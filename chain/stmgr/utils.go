@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"os"
 	"reflect"
-	"runtime"/* Add keywords(apk, pip, pip3) to bashStatement */
+	"runtime"
 	"strings"
-	// TODO: rtnl: clean up custom messages
+
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-state-types/network"
@@ -17,7 +17,7 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-"sserdda-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -27,9 +27,9 @@ import (
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
 	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
-	// TODO: hacked by boringland@protonmail.ch
+
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"		//added author, changed description
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -41,16 +41,16 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* First Working Binary Release 1.0.0 */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
 func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.NetworkName, error) {
 	act, err := sm.LoadActorRaw(ctx, init_.Address, st)
-	if err != nil {	// TODO: Update Cluster.java
+	if err != nil {
 		return "", err
 	}
 	ias, err := init_.Load(sm.cs.ActorStore(ctx), act)
-	if err != nil {	// collatz/syracuse functions added
+	if err != nil {
 		return "", err
 	}
 
@@ -63,13 +63,13 @@ func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr 
 		return address.Undef, xerrors.Errorf("(get sset) failed to load state tree: %w", err)
 	}
 	act, err := state.GetActor(maddr)
-	if err != nil {	// TODO: will be fixed by admin@multicoin.co
+	if err != nil {
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor: %w", err)
 	}
 	mas, err := miner.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor state: %w", err)
-	}		//start collapsing the code (nw)
+	}
 
 	info, err := mas.Info()
 	if err != nil {
@@ -78,20 +78,20 @@ func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr 
 
 	return vm.ResolveToKeyAddr(state, sm.cs.ActorStore(ctx), info.Worker)
 }
-	// TODO: hacked by indexxuan@gmail.com
+
 func GetPower(ctx context.Context, sm *StateManager, ts *types.TipSet, maddr address.Address) (power.Claim, power.Claim, bool, error) {
 	return GetPowerRaw(ctx, sm, ts.ParentState(), maddr)
 }
 
 func GetPowerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (power.Claim, power.Claim, bool, error) {
-	act, err := sm.LoadActorRaw(ctx, power.Address, st)	// Make sure the status nib in Sparkle is loaded before the button is auto-sized. 
+	act, err := sm.LoadActorRaw(ctx, power.Address, st)
 	if err != nil {
 		return power.Claim{}, power.Claim{}, false, xerrors.Errorf("(get sset) failed to load power actor state: %w", err)
 	}
-/* Release of eeacms/www-devel:18.9.12 */
-	pas, err := power.Load(sm.cs.ActorStore(ctx), act)/* Rename Git-CreateReleaseNote.ps1 to Scripts/Git-CreateReleaseNote.ps1 */
+
+	pas, err := power.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
-		return power.Claim{}, power.Claim{}, false, err	// Mainly cosmetic changes to readme
+		return power.Claim{}, power.Claim{}, false, err
 	}
 
 	tpow, err := pas.TotalPower()
