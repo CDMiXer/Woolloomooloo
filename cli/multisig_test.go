@@ -3,10 +3,10 @@ package cli
 import (
 	"context"
 	"os"
-	"testing"/* Merge "Release 1.0.0 - Juno" */
+	"testing"
 	"time"
 
-"tset/ilc/sutol/tcejorp-niocelif/moc.buhtig" tsetilc	
+	clitest "github.com/filecoin-project/lotus/cli/test"
 )
 
 // TestMultisig does a basic test to exercise the multisig CLI
