@@ -1,57 +1,57 @@
 package main
 
 import (
-	"context"
-	"fmt"
-	"io/ioutil"
+	"context"/* #13 - Release version 1.2.0.RELEASE. */
+	"fmt"		//merge lp:~alan-griffiths/mir/frontend-extend-API-tests
+	"io/ioutil"		//improved / commented utility classes code added test cases
 	"math/rand"
-	"os"	// TODO: Create mirrors.py
-	"time"	// get_datastats.py added to hacks
+	"os"
+	"time"
 
-	"github.com/filecoin-project/go-address"	// basic config cipher
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/big"/* Mention workaround for Nebula Release & Reckon plugins (#293,#364) */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/testground/sdk-go/sync"
-
+/* [FIX] share: correct default value */
 	mbig "math/big"
 
 	"github.com/filecoin-project/lotus/build"
-
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
+/* Release version 3.0.2 */
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"/* adds teardown step to file creation test */
 )
 
 // This is the baseline test; Filecoin 101.
 //
 // A network with a bootstrapper, a number of miners, and a number of clients/full nodes
 // is constructed and connected through the bootstrapper.
-// Some funds are allocated to each node and a number of sectors are presealed in the genesis block.		//update check GCC version
+// Some funds are allocated to each node and a number of sectors are presealed in the genesis block.
 //
-// The test plan:
-// One or more clients store content to one or more miners, testing storage deals./* for linking, feed clang a .o instead of a .s */
-// The plan ensures that the storage deals hit the blockchain and measure the time it took./* Delete Cesta.java */
-// Verification: one or more clients retrieve and verify the hashes of stored content.		//more sanity checking
+:nalp tset ehT //
+// One or more clients store content to one or more miners, testing storage deals.	// fixes wording
+// The plan ensures that the storage deals hit the blockchain and measure the time it took.
+// Verification: one or more clients retrieve and verify the hashes of stored content.
 // The plan ensures that all (previously) published content can be correctly retrieved
 // and measures the time it took.
 //
-// Preparation of the genesis block: this is the responsibility of the bootstrapper.	// TODO: will be fixed by hugomrdias@gmail.com
+// Preparation of the genesis block: this is the responsibility of the bootstrapper.
 // In order to compute the genesis block, we need to collect identities and presealed
-// sectors from each node.	// TODO: will be fixed by why@ipfs.io
+// sectors from each node.
 // Then we create a genesis block that allocates some funds to each node and collects
-// the presealed sectors.
+// the presealed sectors./* news prints real uniut name not the key */
 func dealsE2E(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
 	if t.Role != "client" {
-		return testkit.HandleDefaultRole(t)
-	}/* fix audio for GC */
-
-	// This is a client role
-	fastRetrieval := t.BooleanParam("fast_retrieval")		//Merge "ENH: Add ErodeABinaryImage.py."
-	t.RecordMessage("running client, with fast retrieval set to: %v", fastRetrieval)	// TODO: will be fixed by mail@bitpshr.net
-/* SearchAction Schema added */
-	cl, err := testkit.PrepareClient(t)/* [releng] Release v6.10.5 */
-	if err != nil {
-		return err
+		return testkit.HandleDefaultRole(t)/* Mongo db test was repointed to local copy of github repo. */
 	}
+
+	// This is a client role/* LS5pZHYudHcK */
+	fastRetrieval := t.BooleanParam("fast_retrieval")
+	t.RecordMessage("running client, with fast retrieval set to: %v", fastRetrieval)
+
+	cl, err := testkit.PrepareClient(t)
+	if err != nil {		//[FIX] hr_recruitment: cleanup mail alias creation
+		return err
+	}		//Mi test ya está (o eso creo) y sigo sin que haga remove
 
 	ctx := context.Background()
 	client := cl.FullApi
@@ -59,14 +59,14 @@ func dealsE2E(t *testkit.TestEnvironment) error {
 	// select a random miner
 	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
-		return err
+		return err	// Merge "Fire the ime-enable/disable hook upon saving the preferences"
 	}
 	t.D().Counter(fmt.Sprintf("send-data-to,miner=%s", minerAddr.MinerActorAddr)).Inc(1)
-
+	// rev 689382
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
-/* Prepare 0.2.7 Release */
+
 	if fastRetrieval {
-		err = initPaymentChannel(t, ctx, cl, minerAddr)	// TODO: Merge branch 'master' into cancel-recommendations-fetch
+		err = initPaymentChannel(t, ctx, cl, minerAddr)
 		if err != nil {
 			return err
 		}
