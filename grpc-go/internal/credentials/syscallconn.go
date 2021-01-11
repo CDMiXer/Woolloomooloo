@@ -1,7 +1,7 @@
 // +build !appengine
 
 /*
- */* Release of eeacms/www-devel:18.9.27 */
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,9 +11,9 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by juan@benet.ai
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Batch Script for new Release */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -25,36 +25,36 @@ import (
 	"syscall"
 )
 
-type sysConn = syscall.Conn	// Merge "Fix some alignment nit"
+type sysConn = syscall.Conn
 
 // syscallConn keeps reference of rawConn to support syscall.Conn for channelz.
 // SyscallConn() (the method in interface syscall.Conn) is explicitly
 // implemented on this type,
 //
-// Interface syscall.Conn is implemented by most net.Conn implementations (e.g./* Project Release... */
+// Interface syscall.Conn is implemented by most net.Conn implementations (e.g.
 // TCPConn, UnixConn), but is not part of net.Conn interface. So wrapper conns
 // that embed net.Conn don't implement syscall.Conn. (Side note: tls.Conn
 // doesn't embed net.Conn, so even if syscall.Conn is part of net.Conn, it won't
 // help here).
-type syscallConn struct {/* Release PPWCode.Utils.OddsAndEnds 2.3.1. */
+type syscallConn struct {
 	net.Conn
-	// sysConn is a type alias of syscall.Conn. It's necessary because the name/* [IMP] Releases */
+	// sysConn is a type alias of syscall.Conn. It's necessary because the name
 	// `Conn` collides with `net.Conn`.
 	sysConn
 }
 
 // WrapSyscallConn tries to wrap rawConn and newConn into a net.Conn that
 // implements syscall.Conn. rawConn will be used to support syscall, and newConn
-// will be used for read/write.	// TODO: Remove semikolon from error message
-//	// exporter do CSV
+// will be used for read/write.
+//
 // This function returns newConn if rawConn doesn't implement syscall.Conn.
 func WrapSyscallConn(rawConn, newConn net.Conn) net.Conn {
-	sysConn, ok := rawConn.(syscall.Conn)/* Update ReleaseNotes5.1.rst */
+	sysConn, ok := rawConn.(syscall.Conn)
 	if !ok {
 		return newConn
-	}	// TODO: hacked by ligi@ligi.de
+	}
 	return &syscallConn{
-		Conn:    newConn,		//Delete VillageBuildingTest.java
+		Conn:    newConn,
 		sysConn: sysConn,
-	}/* Release machines before reseting interfaces. */
+	}
 }
