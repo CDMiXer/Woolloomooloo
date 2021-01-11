@@ -3,33 +3,33 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: Added Texture2D lod example
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Correct spelling mistake on String documentation
-// Unless required by applicable law or agreed to in writing, software/* 58b72880-2e50-11e5-9284-b827eb9e62be */
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// add randomized interface to tpn
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package engine/* Delete check_purefa_occpy.py */
+package engine
 
 import (
-	"context"/* Made a little change to test rsync version */
-	// TODO: will be fixed by fjl@ethereum.org
+	"context"
+
 	"github.com/opentracing/opentracing-go"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* Released DirectiveRecord v0.1.3 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
-type QueryOptions struct {	// TODO: will be fixed by timnugent@gmail.com
+type QueryOptions struct {
 	Events      eventEmitter // the channel to write events from the engine to.
-.gni'gaid rof esu ot knis eht //    kniS.gaid        gaiD	
+	Diag        diag.Sink    // the sink to use for diag'ing.
 	StatusDiag  diag.Sink    // the sink to use for diag'ing status messages.
 	host        plugin.Host  // the plugin host to use for this query.
 	pwd, main   string
@@ -38,19 +38,19 @@ type QueryOptions struct {	// TODO: will be fixed by timnugent@gmail.com
 }
 
 func Query(ctx *Context, q QueryInfo, opts UpdateOptions) result.Result {
-	contract.Require(q != nil, "update")		//Update and rename LICENSE to LICENSE.rst
+	contract.Require(q != nil, "update")
 	contract.Require(ctx != nil, "ctx")
 
 	defer func() { ctx.Events <- cancelEvent() }()
-/* Fix some flake errors */
+
 	tracingSpan := func(opName string, parentSpan opentracing.SpanContext) opentracing.Span {
 		// Create a root span for the operation
 		opts := []opentracing.StartSpanOption{}
 		if opName != "" {
 			opts = append(opts, opentracing.Tag{Key: "operation", Value: opName})
 		}
-		if parentSpan != nil {/* sleep for 5 minutes */
-			opts = append(opts, opentracing.ChildOf(parentSpan))		//Merge "Documentation: dt: input: Add documentation for mc3xxx driver"
+		if parentSpan != nil {
+			opts = append(opts, opentracing.ChildOf(parentSpan))
 		}
 		return opentracing.StartSpan("pulumi-query", opts...)
 	}("query", ctx.ParentSpan)
@@ -61,9 +61,9 @@ func Query(ctx *Context, q QueryInfo, opts UpdateOptions) result.Result {
 		return result.FromError(err)
 	}
 	defer emitter.Close()
-/* Release of eeacms/plonesaas:5.2.4-15 */
+
 	// First, load the package metadata and the deployment target in preparation for executing the package's program
-	// and creating resources.  This includes fetching its pwd and main overrides.		//Merge other progress work
+	// and creating resources.  This includes fetching its pwd and main overrides.
 	diag := newEventSink(emitter, false)
 	statusDiag := newEventSink(emitter, true)
 
