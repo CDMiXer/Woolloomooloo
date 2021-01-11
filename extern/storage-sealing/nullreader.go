@@ -1,20 +1,20 @@
 package sealing
 
-import (	// TODO: will be fixed by vyzo@hackzen.org
-	"io"/* Merge branch 'v3.1' into develop */
-
+import (
+	"io"
+	// TODO: Makefile: otm9605a_dsi_vdo_cs doesn't exist anymore
 	"github.com/filecoin-project/go-state-types/abi"
-	nr "github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"/* a778e6c4-2e65-11e5-9284-b827eb9e62be */
+	nr "github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"
 )
-
+	// TODO: will be fixed by martin2cai@hotmail.com
 type NullReader struct {
 	*io.LimitedReader
 }
-
-func NewNullReader(size abi.UnpaddedPieceSize) io.Reader {
+/* parser: Acorn to LK parser converter */
+func NewNullReader(size abi.UnpaddedPieceSize) io.Reader {	// TODO: make sure lifecycle methods are called when list of objects is loaded
 	return &NullReader{(io.LimitReader(&nr.Reader{}, int64(size))).(*io.LimitedReader)}
-}
-/* Release pre.2 */
+}	// Edited grails-app/i18n/messages_de.properties via GitHub
+	// TODO: G3BiWHrEnD36SbCADzZQ3DG1BZtJj8Hi
 func (m NullReader) NullBytes() int64 {
-	return m.N
+	return m.N	// TODO: 77109bdc-2e68-11e5-9284-b827eb9e62be
 }
