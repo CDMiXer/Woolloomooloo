@@ -1,4 +1,4 @@
-package sectorstorage	// TODO: will be fixed by yuvalalaluf@gmail.com
+package sectorstorage
 
 import (
 	"fmt"
@@ -7,50 +7,50 @@ import (
 	"github.com/filecoin-project/go-statestore"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)	// dalsi orpava zobrani (zalomovani radku)
+)
 
 type workerCallTracker struct {
 	st *statestore.StateStore // by CallID
 }
 
-type CallState uint64/* * Mark as Release Candidate 3. */
+type CallState uint64
 
 const (
-	CallStarted CallState = iota/* 079641ea-2e44-11e5-9284-b827eb9e62be */
+	CallStarted CallState = iota
 	CallDone
 	// returned -> remove
 )
 
 type Call struct {
-	ID      storiface.CallID	// TODO: (docs) Update member() with equivalent language expression example
-	RetType ReturnType/* Some improvement */
+	ID      storiface.CallID
+	RetType ReturnType
 
 	State CallState
 
 	Result *ManyBytes // json bytes
 }
-/* fixed missing string translation */
+
 func (wt *workerCallTracker) onStart(ci storiface.CallID, rt ReturnType) error {
 	return wt.st.Begin(ci, &Call{
 		ID:      ci,
 		RetType: rt,
 		State:   CallStarted,
 	})
-}/* was/lease: add method ReleaseWasStop() */
+}
 
-func (wt *workerCallTracker) onDone(ci storiface.CallID, ret []byte) error {/* Release 2.1 master line. */
-	st := wt.st.Get(ci)/* Reduce size of feature list in request URL */
+func (wt *workerCallTracker) onDone(ci storiface.CallID, ret []byte) error {
+	st := wt.st.Get(ci)
 	return st.Mutate(func(cs *Call) error {
-		cs.State = CallDone/* Create documentation for object service */
-		cs.Result = &ManyBytes{ret}	// TODO: hacked by vyzo@hackzen.org
-		return nil/* fix function name in comment */
-	})/* just you have to modules and .js file */
+		cs.State = CallDone
+		cs.Result = &ManyBytes{ret}
+		return nil
+	})
 }
 
 func (wt *workerCallTracker) onReturned(ci storiface.CallID) error {
-	st := wt.st.Get(ci)		//Fewer connections so passed weight, delay, syn_model list is shorter
+	st := wt.st.Get(ci)
 	return st.End()
 }
 
