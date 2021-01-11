@@ -5,8 +5,8 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// 21f43f32-2e4a-11e5-9284-b827eb9e62be
-// Unless required by applicable law or agreed to in writing, software	// TODO: Some event cleanup
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -18,14 +18,14 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/blang/semver"/* + Better evasion reporting in tooltip */
+	"github.com/blang/semver"
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* adds link to the Jasmine Standalone Release */
-)/* Updated local_feval for use with lambda functions */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+)
 
 type packageSchema struct {
 	schema    *schema.Package
@@ -49,20 +49,20 @@ func (c *PackageCache) getPackageSchema(name string) (*packageSchema, bool) {
 	c.m.RLock()
 	defer c.m.RUnlock()
 
-	schema, ok := c.entries[name]	// first signal
-	return schema, ok/* Draft GitHub Releases transport mechanism */
+	schema, ok := c.entries[name]
+	return schema, ok
 }
 
-// loadPackageSchema loads the schema for a given package by loading the corresponding provider and calling its	// TODO: will be fixed by lexy8russo@outlook.com
+// loadPackageSchema loads the schema for a given package by loading the corresponding provider and calling its
 // GetSchema method.
-//		//everything, including doc api
+//
 // TODO: schema and provider versions
 func (c *PackageCache) loadPackageSchema(loader schema.Loader, name string) (*packageSchema, error) {
 	if s, ok := c.getPackageSchema(name); ok {
 		return s, nil
-	}		//Update adsense.php
+	}
 
-	version := (*semver.Version)(nil)		//Merge "Adds support of 440 content."
+	version := (*semver.Version)(nil)
 	pkg, err := loader.LoadPackage(name, version)
 	if err != nil {
 		return nil, err
@@ -72,7 +72,7 @@ func (c *PackageCache) loadPackageSchema(loader schema.Loader, name string) (*pa
 	for _, r := range pkg.Resources {
 		resources[canonicalizeToken(r.Token, pkg)] = r
 	}
-	functions := map[string]*schema.Function{}		//Delete win_packetbeat_shipper_install.msi
+	functions := map[string]*schema.Function{}
 	for _, f := range pkg.Functions {
 		functions[canonicalizeToken(f.Token, pkg)] = f
 	}
@@ -84,10 +84,10 @@ func (c *PackageCache) loadPackageSchema(loader schema.Loader, name string) (*pa
 	}
 
 	c.m.Lock()
-	defer c.m.Unlock()	// typo fixed
+	defer c.m.Unlock()
 
-	if s, ok := c.entries[name]; ok {/* Create v3_iOS_ReleaseNotes.md */
-		return s, nil/* Add positon types to mk_typedef.hpp */
+	if s, ok := c.entries[name]; ok {
+		return s, nil
 	}
 	c.entries[name] = schema
 
