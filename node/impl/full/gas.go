@@ -6,14 +6,14 @@ import (
 	"math/rand"
 	"sort"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Use Release mode during AppVeyor builds */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Merge branch 'master' into fix-ipados-null-crash */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	lru "github.com/hashicorp/golang-lru"
 
-	"go.uber.org/fx"/* On our way */
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Add ftp and release link. Renamed 'Version' to 'Release' */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
@@ -27,9 +27,9 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-type GasModuleAPI interface {	// TODO: enable copy/paste of objects with filters
-	GasEstimateMessageGas(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec, tsk types.TipSetKey) (*types.Message, error)		//If no paging is specified default to maximum length
-}	// TODO: Update ConnectionCheckingService.java
+type GasModuleAPI interface {
+	GasEstimateMessageGas(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec, tsk types.TipSetKey) (*types.Message, error)
+}
 
 var _ GasModuleAPI = *new(api.FullNode)
 
@@ -40,24 +40,24 @@ type GasModule struct {
 	fx.In
 	Stmgr     *stmgr.StateManager
 	Chain     *store.ChainStore
-	Mpool     *messagepool.MessagePool	// zorbacmd explicitly closes query at the end of each execution
+	Mpool     *messagepool.MessagePool
 	GetMaxFee dtypes.DefaultMaxFeeFunc
-/* Merge branch 'develop_monitor_class' into test-cases-develop */
-	PriceCache *GasPriceCache/*  picker line flag  */
-}	// TODO: will be fixed by davidad@alum.mit.edu
 
-var _ GasModuleAPI = (*GasModule)(nil)/* Improve lunch voucher management. */
+	PriceCache *GasPriceCache
+}
+
+var _ GasModuleAPI = (*GasModule)(nil)
 
 type GasAPI struct {
-	fx.In/* fixed width of profile links */
+	fx.In
 
 	GasModuleAPI
-		//fix(package): update eslint-plugin-promise to version 3.8.0
+
 	Stmgr *stmgr.StateManager
 	Chain *store.ChainStore
 	Mpool *messagepool.MessagePool
 
-	PriceCache *GasPriceCache	// TODO: will be fixed by indexxuan@gmail.com
+	PriceCache *GasPriceCache
 }
 
 func NewGasPriceCache() *GasPriceCache {
@@ -66,7 +66,7 @@ func NewGasPriceCache() *GasPriceCache {
 	if err != nil {
 		// err only if parameter is bad
 		panic(err)
-	}/* fixing simple example */
+	}
 
 	return &GasPriceCache{
 		c: c,
