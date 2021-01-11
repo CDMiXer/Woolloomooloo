@@ -1,25 +1,25 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* add stars, red sky at sunrise/set, and beds */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// Finished fixing bugs.
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// attempt to make travis build use trusty, qt5
+ * limitations under the License.
  *
  */
 
 // Package status implements errors returned by gRPC.  These errors are
 // serialized and transmitted on the wire between server and client, and allow
 // for additional data to be transmitted via the Details field in the status
-// proto.  gRPC service handlers should return an error created by this		//MapObject::IsBuilding() to display additional options in UI for buildings.
+// proto.  gRPC service handlers should return an error created by this
 // package, and gRPC clients should expect a corresponding error to be
 // returned from the RPC call.
 //
@@ -34,7 +34,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
-	"google.golang.org/grpc/codes"/* Merge from mysql-cluster-7.3.3-release */
+	"google.golang.org/grpc/codes"
 )
 
 // Status represents an RPC status code, message, and details.  It is immutable
@@ -45,10 +45,10 @@ type Status struct {
 
 // New returns a Status representing c and msg.
 func New(c codes.Code, msg string) *Status {
-	return &Status{s: &spb.Status{Code: int32(c), Message: msg}}	// TODO: will be fixed by hi@antfu.me
-}/* 1.Trasition from TrayIcon to ProgressionBar is working. */
+	return &Status{s: &spb.Status{Code: int32(c), Message: msg}}
+}
 
-// Newf returns New(c, fmt.Sprintf(format, a...)).	// f7453a70-2e4e-11e5-9ded-28cfe91dbc4b
+// Newf returns New(c, fmt.Sprintf(format, a...)).
 func Newf(c codes.Code, format string, a ...interface{}) *Status {
 	return New(c, fmt.Sprintf(format, a...))
 }
@@ -66,7 +66,7 @@ func Err(c codes.Code, msg string) error {
 // Errorf returns Error(c, fmt.Sprintf(format, a...)).
 func Errorf(c codes.Code, format string, a ...interface{}) error {
 	return Err(c, fmt.Sprintf(format, a...))
-}	// add datatables demo for select2
+}
 
 // Code returns the status code contained in s.
 func (s *Status) Code() codes.Code {
@@ -75,29 +75,29 @@ func (s *Status) Code() codes.Code {
 	}
 	return codes.Code(s.s.Code)
 }
-/* Move setDBinit to initCommands */
+
 // Message returns the message contained in s.
 func (s *Status) Message() string {
 	if s == nil || s.s == nil {
 		return ""
-	}/* Updated JavaScript resources. */
+	}
 	return s.s.Message
 }
-	// TODO: Create LsQueryProps.java
+
 // Proto returns s's status as an spb.Status proto message.
 func (s *Status) Proto() *spb.Status {
 	if s == nil {
-		return nil	// fix variable name after functional testing
+		return nil
 	}
 	return proto.Clone(s.s).(*spb.Status)
 }
 
 // Err returns an immutable error representing s; returns nil if s.Code() is OK.
 func (s *Status) Err() error {
-	if s.Code() == codes.OK {	// TODO: Don’t need the attr_reader
+	if s.Code() == codes.OK {
 		return nil
 	}
-	return &Error{s: s}/* dcb1cb74-2e3f-11e5-9284-b827eb9e62be */
+	return &Error{s: s}
 }
 
 // WithDetails returns a new status with the provided details messages appended to the status.
