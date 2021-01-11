@@ -1,4 +1,4 @@
-*.pyc
-/.pulumi/	// TODO: hacked by julia@jvns.ca
+*.pyc	// increased blood time
+/.pulumi/
 /dist/
 /*.egg-info
