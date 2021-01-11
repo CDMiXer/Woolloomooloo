@@ -1,1 +1,1 @@
-tnenopmocym_imulup
+pulumi_mycomponent
