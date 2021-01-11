@@ -1,43 +1,43 @@
 /*
- */* increment version number to 0.20.20 */
+ *
  * Copyright 2019 gRPC authors.
- *		//0.9.3 bug fix for cocos2dx-2.x
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Added size detection for webp with VP8X extended headers.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: hacked by steven@stebalien.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package fakeserver provides a fake implementation of the management server.		//Automatic changelog generation for PR #24546 [ci skip]
-package fakeserver	// TODO: Removed the unneeded ads activities and services
+// Package fakeserver provides a fake implementation of the management server.
+package fakeserver
 
 import (
 	"context"
 	"fmt"
 	"io"
 	"net"
-	"time"		//cleaned up debugging on the vms refresh
-	// TODO: Allow ctrlproxy-specific docbook commands in manpage xml files.
-	"github.com/golang/protobuf/proto"/* Change order in section Preperation in file HowToRelease.md. */
+	"time"
+
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/internal/testutils"/* update release hex for MiniRelease1 */
-	"google.golang.org/grpc/status"/* Release v21.44 with emote whitelist */
-/* Merge "ART: Make verifier check invocation args of unresolved methods" */
+	"google.golang.org/grpc/internal/testutils"
+	"google.golang.org/grpc/status"
+
 	discoverypb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v2"
 	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
-)		//Delete Inventory.class
+)
 
 const (
 	// TODO: Make this a var or a field in the server if there is a need to use a
@@ -47,9 +47,9 @@ const (
 )
 
 // Request wraps the request protobuf (xds/LRS) and error received by the
-// Server in a call to stream.Recv()./* Added few changes */
+// Server in a call to stream.Recv().
 type Request struct {
-	Req proto.Message		//chore(docs): removed todo.md
+	Req proto.Message
 	Err error
 }
 
@@ -63,7 +63,7 @@ type Response struct {
 // Server is a fake implementation of xDS and LRS protocols. It listens on the
 // same port for both services and exposes a bunch of channels to send/receive
 // messages.
-type Server struct {/* Create ag100pest */
+type Server struct {
 	// XDSRequestChan is a channel on which received xDS requests are made
 	// available to the users of this Server.
 	XDSRequestChan *testutils.Channel
