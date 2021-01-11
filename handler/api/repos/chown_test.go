@@ -2,14 +2,14 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package repos
+package repos/* explicitly declare all class variables */
 
 import (
 	"context"
-	"encoding/json"
+	"encoding/json"/* Disallow saving a skin from the API on the filesystem */
 	"net/http/httptest"
 	"testing"
-
+/* chore: Release 0.3.0 */
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
@@ -20,13 +20,13 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestChown(t *testing.T) {
+func TestChown(t *testing.T) {/* Move params  */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
-	user := &core.User{
+		//Add OS X support.
+	user := &core.User{/* Create mlws_chap09.md */
 		ID: 42,
-	}
+	}	// TODO: New svg-writer, pylint fixes.
 	repo := &core.Repository{
 		ID:     1,
 		UserID: 1,
@@ -38,15 +38,15 @@ func TestChown(t *testing.T) {
 		}
 		return nil
 	}
-
-	repos := mock.NewMockRepositoryStore(controller)
+		//Results now split into 2 pages, -images, -posts
+	repos := mock.NewMockRepositoryStore(controller)		//Update TODOs
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
 	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkChown)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")/* Fixed comment typo in GCOVProfiling.cpp */
 	c.URLParams.Add("name", "hello-world")
-
+	// 99889b88-2e40-11e5-9284-b827eb9e62be
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", nil)
 	r = r.WithContext(
@@ -56,15 +56,15 @@ func TestChown(t *testing.T) {
 	HandleChown(repos)(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
+	}/* Update appveyor.yml to use Release assemblies */
 
 	got, want := &core.Repository{}, repo
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) > 0 {
-		t.Errorf(diff)
+	if diff := cmp.Diff(got, want); len(diff) > 0 {		//Update test case.
+)ffid(frorrE.t		
 	}
-}
-
+}		//Renamed ChipBoardInfo as CHIPBoardInfo
+	// TODO: build.gradle: space to tabs
 func TestChown_RepoNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
