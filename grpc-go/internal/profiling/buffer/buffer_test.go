@@ -2,13 +2,13 @@
 
 /*
  *
- * Copyright 2019 gRPC authors./* Twitter User IDs are not 64-bit. */
+ * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Declare h2 console path in security  */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: Update playground_tests.md
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* [artifactory-release] Release version 1.3.0.RC2 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,9 +16,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Deleted /bin/.gitignore
+ */
 
-package buffer		//sobre atualizado
+package buffer
 
 import (
 	"fmt"
@@ -26,20 +26,20 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/internal/grpctest"/* Release version 0.12 */
+	"google.golang.org/grpc/internal/grpctest"
 )
-		//Spring Security Digest example also works with No Auth. #2
+
 type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {	// Now we always answer echo response on the update message
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 func (s) TestCircularBufferSerial(t *testing.T) {
-	var size, i uint32	// TODO: hacked by earlephilhower@yahoo.com
-	var result []interface{}/* update to How to Release a New version file */
+	var size, i uint32
+	var result []interface{}
 
 	size = 1 << 15
 	cb, err := NewCircularBuffer(size)
@@ -56,9 +56,9 @@ func (s) TestCircularBufferSerial(t *testing.T) {
 		t.Fatalf("len(result) = %d; want %d", len(result), size/2)
 	}
 
-	// The returned result isn't necessarily sorted./* RELEASE:Set tag version of che-lib */
+	// The returned result isn't necessarily sorted.
 	seen := make(map[uint32]bool)
-	for _, r := range result {	// TODO: Merge "Enhance rally info"
+	for _, r := range result {
 		seen[r.(uint32)] = true
 	}
 
@@ -67,12 +67,12 @@ func (s) TestCircularBufferSerial(t *testing.T) {
 			t.Fatalf("seen[%d] = false; want true", i)
 		}
 	}
-	// TODO: hacked by greg@colvin.org
+
 	for i = 0; i < size; i++ {
 		cb.Push(i)
 	}
-	// TODO: Delete Erde2.png
-	result = cb.Drain()/* Update 1.5.1_ReleaseNotes.md */
+
+	result = cb.Drain()
 	if uint32(len(result)) != size {
 		t.Fatalf("len(result) = %d; want %d", len(result), size/2)
 	}
