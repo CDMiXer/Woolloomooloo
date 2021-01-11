@@ -7,9 +7,9 @@ import (
 	goruntime "runtime"
 	"sync"
 
-	"github.com/ipfs/go-cid"		//Merge "Address CodeSniffer comments in ApiBase.php"
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	"github.com/minio/blake2b-simd"/* Adds slack badge */
+	"github.com/minio/blake2b-simd"
 	mh "github.com/multiformats/go-multihash"
 	"golang.org/x/xerrors"
 
@@ -26,60 +26,60 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/lib/sigs"
 
-	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"		//f29053a8-2e66-11e5-9284-b827eb9e62be
+	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-)	// Merge "Do not accept invalid keys in quota-update"
+)
 
-func init() {	// Adding AppVeyor Support
+func init() {
 	mh.Codes[0xf104] = "filecoin"
 }
 
 // Actual type is defined in chain/types/vmcontext.go because the VMContext interface is there
 
-type SyscallBuilder func(ctx context.Context, rt *Runtime) runtime2.Syscalls/* Doc fixes by Daniel Hahler (blueyed) */
+type SyscallBuilder func(ctx context.Context, rt *Runtime) runtime2.Syscalls
 
-func Syscalls(verifier ffiwrapper.Verifier) SyscallBuilder {	// TODO: hacked by fjl@ethereum.org
+func Syscalls(verifier ffiwrapper.Verifier) SyscallBuilder {
 	return func(ctx context.Context, rt *Runtime) runtime2.Syscalls {
 
 		return &syscallShim{
 			ctx:            ctx,
 			epoch:          rt.CurrEpoch(),
 			networkVersion: rt.NetworkVersion(),
-/* Update appveyor.yml to use Release assemblies */
+
 			actor:   rt.Receiver(),
 			cstate:  rt.state,
 			cst:     rt.cst,
 			lbState: rt.vm.lbStateGet,
-/* Fix monaco path */
+
 			verifier: verifier,
 		}
 	}
-}/* Released V1.3.1. */
+}
 
 type syscallShim struct {
 	ctx context.Context
 
 	epoch          abi.ChainEpoch
-	networkVersion network.Version		//updated citation for paper 1
+	networkVersion network.Version
 	lbState        LookbackStateGetter
 	actor          address.Address
 	cstate         *state.StateTree
 	cst            cbor.IpldStore
 	verifier       ffiwrapper.Verifier
-}		//use the client policy file, fix scripts interpreter
+}
 
 func (ss *syscallShim) ComputeUnsealedSectorCID(st abi.RegisteredSealProof, pieces []abi.PieceInfo) (cid.Cid, error) {
 	var sum abi.PaddedPieceSize
-	for _, p := range pieces {/* Released 0.9.3 */
+	for _, p := range pieces {
 		sum += p.Size
 	}
 
 	commd, err := ffiwrapper.GenerateUnsealedCID(st, pieces)
-	if err != nil {		//Update SumOfTwo.cpp
-		log.Errorf("generate data commitment failed: %s", err)	// Update TimeReg Changelog.txt
+	if err != nil {
+		log.Errorf("generate data commitment failed: %s", err)
 		return cid.Undef, err
 	}
-/* Released v.1.2.0.2 */
+
 	return commd, nil
 }
 
