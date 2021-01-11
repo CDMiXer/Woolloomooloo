@@ -5,19 +5,19 @@ tags:
   - {{this}}
 {{/each}}
 {{/if}}
-manifests:	// TODO: Fix grub-setup on sparc compilation
+manifests:
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
-    platform:		//cbus request session for loco (WIP)
+    platform:
       architecture: amd64
       os: linux
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
-    platform:/* Add trending endpoint for category posts */
+    platform:
       architecture: arm64
       os: linux
       variant: v8
-  -/* Release 2.6.0-alpha-2: update sitemap */
+  -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
