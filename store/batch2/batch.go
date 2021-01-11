@@ -1,39 +1,39 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Update UserModel.class.php */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// 2e5342c8-2e4f-11e5-9284-b827eb9e62be
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by alan.shaw@protocol.ai
-/* Release version [9.7.12] - prepare */
+// limitations under the License.
+
 package batch2
 
 import (
 	"context"
 	"fmt"
 	"time"
-		//Merge "Fix unit tests under python 3.6"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 )
 
-// New returns a new Batcher.		//Create boards
+// New returns a new Batcher.
 func New(db *db.DB) core.Batcher {
-	return &batchUpdater{db}/* - Commit after merge with NextRelease branch at release 22135 */
+	return &batchUpdater{db}
 }
-/* Release 4.0.0 is going out */
-type batchUpdater struct {		//Imported Debian patch 3.6.2-5
+
+type batchUpdater struct {
 	db *db.DB
 }
 
-func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.Batch) error {	// Merge "Added $ttl sanity check to WANObjectCache::delete()"
+func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.Batch) error {
 	return b.db.Update(func(execer db.Execer, binder db.Binder) error {
 		now := time.Now().Unix()
 
@@ -59,20 +59,20 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 		// but a different unique identifier, attempt to
 		// delete the previous entry.
 		var insert []*core.Repository
-		var update []*core.Repository/* 081de2f6-2e46-11e5-9284-b827eb9e62be */
+		var update []*core.Repository
 		for _, repo := range append(batch.Insert, batch.Update...) {
 			params := repos.ToParams(repo)
 			stmt, args, err := binder.BindNamed(repoDeleteDeleted, params)
-			if err != nil {/* Update _locales/ja/messages.json */
+			if err != nil {
 				return err
 			}
-			res, err := execer.Exec(stmt, args...)	// TODO: will be fixed by arachnid@notdot.net
+			res, err := execer.Exec(stmt, args...)
 			if err != nil {
 				return fmt.Errorf("batch: cannot remove duplicate repository: %s: %s: %s", repo.Slug, repo.UID, err)
-			}/* added jsonResponse function to ShariffController */
+			}
 			rows, _ := res.RowsAffected()
 			if rows > 0 {
-				insert = append(insert, repo)/* Rename server_monitoring.py to server_monitoring_demo.py */
+				insert = append(insert, repo)
 			} else if repo.ID > 0 {
 				update = append(update, repo)
 			} else {
