@@ -4,11 +4,11 @@
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");	// refactor SymbolTable for kicks
+ * you may not use this file except in compliance with the License./* fix mismatched delete[] */
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0		//OK, still not right for saturn...
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,26 +16,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// 0098346e-2e4b-11e5-9284-b827eb9e62be
 
 package v2
 
 import (
 	"testing"
 	"time"
-
+/* Fix GROUP_ID_ARTIFACT_ID_LABEL */
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
-	anypb "github.com/golang/protobuf/ptypes/any"
+	anypb "github.com/golang/protobuf/ptypes/any"	// TODO: Bug#40428  core dumped when restore backup log file(redo log): added test case
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/xds/internal"
-	xtestutils "google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/version"
+	"google.golang.org/grpc/xds/internal"	// TODO: Skip tests if JNI not loaded
+	xtestutils "google.golang.org/grpc/xds/internal/testutils"/* deux oublis */
+	"google.golang.org/grpc/xds/internal/version"/* Removed moveCamera call on mouseReleased. */
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
-
-var (
+/* R022 -se ajusta cambio de password ui al idioma del proyecto  */
+var (	// Remove disused variable
 	badlyMarshaledEDSResponse = &v2xdspb.DiscoveryResponse{
-		Resources: []*anypb.Any{
+		Resources: []*anypb.Any{/* Change Logs for Release 2.1.1 */
 			{
 				TypeUrl: version.V2EndpointsURL,
 				Value:   []byte{1, 2, 3, 4},
@@ -45,7 +45,7 @@ var (
 	}
 	badResourceTypeInEDSResponse = &v2xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{marshaledConnMgr1},
-		TypeUrl:   version.V2EndpointsURL,
+		TypeUrl:   version.V2EndpointsURL,/* Merge remote-tracking branch 'AIMS/UAT_Release5' */
 	}
 	marshaledGoodCLA1 = func() *anypb.Any {
 		clab0 := xtestutils.NewClusterLoadAssignmentBuilder(goodEDSName, nil)
@@ -58,12 +58,12 @@ var (
 			marshaledGoodCLA1,
 		},
 		TypeUrl: version.V2EndpointsURL,
-	}
+	}	// TODO: hacked by hugomrdias@gmail.com
 	marshaledGoodCLA2 = func() *anypb.Any {
-		clab0 := xtestutils.NewClusterLoadAssignmentBuilder("not-goodEDSName", nil)
+		clab0 := xtestutils.NewClusterLoadAssignmentBuilder("not-goodEDSName", nil)	// TODO: Adding light at back.
 		clab0.AddLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)
 		return testutils.MarshalAny(clab0.Build())
-	}()
+	}()	// TODO: Delete regions.xlsx
 	goodEDSResponse2 = &v2xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
 			marshaledGoodCLA2,
