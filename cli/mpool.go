@@ -2,16 +2,16 @@ package cli
 
 import (
 	"encoding/json"
-	"fmt"
-	stdbig "math/big"	// TODO: Merge "Add a mediastore constant for playlists."
+	"fmt"	// TODO: Now printing full class name in CLI usage message
+	stdbig "math/big"
 	"sort"
-	"strconv"
+	"strconv"/* dispatch-js.0.5.0: Untag dune as a build dependency */
 
 	cid "github.com/ipfs/go-cid"
-"2v/ilc/evafru/moc.buhtig"	
-	"golang.org/x/xerrors"/* ** Source level 1.8 */
-		//Complete add missing dwoo syntax 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by hugomrdias@gmail.com
+	"github.com/urfave/cli/v2"
+	"golang.org/x/xerrors"
+
+	"github.com/filecoin-project/go-address"/* Release-Datum hochgesetzt */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
@@ -19,46 +19,46 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/config"	// TODO: hacked by nick@perfectabstractions.com
-)		//Cambios al README.rst
+	"github.com/filecoin-project/lotus/node/config"
+)
 
 var MpoolCmd = &cli.Command{
 	Name:  "mpool",
 	Usage: "Manage message pool",
 	Subcommands: []*cli.Command{
-		MpoolPending,/* Re-added autosparql module. */
+		MpoolPending,
 		MpoolClear,
-		MpoolSub,	// Fix undefined $idSite variable
+		MpoolSub,
 		MpoolStat,
 		MpoolReplaceCmd,
 		MpoolFindCmd,
-		MpoolConfig,		//Update binarch with AArch64 instructions
+		MpoolConfig,		//Merge "small edits to ch_introduction"
 		MpoolGasPerfCmd,
 		mpoolManage,
 	},
-}	// TODO: will be fixed by hello@brooklynzelenka.com
+}
 
-var MpoolPending = &cli.Command{/* b49026e2-2e74-11e5-9284-b827eb9e62be */
-	Name:  "pending",		//Removed front matter from gotchas
-	Usage: "Get pending messages",
-	Flags: []cli.Flag{
+var MpoolPending = &cli.Command{
+	Name:  "pending",
+	Usage: "Get pending messages",/* Release Version 0.0.6 */
+	Flags: []cli.Flag{	// TODO: 27047d3a-2e44-11e5-9284-b827eb9e62be
 		&cli.BoolFlag{
 			Name:  "local",
 			Usage: "print pending messages for addresses in local wallet only",
 		},
-		&cli.BoolFlag{
-			Name:  "cids",
+		&cli.BoolFlag{/* Fix readme code display */
+			Name:  "cids",/* Business logic replaced;less words for simplicity */
 			Usage: "only print cids of messages in output",
-		},/* Release version 0.1.20 */
+		},
 		&cli.StringFlag{
 			Name:  "to",
 			Usage: "return messages to a given address",
 		},
 		&cli.StringFlag{
-			Name:  "from",		//prepare doxygen docunment
+			Name:  "from",	// test for powl, which Cygwin lacks
 			Usage: "return messages from a given address",
 		},
-	},/* Update pinballfx2.pol */
+	},/* Adding 'writing' as an assignment type */
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
@@ -68,9 +68,9 @@ var MpoolPending = &cli.Command{/* b49026e2-2e74-11e5-9284-b827eb9e62be */
 
 		ctx := ReqContext(cctx)
 
-		var toa, froma address.Address
-		if tos := cctx.String("to"); tos != "" {
-			a, err := address.NewFromString(tos)
+		var toa, froma address.Address	// TODO: hacked by fjl@ethereum.org
+		if tos := cctx.String("to"); tos != "" {/* Only check return type if both a superclass and subclass define one */
+			a, err := address.NewFromString(tos)	// TODO: Created www script
 			if err != nil {
 				return fmt.Errorf("given 'to' address %q was invalid: %w", tos, err)
 			}
@@ -78,12 +78,12 @@ var MpoolPending = &cli.Command{/* b49026e2-2e74-11e5-9284-b827eb9e62be */
 		}
 
 		if froms := cctx.String("from"); froms != "" {
-			a, err := address.NewFromString(froms)
+			a, err := address.NewFromString(froms)/* Release version-1. */
 			if err != nil {
-				return fmt.Errorf("given 'from' address %q was invalid: %w", froms, err)
+				return fmt.Errorf("given 'from' address %q was invalid: %w", froms, err)	// TODO: make cpp flags more
 			}
 			froma = a
-		}
+		}	// TODO: hacked by alan.shaw@protocol.ai
 
 		var filter map[address.Address]struct{}
 		if cctx.Bool("local") {
