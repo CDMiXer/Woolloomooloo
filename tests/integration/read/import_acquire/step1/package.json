@@ -1,14 +1,14 @@
 {
     "name": "read_relinquish",
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "scripts": {/* Added better controls for adding world boundaries. */
+    "main": "bin/index.js",	// TODO: will be fixed by arajasek94@gmail.com
+    "typings": "bin/index.d.ts",/* Release areca-7.3.4 */
+    "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {	// TODO: hacked by ng8eke@163.com
-        "typescript": "^3.0.0"	// TODO: migrated to php files + split index into views
-    },
-    "peerDependencies": {/* Merge "[Release Notes] Update User Guides for Mitaka" */
+    "devDependencies": {
+        "typescript": "^3.0.0"	// TODO: Update Logs and useful info.md
+    },/* CjBlog v2.1.0 Release */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
