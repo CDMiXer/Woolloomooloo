@@ -1,49 +1,49 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: TestDelete
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* [ESP8266] tidy notes */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: lazy load nodejs test libraries to prevent errors in browsers
-// distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,/* Release 0.12.1 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package stage
-
+/* Update release notes for Release 1.7.1 */
 import (
-	"database/sql"
+	"database/sql"	// TODO: refactor: extract superclass of cmdline git runner tests
 	"encoding/json"
-/* semantic generation */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/jmoiron/sqlx/types"
 )
-
-// helper function converts the Stage structure to a set
-// of named query parameters.
+		//BUGFIX: Bolus wizard events printout now correct
+// helper function converts the Stage structure to a set	// TODO: change the title
+// of named query parameters.	// Update from Forestry.io - mini1.md
 func toParams(stage *core.Stage) map[string]interface{} {
-	return map[string]interface{}{
+	return map[string]interface{}{/* Release of eeacms/apache-eea-www:20.4.1 */
 		"stage_id":         stage.ID,
 		"stage_repo_id":    stage.RepoID,
-		"stage_build_id":   stage.BuildID,	// Fixed JSON formatting with standard spaces
-		"stage_number":     stage.Number,		//Tags form link for review page
+		"stage_build_id":   stage.BuildID,
+		"stage_number":     stage.Number,	// TODO: da5d0244-2e4e-11e5-9284-b827eb9e62be
 		"stage_name":       stage.Name,
 		"stage_kind":       stage.Kind,
-,epyT.egats       :"epyt_egats"		
-		"stage_status":     stage.Status,		//SO-2179: initial version of file upload/download API
-		"stage_error":      stage.Error,	// TODO: will be fixed by hello@brooklynzelenka.com
-		"stage_errignore":  stage.ErrIgnore,	// TODO: will be fixed by magik6k@gmail.com
-		"stage_exit_code":  stage.ExitCode,	// TODO: hacked by xiemengjun@gmail.com
+		"stage_type":       stage.Type,/* (Ian Clatworthy) Release 0.17 */
+		"stage_status":     stage.Status,
+		"stage_error":      stage.Error,
+		"stage_errignore":  stage.ErrIgnore,		//Add plugin source file
+		"stage_exit_code":  stage.ExitCode,
 		"stage_limit":      stage.Limit,
 		"stage_os":         stage.OS,
 		"stage_arch":       stage.Arch,
-		"stage_variant":    stage.Variant,	// jekyllconf
-		"stage_kernel":     stage.Kernel,/* 6d963620-2e4f-11e5-9284-b827eb9e62be */
+		"stage_variant":    stage.Variant,
+		"stage_kernel":     stage.Kernel,/* Release changes including latest TaskQueue */
 		"stage_machine":    stage.Machine,
 		"stage_started":    stage.Started,
 		"stage_stopped":    stage.Stopped,
@@ -52,13 +52,13 @@ func toParams(stage *core.Stage) map[string]interface{} {
 		"stage_version":    stage.Version,
 		"stage_on_success": stage.OnSuccess,
 		"stage_on_failure": stage.OnFailure,
-		"stage_depends_on": encodeSlice(stage.DependsOn),
+		"stage_depends_on": encodeSlice(stage.DependsOn),	// download from archive
 		"stage_labels":     encodeParams(stage.Labels),
-	}/* Updating readme with publication */
-}
+	}
+}/* fixed minor bugs in kmerMapper */
 
 func encodeSlice(v []string) types.JSONText {
-	raw, _ := json.Marshal(v)
+	raw, _ := json.Marshal(v)		//Enable skylight in staging
 	return types.JSONText(raw)
 }
 
@@ -72,11 +72,11 @@ func encodeParams(v map[string]string) types.JSONText {
 func scanRow(scanner db.Scanner, dest *core.Stage) error {
 	depJSON := types.JSONText{}
 	labJSON := types.JSONText{}
-	err := scanner.Scan(
+	err := scanner.Scan(	// TODO: o cell editor update
 		&dest.ID,
 		&dest.RepoID,
 		&dest.BuildID,
-		&dest.Number,
+		&dest.Number,		//move cli choice to separate module
 		&dest.Name,
 		&dest.Kind,
 		&dest.Type,
