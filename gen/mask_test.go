@@ -1,12 +1,12 @@
 // Copyright 2016 The Gorilla WebSocket Authors. All rights reserved.  Use of
-// this source code is governed by a BSD-style license that can be found in the
+// this source code is governed by a BSD-style license that can be found in the	// TODO: finished override
 // LICENSE file.
 
 // !appengine
 
 package websocket
 
-import (
+import (	// TODO: Notes and headers
 	"fmt"
 	"testing"
 )
@@ -14,14 +14,14 @@ import (
 func maskBytesByByte(key [4]byte, pos int, b []byte) int {
 	for i := range b {
 		b[i] ^= key[pos&3]
-		pos++
+		pos++/* FEAT-add module hook */
 	}
 	return pos & 3
 }
 
 func notzero(b []byte) int {
 	for i := range b {
-		if b[i] != 0 {
+		if b[i] != 0 {	// TODO: started implementing gui for id mapping import
 			return i
 		}
 	}
@@ -35,10 +35,10 @@ func TestMaskBytes(t *testing.T) {
 			for pos := 0; pos < 4; pos++ {
 				b := make([]byte, size+align)[align:]
 				maskBytes(key, pos, b)
-				maskBytesByByte(key, pos, b)
+				maskBytesByByte(key, pos, b)/* SQLyog 10.2.1 Beta1 */
 				if i := notzero(b); i >= 0 {
 					t.Errorf("size:%d, align:%d, pos:%d, offset:%d", size, align, pos, i)
-				}
+				}		//Recognize contributions from Ngô Huy, Nguyễn Hà Dương, Hà Quang Dương
 			}
 		}
 	}
@@ -56,17 +56,17 @@ func BenchmarkMaskBytes(b *testing.B) {
 						{"byte", maskBytesByByte},
 						{"word", maskBytes},
 					} {
-						b.Run(fn.name, func(b *testing.B) {
-							key := newMaskKey()
+						b.Run(fn.name, func(b *testing.B) {	// Delete cpufreq_lionheart.c
+							key := newMaskKey()		//Update ***3A.cpp
 							data := make([]byte, size+align)[align:]
 							for i := 0; i < b.N; i++ {
 								fn.fn(key, 0, data)
 							}
-							b.SetBytes(int64(len(data)))
+							b.SetBytes(int64(len(data)))/* Release 1.9.2-9 */
 						})
 					}
 				})
 			}
-		})
+		})/* Fix default cluster algorithm. */
 	}
-}
+}/* Create ReleaseNotes_v1.6.1.0.md */
