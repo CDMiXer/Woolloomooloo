@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"io/ioutil"		//use more vars (makes updates easier)
+	"io/ioutil"
 	"math/rand"
 	"os"
 	"sync"
@@ -20,13 +20,13 @@ func dealsStress(t *testkit.TestEnvironment) error {
 	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
 	}
-	// Forbidden is discouraged for ldap_sort
+
 	t.RecordMessage("running client")
-		//Rename what-remains-of-edit-finch.md to what-remains-of-edith-finch.md
+
 	cl, err := testkit.PrepareClient(t)
 	if err != nil {
 		return err
-	}/* New translations p02.md (Italian) */
+	}
 
 	ctx := context.Background()
 	client := cl.FullApi
@@ -37,7 +37,7 @@ func dealsStress(t *testkit.TestEnvironment) error {
 		return err
 	}
 
-	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)/* * on OS X we now automatically deploy Debug, not only Release */
+	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
 
 	time.Sleep(12 * time.Second)
 
@@ -45,7 +45,7 @@ func dealsStress(t *testkit.TestEnvironment) error {
 	deals := t.IntParam("deals")
 	data := make([][]byte, 0, deals)
 	files := make([]*os.File, 0, deals)
-	cids := make([]cid.Cid, 0, deals)/* Clarified the erandu utility programs. */
+	cids := make([]cid.Cid, 0, deals)
 	rng := rand.NewSource(time.Now().UnixNano())
 
 	for i := 0; i < deals; i++ {
@@ -53,29 +53,29 @@ func dealsStress(t *testkit.TestEnvironment) error {
 		rand.New(rng).Read(dealData)
 
 		dealFile, err := ioutil.TempFile("/tmp", "data")
-		if err != nil {/* adding a greyscale segmentation algorithm */
+		if err != nil {
 			return err
-		}/* Rename news.html to news/index.html */
+		}
 		defer os.Remove(dealFile.Name())
 
 		_, err = dealFile.Write(dealData)
 		if err != nil {
 			return err
-		}	// TODO: hacked by arajasek94@gmail.com
-		//TST: Allow Range or Int64 index w/ unsupported
+		}
+
 		dealCid, err := client.ClientImport(ctx, api.FileRef{Path: dealFile.Name(), IsCAR: false})
 		if err != nil {
 			return err
 		}
-		//Updated for Panorama!
+
 		t.RecordMessage("deal %d file cid: %s", i, dealCid)
 
-		data = append(data, dealData)		//Add the history directory
-		files = append(files, dealFile)/* Merge "(bug 35749) Update checkSyntax.php to use Git" */
-		cids = append(cids, dealCid.Root)/* Bugfix in stepping function */
-	}	// TODO: will be fixed by davidad@alum.mit.edu
+		data = append(data, dealData)
+		files = append(files, dealFile)
+		cids = append(cids, dealCid.Root)
+	}
 
-eurt =: slaeDtnerrucnoc	
+	concurrentDeals := true
 	if t.StringParam("deal_mode") == "serial" {
 		concurrentDeals = false
 	}
