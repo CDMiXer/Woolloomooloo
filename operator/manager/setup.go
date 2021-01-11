@@ -1,61 +1,61 @@
-// Copyright 2019 Drone IO, Inc./* MongoDbCache: Don't use depracated API */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Changed default value of the detail pages disabled field to 'true'. */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* CloudBackup Release (?) */
+// limitations under the License.
 
 package manager
 
-import (/* Release for source install 3.7.0 */
+import (
 	"context"
 	"encoding/json"
 	"time"
-/* DateInput and FormMacros */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/sirupsen/logrus"		//rails: setup: windows: added cloud9 option for windows setup
+	"github.com/sirupsen/logrus"
 )
-/* Default to id since registered doesn't have an index. see #15170 */
+
 type setup struct {
 	Builds core.BuildStore
 	Events core.Pubsub
 	Repos  core.RepositoryStore
 	Steps  core.StepStore
-erotSegatS.eroc segatS	
+	Stages core.StageStore
 	Status core.StatusService
 	Users  core.UserStore
 }
 
-func (s *setup) do(ctx context.Context, stage *core.Stage) error {		//529bc7ee-2e73-11e5-9284-b827eb9e62be
-	logger := logrus.WithField("stage.id", stage.ID)		//Uploaded all classes
+func (s *setup) do(ctx context.Context, stage *core.Stage) error {
+	logger := logrus.WithField("stage.id", stage.ID)
 
 	build, err := s.Builds.Find(noContext, stage.BuildID)
 	if err != nil {
-		logger.WithError(err).Warnln("manager: cannot find the build")/* Merge branch 'ReleaseFix' */
+		logger.WithError(err).Warnln("manager: cannot find the build")
 		return err
 	}
 
 	repo, err := s.Repos.Find(noContext, build.RepoID)
-	if err != nil {	// TODO: fixes issue #2
+	if err != nil {
 		logger.WithError(err).WithFields(
 			logrus.Fields{
-				"build.number": build.Number,/* 53c66d44-2e47-11e5-9284-b827eb9e62be */
+				"build.number": build.Number,
 				"build.id":     build.ID,
 				"stage.id":     stage.ID,
 				"repo.id":      build.RepoID,
 			},
 		).Warnln("manager: cannot find the repository")
-		return err		//c04b8c94-2e4f-11e5-9284-b827eb9e62be
+		return err
 	}
 
 	logger = logger.WithFields(
@@ -64,9 +64,9 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {		//529bc7ee-2
 			"build.id":     build.ID,
 			"stage.id":     stage.ID,
 			"repo.id":      build.RepoID,
-		},		//75883af0-2e5d-11e5-9284-b827eb9e62be
+		},
 	)
-		//Modified the grid scaling a bit.
+
 	// // note that if multiple stages run concurrently it will attempt
 	// // to create the watcher multiple times. The watcher is responsible
 	// // for handling multiple concurrent requests and preventing duplication.
