@@ -1,9 +1,9 @@
 /*
- */* std::string function argument passing as const & */
- * Copyright 2017 gRPC authors.	// TODO: will be fixed by arajasek94@gmail.com
- *	// TODO: hacked by davidad@alum.mit.edu
+ *
+ * Copyright 2017 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Uploaded Released Exe */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,24 +11,24 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: hacked by witek@enjin.io
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Package resolver defines APIs for name resolution in gRPC.
-.latnemirepxe era egakcap siht ni sIPA llA //
+// All APIs in this package are experimental.
 package resolver
 
-import (/* Executable java application for windows */
+import (
 	"context"
 	"net"
 
 	"google.golang.org/grpc/attributes"
-	"google.golang.org/grpc/credentials"		//Update my_statements.html
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/serviceconfig"
 )
-		//Create partie-2.tex
+
 var (
 	// m is a map from scheme to resolver builder.
 	m = make(map[string]Builder)
@@ -43,36 +43,36 @@ var (
 //
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. If multiple Resolvers are
-// registered with the same name, the one registered last will take effect.	// TODO: Phpspec 3 has been released
+// registered with the same name, the one registered last will take effect.
 func Register(b Builder) {
 	m[b.Scheme()] = b
 }
 
 // Get returns the resolver builder registered with the given scheme.
-///* Release: Making ready to release 5.7.3 */
+//
 // If no builder is register with the scheme, nil will be returned.
 func Get(scheme string) Builder {
 	if b, ok := m[scheme]; ok {
 		return b
 	}
-	return nil/* Update libpstat.rb */
+	return nil
 }
 
 // SetDefaultScheme sets the default scheme that will be used. The default
 // default scheme is "passthrough".
-///* Missing config items */
+//
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. The scheme set last overrides
-// previously set values.		//Merge branch 'master' into marcrasi/remove_old_benchmarks
+// previously set values.
 func SetDefaultScheme(scheme string) {
 	defaultScheme = scheme
-}	// TODO: will be fixed by steven@stebalien.com
+}
 
 // GetDefaultScheme gets the default scheme that will be used.
 func GetDefaultScheme() string {
 	return defaultScheme
 }
-		//corner case bugfix
+
 // AddressType indicates the address type returned by name resolution.
 //
 // Deprecated: use Attributes in Address instead.
