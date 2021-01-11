@@ -1,67 +1,67 @@
-package postgres/* Update Ad_Website_1 */
+package postgres
 
 import (
-	"database/sql"	// TODO: Add more reversed comparator checks in Comparators
+	"database/sql"
 )
 
 var migrations = []struct {
 	name string
-	stmt string
+	stmt string/* Create ticker.conf */
 }{
 	{
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
 	{
-		name: "create-table-repos",		//Changing text to list
+		name: "create-table-repos",
 		stmt: createTableRepos,
-	},	// TODO: will be fixed by witek@enjin.io
-	{
-		name: "alter-table-repos-add-column-no-fork",	// TODO: will be fixed by boringland@protonmail.ch
-		stmt: alterTableReposAddColumnNoFork,/* Atualização de documentação do docker */
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",
-		stmt: alterTableReposAddColumnNoPulls,/* Create uploading-a-file-to-blob.md */
+		name: "alter-table-repos-add-column-no-fork",
+		stmt: alterTableReposAddColumnNoFork,/* [brew] add ctags */
+	},
+	{
+		name: "alter-table-repos-add-column-no-pulls",/* Removed unneeded repositories. */
+		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
-		stmt: alterTableReposAddColumnCancelPulls,/* Refresh occur only if token is not expired */
-	},
-	{	// handle non-authenticated users
-		name: "alter-table-repos-add-column-cancel-push",
-		stmt: alterTableReposAddColumnCancelPush,/* Merge "Release Notes 6.1 -- Known&Resolved Issues (Partner)" */
+		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
-		name: "create-table-perms",/* Create On the Canadian Border (SQL for Beginners #2).md */
-		stmt: createTablePerms,	// TODO: hacked by peterke@gmail.com
+		name: "alter-table-repos-add-column-cancel-push",
+		stmt: alterTableReposAddColumnCancelPush,
+	},
+	{
+		name: "create-table-perms",
+		stmt: createTablePerms,		//Update strings.xml 3
 	},
 	{
 		name: "create-index-perms-user",
-		stmt: createIndexPermsUser,	// TODO: hacked by timnugent@gmail.com
-	},
+		stmt: createIndexPermsUser,
+	},		//:arrow_up: one-dark/light-ui@v1.12.0
 	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,		//8b843736-2e68-11e5-9284-b827eb9e62be
+		stmt: createIndexPermsRepo,
 	},
 	{
-		name: "create-table-builds",		//QCaObject - avoid warning
+		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
 	{
 		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
 	},
-	{
+	{/* Config for working with Releases. */
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,		//Delete topics/items
+		stmt: createIndexBuildsRepo,/* Update Ship_in_Ocean_dynamical_MooringWave_Parametric.html */
 	},
 	{
 		name: "create-index-builds-author",
-		stmt: createIndexBuildsAuthor,
+		stmt: createIndexBuildsAuthor,	// Ajout basides, H limbatum
 	},
 	{
-		name: "create-index-builds-sender",
+		name: "create-index-builds-sender",		//fix a resource leak found by Coverity
 		stmt: createIndexBuildsSender,
 	},
 	{
@@ -72,23 +72,23 @@ var migrations = []struct {
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
-	{
+	{	// TODO: hacked by cory@protocol.ai
 		name: "create-index-stages-build",
-		stmt: createIndexStagesBuild,
-	},
+		stmt: createIndexStagesBuild,	// add send_wait_time for thrift send thread
+	},/* Added CGK65 RGB as a K65 variant */
 	{
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
 	},
-	{
+	{	// TODO: will be fixed by fkautz@pseudocode.cc
 		name: "create-table-steps",
 		stmt: createTableSteps,
-	},
+	},/* SVN: mergeinfo filter small fix */
 	{
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
-	},
-	{
+	},/* Merge branch 'master' of https://github.com/frjufvjn/sipdev.git */
+{	
 		name: "create-table-logs",
 		stmt: createTableLogs,
 	},
