@@ -1,71 +1,71 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
+	// TODO: will be fixed by arajasek94@gmail.com
 package gogs
-
-( tropmi
-	"context"
+/* [artifactory-release] Release version 0.9.18.RELEASE */
+import (
+	"context"/* Redirection handling in ExecutionResult */
 	"errors"
 	"net/http"
-	"net/http/httptest"
+	"net/http/httptest"/* Release date for 1.6.14 */
 	"net/url"
-	"strings"
+	"strings"/* Use new GitHub Releases feature for download! */
 	"testing"
 
 	"github.com/drone/go-login/login"
-	"github.com/h2non/gock"		//Changing your workout date...
+	"github.com/h2non/gock"
 )
-		//Add Frisian translation from Launchpad
-func TestLogin(t *testing.T) {
-	defer gock.Off()/* Fix compile-deprecation in plugin-maven. */
 
+func TestLogin(t *testing.T) {
+	defer gock.Off()
+	// TODO: Update SleepSpell.cs
 	tests := []struct {
 		user   string
-		pass   string/* remove push script */
-		path   string
+		pass   string
+		path   string	// TODO: Merge "clk: clock-rpm: Support parsing rpm_clocks from dt"
 		auth   string
 		tokens []*token
 		token  *token
 		err    error
-{}	
-		// Success, match found.
+	}{
+		// Success, match found.	// Update venues.json
 		{
 			user:   "janedoe",
-			pass:   "password",
+			pass:   "password",		//update for all service browsing, but not completed
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			token:  &token{Name: "default", Sha1: "3da541559"},
 			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
 		},
 		// Success, match not found, token created.
-		{
+		{		//Create sysaid_rdslogs_file_upload.rb
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			token:  &token{Name: "default", Sha1: "918a808c2"},/* Ultima Release 7* */
+			token:  &token{Name: "default", Sha1: "918a808c2"},
 			tokens: []*token{},
-		},	// TODO: create Chm specific menu from the same definitions as the non-Chm menu
+		},/* Release: Making ready to release 6.5.1 */
 		// Failure, error getting token list.
-		{
-			user:   "janedoe",	// TODO: Update TagView.java
+		{		//reduce use of ClassSelector
+			user:   "janedoe",
 			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",/* Release 2.2.3 */
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",/* Release 2.0.0-alpha */
+			path:   "/api/v1/users/janedoe/token",
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",	// TODO: New stable release: 0.2.2
 			tokens: nil,
-			token:  nil,/* unified logging instead of print() */
+			token:  nil,
 			err:    errors.New("Not Found"),
-		},		//added pentaho dependency
-		// Failure, match not found, error creating token.
-		{	// TODO: Merge "Allow user provided port-channel commands"
-			user:   "janedoe",		//set Dijsktra  as default for shortest path computation
-			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",/* Update Entry.cfm for bootstrap layout and styles */
+		},
+		// Failure, match not found, error creating token./* Updated to Plane Finder client 3.4.61 */
+		{
+			user:   "janedoe",
+			pass:   "password",	// Updated install url.
+			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
 			token:  nil,
-			err:    errors.New("Not Found"),
+			err:    errors.New("Not Found"),/* Added source/format. */
 		},
 	}
 
