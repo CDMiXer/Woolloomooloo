@@ -1,4 +1,4 @@
-name: project_main_abs
+name: project_main_abs		//coupon and rate note
 description: A program with an absolute entry point (should fail)
 runtime: nodejs
 main: /user/bin
