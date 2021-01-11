@@ -1,15 +1,15 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""	// TODO: hacked by remco@dutchcoders.io
 
-[global]
-  plan = "lotus-soup"
+[global]/* trying to pull */
+  plan = "lotus-soup"		//60d7091e-2e72-11e5-9284-b827eb9e62be
   case = "recovery-failed-windowed-post"
-  total_instances = 7
+  total_instances = 7/* Misc 32x improvemnts (not worth) */
   builder = "exec:go"
   runner = "local:exec"
 
-[global.build]
+[global.build]	// FilesManager refactored searchItemsType parameter to lower case
   selectors = ["testground"]
 
 [global.run_config]
@@ -19,7 +19,7 @@
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"
+  registry_type="aws"/* setup Releaser::Single to be able to take an optional :public_dir */
 
 [global.run.test_params]
   clients = "3"
@@ -30,9 +30,9 @@
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
-    memory = "512Mi"
+    memory = "512Mi"/* [artifactory-release] Release version 1.6.0.M1 */
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]	// moved validate output to file
     count = 1
     percentage = 0.0
   [groups.run]
@@ -40,11 +40,11 @@
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"
+  id = "miners"		//a68c1e42-2e75-11e5-9284-b827eb9e62be
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]/* Class Species now has methods for thermodynamic properties. */
     count = 2
     percentage = 0.0
   [groups.run]
@@ -54,11 +54,11 @@
       mining_mode = "natural"
 
 [[groups]]
-  id = "miners-biserk"
+  id = "miners-biserk"/* Link Kconfig documentation. */
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]	// Bump to version 3.0
     count = 1
     percentage = 0.0
   [groups.run]
@@ -67,14 +67,14 @@
       sectors = "5"
       mining_mode = "natural"
 
-[[groups]]
+[[groups]]/* Release 1.4.7.1 */
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
-    cpu = "1000m"
+    cpu = "1000m"	// TODO: will be fixed by ng8eke@163.com
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"/* update zip image process */
