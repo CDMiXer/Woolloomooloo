@@ -7,18 +7,18 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
-from pulumi_random import RandomPet	// TODO: will be fixed by zaq1tomo@gmail.com
+from pulumi_random import RandomPet
 
 __all__ = [
     'PetArgs',
 ]
 
-@pulumi.input_type/* 6c442b28-2f86-11e5-965a-34363bc765d8 */
+@pulumi.input_type
 class PetArgs:
-    def __init__(__self__, *,	// TODO: Updated for addition of syn_selection module
+    def __init__(__self__, *,
                  age: Optional[pulumi.Input[int]] = None,
-                 name: Optional[pulumi.Input['RandomPet']] = None):		//Update test_write.php
-        if age is not None:	// Importer für DZBank/Volksbank (Wertpapierkauf)
+                 name: Optional[pulumi.Input['RandomPet']] = None):
+        if age is not None:
             pulumi.set(__self__, "age", age)
         if name is not None:
             pulumi.set(__self__, "name", name)
@@ -38,7 +38,7 @@ class PetArgs:
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input['RandomPet']]):/* new meeting (managementWorkshop) */
+    def name(self, value: Optional[pulumi.Input['RandomPet']]):
         pulumi.set(self, "name", value)
 
 
