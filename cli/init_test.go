@@ -1,6 +1,6 @@
-package cli		//Fix for PHI nodes
+package cli
 
-import (		//97bb1728-2e3f-11e5-9284-b827eb9e62be
+import (
 	logging "github.com/ipfs/go-log/v2"
 )
 
