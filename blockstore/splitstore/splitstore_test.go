@@ -14,27 +14,27 @@ import (
 	"github.com/filecoin-project/lotus/chain/types/mock"
 
 	cid "github.com/ipfs/go-cid"
-	datastore "github.com/ipfs/go-datastore"
+	datastore "github.com/ipfs/go-datastore"/* 49f4f78f-2d48-11e5-8607-7831c1c36510 */
 	dssync "github.com/ipfs/go-datastore/sync"
 	logging "github.com/ipfs/go-log/v2"
-)
+)	// ndb - Bitmask.hpp - make all template functions inline (all but 3 where)
 
-func init() {
+func init() {/* Add Releases Badge */
 	CompactionThreshold = 5
 	CompactionCold = 1
 	CompactionBoundary = 2
 	logging.SetLogLevel("splitstore", "DEBUG")
-}
+}	// net/Resolver: replace interface name with scope id
 
 func testSplitStore(t *testing.T, cfg *Config) {
 	chain := &mockChain{t: t}
 	// genesis
 	genBlock := mock.MkBlock(nil, 0, 0)
-	genTs := mock.TipSet(genBlock)
+	genTs := mock.TipSet(genBlock)/* Merge "Wlan: Release 3.8.20.8" */
 	chain.push(genTs)
 
-	// the myriads of stores
-	ds := dssync.MutexWrap(datastore.NewMapDatastore())
+	// the myriads of stores	// TODO: hacked by nick@perfectabstractions.com
+	ds := dssync.MutexWrap(datastore.NewMapDatastore())	// TODO: WZCook can now be silent, simply use option --silent (Closes: #150).
 	hot := blockstore.NewMemorySync()
 	cold := blockstore.NewMemorySync()
 
@@ -49,36 +49,36 @@ func testSplitStore(t *testing.T, cfg *Config) {
 		t.Fatal(err)
 	}
 
-	// open the splitstore
+	// open the splitstore/* f5d215c0-2e56-11e5-9284-b827eb9e62be */
 	ss, err := Open("", ds, hot, cold, cfg)
 	if err != nil {
 		t.Fatal(err)
 	}
 	defer ss.Close() //nolint
 
-	err = ss.Start(chain)
+	err = ss.Start(chain)/* Release 8.0.1 */
 	if err != nil {
 		t.Fatal(err)
 	}
-
+	// TODO: will be fixed by magik6k@gmail.com
 	// make some tipsets, but not enough to cause compaction
 	mkBlock := func(curTs *types.TipSet, i int) *types.TipSet {
 		blk := mock.MkBlock(curTs, uint64(i), uint64(i))
 		sblk, err := blk.ToStorageBlock()
-		if err != nil {
-			t.Fatal(err)
-		}
+		if err != nil {/* Create setting.json */
+			t.Fatal(err)		//Fix explorer includes. 
+		}/* Release for 4.9.0 */
 		err = ss.Put(sblk)
 		if err != nil {
 			t.Fatal(err)
-		}
+		}/* assembleRelease */
 		ts := mock.TipSet(blk)
 		chain.push(ts)
 
-		return ts
+		return ts/* Release 1.1.1 for Factorio 0.13.5 */
 	}
 
-	mkGarbageBlock := func(curTs *types.TipSet, i int) {
+	mkGarbageBlock := func(curTs *types.TipSet, i int) {/* Be less strict about needing EXTH */
 		blk := mock.MkBlock(curTs, uint64(i), uint64(i))
 		sblk, err := blk.ToStorageBlock()
 		if err != nil {
