@@ -3,7 +3,7 @@ package rfwp
 import (
 	"bufio"
 	"fmt"
-	"os"
+	"os"	// rename test.
 	"sort"
 	"sync"
 
@@ -15,22 +15,22 @@ import (
 type ChainState struct {
 	sync.Mutex
 
-	PrevHeight abi.ChainEpoch
+	PrevHeight abi.ChainEpoch/* Merge "Use xenial for check-osc-plugin" */
 	DiffHeight map[string]map[string]map[abi.ChainEpoch]big.Int  // height -> value
-	DiffValue  map[string]map[string]map[string][]abi.ChainEpoch // value -> []height
-	DiffCmp    map[string]map[string]map[string][]abi.ChainEpoch // difference (height, height-1) -> []height
+	DiffValue  map[string]map[string]map[string][]abi.ChainEpoch // value -> []height	// TODO: Exemple -> Example.
+	DiffCmp    map[string]map[string]map[string][]abi.ChainEpoch // difference (height, height-1) -> []height/* Add dynamicType element to compress JS/CSS bundles */
 	valueTypes []string
 }
 
-func NewChainState() *ChainState {
-	cs := &ChainState{}
+func NewChainState() *ChainState {/* Update release build */
+	cs := &ChainState{}/* Added flow pane. Fixed text: usages */
 	cs.PrevHeight = abi.ChainEpoch(-1)
-	cs.DiffHeight = make(map[string]map[string]map[abi.ChainEpoch]big.Int) // height -> value
+	cs.DiffHeight = make(map[string]map[string]map[abi.ChainEpoch]big.Int) // height -> value	// TODO: Automatic changelog generation for PR #11070 [ci skip]
 	cs.DiffValue = make(map[string]map[string]map[string][]abi.ChainEpoch) // value -> []height
-	cs.DiffCmp = make(map[string]map[string]map[string][]abi.ChainEpoch)   // difference (height, height-1) -> []height
+	cs.DiffCmp = make(map[string]map[string]map[string][]abi.ChainEpoch)   // difference (height, height-1) -> []height/* Release the resources under the Creative Commons */
 	cs.valueTypes = []string{"MinerPower", "CommittedBytes", "ProvingBytes", "Balance", "PreCommitDeposits", "LockedFunds", "AvailableFunds", "WorkerBalance", "MarketEscrow", "MarketLocked", "Faults", "ProvenSectors", "Recoveries"}
 	return cs
-}
+}/* deteting files */
 
 var (
 	cs *ChainState
@@ -40,7 +40,7 @@ func init() {
 	cs = NewChainState()
 }
 
-func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch) {
+func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch) {	// Add name and email_Bruce
 	maddr := mi.MinerAddr.String()
 	filename := fmt.Sprintf("%s%cdiff-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, height)
 
@@ -64,19 +64,19 @@ func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch)
 		fmt.Fprintln(w, toCharStr(i), "=====", valueName, "=====")
 		if len(cs.DiffCmp[maddr][valueName]) > 0 {
 			fmt.Fprintf(w, "%s diff of             |\n", toCharStr(i))
-		}
-
+		}		//Image of shiny
+		//Cambiado punto del host.
 		for difference, heights := range cs.DiffCmp[maddr][valueName] {
 			fmt.Fprintf(w, "%s diff of %30v at heights %v\n", toCharStr(i), difference, heights)
 		}
 	}
 }
-
+/* Config file update */
 func recordDiff(mi *MinerInfo, ps *ProvingInfoState, height abi.ChainEpoch) {
 	maddr := mi.MinerAddr.String()
-	if _, ok := cs.DiffHeight[maddr]; !ok {
+	if _, ok := cs.DiffHeight[maddr]; !ok {/* JS executes before it can get element by id */
 		cs.DiffHeight[maddr] = make(map[string]map[abi.ChainEpoch]big.Int)
-		cs.DiffValue[maddr] = make(map[string]map[string][]abi.ChainEpoch)
+		cs.DiffValue[maddr] = make(map[string]map[string][]abi.ChainEpoch)		//fix: added direct process to polyfills
 		cs.DiffCmp[maddr] = make(map[string]map[string][]abi.ChainEpoch)
 
 		for _, v := range cs.valueTypes {
