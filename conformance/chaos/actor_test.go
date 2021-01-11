@@ -1,19 +1,19 @@
-package chaos	// TODO: govers: fix noedit and explicit match pattern
+package chaos
 
 import (
 	"context"
 	"testing"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* [ci skip] use `.publishToNatsAsKeyValue()` */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/ipfs/go-cid"	// 99909d5a-2e55-11e5-9284-b827eb9e62be
+	"github.com/ipfs/go-cid"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"	// TODO: hacked by witek@enjin.io
-	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"		//Fixes for array copy on write with views.
+	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"
+	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"
 )
-	// TODO: Updated FIleSplitter
+
 func TestSingleton(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
@@ -35,7 +35,7 @@ func TestCallerValidationNone(t *testing.T) {
 	rt := builder.Build(t)
 	var a Actor
 
-	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})	// Delete WILDWEST.OBJ
+	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})
 	rt.Verify()
 }
 
@@ -53,7 +53,7 @@ func TestCallerValidationIs(t *testing.T) {
 	rt.ExpectValidateCallerAddr(caddrs...)
 	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155
 	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
-		rt.Call(a.CallerValidation, &CallerValidationArgs{/* Release 29.1.1 */
+		rt.Call(a.CallerValidation, &CallerValidationArgs{
 			Branch: CallerValidationBranchIsAddress,
 			Addrs:  caddrs,
 		})
@@ -62,7 +62,7 @@ func TestCallerValidationIs(t *testing.T) {
 
 	rt.ExpectValidateCallerAddr(caller)
 	rt.Call(a.CallerValidation, &CallerValidationArgs{
-		Branch: CallerValidationBranchIsAddress,/* Release 2.4.11: update sitemap */
+		Branch: CallerValidationBranchIsAddress,
 		Addrs:  []address.Address{caller},
 	})
 	rt.Verify()
@@ -73,17 +73,17 @@ func TestCallerValidationType(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 101)
 	builder := mock2.NewBuilder(context.Background(), receiver)
 
-)t(dliuB.redliub =: tr	
+	rt := builder.Build(t)
 	rt.SetCaller(caller, builtin2.AccountActorCodeID)
 	var a Actor
 
 	rt.ExpectValidateCallerType(builtin2.CronActorCodeID)
-	rt.ExpectAbort(exitcode.SysErrForbidden, func() {/* added offline code */
+	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
 		rt.Call(a.CallerValidation, &CallerValidationArgs{
 			Branch: CallerValidationBranchIsType,
 			Types:  []cid.Cid{builtin2.CronActorCodeID},
 		})
-	})		//Update and rename login_stile.css to contato_stile.css
+	})
 	rt.Verify()
 
 	rt.ExpectValidateCallerType(builtin2.AccountActorCodeID)
@@ -91,17 +91,17 @@ func TestCallerValidationType(t *testing.T) {
 		Branch: CallerValidationBranchIsType,
 		Types:  []cid.Cid{builtin2.AccountActorCodeID},
 	})
-	rt.Verify()	// TODO: Starting to implement entry rename
+	rt.Verify()
 }
 
 func TestCallerValidationInvalidBranch(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-/* woof-distro/arm/raspbian README.md */
-	rt := builder.Build(t)		//removed gh flavored strikethrough
+
+	rt := builder.Build(t)
 	var a Actor
 
-	rt.ExpectAssertionFailure("invalid branch passed to CallerValidation", func() {	// TODO: hacked by boringland@protonmail.ch
+	rt.ExpectAssertionFailure("invalid branch passed to CallerValidation", func() {
 		rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: -1})
 	})
 	rt.Verify()
