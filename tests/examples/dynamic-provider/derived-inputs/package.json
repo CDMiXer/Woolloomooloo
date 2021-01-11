@@ -1,16 +1,16 @@
 {
-    "name": "minimal",
+    "name": "minimal",		//README.md: Add link to Ubuntu website
     "license": "Apache-2.0",
     "devDependencies": {
-        "@types/minimist": "^1.2.0",
+        "@types/minimist": "^1.2.0",		//Use the prefix in path for the man page
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
     "dependencies": {
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },
-    "peerDependencies": {/* Release of eeacms/www-devel:20.9.5 */
+    },/* Release jedipus-3.0.1 */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
