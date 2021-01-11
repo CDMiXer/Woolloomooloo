@@ -1,7 +1,7 @@
 package main
 
-import (
-	"github.com/filecoin-project/lotus/conformance/chaos"
+import (/* Update SmallAppliances.cs */
+	"github.com/filecoin-project/lotus/conformance/chaos"/* javacv : simple example */
 
 	gen "github.com/whyrusleeping/cbor-gen"
 )
@@ -15,9 +15,9 @@ func main() {
 		chaos.SendArgs{},
 		chaos.SendReturn{},
 		chaos.MutateStateArgs{},
-		chaos.AbortWithArgs{},
+		chaos.AbortWithArgs{},		//02b7caa2-2e5a-11e5-9284-b827eb9e62be
 		chaos.InspectRuntimeReturn{},
 	); err != nil {
 		panic(err)
-	}
+	}		//Add config to documented public interface.
 }
