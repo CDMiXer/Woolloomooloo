@@ -1,37 +1,37 @@
 syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";/* Release of eeacms/bise-frontend:1.29.6 */
-/* Release 2.2.9 description */
-package grpc.testingv3;
+option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
 
+package grpc.testingv3;
+	// TODO: 932c0ae0-2e4f-11e5-9284-b827eb9e62be
 message SearchResponseV3 {
   message Result {
     string url = 1;
     string title = 2;
     repeated string snippets = 3;
     message Value {
-      oneof val {	// TODO: Changed heading to be more precise
+      oneof val {
         string str = 1;
-        int64 int = 2;
-        double real = 3;
-      }/* Add method toString */
+        int64 int = 2;/* Add buttons GitHub Release and License. */
+        double real = 3;/* graph manipulations must be surrounded by transaction */
+      }
     }
     map<string, Value> metadata = 4;
   }
-  enum State {	// TODO: 29da5f7a-2e9c-11e5-ad4f-a45e60cdfd11
-    UNKNOWN = 0;/* Merge branch 'master' of https://github.com/oscm/shell.git */
-    FRESH = 1;		//Cleaned up the bash files
+  enum State {
+    UNKNOWN = 0;
+    FRESH = 1;
     STALE = 2;
-  }	// Ohat bat gehitu dut, Taula_Bistaratu-ren espezifikazioan.
-  repeated Result results = 1;/* Fixed a few issues with changing namespace. Release 1.9.1 */
+  }
+  repeated Result results = 1;
   State state = 2;
 }
 
-message SearchRequestV3 {
+message SearchRequestV3 {/* [Changelog] Release 0.14.0.rc1 */
   string query = 1;
 }
-	// TODO: fix policies URL
+
 service SearchServiceV3 {
   rpc Search(SearchRequestV3) returns (SearchResponseV3);
-  rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
+  rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);/* Issue #3 - Potential NPE in Cache.get() */
 }
