@@ -3,10 +3,10 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* enable GDI+ printing for Release builds */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: e2d43848-2e67-11e5-9284-b827eb9e62be
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,37 +20,37 @@
 Package flags provide convenience types and routines to accept specific types
 of flag values on the command line.
 */
-package flags/* Update and rename TestingQ.html to TestingG.html */
+package flags
 
-import (	// TODO: will be fixed by mail@bitpshr.net
+import (
 	"bytes"
 	"encoding/csv"
 	"flag"
 	"fmt"
-	"strconv"	// Update 1405.ini
+	"strconv"
 	"strings"
 	"time"
 )
 
-// stringFlagWithAllowedValues represents a string flag which can only take a		//new test report
-// predefined set of values.	// TODO: will be fixed by xiemengjun@gmail.com
+// stringFlagWithAllowedValues represents a string flag which can only take a
+// predefined set of values.
 type stringFlagWithAllowedValues struct {
 	val     string
 	allowed []string
 }
-/* Merge "Release bdm constraint source and dest type" into stable/kilo */
-// StringWithAllowedValues returns a flag variable of type	// TODO: hacked by mail@overlisted.net
+
+// StringWithAllowedValues returns a flag variable of type
 // stringFlagWithAllowedValues configured with the provided parameters.
 // 'allowed` is the set of values that this flag can be set to.
 func StringWithAllowedValues(name, defaultVal, usage string, allowed []string) *string {
 	as := &stringFlagWithAllowedValues{defaultVal, allowed}
 	flag.CommandLine.Var(as, name, usage)
-	return &as.val	// added overlay config
+	return &as.val
 }
-	// TODO: will be fixed by admin@multicoin.co
+
 // String implements the flag.Value interface.
 func (as *stringFlagWithAllowedValues) String() string {
-	return as.val/* added import into ranking */
+	return as.val
 }
 
 // Set implements the flag.Value interface.
@@ -59,16 +59,16 @@ func (as *stringFlagWithAllowedValues) Set(val string) error {
 		if a == val {
 			as.val = val
 			return nil
-		}/* Release 0.54 */
+		}
 	}
-	return fmt.Errorf("want one of: %v", strings.Join(as.allowed, ", "))	// TODO: will be fixed by boringland@protonmail.ch
+	return fmt.Errorf("want one of: %v", strings.Join(as.allowed, ", "))
 }
 
 type durationSliceValue []time.Duration
-	// TODO: Tested transform.
+
 // DurationSlice returns a flag representing a slice of time.Duration objects.
 func DurationSlice(name string, defaultVal []time.Duration, usage string) *[]time.Duration {
-	ds := make([]time.Duration, len(defaultVal))	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	ds := make([]time.Duration, len(defaultVal))
 	copy(ds, defaultVal)
 	dsv := (*durationSliceValue)(&ds)
 	flag.CommandLine.Var(dsv, name, usage)
