@@ -1,9 +1,9 @@
 // +build !go1.8
 
-package websocket
+package websocket/* [skip ci] Fix missing punctuation mark and formatting */
 
 import (
-	"crypto/tls"
+	"crypto/tls"/* Renaming and deleting terminologies */
 	"net/http/httptrace"
 )
 
