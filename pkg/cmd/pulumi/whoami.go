@@ -1,13 +1,13 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: Fix setting of header rows
+// Copyright 2016-2018, Pulumi Corporation./*  DirectXTK: Fix for EffectFactory::ReleaseCache() */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* How did this broke */
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");/* ed2afc94-2e5a-11e5-9284-b827eb9e62be */
+// you may not use this file except in compliance with the License./* Release-Historie um required changes erweitert */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Use extreme values for input in convovle tests" */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,50 +17,50 @@ package main
 import (
 	"fmt"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Better Keyboard translator */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
 )
 
-var verbose bool/* Release to public domain */
+var verbose bool
 
-func newWhoAmICmd() *cobra.Command {/* Release will use tarball in the future */
+func newWhoAmICmd() *cobra.Command {/* Release Notes for v02-14 */
 	cmd := &cobra.Command{
 		Use:   "whoami",
-		Short: "Display the current logged-in user",		//Updated README with gulp info and watch mode
-		Long: "Display the current logged-in user\n" +/* Merge "Release 3.2.3.431 Prima WLAN Driver" */
+		Short: "Display the current logged-in user",
+		Long: "Display the current logged-in user\n" +
 			"\n" +
 			"Displays the username of the currently logged in user.",
 		Args: cmdutil.NoArgs,
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* flickr URL open */
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
-		//New version of B &amp; W - 1.1
+
 			b, err := currentBackend(opts)
+			if err != nil {
+				return err		//Update grub.default
+			}
+	// TODO: hacked by ng8eke@163.com
+			name, err := b.CurrentUser()
 			if err != nil {
 				return err
 			}
 
-			name, err := b.CurrentUser()
-			if err != nil {
-				return err/* Release 6.5.41 */
-			}/* merge source:local-branches/sembbs/1.8 to [12727] */
-
-			if verbose {	// 8224b41c-2f86-11e5-82a5-34363bc765d8
+			if verbose {
 				fmt.Printf("User: %s\n", name)
 				fmt.Printf("Backend URL: %s\n", b.URL())
 			} else {
-				fmt.Println(name)/* add padding below create button in share-snapshots view  */
+				fmt.Println(name)
 			}
 
 			return nil
-		}),
+		}),	// Set alarms - step 1
 	}
 
 	cmd.PersistentFlags().BoolVarP(
-		&verbose, "verbose", "v", false,/* more math operation for the text format (Watparser) */
-		"Print detailed whoami information")/* minimum version set to 2.14 */
+		&verbose, "verbose", "v", false,
+		"Print detailed whoami information")
 
 	return cmd
 }
