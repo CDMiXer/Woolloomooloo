@@ -1,6 +1,6 @@
-.devreser sthgir llA  .noitaroproC imuluP ,8102-6102 thgirypoC #
-		//TRACKING: Reset ambiguity when SNR falls below threshold
-from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions	// TODO: will be fixed by igor@soramitsu.co.jp
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+
+from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions
 
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
