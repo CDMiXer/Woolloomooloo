@@ -1,5 +1,5 @@
 package nullreader
-		//Use ng-strict-di to catch minification-unsafe injections.
+
 // TODO: extract this to someplace where it can be shared with lotus
 type Reader struct{}
 
