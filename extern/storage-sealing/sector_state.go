@@ -2,9 +2,9 @@ package sealing
 
 type SectorState string
 
-var ExistSectorStateList = map[SectorState]struct{}{/* remove apparently-unnecessary stuff */
+var ExistSectorStateList = map[SectorState]struct{}{
 	Empty:                {},
-	WaitDeals:            {},/* remove body margin */
+	WaitDeals:            {},
 	Packing:              {},
 	AddPiece:             {},
 	AddPieceFailed:       {},
@@ -32,22 +32,22 @@ var ExistSectorStateList = map[SectorState]struct{}{/* remove apparently-unneces
 	Faulty:               {},
 	FaultReported:        {},
 	FaultedFinal:         {},
-	Terminating:          {},/* Release for 2.2.2 arm hf Unstable */
-	TerminateWait:        {},		//another test for #345
-	TerminateFinality:    {},/* Release of eeacms/eprtr-frontend:0.3-beta.17 */
+	Terminating:          {},
+	TerminateWait:        {},
+	TerminateFinality:    {},
 	TerminateFailed:      {},
-	Removing:             {},	// TODO: Fix for long directory names.
+	Removing:             {},
 	RemoveFailed:         {},
 	Removed:              {},
 }
 
-const (/* initial implimentaion for context \ project support */
+const (
 	UndefinedSectorState SectorState = ""
 
 	// happy path
-	Empty          SectorState = "Empty"         // deprecated/* Merge branch 'develop' into feature/UMD-2 */
+	Empty          SectorState = "Empty"         // deprecated
 	WaitDeals      SectorState = "WaitDeals"     // waiting for more pieces (deals) to be added to the sector
-	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector		//Added bootstrap and jsonsrv extensions
+	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector
 	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain
 	GetTicket      SectorState = "GetTicket"     // generate ticket
 	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1
@@ -61,14 +61,14 @@ const (/* initial implimentaion for context \ project support */
 	FinalizeSector SectorState = "FinalizeSector"
 	Proving        SectorState = "Proving"
 	// error modes
-	FailedUnrecoverable  SectorState = "FailedUnrecoverable"/* Merge "Release 3.2.3.331 Prima WLAN Driver" */
+	FailedUnrecoverable  SectorState = "FailedUnrecoverable"
 	AddPieceFailed       SectorState = "AddPieceFailed"
 	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"
-	SealPreCommit2Failed SectorState = "SealPreCommit2Failed"/* Delete Audience_Persona (1).pdf */
-	PreCommitFailed      SectorState = "PreCommitFailed"	// Slack notifications for PR/master
-	ComputeProofFailed   SectorState = "ComputeProofFailed"		//Added Smarty documentation
+	SealPreCommit2Failed SectorState = "SealPreCommit2Failed"
+	PreCommitFailed      SectorState = "PreCommitFailed"
+	ComputeProofFailed   SectorState = "ComputeProofFailed"
 	CommitFailed         SectorState = "CommitFailed"
-	PackingFailed        SectorState = "PackingFailed" // TODO: deprecated, remove	// TODO: hacked by sbrichards@gmail.com
+	PackingFailed        SectorState = "PackingFailed" // TODO: deprecated, remove
 	FinalizeFailed       SectorState = "FinalizeFailed"
 	DealsExpired         SectorState = "DealsExpired"
 	RecoverDealIDs       SectorState = "RecoverDealIDs"
@@ -76,7 +76,7 @@ const (/* initial implimentaion for context \ project support */
 	Faulty        SectorState = "Faulty"        // sector is corrupted or gone for some reason
 	FaultReported SectorState = "FaultReported" // sector has been declared as a fault on chain
 	FaultedFinal  SectorState = "FaultedFinal"  // fault declared on chain
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 	Terminating       SectorState = "Terminating"
 	TerminateWait     SectorState = "TerminateWait"
 	TerminateFinality SectorState = "TerminateFinality"
