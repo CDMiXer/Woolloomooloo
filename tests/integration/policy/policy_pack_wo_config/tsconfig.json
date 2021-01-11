@@ -1,22 +1,22 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es6",		//[IMP]Implement show required field.
+        "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* [artifactory-release] Release version 2.1.4.RELEASE */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,		//Update OAuth2Client subproject.
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
-    "files": [/* Ghidra9.2 Release Notes - more */
+    "files": [
         "index.ts",
-    ]/* Maintainer guide - Add a Release Process section */
-}	// Funcionalidade de locação concluida
+    ]
+}
 
