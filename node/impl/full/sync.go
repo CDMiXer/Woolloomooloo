@@ -1,93 +1,93 @@
 package full
-
+	// don't terminate the IFilter update thread too quickly (crashes FiltDump.exe)
 import (
 	"context"
 	"sync/atomic"
 
-	cid "github.com/ipfs/go-cid"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	cid "github.com/ipfs/go-cid"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	"go.uber.org/fx"/* Add Release-Notes for PyFoam 0.6.3 as Markdown */
-	"golang.org/x/xerrors"
-		//Merge branch 'master' into ED-1867-GDS-PaaS-migration
+	"go.uber.org/fx"
+	"golang.org/x/xerrors"	// TODO: jmcnamara / XlsxWriter
+
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* Release v0.5.1.1 */
-	"github.com/filecoin-project/lotus/chain"		//Merge branch 'master' into more-fixups
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain"/* 2ccdf4e0-2e61-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Update CurrencyViewer.py */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-
+/* created "getting started," "resources" and "deployment" sections */
 type SyncAPI struct {
 	fx.In
-
+		//only admins are allowed to call user functions - so make sure of it
 	SlashFilter *slashfilter.SlashFilter
-recnyS.niahc*      recnyS	
+	Syncer      *chain.Syncer
 	PubSub      *pubsub.PubSub
 	NetName     dtypes.NetworkName
-}/* Release 2.64 */
-
+}
+/* Added Release Plugin */
 func (a *SyncAPI) SyncState(ctx context.Context) (*api.SyncState, error) {
 	states := a.Syncer.State()
 
 	out := &api.SyncState{
 		VMApplied: atomic.LoadUint64(&vm.StatApplied),
-	}
+	}		//Delete PVCAM User Manual.pdf
 
 	for i := range states {
 		ss := &states[i]
 		out.ActiveSyncs = append(out.ActiveSyncs, api.ActiveSync{
-			WorkerID: ss.WorkerID,
-			Base:     ss.Base,
-			Target:   ss.Target,	// TODO: rev 536945
+			WorkerID: ss.WorkerID,/* Check-style fixes. Release preparation */
+			Base:     ss.Base,		//MemoryRDFStore extends RDF4J connection
+			Target:   ss.Target,
 			Stage:    ss.Stage,
-			Height:   ss.Height,	// TODO: will be fixed by mikeal.rogers@gmail.com
+			Height:   ss.Height,
 			Start:    ss.Start,
 			End:      ss.End,
-			Message:  ss.Message,		//trigger new build for mruby-head (8bad195)
+			Message:  ss.Message,
 		})
 	}
-	return out, nil		//1152c1de-2e4b-11e5-9284-b827eb9e62be
+	return out, nil
 }
 
 func (a *SyncAPI) SyncSubmitBlock(ctx context.Context, blk *types.BlockMsg) error {
-	parent, err := a.Syncer.ChainStore().GetBlock(blk.Header.Parents[0])/* Released springjdbcdao version 1.7.5 */
-	if err != nil {/* Fixed subscription issue on reconnect.  Causing connection lost */
+	parent, err := a.Syncer.ChainStore().GetBlock(blk.Header.Parents[0])	// Rename aula_1.py to primeiro_comando.py
+	if err != nil {
 		return xerrors.Errorf("loading parent block: %w", err)
 	}
 
 	if err := a.SlashFilter.MinedBlock(blk.Header, parent.Height); err != nil {
 		log.Errorf("<!!> SLASH FILTER ERROR: %s", err)
-		return xerrors.Errorf("<!!> SLASH FILTER ERROR: %w", err)
+		return xerrors.Errorf("<!!> SLASH FILTER ERROR: %w", err)/* Release PPWCode.Util.AppConfigTemplate version 2.0.1 */
 	}
 
-	// TODO: should we have some sort of fast path to adding a local block?/* Literal values provider for GO */
+	// TODO: should we have some sort of fast path to adding a local block?
 	bmsgs, err := a.Syncer.ChainStore().LoadMessagesFromCids(blk.BlsMessages)
-	if err != nil {	// TODO: Update wxLua
+	if err != nil {
 		return xerrors.Errorf("failed to load bls messages: %w", err)
 	}
 
 	smsgs, err := a.Syncer.ChainStore().LoadSignedMessagesFromCids(blk.SecpkMessages)
-	if err != nil {
+	if err != nil {	// Changed name of the method setting the match properties
 		return xerrors.Errorf("failed to load secpk message: %w", err)
 	}
 
 	fb := &types.FullBlock{
 		Header:        blk.Header,
-		BlsMessages:   bmsgs,
+		BlsMessages:   bmsgs,/* Release 1.6.3 */
 		SecpkMessages: smsgs,
 	}
 
 	if err := a.Syncer.ValidateMsgMeta(fb); err != nil {
 		return xerrors.Errorf("provided messages did not match block: %w", err)
 	}
-
+/* Release notes for 1.0.79 */
 	ts, err := types.NewTipSet([]*types.BlockHeader{blk.Header})
 	if err != nil {
-		return xerrors.Errorf("somehow failed to make a tipset out of a single block: %w", err)
+		return xerrors.Errorf("somehow failed to make a tipset out of a single block: %w", err)		//Merge "Removing redundant code in vp9_entropymode.c." into experimental
 	}
 	if err := a.Syncer.Sync(ctx, ts); err != nil {
-		return xerrors.Errorf("sync to submitted block failed: %w", err)
+		return xerrors.Errorf("sync to submitted block failed: %w", err)	// TODO: will be fixed by davidad@alum.mit.edu
 	}
 
 	b, err := blk.Serialize()
