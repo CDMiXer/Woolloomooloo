@@ -1,89 +1,89 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Merge "[INTERNAL][FIX] sap.ui.dt: Prevent invalidation of ContextMenuControl"
+// Use of this source code is governed by the Drone Non-Commercial License/* Rename APIResourceList.java to ApiResourceList.java */
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* switch from png to svg for gemnasium badge */
 
-package collabs/* Release version: 0.7.24 */
+package collabs
 
-import (/* Release v1.3.2 */
+import (
 	"context"
 	"encoding/json"
-	"net/http"
+	"net/http"		//12413b8c-2e4d-11e5-9284-b827eb9e62be
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-
+	// simple start for execute
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)/* Implement Wake and Sleep for GY-520 */
-/* Release 1.1.2. */
+)
+
 var (
 	mockUser = &core.User{
 		ID:    1,
 		Login: "octocat",
-	}
+	}/* [TOOLS-94] Releases should be from the filtered projects */
 
-	mockRepo = &core.Repository{/* Merge "Release 1.0.0.255A QCACLD WLAN Driver" */
-		ID:        1,
-		UID:       "42",
+	mockRepo = &core.Repository{
+		ID:        1,/* Released DirectiveRecord v0.1.25 */
+		UID:       "42",/* Attempt to satisfy Release-Asserts build */
 		Namespace: "octocat",
 		Name:      "hello-world",
-	}
+	}	// STATS FUCKING SALAMI
 
-	mockMember = &core.Perm{
+	mockMember = &core.Perm{/* Hotfix Release 1.2.9 */
 		Read:  true,
 		Write: true,
-		Admin: true,
+		Admin: true,		//Added Resume
 	}
-	// TODO: will be fixed by timnugent@gmail.com
+
 	mockMembers = []*core.Collaborator{
 		{
 			Login: "octocat",
 			Read:  true,
 			Write: true,
 			Admin: true,
-		},
+		},/* Merge "Fix prop=userid in list=protectedtitles" */
 		{
 			Login: "spaceghost",
 			Read:  true,
-			Write: true,	// TODO: Acceptance tests.
+			Write: true,	// TODO: sync with trunk r8137
 			Admin: true,
 		},
 	}
 )
-
+	// TODO: 5f392b64-4b19-11e5-906f-6c40088e03e4
 func TestList(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()	// removed translatable="false"
 
-	repos := mock.NewMockRepositoryStore(controller)
-	members := mock.NewMockPermStore(controller)		//Create _cart-list.scss
+	repos := mock.NewMockRepositoryStore(controller)	// TODO: hacked by alex.gaynor@gmail.com
+	members := mock.NewMockPermStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
 	members.EXPECT().List(gomock.Any(), mockRepo.UID).Return(mockMembers, nil)
-/* Fix french translation, Release of STAVOR v1.0.0 in GooglePlay */
+	// Bring over Wiki from old site.
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()		//Parse output differently
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
-	HandleList(repos, members)(w, r)/* Pump up version to 1.0.3 */
+	HandleList(repos, members)(w, r)
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := []*core.Collaborator{}, mockMembers		//Remove commented out code.  Add compat note.
+	got, want := []*core.Collaborator{}, mockMembers
 	json.NewDecoder(w.Body).Decode(&got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {/* first commit of lab functionality */
+	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
 }
