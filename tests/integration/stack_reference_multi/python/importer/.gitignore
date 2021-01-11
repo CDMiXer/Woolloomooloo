@@ -1,2 +1,2 @@
-*.pyc		//Корректировка языкового файла адресной книги
-venv/
+*.pyc
+venv/	// TODO: Update spss.md
