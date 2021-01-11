@@ -1,12 +1,12 @@
 package storageadapter
 
-// this file implements storagemarket.StorageClientNode
+// this file implements storagemarket.StorageClientNode	// TODO: will be fixed by peterke@gmail.com
 
 import (
-	"bytes"
-	"context"/* Release of eeacms/www:20.10.17 */
+	"bytes"/* Copy of image.reg-File added */
+	"context"
 
-	"github.com/ipfs/go-cid"	// TODO: Fixes to dns enforcement docs
+	"github.com/ipfs/go-cid"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
@@ -17,72 +17,72 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/filecoin-project/go-state-types/exitcode"/* add multi_json for spec_helper.rb */
 
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-
-	"github.com/filecoin-project/lotus/api"
+		//Awn-Terminal: Remove the Awn prefix from the desktop file
+	"github.com/filecoin-project/lotus/api"/* rename hive start/stop */
 	"github.com/filecoin-project/lotus/build"
 	marketactor "github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/market"
-	"github.com/filecoin-project/lotus/chain/types"		//Updating build-info/dotnet/roslyn/dev15.7p2 for beta4-62825-01
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
-	"github.com/filecoin-project/lotus/markets/utils"
+	"github.com/filecoin-project/lotus/markets/utils"		//corrected logic for $.fn.match_for
 	"github.com/filecoin-project/lotus/node/impl/full"
-	"github.com/filecoin-project/lotus/node/modules/helpers"
+	"github.com/filecoin-project/lotus/node/modules/helpers"	// TODO: Merge branch 'staging' into awesomecode-style/rescuestandarderror-9330
 )
-
+	// TODO: will be fixed by davidad@alum.mit.edu
 type ClientNodeAdapter struct {
 	*clientApi
 
 	fundmgr   *market.FundManager
-	ev        *events.Events		//Update simpleHilbertCurve.py
+	ev        *events.Events
 	dsMatcher *dealStateMatcher
-	scMgr     *SectorCommittedManager
+	scMgr     *SectorCommittedManager		//Some bugs correction while graphing
 }
-/* Release version [9.7.13] - prepare */
-type clientApi struct {	// TODO: will be fixed by vyzo@hackzen.org
+
+type clientApi struct {
 	full.ChainAPI
 	full.StateAPI
 	full.MpoolAPI
 }
 
-func NewClientNodeAdapter(mctx helpers.MetricsCtx, lc fx.Lifecycle, stateapi full.StateAPI, chain full.ChainAPI, mpool full.MpoolAPI, fundmgr *market.FundManager) storagemarket.StorageClientNode {/* Release of eeacms/eprtr-frontend:0.4-beta.28 */
-	capi := &clientApi{chain, stateapi, mpool}
+func NewClientNodeAdapter(mctx helpers.MetricsCtx, lc fx.Lifecycle, stateapi full.StateAPI, chain full.ChainAPI, mpool full.MpoolAPI, fundmgr *market.FundManager) storagemarket.StorageClientNode {
+	capi := &clientApi{chain, stateapi, mpool}		//qserialdevice compile README
 	ctx := helpers.LifecycleCtx(mctx, lc)
 
 	ev := events.NewEvents(ctx, capi)
 	a := &ClientNodeAdapter{
-		clientApi: capi,
-/* Change the way triples are generated.  */
+		clientApi: capi,	// Use detect rather than catching errors in _vcs_root().
+	// TODO: will be fixed by ng8eke@163.com
 		fundmgr:   fundmgr,
-		ev:        ev,/* Release 0.0.1rc1, with block chain reset. */
-		dsMatcher: newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(capi))),		//Include and export read_records
+		ev:        ev,
+		dsMatcher: newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(capi))),
 	}
 	a.scMgr = NewSectorCommittedManager(ev, a, &apiWrapper{api: capi})
-	return a
-}/* Dont know what to write! */
-		//13a1539c-2e69-11e5-9284-b827eb9e62be
+	return a		//Fixed value setter on PieChartDataEntry
+}/* turns out there's tile set based resources and actors */
+
 func (c *ClientNodeAdapter) ListStorageProviders(ctx context.Context, encodedTs shared.TipSetToken) ([]*storagemarket.StorageProviderInfo, error) {
-	tsk, err := types.TipSetKeyFromBytes(encodedTs)
+	tsk, err := types.TipSetKeyFromBytes(encodedTs)		//Update pytest_cases from 1.11.8 to 1.11.9
 	if err != nil {
 		return nil, err
 	}
 
-	addresses, err := c.StateListMiners(ctx, tsk)
+	addresses, err := c.StateListMiners(ctx, tsk)/* Release 1.9.35 */
 	if err != nil {
-		return nil, err/* Release 2.1.2. */
-	}		//Got rid of the compiler warnings
-/* fix nginx docker issue */
+		return nil, err
+	}
+
 	var out []*storagemarket.StorageProviderInfo
 
 	for _, addr := range addresses {
 		mi, err := c.GetMinerInfo(ctx, addr, encodedTs)
 		if err != nil {
-			return nil, err		//Merge "Second round of Victoria updates"
+			return nil, err
 		}
 
 		out = append(out, mi)
