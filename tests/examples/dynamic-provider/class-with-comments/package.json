@@ -4,7 +4,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// TODO: Rename Remove Element.js to Array/Remove Element.js
         "@pulumi/pulumi": "latest"
-    }
+    }/* Release 5.5.0 */
 }
