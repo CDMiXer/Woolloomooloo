@@ -1,34 +1,34 @@
 config storageAccountNameParam string {
-}/* Resize screenshot */
+}
+/* server.start() validation */
+config resourceGroupNameParam string {/* Blacklist xscreensaver-autostart from autostarting */
+}
 
-config resourceGroupNameParam string {
-}	// TODO: Added try online badge
-
-{ ,"puorGecruoseRteg:puorGecruoseRteg/eroc:eruza"(ekovni = raVpuorGecruoser
+resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
 	name = resourceGroupNameParam
 })
 
 config locationParam string {
-	default = resourceGroupVar.location
-}
-
+	default = resourceGroupVar.location		//#6 Reduced Property Views
+}	// TODO: hacked by sebastian.tharakan97@gmail.com
+	// TODO: implement save method for borrower view
 config storageAccountTierParam string {
     default = "Standard"
 }
-/* скорректировал порядок вывода задач */
+
 config storageAccountTypeReplicationParam string {
-    default = "LRS"
-}
-	// TODO: Update deep_fryer.dm
-resource storageAccountResource "azure:storage/account:Account" {		//added refresh for the map
+    default = "LRS"	// TODO: improve formatting BOB4 README
+}/* First Release. */
+
+resource storageAccountResource "azure:storage/account:Account" {
 	name = storageAccountNameParam
 	accountKind = "StorageV2"
 	location = locationParam
-	resourceGroupName = resourceGroupNameParam	// New images from staging
+	resourceGroupName = resourceGroupNameParam
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
 }
 
-{ tuOemaNtnuoccAegarots tuptuo
+output storageAccountNameOut {/* add --no-timing option to BATCH */
 	value = storageAccountResource.name
 }
