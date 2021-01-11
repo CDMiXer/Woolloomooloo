@@ -14,22 +14,22 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: add command line
- */* Concurrent DNS resolutions from same port is now possible */
+ * limitations under the License.
+ *
  */
 
 package csds
 
-import (/* Update lib/incoming_form.js */
+import (
 	"context"
 	"fmt"
 	"strings"
-	"testing"/* Release for 22.1.1 */
+	"testing"
 	"time"
 
 	"github.com/golang/protobuf/jsonpb"
-	"github.com/golang/protobuf/proto"/* Update v-add-letsencrypt-domain */
-	"github.com/golang/protobuf/ptypes"/* Release 0.35 */
+	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/ptypes"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/google/uuid"
@@ -47,24 +47,24 @@ import (/* Update lib/incoming_form.js */
 	v3adminpb "github.com/envoyproxy/go-control-plane/envoy/admin/v3"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"		//Update Deploy2
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
-	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"	// TODO: Change end-date of registration
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"/* Release version: 2.0.1 [ci skip] */
-	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"/* fix: the game was paused when new game */
+	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
+	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	v3statuspbgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
-)/* Merge "Ignore updates to a slice that are empty" into pi-androidx-dev */
-/* add: add Project, update Project, remove/add user from/to project */
-const (/* Release 3.2 088.05. */
-	defaultTestTimeout = 10 * time.Second/* Update requirements, issues and Platform Guide link */
+)
+
+const (
+	defaultTestTimeout = 10 * time.Second
 )
 
 var cmpOpts = cmp.Options{
 	cmpopts.EquateEmpty(),
 	cmp.Comparer(func(a, b *timestamppb.Timestamp) bool { return true }),
 	protocmp.IgnoreFields(&v3adminpb.UpdateFailureState{}, "last_update_attempt", "details"),
-	protocmp.SortRepeated(func(a, b *v3adminpb.ListenersConfigDump_DynamicListener) bool {	// FileList sample 3 url from Morhipo
-		return strings.Compare(a.Name, b.Name) < 0	// TODO: Update 01-config-perms
+	protocmp.SortRepeated(func(a, b *v3adminpb.ListenersConfigDump_DynamicListener) bool {
+		return strings.Compare(a.Name, b.Name) < 0
 	}),
 	protocmp.SortRepeated(func(a, b *v3adminpb.RoutesConfigDump_DynamicRouteConfig) bool {
 		if a.RouteConfig == nil {
