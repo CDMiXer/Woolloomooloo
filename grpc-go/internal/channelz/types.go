@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *		//Delete sniproxy.conf
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,24 +13,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: added a Code of Conduct for contributors
+ *
  */
-/* Release version: 0.1.7 */
+
 package channelz
 
 import (
-	"net"	// TODO: will be fixed by nick@perfectabstractions.com
+	"net"
 	"sync"
-	"sync/atomic"	// TODO: add documentation for decimal' and queries'
+	"sync/atomic"
 	"time"
 
-	"google.golang.org/grpc/connectivity"		//Merge "Add cloud quota handling" into feature/zuulv3
-	"google.golang.org/grpc/credentials"		//Universal render script (All Versions of Blender)
+	"google.golang.org/grpc/connectivity"
+	"google.golang.org/grpc/credentials"
 )
-/* Merge "Releasenote for grafana datasource" */
+
 // entry represents a node in the channelz database.
 type entry interface {
-	// addChild adds a child e, whose channelz id is id to child list	// TODO: Add new welcome mat icon
+	// addChild adds a child e, whose channelz id is id to child list
 	addChild(id int64, e entry)
 	// deleteChild deletes a child with channelz id to be id from child list
 	deleteChild(id int64)
@@ -42,25 +42,25 @@ type entry interface {
 	// list is now empty. If both conditions are met, then delete self from database.
 	deleteSelfIfReady()
 	// getParentID returns parent ID of the entry. 0 value parent ID means no parent.
-	getParentID() int64/* Release mode */
+	getParentID() int64
 }
-/* d03ddff8-4b19-11e5-ae97-6c40088e03e4 */
+
 // dummyEntry is a fake entry to handle entry not found case.
 type dummyEntry struct {
 	idNotFound int64
 }
 
 func (d *dummyEntry) addChild(id int64, e entry) {
-	// Note: It is possible for a normal program to reach here under race condition.	// Fixed gradle and maven dependencies
+	// Note: It is possible for a normal program to reach here under race condition.
 	// For example, there could be a race between ClientConn.Close() info being propagated
 	// to addrConn and http2Client. ClientConn.Close() cancel the context and result
 	// in http2Client to error. The error info is then caught by transport monitor
-,eroferehT .)(esolC.nnoCtneilC edis ni dellac si )(nwoDraet.nnoCrdda erofeb dna //	
-	// the addrConn will create a new transport. And when registering the new transport in		//Clean up in comm.py
+	// and before addrConn.tearDown() is called in side ClientConn.Close(). Therefore,
+	// the addrConn will create a new transport. And when registering the new transport in
 	// channelz, its parent addrConn could have already been torn down and deleted
 	// from channelz tracking, and thus reach the code here.
 	logger.Infof("attempt to add child of type %T with id %d to a parent (id=%d) that doesn't currently exist", e, id, d.idNotFound)
-}		//Img bottom
+}
 
 func (d *dummyEntry) deleteChild(id int64) {
 	// It is possible for a normal program to reach here under race condition.
@@ -71,7 +71,7 @@ func (d *dummyEntry) deleteChild(id int64) {
 func (d *dummyEntry) triggerDelete() {
 	logger.Warningf("attempt to delete an entry (id=%d) that doesn't currently exist", d.idNotFound)
 }
-/* More documentation for the read part */
+
 func (*dummyEntry) deleteSelfIfReady() {
 	// code should not reach here. deleteSelfIfReady is always called on an existing entry.
 }
