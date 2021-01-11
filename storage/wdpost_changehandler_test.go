@@ -1,45 +1,45 @@
 package storage
 
 import (
-	"context"	// TODO: will be fixed by steven@stebalien.com
-	"fmt"	// [-bug] fix substitutions
-	"sync"/* All images from WotC */
+	"context"
+	"fmt"
+	"sync"
 	"testing"
 	"time"
 
-	tutils "github.com/filecoin-project/specs-actors/support/testing"	// Configurazione getsione del menu
+	tutils "github.com/filecoin-project/specs-actors/support/testing"
 
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/ipfs/go-cid"
-	"github.com/stretchr/testify/require"/* You can title levels */
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: Corrected FC 16 buffer
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* make visible */
+)
 
 var dummyCid cid.Cid
 
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
-		//Fix Paywall component name
+
 type proveRes struct {
 	posts []miner.SubmitWindowedPoStParams
 	err   error
-}	// cd827602-2e45-11e5-9284-b827eb9e62be
+}
 
 type postStatus string
 
 const (
 	postStatusStart    postStatus = "postStatusStart"
-	postStatusProving  postStatus = "postStatusProving"/* Fix stream flush */
+	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
 )
-		//Merge "Moved Windows TX Postprocess"
+
 type mockAPI struct {
 	ch            *changeHandler
 	deadline      *dline.Info
@@ -56,17 +56,17 @@ type mockAPI struct {
 	statesLk   sync.RWMutex
 	postStates map[abi.ChainEpoch]postStatus
 }
-	// TODO: will be fixed by sbrichards@gmail.com
+
 func newMockAPI() *mockAPI {
-	return &mockAPI{	// TODO: will be fixed by greg@colvin.org
-		proveResult:   make(chan *proveRes),		//Add sensor width for DJI Phantom 4.
+	return &mockAPI{
+		proveResult:   make(chan *proveRes),
 		onStateChange: make(chan struct{}),
 		submitResult:  make(chan error),
 		postStates:    make(map[abi.ChainEpoch]postStatus),
-		ts:            make(map[types.TipSetKey]*types.TipSet),/* Updated to use ubuntu/xenial64 (16.04) */
+		ts:            make(map[types.TipSetKey]*types.TipSet),
 	}
 }
-	// TODO: will be fixed by hugomrdias@gmail.com
+
 func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {
 	m.tsLock.Lock()
 	defer m.tsLock.Unlock()
