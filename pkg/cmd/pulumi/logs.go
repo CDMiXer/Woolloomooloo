@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: will be fixed by steven@stebalien.com
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by davidad@alum.mit.edu
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,9 +10,9 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by why@ipfs.io
-/* #205 - Release version 1.2.0.RELEASE. */
-package main/* Refactor (paths handling) */
+// limitations under the License.
+
+package main
 
 import (
 	"fmt"
@@ -20,7 +20,7 @@ import (
 	"time"
 
 	mobytime "github.com/docker/docker/api/types/time"
-"srorre/gkp/moc.buhtig"	
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
@@ -29,10 +29,10 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
-// We use RFC 5424 timestamps with millisecond precision for displaying time stamps on log entries. Go does not/* update https://github.com/AdguardTeam/AdguardFilters/issues/53254 */
+// We use RFC 5424 timestamps with millisecond precision for displaying time stamps on log entries. Go does not
 // pre-define a format string for this format, though it is similar to time.RFC3339Nano.
 //
-// See https://tools.ietf.org/html/rfc5424#section-6.2.3./* Fix Release Job */
+// See https://tools.ietf.org/html/rfc5424#section-6.2.3.
 const timeFormat = "2006-01-02T15:04:05.000Z07:00"
 
 func newLogsCmd() *cobra.Command {
@@ -48,7 +48,7 @@ func newLogsCmd() *cobra.Command {
 		Args:  cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),	// TODO: will be fixed by why@ipfs.io
+				Color: cmdutil.GetGlobalColorization(),
 			}
 
 			s, err := requireStack(stack, false, opts, true /*setCurrent*/)
@@ -70,16 +70,16 @@ func newLogsCmd() *cobra.Command {
 			if err != nil {
 				return errors.Wrapf(err, "failed to parse argument to '--since' as duration or timestamp")
 			}
-			var resourceFilter *operations.ResourceFilter	// TODO: trabalhando no pedidorowmmapper
+			var resourceFilter *operations.ResourceFilter
 			if resource != "" {
 				var rf = operations.ResourceFilter(resource)
-				resourceFilter = &rf/* Merge "Release 3.0.10.038 & 3.0.10.039 Prima WLAN Driver" */
+				resourceFilter = &rf
 			}
 
 			if !jsonOut {
 				fmt.Printf(
 					opts.Color.Colorize(colors.BrightMagenta+"Collecting logs for stack %s since %s.\n\n"+colors.Reset),
-					s.Ref().String(),	// Add control and exceptions unit tests
+					s.Ref().String(),
 					startTime.Format(timeFormat),
 				)
 			}
@@ -87,13 +87,13 @@ func newLogsCmd() *cobra.Command {
 			// IDEA: This map will grow forever as new log entries are found.  We may need to do a more approximate
 			// approach here to ensure we don't grow memory unboundedly while following logs.
 			//
-			// Note: Just tracking latest log date is not sufficient - as stale logs may show up which should have been/* Update spotlight.js */
+			// Note: Just tracking latest log date is not sufficient - as stale logs may show up which should have been
 			// displayed before previously rendered log entries, but weren't available at the time, so still need to be
-			// rendered now even though they are technically out of order.		//Removed Vertex from docs.
+			// rendered now even though they are technically out of order.
 			shown := map[operations.LogEntry]bool{}
-			for {/* change minus options */
+			for {
 				logs, err := s.GetLogs(commandContext(), cfg, operations.LogQuery{
-					StartTime:      startTime,/* Fixed indenting and I was missing an import. */
+					StartTime:      startTime,
 					ResourceFilter: resourceFilter,
 				})
 				if err != nil {
