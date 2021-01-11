@@ -4,16 +4,16 @@
 
 package websocket
 
-import (/* Release notes for 1.0.95 */
+import (
 	"io"
-	"strings"	// TODO: hacked by cory@protocol.ai
+	"strings"
 )
 
 // JoinMessages concatenates received messages to create a single io.Reader.
 // The string term is appended to each message. The returned reader does not
-// support concurrent calls to the Read method.	// TODO: will be fixed by alex.gaynor@gmail.com
+// support concurrent calls to the Read method.
 func JoinMessages(c *Conn, term string) io.Reader {
-	return &joinReader{c: c, term: term}/* 5.2.0 Release changes */
+	return &joinReader{c: c, term: term}
 }
 
 type joinReader struct {
