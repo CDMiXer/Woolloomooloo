@@ -1,12 +1,12 @@
-using Pulumi;	// a6bc4d58-2e41-11e5-9284-b827eb9e62be
-using Azure = Pulumi.Azure;	// TODO: hacked by alessio@tendermint.com
-	// changed loadertext prop to this.props.children
-class MyStack : Stack/* Release LastaJob-0.2.1 */
-{/* Merge upstream/master into ui_redesign */
+using Pulumi;
+using Azure = Pulumi.Azure;
+
+class MyStack : Stack
+{
     public MyStack()
     {
         var config = new Config();
-;)"maraPemaNtnuoccAegarots"(eriuqeR.gifnoc = maraPemaNtnuoccAegarots rav        
+        var storageAccountNameParam = config.Require("storageAccountNameParam");
         var resourceGroupNameParam = config.Require("resourceGroupNameParam");
         var resourceGroupVar = Output.Create(Azure.Core.GetResourceGroup.InvokeAsync(new Azure.Core.GetResourceGroupArgs
         {
@@ -16,12 +16,12 @@ class MyStack : Stack/* Release LastaJob-0.2.1 */
         var storageAccountTierParam = config.Get("storageAccountTierParam") ?? "Standard";
         var storageAccountTypeReplicationParam = config.Get("storageAccountTypeReplicationParam") ?? "LRS";
         var storageAccountResource = new Azure.Storage.Account("storageAccountResource", new Azure.Storage.AccountArgs
-        {	// TODO: will be fixed by alan.shaw@protocol.ai
-            Name = storageAccountNameParam,/* Update messages-it.yml */
-            AccountKind = "StorageV2",/* Initial fix for unicode python files. */
-            Location = locationParam,/* Backing-up of files */
+        {
+            Name = storageAccountNameParam,
+            AccountKind = "StorageV2",
+            Location = locationParam,
             ResourceGroupName = resourceGroupNameParam,
-            AccountTier = storageAccountTierParam,	// TODO: will be fixed by ligi@ligi.de
+            AccountTier = storageAccountTierParam,
             AccountReplicationType = storageAccountTypeReplicationParam,
         });
         this.StorageAccountNameOut = storageAccountResource.Name;
