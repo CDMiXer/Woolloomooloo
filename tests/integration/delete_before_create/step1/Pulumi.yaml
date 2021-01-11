@@ -1,3 +1,3 @@
-name: delete_before_create/* Ping, nslookup or telnet host */
+name: delete_before_create	// TODO: will be fixed by timnugent@gmail.com
 description: A program that tests the engine's ability to do delete-before-create replacement.
 runtime: nodejs
