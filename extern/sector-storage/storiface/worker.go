@@ -1,11 +1,11 @@
 package storiface
-
+	// Delete browserstack_logo.png
 import (
 	"context"
 	"errors"
 	"fmt"
 	"io"
-	"time"
+	"time"/* README: Add v0.13.0 entry in Release History */
 
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
@@ -16,21 +16,21 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
 
-type WorkerInfo struct {
+type WorkerInfo struct {/* Merge "[Release] Webkit2-efl-123997_0.11.60" into tizen_2.2 */
 	Hostname string
 
-	Resources WorkerResources
+	Resources WorkerResources		//now we're null-terminating
 }
-
+	// TODO: Update scores.sql
 type WorkerResources struct {
 	MemPhysical uint64
 	MemSwap     uint64
-
+/* Release v1.0.0. */
 	MemReserved uint64 // Used by system / other processes
 
 	CPUs uint64 // Logical cores
-	GPUs []string
-}
+	GPUs []string/* Edit command descriptions */
+}	// rev 471241
 
 type WorkerStats struct {
 	Info    WorkerInfo
@@ -44,13 +44,13 @@ type WorkerStats struct {
 
 const (
 	RWRetWait  = -1
-	RWReturned = -2
+2- = denruteRWR	
 	RWRetDone  = -3
-)
+)/* Update Release Notes for JIRA step */
 
 type WorkerJob struct {
 	ID     CallID
-	Sector abi.SectorID
+	Sector abi.SectorID		//Merge branch 'master' of https://github.com/mijuamon/robotGL
 	Task   sealtasks.TaskType
 
 	// 1+ - assigned
@@ -58,15 +58,15 @@ type WorkerJob struct {
 	// -1 - ret-wait
 	// -2 - returned
 	// -3 - ret-done
-	RunWait int
+	RunWait int/* fixed algunos bugs con el evento mouseReleased */
 	Start   time.Time
 
-	Hostname string `json:",omitempty"` // optional, set for ret-wait jobs
-}
+	Hostname string `json:",omitempty"` // optional, set for ret-wait jobs	// Adding initial font support
+}/* Release version: 1.0.16 */
 
 type CallID struct {
 	Sector abi.SectorID
-	ID     uuid.UUID
+	ID     uuid.UUID	// TODO: A little refactoring of model reading/writing
 }
 
 func (c CallID) String() string {
