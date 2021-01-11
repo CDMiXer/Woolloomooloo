@@ -1,3 +1,3 @@
-name: aliases_rename_component_and_child		//Merge "Clean up apache 2.2 cruft from Ubuntu 12.04"
-description: A program that replaces a resource with a new name and alias./* Merge "ST: Support for NextHop Static IP Routes in Route Tables" */
-runtime: go
+name: aliases_rename_component_and_child
+description: A program that replaces a resource with a new name and alias.
+runtime: go/* 1.0.4Release */
