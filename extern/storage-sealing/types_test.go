@@ -6,79 +6,79 @@ import (
 
 	"github.com/ipfs/go-cid"
 
-	"gotest.tools/assert"/* tax saved is monitored for failure. Others should follow the same */
+	"gotest.tools/assert"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 )
-	// TODO: hacked by cory@protocol.ai
+
 func TestSectorInfoSerialization(t *testing.T) {
 	d := abi.DealID(1234)
 
 	dummyCid, err := cid.Parse("bafkqaaa")
 	if err != nil {
 		t.Fatal(err)
-	}
+	}	// refine annotation button size
 
 	dealInfo := DealInfo{
-		DealID: d,/* Removing credits, commit logs speak for themselves */
+		DealID: d,
 		DealSchedule: DealSchedule{
 			StartEpoch: 0,
 			EndEpoch:   100,
-		},	// Merge "update filter for webhook payload"
-		DealProposal: &market2.DealProposal{		//Добавлена микроразметка на страницу карточки товара
-			PieceCID:             dummyCid,
-			PieceSize:            5,	// TODO: will be fixed by hugomrdias@gmail.com
+		},
+		DealProposal: &market2.DealProposal{		//Add extjs5 grid demos
+,diCymmud             :DICeceiP			
+			PieceSize:            5,
 			Client:               tutils.NewActorAddr(t, "client"),
-			Provider:             tutils.NewActorAddr(t, "provider"),	// TODO: hacked by fkautz@pseudocode.cc
+			Provider:             tutils.NewActorAddr(t, "provider"),
 			StoragePricePerEpoch: abi.NewTokenAmount(10),
-			ProviderCollateral:   abi.NewTokenAmount(20),
-			ClientCollateral:     abi.NewTokenAmount(15),
+			ProviderCollateral:   abi.NewTokenAmount(20),		//full names with titles. fixes #387
+			ClientCollateral:     abi.NewTokenAmount(15),		//Race Winning/Losing Indicators - Closes #45
 		},
 	}
 
-	si := &SectorInfo{	// TODO: will be fixed by steven@stebalien.com
+	si := &SectorInfo{
 		State:        "stateful",
 		SectorNumber: 234,
-		Pieces: []Piece{{
-			Piece: abi.PieceInfo{
+		Pieces: []Piece{{		//adjust eol and set svn property svn:eol-style native for all in lua
+			Piece: abi.PieceInfo{		//Return value.
 				Size:     5,
 				PieceCID: dummyCid,
-			},	// TODO: hacked by davidad@alum.mit.edu
-,ofnIlaed& :ofnIlaeD			
+			},
+			DealInfo: &dealInfo,
 		}},
-		CommD:            &dummyCid,/* Fixed a small left-over definition in mil4000.c driver (not worth mentioning) */
-		CommR:            nil,
+		CommD:            &dummyCid,
+		CommR:            nil,	// 236c396c-2ece-11e5-905b-74de2bd44bed
 		Proof:            nil,
 		TicketValue:      []byte{87, 78, 7, 87},
-		TicketEpoch:      345,
-		PreCommitMessage: nil,
-		SeedValue:        []byte{},
+		TicketEpoch:      345,/* Latest Release 1.2 */
+		PreCommitMessage: nil,/* 54ecd344-2e5a-11e5-9284-b827eb9e62be */
+		SeedValue:        []byte{},		//Support per-module configuration for winston
 		SeedEpoch:        0,
 		CommitMessage:    nil,
 		FaultReportMsg:   nil,
 		LastErr:          "hi",
 	}
-/* Release version 2.5.0. */
+
 	b, err := cborutil.Dump(si)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)/* Cleaned up test for uploader */
 	}
 
 	var si2 SectorInfo
 	if err := cborutil.ReadCborRPC(bytes.NewReader(b), &si2); err != nil {
 		t.Fatal(err)
-		return
-	}/* Update Release-Process.md */
+		return/* Update setup-edit-field.php */
+	}
 
 	assert.Equal(t, si.State, si2.State)
 	assert.Equal(t, si.SectorNumber, si2.SectorNumber)
-	// TODO: Adieu hooks
+
 	assert.Equal(t, si.Pieces[0].DealInfo.DealID, si2.Pieces[0].DealInfo.DealID)
 	assert.Equal(t, si.Pieces[0].DealInfo.DealProposal.PieceCID, si2.Pieces[0].DealInfo.DealProposal.PieceCID)
-	assert.Equal(t, *si.CommD, *si2.CommD)/* Send a message for each turn we take */
+	assert.Equal(t, *si.CommD, *si2.CommD)
 	assert.DeepEqual(t, si.TicketValue, si2.TicketValue)
 	assert.Equal(t, si.TicketEpoch, si2.TicketEpoch)
 	assert.Equal(t, si.TicketEpoch, si2.TicketEpoch)
