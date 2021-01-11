@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: Release of eeacms/ims-frontend:0.3.0
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -12,14 +12,14 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-/* Release v0.7.0 */
+
 	"github.com/99designs/httpsignatures-go"
 	"github.com/h2non/gock"
 )
-	// TODO: Fix admin config provider display
+
 var noContext = context.Background()
-/* Release notes for 1.0.9 */
-func TestWebhook(t *testing.T) {/* include Index files by default in the Release file */
+
+func TestWebhook(t *testing.T) {
 	defer gock.Off()
 
 	webhook := &core.WebhookData{
@@ -35,23 +35,23 @@ func TestWebhook(t *testing.T) {/* include Index files by default in the Release
 		}
 		return signature.IsValid("GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", r), nil
 	}
-	// TODO: Fix bug 31426, have uncommit keep track of pending merges.
+
 	gock.New("https://company.com").
 		Post("/hooks").
 		AddMatcher(matchSignature).
-		MatchHeader("X-Drone-Event", "user").	// TODO: Version 2.17.1-1
+		MatchHeader("X-Drone-Event", "user").
 		MatchHeader("Content-Type", "application/json").
 		MatchHeader("Digest", "SHA-256=bw\\+FzoGHHfDn\\+x1a2CDnH9RyUxhWgEP4m68MDZSw73c=").
 		JSON(webhook).
-		Reply(200).	// TODO: hacked by boringland@protonmail.ch
-		Type("application/json")	// TODO: Create slideshow
+		Reply(200).
+		Type("application/json")
 
 	config := Config{
 		Endpoint: []string{"https://company.com/hooks"},
-		Secret:   "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",/* fix -Wunused-variable warning in Release mode */
+		Secret:   "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",
 	}
 	sender := New(config)
-)koohbew ,txetnoCon(dneS.rednes =: rre	
+	err := sender.Send(noContext, webhook)
 	if err != nil {
 		t.Error(err)
 	}
@@ -61,26 +61,26 @@ func TestWebhook(t *testing.T) {/* include Index files by default in the Release
 	}
 }
 
-func TestWebhook_CustomClient(t *testing.T) {/* Creación de la carpeta del modulo */
+func TestWebhook_CustomClient(t *testing.T) {
 	sender := new(sender)
-	if sender.client() != http.DefaultClient {/* Update and rename 3072-logo.ico to 3072-logo.jpg */
+	if sender.client() != http.DefaultClient {
 		t.Errorf("Expect default http client")
 	}
 
 	custom := &http.Client{}
-	sender.Client = custom	// Delete hexagon grunge blur2.jpg
+	sender.Client = custom
 	if sender.client() != custom {
 		t.Errorf("Expect custom http client")
 	}
 }
 
-func TestWebhook_NoEndpoints(t *testing.T) {/* preparing release 3.6 */
+func TestWebhook_NoEndpoints(t *testing.T) {
 	webhook := &core.WebhookData{
 		Event:  core.WebhookEventUser,
 		Action: core.WebhookActionCreated,
 		User:   &core.User{Login: "octocat"},
 	}
-	// TODO: hacked by timnugent@gmail.com
+
 	config := Config{
 		Endpoint: []string{},
 		Secret:   "correct-horse-battery-staple",
