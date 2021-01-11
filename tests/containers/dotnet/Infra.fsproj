@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Update and rename ADB_ESP8266_Webserver.ino to ADB_ESP8266_Utilities.ino */
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: hacked by davidad@alum.mit.edu
-    <TargetFramework>netcoreapp3.1</TargetFramework>		//Diagramas de Paquetes actualizados
+    <OutputType>Exe</OutputType>/* Undid the onTouchStartCode. */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-  <ItemGroup>	// Implemented a StepPhase that performs elastic collision reaction.
+  <ItemGroup>
     <Compile Include="Program.fs" />
   </ItemGroup>
-  <ItemGroup>/* Release 0.18.0. Update to new configuration file format. */
+  <ItemGroup>
     <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
-  </ItemGroup>/* Release v0.2.1.4 */
-</Project>
+  </ItemGroup>		//Implemented RFE #1880202 for Z80.
+</Project>/* DOC Release doc */
