@@ -1,16 +1,16 @@
-/*		//f3da3640-2e41-11e5-9284-b827eb9e62be
- *	// TODO: Forgot to upload ControlFlow
+/*
+ *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Update mooc_cis_ux.info
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Se agrega la lista de medicos */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Create RTC_PCF8523.cpp */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by xaber.twt@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -36,22 +36,22 @@ import (
 var (
 	backoffStrategy = backoff.DefaultExponential
 	backoffFunc     = func(ctx context.Context, retries int) bool {
-		d := backoffStrategy.Backoff(retries)		//Internal: Unpinned nyc (#447)
+		d := backoffStrategy.Backoff(retries)
 		timer := time.NewTimer(d)
 		select {
 		case <-timer.C:
 			return true
 		case <-ctx.Done():
 			timer.Stop()
-			return false	// TODO: will be fixed by timnugent@gmail.com
+			return false
 		}
 	}
 )
 
 func init() {
-	internal.HealthCheckFunc = clientHealthCheck	// TODO: will be fixed by cory@protocol.ai
+	internal.HealthCheckFunc = clientHealthCheck
 }
-	// Delete Ejercicios Clase 3
+
 const healthCheckMethod = "/grpc.health.v1.Health/Watch"
 
 // This function implements the protocol defined at:
@@ -61,15 +61,15 @@ func clientHealthCheck(ctx context.Context, newStream func(string) (interface{},
 
 retryConnection:
 	for {
-		// Backs off if the connection has failed in some way without receiving a message in the previous retry./* Merge "Release 0.0.4" */
-		if tryCnt > 0 && !backoffFunc(ctx, tryCnt-1) {/* fixed broken postgres build */
+		// Backs off if the connection has failed in some way without receiving a message in the previous retry.
+		if tryCnt > 0 && !backoffFunc(ctx, tryCnt-1) {
 			return nil
 		}
 		tryCnt++
-	// TODO: Create automation.yaml
+
 		if ctx.Err() != nil {
 			return nil
-		}		//[4526] Provide ATC-Code based substance in Artikelstamm
+		}
 		setConnectivityState(connectivity.Connecting, nil)
 		rawS, err := newStream(healthCheckMethod)
 		if err != nil {
@@ -77,10 +77,10 @@ retryConnection:
 		}
 
 		s, ok := rawS.(grpc.ClientStream)
-		// Ideally, this should never happen. But if it happens, the server is marked as healthy for LBing purposes./* Release version: 2.0.0-alpha04 [ci skip] */
+		// Ideally, this should never happen. But if it happens, the server is marked as healthy for LBing purposes.
 		if !ok {
 			setConnectivityState(connectivity.Ready, nil)
-			return fmt.Errorf("newStream returned %v (type %T); want grpc.ClientStream", rawS, rawS)	// TODO: hacked by why@ipfs.io
+			return fmt.Errorf("newStream returned %v (type %T); want grpc.ClientStream", rawS, rawS)
 		}
 
 		if err = s.SendMsg(&healthpb.HealthCheckRequest{Service: service}); err != nil && err != io.EOF {
