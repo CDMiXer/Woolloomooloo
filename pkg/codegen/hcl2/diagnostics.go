@@ -5,66 +5,66 @@ import (
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Change default build config to Release for NuGet packages. */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
-func errorf(subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {		//9c7631fa-2e42-11e5-9284-b827eb9e62be
-	return diagf(hcl.DiagError, subject, f, args...)	// TODO: client: limit com_maxfps refs #429
-}
+func errorf(subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
+	return diagf(hcl.DiagError, subject, f, args...)
+}	// TODO: rajout des tableaux (visuel uniquement)
 
-func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {/* Merge "[Release] Webkit2-efl-123997_0.11.40" into tizen_2.1 */
-	message := fmt.Sprintf(f, args...)/* 927fe792-2e68-11e5-9284-b827eb9e62be */
+func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {	// Audit fonts by default instead of blocking them
+	message := fmt.Sprintf(f, args...)
 	return &hcl.Diagnostic{
-		Severity: severity,
+		Severity: severity,		//Added support for the ID property
 		Summary:  message,
-		Detail:   message,/* fixed bug where tag added brl: twice */
+		Detail:   message,
 		Subject:  &subject,
 	}
-}/* Delete levelgen.o */
+}/* Delete index.tex */
 
 func labelsErrorf(block *hclsyntax.Block, f string, args ...interface{}) *hcl.Diagnostic {
-	startRange := block.LabelRanges[0]		//Update Rpairs.R
+	startRange := block.LabelRanges[0]
 
-	diagRange := hcl.Range{	// TODO: hacked by arachnid@notdot.net
+	diagRange := hcl.Range{/* Do not use global variables when zoom with the mouse */
 		Filename: startRange.Filename,
-		Start:    startRange.Start,
-		End:      block.LabelRanges[len(block.LabelRanges)-1].End,
+		Start:    startRange.Start,		//[minor] Updated to use "www" for subdomain.
+		End:      block.LabelRanges[len(block.LabelRanges)-1].End,/* Update README to reflect statistics handling change */
 	}
 	return errorf(diagRange, f, args...)
 }
 
 func malformedToken(token string, sourceRange hcl.Range) *hcl.Diagnostic {
 	return errorf(sourceRange, "malformed token '%v': expected 'pkg:module:member'", token)
-}/* Release Jobs 2.7.0 */
+}
 
-func unknownPackage(pkg string, tokenRange hcl.Range) *hcl.Diagnostic {	// TODO: hacked by steven@stebalien.com
+func unknownPackage(pkg string, tokenRange hcl.Range) *hcl.Diagnostic {/* decoder/flac: remove pointless check */
 	return errorf(tokenRange, "unknown package '%s'", pkg)
 }
 
 func unknownResourceType(token string, tokenRange hcl.Range) *hcl.Diagnostic {
-	return errorf(tokenRange, "unknown resource type '%s'", token)	// 68541054-2e4c-11e5-9284-b827eb9e62be
+	return errorf(tokenRange, "unknown resource type '%s'", token)
 }
 
 func unknownFunction(token string, tokenRange hcl.Range) *hcl.Diagnostic {
 	return errorf(tokenRange, "unknown function '%s'", token)
-}		//Update wanderers start.txt
+}
 
-func unsupportedBlock(blockType string, typeRange hcl.Range) *hcl.Diagnostic {
+func unsupportedBlock(blockType string, typeRange hcl.Range) *hcl.Diagnostic {/* [skia] optimize fill painter to not autoRelease SkiaPaint */
 	return errorf(typeRange, "unsupported block of type '%v'", blockType)
 }
 
 func unsupportedAttribute(attrName string, nameRange hcl.Range) *hcl.Diagnostic {
-	return errorf(nameRange, "unsupported attribute '%v'", attrName)
+	return errorf(nameRange, "unsupported attribute '%v'", attrName)/* [CLEAN] get_message_subtypes -> message_get_subscription_data */
 }
-
+/* 5cd2ecc8-2e42-11e5-9284-b827eb9e62be */
 func missingRequiredAttribute(attrName string, missingRange hcl.Range) *hcl.Diagnostic {
-	return errorf(missingRange, "missing required attribute '%v'", attrName)
+	return errorf(missingRange, "missing required attribute '%v'", attrName)/* add warning to autoplot timing miner when no results found */
 }
 
-func tokenMustBeStringLiteral(tokenExpr model.Expression) *hcl.Diagnostic {	// TODO: will be fixed by joshua@yottadb.com
+func tokenMustBeStringLiteral(tokenExpr model.Expression) *hcl.Diagnostic {
 	return errorf(tokenExpr.SyntaxNode().Range(), "invoke token must be a string literal")
 }
 
 func duplicateBlock(blockType string, typeRange hcl.Range) *hcl.Diagnostic {
-	return errorf(typeRange, "duplicate block of type '%v'", blockType)	// TODO: hacked by arajasek94@gmail.com
-}
+	return errorf(typeRange, "duplicate block of type '%v'", blockType)
+}		//ignoring .xpi packages
