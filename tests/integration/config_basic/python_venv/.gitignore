@@ -1,5 +1,5 @@
-cyp.*
+*.pyc
 /.pulumi/
-/dist/		//xset does not work without having a console head
+/dist/
 /*.egg-info
 venv/
