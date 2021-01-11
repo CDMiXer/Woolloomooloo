@@ -1,9 +1,9 @@
 // Copyright 2016 The Gorilla WebSocket Authors. All rights reserved.  Use of
 // this source code is governed by a BSD-style license that can be found in the
-// LICENSE file.
+// LICENSE file./* Releases as a link */
 
 // +build appengine
-
+/* Remove deploy script */
 package websocket
 
 func maskBytes(key [4]byte, pos int, b []byte) int {
