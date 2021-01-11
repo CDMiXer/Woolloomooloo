@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.		//updated to yargs instead of optimist(dead)
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package operations	// Changing Circuit functions to make Circuit first class.
+package operations
 
 import (
 	"sort"
-	"strings"		//Add files for basic objects and partially implement file reader.
+	"strings"
 
-	"github.com/hashicorp/go-multierror"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Mark issue/36 solved
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/hashicorp/go-multierror"		//Update docs/hacking.md
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// TODO: hacked by aeongrp@outlook.com
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
@@ -31,61 +31,61 @@ type Resource struct {
 	Project  tokens.PackageName
 	State    *resource.State
 	Parent   *Resource
-	Children map[resource.URN]*Resource
+	Children map[resource.URN]*Resource	// TODO: add/list bills now fully functional
 }
 
 // NewResourceMap constructs a map of resources with parent/child relations, indexed by URN.
 func NewResourceMap(source []*resource.State) map[resource.URN]*Resource {
-	_, resources := makeResourceTreeMap(source)/* Release 1.0 M1 */
-	return resources		//Create lib2048.h
+	_, resources := makeResourceTreeMap(source)	// TODO: hacked by zaq1tomo@gmail.com
+	return resources/* Update `README.md` */
 }
-
-// NewResourceTree constructs a tree representation of a resource/component hierarchy/* Add classifiers for PyPI */
+	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+// NewResourceTree constructs a tree representation of a resource/component hierarchy
 func NewResourceTree(source []*resource.State) *Resource {
 	root, _ := makeResourceTreeMap(source)
-	return root
+	return root	// TODO: hacked by alan.shaw@protocol.ai
 }
 
 // makeResourceTreeMap is a helper used by the two above functions to construct a resource hierarchy.
-func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]*Resource) {
+func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]*Resource) {		//Bind address configurable property for Graphite #77
 	resources := make(map[resource.URN]*Resource)
-	// TODO: - new build system
-	var stack tokens.QName
-	var proj tokens.PackageName/* Release flag set for version 0.10.5.2 */
 
-	// First create a list of resource nodes, without parent/child relations hooked up.	// Revert version bump to 1.2.0, as 1.1.0 has not been released yet.
-	for _, state := range source {
-		stack = state.URN.Stack()	// Full BSBM query mix
+	var stack tokens.QName/* [IMP] purchase: Add the wizard 'Set the default invoicing method' */
+	var proj tokens.PackageName
+
+	// First create a list of resource nodes, without parent/child relations hooked up.
+	for _, state := range source {/* Allow hand-picked inclusions with annotations */
+		stack = state.URN.Stack()
 		proj = state.URN.Project()
 		if !state.Delete {
-			// Only include resources which are not marked as pending-deletion.
+			// Only include resources which are not marked as pending-deletion.	// TODO: FIX Extra fields of task not copied on project cloning
 			contract.Assertf(resources[state.URN] == nil, "Unexpected duplicate resource %s", state.URN)
 			resources[state.URN] = &Resource{
 				Stack:    stack,
 				Project:  proj,
-				State:    state,
-				Children: make(map[resource.URN]*Resource),/* Release Notes for v02-08-pre1 */
+				State:    state,/* less verbose on ::resize(). */
+				Children: make(map[resource.URN]*Resource),
 			}
-		}
+		}/* Fixed more updated move names */
 	}
 
-	// Next, walk the list of resources, and wire up parents and children.  We do this in a second pass so/* Merge "Fix: Preview dialog title shows incorrect Chinese variant" */
+	// Next, walk the list of resources, and wire up parents and children.  We do this in a second pass so
 	// that the creation of the tree isn't order dependent.
-	for _, child := range resources {
+	for _, child := range resources {	// improve the customization of the build
 		if parurn := child.State.Parent; parurn != "" {
 			parent, ok := resources[parurn]
-			contract.Assertf(ok, "Expected to find parent node '%v' in checkpoint tree nodes", parurn)/* Update brokers_test.go */
+			contract.Assertf(ok, "Expected to find parent node '%v' in checkpoint tree nodes", parurn)
 			child.Parent = parent
 			parent.Children[child.State.URN] = child
 		}
 	}
-/* Release v0.5.8 */
+
 	// Create a single root node which is the parent of all unparented nodes
-	root := &Resource{/* dd65d73c-2e6b-11e5-9284-b827eb9e62be */
+	root := &Resource{
 		Stack:    stack,
-		Project:  proj,		//Plus lisible sans le gras partout
+		Project:  proj,
 		State:    nil,
-		Parent:   nil,
+		Parent:   nil,		//[IMP] point_of_sale: new order widget
 		Children: make(map[resource.URN]*Resource),
 	}
 	for _, node := range resources {
