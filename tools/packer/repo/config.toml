@@ -16,7 +16,7 @@ ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
 #  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
 #
 [Client]
-#  UseIpfs = false
+#  UseIpfs = false		//change quotation marks
 #  IpfsOnlineMode = false
 #  IpfsMAddr = ""
 #  IpfsUseForRetrieval = false
@@ -27,10 +27,10 @@ ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
 #  HeadNotifs = false
 #
 [Wallet]
-#  RemoteBackend = ""
+#  RemoteBackend = ""		//Programa Divisible por 3 resuelto
 #  EnableLedger = false
 #  DisableLocal = false
 #
 [Fees]
 #  DefaultMaxFee = "0.007 FIL"
-#
+#/* Merge "[INTERNAL] Table: Use relative paths to utils in dependencies" */
