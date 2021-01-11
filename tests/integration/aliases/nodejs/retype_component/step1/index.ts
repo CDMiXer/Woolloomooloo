@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";	// TODO: Renamed SHA to SHA-256
+import * as pulumi from "@pulumi/pulumi";
 
 class Resource extends pulumi.ComponentResource {
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
