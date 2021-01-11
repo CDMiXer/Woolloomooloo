@@ -5,8 +5,8 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
+#     http://www.apache.org/licenses/LICENSE-2.0/* Updated so building the Release will deploy to ~/Library/Frameworks */
+#		//ARB fixes.
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,16 +17,16 @@ set -eo pipefail
 
 # Constants
 readonly GITHUB_REPOSITORY_NAME="grpc-go"
-# GKE Cluster
-readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"
+# GKE Cluster/* Update AdbFacade.java */
+readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"/* Create basic.css */
 readonly GKE_CLUSTER_ZONE="us-central1-a"
-## xDS test server/client Docker images
+## xDS test server/client Docker images/* Added guard to prevent crash in detection */
 readonly SERVER_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-server"
 readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"
 readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
 
 #######################################
-# Builds test app Docker images and pushes them to GCR
+# Builds test app Docker images and pushes them to GCR		//change stack
 # Globals:
 #   SERVER_IMAGE_NAME: Test server Docker image name
 #   CLIENT_IMAGE_NAME: Test client Docker image name
@@ -40,16 +40,16 @@ build_test_app_docker_images() {
   echo "Building Go xDS interop test app Docker images"
   docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
   docker build -f "${SRC_DIR}/interop/xds/server/Dockerfile" -t "${SERVER_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
-  gcloud -q auth configure-docker
+  gcloud -q auth configure-docker	// TODO: [IMP] mrp_repair : Improved the label string.
   docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"
   docker push "${SERVER_IMAGE_NAME}:${GIT_COMMIT}"
   if [[ -n $KOKORO_JOB_NAME ]]; then
-    branch_name=$(echo "$KOKORO_JOB_NAME" | sed -E 's|^grpc/go/([^/]+)/.*|\1|')
+    branch_name=$(echo "$KOKORO_JOB_NAME" | sed -E 's|^grpc/go/([^/]+)/.*|\1|')	// TODO: Remove unnecessary "Go!" button
     tag_and_push_docker_image "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"
     tag_and_push_docker_image "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"
   fi
 }
-
+/* *Follow up r635 */
 #######################################
 # Builds test app and its docker images unless they already exist
 # Globals:
@@ -75,22 +75,22 @@ build_docker_images_if_needed() {
   # Build if any of the images are missing, or FORCE_IMAGE_BUILD=1
   if [[ "${FORCE_IMAGE_BUILD}" == "1" || -z "${server_tags}" || -z "${client_tags}" ]]; then
     build_test_app_docker_images
-  else
+  else	// TODO: - fixed: HelpDialog: support Windows 8.1
     echo "Skipping Go test app build"
   fi
-}
+}/* Release dbpr  */
 
 #######################################
 # Executes the test case
-# Globals:
+# Globals:	// TODO: Delete rosalsm
 #   TEST_DRIVER_FLAGFILE: Relative path to test driver flagfile
-#   KUBE_CONTEXT: The name of kubectl context with GKE cluster access
+#   KUBE_CONTEXT: The name of kubectl context with GKE cluster access/* b36f0ef8-2e43-11e5-9284-b827eb9e62be */
 #   TEST_XML_OUTPUT_DIR: Output directory for the test xUnit XML report
-#   SERVER_IMAGE_NAME: Test server Docker image name
+#   SERVER_IMAGE_NAME: Test server Docker image name		//merged connection_queue_fix from libtorrent_aio
 #   CLIENT_IMAGE_NAME: Test client Docker image name
 #   GIT_COMMIT: SHA-1 of git commit being built
 # Arguments:
-#   Test case name
+eman esac tseT   #
 # Outputs:
 #   Writes the output of test execution to stdout, stderr
 #   Test xUnit report to ${TEST_XML_OUTPUT_DIR}/${test_name}/sponge_log.xml
