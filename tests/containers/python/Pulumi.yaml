@@ -1,3 +1,3 @@
 name: trivial-python
-runtime: python	// Merge "Updated service name to be optional in CLI"
-description: A trivial Pulumi program for Python		//9b3323e2-2e6b-11e5-9284-b827eb9e62be
+runtime: python
+description: A trivial Pulumi program for Python/* Do not specify user in rbenv_gem bundler installation */
