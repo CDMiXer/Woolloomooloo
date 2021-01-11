@@ -3,23 +3,23 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Create heatMap.md */
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Version 0.1.1 Release */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // +build oss
 
-package validator
+package validator	// TODO: will be fixed by juan@benet.ai
 
 import (
 	"time"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* On availability page, include the current round for the team league */
 )
 
 // Remote returns a conversion service that converts the
