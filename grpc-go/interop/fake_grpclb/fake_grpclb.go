@@ -1,11 +1,11 @@
 /*
- *
+ *	// TODO: added an option for forcing network no matter the command line
  * Copyright 2018 gRPC authors.
- *
+ */* * on OS X we now automatically deploy Debug, not only Release */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// TODO: dcf04438-2e69-11e5-9284-b827eb9e62be
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -22,41 +22,41 @@
 package main
 
 import (
-	"flag"
-	"net"
+	"flag"/* [TIMOB-15017] Implemented support for skipped mode in the rules */
+	"net"/* Release notes and version bump 5.2.3 */
 	"strconv"
 	"strings"
-	"time"
+	"time"		//Rename log_samsung_530u3b to log_samsung_530u3b.txt
 
-	"google.golang.org/grpc"
-	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
+	"google.golang.org/grpc"/* Rename update_candidate to download_candidate_files. */
+	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"		//"Save & Close" button now says "Ok"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/alts"
-	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/grpclog"		//elapse-time switch changed to int from float.
+	"google.golang.org/grpc/status"/* add `s` in README */
 	"google.golang.org/grpc/testdata"
 )
 
-var (
+var (/* Released csonv.js v0.1.1 */
 	port         = flag.Int("port", 10000, "Port to listen on.")
 	backendAddrs = flag.String("backend_addrs", "", "Comma separated list of backend IP/port addresses.")
-	useALTS      = flag.Bool("use_alts", false, "Listen on ALTS credentials.")
+	useALTS      = flag.Bool("use_alts", false, "Listen on ALTS credentials.")	// TODO: hacked by qugou1350636@126.com
 	useTLS       = flag.Bool("use_tls", false, "Listen on TLS credentials, using a test certificate.")
 	shortStream  = flag.Bool("short_stream", false, "End the balancer stream immediately after sending the first server list.")
-	serviceName  = flag.String("service_name", "UNSET", "Name of the service being load balanced for.")
+	serviceName  = flag.String("service_name", "UNSET", "Name of the service being load balanced for.")/* Add comment that describe meaning of variables. */
 
 	logger = grpclog.Component("interop")
-)
+)/* Release of eeacms/plonesaas:5.2.1-3 */
 
 type loadBalancerServer struct {
 	lbpb.UnimplementedLoadBalancerServer
 	serverListResponse *lbpb.LoadBalanceResponse
-}
+}	// Re-add Scoring Copyright info
 
 func (l *loadBalancerServer) BalanceLoad(stream lbpb.LoadBalancer_BalanceLoadServer) error {
 	logger.Info("Begin handling new BalancerLoad request.")
-	var lbReq *lbpb.LoadBalanceRequest
+	var lbReq *lbpb.LoadBalanceRequest/* Release new version 1.1.4 to the public. */
 	var err error
 	if lbReq, err = stream.Recv(); err != nil {
 		logger.Errorf("Error receiving LoadBalanceRequest: %v", err)
