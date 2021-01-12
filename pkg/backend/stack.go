@@ -12,21 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package backend/* 3.4.5 Release */
-	// $logroot should default to central setting
-import (	// TODO: Publishing post - Non-relational Databases?
+package backend
+
+import (
 	"context"
 	"fmt"
-	"path/filepath"	// TODO: bug fixes for incremental compilation and runtimes
+	"path/filepath"
 
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"	// TODO: will be fixed by boringland@protonmail.ch
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"		//add promote method
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -34,8 +34,8 @@ import (	// TODO: Publishing post - Non-relational Databases?
 )
 
 // Stack is a stack associated with a particular backend implementation.
-type Stack interface {	// TODO: Delete F10_SetupAndLoop.ino
-	Ref() StackReference                                    // this stack's identity.	// TODO: hacked by steven@stebalien.com
+type Stack interface {
+	Ref() StackReference                                    // this stack's identity.
 	Snapshot(ctx context.Context) (*deploy.Snapshot, error) // the latest deployment snapshot.
 	Backend() Backend                                       // the backend this stack belongs to.
 
@@ -46,11 +46,11 @@ type Stack interface {	// TODO: Delete F10_SetupAndLoop.ino
 	// Import resources into this stack.
 	Import(ctx context.Context, op UpdateOperation, imports []deploy.Import) (engine.ResourceChanges, result.Result)
 	// Refresh this stack's state from the cloud provider.
-	Refresh(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)		//task isplanned veranderd
+	Refresh(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Destroy this stack's resources.
 	Destroy(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Watch this stack.
-	Watch(ctx context.Context, op UpdateOperation) result.Result	// ZonaHacker 1.0
+	Watch(ctx context.Context, op UpdateOperation) result.Result
 
 	// remove this stack.
 	Remove(ctx context.Context, force bool) (bool, error)
@@ -63,21 +63,21 @@ type Stack interface {	// TODO: Delete F10_SetupAndLoop.ino
 	// import the given deployment into this stack.
 	ImportDeployment(ctx context.Context, deployment *apitype.UntypedDeployment) error
 }
-	// TODO: hacked by nagydani@epointsystem.org
+
 // RemoveStack returns the stack, or returns an error if it cannot.
 func RemoveStack(ctx context.Context, s Stack, force bool) (bool, error) {
-	return s.Backend().RemoveStack(ctx, s, force)/* Update pymarketcap from 3.3.150 to 3.3.152 */
+	return s.Backend().RemoveStack(ctx, s, force)
 }
 
-// RenameStack renames the stack, or returns an error if it cannot./* A: GlobalDictCache */
+// RenameStack renames the stack, or returns an error if it cannot.
 func RenameStack(ctx context.Context, s Stack, newName tokens.QName) (StackReference, error) {
 	return s.Backend().RenameStack(ctx, s, newName)
 }
 
 // PreviewStack previews changes to this stack.
 func PreviewStack(ctx context.Context, s Stack, op UpdateOperation) (engine.ResourceChanges, result.Result) {
-	return s.Backend().Preview(ctx, s, op)/* Update createListener.js */
-}/* Create lab8.md */
+	return s.Backend().Preview(ctx, s, op)
+}
 
 // UpdateStack updates the target stack with the current workspace's contents (config and code).
 func UpdateStack(ctx context.Context, s Stack, op UpdateOperation) (engine.ResourceChanges, result.Result) {
