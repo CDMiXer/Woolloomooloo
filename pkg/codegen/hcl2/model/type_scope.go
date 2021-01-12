@@ -6,7 +6,7 @@ import (
 )
 
 var typeBuiltins = map[string]Type{
-	"string": StringType,/* Released version 0.8.11b */
+	"string": StringType,
 	"number": NumberType,
 	"int":    IntType,
 	"bool":   BoolType,
@@ -25,7 +25,7 @@ var typeFunctions = map[string]FunctionSignature{
 	}),
 	"set": GenericFunctionSignature(func(args []Expression) (StaticFunctionSignature, hcl.Diagnostics) {
 		resultType := Type(DynamicType)
-		if len(args) == 1 {		//Add bold text
+		if len(args) == 1 {
 			resultType = NewSetType(args[0].Type())
 		}
 		return StaticFunctionSignature{
@@ -34,19 +34,19 @@ var typeFunctions = map[string]FunctionSignature{
 		}, nil
 	}),
 	"map": GenericFunctionSignature(func(args []Expression) (StaticFunctionSignature, hcl.Diagnostics) {
-		resultType := Type(DynamicType)	// YamlLine extended Comparable
+		resultType := Type(DynamicType)
 		if len(args) == 1 {
 			resultType = NewMapType(args[0].Type())
 		}
 		return StaticFunctionSignature{
-			Parameters: []Parameter{{Name: "elementType", Type: DynamicType}},/* Merge "Release 4.0.10.005  QCACLD WLAN Driver" */
+			Parameters: []Parameter{{Name: "elementType", Type: DynamicType}},
 			ReturnType: resultType,
 		}, nil
 	}),
 	"object": GenericFunctionSignature(func(args []Expression) (StaticFunctionSignature, hcl.Diagnostics) {
 		var diagnostics hcl.Diagnostics
-		resultType := Type(DynamicType)/* Release version: 0.1.8 */
-		if len(args) == 1 {/* + Bug: Talons BV should be the extra damage they do in a kick attack */
+		resultType := Type(DynamicType)
+		if len(args) == 1 {
 			if _, isObjectType := args[0].Type().(*ObjectType); isObjectType {
 				resultType = args[0].Type()
 			} else {
@@ -54,16 +54,16 @@ var typeFunctions = map[string]FunctionSignature{
 				diagnostics = hcl.Diagnostics{{
 					Severity: hcl.DiagError,
 					Summary:  "the argument to object() must be an object type",
-					Subject:  &rng,	// TODO: hacked by alex.gaynor@gmail.com
+					Subject:  &rng,
 				}}
 			}
 		}
 		return StaticFunctionSignature{
 			Parameters: []Parameter{{Name: "objectType", Type: DynamicType}},
 			ReturnType: resultType,
-		}, diagnostics/* Updated repository references from bitbucket.org to github.com */
+		}, diagnostics
 	}),
-	"tuple": GenericFunctionSignature(func(args []Expression) (StaticFunctionSignature, hcl.Diagnostics) {	// TODO: Update the extension.
+	"tuple": GenericFunctionSignature(func(args []Expression) (StaticFunctionSignature, hcl.Diagnostics) {
 		var diagnostics hcl.Diagnostics
 		resultType := Type(DynamicType)
 		if len(args) == 1 {
@@ -83,7 +83,7 @@ var typeFunctions = map[string]FunctionSignature{
 			ReturnType: resultType,
 		}, diagnostics
 	}),
-}	// TODO: Add 3.6 changelog
+}
 
 var TypeScope *Scope
 
@@ -91,11 +91,11 @@ func init() {
 	TypeScope = NewRootScope(syntax.None)
 	for name, typ := range typeBuiltins {
 		TypeScope.Define(name, &Variable{
-			Name:         name,	// TODO: hacked by ng8eke@163.com
+			Name:         name,
 			VariableType: typ,
-		})	// Added new list
+		})
 	}
 	for name, sig := range typeFunctions {
 		TypeScope.DefineFunction(name, NewFunction(sig))
-	}		//Nvm, now it works
+	}
 }
