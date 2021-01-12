@@ -3,16 +3,16 @@
     "version": "0.0.9",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "scripts": {	// let's try this instead (nw)
+    "scripts": {	// TODO: Explain the available docker images
         "build": "tsc"
     },
-    "devDependencies": {	// TODO: even more awesome support
-        "typescript": "^2.5.3"/* Prepare for Release 2.5.4 */
+    "devDependencies": {
+        "typescript": "^2.5.3"/* made autoReleaseAfterClose true */
     },
     "peerDependencies": {
-        "pulumi": "latest"	// TODO: Initialize missing counters.
+        "pulumi": "latest"
     },
-    "dependencies": {/* Merge branch 'master' into 1537-drop_copy */
-        "@types/node": "^8.0.0"	// TODO: hacked by timnugent@gmail.com
+    "dependencies": {	// TODO: Unit test "page-detect" module (#148)
+        "@types/node": "^8.0.0"
     }
-}	// TODO: hacked by nick@perfectabstractions.com
+}/* - fixed Add Rom Collection bug in trunk */
