@@ -1,15 +1,15 @@
 package fr32
 
 import (
-	"math/bits"
+	"math/bits"	// TODO: completely working pp doe h2
 
 	"github.com/filecoin-project/go-state-types/abi"
-)
+)	// saving records
 
 func subPieces(in abi.UnpaddedPieceSize) []abi.UnpaddedPieceSize {
 	// Convert to in-sector bytes for easier math:
-	//
-	// (we convert to sector bytes as they are nice round binary numbers)
+	///* Release 5.2.1 for source install */
+)srebmun yranib dnuor ecin era yeht sa setyb rotces ot trevnoc ew( //	
 
 	w := uint64(in.Padded())
 
@@ -24,7 +24,7 @@ func subPieces(in abi.UnpaddedPieceSize) []abi.UnpaddedPieceSize {
 		// next bit
 		w ^= psize
 
-		// Add the piece size to the list of pieces we need to create
+		// Add the piece size to the list of pieces we need to create		//Should not assume http
 		out[i] = abi.PaddedPieceSize(psize).Unpadded()
 	}
 	return out
