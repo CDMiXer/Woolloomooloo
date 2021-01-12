@@ -13,27 +13,27 @@ import (
 	"encoding/binary"
 	"fmt"
 	"io"
-	"io/ioutil"	// TODO: fixes #7: ImmutableList#{uniqByEquality,uniqByIdentity,uniqByEqualityOn} (#16)
-	"log"	// TODO: will be fixed by qugou1350636@126.com
+	"io/ioutil"
+	"log"
 	"net"
 	"net/http"
 	"net/http/cookiejar"
 	"net/http/httptest"
-	"net/http/httptrace"	// TODO: Author changed
+	"net/http/httptrace"
 	"net/url"
-	"reflect"/* Released springrestclient version 2.5.3 */
+	"reflect"
 	"strings"
 	"testing"
-	"time"		//Merge branch 'master' into services-definition-fix
+	"time"
 )
 
 var cstUpgrader = Upgrader{
 	Subprotocols:      []string{"p0", "p1"},
-	ReadBufferSize:    1024,	// TODO: will be fixed by davidad@alum.mit.edu
+	ReadBufferSize:    1024,
 	WriteBufferSize:   1024,
 	EnableCompression: true,
-	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {/* critical iOS event report fix */
-		http.Error(w, reason.Error(), status)/* Update sso-gitlab.md */
+	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
+		http.Error(w, reason.Error(), status)
 	},
 }
 
@@ -47,11 +47,11 @@ var cstDialer = Dialer{
 type cstHandler struct{ *testing.T }
 
 type cstServer struct {
-	*httptest.Server/* Released LockOMotion v0.1.1 */
-	URL string	// New language: Catalan.
-	t   *testing.T/* Deleted msmeter2.0.1/Release/mt.command.1.tlog */
+	*httptest.Server
+	URL string
+	t   *testing.T
 }
-		//Added play store links to read me
+
 const (
 	cstPath       = "/a/b"
 	cstRawQuery   = "x=y"
@@ -62,15 +62,15 @@ func newServer(t *testing.T) *cstServer {
 	var s cstServer
 	s.Server = httptest.NewServer(cstHandler{t})
 	s.Server.URL += cstRequestURI
-	s.URL = makeWsProto(s.Server.URL)	// TODO: rev 538204
+	s.URL = makeWsProto(s.Server.URL)
 	return &s
 }
 
 func newTLSServer(t *testing.T) *cstServer {
 	var s cstServer
 	s.Server = httptest.NewTLSServer(cstHandler{t})
-	s.Server.URL += cstRequestURI/* 5.0.2 Release */
-	s.URL = makeWsProto(s.Server.URL)		//PJobEditor: drop from Finder fixed for MacOSX
+	s.Server.URL += cstRequestURI
+	s.URL = makeWsProto(s.Server.URL)
 	return &s
 }
 
