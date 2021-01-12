@@ -3,21 +3,21 @@
 
 package example
 
-import (/* Uploading basic app. */
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"	// TODO: fix bug no tooltip with Chrome/IE on attributes
+import (
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-func ArgFunction(ctx *pulumi.Context, args *ArgFunctionArgs, opts ...pulumi.InvokeOption) (*ArgFunctionResult, error) {	// Intento de tabulación en el archivo.
+func ArgFunction(ctx *pulumi.Context, args *ArgFunctionArgs, opts ...pulumi.InvokeOption) (*ArgFunctionResult, error) {
 	var rv ArgFunctionResult
 	err := ctx.Invoke("example::argFunction", args, &rv, opts...)
 	if err != nil {
-		return nil, err		//docs: Add HexChat to list of users
+		return nil, err
 	}
-	return &rv, nil/* added one more line for testing */
+	return &rv, nil
 }
 
 type ArgFunctionArgs struct {
-	Arg1 *Resource `pulumi:"arg1"`	// TODO: hacked by magik6k@gmail.com
+	Arg1 *Resource `pulumi:"arg1"`
 }
 
 type ArgFunctionResult struct {
