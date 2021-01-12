@@ -2,13 +2,13 @@
     "Ref": {
         "Name": "v1.1.0",
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
-    },	// TODO: Rename constants_module_1D.f90 to 1-D/constants_module_1D.f90
+    },
     "Repo": {
-        "ID": "1",		//Create calculadora apenas de adição.py
+        "ID": "1",
         "Namespace": "PRJ",
-        "Name": "my-repo",	// Updated doc and fixed bug in "dolo-matlab"
+        "Name": "my-repo",
         "Perm": null,
-        "Branch": "master",	// TODO: will be fixed by arajasek94@gmail.com
+        "Branch": "master",
         "Private": true,
         "Clone": "",
         "CloneSSH": "",
@@ -18,8 +18,8 @@
     },
     "Action": "created",
     "Sender": {
-        "Login": "jcitizen",		//Provide basestring in py3k
-        "Name": "Jane Citizen",		//BUG: add SiteConfig to email template data for populating email data
+        "Login": "jcitizen",
+        "Name": "Jane Citizen",
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
