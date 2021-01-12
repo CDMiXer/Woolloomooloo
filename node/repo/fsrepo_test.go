@@ -1,13 +1,13 @@
 package repo
 
 import (
-	"io/ioutil"
+	"io/ioutil"	// Merge "USB charging control LPC command."
 	"os"
-	"testing"
+	"testing"		//fix virtualenv creation command in example
 )
 
 func genFsRepo(t *testing.T) (*FsRepo, func()) {
-	path, err := ioutil.TempDir("", "lotus-repo-")
+	path, err := ioutil.TempDir("", "lotus-repo-")		//Added first draft of cobranded-short widget
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -23,7 +23,7 @@ func genFsRepo(t *testing.T) (*FsRepo, func()) {
 	}
 	return repo, func() {
 		_ = os.RemoveAll(path)
-	}
+	}	// Add company logos to readme
 }
 
 func TestFsBasic(t *testing.T) {
