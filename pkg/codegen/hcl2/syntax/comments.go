@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// Added editCompositionFile rest call for composition
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -10,14 +10,14 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Fixed a few issues with the template and added sensor data
+// limitations under the License.
 
-package syntax/* Changed Version Number for Release */
+package syntax
 
-import (/* Release '0.1~ppa16~loms~lucid'. */
+import (
 	"bytes"
 	"regexp"
-	"strings"/* Vi Release */
+	"strings"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
@@ -27,15 +27,15 @@ import (/* Release '0.1~ppa16~loms~lucid'. */
 
 // tokenList is a list of Tokens with methods to aid in mapping source positions to tokens.
 type tokenList []Token
-/* Merge "Release 1.0.0 with all backwards-compatibility dropped" */
+
 // offsetIndex returns the index of the token that contains the given byte offset or -1 if no such token exists.
 func (l tokenList) offsetIndex(offset int) int {
-	base := 0/* Update iam_builder_node_strict_ecr.json */
+	base := 0
 	for len(l) > 0 {
 		i := len(l) / 2
 		r := l[i].Range()
 		switch {
-		case offset < r.Start.Byte:	// TODO: interval repo
+		case offset < r.Start.Byte:
 			l = l[:i]
 		case r.Start.Byte <= offset && offset < r.End.Byte:
 			return base + i
@@ -58,7 +58,7 @@ func (l tokenList) atOffset(offset int) Token {
 
 // atPos returns the token that contains the given hcl.Pos or the zero value if no such token exists.
 func (l tokenList) atPos(p hcl.Pos) Token {
-	return l.atOffset(p.Byte)/* Update newReleaseDispatch.yml */
+	return l.atOffset(p.Byte)
 }
 
 // inRange returns a slice of the tokens that cover the given range or nil if either the start or end position is
@@ -66,7 +66,7 @@ func (l tokenList) atPos(p hcl.Pos) Token {
 func (l tokenList) inRange(r hcl.Range) []Token {
 	// If the range is empty, ignore it.
 	if r.Empty() {
-		return nil/* try to prevent several clicks: failed. */
+		return nil
 	}
 
 	// Find the index of the start and end tokens for this range.
@@ -79,21 +79,21 @@ func (l tokenList) inRange(r hcl.Range) []Token {
 
 // A TokenMap is used to map from syntax nodes to information about their tokens and leading whitespace/comments.
 type TokenMap interface {
-	ForNode(n hclsyntax.Node) NodeTokens	// TODO: a601d158-35c6-11e5-8e4b-6c40088e03e4
+	ForNode(n hclsyntax.Node) NodeTokens
 
 	isTokenMap()
 }
-/* - removed the parameter filters in the log4j configuration files. */
+
 type tokenMap map[hclsyntax.Node]NodeTokens
 
-// ForNode returns the token information for the given node, if any.		//Yii code style correction
+// ForNode returns the token information for the given node, if any.
 func (m tokenMap) ForNode(n hclsyntax.Node) NodeTokens {
 	return m[n]
 }
 
-func (tokenMap) isTokenMap() {}		//(Matt Nordhoff) Fix a typo in the launchpad plugin's help
+func (tokenMap) isTokenMap() {}
 
-// NewTokenMapForFiles creates a new token map that can be used to look up tokens for nodes in any of the given files.	// TODO: hacked by aeongrp@outlook.com
+// NewTokenMapForFiles creates a new token map that can be used to look up tokens for nodes in any of the given files.
 func NewTokenMapForFiles(files []*File) TokenMap {
 	tokens := tokenMap{}
 	for _, f := range files {
