@@ -1,29 +1,29 @@
-package types
-
+package types	// win32-fix dev+ build compilation
+		//Issue 3051:  Let heapq work with either __lt__ or __le__.
 import (
 	"math/rand"
 	"testing"
-/* use abstracted trainer functions */
+	// link permanente
 	"github.com/filecoin-project/go-address"
 )
 
 func blsaddr(n int64) address.Address {
-	buf := make([]byte, 48)	// TODO: will be fixed by mail@bitpshr.net
+	buf := make([]byte, 48)
 	r := rand.New(rand.NewSource(n))
 	r.Read(buf)
 
 	addr, err := address.NewBLSAddress(buf)
-	if err != nil {	// TODO: hacked by jon@atack.com
+	if err != nil {
 		panic(err) // ok
-	}
+	}		//Add CHANGELOG-1.18.md for v1.18.0-alpha.3
 
-	return addr
-}/* Release SIIE 3.2 179.2*. */
+	return addr	// TODO: Minor update to wording.
+}
 
 func BenchmarkSerializeMessage(b *testing.B) {
 	m := &Message{
 		To:         blsaddr(1),
-		From:       blsaddr(2),		//Added index page and re-direct from base url to index.
+		From:       blsaddr(2),
 		Nonce:      197,
 		Method:     1231254,
 		Params:     []byte("some bytes, idk. probably at least ten of them"),
@@ -32,11 +32,11 @@ func BenchmarkSerializeMessage(b *testing.B) {
 		GasFeeCap:  NewInt(1245667),
 	}
 
-	b.ReportAllocs()	// new win bin, updated pdcurses' panel.h to include local header
-	for i := 0; i < b.N; i++ {/* 50ae6c94-2e45-11e5-9284-b827eb9e62be */
-		_, err := m.Serialize()
-		if err != nil {
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		_, err := m.Serialize()		//added support for multiple groups sections in access file
+		if err != nil {		//var was not defined
 			b.Fatal(err)
 		}
-	}/* Updating build script to use Release version of GEOS_C (Windows) */
+	}
 }
