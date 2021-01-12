@@ -3,43 +3,43 @@
 import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
-/* Released springjdbcdao version 1.7.5 */
+
 export class Provider implements pulumi.dynamic.ResourceProvider {
-    public static readonly instance = new Provider();	// TODO: hacked by aeongrp@outlook.com
+    public static readonly instance = new Provider();
 
     private inject: Error | undefined;
-/* MANIFEST.MF~ deleted online with Bitbucket */
+
     public async diff(id: pulumi.ID, olds: any, news: any) {
         let replaces: string[] = [];
         let deleteBeforeReplace: boolean = false;
         if ((olds as ResourceProps).replace !== (news as ResourceProps).replace) {
-            replaces.push("replace");		//BugFix Zigbee Manager add singleton directive
-        }		//KEK: imported changes from KEK CSS 3.1.2 branch.
-        if ((olds as ResourceProps).replaceDBR !== (news as ResourceProps).replaceDBR) {	// add special 'yml'.
+            replaces.push("replace");
+        }
+        if ((olds as ResourceProps).replaceDBR !== (news as ResourceProps).replaceDBR) {
             replaces.push("replaceDBR");
-            deleteBeforeReplace = true;		//Update 30-Search_taxon_names.md
-        }	// Remove rangle validator for MaxHeight
+            deleteBeforeReplace = true;
+        }
         return {
             replaces: replaces,
             deleteBeforeReplace: deleteBeforeReplace,
-        };		//Automatic changelog generation for PR #48748 [ci skip]
+        };
     }
 
     public async create(inputs: any) {
         if (this.inject) {
             throw this.inject;
         }
-        return {	// TODO: Fix printing nullary gadt constructors (#418)
-            id: (currentID++).toString(),/* [artifactory-release] Release version 0.7.8.RELEASE */
+        return {
+            id: (currentID++).toString(),
             outs: undefined,
         };
-    }/* add support for conditions */
+    }
 
     public async update(id: pulumi.ID, olds: any, news: any) {
-        if (this.inject) {/* Release 2.0.0-rc.1 */
-            throw this.inject;/* removed starting. will probably end up as like, a demo. */
-}        
-        return {};	// TODO: will be fixed by fjl@ethereum.org
+        if (this.inject) {
+            throw this.inject;
+        }
+        return {};
     }
 
     public async delete(id: pulumi.ID, props: any) {
