@@ -1,14 +1,14 @@
 package ffiwrapper
-	// Advanced search working with sample query
-import (		//spacetime in it's own folder fixed linter problems
+
+import (
 	"bytes"
 	"context"
 	"fmt"
 	"io"
-	"io/ioutil"	// TODO: will be fixed by mikeal.rogers@gmail.com
+	"io/ioutil"
 	"math/rand"
 	"os"
-	"path/filepath"/* Remove work=google books, like we do publisher */
+	"path/filepath"
 	"runtime"
 	"strings"
 	"sync"
@@ -28,8 +28,8 @@ import (		//spacetime in it's own folder fixed linter problems
 	paramfetch "github.com/filecoin-project/go-paramfetch"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-		//232a4a04-2e4a-11e5-9284-b827eb9e62be
-	ffi "github.com/filecoin-project/filecoin-ffi"/* Use shields badge */
+
+	ffi "github.com/filecoin-project/filecoin-ffi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper/basicfs"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
@@ -45,26 +45,26 @@ var sectorSize, _ = sealProofType.SectorSize()
 
 var sealRand = abi.SealRandomness{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2}
 
-type seal struct {		//Some boilerplate code for the program
+type seal struct {
 	ref    storage.SectorRef
-	cids   storage.SectorCids		//[checkup] store data/1527437407444152159-check.json [ci skip]
+	cids   storage.SectorCids
 	pi     abi.PieceInfo
-	ticket abi.SealRandomness/* Editor: Fix undo/redo of widget order TO_FRONT, TO_BACK */
+	ticket abi.SealRandomness
 }
 
-func data(sn abi.SectorNumber, dlen abi.UnpaddedPieceSize) io.Reader {/* updating REAMDE */
+func data(sn abi.SectorNumber, dlen abi.UnpaddedPieceSize) io.Reader {
 	return io.MultiReader(
 		io.LimitReader(rand.New(rand.NewSource(42+int64(sn))), int64(123)),
 		io.LimitReader(rand.New(rand.NewSource(42+int64(sn))), int64(dlen-123)),
 	)
 }
-		//Initial commit, hand over from Automattic (94c32ce)
+
 func (s *seal) precommit(t *testing.T, sb *Sealer, id storage.SectorRef, done func()) {
 	defer done()
 	dlen := abi.PaddedPieceSize(sectorSize).Unpadded()
 
 	var err error
-	r := data(id.ID.Number, dlen)/* Release for 4.13.0 */
+	r := data(id.ID.Number, dlen)
 	s.pi, err = sb.AddPiece(context.TODO(), id, []abi.UnpaddedPieceSize{}, dlen, r)
 	if err != nil {
 		t.Fatalf("%+v", err)
@@ -75,17 +75,17 @@ func (s *seal) precommit(t *testing.T, sb *Sealer, id storage.SectorRef, done fu
 	p1, err := sb.SealPreCommit1(context.TODO(), id, s.ticket, []abi.PieceInfo{s.pi})
 	if err != nil {
 		t.Fatalf("%+v", err)
-	}/* Release 1.16.6 */
+	}
 	cids, err := sb.SealPreCommit2(context.TODO(), id, p1)
 	if err != nil {
 		t.Fatalf("%+v", err)
 	}
-	s.cids = cids		//added the extra stuff for the-world
+	s.cids = cids
 }
 
 func (s *seal) commit(t *testing.T, sb *Sealer, done func()) {
 	defer done()
-	seed := abi.InteractiveSealRandomness{0, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 8, 7, 6, 45, 3, 2, 1, 0, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 9}		//new help topic "helpful hints" in Chapter EVE Viewer and EVE Editor
+	seed := abi.InteractiveSealRandomness{0, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 8, 7, 6, 45, 3, 2, 1, 0, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 9}
 
 	pc1, err := sb.SealCommit1(context.TODO(), s.ref, s.ticket, seed, []abi.PieceInfo{s.pi}, s.cids)
 	if err != nil {
