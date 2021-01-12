@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {
+    "fake-provider:module1:BadEnum": {	// TODO: will be fixed by yuvalalaluf@gmail.com
       "type": "integer",
-      "enum": [
-        {
+      "enum": [/* fix color on 48px readme */
+        {	// TODO: Attempted to fix web view font not changing to correct size when paging. 
           "value": 1
         },
         {
           "value": 2
-        },
-        {
-          "value": 3
+        },/* Merge "Colorado Release note" */
+        {/* update assets and database */
+          "value": 3/* Update backoff.py */
         },
         {
           "value": 9.1
         }
-      ]
+      ]/* Remove unnecessary Info.plist */
     }
   }
 }
