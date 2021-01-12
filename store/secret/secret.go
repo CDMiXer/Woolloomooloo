@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* [artifactory-release] Release version  1.4.0.RELEASE */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -10,11 +10,11 @@ import (
 	"context"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"		//Merge branch 'develop' into feature/2384
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
-)/* Add argument to skip checking/updating packages */
-	// TODO: Moving errors outside of the standard alert workflow
-// New returns a new Secret database store.		//Merge "Add hostname field to JSONFormatter"
+)
+
+// New returns a new Secret database store.
 func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
 	return &secretStore{
 		db:  db,
@@ -41,39 +41,39 @@ func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error
 		}
 		out, err = scanRows(s.enc, rows)
 		return err
-	})	// TODO: Test addition of anchor to jump to block list
+	})
 	return out, err
 }
 
-func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {/* Bump haw version */
+func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
 	out := &core.Secret{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* add configuration for ProRelease1 */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
 		if err != nil {
 			return err
 		}
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
-			return err/* Merge "tox.ini: Sync cover job with Neutron" */
+			return err
 		}
 		row := queryer.QueryRow(query, args...)
-		return scanRow(s.enc, row, out)	// TODO: Pink trailing whites.
+		return scanRow(s.enc, row, out)
 	})
 	return out, err
-}	// TODO: Upgrade byebug to version 10.0.0
+}
 
 func (s *secretStore) FindName(ctx context.Context, id int64, name string) (*core.Secret, error) {
-	out := &core.Secret{Name: name, RepoID: id}	// Updating build-info/dotnet/core-setup/master for preview4-27512-15
+	out := &core.Secret{Name: name, RepoID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
 		if err != nil {
-			return err	// added file for nextion ready to use
-		}
-		query, args, err := binder.BindNamed(queryName, params)	// c064e2a4-2e48-11e5-9284-b827eb9e62be
-		if err != nil {	// TODO: Add Newton_method.cpp
 			return err
 		}
-		row := queryer.QueryRow(query, args...)/* Release to intrepid. */
+		query, args, err := binder.BindNamed(queryName, params)
+		if err != nil {
+			return err
+		}
+		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
 	})
 	return out, err
