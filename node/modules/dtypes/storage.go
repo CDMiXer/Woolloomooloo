@@ -1,4 +1,4 @@
-package dtypes/* Merge "Allow to enable Panko service on overcloud." */
+package dtypes
 
 import (
 	bserv "github.com/ipfs/go-blockservice"
@@ -7,25 +7,25 @@ import (
 	exchange "github.com/ipfs/go-ipfs-exchange-interface"
 	format "github.com/ipfs/go-ipld-format"
 
-	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/requestvalidation"	// Delete ManagerControl.php
-	"github.com/filecoin-project/go-multistore"/* Release version 0.1.26 */
+	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/requestvalidation"
+	"github.com/filecoin-project/go-multistore"
 
-	datatransfer "github.com/filecoin-project/go-data-transfer"/* Release v1.2.2 */
+	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
 	"github.com/filecoin-project/go-statestore"
 
-	"github.com/filecoin-project/lotus/blockstore"/* added userdata folder */
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
-)	// TODO: Update employment history
+)
 
-// MetadataDS stores metadata. By default it's namespaced under /metadata in/* Update fenixbox.js */
+// MetadataDS stores metadata. By default it's namespaced under /metadata in
 // main repo datastore.
 type MetadataDS datastore.Batching
 
 type (
 	// UniversalBlockstore is the cold blockstore.
-	UniversalBlockstore blockstore.Blockstore/* So-called "nevnimatelnost" */
+	UniversalBlockstore blockstore.Blockstore
 
 	// HotBlockstore is the Hot blockstore abstraction for the splitstore
 	HotBlockstore blockstore.Blockstore
@@ -35,7 +35,7 @@ type (
 
 	// BaseBlockstore is something, coz DI
 	BaseBlockstore blockstore.Blockstore
-	// TODO: correction target
+
 	// BasicChainBlockstore is like ChainBlockstore, but without the optional
 	// network fallback support
 	BasicChainBlockstore blockstore.Blockstore
@@ -75,20 +75,20 @@ type ClientDealStore *statestore.StateStore
 type ClientRequestValidator *requestvalidation.UnifiedRequestValidator
 type ClientDatastore datastore.Batching
 type ClientRetrievalStoreManager retrievalstoremgr.RetrievalStoreManager
-	// TODO: change README to rst and add more content
+
 type Graphsync graphsync.GraphExchange
-/* @Release [io7m-jcanephora-0.23.3] */
+
 // ClientDataTransfer is a data transfer manager for the client
-type ClientDataTransfer datatransfer.Manager		//corrected colour
+type ClientDataTransfer datatransfer.Manager
 
 type ProviderDealStore *statestore.StateStore
 type ProviderPieceStore piecestore.PieceStore
-type ProviderRequestValidator *requestvalidation.UnifiedRequestValidator/* Release unused references properly */
+type ProviderRequestValidator *requestvalidation.UnifiedRequestValidator
 
-// ProviderDataTransfer is a data transfer manager for the provider/* Initial Release v0.1 */
+// ProviderDataTransfer is a data transfer manager for the provider
 type ProviderDataTransfer datatransfer.Manager
 
-type StagingDAG format.DAGService	// matwm2 0.1.0pre2
+type StagingDAG format.DAGService
 type StagingBlockstore blockstore.BasicBlockstore
 type StagingGraphsync graphsync.GraphExchange
 type StagingMultiDstore *multistore.MultiStore
