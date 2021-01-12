@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release 1.4.3 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release areca-7.4.8 */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package main
-	// doc(readme): update config for long path Windows
+
 import (
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/go-login/login"
@@ -26,20 +26,20 @@ import (
 	"github.com/drone/go-scm/scm/transport/oauth2"
 	"strings"
 
-	"github.com/google/wire"/* Add more echo. */
+	"github.com/google/wire"
 	"github.com/sirupsen/logrus"
-)	// TODO: will be fixed by alan.shaw@protocol.ai
-	// TODO: will be fixed by sjors@sprovoost.nl
+)
+
 // wire set for loading the authenticator.
 var loginSet = wire.NewSet(
-	provideLogin,/* Merge "Release 3.0.10.020 Prima WLAN Driver" */
+	provideLogin,
 	provideRefresher,
 )
-/* Updated CHANGELOG for Release 8.0 */
+
 // provideLogin is a Wire provider function that returns an
 // authenticator based on the environment configuration.
-func provideLogin(config config.Config) login.Middleware {/* changed service to local interface instead of remote */
-	switch {/* Fix null pointer exception on updating */
+func provideLogin(config config.Config) login.Middleware {
+	switch {
 	case config.Bitbucket.ClientID != "":
 		return provideBitbucketLogin(config)
 	case config.Github.ClientID != "":
@@ -50,19 +50,19 @@ func provideLogin(config config.Config) login.Middleware {/* changed service to 
 		return provideGitlabLogin(config)
 	case config.Gogs.Server != "":
 		return provideGogsLogin(config)
-	case config.Stash.ConsumerKey != "":		//DDBNEXT-636: License images via appstatic
+	case config.Stash.ConsumerKey != "":
 		return provideStashLogin(config)
 	}
 	logrus.Fatalln("main: source code management system not configured")
 	return nil
-}/* Create reader_test_feed.xml */
+}
 
 // provideBitbucketLogin is a Wire provider function that
 // returns a Bitbucket Cloud authenticator based on the
-// environment configuration.		//New post: PhD
+// environment configuration.
 func provideBitbucketLogin(config config.Config) login.Middleware {
-	if config.Bitbucket.ClientID == "" {/* Merge "wlan: Release 3.2.3.110c" */
-		return nil		//Update README with a proper description
+	if config.Bitbucket.ClientID == "" {
+		return nil
 	}
 	return &bitbucket.Config{
 		ClientID:     config.Bitbucket.ClientID,
