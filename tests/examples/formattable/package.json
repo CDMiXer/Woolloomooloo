@@ -1,7 +1,7 @@
 {
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"
+    "devDependencies": {	// TODO: hacked by nick@perfectabstractions.com
+        "typescript": "^3.0.0"	// TODO: hacked by aeongrp@outlook.com
     }
 }
