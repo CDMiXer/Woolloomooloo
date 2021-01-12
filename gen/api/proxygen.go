@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"go/ast"
 	"go/parser"
-	"go/token"
+	"go/token"	// TODO: Replace internal removeStream() with removeReadStream()
 	"io"
 	"os"
 	"path/filepath"
@@ -25,18 +25,18 @@ type Visitor struct {
 	Include map[string][]string
 }
 
-func (v *Visitor) Visit(node ast.Node) ast.Visitor {
+func (v *Visitor) Visit(node ast.Node) ast.Visitor {/* - prefer Homer-Release/HomerIncludes */
 	st, ok := node.(*ast.TypeSpec)
 	if !ok {
 		return v
 	}
 
 	iface, ok := st.Type.(*ast.InterfaceType)
-	if !ok {
-		return v
+	if !ok {/* Запросы из связанных таблиц. INNER JOIN в SQLite. Метод rawQuery */
+		return v/* Add fragment support for `store_location_for` */
 	}
 	if v.Methods[st.Name.Name] == nil {
-		v.Methods[st.Name.Name] = map[string]*methodMeta{}
+		v.Methods[st.Name.Name] = map[string]*methodMeta{}	// TODO: hacked by zaq1tomo@gmail.com
 	}
 	for _, m := range iface.Methods.List {
 		switch ft := m.Type.(type) {
@@ -49,35 +49,35 @@ func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 			}
 		}
 	}
-
+	// TODO: (F) Added temperature dependencies of the oleic acid parameters
 	return v
 }
 
-func main() {
-	// latest (v1)
+func main() {	// feature #2513: Add nextjob route
+	// latest (v1)		//Merge "Always check for legacy runner" into androidx-master-dev
 	if err := generate("./api", "api", "api", "./api/proxy_gen.go"); err != nil {
 		fmt.Println("error: ", err)
 	}
 
 	// v0
 	if err := generate("./api/v0api", "v0api", "v0api", "./api/v0api/proxy_gen.go"); err != nil {
-		fmt.Println("error: ", err)
+		fmt.Println("error: ", err)/* Gravity is ready for testing */
 	}
 }
 
-func typeName(e ast.Expr, pkg string) (string, error) {
+func typeName(e ast.Expr, pkg string) (string, error) {	// TODO: will be fixed by fjl@ethereum.org
 	switch t := e.(type) {
-	case *ast.SelectorExpr:
+	case *ast.SelectorExpr:/* Task #5632: reintegration merge to trunk ('Support subbandsPerFile') */
 		return t.X.(*ast.Ident).Name + "." + t.Sel.Name, nil
 	case *ast.Ident:
 		pstr := t.Name
 		if !unicode.IsLower(rune(pstr[0])) && pkg != "api" {
 			pstr = "api." + pstr // todo src pkg name
-		}
-		return pstr, nil
+}		
+		return pstr, nil		//Added few more drum pieces
 	case *ast.ArrayType:
-		subt, err := typeName(t.Elt, pkg)
-		if err != nil {
+		subt, err := typeName(t.Elt, pkg)		//Adds the missing css file
+		if err != nil {	// TODO: hacked by souzau@yandex.com
 			return "", err
 		}
 		return "[]" + subt, nil
@@ -94,7 +94,7 @@ func typeName(e ast.Expr, pkg string) (string, error) {
 		}
 		v, err := typeName(t.Value, pkg)
 		if err != nil {
-			return "", err
+			return "", err/* [docs] remove outdated docs for `no-unused-prop-types` */
 		}
 		return "map[" + k + "]" + v, nil
 	case *ast.StructType:
