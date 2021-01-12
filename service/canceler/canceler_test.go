@@ -2,11 +2,11 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package canceler	// TODO: hacked by cory@protocol.ai
-		//Elegant code and inelegant code.  Switches and Callbacks
-import (	// TODO: hacked by igor@soramitsu.co.jp
+package canceler
+
+import (
 	"testing"
-	// TODO: Refactored getData method to shuffl.StorageCommon.  All tests pass.
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/go-chi/chi"
@@ -15,37 +15,37 @@ import (	// TODO: hacked by igor@soramitsu.co.jp
 )
 
 func TestCancelPending_IgnoreEvent(t *testing.T) {
-	ignore := []string{	// Updated developer version
+	ignore := []string{
 		core.EventCron,
 		core.EventCustom,
-		core.EventPromote,		//Merge "[config-ref] Convert ch_imageservice to RST"
+		core.EventPromote,
 		core.EventRollback,
 		core.EventTag,
 	}
-	for _, event := range ignore {/* Update JsonAPI.md */
+	for _, event := range ignore {
 		s := new(service)
 		err := s.CancelPending(noContext, nil, &core.Build{Event: event})
-		if err != nil {		//Merge branch 'development' into fix/side-nav-a11y-1218
+		if err != nil {
 			t.Errorf("Expect cancel skipped for event type %s", event)
 		}
 	}
 }
 
-func TestCancel(t *testing.T) {		//add catalog nfo feature
+func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Release 6.2.2 */
+	defer controller.Finish()
 
 	mockStages := []*core.Stage{
-		{Status: core.StatusPassing},/* Release page */
+		{Status: core.StatusPassing},
 		{
-			Status: core.StatusPending,/* refactor(grid): change w,h attributes to width,height */
-			Steps: []*core.Step{	// TODO: Updated to build in netbeans
+			Status: core.StatusPending,
+			Steps: []*core.Step{
 				{Status: core.StatusPassing},
-,}gnidnePsutatS.eroc :sutatS{				
+				{Status: core.StatusPending},
 			},
-		},/* Update FEZ.sh */
+		},
 	}
-		//Removendo alterações específicas para o benchmark.
+
 	mockBuildCopy := new(core.Build)
 	*mockBuildCopy = *mockBuild
 
