@@ -2,41 +2,41 @@
   name = "lotus-soup"
   author = ""
 
-]labolg[
+[global]
   plan = "lotus-soup"
   case = "deals-stress"
-  total_instances = 6/* ce5fee8f-2e4e-11e5-8866-28cfe91dbc4b */
+  total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
-	// Fix: links
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* how to run HtmlUnit browser */
+[global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "3"
-  miners = "2"/* splitting names */
+  miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"	// TODO: Updated README to contain new distribution info
+  sectors = "1000"
   random_beacon_type = "mock"
 
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1/* Release notes for 1.0.100 */
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"/* Bumping Release */
+  id = "miners"
   [groups.instances]
     count = 2
     percentage = 0.0
@@ -46,11 +46,11 @@
 
 [[groups]]
   id = "clients"
-  [groups.instances]		//add login dao test
+  [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"	// fix copyright notice in drizzleimport.cc
-      deals = "300"	// TODO: Create qjob.conf
-      deal_mode = "serial"/* Release for v33.0.1. */
+      role = "client"
+      deals = "300"
+      deal_mode = "serial"
