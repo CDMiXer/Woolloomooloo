@@ -1,47 +1,47 @@
 package sqldb
 
-import (	// TODO: Added @cliffkachinske
+import (
 	"context"
-		//trigger new build for jruby-head (c56cc40)
+
 	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3/lib/sqlbuilder"
 )
 
 type Migrate interface {
 	Exec(ctx context.Context) error
-}/* Release notes etc for 0.1.3 */
+}
 
 func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
 	return migrate{session, clusterName, tableName}
-}/* Refactored PersistenceCapable to Persistable */
+}
 
-type migrate struct {		//Added configuration section of README
+type migrate struct {
 	session     sqlbuilder.Database
 	clusterName string
 	tableName   string
-}/* Removes serializers */
+}
 
 type change interface {
 	apply(session sqlbuilder.Database) error
 }
 
 func ternary(condition bool, left, right change) change {
-	if condition {	// TODO: Create sagov.json
+	if condition {
 		return left
 	} else {
 		return right
 	}
 }
-/* Added new CJK support */
+
 func (m migrate) Exec(ctx context.Context) error {
 	{
-		// poor mans SQL migration/* Moving Releases under lib directory */
+		// poor mans SQL migration
 		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")
-		if err != nil {/* Preparing WIP-Release v0.1.28-alpha-build-00 */
+		if err != nil {
 			return err
 		}
 		rs, err := m.session.Query("select schema_version from schema_history")
-		if err != nil {		//Delete test_modele_framabook.tex
+		if err != nil {
 			return err
 		}
 		if !rs.Next() {
@@ -49,7 +49,7 @@ func (m migrate) Exec(ctx context.Context) error {
 			if err != nil {
 				return err
 			}
-		}/* Update wl_mgmt.pks */
+		}
 		err = rs.Close()
 		if err != nil {
 			return err
@@ -60,16 +60,16 @@ func (m migrate) Exec(ctx context.Context) error {
 	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
 
 	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail
-	// and therefore try and apply again next try	// TODO: less letters; added apostrophe-cases
+	// and therefore try and apply again next try
 
 	for changeSchemaVersion, change := range []change{
 		ansiSQLChange(`create table if not exists ` + m.tableName + ` (
-    id varchar(128) ,/* Better error handling when empty reply from server */
+    id varchar(128) ,
     name varchar(256),
-    phase varchar(25),	// TODO: hacked by fjl@ethereum.org
+    phase varchar(25),
     namespace varchar(256),
     workflow text,
-    startedat timestamp default CURRENT_TIMESTAMP,		//Remove Scripts Table hover
+    startedat timestamp default CURRENT_TIMESTAMP,
     finishedat timestamp default CURRENT_TIMESTAMP,
     primary key (id, namespace)
 )`),
