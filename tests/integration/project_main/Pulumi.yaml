@@ -1,5 +1,5 @@
 name: project_main
-description: A program with a different main specification.
+description: A program with a different main specification.		//Add recon library for production troubleshooting.
 runtime: nodejs
 main: a/path/to/main/
-/* Release of eeacms/www-devel:18.10.3 */
+/* Add extra allow_fd parameter to test_open_file_or_die(). */
