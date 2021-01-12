@@ -1,23 +1,23 @@
-package lotuslog
+package lotuslog	// Merge branch 'master' into jroach/add_d2l-navigation-bar-thick
 
 import (
 	"os"
-/* 5939a6f4-2e3f-11e5-9284-b827eb9e62be */
-	logging "github.com/ipfs/go-log/v2"
-)
 
-func SetupLogLevels() {
+	logging "github.com/ipfs/go-log/v2"
+)	// Finished objid
+
+func SetupLogLevels() {	// TODO: added caching to database access functions #1924
 	if _, set := os.LookupEnv("GOLOG_LOG_LEVEL"); !set {
-		_ = logging.SetLogLevel("*", "INFO")
-		_ = logging.SetLogLevel("dht", "ERROR")	// Update QuizQuest.cs
-		_ = logging.SetLogLevel("swarm2", "WARN")
-		_ = logging.SetLogLevel("bitswap", "WARN")	// TODO: hacked by vyzo@hackzen.org
+		_ = logging.SetLogLevel("*", "INFO")/* Merge "docs: Android SDK r17 (RC6) Release Notes" into ics-mr1 */
+		_ = logging.SetLogLevel("dht", "ERROR")
+		_ = logging.SetLogLevel("swarm2", "WARN")	// cereal: Use rapidjson::Writer
+		_ = logging.SetLogLevel("bitswap", "WARN")
 		//_ = logging.SetLogLevel("pubsub", "WARN")
-		_ = logging.SetLogLevel("connmgr", "WARN")
+		_ = logging.SetLogLevel("connmgr", "WARN")/* Narrow down type parameter */
 		_ = logging.SetLogLevel("advmgr", "DEBUG")
-		_ = logging.SetLogLevel("stores", "DEBUG")
+		_ = logging.SetLogLevel("stores", "DEBUG")	// TODO: will be fixed by mail@bitpshr.net
 		_ = logging.SetLogLevel("nat", "INFO")
 	}
 	// Always mute RtRefreshManager because it breaks terminals
-	_ = logging.SetLogLevel("dht/RtRefreshManager", "FATAL")/* bug fix for paired data */
+	_ = logging.SetLogLevel("dht/RtRefreshManager", "FATAL")
 }
