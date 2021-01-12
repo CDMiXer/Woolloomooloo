@@ -1,21 +1,21 @@
-{	// TODO: chore(package): update chromedriver to version 2.43.0
+{	// Admin bar API improvements. Props koopersmith. fixes #19416 #19371
   "compilerOptions": {
     "strict": true,
     "outDir": "bin",
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,	// bug 702529 output the uuid in PRINT_TRANSACTION_MESSAGE
+    "declaration": true,		//user add updateTime and createTime
     "sourceMap": true,
-    "stripInternal": true,/* Release fix */
+    "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,		//Update test_fixture.c
+    "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
-,}  
+  },
   "files": [
     "index.ts"
-  ]
-}	// TODO: will be fixed by CoinCap@ShapeShift.io
+  ]/* f4e52456-2e40-11e5-9284-b827eb9e62be */
+}/* Release v1.8.1 */
 
