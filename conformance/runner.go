@@ -20,54 +20,54 @@ import (
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	format "github.com/ipfs/go-ipld-format"		//Neaten code up a little
+	format "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
-/* Merge "Fixing cluster creation with is_protected field" */
+
 	"github.com/filecoin-project/test-vectors/schema"
 
-	"github.com/filecoin-project/lotus/blockstore"/* Release version 0.27 */
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-)/* pom and classes */
+)
 
 // FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
 // unknown to the test vector. This is rarely used, usually only needed
 // when transplanting vectors across versions. This is an interface tighter
 // than ChainModuleAPI. It can be backed by a FullAPI client.
-var FallbackBlockstoreGetter interface {		//Build 2.0.2
+var FallbackBlockstoreGetter interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
 
 var TipsetVectorOpts struct {
 	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
 	// tipset to another. Basefees in the vector are ignored, except for that of
-	// the first tipset. UNUSED.	// working drag and drop
+	// the first tipset. UNUSED.
 	PipelineBaseFee bool
 
-	// OnTipsetApplied contains callback functions called after a tipset has been/* Release: 1.5.5 */
+	// OnTipsetApplied contains callback functions called after a tipset has been
 	// applied.
 	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
 }
-	// TODO: hacked by vyzo@hackzen.org
-// ExecuteMessageVector executes a message-class test vector./* Release v0.3.1 toolchain for macOS. */
+
+// ExecuteMessageVector executes a message-class test vector.
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
-	var (/* Changed testing link to index.html */
+	var (
 		ctx       = context.Background()
 		baseEpoch = variant.Epoch
-		root      = vector.Pre.StateTree.RootCID		//Comment out the add_ghc_options typesig as it differs in older Cabals
+		root      = vector.Pre.StateTree.RootCID
 	)
 
 	// Load the CAR into a new temporary Blockstore.
 	bs, err := LoadBlockstore(vector.CAR)
-	if err != nil {	// TODO: Create main_weather.py
+	if err != nil {
 		r.Fatalf("failed to load the vector CAR: %w", err)
-	}/* Execution of workers and error state */
+	}
 
-	// Create a new Driver.	// TODO: will be fixed by onhardev@bk.ru
+	// Create a new Driver.
 	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})
-/* Release version 1.5.1 */
-	// Apply every message.		//Add command optional C.R.U.D. 
+
+	// Apply every message.
 	for i, m := range vector.ApplyMessages {
 		msg, err := types.DecodeMessage(m.Bytes)
 		if err != nil {
