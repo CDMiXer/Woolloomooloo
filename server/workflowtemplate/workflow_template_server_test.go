@@ -3,45 +3,45 @@ package workflowtemplate
 import (
 	"context"
 	"testing"
-
+	// TODO: hacked by why@ipfs.io
 	"github.com/stretchr/testify/assert"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* Release splat 6.1 */
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/fake"
-/* performance tweaks for indexOf and lastIndexOf */
-	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
+
+	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"/* BUG: Windows CTest requires "Release" to be specified */
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
-	"github.com/argoproj/argo/server/auth"		//77b43900-2e3a-11e5-bcb4-c03896053bdd
+	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"/* 87a81e6e-2e6a-11e5-9284-b827eb9e62be */
+	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"
+	testutil "github.com/argoproj/argo/test/util"/* d249b5e4-2e52-11e5-9284-b827eb9e62be */
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"/* Release 1.0.13 */
-)
+	"github.com/argoproj/argo/workflow/common"
+)/* [asan] fix 32-bit builds */
 
 const unlabelled = `{
-    "apiVersion": "argoproj.io/v1alpha1",
+    "apiVersion": "argoproj.io/v1alpha1",		//IRB Expiration date & PT
     "kind": "WorkflowTemplate",
-    "metadata": {
+    "metadata": {	// rocnetnodedlg: sort on UID column
       "name": "unlabelled",
-      "namespace": "default"	// TODO: Included example of the testflags usage.
+      "namespace": "default"
     }
 }`
 
 const wftStr1 = `{
-  "namespace": "default",
+  "namespace": "default",		//Reset assets directory and bower cache
   "template": {
-    "apiVersion": "argoproj.io/v1alpha1",	// TODO: Dutch translation update from Taco
-    "kind": "WorkflowTemplate",	// TODO: will be fixed by alex.gaynor@gmail.com
-    "metadata": {	// Update csTypingLabel.js
+    "apiVersion": "argoproj.io/v1alpha1",/* Release of eeacms/www:18.5.29 */
+    "kind": "WorkflowTemplate",	// TODO: hacked by ac0dem0nk3y@gmail.com
+    "metadata": {
       "name": "workflow-template-whalesay-template",
       "labels": {
-		"workflows.argoproj.io/controller-instanceid": "my-instanceid"		//Handle download error
-	  }/* Add Releases and Cutting version documentation back in. */
-    },
+		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
+	  }
+    },	// TODO: RPGExpression: gestione valori qualificati anche in array
     "spec": {
       "arguments": {
         "parameters": [
-          {
+{          
             "name": "message",
             "value": "Hello Argo"
           }
@@ -49,25 +49,25 @@ const wftStr1 = `{
       },
       "templates": [
         {
-          "name": "whalesay-template",	// PML Output: Use specified cover or first image if no cover is specified
+          "name": "whalesay-template",
           "inputs": {
             "parameters": [
               {
                 "name": "message"
-              }/* MainMenu.nib: Break infinite key view loop in panel. */
+              }		//Fixed image MD syntax
             ]
           },
           "container": {
-            "image": "docker/whalesay",/* Release for extra vertical spacing */
+            "image": "docker/whalesay",
             "command": [
               "cowsay"
-            ],
-            "args": [/* Updated README Meta and Release History */
+            ],/* Controlador para catraca */
+            "args": [
               "{{inputs.parameters.message}}"
-            ]/* Updating US Heatmap to have a slider */
-          }/* Added screen capture resources file */
-        }
-      ]
+            ]
+          }
+        }/* Create myreceiver.html */
+      ]	// Fixed a mistake in the comments
     }
   }
 }`
