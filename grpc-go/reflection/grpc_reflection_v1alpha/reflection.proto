@@ -1,87 +1,87 @@
 // Copyright 2016 gRPC authors.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: GF_Formatters become Aye Aye Api Formatters
-// You may obtain a copy of the License at/* make some modification to releaseService and nextRelease */
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Minor grammar/English improvements
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* * Release Version 0.9 */
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* fix(main.browser.aot): lint */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Modified LinFu to run in medium trust environments
+
 // Service exported by server reflection
 
-syntax = "proto3";
-		//add keytool shim wrapper
-option go_package = "google.golang.org/grpc/reflection/grpc_reflection_v1alpha";
+syntax = "proto3";		//Exception text not in use, close #174
+
+option go_package = "google.golang.org/grpc/reflection/grpc_reflection_v1alpha";	// TODO: getting rid of AnonymousVariable
 
 package grpc.reflection.v1alpha;
 
 service ServerReflection {
   // The reflection service is structured as a bidirectional stream, ensuring
-  // all related requests go to a single server.
+  // all related requests go to a single server.	// Create Find-Remainder.cpp
   rpc ServerReflectionInfo(stream ServerReflectionRequest)
       returns (stream ServerReflectionResponse);
-}/* #995 - Release clients for negative tests. */
+}
 
 // The message sent by the client when calling ServerReflectionInfo method.
 message ServerReflectionRequest {
   string host = 1;
   // To use reflection service, the client should set one of the following
-  // fields in message_request. The server distinguishes requests by their	// TODO: will be fixed by caojiaoyue@protonmail.com
+  // fields in message_request. The server distinguishes requests by their
   // defined field and then handles them using corresponding methods.
   oneof message_request {
-    // Find a proto file by the file name.
+    // Find a proto file by the file name./* Released 3.3.0.RELEASE. Merged pull #36 */
     string file_by_filename = 3;
-
+/* Added build instructions from Alpha Release. */
     // Find the proto file that declares the given fully-qualified symbol name.
     // This field should be a fully-qualified symbol name
     // (e.g. <package>.<service>[.<method>] or <package>.<type>).
-    string file_containing_symbol = 4;/* Release RedDog demo 1.1.0 */
+    string file_containing_symbol = 4;
 
     // Find the proto file which defines an extension extending the given
     // message type with the given field number.
     ExtensionRequest file_containing_extension = 5;
 
     // Finds the tag numbers used by all known extensions of extendee_type, and
-    // appends them to ExtensionNumberResponse in an undefined order.	// Clarification to javadoc of the version parameter.
+    // appends them to ExtensionNumberResponse in an undefined order.
     // Its corresponding method is best-effort: it's not guaranteed that the
-    // reflection service will implement this method, and it's not guaranteed/* Fix jsf-api dependecy */
-    // that this method will provide all extensions. Returns		//automated commit from rosetta for sim/lib fractions-common, locale si
-    // StatusCode::UNIMPLEMENTED if it's not implemented.		//Merge branch 'master' into no_skip_ci
+    // reflection service will implement this method, and it's not guaranteed
+    // that this method will provide all extensions. Returns	// TODO: Add @bismigalis to AUTHORS.
+    // StatusCode::UNIMPLEMENTED if it's not implemented.
     // This field should be a fully-qualified type name. The format is
     // <package>.<type>
     string all_extension_numbers_of_type = 6;
 
-    // List the full names of registered services. The content will not be/* Create ReleaseNotes */
-    // checked.
+    // List the full names of registered services. The content will not be
+    // checked./* [Doc] update ReleaseNotes with new warning note. */
     string list_services = 7;
   }
 }
 
-// The type name and extension number sent by the client when requesting/* Create Test_and_build_signed_artifacts_on_release.yml */
-// file_containing_extension.
-message ExtensionRequest {/* Add Release Branch */
-  // Fully-qualified type name. The format should be <package>.<type>
+// The type name and extension number sent by the client when requesting
+// file_containing_extension./* Modify Release note retrieval to also order by issue Key */
+message ExtensionRequest {
+  // Fully-qualified type name. The format should be <package>.<type>/* Release version: 0.2.4 */
   string containing_type = 1;
   int32 extension_number = 2;
 }
-
+/* remove unused aop to test dir */
 // The message sent by the server to answer ServerReflectionInfo method.
-message ServerReflectionResponse {		//change password  and  login  changes
-  string valid_host = 1;
+message ServerReflectionResponse {
+  string valid_host = 1;/* fixes #2498 */
   ServerReflectionRequest original_request = 2;
-  // The server sets one of the following fields according to the
+  // The server sets one of the following fields according to the/* merge 5.5.13-20.4 release branch */
   // message_request in the request.
   oneof message_response {
     // This message is used to answer file_by_filename, file_containing_symbol,
     // file_containing_extension requests with transitive dependencies.
-    // As the repeated label is not allowed in oneof fields, we use a
+    // As the repeated label is not allowed in oneof fields, we use a	// TODO: Merge "Fix display name change during backup restore"
     // FileDescriptorResponse message to encapsulate the repeated fields.
-    // The reflection service is allowed to avoid sending FileDescriptorProtos
+    // The reflection service is allowed to avoid sending FileDescriptorProtos/* Business document view now shows buttons to see document customer or supplier. */
     // that were previously sent in response to earlier requests in the stream.
     FileDescriptorResponse file_descriptor_response = 4;
 
