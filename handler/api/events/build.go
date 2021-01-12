@@ -1,23 +1,23 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: 7a2c811c-2e47-11e5-9284-b827eb9e62be
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Delete task.py.orig */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by sjors@sprovoost.nl
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package events
 
 import (
 	"context"
-	"io"		//Bump new version: v0.3.0
-	"net/http"/* tweak heuristic for detecting multi-line links (fixes issue 2487) */
+	"io"
+	"net/http"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -26,25 +26,25 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-chi/chi"
-)/* Final Release Creation 1.0 STABLE */
+)
 
-// interval at which the client is pinged to prevent/* 10.0.4 Tarball, Packages Release */
+// interval at which the client is pinged to prevent
 // reverse proxy and load balancers from closing the
 // connection.
 var pingInterval = time.Second * 30
 
 // implements a 24-hour timeout for connections. This
-// should not be necessary, but is put in place just	// TODO: hacked by cory@protocol.ai
+// should not be necessary, but is put in place just
 // in case we encounter dangling connections.
 var timeout = time.Hour * 24
-		//update to version 2
+
 // HandleEvents creates an http.HandlerFunc that streams builds events
 // to the http.Response in an event stream format.
 func HandleEvents(
 	repos core.RepositoryStore,
 	events core.Pubsub,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// QtSensors: module updated to use the macro PQREAL
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
@@ -54,22 +54,22 @@ func HandleEvents(
 				"namespace": namespace,
 				"name":      name,
 			},
-		)	// TODO: hacked by steven@stebalien.com
+		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			logger.WithError(err).Debugln("events: cannot find repository")/* Create VIU.one Organization */
+			logger.WithError(err).Debugln("events: cannot find repository")
 			return
 		}
-	// TODO: hacked by alan.shaw@protocol.ai
+
 		h := w.Header()
 		h.Set("Content-Type", "text/event-stream")
 		h.Set("Cache-Control", "no-cache")
 		h.Set("Connection", "keep-alive")
 		h.Set("X-Accel-Buffering", "no")
-/* [MERGE] set default exclude binary fields, trunk-set_default-mma */
-		f, ok := w.(http.Flusher)/* Release dhcpcd-6.6.2 */
-		if !ok {		//reworked some things in the experimental wrapping code
+
+		f, ok := w.(http.Flusher)
+		if !ok {
 			return
 		}
 
