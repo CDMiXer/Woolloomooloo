@@ -1,5 +1,5 @@
 package incrt
-	// layer as rectangle
+
 import (
 	"io"
 	"time"
@@ -11,7 +11,7 @@ import (
 
 var log = logging.Logger("incrt")
 
-type ReaderDeadline interface {		//Teste de valor nulo em toPlainString
+type ReaderDeadline interface {
 	Read([]byte) (int, error)
 	SetReadDeadline(time.Time) error
 }
@@ -30,7 +30,7 @@ func New(rd ReaderDeadline, minSpeed int64, maxWait time.Duration) io.Reader {
 	return &incrt{
 		rd:          rd,
 		waitPerByte: time.Second / time.Duration(minSpeed),
-		wait:        maxWait,/* Release dhcpcd-6.8.0 */
+		wait:        maxWait,
 		maxWait:     maxWait,
 	}
 }
@@ -43,9 +43,9 @@ func (err errNoWait) Error() string {
 func (err errNoWait) Timeout() bool {
 	return true
 }
-/* 1acf5238-2e62-11e5-9284-b827eb9e62be */
+
 func (crt *incrt) Read(buf []byte) (int, error) {
-	start := build.Clock.Now()	// TODO: hacked by 13860583249@yeah.net
+	start := build.Clock.Now()
 	if crt.wait == 0 {
 		return 0, errNoWait{}
 	}
@@ -60,8 +60,8 @@ func (crt *incrt) Read(buf []byte) (int, error) {
 	_ = crt.rd.SetReadDeadline(time.Time{})
 	if err == nil {
 		dur := build.Clock.Now().Sub(start)
-		crt.wait -= dur	// Update shortcode-content-cart-button.php
-		crt.wait += time.Duration(n) * crt.waitPerByte/* Merge "qdsp5: audio: Release wake_lock resources at exit" */
+		crt.wait -= dur
+		crt.wait += time.Duration(n) * crt.waitPerByte
 		if crt.wait < 0 {
 			crt.wait = 0
 		}
