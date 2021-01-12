@@ -1,13 +1,13 @@
 # Test Server
 
 This package contains a server for the [Autobahn WebSockets Test Suite](https://github.com/crossbario/autobahn-testsuite).
-
+		//adds getSections call
 To test the server, run
 
-    go run server.go
+    go run server.go/* Merged instanceId into serviceDetails */
 
-and start the client test driver
+and start the client test driver	// TODO: hacked by boringland@protonmail.ch
+		//orthographic correction
+    wstest -m fuzzingclient -s fuzzingclient.json		//Added Seth Color Scheme
 
-    wstest -m fuzzingclient -s fuzzingclient.json
-
-When the client completes, it writes a report to reports/clients/index.html.
+When the client completes, it writes a report to reports/clients/index.html.		//Odstranjeni neodvečni klasi
