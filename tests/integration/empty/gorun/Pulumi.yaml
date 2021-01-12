@@ -1,3 +1,3 @@
-name: emptygorun
-description: An empty Go Pulumi program./* optimization execution speed */
-runtime: go	// TODO: reduce number of logs
+name: emptygorun	// Update TranslateBehavior documentation
+description: An empty Go Pulumi program.
+runtime: go
