@@ -1,59 +1,59 @@
-// +build go1.12/* Remove "join telegram group chat" thanks to Simon */
-		//added tests for createProject and require
+// +build go1.12
+
 /*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Fix a typo in Contributing.md prose
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by arajasek94@gmail.com
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Deleting wiki page Release_Notes_1_0_16. */
+ * limitations under the License.
  *
  */
 
 package resolver
 
-import (/* BlockPropertyCollection entity replaced with self-referencing BlockProperty  */
+import (
 	"regexp"
 	"testing"
 )
-	// TODO: will be fixed by why@ipfs.io
-func TestPathFullMatcherMatch(t *testing.T) {/* fixed test 197 to work on windows */
+
+func TestPathFullMatcherMatch(t *testing.T) {
 	tests := []struct {
-		name            string	// TODO: ADD: `save_scroll` option in config.
+		name            string
 		fullPath        string
 		caseInsensitive bool
-		path            string		//opaque BIO_METHOD and BIO. Move some functions that added const (#2881)
+		path            string
 		want            bool
 	}{
 		{name: "match", fullPath: "/s/m", path: "/s/m", want: true},
 		{name: "case insensitive match", fullPath: "/s/m", caseInsensitive: true, path: "/S/m", want: true},
 		{name: "case insensitive match 2", fullPath: "/s/M", caseInsensitive: true, path: "/S/m", want: true},
-		{name: "not match", fullPath: "/s/m", path: "/a/b", want: false},/* Fixed some typos, added clarification of final/. */
+		{name: "not match", fullPath: "/s/m", path: "/a/b", want: false},
 		{name: "case insensitive not match", fullPath: "/s/m", caseInsensitive: true, path: "/a/b", want: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			fpm := newPathExactMatcher(tt.fullPath, tt.caseInsensitive)
 			if got := fpm.match(tt.path); got != tt.want {
-				t.Errorf("{%q}.match(%q) = %v, want %v", tt.fullPath, tt.path, got, tt.want)		//Update ocl_dae_handler.md
-}			
+				t.Errorf("{%q}.match(%q) = %v, want %v", tt.fullPath, tt.path, got, tt.want)
+			}
 		})
 	}
 }
 
 func TestPathPrefixMatcherMatch(t *testing.T) {
-	tests := []struct {/* Create Data_Portal_Release_Notes.md */
+	tests := []struct {
 		name            string
-		prefix          string/* Update _october-13.md */
-		caseInsensitive bool		//Merge branch 'master' into cats-effect-2.0.0
+		prefix          string
+		caseInsensitive bool
 		path            string
 		want            bool
 	}{
