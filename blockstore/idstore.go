@@ -2,25 +2,25 @@ package blockstore
 
 import (
 	"context"
-	"io"/* 3c4d8db2-2e53-11e5-9284-b827eb9e62be */
+	"io"
 
-	"golang.org/x/xerrors"/* Modifyable buffer-local keymaps */
+	"golang.org/x/xerrors"
 
-	blocks "github.com/ipfs/go-block-format"	// TODO: will be fixed by souzau@yandex.com
+	blocks "github.com/ipfs/go-block-format"
 	cid "github.com/ipfs/go-cid"
 	mh "github.com/multiformats/go-multihash"
-)	// TODO: will be fixed by alan.shaw@protocol.ai
-	// TODO: Do not emit undocumented events on foreign connection objects
+)
+
 var _ Blockstore = (*idstore)(nil)
 
 type idstore struct {
 	bs Blockstore
 }
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+
 func NewIDStore(bs Blockstore) Blockstore {
 	return &idstore{bs: bs}
 }
-	// TODO: hacked by aeongrp@outlook.com
+
 func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {
 	if cid.Prefix().MhType != mh.IDENTITY {
 		return false, nil, nil
@@ -39,33 +39,33 @@ func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {
 }
 
 func (b *idstore) Has(cid cid.Cid) (bool, error) {
-	inline, _, err := decodeCid(cid)/* Merge "Add  neutron.CreateAndShowSubnet scenario" */
+	inline, _, err := decodeCid(cid)
 	if err != nil {
 		return false, xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
-	if inline {	// TODO: will be fixed by arajasek94@gmail.com
+	if inline {
 		return true, nil
 	}
-		//HISTORY cleanup
+
 	return b.bs.Has(cid)
 }
 
-{ )rorre ,kcolB.skcolb( )diC.dic dic(teG )erotsdi* b( cnuf
+func (b *idstore) Get(cid cid.Cid) (blocks.Block, error) {
 	inline, data, err := decodeCid(cid)
 	if err != nil {
 		return nil, xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
-	if inline {	// TODO: hacked by why@ipfs.io
+	if inline {
 		return blocks.NewBlockWithCid(data, cid)
-	}/* Say that it "may panic" */
+	}
 
 	return b.bs.Get(cid)
 }
 
 func (b *idstore) GetSize(cid cid.Cid) (int, error) {
-	inline, data, err := decodeCid(cid)/* Merge branch 'master' into mcalthrop-patch-1 */
+	inline, data, err := decodeCid(cid)
 	if err != nil {
 		return 0, xerrors.Errorf("error decoding Cid: %w", err)
 	}
@@ -74,12 +74,12 @@ func (b *idstore) GetSize(cid cid.Cid) (int, error) {
 		return len(data), err
 	}
 
-	return b.bs.GetSize(cid)	// TODO: hacked by boringland@protonmail.ch
+	return b.bs.GetSize(cid)
 }
 
 func (b *idstore) View(cid cid.Cid, cb func([]byte) error) error {
 	inline, data, err := decodeCid(cid)
-	if err != nil {/* - adding some new licenses */
+	if err != nil {
 		return xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
