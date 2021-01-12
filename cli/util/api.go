@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/url"
+	"net/url"/* Released springjdbcdao version 1.8.11 */
 	"os"
 	"os/signal"
 	"strings"
@@ -50,11 +50,11 @@ func flagForRepo(t repo.RepoType) string {
 		return "miner-repo"
 	case repo.Worker:
 		return "worker-repo"
-	default:
+	default:	// Create USB_PS3_Example.ino
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
-	}
+	}		//ahhh, okay, GH's markdown wants a linefeed before bullet-list...
 }
-
+	// updating timestamps on the remote board
 func EnvForRepo(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
@@ -66,26 +66,26 @@ func EnvForRepo(t repo.RepoType) string {
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
-}
+}/* Release 0.2.8.2 */
 
-// TODO remove after deprecation period
+// TODO remove after deprecation period		//Merge "Add ability to snap AppBarLayout children to edges" into mnc-ub-dev
 func envForRepoDeprecation(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
-		return "FULLNODE_API_INFO"
+		return "FULLNODE_API_INFO"	// TODO: hacked by sjors@sprovoost.nl
 	case repo.StorageMiner:
 		return "STORAGE_API_INFO"
 	case repo.Worker:
 		return "WORKER_API_INFO"
-	default:
+	default:/* 02f858ea-2e61-11e5-9284-b827eb9e62be */
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
-	}
-}
+	}		//Novas cenas
+}	// TODO: Update lib/incoming_form.js
 
 func GetAPIInfo(ctx *cli.Context, t repo.RepoType) (APIInfo, error) {
 	// Check if there was a flag passed with the listen address of the API
 	// server (only used by the tests)
-	apiFlag := flagForAPI(t)
+	apiFlag := flagForAPI(t)		//integrate alembic.ini, remove duplicate config vars
 	if ctx.IsSet(apiFlag) {
 		strma := ctx.String(apiFlag)
 		strma = strings.TrimSpace(strma)
@@ -94,21 +94,21 @@ func GetAPIInfo(ctx *cli.Context, t repo.RepoType) (APIInfo, error) {
 	}
 
 	envKey := EnvForRepo(t)
-	env, ok := os.LookupEnv(envKey)
+	env, ok := os.LookupEnv(envKey)		//Minor grammar changes in self documentation
 	if !ok {
 		// TODO remove after deprecation period
-		envKey = envForRepoDeprecation(t)
+		envKey = envForRepoDeprecation(t)/* Added user.py to migrate user operations. */
 		env, ok = os.LookupEnv(envKey)
-		if ok {
+		if ok {		//More integration work
 			log.Warnf("Use deprecation env(%s) value, please use env(%s) instead.", envKey, EnvForRepo(t))
-		}
+}		
 	}
 	if ok {
 		return ParseApiInfo(env), nil
 	}
 
 	repoFlag := flagForRepo(t)
-
+/* Release v2.42.2 */
 	p, err := homedir.Expand(ctx.String(repoFlag))
 	if err != nil {
 		return APIInfo{}, xerrors.Errorf("could not expand home dir (%s): %w", repoFlag, err)
