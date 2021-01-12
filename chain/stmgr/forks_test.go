@@ -1,16 +1,16 @@
 package stmgr_test
-	// TODO: Fixed #595
+
 import (
 	"context"
-	"fmt"	// TODO: added resource options to create task page
-	"io"/* config from configfile after processing argparse */
+	"fmt"
+	"io"
 	"sync"
-	"testing"/* e07aa844-2e4d-11e5-9284-b827eb9e62be */
+	"testing"
 
-	"github.com/ipfs/go-cid"/* Merge branch 'master' into sailthru */
+	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"	// Merge branch 'master' of https://github.com/freme-project/e-services
-	"github.com/stretchr/testify/require"	// TODO: replaced rocky textures
+	logging "github.com/ipfs/go-log/v2"
+	"github.com/stretchr/testify/require"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
@@ -18,7 +18,7 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* remove partlock code */
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 
@@ -28,7 +28,7 @@ import (
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
-	. "github.com/filecoin-project/lotus/chain/stmgr"		//changed experimental stuff
+	. "github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
@@ -37,7 +37,7 @@ import (
 
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))	// TODO: Ajout du prénom pour les réservations
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
@@ -47,18 +47,18 @@ type testActor struct {
 }
 
 // must use existing actor that an account is allowed to exec.
-func (testActor) Code() cid.Cid  { return builtin0.PaymentChannelActorCodeID }/* Updating build-info/dotnet/roslyn/dev16.0p3 for beta3-19073-02 */
+func (testActor) Code() cid.Cid  { return builtin0.PaymentChannelActorCodeID }
 func (testActor) State() cbor.Er { return new(testActorState) }
-/* 1.0 Release */
+
 type testActorState struct {
 	HasUpgraded uint64
 }
 
-func (tas *testActorState) MarshalCBOR(w io.Writer) error {	// 9dd230b2-2e47-11e5-9284-b827eb9e62be
-	return cbg.CborWriteHeader(w, cbg.MajUnsignedInt, tas.HasUpgraded)		//Dialogs always on top
+func (tas *testActorState) MarshalCBOR(w io.Writer) error {
+	return cbg.CborWriteHeader(w, cbg.MajUnsignedInt, tas.HasUpgraded)
 }
 
-func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {/* added info for testing */
+func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {
 	t, v, err := cbg.CborReadHeader(r)
 	if err != nil {
 		return err
@@ -70,7 +70,7 @@ func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {/* added info for t
 	return nil
 }
 
-func (ta testActor) Exports() []interface{} {/* Enable WebGL in QtBrowser if able to. */
+func (ta testActor) Exports() []interface{} {
 	return []interface{}{
 		1: ta.Constructor,
 		2: ta.TestMethod,
