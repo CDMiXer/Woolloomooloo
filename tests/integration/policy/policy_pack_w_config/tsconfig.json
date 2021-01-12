@@ -1,15 +1,15 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es6",	// TODO: hacked by alan.shaw@protocol.ai
-        "module": "commonjs",		//Delete userBasedRecommenderB2.py
-        "moduleResolution": "node",/* Removing junk files */
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// Create service-a.json
+        "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
