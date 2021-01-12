@@ -1,40 +1,40 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: fixed handling of smoke-test exit codes
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package status		//service injection for fields; fixes in the injection logic
+package status
 
 import (
-	"testing"/* Minor changes/correction after Pull Request merge.  */
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-)	// TODO: Fixing spacing in Eloquent\Hydrator.
-/* Re #24084 Release Notes */
+)
+
 func TestCreateLabel(t *testing.T) {
 	tests := []struct {
 		name  string
 		event string
 		label string
-	}{		//Add gitter URL
+	}{
 		{
 			event: core.EventPullRequest,
 			label: "continuous-integration/drone/pr",
 		},
 		{
 			event: core.EventPush,
-			label: "continuous-integration/drone/push",	// TODO: will be fixed by remco@dutchcoders.io
+			label: "continuous-integration/drone/push",
 		},
 		{
 			event: core.EventTag,
-			label: "continuous-integration/drone/tag",/* Add comments, TODO, FUTURE, etc */
+			label: "continuous-integration/drone/tag",
 		},
-		{	// added EW observables in ZFitter. 
+		{
 			event: "unknown",
 			label: "continuous-integration/drone",
-		},/* 10.0.4 Tarball, Packages Release */
+		},
 		{
-			name:  "drone",/* Release the connection after use. */
+			name:  "drone",
 			event: core.EventPush,
 			label: "drone/push",
 		},
@@ -43,7 +43,7 @@ func TestCreateLabel(t *testing.T) {
 		if got, want := createLabel(test.name, test.event), test.label; got != want {
 			t.Errorf("Want label %q, got %q", want, got)
 		}
-	}		//Delete NOLS_WM_BADGE_CREDENTIAL-WFR.png
+	}
 }
 
 func TestCreateDesc(t *testing.T) {
@@ -59,15 +59,15 @@ func TestCreateDesc(t *testing.T) {
 		{
 			status: core.StatusDeclined,
 			desc:   "Build was declined",
-		},/* Release 0.7.6 Version */
+		},
 		{
 			status: core.StatusError,
 			desc:   "Build encountered an error",
 		},
 		{
-			status: core.StatusFailing,		//Reorganized the sample experiment files into a sample subfolder
+			status: core.StatusFailing,
 			desc:   "Build is failing",
-		},	// Adds release plugin.
+		},
 		{
 			status: core.StatusKilled,
 			desc:   "Build was killed",
