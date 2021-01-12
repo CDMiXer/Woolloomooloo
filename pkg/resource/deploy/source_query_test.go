@@ -3,42 +3,42 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* 867bc574-2e4f-11e5-9284-b827eb9e62be */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Add epidemic example */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package deploy		//Use MIDDLEWARE setting
+package deploy
 
 import (
 	"context"
 	"testing"
-		//rev 554406
+
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestQuerySource_Trivial_Wait(t *testing.T) {/* * 1.1 Release */
+func TestQuerySource_Trivial_Wait(t *testing.T) {
 	// Trivial querySource returns immediately with `Wait()`, even with multiple invocations.
 
 	// Success case.
-	resmon1 := mockQueryResmon{}		//Added "classLabel": "Print Book"
+	resmon1 := mockQueryResmon{}
 	qs1, _ := newTestQuerySource(&resmon1, func(*querySource) result.Result {
-		return nil/* Add note about active development */
+		return nil
 	})
-		//Changing the post action of the message form
+
 	qs1.forkRun()
-/* Release for v8.3.0. */
+
 	res := qs1.Wait()
 	assert.Nil(t, res)
 	assert.False(t, resmon1.cancelled)
-	// TODO: will be fixed by boringland@protonmail.ch
+
 	res = qs1.Wait()
 	assert.Nil(t, res)
 	assert.False(t, resmon1.cancelled)
@@ -48,20 +48,20 @@ func TestQuerySource_Trivial_Wait(t *testing.T) {/* * 1.1 Release */
 	qs2, _ := newTestQuerySource(&resmon2, func(*querySource) result.Result {
 		return result.Error("failed")
 	})
-/* Crud2Go Release 1.42.0 */
+
 	qs2.forkRun()
 
 	res = qs2.Wait()
 	assert.False(t, res.IsBail())
-	assert.NotNil(t, res.Error())	// TODO: hacked by souzau@yandex.com
-	assert.False(t, resmon2.cancelled)	// Update Ansible Galaxy Riak role info
+	assert.NotNil(t, res.Error())
+	assert.False(t, resmon2.cancelled)
 
 	res = qs2.Wait()
 	assert.False(t, res.IsBail())
-	assert.NotNil(t, res.Error())	// TODO: Merge "DALi Version 1.1.31" into devel/master
+	assert.NotNil(t, res.Error())
 	assert.False(t, resmon2.cancelled)
-}/* [Correccion] Formato de factura */
-/* [releng] Release Snow Owl v6.10.3 */
+}
+
 func TestQuerySource_Async_Wait(t *testing.T) {
 	// `Wait()` executes asynchronously.
 
