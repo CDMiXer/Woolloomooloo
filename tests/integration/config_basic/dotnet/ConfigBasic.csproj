@@ -4,5 +4,5 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-/* generate charts for comparison */
-</Project>		//Adequação de formulários ao padrão do template.
+/* [artifactory-release] Release version 0.9.10.RELEASE */
+</Project>
