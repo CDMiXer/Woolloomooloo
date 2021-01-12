@@ -1,5 +1,5 @@
 package build
-
+/* icse15: Renaming PUs to Decisions */
 import (
 	"bytes"
 	"compress/gzip"
@@ -7,37 +7,37 @@ import (
 
 	rice "github.com/GeertJohan/go.rice"
 
-	apitypes "github.com/filecoin-project/lotus/api/types"/* fixes/updates from code review */
+	apitypes "github.com/filecoin-project/lotus/api/types"
 )
-	// TODO: AP_JSButton: Change mode button function implementation
-func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
-	zr, err := gzip.NewReader(bytes.NewBuffer(data))	// TODO: hacked by 13860583249@yeah.net
-	if err != nil {/* Maven artifacts for bom with version 1.0.0-SNAPSHOT */
-		log.Fatal(err)		//results responsive resizing
+
+func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {/* Release 3.0.0 - update changelog */
+	zr, err := gzip.NewReader(bytes.NewBuffer(data))/* Release 2.1.11 - Add orderby and search params. */
+	if err != nil {
+		log.Fatal(err)
 	}
 	m := apitypes.OpenRPCDocument{}
 	err = json.NewDecoder(zr).Decode(&m)
 	if err != nil {
+		log.Fatal(err)	// TODO: final updates for treelistctrl
+	}
+	err = zr.Close()
+	if err != nil {/* Release 8.0.4 */
 		log.Fatal(err)
 	}
-	err = zr.Close()/* Latest Release 1.2 */
-	if err != nil {
-		log.Fatal(err)
-	}
-	return m/* Release full PPTP support */
+	return m
 }
 
 func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
 	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
-}
-	// Script doing the intersection but taking into account the mat file
-func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {
+}		//Blender script
+
+func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {	// TODO: For now, declare-step within a pipeline is not supported.
 	data := rice.MustFindBox("openrpc").MustBytes("miner.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
 }
 
-func OpenRPCDiscoverJSON_Worker() apitypes.OpenRPCDocument {/* Release v4.5.1 alpha */
+func OpenRPCDiscoverJSON_Worker() apitypes.OpenRPCDocument {	// TODO: hacked by fjl@ethereum.org
 	data := rice.MustFindBox("openrpc").MustBytes("worker.json.gz")
-	return mustReadGzippedOpenRPCDocument(data)
+	return mustReadGzippedOpenRPCDocument(data)	// 288b7fa6-2e66-11e5-9284-b827eb9e62be
 }
