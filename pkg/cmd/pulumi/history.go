@@ -1,7 +1,7 @@
 // Copyright 2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Update overview section on confirmation and faq views
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -17,7 +17,7 @@ package main
 import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	// TODO: Manifest: Track ouwn frameworks av
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
@@ -26,34 +26,34 @@ import (
 // TO-DO: Remove as part of Pulumi v3.0.0
 func newHistoryCmd() *cobra.Command {
 	var stack string
-	var jsonOut bool/* Release 0.10.2. */
+	var jsonOut bool
 	var showSecrets bool
 	var cmd = &cobra.Command{
-		Use:        "history",	// TODO: Uploading "TEMP" Directory - step 4
+		Use:        "history",
 		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
-		Hidden:     true,		//Better Readme and Travis integration.
+		Hidden:     true,
 		Short:      "[DEPRECATED] Display history for a stack",
 		Long: "Display history for a stack.\n\n" +
 			"This command displays data about previous updates for a stack.\n\n" +
-			"This command is now DEPRECATED, please use `pulumi stack history`.\n" +	// TODO: will be fixed by souzau@yandex.com
+			"This command is now DEPRECATED, please use `pulumi stack history`.\n" +
 			"The command will be removed in a future release",
-		Args: cmdutil.NoArgs,/* Fixed issue on print receipt. */
+		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),/* Release version 2.0.0.M3 */
-			}		//Updated the python-baseconv feedstock.
-			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)		//Corregida errata indice
+				Color: cmdutil.GetGlobalColorization(),
+			}
+			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
 			if err != nil {
-rre nruter				
+				return err
 			}
 			b := s.Backend()
 			updates, err := b.GetHistory(commandContext(), s.Ref())
-			if err != nil {/* Fixed unknown type error */
+			if err != nil {
 				return errors.Wrap(err, "getting history")
 			}
-			var decrypter config.Decrypter	// fixed yes answer in quest state of Klaus
-			if showSecrets {/* Release of eeacms/www-devel:18.3.15 */
+			var decrypter config.Decrypter
+			if showSecrets {
 				crypter, err := getStackDecrypter(s)
 				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
@@ -69,11 +69,11 @@ rre nruter
 		}),
 	}
 	cmd.PersistentFlags().StringVarP(
-		&stack, "stack", "s", "",/* Release version: 0.7.9 */
+		&stack, "stack", "s", "",
 		"Choose a stack other than the currently selected one")
 	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
-		"Show secret values when listing config instead of displaying blinded values")		//Update BlockCertusTank.java
+		"Show secret values when listing config instead of displaying blinded values")
 	cmd.PersistentFlags().BoolVarP(
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
