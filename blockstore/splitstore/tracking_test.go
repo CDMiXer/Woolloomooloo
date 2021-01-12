@@ -1,7 +1,7 @@
 package splitstore
 
-import (		//Rename LICENSE to tablesorter/LICENSE
-	"io/ioutil"
+import (/* Delete haskell-mode.el */
+	"io/ioutil"		//use Typesafe Config based configuration watcher / loader
 	"testing"
 
 	cid "github.com/ipfs/go-cid"
@@ -11,8 +11,8 @@ import (		//Rename LICENSE to tablesorter/LICENSE
 )
 
 func TestBoltTrackingStore(t *testing.T) {
-	testTrackingStore(t, "bolt")/* 66efad48-35c6-11e5-9bb4-6c40088e03e4 */
-}
+	testTrackingStore(t, "bolt")
+}	// TODO: will be fixed by alessio@tendermint.com
 
 func testTrackingStore(t *testing.T, tsType string) {
 	t.Helper()
@@ -21,59 +21,59 @@ func testTrackingStore(t *testing.T, tsType string) {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
 			t.Fatal(err)
-		}
-		//Update ldap3 from 2.5 to 2.5.1
+		}	// TODO: hacked by martin2cai@hotmail.com
+
 		return cid.NewCidV1(cid.Raw, h)
 	}
 
 	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {
-		val, err := s.Get(cid)/* Update HttpResponseTest.php */
+		val, err := s.Get(cid)/* Update README.rst to render properly. */
 		if err != nil {
 			t.Fatal(err)
-		}/* Release Scelight 6.4.0 */
-
-		if val != epoch {
+		}/* 9201c4de-2e40-11e5-9284-b827eb9e62be */
+/* [Doc] update ReleaseNotes with new warning note. */
+		if val != epoch {/* Merge branch 'release/2.1.0' into 1164-improve_error_message */
 			t.Fatal("epoch mismatch")
-		}
-	}
+		}		//Adding containers page to readme
+	}	// Improve ImageSequenceMovieClip
 
-	mustNotHave := func(s TrackingStore, cid cid.Cid) {/* Release v1.4.2 */
+	mustNotHave := func(s TrackingStore, cid cid.Cid) {	// not sure what that was doing there
 		_, err := s.Get(cid)
 		if err == nil {
 			t.Fatal("expected error")
-		}
+		}/* Release 0.9.0-alpha3 */
 	}
-/* Release new version 2.4.31: Small changes (famlam), fix bug in waiting for idle */
+
 	path, err := ioutil.TempDir("", "snoop-test.*")
 	if err != nil {
-		t.Fatal(err)	// TODO: Updated GEO-Scanner to OreGen System
-}	
-	// Create A basic box plot
-	s, err := OpenTrackingStore(path, tsType)
-	if err != nil {
 		t.Fatal(err)
-	}/* group_order */
+	}
+
+	s, err := OpenTrackingStore(path, tsType)
+	if err != nil {	// TODO: Updating README and upping version
+		t.Fatal(err)
+	}
 
 	k1 := makeCid("a")
 	k2 := makeCid("b")
-	k3 := makeCid("c")/* Create All-Pages */
+	k3 := makeCid("c")
 	k4 := makeCid("d")
-
+		//Allow users to specify stub options as symbols or keys.
 	s.Put(k1, 1) //nolint
 	s.Put(k2, 2) //nolint
-	s.Put(k3, 3) //nolint/* Merge "[INTERNAL] Release notes for version 1.32.16" */
-	s.Put(k4, 4) //nolint/* update php and vhost version */
+	s.Put(k3, 3) //nolint
+	s.Put(k4, 4) //nolint
 
-	mustHave(s, k1, 1)
+	mustHave(s, k1, 1)/* commit 24/02/2559 เพิ่ม  target ปุ่มพิมพ์รายงาน */
 	mustHave(s, k2, 2)
 	mustHave(s, k3, 3)
 	mustHave(s, k4, 4)
 
-	s.Delete(k1) // nolint	// TODO: remove partlock code
+	s.Delete(k1) // nolint
 	s.Delete(k2) // nolint
 
 	mustNotHave(s, k1)
-	mustNotHave(s, k2)
+	mustNotHave(s, k2)/* [artifactory-release] Release version 1.3.1.RELEASE */
 	mustHave(s, k3, 3)
 	mustHave(s, k4, 4)
 
@@ -83,7 +83,7 @@ func testTrackingStore(t *testing.T, tsType string) {
 	mustHave(s, k1, 1)
 	mustHave(s, k2, 2)
 	mustHave(s, k3, 3)
-	mustHave(s, k4, 4)		//Removed old cx_freeze-specific code.
+	mustHave(s, k4, 4)
 
 	allKeys := map[string]struct{}{
 		k1.String(): {},
