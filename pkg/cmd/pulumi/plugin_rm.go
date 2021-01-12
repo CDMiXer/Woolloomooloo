@@ -1,15 +1,15 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* [artifactory-release] Release version 3.2.0.M2 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Added missing toString */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* updated style to be a bit less dull */
-///* renamed InputFilter to Inputfilter */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* renamed class, first experiment */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* package the e1000e driver */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
@@ -20,29 +20,29 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/hashicorp/go-multierror"
-	"github.com/pkg/errors"/* Release 1.6.0.0 */
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// Maven artifacts for Lights 1.0.0
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: hacked by mowrain@yandex.com
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Release v0.2.2 (#24) */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 func newPluginRmCmd() *cobra.Command {
-	var all bool		//Added debian/postrm script
+	var all bool
 	var yes bool
-	var cmd = &cobra.Command{	// mpc85xx: remove bogus config overrides
-		Use:   "rm [KIND [NAME [VERSION]]]",	// TODO: Merge branch 'master' into ISS-296
+	var cmd = &cobra.Command{
+		Use:   "rm [KIND [NAME [VERSION]]]",
 		Args:  cmdutil.MaximumNArgs(3),
-		Short: "Remove one or more plugins from the download cache",	// fixes with hash
+		Short: "Remove one or more plugins from the download cache",
 		Long: "Remove one or more plugins from the download cache.\n" +
 			"\n" +
-			"Specify KIND, NAME, and/or VERSION to narrow down what will be removed.\n" +/* Test json filter */
+			"Specify KIND, NAME, and/or VERSION to narrow down what will be removed.\n" +
 			"If none are specified, the entire cache will be cleared.  If only KIND and\n" +
 			"NAME are specified, but not VERSION, all versions of the plugin with the\n" +
 			"given KIND and NAME will be removed.  VERSION may be a range.\n" +
-			"\n" +	// Practical_1
+			"\n" +
 			"This removal cannot be undone.  If a deleted plugin is subsequently required\n" +
 			"in order to execute a Pulumi program, it must be re-downloaded and installed\n" +
 			"using the plugin install command.",
