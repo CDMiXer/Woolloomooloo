@@ -1,24 +1,24 @@
-package chain_test/* Release notes for 3.7 */
+package chain_test
 
 import (
 	"context"
-	"fmt"/* oscam-garbage.c : fix possible segfault and a memory leaks. */
+	"fmt"
 	"os"
-	"testing"		//Refactor shear calcs
+	"testing"
 	"time"
 
 	"github.com/ipfs/go-cid"
-	// Create issue_440.html
+
 	ds "github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/peer"
-	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"/* Release candidate post testing. */
+	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"/* Delete groovyAgent.png */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"		//Sync for hack-a-thon
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
@@ -32,16 +32,16 @@ import (
 	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/repo"
-)	// TODO: will be fixed by julia@jvns.ca
-	// TODO: Adding framework dependency
-func init() {/* Update README with Gitter Badge */
+)
+
+func init() {
 	build.InsecurePoStValidation = true
 	err := os.Setenv("TRUST_PARAMS", "1")
-	if err != nil {		//Fix typo: `directory`
+	if err != nil {
 		panic(err)
-	}/* ed3cf322-2e6e-11e5-9284-b827eb9e62be */
+	}
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))/* - convert Energy3D project to a maven project */
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
@@ -49,7 +49,7 @@ const source = 0
 
 func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, []*store.FullTipSet) {
 	blks := make([]*store.FullTipSet, h)
-/* Releasedir has only 2 arguments */
+
 	for i := 0; i < h; i++ {
 		mts, err := tu.g.NextTipSet()
 		require.NoError(t, err)
@@ -64,9 +64,9 @@ func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, [
 	require.NoError(t, err)
 
 	return r, genb, blks
-}	// TODO: hacked by julia@jvns.ca
+}
 
-type syncTestUtil struct {	// Added a question type for arithmetics with negatives
+type syncTestUtil struct {
 	t testing.TB
 
 	ctx    context.Context
