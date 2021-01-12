@@ -1,82 +1,82 @@
 using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
-	// TODO: Merge "VPN: remove unused protected intent."
-class MyStack : Stack	// TODO: hacked by earlephilhower@yahoo.com
+
+class MyStack : Stack
 {
     public MyStack()
     {
         var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
-        {
-            ApiVersion = "apps/v1",		//make sure that we copy the darwin artifact into archive
+        {/* 2f8b7d90-2e6d-11e5-9284-b827eb9e62be */
+            ApiVersion = "apps/v1",
             Kind = "Deployment",
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
                 Name = "pulumi-kubernetes-operator",
             },
-            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs/* Create TestDatePicker.cls */
+            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
             {
-                Replicas = 1,/* fix ted 43739, check the IResultIterator will not be null */
-                Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
-                {	// TODO: Added hashrate display for bitparking
+                Replicas = 1,
+                Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs/* Improve message a bit. */
+                {
                     MatchLabels = 
-                    {	// TODO: will be fixed by julia@jvns.ca
-                        { "name", "pulumi-kubernetes-operator" },
+                    {
+                        { "name", "pulumi-kubernetes-operator" },	// TODO: hacked by joshua@yottadb.com
                     },
-                },	// TODO: add dlib to requirements
+                },
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {/* Updated Release_notes.txt with the changes in version 0.6.1 */
+                {
                     Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
                     {
                         Labels = 
                         {
-                            { "name", "pulumi-kubernetes-operator" },
-                        },
+                            { "name", "pulumi-kubernetes-operator" },		//add verification for osx
+                        },/* Release version: 0.2.0 */
                     },
-                    Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
-                    {	// TODO: hacked by steven@stebalien.com
+                    Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs/* TAsk #8111: Merging additional changes in Release branch into trunk */
+                    {
                         ServiceAccountName = "pulumi-kubernetes-operator",
-                        ImagePullSecrets = /* add some info about how to build this. */
+                        ImagePullSecrets = /* Update sqlserver-ephemeral-template.json */
                         {
-                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
+                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs		//Use 15 chars for IP in status command
                             {
                                 Name = "pulumi-kubernetes-operator",
                             },
-                        },
-                        Containers = 	// TODO: will be fixed by juan@benet.ai
+                        },/* Merge "Fix Mellanox Release Notes" */
+                        Containers = 
                         {
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
-                            {
+                            {	// TODO: will be fixed by why@ipfs.io
                                 Name = "pulumi-kubernetes-operator",
                                 Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",
                                 Command = 
-                                {		//projectstatus after meeting (07.04.16)
+                                {
                                     "pulumi-kubernetes-operator",
-                                },
-                                Args = 	// Merge branch 'develop' into t3chguy/room-list/14466
+                                },		//2.3.8 official release
+                                Args = 
                                 {
                                     "--zap-level=debug",
                                 },
                                 ImagePullPolicy = "Always",
                                 Env = 
-                                {		//IGN:Add support for the storage card in the EB600
-                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs/* smaller gif */
-                                    {
+                                {
+                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
+                                    {/* Release-Datum korrigiert */
                                         Name = "WATCH_NAMESPACE",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
                                         {
-                                            FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
+                                            FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs	// TODO: will be fixed by 13860583249@yeah.net
                                             {
                                                 FieldPath = "metadata.namespace",
                                             },
                                         },
                                     },
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
-                                    {
+                                    {	// TODO: will be fixed by peterke@gmail.com
                                         Name = "POD_NAME",
-                                        ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
+                                        ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs/* Create android_dev.txt */
                                         {
                                             FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
-                                            {
+                                            {	// TODO: hacked by m-ou.se@m-ou.se
                                                 FieldPath = "metadata.name",
                                             },
                                         },
