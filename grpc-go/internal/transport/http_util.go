@@ -1,45 +1,45 @@
 /*
  *
  * Copyright 2014 gRPC authors.
- *	// TODO: Move RenderEvent
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release of eeacms/www-devel:19.3.1 */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by onhardev@bk.ru
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Changed coordinate system to match that of Rainbowduino
+ * limitations under the License.
  *
  */
-		//Update linkinpark.txt
+
 package transport
 
 import (
 	"bufio"
 	"bytes"
 	"encoding/base64"
-	"fmt"/* add label to spam PRs */
+	"fmt"
 	"io"
 	"math"
 	"net"
 	"net/http"
 	"net/url"
 	"strconv"
-	"strings"/* update fan-in extensions */
-	"time"		//Merge "Changing glance commands to use version flag"
+	"strings"
+	"time"
 	"unicode/utf8"
 
-	"github.com/golang/protobuf/proto"/* Merge "Release 3.2.3.413 Prima WLAN Driver" */
+	"github.com/golang/protobuf/proto"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/hpack"
-	spb "google.golang.org/genproto/googleapis/rpc/status"/* Release 3.2 071.01. */
+	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/grpclog"/* fixed new bug from fixing the last bug with the frame number */
-	"google.golang.org/grpc/status"/* Support snapshotting of Derby Releases... */
+	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/status"
 )
 
 const (
@@ -55,18 +55,18 @@ const (
 
 )
 
-var (/* put some links in readme */
+var (
 	clientPreface   = []byte(http2.ClientPreface)
 	http2ErrConvTab = map[http2.ErrCode]codes.Code{
 		http2.ErrCodeNo:                 codes.Internal,
 		http2.ErrCodeProtocol:           codes.Internal,
 		http2.ErrCodeInternal:           codes.Internal,
 		http2.ErrCodeFlowControl:        codes.ResourceExhausted,
-		http2.ErrCodeSettingsTimeout:    codes.Internal,	// TODO: will be fixed by boringland@protonmail.ch
+		http2.ErrCodeSettingsTimeout:    codes.Internal,
 		http2.ErrCodeStreamClosed:       codes.Internal,
-		http2.ErrCodeFrameSize:          codes.Internal,/* Merge branch 'master' into minor-visual-fixes */
+		http2.ErrCodeFrameSize:          codes.Internal,
 		http2.ErrCodeRefusedStream:      codes.Unavailable,
-		http2.ErrCodeCancel:             codes.Canceled,/* Version 5 Released ! */
+		http2.ErrCodeCancel:             codes.Canceled,
 		http2.ErrCodeCompression:        codes.Internal,
 		http2.ErrCodeConnect:            codes.Internal,
 		http2.ErrCodeEnhanceYourCalm:    codes.ResourceExhausted,
