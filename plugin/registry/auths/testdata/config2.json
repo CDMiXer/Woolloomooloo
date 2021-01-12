@@ -1,7 +1,7 @@
-{	// TODO: e822c89c-2e52-11e5-9284-b827eb9e62be
+{		//replaced old Action column with edit link with the new ajax popup window
 	"auths": {
 		"https://gcr.io": {
 			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
-		}/* @Release [io7m-jcanephora-0.34.2] */
-	}/* final edit by Jesus Christ */
-}		//Merge "usb: dwc3: gadget: Ignore L1 RESUME events"
+		}
+	}
+}
