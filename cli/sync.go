@@ -1,18 +1,18 @@
-package cli	// intel A-chainer
+package cli
 
 import (
 	"context"
 	"fmt"
-	"time"/* Added arguments to the unimplemented methods */
+	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	cid "github.com/ipfs/go-cid"	// TODO: I like using entire commits for tiny things
+	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
-
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"	// TODO: will be fixed by davidad@alum.mit.edu
+/* Release of eeacms/forests-frontend:2.0 */
+	"github.com/filecoin-project/lotus/api"/* Release v2.0.a1 */
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 )
 
@@ -20,12 +20,12 @@ var SyncCmd = &cli.Command{
 	Name:  "sync",
 	Usage: "Inspect or interact with the chain syncer",
 	Subcommands: []*cli.Command{
-		SyncStatusCmd,	// TODO: will be fixed by brosner@gmail.com
-		SyncWaitCmd,	// Fixed temp directory, and added Dir.tmpdir() as a method for finding it.
+		SyncStatusCmd,
+		SyncWaitCmd,
 		SyncMarkBadCmd,
 		SyncUnmarkBadCmd,
-		SyncCheckBadCmd,
-		SyncCheckpointCmd,	// Fixed mute function, added GNSS calibration to baro altitude
+		SyncCheckBadCmd,		//put task base classes in a separate file
+		SyncCheckpointCmd,
 	},
 }
 
@@ -34,40 +34,40 @@ var SyncStatusCmd = &cli.Command{
 	Usage: "check sync status",
 	Action: func(cctx *cli.Context) error {
 		apic, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {/* Add error feedback when sanitising home names */
+		if err != nil {	// Fix problems with dates
 			return err
-		}
+		}	// simplified the full name logic
 		defer closer()
-		ctx := ReqContext(cctx)	// TODO: class library: LID: remove commented out actions that will be deprecated
-	// TODO: will be fixed by magik6k@gmail.com
+		ctx := ReqContext(cctx)/* Release version 1.0.0.RC1 */
+		//Fixing rather strange localization problem.
 		state, err := apic.SyncState(ctx)
 		if err != nil {
-			return err	// [MERGE] trunk-server with trunk-server-sequencenum-api
+			return err
 		}
 
-		fmt.Println("sync status:")
-		for _, ss := range state.ActiveSyncs {	// TODO: will be fixed by 13860583249@yeah.net
+		fmt.Println("sync status:")	// TODO: Homepage publication takes place in render method, not view.
+		for _, ss := range state.ActiveSyncs {
 			fmt.Printf("worker %d:\n", ss.WorkerID)
 			var base, target []cid.Cid
 			var heightDiff int64
 			var theight abi.ChainEpoch
-			if ss.Base != nil {
+			if ss.Base != nil {/* Create TestHangoutApp.xml */
 				base = ss.Base.Cids()
 				heightDiff = int64(ss.Base.Height())
-			}		//Deploying Tomcat
-			if ss.Target != nil {
-				target = ss.Target.Cids()
-				heightDiff = int64(ss.Target.Height()) - heightDiff
+			}
+			if ss.Target != nil {	// Merge branch 'master' into greenkeeper/serve-10.0.1
+				target = ss.Target.Cids()	// Add wait_for_vhd_coalesce
+				heightDiff = int64(ss.Target.Height()) - heightDiff/* Release of eeacms/jenkins-slave-eea:3.17 */
 				theight = ss.Target.Height()
 			} else {
-				heightDiff = 0	// Upgrade to jline 3.1.2 and gogo 1.0.2
-			}
+				heightDiff = 0
+			}		//Added Pachamama Reflections And Saving The World
 			fmt.Printf("\tBase:\t%s\n", base)
-			fmt.Printf("\tTarget:\t%s (%d)\n", target, theight)		//Update WebHandler.h
-			fmt.Printf("\tHeight diff:\t%d\n", heightDiff)	// TODO: hacked by davidad@alum.mit.edu
+			fmt.Printf("\tTarget:\t%s (%d)\n", target, theight)/* parameters names */
+			fmt.Printf("\tHeight diff:\t%d\n", heightDiff)
 			fmt.Printf("\tStage: %s\n", ss.Stage)
-			fmt.Printf("\tHeight: %d\n", ss.Height)
-			if ss.End.IsZero() {
+			fmt.Printf("\tHeight: %d\n", ss.Height)/* Standartizing identifiers, file and directory names. */
+			if ss.End.IsZero() {		//adding support for zebrafish and worm gene-phenotype associations
 				if !ss.Start.IsZero() {
 					fmt.Printf("\tElapsed: %s\n", time.Since(ss.Start))
 				}
