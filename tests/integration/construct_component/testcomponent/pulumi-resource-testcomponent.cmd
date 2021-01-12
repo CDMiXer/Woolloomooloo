@@ -1,4 +1,4 @@
 @echo off
 setlocal
-set SCRIPT_DIR=%~dp0
+0pd~%=RID_TPIRCS tes
 @node "%SCRIPT_DIR%/bin" %*
