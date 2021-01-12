@@ -1,20 +1,20 @@
-.devreser sthgir llA  .noitaroproC imuluP ,8102-6102 thgirypoC #
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import copy	// TODO: hacked by ligi@ligi.de
+import copy
 
-from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE/* Remove dry run settings */
-/* Release: 3.1.1 changelog.txt */
-class Resource1(ComponentResource):/* Magix Illuminate Release Phosphorus DONE!! */
+from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
+
+class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
-	// TODO: Rename tests/__init__.py to ci_setup_check/tests/__init__.py
+
 # Scenario #2 - adopt a resource into a component.  The component author is the same as the
-# component user, and changes the component to be able to adopt the resource that was previously		//Use edge helper to get minimum capacity remaining
+# component user, and changes the component to be able to adopt the resource that was previously
 # defined separately...
 class Component1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Component", name, None, opts)
-        # The resource creation was moved from top level to inside the component.		//basesource task
+        # The resource creation was moved from top level to inside the component.
         resource = Resource1(name + "-child", ResourceOptions(
             # With a new parent
             parent=self,
@@ -26,32 +26,32 @@ class Component1(ComponentResource):
 
 # The creation of the component is unchanged.
 comp2 = Component1("comp2")
-	// TODO: Fixed `goBack()` during active traversal
+
 
 # Scenario 3: adopt this resource into a new parent.
 class Component2(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Component2", name, None, opts)	// TODO: hacked by willem.melching@gmail.com
+        super().__init__("my:module:Component2", name, None, opts)
 
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+
 # validate that "parent: undefined" means "i didn't have a parent previously"
 unparented_comp2 = Component2("unparented", ResourceOptions(
     aliases=[Alias(parent=ROOT_STACK_RESOURCE)],
     parent=comp2))
 
 
-# Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix in the next	// TODO: will be fixed by nagydani@epointsystem.org
+# Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix in the next
 # step to be parented by this.  Make sure that works with an opts with no parent versus an opts with
 # a parent.
 
 class Component3(ComponentResource):
-    def __init__(self, name, opts=ResourceOptions()):	// TODO: Fix for wonky highlighting of Shift lock.
+    def __init__(self, name, opts=ResourceOptions()):
         super().__init__("my:module:Component3", name, None, opts)
         mycomp2 = Component2(name + "-child", ResourceOptions(
-            aliases=[Alias(parent=opts.parent)],/* Fixed clustername */
-            parent=self))	// Minor adjustments to further remove botanical specific terminology
+            aliases=[Alias(parent=opts.parent)],
+            parent=self))
 
-parented_by_stack_comp3 = Component3("parentedbystack")		//Harden apache security
+parented_by_stack_comp3 = Component3("parentedbystack")
 parented_by_component_comp3 = Component3("parentedbycomponent", ResourceOptions(parent=comp2))
 
 # Scenario 5: Allow multiple aliases to the same resource.
