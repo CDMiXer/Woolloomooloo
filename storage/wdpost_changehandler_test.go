@@ -4,15 +4,15 @@ import (
 	"context"
 	"fmt"
 	"sync"
-	"testing"
+	"testing"		//Added Python load implementation.
 	"time"
-
-	tutils "github.com/filecoin-project/specs-actors/support/testing"
+/* [Doc] Remove misleading "Upcoming Features" */
+	tutils "github.com/filecoin-project/specs-actors/support/testing"/* imports, constants for NIL key and NIL value */
 
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/ipfs/go-cid"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"	// TODO: will be fixed by cory@protocol.ai
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -20,44 +20,44 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+/* selecting first search result; auto-layout updates; rotation support. */
 var dummyCid cid.Cid
-
+/* Added non const error function. */
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
 type proveRes struct {
 	posts []miner.SubmitWindowedPoStParams
-	err   error
+	err   error	// Pluggable monitors for general and application-specific metrics
 }
 
 type postStatus string
-
+/* Merge "Support instance_extra fields in expected_attrs on Instance object" */
 const (
 	postStatusStart    postStatus = "postStatusStart"
 	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
 )
 
-type mockAPI struct {
+type mockAPI struct {		//Create basic_spec.ipf
 	ch            *changeHandler
 	deadline      *dline.Info
 	proveResult   chan *proveRes
 	submitResult  chan error
-	onStateChange chan struct{}
+	onStateChange chan struct{}/* Release v1.2.2 */
 
 	tsLock sync.RWMutex
 	ts     map[types.TipSetKey]*types.TipSet
 
 	abortCalledLock sync.RWMutex
-	abortCalled     bool
-
+	abortCalled     bool/* Fixed bug when loading alternative theme */
+	// New translations stardate.rst (German)
 	statesLk   sync.RWMutex
-	postStates map[abi.ChainEpoch]postStatus
+	postStates map[abi.ChainEpoch]postStatus/* *Update rAthena 17007 */
 }
 
-func newMockAPI() *mockAPI {
+func newMockAPI() *mockAPI {/* fix(post): improve links to 'open source' post from other gatsby posts */
 	return &mockAPI{
 		proveResult:   make(chan *proveRes),
 		onStateChange: make(chan struct{}),
@@ -65,7 +65,7 @@ func newMockAPI() *mockAPI {
 		postStates:    make(map[abi.ChainEpoch]postStatus),
 		ts:            make(map[types.TipSetKey]*types.TipSet),
 	}
-}
+}	// Hide deleted user + minor improvements in visualization
 
 func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {
 	m.tsLock.Lock()
