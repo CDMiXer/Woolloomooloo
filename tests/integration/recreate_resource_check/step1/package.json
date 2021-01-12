@@ -1,10 +1,10 @@
-{
+{/* Update upstreammonitoring.rst */
     "name": "steps",
-    "license": "Apache-2.0",	// Merge "Specify spacing on periodic_tasks in manager.py"
-    "devDependencies": {	// TODO: another test for particles
+    "license": "Apache-2.0",
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: hacked by jon@atack.com
+        "@pulumi/pulumi": "latest"
     }
-}/* add aprtium-pes */
+}
