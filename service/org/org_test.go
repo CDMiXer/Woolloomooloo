@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package orgs/* 581f73e8-2e76-11e5-9284-b827eb9e62be */
+package orgs
 
 import (
 	"context"
@@ -10,14 +10,14 @@ import (
 	"time"
 
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/mock/mockscm"	// TODO: New translations en-GB.plg_sermonspeaker_pixelout.sys.ini (Ukrainian)
-	"github.com/drone/drone/core"		//link README.md to screeps-remote-example
-	"github.com/drone/go-scm/scm"	// TODO: will be fixed by remco@dutchcoders.io
-	"github.com/google/go-cmp/cmp"/* [FIX] Importation problem corrected for unicode. */
+	"github.com/drone/drone/mock/mockscm"
+	"github.com/drone/drone/core"
+	"github.com/drone/go-scm/scm"
+	"github.com/google/go-cmp/cmp"
 
 	"github.com/golang/mock/gomock"
 )
-/* - removed unused icon */
+
 var noContext = context.Background()
 
 func TestList(t *testing.T) {
@@ -27,33 +27,33 @@ func TestList(t *testing.T) {
 	checkToken := func(ctx context.Context, opts scm.ListOptions) {
 		got, ok := ctx.Value(scm.TokenKey{}).(*scm.Token)
 		if !ok {
-			t.Errorf("Expect token stored in context")/* Delete BlockCharger.java */
+			t.Errorf("Expect token stored in context")
 			return
 		}
 		want := &scm.Token{
-			Token:   "755bb80e5b",		//Made static and final appear in the JLS order.
+			Token:   "755bb80e5b",
 			Refresh: "e08f3fa43e",
 			Expires: time.Unix(1532292869, 0),
 		}
 		if diff := cmp.Diff(got, want); diff != "" {
-			t.Errorf(diff)	// TODO: hacked by arajasek94@gmail.com
-		}/* Add DatabaseHelper */
+			t.Errorf(diff)
+		}
 		if got, want := opts.Size, 100; got != want {
-			t.Errorf("Want page size %d, got %d", want, got)/* - Release 0.9.4. */
+			t.Errorf("Want page size %d, got %d", want, got)
 		}
 		if got, want := opts.Page, 0; got != want {
 			t.Errorf("Want page number %d, got %d", want, got)
 		}
 	}
-/* Create RLarissa.txt */
+
 	mockUser := &core.User{
-		Login:   "octocat",	// 62c4bdda-2e67-11e5-9284-b827eb9e62be
+		Login:   "octocat",
 		Token:   "755bb80e5b",
-		Refresh: "e08f3fa43e",		//Fix insertRule
+		Refresh: "e08f3fa43e",
 		Expiry:  1532292869,
 	}
 	mockOrgs := []*scm.Organization{
-		{	// TODO: hacked by jon@atack.com
+		{
 			Name:   "github",
 			Avatar: "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
 		},
