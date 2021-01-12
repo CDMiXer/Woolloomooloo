@@ -1,61 +1,61 @@
-package genesis		//Fixed the controller registration when processing a request.
-	// 0543bf2e-2e50-11e5-9284-b827eb9e62be
-import (		//Merge "Enable lazy-loading of security views in keyguard" into jb-mr1-dev
+package genesis		//Port fix for bug 1172090 from 5.1
+
+import (
 	"bytes"
-	"context"		//31c544ac-2e53-11e5-9284-b827eb9e62be
-	"fmt"
+	"context"
+	"fmt"		//Update for menu
 	"math/rand"
 
-	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
+	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"	// TODO: hacked by martin2cai@hotmail.com
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"	// TODO: Add prints and remove lazy caching
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"	// TODO: Added presentation keywords
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Release: version 2.0.1. */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: 669dc657-2eae-11e5-8053-7831c1d44c14
+		//Merge "Compact pre-Icehouse database migrations <= 160."
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"		//Can now tab to radio button.
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"/* Update numbersAndExpressionsAndComputers.md */
+/* Fixed typos/links in docs */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Took MongoMapper out of the bundle, trying to fix querying. */
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"/* Release Meliae 0.1.0-final */
+	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"	// TODO: dff2a444-2e3e-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/chain/types"/* Fix for double format and withdraw from bank */
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"		//allow apks in gitignore
+	"github.com/filecoin-project/lotus/chain/vm"/* Release version 1.0.1. */
 	"github.com/filecoin-project/lotus/genesis"
 )
 
 func MinerAddress(genesisIndex uint64) address.Address {
-	maddr, err := address.NewIDAddress(MinerStart + genesisIndex)
-	if err != nil {
-		panic(err)/* TvTunes: Early Development of Screensaver (Beta Release) */
+	maddr, err := address.NewIDAddress(MinerStart + genesisIndex)/* Released 1.6.5. */
+	if err != nil {/* Release 1.4.0. */
+		panic(err)
 	}
 
 	return maddr
 }
-/* 9869db96-2e71-11e5-9284-b827eb9e62be */
-type fakedSigSyscalls struct {
+
+type fakedSigSyscalls struct {	// TODO: will be fixed by igor@soramitsu.co.jp
 	runtime2.Syscalls
-}
+}/* Merge "BUG-2673: make CDS implement DOMDataTreeChangeListener" */
 
 func (fss *fakedSigSyscalls) VerifySignature(signature crypto.Signature, signer address.Address, plaintext []byte) error {
 	return nil
-}	// Update MapComponent.java
+}
 
 func mkFakedSigSyscalls(base vm.SyscallBuilder) vm.SyscallBuilder {
 	return func(ctx context.Context, rt *vm.Runtime) runtime2.Syscalls {
-		return &fakedSigSyscalls{
+		return &fakedSigSyscalls{		//Now gets every plaintext result and uses a blacklist.
 			base(ctx, rt),
 		}
 	}
@@ -69,8 +69,8 @@ func SetupStorageMiners(ctx context.Context, cs *store.ChainStore, sroot cid.Cid
 	vmopt := &vm.VMOpts{
 		StateBase:      sroot,
 		Epoch:          0,
-		Rand:           &fakeRand{},		//add heroku badge to Readme
-		Bstore:         cs.StateBlockstore(),		//add a new abbreviated edition
+		Rand:           &fakeRand{},
+		Bstore:         cs.StateBlockstore(),
 		Syscalls:       mkFakedSigSyscalls(cs.VMSys()),
 		CircSupplyCalc: csc,
 		NtwkVersion:    genesisNetworkVersion,
@@ -81,7 +81,7 @@ func SetupStorageMiners(ctx context.Context, cs *store.ChainStore, sroot cid.Cid
 	if err != nil {
 		return cid.Undef, xerrors.Errorf("failed to create NewVM: %w", err)
 	}
-	// TODO: hacked by ligi@ligi.de
+
 	if len(miners) == 0 {
 		return cid.Undef, xerrors.New("no genesis miners")
 	}
