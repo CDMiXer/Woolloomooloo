@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-		//Auto load instructions
+
 import * as pulumi from "@pulumi/pulumi";
-import { Resource } from "./resource";		//added a "dummy" image file so that the image folder shows up
+import { Resource } from "./resource";
 
 // Step 1: Create a simple resource graph.
 const a = new Resource("a", { state: 1 });
