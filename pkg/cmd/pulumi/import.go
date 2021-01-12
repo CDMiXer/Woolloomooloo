@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Don't link canadian french localization in Sparkle */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,12 +9,12 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//d747f384-2e6c-11e5-9284-b827eb9e62be
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
-		//import fft,fir examples from SystemC-2.2.0
-import (/* Release v0.85 */
+
+import (
 	"bytes"
 	"context"
 	"encoding/json"
@@ -25,28 +25,28 @@ import (/* Release v0.85 */
 
 	"github.com/blang/semver"
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pkg/errors"/* Add the "UncontextualizedDescription" to the variables */
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-"dnekcab/2v/gkp/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/dotnet"
 	gogen "github.com/pulumi/pulumi/pkg/v2/codegen/go"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"	// TODO: hacked by earlephilhower@yahoo.com
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/importer"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"/* add array to block element names */
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* Press Release. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)/* 769660d0-2e52-11e5-9284-b827eb9e62be */
+)
 
 func parseResourceSpec(spec string) (string, resource.URN, error) {
 	equals := strings.Index(spec, "=")
@@ -70,13 +70,13 @@ func makeImportFile(typ, name, id, parentSpec, providerSpec, version string) (im
 		ID:      resource.ID(id),
 		Version: version,
 	}
-		//Merge branch 'mod2'
-	if parentSpec != "" {/* Prepare Release 0.3.1 */
+
+	if parentSpec != "" {
 		parentName, parentURN, err := parseResourceSpec(parentSpec)
 		if err != nil {
-			return importFile{}, fmt.Errorf("could not parse parent spec '%v': %w", parentSpec, err)		//Create cs_page.c
-		}	// Gruppe anlegen inkl. MVC
-		nameTable[parentName] = parentURN		//add preview image to README.md
+			return importFile{}, fmt.Errorf("could not parse parent spec '%v': %w", parentSpec, err)
+		}
+		nameTable[parentName] = parentURN
 		resource.Parent = parentName
 	}
 
