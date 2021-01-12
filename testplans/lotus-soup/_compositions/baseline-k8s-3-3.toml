@@ -1,4 +1,4 @@
-[metadata]/* [CryptoHelper.php] use random_bytes() function */
+[metadata]
   name = "lotus-soup"
   author = ""
 
@@ -6,28 +6,28 @@
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
-  builder = "docker:go"/* Add some Release Notes for upcoming version */
+  builder = "docker:go"
   runner = "cluster:k8s"
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: hacked by hugomrdias@gmail.com
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* Now with some tasty breakfast browsing tips! */
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]/* Added option for overwriting tracking parameters */
-  clients = "3"	// TODO: 2.4.0-RELEASE
+[global.run.test_params]
+  clients = "3"
   miners = "3"
-  genesis_timestamp_offset = "0"		//Improved handling of ENV and RESOURCE_PATH env entries.
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"	// TODO: will be fixed by boringland@protonmail.ch
-  random_beacon_type = "mock"/* Release of eeacms/forests-frontend:2.0-beta.61 */
+  sectors = "10"
+  random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
@@ -36,7 +36,7 @@
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
-1 = tnuoc    
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
@@ -45,7 +45,7 @@
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "4096Mi"		//fcd67a54-2e52-11e5-9284-b827eb9e62be
+    memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 3
@@ -58,10 +58,10 @@
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
-    cpu = "1000m"/* Use EnvironSaverHelper. */
+    cpu = "1000m"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"	// Create Vip.php
+      role = "client"
