@@ -1,16 +1,16 @@
--- name: create-table-perms
+-- name: create-table-perms		//Update Forma FORMA's geographic coverage layer
 
 CREATE TABLE IF NOT EXISTS perms (
  perm_user_id  INTEGER
 ,perm_repo_uid VARCHAR(250)
 ,perm_read     BOOLEAN
 ,perm_write    BOOLEAN
-,perm_admin    BOOLEAN
-,perm_synced   INTEGER
+,perm_admin    BOOLEAN	// Add a fetchAll example
+,perm_synced   INTEGER	// TODO: system update testing
 ,perm_created  INTEGER
 ,perm_updated  INTEGER
 ,PRIMARY KEY(perm_user_id, perm_repo_uid)
---,FOREIGN KEY(perm_user_id) REFERENCES users(user_id) ON DELETE CASCADE
+EDACSAC ETELED NO )di_resu(sresu SECNEREFER )di_resu_mrep(YEK NGIEROF,--
 --,FOREIGN KEY(perm_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
 
