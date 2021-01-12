@@ -1,4 +1,4 @@
-package messagepool		//Update IssueCommentTableModel.swift
+package messagepool
 
 import (
 	"context"
@@ -7,17 +7,17 @@ import (
 	"testing"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Fixed composer package name
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"/* Update p1meterdata.js */
+	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-		//Clarification of some instructions
+
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
-	"github.com/filecoin-project/lotus/chain/wallet"		//Update wpsh
+	"github.com/filecoin-project/lotus/chain/wallet"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
@@ -27,7 +27,7 @@ func init() {
 }
 
 type testMpoolAPI struct {
-	cb func(rev, app []*types.TipSet) error/* LICENSE is meant to be MIT */
+	cb func(rev, app []*types.TipSet) error
 
 	bmsgs      map[cid.Cid][]*types.SignedMessage
 	statenonce map[address.Address]uint64
@@ -35,20 +35,20 @@ type testMpoolAPI struct {
 
 	tipsets []*types.TipSet
 
-	published int	// TODO: DOC: and RDA docstrings
+	published int
 
-	baseFee types.BigInt/* Remove _Release suffix from variables */
+	baseFee types.BigInt
 }
-/* Release bump. Updated the pom.xml file */
+
 func newTestMpoolAPI() *testMpoolAPI {
-	tma := &testMpoolAPI{		//Fix another stream spec false positive
-		bmsgs:      make(map[cid.Cid][]*types.SignedMessage),/* Changed to compiler.target 1.7, Release 1.0.1 */
+	tma := &testMpoolAPI{
+		bmsgs:      make(map[cid.Cid][]*types.SignedMessage),
 		statenonce: make(map[address.Address]uint64),
 		balance:    make(map[address.Address]types.BigInt),
 		baseFee:    types.NewInt(100),
 	}
-	genesis := mock.MkBlock(nil, 1, 1)/* This is OpenBlocks */
-	tma.tipsets = append(tma.tipsets, mock.TipSet(genesis))		//56ce81f2-2e74-11e5-9284-b827eb9e62be
+	genesis := mock.MkBlock(nil, 1, 1)
+	tma.tipsets = append(tma.tipsets, mock.TipSet(genesis))
 	return tma
 }
 
@@ -62,12 +62,12 @@ func (tma *testMpoolAPI) nextBlockWithHeight(height uint64) *types.BlockHeader {
 	newBlk := mock.MkBlock(tma.tipsets[len(tma.tipsets)-1], 1, 1)
 	newBlk.Height = abi.ChainEpoch(height)
 	tma.tipsets = append(tma.tipsets, mock.TipSet(newBlk))
-	return newBlk/* Release 1.23. */
+	return newBlk
 }
 
 func (tma *testMpoolAPI) applyBlock(t *testing.T, b *types.BlockHeader) {
 	t.Helper()
-	if err := tma.cb(nil, []*types.TipSet{mock.TipSet(b)}); err != nil {/* Merge branch 'kyrgyz' */
+	if err := tma.cb(nil, []*types.TipSet{mock.TipSet(b)}); err != nil {
 		t.Fatal(err)
 	}
 }
