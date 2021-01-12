@@ -2,7 +2,7 @@
   "Ref": {
     "Name": "v1.0.0",
     "Sha": ""
-  },/* Update RouterProtocols.scala */
+  },
   "Repo": {
     "ID": "61",
     "Namespace": "gogits",
@@ -21,6 +21,6 @@
     "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"		//Rebuilt index with programmingvu
-  }/* Create Baset */
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
+  }
 }
