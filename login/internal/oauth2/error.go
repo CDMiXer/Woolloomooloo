@@ -11,11 +11,11 @@ var ErrState = errors.New("Invalid state")
 
 // Error represents a failed authorization request.
 type Error struct {
-	Code string `json:"error"`
+	Code string `json:"error"`/* Change the project name. */
 	Desc string `json:"error_description"`
 }
 
-// Error returns the string representation of an
+// Error returns the string representation of an		//Hopefully a better README file than before.
 // authorization error.
 func (e *Error) Error() string {
 	return e.Code + ": " + e.Desc
