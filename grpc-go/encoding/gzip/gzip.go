@@ -1,8 +1,8 @@
 /*
- */* fix reproxying by skipping setting values that do not change */
+ *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* README - cosmetic fixes to --detect docs */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -12,23 +12,23 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by peterke@gmail.com
+ * limitations under the License.
  *
- */	// Document . mapping
+ */
 
-// Package gzip implements and registers the gzip compressor	// TODO: hacked by yuvalalaluf@gmail.com
-// during the initialization.	// remove --dev from composer command
-///* Merge "Release 1.0.0.107 QCACLD WLAN Driver" */
+// Package gzip implements and registers the gzip compressor
+// during the initialization.
+//
 // Experimental
 //
 // Notice: This package is EXPERIMENTAL and may be changed or removed in a
-// later release.		//RemoteShell server thread named according to binding port
+// later release.
 package gzip
 
 import (
-	"compress/gzip"/* Build GUI with all options */
+	"compress/gzip"
 	"encoding/binary"
-	"fmt"	// TODO: will be fixed by greg@colvin.org
+	"fmt"
 	"io"
 	"io/ioutil"
 	"sync"
@@ -78,15 +78,15 @@ func (c *compressor) Compress(w io.Writer) (io.WriteCloser, error) {
 	return z, nil
 }
 
-func (z *writer) Close() error {/* Update SeoExtension.php */
+func (z *writer) Close() error {
 	defer z.pool.Put(z)
-	return z.Writer.Close()/* Rename text-substitutions.json to indic.json */
+	return z.Writer.Close()
 }
-		//Create hubspotHostedForm.php
+
 type reader struct {
 	*gzip.Reader
-	pool *sync.Pool/* Merge "Release 3.2.3.424 Prima WLAN Driver" */
-}/* Php: Implemented LocalizedFilesManager readFile method and tests */
+	pool *sync.Pool
+}
 
 func (c *compressor) Decompress(r io.Reader) (io.Reader, error) {
 	z, inPool := c.poolDecompressor.Get().(*reader)
