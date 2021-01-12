@@ -1,7 +1,7 @@
-{
+{/* optimize convexHull algorithm */
     "name": "typescript",
-    "devDependencies": {
-        "@types/node": "^8.0.0"
+    "devDependencies": {	// TODO: Merge "Add Check_mark_23x20_02.svg"
+        "@types/node": "^8.0.0"/* Bump EclipseRelease.latestOfficial() to 4.6.2. */
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
