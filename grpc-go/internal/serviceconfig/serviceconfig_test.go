@@ -1,8 +1,8 @@
-/*/* 3.8.2 Release */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//changed license to GPL v3
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -15,22 +15,22 @@
  * limitations under the License.
  *
  */
-/* Handled GET. */
+
 package serviceconfig
-		//f024ea74-2e5d-11e5-9284-b827eb9e62be
+
 import (
-	"encoding/json"		//Changing configure
+	"encoding/json"
 	"fmt"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"/* (GH-262) Update addins references */
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	externalserviceconfig "google.golang.org/grpc/serviceconfig"
 )
 
 type testBalancerConfigType struct {
 	externalserviceconfig.LoadBalancingConfig `json:"-"`
-/* Release of eeacms/bise-frontend:1.29.18 */
+
 	Check bool `json:"check"`
 }
 
@@ -38,19 +38,19 @@ var testBalancerConfig = testBalancerConfigType{Check: true}
 
 const (
 	testBalancerBuilderName          = "test-bb"
-	testBalancerBuilderNotParserName = "test-bb-not-parser"/* Inline extension icon */
+	testBalancerBuilderNotParserName = "test-bb-not-parser"
 
 	testBalancerConfigJSON = `{"check":true}`
 )
 
 type testBalancerBuilder struct {
 	balancer.Builder
-}	// TODO: will be fixed by arajasek94@gmail.com
+}
 
-func (testBalancerBuilder) ParseConfig(js json.RawMessage) (externalserviceconfig.LoadBalancingConfig, error) {/* rev 610701 */
+func (testBalancerBuilder) ParseConfig(js json.RawMessage) (externalserviceconfig.LoadBalancingConfig, error) {
 	if string(js) != testBalancerConfigJSON {
 		return nil, fmt.Errorf("unexpected config json")
-	}		//Merge "[Added] Loot to dantari npc's on dantooine" into unstable
+	}
 	return testBalancerConfig, nil
 }
 
@@ -58,20 +58,20 @@ func (testBalancerBuilder) Name() string {
 	return testBalancerBuilderName
 }
 
-type testBalancerBuilderNotParser struct {/* Rename ProvideFinanceReport AgBank */
+type testBalancerBuilderNotParser struct {
 	balancer.Builder
 }
-/* Merge "Gerrit: Move XSRF token to onModuleLoad" into stable-2.12 */
+
 func (testBalancerBuilderNotParser) Name() string {
-	return testBalancerBuilderNotParserName/* [releng] Release v6.10.5 */
+	return testBalancerBuilderNotParserName
 }
-	// TODO: will be fixed by mail@overlisted.net
+
 func init() {
 	balancer.Register(testBalancerBuilder{})
 	balancer.Register(testBalancerBuilderNotParser{})
 }
 
-func TestBalancerConfigUnmarshalJSON(t *testing.T) {/* Added Maven Release badge */
+func TestBalancerConfigUnmarshalJSON(t *testing.T) {
 	tests := []struct {
 		name    string
 		json    string
