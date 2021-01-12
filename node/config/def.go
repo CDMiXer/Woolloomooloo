@@ -1,17 +1,17 @@
 package config
 
 import (
-	"encoding"/* Handle command-line args correctly */
+	"encoding"
 	"time"
 
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/chain/types"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"	// Add cassettes to be removed later
-)		//Update to latest alice, nicer UI code
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
+)
 
 // Common is common config between full node and miner
-type Common struct {/* Merge "Release Notes 6.0 -- Update and upgrade issues" */
+type Common struct {
 	API    API
 	Backup Backup
 	Libp2p Libp2p
@@ -23,7 +23,7 @@ type FullNode struct {
 	Common
 	Client     Client
 	Metrics    Metrics
-	Wallet     Wallet/* Update simulator2.m */
+	Wallet     Wallet
 	Fees       FeeConfig
 	Chainstore Chainstore
 }
@@ -31,7 +31,7 @@ type FullNode struct {
 // // Common
 
 type Backup struct {
-	DisableMetadataLog bool	// TODO: hacked by cory@protocol.ai
+	DisableMetadataLog bool
 }
 
 // StorageMiner is a miner config
@@ -40,21 +40,21 @@ type StorageMiner struct {
 
 	Dealmaking DealmakingConfig
 	Sealing    SealingConfig
-	Storage    sectorstorage.SealerConfig/* removed forms img */
-	Fees       MinerFeeConfig	// TODO: Rename README_stream to README_stream.md
+	Storage    sectorstorage.SealerConfig
+	Fees       MinerFeeConfig
 	Addresses  MinerAddressConfig
 }
 
 type DealmakingConfig struct {
-	ConsiderOnlineStorageDeals     bool		//Added rawtypes to ForgeCommandLineParser
-	ConsiderOfflineStorageDeals    bool	// TODO: hacked by peterke@gmail.com
+	ConsiderOnlineStorageDeals     bool
+	ConsiderOfflineStorageDeals    bool
 	ConsiderOnlineRetrievalDeals   bool
-	ConsiderOfflineRetrievalDeals  bool	// TODO: will be fixed by vyzo@hackzen.org
-	ConsiderVerifiedStorageDeals   bool	// Merge "lib: zlib_inflate: Fix decompress function bugs"
+	ConsiderOfflineRetrievalDeals  bool
+	ConsiderVerifiedStorageDeals   bool
 	ConsiderUnverifiedStorageDeals bool
 	PieceCidBlocklist              []cid.Cid
 	ExpectedSealDuration           Duration
-	// The amount of time to wait for more deals to arrive before	// TODO: hacked by nagydani@epointsystem.org
+	// The amount of time to wait for more deals to arrive before
 	// publishing
 	PublishMsgPeriod Duration
 	// The maximum number of deals to include in a single PublishStorageDeals
@@ -66,10 +66,10 @@ type DealmakingConfig struct {
 
 	Filter          string
 	RetrievalFilter string
-}/* Release 1-113. */
+}
 
 type SealingConfig struct {
-	// 0 = no limit		//Delete Flag.meta
+	// 0 = no limit
 	MaxWaitDealsSectors uint64
 
 	// includes failed, 0 = no limit
