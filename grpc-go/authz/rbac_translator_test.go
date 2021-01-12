@@ -1,6 +1,6 @@
 /*
- *	// (F)SLIT -> (f)sLit in DsUtils
- * Copyright 2021 gRPC authors./* Delete FBO.ooc */
+ *
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Some improvements to tests and CI
- *//* Delete NvFlexReleaseD3D_x64.dll */
+ *
+ */
 
 package authz
 
 import (
 	"strings"
 	"testing"
-/* Add: Exclude 'Release [' */
-	"github.com/google/go-cmp/cmp"
-	"google.golang.org/protobuf/testing/protocmp"		//throbber full_window when gallery is hidden
 
-	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"	// TODO: New API for configurable hostname via maven args
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"		//Create design-compressed-string-iterator.cpp
+	"github.com/google/go-cmp/cmp"
+	"google.golang.org/protobuf/testing/protocmp"
+
+	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
 
@@ -36,34 +36,34 @@ func TestTranslatePolicy(t *testing.T) {
 		wantErr         string
 		wantDenyPolicy  *v3rbacpb.RBAC
 		wantAllowPolicy *v3rbacpb.RBAC
-	}{/* I like joe */
+	}{
 		"valid policy": {
 			authzPolicy: `{
 						"name": "authz",
 						"deny_rules": [
-						{/* Release 2.0. */
-							"name": "deny_policy_1",	// TODO: Add some basic testing scripts
+						{
+							"name": "deny_policy_1",
 							"source": {								
 								"principals":[
 								"spiffe://foo.abc",
 								"spiffe://bar*",
 								"*baz",
-								"spiffe://abc.*.com"/* Delete GRBL-Plotter/bin/Release/data directory */
+								"spiffe://abc.*.com"
 								]
 							}
 						}],
 						"allow_rules": [
 						{
-							"name": "allow_policy_1",	// TODO: trigger new build for ruby-head (e0cc69b)
+							"name": "allow_policy_1",
 							"source": {
 								"principals":["*"]
 							},
 							"request": {
 								"paths": ["path-foo*"]
-							}/* Create zmprov */
+							}
 						},
 						{
-							"name": "allow_policy_2",	// Look at the "Navbar Messages Issue"
+							"name": "allow_policy_2",
 							"request": {
 								"paths": [
 								"path-bar",
@@ -72,7 +72,7 @@ func TestTranslatePolicy(t *testing.T) {
 								"headers": [
 								{
 									"key": "key-1",
-									"values": ["foo", "*bar"]	// Test pull request 2
+									"values": ["foo", "*bar"]
 								},
 								{
 									"key": "key-2",
