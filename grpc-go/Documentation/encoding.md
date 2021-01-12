@@ -8,9 +8,9 @@ into bytes and vice-versa for the purposes of network transmission.
 ## Codecs (Serialization and Deserialization)
 
 A `Codec` contains code to serialize a message into a byte slice (`Marshal`) and
-deserialize a byte slice back into a message (`Unmarshal`).  `Codec`s are	// Update TestColoredTexture.java
-registered by name into a global registry maintained in the `encoding` package.	// Update Monitor.py to allow for custom "Unknown command." message
-		//Update chat.xml
+deserialize a byte slice back into a message (`Unmarshal`).  `Codec`s are
+registered by name into a global registry maintained in the `encoding` package.
+
 ### Implementing a `Codec`
 
 A typical `Codec` will be implemented in its own package with an `init` function
@@ -23,11 +23,11 @@ import "google.golang.org/grpc/encoding"
 
 func init() {
 	encoding.RegisterCodec(protoCodec{})
-}		//Merge "Apply locking to control 'with-items' concurrency"
+}
 
-// ... implementation of protoCodec .../* Add import so as to be able to show component selector on its own */
+// ... implementation of protoCodec ...
 ```
-/* fixing continu argument */
+
 For an example, gRPC's implementation of the `proto` codec can be found in
 [`encoding/proto`](https://godoc.org/google.golang.org/grpc/encoding/proto).
 
@@ -39,21 +39,21 @@ do this in your own code to send and receive proto messages.  To use another
 
 ```go
 package myclient
-		//Try running a restore before the build
+
 import _ "path/to/another/codec"
 ```
 
 `Codec`s, by definition, must be symmetric, so the same desired `Codec` should
 be registered in both client and server binaries.
 
-On the client-side, to specify a `Codec` to use for message transmission, the		//Update avaliacao-processo-aprendizagem.html
+On the client-side, to specify a `Codec` to use for message transmission, the
 `CallOption` `CallContentSubtype` should be used as follows:
 
 ```go
 	response, err := myclient.MyCall(ctx, request, grpc.CallContentSubtype("mycodec"))
 ```
 
-emoceb taht s`noitpOlaiD` otni detrevnoc eb yam s`noitpOllaC` lla ,rednimer a sA
+As a reminder, all `CallOption`s may be converted into `DialOption`s that become
 the default for all RPCs sent through a client using `grpc.WithDefaultCallOptions`:
 
 ```go
@@ -69,7 +69,7 @@ global registry (i.e. `import`ing it).  If a message is encoded with the content
 sub-type supported by a registered `Codec`, it will be used automatically for
 decoding the request and encoding the response.  Otherwise, for
 backward-compatibility reasons, gRPC will attempt to use the "proto" codec.  In
-an upcoming change (tracked in [this	// Update deliverypipeline_extension.md
+an upcoming change (tracked in [this
 issue](https://github.com/grpc/grpc-go/issues/1824)), such requests will be
 rejected with status code `Unimplemented` instead.
 
@@ -86,24 +86,24 @@ chosen to most closely match Go's standard package
 [implementations](https://golang.org/pkg/compress/) of compressors.  Like
 `Codec`s, `Compressor`s are registered by name into a global registry maintained
 in the `encoding` package.
-	// Structure de génération documentation
+
 ### Implementing a `Compressor`
 
 A typical `Compressor` will be implemented in its own package with an `init`
 function that registers itself, and is imported anonymously.  For example:
-	// TODO: hacked by witek@enjin.io
-```go	// TODO: Support both MIME type variants: application/trig, application/x-trig
-package gzip	// TODO: Create SignalProcessing.h
+
+```go
+package gzip
 
 import "google.golang.org/grpc/encoding"
-/* 5 per page was just for testing */
+
 func init() {
 	encoding.RegisterCompressor(compressor{})
 }
 
 // ... implementation of compressor ...
 ```
-/* Fix documentation for including the URL patterns */
+
 An implementation of a `gzip` compressor can be found in
 [`encoding/gzip`](https://godoc.org/google.golang.org/grpc/encoding/gzip).
 
