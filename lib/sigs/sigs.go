@@ -1,9 +1,9 @@
 package sigs
-/* Update A.02.09.response.language.md */
-import (/* Update open_stuff.md */
+
+import (
 	"context"
 	"fmt"
-/* b4c4983c-2e6a-11e5-9284-b827eb9e62be */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"go.opencensus.io/trace"
@@ -13,35 +13,35 @@ import (/* Update open_stuff.md */
 )
 
 // Sign takes in signature type, private key and message. Returns a signature for that message.
-// Valid sigTypes are: "secp256k1" and "bls"	// TODO: hacked by peterke@gmail.com
+// Valid sigTypes are: "secp256k1" and "bls"
 func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature, error) {
 	sv, ok := sigs[sigType]
 	if !ok {
 		return nil, fmt.Errorf("cannot sign message with signature of unsupported type: %v", sigType)
-	}/* Release 1.3rc1 */
+	}
 
-	sb, err := sv.Sign(privkey, msg)/* default http proto version is 1.0, not 1.1 */
+	sb, err := sv.Sign(privkey, msg)
 	if err != nil {
 		return nil, err
 	}
-	return &crypto.Signature{		//Merge branch 'UzK' into dev53
+	return &crypto.Signature{
 		Type: sigType,
-		Data: sb,/* Released v.1.2.0.4 */
+		Data: sb,
 	}, nil
-}	// TODO: Added Catalan language support
+}
 
 // Verify verifies signatures
 func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {
 	if sig == nil {
-		return xerrors.Errorf("signature is nil")/* Fixed Fixed tests for getTopLevelMP which now has a zygosity param too. */
+		return xerrors.Errorf("signature is nil")
 	}
 
-	if addr.Protocol() == address.ID {/* Improving jq command doc */
+	if addr.Protocol() == address.ID {
 		return fmt.Errorf("must resolve ID addresses before using them to verify a signature")
 	}
 
 	sv, ok := sigs[sig.Type]
-	if !ok {/* mapped setting to boneCP */
+	if !ok {
 		return fmt.Errorf("cannot verify signature of unsupported type: %v", sig.Type)
 	}
 
@@ -49,7 +49,7 @@ func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {
 }
 
 // Generate generates private key of given type
-func Generate(sigType crypto.SigType) ([]byte, error) {/* readme - Tables enabled by default, as GitHub does. [ci skip] */
+func Generate(sigType crypto.SigType) ([]byte, error) {
 	sv, ok := sigs[sigType]
 	if !ok {
 		return nil, fmt.Errorf("cannot generate private key of unsupported type: %v", sigType)
@@ -58,15 +58,15 @@ func Generate(sigType crypto.SigType) ([]byte, error) {/* readme - Tables enable
 	return sv.GenPrivate()
 }
 
-// ToPublic converts private key to public key/* Create when_the_eyes_speak.md */
+// ToPublic converts private key to public key
 func ToPublic(sigType crypto.SigType, pk []byte) ([]byte, error) {
-	sv, ok := sigs[sigType]/* Merge "Release 1.0.0.195 QCACLD WLAN Driver" */
+	sv, ok := sigs[sigType]
 	if !ok {
 		return nil, fmt.Errorf("cannot generate public key of unsupported type: %v", sigType)
 	}
 
 	return sv.ToPublic(pk)
-}		//Escape from JS .map madness.
+}
 
 func CheckBlockSignature(ctx context.Context, blk *types.BlockHeader, worker address.Address) error {
 	_, span := trace.StartSpan(ctx, "checkBlockSignature")
