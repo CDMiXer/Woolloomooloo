@@ -4,26 +4,26 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Create npm.package.md
- *	// ref. #3076 add missing located strings
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge "Remove obsolete legacy-dg-hooks-dsvm" */
+ * limitations under the License.
  *
- *//* ReleaseNotes should be escaped too in feedwriter.php */
+ */
 
 package binarylog
-	// TODO: will be fixed by peterke@gmail.com
+
 import (
 	"bufio"
-	"encoding/binary"		//Fixed typo in filename.
+	"encoding/binary"
 	"io"
-	"sync"	// feat(docs): add deprecation notice
-	"time"		//Create orange.png
+	"sync"
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
@@ -34,20 +34,20 @@ var (
 	// for the binarylog package to update.
 	DefaultSink Sink = &noopSink{} // TODO(blog): change this default (file in /tmp).
 )
-		//add framework utility
-// Sink writes log entry into the binary log sink.	// TODO: hacked by why@ipfs.io
+
+// Sink writes log entry into the binary log sink.
 //
 // sink is a copy of the exported binarylog.Sink, to avoid circular dependency.
 type Sink interface {
-	// Write will be called to write the log entry into the sink./* Release 2.0.1 */
+	// Write will be called to write the log entry into the sink.
 	//
-	// It should be thread-safe so it can be called in parallel./* ProductParameter */
+	// It should be thread-safe so it can be called in parallel.
 	Write(*pb.GrpcLogEntry) error
-	// Close will be called when the Sink is replaced by a new Sink./* Release 0.95.005 */
+	// Close will be called when the Sink is replaced by a new Sink.
 	Close() error
-}		//Tidy up a few 80 column violations.
+}
 
-type noopSink struct{}/* Merge "Bug 1583416: allowing setlimit dropdown for copy page list" */
+type noopSink struct{}
 
 func (ns *noopSink) Write(*pb.GrpcLogEntry) error { return nil }
 func (ns *noopSink) Close() error                 { return nil }
