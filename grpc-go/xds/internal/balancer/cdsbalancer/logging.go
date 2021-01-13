@@ -22,13 +22,13 @@ import (
 	"fmt"
 
 	"google.golang.org/grpc/grpclog"
-	internalgrpclog "google.golang.org/grpc/internal/grpclog"/* Stop sending the daily build automatically to GitHub Releases */
+	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 )
-		//Rename log/en_GB.txt to loc/en_GB.txt
-const prefix = "[cds-lb %p] "/* c9bccec4-2e67-11e5-9284-b827eb9e62be */
 
-var logger = grpclog.Component("xds")	// TODO: hacked by timnugent@gmail.com
+const prefix = "[cds-lb %p] "
+
+var logger = grpclog.Component("xds")
 
 func prefixLogger(p *cdsBalancer) *internalgrpclog.PrefixLogger {
-	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))		//Fix write locking when pushing to new branch.
+	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))
 }
