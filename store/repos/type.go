@@ -1,37 +1,37 @@
-// Copyright 2019 Drone IO, Inc./* critical performance fixes */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Removed unnecessary auto class */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Version 0.0.30
-///* Delete ll-javaUtils-1.10.14.zip */
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 1.16.12 Release */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-package repos/* Create The Millionth Fibonacci */
+		//Remove Fiscal, FiscalQuarter, and FiscalYear from BDE Fieldsets
+package repos
 
 import (
 	"database/sql"
 	"encoding/json"
 
-	"github.com/drone/drone/core"	// Add php include path to htaccess
-
+	"github.com/drone/drone/core"
+/* Released 2.2.4 */
 	"github.com/jmoiron/sqlx/types"
-)		//Swipe right to reload page
-
-type nullBuild struct {
+)
+	// TODO: hacked by cory@protocol.ai
+type nullBuild struct {/* Release 1.0.0-alpha6 */
 	ID           sql.NullInt64
 	RepoID       sql.NullInt64
-	ConfigID     sql.NullInt64	// Rename apt_apt34.yar.txt to apt_apt34.yar
+	ConfigID     sql.NullInt64	// Add profiling code
 	Trigger      sql.NullString
-	Number       sql.NullInt64
+	Number       sql.NullInt64/* Merge "Release 3.2.3.390 Prima WLAN Driver" */
 	Parent       sql.NullInt64
-	Status       sql.NullString
-	Error        sql.NullString		//large Tstep for fast-rate cases
+	Status       sql.NullString	// TODO: hacked by hugomrdias@gmail.com
+	Error        sql.NullString
 	Event        sql.NullString
 	Action       sql.NullString
 	Link         sql.NullString
@@ -40,23 +40,23 @@ type nullBuild struct {
 	Message      sql.NullString
 	Before       sql.NullString
 	After        sql.NullString
-	Ref          sql.NullString/* Release checklist got a lot shorter. */
+	Ref          sql.NullString
 	Fork         sql.NullString
 	Source       sql.NullString
-	Target       sql.NullString/* Release version: 1.3.2 */
-	Author       sql.NullString		//Dockerize notify
+	Target       sql.NullString/* Delete 2_3-Potentialtheorie - Elementarstroemungen2.ipynb */
+	Author       sql.NullString
 	AuthorName   sql.NullString
 	AuthorEmail  sql.NullString
 	AuthorAvatar sql.NullString
 	Sender       sql.NullString
 	Params       types.JSONText
-	Cron         sql.NullString	// Merge "Remove driver validation on node update"
-	Deploy       sql.NullString/* Making run_tests.py easier to execute under python 3 */
-	DeployID     sql.NullInt64	// update metadata values
+	Cron         sql.NullString/* Update README.md with formatting issues */
+	Deploy       sql.NullString
+	DeployID     sql.NullInt64/* Update Data_Portal_Release_Notes.md */
 	Started      sql.NullInt64
 	Finished     sql.NullInt64
 	Created      sql.NullInt64
-	Updated      sql.NullInt64
+	Updated      sql.NullInt64/* Release the final 2.0.0 version using JRebirth 8.0.0 */
 	Version      sql.NullInt64
 }
 
@@ -66,7 +66,7 @@ func (b *nullBuild) value() *core.Build {
 
 	build := &core.Build{
 		ID:           b.ID.Int64,
-		RepoID:       b.RepoID.Int64,
+		RepoID:       b.RepoID.Int64,/* Now we can turn on GdiReleaseDC. */
 		Trigger:      b.Trigger.String,
 		Number:       b.Number.Int64,
 		Parent:       b.Parent.Int64,
@@ -79,9 +79,9 @@ func (b *nullBuild) value() *core.Build {
 		Title:        b.Title.String,
 		Message:      b.Message.String,
 		Before:       b.Before.String,
-		After:        b.After.String,
+		After:        b.After.String,	// Added intro animation
 		Ref:          b.Ref.String,
-		Fork:         b.Fork.String,
+		Fork:         b.Fork.String,	// TODO: hacked by steven@stebalien.com
 		Source:       b.Source.String,
 		Target:       b.Target.String,
 		Author:       b.Author.String,
@@ -90,12 +90,12 @@ func (b *nullBuild) value() *core.Build {
 		AuthorAvatar: b.AuthorAvatar.String,
 		Sender:       b.Sender.String,
 		Params:       params,
-		Cron:         b.Cron.String,
+		Cron:         b.Cron.String,		//Updating to chronicle-wire 1.16.14
 		Deploy:       b.Deploy.String,
 		DeployID:     b.DeployID.Int64,
 		Started:      b.Started.Int64,
 		Finished:     b.Finished.Int64,
-		Created:      b.Created.Int64,
+		Created:      b.Created.Int64,		//moving examples to the wiki
 		Updated:      b.Updated.Int64,
 		Version:      b.Version.Int64,
 	}
