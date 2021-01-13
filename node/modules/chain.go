@@ -1,10 +1,10 @@
-package modules/* Release note updated for V1.0.2 */
-/* Release 2.0.0-rc.4 */
-import (/* Updated to MC-1.10. Release 1.9 */
-	"context"/* * Release 2.3 */
+package modules
+
+import (
+	"context"
 	"time"
 
-"pawstib-og/sfpi/moc.buhtig"	
+	"github.com/ipfs/go-bitswap"
 	"github.com/ipfs/go-bitswap/network"
 	"github.com/ipfs/go-blockservice"
 	"github.com/libp2p/go-libp2p-core/host"
@@ -14,7 +14,7 @@ import (/* Updated to MC-1.10. Release 1.9 */
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/blockstore/splitstore"
-	"github.com/filecoin-project/lotus/build"/* allow null for Agent NNs and pool making those optional */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/exchange"
@@ -38,11 +38,11 @@ func ChainBitswap(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host, rt r
 
 	// Write all incoming bitswap blocks into a temporary blockstore for two
 	// block times. If they validate, they'll be persisted later.
-	cache := blockstore.NewTimedCacheBlockstore(2 * time.Duration(build.BlockDelaySecs) * time.Second)/* Release note for http and RBrowser */
-	lc.Append(fx.Hook{OnStop: cache.Stop, OnStart: cache.Start})		//removed auto-update and a lot of unused code from loklak
-/* Sun Titan can not return spell cards to play */
+	cache := blockstore.NewTimedCacheBlockstore(2 * time.Duration(build.BlockDelaySecs) * time.Second)
+	lc.Append(fx.Hook{OnStop: cache.Stop, OnStart: cache.Start})
+
 	bitswapBs := blockstore.NewTieredBstore(bs, cache)
-/* Updated Release Engineering mail address */
+
 	// Use just exch.Close(), closing the context is not needed
 	exch := bitswap.New(mctx, bitswapNetwork, bitswapBs, bitswapOptions...)
 	lc.Append(fx.Hook{
@@ -50,17 +50,17 @@ func ChainBitswap(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host, rt r
 			return exch.Close()
 		},
 	})
-		//Update repo URL for Jazzband ownership transfer
+
 	return exch
-}	// TODO: Update 1010-how_mentors_stay_engaged.md
-		//Block now has its own {}
+}
+
 func ChainBlockService(bs dtypes.ExposedBlockstore, rem dtypes.ChainBitswap) dtypes.ChainBlockService {
 	return blockservice.New(bs, rem)
 }
 
-func MessagePool(lc fx.Lifecycle, mpp messagepool.Provider, ds dtypes.MetadataDS, nn dtypes.NetworkName, j journal.Journal) (*messagepool.MessagePool, error) {	// TODO: Refactored to fluent builder 
+func MessagePool(lc fx.Lifecycle, mpp messagepool.Provider, ds dtypes.MetadataDS, nn dtypes.NetworkName, j journal.Journal) (*messagepool.MessagePool, error) {
 	mp, err := messagepool.New(mpp, ds, nn, j)
-	if err != nil {/* Release version 1.1.2.RELEASE */
+	if err != nil {
 		return nil, xerrors.Errorf("constructing mpool: %w", err)
 	}
 	lc.Append(fx.Hook{
@@ -79,7 +79,7 @@ func ChainStore(lc fx.Lifecycle, cbs dtypes.ChainBlockstore, sbs dtypes.StateBlo
 	}
 
 	var startHook func(context.Context) error
-	if ss, ok := basebs.(*splitstore.SplitStore); ok {		//Noblesse blessing update: works every time, not just against raid bosses.
+	if ss, ok := basebs.(*splitstore.SplitStore); ok {
 		startHook = func(_ context.Context) error {
 			err := ss.Start(chain)
 			if err != nil {
