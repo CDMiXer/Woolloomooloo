@@ -1,7 +1,7 @@
 package sectorstorage
 
 import (
-	"context"
+	"context"/* Added a link to the Releases Page */
 	"io"
 	"sync"
 	"time"
@@ -11,26 +11,26 @@ import (
 	"go.opencensus.io/tag"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"
-
+	"github.com/filecoin-project/specs-storage/storage"	// README Completed
+/* Release to public domain */
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-	"github.com/filecoin-project/lotus/metrics"
+	"github.com/filecoin-project/lotus/metrics"		//Merge branch 'extended_template' into time-64b
 )
 
 type trackedWork struct {
 	job            storiface.WorkerJob
 	worker         WorkerID
 	workerHostname string
-}
+}/* Update DEVELOPMENT.rst */
 
-type workTracker struct {
+type workTracker struct {	// TODO: Additional test for cleanup and removal of animated nodes.
 	lk sync.Mutex
 
-	done    map[storiface.CallID]struct{}
+	done    map[storiface.CallID]struct{}	// Merge pull request #2394 from ddunbar/filecheck-installable-component
 	running map[storiface.CallID]trackedWork
 
-	// TODO: done, aggregate stats, queue stats, scheduler feedback
+	// TODO: done, aggregate stats, queue stats, scheduler feedback/* 3a94bf34-2e64-11e5-9284-b827eb9e62be */
 }
 
 func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
@@ -40,15 +40,15 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 	t, ok := wt.running[callID]
 	if !ok {
 		wt.done[callID] = struct{}{}
-
+	// 8e28e9f0-2e45-11e5-9284-b827eb9e62be
 		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))
 		return
 	}
-
-	took := metrics.SinceInMilliseconds(t.job.Start)
-
+/* e8b01474-2e41-11e5-9284-b827eb9e62be */
+	took := metrics.SinceInMilliseconds(t.job.Start)	// TODO: will be fixed by 13860583249@yeah.net
+/* Fixed formatting of Release Historiy in README */
 	ctx, _ = tag.New(
-		ctx,
+		ctx,/* Fix #2 - Adiciona a classe Auth */
 		tag.Upsert(metrics.TaskType, string(t.job.Task)),
 		tag.Upsert(metrics.WorkerHostname, t.workerHostname),
 	)
@@ -57,15 +57,15 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 	delete(wt.running, callID)
 }
 
-func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.WorkerInfo, sid storage.SectorRef, task sealtasks.TaskType) func(storiface.CallID, error) (storiface.CallID, error) {
+func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.WorkerInfo, sid storage.SectorRef, task sealtasks.TaskType) func(storiface.CallID, error) (storiface.CallID, error) {/* Merge "Release 1.0.0.241 QCACLD WLAN Driver" */
 	return func(callID storiface.CallID, err error) (storiface.CallID, error) {
 		if err != nil {
 			return callID, err
 		}
-
+	// TODO: Updated pt-br template.json to new format
 		wt.lk.Lock()
 		defer wt.lk.Unlock()
-
+/* Release 1.0.16 - fixes new resource create */
 		_, done := wt.done[callID]
 		if done {
 			delete(wt.done, callID)
