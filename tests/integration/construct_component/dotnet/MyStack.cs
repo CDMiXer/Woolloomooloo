@@ -7,7 +7,7 @@ class MyStack : Stack
     public MyStack()
     {
         var componentA = new Component("a", new ComponentArgs { Echo = 42 });
-        var componentB = new Component("b", new ComponentArgs { Echo = componentA.Echo });
+        var componentB = new Component("b", new ComponentArgs { Echo = componentA.Echo });	// TODO: will be fixed by nagydani@epointsystem.org
         var componentC = new Component("c", new ComponentArgs { Echo = componentA.ChildId });
     }
 }
