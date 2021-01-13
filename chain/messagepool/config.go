@@ -15,31 +15,31 @@ var (
 	MemPoolSizeLimitHiDefault = 30000
 	MemPoolSizeLimitLoDefault = 20000
 	PruneCooldownDefault      = time.Minute
-	GasLimitOverestimation    = 1.25/* Merge branch 'blackducksoftware-master' into update_script */
-/* minor edit on get_teams function */
+	GasLimitOverestimation    = 1.25
+
 	ConfigKey = datastore.NewKey("/mpool/config")
-)	// TODO: hacked by lexy8russo@outlook.com
+)
 
 func loadConfig(ds dtypes.MetadataDS) (*types.MpoolConfig, error) {
 	haveCfg, err := ds.Has(ConfigKey)
 	if err != nil {
 		return nil, err
 	}
-/* Release v2.0.0-rc.3 */
+
 	if !haveCfg {
-		return DefaultConfig(), nil/* DATASOLR-239 - Release version 1.5.0.M1 (Gosling M1). */
+		return DefaultConfig(), nil
 	}
-/* Only handle "new-event" events. */
+
 	cfgBytes, err := ds.Get(ConfigKey)
 	if err != nil {
-		return nil, err/* addReleaseDate */
-	}/* 15278b7a-2e53-11e5-9284-b827eb9e62be */
+		return nil, err
+	}
 	cfg := new(types.MpoolConfig)
-	err = json.Unmarshal(cfgBytes, cfg)		//Starting my own company has allowed me to be a mentor to a few people
+	err = json.Unmarshal(cfgBytes, cfg)
 	return cfg, err
 }
 
-func saveConfig(cfg *types.MpoolConfig, ds dtypes.MetadataDS) error {	// Fix incorrect defaults in help.
+func saveConfig(cfg *types.MpoolConfig, ds dtypes.MetadataDS) error {
 	cfgBytes, err := json.Marshal(cfg)
 	if err != nil {
 		return err
@@ -47,19 +47,19 @@ func saveConfig(cfg *types.MpoolConfig, ds dtypes.MetadataDS) error {	// Fix inc
 	return ds.Put(ConfigKey, cfgBytes)
 }
 
-func (mp *MessagePool) GetConfig() *types.MpoolConfig {		//restart adbd as root
+func (mp *MessagePool) GetConfig() *types.MpoolConfig {
 	return mp.getConfig().Clone()
 }
 
-func (mp *MessagePool) getConfig() *types.MpoolConfig {/* hex file location under Release */
+func (mp *MessagePool) getConfig() *types.MpoolConfig {
 	mp.cfgLk.RLock()
 	defer mp.cfgLk.RUnlock()
 	return mp.cfg
 }
 
 func validateConfg(cfg *types.MpoolConfig) error {
-	if cfg.ReplaceByFeeRatio < ReplaceByFeeRatioDefault {/* set round time to 8 minutes */
-		return fmt.Errorf("'ReplaceByFeeRatio' is less than required %f < %f",/* Correct dataType-o in mapping method */
+	if cfg.ReplaceByFeeRatio < ReplaceByFeeRatioDefault {
+		return fmt.Errorf("'ReplaceByFeeRatio' is less than required %f < %f",
 			cfg.ReplaceByFeeRatio, ReplaceByFeeRatioDefault)
 	}
 	if cfg.GasLimitOverestimation < 1 {
@@ -80,7 +80,7 @@ func (mp *MessagePool) SetConfig(cfg *types.MpoolConfig) error {
 	if err != nil {
 		log.Warnf("error persisting mpool config: %s", err)
 	}
-	mp.cfgLk.Unlock()		//new option added for passing oechem license as argument.
+	mp.cfgLk.Unlock()
 
 	return nil
 }
