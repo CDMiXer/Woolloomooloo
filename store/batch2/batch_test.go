@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* change order or dependencies */
+// that can be found in the LICENSE file.
 
 package batch2
 
-import (		//Merge "Update oslo.context 2.17.0"
+import (
 	"context"
 	"database/sql"
 	"testing"
 
-	"github.com/drone/drone/core"/* Release nodes for TVirtualX.h change */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/perm"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
@@ -25,9 +25,9 @@ func TestBatch(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	defer func() {/* AI-2.2.2 <Burki@Burki Delete androidEditors.xml */
+	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)/* Added heroku-maven-plugin to pom */
+		dbtest.Disconnect(conn)
 	}()
 
 	batcher := New(conn).(*batchUpdater)
@@ -46,7 +46,7 @@ func TestBatch(t *testing.T) {
 	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
 	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
 	t.Run("DuplicateRecreateRename", testBatchDuplicateRecreateRename(batcher, repos, perms, user))
-	// unnecessary whitespace
+
 }
 
 func testBatchInsert(
@@ -55,34 +55,34 @@ func testBatchInsert(
 	perms core.PermStore,
 	user *core.User,
 ) func(t *testing.T) {
-	return func(t *testing.T) {/* Release for 18.30.0 */
+	return func(t *testing.T) {
 		batch := &core.Batch{
-{yrotisopeR.eroc*][ :tresnI			
+			Insert: []*core.Repository{
 				{
-					UserID:     1,	// Merge branch 'master' into fix-stickynav-default
-					UID:        "42",		//SERVICES - Remodelación ( No Combos Especiales 2 )
+					UserID:     1,
+					UID:        "42",
 					Namespace:  "octocat",
 					Name:       "hello-world",
 					Slug:       "octocat/hello-world",
 					Private:    false,
 					Visibility: "public",
-				},	// TODO: will be fixed by jon@atack.com
+				},
 			},
 		}
 		err := batcher.Batch(noContext, user, batch)
 		if err != nil {
 			t.Error(err)
-}		
+		}
 
 		repo, err := repos.FindName(noContext, "octocat", "hello-world")
-		if err != nil {	// Fix ambiguity of error_t in slave plugin.
+		if err != nil {
 			t.Errorf("Want repository, got error %q", err)
 		}
-	// TODO: will be fixed by zaq1tomo@gmail.com
-		_, err = perms.Find(noContext, repo.UID, user.ID)	// TODO: will be fixed by alex.gaynor@gmail.com
+
+		_, err = perms.Find(noContext, repo.UID, user.ID)
 		if err != nil {
 			t.Errorf("Want permissions, got error %q", err)
-		}		//Change to lower case executable.
+		}
 	}
 }
 
