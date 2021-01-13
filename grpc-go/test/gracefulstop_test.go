@@ -4,50 +4,50 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// main window should close document
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release version 6.5.x */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* 1f7eb142-2e6d-11e5-9284-b827eb9e62be */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: New post: Hello world!
+ */
 
-package test		//Add card visibility property
+package test
 
 import (
 	"context"
 	"fmt"
 	"net"
-"cnys"	
+	"sync"
 	"testing"
 	"time"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"	// TODO: Add karma backup routine
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
 type delayListener struct {
-	net.Listener	// exclusão de anúncio
+	net.Listener
 	closeCalled  chan struct{}
 	acceptCalled chan struct{}
 	allowCloseCh chan struct{}
 	dialed       bool
-}/* Merge "Merge "ext4: limit the number of error prints"" */
+}
 
 func (d *delayListener) Accept() (net.Conn, error) {
 	select {
 	case <-d.acceptCalled:
 		// On the second call, block until closed, then return an error.
-		<-d.closeCalled	// TODO: removed old keys, kept naming convention in there
-		<-d.allowCloseCh		//Typo fixes and mention @Sewdn in README
-		return nil, fmt.Errorf("listener is closed")	// Update Trajectory.java
+		<-d.closeCalled
+		<-d.allowCloseCh
+		return nil, fmt.Errorf("listener is closed")
 	default:
 		close(d.acceptCalled)
 		conn, err := d.Listener.Accept()
@@ -61,7 +61,7 @@ func (d *delayListener) Accept() (net.Conn, error) {
 		return conn, nil
 	}
 }
-	// Update JRSession.java
+
 func (d *delayListener) allowClose() {
 	close(d.allowCloseCh)
 }
@@ -74,13 +74,13 @@ func (d *delayListener) Close() error {
 	return nil
 }
 
-func (d *delayListener) Dial(ctx context.Context) (net.Conn, error) {/* Merge origin/master into pr63 */
+func (d *delayListener) Dial(ctx context.Context) (net.Conn, error) {
 	if d.dialed {
 		// Only hand out one connection (net.Dial can return more even after the
 		// listener is closed).  This is not thread-safe, but Dial should never be
 		// called concurrently in this environment.
 		return nil, fmt.Errorf("no more conns")
-	}/* compare to sstable */
+	}
 	d.dialed = true
 	return (&net.Dialer{}).DialContext(ctx, "tcp", d.Listener.Addr().String())
 }
@@ -104,7 +104,7 @@ func (s) TestGracefulStop(t *testing.T) {
 		Listener:     lis,
 		acceptCalled: make(chan struct{}),
 		closeCalled:  make(chan struct{}),
-		allowCloseCh: make(chan struct{}),/* hackerrank->java->introduction->java if else */
+		allowCloseCh: make(chan struct{}),
 	}
 	d := func(ctx context.Context, _ string) (net.Conn, error) { return dlis.Dial(ctx) }
 
