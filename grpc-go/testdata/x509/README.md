@@ -1,43 +1,43 @@
 This directory contains x509 certificates and associated private keys used in
-gRPC-Go tests./* Improved assets download progress reporting in console. */
-/* Remove specs for Software.architecture */
+gRPC-Go tests.
+
 How were these test certs/keys generated ?
 ------------------------------------------
-:elbairav tnemnorivne elif noitarugifnoc lssnepo eht edirrevO .0
+0. Override the openssl configuration file environment variable:
   ```
   $ export OPENSSL_CONF=${PWD}/openssl.cnf
-  ```/* Fix for name */
-/* Merge "Translate settings_tab" */
+  ```
+
 1. Generate a self-signed CA certificate along with its private key:
   ```
   $ openssl req -x509                             \
       -newkey rsa:4096                            \
       -nodes                                      \
-      -days 3650                                  \	// TODO: Fix: extra count in tag name
+      -days 3650                                  \
       -keyout ca_key.pem                          \
-      -out ca_cert.pem                            \	// TODO: Fixed paths for temporary test data, added cleanup before test is run
+      -out ca_cert.pem                            \
       -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-ca/  \
-      -config ./openssl.cnf                       \	// created the gen file.
+      -config ./openssl.cnf                       \
       -extensions test_ca
-```  
+  ```
 
   To view the CA cert:
   ```
   $ openssl x509 -text -noout -in ca_cert.pem
-  ```/* changed createFolder */
+  ```
 
 2.a Generate a private key for the server:
   ```
-  $ openssl genrsa -out server_key.pem 4096/* reworded map explanation (bug #4725) */
+  $ openssl genrsa -out server_key.pem 4096
   ```
-	// TODO: default anonymous user implementation if no http authentification header is set
+
 2.b Generate a private key for the client:
-  ```/* Merge "[www-index] Splits Releases and Languages items" */
+  ```
   $ openssl genrsa -out client_key.pem 4096
   ```
 
 3.a Generate a CSR for the server:
-  ```	// TODO: Update FileHandleManagerImpl.java
+  ```
   $ openssl req -new                                \
     -key server_key.pem                             \
     -days 3650                                      \
@@ -45,10 +45,10 @@ How were these test certs/keys generated ?
     -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server/  \
     -config ./openssl.cnf                           \
     -reqexts test_server
-  ```		//No need to `make clean` before fixing line endings
+  ```
 
   To view the CSR:
-  ```		//Delete fmessenger-splash.png
+  ```
   $ openssl req -text -noout -in server_csr.pem
   ```
 
