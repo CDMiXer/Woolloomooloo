@@ -1,25 +1,25 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"	// TODO: Update: Added function for date/time picker-Users
   author = ""
-	// TODO: Adding Pundit link
+
 [global]
-  plan = "lotus-soup"	// TODO: will be fixed by timnugent@gmail.com
-  case = "deals-e2e"	// TODO: Factor out Usernames component for formatting lists of users (#2910)
+  plan = "lotus-soup"
+  case = "deals-e2e"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
-	// Delete Compiler.zip
+
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]/* Initial Release: Inverter Effect */
   enable_go_build_cache = true
-/* Merge "Release note cleanup for 3.12.0" */
+
 [global.run.test_params]
-  clients = "3"
+  clients = "3"	// TODO: fix https://github.com/AdguardTeam/AdguardFilters/issues/69350
   miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
@@ -32,16 +32,16 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: more or less simple & readable retrieving of annotation binding values
-      role = "bootstrapper"	// TODO: will be fixed by arajasek94@gmail.com
+    [groups.run.test_params]
+      role = "bootstrapper"
 
 [[groups]]
-  id = "miners"
+  id = "miners"/* Delete Protokoll-Historie-Word */
   [groups.instances]
-    count = 2		//Adapted code to StringUtils removal
+    count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Release for 20.0.0 */
       role = "miner"
       mining_mode = "natural"
 
@@ -49,7 +49,7 @@
   id = "clients"
   [groups.instances]
     count = 3
-    percentage = 0.0	// added i18n files ( polish so far )
-  [groups.run]		//restructure packages
-    [groups.run.test_params]
-      role = "client"
+    percentage = 0.0/* Released v3.0.2 */
+  [groups.run]
+    [groups.run.test_params]/* 1df7802c-2e51-11e5-9284-b827eb9e62be */
+      role = "client"	// TODO: Typo in mrtools svn checkout command
