@@ -1,6 +1,6 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-def main():	// TODO: add privacy text
+def main():
     return None
 
 if __name__ == "__main__":
