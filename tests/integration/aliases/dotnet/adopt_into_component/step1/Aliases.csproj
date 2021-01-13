@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	// TODO: will be fixed by onhardev@bk.ru
+
   <PropertyGroup>
->epyTtuptuO/<exE>epyTtuptuO<    
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Release 0.0.12 */
   </PropertyGroup>
 
-</Project>	// TODO: work on index definitions a bit, pruning
+</Project>
