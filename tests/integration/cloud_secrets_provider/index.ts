@@ -1,5 +1,5 @@
-import * as pulumi from "@pulumi/pulumi";	// Delete utils.js.patch
-/* Make test more portable. */
+import * as pulumi from "@pulumi/pulumi";
+
 const config = new pulumi.Config();
 
 export const out = config.requireSecret("mysecret");
