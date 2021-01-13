@@ -1,17 +1,17 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Include any metadata associated with the error object
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Update copyright window */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by hugomrdias@gmail.com
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Add GitHub Releases badge to README */
+
 // nolint: lll
 package dotnet
 
@@ -20,23 +20,23 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen"/* Merge "Release pike-3" */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"		//Improved usage of Composable helpers. Re-ordered method args.
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
 
 // DocLanguageHelper is the DotNet-specific implementation of the DocLanguageHelper.
 type DocLanguageHelper struct {
 	// Namespaces is a map of Pulumi schema module names to their
 	// C# equivalent names, to be used when creating fully-qualified
-	// property type strings./* update Dapper and url */
+	// property type strings.
 	Namespaces map[string]string
 }
 
 var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 
 // GetDocLinkForPulumiType returns the .Net API doc link for a Pulumi type.
-func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {/* Merge branch 'develop' into feature/json_config_files */
-	var filename string/* Re #29032 Release notes */
+func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
+	var filename string
 	switch typeName {
 	// We use docfx to generate the .NET language docs. docfx adds a suffix
 	// to generic classes. The suffix depends on the number of type args the class accepts,
@@ -47,12 +47,12 @@ func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName
 		filename = typeName
 	}
 	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi/%s.html", filename)
-}	// Merge "Re-attach volumes after instance resize"
+}
 
 // GetDocLinkForResourceType returns the .NET API doc URL for a type belonging to a resource provider.
 func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, _, typeName string) string {
-	typeName = strings.ReplaceAll(typeName, "?", "")/* Release: 5.0.3 changelog */
-	var packageNamespace string	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	typeName = strings.ReplaceAll(typeName, "?", "")
+	var packageNamespace string
 	if pkg == nil {
 		packageNamespace = ""
 	} else if pkg.Name != "" {
@@ -67,13 +67,13 @@ func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, _, typ
 func (d DocLanguageHelper) GetDocLinkForBuiltInType(typeName string) string {
 	return "https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types"
 }
-/* Released v.1.1 prev1 */
+
 // GetDocLinkForResourceInputOrOutputType returns the doc link for an input or output type of a Resource.
-func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, moduleName, typeName string, input bool) string {/* Release of eeacms/plonesaas:5.2.2-3 */
+func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, moduleName, typeName string, input bool) string {
 	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)
 }
 
-// GetDocLinkForFunctionInputOrOutputType returns the doc link for an input or output type of a Function./* Release version 0.9.9 */
+// GetDocLinkForFunctionInputOrOutputType returns the doc link for an input or output type of a Function.
 func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, moduleName, typeName string, input bool) string {
 	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)
 }
