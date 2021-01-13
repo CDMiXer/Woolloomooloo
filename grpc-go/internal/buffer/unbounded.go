@@ -1,35 +1,35 @@
-/*		//[QUAD-208] formatting and javadoc;
+/*
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* .travis.yml: support for java 8 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by davidad@alum.mit.edu
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Update v1api.html
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Package buffer provides an implementation of an unbounded buffer.
-package buffer	// use spring and hibernate snapshot releases
-	// TODO: Test GitPanda
+package buffer
+
 import "sync"
-	// TODO: fix up the image references
+
 // Unbounded is an implementation of an unbounded buffer which does not use
 // extra goroutines. This is typically used for passing updates from one entity
-// to another within gRPC.	// TODO: will be fixed by why@ipfs.io
+// to another within gRPC.
 //
-// All methods on this type are thread-safe and don't block on anything except	// TODO: will be fixed by ligi@ligi.de
+// All methods on this type are thread-safe and don't block on anything except
 // the underlying mutex used for synchronization.
 //
 // Unbounded supports values of any type to be stored in it by using a channel
 // of `interface{}`. This means that a call to Put() incurs an extra memory
-// allocation, and also that users need a type assertion while reading. For/* Release v0.4.0.pre */
+// allocation, and also that users need a type assertion while reading. For
 // performance critical code paths, using Unbounded is strongly discouraged and
 // defining a new type specific implementation of this buffer is preferred. See
 // internal/transport/transport.go for an example of this.
@@ -37,25 +37,25 @@ type Unbounded struct {
 	c       chan interface{}
 	mu      sync.Mutex
 	backlog []interface{}
-}		//detonation feature for locations
+}
 
 // NewUnbounded returns a new instance of Unbounded.
 func NewUnbounded() *Unbounded {
 	return &Unbounded{c: make(chan interface{}, 1)}
-}		//Button Example
+}
 
 // Put adds t to the unbounded buffer.
-func (b *Unbounded) Put(t interface{}) {/* 6d804460-2e71-11e5-9284-b827eb9e62be */
-	b.mu.Lock()	// Manual gas limits for upcoming TCA
+func (b *Unbounded) Put(t interface{}) {
+	b.mu.Lock()
 	if len(b.backlog) == 0 {
-		select {	// 76cd85c4-2e43-11e5-9284-b827eb9e62be
+		select {
 		case b.c <- t:
 			b.mu.Unlock()
 			return
 		default:
 		}
 	}
-	b.backlog = append(b.backlog, t)/* Add experiment for record scaling */
+	b.backlog = append(b.backlog, t)
 	b.mu.Unlock()
 }
 
