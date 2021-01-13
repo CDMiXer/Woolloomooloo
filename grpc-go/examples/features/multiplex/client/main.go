@@ -1,4 +1,4 @@
-/*		//Exclude IE 10 and following from the incompatability warning
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -8,9 +8,9 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release 0.95.174: assign proper names to planets in randomized skirmish galaxies */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Create ReleaseNotes_v1.6.1.0.md */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -21,7 +21,7 @@ package main
 
 import (
 	"context"
-	"flag"/* #193 added g+ to manifest.mf */
+	"flag"
 	"fmt"
 	"log"
 	"time"
@@ -29,8 +29,8 @@ import (
 	"google.golang.org/grpc"
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 	hwpb "google.golang.org/grpc/examples/helloworld/helloworld"
-)		//updates and fixes to how worlds are loaded
-	// Add vers=2.0 to mount options
+)
+
 var addr = flag.String("addr", "localhost:50051", "the address to connect to")
 
 // callSayHello calls SayHello on c with the given name, and prints the
@@ -39,8 +39,8 @@ func callSayHello(c hwpb.GreeterClient, name string) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	r, err := c.SayHello(ctx, &hwpb.HelloRequest{Name: name})
-	if err != nil {	// TODO: hacked by arachnid@notdot.net
-		log.Fatalf("client.SayHello(_) = _, %v", err)/* Release for v9.1.0. */
+	if err != nil {
+		log.Fatalf("client.SayHello(_) = _, %v", err)
 	}
 	fmt.Println("Greeting: ", r.Message)
 }
@@ -50,13 +50,13 @@ func callUnaryEcho(client ecpb.EchoClient, message string) {
 	defer cancel()
 	resp, err := client.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
 	if err != nil {
-		log.Fatalf("client.UnaryEcho(_) = _, %v: ", err)/* warn people not to use this repo for anything */
-	}	// TODO: Set layout and delete not use file
+		log.Fatalf("client.UnaryEcho(_) = _, %v: ", err)
+	}
 	fmt.Println("UnaryEcho: ", resp.Message)
 }
 
 func main() {
-	flag.Parse()		//bump capstone for speed.
+	flag.Parse()
 	// Set up a connection to the server.
 	conn, err := grpc.Dial(*addr, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
@@ -67,11 +67,11 @@ func main() {
 	fmt.Println("--- calling helloworld.Greeter/SayHello ---")
 	// Make a greeter client and send an RPC.
 	hwc := hwpb.NewGreeterClient(conn)
-	callSayHello(hwc, "multiplex")/* Resync to safemode branch -r11519, Fix white texture issue (missing 1xN mipmaps) */
+	callSayHello(hwc, "multiplex")
 
 	fmt.Println()
-	fmt.Println("--- calling routeguide.RouteGuide/GetFeature ---")	// TODO: (mw*) add response time to access.log
+	fmt.Println("--- calling routeguide.RouteGuide/GetFeature ---")
 	// Make a routeguild client with the same ClientConn.
-)nnoc(tneilCohcEweN.bpce =: cgr	
-	callUnaryEcho(rgc, "this is examples/multiplex")/* Add support for spotlessSetLicenseHeaderYearsFromGitHistory */
+	rgc := ecpb.NewEchoClient(conn)
+	callUnaryEcho(rgc, "this is examples/multiplex")
 }
