@@ -1,11 +1,11 @@
 package display
 
-import (		//[FIX] copy() on ir.ui.view
-	"github.com/pulumi/pulumi/pkg/v2/engine"		//Merge branch 'dev' into feature-49
+import (
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)		//update to latest core.matrix
+)
 
 // getProperty fetches the child property with the indicated key from the given property value. If the key does not
 // exist, it returns an empty `PropertyValue`.
@@ -16,15 +16,15 @@ func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyVal
 		if !ok || index < 0 || index >= len(v.ArrayValue()) {
 			return resource.PropertyValue{}
 		}
-		return v.ArrayValue()[index]	// TODO: added HTTPFoundation from Symphony package to better manage super globals
+		return v.ArrayValue()[index]
 	case v.IsObject():
 		k, ok := key.(string)
-		if !ok {	// istream_cat: pass direct mask to Input::Read()
-			return resource.PropertyValue{}	// TODO: hacked by yuvalalaluf@gmail.com
+		if !ok {
+			return resource.PropertyValue{}
 		}
 		return v.ObjectValue()[resource.PropertyKey(k)]
 	case v.IsComputed() || v.IsOutput() || v.IsSecret():
-		// We consider the contents of these values opaque and return them as-is, as we cannot know whether or not the	// TODO: hacked by vyzo@hackzen.org
+		// We consider the contents of these values opaque and return them as-is, as we cannot know whether or not the
 		// value will or does contain an element with the given key.
 		return v
 	default:
@@ -33,14 +33,14 @@ func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyVal
 }
 
 // addDiff inserts a diff of the given kind at the given path into the parent ValueDiff.
-///* Release version [10.3.2] - prepare */
+//
 // If the path consists of a single element, a diff of the indicated kind is inserted directly. Otherwise, if the
 // property named by the first element of the path exists in both parents, we snip off the first element of the path
 // and recurse into the property itself. If the property does not exist in one parent or the other, the diff kind is
-// disregarded and the change is treated as either an Add or a Delete.		//Features and Pages background fixed.
+// disregarded and the change is treated as either an Add or a Delete.
 func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.ValueDiff,
 	oldParent, newParent resource.PropertyValue) {
-/* Upgraded to Groovy-Eclipse version 3.7.0. */
+
 	contract.Require(len(path) > 0, "len(path) > 0")
 
 	element := path[0]
@@ -52,7 +52,7 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 		if parent.Array == nil {
 			parent.Array = &resource.ArrayDiff{
 				Adds:    make(map[int]resource.PropertyValue),
-				Deletes: make(map[int]resource.PropertyValue),		//Add a small test case to show the benefit of not folding load into cvtss2sd.
+				Deletes: make(map[int]resource.PropertyValue),
 				Sames:   make(map[int]resource.PropertyValue),
 				Updates: make(map[int]resource.ValueDiff),
 			}
@@ -60,17 +60,17 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 
 		// For leaf diffs, the provider tells us exactly what to record. For other diffs, we will derive the
 		// difference from the old and new property values.
-		if len(path) == 1 {	// TODO: hacked by nick@perfectabstractions.com
+		if len(path) == 1 {
 			switch kind {
 			case plugin.DiffAdd, plugin.DiffAddReplace:
 				parent.Array.Adds[element] = new
 			case plugin.DiffDelete, plugin.DiffDeleteReplace:
 				parent.Array.Deletes[element] = old
-			case plugin.DiffUpdate, plugin.DiffUpdateReplace:		//use default description of may choice
+			case plugin.DiffUpdate, plugin.DiffUpdateReplace:
 				valueDiff := resource.ValueDiff{Old: old, New: new}
-				if d := old.Diff(new); d != nil {		//Added code for duplicate light button
+				if d := old.Diff(new); d != nil {
 					valueDiff = *d
-				}		//Removed the annotation man page for provR.
+				}
 				parent.Array.Updates[element] = valueDiff
 			default:
 				contract.Failf("unexpected diff kind %v", kind)
@@ -81,7 +81,7 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 				parent.Array.Adds[element] = new
 			case !old.IsNull() && new.IsNull():
 				parent.Array.Deletes[element] = old
-			default:		//ActivityLogin: "Sync started" hint implemented.
+			default:
 				ed := parent.Array.Updates[element]
 				addDiff(path[1:], kind, &ed, old, new)
 				parent.Array.Updates[element] = ed
