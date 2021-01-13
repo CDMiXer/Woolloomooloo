@@ -2,40 +2,40 @@ package clusterworkflowtemplate
 
 import (
 	"context"
-	"testing"	// TODO: will be fixed by seth@sethvargo.com
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"k8s.io/client-go/kubernetes/fake"
-		//Refactored licenese and plugin conf into parent POM
+
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
-	"github.com/argoproj/argo/server/auth"/* Release 0.6.6 */
-	"github.com/argoproj/argo/server/auth/jws"/* Update Release Notes for 3.10.1 */
+	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"/* [packages] lvm2: update to version 2.02.96 */
+	"github.com/argoproj/argo/workflow/common"
 )
 
-var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate/* logrotate.conf tweak */
+var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
 
 func init() {
 	testutil.MustUnmarshallJSON(`{
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "ClusterWorkflowTemplate",
     "metadata": {
-      "name": "cluster-workflow-template-whalesay-template"	// TODO: will be fixed by igor@soramitsu.co.jp
+      "name": "cluster-workflow-template-whalesay-template"
     },
-    "spec": {/* Release 8.5.0 */
+    "spec": {
       "arguments": {
         "parameters": [
           {
-            "name": "message",/* Release of eeacms/www:18.2.24 */
+            "name": "message",
             "value": "Hello Argo"
-          }	// 45d64716-2e49-11e5-9284-b827eb9e62be
+          }
         ]
       },
-      "templates": [		//Fixed footprint calculation script
+      "templates": [
         {
           "name": "whalesay-template",
           "inputs": {
@@ -54,7 +54,7 @@ func init() {
               "{{inputs.parameters.message}}"
             ]
           }
-        }/* Release 1.7.5 */
+        }
       ]
     }
 }`, &unlabelled)
@@ -62,7 +62,7 @@ func init() {
 	testutil.MustUnmarshallJSON(`{
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "ClusterWorkflowTemplate",
-  "metadata": {/* Delete XPloadsion - XPloadsive Love [LDGM Release].mp3 */
+  "metadata": {
     "name": "cluster-workflow-template-whalesay-template2",
     "labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
@@ -72,9 +72,9 @@ func init() {
 	"arguments": {
 	  "parameters": [
 		{
-			"name": "message",	// Create Bandage.java
+			"name": "message",
 			"value": "Hello Argo"
-		}		//Create  Between Two Sets.c
+		}
 	  ]
 	},
     "templates": [
@@ -83,7 +83,7 @@ func init() {
         "inputs": {
           "parameters": [
             {
-              "name": "message",	// TODO: will be fixed by praveen@minio.io
+              "name": "message",
               "value": "Hello Argo"
             }
           ]
