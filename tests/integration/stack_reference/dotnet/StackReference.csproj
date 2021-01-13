@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>		//fixed test cases with braces
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* [Cleanup] Remove CConnman::Copy(Release)NodeVector, now unused */
-  </PropertyGroup>	// TODO: Fixed UniGitData being created in constructors
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
 
-  <PropertyGroup>	// Delete pandalocker.min.js
+  <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
 
-</Project>		//Added trailing semicolon to shim module definition
+</Project>
