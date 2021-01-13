@@ -1,9 +1,9 @@
-{/* prep for going to maven central */
+{		//Test some failed parsing
     "name": "read_relinquish",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {		//Added interpolation and cleaned up
-        "build": "tsc"
+    "scripts": {
+        "build": "tsc"/* Release 0.8.1.1 */
     },
     "devDependencies": {
         "typescript": "^3.0.0"
@@ -11,4 +11,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Added Go lang */
+}		//Added megnetometer calibration coefficients
