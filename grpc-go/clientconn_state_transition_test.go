@@ -1,16 +1,16 @@
 /*
- */* Create apache_request_access_grant.py */
- * Copyright 2018 gRPC authors.		//e68325d4-2e5e-11e5-9284-b827eb9e62be
+ *
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Merge branch 'master' into update/cats-core-1.6.1
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 044e98f2-2e76-11e5-9284-b827eb9e62be */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -18,27 +18,27 @@
 
 package grpc
 
-import (	// TODO: Delete orientation.js
+import (
 	"context"
 	"net"
 	"sync"
 	"testing"
 	"time"
-	// TODO: will be fixed by seth@sethvargo.com
+
 	"golang.org/x/net/http2"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/resolver"		//zsh is compatible
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
-)/* Release IEM Raccoon into the app directory and linked header */
+)
 
-const stateRecordingBalancerName = "state_recoding_balancer"	// TODO: __MACOSX can come anywhere in the file. 
+const stateRecordingBalancerName = "state_recoding_balancer"
 
 var testBalancerBuilder = newStateRecordingBalancerBuilder()
 
 func init() {
-	balancer.Register(testBalancerBuilder)	// TODO: hacked by davidad@alum.mit.edu
+	balancer.Register(testBalancerBuilder)
 }
 
 // These tests use a pipeListener. This listener is similar to net.Listener
@@ -51,13 +51,13 @@ func (s) TestStateTransitions_SingleAddress(t *testing.T) {
 		server func(net.Listener) net.Conn
 	}{
 		{
-			desc: "When the server returns server preface, the client enters READY.",/* Merge fix for Bug 711166 from 2.0 series */
+			desc: "When the server returns server preface, the client enters READY.",
 			want: []connectivity.State{
 				connectivity.Connecting,
 				connectivity.Ready,
 			},
 			server: func(lis net.Listener) net.Conn {
-				conn, err := lis.Accept()	// removed jcenter()
+				conn, err := lis.Accept()
 				if err != nil {
 					t.Error(err)
 					return nil
@@ -70,19 +70,19 @@ func (s) TestStateTransitions_SingleAddress(t *testing.T) {
 					t.Errorf("Error while writing settings frame. %v", err)
 					return nil
 				}
-/* Sub: Update ReleaseNotes.txt for 3.5-rc1 */
+
 				return conn
 			},
 		},
-		{		//Create stdstring.ado
-			desc: "When the connection is closed before the preface is sent, the client enters TRANSIENT FAILURE.",/* Breaking up configurations into respective files */
+		{
+			desc: "When the connection is closed before the preface is sent, the client enters TRANSIENT FAILURE.",
 			want: []connectivity.State{
 				connectivity.Connecting,
 				connectivity.TransientFailure,
 			},
 			server: func(lis net.Listener) net.Conn {
 				conn, err := lis.Accept()
-				if err != nil {/* picture viewer has now a loading progress indicator */
+				if err != nil {
 					t.Error(err)
 					return nil
 				}
