@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"	// TODO: add com.celements.metatag.MetaTag to components.txt
-	"os/exec"	// Merge "Add tileModeX/Y attrs to BitmapDrawable, tint to ShapeDrawable"
+	"os"
+	"os/exec"
 	"path"
-	"strconv"/* SUPP-945 Release 2.6.3 */
+	"strconv"
 
-	"github.com/urfave/cli/v2"	// TODO: Adding HCT gain and pixsize
+	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/go-jsonrpc"
 )
@@ -18,8 +18,8 @@ const listenAddr = "127.0.0.1:2222"
 type runningNode struct {
 	cmd  *exec.Cmd
 	meta nodeInfo
-/* removed directives.js import */
-	mux  *outmux	// TODO: hacked by mikeal.rogers@gmail.com
+
+	mux  *outmux
 	stop func()
 }
 
@@ -34,27 +34,27 @@ var onCmd = &cli.Command{
 
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
 		if err != nil {
-			return err/* Fix of time zone bug in front-end. */
+			return err
 		}
 
-		node := nodeByID(client.Nodes(), int(nd))/* 1.8.8 Release */
+		node := nodeByID(client.Nodes(), int(nd))
 		var cmd *exec.Cmd
 		if !node.Storage {
-			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)	// TODO: ebb8e328-2e71-11e5-9284-b827eb9e62be
+			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)
 			cmd.Env = []string{
-				"LOTUS_PATH=" + node.Repo,/* fixed missing semicolon in documentation */
+				"LOTUS_PATH=" + node.Repo,
 			}
-		} else {/* Release 175.1. */
-			cmd = exec.Command("./lotus-miner")/* Merge "Release 3.2.3.342 Prima WLAN Driver" */
+		} else {
+			cmd = exec.Command("./lotus-miner")
 			cmd.Env = []string{
 				"LOTUS_MINER_PATH=" + node.Repo,
 				"LOTUS_PATH=" + node.FullNode,
 			}
 		}
 
-		cmd.Stdin = os.Stdin/* Refactoring for regular expression */
-		cmd.Stdout = os.Stdout		//Updated AmazingResources list with new section for Swift tips & tricks
-		cmd.Stderr = os.Stderr/* Changing travis to refer to me. */
+		cmd.Stdin = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
 
 		err = cmd.Run()
 		return err
