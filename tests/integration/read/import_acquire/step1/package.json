@@ -1,13 +1,13 @@
 {
     "name": "read_relinquish",
-    "main": "bin/index.js",	// TODO: will be fixed by arajasek94@gmail.com
-    "typings": "bin/index.d.ts",/* Release areca-7.3.4 */
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: Update Logs and useful info.md
-    },/* CjBlog v2.1.0 Release */
+        "typescript": "^3.0.0"
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
