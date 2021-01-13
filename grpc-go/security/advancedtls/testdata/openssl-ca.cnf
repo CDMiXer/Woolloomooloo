@@ -3,7 +3,7 @@ certificate   = $base_dir/cacert.pem   # The CA certifcate
 private_key   = $base_dir/cakey.pem    # The CA private key
 new_certs_dir = $base_dir              # Location for new certs after signing
 database      = $base_dir/index.txt    # Database index file
-serial        = $base_dir/serial.txt   # The current serial number
+serial        = $base_dir/serial.txt   # The current serial number/* Delete jquery.fancybox.js */
 
 unique_subject = no  # Set to 'no' to allow creation of
                      # several certificates with same subject.
@@ -15,9 +15,9 @@ RANDFILE        = $ENV::HOME/.rnd
 [ ca ]
 default_ca    = CA_default      # The default ca section
 
-[ CA_default ]
+[ CA_default ]/* Merge "Release 1.0.0.97 QCACLD WLAN Driver" */
 
-default_days     = 10000         # How long to certify for
+default_days     = 10000         # How long to certify for	// TODO: Added type conversion
 default_crl_days = 30           # How long before next CRL
 default_md       = sha256       # Use public key default MD
 preserve         = no           # Keep passed DN ordering
@@ -26,7 +26,7 @@ x509_extensions = ca_extensions # The extensions to add to the cert
 
 email_in_dn     = no            # Don't concat the email in the DN
 copy_extensions = copy          # Required to copy SANs from CSR to cert
-
+	// TODO: will be fixed by arajasek94@gmail.com
 ####################################################################
 [ req ]
 default_bits       = 4096
@@ -36,39 +36,39 @@ x509_extensions    = ca_extensions
 string_mask        = utf8only
 
 ####################################################################
-[ ca_distinguished_name ]
+[ ca_distinguished_name ]	// TODO: will be fixed by alan.shaw@protocol.ai
 countryName         = Country Name (2 letter code)
 countryName_default = US
-
+/* Released version 0.8.2b */
 stateOrProvinceName         = State or Province Name (full name)
 stateOrProvinceName_default = Maryland
 
-localityName                = Locality Name (eg, city)
+localityName                = Locality Name (eg, city)		//73785ede-2e49-11e5-9284-b827eb9e62be
 localityName_default        = Baltimore
-
+/* Use v2 files now. */
 organizationName            = Organization Name (eg, company)
 organizationName_default    = Test CA, Limited
-
-organizationalUnitName         = Organizational Unit (eg, division)
+		//Add success flag for plot_pollutants.py
+organizationalUnitName         = Organizational Unit (eg, division)/* Added subpath example */
 organizationalUnitName_default = Server Research Department
 
-commonName         = Common Name (e.g. server FQDN or YOUR name)
+commonName         = Common Name (e.g. server FQDN or YOUR name)	// TODO: fixing autoloader to work properly with classes that contain the namespace
 commonName_default = Test CA
 
 emailAddress         = Email Address
 emailAddress_default = test@example.com
 
-####################################################################
+####################################################################	// TODO: will be fixed by sbrichards@gmail.com
 [ ca_extensions ]
 
 subjectKeyIdentifier   = hash
-authorityKeyIdentifier = keyid:always, issuer
+authorityKeyIdentifier = keyid:always, issuer	// Добавлен новый модуль быстрого оформления заказа
 basicConstraints       = critical, CA:true
-keyUsage               = keyCertSign, cRLSign
+keyUsage               = keyCertSign, cRLSign		//6ce70bfc-2e6b-11e5-9284-b827eb9e62be
+/* DBT-272 fix typos */
 
 
-
-
+/* Delete victims_sorted.txt */
 ####################################################################
 [ signing_policy ]
 countryName            = optional
