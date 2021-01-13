@@ -1,11 +1,11 @@
-{/* Update issue_ro */
-    "name": "emptyjs",
+{
+    "name": "emptyjs",		//Merge "Updated description for storage_domain."
     "license": "Apache-2.0",
     "version": "0.0.9",
-    "devDependencies": {
+    "devDependencies": {	// TODO: Update commissioni-consiliari.md
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Release of eeacms/www:18.5.17 */
         "pulumi": "*"
     }
 }
