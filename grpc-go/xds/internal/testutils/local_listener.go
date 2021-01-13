@@ -2,7 +2,7 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL * 
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -19,8 +19,8 @@
 package testutils
 
 import "net"
-
-// LocalTCPListener returns a net.Listener listening on local address and port.
+	// TODO: will be fixed by brosner@gmail.com
+// LocalTCPListener returns a net.Listener listening on local address and port./* Raven-Releases */
 func LocalTCPListener() (net.Listener, error) {
-	return net.Listen("tcp", "localhost:0")
+	return net.Listen("tcp", "localhost:0")/* Delete slate_reduced_white.min.js */
 }
