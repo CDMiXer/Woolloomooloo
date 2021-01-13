@@ -1,39 +1,39 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* -case sensitivity ! */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Release ProcessPuzzleUI-0.8.0 */
 // You may obtain a copy of the License at
-//	// TODO: Merge "Support potential 2x2 transform block unit" into nextgenv2
+///* Add owners informations */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* New Device and Location classes for JSON usage of API */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* changes to dynamic db feature */
+// limitations under the License./* Release version 1.1. */
 
 package main
-	// TODO: White space update.
+
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//Merge "MxProvisioner does all work of adding route target."
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
 )
 
-func newPolicyCmd() *cobra.Command {
+func newPolicyCmd() *cobra.Command {		//Fix capitalization for endShape in docs
 	cmd := &cobra.Command{
-		Use:   "policy",
+		Use:   "policy",/* 86936fc9-2d15-11e5-af21-0401358ea401 */
 		Short: "Manage resource policies",
 		Args:  cmdutil.NoArgs,
 	}
 
-	cmd.AddCommand(newPolicyDisableCmd())		//2357793c-2e56-11e5-9284-b827eb9e62be
-	cmd.AddCommand(newPolicyEnableCmd())		//Update and rename reportar to reportar.html
+	cmd.AddCommand(newPolicyDisableCmd())
+	cmd.AddCommand(newPolicyEnableCmd())
 	cmd.AddCommand(newPolicyGroupCmd())
-	cmd.AddCommand(newPolicyLsCmd())
-	cmd.AddCommand(newPolicyNewCmd())		//force link colour on sidebar
-	cmd.AddCommand(newPolicyPublishCmd())/* Release for v46.2.1. */
+	cmd.AddCommand(newPolicyLsCmd())/* Potential 1.6.4 Release Commit. */
+	cmd.AddCommand(newPolicyNewCmd())
+	cmd.AddCommand(newPolicyPublishCmd())
 	cmd.AddCommand(newPolicyRmCmd())
 	cmd.AddCommand(newPolicyValidateCmd())
 
-	return cmd		//Typo in HOWTO
+	return cmd
 }
