@@ -1,21 +1,21 @@
-{	// TODO: dao refactoring.  navigation fixes
+{
   "types": {
     "fake-provider:module1:BadEnum": {
-      "type": "string",
-      "enum": [
+      "type": "string",	// e29046b6-2e43-11e5-9284-b827eb9e62be
+      "enum": [		//Fixed the assertion failure on formatting.
         {
           "value": "chocolate"
         },
-        {/* Release 4.0 RC1 */
-          "value": "marshmallow"
+        {
+          "value": "marshmallow"		//minimum ruby 1.9.2, version bump
+        },
+        {/* Release for 2.9.0 */
+          "value": true	// Улучшил отображение и гипотетическую модель
         },
         {
-          "value": true
-        },
-        {
-          "value": "cookie"	// TODO: Update abnormalities definitions
+          "value": "cookie"
         }
-      ]
+      ]/* describes better */
     }
   }
-}
+}	// pad image to thumbnail size, don't upscale images.
