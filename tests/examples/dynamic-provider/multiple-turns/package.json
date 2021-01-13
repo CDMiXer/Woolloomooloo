@@ -1,15 +1,15 @@
-{		//Set width and minimal for Mobile Safari
+{
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"
-    },/* [artifactory-release] Release version 3.6.0.RELEASE */
+        "typescript": "^3.0.0"	// TODO: Bump version and update CHANGELOG
+    },
     "dependencies": {
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },
+    },		//Automatic changelog generation for PR #36166 [ci skip]
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
