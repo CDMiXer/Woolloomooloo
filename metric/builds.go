@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Released csonv.js v0.1.0 (yay!) */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -24,9 +24,9 @@ func BuildCount(builds core.BuildStore) {
 		}),
 	)
 }
-	// Remove outdated iOS link from General Programming
+
 // PendingBuildCount provides metrics for pending build counts.
-func PendingBuildCount(builds core.BuildStore) {		//[tivars_lib] TH_TempEqu: better data size check
+func PendingBuildCount(builds core.BuildStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_pending_builds",
