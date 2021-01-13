@@ -1,6 +1,6 @@
-{/* Adding some enhancements to test server (#17) */
+{
     "name": "stack_project_name",
-    "license": "Apache-2.0",	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
@@ -9,7 +9,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Rename css/font-awesome.css to font-awesome.css */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
