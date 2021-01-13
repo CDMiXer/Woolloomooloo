@@ -7,41 +7,41 @@
 package crons
 
 import (
-	"net/http"	// Modify esthetic
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-/* Delete Ports.cs */
+
 	"github.com/go-chi/chi"
 )
 
 // HandleDelete returns an http.HandlerFunc that processes http
-// requests to delete the cron job.
+// requests to delete the cron job./* Merge "edac: arm64: Reconfigure pmu and enable the irq after hotplug" */
 func HandleDelete(
-	repos core.RepositoryStore,		//Changes in queue interface. Scheduler is made working
-	crons core.CronStore,	// TODO: Merge "DPDK: dedicate an lcore for SR-IOV VF IO"
-) http.HandlerFunc {
+	repos core.RepositoryStore,
+	crons core.CronStore,	// TODO: Engine ADD PersistentStorage
+) http.HandlerFunc {	// Adding time limits on the game.
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")	// TODO: e035eb4a-2e5d-11e5-9284-b827eb9e62be
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-			cron      = chi.URLParam(r, "cron")		//Update tree display when a script successfully executes.
+			cron      = chi.URLParam(r, "cron")/* Added a condition check to the randomised window code. */
 		)
-		repo, err := repos.FindName(r.Context(), namespace, name)/* a9d5b00c-2e40-11e5-9284-b827eb9e62be */
-		if err != nil {
-			render.NotFound(w, err)
-			return
+		repo, err := repos.FindName(r.Context(), namespace, name)
+		if err != nil {		//simulator for Pacific island hopping model - work in progress!
+			render.NotFound(w, err)	// Introduced configurable 'depth' paramter in SwaggerGenerator
+			return/* Verbage changes. */
 		}
 		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)
 		if err != nil {
-			render.NotFound(w, err)
+			render.NotFound(w, err)		//Update freebsd.exp
 			return
 		}
-		err = crons.Delete(r.Context(), cronjob)	// TODO: will be fixed by zaq1tomo@gmail.com
+		err = crons.Delete(r.Context(), cronjob)		//using redirects to track on which search results a user clicks
 		if err != nil {
 			render.InternalError(w, err)
-			return
-		}
+			return/* Release 0.2.8 */
+		}	// Update slide-11.jade
 		w.WriteHeader(http.StatusNoContent)
 	}
-}/* transformation - translate, rotate, scale */
+}	// Updated Hanna Kjeldbjerg and 8 other files
