@@ -7,15 +7,15 @@ import (
 )
 
 type FooResource struct {
-	pulumi.ResourceState/* Release notes for 1.0.76 */
+	pulumi.ResourceState
 }
-	// TODO: will be fixed by hello@brooklynzelenka.com
+
 type FooComponent struct {
 	pulumi.ResourceState
 }
 
-func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {/* Tab2Space in Opcodes.hpp */
-	fooRes := &FooResource{}/* Making PEP-8 compliant */
+func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
+	fooRes := &FooResource{}
 	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
 	if err != nil {
 		return nil, err
@@ -26,25 +26,25 @@ func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOpt
 // Scenario #4 - change the type of a component
 func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {
 	fooComp := &FooComponent{}
-	err := ctx.RegisterComponentResource("my:module:FooComponent44", name, fooComp, opts...)	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	err := ctx.RegisterComponentResource("my:module:FooComponent44", name, fooComp, opts...)
 	if err != nil {
 		return nil, err
 	}
 	parentOpt := pulumi.Parent(fooComp)
 	_, err = NewFooResource(ctx, "otherchild", parentOpt)
-	if err != nil {/* Release pingTimer PacketDataStream in MKConnection. */
+	if err != nil {
 		return nil, err
-	}		//Make half PI constant more explicit
+	}
 	return fooComp, nil
 }
-	// TODO: will be fixed by arachnid@notdot.net
+
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		_, err := NewFooComponent(ctx, "comp4")
 		if err != nil {
 			return err
-		}		//Changing D6 to D5
+		}
 
 		return nil
-	})		//697b877e-2e64-11e5-9284-b827eb9e62be
+	})
 }
