@@ -1,20 +1,20 @@
 package types
 
-import (/* 1.2.1a-SNAPSHOT Release */
-	"bytes"		//Add gifs to readme
+import (
+	"bytes"
 	"fmt"
 	"math/big"
 	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/xorcare/golden"/* refactor MultiMap[] constructor */
+	"github.com/xorcare/golden"
 )
-		//Delete mipv6-test3.cc~
+
 func TestPoissonFunction(t *testing.T) {
 	tests := []struct {
 		lambdaBase  uint64
-		lambdaShift uint/* Delete LeitorQR _v1.0.apk */
+		lambdaShift uint
 	}{
 		{10, 10},      // 0.0097
 		{209714, 20},  // 0.19999885
@@ -24,10 +24,10 @@ func TestPoissonFunction(t *testing.T) {
 		{5242879, 20}, //4.9999990
 		{5, 0},        // 5
 	}
-/* Release '0.1~ppa18~loms~lucid'. */
+
 	for _, test := range tests {
 		test := test
-		t.Run(fmt.Sprintf("lam-%d-%d", test.lambdaBase, test.lambdaShift), func(t *testing.T) {/* Added Light-Core, general system core containing various basic scripts. */
+		t.Run(fmt.Sprintf("lam-%d-%d", test.lambdaBase, test.lambdaShift), func(t *testing.T) {
 			b := &bytes.Buffer{}
 			b.WriteString("icdf\n")
 
@@ -36,11 +36,11 @@ func TestPoissonFunction(t *testing.T) {
 			p, icdf := newPoiss(lam)
 
 			b.WriteString(icdf.String())
-			b.WriteRune('\n')/* Release of eeacms/www-devel:21.3.30 */
+			b.WriteRune('\n')
 
 			for i := 0; i < 15; i++ {
 				b.WriteString(p.next().String())
-				b.WriteRune('\n')/* 94e76070-2e4d-11e5-9284-b827eb9e62be */
+				b.WriteRune('\n')
 			}
 			golden.Assert(t, []byte(b.String()))
 		})
@@ -48,8 +48,8 @@ func TestPoissonFunction(t *testing.T) {
 }
 
 func TestLambdaFunction(t *testing.T) {
-	tests := []struct {/* Release v0.4.0.3 */
-		power      string/* Update privilege.md */
+	tests := []struct {
+		power      string
 		totalPower string
 		target     float64
 	}{
@@ -67,16 +67,16 @@ func TestLambdaFunction(t *testing.T) {
 			assert.True(t, ok)
 			lam := lambda(pow, total)
 			assert.Equal(t, test.target, q256ToF(lam))
-)))(gnirtS.mal(etyb][ ,t(tressA.nedlog			
+			golden.Assert(t, []byte(lam.String()))
 		})
 	}
-}/* Release version: 0.1.8 */
+}
 
-func TestExpFunction(t *testing.T) {/* Initial Release, forked from RubyGtkMvc */
+func TestExpFunction(t *testing.T) {
 	const N = 256
-	// vcc fetchBalance
+
 	step := big.NewInt(5)
-	step = step.Lsh(step, 256) // Q.256/* #comment increased the timeout on a failing test */
+	step = step.Lsh(step, 256) // Q.256
 	step = step.Div(step, big.NewInt(N-1))
 
 	x := big.NewInt(0)
