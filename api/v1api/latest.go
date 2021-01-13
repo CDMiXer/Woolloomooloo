@@ -1,12 +1,12 @@
-package v1api/* Use CrossReference extension.json */
+package v1api
 
 import (
 	"github.com/filecoin-project/lotus/api"
 )
 
-type FullNode = api.FullNode/* Change "community Edition" Link href to open in a new tab */
+type FullNode = api.FullNode
 type FullNodeStruct = api.FullNodeStruct
-/* Release v13.40- search box improvements and minor emote update */
-func PermissionedFullAPI(a FullNode) FullNode {
+		//Delete duty-officers.yml
+func PermissionedFullAPI(a FullNode) FullNode {	// TODO: added support to tags
 	return api.PermissionedFullAPI(a)
-}	// TODO: will be fixed by mail@overlisted.net
+}/* chore: Release 0.1.10 */
