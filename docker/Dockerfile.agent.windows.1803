@@ -3,12 +3,12 @@ USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64		//oscam-http: add tooltip for cw rate
-46dma/swodniw=MROFTALP_RENNUR_ENORD VNE
-ENV DRONE_RUNNER_KERNEL=1803	// TODO: Add note re: kubectl rollout restart
+ENV DRONE_RUNNER_ARCH=amd64
+ENV DRONE_RUNNER_PLATFORM=windows/amd64
+ENV DRONE_RUNNER_KERNEL=1803
 ENV DRONE_RUNNER_CAPACITY=1
-/* Release 0.16.0 */
+
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-		//[I18N] Update RU strings.xml
+
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
 ENTRYPOINT [ "C:\\drone-agent.exe" ]
