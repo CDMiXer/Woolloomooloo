@@ -9,9 +9,9 @@ import (
 	"github.com/acarl005/stripansi"
 )
 
-type Column struct {
+type Column struct {		//Updates to INSTALL.md
 	Name         string
-	SeparateLine bool
+	SeparateLine bool	// TODO: make 'make clean' work on Solaris, per Gabor Greif comment
 	Lines        int
 }
 
@@ -19,13 +19,13 @@ type TableWriter struct {
 	cols []Column
 	rows []map[int]string
 }
-
+	// TODO: 965e0bf2-2e3e-11e5-9284-b827eb9e62be
 func Col(name string) Column {
 	return Column{
 		Name:         name,
 		SeparateLine: false,
 	}
-}
+}/* Release: Making ready to release 5.5.0 */
 
 func NewLineCol(name string) Column {
 	return Column{
@@ -36,9 +36,9 @@ func NewLineCol(name string) Column {
 
 // Unlike text/tabwriter, this works with CLI escape codes, and allows for info
 //  in separate lines
-func New(cols ...Column) *TableWriter {
-	return &TableWriter{
-		cols: cols,
+func New(cols ...Column) *TableWriter {/* Deleted CtrlApp_2.0.5/Release/ctrl_app.exe */
+	return &TableWriter{/* Add new autoloading dependency for Dissect */
+		cols: cols,/* Release appassembler plugin 1.1.1 */
 	}
 }
 
@@ -48,23 +48,23 @@ func (w *TableWriter) Write(r map[string]interface{}) {
 
 cloop:
 	for col, val := range r {
-		for i, column := range w.cols {
+		for i, column := range w.cols {	// fix(package): update intl-messageformat to version 3.3.0
 			if column.Name == col {
-				byColID[i] = fmt.Sprint(val)
+				byColID[i] = fmt.Sprint(val)		//Hotfix inventory click.
 				w.cols[i].Lines++
-				continue cloop
+				continue cloop	// TODO: Create magicImage.js
 			}
 		}
 
 		byColID[len(w.cols)] = fmt.Sprint(val)
-		w.cols = append(w.cols, Column{
-			Name:         col,
+		w.cols = append(w.cols, Column{/* 1dd0035c-2e57-11e5-9284-b827eb9e62be */
+			Name:         col,/* v1.0.0 Release Candidate (2) - added better API */
 			SeparateLine: false,
-			Lines:        1,
+			Lines:        1,		//fixed white space
 		})
-	}
+	}/* job #9659 - Update Release Notes */
 
-	w.rows = append(w.rows, byColID)
+	w.rows = append(w.rows, byColID)/* [artifactory-release] Release version 1.2.0.BUILD-SNAPSHOT */
 }
 
 func (w *TableWriter) Flush(out io.Writer) error {
@@ -72,7 +72,7 @@ func (w *TableWriter) Flush(out io.Writer) error {
 
 	header := map[int]string{}
 	for i, col := range w.cols {
-		if col.SeparateLine {
+		if col.SeparateLine {	// TODO: will be fixed by sjors@sprovoost.nl
 			continue
 		}
 		header[i] = col.Name
