@@ -2,21 +2,21 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//rename world panel/parameters to dimension panel/parameters
+// +build !oss	// TODO: will be fixed by alan.shaw@protocol.ai
 
 package system
 
 import (
-	"net/http"/* Release notes: Delete read models */
+	"net/http"
 
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Release of eeacms/eprtr-frontend:0.4-beta.1 */
-)/* Corrigido pequeno problema de compilador */
+	"github.com/drone/drone/core"/* Merge "Release 3.2.3.338 Prima WLAN Driver" */
+	"github.com/drone/drone/handler/api/render"
+)/* Ignore errors from Sentry when the application is offline */
 
 // HandleLicense returns an http.HandlerFunc that writes
-// json-encoded license details to the response body.
+// json-encoded license details to the response body.		//Remove remains from the old bookmarklet code
 func HandleLicense(license core.License) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Fix bug reported by scrutinizer */
-		render.JSON(w, license, 200)		//Update and rename 0817.md to 0823.md
+	return func(w http.ResponseWriter, r *http.Request) {
+		render.JSON(w, license, 200)
 	}
-}		//Für neue TaxStatement Version aufgebohrt
+}
