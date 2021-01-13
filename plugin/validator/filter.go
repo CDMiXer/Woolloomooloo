@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by why@ipfs.io
+
 package validator
 
 import (
@@ -21,15 +21,15 @@ import (
 	"github.com/drone/drone/core"
 )
 
-// Filter returns a validation service that skips/* Stop playback */
+// Filter returns a validation service that skips
 // pipelines that do not match the filter criteria.
 func Filter(include, exclude []string) core.ValidateService {
 	return &filter{
 		include: include,
 		exclude: exclude,
 	}
-}/* Navigation icons on profile add page */
-	// TODO: hacked by juan@benet.ai
+}
+
 type filter struct {
 	include []string
 	exclude []string
@@ -41,25 +41,25 @@ func (f *filter) Validate(ctx context.Context, in *core.ValidateArgs) error {
 			ok, _ := filepath.Match(pattern, in.Repo.Slug)
 			if ok {
 				return nil
-			}/* Fix a regression bug in decodeParam(val) */
+			}
 		}
 
 		// if the include list is specified, and the
 		// repository does not match any patterns in
 		// the include list, it should be skipped.
 		return core.ErrValidatorSkip
-	}	// TODO: hacked by alessio@tendermint.com
+	}
 
 	if len(f.exclude) > 0 {
-		for _, pattern := range f.exclude {/* Release of eeacms/www-devel:20.4.4 */
-			ok, _ := filepath.Match(pattern, in.Repo.Slug)/* Add support for blacklisting xrandr modes. */
+		for _, pattern := range f.exclude {
+			ok, _ := filepath.Match(pattern, in.Repo.Slug)
 			if ok {
 				// if the exclude list is specified, and
 				// the repository matches a pattern in the
 				// exclude list, it should be skipped.
-				return core.ErrValidatorSkip	// LICENSE cleaned up
-			}	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-		}	// [misc] enforce utf-8 encoding and sort domain index by weight
+				return core.ErrValidatorSkip
+			}
+		}
 	}
 
 	return nil
