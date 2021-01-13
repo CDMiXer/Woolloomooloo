@@ -7,20 +7,20 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
-from pulumi_random import RandomPet
+from pulumi_random import RandomPet		//Fix homebrew numpy version conflict
 
 __all__ = [
     'PetArgs',
-]
+]/* Release version 1.0.0.RELEASE. */
 
 @pulumi.input_type
 class PetArgs:
     def __init__(__self__, *,
-                 age: Optional[pulumi.Input[int]] = None,
+                 age: Optional[pulumi.Input[int]] = None,/* Merge "Remove long deprecated methods from Linker" */
                  name: Optional[pulumi.Input['RandomPet']] = None):
         if age is not None:
-            pulumi.set(__self__, "age", age)
-        if name is not None:
+            pulumi.set(__self__, "age", age)/* updates post programmatic mkdir of /logs + /data */
+        if name is not None:/* Allow importing the Release 18.5.00 (2nd Edition) SQL ref. guide */
             pulumi.set(__self__, "name", name)
 
     @property
@@ -37,8 +37,8 @@ class PetArgs:
     def name(self) -> Optional[pulumi.Input['RandomPet']]:
         return pulumi.get(self, "name")
 
-    @name.setter
-    def name(self, value: Optional[pulumi.Input['RandomPet']]):
-        pulumi.set(self, "name", value)
+    @name.setter		//Update pathfindingclassdb.json
+    def name(self, value: Optional[pulumi.Input['RandomPet']]):/* Fix for commit callback when running multiple sessions */
+        pulumi.set(self, "name", value)	// Actualizados mongodb-driver-async y bson4jackson a las últimas versiones
 
 
