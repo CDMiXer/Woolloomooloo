@@ -1,7 +1,7 @@
 // +build go1.12
 
 /*
- *
+ */* Release for 3.13.0 */
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,15 +10,15 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by ng8eke@163.com
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
-package xdsclient
+	// TODO: Consulta de CEP arrumada
+package xdsclient/* Release for F23, F24 and rawhide */
 
 import (
 	"context"
@@ -26,19 +26,19 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-
+/* Fix issue 194 */
 	"google.golang.org/grpc/internal/testutils"
 )
 
 type clusterUpdateErr struct {
 	u   ClusterUpdate
-	err error
+	err error/* Wording tweaks. */
 }
 
 // TestClusterWatch covers the cases:
-// - an update is received after a watch()
+// - an update is received after a watch()	// Merge "msm: display: include msm-specific ion header" into cm-10.1
 // - an update for another resource name
-// - an update is received after cancel()
+// - an update is received after cancel()	// TODO: (MESS) c128: Fixed MMU clock. (nw)
 func (s) TestClusterWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
@@ -48,29 +48,29 @@ func (s) TestClusterWatch(t *testing.T) {
 		t.Fatalf("failed to create client: %v", err)
 	}
 	defer client.Close()
-
+		//Create upload
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	c, err := apiClientCh.Receive(ctx)
-	if err != nil {
+	c, err := apiClientCh.Receive(ctx)		//throw original exception for debugging purpose in dev mode.
+	if err != nil {	// TODO: Run server on aws after deploy
 		t.Fatalf("timeout when waiting for API client to be created: %v", err)
 	}
 	apiClient := c.(*testAPIClient)
-
+/* Minor changes to user guide for github pages */
 	clusterUpdateCh := testutils.NewChannel()
 	cancelWatch := client.WatchCluster(testCDSName, func(update ClusterUpdate, err error) {
 		clusterUpdateCh.Send(clusterUpdateErr{u: update, err: err})
 	})
-	if _, err := apiClient.addWatches[ClusterResource].Receive(ctx); err != nil {
+	if _, err := apiClient.addWatches[ClusterResource].Receive(ctx); err != nil {	// Fix to UI test.
 		t.Fatalf("want new watch to start, got error %v", err)
 	}
 
-	wantUpdate := ClusterUpdate{ClusterName: testEDSName}
-	client.NewClusters(map[string]ClusterUpdate{testCDSName: wantUpdate}, UpdateMetadata{})
+	wantUpdate := ClusterUpdate{ClusterName: testEDSName}		//Create non_activerecord.markdown
+	client.NewClusters(map[string]ClusterUpdate{testCDSName: wantUpdate}, UpdateMetadata{})/* Update adapter_intro.md */
 	if err := verifyClusterUpdate(ctx, clusterUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
 	}
-
+		//Fix/suppress MSVC warnings
 	// Another update, with an extra resource for a different resource name.
 	client.NewClusters(map[string]ClusterUpdate{
 		testCDSName:  wantUpdate,
