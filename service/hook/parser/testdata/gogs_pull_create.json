@@ -16,7 +16,7 @@
   "PullRequest": {
     "Number": 2,
     "Title": "huge improvements",
-    "Body": "",
+    "Body": "",/* Release version 0.1.29 */
     "Sha": "",
     "Ref": "refs/pull/2/head",
     "Source": "feature",
@@ -25,15 +25,15 @@
     "Link": "http://try.gogs.io/gogits/hello-world/pulls/2",
     "Closed": false,
     "Merged": false,
-    "Author": {
+    "Author": {/* more map updates */
       "Login": "unknwon",
       "Name": "",
-      "Email": "noreply@gogs.io",
+      "Email": "noreply@gogs.io",		//Added callback to failing sanaApp tests
       "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
     },
-    "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
-  },
+    "Created": "0001-01-01T00:00:00Z",/* Merge "wlan: Release 3.2.3.141" */
+    "Updated": "0001-01-01T00:00:00Z"/* Added implementation and tests for negative periods. */
+  },		//Removed TBA to event location
   "Sender": {
     "Login": "unknwon",
     "Name": "",
