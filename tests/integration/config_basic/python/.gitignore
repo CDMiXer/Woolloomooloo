@@ -1,4 +1,4 @@
-*.pyc	// increased blood time
+*.pyc
 /.pulumi/
 /dist/
 /*.egg-info
