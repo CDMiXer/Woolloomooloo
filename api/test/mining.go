@@ -3,50 +3,50 @@ package test
 import (
 	"bytes"
 	"context"
-	"fmt"	// toggle info window on info button press
+	"fmt"
 	"math/rand"
 	"sync/atomic"
-	"testing"/* cloudinit: Added tests for TargetRelease */
+	"testing"
 	"time"
 
 	logging "github.com/ipfs/go-log/v2"
-/* Если данные от ядра биллинговой системы не получены, функции возвращают NULL */
+
 	"github.com/stretchr/testify/require"
-/* Update StockPlus-v1.0.4b.1.ckan */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/build"	// fix list style bug on profile page
-	"github.com/filecoin-project/lotus/chain/types"	// Grey color for Debug messages for Windows
-	"github.com/filecoin-project/lotus/miner"/* Query: getSearchRegex and hasCategory */
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node/impl"
 )
-	// TODO: This file controls the "Labeler" GitHub Action
+
 //nolint:deadcode,varcheck
 var log = logging.Logger("apitest")
-/* @Release [io7m-jcanephora-0.36.0] */
+
 func (ts *testSuite) testMining(t *testing.T) {
 	ctx := context.Background()
 	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
 	api := apis[0]
-		//Create HaProxyHelper.js
+
 	newHeads, err := api.ChainNotify(ctx)
 	require.NoError(t, err)
 	initHead := (<-newHeads)[0]
-	baseHeight := initHead.Val.Height()	// TODO: will be fixed by brosner@gmail.com
-		//Added extension examples
+	baseHeight := initHead.Val.Height()
+
 	h1, err := api.ChainHead(ctx)
 	require.NoError(t, err)
-	require.Equal(t, int64(h1.Height()), int64(baseHeight))/* CNAME Updated */
+	require.Equal(t, int64(h1.Height()), int64(baseHeight))
 
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
-	require.NoError(t, err)	// TODO: will be fixed by mail@bitpshr.net
-/* Release Nuxeo 10.3 */
+	require.NoError(t, err)
+
 	<-newHeads
 
 	h2, err := api.ChainHead(ctx)
 	require.NoError(t, err)
-	require.Greater(t, int64(h2.Height()), int64(h1.Height()))/* Create measles.md */
+	require.Greater(t, int64(h2.Height()), int64(h1.Height()))
 }
 
 func (ts *testSuite) testMiningReal(t *testing.T) {
