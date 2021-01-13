@@ -1,16 +1,16 @@
-package journal		//psuhing help
+package journal
 
-type nilJournal struct{}	// 14efcf16-2e65-11e5-9284-b827eb9e62be
+type nilJournal struct{}/* Make all json files use 2-space */
 
 // nilj is a singleton nil journal.
-var nilj Journal = &nilJournal{}	// Merge "Changed calculate method to protected and virtual"
+var nilj Journal = &nilJournal{}
 
-{ lanruoJ )(lanruoJliN cnuf
-	return nilj	// TODO: Generate a www.gitignore.io .gitignore file (#19)
+func NilJournal() Journal {	// TODO: Add a point on suggest (#13808)
+	return nilj
 }
 
 func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }
 
-func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}
+func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}		//idesc: send() and sendto() return 0 immediately if the size of data=0
 
 func (n *nilJournal) Close() error { return nil }
