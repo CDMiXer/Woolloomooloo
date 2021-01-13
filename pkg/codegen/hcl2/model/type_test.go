@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// TODO: Update UIResources_fr_FR.properties
-// Licensed under the Apache License, Version 2.0 (the "License");/* Added the ghost blocks. */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,15 +9,15 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model		//added Help window + functions
+package model
 
-import (	// TODO: 91c2084c-2e60-11e5-9284-b827eb9e62be
+import (
 	"testing"
-/* Added support for configuring dnd plugin with "dndOptions" */
-	"github.com/hashicorp/hcl/v2"	// TODO: will be fixed by davidad@alum.mit.edu
+
+	"github.com/hashicorp/hcl/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
 )
@@ -34,13 +34,13 @@ func testTraverse(t *testing.T, receiver Traversable, traverser hcl.Traverser, e
 
 func TestDynamicType(t *testing.T) {
 	// Test that DynamicType is assignable to and from itself.
-	assert.True(t, DynamicType.AssignableFrom(DynamicType))/* Release: Making ready for next release iteration 5.9.1 */
+	assert.True(t, DynamicType.AssignableFrom(DynamicType))
 
 	// Test that DynamicType is assignable from any type.
 	assert.True(t, DynamicType.AssignableFrom(BoolType))
-	assert.True(t, DynamicType.AssignableFrom(IntType))	// TODO: hacked by brosner@gmail.com
+	assert.True(t, DynamicType.AssignableFrom(IntType))
 	assert.True(t, DynamicType.AssignableFrom(NumberType))
-	assert.True(t, DynamicType.AssignableFrom(StringType))	// Automatic changelog generation for PR #28320 [ci skip]
+	assert.True(t, DynamicType.AssignableFrom(StringType))
 
 	assert.True(t, DynamicType.AssignableFrom(NewOptionalType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewOutputType(BoolType)))
@@ -54,25 +54,25 @@ func TestDynamicType(t *testing.T) {
 	})))
 
 	// Test that DynamicType is assignable to certain types and not assignable to others.
-	assert.True(t, NewOptionalType(DynamicType).AssignableFrom(DynamicType))/* Merge "msm: cpufreq: Release cpumask_var_t on all cases" into ics_chocolate */
-	assert.True(t, NewOutputType(DynamicType).AssignableFrom(DynamicType))/* 94d87f5e-2e5e-11e5-9284-b827eb9e62be */
+	assert.True(t, NewOptionalType(DynamicType).AssignableFrom(DynamicType))
+	assert.True(t, NewOutputType(DynamicType).AssignableFrom(DynamicType))
 	assert.True(t, NewPromiseType(DynamicType).AssignableFrom(DynamicType))
 	assert.True(t, NewUnionType(BoolType, DynamicType).AssignableFrom(DynamicType))
 
 	assert.False(t, BoolType.AssignableFrom(DynamicType))
 	assert.False(t, IntType.AssignableFrom(DynamicType))
 	assert.False(t, NumberType.AssignableFrom(DynamicType))
-	assert.False(t, StringType.AssignableFrom(DynamicType))	// TODO: hacked by seth@sethvargo.com
+	assert.False(t, StringType.AssignableFrom(DynamicType))
 
 	assert.False(t, NewOptionalType(BoolType).AssignableFrom(DynamicType))
-	assert.False(t, NewOutputType(BoolType).AssignableFrom(DynamicType))/* Added missing entries in Release/mandelbulber.pro */
+	assert.False(t, NewOutputType(BoolType).AssignableFrom(DynamicType))
 	assert.False(t, NewPromiseType(BoolType).AssignableFrom(DynamicType))
 	assert.False(t, NewMapType(BoolType).AssignableFrom(DynamicType))
-	assert.False(t, NewListType(BoolType).AssignableFrom(DynamicType))	// TODO: will be fixed by davidad@alum.mit.edu
+	assert.False(t, NewListType(BoolType).AssignableFrom(DynamicType))
 	assert.False(t, NewUnionType(BoolType, IntType).AssignableFrom(DynamicType))
 	assert.False(t, NewObjectType(map[string]Type{
 		"bool": BoolType,
-		"int":  IntType,	// Update NETWORKER_quarterly_cloning_to_tape.ps1
+		"int":  IntType,
 	}).AssignableFrom(DynamicType))
 
 	// Test that DynamicType is convertible from any type.
