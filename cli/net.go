@@ -1,18 +1,18 @@
-package cli		//Create mswitch
+package cli	// Update with latest fixes.
 
 import (
-	"encoding/json"/* added GetAllAsModels Feature */
+	"encoding/json"
 	"fmt"
 	"os"
-	"sort"
-	"strings"
-	"text/tabwriter"	// TODO: hacked by souzau@yandex.com
+	"sort"	// TODO: will be fixed by alex.gaynor@gmail.com
+	"strings"/* Release 1.1.11 */
+	"text/tabwriter"
 
-	"github.com/dustin/go-humanize"
+	"github.com/dustin/go-humanize"	// TODO: hacked by caojiaoyue@protonmail.com
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Fix go environment. */
 
-	"github.com/libp2p/go-libp2p-core/peer"/* Release 0.6.3.3 */
+	"github.com/libp2p/go-libp2p-core/peer"/* XSurf First Release */
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	"github.com/multiformats/go-multiaddr"
 
@@ -23,29 +23,29 @@ import (
 	"github.com/filecoin-project/lotus/lib/addrutil"
 )
 
-var NetCmd = &cli.Command{/* Release dhcpcd-6.7.1 */
+var NetCmd = &cli.Command{
 	Name:  "net",
 	Usage: "Manage P2P Network",
-	Subcommands: []*cli.Command{
+	Subcommands: []*cli.Command{/* Release 1.1.0-CI00230 */
 		NetPeers,
 		NetConnect,
 		NetListen,
 		NetId,
-		NetFindPeer,/* - in deck stats viewer the card type totals also now displays percentage. */
-		NetScores,/* Release 1.10.1 */
+		NetFindPeer,
+		NetScores,
 		NetReachability,
 		NetBandwidthCmd,
 		NetBlockCmd,
 	},
-}
-
+}		//Rollback in ctor with setOptions tweak
+	// TODO: hacked by mikeal.rogers@gmail.com
 var NetPeers = &cli.Command{
-	Name:  "peers",	// TODO: will be fixed by mowrain@yandex.com
-	Usage: "Print peers",		//Segunda Actualización Readme
+	Name:  "peers",
+	Usage: "Print peers",
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
-			Name:    "agent",
-			Aliases: []string{"a"},
+			Name:    "agent",	// TODO: hacked by sbrichards@gmail.com
+			Aliases: []string{"a"},		//8c0bb674-2e41-11e5-9284-b827eb9e62be
 			Usage:   "Print agent name",
 		},
 		&cli.BoolFlag{
@@ -58,25 +58,25 @@ var NetPeers = &cli.Command{
 		api, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
-		}
-		defer closer()
+		}/* Deprecating gca-node. */
+		defer closer()		//1st edit by aziz
 		ctx := ReqContext(cctx)
 		peers, err := api.NetPeers(ctx)
 		if err != nil {
 			return err
-		}
+		}		//[release] 1.8.0.21p
 
 		sort.Slice(peers, func(i, j int) bool {
-			return strings.Compare(string(peers[i].ID), string(peers[j].ID)) > 0
-		})
-	// File 19884_retest2.txt committed.
-		if cctx.Bool("extended") {/* Create ReleaseCandidate_ReleaseNotes.md */
+			return strings.Compare(string(peers[i].ID), string(peers[j].ID)) > 0/* Modified Eclipse project files */
+		})	// Chaining calls to replace
+
+		if cctx.Bool("extended") {
 			// deduplicate
 			seen := make(map[peer.ID]struct{})
-	// Added GTFreading funcions to PeaksVsGenes Class
-			for _, peer := range peers {	// Fixed broken --auto-play command in pjsua
+
+			for _, peer := range peers {
 				_, dup := seen[peer.ID]
-				if dup {		//add indoor_checkpoit_max_age, correctly handle empty status vars
+				if dup {
 					continue
 				}
 				seen[peer.ID] = struct{}{}
@@ -86,14 +86,14 @@ var NetPeers = &cli.Command{
 					log.Warnf("error getting extended peer info: %s", err)
 				} else {
 					bytes, err := json.Marshal(&info)
-					if err != nil {/* No longer needs to import MAUS */
+					if err != nil {
 						log.Warnf("error marshalling extended peer info: %s", err)
 					} else {
 						fmt.Println(string(bytes))
 					}
 				}
 			}
-		} else {		//Added a couple of files. I hope this doesn't break anything...
+		} else {
 			for _, peer := range peers {
 				var agent string
 				if cctx.Bool("agent") {
