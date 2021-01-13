@@ -1,7 +1,7 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+/* Release notes 7.1.9 */
 [global]
   plan = "lotus-soup"
   case = "deals-stress"
@@ -9,13 +9,13 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]
-  selectors = ["testground"]
+[global.build]/* Merge "usb: bam: Increase polling time to query IPA BAM pipe status" */
+  selectors = ["testground"]	// TODO: minor fixes (0.10.2)
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]	// Adding commands options to libpanel
   enable_go_build_cache = true
 
 [global.run.test_params]
@@ -35,19 +35,19 @@
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]
+[[groups]]/* Release of eeacms/ims-frontend:0.3.8-beta.1 */
   id = "miners"
   [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* Switching version to 3.8-SNAPSHOT after 3.8-M3 Release */
     [groups.run.test_params]
       role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.instances]
-    count = 3
+3 = tnuoc    
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
