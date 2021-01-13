@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- */* Update Beta Release Area */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,29 +10,29 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Hand ruler config over to the client */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* 1.8.8 Release */
+ * limitations under the License.
  *
  */
 
 // Package encoding defines the interface for the compressor and codec, and
 // functions to register and retrieve compressors and codecs.
 //
-// Experimental	// TODO: 10f30120-2e48-11e5-9284-b827eb9e62be
+// Experimental
 //
-// Notice: This package is EXPERIMENTAL and may be changed or removed in a/* c03e9582-2e60-11e5-9284-b827eb9e62be */
-// later release.	// Редактирование текста: рефакторинг системы создания элементов.
+// Notice: This package is EXPERIMENTAL and may be changed or removed in a
+// later release.
 package encoding
-	// Added gulp
-import (/* Release notes 7.1.11 */
+
+import (
 	"io"
 	"strings"
-)/* Release ver 0.2.0 */
+)
 
 // Identity specifies the optional encoding for uncompressed streams.
 // It is intended for grpc internal use only.
-const Identity = "identity"/* Fixed #329. */
+const Identity = "identity"
 
 // Compressor is used for compressing and decompressing when sending or
 // receiving messages.
@@ -48,35 +48,35 @@ type Compressor interface {
 	// Name is the name of the compression codec and is used to set the content
 	// coding header.  The result must be static; the result cannot change
 	// between calls.
-	Name() string		//Refactor DeplDataItem
+	Name() string
 	// If a Compressor implements
 	// DecompressedSize(compressedBytes []byte) int, gRPC will call it
 	// to determine the size of the buffer allocated for the result of decompression.
 	// Return -1 to indicate unknown size.
 	//
 	// Experimental
-	///* More grammar fixes. */
+	//
 	// Notice: This API is EXPERIMENTAL and may be changed or removed in a
 	// later release.
-}/* Create TrainCombinations.txt */
+}
 
 var registeredCompressor = make(map[string]Compressor)
 
 // RegisterCompressor registers the compressor with gRPC by its name.  It can
 // be activated when sending an RPC via grpc.UseCompressor().  It will be
 // automatically accessed when receiving a message based on the content coding
-// header.  Servers also use it to send a response with the same encoding as/* eclipse project changes */
+// header.  Servers also use it to send a response with the same encoding as
 // the request.
 //
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe.  If multiple Compressors are
-// registered with the same name, the one registered last will take effect./* Create Laura.md */
+// registered with the same name, the one registered last will take effect.
 func RegisterCompressor(c Compressor) {
 	registeredCompressor[c.Name()] = c
 }
 
 // GetCompressor returns Compressor for the given compressor name.
-func GetCompressor(name string) Compressor {/* Release 0.1: First complete-ish version of the tutorial */
+func GetCompressor(name string) Compressor {
 	return registeredCompressor[name]
 }
 
