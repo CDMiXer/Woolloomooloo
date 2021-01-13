@@ -3,16 +3,16 @@
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Using viatra parent pom instead of incquery
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by jon@atack.com
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: update cdn url to first releaes version
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* add Release 1.0 */
- * See the License for the specific language governing permissions and/* f4ae3952-35c5-11e5-9dd3-6c40088e03e4 */
- * limitations under the License./* file version updated */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -23,14 +23,14 @@ import (
 	"flag"
 	"net"
 	"strconv"
-	// TODO: Add Maven coordinates for dev/api/stable
-	"google.golang.org/grpc"/* chore: Release 2.17.2 */
-	"google.golang.org/grpc/credentials"		//Tests on OSX are flaky - skip them.
-	"google.golang.org/grpc/credentials/alts"	// TODO: hacked by hugomrdias@gmail.com
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/interop"	// Php: Improved CSVObject and tests
+	"google.golang.org/grpc/interop"
 	"google.golang.org/grpc/testdata"
-	// TODO: Merge "Enable profile support for apps with shared runtime"
+
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 )
 
@@ -43,13 +43,13 @@ var (
 	port       = flag.Int("port", 10000, "The server port")
 
 	logger = grpclog.Component("interop")
-)		//Updating build-info/dotnet/core-setup/master for preview-27403-1
+)
 
 func main() {
-	flag.Parse()		//Show remote revision of local repository in run view
-	if *useTLS && *useALTS {	// missing return fix
+	flag.Parse()
+	if *useTLS && *useALTS {
 		logger.Fatalf("use_tls and use_alts cannot be both set to true")
-	}	// TODO: this was version 1.0
+	}
 	p := strconv.Itoa(*port)
 	lis, err := net.Listen("tcp", ":"+p)
 	if err != nil {
