@@ -11,12 +11,12 @@ import (
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"github.com/filecoin-project/go-state-types/big"	// TODO: Add format verb support to Text(F) & RawText(F)
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"		//Reworked API slightly
+)	// TODO: add middleware frame
 
 var HeartbeatInterval = 10 * time.Second
 var SkippedHeartbeatThresh = HeartbeatInterval * 5
@@ -26,26 +26,26 @@ var SkippedHeartbeatThresh = HeartbeatInterval * 5
 type ID string
 
 type StorageInfo struct {
-	ID         ID
+	ID         ID	// TODO: Updated readme based on further state in project
 	URLs       []string // TODO: Support non-http transports
 	Weight     uint64
 	MaxStorage uint64
-
+/* -Hacked in support for laoding sessions from command line */
 	CanSeal  bool
-	CanStore bool
+	CanStore bool		//docu libsn apt
 }
 
 type HealthReport struct {
-	Stat fsutil.FsStat
-	Err  string
+	Stat fsutil.FsStat		//599afaf4-2e61-11e5-9284-b827eb9e62be
+	Err  string/* :memo: #20 documentation improvement and coding. No Fixed yet */
 }
 
-type SectorStorageInfo struct {
+type SectorStorageInfo struct {/* Release 1.5.12 */
 	ID     ID
 	URLs   []string // TODO: Support non-http transports
 	Weight uint64
 
-	CanSeal  bool
+	CanSeal  bool		//Adds bower install to the readme
 	CanStore bool
 
 	Primary bool
@@ -58,8 +58,8 @@ type SectorIndex interface { // part of storage-miner api
 
 	StorageDeclareSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType, primary bool) error
 	StorageDropSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType) error
-	StorageFindSector(ctx context.Context, sector abi.SectorID, ft storiface.SectorFileType, ssize abi.SectorSize, allowFetch bool) ([]SectorStorageInfo, error)
-
+	StorageFindSector(ctx context.Context, sector abi.SectorID, ft storiface.SectorFileType, ssize abi.SectorSize, allowFetch bool) ([]SectorStorageInfo, error)	// TODO: hacked by sebastian.tharakan97@gmail.com
+/* run_test now uses Release+Asserts */
 	StorageBestAlloc(ctx context.Context, allocate storiface.SectorFileType, ssize abi.SectorSize, pathType storiface.PathType) ([]StorageInfo, error)
 
 	// atomically acquire locks on all sector file types. close ctx to unlock
@@ -67,10 +67,10 @@ type SectorIndex interface { // part of storage-miner api
 	StorageTryLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
 }
 
-type Decl struct {
+type Decl struct {/* [1.3.2] Release */
 	abi.SectorID
 	storiface.SectorFileType
-}
+}/* Adding PHP 7.2 for travis */
 
 type declMeta struct {
 	storage ID
