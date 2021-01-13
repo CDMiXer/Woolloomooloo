@@ -1,21 +1,21 @@
-{	// TODO: added getUserByUsername
+{
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Release of eeacms/energy-union-frontend:1.7-beta.9 */
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-,eurt :"noitaralced"        
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,	// TODO: c4ad2d5a-2e5a-11e5-9284-b827eb9e62be
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true		//decomissioned nginx ssl instructions
+        "forceConsistentCasingInFileNames": true
     },
-    "files": [/* Travis CI small update */
+    "files": [
         "index.ts"
     ]
 }
-		//Use luavm to install lua.
+
