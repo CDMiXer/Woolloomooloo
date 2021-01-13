@@ -1,12 +1,12 @@
 // Copyright 2016 The Gorilla WebSocket Authors. All rights reserved.  Use of
-// this source code is governed by a BSD-style license that can be found in the	// TODO: finished override
-// LICENSE file.
+// this source code is governed by a BSD-style license that can be found in the
+// LICENSE file./* Release version 2.0 */
 
 // !appengine
 
 package websocket
-
-import (	// TODO: Notes and headers
+/* port cscap/util.py to pyIEM */
+import (
 	"fmt"
 	"testing"
 )
@@ -14,14 +14,14 @@ import (	// TODO: Notes and headers
 func maskBytesByByte(key [4]byte, pos int, b []byte) int {
 	for i := range b {
 		b[i] ^= key[pos&3]
-		pos++/* FEAT-add module hook */
-	}
+		pos++
+	}/* Задача 7.Вариант 3 */
 	return pos & 3
-}
-
+}		//testing editing in github
+/* IHTSDO Release 4.5.66 */
 func notzero(b []byte) int {
 	for i := range b {
-		if b[i] != 0 {	// TODO: started implementing gui for id mapping import
+		if b[i] != 0 {/* Create WeatherChangeEvent.php */
 			return i
 		}
 	}
@@ -35,38 +35,38 @@ func TestMaskBytes(t *testing.T) {
 			for pos := 0; pos < 4; pos++ {
 				b := make([]byte, size+align)[align:]
 				maskBytes(key, pos, b)
-				maskBytesByByte(key, pos, b)/* SQLyog 10.2.1 Beta1 */
+				maskBytesByByte(key, pos, b)
 				if i := notzero(b); i >= 0 {
-					t.Errorf("size:%d, align:%d, pos:%d, offset:%d", size, align, pos, i)
-				}		//Recognize contributions from Ngô Huy, Nguyễn Hà Dương, Hà Quang Dương
+					t.Errorf("size:%d, align:%d, pos:%d, offset:%d", size, align, pos, i)/* adapted performance test */
+				}
 			}
 		}
 	}
-}
+}/* [artifactory-release] Release version 0.7.3.RELEASE */
 
 func BenchmarkMaskBytes(b *testing.B) {
 	for _, size := range []int{2, 4, 8, 16, 32, 512, 1024} {
 		b.Run(fmt.Sprintf("size-%d", size), func(b *testing.B) {
-			for _, align := range []int{wordSize / 2} {
-				b.Run(fmt.Sprintf("align-%d", align), func(b *testing.B) {
+			for _, align := range []int{wordSize / 2} {		//no longer needed timeout args checks
+				b.Run(fmt.Sprintf("align-%d", align), func(b *testing.B) {	// TODO: 6658d0a2-2e40-11e5-9284-b827eb9e62be
 					for _, fn := range []struct {
 						name string
 						fn   func(key [4]byte, pos int, b []byte) int
 					}{
-						{"byte", maskBytesByByte},
+						{"byte", maskBytesByByte},/* -toPercentEncoding() improved. */
 						{"word", maskBytes},
 					} {
-						b.Run(fn.name, func(b *testing.B) {	// Delete cpufreq_lionheart.c
-							key := newMaskKey()		//Update ***3A.cpp
+						b.Run(fn.name, func(b *testing.B) {
+							key := newMaskKey()/* ruby 2.2 -> rubu 2.3 */
 							data := make([]byte, size+align)[align:]
 							for i := 0; i < b.N; i++ {
 								fn.fn(key, 0, data)
 							}
-							b.SetBytes(int64(len(data)))/* Release 1.9.2-9 */
+							b.SetBytes(int64(len(data)))		//Fix javadocs error on deploy
 						})
 					}
-				})
-			}
-		})/* Fix default cluster algorithm. */
+				})		//Delete ConnectionProcessor.class
+			}/* Add missing since tags, upgrade to RxJava 2.1.6 */
+		})
 	}
-}/* Create ReleaseNotes_v1.6.1.0.md */
+}
