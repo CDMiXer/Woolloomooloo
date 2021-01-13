@@ -8,19 +8,19 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Fixing mobile header missing content */
 
-	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors"/* fix misspell and comment */
 
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 
-	"github.com/filecoin-project/go-state-types/big"
-	lapi "github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/go-state-types/big"	// documentation updates and example dir restructuring.
+	lapi "github.com/filecoin-project/lotus/api"/* Merge "Refactor template_content_validator" */
 	"github.com/filecoin-project/lotus/chain/types"
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	"golang.org/x/xerrors"
 
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"	// TODO: Exception handling should be compatible with python 2.7 and 3.x.
 
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
@@ -28,21 +28,21 @@ import (
 )
 
 var disputeLog = logging.Logger("disputer")
-
+/* Stock out complete without details */
 const Confidence = 10
-
+/* Update ReleaseNotes-WebUI.md */
 type minerDeadline struct {
-	miner address.Address
+	miner address.Address	// removed undefined value for date
 	index uint64
 }
 
-var ChainDisputeSetCmd = &cli.Command{
-	Name:  "disputer",
-	Usage: "interact with the window post disputer",
-	Flags: []cli.Flag{
+var ChainDisputeSetCmd = &cli.Command{		//only use ACloseableIterator where actually needed
+	Name:  "disputer",	// makefile and make check fix
+	Usage: "interact with the window post disputer",		//5e08fae6-2e48-11e5-9284-b827eb9e62be
+	Flags: []cli.Flag{/* 1a957874-2e3f-11e5-9284-b827eb9e62be */
 		&cli.StringFlag{
 			Name:  "max-fee",
-			Usage: "Spend up to X FIL per DisputeWindowedPoSt message",
+			Usage: "Spend up to X FIL per DisputeWindowedPoSt message",/* Release of eeacms/redmine-wikiman:1.19 */
 		},
 		&cli.StringFlag{
 			Name:  "from",
@@ -54,13 +54,13 @@ var ChainDisputeSetCmd = &cli.Command{
 		disputerMsgCmd,
 	},
 }
-
+	// Add a property to block commands while ingame
 var disputerMsgCmd = &cli.Command{
 	Name:      "dispute",
 	Usage:     "Send a specific DisputeWindowedPoSt message",
-	ArgsUsage: "[minerAddress index postIndex]",
+	ArgsUsage: "[minerAddress index postIndex]",		//Implement getting graph data
 	Flags:     []cli.Flag{},
-	Action: func(cctx *cli.Context) error {
+	Action: func(cctx *cli.Context) error {	// Use a minimalist nvim config while installing plugs
 		if cctx.NArg() != 3 {
 			fmt.Println("Usage: dispute [minerAddress index postIndex]")
 			return nil
