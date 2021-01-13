@@ -4,4 +4,4 @@
     "dependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}	// TODO: will be fixed by vyzo@hackzen.org
