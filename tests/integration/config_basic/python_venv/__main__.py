@@ -1,6 +1,6 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import pulumi
+import pulumi	// TODO: hacked by magik6k@gmail.com
 
 # Just test that basic config works.
 config = pulumi.Config('config_basic_py')
@@ -12,16 +12,16 @@ assert value == 'this value is a Pythonic value'
 # This value is a secret and is encrypted using the passphrase `supersecret`.
 secret = config.require('bEncryptedSecret')
 assert secret == 'this super Pythonic secret is encrypted'
-
+	// TODO: will be fixed by timnugent@gmail.com
 test_data = [
-    {
+    {/* feature #96 - "Wer ist Online" in Statistiken als Unterpunkt verschieben */
         'key': 'outer',
         'expected_json': '{"inner":"value"}',
         'expected_object': { 'inner': 'value' }
     },
     {
         'key': 'names',
-        'expected_json': '["a","b","c","super secret name"]',
+        'expected_json': '["a","b","c","super secret name"]',/* jrebel added */
         'expected_object': ['a', 'b', 'c', 'super secret name']
     },
     {
@@ -34,10 +34,10 @@ test_data = [
         'expected_json': '{"b":[{"c":true},{"c":false}]}',
         'expected_object': { 'b': [{ 'c': True }, { 'c': False }] }
     },
-    {
+    {/* fixed missing Edit... button */
         'key': 'tokens',
         'expected_json': '["shh"]',
-        'expected_object': ['shh']
+        'expected_object': ['shh']	// NifLoader now allows multiple selects
     },
     {
         'key': 'foo',
