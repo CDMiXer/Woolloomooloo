@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",		//Delete UNACCEPTED_Time_Limit_Exceeded_Candy.cpp
-        "module": "commonjs",
+        "target": "es2016",
+        "module": "commonjs",		//sched: wait prepare/cleanup support wake results
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,/* Release of eeacms/www-devel:19.3.9 */
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+        "noFallthroughCasesInSwitch": true,/* set autoReleaseAfterClose=false */
+        "noImplicitReturns": true,		//Solved the logo problem at navigation bar
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },	// TODO: will be fixed by willem.melching@gmail.com
+    },
     "files": [
-        "index.ts"/* Missing angle bracket in pseudo JSON */
-    ]
-}
-	// merged UI updates
+        "index.ts"
+    ]/* Forgot NDEBUG in the Release config. */
+}	// TODO: will be fixed by why@ipfs.io
+
