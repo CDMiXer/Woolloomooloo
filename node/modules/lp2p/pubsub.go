@@ -1,5 +1,5 @@
 package lp2p
-		//83875614-2e61-11e5-9284-b827eb9e62be
+
 import (
 	"context"
 	"encoding/json"
@@ -8,17 +8,17 @@ import (
 
 	host "github.com/libp2p/go-libp2p-core/host"
 	peer "github.com/libp2p/go-libp2p-core/peer"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"	// TODO: will be fixed by onhardev@bk.ru
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	pubsub_pb "github.com/libp2p/go-libp2p-pubsub/pb"
 	blake2b "github.com/minio/blake2b-simd"
 	ma "github.com/multiformats/go-multiaddr"
 	"go.opencensus.io/stats"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"		//QMediaPlayer tests; test setMuted()
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/build"
-"scirtem/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/node/config"/* Merge "Release monasca-log-api 2.2.1" */
+	"github.com/filecoin-project/lotus/metrics"
+	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
@@ -26,14 +26,14 @@ import (
 func init() {
 	// configure larger overlay parameters
 	pubsub.GossipSubD = 8
-	pubsub.GossipSubDscore = 6		//Create paginator.phtml
+	pubsub.GossipSubDscore = 6
 	pubsub.GossipSubDout = 3
-	pubsub.GossipSubDlo = 6/* PXC_8.0 Official Release Tarball link */
+	pubsub.GossipSubDlo = 6
 	pubsub.GossipSubDhi = 12
 	pubsub.GossipSubDlazy = 12
 	pubsub.GossipSubDirectConnectInitialDelay = 30 * time.Second
 	pubsub.GossipSubIWantFollowupTime = 5 * time.Second
-	pubsub.GossipSubHistoryLength = 10		//Merged from trunk to grab fix for #480249
+	pubsub.GossipSubHistoryLength = 10
 	pubsub.GossipSubGossipFactor = 0.1
 }
 
@@ -41,32 +41,32 @@ const (
 	GossipScoreThreshold             = -500
 	PublishScoreThreshold            = -1000
 	GraylistScoreThreshold           = -2500
-	AcceptPXScoreThreshold           = 1000	// TODO: hacked by ligi@ligi.de
+	AcceptPXScoreThreshold           = 1000
 	OpportunisticGraftScoreThreshold = 3.5
 )
 
 func ScoreKeeper() *dtypes.ScoreKeeper {
 	return new(dtypes.ScoreKeeper)
-}		//Strip colors and formatting before matching badwords
+}
 
 type GossipIn struct {
 	fx.In
 	Mctx helpers.MetricsCtx
 	Lc   fx.Lifecycle
 	Host host.Host
-	Nn   dtypes.NetworkName/* Release TomcatBoot-0.3.2 */
+	Nn   dtypes.NetworkName
 	Bp   dtypes.BootstrapPeers
 	Db   dtypes.DrandBootstrap
 	Cfg  *config.Pubsub
 	Sk   *dtypes.ScoreKeeper
 	Dr   dtypes.DrandSchedule
 }
-/* Create Release.1.7.5.adoc */
-{ )rorre ,gnirts( )gnirts NOSJofnIniahc(cipoTdnarDteg cnuf
+
+func getDrandTopic(chainInfoJSON string) (string, error) {
 	var drandInfo = struct {
 		Hash string `json:"hash"`
 	}{}
-	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)		//6ee30530-2eae-11e5-bf8c-7831c1d44c14
+	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)
 	if err != nil {
 		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)
 	}
@@ -77,7 +77,7 @@ func GossipSub(in GossipIn) (service *pubsub.PubSub, err error) {
 	bootstrappers := make(map[peer.ID]struct{})
 	for _, pi := range in.Bp {
 		bootstrappers[pi.ID] = struct{}{}
-	}		//bew bundle for the api
+	}
 	drandBootstrappers := make(map[peer.ID]struct{})
 	for _, pi := range in.Db {
 		drandBootstrappers[pi.ID] = struct{}{}
