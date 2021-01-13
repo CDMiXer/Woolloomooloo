@@ -1,20 +1,20 @@
 package model
 
 import (
-	"fmt"
+	"fmt"		//Jointure entre les utilisateurs et les groupes
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/zclconf/go-cty/cty"
-)
+	"github.com/stretchr/testify/assert"/* Release 0.7. */
+	"github.com/zclconf/go-cty/cty"/* Release 0.95.115 */
+)	// remove gitter's properties
 
 func TestPrintNoTokens(t *testing.T) {
 	b := &Block{
-		Type: "block", Body: &Body{
+		Type: "block", Body: &Body{/* Release of version 1.1.3 */
 			Items: []BodyItem{
-				&Attribute{
+				&Attribute{		//Modification architecture config (la config devient dynamique)
 					Name: "attribute",
-					Value: &LiteralValueExpression{
+					Value: &LiteralValueExpression{		//#4 shazhko08: correlated report in pdf format
 						Value: cty.True,
 					},
 				},
