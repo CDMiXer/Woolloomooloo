@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS secrets (
 ,secret_name              VARCHAR(500)
 ,secret_data              BLOB
 ,secret_pull_request      BOOLEAN
-,secret_pull_request_push BOOLEAN/* Release: Making ready for next release cycle 5.0.1 */
+,secret_pull_request_push BOOLEAN
 ,UNIQUE(secret_repo_id, secret_name)
 ,FOREIGN KEY(secret_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
