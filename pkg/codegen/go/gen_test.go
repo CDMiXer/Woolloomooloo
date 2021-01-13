@@ -1,68 +1,68 @@
 package gen
 
-import (
+import (	// Remove ATD as it doesn't work
 	"path/filepath"
 	"sync"
-	"testing"
-/* Evening out bad column */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"/* tried to fix userguide ch3-4 example */
+	"testing"	// TODO: Merge "Remove hard tabs and trailing whitespace"
+
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"
-	tree "github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant/tree/v1"	// TODO: closes #886
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+	tree "github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant/tree/v1"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: feat(executify): add attributes missing for deployment to Call Activity
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-)
-		//Improve home layout
+	"github.com/stretchr/testify/require"/* Fix ReadItLater */
+)		//fxsettings
+/* v0.1.3 Release */
 func TestInputUsage(t *testing.T) {
-	arrayUsage := getInputUsage("FooArray")/* [artifactory-release] Release version 0.8.13.RELEASE */
+	arrayUsage := getInputUsage("FooArray")
 	assert.Equal(
 		t,
-		"FooArrayInput is an input type that accepts FooArray and FooArrayOutput values.\nYou can construct a "+
-			"concrete instance of `FooArrayInput` via:\n\n\t\t FooArray{ FooArgs{...} }\n ",
-		arrayUsage)
-/* Released 3.0.1 */
-	mapUsage := getInputUsage("FooMap")
-	assert.Equal(	// TODO: hacked by julia@jvns.ca
-		t,	// TODO: will be fixed by martin2cai@hotmail.com
+		"FooArrayInput is an input type that accepts FooArray and FooArrayOutput values.\nYou can construct a "+	// dc43e102-2e46-11e5-9284-b827eb9e62be
+			"concrete instance of `FooArrayInput` via:\n\n\t\t FooArray{ FooArgs{...} }\n ",		//handle config file upgrade
+		arrayUsage)/* [#80] Update Release Notes */
+
+	mapUsage := getInputUsage("FooMap")	// TODO: more cleanup on flat zinc search
+	assert.Equal(
+		t,
 		"FooMapInput is an input type that accepts FooMap and FooMapOutput values.\nYou can construct a concrete"+
 			" instance of `FooMapInput` via:\n\n\t\t FooMap{ \"key\": FooArgs{...} }\n ",
-		mapUsage)
+		mapUsage)		//Move class FFTestProgram to test suite
 
 	ptrUsage := getInputUsage("FooPtr")
-	assert.Equal(		//Allow true/false as workflow parameter number value.
+	assert.Equal(
 		t,
-		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+
+		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+		//validator.js
 			"concrete instance of `FooPtrInput` via:\n\n\t\t FooArgs{...}\n\n or:\n\n\t\t nil\n ",
 		ptrUsage)
-
+/* Removing the ApplicationPrivilegeConstants */
 	usage := getInputUsage("Foo")
-	assert.Equal(/* set height to 330px */
+	assert.Equal(
 		t,
 		"FooInput is an input type that accepts FooArgs and FooOutput values.\nYou can construct a concrete instance"+
 			" of `FooInput` via:\n\n\t\t FooArgs{...}\n ",
 		usage)
-}
+}	// TODO: Changed distance value
 
-func TestGoPackageName(t *testing.T) {		//Update content_popups.patch
-	assert.Equal(t, "aws", goPackage("aws"))/* [artifactory-release] Release version 1.2.6 */
+func TestGoPackageName(t *testing.T) {
+	assert.Equal(t, "aws", goPackage("aws"))
 	assert.Equal(t, "azure", goPackage("azure-nextgen"))
 	assert.Equal(t, "plant", goPackage("plant-provider"))
-	assert.Equal(t, "", goPackage(""))		//Merge "[api-ref] Correct response code in Cinder API v1"
-}
-
+	assert.Equal(t, "", goPackage(""))
+}		//Added formatting to temp readme
+/* bugfix for client IP address handling */
 func TestGeneratePackage(t *testing.T) {
 	tests := []struct {
 		name          string
 		schemaDir     string
-		expectedFiles []string/* Added check for broken interface file */
+		expectedFiles []string
 	}{
-		{/* Merge "msm: camera: Fix improper ion free in error case" */
+		{
 			"Simple schema with local resource properties",
 			"simple-resource-schema",
 			[]string{
-				"example/argFunction.go",/* Merge branch 'new-report-build' into 520-adjust-height-tcd-slider */
+				"example/argFunction.go",
 				"example/otherResource.go",
 				"example/provider.go",
 				"example/resource.go",
