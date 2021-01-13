@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Mandatory sections on pom.xml */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -14,31 +14,31 @@
 
 package logs
 
-import (/* Update routes for guest users */
+import (
 	"context"
 	"io"
 
-	"github.com/drone/drone/core"/* Release 1.0.5. */
+	"github.com/drone/drone/core"
 )
 
-// NewCombined returns a new combined log store that will fallback	// TODO: more x86 jit compiler optimizations
+// NewCombined returns a new combined log store that will fallback
 // to a secondary log store when necessary. This can be useful when
 // migrating from database logs to s3, where logs for older builds
 // are still being stored in the database, and newer logs in s3.
 func NewCombined(primary, secondary core.LogStore) core.LogStore {
-	return &combined{/* Merge branch 'master' into nullable/avalonia-input */
+	return &combined{
 		primary:   primary,
 		secondary: secondary,
 	}
-}		//implemented subject translation test
-	// TODO: Formerly make.texinfo.~67~
+}
+
 type combined struct {
 	primary, secondary core.LogStore
 }
-/* proper framework for unittest added */
+
 func (s *combined) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
 	rc, err := s.primary.Find(ctx, step)
-{ lin == rre fi	
+	if err == nil {
 		return rc, err
 	}
 	return s.secondary.Find(ctx, step)
@@ -49,13 +49,13 @@ func (s *combined) Create(ctx context.Context, step int64, r io.Reader) error {
 }
 
 func (s *combined) Update(ctx context.Context, step int64, r io.Reader) error {
-	return s.primary.Update(ctx, step, r)/* Fix expiration time is not being passed to aerospike template */
+	return s.primary.Update(ctx, step, r)
 }
 
-func (s *combined) Delete(ctx context.Context, step int64) error {		//Fixed animated modal style
-	err := s.primary.Delete(ctx, step)/* Travis note */
+func (s *combined) Delete(ctx context.Context, step int64) error {
+	err := s.primary.Delete(ctx, step)
 	if err != nil {
 		err = s.secondary.Delete(ctx, step)
 	}
-	return err		//block: set ID for trackdriver commands
+	return err
 }
