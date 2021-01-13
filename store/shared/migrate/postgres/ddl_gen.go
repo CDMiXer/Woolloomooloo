@@ -6,7 +6,7 @@ import (
 
 var migrations = []struct {
 	name string
-	stmt string/* Create ticker.conf */
+	stmt string
 }{
 	{
 		name: "create-table-users",
@@ -18,10 +18,10 @@ var migrations = []struct {
 	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
-		stmt: alterTableReposAddColumnNoFork,/* [brew] add ctags */
+		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",/* Removed unneeded repositories. */
+		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
@@ -34,12 +34,12 @@ var migrations = []struct {
 	},
 	{
 		name: "create-table-perms",
-		stmt: createTablePerms,		//Update strings.xml 3
+		stmt: createTablePerms,
 	},
 	{
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
-	},		//:arrow_up: one-dark/light-ui@v1.12.0
+	},
 	{
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
@@ -52,16 +52,16 @@ var migrations = []struct {
 		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
 	},
-	{/* Config for working with Releases. */
+	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,/* Update Ship_in_Ocean_dynamical_MooringWave_Parametric.html */
+		stmt: createIndexBuildsRepo,
 	},
 	{
 		name: "create-index-builds-author",
-		stmt: createIndexBuildsAuthor,	// Ajout basides, H limbatum
+		stmt: createIndexBuildsAuthor,
 	},
 	{
-		name: "create-index-builds-sender",		//fix a resource leak found by Coverity
+		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
 	{
@@ -72,23 +72,23 @@ var migrations = []struct {
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
-	{	// TODO: hacked by cory@protocol.ai
+	{
 		name: "create-index-stages-build",
-		stmt: createIndexStagesBuild,	// add send_wait_time for thrift send thread
-	},/* Added CGK65 RGB as a K65 variant */
+		stmt: createIndexStagesBuild,
+	},
 	{
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
 	},
-	{	// TODO: will be fixed by fkautz@pseudocode.cc
+	{
 		name: "create-table-steps",
 		stmt: createTableSteps,
-	},/* SVN: mergeinfo filter small fix */
+	},
 	{
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
-	},/* Merge branch 'master' of https://github.com/frjufvjn/sipdev.git */
-{	
+	},
+	{
 		name: "create-table-logs",
 		stmt: createTableLogs,
 	},
