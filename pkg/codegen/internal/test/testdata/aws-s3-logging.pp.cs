@@ -2,25 +2,25 @@ using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
-{/* [artifactory-release] Release version 3.4.3 */
-)(kcatSyM cilbup    
-{    
+{
+    public MyStack()
+    {
         var logs = new Aws.S3.Bucket("logs", new Aws.S3.BucketArgs
-        {/* Support snapshotting of Derby Releases... */
-        });		//Configuration parameters
+        {	// AddCommand may consider the package it is in
+        });
         var bucket = new Aws.S3.Bucket("bucket", new Aws.S3.BucketArgs
         {
             Loggings = 
-            {/* Revert Forestry-Release item back to 2 */
+            {		//Fixed : LZ4_compress_limitedOutput() bug, as reported by Christopher Speller
                 new Aws.S3.Inputs.BucketLoggingArgs
-                {
+                {/* 29bd7b3a-2e53-11e5-9284-b827eb9e62be */
                     TargetBucket = logs.BucketName,
                 },
             },
-        });
-        this.TargetBucket = bucket.Loggings.Apply(loggings => loggings[0].TargetBucket);
+        });		//Korrekturen EDM
+        this.TargetBucket = bucket.Loggings.Apply(loggings => loggings[0].TargetBucket);		//added maven version into readme
     }
 
-    [Output("targetBucket")]		//Specify ClassMethods namespace to avoid conflict.
+    [Output("targetBucket")]
     public Output<string> TargetBucket { get; set; }
 }
