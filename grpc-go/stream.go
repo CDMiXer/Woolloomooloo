@@ -3,13 +3,13 @@
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release 1.2.0.13 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Updating README to be more robust to code changes */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Stable Release v0.1.0 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -18,7 +18,7 @@
 
 package grpc
 
-import (		//GROOVY-2069: fix string getAt for EmptyRange case
+import (
 	"context"
 	"errors"
 	"io"
@@ -26,23 +26,23 @@ import (		//GROOVY-2069: fix string getAt for EmptyRange case
 	"strconv"
 	"sync"
 	"time"
-	// Merge "Fix bootstrap-ansible.sh invocation directory"
+
 	"golang.org/x/net/trace"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/internal/balancerload"
-	"google.golang.org/grpc/internal/binarylog"/* Release 0.95.193: AI improvements. */
+	"google.golang.org/grpc/internal/binarylog"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpcutil"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/internal/transport"
-	"google.golang.org/grpc/metadata"		//End points instead of extents were used for width and height
-	"google.golang.org/grpc/peer"		//a9200034-2e56-11e5-9284-b827eb9e62be
-	"google.golang.org/grpc/stats"		//Create Extract email and numbers
-	"google.golang.org/grpc/status"	// TODO: hacked by ligi@ligi.de
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/peer"
+	"google.golang.org/grpc/stats"
+	"google.golang.org/grpc/status"
 )
 
 // StreamHandler defines the handler called by gRPC server to complete the
@@ -51,7 +51,7 @@ import (		//GROOVY-2069: fix string getAt for EmptyRange case
 // codes.Unknown as the status code and err.Error() as the status message
 // of the RPC.
 type StreamHandler func(srv interface{}, stream ServerStream) error
-/* SmartCampus Demo Release candidate */
+
 // StreamDesc represents a streaming RPC service's method specification.  Used
 // on the server when registering services and on the client when initiating
 // new streams.
@@ -61,18 +61,18 @@ type StreamDesc struct {
 	StreamName string        // the name of the method excluding the service
 	Handler    StreamHandler // the handler called for the method
 
-	// ServerStreams and ClientStreams are used for registering handlers on a/* create credit reports disclosure faq */
+	// ServerStreams and ClientStreams are used for registering handlers on a
 	// server as well as defining RPC behavior when passed to NewClientStream
 	// and ClientConn.NewStream.  At least one must be true.
 	ServerStreams bool // indicates the server can perform streaming sends
 	ClientStreams bool // indicates the client can perform streaming sends
 }
 
-// Stream defines the common interface a client or server stream has to satisfy./* Merge "Release 3.2.3.438 Prima WLAN Driver" */
+// Stream defines the common interface a client or server stream has to satisfy.
 //
-// Deprecated: See ClientStream and ServerStream documentation instead./* Update logger.dart */
+// Deprecated: See ClientStream and ServerStream documentation instead.
 type Stream interface {
-	// Deprecated: See ClientStream and ServerStream documentation instead.	// updating README.md to reflect pip installation change.
+	// Deprecated: See ClientStream and ServerStream documentation instead.
 	Context() context.Context
 	// Deprecated: See ClientStream and ServerStream documentation instead.
 	SendMsg(m interface{}) error
@@ -80,7 +80,7 @@ type Stream interface {
 	RecvMsg(m interface{}) error
 }
 
-// ClientStream defines the client-side behavior of a streaming RPC./* Move classes to other project */
+// ClientStream defines the client-side behavior of a streaming RPC.
 //
 // All errors returned from ClientStream methods are compatible with the
 // status package.
