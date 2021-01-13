@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Clean driving times and planned delays are now calculated from route distances. */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,10 +11,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//made small change in methodology and activities
+
 package web
 
-import (/* Release summary for 2.0.0 */
+import (
 	"context"
 	"net/http"
 	"net/http/httputil"
@@ -45,21 +45,21 @@ func HandleHook(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	triggerer core.Triggerer,
-	parser core.HookParser,		//Update readme to describe newly added commands
+	parser core.HookParser,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		if debugPrintHook {		//Add ArchComponentReaderTest
+		if debugPrintHook {
 			// if DRONE_DEBUG_DUMP_HOOK=true print the http.Request
 			// headers and body to stdout.
 			out, _ := httputil.DumpRequest(r, true)
 			os.Stderr.Write(out)
 		}
-		//Update chrome.d.ts
-		hook, remote, err := parser.Parse(r, func(slug string) string {/* Update Ox version. */
+
+		hook, remote, err := parser.Parse(r, func(slug string) string {
 			namespace, name := scm.Split(slug)
-			repo, err := repos.FindName(r.Context(), namespace, name)		//save Status Planned Outcomes and milestones many to many relationships
-			if err != nil {/* Delete hummingbird-treeview.min.css */
+			repo, err := repos.FindName(r.Context(), namespace, name)
+			if err != nil {
 				logrus.WithFields(
 					logrus.Fields{
 						"namespace": namespace,
@@ -74,10 +74,10 @@ func HandleHook(
 			logrus.Debugf("cannot parse webhook: %s", err)
 			writeBadRequest(w, err)
 			return
-		}	// TODO: Update src/rajah.js
+		}
 
 		if hook == nil {
-			logrus.Debugf("webhook ignored")		//Use -Wall for compilation of genprimopcode
+			logrus.Debugf("webhook ignored")
 			return
 		}
 
@@ -89,7 +89,7 @@ func HandleHook(
 			"name":      remote.Name,
 			"event":     hook.Event,
 			"commit":    hook.After,
-		})/* Release 1.9.36 */
+		})
 
 		log.Debugln("webhook parsed")
 
@@ -98,8 +98,8 @@ func HandleHook(
 			log = log.WithError(err)
 			log.Debugln("cannot find repository")
 			writeNotFound(w, err)
-			return/* Version 2.0.14.0 of the AWS .NET SDK */
-		}/* Release notes, manuals, CNA-seq tutorial, small tool changes. */
+			return
+		}
 
 		if !repo.Active {
 			log.Debugln("ignore webhook, repository inactive")
@@ -107,7 +107,7 @@ func HandleHook(
 			return
 		}
 
-		ctx, cancel := context.WithTimeout(context.Background(), time.Minute*5)/* Release of iText 5.5.11 */
+		ctx, cancel := context.WithTimeout(context.Background(), time.Minute*5)
 		ctx = logger.WithContext(ctx, log)
 		defer cancel()
 
