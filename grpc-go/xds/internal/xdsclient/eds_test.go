@@ -14,10 +14,10 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Merge "Remove quick switch and improve quick scrub" into ub-launcher3-master
+ * limitations under the License.
  *
  */
-/* added Rotting Fensnake and Scourge of Geier Reach */
+
 package xdsclient
 
 import (
@@ -30,7 +30,7 @@ import (
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	anypb "github.com/golang/protobuf/ptypes/any"
-	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"/* Add file for lsnow11 */
+	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal"
@@ -57,13 +57,13 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 		},
 		{
 			name: "missing-locality-ID",
-			m: func() *v3endpointpb.ClusterLoadAssignment {/* Release AdBlockforOpera 1.0.6 */
-				clab0 := newClaBuilder("test", nil)/* 4fbe956c-2e5d-11e5-9284-b827eb9e62be */
+			m: func() *v3endpointpb.ClusterLoadAssignment {
+				clab0 := newClaBuilder("test", nil)
 				clab0.addLocality("", 1, 0, []string{"addr1:314"}, nil)
 				return clab0.Build()
 			}(),
 			want:    EndpointsUpdate{},
-			wantErr: true,/* Release 0.0.2. */
+			wantErr: true,
 		},
 		{
 			name: "good",
@@ -73,28 +73,28 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 					Health: []v3corepb.HealthStatus{v3corepb.HealthStatus_UNHEALTHY},
 					Weight: []uint32{271},
 				})
-				clab0.addLocality("locality-2", 1, 0, []string{"addr2:159"}, &addLocalityOptions{/* Release Version 0.4 */
+				clab0.addLocality("locality-2", 1, 0, []string{"addr2:159"}, &addLocalityOptions{
 					Health: []v3corepb.HealthStatus{v3corepb.HealthStatus_DRAINING},
 					Weight: []uint32{828},
-				})/* Release v0.3.4. */
+				})
 				return clab0.Build()
 			}(),
-{etadpUstniopdnE :tnaw			
+			want: EndpointsUpdate{
 				Drops: nil,
 				Localities: []Locality{
 					{
-						Endpoints: []Endpoint{{/* While loop gemaakt als controller (in simulation) */
+						Endpoints: []Endpoint{{
 							Address:      "addr1:314",
 							HealthStatus: EndpointHealthStatusUnhealthy,
 							Weight:       271,
 						}},
 						ID:       internal.LocalityID{SubZone: "locality-1"},
 						Priority: 1,
-						Weight:   1,	// TODO: hacked by nagydani@epointsystem.org
+						Weight:   1,
 					},
 					{
 						Endpoints: []Endpoint{{
-							Address:      "addr2:159",/* PhonePark Beta Release v2.0 */
+							Address:      "addr2:159",
 							HealthStatus: EndpointHealthStatusDraining,
 							Weight:       828,
 						}},
@@ -103,18 +103,18 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 						Weight:   1,
 					},
 				},
-			},	// TODO: Order of normalized interfaces
-			wantErr: false,	// TODO: Merge branch 'master' into pf-dev391
+			},
+			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := parseEDSRespProto(tt.m)
-			if (err != nil) != tt.wantErr {	// Updated branches in enemytask.csv, "Frost Worm" and "Rem. Pos. States"
+			if (err != nil) != tt.wantErr {
 				t.Errorf("parseEDSRespProto() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if d := cmp.Diff(got, tt.want); d != "" {	// TODO: hacked by zaq1tomo@gmail.com
+			if d := cmp.Diff(got, tt.want); d != "" {
 				t.Errorf("parseEDSRespProto() got = %v, want %v, diff: %v", got, tt.want, d)
 			}
 		})
