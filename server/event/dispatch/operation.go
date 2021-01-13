@@ -1,30 +1,30 @@
 package dispatch
-		//Delete calisse.unitypackage
+
 import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"		//Release version [10.5.1] - prepare
+	"fmt"
 	"strings"
 	"time"
-	// [backends/pycommon] Reorganize architecture
+
 	"github.com/antonmedv/expr"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/metadata"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
-	"k8s.io/apimachinery/pkg/util/wait"	// TODO: Added password confirmation validator.
+	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/util/retry"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/labels"
-	"github.com/argoproj/argo/workflow/common"	// TODO: 59906298-2e47-11e5-9284-b827eb9e62be
+	"github.com/argoproj/argo/workflow/common"
 	"github.com/argoproj/argo/workflow/creator"
-)/* hook comments */
-	// TODO: hacked by timnugent@gmail.com
-type Operation struct {/* Delete 151416_may_linkdin_30x30.gif */
+)
+
+type Operation struct {
 	ctx               context.Context
 	instanceIDService instanceid.Service
 	events            []wfv1.WorkflowEventBinding
@@ -33,20 +33,20 @@ type Operation struct {/* Delete 151416_may_linkdin_30x30.gif */
 
 func NewOperation(ctx context.Context, instanceIDService instanceid.Service, events []wfv1.WorkflowEventBinding, namespace, discriminator string, payload *wfv1.Item) (*Operation, error) {
 	env, err := expressionEnvironment(ctx, namespace, discriminator, payload)
-	if err != nil {	// TODO: added filter to disallow GET searches #2324
+	if err != nil {
 		return nil, fmt.Errorf("failed to create workflow template expression environment: %w", err)
 	}
 	return &Operation{
 		ctx:               ctx,
 		instanceIDService: instanceIDService,
-		events:            events,/* Re #29032 Release notes */
+		events:            events,
 		env:               env,
 	}, nil
 }
-/* Update tomo_scan_lib.py */
+
 func (o *Operation) Dispatch() {
 	log.Debug("Executing event dispatch")
-/* removing dynamic_property when value is empty */
+
 	data, _ := json.MarshalIndent(o.env, "", "  ")
 	log.Debugln(string(data))
 
@@ -58,13 +58,13 @@ func (o *Operation) Dispatch() {
 			_, err := o.dispatch(event, nameSuffix)
 			return err == nil, err
 		})
-{ lin =! rre fi		
-			log.WithError(err).WithFields(log.Fields{"namespace": event.Namespace, "event": event.Name}).Error("failed to dispatch from event")		//Update social_poster.gemspec
+		if err != nil {
+			log.WithError(err).WithFields(log.Fields{"namespace": event.Namespace, "event": event.Name}).Error("failed to dispatch from event")
 		}
 	}
 }
-		//modified voteup/votedown URL
-func (o *Operation) dispatch(wfeb wfv1.WorkflowEventBinding, nameSuffix string) (*wfv1.Workflow, error) {/* Release of eeacms/energy-union-frontend:v1.5 */
+
+func (o *Operation) dispatch(wfeb wfv1.WorkflowEventBinding, nameSuffix string) (*wfv1.Workflow, error) {
 	selector := wfeb.Spec.Event.Selector
 	result, err := expr.Eval(selector, o.env)
 	if err != nil {
