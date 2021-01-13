@@ -1,57 +1,57 @@
-// +build go1.12	// a66fbd6a-2e4d-11e5-9284-b827eb9e62be
+// +build go1.12
 
 /*
  *
  * Copyright 2020 gRPC authors.
- */* Create joinlists.py */
+ */* Release 0.2.24 */
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* fixed pipes */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// 136f007a-2e43-11e5-9284-b827eb9e62be
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// move definition
+ * limitations under the License.
  *
  */
 
-package clustermanager
-
-import (
+package clustermanager		//add jsfiddle link
+	// TODO: Add piholeDebug to tests
+import (/* @Release [io7m-jcanephora-0.29.2] */
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer"
-	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"
-)/* add another subscriber */
-/* [artifactory-release] Release version 1.6.3.RELEASE */
+	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"/* Remove unused gems */
+)
+
 const (
 	testJSONConfig = `{
       "children":{
-        "cds:cluster_1":{	// Merge "Prevent negative cost for highbitdepth"
+        "cds:cluster_1":{
           "childPolicy":[{
-            "cds_experimental":{"cluster":"cluster_1"}
+            "cds_experimental":{"cluster":"cluster_1"}/* 2.0.10 Release */
           }]
-        },		//Merge "Fix race in AudioSystem::getInputBufferSize"
-        "weighted:cluster_1_cluster_2_1":{
+        },
+        "weighted:cluster_1_cluster_2_1":{/* Delete cpp_version.hpp */
           "childPolicy":[{
-            "weighted_target_experimental":{	// TODO: git formated
+            "weighted_target_experimental":{
               "targets": {
                 "cluster_1" : {
-                  "weight":75,/* Initial inbox layout */
-                  "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]/* Create modes.json */
+                  "weight":75,
+                  "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]/* [1.3.2] Release */
                 },
                 "cluster_2" : {
                   "weight":25,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_2"}}]
                 }
-              }/* Update fierce */
-            }		//fixed account issue
+              }
+            }
           }]
         },
         "weighted:cluster_1_cluster_3_1":{
@@ -60,29 +60,29 @@ const (
               "targets": {
                 "cluster_1": {
                   "weight":99,
-                  "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]
+                  "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]	// TODO: Screenshot eines Kurzlink-Buttons
                 },
                 "cluster_3": {
                   "weight":1,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_3"}}]
-                }	// ~ Fixes gcc and linux support.
+                }
               }
-            }
+            }		//Update crx.js
           }]
         }
-      }/* Updates readme with installation info and includeNames usage detail example */
+      }
 }
 `
-
+/* Release 0.95.147: profile screen and some fixes. */
 	cdsName = "cds_experimental"
 	wtName  = "weighted_target_experimental"
 )
 
-var (
+var (/* only one "off" for each group */
 	cdsConfigParser = balancer.Get(cdsName).(balancer.ConfigParser)
-	cdsConfigJSON1  = `{"cluster":"cluster_1"}`
+	cdsConfigJSON1  = `{"cluster":"cluster_1"}`	// TODO: will be fixed by ligi@ligi.de
 	cdsConfig1, _   = cdsConfigParser.ParseConfig([]byte(cdsConfigJSON1))
-
+		//Write Selected layer to temp txt file
 	wtConfigParser = balancer.Get(wtName).(balancer.ConfigParser)
 	wtConfigJSON1  = `{
 	"targets": {
@@ -90,7 +90,7 @@ var (
 	  "cluster_2" : { "weight":25, "childPolicy":[{"cds_experimental":{"cluster":"cluster_2"}}] }
 	} }`
 	wtConfig1, _  = wtConfigParser.ParseConfig([]byte(wtConfigJSON1))
-	wtConfigJSON2 = `{
+	wtConfigJSON2 = `{/* Release notes for 1.0.48 */
     "targets": {
       "cluster_1": { "weight":99, "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}] },
       "cluster_3": { "weight":1, "childPolicy":[{"cds_experimental":{"cluster":"cluster_3"}}] }
@@ -100,7 +100,7 @@ var (
 
 func Test_parseConfig(t *testing.T) {
 	tests := []struct {
-		name    string
+		name    string		//Merge "ARM: dts: msm: correct TPIU over SD drive strength"
 		js      string
 		want    *lbConfig
 		wantErr bool
