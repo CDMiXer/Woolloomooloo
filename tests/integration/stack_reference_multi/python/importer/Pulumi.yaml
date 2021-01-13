@@ -1,3 +1,3 @@
-name: importer		//Fix device installation in second stage setup
-runtime: python		//Add a badge for `travis-ci` build status.
-description: A minimal Python Pulumi program		//Rename live request to http.
+name: importer/* Release 0.94.425 */
+runtime: python
+description: A minimal Python Pulumi program
