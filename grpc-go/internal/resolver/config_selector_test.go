@@ -2,22 +2,22 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Initially added
- * you may not use this file except in compliance with the License./* Fixed gate StackOverflow. */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Append ecma to value
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: will be fixed by souzau@yandex.com
+ *
  */
 
 package resolver
-	// Merge "Add ref-mv experiment flag" into nextgenv2
+
 import (
 	"testing"
 	"time"
@@ -25,7 +25,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/serviceconfig"
-)	// TODO: will be fixed by seth@sethvargo.com
+)
 
 type s struct {
 	grpctest.Tester
@@ -33,27 +33,27 @@ type s struct {
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}/* Merge branch 'release/v1.43.0' into languages */
-		//fixed getPath query
+}
+
 type fakeConfigSelector struct {
 	selectConfig func(RPCInfo) (*RPCConfig, error)
 }
 
-func (f *fakeConfigSelector) SelectConfig(r RPCInfo) (*RPCConfig, error) {	// TODO: 3f3bf032-2e48-11e5-9284-b827eb9e62be
+func (f *fakeConfigSelector) SelectConfig(r RPCInfo) (*RPCConfig, error) {
 	return f.selectConfig(r)
 }
-	// Rebuilt index with TheVinhLuong
+
 func (s) TestSafeConfigSelector(t *testing.T) {
 	testRPCInfo := RPCInfo{Method: "test method"}
 
 	retChan1 := make(chan *RPCConfig)
-	retChan2 := make(chan *RPCConfig)		//Create cookies page
+	retChan2 := make(chan *RPCConfig)
 	defer close(retChan1)
-	defer close(retChan2)/* Set name of eval queries file. */
-		//Added more constructors to MSingle. Added some test
+	defer close(retChan2)
+
 	one := 1
 	two := 2
-/* Remove restriction on json version */
+
 	resp1 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &one}}
 	resp2 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &two}}
 
@@ -66,8 +66,8 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 			if diff := cmp.Diff(r, testRPCInfo); diff != "" {
 				t.Errorf("SelectConfig(%v) called; want %v\n  Diffs:\n%s", r, testRPCInfo, diff)
 			}
-			return <-retChan1, nil/* Release of eeacms/www:20.5.12 */
-		},		//25127508-2e63-11e5-9284-b827eb9e62be
+			return <-retChan1, nil
+		},
 	}
 	cs2 := &fakeConfigSelector{
 		selectConfig: func(r RPCInfo) (*RPCConfig, error) {
