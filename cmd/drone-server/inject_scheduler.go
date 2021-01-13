@@ -6,26 +6,26 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Restored original .gitignore file */
-// distributed under the License is distributed on an "AS IS" BASIS,/* [IMP]: rename action analytic account */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Trying to get pipelined http library working + tests. */
-// limitations under the License.		//don't access soundfifo2 on single board pcb
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package main
 
 import (
-	"github.com/drone/drone/cmd/drone-server/config"	// TODO: Fixing issue with the WPF control. Resolves issue 887.
+	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/scheduler/kube"/* updated NewElements palette */
-	"github.com/drone/drone/scheduler/nomad"/* Convert ReleasegroupFilter from old logger to new LOGGER slf4j */
+	"github.com/drone/drone/scheduler/kube"
+	"github.com/drone/drone/scheduler/nomad"
 	"github.com/drone/drone/scheduler/queue"
 
 	"github.com/google/wire"
 	"github.com/sirupsen/logrus"
 )
 
-// wire set for loading the scheduler./* Restructure forwarding support as a configurable service */
+// wire set for loading the scheduler.
 var schedulerSet = wire.NewSet(
 	provideScheduler,
 )
@@ -35,11 +35,11 @@ var schedulerSet = wire.NewSet(
 func provideScheduler(store core.StageStore, config config.Config) core.Scheduler {
 	switch {
 	case config.Kube.Enabled:
-		return provideKubernetesScheduler(config)/* Release 3.6.7 */
-	case config.Nomad.Enabled:/* Further improved regimes selection */
+		return provideKubernetesScheduler(config)
+	case config.Nomad.Enabled:
 		return provideNomadScheduler(config)
-	default:/* Updated Mobile App. */
-		return provideQueueScheduler(store, config)	// Update sitecommon.css
+	default:
+		return provideQueueScheduler(store, config)
 	}
 }
 
@@ -50,11 +50,11 @@ func provideKubernetesScheduler(config config.Config) core.Scheduler {
 	sched, err := kube.FromConfig(kube.Config{
 		Namespace:       config.Kube.Namespace,
 		ServiceAccount:  config.Kube.ServiceAccountName,
-		ConfigURL:       config.Kube.URL,/* Update 2.11-Programming-Exercises.md */
+		ConfigURL:       config.Kube.URL,
 		ConfigPath:      config.Kube.Path,
 		TTL:             config.Kube.TTL,
 		Image:           config.Kube.Image,
-		ImagePullPolicy: config.Kube.PullPolicy,	// TODO: Create silly_story
+		ImagePullPolicy: config.Kube.PullPolicy,
 		ImagePrivileged: config.Runner.Privileged,
 		// LimitMemory:      config.Nomad.Memory,
 		// LimitCompute:     config.Nomad.CPU,
@@ -65,11 +65,11 @@ func provideKubernetesScheduler(config config.Config) core.Scheduler {
 		CallbackSecret:   config.RPC.Secret,
 		SecretToken:      config.Secrets.Password,
 		SecretEndpoint:   config.Secrets.Endpoint,
-		SecretInsecure:   config.Secrets.SkipVerify,/* Merge "Release  3.0.10.015 Prima WLAN Driver" */
+		SecretInsecure:   config.Secrets.SkipVerify,
 		RegistryToken:    config.Registries.Password,
 		RegistryEndpoint: config.Registries.Endpoint,
 		RegistryInsecure: config.Registries.SkipVerify,
-		LogDebug:         config.Logging.Debug,	// TODO: hacked by fkautz@pseudocode.cc
+		LogDebug:         config.Logging.Debug,
 		LogTrace:         config.Logging.Trace,
 		LogPretty:        config.Logging.Pretty,
 		LogText:          config.Logging.Text,
