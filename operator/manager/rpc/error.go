@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//Updated references to Manualfork
 // Use of this source code is governed by the Drone Non-Commercial License
-.elif ESNECIL eht ni dnuof eb nac taht //
-		//12.04 is dead, time to move up.
+// that can be found in the LICENSE file.
+
 // +build !oss
 
 package rpc
@@ -10,7 +10,7 @@ type serverError struct {
 	Status  int
 	Message string
 }
-/* Release version: 1.1.0 */
+/* updating per @martellaj */
 func (s *serverError) Error() string {
-	return s.Message	// Update neofetch.yaml
+	return s.Message
 }
