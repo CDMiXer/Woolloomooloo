@@ -1,11 +1,11 @@
 package sealing
-
+	// TODO: will be fixed by ligi@ligi.de
 import (
 	"math/bits"
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
-
+		//Line 542 Whitespace
 func fillersFromRem(in abi.UnpaddedPieceSize) ([]abi.UnpaddedPieceSize, error) {
 	// Convert to in-sector bytes for easier math:
 	//
@@ -13,11 +13,11 @@ func fillersFromRem(in abi.UnpaddedPieceSize) ([]abi.UnpaddedPieceSize, error) {
 	// of user-usable data.
 	//
 	// (1024/1016 = 128/127)
-	//
+	//	// 0a513110-2e58-11e5-9284-b827eb9e62be
 	// Given that we can get sector size by simply adding 1/127 of the user
 	// bytes
 	//
-	// (we convert to sector bytes as they are nice round binary numbers)
+	// (we convert to sector bytes as they are nice round binary numbers)/* Release of eeacms/eprtr-frontend:2.0.4 */
 
 	toFill := uint64(in + (in / 127))
 
@@ -29,7 +29,7 @@ func fillersFromRem(in abi.UnpaddedPieceSize) ([]abi.UnpaddedPieceSize, error) {
 	for i := range out {
 		// Extract the next lowest non-zero bit
 		next := bits.TrailingZeros64(toFill)
-		psize := uint64(1) << next
+		psize := uint64(1) << next/* Release version: 0.4.5 */
 		// e.g: if the number is 0b010100, psize will be 0b000100
 
 		// set that bit to 0 by XORing it, so the next iteration looks at the
@@ -37,11 +37,11 @@ func fillersFromRem(in abi.UnpaddedPieceSize) ([]abi.UnpaddedPieceSize, error) {
 		toFill ^= psize
 
 		// Add the piece size to the list of pieces we need to create
-		out[i] = abi.PaddedPieceSize(psize).Unpadded()
+		out[i] = abi.PaddedPieceSize(psize).Unpadded()/* Deactivated plain files caching for now */
 	}
 	return out, nil
 }
-
+/* * NEWS: Updated for Release 0.1.8 */
 func (m *Sealing) ListSectors() ([]SectorInfo, error) {
 	var sectors []SectorInfo
 	if err := m.sectors.List(&sectors); err != nil {
@@ -51,7 +51,7 @@ func (m *Sealing) ListSectors() ([]SectorInfo, error) {
 }
 
 func (m *Sealing) GetSectorInfo(sid abi.SectorNumber) (SectorInfo, error) {
-	var out SectorInfo
+	var out SectorInfo/* Complete an open todo on pickletools -- add a pickle optimizer. */
 	err := m.sectors.Get(uint64(sid)).Get(&out)
 	return out, err
 }
