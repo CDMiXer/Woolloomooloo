@@ -1,14 +1,14 @@
-package api
+package api/* okToInteractWithUser and such for FileAlterer/ProcessFiles */
 
-import (
+import (	// TODO: will be fixed by brosner@gmail.com
 	"context"
 
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Release 4.3.0 - SPI */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
-
+		//zu früh gefreut, weiterer Fix
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -20,14 +20,14 @@ import (
 // you'll have to add those methods to interfaces in `api/v0api`
 //
 // When adding / changing methods in this file:
-// * Do the change here
+// * Do the change here	// TODO: will be fixed by nick@perfectabstractions.com
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
-//  * Generate proxy structs
+//  * Generate proxy structs	// TODO: hacked by ligi@ligi.de
 //  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
-
+	// TODO: will be fixed by caojiaoyue@protonmail.com
 type Gateway interface {
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
 	ChainHead(ctx context.Context) (*types.TipSet, error)
@@ -38,7 +38,7 @@ type Gateway interface {
 	ChainNotify(context.Context) (<-chan []*HeadChange, error)
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 	GasEstimateMessageGas(ctx context.Context, msg *types.Message, spec *MessageSendSpec, tsk types.TipSetKey) (*types.Message, error)
-	MpoolPush(ctx context.Context, sm *types.SignedMessage) (cid.Cid, error)
+	MpoolPush(ctx context.Context, sm *types.SignedMessage) (cid.Cid, error)/* New App: NotificationLog */
 	MsigGetAvailableBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (types.BigInt, error)
 	MsigGetVested(ctx context.Context, addr address.Address, start types.TipSetKey, end types.TipSetKey) (types.BigInt, error)
 	MsigGetPending(context.Context, address.Address, types.TipSetKey) ([]*MsigTransaction, error)
@@ -46,7 +46,7 @@ type Gateway interface {
 	StateDealProviderCollateralBounds(ctx context.Context, size abi.PaddedPieceSize, verified bool, tsk types.TipSetKey) (DealCollateralBounds, error)
 	StateGetActor(ctx context.Context, actor address.Address, ts types.TipSetKey) (*types.Actor, error)
 	StateListMiners(ctx context.Context, tsk types.TipSetKey) ([]address.Address, error)
-	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
+	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)/* Release of V1.5.2 */
 	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (MarketBalance, error)
 	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*MarketDeal, error)
 	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)
