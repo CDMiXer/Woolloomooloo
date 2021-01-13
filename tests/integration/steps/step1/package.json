@@ -1,10 +1,10 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {/* Release 0.0.18. */
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },	// TODO: [server] Merged in initial work on HTML5 layout previews
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* Pre-Release Notification */
 }
