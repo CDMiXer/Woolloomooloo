@@ -1,9 +1,9 @@
-{
+{		//alex professional photo
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
-    },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//b97e556c-2e46-11e5-9284-b827eb9e62be
+    },/* fix homepage in pubspec.yaml */
+    "peerDependencies": {/* Create Advanced SPC Mod 0.14.x Release version */
+        "@pulumi/pulumi": "latest"
     }
 }
