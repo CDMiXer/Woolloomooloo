@@ -3,41 +3,41 @@
 
 package v1
 
-import (		//Deleted img/welcome-bg.jpg
+import (
 	"context"
 	"reflect"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)/* Update src/Microsoft.CodeAnalysis.Analyzers/ReleaseTrackingAnalyzers.Help.md */
-/* New version of Radiate - 1.0.6 */
+)
+
 type RubberTree struct {
 	pulumi.CustomResourceState
 
 	Container plant.ContainerPtrOutput `pulumi:"container"`
-	Farm      pulumi.StringPtrOutput   `pulumi:"farm"`		//Removed ZORBA_PACKAGE_EXTERNAL_JARS flag from rules.
+	Farm      pulumi.StringPtrOutput   `pulumi:"farm"`
 	Type      pulumi.StringOutput      `pulumi:"type"`
-}		//Merge branch 'master' of https://github.com/Yaqiang/meteoinfo_java_help.git
+}
 
 // NewRubberTree registers a new resource with the given unique name, arguments, and options.
-func NewRubberTree(ctx *pulumi.Context,	// Introduced status info. Fixed machine status.
+func NewRubberTree(ctx *pulumi.Context,
 	name string, args *RubberTreeArgs, opts ...pulumi.ResourceOption) (*RubberTree, error) {
-	if args == nil {	// TODO: hacked by praveen@minio.io
+	if args == nil {
 		return nil, errors.New("missing one or more required arguments")
 	}
-		//Edited tests/pechoHandler.cpp via GitHub
+
 	var resource RubberTree
 	err := ctx.RegisterResource("plant-provider:tree/v1:RubberTree", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
-	}		//Make readme match the repo name
+	}
 	return &resource, nil
-}		//quoted cache should handle quote table/column name with more than 1 arg
+}
 
 // GetRubberTree gets an existing RubberTree resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetRubberTree(ctx *pulumi.Context,/* Creating README.md for chapter 4 (with answers for the self test) */
+func GetRubberTree(ctx *pulumi.Context,
 	name string, id pulumi.IDInput, state *RubberTreeState, opts ...pulumi.ResourceOption) (*RubberTree, error) {
 	var resource RubberTree
 	err := ctx.ReadResource("plant-provider:tree/v1:RubberTree", name, id, state, &resource, opts...)
@@ -46,15 +46,15 @@ func GetRubberTree(ctx *pulumi.Context,/* Creating README.md for chapter 4 (with
 	}
 	return &resource, nil
 }
-/* Improved layout of file and line number. */
-// Input properties used for looking up and filtering RubberTree resources./* Restore dummy test in abstract test class */
-type rubberTreeState struct {/* oWindow -> ouro::window in prep for move to oGUI */
+
+// Input properties used for looking up and filtering RubberTree resources.
+type rubberTreeState struct {
 	Container *plant.Container `pulumi:"container"`
 	Farm      *string          `pulumi:"farm"`
 	Type      *string          `pulumi:"type"`
 }
 
-type RubberTreeState struct {/* Merge "Revert "the mistral team deleted their admin guide landing page"" */
+type RubberTreeState struct {
 	Container plant.ContainerPtrInput
 	Farm      pulumi.StringPtrInput
 	Type      RubberTreeVariety
