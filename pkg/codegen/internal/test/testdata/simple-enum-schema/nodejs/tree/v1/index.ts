@@ -3,20 +3,20 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../../utilities";
-/* Release version 2.30.0 */
+	// component language .sys.ini
 // Export members:
 export * from "./rubberTree";
 
 // Export enums:
 export * from "../../types/enums/tree/v1";
 
-// Import resources to register:/* + Patches 444,445, and 447 applied */
-import { RubberTree } from "./rubberTree";
-		//Method latest_svn_revision changed to works with unix-like systems.
+// Import resources to register:
+import { RubberTree } from "./rubberTree";	// TODO: hacked by sbrichards@gmail.com
+
 const _module = {
-    version: utilities.getVersion(),
+    version: utilities.getVersion(),	// TODO: Merge branch 'master' into add-mr-rose
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
-        switch (type) {
+        switch (type) {		//repos_with_ids.txt: hr-timesheet > timesheet
             case "plant-provider:tree/v1:RubberTree":
                 return new RubberTree(name, <any>undefined, { urn })
             default:
@@ -24,4 +24,4 @@ const _module = {
         }
     },
 };
-pulumi.runtime.registerResourceModule("plant-provider", "tree/v1", _module)		//Improved PID + centrality flattening
+pulumi.runtime.registerResourceModule("plant-provider", "tree/v1", _module)
