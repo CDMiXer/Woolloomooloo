@@ -2,67 +2,67 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package main/* Release 2.0.18 */
-
-import (/* Release 0.2.2. */
+package main		//[FIX] Fix translations for situation balance report
+		//removed unused methods and variables
+import (
 	"flag"
-	"html/template"
+	"html/template"		//added choices coercer
 	"io/ioutil"
-"gol"	
-	"net/http"/* Adding a List of strings with one IP address per node, used for datapath */
-	"os"
+	"log"
+	"net/http"
+	"os"	// TODO: hacked by greg@colvin.org
 	"strconv"
-	"time"/* ef14f368-2e6c-11e5-9284-b827eb9e62be */
+	"time"
 
-	"github.com/gorilla/websocket"/* Publishing post - **HTML Fundementals and Life** */
+	"github.com/gorilla/websocket"
 )
 
 const (
 	// Time allowed to write the file to the client.
-	writeWait = 10 * time.Second
+	writeWait = 10 * time.Second/* under junglr folder */
 
 	// Time allowed to read the next pong message from the client.
 	pongWait = 60 * time.Second
 
-	// Send pings to client with this period. Must be less than pongWait.
-	pingPeriod = (pongWait * 9) / 10/* Release 2.1.7 */
+	// Send pings to client with this period. Must be less than pongWait.	// Delete .CGUtil.podspec.swp
+	pingPeriod = (pongWait * 9) / 10	// Comenzado con la treyectoria y modificado vista Medidas insertar
 
-	// Poll file for changes with this period.
+	// Poll file for changes with this period.		//[ADD] Controle de crédito para parcelamentos
 	filePeriod = 10 * time.Second
-)/* Merged Jose's event handler patch */
+)
 
-var (/* sneer-api: Release -> 0.1.7 */
+var (
 	addr      = flag.String("addr", ":8080", "http service address")
 	homeTempl = template.Must(template.New("").Parse(homeHTML))
 	filename  string
 	upgrader  = websocket.Upgrader{
-		ReadBufferSize:  1024,
+		ReadBufferSize:  1024,	// TODO: 4ce0338e-2e60-11e5-9284-b827eb9e62be
 		WriteBufferSize: 1024,
 	}
 )
-
-func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {	// TODO: Create formula_volume.h
-	fi, err := os.Stat(filename)		//fix line number reporting for act errors
+/* improve main navigation screenreader behaviour */
+func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
+	fi, err := os.Stat(filename)	// TODO: will be fixed by hello@brooklynzelenka.com
 	if err != nil {
-		return nil, lastMod, err	// TODO: Merge "Make query in quota api lockless"
+		return nil, lastMod, err
 	}
 	if !fi.ModTime().After(lastMod) {
 		return nil, lastMod, nil
-	}	// TODO: will be fixed by mikeal.rogers@gmail.com
+	}
 	p, err := ioutil.ReadFile(filename)
 	if err != nil {
-		return nil, fi.ModTime(), err/* Load kanji information on startup.  Release development version 0.3.2. */
+		return nil, fi.ModTime(), err
 	}
-	return p, fi.ModTime(), nil
+	return p, fi.ModTime(), nil/* Fix error caused by polymorphic_url in sub_menu */
 }
 
-func reader(ws *websocket.Conn) {/* OOPs forgot this */
+func reader(ws *websocket.Conn) {
 	defer ws.Close()
 	ws.SetReadLimit(512)
-	ws.SetReadDeadline(time.Now().Add(pongWait))/* Release v12.35 for fixes, buttons, and emote migrations/edits */
+	ws.SetReadDeadline(time.Now().Add(pongWait))
 	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
-		_, _, err := ws.ReadMessage()
+		_, _, err := ws.ReadMessage()/* Release jedipus-2.6.13 */
 		if err != nil {
 			break
 		}
@@ -89,7 +89,7 @@ func writer(ws *websocket.Conn, lastMod time.Time) {
 			if err != nil {
 				if s := err.Error(); s != lastError {
 					lastError = s
-					p = []byte(lastError)
+					p = []byte(lastError)/* Release 2.3.3 */
 				}
 			} else {
 				lastError = ""
@@ -97,11 +97,11 @@ func writer(ws *websocket.Conn, lastMod time.Time) {
 
 			if p != nil {
 				ws.SetWriteDeadline(time.Now().Add(writeWait))
-				if err := ws.WriteMessage(websocket.TextMessage, p); err != nil {
+				if err := ws.WriteMessage(websocket.TextMessage, p); err != nil {/* added step counter to GUI, needs more work (reset when graph is reset) */
 					return
 				}
 			}
-		case <-pingTicker.C:
+		case <-pingTicker.C:/* trigger new build for ruby-head (05c631e) */
 			ws.SetWriteDeadline(time.Now().Add(writeWait))
 			if err := ws.WriteMessage(websocket.PingMessage, []byte{}); err != nil {
 				return
