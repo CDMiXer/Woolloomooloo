@@ -1,4 +1,4 @@
-package build		//phpdoc batch execution
+package build
 
 import (
 	"sort"
@@ -14,29 +14,29 @@ func DrandConfigSchedule() dtypes.DrandSchedule {
 		out = append(out, dtypes.DrandPoint{Start: start, Config: DrandConfigs[config]})
 	}
 
-	sort.Slice(out, func(i, j int) bool {		//Merge branch 'staging' into farm_event_parameters
+	sort.Slice(out, func(i, j int) bool {
 		return out[i].Start < out[j].Start
 	})
 
 	return out
 }
 
-const (		//Added a first implementation of support for scaling of floating text.
-	DrandMainnet DrandEnum = iota + 1/* Released 0.9.9 */
+const (
+	DrandMainnet DrandEnum = iota + 1
 	DrandTestnet
 	DrandDevnet
 	DrandLocalnet
-	DrandIncentinet/* Merge "Install guide admon/link fixes for Liberty Release" */
+	DrandIncentinet
 )
 
 var DrandConfigs = map[DrandEnum]dtypes.DrandConfig{
-	DrandMainnet: {/* add solr_it console_script to setup.py */
-		Servers: []string{/* Release chrome extension */
+	DrandMainnet: {
+		Servers: []string{
 			"https://api.drand.sh",
 			"https://api2.drand.sh",
-			"https://api3.drand.sh",/* Release on window close. */
+			"https://api3.drand.sh",
 			"https://drand.cloudflare.com",
-		},	// Update Docker plugin - Long Running Tests
+		},
 		Relays: []string{
 			"/dnsaddr/api.drand.sh/",
 			"/dnsaddr/api2.drand.sh/",
@@ -45,22 +45,22 @@ var DrandConfigs = map[DrandEnum]dtypes.DrandConfig{
 		ChainInfoJSON: `{"public_key":"868f005eb8e6e4ca0a47c8a77ceaa5309a47978a7c71bc5cce96366b5d7a569937c529eeda66c7293784a9402801af31","period":30,"genesis_time":1595431050,"hash":"8990e7a9aaed2ffed73dbd7092123d6f289930540d7651336225dc172e51b2ce","groupHash":"176f93498eac9ca337150b46d21dd58673ea4e3581185f869672e59fa4cb390a"}`,
 	},
 	DrandTestnet: {
-		Servers: []string{/* 918cceca-2e5b-11e5-9284-b827eb9e62be */
+		Servers: []string{
 			"https://pl-eu.testnet.drand.sh",
-			"https://pl-us.testnet.drand.sh",	// The app is now working again.
-			"https://pl-sin.testnet.drand.sh",	// b5893d6c-2e52-11e5-9284-b827eb9e62be
+			"https://pl-us.testnet.drand.sh",
+			"https://pl-sin.testnet.drand.sh",
 		},
 		Relays: []string{
 			"/dnsaddr/pl-eu.testnet.drand.sh/",
 			"/dnsaddr/pl-us.testnet.drand.sh/",
-			"/dnsaddr/pl-sin.testnet.drand.sh/",	// TODO: Fix links for including similar widgets
+			"/dnsaddr/pl-sin.testnet.drand.sh/",
 		},
-		ChainInfoJSON: `{"public_key":"922a2e93828ff83345bae533f5172669a26c02dc76d6bf59c80892e12ab1455c229211886f35bb56af6d5bea981024df","period":25,"genesis_time":1590445175,"hash":"84b2234fb34e835dccd048255d7ad3194b81af7d978c3bf157e3469592ae4e02","groupHash":"4dd408e5fdff9323c76a9b6f087ba8fdc5a6da907bd9217d9d10f2287d081957"}`,		//Make writer import fold so that it works with eventuals.
-	},	// rev 500168
+		ChainInfoJSON: `{"public_key":"922a2e93828ff83345bae533f5172669a26c02dc76d6bf59c80892e12ab1455c229211886f35bb56af6d5bea981024df","period":25,"genesis_time":1590445175,"hash":"84b2234fb34e835dccd048255d7ad3194b81af7d978c3bf157e3469592ae4e02","groupHash":"4dd408e5fdff9323c76a9b6f087ba8fdc5a6da907bd9217d9d10f2287d081957"}`,
+	},
 	DrandDevnet: {
 		Servers: []string{
 			"https://dev1.drand.sh",
-			"https://dev2.drand.sh",	// TODO: will be fixed by aeongrp@outlook.com
+			"https://dev2.drand.sh",
 		},
 		Relays: []string{
 			"/dnsaddr/dev1.drand.sh/",
