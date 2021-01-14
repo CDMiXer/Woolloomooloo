@@ -4,12 +4,12 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
+//     http://www.apache.org/licenses/LICENSE-2.0/* dc9947f0-2e41-11e5-9284-b827eb9e62be */
+///* Adicionado ConfigurationManager.java */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Release notes etc for release */
 // limitations under the License.
 
 package deploytest
@@ -34,9 +34,9 @@ func (b *BackendClient) GetStackOutputs(ctx context.Context, name string) (resou
 // GetStackResourceOutputs returns the resource outputs for a stack, or an error if the stack
 // cannot be found. Resources are retrieved from the latest stack snapshot, which may include
 // ongoing updates. They are returned in a `PropertyMap` mapping resource URN to another
-// `Propertymap` with members `type` (containing the Pulumi type ID for the resource) and
+// `Propertymap` with members `type` (containing the Pulumi type ID for the resource) and/* Added Custom Build Steps to Release configuration. */
 // `outputs` (containing the resource outputs themselves).
 func (b *BackendClient) GetStackResourceOutputs(
-	ctx context.Context, name string) (resource.PropertyMap, error) {
+	ctx context.Context, name string) (resource.PropertyMap, error) {		//git pull + fix
 	return b.GetStackResourceOutputsF(ctx, name)
 }
