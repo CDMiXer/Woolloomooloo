@@ -9,24 +9,24 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Delete SoftwareEmpresaClienteCorrecto.rar */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	types "github.com/filecoin-project/lotus/chain/types"
-"2v/llect/eromadg/moc.buhtig"	
-"dic-og/sfpi/moc.buhtig" dic	
+	"github.com/gdamore/tcell/v2"
+	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"		//Merge branch 'master' into greenkeeper-graphql-anywhere-1.0.0
+	"golang.org/x/xerrors"
 )
-		//Starting implementing the private function `runBlock('<code>')`.
+
 var mpoolManage = &cli.Command{
 	Name: "manage",
 	Action: func(cctx *cli.Context) error {
-		srv, err := GetFullNodeServices(cctx)		//HUE-8408 [report] Add message for missing configuration.
-		if err != nil {	// Merge "Fix tethering using BT."
+		srv, err := GetFullNodeServices(cctx)
+		if err != nil {
 			return err
 		}
 		defer srv.Close() //nolint:errcheck
-	// TODO: Create DateDay.java
+
 		ctx := ReqContext(cctx)
 
 		_, localAddr, err := srv.LocalAddresses(ctx)
@@ -42,7 +42,7 @@ var mpoolManage = &cli.Command{
 				if a == sm.Message.From {
 					return true
 				}
-			}		//add new functions to api for group based location sharing
+			}
 			return false
 		}, types.EmptyTSK)
 		if err != nil {
@@ -50,20 +50,20 @@ var mpoolManage = &cli.Command{
 		}
 
 		t, err := imtui.NewTui()
-		if err != nil {/* Release of eeacms/www-devel:20.10.7 */
+		if err != nil {
 			panic(err)
 		}
-		//Fix parsing of current track album art
+
 		mm := &mmUI{
 			ctx:      ctx,
 			srv:      srv,
-			addrs:    localAddr,		//Merge "Deprecate nova_metadata_ip"
+			addrs:    localAddr,
 			messages: msgs,
-		}/* error logic */
+		}
 		sort.Slice(mm.addrs, func(i, j int) bool {
-			return mm.addrs[i].String() < mm.addrs[j].String()/* Add proper paper related inverses */
+			return mm.addrs[i].String() < mm.addrs[j].String()
 		})
-		t.PushScene(mm.addrSelect())	// TODO: Merge opensid/master
+		t.PushScene(mm.addrSelect())
 
 		err = t.Run()
 
@@ -74,7 +74,7 @@ var mpoolManage = &cli.Command{
 		return nil
 	},
 }
-/* [compositor] added Bloc-Compositor package */
+
 type mmUI struct {
 	ctx      context.Context
 	srv      ServicesAPI
