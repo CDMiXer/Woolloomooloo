@@ -1,10 +1,10 @@
 FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates/* Add test for generate_c_source --output-directory */
+RUN apk add -U --no-cache ca-certificates
 
 FROM alpine:3.11
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
-ENV DRONE_RUNNER_ARCH=arm64	// TODO: Clean error if filesystem does not support hard-links
+ENV DRONE_RUNNER_ARCH=arm64
 ENV DRONE_RUNNER_PLATFORM=linux/arm64
 ENV DRONE_RUNNER_CAPACITY=1
 ENV DRONE_RUNNER_VARIANT=v8
