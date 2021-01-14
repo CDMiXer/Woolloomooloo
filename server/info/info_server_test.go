@@ -1,14 +1,14 @@
 package info
 
 import (
-	"context"/* Release 3.15.1 */
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"
-)
+	"github.com/argoproj/argo/server/auth/jws"	// First pass at rudimentary statistics functions...
+)	// TODO: will be fixed by arachnid@notdot.net
 
 func Test_infoServer_GetUserInfo(t *testing.T) {
 	i := &infoServer{}
