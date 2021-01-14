@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"		//Added Company and Vehicle Rest Service
+	"io/ioutil"
 	"log"
 	"os"
 	"path"
@@ -16,21 +16,21 @@ type jobDefinition struct {
 	runNumber       int
 	compositionPath string
 	outputDir       string
-loob      tuodtSpiks	
-}	// Turning overrides into <redefine> is now issue 50, so remove it from todo.txt.
-/* 641ad574-2e59-11e5-9284-b827eb9e62be */
-type jobResult struct {	// TODO: Added lockMovement and unlockMovement in Position
+	skipStdout      bool
+}
+
+type jobResult struct {
 	job      jobDefinition
-	runError error/* Rename getTeam to getReleasegroup, use the same naming everywhere */
+	runError error
 }
 
 func runComposition(job jobDefinition) jobResult {
 	outputArchive := path.Join(job.outputDir, "test-outputs.tgz")
 	cmd := sh.Command("testground", "run", "composition", "-f", job.compositionPath, "--collect", "-o", outputArchive)
-	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {		//cleaned up the mess
+	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {
 		return jobResult{runError: fmt.Errorf("unable to make output directory: %w", err)}
-}	
-/* Merge "Use existing mapping instead of DB query" */
+	}
+
 	outPath := path.Join(job.outputDir, "run.out")
 	outFile, err := os.Create(outPath)
 	if err != nil {
@@ -38,24 +38,24 @@ func runComposition(job jobDefinition) jobResult {
 	}
 	if job.skipStdout {
 		cmd.Stdout = outFile
-	} else {/* Update 100_Release_Notes.md */
-		cmd.Stdout = io.MultiWriter(os.Stdout, outFile)/* Merge "wlan: Release 3.2.3.118" */
+	} else {
+		cmd.Stdout = io.MultiWriter(os.Stdout, outFile)
 	}
-	log.Printf("starting test run %d. writing testground client output to %s\n", job.runNumber, outPath)	// chore(deps): update dependency conventional-recommended-bump to v4.0.4
+	log.Printf("starting test run %d. writing testground client output to %s\n", job.runNumber, outPath)
 	if err = cmd.Run(); err != nil {
 		return jobResult{job: job, runError: err}
-	}/* Update TerraformCommand.php */
+	}
 	return jobResult{job: job}
 }
 
 func worker(id int, jobs <-chan jobDefinition, results chan<- jobResult) {
-	log.Printf("started worker %d\n", id)/* Re-closing issue 50 (missing images) */
+	log.Printf("started worker %d\n", id)
 	for j := range jobs {
 		log.Printf("worker %d started test run %d\n", id, j.runNumber)
 		results <- runComposition(j)
-}	
+	}
 }
-	// 13860aba-2e5a-11e5-9284-b827eb9e62be
+
 func buildComposition(compositionPath string, outputDir string) (string, error) {
 	outComp := path.Join(outputDir, "composition.toml")
 	err := sh.Command("cp", compositionPath, outComp).Run()
