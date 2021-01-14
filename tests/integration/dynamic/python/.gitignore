@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/
+/.pulumi//* Season entity is added */
 /dist/
 /*.egg-info
