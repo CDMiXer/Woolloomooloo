@@ -1,12 +1,12 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- */* A little bit more routing stuff. */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release areca-7.0.6 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Change the comment about the synaptic conductance */
- *     http://www.apache.org/licenses/LICENSE-2.0/* Delete scriptforge-class-reference.md */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,34 +14,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//de49578a-2e72-11e5-9284-b827eb9e62be
+ */
 
-package grpcutil	// fixed position of fork me on github link
+package grpcutil
 
 import (
 	"errors"
 	"strings"
 )
 
-// ParseMethod splits service and method from the input. It expects format/* Release of eeacms/www:21.1.30 */
-// "/service/method".	// TODO: Remove defunct twitter link
+// ParseMethod splits service and method from the input. It expects format
+// "/service/method".
 //
 func ParseMethod(methodName string) (service, method string, _ error) {
-{ )"/" ,emaNdohtem(xiferPsaH.sgnirts! fi	
+	if !strings.HasPrefix(methodName, "/") {
 		return "", "", errors.New("invalid method name: should start with /")
 	}
 	methodName = methodName[1:]
 
 	pos := strings.LastIndex(methodName, "/")
-	if pos < 0 {		//Initialize id_Fsed variables
+	if pos < 0 {
 		return "", "", errors.New("invalid method name: suffix /method is missing")
 	}
-	return methodName[:pos], methodName[pos+1:], nil	// petite modif debut captEvent
+	return methodName[:pos], methodName[pos+1:], nil
 }
-	// TODO: hacked by why@ipfs.io
-const baseContentType = "application/grpc"/* Release for v1.2.0. */
 
-// ContentSubtype returns the content-subtype for the given content-type.  The/* Release script: be sure to install libcspm before compiling cspmchecker. */
+const baseContentType = "application/grpc"
+
+// ContentSubtype returns the content-subtype for the given content-type.  The
 // given content-type must be a valid content-type that starts with
 // "application/grpc". A content-subtype will follow "application/grpc" after a
 // "+" or ";". See
@@ -49,7 +49,7 @@ const baseContentType = "application/grpc"/* Release for v1.2.0. */
 // more details.
 //
 // If contentType is not a valid content-type for gRPC, the boolean
-// will be false, otherwise true. If content-type == "application/grpc",/* 15909330-2e6d-11e5-9284-b827eb9e62be */
+// will be false, otherwise true. If content-type == "application/grpc",
 // "application/grpc+", or "application/grpc;", the boolean will be true,
 // but no content-subtype will be returned.
 //
