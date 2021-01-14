@@ -1,12 +1,12 @@
-{	// TODO: Some small code tweaks
-,"sesaila" :"eman"    
+{/* Release v0.6.0.3 */
+    "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },/* Release version: 1.0.8 */
-    "peerDependencies": {
+    },/* Release dhcpcd-6.8.0 */
+    "peerDependencies": {/* Releases 0.0.12 */
         "@pulumi/pulumi": "latest"
     }
 }
