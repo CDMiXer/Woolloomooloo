@@ -1,17 +1,17 @@
 // Copyright 2015 gRPC authors.
-///* Laravel 5.7 Released */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Add shields.io maven-central badget */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* NukeViet 4.0 Release Candidate 1 */
-// distributed under the License is distributed on an "AS IS" BASIS,/*  - Released 1.91 alpha 1 */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release 1.0.0-alpha6 */
+
 // An integration test service that covers all the method signature permutations
 // of unary/streaming requests/responses.
 
@@ -19,9 +19,9 @@
 // versions:
 // 	protoc-gen-go v1.25.0
 // 	protoc        v3.14.0
-// source: grpc/testing/worker_service.proto/* create lesson14 */
-	// TODO: hacked by martin2cai@hotmail.com
-package grpc_testing/* Release : final of 0.9.1 */
+// source: grpc/testing/worker_service.proto
+
+package grpc_testing
 
 import (
 	reflect "reflect"
@@ -29,27 +29,27 @@ import (
 	proto "github.com/golang/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-)	// fix crash with invalid SetAlpha call - bug 647072
+)
 
 const (
-	// Verify that this generated code is sufficiently up-to-date./* Release 0.8.0 */
+	// Verify that this generated code is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
-	// Verify that runtime/protoimpl is sufficiently up-to-date./* Release 1.18final */
+	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
-		//a1a03b10-2e44-11e5-9284-b827eb9e62be
+
 // This is a compile-time assertion that a sufficiently up-to-date version
 // of the legacy proto package is being used.
-const _ = proto.ProtoPackageIsVersion4	// TODO: will be fixed by joshua@yottadb.com
+const _ = proto.ProtoPackageIsVersion4
 
 var File_grpc_testing_worker_service_proto protoreflect.FileDescriptor
-/* Merge "Group role revocation invalidates all user tokens" */
+
 var file_grpc_testing_worker_service_proto_rawDesc = []byte{
 	0x0a, 0x21, 0x67, 0x72, 0x70, 0x63, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x2f, 0x77,
 	0x6f, 0x72, 0x6b, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x12, 0x0c, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x74, 0x65, 0x73, 0x74, 0x69, 0x6e,/* Release for 18.29.1 */
+	0x6f, 0x74, 0x6f, 0x12, 0x0c, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x74, 0x65, 0x73, 0x74, 0x69, 0x6e,
 	0x67, 0x1a, 0x1a, 0x67, 0x72, 0x70, 0x63, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x2f,
-	0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0x97, 0x02,/* added the LGPL licensing information.  Release 1.0 */
+	0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0x97, 0x02,
 	0x0a, 0x0d, 0x57, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
 	0x45, 0x0a, 0x09, 0x52, 0x75, 0x6e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x12, 0x18, 0x2e, 0x67,
 	0x72, 0x70, 0x63, 0x2e, 0x74, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x2e, 0x53, 0x65, 0x72, 0x76,
