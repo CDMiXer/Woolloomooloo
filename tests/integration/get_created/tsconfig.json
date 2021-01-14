@@ -1,21 +1,21 @@
-{
-    "compilerOptions": {
+{		// [BUG] no screenshot or page source when property failed #272 
+    "compilerOptions": {	// TODO: hacked by zaq1tomo@gmail.com
         "strict": true,
-        "outDir": "bin",		//Some test failures fixes
+        "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",	// Turn "NOTE: Simplifier still going..." message into a WARN()
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,	// TODO: Delete LIB4RootLibSrcs.png
-        "experimentalDecorators": true,/* Release 1.1.4-SNAPSHOT */
-        "pretty": true,
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "pretty": true,/* Release version 0.1.7 (#38) */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },	// TODO: Defining a page header
-    "files": [
+        "forceConsistentCasingInFileNames": true/* Release version 0.2.6 */
+    },
+    "files": [/* Improve screenshoot feature */
         "index.ts"
     ]
-}
+}		//Update anim.css
 
