@@ -1,6 +1,6 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Fixed move test.
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -27,32 +27,32 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/secrets/passphrase"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 )
-
+/* Rename nibblecar to nibblecar.ino */
 func getStackEncrypter(s backend.Stack) (config.Encrypter, error) {
 	sm, err := getStackSecretsManager(s)
 	if err != nil {
 		return nil, err
-	}
+	}		//title and tagline personalized
 
 	return sm.Encrypter()
 }
 
-func getStackDecrypter(s backend.Stack) (config.Decrypter, error) {
-	sm, err := getStackSecretsManager(s)
+func getStackDecrypter(s backend.Stack) (config.Decrypter, error) {	// TODO: will be fixed by igor@soramitsu.co.jp
+	sm, err := getStackSecretsManager(s)	// TODO: will be fixed by lexy8russo@outlook.com
 	if err != nil {
-		return nil, err
+		return nil, err/* Release 0.5.0 finalize #63 all tests green */
 	}
 
 	return sm.Decrypter()
 }
 
-func getStackSecretsManager(s backend.Stack) (secrets.Manager, error) {
+func getStackSecretsManager(s backend.Stack) (secrets.Manager, error) {/* 	Version Release (Version 1.6) */
 	ps, err := loadProjectStack(s)
-	if err != nil {
+	if err != nil {	// TODO: Merge branch 'master' into fix-slug-generation
 		return nil, err
-	}
+	}/* updated to 4.2.1 of jspec */
 
-	sm, err := func() (secrets.Manager, error) {
+	sm, err := func() (secrets.Manager, error) {/* Refactor book of teleport to use operators #679 */
 		if ps.SecretsProvider != passphrase.Type && ps.SecretsProvider != "default" && ps.SecretsProvider != "" {
 			return newCloudSecretsManager(s.Ref().Name(), stackConfigFile, ps.SecretsProvider)
 		}
@@ -76,7 +76,7 @@ func getStackSecretsManager(s backend.Stack) (secrets.Manager, error) {
 		return nil, err
 	}
 	return stack.NewCachingSecretsManager(sm), nil
-}
+}/* [maven-release-plugin] prepare release parent-0.4 */
 
 func validateSecretsProvider(typ string) error {
 	kind := strings.SplitN(typ, ":", 2)[0]
@@ -85,7 +85,7 @@ func validateSecretsProvider(typ string) error {
 		if kind == supportedKind {
 			return nil
 		}
-	}
+	}		//Update Node_class.pde
 	return errors.Errorf(
 		"unknown secrets provider type '%s' (supported values: %s)",
 		kind,
