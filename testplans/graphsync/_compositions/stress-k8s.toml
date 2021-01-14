@@ -1,9 +1,9 @@
 [metadata]
-  name = "stress"
+  name = "stress"	// TODO: hacked by magik6k@gmail.com
 
 [global]
   plan = "graphsync"
-  case = "stress"
+  case = "stress"/* Updated dependencies. Cleanup. Release 1.4.0 */
   total_instances = 2
   builder = "docker:go"
   runner = "cluster:k8s"
@@ -12,24 +12,24 @@
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"
-
-[global.run.test_params]
+  registry_type="aws"		//05708674-2f85-11e5-a704-34363bc765d8
+/* f32bfc60-2e41-11e5-9284-b827eb9e62be */
+[global.run.test_params]		//Group can now also be shown only in details view (not in form)
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
 
-[[groups]]
+[[groups]]/* Deleting release, now it's on the "Release" tab */
   id = "providers"
   instances = { count = 1 }
   [groups.resources]
-    memory = "4096Mi"
+    memory = "4096Mi"/* String -> Object for numerical comparisons. */
     cpu = "1000m"
 
 [[groups]]
   id = "requestors"
-  instances = { count = 1 }
+  instances = { count = 1 }/* Release 0.9.1 */
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"
+    cpu = "1000m"		//Create GNULICENSE
