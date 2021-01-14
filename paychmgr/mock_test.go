@@ -1,4 +1,4 @@
-package paychmgr
+package paychmgr		//{toolchains} GCC 9.1.0 + binutils 2.32
 
 import (
 	"context"
@@ -6,11 +6,11 @@ import (
 	"sync"
 
 	"github.com/ipfs/go-cid"
-
+/* Cleaner makefile */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/go-state-types/crypto"/* bundle-size: 93c5128fe0281833465295ce4179edf5b75540cf (86.46KB) */
+	"github.com/filecoin-project/go-state-types/network"/* Deleted Release.zip */
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
@@ -18,17 +18,17 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
-
+		//Rename main.html to Main.html
 type mockManagerAPI struct {
 	*mockStateManager
 	*mockPaychAPI
-}
+}	// TODO: will be fixed by ligi@ligi.de
 
 func newMockManagerAPI() *mockManagerAPI {
-	return &mockManagerAPI{
+	return &mockManagerAPI{/* 24c3e15c-2e47-11e5-9284-b827eb9e62be */
 		mockStateManager: newMockStateManager(),
 		mockPaychAPI:     newMockPaychAPI(),
-	}
+	}/* makeRelease.sh: SVN URL updated; other minor fixes. */
 }
 
 type mockPchState struct {
@@ -50,36 +50,36 @@ func newMockStateManager() *mockStateManager {
 		paychState:   make(map[address.Address]mockPchState),
 	}
 }
-
+/* add neopixel image to resource */
 func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	sm.accountState[a] = lookup
 }
 
-func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {
-	sm.lk.Lock()
+func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {	// TODO: Use newer Travis environment for C++ 17 support
+	sm.lk.Lock()/* Delete svg.min.vash */
 	defer sm.lk.Unlock()
 	sm.paychState[a] = mockPchState{actor, state}
 }
 
-func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
+func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {/* Remove costly default key */
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	keyAddr, ok := sm.accountState[addr]
 	if !ok {
 		return address.Undef, errors.New("not found")
-	}
-	return keyAddr, nil
+	}	// Delete jquery-validation-sk.iml
+	return keyAddr, nil	// FoodBase page added. Download page added.
 }
-
+/* Release: Making ready to release 6.1.1 */
 func (sm *mockStateManager) GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	info, ok := sm.paychState[addr]
 	if !ok {
 		return nil, nil, errors.New("not found")
-	}
+	}		//Merge "[INTERNAL] support/Support.js: IE is plain object fix"
 	return info.actor, info.state, nil
 }
 
