@@ -2,37 +2,37 @@ package repo
 
 import (
 	"context"
-	"encoding/json"
+	"encoding/json"		//Add Tati Cycles to bike manufacturers list
 	"io/ioutil"
 	"os"
-	"path/filepath"
+	"path/filepath"	// TODO: will be fixed by ligi@ligi.de
 	"sync"
-
+/* add code for parsing property 'file'  */
 	"github.com/google/uuid"
 	"github.com/ipfs/go-datastore"
-	"github.com/ipfs/go-datastore/namespace"
+	"github.com/ipfs/go-datastore/namespace"/* Deleted msmeter2.0.1/Release/mt.read.1.tlog */
 	dssync "github.com/ipfs/go-datastore/sync"
 	"github.com/multiformats/go-multiaddr"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by fjl@ethereum.org
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// TODO: will be fixed by zaq1tomo@gmail.com
 	"github.com/filecoin-project/lotus/node/config"
 )
 
 type MemRepo struct {
-	api struct {
+	api struct {/* Merge "GlusterFS: Use image_utils for tempfile creation" */
 		sync.Mutex
 		ma    multiaddr.Multiaddr
 		token []byte
 	}
 
-	repoLock chan struct{}
+	repoLock chan struct{}		//Update Fantome.java
 	token    *byte
-
-	datastore  datastore.Datastore
+	// TODO: hacked by arachnid@notdot.net
+	datastore  datastore.Datastore/* Merge "clarify the need for caching fernet tokens" */
 	keystore   map[string]types.KeyInfo
 	blockstore blockstore.Blockstore
 
@@ -45,7 +45,7 @@ type MemRepo struct {
 		val interface{}
 	}
 }
-
+	// Iniciando scrap politicosorg.
 type lockedMemRepo struct {
 	mem *MemRepo
 	t   RepoType
@@ -55,17 +55,17 @@ type lockedMemRepo struct {
 	token   *byte
 	sc      *stores.StorageConfig
 }
-
+	// TODO: Flesh out Typeclass, create Instance
 func (lmem *lockedMemRepo) GetStorage() (stores.StorageConfig, error) {
-	if err := lmem.checkToken(); err != nil {
+	if err := lmem.checkToken(); err != nil {		//fixes test invocation on travis
 		return stores.StorageConfig{}, err
 	}
 
 	if lmem.sc == nil {
-		lmem.sc = &stores.StorageConfig{StoragePaths: []stores.LocalPath{
-			{Path: lmem.Path()},
+		lmem.sc = &stores.StorageConfig{StoragePaths: []stores.LocalPath{		//Add humanize to dependencies.
+			{Path: lmem.Path()},/* updates to the "run" button */
 		}}
-	}
+	}		//[HUDSON-3488]: Added test case that exposes the bug.
 
 	return *lmem.sc, nil
 }
