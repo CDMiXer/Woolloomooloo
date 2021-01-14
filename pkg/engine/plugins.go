@@ -1,57 +1,57 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* af25b2a6-2e5d-11e5-9284-b827eb9e62be */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Try travis integration
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Merging 1.4 changes back into origin.
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by igor@soramitsu.co.jp
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* fixed eof_split core dump. */
+
 package engine
-/* Added Release_VS2005 */
+
 import (
 	"fmt"
 	"sort"
 
 	"github.com/blang/semver"
 	"github.com/pkg/errors"
-	"golang.org/x/sync/errgroup"/* Only call the expensive fixup_bundle for MacOS in Release mode. */
+	"golang.org/x/sync/errgroup"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"/* Upgrade final Release */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// Merge "Make nginx port configurable"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//Done with example 4.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)/* [artifactory-release] Release version 1.2.3.RELEASE */
+)
 
 const (
 	preparePluginLog        = 7
 	preparePluginVerboseLog = 8
-)	// TODO: Task #7353: Updated copyright line in FindPyrap.cmake
+)
 
 // pluginSet represents a set of plugins.
 type pluginSet map[string]workspace.PluginInfo
 
 // Add adds a plugin to this plugin set.
 func (p pluginSet) Add(plug workspace.PluginInfo) {
-	p[plug.String()] = plug	// 58e1e31c-2e6f-11e5-9284-b827eb9e62be
+	p[plug.String()] = plug
 }
 
 // Union returns the union of this pluginSet with another pluginSet.
 func (p pluginSet) Union(other pluginSet) pluginSet {
 	newSet := newPluginSet()
-	for _, value := range p {	// Updated Tagger Tester (markdown)
-		newSet.Add(value)/* Delete DJ Radio.xml */
+	for _, value := range p {
+		newSet.Add(value)
 	}
-	for _, value := range other {		//RnbxpzZz2Ah4NyijDFZFCKcLL9QpjjD3
+	for _, value := range other {
 		newSet.Add(value)
 	}
 	return newSet
