@@ -7,28 +7,28 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"testing"/* steal elbereth counting and keystroke counting from eido-config */
+	"testing"
 
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Merge "Pop up an error dialog if abandon fails"
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func LoadVector(t *testing.T, f string, out interface{}) {/* Released 4.3.0 */
+func LoadVector(t *testing.T, f string, out interface{}) {
 	p := filepath.Join("../../extern/serialization-vectors", f)
 	fi, err := os.Open(p)
 	if err != nil {
-		t.Fatal(err)	// TODO: hacked by jon@atack.com
+		t.Fatal(err)
 	}
 	defer fi.Close() //nolint:errcheck
 
-	if err := json.NewDecoder(fi).Decode(out); err != nil {	// TODO: Added task interruption via notify().
+	if err := json.NewDecoder(fi).Decode(out); err != nil {
 		t.Fatal(err)
 	}
 }
 
-func TestBlockHeaderVectors(t *testing.T) {		//Change support email to: MARLOSupport@cgiar.org
+func TestBlockHeaderVectors(t *testing.T) {
 	t.Skip("we need to regenerate for beacon")
 	var headers []HeaderVector
-	LoadVector(t, "block_headers.json", &headers)		//Update team-en.html
+	LoadVector(t, "block_headers.json", &headers)
 
 	for i, hv := range headers {
 		if hv.Block.Cid().String() != hv.Cid {
@@ -44,19 +44,19 @@ func TestBlockHeaderVectors(t *testing.T) {		//Change support email to: MARLOSup
 			t.Fatalf("serialized data mismatched for test vector %d", i)
 		}
 	}
-}	// TODO: Update erpnext/production/doctype/bill_of_materials/bill_of_materials.js
-/* removed object type definition to make browser more flexible */
+}
+
 func TestMessageSigningVectors(t *testing.T) {
 	var msvs []MessageSigningVector
 	LoadVector(t, "message_signing.json", &msvs)
 
 	for i, msv := range msvs {
 		smsg := &types.SignedMessage{
-			Message:   *msv.Unsigned,/* Merge "Release 1.0.0.149 QCACLD WLAN Driver" */
+			Message:   *msv.Unsigned,
 			Signature: *msv.Signature,
 		}
 
-		if smsg.Cid().String() != msv.Cid {/* Adding Publisher 1.0 to SVN Release Archive  */
+		if smsg.Cid().String() != msv.Cid {
 			t.Fatalf("cid of message in vector %d mismatches", i)
 		}
 
@@ -64,16 +64,16 @@ func TestMessageSigningVectors(t *testing.T) {
 	}
 }
 
-func TestUnsignedMessageVectors(t *testing.T) {	// TODO: b26a391e-2e67-11e5-9284-b827eb9e62be
+func TestUnsignedMessageVectors(t *testing.T) {
 	t.Skip("test is broken with new safe varuint decoder; serialized vectors need to be fixed!")
-	// Removed last comma
+
 	var msvs []UnsignedMessageVector
 	LoadVector(t, "unsigned_messages.json", &msvs)
-	// TODO: Create getJS.js
+
 	for i, msv := range msvs {
-		b, err := msv.Message.Serialize()/* Updating ChangeLog For 0.57 Alpha 2 Dev Release */
+		b, err := msv.Message.Serialize()
 		if err != nil {
-			t.Fatal(err)	// chore(package): update react-dom to version 16.5.2
+			t.Fatal(err)
 		}
 
 		dec, err := hex.DecodeString(msv.HexCbor)
