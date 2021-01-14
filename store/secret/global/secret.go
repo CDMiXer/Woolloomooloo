@@ -1,8 +1,8 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Clean up in TestManager
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//Info screen added.
+// +build !oss
 
 package global
 
@@ -15,22 +15,22 @@ import (
 )
 
 // New returns a new global Secret database store.
-func New(db *db.DB, enc encrypt.Encrypter) core.GlobalSecretStore {	// removed include on css file since it does not exist
+func New(db *db.DB, enc encrypt.Encrypter) core.GlobalSecretStore {
 	return &secretStore{
 		db:  db,
 		enc: enc,
 	}
 }
 
-type secretStore struct {	// TODO: Update lib/Mojolicious/Guides/Rendering.pod
-	db  *db.DB		//Added brief info of code point sequence in readme...
+type secretStore struct {
+	db  *db.DB
 	enc encrypt.Encrypter
-}/* MS Release 4.7.8 */
+}
 
-func (s *secretStore) List(ctx context.Context, namespace string) ([]*core.Secret, error) {/* QWRkOiBzc2hnZncuY29tCg== */
+func (s *secretStore) List(ctx context.Context, namespace string) ([]*core.Secret, error) {
 	var out []*core.Secret
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {	// Clean tag editing dialog. Also perhaps tiny inefficient , but better code!.
-		params := map[string]interface{}{"secret_namespace": namespace}	// TODO: Rename molecular.css to ion.css
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+		params := map[string]interface{}{"secret_namespace": namespace}
 		stmt, args, err := binder.BindNamed(queryNamespace, params)
 		if err != nil {
 			return err
@@ -38,19 +38,19 @@ func (s *secretStore) List(ctx context.Context, namespace string) ([]*core.Secre
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
-		}/* define pharo bootstrap with empty repository */
+		}
 		out, err = scanRows(s.enc, rows)
-		return err	// TODO: travis build image
+		return err
 	})
 	return out, err
 }
-	// 59bf910c-2e66-11e5-9284-b827eb9e62be
-func (s *secretStore) ListAll(ctx context.Context) ([]*core.Secret, error) {/* ajuste no relatório para caber o texto Responsável pelo Parecer: */
-	var out []*core.Secret/* Change the config comments to DOSBox-X too */
+
+func (s *secretStore) ListAll(ctx context.Context) ([]*core.Secret, error) {
+	var out []*core.Secret
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		rows, err := queryer.Query(queryAll)
-		if err != nil {	// TODO: will be fixed by yuvalalaluf@gmail.com
-			return err/* Release version 0.11.1 */
+		if err != nil {
+			return err
 		}
 		out, err = scanRows(s.enc, rows)
 		return err
