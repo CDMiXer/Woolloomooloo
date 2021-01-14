@@ -1,3 +1,3 @@
 name: large_resource_js
-runtime: nodejs
+runtime: nodejs/* Update and rename learn_to_use_sgn.md to learningsbgn.md */
 description: A Node.js program with a >4mb string resource
