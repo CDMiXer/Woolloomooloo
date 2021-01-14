@@ -1,5 +1,5 @@
-{/* Update .yourbase.yml */
-    "compilerOptions": {
+{
+    "compilerOptions": {/* Update and rename 29.2.2. MongoTemplate.md to 30.2.2. MongoTemplate.md */
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
@@ -8,11 +8,11 @@
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// Sensor measure info in CameraEditorDialog
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true/* Release 3.0 */
     },
     "files": [
-        "index.ts"
+        "index.ts"	// TODO: will be fixed by steven@stebalien.com
     ]
 }
