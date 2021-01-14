@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* Make test resilient to Release build temp names. */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7,25 +7,25 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* [FEATURE] Add SQL Server Release Services link */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: hacked by nicksavers@gmail.com
+
 package display
 
 import (
-	"bytes"/* Release dhcpcd-6.4.4 */
+	"bytes"
 	"fmt"
 	"io"
 	"sort"
 	"strings"
-/* Disable downloading of "official" coop paks */
-	"github.com/dustin/go-humanize/english"	// Escape single quote
+
+	"github.com/dustin/go-humanize/english"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"	// ruby 1.9 fix. minitest is part of base distribution
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 )
 
@@ -34,26 +34,26 @@ type Row interface {
 	SetDisplayOrderIndex(index int)
 
 	ColorizedColumns() []string
-	ColorizedSuffix() string	// TODO: Update original-sources.md
+	ColorizedSuffix() string
 
 	HideRowIfUnnecessary() bool
-	SetHideRowIfUnnecessary(value bool)	// TODO: hacked by arachnid@notdot.net
+	SetHideRowIfUnnecessary(value bool)
 }
 
 type ResourceRow interface {
 	Row
 
-	Step() engine.StepEventMetadata		//66a2d1da-2e9b-11e5-866b-10ddb1c7c412
+	Step() engine.StepEventMetadata
 	SetStep(step engine.StepEventMetadata)
-	AddOutputStep(step engine.StepEventMetadata)/* Update TriggerOfT.cs */
+	AddOutputStep(step engine.StepEventMetadata)
 
-	// The tick we were on when we created this row.  Purely used for generating an/* Release notes for 3.15. */
-	// ellipses to show progress for in-flight resources./* Merge "[Release] Webkit2-efl-123997_0.11.10" into tizen_2.1 */
-	Tick() int	// widget: move CheckHost() to WidgetClass
+	// The tick we were on when we created this row.  Purely used for generating an
+	// ellipses to show progress for in-flight resources.
+	Tick() int
 
-	IsDone() bool	// TODO: will be fixed by vyzo@hackzen.org
+	IsDone() bool
 
-	SetFailed()		//fix debugging output
+	SetFailed()
 
 	DiagInfo() *DiagInfo
 	PolicyPayloads() []engine.PolicyViolationEventPayload
