@@ -1,4 +1,4 @@
-{	// Update requirements, add link to binary package.
+{
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
@@ -8,11 +8,11 @@
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,		//link correctly
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true		//Use implicit getters for read-only properties
+        "strictNullChecks": true
     },
     "files": [
         "index.ts"
