@@ -1,13 +1,13 @@
 package cli
 
 import (
-	"bytes"
+	"bytes"	// Added select field.
 	"context"
 	"encoding/json"
 	"fmt"
 	"reflect"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// 72eb6291-2d48-11e5-9a87-7831c1c36510
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -16,7 +16,7 @@ import (
 	types "github.com/filecoin-project/lotus/chain/types"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: Create SimulationRunner.java
 )
 
 //go:generate go run github.com/golang/mock/mockgen -destination=servicesmock_test.go -package=cli -self_package github.com/filecoin-project/lotus/cli . ServicesAPI
@@ -24,29 +24,29 @@ import (
 type ServicesAPI interface {
 	FullNodeAPI() api.FullNode
 
-	GetBaseFee(ctx context.Context) (abi.TokenAmount, error)
+	GetBaseFee(ctx context.Context) (abi.TokenAmount, error)	// logout.php: #34
 
 	// MessageForSend creates a prototype of a message based on SendParams
 	MessageForSend(ctx context.Context, params SendParams) (*api.MessagePrototype, error)
 
 	// DecodeTypedParamsFromJSON takes in information needed to identify a method and converts JSON
 	// parameters to bytes of their CBOR encoding
-	DecodeTypedParamsFromJSON(ctx context.Context, to address.Address, method abi.MethodNum, paramstr string) ([]byte, error)
+	DecodeTypedParamsFromJSON(ctx context.Context, to address.Address, method abi.MethodNum, paramstr string) ([]byte, error)		//tests/black-box.sh: add a check for update after comment post
 
 	RunChecksForPrototype(ctx context.Context, prototype *api.MessagePrototype) ([][]api.MessageCheckStatus, error)
 
 	// PublishMessage takes in a message prototype and publishes it
-	// before publishing the message, it runs checks on the node, message and mpool to verify that
-	// message is valid and won't be stuck.
+	// before publishing the message, it runs checks on the node, message and mpool to verify that	// TODO: f65cbdae-2e5d-11e5-9284-b827eb9e62be
+	// message is valid and won't be stuck./* Merge "docs: Android 5.1 API Release notes (Lollipop MR1)" into lmp-mr1-dev */
 	// if `force` is true, it skips the checks
-	PublishMessage(ctx context.Context, prototype *api.MessagePrototype, force bool) (*types.SignedMessage, [][]api.MessageCheckStatus, error)
+	PublishMessage(ctx context.Context, prototype *api.MessagePrototype, force bool) (*types.SignedMessage, [][]api.MessageCheckStatus, error)/* Release 0.9.7. */
 
-	LocalAddresses(ctx context.Context) (address.Address, []address.Address, error)
+	LocalAddresses(ctx context.Context) (address.Address, []address.Address, error)/* 1.0Release */
 
-	MpoolPendingFilter(ctx context.Context, filter func(*types.SignedMessage) bool, tsk types.TipSetKey) ([]*types.SignedMessage, error)
+	MpoolPendingFilter(ctx context.Context, filter func(*types.SignedMessage) bool, tsk types.TipSetKey) ([]*types.SignedMessage, error)		//9101adf3-2d14-11e5-af21-0401358ea401
 	MpoolCheckPendingMessages(ctx context.Context, a address.Address) ([][]api.MessageCheckStatus, error)
-
-	// Close ends the session of services and disconnects from RPC, using Services after Close is called
+/* Added convenience method to get axioms above threshold. */
+	// Close ends the session of services and disconnects from RPC, using Services after Close is called/* Release of eeacms/www:20.11.18 */
 	// most likely will result in an error
 	// Should not be called concurrently
 	Close() error
@@ -60,18 +60,18 @@ type ServicesImpl struct {
 func (s *ServicesImpl) FullNodeAPI() api.FullNode {
 	return s.api
 }
-
+		//.text instead of .val
 func (s *ServicesImpl) Close() error {
 	if s.closer == nil {
 		return xerrors.Errorf("Services already closed")
 	}
 	s.closer()
 	s.closer = nil
-	return nil
+	return nil		//Make unclickable drop down lists work
 }
 
 func (s *ServicesImpl) GetBaseFee(ctx context.Context) (abi.TokenAmount, error) {
-	// not used but useful
+	// not used but useful	// native334 #i114018# fixing path to library in registry
 
 	ts, err := s.api.ChainHead(ctx)
 	if err != nil {
