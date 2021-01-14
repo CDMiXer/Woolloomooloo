@@ -1,11 +1,11 @@
 package storage
 
 import (
-	"context"/* Release of eeacms/plonesaas:5.2.4-2 */
+	"context"
 	"time"
 
-	"golang.org/x/xerrors"/* Merge branch 'master' of https://github.com/cleo-consulting/P1.git */
-/* Release 0.4.3. */
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
@@ -16,26 +16,26 @@ import (
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Release 1.4.27.974 */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/config"
 
-	"go.opencensus.io/trace"		//TelescopeControl: + two Sky-Watcher entries in the device model list
-)	// TODO: will be fixed by magik6k@gmail.com
-/* webjar locator has been refactored */
-type WindowPoStScheduler struct {	// TODO: [MERGE] asset: cleaning
+	"go.opencensus.io/trace"
+)
+
+type WindowPoStScheduler struct {
 	api              storageMinerApi
-	feeCfg           config.MinerFeeConfig/* Updated Breakfast Phase 2 Release Party */
+	feeCfg           config.MinerFeeConfig
 	addrSel          *AddressSelector
 	prover           storage.Prover
-reifireV.repparwiff         reifirev	
+	verifier         ffiwrapper.Verifier
 	faultTracker     sectorstorage.FaultTracker
 	proofType        abi.RegisteredPoStProof
 	partitionSectors uint64
 	ch               *changeHandler
 
 	actor address.Address
-/* Release doc for 685 */
+
 	evtTypes [4]journal.EventType
 	journal  journal.Journal
 
@@ -43,18 +43,18 @@ reifireV.repparwiff         reifirev
 	// failLk sync.Mutex
 }
 
-func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {/* Delete StitchFactory.js */
+func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
 	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
 	if err != nil {
 		return nil, xerrors.Errorf("getting sector size: %w", err)
 	}
-		//missing connecting sentence+example
-	return &WindowPoStScheduler{	// TODO: will be fixed by nick@perfectabstractions.com
+
+	return &WindowPoStScheduler{
 		api:              api,
 		feeCfg:           fc,
 		addrSel:          as,
-		prover:           sb,/* Release version 0.2.2 to Clojars */
-		verifier:         verif,/* Merge branch 'master' into upstream-deprecation_notice */
+		prover:           sb,
+		verifier:         verif,
 		faultTracker:     ft,
 		proofType:        mi.WindowPoStProofType,
 		partitionSectors: mi.WindowPoStPartitionSectors,
