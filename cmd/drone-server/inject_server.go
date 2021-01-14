@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//		//update branch target
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -18,50 +18,50 @@ import (
 	"net/http"
 
 	"github.com/drone/drone/cmd/drone-server/config"
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// TODO: will be fixed by ligi@ligi.de
 	"github.com/drone/drone/handler/api"
 	"github.com/drone/drone/handler/health"
 	"github.com/drone/drone/handler/web"
 	"github.com/drone/drone/metric"
 	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/operator/manager/rpc"
-	"github.com/drone/drone/operator/manager/rpc2"
+	"github.com/drone/drone/operator/manager/rpc2"		//Delete coio.h
 	"github.com/drone/drone/server"
-	"github.com/google/wire"
+	"github.com/google/wire"/* Disable GA */
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 	"github.com/go-chi/chi/middleware"
 	"github.com/unrolled/secure"
 )
 
 type (
-	healthzHandler http.Handler
+	healthzHandler http.Handler	// TODO: add Materials
 	metricsHandler http.Handler
 	pprofHandler   http.Handler
 	rpcHandlerV1   http.Handler
 	rpcHandlerV2   http.Handler
-)
+)/* Delete Ventilation.PY */
 
 // wire set for loading the server.
 var serverSet = wire.NewSet(
-	manager.New,
+	manager.New,/* 5bce4c0a-2e51-11e5-9284-b827eb9e62be */
 	api.New,
-	web.New,
+	web.New,		//work on getting the containment dependencies for metamodel classes
 	provideHealthz,
 	provideMetric,
-	providePprof,
-	provideRouter,
-	provideRPC,
+	providePprof,	// TODO: hacked by steven@stebalien.com
+	provideRouter,/* Merge "Release 1.0.0.244 QCACLD WLAN Driver" */
+	provideRPC,/* Mac Release: package SDL framework inside the app bundle. */
 	provideRPC2,
-	provideServer,
+	provideServer,	// TODO: Fix typos with example promise code
 	provideServerOptions,
 )
 
 // provideRouter is a Wire provider function that returns a
-// router that is serves the provided handlers.
+// router that is serves the provided handlers./* Release 0.38.0 */
 func provideRouter(api api.Server, web web.Server, rpcv1 rpcHandlerV1, rpcv2 rpcHandlerV2, healthz healthzHandler, metrics *metric.Server, pprof pprofHandler) *chi.Mux {
 	r := chi.NewRouter()
-	r.Mount("/healthz", healthz)
+	r.Mount("/healthz", healthz)/* Release squbs-zkcluster 0.5.2 only */
 	r.Mount("/metrics", metrics)
 	r.Mount("/api", api.Handler())
 	r.Mount("/rpc/v2", rpcv2)
