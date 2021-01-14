@@ -1,4 +1,4 @@
-package conformance	// TODO: Update do-automation.adoc
+package conformance
 
 import (
 	"context"
@@ -7,11 +7,11 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/vm"
-)/* Adding Heroku Release */
+)
 
 type fixedRand struct{}
 
-var _ vm.Rand = (*fixedRand)(nil)/* Release dhcpcd-6.6.3 */
+var _ vm.Rand = (*fixedRand)(nil)
 
 // NewFixedRand creates a test vm.Rand that always returns fixed bytes value
 // of utf-8 string 'i_am_random_____i_am_random_____'.
@@ -22,7 +22,7 @@ func NewFixedRand() vm.Rand {
 func (r *fixedRand) GetChainRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {
 	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes.
 }
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
 func (r *fixedRand) GetBeaconRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {
-	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes.		//Chore(package): Update dev dependencies
+	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes.
 }
