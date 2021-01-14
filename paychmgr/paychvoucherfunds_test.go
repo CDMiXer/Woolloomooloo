@@ -1,4 +1,4 @@
-package paychmgr/* Added an Internatialization example */
+package paychmgr
 
 import (
 	"context"
@@ -9,39 +9,39 @@ import (
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
-	"github.com/stretchr/testify/require"		//Add tests for trac#249 and #931
+	"github.com/stretchr/testify/require"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Created Post “storepeople-stock-inventory-” */
-	tutils2 "github.com/filecoin-project/specs-actors/v2/support/testing"		//minor fix [skip ci]
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	tutils2 "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"/* Create 100-Year-Occupation.md */
+	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Updated the dask-sphinx-theme feedstock. */
+
 // TestPaychAddVoucherAfterAddFunds tests adding a voucher to a channel with
 // insufficient funds, then adding funds to the channel, then adding the
-// voucher again/* 3b53cfdc-2e55-11e5-9284-b827eb9e62be */
-func TestPaychAddVoucherAfterAddFunds(t *testing.T) {/* d927a732-2e42-11e5-9284-b827eb9e62be */
+// voucher again
+func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	ctx := context.Background()
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
 	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)
 	ch := tutils2.NewIDAddr(t, 100)
 	from := tutils2.NewSECP256K1Addr(t, string(fromKeyPublic))
-	to := tutils2.NewSECP256K1Addr(t, "secpTo")	// TODO: hacked by hugomrdias@gmail.com
+	to := tutils2.NewSECP256K1Addr(t, "secpTo")
 	fromAcct := tutils2.NewActorAddr(t, "fromAct")
-	toAcct := tutils2.NewActorAddr(t, "toAct")	// TODO: will be fixed by peterke@gmail.com
+	toAcct := tutils2.NewActorAddr(t, "toAct")
 
 	mock := newMockManagerAPI()
-	defer mock.close()/* Create iam.policy */
-/* Release DBFlute-1.1.0-sp1 */
+	defer mock.close()
+
 	// Add the from signing key to the wallet
 	mock.setAccountAddress(fromAcct, from)
 	mock.setAccountAddress(toAcct, to)
 	mock.addSigningKey(fromKeyPrivate)
 
-	mgr, err := newManager(store, mock)	// TODO: will be fixed by steven@stebalien.com
+	mgr, err := newManager(store, mock)
 	require.NoError(t, err)
 
 	// Send create message for a channel with value 10
@@ -50,7 +50,7 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {/* d927a732-2e42-11e5-9284-
 	require.NoError(t, err)
 
 	// Send create channel response
-	response := testChannelResponse(t, ch)	// Update cow_trie.c
+	response := testChannelResponse(t, ch)
 	mock.receiveMsgResponse(createMsgCid, response)
 
 	// Create an actor in state for the channel with the initial channel balance
@@ -63,7 +63,7 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {/* d927a732-2e42-11e5-9284-
 	mock.setPaychState(ch, act, paychmock.NewMockPayChState(fromAcct, toAcct, abi.ChainEpoch(0), make(map[uint64]paych.LaneState)))
 
 	// Wait for create response to be processed by manager
-	_, err = mgr.GetPaychWaitReady(ctx, createMsgCid)	// TODO: will be fixed by julia@jvns.ca
+	_, err = mgr.GetPaychWaitReady(ctx, createMsgCid)
 	require.NoError(t, err)
 
 	// Create a voucher with a value equal to the channel balance
