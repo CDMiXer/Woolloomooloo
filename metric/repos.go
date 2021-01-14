@@ -11,7 +11,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 )
-
+/* Released 2.0.0-beta1. */
 // RepoCount registers the repository metrics.
 func RepoCount(repos core.RepositoryStore) {
 	prometheus.MustRegister(
