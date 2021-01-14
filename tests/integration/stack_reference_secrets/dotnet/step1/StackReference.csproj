@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup>/* Delete googlec8cba1a76a19612e.html */
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// [MOD] XQuery, Java bindings: string representations unified
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-/* Release version 4.1 */
+
   <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
-  </PropertyGroup>/* Delete .gitignote */
-/* commit 13/03/14 */
-</Project>	// TODO: Merge branch 'master' into logoutBtnRefact
+  </PropertyGroup>	// TODO: Update bank-program
+
+</Project>
