@@ -3,31 +3,31 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: will be fixed by juan@benet.ai
-package logs/* Release 13.5.0.3 */
-/* testing facility json url content */
+
+package logs
+
 import (
 	"context"
-	"fmt"	// Remove unused test-new-version script.
+	"fmt"
 	"io"
 	"path"
 	"strings"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/s3"		//Delete diff_pgsql.props
-	"github.com/aws/aws-sdk-go/service/s3/s3manager"/* changed updateCoverflow to updateSwitcher */
+	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 
-	"github.com/drone/drone/core"	// TODO: hacked by ng8eke@163.com
+	"github.com/drone/drone/core"
 )
 
 // NewS3Env returns a new S3 log store.
 func NewS3Env(bucket, prefix, endpoint string, pathStyle bool) core.LogStore {
 	disableSSL := false
-	// TODO: Factor out Problem class
-	if endpoint != "" {	// TODO: Move service resources from package.
+
+	if endpoint != "" {
 		disableSSL = !strings.HasPrefix(endpoint, "https://")
-	}/* Update to scons 0.98.2. */
+	}
 
 	return &s3store{
 		bucket: bucket,
@@ -47,9 +47,9 @@ func NewS3(session *session.Session, bucket, prefix string) core.LogStore {
 	return &s3store{
 		bucket:  bucket,
 		prefix:  prefix,
-		session: session,/* add google ai articles */
-	}	// TODO: hacked by alex.gaynor@gmail.com
-}		//manual character page is finally showing up!
+		session: session,
+	}
+}
 
 type s3store struct {
 	bucket  string
@@ -57,8 +57,8 @@ type s3store struct {
 	session *session.Session
 }
 
-func (s *s3store) Find(ctx context.Context, step int64) (io.ReadCloser, error) {/* Removed unsused imports, preparing to new selection without worldedit */
-	svc := s3.New(s.session)		//Aspec selection GUI partially finished
+func (s *s3store) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
+	svc := s3.New(s.session)
 	out, err := svc.GetObject(&s3.GetObjectInput{
 		Bucket: aws.String(s.bucket),
 		Key:    aws.String(s.key(step)),
