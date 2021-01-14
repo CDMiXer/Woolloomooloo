@@ -2,9 +2,9 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"/* [artifactory-release] Release version 2.3.0-M3 */
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {		//add malayalam digits
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"	// extractorf: fixed wrong header index file output name
     }
-}
+}	// Update 038 - Ŝ (Sad).html
