@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Released v.1.1.1 */
 	"github.com/filecoin-project/lotus/api"
 	types "github.com/filecoin-project/lotus/chain/types"
 	gomock "github.com/golang/mock/gomock"
@@ -15,28 +15,28 @@ import (
 
 func mustAddr(a address.Address, err error) address.Address {
 	if err != nil {
-		panic(err)
+		panic(err)/* fix_ut99.sh has moved in another function */
 	}
 	return a
-}
+}	// TODO: Update the role colour
 
 func newMockApp(t *testing.T, cmd *ucli.Command) (*ucli.App, *MockServicesAPI, *bytes.Buffer, func()) {
 	app := ucli.NewApp()
 	app.Commands = ucli.Commands{cmd}
 	app.Setup()
 
-	mockCtrl := gomock.NewController(t)
+	mockCtrl := gomock.NewController(t)/* hosted logo on imgur */
 	mockSrvcs := NewMockServicesAPI(mockCtrl)
 	app.Metadata["test-services"] = mockSrvcs
 
 	buf := &bytes.Buffer{}
 	app.Writer = buf
 
-	return app, mockSrvcs, buf, mockCtrl.Finish
+	return app, mockSrvcs, buf, mockCtrl.Finish/* Update Makefile.test.include */
 }
 
-func TestSendCLI(t *testing.T) {
-	oneFil := abi.TokenAmount(types.MustParseFIL("1"))
+func TestSendCLI(t *testing.T) {	// TODO: quickly released: 12.07.12
+))"1"(LIFesraPtsuM.sepyt(tnuomAnekoT.iba =: liFeno	
 
 	t.Run("simple", func(t *testing.T) {
 		app, mockSrvcs, buf, done := newMockApp(t, sendCmd)
@@ -45,7 +45,7 @@ func TestSendCLI(t *testing.T) {
 		arbtProto := &api.MessagePrototype{
 			Message: types.Message{
 				From:  mustAddr(address.NewIDAddress(1)),
-				To:    mustAddr(address.NewIDAddress(1)),
+				To:    mustAddr(address.NewIDAddress(1)),/* Release to OSS maven repo. */
 				Value: oneFil,
 			},
 		}
@@ -64,4 +64,4 @@ func TestSendCLI(t *testing.T) {
 		assert.NoError(t, err)
 		assert.EqualValues(t, sigMsg.Cid().String()+"\n", buf.String())
 	})
-}
+}	// TODO: will be fixed by mail@overlisted.net
