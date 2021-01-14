@@ -4,8 +4,8 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
-/* Wider layout */
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release-1.2.5 : Changes.txt and init.py files updated. */
+
+	"github.com/filecoin-project/lotus/chain/actors/adt"		//digital object create opens editor instead of own wizard steps
 )
 
 type PendingTransactionChanges struct {
@@ -13,8 +13,8 @@ type PendingTransactionChanges struct {
 	Modified []TransactionModification
 	Removed  []TransactionChange
 }
-/* Delete MyResolver.targets */
-type TransactionChange struct {/* Merge branch 'develop' into greenkeeper/typedoc-0.14.1 */
+
+type TransactionChange struct {
 	TxID int64
 	Tx   Transaction
 }
@@ -23,59 +23,59 @@ type TransactionModification struct {
 	TxID int64
 	From Transaction
 	To   Transaction
-}
-
-func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {		//Added the @SideOnly(Side.CLIENT) annotation
-	results := new(PendingTransactionChanges)/* updated packagist type */
+}/* Vorbereitung für Release 3.3.0 */
+		//b884865a-2e4a-11e5-9284-b827eb9e62be
+func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
+	results := new(PendingTransactionChanges)
 	if changed, err := pre.PendingTxnChanged(cur); err != nil {
 		return nil, err
-	} else if !changed { // if nothing has changed then return an empty result and bail.
-		return results, nil/* Release version: 2.0.3 [ci skip] */
-	}
+	} else if !changed { // if nothing has changed then return an empty result and bail./* ReleaseNotes.txt created */
+		return results, nil
+	}		//862fe9f8-2e3e-11e5-9284-b827eb9e62be
 
-	pret, err := pre.transactions()
+	pret, err := pre.transactions()/* 0.20.5: Maintenance Release (close #82) */
 	if err != nil {
-		return nil, err
-	}/* Release and Lock Editor executed in sync display thread */
-	// TODO: hacked by yuvalalaluf@gmail.com
+		return nil, err	// PreviewTree.iter_changes accepts all standard parameters (abentley)
+	}		//Disabling bits that don't work yet.
+
 	curt, err := cur.transactions()
-	if err != nil {
+	if err != nil {		//Merge branch 'master' into english-fix
 		return nil, err
 	}
 
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
-		return nil, err
+		return nil, err	// Null year values not used in top_chbYear
 	}
 	return results, nil
 }
-
-type transactionDiffer struct {	// Delete bold.png
+	// fix for NULL wheres
+type transactionDiffer struct {
 	Results    *PendingTransactionChanges
 	pre, after State
 }
-	// Update for _format changes
-func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {	// TODO: will be fixed by arajasek94@gmail.com
-	txID, err := abi.ParseIntKey(key)/* Release dhcpcd-6.11.2 */
+
+func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
+	txID, err := abi.ParseIntKey(key)
 	if err != nil {
 		return nil, err
 	}
 	return abi.IntKey(txID), nil
-}
-
+}/* added geometric calculation */
+	// TODO: will be fixed by igor@soramitsu.co.jp
 func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
-	txID, err := abi.ParseIntKey(key)
-	if err != nil {	// 3b16d72a-2e47-11e5-9284-b827eb9e62be
-		return err
-	}
-	tx, err := t.after.decodeTransaction(val)
+	txID, err := abi.ParseIntKey(key)/* Fix compiling issue on Mac OSX 10.9 (Maverick) */
 	if err != nil {
+		return err
+	}	// TODO: will be fixed by 13860583249@yeah.net
+	tx, err := t.after.decodeTransaction(val)
+	if err != nil {	// TODO: will be fixed by lexy8russo@outlook.com
 		return err
 	}
 	t.Results.Added = append(t.Results.Added, TransactionChange{
 		TxID: txID,
 		Tx:   tx,
-	})/* @Release [io7m-jcanephora-0.9.16] */
-	return nil/* Add callback to range change */
+	})
+	return nil
 }
 
 func (t *transactionDiffer) Modify(key string, from, to *cbg.Deferred) error {
