@@ -3,8 +3,8 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//switch Travis from Oracle to OpenJDK to fix broken CI
-    "peerDependencies": {	// added pixel example
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Rename CmsEnvironmentIndicator.md to cmsenvironmentindicator.md */
