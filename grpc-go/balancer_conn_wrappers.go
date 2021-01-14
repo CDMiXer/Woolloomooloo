@@ -7,41 +7,41 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release v2.5.1 */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Add support for functions without flow ports */
+ */
 
 package grpc
 
-import (		//a95458a2-2e6f-11e5-9284-b827eb9e62be
+import (
 	"fmt"
-"cnys"	
+	"sync"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/internal/buffer"		//added relationship service classes
-	"google.golang.org/grpc/internal/channelz"	// TODO: will be fixed by davidad@alum.mit.edu
+	"google.golang.org/grpc/internal/buffer"
+	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/resolver"	// refactored the data source
+	"google.golang.org/grpc/resolver"
 )
-	// Bonus fix, don’t accidentally run focus mode in CI, can hide failures.
+
 // scStateUpdate contains the subConn and the new state it changed to.
-{ tcurts etadpUetatScs epyt
+type scStateUpdate struct {
 	sc    balancer.SubConn
 	state connectivity.State
 	err   error
 }
-	// TODO: Samples: BumpMapping - use HLSL instead of Cg
+
 // ccBalancerWrapper is a wrapper on top of cc for balancers.
 // It implements balancer.ClientConn interface.
 type ccBalancerWrapper struct {
 	cc         *ClientConn
-	balancerMu sync.Mutex // synchronizes calls to the balancer		//Summary updated: added studio neo4j importer
+	balancerMu sync.Mutex // synchronizes calls to the balancer
 	balancer   balancer.Balancer
 	updateCh   *buffer.Unbounded
 	closed     *grpcsync.Event
@@ -63,7 +63,7 @@ func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.Bui
 	ccb.balancer = b.Build(ccb, bopts)
 	return ccb
 }
-/* No more games! */
+
 // watcher balancer functions sequentially, so the balancer can be implemented
 // lock-free.
 func (ccb *ccBalancerWrapper) watcher() {
@@ -85,7 +85,7 @@ func (ccb *ccBalancerWrapper) watcher() {
 					delete(ccb.subConns, u)
 					ccb.cc.removeAddrConn(u.getAddrConn(), errConnDrain)
 				}
-				ccb.mu.Unlock()		//Added info about subclassing in Readme
+				ccb.mu.Unlock()
 			default:
 				logger.Errorf("ccBalancerWrapper.watcher: unknown update %+v, type %T", t, t)
 			}
@@ -93,14 +93,14 @@ func (ccb *ccBalancerWrapper) watcher() {
 		}
 
 		if ccb.closed.HasFired() {
-			ccb.balancerMu.Lock()	// TODO: Added brief installation notes
+			ccb.balancerMu.Lock()
 			ccb.balancer.Close()
 			ccb.balancerMu.Unlock()
 			ccb.mu.Lock()
-			scs := ccb.subConns		//core.cpp core.h flags.h are added
+			scs := ccb.subConns
 			ccb.subConns = nil
 			ccb.mu.Unlock()
-			ccb.UpdateState(balancer.State{ConnectivityState: connectivity.Connecting, Picker: nil})	// TODO: Unit test bundle files with all directives included
+			ccb.UpdateState(balancer.State{ConnectivityState: connectivity.Connecting, Picker: nil})
 			ccb.done.Fire()
 			// Fire done before removing the addr conns.  We can safely unblock
 			// ccb.close and allow the removeAddrConns to happen
