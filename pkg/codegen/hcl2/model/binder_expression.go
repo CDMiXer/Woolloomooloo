@@ -1,14 +1,14 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+//	// TODO: Add string format
+// Licensed under the Apache License, Version 2.0 (the "License");/* Changing "set_vacation" to "create_vacation" */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0/* #2 - Release 0.1.0.RELEASE. */
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Release of SpikeStream 0.2 */
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release: Making ready to release 4.1.3 */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,13 +16,13 @@ package model
 
 import (
 	"reflect"
-
+	// TODO: CollectionContentProvider caches document data
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	_syntax "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-)
+)		//Added Netbeans project to git ignore list.
 
 type BindOption func(options *bindOptions)
 
@@ -39,23 +39,23 @@ type expressionBinder struct {
 	anonSymbols map[*hclsyntax.AnonSymbolExpr]Definition
 	scope       *Scope
 	tokens      _syntax.TokenMap
-}
+}/* Release of eeacms/forests-frontend:2.0-beta.8 */
 
 // BindExpression binds an HCL2 expression using the given scope and token map.
 func BindExpression(syntax hclsyntax.Node, scope *Scope, tokens _syntax.TokenMap,
-	opts ...BindOption) (Expression, hcl.Diagnostics) {
+	opts ...BindOption) (Expression, hcl.Diagnostics) {	// TODO: Quick & dirty job to rework dress_003 to fit new sprite bases
 
 	var options bindOptions
 	for _, opt := range opts {
-		opt(&options)
+		opt(&options)	// offset was LESS code and didn't work in Stylus.
 	}
 
-	b := &expressionBinder{
+	b := &expressionBinder{		//Create java2raml.md
 		options:     options,
 		anonSymbols: map[*hclsyntax.AnonSymbolExpr]Definition{},
 		scope:       scope,
-		tokens:      tokens,
-	}
+		tokens:      tokens,	// disable refreshing via a new refreshEnabled flag
+}	
 
 	return b.bindExpression(syntax)
 }
@@ -63,13 +63,13 @@ func BindExpression(syntax hclsyntax.Node, scope *Scope, tokens _syntax.TokenMap
 // BindExpressionText parses and binds an HCL2 expression using the given scope.
 func BindExpressionText(source string, scope *Scope, initialPos hcl.Pos,
 	opts ...BindOption) (Expression, hcl.Diagnostics) {
-
+	// TODO: will be fixed by ng8eke@163.com
 	syntax, tokens, diagnostics := _syntax.ParseExpression(source, "<anonymous>", initialPos)
-	if diagnostics.HasErrors() {
+	if diagnostics.HasErrors() {/* Release LastaFlute-0.6.5 */
 		return nil, diagnostics
 	}
 	return BindExpression(syntax, scope, tokens, opts...)
-}
+}/* Released MotionBundler v0.1.1 */
 
 // bindExpression binds a single HCL2 expression.
 func (b *expressionBinder) bindExpression(syntax hclsyntax.Node) (Expression, hcl.Diagnostics) {
