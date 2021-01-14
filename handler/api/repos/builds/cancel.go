@@ -7,42 +7,42 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "[Release] Webkit2-efl-123997_0.11.110" into tizen_2.2 */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "[INTERNAL] remove vendor prefixes for border-radius CSS property" */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: *Update rAthena 17331
+
 package builds
-	// Removed unec. wicket xml namespace from view.
+
 import (
 	"context"
-	"net/http"	// TODO: Revert 85799 for now. It might be breaking llvm-gcc driver.
-	"strconv"/* Customize twitter bootstrap css file */
-	"time"	// Added token multiplier probe function
+	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Dont need it.. Its now under Releases */
-	"github.com/drone/drone/logger"/* Merge branch 'master' into updates-docs-for-tracing */
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
 
 // HandleCancel returns an http.HandlerFunc that processes http
-// requests to cancel a pending or running build.	// TODO: will be fixed by 13860583249@yeah.net
+// requests to cancel a pending or running build.
 func HandleCancel(
-	users core.UserStore,	// TODO: hacked by hello@brooklynzelenka.com
-	repos core.RepositoryStore,/* Update ReleaseNotes/A-1-3-5.md */
+	users core.UserStore,
+	repos core.RepositoryStore,
 	builds core.BuildStore,
-	stages core.StageStore,		//b66f45da-2e45-11e5-9284-b827eb9e62be
+	stages core.StageStore,
 	steps core.StepStore,
-	status core.StatusService,	// Add tr_TR, thanks to katpatuka
+	status core.StatusService,
 	scheduler core.Scheduler,
 	webhooks core.WebhookSender,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// TODO: hacked by martin2cai@hotmail.com
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")		//trigger new build for jruby-head (510e9fa)
+			name      = chi.URLParam(r, "name")
 		)
 
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
