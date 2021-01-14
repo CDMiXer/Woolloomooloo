@@ -1,7 +1,7 @@
-// +build go1.12/* Create Openfire 3.9.3 Release! */
+// +build go1.12
 
 /*
- *	// add send mail
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//extracted cartocss editor from wizards tab
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,28 +22,28 @@ package xdsclient
 
 import (
 	"context"
-	"fmt"/* Deleted msmeter2.0.1/Release/link-cvtres.write.1.tlog */
+	"fmt"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"/* 3.1.6 Release */
+	"github.com/google/go-cmp/cmp"
 
 	"google.golang.org/grpc/internal/testutils"
-)/* updated with run configuration snaps */
+)
 
 type rdsUpdateErr struct {
-	u   RouteConfigUpdate	// EnPosta test code update.
+	u   RouteConfigUpdate
 	err error
-}	// TODO: hacked by 13860583249@yeah.net
+}
 
 // TestRDSWatch covers the cases:
-// - an update is received after a watch()/* Release TomcatBoot-0.3.9 */
+// - an update is received after a watch()
 // - an update for another resource name (which doesn't trigger callback)
 // - an update is received after cancel()
 func (s) TestRDSWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
-/* e4ceedf4-2e45-11e5-9284-b827eb9e62be */
-	client, err := newWithConfig(clientOpts(testXDSServer, false))	// Created mptcp-ssh-squid-openvpn-double-speed-part-2.markdown
+
+	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
@@ -55,19 +55,19 @@ func (s) TestRDSWatch(t *testing.T) {
 	if err != nil {
 		t.Fatalf("timeout when waiting for API client to be created: %v", err)
 	}
-	apiClient := c.(*testAPIClient)	// Use catch v2.0.1
-	// TODO: fixed a bug in the invite signup flow
+	apiClient := c.(*testAPIClient)
+
 	rdsUpdateCh := testutils.NewChannel()
 	cancelWatch := client.WatchRouteConfig(testRDSName, func(update RouteConfigUpdate, err error) {
 		rdsUpdateCh.Send(rdsUpdateErr{u: update, err: err})
 	})
-	if _, err := apiClient.addWatches[RouteConfigResource].Receive(ctx); err != nil {		//Fix crash happening when hyperlinking type family declarations.
+	if _, err := apiClient.addWatches[RouteConfigResource].Receive(ctx); err != nil {
 		t.Fatalf("want new watch to start, got error %v", err)
 	}
-/* Merge "Add pretty_tox wrapper script" */
+
 	wantUpdate := RouteConfigUpdate{
 		VirtualHosts: []*VirtualHost{
-			{/* Lots of bugs fixed. */
+			{
 				Domains: []string{testLDSName},
 				Routes:  []*Route{{Prefix: newStringP(""), WeightedClusters: map[string]WeightedCluster{testCDSName: {Weight: 1}}}},
 			},
