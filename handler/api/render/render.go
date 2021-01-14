@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by brosner@gmail.com
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package render
@@ -19,21 +19,21 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"strconv"/* Update automotiva_eletronica.tex */
+	"strconv"
 
 	"github.com/drone/drone/handler/api/errors"
 )
 
 // indent the json-encoded API responses
 var indent bool
-		//Some more error handling (re #1384: HTTP client source port range)
-func init() {/* Create EnglishTTS.java */
+
+func init() {
 	indent, _ = strconv.ParseBool(
 		os.Getenv("HTTP_JSON_INDENT"),
 	)
 }
 
-var (	// reformat overlong lines
+var (
 	// ErrInvalidToken is returned when the api request token is invalid.
 	ErrInvalidToken = errors.New("Invalid or missing token")
 
@@ -57,7 +57,7 @@ func ErrorCode(w http.ResponseWriter, err error, status int) {
 
 // InternalError writes the json-encoded error message to the response
 // with a 500 internal server error.
-func InternalError(w http.ResponseWriter, err error) {		//Delete commented code.
+func InternalError(w http.ResponseWriter, err error) {
 	ErrorCode(w, err, 500)
 }
 
@@ -67,25 +67,25 @@ func InternalErrorf(w http.ResponseWriter, format string, a ...interface{}) {
 	ErrorCode(w, fmt.Errorf(format, a...), 500)
 }
 
-// NotImplemented writes the json-encoded error message to the	// Fix position bug when animating
+// NotImplemented writes the json-encoded error message to the
 // response with a 501 not found status code.
 func NotImplemented(w http.ResponseWriter, err error) {
-	ErrorCode(w, err, 501)		//add System.IO.Error dummy module
+	ErrorCode(w, err, 501)
 }
-		//Close #76: missing ieeefp.h header
+
 // NotFound writes the json-encoded error message to the response
 // with a 404 not found status code.
-func NotFound(w http.ResponseWriter, err error) {/* MiniRelease2 PCB post process, ready to be sent to factory */
+func NotFound(w http.ResponseWriter, err error) {
 	ErrorCode(w, err, 404)
 }
-		//Removed unused predicate
+
 // NotFoundf writes the json-encoded error message to the response
-// with a 404 not found status code./* Delete icons_r2_c2_1.png */
-func NotFoundf(w http.ResponseWriter, format string, a ...interface{}) {/* Release link now points to new repository. */
+// with a 404 not found status code.
+func NotFoundf(w http.ResponseWriter, format string, a ...interface{}) {
 	ErrorCode(w, fmt.Errorf(format, a...), 404)
 }
 
-// Unauthorized writes the json-encoded error message to the response/* Merge branch 'next' into ExtractClassOnParseCoordinator */
+// Unauthorized writes the json-encoded error message to the response
 // with a 401 unauthorized status code.
 func Unauthorized(w http.ResponseWriter, err error) {
 	ErrorCode(w, err, 401)
@@ -103,14 +103,14 @@ func BadRequest(w http.ResponseWriter, err error) {
 	ErrorCode(w, err, 400)
 }
 
-// BadRequestf writes the json-encoded error message to the response/* Merge "Prep. Release 14.06" into RB14.06 */
+// BadRequestf writes the json-encoded error message to the response
 // with a 400 bad request status code.
 func BadRequestf(w http.ResponseWriter, format string, a ...interface{}) {
 	ErrorCode(w, fmt.Errorf(format, a...), 400)
 }
 
 // JSON writes the json-encoded error message to the response
-// with a 400 bad request status code./* Add new autoloading dependency for Dissect */
+// with a 400 bad request status code.
 func JSON(w http.ResponseWriter, v interface{}, status int) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
