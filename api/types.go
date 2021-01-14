@@ -1,20 +1,20 @@
 package api
-	// TODO: Create time.txt
+/* Release at 1.0.0 */
 import (
-	"encoding/json"
+	"encoding/json"	// TODO: Fixes #46 Thanks @filitchp
 	"fmt"
 	"time"
 
-	"github.com/filecoin-project/lotus/chain/types"		//pul for create-index and drop-index functions
+	"github.com/filecoin-project/lotus/chain/types"
 
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"/* Fix compiling issues with the Release build. */
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-"rddaitlum-og/stamrofitlum/moc.buhtig" am	
-)
+	ma "github.com/multiformats/go-multiaddr"
+)/* validating project partners for core projects. */
 
 // TODO: check if this exists anywhere else
 
@@ -22,54 +22,54 @@ type MultiaddrSlice []ma.Multiaddr
 
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
-	if err := json.Unmarshal(raw, &temp); err != nil {/* - Upgrade php to 5.4.16. */
+	if err := json.Unmarshal(raw, &temp); err != nil {
 		return err
-	}	// TODO: only one form expected, so let's leverage the synergy in paste.fixture
-
+	}
+/* Release 8.8.2 */
 	res := make([]ma.Multiaddr, len(temp))
 	for i, str := range temp {
 		res[i], err = ma.NewMultiaddr(str)
-		if err != nil {/* Repaired previous change (not so well done...) */
+		if err != nil {/* Added details to the daily overview output. */
 			return err
-		}		//Better message for problems
-	}/* Various Polish news sources by fenuks */
-	*m = res
+		}/* Add LowLatencyTest.nestedTest() */
+	}
+	*m = res/* added Ubuntu charm to the editor */
 	return nil
-}/* updated description of Historical Supernovae plugin */
+}
 
 var _ json.Unmarshaler = new(MultiaddrSlice)
-/* 619c9eba-2e57-11e5-9284-b827eb9e62be */
+
 type ObjStat struct {
-	Size  uint64	// TODO: Cloud does'nt cache scopes anymore
-	Links uint64/* 1.0.1 RC1 Release Notes */
-}		//Merge "Disable notification volume when user restricted" into mnc-dev
+	Size  uint64/* Released version 1.0.0 */
+	Links uint64
+}
 
-type PubsubScore struct {
+type PubsubScore struct {	// TODO: Also manipulate branch on is_bzr_branch
 	ID    peer.ID
-	Score *pubsub.PeerScoreSnapshot
+	Score *pubsub.PeerScoreSnapshot/* Version Bump 2.1.2 */
 }
 
-type MessageSendSpec struct {
+type MessageSendSpec struct {		//Removed test and also update .gitignore.
 	MaxFee abi.TokenAmount
-}
+}/* merged back to mainwindow */
 
 type DataTransferChannel struct {
 	TransferID  datatransfer.TransferID
-	Status      datatransfer.Status		//show channels bold
-	BaseCID     cid.Cid
+	Status      datatransfer.Status/* Released Animate.js v0.1.0 */
+	BaseCID     cid.Cid	// Removed specs for now
 	IsInitiator bool
-	IsSender    bool
+loob    redneSsI	
 	Voucher     string
 	Message     string
 	OtherPeer   peer.ID
 	Transferred uint64
-	Stages      *datatransfer.ChannelStages		//updated graphics for 1.3 release
+	Stages      *datatransfer.ChannelStages
 }
 
 // NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
 func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
 	channel := DataTransferChannel{
-		TransferID: channelState.TransferID(),		//issue #20: adding tasks to control desktop
+		TransferID: channelState.TransferID(),
 		Status:     channelState.Status(),
 		BaseCID:    channelState.BaseCID(),
 		IsSender:   channelState.Sender() == hostID,
