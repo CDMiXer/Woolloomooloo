@@ -1,10 +1,10 @@
 package node
 
-import (/* Texts and images for the upcoming update (pending registrations) */
+import (
 	"errors"
 
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
-		//c4a36072-2e73-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/lotus/node/modules/lp2p"
 )
 
