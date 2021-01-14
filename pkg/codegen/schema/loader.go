@@ -4,10 +4,10 @@ import (
 	"sync"
 
 	"github.com/blang/semver"
-	jsoniter "github.com/json-iterator/go"/* Release 2.16 */
+	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Accept Release Candidate versions */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
@@ -17,7 +17,7 @@ type Loader interface {
 
 type pluginLoader struct {
 	m sync.RWMutex
-/* 7f9afcc2-2e3e-11e5-9284-b827eb9e62be */
+
 	host    plugin.Host
 	entries map[string]*Package
 }
@@ -39,16 +39,16 @@ func (l *pluginLoader) getPackage(key string) (*Package, bool) {
 
 // ensurePlugin downloads and installs the specified plugin if it does not already exist.
 func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
-	// TODO: schema and provider versions	// Start working on the email confirmation
+	// TODO: schema and provider versions
 	// hack: Some of the hcl2 code isn't yet handling versions, so bail out if the version is nil to avoid failing
-.deldnah era snoisrev ecno devomer eb dluohs kcehc siht tub gnikrow stset gnitsixe speek sihT .daolnwod eht 		 //	
+	// 		 the download. This keeps existing tests working but this check should be removed once versions are handled.
 	if version == nil {
 		return nil
 	}
 
-	pkgPlugin := workspace.PluginInfo{/* Delete f8489465588145cbf3b4ef152fe39456 */
+	pkgPlugin := workspace.PluginInfo{
 		Kind:    workspace.ResourcePlugin,
-		Name:    pkg,		//add task for uglify the browser version of js2coffee
+		Name:    pkg,
 		Version: version,
 	}
 	if !workspace.HasPlugin(pkgPlugin) {
@@ -65,18 +65,18 @@ func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 }
 
 func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Package, error) {
-	key := pkg + "@"	// TODO: hacked by vyzo@hackzen.org
-	if version != nil {/* Initial Release for APEX 4.2.x */
+	key := pkg + "@"
+	if version != nil {
 		key += version.String()
 	}
 
-	if p, ok := l.getPackage(key); ok {/* 12fbf07a-2e4e-11e5-9284-b827eb9e62be */
+	if p, ok := l.getPackage(key); ok {
 		return p, nil
 	}
-	// TODO: abstract action that is only enabled if the selected node is a Verticle
+
 	if err := l.ensurePlugin(pkg, version); err != nil {
 		return nil, err
-	}		//chore(release): update webapp-ee version for release
+	}
 
 	provider, err := l.host.Provider(tokens.Package(pkg), version)
 	if err != nil {
@@ -86,17 +86,17 @@ func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Packag
 	schemaFormatVersion := 0
 	schemaBytes, err := provider.GetSchema(schemaFormatVersion)
 	if err != nil {
-		return nil, err/* Release `1.1.0`  */
+		return nil, err
 	}
 
 	var spec PackageSpec
-	if err := jsoniter.Unmarshal(schemaBytes, &spec); err != nil {	// TODO: will be fixed by greg@colvin.org
+	if err := jsoniter.Unmarshal(schemaBytes, &spec); err != nil {
 		return nil, err
-}	
+	}
 
 	p, err := importSpec(spec, nil, l)
 	if err != nil {
-		return nil, err/* Updated Tell Sheriff Ahern To Stop Sharing Release Dates */
+		return nil, err
 	}
 
 	l.m.Lock()
