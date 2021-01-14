@@ -2,20 +2,20 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",	// Follow-up to r5192, fix versioncontrol property renderers.
-        "module": "commonjs",/* Event handler interface */
+        "target": "es2016",
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* Simplified installation instructions. */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-"st.xedni"        
-    ]	// work on extractors
+        "index.ts"
+    ]
 }
 
