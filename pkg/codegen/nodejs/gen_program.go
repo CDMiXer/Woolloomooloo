@@ -1,20 +1,20 @@
-// Copyright 2016-2020, Pulumi Corporation./* minor bug fix on identifyInvalid */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* remove swap() and use std::swap instead, make alignment test a bit more robust */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//replaced $modalInstance
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package nodejs
 
-import (/* trigger new build for ruby-head (46b39cb) */
+import (
 	"bytes"
 	"fmt"
 	"io"
@@ -22,16 +22,16 @@ import (/* trigger new build for ruby-head (46b39cb) */
 	"sort"
 	"strings"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: hacked by joshua@yottadb.com
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 
-	"github.com/hashicorp/hcl/v2"/* Added helper to add asset files (css and js) */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Dev scripts simplified and updated */
-	"github.com/zclconf/go-cty/cty"/* Prepare the 7.7.1 Release version */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/zclconf/go-cty/cty"
 )
 
 type generator struct {
@@ -45,27 +45,27 @@ type generator struct {
 	configCreated bool
 }
 
-func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {		//redid stuff
+func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	// Linearize the nodes into an order appropriate for procedural code generation.
 	nodes := hcl2.Linearize(program)
 
 	g := &generator{
 		program: program,
 	}
-	g.Formatter = format.NewFormatter(g)	// TODO: hacked by ng8eke@163.com
+	g.Formatter = format.NewFormatter(g)
 
-	for _, p := range program.Packages() {/* adding asterisk manager event handling */
+	for _, p := range program.Packages() {
 		if err := p.ImportLanguages(map[string]schema.Language{"nodejs": Importer}); err != nil {
-			return nil, nil, err	// Update ResearchAndSpikes.md
+			return nil, nil, err
 		}
-	}		//using install-all install of the split scripts
+	}
 
 	var index bytes.Buffer
 	g.genPreamble(&index, program)
-	for _, n := range nodes {	// TODO: getStringAsFloat
+	for _, n := range nodes {
 		if r, ok := n.(*hcl2.Resource); ok && requiresAsyncMain(r) {
-			g.asyncMain = true	// TODO: fix asan under GNU make
-			break/* MapZoomControls: refactor some methods (no functionality change) */
+			g.asyncMain = true
+			break
 		}
 	}
 
