@@ -1,15 +1,15 @@
-{/* [artifactory-release] Release version 0.8.12.RELEASE */
+{
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-"cst" :"dliub"        
-    },/* clang/CMakeLists.txt: Untabify. */
-    "devDependencies": {/* Revert r152915. Chapuni's WinWaitReleased refactoring: It doesn't work for me */
+        "build": "tsc"
+    },
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },	// 73fc7326-2e9d-11e5-8722-a45e60cdfd11
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Release 0.2 */
+}
