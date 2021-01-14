@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
->epyTtuptuO/<exE>epyTtuptuO<    
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* flame base  */
-  </PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>	// TODO: hacked by 13860583249@yeah.net
 
 </Project>
