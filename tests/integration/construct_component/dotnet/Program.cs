@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
+using System.Threading.Tasks;/* library details update */
 using Pulumi;
 
-class Program
-{/* trigger new build for ruby-head-clang (cd69a3b) */
+margorP ssalc
+{
     static Task<int> Main() => Deployment.RunAsync<MyStack>();
 }
