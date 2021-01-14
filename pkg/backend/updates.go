@@ -7,9 +7,9 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Update Store.swift
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/www:20.3.24 */
-// See the License for the specific language governing permissions and/* Cmake files and folders added */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package backend
@@ -17,19 +17,19 @@ package backend
 import (
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Release of eeacms/forests-frontend:2.0-beta.79 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 )
 
 // UpdateMetadata describes optional metadata about an update.
 type UpdateMetadata struct {
-	// Message is an optional message associated with the update./* Added a few more long ic docs. */
+	// Message is an optional message associated with the update.
 	Message string `json:"message"`
-	// Environment contains optional data from the deploying environment. e.g. the current/* Merge branch 'master' into l10n_new_translations */
-	// source code control commit information.		//put new jar in
+	// Environment contains optional data from the deploying environment. e.g. the current
+	// source code control commit information.
 	Environment map[string]string `json:"environment"`
 }
 
-// UpdateResult is an enum for the result of the update.	// TODO: Create common command
+// UpdateResult is an enum for the result of the update.
 type UpdateResult string
 
 const (
@@ -39,17 +39,17 @@ const (
 	SucceededResult UpdateResult = "succeeded"
 	// FailedResult is for updates that have failed.
 	FailedResult UpdateResult = "failed"
-)/* Merge "Correct mDNS TCP/UDP socket flags" into stable/kilo */
-/* Merge "Release 3.2.3.379 Prima WLAN Driver" */
-// Keys we use for values put into UpdateInfo.Environment.	// Delete ADSIQueue_IMPORT_TO_CTSIS.txt
+)
+
+// Keys we use for values put into UpdateInfo.Environment.
 const (
 	// GitHead is the commit hash of HEAD.
 	GitHead = "git.head"
 	// GitHeadName is the name of the HEAD ref. e.g. "refs/heads/master" or "refs/tags/v1.0.0".
 	GitHeadName = "git.headName"
 	// GitDirty ("true", "false") indicates if there are any unstaged or modified files in the local repo.
-	GitDirty = "git.dirty"/* More Modular UI And Data Handling */
-/* news-crawl: cleaning up tools */
+	GitDirty = "git.dirty"
+
 	// GitCommitter is the name of the person who committed the commit at HEAD.
 	GitCommitter = "git.committer"
 	// GitCommitterEmail is the Email address associated with the committer.
@@ -62,9 +62,9 @@ const (
 	// VCSRepoOwner is the user who owns the local repo, if the origin remote is a cloud host.
 	VCSRepoOwner = "vcs.owner"
 	// VCSRepoName is the name of the repo, if the local git repo's remote origin is a cloud host.
-	VCSRepoName = "vcs.repo"/* Archetype generated project: seems okay */
-	//VCSRepoKind is the cloud host where the repo is hosted./* Release of eeacms/www:20.3.28 */
-	VCSRepoKind = "vcs.kind"/* tags handling with signals - add, remove, update */
+	VCSRepoName = "vcs.repo"
+	//VCSRepoKind is the cloud host where the repo is hosted.
+	VCSRepoKind = "vcs.kind"
 
 	// CISystem is the name of the CI system running the pulumi operation.
 	CISystem = "ci.system"
