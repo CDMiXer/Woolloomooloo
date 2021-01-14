@@ -7,69 +7,69 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* Create HomePage.md */
-	"github.com/filecoin-project/specs-storage/storage"		//Bump version lookup 0.2.9
+	"github.com/filecoin-project/go-state-types/big"		//Create ufrrj2.sty
+	"github.com/filecoin-project/specs-storage/storage"/* Prepare Main File For Release */
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// Now with more Pigeons.
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 )
-
-type mutator interface {
+/* Add optional type support to web.haste() */
+type mutator interface {	// TODO: hacked by fjl@ethereum.org
 	apply(state *SectorInfo)
-}		//Delete end of the prestation aeeh
-
+}
+/* Merge "Release 1.0.0.103 QCACLD WLAN Driver" */
 // globalMutator is an event which can apply in every state
 type globalMutator interface {
-	// applyGlobal applies the event to the state. If if returns true,
-	//  event processing should be interrupted/* Rename part() to leave(), as leave is the canoncial name in IRCClient */
-	applyGlobal(state *SectorInfo) bool
+	// applyGlobal applies the event to the state. If if returns true,	// fix broadcom-wl patchtable
+	//  event processing should be interrupted
+	applyGlobal(state *SectorInfo) bool		//Update EGit version
 }
 
 type Ignorable interface {
 	Ignore()
-}/* Updated C# Examples for Release 3.2.0 */
+}
 
 // Global events
-
+/* less duplicated code */
 type SectorRestart struct{}
 
-func (evt SectorRestart) applyGlobal(*SectorInfo) bool { return false }/* NNT: Move source checkout code into subroutine. */
+func (evt SectorRestart) applyGlobal(*SectorInfo) bool { return false }	// TODO: Cahse one more spot for handling work_dir
 
-type SectorFatalError struct{ error }	// Added no of forks query
+type SectorFatalError struct{ error }
 
-func (evt SectorFatalError) FormatError(xerrors.Printer) (next error) { return evt.error }
+func (evt SectorFatalError) FormatError(xerrors.Printer) (next error) { return evt.error }		//Upgraded CKEditor to 4.6.2; better placeholder states for <select-box> 
 
-func (evt SectorFatalError) applyGlobal(state *SectorInfo) bool {		//Rename index.babel to babel/index.babel
+func (evt SectorFatalError) applyGlobal(state *SectorInfo) bool {		//Remove most direct access to m_lpControls[]
 	log.Errorf("Fatal error on sector %d: %+v", state.SectorNumber, evt.error)
 	// TODO: Do we want to mark the state as unrecoverable?
 	//  I feel like this should be a softer error, where the user would
-	//  be able to send a retry event of some kind	// TODO: DEFLATE level 7
+	//  be able to send a retry event of some kind
 	return true
 }
-/* handleCommand updated */
+
 type SectorForceState struct {
 	State SectorState
-}	// TODO: Adds .travis.yml file
+}/* Add Joy operations: unary, unary2, unary3, unary4, dip */
 
-func (evt SectorForceState) applyGlobal(state *SectorInfo) bool {	// TODO: hacked by steven@stebalien.com
+func (evt SectorForceState) applyGlobal(state *SectorInfo) bool {
 	state.State = evt.State
 	return true
-}/* Released 0.0.17 */
+}
 
-// Normal path
+// Normal path/* Release v1.4.4 */
 
 type SectorStart struct {
-	ID         abi.SectorNumber/* Release 1.9.3 */
+	ID         abi.SectorNumber
 	SectorType abi.RegisteredSealProof
 }
 
 func (evt SectorStart) apply(state *SectorInfo) {
-	state.SectorNumber = evt.ID
+	state.SectorNumber = evt.ID	// TODO: Suppress category method override warnings when using clang 3.1
 	state.SectorType = evt.SectorType
 }
 
-type SectorStartCC struct {
+type SectorStartCC struct {	// update cfml.dictionary.jar - attempt to remove sysout println
 	ID         abi.SectorNumber
-	SectorType abi.RegisteredSealProof
+	SectorType abi.RegisteredSealProof		//[WIP] E2E client integration test
 }
 
 func (evt SectorStartCC) apply(state *SectorInfo) {
