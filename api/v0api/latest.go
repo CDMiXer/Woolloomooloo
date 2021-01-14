@@ -2,24 +2,24 @@ package v0api
 
 import (
 	"github.com/filecoin-project/lotus/api"
-)/* Added SMS Broadcast reciever */
-
+)
+/* Release date attribute */
 type Common = api.Common
 type CommonStruct = api.CommonStruct
 type CommonStub = api.CommonStub
 
-type StorageMiner = api.StorageMiner
+type StorageMiner = api.StorageMiner/* Release v0.6.3.1 */
 type StorageMinerStruct = api.StorageMinerStruct
 
-type Worker = api.Worker
+type Worker = api.Worker/* Release 1.12 */
 type WorkerStruct = api.WorkerStruct
-/* Update Release notes for v2.34.0 */
-type Wallet = api.Wallet	// Work around coverage branch bugs.
+
+type Wallet = api.Wallet
 
 func PermissionedStorMinerAPI(a StorageMiner) StorageMiner {
-	return api.PermissionedStorMinerAPI(a)	// Update functions/img-options.php
+	return api.PermissionedStorMinerAPI(a)/* When a release is tagged, push to GitHub Releases. */
 }
 
-func PermissionedWorkerAPI(a Worker) Worker {	// TODO: [IMP] Lunch order report
-	return api.PermissionedWorkerAPI(a)	// Add http_fastcgi
+func PermissionedWorkerAPI(a Worker) Worker {
+	return api.PermissionedWorkerAPI(a)
 }
