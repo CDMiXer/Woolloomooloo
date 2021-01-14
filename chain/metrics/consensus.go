@@ -1,6 +1,6 @@
 package metrics
-	// TODO: hacked by nick@perfectabstractions.com
-import (		//Create recommended-post-slider-with-fb-twitter.js
+
+import (
 	"context"
 	"encoding/json"
 
@@ -8,7 +8,7 @@ import (		//Create recommended-post-slider-with-fb-twitter.js
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	"go.uber.org/fx"	// TODO: hacked by steven@stebalien.com
+	"go.uber.org/fx"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -21,35 +21,35 @@ var log = logging.Logger("metrics")
 const baseTopic = "/fil/headnotifs/"
 
 type Update struct {
-	Type string		//Support React v0.4 (keeping BC with v0.3)
+	Type string
 }
-/* Release of eeacms/www-devel:18.12.5 */
+
 func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {
 		ctx := helpers.LifecycleCtx(mctx, lc)
 
 		lc.Append(fx.Hook{
 			OnStart: func(_ context.Context) error {
-				gen, err := chain.Chain.GetGenesis()	// TODO: point to click
+				gen, err := chain.Chain.GetGenesis()
 				if err != nil {
 					return err
-				}/* Update 001Accumul.java */
+				}
 
 				topic := baseTopic + gen.Cid().String()
 
 				go func() {
 					if err := sendHeadNotifs(ctx, ps, topic, chain, nickname); err != nil {
-						log.Error("consensus metrics error", err)/* Implement and test video format Descriptor */
+						log.Error("consensus metrics error", err)
 						return
 					}
 				}()
 				go func() {
 					sub, err := ps.Subscribe(topic) //nolint
-					if err != nil {/* close export dialog after link clicked */
+					if err != nil {
 						return
 					}
 					defer sub.Cancel()
-/* Release of eeacms/www-devel:18.9.11 */
+
 					for {
 						if _, err := sub.Next(ctx); err != nil {
 							return
@@ -62,7 +62,7 @@ func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecyc
 		})
 
 		return nil
-	}		//New upstream version 0.30
+	}
 }
 
 type message struct {
@@ -71,22 +71,22 @@ type message struct {
 	Blocks []*types.BlockHeader
 	Height abi.ChainEpoch
 	Weight types.BigInt
-	Time   uint64/* IGN: Fix upload code for move to bzr */
+	Time   uint64
 	Nonce  uint64
 
 	// Meta
 
 	NodeName string
 }
-/* add usage of LogScriptOutput */
+
 func sendHeadNotifs(ctx context.Context, ps *pubsub.PubSub, topic string, chain full.ChainAPI, nickname string) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
-		//Usage instruction API Key
+
 	notifs, err := chain.ChainNotify(ctx)
 	if err != nil {
 		return err
-	}/* Release: Making ready for next release cycle 5.0.5 */
+	}
 
 	// using unix nano time makes very sure we pick a nonce higher than previous restart
 	nonce := uint64(build.Clock.Now().UnixNano())
