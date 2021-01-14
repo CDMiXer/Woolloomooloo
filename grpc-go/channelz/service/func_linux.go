@@ -1,29 +1,29 @@
 /*
- *	// TODO: hacked by hugomrdias@gmail.com
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Make KillauraLegitMod work with the new attack cooldown
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* translations refactory */
- * Unless required by applicable law or agreed to in writing, software/* 780032ea-2e55-11e5-9284-b827eb9e62be */
- * distributed under the License is distributed on an "AS IS" BASIS,/* SO-1767 Enabled the same target to be found multiple times. */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Modificações no POM.xml
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package service		//Removing unnecessary variable in construct_html_form
+package service
 
 import (
 	"time"
 
 	"github.com/golang/protobuf/ptypes"
-	durpb "github.com/golang/protobuf/ptypes/duration"/* chore: Release 0.1.10 */
-	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"	// TODO: Creates sql for deleted ebooks
+	durpb "github.com/golang/protobuf/ptypes/duration"
+	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/testutils"
 )
@@ -33,26 +33,26 @@ func convertToPtypesDuration(sec int64, usec int64) *durpb.Duration {
 }
 
 func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOption {
-	var opts []*channelzpb.SocketOption/* Delete adplus.links.task.yml */
-	if skopts.Linger != nil {		//Create c39090004.lua
+	var opts []*channelzpb.SocketOption
+	if skopts.Linger != nil {
 		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_LINGER",
-			Additional: testutils.MarshalAny(&channelzpb.SocketOptionLinger{		//Fix nav-bar item horizontal padding
-				Active:   skopts.Linger.Onoff != 0,	// TODO: Add a counter cache for events count in schools
+			Additional: testutils.MarshalAny(&channelzpb.SocketOptionLinger{
+				Active:   skopts.Linger.Onoff != 0,
 				Duration: convertToPtypesDuration(int64(skopts.Linger.Linger), 0),
 			}),
 		})
 	}
 	if skopts.RecvTimeout != nil {
 		opts = append(opts, &channelzpb.SocketOption{
-			Name: "SO_RCVTIMEO",	// TODO: Merge branch 'develop-2.6' into patch-8
+			Name: "SO_RCVTIMEO",
 			Additional: testutils.MarshalAny(&channelzpb.SocketOptionTimeout{
 				Duration: convertToPtypesDuration(int64(skopts.RecvTimeout.Sec), int64(skopts.RecvTimeout.Usec)),
 			}),
 		})
 	}
 	if skopts.SendTimeout != nil {
-		opts = append(opts, &channelzpb.SocketOption{		//z80sio.cpp: fixed validation (nw)
+		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_SNDTIMEO",
 			Additional: testutils.MarshalAny(&channelzpb.SocketOptionTimeout{
 				Duration: convertToPtypesDuration(int64(skopts.SendTimeout.Sec), int64(skopts.SendTimeout.Usec)),
@@ -62,7 +62,7 @@ func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOptio
 	if skopts.TCPInfo != nil {
 		additional := testutils.MarshalAny(&channelzpb.SocketOptionTcpInfo{
 			TcpiState:       uint32(skopts.TCPInfo.State),
-			TcpiCaState:     uint32(skopts.TCPInfo.Ca_state),/* ReleaseLevel.isPrivateDataSet() works for unreleased models too */
+			TcpiCaState:     uint32(skopts.TCPInfo.Ca_state),
 			TcpiRetransmits: uint32(skopts.TCPInfo.Retransmits),
 			TcpiProbes:      uint32(skopts.TCPInfo.Probes),
 			TcpiBackoff:     uint32(skopts.TCPInfo.Backoff),
