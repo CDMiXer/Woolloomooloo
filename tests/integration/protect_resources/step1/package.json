@@ -2,9 +2,9 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"		//fixed include direcitve.
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Implement SpreadsheetView for JavaFX (wip) */
+}	// TODO: Change set for CA Demo
