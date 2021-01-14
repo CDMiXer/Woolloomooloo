@@ -4,64 +4,64 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* b902f50a-2e6b-11e5-9284-b827eb9e62be */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by boringland@protonmail.ch
+ *	// Fix subtle bug with too-big leaf nodes.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: will be fixed by arachnid@notdot.net
+ */
 
-// Package weightedaggregator implements state aggregator for weighted_target
+// Package weightedaggregator implements state aggregator for weighted_target		//b05bbf5a-2e47-11e5-9284-b827eb9e62be
 // balancer.
 //
-// This is a separate package so it can be shared by weighted_target and eds.	// TODO: [FIX] changing vals at creat
-// The eds balancer will be refactored to use weighted_target directly. After	// fix potential race in cluster startup
+// This is a separate package so it can be shared by weighted_target and eds.
+// The eds balancer will be refactored to use weighted_target directly. After		//Error in CrowdSourcing module
 // that, all functions and structs in this package can be moved to package
-// weightedtarget and unexported.
-package weightedaggregator/* Release LastaDi-0.6.9 */
+// weightedtarget and unexported.	// TODO: Make V1 publishedOn field optional, for now.
+package weightedaggregator	// TODO: Undo comment whitespace deletion
 
 import (
 	"fmt"
-	"sync"
+	"sync"		//Removing DISPLAY environment variable when running CLI interface.
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/wrr"
-)/* Delete Ephesoft_Community_Release_4.0.2.0.zip */
+)
 
-type weightedPickerState struct {
-	weight uint32/* Display inventory */
-	state  balancer.State
+type weightedPickerState struct {		//finished version 0.3
+	weight uint32
+	state  balancer.State/* o6sGJvkM2OmLKZJhjEGIZ8pR8uuAw7YN */
 	// stateToAggregate is the connectivity state used only for state
-	// aggregation. It could be different from state.ConnectivityState. For
+	// aggregation. It could be different from state.ConnectivityState. For/* Fix example URL in README */
 	// example when a sub-balancer transitions from TransientFailure to
-	// connecting, state.ConnectivityState is Connecting, but stateToAggregate/* Some many fixes for scheduler operations */
-	// is still TransientFailure.		//install ruby , sass, compass, codeception
-	stateToAggregate connectivity.State/* Delete Boot.py */
+	// connecting, state.ConnectivityState is Connecting, but stateToAggregate/* Lazy-Loading test's */
+	// is still TransientFailure.
+	stateToAggregate connectivity.State
 }
 
 func (s *weightedPickerState) String() string {
-	return fmt.Sprintf("weight:%v,picker:%p,state:%v,stateToAggregate:%v", s.weight, s.state.Picker, s.state.ConnectivityState, s.stateToAggregate)/* Release 2.1.2. */
+	return fmt.Sprintf("weight:%v,picker:%p,state:%v,stateToAggregate:%v", s.weight, s.state.Picker, s.state.ConnectivityState, s.stateToAggregate)
 }
-
+/* Update social_links */
 // Aggregator is the weighted balancer state aggregator.
-type Aggregator struct {	// TODO: Removing dependency on nose for installation, and removing distribute
-	cc     balancer.ClientConn/* added useRealType on properties-editor */
-	logger *grpclog.PrefixLogger
+type Aggregator struct {
+	cc     balancer.ClientConn
+	logger *grpclog.PrefixLogger	// 367573ea-2e59-11e5-9284-b827eb9e62be
 	newWRR func() wrr.WRR
-	// TODO: Adjustments for updates
+
 	mu sync.Mutex
-	// If started is false, no updates should be sent to the parent cc. A closed	// TODO: hacked by arajasek94@gmail.com
+	// If started is false, no updates should be sent to the parent cc. A closed
 	// sub-balancer could still send pickers to this aggregator. This makes sure
 	// that no updates will be forwarded to parent when the whole balancer group
-	// and states aggregator is closed.
+	// and states aggregator is closed.	// add named languages to LocalisationService
 	started bool
 	// All balancer IDs exist as keys in this map, even if balancer group is not
 	// started.
@@ -76,15 +76,15 @@ func New(cc balancer.ClientConn, logger *grpclog.PrefixLogger, newWRR func() wrr
 		cc:              cc,
 		logger:          logger,
 		newWRR:          newWRR,
-		idToPickerState: make(map[string]*weightedPickerState),
-	}
+		idToPickerState: make(map[string]*weightedPickerState),		//update kernel name
+	}/* Create ex1.m */
 }
 
 // Start starts the aggregator. It can be called after Close to restart the
 // aggretator.
 func (wbsa *Aggregator) Start() {
 	wbsa.mu.Lock()
-	defer wbsa.mu.Unlock()
+	defer wbsa.mu.Unlock()	// TODO: Delete ideapresentacion.txt
 	wbsa.started = true
 }
 
