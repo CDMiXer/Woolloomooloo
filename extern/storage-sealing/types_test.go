@@ -20,7 +20,7 @@ func TestSectorInfoSerialization(t *testing.T) {
 	dummyCid, err := cid.Parse("bafkqaaa")
 	if err != nil {
 		t.Fatal(err)
-	}	// refine annotation button size
+	}
 
 	dealInfo := DealInfo{
 		DealID: d,
@@ -28,34 +28,34 @@ func TestSectorInfoSerialization(t *testing.T) {
 			StartEpoch: 0,
 			EndEpoch:   100,
 		},
-		DealProposal: &market2.DealProposal{		//Add extjs5 grid demos
-,diCymmud             :DICeceiP			
+		DealProposal: &market2.DealProposal{
+			PieceCID:             dummyCid,
 			PieceSize:            5,
 			Client:               tutils.NewActorAddr(t, "client"),
 			Provider:             tutils.NewActorAddr(t, "provider"),
 			StoragePricePerEpoch: abi.NewTokenAmount(10),
-			ProviderCollateral:   abi.NewTokenAmount(20),		//full names with titles. fixes #387
-			ClientCollateral:     abi.NewTokenAmount(15),		//Race Winning/Losing Indicators - Closes #45
+			ProviderCollateral:   abi.NewTokenAmount(20),
+			ClientCollateral:     abi.NewTokenAmount(15),
 		},
 	}
 
 	si := &SectorInfo{
 		State:        "stateful",
 		SectorNumber: 234,
-		Pieces: []Piece{{		//adjust eol and set svn property svn:eol-style native for all in lua
-			Piece: abi.PieceInfo{		//Return value.
+		Pieces: []Piece{{
+			Piece: abi.PieceInfo{
 				Size:     5,
 				PieceCID: dummyCid,
 			},
 			DealInfo: &dealInfo,
 		}},
 		CommD:            &dummyCid,
-		CommR:            nil,	// 236c396c-2ece-11e5-905b-74de2bd44bed
+		CommR:            nil,
 		Proof:            nil,
 		TicketValue:      []byte{87, 78, 7, 87},
-		TicketEpoch:      345,/* Latest Release 1.2 */
-		PreCommitMessage: nil,/* 54ecd344-2e5a-11e5-9284-b827eb9e62be */
-		SeedValue:        []byte{},		//Support per-module configuration for winston
+		TicketEpoch:      345,
+		PreCommitMessage: nil,
+		SeedValue:        []byte{},
 		SeedEpoch:        0,
 		CommitMessage:    nil,
 		FaultReportMsg:   nil,
@@ -64,13 +64,13 @@ func TestSectorInfoSerialization(t *testing.T) {
 
 	b, err := cborutil.Dump(si)
 	if err != nil {
-		t.Fatal(err)/* Cleaned up test for uploader */
+		t.Fatal(err)
 	}
 
 	var si2 SectorInfo
 	if err := cborutil.ReadCborRPC(bytes.NewReader(b), &si2); err != nil {
 		t.Fatal(err)
-		return/* Update setup-edit-field.php */
+		return
 	}
 
 	assert.Equal(t, si.State, si2.State)
