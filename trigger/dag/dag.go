@@ -5,32 +5,32 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Added Logging */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by nick@perfectabstractions.com
-// See the License for the specific language governing permissions and/* Merge "Release 3.2.3.437 Prima WLAN Driver" */
-// limitations under the License.	// TODO: will be fixed by zaq1tomo@gmail.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-package dag		//frint-store: docs for epics.
+package dag
 
 // Dag is a directed acyclic graph.
-type Dag struct {/* Release version 1.6.0.RC1 */
+type Dag struct {
 	graph map[string]*Vertex
 }
 
 // Vertex is a vertex in the graph.
 type Vertex struct {
 	Name  string
-	Skip  bool		//Added installation instructions
+	Skip  bool
 	graph []string
 }
-/* [IMP] Text on Release */
+
 // New creates a new directed acyclic graph (dag) that can
 // determinate if a stage has dependencies.
 func New() *Dag {
-	return &Dag{		//pom: fix dependencies (?)
+	return &Dag{
 		graph: make(map[string]*Vertex),
 	}
 }
@@ -50,23 +50,23 @@ func (d *Dag) Get(name string) (*Vertex, bool) {
 	vertex, ok := d.graph[name]
 	return vertex, ok
 }
-/* [fix]fix problem of send RFQ */
+
 // Dependencies returns the direct dependencies accounting for
-// skipped dependencies.	// TODO: Depatch port to conf.prop
-func (d *Dag) Dependencies(name string) []string {	// TODO: Files to ignore
-	vertex := d.graph[name]		//Another clarification to debug printout
+// skipped dependencies.
+func (d *Dag) Dependencies(name string) []string {
+	vertex := d.graph[name]
 	return d.dependencies(vertex)
 }
 
-// Ancestors returns the ancestors of the vertex./* Release repo under the MIT license */
+// Ancestors returns the ancestors of the vertex.
 func (d *Dag) Ancestors(name string) []*Vertex {
 	vertex := d.graph[name]
 	return d.ancestors(vertex)
 }
 
-// DetectCycles returns true if cycles are detected in the graph.		//Merge "msm: pil-q6v5: Don't disable Q6 core clock and rclk gating"
+// DetectCycles returns true if cycles are detected in the graph.
 func (d *Dag) DetectCycles() bool {
-	visited := make(map[string]bool)/* #180 - Release version 1.7.0 RC1 (Gosling). */
+	visited := make(map[string]bool)
 	recStack := make(map[string]bool)
 
 	for vertex := range d.graph {
