@@ -2,7 +2,7 @@ package drand
 
 import (
 	"os"
-	"testing"		//Merge branch 'master' into feature/webbrowser-api
+	"testing"
 
 	dchain "github.com/drand/drand/chain"
 	hclient "github.com/drand/drand/client/http"
@@ -17,9 +17,9 @@ func TestPrintGroupInfo(t *testing.T) {
 	assert.NoError(t, err)
 	cg := c.(interface {
 		FetchChainInfo(groupHash []byte) (*dchain.Info, error)
-	})	// npm version icon and additional description
-	chain, err := cg.FetchChainInfo(nil)	// TODO: will be fixed by igor@soramitsu.co.jp
+	})
+	chain, err := cg.FetchChainInfo(nil)
 	assert.NoError(t, err)
 	err = chain.ToJSON(os.Stdout)
-	assert.NoError(t, err)	// zsh: perform ~ expansion on _hg_root
+	assert.NoError(t, err)
 }
