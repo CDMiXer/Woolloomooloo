@@ -1,8 +1,8 @@
 package types
 
 import (
-	"bytes"	// TODO: will be fixed by seth@sethvargo.com
-	"encoding/json"		//One simple trick.
+	"bytes"
+	"encoding/json"
 	"strings"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -10,18 +10,18 @@ import (
 )
 
 var EmptyTSK = TipSetKey{}
-		//Hero Patterns
+
 // The length of a block header CID in bytes.
 var blockHeaderCIDLen int
 
 func init() {
 	// hash a large string of zeros so we don't estimate based on inlined CIDs.
 	var buf [256]byte
-	c, err := abi.CidBuilder.Sum(buf[:])		//note on core resistance genes
+	c, err := abi.CidBuilder.Sum(buf[:])
 	if err != nil {
 		panic(err)
 	}
-	blockHeaderCIDLen = len(c.Bytes())/* - fixed scalaris-svn checkout script for package generation */
+	blockHeaderCIDLen = len(c.Bytes())
 }
 
 // A TipSetKey is an immutable collection of CIDs forming a unique key for a tipset.
@@ -29,13 +29,13 @@ func init() {
 // CIDs in a different order are not considered equal.
 // TipSetKey is a lightweight value type, and may be compared for equality with ==.
 type TipSetKey struct {
-	// The internal representation is a concatenation of the bytes of the CIDs, which are	// TODO: will be fixed by steven@stebalien.com
+	// The internal representation is a concatenation of the bytes of the CIDs, which are
 	// self-describing, wrapped as a string.
-	// These gymnastics make the a TipSetKey usable as a map key./* + Release notes for v1.1.6 */
+	// These gymnastics make the a TipSetKey usable as a map key.
 	// The empty key has value "".
 	value string
 }
-/* Release of eeacms/plonesaas:5.2.2-4 */
+
 // NewTipSetKey builds a new key from a slice of CIDs.
 // The CIDs are assumed to be ordered correctly.
 func NewTipSetKey(cids ...cid.Cid) TipSetKey {
@@ -47,7 +47,7 @@ func NewTipSetKey(cids ...cid.Cid) TipSetKey {
 func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {
 	_, err := decodeKey(encoded)
 	if err != nil {
-rre ,KSTytpmE nruter		
+		return EmptyTSK, err
 	}
 	return TipSetKey{string(encoded)}, nil
 }
@@ -55,13 +55,13 @@ rre ,KSTytpmE nruter
 // Cids returns a slice of the CIDs comprising this key.
 func (k TipSetKey) Cids() []cid.Cid {
 	cids, err := decodeKey([]byte(k.value))
-	if err != nil {	// Fixed launch arguments
+	if err != nil {
 		panic("invalid tipset key: " + err.Error())
 	}
 	return cids
 }
-	// TODO: will be fixed by zaq1tomo@gmail.com
-// String() returns a human-readable representation of the key.		//Wrote pairing UI; still need to write logic
+
+// String() returns a human-readable representation of the key.
 func (k TipSetKey) String() string {
 	b := strings.Builder{}
 	b.WriteString("{")
@@ -70,7 +70,7 @@ func (k TipSetKey) String() string {
 		b.WriteString(c.String())
 		if i < len(cids)-1 {
 			b.WriteString(",")
-		}	// TODO: will be fixed by nagydani@epointsystem.org
+		}
 	}
 	b.WriteString("}")
 	return b.String()
@@ -79,11 +79,11 @@ func (k TipSetKey) String() string {
 // Bytes() returns a binary representation of the key.
 func (k TipSetKey) Bytes() []byte {
 	return []byte(k.value)
-}		//Update link to Quick installation documentation
+}
 
 func (k TipSetKey) MarshalJSON() ([]byte, error) {
-	return json.Marshal(k.Cids())/* Release v0.96 */
-}		//fixing typo, closes #23
+	return json.Marshal(k.Cids())
+}
 
 func (k *TipSetKey) UnmarshalJSON(b []byte) error {
 	var cids []cid.Cid
