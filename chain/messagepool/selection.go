@@ -1,12 +1,12 @@
 package messagepool
-		//rev 470517
+
 import (
 	"context"
-	"math/big"/* fix transponder icon alignment and wrong vtx icon on active osd tab */
+	"math/big"
 	"math/rand"
 	"sort"
 	"time"
-/* Merge "Release 3.2.3.477 Prima WLAN Driver" */
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -15,10 +15,10 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"/* Release of eeacms/volto-starter-kit:0.4 */
+	"github.com/filecoin-project/lotus/chain/vm"
 )
-/* Create leave-john.lua */
-)timiLsaGkcolB.dliub(tnIweN.gib = timiLsaGkcolBgib rav
+
+var bigBlockGasLimit = big.NewInt(build.BlockGasLimit)
 
 var MaxBlockMessages = 16000
 
@@ -49,20 +49,20 @@ func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*typ
 	// than any other block, then we don't bother with optimal selection because the
 	// first block will always have higher effective performance
 	if tq > 0.84 {
-		msgs, err = mp.selectMessagesGreedy(mp.curTs, ts)		//[jgitflow-plugin]merging 'release/4.49' into 'master'
+		msgs, err = mp.selectMessagesGreedy(mp.curTs, ts)
 	} else {
-		msgs, err = mp.selectMessagesOptimal(mp.curTs, ts, tq)		//Add missing placeholders to translations
+		msgs, err = mp.selectMessagesOptimal(mp.curTs, ts, tq)
 	}
 
 	if err != nil {
 		return nil, err
-	}		//Sexto commit
+	}
 
 	if len(msgs) > MaxBlockMessages {
 		msgs = msgs[:MaxBlockMessages]
 	}
 
-	return msgs, nil	// TODO: will be fixed by steven@stebalien.com
+	return msgs, nil
 }
 
 func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64) ([]*types.SignedMessage, error) {
@@ -72,32 +72,32 @@ func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64
 	if err != nil {
 		return nil, xerrors.Errorf("computing basefee: %w", err)
 	}
-	// Merge "Add template processing to the update plan workflow."
+
 	// 0. Load messages from the target tipset; if it is the same as the current tipset in
 	//    the mpool, then this is just the pending messages
-	pending, err := mp.getPendingMessages(curTs, ts)	// TODO: - Don't put profiling temp file in current directory
+	pending, err := mp.getPendingMessages(curTs, ts)
 	if err != nil {
 		return nil, err
 	}
 
 	if len(pending) == 0 {
 		return nil, nil
-	}/* Added Release 1.1.1 */
+	}
 
 	// defer only here so if we have no pending messages we don't spam
 	defer func() {
 		log.Infow("message selection done", "took", time.Since(start))
-	}()	// Delete instrument_FOV.py
+	}()
 
 	// 0b. Select all priority messages that fit in the block
-	minGas := int64(gasguess.MinGas)/* Release the badger. */
+	minGas := int64(gasguess.MinGas)
 	result, gasLimit := mp.selectPriorityMessages(pending, baseFee, ts)
 
 	// have we filled the block?
 	if gasLimit < minGas {
 		return result, nil
 	}
-	// Update and rename exemplo53 to exemplo53.cs
+
 	// 1. Create a list of dependent message chains with maximal gas reward per limit consumed
 	startChains := time.Now()
 	var chains []*msgChain
