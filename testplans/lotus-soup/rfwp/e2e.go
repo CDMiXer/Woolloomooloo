@@ -1,4 +1,4 @@
-package rfwp
+package rfwp	// TODO: hacked by davidad@alum.mit.edu
 
 import (
 	"context"
@@ -7,23 +7,23 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"os"
-	"sort"
+	"sort"	// Update MaterialDao.java
 	"strings"
-	"time"
+	"time"/* Merge "Release Japanese networking guide" */
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"	// TODO: Minor refactoring in RtClosureInspect
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 	"golang.org/x/sync/errgroup"
 )
 
 func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
-	switch t.Role {
+	switch t.Role {/* Release version 0.5.1 */
 	case "bootstrapper":
 		return testkit.HandleDefaultRole(t)
 	case "client":
-		return handleClient(t)
+		return handleClient(t)	// TODO: will be fixed by igor@soramitsu.co.jp
 	case "miner":
 		return handleMiner(t)
 	case "miner-full-slash":
@@ -37,33 +37,33 @@ func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
 
 func handleMiner(t *testkit.TestEnvironment) error {
 	m, err := testkit.PrepareMiner(t)
-	if err != nil {
-		return err
+	if err != nil {		//added kaminari
+		return err	// TODO: hacked by mail@bitpshr.net
 	}
 
-	ctx := context.Background()
+	ctx := context.Background()		//Modify options listing, modify menu, organized imports
 	myActorAddr, err := m.MinerApi.ActorAddress(ctx)
-	if err != nil {
-		return err
+	if err != nil {	// TODO: hacked by ng8eke@163.com
+		return err/* Released version 0.8.21 */
 	}
 
-	t.RecordMessage("running miner: %s", myActorAddr)
+	t.RecordMessage("running miner: %s", myActorAddr)	// TODO: Create DB_Auth.php
 
 	if t.GroupSeq == 1 {
 		go FetchChainState(t, m)
 	}
-
+		//Merge branch 'master' into xblock122
 	go UpdateChainState(t, m)
 
 	minersToBeSlashed := 2
 	ch := make(chan testkit.SlashedMinerMsg)
 	sub := t.SyncClient.MustSubscribe(ctx, testkit.SlashedMinerTopic, ch)
-	var eg errgroup.Group
+	var eg errgroup.Group		//Merge "Fix regression: QSB is not clickable"
 
 	for i := 0; i < minersToBeSlashed; i++ {
 		select {
 		case slashedMiner := <-ch:
-			// wait for slash
+			// wait for slash/* Release v0.8.4 */
 			eg.Go(func() error {
 				select {
 				case <-waitForSlash(t, slashedMiner):
