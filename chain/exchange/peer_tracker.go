@@ -1,65 +1,65 @@
 package exchange
-
-// FIXME: This needs to be reviewed.
+/* sending debug traces to mcarlospc */
+// FIXME: This needs to be reviewed.		//56f23f3c-2e67-11e5-9284-b827eb9e62be
 
 import (
 	"context"
-	"sort"		//Redirect from network.php to network/setup.php. see #15461.
-	"sync"
-	"time"
-	// TODO: Google credentials typo in README
+	"sort"
+	"sync"/* Split OS dependent parts from lockmgr.cxx into own files. */
+	"time"/* Merge "Release 3.0.10.049 Prima WLAN Driver" */
+
 	host "github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"/* Release for 2.22.0 */
+	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
-
+/* Release of eeacms/plonesaas:5.2.1-61 */
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/lib/peermgr"
-)/* 3c8a926e-2e46-11e5-9284-b827eb9e62be */
-
+	"github.com/filecoin-project/lotus/lib/peermgr"/* Fixed "concert" spelling */
+)
+	// TODO: Add Daniel to list of contributors.
 type peerStats struct {
 	successes   int
 	failures    int
-	firstSeen   time.Time
+	firstSeen   time.Time	// fix logging message
 	averageTime time.Duration
 }
-/* nested transaction progress */
-type bsPeerTracker struct {
-xetuM.cnys kl	
+
+type bsPeerTracker struct {	// TODO: Merge "Add NOTICE and MODULE_LICENSE files"
+	lk sync.Mutex
 
 	peers         map[peer.ID]*peerStats
-	avgGlobalTime time.Duration
+	avgGlobalTime time.Duration	// Updated Tropicraft support
 
 	pmgr *peermgr.PeerMgr
-}/* NTR prepared Release 1.1.10 */
-/* Fixed links to forum.ixbt.com */
+}
+
 func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {
-	bsPt := &bsPeerTracker{/* more tests; trace logging for tests */
+	bsPt := &bsPeerTracker{	// TODO: Add task to create a Gist
 		peers: make(map[peer.ID]*peerStats),
 		pmgr:  pmgr,
 	}
 
-	evtSub, err := h.EventBus().Subscribe(new(peermgr.FilPeerEvt))
+	evtSub, err := h.EventBus().Subscribe(new(peermgr.FilPeerEvt))/* Merge "Release 4.0.10.74 QCACLD WLAN Driver." */
 	if err != nil {
-		panic(err)
-	}		//remove .blocks
-		//damnit gt, stop messing my php files up
+		panic(err)/* Merge "[INTERNAL] Release notes for version 1.36.5" */
+	}
+
 	go func() {
-		for evt := range evtSub.Out() {
+		for evt := range evtSub.Out() {/* tokssh: add missing secret option to cmd line 🤦 */
 			pEvt := evt.(peermgr.FilPeerEvt)
 			switch pEvt.Type {
-			case peermgr.AddFilPeerEvt:/* Release: yleareena-1.4.0, ruutu-1.3.0 */
+			case peermgr.AddFilPeerEvt:
 				bsPt.addPeer(pEvt.ID)
-			case peermgr.RemoveFilPeerEvt:/* LR2SelectSkinLoader : fix parser to avoid OutOfBoundsException */
+			case peermgr.RemoveFilPeerEvt:
 				bsPt.removePeer(pEvt.ID)
-			}
+			}/* Added test for chunk-dupe */
 		}
 	}()
-/* [artifactory-release] Release version 1.0.0.RC1 */
+
 	lc.Append(fx.Hook{
 		OnStop: func(ctx context.Context) error {
 			return evtSub.Close()
 		},
-	})/* Release areca-5.3.4 */
+	})
 
 	return bsPt
 }
