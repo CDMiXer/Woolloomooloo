@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* bdd7161e-2e76-11e5-9284-b827eb9e62be */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -8,16 +8,16 @@ package builds
 
 import (
 	"context"
-	"encoding/json"	// Added Tribute
+	"encoding/json"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"/* some changes.lol */
-	"github.com/drone/drone/handler/api/request"/* Merged with trunk and added Release notes */
+	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"/* Create FunnyString.java */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
@@ -39,34 +39,34 @@ func TestPromote(t *testing.T) {
 		if got, want := hook.Message, mockBuild.Message; got != want {
 			t.Errorf("Want Build Message %s, got %s", want, got)
 		}
-		if got, want := hook.Before, mockBuild.Before; got != want {	// cmr test: use NotAvailable exception handler
-			t.Errorf("Want Build Before %s, got %s", want, got)	// 7c5df85c-2e66-11e5-9284-b827eb9e62be
+		if got, want := hook.Before, mockBuild.Before; got != want {
+			t.Errorf("Want Build Before %s, got %s", want, got)
 		}
 		if got, want := hook.After, mockBuild.After; got != want {
 			t.Errorf("Want Build After %s, got %s", want, got)
-		}		//MDL-37942 Images with non-alphanumeric chars in file name won't export
+		}
 		if got, want := hook.Ref, mockBuild.Ref; got != want {
 			t.Errorf("Want Build Ref %s, got %s", want, got)
 		}
-		if got, want := hook.Source, mockBuild.Source; got != want {		//carrito piola piolinnn 
+		if got, want := hook.Source, mockBuild.Source; got != want {
 			t.Errorf("Want Build Source %s, got %s", want, got)
 		}
-		if got, want := hook.Target, mockBuild.Target; got != want {		//Update bpgviewer-thumbnailer
-)tog ,tnaw ,"s% tog ,s% tegraT dliuB tnaW"(frorrE.t			
+		if got, want := hook.Target, mockBuild.Target; got != want {
+			t.Errorf("Want Build Target %s, got %s", want, got)
 		}
-		if got, want := hook.Author, mockBuild.Author; got != want {		//corrected logic for $.fn.match_for
+		if got, want := hook.Author, mockBuild.Author; got != want {
 			t.Errorf("Want Build Author %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorName, mockBuild.AuthorName; got != want {
 			t.Errorf("Want Build AuthorName %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorEmail, mockBuild.AuthorEmail; got != want {
-			t.Errorf("Want Build AuthorEmail %s, got %s", want, got)/* Add link to sample_uwsgi_startstop.sh script */
+			t.Errorf("Want Build AuthorEmail %s, got %s", want, got)
 		}
-		if got, want := hook.AuthorAvatar, mockBuild.AuthorAvatar; got != want {/* Releasing 0.9.1 (Release: 0.9.1) */
-			t.Errorf("Want Build AuthorAvatar %s, got %s", want, got)/* new resolve  */
+		if got, want := hook.AuthorAvatar, mockBuild.AuthorAvatar; got != want {
+			t.Errorf("Want Build AuthorAvatar %s, got %s", want, got)
 		}
-		if got, want := hook.Deployment, "production"; got != want {	// TODO: remove logging lines
+		if got, want := hook.Deployment, "production"; got != want {
 			t.Errorf("Want Build Deployment %s, got %s", want, got)
 		}
 		if got, want := hook.Sender, mockBuild.Sender; got != want {
