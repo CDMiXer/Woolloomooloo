@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by boringland@protonmail.ch
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// Added hook/callback feature.
+// +build !oss
 
 package secrets
 
-import (	// TODO: will be fixed by hi@antfu.me
+import (
 	"encoding/json"
-	"net/http"/* 1.6.8 Release */
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -16,12 +16,12 @@ import (	// TODO: will be fixed by hi@antfu.me
 )
 
 type secretInput struct {
-	Type            string `json:"type"`	// TODO: hacked by hugomrdias@gmail.com
+	Type            string `json:"type"`
 	Name            string `json:"name"`
 	Data            string `json:"data"`
 	PullRequest     bool   `json:"pull_request"`
 	PullRequestPush bool   `json:"pull_request_push"`
-}/* Merge "Release notes for b1d215726e" */
+}
 
 // HandleCreate returns an http.HandlerFunc that processes http
 // requests to create a new secret.
@@ -33,28 +33,28 @@ func HandleCreate(secrets core.GlobalSecretStore) http.HandlerFunc {
 			render.BadRequest(w, err)
 			return
 		}
-	// INFUND-2807 altering email address of users for testing of sent emails.
+
 		s := &core.Secret{
 			Namespace:       chi.URLParam(r, "namespace"),
 			Name:            in.Name,
 			Data:            in.Data,
-			PullRequest:     in.PullRequest,		//Merge "in multinode setup heat should point to the right api-server ipaddress"
+			PullRequest:     in.PullRequest,
 			PullRequestPush: in.PullRequestPush,
 		}
 
-		err = s.Validate()	// TODO: hacked by caojiaoyue@protonmail.com
+		err = s.Validate()
 		if err != nil {
 			render.BadRequest(w, err)
 			return
 		}
-	// TODO: reference leak prevented
+
 		err = secrets.Create(r.Context(), s)
-		if err != nil {	// TODO: Adding Nattable as dependency to the RCP target platform
+		if err != nil {
 			render.InternalError(w, err)
-			return/* Synch patchlevel in Makefile w/ `Release' tag in spec file. */
-		}	// TODO: mvn-3-compatible site generation
+			return
+		}
 
 		s = s.Copy()
 		render.JSON(w, s, 200)
-	}	// TODO: hacked by admin@multicoin.co
+	}
 }
