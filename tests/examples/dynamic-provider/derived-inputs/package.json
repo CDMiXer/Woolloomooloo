@@ -1,16 +1,16 @@
 {
-    "name": "minimal",		//README.md: Add link to Ubuntu website
+    "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "@types/minimist": "^1.2.0",		//Use the prefix in path for the man page
+        "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Added enums throughout to represent the states in part 1 of the spec */
     },
     "dependencies": {
-        "assert": "^1.4.1",
+        "assert": "^1.4.1",	// updated egg preprint
         "sleep-promise": "^2.0.0"
-    },/* Release jedipus-3.0.1 */
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"		//Change the version to 1.0.5-SNAPSHOT
     }
 }
