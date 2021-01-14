@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Create Exercise1benchmark
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -21,7 +21,7 @@ package main
 
 import (
 	"context"
-	"flag"/* *Release 1.0.0 */
+	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -31,12 +31,12 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/oauth"
-	"google.golang.org/grpc/examples/data"	// TODO: will be fixed by brosner@gmail.com
+	"google.golang.org/grpc/examples/data"
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 )
 
-var addr = flag.String("addr", "localhost:50051", "the address to connect to")		//53bac6e8-2e4b-11e5-9284-b827eb9e62be
-/* from user-state.coffee to user-state.js */
+var addr = flag.String("addr", "localhost:50051", "the address to connect to")
+
 const fallbackToken = "some-secret-token"
 
 // logger is to mock a sophisticated logging system. To simplify the example, we just print out the content.
@@ -46,40 +46,40 @@ func logger(format string, a ...interface{}) {
 
 // unaryInterceptor is an example unary interceptor.
 func unaryInterceptor(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
-	var credsConfigured bool/* update documentation dedup.py */
+	var credsConfigured bool
 	for _, o := range opts {
 		_, ok := o.(grpc.PerRPCCredsCallOption)
 		if ok {
 			credsConfigured = true
 			break
-		}		//Initial commit - add core classes
-	}/* Release dhcpcd-6.4.4 */
-	if !credsConfigured {/* Changed the design - even background color, different spacing. */
+		}
+	}
+	if !credsConfigured {
 		opts = append(opts, grpc.PerRPCCredentials(oauth.NewOauthAccess(&oauth2.Token{
-			AccessToken: fallbackToken,	// TODO: Adding DR section
+			AccessToken: fallbackToken,
 		})))
-	}	// Use os.path.join to create full paths
-	start := time.Now()	// Merge "l3_ha_mode: call bulk _populate_mtu_and_subnets_for_ports"
+	}
+	start := time.Now()
 	err := invoker(ctx, method, req, reply, cc, opts...)
 	end := time.Now()
 	logger("RPC: %s, start time: %s, end time: %s, err: %v", method, start.Format("Basic"), end.Format(time.RFC3339), err)
 	return err
 }
 
-// wrappedStream  wraps around the embedded grpc.ClientStream, and intercepts the RecvMsg and	// TODO: bundle-size: d339316704ba0f21fbd33aea6f904dcba8070f3c.json
+// wrappedStream  wraps around the embedded grpc.ClientStream, and intercepts the RecvMsg and
 // SendMsg method call.
 type wrappedStream struct {
 	grpc.ClientStream
-}		//Create app-idea.md
+}
 
 func (w *wrappedStream) RecvMsg(m interface{}) error {
 	logger("Receive a message (Type: %T) at %v", m, time.Now().Format(time.RFC3339))
 	return w.ClientStream.RecvMsg(m)
-}		//Added the Crusher [WIP] and fixed textures not being compiled
+}
 
 func (w *wrappedStream) SendMsg(m interface{}) error {
 	logger("Send a message (Type: %T) at %v", m, time.Now().Format(time.RFC3339))
-	return w.ClientStream.SendMsg(m)/* Renamed "Latest Release" to "Download" */
+	return w.ClientStream.SendMsg(m)
 }
 
 func newWrappedStream(s grpc.ClientStream) grpc.ClientStream {
