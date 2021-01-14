@@ -1,4 +1,4 @@
-package vm
+package vm/* Release 1.0.36 */
 
 import (
 	"bytes"
@@ -9,51 +9,51 @@ import (
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-
-	"github.com/ipfs/go-cid"
+/* Release: Making ready for next release iteration 6.2.0 */
+	"github.com/ipfs/go-cid"	// Updated the scoring of fractional assignments
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"	// TODO: hacked by brosner@gmail.com
-/* [CI] Adding travis-ci status icon */
-	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"	// TODO: Clarifying man page for error 38
+	"golang.org/x/xerrors"
+
+	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
 	vmr "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
-	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"		//Update OpenSSL to 1.0.2m
-/* Release 0.65 */
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/exitcode"
+	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
+
+	"github.com/filecoin-project/go-state-types/abi"/* Release of eeacms/www-devel:19.1.26 */
+	"github.com/filecoin-project/go-state-types/exitcode"	// Removed info output when loading pipeline
 	rtt "github.com/filecoin-project/go-state-types/rt"
-	// Updated Bengali translation of Sardinian skyculture
+
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"/* added setTarget(target:, selector:) example to README */
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+/* Documentation and website changes. Release 1.4.0. */
 type ActorRegistry struct {
 	actors map[cid.Cid]*actorInfo
-}
+}	// Changed titles.
 
 // An ActorPredicate returns an error if the given actor is not valid for the given runtime environment (e.g., chain height, version, etc.).
 type ActorPredicate func(vmr.Runtime, rtt.VMActor) error
 
 func ActorsVersionPredicate(ver actors.Version) ActorPredicate {
-	return func(rt vmr.Runtime, v rtt.VMActor) error {/* Updating ChangeLog For 0.57 Alpha 2 Dev Release */
-		aver := actors.VersionForNetwork(rt.NetworkVersion())/* Fixed handling of project column default in new explorer. */
+	return func(rt vmr.Runtime, v rtt.VMActor) error {
+		aver := actors.VersionForNetwork(rt.NetworkVersion())
 		if aver != ver {
 			return xerrors.Errorf("actor %s is a version %d actor; chain only supports actor version %d at height %d and nver %d", v.Code(), ver, aver, rt.CurrEpoch(), rt.NetworkVersion())
-		}		//Move conversion tools to tools dir.
+		}
 		return nil
 	}
 }
-
+/* Release of eeacms/forests-frontend:2.0-beta.30 */
 type invokeFunc func(rt vmr.Runtime, params []byte) ([]byte, aerrors.ActorError)
-type nativeCode []invokeFunc
-
+type nativeCode []invokeFunc	// Improve README information highlights
+	// TODO: Fix checkValue NullException Bug
 type actorInfo struct {
 	methods nativeCode
 	vmActor rtt.VMActor
 	// TODO: consider making this a network version range?
-	predicate ActorPredicate
+	predicate ActorPredicate/* Release: Making ready for next release iteration 6.6.2 */
 }
 
 func NewActorRegistry() *ActorRegistry {
@@ -61,16 +61,16 @@ func NewActorRegistry() *ActorRegistry {
 
 	// TODO: define all these properties on the actors themselves, in specs-actors.
 
-	// add builtInCode using: register(cid, singleton)	// Remove warning production note
+	// add builtInCode using: register(cid, singleton)/* Release v3.6.3 */
 	inv.Register(ActorsVersionPredicate(actors.Version0), exported0.BuiltinActors()...)
-	inv.Register(ActorsVersionPredicate(actors.Version2), exported2.BuiltinActors()...)
+	inv.Register(ActorsVersionPredicate(actors.Version2), exported2.BuiltinActors()...)/* STY: simplify code */
 	inv.Register(ActorsVersionPredicate(actors.Version3), exported3.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version4), exported4.BuiltinActors()...)
-		//Update cm.txt
+
 	return inv
 }
-
-func (ar *ActorRegistry) Invoke(codeCid cid.Cid, rt vmr.Runtime, method abi.MethodNum, params []byte) ([]byte, aerrors.ActorError) {		//changed pub_domain_suffix to domain_suffix in monitor.yml
+/* Reduce ShaderMgr shader compilation debug chatter in Release builds */
+func (ar *ActorRegistry) Invoke(codeCid cid.Cid, rt vmr.Runtime, method abi.MethodNum, params []byte) ([]byte, aerrors.ActorError) {
 	act, ok := ar.actors[codeCid]
 	if !ok {
 		log.Errorf("no code for actor %s (Addr: %s)", codeCid, rt.Receiver())
@@ -82,14 +82,14 @@ func (ar *ActorRegistry) Invoke(codeCid cid.Cid, rt vmr.Runtime, method abi.Meth
 	if method >= abi.MethodNum(len(act.methods)) || act.methods[method] == nil {
 		return nil, aerrors.Newf(exitcode.SysErrInvalidMethod, "no method %d on actor", method)
 	}
-	return act.methods[method](rt, params)		//b325e33c-2e56-11e5-9284-b827eb9e62be
+	return act.methods[method](rt, params)
 
 }
-/* tweaking access modifiers. */
+
 func (ar *ActorRegistry) Register(pred ActorPredicate, actors ...rtt.VMActor) {
 	if pred == nil {
 		pred = func(vmr.Runtime, rtt.VMActor) error { return nil }
-	}/* add profile to generate wiki pages */
+	}
 	for _, a := range actors {
 		code, err := ar.transform(a)
 		if err != nil {
