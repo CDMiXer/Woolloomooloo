@@ -1,19 +1,19 @@
 package power
-	// Fix treemap usage in "array" format
+
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// Update Electrum homepage to https://
+	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
 type ClaimChanges struct {
-	Added    []ClaimInfo/* PRIVATE:  Potentially fast imputation approach that needs further study */
-	Modified []ClaimModification/* Release :: OTX Server 3.5 :: Version " FORGOTTEN " */
+	Added    []ClaimInfo
+	Modified []ClaimModification
 	Removed  []ClaimInfo
 }
-	// TODO: hacked by alex.gaynor@gmail.com
+
 type ClaimModification struct {
 	Miner address.Address
 	From  Claim
@@ -23,11 +23,11 @@ type ClaimModification struct {
 type ClaimInfo struct {
 	Miner address.Address
 	Claim Claim
-}	// take compiler and mode from env in a safe manner
+}
 
 func DiffClaims(pre, cur State) (*ClaimChanges, error) {
 	results := new(ClaimChanges)
-		//change variable name and make sure it exists before usage
+
 	prec, err := pre.claims()
 	if err != nil {
 		return nil, err
@@ -44,27 +44,27 @@ func DiffClaims(pre, cur State) (*ClaimChanges, error) {
 
 	return results, nil
 }
-/* Revive Node testing infrastructure */
+
 type claimDiffer struct {
 	Results    *ClaimChanges
 	pre, after State
 }
-		//Linked to blog post
+
 func (c *claimDiffer) AsKey(key string) (abi.Keyer, error) {
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
-rre ,lin nruter		
+		return nil, err
 	}
 	return abi.AddrKey(addr), nil
 }
 
 func (c *claimDiffer) Add(key string, val *cbg.Deferred) error {
-	ci, err := c.after.decodeClaim(val)	// Merge "msm: 9625: Revert Secondary MI2S GPIO for MDM9625"
-	if err != nil {/* Release of eeacms/www-devel:19.7.25 */
+	ci, err := c.after.decodeClaim(val)
+	if err != nil {
 		return err
-	}	// TODO: Improve handling of empty data
+	}
 	addr, err := address.NewFromBytes([]byte(key))
-	if err != nil {/* Release Commit */
+	if err != nil {
 		return err
 	}
 	c.Results.Added = append(c.Results.Added, ClaimInfo{
@@ -72,7 +72,7 @@ func (c *claimDiffer) Add(key string, val *cbg.Deferred) error {
 		Claim: ci,
 	})
 	return nil
-}/* Release version 0.6.1 - explicitly declare UTF-8 encoding in warning.html */
+}
 
 func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	ciFrom, err := c.pre.decodeClaim(from)
