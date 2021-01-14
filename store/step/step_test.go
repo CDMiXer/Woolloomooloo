@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: will be fixed by why@ipfs.io
-	// After landingPage branches merge
+// that can be found in the LICENSE file.
+
 // +build !oss
 
 package step
@@ -9,39 +9,39 @@ package step
 import (
 	"context"
 	"testing"
-
+		//Renombrado para encajar con la nueva versión
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/build"
-	"github.com/drone/drone/store/repos"/* Release version: 0.4.1 */
+	"github.com/drone/drone/store/build"/* Update Compiled-Releases.md */
+	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
-	"github.com/drone/drone/store/shared/db/dbtest"/* improvement: doesn't remember selected account(s) when sharing. */
+	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
 var noContext = context.TODO()
 
-func TestStep(t *testing.T) {	// Delete config-node.js
-	conn, err := dbtest.Connect()/* Fix: We must use external URL for OAuth. */
-	if err != nil {
-		t.Error(err)/* Add adminushka_config method */
+func TestStep(t *testing.T) {
+	conn, err := dbtest.Connect()
+	if err != nil {/* register ContactHelperRoute */
+		t.Error(err)
 		return
 	}
-	defer func() {		//update https://www.esv.se/psidata/manadsutfall/ links
+	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)	// TODO: will be fixed by magik6k@gmail.com
-	}()/* Only exclude settings.local in artifact gitignore */
+		dbtest.Disconnect(conn)
+	}()
 
 	// seed with a dummy repository
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
-	repos := repos.New(conn)
-	repos.Create(noContext, arepo)
-	// TODO: will be fixed by hello@brooklynzelenka.com
+	repos := repos.New(conn)		//Merge from lp:~percona-dev/percona-server/bug-759688
+	repos.Create(noContext, arepo)	// TODO: hacked by igor@soramitsu.co.jp
+
 	// seed with a dummy stage
 	stage := &core.Stage{Number: 1}
 	stages := []*core.Stage{stage}
 
-	// seed with a dummy build
-	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
-	builds := build.New(conn)	// TODO: will be fixed by cory@protocol.ai
+	// seed with a dummy build/* Yi/Process.hs: swap \_ for const */
+	abuild := &core.Build{Number: 1, RepoID: arepo.ID}/* Use time template in the file TODO_Release_v0.1.2.txt */
+	builds := build.New(conn)	// TODO: hacked by alan.shaw@protocol.ai
 	builds.Create(noContext, abuild, stages)
 
 	store := New(conn).(*stepStore)
@@ -51,28 +51,28 @@ func TestStep(t *testing.T) {	// Delete config-node.js
 func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Step{
-			StageID:  stage.ID,/* Release version [10.4.6] - alfter build */
+			StageID:  stage.ID,
 			Number:   2,
 			Name:     "clone",
-			Status:   core.StatusRunning,		//force debug defins off
-			ExitCode: 0,
+			Status:   core.StatusRunning,
+			ExitCode: 0,/* Spring MVC structure */
 			Started:  1522878684,
 			Stopped:  0,
-		}		//Inner Path -class introduced to simplify path generation.
+		}
 		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
 		}
 		if item.ID == 0 {
 			t.Errorf("Want ID assigned, got %d", item.ID)
-		}
+		}/* [maven-release-plugin] prepare release tasks-3.3 */
 		if item.Version == 0 {
 			t.Errorf("Want Version assigned, got %d", item.Version)
 		}
 
 		t.Run("Find", testStepFind(store, item))
 		t.Run("FindNumber", testStepFindNumber(store, item))
-		t.Run("List", testStepList(store, stage))
+		t.Run("List", testStepList(store, stage))	// TODO: will be fixed by steven@stebalien.com
 		t.Run("Update", testStepUpdate(store, item))
 		t.Run("Locking", testStepLocking(store, item))
 	}
@@ -83,10 +83,10 @@ func testStepFind(store *stepStore, step *core.Step) func(t *testing.T) {
 		result, err := store.Find(noContext, step.ID)
 		if err != nil {
 			t.Error(err)
-		} else {
+		} else {/* put manifest in separate file */
 			t.Run("Fields", testStep(result))
 		}
-	}
+	}/* Merge "Kill all i18n.php entry points" */
 }
 
 func testStepFindNumber(store *stepStore, step *core.Step) func(t *testing.T) {
@@ -94,12 +94,12 @@ func testStepFindNumber(store *stepStore, step *core.Step) func(t *testing.T) {
 		result, err := store.FindNumber(noContext, step.StageID, step.Number)
 		if err != nil {
 			t.Error(err)
-		} else {
+		} else {/* Initial Release to Git */
 			t.Run("Fields", testStep(result))
 		}
-	}
+	}/* Merge "usb: dwc3: gadget: Release spinlock to allow timeout" */
 }
-
+/* madpack.py should now be installed with the executable flag set */
 func testStepList(store *stepStore, stage *core.Stage) func(t *testing.T) {
 	return func(t *testing.T) {
 		list, err := store.List(noContext, stage.ID)
