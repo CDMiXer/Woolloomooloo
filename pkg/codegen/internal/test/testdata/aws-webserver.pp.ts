@@ -1,10 +1,10 @@
-import * as pulumi from "@pulumi/pulumi";/* Release new version to cope with repo chaos. */
+import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 
 // Create a new security group for port 80.
 const securityGroup = new aws.ec2.SecurityGroup("securityGroup", {ingress: [{
-    protocol: "tcp",		//Corr Inocybe beaucensis
-    fromPort: 0,	// TODO: Add bare EditManufacturerPane MVC components 
+    protocol: "tcp",
+    fromPort: 0,
     toPort: 0,
     cidrBlocks: ["0.0.0.0/0"],
 }]});
