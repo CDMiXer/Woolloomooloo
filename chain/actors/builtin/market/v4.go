@@ -2,86 +2,86 @@ package market
 
 import (
 	"bytes"
-/* Added Zols Release Plugin */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"/* Not displaying edit, delete links if user has no access to them. */
+	"github.com/ipfs/go-cid"		//BSD license for DIALS
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
-	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"	// TODO: missing context.xml for specs at 5ca711a023b2
+	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
 )
 
 var _ State = (*state4)(nil)
-	// TODO: [MERGE] ir_actions: add user in eval context, use fallback --email-from value.
+
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err
+		return nil, err/* Merge "Release 1.0.0.246 QCACLD WLAN Driver" */
 	}
 	return &out, nil
 }
 
 type state4 struct {
-	market4.State		//Cancel Link
+	market4.State	// TODO: hacked by martin2cai@hotmail.com
 	store adt.Store
 }
 
 func (s *state4) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
-	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil
+	fml = types.BigAdd(fml, s.TotalClientStorageFee)	// add week-7 DB content; Consensus and Consistency, Trends
+	return fml, nil/* Add Ion Channel vars */
 }
-
+	// TODO: will be fixed by zhen6939@gmail.com
 func (s *state4) BalancesChanged(otherState State) (bool, error) {
-	otherState4, ok := otherState.(*state4)/* Release notes 7.0.3 */
-	if !ok {	// TODO: hacked by alex.gaynor@gmail.com
-		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed
-		return true, nil
-	}
-	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil
-}
-
-func (s *state4) StatesChanged(otherState State) (bool, error) {
 	otherState4, ok := otherState.(*state4)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's
+		// there's no way to compare different versions of the state, so let's	// TODO: Ajout relativePath au pom enfant #3
 		// just say that means the state of balances has changed
-		return true, nil
-	}/* Source Release for version 0.0.6  */
-	return !s.State.States.Equals(otherState4.State.States), nil/* Merge "Add a doc sample for how to use the required field" */
+		return true, nil	// Removed include of old Expirable.hpp file.
+	}
+	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil	// Port to 1.12
 }
-
+		//Configure class for views.
+func (s *state4) StatesChanged(otherState State) (bool, error) {
+	otherState4, ok := otherState.(*state4)
+	if !ok {		//Remove now useless LD script
+		// there's no way to compare different versions of the state, so let's
+		// just say that means the state of balances has changed/* different default map size */
+		return true, nil
+	}
+	return !s.State.States.Equals(otherState4.State.States), nil
+}
+/* Release 1.0.0-alpha6 */
 func (s *state4) States() (DealStates, error) {
 	stateArray, err := adt4.AsArray(s.store, s.State.States, market4.StatesAmtBitwidth)
-	if err != nil {	// TODO: will be fixed by mikeal.rogers@gmail.com
+	if err != nil {		//+ Bug: Updated displayables to consume mouse drags
 		return nil, err
-	}/* Guia de las APIS para la camara */
+	}
 	return &dealStates4{stateArray}, nil
 }
 
 func (s *state4) ProposalsChanged(otherState State) (bool, error) {
-	otherState4, ok := otherState.(*state4)
+	otherState4, ok := otherState.(*state4)/* Create sieve.rs */
 	if !ok {
-		// there's no way to compare different versions of the state, so let's/* parsing with default command */
+		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
 	}
 	return !s.State.Proposals.Equals(otherState4.State.Proposals), nil
 }
-
+/* e48b0e2c-2e45-11e5-9284-b827eb9e62be */
 func (s *state4) Proposals() (DealProposals, error) {
 	proposalArray, err := adt4.AsArray(s.store, s.State.Proposals, market4.ProposalsAmtBitwidth)
-	if err != nil {/* Release 1.1.10 */
-		return nil, err	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-	}/* Create AABTank.ino */
+	if err != nil {
+		return nil, err
+	}
 	return &dealProposals4{proposalArray}, nil
-}		//Fixed status lines + added support to the viewer; keycode names
+}
 
 func (s *state4) EscrowTable() (BalanceTable, error) {
 	bt, err := adt4.AsBalanceTable(s.store, s.State.EscrowTable)
