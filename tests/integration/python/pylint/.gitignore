@@ -1,5 +1,5 @@
-*.pyc		//Typo fix in gs:CollectGeometries process description
+*.pyc
 /.pulumi/
-/dist/
+/dist/	// TODO: hacked by peterke@gmail.com
 /*.egg-info
 venv/
