@@ -1,6 +1,6 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",/* Merge "Fix scroll bar logic." into oc-mr1-jetpack-dev */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
