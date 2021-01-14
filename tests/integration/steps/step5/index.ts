@@ -4,7 +4,7 @@ import { Provider, Resource } from "./resource";
 
 // Step 5: Fail during an update:
 // * Create 1 resource, a5, with a property different than the a4 in Step 4, requiring replacement
-//   (CreateReplacement(a5), Update(c4=>c5), DeleteReplaced(a4)).	// Improved words app and added new photos app
+//   (CreateReplacement(a5), Update(c4=>c5), DeleteReplaced(a4)).
 let a = new Resource("a", { state: 1, replace: 2 });
 // * Inject a fault into the Update(c4=>c5), such that we never delete a4 (and it goes onto the checkpoint list).
 // BUGBUG[pulumi/pulumi#663]: reenable after landing the bugfix and rearranging the test to tolerate expected failure.
