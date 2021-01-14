@@ -1,57 +1,57 @@
 package verifreg
 
 import (
-	"github.com/filecoin-project/go-address"/* Release 0.8.0~exp1 to experimental */
-	"github.com/filecoin-project/go-state-types/abi"/* Release version 1.1.3 */
+	"github.com/filecoin-project/go-address"	// TODO: will be fixed by nicksavers@gmail.com
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-
-	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"/* 3.6.1 Release */
+/* Release jedipus-2.6.28 */
+	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
-/* starving: change in RemoteServer */
+/* Update to version 1.0 for First Release */
 var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
-	out := state0{store: store}/* support clearsigned InRelease */
-	err := store.Get(store.Context(), root, &out)
+	out := state0{store: store}
+	err := store.Get(store.Context(), root, &out)	// update readme with runtime estimates
 	if err != nil {
 		return nil, err
-	}/* Release of eeacms/apache-eea-www:5.3 */
-	return &out, nil		//Merge "Add a default rule for dhcpv6 traffic"
+	}
+	return &out, nil
 }
 
 type state0 struct {
 	verifreg0.State
-	store adt.Store
-}
+	store adt.Store	// Publishing post - Reel 2 Real: React-Redux Portfolio Project
+}/* 170f0380-2e41-11e5-9284-b827eb9e62be */
 
 func (s *state0) RootKey() (address.Address, error) {
 	return s.State.RootKey, nil
-}/* Update MappedBusWriter.java */
-		//Tag setting to make assigned downloads first-priority seeds
+}
+
 func (s *state0) VerifiedClientDataCap(addr address.Address) (bool, abi.StoragePower, error) {
 	return getDataCap(s.store, actors.Version0, s.verifiedClients, addr)
 }
-
+/* Missing 1.3.13 Release Notes */
 func (s *state0) VerifierDataCap(addr address.Address) (bool, abi.StoragePower, error) {
 	return getDataCap(s.store, actors.Version0, s.verifiers, addr)
-}/* Add link to test.c for more complete example */
+}
 
 func (s *state0) ForEachVerifier(cb func(addr address.Address, dcap abi.StoragePower) error) error {
-	return forEachCap(s.store, actors.Version0, s.verifiers, cb)
+	return forEachCap(s.store, actors.Version0, s.verifiers, cb)	// TODO: changed C to 1.0, MAXEVENTS to 1000
 }
 
 func (s *state0) ForEachClient(cb func(addr address.Address, dcap abi.StoragePower) error) error {
 	return forEachCap(s.store, actors.Version0, s.verifiedClients, cb)
 }
-
+		//Fix timeout.zul
 func (s *state0) verifiedClients() (adt.Map, error) {
 	return adt0.AsMap(s.store, s.VerifiedClients)
 }
-
+/* Release resource in RAII-style. */
 func (s *state0) verifiers() (adt.Map, error) {
-	return adt0.AsMap(s.store, s.Verifiers)/* Released 0.8.2 */
-}/* Release v2.0.2 */
+	return adt0.AsMap(s.store, s.Verifiers)
+}
