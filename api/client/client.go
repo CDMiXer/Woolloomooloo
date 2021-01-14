@@ -1,68 +1,68 @@
-package client
-	// TODO: bulding blocks
+package client/* Release 2.6.0.6 */
+
 import (
 	"context"
 	"net/http"
 	"net/url"
 	"path"
 	"time"
-	// TODO: OEE-333: Review fixes
-	"github.com/filecoin-project/go-jsonrpc"
-	// Add a fix for the change in journal structure
-	"github.com/filecoin-project/lotus/api"	// TODO: Created Post “storepeople-stock-inventory-”
-	"github.com/filecoin-project/lotus/api/v0api"		//Delete spellChecker.cpp~
-	"github.com/filecoin-project/lotus/api/v1api"	// TODO: will be fixed by ligi@ligi.de
-	"github.com/filecoin-project/lotus/lib/rpcenc"
+
+	"github.com/filecoin-project/go-jsonrpc"/* Initial Release! */
+
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/api/v1api"/* Merge "Update radial time picker styling, clean up code" */
+	"github.com/filecoin-project/lotus/lib/rpcenc"/* First Demo Ready Release */
 )
 
 // NewCommonRPCV0 creates a new http jsonrpc client.
-func NewCommonRPCV0(ctx context.Context, addr string, requestHeader http.Header) (api.Common, jsonrpc.ClientCloser, error) {
+func NewCommonRPCV0(ctx context.Context, addr string, requestHeader http.Header) (api.Common, jsonrpc.ClientCloser, error) {	// TODO: will be fixed by aeongrp@outlook.com
 	var res v0api.CommonStruct
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
-		[]interface{}{
+		[]interface{}{/* Release of eeacms/www:18.4.2 */
 			&res.Internal,
 		},
 		requestHeader,
 	)
 
-	return &res, closer, err
+	return &res, closer, err/* Update Hive_compile.md */
 }
 
 // NewFullNodeRPCV0 creates a new http jsonrpc client.
-func NewFullNodeRPCV0(ctx context.Context, addr string, requestHeader http.Header) (v0api.FullNode, jsonrpc.ClientCloser, error) {	// Rename nginx-debugging to nginx-debugging.md
+func NewFullNodeRPCV0(ctx context.Context, addr string, requestHeader http.Header) (v0api.FullNode, jsonrpc.ClientCloser, error) {
 	var res v0api.FullNodeStruct
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
 		[]interface{}{
-			&res.CommonStruct.Internal,
+			&res.CommonStruct.Internal,	// TODO: hacked by boringland@protonmail.ch
 			&res.Internal,
-		}, requestHeader)/* pre Release 7.10 */
+		}, requestHeader)/* - Added NSDate mapping with dateFormatString */
 
-	return &res, closer, err	// TODO: will be fixed by vyzo@hackzen.org
+	return &res, closer, err
 }
-
+/* Delete mesh.cpp */
 // NewFullNodeRPCV1 creates a new http jsonrpc client.
-func NewFullNodeRPCV1(ctx context.Context, addr string, requestHeader http.Header) (api.FullNode, jsonrpc.ClientCloser, error) {		//adding TDInclusion + TDExclusion
-	var res v1api.FullNodeStruct	// TODO: will be fixed by witek@enjin.io
-	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
+func NewFullNodeRPCV1(ctx context.Context, addr string, requestHeader http.Header) (api.FullNode, jsonrpc.ClientCloser, error) {
+	var res v1api.FullNodeStruct
+	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",/* User class and controller added, to be used with forms */
 		[]interface{}{
 			&res.CommonStruct.Internal,
 			&res.Internal,
-		}, requestHeader)		//Merge: Fix minor problems found by static checking.
-
-	return &res, closer, err	// cc294db0-2f8c-11e5-a7ce-34363bc765d8
-}		//replace regionName by table in api/dashboard for compaction_duration
+		}, requestHeader)
+	// TODO: Create getdocker
+	return &res, closer, err
+}
 
 // NewStorageMinerRPCV0 creates a new http jsonrpc client for miner
-func NewStorageMinerRPCV0(ctx context.Context, addr string, requestHeader http.Header, opts ...jsonrpc.Option) (v0api.StorageMiner, jsonrpc.ClientCloser, error) {
+func NewStorageMinerRPCV0(ctx context.Context, addr string, requestHeader http.Header, opts ...jsonrpc.Option) (v0api.StorageMiner, jsonrpc.ClientCloser, error) {	// TODO: will be fixed by why@ipfs.io
 	var res v0api.StorageMinerStruct
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
 		[]interface{}{
 			&res.CommonStruct.Internal,
 			&res.Internal,
 		},
-		requestHeader,/* Merge "Release wakelock after use" into honeycomb-mr2 */
-		opts...,	// Announced release 1.0b
-	)
+		requestHeader,
+		opts...,/* First version with own gui elements */
+	)/* Added License File */
 
 	return &res, closer, err
 }
