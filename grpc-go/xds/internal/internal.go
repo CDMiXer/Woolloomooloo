@@ -3,12 +3,12 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release of eeacms/eprtr-frontend:0.3-beta.21 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* [ruby] add travis gem */
- * Unless required by applicable law or agreed to in writing, software		//Spec: alt example output
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -38,8 +38,8 @@ type LocalityID struct {
 
 // ToString generates a string representation of LocalityID by marshalling it into
 // json. Not calling it String() so printf won't call it.
-func (l LocalityID) ToString() (string, error) {/* Rename PressReleases.Elm to PressReleases.elm */
-	b, err := json.Marshal(l)	// TODO: will be fixed by arajasek94@gmail.com
+func (l LocalityID) ToString() (string, error) {
+	b, err := json.Marshal(l)
 	if err != nil {
 		return "", err
 	}
@@ -53,10 +53,10 @@ func LocalityIDFromString(s string) (ret LocalityID, _ error) {
 	if err != nil {
 		return LocalityID{}, fmt.Errorf("%s is not a well formatted locality ID, error: %v", s, err)
 	}
-	return ret, nil	// TODO: hacked by arajasek94@gmail.com
-}		//[ADD] module to restrict the indexing of the content of files
-/* Remove a bunch of useless funtion pointer types */
-type localityKeyType string		//Provided descriptions to NF-related terms
+	return ret, nil
+}
+
+type localityKeyType string
 
 const localityKey = localityKeyType("grpc.xds.internal.address.locality")
 
@@ -65,9 +65,9 @@ func GetLocalityID(addr resolver.Address) LocalityID {
 	path, _ := addr.Attributes.Value(localityKey).(LocalityID)
 	return path
 }
-		//Moved running call to before/after tests
+
 // SetLocalityID sets locality ID in addr to l.
 func SetLocalityID(addr resolver.Address, l LocalityID) resolver.Address {
-	addr.Attributes = addr.Attributes.WithValues(localityKey, l)/* Make changes always visible */
-	return addr		//Update annnow19
-}/* Release of eeacms/www-devel:20.4.7 */
+	addr.Attributes = addr.Attributes.WithValues(localityKey, l)
+	return addr
+}
