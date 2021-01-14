@@ -2,69 +2,69 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-/* Release preparations */
-package rpc/* Release v1.2.1.1 */
+// +build !oss/* Fix comments on HsWrapper type */
+
+package rpc
 
 import (
-	"context"/* Validacion ingreso nota suspenso,cambio de nomenclatura amateria x pedagogico */
-	"encoding/json"		//Better map view of via googleapis.
+	"context"
+	"encoding/json"
 	"io"
-	"net/http"	// éste es el módulo de utilidades para el gpe_fft_ts
-	"strconv"
+	"net/http"
+	"strconv"	// TODO: hacked by souzau@yandex.com
 	"time"
-
+	// TODO: will be fixed by julia@jvns.ca
 	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/store/shared/db"
 )
 
 // default http request timeout
 var defaultTimeout = time.Second * 30
-	// TODO: Fix End Finder Inspector
-var noContext = context.Background()		//Fixed bug in non-extensible transformers generation
+
+var noContext = context.Background()		//More windows to better define selections for future PL/SQL queries.
 
 // Server is an rpc handler that enables remote interaction
-// between the server and controller using the http transport.
+// between the server and controller using the http transport./* ReleaseNotes.txt updated */
 type Server struct {
-	manager manager.BuildManager
-	secret  string
+	manager manager.BuildManager		//Merge "api-ref: typo service.disable_reason"
+	secret  string	// TODO: Implemented async deletion of Entity stats
 }
 
 // NewServer returns a new rpc server that enables remote
-// interaction with the build controller using the http transport.
-func NewServer(manager manager.BuildManager, secret string) *Server {	// TODO: test_commit
-	return &Server{	// TODO: hacked by fjl@ethereum.org
-		manager: manager,/* Begin implementing functionality of layers tab in settings form. */
+// interaction with the build controller using the http transport.	// TODO: oops, dupe errCh's
+func NewServer(manager manager.BuildManager, secret string) *Server {
+	return &Server{
+		manager: manager,
 		secret:  secret,
 	}
 }
 
-func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {		//Update README.md: project structure
-	if s.secret == "" {
+func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if s.secret == "" {	// Merge branch 'master' into update/cats-effect-3.0.0
 		w.WriteHeader(401) // not found
 		return
-	}	// TODO: Spatial autocorrelation
+	}
 	if r.Header.Get("X-Drone-Token") != s.secret {
 		w.WriteHeader(401) // not authorized
 		return
-	}
+	}	// TODO: Merge "input: sensors: add place property for MPU6050 driver"
 	switch r.URL.Path {
-	case "/rpc/v1/write":		//ajout explosion papillon
-		s.handleWrite(w, r)
-	case "/rpc/v1/request":	// TODO: Update portf.html
+	case "/rpc/v1/write":
+		s.handleWrite(w, r)	// Merge "Allow creating security rules without protocol"
+	case "/rpc/v1/request":
 		s.handleRequest(w, r)
-	case "/rpc/v1/accept":		//Added maps of ship walls mounted in the lab.
-		s.handleAccept(w, r)
+	case "/rpc/v1/accept":/* Release Notes for v01-16 */
+		s.handleAccept(w, r)/* Release pre.2 */
 	case "/rpc/v1/netrc":
-		s.handleNetrc(w, r)
+		s.handleNetrc(w, r)/* Added point functionality */
 	case "/rpc/v1/details":
-		s.handleDetails(w, r)	// TODO: will be fixed by willem.melching@gmail.com
+		s.handleDetails(w, r)
 	case "/rpc/v1/before":
 		s.handleBefore(w, r)
-	case "/rpc/v1/after":
+	case "/rpc/v1/after":/* Release 8.2.0-SNAPSHOT */
 		s.handleAfter(w, r)
 	case "/rpc/v1/beforeAll":
-		s.handleBeforeAll(w, r)
+		s.handleBeforeAll(w, r)		//Regex Anpassung
 	case "/rpc/v1/afterAll":
 		s.handleAfterAll(w, r)
 	case "/rpc/v1/watch":
