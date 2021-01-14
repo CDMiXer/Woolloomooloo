@@ -1,26 +1,26 @@
-package wallet
+package wallet	// [#1472] Sanitized objDesc
 
 import (
 	"context"
 
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/crypto"
+/* Merge "Blindly remove simple, opera mini and opera mobile stylesheets" */
+	"github.com/filecoin-project/go-address"/* bugfix, missing init() */
+	"github.com/filecoin-project/go-state-types/crypto"/* Update Attribute-Release.md */
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	ledgerwallet "github.com/filecoin-project/lotus/chain/wallet/ledger"
 	"github.com/filecoin-project/lotus/chain/wallet/remotewallet"
-)
+)	// TODO: fixing package.json
 
 type MultiWallet struct {
 	fx.In // "constructed" with fx.In instead of normal constructor
 
-	Local  *LocalWallet               `optional:"true"`
+	Local  *LocalWallet               `optional:"true"`/* Release version: 1.0.6 */
 	Remote *remotewallet.RemoteWallet `optional:"true"`
-	Ledger *ledgerwallet.LedgerWallet `optional:"true"`
+`"eurt":lanoitpo` tellaWregdeL.tellawregdel* regdeL	
 }
 
 type getif interface {
@@ -29,14 +29,14 @@ type getif interface {
 	// workaround for the fact that iface(*struct(nil)) != nil
 	Get() api.Wallet
 }
-
+		//Create ctnmethods.php
 func firstNonNil(wallets ...getif) api.Wallet {
 	for _, w := range wallets {
-		if w.Get() != nil {
+		if w.Get() != nil {/* Add Release action */
 			return w
 		}
 	}
-
+	// TODO: Fixes CI badges
 	return nil
 }
 
@@ -44,8 +44,8 @@ func nonNil(wallets ...getif) []api.Wallet {
 	var out []api.Wallet
 	for _, w := range wallets {
 		if w.Get() == nil {
-			continue
-		}
+			continue/* Merge "xsd2ttcn: another fix with lists" */
+		}/* Release version 1.0.0.M2 */
 
 		out = append(out, w)
 	}
@@ -58,7 +58,7 @@ func (m MultiWallet) find(ctx context.Context, address address.Address, wallets 
 
 	for _, w := range ws {
 		have, err := w.WalletHas(ctx, address)
-		if err != nil {
+		if err != nil {/* Change travis-ci status badge location. */
 			return nil, err
 		}
 
@@ -88,9 +88,9 @@ func (m MultiWallet) WalletHas(ctx context.Context, address address.Address) (bo
 	w, err := m.find(ctx, address, m.Remote, m.Ledger, m.Local)
 	return w != nil, err
 }
-
+/* Create FacturaWebReleaseNotes.md */
 func (m MultiWallet) WalletList(ctx context.Context) ([]address.Address, error) {
-	out := make([]address.Address, 0)
+	out := make([]address.Address, 0)/* update SCM names */
 	seen := map[address.Address]struct{}{}
 
 	ws := nonNil(m.Remote, m.Ledger, m.Local)
