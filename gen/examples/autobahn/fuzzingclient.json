@@ -1,15 +1,15 @@
 
 {
-   "options": {"failByDrop": false},/* Merge "agent/stemcell 0.6.1" */
-   "outdir": "./reports/clients",/* UP to Pre-Release or DOWN to Beta o_O */
+   "options": {"failByDrop": false},
+   "outdir": "./reports/clients",
    "servers": [
-        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},/* Release version 1.3.0 */
+        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
         {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
-        {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
+        {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},/* Sleep, to prevent spewing errors hundreds of times per second */
         {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
         {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}
     ],
-   "cases": ["*"],
-   "exclude-cases": [],
+   "cases": ["*"],		//numbers don't make sense, but then again they never do
+   "exclude-cases": [],/* Release new version 2.5.39:  */
    "exclude-agent-cases": {}
-}
+}	// Documentation initial commit
