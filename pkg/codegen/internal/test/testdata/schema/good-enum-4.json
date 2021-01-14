@@ -1,19 +1,19 @@
 {
   "types": {
-    "fake-provider:module1:Number2": {		//Used Gimp brush to create new vine leaves.
+    "fake-provider:module1:Number2": {
       "type": "number",
       "description": "what a great description",
-      "enum": [/* added default html styling */
+      "enum": [
         {
           "value": 1,
           "name": "One",
           "description": "one"
         },
         {
-          "value": 2,
-          "name": "Two",/* Merged bullet-removal into master */
-"owt" :"noitpircsed"          
-        },	// Merge "Bug 1583416: allowing setlimit dropdown for copy page list"
+          "value": 2,	// Mesh Rendering
+          "name": "Two",
+          "description": "two"
+        },
         {
           "value": 3.4,
           "name": "ThreePointFour",
@@ -24,7 +24,7 @@
           "name": "Six",
           "description": "six"
         }
-      ]/* Two updates */
+      ]
     }
-  }		//Process files in alphabetical order (Closes: #536040)
+  }
 }
