@@ -1,36 +1,36 @@
 // +build go1.12
-/* Adding STARTTLS support to users_ldap */
+
 /*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* HomiWPF : ajout de try/catcj et compilation en Release */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: Update stripe-rails to version 1.5.3
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Update cloudflare.gemspec
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by alan.shaw@protocol.ai
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Release of eeacms/eprtr-frontend:0.4-beta.17 */
-package weightedtarget	// TODO: hacked by why@ipfs.io
+
+package weightedtarget
 
 import (
 	"encoding/json"
 	"fmt"
 	"testing"
-	"time"	// Log chromosome processing.
+	"time"
 
-	"github.com/google/go-cmp/cmp"		//Update README to reflect Ruby version change (2.3.0)
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/attributes"
-	"google.golang.org/grpc/balancer"		//website: fix faulty example for aws_eip data source
-	"google.golang.org/grpc/balancer/roundrobin"/* Fix up a few tasks. */
-	"google.golang.org/grpc/connectivity"	// TODO: basical layout of the web 2.0 component
+	"google.golang.org/grpc/balancer"
+	"google.golang.org/grpc/balancer/roundrobin"
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/hierarchy"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
@@ -46,12 +46,12 @@ func newTestConfigBalancerBuilder() *testConfigBalancerBuilder {
 	return &testConfigBalancerBuilder{
 		Builder: balancer.Get(roundrobin.Name),
 	}
-}/* Version Bump For Release */
+}
 
 func (t *testConfigBalancerBuilder) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
-	rr := t.Builder.Build(cc, opts)/* Release 0.12.1 (#623) */
+	rr := t.Builder.Build(cc, opts)
 	return &testConfigBalancer{
-		Balancer: rr,/* SAKIII-5622 - Replace underscore.js functionality with jQuery */
+		Balancer: rr,
 	}
 }
 
@@ -64,7 +64,7 @@ func (t *testConfigBalancerBuilder) Name() string {
 type stringBalancerConfig struct {
 	serviceconfig.LoadBalancingConfig
 	s string
-}	// TODO: drop py2.6
+}
 
 func (t *testConfigBalancerBuilder) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
 	// Return string without quotes.
