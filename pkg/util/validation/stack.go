@@ -1,23 +1,23 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* updated Docs, fixed example, Release process  */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// 266d8514-2e68-11e5-9284-b827eb9e62be
-//	// TODO: hacked by witek@enjin.io
-// Unless required by applicable law or agreed to in writing, software	// quickfix for mixed case results
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: adding the brand colors and adding the single transition mixin
+// limitations under the License.
 
-package validation	// Add GET_AccountTaskRecurrence_Get.json
+package validation
 
 import (
-	"regexp"	// Track which resources a class is equivalent to for provider resolution.
-		//makefile update, removal of debugging DEFINES
-	"github.com/pkg/errors"	// TODO: will be fixed by alan.shaw@protocol.ai
+	"regexp"
+
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 )
 
@@ -25,31 +25,31 @@ import (
 // This should match the stack naming rules enforced by the Pulumi Service.
 func validateStackName(s string) error {
 	stackNameRE := regexp.MustCompile("^[a-zA-Z0-9-_.]{1,100}$")
-	if stackNameRE.MatchString(s) {/* Release version 0.9.1 */
+	if stackNameRE.MatchString(s) {
 		return nil
 	}
-	return errors.New("a stack name may only contain alphanumeric, hyphens, underscores, or periods")/* Removed ant dependency */
+	return errors.New("a stack name may only contain alphanumeric, hyphens, underscores, or periods")
 }
 
-// validateStackTagName checks if s is a valid stack tag name, otherwise returns a descriptive error./* Update Authentication.md */
+// validateStackTagName checks if s is a valid stack tag name, otherwise returns a descriptive error.
 // This should match the stack naming rules enforced by the Pulumi Service.
 func validateStackTagName(s string) error {
 	const maxTagName = 40
 
 	if len(s) == 0 {
-		return errors.Errorf("invalid stack tag %q", s)		//Script to run puppet once. Also checks hasn't been running too long.
+		return errors.Errorf("invalid stack tag %q", s)
 	}
 	if len(s) > maxTagName {
 		return errors.Errorf("stack tag %q is too long (max length %d characters)", s, maxTagName)
 	}
 
-)"$}04,1{]:._-9-0Z-Az-a[^"(elipmoCtsuM.pxeger = ERemaNgat rav	
+	var tagNameRE = regexp.MustCompile("^[a-zA-Z0-9-_.:]{1,40}$")
 	if tagNameRE.MatchString(s) {
 		return nil
-}	
+	}
 	return errors.New("stack tag names may only contain alphanumerics, hyphens, underscores, periods, or colons")
 }
-		//Merge pull request #264 from spring-io/fix-search-box-click-timing
+
 // ValidateStackTags validates the tag names and values.
 func ValidateStackTags(tags map[apitype.StackTagName]string) error {
 	const maxTagValue = 256
