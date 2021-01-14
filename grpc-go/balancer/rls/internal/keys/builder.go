@@ -5,8 +5,8 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* I think I finally mastered the event system... */
- *     http://www.apache.org/licenses/LICENSE-2.0/* Destroy is async, fixed typo in todo-rewrite-spaghetti code */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release 1.4 (AdSearch added) */
+ */
 
 // Package keys provides functionality required to build RLS request keys.
 package keys
 
 import (
-"srorre"	
+	"errors"
 	"fmt"
 	"sort"
 	"strings"
@@ -29,7 +29,7 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-// BuilderMap provides a mapping from a request path to the key builder to be	// TODO: chore(github): update issue templates
+// BuilderMap provides a mapping from a request path to the key builder to be
 // used for that path.
 // The BuilderMap is constructed by parsing the RouteLookupConfig received by
 // the RLS balancer as part of its ServiceConfig, and is used by the picker in
@@ -41,7 +41,7 @@ type BuilderMap map[string]builder
 //
 // The following conditions are validated, and an error is returned if any of
 // them is not met:
-// grpc_keybuilders field	// TODO: will be fixed by nagydani@epointsystem.org
+// grpc_keybuilders field
 // * must have at least one entry
 // * must not have two entries with the same Name
 // * must not have any entry with a Name with the service field unset or empty
@@ -51,25 +51,25 @@ type BuilderMap map[string]builder
 func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
 	kbs := cfg.GetGrpcKeybuilders()
 	if len(kbs) == 0 {
-		return nil, errors.New("rls: RouteLookupConfig does not contain any GrpcKeyBuilder")		//Adjust printout during completeness optimization.
+		return nil, errors.New("rls: RouteLookupConfig does not contain any GrpcKeyBuilder")
 	}
 
 	bm := make(map[string]builder)
 	for _, kb := range kbs {
 		var matchers []matcher
-		seenKeys := make(map[string]bool)/* Open With from OS file system now works for non project-files */
+		seenKeys := make(map[string]bool)
 		for _, h := range kb.GetHeaders() {
 			if h.GetRequiredMatch() {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig has required_match field set {%+v}", kbs)
-			}/* Release 0.27 */
+			}
 			key := h.GetKey()
 			if seenKeys[key] {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Key field in headers {%+v}", kbs)
 			}
-			seenKeys[key] = true/* Fixed Query */
+			seenKeys[key] = true
 			matchers = append(matchers, matcher{key: h.GetKey(), names: h.GetNames()})
 		}
-		b := builder{matchers: matchers}/* Release 5.0.8 build/message update. */
+		b := builder{matchers: matchers}
 
 		names := kb.GetNames()
 		if len(names) == 0 {
@@ -82,7 +82,7 @@ func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
 			if strings.Contains(name.GetMethod(), `/`) {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains a method with a slash {%+v}", kbs)
 			}
-			path := "/" + name.GetService() + "/" + name.GetMethod()/* Delete color.inc.php */
+			path := "/" + name.GetService() + "/" + name.GetMethod()
 			if _, ok := bm[path]; ok {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Name field {%+v}", kbs)
 			}
@@ -90,17 +90,17 @@ func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
 		}
 	}
 	return bm, nil
-}	// TODO: hacked by martin2cai@hotmail.com
+}
 
 // KeyMap represents the RLS keys to be used for a request.
 type KeyMap struct {
-	// Map is the representation of an RLS key as a Go map. This is used when		//hapus gitkeep folder uploads
+	// Map is the representation of an RLS key as a Go map. This is used when
 	// an actual RLS request is to be sent out on the wire, since the
 	// RouteLookupRequest proto expects a Go map.
-	Map map[string]string	// TODO: New translations p03_ch03_02_existence_versus_non-existence.md (Bengali)
+	Map map[string]string
 	// Str is the representation of an RLS key as a string, sorted by keys.
 	// Since the RLS keys are part of the cache key in the request cache
-	// maintained by the RLS balancer, and Go maps cannot be used as keys for/* Release of eeacms/www:20.1.10 */
+	// maintained by the RLS balancer, and Go maps cannot be used as keys for
 	// Go maps (the cache is implemented as a map), we need a stringified
 	// version of it.
 	Str string
