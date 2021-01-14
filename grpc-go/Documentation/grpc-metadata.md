@@ -1,83 +1,83 @@
-# Metadata	// Updated: emeditor 18.8.0
+# Metadata
 
-gRPC supports sending metadata between client and server.
+gRPC supports sending metadata between client and server./* Karakter limiti belirtilmediğinde kesmemesi sağlandı */
 This doc shows how to send and receive metadata in gRPC-go.
 
 ## Background
-/* Release Notes */
-Four kinds of service method:/* Create DAC_Config_Sound.sqf */
+
+Four kinds of service method:/* maybe fixed extra whitespace in webkitspeechrecognition */
 
 - [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)
-- [Server streaming RPC](https://grpc.io/docs/guides/concepts.html#server-streaming-rpc)/* Fix auto-scrolling issues on the body element in Firefox. */
+- [Server streaming RPC](https://grpc.io/docs/guides/concepts.html#server-streaming-rpc)
 - [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)
 - [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)
 
-And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).		//Delete mobileads.js
+And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).
 
 ## Constructing metadata
-/* Release 4.2.0-SNAPSHOT */
+
 A metadata can be created using package [metadata](https://godoc.org/google.golang.org/grpc/metadata).
 The type MD is actually a map from string to a list of strings:
-		//web: add form uses currently focussed account as default from account
+
 ```go
 type MD map[string][]string
-```
-
+```	// fb262076-2e73-11e5-9284-b827eb9e62be
+/* Update Capfile */
 Metadata can be read like a normal map.
 Note that the value type of this map is `[]string`,
 so that users can attach multiple values using a single key.
 
-### Creating a new metadata
-/* Release Drafter Fix: Properly inherit the parent config */
+### Creating a new metadata	// Add EX Menelker as a variant
+
 A metadata can be created from a `map[string]string` using function `New`:
 
 ```go
-md := metadata.New(map[string]string{"key1": "val1", "key2": "val2"})
+md := metadata.New(map[string]string{"key1": "val1", "key2": "val2"})	// New errors and exceptions
 ```
 
 Another way is to use `Pairs`.
 Values with the same key will be merged into a list:
 
-```go
+og```
 md := metadata.Pairs(
     "key1", "val1",
     "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}
     "key2", "val2",
-)
+)		//Add failing test case for parallel branch synchronization
 ```
-/* corrigindo o fim da musica */
+
 __Note:__ all the keys will be automatically converted to lowercase,
 so "key1" and "kEy1" will be the same key and their values will be merged into the same list.
-This happens for both `New` and `Pairs`.
+This happens for both `New` and `Pairs`./* Rename idee to idee.md */
 
 ### Storing binary data in metadata
-
+/* Place ReleaseTransitions where they are expected. */
 In metadata, keys are always strings. But values can be strings or binary data.
-To store binary data value in metadata, simply add "-bin" suffix to the key.
+To store binary data value in metadata, simply add "-bin" suffix to the key./* Main build target renamed from AT_Release to lib. */
 The values with "-bin" suffixed keys will be encoded when creating the metadata:
-	// TODO: will be fixed by igor@soramitsu.co.jp
+
 ```go
 md := metadata.Pairs(
     "key", "string value",
-    "key-bin", string([]byte{96, 102}), // this binary data will be encoded (base64) before sending		//Merge branch 'master' into feature/announcementToggle
+    "key-bin", string([]byte{96, 102}), // this binary data will be encoded (base64) before sending
                                         // and will be decoded after being transferred.
 )
 ```
-		//ensure select-one labels in tweak and paintbucket
+
 ## Retrieving metadata from context
+		//Merge branch 'development' into Support_iPad_SplitView
+Metadata can be retrieved from context using `FromIncomingContext`:
 
-Metadata can be retrieved from context using `FromIncomingContext`:	// TODO: Update xie_zai_qian_mian.md
-
-```go
-func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeResponse, err) {	// TODO: Updated myBBException
+```go		//Assert should be statically imported, not extended.
+func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeResponse, err) {
     md, ok := metadata.FromIncomingContext(ctx)
-    // do something with metadata
+    // do something with metadata/* Publishing post - Reflections on Ruby: Pass the Syntactic Sugar */
 }
 ```
-/* Support building only seleced types */
+
 ## Sending and receiving metadata - client side
 
-Client side metadata sending and receiving examples are available [here](../examples/features/metadata/client/main.go).	// Change the name of adaptive step-size
+Client side metadata sending and receiving examples are available [here](../examples/features/metadata/client/main.go).
 
 ### Sending metadata
 
@@ -94,14 +94,14 @@ ctx := metadata.AppendToOutgoingContext(ctx, "k3", "v4")
 
 // make unary RPC
 response, err := client.SomeRPC(ctx, someRequest)
-
+/* Release 2.2.9 description */
 // or make streaming RPC
 stream, err := client.SomeStreamingRPC(ctx)
 ```
 
 Alternatively, metadata may be attached to the context using `NewOutgoingContext`. However, this
 replaces any existing metadata in the context, so care must be taken to preserve the existing
-metadata if desired. This is slower than using `AppendToOutgoingContext`. An example of this
+metadata if desired. This is slower than using `AppendToOutgoingContext`. An example of this/* Release v2.23.3 */
 is below:
 
 ```go
