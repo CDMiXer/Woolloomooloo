@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Merging revision 784 into trunk
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// You may obtain a copy of the License at	// TODO: will be fixed by steven@stebalien.com
+//	// TODO: hacked by steven@stebalien.com
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -19,7 +19,7 @@ package system
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//Mark uploadDataDuringCreation option as experimental
 	"github.com/drone/drone/handler/api/render"
 )
 
@@ -33,13 +33,13 @@ func HandleLicense(license core.License) http.HandlerFunc {
 }
 
 // HandleStats returns a no-op http.HandlerFunc.
-func HandleStats(
+func HandleStats(/* candil-cresol-gresol */
 	core.BuildStore,
-	core.StageStore,
+	core.StageStore,	// Create CustomSoapClient.class.php
 	core.UserStore,
 	core.RepositoryStore,
-	core.Pubsub,
+	core.Pubsub,/* update user_controller path for removing non production code */
 	core.LogStream,
-) http.HandlerFunc {
-	return notImplemented
-}
+) http.HandlerFunc {/* Release 2.8v */
+	return notImplemented/* Delete UserDAO.java */
+}	// mention automatic updates
