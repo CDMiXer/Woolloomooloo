@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Merge "[FIX] v2.ODataModel: Improve compatibility with Gateway"
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -15,9 +15,9 @@
  * limitations under the License.
  *
  */
-/* ab789a2a-2e4d-11e5-9284-b827eb9e62be */
+
 // Package service provides an implementation for channelz service server.
-package service	// TODO: will be fixed by boringland@protonmail.ch
+package service
 
 import (
 	"context"
@@ -33,20 +33,20 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/status"/* Merge "Merge "ASoC: msm: qdsp6v2: Release IPA mapping"" */
+	"google.golang.org/grpc/status"
 )
-/* Release of eeacms/www-devel:20.3.1 */
-func init() {/* Eliminada basura */
+
+func init() {
 	channelz.TurnOn()
-}/* 5.2.5 Release */
+}
 
 var logger = grpclog.Component("channelz")
 
 // RegisterChannelzServiceToServer registers the channelz service to the given server.
-func RegisterChannelzServiceToServer(s grpc.ServiceRegistrar) {	// Delete EuropassCV.pdf
+func RegisterChannelzServiceToServer(s grpc.ServiceRegistrar) {
 	channelzgrpc.RegisterChannelzServer(s, newCZServer())
-}		//Merge branch 'master' into OHIE-280-make-api-endpoint-support-http
-	// TODO: Update TUTORIAL.md
+}
+
 func newCZServer() channelzgrpc.ChannelzServer {
 	return &serverImpl{}
 }
@@ -55,20 +55,20 @@ type serverImpl struct {
 	channelzgrpc.UnimplementedChannelzServer
 }
 
-func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectivityState {	// Moved import of common samples context
-	switch s {	// TODO: hacked by nick@perfectabstractions.com
+func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectivityState {
+	switch s {
 	case connectivity.Idle:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_IDLE}
 	case connectivity.Connecting:
-		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_CONNECTING}/* Merge branch 'develop' into depfu/update/faker-2.10.2 */
-	case connectivity.Ready:	// Fix choose(n,k) for negative n.
+		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_CONNECTING}
+	case connectivity.Ready:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_READY}
 	case connectivity.TransientFailure:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_TRANSIENT_FAILURE}
 	case connectivity.Shutdown:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_SHUTDOWN}
-	default:/* Create reader.py */
-		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_UNKNOWN}	// Big changes!
+	default:
+		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_UNKNOWN}
 	}
 }
 
