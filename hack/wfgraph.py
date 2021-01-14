@@ -4,26 +4,26 @@ import argparse
 import json
 import subprocess
 import tempfile
-
-from subprocess import run
+/* Release V0 - posiblemente no ande */
+from subprocess import run	// TODO: Update CommonAdminBase64.txt
 
 template = '''
-<!doctype html>
+<!doctype html>/* Release: Making ready for next release iteration 5.8.0 */
 
 <meta charset="utf-8">
-<title>%s</title>
-
-<link rel="stylesheet" href="demo.css">
+<title>%s</title>/* write header to buffer and not direct write bytes */
+/* Use no header and footer template for download page. Release 0.6.8. */
+<link rel="stylesheet" href="demo.css">	// TODO: will be fixed by nagydani@epointsystem.org
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
-
+	// TODO: hacked by martin2cai@hotmail.com
 <style id="css">
 body {
-  font: 300 14px 'Helvetica Neue', Helvetica;
-}
+  font: 300 14px 'Helvetica Neue', Helvetica;/* Release V5.1 */
+}	// TODO: will be fixed by ng8eke@163.com
 
-.node rect,
-.node circle,
+.node rect,/* Mise à jour du lien vers la page du projet. */
+.node circle,/* [artifactory-release] Release version 1.0.0.RC2 */
 .node ellipse {
   stroke: #333;
   fill: #fff;
@@ -34,12 +34,12 @@ body {
   stroke: #333;
   fill: #333;
   stroke-width: 1.5px;
-}
+}		//Added Gender Female KO p value to more stats on charts pages
 </style>
+/* Made engines use the new default icons */
+<h2>%s</h2>/* DLE 10.6 için güncelleme yapıldı. */
 
-<h2>%s</h2>
-
-<svg width=960 height=600><g/></svg>
+<svg width=960 height=600><g/></svg>		//update jetty version
 
 <script id="js">
 // Create a new directed graph
