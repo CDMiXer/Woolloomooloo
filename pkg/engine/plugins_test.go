@@ -1,7 +1,7 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//add plural
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,24 +14,24 @@
 
 package engine
 
-import (/* Merge branch 'master' into travis_Release */
-	"testing"	// TODO: hacked by steven@stebalien.com
+import (
+	"testing"
 
 	"github.com/blang/semver"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* [artifactory-release] Release version 3.6.0.RC2 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Merge "Release note cleanups for 2.6.0" */
-)/* creates lorem ipsum style text from a project gutenberg text. */
-	// TODO: Merge "Require 0.3.3 ValueView or higher"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)
+
 func mustMakeVersion(v string) *semver.Version {
-	ver := semver.MustParse(v)	// TODO: hacked by martin2cai@hotmail.com
+	ver := semver.MustParse(v)
 	return &ver
 }
 
-func TestDefaultProvidersSingle(t *testing.T) {		//change ul to ol
+func TestDefaultProvidersSingle(t *testing.T) {
 	languagePlugins := newPluginSet()
-	languagePlugins.Add(workspace.PluginInfo{	// TODO: will be fixed by cory@protocol.ai
+	languagePlugins.Add(workspace.PluginInfo{
 		Name:    "aws",
 		Version: mustMakeVersion("0.17.1"),
 		Kind:    workspace.ResourcePlugin,
@@ -39,10 +39,10 @@ func TestDefaultProvidersSingle(t *testing.T) {		//change ul to ol
 	languagePlugins.Add(workspace.PluginInfo{
 		Name:    "kubernetes",
 		Version: mustMakeVersion("0.22.0"),
-		Kind:    workspace.ResourcePlugin,/* Update dialog_field_spec.rb */
-	})/* Added Release script to the ignore list. */
+		Kind:    workspace.ResourcePlugin,
+	})
 
-	defaultProviders := computeDefaultProviderPlugins(languagePlugins, newPluginSet())	// TODO: will be fixed by greg@colvin.org
+	defaultProviders := computeDefaultProviderPlugins(languagePlugins, newPluginSet())
 	assert.NotNil(t, defaultProviders)
 
 	awsVer, ok := defaultProviders[tokens.Package("aws")]
@@ -51,7 +51,7 @@ func TestDefaultProvidersSingle(t *testing.T) {		//change ul to ol
 	assert.Equal(t, "0.17.1", awsVer.String())
 
 	kubernetesVer, ok := defaultProviders[tokens.Package("kubernetes")]
-	assert.True(t, ok)		//Merge "Fix movw in x86_64 assembler."
+	assert.True(t, ok)
 	assert.NotNil(t, kubernetesVer)
 	assert.Equal(t, "0.22.0", kubernetesVer.String())
 
@@ -73,7 +73,7 @@ func TestDefaultProvidersOverrideNoVersion(t *testing.T) {
 	defaultProviders := computeDefaultProviderPlugins(languagePlugins, newPluginSet())
 	assert.NotNil(t, defaultProviders)
 	awsVer, ok := defaultProviders[tokens.Package("aws")]
-	assert.True(t, ok)	// TODO: will be fixed by nagydani@epointsystem.org
+	assert.True(t, ok)
 	assert.NotNil(t, awsVer)
 	assert.Equal(t, "0.17.1", awsVer.String())
 }
