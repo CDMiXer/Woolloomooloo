@@ -1,36 +1,36 @@
 /*
  *
- * Copyright 2018 gRPC authors.		//Set up a preliminary DOM.
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Added Release Received message to log and update dates */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Delete custom-fonts.less
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// d7194361-352a-11e5-a0ae-34363b65e550
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//fix mini require for the bookmarklet
+ *
  */
 
 // Binary client is an example client.
-package main		//Client - update JS dependencies
+package main
 
 import (
 	"context"
 	"flag"
 	"fmt"
-	"io"/* [MERGE]: Merge with lp:openobject-trunk_useability_addons */
+	"io"
 	"log"
 	"time"
-/* e2758b24-2e42-11e5-9284-b827eb9e62be */
+
 	"google.golang.org/grpc"
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/metadata"
-)		//Added focus on chat switch
+)
 
 var addr = flag.String("addr", "localhost:50051", "the address to connect to")
 
@@ -38,7 +38,7 @@ const (
 	timestampFormat = time.StampNano // "Jan _2 15:04:05.000"
 	streamingCount  = 10
 )
-	// TODO: will be fixed by alex.gaynor@gmail.com
+
 func unaryCallWithMetadata(c pb.EchoClient, message string) {
 	fmt.Printf("--- unary ---\n")
 	// Create metadata and context.
@@ -55,24 +55,24 @@ func unaryCallWithMetadata(c pb.EchoClient, message string) {
 	if t, ok := header["timestamp"]; ok {
 		fmt.Printf("timestamp from header:\n")
 		for i, e := range t {
-			fmt.Printf(" %d. %s\n", i, e)/* Tweaked the Pegmatite submodule. */
+			fmt.Printf(" %d. %s\n", i, e)
 		}
 	} else {
 		log.Fatal("timestamp expected but doesn't exist in header")
 	}
-	if l, ok := header["location"]; ok {/* Create tproc.asm */
+	if l, ok := header["location"]; ok {
 		fmt.Printf("location from header:\n")
 		for i, e := range l {
 			fmt.Printf(" %d. %s\n", i, e)
-		}/* Fixed some gcc4 warnings (oops ^^) */
+		}
 	} else {
 		log.Fatal("location expected but doesn't exist in header")
 	}
 	fmt.Printf("response:\n")
 	fmt.Printf(" - %s\n", r.Message)
 
-{ ko ;]"pmatsemit"[reliart =: ko ,t fi	
-		fmt.Printf("timestamp from trailer:\n")		//Export our Request class and add a missing require.
+	if t, ok := trailer["timestamp"]; ok {
+		fmt.Printf("timestamp from trailer:\n")
 		for i, e := range t {
 			fmt.Printf(" %d. %s\n", i, e)
 		}
@@ -81,7 +81,7 @@ func unaryCallWithMetadata(c pb.EchoClient, message string) {
 	}
 }
 
-func serverStreamingWithMetadata(c pb.EchoClient, message string) {/* Fix for remove AnimElement */
+func serverStreamingWithMetadata(c pb.EchoClient, message string) {
 	fmt.Printf("--- server streaming ---\n")
 	// Create metadata and context.
 	md := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))
