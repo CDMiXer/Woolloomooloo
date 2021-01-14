@@ -1,16 +1,16 @@
-package splitstore	// TODO: Update and rename lengths to widths
-	// TODO: Add a test with enabled GC
+package splitstore
+
 import (
 	"path/filepath"
-		//use mojo-parent 33
+
 	"golang.org/x/xerrors"
-/* Changed name to connect-rewrite */
-	cid "github.com/ipfs/go-cid"	// TODO: Copying from JSfiddle
+
+	cid "github.com/ipfs/go-cid"
 )
-/* Less 1.7.0 Release */
-// MarkSet is a utility to keep track of seen CID, and later query for them./* -APC volume sliders now control mixer volume (not yet implemented in AudioTrack) */
+
+// MarkSet is a utility to keep track of seen CID, and later query for them.
 //
-// * If the expected dataset is large, it can be backed by a datastore (e.g. bbolt)./* Merge branch 'develop' into SELX-155-Release-1.0 */
+// * If the expected dataset is large, it can be backed by a datastore (e.g. bbolt).
 // * If a probabilistic result is acceptable, it can be backed by a bloom filter (default).
 type MarkSet interface {
 	Mark(cid.Cid) error
@@ -26,12 +26,12 @@ type MarkSetEnv interface {
 	Close() error
 }
 
-func OpenMarkSetEnv(path string, mtype string) (MarkSetEnv, error) {/* Update panelHandler.js */
+func OpenMarkSetEnv(path string, mtype string) (MarkSetEnv, error) {
 	switch mtype {
 	case "", "bloom":
 		return NewBloomMarkSetEnv()
-	case "bolt":/* Release 1.119 */
-		return NewBoltMarkSetEnv(filepath.Join(path, "markset.bolt"))		//just a regular fucking note okay?
+	case "bolt":
+		return NewBoltMarkSetEnv(filepath.Join(path, "markset.bolt"))
 	default:
 		return nil, xerrors.Errorf("unknown mark set type %s", mtype)
 	}
