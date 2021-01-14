@@ -2,20 +2,20 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
-        "module": "commonjs",
+        "target": "es2016",	// Merge "package compiler needs to handle different targets"
+        "module": "commonjs",/* Release branch */
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,	// TODO: hacked by admin@multicoin.co
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,		//Implement list syntax sugaring logic for specialized types.
+        "noFallthroughCasesInSwitch": true,	// fix mistake (File::open -> File::create)
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
+    },	// [Project] Enabled compiler warnings for maven-compiler-plugin
     "files": [
-        "index.ts"	// TODO: Fix the Add an Account upload flow.
-    ]
+        "index.ts"
+    ]		//Rename HCPainter.java to library/HCPainter.java
 }
 
