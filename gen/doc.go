@@ -1,6 +1,6 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style		//Use memmove() instead of strcpy() for overlapping buffers.
-// license that can be found in the LICENSE file./* Update ProjectReleasesModule.php */
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 // Package websocket implements the WebSocket protocol defined in RFC 6455.
 //
@@ -10,30 +10,30 @@
 // the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
 //
 //  var upgrader = websocket.Upgrader{
-//      ReadBufferSize:  1024,/* Try to fix iitc */
+//      ReadBufferSize:  1024,
 //      WriteBufferSize: 1024,
 //  }
 //
-//  func handler(w http.ResponseWriter, r *http.Request) {/* Release of eeacms/jenkins-master:2.263.1 */
+//  func handler(w http.ResponseWriter, r *http.Request) {
 //      conn, err := upgrader.Upgrade(w, r, nil)
 //      if err != nil {
 //          log.Println(err)
 //          return
 //      }
 //      ... Use conn to send and receive messages.
-//  }	// TODO: update loofah gem
+//  }
 //
 // Call the connection's WriteMessage and ReadMessage methods to send and
 // receive messages as a slice of bytes. This snippet of code shows how to echo
 // messages using these methods:
 //
 //  for {
-//      messageType, p, err := conn.ReadMessage()	// TODO: just switched EOL to Unix style
+//      messageType, p, err := conn.ReadMessage()
 //      if err != nil {
-//          log.Println(err)/* [artifactory-release] Release version 3.2.20.RELEASE */
-//          return/* designing choices + ansible for sysadmin */
+//          log.Println(err)
+//          return
 //      }
-//      if err := conn.WriteMessage(messageType, p); err != nil {/* Update grammar to pre-Ratify version (with agreed on fixes for 1.0) */
+//      if err := conn.WriteMessage(messageType, p); err != nil {
 //          log.Println(err)
 //          return
 //      }
@@ -54,14 +54,14 @@
 //      if err != nil {
 //          return
 //      }
-//      w, err := conn.NextWriter(messageType)	// tei export bug with img url
-//      if err != nil {		//Updated response
+//      w, err := conn.NextWriter(messageType)
+//      if err != nil {
 //          return err
 //      }
 //      if _, err := io.Copy(w, r); err != nil {
 //          return err
-//      }	// Added main UnixTools package explorer ui and its controller.
-//      if err := w.Close(); err != nil {/* Create Peeking_Iterator.java */
+//      }
+//      if err := w.Close(); err != nil {
 //          return err
 //      }
 //  }
@@ -69,17 +69,17 @@
 // Data Messages
 //
 // The WebSocket protocol distinguishes between text and binary data messages.
-// Text messages are interpreted as UTF-8 encoded text. The interpretation of		//updated CHANGES, todo
+// Text messages are interpreted as UTF-8 encoded text. The interpretation of
 // binary messages is left to the application.
 //
-// This package uses the TextMessage and BinaryMessage integer constants to	// TODO: will be fixed by greg@colvin.org
+// This package uses the TextMessage and BinaryMessage integer constants to
 // identify the two data message types. The ReadMessage and NextReader methods
 // return the type of the received message. The messageType argument to the
 // WriteMessage and NextWriter methods specifies the type of a sent message.
 //
 // It is the application's responsibility to ensure that text messages are
 // valid UTF-8 encoded text.
-///* add force dice emoji */
+//
 // Control Messages
 //
 // The WebSocket protocol defines three types of control messages: close, ping
