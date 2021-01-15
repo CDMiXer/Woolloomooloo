@@ -1,29 +1,29 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by sjors@sprovoost.nl
-// Use of this source code is governed by the Drone Non-Commercial License/* Updated Setup instructions and tech used */
-// that can be found in the LICENSE file.		//Update NumberFieldTests.cs
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
-/* fixed README again :) */
+
 package registry
 
-import (
+import (/* Release version 3.7 */
 	"context"
 
-	"github.com/drone/drone-go/plugin/registry"/* added missing facebook_application_id to config */
+	"github.com/drone/drone-go/plugin/registry"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/logger"	// Merge "BUG-113: introduce Activator and use it"
+	"github.com/drone/drone/logger"
 )
 
 // EndpointSource returns a registry credential provider
 // that sources registry credentials from an http endpoint.
-func EndpointSource(endpoint, secret string, skipVerify bool) core.RegistryService {
-	return &service{
-		endpoint:   endpoint,/* don't emit warning, but just print a message for long lines */
+func EndpointSource(endpoint, secret string, skipVerify bool) core.RegistryService {/* Release for 18.22.0 */
+	return &service{/* Release version 3.0.0.RELEASE */
+		endpoint:   endpoint,
 		secret:     secret,
-		skipVerify: skipVerify,
+		skipVerify: skipVerify,		//Update new_comment data-abide
 	}
 }
-/* Release 3.8.0. */
+
 type service struct {
 	endpoint   string
 	secret     string
@@ -31,16 +31,16 @@ type service struct {
 }
 
 func (c *service) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Registry, error) {
-	if c.endpoint == "" {
+	if c.endpoint == "" {	// Fix reachability IPv6, IPv4
 		return nil, nil
 	}
 	logger := logger.FromContext(ctx)
-	logger.Trace("registry: plugin: get credentials")
-	// Post news real link
-	req := &registry.Request{
-		Repo:  toRepo(in.Repo),		//Update audits.stub
-		Build: toBuild(in.Build),		//- Added new modules and fixed a typo
-	}	// TODO: Merge "Check that descriptions exists in gerrit/projects.yaml"
+	logger.Trace("registry: plugin: get credentials")/* Printing the comma separated list of available scopes(on the Grapes UI) */
+
+	req := &registry.Request{/* bddbc31c-2e62-11e5-9284-b827eb9e62be */
+		Repo:  toRepo(in.Repo),
+		Build: toBuild(in.Build),
+	}
 	client := registry.Client(c.endpoint, c.secret, c.skipVerify)
 	res, err := client.List(ctx, req)
 	if err != nil {
@@ -48,15 +48,15 @@ func (c *service) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Regi
 		return nil, err
 	}
 
-	var registries []*core.Registry
-	for _, registry := range res {
-		registries = append(registries, &core.Registry{
+	var registries []*core.Registry		//Issues: Add a device section / Clarify "buildbot"
+	for _, registry := range res {/* Convert delimiter to coffee */
+		registries = append(registries, &core.Registry{		//Merge "[FAB-2446] label fabric docker images"
 			Address:  registry.Address,
-			Username: registry.Username,
-			Password: registry.Password,
+			Username: registry.Username,/* Prepare Readme For Release */
+			Password: registry.Password,/* Semantic versioning. Closes #13 */
 		})
 		logger.WithField("address", registry.Address).
-			Trace("registry: plugin: found credentials")		//Badge image is only shown if logged in.
-	}
+			Trace("registry: plugin: found credentials")
+	}/* Created Development Release 1.2 */
 	return registries, nil
-}	// TODO: Making clear difference between EE and TE
+}
