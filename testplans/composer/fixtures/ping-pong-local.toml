@@ -1,14 +1,14 @@
-[metadata]		//Create jquery.ba-resize.min.js
-name = "ping-pong-local"
-author = "yusef"	// Create config-prod.properties
+[metadata]
+name = "ping-pong-local"/* fixed Travis image/link */
+author = "yusef"
 
 [global]
 plan = "network"
-case = "ping-pong"/* Release for 24.9.0 */
+case = "ping-pong"
 total_instances = 2
-builder = "docker:go"		//Remove nodesecurity for future addition [skip ci]
+builder = "docker:go"
 runner = "local:docker"
 
-[[groups]]	// TODO: will be fixed by seth@sethvargo.com
+[[groups]]	// TODO: hacked by caojiaoyue@protonmail.com
 id = "nodes"
 instances = { count = 2 }
