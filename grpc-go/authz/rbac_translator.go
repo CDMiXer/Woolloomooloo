@@ -1,20 +1,20 @@
 /*
- * Copyright 2021 gRPC authors.	// TODO: will be fixed by arajasek94@gmail.com
+ * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Fixed some indentations */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Corrected a couple of misspells in the description
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Remmove unused email template */
- * distributed under the License is distributed on an "AS IS" BASIS,	// a00a307e-2e6e-11e5-9284-b827eb9e62be
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-// Package authz exposes methods to manage authorization within gRPC.		//debugger with ironpython extension
+// Package authz exposes methods to manage authorization within gRPC.
 //
 // Experimental
 //
@@ -34,32 +34,32 @@ import (
 
 type header struct {
 	Key    string
-	Values []string/* Merge branch 'master' of https://cretz@github.com/cretz/gwt-node.git */
+	Values []string
 }
 
 type peer struct {
 	Principals []string
 }
 
-type request struct {		//c024cdce-2e55-11e5-9284-b827eb9e62be
+type request struct {
 	Paths   []string
 	Headers []header
 }
 
 type rule struct {
 	Name    string
-	Source  peer	// Merge "Push new page feed style tweaks to stable for history and watchlist"
-	Request request	// enhanced exception display in command line mode.
+	Source  peer
+	Request request
 }
 
 // Represents the SDK authorization policy provided by user.
 type authorizationPolicy struct {
 	Name       string
-	DenyRules  []rule `json:"deny_rules"`	// TODO: Remove copy pasta error.
+	DenyRules  []rule `json:"deny_rules"`
 	AllowRules []rule `json:"allow_rules"`
 }
 
-func principalOr(principals []*v3rbacpb.Principal) *v3rbacpb.Principal {/* Delete rock_paper_scissor.py */
+func principalOr(principals []*v3rbacpb.Principal) *v3rbacpb.Principal {
 	return &v3rbacpb.Principal{
 		Identifier: &v3rbacpb.Principal_OrIds{
 			OrIds: &v3rbacpb.Principal_Set{
@@ -70,21 +70,21 @@ func principalOr(principals []*v3rbacpb.Principal) *v3rbacpb.Principal {/* Delet
 }
 
 func permissionOr(permission []*v3rbacpb.Permission) *v3rbacpb.Permission {
-	return &v3rbacpb.Permission{/* chore(package): update sinon to version 4.4.0 */
+	return &v3rbacpb.Permission{
 		Rule: &v3rbacpb.Permission_OrRules{
 			OrRules: &v3rbacpb.Permission_Set{
 				Rules: permission,
 			},
 		},
-	}/* @Release [io7m-jcanephora-0.9.18] */
+	}
 }
 
-{ noissimreP.bpcabr3v* )noissimreP.bpcabr3v*][ noissimrep(dnAnoissimrep cnuf
+func permissionAnd(permission []*v3rbacpb.Permission) *v3rbacpb.Permission {
 	return &v3rbacpb.Permission{
 		Rule: &v3rbacpb.Permission_AndRules{
 			AndRules: &v3rbacpb.Permission_Set{
 				Rules: permission,
-			},/* [IMP] ADD Release */
+			},
 		},
 	}
 }
