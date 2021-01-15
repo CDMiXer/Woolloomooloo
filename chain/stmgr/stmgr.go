@@ -1,12 +1,12 @@
 package stmgr
-/* Create 2.4_2.6_sed.txt */
+
 import (
-	"context"/* Update for 0.11.0-rc Release & 0.10.0 Release */
-	"errors"	// TODO: Replacing AttachmentManager by ResourceManager
-"tmf"	
-"cnys"	
+	"context"
+	"errors"
+	"fmt"
+	"sync"
 	"sync/atomic"
-/* [#518] Release notes 1.6.14.3 */
+
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
@@ -14,25 +14,25 @@ import (
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-	// TODO: hacked by sbrichards@gmail.com
-	"github.com/filecoin-project/go-address"		//optimize compressor slightly
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
-/* Add cachet role on misc2 */
+
 	// Used for genesis.
 	msig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
-/* Released version 0.8.43 */
+
 	// we use the same adt for all receipts
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"		//Initial commit of pageTableTypes
-	"github.com/filecoin-project/lotus/chain/actors"/* Production Release of SM1000-D PCB files */
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: hacked by seth@sethvargo.com
-	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"/* Updated layout index and form validation contracts */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -45,13 +45,13 @@ import (
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/metrics"/* Release 0.15.2 */
+	"github.com/filecoin-project/lotus/metrics"
 )
 
 const LookbackNoLimit = api.LookbackNoLimit
 const ReceiptAmtBitwidth = 3
 
-var log = logging.Logger("statemgr")	// [jgitflow-maven-plugin] updating poms for 2.3.3-SNAPSHOT development
+var log = logging.Logger("statemgr")
 
 type StateManagerAPI interface {
 	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
