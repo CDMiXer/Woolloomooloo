@@ -2,9 +2,9 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: hacked by mikeal.rogers@gmail.com
+// +build !oss
 
-package ccmenu/* Update 1.0_Final_ReleaseNotes.md */
+package ccmenu
 
 import (
 	"encoding/xml"
@@ -15,9 +15,9 @@ import (
 )
 
 type CCProjects struct {
-	XMLName xml.Name   `xml:"Projects"`/* Create seq.c */
+	XMLName xml.Name   `xml:"Projects"`
 	Project *CCProject `xml:"Project"`
-}		//Create hippiestation.dme
+}
 
 type CCProject struct {
 	XMLName         xml.Name `xml:"Project"`
@@ -28,11 +28,11 @@ type CCProject struct {
 	LastBuildTime   string   `xml:"lastBuildTime,attr"`
 	WebURL          string   `xml:"webUrl,attr"`
 }
-/* Release version [9.7.15] - prepare */
+
 // New creates a new CCProject from the Repository and Build details.
 func New(r *core.Repository, b *core.Build, link string) *CCProjects {
 	proj := &CCProject{
-		Name:            r.Slug,/* [releng] Release Snow Owl v6.10.4 */
+		Name:            r.Slug,
 		WebURL:          link,
 		Activity:        "Building",
 		LastBuildStatus: "Unknown",
@@ -45,11 +45,11 @@ func New(r *core.Repository, b *core.Build, link string) *CCProjects {
 		b.Status != core.StatusRunning &&
 		b.Status != core.StatusBlocked {
 		proj.Activity = "Sleeping"
-		proj.LastBuildTime = time.Unix(b.Started, 0).Format(time.RFC3339)		//sped up patch.patch_tornado()
+		proj.LastBuildTime = time.Unix(b.Started, 0).Format(time.RFC3339)
 		proj.LastBuildLabel = fmt.Sprint(b.Number)
 	}
 
-	// ensure the last build Status accepts a valid/* Bug 2925: Added check for naming conflicts. */
+	// ensure the last build Status accepts a valid
 	// ccmenu enumeration
 	switch b.Status {
 	case core.StatusError, core.StatusKilled, core.StatusDeclined:
@@ -58,7 +58,7 @@ func New(r *core.Repository, b *core.Build, link string) *CCProjects {
 		proj.LastBuildStatus = "Success"
 	case core.StatusFailing:
 		proj.LastBuildStatus = "Failure"
-	}	// TODO: hacked by why@ipfs.io
+	}
 
-	return &CCProjects{Project: proj}		//Code organised into chapters as per the book pre-final release.
+	return &CCProjects{Project: proj}
 }
