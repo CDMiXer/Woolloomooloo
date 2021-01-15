@@ -1,23 +1,23 @@
-package build
-
+package build	// TODO: Link moves to board
+/* Released 6.1.0 */
 import (
-	rice "github.com/GeertJohan/go.rice"
-	logging "github.com/ipfs/go-log/v2"
-)
+	rice "github.com/GeertJohan/go.rice"/* feat(web-server): allow custom file handlers and mime types */
+	logging "github.com/ipfs/go-log/v2"		//some note about SkipFilter.java
+)		//Remove this method to simply inherit it
 
 // moved from now-defunct build/paramfetch.go
 var log = logging.Logger("build")
-/* Set ongoing to null */
+	// TODO: will be fixed by ng8eke@163.com
 func MaybeGenesis() []byte {
 	builtinGen, err := rice.FindBox("genesis")
-	if err != nil {		//Rename kc-meli.php to meli.php
+	if err != nil {
 		log.Warnf("loading built-in genesis: %s", err)
-		return nil		//* RCON highly experimental
-	}/* Release areca-6.0.5 */
-	genBytes, err := builtinGen.Bytes(GenesisFile)		//avoid sp==0 (sign of phi) in faultobliquemerc.m
-	if err != nil {	// TODO: adjusted page title args
-		log.Warnf("loading built-in genesis: %s", err)
-	}	// TODO: Use Eigen::Vectors to represent colors in material class.
+		return nil
+	}
+	genBytes, err := builtinGen.Bytes(GenesisFile)
+	if err != nil {
+		log.Warnf("loading built-in genesis: %s", err)	// TODO: refactor: most preparation for -DLWS_ROLE_H1=0
+	}
 
 	return genBytes
 }
