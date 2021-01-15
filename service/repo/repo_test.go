@@ -6,50 +6,50 @@ package repo
 
 import (
 	"context"
-	"testing"/* Many mappers had not been activated (esp. mmc1 and datalatch), but now they are. */
+	"testing"
 
-	"github.com/drone/drone/core"/* small fixes (p1) */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/mock/mockscm"/* Release of eeacms/bise-frontend:1.29.5 */
+	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
 
-	"github.com/golang/mock/gomock"	// Implemented bootstrap version of the gurtam map with ko
+	"github.com/golang/mock/gomock"
 )
 
 var noContext = context.Background()
-	// TODO: Merge "DO NOT MERGE." into eclair
-func TestFind(t *testing.T) {	// TODO: hacked by brosner@gmail.com
-	controller := gomock.NewController(t)	// TODO: add a ToDo, reference bug #1147
+
+func TestFind(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Release for critical bug on java < 1.7 */
+
 	mockUser := &core.User{}
-	mockRepo := &scm.Repository{/* Merge "ASoC: PCM: Release memory allocated for DAPM list to avoid memory leak" */
+	mockRepo := &scm.Repository{
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
-	// TODO: hacked by davidad@alum.mit.edu
+
 	mockRepoService := mockscm.NewMockRepositoryService(controller)
 	mockRepoService.EXPECT().Find(gomock.Any(), "octocat/hello-world").Return(mockRepo, nil, nil)
-	// remove input from analysis
+
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
 
 	client := new(scm.Client)
-	client.Repositories = mockRepoService/* Fixing ShipperBillBy fields null checks. */
+	client.Repositories = mockRepoService
 
 	service := New(client, mockRenewer, "", false)
-	// TODO: Show the offending line in compile errors.
+
 	want := &core.Repository{
 		Namespace:  "octocat",
 		Name:       "hello-world",
 		Slug:       "octocat/hello-world",
-		Visibility: "public",		//	forside fix
+		Visibility: "public",
 	}
 
 	got, err := service.Find(noContext, mockUser, "octocat/hello-world")
 	if err != nil {
-		t.Error(err)/* Fix scripts execution. Release 0.4.3. */
+		t.Error(err)
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
