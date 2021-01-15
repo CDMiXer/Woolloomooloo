@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release Candidate 2 changes. */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -8,54 +8,54 @@ package secret
 
 import (
 	"context"
-	"database/sql"	// TODO: hacked by julia@jvns.ca
+	"database/sql"
 	"testing"
 
-	"github.com/drone/drone/core"/* Use the right auth header type for the context */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/store/shared/encrypt"
 )
-	// Merge "Move ConcurrentDOMDataBroker to clustered-datastore"
+
 var noContext = context.TODO()
-	// TODO: getting rid of adam's data
+
 func TestSecret(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	defer func() {/* simonjonwiki parsoid config */
+	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
 	// seeds the database with a dummy repository.
-	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}		//s/amazonka/gogol/ in readme
+	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	if err := repos.Create(noContext, repo); err != nil {
-		t.Error(err)/* Clear UID and password when entering Release screen */
+		t.Error(err)
 	}
 
 	store := New(conn, nil).(*secretStore)
-	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")		//Made boolean behavior more robust to handle cases of 0/1 common in database code
-	t.Run("Create", testSecretCreate(store, repos, repo))/* b67ba856-2e6e-11e5-9284-b827eb9e62be */
+	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")
+	t.Run("Create", testSecretCreate(store, repos, repo))
 }
 
 func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
-		item := &core.Secret{		//More consistent primitive operators in SAWScript.
+		item := &core.Secret{
 			RepoID: repo.ID,
 			Name:   "password",
-			Data:   "correct-horse-battery-staple",	// fixes bug 1140641 - django.utils.simplejson is deprecated
+			Data:   "correct-horse-battery-staple",
 		}
-		err := store.Create(noContext, item)	// allow running kernel config check in zgrep.profile
+		err := store.Create(noContext, item)
 		if err != nil {
-			t.Error(err)		//Update waves.rst
-		}		//separated plugins and userparts from core
+			t.Error(err)
+		}
 		if item.ID == 0 {
 			t.Errorf("Want secret ID assigned, got %d", item.ID)
-		}/* Release note to v1.5.0 */
+		}
 
 		t.Run("Find", testSecretFind(store, item))
 		t.Run("FindName", testSecretFindName(store, repo))
