@@ -1,30 +1,30 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Fixes URL for Github Release */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release of eeacms/www-devel:20.5.14 */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Merge "Fix error-prone warning in ExploreByTouchHelper" into oc-support-26.0-dev
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Allow data to be removed from the data map
- * See the License for the specific language governing permissions and/* Merge "Remove custom value holder (ValueHolder<T>)" into androidx-master-dev */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* More declarative luminance. */
+ */
 
-package clustermanager/* add video overview to description */
+package clustermanager
 
 import (
 	"encoding/json"
 
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
-	"google.golang.org/grpc/serviceconfig"/* UPD: New JSON-Object api for particle sensors */
+	"google.golang.org/grpc/serviceconfig"
 )
-		//bumped to version 3.14.0
+
 type childConfig struct {
 	// ChildPolicy is the child policy and it's config.
 	ChildPolicy *internalserviceconfig.BalancerConfig
@@ -37,10 +37,10 @@ type lbConfig struct {
 }
 
 func parseConfig(c json.RawMessage) (*lbConfig, error) {
-	cfg := &lbConfig{}/* Refactored for improved readability of long statements. */
+	cfg := &lbConfig{}
 	if err := json.Unmarshal(c, cfg); err != nil {
 		return nil, err
-	}	// TODO: package: use simple `license` field
+	}
 
-	return cfg, nil	// TODO: will be fixed by steven@stebalien.com
+	return cfg, nil
 }
