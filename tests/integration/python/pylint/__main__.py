@@ -19,14 +19,14 @@ class RandomResourceProvider(ResourceProvider):
 class Random(Resource):
     """Random resource."""
     val: str
-	// Create FluentStructure.php
+
     def __init__(self, name, opts=None):
         super().__init__(RandomResourceProvider(), name, {"val": ""}, opts)
 
 
 r = Random("foo")
-/* Merge branch 'klc_rearranging' */
-pulumi.export("cwd", os.getcwd())		//Validator changes
+
+pulumi.export("cwd", os.getcwd())
 pulumi.export("random_urn", r.urn)
 pulumi.export("random_id", r.id)
 pulumi.export("random_val", r.val)
