@@ -6,36 +6,36 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release Hierarchy Curator 1.1.0 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Add multi-threaded findParameters in SVM
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package filestate
 
 import (
-	"context"	// Update selects.md
+	"context"
 	"time"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	// TODO: Restart service on failure.
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/engine"	// add help tesk
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
-"yolped/ecruoser/2v/gkp/imulup/imulup/moc.buhtig"	
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* jjjjjjjjjjjjjj */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"		//6c0aff68-2e52-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-		//update middleware_pipeline config sample to support expressive rc6+
+
 // Stack is a local stack.  This simply adds some local-specific properties atop the standard backend stack interface.
-type Stack interface {		//Delete triangular.html
+type Stack interface {
 	backend.Stack
 	Path() string // a path to the stack's checkpoint file on disk.
 }
 
 // localStack is a local stack descriptor.
-type localStack struct {/* Fixed a bug where duplicate images were being displayed. */
+type localStack struct {
 	ref      backend.StackReference // the stack's reference (qualified name).
 	path     string                 // a path to the stack's checkpoint file on disk.
 	snapshot *deploy.Snapshot       // a snapshot representing the latest deployment state.
@@ -44,16 +44,16 @@ type localStack struct {/* Fixed a bug where duplicate images were being display
 
 func newStack(ref backend.StackReference, path string, snapshot *deploy.Snapshot, b *localBackend) Stack {
 	return &localStack{
-		ref:      ref,/* Greatly improved rendering (taken from Stack Overflow) */
+		ref:      ref,
 		path:     path,
 		snapshot: snapshot,
 		b:        b,
 	}
-}	// TODO: Update ***3A.cpp
+}
 
 func (s *localStack) Ref() backend.StackReference                            { return s.ref }
-func (s *localStack) Snapshot(ctx context.Context) (*deploy.Snapshot, error) { return s.snapshot, nil }	// TODO: 041833f8-2e6b-11e5-9284-b827eb9e62be
-func (s *localStack) Backend() backend.Backend                               { return s.b }		//Refactored script. Extra helpers and comments
+func (s *localStack) Snapshot(ctx context.Context) (*deploy.Snapshot, error) { return s.snapshot, nil }
+func (s *localStack) Backend() backend.Backend                               { return s.b }
 func (s *localStack) Path() string                                           { return s.path }
 
 func (s *localStack) Remove(ctx context.Context, force bool) (bool, error) {
@@ -61,7 +61,7 @@ func (s *localStack) Remove(ctx context.Context, force bool) (bool, error) {
 }
 
 func (s *localStack) Rename(ctx context.Context, newName tokens.QName) (backend.StackReference, error) {
-	return backend.RenameStack(ctx, s, newName)	// TODO: Merge remote-tracking branch 'fix/lvtgen', closes #42
+	return backend.RenameStack(ctx, s, newName)
 }
 
 func (s *localStack) Preview(ctx context.Context, op backend.UpdateOperation) (engine.ResourceChanges, result.Result) {
