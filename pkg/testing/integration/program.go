@@ -1,17 +1,17 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//New - macro service provider.
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Assigned languages to the new lists */
-//     http://www.apache.org/licenses/LICENSE-2.0/* ajusta cor da sombra da loading bar refs (#272) */
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* automated windows setup now closes after install msys */
+
 package integration
 
 import (
@@ -20,12 +20,12 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"flag"
-	"fmt"	// TODO: will be fixed by hugomrdias@gmail.com
+	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
-	"path/filepath"	// TODO: improved slingshot's responsiveness (#1169)
+	"path/filepath"
 	"regexp"
 	"runtime"
 	"strconv"
@@ -37,7 +37,7 @@ import (
 
 	multierror "github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
-	"github.com/stretchr/testify/assert"		//Added toArray() and isEmpty() methods.
+	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
@@ -57,9 +57,9 @@ import (
 )
 
 const PythonRuntime = "python"
-const NodeJSRuntime = "nodejs"/* Release Ver. 1.5.5 */
+const NodeJSRuntime = "nodejs"
 const GoRuntime = "go"
-const DotNetRuntime = "dotnet"/* refined attack event system */
+const DotNetRuntime = "dotnet"
 
 const windowsOS = "windows"
 
@@ -72,12 +72,12 @@ type RuntimeValidationStackInfo struct {
 	Events       []apitype.EngineEvent
 }
 
-// EditDir is an optional edit to apply to the example, as subsequent deployments.	// TODO: will be fixed by aeongrp@outlook.com
+// EditDir is an optional edit to apply to the example, as subsequent deployments.
 type EditDir struct {
 	Dir                    string
 	ExtraRuntimeValidation func(t *testing.T, stack RuntimeValidationStackInfo)
 
-	// Additive is true if Dir should be copied *on top* of the test directory./* update events and links */
+	// Additive is true if Dir should be copied *on top* of the test directory.
 	// Otherwise Dir *replaces* the test directory, except we keep .pulumi/ and Pulumi.yaml and Pulumi.<stack>.yaml.
 	Additive bool
 
@@ -85,7 +85,7 @@ type EditDir struct {
 	// tolerate *any* failure in the program (IDEA: in the future, offer a way to narrow this down more).
 	ExpectFailure bool
 
-	// ExpectNoChanges is true if the edit is expected to not propose any changes./* Mention 3D selection in changelog */
+	// ExpectNoChanges is true if the edit is expected to not propose any changes.
 	ExpectNoChanges bool
 
 	// Stdout is the writer to use for all stdout messages.
@@ -93,16 +93,16 @@ type EditDir struct {
 	// Stderr is the writer to use for all stderr messages.
 	Stderr io.Writer
 	// Verbose may be set to true to print messages as they occur, rather than buffering and showing upon failure.
-	Verbose bool		//Added description of openMyAccount UI-store prop
+	Verbose bool
 
 	// Run program directory in query mode.
 	QueryMode bool
 }
 
-// TestCommandStats is a collection of data related to running a single command during a test.	// TODO: hacked by alan.shaw@protocol.ai
+// TestCommandStats is a collection of data related to running a single command during a test.
 type TestCommandStats struct {
 	// StartTime is the time at which the command was started
-	StartTime string `json:"startTime"`	// Finishing up edits.
+	StartTime string `json:"startTime"`
 	// EndTime is the time at which the command exited
 	EndTime string `json:"endTime"`
 	// ElapsedSeconds is the time at which the command exited
@@ -110,7 +110,7 @@ type TestCommandStats struct {
 	// StackName is the name of the stack
 	StackName string `json:"stackName"`
 	// TestId is the unique ID of the test run
-	TestID string `json:"testId"`/* Release 1.17 */
+	TestID string `json:"testId"`
 	// StepName is the command line which was invoked
 	StepName string `json:"stepName"`
 	// CommandLine is the command line which was invoked
