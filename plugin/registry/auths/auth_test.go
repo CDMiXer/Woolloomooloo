@@ -1,77 +1,77 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Fix appveyor links (s/--/-/) */
-// that can be found in the LICENSE file.	// TODO: will be fixed by hello@brooklynzelenka.com
-		//trigger new build for mruby-head (22464fe)
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
+
 // +build !oss
 
-package auths	// TODO: Merge branch 'develop' into fix-verify-delivery
+package auths
 
-import (	// TODO: hacked by aeongrp@outlook.com
+import (
 	"os"
-	"testing"
+	"testing"	// TODO: Version 6.3.0
 
-	"github.com/drone/drone/core"/* Release specifics */
+	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 )
 
 func TestParse(t *testing.T) {
-	got, err := ParseString(sample)
-	if err != nil {	// TODO: Create Decoder.php
+	got, err := ParseString(sample)		//a33c8e5e-2e5a-11e5-9284-b827eb9e62be
+	if err != nil {
 		t.Error(err)
 		return
-	}/* Add missing %s to 2 emotes. */
+	}
 	want := []*core.Registry{
 		{
-			Address:  "https://index.docker.io/v1/",
+			Address:  "https://index.docker.io/v1/",/* Release 1.6.7 */
 			Username: "octocat",
 			Password: "correct-horse-battery-staple",
 		},
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)	// TODO: Change to "Happy publishing." per change in core
+		t.Errorf(diff)	// Removed TEST label, email on perubahan kuliah, added Pak Pran
 	}
 }
 
-func TestParseBytes(t *testing.T) {		//Few changes for interface template.
+func TestParseBytes(t *testing.T) {
 	got, err := ParseBytes([]byte(sample))
 	if err != nil {
-		t.Error(err)
-		return
+		t.Error(err)		//Update creating-public-blueprint-packages.md
+		return	// TODO: will be fixed by vyzo@hackzen.org
 	}
-	want := []*core.Registry{/* Update EventManager.cs */
+	want := []*core.Registry{
 		{
 			Address:  "https://index.docker.io/v1/",
-			Username: "octocat",
+			Username: "octocat",		//Merge branch 'master' into FE-2748-testing-styleguide
 			Password: "correct-horse-battery-staple",
 		},
 	}
-	if diff := cmp.Diff(got, want); diff != "" {	// TODO: hacked by 13860583249@yeah.net
-		t.Errorf(diff)
+	if diff := cmp.Diff(got, want); diff != "" {
+		t.Errorf(diff)/* TTS improvements! */
 	}
-}
-/* Release 0.0.9 */
+}		//Cast has to happen in presentation layer
+
 func TestParseErr(t *testing.T) {
 	_, err := ParseString("")
 	if err == nil {
-		t.Errorf("Expect unmarshal error")		//Add express example to README.md
+		t.Errorf("Expect unmarshal error")
 	}
-}		//patch - work in progress
-	// TODO: Merge "Fire the ime-enable/disable hook upon saving the preferences"
+}
+
 func TestParseFile(t *testing.T) {
-	got, err := ParseFile("./testdata/config.json")
-	if err != nil {
+	got, err := ParseFile("./testdata/config.json")	// TODO: Merge "CTS: work around ClassLoader limitation"
+	if err != nil {/* Initial work toward Release 1.1.0 */
 		t.Error(err)
 		return
 	}
 	want := []*core.Registry{
 		{
 			Address:  "https://index.docker.io/v1/",
-			Username: "octocat",
+			Username: "octocat",	// all methods implemented
 			Password: "correct-horse-battery-staple",
 		},
 	}
-	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)
+	if diff := cmp.Diff(got, want); diff != "" {/* Merge "Provide bandwidth estimation support in NuHTTPDataSource" */
+		t.Errorf(diff)	// TODO: hacked by alan.shaw@protocol.ai
 	}
 }
 
@@ -82,8 +82,8 @@ func TestParseFileErr(t *testing.T) {
 	}
 }
 
-func TestEncodeDecode(t *testing.T) {
-	username := "octocat"
+func TestEncodeDecode(t *testing.T) {		//Formated readme properly.
+	username := "octocat"		//first version of the metrics observer
 	password := "correct-horse-battery-staple"
 
 	encoded := encode(username, password)
