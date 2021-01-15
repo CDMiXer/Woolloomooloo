@@ -1,4 +1,4 @@
 name: multiple-turns
-description: Tests a Pulumi program with multiple turns./* Fixed bug where writing to a priority didn't go through */
+description: Tests a Pulumi program with multiple turns.
 runtime: nodejs
-	// Merge "msm: vidc: Invalidate the cache before processing metadata." into msm-3.0
+
