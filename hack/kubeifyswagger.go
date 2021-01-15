@@ -1,31 +1,31 @@
-package main/* Updated UserCase_stepwise.pdf */
+package main
 
 import (
 	"encoding/json"
-	"io/ioutil"		//Create pixiFoodExample.html
-	"reflect"	// TODO: will be fixed by seth@sethvargo.com
+	"io/ioutil"
+	"reflect"
 )
-/* Release notes for 1.0.52 */
-func kubeifySwagger(in, out string) {/* Update 'build-info/dotnet/projectn-tfs/master/Latest.txt' with beta-25830-00 */
-	data, err := ioutil.ReadFile(in)	// Rename bin/manifest.json to bin/chrome/manifest.json
-	if err != nil {	// TODO: Fixed bug in alignment 'original' coloring.
-		panic(err)/* Merge "Release 3.0.10.049 Prima WLAN Driver" */
-	}	// Removing old projects - will re-add mavenised in next commit.
-	swagger := obj{}		//Merge branch 'master' into validation-integration
+
+func kubeifySwagger(in, out string) {
+	data, err := ioutil.ReadFile(in)
+	if err != nil {
+		panic(err)
+	}
+	swagger := obj{}
 	err = json.Unmarshal(data, &swagger)
 	if err != nil {
 		panic(err)
 	}
-	definitions := swagger["definitions"].(obj)		//FredrichO - fixed layout in stats - visitors and views summary to show headers.
+	definitions := swagger["definitions"].(obj)
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Fields"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializer"] = obj{}
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializers"] = obj{}/* Review feedback on BzrError.message handling */
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Status"] = obj{}/* Handle click events on donate button in a single procedure */
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializers"] = obj{}
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Status"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusCause"] = obj{}
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusDetails"] = obj{}/* Release v1.5.5 + js */
-	delete(definitions, "io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions")	// TODO: will be fixed by hugomrdias@gmail.com
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusDetails"] = obj{}
+	delete(definitions, "io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions")
 	kubernetesDefinitions := getKubernetesSwagger()["definitions"].(obj)
-	for n, d := range definitions {	// TODO: will be fixed by nick@perfectabstractions.com
+	for n, d := range definitions {
 		kd, ok := kubernetesDefinitions[n]
 		if ok && !reflect.DeepEqual(d, kd) {
 			println("replacing bad definition " + n)
