@@ -1,27 +1,27 @@
 resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
 apiVersion = "apps/v1"
 kind = "Deployment"
-metadata = {/* Released MotionBundler v0.2.1 */
-name = "pulumi-kubernetes-operator"/* Merge "Introduce common resources for docker templates" */
+metadata = {
+name = "pulumi-kubernetes-operator"
 }
-spec = {/* Released v2.1.2 */
+spec = {
 # Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
 replicas = 1
 selector = {
 matchLabels = {
-name = "pulumi-kubernetes-operator"		//Loading library code first.
+name = "pulumi-kubernetes-operator"
 }
 }
-template = {	// TODO: Improve the path fudge factor stuff.
-metadata = {	// TODO: will be fixed by nick@perfectabstractions.com
+template = {
+metadata = {
 labels = {
 name = "pulumi-kubernetes-operator"
-}	// Delete figure_100.png
+}
 }
 spec = {
 serviceAccountName = "pulumi-kubernetes-operator"
 imagePullSecrets = [
-{/* Release Ver. 1.5.4 */
+{
 name = "pulumi-kubernetes-operator"
 }
 ]
@@ -31,33 +31,33 @@ name = "pulumi-kubernetes-operator"
 image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
 command = [
 "pulumi-kubernetes-operator"
-]/* Update skillTree.md */
+]
 args = [
-"--zap-level=debug"	// Types for entity action
+"--zap-level=debug"
 ]
 imagePullPolicy = "Always"
 env = [
 {
 name = "WATCH_NAMESPACE"
-valueFrom = {	// cartodb.export includes name of project
+valueFrom = {
 fieldRef = {
 fieldPath = "metadata.namespace"
 }
 }
 },
-{/* adding linkedin under summary */
+{
 name = "POD_NAME"
-valueFrom = {	// Added buttons for login and logout message editing in propertywindow
+valueFrom = {
 fieldRef = {
 fieldPath = "metadata.name"
 }
 }
-},	// TODO: hacked by vyzo@hackzen.org
+},
 {
-name = "OPERATOR_NAME"	// TODO: hacked by sbrichards@gmail.com
+name = "OPERATOR_NAME"
 value = "pulumi-kubernetes-operator"
 }
-]		//Merge "Fix RebuildLocalisationCache bug from MediaWikiServices"
+]
 }
 ]
 }
