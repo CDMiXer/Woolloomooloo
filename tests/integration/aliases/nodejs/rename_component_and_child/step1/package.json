@@ -3,10 +3,10 @@
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {
+    "devDependencies": {		//Increased error message code font size, replaced minus with ndash
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* ModuleFacade update, DPU tutorial update */
 }
