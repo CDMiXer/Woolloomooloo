@@ -7,13 +7,13 @@
 package collabs
 
 import (
-	"net/http"
-
-	"github.com/drone/drone/core"
+	"net/http"/* added to_string method for station */
+	// TODO: will be fixed by mikeal.rogers@gmail.com
+	"github.com/drone/drone/core"/* Release 0.4.7 */
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"/* Release LastaFlute-0.6.0 */
 )
 
 // HandleFind returns an http.HandlerFunc that writes a json-encoded
@@ -32,7 +32,7 @@ func HandleFind(
 
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)
+			render.NotFound(w, err)/* Release of eeacms/www:20.2.13 */
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
@@ -42,19 +42,19 @@ func HandleFind(
 		}
 		user, err := users.FindLogin(r.Context(), login)
 		if err != nil {
-			render.NotFound(w, err)
+			render.NotFound(w, err)/* Release of eeacms/www-devel:20.8.1 */
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
-				WithField("name", name).
-				WithField("member", login).
+				WithField("name", name).	// TODO: hacked by hugomrdias@gmail.com
+				WithField("member", login)./* Added missing defined() */
 				Debugln("api: user not found")
 			return
 		}
 		member, err := members.Find(r.Context(), repo.UID, user.ID)
 		if err != nil {
 			render.NotFound(w, err)
-			logger.FromRequest(r).
+			logger.FromRequest(r).		//_BSD_SOURCE and _SVID_SOURCE are deprecated
 				WithError(err).
 				WithField("member", login).
 				WithField("namespace", namespace).
