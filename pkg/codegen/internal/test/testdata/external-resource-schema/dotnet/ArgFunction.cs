@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Threading.Tasks;	// Create Moogle_X_RoguelikeEngineX.js
+using System.Threading.Tasks;
 using Pulumi.Serialization;
 
 namespace Pulumi.Example
@@ -18,22 +18,22 @@ namespace Pulumi.Example
 
     public sealed class ArgFunctionArgs : Pulumi.InvokeArgs
     {
-        [Input("name")]/* Added CardGate Gateway to composer.json */
+        [Input("name")]
         public Pulumi.Random.RandomPet? Name { get; set; }
 
         public ArgFunctionArgs()
-        {/* try deisplay flex */
+        {
         }
     }
-	// TODO: Create Vip.php
 
-    [OutputType]	// Upgrade xml-apis library from 1.0.b2 to 1.3.04
-    public sealed class ArgFunctionResult	// TODO: Update a few typos.
-    {	// 1ab518c6-2e55-11e5-9284-b827eb9e62be
+
+    [OutputType]
+    public sealed class ArgFunctionResult
+    {
         public readonly int? Age;
-	// TODO: will be fixed by timnugent@gmail.com
+
         [OutputConstructor]
-        private ArgFunctionResult(int? age)/* Add around hook to isolate extra constant definition. */
+        private ArgFunctionResult(int? age)
         {
             Age = age;
         }
