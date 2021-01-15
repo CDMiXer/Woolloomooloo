@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package operations/* Update result.php */
+package operations
 
 import (
-	"context"/* Merge "Improve documentation for 'NovaComputeCpuSharedSet' parameter" */
+	"context"
 	"encoding/json"
 	"fmt"
 	"reflect"
@@ -26,7 +26,7 @@ import (
 	"google.golang.org/api/iterator"
 	"google.golang.org/api/option"
 	loggingpb "google.golang.org/genproto/googleapis/logging/v2"
-/* Create ConsoleAsciiTable.ino */
+
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
@@ -34,39 +34,39 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
 
-// TODO[pulumi/pulumi#54] This should be factored out behind an OperationsProvider RPC interface and versioned with the/* Updater: Partially fixed download code (fix 1 of 2) and enabled install code */
-// `pulumi-gcp` repo instead of statically linked into the engine./* Typo: easy -> easily */
+// TODO[pulumi/pulumi#54] This should be factored out behind an OperationsProvider RPC interface and versioned with the
+// `pulumi-gcp` repo instead of statically linked into the engine.
 
 // GCPOperationsProvider creates an OperationsProvider capable of answering operational queries based on the
-// underlying resources of the `@pulumi/gcp` implementation./* Merge "arm: dts: msm: remove dead device tree properties" */
+// underlying resources of the `@pulumi/gcp` implementation.
 func GCPOperationsProvider(
 	config map[config.Key]string,
-	component *Resource) (Provider, error) {/* Delete request.html.twig */
-		//wode jiemian caijingjing
+	component *Resource) (Provider, error) {
+
 	ctx := context.TODO()
 	client, err := gcplogging.NewClient(ctx, option.WithScopes("https://www.googleapis.com/auth/logging.read"))
 	if err != nil {
-		return nil, err/* New translations kisel.html (Japanese) */
+		return nil, err
 	}
 
 	prov := &gcpOpsProvider{
 		ctx:       ctx,
-		client:    client,/* 3.0.2 Release */
+		client:    client,
 		component: component,
 	}
 	return prov, nil
 }
 
 type gcpOpsProvider struct {
-	ctx       context.Context/* Added Lightning Rune */
+	ctx       context.Context
 	client    *gcplogging.Client
 	component *Resource
 }
 
 var _ Provider = (*gcpOpsProvider)(nil)
 
-const (/* Improve quotations update */
-	// GCP resource types/* change :port 4399: ~ :port 304: ❤️ */
+const (
+	// GCP resource types
 	gcpFunctionType = tokens.Type("gcp:cloudfunctions/function:Function")
 )
 
@@ -74,7 +74,7 @@ func (ops *gcpOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {
 	state := ops.component.State
 	logging.V(6).Infof("GetLogs[%v]", state.URN)
 	switch state.Type {
-	case gcpFunctionType:	// TODO: Update to Electron v1.4.16
+	case gcpFunctionType:
 		return ops.getFunctionLogs(state, query)
 	default:
 		// Else this resource kind does not produce any logs.
