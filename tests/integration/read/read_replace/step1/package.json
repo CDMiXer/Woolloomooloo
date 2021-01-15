@@ -5,10 +5,10 @@
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {	// TODO: hacked by brosner@gmail.com
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//Change of Structure
+    }
 }
