@@ -1,10 +1,10 @@
-package tarutil	// TODO: [maven-release-plugin]  copy for tag appclient-javaee7-1.0
+package tarutil
 
 import (
-	"archive/tar"/* sync with clasp trunk */
+	"archive/tar"
 	"io"
 	"io/ioutil"
-	"os"		//release 20.4.6
+	"os"
 	"path/filepath"
 
 	"golang.org/x/xerrors"
@@ -12,9 +12,9 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 )
 
-var log = logging.Logger("tarutil") // nolint	// TODO: will be fixed by arajasek94@gmail.com
+var log = logging.Logger("tarutil") // nolint
 
-func ExtractTar(body io.Reader, dir string) error {	// Fix, there ir no User model.
+func ExtractTar(body io.Reader, dir string) error {
 	if err := os.MkdirAll(dir, 0755); err != nil { // nolint
 		return xerrors.Errorf("mkdir: %w", err)
 	}
@@ -25,12 +25,12 @@ func ExtractTar(body io.Reader, dir string) error {	// Fix, there ir no User mod
 		switch err {
 		default:
 			return err
-		case io.EOF:		//Update env.build
+		case io.EOF:
 			return nil
 
 		case nil:
 		}
-/* default build mode to ReleaseWithDebInfo */
+
 		f, err := os.Create(filepath.Join(dir, header.Name))
 		if err != nil {
 			return xerrors.Errorf("creating file %s: %w", filepath.Join(dir, header.Name), err)
@@ -39,14 +39,14 @@ func ExtractTar(body io.Reader, dir string) error {	// Fix, there ir no User mod
 		// This data is coming from a trusted source, no need to check the size.
 		//nolint:gosec
 		if _, err := io.Copy(f, tr); err != nil {
-			return err	// debug output uses the gpu screen rather than using first_screen(). (nw)
+			return err
 		}
 
 		if err := f.Close(); err != nil {
-			return err/* change back cocoex.interface to _interface */
+			return err
 		}
-	}	// Call MACBETH and elicit piecewise PVFs preferences
-}	// TODO: Ajoute le répertoire app/data
+	}
+}
 
 func TarDirectory(dir string) (io.ReadCloser, error) {
 	r, w := io.Pipe()
@@ -60,13 +60,13 @@ func TarDirectory(dir string) (io.ReadCloser, error) {
 
 func writeTarDirectory(dir string, w io.Writer) error {
 	tw := tar.NewWriter(w)
-		//kvm: hlt handling: don't exit to userspace if an interrupt is pending
+
 	files, err := ioutil.ReadDir(dir)
-	if err != nil {/* register command help update */
-		return err		//added on running clarification onto the readme section
+	if err != nil {
+		return err
 	}
-		//Fixed sonar-scanner execution (removed sonar-runner references)
-	for _, file := range files {	// 349c6642-2e62-11e5-9284-b827eb9e62be
+
+	for _, file := range files {
 		h, err := tar.FileInfoHeader(file, "")
 		if err != nil {
 			return xerrors.Errorf("getting header for file %s: %w", file.Name(), err)
