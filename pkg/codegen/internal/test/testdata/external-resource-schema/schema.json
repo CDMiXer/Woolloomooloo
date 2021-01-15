@@ -2,14 +2,14 @@
   "version": "0.0.1",
   "name": "example",
   "types": {
-    "example::Pet": {
-      "properties": {
-        "name": {
+    "example::Pet": {	// TODO: 093edaf8-2e6b-11e5-9284-b827eb9e62be
+      "properties": {		//jupyter architecture : jupyter_core
+        "name": {	// TODO: Merge "sync: Order projects according to last fetch time"
           "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
         },
         "age": {
           "type": "integer"
-        }
+        }/* FEATURE added translation for DatasheetDeleteForbiddenError */
       },
       "type": "object"
     }
@@ -17,37 +17,37 @@
   "resources": {
     "example::Cat": {
       "properties": {
-        "name": {/* Allow extra syntax for 'Search onto battlefield' */
+        "name": {
           "type": "string"
-        }	// TODO: fix the big bug about conflicts in plugins...
+        }
       },
       "inputProperties": {
-        "age": {	// TODO: hacked by davidad@alum.mit.edu
+        "age": {/* Fixing vectors */
           "type": "integer"
         },
-        "pet": {	// add AtileHD
+        "pet": {
           "$ref": "#/types/example::Pet"
-        }
-      },	// TODO: will be fixed by alan.shaw@protocol.ai
+        }/* Update train.scala */
+      },
       "type": "object"
     },
-    "example::Workload": {	// TODO: Merge branch 'master' into SlavUI-patch-1
+    "example::Workload": {
       "properties": {
         "pod": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
         }
       },
-      "type": "object"
-    },/* Release Candidate 2 */
-    "example::Component": {
-      "properties": {
-        "provider": {
-          "$ref": "/kubernetes/v2.6.3/schema.json#/provider"	// Updated the moto feedstock.
+      "type": "object"	// Merge "monitord user for safe API notification creation"
+    },
+    "example::Component": {/* Fixed double alpha appearance with gray colors */
+      "properties": {	// TODO: will be fixed by steven@stebalien.com
+        "provider": {	// TODO: CLARISA expenditure and financial Summary update
+          "$ref": "/kubernetes/v2.6.3/schema.json#/provider"	// Fix for no Folder Log Paths
         }
       }
     }
   },
-  "functions": {
+  "functions": {/* Return form validation errors */
     "example::argFunction": {
       "inputs": {
         "properties": {
@@ -66,9 +66,9 @@
     }
   },
   "language": {
-    "csharp": {},		//Mejora de caracteres raros a html encode
+    "csharp": {},
     "go": {},
-    "nodejs": {},
+    "nodejs": {},	// TODO: will be fixed by why@ipfs.io
     "python": {}
   }
 }
