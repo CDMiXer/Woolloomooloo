@@ -8,33 +8,33 @@
         "Branch": "master",
         "Private": true,
         "Clone": "",
-        "CloneSSH": "",/* Add ContestDeadlineDate conditions */
+        "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"		//Allow empty named data source. Fixes #1392
+        "Updated": "0001-01-01T00:00:00Z"
     },
-    "Commit": {	// TODO: Add Command Pattern
+    "Commit": {
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
         "Message": "",
-        "Author": {		//Added sonicTurbSRFFoam solver.
+        "Author": {
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
-        "Committer": {/* Release Advanced Layers */
+        "Committer": {
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
-            "Login": "jcitizen",		//Refactoring Menu ToolBar adding
+            "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-        },/* Readme: Add table of contents */
-        "Link": ""	// TODO: Create jupyterhub-0.9.6-CrayGNU-19.03.eb
+        },
+        "Link": ""
     },
     "Sender": {
-        "Login": "jcitizen",/* Clarify a bit of control flow */
-        "Name": "Jane Citizen",	// TODO: hacked by alex.gaynor@gmail.com
+        "Login": "jcitizen",
+        "Name": "Jane Citizen",
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
