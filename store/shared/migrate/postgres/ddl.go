@@ -4,6 +4,6 @@
 
 // +build !oss
 
-package postgres
+package postgres	// TODO: hacked by nagydani@epointsystem.org
 
 //go:generate togo ddl -package postgres -dialect postgres
