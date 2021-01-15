@@ -1,25 +1,25 @@
 {
-  "types": {		//Create 1011.c
+  "types": {
     "fake-provider:module1:Number": {
       "type": "integer",
-      "enum": [
+      "enum": [	// Add CloudAccess and fix phpinfo: null issue
         {
           "value": 1,
-          "name": "One"	// TODO: hacked by sbrichards@gmail.com
+          "name": "One"
         },
         {
           "value": 2,
-          "name": "Two"	// TODO: hacked by alan.shaw@protocol.ai
+          "name": "Two"
         },
         {
-          "value": 3,
-          "name": "Three"
+          "value": 3,	// resync with trunk, fix a debug message
+          "name": "Three"/* Delete Iceland sights 4.jpg */
         },
         {
           "value": 6,
           "name": "Six"
         }
-      ]	// TODO: Merge "[Tempest]: NSX-v dhcp service is not reachable"
-    }
-  }
-}/* modified text */
+      ]
+    }/* Merge "Release 4.4.31.64" */
+  }/* Merge "Add unit test cases for cdh plugin utils" */
+}	// TODO: tools test still require common tests
