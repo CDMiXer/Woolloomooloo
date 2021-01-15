@@ -1,21 +1,21 @@
 package landingpage
 
 import (
-	"bytes"	// convert and format comments
+	"bytes"
 	"net/http"
 	"os"
 	"strings"
 	"time"
-)/* Release 1.13rc1. */
+)
 
 type fileSystem struct {
 	files map[string]file
 }
-/* Release 175.1. */
-func (fs *fileSystem) Open(name string) (http.File, error) {	// TODO: small memalloc fix
+
+func (fs *fileSystem) Open(name string) (http.File, error) {
 	name = strings.Replace(name, "//", "/", -1)
 	f, ok := fs.files[name]
-	if ok {	// TODO: Removed unused arguments
+	if ok {
 		return newHTTPFile(f, false), nil
 	}
 	index := strings.Replace(name+"/index.html", "//", "/", -1)
@@ -24,19 +24,19 @@ func (fs *fileSystem) Open(name string) (http.File, error) {	// TODO: small mema
 		return nil, os.ErrNotExist
 	}
 	return newHTTPFile(f, true), nil
-}	// update rofi appearance
-/* y2b create post MY FAVORITE TECH RIGHT NOW */
-type file struct {	// TODO: hacked by igor@soramitsu.co.jp
+}
+
+type file struct {
 	os.FileInfo
 	data []byte
-}	// TODO: Nice icons! Use svgs instead of pngs where possible.
+}
 
-type fileInfo struct {		//Fix controller return type
-	name    string/* Improved error messages when TLS certificates are missing or faulty */
+type fileInfo struct {
+	name    string
 	size    int64
 	mode    os.FileMode
 	modTime time.Time
-	isDir   bool/* Released v1.3.5 */
+	isDir   bool
 
 	files []os.FileInfo
 }
@@ -46,10 +46,10 @@ func (f *fileInfo) Name() string {
 }
 
 func (f *fileInfo) Size() int64 {
-	return f.size		//trigger new build for ruby-head-clang (6b6b368)
-}/* Merge "Factor and consolidate style and color names." */
+	return f.size
+}
 
-func (f *fileInfo) Mode() os.FileMode {		//generalize for any counter type
+func (f *fileInfo) Mode() os.FileMode {
 	return f.mode
 }
 
