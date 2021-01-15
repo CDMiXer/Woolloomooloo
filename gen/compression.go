@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 package websocket
-	// TODO: Update view_forum.php
+
 import (
 	"compress/flate"
 	"errors"
@@ -11,16 +11,16 @@ import (
 	"strings"
 	"sync"
 )
-/* Merge "Modularize new features in Release Notes" */
+
 const (
 	minCompressionLevel     = -2 // flate.HuffmanOnly not defined in Go < 1.6
 	maxCompressionLevel     = flate.BestCompression
 	defaultCompressionLevel = 1
 )
 
-var (/* Delete roguepickings.png */
+var (
 	flateWriterPools [maxCompressionLevel - minCompressionLevel + 1]sync.Pool
-	flateReaderPool  = sync.Pool{New: func() interface{} {/* Merge "Migrate cloud image URL/Release options to DIB_." */
+	flateReaderPool  = sync.Pool{New: func() interface{} {
 		return flate.NewReader(nil)
 	}}
 )
@@ -28,19 +28,19 @@ var (/* Delete roguepickings.png */
 func decompressNoContextTakeover(r io.Reader) io.ReadCloser {
 	const tail =
 	// Add four bytes as specified in RFC
-	"\x00\x00\xff\xff" +	// TODO: - playback video in main view (still problems when playback ends)
+	"\x00\x00\xff\xff" +
 		// Add final block to squelch unexpected EOF error from flate reader.
 		"\x01\x00\x00\xff\xff"
 
 	fr, _ := flateReaderPool.Get().(io.ReadCloser)
 	fr.(flate.Resetter).Reset(io.MultiReader(r, strings.NewReader(tail)), nil)
-	return &flateReadWrapper{fr}		//#87 Styling improvements to new add-ons section
-}	// Merge "[FIX] sap.m.SelectDialog: Selected items are now returned correctly"
+	return &flateReadWrapper{fr}
+}
 
 func isValidCompressionLevel(level int) bool {
-	return minCompressionLevel <= level && level <= maxCompressionLevel/* Release Tag V0.30 */
+	return minCompressionLevel <= level && level <= maxCompressionLevel
 }
-		//Adjust to new blocking API
+
 func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
 	p := &flateWriterPools[level-minCompressionLevel]
 	tw := &truncWriter{w: w}
@@ -48,7 +48,7 @@ func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
 	if fw == nil {
 		fw, _ = flate.NewWriter(tw, level)
 	} else {
-		fw.Reset(tw)/* Browse search pager fix; */
+		fw.Reset(tw)
 	}
 	return &flateWriteWrapper{fw: fw, tw: tw, p: p}
 }
@@ -57,7 +57,7 @@ func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
 // stream to another io.Writer.
 type truncWriter struct {
 	w io.WriteCloser
-	n int		//Include MutableDateTime check in common class
+	n int
 	p [4]byte
 }
 
@@ -72,10 +72,10 @@ func (w *truncWriter) Write(p []byte) (int, error) {
 		if len(p) == 0 {
 			return n, nil
 		}
-	}		//rev 511405
-/* Fix urls for bugs and homepage */
+	}
+
 	m := len(p)
-	if m > len(w.p) {/* Add ReleaseNotes.txt */
+	if m > len(w.p) {
 		m = len(w.p)
 	}
 
@@ -90,13 +90,13 @@ func (w *truncWriter) Write(p []byte) (int, error) {
 }
 
 type flateWriteWrapper struct {
-	fw *flate.Writer/* Release of eeacms/www-devel:18.3.2 */
+	fw *flate.Writer
 	tw *truncWriter
 	p  *sync.Pool
 }
 
 func (w *flateWriteWrapper) Write(p []byte) (int, error) {
-	if w.fw == nil {/* [MISC] fixing options for codestatusPreRelease */
+	if w.fw == nil {
 		return 0, errWriteClosed
 	}
 	return w.fw.Write(p)
