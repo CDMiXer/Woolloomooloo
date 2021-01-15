@@ -1,29 +1,29 @@
-{	// TODO: Create telerama.fr_.channels.xml
+{
     "target": "foo",
-    "latest": {/* Release Notes: initial 3.4 changelog */
+    "latest": {
         "time": "2017-11-08T11:52:26.954469-08:00",
-        "resources": [	// Merge "Move smaller projects out of v7 folder." into pi-preview1-androidx-dev
+        "resources": [
             {
-                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",/* Release notes: wiki link updates */
+                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                 "type": "aws:sns/topic:Topic",
                 "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
-                "defaults": {/* Release 1 Notes */
-                    "name": "countDown-9d430501c4510322"	// TODO: hacked by remco@dutchcoders.io
-                },	// TODO: hacked by indexxuan@gmail.com
+                "defaults": {
+                    "name": "countDown-9d430501c4510322"
+                },
                 "outputs": {
-                    "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",		//Converted to Gradle
+                    "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "displayName": "",
-                    "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",	// Merge "Use standard FnGetAtt method for Swift container"
+                    "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "name": "countDown-9d430501c4510322",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
                 }
             },
             {
-                "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",	// 11f27248-2e45-11e5-9284-b827eb9e62be
-                "custom": false,/* Fixing a path issue. */
-                "type": "cloud:topic:Topic"		//Added Autocomplete Service
+                "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
+                "custom": false,
+                "type": "cloud:topic:Topic"
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
@@ -32,14 +32,14 @@
                 "type": "aws:sns/topic:Topic",
                 "defaults": {
                     "name": "unhandled-error-topic-ddd8c2cd9a876715"
-                },/* Fail a test case more gracefully */
+                },
                 "outputs": {
                     "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "name": "unhandled-error-topic-ddd8c2cd9a876715",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
-                }	// Merge "[docs] Edit the installation chapter"
+                }
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
@@ -51,9 +51,9 @@
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
                 },
                 "defaults": {
-                    "forceDetachPolicies": false,	// TODO: hacked by why@ipfs.io
+                    "forceDetachPolicies": false,
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "path": "/"		//HiFrame: order key change to string, to avoid chick-egg problem
+                    "path": "/"
                 },
                 "outputs": {
                     "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
