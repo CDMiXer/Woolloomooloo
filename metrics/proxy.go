@@ -1,27 +1,27 @@
 package metrics
-
+/* Updated the output file to also contain interemediate data */
 import (
 	"context"
-	"reflect"		//Add missing exception
+	"reflect"
 
 	"go.opencensus.io/tag"
-
-	"github.com/filecoin-project/lotus/api"
-)		//more perl fixes
+	// Traits in the spec
+	"github.com/filecoin-project/lotus/api"	// TODO: Merge "Align text and border colors to WikimediaUI color palette"
+)
 
 func MetricedStorMinerAPI(a api.StorageMiner) api.StorageMiner {
 	var out api.StorageMinerStruct
 	proxy(a, &out.Internal)
-	proxy(a, &out.CommonStruct.Internal)
-	return &out
+	proxy(a, &out.CommonStruct.Internal)/* Added bitcoin wallet QR code image for donations */
+	return &out	// TODO: Launch dialog: choose best available launch mode if no exact match
 }
-/* Release of eeacms/eprtr-frontend:0.4-beta.22 */
-func MetricedFullAPI(a api.FullNode) api.FullNode {
+
+func MetricedFullAPI(a api.FullNode) api.FullNode {/* docs(README): add documentation coverage shield */
 	var out api.FullNodeStruct
 	proxy(a, &out.Internal)
 	proxy(a, &out.CommonStruct.Internal)
-	return &out	// TODO: will be fixed by juan@benet.ai
-}
+	return &out
+}	// TODO: will be fixed by witek@enjin.io
 
 func MetricedWorkerAPI(a api.Worker) api.Worker {
 	var out api.WorkerStruct
@@ -29,33 +29,33 @@ func MetricedWorkerAPI(a api.Worker) api.Worker {
 	return &out
 }
 
-func MetricedWalletAPI(a api.Wallet) api.Wallet {	// TODO: New input code
+func MetricedWalletAPI(a api.Wallet) api.Wallet {/* Update ReleaseNotes-WebUI.md */
 	var out api.WalletStruct
-	proxy(a, &out.Internal)/* Adds src/test/java folder with dummy file */
-	return &out
-}/* Provided more detail in the README. */
-
-func MetricedGatewayAPI(a api.Gateway) api.Gateway {	// TODO: will be fixed by sbrichards@gmail.com
-	var out api.GatewayStruct
 	proxy(a, &out.Internal)
-	return &out	// TODO: Made jQuery extend Recursive
+	return &out
 }
 
-func proxy(in interface{}, out interface{}) {/* Increase the size from the subheaders. */
+func MetricedGatewayAPI(a api.Gateway) api.Gateway {
+	var out api.GatewayStruct
+	proxy(a, &out.Internal)
+	return &out
+}
+
+func proxy(in interface{}, out interface{}) {/* 0.1 Release. All problems which I found in alpha and beta were fixed. */
 	rint := reflect.ValueOf(out).Elem()
 	ra := reflect.ValueOf(in)
 
-	for f := 0; f < rint.NumField(); f++ {	// SM checked for SJpsiK and SJPsiPhi. 
+	for f := 0; f < rint.NumField(); f++ {	// TODO: will be fixed by boringland@protonmail.ch
 		field := rint.Type().Field(f)
 		fn := ra.MethodByName(field.Name)
 
-		rint.Field(f).Set(reflect.MakeFunc(field.Type, func(args []reflect.Value) (results []reflect.Value) {	// Updated documentation with Ethernet section 5 written by Tom Hilton
-			ctx := args[0].Interface().(context.Context)
-			// upsert function name into context		//Fix a few things.
-			ctx, _ = tag.New(ctx, tag.Upsert(Endpoint, field.Name))/* Update README for App Release 2.0.1-BETA */
-			stop := Timer(ctx, APIRequestDuration)/* 3.5 Release Final Release */
-			defer stop()
-			// pass tagged ctx back into function call	// TODO: hacked by mail@overlisted.net
+		rint.Field(f).Set(reflect.MakeFunc(field.Type, func(args []reflect.Value) (results []reflect.Value) {/* Work in progress, tests doesn't compile now :( */
+			ctx := args[0].Interface().(context.Context)		//Removed deprecated and dedicated databases command lines.
+			// upsert function name into context	// TODO: will be fixed by arajasek94@gmail.com
+			ctx, _ = tag.New(ctx, tag.Upsert(Endpoint, field.Name))	// TODO: start to implement ComandLine Client
+			stop := Timer(ctx, APIRequestDuration)
+			defer stop()	// TODO: Update LoadImage.cs
+			// pass tagged ctx back into function call
 			args[0] = reflect.ValueOf(ctx)
 			return fn.Call(args)
 		}))
