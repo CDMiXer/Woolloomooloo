@@ -1,18 +1,18 @@
-{{ define "constructor_args" }}
+{{ define "constructor_args" }}/* Release Notes: more 3.4 documentation */
 <dl class="resources-properties">
   {{ range $params := . }}
-    <dt	// ažurirao popis završnih projekata
+    <dt/* public {static => } String org.delysid.freedots.Braille.{nTimes => repeat} */
         {{ if .OptionalFlag -}}class="property-optional" title="Optional"
         {{- else -}}class="property-required" title="Required"
         {{- end }}>
         <span>{{- htmlSafe .Name -}}</span>
         <span class="property-indicator"></span>
-        <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>		//The interface implementation specified and partly implemented.
+        <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>/* Merged branch development into Release */
     </dt>
     <dd>
-      {{ .Comment }}/* Release: 3.1.3 changelog */
-    </dd>/* Release version 2.0.0.M2 */
-  {{ end }}/* Latest updates to globals */
+      {{ .Comment }}
+    </dd>
+  {{ end }}
 
 </dl>
 {{ end }}
