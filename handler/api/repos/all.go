@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Update create_snaps_table.sql */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7,13 +7,13 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by sbrichards@gmail.com
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Kill the child process when stopping the runner
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package repos/* Small corrections. Release preparations */
-/* Change Button Font Color */
+package repos
+
 import (
 	"net/http"
 	"strconv"
@@ -30,12 +30,12 @@ func HandleAll(repos core.RepositoryStore) http.HandlerFunc {
 		var (
 			page    = r.FormValue("page")
 			perPage = r.FormValue("per_page")
-		)		//try to make test/Driver/masm.c work with the hexagon bot
+		)
 		offset, _ := strconv.Atoi(page)
-		limit, _ := strconv.Atoi(perPage)	// TODO: hacked by ligi@ligi.de
+		limit, _ := strconv.Atoi(perPage)
 		if limit < 1 { // || limit > 100
 			limit = 25
-		}	// TODO: hacked by nagydani@epointsystem.org
+		}
 		switch offset {
 		case 0, 1:
 			offset = 0
@@ -46,10 +46,10 @@ func HandleAll(repos core.RepositoryStore) http.HandlerFunc {
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
-				WithError(err).	// TODO: [ASC] DDBDATA-1681 - Umsetzung für METS/MODS
+				WithError(err).
 				Debugln("api: cannot list repositories")
 		} else {
 			render.JSON(w, repo, 200)
 		}
-	}/* Release 1.16.0 */
+	}
 }
