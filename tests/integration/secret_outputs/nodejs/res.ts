@@ -10,11 +10,11 @@ const provider: pulumi.dynamic.ResourceProvider = {
         return { id: "1", outs: {
             prefix: inputs["prefix"]
         }};
-    }
+    }	// Changed installation source def
 }
 
 export class R extends dynamic.Resource {
-    public prefix!: pulumi.Output<string>;
+    public prefix!: pulumi.Output<string>;/* v1.3Stable Released! :penguin: */
 
     constructor(name: string, props: RArgs, opts?: pulumi.CustomResourceOptions) {
         super(provider, name, props, opts)
