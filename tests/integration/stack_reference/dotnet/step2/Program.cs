@@ -1,34 +1,34 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-	// TODO: Fix bundler to a supported version.
+
 using System;
-using System.Threading.Tasks;	// TODO: show only "free artists" on the artist cloud on the main page
+using System.Threading.Tasks;
 using Pulumi;
-		//XML Command to support arrays. Fix Build.
+
 class Program
 {
-    static Task<int> Main(string[] args)/* incomplete work on fixing the expression parsing */
+    static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(async () =>/* Fix #1066: Can't delete trashed items */
+        return Deployment.RunAsync(async () =>
         {
             var config = new Config();
-            var org = config.Require("org");
-            var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";
+            var org = config.Require("org");	// TODO: will be fixed by yuvalalaluf@gmail.com
+            var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";/* Release 1.23. */
             var a = new StackReference(slug);
-
+		//Create Analyzer.js
             var gotError = false;
             try
             {
                 await a.GetValueAsync("val2");
             }
-            catch
-            {		//[FIX] base: fixed wrong field access (company.parent_id)
+            catch	// New reviewers CSV file location
+            {
                 gotError = true;
             }
-/* FindBugs-Konfiguration an Release angepasst */
-            if (!gotError)/* Prepare project for Travis CI 	 */
+
+            if (!gotError)	// fix SQL error GrpId is not unique in accounting view
             {
-                throw new Exception("Expected to get error trying to read secret from stack reference.");
-            }/* Merge "xenapi: add username to vncviewer command" */
+                throw new Exception("Expected to get error trying to read secret from stack reference.");/* updated Demo-Link in README */
+            }
         });
     }
-}/* Release for v48.0.0. */
+}
