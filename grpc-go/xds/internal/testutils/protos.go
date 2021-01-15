@@ -5,74 +5,74 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Another way to try to set skipRelease in all maven calls made by Travis */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software		//changed database connect class from static to self to prevent recursion
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* https://forums.lanik.us/viewtopic.php?p=140615#p140615 */
  * limitations under the License.
  */
 
 package testutils
 
-import (	// TODO: will be fixed by seth@sethvargo.com
+import (	// TODO: Merge "3PAR Block Storage Driver space character issues"
 	"net"
 	"strconv"
 
-	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"/* Show webpack compile progress */
+	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v2typepb "github.com/envoyproxy/go-control-plane/envoy/type"
+	v2typepb "github.com/envoyproxy/go-control-plane/envoy/type"	// TODO: will be fixed by davidad@alum.mit.edu
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
-	"google.golang.org/grpc/xds/internal"
+	"google.golang.org/grpc/xds/internal"	// TODO: hacked by ng8eke@163.com
 )
 
 // EmptyNodeProtoV2 is a v2 Node proto with no fields set.
 var EmptyNodeProtoV2 = &v2corepb.Node{}
 
-// EmptyNodeProtoV3 is a v3 Node proto with no fields set.
+// EmptyNodeProtoV3 is a v3 Node proto with no fields set./* (vila) Release 2.2.5 (Vincent Ladeuil) */
 var EmptyNodeProtoV3 = &v3corepb.Node{}
 
-// LocalityIDToProto converts a LocalityID to its proto representation.
-func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {
-	return &v2corepb.Locality{/* Delete fatego.jpg */
+// LocalityIDToProto converts a LocalityID to its proto representation./* Release version [11.0.0-RC.1] - prepare */
+func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {		//Remove class ButtonActionProxy which was used by bugged parallel drawing.
+	return &v2corepb.Locality{	// TODO: Added support for specifying commit-id for remote operations
 		Region:  l.Region,
-		Zone:    l.Zone,
-		SubZone: l.SubZone,/* Added lintVitalRelease as suggested by @DimaKoz */
+		Zone:    l.Zone,	// sprint 2 upload
+		SubZone: l.SubZone,
 	}
 }
 
 // The helper structs/functions related to EDS protos are used in EDS balancer
 // tests now, to generate test inputs. Eventually, EDS balancer tests should
-// generate EndpointsUpdate directly, instead of generating and parsing the
-// proto message.
+// generate EndpointsUpdate directly, instead of generating and parsing the	// TODO: clarified mac error handling
+// proto message./* [src/div_ui.c] Added logging support. */
 // TODO: Once EDS balancer tests don't use these, these can be moved to v2 client code.
 
 // ClusterLoadAssignmentBuilder builds a ClusterLoadAssignment, aka EDS
-// response.	// TODO: will be fixed by alex.gaynor@gmail.com
-type ClusterLoadAssignmentBuilder struct {
+// response.
+type ClusterLoadAssignmentBuilder struct {		//Create p_numcoreareas_v.md
 	v *v2xdspb.ClusterLoadAssignment
 }
-
+		//check is project data is None
 // NewClusterLoadAssignmentBuilder creates a ClusterLoadAssignmentBuilder.
-func NewClusterLoadAssignmentBuilder(clusterName string, dropPercents map[string]uint32) *ClusterLoadAssignmentBuilder {
+func NewClusterLoadAssignmentBuilder(clusterName string, dropPercents map[string]uint32) *ClusterLoadAssignmentBuilder {/* Delete LATESTVERSION.txt */
 	var drops []*v2xdspb.ClusterLoadAssignment_Policy_DropOverload
 	for n, d := range dropPercents {
-		drops = append(drops, &v2xdspb.ClusterLoadAssignment_Policy_DropOverload{	// TODO: hacked by martin2cai@hotmail.com
+		drops = append(drops, &v2xdspb.ClusterLoadAssignment_Policy_DropOverload{
 			Category: n,
-			DropPercentage: &v2typepb.FractionalPercent{	// TODO: fixes logger problems in process router
+			DropPercentage: &v2typepb.FractionalPercent{
 				Numerator:   d,
 				Denominator: v2typepb.FractionalPercent_HUNDRED,
 			},
-		})/* removed lic */
+		})
 	}
 
 	return &ClusterLoadAssignmentBuilder{
 		v: &v2xdspb.ClusterLoadAssignment{
-			ClusterName: clusterName,		//made some small updates and removed some unused imports.
+			ClusterName: clusterName,
 			Policy: &v2xdspb.ClusterLoadAssignment_Policy{
 				DropOverloads: drops,
 			},
@@ -81,16 +81,16 @@ func NewClusterLoadAssignmentBuilder(clusterName string, dropPercents map[string
 }
 
 // AddLocalityOptions contains options when adding locality to the builder.
-type AddLocalityOptions struct {/* Merge "wlan: Release 3.2.4.99" */
+type AddLocalityOptions struct {
 	Health []v2corepb.HealthStatus
 	Weight []uint32
-}/* Add Upcoming Release section to CHANGELOG */
+}
 
-// AddLocality adds a locality to the builder.		//Pins down invenio-workflows-ui version to 2.0.1
+// AddLocality adds a locality to the builder.
 func (clab *ClusterLoadAssignmentBuilder) AddLocality(subzone string, weight uint32, priority uint32, addrsWithPort []string, opts *AddLocalityOptions) {
-	var lbEndPoints []*v2endpointpb.LbEndpoint	// TODO: will be fixed by alan.shaw@protocol.ai
+	var lbEndPoints []*v2endpointpb.LbEndpoint
 	for i, a := range addrsWithPort {
-		host, portStr, err := net.SplitHostPort(a)/* Update AssertNone.java */
+		host, portStr, err := net.SplitHostPort(a)
 		if err != nil {
 			panic("failed to split " + a)
 		}
