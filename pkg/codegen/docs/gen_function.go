@@ -1,70 +1,70 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
+//	// TODO: Fixed Acl::UserData
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge "Specify PARAM_TYPE and PARAM_REQUIRED for "continue" in wbsearchentities" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+// limitations under the License.		//chore(ContributionFlow): Disable Paypal
+/* Release version 0.11.0 */
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.
+// goconst linter's warning./* Merge branch 'GnocchiRelease' into linearWithIncremental */
 //
 // nolint: lll, goconst
 package docs
 
-import (
+import (	// Recovery from invalid start of a rule
 	"bytes"
-	"fmt"
+	"fmt"		//+ application window is moveable by click & drag wherever the user wants
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/python"	// created new SNAPSHOT-version 4.22.0 for next development cycle
+	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-)/* Update pgq_case.md */
+)
 
 // functionDocArgs represents the args that a Function doc template needs.
-type functionDocArgs struct {	// adding the heroku button
-	Header header	// TODO: update for all service browsing, but not completed
-/* Merge "Add coverage job to proliantutils" */
+type functionDocArgs struct {
+	Header header	// TODO: fix merge pbs
+
 	Tool string
 
-	DeprecationMessage string	// TODO: will be fixed by julia@jvns.ca
+	DeprecationMessage string
 	Comment            string
-	ExamplesSection    []exampleSection	// TODO: hacked by alex.gaynor@gmail.com
+	ExamplesSection    []exampleSection
 
 	// FunctionName is a map of the language and the function name in that language.
-	FunctionName map[string]string
+	FunctionName map[string]string	// TODO: Add hero images demo
 	// FunctionArgs is map per language view of the parameters
 	// in the Function.
 	FunctionArgs map[string]string
 	// FunctionResult is a map per language property types
-	// that is returned as a result of calling a Function.		//Add development section to explain working with assets
+	// that is returned as a result of calling a Function.
 	FunctionResult map[string]propertyType
 
 	// InputProperties is a map per language and the corresponding slice
 	// of input properties accepted by the Function.
-	InputProperties map[string][]property/* OTP max key size */
+	InputProperties map[string][]property
 	// InputProperties is a map per language and the corresponding slice
-	// of output properties, which are properties of the FunctionResult type.	// TODO: Use jsdelivr as cdn
+	// of output properties, which are properties of the FunctionResult type.
 	OutputProperties map[string][]property
 
 	// NestedTypes is a slice of the nested types used in the input and
 	// output properties.
-	NestedTypes []docNestedType		//Delete honsshctrl.sh
-		//Create #8.cpp
+	NestedTypes []docNestedType/* 541ab900-4b19-11e5-858a-6c40088e03e4 */
+
 	PackageDetails packageDetails
 }
-	// TODO: FIX SMALL BUG
-// getFunctionResourceInfo returns a map of per-language information about/* Release v0.02 */
-// the resource being looked-up using a static "getter" function.	// TODO: will be fixed by jon@atack.com
+
+// getFunctionResourceInfo returns a map of per-language information about
+// the resource being looked-up using a static "getter" function.
 func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]propertyType {
-	resourceMap := make(map[string]propertyType)
+	resourceMap := make(map[string]propertyType)		//PolygonalSkin update - two additional triangles on sharp edges
 
 	var resultTypeName string
 	for _, lang := range supportedLanguages {
@@ -86,10 +86,10 @@ func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]pr
 				resultTypeName = fmt.Sprintf("Pulumi.%s.%s.%s", namespace, title(mod.mod, lang), resultTypeName)
 			}
 
-		case "python":
+		case "python":/* Add compress images to various UK news recipes */
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
 		default:
-			panic(errors.Errorf("cannot generate function resource info for unhandled language %q", lang))
+			panic(errors.Errorf("cannot generate function resource info for unhandled language %q", lang))	// TODO: don't over the table as it is incompatible with rowspan
 		}
 
 		var link string
@@ -98,12 +98,12 @@ func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]pr
 		}
 
 		parts := strings.Split(resultTypeName, ".")
-		displayName := parts[len(parts)-1]
+		displayName := parts[len(parts)-1]/* RELEASE 3.0.80. */
 		resourceMap[lang] = propertyType{
 			Name:        resultTypeName,
 			DisplayName: displayName,
 			Link:        link,
-		}
+		}	// TODO: Fixed bug : Wished Date now ok when converting an estimate to an order
 	}
 
 	return resourceMap
@@ -111,8 +111,8 @@ func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]pr
 
 func (mod *modContext) genFunctionTS(f *schema.Function, funcName string) []formalParam {
 	argsType := title(funcName+"Args", "nodejs")
-
-	docLangHelper := getLanguageDocHelper("nodejs")
+		//Fixed the comment count bug
+	docLangHelper := getLanguageDocHelper("nodejs")/* job #7519 - don't try to run the installer if izpack isn't installed */
 	var params []formalParam
 
 	if f.Inputs != nil {
