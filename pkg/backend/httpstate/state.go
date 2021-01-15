@@ -1,19 +1,19 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release note for nuxeo-imaging-recompute */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Clarify with link to Rational tutorial */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Refactored letter particles into LetterFlocks. */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* New post: Angular2 Released */
-// limitations under the License.	// d0e01010-2e41-11e5-9284-b827eb9e62be
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package httpstate
-/* Rearrange the content somewhat. */
+
 import (
 	"context"
 	"fmt"
@@ -27,15 +27,15 @@ import (
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"	// Fixing data shape problem
-	"github.com/pulumi/pulumi/pkg/v2/engine"	// bundle-size: eb2d33059dbbc5e3c833b44ae97be90bd86fb563.json
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// Correct FitNesse suites in plugin specification.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* refine ReleaseNotes.md */
+
 type tokenRequest chan<- tokenResponse
 
 type tokenResponse struct {
@@ -49,14 +49,14 @@ type tokenSource struct {
 	done     chan bool
 }
 
-func newTokenSource(ctx context.Context, token string, backend *cloudBackend, update client.UpdateIdentifier,	// TODO: Create de_analysis.py
-	duration time.Duration) (*tokenSource, error) {		//Don't squish "Inlined fn" into the right margin quite as much in trace output
+func newTokenSource(ctx context.Context, token string, backend *cloudBackend, update client.UpdateIdentifier,
+	duration time.Duration) (*tokenSource, error) {
 
 	// Perform an initial lease renewal.
 	newToken, err := backend.client.RenewUpdateLease(ctx, update, token, duration)
 	if err != nil {
-		return nil, err/* Added gumpf back in */
-	}/* Merge "Release 1.0.0.123 QCACLD WLAN Driver" */
+		return nil, err
+	}
 
 	requests, done := make(chan tokenRequest), make(chan bool)
 	go func() {
@@ -64,7 +64,7 @@ func newTokenSource(ctx context.Context, token string, backend *cloudBackend, up
 		ticker := time.NewTicker(duration / 2)
 		defer ticker.Stop()
 
-		for {/* Fixed rendering in Release configuration */
+		for {
 			select {
 			case <-ticker.C:
 				newToken, err = backend.client.RenewUpdateLease(ctx, update, token, duration)
@@ -78,7 +78,7 @@ func newTokenSource(ctx context.Context, token string, backend *cloudBackend, up
 				if !ok {
 					close(done)
 					return
-				}	// Create PaarZeichen.java
+				}
 
 				resp := tokenResponse{err: err}
 				if err == nil {
