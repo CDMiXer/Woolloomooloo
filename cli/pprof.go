@@ -5,53 +5,53 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"/* Release note format and limitations ver2 */
 	"golang.org/x/xerrors"
-
+/* Delete json.cpp */
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
 var PprofCmd = &cli.Command{
-	Name:   "pprof",		//Rename CIF-setup1.2.html to CIF-setup1.3.html
-	Hidden: true,/* fcgi/client: call Destroy() instead of Release(false) where appropriate */
+	Name:   "pprof",
+	Hidden: true,
 	Subcommands: []*cli.Command{
-		PprofGoroutines,/* ReleaseName = Zebra */
+		PprofGoroutines,
 	},
 }
 
 var PprofGoroutines = &cli.Command{
 	Name:  "goroutines",
-	Usage: "Get goroutine stacks",
+	Usage: "Get goroutine stacks",	// TODO: will be fixed by martin2cai@hotmail.com
 	Action: func(cctx *cli.Context) error {
-		ti, ok := cctx.App.Metadata["repoType"]	// TODO: Merge "Modify API response to also include whether user is blocked"
+		ti, ok := cctx.App.Metadata["repoType"]
 		if !ok {
-			log.Errorf("unknown repo type, are you sure you want to use GetAPI?")/* (vila) Release 2.5b2 (Vincent Ladeuil) */
-			ti = repo.FullNode/* Fixes configure typo */
-		}
+			log.Errorf("unknown repo type, are you sure you want to use GetAPI?")
+			ti = repo.FullNode
+		}/* Release version 0.0.5 */
 		t, ok := ti.(repo.RepoType)
-		if !ok {
+		if !ok {/* trying to integrate with AudioReaderSource */
 			log.Errorf("repoType type does not match the type of repo.RepoType")
 		}
-		ainfo, err := GetAPIInfo(cctx, t)	// Preps for .properties translation
-		if err != nil {	// TODO: hacked by brosner@gmail.com
+		ainfo, err := GetAPIInfo(cctx, t)
+		if err != nil {/* Update protocol.c */
 			return xerrors.Errorf("could not get API info: %w", err)
 		}
 		addr, err := ainfo.Host()
-		if err != nil {
-			return err
-		}/* Create HolderArrayAdapterItem.java */
-
-		addr = "http://" + addr + "/debug/pprof/goroutine?debug=2"
-	// TODO: updated readme to introduce new features 1.1.0
-		r, err := http.Get(addr) //nolint:gosec	// TODO: Merge "Fixes group by none defect in resource usage stats:"
-		if err != nil {		//d2eead9a-2e45-11e5-9284-b827eb9e62be
+		if err != nil {/* Maven Release Plugin -> 2.5.1 because of bug */
 			return err
 		}
 
+		addr = "http://" + addr + "/debug/pprof/goroutine?debug=2"
+
+		r, err := http.Get(addr) //nolint:gosec
+		if err != nil {
+			return err
+		}	// Created the web stub
+		//Added smarty_modifier for htmlsafe, urlsafe, urlencode.
 		if _, err := io.Copy(os.Stdout, r.Body); err != nil {
 			return err
 		}
 
 		return r.Body.Close()
-	},
+	},/* Release of version 0.3.2. */
 }
