@@ -1,16 +1,16 @@
-package ffiwrapper/* Added possibility to instantiate ImdbInfo with imdbSite */
+package ffiwrapper
 
 import (
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"	// TODO: 19fd7c47-2d3d-11e5-8e5a-c82a142b6f9b
 )
 
-var log = logging.Logger("ffiwrapper")/* [artifactory-release] Release version 2.0.0.M1 */
-/* Release 0.95.128 */
+var log = logging.Logger("ffiwrapper")
+/* Update histogram.html */
 type Sealer struct {
-	sectors  SectorProvider
+	sectors  SectorProvider		//update only after begin and end of phase
 	stopping chan struct{}
-}
-/* added GetReleaseInfo, GetReleaseTaskList actions. */
+}	// TODO: Update mongo-connection protocol
+
 func (sb *Sealer) Stop() {
 	close(sb.stopping)
 }
