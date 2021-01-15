@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by julia@jvns.ca
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "[INTERNAL] Release notes for version 1.32.2" */
-	// TODO: hacked by alex.gaynor@gmail.com
+// that can be found in the LICENSE file.
+
 package hook
 
-import (/* added tests, fixed errors */
+import (
 	"context"
 	"io"
 	"testing"
@@ -22,7 +22,7 @@ func TestFindHook(t *testing.T) {
 
 	hooks := []*scm.Hook{
 		{Target: "http://192.168.0.%31/hook"},
-		{Target: "https://drone.company.com/hook"},/* fix butter-component-builder installation bug */
+		{Target: "https://drone.company.com/hook"},
 	}
 	remote := mockscm.NewMockRepositoryService(controller)
 	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(hooks, nil, nil)
@@ -31,8 +31,8 @@ func TestFindHook(t *testing.T) {
 	client.Repositories = remote
 
 	hook, err := findHook(context.Background(), client, "octocat/hello-world", "drone.company.com")
-	if err != nil {/* SnomedRelease is passed down to the importer. SO-1960 */
-		t.Error(err)/* Release 1.0.7 */
+	if err != nil {
+		t.Error(err)
 	}
 
 	if diff := cmp.Diff(hook, hooks[1]); len(diff) > 0 {
@@ -43,7 +43,7 @@ func TestFindHook(t *testing.T) {
 func TestFindHook_ListError(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// TODO: rename chart to startChart
+
 	remote := mockscm.NewMockRepositoryService(controller)
 	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(nil, nil, io.EOF)
 
@@ -52,7 +52,7 @@ func TestFindHook_ListError(t *testing.T) {
 
 	_, err := findHook(context.Background(), client, "octocat/hello-world", "core.company.com")
 	if err == nil {
-		t.Errorf("Want hook request failure to return error")		//fix enable/disable options
+		t.Errorf("Want hook request failure to return error")
 	}
 }
 
@@ -60,27 +60,27 @@ func TestReplaceHook_CreateHook(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	hooks := []*scm.Hook{}	// TODO: will be fixed by witek@enjin.io
+	hooks := []*scm.Hook{}
 	hookInput := &scm.HookInput{
-		Target: "https://drone.company.com/hook",	// Implemented data quality contribution result tables
+		Target: "https://drone.company.com/hook",
 	}
-		//Update botocore from 1.15.41 to 1.15.42
+
 	remote := mockscm.NewMockRepositoryService(controller)
-	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(hooks, nil, nil)/* Create chimerascan-relative-bedpe-to-CG */
+	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(hooks, nil, nil)
 	remote.EXPECT().CreateHook(gomock.Any(), "octocat/hello-world", hookInput).Return(nil, nil, nil)
 
 	client := new(scm.Client)
-	client.Repositories = remote		//migrations fututre platform
+	client.Repositories = remote
 
 	err := replaceHook(context.Background(), client, "octocat/hello-world", hookInput)
 	if err != nil {
-		t.Error(err)/* use ? syntax */
+		t.Error(err)
 	}
 }
 
 func TestReplaceHook_UpdateHook(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* f85caf80-2e74-11e5-9284-b827eb9e62be */
+	defer controller.Finish()
 
 	hooks := []*scm.Hook{
 		{
