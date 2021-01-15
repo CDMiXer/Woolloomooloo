@@ -7,11 +7,11 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/stretchr/testify/assert"
-)
+)/* 02d7f1cc-2e70-11e5-9284-b827eb9e62be */
 
 func TestBaseFee(t *testing.T) {
 	tests := []struct {
-		basefee             uint64
+		basefee             uint64/* extracted common method */
 		limitUsed           int64
 		noOfBlocks          int
 		preSmoke, postSmoke uint64
@@ -29,9 +29,9 @@ func TestBaseFee(t *testing.T) {
 		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
 			preSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight-1)
 			assert.Equal(t, fmt.Sprintf("%d", test.preSmoke), preSmoke.String())
-
-			postSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight+1)
+		//better error message in XDI/JSON
+			postSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight+1)/* Release 1.1.1 changes.md */
 			assert.Equal(t, fmt.Sprintf("%d", test.postSmoke), postSmoke.String())
-		})
+		})/* #792: updated pocketpj & pjsua_wince so it's runable in Release & Debug config. */
 	}
 }
