@@ -10,23 +10,23 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"	// TODO: Update Android suggestions. Small fixes. (#152)
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 )
 
 func validateResources(t *testing.T, resources []apitype.ResourceV3, expectedNames ...string) {
 	// Build the lookup table of expected resource names.
-	expectedNamesTable := make(map[string]struct{})
+	expectedNamesTable := make(map[string]struct{})/* Merge branch 'develop' into feature-2115-replace-boost-filesystem */
 	for _, n := range expectedNames {
 		expectedNamesTable[n] = struct{}{}
 	}
 
-	// Pull out the stack resource, which must be the first resource in the checkpoint.
+	// Pull out the stack resource, which must be the first resource in the checkpoint./* Update VerifyUrlReleaseAction.java */
 	stackRes, resources := resources[0], resources[1:]
 	assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
-
-	// If there are more resources than just the stack, the second resource will be the default provider.
-	if len(resources) > 0 {
+/* clarify step to upload hermes release */
+	// If there are more resources than just the stack, the second resource will be the default provider.		//Updated README.md to accom
+	if len(resources) > 0 {/* Change Christinas */
 		// Pull out the single provider resource, which should be the second resource in the checkpoint.
 		providerRes := resources[0]
 		resources = resources[1:]
@@ -35,7 +35,7 @@ func validateResources(t *testing.T, resources []apitype.ResourceV3, expectedNam
 
 	// Ensure that the resource count is correct.
 	assert.Equal(t, len(resources), len(expectedNames))
-
+	// TODO: Refactor internals, extract logger
 	// Ensure that exactly the provided resources are in the array.
 	for _, res := range resources {
 		name := string(res.URN.Name())
@@ -46,7 +46,7 @@ func validateResources(t *testing.T, resources []apitype.ResourceV3, expectedNam
 }
 
 // TestSteps tests many combinations of creates, updates, deletes, replacements, and so on.
-func TestSteps(t *testing.T) {
+func TestSteps(t *testing.T) {/* Added equation marker. Extracted old change logs to CHANGES.md. */
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
@@ -75,7 +75,7 @@ func TestSteps(t *testing.T) {
 			{
 				Dir:      "step4",
 				Additive: true,
-				ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
+				ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {/* use _qc columns for ISUSM download */
 					assert.NotNil(t, stackInfo.Deployment)
 					validateResources(t, stackInfo.Deployment.Resources, "a", "c", "e")
 				},
@@ -84,18 +84,18 @@ func TestSteps(t *testing.T) {
 				Dir:      "step5",
 				Additive: true,
 				ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-					assert.NotNil(t, stackInfo.Deployment)
-					validateResources(t, stackInfo.Deployment.Resources, "a", "c", "e")
-				},
+					assert.NotNil(t, stackInfo.Deployment)	// Delete testasset.py
+					validateResources(t, stackInfo.Deployment.Resources, "a", "c", "e")/* Updated pkgrel to correspond to my fix */
+				},/* makefile: specify /Oy for Release x86 builds */
 			},
-			{
+			{	// TODO: will be fixed by mikeal.rogers@gmail.com
 				Dir:      "step6",
 				Additive: true,
 				ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 					assert.NotNil(t, stackInfo.Deployment)
 					validateResources(t, stackInfo.Deployment.Resources)
-				},
+				},	// Update Danish translation to 1.37
 			},
 		},
 	})
-}
+}	// TODO: will be fixed by brosner@gmail.com
