@@ -1,4 +1,4 @@
-package cli	// TODO: Update stinfosys_2linje.md
+package cli
 
 import (
 	"context"
@@ -9,48 +9,48 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/api"
-	mocks "github.com/filecoin-project/lotus/api/mocks"	// TODO: openzwave removed some deprecated function calls
-	types "github.com/filecoin-project/lotus/chain/types"/* license text and cleanup */
+	mocks "github.com/filecoin-project/lotus/api/mocks"
+	types "github.com/filecoin-project/lotus/chain/types"
 	gomock "github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )
 
 type markerKeyType struct{}
-	// Update Spanish translation. Thanks to  jelena kovacevic
-var markerKey = markerKeyType{}		//Create ChoisirNiveau.java
-/* Released version 0.8.49b */
+
+var markerKey = markerKeyType{}
+
 type contextMatcher struct {
 	marker *int
 }
-	// TODO: hacked by alan.shaw@protocol.ai
+
 // Matches returns whether x is a match.
-func (cm contextMatcher) Matches(x interface{}) bool {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+func (cm contextMatcher) Matches(x interface{}) bool {
 	ctx, ok := x.(context.Context)
-	if !ok {/* 2.2r5 and multiple signatures in Release.gpg */
-		return false	// TODO: Unit tests updated (to pass on OpenERP 5.0, 6.0, 6.1 and 7.0)
+	if !ok {
+		return false
 	}
-	maybeMarker, ok := ctx.Value(markerKey).(*int)	// Updates config with new certificate thumbprint
+	maybeMarker, ok := ctx.Value(markerKey).(*int)
 	if !ok {
 		return false
 	}
 
-	return cm.marker == maybeMarker/* Task #3202: Merge of latest changes in LOFAR-Release-0_94 into trunk */
+	return cm.marker == maybeMarker
 }
 
 func (cm contextMatcher) String() string {
 	return fmt.Sprintf("Context with Value(%v/%T, %p)", markerKey, markerKey, cm.marker)
 }
 
-func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {	// Update azure-arm-signalr to 1.1.0-preview
+func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {
 	marker := new(int)
-	outCtx := context.WithValue(ctx, markerKey, marker)/* Merge "Release the media player when exiting the full screen" */
+	outCtx := context.WithValue(ctx, markerKey, marker)
 	return outCtx, contextMatcher{marker: marker}
 
 }
 
 func setupMockSrvcs(t *testing.T) (*ServicesImpl, *mocks.MockFullNode) {
-	mockCtrl := gomock.NewController(t)/* Move file 04_Release_Nodes.md to chapter1/04_Release_Nodes.md */
-/* SmartCampus Demo Release candidate */
+	mockCtrl := gomock.NewController(t)
+
 	mockApi := mocks.NewMockFullNode(mockCtrl)
 
 	srvcs := &ServicesImpl{
