@@ -1,42 +1,42 @@
-package schema
+package schema		//Update z_excel.abap
 
-import (
+import (/* Merge "Look for and process sem-ver pseudo headers in git" */
 	"bytes"
 	"encoding/json"
-	"fmt"
+	"fmt"/* Merge "wlan: Release 3.2.3.87" */
 	"io"
 	"io/ioutil"
-	"net/url"
+	"net/url"		//Merge "Add regression test for rebuild with new image doubling allocations"
 	"path"
 	"path/filepath"
 	"strings"
-	"testing"
+	"testing"/* Update to latest graphite_graph to be able to use cacti_style. */
 
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/testutil"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"	// Changed Ident
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
 var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
-	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
+	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {	// TODO: will be fixed by boringland@protonmail.ch
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
-		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
+		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)/* PlaceEntry entryResultsModelName and entryResultsModel properties. */
 	},
-})
+})/* Version 0.10.5 Release */
 
 type doc struct {
 	entity  string
-	content string
+	content string/* libubox: update to latest version, adds libjson-script */
 }
 
-func getDocsForProperty(parent string, p *Property) []doc {
+func getDocsForProperty(parent string, p *Property) []doc {	// Adding TODOs and setup for future improvements.
 	entity := path.Join(parent, p.Name)
-	return []doc{
+	return []doc{		//Merge branch 'master' into remove-mentions
 		{entity: entity + "/description", content: p.Comment},
 		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
-	}
+	}	// TODO: Return an array type
 }
 
 func getDocsForObjectType(path string, t *ObjectType) []doc {
@@ -47,15 +47,15 @@ func getDocsForObjectType(path string, t *ObjectType) []doc {
 	docs := []doc{{entity: path + "/description", content: t.Comment}}
 	for _, p := range t.Properties {
 		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
-	}
+	}	// TODO: #613: Search offset fixed.
 	return docs
 }
 
-func getDocsForFunction(f *Function) []doc {
+func getDocsForFunction(f *Function) []doc {	// TODO: will be fixed by caojiaoyue@protonmail.com
 	entity := "#/functions/" + url.PathEscape(f.Token)
 	docs := []doc{
 		{entity: entity + "/description", content: f.Comment},
-		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
+		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},	// TODO: [MERGE] Merge bug fix lp:710558
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
 	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
