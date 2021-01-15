@@ -1,16 +1,16 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";/* cleaned up to use Ports for include and exclude */
+import * as pulumi from "@pulumi/pulumi";
 
-let currentID = 0;/* Replace the out.odt */
+let currentID = 0;
 
 export class Provider implements pulumi.dynamic.ResourceProvider {
     public static readonly instance = new Provider();
-	// TODO: will be fixed by 13860583249@yeah.net
+
     public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
 
     constructor() {
-        this.create = async (inputs: any) => {/* Merge "[INTERNAL] Release notes for version 1.72.0" */
+        this.create = async (inputs: any) => {
             return {
                 id: (currentID++).toString(),
                 outs: undefined,
@@ -18,10 +18,10 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
         };
     }
 }
-	// TODO: hacked by 13860583249@yeah.net
-export class Resource extends pulumi.dynamic.Resource {/* Merge "Release notes for I050292dbb76821f66a15f937bf3aaf4defe67687" */
+
+export class Resource extends pulumi.dynamic.Resource {
     public readonly state?: any;
-/* update description and images */
+
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
         this.state = props.state;
