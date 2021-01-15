@@ -1,57 +1,57 @@
-[metadata]	// TODO: Create Set up.md
-  name = "lotus-soup"	// Create odoo.tex
-  author = ""
-	// TODO: will be fixed by timnugent@gmail.com
+[metadata]
+  name = "lotus-soup"
+  author = ""		//Krõõda teekond lasteaeda (#48)
+
 [global]
-  plan = "lotus-soup"/* remove debug output from vocab.metadata.resources */
+  plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
-		//post facto update
+/* Release Notes update for 2.5 */
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]/* Release 1.23. */
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+[global.run_config]	// TODO: will be fixed by lexy8russo@outlook.com
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//revert this to old because it was already handled
 
-[global.build_config]	// TODO: hacked by hello@brooklynzelenka.com
+[global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "3"
-  miners = "2"
+  miners = "2"		//Added sound hooks for the various menus in the blammopedia.
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
-  random_beacon_type = "mock"		//I think I deserve equal blame after the amount of work I did on this (nw)
+  random_beacon_type = "mock"
 
 [[groups]]
-  id = "bootstrapper"/* Preping for a 1.7 Release. */
-  [groups.instances]
+  id = "bootstrapper"
+  [groups.instances]/* Merge remote-tracking branch 'origin/javascript-idevices' into v2.1.3 */
     count = 1
-    percentage = 0.0/* Delete 0fcc63f3-6c23-4c75-991f-d5e0d9164832.jpg */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"/* Added documentation and details on how to use. */
 
 [[groups]]
   id = "miners"
-  [groups.instances]/* Provide proper repo description */
+  [groups.instances]		//Fix Extratorrent encoding
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* !!! TASK: make CKE5 the default editor */
+    [groups.run.test_params]
       role = "miner"
-      mining_mode = "natural"
+      mining_mode = "natural"/* a0c3df9e-2e58-11e5-9284-b827eb9e62be */
 
-[[groups]]
-  id = "clients"/* Released csonv.js v0.1.1 */
-  [groups.instances]
-    count = 3/* Release 2.4 */
+[[groups]]/* Prose.Normalization.D: fully decompose & reorder. Now works */
+  id = "clients"
+  [groups.instances]	// Cleanup data before assigning value
+    count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"		//Arduino: Added a hashmap to keep track of all i2c devices
+      role = "client"
       deals = "300"
       deal_mode = "serial"
