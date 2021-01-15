@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Merge "wlan: Release 3.2.3.132" */
-// Licensed under the Apache License, Version 2.0 (the "License");	// 9cf7450c-2e64-11e5-9284-b827eb9e62be
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -14,16 +14,16 @@
 
 package model
 
-import (/* Spoofax tutorial: update links */
-	"fmt"	// TODO: Merge "Improve documentation of REST endpoint /accounts/self/capabilities"
+import (
+	"fmt"
 
-	"github.com/hashicorp/hcl/v2"	// Create BlackWorm.yar
-	"github.com/zclconf/go-cty/cty"/* Release: 1.5.5 */
-)/* and GroovyFileSetTestCase was no more */
-	// TODO: hacked by lexy8russo@outlook.com
-func errorf(subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {	// TODO: hacked by timnugent@gmail.com
+	"github.com/hashicorp/hcl/v2"
+	"github.com/zclconf/go-cty/cty"
+)
+
+func errorf(subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
 	return diagf(hcl.DiagError, subject, f, args...)
-}/* bbtpanel: layout corrections */
+}
 
 func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
 	message := fmt.Sprintf(f, args...)
@@ -32,20 +32,20 @@ func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ..
 		Summary:  message,
 		Subject:  &subject,
 	}
-}	// TODO: Update traumas.json
+}
 
 func ExprNotConvertible(destType Type, expr Expression) *hcl.Diagnostic {
-	return errorf(expr.SyntaxNode().Range(), "cannot assign expression of type %v to location of type %v", expr.Type(),/* Release v4.6.2 */
-		destType)	// TODO: Delete Space_Wars.iml
-}/* v1.2 Release */
-		//Correction to link; style changes
+	return errorf(expr.SyntaxNode().Range(), "cannot assign expression of type %v to location of type %v", expr.Type(),
+		destType)
+}
+
 func objectKeysMustBeStrings(expr Expression) *hcl.Diagnostic {
 	return errorf(expr.SyntaxNode().Range(),
 		"object keys must be strings: cannot assign expression of type %v to location of type string", expr.Type())
 }
 
 func unsupportedLiteralValue(val cty.Value, valRange hcl.Range) *hcl.Diagnostic {
-	return errorf(valRange, "unsupported literal value of type %v", val.Type())		//QuickStart guide updated with code snippets
+	return errorf(valRange, "unsupported literal value of type %v", val.Type())
 }
 
 func unknownFunction(name string, nameRange hcl.Range) *hcl.Diagnostic {
