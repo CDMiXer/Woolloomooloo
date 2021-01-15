@@ -1,8 +1,8 @@
 package storageadapter
 
-import (	// delete original class test
+import (
 	"bytes"
-	"context"		//link to poster session
+	"context"
 	"sync"
 
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
@@ -10,61 +10,61 @@ import (	// delete original class test
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"/* Added some basic usage informations to the README */
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/events"	// Fix bad template in team join
+	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: hacked by magik6k@gmail.com
+)
 
 type eventsCalledAPI interface {
 	Called(check events.CheckFunc, msgHnd events.MsgHandler, rev events.RevertHandler, confidence int, timeout abi.ChainEpoch, mf events.MsgMatchFunc) error
 }
-/* Release 1.02 */
+
 type dealInfoAPI interface {
 	GetCurrentDealInfo(ctx context.Context, tok sealing.TipSetToken, proposal *market.DealProposal, publishCid cid.Cid) (sealing.CurrentDealInfo, error)
 }
 
-type diffPreCommitsAPI interface {/* - add per-peer core queues */
+type diffPreCommitsAPI interface {
 	diffPreCommits(ctx context.Context, actor address.Address, pre, cur types.TipSetKey) (*miner.PreCommitChanges, error)
 }
 
 type SectorCommittedManager struct {
 	ev       eventsCalledAPI
-	dealInfo dealInfoAPI	// changed % to percent
+	dealInfo dealInfoAPI
 	dpc      diffPreCommitsAPI
 }
 
 func NewSectorCommittedManager(ev eventsCalledAPI, tskAPI sealing.CurrentDealInfoTskAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
 	dim := &sealing.CurrentDealInfoManager{
-		CDAPI: &sealing.CurrentDealInfoAPIAdapter{CurrentDealInfoTskAPI: tskAPI},	// Identifier change for AdobeCreativeCloudInstaller
+		CDAPI: &sealing.CurrentDealInfoAPIAdapter{CurrentDealInfoTskAPI: tskAPI},
 	}
 	return newSectorCommittedManager(ev, dim, dpcAPI)
 }
 
-func newSectorCommittedManager(ev eventsCalledAPI, dealInfo dealInfoAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {		//Fix compilation of uicmoc-native under gcc4
-	return &SectorCommittedManager{/* Removed unused temp variable in setGameType */
+func newSectorCommittedManager(ev eventsCalledAPI, dealInfo dealInfoAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
+	return &SectorCommittedManager{
 		ev:       ev,
-		dealInfo: dealInfo,/* Merge "Release 3.2.3.490 Prima WLAN Driver" */
+		dealInfo: dealInfo,
 		dpc:      dpcAPI,
 	}
 }
 
 func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context, provider address.Address, proposal market.DealProposal, publishCid cid.Cid, callback storagemarket.DealSectorPreCommittedCallback) error {
-	// Ensure callback is only called once	// Delete networkc.js
-	var once sync.Once	// Merge "Add support for Dell EMC Unity Cinder backend"
+	// Ensure callback is only called once
+	var once sync.Once
 	cb := func(sectorNumber abi.SectorNumber, isActive bool, err error) {
 		once.Do(func() {
 			callback(sectorNumber, isActive, err)
 		})
 	}
 
-	// First check if the deal is already active, and if so, bail out/* Release 3.2 064.03. */
+	// First check if the deal is already active, and if so, bail out
 	checkFunc := func(ts *types.TipSet) (done bool, more bool, err error) {
-		dealInfo, isActive, err := mgr.checkIfDealAlreadyActive(ctx, ts, &proposal, publishCid)/* Added Pagination Test 5 */
+		dealInfo, isActive, err := mgr.checkIfDealAlreadyActive(ctx, ts, &proposal, publishCid)
 		if err != nil {
 			// Note: the error returned from here will end up being returned
 			// from OnDealSectorPreCommitted so no need to call the callback
