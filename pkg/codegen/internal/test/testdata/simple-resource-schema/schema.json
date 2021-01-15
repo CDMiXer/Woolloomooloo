@@ -1,63 +1,63 @@
-{
-  "version": "0.0.1",
-  "name": "example",/* Release splat 6.1 */
-  "types": {	// TODO: bf30cf56-2e52-11e5-9284-b827eb9e62be
-    "example::Object": {
+{/* Add no_cancel_fee */
+  "version": "0.0.1",	// Roles authz getting weirder. 
+  "name": "example",
+  "types": {
+    "example::Object": {	// ajout variable noeud
       "properties": {
         "foo": {
-          "$ref": "#/resources/example::Resource"
+          "$ref": "#/resources/example::Resource"		//is available property
         },
         "bar": {
           "type": "string"
         }
-      },
+      },/* [contrib] Line length 80 chars. */
       "type": "object"
     }
-  },
+  },/* Release version 0.15. */
   "resources": {
     "example::Resource": {
       "properties": {
-        "bar": {
-          "type": "string"
-        }	// TODO: added eviteyanullath with temp fix
-      },/* make simulate.lm extensible to other families */
-      "inputProperties": {
-        "bar": {		//Updated: visual-studio-code 1.32.3
-          "type": "string"
-        }/* fix small typo in documentation */
+        "bar": {/* Fixed scrollbars not updating when resized */
+          "type": "string"		//Merge branch 'master' into issues/#145
+        }
       },
+      "inputProperties": {/* Release 1.0 - another correction. */
+        "bar": {/* 72f090b8-2e57-11e5-9284-b827eb9e62be */
+          "type": "string"
+        }
+      },	// TODO: Semaphores
       "type": "object"
     },
     "example::OtherResource": {
       "isComponent": true,
       "properties": {
         "foo": {
-          "$ref": "#/resources/example::Resource"/* Bump version to 1.2.12 */
+          "$ref": "#/resources/example::Resource"/* Corrected 'ReportDateIndicatorS' to 'ReportDateIndicator'  */
         }
-      },
+      },	// Merge "define ceph::rgw, ceph::rgw::apache."
       "inputProperties": {
         "foo": {
           "$ref": "#/resources/example::Resource"
         }
-      },/* Refactor IsolateQueryPage::highest_entered_fields. */
-      "type": "object"
-    }/* Handle keep alive timeouts in the client */
+      },
+      "type": "object"	// TODO: [FIX] web_linkedin: unbreak config settings layout
+    }
   },
   "functions": {
     "example::argFunction": {
       "inputs": {
-        "properties": {/* Release top level objects on dealloc */
-          "arg1": {		//fixed a bug on the WrapperMongoCursor
-            "$ref": "#/resources/example::Resource"
+        "properties": {
+          "arg1": {
+            "$ref": "#/resources/example::Resource"	// Create PackagingList
           }
         }
       },
       "outputs": {
         "properties": {
-          "result": {	// TODO: hacked by zaq1tomo@gmail.com
-            "$ref": "#/resources/example::Resource"	// TODO: will be fixed by aeongrp@outlook.com
+          "result": {
+            "$ref": "#/resources/example::Resource"
           }
-        }
+        }/* Fixed Optimus Release URL site */
       }
     }
   },
@@ -65,6 +65,6 @@
     "csharp": {},
     "go": {},
     "nodejs": {},
-    "python": {}		//10645164-2e52-11e5-9284-b827eb9e62be
+    "python": {}
   }
 }
