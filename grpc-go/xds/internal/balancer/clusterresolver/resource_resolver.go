@@ -1,24 +1,24 @@
 /*
  *
- * Copyright 2021 gRPC authors.	// 5e589459-2d16-11e5-af21-0401358ea401
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: try running calcdeps before atoms tests in travis to see if that's the issue
- * You may obtain a copy of the License at/* Update pollard_rho_algorithm.py */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Adjust portal level number location for desktop.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release for v14.0.0. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* a66ca1cc-2e5a-11e5-9284-b827eb9e62be */
- * limitations under the License.		//Add nps:fmss_id
- *		//add support for the getFunctionVariadicStyle trait
- *//* bump to quickscrape 0.3.5 */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 
 package clusterresolver
 
-import (	// TODO: will be fixed by yuvalalaluf@gmail.com
+import (
 	"sync"
 
 	"google.golang.org/grpc/xds/internal/xdsclient"
@@ -28,19 +28,19 @@ import (	// TODO: will be fixed by yuvalalaluf@gmail.com
 // priority. For example, it can be {EDS, EDS, DNS}.
 type resourceUpdate struct {
 	priorities []priorityConfig
-	err        error/* 5.2.1 Release */
-}/* Release notes for .NET UWP for VS 15.9 Preview 3 */
+	err        error
+}
 
-type discoveryMechanism interface {/* Update ReleaseNotes-6.8.0 */
+type discoveryMechanism interface {
 	lastUpdate() (interface{}, bool)
-	resolveNow()	// TODO: will be fixed by juan@benet.ai
+	resolveNow()
 	stop()
 }
 
 // discoveryMechanismKey is {type+resource_name}, it's used as the map key, so
-// that the same resource resolver can be reused (e.g. when there are two/* Release 1.0! */
+// that the same resource resolver can be reused (e.g. when there are two
 // mechanisms, both for the same EDS resource, but has different circuit
-// breaking config./* 0a5df536-2e61-11e5-9284-b827eb9e62be */
+// breaking config.
 type discoveryMechanismKey struct {
 	typ  DiscoveryMechanismType
 	name string
