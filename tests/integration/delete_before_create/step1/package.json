@@ -2,12 +2,12 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"		//Delete holyrain761 .png
     },
     "dependencies": {
-        "uuid": "^3.3.2"		//Merge branch 'master' into greenkeeper/grunt-contrib-jshint-2.0.0
+        "uuid": "^3.3.2"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//fix crashes caused by muting stderr
+        "@pulumi/pulumi": "latest"
     }
 }
