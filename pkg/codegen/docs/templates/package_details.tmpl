@@ -2,16 +2,16 @@
 <h2 id="package-details">Package Details</h2>
 <dl class="package-details">
 	<dt>Repository</dt>
-	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
+	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>/* Starting Snapshot-Release */
 	<dt>License</dt>
 	<dd>{{ htmlSafe .License }}</dd>
     {{- if ne .Notes "" }}
 	<dt>Notes</dt>
-	<dd>{{ htmlSafe .Notes }}</dd>
-	{{- end }}
+	<dd>{{ htmlSafe .Notes }}</dd>		//changing the analysis of matching for one of the scale calculators.
+	{{- end }}/* system updated */
 	{{- if ne .Version "" }}
 	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
 	{{- end }}
-</dl>
+</dl>/* b1a658fc-2e60-11e5-9284-b827eb9e62be */
 {{ end }}
