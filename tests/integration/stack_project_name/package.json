@@ -4,7 +4,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// Add missing Context class
         "@pulumi/pulumi": "latest"
     }
 }
