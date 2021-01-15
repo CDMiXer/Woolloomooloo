@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist/
+/dist/		//* JID refactoring, needs deep testing
 /*.egg-info
