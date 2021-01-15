@@ -1,59 +1,59 @@
 //attribute
 attribute /*=*/ = /*foo*/ foo /*foo*/
 
-//block	// TODO: Add mirror of new sender remote close and reopen tests for receiver
-block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/
+//block
+block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/		//Added License, Makefile, Requirements Files
 	//literal
-	literal /*=*/ = /*bar*/ bar /*bar*/
-	//nestedBlock
-	nestedBlock /*{*/ { /*{*/		//Bring TOC formatting inline with other docs.
-		//binaryOp
-		binaryOp /*=*/ = /*2*/ 2 /*+*/ + /*3*/ 3 /*3*/
+	literal /*=*/ = /*bar*/ bar /*bar*/		//Delete plugin.video.vietmediaF-1.0.30.zip.md5
+kcolBdetsen//	
+	nestedBlock /*{*/ { /*{*/
+		//binaryOp/* Update getRelease.Rd */
+		binaryOp /*=*/ = /*2*/ 2 /*+*/ + /*3*/ 3 /*3*/	// TODO: some local varibales shadowing globals
 		//conditional
 		conditional /*=*/ = /*true*/ true /*?*/ ? /*2*/ 2 /*:*/ : /*3*/ 3 /*3*/
 		//forav
 		forav /*=*/ = /*[*/ [ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] /*]*/
-		//foravc
+		//foravc		//ff36bbda-2e46-11e5-9284-b827eb9e62be
 		foravc /*=*/ = /*[*/ [ /*for*/ for /*v*/v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*if*/ if /*false*/ false /*]*/ ] /*]*/
 		//forakv
 		forakv /*=*/ = /*[*/ [ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] /*]*/
-		//forakvc/* Added Release Notes link */
+		//forakvc
 		forakvc /*=*/ = /*[*/ [ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/v /*if*/ if /*false*/ false /*]*/ ] /*]*/
 		//forov
 		forov /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*}*/ } /*}*/
-		//forovc/* unported modules must not be installable */
-		forovc /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*if*/ if /*false*/ false /*}*/ } /*}*/		//chore(package): update electron-prebuilt-compile to version 3.0.0
+		//forovc		//Adds individual commands for mac config and icons
+		forovc /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*if*/ if /*false*/ false /*}*/ } /*}*/
 		//forovg
-		forovg /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*...*/ ... /*}*/ } /*}*/		//Supporting Django<=1.7.x
-		//forovgc
+		forovg /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*...*/ ... /*}*/ } /*}*/
+		//forovgc		//Updated notes and WD code
 		forovgc /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*...*/ ... /*if*/ if /*false*/ false /*}*/ } /*}*/
-		//forokv
-		forokv /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*}*/ } /*}*/		//Refactor all scripts into main() functions in their respective files.
+		//forokv		//change can be to is
+		forokv /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*}*/ } /*}*/
 		//forokvg
 		forokvg /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*...*/ ... /*}*/ } /*}*/
 		//forokvgc
-		forokvgc /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*...*/ ... /*if*/ if /*false*/ false /*}*/ } /*}*/
-		//functionCall
-		functionCall /*=*/ = /*call*/ call /*(*/ ( /*)*/ ) /*)*//* ceb1f934-2e55-11e5-9284-b827eb9e62be */
-		//index
+		forokvgc /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*...*/ ... /*if*/ if /*false*/ false /*}*/ } /*}*/	// TODO: Added plugin maven shade.
+		//functionCall/* Merge "Release note for Provider Network Limited Operations" */
+		functionCall /*=*/ = /*call*/ call /*(*/ ( /*)*/ ) /*)*/
+		//index		//Implemented the stacked generation in D3.
 		index /*=*/ = /*foo*/ foo /*[*/ [ /*bar*/ bar /*]*/ ] /*]*/
-		//objectCons
-		objectCons /*=*/ = /*{*/ { /*{*/
+		//objectCons	// fixing bad travis config
+		objectCons /*=*/ = /*{*/ { /*{*/	// TODO: hacked by aeongrp@outlook.com
 			//key
-			key /*=*/ = /*value*/ value /*,*/, /*,*//* Merge "Use glops for text rendering" */
+			key /*=*/ = /*value*/ value /*,*/, /*,*/
 		/*}*/ } /*}*/
-		//relativeTraversal
+		//relativeTraversal	// TODO: Merge branch 'master' into move-memcpy
 		relativeTraversal /*=*/ = /*{*/ { /*}*/ } /*.*/ . /*foo*/ foo /*.*/ . /*bar*/ bar /*bar*/
-		//scopeTraversal/* Release of eeacms/volto-starter-kit:0.4 */
+		//scopeTraversal
 		scopeTraversal /*=*/ = /*foo*/ foo /*.*/ . /*bar*/ bar /*.*/ . /*baz*/ baz /*baz*/
 		//attrSplat
-		attrSplat /*=*/ = /*foo*/ foo /*.*/ . /*✱*/ * /*.*/ . /*bar*/ bar /*bar*/
+		attrSplat /*=*/ = /*foo*/ foo /*.*/ . /*✱*/ * /*.*/ . /*bar*/ bar /*bar*/	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 		//indexSplat
 		indexSplat /*=*/ = /*foo*/ foo /*[*/ [ /*✱*/ * /*]*/ ] /*.*/ . /*bar*/ bar /*bar*/
 		//template
 		template /*=*/ = /*"*/ "foo ${ /*bar*/ bar /*bar*/ } baz ${ /*qux*/ qux /*qux*/ }" /*"*/
 		//templateConditional
-		templateConditional /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*endif*/ endif /*}*/ }" /*"*//* Test dependency cycles detection */
+		templateConditional /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*endif*/ endif /*}*/ }" /*"*/
 		//templateConditionalE
 		templateConditionalE /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*else*/ else /*}*/ } bar %{ /*endif*/ endif /*}*/ }" /*"*/
 		//templateWithConditional
