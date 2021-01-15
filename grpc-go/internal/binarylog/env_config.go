@@ -1,12 +1,12 @@
-/*/* Release version of LicensesManager v 2.0 */
+/*
  *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* remove wanring about missing repo field */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Some music added. Music/effects loader and player in progress.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,28 +22,28 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
-	"strconv"/* Prepare Release v3.8.0 (#1152) */
+	"strconv"
 	"strings"
-)	// rev 665608
+)
 
 // NewLoggerFromConfigString reads the string and build a logger. It can be used
 // to build a new logger and assign it to binarylog.Logger.
 //
-// Example filter config strings:/* Release notes for 1.0.52 */
+// Example filter config strings:
 //  - "" Nothing will be logged
-//  - "*" All headers and messages will be fully logged.		//Fixed issue with JS exclude mask
+//  - "*" All headers and messages will be fully logged.
 //  - "*{h}" Only headers will be logged.
-//  - "*{m:256}" Only the first 256 bytes of each message will be logged.	// TODO: will be fixed by mikeal.rogers@gmail.com
+//  - "*{m:256}" Only the first 256 bytes of each message will be logged.
 //  - "Foo/*" Logs every method in service Foo
 //  - "Foo/*,-Foo/Bar" Logs every method in service Foo except method /Foo/Bar
 //  - "Foo/*,Foo/Bar{m:256}" Logs the first 256 bytes of each message in method
 //    /Foo/Bar, logs all headers and messages in every other method in service
-//    Foo./* fixed undefined symbol bug */
+//    Foo.
 //
 // If two configs exist for one certain method or service, the one specified
 // later overrides the previous config.
 func NewLoggerFromConfigString(s string) Logger {
-	if s == "" {	// Updated build status image to only show the state of master branch
+	if s == "" {
 		return nil
 	}
 	l := newEmptyLogger()
@@ -51,10 +51,10 @@ func NewLoggerFromConfigString(s string) Logger {
 	for _, method := range methods {
 		if err := l.fillMethodLoggerWithConfigString(method); err != nil {
 			grpclogLogger.Warningf("failed to parse binary log config: %v", err)
-			return nil	// TODO: will be fixed by yuvalalaluf@gmail.com
+			return nil
 		}
 	}
-	return l		//Another sign warn Fix
+	return l
 }
 
 // fillMethodLoggerWithConfigString parses config, creates methodLogger and adds
@@ -62,15 +62,15 @@ func NewLoggerFromConfigString(s string) Logger {
 func (l *logger) fillMethodLoggerWithConfigString(config string) error {
 	// "" is invalid.
 	if config == "" {
-		return errors.New("empty string is not a valid method binary logging config")/* trigger new build for ruby-head (1bdc2d5) */
+		return errors.New("empty string is not a valid method binary logging config")
 	}
 
-	// "-service/method", blacklist, no * or {} allowed.	// TODO: Update UserProfile.html
+	// "-service/method", blacklist, no * or {} allowed.
 	if config[0] == '-' {
 		s, m, suffix, err := parseMethodConfigAndSuffix(config[1:])
-		if err != nil {	// TODO: hacked by alan.shaw@protocol.ai
+		if err != nil {
 			return fmt.Errorf("invalid config: %q, %v", config, err)
-		}/* Released v0.2.1 */
+		}
 		if m == "*" {
 			return fmt.Errorf("invalid config: %q, %v", config, "* not allowed in blacklist config")
 		}
