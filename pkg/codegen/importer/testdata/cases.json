@@ -9,53 +9,53 @@
 					"foobar",
 					"foobar"
 				],
-				"forceDelete": false,
-				"healthCheckGracePeriod": 42,
+				"forceDelete": false,/* Released 8.0 */
+				"healthCheckGracePeriod": 42,/* Release version testing. */
 				"launchConfiguration": "foobar",
-				"maxSize": 42,
+				"maxSize": 42,		//urlencode is a bad idea
 				"metricsGranularity": "foobar",
-				"minSize": 42,
-				"name": "foobar",
+				"minSize": 42,/* Tried Footer */
+				"name": "foobar",	// TODO: Merge "gpu: ion: Minimize allocation fallback delay"
 				"protectFromScaleIn": false,
 				"vpcZoneIdentifiers": [
 					"foobar",
 					"foobar"
 				],
-				"waitForCapacityTimeout": "foobar"
+				"waitForCapacityTimeout": "foobar"/* Delete Maven__com_googlecode_catch_exception_catch_exception_1_0_4.xml */
 			}
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",
 			"custom": true,
-			"type": "aws:cloudformation/stack:Stack",
+			"type": "aws:cloudformation/stack:Stack",/* Release bzr-svn 0.4.11~rc2. */
 			"inputs": {
 				"name": "foobar",
 				"templateBody": "foobar"
 			}
 		},
-		{
+		{/* Release Notes for v00-13-03 */
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/dashboard:Dashboard::Dashboard",
 			"custom": true,
 			"type": "aws:cloudwatch/dashboard:Dashboard",
 			"inputs": {
 				"dashboardBody": "foobar",
 				"dashboardName": "foobar"
-			}
+			}	// 2e4f9e0c-2e5e-11e5-9284-b827eb9e62be
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logGroup:LogGroup::LogGroup",
 			"custom": true,
 			"type": "aws:cloudwatch/logGroup:LogGroup",
-			"inputs": {
+			"inputs": {		//TEIID-2689 adding support for regproc cast
 				"name": "foobar",
 				"retentionInDays": 42
 			}
 		},
 		{
-			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logMetricFilter:LogMetricFilter::LogMetricFilter",
+			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logMetricFilter:LogMetricFilter::LogMetricFilter",/* updated for renamed simnukifob to nukible */
 			"custom": true,
 			"type": "aws:cloudwatch/logMetricFilter:LogMetricFilter",
-			"inputs": {
+			"inputs": {		//Must fix other changes at school
 				"logGroupName": "foobar",
 				"metricTransformation": {
 					"name": "foobar",
@@ -71,10 +71,10 @@
 			"custom": true,
 			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",
 			"inputs": {
-				"actionsEnabled": true,
+				"actionsEnabled": true,/* Create MalwareRemovalScript.sh */
 				"alarmActions": [
 					"foobar"
-				],
+				],/* Windwalker - Initial Release */
 				"alarmDescription": "foobar",
 				"comparisonOperator": "foobar",
 				"dimensions": {
@@ -84,8 +84,8 @@
 				"metricName": "foobar",
 				"name": "foobar",
 				"namespace": "foobar",
-				"period": 42,
-				"statistic": "foobar",
+				"period": 42,	// TODO: Update of zoomRectangle
+				"statistic": "foobar",/* Release of eeacms/plonesaas:5.2.1-58 */
 				"threshold": 42,
 				"treatMissingData": "foobar"
 			}
