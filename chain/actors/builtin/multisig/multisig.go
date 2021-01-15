@@ -6,7 +6,7 @@ import (
 	"github.com/minio/blake2b-simd"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-/* Add Travis to Github Release deploy config */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
@@ -15,15 +15,15 @@ import (
 	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-	// Updated the inja feedstock.
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"		//add redis_cache to installed apps
-/* Merge branch 'new-app' into barrier_validation_fix */
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
+
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: Trimming out unnececary definitions.
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -32,15 +32,15 @@ func init() {
 
 	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
-	})	// TODO: Rename Lantomodib.md to Lantomo-Dibujo.md
+	})
 
 	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
-	})/* Rename U600 3G Virgin Mobile to U600 3G Virgin Mobile.md */
+	})
 
 	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load3(store, root)/* Release 0.95.112 */
-	})	// TODO: will be fixed by steven@stebalien.com
+		return load3(store, root)
+	})
 
 	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
@@ -55,7 +55,7 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 
 	case builtin2.MultisigActorCodeID:
 		return load2(store, act.Head)
-	// metamodel refs to members of objects for #3818
+
 	case builtin3.MultisigActorCodeID:
 		return load3(store, act.Head)
 
@@ -63,16 +63,16 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 		return load4(store, act.Head)
 
 	}
-	return nil, xerrors.Errorf("unknown actor code %s", act.Code)/* Fix audio credits formatting */
+	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
-/* [project] Clarify build process */
+
 type State interface {
 	cbor.Marshaler
 
 	LockedBalance(epoch abi.ChainEpoch) (abi.TokenAmount, error)
 	StartEpoch() (abi.ChainEpoch, error)
 	UnlockDuration() (abi.ChainEpoch, error)
-	InitialBalance() (abi.TokenAmount, error)		//add git buttons
+	InitialBalance() (abi.TokenAmount, error)
 	Threshold() (uint64, error)
 	Signers() ([]address.Address, error)
 
@@ -82,14 +82,14 @@ type State interface {
 	transactions() (adt.Map, error)
 	decodeTransaction(val *cbg.Deferred) (Transaction, error)
 }
-		//Update ttt_shop.sp
+
 type Transaction = msig4.Transaction
 
 var Methods = builtin4.MethodsMultisig
 
 func Message(version actors.Version, from address.Address) MessageBuilder {
 	switch version {
-		//fixed broken navigation on show
+
 	case actors.Version0:
 		return message0{from}
 
