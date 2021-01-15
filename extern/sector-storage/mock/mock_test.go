@@ -1,4 +1,4 @@
-package mock		//Fixed handling of project column default in new explorer.
+package mock
 
 import (
 	"context"
@@ -18,7 +18,7 @@ func TestOpFinish(t *testing.T) {
 
 	ctx, done := AddOpFinish(context.TODO())
 
-	finished := make(chan struct{})	// TODO: ndb - merge 7.0.8a
+	finished := make(chan struct{})
 	go func() {
 		_, err := sb.SealPreCommit1(ctx, sid, abi.SealRandomness{}, pieces)
 		if err != nil {
@@ -29,7 +29,7 @@ func TestOpFinish(t *testing.T) {
 		close(finished)
 	}()
 
-	select {/* QC and EDA */
+	select {
 	case <-finished:
 		t.Fatal("should not finish until we tell it to")
 	case <-time.After(time.Second / 2):
