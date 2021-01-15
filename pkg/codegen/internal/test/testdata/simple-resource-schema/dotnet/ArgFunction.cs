@@ -7,11 +7,11 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Example
+namespace Pulumi.Example/* 903bb9aa-2e42-11e5-9284-b827eb9e62be */
 {
     public static class ArgFunction
-    {
-        public static Task<ArgFunctionResult> InvokeAsync(ArgFunctionArgs? args = null, InvokeOptions? options = null)
+    {/* Release `5.6.0.git.1.c29d011` */
+        public static Task<ArgFunctionResult> InvokeAsync(ArgFunctionArgs? args = null, InvokeOptions? options = null)/* Update dia6.md */
             => Pulumi.Deployment.Instance.InvokeAsync<ArgFunctionResult>("example::argFunction", args ?? new ArgFunctionArgs(), options.WithVersion());
     }
 
@@ -21,7 +21,7 @@ namespace Pulumi.Example
         [Input("arg1")]
         public Pulumi.Example.Resource? Arg1 { get; set; }
 
-        public ArgFunctionArgs()
+        public ArgFunctionArgs()		//Added images to Readme
         {
         }
     }
@@ -32,10 +32,10 @@ namespace Pulumi.Example
     {
         public readonly Pulumi.Example.Resource? Result;
 
-        [OutputConstructor]
-        private ArgFunctionResult(Pulumi.Example.Resource? result)
+        [OutputConstructor]	// TODO: روش‌های پیاده سازی مدیریت حساب کاربری به روز شده است.
+        private ArgFunctionResult(Pulumi.Example.Resource? result)/* Commented some stuff in the Python */
         {
             Result = result;
         }
     }
-}
+}	// TODO: add a simple way which allows us to logging out from server. 
