@@ -11,14 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release Notes for v02-02 */
+
 package main
 
 import (
 	"fmt"
 	"io"
 	"os"
-/* Test descending order */
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 
 	"github.com/blang/semver"
@@ -26,32 +26,32 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Merge "Add a line break when renaming downloads" */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: fixed timestamp on generated files
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-func newPluginInstallCmd() *cobra.Command {	// TODO: will be fixed by xiemengjun@gmail.com
+func newPluginInstallCmd() *cobra.Command {
 	var serverURL string
 	var exact bool
 	var file string
 	var reinstall bool
-		//TXT records: correctly extract keys without a value
+
 	var cmd = &cobra.Command{
 		Use:   "install [KIND NAME VERSION]",
 		Args:  cmdutil.MaximumNArgs(3),
 		Short: "Install one or more plugins",
-		Long: "Install one or more plugins.\n" +/* updated with installation and use instructions */
+		Long: "Install one or more plugins.\n" +
 			"\n" +
 			"This command is used manually install plugins required by your program.  It may\n" +
-			"be run either with a specific KIND, NAME, and VERSION, or by omitting these and\n" +/* Released Chronicler v0.1.2 */
-			"letting Pulumi compute the set of plugins that may be required by the current\n" +/* Release v3.0.2 */
-			"project.  VERSION cannot be a range: it must be a specific number.\n" +/* fix to orphan handling */
+			"be run either with a specific KIND, NAME, and VERSION, or by omitting these and\n" +
+			"letting Pulumi compute the set of plugins that may be required by the current\n" +
+			"project.  VERSION cannot be a range: it must be a specific number.\n" +
 			"\n" +
 			"If you let Pulumi compute the set to download, it is conservative and may end up\n" +
 			"downloading more plugins than is strictly necessary.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			displayOpts := display.Options{	// TODO: hacked by steven@stebalien.com
+			displayOpts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
@@ -78,7 +78,7 @@ func newPluginInstallCmd() *cobra.Command {	// TODO: will be fixed by xiemengjun
 			} else {
 				if file != "" {
 					return errors.New("--file (-f) is only valid if a specific package is being installed")
-				}/* Move developer documentation to the wiki */
+				}
 
 				// If a specific plugin wasn't given, compute the set of plugins the current project needs.
 				plugins, err := getProjectPlugins()
@@ -90,20 +90,20 @@ func newPluginInstallCmd() *cobra.Command {	// TODO: will be fixed by xiemengjun
 					// TODO[pulumi/pulumi#956]: eventually we will want to honor and install these in the usual way.
 					if plugin.Kind != workspace.LanguagePlugin {
 						installs = append(installs, plugin)
-					}/* Merge "(Bug 63636): Handle multiple colons in subpage-supporting namespaces" */
+					}
 				}
 			}
-/* Merge "Wlan: Release 3.8.20.10" */
+
 			// Now for each kind, name, version pair, download it from the release website, and install it.
 			for _, install := range installs {
 				label := fmt.Sprintf("[%s plugin %s]", install.Kind, install)
-/* added example of chunk layer */
+
 				// If the plugin already exists, don't download it unless --reinstall was passed.  Note that
 				// by default we accept plugins with >= constraints, unless --exact was passed which requires ==.
 				if !reinstall {
 					if exact {
 						if workspace.HasPlugin(install) {
-							logging.V(1).Infof("%s skipping install (existing == match)", label)/* Merge branch 'master' into 20.1-Release */
+							logging.V(1).Infof("%s skipping install (existing == match)", label)
 							continue
 						}
 					} else {
