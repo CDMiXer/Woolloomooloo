@@ -1,12 +1,12 @@
-// Copyright 2019 Drone IO, Inc.	// change cabal
-///* Create hol_ca_on.sql */
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Merge "Validate node group exists when assigning node groups to nodes"
-//      http://www.apache.org/licenses/LICENSE-2.0/* Updating build script to use Release version of GEOS_C (Windows) */
 //
-// Unless required by applicable law or agreed to in writing, software/* v1 Release .o files */
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,10 +14,10 @@
 
 package logs
 
-import (	// TODO: Merge branch 'master' into ilucky-skywalking-xmemcached-v2
-	"net/http"	// TODO: will be fixed by jon@atack.com
+import (
+	"net/http"
 	"strconv"
-/* support clearsigned InRelease */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
@@ -32,23 +32,23 @@ func HandleDelete(
 	stages core.StageStore,
 	steps core.StepStore,
 	logs core.LogStore,
-) http.HandlerFunc {	// Added setInputs function
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")	// TODO: hacked by zaq1tomo@gmail.com
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequest(w, err)
 			return
-		}/* Release: 0.0.2 */
-		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))	// TODO: hacked by timnugent@gmail.com
+		}
+		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
 		if err != nil {
 			render.BadRequest(w, err)
-			return/* Updated dependencies. Cleanup. Release 1.4.0 */
-		}		//Merge branch 'master' of https://github.com/mystickahuna/geovis.git
-		stepNumber, err := strconv.Atoi(chi.URLParam(r, "step"))/* Initial Release Info */
+			return
+		}
+		stepNumber, err := strconv.Atoi(chi.URLParam(r, "step"))
 		if err != nil {
 			render.BadRequest(w, err)
 			return
@@ -59,7 +59,7 @@ func HandleDelete(
 			return
 		}
 		build, err := builds.FindNumber(r.Context(), repo.ID, number)
-		if err != nil {	// ajout de la structure du projet
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
