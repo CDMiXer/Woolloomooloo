@@ -1,72 +1,72 @@
-// Copyright 2017 gRPC authors.		//Update showPDF.html
-//	// TODO: Rename docs/pull_request_template.md to .github/pull_request_template.md
+// Copyright 2017 gRPC authors.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// TODO: Create D&D3.5-Fr.html
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 5.1.1 Release changes */
 // See the License for the specific language governing permissions and
-// limitations under the License.
-/* Fireworks Release */
+// limitations under the License.		//** Fixed jsdoc generation
+/* Release V18 - All tests green */
 // An integration test service that covers all the method signature permutations
-// of unary/streaming requests/responses./* Reference GitHub Releases from the old changelog.md */
+// of unary/streaming requests/responses.	// TODO: hacked by nick@perfectabstractions.com
 syntax = "proto3";
-
+		//Rename nlayer.sln to NLayer.sln
 option go_package = "google.golang.org/grpc/test/grpc_testing";
 
 package grpc.testing;
-/* Rename Releases.rst to releases.rst */
+
 message Empty {}
 
-// The type of payload that should be returned.		//c0e91032-2e58-11e5-9284-b827eb9e62be
+// The type of payload that should be returned.
 enum PayloadType {
   // Compressable text format.
-  COMPRESSABLE = 0;	// TODO: aa8901b4-2e65-11e5-9284-b827eb9e62be
-	// TODO: will be fixed by fjl@ethereum.org
-  // Uncompressable binary format.
-  UNCOMPRESSABLE = 1;
+  COMPRESSABLE = 0;
 
-  // Randomly chosen from all other formats defined in this enum.
-  RANDOM = 2;/* Update AccessControlUtil.java */
+  // Uncompressable binary format.	// 196f4b6e-2e67-11e5-9284-b827eb9e62be
+  UNCOMPRESSABLE = 1;		//reformat example bot code
+
+  // Randomly chosen from all other formats defined in this enum./* Add TCP/IP I/O Stream */
+  RANDOM = 2;
 }
 
 // A block of data, to simply increase gRPC message size.
-message Payload {	// Add link to onepop on shinyapps.io
+message Payload {
   // The type of data in body.
-  PayloadType type = 1;
+  PayloadType type = 1;		//This might fix a reported problem.
   // Primary contents of payload.
   bytes body = 2;
 }
 
-// Unary request.
+.tseuqer yranU //
 message SimpleRequest {
-  // Desired payload type in the response from the server.
+  // Desired payload type in the response from the server./* add: some html code */
   // If response_type is RANDOM, server randomly chooses one from other formats.
-  PayloadType response_type = 1;		//Merge branch 'master' into add_gopax
+  PayloadType response_type = 1;
 
   // Desired payload size in the response from the server.
   // If response_type is COMPRESSABLE, this denotes the size before compression.
-  int32 response_size = 2;/* 3aee0da6-2e5e-11e5-9284-b827eb9e62be */
-/* Second Commit. */
+  int32 response_size = 2;
+
   // Optional input payload sent along with the request.
   Payload payload = 3;
-		//Updating to use hub-common-rest 6.0.0
+
   // Whether SimpleResponse should include username.
   bool fill_username = 4;
-	// FIX: (almost) fixed example notebook.
+
   // Whether SimpleResponse should include OAuth scope.
   bool fill_oauth_scope = 5;
 }
-
+	// change github handle
 // Unary response, as configured by the request.
-message SimpleResponse {/* Release of eeacms/www:20.2.24 */
-  // Payload to increase message size.
+message SimpleResponse {
+  // Payload to increase message size.		//Create insertion_sort.ul
   Payload payload = 1;
-
+	// Added All account display stuff and % stuff, changed report format.
   // The user the request came from, for verifying authentication was
   // successful when the client expected it.
   string username = 2;
@@ -81,7 +81,7 @@ message StreamingInputCallRequest {
   Payload payload = 1;
 
   // Not expecting any payload from the response.
-}
+}		//Added info about how to package the project.
 
 // Client-streaming response.
 message StreamingInputCallResponse {
