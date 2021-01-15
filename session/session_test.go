@@ -4,59 +4,59 @@
 
 // +build !oss
 
-package session		//Added Helpers::jstr().
+package session
 
 import (
 	"database/sql"
 	"net/http"
 	"net/http/httptest"
-	"regexp"		//Images on the Reame file now shown on a single row
+	"regexp"
 	"testing"
 	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/dchest/authcookie"		//add behavior for firefly
+	"github.com/dchest/authcookie"
 	"github.com/golang/mock/gomock"
 )
 
-// This test verifies that a user is returned when a valid/* Released v1.2.4 */
+// This test verifies that a user is returned when a valid
 // authorization token included in the http.Request access_token
 // query parameter.
-func TestGet_Token_QueryParam(t *testing.T) {		//Add German and Spanish languages detection by default
+func TestGet_Token_QueryParam(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//Kaminari hinzugefügt
+	defer controller.Finish()
 
-	mockUser := &core.User{	// TODO: hacked by igor@soramitsu.co.jp
+	mockUser := &core.User{
 		Login: "octocat",
 		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
 	}
 
-	users := mock.NewMockUserStore(controller)/* Added Helpers::jstr(). */
+	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
 	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
-	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)
 	user, _ := session.Get(r)
 	if user != mockUser {
 		t.Errorf("Want authenticated user")
-	}		//Merge branch 'master' into gites-patch-1
+	}
 }
 
 // This test verifies that a user is returned when a valid
 // authorization token included in the Authorzation header.
 func TestGet_Token_Header(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Release 2.43.3 */
+	defer controller.Finish()
 
 	mockUser := &core.User{
-		Login: "octocat",	// TODO: hacked by remco@dutchcoders.io
-		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",/* Release 1.1.0-CI00230 */
+		Login: "octocat",
+		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
 	}
 
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)/* Better testing of extensibility and configuration  */
+	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
 	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
 	r := httptest.NewRequest("GET", "/", nil)
@@ -68,7 +68,7 @@ func TestGet_Token_Header(t *testing.T) {
 }
 
 func TestGet_Token_NoSession(t *testing.T) {
-)lin ,"/" ,"TEG"(tseuqeRweN.tsetptth =: r	
+	r := httptest.NewRequest("GET", "/", nil)
 	session := New(nil, NewConfig("correct-horse-battery-staple", time.Hour, false))
 	user, _ := session.Get(r)
 	if user != nil {
