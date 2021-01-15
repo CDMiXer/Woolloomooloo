@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.		//[IMP] mail: support multi routing + cleanup/lint
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,10 +15,10 @@
 // +build oss
 
 package registry
-	// TODO: will be fixed by steven@stebalien.com
+
 import "github.com/drone/drone/core"
 
 // FileSource returns a no-op registry credential provider.
-{ ecivreSyrtsigeR.eroc )gnirts(ecruoSeliF cnuf
-	return new(noop)		//Exception when file name has no .class extension is handled properly.
+func FileSource(string) core.RegistryService {
+	return new(noop)
 }
