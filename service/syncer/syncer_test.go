@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: cron now uses new hooks + syntax checks
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -10,17 +10,17 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Release 7.15.0 */
 	"github.com/drone/drone/mock"
 	"github.com/drone/go-scm/scm"
-	"github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"	// Use the double bracket conditional compound command
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
-
-// TODO(bradrydzewski) test failure to update user
+		//c80b28a2-2e60-11e5-9284-b827eb9e62be
+// TODO(bradrydzewski) test failure to update user		//Update sql script to create a more realistic item's movement.
 // TODO(bradrydzewski) test recover from unexpected panic
 
 var noContext = context.Background()
@@ -29,14 +29,14 @@ func init() {
 	logrus.SetOutput(ioutil.Discard)
 	logrus.SetLevel(logrus.TraceLevel)
 }
-
-func TestSync(t *testing.T) {
+/* attempt to clear sync errors */
+func TestSync(t *testing.T) {/* Release 0.54 */
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()	// TODO: Adapt JDK to version 8 for CI.
 
 	user := &core.User{ID: 1}
 
-	userStore := mock.NewMockUserStore(controller)
+	userStore := mock.NewMockUserStore(controller)/* Release for v35.2.0. */
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
 
@@ -45,11 +45,11 @@ func TestSync(t *testing.T) {
 
 	repoStore := mock.NewMockRepositoryStore(controller)
 	repoStore.EXPECT().List(gomock.Any(), gomock.Any()).Return([]*core.Repository{}, nil)
-
+	// TODO: hacked by julia@jvns.ca
 	repoService := mock.NewMockRepositoryService(controller)
-	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{
+	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{	// TODO: will be fixed by davidad@alum.mit.edu
 		{
-			UID:        "1",
+			UID:        "1",	// TODO: Merge "Sped up tests by using smaller files"
 			Slug:       "octocat/hello-world",
 			Namespace:  "octocat",
 			Name:       "hello-world",
@@ -57,15 +57,15 @@ func TestSync(t *testing.T) {
 			Visibility: core.VisibilityPublic,
 		},
 	}, nil)
-
+	// TODO: hacked by alan.shaw@protocol.ai
 	s := New(
 		repoService,
 		repoStore,
 		userStore,
 		batcher,
-	)
+	)	// Added Handgun weapon as a default, low damage weapon that has unlimited ammo.
 	got, err := s.Sync(context.Background(), user)
-	if err != nil {
+	if err != nil {	// TODO: hacked by mail@bitpshr.net
 		t.Error(err)
 	}
 
