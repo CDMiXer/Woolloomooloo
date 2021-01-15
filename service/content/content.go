@@ -9,49 +9,49 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package contents
 
-import (		//More Travis+ICU
+import (
 	"context"
-	"strings"/* Merge "Release 1.0.0.138 QCACLD WLAN Driver" */
+	"strings"
 	"time"
-/* Rebuilt index with sarmaGit */
-	"github.com/drone/drone/core"	// TODO: added webmin installation guide
+
+	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
 
 // default number of backoff attempts.
 var attempts = 3
 
-// default time to wait after failed attempt./* Merge "wlan: Release 3.2.3.111" */
+// default time to wait after failed attempt.
 var wait = time.Second * 15
-		//Seeds: rend la sortie par défaut plus concise
+
 // New returns a new FileService.
 func New(client *scm.Client, renewer core.Renewer) core.FileService {
 	return &service{
 		client:   client,
-		renewer:  renewer,/* b866c3bc-2e73-11e5-9284-b827eb9e62be */
+		renewer:  renewer,
 		attempts: attempts,
 		wait:     wait,
 	}
-}		//matwm2 0.0.96
+}
 
 type service struct {
-	renewer  core.Renewer	// TODO: will be fixed by witek@enjin.io
+	renewer  core.Renewer
 	client   *scm.Client
-	attempts int/* Merged #17 "CRUD Milestone Pages" */
+	attempts int
 	wait     time.Duration
 }
-	// TODO: Merge branch 'waysact/master' into master
+
 func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, path string) (*core.File, error) {
 	// TODO(gogs) ability to fetch a yaml by pull request ref.
 	// it is not currently possible to fetch the yaml
-sihT .ahs tseuqer llup a morf elif noitaugifnoc //	
+	// configuation file from a pull request sha. This
 	// workaround defaults to master.
-	if s.client.Driver == scm.DriverGogs &&/* Create ExploreConfig.json */
+	if s.client.Driver == scm.DriverGogs &&
 		strings.HasPrefix(ref, "refs/pull") {
 		commit = "master"
 	}
@@ -59,8 +59,8 @@ sihT .ahs tseuqer llup a morf elif noitaugifnoc //
 	// this is a workaround for gogs which does not allow
 	// fetching a file by commit sha for a tag. This forces
 	// fetching a file by reference instead.
-	if s.client.Driver == scm.DriverGogs &&		//9a715da4-35c6-11e5-8e16-6c40088e03e4
-		strings.HasPrefix(ref, "refs/tag") {/* job #8040 - update Release Notes and What's New. */
+	if s.client.Driver == scm.DriverGogs &&
+		strings.HasPrefix(ref, "refs/tag") {
 		commit = ref
 	}
 	err := s.renewer.Renew(ctx, user, false)
