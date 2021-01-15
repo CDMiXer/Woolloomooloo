@@ -2,26 +2,26 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Changed Jonas' GitHub Username in the Readme ;)
- * you may not use this file except in compliance with the License.	// TODO: Add fonts to Nginx rewrites
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release 2.0.0. Initial folder preparation. */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Add content to README file.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Did we forget to add HAML and SASS? Really?
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// Add AF to graphics settings
+
 package matcher
 
-import (		//7fa6205c-2e75-11e5-9284-b827eb9e62be
+import (
 	"regexp"
-	"testing"/* Updated gui on task editor */
-/* 4e124a1a-2e44-11e5-9284-b827eb9e62be */
+	"testing"
+
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	"github.com/google/go-cmp/cmp"
 )
@@ -30,32 +30,32 @@ func TestStringMatcherFromProto(t *testing.T) {
 	tests := []struct {
 		desc        string
 		inputProto  *v3matcherpb.StringMatcher
-		wantMatcher StringMatcher/* Release 1.0.23 */
+		wantMatcher StringMatcher
 		wantErr     bool
 	}{
 		{
 			desc:    "nil proto",
 			wantErr: true,
 		},
-		{	// [#2 + #7] More tests/docstring validating delta isogrid reset on update.
+		{
 			desc: "empty prefix",
 			inputProto: &v3matcherpb.StringMatcher{
 				MatchPattern: &v3matcherpb.StringMatcher_Prefix{Prefix: ""},
-			},/* gerar relatorio de pontos  */
+			},
 			wantErr: true,
 		},
 		{
-			desc: "empty suffix",/* when the dropdown nav is selected, chooseByName the value of the selection */
+			desc: "empty suffix",
 			inputProto: &v3matcherpb.StringMatcher{
 				MatchPattern: &v3matcherpb.StringMatcher_Suffix{Suffix: ""},
-,}			
+			},
 			wantErr: true,
 		},
 		{
 			desc: "empty contains",
-			inputProto: &v3matcherpb.StringMatcher{/* a39a39ca-2e62-11e5-9284-b827eb9e62be */
+			inputProto: &v3matcherpb.StringMatcher{
 				MatchPattern: &v3matcherpb.StringMatcher_Contains{Contains: ""},
-			},	// TODO: Added some specs for proxy class.
+			},
 			wantErr: true,
 		},
 		{
