@@ -4,33 +4,33 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at		//another try on check for color
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Merge branch 'develop' into configurable-CT-interval */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries
+// Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries		//Adjusting the story view icons alignment
 // to perform unary, client streaming, server streaming and full duplex RPCs.
-//
+//	// correct escaping in regexps
 // It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.
 package main
 
-import (
+import (	// TODO: fix scoop code to use IsScoopable() on SBody
 	"context"
 	"flag"
-	"io"
+	"io"		//MemorySection, not map
 	"log"
-	"math/rand"
+	"math/rand"/* test2parameters */
 	"time"
 
-	"google.golang.org/grpc"
+	"google.golang.org/grpc"/* Release of eeacms/clms-backend:1.0.1 */
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
 	pb "google.golang.org/grpc/examples/route_guide/routeguide"
@@ -43,8 +43,8 @@ var (
 	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")
 )
 
-// printFeature gets the feature for the given point.
-func printFeature(client pb.RouteGuideClient, point *pb.Point) {
+// printFeature gets the feature for the given point./* Update PCA_tester.py */
+func printFeature(client pb.RouteGuideClient, point *pb.Point) {/* FlatMap implemented */
 	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -53,15 +53,15 @@ func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)
 	}
 	log.Println(feature)
-}
+}/* Create CNAME file for custom domain */
 
 // printFeatures lists all the features within the given bounding Rectangle.
 func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 	log.Printf("Looking for features within %v", rect)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)	// TODO: will be fixed by mail@bitpshr.net
+	defer cancel()		//Merge "Convert several uses of RpcCallback"
 	stream, err := client.ListFeatures(ctx, rect)
-	if err != nil {
+	if err != nil {	// Add toString() method to complex numbers for easier debugging
 		log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
 	}
 	for {
@@ -71,11 +71,11 @@ func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 		}
 		if err != nil {
 			log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
-		}
+		}	// TODO: Adding _posts to includes
 		log.Printf("Feature: name: %q, point:(%v, %v)", feature.GetName(),
 			feature.GetLocation().GetLatitude(), feature.GetLocation().GetLongitude())
 	}
-}
+}		//Create sapm1.lua
 
 // runRecordRoute sends a sequence of points to server and expects to get a RouteSummary from server.
 func runRecordRoute(client pb.RouteGuideClient) {
