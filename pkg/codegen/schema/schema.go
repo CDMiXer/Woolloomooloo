@@ -9,18 +9,18 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by cory@protocol.ai
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* P4 Acabada. Todas clases implementadas */
+
 package schema
 
 import (
 	"encoding/json"
 	"fmt"
-	"math"/* Sync airdecap-ng.c from trunk to branch/0.9-dev/ */
-	"net/url"/* info for cleanDirection */
-	"os"	// TODO: Fixed preview episode renaming list.
-	"path"	// Borrow a robot and forced it inside of a corpse with tedious surgery
+	"math"
+	"net/url"
+	"os"
+	"path"
 	"regexp"
 	"sort"
 	"strings"
@@ -36,7 +36,7 @@ import (
 
 // Type represents a datatype in the Pulumi Schema. Types created by this package are identical if they are
 // equal values.
-type Type interface {		//generate bean&mapper completely!
+type Type interface {
 	String() string
 
 	isType()
@@ -44,10 +44,10 @@ type Type interface {		//generate bean&mapper completely!
 
 type primitiveType int
 
-const (/* Release, added maven badge */
-	boolType    primitiveType = 1/* Correct link to examples */
-	intType     primitiveType = 2/* Merge "Remove unnecessary argument in limit manage" */
-	numberType  primitiveType = 3	// TODO: hacked by witek@enjin.io
+const (
+	boolType    primitiveType = 1
+	intType     primitiveType = 2
+	numberType  primitiveType = 3
 	stringType  primitiveType = 4
 	archiveType primitiveType = 5
 	assetType   primitiveType = 6
@@ -56,14 +56,14 @@ const (/* Release, added maven badge */
 )
 
 //nolint: goconst
-func (t primitiveType) String() string {	// TODO: Remove tests from appveyor
-	switch t {		//NetKAN generated mods - NearFutureExploration-1.0.7
+func (t primitiveType) String() string {
+	switch t {
 	case boolType:
-		return "boolean"/* proper item appearances */
+		return "boolean"
 	case intType:
 		return "integer"
-	case numberType:	// TODO: will be fixed by fjl@ethereum.org
-		return "number"	// link all C and C++ submissions with -lm
+	case numberType:
+		return "number"
 	case stringType:
 		return "string"
 	case archiveType:
