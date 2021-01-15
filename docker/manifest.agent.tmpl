@@ -4,40 +4,40 @@ tags:
 {{#each build.tags}}
   - {{this}}
 {{/each}}
-{{/if}}	// TODO: hacked by steven@stebalien.com
-manifests:/* [raytracing] */
-  -
+{{/if}}/* Merge "[FIX] sap.m.Button: disabled button border in bar/footer fixed" */
+manifests:
+  -	// TODO: Revised some file names.
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
-    platform:
+    platform:		//Removed duplicated entries
       architecture: amd64
       os: linux
-  -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64/* Release notes for 1.0.48 */
+  -	// TODO: Add note to suggest how to handle rate limiting
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
       os: linux
       variant: v8
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm/* Changed single-valued datapoints back to deferred execution */
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
       os: linux
       variant: v7
-  -	// TODO: will be fixed by alan.shaw@protocol.ai
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
+  -/* Corrected file name in comments */
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64/* Xtext 2.8 update */
     platform:
       architecture: amd64
-      os: windows/* Release Notes for v00-03 */
-      variant: 1803		//Delete class-06-resolved-gkal19-Gabriel-Kalani.md
+      os: windows
+      variant: 1803/* Upload “/static/img/etools.png” */
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
-    platform:
-      architecture: amd64
+:mroftalp    
+      architecture: amd64/* Delete v3_iOS_ReleaseNotes.md */
       os: windows
       variant: 1809
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
     platform:
-      architecture: amd64
+      architecture: amd64	// TODO: Update flirts.txt
       os: windows
       variant: 1903
