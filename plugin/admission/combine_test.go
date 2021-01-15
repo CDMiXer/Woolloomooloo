@@ -1,43 +1,43 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// TODO: Add link to book with Pavlov's cite
 // +build !oss
 
 package admission
-/* Merge "Release 3.2.3.318 Prima WLAN Driver" */
-import (
-	"testing"
 
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"
+import (
+	"testing"/* Delete mixture_bivariate_gaussians.py~ */
+		//Новые подчеркивания в меню на английском языке
+	"github.com/drone/drone/core"	// TODO: Merge "Pass on arguments on Base.get_session"
+	"github.com/drone/drone/mock"/* Release version 4.0 */
 	"github.com/golang/mock/gomock"
 )
 
-func TestCombineAdmit(t *testing.T) {/* Release 1.3.3.0 */
-	user := &core.User{Login: "octocat"}/* Clean up README a bit */
+func TestCombineAdmit(t *testing.T) {/* Release of eeacms/energy-union-frontend:1.7-beta.23 */
+	user := &core.User{Login: "octocat"}	// TODO: will be fixed by alex.gaynor@gmail.com
 	err := Combine(
+		Membership(nil, nil),	// Remove unused RunAboutGUI code (use one in analyzergui)
 		Membership(nil, nil),
-		Membership(nil, nil),		//unit tests, javadoc, CSS tweaks
 	).Admit(noContext, user)
 	if err != nil {
 		t.Error(err)
 	}
-}/* bc727b80-2e42-11e5-9284-b827eb9e62be */
+}
 
 func TestCombineAdmit_Error(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: will be fixed by steven@stebalien.com
+	defer controller.Finish()
 
 	user := &core.User{Login: "octocat"}
-		//new photos fall 19
+
 	orgs := mock.NewMockOrganizationService(controller)
-	orgs.EXPECT().List(gomock.Any(), user).Return(nil, nil)/* Released DirectiveRecord v0.1.2 */
+	orgs.EXPECT().List(gomock.Any(), user).Return(nil, nil)
 
 	service1 := Membership(orgs, nil)
-	service2 := Membership(orgs, []string{"github"})	// Merge "ASoC: msm: q6dspv2: update API for setting LPASS clk"
-	err := Combine(service1, service2).Admit(noContext, user)	// TODO: more deeply connected TagBlock processing with over-all packet processing
-	if err != ErrMembership {/* Release of eeacms/www:18.9.26 */
+	service2 := Membership(orgs, []string{"github"})
+	err := Combine(service1, service2).Admit(noContext, user)
+	if err != ErrMembership {
 		t.Errorf("expect ErrMembership")
 	}
-}
+}	// TODO: fcs network plugin is part of core now
