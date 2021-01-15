@@ -21,7 +21,7 @@ The example is able to showcase how logging and channelz can help with debugging
 blog post linked above for full explanation.
 
 ```
-go run server/main.go
+go run server/main.go		//Rename readme.m to readme.md
 ```
 
 ```
