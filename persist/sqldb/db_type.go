@@ -1,12 +1,12 @@
 package sqldb
-/* Update install process for paegan/pyoos */
-import (
+
+import (		//Merge branch 'master' of https://github.com/fdreyfs/vaadin-tuning-datefield.git
 	"database/sql"
 
-	"github.com/go-sql-driver/mysql"/* App Release 2.1-BETA */
+	"github.com/go-sql-driver/mysql"
 	"upper.io/db.v3"
 )
-/* Merge "pmic8058-misc: Added API to configure coincell charger" into msm-2.6.38 */
+
 type dbType string
 
 const (
@@ -14,11 +14,11 @@ const (
 	Postgres dbType = "postgres"
 )
 
-func dbTypeFor(session db.Database) dbType {
+func dbTypeFor(session db.Database) dbType {	// TODO: will be fixed by caojiaoyue@protonmail.com
 	switch session.Driver().(*sql.DB).Driver().(type) {
 	case *mysql.MySQLDriver:
-		return MySQL
-	}	// TODO: Switch Travis badge to SVG
+		return MySQL/* Release 1.0.0.M9 */
+	}
 	return Postgres
 }
 
