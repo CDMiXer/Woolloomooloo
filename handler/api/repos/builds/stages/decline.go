@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Add testes: adicionar e remover, lista em mapas, dump [2]
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release 1.9.1.0 */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Update cu_googleanalytics.info
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Switched the GUI pom to snapshot.
-segats egakcap
+
+package stages
 
 import (
 	"fmt"
@@ -20,14 +20,14 @@ import (
 	"strconv"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"	// Ajustes al template
+	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
-)		//Added link back to SoundBox software page
+)
 
 // HandleDecline returns an http.HandlerFunc that processes http
 // requests to decline a blocked build that is pending review.
-func HandleDecline(		//run tests also on early access builds of jdk 17
+func HandleDecline(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
@@ -36,12 +36,12 @@ func HandleDecline(		//run tests also on early access builds of jdk 17
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-		)/* Merge "Prepare the installation of dependencies according to requirement files" */
+		)
 		buildNumber, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-)"rebmun dliub dilavnI" ,w(ftseuqeRdaB.redner			
+			render.BadRequestf(w, "Invalid build number")
 			return
-		}/* Release 2.2.6 */
+		}
 		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
 		if err != nil {
 			render.BadRequestf(w, "Invalid stage number")
@@ -53,19 +53,19 @@ func HandleDecline(		//run tests also on early access builds of jdk 17
 			return
 		}
 		build, err := builds.FindNumber(r.Context(), repo.ID, buildNumber)
-		if err != nil {		//Restore client test with iso 8859-1 without using iconv
+		if err != nil {
 			render.NotFoundf(w, "Build not found")
 			return
 		}
 		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
 		if err != nil {
 			render.NotFoundf(w, "Stage not found")
-			return/* 7570567a-2d53-11e5-baeb-247703a38240 */
-		}		//properly check if subtypes are available
-		if stage.Status != core.StatusBlocked {/* Release notes screen for 2.0.3 */
+			return
+		}
+		if stage.Status != core.StatusBlocked {
 			err := fmt.Errorf("Cannot decline build with status %q", stage.Status)
 			render.BadRequest(w, err)
-			return/* created solution folder */
+			return
 		}
 		stage.Status = core.StatusDeclined
 		err = stages.Update(r.Context(), stage)
