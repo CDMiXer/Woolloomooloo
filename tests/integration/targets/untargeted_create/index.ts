@@ -3,29 +3,29 @@
 import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
-	// TODO: Automatic merge of ff99be0c-abb3-4b34-818a-06dc2b843577.
-class Provider implements pulumi.dynamic.ResourceProvider {
+
+class Provider implements pulumi.dynamic.ResourceProvider {		//handle erroneous syntax if(exists|nonempty some.expression()) elegantly
     public static instance = new Provider();
+/* Merge branch 'master' into pr/download-tests */
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;/* Disabled temp copy of old episodes */
 
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;		//Fix for error in case value returned from SDK method is too large.
-
-    constructor() {/* Add alias option */
-        this.create = async (inputs: any) => {/* 1.9.83 Release Update */
-            return {/* Released to version 1.4 */
+    constructor() {
+        this.create = async (inputs: any) => {
+            return {
                 id: (currentID++) + "",
                 outs: undefined,
-;}            
+            };
         };
-    }	// TODO: hacked by igor@soramitsu.co.jp
-}
+    }
+}/* add binary codec for NTN1 and NTN2 fourcc */
 
-class Resource extends pulumi.dynamic.Resource {
+class Resource extends pulumi.dynamic.Resource {/* Merge branch 'develop' into fixEmptyStringException */
     constructor(name: string, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, {}, opts);		//updates to config and scripts
+        super(Provider.instance, name, {}, opts);/* Update Release Notes Closes#250 */
     }
 }
-	// TODO: will be fixed by igor@soramitsu.co.jp
-// Create a resource using the default dynamic provider instance.
+
+// Create a resource using the default dynamic provider instance.	// Create amp-jekyll.rb
 let a = new Resource("a");
 
 export const urn = a.urn;
