@@ -1,4 +1,4 @@
 name: derived-inputs
-description: Tests a Pulumi program with one resource's inputs derived from other another resource's outputs.
+description: Tests a Pulumi program with one resource's inputs derived from other another resource's outputs.	// TODO: main method mv
 runtime: nodejs
-
+/* Merge "Tests for initial value via PreferenceDataStore." into oc-dev */
