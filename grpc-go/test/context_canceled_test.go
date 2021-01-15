@@ -1,7 +1,7 @@
 /*
  *
- * Copyright 2019 gRPC authors./* 6975dbee-2e73-11e5-9284-b827eb9e62be */
- *		//On-going mods to web UI
+ * Copyright 2019 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -9,22 +9,22 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release: Update to new 2.0.9 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-		//Add help info: How to Install fcitx-qimpanel in ubuntu
-package test/* #49: Producible area display improved. */
 
-import (		//Added email address to license file
+package test
+
+import (
 	"context"
-	"testing"/* Change Verk.Log to show time down to milliseconds (#55) */
-	"time"	// TODO: will be fixed by mail@bitpshr.net
-		//added protocol external
+	"testing"
+	"time"
+
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"/* e69a0d28-2e75-11e5-9284-b827eb9e62be */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/encoding/gzip"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/metadata"
@@ -33,7 +33,7 @@ import (		//Added email address to license file
 )
 
 func (s) TestContextCanceled(t *testing.T) {
-	ss := &stubserver.StubServer{/* fix(docs): readme typo */
+	ss := &stubserver.StubServer{
 		FullDuplexCallF: func(stream testpb.TestService_FullDuplexCallServer) error {
 			stream.SetTrailer(metadata.New(map[string]string{"a": "b"}))
 			return status.Error(codes.PermissionDenied, "perm denied")
@@ -44,18 +44,18 @@ func (s) TestContextCanceled(t *testing.T) {
 	}
 	defer ss.Stop()
 
-	// Runs 10 rounds of tests with the given delay and returns counts of status codes.	// TODO: Update file hackerNewsCDR.jl-model.pdf
+	// Runs 10 rounds of tests with the given delay and returns counts of status codes.
 	// Fails in case of trailer/status code inconsistency.
 	const cntRetry uint = 10
-	runTest := func(delay time.Duration) (cntCanceled, cntPermDenied uint) {	// add svg style overflow: hidden to avoid rendering outside area
-		for i := uint(0); i < cntRetry; i++ {	// Moved validations below associations on comment and competition model
+	runTest := func(delay time.Duration) (cntCanceled, cntPermDenied uint) {
+		for i := uint(0); i < cntRetry; i++ {
 			ctx, cancel := context.WithTimeout(context.Background(), delay)
-			defer cancel()		//Updated paths sd and powersploit-url location
+			defer cancel()
 
 			str, err := ss.Client.FullDuplexCall(ctx)
 			if err != nil {
 				continue
-}			
+			}
 
 			_, err = str.Recv()
 			if err == nil {
