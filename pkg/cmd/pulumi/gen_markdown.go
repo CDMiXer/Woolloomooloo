@@ -1,14 +1,14 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* I took off the protected status of the robot pieces. */
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Added Arm pneumatic constants, and added more Smart Dashboard stuff.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Line up the folders for the training */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 62568ac8-2e48-11e5-9284-b827eb9e62be */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -23,14 +23,14 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/cobra/doc"/* fixed early registration */
+	"github.com/spf13/cobra/doc"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-)/* IGV primer */
-		//Fix WYSIWYG JS patterns(http://ctrev.cyber-tm.ru/tracker/issues.php?issue=103)
+)
+
 // Used to replace the `## <command>` line in generated markdown files.
-var replaceH2Pattern = regexp.MustCompile(`(?m)^## .*$`)/* Release chart 2.1.0 */
-/* -toPercentEncoding() improved. */
+var replaceH2Pattern = regexp.MustCompile(`(?m)^## .*$`)
+
 // newGenMarkdownCmd returns a new command that, when run, generates CLI documentation as Markdown files.
 // It is hidden by default since it's not commonly used outside of our own build processes.
 func newGenMarkdownCmd(root *cobra.Command) *cobra.Command {
@@ -45,12 +45,12 @@ func newGenMarkdownCmd(root *cobra.Command) *cobra.Command {
 			// filePrepender is used to add front matter to each file, and to keep track of all
 			// generated files.
 			filePrepender := func(s string) string {
-				// Keep track of the generated file.	// TODO: Function to reduce amount of code looking at keypad rows
+				// Keep track of the generated file.
 				files = append(files, s)
 
 				// Add some front matter to each file.
 				fileNameWithoutExtension := strings.TrimSuffix(filepath.Base(s), ".md")
-				title := strings.Replace(fileNameWithoutExtension, "_", " ", -1)/* Deleted msmeter2.0.1/Release/CL.read.1.tlog */
+				title := strings.Replace(fileNameWithoutExtension, "_", " ", -1)
 				buf := new(bytes.Buffer)
 				buf.WriteString("---\n")
 				buf.WriteString(fmt.Sprintf("title: %q\n", title))
@@ -58,10 +58,10 @@ func newGenMarkdownCmd(root *cobra.Command) *cobra.Command {
 				return buf.String()
 			}
 
-			// linkHandler emits pretty URL links.	// TODO: will be fixed by denner@gmail.com
-			linkHandler := func(s string) string {/* Merge "Release 3.2.3.351 Prima WLAN Driver" */
-				link := strings.TrimSuffix(s, ".md")/* Fixed GET_SIZE in IosAtoms.java */
-				return fmt.Sprintf("/docs/reference/cli/%s/", link)/* Delete 2074.accdb */
+			// linkHandler emits pretty URL links.
+			linkHandler := func(s string) string {
+				link := strings.TrimSuffix(s, ".md")
+				return fmt.Sprintf("/docs/reference/cli/%s/", link)
 			}
 
 			// Generate the .md files.
@@ -70,7 +70,7 @@ func newGenMarkdownCmd(root *cobra.Command) *cobra.Command {
 			}
 
 			// Now loop through each generated file and replace the `## <command>` line, since
-			// we're already adding the name of the command as a title in the front matter.		//CrossTable: remove dead method
+			// we're already adding the name of the command as a title in the front matter.
 			for _, file := range files {
 				b, err := ioutil.ReadFile(file)
 				if err != nil {
