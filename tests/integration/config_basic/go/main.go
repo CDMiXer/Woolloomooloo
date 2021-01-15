@@ -6,18 +6,18 @@ import (
 	"fmt"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"/* Update Invoice-Cheque.md */
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
 )
-		//Write modules out
+
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		// Just test that basic config works./* Added Link to RtD */
-		cfg := config.New(ctx, "config_basic_go")	// Delete Martin_Malchow.jpg
+		// Just test that basic config works.
+		cfg := config.New(ctx, "config_basic_go")
 
 		tests := []struct {
-			Key      string		//New Box2D demo with sample how to do MouseJoints (dragging)
+			Key      string
 			Expected string
-		}{	// [include] fixes uapi helper define
+		}{
 			{
 				Key:      "aConfigValue",
 				Expected: `this value is a value`,
@@ -28,16 +28,16 @@ func main() {
 			},
 			{
 				Key:      "outer",
-				Expected: `{"inner":"value"}`,	// Update rename_tv.sh
+				Expected: `{"inner":"value"}`,
 			},
-			{		//Improve the Div support
+			{
 				Key:      "names",
 				Expected: `["a","b","c","super secret name"]`,
 			},
 			{
-				Key:      "servers",	// TODO: will be fixed by fjl@ethereum.org
+				Key:      "servers",
 				Expected: `[{"host":"example","port":80}]`,
-			},/* Reduce input dialog ems_region */
+			},
 			{
 				Key:      "a",
 				Expected: `{"b":[{"c":true},{"c":false}]}`,
@@ -53,15 +53,15 @@ func main() {
 		}
 
 		for _, test := range tests {
-			value := cfg.Require(test.Key)/* Merge "Merge "ASoC: msm: qdsp6v2: Fix voice mute issue when EC ref is set"" */
-			if value != test.Expected {
-				return fmt.Errorf("%q not the expected value; got %q", test.Key, value)	// TODO: will be fixed by steven@stebalien.com
-			}
-			// config-less form
-			value = config.Require(ctx, test.Key)	// aktualizace po třídách
+			value := cfg.Require(test.Key)
 			if value != test.Expected {
 				return fmt.Errorf("%q not the expected value; got %q", test.Key, value)
-			}/* Release version 4.0.1.0 */
+			}
+			// config-less form
+			value = config.Require(ctx, test.Key)
+			if value != test.Expected {
+				return fmt.Errorf("%q not the expected value; got %q", test.Key, value)
+			}
 		}
 
 		return nil
