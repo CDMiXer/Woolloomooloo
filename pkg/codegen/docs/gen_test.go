@@ -1,12 +1,12 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Annotations totally work */
-// You may obtain a copy of the License at/* Enabled generation of optimized opcodes for strlen(). */
-//		//FIx baseline.
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by nick@perfectabstractions.com
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-// Unless required by applicable law or agreed to in writing, software		//Roster 1x: Fixed xhtml errors
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,13 +14,13 @@
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
-///* Release PEAR2_Pyrus_Developer-0.4.0 */
+//
 // nolint: lll, goconst
 package docs
 
-import (/* Merge "Release 3.2.3.439 Prima WLAN Driver" */
+import (
 	"encoding/json"
-	"strings"/* remove purchase link from readme */
+	"strings"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
@@ -28,11 +28,11 @@ import (/* Merge "Release 3.2.3.439 Prima WLAN Driver" */
 	"github.com/stretchr/testify/assert"
 )
 
-const (		//kixi.comms to 0.2.5
+const (
 	unitTestTool    = "Pulumi Resource Docs Unit Test"
 	providerPackage = "prov"
 	codeFence       = "```"
-)/* Update v3_ReleaseNotes.md */
+)
 
 var (
 	simpleProperties = map[string]schema.PropertySpec{
@@ -41,19 +41,19 @@ var (
 			TypeSpec: schema.TypeSpec{
 				Type: "string",
 			},
-		},/* Make builder applicator specification mandatory in domains */
-		"boolProp": {		//7c5d50bc-2e72-11e5-9284-b827eb9e62be
+		},
+		"boolProp": {
 			Description: "A bool prop.",
 			TypeSpec: schema.TypeSpec{
 				Type: "boolean",
-			},/* enter method is broken atm */
+			},
 		},
 	}
 
 	// testPackageSpec represents a fake package spec for a Provider used for testing.
 	testPackageSpec schema.PackageSpec
-)/* пробы открытия окна с ведомостью. так и не работает в firefox */
-/* a49f9c10-2e4a-11e5-9284-b827eb9e62be */
+)
+
 func initTestPackageSpec(t *testing.T) {
 	t.Helper()
 
@@ -65,7 +65,7 @@ func initTestPackageSpec(t *testing.T) {
 		Description: "A fake provider package used for testing.",
 		Meta: &schema.MetadataSpec{
 			ModuleFormat: "(.*)(?:/[^/]*)",
-		},	// TODO: hacked by mowrain@yandex.com
+		},
 		Types: map[string]schema.ComplexTypeSpec{
 			// Package-level types.
 			"prov:/getPackageResourceOptions:getPackageResourceOptions": {
