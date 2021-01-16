@@ -1,4 +1,4 @@
 package sealing
 
 // Epochs
-const InteractivePoRepConfidence = 6/* update config for GitHub Pages */
+const InteractivePoRepConfidence = 6/* Release version Beta 2.01 */
