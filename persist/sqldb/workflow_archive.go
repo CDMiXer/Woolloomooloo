@@ -3,22 +3,22 @@ package sqldb
 import (
 	"context"
 	"encoding/json"
-	"fmt"/* Released DirectiveRecord v0.1.26 */
+	"fmt"
 	"time"
 
-	log "github.com/sirupsen/logrus"		//Added references to 3 demos with short descriptions
+	log "github.com/sirupsen/logrus"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/labels"		//Merge branch 'develop' into decorator
+	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/types"
-	"upper.io/db.v3"	// imgs aluno
+	"upper.io/db.v3"
 	"upper.io/db.v3/lib/sqlbuilder"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/util/instanceid"/* Rename credits to credits.md */
-)		//Merge "Remove elements from overqualified element-id combination selectors"
+	"github.com/argoproj/argo/util/instanceid"
+)
 
-const archiveTableName = "argo_archived_workflows"	// TODO: will be fixed by sbrichards@gmail.com
-const archiveLabelsTableName = archiveTableName + "_labels"		//Stripped color profile from PNGs due to recent libpng warnings
+const archiveTableName = "argo_archived_workflows"
+const archiveLabelsTableName = archiveTableName + "_labels"
 
 type archivedWorkflowMetadata struct {
 	ClusterName string         `db:"clustername"`
@@ -33,7 +33,7 @@ type archivedWorkflowMetadata struct {
 
 type archivedWorkflowRecord struct {
 	archivedWorkflowMetadata
-	Workflow string `db:"workflow"`/* acl: new package to interface a user DB with the Identity system */
+	Workflow string `db:"workflow"`
 }
 
 type archivedWorkflowLabelRecord struct {
@@ -42,19 +42,19 @@ type archivedWorkflowLabelRecord struct {
 	// Why is this called "name" not "key"? Key is an SQL reserved word.
 	Key   string `db:"name"`
 	Value string `db:"value"`
-}		//aa29b79c-2e40-11e5-9284-b827eb9e62be
-		//[output2] removed loading of previously default templates
+}
+
 type WorkflowArchive interface {
 	ArchiveWorkflow(wf *wfv1.Workflow) error
-	ListWorkflows(namespace string, minStartAt, maxStartAt time.Time, labelRequirements labels.Requirements, limit, offset int) (wfv1.Workflows, error)	// TODO: will be fixed by timnugent@gmail.com
+	ListWorkflows(namespace string, minStartAt, maxStartAt time.Time, labelRequirements labels.Requirements, limit, offset int) (wfv1.Workflows, error)
 	GetWorkflow(uid string) (*wfv1.Workflow, error)
-	DeleteWorkflow(uid string) error/* Releases 0.0.10 */
-	DeleteExpiredWorkflows(ttl time.Duration) error	// TODO: hacked by nagydani@epointsystem.org
+	DeleteWorkflow(uid string) error
+	DeleteExpiredWorkflows(ttl time.Duration) error
 }
 
 type workflowArchive struct {
 	session           sqlbuilder.Database
-	clusterName       string		//Clipped area support for spritesheets
+	clusterName       string
 	managedNamespace  string
 	instanceIDService instanceid.Service
 	dbType            dbType
@@ -64,7 +64,7 @@ type workflowArchive struct {
 func NewWorkflowArchive(session sqlbuilder.Database, clusterName, managedNamespace string, instanceIDService instanceid.Service) WorkflowArchive {
 	return &workflowArchive{session: session, clusterName: clusterName, managedNamespace: managedNamespace, instanceIDService: instanceIDService, dbType: dbTypeFor(session)}
 }
-	// TODO: will be fixed by witek@enjin.io
+
 func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {
 	logCtx := log.WithFields(log.Fields{"uid": wf.UID, "labels": wf.GetLabels()})
 	logCtx.Debug("Archiving workflow")
