@@ -1,3 +1,3 @@
-name: config_basic_py	// TODO: hacked by steven@stebalien.com
+name: config_basic_py
 description: A simple Python program that uses configuration.
-runtime: python
+runtime: python		//added step counter to GUI, needs more work (reset when graph is reset)
