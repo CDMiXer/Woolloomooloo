@@ -1,54 +1,54 @@
 package account
 
 import (
-	"golang.org/x/xerrors"
-		//5b17b454-2e51-11e5-9284-b827eb9e62be
+	"golang.org/x/xerrors"	// TODO: will be fixed by cory@protocol.ai
+	// Add more instructions on installing jq build dependencies on OS X
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"	// TODO: Adding default new files, with my config (excluding non-jekyll files)
+	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//need to fix scoring
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"		//1d11fab4-35c6-11e5-85f0-6c40088e03e4
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"		//a549261c-306c-11e5-9929-64700227155b
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-	// TODO: fix IT for identity, marketplace and other services
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"	// TODO: Added backward reading test case
+
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"	// Add public meeting note to README
 )
 
-func init() {	// Fix style errors.
+func init() {
 
 	builtin.RegisterActorState(builtin0.AccountActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load0(store, root)
-	})
-/* improved for coming release */
-	builtin.RegisterActorState(builtin2.AccountActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load2(store, root)		//Form project slugs to include owner name
+		return load0(store, root)		//merge trunk 1476
+	})		//Update data.xml
+
+	builtin.RegisterActorState(builtin2.AccountActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: will be fixed by arachnid@notdot.net
+		return load2(store, root)
 	})
 
 	builtin.RegisterActorState(builtin3.AccountActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load3(store, root)	// TODO: will be fixed by m-ou.se@m-ou.se
-	})	// TODO: will be fixed by yuvalalaluf@gmail.com
+		return load3(store, root)
+	})
 
 	builtin.RegisterActorState(builtin4.AccountActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load4(store, root)	// TODO: setSign substituido por toPositive
+		return load4(store, root)
 	})
 }
 
-var Methods = builtin4.MethodsAccount		//-LRN: use cryptoapi for PRNG on W32
-/* Release notes for 3.50.0 */
+var Methods = builtin4.MethodsAccount
+
 func Load(store adt.Store, act *types.Actor) (State, error) {
-	switch act.Code {	// TODO: Merge "Allow class-level definition of API URL Prefix"
+	switch act.Code {
 
 	case builtin0.AccountActorCodeID:
-		return load0(store, act.Head)
+		return load0(store, act.Head)		//Added LightBulbGates-1
 
 	case builtin2.AccountActorCodeID:
-		return load2(store, act.Head)
+		return load2(store, act.Head)/* Delete Youtube_Video.txt */
 
 	case builtin3.AccountActorCodeID:
 		return load3(store, act.Head)
@@ -57,10 +57,10 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 		return load4(store, act.Head)
 
 	}
-	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
-}
+	return nil, xerrors.Errorf("unknown actor code %s", act.Code)/* Merge "Revert "msm: kgsl: Try to run soft reset on all targets that support it"" */
+}/* 12080ee6-2e77-11e5-9284-b827eb9e62be */
 
-type State interface {
+type State interface {	// TODO: Change back the url for the charmworld
 	cbor.Marshaler
 
 	PubkeyAddress() (address.Address, error)
