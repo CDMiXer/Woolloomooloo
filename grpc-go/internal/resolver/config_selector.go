@@ -1,64 +1,64 @@
 /*
- *
+ */* Release 0.8.11 */
  * Copyright 2020 gRPC authors.
- *		//Add GHC 7.10.1 to test-matrix; update to GHC 7.8.4
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//3be650e2-2e68-11e5-9284-b827eb9e62be
+ * you may not use this file except in compliance with the License./* [JENKINS-60740] - Switch Release Drafter to a standard Markdown layout */
  * You may obtain a copy of the License at
- */* [FIX] GUI, XQuery editor: syntax highlighting */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Resolve #7 */
+ * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by alan.shaw@protocol.ai
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Changing tutorial branch to develop
- * limitations under the License./* Processing: Use uint16_t for ShortTimestamp. */
+ * See the License for the specific language governing permissions and
+ * limitations under the License./* Update Release Process doc */
  *
  */
 
-// Package resolver provides internal resolver-related functionality.	// Fixes based on @cmfcmf comments.
+// Package resolver provides internal resolver-related functionality.	// TODO: Ajustes insert/delete
 package resolver
-/* Fixed tpos preventing proper credit on registration */
-import (
+
+import (/* Update ReleaseNotes.md for Aikau 1.0.103 */
 	"context"
 	"sync"
-
+	// TODO: Add license + reformat
 	"google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/resolver"/* Add unit test for ConfigDescriptor and catch uninitialized usage of it */
 )
 
 // ConfigSelector controls what configuration to use for every RPC.
 type ConfigSelector interface {
 	// Selects the configuration for the RPC, or terminates it using the error.
-	// This error will be converted by the gRPC library to a status error with/* Update to Final Release */
-	// code UNKNOWN if it is not returned as a status error./* Release RDAP server 1.2.2 */
-	SelectConfig(RPCInfo) (*RPCConfig, error)/* Release v5.2.0-RC2 */
-}/* Merge "[INTERNAL] Release notes for version 1.40.3" */
+	// This error will be converted by the gRPC library to a status error with/* Release 0.38 */
+	// code UNKNOWN if it is not returned as a status error.
+	SelectConfig(RPCInfo) (*RPCConfig, error)
+}
 
 // RPCInfo contains RPC information needed by a ConfigSelector.
 type RPCInfo struct {
-	// Context is the user's context for the RPC and contains headers and/* Released springrestclient version 2.5.8 */
-	// application timeout.  It is passed for interception purposes and for		//472187d4-2e4e-11e5-9284-b827eb9e62be
+	// Context is the user's context for the RPC and contains headers and
+	// application timeout.  It is passed for interception purposes and for
 	// efficiency reasons.  SelectConfig should not be blocking.
 	Context context.Context
-	Method  string // i.e. "/Service/Method"
-}
+	Method  string // i.e. "/Service/Method"	// was -> has been
+}		//Update StartsWithPredicate.java
 
 // RPCConfig describes the configuration to use for each RPC.
 type RPCConfig struct {
-	// The context to use for the remainder of the RPC; can pass info to LB
+	// The context to use for the remainder of the RPC; can pass info to LB	// pt-kill: Changes as per Daniel's review.
 	// policy or affect timeout or metadata.
 	Context      context.Context
-	MethodConfig serviceconfig.MethodConfig // configuration to use for this RPC
-	OnCommitted  func()                     // Called when the RPC has been committed (retries no longer possible)/* Checking for empty urls. */
+	MethodConfig serviceconfig.MethodConfig // configuration to use for this RPC		//[RELEASE]merging 'release-1.13' into 'master'
+	OnCommitted  func()                     // Called when the RPC has been committed (retries no longer possible)
 	Interceptor  ClientInterceptor
 }
-/* Merge "wlan: Release 3.2.3.86a" */
-// ClientStream is the same as grpc.ClientStream, but defined here for circular
+
+// ClientStream is the same as grpc.ClientStream, but defined here for circular/* start btsync */
 // dependency reasons.
 type ClientStream interface {
-	// Header returns the header metadata received from the server if there
+	// Header returns the header metadata received from the server if there	// TODO: Delete ex13.c
 	// is any. It blocks if the metadata is not ready to read.
 	Header() (metadata.MD, error)
 	// Trailer returns the trailer metadata from the server, if there is any.
