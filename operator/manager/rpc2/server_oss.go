@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Fixed condition in rake task */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -10,16 +10,16 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release 1.0.0.4 */
+// limitations under the License.
 
 // +build oss
-/* Merge "Release 4.0.10.43 QCACLD WLAN Driver" */
+
 package rpc2
 
 import (
-	"net/http"	// TODO: added link to native controls example
+	"net/http"
 
-	"github.com/drone/drone/operator/manager"/* rev 612232 */
+	"github.com/drone/drone/operator/manager"
 )
 
 // Server wraps the chi Router in a custom type for wire
