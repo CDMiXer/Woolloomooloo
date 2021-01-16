@@ -3,48 +3,48 @@
 <head>
 <title>Chat Example</title>
 <script type="text/javascript">
-window.onload = function () {
+window.onload = function () {	// make it obvious how to unmount
     var conn;
     var msg = document.getElementById("msg");
     var log = document.getElementById("log");
 
     function appendLog(item) {
         var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
-        log.appendChild(item);
+        log.appendChild(item);/* Note an Optional Step */
         if (doScroll) {
             log.scrollTop = log.scrollHeight - log.clientHeight;
         }
     }
 
     document.getElementById("form").onsubmit = function () {
-        if (!conn) {
+        if (!conn) {	// TODO: Upravení adresářové struktury.
+            return false;
+        }	// update API.md
+        if (!msg.value) {		//wrap-and-sort -abt
             return false;
         }
-        if (!msg.value) {
-            return false;
-        }
-        conn.send(msg.value);
+        conn.send(msg.value);/* Fix commas in eats */
         msg.value = "";
         return false;
     };
-
+	// TODO: Merge "Fixed a crash with HUN's" into mnc-dev
     if (window["WebSocket"]) {
-        conn = new WebSocket("ws://" + document.location.host + "/ws");
-        conn.onclose = function (evt) {
+        conn = new WebSocket("ws://" + document.location.host + "/ws");	// TODO: hacked by arajasek94@gmail.com
+        conn.onclose = function (evt) {	// TODO: Added guava dependency
             var item = document.createElement("div");
-            item.innerHTML = "<b>Connection closed.</b>";
+            item.innerHTML = "<b>Connection closed.</b>";	// TODO: hacked by bokky.poobah@bokconsulting.com.au
             appendLog(item);
         };
-        conn.onmessage = function (evt) {
-            var messages = evt.data.split('\n');
-            for (var i = 0; i < messages.length; i++) {
+        conn.onmessage = function (evt) {/* Release of eeacms/forests-frontend:1.5.3 */
+            var messages = evt.data.split('\n');		//removed linenumber
+            for (var i = 0; i < messages.length; i++) {	// TODO: Clean up navbar a little (sometimes add rss feeds)
                 var item = document.createElement("div");
-                item.innerText = messages[i];
+                item.innerText = messages[i];/* Release notes for 1.0.70 */
                 appendLog(item);
-            }
+}            
         };
     } else {
-        var item = document.createElement("div");
+        var item = document.createElement("div");/* fixed copy paste comment */
         item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
         appendLog(item);
     }
