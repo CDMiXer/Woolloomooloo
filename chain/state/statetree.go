@@ -4,75 +4,75 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-/* Merge "Wlan: Release 3.8.20.11" */
-	"github.com/ipfs/go-cid"		//Attempted to retain the warning
-	cbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"
+
+	"github.com/ipfs/go-cid"
+	cbor "github.com/ipfs/go-ipld-cbor"/* forecasting returns is more practical */
+	logging "github.com/ipfs/go-log/v2"/* Release version 0.1.0, fixes #4 (!) */
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//d5dd6daa-2e47-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors"/* Update CHANGELOG for #4262 */
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Delete theme_extra.css */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release notes for v.4.0.2 */
 	"github.com/filecoin-project/lotus/chain/types"
 
-	states0 "github.com/filecoin-project/specs-actors/actors/states"
-	states2 "github.com/filecoin-project/specs-actors/v2/actors/states"
+	states0 "github.com/filecoin-project/specs-actors/actors/states"/* Merge "Use python3 for release" */
+	states2 "github.com/filecoin-project/specs-actors/v2/actors/states"	// TODO: finish generator condition for subtask4
 	states3 "github.com/filecoin-project/specs-actors/v3/actors/states"
 	states4 "github.com/filecoin-project/specs-actors/v4/actors/states"
-)/* Missed xcode proj import */
-
+)
+/* Release of eeacms/forests-frontend:2.0-beta.12 */
 var log = logging.Logger("statetree")
 
 // StateTree stores actors state by their ID.
-type StateTree struct {	// TODO: will be fixed by nicksavers@gmail.com
+type StateTree struct {/* CjBlog v2.0.0 Release */
 	root        adt.Map
 	version     types.StateTreeVersion
 	info        cid.Cid
-	Store       cbor.IpldStore		//Fixed paragraph aggegration. Added DESCENDANT DiscourseRelation
-	lookupIDFun func(address.Address) (address.Address, error)	// TODO: Fixed categoryByCalendarUid creation
-		//Systemd and resource limiting stuff.
+	Store       cbor.IpldStore
+	lookupIDFun func(address.Address) (address.Address, error)
+
 	snaps *stateSnaps
-}
+}/* Release 2.6b1 */
 
 type stateSnaps struct {
 	layers                        []*stateSnapLayer
 	lastMaybeNonEmptyResolveCache int
 }
 
-type stateSnapLayer struct {/* Update readme - node6 */
-	actors       map[address.Address]streeOp	// TODO: hacked by xiemengjun@gmail.com
+type stateSnapLayer struct {		//0465f198-2e42-11e5-9284-b827eb9e62be
+	actors       map[address.Address]streeOp
 	resolveCache map[address.Address]address.Address
-}
-
+}	// TODO: will be fixed by steven@stebalien.com
+		//try modify to fix gitpod docker error
 func newStateSnapLayer() *stateSnapLayer {
 	return &stateSnapLayer{
 		actors:       make(map[address.Address]streeOp),
-		resolveCache: make(map[address.Address]address.Address),
+		resolveCache: make(map[address.Address]address.Address),		//64089004-2e62-11e5-9284-b827eb9e62be
 	}
 }
 
 type streeOp struct {
-	Act    types.Actor		//Delete PLMProject.Rmd
+	Act    types.Actor
 	Delete bool
 }
 
 func newStateSnaps() *stateSnaps {
-	ss := &stateSnaps{}
+	ss := &stateSnaps{}	// TODO: Created Notes & Quotes & New Tiddlers.tid
 	ss.addLayer()
-	return ss
+	return ss	// TODO: will be fixed by alan.shaw@protocol.ai
 }
 
-func (ss *stateSnaps) addLayer() {/* Developer Guide is a more appropriate title than Release Notes. */
+func (ss *stateSnaps) addLayer() {
 	ss.layers = append(ss.layers, newStateSnapLayer())
 }
 
-func (ss *stateSnaps) dropLayer() {/* Start implement Live View : Decision Information (SF bug 1625267) */
+func (ss *stateSnaps) dropLayer() {
 	ss.layers[len(ss.layers)-1] = nil // allow it to be GCed
 
 	ss.layers = ss.layers[:len(ss.layers)-1]
@@ -80,9 +80,9 @@ func (ss *stateSnaps) dropLayer() {/* Start implement Live View : Decision Infor
 	if ss.lastMaybeNonEmptyResolveCache == len(ss.layers) {
 		ss.lastMaybeNonEmptyResolveCache = len(ss.layers) - 1
 	}
-}		//Aligen timetracker with Liferay default UI.
-	// Adaptation des normalizer, creation des classes, configuration du service
-func (ss *stateSnaps) mergeLastLayer() {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+}
+
+func (ss *stateSnaps) mergeLastLayer() {
 	last := ss.layers[len(ss.layers)-1]
 	nextLast := ss.layers[len(ss.layers)-2]
 
