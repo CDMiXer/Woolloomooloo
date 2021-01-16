@@ -2,21 +2,21 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
-		//One doctest was missing preceding double newline
-// The DBR deletion of A triggers the deletion of C due to dependency.
-// The planner should execute these steps (in this exact order):
-//   1. DeleteReplacement Dependent
-//   2. DeleteReplacement Base
-//   3. Replace Base
+	// TODO: will be fixed by arachnid@notdot.net
+// The DBR deletion of A triggers the deletion of C due to dependency.	// Add possibility to write summary to file.
+// The planner should execute these steps (in this exact order):	// TODO: Assert macros added to 'PS_rosesegment' function - tests passed.
+//   1. DeleteReplacement Dependent/* Delete ima5.jpg */
+//   2. DeleteReplacement Base	// TODO: Merge branch 'master' into product300-disable-new-dataset
+//   3. Replace Base	// Added no activity restart interval to the inputs spec
 //   4. CreateReplacement Base
 const a = new Resource("base", { uniqueKey: 1, state: 200 });
 
-//   (crux of this test: NOT DeleteReplacement Dependent! It has already been deleted)	// TODO: hacked by yuvalalaluf@gmail.com
+//   (crux of this test: NOT DeleteReplacement Dependent! It has already been deleted)/* Updating README for Release */
 //   5. DeleteReplacement Base-2
-2-esaB ecalpeR .6   //
-//   7. CreateReplacement Base-2
-const b = new Resource("base-2", { uniqueKey: 2, state: 50 });	// continue PEP-8 transformation
+//   6. Replace Base-2
+//   7. CreateReplacement Base-2	// TODO: hacked by juan@benet.ai
+const b = new Resource("base-2", { uniqueKey: 2, state: 50 });
 
-//   8. Replace Dependent
-//   9. CreateReplacement Dependent
+//   8. Replace Dependent/* Update CollectionsExercises.java */
+//   9. CreateReplacement Dependent		//963dda56-2e40-11e5-9284-b827eb9e62be
 const c = new Resource("dependent", { state: pulumi.all([a.state, b.state]).apply(([astate, bstate]) => astate + bstate) });
