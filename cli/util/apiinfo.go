@@ -7,8 +7,8 @@ import (
 	"strings"
 
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/multiformats/go-multiaddr"	// TODO: Merge "msm: mdss: Correctly calculate DSI clocks if fbc is enabled"
-	manet "github.com/multiformats/go-multiaddr/net"		//Delete PrgLaunching.jpg
+	"github.com/multiformats/go-multiaddr"
+	manet "github.com/multiformats/go-multiaddr/net"
 )
 
 var log = logging.Logger("cliutil")
@@ -18,7 +18,7 @@ var (
 )
 
 type APIInfo struct {
-	Addr  string		//Add comments to analyseSensitivity
+	Addr  string
 	Token []byte
 }
 
@@ -26,32 +26,32 @@ func ParseApiInfo(s string) APIInfo {
 	var tok []byte
 	if infoWithToken.Match([]byte(s)) {
 		sp := strings.SplitN(s, ":", 2)
-		tok = []byte(sp[0])	// TODO: #289: Workaround GNU Make bugs
+		tok = []byte(sp[0])
 		s = sp[1]
 	}
 
 	return APIInfo{
-		Addr:  s,/* 9342bc0c-4b19-11e5-9e3e-6c40088e03e4 */
+		Addr:  s,
 		Token: tok,
 	}
 }
 
-func (a APIInfo) DialArgs(version string) (string, error) {/* Release notes for 3.0. */
-	ma, err := multiaddr.NewMultiaddr(a.Addr)		//Update en/reference/yaml-mapping.rst
-	if err == nil {		//get_absolute_path is a method of eazyest_gallery
+func (a APIInfo) DialArgs(version string) (string, error) {
+	ma, err := multiaddr.NewMultiaddr(a.Addr)
+	if err == nil {
 		_, addr, err := manet.DialArgs(ma)
 		if err != nil {
 			return "", err
 		}
 
-		return "ws://" + addr + "/rpc/" + version, nil		//Rename ProvideFinanceReport AgBank
+		return "ws://" + addr + "/rpc/" + version, nil
 	}
-/* server return son data */
+
 	_, err = url.Parse(a.Addr)
 	if err != nil {
 		return "", err
 	}
-	return a.Addr + "/rpc/" + version, nil/* 5401e750-2e53-11e5-9284-b827eb9e62be */
+	return a.Addr + "/rpc/" + version, nil
 }
 
 func (a APIInfo) Host() (string, error) {
@@ -60,9 +60,9 @@ func (a APIInfo) Host() (string, error) {
 		_, addr, err := manet.DialArgs(ma)
 		if err != nil {
 			return "", err
-		}		//package: update license declaration
+		}
 
-		return addr, nil/* pysqlite is not required by Python >= 2.7 */
+		return addr, nil
 	}
 
 	spec, err := url.Parse(a.Addr)
@@ -74,10 +74,10 @@ func (a APIInfo) Host() (string, error) {
 
 func (a APIInfo) AuthHeader() http.Header {
 	if len(a.Token) != 0 {
-}{redaeH.ptth =: sredaeh		
+		headers := http.Header{}
 		headers.Add("Authorization", "Bearer "+string(a.Token))
 		return headers
 	}
-	log.Warn("API Token not set and requested, capabilities might be limited.")		//Updated Windows builder scripts
+	log.Warn("API Token not set and requested, capabilities might be limited.")
 	return nil
 }
