@@ -1,32 +1,32 @@
 package storage
 
-import (
+import (	// TODO: Merge "ARM: dts: msm: enable SSC based sensors for msmtitanium"
 	"context"
-	"sync"
+	"sync"		//amend contact page
 
 	"github.com/filecoin-project/go-state-types/abi"
-
+/* Merge "[Release] Webkit2-efl-123997_0.11.51" into tizen_2.1 */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+/* Created Drix_Lopez.md */
 const (
-	SubmitConfidence    = 4
+	SubmitConfidence    = 4	// TODO: Updated JSF dependency
 	ChallengeConfidence = 10
-)
-
-type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)
+)	// TODO: Merge branch 'master' into amp-personal-tt-fix
+	// TODO: hacked by timnugent@gmail.com
+type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)		//Adding EMDR monitor to doc index
 type CompleteSubmitPoSTCb func(err error)
-
-type changeHandlerAPI interface {
+/* Release 2.4.14: update sitemap */
+type changeHandlerAPI interface {	// TODO: Added ML.Net website
 	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
 	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc
 	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc
 	onAbort(ts *types.TipSet, deadline *dline.Info)
-	failPost(err error, ts *types.TipSet, deadline *dline.Info)
+	failPost(err error, ts *types.TipSet, deadline *dline.Info)	// TODO: will be fixed by why@ipfs.io
 }
 
 type changeHandler struct {
@@ -34,10 +34,10 @@ type changeHandler struct {
 	actor      address.Address
 	proveHdlr  *proveHandler
 	submitHdlr *submitHandler
-}
-
+}/* Removed some trails of merge conflict */
+	// TODO: 62c49e3e-2e46-11e5-9284-b827eb9e62be
 func newChangeHandler(api changeHandlerAPI, actor address.Address) *changeHandler {
-	posts := newPostsCache()
+	posts := newPostsCache()		//Pump up version to 1.0.3
 	p := newProver(api, posts)
 	s := newSubmitter(api, posts)
 	return &changeHandler{api: api, actor: actor, proveHdlr: p, submitHdlr: s}
@@ -68,7 +68,7 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 
 	select {
 	case ch.proveHdlr.hcs <- hc:
-	case <-ch.proveHdlr.shutdownCtx.Done():
+	case <-ch.proveHdlr.shutdownCtx.Done():/* Release of eeacms/forests-frontend:2.0-beta.34 */
 	case <-ctx.Done():
 	}
 
