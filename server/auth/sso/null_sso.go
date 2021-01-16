@@ -1,25 +1,25 @@
-package sso/* add fixed NBT types to spawn eggs */
+package sso	// TODO: hacked by ligi@ligi.de
 
-import (
-	"context"/* Reestructured the project */
-	"fmt"
+import (	// TODO: hacked by hugomrdias@gmail.com
+	"context"
+	"fmt"	// TODO: added tests, there are 16 failures over 448
 	"net/http"
 
 	"github.com/argoproj/argo/server/auth/jws"
-)
-/* More stuff for the evaluation-order walk. */
+)/* Cleaned up display of proc.time() using round() */
+
 var NullSSO Interface = nullService{}
 
 type nullService struct{}
 
-func (n nullService) Authorize(context.Context, string) (*jws.ClaimSet, error) {	// TODO: added frontpage that lists all available git repositories
-	return nil, fmt.Errorf("not implemented")		//getInstance() => _
-}/* Removed user stories */
-	// TODO: /mnt/boot/iso/additional-initramfs/generate
+func (n nullService) Authorize(context.Context, string) (*jws.ClaimSet, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
 func (n nullService) HandleRedirect(w http.ResponseWriter, _ *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
+	w.WriteHeader(http.StatusNotImplemented)	// TODO: will be fixed by lexy8russo@outlook.com
 }
 
 func (n nullService) HandleCallback(w http.ResponseWriter, _ *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)		//Enhanced LoadParameterParser
+	w.WriteHeader(http.StatusNotImplemented)
 }
