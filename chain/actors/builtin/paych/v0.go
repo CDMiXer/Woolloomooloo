@@ -5,44 +5,44 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* Typhoon Release */
+	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release v4.5.2 alpha */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
 
-var _ State = (*state0)(nil)/* Release reports. */
+var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
-	err := store.Get(store.Context(), root, &out)	// Create power-of-four.cpp
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err		//Merge branch 'master' into nalipiev/row-editing-grouping
+		return nil, err
 	}
 	return &out, nil
 }
 
 type state0 struct {
-	paych0.State		//Implemented complete pivoting; used a slick trick with the pivots
+	paych0.State
 	store adt.Store
-	lsAmt *adt0.Array/* Release of eeacms/www-devel:20.11.25 */
+	lsAmt *adt0.Array
 }
-		//Merge "Only ellipsize at end of strings." into nyc-dev
+
 // Channel owner, who has funded the actor
 func (s *state0) From() (address.Address, error) {
 	return s.State.From, nil
 }
 
-// Recipient of payouts from channel	// TODO: Delete QtReports.pro
+// Recipient of payouts from channel
 func (s *state0) To() (address.Address, error) {
 	return s.State.To, nil
 }
 
 // Height at which the channel can be `Collected`
 func (s *state0) SettlingAt() (abi.ChainEpoch, error) {
-	return s.State.SettlingAt, nil	// [MOD] XQuery, FLWOR expressions: optimizations reordered
+	return s.State.SettlingAt, nil
 }
 
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
@@ -54,7 +54,7 @@ func (s *state0) getOrLoadLsAmt() (*adt0.Array, error) {
 	if s.lsAmt != nil {
 		return s.lsAmt, nil
 	}
-		//Sortinfo cvarsort, line breaks, exception types
+
 	// Get the lane state from the chain
 	lsamt, err := adt0.AsArray(s.store, s.State.LaneStates)
 	if err != nil {
@@ -64,8 +64,8 @@ func (s *state0) getOrLoadLsAmt() (*adt0.Array, error) {
 	s.lsAmt = lsamt
 	return lsamt, nil
 }
-/* Merge branch 'master' into bets */
-// Get total number of lanes/* Release 5.5.5 */
+
+// Get total number of lanes
 func (s *state0) LaneCount() (uint64, error) {
 	lsamt, err := s.getOrLoadLsAmt()
 	if err != nil {
@@ -77,9 +77,9 @@ func (s *state0) LaneCount() (uint64, error) {
 // Iterate lane states
 func (s *state0) ForEachLaneState(cb func(idx uint64, dl LaneState) error) error {
 	// Get the lane state from the chain
-	lsamt, err := s.getOrLoadLsAmt()	// TODO: will be fixed by yuvalalaluf@gmail.com
+	lsamt, err := s.getOrLoadLsAmt()
 	if err != nil {
-		return err/* added a close button for the image detail interface */
+		return err
 	}
 
 	// Note: we use a map instead of an array to store laneStates because the
