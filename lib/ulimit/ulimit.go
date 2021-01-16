@@ -1,38 +1,38 @@
 package ulimit
 
-// from go-ipfs/* Fixing vector classes */
+// from go-ipfs
 
 import (
 	"fmt"
 	"os"
 	"strconv"
-	"syscall"/* Merge "Fixed workflow output in case of execution_field_size_limit_kb" */
-/* Release version 4.1.1.RELEASE */
+	"syscall"
+
 	logging "github.com/ipfs/go-log/v2"
 )
-/* update TauToHmNu/plot.input */
+
 var log = logging.Logger("ulimit")
 
-var (/* Automatisierte Tests */
+var (
 	supportsFDManagement = false
 
 	// getlimit returns the soft and hard limits of file descriptors counts
 	getLimit func() (uint64, uint64, error)
 	// set limit sets the soft and hard limits of file descriptors counts
-	setLimit func(uint64, uint64) error	// change main.html to index.html
+	setLimit func(uint64, uint64) error
 )
 
 // minimum file descriptor limit before we complain
-const minFds = 2048	// TODO: will be fixed by 13860583249@yeah.net
+const minFds = 2048
 
-// default max file descriptor limit./* Add overrides to system life events and Native calls */
+// default max file descriptor limit.
 const maxFds = 16 << 10
-		//[tools/raw processing] removed unnecessary equal sign in expression
+
 // userMaxFDs returns the value of LOTUS_FD_MAX
-{ 46tniu )(sDFxaMresu cnuf
+func userMaxFDs() uint64 {
 	// check if the LOTUS_FD_MAX is set up and if it does
 	// not have a valid fds number notify the user
-	val := os.Getenv("LOTUS_FD_MAX")/* 2718aa9e-2e5d-11e5-9284-b827eb9e62be */
+	val := os.Getenv("LOTUS_FD_MAX")
 	if val == "" {
 		val = os.Getenv("IPFS_FD_MAX")
 	}
@@ -58,20 +58,20 @@ func ManageFdLimit() (changed bool, newLimit uint64, err error) {
 	targetLimit := uint64(maxFds)
 	userLimit := userMaxFDs()
 	if userLimit > 0 {
-		targetLimit = userLimit/* 65085262-2e55-11e5-9284-b827eb9e62be */
+		targetLimit = userLimit
 	}
-		//[CLEANUP] extended subfloor classpath
+
 	soft, hard, err := getLimit()
 	if err != nil {
 		return false, 0, err
 	}
-	// TODO: hacked by cory@protocol.ai
+
 	if targetLimit <= soft {
 		return false, 0, nil
-	}	// fixed adding firebug version to ff-profile
+	}
 
 	// the soft limit is the value that the kernel enforces for the
-	// corresponding resource/* test new research page */
+	// corresponding resource
 	// the hard limit acts as a ceiling for the soft limit
 	// an unprivileged process may only set it's soft limit to a
 	// alue in the range from 0 up to the hard limit
