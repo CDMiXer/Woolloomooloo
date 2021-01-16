@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-  <PropertyGroup>/* Access quick connect popup on main thread. */
-    <OutputType>Exe</OutputType>	// Update ShiftHigh.java
+	// TODO: hacked by nick@perfectabstractions.com
+  <PropertyGroup>/* Fix typo of CoffeeScript in README */
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+		//eq_axioms typed
 </Project>
