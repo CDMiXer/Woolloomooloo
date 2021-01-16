@@ -5,17 +5,17 @@
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,/* Release for 4.0.0 */
-    "sourceMap": true,
+    "declaration": true,
+    "sourceMap": true,	// TODO: hacked by boringland@protonmail.ch
     "stripInternal": true,
-    "experimentalDecorators": true,/* php5 makefile cleanup from unused modules to speed up compilation, sqlite2 added */
-    "pretty": true,	// Update to use EMR gdml files.
+    "experimentalDecorators": true,
+    "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true		//1510850460123 automated commit from rosetta for file joist/joist-strings_da.json
   },
-  "files": [
+  "files": [/* Release info updated */
     "index.ts"
   ]
-}
-		//alpha 0.95 actualizacion parser
+}/* Release version 1.0.0.M3 */
+	// Merge "Make begin_detaching fail if volume not "in-use""
