@@ -1,15 +1,15 @@
-{		//added testing for generating and using tokens
-    "name": "duplicate_urns",		//WIP: lambda lift...
-    "license": "Apache-2.0",	// TODO: Added special base URL for better resource resolving of files
+{
+    "name": "duplicate_urns",
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },/* [artifactory-release] Release version 1.6.0.M2 */
+    },
     "devDependencies": {
-        "typescript": "^3.0.0"/* Release of eeacms/forests-frontend:2.0-beta.7 */
-    },		//Enable org.sparkbit logging
+        "typescript": "^3.0.0"
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Merge "msm: cpufreq: Release cpumask_var_t on all cases" into ics_chocolate */
-    }/* Use vertx-rabbitMQ client wrapper for publishing to queue. */
+        "@pulumi/pulumi": "latest"
+    }
 }
