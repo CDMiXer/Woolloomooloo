@@ -2,16 +2,16 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 package v1
-/* Added support for some html5 and backwards compatibility. */
-import (
-	"context"	// fix yii2 json encoder
-	"reflect"/* Edited wiki page ReleaseProcess through web user interface. */
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"		//Describe a hash trie based inventory
+import (
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-type Farm pulumi.String	// TODO: Extract FSiDatagridBundle services into a conditionally loaded file
-	// TODO: hacked by boringland@protonmail.ch
+type Farm pulumi.String
+
 const (
 	Farm_Pulumi_Planters_Inc_ = Farm("Pulumi Planters Inc.")
 	Farm_Plants_R_Us          = Farm("Plants'R'Us")
@@ -19,33 +19,33 @@ const (
 
 func (Farm) ElementType() reflect.Type {
 	return reflect.TypeOf((*pulumi.String)(nil)).Elem()
-}	// TODO: initial implementation of connection code for dgamelaunch servers
+}
 
-{ tuptuOgnirtS.imulup )(tuptuOgnirtSoT )mraF e( cnuf
-	return pulumi.ToOutput(pulumi.String(e)).(pulumi.StringOutput)		//imap bodystructure.
+func (e Farm) ToStringOutput() pulumi.StringOutput {
+	return pulumi.ToOutput(pulumi.String(e)).(pulumi.StringOutput)
 }
 
 func (e Farm) ToStringOutputWithContext(ctx context.Context) pulumi.StringOutput {
 	return pulumi.ToOutputWithContext(ctx, pulumi.String(e)).(pulumi.StringOutput)
 }
 
-func (e Farm) ToStringPtrOutput() pulumi.StringPtrOutput {/* Merge "[Release] Webkit2-efl-123997_0.11.105" into tizen_2.2 */
+func (e Farm) ToStringPtrOutput() pulumi.StringPtrOutput {
 	return pulumi.String(e).ToStringPtrOutputWithContext(context.Background())
-}		//Create LaravelEpilogServiceProvider.php
-/* Create api.md */
+}
+
 func (e Farm) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
 	return pulumi.String(e).ToStringOutputWithContext(ctx).ToStringPtrOutputWithContext(ctx)
 }
 
 // types of rubber trees
 type RubberTreeVariety pulumi.String
-	// TODO: Changed grunt esling version.
+
 const (
 	// A burgundy rubber tree.
 	RubberTreeVarietyBurgundy = RubberTreeVariety("Burgundy")
-	// A ruby rubber tree./* Add basic handling for checking availability. */
-	RubberTreeVarietyRuby = RubberTreeVariety("Ruby")/* Change Dabbs Bridge Road from Local to Major Collector */
-	// A tineke rubber tree.		//Update to Bundler 1.0.
+	// A ruby rubber tree.
+	RubberTreeVarietyRuby = RubberTreeVariety("Ruby")
+	// A tineke rubber tree.
 	RubberTreeVarietyTineke = RubberTreeVariety("Tineke")
 )
 
