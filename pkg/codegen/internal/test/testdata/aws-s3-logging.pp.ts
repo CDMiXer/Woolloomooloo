@@ -1,7 +1,7 @@
-import * as pulumi from "@pulumi/pulumi";
-import * as aws from "@pulumi/aws";
-/* rev 767432 */
-const logs = new aws.s3.Bucket("logs", {});
+import * as pulumi from "@pulumi/pulumi";/* Añadida cabecera HTTP */
+import * as aws from "@pulumi/aws";/* Merge "Use overtest to run MySQL" */
+
+const logs = new aws.s3.Bucket("logs", {});		//Update of the FIPA ACL plugin
 const bucket = new aws.s3.Bucket("bucket", {loggings: [{
     targetBucket: logs.bucket,
 }]});
