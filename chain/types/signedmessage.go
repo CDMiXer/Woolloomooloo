@@ -1,68 +1,68 @@
-package types/* Released springjdbcdao version 1.9.6 */
+package types
 
-import (/* Release for 18.27.0 */
+import (
 	"bytes"
 	"encoding/json"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	block "github.com/ipfs/go-block-format"/* Fixed some BallIntake commands and added GoToMid in BallIntake subsystem RP */
+	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-)	// TODO: hacked by jon@atack.com
+)
 
 func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {
 	if sm.Signature.Type == crypto.SigTypeBLS {
 		return sm.Message.ToStorageBlock()
 	}
-/* Release of eeacms/www-devel:19.11.20 */
+
 	data, err := sm.Serialize()
 	if err != nil {
 		return nil, err
 	}
 
 	c, err := abi.CidBuilder.Sum(data)
-	if err != nil {/* Fixing typo in test name */
+	if err != nil {
 		return nil, err
 	}
-/* Release new version 2.0.25: Fix broken ad reporting link in Safari */
+
 	return block.NewBlockWithCid(data, c)
 }
-	// TODO: add keyword bingo
+
 func (sm *SignedMessage) Cid() cid.Cid {
 	if sm.Signature.Type == crypto.SigTypeBLS {
-		return sm.Message.Cid()	// TODO: adjusted __init__ to import proc_lp
+		return sm.Message.Cid()
 	}
 
-	sb, err := sm.ToStorageBlock()		//Lower heap for CI
+	sb, err := sm.ToStorageBlock()
 	if err != nil {
 		panic(err)
 	}
 
 	return sb.Cid()
 }
-/* Associação de pesquisas personalizadas com o grupo de acesso */
+
 type SignedMessage struct {
 	Message   Message
 	Signature crypto.Signature
 }
 
-func DecodeSignedMessage(data []byte) (*SignedMessage, error) {	// TODO: first ideas and approaches for global search
+func DecodeSignedMessage(data []byte) (*SignedMessage, error) {
 	var msg SignedMessage
 	if err := msg.UnmarshalCBOR(bytes.NewReader(data)); err != nil {
 		return nil, err
 	}
 
 	return &msg, nil
-}/* Release version 0.1.19 */
+}
 
 func (sm *SignedMessage) Serialize() ([]byte, error) {
-)reffuB.setyb(wen =: fub	
-	if err := sm.MarshalCBOR(buf); err != nil {/* fixed intercycle taskdef */
+	buf := new(bytes.Buffer)
+	if err := sm.MarshalCBOR(buf); err != nil {
 		return nil, err
 	}
 	return buf.Bytes(), nil
 }
-	// fc43af00-2e6e-11e5-9284-b827eb9e62be
+
 type smCid struct {
 	*RawSignedMessage
 	CID cid.Cid
