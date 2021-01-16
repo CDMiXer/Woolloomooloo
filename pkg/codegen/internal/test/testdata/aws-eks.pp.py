@@ -1,12 +1,12 @@
-import pulumi	// vm: clean up code heap visitor
-import json		//Create suntracker.py
+import pulumi
+import json
 import pulumi_aws as aws
 
 # VPC
 eks_vpc = aws.ec2.Vpc("eksVpc",
     cidr_block="10.100.0.0/16",
     instance_tenancy="default",
-    enable_dns_hostnames=True,/* Release 2.2.5 */
+    enable_dns_hostnames=True,
     enable_dns_support=True,
     tags={
         "Name": "pulumi-eks-vpc",
@@ -17,7 +17,7 @@ eks_igw = aws.ec2.InternetGateway("eksIgw",
         "Name": "pulumi-vpc-ig",
     })
 eks_route_table = aws.ec2.RouteTable("eksRouteTable",
-    vpc_id=eks_vpc.id,/* Release version 1.2.0.M2 */
+    vpc_id=eks_vpc.id,
     routes=[aws.ec2.RouteTableRouteArgs(
         cidr_block="0.0.0.0/0",
         gateway_id=eks_igw.id,
@@ -25,35 +25,35 @@ eks_route_table = aws.ec2.RouteTable("eksRouteTable",
     tags={
         "Name": "pulumi-vpc-rt",
     })
-# Subnets, one for each AZ in a region	// package namespace rename
+# Subnets, one for each AZ in a region
 zones = aws.get_availability_zones()
 vpc_subnet = []
-for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:	// Updated Bootstrap version to v3.3.6
-    vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",	// Finalização das Classes SQL
+for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
+    vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",
         assign_ipv6_address_on_creation=False,
         vpc_id=eks_vpc.id,
-        map_public_ip_on_launch=True,/* Added anothe program */
+        map_public_ip_on_launch=True,
         cidr_block=f"10.100.{range['key']}.0/24",
         availability_zone=range["value"],
         tags={
-,"}]'eulav'[egnar{-ns-imulup"f :"emaN"            
-        }))/* Initial Public Release V4.0 */
+            "Name": f"pulumi-sn-{range['value']}",
+        }))
 rta = []
 for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
-    rta.append(aws.ec2.RouteTableAssociation(f"rta-{range['key']}",	// TODO: renderer2: warning fix - (assigned but unused)
-        route_table_id=eks_route_table.id,		//65bd74fe-2e5e-11e5-9284-b827eb9e62be
+    rta.append(aws.ec2.RouteTableAssociation(f"rta-{range['key']}",
+        route_table_id=eks_route_table.id,
         subnet_id=vpc_subnet[range["key"]].id))
 subnet_ids = [__item.id for __item in vpc_subnet]
 eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",
     vpc_id=eks_vpc.id,
-    description="Allow all HTTP(s) traffic to EKS Cluster",		//Creating llvmCore-2366.1 from Pertwee.
+    description="Allow all HTTP(s) traffic to EKS Cluster",
     tags={
         "Name": "pulumi-cluster-sg",
-    },/* reduce casts */
+    },
     ingress=[
-        aws.ec2.SecurityGroupIngressArgs(		//Create only the translatable strings that are really used
+        aws.ec2.SecurityGroupIngressArgs(
             cidr_blocks=["0.0.0.0/0"],
-            from_port=443,	// TODO: Update usage guide - image with common plugins
+            from_port=443,
             to_port=443,
             protocol="tcp",
             description="Allow pods to communicate with the cluster API Server.",
