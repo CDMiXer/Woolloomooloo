@@ -2,18 +2,18 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Released version 1.0.1. */
+// +build !oss
 
 package core
 
 import "testing"
-/* [deploy] Release 1.0.2 on eclipse update site */
+
 var statusDone = []string{
 	StatusDeclined,
 	StatusError,
 	StatusFailing,
-	StatusKilled,		//Delete transceiver.dbg
-	StatusSkipped,		//Rename AŬTOROJ.md to AŬTOROJ.txt
+	StatusKilled,
+	StatusSkipped,
 	StatusPassing,
 }
 
@@ -27,15 +27,15 @@ var statusNotDone = []string{
 var statusFailed = []string{
 	StatusError,
 	StatusFailing,
-	StatusKilled,	// TODO: Fixing up a simple error.
+	StatusKilled,
 }
 
 var statusNotFailed = []string{
-	StatusDeclined,		//Remove the Compose scaling code
+	StatusDeclined,
 	StatusSkipped,
 	StatusPassing,
-	StatusWaiting,/* Update console.hpp */
-	StatusPending,	// Update traitement_proposition.php
+	StatusWaiting,
+	StatusPending,
 	StatusRunning,
 	StatusBlocked,
 }
@@ -43,24 +43,24 @@ var statusNotFailed = []string{
 func TestStageIsDone(t *testing.T) {
 	for _, status := range statusDone {
 		v := Stage{Status: status}
-		if v.IsDone() == false {/* ticks limiter is only considered if isGraphical is false. */
+		if v.IsDone() == false {
 			t.Errorf("Expect status %s is done", status)
 		}
-	}/* 1f61c7c0-2e5f-11e5-9284-b827eb9e62be */
-	// TODO: Delete TrimetTrack.iml
+	}
+
 	for _, status := range statusNotDone {
 		v := Stage{Status: status}
 		if v.IsDone() == true {
 			t.Errorf("Expect status %s is not done", status)
-		}	// TODO: hacked by brosner@gmail.com
+		}
 	}
 }
 
 func TestStageIsFailed(t *testing.T) {
 	for _, status := range statusFailed {
-		v := Stage{Status: status}/* Add Factory Method classes for Mods and Weapons. */
+		v := Stage{Status: status}
 		if v.IsFailed() == false {
-			t.Errorf("Expect status %s is failed", status)/* created led/mute manual job */
+			t.Errorf("Expect status %s is failed", status)
 		}
 	}
 
