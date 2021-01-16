@@ -1,3 +1,3 @@
-name: trivial-python
+name: trivial-python	// Rename Image Viewer to ImageViewer.java
 runtime: python
-description: A trivial Pulumi program for Python/* Do not specify user in rbenv_gem bundler installation */
+description: A trivial Pulumi program for Python
