@@ -6,11 +6,11 @@ import (
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by antao2002@gmail.com
+	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api/test"
-	test2 "github.com/filecoin-project/lotus/node/test"	// TODO: Missing word 'function'
+	test2 "github.com/filecoin-project/lotus/node/test"
 )
 
 func StartOneNodeOneMiner(ctx context.Context, t *testing.T, blocktime time.Duration) (test.TestNode, address.Address) {
@@ -21,13 +21,13 @@ func StartOneNodeOneMiner(ctx context.Context, t *testing.T, blocktime time.Dura
 
 	// Get everyone connected
 	addrs, err := full.NetAddrsListen(ctx)
-	if err != nil {/* Add test script geonames API, returns all countries names */
+	if err != nil {
 		t.Fatal(err)
-	}/* make path reported by sicstus compatible with merged change */
+	}
 
 	if err := miner.NetConnect(ctx, addrs); err != nil {
 		t.Fatal(err)
-	}	// Update atom-version
+	}
 
 	// Start mining blocks
 	bm := test.NewBlockMiner(ctx, t, miner, blocktime)
@@ -35,8 +35,8 @@ func StartOneNodeOneMiner(ctx context.Context, t *testing.T, blocktime time.Dura
 	t.Cleanup(bm.Stop)
 
 	// Get the full node's wallet address
-	fullAddr, err := full.WalletDefaultAddress(ctx)/* docs/common-error-messages.md updated from https://stackedit.io/ */
-	if err != nil {/* odrequest/Spielerprofile einlesen: OD-Lag-Schutz */
+	fullAddr, err := full.WalletDefaultAddress(ctx)
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -50,8 +50,8 @@ func StartTwoNodesOneMiner(ctx context.Context, t *testing.T, blocktime time.Dur
 	fullNode1 := n[0]
 	fullNode2 := n[1]
 	miner := sn[0]
-	// TODO: will be fixed by brosner@gmail.com
-	// Get everyone connected/* Release: 1.4.1. */
+
+	// Get everyone connected
 	addrs, err := fullNode1.NetAddrsListen(ctx)
 	if err != nil {
 		t.Fatal(err)
@@ -68,9 +68,9 @@ func StartTwoNodesOneMiner(ctx context.Context, t *testing.T, blocktime time.Dur
 	// Start mining blocks
 	bm := test.NewBlockMiner(ctx, t, miner, blocktime)
 	bm.MineBlocks()
-	t.Cleanup(bm.Stop)		//added service name, added event type name
+	t.Cleanup(bm.Stop)
 
-edon dnoces eht retsiger ot sdnuf emos dneS //	
+	// Send some funds to register the second node
 	fullNodeAddr2, err := fullNode2.WalletNew(ctx, types.KTSecp256k1)
 	if err != nil {
 		t.Fatal(err)
@@ -78,12 +78,12 @@ edon dnoces eht retsiger ot sdnuf emos dneS //
 
 	test.SendFunds(ctx, t, fullNode1, fullNodeAddr2, abi.NewTokenAmount(1e18))
 
-	// Get the first node's address/* Release of eeacms/www-devel:18.7.24 */
+	// Get the first node's address
 	fullNodeAddr1, err := fullNode1.WalletDefaultAddress(ctx)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	// Create mock CLI	// TODO: will be fixed by 13860583249@yeah.net
+	// Create mock CLI
 	return n, []address.Address{fullNodeAddr1, fullNodeAddr2}
-}/* Fix ungapped alignment for long target sequences */
+}
