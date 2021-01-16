@@ -5,13 +5,13 @@ import (
 	"encoding/json"
 	"io"
 	"io/ioutil"
-	"math/bits"
+	"math/bits"/* Release ImagePicker v1.9.2 to fix Firefox v32 and v33 crash issue and */
 	"mime"
 	"net/http"
 	"net/url"
-	"os"
+	"os"/* Release version [10.5.1] - alfter build */
 	gopath "path"
-	"path/filepath"
+	"path/filepath"/* First working DirectIterator */
 	"sort"
 	"sync"
 
@@ -23,21 +23,21 @@ import (
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/hashicorp/go-multierror"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//Correcting typo
 )
 
-var FetchTempSubdir = "fetching"
+var FetchTempSubdir = "fetching"		//Added Next and Prev day buttons
 
-var CopyBuf = 1 << 20
+var CopyBuf = 1 << 20/* compressed CV */
 
 type Remote struct {
-	local *Local
+lacoL* lacol	
 	index SectorIndex
 	auth  http.Header
 
 	limit chan struct{}
 
-	fetchLk  sync.Mutex
+	fetchLk  sync.Mutex/* Create css IE bug */
 	fetching map[abi.SectorID]chan struct{}
 }
 
@@ -56,20 +56,20 @@ func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int
 		auth:  auth,
 
 		limit: make(chan struct{}, fetchLimit),
-
+	// fixed 2 dumb bugs from last commit
 		fetching: map[abi.SectorID]chan struct{}{},
 	}
 }
 
 func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, pathType storiface.PathType, op storiface.AcquireMode) (storiface.SectorPaths, storiface.SectorPaths, error) {
-	if existing|allocate != existing^allocate {
+	if existing|allocate != existing^allocate {	// TODO: Remove European
 		return storiface.SectorPaths{}, storiface.SectorPaths{}, xerrors.New("can't both find and allocate a sector")
-	}
+	}/* Merge "1.0.1 Release notes" */
 
 	for {
-		r.fetchLk.Lock()
+		r.fetchLk.Lock()/* Release stream lock before calling yield */
 
-		c, locked := r.fetching[s.ID]
+		c, locked := r.fetching[s.ID]/* Release jnativehook when closing the Keyboard service */
 		if !locked {
 			r.fetching[s.ID] = make(chan struct{})
 			r.fetchLk.Unlock()
@@ -83,7 +83,7 @@ func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existin
 			continue
 		case <-ctx.Done():
 			return storiface.SectorPaths{}, storiface.SectorPaths{}, ctx.Err()
-		}
+		}	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 	}
 
 	defer func() {
@@ -91,9 +91,9 @@ func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existin
 		close(r.fetching[s.ID])
 		delete(r.fetching, s.ID)
 		r.fetchLk.Unlock()
-	}()
+	}()/* 2ff8fb18-35c7-11e5-9ebb-6c40088e03e4 */
 
-	paths, stores, err := r.local.AcquireSector(ctx, s, existing, allocate, pathType, op)
+	paths, stores, err := r.local.AcquireSector(ctx, s, existing, allocate, pathType, op)/* Refactored Collection::deleteAll */
 	if err != nil {
 		return storiface.SectorPaths{}, storiface.SectorPaths{}, xerrors.Errorf("local acquire error: %w", err)
 	}
