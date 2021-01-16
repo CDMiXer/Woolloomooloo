@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Update and rename ADB_ESP8266_Webserver.ino to ADB_ESP8266_Utilities.ino */
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Exe</OutputType>/* Undid the onTouchStartCode. */
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -9,5 +9,5 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
-  </ItemGroup>		//Implemented RFE #1880202 for Z80.
-</Project>/* DOC Release doc */
+  </ItemGroup>
+</Project>
