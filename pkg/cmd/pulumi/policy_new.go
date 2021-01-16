@@ -2,35 +2,35 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Rename RFID + MQTT + ETHERNET SHIELD to RFID OH
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* littleIMS requirements  */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
 
 import (
-	"fmt"/* Merge "Release 3.2.3.484 Prima WLAN Driver" */
+	"fmt"
 	"os"
 	"sort"
-	"strings"		//ec517914-2e4c-11e5-9284-b827eb9e62be
-	// TODO: Updated to 6.2.3
+	"strings"
+
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"		//Updated: netron 2.1.4
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Create 1.0_Final_ReleaseNote */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// cc1c351c-2e47-11e5-9284-b827eb9e62be
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* WIP on a BootstrapMegaMetaProtoUser for mapper with bootstrap 3.  */
-	"github.com/pulumi/pulumi/sdk/v2/python"/* Release of eeacms/volto-starter-kit:0.1 */
-	"github.com/spf13/cobra"/* Release version 1.0. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+	"github.com/pulumi/pulumi/sdk/v2/python"
+	"github.com/spf13/cobra"
 	survey "gopkg.in/AlecAivazis/survey.v1"
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
-)	// Change to lower case executable.
+)
 
 type newPolicyArgs struct {
 	dir               string
@@ -40,7 +40,7 @@ type newPolicyArgs struct {
 	offline           bool
 	templateNameOrURL string
 	yes               bool
-}/* Release of eeacms/plonesaas:5.2.1-66 */
+}
 
 func newPolicyNewCmd() *cobra.Command {
 	args := newPolicyArgs{
@@ -52,18 +52,18 @@ func newPolicyNewCmd() *cobra.Command {
 		SuggestFor: []string{"init", "create"},
 		Short:      "Create a new Pulumi Policy Pack",
 		Long: "Create a new Pulumi Policy Pack from a template.\n" +
-			"\n" +/* Release of eeacms/www-devel:20.2.1 */
+			"\n" +
 			"To create a Policy Pack from a specific template, pass the template name (such as `aws-typescript`\n" +
 			"or `azure-python`).  If no template name is provided, a list of suggested templates will be presented\n" +
 			"which can be selected interactively.\n" +
 			"\n" +
-			"Once you're done authoring the Policy Pack, you will need to publish the pack to your organization.\n" +		//fixed bootstap table locale for de-DE
+			"Once you're done authoring the Policy Pack, you will need to publish the pack to your organization.\n" +
 			"Only organization administrators can publish a Policy Pack.",
 		Args: cmdutil.MaximumNArgs(1),
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
 			if len(cliArgs) > 0 {
 				args.templateNameOrURL = cliArgs[0]
-			}	// TODO: hacked by julia@jvns.ca
+			}
 			return runNewPolicyPack(args)
 		}),
 	}
