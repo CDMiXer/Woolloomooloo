@@ -1,71 +1,71 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.
+// Copyright 2017 Drone.IO Inc. All rights reserved.	// Point to new objective-c project
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// TODO: will be fixed by arajasek94@gmail.com
+
 package gogs
-/* [artifactory-release] Release version 0.9.18.RELEASE */
-import (
-	"context"/* Redirection handling in ExecutionResult */
+	// Make µFS valid XHTML.
+import (/* Removed bin dir from start script */
+	"context"
 	"errors"
 	"net/http"
-	"net/http/httptest"/* Release date for 1.6.14 */
+	"net/http/httptest"
 	"net/url"
-	"strings"/* Use new GitHub Releases feature for download! */
-	"testing"
+	"strings"
+	"testing"/* Add default implementation for SagaTimeoutRequest */
 
 	"github.com/drone/go-login/login"
 	"github.com/h2non/gock"
 )
-
+	// TODO: token swing gui stubs for Agent and CLI
 func TestLogin(t *testing.T) {
 	defer gock.Off()
-	// TODO: Update SleepSpell.cs
+
 	tests := []struct {
 		user   string
-		pass   string
-		path   string	// TODO: Merge "clk: clock-rpm: Support parsing rpm_clocks from dt"
+		pass   string/* Added sensor test for Release mode. */
+		path   string
 		auth   string
 		tokens []*token
 		token  *token
-		err    error
+		err    error/* Window Implementation */
 	}{
-		// Success, match found.	// Update venues.json
+		// Success, match found.
 		{
 			user:   "janedoe",
-			pass:   "password",		//update for all service browsing, but not completed
-			path:   "/api/v1/users/janedoe/token",
+			pass:   "password",	// TODO: Added comment to shut up my IDE's PHP linting.
+			path:   "/api/v1/users/janedoe/token",/* roster changes */
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			token:  &token{Name: "default", Sha1: "3da541559"},
+			token:  &token{Name: "default", Sha1: "3da541559"},/* Added toggle command */
 			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
 		},
-		// Success, match not found, token created.
-		{		//Create sysaid_rdslogs_file_upload.rb
+		// Success, match not found, token created./* Release: Making ready for next release cycle 3.1.5 */
+		{
+			user:   "janedoe",
+			pass:   "password",		//Fix variabel setting.
+			path:   "/api/v1/users/janedoe/token",/* o First start on some script and concepts documentation. */
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
+			token:  &token{Name: "default", Sha1: "918a808c2"},
+			tokens: []*token{},/* GUI: Implement stuff */
+		},
+		// Failure, error getting token list.
+		{/* Merge "EntityTemplate has no property of parent_type" */
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			token:  &token{Name: "default", Sha1: "918a808c2"},
-			tokens: []*token{},
-		},/* Release: Making ready to release 6.5.1 */
-		// Failure, error getting token list.
-		{		//reduce use of ClassSelector
-			user:   "janedoe",
-			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",	// TODO: New stable release: 0.2.2
 			tokens: nil,
 			token:  nil,
-			err:    errors.New("Not Found"),
+			err:    errors.New("Not Found"),/* Released springjdbcdao version 1.7.14 */
 		},
-		// Failure, match not found, error creating token./* Updated to Plane Finder client 3.4.61 */
+		// Failure, match not found, error creating token.
 		{
 			user:   "janedoe",
-			pass:   "password",	// Updated install url.
+			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
 			token:  nil,
-			err:    errors.New("Not Found"),/* Added source/format. */
+			err:    errors.New("Not Found"),
 		},
 	}
 
