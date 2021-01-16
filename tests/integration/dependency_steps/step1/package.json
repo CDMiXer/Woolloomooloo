@@ -1,11 +1,11 @@
-{
-,"spets" :"eman"    
+{	// TODO: Delete query8.sparql
+    "name": "steps",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",/* Merge "Revert "msm: wfd: Set default rate control to VBR/VFR"" */
     "devDependencies": {
-        "typescript": "^3.0.0"/* Updates eval code */
-    },/* f6de96f2-2e4f-11e5-9284-b827eb9e62be */
+        "typescript": "^3.0.0"
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
