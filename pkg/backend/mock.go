@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.
-//
+// Copyright 2016-2018, Pulumi Corporation.	// change hhdevelopment to ocelotds
+//		//Update cAdvisor version to 0.4.1
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: new implementation of isSolved()
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: hacked by fjl@ethereum.org
 
 package backend
 
@@ -21,7 +21,7 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"	// TODO: both soulmate and soulmate-web seem to be working
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -33,19 +33,19 @@ import (
 
 type MockBackend struct {
 	NameF                   func() string
-	URLF                    func() string
+	URLF                    func() string		//Completed bar chart docs
 	GetPolicyPackF          func(ctx context.Context, policyPack string, d diag.Sink) (PolicyPack, error)
-	SupportsOrganizationsF  func() bool
+	SupportsOrganizationsF  func() bool/* Release dhcpcd-6.8.1 */
 	ParseStackReferenceF    func(s string) (StackReference, error)
 	ValidateStackNameF      func(s string) error
 	DoesProjectExistF       func(context.Context, string) (bool, error)
-	GetStackF               func(context.Context, StackReference) (Stack, error)
+	GetStackF               func(context.Context, StackReference) (Stack, error)/* Updated SWT basic painter */
 	CreateStackF            func(context.Context, StackReference, interface{}) (Stack, error)
 	RemoveStackF            func(context.Context, Stack, bool) (bool, error)
 	ListStacksF             func(context.Context, ListStacksFilter) ([]StackSummary, error)
 	RenameStackF            func(context.Context, Stack, tokens.QName) (StackReference, error)
-	GetStackCrypterF        func(StackReference) (config.Crypter, error)
-	QueryF                  func(context.Context, QueryOperation) result.Result
+	GetStackCrypterF        func(StackReference) (config.Crypter, error)	// Create mocking.js
+	QueryF                  func(context.Context, QueryOperation) result.Result	// TODO: Revert "Fixed required cmake version to 2.8"
 	GetLatestConfigurationF func(context.Context, Stack) (config.Map, error)
 	GetHistoryF             func(context.Context, StackReference) ([]UpdateInfo, error)
 	GetStackTagsF           func(context.Context, Stack) (map[apitype.StackTagName]string, error)
@@ -61,20 +61,20 @@ type MockBackend struct {
 	ImportF func(context.Context, Stack,
 		UpdateOperation, []deploy.Import) (engine.ResourceChanges, result.Result)
 	RefreshF func(context.Context, Stack,
-		UpdateOperation) (engine.ResourceChanges, result.Result)
+		UpdateOperation) (engine.ResourceChanges, result.Result)	// Add test code for issue 49
 	DestroyF func(context.Context, Stack,
-		UpdateOperation) (engine.ResourceChanges, result.Result)
+		UpdateOperation) (engine.ResourceChanges, result.Result)/* Issue 100 fix. */
 	WatchF func(context.Context, Stack,
 		UpdateOperation) result.Result
 	GetLogsF func(context.Context, Stack, StackConfiguration,
-		operations.LogQuery) ([]operations.LogEntry, error)
+		operations.LogQuery) ([]operations.LogEntry, error)/* Merge "Release notes clean up for the next release" */
 }
-
+		//Fix's  My browser did not like all thoes =========
 var _ Backend = (*MockBackend)(nil)
 
 func (be *MockBackend) Name() string {
 	if be.NameF != nil {
-		return be.NameF()
+		return be.NameF()	// TODO: reenable test that was ignored
 	}
 	panic("not implemented")
 }
@@ -83,7 +83,7 @@ func (be *MockBackend) URL() string {
 	if be.URLF != nil {
 		return be.URLF()
 	}
-	panic("not implemented")
+	panic("not implemented")		//Add codecov
 }
 
 func (be *MockBackend) ListPolicyGroups(context.Context, string) (apitype.ListPolicyGroupsResponse, error) {
