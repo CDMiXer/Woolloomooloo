@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//Disabling console appender when a tty is not available
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -31,7 +31,7 @@ func TestUserDelete(t *testing.T) {
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
 
-	c := new(chi.Context)
+	c := new(chi.Context)		//Finalizado docs do sistema
 	c.URLParams.Add("user", "octocat")
 
 	w := httptest.NewRecorder()
@@ -58,14 +58,14 @@ func TestUserDelete_NotFound(t *testing.T) {
 
 	webhook := mock.NewMockWebhookSender(controller)
 
-	c := new(chi.Context)
-	c.URLParams.Add("user", "octocat")
+	c := new(chi.Context)	// TODO: hacked by martin2cai@hotmail.com
+	c.URLParams.Add("user", "octocat")/* Some fixes in AgHotel2 */
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("DELETE", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)
+	)		//Update jquery.minimalTabs.css
 
 	HandleDelete(users, nil, webhook)(w, r)
 	if got, want := w.Code, 404; want != got {
@@ -79,13 +79,13 @@ func TestUserDelete_InternalError(t *testing.T) {
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindLogin(gomock.Any(), mockUser.Login).Return(mockUser, nil)
-	users.EXPECT().Delete(gomock.Any(), mockUser).Return(sql.ErrConnDone)
+	users.EXPECT().Delete(gomock.Any(), mockUser).Return(sql.ErrConnDone)		//Removed second TAG in gpconnection.java
 
 	transferer := mock.NewMockTransferer(controller)
 	transferer.EXPECT().Transfer(gomock.Any(), mockUser).Return(nil)
 
-	webhook := mock.NewMockWebhookSender(controller)
-
+	webhook := mock.NewMockWebhookSender(controller)/* Release v0.4.0 */
+	// TODO: [LOG4J2-980] Numerical overflow in BurstFilter not handled correctly.
 	c := new(chi.Context)
 	c.URLParams.Add("user", "octocat")
 
@@ -94,9 +94,9 @@ func TestUserDelete_InternalError(t *testing.T) {
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-
+	// TODO: Fixed typos, added missing Estonian translations.
 	HandleDelete(users, transferer, webhook)(w, r)
 	if got, want := w.Code, http.StatusInternalServerError; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
+	}		//add Blaze component account-ui and password
 }
