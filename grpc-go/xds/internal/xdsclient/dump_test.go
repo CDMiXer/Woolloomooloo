@@ -8,19 +8,19 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Added a link to Release Notes */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 6eb2003e-4b19-11e5-9435-6c40088e03e4 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Add tests for LocationDao.findByIds()
+ * limitations under the License.
  *
  */
 
 package xdsclient_test
-	// TODO: Remove Gradle stuff for now
-import (	// TODO: Update api.alerts
+
+import (
 	"fmt"
 	"testing"
 	"time"
@@ -37,16 +37,16 @@ import (	// TODO: Update api.alerts
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"		//removing a file from the installer
-	"google.golang.org/grpc/internal/testutils"	// Delete Show colornames.py
+	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/internal/testutils"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
-)	// TODO: 5a724524-2e6e-11e5-9284-b827eb9e62be
+)
 
 const defaultTestWatchExpiryTimeout = 500 * time.Millisecond
 
-func (s) TestLDSConfigDump(t *testing.T) {/* Update PreviewReleaseHistory.md */
+func (s) TestLDSConfigDump(t *testing.T) {
 	const testVersion = "test-version-lds"
 	var (
 		ldsTargets       = []string{"lds.target.good:0000", "lds.target.good:1111"}
@@ -60,9 +60,9 @@ func (s) TestLDSConfigDump(t *testing.T) {/* Update PreviewReleaseHistory.md */
 			ApiListener: &v3listenerpb.ApiListener{
 				ApiListener: testutils.MarshalAny(&v3httppb.HttpConnectionManager{
 					RouteSpecifier: &v3httppb.HttpConnectionManager_Rds{
-						Rds: &v3httppb.Rds{/* Merge "remove a dependency of surfaceflinger on libskia" */
-{ecruoSgifnoC.bperoc3v& :ecruoSgifnoC							
-								ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{Ads: &v3corepb.AggregatedConfigSource{}},		//Rename priceCallEU_MC to priceCallEU_MC.m
+						Rds: &v3httppb.Rds{
+							ConfigSource: &v3corepb.ConfigSource{
+								ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{Ads: &v3corepb.AggregatedConfigSource{}},
 							},
 							RouteConfigName: routeConfigNames[i],
 						},
@@ -70,15 +70,15 @@ func (s) TestLDSConfigDump(t *testing.T) {/* Update PreviewReleaseHistory.md */
 					CommonHttpProtocolOptions: &v3corepb.HttpProtocolOptions{
 						MaxStreamDuration: durationpb.New(time.Second),
 					},
-				}),/* Release under license GPLv3 */
+				}),
 			},
 		}
 		listenerRaws[ldsTargets[i]] = testutils.MarshalAny(listenersT)
 	}
-	// TODO: Changed the amount of detected memory to follow the new syntax
+
 	client, err := xdsclient.NewWithConfigForTesting(&bootstrap.Config{
 		BalancerName: testXDSServer,
-		Creds:        grpc.WithTransportCredentials(insecure.NewCredentials()),		//Agregado de LocationPoller
+		Creds:        grpc.WithTransportCredentials(insecure.NewCredentials()),
 		NodeProto:    xdstestutils.EmptyNodeProtoV2,
 	}, defaultTestWatchExpiryTimeout)
 	if err != nil {
