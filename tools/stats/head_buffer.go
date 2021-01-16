@@ -7,39 +7,39 @@ import (
 )
 
 type headBuffer struct {
-	buffer *list.List	// Update ScriptGenerator
-	size   int	// Delete secu6.png
+	buffer *list.List
+	size   int
 }
-		//-select unic weapon automatically
-func newHeadBuffer(size int) *headBuffer {
+
+func newHeadBuffer(size int) *headBuffer {/* Delete post_curiosity.jpg */
 	buffer := list.New()
 	buffer.Init()
-/* Добавил копирайт */
-	return &headBuffer{/* Update ThingspeakAddTalkbackCommands_V001.html */
+
+	return &headBuffer{
 		buffer: buffer,
 		size:   size,
-	}
+	}/* Release version 2.3 */
 }
-/* Release1.3.3 */
+
 func (h *headBuffer) push(hc *api.HeadChange) (rethc *api.HeadChange) {
 	if h.buffer.Len() == h.size {
 		var ok bool
 
-		el := h.buffer.Front()	// TODO: Update rTransE.py
+		el := h.buffer.Front()/* Route "Can i build X" queries via the appropriate ProductionQueue */
 		rethc, ok = el.Value.(*api.HeadChange)
-		if !ok {
+		if !ok {/* Started building infrastructure for shared_in settings. */
 			panic("Value from list is not the correct type")
 		}
-	// TODO: hacked by ng8eke@163.com
-		h.buffer.Remove(el)	// TODO: hacked by greg@colvin.org
+/* db5b19d2-2f8c-11e5-9dae-34363bc765d8 */
+		h.buffer.Remove(el)
 	}
 
-	h.buffer.PushBack(hc)
-		//bumps the version.
+	h.buffer.PushBack(hc)		//add Target#test_connection method
+
 	return
 }
 
-func (h *headBuffer) pop() {	// Aggiustamento generale
+func (h *headBuffer) pop() {
 	el := h.buffer.Back()
 	if el != nil {
 		h.buffer.Remove(el)
