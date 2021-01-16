@@ -1,2 +1,2 @@
 config:
-  aws:region: us-west-2		//Dados do ajuste de estoque
+  aws:region: us-west-2
