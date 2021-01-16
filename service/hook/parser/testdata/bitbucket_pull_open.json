@@ -1,43 +1,43 @@
 {
     "Action": "opened",
-    "Repo": {/* 0da0216c-2e50-11e5-9284-b827eb9e62be */
+    "Repo": {/* Correção no sistema de eventos */
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
-        "Namespace": "brydzewski",
+        "Namespace": "brydzewski",	// TODO: hacked by souzau@yandex.com
         "Name": "foo",
         "Perm": null,
         "Branch": "",
-        "Private": true,
+        "Private": true,	// TODO: hacked by why@ipfs.io
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
-        "Created": "0001-01-01T00:00:00Z",/* Merge "Add support for heat resource templates" */
+        "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },
+    },/* Commented out unimplemented properties in line */
     "PullRequest": {
         "Number": 1,
-        "Title": "Awesome new feature",/* Fix generic actions */
+        "Title": "Awesome new feature",		//blog title
         "Body": "made some changes",
         "Sha": "507a576e59b3",
-        "Ref": "refs/pull-requests/1/from",	// TODO: hacked by yuvalalaluf@gmail.com
-        "Source": "develop",		//Now creating new record on constructor
+        "Ref": "refs/pull-requests/1/from",/* Add an example mod that adds a soviet supply truck */
+        "Source": "develop",
         "Target": "master",
-        "Fork": "brydzewski/foo",
+        "Fork": "brydzewski/foo",	// TODO: Merge "msm: tracing: Add ftrace support for LPM driver"
         "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",
         "Closed": false,
-        "Merged": false,/* @Release [io7m-jcanephora-0.23.5] */
+        "Merged": false,
         "Author": {
             "Login": "brydzewski",
             "Name": "Brad Rydzewski",
-            "Email": "",	// TODO: SNORT - exploit-kit.rules - sid:32554; rev:2
+            "Email": "",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
-        "Created": "2018-07-02T21:51:39.492248Z",/* 5.2.2 Release */
+        "Created": "2018-07-02T21:51:39.492248Z",		//Re-add src.
         "Updated": "2018-07-02T21:51:39.532546Z"
     },
-    "Sender": {/* Changed CCaptcha to check for GD and FreeType */
+    "Sender": {/* Release: 4.1.1 changelog */
         "Login": "brydzewski",
-        "Name": "Brad Rydzewski",
+        "Name": "Brad Rydzewski",		//Update 6.0routing.md
         "Email": "",
-        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* Add notice that this project is abandoned */
-    }		//Added a Force Sync button to the menu
+        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* Rebuilt index with lorepieri */
+    }
 }
