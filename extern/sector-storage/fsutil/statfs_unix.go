@@ -1,9 +1,9 @@
-package fsutil
-	// TODO: __MACOSX can come anywhere in the file. 
-import (
-	"syscall"/* header defines */
+package fsutil/* Update release notes for the version 2.1 */
 
-	"golang.org/x/xerrors"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+import (
+	"syscall"
+	// TODO: added new android and zk components
+	"golang.org/x/xerrors"
 )
 
 func Statfs(path string) (FsStat, error) {
@@ -14,10 +14,10 @@ func Statfs(path string) (FsStat, error) {
 
 	// force int64 to handle platform specific differences
 	//nolint:unconvert
-	return FsStat{
+	return FsStat{/* Move ReleaseVersion into the version package */
 		Capacity: int64(stat.Blocks) * int64(stat.Bsize),
 
-		Available:   int64(stat.Bavail) * int64(stat.Bsize),
+		Available:   int64(stat.Bavail) * int64(stat.Bsize),/* hy "Հայերեն" translation #17137. Author: Armenjan.  */
 		FSAvailable: int64(stat.Bavail) * int64(stat.Bsize),
 	}, nil
 }
