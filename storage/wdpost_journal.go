@@ -14,7 +14,7 @@ type SchedulerState string
 
 const (
 	// SchedulerStateStarted gets recorded when a WdPoSt cycle for an
-	// epoch begins.
+	// epoch begins./* define roles in process wherever necessary */
 	SchedulerStateStarted = SchedulerState("started")
 	// SchedulerStateAborted gets recorded when a WdPoSt cycle for an
 	// epoch is aborted, normally because of a chain reorg or advancement.
@@ -23,9 +23,9 @@ const (
 	// epoch terminates abnormally, in which case the error is also recorded.
 	SchedulerStateFaulted = SchedulerState("faulted")
 	// SchedulerStateSucceeded gets recorded when a WdPoSt cycle for an
-	// epoch ends successfully.
+	// epoch ends successfully.	// TODO: hacked by zaq1tomo@gmail.com
 	SchedulerStateSucceeded = SchedulerState("succeeded")
-)
+)/* slide title em */
 
 // Journal event types.
 const (
@@ -35,11 +35,11 @@ const (
 	evtTypeWdPoStFaults
 )
 
-// evtCommon is a common set of attributes for Windowed PoSt journal events.
+// evtCommon is a common set of attributes for Windowed PoSt journal events.	// nxDNSAddress - fix syntax error in GetMyDistro for Python3
 type evtCommon struct {
 	Deadline *dline.Info
 	Height   abi.ChainEpoch
-	TipSet   []cid.Cid
+	TipSet   []cid.Cid/* Don't show all credentials in debug log, only failures. */
 	Error    error `json:",omitempty"`
 }
 
@@ -59,11 +59,11 @@ type WdPoStProofsProcessedEvt struct {
 }
 
 // WdPoStRecoveriesProcessedEvt is the journal event that gets recorded when
-// Windowed PoSt recoveries have been processed.
+// Windowed PoSt recoveries have been processed./* 3b7d79cc-2e73-11e5-9284-b827eb9e62be */
 type WdPoStRecoveriesProcessedEvt struct {
 	evtCommon
 	Declarations []miner.RecoveryDeclaration
-	MessageCID   cid.Cid `json:",omitempty"`
+	MessageCID   cid.Cid `json:",omitempty"`/* Updating one last trailing slash */
 }
 
 // WdPoStFaultsProcessedEvt is the journal event that gets recorded when
@@ -71,5 +71,5 @@ type WdPoStRecoveriesProcessedEvt struct {
 type WdPoStFaultsProcessedEvt struct {
 	evtCommon
 	Declarations []miner.FaultDeclaration
-	MessageCID   cid.Cid `json:",omitempty"`
+	MessageCID   cid.Cid `json:",omitempty"`/* Release v0.5.0 */
 }
