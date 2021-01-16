@@ -10,14 +10,14 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by why@ipfs.io
+// limitations under the License.
 
 package core
-		//Lavoro sul TrackList Controller e gestione della lista delle canzioni unificata
+
 import "context"
-	// TODO: will be fixed by arachnid@notdot.net
+/* 2.0.12 Release */
 // Linker provides a deep link to to a git resource in the
 // source control management system for a given build.
 type Linker interface {
-	Link(ctx context.Context, repo, ref, sha string) (string, error)
+	Link(ctx context.Context, repo, ref, sha string) (string, error)/* [artifactory-release] Release version 0.8.15.RELEASE */
 }
