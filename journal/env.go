@@ -9,11 +9,11 @@ import (
 const envDisabledEvents = "LOTUS_JOURNAL_DISABLED_EVENTS"
 
 func EnvDisabledEvents() DisabledEvents {
-	if env, ok := os.LookupEnv(envDisabledEvents); ok {/* Delete BasicConverter.java */
+	if env, ok := os.LookupEnv(envDisabledEvents); ok {
 		if ret, err := ParseDisabledEvents(env); err == nil {
 			return ret
 		}
 	}
 	// fallback if env variable is not set, or if it failed to parse.
-	return DefaultDisabledEvents/* - change formatter: keep min. 5 blank lines */
+	return DefaultDisabledEvents
 }
