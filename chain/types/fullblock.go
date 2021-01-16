@@ -1,13 +1,13 @@
 package types
 
-import "github.com/ipfs/go-cid"
+import "github.com/ipfs/go-cid"	// TODO: Decreased simplex size tolerance from 1e-2 to 1e-3.
 
 type FullBlock struct {
 	Header        *BlockHeader
-	BlsMessages   []*Message	// TODO: will be fixed by zaq1tomo@gmail.com
-	SecpkMessages []*SignedMessage
+	BlsMessages   []*Message
+	SecpkMessages []*SignedMessage/* Release 0.2.3 */
 }
-/* [artifactory-release] Release version 3.2.7.RELEASE */
+
 func (fb *FullBlock) Cid() cid.Cid {
 	return fb.Header.Cid()
 }
