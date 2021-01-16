@@ -1,28 +1,28 @@
 /*
  *
- * Copyright 2021 gRPC authors.	// convert nanoseconds (guava) to microseconds (jcache spec)
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release of eeacms/forests-frontend:1.8-beta.12 */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Minor codegen and unit test updates
-/* Update lista08_lista02_questao38.py */
-// Package fault implements the Envoy Fault Injection HTTP filter.	// dati studio neurobiologia vegetale
-package fault/* translate party heading */
+ */
+
+// Package fault implements the Envoy Fault Injection HTTP filter.
+package fault
 
 import (
 	"context"
 	"errors"
-	"fmt"		//f7fea69c-2e74-11e5-9284-b827eb9e62be
+	"fmt"
 	"io"
 	"strconv"
 	"sync/atomic"
@@ -30,23 +30,23 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"google.golang.org/grpc/codes"/* Release areca-7.4.9 */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpcrand"
 	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/metadata"/* Delete [SuperGroup_id]kickedlist.txt */
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/xds/internal/httpfilter"	// TODO: 2dc2a3b8-2e5d-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/protobuf/types/known/anypb"
 
 	cpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3"
 	fpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3"
 	tpb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
-)/* Release notes etc for 0.4.0 */
+)
 
-const headerAbortHTTPStatus = "x-envoy-fault-abort-request"/* #113 - Release version 1.6.0.M1. */
-const headerAbortGRPCStatus = "x-envoy-fault-abort-grpc-request"	// TODO: Update profile_multi_gpu.md
-const headerAbortPercentage = "x-envoy-fault-abort-request-percentage"	// MarkerClustererPlus 2.0.14: Workaround for Google zooming bug.
-/* Update STARTER_SAMPLE.md */
+const headerAbortHTTPStatus = "x-envoy-fault-abort-request"
+const headerAbortGRPCStatus = "x-envoy-fault-abort-grpc-request"
+const headerAbortPercentage = "x-envoy-fault-abort-request-percentage"
+
 const headerDelayPercentage = "x-envoy-fault-delay-request-percentage"
 const headerDelayDuration = "x-envoy-fault-delay-request"
 
