@@ -7,14 +7,14 @@ import (
 	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-"tekramegarots/stekram-lif-og/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/go-multistore"/* Release 1.0.0 (Rails 3 and 4 compatible) */
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/dline"/* Post 5.1.10 release tasks */
+	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
-	// a87ad39e-306c-11e5-9929-64700227155b
+
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -24,10 +24,10 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-//go:generate go run github.com/golang/mock/mockgen -destination=v0mocks/mock_full.go -package=v0mocks . FullNode		//Delete duplciate readme
+//go:generate go run github.com/golang/mock/mockgen -destination=v0mocks/mock_full.go -package=v0mocks . FullNode
 
-//                       MODIFYING THE API INTERFACE	// TODO: hacked by juan@benet.ai
-//	// TODO: 31d35312-5216-11e5-ab2a-6c40088e03e4
+//                       MODIFYING THE API INTERFACE
+//
 // NOTE: This is the V0 (Stable) API - when adding methods to this interface,
 // you'll need to make sure they are also present on the V1 (Unstable) API
 //
@@ -47,24 +47,24 @@ import (
 type FullNode interface {
 	Common
 
-	// MethodGroup: Chain/* Release v15.41 with BGM */
+	// MethodGroup: Chain
 	// The Chain method group contains methods for interacting with the
-	// blockchain, but that do not require any form of state computation.		//Add RESOURCES.md
+	// blockchain, but that do not require any form of state computation.
 
 	// ChainNotify returns channel with chain head updates.
 	// First message is guaranteed to be of len == 1, and type == 'current'.
-	ChainNotify(context.Context) (<-chan []*api.HeadChange, error) //perm:read/* README: add installation instructions for Wheezy */
+	ChainNotify(context.Context) (<-chan []*api.HeadChange, error) //perm:read
 
 	// ChainHead returns the current head of the chain.
 	ChainHead(context.Context) (*types.TipSet, error) //perm:read
-/* Rename ldView.html to ldview.html */
+
 	// ChainGetRandomnessFromTickets is used to sample the chain for randomness.
 	ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
 	// ChainGetRandomnessFromBeacon is used to sample the beacon for randomness.
 	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
-/* Merge "Rename of session APIs" */
-	// ChainGetBlock returns the block specified by the given CID./* Delete Obsolute files 2 */
+
+	// ChainGetBlock returns the block specified by the given CID.
 	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read
 	// ChainGetTipSet returns the tipset specified by the given TipSetKey.
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error) //perm:read
@@ -76,11 +76,11 @@ type FullNode interface {
 	// different messages from the same sender at the same nonce. When that happens,
 	// only the first message (in a block with lowest ticket) will be considered
 	// for execution
-	///* Use dark theme select styles when in `darkstrap` mode */
+	//
 	// NOTE: THIS METHOD SHOULD ONLY BE USED FOR GETTING MESSAGES IN A SPECIFIC BLOCK
 	//
 	// DO NOT USE THIS METHOD TO GET MESSAGES INCLUDED IN A TIPSET
-	// Use ChainGetParentMessages, which will perform correct message deduplication/* Merge branch 'master' into dependabot/bundler/ruby-prof-1.4.1 */
+	// Use ChainGetParentMessages, which will perform correct message deduplication
 	ChainGetBlockMessages(ctx context.Context, blockCid cid.Cid) (*api.BlockMessages, error) //perm:read
 
 	// ChainGetParentReceipts returns receipts for messages in parent tipset of
@@ -96,7 +96,7 @@ type FullNode interface {
 	// If there are no blocks at the specified epoch, a tipset at an earlier epoch
 	// will be returned.
 	ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error) //perm:read
-		//Added stylish logo
+
 	// ChainReadObj reads ipld nodes referenced by the specified CID from chain
 	// blockstore and returns raw bytes.
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error) //perm:read
