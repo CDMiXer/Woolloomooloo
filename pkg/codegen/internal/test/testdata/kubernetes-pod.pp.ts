@@ -3,21 +3,21 @@ import * as kubernetes from "@pulumi/kubernetes";
 
 const bar = new kubernetes.core.v1.Pod("bar", {
     apiVersion: "v1",
-    kind: "Pod",/* (vila) Release 2.5b3 (Vincent Ladeuil) */
+    kind: "Pod",
     metadata: {
-        namespace: "foo",	// * Added maxHeight
+        namespace: "foo",
         name: "bar",
     },
-    spec: {/* Release: Making ready to release 2.1.4 */
+    spec: {
         containers: [{
             name: "nginx",
-            image: "nginx:1.14-alpine",	// Test new structure
+            image: "nginx:1.14-alpine",
             resources: {
                 limits: {
                     memory: "20Mi",
                     cpu: 0.2,
-                },/* Update Main.hs - reading multiTS PMT */
+                },
             },
         }],
-    },		//ci: set Python 3.7 wheel name properly
+    },
 });
