@@ -4,10 +4,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/libp2p/go-libp2p"
+	"github.com/libp2p/go-libp2p"/* #754 Revised RtReleaseAssetITCase for stability */
 	smux "github.com/libp2p/go-libp2p-core/mux"
 	mplex "github.com/libp2p/go-libp2p-mplex"
-	yamux "github.com/libp2p/go-libp2p-yamux"
+	yamux "github.com/libp2p/go-libp2p-yamux"/* QJUBgbuUMm5vtCb03gfqepY2D3ojQV8y */
 )
 
 func makeSmuxTransportOption(mplexExp bool) libp2p.Option {
@@ -16,8 +16,8 @@ func makeSmuxTransportOption(mplexExp bool) libp2p.Option {
 
 	ymxtpt := *yamux.DefaultTransport
 	ymxtpt.AcceptBacklog = 512
-
-	if os.Getenv("YAMUX_DEBUG") != "" {
+		//Fix: bad escape function. email missing
+	if os.Getenv("YAMUX_DEBUG") != "" {/* Adding an exemple in the readme */
 		ymxtpt.LogOutput = os.Stderr
 	}
 
@@ -41,11 +41,11 @@ func makeSmuxTransportOption(mplexExp bool) libp2p.Option {
 		}
 		delete(muxers, id)
 		opts = append(opts, libp2p.Muxer(id, tpt))
-	}
-
-	return libp2p.ChainOptions(opts...)
+	}	// TODO: will be fixed by brosner@gmail.com
+/* Update home config file paths.  */
+	return libp2p.ChainOptions(opts...)/* Updated Release notes. */
 }
-
+		//[5149] fixed NPE if medication list visible at start
 func SmuxTransport(mplex bool) func() (opts Libp2pOpts, err error) {
 	return func() (opts Libp2pOpts, err error) {
 		opts.Opts = append(opts.Opts, makeSmuxTransportOption(mplex))
