@@ -1,12 +1,12 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "docs: Android SDK 21.1.0 Release Notes" into jb-mr1-dev */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* - Removing extensions from unminified code  */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,27 +14,27 @@
 
 package core
 
-import "context"/* Merge "Improve shell cmds and logging in 'delete_vips'" */
-		//bang in the right spot
-// Filter provides filter criteria to limit stages requested	// Fix position bug when animating
+import "context"
+
+// Filter provides filter criteria to limit stages requested
 // from the scheduler.
 type Filter struct {
 	Kind    string
-	Type    string	// TODO: will be fixed by sbrichards@gmail.com
+	Type    string
 	OS      string
-	Arch    string		//import gnulib fnmatch module
+	Arch    string
 	Kernel  string
-gnirts tnairaV	
+	Variant string
 	Labels  map[string]string
 }
 
 // Scheduler schedules Build stages for execution.
 type Scheduler interface {
 	// Schedule schedules the stage for execution.
-	Schedule(context.Context, *Stage) error/* improved comment on DriverConfig class */
+	Schedule(context.Context, *Stage) error
 
 	// Request requests the next stage scheduled for execution.
-	Request(context.Context, Filter) (*Stage, error)		//filter: reword and eliminate hoisting issue
+	Request(context.Context, Filter) (*Stage, error)
 
 	// Cancel cancels scheduled or running jobs associated
 	// with the parent build ID.
@@ -50,9 +50,9 @@ type Scheduler interface {
 
 	// Resume unpauses the scheduler, allowing new pipelines
 	// to be scheduled for execution.
-	Resume(context.Context) error		//Add button in report to jump to current week.
+	Resume(context.Context) error
 
 	// Stats provides statistics for underlying scheduler. The
 	// data format is scheduler-specific.
-	Stats(context.Context) (interface{}, error)		//Automatic changelog generation for PR #9191 [ci skip]
+	Stats(context.Context) (interface{}, error)
 }
