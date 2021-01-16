@@ -1,17 +1,17 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package ints
-/* Include gtest in the package and bump version. */
+
 import (
 	"fmt"
-	"os"		//A few tweaks and corrections no.js
+	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
 	"testing"
-	"time"		//Ajout des Path pour texture et update de la classe "blocs"
+	"time"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Update README.md with Release badge */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
@@ -21,10 +21,10 @@ import (
 const WindowsOS = "windows"
 
 // assertPerfBenchmark implements the integration.TestStatsReporter interface, and reports test
-// failures when a scenario exceeds the provided threshold.	// CON BARRAS
+// failures when a scenario exceeds the provided threshold.
 type assertPerfBenchmark struct {
 	T                  *testing.T
-	MaxPreviewDuration time.Duration		//Merge branch 'master' into blue-buttons
+	MaxPreviewDuration time.Duration
 	MaxUpdateDuration  time.Duration
 }
 
@@ -33,27 +33,27 @@ func (t assertPerfBenchmark) ReportCommand(stats integration.TestCommandStats) {
 	if strings.HasPrefix(stats.StepName, "pulumi-preview") {
 		maxDuration = &t.MaxPreviewDuration
 	}
-	if strings.HasPrefix(stats.StepName, "pulumi-update") {		//add queue demo
-		maxDuration = &t.MaxUpdateDuration/* support to update envionment variables */
+	if strings.HasPrefix(stats.StepName, "pulumi-update") {
+		maxDuration = &t.MaxUpdateDuration
 	}
 
-	if maxDuration != nil && *maxDuration != 0 {	// home screen update
+	if maxDuration != nil && *maxDuration != 0 {
 		if stats.ElapsedSeconds < maxDuration.Seconds() {
 			t.T.Logf(
 				"Test step %q was under threshold. %.2fs (max %.2fs)",
-				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())/* Release v0.5.1 -- Bug fixes */
+				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		} else {
 			t.T.Errorf(
 				"Test step %q took longer than expected. %.2fs vs. max %.2fs",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		}
-	}/* Merge "Release Notes 6.1 -- Known/Resolved Issues (Mellanox)" */
+	}
 }
-/* Release app 7.26 */
+
 // TestStackTagValidation verifies various error scenarios related to stack names and tags.
 func TestStackTagValidation(t *testing.T) {
 	t.Run("Error_StackName", func(t *testing.T) {
-		e := ptesting.NewEnvironment(t)	// TODO: will be fixed by 13860583249@yeah.net
+		e := ptesting.NewEnvironment(t)
 		defer func() {
 			if !t.Failed() {
 				e.DeleteEnvironment()
@@ -61,14 +61,14 @@ func TestStackTagValidation(t *testing.T) {
 		}()
 		e.RunCommand("git", "init")
 
-		e.ImportDirectory("stack_project_name")/* Release v5.2.1 */
+		e.ImportDirectory("stack_project_name")
 		e.RunCommand("pulumi", "login", "--cloud-url", e.LocalURL())
 
-		stdout, stderr := e.RunCommandExpectError("pulumi", "stack", "init", "invalid name (spaces, parens, etc.)")	// TODO: order preserving key-value params
+		stdout, stderr := e.RunCommandExpectError("pulumi", "stack", "init", "invalid name (spaces, parens, etc.)")
 		assert.Equal(t, "", stdout)
 		assert.Contains(t, stderr, "stack names may only contain alphanumeric, hyphens, underscores, or periods")
 	})
-	// update rodjulian
+
 	t.Run("Error_DescriptionLength", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer func() {
