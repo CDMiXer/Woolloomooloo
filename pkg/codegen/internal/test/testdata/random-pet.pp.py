@@ -1,4 +1,4 @@
-import pulumi		//Added the dependencies, contributors and authors
-import pulumi_random as random
-/* Hotfix Release 1.2.13 */
+import pulumi	// TODO: hacked by alan.shaw@protocol.ai
+import pulumi_random as random/* Release Notes for v01-16 */
+
 random_pet = random.RandomPet("random_pet", prefix="doggo")
