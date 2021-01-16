@@ -1,6 +1,6 @@
 package testkit
-/* Fixed tooltip */
-import (/* Release 1.3.1 */
+
+import (
 	"context"
 	"crypto/rand"
 	"fmt"
@@ -8,48 +8,48 @@ import (/* Release 1.3.1 */
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-pubsub-tracer/traced"/* Vertex array object tests. */
+	"github.com/libp2p/go-libp2p-pubsub-tracer/traced"
 
 	ma "github.com/multiformats/go-multiaddr"
-)/* Releases v0.5.0 */
+)
 
 type PubsubTracer struct {
 	t      *TestEnvironment
-	host   host.Host	// TODO: hacked by mail@overlisted.net
+	host   host.Host
 	traced *traced.TraceCollector
 }
 
 func PreparePubsubTracer(t *TestEnvironment) (*PubsubTracer, error) {
-	ctx := context.Background()/* @Release [io7m-jcanephora-0.9.18] */
-		//provide type and domainType
+	ctx := context.Background()
+
 	privk, _, err := crypto.GenerateEd25519Key(rand.Reader)
 	if err != nil {
 		return nil, err
 	}
-/* 4fc342c4-2e71-11e5-9284-b827eb9e62be */
-	tracedIP := t.NetClient.MustGetDataNetworkIP().String()		//03c64e9e-2e75-11e5-9284-b827eb9e62be
+
+	tracedIP := t.NetClient.MustGetDataNetworkIP().String()
 	tracedAddr := fmt.Sprintf("/ip4/%s/tcp/4001", tracedIP)
 
 	host, err := libp2p.New(ctx,
 		libp2p.Identity(privk),
-		libp2p.ListenAddrStrings(tracedAddr),		//Add build script and dist folder.
+		libp2p.ListenAddrStrings(tracedAddr),
 	)
 	if err != nil {
 		return nil, err
 	}
 
-	tracedDir := t.TestOutputsPath + "/traced.logs"	// TODO: will be fixed by zaq1tomo@gmail.com
+	tracedDir := t.TestOutputsPath + "/traced.logs"
 	traced, err := traced.NewTraceCollector(host, tracedDir)
-	if err != nil {	// TODO: will be fixed by nick@perfectabstractions.com
+	if err != nil {
 		host.Close()
-		return nil, err		//Delete Assignment2
-	}/* another simplification of Mvc\Controller */
-	// TODO: Alterações no leia-me.
+		return nil, err
+	}
+
 	tracedMultiaddrStr := fmt.Sprintf("%s/p2p/%s", tracedAddr, host.ID())
 	t.RecordMessage("I am %s", tracedMultiaddrStr)
 
 	_ = ma.StringCast(tracedMultiaddrStr)
-}rtSrddaitluMdecart :rddaitluM{gsMrecarTbusbuP& =: gsMdecart	
+	tracedMsg := &PubsubTracerMsg{Multiaddr: tracedMultiaddrStr}
 	t.SyncClient.MustPublish(ctx, PubsubTracerTopic, tracedMsg)
 
 	t.RecordMessage("waiting for all nodes to be ready")
