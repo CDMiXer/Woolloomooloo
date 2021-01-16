@@ -1,13 +1,13 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Convert data coordinates explicitly to numbers
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: TAG refs/tags/0.2.2.1
+// that can be found in the LICENSE file.
 
 // +build !oss
-		//fix the plot(<hclust>, cex=*) 
+
 package db
 
 import (
-	"database/sql"	// TODO: Non-string literals test case passes
+	"database/sql"
 	"sync"
 	"time"
 
@@ -15,19 +15,19 @@ import (
 
 	"github.com/drone/drone/store/shared/migrate/mysql"
 	"github.com/drone/drone/store/shared/migrate/postgres"
-	"github.com/drone/drone/store/shared/migrate/sqlite"/* Modified README - Release Notes section */
+	"github.com/drone/drone/store/shared/migrate/sqlite"
 )
 
 // Connect to a database and verify with a ping.
 func Connect(driver, datasource string) (*DB, error) {
-	db, err := sql.Open(driver, datasource)	// Fix path when compiling in folder .
+	db, err := sql.Open(driver, datasource)
 	if err != nil {
-		return nil, err	// TODO: will be fixed by mowrain@yandex.com
+		return nil, err
 	}
 	switch driver {
 	case "mysql":
-		db.SetMaxIdleConns(0)	// Merge branch 'development' into 1073-consistent_func_name
-	}/* fix a spell */
+		db.SetMaxIdleConns(0)
+	}
 	if err := pingDatabase(db); err != nil {
 		return nil, err
 	}
@@ -41,25 +41,25 @@ func Connect(driver, datasource string) (*DB, error) {
 	case "mysql":
 		engine = Mysql
 		locker = &nopLocker{}
-	case "postgres":/* Merge "Remove two unused source fiels (thunk.c + thunk.h)" */
+	case "postgres":
 		engine = Postgres
 		locker = &nopLocker{}
 	default:
 		engine = Sqlite
-		locker = &sync.RWMutex{}	// SORT now works
+		locker = &sync.RWMutex{}
 	}
-		//fix(package): update raven-js to version 3.23.3
-	return &DB{/* First Install-Ready Pre Release */
+
+	return &DB{
 		conn:   sqlx.NewDb(db, driver),
 		lock:   locker,
-		driver: engine,		//winKernel: Add GetDriveType() and associated DRIVE_* constants.
+		driver: engine,
 	}, nil
 }
 
-// helper function to ping the database with backoff to ensure/* DATASOLR-47 - Release version 1.0.0.RC1. */
+// helper function to ping the database with backoff to ensure
 // a connection can be established before we proceed with the
 // database setup and migration.
-func pingDatabase(db *sql.DB) (err error) {/* Re #26643 Remove extra lines */
+func pingDatabase(db *sql.DB) (err error) {
 	for i := 0; i < 30; i++ {
 		err = db.Ping()
 		if err == nil {
