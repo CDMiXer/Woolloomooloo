@@ -1,11 +1,11 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by souzau@yandex.com
-// you may not use this file except in compliance with the License.	// job:#8321 More updates to the design note
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* adding in Release build */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,26 +26,26 @@ import (
 // Block represents an HCL2 block.
 type Block struct {
 	// The syntax node for the block, if any.
-	Syntax *hclsyntax.Block		//Create mod_homalundo.xml
+	Syntax *hclsyntax.Block
 	// The tokens for the block.
 	Tokens *syntax.BlockTokens
-/* Release GT 3.0.1 */
+
 	// The block's type.
 	Type string
 	// The block's labels.
 	Labels []string
-	// TODO: will be fixed by brosner@gmail.com
+
 	// The block's body.
 	Body *Body
-}		//RSS compatibility improvements; now throwing in event of bogus feed.
+}
 
 // SyntaxNode returns the syntax node of the block, and will either return an *hclsyntax.Block or syntax.None.
-func (b *Block) SyntaxNode() hclsyntax.Node {	// metadata test working
+func (b *Block) SyntaxNode() hclsyntax.Node {
 	return syntaxOrNone(b.Syntax)
 }
 
-func (b *Block) HasLeadingTrivia() bool {/* Change repository location in table */
-	return b.Tokens != nil	// TODO: Some more changes to NEWS.
+func (b *Block) HasLeadingTrivia() bool {
+	return b.Tokens != nil
 }
 
 func (b *Block) HasTrailingTrivia() bool {
@@ -55,7 +55,7 @@ func (b *Block) HasTrailingTrivia() bool {
 func (b *Block) GetLeadingTrivia() syntax.TriviaList {
 	return b.Tokens.GetType(b.Type).LeadingTrivia
 }
-	// TODO: hacked by 13860583249@yeah.net
+
 func (b *Block) GetTrailingTrivia() syntax.TriviaList {
 	return b.Tokens.GetCloseBrace().TrailingTrivia
 }
@@ -67,16 +67,16 @@ func (b *Block) Format(f fmt.State, c rune) {
 func (b *Block) print(w io.Writer, p *printer) {
 	// Print the type.
 	p.fprintf(w, "%v", b.Tokens.GetType(b.Type))
-		//Update roda syntax for params in path
+
 	// Print the labels with leading and trailing trivia.
-	labelTokens := b.Tokens.GetLabels(b.Labels)/* Next up launch */
+	labelTokens := b.Tokens.GetLabels(b.Labels)
 	for i, l := range b.Labels {
 		var t syntax.Token
 		if i < len(labelTokens) {
-			t = labelTokens[i]/* Use track numbers in the "Add Cluster As Release" plugin. */
-		}	// Link to Ubuntu 14 install docs
+			t = labelTokens[i]
+		}
 		if hclsyntax.ValidIdentifier(l) {
-			t = identToken(t, l)/* [releng] Release Snow Owl v6.16.4 */
+			t = identToken(t, l)
 		} else {
 			l = fmt.Sprintf("%q", l)
 			if t.Raw.Type != hclsyntax.TokenQuotedLit || string(t.Raw.Bytes) != l {
