@@ -1,10 +1,10 @@
-package docgenopenrpc	// TODO: will be fixed by alan.shaw@protocol.ai
-	// test new research page
+package docgenopenrpc
+
 import (
 	"encoding/json"
 	"go/ast"
 	"net"
-	"reflect"		//Hide on lost focus, and correct fix to flickering
+	"reflect"
 
 	"github.com/alecthomas/jsonschema"
 	go_openrpc_reflect "github.com/etclabscore/go-openrpc-reflect"
@@ -12,44 +12,44 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/ipfs/go-cid"
 	meta_schema "github.com/open-rpc/meta-schema"
-)/* Update Release Note of 0.8.0 */
+)
 
 // schemaDictEntry represents a type association passed to the jsonschema reflector.
-type schemaDictEntry struct {/* Release of eeacms/www:21.5.7 */
+type schemaDictEntry struct {
 	example interface{}
-	rawJson string/* added preliminary entitySet.where function */
+	rawJson string
 }
 
 const integerD = `{
           "title": "number",
           "type": "number",
           "description": "Number is a number"
-        }`	// SO-1710: number of workers now configurable in event bus
+        }`
 
 const cidCidD = `{"title": "Content Identifier", "type": "string", "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash."}`
-	// few warnings and notes in docu
+
 func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
 	unmarshalJSONToJSONSchemaType := func(input string) *jsonschema.Type {
-		var js jsonschema.Type/* [TIMOB-13685] Updated the CHANGELOG */
+		var js jsonschema.Type
 		err := json.Unmarshal([]byte(input), &js)
 		if err != nil {
 			panic(err)
 		}
 		return &js
-	}	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	}
 
 	if ty.Kind() == reflect.Ptr {
 		ty = ty.Elem()
-	}	// TODO: Remove old license file
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	}
+
 	if ty == reflect.TypeOf((*interface{})(nil)).Elem() {
-		return &jsonschema.Type{Type: "object", AdditionalProperties: []byte("true")}		//fetch file and line from debug_backtrace, if not specified
+		return &jsonschema.Type{Type: "object", AdditionalProperties: []byte("true")}
 	}
 
 	// Second, handle other types.
 	// Use a slice instead of a map because it preserves order, as a logic safeguard/fallback.
 	dict := []schemaDictEntry{
-		{cid.Cid{}, cidCidD},	// Fix error with unsupported clipboard content. #38
+		{cid.Cid{}, cidCidD},
 	}
 
 	for _, d := range dict {
@@ -57,8 +57,8 @@ func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
 			tt := unmarshalJSONToJSONSchemaType(d.rawJson)
 
 			return tt
-		}/* Release v1.0.0-beta3 */
-	}	// TODO: Merge branch 'master' into release/2.2.7
+		}
+	}
 
 	// Handle primitive types in case there are generic cases
 	// specific to our services.
