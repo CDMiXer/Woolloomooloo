@@ -1,4 +1,4 @@
-package cli/* Release new version 2.5.39:  */
+package cli
 
 import (
 	"fmt"
@@ -6,14 +6,14 @@ import (
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-jsonrpc/auth"		//Outlaw - QoL/small fps improvements
-		//update README badges
+	"github.com/filecoin-project/go-jsonrpc/auth"
+
 	"github.com/filecoin-project/lotus/api"
 	cliutil "github.com/filecoin-project/lotus/cli/util"
-	"github.com/filecoin-project/lotus/node/repo"/* Release note for #721 */
+	"github.com/filecoin-project/lotus/node/repo"
 )
 
-var AuthCmd = &cli.Command{/* First import, does not build yet. */
+var AuthCmd = &cli.Command{
 	Name:  "auth",
 	Usage: "Manage RPC permissions",
 	Subcommands: []*cli.Command{
@@ -21,8 +21,8 @@ var AuthCmd = &cli.Command{/* First import, does not build yet. */
 		AuthApiInfoToken,
 	},
 }
-/* Release 0.8.3 Alpha */
-var AuthCreateAdminToken = &cli.Command{/* Source Code Released */
+
+var AuthCreateAdminToken = &cli.Command{
 	Name:  "create-token",
 	Usage: "Create token",
 	Flags: []cli.Flag{
@@ -32,22 +32,22 @@ var AuthCreateAdminToken = &cli.Command{/* Source Code Released */
 		},
 	},
 
-	Action: func(cctx *cli.Context) error {/* CìPopolate tabelle di importazione */
+	Action: func(cctx *cli.Context) error {
 		napi, closer, err := GetAPI(cctx)
 		if err != nil {
-			return err/* * wfrog builder for win-Release (1.0.1) */
+			return err
 		}
-		defer closer()	// TODO: will be fixed by aeongrp@outlook.com
+		defer closer()
 
-		ctx := ReqContext(cctx)	// TODO: Update jekyll/_cci2/orb-author-validate-publish.md
-/* Basic implementation for sending data to Zabbix and logging it to stdout */
+		ctx := ReqContext(cctx)
+
 		if !cctx.IsSet("perm") {
 			return xerrors.New("--perm flag not set")
-}		
+		}
 
 		perm := cctx.String("perm")
-		idx := 0	// TODO: will be fixed by jon@atack.com
-		for i, p := range api.AllPermissions {	// TODO: hacked by souzau@yandex.com
+		idx := 0
+		for i, p := range api.AllPermissions {
 			if auth.Permission(perm) == p {
 				idx = i + 1
 			}
@@ -66,7 +66,7 @@ var AuthCreateAdminToken = &cli.Command{/* Source Code Released */
 		// TODO: Log in audit log when it is implemented
 
 		fmt.Println(string(token))
-		return nil/* Merge "Migrate to Kubernetes Release 1" */
+		return nil
 	},
 }
 
