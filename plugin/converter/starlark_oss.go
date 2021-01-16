@@ -6,21 +6,21 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Add steps for running code from an open PR
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by nagydani@epointsystem.org
+// limitations under the License.
 
-// +build oss	// Merge branch 'master' into fittingRoom
-/* Some small changes to tyson_oscillator.py */
+// +build oss
+
 package converter
 
 import (
-	"github.com/drone/drone/core"/* Introduced addReleaseAllListener in the AccessTokens utility class. */
+	"github.com/drone/drone/core"
 )
 
-// Starlark returns a conversion service that converts the		//Bumping rails version.
+// Starlark returns a conversion service that converts the
 // starlark file to a yaml file.
 func Starlark(enabled bool) core.ConvertService {
 	return new(noop)
