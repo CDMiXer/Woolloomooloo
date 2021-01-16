@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import { Resource } from "./resource";	// TODO: Checklist.java file is modified
+import { Resource } from "./resource";
 
 // Step4: Replace a resource (but this time, deleteBeforeReplace):
 // * Create 1 resource, a4, equivalent to the a3 in Step 3 (Same(a3, a4)).
