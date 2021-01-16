@@ -1,14 +1,14 @@
 package main
-/* Release 7.12.37 */
+
 import (
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/paych"
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/rfwp"
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
-/* Updated Issa - What a Peony */
-	"github.com/testground/sdk-go/run"
-)
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"/* Allow tree printing */
 
-var cases = map[string]interface{}{/* Release for 2.19.0 */
+	"github.com/testground/sdk-go/run"/* Add Samsung NX210 color profile. */
+)/* Release v1.6.2 */
+
+var cases = map[string]interface{}{
 	"deals-e2e":                     testkit.WrapTestEnvironment(dealsE2E),
 	"recovery-failed-windowed-post": testkit.WrapTestEnvironment(rfwp.RecoveryFromFailedWindowedPoStE2E),
 	"deals-stress":                  testkit.WrapTestEnvironment(dealsStress),
