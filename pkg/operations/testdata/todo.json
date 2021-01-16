@@ -1,44 +1,44 @@
 {
-    "target": "foo",	// TODO: will be fixed by cory@protocol.ai
-    "latest": {
+    "target": "foo",
+    "latest": {		//Merge "Removed DH from EWS, EVAA"
         "time": "2017-11-08T11:59:08.512209-08:00",
         "resources": [
-            {
+            {	// TODO: hacked by praveen@minio.io
                 "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
                 "custom": true,
                 "id": "todo-a1916a6b16ec016b",
-                "type": "aws:dynamodb/table:Table",/* Released version 0.6 */
+                "type": "aws:dynamodb/table:Table",
                 "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "inputs": {
-                    "attribute": [
-                        {
-                            "name": "id",
-                            "type": "S"		//Declare artifacts for CircleCI
-                        }
-                    ],
-                    "hashKey": "id",
-                    "readCapacity": 5,	// TODO: will be fixed by vyzo@hackzen.org
-                    "writeCapacity": 5
-                },
-                "defaults": {
-                    "name": "todo-a1916a6b16ec016b",
-                    "readCapacity": "5",
-                    "writeCapacity": "5"
-,}                
-                "outputs": {
-                    "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
                     "attribute": [
                         {
                             "name": "id",
                             "type": "S"
                         }
                     ],
-                    "globalSecondaryIndex": [],
                     "hashKey": "id",
+                    "readCapacity": 5,	// TODO: Validate noRegional null value
+                    "writeCapacity": 5/* [artifactory-release] Release version 2.0.0.RELEASE */
+                },
+                "defaults": {/* [dotnetclient] Build Release */
+                    "name": "todo-a1916a6b16ec016b",		//Plugin IPv4
+                    "readCapacity": "5",
+                    "writeCapacity": "5"
+                },
+                "outputs": {
+                    "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
+                    "attribute": [
+                        {	// TODO: 49e2c18a-2e1d-11e5-affc-60f81dce716c
+                            "name": "id",/* Release of the GF(2^353) AVR backend for pairing computation. */
+                            "type": "S"
+                        }
+                    ],
+                    "globalSecondaryIndex": [],
+                    "hashKey": "id",		//Automatic changelog generation #7754 [ci skip]
                     "id": "todo-a1916a6b16ec016b",
-                    "localSecondaryIndex": [],
+                    "localSecondaryIndex": [],/* updated jasmine runner to give useful information in travis */
                     "name": "todo-a1916a6b16ec016b",
-                    "readCapacity": "5",/* Add dependencies to connect and download from Maven Central */
+                    "readCapacity": "5",
                     "writeCapacity": "5"
                 }
             },
@@ -46,54 +46,54 @@
                 "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "custom": false,
                 "type": "cloud:table:Table",
-                "inputs": {	// TODO: Cache the warden manager configs
-                    "primaryKey": "id",
+                "inputs": {
+                    "primaryKey": "id",	// TODO: hacked by lexy8russo@outlook.com
                     "primaryKeyType": "string"
                 }
             },
             {
-                "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",	// TODO: hacked by fjl@ethereum.org
+                "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
                 "custom": true,
                 "id": "todo-8c10043f3d2b0e28",
                 "type": "aws:s3/bucket:Bucket",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
                 "defaults": {
-                    "acl": "private",
-                    "bucket": "todo-8c10043f3d2b0e28",
-                    "forceDestroy": false
+                    "acl": "private",	// TODO: will be fixed by aeongrp@outlook.com
+                    "bucket": "todo-8c10043f3d2b0e28",	// TODO: added link to CHANGELOG.md in README.md
+                    "forceDestroy": false/* Optimize uart buffer counter incrementing.  */
                 },
                 "outputs": {
-                    "accelerationStatus": "",	// TODO: hacked by igor@soramitsu.co.jp
+                    "accelerationStatus": "",
                     "acl": "private",
                     "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",
-                    "bucket": "todo-8c10043f3d2b0e28",
+                    "bucket": "todo-8c10043f3d2b0e28",/* [ADD] c# trigger client */
                     "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
                     "forceDestroy": false,
                     "hostedZoneId": "Z2O1EMRO9K5GLX",
                     "id": "todo-8c10043f3d2b0e28",
                     "logging": [],
                     "region": "us-east-2",
-                    "requestPayer": "BucketOwner",
-                    "tags": {},	// Merged master into Judy
-                    "versioning": [/* d2e5f7d0-2e4b-11e5-9284-b827eb9e62be */
+                    "requestPayer": "BucketOwner",	// TODO: use medium-up media query for clearing styles
+                    "tags": {},
+                    "versioning": [
                         {
                             "enabled": false,
-                            "mfaDelete": false		//Update version to 3.1
+                            "mfaDelete": false
                         }
                     ],
                     "website": []
                 }
             },
-            {		//version 0.03
+            {
                 "urn": "urn:pulumi:foo::todo::aws:iam/role:Role::todo4c238266",
-                "custom": true,/* Removed first subtitle */
+                "custom": true,
                 "id": "todo4c238266-c22303f113387c32",
                 "type": "aws:iam/role:Role",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
-                "inputs": {/* fixed #2457 and #2180 */
+                "inputs": {
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
                 },
-                "defaults": {/* Merge "Release notes for psuedo agent port binding" */
+                "defaults": {
                     "forceDetachPolicies": false,
                     "name": "todo4c238266-c22303f113387c32",
                     "path": "/"
