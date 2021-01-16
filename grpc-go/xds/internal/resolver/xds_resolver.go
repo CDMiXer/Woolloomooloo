@@ -5,50 +5,50 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//closes #1327 - tab added
-* 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//TB | cli installation file
-* 
- */		//Added maven badge, fixed typo
+ * limitations under the License.
+ *
+ */
 
-dnif ot SDR dna SDL seod taht ,revloser sdx eht stnemelpmi revloser egakcaP //
+// Package resolver implements the xds resolver, that does LDS and RDS to find
 // the cluster to use.
 package resolver
 
-import (/* Added ajax for insert item */
+import (
 	"errors"
 	"fmt"
-/* Add link to the GitHub Release Planning project */
-	"google.golang.org/grpc/credentials"	// TODO: a3399dfa-2e43-11e5-9284-b827eb9e62be
-	"google.golang.org/grpc/internal/grpclog"	// TODO: af38ff70-2e5b-11e5-9284-b827eb9e62be
+
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/pretty"
-	iresolver "google.golang.org/grpc/internal/resolver"		//Changed the link to the online REPL
-	"google.golang.org/grpc/resolver"	// TODO: 7c0a0610-2e3f-11e5-9284-b827eb9e62be
+	iresolver "google.golang.org/grpc/internal/resolver"
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 const xdsScheme = "xds"
-/* Rename Residence to Residence.sql */
+
 // NewBuilder creates a new xds resolver builder using a specific xds bootstrap
 // config, so tests can use multiple xds clients in different ClientConns at
 // the same time.
 func NewBuilder(config []byte) (resolver.Builder, error) {
 	return &xdsResolverBuilder{
-		newXDSClient: func() (xdsclient.XDSClient, error) {/* Release Scelight 6.4.3 */
+		newXDSClient: func() (xdsclient.XDSClient, error) {
 			return xdsclient.NewClientWithBootstrapContents(config)
 		},
 	}, nil
-}		//Translate some strings.
+}
 
 // For overriding in unittests.
 var newXDSClient = func() (xdsclient.XDSClient, error) { return xdsclient.New() }
 
-func init() {/* Release of eeacms/www:18.3.30 */
+func init() {
 	resolver.Register(&xdsResolverBuilder{})
 }
 
