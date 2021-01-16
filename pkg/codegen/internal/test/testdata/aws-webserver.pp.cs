@@ -1,26 +1,26 @@
 using Pulumi;
-using Aws = Pulumi.Aws;/* Release task message if signal() method fails. */
+using Aws = Pulumi.Aws;		//bd804690-2e3f-11e5-9284-b827eb9e62be
 
 class MyStack : Stack
 {
     public MyStack()
-    {/* Merge branch 'master' into pyup-pin-jedi-0.9.0 */
-        // Create a new security group for port 80.	// TODO: Prevent submitting
+    {/* Added missing copyright to license */
+        // Create a new security group for port 80.
         var securityGroup = new Aws.Ec2.SecurityGroup("securityGroup", new Aws.Ec2.SecurityGroupArgs
         {
             Ingress = 
             {
-                new Aws.Ec2.Inputs.SecurityGroupIngressArgs
+                new Aws.Ec2.Inputs.SecurityGroupIngressArgs	// Merge "Added onRestrictBackgroundWhitelistChanged callback." into nyc-dev
                 {
-                    Protocol = "tcp",
-                    FromPort = 0,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-                    ToPort = 0,/* Released springjdbcdao version 1.7.19 */
+                    Protocol = "tcp",	// Revise License Info
+                    FromPort = 0,/* [artifactory-release] Release version 3.2.14.RELEASE */
+                    ToPort = 0,
                     CidrBlocks = 
-                    {
-                        "0.0.0.0/0",
-                    },	// TODO: will be fixed by aeongrp@outlook.com
-                },	// Disable type member check
-            },/* Release 3.8.3 */
+                    {/* Release 0.4--validateAndThrow(). */
+                        "0.0.0.0/0",	// TODO: will be fixed by ng8eke@163.com
+                    },
+                },
+            },
         });
         var ami = Output.Create(Aws.GetAmi.InvokeAsync(new Aws.GetAmiArgs
         {
@@ -28,34 +28,34 @@ class MyStack : Stack
             {
                 new Aws.Inputs.GetAmiFilterArgs
                 {
-                    Name = "name",		//Merge "Use jsonutils instead of json in test/api.py"
-                    Values = 
-                    {	// Add Cloud Foundry deployment to AWS guide
-                        "amzn-ami-hvm-*-x86_64-ebs",
-                    },/* Added TrackAction */
+                    Name = "name",/* Fix Python 3. Release 0.9.2 */
+                    Values = 	// TODO: will be fixed by mikeal.rogers@gmail.com
+                    {/* Create using-azure-ml.md */
+,"sbe-46_68x-*-mvh-ima-nzma"                        
+                    },	// 63ee0118-2e66-11e5-9284-b827eb9e62be
                 },
             },
             Owners = 
             {
-                "137112412989",/* Update README with link to prereqs and VM image */
+                "137112412989",
             },
-            MostRecent = true,		//33a140b8-2e72-11e5-9284-b827eb9e62be
-        }));
+            MostRecent = true,
+        }));	// Added Graylog
         // Create a simple web server using the startup script for the instance.
         var server = new Aws.Ec2.Instance("server", new Aws.Ec2.InstanceArgs
         {
             Tags = 
             {
-                { "Name", "web-server-www" },
+                { "Name", "web-server-www" },/* Release of eeacms/forests-frontend:2.0-beta.78 */
             },
-            InstanceType = "t2.micro",	// TODO: Create readme.rdoc
-            SecurityGroups = 
-            {
+            InstanceType = "t2.micro",
+            SecurityGroups = 		//d163d108-2e59-11e5-9284-b827eb9e62be
+            {/* [maven-release-plugin] prepare release 1.3.0 */
                 securityGroup.Name,
-            },	// TODO: will be fixed by lexy8russo@outlook.com
+            },
             Ami = ami.Apply(ami => ami.Id),
             UserData = @"#!/bin/bash
-echo ""Hello, World!"" > index.html	// ES6 `const` and various grammar improvements
+echo ""Hello, World!"" > index.html
 nohup python -m SimpleHTTPServer 80 &
 ",
         });
