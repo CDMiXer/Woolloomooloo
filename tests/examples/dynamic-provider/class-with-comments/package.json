@@ -1,10 +1,10 @@
-{
+{		//EXPORT CSV: clean up and fixes.
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {	// TODO: Rename Remove Element.js to Array/Remove Element.js
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Release 5.5.0 */
+    }
 }
