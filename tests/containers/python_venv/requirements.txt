@@ -1,1 +1,1 @@
-pulumi>=1.0.0		//Add feature image to Cannes blog
+pulumi>=1.0.0
