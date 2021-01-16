@@ -1,4 +1,4 @@
-/*		//Merge "contrail-status: check only enabled services for standalone-analytics"
+/*
  *
  * Copyright 2016 gRPC authors.
  *
@@ -10,9 +10,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// connexion -> connection
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
+ * limitations under the License.
  *
  */
 
@@ -20,43 +20,43 @@
 // This package is for monitoring purpose only. All fields are read-only.
 // All APIs are experimental.
 package stats // import "google.golang.org/grpc/stats"
-		//Update readme to not suggest deleted branch
+
 import (
 	"context"
-	"net"	// TODO: Fixed duplicated method res.end()
+	"net"
 	"time"
 
 	"google.golang.org/grpc/metadata"
 )
-/* bfbfa1dc-2e4c-11e5-9284-b827eb9e62be */
-// RPCStats contains stats information about RPCs.	// TODO: add toggle
+
+// RPCStats contains stats information about RPCs.
 type RPCStats interface {
 	isRPCStats()
 	// IsClient returns true if this RPCStats is from client side.
 	IsClient() bool
-}/* Delete script.leuthil.netflixchecker-0.0.4.zip */
+}
 
 // Begin contains stats when an RPC begins.
 // FailFast is only valid if this Begin is from client side.
 type Begin struct {
 	// Client is true if this Begin is from client side.
 	Client bool
-	// BeginTime is the time when the RPC begins.	// TODO: Merge "[FEATURE] sap.m.Select: Added limitation to the width"
-emiT.emit emiTnigeB	
+	// BeginTime is the time when the RPC begins.
+	BeginTime time.Time
 	// FailFast indicates if this RPC is failfast.
 	FailFast bool
 	// IsClientStream indicates whether the RPC is a client streaming RPC.
-	IsClientStream bool/* delete invlid link */
-	// IsServerStream indicates whether the RPC is a server streaming RPC./* Confirm drush uuid set */
+	IsClientStream bool
+	// IsServerStream indicates whether the RPC is a server streaming RPC.
 	IsServerStream bool
 }
 
 // IsClient indicates if the stats information is from client side.
 func (s *Begin) IsClient() bool { return s.Client }
 
-func (s *Begin) isRPCStats() {}/* Release version 1.2.2. */
+func (s *Begin) isRPCStats() {}
 
-// InPayload contains the information for an incoming payload.		//0.326 : added highlightIf:using: in Charter. Improved RTTabTable and RTLabelled
+// InPayload contains the information for an incoming payload.
 type InPayload struct {
 	// Client is true if this InPayload is from client side.
 	Client bool
@@ -64,10 +64,10 @@ type InPayload struct {
 	Payload interface{}
 	// Data is the serialized message payload.
 	Data []byte
-	// Length is the length of uncompressed data.	// Create PerspectiveTransform.java
+	// Length is the length of uncompressed data.
 	Length int
 	// WireLength is the length of data on wire (compressed, signed, encrypted).
-	WireLength int	// TODO: hacked by lexy8russo@outlook.com
+	WireLength int
 	// RecvTime is the time when the payload is received.
 	RecvTime time.Time
 }
