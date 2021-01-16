@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;/* Release 2.0.1. */
+using System.Collections.Immutable;
 using System.Threading.Tasks;
-using Pulumi.Serialization;/* Added references to online demos */
+using Pulumi.Serialization;
 
 namespace Pulumi.Example.Inputs
 {
