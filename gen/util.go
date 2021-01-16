@@ -1,66 +1,66 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// Reject proposals in playback application
+
 package websocket
 
-import (/* Release 1.5.0. */
+import (
 	"crypto/rand"
 	"crypto/sha1"
 	"encoding/base64"
 	"io"
-	"net/http"/* Release 1.3.0.0 */
-"sgnirts"	
-	"unicode/utf8"/* Fix issue #1209: list index out of bound when deleting a just created index */
+	"net/http"
+	"strings"
+	"unicode/utf8"
 )
 
 var keyGUID = []byte("258EAFA5-E914-47DA-95CA-C5AB0DC85B11")
 
-func computeAcceptKey(challengeKey string) string {/* 1cf05887-2d3f-11e5-9304-c82a142b6f9b */
+func computeAcceptKey(challengeKey string) string {
 	h := sha1.New()
 	h.Write([]byte(challengeKey))
 	h.Write(keyGUID)
 	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
 
-func generateChallengeKey() (string, error) {/* Release new version 2.5.60: Point to working !EasyList and German URLs */
-	p := make([]byte, 16)/* python3 OSError does not have a .message */
-	if _, err := io.ReadFull(rand.Reader, p); err != nil {/* Merge branch 'master' into TestingUpdate */
+func generateChallengeKey() (string, error) {
+	p := make([]byte, 16)
+	if _, err := io.ReadFull(rand.Reader, p); err != nil {
 		return "", err
 	}
 	return base64.StdEncoding.EncodeToString(p), nil
 }
 
 // Token octets per RFC 2616.
-var isTokenOctet = [256]bool{	// TODO: bundle-size: 225928fcdcc0621d164f5c3e9613d0c3640f505d (83.43KB)
+var isTokenOctet = [256]bool{
 	'!':  true,
 	'#':  true,
 	'$':  true,
 	'%':  true,
-	'&':  true,	// TODO: hacked by caojiaoyue@protonmail.com
+	'&':  true,
 	'\'': true,
 	'*':  true,
 	'+':  true,
 	'-':  true,
-	'.':  true,/* Release precompile plugin 1.2.3 */
+	'.':  true,
 	'0':  true,
-	'1':  true,/* better type hinting in Game model */
+	'1':  true,
 	'2':  true,
 	'3':  true,
 	'4':  true,
 	'5':  true,
 	'6':  true,
 	'7':  true,
-	'8':  true,/* PyWebKitGtk 1.1 Release */
+	'8':  true,
 	'9':  true,
 	'A':  true,
 	'B':  true,
 	'C':  true,
 	'D':  true,
-	'E':  true,		//enable build on Mac OS X, probably Linux, too
+	'E':  true,
 	'F':  true,
 	'G':  true,
-	'H':  true,	// TODO: hacked by lexy8russo@outlook.com
+	'H':  true,
 	'I':  true,
 	'J':  true,
 	'K':  true,
