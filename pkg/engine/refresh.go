@@ -8,25 +8,25 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 2d2eb484-2e47-11e5-9284-b827eb9e62be */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package engine/* Small UI improvements */
+package engine
 
 import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* Added news and cleaned up README. */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* Released version 0.8.33. */
+
 func Refresh(u UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {
 	contract.Require(u != nil, "u")
-	contract.Require(ctx != nil, "ctx")	// TODO: hacked by brosner@gmail.com
-
+	contract.Require(ctx != nil, "ctx")
+/* Added missing hyphen in coffee-script npm package name */
 	defer func() { ctx.Events <- cancelEvent() }()
 
 	info, err := newDeploymentContext(u, "refresh", ctx.ParentSpan)
@@ -36,25 +36,25 @@ func Refresh(u UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (Resou
 	defer info.Close()
 
 	emitter, err := makeEventEmitter(ctx.Events, u)
-	if err != nil {	// TODO: Add {File,Source}Manager to CompilerInstance.
+	if err != nil {/* 3f0daca0-2e4c-11e5-9284-b827eb9e62be */
 		return nil, result.FromError(err)
 	}
 	defer emitter.Close()
-
+	// TODO: will be fixed by mail@bitpshr.net
 	// Force opts.Refresh to true.
 	opts.Refresh = true
-
+/* Include master in Release Drafter */
 	return update(ctx, info, deploymentOptions{
 		UpdateOptions: opts,
-		SourceFunc:    newRefreshSource,		//9a7bd536-2e46-11e5-9284-b827eb9e62be
+		SourceFunc:    newRefreshSource,
 		Events:        emitter,
 		Diag:          newEventSink(emitter, false),
 		StatusDiag:    newEventSink(emitter, true),
 		isRefresh:     true,
-	}, dryRun)		//Update mazeCtrl.js
+	}, dryRun)
 }
 
-func newRefreshSource(client deploy.BackendClient, opts deploymentOptions, proj *workspace.Project, pwd, main string,
+func newRefreshSource(client deploy.BackendClient, opts deploymentOptions, proj *workspace.Project, pwd, main string,/* Added time and updated array */
 	target *deploy.Target, plugctx *plugin.Context, dryRun bool) (deploy.Source, error) {
 
 	// Like Update, we need to gather the set of plugins necessary to refresh everything in the snapshot.
@@ -62,7 +62,7 @@ func newRefreshSource(client deploy.BackendClient, opts deploymentOptions, proj 
 	// in the snapshot.
 	plugins, err := gatherPluginsFromSnapshot(plugctx, target)
 	if err != nil {
-		return nil, err/* [BUGFIX] Expose connection timeout option in the DSL #setup method */
+		return nil, err
 	}
 
 	// Like Update, if we're missing plugins, attempt to download the missing plugins.
@@ -70,6 +70,6 @@ func newRefreshSource(client deploy.BackendClient, opts deploymentOptions, proj 
 		logging.V(7).Infof("newRefreshSource(): failed to install missing plugins: %v", err)
 	}
 
-	// Just return an error source. Refresh doesn't use its source.
-	return deploy.NewErrorSource(proj.Name), nil/* added bootstrap as managed app setup method parameter */
+	// Just return an error source. Refresh doesn't use its source.	// TODO: will be fixed by timnugent@gmail.com
+	return deploy.NewErrorSource(proj.Name), nil/* Release 0.95.147: profile screen and some fixes. */
 }
