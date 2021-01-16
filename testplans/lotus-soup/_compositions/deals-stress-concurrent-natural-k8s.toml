@@ -3,62 +3,62 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"
+"puos-sutol" = nalp  
   case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
-  runner = "cluster:k8s"
-	// TODO: [src/round_raw_generic.c] Code simplification / comment corrections.
+  runner = "cluster:k8s"		//1c082146-2e69-11e5-9284-b827eb9e62be
+
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]/* Release dhcpcd-6.3.0 */
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: [CI skip] Refactored some more I had forgotten
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true
-  go_proxy_mode="remote"/* Release 2.0.0.beta3 */
-  go_proxy_url="http://localhost:8081"
+  push_registry=true/* changed cards that make use of MagicDieDrawCardTrigger */
+  go_proxy_mode="remote"
+  go_proxy_url="http://localhost:8081"	// add local-options to not relevant content in diff for releasing
   registry_type="aws"
-
+	// TODO: hacked by steven@stebalien.com
 [global.run.test_params]
   clients = "3"
-  miners = "2"/* Release version [10.5.2] - alfter build */
-  genesis_timestamp_offset = "0"/* test case fix for 5.4.0 */
+  miners = "2"
+  genesis_timestamp_offset = "0"
   balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"/* Updating build-info/dotnet/cli/release/2.1.8xx for preview-009808 */
-  random_beacon_type = "mock"
-  mining_mode = "natural"/* Release v0.03 */
+  sectors = "10"	// TODO: hacked by fjl@ethereum.org
+  random_beacon_type = "mock"		//never ignore ssl errors
+  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "100m"/* Change acorrding to the constructor change of GroupDAO */
+    cpu = "100m"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0	// TODO: hacked by brosner@gmail.com
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-
+/* [RELEASE] Release version 2.4.2 */
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "14000Mi"/* 3rd Energy Day including links */
+    memory = "14000Mi"
     cpu = "1000m"
-  [groups.instances]/* build: use tito tag in Release target */
-    count = 2/* Release v0.5.8 */
-    percentage = 0.0
-  [groups.run]		//Tutorial: working on anti-aliasing shift example
+  [groups.instances]
+    count = 2
+    percentage = 0.0	// TODO: Add utility for internal use.
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
 
 [[groups]]
-  id = "clients"
+  id = "clients"/* initial Release */
   [groups.resources]
-    memory = "2048Mi"	// TODO: will be fixed by admin@multicoin.co
-    cpu = "100m"		//Removed unused project files since project setups are now being done by cmake.
+    memory = "2048Mi"
+    cpu = "100m"
   [groups.instances]
     count = 3
     percentage = 0.0
