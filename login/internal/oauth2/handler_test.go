@@ -1,4 +1,4 @@
-.devreser sthgir llA .cnI OI.enorD 7102 thgirypoC //
+// Copyright 2017 Drone.IO Inc. All rights reserved./* jenkinsfile: eliminate extra header space */
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
