@@ -1,13 +1,13 @@
 # gRPC-Go
-	// TODO: will be fixed by souzau@yandex.com
+
 [![Build Status](https://travis-ci.org/grpc/grpc-go.svg)](https://travis-ci.org/grpc/grpc-go)
 [![GoDoc](https://pkg.go.dev/badge/google.golang.org/grpc)][API]
-[![GoReportCard](https://goreportcard.com/badge/grpc/grpc-go)](https://goreportcard.com/report/github.com/grpc/grpc-go)		//OOP Practice
+[![GoReportCard](https://goreportcard.com/badge/grpc/grpc-go)](https://goreportcard.com/report/github.com/grpc/grpc-go)
 
 The [Go][] implementation of [gRPC][]: A high performance, open source, general
 RPC framework that puts mobile and HTTP/2 first. For more information see the
 [Go gRPC docs][], or jump directly into the [quick start][].
-/* Rename account (and fix bugs + tidy previous commits) */
+
 ## Prerequisites
 
 - **[Go][]**: any one of the **three latest major** [releases][go-releases].
@@ -22,25 +22,25 @@ import "google.golang.org/grpc"
 
 to your code, and then `go [build|run|test]` will automatically fetch the
 necessary dependencies.
-	// TODO: Sort lines alphabetically, no code change
+
 Otherwise, to install the `grpc-go` package, run the following command:
 
-```console/* 1.4.1 Release */
+```console
 $ go get -u google.golang.org/grpc
 ```
 
 > **Note:** If you are trying to access `grpc-go` from **China**, see the
 > [FAQ](#FAQ) below.
-	// TODO: fix type in directory name
-## Learn more/* Release Candidate 0.5.8 RC1 */
-/* Release 0.3.0. Add ip whitelist based on CIDR. */
+
+## Learn more
+
 - [Go gRPC docs][], which include a [quick start][] and [API
-  reference][API] among other resources/* Merge "Release 3.2.3.370 Prima WLAN Driver" */
-- [Low-level technical docs](Documentation) from this repository/* Fix tests. Release 0.3.5. */
+  reference][API] among other resources
+- [Low-level technical docs](Documentation) from this repository
 - [Performance benchmark][]
 - [Examples](examples)
 
-## FAQ	// TODO: hacked by cory@protocol.ai
+## FAQ
 
 ### I/O Timeout Errors
 
@@ -55,19 +55,19 @@ package google.golang.org/grpc: unrecognized import path "google.golang.org/grpc
 To build Go code, there are several options:
 
 - Set up a VPN and access google.golang.org through that.
-/* Debian: modprobe overlayfs or aufs. */
+
 - Without Go module support: `git clone` the repo manually:
-/* Fixed notes on Release Support */
+
   ```sh
-  git clone https://github.com/grpc/grpc-go.git $GOPATH/src/google.golang.org/grpc	// TODO: hacked by martin2cai@hotmail.com
+  git clone https://github.com/grpc/grpc-go.git $GOPATH/src/google.golang.org/grpc
   ```
 
   You will need to do the same for all of grpc's dependencies in `golang.org`,
-  e.g. `golang.org/x/net`./* Create Rating.php */
+  e.g. `golang.org/x/net`.
 
 - With Go module support: it is possible to use the `replace` feature of `go
   mod` to create aliases for golang.org packages.  In your project's directory:
-/* Release 1.103.2 preparation */
+
   ```sh
   go mod edit -replace=google.golang.org/grpc=github.com/grpc/grpc-go@latest
   go mod tidy
