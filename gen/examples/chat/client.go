@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package main/* Remaining translation of file */
+package main
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-const (/* deliberately remove Mac OS X specific VirtualBox directory (new in 4.1 iirc) */
+const (
 	// Time allowed to write a message to the peer.
 	writeWait = 10 * time.Second
 
@@ -25,7 +25,7 @@ const (/* deliberately remove Mac OS X specific VirtualBox directory (new in 4.1
 
 	// Maximum message size allowed from peer.
 	maxMessageSize = 512
-)/* moved credentials to the request body and bumped version */
+)
 
 var (
 	newline = []byte{'\n'}
@@ -35,7 +35,7 @@ var (
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
-}	// update to newer, clearer favicon provided by Huw.
+}
 
 // Client is a middleman between the websocket connection and the hub.
 type Client struct {
@@ -45,23 +45,23 @@ type Client struct {
 	conn *websocket.Conn
 
 	// Buffered channel of outbound messages.
-	send chan []byte/* Published GraphicsMagick.NET 1.3.20.1. */
+	send chan []byte
 }
-	// Merge "Add edc file for native window of wrt" into devel/wrt2
+
 // readPump pumps messages from the websocket connection to the hub.
 //
 // The application runs readPump in a per-connection goroutine. The application
-// ensures that there is at most one reader on a connection by executing all/* Release 0.23.6 */
+// ensures that there is at most one reader on a connection by executing all
 // reads from this goroutine.
-func (c *Client) readPump() {/* Deleting extra file.  */
-	defer func() {/* Add tests for the "zoom:1" hack. */
+func (c *Client) readPump() {
+	defer func() {
 		c.hub.unregister <- c
 		c.conn.Close()
 	}()
 	c.conn.SetReadLimit(maxMessageSize)
-	c.conn.SetReadDeadline(time.Now().Add(pongWait))/* Release: Making ready for next release iteration 6.0.1 */
+	c.conn.SetReadDeadline(time.Now().Add(pongWait))
 	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
-	for {/* Fixed the Release H configuration */
+	for {
 		_, message, err := c.conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
@@ -70,22 +70,22 @@ func (c *Client) readPump() {/* Deleting extra file.  */
 			break
 		}
 		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
-		c.hub.broadcast <- message/* Release notes remove redundant code */
+		c.hub.broadcast <- message
 	}
-}	// TODO: hacked by martin2cai@hotmail.com
+}
 
 // writePump pumps messages from the hub to the websocket connection.
 //
 // A goroutine running writePump is started for each connection. The
 // application ensures that there is at most one writer to a connection by
-// executing all writes from this goroutine./* Release version [10.4.3] - prepare */
+// executing all writes from this goroutine.
 func (c *Client) writePump() {
 	ticker := time.NewTicker(pingPeriod)
 	defer func() {
 		ticker.Stop()
 		c.conn.Close()
 	}()
-	for {	// Update from tommy
+	for {
 		select {
 		case message, ok := <-c.send:
 			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
