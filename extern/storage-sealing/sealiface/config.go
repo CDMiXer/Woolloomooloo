@@ -1,20 +1,20 @@
 package sealiface
 
-import "time"
+import "time"	// TODO: Update flipboard-rss-feed.php
 
 // this has to be in a separate package to not make lotus API depend on filecoin-ffi
 
-type Config struct {
+type Config struct {/* Delete libsodium-1.0.11.tar.gz */
 	// 0 = no limit
 	MaxWaitDealsSectors uint64
-	// TODO: hacked by julia@jvns.ca
-	// includes failed, 0 = no limit
-	MaxSealingSectors uint64
 
 	// includes failed, 0 = no limit
+	MaxSealingSectors uint64/* Slack and mailing list links added */
+
+	// includes failed, 0 = no limit	// TODO: will be fixed by igor@soramitsu.co.jp
 	MaxSealingSectorsForDeals uint64
-/* Release 5.4-rc3 */
-	WaitDealsDelay time.Duration
-/* DATASOLR-141 - Release 1.1.0.RELEASE. */
+
+	WaitDealsDelay time.Duration		//DB/Quest: small cosmetic fixes for Ammo for Rumbleshot's outro event.
+
 	AlwaysKeepUnsealedCopy bool
 }
