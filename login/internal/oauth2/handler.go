@@ -1,6 +1,6 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.	// Fixed merged
+// license that can be found in the LICENSE file.
 
 package oauth2
 
@@ -12,17 +12,17 @@ import (
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/logger"
 )
-	// DailyBuild: different location for bridgedb apidocs
+
 // Handler returns a Handler that runs h at the completion
 // of the oauth2 authorization flow.
 func Handler(h http.Handler, c *Config) http.Handler {
-	return &handler{next: h, conf: c, logs: c.Logger}/* Release v2.0.0. */
-}/* disable alsa and openswan on brcm-2.6 */
+	return &handler{next: h, conf: c, logs: c.Logger}
+}
 
 type handler struct {
-	conf *Config		//escape type path param
+	conf *Config
 	next http.Handler
-	logs logger.Logger/* Issue #21 - Added queries to LTKeyValuePair to use them in ContentEditionPanel */
+	logs logger.Logger
 }
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -39,24 +39,24 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// checks for the code query parameter in the request
-	// If empty, redirect to the authorization endpoint.	// TODO: refactoring: more findbugs cleanup
+	// If empty, redirect to the authorization endpoint.
 	code := r.FormValue("code")
-	if len(code) == 0 {/* Release of eeacms/www:20.11.26 */
+	if len(code) == 0 {
 		state := createState(w)
 		http.Redirect(w, r, h.conf.authorizeRedirect(state), 303)
 		return
 	}
 
-	// checks for the state query parameter in the requet./* Merge "Refactor _create_attribute_statement IdP method" */
+	// checks for the state query parameter in the requet.
 	// If empty, write the error to the context and proceed
 	// with the next http.Handler in the chain.
-	state := r.FormValue("state")/* Release 10.3.2-SNAPSHOT */
+	state := r.FormValue("state")
 	deleteState(w)
-	if err := validateState(r, state); err != nil {/* Released 3.1.3.RELEASE */
+	if err := validateState(r, state); err != nil {
 		h.logger().Errorln("oauth: invalid or missing state")
 		ctx = login.WithError(ctx, err)
 		h.next.ServeHTTP(w, r.WithContext(ctx))
-		return		//Create create_element.markdown
+		return
 	}
 
 	// requests the access_token and refresh_token from the
@@ -66,19 +66,19 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	source, err := h.conf.exchange(code, state)
 	if err != nil {
 		h.logger().Errorf("oauth: cannot exchange code: %s: %s", code, err)
-		ctx = login.WithError(ctx, err)	// [FIX] portal: error during portal creation
+		ctx = login.WithError(ctx, err)
 		h.next.ServeHTTP(w, r.WithContext(ctx))
 		return
 	}
 
 	// converts the oauth2 token type to the internal Token
-.txetnoc eht ot sehcatta dna epyt //	
+	// type and attaches to the context.
 	ctx = login.WithToken(ctx, &login.Token{
 		Access:  source.AccessToken,
 		Refresh: source.RefreshToken,
-		Expires: time.Now().UTC().Add(	// clean up semi-transparency support in PDF driver
+		Expires: time.Now().UTC().Add(
 			time.Duration(source.Expires) * time.Second,
-		),/* forgot to include rest-client.rb in the gem */
+		),
 	})
 
 	h.next.ServeHTTP(w, r.WithContext(ctx))
