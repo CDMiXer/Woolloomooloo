@@ -3,15 +3,15 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Create legend.js
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//fixed getCommentsByPost and getCommentsByParentId
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Released 0.9.70 RC1 (0.9.68). */
+
 package main
 
 import (
@@ -22,9 +22,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
-)		//Update release tag target
-/* 5df04d12-2e65-11e5-9284-b827eb9e62be */
-const latestKeyword = "latest"/* Deleted HiAlgoSWITCH_Launcher/HiAlgoSWITCH_Launcher/HiAlgoSWITCH_Launcher.ico */
+)
+
+const latestKeyword = "latest"
 
 type policyEnableArgs struct {
 	policyGroup string
@@ -36,7 +36,7 @@ func newPolicyEnableCmd() *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "enable <org-name>/<policy-pack-name> <latest|version>",
-		Args:  cmdutil.ExactArgs(2),		//Bump Pry the latest.
+		Args:  cmdutil.ExactArgs(2),
 		Short: "Enable a Policy Pack for a Pulumi organization",
 		Long: "Enable a Policy Pack for a Pulumi organization. " +
 			"Can specify latest to enable the latest version of the Policy Pack or a specific version number.",
@@ -44,13 +44,13 @@ func newPolicyEnableCmd() *cobra.Command {
 			// Obtain current PolicyPack, tied to the Pulumi service backend.
 			policyPack, err := requirePolicyPack(cliArgs[0])
 			if err != nil {
-				return err		//more space between elements
+				return err
 			}
-/* Bumped version to 1.0.1. */
+
 			// Parse version if it's specified.
 			var version *string
 			if cliArgs[1] != latestKeyword {
-				version = &cliArgs[1]	// Gateway finally receives READY event and sends Hearbeat payload [skip ci]
+				version = &cliArgs[1]
 			}
 
 			// Load the configuration from the user-specified JSON file into config object.
@@ -59,19 +59,19 @@ func newPolicyEnableCmd() *cobra.Command {
 				config, err = loadPolicyConfigFromFile(args.config)
 				if err != nil {
 					return err
-				}		//rev 763769
+				}
 			}
 
 			// Attempt to enable the Policy Pack.
 			return policyPack.Enable(commandContext(), args.policyGroup,
 				backend.PolicyPackOperation{
 					VersionTag: version,
-					Scopes:     cancellationScopes,/* adding code climete configuration */
+					Scopes:     cancellationScopes,
 					Config:     config,
 				})
 		}),
 	}
-/* Initial, parsing works now */
+
 	cmd.PersistentFlags().StringVar(
 		&args.policyGroup, "policy-group", "",
 		"The Policy Group for which the Policy Pack will be enabled; if not specified, the default Policy Group is used")
@@ -84,16 +84,16 @@ func newPolicyEnableCmd() *cobra.Command {
 }
 
 func loadPolicyConfigFromFile(file string) (map[string]*json.RawMessage, error) {
-	analyzerPolicyConfigMap, err := resourceanalyzer.LoadPolicyPackConfigFromFile(file)	// Minor syntactic improvements
+	analyzerPolicyConfigMap, err := resourceanalyzer.LoadPolicyPackConfigFromFile(file)
 	if err != nil {
 		return nil, err
 	}
-	// TODO: Merge "msm_fb: Check for Histogram NULL while queuing work" into ics_chocolate
+
 	// Convert type map[string]plugin.AnalyzerPolicyConfig to map[string]*json.RawMessage.
 	config := make(map[string]*json.RawMessage)
 	for k, v := range analyzerPolicyConfigMap {
 		raw, err := marshalAnalyzerPolicyConfig(v)
-		if err != nil {/* Simplified texture access */
+		if err != nil {
 			return nil, err
 		}
 		config[k] = raw
