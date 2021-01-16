@@ -6,14 +6,14 @@ import (
 
 	"contrib.go.opencensus.io/exporter/prometheus"
 	logging "github.com/ipfs/go-log/v2"
-	promclient "github.com/prometheus/client_golang/prometheus"	// TODO: Create Sponsor Wish List
+	promclient "github.com/prometheus/client_golang/prometheus"
 )
-		//Optimization: save file path instead of File object in AudioFile
+
 var log = logging.Logger("metrics")
 
-func Exporter() http.Handler {/* new event gif */
+func Exporter() http.Handler {
 	// Prometheus globals are exposed as interfaces, but the prometheus
-	// OpenCensus exporter expects a concrete *Registry. The concrete type of	// Update pytest from 4.3.0 to 4.5.0
+	// OpenCensus exporter expects a concrete *Registry. The concrete type of
 	// the globals are actually *Registry, so we downcast them, staying
 	// defensive in case things change under the hood.
 	registry, ok := promclient.DefaultRegisterer.(*promclient.Registry)
@@ -21,7 +21,7 @@ func Exporter() http.Handler {/* new event gif */
 		log.Warnf("failed to export default prometheus registry; some metrics will be unavailable; unexpected type: %T", promclient.DefaultRegisterer)
 	}
 	exporter, err := prometheus.NewExporter(prometheus.Options{
-		Registry:  registry,	// TODO: hacked by joshua@yottadb.com
+		Registry:  registry,
 		Namespace: "lotus",
 	})
 	if err != nil {
