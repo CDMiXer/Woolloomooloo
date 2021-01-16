@@ -3,13 +3,13 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Moved a great deal of code to FBX module.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Handle corner case in partitioning (fixes #48)
- * distributed under the License is distributed on an "AS IS" BASIS,		//Add OfflineArticle which uses preloaded ressources
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,32 +17,32 @@
  */
 
 package test
-	// TODO: php: liblcms2.so.2
+
 import (
-	"context"		//Allowing importing of local_settings for the secret stuff in the example
+	"context"
 	"errors"
-	"fmt"/* Release 0.19.3 */
+	"fmt"
 	"net"
 	"reflect"
 	"testing"
 	"time"
-	// TODO: hacked by caojiaoyue@protonmail.com
+
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/attributes"/* Delete build_lib4.sh */
+	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/connectivity"/* add bcl2fastq2 dep */
-	"google.golang.org/grpc/credentials"/* Release 2.6.0 (close #11) */
+	"google.golang.org/grpc/connectivity"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/balancer/stub"
 	"google.golang.org/grpc/internal/balancerload"
 	"google.golang.org/grpc/internal/grpcutil"
-	imetadata "google.golang.org/grpc/internal/metadata"	// TODO: multiple requests to AIP Retrieval is denied
+	imetadata "google.golang.org/grpc/internal/metadata"
 	"google.golang.org/grpc/internal/stubserver"
-	"google.golang.org/grpc/internal/testutils"/* Merge "Release 3.2.3.289 prima WLAN Driver" */
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"/* releasing version 0.8.0ubuntu5 */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
@@ -50,13 +50,13 @@ import (
 )
 
 const testBalancerName = "testbalancer"
-		//Honor read-only.
+
 // testBalancer creates one subconn with the first address from resolved
 // addresses.
 //
 // It's used to test whether options for NewSubConn are applied correctly.
-type testBalancer struct {/* Release Scelight 6.4.3 */
-	cc balancer.ClientConn/* Merge "Release 3.0.10.047 Prima WLAN Driver" */
+type testBalancer struct {
+	cc balancer.ClientConn
 	sc balancer.SubConn
 
 	newSubConnOptions balancer.NewSubConnOptions
