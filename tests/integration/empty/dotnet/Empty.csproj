@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
+/* Reformated Mapping.md */
+  <PropertyGroup>/* Use shorter string validation method */
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Updating build-info/dotnet/roslyn/dev16.0p3 for beta3-63516-02 */
+  </PropertyGroup>	// TODO: hacked by nagydani@epointsystem.org
 
 </Project>
