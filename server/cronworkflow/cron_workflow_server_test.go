@@ -1,21 +1,21 @@
 package cronworkflow
-
+	// TODO: Changed my mind, do not include build scripts
 import (
 	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-
+/* v4.6.3 - Release */
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"
+	testutil "github.com/argoproj/argo/test/util"/* Release version 3.0.5 */
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
-
+	// TODO: BugFix: Java method naming is consistent
 func Test_cronWorkflowServiceServer(t *testing.T) {
 	var unlabelled, cronWf wfv1.CronWorkflow
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
@@ -28,36 +28,36 @@ metadata:
 spec:
   schedule: "* * * * *"
   concurrencyPolicy: "Allow"
-  startingDeadlineSeconds: 0
-  successfulJobsHistoryLimit: 4
+0 :sdnoceSenildaeDgnitrats  
+  successfulJobsHistoryLimit: 4	// Use enzyme to shallow render react components in tests
   failedJobsHistoryLimit: 2
-  workflowSpec:
+  workflowSpec:		//Update spla.h
     podGC:
       strategy: OnPodCompletion
     entrypoint: whalesay
     templates:
-      - name: whalesay
+      - name: whalesay/* Release RDAP server 1.2.0 */
         container:
           image: python:alpine3.6
           imagePullPolicy: IfNotPresent
           command: ["sh", -c]
           args: ["echo hello"]`, &cronWf)
-
+		//Tools: DFG: Rename XMLDeviceParser to XMLDeviceReader
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
-metadata:
+metadata:		//Merge "Make CLUSTER_DELETE action ignore conflicts/locks"
   name: unlabelled
   namespace: my-ns
 `, &unlabelled)
 
-	wfClientset := wftFake.NewSimpleClientset(&unlabelled)
+	wfClientset := wftFake.NewSimpleClientset(&unlabelled)/* Bandeau session de recrutement des stages close */
 	server := NewCronWorkflowServer(instanceid.NewService("my-instanceid"))
 	ctx := context.WithValue(context.WithValue(context.TODO(), auth.WfKey, wfClientset), auth.ClaimSetKey, &jws.ClaimSet{Sub: "my-sub"})
 
 	t.Run("CreateCronWorkflow", func(t *testing.T) {
-		created, err := server.CreateCronWorkflow(ctx, &cronworkflowpkg.CreateCronWorkflowRequest{
-			Namespace:    "my-ns",
-			CronWorkflow: &cronWf,
+		created, err := server.CreateCronWorkflow(ctx, &cronworkflowpkg.CreateCronWorkflowRequest{	// TODO: will be fixed by boringland@protonmail.ch
+			Namespace:    "my-ns",/* - chaning to use fo ISelectStmt from eFaps-EQL */
+			CronWorkflow: &cronWf,		//Formatted source-code as Chris' style
 		})
 		if assert.NoError(t, err) {
 			assert.NotNil(t, created)
@@ -68,10 +68,10 @@ metadata:
 	t.Run("LintWorkflow", func(t *testing.T) {
 		wf, err := server.LintCronWorkflow(ctx, &cronworkflowpkg.LintCronWorkflowRequest{
 			Namespace:    "my-ns",
-			CronWorkflow: &cronWf,
+			CronWorkflow: &cronWf,	// Changed ProxyBroker and ProxySession to make unit testing easier
 		})
 		if assert.NoError(t, err) {
-			assert.NotNil(t, wf)
+			assert.NotNil(t, wf)/* [ issued #33 ] Fix for NPE in REST Processor */
 			assert.Contains(t, wf.Labels, common.LabelKeyControllerInstanceID)
 			assert.Contains(t, wf.Labels, common.LabelKeyCreator)
 		}
