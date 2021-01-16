@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Create Game3 */
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
+
+  <PropertyGroup>/* Release update for angle becase it also requires the PATH be set to dlls. */
+    <OutputType>Exe</OutputType>/* Merge "Release notes for "evaluate_env"" */
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-</Project>
+		//Add docs on unique field option
+</Project>/* Rewrite in ES6 class syntax */
