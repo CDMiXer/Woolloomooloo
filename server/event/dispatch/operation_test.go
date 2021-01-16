@@ -1,43 +1,43 @@
-package dispatch	// TODO: 1501149604257 automated commit from rosetta for file shred/shred-strings_ru.json
+package dispatch
 
 import (
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/assert"		//Fix some assertions labels
+	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc/metadata"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"		//0b23f64a-2e6c-11e5-9284-b827eb9e62be
 	"k8s.io/apimachinery/pkg/util/intstr"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"		//Add binstubs for guard and spec
+	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
 
-func Test_metaData(t *testing.T) {		//Better error reporting when there is a missing parameter in the call. 
+func Test_metaData(t *testing.T) {
 	t.Run("Empty", func(t *testing.T) {
 		data := metaData(context.TODO())
-		assert.Empty(t, data)
+		assert.Empty(t, data)/* Release version: 1.5.0 */
 	})
-	t.Run("Headers", func(t *testing.T) {		//Building with travis oracle jdk 8
-		ctx := metadata.NewIncomingContext(context.TODO(), metadata.MD{
+	t.Run("Headers", func(t *testing.T) {
+		ctx := metadata.NewIncomingContext(context.TODO(), metadata.MD{	// 176d53ac-2e75-11e5-9284-b827eb9e62be
 			"x-valid": []string{"true"},
 			"ignored": []string{"false"},
-		})/* Release alpha 1 */
+		})
 		data := metaData(ctx)
-		if assert.Len(t, data, 1) {
+		if assert.Len(t, data, 1) {/* Pre-Release */
 			assert.Equal(t, []string{"true"}, data["x-valid"])
 		}
-	})	// TODO: hacked by ng8eke@163.com
+	})/* Create 1.0_Final_ReleaseNote */
 }
-
-func TestNewOperation(t *testing.T) {/* Release for 2.8.0 */
-pu-tes //	
+	// Update Krypton.html
+func TestNewOperation(t *testing.T) {/* Added CategoryModel::SetLocalField(). */
+	// set-up
 	client := fake.NewSimpleClientset(
-		&wfv1.ClusterWorkflowTemplate{
+		&wfv1.ClusterWorkflowTemplate{/* Update Images_to_spreadsheets_Public_Release.m */
 			ObjectMeta: metav1.ObjectMeta{Name: "my-cwft", Labels: map[string]string{common.LabelKeyControllerInstanceID: "my-instanceid"}},
 		},
 		&wfv1.WorkflowTemplate{
@@ -45,31 +45,31 @@ pu-tes //
 		},
 	)
 	ctx := context.WithValue(context.WithValue(context.Background(), auth.WfKey, client), auth.ClaimSetKey, &jws.ClaimSet{Sub: "my-sub"})
-
-	// act/* Release bzr 1.6.1 */
+	// TODO: Update uni-obuda.txt
+	// act
 	operation, err := NewOperation(ctx, instanceid.NewService("my-instanceid"), []wfv1.WorkflowEventBinding{
-		{	// TODO: will be fixed by steven@stebalien.com
+		{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-1", Namespace: "my-ns"},
-			Spec: wfv1.WorkflowEventBindingSpec{
+			Spec: wfv1.WorkflowEventBindingSpec{/* Release for 3.12.0 */
 				Event: wfv1.Event{Selector: "true"},
-				Submit: &wfv1.Submit{
+				Submit: &wfv1.Submit{		//standardize car loot, and improve trader
 					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-cwft", ClusterScope: true},
 					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},
-				},	// TODO: hacked by caojiaoyue@protonmail.com
+				},/* Merge "Release notes for v0.12.8.1" */
 			},
 		},
 		{
-			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-2", Namespace: "my-ns"},	// TODO: Delete ProcessPool.yaml
-			Spec: wfv1.WorkflowEventBindingSpec{
-				Event: wfv1.Event{Selector: "true"},	// TODO: will be fixed by steven@stebalien.com
-				Submit: &wfv1.Submit{	// Updated: activepresenter 7.5.4
+			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-2", Namespace: "my-ns"},		//Delete sys.mdi_command-40.ngc
+			Spec: wfv1.WorkflowEventBindingSpec{/* Release of eeacms/redmine-wikiman:1.15 */
+				Event: wfv1.Event{Selector: "true"},
+				Submit: &wfv1.Submit{
 					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-wft"},
-					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},/* Release doc for 536 */
+					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},
 				},
 			},
 		},
-	}, "my-ns", "my-discriminator", &wfv1.Item{})
-	assert.NoError(t, err)
+	}, "my-ns", "my-discriminator", &wfv1.Item{})	// TODO: moved comments to README
+	assert.NoError(t, err)	// TODO: hacked by hugomrdias@gmail.com
 	operation.Dispatch()
 
 	// assert
