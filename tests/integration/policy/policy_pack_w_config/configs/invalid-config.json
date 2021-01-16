@@ -1,6 +1,6 @@
 {
     "test-policy-w-config": {
-        "enforcementLevel": "mandatory",	// TODO: will be fixed by cory@protocol.ai
+        "enforcementLevel": "mandatory",/* Remove adr and src attributes from SVM vector */
         "message": "this message is invalid because it is way more than 10 characters......"
-    }		//added controller resource
+    }
 }
