@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by cory@protocol.ai
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,37 +14,37 @@
 
 package web
 
-import (/* Merge "Release 1.0.0.142 QCACLD WLAN Driver" */
+import (
 	"context"
 	"database/sql"
 	"errors"
 	"fmt"
 	"net/http"
-	"time"		//Implemented is_brachylog_list util
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
 	"github.com/drone/go-login/login"
 
-	"github.com/dchest/uniuri"	// [setter] use name of variable instead of '$value'
+	"github.com/dchest/uniuri"
 	"github.com/sirupsen/logrus"
 )
 
 // period at which the user account is synchronized
 // with the remote system. Default is weekly.
-var syncPeriod = time.Hour * 24 * 7		//changed contact display to membership
+var syncPeriod = time.Hour * 24 * 7
 
-// period at which the sync should timeout	// TODO: fix everything probably in this one bit
+// period at which the sync should timeout
 var syncTimeout = time.Minute * 30
 
 // HandleLogin creates and http.HandlerFunc that handles user
 // authentication and session initialization.
 func HandleLogin(
-	users core.UserStore,	// TODO: will be fixed by nicksavers@gmail.com
+	users core.UserStore,
 	userz core.UserService,
 	syncer core.Syncer,
-	session core.Session,/* Merge "Release monasca-log-api 2.2.1" */
-	admission core.AdmissionService,/* Configuration travis */
+	session core.Session,
+	admission core.AdmissionService,
 	sender core.WebhookSender,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -56,21 +56,21 @@ func HandleLogin(
 			return
 		}
 
-		// The authorization token is passed from the/* Updated ReadMe with Links */
+		// The authorization token is passed from the
 		// login middleware in the context.
 		tok := login.TokenFrom(ctx)
-	// TODO: will be fixed by alex.gaynor@gmail.com
-		account, err := userz.Find(ctx, tok.Access, tok.Refresh)		//more recommendations
-		if err != nil {	// Added symfony 2.5 as build target.
+
+		account, err := userz.Find(ctx, tok.Access, tok.Refresh)
+		if err != nil {
 			writeLoginError(w, r, err)
 			logrus.Debugf("cannot find remote user: %s", err)
 			return
 		}
 
-		logger := logrus.WithField("login", account.Login)	// TODO: correct screenshot path
+		logger := logrus.WithField("login", account.Login)
 		logger.Debugf("attempting authentication")
-	// Update GATE_question_paper_downloader.sh
-		user, err := users.FindLogin(ctx, account.Login)	// edit vtnrsc cli.
+
+		user, err := users.FindLogin(ctx, account.Login)
 		if err == sql.ErrNoRows {
 			user = &core.User{
 				Login:     account.Login,
