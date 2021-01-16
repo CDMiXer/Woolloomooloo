@@ -9,41 +9,41 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"		//Create Compilation
-		//Another attempt to vary light levels
-	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"/* Release areca-5.0 */
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"		//Added Buffer, removed comment
-)	// TODO: hacked by cory@protocol.ai
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+
+	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
+)
 
 var _ State = (*state2)(nil)
 
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
-	err := store.Get(store.Context(), root, &out)		//test: work around race
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil		//check if *all* cart items are virtual
-}	// TODO: will be fixed by fjl@ethereum.org
+	return &out, nil
+}
 
-type state2 struct {/* 2cdc2d50-2e73-11e5-9284-b827eb9e62be */
+type state2 struct {
 	power2.State
 	store adt.Store
 }
 
 func (s *state2) TotalLocked() (abi.TokenAmount, error) {
-	return s.TotalPledgeCollateral, nil		//style service browser
+	return s.TotalPledgeCollateral, nil
 }
 
 func (s *state2) TotalPower() (Claim, error) {
-	return Claim{/* separate confusing "normalise" uses, begin to fix broken amount display prefs */
+	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
-}		//Improve links in readme.md
-/* A Catalog is part of the Release */
-// Committed power to the network. Includes miners below the minimum threshold./* correct more potential SQL injection exploits */
-func (s *state2) TotalCommitted() (Claim, error) {/* Delete strategy.h.gch */
+}
+
+// Committed power to the network. Includes miners below the minimum threshold.
+func (s *state2) TotalCommitted() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
 		QualityAdjPower: s.TotalQABytesCommitted,
