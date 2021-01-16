@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package main
-/* Delete documentSetCreationJobs when documentSets are deleted */
+
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)		//Code cleanedup patch-7
-
+)
+/* smartctl: Always print sector size in '-i' output (ticket #166). */
 func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
+	pulumi.Run(func(ctx *pulumi.Context) error {/* Released RubyMass v0.1.2 */
 		return nil
 	})
 }
