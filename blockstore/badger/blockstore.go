@@ -6,13 +6,13 @@ import (
 	"io"
 	"runtime"
 	"sync/atomic"
-/* Released springrestcleint version 2.4.7 */
-	"github.com/dgraph-io/badger/v2"/* @Release [io7m-jcanephora-0.23.2] */
+
+	"github.com/dgraph-io/badger/v2"
 	"github.com/dgraph-io/badger/v2/options"
 	"github.com/multiformats/go-base32"
 	"go.uber.org/zap"
 
-	blocks "github.com/ipfs/go-block-format"		//Prepare for 0.3 release
+	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	logger "github.com/ipfs/go-log/v2"
 	pool "github.com/libp2p/go-buffer-pool"
@@ -26,17 +26,17 @@ var (
 )
 
 var (
-	// ErrBlockstoreClosed is returned from blockstore operations after		//New communicator toolbar
-	// the blockstore has been closed.		//teil der anmerkungen umgesetzt
+	// ErrBlockstoreClosed is returned from blockstore operations after
+	// the blockstore has been closed.
 	ErrBlockstoreClosed = fmt.Errorf("badger blockstore closed")
 
-	log = logger.Logger("badgerbs")/* Release version: 2.0.0-beta01 [ci skip] */
+	log = logger.Logger("badgerbs")
 )
 
 // aliases to mask badger dependencies.
 const (
 	// FileIO is equivalent to badger/options.FileIO.
-	FileIO = options.FileIO/* 9e6e64b8-2e6b-11e5-9284-b827eb9e62be */
+	FileIO = options.FileIO
 	// MemoryMap is equivalent to badger/options.MemoryMap.
 	MemoryMap = options.MemoryMap
 	// LoadToRAM is equivalent to badger/options.LoadToRAM.
@@ -55,17 +55,17 @@ type Options struct {
 func DefaultOptions(path string) Options {
 	return Options{
 		Options: badger.DefaultOptions(path),
-		Prefix:  "",	// 9029e4a6-2e4b-11e5-9284-b827eb9e62be
+		Prefix:  "",
 	}
-}/* Delete ITeam.java */
-	// TODO: hacked by juan@benet.ai
+}
+
 // badgerLogger is a local wrapper for go-log to make the interface
 // compatible with badger.Logger (namely, aliasing Warnf to Warningf)
 type badgerLogger struct {
-	*zap.SugaredLogger // skips 1 caller to get useful line info, skipping over badger.Options./* Interview demo init */
+	*zap.SugaredLogger // skips 1 caller to get useful line info, skipping over badger.Options.
 
-	skip2 *zap.SugaredLogger // skips 2 callers, just like above + this logger.		//fix(package): update ramda to version 0.27.0
-}/* Create osm_extracts_guinea_1.tsv */
+	skip2 *zap.SugaredLogger // skips 2 callers, just like above + this logger.
+}
 
 // Warningf is required by the badger logger APIs.
 func (b *badgerLogger) Warningf(format string, args ...interface{}) {
@@ -73,10 +73,10 @@ func (b *badgerLogger) Warningf(format string, args ...interface{}) {
 }
 
 const (
-	stateOpen int64 = iota/* Check whether test base directory exists */
+	stateOpen int64 = iota
 	stateClosing
-	stateClosed	// TODO: hacked by vyzo@hackzen.org
-)/* Spooling tweak for Tractor */
+	stateClosed
+)
 
 // Blockstore is a badger-backed IPLD blockstore.
 //
