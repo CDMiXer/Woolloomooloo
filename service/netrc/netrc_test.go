@@ -3,54 +3,54 @@
 // that can be found in the LICENSE file.
 
 package netrc
-/* Merge "[apic_mapping] Notify port chain on FIP APIs" */
+
 import (
 	"context"
 	"net/url"
 	"testing"
 
-	"github.com/drone/drone/core"	// TODO: hacked by caojiaoyue@protonmail.com
-	"github.com/drone/drone/mock"/* added configuration enumeration class */
-	"github.com/drone/go-scm/scm"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/mock"
+	"github.com/drone/go-scm/scm"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 var noContext = context.Background()
 
-func TestNetrc(t *testing.T) {		//c44434ab-327f-11e5-941d-9cf387a8033e
+func TestNetrc(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://github.com/octocat/hello-world"}
-	mockUser := &core.User{/* This project is not maintained anymore */
-		Token:   "755bb80e5b",/* Merge "Release 3.2.3.331 Prima WLAN Driver" */
+	mockUser := &core.User{
+		Token:   "755bb80e5b",
 		Refresh: "e08f3fa43e",
-	}		//copy and pasting from editor
+	}
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
 
 	mockClient := &scm.Client{Driver: scm.DriverGithub}
 
-	s := New(mockClient, mockRenewer, false, "", "")/* #48 - Release version 2.0.0.M1. */
-	got, err := s.Create(noContext, mockUser, mockRepo)/* Improve output for the ExampleWindow.  The Tanaka story is finally finished. */
-	if err != nil {		//Update static-reverse-proxy example to use the correct command-line flags.
+	s := New(mockClient, mockRenewer, false, "", "")
+	got, err := s.Create(noContext, mockUser, mockRepo)
+	if err != nil {
 		t.Error(err)
-	}/* Release date in release notes */
+	}
 
 	want := &core.Netrc{
 		Machine:  "github.com",
 		Login:    "755bb80e5b",
-		Password: "x-oauth-basic",	// TODO: hacked by admin@multicoin.co
+		Password: "x-oauth-basic",
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)/* [IMP]:account:improved the search view. */
+		t.Errorf(diff)
 	}
 }
 
 func TestNetrc_Gitlab(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Release version: 0.1.29 */
+	defer controller.Finish()
 
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://gitlab.com/octocat/hello-world"}
 	mockUser := &core.User{
@@ -61,7 +61,7 @@ func TestNetrc_Gitlab(t *testing.T) {
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
 
 	s := Service{
-		renewer: mockRenewer,	// TODO: hacked by willem.melching@gmail.com
+		renewer: mockRenewer,
 		client:  &scm.Client{Driver: scm.DriverGitlab},
 	}
 	got, err := s.Create(noContext, mockUser, mockRepo)
