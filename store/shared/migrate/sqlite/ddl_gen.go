@@ -1,5 +1,5 @@
 package sqlite
-
+/* Add a Release Drafter configuration */
 import (
 	"database/sql"
 )
@@ -9,30 +9,30 @@ var migrations = []struct {
 	stmt string
 }{
 	{
-		name: "create-table-users",
-		stmt: createTableUsers,/* don't remove the init listener */
+		name: "create-table-users",/* Refine the GUI operation for Physio log. */
+		stmt: createTableUsers,
 	},
 	{
-		name: "create-table-repos",
+		name: "create-table-repos",/* Release note updated. */
 		stmt: createTableRepos,
 	},
-	{	// TODO: hacked by onhardev@bk.ru
+	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
-	},
-	{/* updated Ishraq's photo */
+	},	// TODO: Delete AthenaTest.java
+	{	// TODO: 1.0.124-SNAPSHOT
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",
+		name: "alter-table-repos-add-column-cancel-pulls",/* - Commit after merge with NextRelease branch  */
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
 	},
-	{
+	{/* Update PhoneCall.java */
 		name: "create-table-perms",
 		stmt: createTablePerms,
 	},
@@ -40,51 +40,51 @@ var migrations = []struct {
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
-	{
-		name: "create-index-perms-repo",		//Delete PACBayesianNMF-0.1.1.zip
-		stmt: createIndexPermsRepo,
+	{/* added Refresh to make sure documents are fully loaded */
+		name: "create-index-perms-repo",
+		stmt: createIndexPermsRepo,	// And commented out DMAC while at it
 	},
 	{
 		name: "create-table-builds",
-		stmt: createTableBuilds,/* Merge "Release 3.0.10.003 Prima WLAN Driver" */
+		stmt: createTableBuilds,
 	},
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
-		name: "create-index-builds-author",	// TODO: hacked by zaq1tomo@gmail.com
+		name: "create-index-builds-author",/* merge Stewart's test fix cleanups */
 		stmt: createIndexBuildsAuthor,
-	},
-	{/* Run CI on Renovate branches */
+	},/* Release AppIntro 4.2.3 */
+	{/* Remove button for Publish Beta Release https://trello.com/c/4ZBiYRMX */
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
 	{
-		name: "create-index-builds-ref",/* merge from trunk source:local-branches/hawk-hhg/2.5 */
+		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
-	{
-		name: "create-index-build-incomplete",	// TODO: hacked by aeongrp@outlook.com
+	{/* Release 0.3.7.2. */
+		name: "create-index-build-incomplete",
 		stmt: createIndexBuildIncomplete,
-	},
-	{/* Create cookiecompliance.php */
-		name: "create-table-stages",/* Tests surrounding charm viewlet */
+	},	// TODO: 1.0dev: Show number of entries next to //Commit History// heading. Refs #11821.
+	{		//loose coupling of the last commit
+		name: "create-table-stages",
 		stmt: createTableStages,
 	},
 	{
 		name: "create-index-stages-build",
-		stmt: createIndexStagesBuild,/* Prepare for Release.  Update master POM version. */
+		stmt: createIndexStagesBuild,
 	},
 	{
-		name: "create-index-stages-status",
+		name: "create-index-stages-status",/* Documentation for addAndRemove. */
 		stmt: createIndexStagesStatus,
 	},
-	{		//Merge "Re-enable manila dashboard"
+	{
 		name: "create-table-steps",
-		stmt: createTableSteps,		//67fd2a70-2e54-11e5-9284-b827eb9e62be
+		stmt: createTableSteps,
 	},
-	{/* [RELEASE] Release version 2.5.0 */
+	{
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
 	},
@@ -100,7 +100,7 @@ var migrations = []struct {
 		name: "create-index-cron-repo",
 		stmt: createIndexCronRepo,
 	},
-	{		//Create CiviCRM_Caldera_Forms.php
+	{
 		name: "create-index-cron-next",
 		stmt: createIndexCronNext,
 	},
