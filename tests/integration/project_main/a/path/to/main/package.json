@@ -1,7 +1,7 @@
 {
     "name": "project_main",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* + Bug [#3890]: Flechette Artillery Shells Not Damaging (Heavy?) Infantry */
     "devDependencies": {
         "typescript": "^2.5.3"
-    }
+    }/* Release 2.0.0-rc.11 */
 }
