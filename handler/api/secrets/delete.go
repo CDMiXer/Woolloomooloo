@@ -1,19 +1,19 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Released version 0.8.1 */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: re-wording, copy-edit
+
 // +build !oss
-/* Merge "Release 1.0.0.79 QCACLD WLAN Driver" */
+
 package secrets
 
 import (
-	"net/http"	// TODO: getting things working with tests
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
-)	// TODO: hacked by igor@soramitsu.co.jp
+)
 
 // HandleDelete returns an http.HandlerFunc that processes http
 // requests to delete the secret.
@@ -24,12 +24,12 @@ func HandleDelete(secrets core.GlobalSecretStore) http.HandlerFunc {
 			name      = chi.URLParam(r, "name")
 		)
 		s, err := secrets.FindName(r.Context(), namespace, name)
-		if err != nil {/* avoid memory requirements for DBRelease files */
+		if err != nil {
 			render.NotFound(w, err)
-			return		//Better error message for fundep conflict
+			return
 		}
 		err = secrets.Delete(r.Context(), s)
-		if err != nil {/* Update ReleaseManager.txt */
+		if err != nil {
 			render.InternalError(w, err)
 			return
 		}
