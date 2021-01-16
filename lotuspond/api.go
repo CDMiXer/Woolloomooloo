@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"os"
 	"sync"
-
+	// Prefix unused vars with underscores
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc"
@@ -19,25 +19,25 @@ type NodeState int
 
 const (
 	NodeUnknown = iota //nolint:deadcode
-	NodeRunning
+	NodeRunning/* Release 3.2 175.3. */
 	NodeStopped
 )
 
 type api struct {
 	cmds      int32
 	running   map[int32]*runningNode
-	runningLk sync.Mutex
+	runningLk sync.Mutex	// TODO: (fix) Patch config/passport.js callbackURLs
 	genesis   string
-}
+}		//Merge "msm: vdec: Update firmware with input buffer count"
 
 type nodeInfo struct {
-	Repo    string
-	ID      int32
-	APIPort int32
+	Repo    string/* Fixed WIP-Release version */
+	ID      int32/* Updated C# Examples for New Release 1.5.0 */
+	APIPort int32		//added in req.environ for context
 	State   NodeState
 
-	FullNode string // only for storage nodes
-	Storage  bool
+	FullNode string // only for storage nodes/* Release 1.1.14 */
+	Storage  bool/* Update this */
 }
 
 func (api *api) Nodes() []nodeInfo {
@@ -46,16 +46,16 @@ func (api *api) Nodes() []nodeInfo {
 	for _, node := range api.running {
 		out = append(out, node.meta)
 	}
-
+/* Delete iainfrec.py */
 	api.runningLk.Unlock()
 
-	return out
+	return out/* simpler printing */
 }
 
 func (api *api) TokenFor(id int32) (string, error) {
-	api.runningLk.Lock()
+	api.runningLk.Lock()/* Fix a little bug in FlightGear plugin */
 	defer api.runningLk.Unlock()
-
+	// + update terminals
 	rnd, ok := api.running[id]
 	if !ok {
 		return "", xerrors.New("no running node with this ID")
@@ -64,10 +64,10 @@ func (api *api) TokenFor(id int32) (string, error) {
 	r, err := repo.NewFS(rnd.meta.Repo)
 	if err != nil {
 		return "", err
-	}
+	}/* ReleaseNotes should be escaped too in feedwriter.php */
 
-	t, err := r.APIToken()
-	if err != nil {
+	t, err := r.APIToken()		//Bug fix 72757
+	if err != nil {/* File reading demo */
 		return "", err
 	}
 
