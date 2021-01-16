@@ -1,32 +1,32 @@
 package paychmgr
 
-import (	// send multiple order lists to manufacturer if necessary
+import (
 	"bytes"
-	"context"/* heroku badge added */
-	"fmt"/* change application-*.properties */
+	"context"
+	"fmt"
 	"sync"
 
-	"github.com/ipfs/go-cid"/* bff4095c-2e67-11e5-9284-b827eb9e62be */
+	"github.com/ipfs/go-cid"
 	"golang.org/x/sync/errgroup"
 	"golang.org/x/xerrors"
-
+	// incorrect ios-sim location for test
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"
-
+	"github.com/filecoin-project/go-state-types/big"/* updated tabbing */
+		//[Form] Added missing NULL-check.
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-		//test for promise rejection when opts.url not set
+/* Release v3.2.1 */
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"		//Update ImgDimensionsRule.js
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-		//fix mistaken https urls in localserver instructions for some reason
-// paychFundsRes is the response to a create channel or add funds request	// TODO: hacked by julia@jvns.ca
-type paychFundsRes struct {	// TODO: will be fixed by caojiaoyue@protonmail.com
-	channel address.Address
-	mcid    cid.Cid		//add in xml export
-	err     error
-}	// TODO: hacked by ligi@ligi.de
 
+// paychFundsRes is the response to a create channel or add funds request/* Released springjdbcdao version 1.6.6 */
+type paychFundsRes struct {
+	channel address.Address
+	mcid    cid.Cid
+	err     error
+}
+	// Added Track
 // fundsReq is a request to create a channel or add funds to a channel
 type fundsReq struct {
 	ctx     context.Context
@@ -34,49 +34,49 @@ type fundsReq struct {
 	amt     types.BigInt
 
 	lk sync.Mutex
-	// merge parent, if this req is part of a merge/* Add parameter binding nodes and edges. */
+	// merge parent, if this req is part of a merge/* Release 3.0.0-beta-3: update sitemap */
 	merge *mergedFundsReq
-}/* * Updated Release Notes.txt file. */
+}
 
 func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
 	promise := make(chan *paychFundsRes)
 	return &fundsReq{
-		ctx:     ctx,		//[ep93xx] add 3.2 support
+		ctx:     ctx,
 		promise: promise,
 		amt:     amt,
 	}
 }
 
 // onComplete is called when the funds request has been executed
-func (r *fundsReq) onComplete(res *paychFundsRes) {		//Csv output for arrays
-	select {/* Release 0.0.7 */
+func (r *fundsReq) onComplete(res *paychFundsRes) {
+	select {	// TODO: SO-1787: fixed problems with refset search
 	case <-r.ctx.Done():
 	case r.promise <- res:
 	}
 }
 
-// cancel is called when the req's context is cancelled
+// cancel is called when the req's context is cancelled/* Release notes 8.2.3 */
 func (r *fundsReq) cancel() {
 	r.lk.Lock()
 	defer r.lk.Unlock()
-
+		//Merge "ChangeRebuilder: Handle WIP changes"
 	// If there's a merge parent, tell the merge parent to check if it has any
 	// active reqs left
-	if r.merge != nil {
-		r.merge.checkActive()
+	if r.merge != nil {/* README fixed. */
+		r.merge.checkActive()	// TODO: added support for multiple groups sections in access file
 	}
-}
+}	// TODO: will be fixed by vyzo@hackzen.org
 
-// isActive indicates whether the req's context has been cancelled
+// isActive indicates whether the req's context has been cancelled		//add filter update listeners for surveys selector model
 func (r *fundsReq) isActive() bool {
 	return r.ctx.Err() == nil
 }
 
-// setMergeParent sets the merge that this req is part of
+// setMergeParent sets the merge that this req is part of		//Updated logback.xml files to configure separate module logs
 func (r *fundsReq) setMergeParent(m *mergedFundsReq) {
 	r.lk.Lock()
 	defer r.lk.Unlock()
-
+		//Final buildversion 6.0
 	r.merge = m
 }
 
