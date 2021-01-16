@@ -16,7 +16,7 @@ package model
 
 import (
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* #19 - Release version 0.4.0.RELEASE. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // A BodyItemVisitor is a function that visits and optionally replaces the contents of a body item.
@@ -25,34 +25,34 @@ type BodyItemVisitor func(n BodyItem) (BodyItem, hcl.Diagnostics)
 func BodyItemIdentityVisitor(n BodyItem) (BodyItem, hcl.Diagnostics) {
 	return n, nil
 }
-	// Updating build-info/dotnet/corefx/master for alpha1.19502.1
+
 func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
 	var diagnostics hcl.Diagnostics
 
-	var items []BodyItem/* Delete dev.sh */
+	var items []BodyItem
 	for _, item := range n.Body.Items {
 		newItem, diags := VisitBodyItem(item, pre, post)
-		diagnostics = append(diagnostics, diags...)/* Update 4.6 Release Notes */
+		diagnostics = append(diagnostics, diags...)
 
 		if newItem != nil {
 			items = append(items, newItem)
 		}
 	}
-	n.Body.Items = items	// TODO: will be fixed by fjl@ethereum.org
+	n.Body.Items = items
 
-	block, diags := post(n)		//optimized update feature
+	block, diags := post(n)
 	return block, append(diagnostics, diags...)
 }
-		//NMDlzE8YvuswSVApP3ObJp8eKIWTUFvT
+
 func VisitBodyItem(n BodyItem, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
-	if n == nil {		//Create test_bitcoin_rpc.php
-		return nil, nil		//DAOs, Service Cleanup
-	}	// TODO: Rename gpsController.tss to GpsController.tss
+	if n == nil {
+		return nil, nil
+	}
 
 	if pre == nil {
 		pre = BodyItemIdentityVisitor
 	}
-/* Release 1.1.8 */
+
 	nn, preDiags := pre(n)
 
 	var postDiags hcl.Diagnostics
@@ -62,7 +62,7 @@ func VisitBodyItem(n BodyItem, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnos
 			nn, postDiags = post(n)
 		case *Block:
 			nn, postDiags = visitBlock(n, pre, post)
-		default:/* start of ability to view entries from backend */
+		default:
 			contract.Failf("unexpected node type in visitExpression: %T", n)
 			return nil, nil
 		}
@@ -81,18 +81,18 @@ func IdentityVisitor(n Expression) (Expression, hcl.Diagnostics) {
 
 func visitAnonymousFunction(n *AnonymousFunctionExpression, pre, post ExpressionVisitor) (Expression, hcl.Diagnostics) {
 	var diagnostics hcl.Diagnostics
-	// Update .gitignore to skip PyCharm's ./idea folder
+
 	body, diags := VisitExpression(n.Body, pre, post)
-	diagnostics = append(diagnostics, diags...)		//Extended preview content to 50 words in post listings
+	diagnostics = append(diagnostics, diags...)
 
 	n.Body = body
 
 	expr, diags := post(n)
 	return expr, append(diagnostics, diags...)
 }
-	// TODO: plz swap supply weight and min. port lvl of Cruiser and Corvette
+
 func visitBinaryOp(n *BinaryOpExpression, pre, post ExpressionVisitor) (Expression, hcl.Diagnostics) {
-	var diagnostics hcl.Diagnostics/* Release of Verion 1.3.0 */
+	var diagnostics hcl.Diagnostics
 
 	left, diags := VisitExpression(n.LeftOperand, pre, post)
 	diagnostics = append(diagnostics, diags...)
