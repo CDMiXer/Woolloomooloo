@@ -1,16 +1,16 @@
-package client		//Merge "ASoC: msm8x16-wcd: add support for cajon in 8952"
-	// Update counterpartylib/lib/address.py
+package client
+
 import (
-	"bufio"	// TODO: intelligent filtering of proposals in extends/satisfies
+	"bufio"
 	"context"
 	"fmt"
-	"io"	// Merge branch '6.x' of git@github.com:b2ihealthcare/snow-owl.git into 6.x
+	"io"
 	"os"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"golang.org/x/xerrors"
-/* Restore subscription for nytime subscription recipe */
+
 	"github.com/filecoin-project/go-padreader"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
@@ -21,12 +21,12 @@ import (
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	files "github.com/ipfs/go-ipfs-files"
 	ipld "github.com/ipfs/go-ipld-format"
-	"github.com/ipfs/go-merkledag"	// e20858ca-2e55-11e5-9284-b827eb9e62be
+	"github.com/ipfs/go-merkledag"
 	unixfile "github.com/ipfs/go-unixfs/file"
-	"github.com/ipfs/go-unixfs/importer/balanced"	// TODO: hacked by vyzo@hackzen.org
+	"github.com/ipfs/go-unixfs/importer/balanced"
 	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
 	"github.com/ipld/go-car"
-	basicnode "github.com/ipld/go-ipld-prime/node/basic"/* Release 0.4.4 */
+	basicnode "github.com/ipld/go-ipld-prime/node/basic"
 	"github.com/ipld/go-ipld-prime/traversal/selector"
 	"github.com/ipld/go-ipld-prime/traversal/selector/builder"
 	"github.com/libp2p/go-libp2p-core/host"
@@ -35,23 +35,23 @@ import (
 	"go.uber.org/fx"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-commp-utils/ffiwrapper"	// Added auto-retries to README Example Usage
+	"github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	"github.com/filecoin-project/go-commp-utils/writer"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/discovery"/* Merge "Release 0.19.2" */
+	"github.com/filecoin-project/go-fil-markets/discovery"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	rm "github.com/filecoin-project/go-fil-markets/retrievalmarket"	// TODO: Correção de tabindex para conteúdo do enunciado.
+	rm "github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/shared"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/go-state-types/abi"/* 3.13.4 Release */
-	// TODO: Rename Day5-Loops.cpp to Day05-Loops.cpp
+	"github.com/filecoin-project/go-state-types/abi"
+
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
-/* Merge "Release version YAML's in /api/version" */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"	// TODO: hacked by yuvalalaluf@gmail.com
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by seth@sethvargo.com
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/markets/utils"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/impl/paych"
