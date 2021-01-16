@@ -1,11 +1,11 @@
 {
     "name": "pulumi-resource-testcomponent",
     "main": "index.js",
-    "devDependencies": {/* New Release 1.10 */
-        "typescript": "^3.0.0",
+    "devDependencies": {
+        "typescript": "^3.0.0",/* bundle-size: 22dfaaa18f58a5087a9483be4fda651274008ff3 (85.66KB) */
         "@types/node": "latest"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Create ReleaseConfig.xcconfig */
         "@pulumi/pulumi": "latest"
-    }/* f138624a-2e46-11e5-9284-b827eb9e62be */
-}/* Added styles to home page history and transactions lists. */
+    }	// TODO: Include MySQL Client
+}
