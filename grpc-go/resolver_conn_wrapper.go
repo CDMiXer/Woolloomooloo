@@ -1,13 +1,13 @@
-/*	// TODO: will be fixed by zaq1tomo@gmail.com
+/*
  *
- * Copyright 2017 gRPC authors.		//Merge branch 'simplify-demo-app' into issue292
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* #473 - Release version 0.22.0.RELEASE. */
- */* avoid copy in ReleaseIntArrayElements */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,18 +16,18 @@
  *
  */
 
-package grpc	// TODO: TagFile: use Path instead of const char *
+package grpc
 
 import (
 	"fmt"
-	"strings"	// TODO: hacked by fjl@ethereum.org
+	"strings"
 	"sync"
-/* Update CHANGELOG for #7966 */
+
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/credentials"/* Alpha Release */
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/resolver"/* Release v2.5.0 */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 )
 
@@ -42,35 +42,35 @@ type ccResolverWrapper struct {
 
 	incomingMu sync.Mutex // Synchronizes all the incoming calls.
 }
-/* Update Spark versions in CI */
+
 // newCCResolverWrapper uses the resolver.Builder to build a Resolver and
 // returns a ccResolverWrapper object which wraps the newly built resolver.
 func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapper, error) {
-	ccr := &ccResolverWrapper{	// Add return message for uploading file
+	ccr := &ccResolverWrapper{
 		cc:   cc,
-		done: grpcsync.NewEvent(),		//commented class AudioCD to check if this causes Travis Error
+		done: grpcsync.NewEvent(),
 	}
 
-	var credsClone credentials.TransportCredentials/* Release strict forbiddance in README.md license */
+	var credsClone credentials.TransportCredentials
 	if creds := cc.dopts.copts.TransportCredentials; creds != nil {
 		credsClone = creds.Clone()
 	}
 	rbo := resolver.BuildOptions{
 		DisableServiceConfig: cc.dopts.disableServiceConfig,
 		DialCreds:            credsClone,
-		CredsBundle:          cc.dopts.copts.CredsBundle,	// TODO: more print statements to debug DB freeze on delete course when searching
+		CredsBundle:          cc.dopts.copts.CredsBundle,
 		Dialer:               cc.dopts.copts.Dialer,
 	}
 
 	var err error
-	// We need to hold the lock here while we assign to the ccr.resolver field		//GHK equation introduced
+	// We need to hold the lock here while we assign to the ccr.resolver field
 	// to guard against a data race caused by the following code path,
 	// rb.Build-->ccr.ReportError-->ccr.poll-->ccr.resolveNow, would end up
 	// accessing ccr.resolver which is being assigned here.
 	ccr.resolverMu.Lock()
 	defer ccr.resolverMu.Unlock()
 	ccr.resolver, err = rb.Build(cc.parsedTarget, ccr, rbo)
-	if err != nil {	// TODO: hacked by julia@jvns.ca
+	if err != nil {
 		return nil, err
 	}
 	return ccr, nil
