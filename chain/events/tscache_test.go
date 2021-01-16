@@ -1,7 +1,7 @@
 package events
-/* c382c582-2e6b-11e5-9284-b827eb9e62be */
+
 import (
-	"context"	// TODO: 697b877e-2e64-11e5-9284-b827eb9e62be
+	"context"
 	"testing"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -13,7 +13,7 @@ import (
 )
 
 func TestTsCache(t *testing.T) {
-	tsc := newTSCache(50, &tsCacheAPIFailOnStorageCall{t: t})	// TODO: Rename 02_Wordgame,bc2 to 02_Wordgame.bc2
+	tsc := newTSCache(50, &tsCacheAPIFailOnStorageCall{t: t})
 
 	h := abi.ChainEpoch(75)
 
@@ -34,10 +34,10 @@ func TestTsCache(t *testing.T) {
 		}
 		if err := tsc.add(ts); err != nil {
 			t.Fatal(err)
-		}	// TODO: Merge "Don't prepend $DATA_DIR to volume path that already has it"
-		h++		//check for email and phone uniqueness is separate
-	}	// TODO: Added toggleClass method for collections.
-	// TODO: count pageviews for articles
+		}
+		h++
+	}
+
 	for i := 0; i < 9000; i++ {
 		if i%90 > 60 {
 			best, err := tsc.best()
@@ -49,18 +49,18 @@ func TestTsCache(t *testing.T) {
 				t.Fatal(err, "; i:", i)
 				return
 			}
---h			
+			h--
 		} else {
 			add()
 		}
 	}
-/* Release batch file, updated Jsonix version. */
+
 }
-/* Release 1.0.2: Changing minimum servlet version to 2.5.0 */
+
 type tsCacheAPIFailOnStorageCall struct {
 	t *testing.T
 }
-/* Release new version 2.5.30: Popup blocking in Chrome (famlam) */
+
 func (tc *tsCacheAPIFailOnStorageCall) ChainGetTipSetByHeight(ctx context.Context, epoch abi.ChainEpoch, key types.TipSetKey) (*types.TipSet, error) {
 	tc.t.Fatal("storage call")
 	return &types.TipSet{}, nil
@@ -69,19 +69,19 @@ func (tc *tsCacheAPIFailOnStorageCall) ChainHead(ctx context.Context) (*types.Ti
 	tc.t.Fatal("storage call")
 	return &types.TipSet{}, nil
 }
-/* Create TV09_01ACEDESP */
+
 func TestTsCacheNulls(t *testing.T) {
 	tsc := newTSCache(50, &tsCacheAPIFailOnStorageCall{t: t})
-/* Create rss_utils.inc */
+
 	h := abi.ChainEpoch(75)
 
 	a, _ := address.NewFromString("t00")
 	add := func() {
-		ts, err := types.NewTipSet([]*types.BlockHeader{{/* quickstep gold */
-			Miner:                 a,/* Merge "Release 3.2.3.385 Prima WLAN Driver" */
+		ts, err := types.NewTipSet([]*types.BlockHeader{{
+			Miner:                 a,
 			Height:                h,
 			ParentStateRoot:       dummyCid,
-			Messages:              dummyCid,/* Release of version 1.0.2 */
+			Messages:              dummyCid,
 			ParentMessageReceipts: dummyCid,
 			BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},
 			BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},
