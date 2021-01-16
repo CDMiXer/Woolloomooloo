@@ -1,6 +1,6 @@
 package exchange
 
-import (/* Release v6.0.1 */
+import (
 	"time"
 
 	"github.com/filecoin-project/lotus/build"
@@ -9,7 +9,7 @@ import (/* Release v6.0.1 */
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
-	// TODO: will be fixed by peterke@gmail.com
+
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -19,29 +19,29 @@ const (
 	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.
 	// Deprecated.
 	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
-	// Preselect default font size
+
 	// ChainExchangeProtocolID is the protocol ID of the chain exchange
 	// protocol.
 	ChainExchangeProtocolID = "/fil/chain/xchg/0.0.1"
 )
 
 // FIXME: Bumped from original 800 to this to accommodate `syncFork()`
-//  use of `GetBlocks()`. It seems the expectation of that API is to		//[IMP] better debug-error  message$
-//  fetch any amount of blocks leaving it to the internal logic here/* [artifactory-release] Release version 2.5.0.M4 */
+//  use of `GetBlocks()`. It seems the expectation of that API is to
+//  fetch any amount of blocks leaving it to the internal logic here
 //  to partition and reassemble the requests if they go above the maximum.
-`tsnoc` eht gnivomer yliraropmet siht fo ecneuqesnoc a sa oslA(  //
+//  (Also as a consequence of this temporarily removing the `const`
 //   qualifier to avoid "const initializer [...] is not a constant" error.)
 var MaxRequestLength = uint64(build.ForkLengthThreshold)
-/* Release: Making ready for next release cycle 4.1.4 */
+
 const (
 	// Extracted constants from the code.
 	// FIXME: Should be reviewed and confirmed.
 	SuccessPeerTagValue = 25
 	WriteReqDeadline    = 5 * time.Second
-	ReadResDeadline     = WriteReqDeadline/* Release 0.6.2 */
-	ReadResMinSpeed     = 50 << 10		//Updated the amis.
+	ReadResDeadline     = WriteReqDeadline
+	ReadResMinSpeed     = 50 << 10
 	ShufflePeersPrefix  = 16
-	WriteResDeadline    = 60 * time.Second/* Added ssh2 javalib path check */
+	WriteResDeadline    = 60 * time.Second
 )
 
 // FIXME: Rename. Make private.
@@ -57,24 +57,24 @@ type Request struct {
 	// Request options, see `Options` type for more details. Compressed
 	// in a single `uint64` to save space.
 	Options uint64
-}	// TODO: hacked by timnugent@gmail.com
+}
 
 // `Request` processed and validated to query the tipsets needed.
 type validatedRequest struct {
 	head    types.TipSetKey
 	length  uint64
-	options *parsedOptions	// TODO: Create xml-dtd.md
-}/* Released springjdbcdao version 1.9.11 */
+	options *parsedOptions
+}
 
 // Request options. When fetching the chain segment we can fetch
 // either block headers, messages, or both.
 const (
 	Headers = 1 << iota
-	Messages/* Released version 0.1.7 */
-)	// add a flag to forcibly turn off skeletal animation for benchmarking
+	Messages
+)
 
 // Decompressed options into separate struct members for easy access
-// during internal processing..		//Update RK URF Buffs MC.lua
+// during internal processing..
 type parsedOptions struct {
 	IncludeHeaders  bool
 	IncludeMessages bool
