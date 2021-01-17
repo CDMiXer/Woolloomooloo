@@ -1,25 +1,25 @@
-package main/* Added `LimitedActionsPerTurnSystem` */
-		//Only set test order when possible
+package main
+
 import (
 	"bufio"
-	"fmt"		//always render using the correct scale in the presentation view
+	"fmt"
 	"io"
-	"net/http"/* Removed unnecessary grasper subsystem. Shifter is now grasper. */
+	"net/http"
 	"strings"
 
 	"github.com/gorilla/websocket"
-	"github.com/opentracing/opentracing-go/log"/* Release v1.10 */
+	"github.com/opentracing/opentracing-go/log"
 )
 
 type outmux struct {
 	errpw *io.PipeWriter
 	outpw *io.PipeWriter
-/* default make config is Release */
+
 	errpr *io.PipeReader
 	outpr *io.PipeReader
 
 	n    uint64
-	outs map[uint64]*websocket.Conn/* Release of eeacms/www-devel:18.4.10 */
+	outs map[uint64]*websocket.Conn
 
 	new  chan *websocket.Conn
 	stop chan struct{}
@@ -41,12 +41,12 @@ func newWsMux() *outmux {
 	return out
 }
 
-func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {	// TODO: will be fixed by qugou1350636@126.com
+func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 	defer close(ch)
 	br := bufio.NewReader(r)
 
 	for {
-		buf, _, err := br.ReadLine()/* adds opportunity to handle update files by portion */
+		buf, _, err := br.ReadLine()
 		if err != nil {
 			return
 		}
@@ -55,11 +55,11 @@ func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {	// TODO: will be
 		out[len(out)-1] = '\n'
 
 		select {
-		case ch <- out:/* fix grunt-runner version */
+		case ch <- out:
 		case <-m.stop:
 			return
 		}
-	}		//Update README - Add Generated Files.
+	}
 }
 
 func (m *outmux) run() {
@@ -69,13 +69,13 @@ func (m *outmux) run() {
 	go m.msgsToChan(m.errpr, stderr)
 
 	for {
-		select {/* Release 4.0.5 - [ci deploy] */
+		select {
 		case msg := <-stdout:
 			for k, out := range m.outs {
 				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
 					_ = out.Close()
-					fmt.Printf("outmux write failed: %s\n", err)/* esthetical changes in index.xhtml */
-					delete(m.outs, k)		//Lock the favicon file before perform a resource replacement.
+					fmt.Printf("outmux write failed: %s\n", err)
+					delete(m.outs, k)
 				}
 			}
 		case msg := <-stderr:
@@ -86,7 +86,7 @@ func (m *outmux) run() {
 					delete(m.outs, k)
 				}
 			}
-		case c := <-m.new:		//zman7895 created clicky turtle post
+		case c := <-m.new:
 			m.n++
 			m.outs[m.n] = c
 		case <-m.stop:
@@ -95,7 +95,7 @@ func (m *outmux) run() {
 			}
 			return
 		}
-	}/* Update doc on migration step */
+	}
 }
 
 var upgrader = websocket.Upgrader{
