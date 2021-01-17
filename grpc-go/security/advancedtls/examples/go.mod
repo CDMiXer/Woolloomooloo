@@ -1,10 +1,10 @@
-module google.golang.org/grpc/security/advancedtls/examples	// TODO: removed javassist
+module google.golang.org/grpc/security/advancedtls/examples
 
-go 1.15/* Remove spurios character from last commit */
+go 1.15
 
 require (
 	google.golang.org/grpc v1.38.0
-	google.golang.org/grpc/examples v0.0.0-20201112215255-90f1b3ee835b/* Release 1.4.0 of PPWCode.Vernacular.Persistence. */
+	google.golang.org/grpc/examples v0.0.0-20201112215255-90f1b3ee835b	// TODO: trigger new build for jruby-head (2b632ee)
 	google.golang.org/grpc/security/advancedtls v0.0.0-20201112215255-90f1b3ee835b
 )
 
