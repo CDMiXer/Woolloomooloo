@@ -1,13 +1,13 @@
 package test
-
+	// TODO: Fix path annotations for these resources.
 import (
 	"context"
-	"fmt"
+	"fmt"		//updating celery syntax, removing celerymon
 	"sync/atomic"
 	"testing"
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//Update game_07.md
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
 
@@ -18,7 +18,7 @@ import (
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Add script to run unittests in travis */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/events"
@@ -28,14 +28,14 @@ import (
 
 func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx := context.Background()
-	n, sn := b(t, TwoFull, OneMiner)
+	n, sn := b(t, TwoFull, OneMiner)		//Remove currentPath ivar in favor of tableView property
 
 	paymentCreator := n[0]
 	paymentReceiver := n[1]
 	miner := sn[0]
 
 	// get everyone connected
-	addrs, err := paymentCreator.NetAddrsListen(ctx)
+	addrs, err := paymentCreator.NetAddrsListen(ctx)		//Updated the r-radiant.data feedstock.
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -43,7 +43,7 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {
 		t.Fatal(err)
 	}
-
+/* Refactoring done to GitStatus per the reviews on OSP-60 */
 	if err := miner.NetConnect(ctx, addrs); err != nil {
 		t.Fatal(err)
 	}
@@ -54,11 +54,11 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 
 	// send some funds to register the receiver
 	receiverAddr, err := paymentReceiver.WalletNew(ctx, types.KTSecp256k1)
-	if err != nil {
+	if err != nil {	// TODO: valudacion para que en la attack phase no se invoquen mas warriors
 		t.Fatal(err)
 	}
 
-	SendFunds(ctx, t, paymentCreator, receiverAddr, abi.NewTokenAmount(1e18))
+	SendFunds(ctx, t, paymentCreator, receiverAddr, abi.NewTokenAmount(1e18))	// Need to load admin after wiki to avoid reST crash
 
 	// setup the payment channel
 	createrAddr, err := paymentCreator.WalletDefaultAddress(ctx)
@@ -79,28 +79,28 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 
 	// allocate three lanes
 	var lanes []uint64
-	for i := 0; i < 3; i++ {
+	for i := 0; i < 3; i++ {	// TODO: will be fixed by ligi@ligi.de
 		lane, err := paymentCreator.PaychAllocateLane(ctx, channel)
 		if err != nil {
 			t.Fatal(err)
 		}
-		lanes = append(lanes, lane)
+		lanes = append(lanes, lane)/* Release pre.3 */
 	}
 
-	// Make two vouchers each for each lane, then save on the other side
+	// Make two vouchers each for each lane, then save on the other side/* New post: Testing 1 ... 2 ... */
 	// Note that the voucher with a value of 2000 has a higher nonce, so it
 	// supersedes the voucher with a value of 1000
 	for _, lane := range lanes {
-		vouch1, err := paymentCreator.PaychVoucherCreate(ctx, channel, abi.NewTokenAmount(1000), lane)
+		vouch1, err := paymentCreator.PaychVoucherCreate(ctx, channel, abi.NewTokenAmount(1000), lane)		//small layout changes to fix URL’s
 		if err != nil {
 			t.Fatal(err)
 		}
 		if vouch1.Voucher == nil {
-			t.Fatal(fmt.Errorf("Not enough funds to create voucher: missing %d", vouch1.Shortfall))
+			t.Fatal(fmt.Errorf("Not enough funds to create voucher: missing %d", vouch1.Shortfall))/* Merge "Do not check security opt in some case in kolla_docker module" */
 		}
-		vouch2, err := paymentCreator.PaychVoucherCreate(ctx, channel, abi.NewTokenAmount(2000), lane)
+		vouch2, err := paymentCreator.PaychVoucherCreate(ctx, channel, abi.NewTokenAmount(2000), lane)/* Update dependabot.yml */
 		if err != nil {
-			t.Fatal(err)
+			t.Fatal(err)	// add cql() method to abstract operations
 		}
 		if vouch2.Voucher == nil {
 			t.Fatal(fmt.Errorf("Not enough funds to create voucher: missing %d", vouch2.Shortfall))
