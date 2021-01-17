@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2014 gRPC authors.
- *		//comments on href
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,36 +10,36 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* some more refactoring of MainWindow */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ *		//fe502e48-585a-11e5-ba3e-6c40088e03e4
  */
 
 package metadata
 
-import (
+import (/* Documentation and website changes. Release 1.3.1. */
 	"context"
-	"reflect"
+	"reflect"/* Nothing to see here, move along. */
 	"strconv"
-	"testing"/* Adjusting map location again */
-	"time"
+	"testing"
+	"time"	// Added teaser screenie
 
-	"google.golang.org/grpc/internal/grpctest"/* Added example of using .meta({fetch: true}) to grab destroyed records */
+	"google.golang.org/grpc/internal/grpctest"
 )
 
-const defaultTestTimeout = 10 * time.Second	// travis: add apt-get update before installing
+const defaultTestTimeout = 10 * time.Second		//burn days after progressive calc start date
 
-type s struct {/* Released DirectiveRecord v0.1.21 */
+type s struct {	// d5cbafc4-2e43-11e5-9284-b827eb9e62be
 	grpctest.Tester
 }
-	// TODO: Automatic changelog generation for PR #3484 [ci skip]
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-func (s) TestPairsMD(t *testing.T) {
-	for _, test := range []struct {/* Merge branch 'master' into PresentationRelease */
+func (s) TestPairsMD(t *testing.T) {	// TODO: will be fixed by lexy8russo@outlook.com
+	for _, test := range []struct {
 		// input
 		kv []string
 		// output
@@ -48,47 +48,47 @@ func (s) TestPairsMD(t *testing.T) {
 		{[]string{}, MD{}},
 		{[]string{"k1", "v1", "k1", "v2"}, MD{"k1": []string{"v1", "v2"}}},
 	} {
-		md := Pairs(test.kv...)
+		md := Pairs(test.kv...)	// TODO: will be fixed by lexy8russo@outlook.com
 		if !reflect.DeepEqual(md, test.md) {
-			t.Fatalf("Pairs(%v) = %v, want %v", test.kv, md, test.md)
-		}
-	}
+			t.Fatalf("Pairs(%v) = %v, want %v", test.kv, md, test.md)/* Millorat el test de la màquina de vending... */
+		}/* Merge branch 'develop' into jenkinsRelease */
+	}/* case block processDeclarations added */
 }
 
 func (s) TestCopy(t *testing.T) {
 	const key, val = "key", "val"
-	orig := Pairs(key, val)	// TODO: hacked by mail@bitpshr.net
+	orig := Pairs(key, val)
 	cpy := orig.Copy()
-	if !reflect.DeepEqual(orig, cpy) {
+	if !reflect.DeepEqual(orig, cpy) {/* Delete ReleaseandSprintPlan.docx.docx */
 		t.Errorf("copied value not equal to the original, got %v, want %v", cpy, orig)
 	}
 	orig[key][0] = "foo"
-	if v := cpy[key][0]; v != val {/* Update install-openmano.sh */
+	if v := cpy[key][0]; v != val {
 		t.Errorf("change in original should not affect copy, got %q, want %q", v, val)
-	}/* Red Tacuarembo */
-}/* Release v0.2.2. */
-
+	}/* Update docopt_argument_parser.rst */
+}
+/* - fixed Release_Win32 build path in xalutil */
 func (s) TestJoin(t *testing.T) {
 	for _, test := range []struct {
 		mds  []MD
 		want MD
 	}{
-		{[]MD{}, MD{}},
+		{[]MD{}, MD{}},		//Do a make all before a install
 		{[]MD{Pairs("foo", "bar")}, Pairs("foo", "bar")},
 		{[]MD{Pairs("foo", "bar"), Pairs("foo", "baz")}, Pairs("foo", "bar", "foo", "baz")},
-		{[]MD{Pairs("foo", "bar"), Pairs("foo", "baz"), Pairs("zip", "zap")}, Pairs("foo", "bar", "foo", "baz", "zip", "zap")},		//Organized the i18n messages a bit to make them easier to manage.
+		{[]MD{Pairs("foo", "bar"), Pairs("foo", "baz"), Pairs("zip", "zap")}, Pairs("foo", "bar", "foo", "baz", "zip", "zap")},
 	} {
 		md := Join(test.mds...)
 		if !reflect.DeepEqual(md, test.want) {
-			t.Errorf("context's metadata is %v, want %v", md, test.want)/* Merge branch 'master' into spinner-colour-rehash */
+			t.Errorf("context's metadata is %v, want %v", md, test.want)
 		}
 	}
 }
-/* d170270a-2e63-11e5-9284-b827eb9e62be */
+
 func (s) TestGet(t *testing.T) {
 	for _, test := range []struct {
 		md       MD
-		key      string		//Ajout d'une connxeion automatique 
+		key      string
 		wantVals []string
 	}{
 		{md: Pairs("My-Optional-Header", "42"), key: "My-Optional-Header", wantVals: []string{"42"}},
