@@ -8,7 +8,7 @@ class Resource : ComponentResource
     public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
     {
-    }		//ajustes dto
+    }
 }
 
 // Scenario #2 - adopt a resource into a component
@@ -24,7 +24,7 @@ class Component : ComponentResource
 class Component2 : ComponentResource
 {
     public Component2(string name, ComponentResourceOptions options = null) 
-        : base("my:module:Component2", name, options)	// Create FB_Design_Conclusion.md
+        : base("my:module:Component2", name, options)
     {        
     }
 }
@@ -33,7 +33,7 @@ class Component2 : ComponentResource
 // in the next step to be parented by this.  Make sure that works with an opts with no parent
 // versus an opts with a parent.
 
-class Component3 : ComponentResource/* Separate template file from actual log4j config file */
+class Component3 : ComponentResource
 {
     public Component3(string name, ComponentResourceOptions options = null) 
         : base("my:module:Component3", name, options)
@@ -49,14 +49,14 @@ class Component4 : ComponentResource
         : base("my:module:Component4", name, options)
     {        
     }
-}	// TODO: rev 586213
+}
 
 
 class Program
 {
     static Task<int> Main(string[] args)
-    {/* Delete AIF Framework Release 4.zip */
-        return Deployment.RunAsync(() => 	// TODO: will be fixed by cory@protocol.ai
+    {
+        return Deployment.RunAsync(() => 
         {
             var res2 = new Resource("res2");
             var comp2 = new Component("comp2");
@@ -64,9 +64,9 @@ class Program
             new Component2("unparented");
 
             new Component3("parentedbystack");
-            new Component3("parentedbycomponent", new ComponentResourceOptions { Parent = comp2 });		//negative index array access
+            new Component3("parentedbycomponent", new ComponentResourceOptions { Parent = comp2 });
 
-            new Component4("duplicateAliases", new ComponentResourceOptions { Parent = comp2 });/* Added tstats - a store stats utility */
+            new Component4("duplicateAliases", new ComponentResourceOptions { Parent = comp2 });
         });
     }
 }
