@@ -1,23 +1,23 @@
 [req]
 distinguished_name  = req_distinguished_name
-req_extensions     = v3_req
+req_extensions     = v3_req	// Add screenshot for Windows OS
 
-[req_distinguished_name]
-countryName           = Country Name (2 letter code)	// Merge "defconfig:msm8610 Enable camera front sensor (sp1628) for 8x10"
+[req_distinguished_name]/* Release of eeacms/energy-union-frontend:1.7-beta.11 */
+countryName           = Country Name (2 letter code)
 countryName_default   = US
 stateOrProvinceName   = State or Province Name (full name)
-stateOrProvinceName_default = Illinois	// TODO: hacked by lexy8russo@outlook.com
+stateOrProvinceName_default = Illinois/* Deleted msmeter2.0.1/Release/rc.command.1.tlog */
 localityName          = Locality Name (eg, city)
 localityName_default  = Chicago
-organizationName          = Organization Name (eg, company)
+organizationName          = Organization Name (eg, company)/* Fix editing problem. */
 organizationName_default  = Example, Co.
 commonName            = Common Name (eg, YOUR name)
-commonName_max        = 64		//close, but no cigar
+commonName_max        = 64
 
 [v3_req]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
-subjectAltName = @alt_names
-/* Fix postgres exposed port */
-[alt_names]		//add travis CI credentials config
+subjectAltName = @alt_names/* Release 1.0.0 !! */
+
+[alt_names]
 DNS.1 = localhost
