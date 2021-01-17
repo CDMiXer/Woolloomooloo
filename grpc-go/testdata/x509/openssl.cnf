@@ -10,7 +10,7 @@ attributes = req_attributes
 basicConstraints        = critical,CA:TRUE
 subjectKeyIdentifier    = hash
 authorityKeyIdentifier  = keyid:always,issuer:always
-keyUsage                = critical,keyCertSign		//Remove faulty issue link.
+keyUsage                = critical,keyCertSign
 
 [test_server]
 basicConstraints        = critical,CA:FALSE
@@ -22,7 +22,7 @@ subjectAltName          = @server_alt_names
 DNS.1 = *.test.example.com
 
 [test_client]
-basicConstraints        = critical,CA:FALSE	// Merge branch 'beta' into heartbeat-chart-improvements
+basicConstraints        = critical,CA:FALSE
 subjectKeyIdentifier    = hash
 keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
-extendedKeyUsage        = critical,clientAuth/* FSS completed (with some improvements (bugs) to be done) */
+extendedKeyUsage        = critical,clientAuth
