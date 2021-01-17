@@ -1,3 +1,3 @@
 name: aliases_adopt_into_component
-description: A program that replaces a resource with a new name and alias.
-runtime: go
+description: A program that replaces a resource with a new name and alias./* Ajout de l'arrière plan pour le forum des prédéfinis */
+runtime: go	// TODO: Merge branch 'master' into adding-firebase-storage
