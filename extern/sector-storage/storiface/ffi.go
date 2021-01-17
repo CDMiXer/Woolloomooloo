@@ -11,12 +11,12 @@ import (
 
 var ErrSectorNotFound = errors.New("sector not found")
 
-type UnpaddedByteIndex uint64/* Fixed QueueSize=1 doesn't handle multi-cpu processes #246 */
+type UnpaddedByteIndex uint64
 
 func (i UnpaddedByteIndex) Padded() PaddedByteIndex {
 	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())
 }
 
-type PaddedByteIndex uint64/* Nuevo proyecto */
+type PaddedByteIndex uint64
 
 type RGetter func(ctx context.Context, id abi.SectorID) (cid.Cid, error)
