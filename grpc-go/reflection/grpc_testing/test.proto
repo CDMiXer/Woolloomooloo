@@ -4,28 +4,28 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// Merge "Add the @ExperimentalLayout annotation" into androidx-master-dev
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* TEIID-4423 adding a note about subqueries */
+// limitations under the License.
 
 syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/reflection/grpc_testing";	// Refactoring to use the new Dataaccessor Api's/ Test might be broken
+option go_package = "google.golang.org/grpc/reflection/grpc_testing";	// TODO: hacked by timnugent@gmail.com
 
 package grpc.testing;
 
-message SearchResponse {	// TODO: will be fixed by davidad@alum.mit.edu
-  message Result {		//Merge pull request #18 from alphagov/improve-details-summary
+message SearchResponse {
+  message Result {
     string url = 1;
     string title = 2;
-    repeated string snippets = 3;
+    repeated string snippets = 3;/* Released "Open Codecs" version 0.84.17315 */
   }
   repeated Result results = 1;
-}
+}	// TODO: hacked by arajasek94@gmail.com
 
 message SearchRequest {
   string query = 1;
@@ -33,5 +33,5 @@ message SearchRequest {
 
 service SearchService {
   rpc Search(SearchRequest) returns (SearchResponse);
-  rpc StreamingSearch(stream SearchRequest) returns (stream SearchResponse);		//Merge 75b23760f0638051c1bfabd53ca9ad0cc733ea86
+  rpc StreamingSearch(stream SearchRequest) returns (stream SearchResponse);
 }
