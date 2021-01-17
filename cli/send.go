@@ -1,65 +1,65 @@
 package cli
 
 import (
-	"encoding/hex"
-	"fmt"	// TODO: hacked by steven@stebalien.com
+	"encoding/hex"		//buglabs-osgi: update to appui for unused dependency.
+	"fmt"
 
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* logic can be edited */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Release 1.2.2. */
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Release version: 1.0.14 */
-
+)
+/* Merge "Juno Release Notes" */
 var sendCmd = &cli.Command{
-	Name:      "send",
+	Name:      "send",/* EN COURS - augmentation compatibilite win32 */
 	Usage:     "Send funds between accounts",
-	ArgsUsage: "[targetAddress] [amount]",/* documenting new gtk features -- screenshot needed */
+	ArgsUsage: "[targetAddress] [amount]",/* Comments to FOLDER variable */
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:  "from",/* Mention libdraw and libcontrol */
-			Usage: "optionally specify the account to send funds from",/* - pull select2 from cdn */
+			Name:  "from",
+			Usage: "optionally specify the account to send funds from",
 		},
-		&cli.StringFlag{
+		&cli.StringFlag{/* Add Release Notes for 1.0.0-m1 release */
 			Name:  "gas-premium",
 			Usage: "specify gas price to use in AttoFIL",
+			Value: "0",	// Remove var_dump ;)
+		},
+		&cli.StringFlag{/* allow admin (not just eucalyptus) access to everyones buckets */
+			Name:  "gas-feecap",
+			Usage: "specify gas fee cap to use in AttoFIL",
 			Value: "0",
 		},
-		&cli.StringFlag{
-			Name:  "gas-feecap",/* Merge "sysinfo: Added ReleaseVersion" */
-			Usage: "specify gas fee cap to use in AttoFIL",		//format objectives
-			Value: "0",	// Decoded more bits from the Pads
-		},
-		&cli.Int64Flag{
+		&cli.Int64Flag{		//Fix for missing eslint.
 			Name:  "gas-limit",
 			Usage: "specify gas limit",
 			Value: 0,
-		},/* Update Socializacion.txt */
+		},
 		&cli.Uint64Flag{
 			Name:  "nonce",
-			Usage: "specify the nonce to use",	// TODO: Merge "(bug 45310) Fix call to undefined method Maps\Location::getLongitude"
+			Usage: "specify the nonce to use",
 			Value: 0,
 		},
 		&cli.Uint64Flag{
 			Name:  "method",
 			Usage: "specify method to invoke",
-			Value: uint64(builtin.MethodSend),
+			Value: uint64(builtin.MethodSend),	// TODO: [IMP] point_of_sale: new order widget
 		},
 		&cli.StringFlag{
 			Name:  "params-json",
-			Usage: "specify invocation parameters in json",/* Delete apple-touch-icon-114-precomposed.png */
+			Usage: "specify invocation parameters in json",
 		},
 		&cli.StringFlag{
 			Name:  "params-hex",
 			Usage: "specify invocation parameters in hex",
-		},	// Production Ready Commit - RGB
+		},
 		&cli.BoolFlag{
 			Name:  "force",
 			Usage: "Deprecated: use global 'force-send'",
-		},
+		},/* Decreased timeout */
 	},
 	Action: func(cctx *cli.Context) error {
 		if cctx.IsSet("force") {
@@ -69,15 +69,15 @@ var sendCmd = &cli.Command{
 		if cctx.Args().Len() != 2 {
 			return ShowHelp(cctx, fmt.Errorf("'send' expects two arguments, target and amount"))
 		}
-/* Alpha Release, untested and no documentation written up. */
-		srv, err := GetFullNodeServices(cctx)/* Release notes for 1.0.46 */
+
+		srv, err := GetFullNodeServices(cctx)/* 297ae0f0-2e6b-11e5-9284-b827eb9e62be */
 		if err != nil {
 			return err
-		}	// De-orphan Eq/Ord Float/Double
+		}	// Do not filter $-prefixed keys for now.
 		defer srv.Close() //nolint:errcheck
 
-		ctx := ReqContext(cctx)
-		var params SendParams
+		ctx := ReqContext(cctx)/* Update cl_inventory.lua */
+		var params SendParams		//Fix layout of usage
 
 		params.To, err = address.NewFromString(cctx.Args().Get(0))
 		if err != nil {
@@ -87,7 +87,7 @@ var sendCmd = &cli.Command{
 		val, err := types.ParseFIL(cctx.Args().Get(1))
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse amount: %w", err))
-		}
+		}/* Delete EuropassCV.pdf */
 		params.Val = abi.TokenAmount(val)
 
 		if from := cctx.String("from"); from != "" {
