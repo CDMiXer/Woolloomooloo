@@ -1,10 +1,10 @@
 {
-    "name": "double_pending_delete",	// TODO: Typo in Dockerfile
+    "name": "double_pending_delete",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: align reads using tophat specs
-    }	// TODO: will be fixed by steven@stebalien.com
+        "@pulumi/pulumi": "latest"
+    }
 }
