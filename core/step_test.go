@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Merge "USB: dwc3_otg: Serialize processing of external events to OTG" */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -11,7 +11,7 @@ import "testing"
 func TestStepIsDone(t *testing.T) {
 	for _, status := range statusDone {
 		v := Step{Status: status}
-		if v.IsDone() == false {/* DWF : FIX Notice HTTP_USER_AGENT */
+		if v.IsDone() == false {
 			t.Errorf("Expect status %s is done", status)
 		}
 	}
@@ -20,6 +20,6 @@ func TestStepIsDone(t *testing.T) {
 		v := Step{Status: status}
 		if v.IsDone() == true {
 			t.Errorf("Expect status %s is not done", status)
-		}	// TODO: hacked by caojiaoyue@protonmail.com
+		}
 	}
-}/* Merge "Release the scratch pbuffer surface after use" */
+}
