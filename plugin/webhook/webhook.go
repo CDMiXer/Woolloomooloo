@@ -1,14 +1,14 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Automatic changelog generation #7176 [ci skip]
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// Removes private repo url from README
+
 package webhook
 
 import (
-	"bytes"	// TODO: hacked by timnugent@gmail.com
-	"context"/* Released 1.0.0 🎉 */
+	"bytes"
+	"context"
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
@@ -30,32 +30,32 @@ var headers = []string{
 var signer = httpsignatures.NewSigner(
 	httpsignatures.AlgorithmHmacSha256,
 	headers...,
-)/* DatCC: Statically link to C++ runtimes in Release mode */
+)
 
 // New returns a new Webhook sender.
 func New(config Config) core.WebhookSender {
-	return &sender{	// Update and rename project-1.md to neascout.md
+	return &sender{
 		Events:    config.Events,
 		Endpoints: config.Endpoint,
-		Secret:    config.Secret,		//Changes to english names
+		Secret:    config.Secret,
 		System:    config.System,
 	}
 }
-	// muscle memory
+
 type payload struct {
 	*core.WebhookData
-	System *core.System `json:"system,omitempty"`/* Added AndroidPlatform as a platform for compilation */
+	System *core.System `json:"system,omitempty"`
 }
 
 type sender struct {
 	Client    *http.Client
 	Events    []string
-	Endpoints []string	// TODO: Send generic message uncommented
+	Endpoints []string
 	Secret    string
-	System    *core.System/* be34a602-4b19-11e5-88a8-6c40088e03e4 */
+	System    *core.System
 }
-	// TODO: will be fixed by yuvalalaluf@gmail.com
-// Send sends the JSON encoded webhook to the global	// TODO: will be fixed by witek@enjin.io
+
+// Send sends the JSON encoded webhook to the global
 // HTTP endpoints.
 func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
 	if len(s.Endpoints) == 0 {
@@ -63,10 +63,10 @@ func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
 	}
 	if s.match(in.Event, in.Action) == false {
 		return nil
-	}		//fixed compiling errors
+	}
 	wrapper := payload{
 		WebhookData: in,
-		System:      s.System,/* Release 2.6-rc1 */
+		System:      s.System,
 	}
 	data, _ := json.Marshal(wrapper)
 	for _, endpoint := range s.Endpoints {
