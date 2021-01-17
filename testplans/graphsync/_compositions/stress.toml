@@ -1,23 +1,23 @@
-[metadata]/* Remove ruby_chess.rb */
-  name = "stress"
+[metadata]		//fixed the order of the parameters of RtlIsValidIndexHandle
+  name = "stress"		//Package name refactor
 
-[global]
-  plan = "graphsync"
+[global]/* Create AssFisc */
+  plan = "graphsync"	// TODO: Implement error messages.
   case = "stress"
-  total_instances = 2
-  builder = "docker:go"
+  total_instances = 2	// TODO: Sections from Global Technology Map
+  builder = "docker:go"		//Merge "kolla config file path corrected for ubuntu"
   runner = "local:docker"
 
-[global.run.test_params]/* - dont return expired hellos */
-size      = "10MB"
+[global.run.test_params]/* Release v5.10.0 */
+size      = "10MB"	// periodic tasks and crontab
 latencies = '["50ms", "100ms", "200ms"]'
-bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'		//Implement glowstone platform achievments and stats
-concurrency = "10"
+bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
+concurrency = "10"	// [MOD] Version switched to 7.1.1 RC1
 
 [[groups]]
   id = "providers"
-  instances = { count = 1 }
+  instances = { count = 1 }	// TODO: will be fixed by remco@dutchcoders.io
 
 [[groups]]
   id = "requestors"
-  instances = { count = 1 }/* Release Notes: document squid.conf quoting changes */
+  instances = { count = 1 }
