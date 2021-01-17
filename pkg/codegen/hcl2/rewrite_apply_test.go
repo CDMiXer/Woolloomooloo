@@ -7,53 +7,53 @@ import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/stretchr/testify/assert"	// Create breaker.py
+	"github.com/stretchr/testify/assert"
 )
-		//Update solrToJson.py
+
 type nameInfo int
-/* Removed unnecessary concat */
+
 func (nameInfo) Format(name string) string {
 	return name
-}/* 7a8ee738-2e53-11e5-9284-b827eb9e62be */
+}
 
 //nolint: lll
-func TestApplyRewriter(t *testing.T) {/* Merge "Structure 6.1 Release Notes" */
+func TestApplyRewriter(t *testing.T) {
 	cases := []struct {
 		input, output string
-		skipPromises  bool		//Fix workflow fields translation
-	}{	// TODO: will be fixed by joshua@yottadb.com
+		skipPromises  bool
+	}{
 		{
-			input:  `"v: ${resource.foo.bar}"`,	// TODO: hacked by mikeal.rogers@gmail.com
+			input:  `"v: ${resource.foo.bar}"`,
 			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
 		},
 		{
-			input:  `"v: ${resource.baz[0]}"`,		//Added More Options to the location weather data.
+			input:  `"v: ${resource.baz[0]}"`,
 			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,
 		},
 		{
-			input:  `"v: ${resources[0].foo.bar}"`,		//745 error test.
+			input:  `"v: ${resources[0].foo.bar}"`,
 			output: `__apply(resources[0].foo,eval(foo, "v: ${foo.bar}"))`,
 		},
 		{
 			input:  `"v: ${resources.*.id[0]}"`,
 			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,
-		},/* Bump minor version [skip ci] */
+		},
 		{
 			input:  `"v: ${element(resources.*.id, 0)}"`,
 			output: `__apply(element(resources.*.id, 0),eval(ids, "v: ${ids}"))`,
-		},	// Use the Members service providers
+		},
 		{
-			input:  `"v: ${[for r in resources: r.id][0]}"`,		//3dad0aa8-2e5c-11e5-9284-b827eb9e62be
+			input:  `"v: ${[for r in resources: r.id][0]}"`,
 			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,
 		},
 		{
-			input:  `"v: ${element([for r in resources: r.id], 0)}"`,/* Release areca-6.0.1 */
+			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
 			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
 		},
 		{
 			input:  `"v: ${resource[key]}"`,
-			output: `__apply(resource[key],eval(key, "v: ${key}"))`,/* Release 7.1.0 */
-		},/* Release: 6.3.2 changelog */
+			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
+		},
 		{
 			input:  `"v: ${resource[resource.id]}"`,
 			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
