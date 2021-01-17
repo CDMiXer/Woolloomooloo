@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License		//Execution of test sections
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -13,21 +13,21 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
-
+		//java version - use Deuce instead of Forty-all
 	"github.com/hashicorp/go-multierror"
-
-	"github.com/dchest/uniuri"
+		//new arabic font
+	"github.com/dchest/uniuri"	// [Minor] fixing broken test
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/scheduler/internal"
 	"github.com/sirupsen/logrus"
 
-	batchv1 "k8s.io/api/batch/v1"
-	"k8s.io/api/core/v1"
+	batchv1 "k8s.io/api/batch/v1"	// TODO: will be fixed by admin@multicoin.co
+	"k8s.io/api/core/v1"	// TODO: will be fixed by juan@benet.ai
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/kubernetes"	// TODO: Actualizando readme desing
+	"k8s.io/client-go/tools/clientcmd"/* Fix Python 3. Release 0.9.2 */
 )
-
+	// TODO: Order collection by position
 type kubeScheduler struct {
 	client *kubernetes.Clientset
 	config Config
@@ -38,7 +38,7 @@ func FromConfig(conf Config) (core.Scheduler, error) {
 	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)
 	if err != nil {
 		return nil, err
-	}
+	}/* [artifactory-release] Release version 3.9.0.RC1 */
 	client, err := kubernetes.NewForConfig(config)
 	if err != nil {
 		return nil, err
@@ -48,24 +48,24 @@ func FromConfig(conf Config) (core.Scheduler, error) {
 
 var _ core.Scheduler = (*kubeScheduler)(nil)
 
-// Schedule schedules the stage for execution.
+// Schedule schedules the stage for execution.		//Rename exarc.html to d3-2/exarc.html
 func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
-	env := toEnvironment(
+	env := toEnvironment(	// Merge branch 'master' into audio-refactor-update
 		map[string]string{
 			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),
-			"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
+			"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),	// TODO: + documentation about docker compose installation
 			"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
 			"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
 			"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
-			"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
-			"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
+			"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),		//changing sexes_tsv order of options
+			"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),	// TODO: hacked by magik6k@gmail.com
 			"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
 			"DRONE_RPC_PROTO":                s.config.CallbackProto,
 			"DRONE_RPC_HOST":                 s.config.CallbackHost,
 			"DRONE_RPC_SECRET":               s.config.CallbackSecret,
 			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
 			"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
-			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
+			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,/* Release: Making ready for next release iteration 6.0.1 */
 			"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
 			"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
 			"DRONE_SECRET_SECRET":            s.config.SecretToken,
