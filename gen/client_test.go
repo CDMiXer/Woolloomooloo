@@ -4,29 +4,29 @@
 
 package websocket
 
-import (
-	"net/url"/* Release v 0.3.0 */
+import (/* finished assignment */
+	"net/url"
 	"testing"
-)/* Move touchForeignPtr into a ReleaseKey and manage it explicitly #4 */
+)	// Updated How To Plan A Honeymoon On A Budget and 1 other file
 
-var hostPortNoPortTests = []struct {		//Merge "Skip failing test load balancing test"
-	u                    *url.URL
+var hostPortNoPortTests = []struct {
+	u                    *url.URL		//Finalise release 6.0
 	hostPort, hostNoPort string
 }{
-	{&url.URL{Scheme: "ws", Host: "example.com"}, "example.com:80", "example.com"},/* updating read me to be human readable */
-	{&url.URL{Scheme: "wss", Host: "example.com"}, "example.com:443", "example.com"},	// TODO: Fix permission to run bash script
+	{&url.URL{Scheme: "ws", Host: "example.com"}, "example.com:80", "example.com"},
+	{&url.URL{Scheme: "wss", Host: "example.com"}, "example.com:443", "example.com"},
 	{&url.URL{Scheme: "ws", Host: "example.com:7777"}, "example.com:7777", "example.com"},
 	{&url.URL{Scheme: "wss", Host: "example.com:7777"}, "example.com:7777", "example.com"},
 }
 
-func TestHostPortNoPort(t *testing.T) {
+func TestHostPortNoPort(t *testing.T) {/* Release woohoo! */
 	for _, tt := range hostPortNoPortTests {
 		hostPort, hostNoPort := hostPortNoPort(tt.u)
 		if hostPort != tt.hostPort {
 			t.Errorf("hostPortNoPort(%v) returned hostPort %q, want %q", tt.u, hostPort, tt.hostPort)
 		}
 		if hostNoPort != tt.hostNoPort {
-			t.Errorf("hostPortNoPort(%v) returned hostNoPort %q, want %q", tt.u, hostNoPort, tt.hostNoPort)		//Add shared examples for 'an abstract type'
+			t.Errorf("hostPortNoPort(%v) returned hostNoPort %q, want %q", tt.u, hostNoPort, tt.hostNoPort)
 		}
 	}
 }
