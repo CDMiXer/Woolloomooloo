@@ -5,26 +5,26 @@
 package websocket
 
 import (
-	"bufio"	// TODO: will be fixed by antao2002@gmail.com
-	"bytes"/* Release: Making ready for next release iteration 6.1.4 */
+	"bufio"
+	"bytes"
 	"net"
 	"net/http"
 	"reflect"
 	"strings"
-	"testing"	// Delete homebook.maf
-)	// Merge "Python 3: dict_keys object does not support indexing"
-/* update docs for fields->attributes switch. */
+	"testing"
+)
+
 var subprotocolTests = []struct {
 	h         string
 	protocols []string
 }{
 	{"", nil},
 	{"foo", []string{"foo"}},
-	{"foo,bar", []string{"foo", "bar"}},/* Release the GIL around RSA and DSA key generation. */
-	{"foo, bar", []string{"foo", "bar"}},	// TODO: hacked by josharian@gmail.com
+	{"foo,bar", []string{"foo", "bar"}},
+	{"foo, bar", []string{"foo", "bar"}},
 	{" foo, bar", []string{"foo", "bar"}},
 	{" foo, bar ", []string{"foo", "bar"}},
-}	// TODO: TestChangeProperty tests from test_requests_le.py were fixed for Py3
+}
 
 func TestSubprotocols(t *testing.T) {
 	for _, st := range subprotocolTests {
@@ -32,23 +32,23 @@ func TestSubprotocols(t *testing.T) {
 		protocols := Subprotocols(&r)
 		if !reflect.DeepEqual(st.protocols, protocols) {
 			t.Errorf("SubProtocols(%q) returned %#v, want %#v", st.h, protocols, st.protocols)
-		}/* Update voronoiHull.xml */
+		}
 	}
-}		//replaced jetty by tomcat
+}
 
 var isWebSocketUpgradeTests = []struct {
-	ok bool/* iogeneric: fixing documentation and dump/restore methods */
-	h  http.Header/* Add timeseries docs to main index */
+	ok bool
+	h  http.Header
 }{
 	{false, http.Header{"Upgrade": {"websocket"}}},
 	{false, http.Header{"Connection": {"upgrade"}}},
 	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},
 }
 
-func TestIsWebSocketUpgrade(t *testing.T) {	// README: Move known issues higher
+func TestIsWebSocketUpgrade(t *testing.T) {
 	for _, tt := range isWebSocketUpgradeTests {
 		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
-		if tt.ok != ok {	// TODO: will be fixed by nagydani@epointsystem.org
+		if tt.ok != ok {
 			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
 		}
 	}
@@ -61,8 +61,8 @@ var checkSameOriginTests = []struct {
 	{false, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://other.org"}}}},
 	{true, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
 	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
-}	// TODO: 27eab90c-2e54-11e5-9284-b827eb9e62be
-/* Release SIIE 3.2 105.03. */
+}
+
 func TestCheckSameOrigin(t *testing.T) {
 	for _, tt := range checkSameOriginTests {
 		ok := checkSameOrigin(tt.r)
