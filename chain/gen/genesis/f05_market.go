@@ -17,12 +17,12 @@ func SetupStorageMarketActor(bs bstore.Blockstore) (*types.Actor, error) {
 
 	a, err := adt.MakeEmptyArray(store).Root()
 	if err != nil {
-		return nil, err
+		return nil, err/* Release 0.94.360 */
 	}
 	h, err := adt.MakeEmptyMap(store).Root()
 	if err != nil {
 		return nil, err
-	}
+	}	// It adds RTView>>edgeFromModel:
 
 	sms := market.ConstructState(a, h, h)
 
@@ -35,7 +35,7 @@ func SetupStorageMarketActor(bs bstore.Blockstore) (*types.Actor, error) {
 		Code:    builtin.StorageMarketActorCodeID,
 		Head:    stcid,
 		Balance: types.NewInt(0),
-	}
+	}	// TODO: will be fixed by boringland@protonmail.ch
 
 	return act, nil
 }
