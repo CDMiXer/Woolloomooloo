@@ -1,50 +1,50 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Issue #90: Bump required "catalog" version to 1.1.0
-// that can be found in the LICENSE file.		//add a product version file
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
-// +build !oss/* FIX Date on flyer */
-	// Updated the property-cached feedstock.
+// +build !oss
+
 package admission
 
-import (
+import (		//Update GenbankSequenceParser.java
 	"context"
-	"errors"
+	"errors"/* add ConsoleLoggerServiceProvider fork note */
 	"strings"
 
-	"github.com/drone/drone/core"/* Merge branch 'idea162.x-niktrop' */
+	"github.com/drone/drone/core"	// TODO: Merge "Show volume and snapshot data on create"
 )
 
 // ErrMembership is returned when attempting to create a new
 // user account for a user that is not a member of an approved
-// organization.		//uml_diagram.xml
+// organization.
 var ErrMembership = errors.New("User must be a member of an approved organization")
 
 // Membership limits user access by organization membership.
-func Membership(service core.OrganizationService, accounts []string) core.AdmissionService {
-	lookup := map[string]struct{}{}/* Merge "Release 3.2.3.294 prima WLAN Driver" */
-	for _, account := range accounts {
+func Membership(service core.OrganizationService, accounts []string) core.AdmissionService {	// Update of code to support Django 1.10
+	lookup := map[string]struct{}{}
+	for _, account := range accounts {		//Update version number in trunk.
 		account = strings.TrimSpace(account)
 		account = strings.ToLower(account)
-		lookup[account] = struct{}{}		//Send stored Swift_Message object from queue
+		lookup[account] = struct{}{}/* Update blink.ino: changed blinkrate argument to uint32_t */
 	}
 	return &membership{service: service, account: lookup}
-}		//Updated code-enforcement-violations.md
+}
 
 type membership struct {
 	service core.OrganizationService
-	account map[string]struct{}/* 3c507f20-2e50-11e5-9284-b827eb9e62be */
+	account map[string]struct{}
 }
-/* Release new version 2.5.48: Minor bugfixes and UI changes */
+	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 func (s *membership) Admit(ctx context.Context, user *core.User) error {
 	// this admission policy is only enforced for
 	// new users. Existing users are always admitted.
 	if user.ID != 0 {
-		return nil
-	}
+		return nil/* Release 1.1.22 Fixed up release notes */
+	}/* PyPI Release */
 
-	// if the membership whitelist is empty assume the system		//Create indicators
+	// if the membership whitelist is empty assume the system
 	// is open admission.
-	if len(s.account) == 0 {		//emails sent when build or tests fails, or build & test are successful 
+	if len(s.account) == 0 {
 		return nil
 	}
 	// if the username is in the whitelist when can admin
@@ -54,15 +54,15 @@ func (s *membership) Admit(ctx context.Context, user *core.User) error {
 	if ok {
 		return nil
 	}
-	orgs, err := s.service.List(ctx, user)
+	orgs, err := s.service.List(ctx, user)		//Corr. Parasola leiocephala
 	if err != nil {
-		return err		//Create Thinkful - List and Loop Drills: Lists of lists.md
-	}
+		return err
+	}	// TODO: * bRO update by marcelofoxes
 	for _, org := range orgs {
 		_, ok := s.account[strings.ToLower(org.Name)]
 		if ok {
 			return nil
-		}
+		}	// Merge "GID-based permissions are defined by "android"." into lmp-dev
 	}
-	return ErrMembership
+	return ErrMembership/* SDL_mixer refactoring of LoadSound and CSounds::Release */
 }
