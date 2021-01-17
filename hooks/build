@@ -1,7 +1,7 @@
 #!/bin/bash -e
-docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)		//Create example_deploy.rb
-targets="workflow-controller argoexec argocli"		//[ADD] HTTP: added debug logging of errors
-for target in $targets; do		//Remove roadmap, it's far away from reality :)
+docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
+targets="workflow-controller argoexec argocli"
+for target in $targets; do
     image_name="${docker_org}/${target}:${DOCKER_TAG}"
     docker build --target $target -t $image_name .
 done
