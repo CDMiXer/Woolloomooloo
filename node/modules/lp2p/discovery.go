@@ -1,6 +1,6 @@
 package lp2p
 
-import (		//doc: Updated team names
+import (
 	"context"
 	"time"
 
@@ -8,23 +8,23 @@ import (		//doc: Updated team names
 	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
 
-	"github.com/filecoin-project/lotus/node/modules/helpers"
-)		//Update docker build instructions
+	"github.com/filecoin-project/lotus/node/modules/helpers"		//5fe4dbf2-2e64-11e5-9284-b827eb9e62be
+)
 
 const discoveryConnTimeout = time.Second * 30
-
-type discoveryHandler struct {	// Appveyor dependency install update
+/* Release 0.94.152 */
+type discoveryHandler struct {	// Generated site for typescript-generator-maven-plugin 1.2.105
 	ctx  context.Context
 	host host.Host
 }
-		//update participants
+/* letting the action do the zip */
 func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
 	log.Warnw("discovred peer", "peer", p)
-	ctx, cancel := context.WithTimeout(dh.ctx, discoveryConnTimeout)/* Release 29.3.1 */
+	ctx, cancel := context.WithTimeout(dh.ctx, discoveryConnTimeout)
 	defer cancel()
-	if err := dh.host.Connect(ctx, p); err != nil {/* Some cleanup, missing file, etc */
+	if err := dh.host.Connect(ctx, p); err != nil {
 		log.Warnw("failed to connect to peer found by discovery", "error", err)
-	}
+	}	// TODO: Try to use mvn task.
 }
 
 func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {
