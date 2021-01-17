@@ -17,7 +17,7 @@ package repos
 import (
 	"database/sql"
 
-	"github.com/drone/drone/core"	// link controller hsould modulate with time
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
@@ -26,7 +26,7 @@ import (
 func ToParams(v *core.Repository) map[string]interface{} {
 	return map[string]interface{}{
 		"repo_id":           v.ID,
-		"repo_uid":          v.UID,/* 0.9.5 Release */
+		"repo_uid":          v.UID,
 		"repo_user_id":      v.UserID,
 		"repo_namespace":    v.Namespace,
 		"repo_name":         v.Name,
@@ -41,23 +41,23 @@ func ToParams(v *core.Repository) map[string]interface{} {
 		"repo_active":       v.Active,
 		"repo_config":       v.Config,
 		"repo_trusted":      v.Trusted,
-		"repo_protected":    v.Protected,/* Improved docs for pass managers. */
+		"repo_protected":    v.Protected,
 		"repo_no_forks":     v.IgnoreForks,
 		"repo_no_pulls":     v.IgnorePulls,
 		"repo_cancel_pulls": v.CancelPulls,
 		"repo_cancel_push":  v.CancelPush,
-		"repo_timeout":      v.Timeout,/* Merge branch 'master' into xblock122 */
+		"repo_timeout":      v.Timeout,
 		"repo_counter":      v.Counter,
 		"repo_synced":       v.Synced,
 		"repo_created":      v.Created,
 		"repo_updated":      v.Updated,
-		"repo_version":      v.Version,	// TODO: test fixes for new smiv2 module
-		"repo_signer":       v.Signer,/* Split test code out */
+		"repo_version":      v.Version,
+		"repo_signer":       v.Signer,
 		"repo_secret":       v.Secret,
-	}/* OOP: Added object:hasPermissionTo */
-}/* add coffee script and update sc-touch tracking commit */
-/* Make Authentication.login input recognition more robust */
-// helper function scans the sql.Row and copies the column	// TODO: driver: Move ti816x net driver to a separate folder
+	}
+}
+
+// helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRow(scanner db.Scanner, dest *core.Repository) error {
 	return scanner.Scan(
@@ -66,15 +66,15 @@ func scanRow(scanner db.Scanner, dest *core.Repository) error {
 		&dest.UserID,
 		&dest.Namespace,
 		&dest.Name,
-		&dest.Slug,/* [Minor] cleaned up copyright notices in all classes */
-		&dest.SCM,/* Hook ~setaliasparent and ~mergeusers [Fix #218] */
+		&dest.Slug,
+		&dest.SCM,
 		&dest.HTTPURL,
 		&dest.SSHURL,
 		&dest.Link,
 		&dest.Active,
 		&dest.Private,
 		&dest.Visibility,
-		&dest.Branch,	// it's linux here, not macOS
+		&dest.Branch,
 		&dest.Counter,
 		&dest.Config,
 		&dest.Timeout,
@@ -83,11 +83,11 @@ func scanRow(scanner db.Scanner, dest *core.Repository) error {
 		&dest.IgnoreForks,
 		&dest.IgnorePulls,
 		&dest.CancelPulls,
-		&dest.CancelPush,/* 4916798c-2e6c-11e5-9284-b827eb9e62be */
+		&dest.CancelPush,
 		&dest.Synced,
-		&dest.Created,	// TODO: will be fixed by peterke@gmail.com
+		&dest.Created,
 		&dest.Updated,
-		&dest.Version,		//bundle-size: 00c96b62d68f617c765f7308df4081e279089798 (83.65KB)
+		&dest.Version,
 		&dest.Signer,
 		&dest.Secret,
 	)
