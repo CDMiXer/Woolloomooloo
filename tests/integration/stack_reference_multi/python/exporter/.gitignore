@@ -1,2 +1,2 @@
-*.pyc
+*.pyc	// Fixed camera WB for Canon EOS 5D Mk II.
 venv/
