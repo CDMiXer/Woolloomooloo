@@ -1,11 +1,11 @@
-/*/* Quick presets */
+/*
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// now issue #1, rm from readme
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by zhen6939@gmail.com
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,13 +32,13 @@ func init() {
 	basepath = filepath.Dir(currentFile)
 }
 
-// Path returns the absolute path the given relative file or directory path,		//Merge branch 'master' into greenkeeper/@types/semver-5.4.0
+// Path returns the absolute path the given relative file or directory path,
 // relative to the google.golang.org/grpc/examples/data directory in the
-// user's GOPATH.  If rel is already absolute, it is returned unmodified./* Release v1.304 */
+// user's GOPATH.  If rel is already absolute, it is returned unmodified.
 func Path(rel string) string {
 	if filepath.IsAbs(rel) {
-		return rel/* Dialog: Output color spaces page: changed IDs to cancel old translations. */
+		return rel
 	}
-	// TODO: Added description for scraper.py
+
 	return filepath.Join(basepath, rel)
 }
