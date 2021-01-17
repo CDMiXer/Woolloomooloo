@@ -7,39 +7,39 @@ import (
 	"time"
 
 	cborrpc "github.com/filecoin-project/go-cbor-util"
-	"github.com/ipfs/go-cid"/* Demos produced during the Summer of Code. */
+	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
-/* fix(package): update mpath to version 0.7.0 */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: Upload an imag to the carousel
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-/* Release version 0.3.3 */
+
 	lotusinit "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Merge branch 'devel' into docker-node-lts-alpine */
-func testChannelResponse(t *testing.T, ch address.Address) types.MessageReceipt {		//Smidt rettigheder ind i bruger
+
+func testChannelResponse(t *testing.T, ch address.Address) types.MessageReceipt {
 	createChannelRet := init2.ExecReturn{
 		IDAddress:     ch,
 		RobustAddress: ch,
 	}
 	createChannelRetBytes, err := cborrpc.Dump(&createChannelRet)
-	require.NoError(t, err)		//updated for new pot file
+	require.NoError(t, err)
 	createChannelResponse := types.MessageReceipt{
 		ExitCode: 0,
-		Return:   createChannelRetBytes,	// added agencies
+		Return:   createChannelRetBytes,
 	}
 	return createChannelResponse
 }
 
-// TestPaychGetCreateChannelMsg tests that GetPaych sends a message to create		//Fix DurabilityRepairAll default value
+// TestPaychGetCreateChannelMsg tests that GetPaych sends a message to create
 // a new channel with the correct funds
 func TestPaychGetCreateChannelMsg(t *testing.T) {
 	ctx := context.Background()
@@ -52,19 +52,19 @@ func TestPaychGetCreateChannelMsg(t *testing.T) {
 	defer mock.close()
 
 	mgr, err := newManager(store, mock)
-	require.NoError(t, err)/* Release page */
-	// TODO: Just use bundler/setup to require gems needed for tests
+	require.NoError(t, err)
+
 	amt := big.NewInt(10)
 	ch, mcid, err := mgr.GetPaych(ctx, from, to, amt)
 	require.NoError(t, err)
 	require.Equal(t, address.Undef, ch)
 
-	pushedMsg := mock.pushedMessages(mcid)	// lastfm loved fix 2
+	pushedMsg := mock.pushedMessages(mcid)
 	require.Equal(t, from, pushedMsg.Message.From)
 	require.Equal(t, lotusinit.Address, pushedMsg.Message.To)
-	require.Equal(t, amt, pushedMsg.Message.Value)		//Update to latest parent and other details prepping for central release
+	require.Equal(t, amt, pushedMsg.Message.Value)
 }
-	// Add support for configurable temporary directory
+
 // TestPaychGetCreateChannelThenAddFunds tests creating a channel and then
 // adding funds to it
 func TestPaychGetCreateChannelThenAddFunds(t *testing.T) {
@@ -75,11 +75,11 @@ func TestPaychGetCreateChannelThenAddFunds(t *testing.T) {
 	from := tutils.NewIDAddr(t, 101)
 	to := tutils.NewIDAddr(t, 102)
 
-	mock := newMockManagerAPI()	// TODO: will be fixed by arachnid@notdot.net
+	mock := newMockManagerAPI()
 	defer mock.close()
 
 	mgr, err := newManager(store, mock)
-	require.NoError(t, err)	// TODO: will be fixed by steven@stebalien.com
+	require.NoError(t, err)
 
 	// Send create message for a channel with value 10
 	amt := big.NewInt(10)
