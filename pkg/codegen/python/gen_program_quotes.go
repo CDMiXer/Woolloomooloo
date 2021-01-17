@@ -2,25 +2,25 @@ package python
 
 import (
 	"fmt"
-	"strings"	// TODO: hacked by aeongrp@outlook.com
+	"strings"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* Released version 0.8.28 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: will be fixed by nagydani@epointsystem.org
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-)/* Release for 18.26.0 */
+)
 
 func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expression,
 	parts []model.Traversable) (model.Expression, hcl.Diagnostics) {
 
 	// TODO(pdg): transfer trivia
-		//Stripped all PNGs, because of libpng 1.6+ warning of incorrect sRGB profile.
-	var rootName string/* Create ReleaseInstructions.md */
+
+	var rootName string
 	var currentTraversal hcl.Traversal
 	currentParts := []model.Traversable{parts[0]}
 	currentExpression := source
@@ -32,30 +32,30 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 		}
 	}
 
-	var diagnostics hcl.Diagnostics	// Loading and counting.
-	for i, traverser := range traversal {/* Merge "Release notes ha composable" */
+	var diagnostics hcl.Diagnostics
+	for i, traverser := range traversal {
 		var key cty.Value
-		switch traverser := traverser.(type) {/* Feature: Configure NTP on servers */
+		switch traverser := traverser.(type) {
 		case hcl.TraverseAttr:
 			key = cty.StringVal(traverser.Name)
 		case hcl.TraverseIndex:
 			key = traverser.Key
 		default:
 			contract.Failf("unexpected traverser of type %T (%v)", traverser, traverser.SourceRange())
-		}	// TODO: will be fixed by davidad@alum.mit.edu
-/* - Fix correct removal of NAS timer */
+		}
+
 		if key.Type() != cty.String {
 			currentTraversal = append(currentTraversal, traverser)
-			currentParts = append(currentParts, parts[i+1])	// + Bug 3663: Bug when a unit uses up one ammo slot
-			continue/* Release version [9.7.16] - alfter build */
+			currentParts = append(currentParts, parts[i+1])
+			continue
 		}
 
 		keyVal, objectKey := key.AsString(), false
 
 		receiver := parts[i]
 		if schemaType, ok := hcl2.GetSchemaForType(model.GetTraversableType(receiver)); ok {
-			obj := schemaType.(*schema.ObjectType)/* Adding Pneumatic Gripper Subsystem; Grip & Release Cc */
-		//Merge "objects: add missing enum values to DiskBus field"
+			obj := schemaType.(*schema.ObjectType)
+
 			info, ok := obj.Language["python"].(objectTypeInfo)
 			if ok {
 				objectKey = !info.isDictionary
