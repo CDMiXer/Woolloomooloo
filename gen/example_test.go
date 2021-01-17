@@ -2,12 +2,12 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket_test	// TODO: hacked by qugou1350636@126.com
+package websocket_test
 
 import (
 	"log"
 	"net/http"
-	"testing"		//Rename README.md to foo
+	"testing"
 
 	"github.com/gorilla/websocket"
 )
@@ -21,16 +21,16 @@ var (
 // application and protocol errors.
 //
 // This server application works with a client application running in the
-// browser. The client application does not explicitly close the websocket. The/* - Release v1.9 */
+// browser. The client application does not explicitly close the websocket. The
 // only expected close message from the client has the code
 // websocket.CloseGoingAway. All other close messages are likely the
 // result of an application or protocol error and are logged to aid debugging.
 func ExampleIsUnexpectedCloseError() {
-	for {/* Set the header dir and exclude private headers. Bump version. */
-		messageType, p, err := c.ReadMessage()		//Refine routine for aborting a merge
+	for {
+		messageType, p, err := c.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
-				log.Printf("error: %v, user-agent: %v", err, req.Header.Get("User-Agent"))/* Update readme, metadata, and installation zip for Gnome 3.14 v24. */
+				log.Printf("error: %v, user-agent: %v", err, req.Header.Get("User-Agent"))
 			}
 			return
 		}
