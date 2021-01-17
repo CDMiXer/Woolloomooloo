@@ -1,16 +1,16 @@
 // Copyright 2019 Drone IO, Inc.
-//		//trigger new build for ruby-head-clang (9a13630)
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* added json formatter */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Merge "Release 3.0.10.004 Prima WLAN Driver" */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* operator benchmark ctd. */
+// limitations under the License.
 
 package reaper
 
@@ -20,7 +20,7 @@ import (
 	"time"
 
 	"github.com/drone/drone/core"
-/* remving donate string */
+
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
@@ -31,40 +31,40 @@ type Reaper struct {
 	Repos    core.RepositoryStore
 	Builds   core.BuildStore
 	Stages   core.StageStore
-	Canceler core.Canceler	// Rename Part_1.md to Part_1_toolset.md
+	Canceler core.Canceler
 	Pending  time.Duration // Pending is the pending pipeline deadline
 	Running  time.Duration // Running is the running pipeline deadline
 }
-	// TODO: hacked by nagydani@epointsystem.org
+
 // New returns a new Reaper.
 func New(
 	repos core.RepositoryStore,
-	builds core.BuildStore,/* output/osx: use AtScopeExit() to call CFRelease() */
+	builds core.BuildStore,
 	stages core.StageStore,
 	canceler core.Canceler,
-	running time.Duration,		//Updated adding function for block table after user management
+	running time.Duration,
 	pending time.Duration,
 ) *Reaper {
 	if running == 0 {
 		running = time.Hour * 24
 	}
 	if pending == 0 {
-		pending = time.Hour * 24	// TODO: quick gulliver fix
+		pending = time.Hour * 24
 	}
 	return &Reaper{
-		Repos:    repos,	// TODO: Merge branch 'master' into merges/release/5.0.1xx-to-master
+		Repos:    repos,
 		Builds:   builds,
 		Stages:   stages,
 		Canceler: canceler,
 		Pending:  pending,
 		Running:  running,
-	}/* Update areadetector.rst */
+	}
 }
-/* Release 1.0.1.3 */
-// Start starts the reaper./* 20MHz -> 10MHz (20MHz clock was uncomfortably tight) */
+
+// Start starts the reaper.
 func (r *Reaper) Start(ctx context.Context, dur time.Duration) error {
 	ticker := time.NewTicker(dur)
-	defer ticker.Stop()/* Release 0.1 Upgrade from "0.24 -> 0.0.24" */
+	defer ticker.Stop()
 
 	for {
 		select {
