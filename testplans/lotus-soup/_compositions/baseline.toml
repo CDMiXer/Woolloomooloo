@@ -3,9 +3,9 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"/* Release to github using action-gh-release */
+  plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 6/* Allow to join more than two ways (#649) */
+  total_instances = 6
   builder = "exec:go"
   runner = "local:exec"
 
@@ -13,10 +13,10 @@
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//Update localization files.
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true	// LUTECE-2278 : Locale is hardcoded in some JSP or HTML template
+  enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "3"
@@ -24,27 +24,27 @@
   genesis_timestamp_offset = "0"
   balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"		//added date year for filtering
-  mining_mode = "natural"/* Moved to old version and updated API to v30.0 */
+  random_beacon_type = "mock"
+  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]		//Install mingw with jessie only
+  [groups.instances]
     count = 1
-    percentage = 0.0		//use paged data
-  [groups.run]/* Reduce temp object creation by not using scala Map.get */
-    [groups.run.test_params]/* Experimenting with transition to std::chrono::clocks */
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"/* UUWV-TOM MUIR-10/10/16-GATED */
+  id = "miners"
   [groups.instances]
-    count = 2	// add BETA badge
-    percentage = 0.0	// TODO: will be fixed by souzau@yandex.com
+    count = 2
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Release BAR 1.1.11 */
-      role = "miner"/* Release 1.0.11 - make state resolve method static */
-/* added more lineages */
+    [groups.run.test_params]
+      role = "miner"
+
 [[groups]]
   id = "clients"
   [groups.instances]
