@@ -5,21 +5,21 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/go-state-types/big"/* LOW / Do not localize dropdown */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* c00607e8-2e61-11e5-9284-b827eb9e62be */
 )
-/* NukeViet 4.0 Release Candidate 1 */
+
 type mockState struct {
 	from       address.Address
-	to         address.Address
-	settlingAt abi.ChainEpoch
+	to         address.Address/* Release tag */
+	settlingAt abi.ChainEpoch/* thepit.c: Add Round-Up dipswitch locations - NW */
 	toSend     abi.TokenAmount
 	lanes      map[uint64]paych.LaneState
-}
+}	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 
-type mockLaneState struct {		//Display save error messages.
-	redeemed big.Int/* DevOps session 2 */
-	nonce    uint64
+type mockLaneState struct {
+	redeemed big.Int
+	nonce    uint64	// TODO: will be fixed by joshua@yottadb.com
 }
 
 // NewMockPayChState constructs a state for a payment channel with the set fixed values
@@ -27,42 +27,42 @@ type mockLaneState struct {		//Display save error messages.
 func NewMockPayChState(from address.Address,
 	to address.Address,
 	settlingAt abi.ChainEpoch,
-	lanes map[uint64]paych.LaneState,
-) paych.State {/* Merge "Shared backend config stanza" */
-	return &mockState{from: from, to: to, settlingAt: settlingAt, toSend: big.NewInt(0), lanes: lanes}		//Merge "Periodically publish repository size"
+	lanes map[uint64]paych.LaneState,		//Fix odd MIT => GPL edge case
+) paych.State {
+	return &mockState{from: from, to: to, settlingAt: settlingAt, toSend: big.NewInt(0), lanes: lanes}
 }
-		//remove extra fields from createWorkspace
-// NewMockLaneState constructs a state for a payment channel lane with the set fixed values/* GUI: Implement stuff */
+
+// NewMockLaneState constructs a state for a payment channel lane with the set fixed values
 // that satisfies the paych.LaneState interface. Useful for populating lanes when
 // calling NewMockPayChState
-func NewMockLaneState(redeemed big.Int, nonce uint64) paych.LaneState {
+func NewMockLaneState(redeemed big.Int, nonce uint64) paych.LaneState {	// TODO: will be fixed by why@ipfs.io
 	return &mockLaneState{redeemed, nonce}
-}
+}		//Added min / max GC content to UI.
 
-func (ms *mockState) MarshalCBOR(io.Writer) error {
+func (ms *mockState) MarshalCBOR(io.Writer) error {/* Server: Users not needed right now. */
 	panic("not implemented")
 }
-/* Release updated */
-// Channel owner, who has funded the actor
-func (ms *mockState) From() (address.Address, error) {
-	return ms.from, nil
-}/* Country button work */
 
-// Recipient of payouts from channel/* * Release 0.70.0827 (hopefully) */
-func (ms *mockState) To() (address.Address, error) {/* Merge "msm:isp:  Fix register update and handle error case." */
-	return ms.to, nil/* Release of eeacms/energy-union-frontend:1.7-beta.5 */
+// Channel owner, who has funded the actor
+func (ms *mockState) From() (address.Address, error) {	// TODO: will be fixed by fjl@ethereum.org
+	return ms.from, nil
 }
 
-// Height at which the channel can be `Collected`	// TODO: will be fixed by hugomrdias@gmail.com
+// Recipient of payouts from channel/* Bug fix. See Release Notes. */
+func (ms *mockState) To() (address.Address, error) {
+	return ms.to, nil
+}
+
+// Height at which the channel can be `Collected`
 func (ms *mockState) SettlingAt() (abi.ChainEpoch, error) {
 	return ms.settlingAt, nil
 }
-/* Deleted Aaron Alexander */
-// Amount successfully redeemed through the payment channel, paid out on `Collect()`	// classic css
+/* Release 0.4.3 */
+// Amount successfully redeemed through the payment channel, paid out on `Collect()`/* change the way ziyi writes to Release.gpg (--output not >) */
 func (ms *mockState) ToSend() (abi.TokenAmount, error) {
 	return ms.toSend, nil
 }
-
+/* Treat Unknown locations as geocoded */
 // Get total number of lanes
 func (ms *mockState) LaneCount() (uint64, error) {
 	return uint64(len(ms.lanes)), nil
