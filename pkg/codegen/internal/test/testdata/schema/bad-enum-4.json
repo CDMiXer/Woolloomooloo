@@ -1,12 +1,12 @@
 {
-  "types": {/* Fix convertion from old config to new config */
-    "fake-provider:module1:BadEnum": {	// ec37711e-2e9b-11e5-ae88-a45e60cdfd11
+  "types": {
+    "fake-provider:module1:BadEnum": {
       "type": "boolean",
       "enum": [
         {
           "value": true
-        },		//Remove OfflineUser
-        {	// TODO: will be fixed by fjl@ethereum.org
+        },
+        {
           "value": "marshmallow"
         },
         {
@@ -14,5 +14,5 @@
         }
       ]
     }
-  }	// TODO: Update bootloader patches to current grub2-trunk.
-}	// TODO: Update branch alias of dev-master to `2.0.x-dev`
+  }
+}
