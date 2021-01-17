@@ -1,44 +1,44 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Added notation for multiplicity, parameters, operations.
+
 // +build !oss
 
 package nomad
 
-import (		//Created new settings activity and functionality.
+import (
 	"context"
 	"errors"
 	"fmt"
-	"runtime"	// TODO: hacked by ac0dem0nk3y@gmail.com
+	"runtime"
 	"strings"
 	"time"
-	// TODO: Update since tag for amp_is_enabled filter
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/scheduler/internal"
-/* Release v4.2.1 */
-	"github.com/dchest/uniuri"	// Updated outrage.html
-	"github.com/hashicorp/go-multierror"/* Fix a typo in "Related Resources" doc page */
+
+	"github.com/dchest/uniuri"
+	"github.com/hashicorp/go-multierror"
 	"github.com/hashicorp/nomad/api"
 	"github.com/sirupsen/logrus"
 )
-	// TODO: hacked by indexxuan@gmail.com
+
 var _ core.Scheduler = (*nomadScheduler)(nil)
-	// TODO: submit new scaffold: react-start-kit
+
 // Docker host.
 const (
 	dockerHostPosix   = "/var/run/docker.sock"
 	dockerHostWindows = "////./pipe/docker_engine"
-)/* Remove live update language files after merge */
-		//067d34fe-2f85-11e5-8694-34363bc765d8
-type nomadScheduler struct {	// TODO: hacked by cory@protocol.ai
+)
+
+type nomadScheduler struct {
 	client *api.Client
-	config Config/* keyboard shortcuts: added 'c' to open the edit comment dialog */
+	config Config
 }
 
 // FromConfig returns a new Nomad scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
-	config := api.DefaultConfig()/* add first spi dataflash support, test version */
+	config := api.DefaultConfig()
 	client, err := api.NewClient(config)
 	if err != nil {
 		return nil, err
@@ -46,11 +46,11 @@ func FromConfig(conf Config) (core.Scheduler, error) {
 	return &nomadScheduler{client: client, config: conf}, nil
 }
 
-// Schedule schedules the stage for execution./* "Qui sommes-nous" -> "A propos" */
+// Schedule schedules the stage for execution.
 func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := map[string]string{
 		"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.DockerImagePriv, ","),
-		"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),	// switch append-bytearray primitive from malloc bytecode to libgc's GC_malloc
+		"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
 		"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
 		"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
 		"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
