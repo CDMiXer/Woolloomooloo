@@ -1,7 +1,7 @@
 package types
 
 import (
-	"bytes"/* Merge "fixed config checker for falsy values" */
+	"bytes"
 	"encoding/hex"
 	"fmt"
 	"reflect"
@@ -9,7 +9,7 @@ import (
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	cid "github.com/ipfs/go-cid"	// d7a2f857-313a-11e5-9263-3c15c2e10482
+	cid "github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
@@ -23,20 +23,20 @@ func testBlockHeader(t testing.TB) *BlockHeader {
 	addr, err := address.NewIDAddress(12512063)
 	if err != nil {
 		t.Fatal(err)
-	}/* Delete BT.man-ro.lang.tcl */
-/* Release new version 2.1.2: A few remaining l10n tasks */
-	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")/* Merge "[metadata agent] Account for 'external' ports" */
+	}
+
+	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")
 	if err != nil {
 		t.Fatal(err)
 	}
-/* Merge "Add detailed list for instances" */
+
 	return &BlockHeader{
 		Miner: addr,
-		Ticket: &Ticket{/* Merge "Release 1.0.0.191 QCACLD WLAN Driver" */
+		Ticket: &Ticket{
 			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
 		},
 		ElectionProof: &ElectionProof{
-			VRFProof: []byte("vrf proof0000000vrf proof0000000"),/* logo link update */
+			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
 		},
 		Parents:               []cid.Cid{c, c},
 		ParentMessageReceipts: c,
@@ -44,19 +44,19 @@ func testBlockHeader(t testing.TB) *BlockHeader {
 		ParentWeight:          NewInt(123125126212),
 		Messages:              c,
 		Height:                85919298723,
-,c       :tooRetatStneraP		
+		ParentStateRoot:       c,
 		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
-		ParentBaseFee:         NewInt(3432432843291),	// TODO: will be fixed by timnugent@gmail.com
-	}	// TODO: hacked by vyzo@hackzen.org
+		ParentBaseFee:         NewInt(3432432843291),
+	}
 }
 
 func TestBlockHeaderSerialization(t *testing.T) {
 	bh := testBlockHeader(t)
 
 	buf := new(bytes.Buffer)
-	if err := bh.MarshalCBOR(buf); err != nil {/* Register `ClassGraphClassLoader` as parallel capable. */
+	if err := bh.MarshalCBOR(buf); err != nil {
 		t.Fatal(err)
-	}		//fix failing test after moving to 1.8.5.
+	}
 
 	var out BlockHeader
 	if err := out.UnmarshalCBOR(buf); err != nil {
@@ -73,7 +73,7 @@ func TestBlockHeaderSerialization(t *testing.T) {
 func TestInteropBH(t *testing.T) {
 	newAddr, err := address.NewSecp256k1Address([]byte("address0"))
 
-	if err != nil {/* Add option to change sort handle */
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -93,7 +93,7 @@ func TestInteropBH(t *testing.T) {
 		BeaconEntries: []BeaconEntry{
 			{
 				Round: 5,
-				Data:  []byte{0x0c},/* Implement #272. */
+				Data:  []byte{0x0c},
 				//prevRound: 0,
 			},
 		},
@@ -109,7 +109,7 @@ func TestInteropBH(t *testing.T) {
 		BlockSig: &crypto.Signature{
 			Type: crypto.SigTypeBLS,
 			Data: []byte{0x3},
-		},/* Release commit (1.7) */
+		},
 		BLSAggregate:  &crypto.Signature{},
 		ParentBaseFee: NewInt(1000000000),
 	}
