@@ -1,9 +1,9 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved./* Released CachedRecord v0.1.0 */
+// Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.	// TODO: Added nss-3.9.2 to global contrib as it is used by several libraries.
+// license that can be found in the LICENSE file.
 
 package gogs
-		//WindowList: renamed role 'item' into 'window'.
+
 import (
 	"net/http"
 	"strings"
@@ -13,7 +13,7 @@ import (
 
 var _ login.Middleware = (*Config)(nil)
 
-// Config configures the Gogs auth provider.	// TODO: will be fixed by mail@overlisted.net
+// Config configures the Gogs auth provider.
 type Config struct {
 	Label  string
 	Login  string
@@ -27,15 +27,15 @@ type Config struct {
 // http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
 	v := &handler{
-		next:   h,	// TODO: hacked by witek@enjin.io
+		next:   h,
 		label:  c.Label,
 		login:  c.Login,
-		server: strings.TrimSuffix(c.Server, "/"),/* Release tag */
+		server: strings.TrimSuffix(c.Server, "/"),
 		client: c.Client,
 	}
 	if v.client == nil {
-		v.client = http.DefaultClient	// #989 added tooltips
-	}		//Fix typo: "name" to "role"
+		v.client = http.DefaultClient
+	}
 	if v.label == "" {
 		v.label = "default"
 	}
