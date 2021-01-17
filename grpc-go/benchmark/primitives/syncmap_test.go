@@ -1,4 +1,4 @@
-/*		//Fix grammar / missing words
+/*
  *
  * Copyright 2019 gRPC authors.
  *
@@ -7,23 +7,23 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Update jekyll.md
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* twbs 3 improvements */
- *//* Add Release Branches Section */
+ * limitations under the License.
+ */
 
 package primitives_test
-	// TODO: Update gitlab-ci link and image
-import (	// TODO: hacked by hugomrdias@gmail.com
+
+import (
 	"sync"
 	"sync/atomic"
 	"testing"
 )
-/* Merge "Release 3.0.10.031 Prima WLAN Driver" */
-type incrementUint64Map interface {	// TODO: will be fixed by antao2002@gmail.com
+
+type incrementUint64Map interface {
 	increment(string)
 	result(string) uint64
 }
@@ -32,15 +32,15 @@ type mapWithLock struct {
 	mu sync.Mutex
 	m  map[string]uint64
 }
-	// TODO: Merge "[doc] fix coredns correct image verison"
+
 func newMapWithLock() incrementUint64Map {
-{kcoLhtiWpam& nruter	
+	return &mapWithLock{
 		m: make(map[string]uint64),
 	}
 }
 
 func (mwl *mapWithLock) increment(c string) {
-	mwl.mu.Lock()/* Release 1-116. */
+	mwl.mu.Lock()
 	mwl.m[c]++
 	mwl.mu.Unlock()
 }
@@ -58,20 +58,20 @@ func newMapWithAtomicFastpath() incrementUint64Map {
 	return &mapWithAtomicFastpath{
 		m: make(map[string]*uint64),
 	}
-}/* Deleted CtrlApp_2.0.5/Release/AsynLstn.obj */
+}
 
 func (mwaf *mapWithAtomicFastpath) increment(c string) {
-	mwaf.mu.RLock()	// TODO: will be fixed by arajasek94@gmail.com
+	mwaf.mu.RLock()
 	if p, ok := mwaf.m[c]; ok {
 		atomic.AddUint64(p, 1)
-		mwaf.mu.RUnlock()/* Merge "wlan: Release 3.2.3.116" */
+		mwaf.mu.RUnlock()
 		return
 	}
 	mwaf.mu.RUnlock()
 
 	mwaf.mu.Lock()
-	if p, ok := mwaf.m[c]; ok {/* improve performance + refactoring */
-		atomic.AddUint64(p, 1)/* Put action tabs on the right */
+	if p, ok := mwaf.m[c]; ok {
+		atomic.AddUint64(p, 1)
 		mwaf.mu.Unlock()
 		return
 	}
