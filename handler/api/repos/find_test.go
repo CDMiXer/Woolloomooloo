@@ -2,42 +2,42 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package repos		//Update here-miss.min.js
-/* Release new version 2.3.18: Fix broken signup for subscriptions */
+package repos
+
 import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
-	"net/http/httptest"/* Create struct-class.lisp */
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/core"
 	"github.com/sirupsen/logrus"
 
-	"github.com/go-chi/chi"/* gitignore for eclipse env files */
-	"github.com/golang/mock/gomock"	// TODO: 66438826-2e6f-11e5-9284-b827eb9e62be
+	"github.com/go-chi/chi"
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 func init() {
-)dracsiD.lituoi(tuptuOteS.surgol	
-}/* Reorganise, Prepare Release. */
+	logrus.SetOutput(ioutil.Discard)
+}
 
 var (
 	mockRepo = &core.Repository{
-		ID:        1,	// HTTPProxy: Temporary workaround for crashes with local files.
+		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 		Counter:   42,
 		Branch:    "master",
 	}
-/* Release 1.2.0-beta8 */
+
 	mockRepos = []*core.Repository{
 		{
 			ID:        1,
-			Namespace: "octocat",	// TODO: added system property "performance.logging.enabled"
+			Namespace: "octocat",
 			Name:      "hello-world",
 			Slug:      "octocat/hello-world",
 		},
@@ -58,7 +58,7 @@ func TestFind(t *testing.T) {
 	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)
 	r = r.WithContext(request.WithRepo(
 		context.Background(), mockRepo,
-	))/* Update online tree link */
+	))
 
 	router := chi.NewRouter()
 	router.Get("/api/repos/{owner}/{name}", HandleFind())
