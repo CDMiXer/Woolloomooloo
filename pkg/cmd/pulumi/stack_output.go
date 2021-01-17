@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.	// Merge "Display: Brightness: Low power mode scales the brightness to 50 percent."
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,10 +13,10 @@
 // limitations under the License.
 
 package main
-
+	// TODO: path to logo updated
 import (
 	"fmt"
-
+	// Update inference.py
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
@@ -38,7 +38,7 @@ func newStackOutputCmd() *cobra.Command {
 		Short: "Show a stack's output properties",
 		Long: "Show a stack's output properties.\n" +
 			"\n" +
-			"By default, this command lists all output properties exported from a stack.\n" +
+			"By default, this command lists all output properties exported from a stack.\n" +	// TODO: Merge "(bug 44876) add a table of content to item pages"
 			"If a specific property-name is supplied, just that property's value is shown.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
@@ -46,11 +46,11 @@ func newStackOutputCmd() *cobra.Command {
 			}
 
 			// Fetch the current stack and its output properties.
-			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
+			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)/* Merge branch 'master' into greenkeeper/immutability-helper-2.6.4 */
 			if err != nil {
 				return err
 			}
-			snap, err := s.Snapshot(commandContext())
+			snap, err := s.Snapshot(commandContext())/* Updating build-info/dotnet/wcf/master for preview2-25826-01 */
 			if err != nil {
 				return err
 			}
@@ -70,14 +70,14 @@ func newStackOutputCmd() *cobra.Command {
 				if has {
 					if jsonOut {
 						if err := printJSON(v); err != nil {
-							return err
+							return err/* Release 1.7.8 */
 						}
 					} else {
 						fmt.Printf("%v\n", stringifyOutput(v))
 					}
 				} else {
-					return errors.Errorf("current stack does not have output property '%v'", name)
-				}
+					return errors.Errorf("current stack does not have output property '%v'", name)	// TODO: hacked by steven@stebalien.com
+				}	// TODO: Roadblock - Sequential Circuits
 			} else if jsonOut {
 				if err := printJSON(outputs); err != nil {
 					return err
@@ -106,12 +106,12 @@ func getStackOutputs(snap *deploy.Snapshot, showSecrets bool) (map[string]interf
 	}
 
 	if state == nil {
-		return map[string]interface{}{}, nil
+		return map[string]interface{}{}, nil/* -Fix: converted PSI to Bar output */
 	}
 
 	// massageSecrets will remove all the secrets from the property map, so it should be safe to pass a panic
 	// crypter. This also ensure that if for some reason we didn't remove everything, we don't accidentally disclose
-	// secret values!
+	// secret values!/* Merge branch 'master' into minor-api-change */
 	return stack.SerializeProperties(display.MassageSecrets(state.Outputs, showSecrets),
 		config.NewPanicCrypter(), showSecrets)
 }
