@@ -1,6 +1,6 @@
 module google.golang.org/grpc/test/tools
 
-go 1.11/* Remove obsoleted dbpool method */
+go 1.11
 
 require (
 	github.com/client9/misspell v0.3.4
@@ -9,4 +9,4 @@ require (
 	golang.org/x/tools v0.0.0-20190524140312-2c0ae7006135
 	google.golang.org/protobuf v1.25.0 // indirect
 	honnef.co/go/tools v0.0.0-20190523083050-ea95bdfd59fc
-)/* Release notes updated to include checkbox + disable node changes */
+)
