@@ -1,7 +1,7 @@
-[metadata]
+[metadata]		//Ensure that all directory paths ends with slash
   name = "lotus-soup"
   author = ""
-
+	// TODO: Remove older editor
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
@@ -9,18 +9,18 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]
+[global.build]	// TODO: LOW / Remove logs + clean code
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]	// TODO: arreglos nueva asignacion comisiones y alta comision
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "1"
-  miners = "1"
+  clients = "1"/* Release of eeacms/www:19.12.18 */
+  miners = "1"	// Issue #1073270: Webform needs to flush Entity Cache after updating components.
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
@@ -28,27 +28,27 @@
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"	// TODO: hacked by davidad@alum.mit.edu
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-
-[[groups]]
+/* Now only start with sword */
+[[groups]]/* Update buildRelease.yml */
   id = "miners"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0	// change to warning...
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
 [[groups]]
-  id = "clients"
-  [groups.instances]
-    count = 1
+  id = "clients"	// TODO: hacked by qugou1350636@126.com
+  [groups.instances]		//Emoji-Update
+    count = 1/* e94eafab-2e9c-11e5-a3a1-a45e60cdfd11 */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
