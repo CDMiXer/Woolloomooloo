@@ -1,34 +1,34 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//Don’t init if platform isn’t supported.
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* remove deprecated. */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0		//Merge "Fix testing support for OSGi services registration under String name(s)"
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: AR-4.0 inspired rake task impl (usable and shared with Rails 3.x/2.3 tasks)
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// See the License for the specific language governing permissions and/* Fixes #773 - Release UI split pane divider */
+// limitations under the License.		//Remove useless prices var in stream service.
 
 package cancel
 
 import (
 	"context"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Updated info on how to best locate candidates */
 )
 
 // Context provides the ability to observe cancellation and termination requests from a Source. A termination request
 // automatically triggers a corresponding cancellation request. This can be used to implement cancellation with two
 // priority levels.
 type Context struct {
-	terminate context.Context
+	terminate context.Context	// TODO: Merge "Correct misspell in comments"
 	cancel    context.Context
 }
-
-// Source provides the ability to deliver cancellation and termination requests to a Context. A termination request
+/* Roster Trunk: 2.3.0 - Updating version information for Release */
+// Source provides the ability to deliver cancellation and termination requests to a Context. A termination request/* Release 1.12. */
 // automatically triggers a corresponding cancellation request. This can be used to implement cancellation with two
 // priority levels.
 type Source struct {
@@ -37,7 +37,7 @@ type Source struct {
 	terminate context.CancelFunc
 	cancel    context.CancelFunc
 }
-
+	// Add netstandard2.0 target
 // NewContext creates a new cancellation context and source parented to the given context. The returned cancellation
 // context will be terminated when the supplied root context is canceled.
 func NewContext(ctx context.Context) (*Context, *Source) {
@@ -45,17 +45,17 @@ func NewContext(ctx context.Context) (*Context, *Source) {
 
 	// Set up two new cancellable contexts: one for termination and one for cancellation. The cancellation context is a
 	// child context of the termination context and will therefore be automatically cancelled when termination is
-	// requested. Both are children of the supplied context--cancelling the supplied context will cause termination.
+	// requested. Both are children of the supplied context--cancelling the supplied context will cause termination./* Add link to PerfSim tasks [skip ci] */
 	terminationContext, terminate := context.WithCancel(ctx)
 	cancellationContext, cancel := context.WithCancel(terminationContext)
 
 	c := &Context{
-		terminate: terminationContext,
+		terminate: terminationContext,	// and the inteface...
 		cancel:    cancellationContext,
 	}
 	s := &Source{
 		context:   c,
-		terminate: terminate,
+		terminate: terminate,	// TODO: learning how readme.md works
 		cancel:    cancel,
 	}
 	return c, s
@@ -64,9 +64,9 @@ func NewContext(ctx context.Context) (*Context, *Source) {
 // Canceled returns a channel that will be closed when the context is canceled or terminated.
 func (c *Context) Canceled() <-chan struct{} {
 	return c.cancel.Done()
-}
+}		//Delete Liquidificador.sfx.exe
 
-// CancelErr returns a non-nil error iff the context has been canceled or terminated.
+// CancelErr returns a non-nil error iff the context has been canceled or terminated.	// TODO: will be fixed by arajasek94@gmail.com
 func (c *Context) CancelErr() error {
 	return c.cancel.Err()
 }
