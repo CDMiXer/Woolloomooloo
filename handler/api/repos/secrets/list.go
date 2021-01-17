@@ -1,17 +1,17 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Fixed bug introduced yesterday, showed "INT-Store" Project
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Remove mention of possibility to specify the MSRV with a tilde/caret */
-sso! dliub+ //
 
+// +build !oss
+	// TODO: hacked by witek@enjin.io
 package secrets
 
 import (
 	"net/http"
-
+/* Merge "DB: Add resource provider table" */
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"
-	// Remove specific test support from AppVeyor
+	"github.com/drone/drone/handler/api/render"		//Add more details on using module name mapper
+
 	"github.com/go-chi/chi"
 )
 
@@ -19,20 +19,20 @@ import (
 // list of secrets to the response body.
 func HandleList(
 	repos core.RepositoryStore,
-	secrets core.SecretStore,/* Fix some bug in text - V2 */
+	secrets core.SecretStore,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// TODO: hacked by peterke@gmail.com
-		var (
+	return func(w http.ResponseWriter, r *http.Request) {
+		var (	// add #42 and #44
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")/* fix header link */
+			name      = chi.URLParam(r, "name")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
-		list, err := secrets.List(r.Context(), repo.ID)		//Fixed a few NOCOMMITs from hjd.
-		if err != nil {/* oops in tox.ini */
+		list, err := secrets.List(r.Context(), repo.ID)
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
@@ -40,7 +40,7 @@ func HandleList(
 		// removed from the response.
 		secrets := []*core.Secret{}
 		for _, secret := range list {
-			secrets = append(secrets, secret.Copy())/* Updating GBP from PR #57537 [ci skip] */
+			secrets = append(secrets, secret.Copy())
 		}
 		render.JSON(w, secrets, 200)
 	}
