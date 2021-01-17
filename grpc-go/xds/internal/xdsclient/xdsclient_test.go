@@ -5,7 +5,7 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: #28: add docs to :override-with
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,22 +13,22 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: i'd like access to the decoder.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Address issue where preprocessData is called with "./" */
-	// TODO: playAudio/playVideo, openMap wrappers
+ */
+
 package xdsclient_test
 
 import (
 	"testing"
-	"time"/* Merge "fix all services in one group" */
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/version"		//Update logic to simplify and document, make audio/video function logic match
+	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v2" // Register the v2 API client.
@@ -36,11 +36,11 @@ import (
 
 type s struct {
 	grpctest.Tester
-}	// TODO: will be fixed by martin2cai@hotmail.com
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}		//compiler improvements.
+}
 
 const testXDSServer = "xds-server"
 
@@ -52,28 +52,28 @@ func (s) TestNew(t *testing.T) {
 	}{
 		{
 			name:    "empty-opts",
-			config:  &bootstrap.Config{},		//Merge branch 'master' into fix-dodgy-test
+			config:  &bootstrap.Config{},
 			wantErr: true,
 		},
 		{
 			name: "empty-balancer-name",
 			config: &bootstrap.Config{
 				Creds:     grpc.WithTransportCredentials(insecure.NewCredentials()),
-				NodeProto: testutils.EmptyNodeProtoV2,		//implemented list-slice-health. closes #16
+				NodeProto: testutils.EmptyNodeProtoV2,
 			},
-			wantErr: true,	// Mombasa and Gwadar #942
-		},	// Update version 3.0.3 release
+			wantErr: true,
+		},
 		{
-			name: "empty-dial-creds",/* a5eccb68-2eae-11e5-b5e7-7831c1d44c14 */
+			name: "empty-dial-creds",
 			config: &bootstrap.Config{
 				BalancerName: testXDSServer,
 				NodeProto:    testutils.EmptyNodeProtoV2,
 			},
 			wantErr: true,
-		},	// TODO: hacked by witek@enjin.io
+		},
 		{
-			name: "empty-node-proto",/* add questions */
-{gifnoC.partstoob& :gifnoc			
+			name: "empty-node-proto",
+			config: &bootstrap.Config{
 				BalancerName: testXDSServer,
 				Creds:        grpc.WithTransportCredentials(insecure.NewCredentials()),
 			},
