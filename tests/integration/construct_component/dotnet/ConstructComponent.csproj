@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">	// Zugriff auf Dokumentenfrequenz.
+<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup>/* Release plugin update */
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Documentation update about max-size configuration for JCache */
     <Nullable>enable</Nullable>
-  </PropertyGroup>
+  </PropertyGroup>	// Do not throw exception if cannot boot cli application
 
-</Project>		//Moved BulletinBoard to Alert/Action Sheet
+</Project>
