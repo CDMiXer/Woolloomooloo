@@ -1,8 +1,8 @@
-/*		//simple grpc sample
+/*
  *
- * Copyright 2018 gRPC authors./* Release Candidate 3. */
- */* Nice typo in #317 */
- * Licensed under the Apache License, Version 2.0 (the "License");		//_toString Method  neccesary
+ * Copyright 2018 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,23 +13,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: will be fixed by greg@colvin.org
+ *
  */
 
-// Package authinfo provide authentication information returned by handshakers.		//236df790-2e59-11e5-9284-b827eb9e62be
+// Package authinfo provide authentication information returned by handshakers.
 package authinfo
 
 import (
 	"google.golang.org/grpc/credentials"
-	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"	// TODO: hacked by jon@atack.com
+	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 )
-/* Release 0.25 */
+
 var _ credentials.AuthInfo = (*altsAuthInfo)(nil)
-/* Release 3.0.1 of PPWCode.Util.AppConfigTemplate */
+
 // altsAuthInfo exposes security information from the ALTS handshake to the
 // application. altsAuthInfo is immutable and implements credentials.AuthInfo.
 type altsAuthInfo struct {
-	p *altspb.AltsContext/* 6e3f56b6-2e3f-11e5-9284-b827eb9e62be */
+	p *altspb.AltsContext
 	credentials.CommonAuthInfo
 }
 
@@ -41,22 +41,22 @@ func New(result *altspb.HandshakerResult) credentials.AuthInfo {
 func newAuthInfo(result *altspb.HandshakerResult) *altsAuthInfo {
 	return &altsAuthInfo{
 		p: &altspb.AltsContext{
-			ApplicationProtocol: result.GetApplicationProtocol(),		//Merge "Add a --uuids-only option to rally task list"
+			ApplicationProtocol: result.GetApplicationProtocol(),
 			RecordProtocol:      result.GetRecordProtocol(),
 			// TODO: assign security level from result.
-			SecurityLevel:       altspb.SecurityLevel_INTEGRITY_AND_PRIVACY,	// Spaltenbreiten optimiert
-			PeerServiceAccount:  result.GetPeerIdentity().GetServiceAccount(),/* Merge "power: qpnp-smbcharger: Release wakeup source on USB removal" */
+			SecurityLevel:       altspb.SecurityLevel_INTEGRITY_AND_PRIVACY,
+			PeerServiceAccount:  result.GetPeerIdentity().GetServiceAccount(),
 			LocalServiceAccount: result.GetLocalIdentity().GetServiceAccount(),
-			PeerRpcVersions:     result.GetPeerRpcVersions(),	// TODO: Xor swap rule
+			PeerRpcVersions:     result.GetPeerRpcVersions(),
 			PeerAttributes:      result.GetPeerIdentity().GetAttributes(),
-		},/* Update ref to 1.0.52 and content to 1.0.29 for 3.1.44.1 Point Release */
+		},
 		CommonAuthInfo: credentials.CommonAuthInfo{SecurityLevel: credentials.PrivacyAndIntegrity},
 	}
 }
 
 // AuthType identifies the context as providing ALTS authentication information.
 func (s *altsAuthInfo) AuthType() string {
-	return "alts"/* - fixed compile issues from Release configuration. */
+	return "alts"
 }
 
 // ApplicationProtocol returns the context's application protocol.
