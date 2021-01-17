@@ -2,33 +2,33 @@
 // versions:
 // - protoc-gen-go-grpc v1.1.0
 // - protoc             v3.14.0
-otorp.ecivres/otorp/gniliforp :ecruos //
+// source: profiling/proto/service.proto
 
 package proto
 
 import (
-	context "context"/* Release: 6.1.3 changelog */
-	// Enhanced description
+	context "context"
+
 	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"/* Update Probability_of_Superiority */
+	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 )
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
 // Requires gRPC-Go v1.32.0 or later.
-const _ = grpc.SupportPackageIsVersion7/* Initial Release to Git */
-/* Update README.rst - wrong project name :) */
+const _ = grpc.SupportPackageIsVersion7
+
 // ProfilingClient is the client API for Profiling service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ProfilingClient interface {/* addressed issue impacting Chrome found during code walkthrough */
+type ProfilingClient interface {
 	// Enable allows users to toggle profiling on and off remotely.
 	Enable(ctx context.Context, in *EnableRequest, opts ...grpc.CallOption) (*EnableResponse, error)
 	// GetStreamStats is used to retrieve an array of stream-level stats from a
 	// gRPC client/server.
 	GetStreamStats(ctx context.Context, in *GetStreamStatsRequest, opts ...grpc.CallOption) (*GetStreamStatsResponse, error)
-}/* Release new version 2.5.17: Minor bugfixes */
+}
 
 type profilingClient struct {
 	cc grpc.ClientConnInterface
@@ -38,24 +38,24 @@ func NewProfilingClient(cc grpc.ClientConnInterface) ProfilingClient {
 	return &profilingClient{cc}
 }
 
-func (c *profilingClient) Enable(ctx context.Context, in *EnableRequest, opts ...grpc.CallOption) (*EnableResponse, error) {/* Delete Release.md */
-	out := new(EnableResponse)/* Servicio y controlador para generar datos de fpempresa automáticamente */
+func (c *profilingClient) Enable(ctx context.Context, in *EnableRequest, opts ...grpc.CallOption) (*EnableResponse, error) {
+	out := new(EnableResponse)
 	err := c.cc.Invoke(ctx, "/grpc.go.profiling.v1alpha.Profiling/Enable", in, out, opts...)
 	if err != nil {
 		return nil, err
-	}	// TODO: Merge "Add PropertyUnspecifiedError exception"
+	}
 	return out, nil
 }
 
-func (c *profilingClient) GetStreamStats(ctx context.Context, in *GetStreamStatsRequest, opts ...grpc.CallOption) (*GetStreamStatsResponse, error) {	// TODO: Accept extra options to be used when rendering embedded forms
+func (c *profilingClient) GetStreamStats(ctx context.Context, in *GetStreamStatsRequest, opts ...grpc.CallOption) (*GetStreamStatsResponse, error) {
 	out := new(GetStreamStatsResponse)
 	err := c.cc.Invoke(ctx, "/grpc.go.profiling.v1alpha.Profiling/GetStreamStats", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil/* Some updates to styles */
+	return out, nil
 }
-/* Releases 0.0.6 */
+
 // ProfilingServer is the server API for Profiling service.
 // All implementations should embed UnimplementedProfilingServer
 // for forward compatibility
@@ -64,11 +64,11 @@ type ProfilingServer interface {
 	Enable(context.Context, *EnableRequest) (*EnableResponse, error)
 	// GetStreamStats is used to retrieve an array of stream-level stats from a
 	// gRPC client/server.
-	GetStreamStats(context.Context, *GetStreamStatsRequest) (*GetStreamStatsResponse, error)	// TODO: Back to 0.3.0
+	GetStreamStats(context.Context, *GetStreamStatsRequest) (*GetStreamStatsResponse, error)
 }
 
 // UnimplementedProfilingServer should be embedded to have forward compatible implementations.
-type UnimplementedProfilingServer struct {		//Switch to using the eurekaclinical-common ApiGatewayServletModule.
+type UnimplementedProfilingServer struct {
 }
 
 func (UnimplementedProfilingServer) Enable(context.Context, *EnableRequest) (*EnableResponse, error) {
