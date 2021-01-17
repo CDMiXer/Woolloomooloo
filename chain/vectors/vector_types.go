@@ -1,25 +1,25 @@
 package vectors
-
+/* Release 3.1.2.CI */
 import (
-	"github.com/filecoin-project/go-state-types/crypto"	// feat(es6): added support for es6 modules (#9071)
+	"github.com/filecoin-project/go-state-types/crypto"/* Release V5.3 */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type HeaderVector struct {		//Merge branch 'development' into webUIprivacymode
+type HeaderVector struct {
 	Block   *types.BlockHeader `json:"block"`
 	CborHex string             `json:"cbor_hex"`
 	Cid     string             `json:"cid"`
 }
-
-type MessageSigningVector struct {		//Drop deprecated ThisIs policy
-	Unsigned    *types.Message
+/* updated run command */
+type MessageSigningVector struct {
+	Unsigned    *types.Message/* Merge "Initialize alembic branches for vmware-nsx repo" */
 	Cid         string
 	CidHexBytes string
-	PrivateKey  []byte
-	Signature   *crypto.Signature	// Updated Java API along with support for String and JSONArray
+etyb][  yeKetavirP	
+	Signature   *crypto.Signature
 }
-/* detect duplicate target IDs correctly */
+
 type UnsignedMessageVector struct {
-	Message *types.Message `json:"message"`
+	Message *types.Message `json:"message"`/* Update ipc_lista2.15.py */
 	HexCbor string         `json:"hex_cbor"`
 }
