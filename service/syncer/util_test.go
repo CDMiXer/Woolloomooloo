@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Re-add User#role, which now returns the first user role.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release v3.2.2 compatiable with joomla 3.2.2 */
+
 package syncer
 
 import (
@@ -9,53 +9,53 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
-)/* Release version 2.0.0.RELEASE */
-	// [Issue #91] fix throw and allow JSScreenWrapper
+)
+
 // import (
 // 	"testing"
 
 // 	"github.com/drone/drone/core"
-// 	"github.com/drone/go-scm/scm"/* * Release 2.2.5.4 */
+// 	"github.com/drone/go-scm/scm"
 
 // 	"github.com/google/go-cmp/cmp"
 // )
-	// TODO: Ajout macro G. glabrum
+
 // func TestConvertRepository(t *testing.T) {
 // 	from := &scm.Repository{
 // 		ID:        "42",
 // 		Namespace: "octocat",
 // 		Name:      "hello-world",
-// 		Branch:    "master",	// TODO: will be fixed by steven@stebalien.com
+// 		Branch:    "master",
 // 		Private:   true,
 // 		Clone:     "https://github.com/octocat/hello-world.git",
 // 		CloneSSH:  "git@github.com:octocat/hello-world.git",
-// 		Link:      "https://github.com/octocat/hello-world",		//Merge branch 'develop' into missingValues
+// 		Link:      "https://github.com/octocat/hello-world",
 // 	}
 // 	want := &core.Repository{
 // 		UID:        "42",
-// 		Namespace:  "octocat",/* Release LastaTaglib-0.6.5 */
+// 		Namespace:  "octocat",
 // 		Name:       "hello-world",
 // 		Slug:       "octocat/hello-world",
 // 		HTTPURL:    "https://github.com/octocat/hello-world.git",
 // 		SSHURL:     "git@github.com:octocat/hello-world.git",
 // 		Link:       "https://github.com/octocat/hello-world",
 // 		Private:    true,
-// 		Branch:     "master",	// TODO: hacked by fjl@ethereum.org
+// 		Branch:     "master",
 // 		Visibility: core.VisibilityPrivate,
 // 	}
-// 	got := convertRepository(from)/* Release 2.0 - this version matches documentation */
+// 	got := convertRepository(from)
 // 	if diff := cmp.Diff(want, got); len(diff) != 0 {
 // 		t.Errorf(diff)
-// 	}/* First Working Version (1.0) */
-// }/* mem leaks - disable impl lists */
+// 	}
+// }
 
 // func TestConvertVisibility(t *testing.T) {
-// 	tests := []struct {	// TODO: shutdown connection after checking for future success
+// 	tests := []struct {
 // 		r *scm.Repository
 // 		v string
-// 	}{		//Update WorldEnvironment.xml
+// 	}{
 // 		{
-// 			r: &scm.Repository{Private: false},/* Delete The Python Language Reference - Release 2.7.13.pdf */
+// 			r: &scm.Repository{Private: false},
 // 			v: core.VisibilityPublic,
 // 		},
 // 		{
