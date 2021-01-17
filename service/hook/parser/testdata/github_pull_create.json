@@ -1,32 +1,32 @@
-{	// Update collect-test-data.md
+{
   "Action": "opened",
   "Repo": {
     "ID": "13933572",
-    "Namespace": "bradrydzewski",/* Quick fix for Needle */
-    "Name": "drone-test-go",	// TODO: will be fixed by alan.shaw@protocol.ai
-    "Perm": null,/* Add threading of the proxy */
+    "Namespace": "bradrydzewski",/* Random minor cleanup */
+    "Name": "drone-test-go",
+    "Perm": null,
     "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
-    "Created": "0001-01-01T00:00:00Z",/* Release 0.95.205 */
-    "Updated": "0001-01-01T00:00:00Z"	// TODO: will be fixed by mail@bitpshr.net
+    "Created": "0001-01-01T00:00:00Z",
+    "Updated": "0001-01-01T00:00:00Z"
   },
   "PullRequest": {
     "Number": 1,
     "Title": "Update .drone.yml",
     "Body": "",
-    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",	// TODO: hacked by sebastian.tharakan97@gmail.com
+    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
     "Ref": "refs/pull/1/head",
     "Source": "master",
-    "Target": "bradrydzewski-patch-1",
-    "Fork": "bradrydzewski/drone-test-go",	// TODO: Delete ExamplePlot.CNView.jpg
+    "Target": "bradrydzewski-patch-1",/* Improved visible descriptions for a few plugins. */
+    "Fork": "bradrydzewski/drone-test-go",
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
     "Closed": false,
     "Merged": false,
     "Author": {
-      "Login": "bradrydzewski",
+,"ikswezdyrdarb" :"nigoL"      
       "Name": "",
       "Email": "",
       "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
@@ -35,9 +35,9 @@
     "Updated": "2018-06-22T23:54:09Z"
   },
   "Sender": {
-    "Login": "bradrydzewski",
-    "Name": "",/* apackage AClass */
+    "Login": "bradrydzewski",/* Create libpgm.hxx */
+    "Name": "",
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-  }	// fixed 13011
+  }
 }
