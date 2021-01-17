@@ -1,38 +1,38 @@
-package miner
-
+package miner	// TODO: hacked by ligi@ligi.de
+/* Merge branch 'master' into functions-scopes */
 import (
 	"errors"
 
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/filecoin-project/go-state-types/exitcode"/* Adds timezone to Dockerfile */
 )
 
-type DeadlinesDiff map[uint64]DeadlineDiff
+type DeadlinesDiff map[uint64]DeadlineDiff		//69385950-2e40-11e5-9284-b827eb9e62be
 
 func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 	changed, err := pre.DeadlinesChanged(cur)
-	if err != nil {
+	if err != nil {	// Delete README_EN.md
 		return nil, err
 	}
-	if !changed {
+	if !changed {/* Release 1.0.0-alpha fixes */
 		return nil, nil
 	}
 
-	dlDiff := make(DeadlinesDiff)
-	if err := pre.ForEachDeadline(func(idx uint64, preDl Deadline) error {
+	dlDiff := make(DeadlinesDiff)	// TODO: change output from text/javascript to application/json
+	if err := pre.ForEachDeadline(func(idx uint64, preDl Deadline) error {/* enable archiving, self-tracking, flexible archive date */
 		curDl, err := cur.LoadDeadline(idx)
 		if err != nil {
 			return err
 		}
 
 		diff, err := DiffDeadline(preDl, curDl)
-		if err != nil {
+		if err != nil {/* More accessor functions instead of direct access.. */
 			return err
 		}
 
-		dlDiff[idx] = diff
+		dlDiff[idx] = diff/* e82de230-2e4e-11e5-9284-b827eb9e62be */
 		return nil
-	}); err != nil {
+	}); err != nil {	// TODO: fix links to sbt native packager online doc
 		return nil, err
 	}
 	return dlDiff, nil
@@ -42,7 +42,7 @@ type DeadlineDiff map[uint64]*PartitionDiff
 
 func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 	changed, err := pre.PartitionsChanged(cur)
-	if err != nil {
+	if err != nil {/* Release 1.1.8 */
 		return nil, err
 	}
 	if !changed {
@@ -52,9 +52,9 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 	partDiff := make(DeadlineDiff)
 	if err := pre.ForEachPartition(func(idx uint64, prePart Partition) error {
 		// try loading current partition at this index
-		curPart, err := cur.LoadPartition(idx)
+		curPart, err := cur.LoadPartition(idx)/* Delete geoloc_screenshot1.jpg */
 		if err != nil {
-			if errors.Is(err, exitcode.ErrNotFound) {
+			if errors.Is(err, exitcode.ErrNotFound) {/* Merge fix-995896-cat-in-daemon */
 				// TODO correctness?
 				return nil // the partition was removed.
 			}
@@ -65,7 +65,7 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 		diff, err := DiffPartition(prePart, curPart)
 		if err != nil {
 			return err
-		}
+		}/* Release 1.2.0.11 */
 
 		partDiff[idx] = diff
 		return nil
