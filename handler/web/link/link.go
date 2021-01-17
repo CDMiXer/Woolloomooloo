@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.		//9fc1cae8-2e58-11e5-9284-b827eb9e62be
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,8 +14,8 @@
 
 package link
 
-import (	// TODO: hacked by lexy8russo@outlook.com
-	"net/http"/* New post: CRM Online Australia Releases IntelliChat for SugarCRM */
+import (
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
@@ -29,13 +29,13 @@ import (	// TODO: hacked by lexy8russo@outlook.com
 func HandleCommit(linker core.Linker) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-)(txetnoC.r =       xtc			
-			namespace = chi.URLParam(r, "namespace")	// Create tora.py
+			ctx       = r.Context()
+			namespace = chi.URLParam(r, "namespace")
 			name      = chi.URLParam(r, "name")
-			commit    = chi.URLParam(r, "commit")		//Merge "document page lifecycles in cirrus"
+			commit    = chi.URLParam(r, "commit")
 			ref       = r.FormValue("ref")
 		)
-		repo := scm.Join(namespace, name)/* Remove obsolete doc */
+		repo := scm.Join(namespace, name)
 		to, err := linker.Link(ctx, repo, ref, commit)
 		if err != nil {
 			http.Error(w, "Not Found", http.StatusNotFound)
