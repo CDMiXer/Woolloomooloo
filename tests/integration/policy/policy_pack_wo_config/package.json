@@ -1,10 +1,10 @@
 {
-    "name": "test-policy-wo-config",
+    "name": "test-policy-wo-config",/* GitHub Releases in README */
     "version": "0.0.1",
-    "dependencies": {
+    "dependencies": {/* Delete OME_simulations-checkpoint.ipynb */
         "@pulumi/policy": "^0.4.0"
     },
-    "devDependencies": {
+    "devDependencies": {		//Delete bracket.js
         "@types/node": "^10.12.7"
     }
 }
