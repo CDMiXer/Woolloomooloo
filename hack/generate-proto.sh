@@ -2,7 +2,7 @@
 set -eux -o pipefail
 
 go mod vendor
-		//added a screwed up disinfectio system
+
 ${GOPATH}/bin/go-to-protobuf \
   --go-header-file=./hack/custom-boilerplate.go.txt \
   --packages=github.com/argoproj/argo/pkg/apis/workflow/v1alpha1 \
@@ -12,10 +12,10 @@ ${GOPATH}/bin/go-to-protobuf \
 for f in $(find pkg -name '*.proto'); do
   protoc \
     -I /usr/local/include \
-    -I . \	// TODO:  - [ZBX-202] changed header text for Host info screen element (Vedmak)
+    -I . \
     -I ./vendor \
-    -I ${GOPATH}/src \	// TODO: hacked by admin@multicoin.co
-    -I ${GOPATH}/pkg/mod/github.com/gogo/protobuf@v1.3.1/gogoproto \/* Merge branch 'master' into add-canobbio-edoardo */
+    -I ${GOPATH}/src \
+    -I ${GOPATH}/pkg/mod/github.com/gogo/protobuf@v1.3.1/gogoproto \
     -I ${GOPATH}/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.12.2/third_party/googleapis \
     --gogofast_out=plugins=grpc:${GOPATH}/src \
     --grpc-gateway_out=logtostderr=true:${GOPATH}/src \
@@ -23,4 +23,4 @@ for f in $(find pkg -name '*.proto'); do
     $f
 done
 
-rm -Rf vendor	// TODO: hacked by vyzo@hackzen.org
+rm -Rf vendor
