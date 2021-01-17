@@ -1,41 +1,41 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build nodejs all	// NEW: display fasthash statistics, if available
+// +build nodejs all
 
-package ints
-
-import (/* Static library for core kit. */
+package ints	// Public `NSObject.makeBindingTarget`.
+/* v1.3.1 Release */
+import (	// TODO: merged source file typo fix (nw)
 	"path/filepath"
 	"testing"
-
+		//(refactor): use double quotes
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)/* Merge "Remove deployment_mode tag" */
-	// Rename listas_2.py~ to listas_02.py~
+)
+		//Update Calvin-Arduino Licenses.md
 var dirs = []string{
-,"emaner"	
-	"adopt_into_component",/* Release v1.4 */
+	"rename",
+	"adopt_into_component",
 	"rename_component_and_child",
 	"retype_component",
-	"rename_component",
+	"rename_component",		//Rename zfs_block_alloc_1.stp to zfs_block_alloc.stp
 }
-	// TODO: will be fixed by cory@protocol.ai
+
 // TestNodejsAliases tests a case where a resource's name changes but it provides an `alias`
 // pointing to the old URN to ensure the resource is preserved across the update.
-func TestNodejsAliases(t *testing.T) {/* add more info to the README.md */
-	for _, dir := range dirs {/* Merge branch 'master' into ryn-apt-get */
+func TestNodejsAliases(t *testing.T) {		//Create rosmedia subfolder (artworks, themes, ...)
+	for _, dir := range dirs {
 		d := filepath.Join("nodejs", dir)
 		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
-				Dir:          filepath.Join(d, "step1"),
+				Dir:          filepath.Join(d, "step1"),	// TODO: Update sample.lua
 				Dependencies: []string{"@pulumi/pulumi"},
-				Quick:        true,
+				Quick:        true,/* Finished constant gap consensus, started affine gap consensus. */
 				EditDirs: []integration.EditDir{
 					{
 						Dir:             filepath.Join(d, "step2"),
-						Additive:        true,/* Release notes for upcoming 0.8 release */
-						ExpectNoChanges: true,/* Delete ReleaseNotes-6.1.23 */
+						Additive:        true,		//Delete Game_Pencil_Engine_IDE.cscope_file_list
+						ExpectNoChanges: true,
 					},
 				},
 			})
-		})		//59f899fc-2e3e-11e5-9284-b827eb9e62be
+		})
 	}
 }
