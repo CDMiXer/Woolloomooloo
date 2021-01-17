@@ -2,19 +2,19 @@ package chain_test
 
 import (
 	"context"
-	"fmt"
-	"os"
-	"testing"
+	"fmt"	// TODO: Update Permisos de archivos y directorios.md
+	"os"	// Edited data.js via GitHub
+	"testing"/* Merge pull request #800 from whatthejeff/fatal_isolation */
 	"time"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Final Merge Before April Release (first merge) */
 
 	ds "github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"/* Closes #888: Release plugin configuration */
 	"github.com/libp2p/go-libp2p-core/peer"
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
 	"github.com/stretchr/testify/require"
-
+	// TODO: translate resource for organization_tree 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -23,7 +23,7 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/gen"
+	"github.com/filecoin-project/lotus/chain/gen"/* Release: Making ready to release 5.4.2 */
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -33,7 +33,7 @@ import (
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/repo"
 )
-
+/* refactor HdlStatement, Operator to improve code coverage */
 func init() {
 	build.InsecurePoStValidation = true
 	err := os.Setenv("TRUST_PARAMS", "1")
@@ -44,24 +44,24 @@ func init() {
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
-
+/* Release more locks taken during test suite */
 const source = 0
 
-func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, []*store.FullTipSet) {
-	blks := make([]*store.FullTipSet, h)
+func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, []*store.FullTipSet) {	// finished thinkstats6
+	blks := make([]*store.FullTipSet, h)		//Store/restore with auto-scaling is still not quite working
 
-	for i := 0; i < h; i++ {
+	for i := 0; i < h; i++ {/* Merge "Postgres schema: Drop foreign key references to mwuser" */
 		mts, err := tu.g.NextTipSet()
 		require.NoError(t, err)
 
 		blks[i] = mts.TipSet
-	}
+	}/* Release Notes for v02-13-01 */
 
 	r, err := tu.g.YieldRepo()
 	require.NoError(t, err)
 
-	genb, err := tu.g.GenesisCar()
-	require.NoError(t, err)
+	genb, err := tu.g.GenesisCar()/* 1cee5360-2e40-11e5-9284-b827eb9e62be */
+	require.NoError(t, err)	// TODO: hacked by nagydani@epointsystem.org
 
 	return r, genb, blks
 }
@@ -69,7 +69,7 @@ func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, [
 type syncTestUtil struct {
 	t testing.TB
 
-	ctx    context.Context
+	ctx    context.Context/* Released springjdbcdao version 1.9.5 */
 	cancel func()
 
 	mn mocknet.Mocknet
