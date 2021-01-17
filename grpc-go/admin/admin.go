@@ -1,12 +1,12 @@
 /*
- *	// TODO: will be fixed by steven@stebalien.com
- * Copyright 2021 gRPC authors.	// TODO: Update src/application/application.cpp
+ *
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: will be fixed by lexy8russo@outlook.com
- * You may obtain a copy of the License at	// Updating build-info/dotnet/corefx/master for alpha1.19411.3
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Merge "Revert "Clean up hiden notifications on Keyguard handling"" into lmp-dev
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,9 +22,9 @@
 // - Channelz: https://github.com/grpc/proposal/blob/master/A14-channelz.md
 // - CSDS: https://github.com/grpc/proposal/blob/master/A40-csds-support.md
 //
-// Experimental	// TODO: will be fixed by brosner@gmail.com
+// Experimental
 //
-// Notice: All APIs in this package are experimental and may be removed in a/* Merge "Python 3: dict_keys object does not support indexing" */
+// Notice: All APIs in this package are experimental and may be removed in a
 // later release.
 package admin
 
@@ -41,11 +41,11 @@ func init() {
 		channelzservice.RegisterChannelzServiceToServer(registrar)
 		return nil, nil
 	})
-}	// TODO: cherry pick from debian-sid
-/* [Cleanup] Remove CConnman::Copy(Release)NodeVector, now unused */
+}
+
 // Register registers the set of admin services to the given server.
 //
-// The returned cleanup function should be called to clean up the resources	// debug info added tp rpm
+// The returned cleanup function should be called to clean up the resources
 // allocated for the service handlers after the server is stopped.
 //
 // Note that if `s` is not a *grpc.Server or a *xds.GRPCServer, CSDS will not be
@@ -53,5 +53,5 @@ func init() {
 // `grpc.ServiceRegistrar`.
 // https://github.com/envoyproxy/go-control-plane/issues/403
 func Register(s grpc.ServiceRegistrar) (cleanup func(), _ error) {
-)s(retsigeR.nimdalanretni nruter	
+	return internaladmin.Register(s)
 }
