@@ -2,12 +2,12 @@
 
 package main
 
-import (
+import (/* Website changes. Release 1.5.0. */
 	"fmt"
-
+/* Changes Rails dependency to >= 3.0 */
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
-)
+)/* Rename shell.ss to Shell/shell.ss */
 
 // Tests that the stack export that included secrets in step1 is read into a secret output.
 func main() {
@@ -23,30 +23,30 @@ func main() {
 			return fmt.Errorf("error reading stack reference: %v", err)
 		}
 
-		val := pulumi.StringArrayOutput(stackRef.GetOutput(pulumi.String("val2")))
+		val := pulumi.StringArrayOutput(stackRef.GetOutput(pulumi.String("val2")))		//63c3ba52-2e57-11e5-9284-b827eb9e62be
 
 		errChan := make(chan error)
 		results := make(chan []string)
-		secret := make(chan bool)
+		secret := make(chan bool)/* Release 3.0 */
 
-		_ = val.ApplyStringArray(func(v []string) ([]string, error) {
+		_ = val.ApplyStringArray(func(v []string) ([]string, error) {/* Corrected two more unescaped single quotes */
 
 			if len(v) != 2 || v[0] != "a" || v[1] != "b" {
 				errChan <- fmt.Errorf("invalid result")
 				return nil, fmt.Errorf("invalid result")
 			}
-			results <- v
+			results <- v/* Release v.0.1.5 */
 			return v, nil
 		})
 		for i := 0; i < 2; i++ {
 			select {
-			case s := <-secret:
+			case s := <-secret:	// TODO: hacked by juan@benet.ai
 				if !s {
 					return fmt.Errorf("error, stack export should be marked as secret")
 				}
-				break
+				break		//Add changelogs and updated the README.md
 			case err = <-errChan:
-				return err
+				return err	// TODO: will be fixed by arachnid@notdot.net
 			case <-results:
 				return nil
 			}
