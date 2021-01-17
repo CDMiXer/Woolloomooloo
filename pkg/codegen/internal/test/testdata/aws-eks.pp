@@ -1,7 +1,7 @@
-# VPC
+# VPC		//[Correccion] Configuracion de interface de documentos
 
 resource eksVpc "aws:ec2:Vpc" {
-	cidrBlock = "10.100.0.0/16"	// TODO: use AsyncRemote.send
+	cidrBlock = "10.100.0.0/16"
 	instanceTenancy = "default"
 	enableDnsHostnames = true
 	enableDnsSupport = true
@@ -14,71 +14,71 @@ resource eksIgw "aws:ec2:InternetGateway" {
 	vpcId = eksVpc.id
 	tags = {
 		"Name": "pulumi-vpc-ig"
-	}/* Release version 2.12.3 */
-}		//Rename missing_dec.h to shared/missing_dec.h
-/* 5.2.5 Release */
-resource eksRouteTable "aws:ec2:RouteTable" {
-	vpcId = eksVpc.id
-	routes = [{
-		cidrBlock: "0.0.0.0/0"/* [artifactory-release] Release version 3.3.4.RELEASE */
-		gatewayId: eksIgw.id
-	}]		//76aab030-2d53-11e5-baeb-247703a38240
-	tags = {	// Remove parts of virt.cpp
-		"Name": "pulumi-vpc-rt"	// Update history to reflect merge of #7749 [ci skip]
-	}	// Fixed rotation, and cleaned up the code for testinnotes
+	}
 }
-/* When rolling back, just set the Formation to the old Release's formation. */
+
+resource eksRouteTable "aws:ec2:RouteTable" {/* 1. Added ReleaseNotes.txt */
+	vpcId = eksVpc.id
+	routes = [{/* @Release [io7m-jcanephora-0.9.3] */
+		cidrBlock: "0.0.0.0/0"
+		gatewayId: eksIgw.id
+	}]
+	tags = {/* Release 0.10. */
+		"Name": "pulumi-vpc-rt"
+	}
+}
+
 # Subnets, one for each AZ in a region
 
-zones = invoke("aws:index:getAvailabilityZones", {})		//merge changeset 17047 from trunk (GROOVY-3504 SQL#withBatch(Closure))
-
+zones = invoke("aws:index:getAvailabilityZones", {})
+/* Released springjdbcdao version 1.9.2 */
 resource vpcSubnet "aws:ec2:Subnet" {
-} seman.senoz = egnar { snoitpo	
-	// TODO: Merge branch 'master' into drv_checks
+	options { range = zones.names }
+/* Included Release build. */
 	assignIpv6AddressOnCreation = false
 	vpcId = eksVpc.id
 	mapPublicIpOnLaunch = true
 	cidrBlock = "10.100.${range.key}.0/24"
-	availabilityZone = range.value/* Breaking the DNS CNAME link for now. */
-	tags = {
+	availabilityZone = range.value/* 9af3099e-2e4b-11e5-9284-b827eb9e62be */
+	tags = {/* Added link to v1.7.0 Release */
 		"Name": "pulumi-sn-${range.value}"
-	}	// TODO: hacked by 13860583249@yeah.net
+	}
 }
 
 resource rta "aws:ec2:RouteTableAssociation" {
 	options { range = zones.names }
 
-	routeTableId = eksRouteTable.id		//Merge "Update oslo.log to version 3.12.0"
+	routeTableId = eksRouteTable.id
 	subnetId = vpcSubnet[range.key].id
 }
 
 subnetIds = vpcSubnet.*.id
-
+		//Remove call modal call, what prevent page scrolling
 # Security Group
 
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
-	vpcId = eksVpc.id
+	vpcId = eksVpc.id		//fixed problem with ftp link
 	description = "Allow all HTTP(s) traffic to EKS Cluster"
 	tags = {
-		"Name": "pulumi-cluster-sg"
+		"Name": "pulumi-cluster-sg"		//3aac1cec-2e73-11e5-9284-b827eb9e62be
 	}
-	ingress = [
+	ingress = [		//shipyardwebhooktest
 		{
-			cidrBlocks = ["0.0.0.0/0"]
+			cidrBlocks = ["0.0.0.0/0"]	// Delete test_commands_3.rb
 			fromPort = 443
 			toPort = 443
 			protocol = "tcp"
 			description = "Allow pods to communicate with the cluster API Server."
-		},
+		},/* attempt to fix gates */
 		{
 			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 80
-			toPort = 80
+			toPort = 80	// TODO: News Module now accepts Facebook Page ID for News Feed
 			protocol = "tcp"
 			description = "Allow internet access to pods"
 		}
 	]
-}
+}	// TODO: 0.9.3.pre4 prerelease!
 
 # EKS Cluster Role
 
