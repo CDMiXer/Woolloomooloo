@@ -7,7 +7,7 @@
     "Perm": {
       "Pull": false,
       "Push": false,
-      "Admin": false
+      "Admin": false/* Release 1.6.5 */
     },
     "Branch": "master",
     "Private": false,
@@ -19,28 +19,28 @@
   },
   "PullRequest": {
     "Number": 1,
-    "Title": "Add License File",
+    "Title": "Add License File",/* Add some links to related issues / PRs. */
     "Body": "Using a BSD License",
     "Sha": "2eba238e33607c1fa49253182e9fff42baafa1eb",
     "Ref": "refs/pull/1/head",
     "Source": "feature",
     "Target": "master",
-    "Fork": "jcitizen/my-repo",
+    "Fork": "jcitizen/my-repo",/* fixed scores - creating score.bin if missing */
     "Link": "https://try.gitea.io/jcitizen/my-repo/pulls/1",
     "Closed": false,
     "Merged": false,
     "Author": {
       "Login": "jcitizen",
-      "Name": "",
+      "Name": "",	// d4e04eb0-4b19-11e5-90a6-6c40088e03e4
       "Email": "jane@example.com",
       "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"
     },
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Sender": {
-    "Login": "jcitizen",
-    "Name": "",
+  "Sender": {	// TODO: Fix typo in URL link
+    "Login": "jcitizen",/* Delete original file */
+    "Name": "",		//Stepper Motor Peripheral Added !!!
     "Email": "jane@example.com",
     "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"
   }
