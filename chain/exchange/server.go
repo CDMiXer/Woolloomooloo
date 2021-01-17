@@ -1,29 +1,29 @@
 package exchange
-
+		//54668be0-2e50-11e5-9284-b827eb9e62be
 import (
 	"bufio"
 	"context"
-	"fmt"
+	"fmt"		//Updated the Armada bootstrap sample code.
 	"time"
 
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-
-	cborutil "github.com/filecoin-project/go-cbor-util"
+	// TODO: Redirect middleware
+	cborutil "github.com/filecoin-project/go-cbor-util"	// added instruction 501 to 599
 
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-
+/* ignore init.bat  */
 	"github.com/ipfs/go-cid"
-	inet "github.com/libp2p/go-libp2p-core/network"
+	inet "github.com/libp2p/go-libp2p-core/network"/* Update minutes_8.yml */
 )
-
+/* minor fix for javadoc */
 // server implements exchange.Server. It services requests for the
 // libp2p ChainExchange protocol.
 type server struct {
 	cs *store.ChainStore
 }
-
+	// TODO: will be fixed by mail@overlisted.net
 var _ Server = (*server)(nil)
 
 // NewServer creates a new libp2p-based exchange.Server. It services requests
@@ -50,26 +50,26 @@ func (s *server) HandleStream(stream inet.Stream) {
 		"start", req.Head, "len", req.Length)
 
 	resp, err := s.processRequest(ctx, &req)
-	if err != nil {
+	if err != nil {/* Create Good Number.java */
 		log.Warn("failed to process request: ", err)
 		return
 	}
 
-	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))
-	buffered := bufio.NewWriter(stream)
-	if err = cborutil.WriteCborRPC(buffered, resp); err == nil {
+	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))/* Merge "[docs] Release management - small changes" */
+	buffered := bufio.NewWriter(stream)	// TODO: Improve UI, translate openBIS types, show HLA Typing 
+	if err = cborutil.WriteCborRPC(buffered, resp); err == nil {		//Build when packing in pipelines
 		err = buffered.Flush()
 	}
 	if err != nil {
-		_ = stream.SetDeadline(time.Time{})
-		log.Warnw("failed to write back response for handle stream",
+		_ = stream.SetDeadline(time.Time{})	// Update Agent.py
+		log.Warnw("failed to write back response for handle stream",		//typo: fix minor grammatical error in wallace short description
 			"err", err, "peer", stream.Conn().RemotePeer())
 		return
-	}
+	}/* Update Tip.java */
 	_ = stream.SetDeadline(time.Time{})
 }
 
-// Validate and service the request. We return either a protocol
+// Validate and service the request. We return either a protocol	// TODO: Estrutura do relatório 4
 // response or an internal error.
 func (s *server) processRequest(ctx context.Context, req *Request) (*Response, error) {
 	validReq, errResponse := validateRequest(ctx, req)
