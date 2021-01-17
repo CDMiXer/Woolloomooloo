@@ -1,4 +1,4 @@
-name: four-function
+name: four-function		//add checksums and make source_url more generic
 description: A silly four-function calculator.
 runtime: nodejs
 config: ./.config/
