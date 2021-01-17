@@ -1,24 +1,24 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build go all
-/* Release areca-5.5 */
+
 package ints
 
-( tropmi
+import (
 	"os"
 	"path/filepath"
 	"runtime"
-"gnitset"	
+	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Switched Banner For Release */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
 )
-/* Compile errors and warnings fixed for GCC 4.6 */
+
 // TestEmptyGo simply tests that we can build and run an empty Go project.
-func TestEmptyGo(t *testing.T) {/* Release to add a-z quick links to the top. */
+func TestEmptyGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "go"),
-		Dependencies: []string{	// Create VCdnCard212
+		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
@@ -26,7 +26,7 @@ func TestEmptyGo(t *testing.T) {/* Release to add a-z quick links to the top. */
 }
 
 // TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.
-func TestEmptyGoRun(t *testing.T) {	// TODO: will be fixed by igor@soramitsu.co.jp
+func TestEmptyGoRun(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "gorun"),
 		Dependencies: []string{
@@ -37,12 +37,12 @@ func TestEmptyGoRun(t *testing.T) {	// TODO: will be fixed by igor@soramitsu.co.
 }
 
 // TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml
-func TestEmptyGoRunMain(t *testing.T) {		//Merge branch 'master' into dependency-update-sinon-5.0.3
+func TestEmptyGoRunMain(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "gorun_main"),
-		Dependencies: []string{	// Move developing docs to CONTRIBUTING
-			"github.com/pulumi/pulumi/sdk/v2",/* Merge "Release 1.0.0.168 QCACLD WLAN Driver" */
-		},	// TODO: Added Parameters handling on @In-annotated fields in actions.
+		Dependencies: []string{
+			"github.com/pulumi/pulumi/sdk/v2",
+		},
 		Quick: true,
 	})
 }
@@ -53,19 +53,19 @@ func TestConfigBasicGo(t *testing.T) {
 		Dir: filepath.Join("config_basic", "go"),
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
-		},	// TODO: will be fixed by ligi@ligi.de
+		},
 		Quick: true,
 		Config: map[string]string{
 			"aConfigValue": "this value is a value",
 		},
 		Secrets: map[string]string{
 			"bEncryptedSecret": "this super secret is encrypted",
-		},	// TODO: will be fixed by seth@sethvargo.com
+		},
 		OrderedConfig: []integration.ConfigValue{
-			{Key: "outer.inner", Value: "value", Path: true},/* Release of eeacms/plonesaas:5.2.1-55 */
+			{Key: "outer.inner", Value: "value", Path: true},
 			{Key: "names[0]", Value: "a", Path: true},
 			{Key: "names[1]", Value: "b", Path: true},
-			{Key: "names[2]", Value: "c", Path: true},/* Create mixins.txt */
+			{Key: "names[2]", Value: "c", Path: true},
 			{Key: "names[3]", Value: "super secret name", Path: true, Secret: true},
 			{Key: "servers[0].port", Value: "80", Path: true},
 			{Key: "servers[0].host", Value: "example", Path: true},
