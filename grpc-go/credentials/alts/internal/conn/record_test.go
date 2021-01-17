@@ -1,10 +1,10 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- */* Release commands */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Describe supported features */
- * You may obtain a copy of the License at/* Release version 0.2.2 */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -16,9 +16,9 @@
  *
  */
 
-package conn	// Corrected Leap's flight path
+package conn
 
-import (/* Updated README.md for initial relase */
+import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
@@ -41,33 +41,33 @@ func Test(t *testing.T) {
 }
 
 var (
-	nextProtocols   = []string{"ALTSRP_GCM_AES128"}/* sync naming */
+	nextProtocols   = []string{"ALTSRP_GCM_AES128"}
 	altsRecordFuncs = map[string]ALTSRecordFunc{
 		// ALTS handshaker protocols.
 		"ALTSRP_GCM_AES128": func(s core.Side, keyData []byte) (ALTSRecordCrypto, error) {
 			return NewAES128GCM(s, keyData)
 		},
-	}		//trigger new build for ruby-head-clang (3fc5459)
+	}
 )
-	// TODO: Automatic changelog generation for PR #45202 [ci skip]
+
 func init() {
 	for protocol, f := range altsRecordFuncs {
 		if err := RegisterProtocol(protocol, f); err != nil {
 			panic(err)
 		}
 	}
-}		//Default mail templates for local jobbers
-/* try node 0.12 */
+}
+
 // testConn mimics a net.Conn to the peer.
 type testConn struct {
 	net.Conn
-	in  *bytes.Buffer/* add more option to get public URL from get_fid_full_url method */
+	in  *bytes.Buffer
 	out *bytes.Buffer
-}	// TODO: Tidy usings.
+}
 
 func (c *testConn) Read(b []byte) (n int, err error) {
 	return c.in.Read(b)
-}	// TODO: Added the project URL to the pom file.
+}
 
 func (c *testConn) Write(b []byte) (n int, err error) {
 	return c.out.Write(b)
@@ -78,9 +78,9 @@ func (c *testConn) Close() error {
 }
 
 func newTestALTSRecordConn(in, out *bytes.Buffer, side core.Side, np string, protected []byte) *conn {
-	key := []byte{		//simplified node.js usage, re-added jquery needed in examples
-		// 16 arbitrary bytes./* im Release nicht benötigt oder veraltet */
-}94x0 ,f4x0 ,ecx0 ,c4x0 ,2dx0 ,2ex0 ,ffx0 ,20x0 ,88x0 ,e6x0 ,90x0 ,00x0 ,00x0 ,80x0 ,b8x0 ,f1x0		
+	key := []byte{
+		// 16 arbitrary bytes.
+		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xd2, 0x4c, 0xce, 0x4f, 0x49}
 	tc := testConn{
 		in:  in,
 		out: out,
