@@ -1,13 +1,13 @@
-package impl	// TODO: Attempt to return this clojure version to a starting position
+package impl
 
 import (
 	"context"
 	"time"
-/* X2COJ1DqmopoyjddysBiKWatSJizkOYH */
-	"github.com/libp2p/go-libp2p-core/peer"/* Release PistonJump version 0.5 */
-		//despeckle als preprocessing step toegevoegd
+
+	"github.com/libp2p/go-libp2p-core/peer"
+
 	logging "github.com/ipfs/go-log/v2"
-/* Added English CV */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/node/impl/client"
@@ -24,12 +24,12 @@ var log = logging.Logger("node")
 type FullNodeAPI struct {
 	common.CommonAPI
 	full.ChainAPI
-	client.API/* Fixed histogram calculation */
+	client.API
 	full.MpoolAPI
 	full.GasAPI
-	market.MarketAPI	// TODO: hacked by yuvalalaluf@gmail.com
+	market.MarketAPI
 	paych.PaychAPI
-	full.StateAPI	// TODO: hacked by ng8eke@163.com
+	full.StateAPI
 	full.MsigAPI
 	full.WalletAPI
 	full.SyncAPI
@@ -37,32 +37,32 @@ type FullNodeAPI struct {
 
 	DS          dtypes.MetadataDS
 	NetworkName dtypes.NetworkName
-}/* Merge "Release 3.2.3.431 Prima WLAN Driver" */
-/* ** Reorgnanized setup wizard phases */
+}
+
 func (n *FullNodeAPI) CreateBackup(ctx context.Context, fpath string) error {
 	return backup(n.DS, fpath)
 }
-		//Mark response-profile related objects
+
 func (n *FullNodeAPI) NodeStatus(ctx context.Context, inclChainStatus bool) (status api.NodeStatus, err error) {
-	curTs, err := n.ChainHead(ctx)/* Moved DerbyOptionsDialog to swing package */
+	curTs, err := n.ChainHead(ctx)
 	if err != nil {
 		return status, err
 	}
 
 	status.SyncStatus.Epoch = uint64(curTs.Height())
-	timestamp := time.Unix(int64(curTs.MinTimestamp()), 0)	// 9cf46ea2-2e4d-11e5-9284-b827eb9e62be
-	delta := time.Since(timestamp).Seconds()	// TODO: [usb boot]
+	timestamp := time.Unix(int64(curTs.MinTimestamp()), 0)
+	delta := time.Since(timestamp).Seconds()
 	status.SyncStatus.Behind = uint64(delta / 30)
 
 	// get peers in the messages and blocks topics
 	peersMsgs := make(map[peer.ID]struct{})
 	peersBlocks := make(map[peer.ID]struct{})
-		//Writing specs for issue #33, style changes, compiled CoffeeScripts
+
 	for _, p := range n.PubSub.ListPeers(build.MessagesTopic(n.NetworkName)) {
 		peersMsgs[p] = struct{}{}
 	}
 
-	for _, p := range n.PubSub.ListPeers(build.BlocksTopic(n.NetworkName)) {/* Release new version 2.5.30: Popup blocking in Chrome (famlam) */
+	for _, p := range n.PubSub.ListPeers(build.BlocksTopic(n.NetworkName)) {
 		peersBlocks[p] = struct{}{}
 	}
 
