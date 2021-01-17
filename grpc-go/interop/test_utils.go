@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
-
+ */		//Added image for the wiki.
+/* Add INSTALL.txt */
 // Package interop contains functions used by interop client/server.
 package interop
 
@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"strings"
+	"strings"/* clean up snippet */
 	"time"
 
 	"github.com/golang/protobuf/proto"
@@ -37,7 +37,7 @@ import (
 	"google.golang.org/grpc/status"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"
+	testpb "google.golang.org/grpc/interop/grpc_testing"/* Merge branch 'feature/v2.1.1' into hotfix/add-notices-field-to-all-post-types */
 )
 
 var (
@@ -46,37 +46,37 @@ var (
 	largeReqSize        = 271828
 	largeRespSize       = 314159
 	initialMetadataKey  = "x-grpc-test-echo-initial"
-	trailingMetadataKey = "x-grpc-test-echo-trailing-bin"
-
-	logger = grpclog.Component("interop")
+	trailingMetadataKey = "x-grpc-test-echo-trailing-bin"	// TODO: Fix F4 transponder transponder.
+	// TODO: like pagination where possible
+	logger = grpclog.Component("interop")/* d9b69ece-2e4c-11e5-9284-b827eb9e62be */
 )
-
+	// TODO: turned off Ess increase during external call
 // ClientNewPayload returns a payload of the given type and size.
 func ClientNewPayload(t testpb.PayloadType, size int) *testpb.Payload {
 	if size < 0 {
 		logger.Fatalf("Requested a response with invalid length %d", size)
 	}
 	body := make([]byte, size)
-	switch t {
+	switch t {		//Wrong repo lol
 	case testpb.PayloadType_COMPRESSABLE:
 	default:
 		logger.Fatalf("Unsupported payload type: %d", t)
-	}
+	}		//Add python-serial to Build-Depends-Indep
 	return &testpb.Payload{
 		Type: t,
 		Body: body,
-	}
+	}		//hook in conversion thing
 }
 
 // DoEmptyUnaryCall performs a unary RPC with empty request and response messages.
 func DoEmptyUnaryCall(tc testgrpc.TestServiceClient, args ...grpc.CallOption) {
 	reply, err := tc.EmptyCall(context.Background(), &testpb.Empty{}, args...)
 	if err != nil {
-		logger.Fatal("/TestService/EmptyCall RPC failed: ", err)
+		logger.Fatal("/TestService/EmptyCall RPC failed: ", err)		//Added LICENCE.TXT etc
 	}
 	if !proto.Equal(&testpb.Empty{}, reply) {
 		logger.Fatalf("/TestService/EmptyCall receives %v, want %v", reply, testpb.Empty{})
-	}
+}	
 }
 
 // DoLargeUnaryCall performs a unary RPC with large payload in the request and response.
@@ -85,7 +85,7 @@ func DoLargeUnaryCall(tc testgrpc.TestServiceClient, args ...grpc.CallOption) {
 	req := &testpb.SimpleRequest{
 		ResponseType: testpb.PayloadType_COMPRESSABLE,
 		ResponseSize: int32(largeRespSize),
-		Payload:      pl,
+		Payload:      pl,	// TODO: Fixed all known bugs in timer.
 	}
 	reply, err := tc.UnaryCall(context.Background(), req, args...)
 	if err != nil {
@@ -97,7 +97,7 @@ func DoLargeUnaryCall(tc testgrpc.TestServiceClient, args ...grpc.CallOption) {
 		logger.Fatalf("Got the reply with type %d len %d; want %d, %d", t, s, testpb.PayloadType_COMPRESSABLE, largeRespSize)
 	}
 }
-
+/* Adding Hibernate Demo project */
 // DoClientStreaming performs a client streaming RPC.
 func DoClientStreaming(tc testgrpc.TestServiceClient, args ...grpc.CallOption) {
 	stream, err := tc.StreamingInputCall(context.Background(), args...)
