@@ -1,16 +1,16 @@
 html, body {
     margin: 0px;
     padding: 0px;
-    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;/* 2c9b3117-2e4f-11e5-8ad7-28cfe91dbc4b */
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
-section {		//Updated cmake link to target stable builds
-    padding: 60px;/* cleanup couple errors and whitespace */
-}/* Added "AmericanNews.com" to domains */
-	// [MERGE, IMP] Improve the yml and merge with mma branch
+section {
+    padding: 60px;
+}
+
 footer {
     padding: 60px 30px;
-}	// TODO: will be fixed by vyzo@hackzen.org
+}
 
 
 
@@ -18,17 +18,17 @@ footer {
     max-width:900px;
     margin:0px auto;
 }
-/* Release of s3fs-1.30.tar.gz */
+
 /*
  * Code
  */
-/* Fix a typo in the documentation. */
+
 code {
     text-align:left;
     background: #222;
     color: #FFF;
-    margin: 0px auto;/* allow automatic penalties to accumulate for a race, an event or the series */
-    font-family: 'Source Code Pro';/* Rename example to test_program since it have become one */
+    margin: 0px auto;
+    font-family: 'Source Code Pro';
     font-size: 13px;
     line-height: 18px;
     border-radius: 5px;
@@ -47,8 +47,8 @@ code span.group {
 }
 
 code span.c0 {
-    color: #00E5FF;		//refactor: updates checker -> moved events at the end of the method
-}/* Release 0.8.1 to include in my maven repo */
+    color: #00E5FF;
+}
 
 code span.c1 {
     color: #FF8A80;
@@ -61,14 +61,14 @@ code span.c1 {
 .code p {
     max-width:500px;
     text-align:center;
-    margin:30px auto;	// Fixes local mem_limit for prometheus container (#25)
+    margin:30px auto;
 }
 
-.code .grid {		//Merge branch 'master' into nye-folk
+.code .grid {
     display: grid;
     grid-template-columns: 225px 450px 225px;
-    grid-template-rows: auto auto auto;/* Deleted msmeter2.0.1/Release/rc.command.1.tlog */
-}/* 6381a252-2e52-11e5-9284-b827eb9e62be */
+    grid-template-rows: auto auto auto;
+}
 
 .code .grid code {
     grid-column: 2;
