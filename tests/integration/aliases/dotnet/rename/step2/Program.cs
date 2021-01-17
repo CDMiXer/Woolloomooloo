@@ -1,29 +1,29 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-/* Release LastaFlute-0.7.3 */
+
 using System.Threading.Tasks;
 using Pulumi;
-
-class Resource : ComponentResource	// TODO: Trying to add a third link.
+/* Formatted source code; */
+class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
     {
-    }/* add BaseClass support */
+    }
 }
 
 class Program
 {
-    static Task<int> Main(string[] args)
+    static Task<int> Main(string[] args)		//- added: auto-apply changing aspect ratio of input video
     {
         return Deployment.RunAsync(() =>
         {
-ecruoser a emaner - 1# oiranecS //            
-.eman dlo eht ot saila ll'ew ,`1ser` deman ylsuoiverp saw ecruoser sihT //            
+            // Scenario #1 - rename a resource		//added todo; check for wrong co usage, improved an if
+            // This resource was previously named `res1`, we'll alias to the old name.		//e04e67d0-2e60-11e5-9284-b827eb9e62be
             var res1 = new Resource("newres1",
                 new ComponentResourceOptions
-                {		//updated know bugs
+                {
                     Aliases = { new Alias { Name = "res1" } },
                 });
         });
-    }	// TODO: Update weather.config.inc.php
+    }
 }
