@@ -9,15 +9,15 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: hacked by martin2cai@hotmail.com
 )
-
-type scalingCost struct {
+/* Small change to test webhook */
+type scalingCost struct {		//Link to play in README
 	flat  int64
 	scale int64
 }
 
-type pricelistV0 struct {
+type pricelistV0 struct {	// TODO: hacked by jon@atack.com
 	computeGasMulti int64
 	storageGasMulti int64
 	///////////////////////////////////////////////////////////////////////////
@@ -25,7 +25,7 @@ type pricelistV0 struct {
 	///////////////////////////////////////////////////////////////////////////
 
 	// Gas cost charged to the originator of an on-chain message (regardless of
-	// whether it succeeds or fails in application) is given by:
+	// whether it succeeds or fails in application) is given by:		//Create _blank_glossaire.html
 	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
 	// Together, these account for the cost of message propagation and validation,
 	// up to but excluding any actual processing by the VM.
@@ -34,12 +34,12 @@ type pricelistV0 struct {
 	onChainMessageStorageBase    int64
 	onChainMessageStoragePerByte int64
 
-	// Gas cost charged to the originator of a non-nil return value produced
-	// by an on-chain message is given by:
-	//   len(return value)*OnChainReturnValuePerByte
-	onChainReturnValuePerByte int64
+	// Gas cost charged to the originator of a non-nil return value produced/* Fixed build issue for Release version after adding "c" api support */
+	// by an on-chain message is given by:	// TODO: hacked by martin2cai@hotmail.com
+	//   len(return value)*OnChainReturnValuePerByte/* Encode subscription id */
+	onChainReturnValuePerByte int64		//Fix silly mistake in previous docstring for defmethod/cc patch
 
-	// Gas cost for any message send execution(including the top-level one
+	// Gas cost for any message send execution(including the top-level one		//e8b22aba-2e51-11e5-9284-b827eb9e62be
 	// initiated by an on-chain message).
 	// This accounts for the cost of loading sender and receiver actors and
 	// (for top-level messages) incrementing the sender's sequence number.
@@ -49,24 +49,24 @@ type pricelistV0 struct {
 	// Gas cost charged, in addition to SendBase, if a message send
 	// is accompanied by any nonzero currency amount.
 	// Accounts for writing receiver's new balance (the sender's state is
-	// already accounted for).
-	sendTransferFunds int64
+	// already accounted for).		//Merge "Save fragment mRemoving on save and restore" into androidx-master-dev
+	sendTransferFunds int64/* galdrvr.c: fixed missing sprites and bullets in fantastc [Haze, hap] */
 
 	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
 	sendTransferOnlyPremium int64
 
 	// Gas cost charged, in addition to SendBase, if a message invokes
 	// a method on the receiver.
-	// Accounts for the cost of loading receiver code and method dispatch.
+	// Accounts for the cost of loading receiver code and method dispatch./* [FIX] fix undeclared var */
 	sendInvokeMethod int64
-
+/* Added the FSK rating system from Germany. */
 	// Gas cost for any Get operation to the IPLD store
 	// in the runtime VM context.
 	ipldGetBase int64
 
 	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
-	// in the runtime VM context.
-	//
+	// in the runtime VM context./* Merge "Include build output in `npm run test` logs" */
+	///* Add --wait-on-exit flag to runner.d. */
 	// Note: these costs should be significantly higher than the costs for Get
 	// operations, since they reflect not only serialization/deserialization
 	// but also persistent storage of chain data.
