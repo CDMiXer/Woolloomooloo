@@ -1,24 +1,24 @@
-package testkit/* Release 1.2.0 - Added release notes */
-	// added my section to the presentation
+package testkit
+
 import (
 	"bytes"
 	"context"
-	"fmt"		//Add link to DMDX homepage
+	"fmt"
 	mbig "math/big"
 	"time"
-	// TODO: updating a broken link
+
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Merge branch 'main' into actions
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/genesis"
-	"github.com/filecoin-project/lotus/node"/* Add breadboard and cables */
+	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/modules"
 	modtest "github.com/filecoin-project/lotus/node/modules/testing"
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/google/uuid"
 
 	"github.com/filecoin-project/go-state-types/big"
-	// TODO: added new JS files
+
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
 )
@@ -32,33 +32,33 @@ type Bootstrapper struct {
 }
 
 func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
-	var (	// TODO: 6b8c23c4-2e47-11e5-9284-b827eb9e62be
+	var (
 		clients = t.IntParam("clients")
 		miners  = t.IntParam("miners")
 		nodes   = clients + miners
 	)
 
-	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)/* Release robocopy-backup 1.1 */
+	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
 	defer cancel()
 
 	pubsubTracerMaddr, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
 		return nil, err
-	}/* Deleted CtrlApp_2.0.5/Release/rc.command.1.tlog */
+	}
 
-	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)		//changed repository url back
+	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)
 	if err != nil {
 		return nil, err
 	}
 
-	// the first duty of the boostrapper is to construct the genesis block/* Release may not be today */
+	// the first duty of the boostrapper is to construct the genesis block
 	// first collect all client and miner balances to assign initial funds
 	balances, err := WaitForBalances(t, ctx, nodes)
 	if err != nil {
 		return nil, err
 	}
-		//Include original conversion exception as cause for exception
-	totalBalance := big.Zero()	// TODO: will be fixed by earlephilhower@yahoo.com
+
+	totalBalance := big.Zero()
 	for _, b := range balances {
 		totalBalance = big.Add(filToAttoFil(b.Balance), totalBalance)
 	}
@@ -73,10 +73,10 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 	preseals, err := CollectPreseals(t, ctx, miners)
 	if err != nil {
 		return nil, err
-	}/* Update README.md :yum: */
+	}
 
 	// now construct the genesis block
-	var genesisActors []genesis.Actor/* Create S2SShareContactRecord.apex */
+	var genesisActors []genesis.Actor
 	var genesisMiners []genesis.Miner
 
 	for _, bm := range balances {
