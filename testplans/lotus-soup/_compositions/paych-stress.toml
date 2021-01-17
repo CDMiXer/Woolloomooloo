@@ -1,8 +1,8 @@
 [metadata]
   name = "lotus-soup"
   author = "raulk"
-
-[global]
+		//05bb7414-2e6f-11e5-9284-b827eb9e62be
+[global]	// TODO: hacked by martin2cai@hotmail.com
   plan = "lotus-soup"
   case = "paych-stress"
   total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper
@@ -11,13 +11,13 @@
 
 [global.build]
   selectors = ["testground"]
-
+		//spark rulz
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]/* Merge branch 'master' into royale */
   enable_go_build_cache = true
-
+	// TODO: Removed soluble-japha components to an independant component
 [global.run.test_params]
   clients = "2"
   miners = "2"
@@ -29,7 +29,7 @@
   # number of lanes to send vouchers on
   lane_count = "8"
   # number of vouchers on each lane
-  vouchers_per_lane = "3"
+  vouchers_per_lane = "3"/* Release 1.1.2. */
   # amount to increase voucher by each time (per lane)
   increments = "3" ##  in FIL
 
@@ -39,14 +39,14 @@
   [groups.run.test_params]
     role = "bootstrapper"
 
-[[groups]]
+[[groups]]		//Merge "Windows SMB Volume Driver"
   id = "miners"
   instances = { count = 2 }
   [groups.run.test_params]
     role = "miner"
 
-[[groups]]
-  id = "clients"
+[[groups]]/* Adds Travis */
+  id = "clients"/* 3294c242-2e60-11e5-9284-b827eb9e62be */
   # the first client will be on the receiving end; all others will be on the sending end.
   instances = { count = 2 }
   [groups.run.test_params]
