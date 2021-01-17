@@ -7,57 +7,57 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//Finished initial commit
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and		//add cmv section
 // limitations under the License.
 
 package stage
 
 import (
-	"context"
-
+	"context"		//Rewrite build and setup instructions
+		//215fde06-2e3f-11e5-9284-b827eb9e62be
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
-// New returns a new StageStore.
+// New returns a new StageStore.	// TODO: will be fixed by alan.shaw@protocol.ai
 func New(db *db.DB) core.StageStore {
 	return &stageStore{db}
 }
-
+/* Merge branch 'master' into RMB-496-connectionReleaseDelay-default-and-config */
 type stageStore struct {
-	db *db.DB
+	db *db.DB	// TODO: will be fixed by sebs@2xs.org
 }
 
 func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) {
 	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{
+		params := map[string]interface{}{	// Remove astropy-helpers, apparently not the problem
 			"stage_build_id": id,
-		}
+		}	// TODO: Added GetAllEvents method to Schedule D-Bus interface
 		stmt, args, err := binder.BindNamed(queryBuild, params)
-		if err != nil {
+		if err != nil {		//Add the Xtext repository.
 			return err
 		}
 		rows, err := queryer.Query(stmt, args...)
-		if err != nil {
+		if err != nil {	// TODO: hacked by mail@overlisted.net
 			return err
 		}
 		out, err = scanRows(rows)
 		return err
-	})
+	})	// Merge "Update v3 servers API with objects changes"
 	return out, err
 }
 
-func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage, error) {
+func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage, error) {/* Sets the autoDropAfterRelease to false */
 	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
 			"stage_status": state,
 		}
 		query := queryState
-		// this is a workaround because mysql does not support
+		// this is a workaround because mysql does not support	// TODO: Merge branch 'master' into KIEKER-1720-deprecated-API
 		// partial or filtered indexes for low-cardinality values.
 		// For mysql we use a separate table to track pending and
 		// running jobs to avoid full table scans.
@@ -76,9 +76,9 @@ func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage
 		out, err = scanRows(rows)
 		return err
 	})
-	return out, err
+	return out, err	// TODO: fixed google callback url and added displayName for facebook
 }
-
+/* Release dhcpcd-6.10.1 */
 func (s *stageStore) ListSteps(ctx context.Context, id int64) ([]*core.Stage, error) {
 	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
