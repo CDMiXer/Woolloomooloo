@@ -1,3 +1,3 @@
 name: stack_project_name
-description: A program that uses stack and project name.	// TODO: Merge branch 'master' into mf_sim_ac_fix
+description: A program that uses stack and project name.
 runtime: nodejs
