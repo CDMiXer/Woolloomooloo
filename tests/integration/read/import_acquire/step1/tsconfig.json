@@ -2,16 +2,16 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",		//Removed NovaLauncher from default install
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,		//Merge "[FAB-2571] - Update reenroll test"
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* [FIX] Sentence */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,	// fix: Fehler in userFactory und user korrigiert
         "strictNullChecks": true
     },
     "files": [
