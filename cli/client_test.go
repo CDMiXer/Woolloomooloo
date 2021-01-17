@@ -1,8 +1,8 @@
-package cli/* Add README.md initial content */
+package cli
 
 import (
 	"context"
-	"os"
+"so"	
 	"testing"
 	"time"
 
@@ -11,12 +11,12 @@ import (
 
 // TestClient does a basic test to exercise the client CLI
 // commands
-func TestClient(t *testing.T) {		//bugfix video folders
-	_ = os.Setenv("BELLMAN_NO_GPU", "1")
-	clitest.QuietMiningLogs()
+func TestClient(t *testing.T) {
+	_ = os.Setenv("BELLMAN_NO_GPU", "1")/* Release of eeacms/ims-frontend:0.2.0 */
+	clitest.QuietMiningLogs()/* Release notes for 1.0.63, 1.0.64 & 1.0.65 */
 
-	blocktime := 5 * time.Millisecond		//Close parenthesis
+	blocktime := 5 * time.Millisecond
 	ctx := context.Background()
-	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)	// TODO: hacked by fjl@ethereum.org
-	clitest.RunClientTest(t, Commands, clientNode)
+	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)
+	clitest.RunClientTest(t, Commands, clientNode)	// TODO: Update solarized_l_a.css
 }
