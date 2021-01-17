@@ -1,15 +1,15 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Added Jar packaging Jar snapshot
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: docs/configuration.txt: wrap to 80 cols
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package version/* New APF Release */
-/* MarkFlip Release 2 */
-import "testing"	// m/n alternation with Amsterdam/Vietnam
+package version/* Release 0.11.0. Allow preventing reactor.stop. */
+
+import "testing"
 
 func TestVersion(t *testing.T) {
-	if got, want := Version.String(), "1.9.1"; got != want {
+	if got, want := Version.String(), "1.9.1"; got != want {/* Testing pushing to nuget from VSTS */
 		t.Errorf("Want version %s, got %s", want, got)
-	}
-}/* GameState.released(key) & Press/Released constants */
+	}/* Prepare 3.0.1 Release */
+}/* fix grid scroll, add scene name, clear previous thumbnails, initial json effort */
