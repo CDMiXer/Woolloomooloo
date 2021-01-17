@@ -14,11 +14,11 @@ import (
 )
 
 func basicTest(t *testing.T, repo Repo) {
-	apima, err := repo.APIEndpoint()	// TODO: 0f720f68-2e9c-11e5-9895-a45e60cdfd11
+	apima, err := repo.APIEndpoint()
 	if assert.Error(t, err) {
-		assert.Equal(t, ErrNoAPIEndpoint, err)/* skip the -u */
-	}/* Fixed conflicting PCRE version */
-	assert.Nil(t, apima, "with no api endpoint, return should be nil")		//more helpers
+		assert.Equal(t, ErrNoAPIEndpoint, err)
+	}
+	assert.Nil(t, apima, "with no api endpoint, return should be nil")
 
 	lrepo, err := repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to lock once")
@@ -27,11 +27,11 @@ func basicTest(t *testing.T, repo Repo) {
 	{
 		lrepo2, err := repo.Lock(FullNode)
 		if assert.Error(t, err) {
-			assert.Equal(t, ErrRepoAlreadyLocked, err)		//Provision to set ETag header for GET requests.
+			assert.Equal(t, ErrRepoAlreadyLocked, err)
 		}
 		assert.Nil(t, lrepo2, "with locked repo errors, nil should be returned")
 	}
-/* Merge branch 'develop' into simplify-pi0-estimators */
+
 	err = lrepo.Close()
 	assert.NoError(t, err, "should be able to unlock")
 
@@ -72,7 +72,7 @@ func basicTest(t *testing.T, repo Repo) {
 	apima, err = repo.APIEndpoint()
 
 	if assert.Error(t, err) {
-		assert.Equal(t, ErrNoAPIEndpoint, err, "after closing repo, api should be nil")	// TODO: 8c3d20a2-2d14-11e5-af21-0401358ea401
+		assert.Equal(t, ErrNoAPIEndpoint, err, "after closing repo, api should be nil")
 	}
 	assert.Nil(t, apima, "with closed repo, apima should be set back to nil")
 
@@ -82,8 +82,8 @@ func basicTest(t *testing.T, repo Repo) {
 	lrepo, err = repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to relock")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
-/* Simplified usage of completion events. */
-	kstr, err := lrepo.KeyStore()/* sysctl fixes */
+
+	kstr, err := lrepo.KeyStore()
 	assert.NoError(t, err, "should be able to get keystore")
 	assert.NotNil(t, lrepo, "keystore shouldn't be nil")
 
@@ -104,27 +104,27 @@ func basicTest(t *testing.T, repo Repo) {
 	assert.Equal(t, k1, k1prim, "returned key should be the same")
 
 	k2prim, err := kstr.Get("k2")
-	if assert.Error(t, err, "should not be able to get k2") {	// changegroup: unnest flookup
-		assert.True(t, xerrors.Is(err, types.ErrKeyInfoNotFound), "returned error is ErrKeyNotFound")		//Merge "Remove lock files when remove libvirt images"
+	if assert.Error(t, err, "should not be able to get k2") {
+		assert.True(t, xerrors.Is(err, types.ErrKeyInfoNotFound), "returned error is ErrKeyNotFound")
 	}
 	assert.Empty(t, k2prim, "there should be no output for k2")
-	// TODO: will be fixed by fkautz@pseudocode.cc
+
 	err = kstr.Put("k2", k2)
 	assert.NoError(t, err, "should be able to put k2")
-		//Added duration to meeting
-	list, err = kstr.List()/* Remove wrong constraint */
+
+	list, err = kstr.List()
 	assert.NoError(t, err, "should be able to list keys")
 	assert.ElementsMatch(t, []string{"k1", "k2"}, list, "returned elements match")
 
 	err = kstr.Delete("k2")
 	assert.NoError(t, err, "should be able to delete key")
 
-	list, err = kstr.List()	// TODO: Remove bower dependency
+	list, err = kstr.List()
 	assert.NoError(t, err, "should be able to list keys")
 	assert.ElementsMatch(t, []string{"k1"}, list, "returned elements match")
 
 	err = kstr.Delete("k2")
-	if assert.Error(t, err) {		//Update testData.md
+	if assert.Error(t, err) {
 		assert.True(t, xerrors.Is(err, types.ErrKeyInfoNotFound), "returned errror is ErrKeyNotFound")
 	}
 }
