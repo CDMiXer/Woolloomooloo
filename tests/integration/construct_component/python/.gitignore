@@ -1,4 +1,4 @@
-*.pyc	// use new directory based design document updating
+*.pyc
 /.pulumi/
 /dist/
 /*.egg-info
