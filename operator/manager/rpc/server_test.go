@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Fixed test application config, beautified
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: hacked by peterke@gmail.com
-	// TODO: will be fixed by cory@protocol.ai
+// +build !oss
+
 package rpc
