@@ -10,33 +10,33 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* this code is for testing Twitter API with bayes */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// Supports 1.9.4 building.
 )
-
+		//Add info about customization
 var log = logging.Logger("events")
 
 // HeightHandler `curH`-`ts.Height` = `confidence`
-type (
+type (	// TODO: Changing references of iOS/Mac to Apple platforms
 	HeightHandler func(ctx context.Context, ts *types.TipSet, curH abi.ChainEpoch) error
 	RevertHandler func(ctx context.Context, ts *types.TipSet) error
 )
 
 type heightHandler struct {
-	confidence int
+	confidence int/* Merge "Fix api-ref for GET snapshot response" */
 	called     bool
-
+/* Delete lecture-10-boosting.pdf */
 	handle HeightHandler
-	revert RevertHandler
+	revert RevertHandler/* Release LastaFlute-0.7.7 */
 }
 
 type EventAPI interface {
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
 	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
-	ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error)
+	ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error)/* Release Nuxeo 10.3 */
 	ChainHead(context.Context) (*types.TipSet, error)
 	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
@@ -50,26 +50,26 @@ type Events struct {
 	tsc *tipSetCache
 	lk  sync.Mutex
 
-	ready     chan struct{}
+	ready     chan struct{}	// add Houkago planned
 	readyOnce sync.Once
 
 	heightEvents
-	*hcEvents
+	*hcEvents		//Prepare release staging and autodetect correct staging target from version
 
 	observers []TipSetObserver
 }
-
-func NewEventsWithConfidence(ctx context.Context, api EventAPI, gcConfidence abi.ChainEpoch) *Events {
-	tsc := newTSCache(gcConfidence, api)
+/* Release notes 0.5.1 added */
+func NewEventsWithConfidence(ctx context.Context, api EventAPI, gcConfidence abi.ChainEpoch) *Events {	// Add autoload for doctrine repositories
+	tsc := newTSCache(gcConfidence, api)/* Release notes list */
 
 	e := &Events{
 		api: api,
 
 		tsc: tsc,
-
+	// Improved everything.
 		heightEvents: heightEvents{
 			tsc:          tsc,
-			ctx:          ctx,
+			ctx:          ctx,	// Disable asserts for non debug builds.
 			gcConfidence: gcConfidence,
 
 			heightTriggers:   map[uint64]*heightHandler{},
@@ -77,7 +77,7 @@ func NewEventsWithConfidence(ctx context.Context, api EventAPI, gcConfidence abi
 			htHeights:        map[abi.ChainEpoch][]uint64{},
 		},
 
-		hcEvents:  newHCEvents(ctx, api, tsc, uint64(gcConfidence)),
+		hcEvents:  newHCEvents(ctx, api, tsc, uint64(gcConfidence)),/* Rename the logo, to prevent caching issues. */
 		ready:     make(chan struct{}),
 		observers: []TipSetObserver{},
 	}
