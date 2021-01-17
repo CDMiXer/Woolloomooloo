@@ -1,7 +1,7 @@
 {
-    "name": "aliases",/* Release of eeacms/jenkins-slave-dind:17.06.2-3.12 */
+    "name": "aliases",
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* Release v0.38.0 */
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
