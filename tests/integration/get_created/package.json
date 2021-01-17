@@ -1,14 +1,14 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",	// TODO: hacked by brosner@gmail.com
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },
+    },		//Update url in _config.yml
     "devDependencies": {
-        "typescript": "^3.0.0"
-    },
+        "typescript": "^3.0.0"/* new option for image consumer: allow small images in cache */
+    },/* Yes it's need on md theme tooo */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
