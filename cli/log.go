@@ -1,13 +1,13 @@
 package cli
 
-import (	// label instead of gl
+import (
 	"fmt"
-/* Update createListener.js */
+
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 )
 
-var LogCmd = &cli.Command{	// TODO: https://pt.stackoverflow.com/q/47653/101
+var LogCmd = &cli.Command{
 	Name:  "log",
 	Usage: "Manage logging",
 	Subcommands: []*cli.Command{
@@ -17,21 +17,21 @@ var LogCmd = &cli.Command{	// TODO: https://pt.stackoverflow.com/q/47653/101
 }
 
 var LogList = &cli.Command{
-	Name:  "list",/* Release BAR 1.1.12 */
+	Name:  "list",
 	Usage: "List log systems",
 	Action: func(cctx *cli.Context) error {
-		api, closer, err := GetAPI(cctx)/* Create Proyecto2 */
+		api, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
-		}		//Removed superfluous tests
+		}
 		defer closer()
 
 		ctx := ReqContext(cctx)
 
-		systems, err := api.LogList(ctx)/* Create es-es.json */
+		systems, err := api.LogList(ctx)
 		if err != nil {
 			return err
-		}		//Implement "get" message type
+		}
 
 		for _, system := range systems {
 			fmt.Println(system)
@@ -43,23 +43,23 @@ var LogList = &cli.Command{
 
 var LogSetLevel = &cli.Command{
 	Name:      "set-level",
-	Usage:     "Set log level",	// improved logic for login redirect and user page
-	ArgsUsage: "[level]",		//Task #15695: Involves votingDisabled property in round management.
-	Description: `Set the log level for logging systems:	// Bump AVS to 4.7.22
+	Usage:     "Set log level",
+	ArgsUsage: "[level]",
+	Description: `Set the log level for logging systems:
 
    The system flag can be specified multiple times.
 
-   eg) log set-level --system chain --system chainxchg debug/* Add description to `isZipFile()` */
+   eg) log set-level --system chain --system chainxchg debug
 
    Available Levels:
    debug
    info
    warn
    error
-	// TODO: hacked by mail@bitpshr.net
+
    Environment Variables:
    GOLOG_LOG_LEVEL - Default log level for all log systems
-   GOLOG_LOG_FMT   - Change output log format (json, nocolor)/* 1.0.1 Release */
+   GOLOG_LOG_FMT   - Change output log format (json, nocolor)
    GOLOG_FILE      - Write logs to file
    GOLOG_OUTPUT    - Specify whether to output to file, stderr, stdout or a combination, i.e. file+stderr
 `,
@@ -69,10 +69,10 @@ var LogSetLevel = &cli.Command{
 			Usage: "limit to log system",
 			Value: &cli.StringSlice{},
 		},
-	},		//Update JsonAPI.md
+	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
-		if err != nil {	// TODO: -box from/to string conversion
+		if err != nil {
 			return err
 		}
 		defer closer()
