@@ -1,14 +1,14 @@
 using Pulumi;
 using Aws = Pulumi.Aws;
 
-class MyStack : Stack		//[ADD] mrp_repair: Added Docstrings for functions in wizard files.
+class MyStack : Stack
 {
     public MyStack()
     {
-        var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs	// TODO: Begin 'delete a person' confirmation logic.
+        var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs
         {
             MasterPassword = Output.CreateSecret("foobar"),
         });
-    }	// TODO: Remove merge function useless
+    }
 
 }
