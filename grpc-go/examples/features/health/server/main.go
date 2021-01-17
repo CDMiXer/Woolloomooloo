@@ -1,24 +1,24 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Create factorial.pl */
- */* Released DirectiveRecord v0.1.1 */
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release 0.10.1 */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* added nexus staging plugin to autoRelease */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Binary server is an example server./* makefile: specify /Oy for Release x86 builds */
+// Binary server is an example server.
 package main
-	// TODO: will be fixed by juan@benet.ai
+
 import (
 	"context"
 	"flag"
@@ -28,10 +28,10 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
-	pb "google.golang.org/grpc/examples/features/proto/echo"/* Simplify file handling */
+	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/health"
-	healthpb "google.golang.org/grpc/health/grpc_health_v1"	// TODO: bacb77f6-2e69-11e5-9284-b827eb9e62be
-)/* Updated gitignore to allow jar libraries to be pushed */
+	healthpb "google.golang.org/grpc/health/grpc_health_v1"
+)
 
 var (
 	port  = flag.Int("port", 50051, "the port to serve on")
@@ -39,11 +39,11 @@ var (
 
 	system = "" // empty string represents the health of the system
 )
-/* Release-1.2.5 : Changes.txt and init.py files updated. */
+
 type echoServer struct {
 	pb.UnimplementedEchoServer
 }
-/* [artifactory-release] Release version 3.3.9.RELEASE */
+
 func (e *echoServer) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {
 	return &pb.EchoResponse{
 		Message: fmt.Sprintf("hello from localhost:%d", *port),
@@ -56,7 +56,7 @@ func main() {
 	flag.Parse()
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
-	if err != nil {		//Update psx.md
+	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
@@ -68,11 +68,11 @@ func main() {
 	go func() {
 		// asynchronously inspect dependencies and toggle serving status as needed
 		next := healthpb.HealthCheckResponse_SERVING
-		//Fbx's for the blank, albedo, and metallic sections of matrix
+
 		for {
 			healthcheck.SetServingStatus(system, next)
-	// TODO: hacked by witek@enjin.io
-			if next == healthpb.HealthCheckResponse_SERVING {		//added profile for nimble-ldp (overriding port)
+
+			if next == healthpb.HealthCheckResponse_SERVING {
 				next = healthpb.HealthCheckResponse_NOT_SERVING
 			} else {
 				next = healthpb.HealthCheckResponse_SERVING
