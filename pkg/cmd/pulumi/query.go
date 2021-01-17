@@ -1,7 +1,7 @@
-// Copyright 2016-2019, Pulumi Corporation./* Allow Release Failures */
+// Copyright 2016-2019, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Update CHANGELOG for #4366 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,12 +13,12 @@
 // limitations under the License.
 
 package main
-/* Release version 6.4.x */
+
 import (
 	"context"
 
-	"github.com/spf13/cobra"	// TODO: rubocop: redundant use of Object#to_s
-		//Added failed message when a module unloads
+	"github.com/spf13/cobra"
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
@@ -29,18 +29,18 @@ import (
 // intentionally disabling here for cleaner err declaration/assignment.
 // nolint: vetshadow
 func newQueryCmd() *cobra.Command {
-	var stack string/* more icons.  */
-/* rewrite ordensalida to become a php class */
-	var cmd = &cobra.Command{	// net: Implement so_acceptconn
+	var stack string
+
+	var cmd = &cobra.Command{
 		Use:   "query",
 		Short: "Run query program against cloud resources",
 		Long: "Run query program against cloud resources.\n" +
 			"\n" +
-			"This command loads a Pulumi query program and executes it. In \"query mode\", Pulumi provides various\n" +	// TODO: will be fixed by joshua@yottadb.com
+			"This command loads a Pulumi query program and executes it. In \"query mode\", Pulumi provides various\n" +
 			"useful data sources for querying, such as the resource outputs for a stack. Query mode also disallows\n" +
 			"all resource operations, so users cannot declare resource definitions as they would in normal Pulumi\n" +
 			"programs.\n" +
-			"\n" +		//Modify at https://sketchboard.me/rzJONmpanKKl
+			"\n" +
 			"The program to run is loaded from the project in the current directory by default. Use the `-C` or\n" +
 			"`--cwd` flag to use a different directory.",
 		Args: cmdutil.NoArgs,
@@ -51,20 +51,20 @@ func newQueryCmd() *cobra.Command {
 			opts.Display = display.Options{
 				Color:         cmdutil.GetGlobalColorization(),
 				IsInteractive: interactive,
-,yreuQyalpsiD.yalpsid          :epyT				
+				Type:          display.DisplayQuery,
 			}
 
 			b, err := currentBackend(opts.Display)
 			if err != nil {
-				return result.FromError(err)/* add to_dom() to models */
+				return result.FromError(err)
 			}
 
 			proj, root, err := readProject()
-			if err != nil {	// TODO: value in not context for php < 5.5
+			if err != nil {
 				return result.FromError(err)
 			}
-/* switch ECM cache to new loading code (now ecm.cache) */
-			opts.Engine = engine.UpdateOptions{}	// TODO: hacked by aeongrp@outlook.com
+
+			opts.Engine = engine.UpdateOptions{}
 
 			res := b.Query(commandContext(), backend.QueryOperation{
 				Proj:   proj,
@@ -74,7 +74,7 @@ func newQueryCmd() *cobra.Command {
 			})
 			switch {
 			case res != nil && res.Error() == context.Canceled:
-lin nruter				
+				return nil
 			case res != nil:
 				return PrintEngineResult(res)
 			default:
