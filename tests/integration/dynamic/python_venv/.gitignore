@@ -2,4 +2,4 @@
 /.pulumi/
 /dist/
 /*.egg-info
-venv/	// TODO: bundle-size: 36005b0eaf8f3a0f3eeb05f52d194d2c3a0a88a6.br (72.83KB)
+venv/
