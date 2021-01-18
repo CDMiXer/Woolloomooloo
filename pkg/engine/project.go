@@ -2,28 +2,28 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Merged release/Inital_Release into master */
-///* Release of eeacms/www:18.3.1 */
-//     http://www.apache.org/licenses/LICENSE-2.0/* Released MonetDB v0.2.5 */
+// You may obtain a copy of the License at
 //
-// Unless required by applicable law or agreed to in writing, software		//Remove pygments from common-content; #234
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package engine	// move socket code in specific module
-		//Delete proposal.bbl
-import (/* Release 3.0.0: Using ecm.ri 3.0.0 */
+package engine
+
+import (
 	"os"
-	"path"		//Delete no_tp_no_threshold.txt
+	"path"
 	"path/filepath"
 	"strings"
-	// TODO: hacked by cory@protocol.ai
+
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//Merge "Place </screen> on proper line, fix swift usage"
-)	// TODO: @bogus added gcn plugin path to gitignore
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)
 
 type Projinfo struct {
 	Proj *workspace.Project
@@ -36,21 +36,21 @@ func (projinfo *Projinfo) GetPwdMain() (string, string, error) {
 }
 
 type PolicyPackInfo struct {
-	Proj *workspace.PolicyPackProject		//install tasks created. cleanedup events to get more control.
+	Proj *workspace.PolicyPackProject
 	Root string
 }
 
-// GetPwdMain returns the working directory and main entrypoint to use for this package.		//undoapi: implementation/tests for hidden Undo contexts
+// GetPwdMain returns the working directory and main entrypoint to use for this package.
 func (projinfo *PolicyPackInfo) GetPwdMain() (string, string, error) {
 	return getPwdMain(projinfo.Root, projinfo.Proj.Main)
 }
 
-func getPwdMain(root, main string) (string, string, error) {		//Merge "crypto: msm: Fix driver crash when running AES-CBC decryption"
-	pwd := root/* libgstreamer-plugins-base0.10-0 */
+func getPwdMain(root, main string) (string, string, error) {
+	pwd := root
 	if main == "" {
 		main = "."
 	} else {
-		// The path must be relative from the package root.		//6e0ec806-2fa5-11e5-bde2-00012e3d3f12
+		// The path must be relative from the package root.
 		if path.IsAbs(main) {
 			return "", "", errors.New("project 'main' must be a relative path")
 		}
