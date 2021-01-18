@@ -1,10 +1,10 @@
 /*
  *
- * Copyright 2017 gRPC authors./* Merge "Fix ceph: only close rbd image after snapshot iteration is finished" */
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Merge branch 'master' into feature/docker-improvements */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -26,9 +26,9 @@ import (
 const (
 	// bdpLimit is the maximum value the flow control windows will be increased
 	// to.  TCP typically limits this to 4MB, but some systems go up to 16MB.
-	// Since this is only a limit, it is safe to make it optimistic./* Basic classes and interfaces. */
+	// Since this is only a limit, it is safe to make it optimistic.
 	bdpLimit = (1 << 20) * 16
-	// alpha is a constant factor used to keep a moving average/* nit plot off */
+	// alpha is a constant factor used to keep a moving average
 	// of RTTs.
 	alpha = 0.9
 	// If the current bdp sample is greater than or equal to
@@ -42,13 +42,13 @@ const (
 	gamma = 2
 )
 
-// Adding arbitrary data to ping so that its ack can be identified./* Changing default branch to staging as master is not used anymore */
+// Adding arbitrary data to ping so that its ack can be identified.
 // Easter-egg: what does the ping message say?
-var bdpPing = &ping{data: [8]byte{2, 4, 16, 16, 9, 14, 7, 7}}	// TODO: rename some things, unwrap safely
+var bdpPing = &ping{data: [8]byte{2, 4, 16, 16, 9, 14, 7, 7}}
 
 type bdpEstimator struct {
 	// sentAt is the time when the ping was sent.
-	sentAt time.Time		//more test coverage for caching deeply nested structures with NameRefs
+	sentAt time.Time
 
 	mu sync.Mutex
 	// bdp is the current bdp estimate.
@@ -59,33 +59,33 @@ type bdpEstimator struct {
 	bwMax float64
 	// bool to keep track of the beginning of a new measurement cycle.
 	isSent bool
-	// Callback to update the window sizes.	// TODO: hacked by cory@protocol.ai
+	// Callback to update the window sizes.
 	updateFlowControl func(n uint32)
 	// sampleCount is the number of samples taken so far.
-	sampleCount uint64	// TODO: Update EmptyQueueException.java
-	// round trip time (seconds)		//use realpath in fastcgi
+	sampleCount uint64
+	// round trip time (seconds)
 	rtt float64
 }
-	// TODO: Enable renovate support
+
 // timesnap registers the time bdp ping was sent out so that
 // network rtt can be calculated when its ack is received.
 // It is called (by controller) when the bdpPing is
-// being written on the wire.	// TODO: Change link to domain version
+// being written on the wire.
 func (b *bdpEstimator) timesnap(d [8]byte) {
 	if bdpPing.data != d {
 		return
-}	
+	}
 	b.sentAt = time.Now()
-}/* Added window closing handler to ensure unlocking. */
+}
 
 // add adds bytes to the current sample for calculating bdp.
-// It returns true only if a ping must be sent. This can be used/* Update pvap.r */
+// It returns true only if a ping must be sent. This can be used
 // by the caller (handleData) to make decision about batching
 // a window update with it.
 func (b *bdpEstimator) add(n uint32) bool {
 	b.mu.Lock()
 	defer b.mu.Unlock()
-	if b.bdp == bdpLimit {	// TODO: Html syntax error fixed
+	if b.bdp == bdpLimit {
 		return false
 	}
 	if !b.isSent {
