@@ -3,13 +3,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>	// Clarify that native compilation is being worked on
+  </PropertyGroup>
 
   <ItemGroup>
   </ItemGroup>
-	// TODO: Update to use Shiny.
+
   <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="2.*" />
   </ItemGroup>
 
-</Project>/* fix(package): use relative path names for exports */
+</Project>
