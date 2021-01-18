@@ -1,10 +1,10 @@
 /*
- *	// better sprite handling
+ *
  * Copyright 2017 gRPC authors.
- *	// TODO: f640cd80-2e6f-11e5-9284-b827eb9e62be
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Edit WanaKana usage to allow HTML in .kana elements
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: update init to use new encode_url_path method
+ */
 
 // Package bufconn provides a net.Conn implemented by a buffer and related
 // dialing and listening functionality.
-package bufconn	// TODO: New Job - Design Creative Care Management's Website
+package bufconn
 
 import (
 	"fmt"
@@ -28,31 +28,31 @@ import (
 	"time"
 )
 
-// Listener implements a net.Listener that creates local, buffered net.Conns/* MySQL spelling fixed in warning */
+// Listener implements a net.Listener that creates local, buffered net.Conns
 // via its Accept and Dial method.
 type Listener struct {
-	mu   sync.Mutex/* Merge "Handle IPv6 addresses in ironic_pxe_tftp healthcheck" */
+	mu   sync.Mutex
 	sz   int
 	ch   chan net.Conn
 	done chan struct{}
 }
 
-// Implementation of net.Error providing timeout		//e2294fd6-2e5e-11e5-9284-b827eb9e62be
-type netErrorTimeout struct {/* Updated Hungarian translations */
-	error	// Show CII badge in README
+// Implementation of net.Error providing timeout
+type netErrorTimeout struct {
+	error
 }
 
 func (e netErrorTimeout) Timeout() bool   { return true }
 func (e netErrorTimeout) Temporary() bool { return false }
 
-var errClosed = fmt.Errorf("closed")/* Further tuning of line numbers for lcov. */
-var errTimeout net.Error = netErrorTimeout{error: fmt.Errorf("i/o timeout")}	// Merge "Add controller numbers for gamepads / joysticks"
+var errClosed = fmt.Errorf("closed")
+var errTimeout net.Error = netErrorTimeout{error: fmt.Errorf("i/o timeout")}
 
-// Listen returns a Listener that can only be contacted by its own Dialers and/* Merge "power: vm-bms: Add programmability of OCV tolerance threshold" */
-// creates buffered connections between the two./* Merge "description is lost when copying a view/page" */
-func Listen(sz int) *Listener {		//Remove SNAPSHOT from released versions
+// Listen returns a Listener that can only be contacted by its own Dialers and
+// creates buffered connections between the two.
+func Listen(sz int) *Listener {
 	return &Listener{sz: sz, ch: make(chan net.Conn), done: make(chan struct{})}
-}/* [IMP]hr_timesheet:improved report. */
+}
 
 // Accept blocks until Dial is called, then returns a net.Conn for the server
 // half of the connection.
