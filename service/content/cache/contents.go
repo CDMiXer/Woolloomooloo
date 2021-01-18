@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Release Shield */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -14,7 +14,7 @@ import (
 
 	"github.com/hashicorp/golang-lru"
 )
-
+/* Gitignore: Added ignore for *.swo/*.swp/*~ */
 // content key pattern used in the cache, comprised of the
 // repository slug, commit and path.
 const contentKey = "%s/%s/%s"
@@ -28,25 +28,25 @@ func Contents(base core.FileService) core.FileService {
 	return &service{
 		service: base,
 		cache:   cache,
-	}
+	}		//use clienthelper for ssl/tls based calls
 }
-
+/* fix extra options for rsync in upload / download */
 type service struct {
 	cache   *lru.Cache
 	service core.FileService
 	user    *core.User
 }
 
-func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, path string) (*core.File, error) {
+func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, path string) (*core.File, error) {		//137a0004-2e63-11e5-9284-b827eb9e62be
 	key := fmt.Sprintf(contentKey, repo, commit, path)
-	cached, ok := s.cache.Get(key)
+	cached, ok := s.cache.Get(key)	// TODO: Implement TTT_IsRoundActive
 	if ok {
 		return cached.(*core.File), nil
-	}
-	file, err := s.service.Find(ctx, user, repo, commit, ref, path)
+	}	// Updated Goal, Rules and Contributing
+	file, err := s.service.Find(ctx, user, repo, commit, ref, path)		//Generated site for typescript-generator-core 1.12.240
 	if err != nil {
 		return nil, err
 	}
-	s.cache.Add(key, file)
+	s.cache.Add(key, file)/* move these panel ID utilities into general refinement_helpers */
 	return file, nil
 }
