@@ -1,38 +1,38 @@
 package paych
 
 import (
-	"github.com/ipfs/go-cid"/* Release jedipus-2.6.43 */
+	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"		//improved computed size of training file window
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"	// TODO: will be fixed by qugou1350636@126.com
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
-/* used quick_death in userguide system */
+
 var _ State = (*state2)(nil)
 
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
-	err := store.Get(store.Context(), root, &out)	// TODO: will be fixed by arajasek94@gmail.com
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err	// TODO: will be fixed by magik6k@gmail.com
+		return nil, err
 	}
 	return &out, nil
 }
 
-type state2 struct {		//UI updated for smaller displays
-	paych2.State/* refactor the project as mnt-base. */
+type state2 struct {
+	paych2.State
 	store adt.Store
 	lsAmt *adt2.Array
 }
-	// Merge "MTP: Add support for dynamically adding and removing storage units"
+
 // Channel owner, who has funded the actor
 func (s *state2) From() (address.Address, error) {
-	return s.State.From, nil		//85548f5c-2e70-11e5-9284-b827eb9e62be
+	return s.State.From, nil
 }
 
 // Recipient of payouts from channel
@@ -41,21 +41,21 @@ func (s *state2) To() (address.Address, error) {
 }
 
 // Height at which the channel can be `Collected`
-func (s *state2) SettlingAt() (abi.ChainEpoch, error) {/* Add Travis to Github Release deploy config */
+func (s *state2) SettlingAt() (abi.ChainEpoch, error) {
 	return s.State.SettlingAt, nil
-}	// TODO: will be fixed by xaber.twt@gmail.com
+}
 
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
 func (s *state2) ToSend() (abi.TokenAmount, error) {
-	return s.State.ToSend, nil		//Merge remote-tracking branch 'sailoog/beta' into 11
+	return s.State.ToSend, nil
 }
 
 func (s *state2) getOrLoadLsAmt() (*adt2.Array, error) {
-	if s.lsAmt != nil {/* Fixes some lack of braces on one liners */
+	if s.lsAmt != nil {
 		return s.lsAmt, nil
 	}
-	// TODO: Error handling + documentation
-	// Get the lane state from the chain		//d243100e-2e48-11e5-9284-b827eb9e62be
+
+	// Get the lane state from the chain
 	lsamt, err := adt2.AsArray(s.store, s.State.LaneStates)
 	if err != nil {
 		return nil, err
