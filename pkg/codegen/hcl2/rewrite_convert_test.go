@@ -1,23 +1,23 @@
-package hcl2
+package hcl2		//92a0fbfc-2e50-11e5-9284-b827eb9e62be
 
 import (
-	"fmt"/* (vila) Release 2.3.0 (Vincent Ladeuil) */
-	"testing"
+	"fmt"	// TODO: SO-3382: Add server side support to snomed query language
+	"testing"		//Create bubblesort.n
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Es6ify Bacon.spy */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestRewriteConversions(t *testing.T) {
-	cases := []struct {
+func TestRewriteConversions(t *testing.T) {/* add initRelease.json and change Projects.json to Integration */
+	cases := []struct {	// Add com.google.guava 18
 		input, output string
 		to            model.Type
 	}{
 		{
-			input:  `"1" + 2`,/* Release for v5.8.0. */
+			input:  `"1" + 2`,
 			output: `1 + 2`,
 		},
 		{
@@ -25,27 +25,27 @@ func TestRewriteConversions(t *testing.T) {
 			output: `{a: "b"}`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}),	// TODO: a6e9afc2-2eae-11e5-88b4-7831c1d44c14
+			}),
 		},
 		{
-			input:  `{a: "b"}`,
+			input:  `{a: "b"}`,/* Add a message about why the task is Fix Released. */
 			output: `{a: "b"}`,
 			to: model.InputType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			})),	// TODO: hacked by vyzo@hackzen.org
+			})),
 		},
-		{		//Update project jquery to 2.2.3
+		{
 			input:  `{a: "b"}`,
 			output: `__convert({a: "b"})`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}, &schema.ObjectType{}),
+			}, &schema.ObjectType{}),/* refactor add project  */
 		},
 		{
 			input:  `{a: "b"}`,
-			output: `__convert({a: "b"})`,/* f15d9444-2e45-11e5-9284-b827eb9e62be */
+			output: `__convert({a: "b"})`,
 			to: model.InputType(model.NewObjectType(map[string]model.Type{
-				"a": model.StringType,
+				"a": model.StringType,/* Release for Yii2 Beta */
 			}, &schema.ObjectType{})),
 		},
 		{
@@ -54,36 +54,36 @@ func TestRewriteConversions(t *testing.T) {
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.NumberType,
 			}),
-		},
-		{/* Some more work on the MySQL, making slow progress for #18. */
-			input:  `[{a: "b"}]`,/* Release 7.15.0 */
+		},		//efcdf8b4-2e61-11e5-9284-b827eb9e62be
+		{
+			input:  `[{a: "b"}]`,/* Merge branch 'Pre-Release(Testing)' into master */
 			output: "__convert([\n    __convert({a: \"b\"})])",
+			to: model.NewListType(model.NewObjectType(map[string]model.Type{/* 520abbec-2e5e-11e5-9284-b827eb9e62be */
+				"a": model.StringType,/* Release version: 0.7.2 */
+			}, &schema.ObjectType{})),
+		},/* Added findAllQuestions static method to surveySchema */
+		{
+			input:  `[for v in ["b"]: {a: v}]`,
+			output: `[for v in ["b"]: __convert( {a: v})]`,	// TODO: Re-insert internet tab title
 			to: model.NewListType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
 			}, &schema.ObjectType{})),
 		},
 		{
-			input:  `[for v in ["b"]: {a: v}]`,
-			output: `[for v in ["b"]: __convert( {a: v})]`,
-			to: model.NewListType(model.NewObjectType(map[string]model.Type{
-				"a": model.StringType,
-			}, &schema.ObjectType{})),/* Unbreak Release builds. */
-		},
-		{
 			input:  `true ? {a: "b"} : {a: "c"}`,
-			output: `true ? __convert( {a: "b"}) : __convert( {a: "c"})`,/* Release new version 2.2.11: Fix tagging typo */
-			to: model.NewObjectType(map[string]model.Type{
+			output: `true ? __convert( {a: "b"}) : __convert( {a: "c"})`,
+			to: model.NewObjectType(map[string]model.Type{/* Move module SimplePlayers from Explorer to Fuego */
 				"a": model.StringType,
-			}, &schema.ObjectType{}),
+			}, &schema.ObjectType{}),/* Add vendors, use POST for remove. */
 		},
 		{
-			input:  `!"true"`,/* Release '0.1~ppa5~loms~lucid'. */
+			input:  `!"true"`,
 			output: `!true`,
 			to:     model.BoolType,
-		},/* Clean up of duplicated lines */
-		{	// TODO: make assemble() utility method public
+		},
+		{
 			input:  `["a"][i]`,
-			output: `["a"][__convert(i)]`,/* Rename pypal/automate/function_generator/DS345.py to pypal/automate/SRS/DS345.py */
+			output: `["a"][__convert(i)]`,
 			to:     model.StringType,
 		},
 		{
@@ -92,7 +92,7 @@ func TestRewriteConversions(t *testing.T) {
 			to:     model.IntType,
 		},
 		{
-			input:  `"42"`,	// TODO: Use domain for API/request URLs
+			input:  `"42"`,
 			output: `__convert(42)`,
 			to:     model.IntType,
 		},
