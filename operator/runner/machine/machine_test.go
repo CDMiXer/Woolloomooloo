@@ -2,14 +2,14 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// Update RPM packager for 32 bit ARM builds
 
 package machine
-/* Update Signs on next tick and some java code cleanup. */
+
 import (
 	"testing"
 )
 
-func TestLoad(t *testing.T) {/* Merge "Release 3.2.3.334 Prima WLAN Driver" */
-	t.Skip()
+func TestLoad(t *testing.T) {
+	t.Skip()/* Release version 0.3.3 */
 }
