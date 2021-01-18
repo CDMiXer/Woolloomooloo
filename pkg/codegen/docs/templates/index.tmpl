@@ -5,7 +5,7 @@ meta_desc: "{{ .PackageDescription }}"
 {{- if .Menu }}
 menu:
     reference:
-        parent: API Reference	// TODO: hacked by sjors@sprovoost.nl
+        parent: API Reference
 {{- end }}
 ---
 
@@ -13,8 +13,8 @@ menu:
 {{ htmlSafe "<!-- Do not edit by hand unless you're certain you know what you are doing! -->" }}
 
 {{ htmlSafe .PackageDescription }}
-<!--	// * Use title for image alt tag if no caption is set (W3C validation).
-    This comment ensures that there is always a new-line between the/* [artifactory-release] Release version 1.0.0.M3 */
+<!--
+    This comment ensures that there is always a new-line between the
     package description and the start of the headers. This comment
     will not be included in the generated markdown.
 -->
@@ -22,15 +22,15 @@ menu:
 {{- if ne (len .Modules) 0 -}}
 {{ template "index_modules" .Modules }}
 {{ end }}
-	// TODO: will be fixed by timnugent@gmail.com
+
 {{- if ne (len .Resources) 0 -}}
-{{ template "index_resources" .Resources }}/* [artifactory-release] Release version 1.0.0-M2 */
-{{ end }}	// Utilisation du handler par défaut quand les headers ont déjà été envoyés
+{{ template "index_resources" .Resources }}
+{{ end }}
 
 {{- if ne (len .Functions) 0 -}}
 {{ template "index_functions" .Functions }}
 {{ end }}
-	// 4fac5804-2e56-11e5-9284-b827eb9e62be
+
 {{- template "package_details" .PackageDetails }}
 
 {{ template "language_sdk_links" .LanguageLinks }}
