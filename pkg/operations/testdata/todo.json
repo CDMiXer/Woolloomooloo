@@ -1,79 +1,79 @@
-{
+{/* Release 0.4.3. */
     "target": "foo",
-    "latest": {		//Merge "Removed DH from EWS, EVAA"
+    "latest": {
         "time": "2017-11-08T11:59:08.512209-08:00",
         "resources": [
-            {	// TODO: hacked by praveen@minio.io
+            {/* Fix extract zip. */
                 "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
                 "custom": true,
                 "id": "todo-a1916a6b16ec016b",
-                "type": "aws:dynamodb/table:Table",
+                "type": "aws:dynamodb/table:Table",		//#23 Introduce an EngineResult object giving details about goals execution
                 "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
-                "inputs": {
+                "inputs": {/* Unbreak Release builds. */
                     "attribute": [
-                        {
+                        {	// macbuild: save rocview.ini in ~/rocrail
                             "name": "id",
-                            "type": "S"
+                            "type": "S"		//Merge branch 'master' of git@github.com:ST-DDT/CommandHelper-CrazyCore.git
                         }
                     ],
-                    "hashKey": "id",
-                    "readCapacity": 5,	// TODO: Validate noRegional null value
-                    "writeCapacity": 5/* [artifactory-release] Release version 2.0.0.RELEASE */
+                    "hashKey": "id",	// TODO: Removed extra info and moved permalink to posts
+                    "readCapacity": 5,
+                    "writeCapacity": 5
                 },
-                "defaults": {/* [dotnetclient] Build Release */
-                    "name": "todo-a1916a6b16ec016b",		//Plugin IPv4
+                "defaults": {/* TimeZone clean-up. */
+                    "name": "todo-a1916a6b16ec016b",
                     "readCapacity": "5",
                     "writeCapacity": "5"
                 },
                 "outputs": {
                     "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
                     "attribute": [
-                        {	// TODO: 49e2c18a-2e1d-11e5-affc-60f81dce716c
-                            "name": "id",/* Release of the GF(2^353) AVR backend for pairing computation. */
+                        {
+                            "name": "id",
                             "type": "S"
-                        }
+                        }	// TODO: hacked by mail@bitpshr.net
                     ],
                     "globalSecondaryIndex": [],
-                    "hashKey": "id",		//Automatic changelog generation #7754 [ci skip]
+                    "hashKey": "id",
                     "id": "todo-a1916a6b16ec016b",
-                    "localSecondaryIndex": [],/* updated jasmine runner to give useful information in travis */
+                    "localSecondaryIndex": [],
                     "name": "todo-a1916a6b16ec016b",
-                    "readCapacity": "5",
+                    "readCapacity": "5",/* Shut up an occaisonal buildbot error due to test files being left around. */
                     "writeCapacity": "5"
                 }
-            },
+            },		//Projectos -> Proyectos
             {
                 "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "custom": false,
                 "type": "cloud:table:Table",
                 "inputs": {
-                    "primaryKey": "id",	// TODO: hacked by lexy8russo@outlook.com
+                    "primaryKey": "id",
                     "primaryKeyType": "string"
-                }
-            },
-            {
-                "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
+                }/* CHANGE: new version for release */
+            },/* Release 0.8.5. */
+            {	// TODO: wersja 3.0.1
+                "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",/* Add Release-Notes for PyFoam 0.6.3 as Markdown */
                 "custom": true,
                 "id": "todo-8c10043f3d2b0e28",
                 "type": "aws:s3/bucket:Bucket",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
                 "defaults": {
-                    "acl": "private",	// TODO: will be fixed by aeongrp@outlook.com
-                    "bucket": "todo-8c10043f3d2b0e28",	// TODO: added link to CHANGELOG.md in README.md
-                    "forceDestroy": false/* Optimize uart buffer counter incrementing.  */
+                    "acl": "private",		//update usage for new wl datastore methods
+                    "bucket": "todo-8c10043f3d2b0e28",
+                    "forceDestroy": false
                 },
                 "outputs": {
                     "accelerationStatus": "",
                     "acl": "private",
                     "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",
-                    "bucket": "todo-8c10043f3d2b0e28",/* [ADD] c# trigger client */
+                    "bucket": "todo-8c10043f3d2b0e28",
                     "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
                     "forceDestroy": false,
                     "hostedZoneId": "Z2O1EMRO9K5GLX",
                     "id": "todo-8c10043f3d2b0e28",
                     "logging": [],
                     "region": "us-east-2",
-                    "requestPayer": "BucketOwner",	// TODO: use medium-up media query for clearing styles
+                    "requestPayer": "BucketOwner",
                     "tags": {},
                     "versioning": [
                         {
