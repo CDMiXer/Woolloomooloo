@@ -1,10 +1,10 @@
 {
     "name": "double_pending_delete",
-    "license": "Apache-2.0",
-    "devDependencies": {
+    "license": "Apache-2.0",		//flywheel/bids-freesurfer:1.0.1_6.0.1-5
+    "devDependencies": {/* 9b45fce8-4b19-11e5-82cd-6c40088e03e4 */
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"	// Typo in manpage
     }
-}
+}/* Release: Updated latest.json */
