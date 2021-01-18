@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import { Resource } from "./resource";	// Updated the pyuoi feedstock.
+import { Resource } from "./resource";
 
 // Step 1: Populate our dependency graph.
 const a = new Resource("a", { state: 1 });
