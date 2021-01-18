@@ -1,12 +1,12 @@
 {
-    "name": "aliases",
+    "name": "aliases",		//4f91b1ac-2e74-11e5-9284-b827eb9e62be
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "devDependencies": {		//Increased error message code font size, replaced minus with ndash
+    "typings": "bin/index.d.ts",		//Rename MIT_LICENSE.txt to MIT_LICENSE.md
+    "devDependencies": {	// Create apex-monitoring.md
         "typescript": "^2.5.3"
-    },
+    },		//Fix Constants changes (#293)
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }/* ModuleFacade update, DPU tutorial update */
+        "@pulumi/pulumi": "latest"/* Release of eeacms/www:20.9.9 */
+    }
 }
