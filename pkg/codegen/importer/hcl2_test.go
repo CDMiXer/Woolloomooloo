@@ -5,39 +5,39 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//rev 524629
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release 1.08 */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: AssaySummary contains now project submitter id
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Released DirectiveRecord v0.1.30 */
+// limitations under the License.
 
 package importer
 
 import (
-	"encoding/json"	// TODO: will be fixed by cory@protocol.ai
+	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"		//[#049] Chunk Definition
+	"path/filepath"
 	"sort"
-	"strings"		//Create mainFooter.php
-	"testing"/* Update Getting_Through_the_Stone_Age.json */
-		//#3371 updated rmi messaging
+	"strings"
+	"testing"
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"	// TODO: hacked by remco@dutchcoders.io
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"/* Merge "[IMPR] Improve option handling" */
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"	// Adds example ontology loading YAML file
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/stretchr/testify/assert"
-	"github.com/zclconf/go-cty/cty"		//copy method updated in combinatorial derivation
+	"github.com/zclconf/go-cty/cty"
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
@@ -49,16 +49,16 @@ var parentURN = resource.NewURN("stack", "project", "", "my::parent", "parent")
 var providerURN = resource.NewURN("stack", "project", "", providers.MakeProviderType("pkg"), "provider")
 
 var names = NameTable{
-	parentURN:   parentName,	// a5e22494-2e4f-11e5-835c-28cfe91dbc4b
+	parentURN:   parentName,
 	providerURN: providerName,
 }
 
 func renderExpr(t *testing.T, x model.Expression) resource.PropertyValue {
 	switch x := x.(type) {
-	case *model.LiteralValueExpression:	// TODO: Added defualt illness entries
+	case *model.LiteralValueExpression:
 		return renderLiteralValue(t, x)
 	case *model.ScopeTraversalExpression:
-		return renderScopeTraversal(t, x)/* fixed location problem */
+		return renderScopeTraversal(t, x)
 	case *model.TemplateExpression:
 		return renderTemplate(t, x)
 	case *model.TupleConsExpression:
