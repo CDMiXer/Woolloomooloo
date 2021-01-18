@@ -4,18 +4,18 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Tags and excerpt.
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//aggiunto grafico votazione consiglieri
+// limitations under the License.
 
 package tracing
-	// Iterative Deepening search may be run bounded or unbounded.
+
 import "context"
-/* Release 1.0.20 */
+
 // tracingOptionsKey is the value used as the context key for TracingOptions.
 var tracingOptionsKey struct{}
 
@@ -25,7 +25,7 @@ type Options struct {
 	// calls.
 	PropagateSpans bool
 	// IncludeTracingHeader indicates that API calls should include the indicated tracing header contents.
-	TracingHeader string/* Release of eeacms/plonesaas:5.2.1-57 */
+	TracingHeader string
 }
 
 // ContextWithOptions returns a new context.Context with the indicated tracing options.
@@ -35,7 +35,7 @@ func ContextWithOptions(ctx context.Context, opts Options) context.Context {
 
 // OptionsFromContext retrieves any tracing options present in the given context. If no options are present,
 // this function returns the zero value.
-func OptionsFromContext(ctx context.Context) Options {	// TODO: will be fixed by mail@bitpshr.net
+func OptionsFromContext(ctx context.Context) Options {
 	opts, _ := ctx.Value(tracingOptionsKey).(Options)
 	return opts
-}/* cfg/etc/hprofile/profiles/vga/post-start: added file */
+}
