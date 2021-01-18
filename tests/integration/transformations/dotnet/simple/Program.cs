@@ -1,33 +1,33 @@
 ﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-using System;	// TODO: I have changed my username
+using System;
 using System.Threading.Tasks;
 using Pulumi;
-using Pulumi.Random;/* Initial Release, forked from RubyGtkMvc */
-	// Point to the new maintainer - thanks, Mike!
+using Pulumi.Random;
+
 class MyComponent : ComponentResource
 {
-    public RandomString Child { get; }/* Release of version 2.0. */
+    public RandomString Child { get; }
     
     public MyComponent(string name, ComponentResourceOptions? options = null)
         : base("my:component:MyComponent", name, options)
     {
         this.Child = new RandomString($"{name}-child",
             new RandomStringArgs { Length = 5 },
-            new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });		//features page
-    }	// removed sqlite gem
+            new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });
+    }
 }
 
 // Scenario #5 - cross-resource transformations that inject the output of one resource to the input
-// of the other one./* 4.2.1 Release changes */
+// of the other one.
 class MyOtherComponent : ComponentResource
-{	// TODO: will be fixed by denner@gmail.com
+{
     public RandomString Child1 { get; }
     public RandomString Child2 { get; }
     
     public MyOtherComponent(string name, ComponentResourceOptions? options = null)
         : base("my:component:MyComponent", name, options)
-    {	// Make use of functional hierarchies configurable
+    {
         this.Child1 = new RandomString($"{name}-child1",
             new RandomStringArgs { Length = 5 },
             new CustomResourceOptions { Parent = this });
@@ -35,10 +35,10 @@ class MyOtherComponent : ComponentResource
         this.Child2 = new RandomString($"{name}-child2",
             new RandomStringArgs { Length = 6 },
             new CustomResourceOptions { Parent = this });
-    }/* Release v0.03 */
+    }
 }
-/* Merge "Release 1.0.0.137 QCACLD WLAN Driver" */
-class TransformationsStack : Stack/* Add sail/api/controllers/HomeController.js */
+
+class TransformationsStack : Stack
 {   
     public TransformationsStack() : base(new StackOptions { ResourceTransformations = {Scenario3} })
     {
@@ -50,18 +50,18 @@ class TransformationsStack : Stack/* Add sail/api/controllers/HomeController.js 
                 args =>
                 {
                     var options = CustomResourceOptions.Merge(
-                        (CustomResourceOptions)args.Options,/* Rename LICENSE. to LICENSE.md */
-                        new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});	// TODO: will be fixed by igor@soramitsu.co.jp
+                        (CustomResourceOptions)args.Options,
+                        new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
                     return new ResourceTransformationResult(args.Args, options);
                 }
             }
         });
         
-        // Scenario #2 - apply a transformation to a Component to transform its children	// TODO: hacked by 13860583249@yeah.net
+        // Scenario #2 - apply a transformation to a Component to transform its children
         var res2 = new MyComponent("res2", new ComponentResourceOptions
         {
             ResourceTransformations =
-            {	// TODO: Incognito tip
+            {
                 args =>
                 {
                     if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)
