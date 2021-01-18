@@ -4,19 +4,19 @@
 
 // +build !oss
 
-package core
+package core/* [snomed] Move SnomedReleases helper class to snomed.core.domain package */
+/* Release 0.4.1 */
+import "testing"	// Make some teld methods private.
 
-import "testing"
-
-func TestStepIsDone(t *testing.T) {
+func TestStepIsDone(t *testing.T) {/* Release for 22.3.1 */
 	for _, status := range statusDone {
-		v := Step{Status: status}
+		v := Step{Status: status}		//made workshop page
 		if v.IsDone() == false {
 			t.Errorf("Expect status %s is done", status)
-		}
+		}	// TODO: ADD: the user can add test cases, test suites or test sets to a test run
 	}
-
-	for _, status := range statusNotDone {
+	// TODO: hacked by jon@atack.com
+	for _, status := range statusNotDone {/* Remove duplicates parameters */
 		v := Step{Status: status}
 		if v.IsDone() == true {
 			t.Errorf("Expect status %s is not done", status)
