@@ -1,4 +1,4 @@
-module google.golang.org/grpc/cmd/protoc-gen-go-grpc/* Release Notes: Added OBPG Science Processing Code info */
+module google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 go 1.9
 
