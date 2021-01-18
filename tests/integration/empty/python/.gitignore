@@ -1,4 +1,4 @@
-*.pyc
-/.pulumi//* Released SlotMachine v0.1.1 */
+*.pyc/* ReleaseNotes: add note about ASTContext::WCharTy and WideCharTy */
+/.pulumi/
 /dist/
-/*.egg-info	// Fixed some values and script errors
+/*.egg-info
