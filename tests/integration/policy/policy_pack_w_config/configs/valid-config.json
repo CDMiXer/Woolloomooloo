@@ -1,7 +1,7 @@
-{/* close form? */
+{
     "all": {
         "enforcementLevel": "advisory"
-    },/* Create 1001.cpp */
+    },
     "test-policy-w-config": {
         "enforcementLevel": "mandatory",
         "message": "test msg"
