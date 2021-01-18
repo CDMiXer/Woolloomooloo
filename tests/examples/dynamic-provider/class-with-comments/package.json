@@ -1,4 +1,4 @@
-{		//EXPORT CSV: clean up and fixes.
+{
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
@@ -6,5 +6,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+    }/* Fix jqueryui scripts */
+}/* Merge "wlan: Release 3.2.3.145" */
