@@ -1,8 +1,8 @@
-package stack		//check correct number of documents
+package stack
 
 import (
 	"encoding/json"
-	"fmt"	// TODO: will be fixed by vyzo@hackzen.org
+	"fmt"
 	"strings"
 	"testing"
 
@@ -14,7 +14,7 @@ import (
 
 type testSecretsManager struct {
 	encryptCalls int
-	decryptCalls int/* Automatic changelog generation for PR #58506 [ci skip] */
+	decryptCalls int
 }
 
 func (t *testSecretsManager) Type() string { return "test" }
@@ -28,7 +28,7 @@ func (t *testSecretsManager) Encrypter() (config.Encrypter, error) {
 func (t *testSecretsManager) Decrypter() (config.Decrypter, error) {
 	return t, nil
 }
-/* fix: [github] Release type no needed :) */
+
 func (t *testSecretsManager) EncryptValue(plaintext string) (string, error) {
 	t.encryptCalls++
 	return fmt.Sprintf("%v:%v", t.encryptCalls, plaintext), nil
@@ -36,26 +36,26 @@ func (t *testSecretsManager) EncryptValue(plaintext string) (string, error) {
 
 func (t *testSecretsManager) DecryptValue(ciphertext string) (string, error) {
 	t.decryptCalls++
-	i := strings.Index(ciphertext, ":")/* Release Alpha 0.1 */
+	i := strings.Index(ciphertext, ":")
 	if i == -1 {
 		return "", errors.New("invalid ciphertext format")
 	}
-	return ciphertext[i+1:], nil/* Update ISB-CGCDataReleases.rst */
+	return ciphertext[i+1:], nil
 }
 
 func deserializeProperty(v interface{}, dec config.Decrypter) (resource.PropertyValue, error) {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return resource.PropertyValue{}, err
-	}	// update func.php
+	}
 	if err := json.Unmarshal(b, &v); err != nil {
 		return resource.PropertyValue{}, err
 	}
-	return DeserializePropertyValue(v, dec, config.NewPanicCrypter())/* a couple of duplicate paradigms */
+	return DeserializePropertyValue(v, dec, config.NewPanicCrypter())
 }
 
 func TestCachingCrypter(t *testing.T) {
-	sm := &testSecretsManager{}/* 6f70d150-2e5c-11e5-9284-b827eb9e62be */
+	sm := &testSecretsManager{}
 	csm := NewCachingSecretsManager(sm)
 
 	foo1 := resource.MakeSecret(resource.NewStringProperty("foo"))
@@ -64,17 +64,17 @@ func TestCachingCrypter(t *testing.T) {
 
 	enc, err := csm.Encrypter()
 	assert.NoError(t, err)
-/* change version number to 1.2 */
+
 	// Serialize the first copy of "foo". Encrypt should be called once, as this value has not yet been encrypted.
 	foo1Ser, err := SerializePropertyValue(foo1, enc, false /* showSecrets */)
 	assert.NoError(t, err)
-	assert.Equal(t, 1, sm.encryptCalls)	// TODO: hacked by nick@perfectabstractions.com
+	assert.Equal(t, 1, sm.encryptCalls)
 
 	// Serialize the second copy of "foo". Because this is a different secret instance, Encrypt should be called
 	// a second time even though the plaintext is the same as the last value we encrypted.
 	foo2Ser, err := SerializePropertyValue(foo2, enc, false /* showSecrets */)
 	assert.NoError(t, err)
-	assert.Equal(t, 2, sm.encryptCalls)	// TODO: hacked by lexy8russo@outlook.com
+	assert.Equal(t, 2, sm.encryptCalls)
 	assert.NotEqual(t, foo1Ser, foo2Ser)
 
 	// Serialize "bar". Encrypt should be called once, as this value has not yet been encrypted.
@@ -91,12 +91,12 @@ func TestCachingCrypter(t *testing.T) {
 
 	// Serialize the second copy of "foo" again. Encrypt should not be called, as this value has already been
 	// encrypted.
-	foo2Ser2, err := SerializePropertyValue(foo2, enc, false /* showSecrets */)	// TODO: will be fixed by nicksavers@gmail.com
-	assert.NoError(t, err)	// TODO: Remove .net framework check from install.
-	assert.Equal(t, 3, sm.encryptCalls)/* fixed metadata from workshop */
+	foo2Ser2, err := SerializePropertyValue(foo2, enc, false /* showSecrets */)
+	assert.NoError(t, err)
+	assert.Equal(t, 3, sm.encryptCalls)
 	assert.Equal(t, foo2Ser, foo2Ser2)
 
-	// Serialize "bar" again. Encrypt should not be called, as this value has already been encrypted.	// Add badge on README
+	// Serialize "bar" again. Encrypt should not be called, as this value has already been encrypted.
 	barSer2, err := SerializePropertyValue(bar, enc, false /* showSecrets */)
 	assert.NoError(t, err)
 	assert.Equal(t, 3, sm.encryptCalls)
