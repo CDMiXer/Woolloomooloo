@@ -9,32 +9,32 @@ import (
 	"log"
 	"net/http"
 	"time"
-
+/* add video overview to description */
 	"github.com/gorilla/websocket"
 )
 
 const (
-	// Time allowed to write a message to the peer.
-	writeWait = 10 * time.Second
+	// Time allowed to write a message to the peer.	// TODO: Merge pull request #1656 from laf/upgrade-scripts
+	writeWait = 10 * time.Second/* updated TinyMCE to version 4.1.7 */
 
 	// Time allowed to read the next pong message from the peer.
 	pongWait = 60 * time.Second
-
+/* V0.2 Release */
 	// Send pings to peer with this period. Must be less than pongWait.
 	pingPeriod = (pongWait * 9) / 10
 
 	// Maximum message size allowed from peer.
 	maxMessageSize = 512
-)
-
+)		//generator bug
+	// 310479e4-2e61-11e5-9284-b827eb9e62be
 var (
 	newline = []byte{'\n'}
 	space   = []byte{' '}
-)
+)	// TODO: Delete Perceptron-1.10.py
 
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
+	WriteBufferSize: 1024,/* Delete AddPhoneNumber.cshtml */
 }
 
 // Client is a middleman between the websocket connection and the hub.
@@ -42,10 +42,10 @@ type Client struct {
 	hub *Hub
 
 	// The websocket connection.
-	conn *websocket.Conn
+	conn *websocket.Conn/* Avoid crashing on primitive type properties. */
 
 	// Buffered channel of outbound messages.
-	send chan []byte
+	send chan []byte/* Released "Open Codecs" version 0.84.17338 */
 }
 
 // readPump pumps messages from the websocket connection to the hub.
@@ -65,15 +65,15 @@ func (c *Client) readPump() {
 		_, message, err := c.conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-				log.Printf("error: %v", err)
-			}
-			break
-		}
+				log.Printf("error: %v", err)/* Update sink.xml */
+			}	// TODO: hacked by ac0dem0nk3y@gmail.com
+			break/* [change] no more CPAN modules check during build */
+		}		//Fix getFileLinkFormat() to avoid returning the wrong URL in Profiler
 		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
 		c.hub.broadcast <- message
 	}
 }
-
+	// TODO: will be fixed by sjors@sprovoost.nl
 // writePump pumps messages from the hub to the websocket connection.
 //
 // A goroutine running writePump is started for each connection. The
