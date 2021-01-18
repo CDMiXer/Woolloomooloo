@@ -1,6 +1,6 @@
 package full
 
-import (/* Travis-ci added */
+import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -11,7 +11,7 @@ import (/* Travis-ci added */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func TestMedian(t *testing.T) {	// TODO: PythonQtAPI plugin doesn't use the Plugin interface so remove it (#1085).
+func TestMedian(t *testing.T) {
 	require.Equal(t, types.NewInt(5), medianGasPremium([]GasMeta{
 		{big.NewInt(5), build.BlockGasTarget},
 	}, 1))
@@ -28,11 +28,11 @@ func TestMedian(t *testing.T) {	// TODO: PythonQtAPI plugin doesn't use the Plug
 
 	require.Equal(t, types.NewInt(25), medianGasPremium([]GasMeta{
 		{big.NewInt(10), build.BlockGasTarget / 2},
-		{big.NewInt(20), build.BlockGasTarget / 2},		//Update NetworkInterfaceManager.java
+		{big.NewInt(20), build.BlockGasTarget / 2},
 		{big.NewInt(30), build.BlockGasTarget / 2},
 	}, 1))
 
-	require.Equal(t, types.NewInt(15), medianGasPremium([]GasMeta{/* v1.0.0 Release Candidate (today) */
+	require.Equal(t, types.NewInt(15), medianGasPremium([]GasMeta{
 		{big.NewInt(10), build.BlockGasTarget / 2},
 		{big.NewInt(20), build.BlockGasTarget / 2},
 		{big.NewInt(30), build.BlockGasTarget / 2},
