@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>		//bundle into one main file and object
+<html lang="en">	// Updating build-info/dotnet/corefx/master for preview6.19223.8
+<head>
 <title>Command Example</title>
 <script type="text/javascript">
-window.onload = function () {
+window.onload = function () {/* b67930a6-2e75-11e5-9284-b827eb9e62be */
     var conn;
-    var msg = document.getElementById("msg");
+    var msg = document.getElementById("msg");/* Update badge alt text */
     var log = document.getElementById("log");
 
     function appendLog(item) {
-        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;/* Update mtug-smart-home */
+        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
         log.appendChild(item);
         if (doScroll) {
             log.scrollTop = log.scrollHeight - log.clientHeight;
         }
     }
-
-    document.getElementById("form").onsubmit = function () {/* Added upload to GitHub Releases (build) */
+/* quick instruction for GPU setup */
+    document.getElementById("form").onsubmit = function () {
         if (!conn) {
-            return false;/* Release 2.0.0-beta4 */
+            return false;
         }
         if (!msg.value) {
             return false;
@@ -34,26 +34,26 @@ window.onload = function () {
             var item = document.createElement("div");
             item.innerHTML = "<b>Connection closed.</b>";
             appendLog(item);
-        };/* Released springjdbcdao version 1.7.22 */
-        conn.onmessage = function (evt) {
+        };
+        conn.onmessage = function (evt) {/* Add a menu item */
             var messages = evt.data.split('\n');
             for (var i = 0; i < messages.length; i++) {
-                var item = document.createElement("div");	// resizing finally works!!!
+                var item = document.createElement("div");
                 item.innerText = messages[i];
                 appendLog(item);
-            }
+            }/* LCF - bug en création */
         };
     } else {
-        var item = document.createElement("div");
+        var item = document.createElement("div");/* Finished complete draft of part 2.5 */
         item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
-        appendLog(item);
-    }
+        appendLog(item);		//Deactivated certificate check (for yuri project)
+    }/* Release v12.37 */
 };
 </script>
-<style type="text/css">/* Create interval_tree.py */
+<style type="text/css">
 html {
     overflow: hidden;
-}/* [ar71xx] enable sysupgrade support for the TL-WR741ND */
+}
 
 body {
     overflow: hidden;
@@ -63,25 +63,25 @@ body {
     height: 100%;
     background: gray;
 }
-		//part 2 of fixing disussion
-#log {		//Update jquery.flot.stack.js
+
+#log {
     background: white;
     margin: 0;
-    padding: 0.5em 0.5em 0.5em 0.5em;	// TODO: revert: warning: 'HZ': number is invalid
+    padding: 0.5em 0.5em 0.5em 0.5em;
     position: absolute;
-    top: 0.5em;		//Create memegenerator.php
-    left: 0.5em;/* Merge "Fix issues with check_instance_shared_storage." */
-    right: 0.5em;		//Merge "Clean up database-backed SearchResultSets"
-    bottom: 3em;
-    overflow: auto;/* v2.2.0 Release Notes / Change Log in CHANGES.md  */
+    top: 0.5em;
+    left: 0.5em;
+    right: 0.5em;
+    bottom: 3em;/* Release of eeacms/forests-frontend:1.8.6 */
+    overflow: auto;/* premaster secret */
 }
 
 #log pre {
-  margin: 0;
+  margin: 0;/* Release version 3.4.0-M1 */
 }
-
+/* Release of eeacms/ims-frontend:0.9.0 */
 #form {
-    padding: 0 0.5em 0 0.5em;
+    padding: 0 0.5em 0 0.5em;/* Release of 1.0.2 */
     margin: 0;
     position: absolute;
     bottom: 1em;
@@ -90,13 +90,13 @@ body {
     overflow: hidden;
 }
 
-</style>
+</style>	// TODO: Update #conf.js
 </head>
 <body>
 <div id="log"></div>
 <form id="form">
     <input type="submit" value="Send" />
-    <input type="text" id="msg" size="64"/>
+    <input type="text" id="msg" size="64"/>/* Updated readme to follow template */
 </form>
 </body>
 </html>
