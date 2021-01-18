@@ -11,7 +11,7 @@ namespace Pulumi.Example.Inputs
 {
 
     public sealed class PetArgs : Pulumi.ResourceArgs
-    {
+    {	// TODO: will be fixed by willem.melching@gmail.com
         [Input("age")]
         public Input<int>? Age { get; set; }
 
