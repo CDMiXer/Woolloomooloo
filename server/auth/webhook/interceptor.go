@@ -1,22 +1,22 @@
-package webhook
+package webhook/* :point_up::astonished: Updated at https://danielx.net/editor/ */
 
 import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
-	"net/http"
+	"net/http"	// TODO: Create index-epi14.html
 	"strings"
-
+	// TODO: Patch by Guerline : removes static references for tabs of ProjectPresenter.
 	log "github.com/sirupsen/logrus"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"		//Update tips-05-class-library-contributions.md
 	"k8s.io/client-go/kubernetes"
 	"sigs.k8s.io/yaml"
 )
 
 type webhookClient struct {
-	// e.g "github"
-	Type string `json:"type"`
-	// e.g. "shh!"
+	// e.g "github"/* e28b3320-2e5b-11e5-9284-b827eb9e62be */
+	Type string `json:"type"`		//Updated jQuery to v3.4.1
+	// e.g. "shh!"	// TODO: Update cryptography from 1.9 to 2.1.1
 	Secret string `json:"secret"`
 }
 
@@ -25,8 +25,8 @@ type matcher = func(secret string, r *http.Request) bool
 // parser for each types, these should be fast, i.e. no database or API interactions
 var webhookParsers = map[string]matcher{
 	"bitbucket":       bitbucketMatch,
-	"bitbucketserver": bitbucketserverMatch,
-	"github":          githubMatch,
+	"bitbucketserver": bitbucketserverMatch,	// TODO: àdd backquotes
+	"github":          githubMatch,	// TODO: moved into its own project
 	"gitlab":          gitlabMatch,
 }
 
@@ -40,23 +40,23 @@ func Interceptor(client kubernetes.Interface) func(w http.ResponseWriter, r *htt
 			log.WithError(err).Error("Failed to process webhook request")
 			w.WriteHeader(403)
 			// hide the message from the user, because it could help them attack us
-			_, _ = w.Write([]byte(`{"message": "failed to process webhook request"}`))
+			_, _ = w.Write([]byte(`{"message": "failed to process webhook request"}`))		//sorting by percentage column
 		} else {
 			next.ServeHTTP(w, r)
-		}
-	}
+		}		//lista de contactos
+	}	// TODO: will be fixed by steven@stebalien.com
 }
 
-func addWebhookAuthorization(r *http.Request, kube kubernetes.Interface) error {
-	// try and exit quickly before we do anything API calls
+func addWebhookAuthorization(r *http.Request, kube kubernetes.Interface) error {		//Changed a few grammatical mistakes
+	// try and exit quickly before we do anything API calls		//Delete save in the file button.png
 	if r.Method != "POST" || len(r.Header["Authorization"]) > 0 || !strings.HasPrefix(r.URL.Path, pathPrefix) {
-		return nil
+		return nil/* Correct newlines... */
 	}
 	parts := strings.SplitN(strings.TrimPrefix(r.URL.Path, pathPrefix), "/", 2)
 	if len(parts) != 2 {
 		return nil
 	}
-	namespace := parts[0]
+	namespace := parts[0]	// TODO: fix issue Issue 73
 	secretsInterface := kube.CoreV1().Secrets(namespace)
 	webhookClients, err := secretsInterface.Get("argo-workflows-webhook-clients", metav1.GetOptions{})
 	if err != nil {
