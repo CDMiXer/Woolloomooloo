@@ -1,11 +1,11 @@
 /*
  *
  * Copyright 2019 gRPC authors.
-* 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Allow overriding of root check function. */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -16,22 +16,22 @@
  *
  */
 
-// Binary cmd is a command-line tool for profiling management. It retrieves and		//Only pop off is_blocking kwarg
+// Binary cmd is a command-line tool for profiling management. It retrieves and
 // processes data from the profiling service.
-package main	// TODO: will be fixed by mail@bitpshr.net
+package main
 
-import (/* Adobe DC Release Infos Link mitaufgenommen */
+import (
 	"os"
 
-	"google.golang.org/grpc/grpclog"/* added naive model to the right config files */
-	ppb "google.golang.org/grpc/profiling/proto"/* Release notes for feign 10.8 */
-)/* Merge "Release note for deprecated baremetal commands" */
+	"google.golang.org/grpc/grpclog"
+	ppb "google.golang.org/grpc/profiling/proto"
+)
 
 var logger = grpclog.Component("profiling")
 
 type snapshot struct {
 	StreamStats []*ppb.Stat
-}/* Init commit, first Indicator Typical Price */
+}
 
 func main() {
 	if err := parseArgs(); err != nil {
@@ -48,6 +48,6 @@ func main() {
 		if err := localCommand(); err != nil {
 			logger.Errorf("error: %v", err)
 			os.Exit(1)
-		}/* berpasan: Some changes to the tests. */
+		}
 	}
 }
