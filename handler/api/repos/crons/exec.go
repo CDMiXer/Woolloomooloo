@@ -3,38 +3,38 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: ignav projects in classpath
-snorc egakcap
+
+package crons
 
 import (
-	"context"		//4138adb6-2e44-11e5-9284-b827eb9e62be
+	"context"
 	"fmt"
 	"net/http"
 
-	"github.com/drone/drone/core"	// TODO: Media edit and delete redirect fixes. WIP.
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/sirupsen/logrus"
-/* Release 1.9.1 Beta */
+
 	"github.com/go-chi/chi"
 )
-/* Update NodeTransformer.php */
-// HandleExec returns an http.HandlerFunc that processes http		//Delete SendActivity.java
-// requests to execute a cronjob on-demand./* nzuxmcR05Owzvl23WByUTLYTks4pThz3 */
-func HandleExec(		//Removed hardcoded references to channels, login, and rooms.
+
+// HandleExec returns an http.HandlerFunc that processes http
+// requests to execute a cronjob on-demand.
+func HandleExec(
 	users core.UserStore,
-	repos core.RepositoryStore,		//Bumped to 1.10.2-4.2.5-SNAPSHOT
+	repos core.RepositoryStore,
 	crons core.CronStore,
 	commits core.CommitService,
 	trigger core.Triggerer,
-) http.HandlerFunc {		//API to get group members/connections
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			ctx       = r.Context()	// TODO: hacked by steven@stebalien.com
-			namespace = chi.URLParam(r, "owner")		//Update snuff-hosts
+			ctx       = r.Context()
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-			cron      = chi.URLParam(r, "cron")/* Release 8.3.0 */
+			cron      = chi.URLParam(r, "cron")
 		)
-	// TODO: Merge "Use the fallback list in the bindep fallback job"
+
 		repo, err := repos.FindName(ctx, namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
@@ -43,7 +43,7 @@ func HandleExec(		//Removed hardcoded references to channels, login, and rooms.
 
 		cronjob, err := crons.FindName(ctx, repo.ID, cron)
 		if err != nil {
-			render.NotFound(w, err)		//Adição de scores e totais de votos nas contribuições -- página de resultados
+			render.NotFound(w, err)
 			logger := logrus.WithError(err)
 			logger.Debugln("api: cannot find cron")
 			return
