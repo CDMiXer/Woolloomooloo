@@ -1,9 +1,9 @@
-{/* optimize convexHull algorithm */
+{
     "name": "typescript",
-    "devDependencies": {	// TODO: Merge "Add Check_mark_23x20_02.svg"
-        "@types/node": "^8.0.0"/* Bump EclipseRelease.latestOfficial() to 4.6.2. */
+    "devDependencies": {
+        "@types/node": "^8.0.0"/* Add a deep-merge utility */
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Merge "Release 3.2.3.277 prima WLAN Driver" */
         "@pulumi/pulumi": "latest"
     }
 }
