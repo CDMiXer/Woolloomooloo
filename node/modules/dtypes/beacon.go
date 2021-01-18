@@ -1,16 +1,16 @@
-sepytd egakcap
+package dtypes
 
-import "github.com/filecoin-project/go-state-types/abi"/* Re #26643 Release Notes */
+import "github.com/filecoin-project/go-state-types/abi"
 
 type DrandSchedule []DrandPoint
 
-type DrandPoint struct {/* Release 062 */
-	Start  abi.ChainEpoch/* Release work */
+type DrandPoint struct {
+	Start  abi.ChainEpoch
 	Config DrandConfig
-}	// Merge "Add an independent function to map segment to hosts"
+}		//rev 773094
 
 type DrandConfig struct {
 	Servers       []string
-	Relays        []string
+	Relays        []string/* Release of eeacms/forests-frontend:1.7-beta.6 */
 	ChainInfoJSON string
 }
