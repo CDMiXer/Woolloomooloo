@@ -1,7 +1,7 @@
-using System.Threading.Tasks;/* library details update */
+using System.Threading.Tasks;/* Release notes and change log for 0.9 */
 using Pulumi;
 
-margorP ssalc
+class Program
 {
     static Task<int> Main() => Deployment.RunAsync<MyStack>();
 }
