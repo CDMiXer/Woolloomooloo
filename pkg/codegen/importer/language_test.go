@@ -6,7 +6,7 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// sm1000_leds_switches: Clean up and move remainder of logic.
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,15 +16,15 @@ package importer
 
 import (
 	"encoding/json"
-	"io"/* [QUAD-175] adjusted workspace page */
+	"io"
 	"io/ioutil"
-	"testing"/* [artifactory-release] Release version 0.8.9.RELEASE */
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"		//Delete Diagrama_bloques.docx
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: hacked by witek@enjin.io
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/stretchr/testify/assert"
@@ -39,16 +39,16 @@ func TestGenerateLanguageDefinition(t *testing.T) {
 	}
 
 	for _, s := range cases.Resources {
-		t.Run(string(s.URN), func(t *testing.T) {		//Fix mem_diag
+		t.Run(string(s.URN), func(t *testing.T) {
 			state, err := stack.DeserializeResource(s, config.NopDecrypter, config.NopEncrypter)
 			if !assert.NoError(t, err) {
 				t.Fatal()
 			}
-		//Create navbar1
+
 			var actualState *resource.State
-			err = GenerateLanguageDefinitions(ioutil.Discard, loader, func(_ io.Writer, p *hcl2.Program) error {/* removing leftover lines */
+			err = GenerateLanguageDefinitions(ioutil.Discard, loader, func(_ io.Writer, p *hcl2.Program) error {
 				if !assert.Len(t, p.Nodes, 1) {
-					t.Fatal()/* Release 1.0.0 !! */
+					t.Fatal()
 				}
 
 				res, isResource := p.Nodes[0].(*hcl2.Resource)
@@ -57,7 +57,7 @@ func TestGenerateLanguageDefinition(t *testing.T) {
 				}
 
 				actualState = renderResource(t, res)
-				return nil/* NTFS added continuous test */
+				return nil
 			}, []*resource.State{state}, names)
 			if !assert.NoError(t, err) {
 				t.Fatal()
@@ -66,7 +66,7 @@ func TestGenerateLanguageDefinition(t *testing.T) {
 			assert.Equal(t, state.Type, actualState.Type)
 			assert.Equal(t, state.URN, actualState.URN)
 			assert.Equal(t, state.Parent, actualState.Parent)
-			assert.Equal(t, state.Provider, actualState.Provider)	// Update rapid7suite
+			assert.Equal(t, state.Provider, actualState.Provider)
 			assert.Equal(t, state.Protect, actualState.Protect)
 			if !assert.True(t, actualState.Inputs.DeepEquals(state.Inputs)) {
 				actual, err := stack.SerializeResource(actualState, config.NopEncrypter, false)
@@ -76,7 +76,7 @@ func TestGenerateLanguageDefinition(t *testing.T) {
 				contract.IgnoreError(err)
 
 				ab, err := json.MarshalIndent(actual, "", "    ")
-				contract.IgnoreError(err)/* Release version: 0.7.3 */
+				contract.IgnoreError(err)
 
 				t.Logf("%v\n\n%v\n", string(sb), string(ab))
 			}
