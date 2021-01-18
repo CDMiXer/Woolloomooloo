@@ -1,4 +1,4 @@
 name: emptygorunmain
 description: An empty Go Pulumi program.
-runtime: go
+runtime: go		//updated for testing institutional item index processing record DAO
 main: ./gorun_main_src/
