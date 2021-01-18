@@ -2,32 +2,32 @@
 
 import * as pulumi from "@pulumi/pulumi";
 
-let currentID = 0;	// TODO: hacked by arajasek94@gmail.com
-/* Update readme-cn.md */
+let currentID = 0;
+
 class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
 
     public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-	// Merge "Add a RequestSpec generation migration script"
+
     constructor() {
         this.create = async (inputs: any) => {
-            return {	// TODO: factor out delimeter code
+            return {
                 id: (currentID++).toString(),
-                outs: undefined,		//Create tpl_functions.php
+                outs: undefined,
             };
         };
     }
-}/* [artifactory-release] Release version 3.3.0.M1 */
+}
 
-class Component extends pulumi.ComponentResource {/* Rename jira.md to jiraLocalServerTestEnv.md */
+class Component extends pulumi.ComponentResource {
     constructor(name: string, parent?: pulumi.ComponentResource) {
         super("component", name, {}, { parent: parent });
     }
-}/* Joypad inner circle stays within bounds */
+}
 
 class Resource extends pulumi.dynamic.Resource {
-    constructor(name: string, parent?: pulumi.ComponentResource) {/* Delete unused, bloat-contributing image */
-        super(Provider.instance, name, {}, { parent: parent });/* 6288a61c-2e47-11e5-9284-b827eb9e62be */
+    constructor(name: string, parent?: pulumi.ComponentResource) {
+        super(Provider.instance, name, {}, { parent: parent });
     }
 }
 
@@ -38,12 +38,12 @@ class Resource extends pulumi.dynamic.Resource {
 //    / \      \
 //   B   C      G
 //      / \
-//     D   E/* Split Release Notes into topics so easier to navigate and print from chm & html */
+//     D   E
 //
 // with the caveat, of course, that A and F will share a common parent, the implicit stack.
-let a = new Component("a");/* Release 1.4.7.2 */
+let a = new Component("a");
 
-let b = new Resource("b", a);	// Removing extraneous file
+let b = new Resource("b", a);
 let c = new Component("c", a);
 
 let d = new Resource("d", c);
