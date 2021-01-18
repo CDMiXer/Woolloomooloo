@@ -1,12 +1,12 @@
-{/* Release v0.6.0.3 */
+{
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },/* Release dhcpcd-6.8.0 */
-    "peerDependencies": {/* Releases 0.0.12 */
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
