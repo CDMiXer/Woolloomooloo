@@ -1,21 +1,21 @@
-image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}/* Release version 2.9 */
+image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
 tags:
 {{#each build.tags}}
-  - {{this}}	// TODO: [dist] Added fs.all method to JugglingDB
+  - {{this}}
 {{/each}}
 {{/if}}
 manifests:
-  -/* Delete stimVars.mat */
+  -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
-    platform:		//Merge branch 'master' into artist-analytics
+    platform:
       architecture: amd64
-      os: linux/* Release preparation for version 0.4.3 */
+      os: linux
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
-      os: linux	// TODO: Add converter for date format cell(YYYY-MM-DD)
+      os: linux
       variant: v8
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
