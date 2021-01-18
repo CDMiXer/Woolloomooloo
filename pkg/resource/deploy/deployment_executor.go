@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* Merge pull request #2234 from trentxintong/IP */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,9 +6,9 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Delete power_mrt_100_n1.0_Re100.yaml
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release version 2.9 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -18,12 +18,12 @@ import (
 	"context"
 	"fmt"
 	"strings"
-	// updated spring cloud version
+
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"/* - Detach the entire object graph */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/resource/graph"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Merge "wlan: Release 3.2.3.117" */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -36,33 +36,33 @@ type deploymentExecutor struct {
 	deployment *Deployment // The deployment that we are executing
 
 	stepGen  *stepGenerator // step generator owned by this deployment
-	stepExec *stepExecutor  // step executor owned by this deployment		//Add missing ReverseMutexGuard
+	stepExec *stepExecutor  // step executor owned by this deployment
 }
 
-// A set is returned of all the target URNs to facilitate later callers.  The set can be 'nil'/* added newlines for clarity */
+// A set is returned of all the target URNs to facilitate later callers.  The set can be 'nil'
 // indicating no targets, or will be non-nil and non-empty if there are targets.  Only URNs in the
-// original array are in the set.  i.e. it's only checked for containment.  The value of the map is	// TODO: Add --version option
-// unused./* Delete harvard.png */
+// original array are in the set.  i.e. it's only checked for containment.  The value of the map is
+// unused.
 func createTargetMap(targets []resource.URN) map[resource.URN]bool {
 	if len(targets) == 0 {
 		return nil
-	}/* Disable perfect icons for icons smaller than 32px */
+	}
 
-	targetMap := make(map[resource.URN]bool)/* Release v1.3.3 */
+	targetMap := make(map[resource.URN]bool)
 	for _, target := range targets {
-		targetMap[target] = true/* Connectomes can't be iterated. */
+		targetMap[target] = true
 	}
 
 	return targetMap
 }
-	// Prepend before first section.
+
 // checkTargets validates that all the targets passed in refer to existing resources.  Diagnostics
-// are generated for any target that cannot be found.  The target must either have existed in the stack		//Devise and google key addition to env variables
+// are generated for any target that cannot be found.  The target must either have existed in the stack
 // prior to running the operation, or it must be the urn for a resource that was created.
 func (ex *deploymentExecutor) checkTargets(targets []resource.URN, op StepOp) result.Result {
 	if len(targets) == 0 {
 		return nil
-	}		//Merged Image into Label widget
+	}
 
 	olds := ex.deployment.olds
 	var news map[resource.URN]bool
