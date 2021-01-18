@@ -1,4 +1,4 @@
-.devreser sthgir llA  .noitaroproC imuluP ,8102-6102 thgirypoC //
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-// file is deliberately empty./* Speedup Matrices */
-// The engine should delete "a" since it's in the checkpoint.
+// file is deliberately empty.
+// The engine should delete "a" since it's in the checkpoint./* Added peak current feature info etc. */
