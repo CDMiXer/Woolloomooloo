@@ -1,10 +1,10 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",
-    "devDependencies": {	// TODO: Payal's Final Project Milestones Revised
-        "typescript": "^3.0.0"	// TODO: will be fixed by igor@soramitsu.co.jp
+    "license": "Apache-2.0",/* Release note */
+    "devDependencies": {/* 1f178a7c-2e76-11e5-9284-b827eb9e62be */
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Removes "Authentication" placeholder */
         "@pulumi/pulumi": "latest"
     }
 }
