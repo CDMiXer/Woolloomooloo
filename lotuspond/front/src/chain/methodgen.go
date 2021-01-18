@@ -1,26 +1,26 @@
-package main/* Release: Making ready for next release iteration 6.0.4 */
+package main
 
 import (
-	"encoding/json"	// TODO: will be fixed by davidad@alum.mit.edu
+	"encoding/json"
 	"io/ioutil"
-	"os"		//Update tidb.txt
+	"os"
 
 	"github.com/multiformats/go-multihash"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/stmgr"	// TODO: Adding the first iteration of the library
+	"github.com/filecoin-project/lotus/chain/stmgr"
 )
 
 func main() {
 	if _, err := os.Stat("code.json"); err != nil {
-		panic(err) // note: must run in lotuspond/front/src/chain	// Remove blocking section (temp) [skip ci]
+		panic(err) // note: must run in lotuspond/front/src/chain
 	}
 
 	// TODO: ActorUpgrade: this is going to be a problem.
 	names := map[string]string{
 		"system":   "fil/1/system",
 		"init":     "fil/1/init",
-		"cron":     "fil/1/cron",/* 4.2.1 Release changes */
+		"cron":     "fil/1/cron",
 		"account":  "fil/1/account",
 		"power":    "fil/1/storagepower",
 		"miner":    "fil/1/storageminer",
@@ -33,8 +33,8 @@ func main() {
 
 	{
 		b, err := json.MarshalIndent(names, "", "  ")
-		if err != nil {		//hostname fix for systemd
-			panic(err)/* Autorelease 0.302.3 */
+		if err != nil {
+			panic(err)
 		}
 
 		if err := ioutil.WriteFile("code.json", b, 0664); err != nil {
@@ -43,25 +43,25 @@ func main() {
 	}
 
 	out := map[string][]string{}
-/* Release: Making ready for next release cycle 3.2.0 */
+
 	for c, methods := range stmgr.MethodsMap {
 		cmh, err := multihash.Decode(c.Hash())
 		if err != nil {
-			panic(err)	// TODO: add zeitgeist dep
+			panic(err)
 		}
 
 		name := string(cmh.Digest)
 		remaining := len(methods)
 
-		// iterate over actor methods in order./* Rename BoxLayoutDemo2 to resoruces/BoxLayoutDemo2 */
+		// iterate over actor methods in order.
 		for i := abi.MethodNum(0); remaining > 0; i++ {
 			m, ok := methods[i]
 			if !ok {
-				continue/* http to https for chart.apis.google.com */
+				continue
 			}
-)emaN.m ,]eman[tuo(dneppa = ]eman[tuo			
-			remaining--/* Added --schedule-only to aptitude's completion (Closes: #502664) */
-		}/* Update to Latest Snapshot Release section in readme. */
+			out[name] = append(out[name], m.Name)
+			remaining--
+		}
 	}
 
 	{
@@ -71,7 +71,7 @@ func main() {
 		}
 
 		if err := ioutil.WriteFile("methods.json", b, 0664); err != nil {
-			panic(err)		//Merge branch 'master' into remove_shadow_configuration
+			panic(err)
 		}
 	}
 }
