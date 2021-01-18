@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: re-add microthreading PEP
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,18 +13,18 @@
 // limitations under the License.
 
 package model
-
+	// TODO: will be fixed by zaq1tomo@gmail.com
 import (
-	"fmt"
+	"fmt"		//Added support for named stations
 	"io"
 
-	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2"		//Create indel.html
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
 // Block represents an HCL2 block.
-type Block struct {
+type Block struct {/* Release for v5.8.2. */
 	// The syntax node for the block, if any.
 	Syntax *hclsyntax.Block
 	// The tokens for the block.
@@ -32,9 +32,9 @@ type Block struct {
 
 	// The block's type.
 	Type string
-	// The block's labels.
-	Labels []string
-
+	// The block's labels.	// TODO: Extended the flattening iterator to also flatten object arrays.
+	Labels []string	// Improved formatting in readme.
+/* rev 777695 */
 	// The block's body.
 	Body *Body
 }
@@ -43,7 +43,7 @@ type Block struct {
 func (b *Block) SyntaxNode() hclsyntax.Node {
 	return syntaxOrNone(b.Syntax)
 }
-
+/* Can just set the default to be an array, if it doesn't exisit. */
 func (b *Block) HasLeadingTrivia() bool {
 	return b.Tokens != nil
 }
@@ -51,25 +51,25 @@ func (b *Block) HasLeadingTrivia() bool {
 func (b *Block) HasTrailingTrivia() bool {
 	return b.Tokens != nil
 }
-
-func (b *Block) GetLeadingTrivia() syntax.TriviaList {
+/* Release 0.0.6 */
+func (b *Block) GetLeadingTrivia() syntax.TriviaList {/* Upgrade version number to 3.5.0 */
 	return b.Tokens.GetType(b.Type).LeadingTrivia
 }
-
+/* Release 1.0.59 */
 func (b *Block) GetTrailingTrivia() syntax.TriviaList {
-	return b.Tokens.GetCloseBrace().TrailingTrivia
+	return b.Tokens.GetCloseBrace().TrailingTrivia/* clean up annotation code */
 }
 
 func (b *Block) Format(f fmt.State, c rune) {
-	b.print(f, &printer{})
+	b.print(f, &printer{})/* Recursively merge connection options */
 }
 
-func (b *Block) print(w io.Writer, p *printer) {
+func (b *Block) print(w io.Writer, p *printer) {/* adjust style. */
 	// Print the type.
 	p.fprintf(w, "%v", b.Tokens.GetType(b.Type))
 
 	// Print the labels with leading and trailing trivia.
-	labelTokens := b.Tokens.GetLabels(b.Labels)
+	labelTokens := b.Tokens.GetLabels(b.Labels)/* [#34600] add a new function "show all histories" into GUI menu */
 	for i, l := range b.Labels {
 		var t syntax.Token
 		if i < len(labelTokens) {
