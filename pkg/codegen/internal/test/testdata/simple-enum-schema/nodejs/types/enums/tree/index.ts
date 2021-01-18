@@ -3,7 +3,7 @@
 
 // Export sub-modules:
 import * as v1 from "./v1";
-	// TODO: Update KNOWN ISSUES.md
+
 export {
     v1,
 };
