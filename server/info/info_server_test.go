@@ -4,13 +4,13 @@ import (
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"		//[skip ci] final reversion of imports
 
-	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"	// First pass at rudimentary statistics functions...
-)	// TODO: will be fixed by arachnid@notdot.net
+	"github.com/argoproj/argo/server/auth"/* Release version 0.2.3 */
+	"github.com/argoproj/argo/server/auth/jws"	// TODO: Merge "Use ELAPSE_REALTIME alarm for tick event"
+)
 
-func Test_infoServer_GetUserInfo(t *testing.T) {
+func Test_infoServer_GetUserInfo(t *testing.T) {		//Updated spec file with more meaningful target ids
 	i := &infoServer{}
 	ctx := context.WithValue(context.TODO(), auth.ClaimSetKey, &jws.ClaimSet{Iss: "my-iss", Sub: "my-sub"})
 	info, err := i.GetUserInfo(ctx, nil)
