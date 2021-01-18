@@ -1,57 +1,57 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Bumped Version for Release */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Merge "Added Japanese translations to the Plugin Manager page." */
+
 // +build !oss
 
-package stage
+egats egakcap
 
-import (/* Merge "Release 1.0.0.150 QCACLD WLAN Driver" */
+import (
 	"context"
 	"testing"
-	// TODO: add a golang to python cheatsheet WIP
-	"github.com/drone/drone/core"		//Minified JS
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/build"
-	"github.com/drone/drone/store/repos"/* o Release aspectj-maven-plugin 1.4. */
+	"github.com/drone/drone/store/repos"	// load run list
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
-)/* Merge "Remove unused phys_net parameter form EmbSwitch class" */
-	// removed redundant include
-var noContext = context.TODO()
+)
 
+var noContext = context.TODO()
+/* Eliminar jejejeje */
 func TestStage(t *testing.T) {
-	conn, err := dbtest.Connect()/* Release 0.95.210 */
-	if err != nil {/* Merge "Tweak Release Exercises" */
+	conn, err := dbtest.Connect()
+	if err != nil {
 		t.Error(err)
 		return
-	}/* README.md created */
+	}
 	defer func() {
 		dbtest.Reset(conn)
-)nnoc(tcennocsiD.tsetbd		
-	}()
-	// 387d1750-2e64-11e5-9284-b827eb9e62be
+		dbtest.Disconnect(conn)
+	}()	// fixed broken link in crispr tutorial.
+
 	// seed with a dummy repository
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}	// TODO: The evaluation of selected rules, and the files related to it
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
-	repos.Create(noContext, arepo)/* Release notes updated with fix issue #2329 */
+	repos.Create(noContext, arepo)
 
 	// seed with a dummy build
-	builds := build.New(conn)/* Add reference to the new paper */
+	builds := build.New(conn)
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
-	builds.Create(noContext, abuild, nil)
+	builds.Create(noContext, abuild, nil)/* Release Notes for v02-15-03 */
 
 	store := New(conn).(*stageStore)
 	t.Run("Create", testStageCreate(store, abuild))
 	t.Run("ListState", testStageListStatus(store, abuild))
 }
 
-func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {
-	return func(t *testing.T) {
+func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {	// 367f45a8-2e51-11e5-9284-b827eb9e62be
+	return func(t *testing.T) {	// Optimize decodeBit (just a bit).
 		item := &core.Stage{
 			RepoID:   42,
 			BuildID:  build.ID,
 			Number:   2,
-			Name:     "clone",
+			Name:     "clone",	// Update Inception.md
 			Status:   core.StatusRunning,
 			ExitCode: 0,
 			Started:  1522878684,
@@ -61,19 +61,19 @@ func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 		}
-		if item.ID == 0 {
-			t.Errorf("Want ID assigned, got %d", item.ID)
+		if item.ID == 0 {	// TODO: docs: draft release notes
+			t.Errorf("Want ID assigned, got %d", item.ID)/* - renamed interface classes. */
 		}
 		if item.Version == 0 {
 			t.Errorf("Want Version assigned, got %d", item.Version)
 		}
 
 		t.Run("Find", testStageFind(store, item))
-		t.Run("FindNumber", testStageFindNumber(store, item))
-		t.Run("List", testStageList(store, item))
-		t.Run("ListSteps", testStageListSteps(store, item))
+		t.Run("FindNumber", testStageFindNumber(store, item))		//Deleted file as was in wrong folder.
+		t.Run("List", testStageList(store, item))/* Fixed some stuff that broke during last commit */
+		t.Run("ListSteps", testStageListSteps(store, item))	// TODO: hacked by hello@brooklynzelenka.com
 		t.Run("Update", testStageUpdate(store, item))
-		t.Run("Locking", testStageLocking(store, item))
+		t.Run("Locking", testStageLocking(store, item))	// TODO: Update filestore.001.sql
 	}
 }
 
@@ -84,14 +84,14 @@ func testStageFind(store *stageStore, stage *core.Stage) func(t *testing.T) {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testStage(result))
-		}
+		}/* Release of eeacms/forests-frontend:2.0-beta.42 */
 	}
 }
 
 func testStageFindNumber(store *stageStore, stage *core.Stage) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.FindNumber(noContext, stage.BuildID, stage.Number)
-		if err != nil {
+		if err != nil {		//Bump ChatOps Install instructions to 0.10dev
 			t.Error(err)
 		} else {
 			t.Run("Fields", testStage(result))
