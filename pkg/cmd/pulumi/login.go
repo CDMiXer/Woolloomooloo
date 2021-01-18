@@ -2,9 +2,9 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: docs(cookbook:index.ngdoc):Поправил описание
-///* Término da versão estável. Release 1.0. */
-//     http://www.apache.org/licenses/LICENSE-2.0/* Released springjdbcdao version 1.8.5 */
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,9 +13,9 @@
 // limitations under the License.
 
 package main
-		//Merge branch 'master' into birkholz/delete
+
 import (
-	"fmt"/* Create RSOsignup.html */
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -24,22 +24,22 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"		//Implemented action for precomputed patterns
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"/* Merge "NSX gateway extension: allow more transport type values" */
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// TODO: will be fixed by qugou1350636@126.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-	// TODO: Office Fix
+
 func newLoginCmd() *cobra.Command {
 	var cloudURL string
 	var localMode bool
 
 	cmd := &cobra.Command{
-		Use:   "login [<url>]",	// Merge branch 'dev' into whatsnew_fix
+		Use:   "login [<url>]",
 		Short: "Log in to the Pulumi service",
-		Long: "Log in to the Pulumi service.\n" +/* dice will no longer tell you that they land if there's no gravity */
-			"\n" +	// TODO: Don't randomly comment out code. Probably fixes kdb cont command.
+		Long: "Log in to the Pulumi service.\n" +
+			"\n" +
 			"The service manages your stack's state reliably. Simply run\n" +
 			"\n" +
 			"    $ pulumi login\n" +
@@ -48,9 +48,9 @@ func newLoginCmd() *cobra.Command {
 			"easily obtain one. You can script by using `PULUMI_ACCESS_TOKEN` environment variable.\n" +
 			"\n" +
 			"By default, this will log in to the managed Pulumi service backend.\n" +
-			"If you prefer to log in to a self-hosted Pulumi service backend, specify a URL. For example, run\n" +/* 365dcb26-2e5b-11e5-9284-b827eb9e62be */
+			"If you prefer to log in to a self-hosted Pulumi service backend, specify a URL. For example, run\n" +
 			"\n" +
-			"    $ pulumi login https://api.pulumi.acmecorp.com\n" +/* 0.9.0 Release */
+			"    $ pulumi login https://api.pulumi.acmecorp.com\n" +
 			"\n" +
 			"to log in to a self-hosted Pulumi service running at the api.pulumi.acmecorp.com domain.\n" +
 			"\n" +
@@ -61,8 +61,8 @@ func newLoginCmd() *cobra.Command {
 			"    $ pulumi login file://~\n" +
 			"\n" +
 			"will store your state information on your computer underneath `~/.pulumi`. It is then up to you to\n" +
-			"manage this state, including backing it up, using it in a team environment, and so on.\n" +		//Added a grouping header for the test cases for Richard
-			"\n" +	// Start development series 0.6-post
+			"manage this state, including backing it up, using it in a team environment, and so on.\n" +
+			"\n" +
 			"As a shortcut, you may pass --local to use your home directory (this is an alias for `file://~`):\n" +
 			"\n" +
 			"    $ pulumi login --local\n" +
