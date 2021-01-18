@@ -3,8 +3,8 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },	// Rebuilt BIOS from latest rombios.c
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// extractorf: fixed wrong header index file output name
+        "@pulumi/pulumi": "latest"
     }
-}	// Update 038 - Ŝ (Sad).html
+}
