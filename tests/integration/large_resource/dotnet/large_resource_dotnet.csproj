@@ -3,6 +3,6 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>	// TODO: hacked by 13860583249@yeah.net
+  </PropertyGroup>
 
-</Project>
+</Project>/* Updated for Laravel Releases */
