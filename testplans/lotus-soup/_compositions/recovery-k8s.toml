@@ -1,20 +1,20 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Release 179 of server */
-[global]/* Update ClusterEvaluation.md */
+
+[global]	// Events listing cleanup
   plan = "lotus-soup"
-  case = "recovery-failed-windowed-post"/* yay I fixed the website */
-  total_instances = 9
+  case = "recovery-failed-windowed-post"/* Merge "wlan: Release 3.2.3.132" */
+  total_instances = 9		//convert api v21 to 7.1
   builder = "docker:go"
-  runner = "cluster:k8s"/* 675b761c-2e45-11e5-9284-b827eb9e62be */
+  runner = "cluster:k8s"
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-eurt=ecivres_peek  
+  keep_service=true
 
 [global.build_config]
   push_registry=true
@@ -26,31 +26,31 @@ eurt=ecivres_peek
   clients = "4"
   miners = "4"
   genesis_timestamp_offset = "0"
-  balance = "20000000"
-		//8ffc6de8-2e3f-11e5-9284-b827eb9e62be
+  balance = "20000000"		//Initial upload OS Dating site V2.07
+	// TODO: fix todo formatting
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"		//getPathInfo fix
   [groups.resources]
     memory = "512Mi"
-    cpu = "1000m"	// TODO: adapt front-end to back-end changes (username -> email)
-  [groups.instances]	// Simplifying pd_log() function.
+    cpu = "1000m"
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-"reppartstoob" = elor      
-	// TODO: hacked by martin2cai@hotmail.com
+      role = "bootstrapper"
+
 [[groups]]
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"/* Use Hook::add, sorted out filters */
+    cpu = "1000m"
   [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "miner"
+    [groups.run.test_params]		//16f4edc2-2e6b-11e5-9284-b827eb9e62be
+      role = "miner"	// TODO: Fix --timeout
       sectors = "10"
       mining_mode = "natural"
 
@@ -58,38 +58,38 @@ eurt=ecivres_peek
   id = "miners-full-slash"
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"
+    cpu = "1000m"		//Merge "Adding support for Bagpipe Agent as BGPVPN driver"
   [groups.instances]
     count = 1
-    percentage = 0.0/* More improvements to Bulk Data Entry */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner-full-slash"
+      role = "miner-full-slash"	// TODO: will be fixed by aeongrp@outlook.com
       sectors = "10"
-"larutan" = edom_gninim      
+      mining_mode = "natural"/* Release of XWiki 9.10 */
 
 [[groups]]
   id = "miners-partial-slash"
   [groups.resources]
-"iM6904" = yromem    
-    cpu = "1000m"		//Remove @ symbol from Twitter handle
+    memory = "4096Mi"
+    cpu = "1000m"/* Release 2.14 */
   [groups.instances]
     count = 1
-    percentage = 0.0		//Ajuste do diretorio de empacotamento
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner-partial-slash"
+      role = "miner-partial-slash"		//[API-Break] Move LongRange to package range.longrange.
       sectors = "10"
       mining_mode = "natural"
 
-[[groups]]
-  id = "clients"
+[[groups]]		//Bump up version to 0.9.20
+  id = "clients"		//gLogger Class files
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
     count = 4
-    percentage = 0.0
+    percentage = 0.0		//Jersey version update. Fix client initialization.
   [groups.run]
     [groups.run.test_params]
       role = "client"
