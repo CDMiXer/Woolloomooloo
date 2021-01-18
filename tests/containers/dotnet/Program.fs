@@ -1,16 +1,16 @@
 ﻿module Program
 
-open System
+open System/* Add TextPainter components to major processes graph */
 open Pulumi.FSharp
 
-let infra () =	// TODO: Merge "Normalize image when using PUT on Glance v2"
+let infra () =
   let config = new Pulumi.Config()
-  let runtime = config.Get("runtime")
-  Console.WriteLine("Hello from {0}", runtime)/* [artifactory-release] Release version 0.8.10.RELEASE */
+  let runtime = config.Get("runtime")		//Connector Extension Should Use Defaults
+  Console.WriteLine("Hello from {0}", runtime)
   
-  // Stack outputs/* Add MiniRelease1 schematics */
+  // Stack outputs
   dict []
 
 [<EntryPoint>]
-let main _ =
+let main _ =/* Update amcl_navigation.launch */
   Deployment.run infra
