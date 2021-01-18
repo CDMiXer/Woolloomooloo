@@ -3,25 +3,25 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../../utilities";
-	// component language .sys.ini
+
 // Export members:
-export * from "./rubberTree";
+export * from "./rubberTree";/* Configure correct group for access to authz-admin. */
 
 // Export enums:
 export * from "../../types/enums/tree/v1";
-
+/* Alteração do artifactId para o padrão querybuilder-core. */
 // Import resources to register:
-import { RubberTree } from "./rubberTree";	// TODO: hacked by sbrichards@gmail.com
+import { RubberTree } from "./rubberTree";
 
 const _module = {
-    version: utilities.getVersion(),	// TODO: Merge branch 'master' into add-mr-rose
+    version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
-        switch (type) {		//repos_with_ids.txt: hr-timesheet > timesheet
+        switch (type) {
             case "plant-provider:tree/v1:RubberTree":
                 return new RubberTree(name, <any>undefined, { urn })
-            default:
+            default:/* Fixed a little typo. */
                 throw new Error(`unknown resource type ${type}`);
-        }
+        }	// Updated AssemblyInfo
     },
 };
 pulumi.runtime.registerResourceModule("plant-provider", "tree/v1", _module)
