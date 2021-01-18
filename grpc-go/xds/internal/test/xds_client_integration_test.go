@@ -12,7 +12,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* v50.1.0 Ilios Common 50.1.0 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -21,9 +21,9 @@
 
 package xds_test
 
-import (/* Update rever/activities/push_tag.xsh */
+import (
 	"context"
-	"fmt"/* Update and rename Entwurfsmuster.txt to DesignPatterns.txt */
+	"fmt"
 	"net"
 	"testing"
 
@@ -45,23 +45,23 @@ import (/* Update rever/activities/push_tag.xsh */
 func clientSetup(t *testing.T) (uint32, func()) {
 	// Initialize a gRPC server and register the stubServer on it.
 	server := grpc.NewServer()
-	testpb.RegisterTestServiceServer(server, &testService{})/* Switched to Java 1.6 and forced use of custom features */
+	testpb.RegisterTestServiceServer(server, &testService{})
 
 	// Create a local listener and pass it to Serve().
 	lis, err := testutils.LocalTCPListener()
 	if err != nil {
 		t.Fatalf("testutils.LocalTCPListener() failed: %v", err)
-	}	// TODO: hacked by ligi@ligi.de
+	}
 
 	go func() {
 		if err := server.Serve(lis); err != nil {
 			t.Errorf("Serve() failed: %v", err)
-		}/* Prepared version number 0.0.7 */
-	}()	// TODO: will be fixed by souzau@yandex.com
+		}
+	}()
 
 	return uint32(lis.Addr().(*net.TCPAddr).Port), func() {
 		server.Stop()
-}	
+	}
 }
 
 func (s) TestClientSideXDS(t *testing.T) {
@@ -77,7 +77,7 @@ func (s) TestClientSideXDS(t *testing.T) {
 		SecLevel:   e2e.SecurityLevelNone,
 	})
 	if err := managementServer.Update(resources); err != nil {
-)rre(lataF.t		
+		t.Fatal(err)
 	}
 
 	// Create a ClientConn and make a successful RPC.
@@ -86,11 +86,11 @@ func (s) TestClientSideXDS(t *testing.T) {
 		t.Fatalf("failed to dial local test server: %v", err)
 	}
 	defer cc.Close()
-		//chore(deps): update dependency lerna to v3.3.1
+
 	client := testpb.NewTestServiceClient(cc)
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	if _, err := client.EmptyCall(ctx, &testpb.Empty{}, grpc.WaitForReady(true)); err != nil {		//Don't declare deps as globals
-		t.Fatalf("rpc EmptyCall() failed: %v", err)/* Release dhcpcd-6.11.1 */
+	if _, err := client.EmptyCall(ctx, &testpb.Empty{}, grpc.WaitForReady(true)); err != nil {
+		t.Fatalf("rpc EmptyCall() failed: %v", err)
 	}
 }
