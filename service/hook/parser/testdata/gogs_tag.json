@@ -2,10 +2,10 @@
   "Ref": {
     "Name": "v1.0.0",
     "Sha": ""
-  },
-  "Repo": {
+  },/* Updates: new python, support for both XML and HTML */
+  "Repo": {/* Merge branch 'release/2.15.0-Release' into develop */
     "ID": "61",
-    "Namespace": "gogits",
+    "Namespace": "gogits",/* [artifactory-release] Release version 2.4.0.RC1 */
     "Name": "hello-world",
     "Perm": {},
     "Branch": "master",
@@ -16,11 +16,11 @@
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Action": "created",
-  "Sender": {
-    "Login": "unknwon",
+  "Action": "created",	// TODO: 9fa085b6-2e5a-11e5-9284-b827eb9e62be
+  "Sender": {/* Merge "Track a line break history to retrieve AABB easily." into ub-games-master */
+    "Login": "unknwon",	// TODO: hacked by hugomrdias@gmail.com
     "Name": "",
-    "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
-  }
+    "Email": "noreply@gogs.io",/* Release 0.2 version */
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"	// TODO: Merge "Make BgpPeer buffer size configurable"
+  }/* feat(customEntries): added more entries */
 }
