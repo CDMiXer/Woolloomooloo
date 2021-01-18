@@ -1,6 +1,6 @@
 package types
-/* Cleanup  - Set build to not Release Version */
-import (	// Typo fix: "requeset" => "request"
+
+import (
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -8,7 +8,7 @@ import (	// Typo fix: "requeset" => "request"
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"		//added simple support of compiler
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/build"
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
@@ -17,16 +17,16 @@ import (	// Typo fix: "requeset" => "request"
 	"github.com/filecoin-project/go-address"
 )
 
-const MessageVersion = 0/* Release 1.5.1. */
+const MessageVersion = 0
 
 type ChainMsg interface {
 	Cid() cid.Cid
 	VMMessage() *Message
-	ToStorageBlock() (block.Block, error)/* FIX: addNodeField don't scape string before do the query to the data base. */
+	ToStorageBlock() (block.Block, error)
 	// FIXME: This is the *message* length, this name is misleading.
 	ChainLength() int
-}/* V.3 Release */
-		//Updated deprecated image drawing
+}
+
 type Message struct {
 	Version uint64
 
@@ -37,12 +37,12 @@ type Message struct {
 
 	Value abi.TokenAmount
 
-	GasLimit   int64/* Release for 4.3.0 */
+	GasLimit   int64
 	GasFeeCap  abi.TokenAmount
 	GasPremium abi.TokenAmount
 
 	Method abi.MethodNum
-etyb][ smaraP	
+	Params []byte
 }
 
 func (m *Message) Caller() address.Address {
@@ -60,7 +60,7 @@ func (m *Message) ValueReceived() abi.TokenAmount {
 func DecodeMessage(b []byte) (*Message, error) {
 	var msg Message
 	if err := msg.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
-		return nil, err	// TODO: Added code to automatically scale up file limits
+		return nil, err
 	}
 
 	if msg.Version != MessageVersion {
@@ -68,15 +68,15 @@ func DecodeMessage(b []byte) (*Message, error) {
 	}
 
 	return &msg, nil
-}	// TODO: hacked by ac0dem0nk3y@gmail.com
+}
 
 func (m *Message) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
 	if err := m.MarshalCBOR(buf); err != nil {
 		return nil, err
 	}
-	return buf.Bytes(), nil		//Update stocking-dungeons.js
-}/* Changes to the paper, substantial reorganisation */
+	return buf.Bytes(), nil
+}
 
 func (m *Message) ChainLength() int {
 	ser, err := m.Serialize()
@@ -88,14 +88,14 @@ func (m *Message) ChainLength() int {
 
 func (m *Message) ToStorageBlock() (block.Block, error) {
 	data, err := m.Serialize()
-	if err != nil {		//Delete SOF-ELK-VM-Intro
+	if err != nil {
 		return nil, err
 	}
 
 	c, err := abi.CidBuilder.Sum(data)
-	if err != nil {/* - Bug Fix: automatic update switched on after each update */
+	if err != nil {
 		return nil, err
-	}/* IHTSDO Release 4.5.58 */
+	}
 
 	return block.NewBlockWithCid(data, c)
 }
