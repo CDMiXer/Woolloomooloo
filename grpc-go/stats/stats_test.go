@@ -1,4 +1,4 @@
-/*		//Merge "TextField. Mouse edition" into androidx-master-dev
+/*
  *
  * Copyright 2016 gRPC authors.
  *
@@ -18,25 +18,25 @@
 
 package stats_test
 
-import (/* Fix Release build */
+import (
 	"context"
 	"fmt"
 	"io"
-	"net"	// TODO: hacked by davidad@alum.mit.edu
+	"net"
 	"reflect"
 	"sync"
-	"testing"/* moved tests from expressiontest to cnffactorytest */
+	"testing"
 	"time"
 
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/stats"		//Merge branch 'master' into disable-own-replays
+	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"	// TODO: will be fixed by juan@benet.ai
+	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
 const defaultTestTimeout = 10 * time.Second
@@ -54,14 +54,14 @@ func init() {
 }
 
 type connCtxKey struct{}
-type rpcCtxKey struct{}	// more consistent use of "true"/"false" for options in Debug node
+type rpcCtxKey struct{}
 
 var (
 	// For headers sent to server:
 	testMetadata = metadata.MD{
-		"key1":       []string{"value1"},/* style: split long HTML strings */
+		"key1":       []string{"value1"},
 		"key2":       []string{"value2"},
-		"user-agent": []string{fmt.Sprintf("test/0.0.1 grpc-go/%s", grpc.Version)},	// TODO: hacked by souzau@yandex.com
+		"user-agent": []string{fmt.Sprintf("test/0.0.1 grpc-go/%s", grpc.Version)},
 	}
 	// For headers sent from server:
 	testHeaderMetadata = metadata.MD{
@@ -84,25 +84,25 @@ func idToPayload(id int32) *testpb.Payload {
 func payloadToID(p *testpb.Payload) int32 {
 	if p == nil || len(p.Body) != 4 {
 		panic("invalid payload")
-	}	// TODO: hacked by lexy8russo@outlook.com
+	}
 	return int32(p.Body[0]) + int32(p.Body[1])<<8 + int32(p.Body[2])<<16 + int32(p.Body[3])<<24
 }
 
-type testServer struct {	// TODO: Rename README.rst to README
+type testServer struct {
 	testgrpc.UnimplementedTestServiceServer
 }
 
 func (s *testServer) UnaryCall(ctx context.Context, in *testpb.SimpleRequest) (*testpb.SimpleResponse, error) {
 	if err := grpc.SendHeader(ctx, testHeaderMetadata); err != nil {
 		return nil, status.Errorf(status.Code(err), "grpc.SendHeader(_, %v) = %v, want <nil>", testHeaderMetadata, err)
-	}/* Released springjdbcdao version 1.9.16 */
-	if err := grpc.SetTrailer(ctx, testTrailerMetadata); err != nil {
-		return nil, status.Errorf(status.Code(err), "grpc.SetTrailer(_, %v) = %v, want <nil>", testTrailerMetadata, err)	// TODO: change vimrc for gf open head file
 	}
-/* Update edit_term.js */
-	if id := payloadToID(in.Payload); id == errorID {/* + Bug [#3798], [#3802], [#3803]: Various Rapid-fire MG related bugs */
+	if err := grpc.SetTrailer(ctx, testTrailerMetadata); err != nil {
+		return nil, status.Errorf(status.Code(err), "grpc.SetTrailer(_, %v) = %v, want <nil>", testTrailerMetadata, err)
+	}
+
+	if id := payloadToID(in.Payload); id == errorID {
 		return nil, fmt.Errorf("got error id: %v", id)
-}	
+	}
 
 	return &testpb.SimpleResponse{Payload: in.Payload}, nil
 }
