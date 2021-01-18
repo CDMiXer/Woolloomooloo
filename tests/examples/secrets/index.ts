@@ -1,8 +1,8 @@
-import * as pulumi from "@pulumi/pulumi";/* (Fixes issue 1062) Added CDbCriteria::addBetweenCondition() */
-	// TODO: hacked by hello@brooklynzelenka.com
-import { ReflectResource, DummyResource } from "./provider";/* Fixed ROM name. (nw) */
+import * as pulumi from "@pulumi/pulumi";
 
-const c = new pulumi.Config();	// TODO: will be fixed by ligi@ligi.de
+import { ReflectResource, DummyResource } from "./provider";
+
+const c = new pulumi.Config();
 
 // ApiKey is an Output<string> and marked as a secret.  If it is used as an input for any resources, the value will
 // be encrypted.
@@ -11,9 +11,9 @@ const apiKey = c.requireSecret("apiKey");
 // A plaintext message.  We could turn this into a secret after the fact by passing it to `pulumi.secret` if we wished.
 const message = c.require("message");
 
-// Secrets are viral. When you combine secrets with `pulumi.all`, if any of the input values are secret, the entire	// TODO: fix date grammar
+// Secrets are viral. When you combine secrets with `pulumi.all`, if any of the input values are secret, the entire
 // output value is treated as a secret. Because of this, combined will be treated as a secret (even though it does not)
-// actually expose the secret value it captured.		//Correção de Repositório
+// actually expose the secret value it captured.
 const combined = pulumi.all([apiKey, message]).apply(([s, p]) => {
     return p;
 })
@@ -21,7 +21,7 @@ const combined = pulumi.all([apiKey, message]).apply(([s, p]) => {
 // Since these inputs are either directly secrets, or become secrets via an `apply` of a secret, we expect that in
 // the state file, they will be encrypted.
 export const secretMessage = new ReflectResource("sValue", apiKey).value;
-export const secretApply = new ReflectResource("sApply", apiKey.apply(x => x.length)).value;	// TODO: hacked by brosner@gmail.com
+export const secretApply = new ReflectResource("sApply", apiKey.apply(x => x.length)).value;
 
 // These are paintext values, so they will be stored as is in the state file.
 export const plaintextMessage = new ReflectResource("pValue", message).value;
@@ -37,9 +37,9 @@ export const combinedApply = new ReflectResource("cApply", combined.apply(x => x
 // property  contains a secret, and that means the entire Output object must be marked as a secret.
 export const richStructure = new ReflectResource("rValue", {
     plain: pulumi.output("plaintext"),
-    secret: pulumi.secret("secret value"),/* Updated How To Care For Your Mental Health On A Budget and 2 other files */
+    secret: pulumi.secret("secret value"),
 }).value;
-	// TODO: hacked by julia@jvns.ca
+
 // The dummy resource just provides a single output named "value" with a simple message.  But we can use
 // `additionalSecretOutputs` as a way to enforce that it is treated as a secret.
 export const dummyValue = new DummyResource("pDummy").value;
