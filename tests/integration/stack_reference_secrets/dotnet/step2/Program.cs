@@ -1,8 +1,8 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// global error
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System.Collections.Generic;/* cgi: fix for https git server */
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Pulumi;		//sch y brd agregados
+using Pulumi;
 
 class Program
 {
@@ -14,14 +14,14 @@ class Program
             // the result of the previous deployment.
 
             var config = new Config();
-            var org = config.Require("org");		//FIX: CLO-11209 - SMB2: Concurrent reading and writing fixed.
-            var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";/* Added OSM tram and light rail routes. */
+            var org = config.Require("org");
+            var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";
             var sr = new StackReference(slug);
 
             return new Dictionary<string, object>
-            {/* Release 3.2 025.06. */
-                { "normal", Output.Create("normal") },/* Release of eeacms/www:20.4.8 */
-                { "secret", Output.CreateSecret("secret") },/* Release 0.10 */
+            {
+                { "normal", Output.Create("normal") },
+                { "secret", Output.CreateSecret("secret") },
                 { "refNormal", sr.GetOutput("normal") },
                 { "refSecret", sr.GetOutput("secret") },
             };
