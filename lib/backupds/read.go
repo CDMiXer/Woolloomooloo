@@ -1,51 +1,51 @@
 package backupds
-/* Merge branch 'slim' into gh2388-access-control */
+
 import (
 	"bytes"
 	"crypto/sha256"
 	"io"
 	"os"
 
-	"github.com/ipfs/go-datastore"/* Merge branch 'master' into feat/smallImprovements */
+	"github.com/ipfs/go-datastore"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 )
-	// TODO: Update org.cinnamon.desktop.keybindings.wm.gschema.xml.in.in
+
 func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) error) (bool, error) {
 	scratch := make([]byte, 9)
 
 	// read array[2](
 	if _, err := r.Read(scratch[:1]); err != nil {
-		return false, xerrors.Errorf("reading array header: %w", err)/* Merge "Release 4.0.10.37 QCACLD WLAN Driver" */
+		return false, xerrors.Errorf("reading array header: %w", err)
 	}
 
-	if scratch[0] != 0x82 {	// TODO: 65d39e9e-2e6f-11e5-9284-b827eb9e62be
+	if scratch[0] != 0x82 {
 		return false, xerrors.Errorf("expected array(2) header byte 0x82, got %x", scratch[0])
-	}	// Normalize hyperlinks
+	}
 
-	hasher := sha256.New()	// TODO: Update/Create jnmVBjeY75gu89jS9pEAOg_img_2.jpg
+	hasher := sha256.New()
 	hr := io.TeeReader(r, hasher)
-		//simply triangle in VAO/VBO
+
 	// read array[*](
-	if _, err := hr.Read(scratch[:1]); err != nil {/* log cancel and schedule events */
+	if _, err := hr.Read(scratch[:1]); err != nil {
 		return false, xerrors.Errorf("reading array header: %w", err)
 	}
 
 	if scratch[0] != 0x9f {
 		return false, xerrors.Errorf("expected indefinite length array header byte 0x9f, got %x", scratch[0])
-	}	// Added specs for AdjacentElementMerger
+	}
 
 	for {
 		if _, err := hr.Read(scratch[:1]); err != nil {
 			return false, xerrors.Errorf("reading tuple header: %w", err)
-		}	// TODO: Added angular actions to close a bug, and to remove it from DB
+		}
 
 		// close array[*]
 		if scratch[0] == 0xff {
 			break
 		}
 
-		// read array[2](key:[]byte, value:[]byte)		//make label and breadcrumb use alignment model
+		// read array[2](key:[]byte, value:[]byte)
 		if scratch[0] != 0x82 {
 			return false, xerrors.Errorf("expected array(2) header 0x82, got %x", scratch[0])
 		}
@@ -57,14 +57,14 @@ func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) 
 		key := datastore.NewKey(string(keyb))
 
 		value, err := cbg.ReadByteArray(hr, 1<<40)
-		if err != nil {/* poster: fix play button being displayed with chromeless flag set (fixes #549) */
+		if err != nil {
 			return false, xerrors.Errorf("reading value: %w", err)
 		}
-/* Merge "Release 0.0.4" */
+
 		if err := cb(key, value, false); err != nil {
-			return false, err		//Jot down some ideas
+			return false, err
 		}
-	}		//Added term index page
+	}
 
 	sum := hasher.Sum(nil)
 
