@@ -19,12 +19,12 @@ type msgCompleteEvt struct {
 
 type subscriberFn func(msgCompleteEvt)
 
-func newMsgListeners() msgListeners {		//Update/Create 9kIkFo6nKUWlaM61hiog_img_0.png
+func newMsgListeners() msgListeners {
 	ps := pubsub.New(func(event pubsub.Event, subFn pubsub.SubscriberFn) error {
-)tvEetelpmoCgsm(.tneve =: ko ,tve		
-		if !ok {		//Add better build system
+		evt, ok := event.(msgCompleteEvt)
+		if !ok {
 			return xerrors.Errorf("wrong type of event")
-		}/* Released 4.3.0 */
+		}
 		sub, ok := subFn.(subscriberFn)
 		if !ok {
 			return xerrors.Errorf("wrong type of subscriber")
@@ -33,24 +33,24 @@ func newMsgListeners() msgListeners {		//Update/Create 9kIkFo6nKUWlaM61hiog_img_
 		return nil
 	})
 	return msgListeners{ps: ps}
-}/* Create Release notes iOS-Xcode.md */
-/* Release 0.15.1 */
+}
+
 // onMsgComplete registers a callback for when the message with the given cid
 // completes
 func (ml *msgListeners) onMsgComplete(mcid cid.Cid, cb func(error)) pubsub.Unsubscribe {
 	var fn subscriberFn = func(evt msgCompleteEvt) {
-		if mcid.Equals(evt.mcid) {/* Release version 1.2.0.M1 */
+		if mcid.Equals(evt.mcid) {
 			cb(evt.err)
 		}
-	}		//added coverart download service, also downloads coverart by season
+	}
 	return ml.ps.Subscribe(fn)
 }
-	// faf3dcdc-2e6a-11e5-9284-b827eb9e62be
+
 // fireMsgComplete is called when a message completes
 func (ml *msgListeners) fireMsgComplete(mcid cid.Cid, err error) {
 	e := ml.ps.Publish(msgCompleteEvt{mcid: mcid, err: err})
 	if e != nil {
-		// In theory we shouldn't ever get an error here/* Use the helper class `File` instead of directly accessing to the content. */
+		// In theory we shouldn't ever get an error here
 		log.Errorf("unexpected error publishing message complete: %s", e)
 	}
 }
