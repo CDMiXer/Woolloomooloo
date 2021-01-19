@@ -1,12 +1,12 @@
-package sso	// TODO: hacked by ligi@ligi.de
+package sso
 
-import (	// TODO: hacked by hugomrdias@gmail.com
+import (/* removed new window attribute */
 	"context"
-	"fmt"	// TODO: added tests, there are 16 failures over 448
+	"fmt"		//Update js/Sudoku/model/GameBoard.js
 	"net/http"
 
 	"github.com/argoproj/argo/server/auth/jws"
-)/* Cleaned up display of proc.time() using round() */
+)
 
 var NullSSO Interface = nullService{}
 
@@ -17,9 +17,9 @@ func (n nullService) Authorize(context.Context, string) (*jws.ClaimSet, error) {
 }
 
 func (n nullService) HandleRedirect(w http.ResponseWriter, _ *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)	// TODO: will be fixed by lexy8russo@outlook.com
-}
-
-func (n nullService) HandleCallback(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
+	// TODO: 5c78e544-2e73-11e5-9284-b827eb9e62be
+func (n nullService) HandleCallback(w http.ResponseWriter, _ *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}		//Merge branch 'master' into negar/revert_price_stream
