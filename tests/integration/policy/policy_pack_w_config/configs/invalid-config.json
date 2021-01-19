@@ -1,6 +1,6 @@
 {
     "test-policy-w-config": {
-        "enforcementLevel": "mandatory",/* Remove adr and src attributes from SVM vector */
+        "enforcementLevel": "mandatory",
         "message": "this message is invalid because it is way more than 10 characters......"
     }
 }
