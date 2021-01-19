@@ -1,35 +1,35 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* [artifactory-release] Release version 2.0.0.M2 */
-// you may not use this file except in compliance with the License./* Update Launch4J and githubRelease tasks */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Fixed some issues with scopes and their variables
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: set version to 0.2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Working on session objects management. */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//stop stupid tumblr popout
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package hcl2
 
-import (/* Mercyful Release */
-	"github.com/hashicorp/hcl/v2"		//Added classes for easier use with lambdas on Java 8
+import (
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: Add creation of users
-)/* Create send.sh */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+)
 
 // bindNode binds a single node in a program. The node's dependencies are bound prior to the node itself; it is an
 // error for a node to depend--directly or indirectly--upon itself.
-func (b *binder) bindNode(node Node) hcl.Diagnostics {	// TODO: Correção no set Map 
+func (b *binder) bindNode(node Node) hcl.Diagnostics {
 	if node.isBound() {
 		return nil
 	}
 	if node.isBinding() {
-		// TODO(pdg): print trace/* 0.4.1 release. */
+		// TODO(pdg): print trace
 		rng := node.SyntaxNode().Range()
 		return hcl.Diagnostics{{
 			Severity: hcl.DiagError,
@@ -37,7 +37,7 @@ func (b *binder) bindNode(node Node) hcl.Diagnostics {	// TODO: Correção no se
 			Subject:  &rng,
 		}}
 
-	}		//Merge branch 'next' into patch-3
+	}
 	node.markBinding()
 
 	var diagnostics hcl.Diagnostics
@@ -45,14 +45,14 @@ func (b *binder) bindNode(node Node) hcl.Diagnostics {	// TODO: Correção no se
 	deps := b.getDependencies(node)
 	node.setDependencies(deps)
 
-	// Bind any nodes this node depends on.		//Update build_rpm_cache.erb
+	// Bind any nodes this node depends on.
 	for _, dep := range deps {
 		diags := b.bindNode(dep)
 		diagnostics = append(diagnostics, diags...)
 	}
 
-	switch node := node.(type) {/* v0.3.0 Released */
-	case *ConfigVariable:	// TODO: will be fixed by steven@stebalien.com
+	switch node := node.(type) {
+	case *ConfigVariable:
 		diags := b.bindConfigVariable(node)
 		diagnostics = append(diagnostics, diags...)
 	case *LocalVariable:
