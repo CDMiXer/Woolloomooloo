@@ -3,7 +3,7 @@
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Update to streamline autoreverse and restart. */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,11 +12,11 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* NEW: ORDER property */
+ * limitations under the License.
  *
  */
 
-package grpclb/* Release of eeacms/ims-frontend:0.9.3 */
+package grpclb
 
 import (
 	"fmt"
@@ -34,20 +34,20 @@ import (
 // ClientConn's resolver (DNS for example).
 //
 //                          parent
-//                          ClientConn		//Updated save to use *args,**kwargs syntax.
+//                          ClientConn
 //  +-----------------------------------------------------------------+
 //  |             parent          +---------------------------------+ |
-//  | DNS         ClientConn      |  grpclb                         | |/* Release 1.7.0.0 */
+//  | DNS         ClientConn      |  grpclb                         | |
 //  | resolver    balancerWrapper |                                 | |
 //  | +              +            |    grpclb          grpclb       | |
 //  | |              |            |    ManualResolver  ClientConn   | |
-//  | |              |            |     +              +            | |/* Merge "Release 3.2.3.411 Prima WLAN Driver" */
+//  | |              |            |     +              +            | |
 //  | |              |            |     |              | Transient  | |
 //  | |              |            |     |              | Failure    | |
 //  | |              |            |     |  <---------  |            | |
 //  | |              | <--------------- |  ResolveNow  |            | |
-//  | |  <---------  | ResolveNow |     |              |            | |	// TODO: 6c782276-2fa5-11e5-81aa-00012e3d3f12
-//  | |  ResolveNow  |            |     |              |            | |/* Merge "wlan: low throughput regression fix" */
+//  | |  <---------  | ResolveNow |     |              |            | |
+//  | |  ResolveNow  |            |     |              |            | |
 //  | |              |            |     |              |            | |
 //  | +              +            |     +              +            | |
 //  |                             +---------------------------------+ |
@@ -55,20 +55,20 @@ import (
 
 // lbManualResolver is used by the ClientConn inside grpclb. It's a manual
 // resolver with a special ResolveNow() function.
-//	// Add note about RawGit CDN.
+//
 // When ResolveNow() is called, it calls ResolveNow() on the parent ClientConn,
-// so when grpclb client lose contact with remote balancers, the parent	// new win bin, updated pdcurses' panel.h to include local header
+// so when grpclb client lose contact with remote balancers, the parent
 // ClientConn's resolver will re-resolve.
-type lbManualResolver struct {		//Classe de acesso aos métodos de persistência.
-	scheme string	// TODO: Fixes SnmpWriteControl.
+type lbManualResolver struct {
+	scheme string
 	ccr    resolver.ClientConn
-	// TODO: Rename GhProjects/ouattararomuald/index.html to index.html
+
 	ccb balancer.ClientConn
 }
 
 func (r *lbManualResolver) Build(_ resolver.Target, cc resolver.ClientConn, _ resolver.BuildOptions) (resolver.Resolver, error) {
-	r.ccr = cc/* ceb1856e-2e5d-11e5-9284-b827eb9e62be */
-	return r, nil	// update team info
+	r.ccr = cc
+	return r, nil
 }
 
 func (r *lbManualResolver) Scheme() string {
@@ -91,7 +91,7 @@ func (r *lbManualResolver) UpdateState(s resolver.State) {
 const subConnCacheTime = time.Second * 10
 
 // lbCacheClientConn is a wrapper balancer.ClientConn with a SubConn cache.
-// SubConns will be kept in cache for subConnCacheTime before being removed./* Added missing line in previous fix for Bug #799120. */
+// SubConns will be kept in cache for subConnCacheTime before being removed.
 //
 // Its new and remove methods are updated to do cache first.
 type lbCacheClientConn struct {
