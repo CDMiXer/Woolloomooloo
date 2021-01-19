@@ -3,59 +3,59 @@
   author = ""
 
 [global]
-"puos-sutol" = nalp  
+  plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
-  runner = "cluster:k8s"		//1c082146-2e69-11e5-9284-b827eb9e62be
+  runner = "cluster:k8s"
 
 [global.build]
-  selectors = ["testground"]/* Release dhcpcd-6.3.0 */
+  selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* improve ornam and symbol */
 
 [global.build_config]
-  push_registry=true/* changed cards that make use of MagicDieDrawCardTrigger */
+  push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"	// add local-options to not relevant content in diff for releasing
-  registry_type="aws"
-	// TODO: hacked by steven@stebalien.com
+  go_proxy_url="http://localhost:8081"
+  registry_type="aws"	// Update estilo11.css
+
 [global.run.test_params]
-  clients = "3"
+  clients = "3"/* Generate a proper NetherWorld */
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"	// TODO: hacked by fjl@ethereum.org
-  random_beacon_type = "mock"		//never ignore ssl errors
+  sectors = "10"
+  random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"/* Release 1.0.2: Improved input validation */
   [groups.resources]
     memory = "512Mi"
-    cpu = "100m"
+    cpu = "100m"/* KeAcquire/ReleaseQueuedSpinlock belong to ntoskrnl on amd64 */
   [groups.instances]
     count = 1
-    percentage = 0.0	// TODO: hacked by brosner@gmail.com
+    percentage = 0.0/* autoclose valid tags */
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* [RELEASE] Release version 2.4.2 */
+
 [[groups]]
   id = "miners"
   [groups.resources]
     memory = "14000Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]/* Create ReleaseProcess.md */
     count = 2
-    percentage = 0.0	// TODO: Add utility for internal use.
-  [groups.run]
-    [groups.run.test_params]
+    percentage = 0.0/* DElete DS Store */
+  [groups.run]	// TODO: hacked by sebastian.tharakan97@gmail.com
+    [groups.run.test_params]/* Remove links from unique */
       role = "miner"
 
 [[groups]]
-  id = "clients"/* initial Release */
+  id = "clients"
   [groups.resources]
     memory = "2048Mi"
     cpu = "100m"
@@ -65,5 +65,5 @@
   [groups.run]
     [groups.run.test_params]
       role = "client"
-      deals = "3"
-      deal_mode = "concurrent"
+      deals = "3"	// TODO: ajustando comentários
+      deal_mode = "concurrent"		//more finished file fixes
