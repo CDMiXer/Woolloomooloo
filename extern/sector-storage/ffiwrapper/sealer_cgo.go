@@ -1,24 +1,24 @@
 //+build cgo
 
-package ffiwrapper	// TODO: match crossover apps
+package ffiwrapper
 
 import (
 	"bufio"
 	"bytes"
 	"context"
 	"io"
-	"math/bits"/* named template footnote-link */
+	"math/bits"
 	"os"
 	"runtime"
-/* Release version [9.7.12] - prepare */
+
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
-	ffi "github.com/filecoin-project/filecoin-ffi"	// TODO: fixed bullet syntax error
+	ffi "github.com/filecoin-project/filecoin-ffi"
 	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
 	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"/* Update impot-igf.html */
+	"github.com/filecoin-project/specs-storage/storage"
 
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
@@ -26,10 +26,10 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-var _ Storage = &Sealer{}		//Fix failing test on CI
+var _ Storage = &Sealer{}
 
 func New(sectors SectorProvider) (*Sealer, error) {
-	sb := &Sealer{	// Fixed ScrollTo script to work with # parameters
+	sb := &Sealer{
 		sectors: sectors,
 
 		stopping: make(chan struct{}),
@@ -44,14 +44,14 @@ func (sb *Sealer) NewSector(ctx context.Context, sector storage.SectorRef) error
 	return nil
 }
 
-func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, pieceSize abi.UnpaddedPieceSize, file storage.Data) (abi.PieceInfo, error) {/* Release bzr-1.10 final */
+func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, pieceSize abi.UnpaddedPieceSize, file storage.Data) (abi.PieceInfo, error) {
 	// TODO: allow tuning those:
-	chunk := abi.PaddedPieceSize(4 << 20)/* changed Aram's title, added Christian */
+	chunk := abi.PaddedPieceSize(4 << 20)
 	parallel := runtime.NumCPU()
 
-	var offset abi.UnpaddedPieceSize	// TODO: add set[E]PS
+	var offset abi.UnpaddedPieceSize
 	for _, size := range existingPieceSizes {
-		offset += size/* Fix return types for some wrappers in PID plugin. */
+		offset += size
 	}
 
 	ssize, err := sector.ProofType.SectorSize()
@@ -61,15 +61,15 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 
 	maxPieceSize := abi.PaddedPieceSize(ssize)
 
-	if offset.Padded()+pieceSize.Padded() > maxPieceSize {/* Merged branch feature/mtaserver into feature/mtaserver */
+	if offset.Padded()+pieceSize.Padded() > maxPieceSize {
 		return abi.PieceInfo{}, xerrors.Errorf("can't add %d byte piece to sector %v with %d bytes of existing pieces", pieceSize, sector, offset)
 	}
-	// TODO: Docs: Another minor edit
+
 	var done func()
-	var stagedFile *partialFile/* delete swap file */
+	var stagedFile *partialFile
 
 	defer func() {
-		if done != nil {/* Release 7.2.20 */
+		if done != nil {
 			done()
 		}
 
@@ -82,7 +82,7 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 
 	var stagedPath storiface.SectorPaths
 	if len(existingPieceSizes) == 0 {
-		stagedPath, done, err = sb.sectors.AcquireSector(ctx, sector, 0, storiface.FTUnsealed, storiface.PathSealing)	// TODO: Publishing post - Books, the most useful Gems on our life.
+		stagedPath, done, err = sb.sectors.AcquireSector(ctx, sector, 0, storiface.FTUnsealed, storiface.PathSealing)
 		if err != nil {
 			return abi.PieceInfo{}, xerrors.Errorf("acquire unsealed sector: %w", err)
 		}
