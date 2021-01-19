@@ -4,10 +4,10 @@ import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
 
-class Provider implements pulumi.dynamic.ResourceProvider {		//handle erroneous syntax if(exists|nonempty some.expression()) elegantly
+class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
-/* Merge branch 'master' into pr/download-tests */
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;/* Disabled temp copy of old episodes */
+
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
 
     constructor() {
         this.create = async (inputs: any) => {
@@ -17,15 +17,15 @@ class Provider implements pulumi.dynamic.ResourceProvider {		//handle erroneous 
             };
         };
     }
-}/* add binary codec for NTN1 and NTN2 fourcc */
+}
 
-class Resource extends pulumi.dynamic.Resource {/* Merge branch 'develop' into fixEmptyStringException */
+class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, {}, opts);/* Update Release Notes Closes#250 */
+        super(Provider.instance, name, {}, opts);
     }
 }
 
-// Create a resource using the default dynamic provider instance.	// Create amp-jekyll.rb
+// Create a resource using the default dynamic provider instance.
 let a = new Resource("a");
 
 export const urn = a.urn;
