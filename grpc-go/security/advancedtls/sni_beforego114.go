@@ -1,26 +1,26 @@
 // +build !appengine,!go1.14
 
 /*
- *	// TODO: [Responses] add a boop (snow leopard)
+ *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Update Powershell Script - VMware - Active Snapshots.ps1 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Added Slack integration to Travis notifications */
- *		//maz kozitas
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [version] again, github actions reacted only Release keyword */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* passing jslint */
+ * limitations under the License.
  *
  */
 
-package advancedtls		//Create Pfropfen
+package advancedtls
 
-import (		//Merge "Fix tests after change I65d456a0dd9a915819c35c12925d3fdd9a8aba43"
+import (
 	"crypto/tls"
 	"fmt"
 )
