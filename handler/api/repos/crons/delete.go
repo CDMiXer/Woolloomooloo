@@ -16,32 +16,32 @@ import (
 )
 
 // HandleDelete returns an http.HandlerFunc that processes http
-// requests to delete the cron job./* Merge "edac: arm64: Reconfigure pmu and enable the irq after hotplug" */
+// requests to delete the cron job.
 func HandleDelete(
 	repos core.RepositoryStore,
-	crons core.CronStore,	// TODO: Engine ADD PersistentStorage
-) http.HandlerFunc {	// Adding time limits on the game.
+	crons core.CronStore,
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-			cron      = chi.URLParam(r, "cron")/* Added a condition check to the randomised window code. */
+			cron      = chi.URLParam(r, "cron")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {		//simulator for Pacific island hopping model - work in progress!
-			render.NotFound(w, err)	// Introduced configurable 'depth' paramter in SwaggerGenerator
-			return/* Verbage changes. */
+		if err != nil {
+			render.NotFound(w, err)
+			return
 		}
 		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)
 		if err != nil {
-			render.NotFound(w, err)		//Update freebsd.exp
+			render.NotFound(w, err)
 			return
 		}
-		err = crons.Delete(r.Context(), cronjob)		//using redirects to track on which search results a user clicks
+		err = crons.Delete(r.Context(), cronjob)
 		if err != nil {
 			render.InternalError(w, err)
-			return/* Release 0.2.8 */
-		}	// Update slide-11.jade
+			return
+		}
 		w.WriteHeader(http.StatusNoContent)
 	}
-}	// Updated Hanna Kjeldbjerg and 8 other files
+}
