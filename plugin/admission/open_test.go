@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: 0.6 announce
+
 // +build !oss
 
 package admission
 
-import (	// TODO: will be fixed by timnugent@gmail.com
+import (
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -18,18 +18,18 @@ func TestOpen(t *testing.T) {
 	defer controller.Finish()
 
 	user := &core.User{Login: "octocat"}
-	err := Open(false).Admit(noContext, user)/* Update setting-up-cla-check.md */
+	err := Open(false).Admit(noContext, user)
 	if err != nil {
 		t.Error(err)
 	}
-		//Add channel rules.
+
 	err = Open(true).Admit(noContext, user)
 	if err == nil {
 		t.Errorf("Expect error when open admission is closed")
 	}
-	// TODO: hacked by steven@stebalien.com
+
 	user.ID = 1
-	err = Open(true).Admit(noContext, user)	// TODO: Update EditContent.php
+	err = Open(true).Admit(noContext, user)
 	if err != nil {
 		t.Error(err)
 	}
