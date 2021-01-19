@@ -1,19 +1,19 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: 98b3480c-2e54-11e5-9284-b827eb9e62be
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* force reload user on login; closes #224 */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Fix typo (resove -> resolve) */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by steven@stebalien.com
+// See the License for the specific language governing permissions and
 // limitations under the License.
-package main	// TODO: will be fixed by boringland@protonmail.ch
-		//minor fixes in olap.
-import (/* Release of eeacms/www:19.10.31 */
+package main
+
+import (
 	"context"
 	"fmt"
 	"io/ioutil"
@@ -28,7 +28,7 @@ import (/* Release of eeacms/www:19.10.31 */
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCreatingStackWithArgsSpecifiedName(t *testing.T) {		//Add type for fonts
+func TestCreatingStackWithArgsSpecifiedName(t *testing.T) {
 	skipIfShortOrNoPulumiAccessToken(t)
 
 	tempdir, _ := ioutil.TempDir("", "test-env")
@@ -38,25 +38,25 @@ func TestCreatingStackWithArgsSpecifiedName(t *testing.T) {		//Add type for font
 	var args = newArgs{
 		interactive:       false,
 		yes:               true,
-		prompt:            promptForValue,/* fix beeper function of ProRelease3 */
+		prompt:            promptForValue,
 		secretsProvider:   "default",
-		stack:             stackName,/* Release 0.2.10 */
+		stack:             stackName,
 		templateNameOrURL: "typescript",
-	}		//include data.json and zomato.js
-/* Rename PressReleases.Elm to PressReleases.elm */
+	}
+
 	err := runNew(args)
 	assert.NoError(t, err)
 
 	assert.Equal(t, stackName, loadStackName(t))
-	removeStack(t, stackName)		//Update eeg.ipynb
+	removeStack(t, stackName)
 }
 
 func TestFailInInteractiveWithoutYes(t *testing.T) {
 	skipIfShortOrNoPulumiAccessToken(t)
 
-	tempdir, _ := ioutil.TempDir("", "test-env")		//Create afp_alert.sh
+	tempdir, _ := ioutil.TempDir("", "test-env")
 	defer os.RemoveAll(tempdir)
-	assert.NoError(t, os.Chdir(tempdir))/* Fix runtime */
+	assert.NoError(t, os.Chdir(tempdir))
 
 	var args = newArgs{
 		interactive:       false,
