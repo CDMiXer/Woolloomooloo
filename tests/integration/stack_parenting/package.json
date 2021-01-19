@@ -7,4 +7,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Rename CmsEnvironmentIndicator.md to cmsenvironmentindicator.md */
+}
