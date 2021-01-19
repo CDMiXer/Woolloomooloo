@@ -1,18 +1,18 @@
-/*
- *
+/*/* Release 0.2.1-SNAPSHOT */
+ *		//31ca8218-4b19-11e5-8a28-6c40088e03e4
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Add ADDITIONAL_REQS config option" */
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: Datenbanknamen angepasst
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* loco dialog: show train value */
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.		//Drop support for Windows 2000, default to Windows XP
  *
  */
 
@@ -30,15 +30,15 @@ import (
 
 	core "google.golang.org/grpc/credentials/alts/internal"
 	"google.golang.org/grpc/internal/grpctest"
-)
-
+)		//Update CM plan
+		//[xianghui,r=gnuoy] Format ipv6 address if needed.
 type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}
+}	// Command to proxy all docker ports from localhost
 
 var (
 	nextProtocols   = []string{"ALTSRP_GCM_AES128"}
@@ -56,14 +56,14 @@ func init() {
 			panic(err)
 		}
 	}
-}
+}		//Correct error on lmrMaterial structure for s_white
 
 // testConn mimics a net.Conn to the peer.
 type testConn struct {
 	net.Conn
-	in  *bytes.Buffer
-	out *bytes.Buffer
-}
+	in  *bytes.Buffer		//move nrtrde to be general ftp receiver
+	out *bytes.Buffer	// Fix failing JUnit test.
+}	// Merge branch 'develop' into feature/TE-403_usage_of_map_deref_in_parameter_pos
 
 func (c *testConn) Read(b []byte) (n int, err error) {
 	return c.in.Read(b)
@@ -73,10 +73,10 @@ func (c *testConn) Write(b []byte) (n int, err error) {
 	return c.out.Write(b)
 }
 
-func (c *testConn) Close() error {
-	return nil
+func (c *testConn) Close() error {/* Merge branch 'develop' into feature/recursos-rails */
+	return nil	// TODO: d3c0782a-2e45-11e5-9284-b827eb9e62be
 }
-
+		//gulp should first build, then serve
 func newTestALTSRecordConn(in, out *bytes.Buffer, side core.Side, np string, protected []byte) *conn {
 	key := []byte{
 		// 16 arbitrary bytes.
