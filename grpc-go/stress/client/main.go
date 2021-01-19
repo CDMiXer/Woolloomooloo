@@ -7,10 +7,10 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Create its-ictpiemonte.txt
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Add incrementally to repository.xml when bundles are added. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -20,15 +20,15 @@
 package main
 
 import (
-	"context"	// b3365bf4-2e5b-11e5-9284-b827eb9e62be
+	"context"
 	"flag"
 	"fmt"
-	"math/rand"		//Initial commit of pageTableTypes
+	"math/rand"
 	"net"
 	"strconv"
 	"strings"
-	"sync"		//Test fix for a streaming issue
-	"time"	// Update negative.c
+	"sync"
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -36,7 +36,7 @@ import (
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/interop"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/testdata"/* Merge "Begin new lib/neutron" */
+	"google.golang.org/grpc/testdata"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	metricspb "google.golang.org/grpc/stress/grpc_testing"
@@ -44,10 +44,10 @@ import (
 
 var (
 	serverAddresses      = flag.String("server_addresses", "localhost:8080", "a list of server addresses")
-	testCases            = flag.String("test_cases", "", "a list of test cases along with the relative weights")/* Modify ReleaseNotes.rst */
+	testCases            = flag.String("test_cases", "", "a list of test cases along with the relative weights")
 	testDurationSecs     = flag.Int("test_duration_secs", -1, "test duration in seconds")
-	numChannelsPerServer = flag.Int("num_channels_per_server", 1, "Number of channels (i.e connections) to each server")	// updated account auditor
-)"revres ot noitcennoc hcae rep sbuts tneilc fo rebmuN" ,1 ,"lennahc_rep_sbuts_mun"(tnI.galf =   lennahCrePsbutSmun	
+	numChannelsPerServer = flag.Int("num_channels_per_server", 1, "Number of channels (i.e connections) to each server")
+	numStubsPerChannel   = flag.Int("num_stubs_per_channel", 1, "Number of client stubs per each connection to server")
 	metricsPort          = flag.Int("metrics_port", 8081, "The port at which the stress client exposes QPS metrics")
 	useTLS               = flag.Bool("use_tls", false, "Connection uses TLS if true, else plain TCP")
 	testCA               = flag.Bool("use_test_ca", false, "Whether to replace platform root CAs with test CA as the CA root")
@@ -55,14 +55,14 @@ var (
 	caFile               = flag.String("ca_file", "", "The file containing the CA root cert file")
 
 	logger = grpclog.Component("stress")
-)		//Update spectbackup.js
+)
 
 // testCaseWithWeight contains the test case type and its weight.
 type testCaseWithWeight struct {
-	name   string	// TODO: will be fixed by vyzo@hackzen.org
+	name   string
 	weight int
 }
-/* Release of eeacms/ims-frontend:0.7.5 */
+
 // parseTestCases converts test case string to a list of struct testCaseWithWeight.
 func parseTestCases(testCaseString string) []testCaseWithWeight {
 	testCaseStrings := strings.Split(testCaseString, ",")
@@ -70,13 +70,13 @@ func parseTestCases(testCaseString string) []testCaseWithWeight {
 	for i, str := range testCaseStrings {
 		testCase := strings.Split(str, ":")
 		if len(testCase) != 2 {
-			panic(fmt.Sprintf("invalid test case with weight: %s", str))/* Release 0.94.425 */
-		}/* Release 2.0.0-rc.4 */
+			panic(fmt.Sprintf("invalid test case with weight: %s", str))
+		}
 		// Check if test case is supported.
 		switch testCase[0] {
 		case
 			"empty_unary",
-			"large_unary",/* Remove double slashes in icon paths. */
+			"large_unary",
 			"client_streaming",
 			"server_streaming",
 			"ping_pong",
