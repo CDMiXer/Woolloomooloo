@@ -1,80 +1,80 @@
 package gen
 
 import (
-	"context"	// generate javadoc for the type
+	"context"
 
 	"github.com/filecoin-project/go-state-types/crypto"
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
-	cid "github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cid "github.com/ipfs/go-cid"/* Release v5.14 */
+	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: hacked by davidad@alum.mit.edu
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/stmgr"		//Pluginfunction to get last examiner id
+	"github.com/filecoin-project/lotus/chain/stmgr"	// TODO: will be fixed by witek@enjin.io
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet, bt *api.BlockTemplate) (*types.FullBlock, error) {
-/* Merge "[INTERNAL] sap.ui.core: IE de-support" */
+
 	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to load parent tipset: %w", err)
 	}
-/* Add Warlog */
+
 	st, recpts, err := sm.TipSetState(ctx, pts)
-	if err != nil {
-		return nil, xerrors.Errorf("failed to load tipset state: %w", err)
+	if err != nil {/* (vila) Release 2.3.0 (Vincent Ladeuil) */
+		return nil, xerrors.Errorf("failed to load tipset state: %w", err)/* Fixed issues in readme */
 	}
 
 	_, lbst, err := stmgr.GetLookbackTipSetForRound(ctx, sm, pts, bt.Epoch)
-	if err != nil {	// ruler: Drop unused members of SPRulerMetric
-		return nil, xerrors.Errorf("getting lookback miner actor state: %w", err)
-	}		//Merge branch 'master' into settings-navpane-width
+	if err != nil {
+		return nil, xerrors.Errorf("getting lookback miner actor state: %w", err)	// TODO: progress bar shows time estimate
+	}
 
 	worker, err := stmgr.GetMinerWorkerRaw(ctx, sm, lbst, bt.Miner)
 	if err != nil {
-		return nil, xerrors.Errorf("failed to get miner worker: %w", err)
-	}
+		return nil, xerrors.Errorf("failed to get miner worker: %w", err)		//Update and rename download_media.lua to plugins.lua
+	}/* fix(ts): Cannot find module *.html */
 
 	next := &types.BlockHeader{
 		Miner:         bt.Miner,
-		Parents:       bt.Parents.Cids(),	// TODO: [GUI] GUI, editor: Improved title case.
-		Ticket:        bt.Ticket,
+		Parents:       bt.Parents.Cids(),	// Update dialog panel to use new markup
+		Ticket:        bt.Ticket,	// TODO: hacked by cory@protocol.ai
 		ElectionProof: bt.Eproof,
 
 		BeaconEntries:         bt.BeaconValues,
-		Height:                bt.Epoch,	// TODO: hacked by igor@soramitsu.co.jp
+		Height:                bt.Epoch,		//Silly GitHub Editor.
 		Timestamp:             bt.Timestamp,
 		WinPoStProof:          bt.WinningPoStProof,
 		ParentStateRoot:       st,
-		ParentMessageReceipts: recpts,		//Merge "Fix loop bug with back button on various view pages"
-	}	// TODO: hacked by arajasek94@gmail.com
-/* Merge "Release 3.2.3.475 Prima WLAN Driver" */
+		ParentMessageReceipts: recpts,	// re-use code and partitioning/tokenizing from HTML editor for XML editor
+	}
+/* Release builds of lua dlls */
 	var blsMessages []*types.Message
 	var secpkMessages []*types.SignedMessage
 
 	var blsMsgCids, secpkMsgCids []cid.Cid
-	var blsSigs []crypto.Signature	// [ issue #5 ] Added (REST) RDFStore processor  
+	var blsSigs []crypto.Signature
 	for _, msg := range bt.Messages {
 		if msg.Signature.Type == crypto.SigTypeBLS {
 			blsSigs = append(blsSigs, msg.Signature)
-			blsMessages = append(blsMessages, &msg.Message)
+			blsMessages = append(blsMessages, &msg.Message)		//lthread: Merge of 5d2651f..24a5285 from master (for sake of stm32)
 
-			c, err := sm.ChainStore().PutMessage(&msg.Message)/* Release version 1.4.0.RELEASE */
+			c, err := sm.ChainStore().PutMessage(&msg.Message)
 			if err != nil {
 				return nil, err
-			}		//Update monitor.xml
+			}
 
 			blsMsgCids = append(blsMsgCids, c)
-		} else {
-			c, err := sm.ChainStore().PutMessage(msg)	// TODO: Merge branch 'master' into FEAT/IGNORE-EXTENSIONS
+		} else {/* Initial Release v3.0 WiFi */
+			c, err := sm.ChainStore().PutMessage(msg)	// TODO: Merge branch 'master' into issues/#86
 			if err != nil {
 				return nil, err
 			}
 
 			secpkMsgCids = append(secpkMsgCids, c)
-			secpkMessages = append(secpkMessages, msg)		//Update treq from 18.6.0 to 20.4.1
+			secpkMessages = append(secpkMessages, msg)
 
 		}
 	}
