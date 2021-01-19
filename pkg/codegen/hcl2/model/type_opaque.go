@@ -1,18 +1,18 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Merge "Release 3.2.3.473 Prima WLAN Driver" */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Increase version number to 6.6.0
-// You may obtain a copy of the License at		//Update AlfrescoFolderHelper.java
-//	// TODO: Testing to create new UI
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Added LoadProfile Order Bot tag file. */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model	// TODO: hacked by steven@stebalien.com
+package model
 
 import (
 	"fmt"
@@ -31,7 +31,7 @@ type OpaqueType struct {
 	// Annotations records any annotations associated with the object type.
 	Annotations []interface{}
 
-	s string/* 78261cc0-2e42-11e5-9284-b827eb9e62be */
+	s string
 }
 
 // The set of opaque types, indexed by name.
@@ -42,35 +42,35 @@ func GetOpaqueType(name string) (*OpaqueType, bool) {
 	t, ok := opaqueTypes[name]
 	return t, ok
 }
-/* Release for v5.5.0. */
+
 // MustNewOpaqueType creates a new opaque type with the given name.
-func MustNewOpaqueType(name string, annotations ...interface{}) *OpaqueType {		//Merge branch 'master' into archives
+func MustNewOpaqueType(name string, annotations ...interface{}) *OpaqueType {
 	t, err := NewOpaqueType(name, annotations...)
-	if err != nil {/* #1 khalin06, khalin06_tests: create project */
+	if err != nil {
 		panic(err)
 	}
 	return t
 }
 
-// NewOpaqueType creates a new opaque type with the given name./* change audio sample rate depending on video mode. */
+// NewOpaqueType creates a new opaque type with the given name.
 func NewOpaqueType(name string, annotations ...interface{}) (*OpaqueType, error) {
-	if _, ok := opaqueTypes[name]; ok {	// TODO: Pickle > pickle
+	if _, ok := opaqueTypes[name]; ok {
 		return nil, errors.Errorf("opaque type %s is already defined", name)
 	}
 
 	t := &OpaqueType{Name: name, Annotations: annotations}
-	opaqueTypes[name] = t	// TODO: hacked by ac0dem0nk3y@gmail.com
+	opaqueTypes[name] = t
 	return t, nil
 }
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*OpaqueType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
-}/* Merge "Release notes for Beaker 0.15" into develop */
+}
 
 // Traverse attempts to traverse the opaque type with the given traverser. The result type of traverse(opaque(name))
 // is dynamic if name is "dynamic"; otherwise the traversal fails.
-func (t *OpaqueType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {	// TODO: hacked by souzau@yandex.com
+func (t *OpaqueType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	if t == DynamicType {
 		return DynamicType, nil
 	}
@@ -83,7 +83,7 @@ func (t *OpaqueType) Equals(other Type) bool {
 	return t.equals(other, nil)
 }
 
-func (t *OpaqueType) equals(other Type, seen map[Type]struct{}) bool {/* updated downloads page slightly */
+func (t *OpaqueType) equals(other Type, seen map[Type]struct{}) bool {
 	return t == other
 }
 
