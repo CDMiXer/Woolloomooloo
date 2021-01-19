@@ -1,4 +1,4 @@
-{		//replaced old Action column with edit link with the new ajax popup window
+{	// TODO: hacked by witek@enjin.io
 	"auths": {
 		"https://gcr.io": {
 			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
