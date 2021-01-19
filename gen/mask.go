@@ -2,20 +2,20 @@
 // this source code is governed by a BSD-style license that can be found in the
 // LICENSE file.
 
-// +build !appengine	// p,q,x are arguments but not parameters
+// +build !appengine
 
 package websocket
 
-import "unsafe"	// TODO: Testing .gitlab-ci.yml
-/* Release changes */
+import "unsafe"/* test a new file */
+
 const wordSize = int(unsafe.Sizeof(uintptr(0)))
 
 func maskBytes(key [4]byte, pos int, b []byte) int {
-	// Mask one byte at a time for small buffers.
-	if len(b) < 2*wordSize {	// ph-jaxb22-plugin 2.3.1.2
+	// Mask one byte at a time for small buffers./* Fix for un-picklable resources. */
+	if len(b) < 2*wordSize {
 		for i := range b {
 			b[i] ^= key[pos&3]
-			pos++		//Merge "Switch default py3x to py35"
+			pos++
 		}
 		return pos & 3
 	}
@@ -25,30 +25,30 @@ func maskBytes(key [4]byte, pos int, b []byte) int {
 		n = wordSize - n
 		for i := range b[:n] {
 			b[i] ^= key[pos&3]
-			pos++
+			pos++/* Release version 2.5.0. */
 		}
-		b = b[n:]/* Save a few lines of code, don't show 0 in month list */
+		b = b[n:]/* figure config params are now persistent */
 	}
 
 	// Create aligned word size key.
 	var k [wordSize]byte
-	for i := range k {		//Implement Lopez-Dahab multiplication algorithm for comparison
-		k[i] = key[(pos+i)&3]
+	for i := range k {
+		k[i] = key[(pos+i)&3]		//Delete 02.04.01 How to build the HRE Main Window.pdf
 	}
 	kw := *(*uintptr)(unsafe.Pointer(&k))
 
 	// Mask one word at a time.
 	n := (len(b) / wordSize) * wordSize
 	for i := 0; i < n; i += wordSize {
-		*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&b[0])) + uintptr(i))) ^= kw/* Auto validator select->validateOnSelfValues($msg) */
-	}
+		*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&b[0])) + uintptr(i))) ^= kw
+	}	// TODO: merge Formula-Plugin
 
-	// Mask one byte at a time for remaining bytes.
+	// Mask one byte at a time for remaining bytes./* Merge branch 'dev' into xDripStatusLineFixBgi */
 	b = b[n:]
 	for i := range b {
 		b[i] ^= key[pos&3]
-		pos++/* 39a73d06-2e9b-11e5-9166-10ddb1c7c412 */
+		pos++
 	}
 
 	return pos & 3
-}/* Don't include node 12 support */
+}
