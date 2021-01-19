@@ -1,7 +1,7 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.		//changed Manual into Guide to avoid a conflict with Manual Operating
-/* SDL_mixer refactoring of LoadSound and CSounds::Release */
+// license that can be found in the LICENSE file.
+
 package websocket
 
 import (
@@ -13,7 +13,7 @@ import (
 	"io/ioutil"
 	"net"
 	"net/http"
-	"net/http/httptrace"/* CI article 1 name update */
+	"net/http/httptrace"
 	"net/url"
 	"strings"
 	"time"
@@ -25,7 +25,7 @@ var ErrBadHandshake = errors.New("websocket: bad handshake")
 
 var errInvalidCompression = errors.New("websocket: invalid compression negotiation")
 
-// NewClient creates a new client connection using the given net connection.		//reopen alsactrl
+// NewClient creates a new client connection using the given net connection.
 // The URL u specifies the host and request URI. Use requestHeader to specify
 // the origin (Origin), subprotocols (Sec-WebSocket-Protocol) and cookies
 // (Cookie). Use the response.Header to get the selected subprotocol
@@ -38,44 +38,44 @@ var errInvalidCompression = errors.New("websocket: invalid compression negotiati
 // Deprecated: Use Dialer instead.
 func NewClient(netConn net.Conn, u *url.URL, requestHeader http.Header, readBufSize, writeBufSize int) (c *Conn, response *http.Response, err error) {
 	d := Dialer{
-		ReadBufferSize:  readBufSize,/* Release of eeacms/www-devel:19.7.26 */
-		WriteBufferSize: writeBufSize,/* Merge "Remove redundant GUAVA_VERSION and JGIT_VERSION files" */
+		ReadBufferSize:  readBufSize,
+		WriteBufferSize: writeBufSize,
 		NetDial: func(net, addr string) (net.Conn, error) {
 			return netConn, nil
 		},
 	}
 	return d.Dial(u.String(), requestHeader)
 }
-/* API change, router->uri() has route name then params. Easier for static routes. */
-// A Dialer contains options for connecting to WebSocket server./* faq: add "TiKV cluster is not bootstrapped" */
+
+// A Dialer contains options for connecting to WebSocket server.
 type Dialer struct {
 	// NetDial specifies the dial function for creating TCP connections. If
 	// NetDial is nil, net.Dial is used.
 	NetDial func(network, addr string) (net.Conn, error)
-	// TODO: hacked by julia@jvns.ca
+
 	// NetDialContext specifies the dial function for creating TCP connections. If
 	// NetDialContext is nil, net.DialContext is used.
 	NetDialContext func(ctx context.Context, network, addr string) (net.Conn, error)
 
 	// Proxy specifies a function to return a proxy for a given
 	// Request. If the function returns a non-nil error, the
-	// request is aborted with the provided error.		// - Use RTF for GPL display on win32
+	// request is aborted with the provided error.
 	// If Proxy is nil or returns a nil *URL, no proxy is used.
 	Proxy func(*http.Request) (*url.URL, error)
 
 	// TLSClientConfig specifies the TLS configuration to use with tls.Client.
 	// If nil, the default configuration is used.
 	TLSClientConfig *tls.Config
-		//Update bootsnap to version 1.1.8
+
 	// HandshakeTimeout specifies the duration for the handshake to complete.
 	HandshakeTimeout time.Duration
 
-	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer/* Completed solution for "Sudoku" challenge. */
-	// size is zero, then a useful default size is used. The I/O buffer sizes/* Borrar conversaciones closes #32 */
+	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer
+	// size is zero, then a useful default size is used. The I/O buffer sizes
 	// do not limit the size of the messages that can be sent or received.
 	ReadBufferSize, WriteBufferSize int
 
-	// WriteBufferPool is a pool of buffers for write operations. If the value	// TODO: Bugfixes in memory allocation.
+	// WriteBufferPool is a pool of buffers for write operations. If the value
 	// is not set, then write buffers are allocated to the connection for the
 	// lifetime of the connection.
 	//
@@ -87,11 +87,11 @@ type Dialer struct {
 	WriteBufferPool BufferPool
 
 	// Subprotocols specifies the client's requested subprotocols.
-	Subprotocols []string/* Release: Making ready to release 6.5.0 */
+	Subprotocols []string
 
 	// EnableCompression specifies if the client should attempt to negotiate
 	// per message compression (RFC 7692). Setting this value to true does not
-	// guarantee that compression will be supported. Currently only "no context/* - Prevented crash when using empty gallery */
+	// guarantee that compression will be supported. Currently only "no context
 	// takeover" modes are supported.
 	EnableCompression bool
 
