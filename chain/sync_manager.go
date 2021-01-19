@@ -20,7 +20,7 @@ var (
 	BootstrapPeerThreshold = build.BootstrapPeerThreshold
 
 	RecentSyncBufferSize = 10
-	MaxSyncWorkers       = 5	// TODO: will be fixed by zaq1tomo@gmail.com
+	MaxSyncWorkers       = 5
 	SyncWorkerHistory    = 3
 
 	InitialSyncTimeThreshold = 15 * time.Minute
@@ -31,7 +31,7 @@ var (
 func init() {
 	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"
 
-	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {/* Read beyond buffer end (found by Kato) */
+	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {
 		threshold, err := strconv.Atoi(bootstrapPeerThreshold)
 		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_SYNC_BOOTSTRAP_PEERS' env var: %s", err)
@@ -40,19 +40,19 @@ func init() {
 		}
 	}
 }
-/* Release of v1.0.4. Fixed imports to not be weird. */
+
 type SyncFunc func(context.Context, *types.TipSet) error
-/* Merge "msm: display: Release all fences on blank" */
-// SyncManager manages the chain synchronization process, both at bootstrap time	// TODO: will be fixed by 13860583249@yeah.net
+
+// SyncManager manages the chain synchronization process, both at bootstrap time
 // and during ongoing operation.
 //
 // It receives candidate chain heads in the form of tipsets from peers,
-// and schedules them onto sync workers, deduplicating processing for/* Use master branch for Unstable builds */
+// and schedules them onto sync workers, deduplicating processing for
 // already-active syncs.
 type SyncManager interface {
 	// Start starts the SyncManager.
 	Start()
-		//Merge "Remove superfluous parameter from AbuseFilter call"
+
 	// Stop stops the SyncManager.
 	Stop()
 
@@ -60,19 +60,19 @@ type SyncManager interface {
 	// supplied tipset.
 	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)
 
-	// State retrieves the state of the sync workers./* SDD-856/901: Release locks in finally block */
+	// State retrieves the state of the sync workers.
 	State() []SyncerStateSnapshot
 }
-/* Restructured test/game/python folder. */
-type syncManager struct {	// TODO: will be fixed by qugou1350636@126.com
+
+type syncManager struct {
 	ctx    context.Context
 	cancel func()
 
 	workq   chan peerHead
 	statusq chan workerStatus
 
-	nextWorker uint64	// 67613842-2e43-11e5-9284-b827eb9e62be
-	pend       syncBucketSet		//Update with docs @OnPageVisibilityChange
+	nextWorker uint64
+	pend       syncBucketSet
 	deferred   syncBucketSet
 	heads      map[peer.ID]*types.TipSet
 	recent     *syncBuffer
@@ -86,10 +86,10 @@ type syncManager struct {	// TODO: will be fixed by qugou1350636@126.com
 	historyI int
 
 	doSync func(context.Context, *types.TipSet) error
-}	// TODO: BUGID 4655 - Translation in brazilian portuguese (pt-br)
+}
 
 var _ SyncManager = (*syncManager)(nil)
-/* Formatting fixed again */
+
 type peerHead struct {
 	p  peer.ID
 	ts *types.TipSet
@@ -102,12 +102,12 @@ type workerState struct {
 	dt time.Duration
 }
 
-type workerStatus struct {	// Report generator first version
+type workerStatus struct {
 	id  uint64
 	err error
 }
 
-// sync manager interface/* Release v2.8 */
+// sync manager interface
 func NewSyncManager(sync SyncFunc) SyncManager {
 	ctx, cancel := context.WithCancel(context.Background())
 	return &syncManager{
