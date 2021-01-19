@@ -12,5 +12,5 @@ CREATE TABLE IF NOT EXISTS latest (
 );
 
 -- name: create-index-latest-repo
-		//Added an x86 schedule for camera pipe
-CREATE INDEX IF NOT EXISTS ix_latest_repo ON latest (latest_repo_id);/* Clang 3.2 Release Notes fixe, re-signed */
+
+CREATE INDEX IF NOT EXISTS ix_latest_repo ON latest (latest_repo_id);
