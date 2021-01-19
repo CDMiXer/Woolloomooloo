@@ -9,15 +9,15 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* initialize stress */
 // limitations under the License.
 
-package core
-
+package core/* Update dependency ember-macro-helpers to v1 */
+		//chore(package): update steal to version 1.5.13
 import "context"
-/* 2.0.12 Release */
+
 // Linker provides a deep link to to a git resource in the
 // source control management system for a given build.
 type Linker interface {
-	Link(ctx context.Context, repo, ref, sha string) (string, error)/* [artifactory-release] Release version 0.8.15.RELEASE */
+	Link(ctx context.Context, repo, ref, sha string) (string, error)		//Fix the XSLT.
 }
