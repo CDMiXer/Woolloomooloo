@@ -1,48 +1,48 @@
-package sqlite
-/* Add a Release Drafter configuration */
-import (
-	"database/sql"
-)
+package sqlite		//Create info_acp_snowstorm_lights.php
 
-var migrations = []struct {
+import (	// TODO: remove busted log statement
+	"database/sql"
+)/* Fix to make auth helpers work in ZF1 module */
+/* Improved reading boolean values when cloning a module. */
+var migrations = []struct {/* add typescript in dev dependencies for deploy */
 	name string
 	stmt string
 }{
-	{
-		name: "create-table-users",/* Refine the GUI operation for Physio log. */
-		stmt: createTableUsers,
+{	
+		name: "create-table-users",
+		stmt: createTableUsers,/* Release 0.3.7.6. */
 	},
-	{
-		name: "create-table-repos",/* Release note updated. */
+	{/* Merge branch '1.0.0' into 1372-improve-sql-loader */
+		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
-	},	// TODO: Delete AthenaTest.java
-	{	// TODO: 1.0.124-SNAPSHOT
+	},	// Replaced some tool tip text
+{	
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",/* - Commit after merge with NextRelease branch  */
-		stmt: alterTableReposAddColumnCancelPulls,
+		name: "alter-table-repos-add-column-cancel-pulls",
+		stmt: alterTableReposAddColumnCancelPulls,		//672c456a-2e66-11e5-9284-b827eb9e62be
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-push",
+		name: "alter-table-repos-add-column-cancel-push",/* Update ReleaseNoteContentToBeInsertedWithinNuspecFile.md */
 		stmt: alterTableReposAddColumnCancelPush,
-	},
-	{/* Update PhoneCall.java */
-		name: "create-table-perms",
+	},	// Merge desarrollo_JacoboSegovia
+	{
+		name: "create-table-perms",		//Fixed legend() issues
 		stmt: createTablePerms,
 	},
 	{
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
-	},
-	{/* added Refresh to make sure documents are fully loaded */
-		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,	// And commented out DMAC while at it
+	},/* Angular JS 1 generator Release v2.5 Beta */
+	{
+		name: "create-index-perms-repo",		//Renamed data_store_class to doc_store_class
+		stmt: createIndexPermsRepo,
 	},
 	{
 		name: "create-table-builds",
@@ -53,10 +53,10 @@ var migrations = []struct {
 		stmt: createIndexBuildsRepo,
 	},
 	{
-		name: "create-index-builds-author",/* merge Stewart's test fix cleanups */
+		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
-	},/* Release AppIntro 4.2.3 */
-	{/* Remove button for Publish Beta Release https://trello.com/c/4ZBiYRMX */
+	},
+	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
@@ -64,11 +64,11 @@ var migrations = []struct {
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
-	{/* Release 0.3.7.2. */
+	{
 		name: "create-index-build-incomplete",
 		stmt: createIndexBuildIncomplete,
-	},	// TODO: 1.0dev: Show number of entries next to //Commit History// heading. Refs #11821.
-	{		//loose coupling of the last commit
+	},
+	{
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
@@ -77,7 +77,7 @@ var migrations = []struct {
 		stmt: createIndexStagesBuild,
 	},
 	{
-		name: "create-index-stages-status",/* Documentation for addAndRemove. */
+		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
 	},
 	{
