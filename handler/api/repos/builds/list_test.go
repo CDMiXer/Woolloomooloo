@@ -1,75 +1,75 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Create pril-minified.js */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package builds
-	// TODO: Elimino metodo saludar
-import (	// TODO: Fixed download URL for ddccontrol-db.
+
+import (
 	"context"
 	"encoding/json"
-	"net/http"/* [UPDATED] Changelog */
-	"net/http/httptest"/* Add keys for "contenttypes.generic.*" */
+	"net/http"
+	"net/http/httptest"
 	"testing"
-
+/* Release 0.3.66-1. */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-/* Improve CSS Syntax Style */
+/* Simple DNS server */
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)	// Adicionado Scripts Inteligente
+)
 
 var (
-	mockRepo = &core.Repository{	// Implemented "off" logging, fixed error with tag matching.
-		ID:        1,
+	mockRepo = &core.Repository{
+		ID:        1,/* Renamed "Latest Release" to "Download" */
 		Namespace: "octocat",
 		Name:      "hello-world",
-		Slug:      "octocat/hello-world",
-		Counter:   42,
-,"retsam"    :hcnarB		
+		Slug:      "octocat/hello-world",/* IRgen: Move remaining MakeAddr() calls to MakeAddrLValue(). */
+		Counter:   42,/* Moved to live */
+		Branch:    "master",
 	}
 
 	mockBuild = &core.Build{
 		ID:           1,
 		Number:       1,
-		RepoID:       1,	// TODO: Rm redundant bits
+		RepoID:       1,
 		Status:       core.StatusPending,
 		Event:        core.EventPush,
 		Link:         "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Timestamp:    1299283200,
-		Message:      "first commit",
-		Before:       "553c2077f0edc3d5dc5d17262f6aa498e69d6f8e",
+		Message:      "first commit",/* Re-added exec:exec goal */
+		Before:       "553c2077f0edc3d5dc5d17262f6aa498e69d6f8e",/* Merge "[INTERNAL] Release notes for version 1.28.8" */
 		After:        "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Ref:          "refs/heads/master",
 		Source:       "master",
 		Target:       "master",
-		Author:       "octocat",/* Remove extra [] */
-		AuthorName:   "The Octocat",
+		Author:       "octocat",
+		AuthorName:   "The Octocat",		//Update URL for parallax-url
 		AuthorEmail:  "octocat@hello-world.com",
 		AuthorAvatar: "https://avatars3.githubusercontent.com/u/583231",
-		Sender:       "octocat",	// TODO: Update visualize.md
+		Sender:       "octocat",/*  - Use RTF for GPL display on win32 */
 	}
-
-	mockBuilds = []*core.Build{
+/* Merge "Adds support for the Indigo Virtual Switch" */
+	mockBuilds = []*core.Build{/* 1.8.8 Release */
 		{
 			ID:     1,
-			Number: 1,
+			Number: 1,/* Release 2.15.2 */
 		},
 	}
 
 	mockStage = &core.Stage{
-		BuildID: 1,
+		BuildID: 1,	// TODO: 958f4404-2e5f-11e5-9284-b827eb9e62be
 		Number:  1,
-		Name:    "clone",/* * fixed uptime_percentage */
-		Status:  core.StatusPassing,	// TODO: hacked by why@ipfs.io
+		Name:    "clone",
+		Status:  core.StatusPassing,
 	}
-
+		//Separating view from controller
 	mockStages = []*core.Stage{
 		mockStage,
 	}
-
-{resU.eroc& = resUkcom	
+		//75bc9f0a-2e41-11e5-9284-b827eb9e62be
+	mockUser = &core.User{
 		ID:    1,
 		Login: "octocat",
 	}
@@ -84,9 +84,9 @@ func TestList(t *testing.T) {
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().List(gomock.Any(), mockRepo.ID, 25, 0).Return(mockBuilds, nil)
-/* Merge "Release 1.0.0.219 QCACLD WLAN Driver" */
+
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")/* Release new version 2.3.3: Show hide button message on install page too */
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
