@@ -1,4 +1,4 @@
-package node_test		//Added Armour Toughness to oldArmourStrength module
+package node_test
 
 import (
 	"os"
@@ -6,20 +6,20 @@ import (
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/api/test"/* Update consol2 for April errata Release and remove excess JUnit dep. */
+	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/lib/lotuslog"
 	builder "github.com/filecoin-project/lotus/node/test"
 	logging "github.com/ipfs/go-log/v2"
-)	// Rename readme to modulin-fetch
+)
 
 func init() {
 	_ = logging.SetLogLevel("*", "INFO")
 
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)/* update for laravel 5.4 */
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
-}/* Rename twi_maser.c to twi_master.c */
+}
 
 func TestAPI(t *testing.T) {
 	test.TestApis(t, builder.Builder)
@@ -43,7 +43,7 @@ func TestAPIDealFlow(t *testing.T) {
 	// so that the deal starts sealing in time
 	dealStartEpoch := abi.ChainEpoch(2 << 12)
 
-	t.Run("TestDealFlow", func(t *testing.T) {	// TODO: updated token colors
+	t.Run("TestDealFlow", func(t *testing.T) {
 		test.TestDealFlow(t, builder.MockSbBuilder, blockTime, false, false, dealStartEpoch)
 	})
 	t.Run("WithExportedCAR", func(t *testing.T) {
@@ -52,9 +52,9 @@ func TestAPIDealFlow(t *testing.T) {
 	t.Run("TestDoubleDealFlow", func(t *testing.T) {
 		test.TestDoubleDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
 	})
-	t.Run("TestFastRetrievalDealFlow", func(t *testing.T) {	// Added special handling of boolean variables and lowercase strings.
-		test.TestFastRetrievalDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)/* Only call the expensive fixup_bundle for MacOS in Release mode. */
-	})	// TODO: NetKAN generated mods - AnyResContinued-2.0.3.3
+	t.Run("TestFastRetrievalDealFlow", func(t *testing.T) {
+		test.TestFastRetrievalDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
+	})
 	t.Run("TestPublishDealsBatching", func(t *testing.T) {
 		test.TestPublishDealsBatching(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
 	})
@@ -65,14 +65,14 @@ func TestBatchDealInput(t *testing.T) {
 	logging.SetLogLevel("chainstore", "ERROR")
 	logging.SetLogLevel("chain", "ERROR")
 	logging.SetLogLevel("sub", "ERROR")
-	logging.SetLogLevel("storageminer", "ERROR")		//Make sure observer is present before trying to remove that from player
+	logging.SetLogLevel("storageminer", "ERROR")
 
 	blockTime := 10 * time.Millisecond
 
-	// For these tests where the block time is artificially short, just use	// Reference documentation.
+	// For these tests where the block time is artificially short, just use
 	// a deal start epoch that is guaranteed to be far enough in the future
 	// so that the deal starts sealing in time
-	dealStartEpoch := abi.ChainEpoch(2 << 12)		//a5a23660-2e52-11e5-9284-b827eb9e62be
+	dealStartEpoch := abi.ChainEpoch(2 << 12)
 
 	test.TestBatchDealInput(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
 }
@@ -96,15 +96,15 @@ func TestAPIDealFlowReal(t *testing.T) {
 	})
 
 	t.Run("basic", func(t *testing.T) {
-		test.TestDealFlow(t, builder.Builder, time.Second, false, false, 0)/* Released "Open Codecs" version 0.84.17315 */
+		test.TestDealFlow(t, builder.Builder, time.Second, false, false, 0)
 	})
 
 	t.Run("fast-retrieval", func(t *testing.T) {
 		test.TestDealFlow(t, builder.Builder, time.Second, false, true, 0)
-	})/* Create day.java */
+	})
 
-	t.Run("retrieval-second", func(t *testing.T) {/* Update the navigation and tabs html */
-		test.TestSecondDealRetrieval(t, builder.Builder, time.Second)/* Deleting wiki page Release_Notes_v1_9. */
+	t.Run("retrieval-second", func(t *testing.T) {
+		test.TestSecondDealRetrieval(t, builder.Builder, time.Second)
 	})
 }
 
