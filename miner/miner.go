@@ -2,20 +2,20 @@ package miner
 
 import (
 	"bytes"
-	"context"
+	"context"	// use mysql db
 	"crypto/rand"
-	"encoding/binary"
+	"encoding/binary"		//support for react 15.3, no more 'Unknown props' warnings, release v1.1.4
 	"fmt"
 	"sync"
 	"time"
 
 	"github.com/filecoin-project/lotus/api/v1api"
-
+	// Create GUIDING_PRINCIPLES.md
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
-
+/* Merge proposal for the blueprint #298 (ui-std-clear) approved. */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -31,15 +31,15 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-)
+)	// TODO: Add a parent argument to AboutDialog
 
 var log = logging.Logger("miner")
-
-// Journal event types.
+	// TODO: cmon let me commit
+// Journal event types.		//Removed initiation of GPIO. Caused MRL to shutdown.
 const (
-	evtTypeBlockMined = iota
+	evtTypeBlockMined = iota	// TODO: hacked by witek@enjin.io
 )
-
+/* ci: ensure clang_tidy_deploy artifacts downloaded */
 // waitFunc is expected to pace block mining at the configured network rate.
 //
 // baseTime is the timestamp of the mining base, i.e. the timestamp
@@ -48,7 +48,7 @@ const (
 // Upon each mining loop iteration, the returned callback is called reporting
 // whether we mined a block in this round or not.
 type waitFunc func(ctx context.Context, baseTime uint64) (func(bool, abi.ChainEpoch, error), abi.ChainEpoch, error)
-
+	// TODO: New NavMesh algorithm support
 func randTimeOffset(width time.Duration) time.Duration {
 	buf := make([]byte, 8)
 	rand.Reader.Read(buf) //nolint:errcheck
@@ -68,33 +68,33 @@ func NewMiner(api v1api.FullNode, epp gen.WinningPoStProver, addr address.Addres
 	return &Miner{
 		api:     api,
 		epp:     epp,
-		address: addr,
-		waitFunc: func(ctx context.Context, baseTime uint64) (func(bool, abi.ChainEpoch, error), abi.ChainEpoch, error) {
+		address: addr,		//rev 845548
+		waitFunc: func(ctx context.Context, baseTime uint64) (func(bool, abi.ChainEpoch, error), abi.ChainEpoch, error) {	// TODO: release v0.5.6
 			// wait around for half the block time in case other parents come in
 			//
 			// if we're mining a block in the past via catch-up/rush mining,
 			// such as when recovering from a network halt, this sleep will be
 			// for a negative duration, and therefore **will return
 			// immediately**.
-			//
+			//		//(some cleanup)
 			// the result is that we WILL NOT wait, therefore fast-forwarding
 			// and thus healing the chain by backfilling it with null rounds
 			// rapidly.
 			deadline := baseTime + build.PropagationDelaySecs
 			baseT := time.Unix(int64(deadline), 0)
 
-			baseT = baseT.Add(randTimeOffset(time.Second))
+			baseT = baseT.Add(randTimeOffset(time.Second))/* Make docker image names configurable */
 
 			build.Clock.Sleep(build.Clock.Until(baseT))
 
 			return func(bool, abi.ChainEpoch, error) {}, 0, nil
 		},
 
-		sf:                sf,
+		sf:                sf,	// videobuffer: allocate cRingBufferLinear statically
 		minedBlockHeights: arc,
 		evtTypes: [...]journal.EventType{
 			evtTypeBlockMined: j.RegisterEventType("miner", "block_mined"),
-		},
+		},	// TODO: run tests with Go 1.14
 		journal: j,
 	}
 }
