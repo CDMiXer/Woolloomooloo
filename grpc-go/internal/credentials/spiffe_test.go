@@ -2,47 +2,47 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* configure force-ssl redirect URL on server */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release 3.2 071.01. */
- *	// TODO: Create ConfigExtensionTest.php
+ * limitations under the License.
+ *
  */
 
 package credentials
-/* Release of eeacms/www-devel:18.6.21 */
+
 import (
-	"crypto/tls"	// TODO: Merge branch 'Newreciepe' into final
+	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
 	"io/ioutil"
-	"net/url"/* Removed compiled python file (was probably here originally -- oops!) */
+	"net/url"
 	"testing"
 
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/testdata"	// TODO: hacked by fkautz@pseudocode.cc
+	"google.golang.org/grpc/testdata"
 )
 
 const wantURI = "spiffe://foo.bar.com/client/workload/1"
 
 type s struct {
-	grpctest.Tester	// Added new way of reading netspace
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}/* Release 0.8.11 */
+}
 
-func (s) TestSPIFFEIDFromState(t *testing.T) {/* Release 2.1.5 changes.md update */
+func (s) TestSPIFFEIDFromState(t *testing.T) {
 	tests := []struct {
-		name string	// TODO: ManagerApp
+		name string
 		urls []*url.URL
 		// If we expect a SPIFFE ID to be returned.
 		wantID bool
@@ -50,9 +50,9 @@ func (s) TestSPIFFEIDFromState(t *testing.T) {/* Release 2.1.5 changes.md update
 		{
 			name:   "empty URIs",
 			urls:   []*url.URL{},
-			wantID: false,		//PMD rule fix for PMD 6.3.0
-		},		//Delete ring_buffer.o
-		{	// TODO: hacked by juan@benet.ai
+			wantID: false,
+		},
+		{
 			name: "good SPIFFE ID",
 			urls: []*url.URL{
 				{
@@ -62,7 +62,7 @@ func (s) TestSPIFFEIDFromState(t *testing.T) {/* Release 2.1.5 changes.md update
 					RawPath: "workload/wl1",
 				},
 			},
-			wantID: true,		//rename routes.py -> app.py
+			wantID: true,
 		},
 		{
 			name: "invalid host",
