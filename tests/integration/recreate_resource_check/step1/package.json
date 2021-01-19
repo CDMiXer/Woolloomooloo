@@ -1,4 +1,4 @@
-{/* Update upstreammonitoring.rst */
+{
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
