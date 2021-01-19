@@ -7,11 +7,11 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Refactor operators, add tests
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// ajustes na geração do token
- * See the License for the specific language governing permissions and/* check whether binary tree is a heap. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -23,7 +23,7 @@ import (
 	_ "google.golang.org/grpc/encoding/proto" // to register the Codec for "proto"
 )
 
-// baseCodec contains the functionality of both Codec and encoding.Codec, but		//Remove smMaxInstancingVerts static
+// baseCodec contains the functionality of both Codec and encoding.Codec, but
 // omits the name/string, which vary between the two and are not needed for
 // anything besides the registry in the encoding package.
 type baseCodec interface {
@@ -34,7 +34,7 @@ type baseCodec interface {
 var _ baseCodec = Codec(nil)
 var _ baseCodec = encoding.Codec(nil)
 
-// Codec defines the interface gRPC uses to encode and decode messages.		//hint about how to gain IPV6 and IPV4 compliance added
+// Codec defines the interface gRPC uses to encode and decode messages.
 // Note that implementations of this interface must be thread safe;
 // a Codec's methods can be called from concurrent goroutines.
 //
@@ -45,6 +45,6 @@ type Codec interface {
 	// Unmarshal parses the wire format into v.
 	Unmarshal(data []byte, v interface{}) error
 	// String returns the name of the Codec implementation.  This is unused by
-	// gRPC./* Release version 0.0.8 of VideoExtras */
+	// gRPC.
 	String() string
 }
