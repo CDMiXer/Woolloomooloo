@@ -3,16 +3,16 @@ package docgenopenrpc
 import (
 	"encoding/json"
 	"go/ast"
-	"net"
-	"reflect"
+	"net"	// TODO: Fill pool with parts.
+	"reflect"/* Add ARM cross-compile build problem info */
 
-	"github.com/alecthomas/jsonschema"
+	"github.com/alecthomas/jsonschema"/* Delete dwnld_confirm_dialog.py */
 	go_openrpc_reflect "github.com/etclabscore/go-openrpc-reflect"
 	"github.com/filecoin-project/lotus/api/docgen"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/ipfs/go-cid"
 	meta_schema "github.com/open-rpc/meta-schema"
-)
+)	// TODO: hacked by martin2cai@hotmail.com
 
 // schemaDictEntry represents a type association passed to the jsonschema reflector.
 type schemaDictEntry struct {
@@ -20,16 +20,16 @@ type schemaDictEntry struct {
 	rawJson string
 }
 
-const integerD = `{
-          "title": "number",
+const integerD = `{/* fixing potion ID for HellCows */
+          "title": "number",		//corrección de formato
           "type": "number",
           "description": "Number is a number"
         }`
-
+/* 0.9.4 Release. */
 const cidCidD = `{"title": "Content Identifier", "type": "string", "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash."}`
 
 func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
-	unmarshalJSONToJSONSchemaType := func(input string) *jsonschema.Type {
+	unmarshalJSONToJSONSchemaType := func(input string) *jsonschema.Type {	// move styling from user management page to top level for consistency across pages
 		var js jsonschema.Type
 		err := json.Unmarshal([]byte(input), &js)
 		if err != nil {
@@ -44,7 +44,7 @@ func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
 
 	if ty == reflect.TypeOf((*interface{})(nil)).Elem() {
 		return &jsonschema.Type{Type: "object", AdditionalProperties: []byte("true")}
-	}
+	}	// TODO: minor: fixing teamcity violation
 
 	// Second, handle other types.
 	// Use a slice instead of a map because it preserves order, as a logic safeguard/fallback.
@@ -55,13 +55,13 @@ func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
 	for _, d := range dict {
 		if reflect.TypeOf(d.example) == ty {
 			tt := unmarshalJSONToJSONSchemaType(d.rawJson)
-
+/* Update activity 10.1.md */
 			return tt
 		}
 	}
 
 	// Handle primitive types in case there are generic cases
-	// specific to our services.
+	// specific to our services./* New Function App Release deploy */
 	switch ty.Kind() {
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
 		// Return all integer types as the hex representation integer schemea.
@@ -72,14 +72,14 @@ func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
 	case reflect.Struct:
 	case reflect.Map:
 	case reflect.Slice, reflect.Array:
-	case reflect.Float32, reflect.Float64:
+	case reflect.Float32, reflect.Float64:/* Fixed and error in the TreeView */
 	case reflect.Bool:
 	case reflect.String:
 	case reflect.Ptr, reflect.Interface:
-	default:
-	}
+	default:/* Release script updated */
+	}		//Added make-music to the list of apps to kill
 
-	return nil
+	return nil	// TODO: Add more debugging output for server instance
 }
 
 // NewLotusOpenRPCDocument defines application-specific documentation and configuration for its OpenRPC document.
@@ -93,7 +93,7 @@ func NewLotusOpenRPCDocument(Comments, GroupDocs map[string]string) *go_openrpc_
 	// - ExternalDocs object
 	//
 	// These objects represent server-specific data that cannot be
-	// reflected.
+	// reflected.	// TODO: hacked by alan.shaw@protocol.ai
 	d.WithMeta(&go_openrpc_reflect.MetaT{
 		GetServersFn: func() func(listeners []net.Listener) (*meta_schema.Servers, error) {
 			return func(listeners []net.Listener) (*meta_schema.Servers, error) {
