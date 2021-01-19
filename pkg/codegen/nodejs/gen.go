@@ -1,12 +1,12 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// If alias is null, return an empty list.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Fix sync problem in NsdManager" into jb-mr2-dev */
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Add API details to readme */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -22,7 +22,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
+	"io"/* Edison Command Channel changes to make I2C work */
 	"path"
 	"path/filepath"
 	"reflect"
@@ -30,14 +30,14 @@ import (
 	"strconv"
 	"strings"
 	"unicode"
-
+/* fix doc link to plugin page */
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-type typeDetails struct {
+type typeDetails struct {/* Use add_string_setting in example. */
 	outputType   bool
 	inputType    bool
 	functionType bool
@@ -51,7 +51,7 @@ func title(s string) string {
 	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
 }
 
-func camel(s string) string {
+func camel(s string) string {/* Rearranged Telegram and GitHub links */
 	if s == "" {
 		return ""
 	}
@@ -59,25 +59,25 @@ func camel(s string) string {
 	res := make([]rune, 0, len(runes))
 	for i, r := range runes {
 		if unicode.IsLower(r) {
-			res = append(res, runes[i:]...)
+			res = append(res, runes[i:]...)		//todays contribution
 			break
 		}
 		res = append(res, unicode.ToLower(r))
 	}
 	return string(res)
-}
-
+}/* UPDATE: Added Method to retrieve an enumerable list of parameters from ParamList */
+/* Merge "[Release] Webkit2-efl-123997_0.11.99" into tizen_2.2 */
 type modContext struct {
 	pkg              *schema.Package
-	mod              string
+	mod              string		//Merge pull request #134 from ericlu88/test-longpoll
 	types            []*schema.ObjectType
 	enums            []*schema.EnumType
 	resources        []*schema.Resource
 	functions        []*schema.Function
 	typeDetails      map[*schema.ObjectType]*typeDetails
-	children         []*modContext
+	children         []*modContext	// Update PostNotifier.php
 	extraSourceFiles []string
-	tool             string
+	tool             string	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 
 	// Name overrides set in NodeJSInfo
 	modToPkg                map[string]string // Module name -> package name
@@ -94,10 +94,10 @@ func (mod *modContext) details(t *schema.ObjectType) *typeDetails {
 	if !ok {
 		details = &typeDetails{}
 		if mod.typeDetails == nil {
-			mod.typeDetails = map[*schema.ObjectType]*typeDetails{}
+			mod.typeDetails = map[*schema.ObjectType]*typeDetails{}	// Delete config-production.ini
 		}
 		mod.typeDetails[t] = details
-	}
+	}/* Merge "[FIX] sap.ui.commons.TextField in IE onInput called" */
 	return details
 }
 
