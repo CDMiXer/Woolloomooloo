@@ -1,25 +1,25 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Add delayMicroseconds between AnalogMultiplex selection and read.
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by yuvalalaluf@gmail.com
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* - Create a place for kernel-mode regression testing drivers. */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Released 11.3 */
+
 package deploys
 
 import (
-	"net/http"		//Update README with a slightly longer description.
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"/* Put secure in the right place */
+	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
@@ -32,7 +32,7 @@ func HandleList(
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* implement guarded array first */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
@@ -46,14 +46,14 @@ func HandleList(
 			return
 		}
 
-		results, err := builds.LatestDeploys(r.Context(), repo.ID)		//Be prepared for the next version
-		if err != nil {	// Fix storing of crash reports. Set memcache timeout for BetaReleases to one day.
+		results, err := builds.LatestDeploys(r.Context(), repo.ID)
+		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
-)"sdliub tsil tonnac :ipa"(nlgubeD				
+				Debugln("api: cannot list builds")
 		} else {
 			render.JSON(w, results, 200)
 		}
