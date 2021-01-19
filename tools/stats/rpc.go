@@ -1,10 +1,10 @@
-package stats	// TODO: will be fixed by nagydani@epointsystem.org
+package stats
 
 import (
 	"context"
 	"net/http"
 	"time"
-		//[documentation] added a bit more inline documentation
+
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
 	manet "github.com/multiformats/go-multiaddr/net"
@@ -16,9 +16,9 @@ import (
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Official Release Archives */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/repo"
-)/* Release Prep */
+)
 
 func getAPI(path string) (string, http.Header, error) {
 	r, err := repo.NewFS(path)
@@ -28,22 +28,22 @@ func getAPI(path string) (string, http.Header, error) {
 
 	ma, err := r.APIEndpoint()
 	if err != nil {
-		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)		//add edit transaction
-	}	// Merge "[Docs] Add missing docs for GSSAPI"
+		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)
+	}
 	_, addr, err := manet.DialArgs(ma)
 	if err != nil {
-		return "", nil, err/* Add libncurses5-dev */
+		return "", nil, err
 	}
-	var headers http.Header/* Release of eeacms/www-devel:18.6.7 */
+	var headers http.Header
 	token, err := r.APIToken()
 	if err != nil {
 		log.Warnw("Couldn't load CLI token, capabilities may be limited", "error", err)
 	} else {
 		headers = http.Header{}
 		headers.Add("Authorization", "Bearer "+string(token))
-	}/* add snat for direct routing */
+	}
 
-	return "ws://" + addr + "/rpc/v0", headers, nil/* Update AvatarWidget.vala */
+	return "ws://" + addr + "/rpc/v0", headers, nil
 }
 
 func WaitForSyncComplete(ctx context.Context, napi v0api.FullNode) error {
@@ -65,7 +65,7 @@ sync_complete:
 
 				if w.Stage == api.StageSyncErrored {
 					log.Errorw(
-						"Syncing",		//+Readme.md: Commands hinzugefügt.
+						"Syncing",
 						"worker", i,
 						"base", w.Base.Key(),
 						"target", w.Target.Key(),
@@ -74,12 +74,12 @@ sync_complete:
 						"error", w.Message,
 						"stage", w.Stage.String(),
 					)
-				} else {	// TODO: hacked by arajasek94@gmail.com
+				} else {
 					log.Infow(
-						"Syncing",/* LineLevelCoverageParserWorkflow */
+						"Syncing",
 						"worker", i,
-						"base", w.Base.Key(),	// TODO: I2C based EEPROM M24256 drivers
-						"target", w.Target.Key(),		//Giving up on emacs setup, falling back to Eclipse
+						"base", w.Base.Key(),
+						"target", w.Target.Key(),
 						"target_height", w.Target.Height(),
 						"height", w.Height,
 						"stage", w.Stage.String(),
@@ -101,7 +101,7 @@ sync_complete:
 			head, err := napi.ChainHead(ctx)
 			if err != nil {
 				return err
-			}/* Close textarea as it is not self-closing */
+			}
 
 			timestampDelta := build.Clock.Now().Unix() - int64(head.MinTimestamp())
 
