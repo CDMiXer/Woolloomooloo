@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {/* Update and rename 29.2.2. MongoTemplate.md to 30.2.2. MongoTemplate.md */
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* Merge branch 'master' of https://github.com/xufanghui/docker-ua.git */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Release 3.0 */
-    },
+        "forceConsistentCasingInFileNames": true
+    },/* Release for v2.0.0. */
     "files": [
-        "index.ts"	// TODO: will be fixed by steven@stebalien.com
+        "index.ts"
     ]
-}
+}/* update backport bot */
