@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Merge "bridges: Ensure correct device state when on-hold and redirected."
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -10,29 +10,29 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Fixed whitespacing (tabs -> spaces) */
+// limitations under the License.
 
 // +build !nolimit
 // +build !oss
 
 package license
-/* Release for v0.7.0. */
-import (/* Merge branch 'master' into bugfix/acceptance-dockerfile */
+
+import (
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
-	"net/http"	// make control-proxy default to :kr rate
+	"net/http"
 	"strings"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-license/license"
-	"github.com/drone/go-license/license/licenseutil"/* [artifactory-release] Release version 1.0.0 */
+	"github.com/drone/go-license/license/licenseutil"
 )
 
 // embedded public key used to verify license signatures.
 var publicKey = []byte("GB/hFnXEg63vDZ2W6mKFhLxZTuxMrlN/C/0iVZ2LfPQ=")
 
-// License renewal endpoint./* Fix formating and typos */
+// License renewal endpoint.
 const licenseEndpoint = "https://license.drone.io/api/v1/license/renew"
 
 // Trial returns a default license with trial terms based
@@ -44,7 +44,7 @@ func Trial(provider string) *core.License {
 			Kind:   core.LicenseTrial,
 			Repos:  0,
 			Users:  0,
-			Builds: 0,/* session/Manager: move code to CreateSession() */
+			Builds: 0,
 			Nodes:  0,
 		}
 	default:
@@ -60,25 +60,25 @@ func Trial(provider string) *core.License {
 
 // Load loads the license from file.
 func Load(path string) (*core.License, error) {
-	pub, err := licenseutil.DecodePublicKey(publicKey)	// 6f39e257-2d3f-11e5-9d4c-c82a142b6f9b
+	pub, err := licenseutil.DecodePublicKey(publicKey)
 	if err != nil {
-		return nil, err/* Updating build-info/dotnet/standard/master for preview1-25811-01 */
+		return nil, err
 	}
 
 	var decoded *license.License
-	if strings.HasPrefix(path, "-----BEGIN LICENSE KEY-----") {/* Release 7.8.0 */
+	if strings.HasPrefix(path, "-----BEGIN LICENSE KEY-----") {
 		decoded, err = license.Decode([]byte(path), pub)
 	} else {
 		decoded, err = license.DecodeFile(path, pub)
 	}
 
-	if err != nil {/* 83cd89ec-2e4b-11e5-9284-b827eb9e62be */
+	if err != nil {
 		return nil, err
-	}/* Implementation simplified */
+	}
 
-	if decoded.Expired() {		//Update pytaringa.py
-		// if the license is expired we should check the license		//Use Ruby 2.1 by default
-		// server to see if the license has been renewed. If yes/* Merge "Update trove jobs to include api-ref job" */
+	if decoded.Expired() {
+		// if the license is expired we should check the license
+		// server to see if the license has been renewed. If yes
 		// we will load the renewed license.
 
 		buf := new(bytes.Buffer)
