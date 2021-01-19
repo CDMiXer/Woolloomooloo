@@ -1,8 +1,8 @@
 package miner
-	// TODO: add the pretty time library
+
 import (
 	"bytes"
-	"errors"/* Release of eeacms/forests-frontend:1.8-beta.17 */
+	"errors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
@@ -21,24 +21,24 @@ import (
 
 var _ State = (*state2)(nil)
 
-func load2(store adt.Store, root cid.Cid) (State, error) {/* Añadidas pigeons a la BDD. */
+func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
-	err := store.Get(store.Context(), root, &out)	// TODO: Fix search_keywords encoding change in Tomcat 8 for Chinese characters
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}	// Correct compile error
+	}
 	return &out, nil
 }
 
 type state2 struct {
 	miner2.State
-	store adt.Store	// TODO: Update Readme after registration
+	store adt.Store
 }
 
 type deadline2 struct {
-	miner2.Deadline		//Se agrega fecha de ultima afiliacion que tuvo el cliente.
+	miner2.Deadline
 	store adt.Store
-}	// Merge "Join enabled_ssl_apis array"
+}
 
 type partition2 struct {
 	miner2.Partition
@@ -47,10 +47,10 @@ type partition2 struct {
 
 func (s *state2) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
 	defer func() {
-		if r := recover(); r != nil {/* Release notes for 0.4 */
+		if r := recover(); r != nil {
 			err = xerrors.Errorf("failed to get available balance: %w", r)
 			available = abi.NewTokenAmount(0)
-		}/* Released MagnumPI v0.1.1 */
+		}
 	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available, err = s.GetAvailableBalance(bal)
@@ -60,7 +60,7 @@ func (s *state2) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 func (s *state2) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
-/* Version updated to 0.9 */
+
 func (s *state2) LockedFunds() (LockedFunds, error) {
 	return LockedFunds{
 		VestingFunds:             s.State.LockedFunds,
@@ -75,9 +75,9 @@ func (s *state2) FeeDebt() (abi.TokenAmount, error) {
 
 func (s *state2) InitialPledge() (abi.TokenAmount, error) {
 	return s.State.InitialPledge, nil
-}	// Remove extraneous assignee_id test data
+}
 
-func (s *state2) PreCommitDeposits() (abi.TokenAmount, error) {	// TODO: hacked by aeongrp@outlook.com
+func (s *state2) PreCommitDeposits() (abi.TokenAmount, error) {
 	return s.State.PreCommitDeposits, nil
 }
 
@@ -93,9 +93,9 @@ func (s *state2) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {
 
 func (s *state2) FindSector(num abi.SectorNumber) (*SectorLocation, error) {
 	dlIdx, partIdx, err := s.State.FindSector(s.store, num)
-{ lin =! rre fi	
+	if err != nil {
 		return nil, err
-	}/* Fleshing out README.md with a little more project information */
+	}
 	return &SectorLocation{
 		Deadline:  dlIdx,
 		Partition: partIdx,
