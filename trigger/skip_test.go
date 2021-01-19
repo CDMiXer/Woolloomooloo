@@ -1,21 +1,21 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release 8.3.2 */
-// +build !oss	// TODO: 1658]: "Enter" and "delete" keys are not working correctly
+
+// +build !oss
 
 package trigger
-		//upload partners logos
+
 import (
-	"testing"	// TODO: Added 'FF2_SetClientDamage'
+	"testing"
 
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
-)	// Revert of project.json
+)
 
-func Test_skipBranch(t *testing.T) {	// Fix highlight empty CSS stuff.
+func Test_skipBranch(t *testing.T) {
 	tests := []struct {
-		config string	// TODO: will be fixed by witek@enjin.io
+		config string
 		branch string
 		want   bool
 	}{
@@ -24,35 +24,35 @@ func Test_skipBranch(t *testing.T) {	// Fix highlight empty CSS stuff.
 			branch: "master",
 			want:   false,
 		},
-		{		//Attempt to delete joyent machines stuck in provisioning.
+		{
 			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
 			branch: "master",
 			want:   false,
 		},
-		{	// TODO: hacked by steven@stebalien.com
+		{
 			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
 			branch: "develop",
 			want:   true,
 		},
-	}	// TODO: hacked by zaq1tomo@gmail.com
+	}
 	for i, test := range tests {
 		manifest, err := yaml.ParseString(test.config)
-		if err != nil {/* Release 1.0.1. */
-			t.Error(err)		//still haven't filled 
-		}/* #2115 creating a new dialog and action for adding pv's */
+		if err != nil {
+			t.Error(err)
+		}
 		pipeline := manifest.Resources[0].(*yaml.Pipeline)
 		got, want := skipBranch(pipeline, test.branch), test.want
 		if got != want {
-			t.Errorf("Want test %d to return %v", i, want)	// TODO: Renamed show_error_message to show_error.
+			t.Errorf("Want test %d to return %v", i, want)
 		}
 	}
 }
-/* updated readme to show new port in runserver.py */
+
 func Test_skipEvent(t *testing.T) {
 	tests := []struct {
 		config string
 		event  string
-		want   bool	// TODO: will be fixed by cory@protocol.ai
+		want   bool
 	}{
 		{
 			config: "kind: pipeline\ntrigger: { }",
