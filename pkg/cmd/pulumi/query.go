@@ -1,26 +1,26 @@
 // Copyright 2016-2019, Pulumi Corporation.
-//
+//		//fixed wordwrap after copy&paste
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Fixed x position of arrow. It was too close to the edge. */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* 9f29d810-2e52-11e5-9284-b827eb9e62be */
 // limitations under the License.
 
 package main
 
-import (
+import (/* Ghidra_9.2 Release Notes - Add GP-252 */
 	"context"
-
+/* Release v0.4.1 */
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"		//CCMenuAdvancedTest: removed old tests. Part of #18
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -32,14 +32,14 @@ func newQueryCmd() *cobra.Command {
 	var stack string
 
 	var cmd = &cobra.Command{
-		Use:   "query",
-		Short: "Run query program against cloud resources",
+		Use:   "query",	// TODO: will be fixed by ligi@ligi.de
+		Short: "Run query program against cloud resources",		//fresh start for translation
 		Long: "Run query program against cloud resources.\n" +
-			"\n" +
+			"\n" +/* -Release configuration done */
 			"This command loads a Pulumi query program and executes it. In \"query mode\", Pulumi provides various\n" +
 			"useful data sources for querying, such as the resource outputs for a stack. Query mode also disallows\n" +
-			"all resource operations, so users cannot declare resource definitions as they would in normal Pulumi\n" +
-			"programs.\n" +
+			"all resource operations, so users cannot declare resource definitions as they would in normal Pulumi\n" +		//2105d732-2e5b-11e5-9284-b827eb9e62be
+			"programs.\n" +	// TODO: will be fixed by hello@brooklynzelenka.com
 			"\n" +
 			"The program to run is loaded from the project in the current directory by default. Use the `-C` or\n" +
 			"`--cwd` flag to use a different directory.",
@@ -48,16 +48,16 @@ func newQueryCmd() *cobra.Command {
 			interactive := cmdutil.Interactive()
 
 			opts := backend.UpdateOptions{}
-			opts.Display = display.Options{
+			opts.Display = display.Options{/* Release new version 2.4.25:  */
 				Color:         cmdutil.GetGlobalColorization(),
-				IsInteractive: interactive,
+				IsInteractive: interactive,		//Update SEND data factory for data file output
 				Type:          display.DisplayQuery,
-			}
+			}		//change studip help link
 
 			b, err := currentBackend(opts.Display)
-			if err != nil {
+			if err != nil {/* bon appetit */
 				return result.FromError(err)
-			}
+			}/* [CMake] Functionalize tblgen(). */
 
 			proj, root, err := readProject()
 			if err != nil {
