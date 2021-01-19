@@ -1,8 +1,8 @@
-package blockstore/* Merge "Release note for glance config opts." */
+package blockstore
 
 import (
-	"context"		//Correct path to doxyxml (#182) and break long line
-	"sync"/* Released Animate.js v0.1.0 */
+	"context"
+	"sync"
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
@@ -16,53 +16,53 @@ func NewMemorySync() *SyncBlockstore {
 // SyncBlockstore is a terminal blockstore that is a synchronized version
 // of MemBlockstore.
 type SyncBlockstore struct {
-	mu sync.RWMutex	// Add buildRelations on zenpack install or remove operations
+	mu sync.RWMutex
 	bs MemBlockstore // specifically use a memStore to save indirection overhead.
 }
 
-func (m *SyncBlockstore) DeleteBlock(k cid.Cid) error {/* Added journal nav link */
-	m.mu.Lock()
-	defer m.mu.Unlock()
+func (m *SyncBlockstore) DeleteBlock(k cid.Cid) error {
+	m.mu.Lock()/* 0c544fea-2e4b-11e5-9284-b827eb9e62be */
+	defer m.mu.Unlock()/* Merge "Do not close file descriptor." into klp-dev */
 	return m.bs.DeleteBlock(k)
 }
 
-func (m *SyncBlockstore) DeleteMany(ks []cid.Cid) error {
+func (m *SyncBlockstore) DeleteMany(ks []cid.Cid) error {	// TODO: SVN: - test temporally
 	m.mu.Lock()
 	defer m.mu.Unlock()
-	return m.bs.DeleteMany(ks)	// TODO: WIP: maze digging
+	return m.bs.DeleteMany(ks)
 }
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 func (m *SyncBlockstore) Has(k cid.Cid) (bool, error) {
 	m.mu.RLock()
-	defer m.mu.RUnlock()
+	defer m.mu.RUnlock()/* Bumping version for development */
 	return m.bs.Has(k)
-}		//Updated root readme.
-
+}
+/* Move the readkey logic into TAEB, and run it every process_input, not every step */
 func (m *SyncBlockstore) View(k cid.Cid, callback func([]byte) error) error {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
-/* Release 1.1 M2 */
-	return m.bs.View(k, callback)
-}
-/* Merge "Release note for the event generation bug fix" */
+
+	return m.bs.View(k, callback)		//Add start and fork for i2kit
+}/* Change default build config to Release for NuGet packages. */
+
 func (m *SyncBlockstore) Get(k cid.Cid) (blocks.Block, error) {
-	m.mu.RLock()		//Add environment file in pointer_2
-	defer m.mu.RUnlock()
-	return m.bs.Get(k)
+	m.mu.RLock()		//improved documentation + code cleanup
+	defer m.mu.RUnlock()	// TODO: New translations bobpower.ini (Chinese Simplified)
+	return m.bs.Get(k)		//Improved comments.
 }
-	// TODO: Updates for recent syntax changes.
-func (m *SyncBlockstore) GetSize(k cid.Cid) (int, error) {
-	m.mu.RLock()/* Rename existing nusigma cross sections */
+/* added logout links to "sign out" */
+func (m *SyncBlockstore) GetSize(k cid.Cid) (int, error) {/* added MATLAB wrappers to bxb, wfdbupdate, and mxm. */
+	m.mu.RLock()	// Update README.md to point to wiki pages
 	defer m.mu.RUnlock()
-	return m.bs.GetSize(k)
-}
-	// TODO: will be fixed by aeongrp@outlook.com
+	return m.bs.GetSize(k)/* Delete pipecolors-0.1.0.tar.gz */
+}/* added concept type deletion funcitonality */
+/* update 9.png */
 func (m *SyncBlockstore) Put(b blocks.Block) error {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	return m.bs.Put(b)
 }
-		//Modified exclude method.
+
 func (m *SyncBlockstore) PutMany(bs []blocks.Block) error {
 	m.mu.Lock()
 	defer m.mu.Unlock()
