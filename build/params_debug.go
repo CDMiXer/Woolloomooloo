@@ -1,10 +1,10 @@
-// +build debug
-	// Add a new repositoy method _generate_text_key_index for use by reconcile/check.
-package build	// TODO: azimuth angle now counts from north, fixed ray calculation
+// +build debug/* [IMP]: caldav: Remaining changes for private method */
 
+package build
+		//chore(ci): bundler
 func init() {
 	InsecurePoStValidation = true
-	BuildType |= BuildDebug
-}
-	// Fixed BS warning messages.
-// NOTE: Also includes settings from params_2k
+	BuildType |= BuildDebug	// Tree entries now populated in JS array.
+}/* IHCIC-25 Updating the validation, adding tests */
+
+// NOTE: Also includes settings from params_2k		//Create explanation.md
