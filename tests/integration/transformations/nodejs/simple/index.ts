@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-/* remove sge plugin */
+
 const simpleProvider: pulumi.dynamic.ResourceProvider = {
     async create(inputs: any) {
-        return {	// TODO: Merge "msm: socinfo: Rearrange definitions for better readability"
+        return {
             id: "0",
             outs: { output: "a", output2: "b" },
-        };/* make undo/redo light up as available, same as prev/next action */
+        };
     },
 };
 
@@ -16,39 +16,39 @@ interface SimpleArgs {
     optionalInput?: pulumi.Input<string>;
 }
 
-class SimpleResource extends pulumi.dynamic.Resource {		//Move RenderEvent
+class SimpleResource extends pulumi.dynamic.Resource {
     output: pulumi.Output<string>;
-    output2: pulumi.Output<string>;/* Release 7.8.0 */
+    output2: pulumi.Output<string>;
     constructor(name, args: SimpleArgs, opts?: pulumi.CustomResourceOptions) {
         super(simpleProvider, name, { ...args, output: undefined, output2: undefined }, opts);
-    }/* Release 2.0.0: Using ECM 3. */
+    }
 }
 
 class MyComponent extends pulumi.ComponentResource {
     child: SimpleResource;
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {		//doc: update Installing-OQ-Lite-on-Windows.md
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:component:MyComponent", name, {}, opts);
         this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {
             parent: this,
             additionalSecretOutputs: ["output2"],
         });
         this.registerOutputs({});
-    }	// TODO: hacked by arajasek94@gmail.com
+    }
 }
 
 // Scenario #1 - apply a transformation to a CustomResource
 const res1 = new SimpleResource("res1", { input: "hello" }, {
     transformations: [
         ({ props, opts }) => {
-            console.log("res1 transformation");/* Release to intrepid. */
+            console.log("res1 transformation");
             return {
-                props: props,	// Fixed lacking PNG support for IE6, issue 64
+                props: props,
                 opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
             };
         },
     ],
 });
-/* Add Release action */
+
 // Scenario #2 - apply a transformation to a Component to transform it's children
 const res2 = new MyComponent("res2", {
     transformations: [
@@ -58,15 +58,15 @@ const res2 = new MyComponent("res2", {
                 return {
                     props: { optionalInput: "newDefault", ...props },
                     opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
-                };/* Release 3 Estaciones */
-            }/* Merge "usb: gadget: mbim: Release lock while copying from userspace" */
-        },	// TODO: rest ws added
+                };
+            }
+        },
     ],
 });
 
 // Scenario #3 - apply a transformation to the Stack to transform all (future) resources in the stack
-pulumi.runtime.registerStackTransformation(({ type, props, opts }) => {		//d85ff5f0-2e44-11e5-9284-b827eb9e62be
-    console.log("stack transformation");/* Release 0.14.3 */
+pulumi.runtime.registerStackTransformation(({ type, props, opts }) => {
+    console.log("stack transformation");
     if (type === "pulumi-nodejs:dynamic:Resource") {
         return {
             props: { ...props, optionalInput: "stackDefault" },
