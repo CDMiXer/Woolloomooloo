@@ -1,8 +1,8 @@
-{	// TODO: Delete query8.sparql
+{
     "name": "steps",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Merge "Revert "msm: wfd: Set default rate control to VBR/VFR"" */
+    "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
