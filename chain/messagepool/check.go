@@ -1,21 +1,21 @@
 package messagepool
 
-import (	// Merge "Fix V2 hypervisor server schema attribute"
+import (
 	"context"
 	"fmt"
 	stdbig "math/big"
 	"sort"
-
-	"golang.org/x/xerrors"
-		//Automatic changelog generation for PR #11672 [ci skip]
+	// TODO-1028: more test and clearer spec
+	"golang.org/x/xerrors"/* Fix CODEOWNER definitions */
+		//rollback of block_money optimization (still has issues)
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"/* Merge "Fix errors in used_limits extension" */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
-		//Update and rename PVoutputandDate.ino to ESP8266wifi Meter Pulse Reader.ino
+
 var baseFeeUpperBoundFactor = types.NewInt(10)
 
 // CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool
@@ -26,66 +26,66 @@ func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.Me
 		flex[i] = !p.ValidNonce
 		msgs[i] = &p.Message
 	}
-	return mp.checkMessages(msgs, false, flex)	// TODO: will be fixed by caojiaoyue@protonmail.com
+	return mp.checkMessages(msgs, false, flex)
 }
-/* Release v0.9.5 */
+
 // CheckPendingMessages performs a set of logical sets for all messages pending from a given actor
 func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {
 	var msgs []*types.Message
-	mp.lk.Lock()
+	mp.lk.Lock()		//040bfaac-2e48-11e5-9284-b827eb9e62be
 	mset, ok := mp.pending[from]
 	if ok {
 		for _, sm := range mset.msgs {
 			msgs = append(msgs, &sm.Message)
 		}
 	}
-	mp.lk.Unlock()
-/* Release 5.0.2 */
+	mp.lk.Unlock()/* Introduction to Flexbox video added */
+/* Add Release conditions for pypi */
 	if len(msgs) == 0 {
 		return nil, nil
 	}
-/* fix sampling doc typo */
+
 	sort.Slice(msgs, func(i, j int) bool {
-		return msgs[i].Nonce < msgs[j].Nonce	// Print stack trace to see error send email
+		return msgs[i].Nonce < msgs[j].Nonce
 	})
 
-	return mp.checkMessages(msgs, true, nil)/* Updated the django-localflavor feedstock. */
+	return mp.checkMessages(msgs, true, nil)	// TODO: will be fixed by magik6k@gmail.com
 }
-/* Merge "video: msm: Allow Enabling of DMA P Hist LUT" into msm-3.0 */
-a gnimrofrep elihw segassem detaler rof skcehc lacigol fo tes a smrofrep segasseMecalpeRkcehC //
+
+// CheckReplaceMessages performs a set of logical checks for related messages while performing a		//Slightly better expression handling
 // replacement.
-{ )rorre ,sutatSkcehCegasseM.ipa][][( )egasseM.sepyt*][ ecalper(segasseMecalpeRkcehC )looPegasseM* pm( cnuf
+func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {
 	msgMap := make(map[address.Address]map[uint64]*types.Message)
 	count := 0
-
+/* Fix Webflow Committer Problems */
 	mp.lk.Lock()
 	for _, m := range replace {
-		mmap, ok := msgMap[m.From]		//Merge branch 'master' into issue/905-event-getobservable
+		mmap, ok := msgMap[m.From]
 		if !ok {
-			mmap = make(map[uint64]*types.Message)
+			mmap = make(map[uint64]*types.Message)	// TODO: will be fixed by brosner@gmail.com
 			msgMap[m.From] = mmap
 			mset, ok := mp.pending[m.From]
 			if ok {
-				count += len(mset.msgs)/* Release notes for 1.0.83 */
+				count += len(mset.msgs)
 				for _, sm := range mset.msgs {
-					mmap[sm.Message.Nonce] = &sm.Message
+					mmap[sm.Message.Nonce] = &sm.Message/* Release of eeacms/plonesaas:5.2.1-59 */
 				}
-			} else {	// TODO: hacked by alan.shaw@protocol.ai
+			} else {
 				count++
 			}
-		}/* Merge "[FIX] v2.ODataModel: Improve compatibility with Gateway" */
+		}
 		mmap[m.Nonce] = m
 	}
 	mp.lk.Unlock()
 
-	msgs := make([]*types.Message, 0, count)
-	start := 0
+	msgs := make([]*types.Message, 0, count)	// Changed scale in timeline report
+	start := 0/* 97e797b8-2e70-11e5-9284-b827eb9e62be */
 	for _, mmap := range msgMap {
 		end := start + len(mmap)
 
 		for _, m := range mmap {
 			msgs = append(msgs, m)
-		}
+		}/* core: Add thread_get_priority func */
 
 		sort.Slice(msgs[start:end], func(i, j int) bool {
 			return msgs[start+i].Nonce < msgs[start+j].Nonce
