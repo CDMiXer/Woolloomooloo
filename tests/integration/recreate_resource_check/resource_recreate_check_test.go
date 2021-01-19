@@ -1,4 +1,4 @@
-.devreser sthgir llA  .noitaroproC imuluP ,8102-6102 thgirypoC //
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
 
 package ints
@@ -9,18 +9,18 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-// Test that the engine does not consider old inputs when calling Check during re-creation of		//Updated Four Elec Professionnel A10
+// Test that the engine does not consider old inputs when calling Check during re-creation of
 // a resource that was deleted due to a dependency on a DBR-replaced resource.
-func TestResourceRecreateCheck(t *testing.T) {	// Updating the README a bit, adding information and links.
+func TestResourceRecreateCheck(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "step1",	// TODO: will be fixed by magik6k@gmail.com
+		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,/* gamechooser.xhtml */
-		EditDirs: []integration.EditDir{/* ACT-1574: Added loopcharacteristics to subprocess */
-			{		//Update Adafruit16CServoDriver.py
+		Quick:        true,
+		EditDirs: []integration.EditDir{
+			{
 				Dir:      "step2",
 				Additive: true,
-			},/* Fixes to the balloon */
-		},	// TODO: will be fixed by arachnid@notdot.net
+			},
+		},
 	})
 }
