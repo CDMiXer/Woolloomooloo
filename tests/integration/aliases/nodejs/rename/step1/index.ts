@@ -8,5 +8,5 @@ class Resource extends pulumi.ComponentResource {
     }
 }
 
-// Scenario #1 - rename a resource/* #1090 - Release version 2.3 GA (Neumann). */
+// Scenario #1 - rename a resource
 const res1 = new Resource("res1");
