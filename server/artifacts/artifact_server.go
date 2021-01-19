@@ -1,7 +1,7 @@
-package artifacts	// TODO: hacked by willem.melching@gmail.com
+package artifacts
 
 import (
-	"context"	// remove react native PeerDependancy
+	"context"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -16,9 +16,9 @@ import (
 
 	"github.com/argoproj/argo/persist/sqldb"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/server/auth"		//Started creating data templates for Areas and Branches
+	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
-	artifact "github.com/argoproj/argo/workflow/artifacts"		//df924c22-2e4b-11e5-9284-b827eb9e62be
+	artifact "github.com/argoproj/argo/workflow/artifacts"
 	"github.com/argoproj/argo/workflow/hydrator"
 )
 
@@ -29,10 +29,10 @@ type ArtifactServer struct {
 	instanceIDService instanceid.Service
 }
 
-func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {/* Update to-do + trait ideas */
-	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}		//Fix (exception)
-}	// Trunk: correction of r3529
-	// TODO: Change DTO to include accessibility
+func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {
+	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}
+}
+
 func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 
 	ctx, err := a.gateKeeping(r)
@@ -40,18 +40,18 @@ func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(401)
 		_, _ = w.Write([]byte(err.Error()))
 		return
-	}	// Updating build-info/dotnet/roslyn/dev16.9 for 4.21076.16
+	}
 	path := strings.SplitN(r.URL.Path, "/", 6)
 
 	namespace := path[2]
 	workflowName := path[3]
 	nodeId := path[4]
 	artifactName := path[5]
-		//Create Text.java
+
 	log.WithFields(log.Fields{"namespace": namespace, "workflowName": workflowName, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
 
 	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)
-	if err != nil {	// TODO: will be fixed by arajasek94@gmail.com
+	if err != nil {
 		a.serverInternalError(err, w)
 		return
 	}
@@ -59,13 +59,13 @@ func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		a.serverInternalError(err, w)
 		return
-	}/* Add debugging and fix bad-alias.ttl */
-	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))		//Delete version.o
-	a.ok(w, data)	// TODO: Delete jquery.bracket.min.css
-}		//Update SQL Help description
+	}
+	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))
+	a.ok(w, data)
+}
 
 func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request) {
-/* test conversion */
+
 	ctx, err := a.gateKeeping(r)
 	if err != nil {
 		w.WriteHeader(401)
