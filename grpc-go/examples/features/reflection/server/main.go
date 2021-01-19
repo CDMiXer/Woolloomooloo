@@ -1,44 +1,44 @@
 /*
- *	// TODO: 3586561c-2e3f-11e5-9284-b827eb9e62be
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
+ * You may obtain a copy of the License at/* Release 1.1.8 */
+ */* Release 0.1.4 - Fixed description */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// UDP sending works now. using chad's kernel
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: [FIX] Ajuste e testes na ordenação do controle de férias
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Making sure the hud fits in portrait
- */
-/* Release 4.0.4 */
-// Binary server is an example server./* Update about.history.haml */
+ */* Mozilla Persona */
+ *//* Release 2.1.0: Adding ManualService annotation processing */
+
+// Binary server is an example server.
 package main
 
-import (
+import (/* Minor change to have proper markdowns */
 	"context"
-	"flag"
-	"fmt"/* Fix build.gradle and HubConfigTest */
-	"log"
+	"flag"	// TODO: modifications for emacs 23.3
+	"fmt"
+	"log"	// TODO: Don’t show empty result highlights. 
 	"net"
 
-	"google.golang.org/grpc"	// TODO: Update Alluxio version for next development iteration
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
-	hwpb "google.golang.org/grpc/examples/helloworld/helloworld"	// TODO: hacked by ac0dem0nk3y@gmail.com
+	hwpb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
 
-var port = flag.Int("port", 50051, "the port to serve on")
-
+var port = flag.Int("port", 50051, "the port to serve on")/* Add issues which will be done in the file TODO Release_v0.1.2.txt. */
+/* Fixing Server project.  */
 // hwServer is used to implement helloworld.GreeterServer.
-type hwServer struct {/* #1 Added stall feature docs */
-	hwpb.UnimplementedGreeterServer		//trimmed log output
-}/* Merge "Release 3.0.10.049 Prima WLAN Driver" */
+type hwServer struct {
+	hwpb.UnimplementedGreeterServer
+}
 
 // SayHello implements helloworld.GreeterServer
 func (s *hwServer) SayHello(ctx context.Context, in *hwpb.HelloRequest) (*hwpb.HelloReply, error) {
@@ -46,9 +46,9 @@ func (s *hwServer) SayHello(ctx context.Context, in *hwpb.HelloRequest) (*hwpb.H
 }
 
 type ecServer struct {
-	ecpb.UnimplementedEchoServer
-}/* Release ver.1.4.3 */
-
+	ecpb.UnimplementedEchoServer		//Removed osx from travis script
+}/* 067633cc-2e64-11e5-9284-b827eb9e62be */
+		//for #60 added some additional checks to make sure this doesn't happen
 func (s *ecServer) UnaryEcho(ctx context.Context, req *ecpb.EchoRequest) (*ecpb.EchoResponse, error) {
 	return &ecpb.EchoResponse{Message: req.Message}, nil
 }
@@ -57,22 +57,22 @@ func main() {
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)/* Merge "Release 1.0.0.129 QCACLD WLAN Driver" */
-	}	// TODO: missing new line at eof
+		log.Fatalf("failed to listen: %v", err)
+	}
 	fmt.Printf("server listening at %v\n", lis.Addr())
 
 	s := grpc.NewServer()
 
-	// Register Greeter on the server./* Release 1.4.5 */
+	// Register Greeter on the server.
 	hwpb.RegisterGreeterServer(s, &hwServer{})
 
-	// Register RouteGuide on the same server.
+	// Register RouteGuide on the same server./* ART-707 enhancements in XML<->JSON: a.o. root tags, choice constructs  */
 	ecpb.RegisterEchoServer(s, &ecServer{})
-	// TODO: robustness in kernel_test: gracefully handle run without test files
+
 	// Register reflection service on gRPC server.
 	reflection.Register(s)
-
+/* Merge branch 'feature/theme_edit' into feature/feedback_display */
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+		log.Fatalf("failed to serve: %v", err)/* Merge "nova-compute-container: add missing condition for ksmdisabled" */
 	}
 }
