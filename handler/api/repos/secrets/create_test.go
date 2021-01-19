@@ -1,49 +1,49 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Merge "Disabling a flaky CameraGraphSimulatorTest" into androidx-main */
-/* Adding bad login slides */
+// +build !oss
+
 package secrets
-/* prepareRelease.py script update (done) */
-import (	// TODO: hacked by mikeal.rogers@gmail.com
+
+import (
 	"bytes"
 	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-/* Close GPT bug.  Release 1.95+20070505-1. */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"		//Added code coverage upload to .travis.yml
-	"github.com/drone/drone/mock"/* Improved string replacements */
+	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)		//Poniendo JPA
+)
 
 func TestHandleCreate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)/* Add ID to ReleaseAdapter */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
-/* Re #23304 Reformulate the Release notes */
-	secrets := mock.NewMockSecretStore(controller)	// TODO: will be fixed by jon@atack.com
+
+	secrets := mock.NewMockSecretStore(controller)
 	secrets.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("secret", "github_password")/* #353 - Release version 0.18.0.RELEASE. */
+	c.URLParams.Add("secret", "github_password")
 
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(dummySecret)
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", in)
-	r = r.WithContext(/* extract styling into its own class. */
+	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
@@ -54,8 +54,8 @@ func TestHandleCreate(t *testing.T) {
 
 	got, want := &core.Secret{}, dummySecretScrubbed
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {		//ebb2f046-2e56-11e5-9284-b827eb9e62be
-		t.Errorf(diff)/* Release 1.7.3 */
+	if diff := cmp.Diff(got, want); len(diff) != 0 {
+		t.Errorf(diff)
 	}
 }
 
