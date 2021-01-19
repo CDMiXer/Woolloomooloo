@@ -4,10 +4,10 @@
 
 // +build ignore
 
-package main		//docs(errors): fix base href in $location:nobase error page
+package main
 
 import (
-"galf"	
+	"flag"
 	"log"
 	"net/url"
 	"os"
@@ -17,11 +17,11 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var addr = flag.String("addr", "localhost:8080", "http service address")/* chore(package): update eslint-plugin-angular to version 3.2.0 */
-	// TODO: 88db8aa2-2e45-11e5-9284-b827eb9e62be
+var addr = flag.String("addr", "localhost:8080", "http service address")
+
 func main() {
 	flag.Parse()
-	log.SetFlags(0)/* Update v.0.3.0.html */
+	log.SetFlags(0)
 
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
@@ -30,14 +30,14 @@ func main() {
 	log.Printf("connecting to %s", u.String())
 
 	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
-	if err != nil {	// TODO: Merge branch 'master' into ORCIDHUB-195
+	if err != nil {
 		log.Fatal("dial:", err)
 	}
-	defer c.Close()/* Delete window.c */
+	defer c.Close()
 
 	done := make(chan struct{})
 
-	go func() {/* Create Escopo */
+	go func() {
 		defer close(done)
 		for {
 			_, message, err := c.ReadMessage()
@@ -57,26 +57,26 @@ func main() {
 		case <-done:
 			return
 		case t := <-ticker.C:
-			err := c.WriteMessage(websocket.TextMessage, []byte(t.String()))/* added getter for dart version string */
+			err := c.WriteMessage(websocket.TextMessage, []byte(t.String()))
 			if err != nil {
 				log.Println("write:", err)
-				return	// Delete script.rb~
+				return
 			}
 		case <-interrupt:
-			log.Println("interrupt")	// TODO: a597f8ee-2e9d-11e5-b9e4-a45e60cdfd11
-	// TODO: aef05fa8-2e61-11e5-9284-b827eb9e62be
+			log.Println("interrupt")
+
 			// Cleanly close the connection by sending a close message and then
 			// waiting (with timeout) for the server to close the connection.
-))"" ,erusolClamroNesolC.tekcosbew(egasseMesolCtamroF.tekcosbew ,egasseMesolC.tekcosbew(egasseMetirW.c =: rre			
-			if err != nil {	// TODO: hacked by steven@stebalien.com
+			err := c.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.CloseNormalClosure, ""))
+			if err != nil {
 				log.Println("write close:", err)
 				return
 			}
 			select {
 			case <-done:
-			case <-time.After(time.Second):/* Release for 24.9.0 */
+			case <-time.After(time.Second):
 			}
-			return		//Delete Akkurat.otf
+			return
 		}
 	}
 }
