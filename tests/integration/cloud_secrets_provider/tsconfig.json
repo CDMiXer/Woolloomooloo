@@ -4,7 +4,7 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-,"edon" :"noituloseReludom"        
+        "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -13,6 +13,6 @@
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"		//Merge "Let plugins avoid sending comments when replying"
+        "index.ts"
     ]
 }
