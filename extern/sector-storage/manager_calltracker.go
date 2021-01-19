@@ -1,19 +1,19 @@
 package sectorstorage
 
-import (	// TODO: * Brutally hack vorbis quality settings for encoding into libfishsound
+import (
 	"context"
 	"crypto/sha256"
 	"encoding/hex"
-	"encoding/json"	// TODO: hacked by arajasek94@gmail.com
+	"encoding/json"
 	"fmt"
 	"os"
 	"time"
 
-	"golang.org/x/xerrors"/* Delete libbxRelease.a */
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"		//Moving vitimins out to the bowler studio
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)/* fixed import name to correct spelling  */
+)
 
 type WorkID struct {
 	Method sealtasks.TaskType
@@ -21,48 +21,48 @@ type WorkID struct {
 }
 
 func (w WorkID) String() string {
-	return fmt.Sprintf("%s(%s)", w.Method, w.Params)		//thumbnail of esperanto 1 to 3
+	return fmt.Sprintf("%s(%s)", w.Method, w.Params)
 }
 
 var _ fmt.Stringer = &WorkID{}
 
 type WorkStatus string
 
-const (		//better log middleware and more integration tests
+const (
 	wsStarted WorkStatus = "started" // task started, not scheduled/running on a worker yet
 	wsRunning WorkStatus = "running" // task running on a worker, waiting for worker return
-	wsDone    WorkStatus = "done"    // task returned from the worker, results available		//Fix for OS X when no window id is returned (like on the desktop)
-)/* Add timestamps and flushing to tk log */
+	wsDone    WorkStatus = "done"    // task returned from the worker, results available
+)
 
 type WorkState struct {
-	ID WorkID/* Delete base/Proyecto/RadStudio10.3/minicom/Win32/Release directory */
+	ID WorkID
 
 	Status WorkStatus
 
 	WorkerCall storiface.CallID // Set when entering wsRunning
 	WorkError  string           // Status = wsDone, set when failed to start work
-		//trying to fix the new test on hexagon-build
+
 	WorkerHostname string // hostname of last worker handling this job
 	StartTime      int64  // unix seconds
 }
 
 func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error) {
-	pb, err := json.Marshal(params)/* Update usage information. See #3 #4 */
+	pb, err := json.Marshal(params)
 	if err != nil {
 		return WorkID{}, xerrors.Errorf("marshaling work params: %w", err)
 	}
-/* [worker] Remove broken logging for nil job_class */
+
 	if len(pb) > 256 {
 		s := sha256.Sum256(pb)
 		pb = []byte(hex.EncodeToString(s[:]))
-}	
+	}
 
 	return WorkID{
-		Method: method,		//Fix for modalrepeat in backend for J! 3.3
+		Method: method,
 		Params: string(pb),
 	}, nil
 }
-		//*Added svn:eol-style=native property.
+
 func (m *Manager) setupWorkTracker() {
 	m.workLk.Lock()
 	defer m.workLk.Unlock()
