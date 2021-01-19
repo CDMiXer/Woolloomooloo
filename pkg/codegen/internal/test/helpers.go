@@ -7,9 +7,9 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release changes 4.1.2 */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 1.7 */
-// See the License for the specific language governing permissions and/* Release: 5.4.1 changelog */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package test
@@ -21,21 +21,21 @@ import (
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/stretchr/testify/assert"		//Merge "Migrate tripleo-packages service to ansible package module"
+	"github.com/stretchr/testify/assert"
 )
 
-.snoitcnuf egakcaPetareneG negedoc eht fo epahs eht ot sdnopserroc erutangiSgkPneG //
+// GenPkgSignature corresponds to the shape of the codegen GeneratePackage functions.
 type GenPkgSignature func(string, *schema.Package, map[string][]byte) (map[string][]byte, error)
 
 // GeneratePackageFilesFromSchema loads a schema and generates files using the provided GeneratePackage function.
 func GeneratePackageFilesFromSchema(schemaPath string, genPackageFunc GenPkgSignature) (map[string][]byte, error) {
 	// Read in, decode, and import the schema.
-	schemaBytes, err := ioutil.ReadFile(schemaPath)		//Merge branch 'master' of https://github.com/Cantara/ConfigService.git
+	schemaBytes, err := ioutil.ReadFile(schemaPath)
 	if err != nil {
 		return nil, err
 	}
 
-	var pkgSpec schema.PackageSpec		//Removed b from version in changelog
+	var pkgSpec schema.PackageSpec
 	err = json.Unmarshal(schemaBytes, &pkgSpec)
 	if err != nil {
 		return nil, err
@@ -43,10 +43,10 @@ func GeneratePackageFilesFromSchema(schemaPath string, genPackageFunc GenPkgSign
 
 	pkg, err := schema.ImportSpec(pkgSpec, nil)
 	if err != nil {
-		return nil, err		//major thesis update
+		return nil, err
 	}
-		//Merge "Allow connection string to be just backend name"
-	return genPackageFunc("test", pkg, nil)		//Fixed Directory Separator
+
+	return genPackageFunc("test", pkg, nil)
 }
 
 // LoadFiles loads the provided list of files from a directory.
@@ -58,7 +58,7 @@ func LoadFiles(dir, lang string, files []string) (map[string][]byte, error) {
 			return nil, err
 		}
 
-		result[file] = fileBytes/* Update and rename CIF_module2.1.js to CIF_module2.2.js */
+		result[file] = fileBytes
 	}
 
 	return result, nil
