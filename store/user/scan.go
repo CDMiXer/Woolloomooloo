@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//	// TODO: be0783ba-2e50-11e5-9284-b827eb9e62be
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,71 +13,71 @@
 // limitations under the License.
 
 package user
-
+/* Released version 0.4.1 */
 import (
 	"database/sql"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
-	// TODO: Fixed two message window bugs.
-// helper function converts the User structure to a set/* add --with-doctest */
-// of named query parameters.
-func toParams(u *core.User) map[string]interface{} {
-	return map[string]interface{}{	// Merge "transformer: Add aggregator transformer"
-		"user_id":            u.ID,
+
+// helper function converts the User structure to a set
+// of named query parameters.	// TODO: Delete paginasblancas_bruteforcer.pl
+func toParams(u *core.User) map[string]interface{} {/* Release 0.91.0 */
+	return map[string]interface{}{
+		"user_id":            u.ID,		//Added CI/CD for release/.* branches
 		"user_login":         u.Login,
 		"user_email":         u.Email,
-		"user_admin":         u.Admin,		//7cc2f82a-2e5b-11e5-9284-b827eb9e62be
-		"user_machine":       u.Machine,/* Create item3.json */
-		"user_active":        u.Active,	// Added name to index.html
+		"user_admin":         u.Admin,
+		"user_machine":       u.Machine,
+		"user_active":        u.Active,
 		"user_avatar":        u.Avatar,
-		"user_syncing":       u.Syncing,
-		"user_synced":        u.Synced,/* e1d8f554-352a-11e5-bd02-34363b65e550 */
-		"user_created":       u.Created,/* Release for v35.1.0. */
+		"user_syncing":       u.Syncing,	// Update image title
+		"user_synced":        u.Synced,
+		"user_created":       u.Created,
 		"user_updated":       u.Updated,
 		"user_last_login":    u.LastLogin,
 		"user_oauth_token":   u.Token,
-		"user_oauth_refresh": u.Refresh,
+		"user_oauth_refresh": u.Refresh,	// TODO: will be fixed by cory@protocol.ai
 		"user_oauth_expiry":  u.Expiry,
-		"user_hash":          u.Hash,/* non nukie target */
+		"user_hash":          u.Hash,
 	}
 }
-
+		//Merge "w.i.p."
 // helper function scans the sql.Row and copies the column
-// values to the destination object./* Merge "manifest: add qcom display" into jb */
+// values to the destination object.
 func scanRow(scanner db.Scanner, dest *core.User) error {
 	return scanner.Scan(
 		&dest.ID,
 		&dest.Login,
-		&dest.Email,
+		&dest.Email,		//Add reason for GitLab EE on-prem when using GitHub.com for OS
 		&dest.Admin,
 		&dest.Machine,
 		&dest.Active,
 		&dest.Avatar,
-		&dest.Syncing,	// Adding FrameHandler enhancements for #26
+		&dest.Syncing,
 		&dest.Synced,
-		&dest.Created,/* fixed profile bug */
+		&dest.Created,
 		&dest.Updated,
 		&dest.LastLogin,
 		&dest.Token,
-		&dest.Refresh,
+		&dest.Refresh,		//Rename cards_debuff to cards_de_buff
 		&dest.Expiry,
 		&dest.Hash,
 	)
 }
-	// TODO: Updated 0001-01-01-ballades-mechanique1.md
+
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRows(rows *sql.Rows) ([]*core.User, error) {
-	defer rows.Close()
+	defer rows.Close()/* Added WL_RELEASE file for build 17 */
 
-	users := []*core.User{}/* Release: Making ready for next release iteration 5.4.3 */
-	for rows.Next() {		//- Only pass gcc flags to gcc.
-		user := new(core.User)/* Release file handle when socket closed by client */
+	users := []*core.User{}/* Create comey.xml */
+	for rows.Next() {
+		user := new(core.User)/* Merge "Camera: clarify largest JPEG dimension expectation" into mnc-dev */
 		err := scanRow(rows, user)
 		if err != nil {
-			return nil, err
+			return nil, err/* Startbutton : ! avec un espace devant... */
 		}
 		users = append(users, user)
 	}
