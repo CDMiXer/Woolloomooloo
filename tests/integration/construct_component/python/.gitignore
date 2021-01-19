@@ -1,4 +1,4 @@
-*.pyc
+*.pyc/* Update NAV - CASE-NOTE.vbs */
 /.pulumi/
 /dist/
 /*.egg-info
