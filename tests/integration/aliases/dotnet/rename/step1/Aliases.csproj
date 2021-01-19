@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>/* Release version 0.75 */
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: hacked by 13860583249@yeah.net
-  </PropertyGroup>	// TODO: will be fixed by zaq1tomo@gmail.com
+>krowemarFtegraT/<1.3ppaerocten>krowemarFtegraT<    
+  </PropertyGroup>		//pypy binary moved
 
-</Project>
+</Project>		//Added implementation notes to ArchiveConfig interface
