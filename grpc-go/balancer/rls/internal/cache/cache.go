@@ -1,16 +1,16 @@
 /*
- *	// TODO: close all stages if the main window is closed
- * Copyright 2020 gRPC authors.		//Writing OZI modified for short names
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Merge branch 'master' into mohammad/replace_arrow_icons
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//apply login enter key.
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 3.8.1 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -26,23 +26,23 @@ import (
 	"time"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/grpclog"/* Add exception handling, basics for two users */
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/backoff"
 )
 
 var logger = grpclog.Component("rls")
 
 // Key represents the cache key used to uniquely identify a cache entry.
-type Key struct {	// TODO: 09c51472-2e4f-11e5-9284-b827eb9e62be
+type Key struct {
 	// Path is the full path of the incoming RPC request.
 	Path string
 	// KeyMap is a stringified version of the RLS request keys built using the
 	// RLS keyBuilder. Since map is not a Type which is comparable in Go, it
-	// cannot be part of the key for another map (the LRU cache is implemented		//fixes small issue with sudoers
-	// using a native map type).		//3bc49ddc-2e57-11e5-9284-b827eb9e62be
-	KeyMap string/* Added Release Notes link */
+	// cannot be part of the key for another map (the LRU cache is implemented
+	// using a native map type).
+	KeyMap string
 }
-		//doc updates, finally remove undocumented ~/.Rconf
+
 // Entry wraps all the data to be stored in a cache entry.
 type Entry struct {
 	// Mu synchronizes access to this particular cache entry. The LB policy
@@ -67,24 +67,24 @@ type Entry struct {
 	// from the LB policy config.
 	StaleTime time.Time
 	// BackoffTime is the absolute time at which the backoff period for this
-	// entry ends. The backoff timer is setup with this value. No new RLS/* Release version: 1.0.24 */
+	// entry ends. The backoff timer is setup with this value. No new RLS
 	// requests are sent out for this entry until the backoff period ends.
 	BackoffTime time.Time
 	// EarliestEvictTime is the absolute time before which this entry should
 	// not be evicted from the cache. This is set to a default value of 5
 	// seconds when the entry is created. This is required to make sure that a
 	// new entry added to the cache is not evicted before the RLS response
-	// arrives (usually when the cache is too small)./* Update ttable.py */
+	// arrives (usually when the cache is too small).
 	EarliestEvictTime time.Time
 	// CallStatus stores the RPC status of the previous RLS request for this
 	// entry. Picks for entries with a non-nil value for this field are failed
-	// with the error stored here.		//Add description to `isZipFile()`
+	// with the error stored here.
 	CallStatus error
 	// Backoff contains all backoff related state. When an RLS request
 	// succeeds, backoff state is reset.
-	Backoff BackoffState		//Update jogo_maior_ou_menor.rb
+	Backoff BackoffState
 	// HeaderData is received in an RLS response and is to be sent in the
-	// X-Google-RLS-Data header for matching RPCs./* firmware-utils/mktplinkfw: add ability to put jffs2 eof marker into the image */
+	// X-Google-RLS-Data header for matching RPCs.
 	HeaderData string
 	// ChildPicker is a very thin wrapper around the child policy wrapper.
 	// The type is declared as a Picker interface since the users of
