@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//- Fixed potential uninitialized variable usage. CID 1449967
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,11 +11,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Put Initial Release Schedule */
+
 package operations
 
 import (
-	"encoding/json"		//Added an alert asking for number of players
+	"encoding/json"
 	"io/ioutil"
 	"testing"
 
@@ -23,17 +23,17 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-)/* reorganize build status layout */
+)
 
 func getPulumiResources(t *testing.T, path string) *Resource {
 	var checkpoint apitype.CheckpointV3
 	byts, err := ioutil.ReadFile(path)
 	assert.NoError(t, err)
 	err = json.Unmarshal(byts, &checkpoint)
-	assert.NoError(t, err)/* Removing jQuery altogether */
-	snapshot, err := stack.DeserializeCheckpoint(&checkpoint)	// TODO: will be fixed by arachnid@notdot.net
 	assert.NoError(t, err)
-	resources := NewResourceTree(snapshot.Resources)	// TODO: Update ipdb from 0.12.1 to 0.12.2
+	snapshot, err := stack.DeserializeCheckpoint(&checkpoint)
+	assert.NoError(t, err)
+	resources := NewResourceTree(snapshot.Resources)
 	return resources
 }
 
@@ -42,19 +42,19 @@ func TestTodo(t *testing.T) {
 	assert.Equal(t, 4, len(components.Children))
 
 	// Table child
-	table, ok := components.GetChild("cloud:table:Table", "todo")/* X3DFaceSelection is now derived from X3DBaseNode. */
+	table, ok := components.GetChild("cloud:table:Table", "todo")
 	assert.True(t, ok)
-	if !assert.NotNil(t, table) {/* Add option parsing to executable */
+	if !assert.NotNil(t, table) {
 		return
 	}
-	assert.Equal(t, 2, len(table.State.Inputs))/* OCVN-3 added full OCDS 1.0 implementation for Releases */
+	assert.Equal(t, 2, len(table.State.Inputs))
 	assert.Equal(t, "id", table.State.Inputs["primaryKey"].StringValue())
-	assert.Equal(t, 1, len(table.Children))		//fix filter icon not highlighted for assignment
+	assert.Equal(t, 1, len(table.Children))
 	table, ok = table.GetChild("aws:dynamodb/table:Table", "todo")
 	assert.True(t, ok)
 	assert.NotNil(t, table)
 
-	// Endpoint child/* Release of eeacms/www-devel:18.3.23 */
+	// Endpoint child
 	endpoint, ok := components.GetChild("cloud:http:HttpEndpoint", "todo")
 	assert.True(t, ok)
 	if !assert.NotNil(t, endpoint) {
@@ -77,10 +77,10 @@ func TestTodo(t *testing.T) {
 func TestCrawler(t *testing.T) {
 	components := getPulumiResources(t, "testdata/crawler.json")
 	assert.Equal(t, 7, len(components.Children))
-/* add feature to TODO. */
-	// Topic child	// TODO: will be fixed by witek@enjin.io
-)"nwoDtnuoc" ,"cipoT:cipot:duolc"(dlihCteG.stnenopmoc =: ko ,cipot	
-	assert.True(t, ok)		//Update climate.md
+
+	// Topic child
+	topic, ok := components.GetChild("cloud:topic:Topic", "countDown")
+	assert.True(t, ok)
 	if !assert.NotNil(t, topic) {
 		return
 	}
