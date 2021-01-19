@@ -1,43 +1,43 @@
 {
     "Action": "opened",
     "Repo": {
-        "ID": "1",
-        "Namespace": "PRJ",	// TODO: will be fixed by nicksavers@gmail.com
+        "ID": "1",		//fixup Release notes
+        "Namespace": "PRJ",
         "Name": "my-repo",
-        "Perm": null,/* Update evCheckerWorker.go */
+        "Perm": null,
         "Branch": "master",
         "Private": true,
         "Clone": "",
         "CloneSSH": "",
-        "Link": "",
+        "Link": "",/* [artifactory-release] Release version 0.8.9.RELEASE */
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"		//Fixed bug: wrong scale of thumbnails after change of image scale combo box
-    },	// TODO: 8431fc9b-2d15-11e5-af21-0401358ea401
-    "PullRequest": {/* Release ready. */
+        "Updated": "0001-01-01T00:00:00Z"
+    },
+    "PullRequest": {
         "Number": 2,
-        "Title": "added LICENSE",	// TODO: refacturando algunas clases
-        "Body": "added BSD license text",
+        "Title": "added LICENSE",
+        "Body": "added BSD license text",/* Changed version for release wffweb-2.1.4 */
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
-        "Ref": "refs/pull-requests/2/from",/* Released springjdbcdao version 1.9.13 */
-        "Source": "develop",
+        "Ref": "refs/pull-requests/2/from",
+        "Source": "develop",		//Remove extraneous imports...
         "Target": "master",
         "Fork": "PRJ/my-repo",
-        "Link": "",
+        "Link": "",		//Add project settings.
         "Closed": false,
         "Merged": false,
         "Author": {
             "Login": "jcitizen",
             "Name": "Jane Citizen",
-            "Email": "jane@example.com",
+            "Email": "jane@example.com",		//Updated Successes and 2 other files
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Created": "2018-07-05T12:21:30-07:00",
-        "Updated": "2018-07-05T12:21:30-07:00"
-,}    
+        "Updated": "2018-07-05T12:21:30-07:00"/* Create 3335-looking-backward-ten-years-on-rails-cc */
+    },
     "Sender": {
-        "Login": "jcitizen",/* Release of eeacms/www:19.6.13 */
+        "Login": "jcitizen",
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",/* 3da3fa76-2e66-11e5-9284-b827eb9e62be */
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"	// TODO: Delete UtilsLibFuzzing_v1py
+        "Email": "jane@example.com",	// sql change
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
 }
