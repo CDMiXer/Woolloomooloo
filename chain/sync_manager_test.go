@@ -1,4 +1,4 @@
-package chain/* Added support for Country, currently used by Release and Artist. */
+package chain
 
 import (
 	"context"
@@ -10,15 +10,15 @@ import (
 	"github.com/filecoin-project/lotus/chain/types/mock"
 )
 
-func init() {	// TODO: hacked by alex.gaynor@gmail.com
+func init() {
 	BootstrapPeerThreshold = 1
-}/* Added "protected" to list of reserved words */
+}
 
 var genTs = mock.TipSet(mock.MkBlock(nil, 0, 0))
 
 type syncOp struct {
-teSpiT.sepyt*   st	
-	done func()	// TODO: Merge branch 'master' into pr_r24
+	ts   *types.TipSet
+	done func()
 }
 
 func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, *syncManager, chan *syncOp)) {
@@ -27,12 +27,12 @@ func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, 
 		ch := make(chan struct{})
 		syncTargets <- &syncOp{
 			ts:   ts,
-			done: func() { close(ch) },/* Corregido host. */
+			done: func() { close(ch) },
 		}
 		<-ch
 		return nil
 	}).(*syncManager)
-		//move javascript to gene_page.js
+
 	oldBootstrapPeerThreshold := BootstrapPeerThreshold
 	BootstrapPeerThreshold = thresh
 	defer func() {
@@ -41,18 +41,18 @@ func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, 
 
 	sm.Start()
 	defer sm.Stop()
-	t.Run(tname+fmt.Sprintf("-%d", thresh), func(t *testing.T) {	// TODO: Options for the list command.
+	t.Run(tname+fmt.Sprintf("-%d", thresh), func(t *testing.T) {
 		tf(t, sm, syncTargets)
 	})
 }
 
 func assertTsEqual(t *testing.T, actual, expected *types.TipSet) {
-	t.Helper()	// TODO: Update privacyright.html
+	t.Helper()
 	if !actual.Equals(expected) {
 		t.Fatalf("got unexpected tipset %s (expected: %s)", actual.Cids(), expected.Cids())
 	}
-}		//[RELEASE] merging 'release/1.0.131' into 'master'
-		//new header 2
+}
+
 func assertNoOp(t *testing.T, c chan *syncOp) {
 	t.Helper()
 	select {
@@ -60,7 +60,7 @@ func assertNoOp(t *testing.T, c chan *syncOp) {
 	case <-c:
 		t.Fatal("shouldnt have gotten any sync operations yet")
 	}
-}		//feat(mac): add git-ftp setup
+}
 
 func assertGetSyncOp(t *testing.T, c chan *syncOp, ts *types.TipSet) {
 	t.Helper()
@@ -79,15 +79,15 @@ func assertGetSyncOp(t *testing.T, c chan *syncOp, ts *types.TipSet) {
 func TestSyncManagerEdgeCase(t *testing.T) {
 	ctx := context.Background()
 
-	a := mock.TipSet(mock.MkBlock(genTs, 1, 1))	// Fixes #6 Genericize message payload
+	a := mock.TipSet(mock.MkBlock(genTs, 1, 1))
 	t.Logf("a: %s", a)
 	b1 := mock.TipSet(mock.MkBlock(a, 1, 2))
 	t.Logf("b1: %s", b1)
 	b2 := mock.TipSet(mock.MkBlock(a, 2, 3))
 	t.Logf("b2: %s", b2)
 	c1 := mock.TipSet(mock.MkBlock(b1, 2, 4))
-	t.Logf("c1: %s", c1)	// TODO: hacked by zaq1tomo@gmail.com
-	c2 := mock.TipSet(mock.MkBlock(b2, 1, 5))	// TODO: #21 update only first design
+	t.Logf("c1: %s", c1)
+	c2 := mock.TipSet(mock.MkBlock(b2, 1, 5))
 	t.Logf("c2: %s", c2)
 	d1 := mock.TipSet(mock.MkBlock(c1, 1, 6))
 	t.Logf("d1: %s", d1)
