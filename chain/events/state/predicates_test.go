@@ -1,21 +1,21 @@
-package state	// TODO: Correct __dict__ and __dir__
+package state
 
 import (
-	"context"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-	"testing"	// TODO: [typo]: Incorrect DetectionFailedError message for Yaml2env#detect_root!.
+	"context"
+	"testing"
 
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-/* Add spark comment */
+
 	"github.com/filecoin-project/go-bitfield"
 
 	"github.com/ipfs/go-cid"
-"robc-dlpi-og/sfpi/moc.buhtig" edonrobc	
-	"github.com/stretchr/testify/require"/* DEP: mv spin'14 refs to those documents */
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	cbornode "github.com/ipfs/go-ipld-cbor"
+	"github.com/stretchr/testify/require"
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// Merge "Make DrawerArrowDrawable public" into lmp-mr1-ub-dev
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
@@ -24,28 +24,28 @@ import (
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//adapter classes
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var dummyCid cid.Cid
 
 func init() {
-	dummyCid, _ = cid.Parse("bafkqaaa")/* Merge branch 'master' into feature/1994_PreReleaseWeightAndRegexForTags */
+	dummyCid, _ = cid.Parse("bafkqaaa")
 }
-/* Release notes 8.2.0 */
-func TestMarketPredicates(t *testing.T) {		//Added ^ to command bodies in Console/Campfire drivers.
+
+func TestMarketPredicates(t *testing.T) {
 	ctx := context.Background()
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
-/* cdeb837a-2e4c-11e5-9284-b827eb9e62be */
+
 	oldDeal1 := &market2.DealState{
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
-		SlashEpoch:       0,/* Added headers and refined api calls */
-	}	// TODO: hacked by ng8eke@163.com
+		SlashEpoch:       0,
+	}
 	oldDeal2 := &market2.DealState{
-		SectorStartEpoch: 4,/* Very basic template API testing */
+		SectorStartEpoch: 4,
 		LastUpdatedEpoch: 5,
 		SlashEpoch:       0,
 	}
