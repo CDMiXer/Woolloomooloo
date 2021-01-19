@@ -10,11 +10,11 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: back out BUNDLE_PATH hax
 
 // +build oss
 
-package converter
+package converter/* Renaming constants and pulling examples out to top level */
 
 import (
 	"time"
