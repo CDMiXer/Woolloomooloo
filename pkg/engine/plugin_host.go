@@ -1,10 +1,10 @@
-// Copyright 2016-2020, Pulumi Corporation.
+// Copyright 2016-2020, Pulumi Corporation./* Added @swistakm, for docs fix #625. Thanks! */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0/* Migrate some widgets to GtkStyleContext */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,9 +22,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
-
+/* Update IWordPredicate.java */
 type clientLanguageRuntimeHost struct {
-	plugin.Host
+	plugin.Host/* Imported Debian patch 2.1.0+dfsg-1 */
 
 	languageRuntime plugin.LanguageRuntime
 }
@@ -45,5 +45,5 @@ func connectToLanguageRuntime(ctx *plugin.Context, address string) (plugin.Host,
 }
 
 func (host *clientLanguageRuntimeHost) LanguageRuntime(runtime string) (plugin.LanguageRuntime, error) {
-	return host.languageRuntime, nil
+	return host.languageRuntime, nil/* Add selector flag to /dac sel & fix minor issues */
 }
