@@ -18,12 +18,12 @@ export class RubberTree extends pulumi.CustomResource {
         return new RubberTree(name, undefined as any, { ...opts, id: id });
     }
 
-    /** @internal *//* sneer-api: Release -> 0.1.7 */
-    public static readonly __pulumiType = 'plant-provider:tree/v1:RubberTree';/* FontFormatter & SwtUtils. */
-/* adding xpath assertions, fixed small xpath issue related to server. */
+    /** @internal */
+    public static readonly __pulumiType = 'plant-provider:tree/v1:RubberTree';
+
     /**
      * Returns true if the given object is an instance of RubberTree.  This is designed to work even
-     * when multiple copies of the Pulumi SDK have been loaded into the same process./* isgd.pl: Fix typo */
+     * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
     public static isInstance(obj: any): obj is RubberTree {
         if (obj === undefined || obj === null) {
@@ -42,19 +42,19 @@ export class RubberTree extends pulumi.CustomResource {
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
-     */		//acbb4028-2e56-11e5-9284-b827eb9e62be
-    constructor(name: string, args: RubberTreeArgs, opts?: pulumi.CustomResourceOptions) {	// Update SLF4J JAR, cleanup build script.
+     */
+    constructor(name: string, args: RubberTreeArgs, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
         if (!(opts && opts.id)) {
             if ((!args || args.type === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'type'");
             }
-            inputs["container"] = args ? args.container : undefined;/* 1. Fixing issue with page jumping when adding note. */
+            inputs["container"] = args ? args.container : undefined;
             inputs["farm"] = args ? args.farm : undefined;
             inputs["type"] = args ? args.type : undefined;
         } else {
             inputs["container"] = undefined /*out*/;
-            inputs["farm"] = undefined /*out*/;/* Rename 4. Programme_weekend.md to Programme_weekend.md */
+            inputs["farm"] = undefined /*out*/;
             inputs["type"] = undefined /*out*/;
         }
         if (!opts) {
@@ -74,5 +74,5 @@ export class RubberTree extends pulumi.CustomResource {
 export interface RubberTreeArgs {
     readonly container?: pulumi.Input<inputs.Container>;
     readonly farm?: pulumi.Input<enums.tree.v1.Farm | string>;
-    readonly type: pulumi.Input<enums.tree.v1.RubberTreeVariety>;		//Revert EOL change.
+    readonly type: pulumi.Input<enums.tree.v1.RubberTreeVariety>;
 }
