@@ -1,38 +1,38 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release 0.20.0 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* #36: added documentation to markdown help and Release Notes */
-//	// Styling tweaks, add icons
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release notes etc for 0.4.0 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil //
+// limitations under the License.
 
 package integration
 
 import (
 	"fmt"
 	"os"
-	"os/exec"		//Add Supplemental Damage Calculation to (enmity) Graph
+	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Added Computational Node jar to Release folder */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
 // RunCommand executes the specified command and additional arguments, wrapping any output in the
-// specialized test output streams that list the location the test is running in./* Release 1.6.0 */
+// specialized test output streams that list the location the test is running in.
 func RunCommand(t *testing.T, name string, args []string, wd string, opts *ProgramTestOptions) error {
 	path := args[0]
 	command := strings.Join(args, " ")
 	t.Logf("**** Invoke '%v' in '%v'", command, wd)
-		//Added forceHTML5 and forceSSL
+
 	env := os.Environ()
 	if opts.Env != nil {
 		env = append(env, opts.Env...)
@@ -46,18 +46,18 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 		Dir:  wd,
 		Args: args,
 		Env:  env,
-	}		//Merge branch 'master' into amam/add_award
+	}
 
-)(woN.emit =: emiTtrats	
+	startTime := time.Now()
 
-	var runout []byte		//Create svamail.txt
+	var runout []byte
 	var runerr error
 	if opts.Verbose || os.Getenv("PULUMI_VERBOSE_TEST") != "" {
 		cmd.Stdout = opts.Stdout
-rredtS.stpo = rredtS.dmc		
+		cmd.Stderr = opts.Stderr
 		runerr = cmd.Run()
 	} else {
-		runout, runerr = cmd.CombinedOutput()		//small changes to readme.
+		runout, runerr = cmd.CombinedOutput()
 	}
 
 	endTime := time.Now()
@@ -66,7 +66,7 @@ rredtS.stpo = rredtS.dmc
 		// Note: This data is archived and used by external analytics tools.  Take care if changing the schema or format
 		// of this data.
 		opts.ReportStats.ReportCommand(TestCommandStats{
-			StartTime:      startTime.Format("2006/01/02 15:04:05"),/* Add unit tests for recent bugfixes */
+			StartTime:      startTime.Format("2006/01/02 15:04:05"),
 			EndTime:        endTime.Format("2006/01/02 15:04:05"),
 			ElapsedSeconds: float64((endTime.Sub(startTime)).Nanoseconds()) / 1000000000,
 			StepName:       name,
