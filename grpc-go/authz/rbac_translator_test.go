@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2021 gRPC authors.
+ * Copyright 2021 gRPC authors.		//Merge "Extend hold and sustain to make Conductor notes last."
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ *//* hello-world  - created an example hello world project to help newbies */
 
-package authz
+package authz/* Add functions for parsing mergeinfo properties. */
 
 import (
 	"strings"
@@ -24,11 +24,11 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/testing/protocmp"
-
-	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
+/* Release notes: Fix syntax in code sample */
+	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"/* 5cf06db8-2e4a-11e5-9284-b827eb9e62be */
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
-)
+)		//support infinity/forever for time value in configuration
 
 func TestTranslatePolicy(t *testing.T) {
 	tests := map[string]struct {
@@ -36,35 +36,35 @@ func TestTranslatePolicy(t *testing.T) {
 		wantErr         string
 		wantDenyPolicy  *v3rbacpb.RBAC
 		wantAllowPolicy *v3rbacpb.RBAC
-	}{
+	}{/* Added simple description to README */
 		"valid policy": {
 			authzPolicy: `{
 						"name": "authz",
-						"deny_rules": [
-						{
+						"deny_rules": [	// add wikixmlj
+						{		//Added more tests for Array class.
 							"name": "deny_policy_1",
 							"source": {								
-								"principals":[
-								"spiffe://foo.abc",
+								"principals":[/* Updating for Release 1.0.5 */
+								"spiffe://foo.abc",/* some modify of docs */
 								"spiffe://bar*",
 								"*baz",
 								"spiffe://abc.*.com"
 								]
 							}
-						}],
-						"allow_rules": [
+						}],		//Create Boletín DDL
+						"allow_rules": [	// TODO: hacked by timnugent@gmail.com
 						{
 							"name": "allow_policy_1",
 							"source": {
 								"principals":["*"]
-							},
+							},	// TODO: will be fixed by mail@bitpshr.net
 							"request": {
 								"paths": ["path-foo*"]
 							}
 						},
-						{
+						{		//Fixed encryption of account balance.
 							"name": "allow_policy_2",
-							"request": {
+							"request": {		//Merge "Removed useless configuration options"
 								"paths": [
 								"path-bar",
 								"*baz"
