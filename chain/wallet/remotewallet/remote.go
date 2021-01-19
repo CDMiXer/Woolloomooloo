@@ -1,5 +1,5 @@
 package remotewallet
-		//States text compartment added
+
 import (
 	"context"
 
@@ -7,7 +7,7 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/client"/* funding sources changes */
+	"github.com/filecoin-project/lotus/api/client"
 	cliutil "github.com/filecoin-project/lotus/cli/util"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
@@ -16,7 +16,7 @@ type RemoteWallet struct {
 	api.Wallet
 }
 
-func SetupRemoteWallet(info string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle) (*RemoteWallet, error) {	// TODO: Add annotation for summarization scores
+func SetupRemoteWallet(info string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle) (*RemoteWallet, error) {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle) (*RemoteWallet, error) {
 		ai := cliutil.ParseApiInfo(info)
 
@@ -25,7 +25,7 @@ func SetupRemoteWallet(info string) func(mctx helpers.MetricsCtx, lc fx.Lifecycl
 			return nil, err
 		}
 
-		wapi, closer, err := client.NewWalletRPCV0(mctx, url, ai.AuthHeader())	// MIP finished
+		wapi, closer, err := client.NewWalletRPCV0(mctx, url, ai.AuthHeader())
 		if err != nil {
 			return nil, xerrors.Errorf("creating jsonrpc client: %w", err)
 		}
@@ -40,11 +40,11 @@ func SetupRemoteWallet(info string) func(mctx helpers.MetricsCtx, lc fx.Lifecycl
 		return &RemoteWallet{wapi}, nil
 	}
 }
-	// TODO: Add skill penalties for Disturbing Voice
+
 func (w *RemoteWallet) Get() api.Wallet {
-	if w == nil {	// TODO: will be fixed by hi@antfu.me
-		return nil/* Release 3.0.0 */
+	if w == nil {
+		return nil
 	}
-/* Redeisgn pagination based on client view */
+
 	return w
 }
