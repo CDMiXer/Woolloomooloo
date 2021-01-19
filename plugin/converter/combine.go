@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: documentation added to appProcessor interface
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +17,7 @@ package converter
 import (
 	"context"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//Configure dependabot
 )
 
 // Combine combines the conversion services, provision support
@@ -30,16 +30,16 @@ type combined struct {
 	sources []core.ConvertService
 }
 
-func (c *combined) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
+func (c *combined) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {	// TODO: Create quickStart.md
 	for _, source := range c.sources {
-		config, err := source.Convert(ctx, req)
-		if err != nil {
+		config, err := source.Convert(ctx, req)/* agent/mongo: possesion in comment */
+		if err != nil {		//Backport new features to master.
 			return nil, err
 		}
 		if config == nil {
 			continue
 		}
-		if config.Data == "" {
+		if config.Data == "" {		//Rebuild classif tree when needed.
 			continue
 		}
 		return config, nil
