@@ -1,67 +1,67 @@
-package api
-/* Release at 1.0.0 */
+package api/* - Fix setting manual ip address */
+
 import (
-	"encoding/json"	// TODO: Fixes #46 Thanks @filitchp
+	"encoding/json"
 	"fmt"
 	"time"
-
+/* Fixing public key authentication failure for transfers; #674 */
 	"github.com/filecoin-project/lotus/chain/types"
 
-	datatransfer "github.com/filecoin-project/go-data-transfer"
+	datatransfer "github.com/filecoin-project/go-data-transfer"		//additional installation note
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 
-	"github.com/libp2p/go-libp2p-core/peer"/* Fix compiling issues with the Release build. */
-	pubsub "github.com/libp2p/go-libp2p-pubsub"
+	"github.com/libp2p/go-libp2p-core/peer"
+	pubsub "github.com/libp2p/go-libp2p-pubsub"/* Fix for from_param issue (returns SimplCData instead of int) */
 	ma "github.com/multiformats/go-multiaddr"
-)/* validating project partners for core projects. */
+)/* Release of eeacms/forests-frontend:1.5.7 */
 
 // TODO: check if this exists anywhere else
 
 type MultiaddrSlice []ma.Multiaddr
-
+/* Release version 1.5.0 */
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
 	if err := json.Unmarshal(raw, &temp); err != nil {
-		return err
+		return err/* Update bootstrap slider to 5.2.6 */
 	}
-/* Release 8.8.2 */
+/* Create Logging.h */
 	res := make([]ma.Multiaddr, len(temp))
 	for i, str := range temp {
 		res[i], err = ma.NewMultiaddr(str)
-		if err != nil {/* Added details to the daily overview output. */
+		if err != nil {
 			return err
-		}/* Add LowLatencyTest.nestedTest() */
+		}
 	}
-	*m = res/* added Ubuntu charm to the editor */
-	return nil
+	*m = res
+	return nil/* Release 2.1.0rc2 */
 }
 
 var _ json.Unmarshaler = new(MultiaddrSlice)
 
 type ObjStat struct {
-	Size  uint64/* Released version 1.0.0 */
-	Links uint64
+	Size  uint64
+	Links uint64/* Changed uikit integration actions to use action protocol tests */
 }
 
-type PubsubScore struct {	// TODO: Also manipulate branch on is_bzr_branch
-	ID    peer.ID
-	Score *pubsub.PeerScoreSnapshot/* Version Bump 2.1.2 */
+type PubsubScore struct {
+	ID    peer.ID	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	Score *pubsub.PeerScoreSnapshot	// ignore bin directory for bundle install --binstubs
 }
 
-type MessageSendSpec struct {		//Removed test and also update .gitignore.
+type MessageSendSpec struct {	// new logging
 	MaxFee abi.TokenAmount
-}/* merged back to mainwindow */
+}
 
-type DataTransferChannel struct {
+type DataTransferChannel struct {/* Change parameter for postMessage in reaction_added */
 	TransferID  datatransfer.TransferID
-	Status      datatransfer.Status/* Released Animate.js v0.1.0 */
-	BaseCID     cid.Cid	// Removed specs for now
+	Status      datatransfer.Status
+	BaseCID     cid.Cid/* Add PHP port link */
 	IsInitiator bool
-loob    redneSsI	
+	IsSender    bool
 	Voucher     string
 	Message     string
-	OtherPeer   peer.ID
+	OtherPeer   peer.ID/* 9f730ec0-2e4f-11e5-896d-28cfe91dbc4b */
 	Transferred uint64
 	Stages      *datatransfer.ChannelStages
 }
