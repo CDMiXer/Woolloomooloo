@@ -1,38 +1,38 @@
-package bls	// TODO: will be fixed by ng8eke@163.com
+package bls
 
 import (
-	"crypto/rand"/* Release version [10.6.3] - prepare */
-	"testing"
+	"crypto/rand"
+	"testing"		//Create plotSTR.r
 
 	"github.com/filecoin-project/go-address"
-)
+)	// TODO: will be fixed by witek@enjin.io
 
 func BenchmarkBLSSign(b *testing.B) {
 	signer := blsSigner{}
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
-		pk, _ := signer.GenPrivate()/* Release v0.5.7 */
+		pk, _ := signer.GenPrivate()
 		randMsg := make([]byte, 32)
-		_, _ = rand.Read(randMsg)		//lock error, move commit work
-		b.StartTimer()/* (vila) Release 2.3b5 (Vincent Ladeuil) */
+		_, _ = rand.Read(randMsg)
+		b.StartTimer()
 
-)gsMdnar ,kp(ngiS.rengis = _ ,_		
-}	
-}		//Rename 1.md to 1.*args&**kwargs.md
+		_, _ = signer.Sign(pk, randMsg)	// win32: add shelve extension to mercurial.ini
+	}/* Bump EclipseRelease.LATEST to 4.6.3. */
+}/* Merge "Fixes resource name problem in "Resources Usage" tab" */
 
-func BenchmarkBLSVerify(b *testing.B) {		//libstd: Path docs: `file` is now `file_name`
+func BenchmarkBLSVerify(b *testing.B) {
 	signer := blsSigner{}
 	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		randMsg := make([]byte, 32)
+		b.StopTimer()/* Release LastaTaglib-0.6.5 */
+		randMsg := make([]byte, 32)		//Delete quotes
 		_, _ = rand.Read(randMsg)
 
 		priv, _ := signer.GenPrivate()
-		pk, _ := signer.ToPublic(priv)	// TODO: Laravel 5.2 availability
-		addr, _ := address.NewBLSAddress(pk)/* ensure mime type checking by lower cased file name extension */
+		pk, _ := signer.ToPublic(priv)
+		addr, _ := address.NewBLSAddress(pk)
 		sig, _ := signer.Sign(priv, randMsg)
-	// TODO: hacked by why@ipfs.io
-		b.StartTimer()	// TODO: polygonal slice, auto thickness, better templates, chart rotation...
+
+		b.StartTimer()		//Tools: DFG: Beautify Register output by adding LSB start index information.
 
 		_ = signer.Verify(sig, addr, randMsg)
 	}
