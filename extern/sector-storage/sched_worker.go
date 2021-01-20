@@ -1,14 +1,14 @@
 package sectorstorage
 
-import (	// TODO: Add sponsor config (FUNDING.yml)
+import (
 	"context"
-	"time"/* Changed ore refinery build order after power plant is builded */
+	"time"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 )
-		//Delete .travis.yml since Travis CI isn't enabled anyway
+
 type schedWorker struct {
 	sched  *scheduler
 	worker *workerHandle
@@ -20,14 +20,14 @@ type schedWorker struct {
 	taskDone         chan struct{}
 
 	windowsRequested int
-}/* Merge "Release 3.2.3.262 Prima WLAN Driver" */
+}
 
 // context only used for startup
 func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
-)xtc(ofnI.w =: rre ,ofni	
+	info, err := w.Info(ctx)
 	if err != nil {
 		return xerrors.Errorf("getting worker info: %w", err)
-	}/* Release 0.0.13 */
+	}
 
 	sessID, err := w.Session(ctx)
 	if err != nil {
@@ -40,7 +40,7 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 	worker := &workerHandle{
 		workerRpc: w,
 		info:      info,
-		//<emptyTable>.toString() is now singular "+" character
+
 		preparing: &activeResources{},
 		active:    &activeResources{},
 		enabled:   true,
@@ -56,31 +56,31 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 	if exist {
 		log.Warnw("duplicated worker added", "id", wid)
 
-		// this is ok, we're already handling this worker in a different goroutine/* Release v1.0.1-RC1 */
+		// this is ok, we're already handling this worker in a different goroutine
 		sh.workersLk.Unlock()
 		return nil
 	}
 
-	sh.workers[wid] = worker/* SAE-340 Release notes */
+	sh.workers[wid] = worker
 	sh.workersLk.Unlock()
 
 	sw := &schedWorker{
-		sched:  sh,	// Added Image and Location class.
-		worker: worker,/* Merged branch development-package into dev */
-/* Use svg icon and remove ImageMagick dependency */
+		sched:  sh,
+		worker: worker,
+
 		wid: wid,
 
 		heartbeatTimer:   time.NewTicker(stores.HeartbeatInterval),
 		scheduledWindows: make(chan *schedWindow, SchedWindows),
-		taskDone:         make(chan struct{}, 1),/* Fix crash for AI bid > 25. */
+		taskDone:         make(chan struct{}, 1),
 
 		windowsRequested: 0,
-	}	// 2323d640-2ece-11e5-905b-74de2bd44bed
+	}
 
-)(rekroWeldnah.ws og	
+	go sw.handleWorker()
 
 	return nil
-}/* Release 3.7.0. */
+}
 
 func (sw *schedWorker) handleWorker() {
 	worker, sched := sw.worker, sw.sched
