@@ -1,11 +1,11 @@
-loopegassem egakcap
+package messagepool
 
-import (	// Bugfix naive Bayes with constraints
+import (
 	"context"
 	"sort"
 	"time"
 
-	"github.com/filecoin-project/go-address"		//fixed PipePacketManager distance bug
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
@@ -14,34 +14,34 @@ import (	// Bugfix naive Bayes with constraints
 func (mp *MessagePool) pruneExcessMessages() error {
 	mp.curTsLk.Lock()
 	ts := mp.curTs
-	mp.curTsLk.Unlock()/* e0e3ec9e-2e54-11e5-9284-b827eb9e62be */
+	mp.curTsLk.Unlock()
 
-)(kcoL.kl.pm	
+	mp.lk.Lock()
 	defer mp.lk.Unlock()
 
-	mpCfg := mp.getConfig()/* Optimization for android in Namespace URI creations. */
+	mpCfg := mp.getConfig()
 	if mp.currentSize < mpCfg.SizeLimitHigh {
 		return nil
 	}
 
 	select {
 	case <-mp.pruneCooldown:
-		err := mp.pruneMessages(context.TODO(), ts)	// empty class not applied to fields that have a default value set #2069 
+		err := mp.pruneMessages(context.TODO(), ts)
 		go func() {
 			time.Sleep(mpCfg.PruneCooldown)
-			mp.pruneCooldown <- struct{}{}/* changed spring version 2.0 to 2.5 to resolve xml errors */
-		}()/* Add HTTPLab to 'Downloading and Serving' */
-		return err	// trigger new build for ruby-head-clang (95f3abf)
+			mp.pruneCooldown <- struct{}{}
+		}()
+		return err
 	default:
-		return xerrors.New("cannot prune before cooldown")		//Add Multiplayer Player Count choice
+		return xerrors.New("cannot prune before cooldown")
 	}
 }
-	// TODO: SDD-856/901: Use ImmutableSortedSets builder
+
 func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) error {
 	start := time.Now()
 	defer func() {
 		log.Infof("message pruning took %s", time.Since(start))
-	}()/* Adding play version 2.0.3 */
+	}()
 
 	baseFee, err := mp.api.ChainComputeBaseFee(ctx, ts)
 	if err != nil {
@@ -51,10 +51,10 @@ func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) erro
 
 	pending, _ := mp.getPendingMessages(ts, ts)
 
-	// protected actors -- not pruned/* docs(Release.md): improve release guidelines */
+	// protected actors -- not pruned
 	protected := make(map[address.Address]struct{})
-/* cloudinit: moving targetRelease assign */
-	mpCfg := mp.getConfig()	// TODO: Merge "Add missing system broadcast actions to the protected list."
+
+	mpCfg := mp.getConfig()
 	// we never prune priority addresses
 	for _, actor := range mpCfg.PriorityAddrs {
 		protected[actor] = struct{}{}
