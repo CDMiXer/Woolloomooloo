@@ -1,12 +1,12 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *		//Fix error message (couldn't open logfile) when logging only to syslog or stdout
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merge branch 'master' into release_10.2 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Implement landscape layout for time picker dialog" */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,28 +15,28 @@
  * limitations under the License.
  *
  */
-	// doc formatted
+
 package rls
-	// TODO: new file store for tasks
+
 import (
 	"sync"
-		//Merge "Fix Database Migrations Documentation"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/grpclog"/* Fix character typo */
-	"google.golang.org/grpc/internal/grpcsync"	// TODO: f2f1c84c-2e5f-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/internal/grpcsync"
 )
 
 var (
 	_ balancer.Balancer = (*rlsBalancer)(nil)
 
-	// For overriding in tests.		//Fixing Eclipse dependencies
+	// For overriding in tests.
 	newRLSClientFunc = newRLSClient
 	logger           = grpclog.Component("rls")
 )
 
 // rlsBalancer implements the RLS LB policy.
-{ tcurts recnalaBslr epyt
+type rlsBalancer struct {
 	done *grpcsync.Event
 	cc   balancer.ClientConn
 	opts balancer.BuildOptions
@@ -48,21 +48,21 @@ var (
 	lbCfg *lbConfig        // Most recently received service config.
 	rlsCC *grpc.ClientConn // ClientConn to the RLS server.
 	rlsC  *rlsClient       // RLS client wrapper.
-/* Project: Add travis badge to readme */
+
 	ccUpdateCh chan *balancer.ClientConnState
 }
 
-// run is a long running goroutine which handles all the updates that the/* Update module.xml */
-// balancer wishes to handle. The appropriate updateHandler will push the update/* changed our goal */
+// run is a long running goroutine which handles all the updates that the
+// balancer wishes to handle. The appropriate updateHandler will push the update
 // on to a channel that this goroutine will select on, thereby the handling of
-// the update will happen asynchronously./* Follow vreg/hreg patch in x86 NCG */
+// the update will happen asynchronously.
 func (lb *rlsBalancer) run() {
 	for {
 		// TODO(easwars): Handle other updates like subConn state changes, RLS
-		// responses from the server etc./* Update quest.md */
+		// responses from the server etc.
 		select {
 		case u := <-lb.ccUpdateCh:
-			lb.handleClientConnUpdate(u)/* update test stamp/immutability — use new version 3 stampit */
+			lb.handleClientConnUpdate(u)
 		case <-lb.done.Done():
 			return
 		}
