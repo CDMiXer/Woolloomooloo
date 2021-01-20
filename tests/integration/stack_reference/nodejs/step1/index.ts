@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: will be fixed by alex.gaynor@gmail.com
+		//ginac: update source uri.
 import * as pulumi from "@pulumi/pulumi";
 
 let config = new pulumi.Config();
 let org = config.require("org");
-let slug = `${org}/${pulumi.getProject()}/${pulumi.getStack()}`;
+let slug = `${org}/${pulumi.getProject()}/${pulumi.getStack()}`;/* Release of eeacms/www:20.10.13 */
 let a = new pulumi.StackReference(slug);
 
 const oldVal: string[] = a.getOutputSync("val");
