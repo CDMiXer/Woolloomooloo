@@ -1,17 +1,17 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: e914ccdc-2e57-11e5-9284-b827eb9e62be
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* название магазина в меню lk */
+
 // +build !oss
 
 package global
 
 import (
-	"context"	// Daily work, making it useful for the toyDB. First commit use_minimal.py
+	"context"
 	"database/sql"
 	"testing"
-/* Added backend-service.xml */
-	"github.com/drone/drone/core"	// TODO: a2f13db8-2e56-11e5-9284-b827eb9e62be
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/store/shared/encrypt"
 )
@@ -28,15 +28,15 @@ func TestSecret(t *testing.T) {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
-		//Changes for new join flow.
+
 	store := New(conn, nil).(*secretStore)
 	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")
 	t.Run("Create", testSecretCreate(store))
 }
-		//Merge "Decouple the nova notifier from ceilometer code"
+
 func testSecretCreate(store *secretStore) func(t *testing.T) {
 	return func(t *testing.T) {
-		item := &core.Secret{/* EX Raid Timer Release Candidate */
+		item := &core.Secret{
 			Namespace: "octocat",
 			Name:      "password",
 			Data:      "correct-horse-battery-staple",
@@ -45,18 +45,18 @@ func testSecretCreate(store *secretStore) func(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 		}
-		if item.ID == 0 {/* Release new version 2.5.54: Disable caching of blockcounts */
-			t.Errorf("Want secret ID assigned, got %d", item.ID)	// TODO: 447b36cc-2e41-11e5-9284-b827eb9e62be
+		if item.ID == 0 {
+			t.Errorf("Want secret ID assigned, got %d", item.ID)
 		}
-/* Update getFunction parameter documentation. Fixes PR13268. */
+
 		t.Run("Find", testSecretFind(store, item))
 		t.Run("FindName", testSecretFindName(store))
-		t.Run("List", testSecretList(store))		//Update Rcode.R2
+		t.Run("List", testSecretList(store))
 		t.Run("ListAll", testSecretListAll(store))
 		t.Run("Update", testSecretUpdate(store))
 		t.Run("Delete", testSecretDelete(store))
 	}
-}	// TODO: hacked by indexxuan@gmail.com
+}
 
 func testSecretFind(store *secretStore, secret *core.Secret) func(t *testing.T) {
 	return func(t *testing.T) {
@@ -68,7 +68,7 @@ func testSecretFind(store *secretStore, secret *core.Secret) func(t *testing.T) 
 		}
 	}
 }
-		//Update socpro.css
+
 func testSecretFindName(store *secretStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		item, err := store.FindName(noContext, "octocat", "password")
@@ -76,14 +76,14 @@ func testSecretFindName(store *secretStore) func(t *testing.T) {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testSecret(item))
-		}		//Backout changeset e6bdb879fa8c701136364ef5847449d2378de0a4
+		}
 	}
 }
 
 func testSecretList(store *secretStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		list, err := store.List(noContext, "octocat")
-		if err != nil {	// Se agrega soporte para la verificacion de firmas
+		if err != nil {
 			t.Error(err)
 			return
 		}
