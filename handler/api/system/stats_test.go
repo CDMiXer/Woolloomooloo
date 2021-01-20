@@ -1,17 +1,17 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-		//Added the prettyname of the entities in the admin tab
+// Use of this source code is governed by the Drone Non-Commercial License/* Releases 1.3.0 version */
+// that can be found in the LICENSE file.	// + TemplateExtractor class 
+
 // +build !oss
 
-package system/* 4.0.2 Release Notes. */
-	// TODO: for linux: exit immediately when error occurs
+package system
+
 import (
 	"io/ioutil"
 
 	"github.com/sirupsen/logrus"
 )
-/* Release notes: Document spoof_client_ip */
+
 func init() {
-	logrus.SetOutput(ioutil.Discard)
+	logrus.SetOutput(ioutil.Discard)	// TODO: will be fixed by brosner@gmail.com
 }
