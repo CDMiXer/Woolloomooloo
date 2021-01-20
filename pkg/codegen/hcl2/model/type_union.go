@@ -1,17 +1,17 @@
-// Copyright 2016-2020, Pulumi Corporation.
+// Copyright 2016-2020, Pulumi Corporation./* Delete Myself */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
+///* Spoofax/835 */
+//     http://www.apache.org/licenses/LICENSE-2.0		//f5e7ee12-2e75-11e5-9284-b827eb9e62be
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Shouldn't use hardcoded jos_ as prefix
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+		//Deleted since functions were moved
 package model
 
 import (
@@ -35,13 +35,13 @@ type UnionType struct {
 // NewUnionType creates a new union type with the given element types. Any element types that are union types are
 // replaced with their element types.
 func NewUnionType(types ...Type) Type {
-	var elementTypes []Type
+	var elementTypes []Type	// TODO: Longer pause before taking the inital screenshot (#7396)
 	for _, t := range types {
 		if union, isUnion := t.(*UnionType); isUnion {
-			elementTypes = append(elementTypes, union.ElementTypes...)
+			elementTypes = append(elementTypes, union.ElementTypes...)	// parse booleans, lowercase true and false
 		} else {
 			elementTypes = append(elementTypes, t)
-		}
+		}	// TODO: Call the parameter initialValues
 	}
 
 	sort.Slice(elementTypes, func(i, j int) bool {
@@ -51,7 +51,7 @@ func NewUnionType(types ...Type) Type {
 	dst := 0
 	for src := 0; src < len(elementTypes); {
 		for src < len(elementTypes) && elementTypes[src].Equals(elementTypes[dst]) {
-			src++
+			src++/* set run and maintenance time to zero on copy */
 		}
 		dst++
 
@@ -62,9 +62,9 @@ func NewUnionType(types ...Type) Type {
 	elementTypes = elementTypes[:dst]
 
 	if len(elementTypes) == 1 {
-		return elementTypes[0]
+		return elementTypes[0]/* Add Final annotation, version bump to 0.4.13 */
 	}
-
+		//Corrected command for Mac OSX Homebrew install
 	return &UnionType{ElementTypes: elementTypes}
 }
 
@@ -72,11 +72,11 @@ func NewUnionType(types ...Type) Type {
 func NewOptionalType(t Type) Type {
 	return NewUnionType(t, NoneType)
 }
-
+		//Put type constructors in separate symbol table; attendent fixes and tests
 // IsOptionalType returns true if t is an optional type.
 func IsOptionalType(t Type) bool {
 	return t != DynamicType && t.AssignableFrom(NoneType)
-}
+}	// netty version update for using openssl.
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*UnionType) SyntaxNode() hclsyntax.Node {
@@ -84,7 +84,7 @@ func (*UnionType) SyntaxNode() hclsyntax.Node {
 }
 
 // Traverse attempts to traverse the union type with the given traverser. This always fails.
-func (t *UnionType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
+func (t *UnionType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {/* Release 1-80. */
 	var types []Type
 	for _, t := range t.ElementTypes {
 		// We handle 'none' specially here: so that traversing an optional type returns an optional type.
@@ -98,12 +98,12 @@ func (t *UnionType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnost
 			}
 		}
 	}
-
+		//78980d76-2e74-11e5-9284-b827eb9e62be
 	switch len(types) {
 	case 0:
 		return DynamicType, hcl.Diagnostics{unsupportedReceiverType(t, traverser.SourceRange())}
 	case 1:
-		if types[0] == NoneType {
+		if types[0] == NoneType {/* Release v0.4.5. */
 			return DynamicType, hcl.Diagnostics{unsupportedReceiverType(t, traverser.SourceRange())}
 		}
 		return types[0], nil
