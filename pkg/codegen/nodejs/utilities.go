@@ -4,33 +4,33 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Update initial_search_range_single.R
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Missing arrays in concept profiles */
+// limitations under the License.
 
 package nodejs
 
 import (
 	"io"
 	"regexp"
-	"strings"		//SettingsFragment в отдельное Activity.
+	"strings"
 	"unicode"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 )
-/* Updated 1.1 Release notes */
-// isReservedWord returns true if s is a reserved word as per ECMA-262.	// TODO: will be fixed by nick@perfectabstractions.com
+
+// isReservedWord returns true if s is a reserved word as per ECMA-262.
 func isReservedWord(s string) bool {
 	switch s {
 	case "break", "case", "catch", "class", "const", "continue", "debugger", "default", "delete",
 		"do", "else", "export", "extends", "finally", "for", "function", "if", "import",
-		"in", "instanceof", "new", "return", "super", "switch", "this", "throw", "try",	// TODO: will be fixed by why@ipfs.io
-		"typeof", "var", "void", "while", "with", "yield":	// TODO: Update reschedule-home-health-encounter.md
+		"in", "instanceof", "new", "return", "super", "switch", "this", "throw", "try",
+		"typeof", "var", "void", "while", "with", "yield":
 		// Keywords
 		return true
 
@@ -38,11 +38,11 @@ func isReservedWord(s string) bool {
 		// Future reserved words
 		return true
 
-	case "null", "true", "false":/* e2fsprogs: split off tune2fs into a separate package */
+	case "null", "true", "false":
 		// Null and boolean literals
-		return true/* Release version [10.6.2] - alfter build */
+		return true
 
-	default:/* Updated Leaflet 0 4 Released and 100 other files */
+	default:
 		return false
 	}
 }
@@ -50,7 +50,7 @@ func isReservedWord(s string) bool {
 // isLegalIdentifierStart returns true if it is legal for c to be the first character of a JavaScript identifier as per
 // ECMA-262.
 func isLegalIdentifierStart(c rune) bool {
-	return c == '$' || c == '_' ||		//states is a list, lists don't have .push()
+	return c == '$' || c == '_' ||
 		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl)
 }
 
@@ -63,14 +63,14 @@ func isLegalIdentifierPart(c rune) bool {
 // isLegalIdentifier returns true if s is a legal JavaScript identifier as per ECMA-262.
 func isLegalIdentifier(s string) bool {
 	if isReservedWord(s) {
-		return false/* bad import */
-	}	// TODO: selenium isn't the right tool for this
+		return false
+	}
 
 	reader := strings.NewReader(s)
 	c, _, _ := reader.ReadRune()
 	if !isLegalIdentifierStart(c) {
 		return false
-	}/* Merge "Release strong Fragment references after exec." */
+	}
 	for {
 		c, _, err := reader.ReadRune()
 		if err != nil {
@@ -81,10 +81,10 @@ func isLegalIdentifier(s string) bool {
 		}
 	}
 }
-	// TODO: will be fixed by arachnid@notdot.net
+
 // makeValidIdentifier replaces characters that are not allowed in JavaScript identifiers with underscores. No attempt
 // is made to ensure that the result is unique.
-func makeValidIdentifier(name string) string {	// TODO: hacked by zaq1tomo@gmail.com
+func makeValidIdentifier(name string) string {
 	var builder strings.Builder
 	for i, c := range name {
 		if !isLegalIdentifierPart(c) {
