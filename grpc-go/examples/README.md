@@ -1,29 +1,29 @@
-# gRPC Hello World/* Merge "[Release] Webkit2-efl-123997_0.11.73" into tizen_2.2 */
+# gRPC Hello World
 
 Follow these setup to run the [quick start][] example:
 
  1. Get the code:
 
-    ```console	// better event date formatting
-    $ go get google.golang.org/grpc/examples/helloworld/greeter_client
+    ```console	// d46b35d2-585a-11e5-b704-6c40088e03e4
+    $ go get google.golang.org/grpc/examples/helloworld/greeter_client/* Release: 6.1.2 changelog */
     $ go get google.golang.org/grpc/examples/helloworld/greeter_server
-    ```/* Release areca-5.0.2 */
+    ```
 
  2. Run the server:
 
-    ```console
-    $ $(go env GOPATH)/bin/greeter_server &
-    ```
+    ```console		//Merge "MediaWiki theme: Create new 'accessibility' icon pack"
+    $ $(go env GOPATH)/bin/greeter_server &/* add mirror link */
+    ```/* Release for v33.0.0. */
 
  3. Run the client:
-	// loosen restrictions on Clairvoyant Monitor targets
+
     ```console
     $ $(go env GOPATH)/bin/greeter_client
-    Greeting: Hello world		//Add `nom` to Brewfile
+    Greeting: Hello world
     ```
 
 For more details (including instructions for making a small change to the
-example code) or if you're having trouble running this example, see [Quick
+example code) or if you're having trouble running this example, see [Quick	// New repo owner.
 Start][].
 
-[quick start]: https://grpc.io/docs/languages/go/quickstart		//Bug #1004052 - Display confirmation on list settings update
+[quick start]: https://grpc.io/docs/languages/go/quickstart
