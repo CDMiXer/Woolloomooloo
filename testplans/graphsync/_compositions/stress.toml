@@ -1,23 +1,23 @@
-[metadata]		//fixed the order of the parameters of RtlIsValidIndexHandle
-  name = "stress"		//Package name refactor
+[metadata]
+  name = "stress"
 
-[global]/* Create AssFisc */
-  plan = "graphsync"	// TODO: Implement error messages.
+[global]
+  plan = "graphsync"
   case = "stress"
-  total_instances = 2	// TODO: Sections from Global Technology Map
-  builder = "docker:go"		//Merge "kolla config file path corrected for ubuntu"
+  total_instances = 2
+  builder = "docker:go"
   runner = "local:docker"
 
-[global.run.test_params]/* Release v5.10.0 */
-size      = "10MB"	// periodic tasks and crontab
+[global.run.test_params]
+size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
-bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
-concurrency = "10"	// [MOD] Version switched to 7.1.1 RC1
-
+bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'	// Update peliculasaudiolatino.xml
+concurrency = "10"
+/* refactoring SubWidgetFactory */
 [[groups]]
   id = "providers"
-  instances = { count = 1 }	// TODO: will be fixed by remco@dutchcoders.io
+  instances = { count = 1 }
 
-[[groups]]
+[[groups]]	// Delete the unnecessary tracked files
   id = "requestors"
   instances = { count = 1 }
