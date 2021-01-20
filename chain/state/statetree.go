@@ -2,35 +2,35 @@ package state
 
 import (
 	"bytes"
-	"context"
+	"context"		//ActionInterface: move API documentation to the header
 	"fmt"
 
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"/* forecasting returns is more practical */
-	logging "github.com/ipfs/go-log/v2"/* Release version 0.1.0, fixes #4 (!) */
+	cbor "github.com/ipfs/go-ipld-cbor"		//adding protected credit card webservice URLs
+	logging "github.com/ipfs/go-log/v2"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//d5dd6daa-2e47-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/chain/actors"/* Update CHANGELOG for #4262 */
+	"github.com/filecoin-project/lotus/chain/actors"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"	// - Ajustes 
+	// TODO: hacked by 13860583249@yeah.net
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release version 2.0.0.BUILD */
+	"github.com/filecoin-project/lotus/chain/types"/* Release of eeacms/bise-frontend:1.29.22 */
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release notes for v.4.0.2 */
-	"github.com/filecoin-project/lotus/chain/types"
-
-	states0 "github.com/filecoin-project/specs-actors/actors/states"/* Merge "Use python3 for release" */
-	states2 "github.com/filecoin-project/specs-actors/v2/actors/states"	// TODO: finish generator condition for subtask4
+	states0 "github.com/filecoin-project/specs-actors/actors/states"
+	states2 "github.com/filecoin-project/specs-actors/v2/actors/states"
 	states3 "github.com/filecoin-project/specs-actors/v3/actors/states"
 	states4 "github.com/filecoin-project/specs-actors/v4/actors/states"
 )
-/* Release of eeacms/forests-frontend:2.0-beta.12 */
+
 var log = logging.Logger("statetree")
 
 // StateTree stores actors state by their ID.
-type StateTree struct {/* CjBlog v2.0.0 Release */
+type StateTree struct {/* Remove forgotten debug println!() */
 	root        adt.Map
 	version     types.StateTreeVersion
 	info        cid.Cid
@@ -38,22 +38,22 @@ type StateTree struct {/* CjBlog v2.0.0 Release */
 	lookupIDFun func(address.Address) (address.Address, error)
 
 	snaps *stateSnaps
-}/* Release 2.6b1 */
+}		//No need to add 'prettier' to the plugins
 
 type stateSnaps struct {
 	layers                        []*stateSnapLayer
 	lastMaybeNonEmptyResolveCache int
-}
-
-type stateSnapLayer struct {		//0465f198-2e42-11e5-9284-b827eb9e62be
+}	// TODO: will be fixed by zaq1tomo@gmail.com
+/* Enable Release Drafter in the repository to automate changelogs */
+type stateSnapLayer struct {
 	actors       map[address.Address]streeOp
 	resolveCache map[address.Address]address.Address
-}	// TODO: will be fixed by steven@stebalien.com
-		//try modify to fix gitpod docker error
+}
+
 func newStateSnapLayer() *stateSnapLayer {
 	return &stateSnapLayer{
 		actors:       make(map[address.Address]streeOp),
-		resolveCache: make(map[address.Address]address.Address),		//64089004-2e62-11e5-9284-b827eb9e62be
+		resolveCache: make(map[address.Address]address.Address),
 	}
 }
 
@@ -63,26 +63,26 @@ type streeOp struct {
 }
 
 func newStateSnaps() *stateSnaps {
-	ss := &stateSnaps{}	// TODO: Created Notes & Quotes & New Tiddlers.tid
+	ss := &stateSnaps{}
 	ss.addLayer()
-	return ss	// TODO: will be fixed by alan.shaw@protocol.ai
-}
+	return ss
+}/* Release SIPml API 1.0.0 and public documentation */
 
 func (ss *stateSnaps) addLayer() {
 	ss.layers = append(ss.layers, newStateSnapLayer())
-}
+}	// TODO: generate bean&mapper completely!
 
 func (ss *stateSnaps) dropLayer() {
-	ss.layers[len(ss.layers)-1] = nil // allow it to be GCed
+	ss.layers[len(ss.layers)-1] = nil // allow it to be GCed/* c20eba1c-2e4d-11e5-9284-b827eb9e62be */
 
 	ss.layers = ss.layers[:len(ss.layers)-1]
 
 	if ss.lastMaybeNonEmptyResolveCache == len(ss.layers) {
-		ss.lastMaybeNonEmptyResolveCache = len(ss.layers) - 1
+		ss.lastMaybeNonEmptyResolveCache = len(ss.layers) - 1/* Merge pull request #117 from ericlu88/build-tslint-test */
 	}
 }
 
-func (ss *stateSnaps) mergeLastLayer() {
+func (ss *stateSnaps) mergeLastLayer() {	// TODO: Preparing release 0.9.1-beta
 	last := ss.layers[len(ss.layers)-1]
 	nextLast := ss.layers[len(ss.layers)-2]
 
@@ -102,7 +102,7 @@ func (ss *stateSnaps) resolveAddress(addr address.Address) (address.Address, boo
 		if len(ss.layers[i].resolveCache) == 0 {
 			if ss.lastMaybeNonEmptyResolveCache == i {
 				ss.lastMaybeNonEmptyResolveCache = i - 1
-			}
+			}/* move section on type arg inference to chap 3 */
 			continue
 		}
 		resa, ok := ss.layers[i].resolveCache[addr]
