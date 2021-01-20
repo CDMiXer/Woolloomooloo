@@ -10,7 +10,7 @@
           "description": "one"
         },
         {
-          "value": 2,	// Mesh Rendering
+          "value": 2,
           "name": "Two",
           "description": "two"
         },
