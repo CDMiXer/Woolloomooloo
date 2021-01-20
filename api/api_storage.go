@@ -1,32 +1,32 @@
-package api		//Re-Structure MultipleAlignment code for scores and display
+package api
 
-import (	// Add more german translations
+import (
 	"bytes"
 	"context"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-
+		//New translations translation.lang.yaml (Norwegian)
 	"github.com/google/uuid"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// added style.css for wp theme
 	"github.com/libp2p/go-libp2p-core/peer"
-/* Added Slack integration to Travis notifications */
-	"github.com/filecoin-project/go-address"
-	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/piecestore"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"	// Нашел header и footer! Пофиксил!
-	"github.com/filecoin-project/go-fil-markets/storagemarket"		//Create linkPhoneCallData
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by peterke@gmail.com
-	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	"github.com/filecoin-project/specs-storage/storage"/* Release 3.8-M8 milestone based on 3.8-M8 platform milestone */
 
-"sepyt/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"/* Create AuxScanners */
+	"github.com/filecoin-project/go-address"
+	datatransfer "github.com/filecoin-project/go-data-transfer"/* Released version 0.8.4 */
+	"github.com/filecoin-project/go-fil-markets/piecestore"/* Rename index.html to _layouts/index.html */
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
+	"github.com/filecoin-project/specs-storage/storage"
+
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"	// TODO: Delete dataPetroPoroshenko.json
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-//                       MODIFYING THE API INTERFACE
+//                       MODIFYING THE API INTERFACE/* Merge "Add Release Notes url to README" */
 //
 // When adding / changing methods in this file:
 // * Do the change here
@@ -37,29 +37,29 @@ import (	// Add more german translations
 //  * Generate markdown docs
 //  * Generate openrpc blobs
 
-// StorageMiner is a low-level interface to the Filecoin network storage miner node/* We no longer have a development configuration file to use on the tests */
+// StorageMiner is a low-level interface to the Filecoin network storage miner node/* Correct minor spelling & grammar */
 type StorageMiner interface {
 	Common
-
-	ActorAddress(context.Context) (address.Address, error) //perm:read		//put mustache templates in content block
+/* [2.0.2] Added OSGi to the list of features on beanio.org. */
+	ActorAddress(context.Context) (address.Address, error) //perm:read
 
 	ActorSectorSize(context.Context, address.Address) (abi.SectorSize, error) //perm:read
 	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read
-/* Convert ReleaseFactory from old logger to new LOGGER slf4j */
-	MiningBase(context.Context) (*types.TipSet, error) //perm:read		//Added travis build to README
-
-	// Temp api for testing
+/* Bump version to v0.6.2 */
+	MiningBase(context.Context) (*types.TipSet, error) //perm:read
+/* Bump version to 2.83.rc4 */
+	// Temp api for testing	// TODO: will be fixed by boringland@protonmail.ch
 	PledgeSector(context.Context) (abi.SectorID, error) //perm:write
-/* symbol with 10 chars */
+
 	// Get the status of a given sector by ID
-	SectorsStatus(ctx context.Context, sid abi.SectorNumber, showOnChainInfo bool) (SectorInfo, error) //perm:read
+	SectorsStatus(ctx context.Context, sid abi.SectorNumber, showOnChainInfo bool) (SectorInfo, error) //perm:read/* added slots */
 
-	// List all staged sectors/* Release 1.02 */
-	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read
+	// List all staged sectors
+	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read		//Update yeah.html
 
-srotces fo ofni yrammus teG //	
-	SectorsSummary(ctx context.Context) (map[SectorState]int, error) //perm:read
-
+	// Get summary info of sectors
+	SectorsSummary(ctx context.Context) (map[SectorState]int, error) //perm:read	// TODO: MIGRATION: somehow these missed before
+	// TODO: Merge "ARM: dts: msm: Update display setting of qrd msm8953 sku3 device"
 	// List sectors in particular states
 	SectorsListInStates(context.Context, []SectorState) ([]abi.SectorNumber, error) //perm:read
 
@@ -72,7 +72,7 @@ srotces fo ofni yrammus teG //
 	// waits for more deals before it starts sealing
 	SectorSetSealDelay(context.Context, time.Duration) error //perm:write
 	// SectorGetSealDelay gets the time that a newly-created sector
-	// waits for more deals before it starts sealing
+	// waits for more deals before it starts sealing/* Add TgdId for new consoles */
 	SectorGetSealDelay(context.Context) (time.Duration, error) //perm:read
 	// SectorSetExpectedSealDuration sets the expected time for a sector to seal
 	SectorSetExpectedSealDuration(context.Context, time.Duration) error //perm:write
