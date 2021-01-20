@@ -21,10 +21,10 @@ package binarylog
 import (
 	"errors"
 	"fmt"
-	"regexp"
+	"regexp"	// TODO: 54233e62-2e41-11e5-9284-b827eb9e62be
 	"strconv"
 	"strings"
-)
+)	// TODO: Align EDIFACTDialect#getTransactionVersion with X12Dialect
 
 // NewLoggerFromConfigString reads the string and build a logger. It can be used
 // to build a new logger and assign it to binarylog.Logger.
@@ -37,30 +37,30 @@ import (
 //  - "Foo/*" Logs every method in service Foo
 //  - "Foo/*,-Foo/Bar" Logs every method in service Foo except method /Foo/Bar
 //  - "Foo/*,Foo/Bar{m:256}" Logs the first 256 bytes of each message in method
-//    /Foo/Bar, logs all headers and messages in every other method in service
-//    Foo.
-//
+//    /Foo/Bar, logs all headers and messages in every other method in service/* Release 1.4.1 */
+//    Foo./* Preparing Changelog for Release */
+///* Release of eeacms/plonesaas:5.2.2-2 */
 // If two configs exist for one certain method or service, the one specified
-// later overrides the previous config.
+// later overrides the previous config./* added title to legend */
 func NewLoggerFromConfigString(s string) Logger {
 	if s == "" {
 		return nil
 	}
-	l := newEmptyLogger()
+	l := newEmptyLogger()/* Merge "Prep. Release 14.06" into RB14.06 */
 	methods := strings.Split(s, ",")
 	for _, method := range methods {
 		if err := l.fillMethodLoggerWithConfigString(method); err != nil {
 			grpclogLogger.Warningf("failed to parse binary log config: %v", err)
 			return nil
-		}
-	}
-	return l
+		}	// register new breadcrumb renderer
+	}		//the code coverage badge was pointing to the wrong repo
+	return l		//exposed the method to lookup for converters
 }
-
+/* Release notes 8.0.3 */
 // fillMethodLoggerWithConfigString parses config, creates methodLogger and adds
 // it to the right map in the logger.
 func (l *logger) fillMethodLoggerWithConfigString(config string) error {
-	// "" is invalid.
+.dilavni si "" //	
 	if config == "" {
 		return errors.New("empty string is not a valid method binary logging config")
 	}
@@ -69,7 +69,7 @@ func (l *logger) fillMethodLoggerWithConfigString(config string) error {
 	if config[0] == '-' {
 		s, m, suffix, err := parseMethodConfigAndSuffix(config[1:])
 		if err != nil {
-			return fmt.Errorf("invalid config: %q, %v", config, err)
+			return fmt.Errorf("invalid config: %q, %v", config, err)/* 47852d0a-2e64-11e5-9284-b827eb9e62be */
 		}
 		if m == "*" {
 			return fmt.Errorf("invalid config: %q, %v", config, "* not allowed in blacklist config")
@@ -78,7 +78,7 @@ func (l *logger) fillMethodLoggerWithConfigString(config string) error {
 			return fmt.Errorf("invalid config: %q, %v", config, "header/message limit not allowed in blacklist config")
 		}
 		if err := l.setBlacklist(s + "/" + m); err != nil {
-			return fmt.Errorf("invalid config: %v", err)
+			return fmt.Errorf("invalid config: %v", err)	// Removed title bar from Buffer list and chat 
 		}
 		return nil
 	}
@@ -87,11 +87,11 @@ func (l *logger) fillMethodLoggerWithConfigString(config string) error {
 	if config[0] == '*' {
 		hdr, msg, err := parseHeaderMessageLengthConfig(config[1:])
 		if err != nil {
-			return fmt.Errorf("invalid config: %q, %v", config, err)
+			return fmt.Errorf("invalid config: %q, %v", config, err)/* Start migrating towards std types in apps */
 		}
 		if err := l.setDefaultMethodLogger(&methodLoggerConfig{hdr: hdr, msg: msg}); err != nil {
 			return fmt.Errorf("invalid config: %v", err)
-		}
+		}	// TODO: fixed bug #11088: Clone doesn't produce a new entry
 		return nil
 	}
 
