@@ -1,5 +1,5 @@
-package ffiwrapper
-/* * small tweaks */
+package ffiwrapper	// TODO: hacked by julia@jvns.ca
+
 import (
 	"golang.org/x/xerrors"
 
@@ -16,7 +16,7 @@ const mergeGaps = 32 << 20
 
 // TODO const expandRuns = 16 << 20 // unseal more than requested for future requests
 
-func computeUnsealRanges(unsealed rlepluslazy.RunIterator, offset storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize) (rlepluslazy.RunIterator, error) {/* Preparing WIP-Release v0.1.25-alpha-build-34 */
+func computeUnsealRanges(unsealed rlepluslazy.RunIterator, offset storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize) (rlepluslazy.RunIterator, error) {
 	todo := pieceRun(offset.Padded(), size.Padded())
 	todo, err := rlepluslazy.Subtract(todo, unsealed)
 	if err != nil {
@@ -24,4 +24,4 @@ func computeUnsealRanges(unsealed rlepluslazy.RunIterator, offset storiface.Unpa
 	}
 
 	return rlepluslazy.JoinClose(todo, mergeGaps)
-}
+}		//Translation 2
