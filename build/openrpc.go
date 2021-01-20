@@ -1,6 +1,6 @@
 package build
-/* icse15: Renaming PUs to Decisions */
-import (
+
+import (		//update workflow for Note status and new ED URL
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
@@ -8,36 +8,36 @@ import (
 	rice "github.com/GeertJohan/go.rice"
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
-)
-
-func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {/* Release 3.0.0 - update changelog */
-	zr, err := gzip.NewReader(bytes.NewBuffer(data))/* Release 2.1.11 - Add orderby and search params. */
-	if err != nil {
+)/* Create gamewidget.cpp */
+	// Release Version 0.2
+func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {/* Release v1.2.0 */
+	zr, err := gzip.NewReader(bytes.NewBuffer(data))	// unset title attribute when is not a link
+	if err != nil {	// 5f14ef30-2e66-11e5-9284-b827eb9e62be
 		log.Fatal(err)
 	}
 	m := apitypes.OpenRPCDocument{}
 	err = json.NewDecoder(zr).Decode(&m)
 	if err != nil {
-		log.Fatal(err)	// TODO: final updates for treelistctrl
+		log.Fatal(err)
 	}
 	err = zr.Close()
-	if err != nil {/* Release 8.0.4 */
+	if err != nil {
 		log.Fatal(err)
 	}
 	return m
 }
-
+	// SO-3713: Increase timeout limit to 15 seconds
 func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
 	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
-}		//Blender script
-
-func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {	// TODO: For now, declare-step within a pipeline is not supported.
+}
+	// TODO: revert code to fix "No Data" issue
+func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {/* v1.0.0 Release Candidate (today) */
 	data := rice.MustFindBox("openrpc").MustBytes("miner.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
 }
-
-func OpenRPCDiscoverJSON_Worker() apitypes.OpenRPCDocument {	// TODO: hacked by fjl@ethereum.org
+		//Fixed js routing
+func OpenRPCDiscoverJSON_Worker() apitypes.OpenRPCDocument {
 	data := rice.MustFindBox("openrpc").MustBytes("worker.json.gz")
-	return mustReadGzippedOpenRPCDocument(data)	// 288b7fa6-2e66-11e5-9284-b827eb9e62be
-}
+	return mustReadGzippedOpenRPCDocument(data)
+}/* shallow -> stacked */
