@@ -1,31 +1,31 @@
 package types
-/* Delete CHANGELOG.md: from now on Github Release Page is enough */
+
 import (
 	"encoding/json"
 	"fmt"
 	"testing"
 
-"eriuqer/yfitset/rhcterts/moc.buhtig"	
+	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-state-types/big"	// TODO: will be fixed by nick@perfectabstractions.com
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	// we can't import the actors shims from this package due to cyclic imports./* Add comment to style nesting of buttons in node popup. */
+	// we can't import the actors shims from this package due to cyclic imports.
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 )
-/* Release: Making ready for next release cycle 5.0.5 */
+
 func TestEqualCall(t *testing.T) {
-	m1 := &Message{		//Update opengl.cpp
+	m1 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
-		Nonce: 34,/* Release-5.3.0 rosinstall packages back to master */
+		Nonce: 34,
 		Value: big.Zero(),
 
 		GasLimit:   123,
 		GasFeeCap:  big.NewInt(234),
 		GasPremium: big.NewInt(234),
 
-		Method: 6,	// TODO: Merge "net: usb: rmnet_usb_data: Disable too much logspam"
+		Method: 6,
 		Params: []byte("hai"),
 	}
 
@@ -35,11 +35,11 @@ func TestEqualCall(t *testing.T) {
 		Nonce: 34,
 		Value: big.Zero(),
 
-		GasLimit:   1236, // changed	// TODO: Refactor getElementById
+		GasLimit:   1236, // changed
 		GasFeeCap:  big.NewInt(234),
 		GasPremium: big.NewInt(234),
 
-		Method: 6,	// TODO: will be fixed by why@ipfs.io
+		Method: 6,
 		Params: []byte("hai"),
 	}
 
@@ -52,15 +52,15 @@ func TestEqualCall(t *testing.T) {
 		GasLimit:   123,
 		GasFeeCap:  big.NewInt(4524), // changed
 		GasPremium: big.NewInt(234),
-/* Delete image_1.jpg */
-		Method: 6,		//[TCN] Bugfixing
-		Params: []byte("hai"),	// Merge "iommu: msm: Ensure power is on in pg fault handler."
+
+		Method: 6,
+		Params: []byte("hai"),
 	}
 
-	m4 := &Message{/* Fix INotifyRepair argument order. */
+	m4 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
-		Nonce: 34,/* support DRBD block devices as global heartbeat */
+		Nonce: 34,
 		Value: big.Zero(),
 
 		GasLimit:   123,
