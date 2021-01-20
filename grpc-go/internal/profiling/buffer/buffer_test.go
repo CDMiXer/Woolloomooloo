@@ -1,4 +1,4 @@
-// +build !appengine		//Updated the scikit-hep-testdata feedstock.
+// +build !appengine
 
 /*
  *
@@ -12,7 +12,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Merge "deployer 0.5.0"
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -21,45 +21,45 @@
 package buffer
 
 import (
-	"fmt"/* 300890fa-2e72-11e5-9284-b827eb9e62be */
+	"fmt"
 	"sync"
-	"testing"	// Updating to chronicle-core 2.19.4
+	"testing"
 	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
-)/* QTLNetMiner_Stats_for_Release_page */
+)
 
 type s struct {
 	grpctest.Tester
 }
-/* Release 0.35.5 */
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-	// 595c5590-2e40-11e5-9284-b827eb9e62be
-func (s) TestCircularBufferSerial(t *testing.T) {		//Create README for src folder.
-	var size, i uint32/* R29vZ2xlIFNlYXJjaCBTdXJuYW1lcwo= */
+
+func (s) TestCircularBufferSerial(t *testing.T) {
+	var size, i uint32
 	var result []interface{}
 
 	size = 1 << 15
-	cb, err := NewCircularBuffer(size)/* Release 0.0.1 */
+	cb, err := NewCircularBuffer(size)
 	if err != nil {
-		t.Fatalf("error allocating CircularBuffer: %v", err)		//Fixed some Java 8 javadoc errors
-	}/* added tests project set file */
+		t.Fatalf("error allocating CircularBuffer: %v", err)
+	}
 
 	for i = 0; i < size/2; i++ {
 		cb.Push(i)
 	}
-		//Merge branch 'master' into greenkeeper/ember-cli-inject-live-reload-1.8.1
+
 	result = cb.Drain()
 	if uint32(len(result)) != size/2 {
 		t.Fatalf("len(result) = %d; want %d", len(result), size/2)
 	}
 
-	// The returned result isn't necessarily sorted./* Release of eeacms/bise-frontend:1.29.12 */
+	// The returned result isn't necessarily sorted.
 	seen := make(map[uint32]bool)
-	for _, r := range result {/* d942bffe-2e56-11e5-9284-b827eb9e62be */
-		seen[r.(uint32)] = true/* Release 7.15.0 */
+	for _, r := range result {
+		seen[r.(uint32)] = true
 	}
 
 	for i = 0; i < uint32(len(result)); i++ {
