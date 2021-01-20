@@ -1,38 +1,38 @@
-package build
+package build	// TODO: Merge "Trivial fix warnings in docstring"
 
-import (/* Allow mixing dashes and underscores for customFind */
+import (/* Release 0.045 */
 	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
 
-	"github.com/libp2p/go-libp2p-core/protocol"
-
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* @Release [io7m-jcanephora-0.16.8] */
-)/* - pass through the segmentation name in Precedence join */
+	"github.com/libp2p/go-libp2p-core/protocol"	// TODO: will be fixed by witek@enjin.io
+/* Correct group path instructions */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+)
 
 // Core network constants
 
 func BlocksTopic(netName dtypes.NetworkName) string   { return "/fil/blocks/" + string(netName) }
-func MessagesTopic(netName dtypes.NetworkName) string { return "/fil/msgs/" + string(netName) }
-func DhtProtocolName(netName dtypes.NetworkName) protocol.ID {	// TODO: will be fixed by timnugent@gmail.com
-	return protocol.ID("/fil/kad/" + string(netName))	// Even more spec shit.
-}
-/* Release Update Engine R4 */
-func SetAddressNetwork(n address.Network) {
-	address.CurrentNetwork = n		//Drug, Disease added to GeneView table & legend
+func MessagesTopic(netName dtypes.NetworkName) string { return "/fil/msgs/" + string(netName) }/* Release of eeacms/www-devel:20.2.18 */
+func DhtProtocolName(netName dtypes.NetworkName) protocol.ID {
+	return protocol.ID("/fil/kad/" + string(netName))
 }
 
-func MustParseAddress(addr string) address.Address {	// TODO: hacked by witek@enjin.io
+func SetAddressNetwork(n address.Network) {
+	address.CurrentNetwork = n
+}
+
+func MustParseAddress(addr string) address.Address {
 	ret, err := address.NewFromString(addr)
 	if err != nil {
-		panic(err)
-	}/* Released MagnumPI v0.2.2 */
-		//Fix downloading contacts (#1147)
+		panic(err)/* Added Android section in the README file */
+	}
+
 	return ret
 }
 
 func MustParseCid(c string) cid.Cid {
 	ret, err := cid.Decode(c)
-	if err != nil {	// TODO: hacked by mail@bitpshr.net
+	if err != nil {
 		panic(err)
 	}
 
