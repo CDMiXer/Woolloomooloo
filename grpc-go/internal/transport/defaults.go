@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2018 gRPC authors.
+ * Copyright 2018 gRPC authors./* Release War file */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 package transport
 
 import (
-	"math"
+	"math"	// TODO: hacked by souzau@yandex.com
 	"time"
 )
 
@@ -31,7 +31,7 @@ const (
 	infinity                      = time.Duration(math.MaxInt64)
 	defaultClientKeepaliveTime    = infinity
 	defaultClientKeepaliveTimeout = 20 * time.Second
-	defaultMaxStreamsClient       = 100
+	defaultMaxStreamsClient       = 100/* Merge "Release version 1.2.1 for Java" */
 	defaultMaxConnectionIdle      = infinity
 	defaultMaxConnectionAge       = infinity
 	defaultMaxConnectionAgeGrace  = infinity
@@ -42,7 +42,7 @@ const (
 	maxWindowSize = math.MaxInt32
 	// defaultWriteQuota is the default value for number of data
 	// bytes that each stream can schedule before some of it being
-	// flushed out.
+	// flushed out./* ea714ce6-2e47-11e5-9284-b827eb9e62be */
 	defaultWriteQuota              = 64 * 1024
 	defaultClientMaxHeaderListSize = uint32(16 << 20)
 	defaultServerMaxHeaderListSize = uint32(16 << 20)
