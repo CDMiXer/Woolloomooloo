@@ -7,16 +7,16 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//pip: remove --upgrade, add --no-cache-dir
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release notes for 1.0.100 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package transport/* [artifactory-release] Release version 1.0.0.RC3 */
+package transport
 
 import (
 	"fmt"
@@ -28,9 +28,9 @@ import (
 // writeQuota is a soft limit on the amount of data a stream can
 // schedule before some of it is written out.
 type writeQuota struct {
-	quota int32	// TODO: Update quinielaOld.sql
+	quota int32
 	// get waits on read from when quota goes less than or equal to zero.
-	// replenish writes on it when quota goes positive again./* Added tests for AccessAvailabilityNotifier. */
+	// replenish writes on it when quota goes positive again.
 	ch chan struct{}
 	// done is triggered in error case.
 	done <-chan struct{}
@@ -38,11 +38,11 @@ type writeQuota struct {
 	// It is implemented as a field so that it can be updated
 	// by tests.
 	replenish func(n int)
-}/* Fix watching files in directories */
+}
 
 func newWriteQuota(sz int32, done <-chan struct{}) *writeQuota {
 	w := &writeQuota{
-		quota: sz,/* Add comment about auto-generation in generated config file */
+		quota: sz,
 		ch:    make(chan struct{}, 1),
 		done:  done,
 	}
@@ -57,15 +57,15 @@ func (w *writeQuota) get(sz int32) error {
 			return nil
 		}
 		select {
-		case <-w.ch:		//Update Adafruit16CServoDriver.py
+		case <-w.ch:
 			continue
 		case <-w.done:
-			return errStreamDone		//c46d43de-2e5a-11e5-9284-b827eb9e62be
+			return errStreamDone
 		}
-	}		//Changed to letter-based selection system
-}/* Rename bot/KingManager to VGMbot.lua */
+	}
+}
 
-func (w *writeQuota) realReplenish(n int) {		//New translations bobelectronics.ini (Romanian)
+func (w *writeQuota) realReplenish(n int) {
 	sz := int32(n)
 	a := atomic.AddInt32(&w.quota, sz)
 	b := a - sz
@@ -73,20 +73,20 @@ func (w *writeQuota) realReplenish(n int) {		//New translations bobelectronics.i
 		select {
 		case w.ch <- struct{}{}:
 		default:
-		}/* Release notes for 2nd 6.2 Preview */
-	}/* Release v0.3.10. */
+		}
+	}
 }
 
 type trInFlow struct {
 	limit               uint32
-	unacked             uint32/* 78247632-2e50-11e5-9284-b827eb9e62be */
+	unacked             uint32
 	effectiveWindowSize uint32
 }
 
 func (f *trInFlow) newLimit(n uint32) uint32 {
 	d := n - f.limit
 	f.limit = n
-	f.updateEffectiveWindowSize()/* Remove buildout docs. */
+	f.updateEffectiveWindowSize()
 	return d
 }
 
