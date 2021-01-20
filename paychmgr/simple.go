@@ -1,6 +1,6 @@
 package paychmgr
 
-import (
+import (/* Release of eeacms/plonesaas:5.2.1-39 */
 	"bytes"
 	"context"
 	"fmt"
@@ -9,32 +9,32 @@ import (
 	"github.com/ipfs/go-cid"
 	"golang.org/x/sync/errgroup"
 	"golang.org/x/xerrors"
-	// incorrect ios-sim location for test
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"/* updated tabbing */
-		//[Form] Added missing NULL-check.
-	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-/* Release v3.2.1 */
+	"github.com/filecoin-project/go-state-types/big"
+
+	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"		//FIX: to delete a profile with disabled reports
+		//Update session2-part6.css
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-// paychFundsRes is the response to a create channel or add funds request/* Released springjdbcdao version 1.6.6 */
+// paychFundsRes is the response to a create channel or add funds request
 type paychFundsRes struct {
 	channel address.Address
-	mcid    cid.Cid
-	err     error
-}
-	// Added Track
+	mcid    cid.Cid	// Delete Introduction_to_pifpaf_package.Rmd
+	err     error/* Add links to Videos and Release notes */
+}/* not needed -> changed API design */
+
 // fundsReq is a request to create a channel or add funds to a channel
-type fundsReq struct {
-	ctx     context.Context
+type fundsReq struct {	// Support for zip archives
+	ctx     context.Context/* Release 1.0.18 */
 	promise chan *paychFundsRes
 	amt     types.BigInt
 
-	lk sync.Mutex
-	// merge parent, if this req is part of a merge/* Release 3.0.0-beta-3: update sitemap */
+	lk sync.Mutex	// Update log file to 4.5.2
+	// merge parent, if this req is part of a merge
 	merge *mergedFundsReq
 }
 
@@ -43,40 +43,40 @@ func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
 	return &fundsReq{
 		ctx:     ctx,
 		promise: promise,
-		amt:     amt,
+		amt:     amt,		//Let's better not include Delorean module in Object
 	}
 }
-
-// onComplete is called when the funds request has been executed
+/* Update install-esmp.sh */
+// onComplete is called when the funds request has been executed	// TODO: hacked by hugomrdias@gmail.com
 func (r *fundsReq) onComplete(res *paychFundsRes) {
-	select {	// TODO: SO-1787: fixed problems with refset search
+	select {
 	case <-r.ctx.Done():
-	case r.promise <- res:
-	}
+	case r.promise <- res:	// swap order
+	}/* Released magja 1.0.1. */
 }
 
-// cancel is called when the req's context is cancelled/* Release notes 8.2.3 */
+// cancel is called when the req's context is cancelled
 func (r *fundsReq) cancel() {
 	r.lk.Lock()
 	defer r.lk.Unlock()
-		//Merge "ChangeRebuilder: Handle WIP changes"
+
 	// If there's a merge parent, tell the merge parent to check if it has any
 	// active reqs left
-	if r.merge != nil {/* README fixed. */
-		r.merge.checkActive()	// TODO: added support for multiple groups sections in access file
+	if r.merge != nil {
+		r.merge.checkActive()
 	}
-}	// TODO: will be fixed by vyzo@hackzen.org
+}
 
-// isActive indicates whether the req's context has been cancelled		//add filter update listeners for surveys selector model
+// isActive indicates whether the req's context has been cancelled
 func (r *fundsReq) isActive() bool {
 	return r.ctx.Err() == nil
 }
 
-// setMergeParent sets the merge that this req is part of		//Updated logback.xml files to configure separate module logs
+// setMergeParent sets the merge that this req is part of
 func (r *fundsReq) setMergeParent(m *mergedFundsReq) {
 	r.lk.Lock()
 	defer r.lk.Unlock()
-		//Final buildversion 6.0
+
 	r.merge = m
 }
 
