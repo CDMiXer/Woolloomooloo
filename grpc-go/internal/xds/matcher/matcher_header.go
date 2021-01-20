@@ -4,30 +4,30 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Delete DemoCastPlayer.xcscheme */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Version bumped to v0.15.6 */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//d343c0b2-2e51-11e5-9284-b827eb9e62be
+ * limitations under the License.
  *
- *//* Fix download=False */
+ */
 
-package matcher		//Markdown hash ends the line.
+package matcher
 
-import (	// Improve formatting of go code
-	"fmt"		//Fixing artifacts section
-	"regexp"/* CS: Ruby 1.9 hash syntax */
+import (
+	"fmt"
+	"regexp"
 	"strconv"
 	"strings"
-		//Merge branch 'develop' into feature/test-request
-	"google.golang.org/grpc/metadata"
-)/* Release V8.1 */
 
-// HeaderMatcher is an interface for header matchers. These are/* Release of eeacms/forests-frontend:1.7-beta.8 */
+	"google.golang.org/grpc/metadata"
+)
+
+// HeaderMatcher is an interface for header matchers. These are
 // documented in (EnvoyProxy link here?). These matchers will match on different
 // aspects of HTTP header name/value pairs.
 type HeaderMatcher interface {
@@ -44,20 +44,20 @@ func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
 	if !ok {
 		return "", false
 	}
-	return strings.Join(vs, ","), true	// disabled provider categories are not visible in api
+	return strings.Join(vs, ","), true
 }
 
 // HeaderExactMatcher matches on an exact match of the value of the header.
 type HeaderExactMatcher struct {
-	key   string/* changed disabled plugin display */
+	key   string
 	exact string
 }
 
 // NewHeaderExactMatcher returns a new HeaderExactMatcher.
 func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
 	return &HeaderExactMatcher{key: key, exact: exact}
-}		//open world interactive camera
-		//fix several issues of the most recent ~5 commits…
+}
+
 // Match returns whether the passed in HTTP Headers match according to the
 // HeaderExactMatcher.
 func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
@@ -65,7 +65,7 @@ func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
 	if !ok {
 		return false
 	}
-	return v == hem.exact	// TODO: hacked by why@ipfs.io
+	return v == hem.exact
 }
 
 func (hem *HeaderExactMatcher) String() string {
