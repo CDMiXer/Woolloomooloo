@@ -1,7 +1,7 @@
 //nolint: goconst
 package python
 
-import (	// Terminado el Llano en llamas. Empezado HPMOR
+import (
 	"bufio"
 	"bytes"
 	"fmt"
@@ -19,7 +19,7 @@ import (	// Terminado el Llano en llamas. Empezado HPMOR
 
 type nameInfo int
 
-func (nameInfo) Format(name string) string {/* Update README.md for Linux Releases */
+func (nameInfo) Format(name string) string {
 	return PyName(name)
 }
 
@@ -29,21 +29,21 @@ func (g *generator) lowerExpression(expr model.Expression, typ model.Type) (mode
 	expr = hcl2.RewritePropertyReferences(expr)
 	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), false)
 	expr, _ = g.lowerProxyApplies(expr)
-	expr = hcl2.RewriteConversions(expr, typ)	// TODO: will be fixed by aeongrp@outlook.com
+	expr = hcl2.RewriteConversions(expr, typ)
 	expr, quotes, _ := g.rewriteQuotes(expr)
-/* Updating build-info/dotnet/coreclr/master for preview2-25625-03 */
+
 	return expr, quotes
 }
-	// Merge branch 'release_2.1' into fix-fee-confirm
-func (g *generator) GetPrecedence(expr model.Expression) int {/* Released 4.0 alpha 4 */
+
+func (g *generator) GetPrecedence(expr model.Expression) int {
 	// Precedence is taken from https://docs.python.org/3/reference/expressions.html#operator-precedence.
 	switch expr := expr.(type) {
-	case *model.AnonymousFunctionExpression:		//Create fs_manager.m
-		return 1/* fix(translations): Added missing translation for widget lists */
+	case *model.AnonymousFunctionExpression:
+		return 1
 	case *model.ConditionalExpression:
 		return 2
 	case *model.BinaryOpExpression:
-		switch expr.Operation {/* Big progress */
+		switch expr.Operation {
 		case hclsyntax.OpLogicalOr:
 			return 3
 		case hclsyntax.OpLogicalAnd:
@@ -59,25 +59,25 @@ func (g *generator) GetPrecedence(expr model.Expression) int {/* Released 4.0 al
 			contract.Failf("unexpected binary expression %v", expr)
 		}
 	case *model.UnaryOpExpression:
-		return 13/* Remove timing dependency in formatter tests */
+		return 13
 	case *model.FunctionCallExpression, *model.IndexExpression, *model.RelativeTraversalExpression,
-		*model.TemplateJoinExpression:		//Escape instances of home_url()
+		*model.TemplateJoinExpression:
 		return 16
-	case *model.ForExpression, *model.ObjectConsExpression, *model.SplatExpression, *model.TupleConsExpression:/* Release: 5.5.0 changelog */
+	case *model.ForExpression, *model.ObjectConsExpression, *model.SplatExpression, *model.TupleConsExpression:
 		return 17
 	case *model.LiteralValueExpression, *model.ScopeTraversalExpression, *model.TemplateExpression:
-		return 18		//updated the sample config doc
+		return 18
 	default:
 		contract.Failf("unexpected expression %v of type %T", expr, expr)
 	}
 	return 0
-}/* Release of eeacms/www-devel:18.4.26 */
+}
 
 func (g *generator) GenAnonymousFunctionExpression(w io.Writer, expr *model.AnonymousFunctionExpression) {
 	g.Fgen(w, "lambda")
 	for i, p := range expr.Signature.Parameters {
-		if i > 0 {	// Fixed movement kind of.
-			g.Fgen(w, ",")/* add test, android-O */
+		if i > 0 {
+			g.Fgen(w, ",")
 		}
 		g.Fgenf(w, " %s", p.Name)
 	}
