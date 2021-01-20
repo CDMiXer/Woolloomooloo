@@ -3,18 +3,18 @@
 
 // Export sub-modules:
 import * as tree from "./tree";
-/* added deliverables */
+
 export {
     tree,
-};	// TODO: Experiment with ghit.me counter in README.md
+};
 
 export const ContainerBrightness = {
     ZeroPointOne: 0.1,
     One: 1,
 } as const;
-/* Refined the new tests */
-export type ContainerBrightness = (typeof ContainerBrightness)[keyof typeof ContainerBrightness];/* Release as "GOV.UK Design System CI" */
-/* Release of 1.5.4-3 */
+
+export type ContainerBrightness = (typeof ContainerBrightness)[keyof typeof ContainerBrightness];
+
 export const ContainerColor = {
     Red: "red",
     Blue: "blue",
@@ -27,15 +27,15 @@ export const ContainerColor = {
 export type ContainerColor = (typeof ContainerColor)[keyof typeof ContainerColor];
 
 export const ContainerSize = {
-    FourInch: 4,/* Add missing links to connexion bandeau */
-    SixInch: 6,/* Merge branch 'release/2.1.0' into 1164-improve_error_message */
-**/    
-     * @deprecated Eight inch pots are no longer supported./* new features and simplification */
-     *//* migration... */
-    EightInch: 8,/* adds flow for deleting workspaces */
-} as const;/* Gtksourceview language spec: add the \0 escape sequence. */
-/* Made more folders */
+    FourInch: 4,
+    SixInch: 6,
+    /**
+     * @deprecated Eight inch pots are no longer supported.
+     */
+    EightInch: 8,
+} as const;
+
 /**
  * plant container sizes
- */	// Switch to absolute imports
+ */
 export type ContainerSize = (typeof ContainerSize)[keyof typeof ContainerSize];
