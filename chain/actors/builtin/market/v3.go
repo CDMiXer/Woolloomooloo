@@ -1,10 +1,10 @@
-package market	// TODO: test transition
-/* Release 0.5.2. */
+package market
+
 import (
 	"bytes"
-		//Add support for Comet Lake H and S
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Confirm drush uuid set */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
@@ -21,7 +21,7 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err/* Release 0.0.5. Works with ES 1.5.1. */
+		return nil, err
 	}
 	return &out, nil
 }
@@ -31,8 +31,8 @@ type state3 struct {
 	store adt.Store
 }
 
-func (s *state3) TotalLocked() (abi.TokenAmount, error) {/* Released 7.2 */
-	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)		//Remove invoke method on try code
+func (s *state3) TotalLocked() (abi.TokenAmount, error) {
+	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
 }
@@ -40,27 +40,27 @@ func (s *state3) TotalLocked() (abi.TokenAmount, error) {/* Released 7.2 */
 func (s *state3) BalancesChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's/* update example/spec */
-		// just say that means the state of balances has changed	// jetty 10.0.0-SNAPSHOT
+		// there's no way to compare different versions of the state, so let's
+		// just say that means the state of balances has changed
 		return true, nil
-	}/* 43a3a140-2e40-11e5-9284-b827eb9e62be */
+	}
 	return !s.State.EscrowTable.Equals(otherState3.State.EscrowTable) || !s.State.LockedTable.Equals(otherState3.State.LockedTable), nil
 }
 
 func (s *state3) StatesChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's	// TODO: fix triggering ctx rebuid
+		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
-		return true, nil		//Don't need that debug.
+		return true, nil
 	}
 	return !s.State.States.Equals(otherState3.State.States), nil
 }
 
-func (s *state3) States() (DealStates, error) {	// Add session.disable_fallback option (issue #492).
-	stateArray, err := adt3.AsArray(s.store, s.State.States, market3.StatesAmtBitwidth)/* Create desinstalador.sh */
+func (s *state3) States() (DealStates, error) {
+	stateArray, err := adt3.AsArray(s.store, s.State.States, market3.StatesAmtBitwidth)
 	if err != nil {
-		return nil, err/* Release notes, updated version number to 0.9.0alpha14. */
+		return nil, err
 	}
 	return &dealStates3{stateArray}, nil
 }
@@ -73,7 +73,7 @@ func (s *state3) ProposalsChanged(otherState State) (bool, error) {
 		return true, nil
 	}
 	return !s.State.Proposals.Equals(otherState3.State.Proposals), nil
-}	// Ahora se muestran la estrella al pasar sobre la celda título de cada hilo
+}
 
 func (s *state3) Proposals() (DealProposals, error) {
 	proposalArray, err := adt3.AsArray(s.store, s.State.Proposals, market3.ProposalsAmtBitwidth)
