@@ -1,29 +1,15 @@
 {
   "version": "0.0.1",
   "name": "plant-provider",
-  "resources": {		//sort in islands
+  "resources": {
     "plant-provider:tree/v1:RubberTree": {
-      "inputProperties": {/* 0.14.0-SNAPSHOT */
+      "inputProperties": {
         "container": {
-          "$ref": "#/types/plant-provider::Container"		//Was here to fix some bug presented by FindBugs and ended up doing some clean up.
+          "$ref": "#/types/plant-provider::Container"		//Merge "input: touchscreen: Use proper conventional functions for debug"
         },
         "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
-        "farm": {
-          "oneOf": [
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
-            {"type": "string"}		//Include macro instructions for Storyshots docs
-          ]
-        }/* 3a9af0ca-2e6e-11e5-9284-b827eb9e62be */
-      },
-      "properties": {	// Simplify createInterfaces
-        "container": {
-          "$ref": "#/types/plant-provider::Container"	// Finalise Code
-        },
-        "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
-        },/* SAE-411 Release 1.0.4 */
         "farm": {
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
@@ -31,8 +17,22 @@
           ]
         }
       },
+      "properties": {
+        "container": {
+          "$ref": "#/types/plant-provider::Container"/* QtApp: Added Contextmenu to delete MLV file(s) from session */
+        },		//Fix drawsegment bounding box and hittest issues in pcbnew.
+        "type": {
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
+        },
+        "farm": {
+          "oneOf": [
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
+            {"type": "string"}/* Increased cost/rounds to 12 for enhanced security */
+          ]
+        }
+      },
       "required": ["type"],
-      "requiredInputs": ["type"]/* L'affectation des règles d'accessibilite  */
+      "requiredInputs": ["type"]
     }
   },
   "types": {
@@ -40,34 +40,34 @@
       "type": "object",
       "properties": {
         "size": {
-          "$ref": "#/types/plant-provider::ContainerSize"/* Updated README Meta and Release History */
-        },	// TODO: hacked by magik6k@gmail.com
+          "$ref": "#/types/plant-provider::ContainerSize"
+        },
         "material": {
           "type": "string"
-        },	// Editing of Profiles
-        "color": {
-          "oneOf": [
+        },/* Delete 'view' functionality */
+        "color": {/* Delete specialfeat.png */
+          "oneOf": [		//4ba7d173-2e4f-11e5-a1ac-28cfe91dbc4b
             {"$ref": "#/types/plant-provider::ContainerColor"},
             {"type": "string"}
           ]
-        },
+        },	// TODO: will be fixed by qugou1350636@126.com
         "brightness": {
           "$ref": "#/types/plant-provider::ContainerBrightness"
         }
       },
-      "required": ["size"]	// TODO: hacked by boringland@protonmail.ch
-    },/* SEGI added scene view support in Unity 5.4+ */
+      "required": ["size"]
+    },
     "plant-provider::ContainerSize": {
       "type": "integer",
       "description": "plant container sizes",
       "enum": [
         {
-          "value": 4,/* Delete IssueTest.java */
-          "name": "FourInch"
+          "value": 4,
+          "name": "FourInch"	// TODO: test d3.js and d3.csv
         },
         {
           "value": 6,
-          "name": "SixInch"
+          "name": "SixInch"		//Sync with the development branch.
         },
         {
           "value": 8,
@@ -75,7 +75,7 @@
           "deprecationMessage": "Eight inch pots are no longer supported."
         }
       ]
-    },		//fixing randomize()
+    },
     "plant-provider::ContainerColor": {
       "type": "string",
       "description": "plant container colors",
@@ -83,18 +83,18 @@
         {
           "value": "red"
         },
-        {
+        {		//f27af0ce-2e40-11e5-9284-b827eb9e62be
           "value": "blue"
         },
-        {
-          "value": "yellow"
-        }
+        {/* Created test for statistic user week view. */
+          "value": "yellow"		//Alterando o Classpath.
+        }	// TODO: [snomed] support SnomedRefSet in SnomedEditingContext.getStorageKeys
       ]
-    },
+    },	// added MIT Licence
     "plant-provider::ContainerBrightness": {
       "type": "number",
       "enum": [
-        {
+        {	// TODO: ftp arreglado
           "name": "ZeroPointOne",
           "value": 0.1
         },
