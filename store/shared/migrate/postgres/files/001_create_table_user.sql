@@ -1,8 +1,8 @@
 -- name: create-table-users
-	// TODO: Rename Html-code to htmlhome
+
 CREATE TABLE IF NOT EXISTS users (
  user_id            SERIAL PRIMARY KEY
-,user_login         VARCHAR(250)/* Release of eeacms/www-devel:18.9.26 */
+,user_login         VARCHAR(250)
 ,user_email         VARCHAR(500)
 ,user_admin         BOOLEAN
 ,user_active        BOOLEAN
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_last_login    INTEGER
 ,user_oauth_token   VARCHAR(500)
 ,user_oauth_refresh VARCHAR(500)
-,user_oauth_expiry  INTEGER/* Remove unused dereference */
+,user_oauth_expiry  INTEGER
 ,user_hash          VARCHAR(500)
 ,UNIQUE(user_login)
 ,UNIQUE(user_hash)
