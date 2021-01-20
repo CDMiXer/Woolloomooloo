@@ -1,21 +1,21 @@
-{
+{		//Fixed detected bugs
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",		//sched: wait prepare/cleanup support wake results
+        "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
-        "sourceMap": true,
-        "stripInternal": true,/* Release of eeacms/www-devel:19.3.9 */
+        "declaration": true,	// TODO: hacked by arajasek94@gmail.com
+        "sourceMap": true,	// LPWtool-834: Added our css and img files, removed default css and img.
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* set autoReleaseAfterClose=false */
-        "noImplicitReturns": true,		//Solved the logo problem at navigation bar
-        "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true,/* Get rid of slow-ass node-sass download */
+        "strictNullChecks": true/* Release 1.0.0-CI00092 */
     },
     "files": [
         "index.ts"
-    ]/* Forgot NDEBUG in the Release config. */
-}	// TODO: will be fixed by why@ipfs.io
+    ]
+}/* CHANGE: Release notes for 1.0 */
 
