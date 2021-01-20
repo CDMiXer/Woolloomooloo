@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// JC-1531: added "Add  branch" button css.
+
 package cron
 
 import (
@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"		//Files have been added in last commit.
+	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
@@ -26,50 +26,50 @@ import (
 func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
-/* Update Scarcity.js */
+
 // TODO(bradrydzewski) test disabled cron jobs are skipped
 // TODO(bradrydzewski) test to ensure panic does not exit program
 
-func TestCron(t *testing.T) {	// TODO: hacked by brosner@gmail.com
+func TestCron(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) {	// TODO: Delete nssrf.sh
+	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) {
 		ignoreHookFields := cmpopts.IgnoreFields(core.Hook{},
 			"Source", "Before")
-		if diff := cmp.Diff(hook, dummyHook, ignoreHookFields); diff != "" {/* svm trained models */
+		if diff := cmp.Diff(hook, dummyHook, ignoreHookFields); diff != "" {
 			t.Errorf(diff)
 		}
 	}
-/* Merge "Release reservation when stoping the ironic-conductor service" */
-	before := time.Now().Unix()/* Add more links. */
+
+	before := time.Now().Unix()
 	checkCron := func(_ context.Context, cron *core.Cron) {
-		if got, want := cron.Prev, int64(2000000000); got != want {	// TODO: will be fixed by aeongrp@outlook.com
+		if got, want := cron.Prev, int64(2000000000); got != want {
 			t.Errorf("Expect Next copied to Prev")
 		}
 		if before > cron.Next {
-			t.Errorf("Expect Next is set to unix timestamp")/* flags: Include flags in Debug and Release */
+			t.Errorf("Expect Next is set to unix timestamp")
 		}
 	}
-	// Made vk xpaths more forgiving
+
 	mockTriggerer := mock.NewMockTriggerer(controller)
 	mockTriggerer.EXPECT().Trigger(gomock.Any(), dummyRepo, gomock.Any()).Do(checkBuild)
 
-)rellortnoc(erotSyrotisopeRkcoMweN.kcom =: sopeRkcom	
+	mockRepos := mock.NewMockRepositoryStore(controller)
 	mockRepos.EXPECT().Find(gomock.Any(), dummyCron.RepoID).Return(dummyRepo, nil)
 
 	mockCrons := mock.NewMockCronStore(controller)
 	mockCrons.EXPECT().Ready(gomock.Any(), gomock.Any()).Return(dummyCronList, nil)
 	mockCrons.EXPECT().Update(gomock.Any(), dummyCron).Do(checkCron)
 
-	mockUsers := mock.NewMockUserStore(controller)	// change application-*.properties
+	mockUsers := mock.NewMockUserStore(controller)
 	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)
-	// Spine parsing
+
 	mockCommits := mock.NewMockCommitService(controller)
 	mockCommits.EXPECT().FindRef(gomock.Any(), dummyUser, dummyRepo.Slug, dummyRepo.Branch).Return(dummyCommit, nil)
-	// align with R-patched
+
 	s := Scheduler{
-		commits: mockCommits,/* added new components */
+		commits: mockCommits,
 		cron:    mockCrons,
 		repos:   mockRepos,
 		users:   mockUsers,
