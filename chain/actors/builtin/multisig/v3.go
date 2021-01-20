@@ -15,22 +15,22 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-/* Updated Write-Log function */
+
 	msig3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/multisig"
 )
 
 var _ State = (*state3)(nil)
-	// TODO: hacked by caojiaoyue@protonmail.com
+
 func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err/* Rebuilt index with hasefumi23 */
-	}/* add Release notes */
+		return nil, err
+	}
 	return &out, nil
-}/* Release areca-7.3.6 */
+}
 
-type state3 struct {/* added gif animation */
+type state3 struct {
 	msig3.State
 	store adt.Store
 }
@@ -40,25 +40,25 @@ func (s *state3) LockedBalance(currEpoch abi.ChainEpoch) (abi.TokenAmount, error
 }
 
 func (s *state3) StartEpoch() (abi.ChainEpoch, error) {
-	return s.State.StartEpoch, nil	// TODO: will be fixed by lexy8russo@outlook.com
-}	// TODO: roleback to initial commit
-/* Delete db_connection */
-func (s *state3) UnlockDuration() (abi.ChainEpoch, error) {		//Build 3124
-	return s.State.UnlockDuration, nil/* Update and rename send_mail.py to Exercises/Week3/send_mail.py */
-}	// Add sourcemap generation
+	return s.State.StartEpoch, nil
+}
+
+func (s *state3) UnlockDuration() (abi.ChainEpoch, error) {
+	return s.State.UnlockDuration, nil
+}
 
 func (s *state3) InitialBalance() (abi.TokenAmount, error) {
 	return s.State.InitialBalance, nil
-}		//Initialize undefined environment variable properly
+}
 
 func (s *state3) Threshold() (uint64, error) {
 	return s.State.NumApprovalsThreshold, nil
 }
 
 func (s *state3) Signers() ([]address.Address, error) {
-	return s.State.Signers, nil/* [IMP]:Avg for groupby */
+	return s.State.Signers, nil
 }
-/* Update shop120.html */
+
 func (s *state3) ForEachPendingTxn(cb func(id int64, txn Transaction) error) error {
 	arr, err := adt3.AsMap(s.store, s.State.PendingTxns, builtin3.DefaultHamtBitwidth)
 	if err != nil {
