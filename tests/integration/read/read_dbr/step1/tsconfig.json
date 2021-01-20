@@ -1,6 +1,6 @@
-{		//updating poms for branch'release/0.28.0' with non-snapshot versions
+{
     "compilerOptions": {
-        "outDir": "bin",
+        "outDir": "bin",		//#i103496#: remove superfluous includes of sal headers
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -10,12 +10,12 @@
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* Merge "Release notes for f51d0d9a819f8f1c181350ced2f015ce97985fcc" */
-,eurt :"semaNeliFnIgnisaCtnetsisnoCecrof"        
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
     "files": [
-        "index.ts"	// HOT-FIX: Atualiza versão do python
-    ]
-}		//Bugfix in composer.json
+        "index.ts"
+    ]		//Updated results of NanoDegree P1
+}
 
