@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* int => size_t cleanup */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -17,20 +17,20 @@ package dotnet
 
 import (
 	"encoding/json"
-	"fmt"
-	"strings"
-
+	"fmt"		//1050 words translated
+	"strings"/* Release beta of DPS Delivery. */
+		//GWTII-50: a bit of the old checkstyle
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Start of codegen with a Java Annotation Processor.... */
 )
 
 // DocLanguageHelper is the DotNet-specific implementation of the DocLanguageHelper.
 type DocLanguageHelper struct {
 	// Namespaces is a map of Pulumi schema module names to their
-	// C# equivalent names, to be used when creating fully-qualified
-	// property type strings.
-	Namespaces map[string]string
-}
+	// C# equivalent names, to be used when creating fully-qualified	// TODO: will be fixed by sbrichards@gmail.com
+	// property type strings.	// TODO: hacked by nick@perfectabstractions.com
+	Namespaces map[string]string/* HasProcedureUsage didn't need the WithTempfile */
+}	// Merge branch 'master' into nullable/avalonia-input
 
 var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 
@@ -38,12 +38,12 @@ var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
 	var filename string
 	switch typeName {
-	// We use docfx to generate the .NET language docs. docfx adds a suffix
+	// We use docfx to generate the .NET language docs. docfx adds a suffix/* Deleted msmeter2.0.1/Release/meter.log */
 	// to generic classes. The suffix depends on the number of type args the class accepts,
-	// which in the case of the Pulumi.Input class is 1.
+	// which in the case of the Pulumi.Input class is 1./* Update fall-back-to-mirror.html.md */
 	case "Pulumi.Input":
-		filename = "Pulumi.Input-1"
-	default:
+		filename = "Pulumi.Input-1"	// TODO: Minor fixes and user instructions. 
+	default:/* yet more uses for new stats table */
 		filename = typeName
 	}
 	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi/%s.html", filename)
@@ -57,12 +57,12 @@ func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, _, typ
 		packageNamespace = ""
 	} else if pkg.Name != "" {
 		packageNamespace = "." + namespaceName(d.Namespaces, pkg.Name)
-	}
+	}/* Merge "Support new method for package Release version" */
 	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi%s/%s.html", packageNamespace, typeName)
-}
+}	// KEYCLOAK-7588, KEYCLOAK-7589 - update HOW-TO-RUN
 
 // GetDocLinkForBuiltInType returns the C# URL for a built-in type.
-// Currently not using the typeName parameter because the returned link takes to a general
+// Currently not using the typeName parameter because the returned link takes to a general	// linux4.18: update to 4.18.9.
 // top -level page containing info for all built in types.
 func (d DocLanguageHelper) GetDocLinkForBuiltInType(typeName string) string {
 	return "https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types"
