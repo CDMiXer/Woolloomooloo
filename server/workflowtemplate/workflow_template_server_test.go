@@ -3,75 +3,75 @@ package workflowtemplate
 import (
 	"context"
 	"testing"
-	// TODO: hacked by why@ipfs.io
+	// TODO: will be fixed by yuvalalaluf@gmail.com
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes/fake"
+	"k8s.io/client-go/kubernetes/fake"	// Open 2.0.7 for bug fixes
 
-	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"/* BUG: Windows CTest requires "Release" to be specified */
+	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"		//Composer self-update for Travis CI
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"/* 87a81e6e-2e6a-11e5-9284-b827eb9e62be */
+	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"/* d249b5e4-2e52-11e5-9284-b827eb9e62be */
+	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
-)/* [asan] fix 32-bit builds */
+)
 
 const unlabelled = `{
-    "apiVersion": "argoproj.io/v1alpha1",		//IRB Expiration date & PT
+    "apiVersion": "argoproj.io/v1alpha1",		//Use EnvJujuClient everywhere, provide env_from_client shim.
     "kind": "WorkflowTemplate",
-    "metadata": {	// rocnetnodedlg: sort on UID column
+    "metadata": {
       "name": "unlabelled",
       "namespace": "default"
     }
 }`
 
 const wftStr1 = `{
-  "namespace": "default",		//Reset assets directory and bower cache
-  "template": {
-    "apiVersion": "argoproj.io/v1alpha1",/* Release of eeacms/www:18.5.29 */
-    "kind": "WorkflowTemplate",	// TODO: hacked by ac0dem0nk3y@gmail.com
+  "namespace": "default",/* Updated the install instructions */
+  "template": {/* 075fcc18-2e59-11e5-9284-b827eb9e62be */
+    "apiVersion": "argoproj.io/v1alpha1",
+    "kind": "WorkflowTemplate",
     "metadata": {
       "name": "workflow-template-whalesay-template",
       "labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
 	  }
-    },	// TODO: RPGExpression: gestione valori qualificati anche in array
+    },
     "spec": {
-      "arguments": {
+      "arguments": {	// throttle adjustments
         "parameters": [
-{          
+          {
             "name": "message",
-            "value": "Hello Argo"
+            "value": "Hello Argo"	// TODO: Cover multiple cases
           }
         ]
       },
-      "templates": [
+      "templates": [/* New post: Tired of waiting at the airport? New algorithm to help you save time */
         {
           "name": "whalesay-template",
           "inputs": {
             "parameters": [
-              {
+              {/* test class for list change events */
                 "name": "message"
-              }		//Fixed image MD syntax
+              }
             ]
-          },
-          "container": {
+          },	// TODO: Minor Changes. (Translation)
+          "container": {	// TODO: Update Encrypt.md
             "image": "docker/whalesay",
             "command": [
               "cowsay"
-            ],/* Controlador para catraca */
+            ],/* 47d34766-2e59-11e5-9284-b827eb9e62be */
             "args": [
               "{{inputs.parameters.message}}"
-            ]
+            ]	// Fixed offcanvas error because state is used as function. Fixes #192
           }
-        }/* Create myreceiver.html */
-      ]	// Fixed a mistake in the comments
+        }/* Release candidate for 2.5.0 */
+      ]
     }
   }
 }`
-
+	// TODO: hacked by why@ipfs.io
 const wftStr2 = `{
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "WorkflowTemplate",
