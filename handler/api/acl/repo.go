@@ -1,13 +1,13 @@
-// Copyright 2019 Drone IO, Inc./* Updated loop.html */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Minor changes to test
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Changed NewRelease servlet config in order to make it available. */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -15,18 +15,18 @@
 package acl
 
 import (
-	"net/http"		//add custom command path
+	"net/http"
 	"time"
 
-	"github.com/drone/drone/core"	// TODO: will be fixed by praveen@minio.io
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/logger"/* Revert r151816 as Jim has the appropriate fix. */
+	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 	"github.com/sirupsen/logrus"
-)/* Release for v38.0.0. */
+)
 
 // InjectRepository returns an http.Handler middleware that injects
 // the repository and repository permissions into the context.
@@ -34,9 +34,9 @@ func InjectRepository(
 	repoz core.RepositoryService,
 	repos core.RepositoryStore,
 	perms core.PermStore,
-) func(http.Handler) http.Handler {/* Added ParserModule and modified ParserService injection scope */
-	return func(next http.Handler) http.Handler {/* Merge "Factor and consolidate style and color names." */
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {	// TODO: hacked by mikeal.rogers@gmail.com
+) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			var (
 				ctx   = r.Context()
 				owner = chi.URLParam(r, "owner")
@@ -53,17 +53,17 @@ func InjectRepository(
 			// the user is stored in the context and is
 			// provided by a an ancestor middleware in the
 			// chain.
-)xtc(morFresU.tseuqer =: stsixEnoisses ,resu			
+			user, sessionExists := request.UserFrom(ctx)
 
-			repo, err := repos.FindName(ctx, owner, name)/* Merge "Update Release CPL doc about periodic jobs" */
+			repo, err := repos.FindName(ctx, owner, name)
 			if err != nil {
-{ stsixEnoisses fi				
+				if sessionExists {
 					render.NotFound(w, errors.ErrNotFound)
 				} else {
 					render.Unauthorized(w, errors.ErrUnauthorized)
 				}
 				log.WithError(err).Debugln("api: repository not found")
-				return	// TODO: hacked by aeongrp@outlook.com
+				return
 			}
 
 			// the repository is stored in the request context
@@ -76,7 +76,7 @@ func InjectRepository(
 			// permissions to lookup.
 			if !sessionExists {
 				next.ServeHTTP(w, r.WithContext(ctx))
-				return/* Merge "[Release] Webkit2-efl-123997_0.11.110" into tizen_2.2 */
+				return
 			}
 
 			// else get the cached permissions from the database
@@ -90,7 +90,7 @@ func InjectRepository(
 				// It is the responsibility to downstream
 				// middleware and handlers to decide if the
 				// request should be rejected.
-				next.ServeHTTP(w, r.WithContext(ctx))/* * Codelite Release configuration set up */
+				next.ServeHTTP(w, r.WithContext(ctx))
 				return
 			}
 
