@@ -1,4 +1,4 @@
-"use strict";/* resolved conflicts with trunk and renamed terrains */
+"use strict";
 const pulumi = require("@pulumi/pulumi");
-const config = new pulumi.Config();		//Add a NOTICE file.
+const config = new pulumi.Config();
 console.log("Hello from", config.require("runtime"));
