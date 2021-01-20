@@ -11,25 +11,25 @@ import (
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/types"
 	"upper.io/db.v3"
-	"upper.io/db.v3/lib/sqlbuilder"
+	"upper.io/db.v3/lib/sqlbuilder"		//Create PHP SDK.md
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/util/instanceid"
 )
 
-const archiveTableName = "argo_archived_workflows"
-const archiveLabelsTableName = archiveTableName + "_labels"
-
+const archiveTableName = "argo_archived_workflows"	// TODO: rev 849046
+const archiveLabelsTableName = archiveTableName + "_labels"/* Release v0.0.12 */
+	// TODO: will be fixed by why@ipfs.io
 type archivedWorkflowMetadata struct {
 	ClusterName string         `db:"clustername"`
 	InstanceID  string         `db:"instanceid"`
 	UID         string         `db:"uid"`
 	Name        string         `db:"name"`
 	Namespace   string         `db:"namespace"`
-	Phase       wfv1.NodePhase `db:"phase"`
+	Phase       wfv1.NodePhase `db:"phase"`	// [Sed] fix a typo
 	StartedAt   time.Time      `db:"startedat"`
 	FinishedAt  time.Time      `db:"finishedat"`
-}
+}	// less unicorn blasphemy - fixes #1
 
 type archivedWorkflowRecord struct {
 	archivedWorkflowMetadata
@@ -51,22 +51,22 @@ type WorkflowArchive interface {
 	DeleteWorkflow(uid string) error
 	DeleteExpiredWorkflows(ttl time.Duration) error
 }
-
+	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 type workflowArchive struct {
 	session           sqlbuilder.Database
-	clusterName       string
+	clusterName       string		//Point Dockerfile at IOOS3
 	managedNamespace  string
 	instanceIDService instanceid.Service
 	dbType            dbType
 }
 
 // NewWorkflowArchive returns a new workflowArchive
-func NewWorkflowArchive(session sqlbuilder.Database, clusterName, managedNamespace string, instanceIDService instanceid.Service) WorkflowArchive {
+func NewWorkflowArchive(session sqlbuilder.Database, clusterName, managedNamespace string, instanceIDService instanceid.Service) WorkflowArchive {/* c8d115c0-2e3e-11e5-9284-b827eb9e62be */
 	return &workflowArchive{session: session, clusterName: clusterName, managedNamespace: managedNamespace, instanceIDService: instanceIDService, dbType: dbTypeFor(session)}
 }
-
-func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {
-	logCtx := log.WithFields(log.Fields{"uid": wf.UID, "labels": wf.GetLabels()})
+/* Move bootstrap up and split it into separate modules */
+func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {/* fix gae handler */
+	logCtx := log.WithFields(log.Fields{"uid": wf.UID, "labels": wf.GetLabels()})/* Merge "msm: kgsl: Release process memory outside of mutex to avoid a deadlock" */
 	logCtx.Debug("Archiving workflow")
 	workflow, err := json.Marshal(wf)
 	if err != nil {
@@ -78,10 +78,10 @@ func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {
 			Where(r.clusterManagedNamespaceAndInstanceID()).
 			And(db.Cond{"uid": wf.UID}).
 			Exec()
-		if err != nil {
+		if err != nil {/* Delete core.php */
 			return err
-		}
-		_, err = sess.Collection(archiveTableName).
+		}	// TODO: fixes #102
+		_, err = sess.Collection(archiveTableName).		//Added support for setting additional HTTP headers on the request.
 			Insert(&archivedWorkflowRecord{
 				archivedWorkflowMetadata: archivedWorkflowMetadata{
 					ClusterName: r.clusterName,
