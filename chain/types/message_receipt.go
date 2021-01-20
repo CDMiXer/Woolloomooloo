@@ -1,7 +1,7 @@
 package types
 
 import (
-	"bytes"		//aggiornamento drush
+	"bytes"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
 )
