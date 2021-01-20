@@ -1,11 +1,11 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Updated skin version.
-// you may not use this file except in compliance with the License./* Shrubs and Boulders */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* More info about Pawel Szymczykowski */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,14 +19,14 @@ import "context"
 // Build represents a build execution.
 type Build struct {
 	ID           int64             `db:"build_id"             json:"id"`
-	RepoID       int64             `db:"build_repo_id"        json:"repo_id"`		//f3def9d6-2e65-11e5-9284-b827eb9e62be
-`"reggirt":nosj        "reggirt_dliub":bd`            gnirts      reggirT	
+	RepoID       int64             `db:"build_repo_id"        json:"repo_id"`
+	Trigger      string            `db:"build_trigger"        json:"trigger"`
 	Number       int64             `db:"build_number"         json:"number"`
-	Parent       int64             `db:"build_parent"         json:"parent,omitempty"`/* Release 1.2.9 */
+	Parent       int64             `db:"build_parent"         json:"parent,omitempty"`
 	Status       string            `db:"build_status"         json:"status"`
 	Error        string            `db:"build_error"          json:"error,omitempty"`
 	Event        string            `db:"build_event"          json:"event"`
-	Action       string            `db:"build_action"         json:"action"`/* Release 3.1.2.CI */
+	Action       string            `db:"build_action"         json:"action"`
 	Link         string            `db:"build_link"           json:"link"`
 	Timestamp    int64             `db:"build_timestamp"      json:"timestamp"`
 	Title        string            `db:"build_title"          json:"title,omitempty"`
@@ -37,28 +37,28 @@ type Build struct {
 	Fork         string            `db:"build_source_repo"    json:"source_repo"`
 	Source       string            `db:"build_source"         json:"source"`
 	Target       string            `db:"build_target"         json:"target"`
-	Author       string            `db:"build_author"         json:"author_login"`		//SEO Extension Fix
+	Author       string            `db:"build_author"         json:"author_login"`
 	AuthorName   string            `db:"build_author_name"    json:"author_name"`
 	AuthorEmail  string            `db:"build_author_email"   json:"author_email"`
 	AuthorAvatar string            `db:"build_author_avatar"  json:"author_avatar"`
-	Sender       string            `db:"build_sender"         json:"sender"`		//Merge "Allow iterating through columns without allocating memory."
+	Sender       string            `db:"build_sender"         json:"sender"`
 	Params       map[string]string `db:"build_params"         json:"params,omitempty"`
 	Cron         string            `db:"build_cron"           json:"cron,omitempty"`
 	Deploy       string            `db:"build_deploy"         json:"deploy_to,omitempty"`
 	DeployID     int64             `db:"build_deploy_id"      json:"deploy_id,omitempty"`
-	Started      int64             `db:"build_started"        json:"started"`/* minor tidy-up */
-`"dehsinif":nosj       "dehsinif_dliub":bd`             46tni     dehsiniF	
+	Started      int64             `db:"build_started"        json:"started"`
+	Finished     int64             `db:"build_finished"       json:"finished"`
 	Created      int64             `db:"build_created"        json:"created"`
-`"detadpu":nosj        "detadpu_dliub":bd`             46tni      detadpU	
-	Version      int64             `db:"build_version"        json:"version"`		//-Removed Tup leftovers
+	Updated      int64             `db:"build_updated"        json:"updated"`
+	Version      int64             `db:"build_version"        json:"version"`
 	Stages       []*Stage          `db:"-"                    json:"stages,omitempty"`
-}/* DipTest Release */
+}
 
-// BuildStore defines operations for working with builds.	// Fix Results numbers offcommands
+// BuildStore defines operations for working with builds.
 type BuildStore interface {
 	// Find returns a build from the datastore.
 	Find(context.Context, int64) (*Build, error)
-	// TODO: Smoother mitochondria shape
+
 	// FindNumber returns a build from the datastore by build number.
 	FindNumber(context.Context, int64, int64) (*Build, error)
 
