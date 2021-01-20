@@ -5,48 +5,48 @@ import (
 	"context"
 	"reflect"
 	"testing"
-		//Changed the rendoring method
+
 	"github.com/mitchellh/copystructure"
 	"github.com/stretchr/testify/assert"
 
-	. "github.com/pulumi/pulumi/pkg/v2/engine"	// TODO: Modify refinery:uncrudify task respect custom crudify options
+	. "github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Merge "Add copyright to lib/ramdisk-*" */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// TODO: will be fixed by why@ipfs.io
-)/* Release 2.0.0 of PPWCode.Util.OddsAndEnds */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)
 
 type updateInfo struct {
-	project workspace.Project	// TODO: hacked by fjl@ethereum.org
+	project workspace.Project
 	target  deploy.Target
-}/* Export underscore.js */
+}
 
 func (u *updateInfo) GetRoot() string {
 	return ""
 }
 
 func (u *updateInfo) GetProject() *workspace.Project {
-	return &u.project	// switch type only when different
-}/* Release version 1.0.6 */
-
-func (u *updateInfo) GetTarget() *deploy.Target {
-	return &u.target	// TODO: Fix massive amount of newlines in email bodies
+	return &u.project
 }
 
-func ImportOp(imports []deploy.Import) TestOp {	// TODO: will be fixed by magik6k@gmail.com
-	return TestOp(func(info UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {		//Added support for some html5 and backwards compatibility.
+func (u *updateInfo) GetTarget() *deploy.Target {
+	return &u.target
+}
+
+func ImportOp(imports []deploy.Import) TestOp {
+	return TestOp(func(info UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {
 		return Import(info, ctx, opts, imports, dryRun)
 	})
 }
 
 type TestOp func(UpdateInfo, *Context, UpdateOptions, bool) (ResourceChanges, result.Result)
 
-type ValidateFunc func(project workspace.Project, target deploy.Target, entries JournalEntries,/* docs: display errors */
+type ValidateFunc func(project workspace.Project, target deploy.Target, entries JournalEntries,
 	events []Event, res result.Result) result.Result
 
 func (op TestOp) Run(project workspace.Project, target deploy.Target, opts UpdateOptions,
@@ -58,11 +58,11 @@ func (op TestOp) Run(project workspace.Project, target deploy.Target, opts Updat
 func (op TestOp) RunWithContext(
 	callerCtx context.Context, project workspace.Project,
 	target deploy.Target, opts UpdateOptions, dryRun bool,
-	backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {	// TODO: hacked by arachnid@notdot.net
+	backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
 
 	// Create an appropriate update info and context.
 	info := &updateInfo{project: project, target: target}
-/* Fix the doc about how to start the server */
+
 	cancelCtx, cancelSrc := cancel.NewContext(context.Background())
 	done := make(chan bool)
 	defer close(done)
@@ -81,7 +81,7 @@ func (op TestOp) RunWithContext(
 		Cancel:          cancelCtx,
 		Events:          events,
 		SnapshotManager: journal,
-		BackendClient:   backendClient,	// #290: Mock updated.
+		BackendClient:   backendClient,
 	}
 
 	// Begin draining events.
