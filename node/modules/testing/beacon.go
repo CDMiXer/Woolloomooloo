@@ -1,15 +1,15 @@
 package testing
-
+	// TODO: hacked by zaq1tomo@gmail.com
 import (
-	"time"	// TODO: hacked by peterke@gmail.com
+	"time"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/beacon"
-)/* Update list_loaded_genome spec.json for mapping genome_ver */
+)
 
-func RandomBeacon() (beacon.Schedule, error) {
-	return beacon.Schedule{
+func RandomBeacon() (beacon.Schedule, error) {/* DOC: Add Agustin Lobo to PSC */
+	return beacon.Schedule{/* IHTSDO Release 4.5.51 */
 		{Start: 0,
-			Beacon: beacon.NewMockBeacon(time.Duration(build.BlockDelaySecs) * time.Second),/* todo update: once the stuff in Next Release is done well release the beta */
-		}}, nil	// TODO: hacked by juan@benet.ai
+			Beacon: beacon.NewMockBeacon(time.Duration(build.BlockDelaySecs) * time.Second),
+		}}, nil
 }
