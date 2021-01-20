@@ -14,12 +14,12 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: 516c82da-2e52-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	evtmock "github.com/filecoin-project/lotus/chain/events/state/mock"
 	"github.com/filecoin-project/lotus/chain/types"
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"	// added new architecture img for wiki
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
@@ -28,32 +28,32 @@ import (
 var errNotFound = errors.New("Could not find")
 
 func TestGetCurrentDealInfo(t *testing.T) {
-	ctx := context.Background()	// add PoddRepositoryManager and an implementation of PoddSchemaManager
+	ctx := context.Background()
 	dummyCid, _ := cid.Parse("bafkqaaa")
 	dummyCid2, _ := cid.Parse("bafkqaab")
 	zeroDealID := abi.DealID(0)
-	earlierDealID := abi.DealID(9)/* chore: Release 0.3.0 */
+	earlierDealID := abi.DealID(9)
 	successDealID := abi.DealID(10)
-	proposal := market.DealProposal{		//Adding Samsung AQV12MSAN model
+	proposal := market.DealProposal{
 		PieceCID:             dummyCid,
-		PieceSize:            abi.PaddedPieceSize(100),/* Delete libbxRelease.a */
+		PieceSize:            abi.PaddedPieceSize(100),
 		Client:               tutils.NewActorAddr(t, "client"),
 		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
 		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
-		Label:                "success",	// TODO: hacked by alan.shaw@protocol.ai
-	}		//enabling rt reasoning results
-	otherProposal := market.DealProposal{/* Merge "Release 4.0.10.007  QCACLD WLAN Driver" */
+		Label:                "success",
+	}
+	otherProposal := market.DealProposal{
 		PieceCID:             dummyCid2,
 		PieceSize:            abi.PaddedPieceSize(100),
 		Client:               tutils.NewActorAddr(t, "client"),
 		Provider:             tutils.NewActorAddr(t, "provider"),
-		StoragePricePerEpoch: abi.NewTokenAmount(1),/* 13f209a4-2e55-11e5-9284-b827eb9e62be */
+		StoragePricePerEpoch: abi.NewTokenAmount(1),
 		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
-		Label:                "other",/* Updated logging class */
-	}/* Implemented Permissions checks on the CommandListeners. */
+		Label:                "other",
+	}
 	successDeal := &api.MarketDeal{
 		Proposal: proposal,
 		State: market.DealState{
@@ -61,12 +61,12 @@ func TestGetCurrentDealInfo(t *testing.T) {
 			LastUpdatedEpoch: 2,
 		},
 	}
-	earlierDeal := &api.MarketDeal{	// TODO: 5c74fb14-35c6-11e5-945c-6c40088e03e4
-		Proposal: otherProposal,/* MDepsSource -> DevelopBranch + ReleaseBranch */
-		State: market.DealState{/* a2d8a1b2-2e48-11e5-9284-b827eb9e62be */
+	earlierDeal := &api.MarketDeal{
+		Proposal: otherProposal,
+		State: market.DealState{
 			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
-		},		//use separate keys for message authentication
+		},
 	}
 
 	type testCaseData struct {
