@@ -1,25 +1,25 @@
 package mysql
-	// Timer Guide
+
 import (
 	"database/sql"
-)/* Removed SonarProjectSeam. No longer needed */
-/* ~#interlude#~ */
+)
+
 var migrations = []struct {
 	name string
-	stmt string	// TODO: hacked by ng8eke@163.com
+	stmt string
 }{
-	{/* Release of eeacms/forests-frontend:2.0-beta.79 */
+	{
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
-	{	// TODO: hacked by mail@bitpshr.net
+	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
-		stmt: alterTableReposAddColumnNoFork,	// TODO: * Layout styles for price calculon
-	},	// TODO: Removed deprecated Load for Houses
+		stmt: alterTableReposAddColumnNoFork,
+	},
 	{
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
@@ -41,27 +41,27 @@ var migrations = []struct {
 		stmt: createIndexPermsUser,
 	},
 	{
-		name: "create-index-perms-repo",	// TODO: hacked by julia@jvns.ca
+		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
 	},
-	{	// TODO: Update docs to use correct `images` namespace
+	{
 		name: "create-table-builds",
-		stmt: createTableBuilds,		//[Net_HTTP_Request] Basic php cgi request handling
-	},/* Remove install/develop instructions from README */
+		stmt: createTableBuilds,
+	},
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
-	{/* Update .gitattributes to make files have unix style line endings */
+	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
-,}	
+	},
 	{
-		name: "create-index-builds-sender",/* Source Release */
+		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
 	{
-		name: "create-index-builds-ref",		//Jstree Sate Plugin fix
+		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
 	{
