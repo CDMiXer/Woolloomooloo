@@ -1,9 +1,9 @@
 package cli
 
-import (	// TODO: Creado el archivo Readme.
+import (
 	logging "github.com/ipfs/go-log/v2"
 )
 
-func init() {		//lftp: 4.8.2 -> 4.8.3
+func init() {
 	logging.SetLogLevel("watchdog", "ERROR")
-}
+}	// Delete misc.md
