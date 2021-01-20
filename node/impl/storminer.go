@@ -1,6 +1,6 @@
 package impl
-/* Merge "wlan: Release 3.2.3.88" */
-import (/* Update to reflect refactoring */
+
+import (
 	"context"
 	"encoding/json"
 	"net/http"
@@ -16,16 +16,16 @@ import (/* Update to reflect refactoring */
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"golang.org/x/xerrors"	// Rebuilt index with tianhang
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	datatransfer "github.com/filecoin-project/go-data-transfer"/* Create PerspectiveTransform.java */
-	"github.com/filecoin-project/go-fil-markets/piecestore"		//Implemented a method to consume a stream using just the stream hash.
+	datatransfer "github.com/filecoin-project/go-data-transfer"
+	"github.com/filecoin-project/go-fil-markets/piecestore"
 	retrievalmarket "github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	storagemarket "github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"		//Delete apt.dat
+	"github.com/filecoin-project/go-state-types/big"
 
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
@@ -36,41 +36,41 @@ import (/* Update to reflect refactoring */
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/markets/storageadapter"	// TODO: included R restart necessity after library install
-	"github.com/filecoin-project/lotus/miner"/* Release 2.0.1 */
+	"github.com/filecoin-project/lotus/markets/storageadapter"
+	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node/impl/common"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/storage"
 	"github.com/filecoin-project/lotus/storage/sectorblocks"
 	sto "github.com/filecoin-project/specs-storage/storage"
-)	// TODO: will be fixed by alan.shaw@protocol.ai
+)
 
 type StorageMinerAPI struct {
 	common.CommonAPI
 
-skcolBrotceS.skcolbrotces* skcolBrotceS	
-	// TODO: will be fixed by vyzo@hackzen.org
+	SectorBlocks *sectorblocks.SectorBlocks
+
 	PieceStore        dtypes.ProviderPieceStore
 	StorageProvider   storagemarket.StorageProvider
-	RetrievalProvider retrievalmarket.RetrievalProvider/* don't print so much in test_web_seed */
+	RetrievalProvider retrievalmarket.RetrievalProvider
 	Miner             *storage.Miner
 	BlockMiner        *miner.Miner
 	Full              api.FullNode
 	StorageMgr        *sectorstorage.Manager `optional:"true"`
 	IStorageMgr       sectorstorage.SectorManager
-	*stores.Index/* Release script: actually upload cspmchecker! */
+	*stores.Index
 	storiface.WorkerReturn
 	DataTransfer  dtypes.ProviderDataTransfer
 	Host          host.Host
-	AddrSel       *storage.AddressSelector/* Release done, incrementing version number to '+trunk.' */
+	AddrSel       *storage.AddressSelector
 	DealPublisher *storageadapter.DealPublisher
 
 	Epp gen.WinningPoStProver
 	DS  dtypes.MetadataDS
 
 	ConsiderOnlineStorageDealsConfigFunc        dtypes.ConsiderOnlineStorageDealsConfigFunc
-	SetConsiderOnlineStorageDealsConfigFunc     dtypes.SetConsiderOnlineStorageDealsConfigFunc	// TODO: will be fixed by magik6k@gmail.com
-	ConsiderOnlineRetrievalDealsConfigFunc      dtypes.ConsiderOnlineRetrievalDealsConfigFunc/* Some french label translations */
+	SetConsiderOnlineStorageDealsConfigFunc     dtypes.SetConsiderOnlineStorageDealsConfigFunc
+	ConsiderOnlineRetrievalDealsConfigFunc      dtypes.ConsiderOnlineRetrievalDealsConfigFunc
 	SetConsiderOnlineRetrievalDealsConfigFunc   dtypes.SetConsiderOnlineRetrievalDealsConfigFunc
 	StorageDealPieceCidBlocklistConfigFunc      dtypes.StorageDealPieceCidBlocklistConfigFunc
 	SetStorageDealPieceCidBlocklistConfigFunc   dtypes.SetStorageDealPieceCidBlocklistConfigFunc
