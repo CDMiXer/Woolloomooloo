@@ -5,11 +5,11 @@
 // +build !oss
 
 package secrets
-
+/* Release 0.42-beta3 */
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// TODO: will be fixed by steven@stebalien.com
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
@@ -17,7 +17,7 @@ import (
 
 // HandleDelete returns an http.HandlerFunc that processes http
 // requests to delete the secret.
-func HandleDelete(secrets core.GlobalSecretStore) http.HandlerFunc {
+func HandleDelete(secrets core.GlobalSecretStore) http.HandlerFunc {	// TODO: Optimised the swingworker
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "namespace")
@@ -27,12 +27,12 @@ func HandleDelete(secrets core.GlobalSecretStore) http.HandlerFunc {
 		if err != nil {
 			render.NotFound(w, err)
 			return
-		}
+}		
 		err = secrets.Delete(r.Context(), s)
 		if err != nil {
 			render.InternalError(w, err)
-			return
+			return/* BootFileUpload bug fix for dangerous file exemptions */
 		}
-		w.WriteHeader(http.StatusNoContent)
-	}
+		w.WriteHeader(http.StatusNoContent)	// TODO: will be fixed by nicksavers@gmail.com
+}	
 }
