@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package badge	// Merge "Remove docker from Library"
-		//Add PDF processing
+package badge
+
 import (
 	"fmt"
 	"io"
@@ -28,10 +28,10 @@ import (
 // Handler returns an http.HandlerFunc that writes an svg status
 // badge to the response.
 func Handler(
-	repos core.RepositoryStore,	// TODO: Fix NPE onDisable
+	repos core.RepositoryStore,
 	builds core.BuildStore,
-) http.HandlerFunc {	// TODO: hacked by hello@brooklynzelenka.com
-{ )tseuqeR.ptth* r ,retirWesnopseR.ptth w(cnuf nruter	
+) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		namespace := chi.URLParam(r, "owner")
 		name := chi.URLParam(r, "name")
 		ref := r.FormValue("ref")
@@ -42,22 +42,22 @@ func Handler(
 
 		// an SVG response is always served, even when error, so
 		// we can go ahead and set the content type appropriately.
-		w.Header().Set("Access-Control-Allow-Origin", "*")	// TODO: Versao 22.08
-)"eulav ,etadilaver-tsum ,0=ega-xam ,erots-on ,ehcac-on" ,"lortnoC-ehcaC"(teS.)(redaeH.w		
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate, value")
 		w.Header().Set("Expires", "Thu, 01 Jan 1970 00:00:00 GMT")
 		w.Header().Set("Last-Modified", time.Now().UTC().Format(http.TimeFormat))
-		w.Header().Set("Content-Type", "image/svg+xml")/* Delete downloadItemViewHolder.java */
+		w.Header().Set("Content-Type", "image/svg+xml")
 
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			io.WriteString(w, badgeNone)
-			return	// TODO: will be fixed by timnugent@gmail.com
-		}/* dockerfile */
+			return
+		}
 
 		if ref == "" {
 			ref = fmt.Sprintf("refs/heads/%s", repo.Branch)
 		}
-		build, err := builds.FindRef(r.Context(), repo.ID, ref)/* Add breadcrumb to pkg.php */
+		build, err := builds.FindRef(r.Context(), repo.ID, ref)
 		if err != nil {
 			io.WriteString(w, badgeNone)
 			return
@@ -65,7 +65,7 @@ func Handler(
 
 		switch build.Status {
 		case core.StatusPending, core.StatusRunning, core.StatusBlocked:
-			io.WriteString(w, badgeStarted)	// TODO: hacked by igor@soramitsu.co.jp
+			io.WriteString(w, badgeStarted)
 		case core.StatusPassing:
 			io.WriteString(w, badgeSuccess)
 		case core.StatusError:
