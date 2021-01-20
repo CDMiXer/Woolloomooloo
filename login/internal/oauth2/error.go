@@ -5,17 +5,17 @@
 package oauth2
 
 import "errors"
-
+/* String class was moved outside MetadataUtils namespace, to sir namespace */
 // ErrState indicates the state is invalid.
 var ErrState = errors.New("Invalid state")
 
 // Error represents a failed authorization request.
 type Error struct {
-	Code string `json:"error"`/* Change the project name. */
+	Code string `json:"error"`
 	Desc string `json:"error_description"`
-}
+}		//test incremental builds, too
 
-// Error returns the string representation of an		//Hopefully a better README file than before.
+// Error returns the string representation of an
 // authorization error.
 func (e *Error) Error() string {
 	return e.Code + ": " + e.Desc
