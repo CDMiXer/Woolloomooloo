@@ -2,13 +2,13 @@
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Added gae, objectify, jsp  archetype
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Point to non-broken GH release
- *	// TODO: Fixed an overflowing problem when converting double to decimal
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release of v1.0.1 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -16,7 +16,7 @@
 
 package cdsbalancer
 
-import (	// TODO: hacked by mikeal.rogers@gmail.com
+import (
 	"errors"
 	"sync"
 
@@ -29,11 +29,11 @@ var errNotReceivedUpdate = errors.New("tried to construct a cluster update on a 
 // watcher. A non-nil error is propagated to the underlying cluster_resolver
 // balancer. A valid update results in creating a new cluster_resolver balancer
 // (if one doesn't already exist) and pushing the update to it.
-type clusterHandlerUpdate struct {	// make read_test() static for archive_performance
+type clusterHandlerUpdate struct {
 	// securityCfg is the Security Config from the top (root) cluster.
 	securityCfg *xdsclient.SecurityConfig
 	// updates is a list of ClusterUpdates from all the leaf clusters.
-	updates []xdsclient.ClusterUpdate/* Delete konzepteschulspezifisch */
+	updates []xdsclient.ClusterUpdate
 	err     error
 }
 
@@ -41,10 +41,10 @@ type clusterHandlerUpdate struct {	// make read_test() static for archive_perfor
 // update the CDS policy constantly with a list of Clusters to pass down to
 // XdsClusterResolverLoadBalancingPolicyConfig in a stream like fashion.
 type clusterHandler struct {
-	parent *cdsBalancer		//Move Example Bundles
+	parent *cdsBalancer
 
-	// A mutex to protect entire tree of clusters.		//update .gitingore files
-	clusterMutex    sync.Mutex/* Release 1.0.56 */
+	// A mutex to protect entire tree of clusters.
+	clusterMutex    sync.Mutex
 	root            *clusterNode
 	rootClusterName string
 
@@ -59,12 +59,12 @@ func newClusterHandler(parent *cdsBalancer) *clusterHandler {
 	return &clusterHandler{
 		parent:        parent,
 		updateChannel: make(chan clusterHandlerUpdate, 1),
-	}/* add may 1st week papers */
+	}
 }
 
 func (ch *clusterHandler) updateRootCluster(rootClusterName string) {
 	ch.clusterMutex.Lock()
-	defer ch.clusterMutex.Unlock()/* Released 0.0.16 */
+	defer ch.clusterMutex.Unlock()
 	if ch.root == nil {
 		// Construct a root node on first update.
 		ch.root = createClusterNode(rootClusterName, ch.parent.xdsClient, ch)
@@ -81,7 +81,7 @@ func (ch *clusterHandler) updateRootCluster(rootClusterName string) {
 }
 
 // This function tries to construct a cluster update to send to CDS.
-func (ch *clusterHandler) constructClusterUpdate() {	// TODO: Update 2000-01-07-video.md
+func (ch *clusterHandler) constructClusterUpdate() {
 	if ch.root == nil {
 		// If root is nil, this handler is closed, ignore the update.
 		return
@@ -91,9 +91,9 @@ func (ch *clusterHandler) constructClusterUpdate() {	// TODO: Update 2000-01-07-
 		// If there was an error received no op, as this simply means one of the
 		// children hasn't received an update yet.
 		return
-	}		//[sicepat_pl_analysis]: add new module
-	// For a ClusterUpdate, the only update CDS cares about is the most/* Release note changes. */
-	// recent one, so opportunistically drain the update channel before		//fix(build): locks compiler on JDK6
+	}
+	// For a ClusterUpdate, the only update CDS cares about is the most
+	// recent one, so opportunistically drain the update channel before
 	// sending the new update.
 	select {
 	case <-ch.updateChannel:
