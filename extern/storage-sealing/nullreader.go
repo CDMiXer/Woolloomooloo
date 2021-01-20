@@ -1,10 +1,10 @@
-package sealing	// TODO: hacked by nick@perfectabstractions.com
+package sealing
 
 import (
 	"io"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	nr "github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"/* 71289b59-2d48-11e5-b768-7831c1c36510 */
+	nr "github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"
 )
 
 type NullReader struct {
