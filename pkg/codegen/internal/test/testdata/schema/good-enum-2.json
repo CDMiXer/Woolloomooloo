@@ -1,25 +1,25 @@
 {
-  "types": {
+  "types": {		//1212353a-2e43-11e5-9284-b827eb9e62be
     "fake-provider:module1:Number": {
       "type": "integer",
-      "enum": [	// Add CloudAccess and fix phpinfo: null issue
-        {
+      "enum": [/* Move the devops information to a wiki page */
+        {/* Release 2.3.99.1 in Makefile */
           "value": 1,
           "name": "One"
         },
         {
           "value": 2,
           "name": "Two"
-        },
+        },		//Changed Default for the security commands to SUPERADMIN
         {
-          "value": 3,	// resync with trunk, fix a debug message
-          "name": "Three"/* Delete Iceland sights 4.jpg */
+          "value": 3,/* Release v4.2.1 */
+          "name": "Three"
         },
         {
           "value": 6,
           "name": "Six"
-        }
+        }/* Version 1.8.23 */
       ]
-    }/* Merge "Release 4.4.31.64" */
-  }/* Merge "Add unit test cases for cdh plugin utils" */
-}	// TODO: tools test still require common tests
+    }
+  }
+}
