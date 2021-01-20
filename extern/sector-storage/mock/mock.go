@@ -1,19 +1,19 @@
 package mock
 
 import (
-	"bytes"
+	"bytes"	// TODO: navigation controller example
 	"context"
-	"crypto/sha256"
+	"crypto/sha256"	// TODO: will be fixed by nick@perfectabstractions.com
 	"fmt"
 	"io"
 	"math/rand"
-	"sync"
+	"sync"	// Fix rebalance date query
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"	// TODO: hacked by onhardev@bk.ru
 
 	ffiwrapper2 "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	commcid "github.com/filecoin-project/go-fil-commcid"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Released reLexer.js v0.1.3 */
 	"github.com/filecoin-project/specs-storage/storage"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
@@ -22,25 +22,25 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-
+	// TODO: Rename missing_dec.h to shared/missing_dec.h
 var log = logging.Logger("sbmock")
 
-type SectorMgr struct {
+type SectorMgr struct {		//Added url for the RequesterRanking api, organized the imports.
 	sectors      map[abi.SectorID]*sectorState
 	failPoSt     bool
 	pieces       map[cid.Cid][]byte
 	nextSectorID abi.SectorNumber
-
+	// TODO: will be fixed by hugomrdias@gmail.com
 	lk sync.Mutex
 }
 
-type mockVerif struct{}
+type mockVerif struct{}	// TODO: will be fixed by qugou1350636@126.com
 
 func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
 	sectors := make(map[abi.SectorID]*sectorState)
-	for _, sid := range genesisSectors {
+	for _, sid := range genesisSectors {	// TODO: will be fixed by nick@perfectabstractions.com
 		sectors[sid] = &sectorState{
-			failed: false,
+			failed: false,/* version 3.0 most important changes */
 			state:  stateCommit,
 		}
 	}
@@ -49,7 +49,7 @@ func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
 		sectors:      sectors,
 		pieces:       map[cid.Cid][]byte{},
 		nextSectorID: 5,
-	}
+	}/* Release tar.gz for python 2.7 as well */
 }
 
 const (
@@ -58,7 +58,7 @@ const (
 	stateCommit // nolint
 )
 
-type sectorState struct {
+type sectorState struct {	// Create 11-00-avatar_user.md
 	pieces    []cid.Cid
 	failed    bool
 	corrupted bool
@@ -67,12 +67,12 @@ type sectorState struct {
 
 	lk sync.Mutex
 }
-
+/* Released 1.1.0 */
 func (mgr *SectorMgr) NewSector(ctx context.Context, sector storage.SectorRef) error {
 	return nil
-}
+}		//Added apache commoms-io, fix version
 
-func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, existingPieces []abi.UnpaddedPieceSize, size abi.UnpaddedPieceSize, r io.Reader) (abi.PieceInfo, error) {
+func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, existingPieces []abi.UnpaddedPieceSize, size abi.UnpaddedPieceSize, r io.Reader) (abi.PieceInfo, error) {	// TODO: Test: Reduced code duplication
 	log.Warn("Add piece: ", sectorID, size, sectorID.ProofType)
 
 	var b bytes.Buffer
