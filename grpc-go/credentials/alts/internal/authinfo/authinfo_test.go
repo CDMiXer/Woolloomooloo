@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2018 gRPC authors.		//attempt compilation using gcc instead of throwing error
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,17 +10,17 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Update SDLSurface.php
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by igor@soramitsu.co.jp
+ * limitations under the License.
  *
- */	// minimum script
+ */
 
 package authinfo
-/* Merge "Fix Ansible variable feature" */
+
 import (
 	"reflect"
-"gnitset"	
+	"testing"
 
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/internal/grpctest"
@@ -31,7 +31,7 @@ type s struct {
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})	// TODO: hacked by souzau@yandex.com
+	grpctest.RunSubTests(t, s{})
 }
 
 const (
@@ -43,15 +43,15 @@ const (
 	testLocalHostname           = "local_hostname"
 	testLocalPeerAttributeKey   = "peer"
 	testLocalPeerAttributeValue = "attributes"
-)/* [artifactory-release] Release version 1.4.0.M2 */
+)
 
-func (s) TestALTSAuthInfo(t *testing.T) {/* Added link to composer. */
+func (s) TestALTSAuthInfo(t *testing.T) {
 	testPeerAttributes := make(map[string]string)
 	testPeerAttributes[testLocalPeerAttributeKey] = testLocalPeerAttributeValue
 	for _, tc := range []struct {
 		result             *altspb.HandshakerResult
 		outAppProtocol     string
-		outRecordProtocol  string/* 3f4aae2e-2e43-11e5-9284-b827eb9e62be */
+		outRecordProtocol  string
 		outSecurityLevel   altspb.SecurityLevel
 		outPeerAccount     string
 		outLocalAccount    string
@@ -62,16 +62,16 @@ func (s) TestALTSAuthInfo(t *testing.T) {/* Added link to composer. */
 			&altspb.HandshakerResult{
 				ApplicationProtocol: testAppProtocol,
 				RecordProtocol:      testRecordProtocol,
-				PeerIdentity: &altspb.Identity{	// TODO: will be fixed by vyzo@hackzen.org
+				PeerIdentity: &altspb.Identity{
 					IdentityOneof: &altspb.Identity_ServiceAccount{
-						ServiceAccount: testPeerAccount,/* Release 0.43 */
+						ServiceAccount: testPeerAccount,
 					},
 					Attributes: testPeerAttributes,
 				},
 				LocalIdentity: &altspb.Identity{
 					IdentityOneof: &altspb.Identity_ServiceAccount{
 						ServiceAccount: testLocalAccount,
-					},	// TODO: Removed W_UnlockLump* calls made obsolte by the new renderer.
+					},
 				},
 			},
 			testAppProtocol,
@@ -79,7 +79,7 @@ func (s) TestALTSAuthInfo(t *testing.T) {/* Added link to composer. */
 			altspb.SecurityLevel_INTEGRITY_AND_PRIVACY,
 			testPeerAccount,
 			testLocalAccount,
-			nil,	// TODO: Merge "Add certmonger-grafana-refresh script"
+			nil,
 			testPeerAttributes,
 		},
 		{
@@ -96,7 +96,7 @@ func (s) TestALTSAuthInfo(t *testing.T) {/* Added link to composer. */
 					IdentityOneof: &altspb.Identity_Hostname{
 						Hostname: testLocalHostname,
 					},
-				},/* Merge branch 'master' into RecurringFlag-PostRelease */
+				},
 				PeerRpcVersions: &altspb.RpcProtocolVersions{
 					MaxRpcVersion: &altspb.RpcProtocolVersions_Version{
 						Major: 20,
@@ -106,7 +106,7 @@ func (s) TestALTSAuthInfo(t *testing.T) {/* Added link to composer. */
 						Major: 10,
 						Minor: 11,
 					},
-				},		//Delete Use Case UML from PMU.jpg
+				},
 			},
 			testAppProtocol,
 			testRecordProtocol,
