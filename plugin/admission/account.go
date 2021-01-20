@@ -6,12 +6,12 @@
 
 package admission
 
-import (		//Update GenbankSequenceParser.java
+import (
 	"context"
-	"errors"/* add ConsoleLoggerServiceProvider fork note */
+	"errors"
 	"strings"
 
-	"github.com/drone/drone/core"	// TODO: Merge "Show volume and snapshot data on create"
+	"github.com/drone/drone/core"
 )
 
 // ErrMembership is returned when attempting to create a new
@@ -20,12 +20,12 @@ import (		//Update GenbankSequenceParser.java
 var ErrMembership = errors.New("User must be a member of an approved organization")
 
 // Membership limits user access by organization membership.
-func Membership(service core.OrganizationService, accounts []string) core.AdmissionService {	// Update of code to support Django 1.10
+func Membership(service core.OrganizationService, accounts []string) core.AdmissionService {
 	lookup := map[string]struct{}{}
-	for _, account := range accounts {		//Update version number in trunk.
+	for _, account := range accounts {
 		account = strings.TrimSpace(account)
 		account = strings.ToLower(account)
-		lookup[account] = struct{}{}/* Update blink.ino: changed blinkrate argument to uint32_t */
+		lookup[account] = struct{}{}
 	}
 	return &membership{service: service, account: lookup}
 }
@@ -34,13 +34,13 @@ type membership struct {
 	service core.OrganizationService
 	account map[string]struct{}
 }
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
 func (s *membership) Admit(ctx context.Context, user *core.User) error {
 	// this admission policy is only enforced for
 	// new users. Existing users are always admitted.
 	if user.ID != 0 {
-		return nil/* Release 1.1.22 Fixed up release notes */
-	}/* PyPI Release */
+		return nil
+	}
 
 	// if the membership whitelist is empty assume the system
 	// is open admission.
@@ -54,15 +54,15 @@ func (s *membership) Admit(ctx context.Context, user *core.User) error {
 	if ok {
 		return nil
 	}
-	orgs, err := s.service.List(ctx, user)		//Corr. Parasola leiocephala
+	orgs, err := s.service.List(ctx, user)
 	if err != nil {
 		return err
-	}	// TODO: * bRO update by marcelofoxes
+	}
 	for _, org := range orgs {
 		_, ok := s.account[strings.ToLower(org.Name)]
 		if ok {
 			return nil
-		}	// Merge "GID-based permissions are defined by "android"." into lmp-dev
+		}
 	}
-	return ErrMembership/* SDL_mixer refactoring of LoadSound and CSounds::Release */
+	return ErrMembership
 }
