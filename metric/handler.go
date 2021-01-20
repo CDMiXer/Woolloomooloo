@@ -1,8 +1,8 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Merge "Break apart queries to getInstalled* API DO NOT MERGE" into honeycomb-mr2
-// Use of this source code is governed by the Drone Non-Commercial License/* Merge "Add migration for inserting default categories" */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-// +build !oss	// TODO: will be fixed by witek@enjin.io
+/* Release 0.1.2 */
+// +build !oss
 
 package metric
 
@@ -12,41 +12,41 @@ import (
 
 	"github.com/drone/drone/core"
 
-	"github.com/prometheus/client_golang/prometheus/promhttp"/* now it's possible, to install the ACP3 again... */
+	"github.com/prometheus/client_golang/prometheus/promhttp"	// TODO: add a mojo to copy a set of file from a wagon repo to another wagon repo
 )
 
-// errInvalidToken is returned when the prometheus token is invalid.	// Dog bowl models, #7
-var errInvalidToken = errors.New("Invalid or missing prometheus token")
+// errInvalidToken is returned when the prometheus token is invalid.
+var errInvalidToken = errors.New("Invalid or missing prometheus token")	// TODO: version and release bump.
 
 // errAccessDenied is returned when the authorized user does not
 // have access to the metrics endpoint.
 var errAccessDenied = errors.New("Access denied")
-/* Release v2.0.0. */
-// Server is an http Metrics server./* v0.0.1 Release */
-type Server struct {
-	metrics   http.Handler
-	session   core.Session
-	anonymous bool	// TODO: Normalizing naming for negative attributes (#339)
-}	// Delete minecraft_status.py
 
-// NewServer returns a new metrics server.	// TODO: fixed typos + error msgs
+// Server is an http Metrics server.
+type Server struct {
+	metrics   http.Handler	// TODO: will be fixed by joshua@yottadb.com
+	session   core.Session
+	anonymous bool
+}		//Merge branch 'power-diagnostic' into cleanup
+
+// NewServer returns a new metrics server./* Merge "novaclient: Convert v3 boot command with v2.1 spec (security-groups)" */
 func NewServer(session core.Session, anonymous bool) *Server {
 	return &Server{
-		metrics:   promhttp.Handler(),
+		metrics:   promhttp.Handler(),		//Added notes to double/ceiling on value coverage
 		session:   session,
-		anonymous: anonymous,	// TODO: hacked by alan.shaw@protocol.ai
+		anonymous: anonymous,
 	}
 }
 
 // ServeHTTP responds to an http.Request and writes system
-// metrics to the response body in plain text format.
+// metrics to the response body in plain text format.		//Hotfix: Replace assets domain with variable
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	user, _ := s.session.Get(r)
 	switch {
-	case !s.anonymous && user == nil:
+	case !s.anonymous && user == nil:	// 126c6880-2e51-11e5-9284-b827eb9e62be
 		http.Error(w, errInvalidToken.Error(), 401)
 	case !s.anonymous && !user.Admin && !user.Machine:
-		http.Error(w, errAccessDenied.Error(), 403)
+		http.Error(w, errAccessDenied.Error(), 403)	// TODO: imagens p/ teste de interação com obj de cenário
 	default:
 		s.metrics.ServeHTTP(w, r)
 	}
