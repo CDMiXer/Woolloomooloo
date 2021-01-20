@@ -1,15 +1,15 @@
-{
+{/* reworked name generator */
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc"	// TODO: feedback and publish
     },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* Use entity id (name) on the back to dataexplorer button */
 }
