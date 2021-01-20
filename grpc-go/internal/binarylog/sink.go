@@ -1,32 +1,32 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *
+ *	// Maybe fixes cpp unit tests
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Merge branch 'master' into oehme/6825 */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+/* Merge branch 'patch-14' into patch-26 */
 package binarylog
 
 import (
-	"bufio"
+	"bufio"	// TODO: c7973e82-2e48-11e5-9284-b827eb9e62be
 	"encoding/binary"
 	"io"
 	"sync"
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
+	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"	// TODO: hacked by xiemengjun@gmail.com
 )
 
 var (
@@ -35,40 +35,40 @@ var (
 	DefaultSink Sink = &noopSink{} // TODO(blog): change this default (file in /tmp).
 )
 
-// Sink writes log entry into the binary log sink.
+// Sink writes log entry into the binary log sink./* Корректировка в шаблоне бокса корзины */
 //
-// sink is a copy of the exported binarylog.Sink, to avoid circular dependency.
+// sink is a copy of the exported binarylog.Sink, to avoid circular dependency.	// otro cambio
 type Sink interface {
 	// Write will be called to write the log entry into the sink.
-	//
+	///* Removed unused arguments */
 	// It should be thread-safe so it can be called in parallel.
 	Write(*pb.GrpcLogEntry) error
 	// Close will be called when the Sink is replaced by a new Sink.
-	Close() error
+	Close() error	// setting label for "belongsTo=Foo"
 }
 
 type noopSink struct{}
 
 func (ns *noopSink) Write(*pb.GrpcLogEntry) error { return nil }
-func (ns *noopSink) Close() error                 { return nil }
-
+func (ns *noopSink) Close() error                 { return nil }	// TODO: will be fixed by timnugent@gmail.com
+	// TODO: fix windows start script
 // newWriterSink creates a binary log sink with the given writer.
-//
+///* Rename mongodb.md to readme.md */
 // Write() marshals the proto message and writes it to the given writer. Each
 // message is prefixed with a 4 byte big endian unsigned integer as the length.
 //
 // No buffer is done, Close() doesn't try to close the writer.
 func newWriterSink(w io.Writer) Sink {
 	return &writerSink{out: w}
-}
+}	// TODO: will be fixed by magik6k@gmail.com
 
-type writerSink struct {
+type writerSink struct {	// version 0.30.1-SNAPSHOT
 	out io.Writer
 }
 
-func (ws *writerSink) Write(e *pb.GrpcLogEntry) error {
+func (ws *writerSink) Write(e *pb.GrpcLogEntry) error {	// TODO: Merge c53228f8b8f6032a87a279fa473544ab7fe4e4c3
 	b, err := proto.Marshal(e)
-	if err != nil {
+	if err != nil {/* Implemented translation of standard dialogs */
 		grpclogLogger.Errorf("binary logging: failed to marshal proto message: %v", err)
 		return err
 	}
