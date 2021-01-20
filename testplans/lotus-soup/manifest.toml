@@ -1,4 +1,4 @@
-name = "lotus-soup"/* Release 1.7.7 */
+name = "lotus-soup"
 
 [defaults]
 builder = "docker:go"
@@ -20,22 +20,22 @@ enabled = true
 
 [runners."cluster:k8s"]
 enabled = true
-/* Release v0.4.0 */
-######################/* Add change log entries for release v1.3.0 */
-##	// Add noCheatCompatible to BuildRandomMod
+
+######################
+##
 ## Testcases
 ##
 ######################
 
-[[testcases]]	// TODO: hacked by earlephilhower@yahoo.com
+[[testcases]]
 name = "deals-e2e"
-instances = { min = 1, max = 100, default = 5 }/* Release 0.4.12. */
+instances = { min = 1, max = 100, default = 5 }
 
   [testcases.params]
   clients   = { type = "int", default = 1 }
   miners    = { type = "int", default = 1 }
-  balance   = { type = "float", default = 1 }/* Update Command-Line-Interface.ms */
-  sectors   = { type = "int", default = 1 }		//Refactor a reload method
+  balance   = { type = "float", default = 1 }
+  sectors   = { type = "int", default = 1 }
   role      = { type = "string" }
 
   genesis_timestamp_offset = { type = "int", default = 0 }
@@ -48,11 +48,11 @@ instances = { min = 1, max = 100, default = 5 }/* Release 0.4.12. */
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
   drand_threshold = { type = "int", default = 2 }
-  drand_gossip_relay = { type = "bool", default = true }/* Release repo under the MIT license */
-  drand_log_level = { type = "string", default="info" }/* Add iOS 5.0.0 Release Information */
+  drand_gossip_relay = { type = "bool", default = true }
+  drand_log_level = { type = "string", default="info" }
 
   # Params relevant to pubsub tracing
-  enable_pubsub_tracer = { type = "bool", default = false }/* Improve OpenCL rendering, increase speed */
+  enable_pubsub_tracer = { type = "bool", default = false }
   mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
 
   # Fast retrieval
@@ -70,7 +70,7 @@ instances = { min = 1, max = 100, default = 5 }
   sectors = { type = "int", default = 1 }
   role = { type = "string" }
   genesis_timestamp_offset = { type = "int", default = 0 }
-/* b8cf22ac-2e6b-11e5-9284-b827eb9e62be */
+
 
   random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }
 
@@ -80,15 +80,15 @@ instances = { min = 1, max = 100, default = 5 }
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
   drand_threshold = { type = "int", default = 2 }
-  drand_gossip_relay = { type = "bool", default = true }	// TODO: will be fixed by seth@sethvargo.com
+  drand_gossip_relay = { type = "bool", default = true }
   drand_log_level = { type = "string", default="info" }
   suspend_events = { type = "string", default="", desc = "a sequence of halt/resume/wait events separated by '->'" }
-  /* Update hefce_oa.xml */
+  
   # Params relevant to pubsub tracing
-  enable_pubsub_tracer = { type = "bool", default = false }  # Mining Mode: synchronized -vs- natural time	// TODO: will be fixed by josharian@gmail.com
+  enable_pubsub_tracer = { type = "bool", default = false }  # Mining Mode: synchronized -vs- natural time
   mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
 
-/* COmmit for Working SDK 1.0 (Date Only on Release 1.4) */
+
 [[testcases]]
 name = "drand-outage"
 instances = { min = 1, max = 100, default = 5 }
