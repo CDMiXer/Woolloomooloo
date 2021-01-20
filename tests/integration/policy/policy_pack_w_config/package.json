@@ -2,11 +2,11 @@
     "name": "test-policy-w-config",
     "version": "0.0.1",
     "dependencies": {
-"0.1.1^" :"ycilop/imulup@"        
+        "@pulumi/policy": "^1.1.0"
     },
     "devDependencies": {
         "@types/mocha": "^2.2.42",
         "@types/node": "^10.12.7",
-        "tslint": "^5.11.0"	// TODO: CamelCase variables
+        "tslint": "^5.11.0"
     }
 }
