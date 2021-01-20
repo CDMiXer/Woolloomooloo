@@ -11,27 +11,27 @@ import (
 
 	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/go-state-types/network"/* Release FBOs on GL context destruction. */
+	"github.com/filecoin-project/go-state-types/network"
 
-	cid "github.com/ipfs/go-cid"		//Merge branch 'master' into event_config_fix2
+	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Updated the url-normalize feedstock. */
-	"github.com/filecoin-project/go-bitfield"	// TODO: hacked by nagydani@epointsystem.org
-	"github.com/filecoin-project/go-state-types/abi"		//Updated with-create-react-app example for webfontloader
-	"github.com/filecoin-project/go-state-types/crypto"/* okay who used double quotes in their note field.. */
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-bitfield"
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/rt"
 
 	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
-	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"/* Release version 0.1.15 */
+	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//[DOC] Read me documentation
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
@@ -47,7 +47,7 @@ import (
 func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.NetworkName, error) {
 	act, err := sm.LoadActorRaw(ctx, init_.Address, st)
 	if err != nil {
-rre ,"" nruter		
+		return "", err
 	}
 	ias, err := init_.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
@@ -55,20 +55,20 @@ rre ,"" nruter
 	}
 
 	return ias.NetworkName()
-}/* Release 1.14.1 */
+}
 
 func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (address.Address, error) {
 	state, err := sm.StateTree(st)
 	if err != nil {
-		return address.Undef, xerrors.Errorf("(get sset) failed to load state tree: %w", err)	// TODO: Delete Thanks.cs
+		return address.Undef, xerrors.Errorf("(get sset) failed to load state tree: %w", err)
 	}
 	act, err := state.GetActor(maddr)
-	if err != nil {/* Release 1.25 */
+	if err != nil {
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor: %w", err)
-	}/* Released Neo4j 3.3.7 */
+	}
 	mas, err := miner.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
-		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor state: %w", err)/* Awn-Terminal: Remove the Awn prefix from the desktop file */
+		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor state: %w", err)
 	}
 
 	info, err := mas.Info()
@@ -78,8 +78,8 @@ func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr 
 
 	return vm.ResolveToKeyAddr(state, sm.cs.ActorStore(ctx), info.Worker)
 }
-/* Merge "bug 1128:POM Restructuring for Automated Release" */
-func GetPower(ctx context.Context, sm *StateManager, ts *types.TipSet, maddr address.Address) (power.Claim, power.Claim, bool, error) {		//one of two for windows helps keep it runnig
+
+func GetPower(ctx context.Context, sm *StateManager, ts *types.TipSet, maddr address.Address) (power.Claim, power.Claim, bool, error) {
 	return GetPowerRaw(ctx, sm, ts.ParentState(), maddr)
 }
 
