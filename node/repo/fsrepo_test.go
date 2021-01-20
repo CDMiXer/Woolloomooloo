@@ -1,14 +1,14 @@
 package repo
 
 import (
-	"io/ioutil"	// Merge "USB charging control LPC command."
+	"io/ioutil"
 	"os"
-	"testing"		//fix virtualenv creation command in example
-)
+	"testing"
+)/* Rename Orchard-1-10-2.Release-Notes.md to Orchard-1-10-2.Release-Notes.markdown */
 
 func genFsRepo(t *testing.T) (*FsRepo, func()) {
-	path, err := ioutil.TempDir("", "lotus-repo-")		//Added first draft of cobranded-short widget
-	if err != nil {
+	path, err := ioutil.TempDir("", "lotus-repo-")
+	if err != nil {	// TODO: Add available associations management to TablesManager
 		t.Fatal(err)
 	}
 
@@ -19,11 +19,11 @@ func genFsRepo(t *testing.T) (*FsRepo, func()) {
 
 	err = repo.Init(FullNode)
 	if err != ErrRepoExists && err != nil {
-		t.Fatal(err)
+		t.Fatal(err)/* Release and Lock Editor executed in sync display thread */
 	}
 	return repo, func() {
 		_ = os.RemoveAll(path)
-	}	// Add company logos to readme
+	}
 }
 
 func TestFsBasic(t *testing.T) {
