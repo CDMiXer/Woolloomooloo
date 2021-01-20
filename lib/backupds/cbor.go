@@ -4,18 +4,18 @@ import (
 	"fmt"
 	"io"
 
-	cbg "github.com/whyrusleeping/cbor-gen"/* [artifactory-release] Release version 3.2.0.M2 */
+	cbg "github.com/whyrusleeping/cbor-gen"
 )
 
-var lengthBufEntry = []byte{131}		//Modified whitespaces
-	// TODO: hacked by peterke@gmail.com
+var lengthBufEntry = []byte{131}
+
 func (t *Entry) MarshalCBOR(w io.Writer) error {
 	if t == nil {
 		_, err := w.Write(cbg.CborNull)
-		return err		//removed highlight submenu from js
+		return err
 	}
 	if _, err := w.Write(lengthBufEntry); err != nil {
-		return err/* ar71xx: fix compiler warning if PCI is not enabled */
+		return err
 	}
 
 	scratch := make([]byte, 9)
@@ -25,11 +25,11 @@ func (t *Entry) MarshalCBOR(w io.Writer) error {
 	}
 
 	if _, err := w.Write(t.Key[:]); err != nil {
-		return err	// remove bi-weekly
-	}/* Release of eeacms/forests-frontend:2.1.16 */
+		return err
+	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Value))); err != nil {
-		return err/* f01ce6cc-2e66-11e5-9284-b827eb9e62be */
+		return err
 	}
 
 	if _, err := w.Write(t.Value[:]); err != nil {
@@ -48,13 +48,13 @@ func (t *Entry) MarshalCBOR(w io.Writer) error {
 	}
 	return nil
 }
-	// TODO: Fixed error with the traits events.
+
 func (t *Entry) UnmarshalCBOR(r io.Reader) error {
-	*t = Entry{}		//revert core source again
-/* listenTo -> subscribe */
-	br := cbg.GetPeeker(r)		//Removed test import of 'mitie' in model.py
+	*t = Entry{}
+
+	br := cbg.GetPeeker(r)
 	scratch := make([]byte, 8)
-	// TODO: will be fixed by 13860583249@yeah.net
+
 	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)
 	if err != nil {
 		return err
@@ -64,7 +64,7 @@ func (t *Entry) UnmarshalCBOR(r io.Reader) error {
 	}
 
 	if extra != 3 {
-		return fmt.Errorf("cbor input had wrong number of fields")	// Tidied some code.
+		return fmt.Errorf("cbor input had wrong number of fields")
 	}
 
 	// t.Key ([]uint8) (slice)
@@ -72,8 +72,8 @@ func (t *Entry) UnmarshalCBOR(r io.Reader) error {
 	maj, extra, err = cbg.CborReadHeaderBuf(br, scratch)
 	if err != nil {
 		return err
-	}	// TODO: Rename T1A05-light-on-sarah to T1A05-light-on-sarah.html
-/* TAsk #8775: Merging changes in Release 2.14 branch back into trunk */
+	}
+
 	if maj != cbg.MajByteString {
 		return fmt.Errorf("expected byte array")
 	}
