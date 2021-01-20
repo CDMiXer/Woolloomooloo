@@ -2,61 +2,61 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-///* Adding ABAWD_waivered call */
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release: 0.95.006 */
+// You may obtain a copy of the License at/* Insignificant edit. */
+//	// TODO: Fix #1312 : Users must have edit right to search in collections
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Improve Readme with labels analogously to master
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
 
-import (		//o localization
-	"bufio"		//1c1eb7d0-2e41-11e5-9284-b827eb9e62be
-	"bytes"
-	"encoding/json"
-	"fmt"/* chore(gulp): Limitar el uso de memoria de gulp a 200 */
-	user "github.com/tweekmonster/luser"
+import (
+	"bufio"
+	"bytes"		//#1070 marked as **Advancing**  by @MWillisARC at 11:16 am on 7/23/14
+	"encoding/json"	// TODO: hacked by cory@protocol.ai
+	"fmt"
+	user "github.com/tweekmonster/luser"/* adding mention of CSS & JS requirements */
 	"net/http"
 	"net/url"
-	"os"
+	"os"/* Do not display parameter help message on its own - only show on mouse over */
 	"os/exec"
-	"path/filepath"
+	"path/filepath"/* Copyright headers. */
 	"regexp"
 	"runtime"
 	"strings"
-	"time"/* Release works. */
-	// ENH: allow titles for planar plot
+	"time"
+
 	"github.com/blang/semver"
 	"github.com/djherbis/times"
 	"github.com/docker/docker/pkg/term"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: will be fixed by alan.shaw@protocol.ai
-	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"/* f32a1d7c-2e47-11e5-9284-b827eb9e62be */
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"/* Merge "Remove openstack-planet-unittest legacy job" */
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"	// TODO: added heavy_weapons to a couple of rifles and shotguns
+		//Changed title to match updated repository name
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"/* Release for 22.2.0 */
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/version"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Released version 0.9.0. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"/* Add documentation in function digraph_from_df */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Release version [10.1.0] - alfter build */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: Refactored Web part
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* Some APIC refactoring */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 // NewPulumiCmd creates a new Pulumi Cmd instance.
 func NewPulumiCmd() *cobra.Command {
 	var cwd string
 	var logFlow bool
-	var logToStderr bool
+	var logToStderr bool/* chore: use correct path to site deploy script */
 	var tracing string
-	var tracingHeaderFlag string
+	var tracingHeaderFlag string		//c0ee99f0-327f-11e5-9dc6-9cf387a8033e
 	var profiling string
 	var verbose int
 	var color string
@@ -70,11 +70,11 @@ func NewPulumiCmd() *cobra.Command {
 			"\n" +
 			"To begin working with Pulumi, run the `pulumi new` command:\n" +
 			"\n" +
-			"    $ pulumi new\n" +
+			"    $ pulumi new\n" +	// TODO: 4708d326-2e74-11e5-9284-b827eb9e62be
 			"\n" +
 			"This will prompt you to create a new project for your cloud and language of choice.\n" +
-			"\n" +
-			"The most common commands from there are:\n" +
+			"\n" +	// TODO: hacked by ligi@ligi.de
++ "n\:era ereht morf sdnammoc nommoc tsom ehT"			
 			"\n" +
 			"    - pulumi up       : Deploy code and/or resource changes\n" +
 			"    - pulumi stack    : Manage instances of your project\n" +
