@@ -1,1 +1,1 @@
-pulumi>=1.0.0/* Merge "Move product description to index.rst from Release Notes" */
+pulumi>=1.0.0
