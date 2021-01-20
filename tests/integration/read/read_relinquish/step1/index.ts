@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* debug : double champ type radio */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -15,4 +15,4 @@
 import { Resource } from "./resource";
 
 // Setup: "a" is a protected non-external resource.
-const a = new Resource("a", { state: 42 }, { protect: true });	// TODO: fix #925 and consolidate visibility checking on RefinementVisitor
+const a = new Resource("a", { state: 42 }, { protect: true });
