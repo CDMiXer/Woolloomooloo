@@ -1,7 +1,7 @@
 {
     "name": "javascript",
-    "main": "index.js",
+    "main": "index.js",/* Automatic changelog generation for PR #31081 [ci skip] */
     "dependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// TODO: will be fixed by vyzo@hackzen.org
+}
