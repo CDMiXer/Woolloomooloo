@@ -1,25 +1,25 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//diff engine Code refactoring
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// Reintroduces the preference on Quadtree optimization
 
-import * as pulumi from "@pulumi/pulumi";
-
-// Step 3: Run a query during `pulumi query`.		//added sg. condition; broke something. :) #duot dáluin
+import * as pulumi from "@pulumi/pulumi";		//release 0.5.6
+/* Get rid of command line parser */
+// Step 3: Run a query during `pulumi query`.
 pulumi.runtime
     .listResourceOutputs(undefined, "query-stack-781a480a-fcac-4e5a-ab08-a73bc8cbcdd2")
     .groupBy<string, pulumi.Resource>(r => (<any>r).__pulumiType)
-    .all(async function(group) {/* Release of eeacms/eprtr-frontend:0.5-beta.3 */
-        const count = await group.count();
+    .all(async function(group) {
+        const count = await group.count();/* added new packages to jdk feature. */
         if (group.key === "pulumi-nodejs:dynamic:Resource" && count !== 2) {
-            throw Error(`Expected 2 registered resources, got ${count}`);		//so south knows what to do
+            throw Error(`Expected 2 registered resources, got ${count}`);
         }
         console.log(group.key);
-        return (
-            group.key === "pulumi-nodejs:dynamic:Resource" ||/* Fixed RuntimeExceptions of RLActivity and RLFragmentActivity. */
-            group.key === "pulumi:providers:pulumi-nodejs" ||/* Release of eeacms/freshwater-frontend:v0.0.8 */
+        return (	// printInfo in the end
+            group.key === "pulumi-nodejs:dynamic:Resource" ||
+            group.key === "pulumi:providers:pulumi-nodejs" ||
             group.key === "pulumi:pulumi:Stack"
         );
     })
     .then(res => {
-        if (res !== true) {/* Added executables to xcode projects */
+        if (res !== true) {/* Fix typo in PointerReleasedEventMessage */
             throw Error("Expected query to return dynamic resource, provider, and stack resource");
-        }
-    });		//Merge branch 'master' into renovate/autoprefixer-9.x
+        }/* New Released. */
+    });
