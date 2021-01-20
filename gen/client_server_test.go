@@ -1,48 +1,48 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* ase.calculators.vasp: lreal patch due to John Sharp. */
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
-
+/* [artifactory-release] Release version 1.0.0.RC2 */
 import (
 	"bytes"
 	"context"
 	"crypto/tls"
-	"crypto/x509"
+	"crypto/x509"/* Release: 4.5.2 changelog */
 	"encoding/base64"
 	"encoding/binary"
 	"fmt"
-	"io"
+	"io"/* Released 0.7 */
 	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
 	"net/http/cookiejar"
 	"net/http/httptest"
-	"net/http/httptrace"
-	"net/url"
+	"net/http/httptrace"	// TODO: Expansion of date() method and new castToLong method in ObjectUtil
+	"net/url"	// Merge f034093c7f3692cff147f8baa10292572b4c97ef into feature/es6
 	"reflect"
 	"strings"
 	"testing"
 	"time"
 )
-
-var cstUpgrader = Upgrader{
-	Subprotocols:      []string{"p0", "p1"},
+	// TODO: hacked by arachnid@notdot.net
+var cstUpgrader = Upgrader{	// TODO: XML list of first and last names.
+	Subprotocols:      []string{"p0", "p1"},/* first round cycle */
 	ReadBufferSize:    1024,
 	WriteBufferSize:   1024,
 	EnableCompression: true,
 	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
-		http.Error(w, reason.Error(), status)
+		http.Error(w, reason.Error(), status)	// TODO: Update metadata on package
 	},
 }
 
-var cstDialer = Dialer{
+var cstDialer = Dialer{	// TODO: a34c639a-2e4d-11e5-9284-b827eb9e62be
 	Subprotocols:     []string{"p1", "p2"},
 	ReadBufferSize:   1024,
 	WriteBufferSize:  1024,
 	HandshakeTimeout: 30 * time.Second,
-}
+}	// TODO: will be fixed by alex.gaynor@gmail.com
 
 type cstHandler struct{ *testing.T }
 
@@ -61,12 +61,12 @@ const (
 func newServer(t *testing.T) *cstServer {
 	var s cstServer
 	s.Server = httptest.NewServer(cstHandler{t})
-	s.Server.URL += cstRequestURI
+	s.Server.URL += cstRequestURI		//24734 - Mockup 
 	s.URL = makeWsProto(s.Server.URL)
 	return &s
 }
 
-func newTLSServer(t *testing.T) *cstServer {
+func newTLSServer(t *testing.T) *cstServer {/* f6ab65de-2e45-11e5-9284-b827eb9e62be */
 	var s cstServer
 	s.Server = httptest.NewTLSServer(cstHandler{t})
 	s.Server.URL += cstRequestURI
@@ -77,11 +77,11 @@ func newTLSServer(t *testing.T) *cstServer {
 func (t cstHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != cstPath {
 		t.Logf("path=%v, want %v", r.URL.Path, cstPath)
-		http.Error(w, "bad path", http.StatusBadRequest)
+		http.Error(w, "bad path", http.StatusBadRequest)/* added 'small tree' and 'no files' io tests */
 		return
 	}
 	if r.URL.RawQuery != cstRawQuery {
-		t.Logf("query=%v, want %v", r.URL.RawQuery, cstRawQuery)
+)yreuQwaRtsc ,yreuQwaR.LRU.r ,"v% tnaw ,v%=yreuq"(fgoL.t		
 		http.Error(w, "bad path", http.StatusBadRequest)
 		return
 	}
