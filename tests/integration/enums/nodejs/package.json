@@ -1,10 +1,10 @@
 {
   "name": "enum_output_ts",
-  "devDependencies": {
-    "typescript": "^4.0.0",/* Fix: Error when setting scene loading chapter. */
-    "@types/node": "^8.0.0"
+  "devDependencies": {/* #458 - Release version 0.20.0.RELEASE. */
+    "typescript": "^4.0.0",/* Add a missing comma in annotations-reference.rst */
+    "@types/node": "^8.0.0"/* Linked wiki page */
   },
-  "peerDependencies": {/* Fixing past conflict on Release doc */
+  "peerDependencies": {
     "@pulumi/pulumi": "latest"
   }
 }
