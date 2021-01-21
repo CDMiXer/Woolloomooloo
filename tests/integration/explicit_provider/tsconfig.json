@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* Release DBFlute-1.1.0-sp4 */
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",	// Merge "package compiler needs to handle different targets"
-        "module": "commonjs",/* Release branch */
+        "target": "es2016",		//Add correct HTML 5 tags.
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,		//Fix equals operator in reports
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// fix mistake (File::open -> File::create)
+        "pretty": true,/* Issue #40: replaced JDK-dependent test with reflective test */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },	// [Project] Enabled compiler warnings for maven-compiler-plugin
+    },
     "files": [
         "index.ts"
-    ]		//Rename HCPainter.java to library/HCPainter.java
+    ]
 }
 
