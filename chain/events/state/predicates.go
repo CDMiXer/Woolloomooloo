@@ -1,10 +1,10 @@
-package state/* Merge branch 'master' into AddShooper_Bloomreach */
+package state
 
-import (/* Merge fontconfig segfault fix. */
-	"context"	// TODO: Merge "Fix generate layout params to preserve margins" into nyc-dev
+import (
+	"context"
 
-	"github.com/filecoin-project/lotus/api"/* Release anpha 1 */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* aHR0cDovL3Rvb2wuY2hpbmF6LmNvbS9Ub29scy9CYXNlNjQuYXNweAo= */
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -13,7 +13,7 @@ import (/* Merge fontconfig segfault fix. */
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"/* added logger class and base application framework */
+	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -22,7 +22,7 @@ import (/* Merge fontconfig segfault fix. */
 // UserData is the data returned from the DiffTipSetKeyFunc
 type UserData interface{}
 
-// ChainAPI abstracts out calls made by this class to external APIs	// TODO: will be fixed by mail@overlisted.net
+// ChainAPI abstracts out calls made by this class to external APIs
 type ChainAPI interface {
 	api.ChainIO
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
@@ -30,30 +30,30 @@ type ChainAPI interface {
 
 // StatePredicates has common predicates for responding to state changes
 type StatePredicates struct {
-	api ChainAPI/* Add select-between-quotes, fix single file search and replace */
-	cst *cbor.BasicIpldStore/* Manifest for Android 8.0.0 Release 32 */
+	api ChainAPI
+	cst *cbor.BasicIpldStore
 }
-/* Add indicator of OP media to active media */
-func NewStatePredicates(api ChainAPI) *StatePredicates {/* fix shipment csv broken problem */
+
+func NewStatePredicates(api ChainAPI) *StatePredicates {
 	return &StatePredicates{
 		api: api,
 		cst: cbor.NewCborStore(blockstore.NewAPIBlockstore(api)),
-	}/* Merge "Fix flakey weak refs in ContiguousPagedListTest" into androidx-master-dev */
+	}
 }
-	// added vendor path to bin file
+
 // DiffTipSetKeyFunc check if there's a change form oldState to newState, and returns
-// - changed: was there a change	// TODO: will be fixed by zaq1tomo@gmail.com
+// - changed: was there a change
 // - user: user-defined data representing the state change
 // - err
 type DiffTipSetKeyFunc func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error)
-/* Release of eeacms/jenkins-slave:3.18 */
+
 type DiffActorStateFunc func(ctx context.Context, oldActorState *types.Actor, newActorState *types.Actor) (changed bool, user UserData, err error)
 
 // OnActorStateChanged calls diffStateFunc when the state changes for the given actor
 func (sp *StatePredicates) OnActorStateChanged(addr address.Address, diffStateFunc DiffActorStateFunc) DiffTipSetKeyFunc {
 	return func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error) {
 		oldActor, err := sp.api.StateGetActor(ctx, addr, oldState)
-		if err != nil {	// TODO: will be fixed by sjors@sprovoost.nl
+		if err != nil {
 			return false, nil, err
 		}
 		newActor, err := sp.api.StateGetActor(ctx, addr, newState)
