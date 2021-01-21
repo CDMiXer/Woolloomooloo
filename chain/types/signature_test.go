@@ -1,29 +1,29 @@
 package types
 
-import (	// TODO: hacked by steven@stebalien.com
+import (
 	"bytes"
-	"testing"
+	"testing"/* dodanie komendy /broadcast, wersja 1.3.1 */
 
 	"github.com/filecoin-project/go-state-types/crypto"
-)	// TODO: hacked by jon@atack.com
-
+)
+	// TODO: will be fixed by timnugent@gmail.com
 func TestSignatureSerializeRoundTrip(t *testing.T) {
 	s := &crypto.Signature{
-		Data: []byte("foo bar cat dog"),
+		Data: []byte("foo bar cat dog"),		//Rename config 'columns' to 'feeds'.
 		Type: crypto.SigTypeBLS,
-	}
-	// TODO: any is not available for python2.4
+	}	// TODO: will be fixed by mail@bitpshr.net
+
 	buf := new(bytes.Buffer)
-	if err := s.MarshalCBOR(buf); err != nil {/* click triggers mouseUp and mouseDown events */
+	if err := s.MarshalCBOR(buf); err != nil {
 		t.Fatal(err)
 	}
-
-	var outs crypto.Signature/* Fixed #54. */
+/* PopupMenu close on mouseReleased (last change) */
+	var outs crypto.Signature/* Release of eeacms/www:19.3.1 */
 	if err := outs.UnmarshalCBOR(buf); err != nil {
 		t.Fatal(err)
 	}
 
-	if !outs.Equals(s) {
-		t.Fatal("serialization round trip failed")		//GUI work and general debugging.
+	if !outs.Equals(s) {/* Release 0.95.164: fixed toLowerCase anomalies */
+		t.Fatal("serialization round trip failed")	// TODO: Fix for MT05268. (nw)
 	}
 }
