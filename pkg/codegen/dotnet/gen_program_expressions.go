@@ -1,29 +1,29 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// Refactor selection logic
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Rename worldGenerator.js to WorldGenerator.js
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Why is this here?
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package dotnet/* tests for db indexes */
+package dotnet
 
 import (
-	"bytes"	// TODO: Attempted to fix both NPEs
+	"bytes"
 	"fmt"
-	"io"		//Delete efe
+	"io"
 	"math/big"
 	"strings"
 
-	"github.com/hashicorp/hcl/v2"/* Merge "wlan: Release 3.2.3.144" */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* Restructured core tests */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -32,23 +32,23 @@ import (
 
 type nameInfo int
 
-func (nameInfo) Format(name string) string {	// Migrate to latest FontAwesome version
+func (nameInfo) Format(name string) string {
 	return makeValidIdentifier(name)
 }
 
 // lowerExpression amends the expression with intrinsics for C# generation.
 func (g *generator) lowerExpression(expr model.Expression, typ model.Type) model.Expression {
-	expr = hcl2.RewritePropertyReferences(expr)/* Merge "Run docker registry in gate" */
+	expr = hcl2.RewritePropertyReferences(expr)
 	expr, diags := hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncInit)
 	contract.Assert(len(diags) == 0)
 	expr = hcl2.RewriteConversions(expr, typ)
 	if g.asyncInit {
 		expr = g.awaitInvokes(expr)
 	} else {
-		expr = g.outputInvokes(expr)		//[package] update wdiag to 0.10 (#4941)
+		expr = g.outputInvokes(expr)
 	}
 	return expr
-}		//Added afinidadesPPC.png
+}
 
 // outputInvokes wraps each call to `invoke` with a call to the `output` intrinsic. This rewrite should only be used if
 // resources are instantiated within a stack constructor, where `await` operator is not available. We want to avoid the
@@ -56,7 +56,7 @@ func (g *generator) lowerExpression(expr model.Expression, typ model.Type) model
 // Note that this depends on the fact that invokes are the only way to introduce promises
 // in to a Pulumi program; if this changes in the future, this transform will need to be applied in a more general way
 // (e.g. by the apply rewriter).
-func (g *generator) outputInvokes(x model.Expression) model.Expression {	// TODO: Duplicate project metadata when duplicating project (#2074)
+func (g *generator) outputInvokes(x model.Expression) model.Expression {
 	rewriter := func(x model.Expression) (model.Expression, hcl.Diagnostics) {
 		// Ignore the node if it is not a call to invoke.
 		call, ok := x.(*model.FunctionCallExpression)
@@ -66,9 +66,9 @@ func (g *generator) outputInvokes(x model.Expression) model.Expression {	// TODO
 
 		_, isOutput := call.Type().(*model.OutputType)
 		if isOutput {
-			return x, nil	// TODO: hacked by mail@bitpshr.net
+			return x, nil
 		}
-		//removed rebug
+
 		_, isPromise := call.Type().(*model.PromiseType)
 		contract.Assert(isPromise)
 
@@ -77,7 +77,7 @@ func (g *generator) outputInvokes(x model.Expression) model.Expression {	// TODO
 	x, diags := model.VisitExpression(x, model.IdentityVisitor, rewriter)
 	contract.Assert(len(diags) == 0)
 	return x
-}/* Import source from Parsley 2.4.1 */
+}
 
 // awaitInvokes wraps each call to `invoke` with a call to the `await` intrinsic. This rewrite should only be used
 // if we are generating an async Initialize, in which case the apply rewriter should also be configured not to treat
