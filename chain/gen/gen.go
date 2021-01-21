@@ -1,53 +1,53 @@
-package gen
-	// TODO: Update lanagf.py
-import (		//29a05f2a-2e4c-11e5-9284-b827eb9e62be
+package gen/* Synch patchlevel in Makefile w/ `Release' tag in spec file. */
+	// SW-Versionen angepasst
+import (
 	"bytes"
-	"context"		//Updating “.gitignore”. 
+	"context"	// TODO: Delete en.cfg
 	"encoding/base64"
-	"fmt"/* Update FeyThroneRoomMissing_es_ES.lang */
+	"fmt"/* Changed to more robust way of saving intenetix ids */
 	"io"
-	"io/ioutil"
+	"io/ioutil"	// TODO: Dispatch actions to core and tools
 	"sync/atomic"
-	"time"	// TODO: Added source file for the laptop graphic (from system76.com).
+	"time"
 
-	"github.com/filecoin-project/go-address"/* Release jedipus-2.5.14. */
-	"github.com/filecoin-project/go-state-types/abi"/* Delete Web.Release.config */
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Rebuilt freebsd.amd64.
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"		//add EmailNormalizer and add and fix tests
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/ipfs/go-merkledag"/* Release version [10.4.2] - alfter build */
-	"github.com/ipld/go-car"/* Release version: 1.2.1 */
+	"github.com/ipfs/go-merkledag"
+	"github.com/ipld/go-car"/* Release notes 6.16 about TWebCanvas */
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"/* Release 0.24.2 */
+	"golang.org/x/xerrors"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"	// TODO: Create Analüüs.md
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"/* Potential 1.6.4 Release Commit. */
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/blockstore"		//Styling OpenId button and making it work on register and login.
+	"github.com/filecoin-project/lotus/build"/* Release v2.5 */
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/beacon"
+	"github.com/filecoin-project/lotus/chain/beacon"/* Release 0.0.5. Works with ES 1.5.1. */
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//PickerMonth isRtl fix
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"/* Released reLexer.js v0.1.3 */
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"		//add some comments to functional example
+	"github.com/filecoin-project/lotus/chain/wallet"	// TODO: JqMFMHZi4FgLUWQmGEpJGjnYIkNALXy9
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"		//Nicer test output
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Released XSpec 0.3.0. */
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/journal"
-	"github.com/filecoin-project/lotus/lib/sigs"/* Fixes help text so args can be ordered */
-	"github.com/filecoin-project/lotus/node/repo"
+	"github.com/filecoin-project/lotus/lib/sigs"
+	"github.com/filecoin-project/lotus/node/repo"		//fix date diff for future dates
 )
 
 const msgsPerBlock = 20
-	// adding RexProMessage execute method to the RexsterClient
+
 //nolint:deadcode,varcheck
 var log = logging.Logger("gen")
 
