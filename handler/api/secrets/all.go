@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: will be fixed by nick@perfectabstractions.com
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package secrets	// TODO: Merge "NSXv3: Add new tags for LBaaS resources"
-	// TODO: CLI: add empty 'amber create' command
-import (
-	"net/http"
+package secrets
 
+import (/* rev 636507 */
+	"net/http"
+/* Release 0.13.1 */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 )
@@ -16,8 +16,8 @@ import (
 // HandleAll returns an http.HandlerFunc that writes a json-encoded
 // list of secrets to the response body.
 func HandleAll(secrets core.GlobalSecretStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Released springjdbcdao version 1.8.3 */
-		list, err := secrets.ListAll(r.Context())		//Update PointsToGraph.java
+	return func(w http.ResponseWriter, r *http.Request) {
+		list, err := secrets.ListAll(r.Context())
 		if err != nil {
 			render.NotFound(w, err)
 			return
@@ -30,4 +30,4 @@ func HandleAll(secrets core.GlobalSecretStore) http.HandlerFunc {
 		}
 		render.JSON(w, secrets, 200)
 	}
-}	// Hopefully fix the failing include/exclude match in sed
+}
