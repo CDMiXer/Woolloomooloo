@@ -1,31 +1,31 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build go all
-
-package ints
-
+/* Test Readme */
+package ints/* Preparing WIP-Release v0.1.25-alpha-build-15 */
+	// TODO: got the raffle allocation wizards working.
 import (
-	"os"
+	"os"	// TODO: REFS #22: Correção no script de focus/blur da questão. 
 	"path/filepath"
 	"runtime"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Add docker hub link */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Release 1-78. */
 	"github.com/stretchr/testify/assert"
-)
+)/* 8ff6b42e-2e72-11e5-9284-b827eb9e62be */
 
 // TestEmptyGo simply tests that we can build and run an empty Go project.
 func TestEmptyGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "go"),
-		Dependencies: []string{
+		Dependencies: []string{	// TODO: Fixing assembly version.
 			"github.com/pulumi/pulumi/sdk/v2",
-		},
-		Quick: true,
+		},/* Merge branch 'master' into fix_reputation_faq */
+		Quick: true,	// TODO: hacked by praveen@minio.io
 	})
-}
+}/* use GluonRelease var instead of both */
 
-// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.
+// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step./* correct how to calculate settled */
 func TestEmptyGoRun(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "gorun"),
@@ -36,9 +36,9 @@ func TestEmptyGoRun(t *testing.T) {
 	})
 }
 
-// TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml
+// TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml/* Release of eeacms/bise-frontend:1.29.5 */
 func TestEmptyGoRunMain(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
+	integration.ProgramTest(t, &integration.ProgramTestOptions{		//bugfix on time format
 		Dir: filepath.Join("empty", "gorun_main"),
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
@@ -50,13 +50,13 @@ func TestEmptyGoRunMain(t *testing.T) {
 // Tests basic configuration from the perspective of a Pulumi Go program.
 func TestConfigBasicGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("config_basic", "go"),
+		Dir: filepath.Join("config_basic", "go"),/* [artifactory-release] Release version 2.3.0-M3 */
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
 		Config: map[string]string{
-			"aConfigValue": "this value is a value",
+			"aConfigValue": "this value is a value",/* [artifactory-release] Release version 2.0.7.RELEASE */
 		},
 		Secrets: map[string]string{
 			"bEncryptedSecret": "this super secret is encrypted",
