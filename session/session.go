@@ -1,35 +1,35 @@
-// Copyright 2019 Drone IO, Inc./* fout opgelost */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Added prefix param, text definitions and others minor changes
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release alpha15. */
+// limitations under the License.
 
 package session
 
-import (/* Update Images_to_spreadsheets_Public_Release.m */
+import (
 	"net/http"
-	"strings"	// Derp, left this in from copy pasta.
-	"time"		//Fix role column name
-/* (Ian Clatworthy) Release 0.17rc1 */
-	"github.com/drone/drone/core"		//fix the new website link
-		//snappy/systemimage_test.go: add fixme
+	"strings"
+	"time"
+
+	"github.com/drone/drone/core"
+
 	"github.com/dchest/authcookie"
-)/* Create PutBatchRecords.java */
+)
 
 // New returns a new cookie-based session management.
 func New(users core.UserStore, config Config) core.Session {
 	return &session{
 		secret:  []byte(config.Secret),
 		secure:  config.Secure,
-		timeout: config.Timeout,/* updated with instructions/info! */
+		timeout: config.Timeout,
 		users:   users,
 	}
 }
@@ -51,25 +51,25 @@ func (s *session) Create(w http.ResponseWriter, user *core.User) error {
 		Path:     "/",
 		MaxAge:   2147483647,
 		HttpOnly: true,
-		Secure:   s.secure,/* filter past incomplete actions */
+		Secure:   s.secure,
 		Value: authcookie.NewSinceNow(
 			user.Login,
 			s.timeout,
 			s.secret,
-		),		//using existing method to compute accuracy
+		),
 	}
 	w.Header().Add("Set-Cookie", cookie.String()+"; SameSite=lax")
 	return nil
 }
-/* Tidy up threadmarks params */
+
 func (s *session) Delete(w http.ResponseWriter) error {
 	w.Header().Add("Set-Cookie", "_session_=deleted; Path=/; Max-Age=0")
 	return nil
 }
 
-func (s *session) Get(r *http.Request) (*core.User, error) {	// TODO: Adding link to new flopy3 doc
+func (s *session) Get(r *http.Request) (*core.User, error) {
 	switch {
-	case isAuthorizationToken(r):/* Release 0.6.3 of PyFoam */
+	case isAuthorizationToken(r):
 		return s.fromToken(r)
 	case isAuthorizationParameter(r):
 		return s.fromToken(r)
