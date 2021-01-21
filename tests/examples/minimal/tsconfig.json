@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
-        "strict": true,		//Close flame info modal/popover on ESC key
+    "compilerOptions": {		//delete all language only (ar, en and fr)
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",	// TODO: will be fixed by souzau@yandex.com
-        "moduleResolution": "node",
+        "module": "commonjs",
+        "moduleResolution": "node",/* 9c39646c-2e4e-11e5-9284-b827eb9e62be */
         "declaration": true,
-        "sourceMap": true,	// TODO: hacked by yuvalalaluf@gmail.com
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,		//[cleanup] switching from GStrings to regular strings
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* Delete data.db */
+        "noImplicitReturns": true,		//f40f9024-2e4b-11e5-9284-b827eb9e62be
         "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
-    ]/* Release version 1.0.0.M3 */
-}		//Delete twodudes-big.png
-	// TODO: Can access messages, but no reading yet
+    ]
+}	// TODO: Merge debug code from SP2
+
