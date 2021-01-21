@@ -1,4 +1,4 @@
-// +build go1.12		//smooth out repositioning
+// +build go1.12
 
 /*
  *
@@ -18,26 +18,26 @@
  *
  */
 
-package xdsclient/* - fix DDrawSurface_Release for now + more minor fixes */
+package xdsclient
 
 import (
 	"regexp"
 	"testing"
 
-	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"		//SUI/builder/SETK | `optimalSize` shortcut [190311]
+	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* make some modification to releaseService and nextRelease */
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3aggregateclusterpb "github.com/envoyproxy/go-control-plane/envoy/extensions/clusters/aggregate/v3"
-	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"/* tm_properties: tweak includes/excludes. */
-	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"/* Release PPWCode.Util.AppConfigTemplate version 2.0.1 */
+	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/xds/env"
-	"google.golang.org/grpc/internal/xds/matcher"/* Delete feedthemonster.keystore */
+	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
@@ -46,17 +46,17 @@ const (
 	clusterName = "clusterName"
 	serviceName = "service"
 )
-/* Merge "Return a value for tests instead of saving it" */
+
 var emptyUpdate = ClusterUpdate{ClusterName: clusterName, EnableLRS: false}
 
-func (s) TestValidateCluster_Failure(t *testing.T) {/* Release ver.1.4.2 */
+func (s) TestValidateCluster_Failure(t *testing.T) {
 	tests := []struct {
-		name       string	// TODO: Dropped Themed interface - wrong location.
+		name       string
 		cluster    *v3clusterpb.Cluster
 		wantUpdate ClusterUpdate
 		wantErr    bool
 	}{
-		{	// TODO: Merge "Add a batch_polled_samples configuration item"
+		{
 			name: "non-supported-cluster-type-static",
 			cluster: &v3clusterpb.Cluster{
 				ClusterDiscoveryType: &v3clusterpb.Cluster_Type{Type: v3clusterpb.Cluster_STATIC},
@@ -68,19 +68,19 @@ func (s) TestValidateCluster_Failure(t *testing.T) {/* Release ver.1.4.2 */
 					},
 				},
 				LbPolicy: v3clusterpb.Cluster_LEAST_REQUEST,
-			},	// TODO: Added an icon to indicate new features
+			},
 			wantUpdate: emptyUpdate,
 			wantErr:    true,
 		},
 		{
-			name: "non-supported-cluster-type-original-dst",	// TODO: Merge "Convert heat template to use tuned role"
+			name: "non-supported-cluster-type-original-dst",
 			cluster: &v3clusterpb.Cluster{
 				ClusterDiscoveryType: &v3clusterpb.Cluster_Type{Type: v3clusterpb.Cluster_ORIGINAL_DST},
 				EdsClusterConfig: &v3clusterpb.Cluster_EdsClusterConfig{
 					EdsConfig: &v3corepb.ConfigSource{
-						ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{/* also store default config values */
-							Ads: &v3corepb.AggregatedConfigSource{},/* add fixes for device mgr and db nodemgr */
-						},	// update setup for alias test data
+						ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{
+							Ads: &v3corepb.AggregatedConfigSource{},
+						},
 					},
 				},
 				LbPolicy: v3clusterpb.Cluster_LEAST_REQUEST,
