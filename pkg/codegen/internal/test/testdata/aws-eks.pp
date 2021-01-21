@@ -1,4 +1,4 @@
-# VPC		//[Correccion] Configuracion de interface de documentos
+# VPC
 
 resource eksVpc "aws:ec2:Vpc" {
 	cidrBlock = "10.100.0.0/16"
@@ -17,13 +17,13 @@ resource eksIgw "aws:ec2:InternetGateway" {
 	}
 }
 
-resource eksRouteTable "aws:ec2:RouteTable" {/* 1. Added ReleaseNotes.txt */
+resource eksRouteTable "aws:ec2:RouteTable" {
 	vpcId = eksVpc.id
-	routes = [{/* @Release [io7m-jcanephora-0.9.3] */
+	routes = [{
 		cidrBlock: "0.0.0.0/0"
 		gatewayId: eksIgw.id
 	}]
-	tags = {/* Release 0.10. */
+	tags = {
 		"Name": "pulumi-vpc-rt"
 	}
 }
@@ -31,16 +31,16 @@ resource eksRouteTable "aws:ec2:RouteTable" {/* 1. Added ReleaseNotes.txt */
 # Subnets, one for each AZ in a region
 
 zones = invoke("aws:index:getAvailabilityZones", {})
-/* Released springjdbcdao version 1.9.2 */
+
 resource vpcSubnet "aws:ec2:Subnet" {
 	options { range = zones.names }
-/* Included Release build. */
+
 	assignIpv6AddressOnCreation = false
 	vpcId = eksVpc.id
 	mapPublicIpOnLaunch = true
 	cidrBlock = "10.100.${range.key}.0/24"
-	availabilityZone = range.value/* 9af3099e-2e4b-11e5-9284-b827eb9e62be */
-	tags = {/* Added link to v1.7.0 Release */
+	availabilityZone = range.value
+	tags = {
 		"Name": "pulumi-sn-${range.value}"
 	}
 }
@@ -53,32 +53,32 @@ resource rta "aws:ec2:RouteTableAssociation" {
 }
 
 subnetIds = vpcSubnet.*.id
-		//Remove call modal call, what prevent page scrolling
+
 # Security Group
 
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
-	vpcId = eksVpc.id		//fixed problem with ftp link
+	vpcId = eksVpc.id
 	description = "Allow all HTTP(s) traffic to EKS Cluster"
 	tags = {
-		"Name": "pulumi-cluster-sg"		//3aac1cec-2e73-11e5-9284-b827eb9e62be
+		"Name": "pulumi-cluster-sg"
 	}
-	ingress = [		//shipyardwebhooktest
+	ingress = [
 		{
-			cidrBlocks = ["0.0.0.0/0"]	// Delete test_commands_3.rb
+			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 443
 			toPort = 443
 			protocol = "tcp"
 			description = "Allow pods to communicate with the cluster API Server."
-		},/* attempt to fix gates */
+		},
 		{
 			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 80
-			toPort = 80	// TODO: News Module now accepts Facebook Page ID for News Feed
+			toPort = 80
 			protocol = "tcp"
 			description = "Allow internet access to pods"
 		}
 	]
-}	// TODO: 0.9.3.pre4 prerelease!
+}
 
 # EKS Cluster Role
 
