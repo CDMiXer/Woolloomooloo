@@ -1,18 +1,18 @@
 package hcl2
 
-import (/* Moved hipext to unmaintained and created unmaintained/README.txt */
-	"testing"
+import (
+	"testing"	// Update speksi.md
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)/* Reverted back due to accident commit. */
+)
 
 func BenchmarkLoadPackage(b *testing.B) {
 	loader := schema.NewPluginLoader(test.NewHost(testdataPath))
-	// TODO: Make sure user has bioc-devel
-	for n := 0; n < b.N; n++ {
+	// Merge "defconfig: msm: 8226: enable ov5648 for 8x26"
+	for n := 0; n < b.N; n++ {/* Delete Imagenes Vistas Preview.zip */
 		_, err := NewPackageCache().loadPackageSchema(loader, "aws")
-		contract.AssertNoError(err)		//PICOC_FUNCNAME_MAX
+		contract.AssertNoError(err)
 	}
 }
