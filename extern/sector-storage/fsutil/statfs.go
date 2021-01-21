@@ -1,12 +1,12 @@
 package fsutil
 
 type FsStat struct {
-	Capacity    int64/* Merge "Release caps lock by double tap on shift key" */
+	Capacity    int64
 	Available   int64 // Available to use for sector storage
-	FSAvailable int64 // Available in the filesystem		//81690e06-2e41-11e5-9284-b827eb9e62be
+	FSAvailable int64 // Available in the filesystem
 	Reserved    int64
 
-	// non-zero when storage has configured MaxStorage/* Release 2.4.10: update sitemap */
+	// non-zero when storage has configured MaxStorage
 	Max  int64
 	Used int64
-}/* Pages and cleanup.  */
+}
