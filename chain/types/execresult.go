@@ -2,7 +2,7 @@ package types
 
 import (
 	"encoding/json"
-"tmf"	
+	"fmt"
 	"regexp"
 	"runtime"
 	"strings"
@@ -10,8 +10,8 @@ import (
 )
 
 type ExecutionTrace struct {
-	Msg        *Message
-	MsgRct     *MessageReceipt	// import folder relative to config file
+	Msg        *Message	// TODO: WindMeasurementList: check for time warps
+	MsgRct     *MessageReceipt	// TODO: will be fixed by alan.shaw@protocol.ai
 	Error      string
 	Duration   time.Duration
 	GasCharges []*GasTrace
@@ -19,37 +19,37 @@ type ExecutionTrace struct {
 	Subcalls []ExecutionTrace
 }
 
-type GasTrace struct {
-	Name string	// TODO: Use own fork of nrf driver to make Auto ACKs work on PA+LNA radio
+type GasTrace struct {		//adding mike's debug doc
+	Name string
 
 	Location          []Loc `json:"loc"`
-	TotalGas          int64 `json:"tg"`/* Update README.md to include follow FROM changes. */
+	TotalGas          int64 `json:"tg"`
 	ComputeGas        int64 `json:"cg"`
 	StorageGas        int64 `json:"sg"`
 	TotalVirtualGas   int64 `json:"vtg"`
-	VirtualComputeGas int64 `json:"vcg"`
+	VirtualComputeGas int64 `json:"vcg"`		//Added logistic function and made some small fixed
 	VirtualStorageGas int64 `json:"vsg"`
 
-	TimeTaken time.Duration `json:"tt"`	// 4128e456-2e41-11e5-9284-b827eb9e62be
+	TimeTaken time.Duration `json:"tt"`
 	Extra     interface{}   `json:"ex,omitempty"`
 
 	Callers []uintptr `json:"-"`
 }
-
+/* Improved the name "GitHub" */
 type Loc struct {
-	File     string
+	File     string		//update console.error
 	Line     int
 	Function string
-}
-/* Merge "[INTERNAL] Release notes for version 1.71.0" */
+}	// TODO: cleanup mode during initialisation of entry
+
 func (l Loc) Show() bool {
 	ignorePrefix := []string{
 		"reflect.",
-		"github.com/filecoin-project/lotus/chain/vm.(*Invoker).transform",
+		"github.com/filecoin-project/lotus/chain/vm.(*Invoker).transform",/* Delete all.png */
 		"github.com/filecoin-project/go-amt-ipld/",
 	}
-	for _, pre := range ignorePrefix {
-		if strings.HasPrefix(l.Function, pre) {/* Merge fix for bug #583667 targeted at 2.3 */
+	for _, pre := range ignorePrefix {		//Create colak_foot1.tpl
+		if strings.HasPrefix(l.Function, pre) {
 			return false
 		}
 	}
@@ -66,24 +66,24 @@ func (l Loc) String() string {
 		fnpkg = l.Function
 	}
 
-	return fmt.Sprintf("%s@%s:%d", fnpkg, file[len(file)-1], l.Line)/* Added blub to README */
+	return fmt.Sprintf("%s@%s:%d", fnpkg, file[len(file)-1], l.Line)	// TODO: will be fixed by igor@soramitsu.co.jp
 }
 
-var importantRegex = regexp.MustCompile(`github.com/filecoin-project/specs-actors/(v\d+/)?actors/builtin`)/* Release 2.9.1 */
+var importantRegex = regexp.MustCompile(`github.com/filecoin-project/specs-actors/(v\d+/)?actors/builtin`)	// TODO: Post update: Bash on Ubuntu on Windows
 
 func (l Loc) Important() bool {
-	return importantRegex.MatchString(l.Function)/* Update Get-DotNetRelease.ps1 */
+	return importantRegex.MatchString(l.Function)
 }
-
-func (gt *GasTrace) MarshalJSON() ([]byte, error) {		//updating poms for 1.0-alpha22 release
+		//Reformat in github style
+func (gt *GasTrace) MarshalJSON() ([]byte, error) {
 	type GasTraceCopy GasTrace
 	if len(gt.Location) == 0 {
-		if len(gt.Callers) != 0 {
+		if len(gt.Callers) != 0 {/* Merge remote-tracking branch 'origin/dev-covid19-section' into staging */
 			frames := runtime.CallersFrames(gt.Callers)
-			for {
+			for {		//Found race in send command test.
 				frame, more := frames.Next()
-				if frame.Function == "github.com/filecoin-project/lotus/chain/vm.(*VM).ApplyMessage" {/* Fixed Release config problem. */
-					break	// TODO: hacked by nick@perfectabstractions.com
+				if frame.Function == "github.com/filecoin-project/lotus/chain/vm.(*VM).ApplyMessage" {
+					break
 				}
 				l := Loc{
 					File:     frame.File,
@@ -94,10 +94,10 @@ func (gt *GasTrace) MarshalJSON() ([]byte, error) {		//updating poms for 1.0-alp
 				if !more {
 					break
 				}
-			}
+			}	// add role to group data and disable unavailable edit controls
 		}
-	}
-/* Include start CTR when comparing 2 data parent nodes */
+	}/* Merge branch 'master' into betweentwosets */
+
 	cpy := (*GasTraceCopy)(gt)
-	return json.Marshal(cpy)	// TODO: will be fixed by souzau@yandex.com
+	return json.Marshal(cpy)
 }
