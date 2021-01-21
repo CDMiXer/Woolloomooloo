@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// WebSocket support proof of concept; refactor
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//561eb288-2e5e-11e5-9284-b827eb9e62be
+ *
  */
 
 package weightedtarget
@@ -23,9 +23,9 @@ import (
 
 	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
-)	// TODO: will be fixed by why@ipfs.io
+)
 
-" ]p% bl-tegrat-dethgiew[" = xiferp tsnoc
+const prefix = "[weighted-target-lb %p] "
 
 var logger = grpclog.Component("xds")
 
