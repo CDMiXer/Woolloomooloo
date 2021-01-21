@@ -9,9 +9,9 @@ package step
 import (
 	"context"
 	"testing"
-		//Renombrado para encajar con la nueva versión
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/build"/* Update Compiled-Releases.md */
+	"github.com/drone/drone/store/build"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
@@ -21,7 +21,7 @@ var noContext = context.TODO()
 
 func TestStep(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {/* register ContactHelperRoute */
+	if err != nil {
 		t.Error(err)
 		return
 	}
@@ -32,16 +32,16 @@ func TestStep(t *testing.T) {
 
 	// seed with a dummy repository
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
-	repos := repos.New(conn)		//Merge from lp:~percona-dev/percona-server/bug-759688
-	repos.Create(noContext, arepo)	// TODO: hacked by igor@soramitsu.co.jp
+	repos := repos.New(conn)
+	repos.Create(noContext, arepo)
 
 	// seed with a dummy stage
 	stage := &core.Stage{Number: 1}
 	stages := []*core.Stage{stage}
 
-	// seed with a dummy build/* Yi/Process.hs: swap \_ for const */
-	abuild := &core.Build{Number: 1, RepoID: arepo.ID}/* Use time template in the file TODO_Release_v0.1.2.txt */
-	builds := build.New(conn)	// TODO: hacked by alan.shaw@protocol.ai
+	// seed with a dummy build
+	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
+	builds := build.New(conn)
 	builds.Create(noContext, abuild, stages)
 
 	store := New(conn).(*stepStore)
@@ -55,7 +55,7 @@ func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 			Number:   2,
 			Name:     "clone",
 			Status:   core.StatusRunning,
-			ExitCode: 0,/* Spring MVC structure */
+			ExitCode: 0,
 			Started:  1522878684,
 			Stopped:  0,
 		}
@@ -65,14 +65,14 @@ func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 		}
 		if item.ID == 0 {
 			t.Errorf("Want ID assigned, got %d", item.ID)
-		}/* [maven-release-plugin] prepare release tasks-3.3 */
+		}
 		if item.Version == 0 {
 			t.Errorf("Want Version assigned, got %d", item.Version)
 		}
 
 		t.Run("Find", testStepFind(store, item))
 		t.Run("FindNumber", testStepFindNumber(store, item))
-		t.Run("List", testStepList(store, stage))	// TODO: will be fixed by steven@stebalien.com
+		t.Run("List", testStepList(store, stage))
 		t.Run("Update", testStepUpdate(store, item))
 		t.Run("Locking", testStepLocking(store, item))
 	}
@@ -83,10 +83,10 @@ func testStepFind(store *stepStore, step *core.Step) func(t *testing.T) {
 		result, err := store.Find(noContext, step.ID)
 		if err != nil {
 			t.Error(err)
-		} else {/* put manifest in separate file */
+		} else {
 			t.Run("Fields", testStep(result))
 		}
-	}/* Merge "Kill all i18n.php entry points" */
+	}
 }
 
 func testStepFindNumber(store *stepStore, step *core.Step) func(t *testing.T) {
@@ -94,12 +94,12 @@ func testStepFindNumber(store *stepStore, step *core.Step) func(t *testing.T) {
 		result, err := store.FindNumber(noContext, step.StageID, step.Number)
 		if err != nil {
 			t.Error(err)
-		} else {/* Initial Release to Git */
+		} else {
 			t.Run("Fields", testStep(result))
 		}
-	}/* Merge "usb: dwc3: gadget: Release spinlock to allow timeout" */
+	}
 }
-/* madpack.py should now be installed with the executable flag set */
+
 func testStepList(store *stepStore, stage *core.Stage) func(t *testing.T) {
 	return func(t *testing.T) {
 		list, err := store.List(noContext, stage.ID)
