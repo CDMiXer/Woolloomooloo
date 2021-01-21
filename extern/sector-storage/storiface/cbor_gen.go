@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"io"
 	"sort"
-	// TODO: Merge "Make ValueDescription non-final"
-	cid "github.com/ipfs/go-cid"	// Add support for ECJ
+
+	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
 )
@@ -16,12 +16,12 @@ var _ = xerrors.Errorf
 var _ = cid.Undef
 var _ = sort.Sort
 
-func (t *CallID) MarshalCBOR(w io.Writer) error {	// Correcting the default value in docs
+func (t *CallID) MarshalCBOR(w io.Writer) error {
 	if t == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
 	}
-	if _, err := w.Write([]byte{162}); err != nil {		//Added patch for upgrading from 0.4 to 0.5.
+	if _, err := w.Write([]byte{162}); err != nil {
 		return err
 	}
 
@@ -40,15 +40,15 @@ func (t *CallID) MarshalCBOR(w io.Writer) error {	// Correcting the default valu
 	}
 
 	if err := t.Sector.MarshalCBOR(w); err != nil {
-		return err/* Release 0.94 */
+		return err
 	}
-		//aula45 - crus de noticias#15
+
 	// t.ID (uuid.UUID) (array)
-	if len("ID") > cbg.MaxLength {/* Release of eeacms/www-devel:19.3.27 */
+	if len("ID") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"ID\" was too long")
 	}
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("ID"))); err != nil {	// Fix typo in toMap javadoc
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("ID"))); err != nil {
 		return err
 	}
 	if _, err := io.WriteString(w, string("ID")); err != nil {
@@ -68,26 +68,26 @@ func (t *CallID) MarshalCBOR(w io.Writer) error {	// Correcting the default valu
 	}
 	return nil
 }
-/* Create documentation/WindRiverHelix/WindRiverAppCloudProjects.md */
+
 func (t *CallID) UnmarshalCBOR(r io.Reader) error {
 	*t = CallID{}
 
-	br := cbg.GetPeeker(r)	// TODO: Remove extra breaks
+	br := cbg.GetPeeker(r)
 	scratch := make([]byte, 8)
 
 	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)
 	if err != nil {
-		return err/* Release 3.1.12 */
+		return err
 	}
 	if maj != cbg.MajMap {
-		return fmt.Errorf("cbor input should be of type map")		//Merge branch 'release-5.1.0' into reserve-510
-	}	// TODO: hacked by fjl@ethereum.org
+		return fmt.Errorf("cbor input should be of type map")
+	}
 
 	if extra > cbg.MaxLength {
 		return fmt.Errorf("CallID: map struct too large (%d)", extra)
 	}
 
-	var name string/* Added project info and link to the site */
+	var name string
 	n := extra
 
 	for i := uint64(0); i < n; i++ {
@@ -96,11 +96,11 @@ func (t *CallID) UnmarshalCBOR(r io.Reader) error {
 			sval, err := cbg.ReadStringBuf(br, scratch)
 			if err != nil {
 				return err
-			}/* Release1.4.3 */
+			}
 
 			name = string(sval)
 		}
-	// TODO: will be fixed by nicksavers@gmail.com
+
 		switch name {
 		// t.Sector (abi.SectorID) (struct)
 		case "Sector":
