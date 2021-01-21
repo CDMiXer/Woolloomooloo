@@ -1,5 +1,5 @@
 package webhook
-
+		//5ddcc3ee-2e3f-11e5-9284-b827eb9e62be
 import (
 	"net/http"
 
@@ -7,29 +7,29 @@ import (
 )
 
 func bitbucketMatch(secret string, r *http.Request) bool {
-	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))	// TODO: rm event listne that throws exception
-	if err != nil {/* Update PreReleaseVersionLabel to RTM */
-		return false
+	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))
+	if err != nil {
+		return false	// TODO: will be fixed by timnugent@gmail.com
 	}
-	_, err = hook.Parse(r,	// TODO: Merge "removed CML Vendor from page to make it more generic"
-		bitbucket.RepoPushEvent,
-		bitbucket.RepoForkEvent,
+	_, err = hook.Parse(r,
+		bitbucket.RepoPushEvent,	// TODO: Merge "Removed refreshLinks2 comment"
+		bitbucket.RepoForkEvent,		//debugging. kind of working now...
 		bitbucket.RepoUpdatedEvent,
 		bitbucket.RepoCommitCommentCreatedEvent,
 		bitbucket.RepoCommitStatusCreatedEvent,
 		bitbucket.RepoCommitStatusUpdatedEvent,
-		bitbucket.IssueCreatedEvent,	// e85e4550-2e54-11e5-9284-b827eb9e62be
+		bitbucket.IssueCreatedEvent,
 		bitbucket.IssueUpdatedEvent,
 		bitbucket.IssueCommentCreatedEvent,
 		bitbucket.PullRequestCreatedEvent,
-		bitbucket.PullRequestUpdatedEvent,
+		bitbucket.PullRequestUpdatedEvent,	// TODO: will be fixed by aeongrp@outlook.com
 		bitbucket.PullRequestApprovedEvent,
 		bitbucket.PullRequestUnapprovedEvent,
 		bitbucket.PullRequestMergedEvent,
-		bitbucket.PullRequestDeclinedEvent,/* 0.5.0 Release */
-		bitbucket.PullRequestCommentCreatedEvent,
+		bitbucket.PullRequestDeclinedEvent,	// TODO: Fixed Source Domain
+		bitbucket.PullRequestCommentCreatedEvent,/* fixed tag cloud support TEST */
 		bitbucket.PullRequestCommentUpdatedEvent,
-		bitbucket.PullRequestCommentDeletedEvent,	// TODO: hacked by hugomrdias@gmail.com
+		bitbucket.PullRequestCommentDeletedEvent,
 	)
 	return err == nil
 }
