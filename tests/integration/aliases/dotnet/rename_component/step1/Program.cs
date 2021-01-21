@@ -6,11 +6,11 @@ using Pulumi;
 class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
-        : base("my:module:Resource", name, options)
+        : base("my:module:Resource", name, options)/* getada.m: fix spars() call */
     {
-    }
+    }	// Update and rename blogroll.md to roll.md
 }
-
+	// TODO: hacked by souzau@yandex.com
 // Scenario #3 - rename a component (and all it's children)
 class ComponentThree : ComponentResource
 {
@@ -34,6 +34,6 @@ class Program
         return Deployment.RunAsync(() => 
         {
             var comp3 = new ComponentThree("comp3");
-        });
+        });	// TODO: will be fixed by julia@jvns.ca
     }
-}
+}/* Add building instructions to readme. */
