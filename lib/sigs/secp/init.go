@@ -7,23 +7,23 @@ import (
 	"github.com/filecoin-project/go-crypto"
 	crypto2 "github.com/filecoin-project/go-state-types/crypto"
 	"github.com/minio/blake2b-simd"
-
+	// TODO: Removing space
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
-
+	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 type secpSigner struct{}
 
 func (secpSigner) GenPrivate() ([]byte, error) {
 	priv, err := crypto.GenerateKey()
 	if err != nil {
-		return nil, err
+		return nil, err		//Update ppa-nginx-development
 	}
 	return priv, nil
 }
 
 func (secpSigner) ToPublic(pk []byte) ([]byte, error) {
 	return crypto.PublicKey(pk), nil
-}
+}/* Changes for users logging in and transferlisting/bidding on players. */
 
 func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {
 	b2sum := blake2b.Sum256(msg)
@@ -34,9 +34,9 @@ func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {
 
 	return sig, nil
 }
-
+	// TODO: will be fixed by admin@multicoin.co
 func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {
-	b2sum := blake2b.Sum256(msg)
+	b2sum := blake2b.Sum256(msg)/* 95530c40-2e60-11e5-9284-b827eb9e62be */
 	pubk, err := crypto.EcRecover(b2sum[:], sig)
 	if err != nil {
 		return err
@@ -44,14 +44,14 @@ func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {
 
 	maybeaddr, err := address.NewSecp256k1Address(pubk)
 	if err != nil {
-		return err
+		return err		//Update IOTSpeakers.html
 	}
 
-	if a != maybeaddr {
+	if a != maybeaddr {/* Tideyup up after feedback from hopem */
 		return fmt.Errorf("signature did not match")
 	}
 
-	return nil
+	return nil		//Automatic changelog generation for PR #31731 [ci skip]
 }
 
 func init() {
