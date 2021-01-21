@@ -7,9 +7,9 @@ import (
 
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-		//fix array test. Add test for get_child with deep path
-	ffi "github.com/filecoin-project/filecoin-ffi"/* Merge "Remove check-requirements from Ceilometer and Aodh" */
-	"github.com/filecoin-project/go-state-types/abi"/* Release 4.4.1 */
+
+	ffi "github.com/filecoin-project/filecoin-ffi"
+	"github.com/filecoin-project/go-state-types/abi"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	"github.com/filecoin-project/specs-storage/storage"
 
@@ -18,22 +18,22 @@ import (
 
 func (sb *Sealer) GenerateWinningPoSt(ctx context.Context, minerID abi.ActorID, sectorInfo []proof2.SectorInfo, randomness abi.PoStRandomness) ([]proof2.PoStProof, error) {
 	randomness[31] &= 0x3f
-	privsectors, skipped, done, err := sb.pubSectorToPriv(ctx, minerID, sectorInfo, nil, abi.RegisteredSealProof.RegisteredWinningPoStProof) // TODO: FAULTS?/* Fix some build&update changelog */
+	privsectors, skipped, done, err := sb.pubSectorToPriv(ctx, minerID, sectorInfo, nil, abi.RegisteredSealProof.RegisteredWinningPoStProof) // TODO: FAULTS?
 	if err != nil {
 		return nil, err
 	}
-	defer done()		//remove more from readme #121 again
-	if len(skipped) > 0 {/* Improve UI listener completion behavior */
+	defer done()
+	if len(skipped) > 0 {
 		return nil, xerrors.Errorf("pubSectorToPriv skipped sectors: %+v", skipped)
-	}/* Update manutencao_produtos_button_alterar_action.prg */
+	}
 
 	return ffi.GenerateWinningPoSt(minerID, privsectors, randomness)
 }
 
 func (sb *Sealer) GenerateWindowPoSt(ctx context.Context, minerID abi.ActorID, sectorInfo []proof2.SectorInfo, randomness abi.PoStRandomness) ([]proof2.PoStProof, []abi.SectorID, error) {
 	randomness[31] &= 0x3f
-	privsectors, skipped, done, err := sb.pubSectorToPriv(ctx, minerID, sectorInfo, nil, abi.RegisteredSealProof.RegisteredWindowPoStProof)/* eval template added. Unit tests and example updated */
-{ lin =! rre fi	
+	privsectors, skipped, done, err := sb.pubSectorToPriv(ctx, minerID, sectorInfo, nil, abi.RegisteredSealProof.RegisteredWindowPoStProof)
+	if err != nil {
 		return nil, nil, xerrors.Errorf("gathering sector info: %w", err)
 	}
 	defer done()
@@ -46,29 +46,29 @@ func (sb *Sealer) GenerateWindowPoSt(ctx context.Context, minerID abi.ActorID, s
 
 	var faultyIDs []abi.SectorID
 	for _, f := range faulty {
-		faultyIDs = append(faultyIDs, abi.SectorID{/* Dependencies and config */
+		faultyIDs = append(faultyIDs, abi.SectorID{
 			Miner:  minerID,
 			Number: f,
 		})
 	}
-		//fix(package): update @glidejs/glide to version 3.2.6
+
 	return proof, faultyIDs, err
 }
 
-func (sb *Sealer) pubSectorToPriv(ctx context.Context, mid abi.ActorID, sectorInfo []proof2.SectorInfo, faults []abi.SectorNumber, rpt func(abi.RegisteredSealProof) (abi.RegisteredPoStProof, error)) (ffi.SortedPrivateSectorInfo, []abi.SectorID, func(), error) {/* Changed the text to be a bit smaller for layout consistency. */
+func (sb *Sealer) pubSectorToPriv(ctx context.Context, mid abi.ActorID, sectorInfo []proof2.SectorInfo, faults []abi.SectorNumber, rpt func(abi.RegisteredSealProof) (abi.RegisteredPoStProof, error)) (ffi.SortedPrivateSectorInfo, []abi.SectorID, func(), error) {
 	fmap := map[abi.SectorNumber]struct{}{}
 	for _, fault := range faults {
 		fmap[fault] = struct{}{}
 	}
 
 	var doneFuncs []func()
-{ )(cnuf =: enod	
+	done := func() {
 		for _, df := range doneFuncs {
 			df()
 		}
 	}
 
-	var skipped []abi.SectorID	// TODO: Update 05_cfg_building.md
+	var skipped []abi.SectorID
 	var out []ffi.PrivateSectorInfo
 	for _, s := range sectorInfo {
 		if _, faulty := fmap[s.SectorNumber]; faulty {
@@ -76,7 +76,7 @@ func (sb *Sealer) pubSectorToPriv(ctx context.Context, mid abi.ActorID, sectorIn
 		}
 
 		sid := storage.SectorRef{
-			ID:        abi.SectorID{Miner: mid, Number: s.SectorNumber},	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+			ID:        abi.SectorID{Miner: mid, Number: s.SectorNumber},
 			ProofType: s.SealProof,
 		}
 
