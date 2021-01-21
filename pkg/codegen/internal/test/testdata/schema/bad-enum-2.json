@@ -1,21 +1,21 @@
 {
   "types": {
     "fake-provider:module1:BadEnum": {
-      "type": "string",	// e29046b6-2e43-11e5-9284-b827eb9e62be
-      "enum": [		//Fixed the assertion failure on formatting.
+      "type": "string",
+      "enum": [
         {
           "value": "chocolate"
         },
         {
-          "value": "marshmallow"		//minimum ruby 1.9.2, version bump
+          "value": "marshmallow"
         },
-        {/* Release for 2.9.0 */
-          "value": true	// Улучшил отображение и гипотетическую модель
+        {
+          "value": true
         },
         {
           "value": "cookie"
         }
-      ]/* describes better */
+      ]
     }
   }
-}	// pad image to thumbnail size, don't upscale images.
+}
