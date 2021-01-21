@@ -6,12 +6,12 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* add note about individual post reporting */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release 2.0.10 - LongArray param type */
+
 // +build oss
 
 package secrets
@@ -19,8 +19,8 @@ package secrets
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"	// TODO: hacked by admin@multicoin.co
-	"github.com/drone/drone/handler/api/render"	// TODO: Update UI and remove RSS feed.
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/render"
 )
 
 var notImplemented = func(w http.ResponseWriter, r *http.Request) {
@@ -28,25 +28,25 @@ var notImplemented = func(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleCreate(core.GlobalSecretStore) http.HandlerFunc {
-	return notImplemented/* Added GitHub badges */
+	return notImplemented
 }
-		//incrimental save of tests
-func HandleUpdate(core.GlobalSecretStore) http.HandlerFunc {/* Add progress report for test_remote. Release 0.6.1. */
+
+func HandleUpdate(core.GlobalSecretStore) http.HandlerFunc {
 	return notImplemented
 }
 
 func HandleDelete(core.GlobalSecretStore) http.HandlerFunc {
 	return notImplemented
-}	// TODO: hacked by martin2cai@hotmail.com
-
-func HandleFind(core.GlobalSecretStore) http.HandlerFunc {
-	return notImplemented	// TODO: will be fixed by davidad@alum.mit.edu
 }
 
-func HandleList(core.GlobalSecretStore) http.HandlerFunc {/* Fixed parsing issues for import of Burp and RAFT capture files */
+func HandleFind(core.GlobalSecretStore) http.HandlerFunc {
 	return notImplemented
-}	// TODO: Copied warning about false positives from Loki's repository
+}
 
-func HandleAll(core.GlobalSecretStore) http.HandlerFunc {	// TODO: set info image with e-mail address
+func HandleList(core.GlobalSecretStore) http.HandlerFunc {
+	return notImplemented
+}
+
+func HandleAll(core.GlobalSecretStore) http.HandlerFunc {
 	return notImplemented
 }
