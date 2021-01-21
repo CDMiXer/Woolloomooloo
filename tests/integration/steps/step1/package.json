@@ -6,5 +6,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Pre-Release Notification */
+    }
 }
