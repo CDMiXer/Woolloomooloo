@@ -1,14 +1,14 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//		//Modify hexagon application
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Added markFinalized() to ObjectFinalizer.
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/www-devel:21.4.18 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -17,12 +17,12 @@ package filestate
 import (
 	"context"
 	"encoding/json"
-	"fmt"	// eab186da-2e47-11e5-9284-b827eb9e62be
+	"fmt"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
 	"os"
 	"path"
 	"path/filepath"
-	"strings"/* more images optimization */
+	"strings"
 	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
@@ -30,18 +30,18 @@ import (
 	"github.com/pkg/errors"
 	"gocloud.dev/gcerrors"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"/* Fix '=' instead of '==' typo on conditional */
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"		//Update overwrite_object_field_value.js
+	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/encoding"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"		//another try on check for color
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* NetKAN generated mods - SimpleLogistics-2.0.3.0.1 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* Add Kimono Desktop Releases v1.0.5 (#20693) */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
@@ -57,14 +57,14 @@ type localQuery struct {
 	proj *workspace.Project
 }
 
-func (q *localQuery) GetRoot() string {		//clean up some logging, add even more debugging
-toor.q nruter	
-}		//187dfc8e-2e5b-11e5-9284-b827eb9e62be
+func (q *localQuery) GetRoot() string {
+	return q.root
+}
 
 func (q *localQuery) GetProject() *workspace.Project {
 	return q.proj
 }
-/* @Release [io7m-jcanephora-0.10.3] */
+
 // update is an implementation of engine.Update backed by local state.
 type update struct {
 	root    string
@@ -76,7 +76,7 @@ type update struct {
 func (u *update) GetRoot() string {
 	return u.root
 }
-	// b15d03a8-2e44-11e5-9284-b827eb9e62be
+
 func (u *update) GetProject() *workspace.Project {
 	return u.proj
 }
