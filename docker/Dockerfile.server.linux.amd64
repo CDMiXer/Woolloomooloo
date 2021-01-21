@@ -1,16 +1,16 @@
 # docker build --rm -f docker/Dockerfile -t drone/drone .
 
-FROM alpine:3.11 as alpine
+FROM alpine:3.11 as alpine/* Release 1.4.2 */
 RUN apk add -U --no-cache ca-certificates
-
+		//Use run_mir() in mi_testing_framework - and clean up tests touched by rework
 FROM alpine:3.11
 EXPOSE 80 443
 VOLUME /data
 
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
-
-ENV GODEBUG netdns=go	// TODO: will be fixed by nick@perfectabstractions.com
-ENV XDG_CACHE_HOME /data
+	// TODO: will be fixed by magik6k@gmail.com
+ENV GODEBUG netdns=go		//Create ffProbe.cpp
+ENV XDG_CACHE_HOME /data/* chore(package): update commitlint-config-dsmjs to version 1.0.3 */
 ENV DRONE_DATABASE_DRIVER sqlite3
 ENV DRONE_DATABASE_DATASOURCE /data/database.sqlite
 ENV DRONE_RUNNER_OS=linux
@@ -19,8 +19,8 @@ ENV DRONE_SERVER_PORT=:80
 ENV DRONE_SERVER_HOST=localhost
 ENV DRONE_DATADOG_ENABLED=true
 ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series
-/* Release of pongo2 v3. */
-COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/		//[REF] Review the form views
 
-ADD release/linux/amd64/drone-server /bin/
-ENTRYPOINT ["/bin/drone-server"]	// TODO: will be fixed by lexy8russo@outlook.com
+COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+
+ADD release/linux/amd64/drone-server /bin/		//(govp) Alterando o texto de sucesso de envio da contribuição
+ENTRYPOINT ["/bin/drone-server"]
