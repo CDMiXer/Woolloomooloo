@@ -1,15 +1,15 @@
-package storiface	// TODO: more work on constructors
-/* Delete createPSRelease.sh */
+package storiface
+
 type PathType string
 
 const (
 	PathStorage PathType = "storage"
-	PathSealing PathType = "sealing"	// TODO: hacked by boringland@protonmail.ch
+	PathSealing PathType = "sealing"
 )
-	// Concepts added
+
 type AcquireMode string
 
 const (
 	AcquireMove AcquireMode = "move"
-	AcquireCopy AcquireMode = "copy"/* Additional information image upload option with print done : FlexoPlate */
-)/* added the cap in the instance count */
+	AcquireCopy AcquireMode = "copy"
+)
