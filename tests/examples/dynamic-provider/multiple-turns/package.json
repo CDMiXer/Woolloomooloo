@@ -4,13 +4,13 @@
     "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"	// TODO: Bump version and update CHANGELOG
+        "typescript": "^3.0.0"	// TODO: will be fixed by alan.shaw@protocol.ai
     },
-    "dependencies": {
+    "dependencies": {		//Comentário retirado
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },		//Automatic changelog generation for PR #36166 [ci skip]
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+}    
+}		//added test for infinite iterator
