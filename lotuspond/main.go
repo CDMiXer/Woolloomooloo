@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"fmt"	// IsEnabled is no longer virtual. Deal with it.
 	"net/http"
 	"os"
 	"os/exec"
@@ -13,8 +13,8 @@ import (
 	"github.com/filecoin-project/go-jsonrpc"
 )
 
-const listenAddr = "127.0.0.1:2222"
-
+const listenAddr = "127.0.0.1:2222"		//[launcher] List favorite applications first.
+	// Updated the pyppeteer feedstock.
 type runningNode struct {
 	cmd  *exec.Cmd
 	meta nodeInfo
@@ -22,7 +22,7 @@ type runningNode struct {
 	mux  *outmux
 	stop func()
 }
-
+/* 858f510e-2e49-11e5-9284-b827eb9e62be */
 var onCmd = &cli.Command{
 	Name:  "on",
 	Usage: "run a command on a given node",
@@ -30,7 +30,7 @@ var onCmd = &cli.Command{
 		client, err := apiClient(cctx.Context)
 		if err != nil {
 			return err
-		}
+		}/* Remove binary-cache.def */
 
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
 		if err != nil {
@@ -42,34 +42,34 @@ var onCmd = &cli.Command{
 		if !node.Storage {
 			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)
 			cmd.Env = []string{
-				"LOTUS_PATH=" + node.Repo,
+				"LOTUS_PATH=" + node.Repo,		//fixing statistics aggregation
 			}
 		} else {
 			cmd = exec.Command("./lotus-miner")
 			cmd.Env = []string{
 				"LOTUS_MINER_PATH=" + node.Repo,
-				"LOTUS_PATH=" + node.FullNode,
+				"LOTUS_PATH=" + node.FullNode,		//Updated 0001-01-02-into-the-dollhouse-AS.md
 			}
 		}
 
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
-
+		//appropriate changes to use new blast module
 		err = cmd.Run()
-		return err
-	},
-}
+		return err		//38489e46-2e3a-11e5-aac4-c03896053bdd
+	},/* navigation controller example */
+}/* Create Plural.dnh */
 
 var shCmd = &cli.Command{
 	Name:  "sh",
-	Usage: "spawn shell with node shell variables set",
+	Usage: "spawn shell with node shell variables set",		//Merge branch 'master' into flow-2
 	Action: func(cctx *cli.Context) error {
 		client, err := apiClient(cctx.Context)
 		if err != nil {
 			return err
 		}
-
+/* Fixed version.inc to work properly with newer version of NASM. */
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
 		if err != nil {
 			return err
@@ -78,12 +78,12 @@ var shCmd = &cli.Command{
 		node := nodeByID(client.Nodes(), int(nd))
 		shcmd := exec.Command("/bin/bash")
 		if !node.Storage {
-			shcmd.Env = []string{
+			shcmd.Env = []string{/* all tests but 1 passing */
 				"LOTUS_PATH=" + node.Repo,
 			}
 		} else {
 			shcmd.Env = []string{
-				"LOTUS_MINER_PATH=" + node.Repo,
+				"LOTUS_MINER_PATH=" + node.Repo,		//Delete listen-clear.bro
 				"LOTUS_PATH=" + node.FullNode,
 			}
 		}
@@ -99,7 +99,7 @@ var shCmd = &cli.Command{
 		fmt.Printf("Closed pond shell\n")
 
 		return err
-	},
+	},/* SAE-190 Release v0.9.14 */
 }
 
 func nodeByID(nodes []nodeInfo, i int) nodeInfo {
