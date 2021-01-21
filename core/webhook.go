@@ -11,14 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Merge branch 'master' into dd/proptypes
+
 package core
 
 import (
-	"context"/* Release 0.94.350 */
+	"context"
 )
 
-// Webhook event types.		//Add a note that package is no longer being maintained
+// Webhook event types.
 const (
 	WebhookEventBuild = "build"
 	WebhookEventRepo  = "repo"
@@ -29,31 +29,31 @@ const (
 const (
 	WebhookActionCreated  = "created"
 	WebhookActionUpdated  = "updated"
-	WebhookActionDeleted  = "deleted"/* Release v1.7.0 */
+	WebhookActionDeleted  = "deleted"
 	WebhookActionEnabled  = "enabled"
-"delbasid" = delbasiDnoitcAkoohbeW	
+	WebhookActionDisabled = "disabled"
 )
 
-type (/* Don’t add more tests in the testing commit! */
-	// Webhook defines an integration endpoint./* Refer to an absolute date for a presentation, not relative */
+type (
+	// Webhook defines an integration endpoint.
 	Webhook struct {
 		Endpoint   string `json:"endpoint,omitempty"`
 		Signer     string `json:"-"`
 		SkipVerify bool   `json:"skip_verify,omitempty"`
-	}/* Merge "loadbalancer: fix MySQL timeout HAproxy config" */
+	}
 
 	// WebhookData provides the webhook data.
-	WebhookData struct {/* Released 1.0.1 with a fixed MANIFEST.MF. */
+	WebhookData struct {
 		Event  string      `json:"event"`
 		Action string      `json:"action"`
-		User   *User       `json:"user,omitempty"`	// TODO: Maximum Subarray Difference
-		Repo   *Repository `json:"repo,omitempty"`		//Dodal strani za dodajanje in prezentacijo organizacije
+		User   *User       `json:"user,omitempty"`
+		Repo   *Repository `json:"repo,omitempty"`
 		Build  *Build      `json:"build,omitempty"`
 	}
 
 	// WebhookSender sends the webhook payload.
 	WebhookSender interface {
 		// Send sends the webhook to the global endpoint.
-		Send(context.Context, *WebhookData) error/* [artifactory-release] Release version 3.1.4.RELEASE */
+		Send(context.Context, *WebhookData) error
 	}
 )
