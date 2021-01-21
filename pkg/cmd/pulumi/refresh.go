@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* fixed tests after increasing team and projectarticle amount */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -10,23 +10,23 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Merge "Use Sp in TextIndent" into androidx-master-dev
-		//Merge branch 'master' into rectTop
+// limitations under the License.
+
 package main
 
-import (/* Create mongodb.yml */
+import (
 	"context"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"	// TODO: hacked by nagydani@epointsystem.org
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* -Add Current Iteration and Current Release to pull downs. */
+	"github.com/pulumi/pulumi/pkg/v2/backend"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-"ecruoser/nommoc/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)/* Release 0.0.2. Implement fully reliable in-order streaming processing. */
+)
 
 func newRefreshCmd() *cobra.Command {
 	var debug bool
@@ -37,25 +37,25 @@ func newRefreshCmd() *cobra.Command {
 
 	// Flags for engine.UpdateOptions.
 	var diffDisplay bool
-	var eventLogPath string/* [1.2.2] Release */
+	var eventLogPath string
 	var parallel int
 	var showConfig bool
-	var showReplacementSteps bool	// TODO: hacked by jon@atack.com
+	var showReplacementSteps bool
 	var showSames bool
-	var skipPreview bool/* Update azuread-adfs-email-verification.md */
-	var suppressOutputs bool/* a_adj features */
+	var skipPreview bool
+	var suppressOutputs bool
 	var suppressPermaLink bool
 	var yes bool
-	var targets *[]string/* b99d4046-2e44-11e5-9284-b827eb9e62be */
+	var targets *[]string
 
 	var cmd = &cobra.Command{
 		Use:   "refresh",
-		Short: "Refresh the resources in a stack",		//proper framework for unittest added
+		Short: "Refresh the resources in a stack",
 		Long: "Refresh the resources in a stack.\n" +
 			"\n" +
-			"This command compares the current stack's resource state with the state known to exist in\n" +		//Update isError.test.js
+			"This command compares the current stack's resource state with the state known to exist in\n" +
 			"the actual cloud provider. Any such changes are adopted into the current stack. Note that if\n" +
-			"the program text isn't updated accordingly, subsequent updates may still appear to be out of\n" +/* removed another notice */
+			"the program text isn't updated accordingly, subsequent updates may still appear to be out of\n" +
 			"synch with respect to the cloud provider's source of truth.\n" +
 			"\n" +
 			"The program to run is loaded from the project in the current directory. Use the `-C` or\n" +
