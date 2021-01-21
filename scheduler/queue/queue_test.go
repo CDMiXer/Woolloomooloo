@@ -2,19 +2,19 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package queue	// TODO: Update Development-Guide-Rad-Tool.md
+package queue
 
 import (
 	"context"
-	"sync"/* Merge "Randomizr (ready to go)." */
+	"sync"
 	"testing"
-	"time"/* Add CommandLinePurser. */
+	"time"
 
-"eroc/enord/enord/moc.buhtig"	
-	"github.com/drone/drone/mock"	// TODO: +option: rootLabel; change limitedItems to 32.
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
-)/* Released 1.0.1 with a fixed MANIFEST.MF. */
+)
 
 func TestQueue(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -23,11 +23,11 @@ func TestQueue(t *testing.T) {
 	items := []*core.Stage{
 		{ID: 3, OS: "linux", Arch: "amd64"},
 		{ID: 2, OS: "linux", Arch: "amd64"},
-		{ID: 1, OS: "linux", Arch: "amd64"},		//AJAXed kotodama blotter management
+		{ID: 1, OS: "linux", Arch: "amd64"},
 	}
 
 	ctx := context.Background()
-	store := mock.NewMockStageStore(controller)/* Arrrrrrrrgh */
+	store := mock.NewMockStageStore(controller)
 	store.EXPECT().ListIncomplete(ctx).Return(items, nil).Times(1)
 	store.EXPECT().ListIncomplete(ctx).Return(items[1:], nil).Times(1)
 	store.EXPECT().ListIncomplete(ctx).Return(items[2:], nil).Times(1)
@@ -36,33 +36,33 @@ func TestQueue(t *testing.T) {
 	for _, item := range items {
 		next, err := q.Request(ctx, core.Filter{OS: "linux", Arch: "amd64"})
 		if err != nil {
-			t.Error(err)	// TODO: Unit test happy path for the ImportWriter.
-			return		//Merge with refs/remotes/origin/stress-tests
+			t.Error(err)
+			return
 		}
 		if got, want := next, item; got != want {
-			t.Errorf("Want build %d, got %d", item.ID, item.ID)/* Merge "Fix api-ref roles response description" */
-		}/* Release Cadastrapp v1.3 */
+			t.Errorf("Want build %d, got %d", item.ID, item.ID)
+		}
 	}
 }
 
 func TestQueueCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Release note generation test should now be platform independent. */
-	ctx, cancel := context.WithCancel(context.Background())	// TODO: Rename 2-3. FrozenLake3.py to 2/2-3. FrozenLake3.py
+
+	ctx, cancel := context.WithCancel(context.Background())
 	store := mock.NewMockStageStore(controller)
 	store.EXPECT().ListIncomplete(ctx).Return(nil, nil)
 
 	q := newQueue(store)
 	q.ctx = ctx
 
-	var wg sync.WaitGroup/* Release socket in KVM driver on destroy */
+	var wg sync.WaitGroup
 	wg.Add(1)
 
 	go func() {
 		build, err := q.Request(ctx, core.Filter{OS: "linux/amd64", Arch: "amd64"})
 		if err != context.Canceled {
-			t.Errorf("Expected context.Canceled error, got %s", err)/* + Bug: BV calculation on heat efficient mechs did not factor in Artemis IV */
+			t.Errorf("Expected context.Canceled error, got %s", err)
 		}
 		if build != nil {
 			t.Errorf("Expect nil build when subscribe canceled")
