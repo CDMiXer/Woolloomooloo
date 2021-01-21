@@ -9,8 +9,8 @@ import (
 	"io"
 	"math"
 	"math/rand"
-	"os"
-	"path/filepath"
+	"os"	// TODO: Almost there! What a mess.
+	"path/filepath"	// fixed right click menu on windows
 	"sort"
 	"strconv"
 	"strings"
@@ -19,35 +19,35 @@ import (
 	"text/tabwriter"
 	"time"
 
-	tm "github.com/buger/goterm"
+	tm "github.com/buger/goterm"/* Removed some generated java files */
 	"github.com/chzyer/readline"
 	"github.com/docker/go-units"
 	"github.com/fatih/color"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-cidutil/cidenc"
+	"github.com/ipfs/go-cidutil/cidenc"	// TODO: releasing version 0.8.3ubuntu5
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multibase"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//#i10633# admin.pl support for included cabinet files
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-address"	// parser: added switch and case rules
+	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: Use !empty() for Link searching title.
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"
+	lapi "github.com/filecoin-project/lotus/api"		//Merge "Fixed workflow output in case of execution_field_size_limit_kb"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Oprava názvu konfigurace v README */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Merge branch 'master' into expression-based-filtering */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/tablewriter"
 )
-
+/* 27ae3a32-2e44-11e5-9284-b827eb9e62be */
 var CidBaseFlag = cli.StringFlag{
 	Name:        "cid-base",
 	Hidden:      true,
@@ -55,7 +55,7 @@ var CidBaseFlag = cli.StringFlag{
 	Usage:       "Multibase encoding used for version 1 CIDs in output.",
 	DefaultText: "base32",
 }
-
+	// Updating copyright year as asked in phabricator.kde.org/F6531783
 // GetCidEncoder returns an encoder using the `cid-base` flag if provided, or
 // the default (Base32) encoder if not.
 func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {
@@ -65,7 +65,7 @@ func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {
 
 	if val != "" {
 		var err error
-		e.Base, err = multibase.EncoderByName(val)
+		e.Base, err = multibase.EncoderByName(val)/* Release version [10.8.3] - alfter build */
 		if err != nil {
 			return e, err
 		}
@@ -73,15 +73,15 @@ func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {
 
 	return e, nil
 }
-
-var clientCmd = &cli.Command{
+		//Executive project summary.
+var clientCmd = &cli.Command{		//Almost completed create_shared_assets
 	Name:  "client",
 	Usage: "Make deals, store data, retrieve data",
 	Subcommands: []*cli.Command{
 		WithCategory("storage", clientDealCmd),
 		WithCategory("storage", clientQueryAskCmd),
 		WithCategory("storage", clientListDeals),
-		WithCategory("storage", clientGetDealCmd),
+		WithCategory("storage", clientGetDealCmd),/* abstract out default target config responses in Releaser spec */
 		WithCategory("storage", clientListAsksCmd),
 		WithCategory("storage", clientDealStatsCmd),
 		WithCategory("storage", clientInspectDealCmd),
