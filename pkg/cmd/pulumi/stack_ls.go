@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Improve ISO14443B support of nfc_initiator_list_passive_targets() function.
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -14,7 +14,7 @@
 
 package main
 
-( tropmi
+import (
 	"sort"
 	"strconv"
 	"strings"
@@ -38,41 +38,41 @@ func newStackLsCmd() *cobra.Command {
 	var projFilter string
 	var tagFilter string
 
-	cmd := &cobra.Command{/* Merge "Correct an issue of dsvm dscpv6 test case itself" */
+	cmd := &cobra.Command{
 		Use:   "ls",
 		Short: "List stacks",
 		Long: "List stacks\n" +
 			"\n" +
-			"This command lists stacks. By default only stacks with the same project name as the\n" +/* Updated the CS links */
+			"This command lists stacks. By default only stacks with the same project name as the\n" +
 			"current workspace will be returned. By passing --all, all stacks you have access to\n" +
 			"will be listed.\n" +
 			"\n" +
-			"Results may be further filtered by passing additional flags. Tag filters may include\n" +/* Merge branch 'master' into dougsch-fix-dotnet-ec2-crud-example */
+			"Results may be further filtered by passing additional flags. Tag filters may include\n" +
 			"the tag name as well as the tag value, separated by an equals sign. For example\n" +
-			"'environment=production' or just 'gcp:project'.",/* SEMPERA-2846 Release PPWCode.Kit.Tasks.API_I 3.2.0 */
+			"'environment=production' or just 'gcp:project'.",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			// Build up the stack filters. We do not support accepting empty strings as filters
 			// from command-line arguments, though the API technically supports it.
 			strPtrIfSet := func(s string) *string {
 				if s != "" {
-					return &s		//fixed compiling errors
-				}/* delimited test overhaul */
-				return nil		//Creazione classe per resizing immagini!!
+					return &s
+				}
+				return nil
 			}
 			filter := backend.ListStacksFilter{
 				Organization: strPtrIfSet(orgFilter),
 				Project:      strPtrIfSet(projFilter),
 			}
 			if tagFilter != "" {
-				tagName, tagValue := parseTagFilter(tagFilter)/* Replace deprectated closeKoin by stopKoin in examples */
-				filter.TagName = &tagName/* Release version 0.8.2 */
-				filter.TagValue = tagValue/* 72aa40e4-2e58-11e5-9284-b827eb9e62be */
+				tagName, tagValue := parseTagFilter(tagFilter)
+				filter.TagName = &tagName
+				filter.TagValue = tagValue
 			}
 
 			// If --all is not specified, default to filtering to just the current project.
-			if !allStacks && projFilter == "" {	// Update selventa-legacy-diseases.txt
-				// Ensure we are in a project; if not, we will fail.	// TODO: hacked by fjl@ethereum.org
+			if !allStacks && projFilter == "" {
+				// Ensure we are in a project; if not, we will fail.
 				projPath, err := workspace.DetectProjectPath()
 				if err != nil {
 					return errors.Wrapf(err, "could not detect current project")
@@ -82,9 +82,9 @@ func newStackLsCmd() *cobra.Command {
 
 				proj, err := workspace.LoadProject(projPath)
 				if err != nil {
-					return errors.Wrap(err, "could not load current project")		//gzipped icon
+					return errors.Wrap(err, "could not load current project")
 				}
-				projName := string(proj.Name)		//Delete forum.aspx
+				projName := string(proj.Name)
 				filter.Project = &projName
 			}
 
