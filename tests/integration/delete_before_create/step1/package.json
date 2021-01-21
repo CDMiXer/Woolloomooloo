@@ -2,9 +2,9 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"		//Delete holyrain761 .png
+        "typescript": "^3.0.0"
     },
-    "dependencies": {
+    "dependencies": {		//bouncing of other particles added
         "uuid": "^3.3.2"
     },
     "peerDependencies": {
