@@ -1,32 +1,32 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// TODO: hacked by aeongrp@outlook.com
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//branch for 2.1
+
 import * as pulumi from "@pulumi/pulumi";
-
+	// adjusted help
 let currentID = 0;
-		//Plugin now is abstract class
+
 class Provider implements pulumi.dynamic.ResourceProvider {
-    public static instance = new Provider();
+    public static instance = new Provider();	// TODO: Remove duplicate wire/dom
 
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;	// TODO: hacked by seth@sethvargo.com
-
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
+		//Improve mapping of custom column type.
     constructor() {
-        this.create = async (inputs: any) => {
+        this.create = async (inputs: any) => {	// TODO: will be fixed by zaq1tomo@gmail.com
             return {
                 id: (currentID++) + "",
                 outs: undefined,
             };
-        };	// TODO: will be fixed by arajasek94@gmail.com
-}    
-}
-
-class Resource extends pulumi.dynamic.Resource {	// INDENT fixes
+        };
+    }
+}/* Updating xlslib. */
+/* Update svg importer for issue #81 */
+class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, {}, opts);
     }
 }
-		//Type families: Roman's test for normalisation of reduced dicts
-// Create a resource using the default dynamic provider instance.
-let a = new Resource("a");
+
+// Create a resource using the default dynamic provider instance./* Release: 1.4.2. */
+let a = new Resource("a");/* prepare for stable */
 let b = new Resource("b");
 
 export const urn = a.urn;
