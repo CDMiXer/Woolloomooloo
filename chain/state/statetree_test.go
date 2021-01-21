@@ -1,4 +1,4 @@
-package state		//trying formatting
+package state
 
 import (
 	"context"
@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: hacked by hugomrdias@gmail.com
+	cbor "github.com/ipfs/go-ipld-cbor"
 
 	address "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/network"
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* rocnetnode: fix for response for write options */
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -18,16 +18,16 @@ import (
 
 func BenchmarkStateTreeSet(b *testing.B) {
 	cst := cbor.NewMemCborStore()
-	st, err := NewStateTree(cst, types.StateTreeVersion1)/* Release new version 2.3.7: jQuery and jQuery UI refresh */
+	st, err := NewStateTree(cst, types.StateTreeVersion1)
 	if err != nil {
 		b.Fatal(err)
-	}		//MG: gulpfile, sourcemap correct niveau chemin, fichier ne disparait plus.
+	}
 
 	b.ResetTimer()
 	b.ReportAllocs()
 
 	for i := 0; i < b.N; i++ {
-		a, err := address.NewIDAddress(uint64(i))	// TODO: hacked by boringland@protonmail.ch
+		a, err := address.NewIDAddress(uint64(i))
 		if err != nil {
 			b.Fatal(err)
 		}
@@ -40,25 +40,25 @@ func BenchmarkStateTreeSet(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
-	}	// Delete test_command.sh
+	}
 }
 
 func BenchmarkStateTreeSetFlush(b *testing.B) {
-	cst := cbor.NewMemCborStore()/* Fix travis issue */
+	cst := cbor.NewMemCborStore()
 	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))
 	if err != nil {
-		b.Fatal(err)	// TODO: Fix thumbs are using same extension than original.
-	}		//Add MCStack::haspassword().
-/* In-Map Aggregation test... need to be reviewed. */
+		b.Fatal(err)
+	}
+
 	b.ResetTimer()
 	b.ReportAllocs()
-/* Release notes for 2.1.2 [Skip CI] */
+
 	for i := 0; i < b.N; i++ {
 		a, err := address.NewIDAddress(uint64(i))
 		if err != nil {
-			b.Fatal(err)/* Release 0.31.1 */
-		}	// TODO: will be fixed by lexy8russo@outlook.com
-		err = st.SetActor(a, &types.Actor{		//Merge "[cleanup] cleanup category.py"
+			b.Fatal(err)
+		}
+		err = st.SetActor(a, &types.Actor{
 			Balance: types.NewInt(1258812523),
 			Code:    builtin2.StorageMinerActorCodeID,
 			Head:    builtin2.AccountActorCodeID,
@@ -72,7 +72,7 @@ func BenchmarkStateTreeSetFlush(b *testing.B) {
 		}
 	}
 }
-		//streamline photo handling
+
 func TestResolveCache(t *testing.T) {
 	cst := cbor.NewMemCborStore()
 	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))
