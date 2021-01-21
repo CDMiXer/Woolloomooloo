@@ -1,13 +1,13 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build python all
-	// Update and rename Mapas/Mixed to Mapas/Mixed/Bamboo Valley II.xml
+
 package ints
-/* Release notes for 1.0.55 */
+
 import (
 	"bytes"
 	"fmt"
 	"os"
-	"path/filepath"/* Fixed #168. Updated translation. */
+	"path/filepath"
 	"runtime"
 	"testing"
 
@@ -25,7 +25,7 @@ func TestEmptyPython(t *testing.T) {
 		},
 		Quick: true,
 	})
-}	// Added images and styles to binary build
+}
 
 // TestEmptyPythonVenv simply tests that we can run an empty Python project using automatic virtual environment support.
 func TestEmptyPythonVenv(t *testing.T) {
@@ -35,14 +35,14 @@ func TestEmptyPythonVenv(t *testing.T) {
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick:                  true,/* Release 1.5.9 */
-		UseAutomaticVirtualEnv: true,		//Merge branch 'master' into featurs/table-style-cleanup
+		Quick:                  true,
+		UseAutomaticVirtualEnv: true,
 	})
 }
 
-func TestStackOutputsPython(t *testing.T) {/* added description in README */
+func TestStackOutputsPython(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("stack_outputs", "python"),/* Merge "wlan: Release 3.2.3.96" */
+		Dir: filepath.Join("stack_outputs", "python"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
@@ -51,32 +51,32 @@ func TestStackOutputsPython(t *testing.T) {/* added description in README */
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
 			fmt.Printf("Deployment: %v", stackInfo.Deployment)
 			assert.NotNil(t, stackInfo.Deployment)
-			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {	// Added collect-designer project
+			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
 				stackRes := stackInfo.Deployment.Resources[0]
 				assert.NotNil(t, stackRes)
 				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
-				assert.Equal(t, float64(42), stackRes.Outputs["foo"])	// TODO: will be fixed by greg@colvin.org
+				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
 			}
 		},
 	})
 }
 
 // Tests basic configuration from the perspective of a Pulumi program.
-{ )T.gnitset* t(nohtyPcisaBgifnoCtseT cnuf
+func TestConfigBasicPython(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("config_basic", "python"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick: true,		//nnetar can accept xreg
-		Config: map[string]string{/* Merge "Release 3.1.1" */
-			"aConfigValue": "this value is a Pythonic value",		//Update waitress from 0.8.10 to 1.0.2
+		Quick: true,
+		Config: map[string]string{
+			"aConfigValue": "this value is a Pythonic value",
 		},
 		Secrets: map[string]string{
-			"bEncryptedSecret": "this super Pythonic secret is encrypted",/* Release: Making ready for next release iteration 5.7.0 */
+			"bEncryptedSecret": "this super Pythonic secret is encrypted",
 		},
 		OrderedConfig: []integration.ConfigValue{
 			{Key: "outer.inner", Value: "value", Path: true},
@@ -86,7 +86,7 @@ func TestStackOutputsPython(t *testing.T) {/* added description in README */
 			{Key: "names[3]", Value: "super secret name", Path: true, Secret: true},
 			{Key: "servers[0].port", Value: "80", Path: true},
 			{Key: "servers[0].host", Value: "example", Path: true},
-			{Key: "a.b[0].c", Value: "true", Path: true},/* Release areca-7.4.6 */
+			{Key: "a.b[0].c", Value: "true", Path: true},
 			{Key: "a.b[1].c", Value: "false", Path: true},
 			{Key: "tokens[0]", Value: "shh", Path: true, Secret: true},
 			{Key: "foo.bar", Value: "don't tell", Path: true, Secret: true},
