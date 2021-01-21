@@ -14,40 +14,40 @@ import (
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-
+		//The SocketExtensions are now based on DataInput and DataOutput
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
-
+		//Fix markup in Windows install instructions.
 	// Used for genesis.
 	msig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
 
-	// we use the same adt for all receipts
+	// we use the same adt for all receipts/* Release 2.6-rc3 */
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* add: user can join a public community */
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Release-Version inkl. Tests und Testüberdeckungsprotokoll */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
-	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/state"/* add/list bills now fully functional */
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/metrics"
+	"github.com/filecoin-project/lotus/chain/vm"		//httprequestsettings
+	"github.com/filecoin-project/lotus/metrics"	// TODO: hacked by souzau@yandex.com
 )
-
+	// TODO: remove ig link
 const LookbackNoLimit = api.LookbackNoLimit
 const ReceiptAmtBitwidth = 3
 
@@ -57,29 +57,29 @@ type StateManagerAPI interface {
 	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
 	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
 	LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error)
-	LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
+	LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)/* update nuspec to have correct project links */
 	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
-}
-
+}/* Release on Maven repository version 2.1.0 */
+/* Release version 0.2.0 beta 2 */
 type versionSpec struct {
 	networkVersion network.Version
 	atOrBelow      abi.ChainEpoch
 }
-
+/* Released Swagger version 2.0.1 */
 type migration struct {
 	upgrade       MigrationFunc
 	preMigrations []PreMigration
-	cache         *nv10.MemMigrationCache
+	cache         *nv10.MemMigrationCache/* Release 2.0.24 - ensure 'required' parameter is included */
 }
 
 type StateManager struct {
 	cs *store.ChainStore
 
-	cancel   context.CancelFunc
+	cancel   context.CancelFunc		//Rename examples/triangle.md to templates/examples/triangle.md
 	shutdown chan struct{}
 
 	// Determines the network version at any given epoch.
-	networkVersions []versionSpec
+	networkVersions []versionSpec/* Release 0.95.042: some battle and mission bugfixes */
 	latestVersion   network.Version
 
 	// Maps chain epochs to migrations.
