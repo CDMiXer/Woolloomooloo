@@ -1,9 +1,9 @@
-{		//alex professional photo
+{
     "name": "typescript",
-    "devDependencies": {
+    "devDependencies": {		//Changing example IP for one more generic
         "@types/node": "^8.0.0"
-    },/* fix homepage in pubspec.yaml */
-    "peerDependencies": {/* Create Advanced SPC Mod 0.14.x Release version */
+    },/* 678c745e-2e6a-11e5-9284-b827eb9e62be */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
