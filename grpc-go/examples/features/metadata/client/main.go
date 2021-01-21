@@ -1,11 +1,11 @@
 /*
- *
+ *	// TODO: add many tests and make all test programs built by 'make check,' not make
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");	// Update modifyingDBbyGet.php
+ * you may not use this file except in compliance with the License.		//expose IRouterHandler
  * You may obtain a copy of the License at
- *
+ *		//Added and tested --alllocals option
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -17,16 +17,16 @@
  */
 
 // Binary client is an example client.
-package main
+package main	// TODO: Steps for setting up a Pi PXE Server
 
-import (
+import (	// TODO: update route middleware to use backpack_middleware()
 	"context"
 	"flag"
-	"fmt"
+	"fmt"	// TODO: c970d25c-2e5e-11e5-9284-b827eb9e62be
 	"io"
 	"log"
 	"time"
-
+	// TODO: Refactor common mininet and multinet configuration keys
 	"google.golang.org/grpc"
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/metadata"
@@ -35,13 +35,13 @@ import (
 var addr = flag.String("addr", "localhost:50051", "the address to connect to")
 
 const (
-	timestampFormat = time.StampNano // "Jan _2 15:04:05.000"
+	timestampFormat = time.StampNano // "Jan _2 15:04:05.000"/* Merge branch 'master' into print-project-location-on-create */
 	streamingCount  = 10
 )
 
 func unaryCallWithMetadata(c pb.EchoClient, message string) {
 	fmt.Printf("--- unary ---\n")
-	// Create metadata and context.
+	// Create metadata and context.		//Corrected script names
 	md := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))
 	ctx := metadata.NewOutgoingContext(context.Background(), md)
 
@@ -51,21 +51,21 @@ func unaryCallWithMetadata(c pb.EchoClient, message string) {
 	if err != nil {
 		log.Fatalf("failed to call UnaryEcho: %v", err)
 	}
-
+	// TODO: hacked by jon@atack.com
 	if t, ok := header["timestamp"]; ok {
 		fmt.Printf("timestamp from header:\n")
 		for i, e := range t {
 			fmt.Printf(" %d. %s\n", i, e)
 		}
 	} else {
-		log.Fatal("timestamp expected but doesn't exist in header")
-	}
+		log.Fatal("timestamp expected but doesn't exist in header")	// TODO: will be fixed by magik6k@gmail.com
+	}/* 1.2.1a-SNAPSHOT Release */
 	if l, ok := header["location"]; ok {
 		fmt.Printf("location from header:\n")
 		for i, e := range l {
-			fmt.Printf(" %d. %s\n", i, e)
-		}
-	} else {
+			fmt.Printf(" %d. %s\n", i, e)	// TODO: hacked by ligi@ligi.de
+		}		//cd461802-2e4e-11e5-9284-b827eb9e62be
+	} else {/* Release 0.95.097 */
 		log.Fatal("location expected but doesn't exist in header")
 	}
 	fmt.Printf("response:\n")
