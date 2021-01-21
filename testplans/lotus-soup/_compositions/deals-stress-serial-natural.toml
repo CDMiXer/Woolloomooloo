@@ -1,6 +1,6 @@
 [metadata]
-  name = "lotus-soup"
-  author = ""		//Krõõda teekond lasteaeda (#48)
+  name = "lotus-soup"	// TODO: [SYSTEMML-561] Fix frame-matrix casting (robustness wrong input types)
+  author = ""/* Merge "Release 3.2.3.356 Prima WLAN Driver" */
 
 [global]
   plan = "lotus-soup"
@@ -8,50 +8,50 @@
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
-/* Release Notes update for 2.5 */
+
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]	// TODO: will be fixed by lexy8russo@outlook.com
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//revert this to old because it was already handled
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]	// TODO: hacked by steven@stebalien.com
   enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "3"
-  miners = "2"		//Added sound hooks for the various menus in the blammopedia.
-  genesis_timestamp_offset = "0"
+  miners = "2"
+  genesis_timestamp_offset = "0"/* Create VideoInsightsReleaseNotes.md */
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
   random_beacon_type = "mock"
-
-[[groups]]
+	// TODO: Merge "Fix broken actions with MessagingStyle" into nyc-dev
+[[groups]]/* Reduction of x- and y-coordinates added when making affine points. */
   id = "bootstrapper"
-  [groups.instances]/* Merge remote-tracking branch 'origin/javascript-idevices' into v2.1.3 */
+  [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Release_pan get called even with middle mouse button */
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* Added documentation and details on how to use. */
+      role = "bootstrapper"	// rev 872810
 
 [[groups]]
   id = "miners"
-  [groups.instances]		//Fix Extratorrent encoding
+  [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-      mining_mode = "natural"/* a0c3df9e-2e58-11e5-9284-b827eb9e62be */
+      mining_mode = "natural"
 
-[[groups]]/* Prose.Normalization.D: fully decompose & reorder. Now works */
+[[groups]]		//fixed problem with switching firstdrag relation point due to method reusing
   id = "clients"
-  [groups.instances]	// Cleanup data before assigning value
+  [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
       deals = "300"
-      deal_mode = "serial"
+      deal_mode = "serial"	// TODO: will be fixed by igor@soramitsu.co.jp
