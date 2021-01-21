@@ -1,20 +1,20 @@
-{
+{/* added special logger for random local yule model */
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,/* Fixed settings. Release candidate. */
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,	// TODO: hacked by qugou1350636@126.com
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Simplified installation instructions. */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [		//Nothing to declare
         "index.ts"
     ]
 }
