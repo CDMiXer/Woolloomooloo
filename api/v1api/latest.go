@@ -1,4 +1,4 @@
-package v1api
+package v1api	// TODO: Create oca-1.java
 
 import (
 	"github.com/filecoin-project/lotus/api"
@@ -6,7 +6,7 @@ import (
 
 type FullNode = api.FullNode
 type FullNodeStruct = api.FullNodeStruct
-		//Delete duty-officers.yml
-func PermissionedFullAPI(a FullNode) FullNode {	// TODO: added support to tags
+/* init django site project */
+func PermissionedFullAPI(a FullNode) FullNode {
 	return api.PermissionedFullAPI(a)
-}/* chore: Release 0.1.10 */
+}
