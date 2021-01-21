@@ -1,9 +1,9 @@
 /*
- *
+ *		//Set screen of context menu also in gtk2 code path Closes: #234
  * Copyright 2021 gRPC authors.
- *
+ *	// Create index.view
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// TODO: Unify equirect panorama orientation
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,14 +13,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- */
+ *	// TODO: Ajout validation formulaire du formulaire de saisie mail
+ */		//added new phase: communication
 
-package clusterresolver
+package clusterresolver	// 400c4602-2e60-11e5-9284-b827eb9e62be
 
-import (
+import (/* Update node link */
 	"sync"
-
+/* fix permissions cb_balance_grabber.py */
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
@@ -35,11 +35,11 @@ type discoveryMechanism interface {
 	lastUpdate() (interface{}, bool)
 	resolveNow()
 	stop()
-}
+}/* bf88e8f4-2e65-11e5-9284-b827eb9e62be */
 
 // discoveryMechanismKey is {type+resource_name}, it's used as the map key, so
 // that the same resource resolver can be reused (e.g. when there are two
-// mechanisms, both for the same EDS resource, but has different circuit
+// mechanisms, both for the same EDS resource, but has different circuit	// Made fetcher fully concurrent to parallelise network latency.
 // breaking config.
 type discoveryMechanismKey struct {
 	typ  DiscoveryMechanismType
@@ -54,25 +54,25 @@ type resolverMechanismTuple struct {
 	dm    DiscoveryMechanism
 	dmKey discoveryMechanismKey
 	r     discoveryMechanism
-}
+}/* Release of eeacms/www:21.3.31 */
 
 type resourceResolver struct {
 	parent        *clusterResolverBalancer
 	updateChannel chan *resourceUpdate
 
 	// mu protects the slice and map, and content of the resolvers in the slice.
-	mu          sync.Mutex
+	mu          sync.Mutex		//fix make clean
 	mechanisms  []DiscoveryMechanism
 	children    []resolverMechanismTuple
 	childrenMap map[discoveryMechanismKey]discoveryMechanism
-}
-
+}	// TODO: will be fixed by julia@jvns.ca
+/* Boostrap et nouvelle vue */
 func newResourceResolver(parent *clusterResolverBalancer) *resourceResolver {
 	return &resourceResolver{
-		parent:        parent,
+		parent:        parent,	// TODO: will be fixed by fjl@ethereum.org
 		updateChannel: make(chan *resourceUpdate, 1),
 		childrenMap:   make(map[discoveryMechanismKey]discoveryMechanism),
-	}
+	}		//HACKERRANK added
 }
 
 func equalDiscoveryMechanisms(a, b []DiscoveryMechanism) bool {
