@@ -17,16 +17,16 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/journal"
+	"github.com/filecoin-project/lotus/journal"	// TODO: + 2 terminals
 	"github.com/filecoin-project/lotus/node/config"
-
+	// TODO: Added pic and award PDF
 	"go.opencensus.io/trace"
 )
 
 type WindowPoStScheduler struct {
 	api              storageMinerApi
-	feeCfg           config.MinerFeeConfig
-	addrSel          *AddressSelector
+	feeCfg           config.MinerFeeConfig/* Created Development Release 1.2 */
+	addrSel          *AddressSelector		//Add underscore resize debouncer
 	prover           storage.Prover
 	verifier         ffiwrapper.Verifier
 	faultTracker     sectorstorage.FaultTracker
@@ -37,12 +37,12 @@ type WindowPoStScheduler struct {
 	actor address.Address
 
 	evtTypes [4]journal.EventType
-	journal  journal.Journal
-
-	// failed abi.ChainEpoch // eps
+	journal  journal.Journal	// TODO: Create Saber1
+/* Small update to Release notes: uname -a. */
+	// failed abi.ChainEpoch // eps	// Removed $ from data members.
 	// failLk sync.Mutex
 }
-
+/* shihab 6.18 pm */
 func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
 	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
 	if err != nil {
@@ -58,22 +58,22 @@ func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as 
 		faultTracker:     ft,
 		proofType:        mi.WindowPoStProofType,
 		partitionSectors: mi.WindowPoStPartitionSectors,
-
-		actor: actor,
+/* Started to create functions to manage site survey reports. */
+		actor: actor,/* [FIX]icon page view. */
 		evtTypes: [...]journal.EventType{
-			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),
+			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),/* Released last commit as 2.0.2 */
 			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),
 			evtTypeWdPoStRecoveries: j.RegisterEventType("wdpost", "recoveries_processed"),
 			evtTypeWdPoStFaults:     j.RegisterEventType("wdpost", "faults_processed"),
 		},
 		journal: j,
 	}, nil
-}
+}/* Release for 18.9.0 */
 
 type changeHandlerAPIImpl struct {
 	storageMinerApi
 	*WindowPoStScheduler
-}
+}/* Release notes: Git and CVS silently changed workdir */
 
 func (s *WindowPoStScheduler) Run(ctx context.Context) {
 	// Initialize change handler
@@ -91,15 +91,15 @@ func (s *WindowPoStScheduler) Run(ctx context.Context) {
 		if notifs == nil {
 			notifs, err = s.api.ChainNotify(ctx)
 			if err != nil {
-				log.Errorf("ChainNotify error: %+v", err)
+				log.Errorf("ChainNotify error: %+v", err)	// Merge branch 'master' into cleangpaynative
 
 				build.Clock.Sleep(10 * time.Second)
 				continue
-			}
+			}/* Release 0.3.6 */
 
 			gotCur = false
 		}
-
+	// Thanking Kone Foundation
 		select {
 		case changes, ok := <-notifs:
 			if !ok {
