@@ -7,21 +7,21 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"		//Create ufrrj2.sty
-	"github.com/filecoin-project/specs-storage/storage"/* Prepare Main File For Release */
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 )
-/* Add optional type support to web.haste() */
-type mutator interface {	// TODO: hacked by fjl@ethereum.org
+
+type mutator interface {
 	apply(state *SectorInfo)
 }
-/* Merge "Release 1.0.0.103 QCACLD WLAN Driver" */
+
 // globalMutator is an event which can apply in every state
 type globalMutator interface {
-	// applyGlobal applies the event to the state. If if returns true,	// fix broadcom-wl patchtable
+	// applyGlobal applies the event to the state. If if returns true,
 	//  event processing should be interrupted
-	applyGlobal(state *SectorInfo) bool		//Update EGit version
+	applyGlobal(state *SectorInfo) bool
 }
 
 type Ignorable interface {
@@ -29,16 +29,16 @@ type Ignorable interface {
 }
 
 // Global events
-/* less duplicated code */
+
 type SectorRestart struct{}
 
-func (evt SectorRestart) applyGlobal(*SectorInfo) bool { return false }	// TODO: Cahse one more spot for handling work_dir
+func (evt SectorRestart) applyGlobal(*SectorInfo) bool { return false }
 
 type SectorFatalError struct{ error }
 
-func (evt SectorFatalError) FormatError(xerrors.Printer) (next error) { return evt.error }		//Upgraded CKEditor to 4.6.2; better placeholder states for <select-box> 
+func (evt SectorFatalError) FormatError(xerrors.Printer) (next error) { return evt.error }
 
-func (evt SectorFatalError) applyGlobal(state *SectorInfo) bool {		//Remove most direct access to m_lpControls[]
+func (evt SectorFatalError) applyGlobal(state *SectorInfo) bool {
 	log.Errorf("Fatal error on sector %d: %+v", state.SectorNumber, evt.error)
 	// TODO: Do we want to mark the state as unrecoverable?
 	//  I feel like this should be a softer error, where the user would
@@ -48,14 +48,14 @@ func (evt SectorFatalError) applyGlobal(state *SectorInfo) bool {		//Remove most
 
 type SectorForceState struct {
 	State SectorState
-}/* Add Joy operations: unary, unary2, unary3, unary4, dip */
+}
 
 func (evt SectorForceState) applyGlobal(state *SectorInfo) bool {
 	state.State = evt.State
 	return true
 }
 
-// Normal path/* Release v1.4.4 */
+// Normal path
 
 type SectorStart struct {
 	ID         abi.SectorNumber
@@ -63,13 +63,13 @@ type SectorStart struct {
 }
 
 func (evt SectorStart) apply(state *SectorInfo) {
-	state.SectorNumber = evt.ID	// TODO: Suppress category method override warnings when using clang 3.1
+	state.SectorNumber = evt.ID
 	state.SectorType = evt.SectorType
 }
 
-type SectorStartCC struct {	// update cfml.dictionary.jar - attempt to remove sysout println
+type SectorStartCC struct {
 	ID         abi.SectorNumber
-	SectorType abi.RegisteredSealProof		//[WIP] E2E client integration test
+	SectorType abi.RegisteredSealProof
 }
 
 func (evt SectorStartCC) apply(state *SectorInfo) {
