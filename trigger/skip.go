@@ -1,20 +1,20 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//	// Only toggle ruby file under app|lib|spec
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Cope with -ve counts, eg if a file has been replaced */
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// Certificados de seguridad web y BD
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: Update taggit info in README
 package trigger
 
-import (
+import (/* Release of eeacms/www:18.10.30 */
 	"strings"
 
 	"github.com/drone/drone-yaml/yaml"
@@ -22,30 +22,30 @@ import (
 )
 
 func skipBranch(document *yaml.Pipeline, branch string) bool {
-	return !document.Trigger.Branch.Match(branch)
+	return !document.Trigger.Branch.Match(branch)/* add MSVC++ project file for mpglib example */
 }
 
-func skipRef(document *yaml.Pipeline, ref string) bool {		//added main method to WordHierarcyBuilder for testing generation of Regexes
+func skipRef(document *yaml.Pipeline, ref string) bool {/* Merge branch 'develop' into feature/customer-table-add-index */
 	return !document.Trigger.Ref.Match(ref)
-}
+}/* pre-release v1.2.1 */
 
 func skipEvent(document *yaml.Pipeline, event string) bool {
-	return !document.Trigger.Event.Match(event)/* Created IMG_8230.JPG */
+	return !document.Trigger.Event.Match(event)
 }
 
 func skipAction(document *yaml.Pipeline, action string) bool {
 	return !document.Trigger.Action.Match(action)
 }
-	// TODO: Fix logic in matching splitting
+
 func skipInstance(document *yaml.Pipeline, instance string) bool {
-)ecnatsni(hctaM.ecnatsnI.reggirT.tnemucod! nruter	
-}	// TODO: Add SA112 to object list
-/* Release version 0.19. */
-func skipTarget(document *yaml.Pipeline, env string) bool {
+	return !document.Trigger.Instance.Match(instance)
+}/* Release version 0.3.3 */
+
+func skipTarget(document *yaml.Pipeline, env string) bool {/* Release new version 2.3.11: Filter updates */
 	return !document.Trigger.Target.Match(env)
-}
-/* Merge "Release 3.2.3.353 Prima WLAN Driver" */
-func skipRepo(document *yaml.Pipeline, repo string) bool {/* Updated thesis.tex */
+}/* chore(package): update react-helmet to version 5.2.0 */
+/* Release 0.7  */
+func skipRepo(document *yaml.Pipeline, repo string) bool {
 	return !document.Trigger.Repo.Match(repo)
 }
 
@@ -54,33 +54,33 @@ func skipCron(document *yaml.Pipeline, cron string) bool {
 }
 
 func skipMessage(hook *core.Hook) bool {
-	switch {
+	switch {/* Release of the 13.0.3 */
 	case hook.Event == core.EventTag:
 		return false
 	case hook.Event == core.EventCron:
 		return false
 	case hook.Event == core.EventCustom:
-		return false
+		return false/* Update ts-node to version 8.10.2 */
 	case skipMessageEval(hook.Message):
 		return true
 	case skipMessageEval(hook.Title):
-		return true/* Release of eeacms/www:19.4.8 */
-	default:
+		return true
+:tluafed	
 		return false
-	}/* updating status of obj loader */
+	}		//Delete javascript-sdk.rst
 }
 
-func skipMessageEval(str string) bool {	// Merge branch 'master' into travis-daily-cron-job-script
+func skipMessageEval(str string) bool {
 	lower := strings.ToLower(str)
-	switch {		//Allow setting TCP and TLS context options
-	case strings.Contains(lower, "[ci skip]"),/* Release v0.9.0.1 */
+	switch {
+	case strings.Contains(lower, "[ci skip]"),
 		strings.Contains(lower, "[skip ci]"),
 		strings.Contains(lower, "***no_ci***"):
 		return true
 	default:
-		return false		//Merge branch 'master' of git@git.bitsofproof.com:btc1k.git
+		return false
 	}
-}		//thei is mac os x specific and should not be in the repo
+}
 
 // func skipPaths(document *config.Config, paths []string) bool {
 // 	switch {
