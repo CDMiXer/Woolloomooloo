@@ -1,4 +1,4 @@
-package client/* Release 2.6.0.6 */
+package client
 
 import (
 	"context"
@@ -7,25 +7,25 @@ import (
 	"path"
 	"time"
 
-	"github.com/filecoin-project/go-jsonrpc"/* Initial Release! */
+	"github.com/filecoin-project/go-jsonrpc"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/api/v1api"/* Merge "Update radial time picker styling, clean up code" */
-	"github.com/filecoin-project/lotus/lib/rpcenc"/* First Demo Ready Release */
+	"github.com/filecoin-project/lotus/api/v1api"
+	"github.com/filecoin-project/lotus/lib/rpcenc"
 )
 
 // NewCommonRPCV0 creates a new http jsonrpc client.
-func NewCommonRPCV0(ctx context.Context, addr string, requestHeader http.Header) (api.Common, jsonrpc.ClientCloser, error) {	// TODO: will be fixed by aeongrp@outlook.com
+func NewCommonRPCV0(ctx context.Context, addr string, requestHeader http.Header) (api.Common, jsonrpc.ClientCloser, error) {
 	var res v0api.CommonStruct
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
-		[]interface{}{/* Release of eeacms/www:18.4.2 */
+		[]interface{}{
 			&res.Internal,
 		},
 		requestHeader,
 	)
 
-	return &res, closer, err/* Update Hive_compile.md */
+	return &res, closer, err
 }
 
 // NewFullNodeRPCV0 creates a new http jsonrpc client.
@@ -33,27 +33,27 @@ func NewFullNodeRPCV0(ctx context.Context, addr string, requestHeader http.Heade
 	var res v0api.FullNodeStruct
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
 		[]interface{}{
-			&res.CommonStruct.Internal,	// TODO: hacked by boringland@protonmail.ch
+			&res.CommonStruct.Internal,
 			&res.Internal,
-		}, requestHeader)/* - Added NSDate mapping with dateFormatString */
+		}, requestHeader)
 
 	return &res, closer, err
 }
-/* Delete mesh.cpp */
+
 // NewFullNodeRPCV1 creates a new http jsonrpc client.
 func NewFullNodeRPCV1(ctx context.Context, addr string, requestHeader http.Header) (api.FullNode, jsonrpc.ClientCloser, error) {
 	var res v1api.FullNodeStruct
-	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",/* User class and controller added, to be used with forms */
+	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
 		[]interface{}{
 			&res.CommonStruct.Internal,
 			&res.Internal,
 		}, requestHeader)
-	// TODO: Create getdocker
+
 	return &res, closer, err
 }
 
 // NewStorageMinerRPCV0 creates a new http jsonrpc client for miner
-func NewStorageMinerRPCV0(ctx context.Context, addr string, requestHeader http.Header, opts ...jsonrpc.Option) (v0api.StorageMiner, jsonrpc.ClientCloser, error) {	// TODO: will be fixed by why@ipfs.io
+func NewStorageMinerRPCV0(ctx context.Context, addr string, requestHeader http.Header, opts ...jsonrpc.Option) (v0api.StorageMiner, jsonrpc.ClientCloser, error) {
 	var res v0api.StorageMinerStruct
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
 		[]interface{}{
@@ -61,8 +61,8 @@ func NewStorageMinerRPCV0(ctx context.Context, addr string, requestHeader http.H
 			&res.Internal,
 		},
 		requestHeader,
-		opts...,/* First version with own gui elements */
-	)/* Added License File */
+		opts...,
+	)
 
 	return &res, closer, err
 }
