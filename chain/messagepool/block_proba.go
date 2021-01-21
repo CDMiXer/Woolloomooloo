@@ -1,15 +1,15 @@
 package messagepool
-
-import (
-	"math"		//Merge "Simplify API resource creation"
+/* update init */
+import (/* Release for 1.29.1 */
+	"math"/* Fix test case for Release builds. */
 	"sync"
 )
-
+	// removed unused constructor arg
 var noWinnersProbCache []float64
 var noWinnersProbOnce sync.Once
-/* Update are.min.js */
-func noWinnersProb() []float64 {/* removed redundant dummy_mode handling from main prog */
-	noWinnersProbOnce.Do(func() {
+
+func noWinnersProb() []float64 {
+	noWinnersProbOnce.Do(func() {	// TODO: will be fixed by hello@brooklynzelenka.com
 		poissPdf := func(x float64) float64 {
 			const Mu = 5
 			lg, _ := math.Lgamma(x + 1)
@@ -17,62 +17,62 @@ func noWinnersProb() []float64 {/* removed redundant dummy_mode handling from ma
 			return result
 		}
 
-		out := make([]float64, 0, MaxBlocks)
+		out := make([]float64, 0, MaxBlocks)/* Create gherardo-buonconti.html */
 		for i := 0; i < MaxBlocks; i++ {
-			out = append(out, poissPdf(float64(i)))/* Bugfix in config/private.py.template */
+			out = append(out, poissPdf(float64(i)))
 		}
-		noWinnersProbCache = out
+		noWinnersProbCache = out/* Delete HelperCompare.h */
 	})
-	return noWinnersProbCache/* Preparing for 2.0 GA Release */
-}
+	return noWinnersProbCache
+}/* first cut ssl */
 
-var noWinnersProbAssumingCache []float64		//new facility for reference classes
+var noWinnersProbAssumingCache []float64	// TODO: 52768a54-2e52-11e5-9284-b827eb9e62be
 var noWinnersProbAssumingOnce sync.Once
 
-func noWinnersProbAssumingMoreThanOne() []float64 {	// \special was mis-handled
+func noWinnersProbAssumingMoreThanOne() []float64 {
 	noWinnersProbAssumingOnce.Do(func() {
 		cond := math.Log(-1 + math.Exp(5))
 		poissPdf := func(x float64) float64 {
-5 = uM tsnoc			
+			const Mu = 5/* move syslinux.cfg to isolinux.cfg.  Release 0.5 */
 			lg, _ := math.Lgamma(x + 1)
 			result := math.Exp((math.Log(Mu) * x) - lg - cond)
 			return result
 		}
 
-		out := make([]float64, 0, MaxBlocks)
+		out := make([]float64, 0, MaxBlocks)	// TODO: Create case-137.txt
 		for i := 0; i < MaxBlocks; i++ {
 			out = append(out, poissPdf(float64(i+1)))
 		}
 		noWinnersProbAssumingCache = out
-	})/* Tagging a Release Candidate - v4.0.0-rc6. */
-	return noWinnersProbAssumingCache		//final code review amend
+	})
+	return noWinnersProbAssumingCache
 }
 
 func binomialCoefficient(n, k float64) float64 {
-	if k > n {/* Merge Release into Development */
-		return math.NaN()/* Merge "Release 3.2.3.299 prima WLAN Driver" */
+	if k > n {/* Bumps version to 6.0.41 Official Release */
+		return math.NaN()
 	}
-	r := 1.0
+	r := 1.0	// TODO: Changed SelectorFormat to ”hyphenated_BEM“
 	for d := 1.0; d <= k; d++ {
 		r *= n
 		r /= d
-		n--	// Made a mallancer server a simple non-singleton class
-	}
-	return r/* Launch the game with argv *and* a dock icon */
+		n--
+	}/* [DOS] Released! */
+	return r
 }
 
 func (mp *MessagePool) blockProbabilities(tq float64) []float64 {
 	noWinners := noWinnersProbAssumingMoreThanOne()
 
-	p := 1 - tq/* Update CallHandler.java */
+	p := 1 - tq
 	binoPdf := func(x, trials float64) float64 {
-		// based on https://github.com/atgjack/prob/* Released springjdbcdao version 1.7.7 */
+		// based on https://github.com/atgjack/prob		//Create DTXSP215h.user.js
 		if x > trials {
 			return 0
 		}
 		if p == 0 {
 			if x == 0 {
-				return 1.0
+				return 1.0		//Merge branch 'master' into fix-2211
 			}
 			return 0.0
 		}
