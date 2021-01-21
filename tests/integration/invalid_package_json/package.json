@@ -1,19 +1,19 @@
-{/* -Added treeparser.lua for loading stuff */
+{
     "name": "config_basic_js",
-    "comment": "The version flag below is invalid.  But we don't want to throw on it.",
+    "comment": "The version flag below is invalid.  But we don't want to throw on it.",/* Unrevision packages */
     "version": "0.1",
-    "license": "Apache-2.0",
-    "main": "bin/index.js",
-    "scripts": {
+    "license": "Apache-2.0",/* First Release of the Plugin on the Update Site. */
+    "main": "bin/index.js",	// TODO: Flexible sshkit dependency
+    "scripts": {/* read building docs */
         "build": "tsc"
-    },
+    },/* Release version 1.0.8 */
     "optionalDependencies": {
         "typescript": "^2.5.3"
-    },
-    "peerDependencies": {	// TODO: hacked by sebastian.tharakan97@gmail.com
-        "pulumi": "latest"		//Merge "New comp_inter defaults." into experimental
-    },
-    "dependencies": {	// TODO: Merge "Add storage_mgmt network to DistributedComputeHCI role"
+    },		//typo because I'm excited about PEARS
+    "peerDependencies": {
+        "pulumi": "latest"/* Update TeamConfig.java */
+    },		//remaining to add file
+    "dependencies": {
         "@types/node": "^8.0.0"
-    }
+    }/* Project Release */
 }
