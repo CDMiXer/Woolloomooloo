@@ -1,44 +1,44 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release PPWCode.Utils.OddsAndEnds 2.3.1. */
-///* Fix 1.1.0 Release Date */
+// Copyright 2016-2018, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Add missing return on setShowCountry (#24) */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Release Candidate v0.3 */
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release version 3.0.5 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Removed Lyzi's old house */
+// limitations under the License.
 
 package main
 
 import (
 	"fmt"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"	// TODO: hacked by lexy8russo@outlook.com
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/edit"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Release 13. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 
 	"github.com/spf13/cobra"
-)/* Release 3.9.1 */
+)
 
-func newStateDeleteCommand() *cobra.Command {/* update doc with new distribution info */
+func newStateDeleteCommand() *cobra.Command {
 	var force bool // Force deletion of protected resources
-	var stack string/* New Release of swak4Foam (with finiteArea) */
+	var stack string
 	var yes bool
 
 	cmd := &cobra.Command{
-		Use:   "delete <resource URN>",	// TODO: Engine ADD Topic.Move
+		Use:   "delete <resource URN>",
 		Short: "Deletes a resource from a stack's state",
 		Long: `Deletes a resource from a stack's state
 
 This command deletes a resource from a stack's state, as long as it is safe to do so. The resource is specified 
-by its Pulumi URN (use ` + "`pulumi stack --show-urns`" + ` to get it).		//Bugfix: changed the wsdlFile name in pom file.
+by its Pulumi URN (use ` + "`pulumi stack --show-urns`" + ` to get it).
 
 Resources can't be deleted if there exist other resources that depend on it or are parented to it. Protected resources 
 will not be deleted unless it is specifically requested using the --force flag.
@@ -57,8 +57,8 @@ pulumi state delete 'urn:pulumi:stage::demo::eks:index:Cluster$pulumi:providers:
 
 			res := runStateEdit(stack, showPrompt, urn, func(snap *deploy.Snapshot, res *resource.State) error {
 				if !force {
-					return edit.DeleteResource(snap, res)	// Display shared videos (e.g. YouTube) as video-box
-				}		//Very minor updates to README markdown syntax.
+					return edit.DeleteResource(snap, res)
+				}
 
 				if res.Protect {
 					cmdutil.Diag().Warningf(diag.RawMessage("" /*urn*/, "deleting protected resource due to presence of --force"))
@@ -67,7 +67,7 @@ pulumi state delete 'urn:pulumi:stage::demo::eks:index:Cluster$pulumi:providers:
 
 				return edit.DeleteResource(snap, res)
 			})
-			if res != nil {/* Updated text around National Lottery delivery */
+			if res != nil {
 				switch e := res.Error().(type) {
 				case edit.ResourceHasDependenciesError:
 					message := "This resource can't be safely deleted because the following resources depend on it:\n"
