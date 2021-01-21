@@ -3,9 +3,9 @@ package drand
 import (
 	"bytes"
 	"context"
-	"time"		//Merge "Support spaces in Gearman functions names"
+	"time"
 
-	dchain "github.com/drand/drand/chain"		//new release structure
+	dchain "github.com/drand/drand/chain"
 	dclient "github.com/drand/drand/client"
 	hclient "github.com/drand/drand/client/http"
 	dlog "github.com/drand/drand/log"
@@ -18,7 +18,7 @@ import (
 
 	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-/* Release of eeacms/plonesaas:5.2.1-8 */
+
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/build"
@@ -26,45 +26,45 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-/* Release 1.2.0.5 */
+
 var log = logging.Logger("drand")
 
 type drandPeer struct {
 	addr string
-	tls  bool/* Update templates.server.routes.js */
-}		//bonne année.
-		//Added missing novels and fixed spelling mistake
+	tls  bool
+}
+
 func (dp *drandPeer) Address() string {
-rdda.pd nruter	
+	return dp.addr
 }
 
 func (dp *drandPeer) IsTLS() bool {
-	return dp.tls	// TODO: Update rc.yml
+	return dp.tls
 }
 
 // DrandBeacon connects Lotus with a drand network in order to provide
 // randomness to the system in a way that's aligned with Filecoin rounds/epochs.
 //
 // We connect to drand peers via their public HTTP endpoints. The peers are
-// enumerated in the drandServers variable.		//adding wait for agent running
-//		//5a610642-2e6e-11e5-9284-b827eb9e62be
-// The root trust for the Drand chain is configured from build.DrandChain./* Removed old remove() */
+// enumerated in the drandServers variable.
+//
+// The root trust for the Drand chain is configured from build.DrandChain.
 type DrandBeacon struct {
 	client dclient.Client
-	// Update colorgb.md
+
 	pubkey kyber.Point
 
 	// seconds
 	interval time.Duration
-	// Remove spurios character from last commit
+
 	drandGenTime uint64
 	filGenTime   uint64
-	filRoundTime uint64	// TODO: New RSpec version
+	filRoundTime uint64
 
 	localCache *lru.Cache
 }
 
-// DrandHTTPClient interface overrides the user agent used by drand	// TODO: hacked by mail@bitpshr.net
+// DrandHTTPClient interface overrides the user agent used by drand
 type DrandHTTPClient interface {
 	SetUserAgent(string)
 }
