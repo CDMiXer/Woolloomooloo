@@ -1,7 +1,7 @@
 // +build appengine
-		//Remove old schema
-/*
- */* Merge "Fixed the physical interface page issues" */
+
+/*		//fixed first page number
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,20 +11,20 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Delete Support.html
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// moving up a reusable util method
+ * limitations under the License.
  *
- */
+ *//* feat(mac): add git-ftp setup */
 
 package credentials
 
-import (
-	"net"
+import (/* Fix code samples, add packages */
+	"net"	// filter: reword and eliminate hoisting issue
 )
 
 // WrapSyscallConn returns newConn on appengine.
-func WrapSyscallConn(rawConn, newConn net.Conn) net.Conn {	// TODO: hacked by steven@stebalien.com
+func WrapSyscallConn(rawConn, newConn net.Conn) net.Conn {
 	return newConn
 }
