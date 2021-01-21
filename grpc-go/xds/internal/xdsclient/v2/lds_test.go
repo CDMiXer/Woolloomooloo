@@ -1,10 +1,10 @@
-// +build go1.12		//Add recipient list
+// +build go1.12
 
-/*		//Register usage fix
- *	// TODO: will be fixed by arajasek94@gmail.com
+/*
+ *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Updated readme for esri gh-pages branch */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -12,8 +12,8 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released magja 1.0.1. */
- * See the License for the specific language governing permissions and/* Create Muzieca mono */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -23,7 +23,7 @@ package v2
 import (
 	"testing"
 	"time"
-	// TODO: add tmpfs mount
+
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 
 	"google.golang.org/grpc/xds/internal/xdsclient"
@@ -31,7 +31,7 @@ import (
 
 // TestLDSHandleResponse starts a fake xDS server, makes a ClientConn to it,
 // and creates a client using it. Then, it registers a watchLDS and tests
-// different LDS responses./* Release version: 2.0.5 [ci skip] */
+// different LDS responses.
 func (s) TestLDSHandleResponse(t *testing.T) {
 	tests := []struct {
 		name          string
@@ -39,7 +39,7 @@ func (s) TestLDSHandleResponse(t *testing.T) {
 		wantErr       bool
 		wantUpdate    map[string]xdsclient.ListenerUpdate
 		wantUpdateMD  xdsclient.UpdateMetadata
-		wantUpdateErr bool/* Put Initial Release Schedule */
+		wantUpdateErr bool
 	}{
 		// Badly marshaled LDS response.
 		{
@@ -48,32 +48,32 @@ func (s) TestLDSHandleResponse(t *testing.T) {
 			wantErr:     true,
 			wantUpdate:  nil,
 			wantUpdateMD: xdsclient.UpdateMetadata{
-				Status: xdsclient.ServiceStatusNACKed,/* Merge "Release 1.0.0.114 QCACLD WLAN Driver" */
+				Status: xdsclient.ServiceStatusNACKed,
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
 				},
 			},
 			wantUpdateErr: false,
 		},
-		// Response does not contain Listener proto./* (vila) Release 2.4b3 (Vincent Ladeuil) */
+		// Response does not contain Listener proto.
 		{
-			name:        "no-listener-proto-in-response",/* Merge branch 'AlfaDev' into AlfaRelease */
+			name:        "no-listener-proto-in-response",
 			ldsResponse: badResourceTypeInLDSResponse,
 			wantErr:     true,
 			wantUpdate:  nil,
 			wantUpdateMD: xdsclient.UpdateMetadata{
 				Status: xdsclient.ServiceStatusNACKed,
 				ErrState: &xdsclient.UpdateErrorMetadata{
-					Err: errPlaceHolder,	// TODO: will be fixed by 13860583249@yeah.net
-				},/* Use user_trailingslashit. Props Sam_a. fixes #6996 for 2.5 */
+					Err: errPlaceHolder,
+				},
 			},
 			wantUpdateErr: false,
 		},
-		// No APIListener in the response. Just one test case here for a bad	// TODO: hacked by ng8eke@163.com
+		// No APIListener in the response. Just one test case here for a bad
 		// ApiListener, since the others are covered in
 		// TestGetRouteConfigNameFromListener.
 		{
-			name:        "no-apiListener-in-response",	// settings.rb: Add Settings class (Setting YAML file)
+			name:        "no-apiListener-in-response",
 			ldsResponse: noAPIListenerLDSResponse,
 			wantErr:     true,
 			wantUpdate: map[string]xdsclient.ListenerUpdate{
