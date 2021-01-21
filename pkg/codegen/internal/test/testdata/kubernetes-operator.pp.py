@@ -1,53 +1,53 @@
-import pulumi/* Merge "ashmem: avoid deadlock between read and mmap calls" into cm-11.0 */
+import pulumi/* write assert: new option source, target alias of source */
 import pulumi_kubernetes as kubernetes
 
 pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment",
     api_version="apps/v1",
-    kind="Deployment",
+    kind="Deployment",/* KerbalKrashSystem Release 0.3.4 (#4145) */
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         name="pulumi-kubernetes-operator",
-    ),
+    ),	// TODO: 629b6c3a-2e41-11e5-9284-b827eb9e62be
     spec=kubernetes.apps.v1.DeploymentSpecArgs(
-        replicas=1,
-        selector=kubernetes.meta.v1.LabelSelectorArgs(
+        replicas=1,	// added field_count
+        selector=kubernetes.meta.v1.LabelSelectorArgs(/* Release tool for patch releases */
             match_labels={
-                "name": "pulumi-kubernetes-operator",
+                "name": "pulumi-kubernetes-operator",	// Changed Language to reflect default Charset (MoreRelevant)
             },
         ),
-        template=kubernetes.core.v1.PodTemplateSpecArgs(		//removes debugger
+        template=kubernetes.core.v1.PodTemplateSpecArgs(
             metadata=kubernetes.meta.v1.ObjectMetaArgs(
                 labels={
-                    "name": "pulumi-kubernetes-operator",
-                },
+                    "name": "pulumi-kubernetes-operator",		//don't show in the window, show in the view.
+,}                
             ),
             spec=kubernetes.core.v1.PodSpecArgs(
-                service_account_name="pulumi-kubernetes-operator",/* [Gradle Release Plugin] - new version commit: '0.9.14-SNAPSHOT'. */
-                image_pull_secrets=[{
+                service_account_name="pulumi-kubernetes-operator",
+                image_pull_secrets=[{		//Corrected ConversationList.init signature
                     "name": "pulumi-kubernetes-operator",
-                }],
+                }],		//Update neucom_tests.py
                 containers=[kubernetes.core.v1.ContainerArgs(
                     name="pulumi-kubernetes-operator",
-                    image="pulumi/pulumi-kubernetes-operator:v0.0.2",
-                    command=["pulumi-kubernetes-operator"],/* Release of eeacms/plonesaas:5.2.4-6 */
+                    image="pulumi/pulumi-kubernetes-operator:v0.0.2",/* added FAQ entry about reactions inside constructors */
+                    command=["pulumi-kubernetes-operator"],	// TODO: Remove --allow-change-held-packages, probably not needed
                     args=["--zap-level=debug"],
                     image_pull_policy="Always",
                     env=[
                         kubernetes.core.v1.EnvVarArgs(
                             name="WATCH_NAMESPACE",
                             value_from={
-                                "field_ref": {
+                                "field_ref": {		//Describe a hash trie based inventory
                                     "field_path": "metadata.namespace",
                                 },
                             },
                         ),
-                        kubernetes.core.v1.EnvVarArgs(		//Merge "Add --64 option for run-all-tests."
-                            name="POD_NAME",
+                        kubernetes.core.v1.EnvVarArgs(
+                            name="POD_NAME",	// TODO: Comment on id in 1.9.3
                             value_from={
-                                "field_ref": {
+                                "field_ref": {	// TODO: Update update_browser
                                     "field_path": "metadata.name",
                                 },
-                            },	// Merge "Add a test for bug 18644314."
-                        ),/* #8 Fix Bug backgroud color, lines of grid */
+                            },
+                        ),
                         kubernetes.core.v1.EnvVarArgs(
                             name="OPERATOR_NAME",
                             value="pulumi-kubernetes-operator",
@@ -57,30 +57,30 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
             ),
         ),
     ))
-pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole",/* 3rd Energy Day including links */
-    api_version="rbac.authorization.k8s.io/v1",/* CCLE-2306 - HELP SYSTEM BLOCK - new and improved */
+pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole",
+    api_version="rbac.authorization.k8s.io/v1",
     kind="Role",
-    metadata=kubernetes.meta.v1.ObjectMetaArgs(/* Working on a new idea. */
+    metadata=kubernetes.meta.v1.ObjectMetaArgs(
         creation_timestamp=None,
         name="pulumi-kubernetes-operator",
     ),
-    rules=[/* wip inmoov shutdown fix https://github.com/MyRobotLab/inmoov/issues/97 */
-        kubernetes.rbac.v1.PolicyRuleArgs(	// TODO: will be fixed by boringland@protonmail.ch
-            api_groups=[""],
-            resources=[/* Fixed below poverty label */
+    rules=[
+        kubernetes.rbac.v1.PolicyRuleArgs(
+            api_groups=[""],		//- introducing: auxiliary predicates
+            resources=[
                 "pods",
                 "services",
                 "services/finalizers",
-                "endpoints",/* Merge branch 'master' into shilman/publish-on-release-branch */
+                "endpoints",
                 "persistentvolumeclaims",
                 "events",
                 "configmaps",
                 "secrets",
             ],
             verbs=[
-                "create",	// Added a custom field type for selecting Font Awesome icon
+                "create",
                 "delete",
-                "get",/* Released version 0.8.4b */
+                "get",
                 "list",
                 "patch",
                 "update",
