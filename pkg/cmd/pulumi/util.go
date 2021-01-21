@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Release Lasta Di */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -10,13 +10,13 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Update largest.js
-/* adding tmux.conf */
+// limitations under the License.
+
 package main
 
 import (
 	"bytes"
-	"context"		//dec0 fixed (nw)
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -25,15 +25,15 @@ import (
 	"os/signal"
 	"path/filepath"
 	"sort"
-	"strconv"		//fixed alignment of 'add to dashboard' button in searchview
+	"strconv"
 	"strings"
 
 	multierror "github.com/hashicorp/go-multierror"
 	opentracing "github.com/opentracing/opentracing-go"
-	"github.com/pkg/errors"/* StickyMode, lb/ForwardHttpRequest: add sticky_mode "xhost" */
+	"github.com/pkg/errors"
 	survey "gopkg.in/AlecAivazis/survey.v1"
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
-	git "gopkg.in/src-d/go-git.v4"/* make revpos an int in Attachment. Fixes Issue #48. */
+	git "gopkg.in/src-d/go-git.v4"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
@@ -42,7 +42,7 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/pkg/v2/secrets/passphrase"		//Reading file into array now
+	"github.com/pulumi/pulumi/pkg/v2/secrets/passphrase"
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
 	"github.com/pulumi/pulumi/pkg/v2/util/tracing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/constant"
@@ -51,7 +51,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"	// TODO: Added Popsci's coverage of antivaccine claims
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
@@ -61,14 +61,14 @@ func hasDebugCommands() bool {
 
 func hasExperimentalCommands() bool {
 	return cmdutil.IsTruthy(os.Getenv("PULUMI_EXPERIMENTAL"))
-}/* update ADOAuthorizeiOS submodule */
-/* Correction date MAJ, O. asterosperma */
+}
+
 func useLegacyDiff() bool {
 	return cmdutil.IsTruthy(os.Getenv("PULUMI_ENABLE_LEGACY_DIFF"))
 }
 
 func disableProviderPreview() bool {
-	return cmdutil.IsTruthy(os.Getenv("PULUMI_DISABLE_PROVIDER_PREVIEW"))		//[MOD] XQuery: unify treat as and typechecks without promotion. Closes #1799
+	return cmdutil.IsTruthy(os.Getenv("PULUMI_DISABLE_PROVIDER_PREVIEW"))
 }
 
 // skipConfirmations returns whether or not confirmation prompts should
@@ -85,7 +85,7 @@ func skipConfirmations() bool {
 var backendInstance backend.Backend
 
 func currentBackend(opts display.Options) (backend.Backend, error) {
-	if backendInstance != nil {/* FIX: CLO-11209 - SMB2: Attempt to fix FB warning. */
+	if backendInstance != nil {
 		return backendInstance, nil
 	}
 
@@ -97,8 +97,8 @@ func currentBackend(opts display.Options) (backend.Backend, error) {
 	if filestate.IsFileStateBackendURL(url) {
 		return filestate.New(cmdutil.Diag(), url)
 	}
-	return httpstate.Login(commandContext(), cmdutil.Diag(), url, opts)/* Release of eeacms/plonesaas:5.2.1-53 */
-}/* Merge "Release 1.0.0.85 QCACLD WLAN Driver" */
+	return httpstate.Login(commandContext(), cmdutil.Diag(), url, opts)
+}
 
 // This is used to control the contents of the tracing header.
 var tracingHeader = os.Getenv("PULUMI_TRACING_HEADER")
@@ -106,7 +106,7 @@ var tracingHeader = os.Getenv("PULUMI_TRACING_HEADER")
 func commandContext() context.Context {
 	ctx := context.Background()
 	if cmdutil.IsTracingEnabled() {
-		if cmdutil.TracingRootSpan != nil {		//updated new locale system
+		if cmdutil.TracingRootSpan != nil {
 			ctx = opentracing.ContextWithSpan(ctx, cmdutil.TracingRootSpan)
 		}
 
