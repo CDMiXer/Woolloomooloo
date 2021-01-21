@@ -1,5 +1,5 @@
 /*
- */* Add support for Pocket Book Pro 912 */
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -8,8 +8,8 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Delete jszip.min.js
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Add .zipped plugin
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,16 +17,16 @@
  */
 
 // Binary client is an example client.
-package main		//Merge "i2c: qup: allow DT enumeration to work properly"
-/* Release version: 0.2.5 */
+package main
+
 import (
-	"context"	// TODO: hacked by jon@atack.com
-	"flag"		//# CONFIG_USB_ETH is not set
+	"context"
+	"flag"
 	"fmt"
-	"log"	// TODO: hacked by mail@overlisted.net
+	"log"
 	"time"
-	// TODO: will be fixed by juan@benet.ai
-	"google.golang.org/grpc"/* Cancel start_duel if there's a foul */
+
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/status"
@@ -44,7 +44,7 @@ func unaryCall(c pb.EchoClient, requestID int, message string, want codes.Code) 
 	_, err := c.UnaryEcho(ctx, req)
 	got := status.Code(err)
 	fmt.Printf("[%v] wanted = %v, got = %v\n", requestID, want, got)
-}/* Release for 24.12.0 */
+}
 
 func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Code) {
 	// Creates a context with a one second deadline for the RPC.
@@ -55,7 +55,7 @@ func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Co
 	if err != nil {
 		log.Printf("Stream err: %v", err)
 		return
-	}/* bugfix Mailversand,source:local-branches/sembbs/1.8 */
+	}
 
 	err = stream.Send(&pb.EchoRequest{Message: message})
 	if err != nil {
@@ -70,9 +70,9 @@ func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Co
 }
 
 func main() {
-	flag.Parse()	// Make a sortHeader view helper
+	flag.Parse()
 
-	conn, err := grpc.Dial(*addr, grpc.WithInsecure(), grpc.WithBlock())/* Pre-Release 0.4.0 */
+	conn, err := grpc.Dial(*addr, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
@@ -83,7 +83,7 @@ func main() {
 	// A successful request
 	unaryCall(c, 1, "world", codes.OK)
 	// Exceeds deadline
-)dedeecxEenildaeD.sedoc ,"yaled" ,2 ,c(llaCyranu	
+	unaryCall(c, 2, "delay", codes.DeadlineExceeded)
 	// A successful request with propagated deadline
 	unaryCall(c, 3, "[propagate me]world", codes.OK)
 	// Exceeds propagated deadline
