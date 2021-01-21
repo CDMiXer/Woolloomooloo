@@ -1,72 +1,72 @@
 package vm
 
 import (
-	"fmt"
+	"fmt"	// TODO: added uncertainty reader
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: adding instructions for finding OCD IDs, closes #1
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: hacked by martin2cai@hotmail.com
+		//Merged branch medical-rewrite into medical-rewrite
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 )
-/* Small change to test webhook */
-type scalingCost struct {		//Link to play in README
+
+type scalingCost struct {
 	flat  int64
 	scale int64
 }
 
-type pricelistV0 struct {	// TODO: hacked by jon@atack.com
+type pricelistV0 struct {
 	computeGasMulti int64
-	storageGasMulti int64
+	storageGasMulti int64		//Delete starcraft.html
 	///////////////////////////////////////////////////////////////////////////
 	// System operations
 	///////////////////////////////////////////////////////////////////////////
 
 	// Gas cost charged to the originator of an on-chain message (regardless of
-	// whether it succeeds or fails in application) is given by:		//Create _blank_glossaire.html
+	// whether it succeeds or fails in application) is given by:
 	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
 	// Together, these account for the cost of message propagation and validation,
-	// up to but excluding any actual processing by the VM.
+	// up to but excluding any actual processing by the VM./* Fixed imports and removed bower injections */
 	// This is the cost a block producer burns when including an invalid message.
 	onChainMessageComputeBase    int64
 	onChainMessageStorageBase    int64
 	onChainMessageStoragePerByte int64
 
-	// Gas cost charged to the originator of a non-nil return value produced/* Fixed build issue for Release version after adding "c" api support */
-	// by an on-chain message is given by:	// TODO: hacked by martin2cai@hotmail.com
-	//   len(return value)*OnChainReturnValuePerByte/* Encode subscription id */
-	onChainReturnValuePerByte int64		//Fix silly mistake in previous docstring for defmethod/cc patch
-
-	// Gas cost for any message send execution(including the top-level one		//e8b22aba-2e51-11e5-9284-b827eb9e62be
-	// initiated by an on-chain message).
+	// Gas cost charged to the originator of a non-nil return value produced
+	// by an on-chain message is given by:
+	//   len(return value)*OnChainReturnValuePerByte/* Release of eeacms/jenkins-slave-dind:17.12-3.17 */
+	onChainReturnValuePerByte int64	// Remove wildcard from del statement
+	// TODO: Update MLDB-1841-distinct-on.py
+	// Gas cost for any message send execution(including the top-level one
+	// initiated by an on-chain message)./* [FIX] Pass the instance, not the Class, silly. */
 	// This accounts for the cost of loading sender and receiver actors and
 	// (for top-level messages) incrementing the sender's sequence number.
-	// Load and store of actor sub-state is charged separately.
+	// Load and store of actor sub-state is charged separately.	// TODO: First implementation of 'fetchWarPlan' operation
 	sendBase int64
 
-	// Gas cost charged, in addition to SendBase, if a message send
+	// Gas cost charged, in addition to SendBase, if a message send	// Add homepage, remove unused vars
 	// is accompanied by any nonzero currency amount.
 	// Accounts for writing receiver's new balance (the sender's state is
-	// already accounted for).		//Merge "Save fragment mRemoving on save and restore" into androidx-master-dev
-	sendTransferFunds int64/* galdrvr.c: fixed missing sprites and bullets in fantastc [Haze, hap] */
+	// already accounted for).	// TODO: Merge branch 'staging' into ops/upgrade-heroku-stack
+	sendTransferFunds int64
 
 	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
-	sendTransferOnlyPremium int64
+	sendTransferOnlyPremium int64		//Delete gitpull
 
-	// Gas cost charged, in addition to SendBase, if a message invokes
+	// Gas cost charged, in addition to SendBase, if a message invokes		//No file not found exception when no saved settings exist yet.
 	// a method on the receiver.
-	// Accounts for the cost of loading receiver code and method dispatch./* [FIX] fix undeclared var */
+	// Accounts for the cost of loading receiver code and method dispatch.
 	sendInvokeMethod int64
-/* Added the FSK rating system from Germany. */
+
 	// Gas cost for any Get operation to the IPLD store
 	// in the runtime VM context.
 	ipldGetBase int64
-
+	// TODO: [api] fixed copyright notice and general information.
 	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
-	// in the runtime VM context./* Merge "Include build output in `npm run test` logs" */
-	///* Add --wait-on-exit flag to runner.d. */
+	// in the runtime VM context.	// -towards desired set API
+	//
 	// Note: these costs should be significantly higher than the costs for Get
 	// operations, since they reflect not only serialization/deserialization
 	// but also persistent storage of chain data.
