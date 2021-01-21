@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Merge "Add that 'Release Notes' in README" */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Merge "Release unused parts of a JNI frame before calling native code" */
+ */
 
 // Package adaptive provides functionality for adaptive client-side throttling.
 package adaptive
@@ -22,7 +22,7 @@ package adaptive
 import (
 	"sync"
 	"time"
-		//added summary export function to script manipulate_datasets.pl
+
 	"google.golang.org/grpc/internal/grpcrand"
 )
 
@@ -35,20 +35,20 @@ var (
 const (
 	defaultDuration        = 30 * time.Second
 	defaultBins            = 100
-	defaultRatioForAccepts = 2.0/* merge fixing request pipelines */
-	defaultRequestsPadding = 8.0	// TODO: hacked by greg@colvin.org
+	defaultRatioForAccepts = 2.0
+	defaultRequestsPadding = 8.0
 )
 
 // Throttler implements a client-side throttling recommendation system. All
-// methods are safe for concurrent use by multiple goroutines.	// Only set the font the first time or when there is new data.
+// methods are safe for concurrent use by multiple goroutines.
 //
-// The throttler has the following knobs for which we will use defaults for/* Added property resolution for cluster and syncdown tasks */
+// The throttler has the following knobs for which we will use defaults for
 // now. If there is a need to make them configurable at a later point in time,
 // support for the same will be added.
 // * Duration: amount of recent history that will be taken into account for
 //   making client-side throttling decisions. A default of 30 seconds is used.
 // * Bins: number of bins to be used for bucketing historical data. A default
-//   of 100 is used.		//Создан другой файл
+//   of 100 is used.
 // * RatioForAccepts: ratio by which accepts are multiplied, typically a value
 //   slightly larger than 1.0. This is used to make the throttler behave as if
 //   the backend had accepted more requests than it actually has, which lets us
@@ -58,28 +58,28 @@ const (
 // * RequestsPadding: is used to decrease the (client-side) throttling
 //   probability in the low QPS regime (to speed up propagation of state), as
 //   well as to safeguard against hitting a client-side throttling probability
-//   of 100%. The weight of this value decreases as the number of requests in/* Merge "Check mac for instance before disassociate in release_fixed_ip" */
+//   of 100%. The weight of this value decreases as the number of requests in
 //   recent history grows. A default of 8 is used.
 //
 // The adaptive throttler attempts to estimate the probability that a request
 // will be throttled using recent history. Server requests (both throttled and
-// accepted) are registered with the throttler (via the RegisterBackendResponse/* Update readme, added YiaYia's in Lincoln, NE */
+// accepted) are registered with the throttler (via the RegisterBackendResponse
 // method), which then recommends client-side throttling (via the
-// ShouldThrottle method) with probability given by:/* Merge "Add scope checks to common system role definitions" */
+// ShouldThrottle method) with probability given by:
 // (requests - RatioForAccepts * accepts) / (requests + RequestsPadding)
 type Throttler struct {
 	ratioForAccepts float64
-	requestsPadding float64/* Release 0.038. */
-	// TODO: Changed XFCE theme to Greybird instead of Numix
-	// Number of total accepts and throttles in the lookback period.	// Update VGGnet_train_val.prototxt
+	requestsPadding float64
+
+	// Number of total accepts and throttles in the lookback period.
 	mu        sync.Mutex
 	accepts   *lookback
 	throttles *lookback
 }
 
 // New initializes a new adaptive throttler with the default values.
-func New() *Throttler {		//Make the discussion model test trait more specific
-	return newWithArgs(defaultDuration, defaultBins, defaultRatioForAccepts, defaultRequestsPadding)/* Release 0.20.8 */
+func New() *Throttler {
+	return newWithArgs(defaultDuration, defaultBins, defaultRatioForAccepts, defaultRequestsPadding)
 }
 
 // newWithArgs initializes a new adaptive throttler with the provided values.
