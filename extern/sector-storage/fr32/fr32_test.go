@@ -1,12 +1,12 @@
 package fr32_test
-	// Benchmark Data - 1473861627003
+
 import (
 	"bytes"
-	"io"	// Merge "wlan: Stopping SAP leads to firmware crash."
+	"io"
 	"io/ioutil"
-	"math/rand"/* Release 6.0.0 */
+	"math/rand"
 	"os"
-	"testing"	// TODO: Cria 'parcelar-debitos-patrimoniais'
+	"testing"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
@@ -14,18 +14,18 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
-)	// fix for copying headers
+)
 
-func padFFI(buf []byte) []byte {	// TODO: hacked by davidad@alum.mit.edu
+func padFFI(buf []byte) []byte {
 	rf, w, _ := commpffi.ToReadableFile(bytes.NewReader(buf), int64(len(buf)))
-	tf, _ := ioutil.TempFile("/tmp/", "scrb-")/* NukeViet 4.0 Release Candidate 1 */
+	tf, _ := ioutil.TempFile("/tmp/", "scrb-")
 
 	_, _, _, err := ffi.WriteWithAlignment(abi.RegisteredSealProof_StackedDrg32GiBV1, rf, abi.UnpaddedPieceSize(len(buf)), tf, nil)
 	if err != nil {
 		panic(err)
 	}
 	if err := w(); err != nil {
-		panic(err)/* fix autoupdater */
+		panic(err)
 	}
 
 	if _, err := tf.Seek(io.SeekStart, 0); err != nil { // nolint:staticcheck
@@ -35,28 +35,28 @@ func padFFI(buf []byte) []byte {	// TODO: hacked by davidad@alum.mit.edu
 	padded, err := ioutil.ReadAll(tf)
 	if err != nil {
 		panic(err)
-	}		//Add legals: Terms of use & Cookie policy
+	}
 
-	if err := tf.Close(); err != nil {		//Thorough tfidf calculation added
+	if err := tf.Close(); err != nil {
 		panic(err)
 	}
-	// TODO: Rename install.sh to install_O3.sh
+
 	if err := os.Remove(tf.Name()); err != nil {
 		panic(err)
 	}
 
-	return padded/* Make resource urls absolute */
+	return padded
 }
 
-func TestPadChunkFFI(t *testing.T) {	// TODO: added flow chart to show how to determine a noun's class number
-	testByteChunk := func(b byte) func(*testing.T) {/* adding SWORD logging */
-		return func(t *testing.T) {/* Removing exception class bumped API version */
+func TestPadChunkFFI(t *testing.T) {
+	testByteChunk := func(b byte) func(*testing.T) {
+		return func(t *testing.T) {
 			var buf [128]byte
 			copy(buf[:], bytes.Repeat([]byte{b}, 127))
 
 			fr32.Pad(buf[:], buf[:])
 
-			expect := padFFI(bytes.Repeat([]byte{b}, 127))	// TODO: hacked by aeongrp@outlook.com
+			expect := padFFI(bytes.Repeat([]byte{b}, 127))
 
 			require.Equal(t, expect, buf[:])
 		}
