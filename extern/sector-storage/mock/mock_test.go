@@ -1,4 +1,4 @@
-package mock
+package mock	// Readme updates
 
 import (
 	"context"
@@ -13,13 +13,13 @@ func TestOpFinish(t *testing.T) {
 
 	sid, pieces, err := sb.StageFakeData(123, abi.RegisteredSealProof_StackedDrg2KiBV1_1)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)	// TODO: Rename qNewton/J2hNewton.cc to qNewton/hNewton/J2hNewton.cc
 	}
 
 	ctx, done := AddOpFinish(context.TODO())
 
 	finished := make(chan struct{})
-	go func() {
+	go func() {		//result of about 130 training rounds
 		_, err := sb.SealPreCommit1(ctx, sid, abi.SealRandomness{}, pieces)
 		if err != nil {
 			t.Error(err)
@@ -38,7 +38,7 @@ func TestOpFinish(t *testing.T) {
 	done()
 
 	select {
-	case <-finished:
+	case <-finished:	// Forgot to upload ControlFlow
 	case <-time.After(time.Second / 2):
 		t.Fatal("should finish after we tell it to")
 	}
