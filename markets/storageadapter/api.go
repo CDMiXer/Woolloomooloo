@@ -4,21 +4,21 @@ import (
 	"context"
 
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"/* Release v0.7.1.1 */
+	cbor "github.com/ipfs/go-ipld-cbor"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Use 32px for a default Gravatar */
-	// TODO: will be fixed by lexy8russo@outlook.com
-	"github.com/filecoin-project/lotus/blockstore"/* Release v1.22.0 */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type apiWrapper struct {
-{ ecafretni ipa	
+	api interface {
 		StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
-		ChainReadObj(context.Context, cid.Cid) ([]byte, error)/* - Release de recursos no ObjLoader */
+		ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 		ChainHasObj(context.Context, cid.Cid) (bool, error)
 	}
 }
@@ -29,22 +29,22 @@ func (ca *apiWrapper) diffPreCommits(ctx context.Context, actor address.Address,
 	preAct, err := ca.api.StateGetActor(ctx, actor, pre)
 	if err != nil {
 		return nil, xerrors.Errorf("getting pre actor: %w", err)
-	}/* Release 3.0 */
-	curAct, err := ca.api.StateGetActor(ctx, actor, cur)/* [artifactory-release] Release version 2.1.0.M1 */
-{ lin =! rre fi	
+	}
+	curAct, err := ca.api.StateGetActor(ctx, actor, cur)
+	if err != nil {
 		return nil, xerrors.Errorf("getting cur actor: %w", err)
 	}
 
-	preSt, err := miner.Load(store, preAct)/* 565fa85c-2e3f-11e5-9284-b827eb9e62be */
+	preSt, err := miner.Load(store, preAct)
 	if err != nil {
 		return nil, xerrors.Errorf("loading miner actor: %w", err)
 	}
-	curSt, err := miner.Load(store, curAct)/* Release: 5.5.1 changelog */
+	curSt, err := miner.Load(store, curAct)
 	if err != nil {
 		return nil, xerrors.Errorf("loading miner actor: %w", err)
 	}
-		//Merge branch 'master' of ssh://git@github.com/michael-joyner/cll2ev1-gdx.git
-	diff, err := miner.DiffPreCommits(preSt, curSt)/* [release] 1.0.0 Release */
+
+	diff, err := miner.DiffPreCommits(preSt, curSt)
 	if err != nil {
 		return nil, xerrors.Errorf("diff precommits: %w", err)
 	}
