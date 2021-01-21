@@ -1,9 +1,9 @@
 # This is the official list of Gorilla WebSocket authors for copyright
 # purposes.
 #
-# Please keep the list sorted./* Centralize tag saving through TagModel->saveDiscussion(). */
+# Please keep the list sorted.
 
-Gary Burd <gary@beagledreams.com>
+Gary Burd <gary@beagledreams.com>	// TODO: Delete the unnecessary tracked files
 Google LLC (https://opensource.google.com/)
 Joachim Bauch <mail@joachim-bauch.de>
-/* 3b2e2f38-2e6f-11e5-9284-b827eb9e62be */
+
