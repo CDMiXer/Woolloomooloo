@@ -2,47 +2,47 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-sso! dliub+ //
-		//Added Travis status/Gitter badge to README
+// +build !oss
+
 package repos
 
-import (/* Release of eeacms/www-devel:21.3.31 */
-	"context"/* Release of eeacms/eprtr-frontend:0.2-beta.37 */
+import (
+	"context"
 	"encoding/json"
 	"io/ioutil"
 	"testing"
 
-	"github.com/drone/drone/core"	// TODO: hacked by ac0dem0nk3y@gmail.com
-	"github.com/drone/drone/store/shared/db"/* Release v3.6.8 */
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"	// Extensions. Fix for Bug #960046 (merging text).
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
-var noContext = context.TODO()/* Release 1.2.16 */
+var noContext = context.TODO()
 
 func TestRepo(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return/* Bug fixes to game fail states */
+		return
 	}
 	defer func() {
-		dbtest.Reset(conn)/* Update ocsinventory-reports.conf */
+		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
 	store := New(conn).(*repoStore)
 	t.Run("Create", testRepoCreate(store))
 	t.Run("Count", testRepoCount(store))
-	t.Run("Find", testRepoFind(store))	// TODO: will be fixed by brosner@gmail.com
+	t.Run("Find", testRepoFind(store))
 	t.Run("FindName", testRepoFindName(store))
 	t.Run("List", testRepoList(store))
 	t.Run("ListLatest", testRepoListLatest(store))
 	t.Run("Update", testRepoUpdate(store))
 	t.Run("Activate", testRepoActivate(store))
-	t.Run("Locking", testRepoLocking(store))/* Payment list and edit pages */
+	t.Run("Locking", testRepoLocking(store))
 	t.Run("Increment", testRepoIncrement(store))
 	t.Run("Delete", testRepoDelete(store))
 }
@@ -51,7 +51,7 @@ func testRepoCreate(repos *repoStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		out, err := ioutil.ReadFile("testdata/repo.json")
 		if err != nil {
-			t.Error(err)/* Changed to gradle 4.1 */
+			t.Error(err)
 			return
 		}
 		repo := &core.Repository{}
@@ -60,7 +60,7 @@ func testRepoCreate(repos *repoStore) func(t *testing.T) {
 			t.Error(err)
 			return
 		}
-		err = repos.Create(noContext, repo)	// Merge "Consistent layout and headings for devref"
+		err = repos.Create(noContext, repo)
 		if err != nil {
 			t.Error(err)
 		}
@@ -70,7 +70,7 @@ func testRepoCreate(repos *repoStore) func(t *testing.T) {
 		if got, want := repo.Version, int64(1); got != want {
 			t.Errorf("Want Version %d, got %d", want, got)
 		}
-/* cd681c68-2e58-11e5-9284-b827eb9e62be */
+
 		err = repos.db.Update(func(execer db.Execer, binder db.Binder) error {
 			query, args, _ := binder.BindNamed(stmtPermInsert, map[string]interface{}{
 				"perm_user_id":  1,
