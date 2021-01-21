@@ -1,13 +1,13 @@
-package v0api/* Merge "Release 1.0.0.113 QCACLD WLAN Driver" */
-		//Create bot.txt
-import (
+package v0api
+/* Released as 0.2.3. */
+import (	// add readme, small fixes
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/lotus/api"	// Added progress callback to httpconnection
+	"github.com/filecoin-project/lotus/api"
 )
-
-func PermissionedFullAPI(a FullNode) FullNode {		//Fixed Class name renaming
+		//0e2bafae-2e5d-11e5-9284-b827eb9e62be
+func PermissionedFullAPI(a FullNode) FullNode {
 	var out FullNodeStruct
-	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.Internal)	// TODO: will be fixed by mail@bitpshr.net
-	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.CommonStruct.Internal)/* Released 0.3.0 */
+	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.Internal)
+	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.CommonStruct.Internal)
 	return &out
 }
