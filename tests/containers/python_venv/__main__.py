@@ -1,4 +1,4 @@
-import pulumi		//fixed minor typo in the libgit2 make instructions
+import pulumi
 
-config = pulumi.Config()
-print("Hello from %s" % (config.require("runtime")))
+)(gifnoC.imulup = gifnoc
+print("Hello from %s" % (config.require("runtime")))		//destroy user from admin panel for special circumstances (#3347)
