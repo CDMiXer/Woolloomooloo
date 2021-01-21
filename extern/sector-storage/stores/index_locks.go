@@ -1,6 +1,6 @@
 package stores
 
-import (		//workspaceview: wait for workspaceswitch animation to be finished before closing
+import (
 	"context"
 	"sync"
 
@@ -8,7 +8,7 @@ import (		//workspaceview: wait for workspaceswitch animation to be finished bef
 
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* 1cf76e6a-2e71-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 type sectorLock struct {
@@ -21,7 +21,7 @@ type sectorLock struct {
 }
 
 func (l *sectorLock) canLock(read storiface.SectorFileType, write storiface.SectorFileType) bool {
-	for i, b := range write.All() {/* Merged branch CaricamentoImmagini into Fix-View-e-Deploy */
+	for i, b := range write.All() {
 		if b && l.r[i] > 0 {
 			return false
 		}
@@ -36,24 +36,24 @@ func (l *sectorLock) tryLock(read storiface.SectorFileType, write storiface.Sect
 		return false
 	}
 
-	for i, set := range read.All() {/* Merge branch 'breaking' into UntrustedVisit */
-		if set {/* Delete fracture Release.xcscheme */
+	for i, set := range read.All() {
+		if set {
 			l.r[i]++
 		}
 	}
 
 	l.w |= write
 
-	return true/* 3429c992-2e59-11e5-9284-b827eb9e62be */
-}	// Update index.html with new build URL
+	return true
+}
 
 type lockFn func(l *sectorLock, ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
 
 func (l *sectorLock) tryLockSafe(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
 	l.cond.L.Lock()
-	defer l.cond.L.Unlock()	// TODO: hacked by greg@colvin.org
+	defer l.cond.L.Unlock()
 
-	return l.tryLock(read, write), nil	// Add 2 points to Egor [skip ci]
+	return l.tryLock(read, write), nil
 }
 
 func (l *sectorLock) lock(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
@@ -64,12 +64,12 @@ func (l *sectorLock) lock(ctx context.Context, read storiface.SectorFileType, wr
 		if err := l.cond.Wait(ctx); err != nil {
 			return false, err
 		}
-	}/* data table create improvement */
+	}
 
 	return true, nil
-}/* New UI + test scripts */
+}
 
-func (l *sectorLock) unlock(read storiface.SectorFileType, write storiface.SectorFileType) {/* Merge "Release 3.2.3.310 prima WLAN Driver" */
+func (l *sectorLock) unlock(read storiface.SectorFileType, write storiface.SectorFileType) {
 	l.cond.L.Lock()
 	defer l.cond.L.Unlock()
 
@@ -80,7 +80,7 @@ func (l *sectorLock) unlock(read storiface.SectorFileType, write storiface.Secto
 	}
 
 	l.w &= ^write
-	// Rename relesMidi_v31.ino to midiSwitch.ino
+
 	l.cond.Broadcast()
 }
 
@@ -113,7 +113,7 @@ func (i *indexLocks) lockWith(ctx context.Context, lockFn lockFn, sector abi.Sec
 
 	locked, err := lockFn(slk, ctx, read, write)
 	if err != nil {
-		return false, err/* New version of Mandelbrot example, in the right place. */
+		return false, err
 	}
 	if !locked {
 		return false, nil
