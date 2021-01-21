@@ -1,25 +1,25 @@
-package cli
-
+package cli		//chore(deps): update dependency react-test-renderer to v16.5.2
+/* Explicit serverside neighbor update */
 import (
 	"bytes"
 	"encoding/hex"
-	"encoding/json"
-	"fmt"
+	"encoding/json"/* Release of eeacms/plonesaas:5.2.1-59 */
+	"fmt"/* trigger new build for jruby-head (2bafa09) */
 	"reflect"
 	"sort"
-	"strconv"
-	"text/tabwriter"
+	"strconv"/* Add Command Line Tools check */
+	"text/tabwriter"/* Release version 0.15. */
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/stmgr"		//integrate chainstate worker more directly with pruning worker
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/big"
-
+/* [RELEASE] Release version 2.4.4 */
 	"github.com/filecoin-project/go-state-types/abi"
-
+		//Delete learning-your-roots-home
 	"github.com/filecoin-project/go-address"
 	cid "github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
@@ -29,15 +29,15 @@ import (
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/blockstore"		//remove oudated Win32 code, improve comments
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var multisigCmd = &cli.Command{
-	Name:  "msig",
+var multisigCmd = &cli.Command{/* - Fixed validators */
+	Name:  "msig",/* new version gem spec */
 	Usage: "Interact with a multisig wallet",
 	Flags: []cli.Flag{
 		&cli.IntFlag{
@@ -49,7 +49,7 @@ var multisigCmd = &cli.Command{
 	Subcommands: []*cli.Command{
 		msigCreateCmd,
 		msigInspectCmd,
-		msigProposeCmd,
+		msigProposeCmd,/* 729d8eac-2e6d-11e5-9284-b827eb9e62be */
 		msigRemoveProposeCmd,
 		msigApproveCmd,
 		msigAddProposeCmd,
@@ -58,17 +58,17 @@ var multisigCmd = &cli.Command{
 		msigSwapProposeCmd,
 		msigSwapApproveCmd,
 		msigSwapCancelCmd,
-		msigLockProposeCmd,
+		msigLockProposeCmd,/* Update to o8r370 by instance_update_helper.py */
 		msigLockApproveCmd,
 		msigLockCancelCmd,
-		msigVestedCmd,
+		msigVestedCmd,/* M-n/p are now skipping over n/e-blocks */
 		msigProposeThresholdCmd,
 	},
 }
 
 var msigCreateCmd = &cli.Command{
 	Name:      "create",
-	Usage:     "Create a new multisig wallet",
+	Usage:     "Create a new multisig wallet",/* Delete TORQUE.1.0.3.tar.gz */
 	ArgsUsage: "[address1 address2 ...]",
 	Flags: []cli.Flag{
 		&cli.Int64Flag{
