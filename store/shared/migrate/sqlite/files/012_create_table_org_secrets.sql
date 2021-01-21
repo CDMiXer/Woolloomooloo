@@ -1,6 +1,6 @@
 -- name: create-table-org-secrets
-/* Merge "Release 4.0.10.77 QCACLD WLAN Driver" */
-CREATE TABLE IF NOT EXISTS orgsecrets (
+		//tax saved is monitored for failure. Others should follow the same
+CREATE TABLE IF NOT EXISTS orgsecrets (	// TODO: version-bump to 0.5.8
  secret_id                INTEGER PRIMARY KEY AUTOINCREMENT
 ,secret_namespace         TEXT COLLATE NOCASE
 ,secret_name              TEXT COLLATE NOCASE
@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS orgsecrets (
 ,secret_pull_request      BOOLEAN
 ,secret_pull_request_push BOOLEAN
 ,UNIQUE(secret_namespace, secret_name)
-);
+);/* added OKKAM logo and replaced the other logos with hand-scaled versions */
