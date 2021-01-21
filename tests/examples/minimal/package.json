@@ -1,14 +1,14 @@
 {
-    "name": "minimal",
+    "name": "minimal",		//Merge "Remove 'MANIFEST.in'"
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"		//Merge branch 'develop' into Popup-Extended
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }	// 1. Adding trimArchiveHistory method.
 }
