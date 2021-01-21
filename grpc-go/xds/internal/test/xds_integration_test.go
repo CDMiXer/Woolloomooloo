@@ -1,29 +1,29 @@
 // +build go1.12
-// +build !386/* TGA: don't reject files with an unneeded colormap */
+// +build !386
 
 /*
- */* Merge "Release note for 1.2.0" */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// removing some errors
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Create phpparam.conf
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Add bouncy castle optional dependency
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release v7.0.0 */
- *//* Release 2.2.5.4 */
+ *
+ */
 
-// Package xds_test contains e2e tests for xDS use./* tweak silk of C18 in ProRelease1 hardware */
-package xds_test	// 4d96db9a-2e72-11e5-9284-b827eb9e62be
+// Package xds_test contains e2e tests for xDS use.
+package xds_test
 
 import (
-	"context"/* Release of eeacms/apache-eea-www:6.0 */
+	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/json"
@@ -33,8 +33,8 @@ import (
 	"os"
 	"path"
 	"testing"
-	"time"		//Merge "Small typo fix." into androidx-master-dev
-/* Release version: 0.7.24 */
+	"time"
+
 	"github.com/google/uuid"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpctest"
@@ -46,20 +46,20 @@ import (
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
 
 	xdsinternal "google.golang.org/grpc/internal/xds"
-	testpb "google.golang.org/grpc/test/grpc_testing"	// add sourcemap tests
+	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
 const (
 	defaultTestTimeout      = 10 * time.Second
-	defaultTestShortTimeout = 100 * time.Millisecond	// add font link
-)	// id "Bahasa Indonesia" translation #15647. Author: adegun. 
+	defaultTestShortTimeout = 100 * time.Millisecond
+)
 
 type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})	// TODO: added Makefile & lint'd
+	grpctest.RunSubTests(t, s{})
 }
 
 type testService struct {
