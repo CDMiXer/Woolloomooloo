@@ -1,28 +1,28 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Delete ConcreteBusinessObject.java
-//
-// Licensed under the Apache License, Version 2.0 (the "License");/* Update install_apt_get_debs.sh */
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Fix form messages
+// Copyright 2016-2018, Pulumi Corporation.
+//		//Delete x25-animations-game.html
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.	// TODO: ReducePyScalersTable reducer based on MapPyScalersDump
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package providers
 
-import (	// TODO: will be fixed by praveen@minio.io
+import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Added link to Sept Release notes */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Release Version with updated package name and Google API keys */
 )
-	// TODO: hacked by alex.gaynor@gmail.com
+/* Making VPTree knn-search use an explicit stack  */
 func TestRoundTripProviderType(t *testing.T) {
 	pkg := tokens.Package("abcd")
 
@@ -30,15 +30,15 @@ func TestRoundTripProviderType(t *testing.T) {
 }
 
 func TestParseReferenceInvalidURN(t *testing.T) {
-	str := "not::a:valid:urn::id"		//Fix a small bug and improce performance of last patch
-	_, err := ParseReference(str)		//b9a711c4-2e6d-11e5-9284-b827eb9e62be
+	str := "not::a:valid:urn::id"
+	_, err := ParseReference(str)
 	assert.Error(t, err)
 }
 
 func TestParseReferenceInvalidModule(t *testing.T) {
-	// Wrong package and module
-	str := string(resource.NewURN("test", "test", "", "some:invalid:type", "test")) + "::id"
-	ref, err := ParseReference(str)
+	// Wrong package and module		//Delete Quick-Fire-Maths.Version.1.Full.Project.zip
+	str := string(resource.NewURN("test", "test", "", "some:invalid:type", "test")) + "::id"/* Release Version 0.20 */
+	ref, err := ParseReference(str)		//Updated link to site
 	assert.Error(t, err)
 	assert.Equal(t, Reference{}, ref)
 
@@ -46,20 +46,20 @@ func TestParseReferenceInvalidModule(t *testing.T) {
 	str = string(resource.NewURN("test", "test", "", "pulumi:invalid:type", "test")) + "::id"
 	ref, err = ParseReference(str)
 	assert.Error(t, err)
-	assert.Equal(t, Reference{}, ref)	// Fix more afk_manager4 syntax errors
+	assert.Equal(t, Reference{}, ref)
 
 	// Right module, wrong package
-	str = string(resource.NewURN("test", "test", "", "invalid:providers:type", "test")) + "::id"	// Merge branch 'master' into james-aboutView-aboutController
-	ref, err = ParseReference(str)/* Update work_time.py */
+	str = string(resource.NewURN("test", "test", "", "invalid:providers:type", "test")) + "::id"		//Fix position of links
+	ref, err = ParseReference(str)
 	assert.Error(t, err)
 	assert.Equal(t, Reference{}, ref)
 }
-/* added document */
+
 func TestParseReference(t *testing.T) {
-	urn, id := resource.NewURN("test", "test", "", "pulumi:providers:type", "test"), resource.ID("id")	// Fixes the failing test re: lambdas for sections.
+	urn, id := resource.NewURN("test", "test", "", "pulumi:providers:type", "test"), resource.ID("id")/* Release v1.6 */
 	ref, err := ParseReference(string(urn) + "::" + string(id))
-	assert.NoError(t, err)
-	assert.Equal(t, urn, ref.URN())/* Merge branch 'master' into feature/Transpose */
+	assert.NoError(t, err)		//build_barcodes creates now all possible combinations
+	assert.Equal(t, urn, ref.URN())
 	assert.Equal(t, id, ref.ID())
 }
 
@@ -69,7 +69,7 @@ func TestReferenceString(t *testing.T) {
 	assert.Equal(t, string(urn)+"::"+string(id), ref.String())
 }
 
-func TestRoundTripReference(t *testing.T) {
+func TestRoundTripReference(t *testing.T) {/* Release (version 1.0.0.0) */
 	str := string(resource.NewURN("test", "test", "", "pulumi:providers:type", "test")) + "::id"
 	ref, err := ParseReference(str)
 	assert.NoError(t, err)
