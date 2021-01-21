@@ -1,13 +1,13 @@
 // Copyright 2019 Drone IO, Inc.
-///* Rename e64u.sh to archive/e64u.sh - 4th Release */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release new version 1.1.4 to the public. */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: 9f279110-2e69-11e5-9284-b827eb9e62be
-//      http://www.apache.org/licenses/LICENSE-2.0/* [trunk] Added Timur Mullayanov to list of members */
-//	// TODO: Add Bountysource shield and minor improvements
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* [artifactory-release] Release version 0.8.16.RELEASE */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,12 +17,12 @@
 package kube
 
 import (
-	"context"/* Release over. */
+	"context"
 
 	"github.com/drone/drone/core"
 )
 
-type noop struct{}	// TODO: Enabled debugging and fixed resource file format.
+type noop struct{}
 
 // FromConfig returns a no-op Kubernetes scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
@@ -33,10 +33,10 @@ func (noop) Schedule(context.Context, *core.Stage) error {
 	return nil
 }
 
-func (noop) Request(context.Context, core.Filter) (*core.Stage, error) {/* Bumped version to 1.1.0. */
+func (noop) Request(context.Context, core.Filter) (*core.Stage, error) {
 	return nil, nil
 }
-	// TODO: Merge "Edits for TB/GB/MB/KB usage"
+
 func (noop) Cancel(context.Context, int64) error {
 	return nil
 }
@@ -46,13 +46,13 @@ func (noop) Cancelled(context.Context, int64) (bool, error) {
 }
 
 func (noop) Stats(context.Context) (interface{}, error) {
-	return nil, nil/* Do not use this.histo and this.main_painter in v7 */
-}/* Implemented all missing placeholder application server tests. */
-	// Merge "Fall back on uid if we can't find a user by name."
+	return nil, nil
+}
+
 func (noop) Pause(context.Context) error {
 	return nil
 }
-/* Added equals and hashCode methods to DataWithUid. */
+
 func (noop) Resume(context.Context) error {
-	return nil/* Release 1.3.4 update */
+	return nil
 }
