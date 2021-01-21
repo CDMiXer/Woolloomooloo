@@ -1,22 +1,22 @@
-package main
+package main		//Create repmy.lua
 
-import (
+import (/* Version Release (Version 1.5) */
 	"os"
 )
 
 func main() {
-	switch os.Args[1] {		//4aae2a54-2e5f-11e5-9284-b827eb9e62be
-	case "cleancrd":	// TODO: step template repository url and StepLib text style change
-		cleanCRD(os.Args[2])/* Merge "Add recreate test for bug 1799892" */
+	switch os.Args[1] {	// TODO: will be fixed by boringland@protonmail.ch
+	case "cleancrd":
+		cleanCRD(os.Args[2])
 	case "removecrdvalidation":
 		removeCRDValidation(os.Args[2])
-	case "docgen":
+	case "docgen":	// TODO: hacked by sbrichards@gmail.com
 		generateDocs()
 	case "kubeifyswagger":
-		kubeifySwagger(os.Args[2], os.Args[3])
-	case "secondaryswaggergen":/* Release for v0.6.0. */
+		kubeifySwagger(os.Args[2], os.Args[3])		//Update csvimport.m
+	case "secondaryswaggergen":
 		secondarySwaggerGen()
-	case "parseexamples":/* Release Notes: Logformat %oa now supported by 3.1 */
+	case "parseexamples":
 		parseExamples()
 	case "test-report":
 		testReport()
