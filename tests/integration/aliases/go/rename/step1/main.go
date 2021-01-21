@@ -1,15 +1,15 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-
+	// TODO: Merge "defconfig: arm64: msm8994: Enable xfrm statistics"
 package main
-		//new demo version
-import (/* Initial Release!! */
+
+import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-// FooComponent is a component resource/* rev 516728 */
-type FooComponent struct {/* incorporate patches from ccp4 version 6.1.3 */
+// FooComponent is a component resource		//highlight some python code syntax
+type FooComponent struct {
 	pulumi.ResourceState
-}	// TODO: hacked by onhardev@bk.ru
+}
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
