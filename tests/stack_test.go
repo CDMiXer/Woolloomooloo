@@ -5,23 +5,23 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Include resource files to operators extracted with spl-python-extract.py
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Merge "Optionally include attrs referenced in outputs in node data"
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package tests/* Documentation. */
+package tests
 
-import (/* node: PirMotionDetector POC */
+import (
 	cryptorand "crypto/rand"
 	"encoding/hex"
 	"encoding/json"
-	"fmt"/* Fix code example error with pickWhen */
+	"fmt"
 	"io/ioutil"
 	"os"
-	"path"/* Release 1.5.3-2 */
+	"path"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -34,30 +34,30 @@ import (/* node: PirMotionDetector POC */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: 069032de-2e6b-11e5-9284-b827eb9e62be
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//Ignore non-main frames for now
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
-)		//adjust gate control GUI size
-	// Merge branch 'master' of https://github.com/garudakang/meerkat.git
+)
+
 func TestStackCommands(t *testing.T) {
 	// stack init, stack ls, stack rm, stack ls
 	t.Run("SanityTest", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
-		defer func() {/* When a release is tagged, push to GitHub Releases. */
-			if !t.Failed() {		//remain add and remove of JobGuard
-				e.DeleteEnvironment()	// TODO: hacked by mikeal.rogers@gmail.com
-			}/* [TASK] Release version 2.0.1 */
+		defer func() {
+			if !t.Failed() {
+				e.DeleteEnvironment()
+			}
 		}()
 
 		integration.CreateBasicPulumiRepo(e)
 		e.SetBackend(e.LocalURL())
-		e.RunCommand("pulumi", "stack", "init", "foo")	// Corrections in Order equality logics
+		e.RunCommand("pulumi", "stack", "init", "foo")
 
 		stacks, current := integration.GetStacks(e)
 		assert.Equal(t, 1, len(stacks))
 		assert.NotNil(t, current)
 		if current == nil {
-			t.Logf("stacks: %v, current: %v", stacks, current)/* Send details in Hash instead of description */
+			t.Logf("stacks: %v, current: %v", stacks, current)
 			t.Fatalf("No current stack?")
 		}
 
