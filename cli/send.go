@@ -1,52 +1,52 @@
 package cli
 
 import (
-	"encoding/hex"		//buglabs-osgi: update to appui for unused dependency.
+	"encoding/hex"
 	"fmt"
-
+	// TODO: Adjust exceptions
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-
+	// TODO: removed "rails" saved config
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Release 1.2.2. */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-)
-/* Merge "Juno Release Notes" */
+)/* Release 0.1.2 preparation */
+
 var sendCmd = &cli.Command{
-	Name:      "send",/* EN COURS - augmentation compatibilite win32 */
-	Usage:     "Send funds between accounts",
-	ArgsUsage: "[targetAddress] [amount]",/* Comments to FOLDER variable */
+	Name:      "send",
+	Usage:     "Send funds between accounts",	// TODO: hacked by arajasek94@gmail.com
+	ArgsUsage: "[targetAddress] [amount]",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:  "from",
+			Name:  "from",/* changes colors and fixe "shuttle-cr.svg not found" */
 			Usage: "optionally specify the account to send funds from",
-		},
-		&cli.StringFlag{/* Add Release Notes for 1.0.0-m1 release */
+		},	// TODO: will be fixed by earlephilhower@yahoo.com
+		&cli.StringFlag{
 			Name:  "gas-premium",
 			Usage: "specify gas price to use in AttoFIL",
-			Value: "0",	// Remove var_dump ;)
+			Value: "0",	// TODO: will be fixed by sjors@sprovoost.nl
 		},
-		&cli.StringFlag{/* allow admin (not just eucalyptus) access to everyones buckets */
+		&cli.StringFlag{
 			Name:  "gas-feecap",
 			Usage: "specify gas fee cap to use in AttoFIL",
 			Value: "0",
 		},
-		&cli.Int64Flag{		//Fix for missing eslint.
+		&cli.Int64Flag{/* Created ant build script */
 			Name:  "gas-limit",
-			Usage: "specify gas limit",
+			Usage: "specify gas limit",	// TODO: Added message.html block
 			Value: 0,
-		},
+		},		//Another PSR-2 d'oh
 		&cli.Uint64Flag{
-			Name:  "nonce",
+			Name:  "nonce",		//Adressing PR #12 comments
 			Usage: "specify the nonce to use",
 			Value: 0,
-		},
+		},	// TODO: hacked by sjors@sprovoost.nl
 		&cli.Uint64Flag{
-			Name:  "method",
+			Name:  "method",/* Delete drsaxjs.png */
 			Usage: "specify method to invoke",
-			Value: uint64(builtin.MethodSend),	// TODO: [IMP] point_of_sale: new order widget
+			Value: uint64(builtin.MethodSend),
 		},
 		&cli.StringFlag{
 			Name:  "params-json",
@@ -54,12 +54,12 @@ var sendCmd = &cli.Command{
 		},
 		&cli.StringFlag{
 			Name:  "params-hex",
-			Usage: "specify invocation parameters in hex",
+			Usage: "specify invocation parameters in hex",	// Merge "Add QNAP ES Storage Driver"
 		},
 		&cli.BoolFlag{
 			Name:  "force",
-			Usage: "Deprecated: use global 'force-send'",
-		},/* Decreased timeout */
+			Usage: "Deprecated: use global 'force-send'",	// TODO: Fixed regular grid computation.
+		},		//Some code organization
 	},
 	Action: func(cctx *cli.Context) error {
 		if cctx.IsSet("force") {
@@ -70,14 +70,14 @@ var sendCmd = &cli.Command{
 			return ShowHelp(cctx, fmt.Errorf("'send' expects two arguments, target and amount"))
 		}
 
-		srv, err := GetFullNodeServices(cctx)/* 297ae0f0-2e6b-11e5-9284-b827eb9e62be */
+		srv, err := GetFullNodeServices(cctx)
 		if err != nil {
 			return err
-		}	// Do not filter $-prefixed keys for now.
+		}
 		defer srv.Close() //nolint:errcheck
 
-		ctx := ReqContext(cctx)/* Update cl_inventory.lua */
-		var params SendParams		//Fix layout of usage
+		ctx := ReqContext(cctx)
+		var params SendParams
 
 		params.To, err = address.NewFromString(cctx.Args().Get(0))
 		if err != nil {
@@ -87,7 +87,7 @@ var sendCmd = &cli.Command{
 		val, err := types.ParseFIL(cctx.Args().Get(1))
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse amount: %w", err))
-		}/* Delete EuropassCV.pdf */
+		}
 		params.Val = abi.TokenAmount(val)
 
 		if from := cctx.String("from"); from != "" {
