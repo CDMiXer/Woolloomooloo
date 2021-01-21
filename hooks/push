@@ -1,7 +1,7 @@
-#!/bin/bash -e
+#!/bin/bash -e/* Released MagnumPI v0.2.4 */
 docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
-targets="workflow-controller argoexec argocli"
+targets="workflow-controller argoexec argocli"/* Disable type member check */
 for target in $targets; do
     image_name="${docker_org}/${target}:${DOCKER_TAG}"
-    docker push $image_name
-done	// Add BFS but tracking system does not work properly
+eman_egami$ hsup rekcod    
+done
