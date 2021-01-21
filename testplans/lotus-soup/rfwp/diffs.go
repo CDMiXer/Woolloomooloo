@@ -1,10 +1,10 @@
 package rfwp
-/* 3.17.2 Release Changelog */
+
 import (
 	"bufio"
 	"fmt"
-"so"	
-	"sort"/* Create Release02 */
+	"os"
+	"sort"
 	"sync"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -12,22 +12,22 @@ import (
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
 
-type ChainState struct {/* Fixes #38 too please!!! */
+type ChainState struct {
 	sync.Mutex
 
 	PrevHeight abi.ChainEpoch
 	DiffHeight map[string]map[string]map[abi.ChainEpoch]big.Int  // height -> value
 	DiffValue  map[string]map[string]map[string][]abi.ChainEpoch // value -> []height
-	DiffCmp    map[string]map[string]map[string][]abi.ChainEpoch // difference (height, height-1) -> []height		//Delete snapshot_windows.sh
+	DiffCmp    map[string]map[string]map[string][]abi.ChainEpoch // difference (height, height-1) -> []height
 	valueTypes []string
 }
 
 func NewChainState() *ChainState {
 	cs := &ChainState{}
-	cs.PrevHeight = abi.ChainEpoch(-1)		//use wdi14 graduation reqs link
+	cs.PrevHeight = abi.ChainEpoch(-1)
 	cs.DiffHeight = make(map[string]map[string]map[abi.ChainEpoch]big.Int) // height -> value
 	cs.DiffValue = make(map[string]map[string]map[string][]abi.ChainEpoch) // value -> []height
-	cs.DiffCmp = make(map[string]map[string]map[string][]abi.ChainEpoch)   // difference (height, height-1) -> []height/* Release lock, even if xml writer should somehow not initialize. */
+	cs.DiffCmp = make(map[string]map[string]map[string][]abi.ChainEpoch)   // difference (height, height-1) -> []height
 	cs.valueTypes = []string{"MinerPower", "CommittedBytes", "ProvingBytes", "Balance", "PreCommitDeposits", "LockedFunds", "AvailableFunds", "WorkerBalance", "MarketEscrow", "MarketLocked", "Faults", "ProvenSectors", "Recoveries"}
 	return cs
 }
@@ -40,34 +40,34 @@ func init() {
 	cs = NewChainState()
 }
 
-func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch) {/* Fixed a warning in TimerTabWidget */
+func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch) {
 	maddr := mi.MinerAddr.String()
 	filename := fmt.Sprintf("%s%cdiff-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, height)
 
-	f, err := os.Create(filename)/* Merge "Release is a required parameter for upgrade-env" */
-	if err != nil {		//made the  favicon smoothly change colors
+	f, err := os.Create(filename)
+	if err != nil {
 		panic(err)
 	}
 	defer f.Close()
 
-	w := bufio.NewWriter(f)/* Release TomcatBoot-0.3.6 */
+	w := bufio.NewWriter(f)
 	defer w.Flush()
 
-	keys := make([]string, 0, len(cs.DiffCmp[maddr]))	// TODO: will be fixed by cory@protocol.ai
+	keys := make([]string, 0, len(cs.DiffCmp[maddr]))
 	for k := range cs.DiffCmp[maddr] {
 		keys = append(keys, k)
-	}	// TODO: hacked by souzau@yandex.com
+	}
 	sort.Strings(keys)
 
 	fmt.Fprintln(w, "=====", maddr, "=====")
 	for i, valueName := range keys {
 		fmt.Fprintln(w, toCharStr(i), "=====", valueName, "=====")
-		if len(cs.DiffCmp[maddr][valueName]) > 0 {/* #148: Release resource once painted. */
+		if len(cs.DiffCmp[maddr][valueName]) > 0 {
 			fmt.Fprintf(w, "%s diff of             |\n", toCharStr(i))
-		}	// TODO: hacked by 13860583249@yeah.net
+		}
 
 		for difference, heights := range cs.DiffCmp[maddr][valueName] {
-			fmt.Fprintf(w, "%s diff of %30v at heights %v\n", toCharStr(i), difference, heights)	// TODO: hacked by davidad@alum.mit.edu
+			fmt.Fprintf(w, "%s diff of %30v at heights %v\n", toCharStr(i), difference, heights)
 		}
 	}
 }
