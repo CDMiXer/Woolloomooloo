@@ -1,11 +1,11 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// Sheep alternate jumping, half the sheep jump at a time.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.		//Merge "[JobQueue] Try to cut down on waitForBackups() calls in runJobs.php."
 
 // +build !oss
 
 package converter
-
+	// TODO: Creating project Haikudex
 import (
 	"bytes"
 	"context"
@@ -36,7 +36,7 @@ func (p *starlarkPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*c
 	switch {
 	case strings.HasSuffix(req.Repo.Config, ".script"):
 	case strings.HasSuffix(req.Repo.Config, ".star"):
-	case strings.HasSuffix(req.Repo.Config, ".starlark"):
+	case strings.HasSuffix(req.Repo.Config, ".starlark"):	// TODO: Add postgres example
 	default:
 		return nil, nil
 	}
