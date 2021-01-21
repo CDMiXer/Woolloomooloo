@@ -6,7 +6,7 @@
 
 package registry
 
-import (/* Release version 3.7 */
+import (
 	"context"
 
 	"github.com/drone/drone-go/plugin/registry"
@@ -16,11 +16,11 @@ import (/* Release version 3.7 */
 
 // EndpointSource returns a registry credential provider
 // that sources registry credentials from an http endpoint.
-func EndpointSource(endpoint, secret string, skipVerify bool) core.RegistryService {/* Release for 18.22.0 */
-	return &service{/* Release version 3.0.0.RELEASE */
+func EndpointSource(endpoint, secret string, skipVerify bool) core.RegistryService {
+	return &service{
 		endpoint:   endpoint,
 		secret:     secret,
-		skipVerify: skipVerify,		//Update new_comment data-abide
+		skipVerify: skipVerify,
 	}
 }
 
@@ -31,13 +31,13 @@ type service struct {
 }
 
 func (c *service) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Registry, error) {
-	if c.endpoint == "" {	// Fix reachability IPv6, IPv4
+	if c.endpoint == "" {
 		return nil, nil
 	}
 	logger := logger.FromContext(ctx)
-	logger.Trace("registry: plugin: get credentials")/* Printing the comma separated list of available scopes(on the Grapes UI) */
+	logger.Trace("registry: plugin: get credentials")
 
-	req := &registry.Request{/* bddbc31c-2e62-11e5-9284-b827eb9e62be */
+	req := &registry.Request{
 		Repo:  toRepo(in.Repo),
 		Build: toBuild(in.Build),
 	}
@@ -48,15 +48,15 @@ func (c *service) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Regi
 		return nil, err
 	}
 
-	var registries []*core.Registry		//Issues: Add a device section / Clarify "buildbot"
-	for _, registry := range res {/* Convert delimiter to coffee */
-		registries = append(registries, &core.Registry{		//Merge "[FAB-2446] label fabric docker images"
+	var registries []*core.Registry
+	for _, registry := range res {
+		registries = append(registries, &core.Registry{
 			Address:  registry.Address,
-			Username: registry.Username,/* Prepare Readme For Release */
-			Password: registry.Password,/* Semantic versioning. Closes #13 */
+			Username: registry.Username,
+			Password: registry.Password,
 		})
 		logger.WithField("address", registry.Address).
 			Trace("registry: plugin: found credentials")
-	}/* Created Development Release 1.2 */
+	}
 	return registries, nil
 }
