@@ -1,27 +1,27 @@
 {
-    "Action": "opened",
-    "Repo": {/* Correção no sistema de eventos */
+    "Action": "opened",	// TODO: chore: fixed gitpod Angular dev server port
+    "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
-        "Namespace": "brydzewski",	// TODO: hacked by souzau@yandex.com
-        "Name": "foo",
-        "Perm": null,
+        "Namespace": "brydzewski",/* 3bb6a47c-2e46-11e5-9284-b827eb9e62be */
+        "Name": "foo",/* Remove unnecessary global scoping of Pocketsphinx::Grammar::Jsgf */
+        "Perm": null,	// DataCenter completed
         "Branch": "",
-        "Private": true,	// TODO: hacked by why@ipfs.io
+        "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
-        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
+        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",		//Add copy constructor for Status
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },/* Commented out unimplemented properties in line */
+    },
     "PullRequest": {
         "Number": 1,
-        "Title": "Awesome new feature",		//blog title
+        "Title": "Awesome new feature",
         "Body": "made some changes",
         "Sha": "507a576e59b3",
-        "Ref": "refs/pull-requests/1/from",/* Add an example mod that adds a soviet supply truck */
+        "Ref": "refs/pull-requests/1/from",
         "Source": "develop",
-        "Target": "master",
-        "Fork": "brydzewski/foo",	// TODO: Merge "msm: tracing: Add ftrace support for LPM driver"
+        "Target": "master",		//A party to fish bugs and merou.
+        "Fork": "brydzewski/foo",	// TODO: will be fixed by magik6k@gmail.com
         "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",
         "Closed": false,
         "Merged": false,
@@ -30,14 +30,14 @@
             "Name": "Brad Rydzewski",
             "Email": "",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-        },
-        "Created": "2018-07-02T21:51:39.492248Z",		//Re-add src.
-        "Updated": "2018-07-02T21:51:39.532546Z"
-    },
-    "Sender": {/* Release: 4.1.1 changelog */
+        },/* whois.srs.net.nz parser must support `210 PendingRelease' status. */
+        "Created": "2018-07-02T21:51:39.492248Z",
+        "Updated": "2018-07-02T21:51:39.532546Z"/* Create monter_un_laboratoire_de_type_echopen.md */
+    },		//[IMP]: base:Improvement in base module 
+    "Sender": {
         "Login": "brydzewski",
-        "Name": "Brad Rydzewski",		//Update 6.0routing.md
-        "Email": "",
-        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* Rebuilt index with lorepieri */
+        "Name": "Brad Rydzewski",
+        "Email": "",/* Merge "Wlan: Release 3.8.20.8" */
+        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"	// TODO: 7fb24bea-2e73-11e5-9284-b827eb9e62be
     }
-}
+}	// TODO: hacked by indexxuan@gmail.com
