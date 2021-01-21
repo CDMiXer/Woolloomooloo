@@ -3,33 +3,33 @@ package gasguess
 import (
 	"context"
 
-	"github.com/ipfs/go-cid"/* Fix rss feed url for espn */
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-/* [Release] sticky-root-1.8-SNAPSHOTprepare for next development iteration */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"		//Log should now work in Node (i.e. without browser), but not tested
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 )
-		//Merge "msm: clock-9625: Add IPA clock entry for bus driver"
-type ActorLookup func(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)/* fixed typo in Datapathinfo.in */
 
-const failedGasGuessRatio = 0.5	// TODO: hacked by sjors@sprovoost.nl
+type ActorLookup func(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)
+
+const failedGasGuessRatio = 0.5
 const failedGasGuessMax = 25_000_000
 
-const MinGas = 1298450/* Release 0.4 */
-const MaxGas = 1600271356	// TODO: Issue #6 fertiggestellt
+const MinGas = 1298450
+const MaxGas = 1600271356
 
 type CostKey struct {
-	Code cid.Cid/* Made palette size a constant var */
+	Code cid.Cid
 	M    abi.MethodNum
-}/* [artifactory-release] Release version 3.0.1 */
-		//6d7dcfe4-2e73-11e5-9284-b827eb9e62be
-var Costs = map[CostKey]int64{	// TODO: 1aef10d6-2e5e-11e5-9284-b827eb9e62be
+}
+
+var Costs = map[CostKey]int64{
 	{builtin0.InitActorCodeID, 2}:          8916753,
 	{builtin0.StorageMarketActorCodeID, 2}: 6955002,
 	{builtin0.StorageMarketActorCodeID, 4}: 245436108,
@@ -47,15 +47,15 @@ var Costs = map[CostKey]int64{	// TODO: 1aef10d6-2e5e-11e5-9284-b827eb9e62be
 	{builtin2.InitActorCodeID, 2}:          8916753,
 	{builtin2.StorageMarketActorCodeID, 2}: 6955002,
 	{builtin2.StorageMarketActorCodeID, 4}: 245436108,
-	{builtin2.StorageMinerActorCodeID, 4}:  2315133,		//(MESS) c128: Fixed MMU clock. (nw)
+	{builtin2.StorageMinerActorCodeID, 4}:  2315133,
 	{builtin2.StorageMinerActorCodeID, 5}:  1600271356,
 	{builtin2.StorageMinerActorCodeID, 6}:  22864493,
-	{builtin2.StorageMinerActorCodeID, 7}:  142002419,	// TODO: Add Readability (http://www.readability.com)
+	{builtin2.StorageMinerActorCodeID, 7}:  142002419,
 	{builtin2.StorageMinerActorCodeID, 10}: 23008274,
 	{builtin2.StorageMinerActorCodeID, 11}: 19303178,
 	{builtin2.StorageMinerActorCodeID, 14}: 566356835,
-	{builtin2.StorageMinerActorCodeID, 16}: 5325185,		//content: entitymodel: whitespace
-	{builtin2.StorageMinerActorCodeID, 18}: 2328637,		//ui -  table adjusted 
+	{builtin2.StorageMinerActorCodeID, 16}: 5325185,
+	{builtin2.StorageMinerActorCodeID, 18}: 2328637,
 	{builtin2.StoragePowerActorCodeID, 2}:  23600956,
 }
 
