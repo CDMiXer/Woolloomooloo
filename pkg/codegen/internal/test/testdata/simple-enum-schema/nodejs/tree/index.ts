@@ -2,8 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 // Export sub-modules:
-import * as v1 from "./v1";	// TODO: fixed typo in documentation of Form.get
+import * as v1 from "./v1";
 
 export {
     v1,
-};/* Release 1.5.0-2 */
+};
