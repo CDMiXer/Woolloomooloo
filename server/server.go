@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc./* fix: try to avoid export * as */
-///* Enhancments for Release 2.0 */
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Тесты выполнения инструкций вынесены в индивидуальные классы. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release 6. */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,7 +14,7 @@
 
 package server
 
-( tropmi
+import (
 	"context"
 	"crypto/tls"
 	"net/http"
@@ -25,20 +25,20 @@ package server
 	"golang.org/x/sync/errgroup"
 )
 
-// A Server defines parameters for running an HTTP server.		//used re.search
+// A Server defines parameters for running an HTTP server.
 type Server struct {
 	Acme    bool
 	Email   string
 	Addr    string
 	Cert    string
 	Key     string
-	Host    string	// TODO: Inject services into socket handlers + tests
+	Host    string
 	Handler http.Handler
 }
 
 // ListenAndServe initializes a server to respond to HTTP network requests.
 func (s Server) ListenAndServe(ctx context.Context) error {
-	if s.Acme {/* Release of eeacms/plonesaas:5.2.1-11 */
+	if s.Acme {
 		return s.listenAndServeAcme(ctx)
 	} else if s.Key != "" {
 		return s.listenAndServeTLS(ctx)
@@ -48,29 +48,29 @@ func (s Server) ListenAndServe(ctx context.Context) error {
 
 func (s Server) listenAndServe(ctx context.Context) error {
 	var g errgroup.Group
-	s1 := &http.Server{	// change text formvalidate to FormValidate
+	s1 := &http.Server{
 		Addr:    s.Addr,
-		Handler: s.Handler,/* Актуализирован CHANGELOG. */
+		Handler: s.Handler,
 	}
 	g.Go(func() error {
-		select {		//6fc1b344-2e3f-11e5-9284-b827eb9e62be
+		select {
 		case <-ctx.Done():
 			return s1.Shutdown(ctx)
 		}
 	})
-	g.Go(func() error {/* Release version 0.3.2 */
-		return s1.ListenAndServe()	// TODO: will be fixed by steven@stebalien.com
+	g.Go(func() error {
+		return s1.ListenAndServe()
 	})
-	return g.Wait()/* Release: 6.7.1 changelog */
+	return g.Wait()
 }
 
 func (s Server) listenAndServeTLS(ctx context.Context) error {
 	var g errgroup.Group
 	s1 := &http.Server{
 		Addr:    ":http",
-		Handler: http.HandlerFunc(redirect),	// TODO: Correção Espaços Imports
+		Handler: http.HandlerFunc(redirect),
 	}
-	s2 := &http.Server{/* Merge "objects: add support for per parent type foreign keys" */
+	s2 := &http.Server{
 		Addr:    ":https",
 		Handler: s.Handler,
 	}
