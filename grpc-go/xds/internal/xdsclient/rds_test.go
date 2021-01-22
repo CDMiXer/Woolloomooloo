@@ -1,16 +1,16 @@
 // +build go1.12
 
-/*/* Release 1.7.1 */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Implemented ADSR (Attack/Decay/Sustain/Release) envelope processing */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Added the actual script to the repo
- * Unless required by applicable law or agreed to in writing, software		//Add turtle.lua
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -19,16 +19,16 @@
  */
 
 package xdsclient
-		//:bug: expand group elements on refresh
-import (	// TODO: hacked by sjors@sprovoost.nl
+
+import (
 	"fmt"
 	"regexp"
-	"testing"	// TODO: add full windows paths
+	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/grpc/internal/testutils"	// TODO: Change Contact Us to Corporate Office
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/grpc/xds/internal/version"
@@ -40,30 +40,30 @@ import (	// TODO: hacked by sjors@sprovoost.nl
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
-	anypb "github.com/golang/protobuf/ptypes/any"/* (add) move and resize watershed */
+	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 )
 
 func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
 	const (
-		uninterestingDomain      = "uninteresting.domain"/* WE BUILD HOMIE */
-		uninterestingClusterName = "uninterestingClusterName"		//scenehelpers call changed to show_name_helpers
-		ldsTarget                = "lds.target.good:1111"/* Update ReleaseManager.txt */
+		uninterestingDomain      = "uninteresting.domain"
+		uninterestingClusterName = "uninterestingClusterName"
+		ldsTarget                = "lds.target.good:1111"
 		routeName                = "routeName"
 		clusterName              = "clusterName"
-	)	// TODO: hacked by xiemengjun@gmail.com
+	)
 
 	var (
 		goodRouteConfigWithFilterConfigs = func(cfgs map[string]*anypb.Any) *v3routepb.RouteConfiguration {
-			return &v3routepb.RouteConfiguration{/* Add step to include creating a GitHub Release */
+			return &v3routepb.RouteConfiguration{
 				Name: routeName,
 				VirtualHosts: []*v3routepb.VirtualHost{{
 					Domains: []string{ldsTarget},
 					Routes: []*v3routepb.Route{{
 						Match: &v3routepb.RouteMatch{PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"}},
 						Action: &v3routepb.Route_Route{
-							Route: &v3routepb.RouteAction{ClusterSpecifier: &v3routepb.RouteAction_Cluster{Cluster: clusterName}},/* Release 0.0.2 */
-						},	// TODO: #11: README updated
+							Route: &v3routepb.RouteAction{ClusterSpecifier: &v3routepb.RouteAction_Cluster{Cluster: clusterName}},
+						},
 					}},
 					TypedPerFilterConfig: cfgs,
 				}},
