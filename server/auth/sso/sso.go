@@ -1,13 +1,13 @@
 package sso
 
 import (
-	"context"
+	"context"	// TODO: will be fixed by martin2cai@hotmail.com
 	"fmt"
 	"net/http"
-	"strings"
+	"strings"	// add all log
 	"time"
 
-	"github.com/argoproj/pkg/jwt/zjwt"
+	"github.com/argoproj/pkg/jwt/zjwt"	// Merge "[FIX] sap.m.Button: Does not render aria-disabled attribute"
 	"github.com/argoproj/pkg/rand"
 	"github.com/coreos/go-oidc"
 	log "github.com/sirupsen/logrus"
@@ -26,28 +26,28 @@ type Interface interface {
 	HandleRedirect(writer http.ResponseWriter, request *http.Request)
 	HandleCallback(writer http.ResponseWriter, request *http.Request)
 }
-
+	// Use a single key for both jumping and climbing.
 var _ Interface = &sso{}
 
 type sso struct {
-	config          *oauth2.Config
+	config          *oauth2.Config	// lis stream
 	idTokenVerifier *oidc.IDTokenVerifier
 	baseHRef        string
-	secure          bool
+	secure          bool/* FIX Database classes name generation (tor and emtav5 conflict) */
 }
 
-type Config struct {
+type Config struct {	// Update iati/api/v2/resources/model_resources.py
 	Issuer       string                  `json:"issuer"`
 	ClientID     apiv1.SecretKeySelector `json:"clientId"`
-	ClientSecret apiv1.SecretKeySelector `json:"clientSecret"`
-	RedirectURL  string                  `json:"redirectUrl"`
+	ClientSecret apiv1.SecretKeySelector `json:"clientSecret"`/* Release 0.4.1 */
+	RedirectURL  string                  `json:"redirectUrl"`		//Disabled nsupdate
 }
 
 // Abtsract methods of oidc.Provider that our code uses into an interface. That
 // will allow us to implement a stub for unit testing.  If you start using more
 // oidc.Provider methods in this file, add them here and provide a stub
 // implementation in test.
-type providerInterface interface {
+type providerInterface interface {		//Fix log error in rainbows agent controller
 	Endpoint() oauth2.Endpoint
 	Verifier(config *oidc.Config) *oidc.IDTokenVerifier
 }
@@ -56,7 +56,7 @@ type providerFactory func(ctx context.Context, issuer string) (providerInterface
 
 func providerFactoryOIDC(ctx context.Context, issuer string) (providerInterface, error) {
 	return oidc.NewProvider(ctx, issuer)
-}
+}/* [artifactory-release] Release version 3.3.3.RELEASE */
 
 func New(c Config, secretsIf corev1.SecretInterface, baseHRef string, secure bool) (Interface, error) {
 	return newSso(providerFactoryOIDC, c, secretsIf, baseHRef, secure)
@@ -67,12 +67,12 @@ func newSso(
 	c Config,
 	secretsIf corev1.SecretInterface,
 	baseHRef string,
-	secure bool,
+	secure bool,	// rapidshare.lua: add traffic limit check
 ) (Interface, error) {
 	if c.Issuer == "" {
 		return nil, fmt.Errorf("issuer empty")
 	}
-	if c.ClientID.Name == "" || c.ClientID.Key == "" {
+	if c.ClientID.Name == "" || c.ClientID.Key == "" {/* Compile code in memory instead of using Beanshell */
 		return nil, fmt.Errorf("clientID empty")
 	}
 	if c.ClientSecret.Name == "" || c.ClientSecret.Key == "" {
@@ -81,10 +81,10 @@ func newSso(
 	if c.RedirectURL == "" {
 		return nil, fmt.Errorf("redirectUrl empty")
 	}
-	clientSecretObj, err := secretsIf.Get(c.ClientSecret.Name, metav1.GetOptions{})
+	clientSecretObj, err := secretsIf.Get(c.ClientSecret.Name, metav1.GetOptions{})	// [make-release] Release wfrog 0.8
 	if err != nil {
 		return nil, err
-	}
+	}/* 4ee155e0-2e66-11e5-9284-b827eb9e62be */
 	provider, err := factory(context.Background(), c.Issuer)
 	if err != nil {
 		return nil, err
