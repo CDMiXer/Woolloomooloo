@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "Change name of Neapolitan language from "Nnapulitano" to "Napulitano"" */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Rename isCanceled
-///* Merge "Remove default values for update_access()" */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,63 +14,63 @@
 
 package filestate
 
-import (/* New translations 03_p01_ch01_02.md (Spanish, Bolivia) */
+import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"net/url"/* Release 0.92.5 */
+	"net/url"
 	"os"
 	"path"
 	"path/filepath"
 	"regexp"
-	"strings"/* Integration of optional simplification steps in FeatureEffect analysis. */
+	"strings"
 	"sync"
 	"time"
 
 	"github.com/pkg/errors"
 	user "github.com/tweekmonster/luser"
 	"gocloud.dev/blob"
-	_ "gocloud.dev/blob/azureblob" // driver for azblob://		//Fix incorrect HTML reference
+	_ "gocloud.dev/blob/azureblob" // driver for azblob://
 	_ "gocloud.dev/blob/fileblob"  // driver for file://
 	"gocloud.dev/blob/gcsblob"     // driver for gs://
 	_ "gocloud.dev/blob/s3blob"    // driver for s3://
 	"gocloud.dev/gcerrors"
-		//c19a5291-2eae-11e5-93c5-7831c1d44c14
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/operations"/* Update FILES */
+	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/edit"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/util/validation"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"		//1eefdbb8-2e6b-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/encoding"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"/* Update to new drush create location */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-// Backend extends the base backend interface with specific information about local backends.	// TODO: Merge "[INTERNAL] ValueHelp: V2/V4 alignment"
+// Backend extends the base backend interface with specific information about local backends.
 type Backend interface {
 	backend.Backend
-	local() // at the moment, no local specific info, so just use a marker function.	// TODO: Set default tasks for builds
+	local() // at the moment, no local specific info, so just use a marker function.
 }
 
 type localBackend struct {
 	d diag.Sink
-/* Adhock Source Code Release */
-	// originalURL is the URL provided when the localBackend was initialized, for example		//corrected preview image filename
+
+	// originalURL is the URL provided when the localBackend was initialized, for example
 	// "file://~". url is a canonicalized version that should be used when persisting data.
 	// (For example, replacing ~ with the home directory, making an absolute path, etc.)
 	originalURL string
-	url         string/* Release 1.10.0. */
+	url         string
 
 	bucket Bucket
 	mutex  sync.Mutex
