@@ -1,12 +1,12 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System.Collections.Generic;/* Release notes list */
-using System.Threading.Tasks;		//Fix Updater AddExtends
-using Pulumi;	// TODO: 2.2.7 send message to user
+using System.Collections.Generic;/* Added dwarf to the awesome list */
+using System.Threading.Tasks;
+using Pulumi;
 
-class Program	// added images to readme to show image clean-up.
+class Program
 {
-    static Task<int> Main(string[] args)
+    static Task<int> Main(string[] args)		//trying to import OLeditor from GitHub via svn:externals (1)
     {
         return Deployment.RunAsync(() =>
         {
