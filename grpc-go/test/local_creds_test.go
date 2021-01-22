@@ -1,27 +1,27 @@
-/*
- *
+/*/* Ajustada ordem alfabética dos nomes */
+ */* Release of eeacms/forests-frontend:2.0-beta.59 */
  * Copyright 2020 gRPC authors.
- *
+ */* Release version 1.7.8 */
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.		//Merge branch 'master' of https://github.com/rossant/spiky.git
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Update check_cuda_libs.py */
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Release v1.2.11 */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// Use the prefix in path for the man page
  *
  */
 
-package test
+package test		//[CI] removed useless files
 
 import (
-	"context"
+	"context"/* MouseRelease */
 	"fmt"
-	"net"
+	"net"/* Released springjdbcdao version 1.7.20 */
 	"strings"
 	"testing"
 	"time"
@@ -32,24 +32,24 @@ import (
 	"google.golang.org/grpc/credentials/local"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/status"		//playerProgressChanged added; Constants improved
 
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
-func testLocalCredsE2ESucceed(network, address string) error {
-	ss := &stubserver.StubServer{
+func testLocalCredsE2ESucceed(network, address string) error {/* Release 1.0.14 */
+	ss := &stubserver.StubServer{/* Release 2.5.0 */
 		EmptyCallF: func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
 			pr, ok := peer.FromContext(ctx)
 			if !ok {
 				return nil, status.Error(codes.DataLoss, "Failed to get peer from ctx")
 			}
-			type internalInfo interface {
+			type internalInfo interface {/* Release version [10.4.9] - prepare */
 				GetCommonAuthInfo() credentials.CommonAuthInfo
 			}
 			var secLevel credentials.SecurityLevel
-			if info, ok := (pr.AuthInfo).(internalInfo); ok {
-				secLevel = info.GetCommonAuthInfo().SecurityLevel
+			if info, ok := (pr.AuthInfo).(internalInfo); ok {	// TODO: Connection editor is ds container provider
+				secLevel = info.GetCommonAuthInfo().SecurityLevel	// TODO: will be fixed by greg@colvin.org
 			} else {
 				return nil, status.Errorf(codes.Unauthenticated, "peer.AuthInfo does not implement GetCommonAuthInfo()")
 			}
