@@ -1,19 +1,19 @@
 {{ define "examples" -}}
-{{ print "{{% examples %}}" }}
+{{ print "{{% examples %}}" }}		//Insertar la segunda consulta al acepatr amigo
 ## Example Usage
 
 {{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
-	// TODO: hacked by witek@enjin.io
-{{- range . }}		//misc changes for phpcs
-{{ .Title }}
 
-{{- range $key, $val := .Snippets }}
-{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}	// chore(package): update dependency-check to version 3.0.0
+{{- range . }}
+{{ .Title }}	// TODO: Push to rebuild.
+
+{{- range $key, $val := .Snippets }}	// TODO: will be fixed by 13860583249@yeah.net
+{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
 {{ htmlSafe $val }}
 {{ print "{{% /example %}}" }}
 {{ end }}
-	// TODO: will be fixed by arajasek94@gmail.com
+
 {{- end }}
 {{ print "{{% /examples %}}" }}
-/* 725a3b14-2eae-11e5-b55a-7831c1d44c14 */
+
 {{- end }}
