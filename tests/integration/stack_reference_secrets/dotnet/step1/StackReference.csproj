@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>/* Delete googlec8cba1a76a19612e.html */
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
-  </PropertyGroup>	// TODO: Update bank-program
+  </PropertyGroup>
 
 </Project>
