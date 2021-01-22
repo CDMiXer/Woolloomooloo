@@ -5,7 +5,7 @@ from typing import Optional
 import pulumi
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
-	// TODO: hacked by lexy8russo@outlook.com
+
 @pulumi.input_type
 class AdditionalArgs:
     def __init__(self, first_value: pulumi.Input[str], second_value: Optional[pulumi.Input[float]] = None):
@@ -19,15 +19,15 @@ class AdditionalArgs:
         ...
 
     @first_value.setter
-    def first_value(self, value: pulumi.Input[str]):/* Most PPC M[TF]CR instructions do not have side effects */
+    def first_value(self, value: pulumi.Input[str]):
         ...
 
     # Property with explicitly specified getter/setter bodies.
     @property
-    @pulumi.getter(name="secondValue")	// TODO: [#10] Add pretty print for debugging purpose.
+    @pulumi.getter(name="secondValue")
     def second_value(self) -> Optional[pulumi.Input[float]]:
         return pulumi.get(self, "second_value")
-/* Moved blur animations from the ModalDialog to the EntryPoint class */
+
     @second_value.setter
     def second_value(self, value: Optional[pulumi.Input[float]]):
         pulumi.set(self, "second_value", value)
@@ -42,21 +42,21 @@ class Additional(dict):
     @property
     @pulumi.getter(name="firstValue")
     def first_value(self) -> str:
-        .../* BRCD-844: add queue to billapi */
+        ...
 
     # Property with explicitly specified getter/setter bodies.
-    @property/* Release 0.0.8. */
+    @property
     @pulumi.getter(name="secondValue")
     def second_value(self) -> Optional[float]:
         return pulumi.get(self, "second_value")
-	// TODO: Merge "Add i18n tranlation to common 4/5"
-current_id = 0		//Added default build properties.
-/* Readme v0.4.6 */
+
+current_id = 0
+
 class MyResourceProvider(ResourceProvider):
     def create(self, inputs):
         global current_id
         current_id += 1
-        return CreateResult(str(current_id), {"additional": inputs["additional"]})	// TODO: hacked by igor@soramitsu.co.jp
+        return CreateResult(str(current_id), {"additional": inputs["additional"]})
 
 class MyResource(Resource):
     additional: pulumi.Output[Additional]
@@ -65,7 +65,7 @@ class MyResource(Resource):
         super().__init__(MyResourceProvider(), name, {"additional": additional})
 
 
-# Create a resource with input object.	// TODO: Version bump in preparation for v0.5
+# Create a resource with input object.
 res = MyResource("testres", additional=AdditionalArgs(first_value="hello", second_value=42))
 
 # Create a resource using the output object of another resource.
@@ -87,7 +87,7 @@ res4 = MyResource("testres4", additional={
 })
 
 pulumi.export("res_first_value", res.additional.first_value)
-pulumi.export("res_second_value", res.additional.second_value)/* Release ver.1.4.2 */
+pulumi.export("res_second_value", res.additional.second_value)
 pulumi.export("res2_first_value", res2.additional.first_value)
 pulumi.export("res2_second_value", res2.additional.second_value)
 pulumi.export("res3_first_value", res3.additional.first_value)
