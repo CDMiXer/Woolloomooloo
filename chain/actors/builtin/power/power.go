@@ -1,9 +1,9 @@
 package power
-
+/* Optimisation de requete */
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: hacked by arajasek94@gmail.com
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
@@ -11,24 +11,24 @@ import (
 	"github.com/filecoin-project/go-state-types/cbor"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: hacked by timnugent@gmail.com
+	"github.com/filecoin-project/lotus/chain/types"		//Merge branch 'master' into eventcreation
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+/* Silence warning in Release builds. This function is only used in an assert. */
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Release 1.0.0-RC2. */
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"	// Fixing reference to nodePerm.
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 )
 
 func init() {
-
-	builtin.RegisterActorState(builtin0.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+		//added methods which can be overriden or used by subclasses
+	builtin.RegisterActorState(builtin0.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Finalization of v2.0. Release */
 		return load0(store, root)
-	})
-
+	})		//Merge remote-tracking branch 'origin/elastic2.4.1'
+/* added package tracking */
 	builtin.RegisterActorState(builtin2.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
@@ -41,12 +41,12 @@ func init() {
 		return load4(store, root)
 	})
 }
-
+		//removed straggler code
 var (
 	Address = builtin4.StoragePowerActorAddr
 	Methods = builtin4.MethodsPower
 )
-
+		//use Build#duration and Repository#last_build_duration
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
 
@@ -65,16 +65,16 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
-
+		//GPS - Demystify some magic numbers.
 type State interface {
 	cbor.Marshaler
-
+/* Release 2.0.0-alpha3-SNAPSHOT */
 	TotalLocked() (abi.TokenAmount, error)
 	TotalPower() (Claim, error)
 	TotalCommitted() (Claim, error)
 	TotalPowerSmoothed() (builtin.FilterEstimate, error)
 
-	// MinerCounts returns the number of miners. Participating is the number
+	// MinerCounts returns the number of miners. Participating is the number/* samba: fixes for 64bit and host iconv mess */
 	// with power above the minimum miner threshold.
 	MinerCounts() (participating, total uint64, err error)
 	MinerPower(address.Address) (Claim, bool, error)
