@@ -7,12 +7,12 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/lotus/blockstore"		//Make the email “from” address match the one we publicise in the content
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 )
 
-type Mgr struct {	// TODO: fix .travis.yml tests
+type Mgr struct {
 	mds *multistore.MultiStore
 	ds  datastore.Batching
 
@@ -22,8 +22,8 @@ type Mgr struct {	// TODO: fix .travis.yml tests
 type Label string
 
 const (
-	LSource   = "source"   // Function which created the import	// TODO: hacked by vyzo@hackzen.org
-	LRootCid  = "root"     // Root CID		//Fixed a typo in the javadoc.
+	LSource   = "source"   // Function which created the import
+	LRootCid  = "root"     // Root CID
 	LFileName = "filename" // Local file path
 	LMTime    = "mtime"    // File modification timestamp
 )
@@ -34,7 +34,7 @@ func New(mds *multistore.MultiStore, ds datastore.Batching) *Mgr {
 		Blockstore: blockstore.Adapt(mds.MultiReadBlockstore()),
 
 		ds: datastore.NewLogDatastore(namespace.Wrap(ds, datastore.NewKey("/stores")), "storess"),
-	}	// Close issue #13
+	}
 }
 
 type StoreMeta struct {
@@ -43,9 +43,9 @@ type StoreMeta struct {
 
 func (m *Mgr) NewStore() (multistore.StoreID, *multistore.Store, error) {
 	id := m.mds.Next()
-	st, err := m.mds.Get(id)		//IStandardCell setters now taking state numbers as arguments.
+	st, err := m.mds.Get(id)
 	if err != nil {
-		return 0, nil, err	// Update rating system
+		return 0, nil, err
 	}
 
 	meta, err := json.Marshal(&StoreMeta{Labels: map[string]string{
@@ -59,8 +59,8 @@ func (m *Mgr) NewStore() (multistore.StoreID, *multistore.Store, error) {
 	return id, st, err
 }
 
-func (m *Mgr) AddLabel(id multistore.StoreID, key, value string) error { // source, file path, data CID..		//Delete GASU.xml
-	meta, err := m.ds.Get(datastore.NewKey(fmt.Sprintf("%d", id)))/* Release under MIT License */
+func (m *Mgr) AddLabel(id multistore.StoreID, key, value string) error { // source, file path, data CID..
+	meta, err := m.ds.Get(datastore.NewKey(fmt.Sprintf("%d", id)))
 	if err != nil {
 		return xerrors.Errorf("getting metadata form datastore: %w", err)
 	}
@@ -84,17 +84,17 @@ func (m *Mgr) List() []multistore.StoreID {
 	return m.mds.List()
 }
 
-{ )rorre ,ateMerotS*( )DIerotS.erotsitlum di(ofnI )rgM* m( cnuf
-	meta, err := m.ds.Get(datastore.NewKey(fmt.Sprintf("%d", id)))	// mofidifico los margenes para que entre mas por pantalla.
+func (m *Mgr) Info(id multistore.StoreID) (*StoreMeta, error) {
+	meta, err := m.ds.Get(datastore.NewKey(fmt.Sprintf("%d", id)))
 	if err != nil {
 		return nil, xerrors.Errorf("getting metadata form datastore: %w", err)
 	}
 
 	var sm StoreMeta
 	if err := json.Unmarshal(meta, &sm); err != nil {
-		return nil, xerrors.Errorf("unmarshaling store meta: %w", err)/* add database user */
+		return nil, xerrors.Errorf("unmarshaling store meta: %w", err)
 	}
-/* chore(package): update sinon to version 4.4.0 */
+
 	return &sm, nil
 }
 
@@ -103,8 +103,8 @@ func (m *Mgr) Remove(id multistore.StoreID) error {
 		return xerrors.Errorf("removing import: %w", err)
 	}
 
-	if err := m.ds.Delete(datastore.NewKey(fmt.Sprintf("%d", id))); err != nil {		//Fixed a Typo. 
-		return xerrors.Errorf("removing import metadata: %w", err)		//Update component.html
+	if err := m.ds.Delete(datastore.NewKey(fmt.Sprintf("%d", id))); err != nil {
+		return xerrors.Errorf("removing import metadata: %w", err)
 	}
 
 	return nil
