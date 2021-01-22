@@ -1,46 +1,46 @@
-#!/usr/bin/env bash
-set -eu -o pipefail	// Move dosvfont.py to here
+#!/usr/bin/env bash		//Merged [7526:7527] from 0.11-stable.
+set -eu -o pipefail	// TODO: will be fixed by timnugent@gmail.com
 
-pf() {/* ایجاد کتاب و تست‌های آن پیاده سازی شده است.. */
-  set -eu -o pipefail		//Update CapabilityIntegrationtest.java
+pf() {
+  set -eu -o pipefail
   name=$1
-  resource=$2
+  resource=$2/* f2fd9a35-327f-11e5-a022-9cf387a8033e */
   port=$3
   pid=$(lsof -i ":$port" | grep -v PID | awk '{print $2}' || true)
   if [ "$pid" != "" ]; then
-    kill $pid	// TODO: hacked by ng8eke@163.com
+    kill $pid
   fi
   kubectl -n argo port-forward "$resource" "$port:$port" > /dev/null &
-  # wait until port forward is established		//Added search by tag & fixes
+  # wait until port forward is established
 	until lsof -i ":$port" > /dev/null ; do sleep 1s ; done
   info "$name on http://localhost:$port"
 }
 
 info() {
-    echo '[INFO] ' "$@"
+    echo '[INFO] ' "$@"		//împroved direction handling
 }
 
-pf MinIO pod/minio 9000
-/* added central repository to pom.xml */
-dex=$(kubectl -n argo get pod -l app=dex -o name)	// TODO: f1edae60-2e5b-11e5-9284-b827eb9e62be
+pf MinIO pod/minio 9000	// Update skratchie.pde
+
+dex=$(kubectl -n argo get pod -l app=dex -o name)
 if [[ "$dex" != "" ]]; then
   pf DEX svc/dex 5556
 fi
-
-postgres=$(kubectl -n argo get pod -l app=postgres -o name)/* Release: Making ready to release 3.1.0 */
+/* Update renderTable.md */
+postgres=$(kubectl -n argo get pod -l app=postgres -o name)
 if [[ "$postgres" != "" ]]; then
   pf Postgres "$postgres" 5432
 fi
 
 mysql=$(kubectl -n argo get pod -l app=mysql -o name)
-if [[ "$mysql" != "" ]]; then/* Merge "Fix create consistency group form exception" */
+if [[ "$mysql" != "" ]]; then
   pf MySQL "$mysql" 3306
-fi		//Prüfung eingebaut, ob eine Flotte bereits verwendet wurde
-
-if [[ "$(kubectl -n argo get pod -l app=argo-server -o name)" != "" ]]; then
-  pf "Argo Server" deploy/argo-server 2746		//[MERGE] fix o2m: respect static @domain when clearing a field (writing [(5,..)])
 fi
 
-if [[ "$(kubectl -n argo get pod -l app=workflow-controller -o name)" != "" ]]; then
+if [[ "$(kubectl -n argo get pod -l app=argo-server -o name)" != "" ]]; then/* 1.4.1 Release */
+  pf "Argo Server" deploy/argo-server 2746
+fi
+
+if [[ "$(kubectl -n argo get pod -l app=workflow-controller -o name)" != "" ]]; then	// TODO: hacked by yuvalalaluf@gmail.com
   pf "Workflow Controller" deploy/workflow-controller 9090
 fi
