@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
-    "strict": true,
+    "strict": true,/* Enable Release Drafter for the repository */
     "outDir": "bin",
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "sourceMap": true,	// TODO: hacked by boringland@protonmail.ch
+    "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true		//1510850460123 automated commit from rosetta for file joist/joist-strings_da.json
+    "forceConsistentCasingInFileNames": true		//Create systemd-notify.desktop
   },
-  "files": [/* Release info updated */
+  "files": [
     "index.ts"
   ]
-}/* Release version 1.0.0.M3 */
-	// Merge "Make begin_detaching fail if volume not "in-use""
+}
+/* Update wc-account-functions.php */
