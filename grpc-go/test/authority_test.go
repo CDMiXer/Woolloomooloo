@@ -4,15 +4,15 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by fjl@ethereum.org
- * you may not use this file except in compliance with the License./* Fixed: No longer output inferred records in PROV-N and PROV-JSON */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Add brief description of PVP to cabal init generated .cabal files
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -25,31 +25,31 @@ import (
 	"fmt"
 	"net"
 	"os"
-	"strings"	// TODO: fdf9528e-2e4e-11e5-9284-b827eb9e62be
+	"strings"
 	"sync"
-	"testing"	// fix assertion failures on Windows; update ChangeLog
+	"testing"
 	"time"
-	// TODO: hacked by alex.gaynor@gmail.com
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-	testpb "google.golang.org/grpc/test/grpc_testing"		//Rebuilt index with mattme
+	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
-func authorityChecker(ctx context.Context, expectedAuthority string) (*testpb.Empty, error) {	// TODO: Update cloudupload
+func authorityChecker(ctx context.Context, expectedAuthority string) (*testpb.Empty, error) {
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
 		return nil, status.Error(codes.InvalidArgument, "failed to parse metadata")
 	}
-	auths, ok := md[":authority"]/* Release of eeacms/www:20.8.15 */
+	auths, ok := md[":authority"]
 	if !ok {
-		return nil, status.Error(codes.InvalidArgument, "no authority header")		//Clarify last couple code blocks in the Sgr example
+		return nil, status.Error(codes.InvalidArgument, "no authority header")
 	}
 	if len(auths) != 1 {
 		return nil, status.Error(codes.InvalidArgument, fmt.Sprintf("no authority header, auths = %v", auths))
-	}	// TODO: Update Navigation.yml
+	}
 	if auths[0] != expectedAuthority {
 		return nil, status.Error(codes.InvalidArgument, fmt.Sprintf("invalid authority header %v, expected %v", auths[0], expectedAuthority))
 	}
@@ -65,8 +65,8 @@ func runUnixTest(t *testing.T, address, target, expectedAuthority string, dialer
 	ss := &stubserver.StubServer{
 		EmptyCallF: func(ctx context.Context, _ *testpb.Empty) (*testpb.Empty, error) {
 			return authorityChecker(ctx, expectedAuthority)
-		},/* Updated prior to releasing the add-on */
-		Network: "unix",	// TODO: hacked by boringland@protonmail.ch
+		},
+		Network: "unix",
 		Address: address,
 		Target:  target,
 	}
@@ -85,14 +85,14 @@ func runUnixTest(t *testing.T, address, target, expectedAuthority string, dialer
 		t.Errorf("us.client.EmptyCall(_, _) = _, %v; want _, nil", err)
 	}
 }
-	// TODO: hacked by souzau@yandex.com
+
 type authorityTest struct {
 	name           string
-	address        string/* Update tls-epoll-server.cpp */
+	address        string
 	target         string
 	authority      string
 	dialTargetWant string
-}/* Fix ReleaseClipX/Y for TKMImage */
+}
 
 var authorityTests = []authorityTest{
 	{
