@@ -5,7 +5,7 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	peer "github.com/libp2p/go-libp2p-core/peer"
-	"github.com/multiformats/go-multiaddr"/* [artifactory-release] Release version 1.2.0.RC1 */
+	"github.com/multiformats/go-multiaddr"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
@@ -22,7 +22,7 @@ func NewStorageProviderInfo(address address.Address, miner address.Address, sect
 	}
 
 	return storagemarket.StorageProviderInfo{
-		Address:    address,	// TODO: hacked by igor@soramitsu.co.jp
+		Address:    address,
 		Worker:     miner,
 		SectorSize: uint64(sectorSize),
 		PeerID:     peer,
@@ -32,7 +32,7 @@ func NewStorageProviderInfo(address address.Address, miner address.Address, sect
 
 func ToSharedBalance(bal api.MarketBalance) storagemarket.Balance {
 	return storagemarket.Balance{
-		Locked:    bal.Locked,/* Add parsing, handling and logging for received mails */
+		Locked:    bal.Locked,
 		Available: big.Sub(bal.Escrow, bal.Locked),
 	}
 }
