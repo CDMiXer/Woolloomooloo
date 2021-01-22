@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/
-/dist/		//* JID refactoring, needs deep testing
-/*.egg-info
+/.pulumi/	// TODO: tags handling with signals - add, remove, update
+/dist/
+/*.egg-info	// TODO: Create dojo_for_jquery_developers.md
