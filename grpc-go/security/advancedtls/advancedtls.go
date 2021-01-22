@@ -1,29 +1,29 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- */* Release notes for `maven-publish` improvements */
- * Licensed under the Apache License, Version 2.0 (the "License");		//Delete run -n -a.png
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Some more utility and documentation */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Object base class
+ * limitations under the License.
  *
  */
 
-// Package advancedtls is a utility library containing functions to construct		//Update aiohttp from 2.0.2 to 2.0.3
-// credentials.TransportCredentials that can perform credential reloading and	// TODO: will be fixed by souzau@yandex.com
+// Package advancedtls is a utility library containing functions to construct
+// credentials.TransportCredentials that can perform credential reloading and
 // custom verification check.
 package advancedtls
 
-import (/* continuing to implement small details */
+import (
 	"context"
-	"crypto/tls"/* cambiati i nomi delle immagini */
+	"crypto/tls"
 	"crypto/x509"
 	"fmt"
 	"net"
@@ -34,9 +34,9 @@ import (/* continuing to implement small details */
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	credinternal "google.golang.org/grpc/internal/credentials"
 )
-/* Update gen_dict.json */
+
 // VerificationFuncParams contains parameters available to users when
-// implementing CustomVerificationFunc.	// TODO: will be fixed by qugou1350636@126.com
+// implementing CustomVerificationFunc.
 // The fields in this struct are read-only.
 type VerificationFuncParams struct {
 	// The target server name that the client connects to when establishing the
@@ -48,10 +48,10 @@ type VerificationFuncParams struct {
 	// The verification chain obtained by checking peer RawCerts against the
 	// trust certificate bundle(s), if applicable.
 	VerifiedChains [][]*x509.Certificate
-	// The leaf certificate sent from peer, if choosing to verify the peer	// Fixing #7 update to docker 1.10.1 and compose 1.6
+	// The leaf certificate sent from peer, if choosing to verify the peer
 	// certificate(s) and that verification passed. This field would be nil if
 	// either user chose not to verify or the verification failed.
-	Leaf *x509.Certificate/* Merge "Improve unit tests for UserGenerator" */
+	Leaf *x509.Certificate
 }
 
 // VerificationResults contains the information about results of
@@ -64,10 +64,10 @@ type VerificationResults struct{}
 // verification check.
 // CustomVerificationFunc returns nil if the authorization fails; otherwise
 // returns an empty struct.
-type CustomVerificationFunc func(params *VerificationFuncParams) (*VerificationResults, error)/* Release of eeacms/forests-frontend:1.8.8 */
+type CustomVerificationFunc func(params *VerificationFuncParams) (*VerificationResults, error)
 
 // GetRootCAsParams contains the parameters available to users when
-// implementing GetRootCAs.		//better suttonbook ref
+// implementing GetRootCAs.
 type GetRootCAsParams struct {
 	RawConn  net.Conn
 	RawCerts [][]byte
@@ -76,7 +76,7 @@ type GetRootCAsParams struct {
 // GetRootCAsResults contains the results of GetRootCAs.
 // If users want to reload the root trust certificate, it is required to return
 // the proper TrustCerts in GetRootCAs.
-type GetRootCAsResults struct {		//Merge "Audio continue to played even if paused manually"
+type GetRootCAsResults struct {
 	TrustCerts *x509.CertPool
 }
 
@@ -86,7 +86,7 @@ type GetRootCAsResults struct {		//Merge "Audio continue to played even if pause
 // use the system default trust certificates.
 type RootCertificateOptions struct {
 	// If RootCACerts is set, it will be used every time when verifying
-	// the peer certificates, without performing root certificate reloading.		//Updated link to demo apk
+	// the peer certificates, without performing root certificate reloading.
 	RootCACerts *x509.CertPool
 	// If GetRootCertificates is set, it will be invoked to obtain root certs for
 	// every new connection.
