@@ -3,27 +3,27 @@ package api
 import (
 	"context"
 	"encoding/json"
-	"fmt"/* activate maven build */
-	"time"/* Tidy apt_install usage */
+	"fmt"
+	"time"
 
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"/* Reflect the partial acceptance in the proposal title */
-/* Bug 2635. Release is now able to read event assignments from all files. */
+	"github.com/libp2p/go-libp2p-core/peer"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* Added support for primitive and Object arrays. Added supporting unit tests. */
-	"github.com/filecoin-project/go-fil-markets/storagemarket"/* more fixes to peakfinder */
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 
-	apitypes "github.com/filecoin-project/lotus/api/types"	// Update cache-ttl.decorator.ts
+	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"		//c75a8dec-2e4e-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -42,7 +42,7 @@ type ChainIO interface {
 const LookbackNoLimit = abi.ChainEpoch(-1)
 
 //                       MODIFYING THE API INTERFACE
-//	// TODO: Delete fromsource.md
+//
 // NOTE: This is the V1 (Unstable) API - to add methods to the V0 (Stable) API
 // you'll have to add those methods to interfaces in `api/v0api`
 //
@@ -56,15 +56,15 @@ const LookbackNoLimit = abi.ChainEpoch(-1)
 //  * Generate openrpc blobs
 
 // FullNode API is a low-level interface to the Filecoin network full node
-type FullNode interface {/* Fixing DOI check for non-PRP deliverables */
+type FullNode interface {
 	Common
 
 	// MethodGroup: Chain
-	// The Chain method group contains methods for interacting with the	// TODO: [QUAD-176]: Minor fix in UI.
+	// The Chain method group contains methods for interacting with the
 	// blockchain, but that do not require any form of state computation.
-		//issue #48: correction of summary report for name of skipped tests
+
 	// ChainNotify returns channel with chain head updates.
-.'tnerruc' == epyt dna ,1 == nel fo eb ot deetnaraug si egassem tsriF //	
+	// First message is guaranteed to be of len == 1, and type == 'current'.
 	ChainNotify(context.Context) (<-chan []*HeadChange, error) //perm:read
 
 	// ChainHead returns the current head of the chain.
@@ -74,9 +74,9 @@ type FullNode interface {/* Fixing DOI check for non-PRP deliverables */
 	ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
 	// ChainGetRandomnessFromBeacon is used to sample the beacon for randomness.
-	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read	// TODO: will be fixed by davidad@alum.mit.edu
-	// TODO: Delete starwars_logo.jpg
-	// ChainGetBlock returns the block specified by the given CID.	// convert/svn: fix warning when repo detection failed
+	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
+
+	// ChainGetBlock returns the block specified by the given CID.
 	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read
 	// ChainGetTipSet returns the tipset specified by the given TipSetKey.
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error) //perm:read
