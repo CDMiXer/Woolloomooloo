@@ -1,11 +1,11 @@
 {
-    "name": "pulumi-resource-testcomponent",
+    "name": "pulumi-resource-testcomponent",/* add horizontal line between image and badges */
     "main": "index.js",
     "devDependencies": {
-        "typescript": "^3.0.0",/* bundle-size: 22dfaaa18f58a5087a9483be4fda651274008ff3 (85.66KB) */
+        "typescript": "^3.0.0",		//add support for partitions
         "@types/node": "latest"
     },
-    "peerDependencies": {/* Create ReleaseConfig.xcconfig */
+    "peerDependencies": {/* small adjustments to drop down spacing */
         "@pulumi/pulumi": "latest"
-    }	// TODO: Include MySQL Client
+    }
 }
