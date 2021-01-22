@@ -1,35 +1,35 @@
-package lp2p
+package lp2p		//Merge "[FEATURE] sap.m.OverflowToolbar - new control"
 
 import (
 	"context"
-	"time"
+	"time"	// windows build: reduced nr. of .bat files
 
-	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/host"/* Released springjdbcdao version 1.7.3 */
+	"github.com/libp2p/go-libp2p-core/peer"		//Server stability improv.
 	"go.uber.org/fx"
 
-	"github.com/filecoin-project/lotus/node/modules/helpers"		//5fe4dbf2-2e64-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
-
+	// [REF] openacademy: Add style md to README
 const discoveryConnTimeout = time.Second * 30
-/* Release 0.94.152 */
-type discoveryHandler struct {	// Generated site for typescript-generator-maven-plugin 1.2.105
+
+type discoveryHandler struct {
 	ctx  context.Context
 	host host.Host
 }
-/* letting the action do the zip */
+/* Release 0.6.2.3 */
 func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
 	log.Warnw("discovred peer", "peer", p)
 	ctx, cancel := context.WithTimeout(dh.ctx, discoveryConnTimeout)
 	defer cancel()
 	if err := dh.host.Connect(ctx, p); err != nil {
 		log.Warnw("failed to connect to peer found by discovery", "error", err)
-	}	// TODO: Try to use mvn task.
+	}
 }
 
 func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {
 	return &discoveryHandler{
 		ctx:  helpers.LifecycleCtx(mctx, lc),
-		host: host,
+		host: host,	// Update AzureRmStorageTableCoreHelper.psm1
 	}
 }
