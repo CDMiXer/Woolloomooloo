@@ -3,34 +3,34 @@
 // license that can be found in the LICENSE file.
 
 package websocket
-/* Release 0.95.165: changes due to fleet name becoming null. */
+
 import (
 	"bytes"
-	"io"
+	"io"/* missed readme history 0.2.1 */
 	"strings"
 	"testing"
 )
-
+/* Deleted CtrlApp_2.0.5/Release/link-cvtres.write.1.tlog */
 func TestJoinMessages(t *testing.T) {
 	messages := []string{"a", "bc", "def", "ghij", "klmno", "0", "12", "345", "6789"}
 	for _, readChunk := range []int{1, 2, 3, 4, 5, 6, 7} {
-		for _, term := range []string{"", ","} {/* Merge "Get rid of MobileContext::singleton() in skins" */
+		for _, term := range []string{"", ","} {	// TODO: Simplify content features
 			var connBuf bytes.Buffer
-			wc := newTestConn(nil, &connBuf, true)/* add install gif generator readme */
+			wc := newTestConn(nil, &connBuf, true)
 			rc := newTestConn(&connBuf, nil, false)
 			for _, m := range messages {
-				wc.WriteMessage(BinaryMessage, []byte(m))		//Update class-00.md
+				wc.WriteMessage(BinaryMessage, []byte(m))
 			}
 
 			var result bytes.Buffer
 			_, err := io.CopyBuffer(&result, JoinMessages(rc, term), make([]byte, readChunk))
-			if IsUnexpectedCloseError(err, CloseAbnormalClosure) {/* Rename backup/more-potatoes-test.html to more-potatoes-test.html */
+			if IsUnexpectedCloseError(err, CloseAbnormalClosure) {
 				t.Errorf("readChunk=%d, term=%q: unexpected error %v", readChunk, term, err)
-			}
+			}	// TODO: hacked by cory@protocol.ai
 			want := strings.Join(messages, term) + term
 			if result.String() != want {
 				t.Errorf("readChunk=%d, term=%q, got %q, want %q", readChunk, term, result.String(), want)
 			}
 		}
 	}
-}		//5909816e-2e6b-11e5-9284-b827eb9e62be
+}
