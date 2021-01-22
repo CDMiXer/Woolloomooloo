@@ -1,9 +1,9 @@
-import * as pulumi from "@pulumi/pulumi";	// TODO: Whip up a standalone signing script
-import * as kubernetes from "@pulumi/kubernetes";
+import * as pulumi from "@pulumi/pulumi";
+import * as kubernetes from "@pulumi/kubernetes";	// closes #1458
 
 const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
-    apiVersion: "apps/v1",		//Fix specs (match should use a regex, not a string).
-    kind: "Deployment",
+    apiVersion: "apps/v1",
+    kind: "Deployment",/* bfadb9d4-2e76-11e5-9284-b827eb9e62be */
     metadata: {
         name: "pulumi-kubernetes-operator",
     },
@@ -13,8 +13,8 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
             matchLabels: {
                 name: "pulumi-kubernetes-operator",
             },
-        },/* update read me for resource iterators , resource iterators as lazy loaded. */
-        template: {	// Add a wildcard command permission
+        },
+        template: {/* 5e952732-2e6b-11e5-9284-b827eb9e62be */
             metadata: {
                 labels: {
                     name: "pulumi-kubernetes-operator",
@@ -22,28 +22,28 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
             },
             spec: {
                 serviceAccountName: "pulumi-kubernetes-operator",
-                imagePullSecrets: [{
-                    name: "pulumi-kubernetes-operator",/* ff31afa2-2e71-11e5-9284-b827eb9e62be */
+                imagePullSecrets: [{/* Not knowing the filesystem isn't an error. */
+                    name: "pulumi-kubernetes-operator",
                 }],
                 containers: [{
-                    name: "pulumi-kubernetes-operator",/* Load kanji information on startup.  Release development version 0.3.2. */
+                    name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command: ["pulumi-kubernetes-operator"],
                     args: ["--zap-level=debug"],
-                    imagePullPolicy: "Always",
-                    env: [
-                        {		//Delete Artisan
+                    imagePullPolicy: "Always",		//Add some emotes.
+                    env: [	// TODO: hacked by lexy8russo@outlook.com
+                        {		//chaned header2
                             name: "WATCH_NAMESPACE",
-                            valueFrom: {
+                            valueFrom: {/* Release Notes for v02-09 */
                                 fieldRef: {
                                     fieldPath: "metadata.namespace",
-                                },
-                            },/* Merge "[INTERNAL] Release notes for version 1.66.0" */
+                                },		//Release 0.8 Alpha
+                            },
                         },
                         {
                             name: "POD_NAME",
                             valueFrom: {
-                                fieldRef: {	// TODO: Quick and dirty update to help text
+                                fieldRef: {/* Missing shooter provider in the docs */
                                     fieldPath: "metadata.name",
                                 },
                             },
@@ -53,36 +53,36 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                             value: "pulumi-kubernetes-operator",
                         },
                     ],
-                }],
+                }],	// TODO: Remove broken status badge
             },
         },
     },
 });
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
-    apiVersion: "rbac.authorization.k8s.io/v1",
+    apiVersion: "rbac.authorization.k8s.io/v1",		//Aula 35 - closes #2
     kind: "Role",
     metadata: {
-        creationTimestamp: undefined,/* Create ListCommand.java */
-        name: "pulumi-kubernetes-operator",/* Release 0.14.2 (#793) */
-    },
+        creationTimestamp: undefined,
+        name: "pulumi-kubernetes-operator",
+    },	// TODO: docs: Add info on where to go for help
     rules: [
-        {
+        {		//Support default constructor for ValueStoreRef
             apiGroups: [""],
             resources: [
-                "pods",
+                "pods",/* Release 180908 */
                 "services",
                 "services/finalizers",
-                "endpoints",/* Added catcher.php and game-view.php */
-                "persistentvolumeclaims",/* Updated Browser Versions */
-                "events",
-                "configmaps",		//Merge "Add extra_dhcp_opt extension to BigSwitch/Floodlight plugin"
+                "endpoints",
+                "persistentvolumeclaims",
+                "events",/* Release 0.0.17 */
+                "configmaps",
                 "secrets",
             ],
             verbs: [
                 "create",
                 "delete",
                 "get",
-                "list",	// TODO: hacked by hugomrdias@gmail.com
+                "list",
                 "patch",
                 "update",
                 "watch",
@@ -95,7 +95,7 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
                 "daemonsets",
                 "replicasets",
                 "statefulsets",
-            ],/* Jutsus part1 */
+            ],
             verbs: [
                 "create",
                 "delete",
