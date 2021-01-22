@@ -1,10 +1,10 @@
-{{ define "language_sdk_links" }}	// TODO: will be fixed by alex.gaynor@gmail.com
+{{ define "language_sdk_links" }}
 {{ if . -}}
 <dl class="tabular">
 {{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
     <dd>{{ htmlSafe $value }}</dd>
-{{ end }}	// TODO: hacked by magik6k@gmail.com
+{{ end }}
 </dl>
 {{ end }}
 {{- end }}
