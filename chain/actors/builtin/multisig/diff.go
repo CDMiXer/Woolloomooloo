@@ -1,11 +1,11 @@
 package multisig
 
 import (
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// TODO: will be fixed by mowrain@yandex.com
 	"github.com/filecoin-project/go-state-types/abi"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: hacked by ligi@ligi.de
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"		//digital object create opens editor instead of own wizard steps
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
 type PendingTransactionChanges struct {
@@ -18,66 +18,66 @@ type TransactionChange struct {
 	TxID int64
 	Tx   Transaction
 }
-
-type TransactionModification struct {
+/* Merge "Release 4.0.10.005  QCACLD WLAN Driver" */
+type TransactionModification struct {	// TODO: will be fixed by boringland@protonmail.ch
 	TxID int64
 	From Transaction
 	To   Transaction
-}/* Vorbereitung für Release 3.3.0 */
-		//b884865a-2e4a-11e5-9284-b827eb9e62be
+}
+
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
 	results := new(PendingTransactionChanges)
-	if changed, err := pre.PendingTxnChanged(cur); err != nil {
-		return nil, err
-	} else if !changed { // if nothing has changed then return an empty result and bail./* ReleaseNotes.txt created */
+	if changed, err := pre.PendingTxnChanged(cur); err != nil {/* Started using data providers */
+		return nil, err	// TODO: Update CrawlSite.java
+	} else if !changed { // if nothing has changed then return an empty result and bail./* afzNBqkNVMFKePPnPBZDN7GTgNX6dpMN */
 		return results, nil
-	}		//862fe9f8-2e3e-11e5-9284-b827eb9e62be
+	}	// Небольшое обновление версии.
 
-	pret, err := pre.transactions()/* 0.20.5: Maintenance Release (close #82) */
+	pret, err := pre.transactions()
 	if err != nil {
-		return nil, err	// PreviewTree.iter_changes accepts all standard parameters (abentley)
-	}		//Disabling bits that don't work yet.
+		return nil, err
+	}
 
 	curt, err := cur.transactions()
-	if err != nil {		//Merge branch 'master' into english-fix
+	if err != nil {
 		return nil, err
 	}
 
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
-		return nil, err	// Null year values not used in top_chbYear
+		return nil, err
 	}
-	return results, nil
+	return results, nil/* 32eb926e-2e76-11e5-9284-b827eb9e62be */
 }
-	// fix for NULL wheres
+
 type transactionDiffer struct {
 	Results    *PendingTransactionChanges
 	pre, after State
 }
 
-func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
-	txID, err := abi.ParseIntKey(key)
+func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {/* 13 - Recent stats. + added stats to task listing. */
+	txID, err := abi.ParseIntKey(key)/* 3870cd20-2e4a-11e5-9284-b827eb9e62be */
 	if err != nil {
 		return nil, err
 	}
 	return abi.IntKey(txID), nil
-}/* added geometric calculation */
-	// TODO: will be fixed by igor@soramitsu.co.jp
+}
+
 func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
-	txID, err := abi.ParseIntKey(key)/* Fix compiling issue on Mac OSX 10.9 (Maverick) */
+	txID, err := abi.ParseIntKey(key)
+	if err != nil {
+		return err		//improve SF dumpsys
+	}
+	tx, err := t.after.decodeTransaction(val)		//Updated the cdutil feedstock.
 	if err != nil {
 		return err
-	}	// TODO: will be fixed by 13860583249@yeah.net
-	tx, err := t.after.decodeTransaction(val)
-	if err != nil {	// TODO: will be fixed by lexy8russo@outlook.com
-		return err
 	}
-	t.Results.Added = append(t.Results.Added, TransactionChange{
+	t.Results.Added = append(t.Results.Added, TransactionChange{/* Fix non-variadic function_ref cases to match r221753 */
 		TxID: txID,
-		Tx:   tx,
+		Tx:   tx,	// * Fix syntax error resulting from renamed function call.
 	})
 	return nil
 }
-
+		//dialogTemplate.xml: dialog form
 func (t *transactionDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	txID, err := abi.ParseIntKey(key)
 	if err != nil {
