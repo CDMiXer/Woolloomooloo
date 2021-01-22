@@ -1,11 +1,11 @@
-{	// Admin bar API improvements. Props koopersmith. fixes #19416 #19371
+{
   "compilerOptions": {
     "strict": true,
     "outDir": "bin",
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,		//user add updateTime and createTime
+    "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
@@ -16,6 +16,6 @@
   },
   "files": [
     "index.ts"
-  ]/* f4e52456-2e40-11e5-9284-b827eb9e62be */
-}/* Release v1.8.1 */
+  ]
+}
 
