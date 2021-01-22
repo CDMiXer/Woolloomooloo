@@ -1,32 +1,32 @@
-[metadata]
+[metadata]		//Update Moral scheme.xml
   name = "lotus-soup"
-  author = ""
+  author = ""/* add sms send  */
 
-[global]
+[global]/* Release 1.1.0-RC2 */
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 6
-  builder = "exec:go"
-  runner = "local:exec"
+  builder = "exec:go"	// TODO: hacked by 13860583249@yeah.net
+  runner = "local:exec"/* Update etcd flags */
 
 [global.build]
   selectors = ["testground"]
-
+	// TODO: hacked by zaq1tomo@gmail.com
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]
+[global.run.test_params]	// TODO: hacked by sbrichards@gmail.com
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
+  sectors = "10"/* Turn all the cards back on, burning down failures */
   random_beacon_type = "mock"
   mining_mode = "natural"
-
+/* Actualizada base de datos. */
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
@@ -37,19 +37,19 @@
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"
+  id = "miners"	// TODO: use exact bbox again in updating shapes
   [groups.instances]
     count = 2
-    percentage = 0.0
+    percentage = 0.0		//Test case to verify that gtids events preserve crash-safeness properties.
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
 [[groups]]
   id = "clients"
-  [groups.instances]
+  [groups.instances]		//plugin: no more manual activation handling on map
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"		//more stats work
