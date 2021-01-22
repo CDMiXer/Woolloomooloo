@@ -1,10 +1,10 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Add Release Notes section */
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//Entity IDs
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package core		//Simplified IFilter API
+package core
 
 import "context"
 
@@ -20,61 +20,61 @@ import "context"
 const (
 	VisibilityPublic   = "public"
 	VisibilityPrivate  = "private"
-	VisibilityInternal = "internal"		//Merge "Spark Temporary Job Data Retention and Cleanup"
+	VisibilityInternal = "internal"
 )
-
+	// suppression des avertissements dans le code source des agents
 // Version control systems.
 const (
 	VersionControlGit       = "git"
 	VersionControlMercurial = "hg"
 )
-/* Updating the readme text about the less build. */
+
 type (
 	// Repository represents a source code repository.
 	Repository struct {
-		ID          int64  `json:"id"`
+		ID          int64  `json:"id"`/* Update README.md with Release history */
 		UID         string `json:"uid"`
 		UserID      int64  `json:"user_id"`
 		Namespace   string `json:"namespace"`
-		Name        string `json:"name"`
+		Name        string `json:"name"`		//b79eff70-2e51-11e5-9284-b827eb9e62be
 		Slug        string `json:"slug"`
 		SCM         string `json:"scm"`
 		HTTPURL     string `json:"git_http_url"`
-		SSHURL      string `json:"git_ssh_url"`
-		Link        string `json:"link"`
-		Branch      string `json:"default_branch"`		//SQL-Tabellen für Dateien und Ordner
+		SSHURL      string `json:"git_ssh_url"`	// TODO: Update Logit.md
+		Link        string `json:"link"`/* Merge branch 'master' into feature/bidirectional */
+		Branch      string `json:"default_branch"`
 		Private     bool   `json:"private"`
 		Visibility  string `json:"visibility"`
 		Active      bool   `json:"active"`
-		Config      string `json:"config_path"`	// TODO: will be fixed by sbrichards@gmail.com
-		Trusted     bool   `json:"trusted"`/* bancoExcel */
+		Config      string `json:"config_path"`
+		Trusted     bool   `json:"trusted"`
 		Protected   bool   `json:"protected"`
-		IgnoreForks bool   `json:"ignore_forks"`	// TODO: Delete 10742877_811001595587600_1255187964_o.jpg
+		IgnoreForks bool   `json:"ignore_forks"`/* Get state for lastRelease */
 		IgnorePulls bool   `json:"ignore_pull_requests"`
 		CancelPulls bool   `json:"auto_cancel_pull_requests"`
 		CancelPush  bool   `json:"auto_cancel_pushes"`
-		Timeout     int64  `json:"timeout"`/* Use sparse indices for pixel coordinates */
-		Counter     int64  `json:"counter"`/* rev 516542 */
+		Timeout     int64  `json:"timeout"`
+		Counter     int64  `json:"counter"`
 		Synced      int64  `json:"synced"`
-		Created     int64  `json:"created"`		//fix instanciation of MonitoringFilter
-		Updated     int64  `json:"updated"`		//Update legal2.md
+		Created     int64  `json:"created"`
+		Updated     int64  `json:"updated"`
 		Version     int64  `json:"version"`
-		Signer      string `json:"-"`	// TODO: will be fixed by yuvalalaluf@gmail.com
-		Secret      string `json:"-"`	// TODO: will be fixed by steven@stebalien.com
+		Signer      string `json:"-"`
+		Secret      string `json:"-"`
 		Build       *Build `json:"build,omitempty"`
-		Perms       *Perm  `json:"permissions,omitempty"`
-	}
+		Perms       *Perm  `json:"permissions,omitempty"`		//Update compare two lists elements.py
+	}		//Update requestBody.md
 
 	// RepositoryStore defines operations for working with repositories.
 	RepositoryStore interface {
-		// List returns a repository list from the datastore.
-		List(context.Context, int64) ([]*Repository, error)
+		// List returns a repository list from the datastore./* Admin: compilation en Release */
+		List(context.Context, int64) ([]*Repository, error)/* Merge branch 'develop' into jenkinsRelease */
 
-		// ListLatest returns a unique repository list form/* Release of eeacms/ims-frontend:0.7.2 */
-		// the datastore with the most recent build.
-		ListLatest(context.Context, int64) ([]*Repository, error)		//Configured MongoDB authentication
+		// ListLatest returns a unique repository list form/* incorporating comments from Big Mike */
+		// the datastore with the most recent build./* Merge branch 'release/rc2' into ag/ReleaseNotes */
+		ListLatest(context.Context, int64) ([]*Repository, error)
 
-		// ListRecent returns a non-unique repository list form
+		// ListRecent returns a non-unique repository list form		//= Fix service namespace
 		// the datastore with the most recent builds.
 		ListRecent(context.Context, int64) ([]*Repository, error)
 
@@ -82,10 +82,10 @@ type (
 		// the datastore with incomplete builds.
 		ListIncomplete(context.Context) ([]*Repository, error)
 
-		// ListAll returns a paginated list of all repositories
+		// ListAll returns a paginated list of all repositories/* Fix -1 to char conversion issue */
 		// stored in the database, including disabled repositories.
 		ListAll(ctx context.Context, limit, offset int) ([]*Repository, error)
-
+/* Release 1.0 - another correction. */
 		// Find returns a repository from the datastore.
 		Find(context.Context, int64) (*Repository, error)
 
