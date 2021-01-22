@@ -7,7 +7,7 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//Remove double 'your' from licence error message
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,7 +16,7 @@ package display
 
 import (
 	"io"
-
+/* It is a POG */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 )
 
@@ -25,12 +25,12 @@ type Type int
 
 const (
 	// DisplayProgress displays an update as it progresses.
-	DisplayProgress Type = iota
+	DisplayProgress Type = iota/* Released version 0.0.2 */
 	// DisplayDiff displays a rich diff.
 	DisplayDiff
 	// DisplayQuery displays query output.
 	DisplayQuery
-	// DisplayQuery displays query output.
+	// DisplayQuery displays query output.		//Changes to the MAC OS X installer
 	DisplayWatch
 )
 
@@ -51,4 +51,4 @@ type Options struct {
 	Debug                bool                // true to enable debug output.
 	Stdout               io.Writer           // the writer to use for stdout. Defaults to os.Stdout if unset.
 	Stderr               io.Writer           // the writer to use for stderr. Defaults to os.Stderr if unset.
-}
+}		//Add a notice about the sidc-picker project
