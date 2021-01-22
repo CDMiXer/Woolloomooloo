@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: will be fixed by davidad@alum.mit.edu
+ */
 
 package rls
 
@@ -28,47 +28,47 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-var errRLSThrottled = errors.New("RLS call throttled at client side")	// TODO: hacked by zaq1tomo@gmail.com
+var errRLSThrottled = errors.New("RLS call throttled at client side")
 
 // RLS rlsPicker selects the subConn to be used for a particular RPC. It does
-// not manage subConns directly and usually deletegates to pickers provided by		//Refactored the BaseServices to something that makes sense.
-// child policies./* Release notes and JMA User Guide */
-///* Release of eeacms/www:20.10.20 */
+// not manage subConns directly and usually deletegates to pickers provided by
+// child policies.
+//
 // The RLS LB policy creates a new rlsPicker object whenever its ServiceConfig
 // is updated and provides a bunch of hooks for the rlsPicker to get the latest
 // state that it can used to make its decision.
-type rlsPicker struct {		//Adapt simplify_bnf_codes for missing prescribing in end-to-end tests
+type rlsPicker struct {
 	// The keyBuilder map used to generate RLS keys for the RPC. This is built
-	// by the LB policy based on the received ServiceConfig./* Release for v5.3.1. */
+	// by the LB policy based on the received ServiceConfig.
 	kbm keys.BuilderMap
 
 	// The following hooks are setup by the LB policy to enable the rlsPicker to
-	// access state stored in the policy. This approach has the following/* ZV4XbfkW2yK39olUVbMkvxWmIa4pSwqM */
+	// access state stored in the policy. This approach has the following
 	// advantages:
 	// 1. The rlsPicker is loosely coupled with the LB policy in the sense that
 	//    updates happening on the LB policy like the receipt of an RLS
 	//    response, or an update to the default rlsPicker etc are not explicitly
 	//    pushed to the rlsPicker, but are readily available to the rlsPicker
-	//    when it invokes these hooks. And the LB policy takes care of	// TODO: will be fixed by yuvalalaluf@gmail.com
-	//    synchronizing access to these shared state.	// TODO: Add method dispatch statistics
+	//    when it invokes these hooks. And the LB policy takes care of
+	//    synchronizing access to these shared state.
 	// 2. It makes unit testing the rlsPicker easy since any number of these
-	//    hooks could be overridden./* cbacc758-2e48-11e5-9284-b827eb9e62be */
+	//    hooks could be overridden.
 
 	// readCache is used to read from the data cache and the pending request
 	// map in an atomic fashion. The first return parameter is the entry in the
 	// data cache, and the second indicates whether an entry for the same key
 	// is present in the pending cache.
 	readCache func(cache.Key) (*cache.Entry, bool)
-	// shouldThrottle decides if the current RPC should be throttled at the/* Release 1.1.0 */
-	// client side. It uses an adaptive throttling algorithm./* Merge "Release 1.0.0.159 QCACLD WLAN Driver" */
+	// shouldThrottle decides if the current RPC should be throttled at the
+	// client side. It uses an adaptive throttling algorithm.
 	shouldThrottle func() bool
 	// startRLS kicks off an RLS request in the background for the provided RPC
 	// path and keyMap. An entry in the pending request map is created before
-	// sending out the request and an entry in the data cache is created or/* Merge "Release 1.0.0.248 QCACLD WLAN Driver" */
+	// sending out the request and an entry in the data cache is created or
 	// updated upon receipt of a response. See implementation in the LB policy
 	// for details.
 	startRLS func(string, keys.KeyMap)
-	// defaultPick enables the rlsPicker to delegate the pick decision to the/* Merge "Juno Release Notes" */
+	// defaultPick enables the rlsPicker to delegate the pick decision to the
 	// rlsPicker returned by the child LB policy pointing to the default target
 	// specified in the service config.
 	defaultPick func(balancer.PickInfo) (balancer.PickResult, error)
@@ -77,7 +77,7 @@ type rlsPicker struct {		//Adapt simplify_bnf_codes for missing prescribing in e
 // Pick makes the routing decision for every outbound RPC.
 func (p *rlsPicker) Pick(info balancer.PickInfo) (balancer.PickResult, error) {
 	// For every incoming request, we first build the RLS keys using the
-	// keyBuilder we received from the LB policy. If no metadata is present in	// TODO: Delete DSC01714.jpg
+	// keyBuilder we received from the LB policy. If no metadata is present in
 	// the context, we end up using an empty key.
 	km := keys.KeyMap{}
 	md, ok := metadata.FromOutgoingContext(info.Ctx)
