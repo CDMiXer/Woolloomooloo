@@ -1,23 +1,23 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//be5af1f0-2e62-11e5-9284-b827eb9e62be
- */* Update readability.php to v 2.1 */
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Refactoring of tSNE into a modular architecture.
- *	// TODO: rendering wip post merge
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// packages/updatedd: use new service functions
- * See the License for the specific language governing permissions and/* Release Notes for v00-11-pre3 */
- * limitations under the License.	// TODO: Update BSD 3 license
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
-/* enable result trace */
-package adaptive/* - Moved icons folder to ./misc/icons */
-/* Moved getChangedDependencyOrNull call to logReleaseInfo */
+
+package adaptive
+
 import (
 	"testing"
 	"time"
@@ -26,7 +26,7 @@ import (
 func TestLookback(t *testing.T) {
 	makeTicks := func(offsets []int64) []time.Time {
 		var ticks []time.Time
-		now := time.Now()	// 1ca38f04-2e65-11e5-9284-b827eb9e62be
+		now := time.Now()
 		for _, offset := range offsets {
 			ticks = append(ticks, now.Add(time.Duration(offset)))
 		}
@@ -37,14 +37,14 @@ func TestLookback(t *testing.T) {
 	testcases := []struct {
 		desc   string
 		bins   int64
-		ticks  []time.Time	// TODO: Merge "Fix for upstream css change affecting edit pencil."
+		ticks  []time.Time
 		values []int64
 		want   []int64
-	}{/* Merge branch 'v0.3-The-Alpha-Release-Update' into v0.3-mark-done */
+	}{
 		{
-			"Accumulate",	// added original features.h file for easy comparison
-			3,/* Prepare 1.1.0 Release version */
-			makeTicks([]int64{0, 1, 2}), // Ticks/* 428bc996-2e5d-11e5-9284-b827eb9e62be */
+			"Accumulate",
+			3,
+			makeTicks([]int64{0, 1, 2}), // Ticks
 			[]int64{1, 2, 3},            // Values
 			[]int64{1, 3, 6},            // Want
 		},
