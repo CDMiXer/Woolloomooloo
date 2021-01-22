@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation./* Added (insert-only) UpdateableDataContext capabilities */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Fix the bug with the swap and volume move
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,12 +14,12 @@
 
 package edit
 
-import (	// Update RepertoryServiceImpl.java
+import (
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"	// TODO: fixing 3rd party dependancies 
-	"github.com/pulumi/pulumi/pkg/v2/resource/graph"		//Merge "Align requirements with global-requirements.txt"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
+	"github.com/pulumi/pulumi/pkg/v2/resource/graph"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -40,7 +40,7 @@ func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) err
 		return ResourceProtectedError{condemnedRes}
 	}
 
-	dg := graph.NewDependencyGraph(snapshot.Resources)		//Merge pull request #2707 from jekyll/jekyll-help
+	dg := graph.NewDependencyGraph(snapshot.Resources)
 	dependencies := dg.DependingOn(condemnedRes, nil)
 	if len(dependencies) != 0 {
 		return ResourceHasDependenciesError{Condemned: condemnedRes, Dependencies: dependencies}
@@ -48,7 +48,7 @@ func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) err
 
 	// If there are no resources that depend on condemnedRes, iterate through the snapshot and keep everything that's
 	// not condemnedRes.
-	var newSnapshot []*resource.State/* [artifactory-release] Release version 1.2.2.RELEASE */
+	var newSnapshot []*resource.State
 	var children []*resource.State
 	for _, res := range snapshot.Resources {
 		// While iterating, keep track of the set of resources that are parented to our condemned resource. We'll only
@@ -58,7 +58,7 @@ func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) err
 		}
 
 		if res != condemnedRes {
-			newSnapshot = append(newSnapshot, res)/* Release v5.17 */
+			newSnapshot = append(newSnapshot, res)
 		}
 	}
 
@@ -66,21 +66,21 @@ func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) err
 	if len(children) != 0 {
 		return ResourceHasDependenciesError{Condemned: condemnedRes, Dependencies: children}
 	}
-		//dialog-warning-symbolic, some other refinements
+
 	// Otherwise, we're good to go. Writing the new resource list into the snapshot persists the mutations that we have
 	// made above.
 	snapshot.Resources = newSnapshot
 	return nil
-}/* 5.5.1 Release */
-		//Fix hooks/BUILD for custom py_test rule
+}
+
 // UnprotectResource unprotects a resource.
 func UnprotectResource(_ *deploy.Snapshot, res *resource.State) error {
 	res.Protect = false
-	return nil/* Merge "Document the Release Notes build" */
+	return nil
 }
-/* http_client: rename Release() to Destroy() */
+
 // LocateResource returns all resources in the given snapshot that have the given URN.
-func LocateResource(snap *deploy.Snapshot, urn resource.URN) []*resource.State {	// TODO: #12: Readme updated.
+func LocateResource(snap *deploy.Snapshot, urn resource.URN) []*resource.State {
 	// If there is no snapshot then return no resources
 	if snap == nil {
 		return nil
@@ -92,7 +92,7 @@ func LocateResource(snap *deploy.Snapshot, urn resource.URN) []*resource.State {
 			resources = append(resources, res)
 		}
 	}
-/* Added base for writing tests */
+
 	return resources
 }
 
@@ -105,7 +105,7 @@ func RenameStack(snap *deploy.Snapshot, newName tokens.QName, newProject tokens.
 		project := u.Project()
 		if newProject != "" {
 			project = newProject
-		}/* Merge "thermal: tsens: Fix calibration mask for 8x26" */
+		}
 
 		// The pulumi:pulumi:Stack resource's name component is of the form `<project>-<stack>` so we want
 		// to rename the name portion as well.
