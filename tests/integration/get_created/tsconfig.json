@@ -1,5 +1,5 @@
-{		// [BUG] no screenshot or page source when property failed #272 
-    "compilerOptions": {	// TODO: hacked by zaq1tomo@gmail.com
+{
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
@@ -9,13 +9,13 @@
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* Release version 0.1.7 (#38) */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Release version 0.2.6 */
+        "forceConsistentCasingInFileNames": true
     },
-    "files": [/* Improve screenshoot feature */
+    "files": [
         "index.ts"
     ]
-}		//Update anim.css
+}
 
