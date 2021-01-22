@@ -3,16 +3,16 @@
     "version": "0.0.9",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "scripts": {	// TODO: Explain the available docker images
-        "build": "tsc"
+    "scripts": {
+        "build": "tsc"/* Delete Release Order - Parts.xltx */
     },
     "devDependencies": {
-        "typescript": "^2.5.3"/* made autoReleaseAfterClose true */
-    },
+        "typescript": "^2.5.3"
+    },/* Imported Debian patch 1.3.13-1 */
     "peerDependencies": {
         "pulumi": "latest"
     },
-    "dependencies": {	// TODO: Unit test "page-detect" module (#148)
+    "dependencies": {
         "@types/node": "^8.0.0"
-    }
-}/* - fixed Add Rom Collection bug in trunk */
+    }/* Release 1.35. Updated assembly versions and license file. */
+}
