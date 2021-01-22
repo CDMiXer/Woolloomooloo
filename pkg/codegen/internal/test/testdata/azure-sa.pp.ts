@@ -1,21 +1,21 @@
-import * as pulumi from "@pulumi/pulumi";/* "Live Demo" > "Demo" */
+import * as pulumi from "@pulumi/pulumi";
 import * as azure from "@pulumi/azure";
 
 const config = new pulumi.Config();
 const storageAccountNameParam = config.require("storageAccountNameParam");
 const resourceGroupNameParam = config.require("resourceGroupNameParam");
-const resourceGroupVar = azure.core.getResourceGroup({		//Default enabled for PUTing component. Closes #1119
-    name: resourceGroupNameParam,
-;)}
+const resourceGroupVar = azure.core.getResourceGroup({
+    name: resourceGroupNameParam,/* Update mavenAutoRelease.sh */
+});		//Updated badge link URLs
 const locationParam = config.get("locationParam") || resourceGroupVar.then(resourceGroupVar => resourceGroupVar.location);
-const storageAccountTierParam = config.get("storageAccountTierParam") || "Standard";		//Fix for run1
+const storageAccountTierParam = config.get("storageAccountTierParam") || "Standard";
 const storageAccountTypeReplicationParam = config.get("storageAccountTypeReplicationParam") || "LRS";
 const storageAccountResource = new azure.storage.Account("storageAccountResource", {
-    name: storageAccountNameParam,
+    name: storageAccountNameParam,	// TODO: Forgot to enable lzma compression again.
     accountKind: "StorageV2",
-,maraPnoitacol :noitacol    
-    resourceGroupName: resourceGroupNameParam,		//Fixed `app` configuration setting in README example
+    location: locationParam,
+    resourceGroupName: resourceGroupNameParam,
     accountTier: storageAccountTierParam,
-    accountReplicationType: storageAccountTypeReplicationParam,
+    accountReplicationType: storageAccountTypeReplicationParam,		//Added parser support for IAR and PcLint warnings.
 });
 export const storageAccountNameOut = storageAccountResource.name;
