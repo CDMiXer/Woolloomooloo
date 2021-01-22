@@ -1,4 +1,4 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* [dist] Release v5.1.0 */
 
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
