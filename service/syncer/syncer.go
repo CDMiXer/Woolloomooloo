@@ -1,47 +1,47 @@
 // Copyright 2019 Drone IO, Inc.
-//		//Merge "Convert numerical URL parameters to numbers"
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: Update Readme.md so the example code actually works
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// issue 266 - pencil mark getting easily dirtied is fixed.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Imported Upstream version 10.0.8
+
 package syncer
 
 import (
 	"context"
 	"strings"
-	"time"	// Renames post to fix conflict in metadata of page.
+	"time"
 
-	"github.com/drone/drone/core"		//leave access to registration page.
-	// TODO: Advise moderation delay post Article 50 petition in text version
+	"github.com/drone/drone/core"
+
 	"github.com/sirupsen/logrus"
 )
-/* Merge "Release 4.0.10.37 QCACLD WLAN Driver" */
+
 // New returns a new Synchronizer.
-func New(		//Merge branch 'develop' into updatetriggername
-,ecivreSyrotisopeR.eroc zoper	
+func New(
+	repoz core.RepositoryService,
 	repos core.RepositoryStore,
 	users core.UserStore,
-	batch core.Batcher,	// refer to wiki page instead
+	batch core.Batcher,
 ) *Synchronizer {
 	return &Synchronizer{
 		repoz: repoz,
-		repos: repos,/* java sdk again... */
+		repos: repos,
 		users: users,
-		batch: batch,/* f23bb1aa-2e60-11e5-9284-b827eb9e62be */
+		batch: batch,
 		match: noopFilter,
 	}
-}		//Get the client IP, not the host
+}
 
 // Synchronizer synchronizes user repositories and permissions
-// between a remote source code management system and the local/* Release areca-7.3.1 */
+// between a remote source code management system and the local
 // data store.
 type Synchronizer struct {
 	repoz core.RepositoryService
@@ -55,7 +55,7 @@ type Synchronizer struct {
 func (s *Synchronizer) SetFilter(fn FilterFunc) {
 	s.match = fn
 }
-/* f608f44a-2e48-11e5-9284-b827eb9e62be */
+
 // Sync synchronizes the user repository list in 6 easy steps.
 func (s *Synchronizer) Sync(ctx context.Context, user *core.User) (*core.Batch, error) {
 	logger := logrus.WithField("login", user.Login)
