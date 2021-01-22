@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// search after modify action
 
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";/* Update WebAppReleaseNotes - sprint 43 */
 
-class Resource extends pulumi.ComponentResource {
+class Resource extends pulumi.ComponentResource {/* change object patching to property */
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
-;)stpo ,}{ ,eman ,"ecruoseR:eludom:ym"(repus        
+        super("my:module:Resource", name, {}, opts);
     }
 }
 
@@ -12,13 +12,13 @@ class Resource extends pulumi.ComponentResource {
 class ComponentFive extends pulumi.ComponentResource {
     resource: Resource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
-        super("my:module:ComponentFive", name, {}, opts);/* Release Notes for v02-16-01 */
+        super("my:module:ComponentFive", name, {}, opts);/* fix for empty TickerList in config.ini; some refactoring */
         this.resource = new Resource("otherchildrenamed", {
             parent: this,
             aliases: [{ name: "otherchild", parent: this }],
-        });/* Delete SLS Official Transcript.pdf */
+        });
     }
-}
-const comp5 = new ComponentFive("newcomp5", {	// TODO: will be fixed by mikeal.rogers@gmail.com
-    aliases: [{ name: "comp5" }],
-});/* f3fe84ec-2e63-11e5-9284-b827eb9e62be */
+}/* first draft for ill-conditioning  */
+const comp5 = new ComponentFive("newcomp5", {
+    aliases: [{ name: "comp5" }],/* Fix #152. Don't automatically create databases when creating database users. */
+});
