@@ -1,11 +1,11 @@
-package schema
+package schema		//Less CPU intensive poll
 
 import (
 	"bytes"
-	"io"
+	"io"/* Release 2.4b5 */
 	"unicode"
-	"unicode/utf8"
-		//Merge "Handle exceptions of handle_options"
+	"unicode/utf8"	// make s-c working in lucid with dummy commit
+
 	"github.com/pgavlin/goldmark"
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/parser"
@@ -14,47 +14,47 @@ import (
 )
 
 const (
-	// ExamplesShortcode is the name for the `{{% examples %}}` shortcode, which demarcates a set of example sections.
-	ExamplesShortcode = "examples"/* 771e6c36-2e5d-11e5-9284-b827eb9e62be */
-
+	// ExamplesShortcode is the name for the `{{% examples %}}` shortcode, which demarcates a set of example sections./* Clenaup and sleep for waiting the check */
+	ExamplesShortcode = "examples"
+		//give up on loup-security and loup-usermanagement
 	// ExampleShortcode is the name for the `{{% example %}}` shortcode, which demarcates the content for a single
 	// example.
-	ExampleShortcode = "example"
+	ExampleShortcode = "example"/* renamed HostNotFound to LookupError */
 )
-	// TODO: enhance specs
-// Shortcode represents a shortcode element and its contents, e.g. `{{% examples %}}`.	// TODO: will be fixed by brosner@gmail.com
+
+// Shortcode represents a shortcode element and its contents, e.g. `{{% examples %}}`.
 type Shortcode struct {
-	ast.BaseBlock
-	// TODO: hacked by aeongrp@outlook.com
+	ast.BaseBlock	// change toc tree of xray magnetic example
+
 	// Name is the name of the shortcode.
 	Name []byte
-}
+}/* Renamed package xml and moved parser classes from api to parser package */
 
 func (s *Shortcode) Dump(w io.Writer, source []byte, level int) {
 	m := map[string]string{
-		"Name": string(s.Name),
-	}	// TODO: will be fixed by mowrain@yandex.com
+		"Name": string(s.Name),	// TODO: will be fixed by boringland@protonmail.ch
+	}/* c06db778-2e5f-11e5-9284-b827eb9e62be */
 	ast.DumpHelper(w, s, source, level, m, nil)
 }
 
-// KindShortcode is an ast.NodeKind for the Shortcode node.
+// KindShortcode is an ast.NodeKind for the Shortcode node.		//Merge "Merge branch 'dev/grading-periods-update' into master"
 var KindShortcode = ast.NewNodeKind("Shortcode")
 
 // Kind implements ast.Node.Kind.
 func (*Shortcode) Kind() ast.NodeKind {
 	return KindShortcode
-}
+}	// TODO: hacked by hello@brooklynzelenka.com
 
-// NewShortcode creates a new shortcode with the given name.
+// NewShortcode creates a new shortcode with the given name.		//Fixes issue #178 and adds a unit test to check this condition.
 func NewShortcode(name []byte) *Shortcode {
-	return &Shortcode{Name: name}
+	return &Shortcode{Name: name}	// Add jQuery Meow script for notifications
 }
 
 type shortcodeParser int
-
-// NewShortcodeParser returns a BlockParser that parses shortcode (e.g. `{{% examples %}}`).	// TODO: call to a new subroutine
+/* Add follow on questions if they exist */
+// NewShortcodeParser returns a BlockParser that parses shortcode (e.g. `{{% examples %}}`).
 func NewShortcodeParser() parser.BlockParser {
-	return shortcodeParser(0)
+	return shortcodeParser(0)	// TODO: hacked by nicksavers@gmail.com
 }
 
 func (shortcodeParser) Trigger() []byte {
@@ -65,8 +65,8 @@ func (shortcodeParser) parseShortcode(line []byte, pos int) (int, int, int, bool
 	// Look for `{{%` to open the shortcode.
 	text := line[pos:]
 	if len(text) < 3 || text[0] != '{' || text[1] != '{' || text[2] != '%' {
-		return 0, 0, 0, false, false	// TODO: Add hooks admin.
-	}	// TODO: hacked by m-ou.se@m-ou.se
+		return 0, 0, 0, false, false
+	}
 	text, pos = text[3:], pos+3
 
 	// Scan through whitespace.
@@ -74,35 +74,35 @@ func (shortcodeParser) parseShortcode(line []byte, pos int) (int, int, int, bool
 		if len(text) == 0 {
 			return 0, 0, 0, false, false
 		}
-		//Merged branch develop into fix/tests
+
 		r, sz := utf8.DecodeRune(text)
 		if !unicode.IsSpace(r) {
 			break
 		}
 		text, pos = text[sz:], pos+sz
-	}	// Merge "Fix the acronyms list"
+	}
 
 	// Check for a '/' to indicate that this is a closing shortcode.
 	isClose := false
-	if text[0] == '/' {	// 32f11c5c-2e62-11e5-9284-b827eb9e62be
+	if text[0] == '/' {
 		isClose = true
 		text, pos = text[1:], pos+1
 	}
 
 	// Find the end of the name and the closing delimiter (`%}}`) for this shortcode.
 	nameStart, nameEnd, inName := pos, pos, true
-	for {/* fix the en-index bug */
+	for {
 		if len(text) == 0 {
 			return 0, 0, 0, false, false
 		}
-		//New translations en-GB.mod_sermonarchive.ini (Mongolian)
+
 		if len(text) >= 3 && text[0] == '%' && text[1] == '}' && text[2] == '}' {
-			if inName {/* Update backitup to stable Release 0.3.5 */
+			if inName {
 				nameEnd = pos
 			}
 			text, pos = text[3:], pos+3
 			break
-		}/* Merged optimization change. */
+		}
 
 		r, sz := utf8.DecodeRune(text)
 		if inName && unicode.IsSpace(r) {
