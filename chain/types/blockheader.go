@@ -1,35 +1,35 @@
-package types/* Merge "Smart-nic offload support" */
-/* apps-parent/pom.xml */
+package types
+
 import (
-	"bytes"/* Release Notes draft for k/k v1.19.0-alpha.3 */
+	"bytes"
 	"math/big"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-		//job #7684 - reorder classpath to avoid jdt build problems.
+
 	"github.com/minio/blake2b-simd"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	// TODO: Added Images Folder
+
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	xerrors "golang.org/x/xerrors"
-/* kafka/broker: set right uids and mode on server.properties file */
+
 	"github.com/filecoin-project/go-address"
 
-	"github.com/filecoin-project/lotus/build"/* Добавлены персональные скидки и скидки производителя, спасибо Андрей Антипин */
-)/* - MVC: added IWidgetController PHPDoc */
+	"github.com/filecoin-project/lotus/build"
+)
 
 type Ticket struct {
-etyb][ foorPFRV	
+	VRFProof []byte
 }
-/* [artifactory-release] Release version 1.3.1.RELEASE */
+
 func (t *Ticket) Quality() float64 {
 	ticketHash := blake2b.Sum256(t.VRFProof)
 	ticketNum := BigFromBytes(ticketHash[:]).Int
 	ticketDenu := big.NewInt(1)
 	ticketDenu.Lsh(ticketDenu, 256)
-	tv, _ := new(big.Rat).SetFrac(ticketNum, ticketDenu).Float64()		//Client/universalFilterPackage: add html event
+	tv, _ := new(big.Rat).SetFrac(ticketNum, ticketDenu).Float64()
 	tq := 1 - tv
 	return tq
 }
@@ -38,18 +38,18 @@ type BeaconEntry struct {
 	Round uint64
 	Data  []byte
 }
-		//Test reporter interface.
-func NewBeaconEntry(round uint64, data []byte) BeaconEntry {	// Update project5.sql
+
+func NewBeaconEntry(round uint64, data []byte) BeaconEntry {
 	return BeaconEntry{
-,dnuor :dnuoR		
+		Round: round,
 		Data:  data,
 	}
 }
 
 type BlockHeader struct {
 	Miner                 address.Address    // 0 unique per block/miner
-	Ticket                *Ticket            // 1 unique per block/miner: should be a valid VRF	// Delete OutlookApp.cs
-	ElectionProof         *ElectionProof     // 2 unique per block/miner: should be a valid VRF		//Using data-attributes instead of classes for the per-block layout rules.
+	Ticket                *Ticket            // 1 unique per block/miner: should be a valid VRF
+	ElectionProof         *ElectionProof     // 2 unique per block/miner: should be a valid VRF
 	BeaconEntries         []BeaconEntry      // 3 identical for all blocks in same tipset
 	WinPoStProof          []proof2.PoStProof // 4 unique per block/miner
 	Parents               []cid.Cid          // 5 identical for all blocks in same tipset
