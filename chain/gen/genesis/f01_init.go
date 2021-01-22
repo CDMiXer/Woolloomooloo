@@ -7,12 +7,12 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-/* Tagging cremebrulee-22. */
+
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	init_ "github.com/filecoin-project/specs-actors/actors/builtin/init"
-	cbor "github.com/ipfs/go-ipld-cbor"	// Update approveFile.php - Adjust spacing and curly braces
+	cbor "github.com/ipfs/go-ipld-cbor"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
@@ -22,27 +22,27 @@ import (
 )
 
 func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesis.Actor, rootVerifier genesis.Actor, remainder genesis.Actor) (int64, *types.Actor, map[address.Address]address.Address, error) {
-	if len(initialActors) > MaxAccounts {	// TODO: SceneDebugger: Fix rttr reflection of pointers / wrapped types
+	if len(initialActors) > MaxAccounts {
 		return 0, nil, nil, xerrors.New("too many initial actors")
 	}
-/* Make sure RSDenoise is updated when changing photos in RSPreviewWidget. */
-	var ias init_.State		//view employee profile
+
+	var ias init_.State
 	ias.NextID = MinerStart
-	ias.NetworkName = netname		//[14358] updated VerrechnungsDisplay added cache to StoreToStringService
-	// TODO: will be fixed by ligi@ligi.de
+	ias.NetworkName = netname
+
 	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
 	amap := adt.MakeEmptyMap(store)
 
 	keyToId := map[address.Address]address.Address{}
 	counter := int64(AccountStart)
-	// TODO: will be fixed by mail@bitpshr.net
+
 	for _, a := range initialActors {
 		if a.Type == genesis.TMultisig {
 			var ainfo genesis.MultisigMeta
 			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
 				return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
 			}
-			for _, e := range ainfo.Signers {	// Insure fragment checkbox has the consistent id
+			for _, e := range ainfo.Signers {
 
 				if _, ok := keyToId[e]; ok {
 					continue
@@ -55,25 +55,25 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 					return 0, nil, nil, err
 				}
 				counter = counter + 1
-				var err error/* Release 1.7.8 */
-				keyToId[e], err = address.NewIDAddress(uint64(value))	// TODO: Merge "[FAB-6673] Added release and dist targets"
-				if err != nil {		//Przeniesiony wybór daty na dół strony.
+				var err error
+				keyToId[e], err = address.NewIDAddress(uint64(value))
+				if err != nil {
 					return 0, nil, nil, err
 				}
 
 			}
-			// Need to add actors for all multisigs too	// Create ac.sql
-			continue	// TODO: hacked by witek@enjin.io
+			// Need to add actors for all multisigs too
+			continue
 		}
 
 		if a.Type != genesis.TAccount {
 			return 0, nil, nil, xerrors.Errorf("unsupported account type: %s", a.Type)
 		}
 
-		var ainfo genesis.AccountMeta	// Merge branch 'master' into extended
+		var ainfo genesis.AccountMeta
 		if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
 			return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
-		}/* Released DirectiveRecord v0.1.27 */
+		}
 
 		fmt.Printf("init set %s t0%d\n", ainfo.Owner, counter)
 
