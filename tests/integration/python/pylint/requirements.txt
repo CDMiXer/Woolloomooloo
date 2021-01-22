@@ -1,1 +1,1 @@
-pylint
+pylint		//Updated the list of dependencies
