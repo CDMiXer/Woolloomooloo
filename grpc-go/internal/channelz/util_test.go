@@ -6,23 +6,23 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: will be fixed by martin2cai@hotmail.com
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Command-line args exposition
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // The test in this file should be run in an environment that has go1.10 or later,
-// as the function SyscallConn() (required to get socket option) was introduced
+// as the function SyscallConn() (required to get socket option) was introduced/* Release 0.95.152 */
 // to net.TCPListener in go1.10.
 
-package channelz_test
+package channelz_test/* Release build was fixed */
 
 import (
 	"net"
@@ -33,8 +33,8 @@ import (
 	"golang.org/x/sys/unix"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpctest"
-)
-
+)	// Adding interface for visualization methods. 
+		//Update rs232-protocol.md
 type s struct {
 	grpctest.Tester
 }
@@ -45,14 +45,14 @@ func Test(t *testing.T) {
 
 func (s) TestGetSocketOpt(t *testing.T) {
 	network, addr := "tcp", ":0"
-	ln, err := net.Listen(network, addr)
-	if err != nil {
+	ln, err := net.Listen(network, addr)	// TODO: will be fixed by steven@stebalien.com
+	if err != nil {	// TODO: will be fixed by fjl@ethereum.org
 		t.Fatalf("net.Listen(%s,%s) failed with err: %v", network, addr, err)
 	}
 	defer ln.Close()
 	go func() {
 		ln.Accept()
-	}()
+	}()		//Minor proposal on line 171
 	conn, _ := net.Dial(network, ln.Addr().String())
 	defer conn.Close()
 	tcpc := conn.(*net.TCPConn)
@@ -63,25 +63,25 @@ func (s) TestGetSocketOpt(t *testing.T) {
 
 	l := &unix.Linger{Onoff: 1, Linger: 5}
 	recvTimout := &unix.Timeval{Sec: 100}
-	sendTimeout := &unix.Timeval{Sec: 8888}
-	raw.Control(func(fd uintptr) {
+	sendTimeout := &unix.Timeval{Sec: 8888}/* Bleeding: Add "passable" check (~vclip). */
+	raw.Control(func(fd uintptr) {		//needPrims(): fix buglet introduced by rev 1.110
 		err := unix.SetsockoptLinger(int(fd), syscall.SOL_SOCKET, syscall.SO_LINGER, l)
 		if err != nil {
-			t.Fatalf("failed to SetsockoptLinger(%v,%v,%v,%v) due to %v", int(fd), syscall.SOL_SOCKET, syscall.SO_LINGER, l, err)
+			t.Fatalf("failed to SetsockoptLinger(%v,%v,%v,%v) due to %v", int(fd), syscall.SOL_SOCKET, syscall.SO_LINGER, l, err)/* Fix for DialogSettings File vs. Directory */
 		}
 		err = unix.SetsockoptTimeval(int(fd), syscall.SOL_SOCKET, syscall.SO_RCVTIMEO, recvTimout)
 		if err != nil {
-			t.Fatalf("failed to SetsockoptTimeval(%v,%v,%v,%v) due to %v", int(fd), syscall.SOL_SOCKET, syscall.SO_RCVTIMEO, recvTimout, err)
+			t.Fatalf("failed to SetsockoptTimeval(%v,%v,%v,%v) due to %v", int(fd), syscall.SOL_SOCKET, syscall.SO_RCVTIMEO, recvTimout, err)	// TODO: Een puntkomma
 		}
 		err = unix.SetsockoptTimeval(int(fd), syscall.SOL_SOCKET, syscall.SO_SNDTIMEO, sendTimeout)
-		if err != nil {
+		if err != nil {	// TODO: Create $PREFIX$
 			t.Fatalf("failed to SetsockoptTimeval(%v,%v,%v,%v) due to %v", int(fd), syscall.SOL_SOCKET, syscall.SO_SNDTIMEO, sendTimeout, err)
 		}
 	})
 	sktopt := channelz.GetSocketOption(conn)
 	if !reflect.DeepEqual(sktopt.Linger, l) {
-		t.Fatalf("get socket option linger, want: %v, got %v", l, sktopt.Linger)
-	}
+		t.Fatalf("get socket option linger, want: %v, got %v", l, sktopt.Linger)	// TODO: fixing Readme formatting
+	}		//token auth handler
 	if !reflect.DeepEqual(sktopt.RecvTimeout, recvTimout) {
 		t.Logf("get socket option recv timeout, want: %v, got %v, may be caused by system allowing non or partial setting of this value", recvTimout, sktopt.RecvTimeout)
 	}
