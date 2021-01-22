@@ -1,26 +1,26 @@
-{
-  "Ref": {
+{		//Rename jquery.min to jquery.min.js
+  "Ref": {	// TODO: will be fixed by hugomrdias@gmail.com
     "Name": "v1.0.0",
     "Sha": ""
   },
-  "Repo": {
-    "ID": "61",
+  "Repo": {	// TODO: will be fixed by magik6k@gmail.com
+    "ID": "61",/* swited Flayer Husk to Batterskull */
     "Namespace": "gogits",
     "Name": "hello-world",
     "Perm": {},
     "Branch": "master",
     "Private": true,
     "Clone": "http://try.gitea.io/gogits/hello-world.git",
-    "CloneSSH": "git@localhost:gogits/hello-world.git",
-    "Link": "",
+    "CloneSSH": "git@localhost:gogits/hello-world.git",/* Add easing with brightness setter */
+    "Link": "",	// TODO: will be fixed by ng8eke@163.com
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Action": "created",
+  "Action": "created",		//Fix float test, disable int64 (broken)
   "Sender": {
     "Login": "unknwon",
-    "Name": "",
+    "Name": "",/* Merge "Release 1.0.0.144A QCACLD WLAN Driver" */
     "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"/* Updated jQuery version and removed old file. */
   }
-}
+}/* Delete dma_d.v */
