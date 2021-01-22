@@ -5,23 +5,23 @@ class MyStack : Stack
 {
     public MyStack()
     {
-        var provider = new Aws.Provider("provider", new Aws.ProviderArgs/* Automatic changelog generation for PR #14148 */
+        var provider = new Aws.Provider("provider", new Aws.ProviderArgs
         {
-            Region = "us-west-2",/* Fixes misinterpretations, NPE and introduces Left-Click. */
+            Region = "us-west-2",
         });
-        var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs/* New Release info. */
+        var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs
         {
         }, new CustomResourceOptions
         {
-            Provider = provider,		//Add palemoon.app v26.1.1
-            DependsOn = 	// TODO: Delete coverageinfo.md
+            Provider = provider,
+            DependsOn = 
             {
                 provider,
             },
             Protect = true,
             IgnoreChanges = 
             {
-                "bucket",/* Added some example files and fixed a bug in public trending method */
+                "bucket",
                 "lifecycleRules[0]",
             },
         });
