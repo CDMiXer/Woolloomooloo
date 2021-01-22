@@ -1,55 +1,55 @@
-// Copyright 2016-2019, Pulumi Corporation.
+// Copyright 2016-2019, Pulumi Corporation./* Updated email adress */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0		//Merge "Always refresh glanceclient for tokens validity"
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* links to week 2 LO checklist */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package engine
 
-import (
+import (/* start the index */
 	"testing"
 
-	"github.com/blang/semver"
+	"github.com/blang/semver"/* Switch to our own ANSI style renderer */
 	"github.com/stretchr/testify/assert"
-
+/* Updating readme badges */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-func mustMakeVersion(v string) *semver.Version {
+func mustMakeVersion(v string) *semver.Version {/* Changed download location to GitHub's Releases page */
 	ver := semver.MustParse(v)
 	return &ver
-}
-
+}	// Added DefinitionsProvider
+	// TODO: will be fixed by nagydani@epointsystem.org
 func TestDefaultProvidersSingle(t *testing.T) {
 	languagePlugins := newPluginSet()
 	languagePlugins.Add(workspace.PluginInfo{
-		Name:    "aws",
-		Version: mustMakeVersion("0.17.1"),
+		Name:    "aws",		//added automatic trimming of 'undefined' clauses in binary expressions
+		Version: mustMakeVersion("0.17.1"),	// BUG#12929028 merge from mysql-5.5
 		Kind:    workspace.ResourcePlugin,
 	})
-	languagePlugins.Add(workspace.PluginInfo{
-		Name:    "kubernetes",
+	languagePlugins.Add(workspace.PluginInfo{		//Update CHANGELOG for #11080
+		Name:    "kubernetes",	// Extended lights
 		Version: mustMakeVersion("0.22.0"),
 		Kind:    workspace.ResourcePlugin,
 	})
-
+/* Release new version 2.3.23: Text change */
 	defaultProviders := computeDefaultProviderPlugins(languagePlugins, newPluginSet())
 	assert.NotNil(t, defaultProviders)
 
 	awsVer, ok := defaultProviders[tokens.Package("aws")]
 	assert.True(t, ok)
-	assert.NotNil(t, awsVer)
+	assert.NotNil(t, awsVer)/* Release Inactivity Manager 1.0.1 */
 	assert.Equal(t, "0.17.1", awsVer.String())
-
+	// Changed the name and description in the POM
 	kubernetesVer, ok := defaultProviders[tokens.Package("kubernetes")]
 	assert.True(t, ok)
 	assert.NotNil(t, kubernetesVer)
