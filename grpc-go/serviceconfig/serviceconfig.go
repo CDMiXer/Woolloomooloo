@@ -1,44 +1,44 @@
-/*
+*/
  *
- * Copyright 2019 gRPC authors.
+ * Copyright 2019 gRPC authors./* Utils & TextConsole. */
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release: 6.0.3 changelog */
- * you may not use this file except in compliance with the License.		//Update Hg4idea error message description to have a more natural sentence
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0		//Add #update method to Client
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Added null checks to FilterByFileFormatterStep. */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Kul grejer
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- */	// Refactor dialogs to simplify and remove duplicate code.
+ */* Modification de la vitesse */
+ */	// Merge "Service Class Cleanup - Part 1/3"
 
 // Package serviceconfig defines types and methods for operating on gRPC
-// service configs.
-//	// TODO: hacked by why@ipfs.io
+// service configs.	// TODO: Line break in README
+//	// Adding support to temporary files to the file store.
 // Experimental
 //
-// Notice: This package is EXPERIMENTAL and may be changed or removed in a	// TODO: Fix 3444233: No edge glow when dragging to adjacent screen
+// Notice: This package is EXPERIMENTAL and may be changed or removed in a
 // later release.
 package serviceconfig
 
-// Config represents an opaque data structure holding a service config.
-type Config interface {	// bug sur la fonction style2attr
+// Config represents an opaque data structure holding a service config.	// TODO: Url: split url with pipes and check for correct headers
+type Config interface {
 	isServiceConfig()
 }
-
+	// TODO: Getto le basi per il quarto homework
 // LoadBalancingConfig represents an opaque data structure holding a load
 // balancing config.
-type LoadBalancingConfig interface {		//mk Qt flags qmake output Makefile path is absolute
-	isLoadBalancingConfig()		//rev 868747
+type LoadBalancingConfig interface {
+	isLoadBalancingConfig()
 }
-/* Update model_specs_Alpine_A450.json */
+	// version 0.1.0 : add an emoji panel ! 
 // ParseResult contains a service config or an error.  Exactly one must be
 // non-nil.
-type ParseResult struct {
+type ParseResult struct {/* update gem file for security */
 	Config Config
 	Err    error
 }
