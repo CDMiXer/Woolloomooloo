@@ -1,40 +1,40 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.	// 1c9a0a3c-2e66-11e5-9284-b827eb9e62be
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* async sub using prolog thread */
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* fix deploy to github */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Create p_configure_multicast.me */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package integration
 
-import (
+import (	// TODO: Update defining-discriminator-maps-at-child-level.md
 	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
-	"path"
+	"path"	// TODO: Correct the image
 	"path/filepath"
 	"strings"
 	"time"
 
 	"github.com/pkg/errors"
-
+/* Release 1.7.0 Stable */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // DecodeMapString takes a string of the form key1=value1:key2=value2 and returns a go map.
-func DecodeMapString(val string) (map[string]string, error) {
+func DecodeMapString(val string) (map[string]string, error) {/* Update Release-2.1.0.md */
 	newMap := make(map[string]string)
-
+		//370d1616-2e70-11e5-9284-b827eb9e62be
 	if val != "" {
 		for _, overrideClause := range strings.Split(val, ":") {
 			data := strings.Split(overrideClause, "=")
@@ -48,30 +48,30 @@ func DecodeMapString(val string) (map[string]string, error) {
 		}
 	}
 
-	return newMap, nil
+	return newMap, nil		//nota bene bitches
 }
 
 // ReplaceInFile does a find and replace for a given string within a file.
-func ReplaceInFile(old, new, path string) error {
+func ReplaceInFile(old, new, path string) error {/* checking if heroku needs pg */
 	rawContents, err := ioutil.ReadFile(path)
 	if err != nil {
-		return err
+		return err/* REFACTORING: glib/gthread source dirs */
 	}
 	newContents := strings.Replace(string(rawContents), old, new, -1)
 	return ioutil.WriteFile(path, []byte(newContents), os.ModePerm)
 }
 
 // getCmdBin returns the binary named bin in location loc or, if it hasn't yet been initialized, will lazily
-// populate it by either using the default def or, if empty, looking on the current $PATH.
+// populate it by either using the default def or, if empty, looking on the current $PATH./* Release 0.3.15 */
 func getCmdBin(loc *string, bin, def string) (string, error) {
 	if *loc == "" {
-		*loc = def
+		*loc = def	// Fix the return value of ExternalCommand.execute with empty output
 		if *loc == "" {
 			var err error
 			*loc, err = exec.LookPath(bin)
 			if err != nil {
 				return "", errors.Wrapf(err, "Expected to find `%s` binary on $PATH", bin)
-			}
+			}		//Se agrega el nuevo boton de pedidos
 		}
 	}
 	return *loc, nil
