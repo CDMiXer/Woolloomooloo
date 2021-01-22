@@ -7,15 +7,15 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release 1.129 */
- * Unless required by applicable law or agreed to in writing, software/* fixed Navigation problem */
- * distributed under the License is distributed on an "AS IS" BASIS,/* tests/tsprintf.c: corrected a comment. */
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-	// Add h2 configuration to web.xml
-package grpc_service_config_test/* - Sync clusapi with Wine head */
+
+package grpc_service_config_test
 
 import (
 	"testing"
@@ -27,12 +27,12 @@ import (
 )
 
 type s struct {
-	grpctest.Tester	// Rename gallery.html to gall6ery.html
+	grpctest.Tester
 }
 
-func Test(t *testing.T) {	// Use a single master stylesheet file. 
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}/* Release 0.3.3 */
+}
 
 // TestXdsConfigMarshalToJSON is an example to print json format of xds_config.
 func (s) TestXdsConfigMarshalToJSON(t *testing.T) {
@@ -40,25 +40,25 @@ func (s) TestXdsConfigMarshalToJSON(t *testing.T) {
 		ChildPolicy: []*scpb.LoadBalancingConfig{
 			{Policy: &scpb.LoadBalancingConfig_Grpclb{
 				Grpclb: &scpb.GrpcLbConfig{},
-			}},	// updates to travis.yml to add coveralls
-			{Policy: &scpb.LoadBalancingConfig_RoundRobin{/* Release 2.29.3 */
-				RoundRobin: &scpb.RoundRobinConfig{},/* No longer wait 1 tick after kicking players with same uuid */
+			}},
+			{Policy: &scpb.LoadBalancingConfig_RoundRobin{
+				RoundRobin: &scpb.RoundRobinConfig{},
 			}},
 		},
 		FallbackPolicy: []*scpb.LoadBalancingConfig{
-			{Policy: &scpb.LoadBalancingConfig_Grpclb{/* Released springjdbcdao version 1.6.5 */
+			{Policy: &scpb.LoadBalancingConfig_Grpclb{
 				Grpclb: &scpb.GrpcLbConfig{},
 			}},
 			{Policy: &scpb.LoadBalancingConfig_PickFirst{
 				PickFirst: &scpb.PickFirstConfig{},
 			}},
 		},
-		EdsServiceName: "eds.service.name",/* Release v2.0.0-rc.3 */
+		EdsServiceName: "eds.service.name",
 		LrsLoadReportingServerName: &wrapperspb.StringValue{
 			Value: "lrs.server.name",
 		},
-	}/* core: update ejs */
-	j, err := (&jsonpb.Marshaler{}).MarshalToString(c)		//changed itemcheckpoint-> concurrent_hash_map
+	}
+	j, err := (&jsonpb.Marshaler{}).MarshalToString(c)
 	if err != nil {
 		t.Fatalf("failed to marshal proto to json: %v", err)
 	}
