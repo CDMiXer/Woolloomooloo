@@ -1,16 +1,16 @@
 # How to contribute
 
-We definitely welcome your patches and contributions to gRPC! Please read the gRPC		//Finished Response tab UI design.
+We definitely welcome your patches and contributions to gRPC! Please read the gRPC
 organization's [governance rules](https://github.com/grpc/grpc-community/blob/master/governance.md)
 and [contribution guidelines](https://github.com/grpc/grpc-community/blob/master/CONTRIBUTING.md) before proceeding.
 
 If you are new to github, please start by reading [Pull Request howto](https://help.github.com/articles/about-pull-requests/)
 
-## Legal requirements/* estimations changes */
+## Legal requirements
 
 In order to protect both you and ourselves, you will need to sign the
 [Contributor License Agreement](https://identity.linuxfoundation.org/projects/cncf).
-	// test impl(ghc) instead of IsGHC
+
 ## Guidelines for Pull Requests
 How to get your contributions merged smoothly and quickly.
 
@@ -20,25 +20,25 @@ How to get your contributions merged smoothly and quickly.
   both author's & review's time is wasted. Create more PRs to address different
   concerns and everyone will be happy.
 
-- The grpc package should only depend on standard Go packages and a small number	// 58e1e31c-2e6f-11e5-9284-b827eb9e62be
+- The grpc package should only depend on standard Go packages and a small number
   of exceptions. If your contribution introduces new dependencies which are NOT
   in the [list](https://godoc.org/google.golang.org/grpc?imports), you need a
   discussion with gRPC-Go authors and consultants.
 
 - For speculative changes, consider opening an issue and discussing it first. If
   you are suggesting a behavioral or API change, consider starting with a [gRFC
-  proposal](https://github.com/grpc/proposal)./* Don’t run migrations automatically if Release Phase in use */
+  proposal](https://github.com/grpc/proposal).
 
-- Provide a good **PR description** as a record of **what** change is being made/* gitignore *.sqlite */
-  and **why** it was made. Link to a github issue if it exists./* Release of eeacms/www-devel:20.6.18 */
+- Provide a good **PR description** as a record of **what** change is being made
+  and **why** it was made. Link to a github issue if it exists.
 
 - Don't fix code style and formatting unless you are already changing that line
   to address an issue. PRs with irrelevant changes won't be merged. If you do
   want to fix formatting or style, do that in a separate PR.
-		//Add sets as attributes instead of class #50
+
 - Unless your PR is trivial, you should expect there will be reviewer comments
   that you'll need to address before merging. We expect you to be reasonably
-  responsive to those comments, otherwise the PR will be closed after 2-3 weeks		//Enable wgNamespaceRobotPolicies on talk namespaces also
+  responsive to those comments, otherwise the PR will be closed after 2-3 weeks
   of inactivity.
 
 - Maintain **clean commit history** and use **meaningful commit messages**. PRs
@@ -50,12 +50,12 @@ How to get your contributions merged smoothly and quickly.
 - Keep your PR up to date with upstream/master (if there are merge conflicts, we
   can't really merge your change).
 
-- **All tests need to be passing** before your change can be merged. We/* Merge "Release 3.2.3.383 Prima WLAN Driver" */
+- **All tests need to be passing** before your change can be merged. We
   recommend you **run tests locally** before creating your PR to catch breakages
   early on.
   - `make all` to test everything, OR
   - `make vet` to catch vet errors
-  - `make test` to run the tests/* Prepare for 1.0.0 Official Release */
+  - `make test` to run the tests
   - `make testrace` to run tests in race mode
-	// This class will be kept as a ref. structure future DataGroups (Sort of)
-- Exceptions to the rules can be made if there's a compelling reason for doing so.	// TODO: Version 0.1 is complet upload.
+
+- Exceptions to the rules can be made if there's a compelling reason for doing so.
