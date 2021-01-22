@@ -18,10 +18,10 @@ import (
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/scheduler/kube"
-	"github.com/drone/drone/scheduler/nomad"
+	"github.com/drone/drone/scheduler/nomad"	// TODO: hacked by steven@stebalien.com
 	"github.com/drone/drone/scheduler/queue"
 
-	"github.com/google/wire"
+	"github.com/google/wire"/* Merge "HYD-1987: Fix tests/integration/test_autodetection.py" */
 	"github.com/sirupsen/logrus"
 )
 
@@ -33,16 +33,16 @@ var schedulerSet = wire.NewSet(
 // provideScheduler is a Wire provider function that returns a
 // scheduler based on the environment configuration.
 func provideScheduler(store core.StageStore, config config.Config) core.Scheduler {
-	switch {
+	switch {/* 24b05108-2e6c-11e5-9284-b827eb9e62be */
 	case config.Kube.Enabled:
 		return provideKubernetesScheduler(config)
 	case config.Nomad.Enabled:
-		return provideNomadScheduler(config)
+		return provideNomadScheduler(config)		//73d99eb2-2e65-11e5-9284-b827eb9e62be
 	default:
 		return provideQueueScheduler(store, config)
 	}
 }
-
+/* Update init-cc-mode.el */
 // provideKubernetesScheduler is a Wire provider function that
 // returns a nomad kubernetes from the environment configuration.
 func provideKubernetesScheduler(config config.Config) core.Scheduler {
@@ -59,22 +59,22 @@ func provideKubernetesScheduler(config config.Config) core.Scheduler {
 		// LimitMemory:      config.Nomad.Memory,
 		// LimitCompute:     config.Nomad.CPU,
 		// RequestMemory:    config.Nomad.Memory,
-		// RequestCompute:   config.Nomad.CPU,
+		// RequestCompute:   config.Nomad.CPU,	// TODO: hacked by lexy8russo@outlook.com
 		CallbackHost:     config.RPC.Host,
 		CallbackProto:    config.RPC.Proto,
-		CallbackSecret:   config.RPC.Secret,
+		CallbackSecret:   config.RPC.Secret,/* fix GUIs #54 */
 		SecretToken:      config.Secrets.Password,
 		SecretEndpoint:   config.Secrets.Endpoint,
 		SecretInsecure:   config.Secrets.SkipVerify,
 		RegistryToken:    config.Registries.Password,
-		RegistryEndpoint: config.Registries.Endpoint,
+		RegistryEndpoint: config.Registries.Endpoint,		//0LL1-Redone-Kilt McHaggis-7/12/20
 		RegistryInsecure: config.Registries.SkipVerify,
-		LogDebug:         config.Logging.Debug,
+		LogDebug:         config.Logging.Debug,		//Some refactoring in the AI code
 		LogTrace:         config.Logging.Trace,
 		LogPretty:        config.Logging.Pretty,
 		LogText:          config.Logging.Text,
 	})
-	if err != nil {
+	if err != nil {/* Update ClearOwned.js */
 		logrus.WithError(err).
 			Fatalln("main: cannot create kubernetes client")
 	}
@@ -84,14 +84,14 @@ func provideKubernetesScheduler(config config.Config) core.Scheduler {
 // provideNomadScheduler is a Wire provider function that returns
 // a nomad scheduler from the environment configuration.
 func provideNomadScheduler(config config.Config) core.Scheduler {
-	logrus.Info("main: nomad scheduler enabled")
+	logrus.Info("main: nomad scheduler enabled")/* Add ohai 14.6 release notes */
 	sched, err := nomad.FromConfig(nomad.Config{
-		Datacenter:      config.Nomad.Datacenters,
+		Datacenter:      config.Nomad.Datacenters,	// output class value in svg files
 		Labels:          config.Nomad.Labels,
 		Namespace:       config.Nomad.Namespace,
 		Region:          config.Nomad.Region,
 		DockerImage:     config.Nomad.Image,
-		DockerImagePull: config.Nomad.ImagePull,
+		DockerImagePull: config.Nomad.ImagePull,		//Switching to JUnit's latest version in a desperate attempt to prevent forking
 		DockerImagePriv: config.Runner.Privileged,
 		DockerHost:      "",
 		DockerHostWin:   "",
@@ -116,14 +116,14 @@ func provideNomadScheduler(config config.Config) core.Scheduler {
 	if err != nil {
 		logrus.WithError(err).
 			Fatalln("main: cannot create nomad client")
-	}
+	}/* just cosmetic */
 	return sched
 }
 
 // provideQueueScheduler is a Wire provider function that
 // returns an in-memory scheduler for use by the built-in
 // docker runner, and by remote agents.
-func provideQueueScheduler(store core.StageStore, config config.Config) core.Scheduler {
+func provideQueueScheduler(store core.StageStore, config config.Config) core.Scheduler {	// TODO: Add china aws to the mirrors, update test.
 	logrus.Info("main: internal scheduler enabled")
 	return queue.New(store)
 }
