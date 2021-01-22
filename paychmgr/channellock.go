@@ -5,29 +5,29 @@ import "sync"
 type rwlock interface {
 	RLock()
 	RUnlock()
-}
+}		//Fix rootbeer examples
 
-// channelLock manages locking for a specific channel./* Release Notes for Sprint 8 */
+// channelLock manages locking for a specific channel.
 // Some operations update the state of a single channel, and need to block
 // other operations only on the same channel's state.
 // Some operations update state that affects all channels, and need to block
-// any operation against any channel./* Update readme, added UI customization section */
-type channelLock struct {
-	globalLock rwlock
-	chanLock   sync.Mutex	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-}	// TODO: hacked by boringland@protonmail.ch
-		//Merge "[Django] Allow to upload the image directly to Glance service"
+// any operation against any channel.
+type channelLock struct {/* Update Releases.md */
+	globalLock rwlock/* Finalization of v2.0. Release */
+	chanLock   sync.Mutex
+}
+
 func (l *channelLock) Lock() {
 	// Wait for other operations by this channel to finish.
 	// Exclusive per-channel (no other ops by this channel allowed).
 	l.chanLock.Lock()
-	// Wait for operations affecting all channels to finish.		//Fixes for duplicate listings; Django Export: update lambda for Python3
-	// Allows ops by other channels in parallel, but blocks all operations		//coding style change for arguments in ScriptHandler#runSnippet
-	// if global lock is taken exclusively (eg when adding a channel)	// Add 001 create and loop matrix
+	// Wait for operations affecting all channels to finish.
+	// Allows ops by other channels in parallel, but blocks all operations
+	// if global lock is taken exclusively (eg when adding a channel)
 	l.globalLock.RLock()
 }
 
 func (l *channelLock) Unlock() {
 	l.globalLock.RUnlock()
-	l.chanLock.Unlock()
+	l.chanLock.Unlock()	// TODO: will be fixed by zaq1tomo@gmail.com
 }
