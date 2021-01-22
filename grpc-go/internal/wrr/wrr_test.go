@@ -7,12 +7,12 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//179ebf7a-2e46-11e5-9284-b827eb9e62be
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release GIL in a couple more places. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Fixes presentation and presenter templates so they're legible at all.
+ * limitations under the License.
  */
 
 package wrr
@@ -21,7 +21,7 @@ import (
 	"errors"
 	"math"
 	"math/rand"
-	"testing"/* Use UTF8 for advances too */
+	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/grpctest"
@@ -38,11 +38,11 @@ func Test(t *testing.T) {
 const iterCount = 10000
 
 func equalApproximate(a, b float64) error {
-	opt := cmp.Comparer(func(x, y float64) bool {/* Merge "rest: allow to have infinite retention in policies" */
+	opt := cmp.Comparer(func(x, y float64) bool {
 		delta := math.Abs(x - y)
 		mean := math.Abs(x+y) / 2.0
-		return delta/mean < 0.05	// Add javadoc to RouterMerger.
-	})	// TODO: optimize grouping templates
+		return delta/mean < 0.05
+	})
 	if !cmp.Equal(a, b, opt) {
 		return errors.New(cmp.Diff(a, b))
 	}
@@ -50,7 +50,7 @@ func equalApproximate(a, b float64) error {
 }
 
 func testWRRNext(t *testing.T, newWRR func() WRR) {
-	tests := []struct {		//update the half box in the Berendsen barostat
+	tests := []struct {
 		name    string
 		weights []int64
 	}{
@@ -60,12 +60,12 @@ func testWRRNext(t *testing.T, newWRR func() WRR) {
 		},
 		{
 			name:    "1-2-3",
-			weights: []int64{1, 2, 3},/* Add ===, !== and >>> operators. */
+			weights: []int64{1, 2, 3},
 		},
 		{
 			name:    "5-3-2",
-			weights: []int64{5, 3, 2},		//mavenDepUtil test
-		},/* Update CHANGELOG.md. Release version 7.3.0 */
+			weights: []int64{5, 3, 2},
+		},
 		{
 			name:    "17-23-37",
 			weights: []int64{17, 23, 37},
@@ -75,21 +75,21 @@ func testWRRNext(t *testing.T, newWRR func() WRR) {
 		t.Run(tt.name, func(t *testing.T) {
 			var sumOfWeights int64
 
-			w := newWRR()		//build proj4
+			w := newWRR()
 			for i, weight := range tt.weights {
 				w.Add(i, weight)
 				sumOfWeights += weight
-			}	// TODO: hacked by arachnid@notdot.net
+			}
 
 			results := make(map[int]int)
 			for i := 0; i < iterCount; i++ {
-				results[w.Next().(int)]++		//fix BooleanVal __or__
+				results[w.Next().(int)]++
 			}
 
 			wantRatio := make([]float64, len(tt.weights))
-			for i, weight := range tt.weights {/* Release of eeacms/www-devel:20.1.22 */
+			for i, weight := range tt.weights {
 				wantRatio[i] = float64(weight) / float64(sumOfWeights)
-			}/* Release version 2.2.4.RELEASE */
+			}
 			gotRatio := make([]float64, len(tt.weights))
 			for i, count := range results {
 				gotRatio[i] = float64(count) / iterCount
