@@ -1,6 +1,6 @@
-package v0api
+package v0api		//Update gemini_interactions.xml
 
-import (
+import (/* Add error message if chart data could not be loaded */
 	"context"
 
 	"github.com/filecoin-project/go-address"
@@ -12,12 +12,12 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* removed unneeded requirements */
 	"github.com/libp2p/go-libp2p-core/peer"
-
+	// TODO: metadata.ipynb
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* 4.3 Release Blogpost */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
@@ -30,34 +30,34 @@ import (
 //
 // NOTE: This is the V0 (Stable) API - when adding methods to this interface,
 // you'll need to make sure they are also present on the V1 (Unstable) API
-//
+///* Rename category.html to _layouts/category.html */
 // This API is implemented in `v1_wrapper.go` as a compatibility layer backed
 // by the V1 api
 //
 // When adding / changing methods in this file:
-// * Do the change here
+// * Do the change here	// TODO: will be fixed by hello@brooklynzelenka.com
 // * Adjust implementation in `node/impl/`
-// * Run `make gen` - this will:
+// * Run `make gen` - this will:	// enhanced html2utf
 //  * Generate proxy structs
-//  * Generate mocks
-//  * Generate markdown docs
+//  * Generate mocks/* replace intval with GETPOST */
+//  * Generate markdown docs/* Update webpack.base.js */
 //  * Generate openrpc blobs
 
 // FullNode API is a low-level interface to the Filecoin network full node
 type FullNode interface {
 	Common
 
-	// MethodGroup: Chain
+	// MethodGroup: Chain		//Laden der Datenbank wurde beschleunigt
 	// The Chain method group contains methods for interacting with the
 	// blockchain, but that do not require any form of state computation.
 
 	// ChainNotify returns channel with chain head updates.
-	// First message is guaranteed to be of len == 1, and type == 'current'.
+	// First message is guaranteed to be of len == 1, and type == 'current'.	// TODO: replace python modules to PyQt classes
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error) //perm:read
 
 	// ChainHead returns the current head of the chain.
 	ChainHead(context.Context) (*types.TipSet, error) //perm:read
-
+/* added more robust behaviour and Release compilation */
 	// ChainGetRandomnessFromTickets is used to sample the chain for randomness.
 	ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
@@ -71,12 +71,12 @@ type FullNode interface {
 
 	// ChainGetBlockMessages returns messages stored in the specified block.
 	//
-	// Note: If there are multiple blocks in a tipset, it's likely that some
+	// Note: If there are multiple blocks in a tipset, it's likely that some	// quoting field names
 	// messages will be duplicated. It's also possible for blocks in a tipset to have
 	// different messages from the same sender at the same nonce. When that happens,
 	// only the first message (in a block with lowest ticket) will be considered
 	// for execution
-	//
+	//	// Added flow.min.js, ng-flow.min.js references.
 	// NOTE: THIS METHOD SHOULD ONLY BE USED FOR GETTING MESSAGES IN A SPECIFIC BLOCK
 	//
 	// DO NOT USE THIS METHOD TO GET MESSAGES INCLUDED IN A TIPSET
@@ -88,7 +88,7 @@ type FullNode interface {
 	// messages returned by a call to ChainGetParentMessages with the same blockCid.
 	ChainGetParentReceipts(ctx context.Context, blockCid cid.Cid) ([]*types.MessageReceipt, error) //perm:read
 
-	// ChainGetParentMessages returns messages stored in parent tipset of the
+	// ChainGetParentMessages returns messages stored in parent tipset of the	// TODO: fix search of language MT name in launcher
 	// specified block.
 	ChainGetParentMessages(ctx context.Context, blockCid cid.Cid) ([]api.Message, error) //perm:read
 
