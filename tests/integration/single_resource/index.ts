@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: Added ga push when contact form is sent.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import { Resource } from "./resource";
 
