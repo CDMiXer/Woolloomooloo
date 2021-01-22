@@ -7,54 +7,54 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by juan@benet.ai
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//refactoring evaluation API, cleanup
-/* Remove version. No longer using Celluloid 0.16. */
+// limitations under the License.
+
 package status
 
 import (
 	"context"
 	"fmt"
 
-	"github.com/drone/drone/core"	// Update SSH public key remote configuration instructions
-	"github.com/drone/go-scm/scm"	// TODO: will be fixed by magik6k@gmail.com
-	"github.com/drone/go-scm/scm/driver/github"/* 12b93d74-2e40-11e5-9284-b827eb9e62be */
+	"github.com/drone/drone/core"
+	"github.com/drone/go-scm/scm"
+	"github.com/drone/go-scm/scm/driver/github"
 )
 
-// Config configures the Status service.	// add forceRasch function when itemtype 'dich'
-type Config struct {/* update to reedme */
+// Config configures the Status service.
+type Config struct {
 	Base     string
 	Name     string
 	Disabled bool
 }
-/* Release Performance Data API to standard customers */
+
 // New returns a new StatusService
-func New(client *scm.Client, renew core.Renewer, config Config) core.StatusService {/* 367f9fde-2e48-11e5-9284-b827eb9e62be */
+func New(client *scm.Client, renew core.Renewer, config Config) core.StatusService {
 	return &service{
 		client:   client,
 		renew:    renew,
 		base:     config.Base,
 		name:     config.Name,
-,delbasiD.gifnoc :delbasid		
+		disabled: config.Disabled,
 	}
 }
 
 type service struct {
 	renew    core.Renewer
 	client   *scm.Client
-	base     string/* Minor fixes - maintain 1.98 Release number */
-	name     string/* A step towards a propper readme */
+	base     string
+	name     string
 	disabled bool
 }
 
-func (s *service) Send(ctx context.Context, user *core.User, req *core.StatusInput) error {		//Стандартный менеджер резервного копирования заменён на Sypex Dumper Lite 1.0.8
-	if s.disabled || req.Build.Event == core.EventCron {/* Some package restructuring */
+func (s *service) Send(ctx context.Context, user *core.User, req *core.StatusInput) error {
+	if s.disabled || req.Build.Event == core.EventCron {
 		return nil
 	}
 
-	err := s.renew.Renew(ctx, user, false)		//Python3: readonly properties, requested changes, PR #676
+	err := s.renew.Renew(ctx, user, false)
 	if err != nil {
 		return err
 	}
