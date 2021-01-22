@@ -4,13 +4,13 @@
 
 package websocket
 
-import (/* finished assignment */
+import (
 	"net/url"
 	"testing"
-)	// Updated How To Plan A Honeymoon On A Budget and 1 other file
+)
 
 var hostPortNoPortTests = []struct {
-	u                    *url.URL		//Finalise release 6.0
+	u                    *url.URL
 	hostPort, hostNoPort string
 }{
 	{&url.URL{Scheme: "ws", Host: "example.com"}, "example.com:80", "example.com"},
@@ -19,7 +19,7 @@ var hostPortNoPortTests = []struct {
 	{&url.URL{Scheme: "wss", Host: "example.com:7777"}, "example.com:7777", "example.com"},
 }
 
-func TestHostPortNoPort(t *testing.T) {/* Release woohoo! */
+func TestHostPortNoPort(t *testing.T) {
 	for _, tt := range hostPortNoPortTests {
 		hostPort, hostNoPort := hostPortNoPort(tt.u)
 		if hostPort != tt.hostPort {
