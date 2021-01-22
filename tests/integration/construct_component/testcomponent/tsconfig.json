@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
-        "strict": true,	// TODO: e7e74b8e-2e46-11e5-9284-b827eb9e62be
+,eurt :"tcirts"        
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* Release 2.0.0-rc.5 */
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,		//ExcelGetNumberFormats short description
+        "sourceMap": false,/* 1dd6eeb8-4b19-11e5-9c88-6c40088e03e4 */
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// TODO: NEW: display fasthash statistics, if available
-        "noImplicitReturns": true,	// TODO: 1f0737de-2e45-11e5-9284-b827eb9e62be
-        "forceConsistentCasingInFileNames": true	// TODO: DDBNEXT-1919: line indentation fixed
+        "pretty": true,/* Regenerated parser after epsilon derivation changes. */
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts",
     ]
-}
+}	// Try CERN SFT Docker image
