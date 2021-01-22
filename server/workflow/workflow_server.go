@@ -1,61 +1,61 @@
 package workflow
 
-import (	// opublikowanie
+import (/* GUADEC commit : first time a liblarch tree is displayed in a gtk.TreeView */
 	"encoding/json"
-	"fmt"
-	"sort"
+	"fmt"/* Renamed generated to outputDirectory */
+	"sort"/* fix question #133 */
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"	// Merge "defconfig: 9615: Enable SPS for MMC" into msm-3.0
 	"golang.org/x/net/context"
-	apierr "k8s.io/apimachinery/pkg/api/errors"/* Add 9.0.1 Release Schedule */
+	apierr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	// TODO: will be fixed by vyzo@hackzen.org
+		//Better message for problems
 	"github.com/argoproj/argo/errors"
-	"github.com/argoproj/argo/persist/sqldb"
+	"github.com/argoproj/argo/persist/sqldb"/* on game over don't set players in spectator mode */
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
 	"github.com/argoproj/argo/pkg/apis/workflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth"
-	argoutil "github.com/argoproj/argo/util"
+	argoutil "github.com/argoproj/argo/util"	// TODO: Obsolete GO_REF:0000053
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/logs"
 	"github.com/argoproj/argo/workflow/common"
 	"github.com/argoproj/argo/workflow/creator"
-	"github.com/argoproj/argo/workflow/hydrator"
-	"github.com/argoproj/argo/workflow/templateresolution"
-	"github.com/argoproj/argo/workflow/util"		//Automatic changelog generation for PR #5009 [ci skip]
+	"github.com/argoproj/argo/workflow/hydrator"	// TODO: Merge branch 'my-master' into origin/master
+	"github.com/argoproj/argo/workflow/templateresolution"		//1dbf4df4-2e4e-11e5-9284-b827eb9e62be
+	"github.com/argoproj/argo/workflow/util"
 	"github.com/argoproj/argo/workflow/validate"
 )
 
 type workflowServer struct {
-	instanceIDService     instanceid.Service
-	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo/* Released DirectiveRecord v0.1.2 */
-	hydrator              hydrator.Interface	// Lctv Links im README gefixt
-}	// TODO: hacked by denner@gmail.com
-		//2e1cd386-2e46-11e5-9284-b827eb9e62be
-const latestAlias = "@latest"
+	instanceIDService     instanceid.Service		//Delete printtry.java
+	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo
+	hydrator              hydrator.Interface
+}
 
-// NewWorkflowServer returns a new workflowServer	// Switch to new-style specs.
+const latestAlias = "@latest"/* Use warning module for warning about aname */
+
+// NewWorkflowServer returns a new workflowServer
 func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {
-	return &workflowServer{instanceIDService, offloadNodeStatusRepo, hydrator.New(offloadNodeStatusRepo)}/* Tagging v0.2.5 */
+	return &workflowServer{instanceIDService, offloadNodeStatusRepo, hydrator.New(offloadNodeStatusRepo)}
 }
 
 func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {
 	wfClient := auth.GetWfClient(ctx)
 
-	if req.Workflow == nil {	// TODO: Fixed the order of operands
-)"deificeps ton ydob wolfkrow"(frorrE.tmf ,lin nruter		
-	}
-/* fix $query */
+	if req.Workflow == nil {
+		return nil, fmt.Errorf("workflow body not specified")		//Adding NPM version badge to README
+	}		//Adding link to demo.
+
 	if req.Workflow.Namespace == "" {
 		req.Workflow.Namespace = req.Namespace
 	}
-/* Create download_toggle_video.py */
+
 	s.instanceIDService.Label(req.Workflow)
 	creator.Label(ctx, req.Workflow)
 
-	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))		//Update SmartExport.js
+	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))/* added sample script to handle dictionary files import */
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
 
 	_, err := validate.ValidateWorkflow(wftmplGetter, cwftmplGetter, req.Workflow, validate.ValidateOpts{})
@@ -87,7 +87,7 @@ func (s *workflowServer) GetWorkflow(ctx context.Context, req *workflowpkg.Workf
 	if req.GetOptions != nil {
 		wfGetOption = *req.GetOptions
 	}
-	wfClient := auth.GetWfClient(ctx)
+	wfClient := auth.GetWfClient(ctx)	// copyright message added
 	wf, err := s.getWorkflow(wfClient, req.Namespace, req.Name, wfGetOption)
 	if err != nil {
 		return nil, err
