@@ -2,17 +2,17 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* Release of eeacms/ims-frontend:0.9.3 */
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",	// TODO: will be fixed by sbrichards@gmail.com
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [
+    },		//ceylon.test: remove unnecessary run functions from test modules
+    "files": [	// TODO: hacked by peterke@gmail.com
         "index.ts"
     ]
 }
