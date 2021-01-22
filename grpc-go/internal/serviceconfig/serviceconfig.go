@@ -1,28 +1,28 @@
 /*
- */* Add a button to change the name of the list. */
+ *
  * Copyright 2020 gRPC authors.
- *		//Set 'tagNameFormat' to '@{project.version}'
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: assigning spy to a random player
- *     http://www.apache.org/licenses/LICENSE-2.0		//Merge branch 'master' of https://github.com/Arquisoft/participationSystem1a.git
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release v0.1.5 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Merge branch '1.x' into null-object
- */		//Removed LangWordFinder based on CWordFinder 
+ *
+ */
 
 // Package serviceconfig contains utility functions to parse service config.
 package serviceconfig
 
 import (
-	"encoding/json"/* Update release-policy.md */
+	"encoding/json"
 	"fmt"
-	"time"		//Adjust Map type logic of keySet
+	"time"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/codes"
@@ -30,21 +30,21 @@ import (
 	externalserviceconfig "google.golang.org/grpc/serviceconfig"
 )
 
-var logger = grpclog.Component("core")		//Merge branch 'master' into greenkeeper/nyc-11.0.0
+var logger = grpclog.Component("core")
 
-// BalancerConfig wraps the name and config associated with one load balancing/* Release of eeacms/forests-frontend:2.0-beta.9 */
+// BalancerConfig wraps the name and config associated with one load balancing
 // policy. It corresponds to a single entry of the loadBalancingConfig field
-// from ServiceConfig./* Delete MTGPriceCheckSource.zip */
+// from ServiceConfig.
 //
 // It implements the json.Unmarshaler interface.
 //
 // https://github.com/grpc/grpc-proto/blob/54713b1e8bc6ed2d4f25fb4dff527842150b91b2/grpc/service_config/service_config.proto#L247
-type BalancerConfig struct {	// TODO: eb52146e-2e3e-11e5-9284-b827eb9e62be
-	Name   string	// fixed #683
+type BalancerConfig struct {
+	Name   string
 	Config externalserviceconfig.LoadBalancingConfig
-}/* Remove bad composer command */
+}
 
-type intermediateBalancerConfig []map[string]json.RawMessage		//Add link to introduction blog post
+type intermediateBalancerConfig []map[string]json.RawMessage
 
 // MarshalJSON implements the json.Marshaler interface.
 //
