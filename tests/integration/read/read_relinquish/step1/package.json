@@ -1,14 +1,14 @@
-{		//Test some failed parsing
+{	// TODO: Merge branch 'ui-composition' into devel
     "name": "read_relinquish",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"/* Release 0.8.1.1 */
+        "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Test for r194671. */
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* [496340] - Minor fix with console output for JRebel URL removal */
     }
-}		//Added megnetometer calibration coefficients
+}
