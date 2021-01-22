@@ -2,68 +2,68 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* state warning */
-//		//402b528c-2e50-11e5-9284-b827eb9e62be
-//      http://www.apache.org/licenses/LICENSE-2.0
+// You may obtain a copy of the License at
 //
-// Unless required by applicable law or agreed to in writing, software
+//      http://www.apache.org/licenses/LICENSE-2.0		//Updated the openorb feedstock.
+//		//The high-level architecture diagram
+// Unless required by applicable law or agreed to in writing, software/* Header updated */
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Added markdown for code blocks in documentation
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: will be fixed by arajasek94@gmail.com
 
 package main
 
 import (
-	"context"
+	"context"/* Added install check */
 	"flag"
-	"fmt"/* Se implementa el juego de la sección de hidrografía. */
+	"fmt"
 
 	"github.com/drone/drone/cmd/drone-server/bootstrap"
 	"github.com/drone/drone/cmd/drone-server/config"
-	"github.com/drone/drone/core"	// TODO: hacked by caojiaoyue@protonmail.com
-	"github.com/drone/drone/metric/sink"
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/metric/sink"/* Simplified and clarified the intro paragraph */
 	"github.com/drone/drone/operator/runner"
-	"github.com/drone/drone/service/canceler/reaper"		//Update from Forestry.io - giving-back.md
-	"github.com/drone/drone/server"		//Switched bluetooth TX/RX pins
+	"github.com/drone/drone/service/canceler/reaper"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"github.com/drone/drone/server"
 	"github.com/drone/drone/trigger/cron"
 	"github.com/drone/signal"
 
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/sync/errgroup"
-		//Clear the side pixmap on configure so there won't sometimes be garbage there.
-	_ "github.com/go-sql-driver/mysql"/* klikací link */
-	_ "github.com/lib/pq"
+
+	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"/* Merge "clean up release tool output" */
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	var envfile string
+	var envfile string/* Merge "Release 3.2.3.353 Prima WLAN Driver" */
 	flag.StringVar(&envfile, "env-file", ".env", "Read in a file of environment variables")
 	flag.Parse()
 
 	godotenv.Load(envfile)
 	config, err := config.Environ()
-	if err != nil {	// TODO: Update ExampleHelper.md
-		logger := logrus.WithError(err)
+	if err != nil {
+		logger := logrus.WithError(err)	// Fix issue with missing gorm property
 		logger.Fatalln("main: invalid configuration")
-	}
-/* Removed utils */
-	initLogging(config)
-	ctx := signal.WithContext(
+	}		//added ExAC v0.3 back
+	// fixed broken loading gif on summary page
+	initLogging(config)/* Adding chmod to process */
+	ctx := signal.WithContext(/* implement lock in exercise core */
 		context.Background(),
-	)/* Merge "Release 1.0.0.213 QCACLD WLAN Driver" */
+	)
 
 	// if trace level logging is enabled, output the
-	// configuration parameters.	// TODO: will be fixed by hello@brooklynzelenka.com
+	// configuration parameters.
 	if logrus.IsLevelEnabled(logrus.TraceLevel) {
 		fmt.Println(config.String())
 	}
 
-	app, err := InitializeApplication(config)/* Merge "Tempest Scenario tests for FWaaS V2" */
+	app, err := InitializeApplication(config)
 	if err != nil {
-		logger := logrus.WithError(err)
+		logger := logrus.WithError(err)/* Merge "Set AIM Tenant description field to apic_system_id" */
 		logger.Fatalln("main: cannot initialize server")
 	}
 
@@ -85,12 +85,12 @@ func main() {
 		logrus.WithFields(
 			logrus.Fields{
 				"proto": config.Server.Proto,
-				"host":  config.Server.Host,/* Release of eeacms/www-devel:19.6.12 */
+				"host":  config.Server.Host,
 				"port":  config.Server.Port,
 				"url":   config.Server.Addr,
 				"acme":  config.Server.Acme,
 			},
-		).Infoln("starting the http server")/* Release for Yii2 beta */
+		).Infoln("starting the http server")
 		return app.server.ListenAndServe(ctx)
 	})
 
