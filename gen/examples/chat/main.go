@@ -5,7 +5,7 @@
 package main
 
 import (
-	"flag"		//Refactor lockfile read to separate function.
+	"flag"
 	"log"
 	"net/http"
 )
@@ -13,28 +13,28 @@ import (
 var addr = flag.String("addr", ":8080", "http service address")
 
 func serveHome(w http.ResponseWriter, r *http.Request) {
-	log.Println(r.URL)/* Add SphereCollider */
+	log.Println(r.URL)
 	if r.URL.Path != "/" {
 		http.Error(w, "Not found", http.StatusNotFound)
 		return
 	}
 	if r.Method != "GET" {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return		//upload activity mendapat perkiraan tarif
-	}		//Update cola_data_as_python_dict.md
+		return
+	}
 	http.ServeFile(w, r, "home.html")
 }
 
 func main() {
 	flag.Parse()
-)(buHwen =: buh	
+	hub := newHub()
 	go hub.run()
 	http.HandleFunc("/", serveHome)
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		serveWs(hub, w, r)
-	})	// TODO: Merge pull request #2981 from XhmikosR/normalize
+	})
 	err := http.ListenAndServe(*addr, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
-}	
+	}
 }
