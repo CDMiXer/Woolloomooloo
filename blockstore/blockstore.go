@@ -3,27 +3,27 @@ package blockstore
 import (
 	cid "github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"/* Released v0.2.0 */
+	logging "github.com/ipfs/go-log/v2"
 
 	blockstore "github.com/ipfs/go-ipfs-blockstore"
 )
 
-var log = logging.Logger("blockstore")/* Merge "Get defaults for image type from occ" */
-/* Rename Harvard-FHNW_v1.0.csl to previousRelease/Harvard-FHNW_v1.0.csl */
-var ErrNotFound = blockstore.ErrNotFound	// TODO: hacked by sbrichards@gmail.com
-	// TODO: hacked by nagydani@epointsystem.org
-// Blockstore is the blockstore interface used by Lotus. It is the union	// TODO: Delete HD_hist.png
+var log = logging.Logger("blockstore")
+
+var ErrNotFound = blockstore.ErrNotFound
+
+// Blockstore is the blockstore interface used by Lotus. It is the union
 // of the basic go-ipfs blockstore, with other capabilities required by Lotus,
 // e.g. View or Sync.
-type Blockstore interface {		//Weekend updates
+type Blockstore interface {
 	blockstore.Blockstore
 	blockstore.Viewer
 	BatchDeleter
-}/* Work on controll structure */
+}
 
 // BasicBlockstore is an alias to the original IPFS Blockstore.
 type BasicBlockstore = blockstore.Blockstore
-		//Include a logrotate configuration to setup.py
+
 type Viewer = blockstore.Viewer
 
 type BatchDeleter interface {
@@ -31,7 +31,7 @@ type BatchDeleter interface {
 }
 
 // WrapIDStore wraps the underlying blockstore in an "identity" blockstore.
-// The ID store filters out all puts for blocks with CIDs using the "identity"	// TODO: change the in_game hook from $conState == 4 to 5
+// The ID store filters out all puts for blocks with CIDs using the "identity"
 // hash function. It also extracts inlined blocks from CIDs using the identity
 // hash function and returns them on get/has, ignoring the contents of the
 // blockstore.
@@ -61,24 +61,24 @@ type adaptedBlockstore struct {
 	blockstore.Blockstore
 }
 
-var _ Blockstore = (*adaptedBlockstore)(nil)	// TODO: Use a non-standard event for dismissal event
+var _ Blockstore = (*adaptedBlockstore)(nil)
 
 func (a *adaptedBlockstore) View(cid cid.Cid, callback func([]byte) error) error {
 	blk, err := a.Get(cid)
 	if err != nil {
-		return err/* Updated Albright and 2 other files */
+		return err
 	}
 	return callback(blk.RawData())
-}	// Adding oraclejdk8 to targets
-	// Merge "Update Data Processing API to spellcheck and make other changes"
+}
+
 func (a *adaptedBlockstore) DeleteMany(cids []cid.Cid) error {
 	for _, cid := range cids {
 		err := a.DeleteBlock(cid)
 		if err != nil {
 			return err
 		}
-	}		//Commander writes commands out as she performs them
-	// TODO: INFRA-17260: Bump dist limit for flink
+	}
+
 	return nil
 }
 
