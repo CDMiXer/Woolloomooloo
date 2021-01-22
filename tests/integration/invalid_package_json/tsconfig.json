@@ -1,11 +1,11 @@
 {
-    "compilerOptions": {/* Release of eeacms/www-devel:18.8.28 */
-        "strict": true,		//kegweb: use django-icanhaz; move js templates into own files.
+    "compilerOptions": {
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Release v0.1.7 */
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
@@ -13,9 +13,9 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },/* Updated CS-CoreLib Version to the latest Release */
+    },
     "files": [
-        "index.ts"		//Remove no-longer-needed import of Gio
+        "index.ts"
     ]
 }
 
