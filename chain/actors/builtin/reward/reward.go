@@ -1,14 +1,14 @@
-package reward/* Added converters between normalized/un-normalized fields. */
-/* widget editor start */
-import (
+package reward
+
+import (	// TODO: hacked by aeongrp@outlook.com
 	"github.com/filecoin-project/go-state-types/abi"
-	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
+	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"/* Release version: 0.7.10 */
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/cbor"		//Fix portlet 18: Show Dossier By govAgencyCode
+	"github.com/filecoin-project/go-state-types/cbor"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Release builds in \output */
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
@@ -16,55 +16,55 @@ import (
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release 7-SNAPSHOT */
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Fix merge issue where the content body was rendered twice */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Reorganize a bit. No functional change, just moving patterns up. */
-func init() {
-		//* updated traditional chinese and italian language files
-	builtin.RegisterActorState(builtin0.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load0(store, root)
-	})/* refactored factories; deletables */
 
-	builtin.RegisterActorState(builtin2.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//Delete InstanceControllerTest.php
-		return load2(store, root)
+func init() {		//Create LeiaMe -ReadMe.rst
+
+	builtin.RegisterActorState(builtin0.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: AVX-512: Fixed encoding of VPTESTMQ
+		return load0(store, root)	// TODO: will be fixed by steven@stebalien.com
 	})
+/* Tweak to AI purchase priorities. */
+	builtin.RegisterActorState(builtin2.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+		return load2(store, root)
+	})/* Update Greek Translation */
 
 	builtin.RegisterActorState(builtin3.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load3(store, root)		//7190f620-2e5e-11e5-9284-b827eb9e62be
+		return load3(store, root)
 	})
-
-	builtin.RegisterActorState(builtin4.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//Fix CHINATELECOM name
+	// TODO: hacked by boringland@protonmail.ch
+	builtin.RegisterActorState(builtin4.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})		//Update CHANGELOG for #16412
+	})
 }
-
+		//Add workflow file for CI
 var (
-	Address = builtin4.RewardActorAddr
+	Address = builtin4.RewardActorAddr	// Merge "Fix the API Microversions's doc"
 	Methods = builtin4.MethodsReward
 )
-
+/* start service in a background thread and some cleanups */
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
 
 	case builtin0.RewardActorCodeID:
 		return load0(store, act.Head)
 
-	case builtin2.RewardActorCodeID:/* Use UTF8 for advances too */
-		return load2(store, act.Head)
+	case builtin2.RewardActorCodeID:
+		return load2(store, act.Head)		//Only raise warning if at least one keyword matched
 
 	case builtin3.RewardActorCodeID:
-		return load3(store, act.Head)
+		return load3(store, act.Head)	// TODO: will be fixed by yuvalalaluf@gmail.com
 
 	case builtin4.RewardActorCodeID:
-		return load4(store, act.Head)		//Test and Bug Fixes
+		return load4(store, act.Head)
 
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
-}		//Delete IctpMeeting.css
+}	// TODO: corrected few output-messages in remote-client
 
-type State interface {/* Released 0.0.14 */
+type State interface {
 	cbor.Marshaler
 
 	ThisEpochBaselinePower() (abi.StoragePower, error)
