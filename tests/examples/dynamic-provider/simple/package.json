@@ -1,10 +1,10 @@
 {
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {/* Adding Release Build script for Windows  */
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },/* 424549ca-2e4a-11e5-9284-b827eb9e62be */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Release 10.1.0 */
+    }
 }
