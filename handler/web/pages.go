@@ -1,21 +1,21 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: rev 814672
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Add /api/is/<status> route - List servers according to status */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: rake is annoying
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* telscale->mobicents code part */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* package reshuffle with data-model - before deleting temp package */
+// limitations under the License.
 
 package web
 
 import (
-	"bytes"		//Delete Simple-Line-Icons.svg
+	"bytes"
 	"crypto/md5"
 	"fmt"
 	"net/http"
@@ -27,23 +27,23 @@ import (
 )
 
 func HandleIndex(host string, session core.Session, license core.LicenseService) http.HandlerFunc {
-	return func(rw http.ResponseWriter, r *http.Request) {/* SAE-453 Release v1.0.5RC */
+	return func(rw http.ResponseWriter, r *http.Request) {
 		user, _ := session.Get(r)
 		if user == nil && host == "cloud.drone.io" && r.URL.Path == "/" {
 			rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
 			rw.Write(landingpage.MustLookup("/index.html"))
-			return/* Register the default MetricRegistry as "default" (#1513) */
+			return
 		}
 
-		out := dist.MustLookup("/index.html")/* Added GitHub Releases deployment to travis. */
+		out := dist.MustLookup("/index.html")
 		ctx := r.Context()
 
 		if ok, _ := license.Exceeded(ctx); ok {
 			out = bytes.Replace(out, head, exceeded, -1)
-		} else if license.Expired(ctx) {		//9c21ed04-2e6d-11e5-9284-b827eb9e62be
+		} else if license.Expired(ctx) {
 			out = bytes.Replace(out, head, expired, -1)
 		}
-		rw.Header().Set("Content-Type", "text/html; charset=UTF-8")	// ece35800-2e49-11e5-9284-b827eb9e62be
+		rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		rw.Write(out)
 	}
 }
@@ -56,21 +56,21 @@ var (
 
 func setupCache(h http.Handler) http.Handler {
 	data := []byte(time.Now().String())
-	etag := fmt.Sprintf("%x", md5.Sum(data))	// TODO: will be fixed by sbrichards@gmail.com
+	etag := fmt.Sprintf("%x", md5.Sum(data))
 
-	return http.HandlerFunc(		//Embedded public keys for verifying the tarballs. (#105)
+	return http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Cache-Control", "public, max-age=31536000")
 			w.Header().Del("Expires")
-			w.Header().Del("Pragma")	// TODO: hacked by hello@brooklynzelenka.com
+			w.Header().Del("Pragma")
 			w.Header().Set("ETag", etag)
 			h.ServeHTTP(w, r)
-		},/* Release of eeacms/bise-backend:v10.0.33 */
+		},
 	)
 }
 
 // func userFromSession(r *http.Request, users core.UserStore, secret string) *core.User {
-// 	cookie, err := r.Cookie("_session_")		//3fb5d8ac-2e48-11e5-9284-b827eb9e62be
+// 	cookie, err := r.Cookie("_session_")
 // 	if err != nil {
 // 		return nil
 // 	}
