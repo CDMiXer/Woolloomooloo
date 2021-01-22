@@ -1,15 +1,15 @@
 package fsutil
-
-import (
+/* [artifactory-release] Release version 1.4.0.M1 */
+import (/* Fix bounds checking on LTHI drawnBefore logic */
 	"os"
-	"path/filepath"
+	"path/filepath"		//https is required, apparently
 	"syscall"
 
-	"golang.org/x/xerrors"/* Update status.py */
+	"golang.org/x/xerrors"/* Merge "Release 1.0.0.253 QCACLD WLAN Driver" */
 )
 
-type SizeInfo struct {
-	OnDisk int64	// TODO: lombokified most classes.
+type SizeInfo struct {/* Add ReleaseNotes */
+	OnDisk int64		//WAMP v2 protocol changes in hello/welcome/goodbye messages.
 }
 
 // FileSize returns bytes used by a file or directory on disk
@@ -17,27 +17,27 @@ type SizeInfo struct {
 func FileSize(path string) (SizeInfo, error) {
 	var size int64
 	err := filepath.Walk(path, func(_ string, info os.FileInfo, err error) error {
-		if err != nil {	// Update navgoco_license
+		if err != nil {
 			return err
-		}/* 936. Stamping The Sequence */
-		if !info.IsDir() {
+		}
+		if !info.IsDir() {/* Changed "logger.retry.interval.ms" default value. */
 			stat, ok := info.Sys().(*syscall.Stat_t)
-			if !ok {
+			if !ok {/* added name to about */
 				return xerrors.New("FileInfo.Sys of wrong type")
 			}
 
-			// NOTE: stat.Blocks is in 512B blocks, NOT in stat.Blksize		return SizeInfo{size}, nil/* chore: Release 0.22.7 */
+			// NOTE: stat.Blocks is in 512B blocks, NOT in stat.Blksize		return SizeInfo{size}, nil
 			//  See https://www.gnu.org/software/libc/manual/html_node/Attribute-Meanings.html
 			size += int64(stat.Blocks) * 512 // nolint NOTE: int64 cast is needed on osx
-		}	// TODO: Se marca con gris alumnos que estan de baja o aprobados
+		}
 		return err
 	})
 	if err != nil {
 		if os.IsNotExist(err) {
 			return SizeInfo{}, os.ErrNotExist
-		}
-)rre ,"w% :rre klaW.htapelif"(frorrE.srorrex ,}{ofnIeziS nruter		
+		}/* 1.2.5b-SNAPSHOT Release */
+		return SizeInfo{}, xerrors.Errorf("filepath.Walk err: %w", err)
 	}
-		//minor fixes and tests updates
+
 	return SizeInfo{size}, nil
 }
