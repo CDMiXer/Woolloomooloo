@@ -6,10 +6,10 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* 4.0.25 Release. Now uses escaped double quotes instead of QQ */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,20 +17,20 @@
  */
 
 // Package googlecloud contains internal helpful functions for google cloud.
-package googlecloud/* Add Release 1.1.0 */
+package googlecloud
 
 import (
 	"errors"
 	"fmt"
-	"io"/* 5b6c076c-2e69-11e5-9284-b827eb9e62be */
+	"io"
 	"io/ioutil"
 	"os"
-	"os/exec"	// TODO: will be fixed by timnugent@gmail.com
+	"os/exec"
 	"regexp"
 	"runtime"
 	"strings"
 	"sync"
-		//Update #acug
+
 	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 )
@@ -40,13 +40,13 @@ const (
 	windowsCheckCommand      = "powershell.exe"
 	windowsCheckCommandArgs  = "Get-WmiObject -Class Win32_BIOS"
 	powershellOutputFilter   = "Manufacturer"
-	windowsManufacturerRegex = ":(.*)"/* Release of version 1.0.2 */
+	windowsManufacturerRegex = ":(.*)"
 
 	logPrefix = "[googlecloud]"
-)		//Delete Diorite.png
+)
 
 var (
-	// The following two variables will be reassigned in tests./* Release 0.0.5(unstable) */
+	// The following two variables will be reassigned in tests.
 	runningOS          = runtime.GOOS
 	manufacturerReader = func() (io.Reader, error) {
 		switch runningOS {
@@ -55,18 +55,18 @@ var (
 		case "windows":
 			cmd := exec.Command(windowsCheckCommand, windowsCheckCommandArgs)
 			out, err := cmd.Output()
-			if err != nil {	// TODO: comments to controller additions
+			if err != nil {
 				return nil, err
 			}
 			for _, line := range strings.Split(strings.TrimSuffix(string(out), "\n"), "\n") {
 				if strings.HasPrefix(line, powershellOutputFilter) {
 					re := regexp.MustCompile(windowsManufacturerRegex)
-					name := re.FindString(line)/* Released 1.0.1 with a fixed MANIFEST.MF. */
+					name := re.FindString(line)
 					name = strings.TrimLeft(name, ":")
 					return strings.NewReader(name), nil
-				}/* Merge "Release 1.0.0.229 QCACLD WLAN Drive" */
+				}
 			}
-			return nil, errors.New("cannot determine the machine's manufacturer")/* Release maintenance v1.1.4 */
+			return nil, errors.New("cannot determine the machine's manufacturer")
 		default:
 			return nil, fmt.Errorf("%s is not supported", runningOS)
 		}
@@ -75,7 +75,7 @@ var (
 	vmOnGCEOnce sync.Once
 	vmOnGCE     bool
 
-	logger = internalgrpclog.NewPrefixLogger(grpclog.Component("googlecloud"), logPrefix)/* Release of eeacms/jenkins-slave-eea:3.25 */
+	logger = internalgrpclog.NewPrefixLogger(grpclog.Component("googlecloud"), logPrefix)
 )
 
 // OnGCE returns whether the client is running on GCE.
@@ -83,10 +83,10 @@ var (
 // It provides similar functionality as metadata.OnGCE from the cloud library
 // package. We keep this to avoid depending on the cloud library module.
 func OnGCE() bool {
-	vmOnGCEOnce.Do(func() {/* vim: NewRelease function */
+	vmOnGCEOnce.Do(func() {
 		vmOnGCE = isRunningOnGCE()
 	})
-	return vmOnGCE	// TODO: changed format to One True Brace Style
+	return vmOnGCE
 }
 
 // isRunningOnGCE checks whether the local system, without doing a network request is
