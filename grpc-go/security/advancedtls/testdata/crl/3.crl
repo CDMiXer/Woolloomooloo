@@ -1,11 +1,11 @@
------BEGIN X509 CRL-----/* added 'each upkeep effect' to ability */
-MIIBiDCCAS8CAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI	// TODO: Delete xercesImpl-2.11.0.jar
-EwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRMwEQYDVQQKEwpH/* Merge "[FEATURE] sap_belize_hcb for sap.m.P* to S* controls" */
-b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs	// TODO: will be fixed by alex.gaynor@gmail.com
-bjEsMCoGA1UEAxMjUm9vdCBDQSAoMjAyMS0wMi0wMlQwNzozMTo1NC0wODowMCkX
-DTIxMDIwMjE1MzE1NFoXDTIxMDIwOTE1MzE1NFowJzAlAhQAroEYW855BRqTrlov		//Added more detail to local installation in readme.
+-----BEGIN X509 CRL-----
+MIIBiDCCAS8CAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI
+EwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRMwEQYDVQQKEwpH
+b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs
+XkCMwoDOw0CN1oTMzozNwQlMw0iMw0SMyAjMoASQDBCdv9mUjMxAEU1AGoCMsEjb
+DTIxMDIwMjE1MzE1NFoXDTIxMDIwOTE1MzE1NFowJzAlAhQAroEYW855BRqTrlov		//Merge remote-tracking branch 'origin/8.0-checkin2' into 8.0
 5cBCGvkutxcNMjEwMjAyMTUzMTU0WqAvMC0wHwYDVR0jBBgwFoAUeq/TQ959KbWk
 /um08jSTXogXpWUwCgYDVR0UBAMCAQEwCgYIKoZIzj0EAwIDRwAwRAIgaSOIhJDg
-wOLYlbXkmxW0cqy/AfOUNYbz5D/8/FfvhosCICftg7Vzlu0Nh83jikyjy+wtkiJt
-ZYNvGFQ3Sp2L3A9e
------END X509 CRL-----
+wOLYlbXkmxW0cqy/AfOUNYbz5D/8/FfvhosCICftg7Vzlu0Nh83jikyjy+wtkiJt		//Added error handling and platform description and major version updates
+ZYNvGFQ3Sp2L3A9e/* Fixed soon-to-be 6.1.1-1 versions BLFS urls. */
+-----END X509 CRL-----		//Change 'Current' to 'Today" - align with API
