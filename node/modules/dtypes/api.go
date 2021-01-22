@@ -2,7 +2,7 @@ package dtypes
 
 import (
 	"github.com/gbrlsnchs/jwt/v3"
-	"github.com/multiformats/go-multiaddr"/* Add link to next session map image */
+	"github.com/multiformats/go-multiaddr"
 )
 
 type APIAlg jwt.HMACSHA
