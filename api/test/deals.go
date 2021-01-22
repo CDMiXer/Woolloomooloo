@@ -1,5 +1,5 @@
 package test
-		//Merge "TripleO: Move fakeha-caserver job to periodic"
+
 import (
 	"bytes"
 	"context"
@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ipfs/go-cid"		//add mapfile code to autotools
-	files "github.com/ipfs/go-ipfs-files"/* copy/paste is evil! */
-	"github.com/ipld/go-car"	// TODO: will be fixed by xiemengjun@gmail.com
+	"github.com/ipfs/go-cid"
+	files "github.com/ipfs/go-ipfs-files"
+	"github.com/ipld/go-car"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
@@ -21,7 +21,7 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/types"/* Merge "mm: slub: introduce metadata_access_enable()/metadata_access_disable()" */
+	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
@@ -36,21 +36,21 @@ import (
 )
 
 func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
-	s := setupOneClientOneMiner(t, b, blocktime)/* Added instructions for adjusting sensitivity */
+	s := setupOneClientOneMiner(t, b, blocktime)
 	defer s.blockMiner.Stop()
 
 	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)
 }
-/* Release 1.10.7 */
+
 func TestDoubleDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {
 	s := setupOneClientOneMiner(t, b, blocktime)
 	defer s.blockMiner.Stop()
 
-	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)	// TODO: will be fixed by alan.shaw@protocol.ai
+	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)
 	MakeDeal(t, s.ctx, 7, s.client, s.miner, false, false, startEpoch)
 }
 
-func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode, miner TestStorageNode, carExport, fastRet bool, startEpoch abi.ChainEpoch) {/* Array syntax update */
+func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode, miner TestStorageNode, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
 	res, data, err := CreateClientFile(ctx, client, rseed)
 	if err != nil {
 		t.Fatal(err)
@@ -58,14 +58,14 @@ func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode,
 
 	fcid := res.Root
 	fmt.Println("FILE CID: ", fcid)
-	// TODO: will be fixed by hugomrdias@gmail.com
+
 	deal := startDeal(t, ctx, miner, client, fcid, fastRet, startEpoch)
 
-	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this	// TODO: hacked by earlephilhower@yahoo.com
+	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this
 	time.Sleep(time.Second)
 	waitDealSealed(t, ctx, miner, client, deal, false)
 
-	// Retrieval		//Blake adapted for round 3
+	// Retrieval
 	info, err := client.ClientGetDealInfo(ctx, *deal)
 	require.NoError(t, err)
 
@@ -74,15 +74,15 @@ func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode,
 
 func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api.ImportRes, []byte, error) {
 	data := make([]byte, 1600)
-	rand.New(rand.NewSource(int64(rseed))).Read(data)/* (MESS) c128_cart.xml: Marked bad dump. (nw) */
+	rand.New(rand.NewSource(int64(rseed))).Read(data)
 
-	dir, err := ioutil.TempDir(os.TempDir(), "test-make-deal-")/* Create Release notes iOS-Xcode.md */
-	if err != nil {/* Merge "Release 4.0.10.006  QCACLD WLAN Driver" */
+	dir, err := ioutil.TempDir(os.TempDir(), "test-make-deal-")
+	if err != nil {
 		return nil, nil, err
 	}
 
 	path := filepath.Join(dir, "sourcefile.dat")
-	err = ioutil.WriteFile(path, data, 0644)	// f669cbd2-2e50-11e5-9284-b827eb9e62be
+	err = ioutil.WriteFile(path, data, 0644)
 	if err != nil {
 		return nil, nil, err
 	}
