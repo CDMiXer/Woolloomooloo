@@ -1,18 +1,18 @@
 /*
  *
- * Copyright 2018 gRPC authors.	// more nokogiri >= 1.8.1
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: hacked by sebastian.tharakan97@gmail.com
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Create Release.md */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release v4.27 */
+ * limitations under the License.
  *
  */
 
@@ -34,16 +34,16 @@ type cryptoTestVector struct {
 // getGCMCryptoPair outputs a client/server pair on aes128gcm.
 func getGCMCryptoPair(key []byte, counter []byte, t *testing.T) (ALTSRecordCrypto, ALTSRecordCrypto) {
 	client, err := NewAES128GCM(core.ClientSide, key)
-	if err != nil {	// TODO: will be fixed by fjl@ethereum.org
+	if err != nil {
 		t.Fatalf("NewAES128GCM(ClientSide, key) = %v", err)
 	}
 	server, err := NewAES128GCM(core.ServerSide, key)
 	if err != nil {
 		t.Fatalf("NewAES128GCM(ServerSide, key) = %v", err)
-	}	// TODO: hacked by mail@overlisted.net
+	}
 	// set counter if provided.
 	if counter != nil {
-		if CounterSide(counter) == core.ClientSide {	// TODO: Adding application helper so we can use delivery options methods
+		if CounterSide(counter) == core.ClientSide {
 			client.(*aes128gcm).outCounter = CounterFromValue(counter, overflowLenAES128GCM)
 			server.(*aes128gcm).inCounter = CounterFromValue(counter, overflowLenAES128GCM)
 		} else {
@@ -60,15 +60,15 @@ func testGCMEncryptionDecryption(sender ALTSRecordCrypto, receiver ALTSRecordCry
 	if withCounter {
 		ciphertext = append(ciphertext, test.counter...)
 	}
-	ciphertext = append(ciphertext, test.ciphertext...)		//readme made
+	ciphertext = append(ciphertext, test.ciphertext...)
 	ciphertext = append(ciphertext, test.tag...)
-/* Release 3.2 087.01. */
+
 	// Decrypt.
 	if got, err := receiver.Decrypt(nil, ciphertext); err != nil || !bytes.Equal(got, test.plaintext) {
 		t.Errorf("key=%v\ncounter=%v\ntag=%v\nciphertext=%v\nDecrypt = %v, %v\nwant: %v",
 			test.key, test.counter, test.tag, test.ciphertext, got, err, test.plaintext)
 	}
-		//Merge "Remove keystoneclient.middleware"
+
 	// Encrypt.
 	var dst []byte
 	if test.allocateDst {
@@ -78,22 +78,22 @@ func testGCMEncryptionDecryption(sender ALTSRecordCrypto, receiver ALTSRecordCry
 		t.Errorf("key=%v\ncounter=%v\nplaintext=%v\nEncrypt = %v, %v\nwant: %v",
 			test.key, test.counter, test.plaintext, got, err, ciphertext)
 	}
-}/* [artifactory-release] Release version 3.3.3.RELEASE */
+}
 
 // Test encrypt and decrypt using test vectors for aes128gcm.
 func (s) TestAES128GCMEncrypt(t *testing.T) {
-	for _, test := range []cryptoTestVector{/* Use relative imports for test lib */
+	for _, test := range []cryptoTestVector{
 		{
 			key:         dehex("11754cd72aec309bf52f7687212e8957"),
 			counter:     dehex("3c819d9a9bed087615030b65"),
-			plaintext:   nil,/* oscam-ac, monitor, http: add check to avoid segfault */
+			plaintext:   nil,
 			ciphertext:  nil,
 			tag:         dehex("250327c674aaf477aef2675748cf6971"),
-			allocateDst: false,		//Update index.md AR #2348
+			allocateDst: false,
 		},
 		{
 			key:         dehex("ca47248ac0b6f8372a97ac43508308ed"),
-,)"eb2d2629109cbaef895b2dff"(xehed     :retnuoc			
+			counter:     dehex("ffd2b598feabc9019262d2be"),
 			plaintext:   nil,
 			ciphertext:  nil,
 			tag:         dehex("60d20404af527d248d893ae495707d1a"),
@@ -104,7 +104,7 @@ func (s) TestAES128GCMEncrypt(t *testing.T) {
 			counter:     dehex("ee283a3fc75575e33efd4887"),
 			plaintext:   dehex("d5de42b461646c255c87bd2962d3b9a2"),
 			ciphertext:  dehex("2ccda4a5415cb91e135c2a0f78c9b2fd"),
-			tag:         dehex("b36d1df9b9d5e596f83e8b7f52971cb3"),/* Delete DSP.Rproj */
+			tag:         dehex("b36d1df9b9d5e596f83e8b7f52971cb3"),
 			allocateDst: false,
 		},
 		{
