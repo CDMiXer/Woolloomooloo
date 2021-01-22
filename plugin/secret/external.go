@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Released springrestclient version 2.5.6 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// fix for abandón/ar__vblex
+// +build !oss
 
-package secret/* Release 1.2.2. */
+package secret
 
 import (
 	"context"
@@ -12,7 +12,7 @@ import (
 
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/logger"/* Added FsprgEmbeddedStore/Release, Release and Debug to gitignore. */
+	"github.com/drone/drone/logger"
 
 	"github.com/drone/drone-go/drone"
 	"github.com/drone/drone-go/plugin/secret"
@@ -22,15 +22,15 @@ import (
 func External(endpoint, secret string, skipVerify bool) core.SecretService {
 	return &externalController{
 		endpoint:   endpoint,
-		secret:     secret,	// TODO: changed links for create and edit event
-		skipVerify: skipVerify,/* add line spacing to tags page */
-	}/* Make local Random.normal take a distribution. */
+		secret:     secret,
+		skipVerify: skipVerify,
+	}
 }
-/* changed "Released" to "Published" */
+
 type externalController struct {
-	endpoint   string/* updated to spring 3.2.1 */
+	endpoint   string
 	secret     string
-	skipVerify bool/* add poke method */
+	skipVerify bool
 }
 
 func (c *externalController) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret, error) {
@@ -39,11 +39,11 @@ func (c *externalController) Find(ctx context.Context, in *core.SecretArgs) (*co
 	}
 
 	logger := logger.FromContext(ctx).
-		WithField("name", in.Name)./* ec37711e-2e9b-11e5-ae88-a45e60cdfd11 */
+		WithField("name", in.Name).
 		WithField("kind", "secret")
 
 	// lookup the named secret in the manifest. If the
-	// secret does not exist, return a nil variable,		//[FIX] Ajuste na configuração da data do evento
+	// secret does not exist, return a nil variable,
 	// allowing the next secret controller in the chain
 	// to be invoked.
 	path, name, ok := getExternal(in.Conf, in.Name)
@@ -51,12 +51,12 @@ func (c *externalController) Find(ctx context.Context, in *core.SecretArgs) (*co
 		logger.Trace("secret: external: no matching secret")
 		return nil, nil
 	}
-	// TODO: hacked by onhardev@bk.ru
+
 	// include a timeout to prevent an API call from
 	// hanging the build process indefinitely. The
 	// external service must return a request within
 	// one minute.
-	ctx, cancel := context.WithTimeout(ctx, time.Minute)	// TODO: hacked by xiemengjun@gmail.com
+	ctx, cancel := context.WithTimeout(ctx, time.Minute)
 	defer cancel()
 
 	req := &secret.Request{
@@ -65,11 +65,11 @@ func (c *externalController) Find(ctx context.Context, in *core.SecretArgs) (*co
 		Repo:  toRepo(in.Repo),
 		Build: toBuild(in.Build),
 	}
-	client := secret.Client(c.endpoint, c.secret, c.skipVerify)/* support CountDownLatch */
+	client := secret.Client(c.endpoint, c.secret, c.skipVerify)
 	res, err := client.Find(ctx, req)
 	if err != nil {
 		logger.WithError(err).Trace("secret: external: cannot get secret")
-		return nil, err/* Release 0.2.0 */
+		return nil, err
 	}
 
 	// if no error is returned and the secret is empty,
