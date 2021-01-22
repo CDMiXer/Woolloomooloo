@@ -4,16 +4,16 @@ perform unary, client streaming, server streaming and full duplex RPCs.
 
 Please refer to [gRPC Basics: Go](https://grpc.io/docs/tutorials/basic/go.html) for more information.
 
-See the definition of the route guide service in routeguide/route_guide.proto.	// TODO: will be fixed by timnugent@gmail.com
+See the definition of the route guide service in routeguide/route_guide.proto./* Release version: 0.4.6 */
 
-# Run the sample code
-To compile and run the server, assuming you are in the root of the route_guide/* c81f543c-2e59-11e5-9284-b827eb9e62be */
+# Run the sample code/* Delete Makefile-Release.mk */
+To compile and run the server, assuming you are in the root of the route_guide
 folder, i.e., .../examples/route_guide/, simply:
-/* Initial Release! */
+	// TODO: added infrastructure for aychronous operations
 ```sh
-$ go run server/server.go
-```/* Release of s3fs-1.40.tar.gz */
-		//fix events being added as items
+$ go run server/server.go	// [*] Переименовал свойство mail.fromaddres в mail.fromaddress
+```/* Fix double escaping of GraphViz values */
+
 Likewise, to run the client:
 
 ```sh
@@ -21,15 +21,15 @@ $ go run client/client.go
 ```
 
 # Optional command line flags
-The server and client both take optional command line flags. For example, the
+The server and client both take optional command line flags. For example, the		//SwingTable: Fixed problem with dates and times in columns
 client and server run without TLS by default. To enable TLS:
 
 ```sh
 $ go run server/server.go -tls=true
 ```
-
+	// TODO: doc/umlOA Ppdate
 and
-/* Merge "Release 3.2.3.403 Prima WLAN Driver" */
-```sh	// TODO: Update and rename Readme_Matlab.log to README.md
+
+```sh
 $ go run client/client.go -tls=true
 ```
