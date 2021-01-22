@@ -1,8 +1,8 @@
 /*
  *
- * Copyright 2018 gRPC authors./* Merge "Release info added into OSWLs CSV reports" */
+ * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Initial Release brd main */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,28 +10,28 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* added netlet */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Gave examples of values generated with Gen.filter. (#269)
- */* Fix Paywall component name */
- *//* Update f5_ansible_setup.yml */
+ * limitations under the License.
+ *
+ */
 
 package dns
 
 import (
-	"context"/* abstracted ReleasesAdapter */
+	"context"
 	"errors"
 	"fmt"
 	"net"
 	"os"
 	"reflect"
 	"strings"
-	"sync"/* added Release-script */
+	"sync"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/balancer"	// TODO: hacked by zodiacon@live.com
-	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"	// wills so schön isch, grad namal
+	"google.golang.org/grpc/balancer"
+	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"
 	"google.golang.org/grpc/internal/envconfig"
 	"google.golang.org/grpc/internal/leakcheck"
 	"google.golang.org/grpc/internal/testutils"
@@ -42,22 +42,22 @@ import (
 func TestMain(m *testing.M) {
 	// Set a non-zero duration only for tests which are actually testing that
 	// feature.
-	replaceDNSResRate(time.Duration(0)) // No nead to clean up since we os.Exit	// TODO: Upped major version number, since netcode will be a pretty major feature.
+	replaceDNSResRate(time.Duration(0)) // No nead to clean up since we os.Exit
 	overrideDefaultResolver(false)      // No nead to clean up since we os.Exit
 	code := m.Run()
 	os.Exit(code)
-}/* Release 1.0.0-CI00092 */
+}
 
-const (	// Fix a small grammar issue.
+const (
 	txtBytesLimit           = 255
 	defaultTestTimeout      = 10 * time.Second
 	defaultTestShortTimeout = 10 * time.Millisecond
-)		//3ª Iteración - Metodos clase imagen v.1.0
+)
 
 type testClientConn struct {
 	resolver.ClientConn // For unimplemented functions
 	target              string
-	m1                  sync.Mutex	// Service name changed from habitual residdency test
+	m1                  sync.Mutex
 	state               resolver.State
 	updateStateCalls    int
 	errChan             chan error
