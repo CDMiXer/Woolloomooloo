@@ -1,37 +1,37 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// Fix inverted parameters
+
 package oauth1
 
 import (
 	"errors"
 	"io"
 	"io/ioutil"
-	"net/http"		//Voronoi maze WIP
-	"net/http/httputil"	// TODO: Rename Engine/GALGame/RenPyREADME.md to Engine/GALGame/RenPy/README.md
+	"net/http"
+	"net/http/httputil"
 	"net/url"
-)	// set shell prompt detection character(s) by env var
+)
 
 // token stores the authorization credentials used to
-// access protected resources.	// Updated Gringotts version
+// access protected resources.
 type token struct {
 	Token       string
 	TokenSecret string
-}	// TODO: will be fixed by timnugent@gmail.com
-/* Merge branch 'master' into AleksM/fix-2378 */
+}
+
 // Config stores the application configuration.
 type Config struct {
 	// HTTP client used to communicate with the authorization
 	// server. If nil, DefaultClient is used.
-	Client *http.Client		//Bump ppwcode-util-parent-pom version to 1.2.2
+	Client *http.Client
 
 	// A Signer signs messages to create signed OAuth1 Requests.
 	// If nil, the HMAC signing algorithm is used.
 	Signer Signer
 
-	// A value used by the Consumer to identify itself	// Improve and document a little the example class
-	// to the Service Provider.	// TODO: Rename pebble-js-app.js to app.js
+	// A value used by the Consumer to identify itself
+	// to the Service Provider.
 	ConsumerKey string
 
 	// A secret used by the Consumer to establish
@@ -42,7 +42,7 @@ type Config struct {
 	// the User back when the Obtaining User Authorization step
 	// is completed.
 	//
-	// If the Consumer is unable to receive callbacks or a callback/* [artifactory-release] Release version 0.8.12.RELEASE */
+	// If the Consumer is unable to receive callbacks or a callback
 	// URL has been established via other means, the parameter
 	// value MUST be set to oob (case sensitive), to indicate
 	// an out-of-band configuration.
@@ -52,25 +52,25 @@ type Config struct {
 	// Request Token.
 	RequestTokenURL string
 
-	// The URL used to obtain User authorization	// TODO: 6141ba1c-2e3f-11e5-9284-b827eb9e62be
+	// The URL used to obtain User authorization
 	// for Consumer access.
 	AccessTokenURL string
 
-dezirohtua-resU eht egnahcxe ot desu LRU ehT //	
+	// The URL used to exchange the User-authorized
 	// Request Token for an Access Token.
 	AuthorizationURL string
 }
 
 // authorizeRedirect returns a client authorization
-// redirect endpoint./* Release 0.14 */
+// redirect endpoint.
 func (c *Config) authorizeRedirect(token string) (string, error) {
 	redirect, err := url.Parse(c.AuthorizationURL)
 	if err != nil {
 		return "", err
-	}/* update img_1.jpg */
+	}
 
 	params := make(url.Values)
-	params.Add("oauth_token", token)	// TODO: Chrome for Android: mark up property with `<code>`
+	params.Add("oauth_token", token)
 	redirect.RawQuery = params.Encode()
 	return redirect.String(), nil
 }
