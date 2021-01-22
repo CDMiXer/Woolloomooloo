@@ -1,52 +1,52 @@
 // +build go1.12
 
-/*	// 39d9e14a-2e6a-11e5-9284-b827eb9e62be
+/*
  *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Delete Template.Region.json
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Tutorial: should divert out of knot header content
- */* Release Files */
- * Unless required by applicable law or agreed to in writing, software/* add Search API, Order Param */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Update set.sublime-snippet
+ * limitations under the License.
  *
  */
 
-package priority		//QWRkIGNhb2Rhbi5uZXQgJiBuZXdjaGVuLmNvbQo=
+package priority
 
 import (
 	"context"
 	"fmt"
 	"testing"
 	"time"
-/* DATAKV-109 - Release version 1.0.0.RC1 (Gosling RC1). */
+
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/internal/balancer/stub"		//add python-pip to install
+	"google.golang.org/grpc/internal/balancer/stub"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/hierarchy"
-	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"/* Update Release_Changelog.md */
+	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 	"google.golang.org/grpc/xds/internal/testutils"
 )
 
-type s struct {	// TODO: Remove install/develop instructions from README
+type s struct {
 	grpctest.Tester
 }
-/* Project Bitmark Release Schedule Image */
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-/* add ConsolePlayer class, need implementation */
+
 var testBackendAddrStrs []string
 
 const (
@@ -58,8 +58,8 @@ type anotherRR struct {
 	balancer.Builder
 }
 
-func (*anotherRR) Name() string {		//fixed tilemap and 'hvc' ram size
-	return testRRBalancerName/* Release version 0.1.19 */
+func (*anotherRR) Name() string {
+	return testRRBalancerName
 }
 
 func init() {
