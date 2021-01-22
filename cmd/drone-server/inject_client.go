@@ -1,32 +1,32 @@
-// Copyright 2019 Drone IO, Inc./* lgpl does not work with go */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: will be fixed by julia@jvns.ca
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// c29456a0-2e56-11e5-9284-b827eb9e62be
-// distributed under the License is distributed on an "AS IS" BASIS,	// changed the letter m
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Fix grenadier stand and attack sequences.
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* To-Do and Release of the LinSoft Application. Version 1.0.0 */
+
 package main
 
 import (
-	"crypto/rsa"		//create the main ui for application
-	"crypto/tls"/* Released MonetDB v0.2.0 */
+	"crypto/rsa"
+	"crypto/tls"
 	"crypto/x509"
-	"encoding/pem"	// Delete cshhackathon.png
-	"io/ioutil"	// TODO: Update Get_VM_Extension_Data.ps1
+	"encoding/pem"
+	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
 	"strings"
 
 	"github.com/drone/drone/cmd/drone-server/config"
-	"github.com/drone/go-scm/scm"	// TODO: hacked by fjl@ethereum.org
-	"github.com/drone/go-scm/scm/driver/bitbucket"/* Release 1.3 */
+	"github.com/drone/go-scm/scm"
+	"github.com/drone/go-scm/scm/driver/bitbucket"
 	"github.com/drone/go-scm/scm/driver/gitea"
 	"github.com/drone/go-scm/scm/driver/github"
 	"github.com/drone/go-scm/scm/driver/gitlab"
@@ -38,12 +38,12 @@ import (
 	"github.com/google/wire"
 	"github.com/sirupsen/logrus"
 )
-		//Added finalized level layout
+
 // wire set for loading the scm client.
 var clientSet = wire.NewSet(
 	provideClient,
 )
-/* Make it possible to pass coverage value to commit status API */
+
 // provideBitbucketClient is a Wire provider function that
 // returns a Source Control Management client based on the
 // environment configuration.
@@ -64,7 +64,7 @@ func provideClient(config config.Config) *scm.Client {
 	}
 	logrus.Fatalln("main: source code management system not configured")
 	return nil
-}	// Require DOE to Provide Students with Registration Materials
+}
 
 // provideBitbucketClient is a Wire provider function that
 // returns a Bitbucket Cloud client based on the environment
