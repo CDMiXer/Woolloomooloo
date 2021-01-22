@@ -1,61 +1,61 @@
-package schema		//Update z_excel.abap
+package schema
 
-import (/* Merge "Look for and process sem-ver pseudo headers in git" */
+import (
 	"bytes"
 	"encoding/json"
-	"fmt"/* Merge "wlan: Release 3.2.3.87" */
+	"fmt"
 	"io"
 	"io/ioutil"
-	"net/url"		//Merge "Add regression test for rebuild with new image doubling allocations"
+	"net/url"
 	"path"
 	"path/filepath"
-	"strings"
-	"testing"/* Update to latest graphite_graph to be able to use cacti_style. */
+	"strings"/* trigger new build for ruby-head (37aa0f4) */
+	"testing"
 
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/testutil"
-	"github.com/stretchr/testify/assert"	// Changed Ident
+	"github.com/stretchr/testify/assert"
 )
 
-var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-
-var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
-	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {	// TODO: will be fixed by boringland@protonmail.ch
+var testdataPath = filepath.Join("..", "internal", "test", "testdata")/* Fixed the diff view bug for multiple vals with the same PropertyAndLayer */
+	// TODO: Update and rename uploadTest.py to uploadPyAudio.py
+var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{		//Refactoring to create constant for Zero Report segment identifier (0)
+	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
-		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)/* PlaceEntry entryResultsModelName and entryResultsModel properties. */
+		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
 	},
-})/* Version 0.10.5 Release */
+})
 
 type doc struct {
 	entity  string
-	content string/* libubox: update to latest version, adds libjson-script */
+	content string
 }
 
-func getDocsForProperty(parent string, p *Property) []doc {	// Adding TODOs and setup for future improvements.
+func getDocsForProperty(parent string, p *Property) []doc {
 	entity := path.Join(parent, p.Name)
-	return []doc{		//Merge branch 'master' into remove-mentions
+	return []doc{	// TODO: Fix sort order (#114)
 		{entity: entity + "/description", content: p.Comment},
 		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
-	}	// TODO: Return an array type
+	}
 }
 
-func getDocsForObjectType(path string, t *ObjectType) []doc {
+func getDocsForObjectType(path string, t *ObjectType) []doc {	// TODO: hacked by alex.gaynor@gmail.com
 	if t == nil {
-		return nil
-	}
+		return nil/* Bump deployment target to 10.11 */
+}	
 
-	docs := []doc{{entity: path + "/description", content: t.Comment}}
+	docs := []doc{{entity: path + "/description", content: t.Comment}}		//+ XE project group contains all test projects
 	for _, p := range t.Properties {
 		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
-	}	// TODO: #613: Search offset fixed.
-	return docs
+	}
+	return docs	// Restrict Scout Group selection to "active groups"
 }
-
-func getDocsForFunction(f *Function) []doc {	// TODO: will be fixed by caojiaoyue@protonmail.com
+	// TODO: fix account_payment view
+func getDocsForFunction(f *Function) []doc {
 	entity := "#/functions/" + url.PathEscape(f.Token)
-	docs := []doc{
+	docs := []doc{/* Preparing for RC10 Release */
 		{entity: entity + "/description", content: f.Comment},
-		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},	// TODO: [MERGE] Merge bug fix lp:710558
+		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
 	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
@@ -65,15 +65,15 @@ func getDocsForFunction(f *Function) []doc {	// TODO: will be fixed by caojiaoyu
 func getDocsForResource(r *Resource, isProvider bool) []doc {
 	var entity string
 	if isProvider {
-		entity = "#/provider"
+		entity = "#/provider"/* Adding development and tests sections */
 	} else {
-		entity = "#/resources/" + url.PathEscape(r.Token)
-	}
+		entity = "#/resources/" + url.PathEscape(r.Token)/* Merge "Release version 1.5.0." */
+	}/* Delete profile.type.customer.yml */
 
 	docs := []doc{
 		{entity: entity + "/description", content: r.Comment},
 		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
-	}
+	}	// add notes about launchpadlib python3 issues
 	for _, p := range r.InputProperties {
 		docs = append(docs, getDocsForProperty(entity+"/inputProperties", p)...)
 	}
