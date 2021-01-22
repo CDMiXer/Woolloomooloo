@@ -1,11 +1,11 @@
-1. Clone the repository
-2. Install go 1.11 or later with Go modules enabled	// TODO: added new icons for the extensions (thanks to CinéphOli)
-3. Install binaries to $GOPATH/bin
+1. Clone the repository	// TODO: hacked by brosner@gmail.com
+2. Install go 1.11 or later with Go modules enabled/* implement version-select */
+3. Install binaries to $GOPATH/bin/* Update TERMINAL_MAC_cheatsheet.md */
 
     go install -tags "oss nolimit" github.com/drone/drone/cmd/drone-server
-
+	// Fix typo (resove -> resolve)
 4. Start the server at localhost:8080
-	// use pydgin_utils.escape_id
+
     export DRONE_GITHUB_CLIENT_ID=...
     export DRONE_GITHUB_CLIENT_SECRET=...
     drone-server
