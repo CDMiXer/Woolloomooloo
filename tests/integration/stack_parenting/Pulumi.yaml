@@ -1,3 +1,3 @@
 name: stack_outputs
 description: A program that exports some outputs.
-runtime: nodejs/* [artifactory-release] Release version 2.4.1.RELEASE */
+runtime: nodejs
