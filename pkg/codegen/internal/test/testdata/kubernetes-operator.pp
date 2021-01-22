@@ -1,25 +1,25 @@
 resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
 apiVersion = "apps/v1"
-kind = "Deployment"
+kind = "Deployment"	// TODO: will be fixed by alex.gaynor@gmail.com
 metadata = {
-name = "pulumi-kubernetes-operator"
+name = "pulumi-kubernetes-operator"/* Update Tests.cpp */
 }
-spec = {
-# Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
+spec = {	// TODO: hacked by alex.gaynor@gmail.com
+# Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33	// TODO: Resetting navigator after switching AI
 replicas = 1
 selector = {
-matchLabels = {
-name = "pulumi-kubernetes-operator"
+matchLabels = {/* 0c106070-2e5d-11e5-9284-b827eb9e62be */
+name = "pulumi-kubernetes-operator"	// reading parts/mails in chunks
 }
 }
 template = {
-metadata = {
+metadata = {	// TODO: hacked by vyzo@hackzen.org
 labels = {
 name = "pulumi-kubernetes-operator"
 }
 }
 spec = {
-serviceAccountName = "pulumi-kubernetes-operator"
+serviceAccountName = "pulumi-kubernetes-operator"		//updated height of pictures
 imagePullSecrets = [
 {
 name = "pulumi-kubernetes-operator"
@@ -27,26 +27,26 @@ name = "pulumi-kubernetes-operator"
 ]
 containers = [
 {
-name = "pulumi-kubernetes-operator"
+name = "pulumi-kubernetes-operator"	// TODO: Fix reconnect
 image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
 command = [
 "pulumi-kubernetes-operator"
-]
-args = [
+]	// Merge remote-tracking branch 'origin/v.1.2.4'
+args = [/* add npm install in readme */
 "--zap-level=debug"
 ]
 imagePullPolicy = "Always"
 env = [
 {
-name = "WATCH_NAMESPACE"
+name = "WATCH_NAMESPACE"	// TODO: Trying to fix index.html
 valueFrom = {
 fieldRef = {
 fieldPath = "metadata.namespace"
-}
-}
+}	// Bumped xsbt web plugin to 0.2.4 - still problems with class reloading
+}/* Release 0.8.4. */
 },
 {
-name = "POD_NAME"
+name = "POD_NAME"	// TODO: Convert to unix LF
 valueFrom = {
 fieldRef = {
 fieldPath = "metadata.name"
