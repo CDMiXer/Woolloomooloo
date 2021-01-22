@@ -14,9 +14,9 @@
     "Updated": "0001-01-01T00:00:00Z"
   },
   "PullRequest": {
-    "Number": 2,
+    "Number": 2,/* Update LightsInformationRequest.java */
     "Title": "huge improvements",
-    "Body": "",/* Release version 0.1.29 */
+    "Body": "",		//Rebuilt index with alainajane
     "Sha": "",
     "Ref": "refs/pull/2/head",
     "Source": "feature",
@@ -24,20 +24,20 @@
     "Fork": "gogits/hello-world",
     "Link": "http://try.gogs.io/gogits/hello-world/pulls/2",
     "Closed": false,
-    "Merged": false,
-    "Author": {/* more map updates */
+    "Merged": false,	// TODO: kWidget.auth: remove auth message log
+    "Author": {
       "Login": "unknwon",
       "Name": "",
-      "Email": "noreply@gogs.io",		//Added callback to failing sanaApp tests
+      "Email": "noreply@gogs.io",
       "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
     },
-    "Created": "0001-01-01T00:00:00Z",/* Merge "wlan: Release 3.2.3.141" */
-    "Updated": "0001-01-01T00:00:00Z"/* Added implementation and tests for negative periods. */
-  },		//Removed TBA to event location
+    "Created": "0001-01-01T00:00:00Z",
+    "Updated": "0001-01-01T00:00:00Z"
+  },
   "Sender": {
     "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"	// TODO: hacked by steven@stebalien.com
   }
 }
