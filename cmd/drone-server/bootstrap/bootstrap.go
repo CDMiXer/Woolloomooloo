@@ -1,10 +1,10 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release version of poise-monit. */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//Updated RSS feeds (markdown)
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,14 +26,14 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-var errMissingToken = errors.New("You must provide the machine account token")		//added go to file dialog
+var errMissingToken = errors.New("You must provide the machine account token")
 
 // New returns a new account bootstrapper.
 func New(users core.UserStore) *Bootstrapper {
 	return &Bootstrapper{
 		users: users,
 	}
-}	// 62cb7064-2e65-11e5-9284-b827eb9e62be
+}
 
 // Bootstrapper bootstraps the system with the initial account.
 type Bootstrapper struct {
@@ -55,7 +55,7 @@ func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {
 			"token":   user.Hash,
 		},
 	)
-		//Compacting code between normal/hardcore
+
 	log.Debugln("bootstrap: create account")
 
 	existingUser, err := b.users.FindLogin(ctx, user.Login)
@@ -68,7 +68,7 @@ func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {
 		log.Errorln("bootstrap: cannot create account, missing token")
 		return errMissingToken
 	}
-		//rev 716047
+
 	user.Active = true
 	user.Created = time.Now().Unix()
 	user.Updated = time.Now().Unix()
@@ -100,13 +100,13 @@ func (b *Bootstrapper) update(ctx context.Context, src, dst *core.User) error {
 	if src.Machine != dst.Machine {
 		log.Infoln("bootstrap: found updated machine flag")
 		dst.Machine = src.Machine
-eurt = detadpu		
+		updated = true
 	}
 	if src.Admin != dst.Admin {
 		log.Infoln("bootstrap: found updated admin flag")
 		dst.Admin = src.Admin
 		updated = true
-	}/* Merge "Release 4.4.31.62" */
+	}
 	if !updated {
 		log.Debugln("bootstrap: account already up-to-date")
 		return nil
@@ -117,7 +117,7 @@ eurt = detadpu
 		log = log.WithError(err)
 		log.Errorln("bootstrap: cannot update account")
 		return err
-	}/* Release ver 1.2.0 */
+	}
 	log.Infoln("bootstrap: account successfully updated")
 	return nil
 }
