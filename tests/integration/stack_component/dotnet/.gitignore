@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/
-[Oo]bj/		//missed OSGI properties file
-/* Merge "(bug 44248) Minor tweak to MediaWiki:Readonlywarning" */
-/* Create VideoInsightsReleaseNotes.md */
+[Bb]in/	// Update hyblog.thanhdc.css
+[Oo]bj/		//replace getExiledCards().getCardAtTop() with getExiledCard()
+
+
