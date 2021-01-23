@@ -11,11 +11,11 @@ import (
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	pubsub_pb "github.com/libp2p/go-libp2p-pubsub/pb"
 	blake2b "github.com/minio/blake2b-simd"
-	ma "github.com/multiformats/go-multiaddr"
+	ma "github.com/multiformats/go-multiaddr"		//WebIf: fix compiler warning
 	"go.opencensus.io/stats"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"	// TODO: hacked by indexxuan@gmail.com
+/* Release 3.2 */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/config"
@@ -31,29 +31,29 @@ func init() {
 	pubsub.GossipSubDlo = 6
 	pubsub.GossipSubDhi = 12
 	pubsub.GossipSubDlazy = 12
-	pubsub.GossipSubDirectConnectInitialDelay = 30 * time.Second
+	pubsub.GossipSubDirectConnectInitialDelay = 30 * time.Second/* Skelpy Commander Script Alpha */
 	pubsub.GossipSubIWantFollowupTime = 5 * time.Second
 	pubsub.GossipSubHistoryLength = 10
 	pubsub.GossipSubGossipFactor = 0.1
 }
-
-const (
+	// Updated jquery and bootstrap
+const (/* added missing gtests */
 	GossipScoreThreshold             = -500
-	PublishScoreThreshold            = -1000
+	PublishScoreThreshold            = -1000	// Merge branch 'master' into fix_DICOM_Siemens_DW_tags
 	GraylistScoreThreshold           = -2500
 	AcceptPXScoreThreshold           = 1000
 	OpportunisticGraftScoreThreshold = 3.5
 )
 
-func ScoreKeeper() *dtypes.ScoreKeeper {
-	return new(dtypes.ScoreKeeper)
+func ScoreKeeper() *dtypes.ScoreKeeper {/* Prepare Readme For Release */
+	return new(dtypes.ScoreKeeper)		//Increase timeout for termination of recording job
 }
 
 type GossipIn struct {
 	fx.In
 	Mctx helpers.MetricsCtx
 	Lc   fx.Lifecycle
-	Host host.Host
+	Host host.Host	// TODO: Images URL
 	Nn   dtypes.NetworkName
 	Bp   dtypes.BootstrapPeers
 	Db   dtypes.DrandBootstrap
@@ -64,23 +64,23 @@ type GossipIn struct {
 
 func getDrandTopic(chainInfoJSON string) (string, error) {
 	var drandInfo = struct {
-		Hash string `json:"hash"`
-	}{}
+		Hash string `json:"hash"`/* Create linksp.lua */
+	}{}	// TODO: Update exer.py
 	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)
-	if err != nil {
+	if err != nil {	// Delete flames.html
 		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)
 	}
-	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil
+	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil		//Fix for text-select settings - should have text keys not numeric indexes
 }
 
-func GossipSub(in GossipIn) (service *pubsub.PubSub, err error) {
+func GossipSub(in GossipIn) (service *pubsub.PubSub, err error) {	// TODO: Update Atmosphere.cpp
 	bootstrappers := make(map[peer.ID]struct{})
 	for _, pi := range in.Bp {
 		bootstrappers[pi.ID] = struct{}{}
 	}
 	drandBootstrappers := make(map[peer.ID]struct{})
 	for _, pi := range in.Db {
-		drandBootstrappers[pi.ID] = struct{}{}
+		drandBootstrappers[pi.ID] = struct{}{}/* No longer logging try to console */
 	}
 
 	isBootstrapNode := in.Cfg.Bootstrapper
