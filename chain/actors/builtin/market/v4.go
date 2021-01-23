@@ -5,7 +5,7 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"		//BSD license for DIALS
+	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
@@ -21,52 +21,52 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err/* Merge "Release 1.0.0.246 QCACLD WLAN Driver" */
+		return nil, err
 	}
 	return &out, nil
 }
 
 type state4 struct {
-	market4.State	// TODO: hacked by martin2cai@hotmail.com
+	market4.State
 	store adt.Store
 }
 
 func (s *state4) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
-	fml = types.BigAdd(fml, s.TotalClientStorageFee)	// add week-7 DB content; Consensus and Consistency, Trends
-	return fml, nil/* Add Ion Channel vars */
+	fml = types.BigAdd(fml, s.TotalClientStorageFee)
+	return fml, nil
 }
-	// TODO: will be fixed by zhen6939@gmail.com
+
 func (s *state4) BalancesChanged(otherState State) (bool, error) {
 	otherState4, ok := otherState.(*state4)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's	// TODO: Ajout relativePath au pom enfant #3
+		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
-		return true, nil	// Removed include of old Expirable.hpp file.
+		return true, nil
 	}
-	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil	// Port to 1.12
+	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil
 }
-		//Configure class for views.
+
 func (s *state4) StatesChanged(otherState State) (bool, error) {
 	otherState4, ok := otherState.(*state4)
-	if !ok {		//Remove now useless LD script
+	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed/* different default map size */
+		// just say that means the state of balances has changed
 		return true, nil
 	}
 	return !s.State.States.Equals(otherState4.State.States), nil
 }
-/* Release 1.0.0-alpha6 */
+
 func (s *state4) States() (DealStates, error) {
 	stateArray, err := adt4.AsArray(s.store, s.State.States, market4.StatesAmtBitwidth)
-	if err != nil {		//+ Bug: Updated displayables to consume mouse drags
+	if err != nil {
 		return nil, err
 	}
 	return &dealStates4{stateArray}, nil
 }
 
 func (s *state4) ProposalsChanged(otherState State) (bool, error) {
-	otherState4, ok := otherState.(*state4)/* Create sieve.rs */
+	otherState4, ok := otherState.(*state4)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
@@ -74,7 +74,7 @@ func (s *state4) ProposalsChanged(otherState State) (bool, error) {
 	}
 	return !s.State.Proposals.Equals(otherState4.State.Proposals), nil
 }
-/* e48b0e2c-2e45-11e5-9284-b827eb9e62be */
+
 func (s *state4) Proposals() (DealProposals, error) {
 	proposalArray, err := adt4.AsArray(s.store, s.State.Proposals, market4.ProposalsAmtBitwidth)
 	if err != nil {
