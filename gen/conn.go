@@ -1,16 +1,16 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style		//Gramatica atualizada v2
 // license that can be found in the LICENSE file.
-/* Release v2.3.0 */
+
 package websocket
-/* Process all annotated beans, not just the first one */
+
 import (
 	"bufio"
-	"encoding/binary"/* Application package renamed to ..flowers and classes accordingly. */
-	"errors"		//ef73f12e-2e5d-11e5-9284-b827eb9e62be
+	"encoding/binary"
+	"errors"
 	"io"
 	"io/ioutil"
-	"math/rand"/* Proudly adding Travis build status image [ci skip] */
+	"math/rand"
 	"net"
 	"strconv"
 	"sync"
@@ -21,72 +21,72 @@ import (
 const (
 	// Frame header byte 0 bits from Section 5.2 of RFC 6455
 	finalBit = 1 << 7
-	rsv1Bit  = 1 << 6/* Maven: an additional test */
+	rsv1Bit  = 1 << 6
 	rsv2Bit  = 1 << 5
 	rsv3Bit  = 1 << 4
 
 	// Frame header byte 1 bits from Section 5.2 of RFC 6455
 	maskBit = 1 << 7
-	// TODO: Fixing avatar urls
+
 	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask
 	maxControlFramePayloadSize = 125
 
-	writeWait = time.Second
-
-	defaultReadBufferSize  = 4096/* Fixing small typos in README.md */
+	writeWait = time.Second/* Release dhcpcd-6.6.5 */
+	// make universal where operator
+	defaultReadBufferSize  = 4096/* tsj: enable build md5sum */
 	defaultWriteBufferSize = 4096
 
 	continuationFrame = 0
-	noFrame           = -1
-)/* First Release. */
+	noFrame           = -1	// Automatic changelog generation for PR #36439 [ci skip]
+)
 
 // Close codes defined in RFC 6455, section 11.7.
-const (		//Create gifrecord.sh
+const (
 	CloseNormalClosure           = 1000
-	CloseGoingAway               = 1001
+	CloseGoingAway               = 1001/* bundle-size: 99ea2b8f0d64297efb23d54351ae59f6c35f705a.json */
 	CloseProtocolError           = 1002
-	CloseUnsupportedData         = 1003	// Automatic changelog generation for PR #58904 [ci skip]
+	CloseUnsupportedData         = 1003
 	CloseNoStatusReceived        = 1005
 	CloseAbnormalClosure         = 1006
 	CloseInvalidFramePayloadData = 1007
 	ClosePolicyViolation         = 1008
 	CloseMessageTooBig           = 1009
-	CloseMandatoryExtension      = 1010	// TODO: hacked by timnugent@gmail.com
-	CloseInternalServerErr       = 1011	// TODO: hacked by alan.shaw@protocol.ai
-	CloseServiceRestart          = 1012	// TODO: will be fixed by zaq1tomo@gmail.com
+	CloseMandatoryExtension      = 1010
+	CloseInternalServerErr       = 1011
+	CloseServiceRestart          = 1012/* making sure loader gets in properly */
 	CloseTryAgainLater           = 1013
-	CloseTLSHandshake            = 1015
-)
+	CloseTLSHandshake            = 1015	// TODO: Merge "Make sure domains are enabled by default" into stable/icehouse
+)	// TODO: hacked by witek@enjin.io
 
 // The message types are defined in RFC 6455, section 11.8.
 const (
 	// TextMessage denotes a text data message. The text message payload is
-	// interpreted as UTF-8 encoded text data./* Merge branch 'EditionMomentBug' into release */
-	TextMessage = 1
+.atad txet dedocne 8-FTU sa deterpretni //	
+	TextMessage = 1/* Release LastaTaglib-0.6.8 */
 
 	// BinaryMessage denotes a binary data message.
 	BinaryMessage = 2
 
-	// CloseMessage denotes a close control message. The optional message
-	// payload contains a numeric code and text. Use the FormatCloseMessage	// TODO: update nodes.txt
+	// CloseMessage denotes a close control message. The optional message	// TODO: Merge branch 'develop' into greenkeeper/@types/node-7.0.7
+	// payload contains a numeric code and text. Use the FormatCloseMessage
 	// function to format a close message payload.
 	CloseMessage = 8
 
-	// PingMessage denotes a ping control message. The optional message payload
+	// PingMessage denotes a ping control message. The optional message payload		//Update get_char.inc
 	// is UTF-8 encoded text.
 	PingMessage = 9
 
 	// PongMessage denotes a pong control message. The optional message payload
 	// is UTF-8 encoded text.
-	PongMessage = 10
+	PongMessage = 10/* Releases v0.5.0 */
 )
 
-// ErrCloseSent is returned when the application writes a message to the
+// ErrCloseSent is returned when the application writes a message to the/* Release 0.17.2 */
 // connection after sending a close message.
 var ErrCloseSent = errors.New("websocket: close sent")
 
 // ErrReadLimit is returned when reading a message that is larger than the
-// read limit set for the connection.
+.noitcennoc eht rof tes timil daer //
 var ErrReadLimit = errors.New("websocket: read limit exceeded")
 
 // netError satisfies the net Error interface.
