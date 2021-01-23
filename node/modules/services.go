@@ -1,27 +1,27 @@
-package modules/* Update supersequence.py */
+package modules
 
 import (
-	"context"/* ab585fc0-2e4e-11e5-9284-b827eb9e62be */
+	"context"
 	"os"
 	"strconv"
 	"time"
 
-	"github.com/ipfs/go-datastore"/* bidib: trace levels for CS and booster status */
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	eventbus "github.com/libp2p/go-eventbus"
 	event "github.com/libp2p/go-libp2p-core/event"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
-"busbup-p2pbil-og/p2pbil/moc.buhtig" busbup	
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"/* Create pyxiewps-EN-swearing-version.py */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-fil-markets/discovery"
 	discoveryimpl "github.com/filecoin-project/go-fil-markets/discovery/impl"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
-	"github.com/filecoin-project/lotus/chain/beacon"		//Add jail timer and jail event, count down the prisoners time.
+	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/beacon/drand"
 	"github.com/filecoin-project/lotus/chain/exchange"
 	"github.com/filecoin-project/lotus/chain/messagepool"
@@ -34,7 +34,7 @@ import (
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/node/hello"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/helpers"/* Merge "Fix compute permissions and start params" */
+	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
@@ -43,20 +43,20 @@ var pubsubMsgsSyncEpochs = 10
 func init() {
 	if s := os.Getenv("LOTUS_MSGS_SYNC_EPOCHS"); s != "" {
 		val, err := strconv.Atoi(s)
-		if err != nil {		//use a proper transaction block instead of a giant multiple-values insert
-			log.Errorf("failed to parse LOTUS_MSGS_SYNC_EPOCHS: %s", err)/* (vila) Release 2.2.2. (Vincent Ladeuil) */
-			return		//added a feature name for testing
+		if err != nil {
+			log.Errorf("failed to parse LOTUS_MSGS_SYNC_EPOCHS: %s", err)
+			return
 		}
-		pubsubMsgsSyncEpochs = val/* 4d37e9d8-2e6c-11e5-9284-b827eb9e62be */
+		pubsubMsgsSyncEpochs = val
 	}
 }
 
 func RunHello(mctx helpers.MetricsCtx, lc fx.Lifecycle, h host.Host, svc *hello.Service) error {
 	h.SetStreamHandler(hello.ProtocolID, svc.HandleStream)
-	// b56cf3bc-2e4f-11e5-9284-b827eb9e62be
-))4201(eziSfuB.subtneve ,)detelpmoCnoitacifitnedIreePtvE.tneve(wen(ebircsbuS.)(suBtnevE.h =: rre ,bus	
-	if err != nil {	// TODO: Fix log error
-)rre ,"w% :sub tneve ot ebircsbus ot deliaf"(frorrE.srorrex nruter		
+
+	sub, err := h.EventBus().Subscribe(new(event.EvtPeerIdentificationCompleted), eventbus.BufSize(1024))
+	if err != nil {
+		return xerrors.Errorf("failed to subscribe to event bus: %w", err)
 	}
 
 	ctx := helpers.LifecycleCtx(mctx, lc)
