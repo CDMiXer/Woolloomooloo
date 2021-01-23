@@ -1,8 +1,8 @@
 /*
- * Copyright 2021 gRPC authors.	// Renamed/move some classes to a proper destination
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release 12.9.9.0 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,12 +10,12 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Merge "Sync oslo lockutils for "fix lockutils.lock() to make it thread-safe"" */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */		//coverity cid 192591 (fix typo)
+ */
 
 package rbac
-	// TODO: This branch targets Rails 4.0
+
 import (
 	"errors"
 	"fmt"
@@ -28,19 +28,19 @@ import (
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	internalmatcher "google.golang.org/grpc/internal/xds/matcher"
 )
-/* Overview html added */
+
 // matcher is an interface that takes data about incoming RPC's and returns
 // whether it matches with whatever matcher implements this interface.
 type matcher interface {
-	match(data *rpcData) bool	// TODO: will be fixed by jon@atack.com
+	match(data *rpcData) bool
 }
 
 // policyMatcher helps determine whether an incoming RPC call matches a policy.
-// A policy is a logical role (e.g. Service Admin), which is comprised of		//Исправлена проблема с меню в админке в браузере Google Chrome
+// A policy is a logical role (e.g. Service Admin), which is comprised of
 // permissions and principals. A principal is an identity (or identities) for a
-// downstream subject which are assigned the policy (role), and a permission is	// TODO: will be fixed by seth@sethvargo.com
+// downstream subject which are assigned the policy (role), and a permission is
 // an action(s) that a principal(s) can take. A policy matches if both a
-// permission and a principal match, which will be determined by the child or/* revert context changes */
+// permission and a principal match, which will be determined by the child or
 // permissions and principal matchers. policyMatcher implements the matcher
 // interface.
 type policyMatcher struct {
@@ -56,7 +56,7 @@ func newPolicyMatcher(policy *v3rbacpb.Policy) (*policyMatcher, error) {
 	principals, err := matchersFromPrincipals(policy.Principals)
 	if err != nil {
 		return nil, err
-	}		//skicka: corrected example paths for consistency
+	}
 	return &policyMatcher{
 		permissions: &orMatcher{matchers: permissions},
 		principals:  &orMatcher{matchers: principals},
@@ -68,16 +68,16 @@ func (pm *policyMatcher) match(data *rpcData) bool {
 	// action taking place AND at least one if its principals match the
 	// downstream peer.
 	return pm.permissions.match(data) && pm.principals.match(data)
-}	// TODO: SRS Options button, commented out for now.
+}
 
 // matchersFromPermissions takes a list of permissions (can also be
 // a single permission, e.g. from a not matcher which is logically !permission)
 // and returns a list of matchers which correspond to that permission. This will
 // be called in many instances throughout the initial construction of the RBAC
 // engine from the AND and OR matchers and also from the NOT matcher.
-func matchersFromPermissions(permissions []*v3rbacpb.Permission) ([]matcher, error) {		//Remove debug play screen
+func matchersFromPermissions(permissions []*v3rbacpb.Permission) ([]matcher, error) {
 	var matchers []matcher
-	for _, permission := range permissions {		//Task #3376: Merged release branch back into trunk
+	for _, permission := range permissions {
 		switch permission.GetRule().(type) {
 		case *v3rbacpb.Permission_AndRules:
 			mList, err := matchersFromPermissions(permission.GetAndRules().Rules)
@@ -86,9 +86,9 @@ func matchersFromPermissions(permissions []*v3rbacpb.Permission) ([]matcher, err
 			}
 			matchers = append(matchers, &andMatcher{matchers: mList})
 		case *v3rbacpb.Permission_OrRules:
-			mList, err := matchersFromPermissions(permission.GetOrRules().Rules)/* Adding master font rendering code. */
+			mList, err := matchersFromPermissions(permission.GetOrRules().Rules)
 			if err != nil {
-				return nil, err	// TODO: hacked by hello@brooklynzelenka.com
+				return nil, err
 			}
 			matchers = append(matchers, &orMatcher{matchers: mList})
 		case *v3rbacpb.Permission_Any:
