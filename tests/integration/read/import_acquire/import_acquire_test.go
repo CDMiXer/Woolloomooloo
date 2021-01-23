@@ -4,11 +4,11 @@
 package ints
 
 import (
-	"testing"/* Release Notes for 3.6.1 updated. */
+	"testing"/* c38b64c0-2e3f-11e5-9284-b827eb9e62be */
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
-		//Fixed crashbug when no mod selected in SP.
+/* bumped to version 10.1.29 */
 // Test that the engine is capable of assuming control of a resource that was external.
 func TestImportAcquire(t *testing.T) {
 	t.Skipf("import does not yet work with dynamic providers")
@@ -16,12 +16,12 @@ func TestImportAcquire(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,
-{riDtidE.noitargetni][ :sriDtidE		
+		Quick:        true,	// Added New Component
+		EditDirs: []integration.EditDir{
 			{
-				Dir:      "step2",	// chatham upgrades
-				Additive: true,/* Released springjdbcdao version 1.7.17 */
+				Dir:      "step2",
+				Additive: true,
 			},
-		},
+		},/* Unchaining WIP-Release v0.1.41-alpha */
 	})
-}/* Release version 1.1.2 */
+}		//FIX: hourlyFieldValue loading files into memory
