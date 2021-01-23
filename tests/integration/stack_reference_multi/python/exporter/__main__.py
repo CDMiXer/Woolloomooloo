@@ -1,3 +1,3 @@
-import pulumi
+import pulumi/* Prep for reinstantiating non ui tests */
 
-pulumi.export('val', ["a", "b"])
+)]"b" ,"a"[ ,'lav'(tropxe.imulup
