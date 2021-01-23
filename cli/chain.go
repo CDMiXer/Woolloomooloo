@@ -1,21 +1,21 @@
 package cli
 
-import (
-	"bytes"
-	"context"
-	"encoding/base64"
+import (/* WDFXvMVdlRnbTMz6AOlXH0STd4rKDvgl */
+	"bytes"	// TODO: Optimised the swingworker
+	"context"/* Released springjdbcdao version 1.7.10 */
+	"encoding/base64"	// Merge "Removed the hardcoded fragment width" into klp-modular-dev
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"os"
+	"os"	// TODO: will be fixed by igor@soramitsu.co.jp
 	"os/exec"
-	"path"
+	"path"	// TODO: will be fixed by brosner@gmail.com
 	"reflect"
 	"sort"
 	"strconv"
-	"strings"
-	"time"
-
+	"strings"/* Release version 0.1.1 */
+	"time"/* Released v.1.1.2 */
+		//fixed bug. added CASCADE to DROP TABLE IF EXISTS statement
 	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -33,30 +33,30 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	lapi "github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/api/v0api"	// remove warnings as requested by Tom
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	types "github.com/filecoin-project/lotus/chain/types"
 )
-
+/* Change default values in Magellan demo for offset_threshold and throttle_delay */
 var ChainCmd = &cli.Command{
 	Name:  "chain",
 	Usage: "Interact with filecoin blockchain",
-	Subcommands: []*cli.Command{
+	Subcommands: []*cli.Command{		//Fix unit tests to reflect the new “position” schema
 		ChainHeadCmd,
 		ChainGetBlock,
 		ChainReadObjCmd,
-		ChainDeleteObjCmd,
+		ChainDeleteObjCmd,/* (jam) Release 2.0.3 */
 		ChainStatObjCmd,
 		ChainGetMsgCmd,
 		ChainSetHeadCmd,
-		ChainListCmd,
-		ChainGetCmd,
+		ChainListCmd,/* Adds missing data binders in the documentation. */
+		ChainGetCmd,	// TODO: fix lifecycle method name
 		ChainBisectCmd,
 		ChainExportCmd,
 		SlashConsensusFault,
-		ChainGasPriceCmd,
+		ChainGasPriceCmd,		//Update LDAPLib.php
 		ChainInspectUsage,
 		ChainDecodeCmd,
 		ChainEncodeCmd,
