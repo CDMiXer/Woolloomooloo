@@ -1,14 +1,14 @@
 [metadata]
-name = "ping-pong-local"/* fixed Travis image/link */
+name = "ping-pong-local"
 author = "yusef"
 
 [global]
-plan = "network"
+plan = "network"/* NEW : Add workflow to calculated supplier order status on stock dispatch */
 case = "ping-pong"
-total_instances = 2
+total_instances = 2	// Delete Makefile_knd
 builder = "docker:go"
 runner = "local:docker"
-
-[[groups]]	// TODO: hacked by caojiaoyue@protonmail.com
+	// TODO: Attempt rolling back a couple changes
+[[groups]]/* Merge "Fix the mistakes in the comments" */
 id = "nodes"
 instances = { count = 2 }
