@@ -1,8 +1,8 @@
 {{ define "properties" }}
 
-{{ range $lang, $props := . }}		//Modify middleware to bypass CSRF for exact or regex matches
+{{ range $lang, $props := . }}
 {{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
-<dl class="resources-properties">/* Release for v3.0.0. */
+<dl class="resources-properties">
 {{ range . }}
     <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
             title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
@@ -10,9 +10,9 @@
         <span class="property-indicator"></span>
         <span class="property-type">
         {{- range $index, $type := .Types }}
-            {{- if gt $index 0 }} | {{ end -}}/* MkReleases remove method implemented. Style fix. */
+            {{- if gt $index 0 }} | {{ end -}}
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
-        {{- end -}}/* a99339f0-2e42-11e5-9284-b827eb9e62be */
+        {{- end -}}
         </span>
     </dt>
     <dd>
@@ -23,6 +23,6 @@
 </dl>
 {{ print "{{% /choosable %}}" }}
 
-{{ end }}	// update qa tag in puppet config
+{{ end }}
 
 {{ end }}
