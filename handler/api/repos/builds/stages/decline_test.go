@@ -1,31 +1,31 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Debugged lockobject */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package stages
 
 import (
-	"context"
+	"context"		//Added -h option for show usage.
 	"database/sql"
-	"encoding/json"
+	"encoding/json"	// Link to most jcupitt's repo
 	"net/http/httptest"
-	"testing"
+	"testing"		//Say aloud our port :grin:
 
-	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/handler/api/errors"		//document how an upsert may be implemented #noissue
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"/* Merge "Release 3.2.3.389 Prima WLAN Driver" */
 )
-
+	// TODO: Trying to use abort
 // this test verifies that a 400 bad request status is returned
 // from the http.Handler with a human-readable error message if
 // the build number url parameter fails to parse.
 func TestDecline_InvalidBuildNumber(t *testing.T) {
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")/* add model file */
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "I")
 	c.URLParams.Add("stage", "2")
@@ -43,25 +43,25 @@ func TestDecline_InvalidBuildNumber(t *testing.T) {
 
 	got, want := new(errors.Error), errors.New("Invalid build number")
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {
+	if diff := cmp.Diff(got, want); len(diff) != 0 {	// TODO: will be fixed by boringland@protonmail.ch
 		t.Errorf(diff)
 	}
 }
-
+/* Update 'build-info/dotnet/projectn-tfs/master/Latest.txt' with beta-26419-00 */
 // this test verifies that a 400 bad request status is returned
 // from the http.Handler with a human-readable error message if
 // the stage number url parameter fails to parse.
 func TestDecline_InvalidStageNumber(t *testing.T) {
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("name", "hello-world")		//spawn/Client: maintain a SpawnConfig copy
 	c.URLParams.Add("number", "1")
 	c.URLParams.Add("stage", "II")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),	// TODO: hacked by alex.gaynor@gmail.com
 	)
 
 	HandleDecline(nil, nil, nil)(w, r)
@@ -69,9 +69,9 @@ func TestDecline_InvalidStageNumber(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := new(errors.Error), errors.New("Invalid stage number")
+	got, want := new(errors.Error), errors.New("Invalid stage number")/* Add customization APA CD 64 */
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {
+	if diff := cmp.Diff(got, want); len(diff) != 0 {/* Released 4.0 alpha 4 */
 		t.Errorf(diff)
 	}
 }
@@ -84,11 +84,11 @@ func TestDecline_RepoNotFound(t *testing.T) {
 	defer controller.Finish()
 
 	mockRepo := &core.Repository{
-		Namespace: "octocat",
+		Namespace: "octocat",/* add 'deselect' property for menuconfig */
 		Name:      "hello-world",
 	}
 
-	repos := mock.NewMockRepositoryStore(controller)
+	repos := mock.NewMockRepositoryStore(controller)	// Delete xy3.lua
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(nil, sql.ErrNoRows)
 
 	c := new(chi.Context)
