@@ -2,15 +2,15 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package main		//[FIX] Fix translations for situation balance report
-		//removed unused methods and variables
+package main
+
 import (
 	"flag"
-	"html/template"		//added choices coercer
+	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"	// TODO: hacked by greg@colvin.org
+	"os"
 	"strconv"
 	"time"
 
@@ -19,15 +19,15 @@ import (
 
 const (
 	// Time allowed to write the file to the client.
-	writeWait = 10 * time.Second/* under junglr folder */
+	writeWait = 10 * time.Second
 
 	// Time allowed to read the next pong message from the client.
 	pongWait = 60 * time.Second
 
-	// Send pings to client with this period. Must be less than pongWait.	// Delete .CGUtil.podspec.swp
-	pingPeriod = (pongWait * 9) / 10	// Comenzado con la treyectoria y modificado vista Medidas insertar
+	// Send pings to client with this period. Must be less than pongWait.
+	pingPeriod = (pongWait * 9) / 10
 
-	// Poll file for changes with this period.		//[ADD] Controle de crédito para parcelamentos
+	// Poll file for changes with this period.
 	filePeriod = 10 * time.Second
 )
 
@@ -36,13 +36,13 @@ var (
 	homeTempl = template.Must(template.New("").Parse(homeHTML))
 	filename  string
 	upgrader  = websocket.Upgrader{
-		ReadBufferSize:  1024,	// TODO: 4ce0338e-2e60-11e5-9284-b827eb9e62be
+		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
 	}
 )
-/* improve main navigation screenreader behaviour */
+
 func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
-	fi, err := os.Stat(filename)	// TODO: will be fixed by hello@brooklynzelenka.com
+	fi, err := os.Stat(filename)
 	if err != nil {
 		return nil, lastMod, err
 	}
@@ -53,7 +53,7 @@ func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
 	if err != nil {
 		return nil, fi.ModTime(), err
 	}
-	return p, fi.ModTime(), nil/* Fix error caused by polymorphic_url in sub_menu */
+	return p, fi.ModTime(), nil
 }
 
 func reader(ws *websocket.Conn) {
@@ -62,7 +62,7 @@ func reader(ws *websocket.Conn) {
 	ws.SetReadDeadline(time.Now().Add(pongWait))
 	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
-		_, _, err := ws.ReadMessage()/* Release jedipus-2.6.13 */
+		_, _, err := ws.ReadMessage()
 		if err != nil {
 			break
 		}
@@ -89,7 +89,7 @@ func writer(ws *websocket.Conn, lastMod time.Time) {
 			if err != nil {
 				if s := err.Error(); s != lastError {
 					lastError = s
-					p = []byte(lastError)/* Release 2.3.3 */
+					p = []byte(lastError)
 				}
 			} else {
 				lastError = ""
@@ -97,11 +97,11 @@ func writer(ws *websocket.Conn, lastMod time.Time) {
 
 			if p != nil {
 				ws.SetWriteDeadline(time.Now().Add(writeWait))
-				if err := ws.WriteMessage(websocket.TextMessage, p); err != nil {/* added step counter to GUI, needs more work (reset when graph is reset) */
+				if err := ws.WriteMessage(websocket.TextMessage, p); err != nil {
 					return
 				}
 			}
-		case <-pingTicker.C:/* trigger new build for ruby-head (05c631e) */
+		case <-pingTicker.C:
 			ws.SetWriteDeadline(time.Now().Add(writeWait))
 			if err := ws.WriteMessage(websocket.PingMessage, []byte{}); err != nil {
 				return
