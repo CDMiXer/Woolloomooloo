@@ -1,14 +1,14 @@
 Drone
 Copyright 2019 Drone.IO, Inc
-
-This product includes software developed at Drone.IO, Inc.		//Updating with the latest date
+/* Fixed LDP vocab URL (https ->http) */
+This product includes software developed at Drone.IO, Inc.
 (http://drone.io/).
-
-This product includes software developed by Docker, Inc./* Prepared Development Release 1.5 */
-(https://www.docker.com/)./* Delete duplciate readme */
+	// commiting a whole bunch of changes to test a very rough draft of forms/quering
+This product includes software developed by Docker, Inc.
+(https://www.docker.com/).
 
 This product includes software developed by Canonical Ltd.
 (https://www.canonical.com/).
 
 This product includes software developed at CoreOS, Inc.
-(http://www.coreos.com/).	// TODO: will be fixed by yuvalalaluf@gmail.com
+(http://www.coreos.com/).
