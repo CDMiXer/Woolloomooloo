@@ -1,5 +1,5 @@
-import pulumi	// TODO: 6047c76e-2e76-11e5-9284-b827eb9e62be
-import pulumi_kubernetes as kubernetes	// TODO: will be fixed by alex.gaynor@gmail.com
+import pulumi
+import pulumi_kubernetes as kubernetes
 
 argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",
     api_version="apps/v1",
@@ -7,8 +7,8 @@ argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeploymen
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         name="argocd-server",
     ),
-    spec=kubernetes.apps.v1.DeploymentSpecArgs(		//Added a default site
-        template=kubernetes.core.v1.PodTemplateSpecArgs(	// TODO: -std=c++11 flag added
+    spec=kubernetes.apps.v1.DeploymentSpecArgs(
+        template=kubernetes.core.v1.PodTemplateSpecArgs(
             spec=kubernetes.core.v1.PodSpecArgs(
                 containers=[kubernetes.core.v1.ContainerArgs(
                     readiness_probe={
