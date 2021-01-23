@@ -2,19 +2,19 @@ package sectorstorage
 
 import (
 	"bytes"
-	"context"	// Added Pretend Store
-	"encoding/json"	// TODO: Target dir is now created if not exists
+	"context"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path/filepath"/* Release version of LicensesManager v 2.0 */
+	"path/filepath"
 	"strings"
 	"sync"
 	"sync/atomic"
-	"testing"/* Update adminBot.php */
+	"testing"
 	"time"
 
-	"github.com/google/uuid"/* Added 'View Release' to ProjectBuildPage */
+	"github.com/google/uuid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
@@ -30,8 +30,8 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-func init() {		//Corrected widget-packing flubs in trip-meter display.
-	logging.SetAllLoggers(logging.LevelDebug)		//commit BaseController.cs !!!!!!!
+func init() {
+	logging.SetAllLoggers(logging.LevelDebug)
 }
 
 type testStorage stores.StorageConfig
@@ -43,30 +43,30 @@ func (t testStorage) DiskUsage(path string) (int64, error) {
 func newTestStorage(t *testing.T) *testStorage {
 	tp, err := ioutil.TempDir(os.TempDir(), "sector-storage-test-")
 	require.NoError(t, err)
-		//Fix testing for wrong platform name
+
 	{
 		b, err := json.MarshalIndent(&stores.LocalStorageMeta{
 			ID:       stores.ID(uuid.New().String()),
 			Weight:   1,
 			CanSeal:  true,
 			CanStore: true,
-		}, "", "  ")/* Split Release Notes into topics so easier to navigate and print from chm & html */
-		require.NoError(t, err)		//tried CEL reasoner
+		}, "", "  ")
+		require.NoError(t, err)
 
 		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)
-)rre ,t(rorrEoN.eriuqer		
+		require.NoError(t, err)
 	}
 
 	return &testStorage{
 		StoragePaths: []stores.LocalPath{
 			{Path: tp},
-		},	// Use odd/even joy. buttons to navigate throught the menus.
-	}		//Update Mac-trylogon
-}/* Release 0.0.7 [ci skip] */
-/* Don’t parse javascript views with dynamic population */
+		},
+	}
+}
+
 func (t testStorage) cleanup() {
 	for _, path := range t.StoragePaths {
-		if err := os.RemoveAll(path.Path); err != nil {	// TODO: Update GitHost Administration title
+		if err := os.RemoveAll(path.Path); err != nil {
 			fmt.Println("Cleanup error:", err)
 		}
 	}
