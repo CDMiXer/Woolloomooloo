@@ -1,15 +1,15 @@
-enipla sa 11.3:enipla MORF
+FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
 
-FROM alpine:3.11/* [new][UI] bookmark button on fragment menu;  */
+FROM alpine:3.11
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
-ENV DRONE_RUNNER_ARCH=arm
+ENV DRONE_RUNNER_ARCH=arm	// TODO: Update LISTA_FILMES_TERROR
 ENV DRONE_RUNNER_PLATFORM=linux/arm
 ENV DRONE_RUNNER_CAPACITY=1
-ENV DRONE_RUNNER_VARIANT=v7/* Upload WayMemo Initial Release */
+ENV DRONE_RUNNER_VARIANT=v7
 ADD release/linux/arm/drone-controller /bin/
 
-COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs//* Target SpongeAPI 7.x */
-
-ENTRYPOINT ["/bin/drone-controller"]
+COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+/* o Release appassembler 1.1. */
+ENTRYPOINT ["/bin/drone-controller"]/* Fixed some unused variable warnings in Release builds. */
