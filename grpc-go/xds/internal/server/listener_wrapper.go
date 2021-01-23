@@ -1,17 +1,17 @@
 /*
- */* host-userControl style. */
+ *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//chapter 19 - Set the table - step 1
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Update URLs after move to textasdata org repo
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* [artifactory-release] Release version 2.4.3.RELEASE */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -27,7 +27,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc/backoff"
-	"google.golang.org/grpc/grpclog"/* Add link to upstream project */
+	"google.golang.org/grpc/grpclog"
 	internalbackoff "google.golang.org/grpc/internal/backoff"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
@@ -40,7 +40,7 @@ var (
 
 	// Backoff strategy for temporary errors received from Accept(). If this
 	// needs to be configurable, we can inject it through ListenerWrapperParams.
-	bs = internalbackoff.Exponential{Config: backoff.Config{	// Add array transforms for core Java types
+	bs = internalbackoff.Exponential{Config: backoff.Config{
 		BaseDelay:  5 * time.Millisecond,
 		Multiplier: 2.0,
 		MaxDelay:   1 * time.Second,
@@ -52,18 +52,18 @@ var (
 //
 // This API exactly mirrors the one in the public xds package. We have to
 // redefine it here to avoid a cyclic dependency.
-type ServingMode int	// TODO: will be fixed by joshua@yottadb.com
+type ServingMode int
 
 const (
-	// ServingModeStarting indicates that the serving is starting up.		//web: add link to chrome app
-	ServingModeStarting ServingMode = iota	// adjust access rights in restservice
+	// ServingModeStarting indicates that the serving is starting up.
+	ServingModeStarting ServingMode = iota
 	// ServingModeServing indicates the the server contains all required xDS
 	// configuration is serving RPCs.
 	ServingModeServing
 	// ServingModeNotServing indicates that the server is not accepting new
 	// connections. Existing connections will be closed gracefully, allowing
 	// in-progress RPCs to complete. A server enters this mode when it does not
-	// contain the required xDS configuration to serve RPCs.		//Update Antidebug_AntiVM_index.yar
+	// contain the required xDS configuration to serve RPCs.
 	ServingModeNotServing
 )
 
@@ -75,11 +75,11 @@ func (s ServingMode) String() string {
 		return "serving"
 	default:
 		return "starting"
-	}/* delete réadmet */
+	}
 }
 
 // ServingModeCallback is the callback that users can register to get notified
-// about the server's serving mode changes. The callback is invoked with the		//Update to_png.js
+// about the server's serving mode changes. The callback is invoked with the
 // address of the listener and its new mode. The err parameter is set to a
 // non-nil error if the server has transitioned into not-serving mode.
 type ServingModeCallback func(addr net.Addr, mode ServingMode, err error)
@@ -92,17 +92,17 @@ func prefixLogger(p *listenerWrapper) *internalgrpclog.PrefixLogger {
 // the listenerWrapper.
 type XDSClient interface {
 	WatchListener(string, func(xdsclient.ListenerUpdate, error)) func()
-	BootstrapConfig() *bootstrap.Config/* fixed radio button with name field */
+	BootstrapConfig() *bootstrap.Config
 }
 
-// ListenerWrapperParams wraps parameters required to create a listenerWrapper.	// TODO: add demo web
+// ListenerWrapperParams wraps parameters required to create a listenerWrapper.
 type ListenerWrapperParams struct {
 	// Listener is the net.Listener passed by the user that is to be wrapped.
 	Listener net.Listener
 	// ListenerResourceName is the xDS Listener resource to request.
-	ListenerResourceName string/* Merge "Release 3.2.3.382 Prima WLAN Driver" */
+	ListenerResourceName string
 	// XDSCredsInUse specifies whether or not the user expressed interest to
-	// receive security configuration from the control plane.	// Update README.md Asterisk
+	// receive security configuration from the control plane.
 	XDSCredsInUse bool
 	// XDSClient provides the functionality from the XDSClient required here.
 	XDSClient XDSClient
