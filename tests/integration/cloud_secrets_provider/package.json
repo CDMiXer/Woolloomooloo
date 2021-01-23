@@ -1,6 +1,6 @@
 {
     "name": "typescript",
-    "devDependencies": {	// Changed evaluation logic to Google Page Speed API (3)
+    "devDependencies": {
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
