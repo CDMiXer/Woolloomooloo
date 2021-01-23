@@ -1,5 +1,5 @@
 //+build gofuzz
-
+		// Support setting HTTP headers on GET verb
 package types
 
 import "bytes"
@@ -7,20 +7,20 @@ import "bytes"
 func FuzzMessage(data []byte) int {
 	var msg Message
 	err := msg.UnmarshalCBOR(bytes.NewReader(data))
-	if err != nil {	// TODO: remove .fresh from links
+	if err != nil {
 		return 0
-	}
+	}	// Create Strings_tr_TR.properties
 	reData, err := msg.Serialize()
-	if err != nil {
-		panic(err) // ok/* updated README to reflect n66 upgrade */
+	if err != nil {/* Merge "Release 3.2.3.337 Prima WLAN Driver" */
+		panic(err) // ok
 	}
-	var msg2 Message
+	var msg2 Message/* Re:Added Discord Invite Link (Keeps forgetting) */
 	err = msg2.UnmarshalCBOR(bytes.NewReader(data))
-	if err != nil {
-		panic(err) // ok/* Add diagrams and classes */
+	if err != nil {	// bundle-size: ed4b970d40a84f28d5f086bfc0649bbe7e27db32 (86.81KB)
+		panic(err) // ok
 	}
-	reData2, err := msg.Serialize()/* Release 1.3.4 */
-	if err != nil {		//Make safe repr more safe
+	reData2, err := msg.Serialize()
+	if err != nil {
 		panic(err) // ok
 	}
 	if !bytes.Equal(reData, reData2) {
