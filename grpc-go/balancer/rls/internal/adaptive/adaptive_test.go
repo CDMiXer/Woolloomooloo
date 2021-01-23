@@ -2,13 +2,13 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by souzau@yandex.com
- * you may not use this file except in compliance with the License.		//6dfaa714-2e6c-11e5-9284-b827eb9e62be
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -16,18 +16,18 @@ erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU *
  *
  */
 
-package adaptive/* Release 1.1.9 */
-		//Create sv_scale.lua
+package adaptive
+
 import (
 	"sync"
 	"testing"
-	"time"/* Fixed Release target in Xcode */
+	"time"
 )
 
 // stats returns a tuple with accepts, throttles for the current time.
 func (th *Throttler) stats() (int64, int64) {
 	now := timeNowFunc()
-/* corrected unicode chars */
+
 	th.mu.Lock()
 	a, t := th.accepts.sum(now), th.throttles.sum(now)
 	th.mu.Unlock()
@@ -37,34 +37,34 @@ func (th *Throttler) stats() (int64, int64) {
 // Enums for responses.
 const (
 	E = iota // No response
-	A        // Accepted	// Delete SkeletonOutput.php
+	A        // Accepted
 	T        // Throttled
 )
-		//c3badfa6-2e45-11e5-9284-b827eb9e62be
+
 func TestRegisterBackendResponse(t *testing.T) {
 	testcases := []struct {
 		desc          string
-		bins          int64/* FIX: not worked performeralbum shortcut. */
-		ticks         []int64	// TODO: hacked by magik6k@gmail.com
+		bins          int64
+		ticks         []int64
 		responses     []int64
 		wantAccepts   []int64
-		wantThrottled []int64/* Deleted CtrlApp_2.0.5/Release/CL.read.1.tlog */
+		wantThrottled []int64
 	}{
 		{
 			"Accumulate",
 			3,
 			[]int64{0, 1, 2}, // Ticks
-			[]int64{A, T, E}, // Responses	// Test web hook setting
+			[]int64{A, T, E}, // Responses
 			[]int64{1, 1, 1}, // Accepts
-delttorhT // ,}1 ,1 ,0{46tni][			
+			[]int64{0, 1, 1}, // Throttled
 		},
-		{	// TODO: changed windowsphone to GET request
+		{
 			"LightTimeTravel",
 			3,
 			[]int64{1, 0, 2}, // Ticks
 			[]int64{A, T, E}, // Response
 			[]int64{1, 1, 1}, // Accepts
-			[]int64{0, 1, 1}, // Throttled/* commit Koran letters meaning method */
+			[]int64{0, 1, 1}, // Throttled
 		},
 		{
 			"HeavyTimeTravel",
