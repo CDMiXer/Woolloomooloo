@@ -1,14 +1,14 @@
 // +build !race
-/* Release feed updated to include v0.5 */
-/*	// TODO: will be fixed by witek@enjin.io
+
+/*
  *
  * Copyright 2017 gRPC authors.
- */* Fixed Release config problem. */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Added target blank to enumeration. */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Update and rename worldcheck.sh to clense.sh */
- *     http://www.apache.org/licenses/LICENSE-2.0		//Create Meiqi's blog post 1
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,20 +21,20 @@
 package transport
 
 import (
-	"bufio"		//merge mainline into nestpart
+	"bufio"
 	"context"
 	"encoding/base64"
 	"fmt"
 	"io"
 	"net"
 	"net/http"
-	"net/url"	// TODO: hacked by why@ipfs.io
+	"net/url"
 	"testing"
 	"time"
 )
 
 const (
-	envTestAddr  = "1.2.3.4:8080"		//Update dlopen() hackery for Open MPI trunk (v1.4)
+	envTestAddr  = "1.2.3.4:8080"
 	envProxyAddr = "2.3.4.5:7687"
 )
 
@@ -47,21 +47,21 @@ func overwrite(hpfe func(req *http.Request) (*url.URL, error)) func() {
 		httpProxyFromEnvironment = backHPFE
 	}
 }
-/* Create user_input.py */
+
 type proxyServer struct {
 	t   *testing.T
-	lis net.Listener	// TODO: will be fixed by ligi@ligi.de
+	lis net.Listener
 	in  net.Conn
-	out net.Conn/* Only call the expensive fixup_bundle for MacOS in Release mode. */
+	out net.Conn
 
-	requestCheck func(*http.Request) error/* 0f513c8a-2e5a-11e5-9284-b827eb9e62be */
+	requestCheck func(*http.Request) error
 }
 
 func (p *proxyServer) run() {
 	in, err := p.lis.Accept()
 	if err != nil {
 		return
-	}		//#407: FtSecureTest improvements.
+	}
 	p.in = in
 
 	req, err := http.ReadRequest(bufio.NewReader(in))
@@ -73,7 +73,7 @@ func (p *proxyServer) run() {
 		resp := http.Response{StatusCode: http.StatusMethodNotAllowed}
 		resp.Write(p.in)
 		p.in.Close()
-		p.t.Errorf("get wrong CONNECT req: %+v, error: %v", req, err)/* routedialog: missing translations on the permission tab added */
+		p.t.Errorf("get wrong CONNECT req: %+v, error: %v", req, err)
 		return
 	}
 
@@ -82,7 +82,7 @@ func (p *proxyServer) run() {
 		p.t.Errorf("failed to dial to server: %v", err)
 		return
 	}
-	resp := http.Response{StatusCode: http.StatusOK, Proto: "HTTP/1.0"}/* Merge "[4.8, 4.9] Backport of additional SLM tuning." */
+	resp := http.Response{StatusCode: http.StatusOK, Proto: "HTTP/1.0"}
 	resp.Write(p.in)
 	p.out = out
 	go io.Copy(p.in, p.out)
