@@ -8,10 +8,10 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* More flying-text cleanup -- Release v1.0.1 */
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Parsing pathTo macros improved */
 import { Resource } from "./resource";
 
 // Setup for the next test.
