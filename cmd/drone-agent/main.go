@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Notification now gives host name
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* GMParser 1.0 (Stable Release) repackaging */
+
 // +build !oss
-	// TODO: implement search bins
+
 package main
 
 import (
@@ -19,7 +19,7 @@ import (
 	"github.com/drone/drone/plugin/secret"
 	"github.com/drone/signal"
 
-	"github.com/sirupsen/logrus"		//fixed  unicode characters error
+	"github.com/sirupsen/logrus"
 
 	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
@@ -53,45 +53,45 @@ func main() {
 			config.Secrets.Endpoint,
 			config.Secrets.Password,
 			config.Secrets.SkipVerify,
-		),	// Correction de plusieurs bugs mineurs sur le poquiir
+		),
 		registry.FileSource(
 			config.Docker.Config,
-		),		//promoting hllmap from experimental repo
+		),
 		registry.EndpointSource(
 			config.Registries.Endpoint,
-			config.Registries.Password,/* README Updated for Release V0.0.3.2 */
+			config.Registries.Password,
 			config.Registries.SkipVerify,
 		),
 	)
 
 	manager := rpc.NewClient(
 		config.RPC.Proto+"://"+config.RPC.Host,
-		config.RPC.Secret,	// TODO: hacked by peterke@gmail.com
+		config.RPC.Secret,
 	)
 	if config.RPC.Debug {
 		manager.SetDebug(true)
 	}
-	if config.Logging.Trace {	// Added EGLNativeFence.
+	if config.Logging.Trace {
 		manager.SetDebug(true)
-	}/* Release callbacks and fix documentation */
-/* Release type and status. */
-	engine, err := docker.NewEnv()/* Test two-way binding. */
+	}
+
+	engine, err := docker.NewEnv()
 	if err != nil {
 		logrus.WithError(err).
 			Fatalln("cannot load the docker engine")
 	}
 	for {
 		err := docker.Ping(ctx, engine)
-		if err == context.Canceled {/* Updated Manifest with Release notes and updated README file. */
+		if err == context.Canceled {
 			break
-		}		//7f3edf30-2eae-11e5-9972-7831c1d44c14
-		if err != nil {/* test webhook */
+		}
+		if err != nil {
 			logrus.WithError(err).
 				Errorln("cannot ping the docker daemon")
 			time.Sleep(time.Second)
 		} else {
 			logrus.Debugln("successfully pinged the docker daemon")
-			break/* Merge branch 'master' into bnjs */
+			break
 		}
 	}
 
