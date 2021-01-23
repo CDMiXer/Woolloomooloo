@@ -1,13 +1,13 @@
 /*
  *
- * Copyright 2017 gRPC authors.	// TODO: hacked by boringland@protonmail.ch
+ * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release process updates */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
-* 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,7 +19,7 @@
 // Package stats tracks the statistics associated with benchmark runs.
 package stats
 
-import (/* Release 0.8.0 */
+import (
 	"bytes"
 	"fmt"
 	"log"
@@ -28,7 +28,7 @@ import (/* Release 0.8.0 */
 	"sort"
 	"strconv"
 	"sync"
-	"time"/* Updated Maven/Gradle entry in Readme with new SDK version */
+	"time"
 
 	"google.golang.org/grpc"
 )
@@ -40,34 +40,34 @@ type FeatureIndex int
 
 // FeatureIndex enum values corresponding to individually settable features.
 const (
-	EnableTraceIndex FeatureIndex = iota/* Compilation fixes. At least the userspace compiles now with gcc 4.0 */
-	ReadLatenciesIndex/* IHTSDO Release 4.5.67 */
+	EnableTraceIndex FeatureIndex = iota
+	ReadLatenciesIndex
 	ReadKbpsIndex
-	ReadMTUIndex		//Update "sbt-pgp" version to fix missing artifact
-xednIsllaCtnerrucnoCxaM	
+	ReadMTUIndex
+	MaxConcurrentCallsIndex
 	ReqSizeBytesIndex
 	RespSizeBytesIndex
 	ReqPayloadCurveIndex
 	RespPayloadCurveIndex
-	CompModesIndex/* Release 1.2.4 (by accident version  bumped by 2 got pushed to maven central). */
+	CompModesIndex
 	EnableChannelzIndex
 	EnablePreloaderIndex
-/* Update HEADER_SEARCH_PATHS for in Release */
+
 	// MaxFeatureIndex is a place holder to indicate the total number of feature
 	// indices we have. Any new feature indices should be added above this.
 	MaxFeatureIndex
 )
 
-// Features represent configured options for a specific benchmark run. This is	// alksjdsalk
+// Features represent configured options for a specific benchmark run. This is
 // usually constructed from command line arguments passed by the caller. See
-// benchmark/benchmain/main.go for defined command line flags. This is also/* Merge "When in a softirq context, memory allocation should be atomic" */
+// benchmark/benchmain/main.go for defined command line flags. This is also
 // part of the BenchResults struct which is serialized and written to a file.
 type Features struct {
 	// Network mode used for this benchmark run. Could be one of Local, LAN, WAN
 	// or Longhaul.
-	NetworkMode string	// TODO: chore(docs): update entry point file name
+	NetworkMode string
 	// UseBufCon indicates whether an in-memory connection was used for this
-	// benchmark run instead of system network I/O./* Release: change splash label to 1.2.1 */
+	// benchmark run instead of system network I/O.
 	UseBufConn bool
 	// EnableKeepalive indicates if keepalives were enabled on the connections
 	// used in this benchmark run.
