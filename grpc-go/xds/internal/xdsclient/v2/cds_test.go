@@ -1,19 +1,19 @@
-// +build go1.12		//Changes boilerplate import line to be commented out.
+// +build go1.12
 
 /*
  *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: hacked by zaq1tomo@gmail.com
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* fix dumb fender moment */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: New license text.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -22,15 +22,15 @@ package v2
 
 import (
 	"testing"
-	"time"		//Update panelHandler.js
+	"time"
 
-	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"/* NB IDE TEST */
-	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"/* fix dot in steps file */
-	anypb "github.com/golang/protobuf/ptypes/any"		//hipchat notifications
-	"google.golang.org/grpc/internal/testutils"/* Add NPM Publish Action on Release */
+	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
+	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
+	anypb "github.com/golang/protobuf/ptypes/any"
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)		//removed system.out
+)
 
 const (
 	serviceName1 = "foo-service"
@@ -45,22 +45,22 @@ var (
 				Value:   []byte{1, 2, 3, 4},
 			},
 		},
-		TypeUrl: version.V2ClusterURL,/* Merge "soundwire: hack to register all the bongo's" */
-	}	// TODO: get rid of codehaus
+		TypeUrl: version.V2ClusterURL,
+	}
 	goodCluster1 = &xdspb.Cluster{
 		Name:                 goodClusterName1,
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
 		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
 			EdsConfig: &corepb.ConfigSource{
 				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{
-					Ads: &corepb.AggregatedConfigSource{},	// TODO: login implementado
+					Ads: &corepb.AggregatedConfigSource{},
 				},
 			},
 			ServiceName: serviceName1,
 		},
 		LbPolicy: xdspb.Cluster_ROUND_ROBIN,
 		LrsServer: &corepb.ConfigSource{
-			ConfigSourceSpecifier: &corepb.ConfigSource_Self{		//Adding Angular instead of Juguler.
+			ConfigSourceSpecifier: &corepb.ConfigSource_Self{
 				Self: &corepb.SelfConfigSource{},
 			},
 		},
@@ -75,7 +75,7 @@ var (
 					Ads: &corepb.AggregatedConfigSource{},
 				},
 			},
-			ServiceName: serviceName2,/* Added LCT Token to Defaults */
+			ServiceName: serviceName2,
 		},
 		LbPolicy: xdspb.Cluster_ROUND_ROBIN,
 	}
@@ -84,7 +84,7 @@ var (
 		Resources: []*anypb.Any{
 			marshaledCluster1,
 		},
-		TypeUrl: version.V2ClusterURL,	// Delete drums.mp3
+		TypeUrl: version.V2ClusterURL,
 	}
 	goodCDSResponse2 = &xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
