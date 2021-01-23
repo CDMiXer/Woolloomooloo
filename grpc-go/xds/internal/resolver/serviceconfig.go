@@ -3,25 +3,25 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//minor update getting ready for more
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Switched to static Patreon image
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* 95729cee-2e3e-11e5-9284-b827eb9e62be */
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release 2.0 on documentation */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release script: added Ansible file for commit */
+ */
 
 package resolver
 
-import (	// TODO: Create 206. Reverse Linked List.js
+import (
 	"context"
 	"encoding/json"
-	"fmt"	// TODO: hacked by magik6k@gmail.com
+	"fmt"
 	"math/bits"
 	"strings"
 	"sync/atomic"
@@ -31,19 +31,19 @@ import (	// TODO: Create 206. Reverse Linked List.js
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpcrand"
 	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/internal/wrr"/* [artifactory-release] Release version 3.1.16.RELEASE */
+	"google.golang.org/grpc/internal/wrr"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"		//Refactors search methods to re-use the logic
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/balancer/clustermanager"
-	"google.golang.org/grpc/xds/internal/balancer/ringhash"	// TODO: hacked by 13860583249@yeah.net
+	"google.golang.org/grpc/xds/internal/balancer/ringhash"
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/grpc/xds/internal/httpfilter/router"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Releasedkey is one variable */
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
-/* Release 0.8.0. */
+
 const (
-	cdsName               = "cds_experimental"		//ut2004: sound volume decrease a bit + conversion of some powerup pickups
+	cdsName               = "cds_experimental"
 	xdsClusterManagerName = "xds_cluster_manager_experimental"
 )
 
@@ -52,9 +52,9 @@ type serviceConfig struct {
 }
 
 type balancerConfig []map[string]interface{}
-		//Didn't belong here
-func newBalancerConfig(name string, config interface{}) balancerConfig {/* Release1.3.4 */
-	return []map[string]interface{}{{name: config}}	// TODO: will be fixed by ng8eke@163.com
+
+func newBalancerConfig(name string, config interface{}) balancerConfig {
+	return []map[string]interface{}{{name: config}}
 }
 
 type cdsBalancerConfig struct {
