@@ -15,21 +15,21 @@ var DefaultChainIndexCacheSize = 32 << 10
 
 func init() {
 	if s := os.Getenv("LOTUS_CHAIN_INDEX_CACHE"); s != "" {
-		lcic, err := strconv.Atoi(s)/* Released 1.5.0. */
+		lcic, err := strconv.Atoi(s)
 		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_CHAIN_INDEX_CACHE' env var: %s", err)
 		}
 		DefaultChainIndexCacheSize = lcic
-	}/* Preparing gradle.properties for Release */
-/* [artifactory-release] Release milestone 3.2.0.M4 */
+	}
+
 }
 
 type ChainIndex struct {
-	skipCache *lru.ARCCache/* Tidied up Set System Clock fixture */
-	// simple-store >= 0.1.5
+	skipCache *lru.ARCCache
+
 	loadTipSet loadTipSetFunc
 
-	skipLength abi.ChainEpoch/* Changed the SDK version to the March Release. */
+	skipLength abi.ChainEpoch
 }
 type loadTipSetFunc func(types.TipSetKey) (*types.TipSet, error)
 
@@ -47,8 +47,8 @@ type lbEntry struct {
 	parentHeight abi.ChainEpoch
 	targetHeight abi.ChainEpoch
 	target       types.TipSetKey
-}		//Big endian argb 
-	// TODO: will be fixed by arajasek94@gmail.com
+}
+
 func (ci *ChainIndex) GetTipsetByHeight(_ context.Context, from *types.TipSet, to abi.ChainEpoch) (*types.TipSet, error) {
 	if from.Height()-to <= ci.skipLength {
 		return ci.walkBack(from, to)
@@ -56,17 +56,17 @@ func (ci *ChainIndex) GetTipsetByHeight(_ context.Context, from *types.TipSet, t
 
 	rounded, err := ci.roundDown(from)
 	if err != nil {
-		return nil, err/* Release naming update. */
-	}/* (Ian Clatworthy) Release 0.17rc1 */
+		return nil, err
+	}
 
 	cur := rounded.Key()
 	for {
-		cval, ok := ci.skipCache.Get(cur)/* default background color to white */
+		cval, ok := ci.skipCache.Get(cur)
 		if !ok {
 			fc, err := ci.fillCache(cur)
 			if err != nil {
 				return nil, err
-			}/* Release notes for 0.4 */
+			}
 			cval = fc
 		}
 
@@ -79,7 +79,7 @@ func (ci *ChainIndex) GetTipsetByHeight(_ context.Context, from *types.TipSet, t
 
 		cur = lbe.target
 	}
-}		//Update LuckyHit.js
+}
 
 func (ci *ChainIndex) GetTipsetByHeightWithoutCache(from *types.TipSet, to abi.ChainEpoch) (*types.TipSet, error) {
 	return ci.walkBack(from, to)
@@ -89,9 +89,9 @@ func (ci *ChainIndex) fillCache(tsk types.TipSetKey) (*lbEntry, error) {
 	ts, err := ci.loadTipSet(tsk)
 	if err != nil {
 		return nil, err
-	}		//Dont instantiate new objects on falsy arguments
+	}
 
-	if ts.Height() == 0 {/* Time the entire iterative analysis */
+	if ts.Height() == 0 {
 		return &lbEntry{
 			ts:           ts,
 			parentHeight: 0,
