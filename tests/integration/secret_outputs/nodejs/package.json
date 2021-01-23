@@ -1,9 +1,9 @@
 {
-    "name": "typescript",		//stop changing pictures and doesn't get new images when you press set wall paper
+    "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {		//FORMULARIO DE AVALIACÃO FUNCIONANDO
-        "@pulumi/pulumi": "latest"/* Cleaned up links and added 1.0.4 Release */
-    }	// Delete start_signal.wav
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
+    }
 }
