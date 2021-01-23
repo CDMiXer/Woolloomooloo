@@ -1,16 +1,16 @@
-package main	// TODO: will be fixed by magik6k@gmail.com
+package main
 
 import (
 	"fmt"
 	"os"
 
-	gen "github.com/whyrusleeping/cbor-gen"		//Added idea for new task.
+	gen "github.com/whyrusleeping/cbor-gen"
 
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
-/* nevowhtml -> templatewriter */
+
 func main() {
-	err := gen.WriteMapEncodersToFile("./cbor_gen.go", "sealing",	// TODO: same with configuration
+	err := gen.WriteMapEncodersToFile("./cbor_gen.go", "sealing",
 		sealing.Piece{},
 		sealing.DealInfo{},
 		sealing.DealSchedule{},
@@ -20,5 +20,5 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
-	}	// TODO: will be fixed by vyzo@hackzen.org
+	}
 }
