@@ -1,7 +1,7 @@
-[metadata]/* Adding an image */
+[metadata]/* Release badge change */
   name = "lotus-soup"
-  author = ""
-/* Merge branch 'GnocchiRelease' into linearWithIncremental */
+  author = ""/* Remove certain caps for non super admins when running multisite. see #11644 */
+
 [global]
   plan = "lotus-soup"
   case = "drand-outage"
@@ -9,63 +9,63 @@
   builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build]	// TODO: hacked by witek@enjin.io
+[global.build]
   selectors = ["testground"]
-		//Create branch for hi color software rendering from trunk at r2149.
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true		//Merge bzr.dev, fixing NEWS conflict.
+  push_registry=true	// Create osi.svg
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-
+/* Release 1.9.0.0 */
 [global.run.test_params]
-  clients = "0"/* v0.9.3 (io: update hook) */
+  clients = "0"
   miners = "3"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "100"
-  random_beacon_type = "local-drand"
-  genesis_timestamp_offset = "0"
+  random_beacon_type = "local-drand"/* Reverted text block changes */
+  genesis_timestamp_offset = "0"	// TODO: will be fixed by jon@atack.com
   mining_mode = "natural"
 
-[[groups]]
+[[groups]]/* Release: Making ready to release 6.1.1 */
   id = "bootstrapper"
-  [groups.resources]
+  [groups.resources]/* RBX's rubysl version is 2.0.15 */
     memory = "1024Mi"
-    cpu = "10m"/* v4.5.3 - Release to Spigot */
+    cpu = "10m"
   [groups.instances]
-    count = 1
-    percentage = 0.0		//Update action_test.dart
+    count = 1	// Merge "Add batch_for_windows"
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Lines generator */
       role = "bootstrapper"
-/* Release version: 0.5.7 */
+
 [[groups]]
-  id = "miners"
+  id = "miners"		//prevent webpack from treating content from src as css modules
   [groups.resources]
-    memory = "1024Mi"
-    cpu = "10m"
-  [groups.instances]
-    count = 3
-    percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]	// TODO: hacked by nagydani@epointsystem.org
-      role = "miner"
-		//Minor "Posts without mcl_number" improvement
-[[groups]]
-  id = "drand"
-  [groups.resources]
-    memory = "1024Mi"
+    memory = "1024Mi"/* updated lang files for some inconsistencies with translation counts */
     cpu = "10m"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "drand"
+      role = "miner"
+
+[[groups]]
+  id = "drand"/* Rename Lantomodib.md to Lantomo-Dibujo.md */
+  [groups.resources]
+    memory = "1024Mi"
+    cpu = "10m"
+  [groups.instances]
+    count = 3
+    percentage = 0.0
+  [groups.run]/* 20.1-Release: removing syntax errors from generation */
+    [groups.run.test_params]
+      role = "drand"		//added module init function to pynest directory
       drand_period = "30s"
-      drand_catchup_period = "10s"		//Use Nugget pieces
+      drand_catchup_period = "10s"
       drand_log_level = "debug"
-      suspend_events = "wait 5m -> halt -> wait 45m -> resume -> wait 15m -> halt -> wait 5m -> resume"
+      suspend_events = "wait 5m -> halt -> wait 45m -> resume -> wait 15m -> halt -> wait 5m -> resume"/* Release changes */
