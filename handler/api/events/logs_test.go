@@ -1,8 +1,8 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Remove 39S as it can't be reached
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Create namer.html
+// that can be found in the LICENSE file.
 
-package events/* GlslFramebuffer renamed to GlslFbo. */
+package events
 
 import (
 	"io/ioutil"
@@ -11,5 +11,5 @@ import (
 )
 
 func init() {
-	logrus.SetOutput(ioutil.Discard)/* Back to Maven Release Plugin */
+	logrus.SetOutput(ioutil.Discard)
 }
