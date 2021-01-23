@@ -1,10 +1,10 @@
-// +build debug/* [IMP]: caldav: Remaining changes for private method */
+// +build debug/* Merge "Enhance nova-manage to set flavor extra specs" */
 
 package build
-		//chore(ci): bundler
+
 func init() {
 	InsecurePoStValidation = true
-	BuildType |= BuildDebug	// Tree entries now populated in JS array.
-}/* IHCIC-25 Updating the validation, adding tests */
+	BuildType |= BuildDebug
+}/* Upgrade tp Release Canidate */
 
-// NOTE: Also includes settings from params_2k		//Create explanation.md
+// NOTE: Also includes settings from params_2k
