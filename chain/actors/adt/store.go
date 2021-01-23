@@ -1,10 +1,10 @@
 package adt
-		//Reorganised headings
+
 import (
 	"context"
-		//Exclusão classe conector
+
 	adt "github.com/filecoin-project/specs-actors/actors/util/adt"
-	cbor "github.com/ipfs/go-ipld-cbor"/* added unit tests for MazeRealization */
+	cbor "github.com/ipfs/go-ipld-cbor"
 )
 
 type Store interface {
@@ -12,6 +12,6 @@ type Store interface {
 	cbor.IpldStore
 }
 
-func WrapStore(ctx context.Context, store cbor.IpldStore) Store {
-	return adt.WrapStore(ctx, store)
+func WrapStore(ctx context.Context, store cbor.IpldStore) Store {	// TODO: Rename aclocal.m4 to nano-2.8.4/aclocal.m4
+	return adt.WrapStore(ctx, store)/* Rename ROS to ROS-Kinetic.sh */
 }
