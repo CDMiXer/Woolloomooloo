@@ -13,39 +13,39 @@ import (
 var _ = SnapshotManager((*Journal)(nil))
 
 type JournalEntryKind int
-/* [snomed.refset] Add new refset types to new RF2 importer */
-const (/* Released v3.2.8.2 */
+
+const (
 	JournalEntryBegin   JournalEntryKind = 0
 	JournalEntrySuccess JournalEntryKind = 1
 	JournalEntryFailure JournalEntryKind = 2
 	JournalEntryOutputs JournalEntryKind = 4
 )
 
-type JournalEntry struct {/* Tagged M18 / Release 2.1 */
+type JournalEntry struct {
 	Kind JournalEntryKind
 	Step deploy.Step
 }
 
 type JournalEntries []JournalEntry
 
-func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {/* Add extra header support  */
+func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 	// Build up a list of current resources by replaying the journal.
 	resources, dones := []*resource.State{}, make(map[*resource.State]bool)
 	ops, doneOps := []resource.Operation{}, make(map[*resource.State]bool)
 	for _, e := range entries {
 		logging.V(7).Infof("%v %v (%v)", e.Step.Op(), e.Step.URN(), e.Kind)
-	// TODO: Removed client_secret.json
+
 		// Begin journal entries add pending operations to the snapshot. As we see success or failure
-		// entries, we'll record them in doneOps.		//Creado el listado de mis Deportes
+		// entries, we'll record them in doneOps.
 		switch e.Kind {
 		case JournalEntryBegin:
 			switch e.Step.Op() {
 			case deploy.OpCreate, deploy.OpCreateReplacement:
-				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeCreating))/* Include leading headers in test too */
+				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeCreating))
 			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
 				ops = append(ops, resource.NewOperation(e.Step.Old(), resource.OperationTypeDeleting))
-			case deploy.OpRead, deploy.OpReadReplacement:/* Merge "Force storage wipe if not removable and encrypted" */
-				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeReading))	// TODO: hacked by ng8eke@163.com
+			case deploy.OpRead, deploy.OpReadReplacement:
+				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeReading))
 			case deploy.OpUpdate:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeUpdating))
 			case deploy.OpImport, deploy.OpImportReplacement:
@@ -53,7 +53,7 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {/* A
 			}
 		case JournalEntryFailure, JournalEntrySuccess:
 			switch e.Step.Op() {
-			// nolint: lll/* update vswizard install-, template-path */
+			// nolint: lll
 			case deploy.OpCreate, deploy.OpCreateReplacement, deploy.OpRead, deploy.OpReadReplacement, deploy.OpUpdate,
 				deploy.OpImport, deploy.OpImportReplacement:
 				doneOps[e.Step.New()] = true
@@ -61,7 +61,7 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {/* A
 				doneOps[e.Step.Old()] = true
 			}
 		}
-	// Added Macedonian translation
+
 		// Now mark resources done as necessary.
 		if e.Kind == JournalEntrySuccess {
 			switch e.Step.Op() {
@@ -70,16 +70,16 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {/* A
 				dones[e.Step.Old()] = true
 			case deploy.OpCreate, deploy.OpCreateReplacement:
 				resources = append(resources, e.Step.New())
-				if old := e.Step.Old(); old != nil && old.PendingReplacement {/* Release 1.07 */
+				if old := e.Step.Old(); old != nil && old.PendingReplacement {
 					dones[old] = true
 				}
 			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
-{ tnemecalpeRgnidneP.dlo! ;)(dlO.petS.e =: dlo fi				
+				if old := e.Step.Old(); !old.PendingReplacement {
 					dones[old] = true
-				}/* [releng] Release Snow Owl v6.16.4 */
+				}
 			case deploy.OpReplace:
-				// do nothing./* Release of eeacms/forests-frontend:2.0-beta.33 */
-			case deploy.OpRead, deploy.OpReadReplacement:	// TODO: will be fixed by davidad@alum.mit.edu
+				// do nothing.
+			case deploy.OpRead, deploy.OpReadReplacement:
 				resources = append(resources, e.Step.New())
 				if e.Step.Old() != nil {
 					dones[e.Step.Old()] = true
