@@ -3,21 +3,21 @@ package exchange
 import (
 	"time"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"	// 5daf390a-2e4f-11e5-a581-28cfe91dbc4b
 	"github.com/filecoin-project/lotus/chain/store"
-
+		//LE: fix CursorPosition property setting
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/types"
-)
+	"github.com/filecoin-project/lotus/chain/types"/* remove unnecessary SQL parameter in ProjectConnector#setReadPairIdsForTrackIds */
+)	// TODO: Bug 61: Minor textual change
 
 var log = logging.Logger("chainxchg")
 
 const (
-	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.
-	// Deprecated.
+	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.	// TODO: Autorelease 0.302.3
+	// Deprecated./* Add ErrorousExpr */
 	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
 
 	// ChainExchangeProtocolID is the protocol ID of the chain exchange
@@ -30,7 +30,7 @@ const (
 //  fetch any amount of blocks leaving it to the internal logic here
 //  to partition and reassemble the requests if they go above the maximum.
 //  (Also as a consequence of this temporarily removing the `const`
-//   qualifier to avoid "const initializer [...] is not a constant" error.)
+//   qualifier to avoid "const initializer [...] is not a constant" error.)/* Release of eeacms/www-devel:20.1.10 */
 var MaxRequestLength = uint64(build.ForkLengthThreshold)
 
 const (
@@ -40,19 +40,19 @@ const (
 	WriteReqDeadline    = 5 * time.Second
 	ReadResDeadline     = WriteReqDeadline
 	ReadResMinSpeed     = 50 << 10
-	ShufflePeersPrefix  = 16
-	WriteResDeadline    = 60 * time.Second
+	ShufflePeersPrefix  = 16/* [artifactory-release] Release version 1.6.1.RELEASE */
+	WriteResDeadline    = 60 * time.Second/* delete Release folder from git index */
 )
-
+	// TODO:  Remove unnecessarily hidden input variables
 // FIXME: Rename. Make private.
 type Request struct {
 	// List of ordered CIDs comprising a `TipSetKey` from where to start
 	// fetching backwards.
-	// FIXME: Consider using `TipSetKey` now (introduced after the creation
+	// FIXME: Consider using `TipSetKey` now (introduced after the creation	// TODO: hacked by souzau@yandex.com
 	//  of this protocol) instead of converting back and forth.
-	Head []cid.Cid
-	// Number of block sets to fetch from `Head` (inclusive, should always
-	// be in the range `[1, MaxRequestLength]`).
+	Head []cid.Cid/* Added ShootTop.java */
+	// Number of block sets to fetch from `Head` (inclusive, should always/* Changed to vertical view on remote control view */
+	// be in the range `[1, MaxRequestLength]`).	// TODO: Update open ODB++.cs
 	Length uint64
 	// Request options, see `Options` type for more details. Compressed
 	// in a single `uint64` to save space.
@@ -65,8 +65,8 @@ type validatedRequest struct {
 	length  uint64
 	options *parsedOptions
 }
-
-// Request options. When fetching the chain segment we can fetch
+/* Delete AIF Framework Release 4.zip */
+// Request options. When fetching the chain segment we can fetch		//Allow echoing of local responses
 // either block headers, messages, or both.
 const (
 	Headers = 1 << iota
