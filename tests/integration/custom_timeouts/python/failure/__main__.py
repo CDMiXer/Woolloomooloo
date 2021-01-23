@@ -1,11 +1,11 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// Create SuperSweetTildeSuite
-	// TODO: add tweets in db
-from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions/* Release new version 2.5.27: Fix some websites broken by injecting a <link> tag */
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* 4.0.27-dev Release */
 
-class Resource1(ComponentResource):
+from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions
+
+class Resource1(ComponentResource):/* [artifactory-release] Release version 2.2.0.M2 */
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
-	// TODO: Changed dictionary keys from unicode to strings.
+
 # Attempt to create a resource with a CustomTimeout that should fail
 res5 = Resource1("res5",
     opts=ResourceOptions(custom_timeouts='asdf')
