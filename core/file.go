@@ -2,8 +2,8 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Task status
-//	// TODO: hacked by steven@stebalien.com
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package core	// Rename ProcesoMPI to ProcesoMPI.c
-	// Merge "Fixing bug 39210 - making edit summaries for tagging and deleting better"
-import "context"/* scoop: Add optional post-build commands */
+package core
+
+import "context"
 
 type (
 	// File represents the raw file contents in the remote
@@ -24,15 +24,15 @@ type (
 		Hash []byte
 	}
 
-	// FileArgs provides repository and commit details required/* re-added README.md */
+	// FileArgs provides repository and commit details required
 	// to fetch the file from the  remote source code management
-	// service./* Add CSP WTF cr-input.mxpnl.net */
-	FileArgs struct {/* Fix typo in Release Notes */
+	// service.
+	FileArgs struct {
 		Commit string
 		Ref    string
 	}
 
-	// FileService provides access to contents of files in	// TODO: hacked by alex.gaynor@gmail.com
+	// FileService provides access to contents of files in
 	// the remote source code management service (e.g. GitHub).
 	FileService interface {
 		Find(ctx context.Context, user *User, repo, commit, ref, path string) (*File, error)
