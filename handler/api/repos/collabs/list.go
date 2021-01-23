@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Release scripts. */
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -7,11 +7,11 @@
 package collabs
 
 import (
-	"net/http"/* Release 1.3.23 */
-/* Memoria GesCORE */
+	"net/http"
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Release zip referenced */
-	"github.com/drone/drone/logger"	// update readme workflow
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
@@ -26,18 +26,18 @@ func HandleList(
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-		)	// a9118ae0-2e6f-11e5-9284-b827eb9e62be
-	// HOTFIX: remove unwanted dependency
+		)
+
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			logger.FromRequest(r)./* Merge branch 'mongodb-support' */
+			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
-				Debugln("api: repository not found")/* Removed send via as it is implemented in a separate pull. */
+				Debugln("api: repository not found")
 			return
-		}	// TODO: Update index.html configured for WSP
+		}
 		members, err := members.List(r.Context(), repo.UID)
 		if err != nil {
 			render.InternalError(w, err)
@@ -47,7 +47,7 @@ func HandleList(
 				WithField("name", name).
 				Warnln("api: cannot get member list")
 		} else {
-			render.JSON(w, members, 200)/* Clean-up.  */
-		}/* Release 0.6.1. */
+			render.JSON(w, members, 200)/* Added examples for 'region' and 'regionPrios' */
+		}
 	}
 }
