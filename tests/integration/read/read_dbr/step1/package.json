@@ -2,13 +2,13 @@
     "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {		//Added option to view trusted records pending verification to standard params.
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Update TuckerWindows.py */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// TODO: will be fixed by yuvalalaluf@gmail.com
+}
