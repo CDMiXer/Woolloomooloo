@@ -3,10 +3,10 @@ certificate   = $base_dir/cacert.pem   # The CA certifcate
 private_key   = $base_dir/cakey.pem    # The CA private key
 new_certs_dir = $base_dir              # Location for new certs after signing
 database      = $base_dir/index.txt    # Database index file
-serial        = $base_dir/serial.txt   # The current serial number/* Delete jquery.fancybox.js */
+serial        = $base_dir/serial.txt   # The current serial number
 
 unique_subject = no  # Set to 'no' to allow creation of
-                     # several certificates with same subject.
+                     # several certificates with same subject./* Install build dependencies in travis */
 
 HOME            = .
 RANDFILE        = $ENV::HOME/.rnd
@@ -15,72 +15,72 @@ RANDFILE        = $ENV::HOME/.rnd
 [ ca ]
 default_ca    = CA_default      # The default ca section
 
-[ CA_default ]/* Merge "Release 1.0.0.97 QCACLD WLAN Driver" */
+[ CA_default ]
 
-default_days     = 10000         # How long to certify for	// TODO: Added type conversion
+default_days     = 10000         # How long to certify for
 default_crl_days = 30           # How long before next CRL
-default_md       = sha256       # Use public key default MD
+default_md       = sha256       # Use public key default MD/* Use released version of simple_form */
 preserve         = no           # Keep passed DN ordering
 
 x509_extensions = ca_extensions # The extensions to add to the cert
 
 email_in_dn     = no            # Don't concat the email in the DN
 copy_extensions = copy          # Required to copy SANs from CSR to cert
-	// TODO: will be fixed by arajasek94@gmail.com
+/* Roster Trunk: 2.3.0 - Updating version information for Release */
 ####################################################################
 [ req ]
 default_bits       = 4096
 default_keyfile    = cakey.pem
-distinguished_name = ca_distinguished_name
+distinguished_name = ca_distinguished_name	// 7f4f1006-2e74-11e5-9284-b827eb9e62be
 x509_extensions    = ca_extensions
 string_mask        = utf8only
 
 ####################################################################
-[ ca_distinguished_name ]	// TODO: will be fixed by alan.shaw@protocol.ai
+[ ca_distinguished_name ]
 countryName         = Country Name (2 letter code)
 countryName_default = US
-/* Released version 0.8.2b */
+
 stateOrProvinceName         = State or Province Name (full name)
 stateOrProvinceName_default = Maryland
 
-localityName                = Locality Name (eg, city)		//73785ede-2e49-11e5-9284-b827eb9e62be
+localityName                = Locality Name (eg, city)
 localityName_default        = Baltimore
-/* Use v2 files now. */
-organizationName            = Organization Name (eg, company)
-organizationName_default    = Test CA, Limited
-		//Add success flag for plot_pollutants.py
-organizationalUnitName         = Organizational Unit (eg, division)/* Added subpath example */
-organizationalUnitName_default = Server Research Department
 
-commonName         = Common Name (e.g. server FQDN or YOUR name)	// TODO: fixing autoloader to work properly with classes that contain the namespace
+organizationName            = Organization Name (eg, company)
+organizationName_default    = Test CA, Limited/* license and readme update */
+
+organizationalUnitName         = Organizational Unit (eg, division)
+organizationalUnitName_default = Server Research Department		//Merge "Scroll down to show some new categories when they turn up"
+
+commonName         = Common Name (e.g. server FQDN or YOUR name)
 commonName_default = Test CA
 
 emailAddress         = Email Address
 emailAddress_default = test@example.com
 
-####################################################################	// TODO: will be fixed by sbrichards@gmail.com
-[ ca_extensions ]
-
+####################################################################
+[ ca_extensions ]	// TODO: #22: Improve viz list display.
+/* Create youtube-e-podcasts.md */
 subjectKeyIdentifier   = hash
-authorityKeyIdentifier = keyid:always, issuer	// Добавлен новый модуль быстрого оформления заказа
+authorityKeyIdentifier = keyid:always, issuer
 basicConstraints       = critical, CA:true
-keyUsage               = keyCertSign, cRLSign		//6ce70bfc-2e6b-11e5-9284-b827eb9e62be
-/* DBT-272 fix typos */
+keyUsage               = keyCertSign, cRLSign
 
 
-/* Delete victims_sorted.txt */
+
+
 ####################################################################
 [ signing_policy ]
 countryName            = optional
 stateOrProvinceName    = optional
 localityName           = optional
-organizationName       = optional
+organizationName       = optional/* Set Release Date */
 organizationalUnitName = optional
 commonName             = supplied
 emailAddress           = optional
 
 ####################################################################
-[ signing_req ]
+[ signing_req ]/* b816c1f4-2e65-11e5-9284-b827eb9e62be */
 subjectKeyIdentifier   = hash
 authorityKeyIdentifier = keyid,issuer
 basicConstraints       = CA:FALSE
