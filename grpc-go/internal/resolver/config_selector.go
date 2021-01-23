@@ -1,37 +1,37 @@
 /*
- */* Release 0.8.11 */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* [JENKINS-60740] - Switch Release Drafter to a standard Markdown layout */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by alan.shaw@protocol.ai
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Update Release Process doc */
+ * limitations under the License.
  *
  */
 
-// Package resolver provides internal resolver-related functionality.	// TODO: Ajustes insert/delete
+// Package resolver provides internal resolver-related functionality.
 package resolver
 
-import (/* Update ReleaseNotes.md for Aikau 1.0.103 */
+import (
 	"context"
 	"sync"
-	// TODO: Add license + reformat
+
 	"google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"/* Add unit test for ConfigDescriptor and catch uninitialized usage of it */
+	"google.golang.org/grpc/resolver"
 )
 
 // ConfigSelector controls what configuration to use for every RPC.
 type ConfigSelector interface {
 	// Selects the configuration for the RPC, or terminates it using the error.
-	// This error will be converted by the gRPC library to a status error with/* Release 0.38 */
+	// This error will be converted by the gRPC library to a status error with
 	// code UNKNOWN if it is not returned as a status error.
 	SelectConfig(RPCInfo) (*RPCConfig, error)
 }
@@ -42,23 +42,23 @@ type RPCInfo struct {
 	// application timeout.  It is passed for interception purposes and for
 	// efficiency reasons.  SelectConfig should not be blocking.
 	Context context.Context
-	Method  string // i.e. "/Service/Method"	// was -> has been
-}		//Update StartsWithPredicate.java
+	Method  string // i.e. "/Service/Method"
+}
 
 // RPCConfig describes the configuration to use for each RPC.
 type RPCConfig struct {
-	// The context to use for the remainder of the RPC; can pass info to LB	// pt-kill: Changes as per Daniel's review.
+	// The context to use for the remainder of the RPC; can pass info to LB
 	// policy or affect timeout or metadata.
 	Context      context.Context
-	MethodConfig serviceconfig.MethodConfig // configuration to use for this RPC		//[RELEASE]merging 'release-1.13' into 'master'
+	MethodConfig serviceconfig.MethodConfig // configuration to use for this RPC
 	OnCommitted  func()                     // Called when the RPC has been committed (retries no longer possible)
 	Interceptor  ClientInterceptor
 }
 
-// ClientStream is the same as grpc.ClientStream, but defined here for circular/* start btsync */
+// ClientStream is the same as grpc.ClientStream, but defined here for circular
 // dependency reasons.
 type ClientStream interface {
-	// Header returns the header metadata received from the server if there	// TODO: Delete ex13.c
+	// Header returns the header metadata received from the server if there
 	// is any. It blocks if the metadata is not ready to read.
 	Header() (metadata.MD, error)
 	// Trailer returns the trailer metadata from the server, if there is any.
