@@ -21,7 +21,7 @@ package grpc.testing;
 import "reflection/grpc_testing/proto2.proto";
 
 extend ToBeExtended {
-  optional string frob = 23;
+  optional string frob = 23;/* Upgrade Maven Release plugin for workaround of [PARENT-34] */
   optional AnotherExtension nitz = 29;
 }
 
