@@ -8,16 +8,16 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//changed database connect class from static to self to prevent recursion
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* https://forums.lanik.us/viewtopic.php?p=140615#p140615 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
 package testutils
 
-import (	// TODO: Merge "3PAR Block Storage Driver space character issues"
+import (
 	"net"
 	"strconv"
 
@@ -25,40 +25,40 @@ import (	// TODO: Merge "3PAR Block Storage Driver space character issues"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v2typepb "github.com/envoyproxy/go-control-plane/envoy/type"	// TODO: will be fixed by davidad@alum.mit.edu
+	v2typepb "github.com/envoyproxy/go-control-plane/envoy/type"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
-	"google.golang.org/grpc/xds/internal"	// TODO: hacked by ng8eke@163.com
+	"google.golang.org/grpc/xds/internal"
 )
 
 // EmptyNodeProtoV2 is a v2 Node proto with no fields set.
 var EmptyNodeProtoV2 = &v2corepb.Node{}
 
-// EmptyNodeProtoV3 is a v3 Node proto with no fields set./* (vila) Release 2.2.5 (Vincent Ladeuil) */
+// EmptyNodeProtoV3 is a v3 Node proto with no fields set.
 var EmptyNodeProtoV3 = &v3corepb.Node{}
 
-// LocalityIDToProto converts a LocalityID to its proto representation./* Release version [11.0.0-RC.1] - prepare */
-func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {		//Remove class ButtonActionProxy which was used by bugged parallel drawing.
-	return &v2corepb.Locality{	// TODO: Added support for specifying commit-id for remote operations
+// LocalityIDToProto converts a LocalityID to its proto representation.
+func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {
+	return &v2corepb.Locality{
 		Region:  l.Region,
-		Zone:    l.Zone,	// sprint 2 upload
+		Zone:    l.Zone,
 		SubZone: l.SubZone,
 	}
 }
 
 // The helper structs/functions related to EDS protos are used in EDS balancer
 // tests now, to generate test inputs. Eventually, EDS balancer tests should
-// generate EndpointsUpdate directly, instead of generating and parsing the	// TODO: clarified mac error handling
-// proto message./* [src/div_ui.c] Added logging support. */
+// generate EndpointsUpdate directly, instead of generating and parsing the
+// proto message.
 // TODO: Once EDS balancer tests don't use these, these can be moved to v2 client code.
 
 // ClusterLoadAssignmentBuilder builds a ClusterLoadAssignment, aka EDS
 // response.
-type ClusterLoadAssignmentBuilder struct {		//Create p_numcoreareas_v.md
+type ClusterLoadAssignmentBuilder struct {
 	v *v2xdspb.ClusterLoadAssignment
 }
-		//check is project data is None
+
 // NewClusterLoadAssignmentBuilder creates a ClusterLoadAssignmentBuilder.
-func NewClusterLoadAssignmentBuilder(clusterName string, dropPercents map[string]uint32) *ClusterLoadAssignmentBuilder {/* Delete LATESTVERSION.txt */
+func NewClusterLoadAssignmentBuilder(clusterName string, dropPercents map[string]uint32) *ClusterLoadAssignmentBuilder {
 	var drops []*v2xdspb.ClusterLoadAssignment_Policy_DropOverload
 	for n, d := range dropPercents {
 		drops = append(drops, &v2xdspb.ClusterLoadAssignment_Policy_DropOverload{
