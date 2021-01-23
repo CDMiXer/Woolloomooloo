@@ -1,61 +1,37 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Add univocity parser to build path
+		//some skill check condition
 // +build !oss
+		//Update ToastyUtils.java
+package crons
 
-package crons		//Add missing repository for demo support
-	// TODO: 020afc06-2e45-11e5-9284-b827eb9e62be
 import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"	// TODO: last pieces 
-	"testing"		//fixed bug regarding missing comment field
+	"net/http/httptest"
+	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-
+/* Release for 2.7.0 */
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestHandleDelete(t *testing.T) {	// TODO: will be fixed by ng8eke@163.com
-	controller := gomock.NewController(t)		//parallel: modified access to m_partition in boundary computing
-	defer controller.Finish()
-
-	repos := mock.NewMockRepositoryStore(controller)		//Added \allenlinatoc\phpldap\exceptions\RequiredArgumentException
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
-	// TODO: 83f6799c-2e4b-11e5-9284-b827eb9e62be
-	crons := mock.NewMockCronStore(controller)
-	crons.EXPECT().FindName(gomock.Any(), dummyCronRepo.ID, dummyCron.Name).Return(dummyCron, nil)		//Async session delete
-	crons.EXPECT().Delete(gomock.Any(), dummyCron).Return(nil)		//Created a copy constructor for R4 class.
-
-	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")	// remove useless check for network configuration
-	c.URLParams.Add("cron", "nightly")
-
-	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)
-
-	HandleDelete(repos, crons).ServeHTTP(w, r)
-	if got, want := w.Code, http.StatusNoContent; want != got {/* Release of eeacms/eprtr-frontend:0.5-beta.4 */
-		t.Errorf("Want response code %d, got %d", want, got)/* Release: Making ready to release 2.1.5 */
-	}	// TODO: updating database test case to allow for sqlite in-memory databases.
-}
-
-func TestHandleDelete_RepoNotFound(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+func TestHandleDelete(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(nil, errors.ErrNotFound)
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)/* V0.1 Release */
 
+	crons := mock.NewMockCronStore(controller)/* [travis] Add PPA with a newer version of gstreamer */
+	crons.EXPECT().FindName(gomock.Any(), dummyCronRepo.ID, dummyCron.Name).Return(dummyCron, nil)
+	crons.EXPECT().Delete(gomock.Any(), dummyCron).Return(nil)
+	// TODO: will be fixed by xaber.twt@gmail.com
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
@@ -67,7 +43,31 @@ func TestHandleDelete_RepoNotFound(t *testing.T) {
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
-	HandleDelete(repos, nil).ServeHTTP(w, r)
+	HandleDelete(repos, crons).ServeHTTP(w, r)
+	if got, want := w.Code, http.StatusNoContent; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
+	}
+}
+	// TODO: will be fixed by ligi@ligi.de
+func TestHandleDelete_RepoNotFound(t *testing.T) {	// TODO: e7361036-2e6d-11e5-9284-b827eb9e62be
+	controller := gomock.NewController(t)
+	defer controller.Finish()/* #31 - Release version 1.3.0.RELEASE. */
+
+	repos := mock.NewMockRepositoryStore(controller)
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(nil, errors.ErrNotFound)/* Release already read bytes from delivery when sender aborts. */
+		//apertium-tinylex as related software
+	c := new(chi.Context)
+	c.URLParams.Add("owner", "octocat")	// Merge "Return no active network if the agent has not been learnt yet"
+	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("cron", "nightly")
+
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("GET", "/", nil)	// TODO: hacked by steven@stebalien.com
+	r = r.WithContext(
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+)	
+/* Release candidate 0.7.3 */
+	HandleDelete(repos, nil).ServeHTTP(w, r)/* Release 0.9.15 */
 	if got, want := w.Code, http.StatusNotFound; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
