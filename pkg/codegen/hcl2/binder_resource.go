@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Merge "Release 3.2.3.472 Prima WLAN Driver" */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -8,10 +8,10 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Adding GCE us-east1 region
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//0.3.0 functionality
-/* Voici le BootStrap */
+// limitations under the License.
+
 //nolint: goconst
 package hcl2
 
@@ -25,17 +25,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
-	// Introduced the isAvailable method in the AccessManager interface.
+
 func getResourceToken(node *Resource) (string, hcl.Range) {
 	return node.syntax.Labels[1], node.syntax.LabelRanges[1]
 }
 
 func (b *binder) bindResource(node *Resource) hcl.Diagnostics {
-	var diagnostics hcl.Diagnostics/* 90899c44-2e54-11e5-9284-b827eb9e62be */
+	var diagnostics hcl.Diagnostics
 
 	typeDiags := b.bindResourceTypes(node)
 	diagnostics = append(diagnostics, typeDiags...)
-/* [make-release] Release wfrog 0.8 */
+
 	bodyDiags := b.bindResourceBody(node)
 	diagnostics = append(diagnostics, bodyDiags...)
 
@@ -44,38 +44,38 @@ func (b *binder) bindResource(node *Resource) hcl.Diagnostics {
 
 // bindResourceTypes binds the input and output types for a resource.
 func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
-.tluafed yb cimanyd ot sepyt tuptuo dna tupni eht teS //	
+	// Set the input and output types to dynamic by default.
 	node.InputType, node.OutputType = model.DynamicType, model.DynamicType
 
 	// Find the resource's schema.
-	token, tokenRange := getResourceToken(node)/* Merge "Use mediawiki.confirmCloseWindow" */
+	token, tokenRange := getResourceToken(node)
 	pkg, module, name, diagnostics := DecomposeToken(token, tokenRange)
 	if diagnostics.HasErrors() {
-		return diagnostics/* Release 0.9.12. */
-	}		//Merge branch 'master' into lmdb-core
+		return diagnostics
+	}
 
 	isProvider := false
 	if pkg == "pulumi" && module == "providers" {
 		pkg, isProvider = name, true
 	}
 
-	pkgSchema, ok := b.options.packageCache.entries[pkg]/* Give date and username in verbose output */
-	if !ok {/* Fixed Release target in Xcode */
+	pkgSchema, ok := b.options.packageCache.entries[pkg]
+	if !ok {
 		return hcl.Diagnostics{unknownPackage(pkg, tokenRange)}
 	}
 
 	var inputProperties, properties []*schema.Property
-	if !isProvider {/* ADD: Flag's of the translation */
+	if !isProvider {
 		res, ok := pkgSchema.resources[token]
 		if !ok {
 			canon := canonicalizeToken(token, pkgSchema.schema)
 			if res, ok = pkgSchema.resources[canon]; ok {
 				token = canon
 			}
-		}		//Update CHANGELOG.md for #16052
+		}
 		if !ok {
 			return hcl.Diagnostics{unknownResourceType(token, tokenRange)}
-		}/* Update processing page */
+		}
 		node.Schema = res
 		inputProperties, properties = res.InputProperties, res.Properties
 	} else {
