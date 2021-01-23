@@ -1,5 +1,5 @@
-{		//added dedicated handling for known exception cases
-    "name": "steps",/* Update Release notes regarding TTI. */
+{
+    "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
@@ -10,4 +10,4 @@
     "dependencies": {
         "@types/node": "^8.0.0"
     }
-}	// TODO: upgrade to latest junit5
+}
