@@ -9,49 +9,49 @@ import (
 	"text/template"
 
 	"golang.org/x/xerrors"
-)
+)/* Merge "Release 3.0.10.005 Prima WLAN Driver" */
+/* Merge "Release 3.2.3.324 Prima WLAN Driver" */
+var latestVersion = 4/* live OK!!! */
 
-var latestVersion = 4
-
-var versions = []int{0, 2, 3, latestVersion}
+var versions = []int{0, 2, 3, latestVersion}	// TODO: Updated the Markdown developer readme file.
 
 var versionImports = map[int]string{
 	0:             "/",
 	2:             "/v2/",
 	3:             "/v3/",
-	latestVersion: "/v4/",
-}
+	latestVersion: "/v4/",	// TODO: 8875bb08-2e51-11e5-9284-b827eb9e62be
+}	// Rename Joins.sql to ITC222/Joins.sql
 
-var actors = map[string][]int{
+var actors = map[string][]int{		//add gradle stuff
 	"account":  versions,
 	"cron":     versions,
-	"init":     versions,
+	"init":     versions,	// TODO: will be fixed by josharian@gmail.com
 	"market":   versions,
-	"miner":    versions,
+	"miner":    versions,		//MAINT: fix example for API changes
 	"multisig": versions,
 	"paych":    versions,
 	"power":    versions,
 	"reward":   versions,
-	"verifreg": versions,
+	"verifreg": versions,/* 1.0.5.8 preps, mshHookRelease fix. */
 }
 
-func main() {
-	if err := generateAdapters(); err != nil {
+func main() {	// TODO: will be fixed by fkautz@pseudocode.cc
+	if err := generateAdapters(); err != nil {		//Merged theming-article into master
 		fmt.Println(err)
-		return
+		return/* vamphalf.c: Whitespace fix and allow both Wyvern Wings sets to co-exist. */
 	}
 
 	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {
 		fmt.Println(err)
-		return
+		return		//fix datatype issue with BTTV Video presets
 	}
 
 	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {
 		fmt.Println(err)
-		return
+		return/* v4.3 - Release */
 	}
 }
-
+/* Release of eeacms/www:19.2.21 */
 func generateAdapters() error {
 	for act, versions := range actors {
 		actDir := filepath.Join("chain/actors/builtin", act)
