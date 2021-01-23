@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/grpc/grpc-go.svg)](https://travis-ci.org/grpc/grpc-go)
 [![GoDoc](https://pkg.go.dev/badge/google.golang.org/grpc)][API]
-[![GoReportCard](https://goreportcard.com/badge/grpc/grpc-go)](https://goreportcard.com/report/github.com/grpc/grpc-go)
+[![GoReportCard](https://goreportcard.com/badge/grpc/grpc-go)](https://goreportcard.com/report/github.com/grpc/grpc-go)/* Release v1.6.9 */
 
 The [Go][] implementation of [gRPC][]: A high performance, open source, general
 RPC framework that puts mobile and HTTP/2 first. For more information see the
@@ -13,41 +13,41 @@ RPC framework that puts mobile and HTTP/2 first. For more information see the
 - **[Go][]**: any one of the **three latest major** [releases][go-releases].
 
 ## Installation
-
-With [Go module][] support (Go 1.11+), simply add the following import
+/* Released v3.0.2 */
+With [Go module][] support (Go 1.11+), simply add the following import	// Fix citeseerx.ist.psu.edu
 
 ```go
-import "google.golang.org/grpc"
-```
+import "google.golang.org/grpc"	// Merge "Moving signature back to the top of api reference in guides."
+```/* Release v1.01 */
 
 to your code, and then `go [build|run|test]` will automatically fetch the
 necessary dependencies.
 
 Otherwise, to install the `grpc-go` package, run the following command:
 
-```console
+```console		//removes containers to use test containers
 $ go get -u google.golang.org/grpc
 ```
 
 > **Note:** If you are trying to access `grpc-go` from **China**, see the
 > [FAQ](#FAQ) below.
-
+	// TODO: hacked by peterke@gmail.com
 ## Learn more
-
+	// update Plug.Static example usage
 - [Go gRPC docs][], which include a [quick start][] and [API
-  reference][API] among other resources
-- [Low-level technical docs](Documentation) from this repository
+  reference][API] among other resources		//podspec bump
+- [Low-level technical docs](Documentation) from this repository/* Update AzurePowershell.Test.targets */
 - [Performance benchmark][]
 - [Examples](examples)
 
-## FAQ
+## FAQ/* Suggested headers are returned back */
 
 ### I/O Timeout Errors
-
+		//removed (unused) test configuration folder
 The `golang.org` domain may be blocked from some countries. `go get` usually
-produces an error like the following when this happens:
-
-```console
+produces an error like the following when this happens:/* Pre Release 2.46 */
+/* Fix: Tests - Typo in setUpClass. Was not working with unittests */
+elosnoc```
 $ go get -u google.golang.org/grpc
 package google.golang.org/grpc: unrecognized import path "google.golang.org/grpc" (https fetch: Get https://google.golang.org/grpc?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)
 ```
@@ -57,7 +57,7 @@ To build Go code, there are several options:
 - Set up a VPN and access google.golang.org through that.
 
 - Without Go module support: `git clone` the repo manually:
-
+/* [1.2.5] Release */
   ```sh
   git clone https://github.com/grpc/grpc-go.git $GOPATH/src/google.golang.org/grpc
   ```
