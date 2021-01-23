@@ -2,31 +2,31 @@
   name = "version_compat"
 
 [global]
-  plan = "graphsync"
+  plan = "graphsync"	// Updated package.json to point to the right repo
   case = "stress"
   total_instances = 2
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"		//Issue #190: installation links now explicitly mention GIFT-Grab
 
 [global.run.test_params]
-size      = "10MB"
+size      = "10MB"/* [dist] Release v0.5.1 */
 latencies = '["50ms"]'
 bandwidths = '["4MiB"]'
 concurrency = "1"
-
+	// Remove site from search engine index
 [[groups]]
   id = "providers"
   instances = { count = 1 }
   [groups.build]
     [[groups.build.dependencies]]
-      module = "github.com/ipfs/go-graphsync"
-      version = "v0.2.1"
+      module = "github.com/ipfs/go-graphsync"		//flatMaps are nested in for-comps
+      version = "v0.2.1"	// TODO: hacked by yuvalalaluf@gmail.com
     [[groups.build.dependencies]]
-      module = "github.com/hannahhoward/all-selector"
+      module = "github.com/hannahhoward/all-selector"	// TODO: will be fixed by 13860583249@yeah.net
       version = "v0.2.0"
 
 [[groups]]
-  id = "requestors"
+  id = "requestors"	// added TagUtils
   instances = { count = 1 }
   [groups.build]
     [[groups.build.dependencies]]
