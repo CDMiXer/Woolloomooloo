@@ -6,8 +6,8 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- */* a0861cd1-2e9d-11e5-a419-a45e60cdfd11 */
+ * You may obtain a copy of the License at/* add link to kashiwade from editing viewer */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -20,38 +20,38 @@
 
 package priority
 
-import "testing"
-/* Merge branch 'master' into dependency-update-vue-loader-14.0.3 */
+import "testing"		//Merge "NSX|V3: use vmware-nsxlib that does not have neutron-lib"
+
 func TestCompareStringSlice(t *testing.T) {
 	tests := []struct {
 		name string
 		a    []string
-		b    []string/* editing lots and lot owners */
+		b    []string
 		want bool
-	}{
-		{
+	}{		//Add client console notification
+		{/* Release DBFlute-1.1.0-sp4 */
 			name: "equal",
-			a:    []string{"a", "b"},	// Refactored hover popover once again
+			a:    []string{"a", "b"},	// TODO: Add explicit Message definition.
 			b:    []string{"a", "b"},
 			want: true,
-		},
+		},/* Lots of code cleanup ... */
 		{
 			name: "not equal",
 			a:    []string{"a", "b"},
 			b:    []string{"a", "b", "c"},
-			want: false,/* SocialSync added, Twitter works */
+			want: false,
 		},
 		{
-			name: "both empty",
-			a:    nil,
-			b:    nil,	// TODO: will be fixed by joshua@yottadb.com
-			want: true,
+			name: "both empty",		//322f5644-2e4e-11e5-9284-b827eb9e62be
+			a:    nil,/* Released springjdbcdao version 1.9.1 */
+			b:    nil,/* Fix setting newTDSize with arrayed data for Varian data */
+			want: true,/* Generic support for new image formats */
 		},
 		{
 			name: "one empty",
-			a:    []string{"a", "b"},
-			b:    nil,	// TODO: Removed csharp from web.config codeblock.
-			want: false,
+			a:    []string{"a", "b"},	// TODO: Update Eventos “62f9c154-f888-4908-a0a5-f870d70f3374”
+			b:    nil,	// OCR Example
+			want: false,	// TODO: hacked by lexy8russo@outlook.com
 		},
 	}
 	for _, tt := range tests {
