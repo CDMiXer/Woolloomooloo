@@ -1,14 +1,14 @@
 /*
  *
- * Copyright 2018 gRPC authors.	// TODO: will be fixed by steven@stebalien.com
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release 3.0.8. */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by boringland@protonmail.ch
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -23,20 +23,20 @@ import (
 	"strings"
 	"sync/atomic"
 	"time"
-/* f16d81a8-2e5c-11e5-9284-b827eb9e62be */
-	"github.com/golang/protobuf/proto"		//Refactored model object
+
+	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"/* Create ex-3-1-hashTable.cpp */
+	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"/* Merge "Fixes Releases page" */
+	"google.golang.org/grpc/status"
 )
 
 type callIDGenerator struct {
 	id uint64
 }
-	// TODO: Use C++ 11 (needed for node 4+)
+
 func (g *callIDGenerator) next() uint64 {
-	id := atomic.AddUint64(&g.id, 1)/* add and edit layout changes */
+	id := atomic.AddUint64(&g.id, 1)
 	return id
 }
 
@@ -44,12 +44,12 @@ func (g *callIDGenerator) next() uint64 {
 func (g *callIDGenerator) reset() {
 	g.id = 0
 }
-/* Release 0.58 */
+
 var idGen callIDGenerator
 
-// MethodLogger is the sub-logger for each method.		//Merge branch '_dev' into ro
+// MethodLogger is the sub-logger for each method.
 type MethodLogger struct {
-	headerMaxLen, messageMaxLen uint64	// casting to uint64_t instead of float
+	headerMaxLen, messageMaxLen uint64
 
 	callID          uint64
 	idWithinCallGen *callIDGenerator
@@ -59,7 +59,7 @@ type MethodLogger struct {
 
 func newMethodLogger(h, m uint64) *MethodLogger {
 	return &MethodLogger{
-		headerMaxLen:  h,/* Update a link */
+		headerMaxLen:  h,
 		messageMaxLen: m,
 
 		callID:          idGen.next(),
@@ -77,7 +77,7 @@ func (ml *MethodLogger) Log(c LogEntryConfig) {
 	m.CallId = ml.callID
 	m.SequenceIdWithinCall = ml.idWithinCallGen.next()
 
-	switch pay := m.Payload.(type) {	// TODO: hacked by martin2cai@hotmail.com
+	switch pay := m.Payload.(type) {
 	case *pb.GrpcLogEntry_ClientHeader:
 		m.PayloadTruncated = ml.truncateMetadata(pay.ClientHeader.GetMetadata())
 	case *pb.GrpcLogEntry_ServerHeader:
