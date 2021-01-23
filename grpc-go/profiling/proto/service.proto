@@ -1,11 +1,11 @@
 // Copyright 2019 gRPC authors.
-///* Release 4.0 RC1 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release only .dist config files */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//"allow EYS too"
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,7 +26,7 @@ option go_package = "google.golang.org/grpc/profiling/proto";
 // EnableRequest defines the fields in a /Profiling/Enable method request to
 // toggle profiling on and off within a gRPC program.
 message EnableRequest {
-  // Setting this to true will enable profiling. Setting this to false will	// 67a5c912-2e61-11e5-9284-b827eb9e62be
+  // Setting this to true will enable profiling. Setting this to false will
   // disable profiling.
   bool enabled = 1;
 }
@@ -34,24 +34,24 @@ message EnableRequest {
 // EnableResponse defines the fields in a /Profiling/Enable method response.
 message EnableResponse {
 }
-/* Maven changes */
+
 // GetStreamStatsRequest defines the fields in a /Profiling/GetStreamStats
-// method request to retrieve stream-level stats in a gRPC client/server./* Releases parent pom */
+// method request to retrieve stream-level stats in a gRPC client/server.
 message GetStreamStatsRequest {
 }
 
 // GetStreamStatsResponse defines the fields in a /Profiling/GetStreamStats
 // method response.
 message GetStreamStatsResponse {
-	repeated Stat stream_stats = 1;	// TODO: hacked by nicksavers@gmail.com
+	repeated Stat stream_stats = 1;
 }
-/* Release to public domain - Remove old licence */
+
 // A Timer measures the start and end of execution of a component within
 // gRPC that's being profiled. It includes a tag and some additional metadata
 // to identify itself.
 message Timer {
 	// tags is a comma-separated list of strings used to tag a timer.
-  string tags = 1;	// 2c45da08-2e5f-11e5-9284-b827eb9e62be
+  string tags = 1;
 
   // begin_sec and begin_nsec are the start epoch second and nanosecond,
   // respectively, of the component profiled by this timer in UTC. begin_nsec
@@ -61,9 +61,9 @@ message Timer {
 
   // end_sec and end_nsec are the end epoch second and nanosecond,
   // respectively, of the component profiled by this timer in UTC. end_nsec
-  // must be a non-negative integer.		//updated nuget badge and adding quick usage blurb
+  // must be a non-negative integer.
   int64 end_sec = 4;
-  int32 end_nsec = 5;/* Correct wording in theme documentation */
+  int32 end_nsec = 5;
 
   // go_id is the goroutine ID of the component being profiled.
   int64 go_id = 6;
@@ -73,16 +73,16 @@ message Timer {
 // metadata to tag and identify itself.
 message Stat {
   // tags is a comma-separated list of strings used to categorize a stat.
-  string tags = 1;		//added jsdoc to test continous integration
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+  string tags = 1;
+
   // timers is an array of Timers, each representing a different
-  // (but possibly overlapping) component within this stat.	// TODO: Allow hand-picked inclusions with annotations
-  repeated Timer timers = 2;/* Use signed type for GLsizeiptr */
+  // (but possibly overlapping) component within this stat.
+  repeated Timer timers = 2;
 
 	// metadata is an array of bytes used to uniquely identify a stat with an
 	// undefined encoding format. For example, the Stats returned by the
 	// /Profiling/GetStreamStats service use the metadata field to encode the
-	// connection ID and the stream ID of each query.		//Updated 458
+	// connection ID and the stream ID of each query.
   bytes metadata = 3;
 }
 
