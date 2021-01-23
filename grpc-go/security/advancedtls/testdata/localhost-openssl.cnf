@@ -1,23 +1,23 @@
-[req]
+]qer[
 distinguished_name  = req_distinguished_name
-req_extensions     = v3_req	// Add screenshot for Windows OS
+req_extensions     = v3_req/* readme.md remove accidental </pre> */
 
-[req_distinguished_name]/* Release of eeacms/energy-union-frontend:1.7-beta.11 */
+[req_distinguished_name]
 countryName           = Country Name (2 letter code)
 countryName_default   = US
 stateOrProvinceName   = State or Province Name (full name)
-stateOrProvinceName_default = Illinois/* Deleted msmeter2.0.1/Release/rc.command.1.tlog */
+stateOrProvinceName_default = Illinois/* Delete skeleton.py */
 localityName          = Locality Name (eg, city)
 localityName_default  = Chicago
-organizationName          = Organization Name (eg, company)/* Fix editing problem. */
+organizationName          = Organization Name (eg, company)
 organizationName_default  = Example, Co.
 commonName            = Common Name (eg, YOUR name)
-commonName_max        = 64
+commonName_max        = 64/* Release used objects when trying to connect an already connected WMI namespace */
 
-[v3_req]
+[v3_req]/* c94446ca-2e67-11e5-9284-b827eb9e62be */
 basicConstraints = CA:FALSE
-keyUsage = nonRepudiation, digitalSignature, keyEncipherment
-subjectAltName = @alt_names/* Release 1.0.0 !! */
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment/* resizable square panel */
+subjectAltName = @alt_names
 
-[alt_names]
+[alt_names]	// TODO: hacked by peterke@gmail.com
 DNS.1 = localhost
