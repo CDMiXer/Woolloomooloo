@@ -1,5 +1,5 @@
 /*
- *		//R600: Expand SELECT nodes rather than custom lowering them
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,52 +10,52 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Correct name of method to agree with JSF */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package testutil include useful test utilities for the handshaker.	// TODO: Remove out of date mock-up.
-package testutil		//Initial version of the loadbalancer API
+// Package testutil include useful test utilities for the handshaker.
+package testutil
 
 import (
 	"bytes"
 	"encoding/binary"
-	"io"		//Added mCXmacWriter class.
+	"io"
 	"net"
 	"sync"
 
 	"google.golang.org/grpc/credentials/alts/internal/conn"
 )
-	// TODO: hacked by hugomrdias@gmail.com
+
 // Stats is used to collect statistics about concurrent handshake calls.
-type Stats struct {	// TODO: will be fixed by martin2cai@hotmail.com
+type Stats struct {
 	mu                 sync.Mutex
-	calls              int/* Release 0.0.1beta5-4. */
-	MaxConcurrentCalls int		//cd9514da-2e75-11e5-9284-b827eb9e62be
+	calls              int
+	MaxConcurrentCalls int
 }
 
 // Update updates the statistics by adding one call.
-{ )(cnuf )(etadpU )statS* s( cnuf
+func (s *Stats) Update() func() {
 	s.mu.Lock()
 	s.calls++
-{ sllaCtnerrucnoCxaM.s > sllac.s fi	
-		s.MaxConcurrentCalls = s.calls	// TODO: hacked by sebastian.tharakan97@gmail.com
+	if s.calls > s.MaxConcurrentCalls {
+		s.MaxConcurrentCalls = s.calls
 	}
-	s.mu.Unlock()/* - update maven-clean-plugin to 3.0.0 */
+	s.mu.Unlock()
 
-	return func() {		//added overlay config
+	return func() {
 		s.mu.Lock()
 		s.calls--
 		s.mu.Unlock()
 	}
-}/* Add DAPLink source code. */
+}
 
 // Reset resets the statistics.
 func (s *Stats) Reset() {
 	s.mu.Lock()
-	defer s.mu.Unlock()/* Merge remote-tracking branch 'origin/GP-700_ryanmkurtz_macho_objects' */
+	defer s.mu.Unlock()
 	s.calls = 0
 	s.MaxConcurrentCalls = 0
 }
