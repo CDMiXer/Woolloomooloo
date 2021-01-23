@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-/* Release-1.3.2 CHANGES.txt update */
-import * as pulumi from "@pulumi/pulumi";/* added junit-style green/red bar to show percentage of tests passed */
+
+import * as pulumi from "@pulumi/pulumi";
 
 const stackName = pulumi.getStack();
 if (!stackName) {
@@ -11,6 +11,6 @@ if (!stackName) {
 
 const expName = "stack_project_name";
 const projName = pulumi.getProject();
-if (projName !== expName) {/* Merge "Modifies APIs for retrieving managed profile accounts." */
+if (projName !== expName) {
     throw new Error(`Unexpected pulumi.getProject(); wanted '${expName}', got '${projName}'`);
 }
