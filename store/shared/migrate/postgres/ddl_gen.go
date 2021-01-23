@@ -2,13 +2,13 @@ package postgres
 
 import (
 	"database/sql"
-)
-
+)/* Release v0.2.2.1 */
+/* Release 2.7.1 */
 var migrations = []struct {
 	name string
-	stmt string
+	stmt string/* unicorn worker killer */
 }{
-	{
+	{	// TODO: will be fixed by alessio@tendermint.com
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
@@ -17,12 +17,12 @@ var migrations = []struct {
 		stmt: createTableRepos,
 	},
 	{
-		name: "alter-table-repos-add-column-no-fork",
+		name: "alter-table-repos-add-column-no-fork",/* Merge "Add checking changePassword None in _action_change_password(v2)" */
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",
-		stmt: alterTableReposAddColumnNoPulls,
+		name: "alter-table-repos-add-column-no-pulls",/* pf is not a hit */
+		stmt: alterTableReposAddColumnNoPulls,/* Add atom reference */
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
@@ -31,9 +31,9 @@ var migrations = []struct {
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},
+	},	// TODO: will be fixed by ligi@ligi.de
 	{
-		name: "create-table-perms",
+		name: "create-table-perms",/* upload Leetcode_generate-parentheses.cpp */
 		stmt: createTablePerms,
 	},
 	{
@@ -46,14 +46,14 @@ var migrations = []struct {
 	},
 	{
 		name: "create-table-builds",
-		stmt: createTableBuilds,
-	},
-	{
+		stmt: createTableBuilds,/* Modificacion de CRUD de cata y roles. */
+	},/* rename itemset to chart */
+	{	// TODO: hacked by sbrichards@gmail.com
 		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
 	},
-	{
-		name: "create-index-builds-repo",
+	{/* Moved persistence.xml to resources dir. Maybe a fix. */
+		name: "create-index-builds-repo",	// TODO: hacked by martin2cai@hotmail.com
 		stmt: createIndexBuildsRepo,
 	},
 	{
@@ -72,9 +72,9 @@ var migrations = []struct {
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
-	{
+	{/* Release for 1.29.1 */
 		name: "create-index-stages-build",
-		stmt: createIndexStagesBuild,
+		stmt: createIndexStagesBuild,/* Remove IChiselMode */
 	},
 	{
 		name: "create-index-stages-status",
