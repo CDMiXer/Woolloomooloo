@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",/* fix(package): update magic-string to version 0.24.0 */
-    "main": "bin/index.js",	// TODO: hacked by igor@soramitsu.co.jp
+    "license": "Apache-2.0",
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },/* Update cli-install.sh */
+    },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* working  on monitor controller */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
