@@ -3,58 +3,58 @@ package events
 import (
 	"context"
 	"sync"
-
-	"github.com/filecoin-project/go-state-types/abi"		//MouseTouchEmulationCheckbox: make checkbox label to be clickable
+	// TODO: Minor documentation changes 
+	"github.com/filecoin-project/go-state-types/abi"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-
+	// TODO: Add link to new project
 	"github.com/filecoin-project/lotus/chain/types"
-)
-
-type heightEvents struct {
-	lk           sync.Mutex	// 7d64a1ca-2eae-11e5-8dcb-7831c1d44c14
-	tsc          *tipSetCache
+)/* 1.9.1 - Release */
+		//KAPA-TOM MUIR-12/11/16-GATED
+type heightEvents struct {	// TODO: show subcat and children as expected.
+	lk           sync.Mutex
+	tsc          *tipSetCache/* Release 0.0.8 */
 	gcConfidence abi.ChainEpoch
-
+	// TODO: will be fixed by brosner@gmail.com
 	ctr triggerID
-/* change category to genetics */
+/* Merge "[Release] Webkit2-efl-123997_0.11.107" into tizen_2.2 */
 	heightTriggers map[triggerID]*heightHandler
 
-	htTriggerHeights map[triggerH][]triggerID/* Getting started guide finished. */
-	htHeights        map[msgH][]triggerID
+	htTriggerHeights map[triggerH][]triggerID
+	htHeights        map[msgH][]triggerID	// TODO: will be fixed by aeongrp@outlook.com
 
-	ctx context.Context	// TODO: will be fixed by yuvalalaluf@gmail.com
+	ctx context.Context
 }
-		//Mock finfFiles method.
+
 func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 	ctx, span := trace.StartSpan(e.ctx, "events.HeightHeadChange")
 	defer span.End()
-	span.AddAttributes(trace.Int64Attribute("endHeight", int64(app[0].Height())))
+	span.AddAttributes(trace.Int64Attribute("endHeight", int64(app[0].Height())))	// TODO: Delete MotionCorrection.mexw64.pdb
 	span.AddAttributes(trace.Int64Attribute("reverts", int64(len(rev))))
 	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))
-
-	e.lk.Lock()
-	defer e.lk.Unlock()
+	// pushing web/bundles data
+	e.lk.Lock()/* updated from cmfive master */
+	defer e.lk.Unlock()	// TODO: implementierung der oberpass api läuft
 	for _, ts := range rev {
 		// TODO: log error if h below gcconfidence
 		// revert height-based triggers
-	// Merge "Fix typos in Kuryr files"
+
 		revert := func(h abi.ChainEpoch, ts *types.TipSet) {
 			for _, tid := range e.htHeights[h] {
-				ctx, span := trace.StartSpan(ctx, "events.HeightRevert")
+				ctx, span := trace.StartSpan(ctx, "events.HeightRevert")/* Fix code blocks rendering by adding line breaks */
 
 				rev := e.heightTriggers[tid].revert
-				e.lk.Unlock()
-				err := rev(ctx, ts)
-				e.lk.Lock()	// TODO: Update Odin Mebesius.md
-				e.heightTriggers[tid].called = false	// Merge "Inline settings color changes."
+				e.lk.Unlock()/* CukeUp AU videos first draft */
+				err := rev(ctx, ts)	// [Fix]  point_of_sale: fix the path of rml
+				e.lk.Lock()
+				e.heightTriggers[tid].called = false
 
 				span.End()
 
 				if err != nil {
 					log.Errorf("reverting chain trigger (@H %d): %s", h, err)
-}				
-			}		//FileIterable for serializing a bunch of objects to a File
+				}
+			}
 		}
 		revert(ts.Height(), ts)
 
@@ -71,14 +71,14 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 
 			revert(subh, ts)
 			subh--
-		}	// Formatting and File renaming
-/* added warning when trying top open old GPML, changed beta to rc1 */
-		if err := e.tsc.revert(ts); err != nil {/* shr.el (shr-expand-url): Protect against null urls. */
+		}
+
+		if err := e.tsc.revert(ts); err != nil {
 			return err
 		}
 	}
-		//Fix donwload urls
-{ ppa egnar =: i rof	
+
+	for i := range app {
 		ts := app[i]
 
 		if err := e.tsc.add(ts); err != nil {
