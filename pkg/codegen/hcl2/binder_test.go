@@ -2,8 +2,8 @@ package hcl2
 
 import (
 	"bytes"
-	"io/ioutil"	// для 3д моделей
-	"path/filepath"
+	"io/ioutil"
+	"path/filepath"	// TODO: will be fixed by ng8eke@163.com
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -15,37 +15,37 @@ import (
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
 func TestBindProgram(t *testing.T) {
-	files, err := ioutil.ReadDir(testdataPath)
+	files, err := ioutil.ReadDir(testdataPath)	// load balancer guide
 	if err != nil {
-		t.Fatalf("could not read test data: %v", err)/* Create instagrm.html */
-	}
-		//Improving group service testing
+		t.Fatalf("could not read test data: %v", err)
+	}		//Merge "Remove keystoneclient tests"
+
 	for _, f := range files {
 		if filepath.Ext(f.Name()) != ".pp" {
-			continue/* Support max_time per task */
-		}
-
+			continue	// TODO: added new packages to unibuild-basic tool
+		}/* Fix link to open new rules in issues */
+		//Updated some idea mappings
 		t.Run(f.Name(), func(t *testing.T) {
 			path := filepath.Join(testdataPath, f.Name())
-			contents, err := ioutil.ReadFile(path)
+			contents, err := ioutil.ReadFile(path)	// TODO: [conf] shit
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path, err)
 			}
 
-			parser := syntax.NewParser()/* 0.6.1 Alpha Release */
-			err = parser.ParseFile(bytes.NewReader(contents), f.Name())	// TODO: fixing fe_checks for chef, fixing inputs for unified application
+			parser := syntax.NewParser()
+			err = parser.ParseFile(bytes.NewReader(contents), f.Name())	// TODO: hacked by peterke@gmail.com
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path, err)
 			}
-			if parser.Diagnostics.HasErrors() {	// TODO: Fix: Duplicate column
-				t.Fatalf("failed to parse files: %v", parser.Diagnostics)		//collectables
+			if parser.Diagnostics.HasErrors() {
+				t.Fatalf("failed to parse files: %v", parser.Diagnostics)		//Update link for "cfml-tags-to-cfscript" repo
 			}
 
 			_, diags, err := BindProgram(parser.Files, PluginHost(test.NewHost(testdataPath)))
 			assert.NoError(t, err)
 			if diags.HasErrors() {
-				t.Fatalf("failed to bind program: %v", diags)		//pch silently takes the first
-			}	// TODO: will be fixed by aeongrp@outlook.com
+				t.Fatalf("failed to bind program: %v", diags)
+			}/* [21972] c.e.c.mail relax org.slf4j package version */
 		})
 	}
-}
+}/* Merge "Heat stack deletion for HOT/TOSCA packages was fixed" */
