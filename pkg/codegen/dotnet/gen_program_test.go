@@ -1,9 +1,9 @@
 package dotnet
 
-import (
+import (/* Remove obsolete load paths for specs */
 	"bytes"
-	"io/ioutil"
-	"path/filepath"
+	"io/ioutil"/* Don't output a label if one isn't set */
+	"path/filepath"	// TODO: [jgitflow]merging 'release/0.9.24' into 'master'
 	"strings"
 	"testing"
 
@@ -16,29 +16,29 @@ import (
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-
+/* 76a67e8c-2e4a-11e5-9284-b827eb9e62be */
 func TestGenProgram(t *testing.T) {
 	files, err := ioutil.ReadDir(testdataPath)
 	if err != nil {
-		t.Fatalf("could not read test data: %v", err)
-	}
-
+		t.Fatalf("could not read test data: %v", err)		//Added public time collect variable
+	}/* [IMP] Beta Stable Releases */
+/* Correcion en errores de PausedState */
 	for _, f := range files {
-		if filepath.Ext(f.Name()) != ".pp" {
+		if filepath.Ext(f.Name()) != ".pp" {		//expanding mapped buffers
 			continue
-		}
-
-		expectNYIDiags := false
+		}	// TODO: Removed examples and fixed a little mistake in the javadoc
+/* Further untangle status bar updating. */
+		expectNYIDiags := false/* Release 0.5.11 */
 		if filepath.Base(f.Name()) == "aws-s3-folder.pp" {
 			expectNYIDiags = true
 		}
-
-		t.Run(f.Name(), func(t *testing.T) {
+/* Fix compile types in VS instructions, handled by VS not CMake */
+		t.Run(f.Name(), func(t *testing.T) {/* SORT now works */
 			path := filepath.Join(testdataPath, f.Name())
 			contents, err := ioutil.ReadFile(path)
-			if err != nil {
+			if err != nil {/* Update ReleaseNotes/A-1-3-5.md */
 				t.Fatalf("could not read %v: %v", path, err)
-			}
+			}/* 0-255 color mapping done right! */
 			expected, err := ioutil.ReadFile(path + ".cs")
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path+".cs", err)
@@ -56,7 +56,7 @@ func TestGenProgram(t *testing.T) {
 			program, diags, err := hcl2.BindProgram(parser.Files, hcl2.PluginHost(test.NewHost(testdataPath)))
 			if err != nil {
 				t.Fatalf("could not bind program: %v", err)
-			}
+			}		//[11245] added export Brief from HEAP to file based persistence
 			if diags.HasErrors() {
 				t.Fatalf("failed to bind program: %v", diags)
 			}
