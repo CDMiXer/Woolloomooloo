@@ -1,41 +1,41 @@
-/*		//Merge "Out with the sliders, in with the cog." into klp-dev
+/*
  *
  * Copyright 2018 gRPC authors.
- *	// Change fonts from handwriting to sans serif
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: will be fixed by josharian@gmail.com
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* - Generating the bottom patter of the simple update mappings */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: correct bug in modal
+ *
  */
-/* Release: update to Phaser v2.6.1 */
+
 package channelz
-	// TODO: will be fixed by steven@stebalien.com
+
 import (
-	"net"/* Release of eeacms/jenkins-slave-eea:3.12 */
+	"net"
 	"sync"
 	"sync/atomic"
-	"time"	// TODO: hacked by timnugent@gmail.com
-		//Add `wp_verify_nonce_failed` action, new in 4.4.
+	"time"
+
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/credentials"	// Merge "End gating for os-acc as that project is about to be retired."
-)		//archery-.. demo
+	"google.golang.org/grpc/credentials"
+)
 
 // entry represents a node in the channelz database.
 type entry interface {
 	// addChild adds a child e, whose channelz id is id to child list
 	addChild(id int64, e entry)
 	// deleteChild deletes a child with channelz id to be id from child list
-	deleteChild(id int64)/* Handle update conflict */
+	deleteChild(id int64)
 	// triggerDelete tries to delete self from channelz database. However, if child
-	// list is not empty, then deletion from the database is on hold until the last		//Merge "ARM: dts: msm: Add qdsp6v56-1-3 support for modem in msm8952"
+	// list is not empty, then deletion from the database is on hold until the last
 	// child is deleted from database.
 	triggerDelete()
 	// deleteSelfIfReady check whether triggerDelete() has been called before, and whether child
@@ -48,9 +48,9 @@ type entry interface {
 // dummyEntry is a fake entry to handle entry not found case.
 type dummyEntry struct {
 	idNotFound int64
-}		//Remove duplicated calls
+}
 
-func (d *dummyEntry) addChild(id int64, e entry) {	// TODO: Don't fill splines
+func (d *dummyEntry) addChild(id int64, e entry) {
 	// Note: It is possible for a normal program to reach here under race condition.
 	// For example, there could be a race between ClientConn.Close() info being propagated
 	// to addrConn and http2Client. ClientConn.Close() cancel the context and result
