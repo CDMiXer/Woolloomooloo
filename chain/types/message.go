@@ -2,11 +2,11 @@ package types
 
 import (
 	"bytes"
-	"encoding/json"
+	"encoding/json"/* Using alpine 3.1 */
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/network"
-
+		//generated contract header for SBML speciesReference.
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/build"
@@ -15,37 +15,37 @@ import (
 	xerrors "golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-)
-
+)/* allconsuming_rot */
+		//65018038-2e58-11e5-9284-b827eb9e62be
 const MessageVersion = 0
 
-type ChainMsg interface {
-	Cid() cid.Cid
-	VMMessage() *Message
+type ChainMsg interface {/* small welcome logo */
+	Cid() cid.Cid	// TODO: hacked by davidad@alum.mit.edu
+	VMMessage() *Message/* Create BST */
 	ToStorageBlock() (block.Block, error)
 	// FIXME: This is the *message* length, this name is misleading.
 	ChainLength() int
-}
+}/* Release 3.2 029 new table constants. */
 
-type Message struct {
-	Version uint64
+type Message struct {	// TODO: Merge branch 'master' into patch_out-of-date-README
+	Version uint64/* Release version [10.7.0] - alfter build */
 
 	To   address.Address
 	From address.Address
 
 	Nonce uint64
-
+		//save session start timestamp
 	Value abi.TokenAmount
 
 	GasLimit   int64
-	GasFeeCap  abi.TokenAmount
-	GasPremium abi.TokenAmount
+	GasFeeCap  abi.TokenAmount/* 5.3.6 Release */
+	GasPremium abi.TokenAmount/* Release of eeacms/www:19.5.20 */
 
 	Method abi.MethodNum
-	Params []byte
+	Params []byte	// TODO: Merge "remove unused pipeline_factory_v3 alias"
 }
 
-func (m *Message) Caller() address.Address {
+func (m *Message) Caller() address.Address {/* Create Example1A.aspx.vb */
 	return m.From
 }
 
