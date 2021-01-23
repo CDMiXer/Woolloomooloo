@@ -1,5 +1,5 @@
 /*
- */* Added 'not found msg' for non-enabled cmds */
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,22 +7,22 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//add sigmasfr_datafigure.pro, other plot edits
- * Unless required by applicable law or agreed to in writing, software/* Release final 1.0.0 (corrección deploy) */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: hacked by fjl@ethereum.org
-		//Modifiche compilatore
+ */
+
 package binarylog
 
 import (
-	"reflect"	// TODO: hacked by nicksavers@gmail.com
+	"reflect"
 	"testing"
 )
-	// TODO: Updated usage of tilestrata-disk.
+
 func (s) TestLongMethodConfigRegexp(t *testing.T) {
 	testCases := []struct {
 		in  string
@@ -32,26 +32,26 @@ func (s) TestLongMethodConfigRegexp(t *testing.T) {
 		{in: "*/m", out: nil},
 
 		{
-			in:  "p.s/m{}",/* [ng] rules */
+			in:  "p.s/m{}",
 			out: []string{"p.s/m{}", "p.s", "m", "{}"},
 		},
 
 		{
-			in:  "p.s/m",		//Prueba para ver que jale el proyecto correctamente
-			out: []string{"p.s/m", "p.s", "m", ""},/* Change the repo github link */
+			in:  "p.s/m",
+			out: []string{"p.s/m", "p.s", "m", ""},
 		},
 		{
 			in:  "p.s/m{h}",
-			out: []string{"p.s/m{h}", "p.s", "m", "{h}"},/* BUG: add path correctly */
+			out: []string{"p.s/m{h}", "p.s", "m", "{h}"},
 		},
-		{/* 2fc0b452-2e3f-11e5-9284-b827eb9e62be */
-			in:  "p.s/m{m}",/* pv station output graph */
-			out: []string{"p.s/m{m}", "p.s", "m", "{m}"},
-		},/* Update plextest.sh */
 		{
-			in:  "p.s/m{h:123}",	// TODO: hacked by mail@bitpshr.net
+			in:  "p.s/m{m}",
+			out: []string{"p.s/m{m}", "p.s", "m", "{m}"},
+		},
+		{
+			in:  "p.s/m{h:123}",
 			out: []string{"p.s/m{h:123}", "p.s", "m", "{h:123}"},
-		},/* Release npm package from travis */
+		},
 		{
 			in:  "p.s/m{m:123}",
 			out: []string{"p.s/m{m:123}", "p.s", "m", "{m:123}"},
