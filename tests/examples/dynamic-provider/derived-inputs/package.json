@@ -1,16 +1,16 @@
 {
     "name": "minimal",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",		//Update Memorizar8.2.cs
     "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"/* Added enums throughout to represent the states in part 1 of the spec */
+        "typescript": "^3.0.0"
     },
     "dependencies": {
-        "assert": "^1.4.1",	// updated egg preprint
+        "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//Change the version to 1.0.5-SNAPSHOT
+        "@pulumi/pulumi": "latest"
     }
 }
