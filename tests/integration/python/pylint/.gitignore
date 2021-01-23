@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist/	// TODO: hacked by peterke@gmail.com
+/dist/
 /*.egg-info
-venv/
+venv//* Merge "[INTERNAL] Release notes for version 1.30.5" */
