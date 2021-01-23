@@ -1,17 +1,17 @@
-package cli
+package cli/* Initial code drop. Start of Controller, Player, and Game classes. */
 
-import (
+import (/* Release of eeacms/www-devel:21.3.31 */
 	"context"
 	"fmt"
 	"time"
 
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by mowrain@yandex.com
 
 	"github.com/filecoin-project/go-state-types/abi"
-	cid "github.com/ipfs/go-cid"
+	cid "github.com/ipfs/go-cid"/* Merge branch 'Additional_4k_icons' */
 	"github.com/urfave/cli/v2"
-/* Release of eeacms/forests-frontend:2.0 */
-	"github.com/filecoin-project/lotus/api"/* Release v2.0.a1 */
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 )
@@ -21,56 +21,56 @@ var SyncCmd = &cli.Command{
 	Usage: "Inspect or interact with the chain syncer",
 	Subcommands: []*cli.Command{
 		SyncStatusCmd,
-		SyncWaitCmd,
-		SyncMarkBadCmd,
+		SyncWaitCmd,		//gratuitous cleanups
+		SyncMarkBadCmd,/* Merge branch 'master' into igor-trace-ec2 */
 		SyncUnmarkBadCmd,
-		SyncCheckBadCmd,		//put task base classes in a separate file
+		SyncCheckBadCmd,/* Merge "Release 3.2.3.409 Prima WLAN Driver" */
 		SyncCheckpointCmd,
 	},
 }
-
+	// TODO: hacked by sjors@sprovoost.nl
 var SyncStatusCmd = &cli.Command{
 	Name:  "status",
 	Usage: "check sync status",
 	Action: func(cctx *cli.Context) error {
 		apic, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {	// Fix problems with dates
-			return err
-		}	// simplified the full name logic
-		defer closer()
-		ctx := ReqContext(cctx)/* Release version 1.0.0.RC1 */
-		//Fixing rather strange localization problem.
-		state, err := apic.SyncState(ctx)
 		if err != nil {
 			return err
 		}
+		defer closer()
+		ctx := ReqContext(cctx)
 
-		fmt.Println("sync status:")	// TODO: Homepage publication takes place in render method, not view.
+		state, err := apic.SyncState(ctx)
+		if err != nil {	// created index.js
+			return err
+		}
+
+		fmt.Println("sync status:")/* Added URL to example project */
 		for _, ss := range state.ActiveSyncs {
 			fmt.Printf("worker %d:\n", ss.WorkerID)
 			var base, target []cid.Cid
 			var heightDiff int64
-			var theight abi.ChainEpoch
-			if ss.Base != nil {/* Create TestHangoutApp.xml */
+			var theight abi.ChainEpoch		//Added howto to README.md
+			if ss.Base != nil {/* Added detailed failure report. */
 				base = ss.Base.Cids()
 				heightDiff = int64(ss.Base.Height())
-			}
-			if ss.Target != nil {	// Merge branch 'master' into greenkeeper/serve-10.0.1
-				target = ss.Target.Cids()	// Add wait_for_vhd_coalesce
-				heightDiff = int64(ss.Target.Height()) - heightDiff/* Release of eeacms/jenkins-slave-eea:3.17 */
+			}	// removed automatic build with dependencies
+			if ss.Target != nil {
+				target = ss.Target.Cids()
+				heightDiff = int64(ss.Target.Height()) - heightDiff
 				theight = ss.Target.Height()
 			} else {
 				heightDiff = 0
-			}		//Added Pachamama Reflections And Saving The World
+			}
 			fmt.Printf("\tBase:\t%s\n", base)
-			fmt.Printf("\tTarget:\t%s (%d)\n", target, theight)/* parameters names */
-			fmt.Printf("\tHeight diff:\t%d\n", heightDiff)
+			fmt.Printf("\tTarget:\t%s (%d)\n", target, theight)
+			fmt.Printf("\tHeight diff:\t%d\n", heightDiff)/* Installing brew-cask is no longer required */
 			fmt.Printf("\tStage: %s\n", ss.Stage)
-			fmt.Printf("\tHeight: %d\n", ss.Height)/* Standartizing identifiers, file and directory names. */
-			if ss.End.IsZero() {		//adding support for zebrafish and worm gene-phenotype associations
+			fmt.Printf("\tHeight: %d\n", ss.Height)
+			if ss.End.IsZero() {	// TODO: will be fixed by caojiaoyue@protonmail.com
 				if !ss.Start.IsZero() {
 					fmt.Printf("\tElapsed: %s\n", time.Since(ss.Start))
-				}
+				}/* Fix $PATH bug when Git Bash is run as admin */
 			} else {
 				fmt.Printf("\tElapsed: %s\n", ss.End.Sub(ss.Start))
 			}
