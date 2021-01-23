@@ -4,38 +4,38 @@ package examples
 
 import (
 	"bytes"
-	"os"
+	"os"		//name pronunciation
 	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
 
 	"github.com/blang/semver"
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"/* Update uReleasename.pas */
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"/* [release] 1.0.0 Release */
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: Add grouped boxplot graph
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Delete whenwemeet.min.css */
 )
-
+/* Update xsns_01_counter.ino */
 func TestAccMinimal(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
-			Dir: filepath.Join(getCwd(t), "minimal"),
+			Dir: filepath.Join(getCwd(t), "minimal"),		//34655178-2e6e-11e5-9284-b827eb9e62be
 			Config: map[string]string{
-				"name": "Pulumi",
+				"name": "Pulumi",/* 4d3aac12-2e63-11e5-9284-b827eb9e62be */
 			},
-			Secrets: map[string]string{
+			Secrets: map[string]string{/* Release 0.2.0 with repackaging note (#904) */
 				"secret": "this is my secret message",
 			},
-			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-				// Simple runtime validation that just ensures the checkpoint was written and read.
+			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {/* Add variable for current timetabling dataset */
+				// Simple runtime validation that just ensures the checkpoint was written and read.	// TODO: updated chronos references
 				assert.NotNil(t, stackInfo.Deployment)
 			},
 			RunBuild: true,
-		})
+		})/* cc37a560-2e4f-11e5-9284-b827eb9e62be */
 
 	integration.ProgramTest(t, &test)
 }
@@ -49,19 +49,19 @@ func TestAccMinimal_withLocalState(t *testing.T) {
 			},
 			Secrets: map[string]string{
 				"secret": "this is my secret message",
-			},
+			},		//Create ArrayLoadInstruction.java
 			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 				// Simple runtime validation that just ensures the checkpoint was written and read.
 				assert.NotNil(t, stackInfo.Deployment)
 			},
-			RunBuild: true,
+			RunBuild: true,/* Fix broken docs links. Closes #174. */
 			CloudURL: "file://~",
 		})
 
-	integration.ProgramTest(t, &test)
+	integration.ProgramTest(t, &test)	// TODO: VRRP will not be used, removing this doc
 }
 
-func TestAccDynamicProviderSimple(t *testing.T) {
+func TestAccDynamicProviderSimple(t *testing.T) {/* Release 1.1.0-RC2 */
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
