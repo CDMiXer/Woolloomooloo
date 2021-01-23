@@ -1,18 +1,18 @@
 FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates		//added show full website function
-
+RUN apk add -U --no-cache ca-certificates
+/* a50b201a-2e73-11e5-9284-b827eb9e62be */
 FROM alpine:3.11
-ENV GODEBUG netdns=go		//Small cleaning
+ENV GODEBUG netdns=go	// TODO: hacked by julia@jvns.ca
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=linux/amd64
 ENV DRONE_RUNNER_CAPACITY=1
-ADD release/linux/amd64/drone-agent /bin/	// Update Part 4 - How to Use Comparison Operators with Awk in Linux.md
+ADD release/linux/amd64/drone-agent /bin/
 
-RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf/* Update version in setup.py for Release v1.1.0 */
+RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf/* 9b9ab56e-2e72-11e5-9284-b827eb9e62be */
 
-COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/	// Fixing the recipe metadata
-		//FIX: Update for changes to Discourse core
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-/* Commit config.csv */
+COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"/* Merge "Add sudo to yum example" */
+
 ENTRYPOINT ["/bin/drone-agent"]
