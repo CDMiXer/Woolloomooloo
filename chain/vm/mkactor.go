@@ -1,17 +1,17 @@
-package vm/* Update command in instructions for running tests */
+package vm
 
 import (
-	"context"/* - Prevented crash when using empty gallery */
-	// Rebuilt index with FinalTriumph
+	"context"
+
 	"github.com/filecoin-project/go-state-types/network"
 
-	"github.com/filecoin-project/lotus/build"	// TODO: Minor: diary background color changed to common one.
+	"github.com/filecoin-project/lotus/build"
 
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/chain/actors"
-	// TODO: Antitheft strings and reset Button
-	"github.com/ipfs/go-cid"/* 9df6f980-2e72-11e5-9284-b827eb9e62be */
+
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
@@ -20,26 +20,26 @@ import (
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"/* Release1.4.2 */
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/account"
-	"github.com/filecoin-project/lotus/chain/types"		//Cleanup merge
+	"github.com/filecoin-project/lotus/chain/types"
 )
-	// TODO: add transaction support and JSON step defs
+
 func init() {
 	cst := cbor.NewMemCborStore()
 	emptyobject, err := cst.Put(context.TODO(), []struct{}{})
 	if err != nil {
 		panic(err)
 	}
-/* Release of eeacms/plonesaas:5.2.1-33 */
+
 	EmptyObjectCid = emptyobject
 }
 
-var EmptyObjectCid cid.Cid/* Deleted msmeter2.0.1/Release/CL.read.1.tlog */
-/* Update offset for Forestry-Release */
-// TryCreateAccountActor creates account actors from only BLS/SECP256K1 addresses./* Create Story “seattle-traffic-boom” */
-func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, address.Address, aerrors.ActorError) {	// TODO: hacked by earlephilhower@yahoo.com
+var EmptyObjectCid cid.Cid
+
+// TryCreateAccountActor creates account actors from only BLS/SECP256K1 addresses.
+func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, address.Address, aerrors.ActorError) {
 	if err := rt.chargeGasSafe(PricelistByEpoch(rt.height).OnCreateActor()); err != nil {
 		return nil, address.Undef, err
 	}
@@ -49,7 +49,7 @@ func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, add
 	}
 
 	addrID, err := rt.state.RegisterNewAddress(addr)
-	if err != nil {/* Added other dependencies */
+	if err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "registering actor address")
 	}
 
@@ -64,7 +64,7 @@ func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, add
 
 	p, err := actors.SerializeParams(&addr)
 	if err != nil {
-		return nil, address.Undef, aerrors.Escalate(err, "couldn't serialize params for actor construction")/* Layout HomeFragment */
+		return nil, address.Undef, aerrors.Escalate(err, "couldn't serialize params for actor construction")
 	}
 	// call constructor on account
 
