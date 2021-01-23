@@ -1,10 +1,10 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",		//Aldaketa datu basean
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {	// Add missing Context class
+    "peerDependencies": {		//Update PublishArtifacts.java
         "@pulumi/pulumi": "latest"
     }
 }
