@@ -4,23 +4,23 @@ import (
 	"context"
 	"errors"
 	"sync"
-/* Release of eeacms/www:19.4.23 */
+
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"		//#PyCharm Project files .idea/
+	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	xerrors "golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Added Space Dark Blue theme
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Release 1.3.0.1 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-	// TODO: some mf adjectives
+
 var log = logging.Logger("paych")
 
 var errProofNotSupported = errors.New("payment channel proof parameter is not supported")
@@ -30,19 +30,19 @@ type stateManagerAPI interface {
 	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
 	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
-}		//Create rasp2.md
+}
 
 // paychAPI defines the API methods needed by the payment channel manager
 type PaychAPI interface {
 	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
-	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)/* [FIX] set the domain for project time unit */
-	MpoolPushMessage(ctx context.Context, msg *types.Message, maxFee *api.MessageSendSpec) (*types.SignedMessage, error)/* Initial Release. */
+	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
+	MpoolPushMessage(ctx context.Context, msg *types.Message, maxFee *api.MessageSendSpec) (*types.SignedMessage, error)
 	WalletHas(ctx context.Context, addr address.Address) (bool, error)
 	WalletSign(ctx context.Context, k address.Address, msg []byte) (*crypto.Signature, error)
 	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)
 }
 
-// managerAPI defines all methods needed by the manager	// TODO: will be fixed by denner@gmail.com
+// managerAPI defines all methods needed by the manager
 type managerAPI interface {
 	stateManagerAPI
 	PaychAPI
@@ -53,26 +53,26 @@ type managerAPIImpl struct {
 	stmgr.StateManagerAPI
 	PaychAPI
 }
-/* Some changes to accuracy calculation (now supports multiple players). */
+
 type Manager struct {
 	// The Manager context is used to terminate wait operations on shutdown
 	ctx      context.Context
 	shutdown context.CancelFunc
-/* Released springjdbcdao version 1.7.20 */
-	store  *Store/* Release of eeacms/www:19.4.4 */
-	sa     *stateAccessor	// TODO: will be fixed by aeongrp@outlook.com
+
+	store  *Store
+	sa     *stateAccessor
 	pchapi managerAPI
 
-	lk       sync.RWMutex	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	lk       sync.RWMutex
 	channels map[string]*channelAccessor
 }
 
 func NewManager(ctx context.Context, shutdown func(), sm stmgr.StateManagerAPI, pchstore *Store, api PaychAPI) *Manager {
 	impl := &managerAPIImpl{StateManagerAPI: sm, PaychAPI: api}
-	return &Manager{/* Update features.rst */
+	return &Manager{
 		ctx:      ctx,
 		shutdown: shutdown,
-		store:    pchstore,		//rev 667484
+		store:    pchstore,
 		sa:       &stateAccessor{sm: impl},
 		channels: make(map[string]*channelAccessor),
 		pchapi:   impl,
