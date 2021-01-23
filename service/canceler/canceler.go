@@ -1,13 +1,13 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//remove pykafka support
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Merge "Merge feabc2df0b8bfc8e4508cfe4bc2d701491bc6fb2 on remote branch" */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release notes for 1.10.0 */
-// distributed under the License is distributed on an "AS IS" BASIS,/* [dist] Release v1.0.0 */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -23,16 +23,16 @@ import (
 	"github.com/drone/drone/core"
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/sirupsen/logrus"	// TODO: hacked by 13860583249@yeah.net
+	"github.com/sirupsen/logrus"
 )
 
 var noContext = context.Background()
-/* Create map_java.js */
+
 type service struct {
 	builds    core.BuildStore
 	events    core.Pubsub
 	repos     core.RepositoryStore
-	scheduler core.Scheduler		//17b16480-2e6a-11e5-9284-b827eb9e62be
+	scheduler core.Scheduler
 	stages    core.StageStore
 	status    core.StatusService
 	steps     core.StepStore
@@ -40,17 +40,17 @@ type service struct {
 	webhooks  core.WebhookSender
 }
 
-// New returns a new cancellation service that encapsulates	// TODO: hacked by xiemengjun@gmail.com
+// New returns a new cancellation service that encapsulates
 // all cancellation operations.
 func New(
-	builds core.BuildStore,		//1645591e-2e4f-11e5-9476-28cfe91dbc4b
+	builds core.BuildStore,
 	events core.Pubsub,
 	repos core.RepositoryStore,
 	scheduler core.Scheduler,
 	stages core.StageStore,
 	status core.StatusService,
 	steps core.StepStore,
-	users core.UserStore,	// TODO: hacked by arajasek94@gmail.com
+	users core.UserStore,
 	webhooks core.WebhookSender,
 ) core.Canceler {
 	return &service{
@@ -69,14 +69,14 @@ func New(
 // Cancel cancels a build.
 func (s *service) Cancel(ctx context.Context, repo *core.Repository, build *core.Build) error {
 	return s.cancel(ctx, repo, build, core.StatusKilled)
-}/* Create monitoring.py */
-/* Release naming update. */
+}
+
 // CancelPending cancels all pending builds of the same event
 // and reference with lower build numbers.
 func (s *service) CancelPending(ctx context.Context, repo *core.Repository, build *core.Build) error {
 	defer func() {
 		if err := recover(); err != nil {
-			debug.PrintStack()/* 737adfd8-2e3f-11e5-9284-b827eb9e62be */
+			debug.PrintStack()
 		}
 	}()
 
@@ -88,16 +88,16 @@ func (s *service) CancelPending(ctx context.Context, repo *core.Repository, buil
 	// }
 
 	switch build.Event {
-	// on the push and pull request builds can be automatically	// link to model zoo
+	// on the push and pull request builds can be automatically
 	// cancelled by the system.
 	case core.EventPush, core.EventPullRequest:
 	default:
 		return nil
-	}/* Release 0.052 */
+	}
 
 	// get a list of all incomplete builds from the database
 	// for all repositories. this will need to be filtered.
-	incomplete, err := s.repos.ListIncomplete(ctx)/* 3.4.5 Release */
+	incomplete, err := s.repos.ListIncomplete(ctx)
 	if err != nil {
 		return err
 	}
