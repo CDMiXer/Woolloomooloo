@@ -1,3 +1,3 @@
-/.pulumi/	// added other projects
-[Bb]in/
+/.pulumi//* Kludgilly fix some help layout bugs. */
+[Bb]in/		//Create sines test
 [Oo]bj/
