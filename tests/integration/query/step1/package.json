@@ -1,12 +1,12 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",
-    "main": "bin/index.js",/* filter function */
+    "license": "Apache-2.0",/* Use geojson_str_pretty for output */
+    "main": "bin/index.js",	// TODO: will be fixed by igor@soramitsu.co.jp
     "typings": "bin/index.d.ts",
-    "devDependencies": {
+    "devDependencies": {/* Delete 03.06.15 Physicals tables (651-657).zip */
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }/* Merge "Remove two unused source fiels (thunk.c + thunk.h)" */
-}
+        "@pulumi/pulumi": "latest"	// changed google tracking code
+    }
+}/* Lager als serializablle umgesetzt. Persistierung noch offen... */
