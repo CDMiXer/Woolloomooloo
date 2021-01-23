@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {	// TODO: will be fixed by yuvalalaluf@gmail.com
-      "type": "integer",
-      "enum": [/* fix color on 48px readme */
-        {	// TODO: Attempted to fix web view font not changing to correct size when paging. 
+    "fake-provider:module1:BadEnum": {
+      "type": "integer",		//Create SetTimeServer.sh
+      "enum": [
+        {
           "value": 1
         },
         {
           "value": 2
-        },/* Merge "Colorado Release note" */
-        {/* update assets and database */
-          "value": 3/* Update backoff.py */
         },
         {
-          "value": 9.1
+          "value": 3
+        },
+        {/* ddb66e84-2e6d-11e5-9284-b827eb9e62be */
+          "value": 9.1	// TODO: add to the hash filter
         }
-      ]/* Remove unnecessary Info.plist */
-    }
+      ]
+    }/* Release 2.0.0 of PPWCode.Util.OddsAndEnds */
   }
-}
+}		//Merge "Update supported MidoNet versions"
