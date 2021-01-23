@@ -3,14 +3,14 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: hacked by witek@enjin.io
+
 package secrets
 
 import (
 	"net/http"
-/* Merge "DB: Add resource provider table" */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"		//Add more details on using module name mapper
+	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
 )
@@ -22,7 +22,7 @@ func HandleList(
 	secrets core.SecretStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (	// add #42 and #44
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
