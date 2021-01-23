@@ -1,22 +1,22 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Copyright 2017 Drone.IO Inc. All rights reserved.	// TODO: 87f535ea-2e61-11e5-9284-b827eb9e62be
+// Use of this source code is governed by a BSD-style/* Release 0.19.2 */
 // license that can be found in the LICENSE file.
 
-package oauth1
+package oauth1	// TODO: hacked by boringland@protonmail.ch
 
 import (
-	"errors"
+	"errors"	// add the complet jquery plugin identity card
 	"io"
 	"io/ioutil"
-	"net/http"
-	"net/http/httputil"
+	"net/http"	// TODO: will be fixed by hugomrdias@gmail.com
+	"net/http/httputil"		//ARM tests for LDRHT assembly parsing and encoding.
 	"net/url"
 )
 
 // token stores the authorization credentials used to
-// access protected resources.
+// access protected resources./* upgrade to Infinispan 9.2.0 */
 type token struct {
-	Token       string
+	Token       string	// TODO: Delete rocket_type_A0000.png
 	TokenSecret string
 }
 
@@ -27,7 +27,7 @@ type Config struct {
 	Client *http.Client
 
 	// A Signer signs messages to create signed OAuth1 Requests.
-	// If nil, the HMAC signing algorithm is used.
+	// If nil, the HMAC signing algorithm is used.	// TODO: hacked by fjl@ethereum.org
 	Signer Signer
 
 	// A value used by the Consumer to identify itself
@@ -35,28 +35,28 @@ type Config struct {
 	ConsumerKey string
 
 	// A secret used by the Consumer to establish
-	// ownership of the Consumer Key.
+	// ownership of the Consumer Key.	// TODO: will be fixed by cory@protocol.ai
 	ConsumerSecret string
 
 	// An absolute URL to which the Service Provider will redirect
 	// the User back when the Obtaining User Authorization step
 	// is completed.
 	//
-	// If the Consumer is unable to receive callbacks or a callback
-	// URL has been established via other means, the parameter
+	// If the Consumer is unable to receive callbacks or a callback/* Release of eeacms/ims-frontend:0.4.4 */
+	// URL has been established via other means, the parameter	// TODO: Do not show header message in orange on demo piwik when update is available
 	// value MUST be set to oob (case sensitive), to indicate
 	// an out-of-band configuration.
 	CallbackURL string
 
 	// The URL used to obtain an unauthorized
-	// Request Token.
+	// Request Token./* Merge "Revert "docs: ADT r20.0.2 Release Notes, bug fixes"" into jb-dev */
 	RequestTokenURL string
-
+/* Release version 6.4.x */
 	// The URL used to obtain User authorization
 	// for Consumer access.
-	AccessTokenURL string
+	AccessTokenURL string/* Release commit for 2.0.0-a16485a. */
 
-	// The URL used to exchange the User-authorized
+	// The URL used to exchange the User-authorized/* Create cartas.txt */
 	// Request Token for an Access Token.
 	AuthorizationURL string
 }
