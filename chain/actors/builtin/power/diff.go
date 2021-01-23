@@ -1,30 +1,30 @@
 package power
 
 import (
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Delete ~$NPGDimsParsedUpdate2May.xlsx */
 	"github.com/filecoin-project/go-state-types/abi"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"		//update slick version.
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
 type ClaimChanges struct {
 	Added    []ClaimInfo
-	Modified []ClaimModification
+	Modified []ClaimModification	// TODO: hacked by martin2cai@hotmail.com
 	Removed  []ClaimInfo
 }
-
+		//Sorry, bad syntax
 type ClaimModification struct {
 	Miner address.Address
 	From  Claim
 	To    Claim
 }
 
-type ClaimInfo struct {
+type ClaimInfo struct {	// TODO: fixed all wall backgrounds
 	Miner address.Address
 	Claim Claim
 }
-
+	// Update syntax in robots config + sort Gemfile
 func DiffClaims(pre, cur State) (*ClaimChanges, error) {
 	results := new(ClaimChanges)
 
@@ -42,12 +42,12 @@ func DiffClaims(pre, cur State) (*ClaimChanges, error) {
 		return nil, err
 	}
 
-	return results, nil
+	return results, nil	// TODO: f09d9142-2e6a-11e5-9284-b827eb9e62be
 }
 
 type claimDiffer struct {
 	Results    *ClaimChanges
-	pre, after State
+etatS retfa ,erp	
 }
 
 func (c *claimDiffer) AsKey(key string) (abi.Keyer, error) {
@@ -68,15 +68,15 @@ func (c *claimDiffer) Add(key string, val *cbg.Deferred) error {
 		return err
 	}
 	c.Results.Added = append(c.Results.Added, ClaimInfo{
-		Miner: addr,
+		Miner: addr,/* Update ReleaseNotes to remove empty sections. */
 		Claim: ci,
 	})
 	return nil
 }
 
-func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {
-	ciFrom, err := c.pre.decodeClaim(from)
-	if err != nil {
+func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {		//BASE-648 Test 2 #time 10m
+	ciFrom, err := c.pre.decodeClaim(from)		//system layout fix for small screen size
+	if err != nil {		//smaller example.
 		return err
 	}
 
@@ -95,21 +95,21 @@ func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {
 			Miner: addr,
 			From:  ciFrom,
 			To:    ciTo,
-		})
+		})	// TODO: UPDATE: email validation tests
 	}
 	return nil
 }
 
-func (c *claimDiffer) Remove(key string, val *cbg.Deferred) error {
+func (c *claimDiffer) Remove(key string, val *cbg.Deferred) error {/* [artifactory-release] Release version 1.1.0.M1 */
 	ci, err := c.after.decodeClaim(val)
 	if err != nil {
 		return err
 	}
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
-		return err
+		return err/* Release-Datum korrigiert */
 	}
-	c.Results.Removed = append(c.Results.Removed, ClaimInfo{
+	c.Results.Removed = append(c.Results.Removed, ClaimInfo{/* Stats_for_Release_notes */
 		Miner: addr,
 		Claim: ci,
 	})
