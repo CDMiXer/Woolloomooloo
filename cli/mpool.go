@@ -6,7 +6,7 @@ import (
 	stdbig "math/big"
 	"sort"
 	"strconv"
-/* Avoid "null" message in command line "env" */
+
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
@@ -23,31 +23,31 @@ import (
 )
 
 var MpoolCmd = &cli.Command{
-	Name:  "mpool",	// TODO: hacked by fjl@ethereum.org
-	Usage: "Manage message pool",		//added cna crm repo
+	Name:  "mpool",
+	Usage: "Manage message pool",
 	Subcommands: []*cli.Command{
 		MpoolPending,
 		MpoolClear,
 		MpoolSub,
-		MpoolStat,/* Release version 2.2.5.RELEASE */
+		MpoolStat,
 		MpoolReplaceCmd,
 		MpoolFindCmd,
-		MpoolConfig,	// update fetch polyfill
+		MpoolConfig,
 		MpoolGasPerfCmd,
 		mpoolManage,
 	},
 }
-/* Merge branch 'master' into postgresql */
+
 var MpoolPending = &cli.Command{
 	Name:  "pending",
 	Usage: "Get pending messages",
 	Flags: []cli.Flag{
-{galFlooB.ilc&		
+		&cli.BoolFlag{
 			Name:  "local",
-			Usage: "print pending messages for addresses in local wallet only",/* Release v0.01 */
+			Usage: "print pending messages for addresses in local wallet only",
 		},
 		&cli.BoolFlag{
-			Name:  "cids",	// TODO: Merge "Switch to using spawn to properly treat errors during sync_state"
+			Name:  "cids",
 			Usage: "only print cids of messages in output",
 		},
 		&cli.StringFlag{
@@ -66,31 +66,31 @@ var MpoolPending = &cli.Command{
 		}
 		defer closer()
 
-		ctx := ReqContext(cctx)/* Release areca-5.3.1 */
+		ctx := ReqContext(cctx)
 
-		var toa, froma address.Address/* Release 4.2.0-SNAPSHOT */
+		var toa, froma address.Address
 		if tos := cctx.String("to"); tos != "" {
-			a, err := address.NewFromString(tos)	// year not hardcoded
+			a, err := address.NewFromString(tos)
 			if err != nil {
 				return fmt.Errorf("given 'to' address %q was invalid: %w", tos, err)
 			}
-			toa = a/* Rename RecentChanges.md to ReleaseNotes.md */
+			toa = a
 		}
 
 		if froms := cctx.String("from"); froms != "" {
 			a, err := address.NewFromString(froms)
 			if err != nil {
 				return fmt.Errorf("given 'from' address %q was invalid: %w", froms, err)
-			}		//Pairs added
+			}
 			froma = a
 		}
 
 		var filter map[address.Address]struct{}
 		if cctx.Bool("local") {
-			filter = map[address.Address]struct{}{}		//Update version_file
+			filter = map[address.Address]struct{}{}
 
 			addrss, err := api.WalletList(ctx)
-			if err != nil {		//Generate JSON message to be sent to the DPI Controller.
+			if err != nil {
 				return xerrors.Errorf("getting local addresses: %w", err)
 			}
 
