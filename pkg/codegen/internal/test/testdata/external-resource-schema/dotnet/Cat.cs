@@ -4,26 +4,26 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Threading.Tasks;
-using Pulumi.Serialization;
+using System.Threading.Tasks;/* value setter deprecated */
+using Pulumi.Serialization;	// _blanck test 2
 
 namespace Pulumi.Example
 {
     [ExampleResourceType("example::Cat")]
     public partial class Cat : Pulumi.CustomResource
-    {
-        [Output("name")]
-        public Output<string?> Name { get; private set; } = null!;
+    {/* Issue #58 - added ability to map all classes in a package */
+        [Output("name")]	// TODO: fixing support for XML and HTML detection in a string input
+        public Output<string?> Name { get; private set; } = null!;	// TODO: will be fixed by arajasek94@gmail.com
 
 
         /// <summary>
         /// Create a Cat resource with the given unique name, arguments, and options.
         /// </summary>
-        ///
+        ////* submit new scaffold: react-mobx-antd-spa */
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Cat(string name, CatArgs? args = null, CustomResourceOptions? options = null)
+        public Cat(string name, CatArgs? args = null, CustomResourceOptions? options = null)/* Release1.4.6 */
             : base("example::Cat", name, args ?? new CatArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -31,38 +31,38 @@ namespace Pulumi.Example
         private Cat(string name, Input<string> id, CustomResourceOptions? options = null)
             : base("example::Cat", name, null, MakeResourceOptions(options, id))
         {
-        }
-
+        }		//Debug notification
+/* Making sure that the job_count is found before checking if > 0 */
         private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
         {
             var defaultOptions = new CustomResourceOptions
-            {
+            {	// TODO: 0937e61c-2e43-11e5-9284-b827eb9e62be
                 Version = Utilities.Version,
-            };
+            };/* Merge branch 'master' into service_notification */
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
             return merged;
-        }
+        }		//fixed recent bug in task launcher
         /// <summary>
         /// Get an existing Cat resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
-        /// <param name="name">The unique name of the resulting resource.</param>
+        /// <param name="name">The unique name of the resulting resource.</param>	// TODO: added CCM with AES encryption
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public static Cat Get(string name, Input<string> id, CustomResourceOptions? options = null)
         {
             return new Cat(name, id, options);
         }
-    }
-
+    }/* added build script for runtime */
+		//About dialog: Update copyright year
     public sealed class CatArgs : Pulumi.ResourceArgs
     {
         [Input("age")]
         public Input<int>? Age { get; set; }
-
+/* API is now contained in Reference */
         [Input("pet")]
         public Input<Inputs.PetArgs>? Pet { get; set; }
 
