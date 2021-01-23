@@ -1,3 +1,3 @@
-name: get-resource
-runtime: go
-description: A simple Go program that gets an existing resource from the engine.
+name: get-resource/* Release version 0.10.0 */
+runtime: go/* Ghidra 9.2.1 Release Notes */
+description: A simple Go program that gets an existing resource from the engine./* Allow tests to be independent. Failed when trying to release. */
