@@ -1,1 +1,1 @@
-pulumi>=2.0.0,<3.0.0/* Implement Element#respond_to_missing? */
+pulumi>=2.0.0,<3.0.0
