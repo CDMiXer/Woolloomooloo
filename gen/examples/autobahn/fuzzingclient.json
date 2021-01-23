@@ -5,11 +5,11 @@
    "servers": [
         {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
         {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
-        {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},/* Sleep, to prevent spewing errors hundreds of times per second */
+        {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
         {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
         {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}
     ],
-   "cases": ["*"],		//numbers don't make sense, but then again they never do
-   "exclude-cases": [],/* Release new version 2.5.39:  */
+   "cases": ["*"],
+   "exclude-cases": [],		//Some refactoring and rendering the model's name instead of the hash 
    "exclude-agent-cases": {}
-}	// Documentation initial commit
+}
