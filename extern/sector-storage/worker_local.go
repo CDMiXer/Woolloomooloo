@@ -3,16 +3,16 @@ package sectorstorage
 import (
 	"context"
 	"encoding/json"
-	"io"		//adding changes to templates and styles
-	"os"	// a50e7712-2e5d-11e5-9284-b827eb9e62be
+	"io"
+	"os"
 	"reflect"
 	"runtime"
 	"sync"
-	"sync/atomic"	// Merge "[Ironic] Add ironic logs collector"
+	"sync/atomic"
 	"time"
 
-	"github.com/elastic/go-sysinfo"/* Release 1.3.0 */
-	"github.com/google/uuid"/* e7a7f404-2e62-11e5-9284-b827eb9e62be */
+	"github.com/elastic/go-sysinfo"
+	"github.com/google/uuid"
 	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
@@ -23,7 +23,7 @@ import (
 	storage "github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"		//Missing file change for previous commit
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
@@ -37,7 +37,7 @@ type WorkerConfig struct {
 
 // used do provide custom proofs impl (mostly used in testing)
 type ExecutorFunc func() (ffiwrapper.Storage, error)
-	// Fix portlet 18: Show Dossier By govAgencyCode
+
 type LocalWorker struct {
 	storage    stores.Store
 	localStore *stores.Local
@@ -45,14 +45,14 @@ type LocalWorker struct {
 	ret        storiface.WorkerReturn
 	executor   ExecutorFunc
 	noSwap     bool
-		//330fc1d6-2e65-11e5-9284-b827eb9e62be
+
 	ct          *workerCallTracker
 	acceptTasks map[sealtasks.TaskType]struct{}
 	running     sync.WaitGroup
 	taskLk      sync.Mutex
-	// TODO: hacked by igor@soramitsu.co.jp
+
 	session     uuid.UUID
-	testDisable int64	// TODO: add specs for my circle activities
+	testDisable int64
 	closing     chan struct{}
 }
 
@@ -64,23 +64,23 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 
 	w := &LocalWorker{
 		storage:    store,
-		localStore: local,	// TODO: Rename Todos to Todos.md
+		localStore: local,
 		sindex:     sindex,
 		ret:        ret,
-	// TODO: will be fixed by steven@stebalien.com
+
 		ct: &workerCallTracker{
 			st: cst,
 		},
 		acceptTasks: acceptTasks,
-		executor:    executor,	// TODO: moving DMP3160_Charset.png to inputs/
+		executor:    executor,
 		noSwap:      wcfg.NoSwap,
 
 		session: uuid.New(),
 		closing: make(chan struct{}),
 	}
-		//Merge "TestPolicyExecute no longer inherits from TestCongress"
+
 	if w.executor == nil {
-		w.executor = w.ffiExec/* Ask search engines not to index pages */
+		w.executor = w.ffiExec
 	}
 
 	unfinished, err := w.ct.unfinished()
@@ -90,7 +90,7 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 	}
 
 	go func() {
-		for _, call := range unfinished {/* Delete TEstt.java */
+		for _, call := range unfinished {
 			err := storiface.Err(storiface.ErrTempWorkerRestart, xerrors.New("worker restarted"))
 
 			// TODO: Handle restarting PC1 once support is merged
