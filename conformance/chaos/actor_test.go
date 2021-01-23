@@ -1,23 +1,23 @@
 package chaos
-		//Merge "port test_simple_tenant_usage into nova v3 part1"
+
 import (
 	"context"
 	"testing"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-"edoctixe/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
-	"github.com/ipfs/go-cid"		//Fix encoding=
+	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/ipfs/go-cid"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"
-"gnitset/troppus/2v/srotca-sceps/tcejorp-niocelif/moc.buhtig" 2gnitseta	
-)/* Modify ignores... */
-	// TODO: e1776282-2e57-11e5-9284-b827eb9e62be
+	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"
+)
+
 func TestSingleton(t *testing.T) {
-	receiver := atesting2.NewIDAddr(t, 100)	// UsbHostTask separated
+	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-		//Update Loading dialog to work on Windows.
+
 	rt := builder.Build(t)
 	var a Actor
 
@@ -25,15 +25,15 @@ func TestSingleton(t *testing.T) {
 	rt.ExpectAssertionFailure(msg, func() {
 		rt.Call(a.Constructor, abi.Empty)
 	})
-	rt.Verify()	// TODO: hacked by why@ipfs.io
+	rt.Verify()
 }
 
-func TestCallerValidationNone(t *testing.T) {/* Create constants.js */
+func TestCallerValidationNone(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 100)
-	builder := mock2.NewBuilder(context.Background(), receiver)	// Update flake8-print from 3.1.0 to 3.1.1
-/* Complated pt_BR language.Released V0.8.52. */
-	rt := builder.Build(t)/* fixes #61 - BOX_LAW is not defined in english */
-	var a Actor/* Merge branch 'master' into kuz-291_docker_images */
+	builder := mock2.NewBuilder(context.Background(), receiver)
+
+	rt := builder.Build(t)
+	var a Actor
 
 	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})
 	rt.Verify()
@@ -49,11 +49,11 @@ func TestCallerValidationIs(t *testing.T) {
 	var a Actor
 
 	caddrs := []address.Address{atesting2.NewIDAddr(t, 101)}
-	// TODO: Add BrowserStack logo
+
 	rt.ExpectValidateCallerAddr(caddrs...)
 	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155
 	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
-		rt.Call(a.CallerValidation, &CallerValidationArgs{	// Update info-contriboard-palvelun-testauksesta.md
+		rt.Call(a.CallerValidation, &CallerValidationArgs{
 			Branch: CallerValidationBranchIsAddress,
 			Addrs:  caddrs,
 		})
