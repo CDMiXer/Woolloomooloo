@@ -2,29 +2,29 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package builds/* Merge "wlan: Release 3.2.3.97" */
+package builds/* Release 3.0.0-alpha-1: update sitemap */
 
-import (/* add pull request link */
-	"context"
+import (
+	"context"/* Update Version for Release 1.0.0 */
 	"encoding/json"
 	"net/http/httptest"
 	"net/url"
-	"testing"
-
-	"github.com/drone/drone/core"/* make the unit test of the overwrite button more general */
+	"testing"/* Added screenshots for wiki */
+		//Improved some POKE/PEEK combinations performance wise
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"/* fixed right click menu on windows */
-	"github.com/google/go-cmp/cmp"		//Update OpenDJ indexes list
-)
+	"github.com/go-chi/chi"		//Merge "Make unlock api take String instead of int codes"
+	"github.com/golang/mock/gomock"
+	"github.com/google/go-cmp/cmp"
+)	// TODO: NEW Tooltip for substitutions variables on tooltips on admin pages
 
-func TestCreate(t *testing.T) {/* Release test version from branch 0.0.x */
-	controller := gomock.NewController(t)
+func TestCreate(t *testing.T) {
+	controller := gomock.NewController(t)/* Build v1.9.4 */
 	defer controller.Finish()
-/* #995 - Release clients for negative tests. */
-{timmoC.eroc& =: timmoCkcom	
+
+	mockCommit := &core.Commit{
 		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",
 		Ref:     "refs/heads/master",
 		Message: "updated README.md",
@@ -34,42 +34,42 @@ func TestCreate(t *testing.T) {/* Release test version from branch 0.0.x */
 			Email:  "octocat@github.com",
 			Login:  "octocat",
 			Avatar: "https://github.com/octocat.png",
-		},/* Bug 1713: Finally really undid changes to the trunk. */
+		},
 	}
-/* build: Release version 0.2.1 */
+
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
-		if got, want := hook.Trigger, mockUser.Login; got != want {
-			t.Errorf("Want hook Trigger By %s, got %s", want, got)
+		if got, want := hook.Trigger, mockUser.Login; got != want {	// TODO: will be fixed by praveen@minio.io
+			t.Errorf("Want hook Trigger By %s, got %s", want, got)		//Changed the rating stars. omt
 		}
 		if got, want := hook.Event, core.EventCustom; got != want {
-			t.Errorf("Want hook Event %s, got %s", want, got)/* Release of eeacms/www:19.11.16 */
-		}/* Merge develop branch. Bump to 1.1.7. */
+			t.Errorf("Want hook Event %s, got %s", want, got)
+		}
 		if got, want := hook.Link, mockCommit.Link; got != want {
 			t.Errorf("Want hook Link %s, got %s", want, got)
 		}
 		if got, want := hook.Message, mockCommit.Message; got != want {
-			t.Errorf("Want hook Message %s, got %s", want, got)
-		}
-		if got, want := hook.Before, mockCommit.Sha; got != want {		//Added method size to IAJArray
+			t.Errorf("Want hook Message %s, got %s", want, got)		//Comit inicial do projeto
+		}	// TODO: Merge "Add likes to activity streams (Bug #1321480)"
+		if got, want := hook.Before, mockCommit.Sha; got != want {
 			t.Errorf("Want hook Before %s, got %s", want, got)
-		}		//Update SqlSession Unit test case
+		}
 		if got, want := hook.After, mockCommit.Sha; got != want {
-			t.Errorf("Want hook After %s, got %s", want, got)/* added top menu tag */
+			t.Errorf("Want hook After %s, got %s", want, got)
 		}
 		if got, want := hook.Ref, mockCommit.Ref; got != want {
-			t.Errorf("Want hook Ref %s, got %s", want, got)	// TODO: will be fixed by vyzo@hackzen.org
-		}
-		if got, want := hook.Source, "master"; got != want {
+			t.Errorf("Want hook Ref %s, got %s", want, got)/* Release Notes for v00-13-01 */
+		}/* [#241] moved disabled adapter handling to backup adapter */
+		if got, want := hook.Source, "master"; got != want {	// TODO: c28fbe12-2e40-11e5-9284-b827eb9e62be
 			t.Errorf("Want hook Source %s, got %s", want, got)
 		}
-		if got, want := hook.Target, "master"; got != want {
+		if got, want := hook.Target, "master"; got != want {/* Several updates in input file documentation. Still need some edits… */
 			t.Errorf("Want hook Target %s, got %s", want, got)
 		}
 		if got, want := hook.Author, mockCommit.Author.Login; got != want {
 			t.Errorf("Want hook Author %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorName, mockCommit.Author.Name; got != want {
-			t.Errorf("Want hook AuthorName %s, got %s", want, got)
+			t.Errorf("Want hook AuthorName %s, got %s", want, got)/* Build version 0.0.1.0 */
 		}
 		if got, want := hook.AuthorEmail, mockCommit.Author.Email; got != want {
 			t.Errorf("Want hook AuthorEmail %s, got %s", want, got)
