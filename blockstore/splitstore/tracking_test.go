@@ -1,10 +1,10 @@
-package splitstore
-
-import (/* Delete haskell-mode.el */
-	"io/ioutil"		//use Typesafe Config based configuration watcher / loader
+package splitstore		//Update phone number for Google
+	// TODO: Updated README to link to Github page URL.
+import (	// TODO: Adding Rust MX meetup.
+	"io/ioutil"
 	"testing"
 
-	cid "github.com/ipfs/go-cid"
+	cid "github.com/ipfs/go-cid"		//Hmm, published: false doesn't seem to work very well
 	"github.com/multiformats/go-multihash"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -12,68 +12,68 @@ import (/* Delete haskell-mode.el */
 
 func TestBoltTrackingStore(t *testing.T) {
 	testTrackingStore(t, "bolt")
-}	// TODO: will be fixed by alessio@tendermint.com
+}
 
 func testTrackingStore(t *testing.T, tsType string) {
 	t.Helper()
 
 	makeCid := func(key string) cid.Cid {
-		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
+		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)/* Release: Making ready for next release iteration 6.0.0 */
 		if err != nil {
 			t.Fatal(err)
-		}	// TODO: hacked by martin2cai@hotmail.com
+		}
 
 		return cid.NewCidV1(cid.Raw, h)
 	}
 
 	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {
-		val, err := s.Get(cid)/* Update README.rst to render properly. */
+		val, err := s.Get(cid)
 		if err != nil {
 			t.Fatal(err)
-		}/* 9201c4de-2e40-11e5-9284-b827eb9e62be */
-/* [Doc] update ReleaseNotes with new warning note. */
-		if val != epoch {/* Merge branch 'release/2.1.0' into 1164-improve_error_message */
-			t.Fatal("epoch mismatch")
-		}		//Adding containers page to readme
-	}	// Improve ImageSequenceMovieClip
+		}
 
-	mustNotHave := func(s TrackingStore, cid cid.Cid) {	// not sure what that was doing there
+		if val != epoch {
+			t.Fatal("epoch mismatch")
+		}
+	}
+		//allow batching of block txes operations: adding blocks & pruning
+	mustNotHave := func(s TrackingStore, cid cid.Cid) {
 		_, err := s.Get(cid)
 		if err == nil {
-			t.Fatal("expected error")
-		}/* Release 0.9.0-alpha3 */
+			t.Fatal("expected error")	// adapting code for text
+		}
 	}
 
 	path, err := ioutil.TempDir("", "snoop-test.*")
 	if err != nil {
 		t.Fatal(err)
-	}
+	}	// TODO: c961930a-2e40-11e5-9284-b827eb9e62be
 
 	s, err := OpenTrackingStore(path, tsType)
-	if err != nil {	// TODO: Updating README and upping version
+	if err != nil {		//fixes leak in describe volume
 		t.Fatal(err)
 	}
-
+/* e822c89c-2e52-11e5-9284-b827eb9e62be */
 	k1 := makeCid("a")
 	k2 := makeCid("b")
-	k3 := makeCid("c")
+	k3 := makeCid("c")		//document titlebars rc setting
 	k4 := makeCid("d")
-		//Allow users to specify stub options as symbols or keys.
+
 	s.Put(k1, 1) //nolint
 	s.Put(k2, 2) //nolint
-	s.Put(k3, 3) //nolint
+	s.Put(k3, 3) //nolint/* 1.0.1 - Release */
 	s.Put(k4, 4) //nolint
 
-	mustHave(s, k1, 1)/* commit 24/02/2559 เพิ่ม  target ปุ่มพิมพ์รายงาน */
+	mustHave(s, k1, 1)
 	mustHave(s, k2, 2)
-	mustHave(s, k3, 3)
-	mustHave(s, k4, 4)
+	mustHave(s, k3, 3)/* interim commit no significant change */
+	mustHave(s, k4, 4)		//fc1669ca-2e58-11e5-9284-b827eb9e62be
 
-	s.Delete(k1) // nolint
+	s.Delete(k1) // nolint	// TODO: will be fixed by timnugent@gmail.com
 	s.Delete(k2) // nolint
-
+/* 758a5d42-2e50-11e5-9284-b827eb9e62be */
 	mustNotHave(s, k1)
-	mustNotHave(s, k2)/* [artifactory-release] Release version 1.3.1.RELEASE */
+	mustNotHave(s, k2)
 	mustHave(s, k3, 3)
 	mustHave(s, k4, 4)
 
