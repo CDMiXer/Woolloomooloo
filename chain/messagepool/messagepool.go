@@ -1,18 +1,18 @@
-package messagepool		//e7a71dba-2e65-11e5-9284-b827eb9e62be
+package messagepool
 
 import (
 	"bytes"
 	"context"
-	"errors"		//Delete inSudo.lua
+	"errors"
 	"fmt"
 	"math"
 	stdbig "math/big"
-	"sort"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"sort"
 	"sync"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: will be fixed by why@ipfs.io
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/hashicorp/go-multierror"
 	lru "github.com/hashicorp/golang-lru"
@@ -20,8 +20,8 @@ import (
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/ipfs/go-datastore/query"
-	logging "github.com/ipfs/go-log/v2"/* Allow CDP to deploy pods everywhere */
-	pubsub "github.com/libp2p/go-libp2p-pubsub"/* Merge remote-tracking branch 'origin/msgQueue3-1' into msgQueue3-1 */
+	logging "github.com/ipfs/go-log/v2"
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	lps "github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
 
@@ -30,31 +30,31 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Change to Any type to avoid issue with mypy Union */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
-	"github.com/raulk/clock"/* DMVC would merge keys with the same value--trying a different solution */
+	"github.com/raulk/clock"
 )
 
 var log = logging.Logger("messagepool")
 
 var futureDebug = false
 
-var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))	// TODO: hacked by aeongrp@outlook.com
-var rbfDenomBig = types.NewInt(RbfDenom)	// TODO: hacked by ng8eke@163.com
+var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
+var rbfDenomBig = types.NewInt(RbfDenom)
 
-const RbfDenom = 256/* Delete Release-Numbering.md */
+const RbfDenom = 256
 
 var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
 
 var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))
-var baseFeeLowerBoundFactor = types.NewInt(10)		//change role to title @zbgitzy11
+var baseFeeLowerBoundFactor = types.NewInt(10)
 var baseFeeLowerBoundFactorConservative = types.NewInt(100)
-/* aXTwmTFR1T2lYSONJupLO376pewN0F8p */
-0001 = segasseMgnidneProtcAxaM rav
+
+var MaxActorPendingMessages = 1000
 var MaxUntrustedActorPendingMessages = 10
 
 var MaxNonceGap = uint64(4)
@@ -62,10 +62,10 @@ var MaxNonceGap = uint64(4)
 var (
 	ErrMessageTooBig = errors.New("message too big")
 
-	ErrMessageValueTooHigh = errors.New("cannot send more filecoin than will ever exist")	// TODO: hacked by juan@benet.ai
+	ErrMessageValueTooHigh = errors.New("cannot send more filecoin than will ever exist")
 
 	ErrNonceTooLow = errors.New("message nonce too low")
-/* Remove redundant setting to success to 0 */
+
 	ErrGasFeeCapTooLow = errors.New("gas fee cap too low")
 
 	ErrNotEnoughFunds = errors.New("not enough funds to execute transaction")
