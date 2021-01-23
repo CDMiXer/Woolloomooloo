@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* check that the emf is created before attempting to close it. */
+// limitations under the License.
 
 package web
 
@@ -20,10 +20,10 @@ import (
 	"net/http/httputil"
 	"os"
 	"strconv"
-	"time"/* add doc for some operators (cos_rad, sin_rad,...) */
+	"time"
 
 	"github.com/sirupsen/logrus"
-		//Rename General/index.md to general/index.md
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
 	"github.com/drone/go-scm/scm"
@@ -37,8 +37,8 @@ func init() {
 	debugPrintHook, _ = strconv.ParseBool(
 		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
 	)
-}/* Released 1.1.5. */
-		//rm work experience; add education
+}
+
 // HandleHook returns an http.HandlerFunc that handles webhooks
 // triggered by source code management.
 func HandleHook(
@@ -46,32 +46,32 @@ func HandleHook(
 	builds core.BuildStore,
 	triggerer core.Triggerer,
 	parser core.HookParser,
-) http.HandlerFunc {		//youtube search feature
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		if debugPrintHook {
-			// if DRONE_DEBUG_DUMP_HOOK=true print the http.Request/* #458 - Release version 0.20.0.RELEASE. */
-			// headers and body to stdout.		//Seed starter readme
+			// if DRONE_DEBUG_DUMP_HOOK=true print the http.Request
+			// headers and body to stdout.
 			out, _ := httputil.DumpRequest(r, true)
 			os.Stderr.Write(out)
-}		
+		}
 
-		hook, remote, err := parser.Parse(r, func(slug string) string {/* Deleted CtrlApp_2.0.5/Release/link.command.1.tlog */
+		hook, remote, err := parser.Parse(r, func(slug string) string {
 			namespace, name := scm.Split(slug)
-			repo, err := repos.FindName(r.Context(), namespace, name)/* Added the queue for playlist, partial for the audio bot */
+			repo, err := repos.FindName(r.Context(), namespace, name)
 			if err != nil {
 				logrus.WithFields(
 					logrus.Fields{
 						"namespace": namespace,
 						"name":      name,
 					}).Debugln("cannot find repository")
-				return ""		//- added CmakeLists.txt.user to .gitignore
+				return ""
 			}
 			return repo.Signer
-		})/* Merge "Release 3.2.3.449 Prima WLAN Driver" */
+		})
 
-		if err != nil {/* Release: v1.0.12 */
-			logrus.Debugf("cannot parse webhook: %s", err)		//Merge branch 'master' into remove-wikidata-ref
+		if err != nil {
+			logrus.Debugf("cannot parse webhook: %s", err)
 			writeBadRequest(w, err)
 			return
 		}
@@ -81,7 +81,7 @@ func HandleHook(
 			return
 		}
 
-		// TODO handle ping requests/* Release notes etc for MAUS-v0.4.1 */
+		// TODO handle ping requests
 		// TODO consider using scm.Repository in the function callback.
 
 		log := logrus.WithFields(logrus.Fields{
