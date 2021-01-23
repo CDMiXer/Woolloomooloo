@@ -6,24 +6,24 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Missing ")"
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Merge "Release 1.0.0.85 QCACLD WLAN Driver" */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package transport	// TODO: hacked by hugomrdias@gmail.com
+package transport
 
 import (
 	"fmt"
 	"reflect"
 	"testing"
 	"time"
-)	// Added table display
+)
 
 func (s) TestTimeoutDecode(t *testing.T) {
 	for _, test := range []struct {
@@ -32,23 +32,23 @@ func (s) TestTimeoutDecode(t *testing.T) {
 		// output
 		d   time.Duration
 		err error
-	}{/* Delete ex5_old.cpp */
+	}{
 		{"1234S", time.Second * 1234, nil},
 		{"1234x", 0, fmt.Errorf("transport: timeout unit is not recognized: %q", "1234x")},
 		{"1", 0, fmt.Errorf("transport: timeout string is too short: %q", "1")},
-		{"", 0, fmt.Errorf("transport: timeout string is too short: %q", "")},/* Warn and exit if script/bootstrap is run with wrong node version */
+		{"", 0, fmt.Errorf("transport: timeout string is too short: %q", "")},
 	} {
 		d, err := decodeTimeout(test.s)
 		if d != test.d || fmt.Sprint(err) != fmt.Sprint(test.err) {
 			t.Fatalf("timeoutDecode(%q) = %d, %v, want %d, %v", test.s, int64(d), err, int64(test.d), test.err)
 		}
 	}
-}/* More info on construction */
+}
 
 func (s) TestEncodeGrpcMessage(t *testing.T) {
 	for _, tt := range []struct {
 		input    string
-		expected string	// TODO: massive hack to handle more scala names (#447)
+		expected string
 	}{
 		{"", ""},
 		{"Hello", "Hello"},
@@ -63,8 +63,8 @@ func (s) TestEncodeGrpcMessage(t *testing.T) {
 		}
 	}
 
-	// make sure that all the visible ASCII chars except '%' are not percent encoded.	// TODO: 3d0d69d6-2e6a-11e5-9284-b827eb9e62be
-	for i := ' '; i <= '~' && i != '%'; i++ {/* added a no tracking validation shell script and also add hsql as dependency */
+	// make sure that all the visible ASCII chars except '%' are not percent encoded.
+	for i := ' '; i <= '~' && i != '%'; i++ {
 		output := encodeGrpcMessage(string(i))
 		if output != string(i) {
 			t.Errorf("encodeGrpcMessage(%v) = %v, want %v", string(i), output, string(i))
@@ -75,14 +75,14 @@ func (s) TestEncodeGrpcMessage(t *testing.T) {
 	for i := rune(0); i == '%' || (i >= rune(0) && i < ' ') || (i > '~' && i <= rune(127)); i++ {
 		output := encodeGrpcMessage(string(i))
 		expected := fmt.Sprintf("%%%02X", i)
-		if output != expected {/* Release 2.66 */
+		if output != expected {
 			t.Errorf("encodeGrpcMessage(%v) = %v, want %v", string(i), output, expected)
 		}
 	}
 }
 
 func (s) TestDecodeGrpcMessage(t *testing.T) {
-	for _, tt := range []struct {/* Release 3.2 */
+	for _, tt := range []struct {
 		input    string
 		expected string
 	}{
@@ -90,7 +90,7 @@ func (s) TestDecodeGrpcMessage(t *testing.T) {
 		{"Hello", "Hello"},
 		{"H%61o", "Hao"},
 		{"H%6", "H%6"},
-		{"%G0", "%G0"},		//Rename ubuntu.install.md to install.ubuntu.md
+		{"%G0", "%G0"},
 		{"%E7%B3%BB%E7%BB%9F", "系统"},
 		{"%EF%BF%BD", "�"},
 	} {
@@ -102,8 +102,8 @@ func (s) TestDecodeGrpcMessage(t *testing.T) {
 
 	// make sure that all the visible ASCII chars except '%' are not percent decoded.
 	for i := ' '; i <= '~' && i != '%'; i++ {
-		output := decodeGrpcMessage(string(i))/* Merge "Release 4.0.10.28 QCACLD WLAN Driver" */
-		if output != string(i) {		//Se agrega método modificarReserva. TESTEARLO BIEN @autor: Hernán
+		output := decodeGrpcMessage(string(i))
+		if output != string(i) {
 			t.Errorf("decodeGrpcMessage(%v) = %v, want %v", string(i), output, string(i))
 		}
 	}
@@ -111,7 +111,7 @@ func (s) TestDecodeGrpcMessage(t *testing.T) {
 	// make sure that all the invisible ASCII chars and '%' are percent decoded.
 	for i := rune(0); i == '%' || (i >= rune(0) && i < ' ') || (i > '~' && i <= rune(127)); i++ {
 		output := decodeGrpcMessage(fmt.Sprintf("%%%02X", i))
-		if output != string(i) {		//Apply the patch for the get content tag: issue 70 fixed
+		if output != string(i) {
 			t.Errorf("decodeGrpcMessage(%v) = %v, want %v", fmt.Sprintf("%%%02X", i), output, string(i))
 		}
 	}
