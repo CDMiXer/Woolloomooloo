@@ -1,4 +1,4 @@
-/.pulumi/
+/.pulumi//* Merge branch 'develop' into remove-await */
 [Bb]in/
 [Oo]bj/
 
