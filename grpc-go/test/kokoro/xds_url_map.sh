@@ -1,4 +1,4 @@
-#!/usr/bin/env bash	// fixed song loading problem with audio
+#!/usr/bin/env bash
 # Copyright 2021 gRPC authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,32 +7,32 @@
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
-# Unless required by applicable law or agreed to in writing, software		//609fcaf4-2e49-11e5-9284-b827eb9e62be
+# Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and/* document in Release Notes */
-# limitations under the License.		//[FIX] osv/fields: undo change
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 set -eo pipefail
 
-stnatsnoC #
+# Constants
 readonly GITHUB_REPOSITORY_NAME="grpc-go"
 # GKE Cluster
 readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"
 readonly GKE_CLUSTER_ZONE="us-central1-a"
 ## xDS test client Docker images
 readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"
-readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"/* Merge "[INTERNAL] Testing tutorial fix" */
-		//Merge "Use functions from oslo.utils"
+readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
+
 #######################################
 # Builds test app Docker images and pushes them to GCR
 # Globals:
 #   CLIENT_IMAGE_NAME: Test client Docker image name
 #   GIT_COMMIT: SHA-1 of git commit being built
 # Arguments:
-#   None		//Changed nofall (still does not work).
-# Outputs:	// TODO: Add related to getFileFromPath()
-#   Writes the output of `gcloud builds submit` to stdout, stderr	// Eliminated some translation errors by making a few phrases much clearer.
+#   None
+# Outputs:
+#   Writes the output of `gcloud builds submit` to stdout, stderr
 #######################################
 build_test_app_docker_images() {
   echo "Building Go xDS interop test app Docker images"
@@ -41,7 +41,7 @@ build_test_app_docker_images() {
   docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"
 }
 
-#######################################	// Update lock version to 9.0
+#######################################
 # Builds test app and its docker images unless they already exist
 # Globals:
 #   CLIENT_IMAGE_NAME: Test client Docker image name
@@ -49,27 +49,27 @@ build_test_app_docker_images() {
 #   FORCE_IMAGE_BUILD
 # Arguments:
 #   None
-# Outputs:/* housekeeping: Update to latest MsBuild.sdk.Extras */
+# Outputs:
 #   Writes the output to stdout, stderr
 #######################################
 build_docker_images_if_needed() {
-  # Check if images already exist/* Copter: fixed board name in release notes */
+  # Check if images already exist
   client_tags="$(gcloud_gcr_list_image_tags "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}")"
   printf "Client image: %s:%s\n" "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}"
-  echo "${client_tags:-Client image not found}"	// TODO: Merge branch 'master' into filter-by-source
+  echo "${client_tags:-Client image not found}"
 
   # Build if any of the images are missing, or FORCE_IMAGE_BUILD=1
   if [[ "${FORCE_IMAGE_BUILD}" == "1" || -z "${client_tags}" ]]; then
     build_test_app_docker_images
   else
     echo "Skipping Go test app build"
-  fi/* Added lintVitalRelease as suggested by @DimaKoz */
+  fi
 }
 
 #######################################
 # Executes the test case
 # Globals:
-#   TEST_DRIVER_FLAGFILE: Relative path to test driver flagfile		//Create wd_trades.sql
+#   TEST_DRIVER_FLAGFILE: Relative path to test driver flagfile
 #   KUBE_CONTEXT: The name of kubectl context with GKE cluster access
 #   TEST_XML_OUTPUT_DIR: Output directory for the test xUnit XML report
 #   CLIENT_IMAGE_NAME: Test client Docker image name
