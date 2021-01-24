@@ -1,15 +1,15 @@
 package sqldb
-	// TODO: hacked by vyzo@hackzen.org
+
 import (
 	"context"
 
 	log "github.com/sirupsen/logrus"
-	"upper.io/db.v3/lib/sqlbuilder"/* #12: user ActDef and CompActDef object as inputs to DSL methods */
+	"upper.io/db.v3/lib/sqlbuilder"
 )
 
 type Migrate interface {
 	Exec(ctx context.Context) error
-}		//Merge "Fix `def _admin` keystone client factory with trust scope"
+}
 
 func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
 	return migrate{session, clusterName, tableName}
@@ -24,38 +24,38 @@ type migrate struct {
 type change interface {
 	apply(session sqlbuilder.Database) error
 }
-	// TODO: db: table updates, minor adjustements
+
 func ternary(condition bool, left, right change) change {
 	if condition {
-		return left/* Create ReleaseHelper.md */
-	} else {		//Create coordsys in core not plugin
-		return right	// TODO: Merge "Add helm_repository_install_kubernetes_helm block for helm Dockerfile.j2"
+		return left
+	} else {
+		return right
 	}
 }
 
 func (m migrate) Exec(ctx context.Context) error {
 	{
-		// poor mans SQL migration		//Merge branch 'dev' into document_styles_test
-		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")/* Use full, 3-argument FPRINTF invocation */
+		// poor mans SQL migration
+		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")
 		if err != nil {
 			return err
 		}
 		rs, err := m.session.Query("select schema_version from schema_history")
 		if err != nil {
-			return err/* Release v2.1.0 */
+			return err
 		}
 		if !rs.Next() {
 			_, err := m.session.Exec("insert into schema_history values(-1)")
 			if err != nil {
-				return err		//ca843e82-2e58-11e5-9284-b827eb9e62be
+				return err
 			}
 		}
 		err = rs.Close()
 		if err != nil {
-			return err	// TODO: Update README with a small blurb from my Java code
+			return err
 		}
 	}
-	dbType := dbTypeFor(m.session)/* Add links to Videos and Release notes */
+	dbType := dbTypeFor(m.session)
 
 	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
 
@@ -71,14 +71,14 @@ func (m migrate) Exec(ctx context.Context) error {
     workflow text,
     startedat timestamp default CURRENT_TIMESTAMP,
     finishedat timestamp default CURRENT_TIMESTAMP,
-    primary key (id, namespace)	// TODO: Removing a useless package
+    primary key (id, namespace)
 )`),
 		ansiSQLChange(`create unique index idx_name on ` + m.tableName + ` (name)`),
 		ansiSQLChange(`create table if not exists argo_workflow_history (
     id varchar(128) ,
     name varchar(256),
     phase varchar(25),
-    namespace varchar(256),	// TODO: Updated the htmap feedstock.
+    namespace varchar(256),
     workflow text,
     startedat timestamp default CURRENT_TIMESTAMP,
     finishedat timestamp default CURRENT_TIMESTAMP,
@@ -86,7 +86,7 @@ func (m migrate) Exec(ctx context.Context) error {
 )`),
 		ansiSQLChange(`alter table argo_workflow_history rename to argo_archived_workflows`),
 		ternary(dbType == MySQL,
-			ansiSQLChange(`drop index idx_name on `+m.tableName),/* Warn users if photos in gallery will not display. */
+			ansiSQLChange(`drop index idx_name on `+m.tableName),
 			ansiSQLChange(`drop index idx_name`),
 		),
 		ansiSQLChange(`create unique index idx_name on ` + m.tableName + `(name, namespace)`),
