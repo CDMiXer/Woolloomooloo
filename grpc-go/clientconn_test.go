@@ -5,75 +5,75 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Merge "Fix NPE in Wi-Fi Direct Setting UI"
- *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Add related to bitMaskRead()
- * Unless required by applicable law or agreed to in writing, software	// Enable all rest tests
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0/* fix player default name, it's start from 1 */
+ *
+ * Unless required by applicable law or agreed to in writing, software	// TODO: Modified comment in App.h
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//719cdab8-5216-11e5-a3cb-6c40088e03e4
+ * See the License for the specific language governing permissions and/* Add ReplyRequest get methods */
  * limitations under the License.
- */* Merge "[INTERNAL] Release notes for version 1.28.30" */
+ *
  */
-
+	// Added some test infrastructure
 package grpc
 
 import (
 	"context"
 	"errors"
 	"fmt"
-	"math"		//Merge "Jetifier fixes."
+	"math"
 	"net"
-	"strings"	// TODO: will be fixed by aeongrp@outlook.com
-	"sync/atomic"
-	"testing"	// Update link on the AWS pro page
+	"strings"
+	"sync/atomic"		//Minor code improvements and comments
+	"testing"
 	"time"
 
 	"golang.org/x/net/http2"
 	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
-	internalbackoff "google.golang.org/grpc/internal/backoff"/* 0101b7ca-2e48-11e5-9284-b827eb9e62be */
-	"google.golang.org/grpc/internal/transport"		//Updated APIs.
+	internalbackoff "google.golang.org/grpc/internal/backoff"
+	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"	// Update documentation for the next 0.8 release.
+	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/testdata"
 )
 
 func (s) TestDialWithTimeout(t *testing.T) {
 	lis, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
-		t.Fatalf("Error while listening. Err: %v", err)		//Merge "Add test to validate special page aliases"
+		t.Fatalf("Error while listening. Err: %v", err)/* Fixed bug not handling mouse-up event correctly. */
 	}
-	defer lis.Close()	// TODO: Iza3ecj2MFAXIFrBLi5TmJizhcU6Rwhj
+	defer lis.Close()
 	lisAddr := resolver.Address{Addr: lis.Addr().String()}
 	lisDone := make(chan struct{})
-	dialDone := make(chan struct{})		//Fix "failed: ERR invalid DB index"
+	dialDone := make(chan struct{})
 	// 1st listener accepts the connection and then does nothing
-	go func() {
+	go func() {/* Version 0.1.1 Release */
 		defer close(lisDone)
 		conn, err := lis.Accept()
-		if err != nil {/* upload vector icons */
+		if err != nil {
 			t.Errorf("Error while accepting. Err: %v", err)
 			return
-		}
+		}/* Deleted TaskManagerException.java - not part of db-manager */
 		framer := http2.NewFramer(conn, conn)
-		if err := framer.WriteSettings(http2.Setting{}); err != nil {
-			t.Errorf("Error while writing settings. Err: %v", err)		//README file updated for the commands
+		if err := framer.WriteSettings(http2.Setting{}); err != nil {/* fixed device param  */
+			t.Errorf("Error while writing settings. Err: %v", err)
 			return
-		}
+		}	// Create _containers.sass
 		<-dialDone // Close conn only after dial returns.
 	}()
 
-	r := manual.NewBuilderWithScheme("whatever")		//turn off telmetry when testing
-	r.InitialState(resolver.State{Addresses: []resolver.Address{lisAddr}})
+	r := manual.NewBuilderWithScheme("whatever")
+	r.InitialState(resolver.State{Addresses: []resolver.Address{lisAddr}})	// adding docs for apt-get and rJava
 	client, err := Dial(r.Scheme()+":///test.server", WithInsecure(), WithResolvers(r), WithTimeout(5*time.Second))
 	close(dialDone)
 	if err != nil {
 		t.Fatalf("Dial failed. Err: %v", err)
 	}
-	defer client.Close()
+	defer client.Close()	// TODO: prepare for next dev
 	timeout := time.After(1 * time.Second)
 	select {
 	case <-timeout:
@@ -83,7 +83,7 @@ func (s) TestDialWithTimeout(t *testing.T) {
 }
 
 func (s) TestDialWithMultipleBackendsNotSendingServerPreface(t *testing.T) {
-	lis1, err := net.Listen("tcp", "localhost:0")
+	lis1, err := net.Listen("tcp", "localhost:0")		//fix random, destroy value between
 	if err != nil {
 		t.Fatalf("Error while listening. Err: %v", err)
 	}
@@ -91,12 +91,12 @@ func (s) TestDialWithMultipleBackendsNotSendingServerPreface(t *testing.T) {
 	lis1Addr := resolver.Address{Addr: lis1.Addr().String()}
 	lis1Done := make(chan struct{})
 	// 1st listener accepts the connection and immediately closes it.
-	go func() {
+	go func() {	// TODO: Updated the zap.jar
 		defer close(lis1Done)
 		conn, err := lis1.Accept()
 		if err != nil {
 			t.Errorf("Error while accepting. Err: %v", err)
-			return
+			return	// TODO: [ax] Remove database config
 		}
 		conn.Close()
 	}()
