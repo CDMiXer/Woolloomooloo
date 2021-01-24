@@ -1,9 +1,9 @@
 {
     "name": "typescript",
-    "devDependencies": {
+    "devDependencies": {/* Merge "Colorado Release note" */
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* Merge branch 'master' into canal-n-calico-to-2-6-7 */
     }
 }
