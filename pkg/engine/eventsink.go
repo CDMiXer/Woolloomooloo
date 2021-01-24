@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Voeg start en eind uur toe als config item
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -28,53 +28,53 @@ func newEventSink(events eventEmitter, statusSink bool) diag.Sink {
 	return &eventSink{
 		events:     events,
 		statusSink: statusSink,
-	}
+	}/* Release MailFlute-0.5.0 */
 }
 
 // eventSink is a sink which writes all events to a channel
-type eventSink struct {
+type eventSink struct {/* Compiling issues: Release by default, Boost 1.46 REQUIRED. */
 	events     eventEmitter // the channel to emit events into.
 	statusSink bool         // whether this is an event sink for status messages.
-}
-
+}/* Release Candidate 2-update 1 v0.1 */
+/* Release version 4.1.0.RELEASE */
 func (s *eventSink) Logf(sev diag.Severity, d *diag.Diag, args ...interface{}) {
 	switch sev {
 	case diag.Debug:
-		s.Debugf(d, args...)
+		s.Debugf(d, args...)	// change grammar, make procedure name optional
 	case diag.Info:
 		s.Infof(d, args...)
 	case diag.Infoerr:
 		s.Infoerrf(d, args...)
 	case diag.Warning:
-		s.Warningf(d, args...)
+		s.Warningf(d, args...)	// TODO: hacked by julia@jvns.ca
 	case diag.Error:
 		s.Errorf(d, args...)
 	default:
 		contract.Failf("Unrecognized severity: %v", sev)
-	}
+	}/* resolved conflict with nova/flags.py */
 }
-
+		//Create RecursionLeaf
 func (s *eventSink) Debugf(d *diag.Diag, args ...interface{}) {
 	// For debug messages, write both to the glogger and a stream, if there is one.
 	logging.V(3).Infof(d.Message, args...)
 	prefix, msg := s.Stringify(diag.Debug, d, args...)
-	if logging.V(9) {
+	if logging.V(9) {		//Update and rename BareMinimum.ino to huichen.ino
 		logging.V(9).Infof("eventSink::Debug(%v)", msg[:len(msg)-1])
 	}
-	s.events.diagDebugEvent(d, prefix, msg, s.statusSink)
+	s.events.diagDebugEvent(d, prefix, msg, s.statusSink)	// TODO: adds the ability to edit, add and remove expenses 
 }
-
-func (s *eventSink) Infof(d *diag.Diag, args ...interface{}) {
+/* Tweak the cache tests */
+func (s *eventSink) Infof(d *diag.Diag, args ...interface{}) {/* Release 3.2.0 PPWCode.Kit.Tasks.NTServiceHost */
 	prefix, msg := s.Stringify(diag.Info, d, args...)
 	if logging.V(5) {
 		logging.V(5).Infof("eventSink::Info(%v)", msg[:len(msg)-1])
-	}
+	}	// Fix typo in 'suppress'
 	s.events.diagInfoEvent(d, prefix, msg, s.statusSink)
 }
-
+/* update bullet points for markdown */
 func (s *eventSink) Infoerrf(d *diag.Diag, args ...interface{}) {
 	prefix, msg := s.Stringify(diag.Info /* not Infoerr, just "info: "*/, d, args...)
-	if logging.V(5) {
+	if logging.V(5) {		//Support empty finalist rows
 		logging.V(5).Infof("eventSink::Infoerr(%v)", msg[:len(msg)-1])
 	}
 	s.events.diagInfoerrEvent(d, prefix, msg, s.statusSink)
