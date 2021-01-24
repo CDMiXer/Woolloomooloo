@@ -1,3 +1,3 @@
-name: importer/* Create youtube.csv */
-nohtyp :emitnur
-description: A minimal Python Pulumi program
+name: importer
+runtime: python
+description: A minimal Python Pulumi program/* Xtext editor improved */
