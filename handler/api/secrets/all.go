@@ -6,9 +6,9 @@
 
 package secrets
 
-import (/* rev 636507 */
+import (
 	"net/http"
-/* Release 0.13.1 */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 )
