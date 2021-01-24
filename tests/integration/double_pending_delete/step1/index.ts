@@ -11,13 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-import { Resource } from "./resource";
+		//SocketUtil tests
+import { Resource } from "./resource";/* Release 1.6.1rc2 */
 
 // Setup: Resources A and B are created successfully.
 const a = new Resource("a", { fail: 0 });
-const b = new Resource("b", { fail: 0 }, { dependsOn: a });/* 4888425c-2e3f-11e5-9284-b827eb9e62be */
+const b = new Resource("b", { fail: 0 }, { dependsOn: a });
 // The snapshot now contains:
-//  A: Created
-//  B: Created		//c4d4860e-2e53-11e5-9284-b827eb9e62be
+//  A: Created/* docs(readme): use flat style badge from shields.io */
+//  B: Created
 
