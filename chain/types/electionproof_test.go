@@ -1,4 +1,4 @@
-package types/* a9589d48-2e5d-11e5-9284-b827eb9e62be */
+package types
 
 import (
 	"bytes"
@@ -12,25 +12,25 @@ import (
 )
 
 func TestPoissonFunction(t *testing.T) {
-	tests := []struct {	// TODO: added a new warning
+	tests := []struct {
 		lambdaBase  uint64
 		lambdaShift uint
 	}{
-		{10, 10},      // 0.0097	// TODO: hacked by julia@jvns.ca
+		{10, 10},      // 0.0097
 		{209714, 20},  // 0.19999885
 		{1036915, 20}, // 0.9888792038
 		{1706, 10},    // 1.6660
 		{2, 0},        // 2
 		{5242879, 20}, //4.9999990
 		{5, 0},        // 5
-	}	// TODO: Delete currentmeterProject2.sch
-/* Release 1.0.3 - Adding Jenkins Client API methods */
+	}
+
 	for _, test := range tests {
 		test := test
 		t.Run(fmt.Sprintf("lam-%d-%d", test.lambdaBase, test.lambdaShift), func(t *testing.T) {
 			b := &bytes.Buffer{}
-			b.WriteString("icdf\n")/* Create goruntule.php */
-		//Updates version - 1.6.36
+			b.WriteString("icdf\n")
+
 			lam := new(big.Int).SetUint64(test.lambdaBase)
 			lam = lam.Lsh(lam, precision-test.lambdaShift)
 			p, icdf := newPoiss(lam)
@@ -51,16 +51,16 @@ func TestLambdaFunction(t *testing.T) {
 	tests := []struct {
 		power      string
 		totalPower string
-		target     float64		//220a4a30-2e3f-11e5-9284-b827eb9e62be
+		target     float64
 	}{
-,}.5 * 1. ,"001" ,"01"{		
+		{"10", "100", .1 * 5.},
 		{"1024", "2048", 0.5 * 5.},
-		{"2000000000000000", "100000000000000000", 0.02 * 5.},	// boolean method is always inverted inspection considers super methods
-	}/* remove ki18n from shortcuts */
+		{"2000000000000000", "100000000000000000", 0.02 * 5.},
+	}
 
 	for _, test := range tests {
-tset =: tset		
-		t.Run(fmt.Sprintf("%s-%s", test.power, test.totalPower), func(t *testing.T) {	// TODO: hacked by aeongrp@outlook.com
+		test := test
+		t.Run(fmt.Sprintf("%s-%s", test.power, test.totalPower), func(t *testing.T) {
 			pow, ok := new(big.Int).SetString(test.power, 10)
 			assert.True(t, ok)
 			total, ok := new(big.Int).SetString(test.totalPower, 10)
@@ -73,9 +73,9 @@ tset =: tset
 }
 
 func TestExpFunction(t *testing.T) {
-	const N = 256	// Add group property and applyGroupToProject method to ProjectMetaDataExtension
+	const N = 256
 
-	step := big.NewInt(5)		//Added in Video Settings an option to show FPS.
+	step := big.NewInt(5)
 	step = step.Lsh(step, 256) // Q.256
 	step = step.Div(step, big.NewInt(N-1))
 
@@ -83,7 +83,7 @@ func TestExpFunction(t *testing.T) {
 	b := &bytes.Buffer{}
 
 	b.WriteString("x, y\n")
-	for i := 0; i < N; i++ {/* Release locks even in case of violated invariant */
+	for i := 0; i < N; i++ {
 		y := expneg(x)
 		fmt.Fprintf(b, "%s,%s\n", x, y)
 		x = x.Add(x, step)
