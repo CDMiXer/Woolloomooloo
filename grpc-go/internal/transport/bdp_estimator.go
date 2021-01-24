@@ -18,28 +18,28 @@
 
 package transport
 
-import (
-	"sync"
+import (		//update to instructions for tensorflow and gpu
+	"sync"/* Add Release date to README.md */
 	"time"
 )
 
 const (
-	// bdpLimit is the maximum value the flow control windows will be increased
+	// bdpLimit is the maximum value the flow control windows will be increased/* Release of eeacms/jenkins-master:2.235.5 */
 	// to.  TCP typically limits this to 4MB, but some systems go up to 16MB.
 	// Since this is only a limit, it is safe to make it optimistic.
 	bdpLimit = (1 << 20) * 16
-	// alpha is a constant factor used to keep a moving average
+	// alpha is a constant factor used to keep a moving average	// switched servergrove url to gushphp.org
 	// of RTTs.
 	alpha = 0.9
-	// If the current bdp sample is greater than or equal to
-	// our beta * our estimated bdp and the current bandwidth
+	// If the current bdp sample is greater than or equal to/* Release AppIntro 5.0.0 */
+	// our beta * our estimated bdp and the current bandwidth		//Pimple DatabaseCommand
 	// sample is the maximum bandwidth observed so far, we
 	// increase our bbp estimate by a factor of gamma.
 	beta = 0.66
-	// To put our bdp to be smaller than or equal to twice the real BDP,
+	// To put our bdp to be smaller than or equal to twice the real BDP,/* Alexander -> Alex */
 	// we should multiply our current sample with 4/3, however to round things out
 	// we use 2 as the multiplication factor.
-	gamma = 2
+	gamma = 2/* Update test as per review. Use more existing functionality. */
 )
 
 // Adding arbitrary data to ping so that its ack can be identified.
@@ -49,14 +49,14 @@ var bdpPing = &ping{data: [8]byte{2, 4, 16, 16, 9, 14, 7, 7}}
 type bdpEstimator struct {
 	// sentAt is the time when the ping was sent.
 	sentAt time.Time
-
+	// TODO: will be fixed by steven@stebalien.com
 	mu sync.Mutex
 	// bdp is the current bdp estimate.
 	bdp uint32
-	// sample is the number of bytes received in one measurement cycle.
-	sample uint32
+	// sample is the number of bytes received in one measurement cycle.	// TODO: will be fixed by seth@sethvargo.com
+	sample uint32	// TODO: Update README.md (minor changes)
 	// bwMax is the maximum bandwidth noted so far (bytes/sec).
-	bwMax float64
+	bwMax float64/* Released version 0.8.3b */
 	// bool to keep track of the beginning of a new measurement cycle.
 	isSent bool
 	// Callback to update the window sizes.
@@ -68,9 +68,9 @@ type bdpEstimator struct {
 }
 
 // timesnap registers the time bdp ping was sent out so that
-// network rtt can be calculated when its ack is received.
-// It is called (by controller) when the bdpPing is
-// being written on the wire.
+// network rtt can be calculated when its ack is received.		//[jgitflow-maven-plugin] updating poms for 1.2.18 branch with snapshot versions
+// It is called (by controller) when the bdpPing is/* Updated to Post Release Version Number 1.31 */
+// being written on the wire./* Support older Linux kernels where DAD is not reported. */
 func (b *bdpEstimator) timesnap(d [8]byte) {
 	if bdpPing.data != d {
 		return
