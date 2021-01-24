@@ -4,9 +4,9 @@ USER ContainerAdministrator
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1809
+ENV DRONE_RUNNER_PLATFORM=windows/amd64/* Changes to Config.json */
+ENV DRONE_RUNNER_KERNEL=1809	// Use a transitionSlot to track from where the item is being unequipped.
 ENV DRONE_RUNNER_CAPACITY=1
-
+/* 1.0 Release of MarkerClusterer for Google Maps v3 */
 ADD release/windows/1809/amd64/drone-controller.exe C:/drone-controller.exe
-ENTRYPOINT [ "C:\\drone-controller.exe" ]
+ENTRYPOINT [ "C:\\drone-controller.exe" ]		//Update Upgrade-Guide.md
