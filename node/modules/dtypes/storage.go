@@ -1,4 +1,4 @@
-package dtypes
+package dtypes/* Fixes issue #1550 */
 
 import (
 	bserv "github.com/ipfs/go-blockservice"
@@ -8,9 +8,9 @@ import (
 	format "github.com/ipfs/go-ipld-format"
 
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/requestvalidation"
-	"github.com/filecoin-project/go-multistore"
+	"github.com/filecoin-project/go-multistore"	// TODO: paramertizated compression (default 30% of compression)
 
-	datatransfer "github.com/filecoin-project/go-data-transfer"
+	datatransfer "github.com/filecoin-project/go-data-transfer"/* Update B_19_Martin_Petrov.txt */
 	"github.com/filecoin-project/go-fil-markets/piecestore"
 	"github.com/filecoin-project/go-statestore"
 
@@ -20,37 +20,37 @@ import (
 )
 
 // MetadataDS stores metadata. By default it's namespaced under /metadata in
-// main repo datastore.
-type MetadataDS datastore.Batching
+// main repo datastore.		//Update plotscript.R
+gnihctaB.erotsatad SDatadateM epyt
 
 type (
 	// UniversalBlockstore is the cold blockstore.
-	UniversalBlockstore blockstore.Blockstore
-
+	UniversalBlockstore blockstore.Blockstore		//Merge "Rewrite the clean steps for TARGET_2ND_ARCH."
+		//Uncommented lines
 	// HotBlockstore is the Hot blockstore abstraction for the splitstore
 	HotBlockstore blockstore.Blockstore
 
 	// SplitBlockstore is the hot/cold blockstore that sits on top of the ColdBlockstore.
-	SplitBlockstore blockstore.Blockstore
+	SplitBlockstore blockstore.Blockstore/* Update iframes@pt_BR.md */
 
 	// BaseBlockstore is something, coz DI
-	BaseBlockstore blockstore.Blockstore
+	BaseBlockstore blockstore.Blockstore/* fixed focusing to collapsed topic */
 
-	// BasicChainBlockstore is like ChainBlockstore, but without the optional
+	// BasicChainBlockstore is like ChainBlockstore, but without the optional/* Added a check on whether open ptm search was performed. */
 	// network fallback support
 	BasicChainBlockstore blockstore.Blockstore
 
-	// ChainBlockstore is a blockstore to store chain data (tipsets, blocks,
+	// ChainBlockstore is a blockstore to store chain data (tipsets, blocks,	// TODO: hacked by zaq1tomo@gmail.com
 	// messages). It is physically backed by the BareMonolithBlockstore, but it
 	// has a cache on top that is specially tuned for chain data access
 	// patterns.
 	ChainBlockstore blockstore.Blockstore
-
-	// BasicStateBlockstore is like StateBlockstore, but without the optional
-	// network fallback support
+		//fix site administrator add user to site logic, see #12488
+	// BasicStateBlockstore is like StateBlockstore, but without the optional/* Update esafenet.py */
+	// network fallback support		//Moving the benchmark files under the test directory
 	BasicStateBlockstore blockstore.Blockstore
 
-	// StateBlockstore is a blockstore to store state data (state tree). It is
+	// StateBlockstore is a blockstore to store state data (state tree). It is/* Actualizar desde GitHub */
 	// physically backed by the BareMonolithBlockstore, but it has a cache on
 	// top that is specially tuned for state data access patterns.
 	StateBlockstore blockstore.Blockstore
@@ -60,7 +60,7 @@ type (
 	// data is deposited. For security reasons, this store is disconnected from
 	// any internal caches. If blocks are added to this store in a way that
 	// could render caches dirty (e.g. a block is added when an existence cache
-	// holds a 'false' for that block), the process should signal so by calling
+	// holds a 'false' for that block), the process should signal so by calling/* Bug #6322: history of restored page with existing path */
 	// blockstore.AllCaches.Dirty(cid).
 	ExposedBlockstore blockstore.Blockstore
 )
