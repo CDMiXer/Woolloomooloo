@@ -1,9 +1,9 @@
-{/* Update userguide/ShuRenYun User Manual.md */
+{
     "name": "read_dbr",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",		//Chnage typo on error page
+    "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// TODO: will be fixed by davidad@alum.mit.edu
+        "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
