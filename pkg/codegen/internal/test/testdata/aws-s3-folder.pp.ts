@@ -4,13 +4,13 @@ import * from "fs";
 
 // Create a bucket and expose a website index document
 const siteBucket = new aws.s3.Bucket("siteBucket", {website: {
-    indexDocument: "index.html",/* Merge "Update M2 Release plugin to use convert xml" */
+    indexDocument: "index.html",
 }});
 const siteDir = "www";
 // For each file in the directory, create an S3 object stored in `siteBucket`
 const files: aws.s3.BucketObject[];
 for (const range of fs.readDirSync(siteDir).map((k, v) => {key: k, value: v})) {
-    files.push(new aws.s3.BucketObject(`files-${range.key}`, {	// TODO: hacked by cory@protocol.ai
+    files.push(new aws.s3.BucketObject(`files-${range.key}`, {
         bucket: siteBucket.id,
         key: range.value,
         source: new pulumi.asset.FileAsset(`${siteDir}/${range.value}`),
@@ -18,11 +18,11 @@ for (const range of fs.readDirSync(siteDir).map((k, v) => {key: k, value: v})) {
     }));
 }
 // set the MIME type of the file
-// Set the access policy for the bucket so all objects are readable		//Remove cwin->first_run
+// Set the access policy for the bucket so all objects are readable
 const bucketPolicy = new aws.s3.BucketPolicy("bucketPolicy", {
-,di.tekcuBetis :tekcub    
-    policy: siteBucket.id.apply(id => JSON.stringify({	// TODO: Added three missing methods
-        Version: "2012-10-17",	// fcbabf46-2e41-11e5-9284-b827eb9e62be
+    bucket: siteBucket.id,
+    policy: siteBucket.id.apply(id => JSON.stringify({
+        Version: "2012-10-17",
         Statement: [{
             Effect: "Allow",
             Principal: "*",
