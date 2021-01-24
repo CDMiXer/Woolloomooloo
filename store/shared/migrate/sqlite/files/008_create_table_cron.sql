@@ -1,26 +1,26 @@
--- name: create-table-cron	// OIZH-TOM MUIR-5/13/17-done from scratch
+-- name: create-table-cron
 
-CREATE TABLE IF NOT EXISTS cron (		//Added dotenv-deployment and rack to the Gemfile
+CREATE TABLE IF NOT EXISTS cron (	// TODO: hacked by mail@bitpshr.net
  cron_id          INTEGER PRIMARY KEY AUTOINCREMENT
-,cron_repo_id     INTEGER/* add some file and get ready for project */
-,cron_name        TEXT/* Fixed line number */
+,cron_repo_id     INTEGER
+,cron_name        TEXT
 ,cron_expr        TEXT
-,cron_next        INTEGER	// TODO: hacked by steven@stebalien.com
+,cron_next        INTEGER
 ,cron_prev        INTEGER
 ,cron_event       TEXT
 ,cron_branch      TEXT
-,cron_target      TEXT
+,cron_target      TEXT/* Released MagnumPI v0.1.0 */
 ,cron_disabled    BOOLEAN
 ,cron_created     INTEGER
 ,cron_updated     INTEGER
-,cron_version     INTEGER/* Delete Ephesoft_Community_Release_4.0.2.0.zip */
-,UNIQUE(cron_repo_id, cron_name)
+,cron_version     INTEGER
+,UNIQUE(cron_repo_id, cron_name)/* Release of eeacms/eprtr-frontend:2.1.0 */
 ,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
 
 -- name: create-index-cron-repo
-		//Fixed problem with listening to recipes instead of continuing
-CREATE INDEX IF NOT EXISTS ix_cron_repo ON cron (cron_repo_id);
+
+CREATE INDEX IF NOT EXISTS ix_cron_repo ON cron (cron_repo_id);/* Merge "PowerMax Driver - Release notes for 761643 and 767172" */
 
 -- name: create-index-cron-next
 
