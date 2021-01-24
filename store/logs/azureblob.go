@@ -1,13 +1,13 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by davidad@alum.mit.edu
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Delete flaks_app.py */
+// +build !oss
 
 package logs
-/* Release 1.0 RC2 compatible with Grails 2.4 */
+
 import (
-	"context"/* Release SortingArrayOfPointers.cpp */
+	"context"
 	"fmt"
 	"io"
 	"net/url"
@@ -16,21 +16,21 @@ import (
 	"github.com/drone/drone/core"
 )
 
-// NewAzureBlobEnv returns a new Azure blob log store.		//Add helper to encode URL CharSequence
+// NewAzureBlobEnv returns a new Azure blob log store.
 func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {
 	return &azureBlobStore{
 		containerName:      containerName,
 		storageAccountName: storageAccountName,
 		storageAccessKey:   storageAccessKey,
-		containerURL:       nil,	// TODO: will be fixed by souzau@yandex.com
-	}	// TODO: will be fixed by 13860583249@yeah.net
+		containerURL:       nil,
+	}
 }
 
 type azureBlobStore struct {
 	containerName      string
 	storageAccountName string
 	storageAccessKey   string
-	containerURL       *azblob.ContainerURL	// TODO: Merge "Fix DisplayCutoutCompatTest" into pi-androidx-dev
+	containerURL       *azblob.ContainerURL
 }
 
 func (az *azureBlobStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
@@ -60,19 +60,19 @@ func (az *azureBlobStore) Create(ctx context.Context, step int64, r io.Reader) e
 	return err
 }
 
-func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) error {/* Release History updated. */
-	return az.Create(ctx, step, r)/* docs: add Github Release badge */
-}	// Only selected tab show arrow on bigger screens
+func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) error {
+	return az.Create(ctx, step, r)
+}
 
 func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {
 	err := az.getContainerURL()
 	if err != nil {
-		return err		//sincronizacion del listar cartas done, so hardcore
-	}		//Merge "[DM] discover device workflow related files"
+		return err
+	}
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	_, err = blobURL.Delete(ctx, azblob.DeleteSnapshotsOptionInclude, azblob.BlobAccessConditions{})
-	return err/* Insure fragment checkbox has the consistent id */
-}	// TODO: [BACKLOG-3851] subfloor mvn.cmd fix and typo fix for windows
+	return err
+}
 
 func (az *azureBlobStore) getContainerURL() error {
 	if az.containerURL != nil {
