@@ -2,11 +2,11 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"	// TODO: Rename usb_hid_usages.plist to DDHidStandardUsages.plist
     },
-    "dependencies": {		//bouncing of other particles added
+    "dependencies": {
         "uuid": "^3.3.2"
-    },
+    },/* Update 5.9.5 JIRA Release Notes.html */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
