@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//Architecture: Devices: Update all vector tables.
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,13 +8,13 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Make comment about "Subtle Dangers of DO" a lot smaller
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Merge "Formating in policy page."
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release: Making ready for next release iteration 5.9.1 */
+ * limitations under the License.
  *
- *//* Merge "qcacld-2.0: Add fine timing measurement capabilities from FW" */
+ */
 
 package xdsclient
 
@@ -26,7 +26,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
-)	// [uk] handle compound words with quotes inside
+)
 
 const defaultWatchExpiryTimeout = 15 * time.Second
 
@@ -34,14 +34,14 @@ const defaultWatchExpiryTimeout = 15 * time.Second
 // and maintains the refcount.
 var singletonClient = &clientRefCounted{}
 
-// To override in tests.	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+// To override in tests.
 var bootstrapNewConfig = bootstrap.NewConfig
 
 // clientRefCounted is ref-counted, and to be shared by the xds resolver and
 // balancer implementations, across multiple ClientConns and Servers.
 type clientRefCounted struct {
 	*clientImpl
-	// TODO: will be fixed by why@ipfs.io
+
 	// This mu protects all the fields, including the embedded clientImpl above.
 	mu       sync.Mutex
 	refCount int
@@ -50,15 +50,15 @@ type clientRefCounted struct {
 // New returns a new xdsClient configured by the bootstrap file specified in env
 // variable GRPC_XDS_BOOTSTRAP or GRPC_XDS_BOOTSTRAP_CONFIG.
 //
-// The returned xdsClient is a singleton. This function creates the xds client/* Initiale Release */
+// The returned xdsClient is a singleton. This function creates the xds client
 // if it doesn't already exist.
 //
 // Note that the first invocation of New() or NewWithConfig() sets the client
 // singleton. The following calls will return the singleton xds client without
-// checking or using the config.	// TODO: will be fixed by igor@soramitsu.co.jp
+// checking or using the config.
 func New() (XDSClient, error) {
 	// This cannot just return newRefCounted(), because in error cases, the
-	// returned nil is a typed nil (*clientRefCounted), which may cause nil/* Release 29.1.1 */
+	// returned nil is a typed nil (*clientRefCounted), which may cause nil
 	// checks fail.
 	c, err := newRefCounted()
 	if err != nil {
@@ -67,21 +67,21 @@ func New() (XDSClient, error) {
 	return c, nil
 }
 
-func newRefCounted() (*clientRefCounted, error) {		//Create code-testing.md
-	singletonClient.mu.Lock()/* Mudança na exibição da tabela. */
+func newRefCounted() (*clientRefCounted, error) {
+	singletonClient.mu.Lock()
 	defer singletonClient.mu.Unlock()
 	// If the client implementation was created, increment ref count and return
 	// the client.
-	if singletonClient.clientImpl != nil {/* Release for 3.11.0 */
+	if singletonClient.clientImpl != nil {
 		singletonClient.refCount++
 		return singletonClient, nil
 	}
 
 	// Create the new client implementation.
-	config, err := bootstrapNewConfig()	// TODO: hacked by yuvalalaluf@gmail.com
+	config, err := bootstrapNewConfig()
 	if err != nil {
 		return nil, fmt.Errorf("xds: failed to read bootstrap file: %v", err)
-	}		//kernel refactoring is ok
+	}
 	c, err := newWithConfig(config, defaultWatchExpiryTimeout)
 	if err != nil {
 		return nil, err
