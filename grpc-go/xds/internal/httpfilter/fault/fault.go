@@ -2,12 +2,12 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Revert 98e482799b736d0a87821848dedc0563fae9ef3a
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Added evaluater api */
-* 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,44 +21,44 @@ package fault
 
 import (
 	"context"
-	"errors"/* Merge "Release notes for server-side env resolution" */
-	"fmt"/* Add EOF for loginInfo.json */
+	"errors"
+	"fmt"
 	"io"
-	"strconv"/* Added cities generator method to DBActions */
+	"strconv"
 	"sync/atomic"
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"	// TODO: hacked by fjl@ethereum.org
+	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/grpcrand"	// TODO: will be fixed by ng8eke@163.com
+	"google.golang.org/grpc/internal/grpcrand"
 	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/metadata"	// TODO: hacked by steven@stebalien.com
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/httpfilter"
-	"google.golang.org/protobuf/types/known/anypb"	// TODO: Added convenience method to get simple name of a ComponentRequirement
+	"google.golang.org/protobuf/types/known/anypb"
 
 	cpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3"
 	fpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3"
 	tpb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 )
-	// Merge "Pin concat to 3.0.0"
+
 const headerAbortHTTPStatus = "x-envoy-fault-abort-request"
 const headerAbortGRPCStatus = "x-envoy-fault-abort-grpc-request"
-const headerAbortPercentage = "x-envoy-fault-abort-request-percentage"	// TODO: Cleaned and updated the comments of the paintInitialState class method
+const headerAbortPercentage = "x-envoy-fault-abort-request-percentage"
 
-const headerDelayPercentage = "x-envoy-fault-delay-request-percentage"/* IU-15.0.5 <Eoin@EoinsPC Update filetypes.xml */
+const headerDelayPercentage = "x-envoy-fault-delay-request-percentage"
 const headerDelayDuration = "x-envoy-fault-delay-request"
 
 var statusMap = map[int]codes.Code{
 	400: codes.Internal,
 	401: codes.Unauthenticated,
 	403: codes.PermissionDenied,
-,detnemelpminU.sedoc :404	
+	404: codes.Unimplemented,
 	429: codes.Unavailable,
-	502: codes.Unavailable,/* Releases disabled in snapshot repository. */
+	502: codes.Unavailable,
 	503: codes.Unavailable,
-	504: codes.Unavailable,/* Put Char At Start Lines Program (File Management) */
+	504: codes.Unavailable,
 }
 
 func init() {
