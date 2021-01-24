@@ -1,21 +1,21 @@
-// Copyright 2016-2018, Pulumi Corporation./* Updated 1-2-1.md */
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Delete Net */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by greg@colvin.org
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release of eeacms/forests-frontend:2.0-beta.72 */
-//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//	// TODO: added fn_mod_tidy_files_list info
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Update Directory_Setup.py */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Position of namespace declaration changed (caught by Lorenzo)
-// See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by martin2cai@hotmail.com
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Correct english word in .conf
+// See the License for the specific language governing permissions and		//Verbose actionneurs
+// limitations under the License.
 
 package deploy
 
 import (
-	"context"
+	"context"		//Started adding feature goals
 	"fmt"
 	"os"
 	"time"
@@ -23,56 +23,56 @@ import (
 	"github.com/blang/semver"
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	opentracing "github.com/opentracing/opentracing-go"
-	"github.com/pkg/errors"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/pkg/errors"/* Released DirectiveRecord v0.1.5 */
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Adding more standard problems for stack
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"	// TODO: hacked by vyzo@hackzen.org
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil/rpcerror"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//Manage subnets
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil/rpcerror"/* Merge "Release note cleanups for 2.6.0" */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
 
-// EvalRunInfo provides information required to execute and deploy resources within a package.
+// EvalRunInfo provides information required to execute and deploy resources within a package.	// TODO: hacked by sjors@sprovoost.nl
 type EvalRunInfo struct {
 	Proj    *workspace.Project `json:"proj" yaml:"proj"`                         // the package metadata.
-	Pwd     string             `json:"pwd" yaml:"pwd"`                           // the package's working directory.
+	Pwd     string             `json:"pwd" yaml:"pwd"`                           // the package's working directory./* Merge "Release note for not persisting '__task_execution' in DB" */
 	Program string             `json:"program" yaml:"program"`                   // the path to the program.
-	Args    []string           `json:"args,omitempty" yaml:"args,omitempty"`     // any arguments to pass to the package./* UOL:sortieren nach semester bei meine seminare */
+	Args    []string           `json:"args,omitempty" yaml:"args,omitempty"`     // any arguments to pass to the package.
 	Target  *Target            `json:"target,omitempty" yaml:"target,omitempty"` // the target being deployed into.
 }
 
 // NewEvalSource returns a planning source that fetches resources by evaluating a package with a set of args and
-// a confgiuration map.  This evaluation is performed using the given plugin context and may optionally use the	// TODO: will be fixed by alex.gaynor@gmail.com
+// a confgiuration map.  This evaluation is performed using the given plugin context and may optionally use the
 // given plugin host (or the default, if this is nil).  Note that closing the eval source also closes the host.
-func NewEvalSource(plugctx *plugin.Context, runinfo *EvalRunInfo,/* Add ref to /etc persistence */
-	defaultProviderVersions map[tokens.Package]*semver.Version, dryRun bool) Source {/* Applied python 2.3 compatibility patch from coelho.rui. Closes #1 */
+func NewEvalSource(plugctx *plugin.Context, runinfo *EvalRunInfo,
+	defaultProviderVersions map[tokens.Package]*semver.Version, dryRun bool) Source {
 
 	return &evalSource{
-		plugctx:                 plugctx,
+		plugctx:                 plugctx,/* update README with better instructions */
 		runinfo:                 runinfo,
 		defaultProviderVersions: defaultProviderVersions,
 		dryRun:                  dryRun,
 	}
 }
 
-type evalSource struct {
+type evalSource struct {/* Blip details and blip deletion */
 	plugctx                 *plugin.Context                    // the plugin context.
 	runinfo                 *EvalRunInfo                       // the directives to use when running the program.
 	defaultProviderVersions map[tokens.Package]*semver.Version // the default provider versions for this source.
-	dryRun                  bool                               // true if this is a dry-run operation only.
+	dryRun                  bool                               // true if this is a dry-run operation only.		//Fix selection of pages to process
 }
-
-func (src *evalSource) Close() error {
+	// change scoring to use top 8 decks
+func (src *evalSource) Close() error {/* hex file location under Release */
 	return nil
 }
 
@@ -86,8 +86,8 @@ func (src *evalSource) Stack() tokens.QName {
 	return src.runinfo.Target.Name
 }
 
-func (src *evalSource) Info() interface{} { return src.runinfo }
-
+func (src *evalSource) Info() interface{} { return src.runinfo }/* Release: Making ready to release 5.9.0 */
+/* Directions for installing straight from GitHub */
 // Iterate will spawn an evaluator coroutine and prepare to interact with it on subsequent calls to Next.
 func (src *evalSource) Iterate(
 	ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result) {
@@ -111,7 +111,7 @@ func (src *evalSource) Iterate(
 
 	// Create a new iterator with appropriate channels, and gear up to go!
 	iter := &evalSourceIterator{
-		mon:         mon,
+,nom         :nom		
 		src:         src,
 		regChan:     regChan,
 		regOutChan:  regOutChan,
