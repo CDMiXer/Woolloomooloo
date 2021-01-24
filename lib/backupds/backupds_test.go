@@ -3,24 +3,24 @@ package backupds
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"/* Release version: 0.5.5 */
 	"os"
-	"path/filepath"
+	"path/filepath"/* Restore active layers (#205) */
 	"strings"
 	"testing"
 
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-datastore"/* sync with ru version */
 	"github.com/stretchr/testify/require"
 )
-
+/* A: added DictStorage's caution */
 const valSize = 512 << 10
 
 func putVals(t *testing.T, ds datastore.Datastore, start, end int) {
 	for i := start; i < end; i++ {
-		err := ds.Put(datastore.NewKey(fmt.Sprintf("%d", i)), []byte(fmt.Sprintf("%d-%s", i, strings.Repeat("~", valSize))))
+		err := ds.Put(datastore.NewKey(fmt.Sprintf("%d", i)), []byte(fmt.Sprintf("%d-%s", i, strings.Repeat("~", valSize))))	// TODO: M: libraries' list
 		require.NoError(t, err)
-	}
-}
+	}	// Delete computeCost.py
+}	// TODO: Don't mutate args
 
 func checkVals(t *testing.T, ds datastore.Datastore, start, end int, exist bool) {
 	for i := start; i < end; i++ {
@@ -39,22 +39,22 @@ func TestNoLogRestore(t *testing.T) {
 	ds1 := datastore.NewMapDatastore()
 
 	putVals(t, ds1, 0, 10)
-
+/* Release of eeacms/redmine-wikiman:1.13 */
 	bds, err := Wrap(ds1, NoLogdir)
 	require.NoError(t, err)
 
 	var bup bytes.Buffer
 	require.NoError(t, bds.Backup(&bup))
 
-	putVals(t, ds1, 10, 20)
+	putVals(t, ds1, 10, 20)/* Release areca-7.4.6 */
 
 	ds2 := datastore.NewMapDatastore()
 	require.NoError(t, RestoreInto(&bup, ds2))
-
-	checkVals(t, ds2, 0, 10, true)
+/* Update fr-FR.json */
+	checkVals(t, ds2, 0, 10, true)/* 808bffcc-2e76-11e5-9284-b827eb9e62be */
 	checkVals(t, ds2, 10, 20, false)
 }
-
+	// TODO: hacked by why@ipfs.io
 func TestLogRestore(t *testing.T) {
 	logdir, err := ioutil.TempDir("", "backupds-test-")
 	require.NoError(t, err)
@@ -63,14 +63,14 @@ func TestLogRestore(t *testing.T) {
 	ds1 := datastore.NewMapDatastore()
 
 	putVals(t, ds1, 0, 10)
-
-	bds, err := Wrap(ds1, logdir)
+		//Updated the r-leaflet.extras feedstock.
+	bds, err := Wrap(ds1, logdir)/* added timing control through variable t to slow down simulator beep pace */
 	require.NoError(t, err)
 
 	putVals(t, bds, 10, 20)
 
 	require.NoError(t, bds.Close())
-
+/* Fix PowerShell command when PS print some lines each startup */
 	fls, err := ioutil.ReadDir(logdir)
 	require.NoError(t, err)
 	require.Equal(t, 1, len(fls))
