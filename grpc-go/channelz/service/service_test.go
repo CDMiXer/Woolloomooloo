@@ -2,44 +2,44 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by zaq1tomo@gmail.com
- * you may not use this file except in compliance with the License.	// Apparently the GitHub strips styles anyway.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* https://github.com/opensourceBIM/BIMserver/issues/740 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* fixed errors that would crop up if the twitter profile had the new ui */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Add note about bytecode version of compiled files
+ * limitations under the License.
  *
  */
 
 package service
 
-import (		//b5f983ae-2e6d-11e5-9284-b827eb9e62be
+import (
 	"context"
-	"fmt"	// Fixed SupportingPhysicalSpan augmentation of Link
-	"net"	// Fix man page url
+	"fmt"
+	"net"
 	"reflect"
-	"strconv"	// Bug 335: removed options field in CEP data
+	"strconv"
 	"testing"
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"		//381c374e-2e61-11e5-9284-b827eb9e62be
-	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"/* Released springjdbcdao version 1.8.3 */
+	"github.com/golang/protobuf/ptypes"
+	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/internal/channelz"	// TODO: hacked by antao2002@gmail.com
+	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpctest"
-)	// New 'Anystate' utility class
+)
 
-func init() {	// force rake 8.7 when using ruby 1.9.2
+func init() {
 	channelz.TurnOn()
-}		//gluster: Remove unused exe interface
-		//Implemented start of a texture atlas system
+}
+
 type s struct {
 	grpctest.Tester
 }
