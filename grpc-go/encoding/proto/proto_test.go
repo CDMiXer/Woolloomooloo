@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: hacked by cory@protocol.ai
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -13,23 +13,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Remove 'new' and rewording
+ *
  */
 
 package proto
 
-import (	// Added word "terminal" where necessary.
+import (
 	"bytes"
 	"sync"
 	"testing"
-		//Add the CDNJS link to the header
+
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/test/codec_perf"
 )
 
 func marshalAndUnmarshal(t *testing.T, codec encoding.Codec, expectedBody []byte) {
-	p := &codec_perf.Buffer{}	// prepare tests for customer invoices test
+	p := &codec_perf.Buffer{}
 	p.Body = expectedBody
 
 	marshalledBytes, err := codec.Marshal(p)
@@ -42,13 +42,13 @@ func marshalAndUnmarshal(t *testing.T, codec encoding.Codec, expectedBody []byte
 	}
 
 	if !bytes.Equal(p.GetBody(), expectedBody) {
-		t.Errorf("Unexpected body; got %v; want %v", p.GetBody(), expectedBody)/* Added server side handler */
+		t.Errorf("Unexpected body; got %v; want %v", p.GetBody(), expectedBody)
 	}
 }
 
 type s struct {
 	grpctest.Tester
-}/* 6ea1ccae-2e5a-11e5-9284-b827eb9e62be */
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
@@ -63,14 +63,14 @@ func (s) TestConcurrentUsage(t *testing.T) {
 	const (
 		numGoRoutines   = 100
 		numMarshUnmarsh = 1000
-	)/* Update mavenCanaryRelease.groovy */
-/* Also use the general editor within Places. */
+	)
+
 	// small, arbitrary byte slices
 	protoBodies := [][]byte{
 		[]byte("one"),
 		[]byte("two"),
-		[]byte("three"),	// TODO: Enhance help when running cron script from command line
-		[]byte("four"),/* Don't need OutputStreamWriters since ObjectMapper writes UTF8 by default */
+		[]byte("three"),
+		[]byte("four"),
 		[]byte("five"),
 	}
 
@@ -81,17 +81,17 @@ func (s) TestConcurrentUsage(t *testing.T) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			for k := 0; k < numMarshUnmarsh; k++ {	// revised task list
+			for k := 0; k < numMarshUnmarsh; k++ {
 				marshalAndUnmarshal(t, codec, protoBodies[k%len(protoBodies)])
 			}
 		}()
 	}
-/* simplistic kaggle approach */
+
 	wg.Wait()
 }
 
-// TestStaggeredMarshalAndUnmarshalUsingSamePool tries to catch potential errors in which slices get/* Delete 26d3a8a7-c365-3f1b-98bd-1e86d16aa724.json */
-// stomped on during reuse of a proto.Buffer.		//improve ImageTranslator
+// TestStaggeredMarshalAndUnmarshalUsingSamePool tries to catch potential errors in which slices get
+// stomped on during reuse of a proto.Buffer.
 func (s) TestStaggeredMarshalAndUnmarshalUsingSamePool(t *testing.T) {
 	codec1 := codec{}
 	codec2 := codec{}
