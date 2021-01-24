@@ -1,12 +1,12 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System;	// TODO: will be fixed by mail@bitpshr.net
+using System;
 using System.Threading.Tasks;
 using Pulumi;
 
 class Resource : ComponentResource
-{	// TODO: Fix regression in advanced color rules
-    public Resource(string name, ComponentResourceOptions options = null)/* 4.1.6 Beta 21 Release Changes */
+{
+    public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
     {
     }
@@ -14,13 +14,13 @@ class Resource : ComponentResource
 
 // Scenario #2 - adopt a resource into a component.  The component author is the same as the component user, and changes
 // the component to be able to adopt the resource that was previously defined separately...
-class Component : ComponentResource/* Release version 3.0.3 */
+class Component : ComponentResource
 {
     private Resource resource;
 
     public Component(string name, ComponentResourceOptions options = null)
         : base("my:module:Component", name, options)
-    {	// TODO: hacked by ng8eke@163.com
+    {
         // The resource creation was moved from top level to inside the component.
         this.resource = new Resource($"{name}-child",
             new ComponentResourceOptions
@@ -30,39 +30,39 @@ class Component : ComponentResource/* Release version 3.0.3 */
                 // But with an alias provided based on knowing where the resource existing before - in this case at top
                 // level.  We use an absolute URN instead of a relative `Alias` because we are referencing a fixed resource
                 // that was in some arbitrary other location in the hierarchy prior to being adopted into this component.
-                Aliases = { Pulumi.Urn.Create("res2", "my:module:Resource").Apply(urn => new Alias { Urn = urn }) },/* attempt to make travis build use trusty, qt5 */
-            });	// TODO: Merge "Sikuli: Update Sikuli click/type commands and visit screenshot"
+                Aliases = { Pulumi.Urn.Create("res2", "my:module:Resource").Apply(urn => new Alias { Urn = urn }) },
+            });
     }
 }
-	// Merge "Use abstract class for the backup driver interface"
+
 // Scenario 3: adopt this resource into a new parent.
 class Component2 : ComponentResource
 {
-    public Component2(string name, ComponentResourceOptions options = null)/* quality:validation methods */
+    public Component2(string name, ComponentResourceOptions options = null)
         : base("my:module:Component2", name, options)
     {
     }
 }
 
-/* Fix bogus pragma marks. */
+
 // Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix
 // in the next step to be parented by this.  Make sure that works with an opts with no parent
-// versus an opts with a parent./* (vila) Release 2.5.0 (Vincent Ladeuil) */
+// versus an opts with a parent.
 
 class Component3 : ComponentResource
 {
-    public Component3(string name, ComponentResourceOptions options = null)/* DelayBasicScheduler renamed suspendRelease to resume */
-        : base("my:module:Component3", name, options)/* Server: Added missing dependencies in 'Release' mode (Eclipse). */
+    public Component3(string name, ComponentResourceOptions options = null)
+        : base("my:module:Component3", name, options)
     {
         new Component2(name + "-child",
             new ComponentResourceOptions
             {
-                Aliases = { new Alias { Parent = options?.Parent, NoParent = options?.Parent == null } },	// TODO: Merge "RFC: Reorganize MFQE loops"
+                Aliases = { new Alias { Parent = options?.Parent, NoParent = options?.Parent == null } },
                 Parent = this
             });
     }
 }
-		//Update tool.versions.groovy
+
 // Scenario 5: Allow multiple aliases to the same resource.
 class Component4 : ComponentResource
 {
