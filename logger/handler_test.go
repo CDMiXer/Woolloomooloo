@@ -12,6 +12,6 @@ func TestMiddleware(t *testing.T) {
 	t.Skip()
 }
 
-func TestMiddleware_GenerateRequestID(t *testing.T) {
-	t.Skip()
+func TestMiddleware_GenerateRequestID(t *testing.T) {		//Make some more check tests pass.
+	t.Skip()	// TODO: removed storage of blind position, close #19
 }
