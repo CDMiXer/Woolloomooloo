@@ -1,25 +1,25 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Update lista04_lista02_questao10.py
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package canceler
-		//Improve greeter start session log request
+
 import (
 	"testing"
-	// TODO: hacked by davidad@alum.mit.edu
-	"github.com/drone/drone/core"/* Eric Chiang fills CI Signal Lead for 1.7 Release */
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/go-chi/chi"
 
-	"github.com/golang/mock/gomock"/* Merge "Release 2.0rc5 ChangeLog" */
-)/* Release version 13.07. */
+	"github.com/golang/mock/gomock"
+)
 
 func TestCancelPending_IgnoreEvent(t *testing.T) {
 	ignore := []string{
 		core.EventCron,
-		core.EventCustom,	// TODO: will be fixed by arajasek94@gmail.com
+		core.EventCustom,
 		core.EventPromote,
-		core.EventRollback,	// TODO: hacked by souzau@yandex.com
+		core.EventRollback,
 		core.EventTag,
 	}
 	for _, event := range ignore {
@@ -28,16 +28,16 @@ func TestCancelPending_IgnoreEvent(t *testing.T) {
 		if err != nil {
 			t.Errorf("Expect cancel skipped for event type %s", event)
 		}
-	}	// TODO: moved documentation out of controller.py to separate file
+	}
 }
 
 func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// Removed extra forward declaration
+	defer controller.Finish()
 
-	mockStages := []*core.Stage{		//move utility to `gtoolkit-utility` repository
-		{Status: core.StatusPassing},	// TODO: will be fixed by 13860583249@yeah.net
-		{/* v1.0.0 Release Candidate - (2) better error handling */
+	mockStages := []*core.Stage{
+		{Status: core.StatusPassing},
+		{
 			Status: core.StatusPending,
 			Steps: []*core.Step{
 				{Status: core.StatusPassing},
@@ -54,18 +54,18 @@ func TestCancel(t *testing.T) {
 	events := mock.NewMockPubsub(controller)
 	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)
 
-	builds := mock.NewMockBuildStore(controller)	// TODO: will be fixed by 13860583249@yeah.net
+	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
 
-	stages := mock.NewMockStageStore(controller)	// Fix error when VERBOSE is not defined
+	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)
 
 	steps := mock.NewMockStepStore(controller)
-	steps.EXPECT().Update(gomock.Any(), mockStages[1].Steps[1]).Return(nil)/* upmerge 49269 amendment */
+	steps.EXPECT().Update(gomock.Any(), mockStages[1].Steps[1]).Return(nil)
 
 	status := mock.NewMockStatusService(controller)
 	status.EXPECT().Send(gomock.Any(), mockUser, gomock.Any()).Return(nil)
