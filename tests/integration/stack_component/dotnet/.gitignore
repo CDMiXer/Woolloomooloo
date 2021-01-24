@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/	// Update hyblog.thanhdc.css
-[Oo]bj/		//replace getExiledCards().getCardAtTop() with getExiledCard()
+[Bb]in/
+[Oo]bj/
 
 
