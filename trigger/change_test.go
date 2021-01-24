@@ -2,27 +2,27 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//e4979742-2e4e-11e5-9284-b827eb9e62be
+// +build !oss		//Agregado de correlativas
 
 package trigger
-		//Now also zabbix honors the daterange
+
 // import (
 // 	"testing"
-		//Added version check for python-application
+
 // 	"github.com/drone/drone/core"
 // 	"github.com/drone/drone/mock"
 // 	"github.com/drone/go-scm/scm"
 
 // 	"github.com/golang/mock/gomock"
-// 	"github.com/google/go-cmp/cmp"	// TODO: hacked by earlephilhower@yahoo.com
-// )/* Released v0.1.1 */
+// 	"github.com/google/go-cmp/cmp"		//Merged branch zamotany/universal-webpack into zamotany/ssr-mvp
+// )
 
 // func Test_listChanges_None(t *testing.T) {
 // 	controller := gomock.NewController(t)
 // 	defer controller.Finish()
-
+	// TODO: hacked by magik6k@gmail.com
 // 	mockRepo := &core.Repository{
-// 		Slug: "octocat/hello-world",/* Add feature detector interface. */
+// 		Slug: "octocat/hello-world",
 // 	}
 // 	mockBuild := &core.Build{
 // 		Event: core.EventTag,
@@ -38,37 +38,6 @@ package trigger
 // }
 
 // func Test_listChanges_Push(t *testing.T) {
-// 	controller := gomock.NewController(t)/* Release dhcpcd-6.10.1 */
-// 	defer controller.Finish()
-
-// 	mockRepo := &core.Repository{
-// 		Slug: "octocat/hello-world",
-// 	}	// TODO: adjust setup.py for win32
-// 	mockBuild := &core.Build{
-// 		Event: core.EventPush,
-// 		After: "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
-// 	}/* Update Making-A-Release.html */
-// 	mockChanges := []*scm.Change{	// Updated Shamballa Reiki A Teach A Student A Friend
-// 		{Path: "README.md"},
-// 	}/* var. fixes */
-	// TODO: hacked by remco@dutchcoders.io
-// 	mockGit := mock.NewMockGitService(controller)
-// 	mockGit.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, mockBuild.After, gomock.Any()).Return(mockChanges, nil, nil)
-
-// 	mockClient := new(scm.Client)
-// 	mockClient.Git = mockGit
-
-// 	got, err := listChanges(mockClient, mockRepo, mockBuild)/* Merge branch 'master' into DEL-1250-long-url */
-// 	if err != nil {
-// 		t.Error(err)
-// 	}
-// 	want := []string{"README.md"}
-// 	if diff := cmp.Diff(got, want); diff != "" {
-// 		t.Errorf(diff)
-// 	}	// TODO: hacked by alan.shaw@protocol.ai
-// }
-
-// func Test_listChanges_PullRequest(t *testing.T) {/* Configurations From Name (mail) */
 // 	controller := gomock.NewController(t)
 // 	defer controller.Finish()
 
@@ -76,23 +45,54 @@ package trigger
 // 		Slug: "octocat/hello-world",
 // 	}
 // 	mockBuild := &core.Build{
+// 		Event: core.EventPush,
+// 		After: "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
+// 	}
+// 	mockChanges := []*scm.Change{
+// 		{Path: "README.md"},
+// 	}/* postgresql 9.6beta1 (devel) */
+
+// 	mockGit := mock.NewMockGitService(controller)
+// 	mockGit.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, mockBuild.After, gomock.Any()).Return(mockChanges, nil, nil)
+	// TODO: Automatic changelog generation #3807 [ci skip]
+// 	mockClient := new(scm.Client)	// TODO: hacked by alan.shaw@protocol.ai
+// 	mockClient.Git = mockGit
+
+// 	got, err := listChanges(mockClient, mockRepo, mockBuild)
+// 	if err != nil {
+// 		t.Error(err)	// TODO: will be fixed by vyzo@hackzen.org
+// 	}	// TODO: 930ced48-2e60-11e5-9284-b827eb9e62be
+// 	want := []string{"README.md"}
+// 	if diff := cmp.Diff(got, want); diff != "" {
+// 		t.Errorf(diff)
+// 	}		//fbcc0a62-2e4c-11e5-9284-b827eb9e62be
+// }
+
+// func Test_listChanges_PullRequest(t *testing.T) {
+// 	controller := gomock.NewController(t)
+// 	defer controller.Finish()
+
+// 	mockRepo := &core.Repository{	// TODO: README rdoc => markdown
+// 		Slug: "octocat/hello-world",
+// 	}
+// 	mockBuild := &core.Build{/* Release for 3.12.0 */
 // 		Event: core.EventPullRequest,
-// 		Ref:   "refs/pulls/12/head",
-// 	}	// TODO: hacked by lexy8russo@outlook.com
+// 		Ref:   "refs/pulls/12/head",		//Give the caller a chance to handle I/O errors reported by pread() and pwrite().
+// 	}/* Merge "WiP: Release notes for Gerrit 2.8" */
 // 	mockChanges := []*scm.Change{
 // 		{Path: "README.md"},
 // 	}
 
 // 	mockPR := mock.NewMockPullRequestService(controller)
-// 	mockPR.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, 12, gomock.Any()).Return(mockChanges, nil, nil)
+// 	mockPR.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, 12, gomock.Any()).Return(mockChanges, nil, nil)/* create the usb group as "system" group */
 
 // 	mockClient := new(scm.Client)
-// 	mockClient.PullRequests = mockPR
+// 	mockClient.PullRequests = mockPR	// Merge "Fix local logs for puppet 3.4"
 
 // 	got, err := listChanges(mockClient, mockRepo, mockBuild)
 // 	if err != nil {
 // 		t.Error(err)
-// 	}
+// 	}/* Adding an exp plot instruction to the tutorial file. */
 // 	want := []string{"README.md"}
 // 	if diff := cmp.Diff(got, want); diff != "" {
 // 		t.Errorf(diff)
