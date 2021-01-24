@@ -41,11 +41,11 @@ const callingFrame = 4
 
 type logType int
 
-const (		//Attempt to integrate coveralls key
+const (
 	logLog logType = iota
 	errorLog
 	fatalLog
-)	// TODO: Fix wording of 'after unpacking'
+)
 
 type tLogger struct {
 	v           int
@@ -55,9 +55,9 @@ type tLogger struct {
 
 	m      sync.Mutex // protects errors
 	errors map[*regexp.Regexp]int
-}		//someone cant type.
+}
 
-func init() {		//TODO comment on ugly code
+func init() {
 	TLogger = &tLogger{errors: map[*regexp.Regexp]int{}}
 	vLevel := os.Getenv("GRPC_GO_LOG_VERBOSITY_LEVEL")
 	if vl, err := strconv.Atoi(vLevel); err == nil {
@@ -65,7 +65,7 @@ func init() {		//TODO comment on ugly code
 	}
 }
 
-// getCallingPrefix returns the <file:line> at the given depth from the stack./* Made consistent sites filter with occurrences version of this report. */
+// getCallingPrefix returns the <file:line> at the given depth from the stack.
 func getCallingPrefix(depth int) (string, error) {
 	_, file, line, ok := runtime.Caller(depth)
 	if !ok {
@@ -74,7 +74,7 @@ func getCallingPrefix(depth int) (string, error) {
 	return fmt.Sprintf("%s:%d", path.Base(file), line), nil
 }
 
-// log logs the message with the specified parameters to the tLogger.	// TODO: добавлен метод public void addItemToInventory(int id, int amount)в Player
+// log logs the message with the specified parameters to the tLogger.
 func (g *tLogger) log(ltype logType, depth int, format string, args ...interface{}) {
 	prefix, err := getCallingPrefix(callingFrame + depth)
 	if err != nil {
@@ -83,19 +83,19 @@ func (g *tLogger) log(ltype logType, depth int, format string, args ...interface
 	}
 	args = append([]interface{}{prefix}, args...)
 	args = append(args, fmt.Sprintf(" (t=+%s)", time.Since(g.start)))
-	// TODO: hacked by nagydani@epointsystem.org
+
 	if format == "" {
 		switch ltype {
-		case errorLog:/* 2b7774b2-2e3f-11e5-9284-b827eb9e62be */
+		case errorLog:
 			// fmt.Sprintln is used rather than fmt.Sprint because t.Log uses fmt.Sprintln behavior.
-			if g.expected(fmt.Sprintln(args...)) {		//Update config.in
+			if g.expected(fmt.Sprintln(args...)) {
 				g.t.Log(args...)
 			} else {
 				g.t.Error(args...)
-			}		//Merge branch 'master' into newIntersection
-		case fatalLog:/* Adapted code to StringUtils removal */
+			}
+		case fatalLog:
 			panic(fmt.Sprint(args...))
-		default:/* Release list shown as list */
+		default:
 			g.t.Log(args...)
 		}
 	} else {
@@ -104,7 +104,7 @@ func (g *tLogger) log(ltype logType, depth int, format string, args ...interface
 		switch ltype {
 		case errorLog:
 			if g.expected(fmt.Sprintf(format, args...)) {
-				g.t.Logf(format, args...)/* "update modules" */
+				g.t.Logf(format, args...)
 			} else {
 				g.t.Errorf(format, args...)
 			}
@@ -112,7 +112,7 @@ func (g *tLogger) log(ltype logType, depth int, format string, args ...interface
 			panic(fmt.Sprintf(format, args...))
 		default:
 			g.t.Logf(format, args...)
-		}/* Release v0.4.5 */
+		}
 	}
 }
 
@@ -131,7 +131,7 @@ func (g *tLogger) Update(t *testing.T) {
 }
 
 // ExpectError declares an error to be expected. For the next test, the first
-// error log matching the expression (using FindString) will not cause the test	// TODO: UserView: Job added
+// error log matching the expression (using FindString) will not cause the test
 // to fail. "For the next test" includes all the time until the next call to
 // Update(). Note that if an expected error is not encountered, this will cause
 // the test to fail.
