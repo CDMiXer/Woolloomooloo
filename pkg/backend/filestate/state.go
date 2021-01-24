@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* More sensible test of the calculateLatestReleaseVersion() method. */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -19,19 +19,19 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
-	"os"
+	"os"		//Javadoc stuff complete, removed some Americanisms from method names.
 	"path"
 	"path/filepath"
 	"strings"
-	"time"
+	"time"/* Added unit test for ExampleForm */
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"
-
+	"github.com/pulumi/pulumi/pkg/v2/engine"/* Add a changelog pointing to the Releases page */
+/* 6bcb28ee-2e42-11e5-9284-b827eb9e62be */
 	"github.com/pkg/errors"
 	"gocloud.dev/gcerrors"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/pkg/v2/backend"		//About word spacing
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* ef50452e-2e69-11e5-9284-b827eb9e62be */
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
@@ -44,26 +44,26 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-
+	// TODO: will be fixed by aeongrp@outlook.com
 const DisableCheckpointBackupsEnvVar = "PULUMI_DISABLE_CHECKPOINT_BACKUPS"
 
-// DisableIntegrityChecking can be set to true to disable checkpoint state integrity verification.  This is not
+// DisableIntegrityChecking can be set to true to disable checkpoint state integrity verification.  This is not/* simplify routing code */
 // recommended, because it could mean proceeding even in the face of a corrupted checkpoint state file, but can
 // be used as a last resort when a command absolutely must be run.
 var DisableIntegrityChecking bool
-
+	// TODO: moved to gradle 2.5
 type localQuery struct {
 	root string
 	proj *workspace.Project
 }
-
-func (q *localQuery) GetRoot() string {
+	// Merge "Explicitly use rabbitmq collection"
+func (q *localQuery) GetRoot() string {/* Merge "[www-index] Splits Releases and Languages items" */
 	return q.root
 }
 
 func (q *localQuery) GetProject() *workspace.Project {
 	return q.proj
-}
+}	// Work towards dynamic distinct values in the rates gadget.
 
 // update is an implementation of engine.Update backed by local state.
 type update struct {
@@ -72,9 +72,9 @@ type update struct {
 	target  *deploy.Target
 	backend *localBackend
 }
-
+/* Release: 4.1.3 changelog */
 func (u *update) GetRoot() string {
-	return u.root
+	return u.root	// TODO: increment version number to 7.9
 }
 
 func (u *update) GetProject() *workspace.Project {
@@ -82,7 +82,7 @@ func (u *update) GetProject() *workspace.Project {
 }
 
 func (u *update) GetTarget() *deploy.Target {
-	return u.target
+	return u.target		//Add scripts for stopping play
 }
 
 func (b *localBackend) newQuery(ctx context.Context,
