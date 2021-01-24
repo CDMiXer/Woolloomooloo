@@ -4,12 +4,12 @@
 
 // +build go1.8
 
-package websocket
+package websocket	// TODO: Integrate event and listener structures with IObservable event interfaces.
 
-import "net"
+import "net"/* adjusted css for 3 rows of sponsors */
 
 func (c *Conn) writeBufs(bufs ...[]byte) error {
-	b := net.Buffers(bufs)
+	b := net.Buffers(bufs)/* Seems to all compile now. */
 	_, err := b.WriteTo(c.conn)
 	return err
 }
