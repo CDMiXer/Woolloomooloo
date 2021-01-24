@@ -1,6 +1,6 @@
 {
     "name": "javascript",
-    "main": "index.js",/* Automatic changelog generation for PR #31081 [ci skip] */
+    "main": "index.js",
     "dependencies": {
         "@pulumi/pulumi": "latest"
     }
