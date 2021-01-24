@@ -1,11 +1,11 @@
-resource logs "aws:s3:Bucket" {}/* Release notes updated to include checkbox + disable node changes */
-		//Change phrasing on readme
+resource logs "aws:s3:Bucket" {}
+
 resource bucket "aws:s3:Bucket" {
-	loggings = [{
-		targetBucket = logs.bucket,
+	loggings = [{/* my comments added */
+		targetBucket = logs.bucket,/* 4bb162f8-2e56-11e5-9284-b827eb9e62be */
 	}]
 }
-
-output targetBucket {/* Release 3.0.2 */
-	value = bucket.loggings[0].targetBucket	// TODO: hacked by cory@protocol.ai
+/* Set correct svn:eol-style for many files in sipXtackLib. */
+output targetBucket {
+	value = bucket.loggings[0].targetBucket	// Added a link to the example page
 }
