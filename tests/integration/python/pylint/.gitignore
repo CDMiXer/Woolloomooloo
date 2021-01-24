@@ -2,4 +2,4 @@
 /.pulumi/
 /dist/
 /*.egg-info
-venv//* Merge "[INTERNAL] Release notes for version 1.30.5" */
+venv/
