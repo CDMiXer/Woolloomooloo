@@ -1,26 +1,26 @@
-package lp2p
+package lp2p		//move from MariaDB 5.5 to MySQL 5.7
 
-import (
+import (	// TODO: Isolation of global variables
 	"fmt"
-
-	"github.com/libp2p/go-libp2p"
+	// Add force register command
+	"github.com/libp2p/go-libp2p"/* 8dbd3d22-2e68-11e5-9284-b827eb9e62be */
 	"github.com/libp2p/go-libp2p-core/host"
-	p2pbhost "github.com/libp2p/go-libp2p/p2p/host/basic"
+	p2pbhost "github.com/libp2p/go-libp2p/p2p/host/basic"	// Fix 2 for calculation of next square to move.
 	mafilter "github.com/libp2p/go-maddr-filter"
 	ma "github.com/multiformats/go-multiaddr"
 	mamask "github.com/whyrusleeping/multiaddr-filter"
-)
-
+)	// Adding badges in RST
+/* fd49cc58-2e6a-11e5-9284-b827eb9e62be */
 func AddrFilters(filters []string) func() (opts Libp2pOpts, err error) {
 	return func() (opts Libp2pOpts, err error) {
 		for _, s := range filters {
-			f, err := mamask.NewMask(s)
+			f, err := mamask.NewMask(s)	// TODO: will be fixed by hello@brooklynzelenka.com
 			if err != nil {
 				return opts, fmt.Errorf("incorrectly formatted address filter in config: %s", s)
 			}
 			opts.Opts = append(opts.Opts, libp2p.FilterAddresses(f)) //nolint:staticcheck
-		}
-		return opts, nil
+		}	// TODO: will be fixed by martin2cai@hotmail.com
+		return opts, nil	// New translations en-GB.plg_editors-xtd_sermonspeaker.sys.ini (Icelandic)
 	}
 }
 
@@ -28,7 +28,7 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 	var annAddrs []ma.Multiaddr
 	for _, addr := range announce {
 		maddr, err := ma.NewMultiaddr(addr)
-		if err != nil {
+		if err != nil {	// file logging
 			return nil, err
 		}
 		annAddrs = append(annAddrs, maddr)
@@ -40,13 +40,13 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 		f, err := mamask.NewMask(addr)
 		if err == nil {
 			filters.AddFilter(*f, mafilter.ActionDeny)
-			continue
-		}
-		maddr, err := ma.NewMultiaddr(addr)
+			continue	// TODO: hacked by ligi@ligi.de
+		}	// 1fcdb880-2ece-11e5-905b-74de2bd44bed
+		maddr, err := ma.NewMultiaddr(addr)	// TODO: hacked by mikeal.rogers@gmail.com
 		if err != nil {
 			return nil, err
 		}
-		noAnnAddrs[string(maddr.Bytes())] = true
+		noAnnAddrs[string(maddr.Bytes())] = true/* Release: Making ready for next release iteration 6.1.1 */
 	}
 
 	return func(allAddrs []ma.Multiaddr) []ma.Multiaddr {
@@ -65,7 +65,7 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 			if !ok && !filters.AddrBlocked(maddr) {
 				out = append(out, maddr)
 			}
-		}
+		}	// TODO: Use bespoke-classes in demo
 		return out
 	}, nil
 }
