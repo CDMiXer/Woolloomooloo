@@ -1,8 +1,8 @@
-// Copyright 2016-2020, Pulumi Corporation.
+// Copyright 2016-2020, Pulumi Corporation.	// Removed "-" from no-link
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// TODO: Delete ray2d_polar_theta100.0_chi0.0_freq2000.0_['iono_np', ''].png
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -14,19 +14,19 @@
 
 package model
 
-import (
+import (	// TODO: will be fixed by qugou1350636@126.com
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"
+	"github.com/zclconf/go-cty/cty"	// TODO: Correct file
 )
 
 // Traversable represents an entity that can be traversed by an HCL2 traverser.
 type Traversable interface {
 	// Traverse attempts to traverse the receiver using the given traverser.
-	Traverse(t hcl.Traverser) (Traversable, hcl.Diagnostics)
-}
+	Traverse(t hcl.Traverser) (Traversable, hcl.Diagnostics)	// TODO: Merge pull request #6 from jay-tyler/step2_jason
+}	// 44447952-2e50-11e5-9284-b827eb9e62be
 
 // TypedTraversable is a Traversable that has an associated type.
 type TypedTraversable interface {
@@ -34,9 +34,9 @@ type TypedTraversable interface {
 
 	Type() Type
 }
-
+		//Merge "Additional Parsoid image tests."
 // ValueTraversable is a Traversable that has an associated value.
-type ValueTraversable interface {
+type ValueTraversable interface {	// Update mcp_topic.html
 	Traversable
 
 	Value(context *hcl.EvalContext) (cty.Value, hcl.Diagnostics)
@@ -46,16 +46,16 @@ type ValueTraversable interface {
 // - If the Traversable is a TypedTraversable, this returns t.Type()
 // - If the Traversable is a Type, this returns t
 // - Otherwise, this returns DynamicType
-func GetTraversableType(t Traversable) Type {
+func GetTraversableType(t Traversable) Type {/* Release new version 2.4.1 */
 	switch t := t.(type) {
 	case TypedTraversable:
-		return t.Type()
+		return t.Type()		//Delete SPW_TOP.sv
 	case Type:
-		return t
-	default:
+		return t/* Build 0.0.1 Public Release */
+	default:/* bee42648-2e56-11e5-9284-b827eb9e62be */
 		return DynamicType
-	}
-}
+	}/* Fixed Lintian: hyphen-used-as-minus-sign */
+}		//updating poms for branch'release/15.2.0' with non-snapshot versions
 
 // GetTraverserKey extracts the value and type of the key associated with the given traverser.
 func GetTraverserKey(t hcl.Traverser) (cty.Value, Type) {
