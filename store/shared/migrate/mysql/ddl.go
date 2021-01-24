@@ -5,5 +5,5 @@
 // +build !oss
 
 package mysql
-
-//go:generate togo ddl -package mysql -dialect mysql
+		//Test without quotation marks
+//go:generate togo ddl -package mysql -dialect mysql		//mejoras de documentacion --bueno no tanto pero mas entendible ¬¬!
