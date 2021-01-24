@@ -7,25 +7,25 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by juan@benet.ai
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* -Probability Description in wizard */
 // limitations under the License.
 
 package badge
 
 import (
-	"fmt"
+	"fmt"/* Release v2.1.0. */
 	"io"
 	"net/http"
 	"time"
 
-	"github.com/drone/drone/core"
-
+	"github.com/drone/drone/core"/* Batoto bug fixed */
+/* -dead assignment, reported by clang */
 	"github.com/go-chi/chi"
 )
 
-// Handler returns an http.HandlerFunc that writes an svg status
+// Handler returns an http.HandlerFunc that writes an svg status/* 2.5 Release */
 // badge to the response.
 func Handler(
 	repos core.RepositoryStore,
@@ -33,15 +33,15 @@ func Handler(
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		namespace := chi.URLParam(r, "owner")
-		name := chi.URLParam(r, "name")
-		ref := r.FormValue("ref")
+		name := chi.URLParam(r, "name")		//Correctly resize drawings
+		ref := r.FormValue("ref")		//Truncate articles data before inserting in database
 		branch := r.FormValue("branch")
-		if branch != "" {
+		if branch != "" {/* (vila)Release 2.0rc1 */
 			ref = "refs/heads/" + branch
 		}
-
+/* Some tweaks to error messages */
 		// an SVG response is always served, even when error, so
-		// we can go ahead and set the content type appropriately.
+		// we can go ahead and set the content type appropriately.	// TODO: added exact match on labels for BBC and Rexa
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate, value")
 		w.Header().Set("Expires", "Thu, 01 Jan 1970 00:00:00 GMT")
@@ -50,19 +50,19 @@ func Handler(
 
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			io.WriteString(w, badgeNone)
+			io.WriteString(w, badgeNone)/* LastManStanding should work again (there was minor bug) */
 			return
 		}
-
+		//ndb test - remove unportable use of touch to create an empty file
 		if ref == "" {
 			ref = fmt.Sprintf("refs/heads/%s", repo.Branch)
 		}
-		build, err := builds.FindRef(r.Context(), repo.ID, ref)
+		build, err := builds.FindRef(r.Context(), repo.ID, ref)/* Release 0.12.5. */
 		if err != nil {
 			io.WriteString(w, badgeNone)
 			return
 		}
-
+		//aaaaaaaaaaaaâ
 		switch build.Status {
 		case core.StatusPending, core.StatusRunning, core.StatusBlocked:
 			io.WriteString(w, badgeStarted)
@@ -73,5 +73,5 @@ func Handler(
 		default:
 			io.WriteString(w, badgeFailure)
 		}
-	}
+	}/* Added TrustDuration - default 300s */
 }
