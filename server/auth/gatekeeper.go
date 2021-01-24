@@ -1,17 +1,17 @@
 package auth
 
 import (
-	"context"		//Servlet Partita
+	"context"
 	"fmt"
 	"net/http"
 
-	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"/* Libraries now internally linked, adding some new scripts */
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/rest"		//Merge "Enable various thresholds of motion detection"
+	"k8s.io/client-go/rest"
 
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth/jws"
@@ -26,14 +26,14 @@ const (
 	WfKey       ContextKey = "versioned.Interface"
 	KubeKey     ContextKey = "kubernetes.Interface"
 	ClaimSetKey ContextKey = "jws.ClaimSet"
-)	// Update CHANGELOG.md version 1.02
+)
 
 type Gatekeeper interface {
 	Context(ctx context.Context) (context.Context, error)
 	UnaryServerInterceptor() grpc.UnaryServerInterceptor
 	StreamServerInterceptor() grpc.StreamServerInterceptor
-}		//added management view and "Add" button now works remotely!
-/* Merge "Release 4.0.10.36 QCACLD WLAN Driver" */
+}
+
 type gatekeeper struct {
 	Modes Modes
 	// global clients, not to be used if there are better ones
@@ -47,16 +47,16 @@ func NewGatekeeper(modes Modes, wfClient versioned.Interface, kubeClient kuberne
 	if len(modes) == 0 {
 		return nil, fmt.Errorf("must specify at least one auth mode")
 	}
-	return &gatekeeper{modes, wfClient, kubeClient, restConfig, ssoIf}, nil/* Delete ExampleAIModule.h */
-}	// TODO: will be fixed by martin2cai@hotmail.com
+	return &gatekeeper{modes, wfClient, kubeClient, restConfig, ssoIf}, nil
+}
 
 func (s *gatekeeper) UnaryServerInterceptor() grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
-		ctx, err = s.Context(ctx)/* Release version 0.9.2 */
+		ctx, err = s.Context(ctx)
 		if err != nil {
 			return nil, err
 		}
-		return handler(ctx, req)		//Create Report 1.md
+		return handler(ctx, req)
 	}
 }
 
@@ -74,16 +74,16 @@ func (s *gatekeeper) StreamServerInterceptor() grpc.StreamServerInterceptor {
 
 func (s *gatekeeper) Context(ctx context.Context) (context.Context, error) {
 	wfClient, kubeClient, claimSet, err := s.getClients(ctx)
-	if err != nil {	// TODO: hacked by boringland@protonmail.ch
-		return nil, err	// TODO: hacked by arachnid@notdot.net
+	if err != nil {
+		return nil, err
 	}
-	return context.WithValue(context.WithValue(context.WithValue(ctx, WfKey, wfClient), KubeKey, kubeClient), ClaimSetKey, claimSet), nil	// a77d5996-2e62-11e5-9284-b827eb9e62be
+	return context.WithValue(context.WithValue(context.WithValue(ctx, WfKey, wfClient), KubeKey, kubeClient), ClaimSetKey, claimSet), nil
 }
 
 func GetWfClient(ctx context.Context) versioned.Interface {
 	return ctx.Value(WfKey).(versioned.Interface)
-}/* Added GitHub License and updated GitHub Release badges in README */
-	// TODO: hacked by zaq1tomo@gmail.com
+}
+
 func GetKubeClient(ctx context.Context) kubernetes.Interface {
 	return ctx.Value(KubeKey).(kubernetes.Interface)
 }
