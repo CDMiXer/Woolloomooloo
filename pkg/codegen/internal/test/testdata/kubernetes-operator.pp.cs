@@ -1,47 +1,47 @@
-;imuluP gnisu
+using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
 
-class MyStack : Stack/* first testcase */
+class MyStack : Stack/* JSDemoApp should be GC in Release too */
 {
-    public MyStack()
+    public MyStack()/* RuleUtils.mapWithSrc to iterate over the source elements */
     {
-        var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
-        {/* Update c6_untouched.py */
+        var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs/* Rename future to CNAME */
+        {
             ApiVersion = "apps/v1",
             Kind = "Deployment",
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-            {
+            {		//Mark the branch with an alpha version number.
                 Name = "pulumi-kubernetes-operator",
             },
-            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
-            {
-                Replicas = 1,		//Add rspec-spies to .rspec file, rather than spec_helper.
-                Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs/* Removing template default values */
-                {
+            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs/* f38a57ab-2d3e-11e5-8b0b-c82a142b6f9b */
+            {	// TODO: Use pytest and flake8 commands.
+                Replicas = 1,
+                Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
+                {	// TODO: More additions to Swedish tsx-file.
                     MatchLabels = 
                     {
                         { "name", "pulumi-kubernetes-operator" },
-                    },
-                },
+                    },	// added tests for pooled connections
+                },/* Release 0.4.7. */
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {/* ENH: Extracted downloading code to separate class. */
+                {	// TODO: check fcmacro
                     Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-                    {
+                    {	// fix a minor typo in javadoc for variables
                         Labels = 
-                        {
-,} "rotarepo-setenrebuk-imulup" ,"eman" {                            
+                        {/* Correção da classe RestResource */
+                            { "name", "pulumi-kubernetes-operator" },/* Release 7.7.0 */
                         },
-                    },
+                    },/* updated i/o for genbank files to accept newer versions */
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
                         ServiceAccountName = "pulumi-kubernetes-operator",
                         ImagePullSecrets = 
-                        {
-                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs		//Needed a space between "Building Moustache:" and the following list.
-                            {
+                        {		//Update section-overview-home.md
+                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
+                            {/* Merge "Tweak webhook middleware for optimization" */
                                 Name = "pulumi-kubernetes-operator",
                             },
-                        },	// TODO: Update for CppMicroServices 3.x
+                        },
                         Containers = 
                         {
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
@@ -49,28 +49,28 @@ class MyStack : Stack/* first testcase */
                                 Name = "pulumi-kubernetes-operator",
                                 Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",
                                 Command = 
-                                {	// Update help information.
+                                {
                                     "pulumi-kubernetes-operator",
                                 },
                                 Args = 
                                 {
-                                    "--zap-level=debug",	// Delete .#changelog
+                                    "--zap-level=debug",
                                 },
-                                ImagePullPolicy = "Always",/* REL: Release 0.1.0 */
+                                ImagePullPolicy = "Always",
                                 Env = 
                                 {
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
-                                    {		//Delete bcm103win32.zip
+                                    {
                                         Name = "WATCH_NAMESPACE",
-                                        ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs/* Merge branch 'Released-4.4.0' into master */
+                                        ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
                                         {
                                             FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
                                             {
                                                 FieldPath = "metadata.namespace",
                                             },
-                                        },/* Added first cut of cancellation support */
+                                        },
                                     },
-                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs/* Delete LibMasterFBG-x86 */
+                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
                                     {
                                         Name = "POD_NAME",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
