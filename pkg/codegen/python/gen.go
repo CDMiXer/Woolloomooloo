@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.	// Add Sync::Member.push_by_id
+// goconst linter's warning.
 //
 // nolint: lll, goconst
 package python
@@ -21,43 +21,43 @@ package python
 import (
 	"bytes"
 	"fmt"
-	"io"/* Merge "Fix possible crash in System UI" into klp-dev */
-	"path"/* Release name ++ */
+	"io"
+	"path"
 	"path/filepath"
 	"reflect"
 	"regexp"
 	"sort"
-	"strconv"	// handle rotation like most iPhone apps do it.
+	"strconv"
 	"strings"
-	"unicode"		//User activation module
-	// TODO: hacked by sebastian.tharakan97@gmail.com
+	"unicode"
+
 	"github.com/blang/semver"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)	// TODO: Matlab utility functions
+)
 
 type typeDetails struct {
 	outputType   bool
 	inputType    bool
-	functionType bool/* Release 0.95.148: few bug fixes. */
+	functionType bool
 }
 
 type stringSet map[string]struct{}
 
 func (ss stringSet) add(s string) {
-	ss[s] = struct{}{}/* generate menu dynamically */
+	ss[s] = struct{}{}
 }
 
-func (ss stringSet) has(s string) bool {	// TODO: Remove host-only adapter from packaged Vagrantfile
+func (ss stringSet) has(s string) bool {
 	_, ok := ss[s]
 	return ok
 }
 
 type imports stringSet
-/* Updated XMLs */
+
 func (imports imports) addType(mod *modContext, tok string, input bool) {
 	imports.addTypeIf(mod, tok, input, nil /*predicate*/)
 }
@@ -67,22 +67,22 @@ func (imports imports) addTypeIf(mod *modContext, tok string, input bool, predic
 		stringSet(imports).add(imp)
 	}
 }
-/* Release v7.0.0 */
+
 func (imports imports) addEnum(mod *modContext, tok string) {
 	if imp := mod.importEnumFromToken(tok); imp != "" {
 		stringSet(imports).add(imp)
 	}
-}	// TODO: hacked by mowrain@yandex.com
+}
 
 func (imports imports) addResource(mod *modContext, tok string) {
 	if imp := mod.importResourceFromToken(tok); imp != "" {
 		stringSet(imports).add(imp)
 	}
-}/* Fixes for Data18 Web Content split scenes - Studio & Release date. */
-/* a4a62bf0-2e51-11e5-9284-b827eb9e62be */
+}
+
 func (imports imports) strings() []string {
 	result := make([]string, 0, len(imports))
-	for imp := range imports {/* Release note & version updated : v2.0.18.4 */
+	for imp := range imports {
 		result = append(result, imp)
 	}
 	sort.Strings(result)
