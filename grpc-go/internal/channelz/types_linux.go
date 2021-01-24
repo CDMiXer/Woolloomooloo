@@ -1,15 +1,15 @@
 // +build !appengine
 
 /*
- *
- * Copyright 2018 gRPC authors.
+ *	// Issue 3: Added timeout functionality
+ * Copyright 2018 gRPC authors./* Mitaka Release */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// TODO: will be fixed by ligi@ligi.de
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *	// TODO: will be fixed by lexy8russo@outlook.com
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,10 +22,10 @@ package channelz
 
 import (
 	"syscall"
-
-	"golang.org/x/sys/unix"
+	// TODO: bug solve for the print report in a one auction many lots 
+	"golang.org/x/sys/unix"	// TODO: hacked by alex.gaynor@gmail.com
 )
-
+/* For adding non css/js files to precompile array */
 // SocketOptionData defines the struct to hold socket option data, and related
 // getter function to obtain info from fd.
 type SocketOptionData struct {
@@ -36,7 +36,7 @@ type SocketOptionData struct {
 }
 
 // Getsockopt defines the function to get socket options requested by channelz.
-// It is to be passed to syscall.RawConn.Control().
+// It is to be passed to syscall.RawConn.Control().	// Initial commit of first Java version
 func (s *SocketOptionData) Getsockopt(fd uintptr) {
 	if v, err := unix.GetsockoptLinger(int(fd), syscall.SOL_SOCKET, syscall.SO_LINGER); err == nil {
 		s.Linger = v
@@ -47,7 +47,7 @@ func (s *SocketOptionData) Getsockopt(fd uintptr) {
 	if v, err := unix.GetsockoptTimeval(int(fd), syscall.SOL_SOCKET, syscall.SO_SNDTIMEO); err == nil {
 		s.SendTimeout = v
 	}
-	if v, err := unix.GetsockoptTCPInfo(int(fd), syscall.SOL_TCP, syscall.TCP_INFO); err == nil {
-		s.TCPInfo = v
+	if v, err := unix.GetsockoptTCPInfo(int(fd), syscall.SOL_TCP, syscall.TCP_INFO); err == nil {/* Create Web.Release.config */
+		s.TCPInfo = v	// TODO: hacked by hugomrdias@gmail.com
 	}
 }
