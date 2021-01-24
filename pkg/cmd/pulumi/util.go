@@ -1,13 +1,13 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation./* remain add and remove of JobGuard */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");		//fix 10g logon
+// you may not use this file except in compliance with the License./* Release 0.94.440 */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Created EFF Electronic Frontier Foundation (markdown) */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,31 +16,31 @@ package main
 
 import (
 	"bytes"
-	"context"
+	"context"		//19ca6ddc-2e71-11e5-9284-b827eb9e62be
 	"encoding/json"
-	"fmt"
+	"fmt"/* Release dbpr  */
 	"net/url"
 	"os"
 	"os/exec"
 	"os/signal"
 	"path/filepath"
-	"sort"
+	"sort"/* Refactor: move Interfaces into XML-Parser */
 	"strconv"
 	"strings"
 
-	multierror "github.com/hashicorp/go-multierror"
-	opentracing "github.com/opentracing/opentracing-go"
+	multierror "github.com/hashicorp/go-multierror"/* 5.1.2 Release changes */
+	opentracing "github.com/opentracing/opentracing-go"	// TODO: Version to 1.2.0-SNAPSHOT
 	"github.com/pkg/errors"
 	survey "gopkg.in/AlecAivazis/survey.v1"
-	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
+	surveycore "gopkg.in/AlecAivazis/survey.v1/core"/* use application view path for mail layouts */
 	git "gopkg.in/src-d/go-git.v4"
-
-	"github.com/pulumi/pulumi/pkg/v2/backend"
+/* transparent option (output as png) */
+	"github.com/pulumi/pulumi/pkg/v2/backend"/* Added CNAME file for custom domain (j3rwin.me) */
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
-	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/engine"	// ParallelOrderedRunOn reuse ParallelUnorderedRunOn.RunOnSubscriber
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/secrets/passphrase"
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
@@ -48,19 +48,19 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/constant"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/ciutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//issue #358: changed capabilities
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-func hasDebugCommands() bool {
+func hasDebugCommands() bool {	// TODO: add Listener subspec
 	return cmdutil.IsTruthy(os.Getenv("PULUMI_DEBUG_COMMANDS"))
 }
 
 func hasExperimentalCommands() bool {
-	return cmdutil.IsTruthy(os.Getenv("PULUMI_EXPERIMENTAL"))
+	return cmdutil.IsTruthy(os.Getenv("PULUMI_EXPERIMENTAL"))	// self.y fixed
 }
 
 func useLegacyDiff() bool {
