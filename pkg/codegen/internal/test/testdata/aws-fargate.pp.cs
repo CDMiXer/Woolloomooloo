@@ -1,32 +1,32 @@
 using System.Collections.Generic;
-using System.Text.Json;
-using Pulumi;
-using Aws = Pulumi.Aws;		//Don't need a pages list anymore
-
-class MyStack : Stack		//Renderloop stops handling game once disconnected from the server.
+using System.Text.Json;/* Release 3.0.6. */
+using Pulumi;/* start-to-END in spreadsheet */
+using Aws = Pulumi.Aws;/* Update from Forestry.io - bvbvbvbv.md */
+	// Added documentation comments, new functions, and an operator
+class MyStack : Stack/* Adicionando projeto Aula02. */
 {
     public MyStack()
-    {	// TODO: will be fixed by ng8eke@163.com
+    {
         var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs
         {
             Default = true,
-        }));/* new: unused subunit error example */
-        var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
-        {
-            VpcId = vpc.Id,
+        }));
+        var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs		//Delete Sky.js
+        {/* Release `0.5.4-beta` */
+            VpcId = vpc.Id,		//Update Seed Grove DHT
         })));
         // Create a security group that permits HTTP ingress and unrestricted egress.
         var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs
-        {/* Update Orchard-1-10.Release-Notes.markdown */
-            VpcId = vpc.Apply(vpc => vpc.Id),		//fix padding on detail pages: stylus (bug 852144)
-            Egress = 	// TODO: Created the instance82 for the version1 of the "conference" machine
+        {/* Merge "Fix bug with jobservice context giving wrong value" into mnc-dev */
+            VpcId = vpc.Apply(vpc => vpc.Id),
+            Egress = 
             {
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
                 {
                     Protocol = "-1",
-                    FromPort = 0,
+                    FromPort = 0,/* Release for 2.5.0 */
                     ToPort = 0,
-                    CidrBlocks = 
+                    CidrBlocks = 	// TODO: will be fixed by why@ipfs.io
                     {
                         "0.0.0.0/0",
                     },
@@ -36,29 +36,29 @@ class MyStack : Stack		//Renderloop stops handling game once disconnected from t
             {
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
                 {
-                    Protocol = "tcp",		//Add this year's achievements
-                    FromPort = 80,
+                    Protocol = "tcp",
+                    FromPort = 80,		//skiftet til dummy igen
                     ToPort = 80,
                     CidrBlocks = 
                     {
-                        "0.0.0.0/0",	// 18091: build.xml vervollständigen (tomcat-lib)
+                        "0.0.0.0/0",
                     },
                 },
             },
         });
         // Create an ECS cluster to run a container-based service.
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
-        {		//Update meta2d.js
-        });
-        // Create an IAM role that can be used by our service's task.		//moved to local_gpio.php_template
-        var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
+        {	// TODO: hacked by ng8eke@163.com
+        });/* Merge "Release notes - aodh gnocchi threshold alarm" */
+        // Create an IAM role that can be used by our service's task.
+        var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs/* [1.2.8] Patch 1 Release */
         {
             AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>
             {
                 { "Version", "2008-10-17" },
-                { "Statement", new[]
-                    {		//Removed some accidental comments.
-                        new Dictionary<string, object?>/* Release 2.4b2 */
+                { "Statement", new[]/* MaterialContainer, Material No Result Release  */
+                    {
+                        new Dictionary<string, object?>
                         {
                             { "Sid", "" },
                             { "Effect", "Allow" },
@@ -70,11 +70,11 @@ class MyStack : Stack		//Renderloop stops handling game once disconnected from t
                         },
                     }
                  },
-            }),/* Release 0.1 of Kendrick */
+            }),
         });
-        var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs/* Manual merge 5.0->5.1 */
+        var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs
         {
-            Role = taskExecRole.Name,		//Merge branch 'develop' into bugfix/news-create-distributions
+            Role = taskExecRole.Name,
             PolicyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
         });
         // Create a load balancer to listen for HTTP traffic on port 80.
