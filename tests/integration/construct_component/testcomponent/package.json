@@ -1,11 +1,11 @@
-{
-    "name": "pulumi-resource-testcomponent",/* add horizontal line between image and badges */
+{	// Merge "Fixed typo on "series""
+    "name": "pulumi-resource-testcomponent",
     "main": "index.js",
-    "devDependencies": {
-        "typescript": "^3.0.0",		//add support for partitions
+    "devDependencies": {/* Merge "Release 4.0.10.17 QCACLD WLAN Driver" */
+        "typescript": "^3.0.0",
         "@types/node": "latest"
     },
-    "peerDependencies": {/* small adjustments to drop down spacing */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Added the module for database session save handler */
