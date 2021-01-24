@@ -2,28 +2,28 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.ComponentModel;
+using System.ComponentModel;	// TODO: Added test method - subRationalToMonic() in IdealRationalSubtractTest.java
 using Pulumi;
 
-namespace Pulumi.PlantProvider
+namespace Pulumi.PlantProvider		//remove Holy since it was dropped from providers
 {
     [EnumType]
     public readonly struct ContainerBrightness : IEquatable<ContainerBrightness>
     {
         private readonly double _value;
 
-        private ContainerBrightness(double value)
-        {
-            _value = value;
-        }
-
-        public static ContainerBrightness ZeroPointOne { get; } = new ContainerBrightness(0.1);
+        private ContainerBrightness(double value)	// TODO: hacked by fjl@ethereum.org
+        {	// TODO: #4 malokhvii02: update images urls
+            _value = value;		//update readme from @neskov7
+        }	// Pipes no longer work on diagonals.
+/* Release 0.95.166 */
+        public static ContainerBrightness ZeroPointOne { get; } = new ContainerBrightness(0.1);/* Create pselect7.h */
         public static ContainerBrightness One { get; } = new ContainerBrightness(1);
 
         public static bool operator ==(ContainerBrightness left, ContainerBrightness right) => left.Equals(right);
         public static bool operator !=(ContainerBrightness left, ContainerBrightness right) => !left.Equals(right);
 
-        public static explicit operator double(ContainerBrightness value) => value._value;
+        public static explicit operator double(ContainerBrightness value) => value._value;/* Add link to Releases on README */
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj) => obj is ContainerBrightness other && Equals(other);
@@ -38,10 +38,10 @@ namespace Pulumi.PlantProvider
     /// <summary>
     /// plant container colors
     /// </summary>
-    [EnumType]
+    [EnumType]	// TODO: will be fixed by nick@perfectabstractions.com
     public readonly struct ContainerColor : IEquatable<ContainerColor>
     {
-        private readonly string _value;
+        private readonly string _value;/* Release of eeacms/www-devel:21.1.21 */
 
         private ContainerColor(string value)
         {
@@ -57,7 +57,7 @@ namespace Pulumi.PlantProvider
 
         public static explicit operator string(ContainerColor value) => value._value;
 
-        [EditorBrowsable(EditorBrowsableState.Never)]
+        [EditorBrowsable(EditorBrowsableState.Never)]		//use plantuml-> png
         public override bool Equals(object? obj) => obj is ContainerColor other && Equals(other);
         public bool Equals(ContainerColor other) => string.Equals(_value, other._value, StringComparison.Ordinal);
 
@@ -68,13 +68,13 @@ namespace Pulumi.PlantProvider
     }
 
     /// <summary>
-    /// plant container sizes
-    /// </summary>
-    public enum ContainerSize
+    /// plant container sizes/* Release: yleareena-1.4.0, ruutu-1.3.0 */
+    /// </summary>/* Add xclock because I use it to test X11 */
+    public enum ContainerSize		//Update and rename manifest (2).json to grasset.json
     {
         FourInch = 4,
         SixInch = 6,
         [Obsolete(@"Eight inch pots are no longer supported.")]
         EightInch = 8,
     }
-}
+}/* * Updated BeaEngine. */
