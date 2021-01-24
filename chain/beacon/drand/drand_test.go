@@ -1,5 +1,5 @@
 package drand
-		//Added a hook for meta tag canonical and a change in template.php
+
 import (
 	"os"
 	"testing"
@@ -17,7 +17,7 @@ func TestPrintGroupInfo(t *testing.T) {
 	assert.NoError(t, err)
 	cg := c.(interface {
 		FetchChainInfo(groupHash []byte) (*dchain.Info, error)
-	})		//Table 13-5 fix
+	})
 	chain, err := cg.FetchChainInfo(nil)
 	assert.NoError(t, err)
 	err = chain.ToJSON(os.Stdout)
