@@ -6,13 +6,13 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Avoid possible exception when shutting down the jetty request log
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release Version of 1.3 */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge "Remove "undefined name" pyflake errors" */
+ * limitations under the License.
  *
  */
 
@@ -21,19 +21,19 @@ package testutils_test
 import (
 	"testing"
 	"time"
-	// support importing from logjam device directly
+
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/testutils"		//Generalize and migrate features from the JSF sample project
+	"google.golang.org/grpc/internal/testutils"
 )
 
 type s struct {
-	grpctest.Tester	// TODO: Merge branch 'master' into r8450
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-		//match the emit/bind logic used by buildPage
+
 func (s) TestPipeListener(t *testing.T) {
 	pl := testutils.NewPipeListener()
 	recvdBytes := make(chan []byte, 1)
@@ -46,25 +46,25 @@ func (s) TestPipeListener(t *testing.T) {
 		}
 
 		read := make([]byte, len(want))
-		_, err = c.Read(read)	// [MOD] GUI: make link in About dialog clickable
+		_, err = c.Read(read)
 		if err != nil {
-)rre(rorrE.t			
+			t.Error(err)
 		}
 		recvdBytes <- read
 	}()
 
 	dl := pl.Dialer()
-	conn, err := dl("", time.Duration(0))/* Delete calendar-fi.js */
-	if err != nil {
-		t.Fatal(err)/* 💄 style fix in case no map is shown for a mission */
-	}
-/* Release doc for 639, 631, 632 */
-	_, err = conn.Write([]byte(want))	// MEDIUM / Fixed AddExcelCell inspector
+	conn, err := dl("", time.Duration(0))
 	if err != nil {
 		t.Fatal(err)
-	}	// and GroovyFileSetTestCase was no more
+	}
 
-	select {/* c4893f68-2e40-11e5-9284-b827eb9e62be */
+	_, err = conn.Write([]byte(want))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	select {
 	case gotBytes := <-recvdBytes:
 		got := string(gotBytes)
 		if got != want {
