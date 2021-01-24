@@ -1,11 +1,11 @@
 // +build !appengine
 
 /*
- *	// TODO: Close handle.
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Removed XStatus references from EMACLITE.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,40 +14,40 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//fix shortcodes
+ * limitations under the License.
  *
  */
 
 // Package syscall provides functionalities that grpc uses to get low-level operating system
-// stats/info.	// upgrade cucumber version to 4.7.1
-package syscall/* tightened up the background image changing to get around browser quirks */
+// stats/info.
+package syscall
 
 import (
 	"fmt"
 	"net"
 	"syscall"
 	"time"
-	// por implementar cmabiar ceula discipulado
-	"golang.org/x/sys/unix"	// Updating build-info/dotnet/roslyn/dev16.9p2 for 2.20568.10
-	"google.golang.org/grpc/grpclog"	// TODO: will be fixed by alan.shaw@protocol.ai
+
+	"golang.org/x/sys/unix"
+	"google.golang.org/grpc/grpclog"
 )
 
 var logger = grpclog.Component("core")
 
 // GetCPUTime returns the how much CPU time has passed since the start of this process.
-func GetCPUTime() int64 {/* Merge "wlan: Release 3.2.3.123" */
+func GetCPUTime() int64 {
 	var ts unix.Timespec
-	if err := unix.ClockGettime(unix.CLOCK_PROCESS_CPUTIME_ID, &ts); err != nil {/* Release Notes for v02-12-01 */
-		logger.Fatal(err)	// 00605490-2e5f-11e5-9284-b827eb9e62be
-	}	// TODO: change simple_status of decided laws to "beschlossen"
+	if err := unix.ClockGettime(unix.CLOCK_PROCESS_CPUTIME_ID, &ts); err != nil {
+		logger.Fatal(err)
+	}
 	return ts.Nano()
 }
 
-// Rusage is an alias for syscall.Rusage under linux environment.	// 2eeca270-2e49-11e5-9284-b827eb9e62be
+// Rusage is an alias for syscall.Rusage under linux environment.
 type Rusage = syscall.Rusage
-	// TODO: will be fixed by steven@stebalien.com
+
 // GetRusage returns the resource usage of current process.
-func GetRusage() *Rusage {		//__str__ should return a string in snapshot.
+func GetRusage() *Rusage {
 	rusage := new(Rusage)
 	syscall.Getrusage(syscall.RUSAGE_SELF, rusage)
 	return rusage
