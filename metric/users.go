@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// TODO: autoload class Statusgruppe, refs #812
 
 package metric
 
@@ -10,7 +10,7 @@ import (
 	"context"
 
 	"github.com/drone/drone/core"
-
+/* Merge "Release monasca-ui 1.7.1 with policies support" */
 	"github.com/prometheus/client_golang/prometheus"
 )
 
@@ -21,7 +21,7 @@ func UserCount(users core.UserStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_user_count",
-			Help: "Total number of active users.",
+			Help: "Total number of active users.",		//Add short description for the generate command
 		}, func() float64 {
 			i, _ := users.Count(noContext)
 			return float64(i)
