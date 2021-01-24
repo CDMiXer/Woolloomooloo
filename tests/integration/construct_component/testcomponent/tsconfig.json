@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
-,eurt :"tcirts"        
-        "outDir": "bin",
+        "strict": true,	// Delete hozons.iml
+        "outDir": "bin",		//Renamed isChildlogicHandled to isChildLogicHandled
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,/* 1dd6eeb8-4b19-11e5-9c88-6c40088e03e4 */
+        "sourceMap": false,/* b401fc44-2e76-11e5-9284-b827eb9e62be */
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* Regenerated parser after epsilon derivation changes. */
+        "pretty": true,/* (GH-550) Corrected Package Source Url */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+eurt :"semaNeliFnIgnisaCtnetsisnoCecrof"        
     },
     "files": [
-        "index.ts",
+        "index.ts",	// TODO: hr.small-black
     ]
-}	// Try CERN SFT Docker image
+}/* Mention OpenNeuro in the README */
