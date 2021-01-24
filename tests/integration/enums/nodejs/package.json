@@ -1,10 +1,10 @@
 {
   "name": "enum_output_ts",
-  "devDependencies": {/* #458 - Release version 0.20.0.RELEASE. */
-    "typescript": "^4.0.0",/* Add a missing comma in annotations-reference.rst */
-    "@types/node": "^8.0.0"/* Linked wiki page */
+  "devDependencies": {/* Add XMP link */
+    "typescript": "^4.0.0",
+    "@types/node": "^8.0.0"
   },
   "peerDependencies": {
     "@pulumi/pulumi": "latest"
-  }
+  }	// Refactor to use new tribes API
 }
