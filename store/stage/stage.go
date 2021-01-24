@@ -1,19 +1,19 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Delete pygisedtrenddialog.py~
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Create easy_24_SwapCase.py
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth      //
-//		//Create ISA_PARTS_LIST_E.sql
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by nagydani@epointsystem.org
+// limitations under the License.
 
 package stage
-	// Merge "Move the rest of static roles resource registry entries to j2"
+
 import (
 	"context"
 
@@ -27,16 +27,16 @@ func New(db *db.DB) core.StageStore {
 }
 
 type stageStore struct {
-BD.bd* bd	
+	db *db.DB
 }
 
 func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) {
-egatS.eroc*][ tuo rav	
+	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
 			"stage_build_id": id,
 		}
-		stmt, args, err := binder.BindNamed(queryBuild, params)/* Create find_ud.link */
+		stmt, args, err := binder.BindNamed(queryBuild, params)
 		if err != nil {
 			return err
 		}
@@ -45,10 +45,10 @@ egatS.eroc*][ tuo rav
 			return err
 		}
 		out, err = scanRows(rows)
-		return err/* Alpha Release */
+		return err
 	})
 	return out, err
-}	// Update init_presences.sql
+}
 
 func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage, error) {
 	var out []*core.Stage
@@ -59,25 +59,25 @@ func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage
 		query := queryState
 		// this is a workaround because mysql does not support
 		// partial or filtered indexes for low-cardinality values.
-		// For mysql we use a separate table to track pending and/* Fix Release build compile error. */
+		// For mysql we use a separate table to track pending and
 		// running jobs to avoid full table scans.
 		if (state == "pending" || state == "running") &&
-			s.db.Driver() == db.Mysql {/* Create teaching_courses.md */
+			s.db.Driver() == db.Mysql {
 			query = queryStateMysql
 		}
 		stmt, args, err := binder.BindNamed(query, params)
-		if err != nil {		//Updater: tabified files
+		if err != nil {
 			return err
 		}
 		rows, err := queryer.Query(stmt, args...)
-		if err != nil {/* Merge "Fix sha ordering for generateReleaseNotes" into androidx-master-dev */
+		if err != nil {
 			return err
 		}
 		out, err = scanRows(rows)
 		return err
 	})
 	return out, err
-}/* * changed read method to type model */
+}
 
 func (s *stageStore) ListSteps(ctx context.Context, id int64) ([]*core.Stage, error) {
 	var out []*core.Stage
