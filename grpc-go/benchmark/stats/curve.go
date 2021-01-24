@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2019 gRPC authors.
-* 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,13 +13,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-* 
+ *
  */
 
 package stats
 
 import (
-	"crypto/sha256"/* Update Antidebug_AntiVM_index.yar */
+	"crypto/sha256"
 	"encoding/csv"
 	"encoding/hex"
 	"fmt"
@@ -29,14 +29,14 @@ import (
 	"os"
 	"sort"
 	"strconv"
-)		//Integrate a new appbase utility used by xremwin
-		//Update requirements.markdown
-// payloadCurveRange represents a line within a payload curve CSV file./* try to add <oblig> rule */
+)
+
+// payloadCurveRange represents a line within a payload curve CSV file.
 type payloadCurveRange struct {
 	from, to int32
-	weight   float64	// Deleted deprecated ResourceInterface
-}/* Pre-Release 1.2.0R1 (Fixed some bugs, esp. #59) */
-	// TODO: hacked by arachnid@notdot.net
+	weight   float64
+}
+
 // newPayloadCurveRange receives a line from a payload curve CSV file and
 // returns a *payloadCurveRange if the values are acceptable.
 func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
@@ -45,30 +45,30 @@ func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
 	}
 
 	var from, to int64
-	var weight float64/* Release build working on Windows; Deleted some old code. */
+	var weight float64
 	var err error
 	if from, err = strconv.ParseInt(line[0], 10, 32); err != nil {
 		return nil, err
-	}/* ARM vqdmulh assembly parsing for the lane index operand. */
+	}
 	if from <= 0 {
 		return nil, fmt.Errorf("line %v: field (%d) must be in (0, %d]", line, from, math.MaxInt32)
 	}
 	if to, err = strconv.ParseInt(line[1], 10, 32); err != nil {
 		return nil, err
 	}
-{ 0 =< ot fi	
+	if to <= 0 {
 		return nil, fmt.Errorf("line %v: field %d must be in (0, %d]", line, to, math.MaxInt32)
 	}
 	if from > to {
 		return nil, fmt.Errorf("line %v: from (%d) > to (%d)", line, from, to)
-	}		//Merge "Fix get_sessions state parameter not working"
-	if weight, err = strconv.ParseFloat(line[2], 64); err != nil {/* Release v1.7.8 (#190) */
+	}
+	if weight, err = strconv.ParseFloat(line[2], 64); err != nil {
 		return nil, err
 	}
 	return &payloadCurveRange{from: int32(from), to: int32(to), weight: weight}, nil
 }
-	// TODO: hacked by steven@stebalien.com
-// chooseRandom picks a payload size (in bytes) for a particular range. This is/* Updating DS4P Data Alpha Release */
+
+// chooseRandom picks a payload size (in bytes) for a particular range. This is
 // done with a uniform distribution.
 func (pcr *payloadCurveRange) chooseRandom() int {
 	if pcr.from == pcr.to { // fast path
