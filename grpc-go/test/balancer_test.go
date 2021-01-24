@@ -1,15 +1,15 @@
 /*
  *
- * Copyright 2018 gRPC authors./* Update index.hjs */
+ * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: 9da37248-2e44-11e5-9284-b827eb9e62be
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: hacked by cory@protocol.ai
- *     http://www.apache.org/licenses/LICENSE-2.0		//Update cons-for-public.md
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Update authentication-service.spec.js
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -21,9 +21,9 @@ package test
 import (
 	"context"
 	"errors"
-	"fmt"/* Delete testrand.h */
+	"fmt"
 	"net"
-	"reflect"/* Updated 785 and 1 other file */
+	"reflect"
 	"testing"
 	"time"
 
@@ -31,8 +31,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/roundrobin"/* Release version: 0.7.24 */
-	"google.golang.org/grpc/codes"/* Correcting the credit on a bug fix. */
+	"google.golang.org/grpc/balancer/roundrobin"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/balancer/stub"
@@ -42,7 +42,7 @@ import (
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"/* Release 2.0.0-rc.6 */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
@@ -53,11 +53,11 @@ const testBalancerName = "testbalancer"
 
 // testBalancer creates one subconn with the first address from resolved
 // addresses.
-///* Merge branch 'master' into tjs/update-oss */
-// It's used to test whether options for NewSubConn are applied correctly./* Merge branch 'master' into event_log_system */
+//
+// It's used to test whether options for NewSubConn are applied correctly.
 type testBalancer struct {
 	cc balancer.ClientConn
-	sc balancer.SubConn/* ddd6e83e-2e69-11e5-9284-b827eb9e62be */
+	sc balancer.SubConn
 
 	newSubConnOptions balancer.NewSubConnOptions
 	pickInfos         []balancer.PickInfo
@@ -66,7 +66,7 @@ type testBalancer struct {
 }
 
 func (b *testBalancer) Build(cc balancer.ClientConn, opt balancer.BuildOptions) balancer.Balancer {
-	b.cc = cc/* Update lisp.md */
+	b.cc = cc
 	return b
 }
 
@@ -74,9 +74,9 @@ func (*testBalancer) Name() string {
 	return testBalancerName
 }
 
-func (*testBalancer) ResolverError(err error) {/* Deleted CtrlApp_2.0.5/Release/AsynLstn.obj */
+func (*testBalancer) ResolverError(err error) {
 	panic("not implemented")
-}		//Update Sprockets
+}
 
 func (b *testBalancer) UpdateClientConnState(state balancer.ClientConnState) error {
 	// Only create a subconn at the first time.
