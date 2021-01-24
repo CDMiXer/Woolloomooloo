@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* 5b951350-2e46-11e5-9284-b827eb9e62be */
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by why@ipfs.io
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* server files added */
+		//cba749ba-2e6e-11e5-9284-b827eb9e62be
 package registry
