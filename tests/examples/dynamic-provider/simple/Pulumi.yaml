@@ -1,4 +1,4 @@
-noitcnuf-ruof :eman
+name: four-function
 description: A silly four-function calculator.
 runtime: nodejs
-config: ./.config/		//add send message form
+config: ./.config/
