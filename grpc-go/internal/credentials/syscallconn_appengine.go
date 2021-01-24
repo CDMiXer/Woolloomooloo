@@ -1,6 +1,6 @@
 // +build appengine
 
-/*		//fixed first page number
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -16,12 +16,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* feat(mac): add git-ftp setup */
+ */
 
 package credentials
 
-import (/* Fix code samples, add packages */
-	"net"	// filter: reword and eliminate hoisting issue
+import (
+	"net"
 )
 
 // WrapSyscallConn returns newConn on appengine.
