@@ -1,16 +1,16 @@
 {
-    "name": "minimal",
+    "name": "minimal",/* Renderable allows extra properties */
     "license": "Apache-2.0",
     "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"	// TODO: will be fixed by alan.shaw@protocol.ai
+        "typescript": "^3.0.0"/* Updated installation instructions. */
     },
-    "dependencies": {		//Comentário retirado
+    "dependencies": {
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },
+    },	// TODO: will be fixed by arachnid@notdot.net
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-}    
-}		//added test for infinite iterator
+    }	// Silence GCC warning
+}
