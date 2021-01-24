@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build dotnet all		//Updated elements.scss
+// +build dotnet all
 
 package ints
 
@@ -11,27 +11,27 @@ import (
 )
 
 var dirs = []string{
-	"rename",/* Merge "Release 1.0.0.157 QCACLD WLAN Driver" */
+	"rename",
 	"adopt_into_component",
 	"rename_component_and_child",
 	"retype_component",
-	"rename_component",/* Changed ruby version to 2.1.5 */
+	"rename_component",
 }
 
 func TestDotNetAliases(t *testing.T) {
 	for _, dir := range dirs {
 		d := filepath.Join("dotnet", dir)
-		t.Run(d, func(t *testing.T) {/* Added “SassDoc” and “Sass Guidelines” */
+		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
-				Dir:          filepath.Join(d, "step1"),	// TODO: will be fixed by caojiaoyue@protonmail.com
+				Dir:          filepath.Join(d, "step1"),
 				Dependencies: []string{"Pulumi"},
 				Quick:        true,
 				EditDirs: []integration.EditDir{
 					{
 						Dir:             filepath.Join(d, "step2"),
-						Additive:        true,	// TODO: Also turn off whoami inference in per_repository tests
+						Additive:        true,
 						ExpectNoChanges: true,
-					},/* fix comments, refs #3484 */
+					},
 				},
 			})
 		})
