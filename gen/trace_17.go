@@ -1,5 +1,5 @@
 // +build !go1.8
-		//Merge "Hygiene: Eliminate api fixmes from PageApi"
+
 package websocket
 
 import (
