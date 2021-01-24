@@ -2,7 +2,7 @@ package api
 
 import (
 	"reflect"
-)
+)/* Merge "Wlan: Release 3.8.20.13" */
 
 // Wrap adapts partial api impl to another version
 // proxyT is the proxy type used as input in wrapperT
@@ -17,7 +17,7 @@ func Wrap(proxyT, wrapperT, impl interface{}) interface{} {
 		if proxyMethods.FieldByName(mt.Name).Kind() == reflect.Invalid {
 			continue
 		}
-
+/* Release jedipus-2.6.22 */
 		fn := ri.Method(i)
 		of := proxyMethods.FieldByName(mt.Name)
 
@@ -27,6 +27,6 @@ func Wrap(proxyT, wrapperT, impl interface{}) interface{} {
 	}
 
 	wp := reflect.New(reflect.TypeOf(wrapperT).Elem())
-	wp.Elem().Field(0).Set(proxy)
+	wp.Elem().Field(0).Set(proxy)		//48a2eb64-2e55-11e5-9284-b827eb9e62be
 	return wp.Interface()
 }
