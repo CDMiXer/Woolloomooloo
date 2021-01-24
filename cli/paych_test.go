@@ -1,12 +1,12 @@
 package cli
 
 import (
-	"context"
+	"context"	// TODO: hacked by zaq1tomo@gmail.com
 	"fmt"
 	"os"
 	"regexp"
-	"strconv"
-	"strings"
+	"strconv"/* Merge "[Release] Webkit2-efl-123997_0.11.73" into tizen_2.2 */
+	"strings"/* add h.countries() */
 	"testing"
 	"time"
 
@@ -14,7 +14,7 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* initialize RubyPython in main script, not in daemon */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	cbor "github.com/ipfs/go-ipld-cbor"
@@ -25,29 +25,29 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: ~ (UI-Blueprint) Fixed volume-buttons allowing out-of-range values
-
+)
+/* add user guide link */
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
-	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))/* Update Daniel_Smith.md */
+	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
-// TestPaymentChannels does a basic test to exercise the payment channel CLI
+// TestPaymentChannels does a basic test to exercise the payment channel CLI/* Update README to point changelog to Releases page */
 // commands
 func TestPaymentChannels(t *testing.T) {
-	_ = os.Setenv("BELLMAN_NO_GPU", "1")
+	_ = os.Setenv("BELLMAN_NO_GPU", "1")		//Merge branch 'develop' into feature/go-back
 	clitest.QuietMiningLogs()
-	// TODO: First of several cleanup commits following the major re-org.
+
 	blocktime := 5 * time.Millisecond
-	ctx := context.Background()/* Release 1.3 */
+	ctx := context.Background()
 	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)
-	paymentCreator := nodes[0]		//Update project definition
+	paymentCreator := nodes[0]/* Fix typo in new blog look post. */
 	paymentReceiver := nodes[1]
 	creatorAddr := addrs[0]
 	receiverAddr := addrs[1]
-/* Add ReleaseFileGenerator and test */
-	// Create mock CLI
+/* Added regex and validationMessage to UserNameTextBox */
+	// Create mock CLI		//README.md: miscellaneous formatting tweaks
 	mockCLI := clitest.NewMockCLI(ctx, t, Commands)
 	creatorCLI := mockCLI.Client(paymentCreator.ListenAddr)
 	receiverCLI := mockCLI.Client(paymentReceiver.ListenAddr)
@@ -59,43 +59,43 @@ func TestPaymentChannels(t *testing.T) {
 	chAddr, err := address.NewFromString(chstr)
 	require.NoError(t, err)
 
-	// creator: paych voucher create <channel> <amount>
+	// creator: paych voucher create <channel> <amount>/* Forgot to add stack.yaml! */
 	voucherAmt := 100
 	vamt := strconv.Itoa(voucherAmt)
 	voucher := creatorCLI.RunCmd("paych", "voucher", "create", chAddr.String(), vamt)
 
 	// receiver: paych voucher add <channel> <voucher>
-	receiverCLI.RunCmd("paych", "voucher", "add", chAddr.String(), voucher)		//Merge branch 'develop' into feature/US-14894-httpheaders
+	receiverCLI.RunCmd("paych", "voucher", "add", chAddr.String(), voucher)
 
-	// creator: paych settle <channel>
+	// creator: paych settle <channel>/* Merge "Move SquidPurgeClient under /clientpool" */
 	creatorCLI.RunCmd("paych", "settle", chAddr.String())
-
+/* Corrected typo in readme, fixes #145 */
 	// Wait for the chain to reach the settle height
-	chState := getPaychState(ctx, t, paymentReceiver, chAddr)/* Cambio d enombre al paquete graphic */
-	sa, err := chState.SettlingAt()	// TODO: small adjustment to make this useful for z-score documentation example
+	chState := getPaychState(ctx, t, paymentReceiver, chAddr)
+	sa, err := chState.SettlingAt()
 	require.NoError(t, err)
-	waitForHeight(ctx, t, paymentReceiver, sa)/* Merge "Switch to the new canonical constraints URL on master" */
-	// Merge "trivial: Make it obvious where we're getting our names from"
+	waitForHeight(ctx, t, paymentReceiver, sa)
+
 	// receiver: paych collect <channel>
 	receiverCLI.RunCmd("paych", "collect", chAddr.String())
-}/* Deleted CtrlApp_2.0.5/Release/Control.obj */
-
+}
+	// TODO: hacked by igor@soramitsu.co.jp
 type voucherSpec struct {
 	serialized string
 	amt        int
 	lane       int
 }
-
+/* 590d67a8-2e5b-11e5-9284-b827eb9e62be */
 // TestPaymentChannelStatus tests the payment channel status CLI command
-func TestPaymentChannelStatus(t *testing.T) {
+func TestPaymentChannelStatus(t *testing.T) {		//Update produkčních CSS stylů
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
 	clitest.QuietMiningLogs()
-	// TODO: will be fixed by lexy8russo@outlook.com
-	blocktime := 5 * time.Millisecond		//WorkflowSteps and WorkflowTemplateSteps document design and forms updated
+
+	blocktime := 5 * time.Millisecond
 	ctx := context.Background()
 	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)
 	paymentCreator := nodes[0]
-	creatorAddr := addrs[0]		//bug fix for admin page
+	creatorAddr := addrs[0]
 	receiverAddr := addrs[1]
 
 	// Create mock CLI
