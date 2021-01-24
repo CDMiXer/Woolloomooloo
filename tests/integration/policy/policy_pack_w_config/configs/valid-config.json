@@ -2,7 +2,7 @@
     "all": {
         "enforcementLevel": "advisory"
     },
-    "test-policy-w-config": {
+    "test-policy-w-config": {/* Merge "Release 3.2.3.472 Prima WLAN Driver" */
         "enforcementLevel": "mandatory",
         "message": "test msg"
     }
