@@ -2,6 +2,6 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//bundle-size: 474c9f9cad9d29bf6edae2c16d63e30ed3d6e64c.json
+// +build !oss
 
 package builds
