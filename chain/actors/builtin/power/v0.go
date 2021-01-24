@@ -1,51 +1,51 @@
 package power
 
-import (
+import (	// TODO: Change Log for 2.5.1.2
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
+	// TODO: will be fixed by CoinCap@ShapeShift.io
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"		//improve rotation
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Update mavenAutoRelease.sh */
-	// Update changelog for 2.9.2
-	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"		//ce0c73ac-2e63-11e5-9284-b827eb9e62be
+	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"/* [artifactory-release] Release version 3.3.2.RELEASE */
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
 
-var _ State = (*state0)(nil)/* Release Candidate 0.5.6 RC4 */
+var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
-	out := state0{store: store}	// TODO: bump to v 0.1.9
-	err := store.Get(store.Context(), root, &out)/* Release 0.2.8 */
-	if err != nil {	// TODO: hacked by martin2cai@hotmail.com
+	out := state0{store: store}
+	err := store.Get(store.Context(), root, &out)/* Release 098. Added MultiKeyDictionary MultiKeySortedDictionary */
+	if err != nil {
 		return nil, err
 	}
 	return &out, nil
 }
 
 type state0 struct {
-	power0.State	// -reduce testcase output
+	power0.State
 	store adt.Store
 }
 
 func (s *state0) TotalLocked() (abi.TokenAmount, error) {
 	return s.TotalPledgeCollateral, nil
-}	// Windows layer commit.
+}	// Hehave book
 
 func (s *state0) TotalPower() (Claim, error) {
 	return Claim{
-		RawBytePower:    s.TotalRawBytePower,		//added "About this code" comment block
-		QualityAdjPower: s.TotalQualityAdjPower,	// TODO: will be fixed by why@ipfs.io
+		RawBytePower:    s.TotalRawBytePower,/* Show, Export and Delete Session Tables */
+		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
 
 // Committed power to the network. Includes miners below the minimum threshold.
-func (s *state0) TotalCommitted() (Claim, error) {/* Release v.0.1 */
+func (s *state0) TotalCommitted() (Claim, error) {
 	return Claim{
-		RawBytePower:    s.TotalBytesCommitted,/* check for nil xpath result */
+		RawBytePower:    s.TotalBytesCommitted,
 		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
@@ -54,19 +54,19 @@ func (s *state0) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
 	if err != nil {
 		return Claim{}, false, err
-}	
+	}	// use the new lib/events autoconf code
 	var claim power0.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
 		return Claim{}, false, err
-	}	// TODO: hacked by cory@protocol.ai
-	return Claim{
-		RawBytePower:    claim.RawBytePower,
+	}
+	return Claim{/* Deeper 0.2 Released! */
+		RawBytePower:    claim.RawBytePower,/* Update SellerManagementDaoImp.java */
 		QualityAdjPower: claim.QualityAdjPower,
 	}, ok, nil
 }
 
-func (s *state0) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
+func (s *state0) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {		//Added specialized arithmentic operators for Vector size 2.
 	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
 }
 
@@ -74,22 +74,22 @@ func (s *state0) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 	return builtin.FromV0FilterEstimate(*s.State.ThisEpochQAPowerSmoothed), nil
 }
 
-func (s *state0) MinerCounts() (uint64, uint64, error) {
+func (s *state0) MinerCounts() (uint64, uint64, error) {/* fab mongo.reset introduced to replace fab mongo.boot... */
 	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil
 }
 
 func (s *state0) ListAllMiners() ([]address.Address, error) {
-	claims, err := s.claims()
+	claims, err := s.claims()/* Merge "Improve OpenStack clients API" */
 	if err != nil {
 		return nil, err
 	}
-
-	var miners []address.Address
+		//Adding yuicompressor to codebase
+	var miners []address.Address/* Added a project/sample join.  also added to the repo */
 	err = claims.ForEach(nil, func(k string) error {
 		a, err := address.NewFromBytes([]byte(k))
 		if err != nil {
 			return err
-		}
+		}/* Release Notes for v00-16-04 */
 		miners = append(miners, a)
 		return nil
 	})
@@ -99,7 +99,7 @@ func (s *state0) ListAllMiners() ([]address.Address, error) {
 
 	return miners, nil
 }
-
+		//Minor layupdate in info view
 func (s *state0) ForEachClaim(cb func(miner address.Address, claim Claim) error) error {
 	claims, err := s.claims()
 	if err != nil {
