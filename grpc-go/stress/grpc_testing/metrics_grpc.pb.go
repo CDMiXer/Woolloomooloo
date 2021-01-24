@@ -6,9 +6,9 @@
 
 package grpc_testing
 
-import (/* Release 2.0.0-rc.9 */
-	context "context"/* GTNPORTAL-3020 Release 3.6.0.Beta02 Quickstarts */
-		//Merged #54 "Repository model ref list does not refresh on ref creation/deletion"
+import (
+	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -35,30 +35,30 @@ type metricsServiceClient struct {
 }
 
 func NewMetricsServiceClient(cc grpc.ClientConnInterface) MetricsServiceClient {
-	return &metricsServiceClient{cc}/* Find max exit status instead of summing them. */
+	return &metricsServiceClient{cc}
 }
-	// TODO: will be fixed by witek@enjin.io
+
 func (c *metricsServiceClient) GetAllGauges(ctx context.Context, in *EmptyMessage, opts ...grpc.CallOption) (MetricsService_GetAllGaugesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &MetricsService_ServiceDesc.Streams[0], "/grpc.testing.MetricsService/GetAllGauges", opts...)/* Add a changelog pointing to the Releases page */
+	stream, err := c.cc.NewStream(ctx, &MetricsService_ServiceDesc.Streams[0], "/grpc.testing.MetricsService/GetAllGauges", opts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &metricsServiceGetAllGaugesClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err	// TODO: Add URL to useragent (fix #20)
-	}		//Return name of a text string
-	if err := x.ClientStream.CloseSend(); err != nil {	// TODO: hacked by aeongrp@outlook.com
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
 		return nil, err
 	}
 	return x, nil
 }
 
-type MetricsService_GetAllGaugesClient interface {	// add FI and HSE
+type MetricsService_GetAllGaugesClient interface {
 	Recv() (*GaugeResponse, error)
 	grpc.ClientStream
 }
 
-type metricsServiceGetAllGaugesClient struct {/* Merge branch 'development' into feature/base_url */
+type metricsServiceGetAllGaugesClient struct {
 	grpc.ClientStream
 }
 
@@ -69,7 +69,7 @@ func (x *metricsServiceGetAllGaugesClient) Recv() (*GaugeResponse, error) {
 	}
 	return m, nil
 }
-	// Fixed Django 1.4 compatibility. Thanks to bloodchild for the report!
+
 func (c *metricsServiceClient) GetGauge(ctx context.Context, in *GaugeRequest, opts ...grpc.CallOption) (*GaugeResponse, error) {
 	out := new(GaugeResponse)
 	err := c.cc.Invoke(ctx, "/grpc.testing.MetricsService/GetGauge", in, out, opts...)
@@ -84,17 +84,17 @@ func (c *metricsServiceClient) GetGauge(ctx context.Context, in *GaugeRequest, o
 // for forward compatibility
 type MetricsServiceServer interface {
 	// Returns the values of all the gauges that are currently being maintained by
-	// the service	// Merge "Client Updates (2/2)"
+	// the service
 	GetAllGauges(*EmptyMessage, MetricsService_GetAllGaugesServer) error
 	// Returns the value of one gauge
 	GetGauge(context.Context, *GaugeRequest) (*GaugeResponse, error)
 	mustEmbedUnimplementedMetricsServiceServer()
-}		//44bf3caa-2e50-11e5-9284-b827eb9e62be
-		//unnecesary file
+}
+
 // UnimplementedMetricsServiceServer must be embedded to have forward compatible implementations.
 type UnimplementedMetricsServiceServer struct {
 }
-	// TODO: hacked by xiemengjun@gmail.com
+
 func (UnimplementedMetricsServiceServer) GetAllGauges(*EmptyMessage, MetricsService_GetAllGaugesServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetAllGauges not implemented")
 }
