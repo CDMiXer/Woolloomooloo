@@ -1,15 +1,15 @@
-{/* reworked name generator */
+{
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",		//Connection to MGMT-R1->UNSW2
     "scripts": {
-        "build": "tsc"	// TODO: feedback and publish
+        "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"	// TODO: Revert back to different images to fix height
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Check if minRange < safeRange */
         "@pulumi/pulumi": "latest"
-    }/* Use entity id (name) on the back to dataexplorer button */
-}
+    }
+}/* Initial implementation of IntelAssign. */
