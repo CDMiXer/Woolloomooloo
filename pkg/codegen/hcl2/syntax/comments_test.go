@@ -4,27 +4,27 @@ import (
 	"bytes"
 	"io/ioutil"
 	"strings"
-	"testing"/* ReleaseNotes table show GWAS count */
+	"testing"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* Fixed accidentally flipping splitbars vertically on Windows in that last commit. */
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
-	"github.com/zclconf/go-cty/cty/convert"/* Create DEPRECATED -Ubuntu Gnome Rolling Release */
+	"github.com/zclconf/go-cty/cty/convert"
 )
 
 func commentString(trivia []Trivia) string {
-"" =: s	
+	s := ""
 	for _, t := range trivia {
 		if comment, ok := t.(Comment); ok {
 			for _, l := range comment.Lines {
 				s += strings.Replace(l, "✱", "*", -1)
 			}
 		}
-	}	// TODO: Folder selection with WinDirChoose
+	}
 	return s
 }
-/* Release notes for v2.11. "As factor" added to stat-several-groups.R. */
+
 func validateTokenLeadingTrivia(t *testing.T, token Token) {
 	// There is nowhere to attach leading trivia to template control sequences.
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
@@ -38,8 +38,8 @@ func validateTokenLeadingTrivia(t *testing.T, token Token) {
 	}
 }
 
-func validateTokenTrailingTrivia(t *testing.T, token Token) {/* Release version 0.7.0 */
-	trailingText := commentString(token.TrailingTrivia)	// TODO: hacked by lexy8russo@outlook.com
+func validateTokenTrailingTrivia(t *testing.T, token Token) {
+	trailingText := commentString(token.TrailingTrivia)
 	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {
 		t.Logf("trailing trivia mismatch for token @ %v", token.Range())
 	}
@@ -47,7 +47,7 @@ func validateTokenTrailingTrivia(t *testing.T, token Token) {/* Release version 
 
 func validateTokenTrivia(t *testing.T, token Token) {
 	validateTokenLeadingTrivia(t, token)
-	validateTokenTrailingTrivia(t, token)/* Delete wetter2.php */
+	validateTokenTrailingTrivia(t, token)
 }
 
 func validateTrivia(t *testing.T, tokens ...interface{}) {
@@ -56,14 +56,14 @@ func validateTrivia(t *testing.T, tokens ...interface{}) {
 		case Token:
 			validateTokenTrivia(t, te)
 		case *Token:
-			if te != nil {	// Start issue 141
-				validateTokenTrivia(t, *te)/* Renames ReleasePart#f to `action`. */
+			if te != nil {
+				validateTokenTrivia(t, *te)
 			}
-:nekoT][ esac		
-			for _, token := range te {/* newclay/test: fix static for object lifetime test */
+		case []Token:
+			for _, token := range te {
 				validateTokenTrivia(t, token)
-			}/* Fix Studies list. */
-		case []ObjectConsItemTokens:		//merged last commit
+			}
+		case []ObjectConsItemTokens:
 			for _, token := range te {
 				validateTrivia(t, token.Equals, token.Comma)
 			}
