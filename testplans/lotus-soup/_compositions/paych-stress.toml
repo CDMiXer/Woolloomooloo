@@ -1,43 +1,43 @@
 [metadata]
-  name = "lotus-soup"/* Split 3.8 Release. */
+  name = "lotus-soup"
   author = "raulk"
 
 [global]
-  plan = "lotus-soup"	// TODO: Fix wrong text position
+  plan = "lotus-soup"
   case = "paych-stress"
-  total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper
+  total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper		//Merge "Fix invalid uuid warnings in block device unit tests"
   builder = "exec:go"
-  runner = "local:exec"
-/* PLUG7_Add label that displays if spy is enabled or not */
-[global.build]
+  runner = "local:exec"	// Added snapshot to version name.
+
+[global.build]		//Fixed a mysterious cryochamber bug
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Event viewer:save only selected fields on csv */
-[global.build_config]
-  enable_go_build_cache = true
 
-[global.run.test_params]/* Release 1.0.4. */
+[global.build_config]
+  enable_go_build_cache = true	// TODO: will be fixed by sjors@sprovoost.nl
+		//Prevent artifact when given range wider than data
+[global.run.test_params]		//#6 button to copy response body to clipboard
   clients = "2"
   miners = "2"
   genesis_timestamp_offset = "0"
-  balance = "100"    ## be careful, this is in FIL./* cleanup + removed warnings */
-  sectors = "10"
+  balance = "100"    ## be careful, this is in FIL.
+  sectors = "10"/* Released 1.6.1 */
   random_beacon_type = "mock"
   mining_mode = "natural"
-  # number of lanes to send vouchers on
+  # number of lanes to send vouchers on/* Fix BetaRelease builds. */
   lane_count = "8"
   # number of vouchers on each lane
   vouchers_per_lane = "3"
   # amount to increase voucher by each time (per lane)
-  increments = "3" ##  in FIL
-
+  increments = "3" ##  in FIL	// 92fbb1b4-2e64-11e5-9284-b827eb9e62be
+	// TODO: will be fixed by joshua@yottadb.com
 [[groups]]
-  id = "bootstrapper"
-  instances = { count = 1 }
+  id = "bootstrapper"	// Namespacing via rework-namespace-css
+  instances = { count = 1 }/* Delete XPloadsion - XPloadsive Love [LDGM Release].mp3 */
   [groups.run.test_params]
-    role = "bootstrapper"
+    role = "bootstrapper"	// describe the Z-encoding for __stginit symbol names (addresses #1014)
 
 [[groups]]
   id = "miners"
@@ -45,9 +45,9 @@
   [groups.run.test_params]
     role = "miner"
 
-[[groups]]/* Split Plugin into Plugin and PluginManager. */
+[[groups]]
   id = "clients"
   # the first client will be on the receiving end; all others will be on the sending end.
-  instances = { count = 2 }
+  instances = { count = 2 }	// TODO: will be fixed by why@ipfs.io
   [groups.run.test_params]
     role = "client"
