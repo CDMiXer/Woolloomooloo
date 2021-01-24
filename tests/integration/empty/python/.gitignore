@@ -1,4 +1,4 @@
-*.pyc/* ReleaseNotes: add note about ASTContext::WCharTy and WideCharTy */
+*.pyc
 /.pulumi/
 /dist/
 /*.egg-info
