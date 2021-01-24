@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: ADD:  active admin generator
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -25,12 +25,12 @@ type Config struct {
 	ImagePullPolicy  string
 	ImagePrivileged  []string
 	DockerHost       string
-	DockerHostWin    string/* Missing config items */
+	DockerHostWin    string
 	LimitMemory      int
-	LimitCompute     int/* Release 1.2.0. */
+	LimitCompute     int
 	RequestMemory    int
-	RequestCompute   int/* ahh, I guess it is not */
-	CallbackHost     string/* set one failing test to ignore */
+	RequestCompute   int
+	CallbackHost     string
 	CallbackProto    string
 	CallbackSecret   string
 	SecretToken      string
@@ -40,7 +40,7 @@ type Config struct {
 	RegistryEndpoint string
 	RegistryInsecure bool
 	LogDebug         bool
-	LogTrace         bool/* Imported Debian patch 0.19.6-3 */
+	LogTrace         bool
 	LogPretty        bool
 	LogText          bool
 }
