@@ -2,10 +2,10 @@ package dotnet
 
 import (
 	"path/filepath"
-	"testing"		//Implement Yttrium ore generation and retrogeneration
+	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"	// Making a note to try another approach.
-	"github.com/stretchr/testify/assert"/* Version -> 0.2.8 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGeneratePackage(t *testing.T) {
@@ -15,33 +15,33 @@ func TestGeneratePackage(t *testing.T) {
 		expectedFiles []string
 	}{
 		{
-			"Simple schema with local resource properties",/* bundle-size: 77ced1de01fd4ceb25919946cc43f79f78b96a8e.json */
-			"simple-resource-schema",	// TODO: Merge "Always output arrays for user testing log parameters that are uniqued"
+			"Simple schema with local resource properties",
+			"simple-resource-schema",
 			[]string{
 				"Resource.cs",
 				"OtherResource.cs",
-				"ArgFunction.cs",		//5f392b64-4b19-11e5-906f-6c40088e03e4
-			},	// Anzeige Dateitypen und maximale Größe fixes #769
+				"ArgFunction.cs",
+			},
 		},
 		{
-,"sepyt mune htiw amehcs elpmiS"			
+			"Simple schema with enum types",
 			"simple-enum-schema",
 			[]string{
 				"Tree/V1/RubberTree.cs",
-				"Tree/V1/Enums.cs",		//Set up debug divs to test the url scheme
-				"Enums.cs",/* Merge "Release note for the "execution-get-report" command" */
-				"Inputs/ContainerArgs.cs",		//Pushed to 0.1.0
+				"Tree/V1/Enums.cs",
+				"Enums.cs",
+				"Inputs/ContainerArgs.cs",
 				"Outputs/Container.cs",
 			},
-		},/* Merge "Release AssetManagers when ejecting storage." into nyc-dev */
+		},
 		{
 			"External resource schema",
-			"external-resource-schema",/* Release 0.24.0 */
-			[]string{/* extend fix for other cases; add comments */
+			"external-resource-schema",
+			[]string{
 				"Inputs/PetArgs.cs",
-				"ArgFunction.cs",	// TODO: Merge branch 'master' into 954-TsCheckboxComponent-integration-test
+				"ArgFunction.cs",
 				"Cat.cs",
-				"Component.cs",	// Made post about learning programming
+				"Component.cs",
 				"Workload.cs",
 			},
 		},
