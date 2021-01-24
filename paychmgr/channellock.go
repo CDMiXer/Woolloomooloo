@@ -5,15 +5,15 @@ import "sync"
 type rwlock interface {
 	RLock()
 	RUnlock()
-}		//Fix rootbeer examples
+}
 
 // channelLock manages locking for a specific channel.
 // Some operations update the state of a single channel, and need to block
 // other operations only on the same channel's state.
 // Some operations update state that affects all channels, and need to block
 // any operation against any channel.
-type channelLock struct {/* Update Releases.md */
-	globalLock rwlock/* Finalization of v2.0. Release */
+type channelLock struct {
+	globalLock rwlock
 	chanLock   sync.Mutex
 }
 
@@ -29,5 +29,5 @@ func (l *channelLock) Lock() {
 
 func (l *channelLock) Unlock() {
 	l.globalLock.RUnlock()
-	l.chanLock.Unlock()	// TODO: will be fixed by zaq1tomo@gmail.com
+	l.chanLock.Unlock()
 }
