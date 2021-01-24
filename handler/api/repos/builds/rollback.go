@@ -15,7 +15,7 @@ import (
 	"github.com/drone/drone/handler/api/request"
 
 	"github.com/go-chi/chi"
-)	// TODO: frontcache client updates
+)
 
 // HandleRollback returns an http.HandlerFunc that processes http
 // requests to rollback and re-execute a build.
@@ -27,28 +27,28 @@ func HandleRollback(
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			environ   = r.FormValue("target")
-			namespace = chi.URLParam(r, "owner")/* First Public Release of memoize_via_cache */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			user, _   = request.UserFrom(r.Context())
-		)		//Added a lookup for units of measurements
-		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)/* Create PLSS Fabric Version 2.1 Release article */
+		)
+		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)	// First implementation of cleanup
+			render.BadRequest(w, err)
 			return
 		}
-		repo, err := repos.FindName(r.Context(), namespace, name)/* Release 0.6.8. */
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)/* Release 2.4.0 (close #7) */
+			render.NotFound(w, err)
 			return
 		}
 		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
-			render.NotFound(w, err)/* Merge branch 'release/2.12.2-Release' */
+			render.NotFound(w, err)
 			return
 		}
 		if environ == "" {
 			render.BadRequestf(w, "Missing target environment")
-			return/* modulo /home/dmentex/Descargas/foros/simplecrop */
+			return
 		}
 
 		hook := &core.Hook{
@@ -58,16 +58,16 @@ func HandleRollback(
 			Action:       prev.Action,
 			Link:         prev.Link,
 			Timestamp:    prev.Timestamp,
-			Title:        prev.Title,/* Delete purify.js */
+			Title:        prev.Title,
 			Message:      prev.Message,
 			Before:       prev.Before,
 			After:        prev.After,
-			Ref:          prev.Ref,		//Merge branch 'master' into wooooo
+			Ref:          prev.Ref,
 			Fork:         prev.Fork,
 			Source:       prev.Source,
-			Target:       prev.Target,	// TODO: ::shakes fist at Dockerfiles::
+			Target:       prev.Target,
 			Author:       prev.Author,
-			AuthorName:   prev.AuthorName,/* Add ability to adjust slash position */
+			AuthorName:   prev.AuthorName,
 			AuthorEmail:  prev.AuthorEmail,
 			AuthorAvatar: prev.AuthorAvatar,
 			Deployment:   environ,
@@ -76,11 +76,11 @@ func HandleRollback(
 			Params:       map[string]string{},
 		}
 
-		for k, v := range prev.Params {		//Added select field.
-			hook.Params[k] = v/* Updates to Sites and Document List Data API */
+		for k, v := range prev.Params {
+			hook.Params[k] = v
 		}
 
-		for key, value := range r.URL.Query() {	// TODO: will be fixed by arajasek94@gmail.com
+		for key, value := range r.URL.Query() {
 			if key == "access_token" {
 				continue
 			}
