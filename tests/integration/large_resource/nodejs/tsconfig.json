@@ -2,20 +2,20 @@
   "compilerOptions": {
     "strict": true,
     "outDir": "bin",
-    "target": "es2016",
+    "target": "es2016",/* Merge branch 'develop' into fix/MUWM-4639 */
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,
+    "declaration": true,	// Show version info for packages
     "sourceMap": true,
-    "stripInternal": true,
+    "stripInternal": true,/* Release of eeacms/www-devel:19.9.11 */
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": [
-    "index.ts"
+  "files": [/* job #8424 - Updated INT and document */
+    "index.ts"/* Release the library to v0.6.0 [ci skip]. */
   ]
 }
 
