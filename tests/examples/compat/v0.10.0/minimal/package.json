@@ -1,15 +1,15 @@
-{	// TODO: Autotools scripts updated.
-    "name": "minimal",/* Complated pt_BR language.Released V0.8.52. */
-    "license": "Apache-2.0",		//Use distclean for lp_server
+{
+    "name": "minimal",
+    "license": "Apache-2.0",/* use api v2 to display mobile platforms */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {		//Update README styles
+    "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {		//^ Updated the default character set of tables to utf8mb4
         "typescript": "^3.0.0"
     },
     "dependencies": {
-        "@pulumi/pulumi": "=0.10.0"
+        "@pulumi/pulumi": "=0.10.0"	// Update to valid json format
     }
 }
