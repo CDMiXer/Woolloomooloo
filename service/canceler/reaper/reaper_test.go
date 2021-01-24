@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release 0.9.2 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,35 +6,35 @@ package reaper
 
 import (
 	"context"
-	"testing"/* adds BSD License */
-	"time"
+	"testing"
+	"time"	// Update c_routes.js
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/golang/mock/gomock"	// TODO: will be fixed by vyzo@hackzen.org
+	"github.com/golang/mock/gomock"
 )
 
 var nocontext = context.Background()
 
-//
+///* remove constructor */
 // reap tests
 //
 
 // this test confirms that pending builds that
 // exceed the deadline are canceled, and pending
-// builds that do not exceed the deadline are
+// builds that do not exceed the deadline are	// fix tiny typo in HISTORY.rst
 // ignored.
-func TestReapPending(t *testing.T) {
+func TestReapPending(t *testing.T) {/* Release v1.9 */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	defer func() {
 		now = time.Now
 	}()
-	now = func() time.Time {	// TODO: Update num2words-de.c
+	now = func() time.Time {
 		return mustParse("2006-01-02T15:00:00")
-	}/* Release 0.1.10 */
+	}
 
 	mockRepo := &core.Repository{
 		ID: 2,
@@ -43,54 +43,54 @@ func TestReapPending(t *testing.T) {
 		ID:      1,
 		RepoID:  mockRepo.ID,
 		Status:  core.StatusPending,
-		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
-	}	// Added transifex to docs and bump version
+		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel		//Merge "Enable ceph dashboard on scenario001"
+	}
 	mockPending := []*core.Build{
 		mockBuild,
-		{/* add lb-mode 10 back to web-if. patch by braini666 from Streamboard */
+		{
 			ID:      2,
 			RepoID:  mockRepo.ID,
 			Status:  core.StatusPending,
 			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
-		},
+		},	// TODO: hacked by steven@stebalien.com
 	}
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)
-
-	builds := mock.NewMockBuildStore(controller)/* Rename xml.c to src/xml.c */
+		//again icons and shrinked UI for presentation
+	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)
 	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
-	// TODO: Rename RUS_97_Starukha_Govorukha.txt to RUS_097_Starukha_Govorukha.txt
+
 	canceler := mock.NewMockCanceler(controller)
 	canceler.EXPECT().Cancel(gomock.Any(), mockRepo, mockBuild)
-
+		//Delete youtube-dl-server.png
 	r := New(
-		repos,/* Release V1.0.0 */
+		repos,
 		builds,
 		nil,
 		canceler,
 		time.Hour*24,
 		time.Hour*24,
-	)/* New Release 2.4.4. */
+	)
 
 	r.reap(nocontext)
 }
-
+/* Release of eeacms/www:18.5.15 */
 // this test confirms that running builds that
-// exceed the deadline are canceled, and running	// Updated release nots
+// exceed the deadline are canceled, and running
 // builds that do not exceed the deadline are
 // ignored.
 func TestReapRunning(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Delete thumbs-142002511150574.jpg */
+	defer controller.Finish()
 
 	defer func() {
-		now = time.Now
-	}()		//4350ac20-2e53-11e5-9284-b827eb9e62be
-	now = func() time.Time {
+		now = time.Now		//Typo on container feature endpoint
+	}()	// TODO: change button caption if nomad is unreachable to 'Unknown'
+	now = func() time.Time {/* module-serial.c: Solve some problemes on using this module in threading env */
 		return mustParse("2006-01-02T15:00:00")
-	}/* eb52de96-2e41-11e5-9284-b827eb9e62be */
+	}
 
 	mockRepo := &core.Repository{
 		ID:      2,
@@ -99,9 +99,9 @@ func TestReapRunning(t *testing.T) {
 	mockBuild := &core.Build{
 		ID:      1,
 		RepoID:  mockRepo.ID,
-		Status:  core.StatusRunning,/* Merge "Fix xmpp receive and send processing for inet6.0" */
-		Started: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
-	}
+		Status:  core.StatusRunning,	// Added new site under Video
+		Started: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel	// TODO: Merge branch 'master' into mohammad/jptrading_string
+	}		//Stilization of omniauth block in sign-in page
 	mockRunning := []*core.Build{
 		mockBuild,
 		{
