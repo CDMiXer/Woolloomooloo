@@ -1,4 +1,4 @@
-{	// TODO: hacked by witek@enjin.io
+{
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "string",
@@ -7,11 +7,11 @@
           "value": "chocolate"
         },
         {
-          "value": "marshmallow"/* [artifactory-release] Release version 1.2.0.M2 */
+          "value": "marshmallow"
         },
         {
-          "value": 3		//let's try updating the package repo first
-        },	// TODO: hacked by mail@overlisted.net
+          "value": 3
+        },
         {
           "value": "cookie"
         }
