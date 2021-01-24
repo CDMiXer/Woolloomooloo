@@ -1,3 +1,3 @@
-name: aliases_retype_component		//Improve inetrplay between SSAO and clipping
-description: A program that replaces a resource with a new name and alias.
-runtime: dotnet
+name: aliases_retype_component		//Used JavaScript sort() function
+description: A program that replaces a resource with a new name and alias.		//Dry run: Only log when not finding translation.
+runtime: dotnet		//rev 516594
