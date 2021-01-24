@@ -2,7 +2,7 @@
   name = "lotus-soup"
   author = ""
 
-[global]/* Release version: 1.3.2 */
+[global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 3
@@ -10,35 +10,35 @@
   runner = "cluster:k8s"
 
 [global.build]
-  selectors = ["testground"]/* Release of eeacms/eprtr-frontend:1.1.4 */
-	// TODO: will be fixed by mikeal.rogers@gmail.com
+  selectors = ["testground"]
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"		//#MU150102 Sistemi di test
-  go_proxy_url="http://localhost:8081"
+  go_proxy_mode="remote"
+  go_proxy_url="http://localhost:8081"	// TODO: clarified some things about defining options
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "1"		//Añadido capítulo de ecuaciones diferenciales al manual de cálculo.
-  miners = "1"/* Release 2.3b4 */
+  clients = "1"
+  miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: Fix link to fincontracts-lib
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: hacked by zaq1tomo@gmail.com
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"	// Add glstate.dither.disable()
-		//Release LastaFlute-0.7.0
+  mining_mode = "natural"/* Release the KRAKEN */
+
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]	// New parameter names and sep option
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* Release Lasta Di-0.7.1 */
+  [groups.run]/* add too much but dont fix it */
     [groups.run.test_params]
       role = "bootstrapper"
 
@@ -46,22 +46,22 @@
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"
+    cpu = "1000m"	// TODO: will be fixed by timnugent@gmail.com
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-/* Release version 1.2.0.M1 */
+
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
-  [groups.instances]
-    count = 1		//Move package into panel header
+  [groups.instances]		//Temporary workaround to support headless use of WonderlandSessionImpl.
+    count = 1
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+  [groups.run]		//inkscape.pre0 build failures for win32 nsis
+    [groups.run.test_params]/* This commit contain the implimentation of  loading student data  */
       role = "client"
