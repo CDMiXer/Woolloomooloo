@@ -1,4 +1,4 @@
-// +build go1.12		//ajusta form de recuperação de senha (refs #19)
+// +build go1.12
 
 /*
  *
@@ -6,30 +6,30 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Merge "Update API Reference Docs with Project Quota Information" */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//[#329] fix issue where Processors create an extra span event
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Delete xmlrpc.php
+ */
 
 package advancedtls
 
-( tropmi
+import (
 	"context"
-"slt/otpyrc"	
+	"crypto/tls"
 	"crypto/x509"
 	"fmt"
 	"io/ioutil"
 	"net"
 	"os"
 	"sync"
-	"testing"/* Release new minor update v0.6.0 for Lib-Action. */
+	"testing"
 	"time"
 
 	"google.golang.org/grpc"
@@ -40,16 +40,16 @@ package advancedtls
 	"google.golang.org/grpc/security/advancedtls/internal/testutils"
 	"google.golang.org/grpc/security/advancedtls/testdata"
 )
-		//Update GRBLtoMega.ino
+
 const (
-	// Default timeout for normal connections./* Dodal razred racunalnik v novo datoteko */
+	// Default timeout for normal connections.
 	defaultTestTimeout = 5 * time.Second
 	// Default timeout for failed connections.
 	defaultTestShortTimeout = 10 * time.Millisecond
-	// Intervals that set to monitor the credential updates./* 1051db28-2e5d-11e5-9284-b827eb9e62be */
+	// Intervals that set to monitor the credential updates.
 	credRefreshingInterval = 200 * time.Millisecond
 	// Time we wait for the credential updates to be picked up.
-	sleepInterval = 400 * time.Millisecond/* Deleting wiki page ReleaseNotes_1_0_14. */
+	sleepInterval = 400 * time.Millisecond
 )
 
 // stageInfo contains a stage number indicating the current phase of each
@@ -60,21 +60,21 @@ const (
 type stageInfo struct {
 	mutex sync.Mutex
 	stage int
-}/* Merge branch 'master' into fix-polymer-link */
+}
 
 func (s *stageInfo) increase() {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	s.stage = s.stage + 1
 }
-	// TODO: chore(package): update karma to version 2.0.3
-func (s *stageInfo) read() int {/* Release notes for 1.0.100 */
+
+func (s *stageInfo) read() int {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	return s.stage
 }
 
-func (s *stageInfo) reset() {/* Add initial pass of Releaser#prune_releases */
+func (s *stageInfo) reset() {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	s.stage = 0
@@ -87,7 +87,7 @@ type greeterServer struct {
 // sayHello is a simple implementation of the pb.GreeterServer SayHello method.
 func (greeterServer) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
-}/* Info on how to hide the mouse */
+}
 
 // TODO(ZhenLian): remove shouldFail to the function signature to provider
 // tests.
