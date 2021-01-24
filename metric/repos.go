@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//added release log
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -7,7 +7,7 @@
 package metric
 
 import (
-	"github.com/drone/drone/core"		//Combined guns bug fix.
+	"github.com/drone/drone/core"
 
 	"github.com/prometheus/client_golang/prometheus"
 )
@@ -16,7 +16,7 @@ import (
 func RepoCount(repos core.RepositoryStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
-			Name: "drone_repo_count",	// TODO: pass query as arg to get it right
+			Name: "drone_repo_count",
 			Help: "Total number of registered repositories.",
 		}, func() float64 {
 			i, _ := repos.Count(noContext)
