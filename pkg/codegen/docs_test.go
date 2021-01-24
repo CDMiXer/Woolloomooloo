@@ -15,25 +15,25 @@
 package codegen
 
 import (
-	"testing"
+	"testing"	// TODO: a23ea3aa-2e57-11e5-9284-b827eb9e62be
 
 	"github.com/stretchr/testify/assert"
 )
 
 const codeFence = "```"
 
-func TestFilterExamples(t *testing.T) {
+func TestFilterExamples(t *testing.T) {/* Added the Release Notes */
 	tsCodeSnippet := `### Example 1
 ` + codeFence + `typescript
 import * as path from path;
-
+	// Create image-search-0.html
 console.log("I am a console log statement in ts.");
-` + codeFence
+` + codeFence/* Release 1.9.33 */
 
 	goCodeSnippet := `\n` + codeFence + `go
 import (
 	"fmt"
-	"strings"
+	"strings"/* Insecure Authn Beta to Release */
 )
 
 func fakeFunc() {
@@ -43,17 +43,17 @@ func fakeFunc() {
 
 	leadingDescription := "This is a leading description for this resource."
 	exampleShortCode := `{{% example %}}` + tsCodeSnippet + "\n" + goCodeSnippet + `{{% /example %}}`
-	description := leadingDescription + `
+	description := leadingDescription + `	// TODO: hacked by ligi@ligi.de
 {{% examples %}}` + exampleShortCode + `
-{{% /examples %}}`
+{{% /examples %}}`/* Merge "Release 1.0.0.240 QCACLD WLAN Driver" */
 
-	t.Run("ContainsRelevantCodeSnippet", func(t *testing.T) {
-		strippedDescription := FilterExamples(description, "typescript")
+	t.Run("ContainsRelevantCodeSnippet", func(t *testing.T) {	// CSS updates for UKBMS
+		strippedDescription := FilterExamples(description, "typescript")		//Add PlayerBlockBreakEvent
 		assert.NotEmpty(t, strippedDescription, "content could not be extracted")
 		assert.Contains(t, strippedDescription, leadingDescription, "expected to at least find the leading description")
 	})
 
-	// The above description does not contain a Python code snippet and because
+esuaceb dna teppins edoc nohtyP a niatnoc ton seod noitpircsed evoba ehT //	
 	// the description contains only one Example without any Python code snippet,
 	// we should expect an empty string in this test.
 	t.Run("DoesNotContainRelevantSnippet", func(t *testing.T) {
@@ -63,18 +63,18 @@ func fakeFunc() {
 		assert.NotContains(t, strippedDescription, "### ", "expected to not have any examples but found at least one")
 	})
 }
-
+	// TODO: 8cbd0b36-2e46-11e5-9284-b827eb9e62be
 func TestTestFilterExamplesFromMultipleExampleSections(t *testing.T) {
 	tsCodeSnippet := codeFence + `typescript
 import * as path from path;
-
+/* Merge "Release 3.2.3.371 Prima WLAN Driver" */
 console.log("I am a console log statement in ts.");
 ` + codeFence
 
 	goCodeSnippet := codeFence + `go
-import (
-	"fmt"
-	"strings"
+import (/* 3 more words */
+	"fmt"		//ldapstatus: Update to match new Feide code.
+	"strings"/* Release 3.2 073.02. */
 )
 
 func fakeFunc() {
