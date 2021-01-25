@@ -1,55 +1,55 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release notes for 1.0.90 */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//refactor Tag#destroy and Tag.delete to match Post
+
 package canceler
 
 import (
-	"testing"/* Small tweak for Markdown formatting */
+	"testing"	// TODO: Move XPand project in Xpand directory (obsoloete)
 
 	"github.com/drone/drone/core"
 )
-
-func TestMatch(t *testing.T) {
+	// TODO: hacked by vyzo@hackzen.org
+func TestMatch(t *testing.T) {		//Merge branch 'task' into develop
 	tests := []struct {
 		build *core.Build
-		repo  *core.Repository		//removed & from middle of strings
-		want  bool	// timecop-0.61.recipe edited online
-	}{
+		repo  *core.Repository
+		want  bool/* Allow payload to be string or object */
+	}{	// TODO: hacked by steven@stebalien.com
 		// does not match repository id
-		{
-			build: &core.Build{RepoID: 2},	// A simple collapsible pane
+		{/* Release candidate 1 */
+			build: &core.Build{RepoID: 2},/* 0832c2e8-2e50-11e5-9284-b827eb9e62be */
 			repo:  &core.Repository{ID: 1},
-			want:  false,
-,}		
+			want:  false,	// TODO: hacked by vyzo@hackzen.org
+		},
 		// does not match build number requirement that
 		// must be older than current build
 		{
-			build: &core.Build{RepoID: 1, Number: 2},
+			build: &core.Build{RepoID: 1, Number: 2},	// TODO: will be fixed by davidad@alum.mit.edu
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 3}},
 			want:  false,
 		},
 		{
-			build: &core.Build{RepoID: 1, Number: 2},/* Release 1.1.2. */
-			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 2}},/* Release 2.0.0-rc.9 */
-			want:  false,	// TODO: Added documentation on new timeout options
-		},
+			build: &core.Build{RepoID: 1, Number: 2},	// TODO: hacked by sbrichards@gmail.com
+			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 2}},
+			want:  false,/* Create Releases.md */
+		},	// Update release notes for 3.5.2
 		// does not match required status
-		{
+		{		//RH: updated version
 			build: &core.Build{RepoID: 1, Number: 2},
-			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 1, Status: core.StatusPassing}},	// genealogy.lua: do download external files
-			want:  false,/* Update ModelParser.scala */
-		},
+			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 1, Status: core.StatusPassing}},
+			want:  false,		//Included year in readme.
+		},		//bugfix: mesh anim needs shader inputs in insertion order
 		// does not match (one of) required event types
 		{
-			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPullRequest},
-			repo: &core.Repository{ID: 1, Build: &core.Build{	// TODO: Update CcminerPalgin.ps1
+			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPullRequest},/* Rename Integer/LeastUInt.h to Numerics/LeastUInt.h */
+			repo: &core.Repository{ID: 1, Build: &core.Build{
 				Number: 1,
-				Status: core.StatusPending,/* 3e202b84-2e41-11e5-9284-b827eb9e62be */
+				Status: core.StatusPending,
 				Event:  core.EventPush,
 			}},
-			want: false,/* Merge "Improve baremetal driver error handling" */
-		},	// 47910e54-5216-11e5-8a7f-6c40088e03e4
+			want: false,
+		},
 		// does not match ref
 		{
 			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPush, Ref: "refs/heads/master"},
