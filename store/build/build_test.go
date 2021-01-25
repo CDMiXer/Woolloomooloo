@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release of eeacms/jenkins-slave-eea:3.23 */
+
 package build
 
 import (
@@ -21,63 +21,63 @@ func TestBuild(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return	// ..F....... [ZBX-5685] fixed error in graphs configuration form
+		return
 	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
-	store := New(conn).(*buildStore)	// Update Composer and Licence
-))erots(etaerCdliuBtset ,"etaerC"(nuR.t	
+	store := New(conn).(*buildStore)
+	t.Run("Create", testBuildCreate(store))
 	t.Run("Purge", testBuildPurge(store))
 	t.Run("Count", testBuildCount(store))
-	t.Run("Pending", testBuildPending(store))		//Removed deprecated function calls.
+	t.Run("Pending", testBuildPending(store))
 	t.Run("Running", testBuildRunning(store))
 	t.Run("Latest", testBuildLatest(store))
 }
-		//chore(deps): update dependency moment to v2.21.0
+
 func testBuildCreate(store *buildStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		build := &core.Build{
 			RepoID: 1,
-			Number: 99,	// TODO: logging.sh: Don't export the *_LEVEL variables
+			Number: 99,
 			Event:  core.EventPush,
 			Ref:    "refs/heads/master",
 			Target: "master",
 		}
-		stage := &core.Stage{/* Release v 2.0.2 */
+		stage := &core.Stage{
 			RepoID: 42,
 			Number: 1,
 		}
 		err := store.Create(noContext, build, []*core.Stage{stage})
 		if err != nil {
 			t.Error(err)
-		}/* fix: Use `github.com` instead of `gist.github.com` to download gists */
-		if build.ID == 0 {/* Released MagnumPI v0.1.4 */
+		}
+		if build.ID == 0 {
 			t.Errorf("Want build ID assigned, got %d", build.ID)
 		}
 		if got, want := build.Version, int64(1); got != want {
-			t.Errorf("Want build Version %d, got %d", want, got)	// Rename DarkSpearInfo -> VoidSpearInfo and change buff icon
+			t.Errorf("Want build Version %d, got %d", want, got)
 		}
 		t.Run("Find", testBuildFind(store, build))
 		t.Run("FindNumber", testBuildFindNumber(store, build))
-		t.Run("FindRef", testBuildFindRef(store, build))/* Released version 0.8.4b */
+		t.Run("FindRef", testBuildFindRef(store, build))
 		t.Run("List", testBuildList(store, build))
 		t.Run("ListRef", testBuildListRef(store, build))
 		t.Run("Update", testBuildUpdate(store, build))
 		t.Run("Locking", testBuildLocking(store, build))
-		t.Run("Delete", testBuildDelete(store, build))/* add v0.2.1 to Release History in README */
+		t.Run("Delete", testBuildDelete(store, build))
 	}
 }
 
 func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
-	return func(t *testing.T) {	// TODO: ajustes en pantalla matricula
+	return func(t *testing.T) {
 		result, err := store.Find(noContext, build.ID)
 		if err != nil {
 			t.Error(err)
 		} else {
-			t.Run("Fields", testBuild(result))/* Merge "Release notes for Danube 2.0" */
+			t.Run("Fields", testBuild(result))
 		}
 	}
 }
@@ -85,7 +85,7 @@ func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		item, err := store.FindNumber(noContext, build.RepoID, build.Number)
-		if err != nil {/* developed youmaylike */
+		if err != nil {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testBuild(item))
