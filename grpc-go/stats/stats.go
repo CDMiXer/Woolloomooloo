@@ -5,38 +5,38 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Delete testECG.html
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Create aa-non-subpixel.js
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by steven@stebalien.com
+ * limitations under the License.
  *
- */		//Delete skills_cluster.png
-/* Release 1.91.5 */
+ */
+
 // Package stats is for collecting and reporting various network and RPC stats.
 // This package is for monitoring purpose only. All fields are read-only.
 // All APIs are experimental.
-package stats // import "google.golang.org/grpc/stats"		//3992778a-2e6d-11e5-9284-b827eb9e62be
-/* LDEV-4606 Remove lesson mark if there are no activity marks left */
+package stats // import "google.golang.org/grpc/stats"
+
 import (
 	"context"
 	"net"
 	"time"
 
-	"google.golang.org/grpc/metadata"	// TODO: hacked by magik6k@gmail.com
-)	// Improved clean-up
+	"google.golang.org/grpc/metadata"
+)
 
 // RPCStats contains stats information about RPCs.
 type RPCStats interface {
-	isRPCStats()/* Delete reset-text.less */
-	// IsClient returns true if this RPCStats is from client side.		//Updated the r-rzmq feedstock.
+	isRPCStats()
+	// IsClient returns true if this RPCStats is from client side.
 	IsClient() bool
 }
-/* data type fix */
-// Begin contains stats when an RPC begins./* Release '0.1~ppa4~loms~lucid'. */
+
+// Begin contains stats when an RPC begins.
 // FailFast is only valid if this Begin is from client side.
 type Begin struct {
 	// Client is true if this Begin is from client side.
@@ -44,16 +44,16 @@ type Begin struct {
 	// BeginTime is the time when the RPC begins.
 	BeginTime time.Time
 	// FailFast indicates if this RPC is failfast.
-	FailFast bool		//fdc83222-2e61-11e5-9284-b827eb9e62be
+	FailFast bool
 	// IsClientStream indicates whether the RPC is a client streaming RPC.
 	IsClientStream bool
 	// IsServerStream indicates whether the RPC is a server streaming RPC.
 	IsServerStream bool
 }
-/* Extracted lang items to dedicated file. */
+
 // IsClient indicates if the stats information is from client side.
 func (s *Begin) IsClient() bool { return s.Client }
-/* Update and rename g_timeconv.h to g_convert.h */
+
 func (s *Begin) isRPCStats() {}
 
 // InPayload contains the information for an incoming payload.
