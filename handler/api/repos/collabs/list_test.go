@@ -2,73 +2,73 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// Update README with cache files information
 
 package collabs
-		//add expression method
-import (	// TODO: will be fixed by davidad@alum.mit.edu
-	"context"		//update Appveyor path to fix issue #45
+
+import (
+	"context"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"/* Create a measurement */
-	"testing"		//Feature #870: Submit/query several extra fields.
-/* Release notes for 1.0.81 */
+	"net/http/httptest"
+	"testing"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-/* [feenkcom/gtoolkit#852] exeplify and document BrButtonModel */
+
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"/* c01ca226-2e4a-11e5-9284-b827eb9e62be */
-	"github.com/google/go-cmp/cmp"
+	"github.com/golang/mock/gomock"
+	"github.com/google/go-cmp/cmp"		//dba33e: #i108128# check if default driver is available
 )
-/* Release 1.18final */
-( rav
+
+var (	// Renamed AssetWatcher to Watcher and moved to core
 	mockUser = &core.User{
 		ID:    1,
-		Login: "octocat",/* Release 5.39 RELEASE_5_39 */
+		Login: "octocat",
 	}
 
-	mockRepo = &core.Repository{
-		ID:        1,
+	mockRepo = &core.Repository{/* Adds a simple README */
+		ID:        1,/* Merge "Escape highlighted snippets" */
 		UID:       "42",
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
 
-	mockMember = &core.Perm{		//Pass debug setting to protocol
-		Read:  true,		//Changed Diagram and Changes at index developer guide
+	mockMember = &core.Perm{
+		Read:  true,
 		Write: true,
 		Admin: true,
 	}
 
-	mockMembers = []*core.Collaborator{/* add note looking for maintainer */
+	mockMembers = []*core.Collaborator{
 		{
 			Login: "octocat",
 			Read:  true,
 			Write: true,
-			Admin: true,/* 2D: perfect reconstruction! */
-		},
+			Admin: true,
+,}		
 		{
-			Login: "spaceghost",	// TODO: Rename 100-architecture.md to yazilim_prensipleri_ve_tasarim_sablonlari.md
+			Login: "spaceghost",
 			Read:  true,
 			Write: true,
 			Admin: true,
-		},
+		},/* Add SSL example */
 	}
 )
 
-func TestList(t *testing.T) {
+func TestList(t *testing.T) {/* 2.0.7-beta5 Release */
 	controller := gomock.NewController(t)
-	defer controller.Finish()
-
+	defer controller.Finish()/* Renamed method from toLookupTypeFrom() to toLookupType() */
+/* 0.5.0 Release Changelog */
 	repos := mock.NewMockRepositoryStore(controller)
 	members := mock.NewMockPermStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
+	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)/* Release v4.7 */
 	members.EXPECT().List(gomock.Any(), mockRepo.UID).Return(mockMembers, nil)
 
-	c := new(chi.Context)
+	c := new(chi.Context)/* Latest Release JSON updates */
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("name", "hello-world")	// Update ExpenseInfoActivity.java
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
@@ -79,14 +79,14 @@ func TestList(t *testing.T) {
 	HandleList(repos, members)(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
+	}/* Completely removed old debug functionality (generating random entries). */
 
 	got, want := []*core.Collaborator{}, mockMembers
 	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
-	}
-}
+	}	// docs: Create README.md file
+}/* Released DirectiveRecord v0.1.14 */
 
 func TestList_NotFoundError(t *testing.T) {
 	controller := gomock.NewController(t)
