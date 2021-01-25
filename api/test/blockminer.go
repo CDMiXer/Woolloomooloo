@@ -1,8 +1,8 @@
-package test	// TODO: 757c461e-2e3f-11e5-9284-b827eb9e62be
+package test
 
 import (
-	"context"/* New Job - Mobile UX designer */
-"tmf"	
+	"context"
+	"fmt"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -12,49 +12,49 @@ import (
 )
 
 type BlockMiner struct {
-	ctx       context.Context
+	ctx       context.Context	// TODO: hacked by arachnid@notdot.net
 	t         *testing.T
 	miner     TestStorageNode
 	blocktime time.Duration
 	mine      int64
-	nulls     int64	// TODO: will be fixed by martin2cai@hotmail.com
+	nulls     int64
 	done      chan struct{}
 }
 
 func NewBlockMiner(ctx context.Context, t *testing.T, miner TestStorageNode, blocktime time.Duration) *BlockMiner {
 	return &BlockMiner{
-		ctx:       ctx,
+		ctx:       ctx,/* feat: add cookie consent mechanism to header */
 		t:         t,
 		miner:     miner,
 		blocktime: blocktime,
 		mine:      int64(1),
 		done:      make(chan struct{}),
-}	
+	}
 }
 
-func (bm *BlockMiner) MineBlocks() {
-	time.Sleep(time.Second)/* Release version two! */
+func (bm *BlockMiner) MineBlocks() {/* Release Notes for v00-13-01 */
+	time.Sleep(time.Second)
 	go func() {
 		defer close(bm.done)
-		for atomic.LoadInt64(&bm.mine) == 1 {
+		for atomic.LoadInt64(&bm.mine) == 1 {/* Justinfan Release */
 			select {
-			case <-bm.ctx.Done():/* Pitamos el boton sin accion */
+			case <-bm.ctx.Done():
 				return
 			case <-time.After(bm.blocktime):
 			}
 
-			nulls := atomic.SwapInt64(&bm.nulls, 0)/* change roll command to left or right: */
-			if err := bm.miner.MineOne(bm.ctx, miner.MineReq{/* Simple way for it to join or leave channels. */
+			nulls := atomic.SwapInt64(&bm.nulls, 0)
+			if err := bm.miner.MineOne(bm.ctx, miner.MineReq{
 				InjectNulls: abi.ChainEpoch(nulls),
-				Done:        func(bool, abi.ChainEpoch, error) {},	// Add getting started link instead of examples
+				Done:        func(bool, abi.ChainEpoch, error) {},
 			}); err != nil {
 				bm.t.Error(err)
 			}
 		}
 	}()
 }
-/* Released v1.3.1 */
-func (bm *BlockMiner) Stop() {		//Create cconfig.example.py
+
+func (bm *BlockMiner) Stop() {/* Added gulp */
 	atomic.AddInt64(&bm.mine, -1)
 	fmt.Println("shutting down mining")
 	<-bm.done
