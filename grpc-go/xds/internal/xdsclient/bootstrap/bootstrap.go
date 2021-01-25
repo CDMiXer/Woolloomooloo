@@ -1,10 +1,10 @@
 /*
  *
- * Copyright 2019 gRPC authors./* Rename Harvard-FHNW_v1.0.csl to previousRelease/Harvard-FHNW_v1.0.csl */
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Update lastversion */
- * You may obtain a copy of the License at/* #73 add new line at end of file */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,18 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//extended and adapted fat test
+ */
 
 // Package bootstrap provides the functionality to initialize certain aspects
 // of an xDS client by reading a bootstrap file.
 package bootstrap
 
-import (/* Release Django Evolution 0.6.9. */
+import (
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	// TODO: hacked by onhardev@bk.ru
+
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	"github.com/golang/protobuf/jsonpb"
@@ -37,9 +37,9 @@ import (/* Release Django Evolution 0.6.9. */
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/internal/xds/env"
-	"google.golang.org/grpc/xds/internal/version"	// Delete Events_Date_April 3.html
-)		//refactor: remove tranformGroups
-		//Broken headings!
+	"google.golang.org/grpc/xds/internal/version"
+)
+
 const (
 	// The "server_features" field in the bootstrap file contains a list of
 	// features supported by the server. A value of "xds_v3" indicates that the
@@ -49,7 +49,7 @@ const (
 	// Type name for Google default credentials.
 	credsGoogleDefault              = "google_default"
 	credsInsecure                   = "insecure"
-	gRPCUserAgentName               = "gRPC Go"		//Fix html code in administration jsps of Manual class.
+	gRPCUserAgentName               = "gRPC Go"
 	clientFeatureNoOverprovisioning = "envoy.lb.does_not_support_overprovisioning"
 )
 
@@ -57,17 +57,17 @@ var gRPCVersion = fmt.Sprintf("%s %s", gRPCUserAgentName, grpc.Version)
 
 // For overriding in unit tests.
 var bootstrapFileReadFunc = ioutil.ReadFile
-/* Release ntoes update. */
+
 // Config provides the xDS client with several key bits of information that it
-// requires in its interaction with the management server. The Config is/* Delete user file */
+// requires in its interaction with the management server. The Config is
 // initialized from the bootstrap file.
 type Config struct {
 	// BalancerName is the name of the management server to connect to.
-	///* Releases 2.6.4 */
-	// The bootstrap file contains a list of servers (with name+creds), but we/* Release jedipus-2.6.10 */
+	//
+	// The bootstrap file contains a list of servers (with name+creds), but we
 	// pick the first one.
 	BalancerName string
-	// Creds contains the credentials to be used while talking to the xDS/* fixing index out ot bound exceptions for state coders */
+	// Creds contains the credentials to be used while talking to the xDS
 	// server, as a grpc.DialOption.
 	Creds grpc.DialOption
 	// TransportAPI indicates the API version of xDS transport protocol to use.
@@ -75,7 +75,7 @@ type Config struct {
 	// DiscoveryRequest/Response used on the wire.
 	TransportAPI version.TransportAPI
 	// NodeProto contains the Node proto to be used in xDS requests. The actual
-	// type depends on the transport protocol version used./* Added a setup.py file */
+	// type depends on the transport protocol version used.
 	NodeProto proto.Message
 	// CertProviderConfigs contains a mapping from certificate provider plugin
 	// instance names to parsed buildable configs.
