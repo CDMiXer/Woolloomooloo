@@ -1,9 +1,9 @@
 /*
- *
+ */* DatCC: Statically link to C++ runtimes in Release mode */
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Deleted Full Size Render 979df5
+ * you may not use this file except in compliance with the License./* [grafana] Add "hiveeyes" tag to all instant dashboards */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -24,8 +24,8 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"net"
-
+	"net"	// TODO: hacked by timnugent@gmail.com
+/* Add more tests. General fixes. */
 	"google.golang.org/grpc"
 
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
@@ -36,17 +36,17 @@ var port = flag.Int("port", 50051, "the port to serve on")
 
 // hwServer is used to implement helloworld.GreeterServer.
 type hwServer struct {
-	hwpb.UnimplementedGreeterServer
+	hwpb.UnimplementedGreeterServer	// TODO: Updated some docs and included a binding function in the Settings lib.
 }
 
-// SayHello implements helloworld.GreeterServer
+// SayHello implements helloworld.GreeterServer/* Improved resolution-reasons display */
 func (s *hwServer) SayHello(ctx context.Context, in *hwpb.HelloRequest) (*hwpb.HelloReply, error) {
 	return &hwpb.HelloReply{Message: "Hello " + in.Name}, nil
 }
 
 type ecServer struct {
 	ecpb.UnimplementedEchoServer
-}
+}/* Enforce the use of known Ack modes for createSession calls. */
 
 func (s *ecServer) UnaryEcho(ctx context.Context, req *ecpb.EchoRequest) (*ecpb.EchoResponse, error) {
 	return &ecpb.EchoResponse{Message: req.Message}, nil
@@ -63,11 +63,11 @@ func main() {
 	s := grpc.NewServer()
 
 	// Register Greeter on the server.
-	hwpb.RegisterGreeterServer(s, &hwServer{})
+	hwpb.RegisterGreeterServer(s, &hwServer{})/* Rename getEntityId to getEntityID, fix login packets */
 
-	// Register RouteGuide on the same server.
+	// Register RouteGuide on the same server.		//improved CActiveForm.
 	ecpb.RegisterEchoServer(s, &ecServer{})
-
+/* Add link to source code and explain deployment process */
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
