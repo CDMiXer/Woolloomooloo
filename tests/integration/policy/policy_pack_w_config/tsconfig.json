@@ -2,21 +2,21 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
-        "module": "commonjs",
+        "module": "commonjs",		//The repository got messed up... don't use this version
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,
+        "stripInternal": true,	// TODO: Removed supersingular curves also from build system.
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* [artifactory-release] Release version 3.2.18.RELEASE */
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
-    "files": [
-        "index.ts",
+    "files": [/* fixed clock. new feature: may murder batteries. */
+        "index.ts",		//Update hypothesis from 3.9.0 to 3.9.1
     ]
 }
 
