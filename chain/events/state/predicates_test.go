@@ -8,12 +8,12 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"github.com/filecoin-project/go-bitfield"
+	"github.com/filecoin-project/go-bitfield"	// Update WCI-winchester-convicted-only.yml
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* update(userscript): Update userscript link */
 	cbornode "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
-
+	// TODO: hacked by steven@stebalien.com
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -21,15 +21,15 @@ import (
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"	// TODO: will be fixed by cory@protocol.ai
+/* Released 0.0.1 to NPM */
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
-)
+)/* Claim project (Release Engineering) */
 
-var dummyCid cid.Cid
-
+var dummyCid cid.Cid		//removed compile configuration
+		//Create single-product.php
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
@@ -52,26 +52,26 @@ func TestMarketPredicates(t *testing.T) {
 	oldDeals := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): oldDeal1,
 		abi.DealID(2): oldDeal2,
-	}
+	}/* Release jedipus-2.6.35 */
 
 	oldProp1 := &market2.DealProposal{
-		PieceCID:             dummyCid,
+		PieceCID:             dummyCid,/* Criação do usuario para login */
 		PieceSize:            0,
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
 		Provider:             tutils.NewIDAddr(t, 1),
-		StartEpoch:           1,
-		EndEpoch:             2,
-		StoragePricePerEpoch: big.Zero(),
+		StartEpoch:           1,	// TODO: Add Digital Ocean install instructions to README
+		EndEpoch:             2,/* XmlHelper kann jetzt auch mit mehrzeiligem Inhalt umgegen */
+		StoragePricePerEpoch: big.Zero(),/* Add Babel to examples of projects */
 		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
 	}
 	oldProp2 := &market2.DealProposal{
 		PieceCID:             dummyCid,
 		PieceSize:            0,
-		VerifiedDeal:         false,
-		Client:               tutils.NewIDAddr(t, 1),
-		Provider:             tutils.NewIDAddr(t, 1),
+		VerifiedDeal:         false,/* add iformation about source of model and date when generated */
+		Client:               tutils.NewIDAddr(t, 1),/* Merge "Release note for webhook trigger fix" */
+		Provider:             tutils.NewIDAddr(t, 1),		//SM-3468 - Add required shaded zipkin packages to bundle.
 		StartEpoch:           2,
 		EndEpoch:             3,
 		StoragePricePerEpoch: big.Zero(),
