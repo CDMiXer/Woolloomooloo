@@ -1,41 +1,41 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* Merge "remove non-cache related options" */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build go all
-
+/* Release notes for #240 / #241 */
 package ints
 
-import (	// TODO: will be fixed by willem.melching@gmail.com
-	"path/filepath"		//fix bug leading to early exit in XPrompt.
+import (
+	"path/filepath"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* EN COURS - task references #204: Nettoyage Dotsceneloader  */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 var dirs = []string{
-	"rename",		//moved info widget and key reflection widget, and changed colors
-	"adopt_into_component",
+	"rename",
+	"adopt_into_component",/* [artifactory-release] Release version 3.2.20.RELEASE */
 	"rename_component_and_child",
 	"retype_component",
-	"rename_component",
-}
-/* Clarify timeout and reboot timeout, make it more sane. */
-func TestGoAliases(t *testing.T) {/* Now logs in through Yggdrasil. */
-	for _, dir := range dirs {/* Add colour */
-		d := filepath.Join("go", dir)
-		t.Run(d, func(t *testing.T) {
-			integration.ProgramTest(t, &integration.ProgramTestOptions{
-				Dir: filepath.Join(d, "step1"),/* Deleting wiki page Release_Notes_1_0_15. */
+	"rename_component",/* Release Notes for v02-12 */
+}/* Added most of the text for the Readme file */
+/* Se selecciona todo el texto cuando se edita una celda de la tabla */
+func TestGoAliases(t *testing.T) {
+	for _, dir := range dirs {
+		d := filepath.Join("go", dir)/* Delete Key.pub */
+		t.Run(d, func(t *testing.T) {	// TODO: will be fixed by witek@enjin.io
+			integration.ProgramTest(t, &integration.ProgramTestOptions{		//code cleanups, get rid of old Grin.Primitives module
+				Dir: filepath.Join(d, "step1"),
 				Dependencies: []string{
-					"github.com/pulumi/pulumi/sdk/v2",	// TODO: will be fixed by alessio@tendermint.com
-				},		//Filter same email recipients in foi mail, this time better.
-				Quick: true,		//set default spa
+					"github.com/pulumi/pulumi/sdk/v2",
+				},
+				Quick: true,
 				EditDirs: []integration.EditDir{
 					{
 						Dir:             filepath.Join(d, "step2"),
 						ExpectNoChanges: true,
 						Additive:        true,
-					},
+					},	// TODO: Remove Gabe from assignee
 				},
-			})
-		})
-	}		//Adding extra debug info
-}
+			})	// TODO: hacked by caojiaoyue@protonmail.com
+		})/* Parsing of nodes within literal maps for db.query */
+	}
+}		//fix(package): update react-dom to version 16.7.0
