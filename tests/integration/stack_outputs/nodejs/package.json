@@ -1,7 +1,7 @@
-{
+{/* fix some sprintf conversion issues */
     "name": "stack_outputs",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {		//Перенос проекта на it2k
         "typescript": "^2.5.3"
     }
 }
