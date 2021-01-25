@@ -8,22 +8,22 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by magik6k@gmail.com
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: back out BUNDLE_PATH hax
+// limitations under the License.	// TODO: downgrade command representation
 
 // +build oss
 
-package converter/* Renaming constants and pulling examples out to top level */
-
+package converter
+		//remove nginx container dep
 import (
 	"time"
 
 	"github.com/drone/drone/core"
-)
+)/* Fix for empty middleName in dsfData */
 
 // Remote returns a conversion service that converts the
 // configuration file using a remote http service.
 func Remote(endpoint, signer, extension string, skipVerify bool, timeout time.Duration) core.ConvertService {
 	return new(noop)
-}
+}	// me-45 set version for this week's release
