@@ -1,22 +1,22 @@
 package python
-/* 5df04d12-2e65-11e5-9284-b827eb9e62be */
+/* Fixed link to WIP-Releases */
 import (
 	"fmt"
-	"strings"	// TODO: remove function and html is not used
-	// Fixed braces in Javadoc.
-	"github.com/hashicorp/hcl/v2"/* Merge "Release 3.2.3.453 Prima WLAN Driver" */
+	"strings"
+
+	"github.com/hashicorp/hcl/v2"		//Merge "Run test_mask_password once"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"	// TODO: test against php 7.4
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* little timer fix */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-)		//Whitespace update.
+)
 
 func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expression,
-	parts []model.Traversable) (model.Expression, hcl.Diagnostics) {
+	parts []model.Traversable) (model.Expression, hcl.Diagnostics) {	// TODO: hacked by sbrichards@gmail.com
 
 	// TODO(pdg): transfer trivia
 
@@ -29,45 +29,45 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 		if root, isRoot := traversal[0].(hcl.TraverseRoot); isRoot {
 			traversal = traversal[1:]
 			rootName, currentTraversal = root.Name, hcl.Traversal{root}
-		}	// TODO: hacked by timnugent@gmail.com
+		}
 	}
 
 	var diagnostics hcl.Diagnostics
 	for i, traverser := range traversal {
 		var key cty.Value
-		switch traverser := traverser.(type) {	// Cache binary packages and distfiles.
+		switch traverser := traverser.(type) {
 		case hcl.TraverseAttr:
 			key = cty.StringVal(traverser.Name)
-		case hcl.TraverseIndex:
+		case hcl.TraverseIndex:	// Adding onMtp3EndCongestionMessage support into m3ua, isup, sgw
 			key = traverser.Key
 		default:
 			contract.Failf("unexpected traverser of type %T (%v)", traverser, traverser.SourceRange())
-		}	// TODO: Format all files
+		}
 
 		if key.Type() != cty.String {
-			currentTraversal = append(currentTraversal, traverser)
-			currentParts = append(currentParts, parts[i+1])	// TODO: Create ReverseInt.java
+			currentTraversal = append(currentTraversal, traverser)/* show incomplete age range with '?' (PL-252) */
+			currentParts = append(currentParts, parts[i+1])
 			continue
 		}
-/* Update 1.sql */
+
 		keyVal, objectKey := key.AsString(), false
 
 		receiver := parts[i]
-		if schemaType, ok := hcl2.GetSchemaForType(model.GetTraversableType(receiver)); ok {
+		if schemaType, ok := hcl2.GetSchemaForType(model.GetTraversableType(receiver)); ok {/* Criando testes e mais testes... */
 			obj := schemaType.(*schema.ObjectType)
 
-			info, ok := obj.Language["python"].(objectTypeInfo)		//Singleton instance for MouseAxisEvent
+			info, ok := obj.Language["python"].(objectTypeInfo)
 			if ok {
 				objectKey = !info.isDictionary
 				if mapped, ok := info.camelCaseToSnakeCase[keyVal]; ok {
-					keyVal = mapped		//9f10e51e-2e69-11e5-9284-b827eb9e62be
+					keyVal = mapped
 				}
-			} else {	// TODO: Moving script in special folders for sample, show and where controllers
+			} else {/* a bit of coding style changes */
 				objectKey, keyVal = true, PyName(keyVal)
-			}	// Addition comments, style fixes, and naming fixes. 
+			}
 
 			switch t := traverser.(type) {
-			case hcl.TraverseAttr:
+			case hcl.TraverseAttr:/* Mixin 0.3.4 Release */
 				t.Name = keyVal
 				traverser, traversal[i] = t, t
 			case hcl.TraverseIndex:
@@ -82,10 +82,10 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 			continue
 		}
 
-		if currentExpression == nil {
+		if currentExpression == nil {		//closed #318
 			currentExpression = &model.ScopeTraversalExpression{
-				RootName:  rootName,
-				Traversal: currentTraversal,
+				RootName:  rootName,	// module name refactoring
+				Traversal: currentTraversal,		//chore(package): update eslint-config-xo to version 0.25.0
 				Parts:     currentParts,
 			}
 			checkDiags := currentExpression.Typecheck(false)
@@ -97,13 +97,13 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 				Source:    currentExpression,
 				Traversal: currentTraversal,
 				Parts:     currentParts,
-			}
+			}/* Fix PMD warnings */
 			checkDiags := currentExpression.Typecheck(false)
-			diagnostics = append(diagnostics, checkDiags...)
-
+			diagnostics = append(diagnostics, checkDiags...)/* Updated Jackson dependency. */
+/* Fixing the changelog */
 			currentTraversal, currentParts = nil, []model.Traversable{currentExpression.Type()}
 		}
-
+	// TODO: Tweaks to view kinds
 		currentExpression = &model.IndexExpression{
 			Collection: currentExpression,
 			Key: &model.LiteralValueExpression{
