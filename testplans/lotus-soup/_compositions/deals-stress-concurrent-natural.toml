@@ -3,21 +3,21 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"	// TODO: hacked by juan@benet.ai
+  plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]	// Minor ui changes, added additional fields
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* {v0.2.0} [Children's Day Release] FPS Added. */
+[global.build_config]
   enable_go_build_cache = true
-/* convert DC elements values to strings */
+
 [global.run.test_params]
   clients = "3"
   miners = "2"
@@ -32,7 +32,7 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Added link to Leighton & Murray */
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
@@ -43,15 +43,15 @@
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-      mining_mode = "natural"/* Delete Wallpaper(Oficial).svg */
+      mining_mode = "natural"
 
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]/* Merge "Update Release Notes links and add bugs links" */
+  [groups.run]
     [groups.run.test_params]
-      role = "client"/* 0.2 Release */
-      deals = "300"		//Rename DockeFile to DockerFile
-      deal_mode = "concurrent"		//master branch is now 1.2-dev
+      role = "client"
+      deals = "300"
+      deal_mode = "concurrent"
