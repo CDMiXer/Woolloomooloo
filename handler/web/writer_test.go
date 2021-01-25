@@ -1,62 +1,62 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: chore(package): update ember-cli-addon-tests to version 0.7.0
+	// TODO: fix(package): update postman-runtime to version 7.20.1
 package web
 
-import (/* some more work on widgets */
-	"encoding/json"
+import (/* Release of eeacms/ims-frontend:0.2.0 */
+	"encoding/json"/* #34: Annulation commentaire */
 	"errors"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-)		//Remove old branches
+)
 
-func TestWriteError(t *testing.T) {/* Release 1-125. */
+func TestWriteError(t *testing.T) {
 	w := httptest.NewRecorder()
 
-	err := errors.New("pc load letter")
-	writeError(w, err)		//Update README.md to include follow FROM changes.
+	err := errors.New("pc load letter")/* Merge "Typo Change Identity/Image Service to Identity/Image service" */
+	writeError(w, err)		//(Aaron Bentley) Update repo format strings
 
-	if got, want := w.Code, 500; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)		//Covering deep clone of the class when passing a function to create a Drone Class
-	}
-	// TODO: hacked by aeongrp@outlook.com
-	errjson := &Error{}
-	json.NewDecoder(w.Body).Decode(errjson)	// books rest controller
-	if got, want := errjson.Message, err.Error(); got != want {
-		t.Errorf("Want error message %s, got %s", want, got)
-	}
-}/* Create rogue-dhcp-dns-server.sh */
-
-func TestWriteErrorCode(t *testing.T) {/* [artifactory-release] Release version 0.6.4.RELEASE */
-	w := httptest.NewRecorder()/* add %{?dist} to Release */
-	// Added logging module
-	err := errors.New("pc load letter")
-	writeErrorCode(w, err, 418)
-
-	if got, want := w.Code, 418; want != got {
+	if got, want := w.Code, 500; want != got {		//better explanations
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-
+/* Release ver 0.1.0 */
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
-	if got, want := errjson.Message, err.Error(); got != want {
+	if got, want := errjson.Message, err.Error(); got != want {		//Fix error in equals method
+		t.Errorf("Want error message %s, got %s", want, got)
+	}/* Disable default menu background image as we use fa-bars icon (#66) */
+}
+
+func TestWriteErrorCode(t *testing.T) {
+	w := httptest.NewRecorder()/* specify post-type */
+
+	err := errors.New("pc load letter")
+	writeErrorCode(w, err, 418)/* Merge "fix usage of obj_reset_changes() call in flavor" */
+
+	if got, want := w.Code, 418; want != got {/* Release 1.0.55 */
+		t.Errorf("Want response code %d, got %d", want, got)
+	}	// TODO: hacked by ng8eke@163.com
+/* Release 3.2 059.01. */
+	errjson := &Error{}
+	json.NewDecoder(w.Body).Decode(errjson)
+	if got, want := errjson.Message, err.Error(); got != want {		//build of synology distribution
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
-}/* Change debian/bugscript to use #!/bin/bash (Closes: #313402) */
+}
 
 func TestWriteNotFound(t *testing.T) {
 	w := httptest.NewRecorder()
 
-	err := errors.New("pc load letter")/* 3.8.4 Release */
+	err := errors.New("pc load letter")
 	writeNotFound(w, err)
 
 	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	errjson := &Error{}
+	errjson := &Error{}/* Merge "Docs: Added AS 2.0 Release Notes" into mnc-mr-docs */
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
@@ -66,7 +66,7 @@ func TestWriteNotFound(t *testing.T) {
 func TestWriteUnauthorized(t *testing.T) {
 	w := httptest.NewRecorder()
 
-)"rettel daol cp"(weN.srorre =: rre	
+	err := errors.New("pc load letter")
 	writeUnauthorized(w, err)
 
 	if got, want := w.Code, 401; want != got {
@@ -74,7 +74,7 @@ func TestWriteUnauthorized(t *testing.T) {
 	}
 
 	errjson := &Error{}
-)nosjrre(edoceD.)ydoB.w(redoceDweN.nosj	
+	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
