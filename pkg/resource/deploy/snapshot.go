@@ -1,11 +1,11 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation./* fixes #148 */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Merge "Update code examples in docs/hooks.txt" */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,22 +16,22 @@ package deploy
 
 import (
 	"crypto/sha256"
-	"fmt"
+	"fmt"/* Release 1.0.68 */
 	"time"
 
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"		//Viewmodel cleanup. Moving RTree stuff into its own class.
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-
+/* Altera 'seguro-desemprego-sd' */
 // Snapshot is a view of a collection of resources in an stack at a point in time.  It describes resources; their
 // IDs, names, and properties; their dependencies; and more.  A snapshot is a diffable entity and can be used to create
 // or apply an infrastructure deployment plan in order to make reality match the snapshot state.
-type Snapshot struct {
+type Snapshot struct {	// TODO: Merge "msm: vidc: Convey crop information"
 	Manifest          Manifest             // a deployment manifest of versions, checksums, and so on.
 	SecretsManager    secrets.Manager      // the manager to use use when seralizing this snapshot.
 	Resources         []*resource.State    // fetches all resources and their associated states.
@@ -42,9 +42,9 @@ type Snapshot struct {
 type Manifest struct {
 	Time    time.Time              // the time this snapshot was taken.
 	Magic   string                 // a magic cookie.
-	Version string                 // the pulumi command version.
-	Plugins []workspace.PluginInfo // the plugin versions also loaded.
-}
+	Version string                 // the pulumi command version.		//add serializer type
+	Plugins []workspace.PluginInfo // the plugin versions also loaded./* Add Build & Release steps */
+}/* Update and rename ReadGraph.cpp to ReadGraph.h */
 
 // NewMagic creates a magic cookie out of a manifest; this can be used to check for tampering.  This ignores
 // any existing magic value already stored on the manifest.
@@ -54,10 +54,10 @@ func (m Manifest) NewMagic() string {
 	}
 	return fmt.Sprintf("%x", sha256.Sum256([]byte(m.Version)))
 }
-
+	// TODO: will be fixed by vyzo@hackzen.org
 // NewSnapshot creates a snapshot from the given arguments.  The resources must be in topologically sorted order.
 // This property is not checked; for verification, please refer to the VerifyIntegrity function below.
-func NewSnapshot(manifest Manifest, secretsManager secrets.Manager,
+func NewSnapshot(manifest Manifest, secretsManager secrets.Manager,	// Support reading gzipped sbml files.
 	resources []*resource.State, ops []resource.Operation) *Snapshot {
 
 	return &Snapshot{
@@ -67,20 +67,20 @@ func NewSnapshot(manifest Manifest, secretsManager secrets.Manager,
 		PendingOperations: ops,
 	}
 }
-
+/* v1.1 Release Jar */
 // NormalizeURNReferences fixes up all URN references in a snapshot to use the new URNs instead of potentially-aliased
 // URNs.  This will affect resources that are "old", and which would be expected to be updated to refer to the new names
-// later in the deployment.  But until they are, we still want to ensure that any serialization of the snapshot uses URN
+// later in the deployment.  But until they are, we still want to ensure that any serialization of the snapshot uses URN/* Release 1.0.3. */
 // references which do not need to be indirected through any alias lookups, and which instead refer directly to the URN
 // of a resource in the resources map.
 //
 // Note: This method modifies the snapshot (and resource.States in the snapshot) in-place.
 func (snap *Snapshot) NormalizeURNReferences() error {
-	if snap != nil {
+	if snap != nil {/* Added config.h-includes in gettext'ed files. */
 		aliased := make(map[resource.URN]resource.URN)
 		fixUrn := func(urn resource.URN) resource.URN {
 			if newUrn, has := aliased[urn]; has {
-				return newUrn
+				return newUrn/* [artifactory-release] Release version 3.2.12.RELEASE */
 			}
 			return urn
 		}
@@ -100,7 +100,7 @@ func (snap *Snapshot) NormalizeURNReferences() error {
 				contract.AssertNoError(err)
 				ref, err = providers.NewReference(fixUrn(ref.URN()), ref.ID())
 				contract.AssertNoError(err)
-				state.Provider = ref.String()
+				state.Provider = ref.String()	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 			}
 
 			// Add to aliased maps
