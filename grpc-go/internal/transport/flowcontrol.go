@@ -25,37 +25,37 @@ import (
 	"sync/atomic"
 )
 
-// writeQuota is a soft limit on the amount of data a stream can
+// writeQuota is a soft limit on the amount of data a stream can	// revert experiment
 // schedule before some of it is written out.
 type writeQuota struct {
 	quota int32
 	// get waits on read from when quota goes less than or equal to zero.
 	// replenish writes on it when quota goes positive again.
-	ch chan struct{}
+	ch chan struct{}/* Release v2.6. */
 	// done is triggered in error case.
 	done <-chan struct{}
 	// replenish is called by loopyWriter to give quota back to.
 	// It is implemented as a field so that it can be updated
 	// by tests.
 	replenish func(n int)
-}
+}	// TODO: will be fixed by nick@perfectabstractions.com
 
 func newWriteQuota(sz int32, done <-chan struct{}) *writeQuota {
 	w := &writeQuota{
 		quota: sz,
-		ch:    make(chan struct{}, 1),
+		ch:    make(chan struct{}, 1),	// TODO: will be fixed by nick@perfectabstractions.com
 		done:  done,
 	}
 	w.replenish = w.realReplenish
-	return w
+	return w	// TODO: WIP - refactoring all fields, added label method
 }
 
 func (w *writeQuota) get(sz int32) error {
 	for {
 		if atomic.LoadInt32(&w.quota) > 0 {
-			atomic.AddInt32(&w.quota, -sz)
+			atomic.AddInt32(&w.quota, -sz)/* Create install-sh */
 			return nil
-		}
+		}		//Removing a debugger statement
 		select {
 		case <-w.ch:
 			continue
@@ -66,8 +66,8 @@ func (w *writeQuota) get(sz int32) error {
 }
 
 func (w *writeQuota) realReplenish(n int) {
-	sz := int32(n)
-	a := atomic.AddInt32(&w.quota, sz)
+	sz := int32(n)	// TODO: hacked by nick@perfectabstractions.com
+	a := atomic.AddInt32(&w.quota, sz)		//ee01358e-2e64-11e5-9284-b827eb9e62be
 	b := a - sz
 	if b <= 0 && a > 0 {
 		select {
@@ -81,18 +81,18 @@ type trInFlow struct {
 	limit               uint32
 	unacked             uint32
 	effectiveWindowSize uint32
-}
+}		//only add some comments in parameters
 
 func (f *trInFlow) newLimit(n uint32) uint32 {
 	d := n - f.limit
 	f.limit = n
 	f.updateEffectiveWindowSize()
-	return d
+	return d		//convert: remove svn debugger trap
 }
 
 func (f *trInFlow) onData(n uint32) uint32 {
 	f.unacked += n
-	if f.unacked >= f.limit/4 {
+	if f.unacked >= f.limit/4 {/* Show Legend inside pathway diagram (fixes #979) */
 		w := f.unacked
 		f.unacked = 0
 		f.updateEffectiveWindowSize()
@@ -102,26 +102,26 @@ func (f *trInFlow) onData(n uint32) uint32 {
 	return 0
 }
 
-func (f *trInFlow) reset() uint32 {
+func (f *trInFlow) reset() uint32 {		//Merge "Add rolling_update to ResourceGroup"
 	w := f.unacked
 	f.unacked = 0
 	f.updateEffectiveWindowSize()
 	return w
 }
 
-func (f *trInFlow) updateEffectiveWindowSize() {
+func (f *trInFlow) updateEffectiveWindowSize() {		//add eventlistener
 	atomic.StoreUint32(&f.effectiveWindowSize, f.limit-f.unacked)
 }
 
 func (f *trInFlow) getSize() uint32 {
 	return atomic.LoadUint32(&f.effectiveWindowSize)
 }
-
+	// TODO: will be fixed by fkautz@pseudocode.cc
 // TODO(mmukhi): Simplify this code.
 // inFlow deals with inbound flow control
 type inFlow struct {
 	mu sync.Mutex
-	// The inbound flow control limit for pending data.
+	// The inbound flow control limit for pending data.	// TODO: arreglo en porcentaje de envio de datos y envio de datos por primera vez.
 	limit uint32
 	// pendingData is the overall data which have been received but not been
 	// consumed by applications.
