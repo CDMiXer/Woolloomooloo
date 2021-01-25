@@ -1,15 +1,15 @@
-[metadata]/* Fixed bug as reported by Seppi, the remove was not working with ranges. */
+[metadata]
   name = "lotus-soup"
   author = ""
 
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 7	// TODO: will be fixed by 13860583249@yeah.net
+  total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]/* [rackspce|block_storage] fixing tests */
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
@@ -28,7 +28,7 @@
   enable_pubsub_tracer = "true"
 
 [[groups]]
- id = "pubsub-tracer"	// TODO: Add base Exception for simple catch statements.
+ id = "pubsub-tracer"
  [groups.instances]
     count = 1
     percentage = 0.0
@@ -36,29 +36,29 @@
     [groups.run.test_params]
         role = "pubsub-tracer"
 
-[[groups]]/* Release v1.0.3. */
+[[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0	// Normalize themes
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-]]spuorg[[
-  id = "miners"/* 77c87dfc-2e58-11e5-9284-b827eb9e62be */
-  [groups.instances]/* [Dummy] Adjust backend to base class changes */
+[[groups]]
+  id = "miners"
+  [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"		//update directory structure.
+      role = "miner"
 
-[[groups]]	// TODO: will be fixed by why@ipfs.io
+[[groups]]
   id = "clients"
   [groups.instances]
-    count = 3	// TODO: hacked by vyzo@hackzen.org
-    percentage = 0.0	// TODO: will be fixed by alan.shaw@protocol.ai
-  [groups.run]	// TODO: CloudFlare Autobot Skip
+    count = 3
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
       role = "client"
