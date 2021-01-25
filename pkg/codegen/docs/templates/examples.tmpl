@@ -1,19 +1,19 @@
 {{ define "examples" -}}
-{{ print "{{% examples %}}" }}		//Insertar la segunda consulta al acepatr amigo
+{{ print "{{% examples %}}" }}
 ## Example Usage
+		//1f242e54-2e57-11e5-9284-b827eb9e62be
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}/* fix transm */
 
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
+{{- range . }}		//- Fixed Sync Error
+{{ .Title }}
 
-{{- range . }}
-{{ .Title }}	// TODO: Push to rebuild.
-
-{{- range $key, $val := .Snippets }}	// TODO: will be fixed by 13860583249@yeah.net
+{{- range $key, $val := .Snippets }}
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
 {{ htmlSafe $val }}
-{{ print "{{% /example %}}" }}
+{{ print "{{% /example %}}" }}/* Release of eeacms/www:20.9.29 */
 {{ end }}
 
-{{- end }}
+{{- end }}	// TODO: will be fixed by why@ipfs.io
 {{ print "{{% /examples %}}" }}
-
+	// increase coverage of nws.gini
 {{- end }}
