@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",/* Merge "Merge "Merge "ASoC: msm: qdsp6v2: Release IPA mapping""" */
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* Upgrade to JRebirth 8.5.0, RIA 3.0.0, Release 3.0.0 */
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
@@ -11,10 +11,10 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-,eurt :"semaNeliFnIgnisaCtnetsisnoCecrof"        
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
-    "files": [
+    "files": [	// TODO: remove this.services and compute it from service_boxes.values()
         "index.ts"
     ]
 }
