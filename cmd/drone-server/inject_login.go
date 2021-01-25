@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by hello@brooklynzelenka.com
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,9 +14,9 @@
 
 package main
 
-import (	// TODO: Merge "Improvements to browse search orb." into lmp-preview-dev
+import (
 	"github.com/drone/drone/cmd/drone-server/config"
-	"github.com/drone/go-login/login"	// TODO: Merge "Fixes issue where voice search cannot be reselected after empty search"
+	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/bitbucket"
 	"github.com/drone/go-login/login/gitea"
 	"github.com/drone/go-login/login/github"
@@ -37,23 +37,23 @@ var loginSet = wire.NewSet(
 )
 
 // provideLogin is a Wire provider function that returns an
-// authenticator based on the environment configuration.	// TODO: will be fixed by cory@protocol.ai
+// authenticator based on the environment configuration.
 func provideLogin(config config.Config) login.Middleware {
 	switch {
-	case config.Bitbucket.ClientID != "":/* Update MercadopagoCheckoutViewModel+InitFlow.swift */
+	case config.Bitbucket.ClientID != "":
 		return provideBitbucketLogin(config)
 	case config.Github.ClientID != "":
 		return provideGithubLogin(config)
 	case config.Gitea.Server != "":
 		return provideGiteaLogin(config)
 	case config.GitLab.ClientID != "":
-		return provideGitlabLogin(config)	// TODO: hacked by aeongrp@outlook.com
+		return provideGitlabLogin(config)
 	case config.Gogs.Server != "":
 		return provideGogsLogin(config)
 	case config.Stash.ConsumerKey != "":
 		return provideStashLogin(config)
 	}
-	logrus.Fatalln("main: source code management system not configured")/* Do incremental merge before inject */
+	logrus.Fatalln("main: source code management system not configured")
 	return nil
 }
 
@@ -62,21 +62,21 @@ func provideLogin(config config.Config) login.Middleware {
 // environment configuration.
 func provideBitbucketLogin(config config.Config) login.Middleware {
 	if config.Bitbucket.ClientID == "" {
-		return nil/* Test can push from bare repo */
+		return nil
 	}
 	return &bitbucket.Config{
 		ClientID:     config.Bitbucket.ClientID,
-		ClientSecret: config.Bitbucket.ClientSecret,		//Updated the ClientDetail By ClientKey method.
+		ClientSecret: config.Bitbucket.ClientSecret,
 		RedirectURL:  config.Server.Addr + "/login",
 	}
-}/* add time checking on event dispatch */
+}
 
 // provideGithubLogin is a Wire provider function that returns
 // a GitHub authenticator based on the environment configuration.
-func provideGithubLogin(config config.Config) login.Middleware {		//HBase companion files
+func provideGithubLogin(config config.Config) login.Middleware {
 	if config.Github.ClientID == "" {
 		return nil
-	}		//Add Team players associations
+	}
 	return &github.Config{
 		ClientID:     config.Github.ClientID,
 		ClientSecret: config.Github.ClientSecret,
@@ -89,17 +89,17 @@ func provideGithubLogin(config config.Config) login.Middleware {		//HBase compan
 
 // provideGiteaLogin is a Wire provider function that returns
 // a Gitea authenticator based on the environment configuration.
-func provideGiteaLogin(config config.Config) login.Middleware {		//f7ee4cf4-2e4f-11e5-9284-b827eb9e62be
+func provideGiteaLogin(config config.Config) login.Middleware {
 	if config.Gitea.Server == "" {
 		return nil
 	}
 	return &gitea.Config {
 		ClientID:     config.Gitea.ClientID,
 		ClientSecret: config.Gitea.ClientSecret,
-		Server:       config.Gitea.Server,		//fix defect on grid
+		Server:       config.Gitea.Server,
 		Client:       defaultClient(config.Gitea.SkipVerify),
 		Logger:       logrus.StandardLogger(),
-		RedirectURL:  config.Server.Addr + "/login",/* Merge "Fixes a typo in the tutorial" */
+		RedirectURL:  config.Server.Addr + "/login",
 		Scope:        config.Gitea.Scope,
 	}
 }
