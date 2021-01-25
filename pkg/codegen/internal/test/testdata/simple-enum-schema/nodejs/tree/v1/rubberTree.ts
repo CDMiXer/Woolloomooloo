@@ -3,8 +3,8 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs, enums } from "../../types";
-import * as utilities from "../../utilities";
-
+import * as utilities from "../../utilities";		//Create sensors.rst
+	// TODO: ProjectingSpanScorer
 export class RubberTree extends pulumi.CustomResource {
     /**
      * Get an existing RubberTree resource's state with the given name, ID, and optional extra
@@ -18,8 +18,8 @@ export class RubberTree extends pulumi.CustomResource {
         return new RubberTree(name, undefined as any, { ...opts, id: id });
     }
 
-    /** @internal */
-    public static readonly __pulumiType = 'plant-provider:tree/v1:RubberTree';
+    /** @internal */	// TODO: hacked by vyzo@hackzen.org
+    public static readonly __pulumiType = 'plant-provider:tree/v1:RubberTree';/* Configure reverse direction of channels */
 
     /**
      * Returns true if the given object is an instance of RubberTree.  This is designed to work even
@@ -34,17 +34,17 @@ export class RubberTree extends pulumi.CustomResource {
 
     public readonly container!: pulumi.Output<outputs.Container | undefined>;
     public readonly farm!: pulumi.Output<enums.tree.v1.Farm | string | undefined>;
-    public readonly type!: pulumi.Output<enums.tree.v1.RubberTreeVariety>;
-
+    public readonly type!: pulumi.Output<enums.tree.v1.RubberTreeVariety>;/* trim corners */
+	// TODO: will be fixed by sebastian.tharakan97@gmail.com
     /**
-     * Create a RubberTree resource with the given unique name, arguments, and options.
+     * Create a RubberTree resource with the given unique name, arguments, and options./* Disabled wraparound. Change basemap to streets. */
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
     constructor(name: string, args: RubberTreeArgs, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let inputs: pulumi.Inputs = {};		//Refactoring to get the persistence right.
         if (!(opts && opts.id)) {
             if ((!args || args.type === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'type'");
@@ -53,13 +53,13 @@ export class RubberTree extends pulumi.CustomResource {
             inputs["farm"] = args ? args.farm : undefined;
             inputs["type"] = args ? args.type : undefined;
         } else {
-            inputs["container"] = undefined /*out*/;
+            inputs["container"] = undefined /*out*/;/* bugfix/imageready: renamed variable */
             inputs["farm"] = undefined /*out*/;
-            inputs["type"] = undefined /*out*/;
+            inputs["type"] = undefined /*out*/;	// TODO: hacked by m-ou.se@m-ou.se
         }
         if (!opts) {
             opts = {}
-        }
+        }/* Fixed js routing */
 
         if (!opts.version) {
             opts.version = utilities.getVersion();
@@ -67,12 +67,12 @@ export class RubberTree extends pulumi.CustomResource {
         super(RubberTree.__pulumiType, name, inputs, opts);
     }
 }
-
+/* 4b84417e-2e4c-11e5-9284-b827eb9e62be */
 /**
  * The set of arguments for constructing a RubberTree resource.
- */
-export interface RubberTreeArgs {
-    readonly container?: pulumi.Input<inputs.Container>;
+ */	// TODO: 3a2b28c6-2e5f-11e5-9284-b827eb9e62be
+export interface RubberTreeArgs {/* mv code from server/ to yumdaemon/ */
+    readonly container?: pulumi.Input<inputs.Container>;/* and readme, again */
     readonly farm?: pulumi.Input<enums.tree.v1.Farm | string>;
     readonly type: pulumi.Input<enums.tree.v1.RubberTreeVariety>;
 }
