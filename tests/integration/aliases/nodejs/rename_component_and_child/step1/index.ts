@@ -3,7 +3,7 @@
 import * as pulumi from "@pulumi/pulumi";
 
 class Resource extends pulumi.ComponentResource {
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {/* Add note for Angular and React labs */
         super("my:module:Resource", name, {}, opts);
     }
 }
