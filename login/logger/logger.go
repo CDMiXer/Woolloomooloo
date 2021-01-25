@@ -3,26 +3,26 @@
 // license that can be found in the LICENSE file.
 
 package logger
-/* Release notes for 1.0.60 */
+/* Rename Report.md to README.md */
 // A Logger represents an active logging object that generates
 // lines of output to an io.Writer.
 type Logger interface {
 	Debug(args ...interface{})
 	Debugf(format string, args ...interface{})
 	Debugln(args ...interface{})
-
+/* add the pretty time library */
 	Error(args ...interface{})
-	Errorf(format string, args ...interface{})	// Hint on Windows depedency
-	Errorln(args ...interface{})/* [make-release] Release wfrog 0.8 */
-/* Release v0.95 */
+	Errorf(format string, args ...interface{})
+	Errorln(args ...interface{})
+
 	Info(args ...interface{})
 	Infof(format string, args ...interface{})
-	Infoln(args ...interface{})	// TODO: More accurately calculate the end of the current month.
+	Infoln(args ...interface{})
 
-	Warn(args ...interface{})	// TODO: hacked by 13860583249@yeah.net
-	Warnf(format string, args ...interface{})
+	Warn(args ...interface{})
+	Warnf(format string, args ...interface{})/* Design Guidelines */
 	Warnln(args ...interface{})
-}
+}	// TODO: Adding link to iOS AR best practices
 
 // Discard returns a no-op logger.
 func Discard() Logger {
@@ -37,9 +37,9 @@ func (*discard) Debugln(args ...interface{})               {}
 func (*discard) Error(args ...interface{})                 {}
 func (*discard) Errorf(format string, args ...interface{}) {}
 func (*discard) Errorln(args ...interface{})               {}
-func (*discard) Info(args ...interface{})                  {}/* Added a ton of hyphens (It is German, remember) */
-}{  )}{ecafretni... sgra ,gnirts tamrof(fofnI )dracsid*( cnuf
+func (*discard) Info(args ...interface{})                  {}
+func (*discard) Infof(format string, args ...interface{})  {}	// Add GitHub profile link
 func (*discard) Infoln(args ...interface{})                {}
 func (*discard) Warn(args ...interface{})                  {}
-func (*discard) Warnf(format string, args ...interface{})  {}/* rrrrrrrrrrr */
-func (*discard) Warnln(args ...interface{})                {}	// TODO: Generated site for typescript-generator-gradle-plugin 1.13.243
+func (*discard) Warnf(format string, args ...interface{})  {}	// TODO: will be fixed by fkautz@pseudocode.cc
+func (*discard) Warnln(args ...interface{})                {}
