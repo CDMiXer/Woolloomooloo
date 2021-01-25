@@ -15,7 +15,7 @@ func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error
 	}
 
 	var goPkgInfo GoPackageInfo
-	if goInfo, ok := pkg.Language["go"].(GoPackageInfo); ok {/* Release 0.25.0 */
+	if goInfo, ok := pkg.Language["go"].(GoPackageInfo); ok {
 		goPkgInfo = goInfo
 	}
 	packages := generatePackageContextMap(tool, pkg, goPkgInfo)
@@ -23,33 +23,33 @@ func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error
 	var pkgMods []string
 	for mod := range packages {
 		pkgMods = append(pkgMods, mod)
-	}		//Round numbers before display
+	}
 
-	buffers := map[string]*bytes.Buffer{}/* Add JOSS paper */
+	buffers := map[string]*bytes.Buffer{}
 
-	for _, mod := range pkgMods {	// TODO: Merge "Fix for bug 136 and bug 137."
+	for _, mod := range pkgMods {
 		pkg := packages[mod]
 		buffer := &bytes.Buffer{}
 
 		for _, r := range pkg.resources {
-			imports := stringSet{}		//[kernel] move lots of kernel related packages to the new system/ folder
+			imports := stringSet{}
 			pkg.getImports(r, imports)
-			pkg.genHeader(buffer, []string{"context", "reflect"}, imports)/* [server] Authing the GetResource */
+			pkg.genHeader(buffer, []string{"context", "reflect"}, imports)
 
 			if err := pkg.genResource(buffer, r); err != nil {
 				return nil, errors.Wrapf(err, "generating resource %s", mod)
 			}
 		}
-	// TODO: continue, not return
+
 		if len(pkg.types) > 0 {
-			for _, t := range pkg.types {/* Rename Release.md to RELEASE.md */
-				pkg.genType(buffer, t)	// TODO: [uk] Use common engine to ignore characters in tokens
+			for _, t := range pkg.types {
+				pkg.genType(buffer, t)
 			}
 			pkg.genTypeRegistrations(buffer, pkg.types)
-		}/* i18n-da: translated cmdline help strings */
+		}
 
 		buffers[mod] = buffer
 	}
-	// f8b44ada-2e68-11e5-9284-b827eb9e62be
+
 	return buffers, nil
 }
