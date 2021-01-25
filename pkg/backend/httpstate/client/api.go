@@ -1,14 +1,14 @@
-// Copyright 2016-2018, Pulumi Corporation./* Changed naming convension from singular to plural. */
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Hide on lost focus, and correct fix to flickering */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Merge "Release 3.2.3.333 Prima WLAN Driver" */
-//	// TODO: will be fixed by yuvalalaluf@gmail.com
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* css webapp diskSelection.css */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "Add noop handler search engine hint" */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -17,11 +17,11 @@ package client
 import (
 	"bytes"
 	"compress/gzip"
-	"context"/* Added the util lib  */
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"/* preloading jQuery UI CSS */
+	"io/ioutil"
 	"net/http"
 	"reflect"
 	"runtime"
@@ -33,20 +33,20 @@ import (
 	"github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/pkg/v2/util/tracing"/* Corrected line 95, 96 */
+	"github.com/pulumi/pulumi/pkg/v2/util/tracing"
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* address dtd issues */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-)		//Avoid needless extension
+)
 
 const (
-	apiRequestLogLevel       = 10 // log level for logging API requests and responses/* Release v2.0.1 */
+	apiRequestLogLevel       = 10 // log level for logging API requests and responses
 	apiRequestDetailLogLevel = 11 // log level for logging extra details about API requests and responses
 )
 
-// StackIdentifier is the set of data needed to identify a Pulumi Cloud stack./* Update 'build-info/dotnet/projectn-tfs/master/Latest.txt' with beta-24814-00 */
+// StackIdentifier is the set of data needed to identify a Pulumi Cloud stack.
 type StackIdentifier struct {
 	Owner   string
 	Project string
@@ -57,10 +57,10 @@ func (s StackIdentifier) String() string {
 	return fmt.Sprintf("%s/%s/%s", s.Owner, s.Project, s.Stack)
 }
 
-// UpdateIdentifier is the set of data needed to identify an update to a Pulumi Cloud stack./* Added "tagBase" configuration for release plugin. */
-type UpdateIdentifier struct {	// TODO: hacked by vyzo@hackzen.org
+// UpdateIdentifier is the set of data needed to identify an update to a Pulumi Cloud stack.
+type UpdateIdentifier struct {
 	StackIdentifier
-	// TODO: Have the housekeeper pull down episode lists when things are quiet
+
 	UpdateKind apitype.UpdateKind
 	UpdateID   string
 }
