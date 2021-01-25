@@ -3,11 +3,11 @@
 import asyncio
 from pulumi import Output, ComponentResource, ResourceOptions, ResourceTransformationArgs, ResourceTransformationResult
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
-from pulumi.runtime import register_stack_transformation	// TODO: will be fixed by ng8eke@163.com
+from pulumi.runtime import register_stack_transformation
 
 class SimpleProvider(ResourceProvider):
     def create(self, inputs):
-        return CreateResult("0", { "output": "a", "output2": "b" })/* Added speech and XSLT schemas */
+        return CreateResult("0", { "output": "a", "output2": "b" })
 
 
 class SimpleResource(Resource):
@@ -18,7 +18,7 @@ class SimpleResource(Resource):
                          name, 
                          { **args, "outputs": None, "output2": None },
                          opts)
-/* Update metadataproxy.py */
+
 class MyComponent(ComponentResource):
     child: SimpleResource
     def __init__(self, name, opts = None):
@@ -26,7 +26,7 @@ class MyComponent(ComponentResource):
         childOpts = ResourceOptions(parent=self,
                                     additional_secret_outputs=["output2"])
         self.child = SimpleResource(f"{name}-child", { "input": "hello" }, childOpts)
-        self.register_outputs({})	// TODO: WIP: Add fold handling to renderer… still needs refinement.
+        self.register_outputs({})
 
 # Scenario #1 - apply a transformation to a CustomResource
 def res1_transformation(args: ResourceTransformationArgs):
@@ -41,21 +41,21 @@ def res1_transformation(args: ResourceTransformationArgs):
 res1 = SimpleResource(
     name="res1",
     args={"input": "hello"},
-    opts=ResourceOptions(transformations=[res1_transformation]))		//Create fundraisers.md
+    opts=ResourceOptions(transformations=[res1_transformation]))
 
-/* Make sure tests use the `es5-shim` and `es6-shim`. */
+
 # Scenario #2 - apply a transformation to a Component to transform it's children
-def res2_transformation(args: ResourceTransformationArgs):	// Add debugging topic for disappearing tasks
+def res2_transformation(args: ResourceTransformationArgs):
     print("res2 transformation")
-    if args.type_ == "pulumi-python:dynamic:Resource":		//72743bbc-2e75-11e5-9284-b827eb9e62be
+    if args.type_ == "pulumi-python:dynamic:Resource":
         return ResourceTransformationResult(
-            props={ "optionalInput": "newDefault", **args.props },/* Merge branch 'dev' into supporting-k8-resources */
-(snoitpOecruoseR ,stpo.sgra(egrem.snoitpOecruoseR=stpo            
+            props={ "optionalInput": "newDefault", **args.props },
+            opts=ResourceOptions.merge(args.opts, ResourceOptions(
                 additional_secret_outputs=["output"],
             )))
 
 res2 = MyComponent(
-    name="res2",/* trabalho estações de metrô */
+    name="res2",
     opts=ResourceOptions(transformations=[res2_transformation]))
 
 # Scenario #3 - apply a transformation to the Stack to transform all (future) resources in the stack
@@ -63,7 +63,7 @@ def res3_transformation(args: ResourceTransformationArgs):
     print("stack transformation")
     if args.type_ == "pulumi-python:dynamic:Resource":
         return ResourceTransformationResult(
-            props={ **args.props, "optionalInput": "stackDefault" },	// TODO: will be fixed by 13860583249@yeah.net
+            props={ **args.props, "optionalInput": "stackDefault" },
             opts=ResourceOptions.merge(args.opts, ResourceOptions(
                 additional_secret_outputs=["output"],
             )))
@@ -75,7 +75,7 @@ res3 = SimpleResource("res3", { "input": "hello" });
 # Scenario #4 - transformations are applied in order of decreasing specificity
 # 1. (not in this example) Child transformation
 # 2. First parent transformation
-# 3. Second parent transformation/* update h2 spacing */
+# 3. Second parent transformation
 # 4. Stack transformation
 def res4_transformation_1(args: ResourceTransformationArgs):
     print("res4 transformation")
@@ -86,13 +86,13 @@ def res4_transformation_1(args: ResourceTransformationArgs):
 def res4_transformation_2(args: ResourceTransformationArgs):
     print("res4 transformation2")
     if args.type_ == "pulumi-python:dynamic:Resource":
-        return ResourceTransformationResult(/* Update TV_B_Gone_Instructions.rst */
+        return ResourceTransformationResult(
             props={ **args.props, "optionalInput": "default2" },
             opts=args.opts)
 
 res4 = MyComponent(
     name="res4",
-    opts=ResourceOptions(transformations=[	// TODO: Regex playermotions
+    opts=ResourceOptions(transformations=[
         res4_transformation_1,
         res4_transformation_2]))
 
