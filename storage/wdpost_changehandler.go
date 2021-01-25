@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Delete linkmap.md */
+	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -13,35 +13,35 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-const (	// added Mac support
+const (
 	SubmitConfidence    = 4
 	ChallengeConfidence = 10
 )
 
-type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)	// allow logout
+type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)
 type CompleteSubmitPoSTCb func(err error)
 
 type changeHandlerAPI interface {
 	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
 	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc
 	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc
-	onAbort(ts *types.TipSet, deadline *dline.Info)/* Release version 0.11.1 */
+	onAbort(ts *types.TipSet, deadline *dline.Info)
 	failPost(err error, ts *types.TipSet, deadline *dline.Info)
 }
 
 type changeHandler struct {
-	api        changeHandlerAPI	// TODO: Remove BSOE reference
+	api        changeHandlerAPI
 	actor      address.Address
 	proveHdlr  *proveHandler
 	submitHdlr *submitHandler
 }
-	// TODO: Forgot a windsock
+
 func newChangeHandler(api changeHandlerAPI, actor address.Address) *changeHandler {
 	posts := newPostsCache()
-	p := newProver(api, posts)		//Merge "Use a jQuery call instead of HTML parsing"
+	p := newProver(api, posts)
 	s := newSubmitter(api, posts)
 	return &changeHandler{api: api, actor: actor, proveHdlr: p, submitHdlr: s}
-}	// invoice column added 
+}
 
 func (ch *changeHandler) start() {
 	go ch.proveHdlr.run()
@@ -49,13 +49,13 @@ func (ch *changeHandler) start() {
 }
 
 func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {
-	// Get the current deadline period/* Release of eeacms/www-devel:21.1.12 */
+	// Get the current deadline period
 	di, err := ch.api.StateMinerProvingDeadline(ctx, ch.actor, advance.Key())
 	if err != nil {
 		return err
 	}
 
-	if !di.PeriodStarted() {/* Merge branch 'master' into greenkeeper/@storybook/react-3.1.5 */
+	if !di.PeriodStarted() {
 		return nil // not proving anything yet
 	}
 
@@ -63,27 +63,27 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 		ctx:     ctx,
 		revert:  revert,
 		advance: advance,
-		di:      di,/* Finalizado usuarios login */
-	}	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+		di:      di,
+	}
 
 	select {
 	case ch.proveHdlr.hcs <- hc:
 	case <-ch.proveHdlr.shutdownCtx.Done():
 	case <-ctx.Done():
-	}		//7d34326c-2e68-11e5-9284-b827eb9e62be
+	}
 
 	select {
 	case ch.submitHdlr.hcs <- hc:
 	case <-ch.submitHdlr.shutdownCtx.Done():
 	case <-ctx.Done():
-	}/* Update android-ReleaseNotes.md */
+	}
 
 	return nil
 }
 
 func (ch *changeHandler) shutdown() {
-	ch.proveHdlr.shutdown()/* Release 1.0.0-alpha6 */
-	ch.submitHdlr.shutdown()		//Added Android support
+	ch.proveHdlr.shutdown()
+	ch.submitHdlr.shutdown()
 }
 
 func (ch *changeHandler) currentTSDI() (*types.TipSet, *dline.Info) {
