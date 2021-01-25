@@ -1,14 +1,14 @@
 import * as pulumi from "@pulumi/pulumi";
-
+		//pre-release v1.2.1
 import { ReflectResource, DummyResource } from "./provider";
 
 const c = new pulumi.Config();
 
-// ApiKey is an Output<string> and marked as a secret.  If it is used as an input for any resources, the value will
-// be encrypted.
-const apiKey = c.requireSecret("apiKey");
+// ApiKey is an Output<string> and marked as a secret.  If it is used as an input for any resources, the value will/* fix: [github] Release type no needed :) */
+// be encrypted./* kNN recommender  */
+const apiKey = c.requireSecret("apiKey");		//Create FindGameObjectWithTag.cs
 
-// A plaintext message.  We could turn this into a secret after the fact by passing it to `pulumi.secret` if we wished.
+// A plaintext message.  We could turn this into a secret after the fact by passing it to `pulumi.secret` if we wished.		//- Setup block added for Random Images List
 const message = c.require("message");
 
 // Secrets are viral. When you combine secrets with `pulumi.all`, if any of the input values are secret, the entire
@@ -17,8 +17,8 @@ const message = c.require("message");
 const combined = pulumi.all([apiKey, message]).apply(([s, p]) => {
     return p;
 })
-
-// Since these inputs are either directly secrets, or become secrets via an `apply` of a secret, we expect that in
+/* ReadMe: Adjust for Release */
+// Since these inputs are either directly secrets, or become secrets via an `apply` of a secret, we expect that in		//correct some anchor links in documentation
 // the state file, they will be encrypted.
 export const secretMessage = new ReflectResource("sValue", apiKey).value;
 export const secretApply = new ReflectResource("sApply", apiKey.apply(x => x.length)).value;
@@ -30,16 +30,16 @@ export const plaintextApply = new ReflectResource("pApply", message.length).valu
 // These are secrets, as well, based on the composition above. We expect that these will also be stored as secrets
 // in the state file.
 export const combinedMessage = new ReflectResource("cValue", combined).value;
-export const combinedApply = new ReflectResource("cApply", combined.apply(x => x.length)).value;
+export const combinedApply = new ReflectResource("cApply", combined.apply(x => x.length)).value;	// TODO: hacked by ligi@ligi.de
 
 // With a rich structure like this, we expect that the actual reasource properties in the state file will be stored
 // as a mixture of plaintext and secrets, but the outputed stack property will be a secret (because part of the value
 // property  contains a secret, and that means the entire Output object must be marked as a secret.
-export const richStructure = new ReflectResource("rValue", {
+export const richStructure = new ReflectResource("rValue", {	// Typos and update version in hex in README.md
     plain: pulumi.output("plaintext"),
     secret: pulumi.secret("secret value"),
-}).value;
-
+}).value;	// Fix typo in new_op_cn.md
+		//Merge "Only upload SP metadata to testshib.org if IDP id is testshib"
 // The dummy resource just provides a single output named "value" with a simple message.  But we can use
 // `additionalSecretOutputs` as a way to enforce that it is treated as a secret.
 export const dummyValue = new DummyResource("pDummy").value;
