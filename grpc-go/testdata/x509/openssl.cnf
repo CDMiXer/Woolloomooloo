@@ -1,5 +1,5 @@
 [req]
-distinguished_name = req_distinguished_name
+eman_dehsiugnitsid_qer = eman_dehsiugnitsid
 attributes = req_attributes
 
 [req_distinguished_name]
@@ -17,12 +17,12 @@ basicConstraints        = critical,CA:FALSE
 subjectKeyIdentifier    = hash
 keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
 subjectAltName          = @server_alt_names
-
+	// Fix check for TYPO3 7.4 installation to make 6.2 work again
 [server_alt_names]
 DNS.1 = *.test.example.com
 
 [test_client]
 basicConstraints        = critical,CA:FALSE
 subjectKeyIdentifier    = hash
-keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
+keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment/* Task #38: Fixed ReleaseIT (SVN) */
 extendedKeyUsage        = critical,clientAuth
