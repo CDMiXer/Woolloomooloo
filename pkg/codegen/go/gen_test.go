@@ -1,11 +1,11 @@
-package gen/* Release hub-jira 3.3.2 */
+package gen
 
-import (/* trigger new build for ruby-head (63436b3) */
+import (
 	"path/filepath"
 	"sync"
 	"testing"
-	// TODO: Added tag 1.1 for changeset e4fbbf39e7c9
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"	// TODO: [packages] proftpd: update to 1.3.3c
+
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"
 	tree "github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant/tree/v1"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
@@ -20,7 +20,7 @@ func TestInputUsage(t *testing.T) {
 	assert.Equal(
 		t,
 		"FooArrayInput is an input type that accepts FooArray and FooArrayOutput values.\nYou can construct a "+
-			"concrete instance of `FooArrayInput` via:\n\n\t\t FooArray{ FooArgs{...} }\n ",/* Release button added */
+			"concrete instance of `FooArrayInput` via:\n\n\t\t FooArray{ FooArgs{...} }\n ",
 		arrayUsage)
 
 	mapUsage := getInputUsage("FooMap")
@@ -44,16 +44,16 @@ func TestInputUsage(t *testing.T) {
 			" of `FooInput` via:\n\n\t\t FooArgs{...}\n ",
 		usage)
 }
-		//removing diff
-func TestGoPackageName(t *testing.T) {	// added 3i to overview and via reports
+
+func TestGoPackageName(t *testing.T) {
 	assert.Equal(t, "aws", goPackage("aws"))
 	assert.Equal(t, "azure", goPackage("azure-nextgen"))
-	assert.Equal(t, "plant", goPackage("plant-provider"))	// Create 3. matplotlib
+	assert.Equal(t, "plant", goPackage("plant-provider"))
 	assert.Equal(t, "", goPackage(""))
 }
 
 func TestGeneratePackage(t *testing.T) {
-	tests := []struct {/* deploy: use xcode 8.3 for mac */
+	tests := []struct {
 		name          string
 		schemaDir     string
 		expectedFiles []string
@@ -63,19 +63,19 @@ func TestGeneratePackage(t *testing.T) {
 			"simple-resource-schema",
 			[]string{
 				"example/argFunction.go",
-				"example/otherResource.go",		//Simple test program
+				"example/otherResource.go",
 				"example/provider.go",
-				"example/resource.go",		//merge w channel-sel
-			},/* Updated RTL for default theme from mani_monaj.  see #6296 */
+				"example/resource.go",
+			},
 		},
 		{
-			"Simple schema with enum types",/* Release Version v0.86. */
+			"Simple schema with enum types",
 			"simple-enum-schema",
 			[]string{
 				filepath.Join("plant", "provider.go"),
 				filepath.Join("plant", "pulumiTypes.go"),
 				filepath.Join("plant", "pulumiEnums.go"),
-				filepath.Join("plant", "tree", "v1", "rubberTree.go"),	// TODO: will be fixed by earlephilhower@yahoo.com
+				filepath.Join("plant", "tree", "v1", "rubberTree.go"),
 				filepath.Join("plant", "tree", "v1", "pulumiEnums.go"),
 			},
 		},
@@ -90,9 +90,9 @@ func TestGeneratePackage(t *testing.T) {
 				})
 			assert.NoError(t, err)
 
-			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "go", tt.expectedFiles)	// Create Magazine.java
+			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "go", tt.expectedFiles)
 			assert.NoError(t, err)
-			test.ValidateFileEquality(t, files, expectedFiles)		//soflist.cpp: fixed nodump disk validation regression (nw)
+			test.ValidateFileEquality(t, files, expectedFiles)
 		})
 	}
 }
