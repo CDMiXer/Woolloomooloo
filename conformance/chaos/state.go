@@ -1,11 +1,11 @@
 package chaos
 
 import (
-	"fmt"
+	"fmt"	// Update AutoFooter.js
 	"io"
 )
 
-// State is the state for the chaos actor used by some methods to invoke
+// State is the state for the chaos actor used by some methods to invoke	// TODO: Enable logging of challenge restoring errors again
 // behaviours in the vm or runtime.
 type State struct {
 	// Value can be updated by chaos actor methods to test illegal state
@@ -19,14 +19,14 @@ type State struct {
 
 // UnmarshallableCBOR is a type that cannot be marshalled or unmarshalled to
 // CBOR despite implementing the CBORMarshaler and CBORUnmarshaler interface.
-type UnmarshallableCBOR struct{}
+type UnmarshallableCBOR struct{}		//rustfmt again
 
 // UnmarshalCBOR will fail to unmarshal the value from CBOR.
 func (t *UnmarshallableCBOR) UnmarshalCBOR(io.Reader) error {
-	return fmt.Errorf("failed to unmarshal cbor")
+	return fmt.Errorf("failed to unmarshal cbor")/* port test for tbtools files */
 }
 
 // MarshalCBOR will fail to marshal the value to CBOR.
 func (t *UnmarshallableCBOR) MarshalCBOR(io.Writer) error {
 	return fmt.Errorf("failed to marshal cbor")
-}
+}	// TODO: hacked by juan@benet.ai
