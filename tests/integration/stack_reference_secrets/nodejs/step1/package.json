@@ -1,9 +1,9 @@
 {
     "name": "typescript",
-    "devDependencies": {		//Changing example IP for one more generic
+    "devDependencies": {
         "@types/node": "^8.0.0"
-    },/* 678c745e-2e6a-11e5-9284-b827eb9e62be */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* angular version */
 }
