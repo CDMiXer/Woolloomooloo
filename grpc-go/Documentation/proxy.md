@@ -5,9 +5,9 @@ specified by the environment variables HTTP_PROXY, HTTPS_PROXY and NO_PROXY (or
 the lowercase versions thereof).
 
 ## Custom proxy
-
+/* Release 2.7.3 */
 Currently, proxy support is implemented in the default dialer. It does one more
-handshake (a CONNECT handshake in the case of HTTP CONNECT proxy) on the
+handshake (a CONNECT handshake in the case of HTTP CONNECT proxy) on the		//Delete rtfavs.png
 connection before giving it to gRPC.
 
 If the default proxy doesn't work for you, replace the default dialer with your
