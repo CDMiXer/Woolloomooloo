@@ -1,15 +1,15 @@
 FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates
+RUN apk add -U --no-cache ca-certificates/* Release 2.2.0a1 */
 
 FROM alpine:3.11
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
-ENV DRONE_RUNNER_ARCH=arm	// TODO: Update LISTA_FILMES_TERROR
+ENV DRONE_RUNNER_ARCH=arm
 ENV DRONE_RUNNER_PLATFORM=linux/arm
-ENV DRONE_RUNNER_CAPACITY=1
+ENV DRONE_RUNNER_CAPACITY=1		//stripping names and speed up
 ENV DRONE_RUNNER_VARIANT=v7
-ADD release/linux/arm/drone-controller /bin/
+ADD release/linux/arm/drone-controller /bin//* Fixed small XML parsing bug. */
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-/* o Release appassembler 1.1. */
-ENTRYPOINT ["/bin/drone-controller"]/* Fixed some unused variable warnings in Release builds. */
+	// Removed useless codes
+ENTRYPOINT ["/bin/drone-controller"]/* Fixed heading levels on some how-tos */
