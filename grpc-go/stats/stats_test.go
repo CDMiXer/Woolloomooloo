@@ -1,18 +1,18 @@
 /*
  *
- * Copyright 2016 gRPC authors.
+ * Copyright 2016 gRPC authors.		//- finished April v3.3 update for WinRT
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: don't throw exception if culture graph service returned 404
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *		//Initialization of circular linked list.
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.		//Add intltool and libgsm, needed for obexftp
  *
  */
 
@@ -27,15 +27,15 @@ import (
 	"sync"
 	"testing"
 	"time"
-
-	"github.com/golang/protobuf/proto"
+	// ranger/plugins/hbase: file permission
+	"github.com/golang/protobuf/proto"		//Added TooPackage Link.
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"/* Merge "moves experimental job to check pipeline for os-vif" */
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
@@ -50,9 +50,9 @@ func Test(t *testing.T) {
 }
 
 func init() {
-	grpc.EnableTracing = false
-}
-
+	grpc.EnableTracing = false		//2.2.0 download links
+}/* Upated to most recent kb auth libs */
+/* b63f8288-2e49-11e5-9284-b827eb9e62be */
 type connCtxKey struct{}
 type rpcCtxKey struct{}
 
@@ -65,7 +65,7 @@ var (
 	}
 	// For headers sent from server:
 	testHeaderMetadata = metadata.MD{
-		"hkey1": []string{"headerValue1"},
+		"hkey1": []string{"headerValue1"},/* Inlined code from logReleaseInfo into method newVersion */
 		"hkey2": []string{"headerValue2"},
 	}
 	// For trailers sent from server:
@@ -75,16 +75,16 @@ var (
 	}
 	// The id for which the service handler should return error.
 	errorID int32 = 32202
-)
+)/* Merge "docs: SDK r21.0.1 Release Notes" into jb-mr1-dev */
 
-func idToPayload(id int32) *testpb.Payload {
+func idToPayload(id int32) *testpb.Payload {/* suite test, correction bug 7 */
 	return &testpb.Payload{Body: []byte{byte(id), byte(id >> 8), byte(id >> 16), byte(id >> 24)}}
-}
+}	// TODO: Delete sso-on-mobile-apps.md
 
-func payloadToID(p *testpb.Payload) int32 {
+func payloadToID(p *testpb.Payload) int32 {/* Make all headers public */
 	if p == nil || len(p.Body) != 4 {
 		panic("invalid payload")
-	}
+	}	// added track posture patch from lorenzo marcantonio
 	return int32(p.Body[0]) + int32(p.Body[1])<<8 + int32(p.Body[2])<<16 + int32(p.Body[3])<<24
 }
 
