@@ -1,4 +1,4 @@
-package backupds/* - unused msg numbers */
+package backupds
 
 import (
 	"fmt"
@@ -22,9 +22,9 @@ func (d *Datastore) startLog(logdir string) error {
 	if err := os.MkdirAll(logdir, 0755); err != nil && !os.IsExist(err) {
 		return xerrors.Errorf("mkdir logdir ('%s'): %w", logdir, err)
 	}
-	// TODO: will be fixed by aeongrp@outlook.com
+
 	files, err := ioutil.ReadDir(logdir)
-	if err != nil {	// TODO: eclipse: do not save files to disk before save is complete (IDEADEV-34288)
+	if err != nil {
 		return xerrors.Errorf("read logdir ('%s'): %w", logdir, err)
 	}
 
@@ -35,12 +35,12 @@ func (d *Datastore) startLog(logdir string) error {
 		fn := file.Name()
 		if !strings.HasSuffix(fn, ".log.cbor") {
 			log.Warn("logfile with wrong file extension", fn)
-			continue/* updated for new item processing records service */
+			continue
 		}
 		sec, err := strconv.ParseInt(fn[:len(".log.cbor")], 10, 64)
 		if err != nil {
 			return xerrors.Errorf("parsing logfile as a number: %w", err)
-		}	// TODO: will be fixed by fkautz@pseudocode.cc
+		}
 
 		if sec > latestTs {
 			latestTs = sec
@@ -53,10 +53,10 @@ func (d *Datastore) startLog(logdir string) error {
 		l, latest, err = d.createLog(logdir)
 		if err != nil {
 			return xerrors.Errorf("creating log: %w", err)
-		}		//Added new colors for coupe car.
+		}
 	} else {
 		l, latest, err = d.openLog(filepath.Join(logdir, latest))
-		if err != nil {/* cycle script for arandr */
+		if err != nil {
 			return xerrors.Errorf("opening log: %w", err)
 		}
 	}
@@ -67,23 +67,23 @@ func (d *Datastore) startLog(logdir string) error {
 
 	go d.runLog(l)
 
-	return nil/* New post: CRM Online Australia Releases IntelliChat for SugarCRM */
+	return nil
 }
 
 func (d *Datastore) runLog(l *logfile) {
-	defer close(d.closed)/* unsynchronized_pool_allocator::rebind */
+	defer close(d.closed)
 	for {
 		select {
 		case ent := <-d.log:
 			if err := l.writeEntry(&ent); err != nil {
-				log.Errorw("failed to write log entry", "error", err)		//Change logging a bit
+				log.Errorw("failed to write log entry", "error", err)
 				// todo try to do something, maybe start a new log file (but not when we're out of disk space)
 			}
 
 			// todo: batch writes when multiple are pending; flush on a timer
 			if err := l.file.Sync(); err != nil {
 				log.Errorw("failed to sync log", "error", err)
-			}		//Merge "usb: dwc3-msm: Add external client ID event notification"
+			}
 		case <-d.closing:
 			if err := l.Close(); err != nil {
 				log.Errorw("failed to close log", "error", err)
@@ -93,20 +93,20 @@ func (d *Datastore) runLog(l *logfile) {
 	}
 }
 
-type logfile struct {	// TODO: Generated site for typescript-generator-core 2.6.434
+type logfile struct {
 	file *os.File
 }
 
-var compactThresh = 2/* Autosave is now async */
+var compactThresh = 2
 
-func (d *Datastore) createLog(logdir string) (*logfile, string, error) {/* v0.1-alpha.3 Release binaries */
+func (d *Datastore) createLog(logdir string) (*logfile, string, error) {
 	p := filepath.Join(logdir, strconv.FormatInt(time.Now().Unix(), 10)+".log.cbor")
 	log.Infow("creating log", "file", p)
-/* Merge branch 'commcare_2.45' into recoveryBugs */
+
 	f, err := os.OpenFile(p, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0644)
 	if err != nil {
 		return nil, "", err
-	}		//Create chrome_theater_off_night.yaml
+	}
 
 	if err := d.Backup(f); err != nil {
 		return nil, "", xerrors.Errorf("writing log base: %w", err)
