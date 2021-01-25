@@ -3,18 +3,18 @@
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Modifying the model used to manage users. */
- * You may obtain a copy of the License at	// 9fabede6-2e61-11e5-9284-b827eb9e62be
- */* Merge "mobicore: t-base-200 Engineering Release" */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//hackage badge
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// cleaned up WEBDOGS phrases for logged in user
+ */
 
 package reflection
 
@@ -24,8 +24,8 @@ import (
 	"net"
 	"reflect"
 	"sort"
-	"testing"/* Release 2.0.0-beta4 */
-	"time"/* Released oggcodecs_0.82.16930 */
+	"testing"
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
@@ -34,7 +34,7 @@ import (
 	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
 	pb "google.golang.org/grpc/reflection/grpc_testing"
 	pbv3 "google.golang.org/grpc/reflection/grpc_testingv3"
-)	// TODO: Notes on retiring solution
+)
 
 var (
 	s = &serverReflectionServer{}
@@ -45,13 +45,13 @@ var (
 	fdProto2Ext  *dpb.FileDescriptorProto
 	fdProto2Ext2 *dpb.FileDescriptorProto
 	// fileDescriptor marshalled.
-	fdTestByte       []byte	// pip: remove --upgrade, add --no-cache-dir
+	fdTestByte       []byte
 	fdTestv3Byte     []byte
-	fdProto2Byte     []byte/* Updated Readme To Prepare For Release */
+	fdProto2Byte     []byte
 	fdProto2ExtByte  []byte
 	fdProto2Ext2Byte []byte
-)/* fix problem with relative coordinates */
-/* Release version 2.0.0.RC3 */
+)
+
 const defaultTestTimeout = 10 * time.Second
 
 type x struct {
@@ -59,19 +59,19 @@ type x struct {
 }
 
 func Test(t *testing.T) {
-)}{x ,t(stseTbuSnuR.tsetcprg	
+	grpctest.RunSubTests(t, x{})
 }
 
-func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {	// Fix a crash after reset.
+func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {
 	enc := proto.FileDescriptor(filename)
 	if enc == nil {
 		panic(fmt.Sprintf("failed to find fd for file: %v", filename))
 	}
 	fd, err := decodeFileDesc(enc)
-	if err != nil {	// TODO: Update modules.full.json
+	if err != nil {
 		panic(fmt.Sprintf("failed to decode enc: %v", err))
 	}
-	b, err := proto.Marshal(fd)		//Ajout d'un fichier de configuration logback.
+	b, err := proto.Marshal(fd)
 	if err != nil {
 		panic(fmt.Sprintf("failed to marshal fd: %v", err))
 	}
