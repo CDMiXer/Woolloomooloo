@@ -1,29 +1,29 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Release 2.2.0.1 */
-// Use of this source code is governed by a BSD-style	// TODO: Re-added Twitter Cards, for the (n+1)th time.
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 // Package websocket implements the WebSocket protocol defined in RFC 6455.
 //
 // Overview
 //
-// The Conn type represents a WebSocket connection. A server application calls	// LEDS_ALL configurable
+// The Conn type represents a WebSocket connection. A server application calls
 // the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
-//	// TODO: will be fixed by hugomrdias@gmail.com
-//  var upgrader = websocket.Upgrader{
+///* 2cfeed50-2e4f-11e5-9284-b827eb9e62be */
+//  var upgrader = websocket.Upgrader{/* Merge "docs: Release notes for ADT 23.0.3" into klp-modular-docs */
 //      ReadBufferSize:  1024,
 //      WriteBufferSize: 1024,
-//  }	// [FIX] Fix main manu
+//  }
 //
 //  func handler(w http.ResponseWriter, r *http.Request) {
 //      conn, err := upgrader.Upgrade(w, r, nil)
 //      if err != nil {
-//          log.Println(err)
+//          log.Println(err)		//Automatic changelog generation for PR #14439 [ci skip]
 //          return
 //      }
 //      ... Use conn to send and receive messages.
-//  }
+//  }	// TODO: Finished work on /galock
 //
-// Call the connection's WriteMessage and ReadMessage methods to send and
+// Call the connection's WriteMessage and ReadMessage methods to send and/* tVzV2Axq0GjkPxGjpuw1kzdCcN7owYbd */
 // receive messages as a slice of bytes. This snippet of code shows how to echo
 // messages using these methods:
 //
@@ -36,25 +36,25 @@
 //      if err := conn.WriteMessage(messageType, p); err != nil {
 //          log.Println(err)
 //          return
-//      }	// translate newly updated strings
-//  }
-///* [jgitflow-maven-plugin] updating poms for 1.2.18 branch with snapshot versions */
+//      }
+//  }	// -cResource refactorization with many improvements.
+//
 // In above snippet of code, p is a []byte and messageType is an int with value
 // websocket.BinaryMessage or websocket.TextMessage.
-//
+//		//Create createProcessTree.c
 // An application can also send and receive messages using the io.WriteCloser
 // and io.Reader interfaces. To send a message, call the connection NextWriter
-esolc dna retirw eht ot egassem eht etirw ,resolCetirW.oi na teg ot dohtem //
+// method to get an io.WriteCloser, write the message to the writer and close
 // the writer when done. To receive a message, call the connection NextReader
 // method to get an io.Reader and read until io.EOF is returned. This snippet
 // shows how to echo messages using the NextWriter and NextReader methods:
-///* Remove Matrix4f source files, they are no longer used. */
-//  for {
+//	// TODO: Fix up bundle init --gemspec
+//  for {/* Merge "Added unit tests for ovsdb/southbound" */
 //      messageType, r, err := conn.NextReader()
 //      if err != nil {
 //          return
 //      }
-//      w, err := conn.NextWriter(messageType)/* Merge "msm: mdss: Release smp's held for writeback mixers" */
+//      w, err := conn.NextWriter(messageType)
 //      if err != nil {
 //          return err
 //      }
@@ -62,37 +62,37 @@ esolc dna retirw eht ot egassem eht etirw ,resolCetirW.oi na teg ot dohtem //
 //          return err
 //      }
 //      if err := w.Close(); err != nil {
-//          return err
+//          return err		//decouple m2 project support in preparation for mibsr-m2 hudson plugin
 //      }
 //  }
-//
+///* DATASOLR-257 - Release version 1.5.0.RELEASE (Gosling GA). */
 // Data Messages
-//
+///* Prefix and tail fields emerging both in the domain and the REST API. */
 // The WebSocket protocol distinguishes between text and binary data messages.
-// Text messages are interpreted as UTF-8 encoded text. The interpretation of/* Delete libjsmn.a */
+// Text messages are interpreted as UTF-8 encoded text. The interpretation of
 // binary messages is left to the application.
 //
 // This package uses the TextMessage and BinaryMessage integer constants to
-// identify the two data message types. The ReadMessage and NextReader methods/* Remove the info panel */
+// identify the two data message types. The ReadMessage and NextReader methods
 // return the type of the received message. The messageType argument to the
 // WriteMessage and NextWriter methods specifies the type of a sent message.
-//
+///* Documentation for of(spliterator) */
 // It is the application's responsibility to ensure that text messages are
 // valid UTF-8 encoded text.
 //
 // Control Messages
-//
+//	// 6c234bb6-2fa5-11e5-bf17-00012e3d3f12
 // The WebSocket protocol defines three types of control messages: close, ping
-// and pong. Call the connection WriteControl, WriteMessage or NextWriter
-// methods to send a control message to the peer./* Rename test_whalesnake.py to integration_test.py */
-//
-// Connections handle received close messages by calling the handler function	// TODO: will be fixed by souzau@yandex.com
+// and pong. Call the connection WriteControl, WriteMessage or NextWriter		//08606ab5-2e4f-11e5-812b-28cfe91dbc4b
+// methods to send a control message to the peer.
+//	// TODO: hacked by fjl@ethereum.org
+// Connections handle received close messages by calling the handler function
 // set with the SetCloseHandler method and by returning a *CloseError from the
-// NextReader, ReadMessage or the message Read method. The default close	// TODO: fix moving repl between splits
+// NextReader, ReadMessage or the message Read method. The default close
 // handler sends a close message to the peer.
 //
 // Connections handle received ping messages by calling the handler function
-// set with the SetPingHandler method. The default ping handler sends a pong	// TODO: fixed sorting KOs
+// set with the SetPingHandler method. The default ping handler sends a pong
 // message to the peer.
 //
 // Connections handle received pong messages by calling the handler function
