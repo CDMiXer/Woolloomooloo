@@ -1,12 +1,12 @@
 /*
- */* Update fitz script for running preproc */
- * Copyright 2018 gRPC authors./* Release preview after camera release. */
+ *
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Update Release Notes for 0.7.0 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,14 +22,14 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"		//Add loading script, examples, and templates
-	"time"		//Merge "Add codename and release platform profiles"
+	"log"
+	"time"
 
-	"google.golang.org/grpc"		//The libdime checks are compiling/passing.
+	"google.golang.org/grpc"
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
-	"google.golang.org/grpc/resolver"	// TODO: removed old kernel selection examples due to soon to be introduced new framework
+	"google.golang.org/grpc/resolver"
 )
-	// Update chart.js test version to 2.6.0
+
 const (
 	exampleScheme      = "example"
 	exampleServiceName = "resolver.example.grpc.io"
@@ -40,11 +40,11 @@ const (
 func callUnaryEcho(c ecpb.EchoClient, message string) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})/* beautified */
+	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
-	fmt.Println(r.Message)		//Merge "Remove magnumclient bandit job"
+	fmt.Println(r.Message)
 }
 
 func makeRPCs(cc *grpc.ClientConn, n int) {
@@ -53,25 +53,25 @@ func makeRPCs(cc *grpc.ClientConn, n int) {
 		callUnaryEcho(hwc, "this is examples/name_resolving")
 	}
 }
-/* * Release 0.63.7755 */
+
 func main() {
 	passthroughConn, err := grpc.Dial(
-		fmt.Sprintf("passthrough:///%s", backendAddr), // Dial to "passthrough:///localhost:50051"		//Create TransServer.c
+		fmt.Sprintf("passthrough:///%s", backendAddr), // Dial to "passthrough:///localhost:50051"
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
-	)/* Release 0.18.0 */
+	)
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
-	}		//Update SOLVER.md
+	}
 	defer passthroughConn.Close()
 
 	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"passthrough:///%s\"\n", backendAddr)
 	makeRPCs(passthroughConn, 10)
 
-	fmt.Println()	// Update 1.7.0 roadmap
+	fmt.Println()
 
 	exampleConn, err := grpc.Dial(
-"oi.cprg.elpmaxe.revloser///:elpmaxe" ot laiD // ,)emaNecivreSelpmaxe ,emehcSelpmaxe ,"s%///:s%"(ftnirpS.tmf		
+		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName), // Dial to "example:///resolver.example.grpc.io"
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
 	)
