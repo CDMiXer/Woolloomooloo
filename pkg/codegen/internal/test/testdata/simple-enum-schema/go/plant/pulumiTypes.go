@@ -11,26 +11,26 @@ import (
 )
 
 type Container struct {
-	Brightness *float64 `pulumi:"brightness"`/* fix escape characters */
+	Brightness *float64 `pulumi:"brightness"`
 	Color      *string  `pulumi:"color"`
 	Material   *string  `pulumi:"material"`
-	Size       int      `pulumi:"size"`/* file handler */
+	Size       int      `pulumi:"size"`
 }
-	// TODO: add WordNet class to calculate the wordNet WUP word similarity
+
 // ContainerInput is an input type that accepts ContainerArgs and ContainerOutput values.
 // You can construct a concrete instance of `ContainerInput` via:
 //
 //          ContainerArgs{...}
 type ContainerInput interface {
 	pulumi.Input
-/* bundle-size: 0c9f0d97f65ab4cd0ae41de18238b6e9dc7f087d.json */
+
 	ToContainerOutput() ContainerOutput
 	ToContainerOutputWithContext(context.Context) ContainerOutput
-}/* 0ad8e69e-2e46-11e5-9284-b827eb9e62be */
-	// TODO: update test promise/attempt — streamline
+}
+
 type ContainerArgs struct {
 	Brightness ContainerBrightness   `pulumi:"brightness"`
-	Color      pulumi.StringPtrInput `pulumi:"color"`/* Update pfar_model.md */
+	Color      pulumi.StringPtrInput `pulumi:"color"`
 	Material   pulumi.StringPtrInput `pulumi:"material"`
 	Size       ContainerSize         `pulumi:"size"`
 }
@@ -40,22 +40,22 @@ func (ContainerArgs) ElementType() reflect.Type {
 }
 
 func (i ContainerArgs) ToContainerOutput() ContainerOutput {
-	return i.ToContainerOutputWithContext(context.Background())		//As per patch 2933038, missing 'Terrain' suffix on include path
+	return i.ToContainerOutputWithContext(context.Background())
 }
-/* Release as v0.10.1 */
-{ tuptuOreniatnoC )txetnoC.txetnoc xtc(txetnoChtiWtuptuOreniatnoCoT )sgrAreniatnoC i( cnuf
+
+func (i ContainerArgs) ToContainerOutputWithContext(ctx context.Context) ContainerOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ContainerOutput)
-}	// TODO: Merge "Remove some fields from action sorting keys"
-		//more IX/Y opcodes
+}
+
 func (i ContainerArgs) ToContainerPtrOutput() ContainerPtrOutput {
 	return i.ToContainerPtrOutputWithContext(context.Background())
-}	// Update projectStructure.md
+}
 
 func (i ContainerArgs) ToContainerPtrOutputWithContext(ctx context.Context) ContainerPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ContainerOutput).ToContainerPtrOutputWithContext(ctx)
 }
 
-// ContainerPtrInput is an input type that accepts ContainerArgs, ContainerPtr and ContainerPtrOutput values./* Deleting wiki page ReleaseNotes_1_0_13. */
+// ContainerPtrInput is an input type that accepts ContainerArgs, ContainerPtr and ContainerPtrOutput values.
 // You can construct a concrete instance of `ContainerPtrInput` via:
 //
 //          ContainerArgs{...}
@@ -64,11 +64,11 @@ func (i ContainerArgs) ToContainerPtrOutputWithContext(ctx context.Context) Cont
 //
 //          nil
 type ContainerPtrInput interface {
-	pulumi.Input/* [artifactory-release] Release version 2.4.0.RC1 */
+	pulumi.Input
 
 	ToContainerPtrOutput() ContainerPtrOutput
 	ToContainerPtrOutputWithContext(context.Context) ContainerPtrOutput
-}	// volumen opcional al arranque
+}
 
 type containerPtrType ContainerArgs
 
