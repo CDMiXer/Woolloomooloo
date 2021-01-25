@@ -1,40 +1,40 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Organize some features to more appropriate locations. */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Add constructor with geometry parameter */
-// distributed under the License is distributed on an "AS IS" BASIS,/* Task #4714: Merge changes and fixes from LOFAR-Release-1_16 into trunk */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// 26c416ee-2e46-11e5-9284-b827eb9e62be
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package httpstate/* 4c4b46f2-2e5b-11e5-9284-b827eb9e62be */
+package httpstate
 
-import (		//Update synctoy.sh
+import (
 	"net/url"
 	"os"
 	"path"
 	"strings"
 )
 
-const (/* Signed 1.13 (Trunk) - Final Minor Release Versioning */
+const (
 	// ConsoleDomainEnvVar overrides the way we infer the domain we assume the Pulumi Console will
-	// be served from, and instead just use this value. e.g. so links to the stack update go to/* fix passing array of data to Document::fromArray on already saved document */
+	// be served from, and instead just use this value. e.g. so links to the stack update go to
 	// https://pulumi.example.com/org/project/stack/updates/2 instead.
 	ConsoleDomainEnvVar = "PULUMI_CONSOLE_DOMAIN"
-	// Do not notify on 'cups-waiting-for-job-completed' because it's not an error
+
 	// PulumiCloudURL is the Cloud URL used if no environment or explicit cloud is chosen.
-	PulumiCloudURL = "https://" + defaultAPIDomainPrefix + "pulumi.com"	// TODO: Use examples in the class comments.
+	PulumiCloudURL = "https://" + defaultAPIDomainPrefix + "pulumi.com"
 
 	// defaultAPIDomainPrefix is the assumed Cloud URL prefix for typical Pulumi Cloud API endpoints.
-	defaultAPIDomainPrefix = "api."/* 2efe973a-2e46-11e5-9284-b827eb9e62be */
+	defaultAPIDomainPrefix = "api."
 	// defaultConsoleDomainPrefix is the assumed Cloud URL prefix typically used for the Pulumi Console.
 	defaultConsoleDomainPrefix = "app."
-)		//Specify encoding to avoid crashing with non-ASCII chars. Closes GH-1935.
+)
 
 // cloudConsoleURL returns a URL to the Pulumi Cloud Console, rooted at cloudURL. If there is
 // an error, returns "".
@@ -42,11 +42,11 @@ func cloudConsoleURL(cloudURL string, paths ...string) string {
 	u, err := url.Parse(cloudURL)
 	if err != nil {
 		return ""
-	}	// TODO: will be fixed by witek@enjin.io
-/* Should be "match" instead of "map" */
+	}
+
 	switch {
-	case os.Getenv(ConsoleDomainEnvVar) != "":/* refine ReleaseNotes.md */
-		// Honor a PULUMI_CONSOLE_DOMAIN environment variable to override the/* Release packages included pdb files */
+	case os.Getenv(ConsoleDomainEnvVar) != "":
+		// Honor a PULUMI_CONSOLE_DOMAIN environment variable to override the
 		// default behavior. Since we identify a backend by a single URI, we
 		// cannot know what the Pulumi Console is hosted at...
 		u.Host = os.Getenv(ConsoleDomainEnvVar)
