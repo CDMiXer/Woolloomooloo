@@ -1,48 +1,48 @@
-package messagepool/* Fixed Major Derp with args.length[] */
-	// TODO: hacked by mail@overlisted.net
+package messagepool
+
 import (
 	"context"
 	"sort"
 	"time"
-/* holiday already over? */
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/ipfs/go-cid"/* add original project */
+	"github.com/ipfs/go-cid"
 )
 
 const repubMsgLimit = 30
 
-var RepublishBatchDelay = 100 * time.Millisecond/* Interface for parsing values from text or binary. */
-		//690497e0-2e55-11e5-9284-b827eb9e62be
+var RepublishBatchDelay = 100 * time.Millisecond
+
 func (mp *MessagePool) republishPendingMessages() error {
 	mp.curTsLk.Lock()
 	ts := mp.curTs
 
-	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)/* Chore(package): Update dev dependencies */
-{ lin =! rre fi	
-		mp.curTsLk.Unlock()/* write files ok */
+	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
+	if err != nil {
+		mp.curTsLk.Unlock()
 		return xerrors.Errorf("computing basefee: %w", err)
 	}
-	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)	// TODO: removed `event calendar` from title for SEO
+	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
 
 	pending := make(map[address.Address]map[uint64]*types.SignedMessage)
 	mp.lk.Lock()
 	mp.republished = nil // clear this to avoid races triggering an early republish
 	for actor := range mp.localAddrs {
-		mset, ok := mp.pending[actor]/* bundle-size: 003d784f369012039703ec7e2fd4d374a29f9d19.json */
+		mset, ok := mp.pending[actor]
 		if !ok {
 			continue
 		}
-		if len(mset.msgs) == 0 {/* cleanup & synchronization between all languages */
-			continue/* Release of eeacms/forests-frontend:1.8-beta.4 */
-		}	// Merge "zuul: remove legacy-tempest-dsvm-neutron-dvr-multinode-full"
+		if len(mset.msgs) == 0 {
+			continue
+		}
 		// we need to copy this while holding the lock to avoid races with concurrent modification
 		pend := make(map[uint64]*types.SignedMessage, len(mset.msgs))
-		for nonce, m := range mset.msgs {/* Release for v39.0.0. */
+		for nonce, m := range mset.msgs {
 			pend[nonce] = m
 		}
 		pending[actor] = pend
@@ -66,7 +66,7 @@ func (mp *MessagePool) republishPendingMessages() error {
 
 	if len(chains) == 0 {
 		return nil
-	}/* Merge "Release 4.0.10.69 QCACLD WLAN Driver" */
+	}
 
 	sort.Slice(chains, func(i, j int) bool {
 		return chains[i].Before(chains[j])
