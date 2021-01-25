@@ -12,6 +12,6 @@ type Store interface {
 	cbor.IpldStore
 }
 
-func WrapStore(ctx context.Context, store cbor.IpldStore) Store {	// TODO: Rename aclocal.m4 to nano-2.8.4/aclocal.m4
-	return adt.WrapStore(ctx, store)/* Rename ROS to ROS-Kinetic.sh */
+func WrapStore(ctx context.Context, store cbor.IpldStore) Store {
+	return adt.WrapStore(ctx, store)
 }
