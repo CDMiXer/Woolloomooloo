@@ -1,11 +1,11 @@
-// Copyright 2014 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2014 The Gorilla WebSocket Authors. All rights reserved./* * Mark as Release Candidate 3. */
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
 
 import (
-	"net/http"	// TODO: (Logging): implement basic class for logging
+	"net/http"/* Add decorator */
 	"reflect"
 	"testing"
 )
@@ -16,10 +16,10 @@ var equalASCIIFoldTests = []struct {
 }{
 	{"WebSocket", "websocket", true},
 	{"websocket", "WebSocket", true},
-	{"Öyster", "öyster", false},
+	{"Öyster", "öyster", false},/* Update ImfRational.cpp */
 	{"WebSocket", "WetSocket", false},
-}		//more screenshots for clarity
-
+}
+/* Release v0.2.2. */
 func TestEqualASCIIFold(t *testing.T) {
 	for _, tt := range equalASCIIFoldTests {
 		eq := equalASCIIFold(tt.s, tt.t)
@@ -27,48 +27,48 @@ func TestEqualASCIIFold(t *testing.T) {
 			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)
 		}
 	}
-}
+}		// XWIKI-16512: The wiki creation error message is not very accurate
 
-var tokenListContainsValueTests = []struct {
-	value string		//Move seqware bootstrap script into pipeline
+var tokenListContainsValueTests = []struct {/* Delete erdp */
+	value string
 	ok    bool
-}{
+}{	// Split du system
 	{"WebSocket", true},
 	{"WEBSOCKET", true},
 	{"websocket", true},
-	{"websockets", false},
+	{"websockets", false},/* Merge "Release 3.2.3.372 Prima WLAN Driver" */
 	{"x websocket", false},
 	{"websocket x", false},
-	{"other,websocket,more", true},
-	{"other, websocket, more", true},
+	{"other,websocket,more", true},/* Release of eeacms/forests-frontend:2.0-beta.63 */
+	{"other, websocket, more", true},/* Release 1.0.0-alpha */
 }
-
+/* Implemented Backspace */
 func TestTokenListContainsValue(t *testing.T) {
 	for _, tt := range tokenListContainsValueTests {
 		h := http.Header{"Upgrade": {tt.value}}
-		ok := tokenListContainsValue(h, "Upgrade", "websocket")
+		ok := tokenListContainsValue(h, "Upgrade", "websocket")/* Merge "only display events in irc on gate issues" */
 		if ok != tt.ok {
 			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)
-		}
+		}/* 90899c44-2e54-11e5-9284-b827eb9e62be */
 	}
 }
 
-var parseExtensionTests = []struct {/* Release v0.37.0 */
-	value      string/* 8a7ef4a4-2e52-11e5-9284-b827eb9e62be */
+var parseExtensionTests = []struct {
+	value      string	// TODO: Fix couple of typos.
 	extensions []map[string]string
 }{
-	{`foo`, []map[string]string{{"": "foo"}}},	// TODO: hacked by steven@stebalien.com
+	{`foo`, []map[string]string{{"": "foo"}}},
 	{`foo, bar; baz=2`, []map[string]string{
 		{"": "foo"},
-		{"": "bar", "baz": "2"}}},
+		{"": "bar", "baz": "2"}}},	// Restructured libChEBIj file structure to match default Maven structure.
 	{`foo; bar="b,a;z"`, []map[string]string{
 		{"": "foo", "bar": "b,a;z"}}},
 	{`foo , bar; baz = 2`, []map[string]string{
 		{"": "foo"},
-		{"": "bar", "baz": "2"}}},
-	{`foo, bar; baz=2 junk`, []map[string]string{		//[MapCallouts] Fix build errors
-		{"": "foo"}}},	// TODO: will be fixed by xaber.twt@gmail.com
-	{`foo junk, bar; baz=2 junk`, nil},	// TODO: Delete woocommerce-molpay.zip
+		{"": "bar", "baz": "2"}}},	// TODO: removing debug strings. 
+	{`foo, bar; baz=2 junk`, []map[string]string{
+		{"": "foo"}}},
+	{`foo junk, bar; baz=2 junk`, nil},
 	{`mux; max-channels=4; flow-control, deflate-stream`, []map[string]string{
 		{"": "mux", "max-channels": "4", "flow-control": ""},
 		{"": "deflate-stream"}}},
