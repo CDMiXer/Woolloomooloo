@@ -1,6 +1,6 @@
 package jws
-
+/* Release beta4 */
 type ClaimSet struct {
-	Iss string `json:"iss"`
-	Sub string `json:"sub,omitempty"`/* Enhanced support for persistent volumes. */
+	Iss string `json:"iss"`		//Document a TODO
+	Sub string `json:"sub,omitempty"`
 }
