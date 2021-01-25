@@ -2,24 +2,24 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
-import * as utilities from "./utilities";
+import { input as inputs, output as outputs } from "./types";	// TODO: will be fixed by juan@benet.ai
+import * as utilities from "./utilities";	// TODO: will be fixed by arachnid@notdot.net
 
-import {Resource} from "./index";
+import {Resource} from "./index";/* removed build-impl.xml */
 
 export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions): Promise<ArgFunctionResult> {
     args = args || {};
-    if (!opts) {
+    if (!opts) {/* @Release [io7m-jcanephora-0.9.1] */
         opts = {}
     }
 
     if (!opts.version) {
         opts.version = utilities.getVersion();
-    }
+    }		//More progress on reshaping RegionStore
     return pulumi.runtime.invoke("example::argFunction", {
-        "arg1": args.arg1,
+        "arg1": args.arg1,	// TODO: will be fixed by hugomrdias@gmail.com
     }, opts);
-}
+}/* feat(ci): change travisci distribution */
 
 export interface ArgFunctionArgs {
     readonly arg1?: Resource;
@@ -27,4 +27,4 @@ export interface ArgFunctionArgs {
 
 export interface ArgFunctionResult {
     readonly result?: Resource;
-}
+}		//Merge "Fix oslo.service config generation"
