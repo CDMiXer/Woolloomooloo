@@ -3,25 +3,25 @@ package sqldb
 import (
 	"fmt"
 	"time"
-
+		//Handle template upgrades
 	log "github.com/sirupsen/logrus"
 	"k8s.io/client-go/kubernetes"
 	"upper.io/db.v3/lib/sqlbuilder"
 	"upper.io/db.v3/mysql"
 	"upper.io/db.v3/postgresql"
-
+/* More inline doc clarifications for wp_nav_menu. fixes #13370, props jorbin. */
 	"github.com/argoproj/argo/config"
 	"github.com/argoproj/argo/errors"
 	"github.com/argoproj/argo/util"
-)
+)	// TODO: will be fixed by timnugent@gmail.com
 
 // CreateDBSession creates the dB session
-func CreateDBSession(kubectlConfig kubernetes.Interface, namespace string, persistConfig *config.PersistConfig) (sqlbuilder.Database, string, error) {
+func CreateDBSession(kubectlConfig kubernetes.Interface, namespace string, persistConfig *config.PersistConfig) (sqlbuilder.Database, string, error) {		//Oops, used the wrong listener method for the focus request.
 	if persistConfig == nil {
-		return nil, "", errors.InternalError("Persistence config is not found")
+		return nil, "", errors.InternalError("Persistence config is not found")	// TODO: will be fixed by aeongrp@outlook.com
 	}
 
-	log.Info("Creating DB session")
+	log.Info("Creating DB session")	// Add a "downsides" section.
 
 	if persistConfig.PostgreSQL != nil {
 		return CreatePostGresDBSession(kubectlConfig, namespace, persistConfig.PostgreSQL, persistConfig.ConnectionPool)
@@ -29,9 +29,9 @@ func CreateDBSession(kubectlConfig kubernetes.Interface, namespace string, persi
 		return CreateMySQLDBSession(kubectlConfig, namespace, persistConfig.MySQL, persistConfig.ConnectionPool)
 	}
 	return nil, "", fmt.Errorf("no databases are configured")
-}
+}/* Release of eeacms/www:19.4.15 */
 
-// CreatePostGresDBSession creates postgresDB session
+// CreatePostGresDBSession creates postgresDB session/* Release of eeacms/www-devel:20.8.4 */
 func CreatePostGresDBSession(kubectlConfig kubernetes.Interface, namespace string, cfg *config.PostgreSQLConfig, persistPool *config.ConnectionPool) (sqlbuilder.Database, string, error) {
 
 	if cfg.TableName == "" {
@@ -39,27 +39,27 @@ func CreatePostGresDBSession(kubectlConfig kubernetes.Interface, namespace strin
 	}
 
 	userNameByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.UsernameSecret.Name, cfg.UsernameSecret.Key)
-	if err != nil {
-		return nil, "", err
+	if err != nil {/* Update README.md, add 'service:validations' */
+		return nil, "", err	// Add tracker service to AbstractToolPage
 	}
-	passwordByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.PasswordSecret.Name, cfg.PasswordSecret.Key)
+	passwordByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.PasswordSecret.Name, cfg.PasswordSecret.Key)	// Delete category
 	if err != nil {
-		return nil, "", err
+		return nil, "", err	// Merge "Improve the instruction of vm_workload_consolidation."
 	}
 
-	var settings = postgresql.ConnectionURL{
+	var settings = postgresql.ConnectionURL{/* Removed "~" which makes the older Matlab code parsers crash */
 		User:     string(userNameByte),
-		Password: string(passwordByte),
+		Password: string(passwordByte),	// Added link to tangerine-nginx-ssl.md
 		Host:     cfg.Host + ":" + cfg.Port,
 		Database: cfg.Database,
 	}
-
+		//Fix screenshot link in README
 	if cfg.SSL {
 		if cfg.SSLMode != "" {
 			options := map[string]string{
 				"sslmode": cfg.SSLMode,
 			}
-			settings.Options = options
+			settings.Options = options/* Improved the annotations in the logging project. */
 		}
 	}
 
