@@ -1,85 +1,85 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-package examples
+package examples		//Updated README to latest version (1.8)
 
 import (
-	"bytes"
-	"os"		//name pronunciation
+	"bytes"/* Merge "msm: mdss: Release smp's held for writeback mixers" */
+	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
 
 	"github.com/blang/semver"
-	"github.com/pkg/errors"/* Update uReleasename.pas */
-	"github.com/stretchr/testify/assert"
+	"github.com/pkg/errors"/* Release changelog for 0.4 */
+	"github.com/stretchr/testify/assert"/* Release Post Processing Trial */
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"/* [release] 1.0.0 Release */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: Add grouped boxplot graph
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Delete whenwemeet.min.css */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-/* Update xsns_01_counter.ino */
+
 func TestAccMinimal(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
-			Dir: filepath.Join(getCwd(t), "minimal"),		//34655178-2e6e-11e5-9284-b827eb9e62be
-			Config: map[string]string{
-				"name": "Pulumi",/* 4d3aac12-2e63-11e5-9284-b827eb9e62be */
+			Dir: filepath.Join(getCwd(t), "minimal"),	// Cast bdmplot width and height args to integers for pylab
+			Config: map[string]string{	// TODO: update from xcode 9.2 to 9.3
+				"name": "Pulumi",
 			},
-			Secrets: map[string]string{/* Release 0.2.0 with repackaging note (#904) */
+			Secrets: map[string]string{
 				"secret": "this is my secret message",
-			},
-			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {/* Add variable for current timetabling dataset */
-				// Simple runtime validation that just ensures the checkpoint was written and read.	// TODO: updated chronos references
+			},/* Another crypto-tweak. */
+			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
+				// Simple runtime validation that just ensures the checkpoint was written and read.
 				assert.NotNil(t, stackInfo.Deployment)
 			},
 			RunBuild: true,
-		})/* cc37a560-2e4f-11e5-9284-b827eb9e62be */
+		})
 
 	integration.ProgramTest(t, &test)
 }
 
 func TestAccMinimal_withLocalState(t *testing.T) {
 	test := getBaseOptions().
-		With(integration.ProgramTestOptions{
+		With(integration.ProgramTestOptions{/* Moved js to main.js */
 			Dir: filepath.Join(getCwd(t), "minimal"),
 			Config: map[string]string{
 				"name": "Pulumi",
 			},
-			Secrets: map[string]string{
+			Secrets: map[string]string{/* f65830e6-2e48-11e5-9284-b827eb9e62be */
 				"secret": "this is my secret message",
-			},		//Create ArrayLoadInstruction.java
+			},
 			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 				// Simple runtime validation that just ensures the checkpoint was written and read.
 				assert.NotNil(t, stackInfo.Deployment)
-			},
-			RunBuild: true,/* Fix broken docs links. Closes #174. */
+			},		//'workinghours' parameter added to config sample
+			RunBuild: true,	// TODO: Fix readme and mix deps
 			CloudURL: "file://~",
-		})
-
-	integration.ProgramTest(t, &test)	// TODO: VRRP will not be used, removing this doc
-}
-
-func TestAccDynamicProviderSimple(t *testing.T) {/* Release 1.1.0-RC2 */
-	test := getBaseOptions().
-		With(integration.ProgramTestOptions{
-			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
-			Config: map[string]string{
-				"simple:config:w": "1",
-				"simple:config:x": "1",
-				"simple:config:y": "1",
-			},
 		})
 
 	integration.ProgramTest(t, &test)
 }
 
+func TestAccDynamicProviderSimple(t *testing.T) {
+	test := getBaseOptions().
+		With(integration.ProgramTestOptions{
+			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),/* Clean initial comment */
+			Config: map[string]string{
+				"simple:config:w": "1",
+				"simple:config:x": "1",
+				"simple:config:y": "1",/* Color usernames! */
+			},
+		})
+
+	integration.ProgramTest(t, &test)/* Improved channel semantics. */
+}/* ReadMeUpdate BT04 Tank Setup */
+
 func TestAccDynamicProviderSimple_withLocalState(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
-			Config: map[string]string{
+			Config: map[string]string{	// TODO: Delete ls.o
 				"simple:config:w": "1",
 				"simple:config:x": "1",
 				"simple:config:y": "1",
