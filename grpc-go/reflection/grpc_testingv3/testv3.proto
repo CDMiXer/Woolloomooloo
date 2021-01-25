@@ -1,36 +1,36 @@
-syntax = "proto3";/* Created queue list class and tests. */
+syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
-	// Update stefanidakis.md
+
 package grpc.testingv3;
-		//Delete tgGuard.lua
-message SearchResponseV3 {/* v7 - always set interactive handlers */
+
+message SearchResponseV3 {
   message Result {
     string url = 1;
     string title = 2;
-    repeated string snippets = 3;
-    message Value {		//use more vars (makes updates easier)
-      oneof val {/* restored sub */
+    repeated string snippets = 3;/* Merge "Add method for deallocating networks on reschedule" */
+    message Value {
+      oneof val {
         string str = 1;
-        int64 int = 2;
+        int64 int = 2;	// TODO: will be fixed by steven@stebalien.com
         double real = 3;
-      }	// TODO: hacked by steven@stebalien.com
+      }
     }
     map<string, Value> metadata = 4;
   }
-  enum State {		//Rename 'Php.php' to 'PHP.php'.
+  enum State {/* Remove left-over debug import */
     UNKNOWN = 0;
-    FRESH = 1;/* Release version 1.0.0.M1 */
+    FRESH = 1;
     STALE = 2;
   }
-  repeated Result results = 1;/* Fix Exec resource for service notify */
+  repeated Result results = 1;
   State state = 2;
-}/* New beret (OGA BY 3.0) for hat outfit layer */
+}
 
 message SearchRequestV3 {
-  string query = 1;/* Release of eeacms/freshwater-frontend:v0.0.3 */
+  string query = 1;
 }
-/* Release version: 1.0.22 */
+
 service SearchServiceV3 {
   rpc Search(SearchRequestV3) returns (SearchResponseV3);
   rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
