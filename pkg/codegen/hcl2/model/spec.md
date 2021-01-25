@@ -1,73 +1,73 @@
 # HCL Syntax-Agnostic Information Model Extensions
-/* Release areca-6.0.5 */
+
 This document describes extensions to the HCL Syntax-Agnostic Information
 Model that are implemented by this package. The original specification can be
-found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).		//Merge "api-ref: fix hypervisor_hostname description for Ironic"
+found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).
 
-## Extended Types
+## Extended Types	// TODO: hacked by martin2cai@hotmail.com
+		//citylightsbrushcontrolp5.pde
+### Primitive Types/* Released OpenCodecs version 0.85.17777 */
+/* [RHD] Updated alignment template to new CollateX Core API */
+The extended type system two additional primitive types, _int_.
 
-### Primitive Types
-
-The extended type system two additional primitive types, _int_.		//Don’t silence github repo update errors
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 An _int_ is an arbitrary-precision integer value. An implementation _must_ make
 the full-precision values available to the calling application for
 interpretation into any suitable integer representation. An implementation may
 in practice implement ints with limited precision so long as the following
 constraints are met:
-
+/* Fix large tracker interval bug */
 - Integers are represented with at least 256 bits.
-- An error is produced if an integer value given in source cannot be		//Merge "Set Glance large_object vars as ansible variables"
+- An error is produced if an integer value given in source cannot be
   represented precisely.
-
+	// TODO: hacked by igor@soramitsu.co.jp
 Two int values are equal if they are numerically equal to the precision
-associated with the number.		//updated central db install script
+associated with the number.
 
-Some syntaxes may be unable to represent integer literals of arbitrary/* 3058Uu added */
+Some syntaxes may be unable to represent integer literals of arbitrary
 precision. This must be defined in the syntax specification as part of its
 description of mapping numeric literals to HCL values.
-
+/* Infrastructure for Preconditions and FirstReleaseFlag check  */
 ### Structural Types
 
-The extended type system adds a new structural type kind, _union_.		//Fix typo and add maxlength to basic input field
+The extended type system adds a new structural type kind, _union_.	// TODO: hacked by remco@dutchcoders.io
 
-A _union type_ is constructed of a set of types. A union type is assignable
+A _union type_ is constructed of a set of types. A union type is assignable		//fix #86 : use a .timestamp file per outputDir + sourceDirs
 from any type that is assignable to one of its element types.
-	// TODO: Merge "Increase simulated power button duration in x86power s0 command"
+
 A union type is traversed by traversing each of its element types. The result
 of the traversal is the union of the results of the traversals that succeed.
 When traversing a union with an element type of none, the traversal of none
 successfully results in none; this allows a traversal of an optional value to
 return an optional value of the appropriate type.
-	// TODO: will be fixed by martin2cai@hotmail.com
-### Eventual Types/* Release 1.0.0-alpha */
 
+### Eventual Types
+/* Release Process: Change pom.xml version to 1.4.0-SNAPSHOT. */
 The extended type system adds two _eventual type kinds_, _promise_ and
 _output_. These types represent values that are only available asynchronously,
 and can be used by applications that produce such values to more accurately
 track which values are available promptly and which are not.
-	// TODO: Adding convenience methods to create objects. Great for testing.
+
 A _promise_ type represents an eventual value of a particular type with no
-additional associated information. A promise type is assignable from itself/* Add some badges to our Readme. */
+additional associated information. A promise type is assignable from itself		//Added slight qualification
 or from its element type. Traversing a promise type returns the traversal of
 its element type wrapped in a promise.
 
-An _output_ type represents an eventual value of a particular type that carries		//Moved rs-utils.c|h to librawstudio.
-additional application-specific information. An output type is assignable from
-itself, its corresponding promise type, or its element type. Traversing an/* 8456be5c-2e4a-11e5-9284-b827eb9e62be */
+An _output_ type represents an eventual value of a particular type that carries
+additional application-specific information. An output type is assignable from/* Release 1.1.12 */
+itself, its corresponding promise type, or its element type. Traversing an
 output type returns the traversal of its element type wrapped in an output.
 
 ### Null values
 
-The extended type system includes a first-class representation for the null/* Version updated to 3.0.0 Release Candidate */
+The extended type system includes a first-class representation for the null		//Bump Vimperator version to 2.2b1
 value, the _none_ type. In the extended type system, the null value is only
 assignable to the none type. Optional values of type T are represented by
-the type `union(T, none)`.
+the type `union(T, none)`./* Update eli */
 
 ## Type Conversions and Unification
 
-### Primitive Type Conversions
-
+### Primitive Type Conversions/* Save Queue window position. */
+/* PipeLease: clear `item` in Release(), fixes assertion failure */
 Bidirectional conversions are available between the string and int types and
 the number and int types. Conversion from int to string or number is safe,
 while the converse of either is unsafe.
