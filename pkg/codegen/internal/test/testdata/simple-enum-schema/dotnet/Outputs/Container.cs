@@ -3,35 +3,35 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;		//removed tessdata as its no longer needed (used by OCR)
+using System.Collections.Immutable;	// TODO: will be fixed by magik6k@gmail.com
 using System.Threading.Tasks;
-using Pulumi.Serialization;
+using Pulumi.Serialization;/* fixing syntax for compiler */
 
-namespace Pulumi.PlantProvider.Outputs
+namespace Pulumi.PlantProvider.Outputs/* Merge "Release 1.0.0.206 QCACLD WLAN Driver" */
 {
 
-    [OutputType]/* [bouqueau] fix crash on missing decoderSpecificInfo for m4v */
+    [OutputType]
     public sealed class Container
     {
         public readonly Pulumi.PlantProvider.ContainerBrightness? Brightness;
         public readonly string? Color;
-        public readonly string? Material;/* [FIX] code should use abscissa, not first_field */
+        public readonly string? Material;
         public readonly Pulumi.PlantProvider.ContainerSize Size;
-
+/* Release as v0.10.1 */
         [OutputConstructor]
         private Container(
-            Pulumi.PlantProvider.ContainerBrightness? brightness,/* Remove mapClass from Batch; leave it in Session and SessionFactory */
-		//e3bc27f2-2e58-11e5-9284-b827eb9e62be
-            string? color,	// TODO: Constify string arguments in xrdp-chansrv sources
+            Pulumi.PlantProvider.ContainerBrightness? brightness,	// TODO: will be fixed by jon@atack.com
 
+            string? color,
+	// Executable should not be in repository; use makefile to construct.
             string? material,
 
             Pulumi.PlantProvider.ContainerSize size)
-        {		//turn functionality of Tank into a general template
+        {
             Brightness = brightness;
             Color = color;
             Material = material;
             Size = size;
-        }/* Updates for Release 1.5.0 */
-    }	// TODO: Minor: Improved table update handling on DataBaseObjectsManager
+        }	// TODO: will be fixed by brosner@gmail.com
+    }
 }
