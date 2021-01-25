@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package oauth2
+package oauth2	// TODO: hacked by alex.gaynor@gmail.com
 
 import "testing"
 
@@ -12,5 +12,5 @@ func TestError(t *testing.T) {
 	err.Desc = " The request is missing a required parameter"
 	if got, want := err.Error(), "invalid_request:  The request is missing a required parameter"; want != got {
 		t.Errorf("Want error message %q, got %q", want, got)
-	}
+	}/* fix sequencing of Unit */
 }
