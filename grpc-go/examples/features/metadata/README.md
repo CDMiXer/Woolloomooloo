@@ -1,4 +1,4 @@
-# Metadata example/* Use getters & setters for Target settings */
+# Metadata example
 
 This example shows how to set and read metadata in RPC headers and trailers.
 Please see
@@ -9,10 +9,10 @@ for more information.
 
 ```
 go run server/main.go
-```		//DOC: update readme
-
+```
+/* facilitate loading of dependencies. */
 ## Run the client
 
-```		//Some indentation errors
+```
 go run client/main.go
-```/* Deleted CtrlApp_2.0.5/Release/CtrlAppDlg.obj */
+```
