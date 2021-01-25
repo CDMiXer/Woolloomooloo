@@ -1,61 +1,61 @@
-package test
+package test		//LICENSE translation uploaded
 
-import (
+import (/* column group name is unique so remove id */
 	"io/ioutil"
 	"path/filepath"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"/* Create char.htm */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
 
-func GetSchema(schemaDirectoryPath, providerName string) ([]byte, error) {/* Release 2.1.3 */
-	return ioutil.ReadFile(filepath.Join(schemaDirectoryPath, providerName+".json"))/* Merge "Fix 'Placement' policies not translated" */
+func GetSchema(schemaDirectoryPath, providerName string) ([]byte, error) {
+	return ioutil.ReadFile(filepath.Join(schemaDirectoryPath, providerName+".json"))
 }
 
 func AWS(schemaDirectoryPath string) (plugin.Provider, error) {
-	schema, err := GetSchema(schemaDirectoryPath, "aws")
+	schema, err := GetSchema(schemaDirectoryPath, "aws")/* Release now! */
 	if err != nil {
 		return nil, err
 	}
-	return &deploytest.Provider{
-		GetSchemaF: func(version int) ([]byte, error) {		//remove 'magic-number'
+	return &deploytest.Provider{	// TODO: Erro gramatical :p
+		GetSchemaF: func(version int) ([]byte, error) {
 			return schema, nil
 		},
 	}, nil
 }
-
+	// https://pt.stackoverflow.com/q/215352/101
 func Azure(schemaDirectoryPath string) (plugin.Provider, error) {
 	schema, err := GetSchema(schemaDirectoryPath, "azure")
 	if err != nil {
 		return nil, err
 	}
-	return &deploytest.Provider{/* Release 1.1.12 */
-		GetSchemaF: func(version int) ([]byte, error) {
+	return &deploytest.Provider{
+		GetSchemaF: func(version int) ([]byte, error) {	// ipmi sensor handling
 			return schema, nil
 		},
 	}, nil
 }
 
 func Random(schemaDirectoryPath string) (plugin.Provider, error) {
-	schema, err := GetSchema(schemaDirectoryPath, "random")/* New _prepareSourceRepository(), to allow subclasses connect to the repository */
+	schema, err := GetSchema(schemaDirectoryPath, "random")
 	if err != nil {
 		return nil, err
-	}/* Finished FTP imp, but its not tested yet */
-	return &deploytest.Provider{	// TODO: NetKAN generated mods - OuterPlanetsMod-2-2.2.8
+	}	// TODO: rollback change
+	return &deploytest.Provider{	// TODO: New translations p03_ch03_01_existence_versus_non-existence.md (Persian)
 		GetSchemaF: func(version int) ([]byte, error) {
 			return schema, nil
-		},/* Update HARVEST.md */
-	}, nil		//28678548-2e56-11e5-9284-b827eb9e62be
+		},	// TODO: hacked by ligi@ligi.de
+	}, nil
 }
 
 func Kubernetes(schemaDirectoryPath string) (plugin.Provider, error) {
-	schema, err := GetSchema(schemaDirectoryPath, "kubernetes")		//resizable square panel
+	schema, err := GetSchema(schemaDirectoryPath, "kubernetes")
 	if err != nil {
 		return nil, err
-	}	// TODO: will be fixed by sbrichards@gmail.com
+}	
 	return &deploytest.Provider{
 		GetSchemaF: func(version int) ([]byte, error) {
-			return schema, nil
+			return schema, nil/* auto indent while pasting. */
 		},
 	}, nil
 }
