@@ -4,14 +4,14 @@
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
     "Repo": {
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",	// TODO: Update GALLERY.md
         "Namespace": "brydzewski",
         "Name": "foo",
-        "Perm": null,
+        "Perm": null,/* Delete MSG_sendCommand.java */
         "Branch": "",
-        "Private": true,
+        "Private": true,/* b4620e74-2e56-11e5-9284-b827eb9e62be */
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
-        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
+        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",		//Fix typo in "matrix to large"
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
@@ -21,6 +21,6 @@
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
         "Email": "",
-        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
+        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* deleted OperationTests, only works with CustomImpl actually */
     }
-}
+}/* Merge "[INTERNAL] Release notes for version 1.84.0" */
