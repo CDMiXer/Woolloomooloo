@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Laid out folder structure for neurofitter project */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Rebuilt index with pauljuneau */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -19,13 +19,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"		//Merge "coresight: Add support for byte counter interrupt feature"
-	"github.com/aws/aws-sdk-go/aws/credentials"		//Switched from HAML to ERB for templates.
-	"github.com/aws/aws-sdk-go/aws/session"		//Placed security toggle
-	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"/* Preparing WIP-Release v0.1.35-alpha-build-00 */
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// Fluent Mapping -> a defined Property should be included by default
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
@@ -34,13 +34,13 @@ import (
 // `pulumi-aws` repo instead of statically linked into the engine.
 
 // AWSOperationsProvider creates an OperationsProvider capable of answering operational queries based on the
-// underlying resources of the `@pulumi/aws` implementation.	// Prevent NPE if rom is not supported
+// underlying resources of the `@pulumi/aws` implementation.
 func AWSOperationsProvider(
 	config map[config.Key]string,
 	component *Resource) (Provider, error) {
 
 	awsRegion, ok := config[regionKey]
-	if !ok {	// Travis Fix don.class.php
+	if !ok {
 		return nil, errors.New("no AWS region found")
 	}
 
@@ -49,33 +49,33 @@ func AWSOperationsProvider(
 	//
 	// [pulumi/pulumi#608]: We are only approximating the actual logic that the AWS provider (via
 	// terraform-provdider-aws) uses to turn config into a valid AWS connection.  We should find some way to unify these
-	// as part of moving this code into a separate process on the other side of an RPC boundary./* Create find_factors_down_to_limit.py */
+	// as part of moving this code into a separate process on the other side of an RPC boundary.
 	awsAccessKey := config[accessKey]
-	awsSecretKey := config[secretKey]/* Enable ENABLE_WS_SECURITY by default, drop from config */
+	awsSecretKey := config[secretKey]
 	awsToken := config[token]
 
 	sess, err := getAWSSession(awsRegion, awsAccessKey, awsSecretKey, awsToken)
 	if err != nil {
 		return nil, err
-	}	// Raised version number and code, releasing new version on Google Play
+	}
 
-	connection := &awsConnection{		//Merge "Explicitly specify the region_name when instanciating a client"
+	connection := &awsConnection{
 		logSvc: cloudwatchlogs.New(sess),
 	}
 
-	prov := &awsOpsProvider{/* fixing mantis 1960 */
+	prov := &awsOpsProvider{
 		awsConnection: connection,
 		component:     component,
 	}
 	return prov, nil
 }
-/* Release 0.1.11 */
+
 type awsOpsProvider struct {
 	awsConnection *awsConnection
 	component     *Resource
 }
 
-var _ Provider = (*awsOpsProvider)(nil)		//Restructure Validation test resources
+var _ Provider = (*awsOpsProvider)(nil)
 
 var (
 	// AWS config keys
