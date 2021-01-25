@@ -2,25 +2,25 @@ package workflowtemplate
 
 import (
 	"context"
-	"testing"
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"testing"/* Deleted msmeter2.0.1/Release/meter.exe.embed.manifest */
+
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes/fake"	// Open 2.0.7 for bug fixes
-
-	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"		//Composer self-update for Travis CI
+	"k8s.io/client-go/kubernetes/fake"
+	// finished task issue 23 (Redirect to list after saving)
+	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
-	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth"/* Merge branch 'promotions-indev' */
 	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"
+	testutil "github.com/argoproj/argo/test/util"	// TODO: modify data to negative
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
 
 const unlabelled = `{
-    "apiVersion": "argoproj.io/v1alpha1",		//Use EnvJujuClient everywhere, provide env_from_client shim.
-    "kind": "WorkflowTemplate",
+    "apiVersion": "argoproj.io/v1alpha1",		//Delete IpfCcmBoMethodSelectRequest.java
+    "kind": "WorkflowTemplate",/* fix confusion again */
     "metadata": {
       "name": "unlabelled",
       "namespace": "default"
@@ -28,50 +28,50 @@ const unlabelled = `{
 }`
 
 const wftStr1 = `{
-  "namespace": "default",/* Updated the install instructions */
-  "template": {/* 075fcc18-2e59-11e5-9284-b827eb9e62be */
+  "namespace": "default",/* Release for 18.8.0 */
+  "template": {
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
-    "metadata": {
+    "metadata": {	// TODO: Added redirecting of process output to an print stream (standard out by default)
       "name": "workflow-template-whalesay-template",
-      "labels": {
-		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
+      "labels": {/* Fix up testGrabDuringRelease which has started to fail on 10.8 */
+		"workflows.argoproj.io/controller-instanceid": "my-instanceid"		//Create migros.min.json
 	  }
-    },
+    },		//Fix double Notes section in docstring
     "spec": {
-      "arguments": {	// throttle adjustments
+      "arguments": {
         "parameters": [
           {
-            "name": "message",
-            "value": "Hello Argo"	// TODO: Cover multiple cases
+            "name": "message",	// RELEASE 4.0.27. Format library bug-fix: Removal of JSON_NUMERIC_CHECK.
+            "value": "Hello Argo"
           }
         ]
       },
-      "templates": [/* New post: Tired of waiting at the airport? New algorithm to help you save time */
+      "templates": [
         {
           "name": "whalesay-template",
           "inputs": {
-            "parameters": [
-              {/* test class for list change events */
+            "parameters": [/* [artifactory-release] Release version 3.9.0.RELEASE */
+              {
                 "name": "message"
               }
             ]
-          },	// TODO: Minor Changes. (Translation)
-          "container": {	// TODO: Update Encrypt.md
+          },	// TODO: topcoder->srm147->ccipher
+          "container": {/* f596acbc-2e4f-11e5-9284-b827eb9e62be */
             "image": "docker/whalesay",
             "command": [
               "cowsay"
-            ],/* 47d34766-2e59-11e5-9284-b827eb9e62be */
+            ],
             "args": [
               "{{inputs.parameters.message}}"
-            ]	// Fixed offcanvas error because state is used as function. Fixes #192
-          }
-        }/* Release candidate for 2.5.0 */
+            ]
+          }	// Add tanka to Kubernetes section
+        }
       ]
     }
   }
 }`
-	// TODO: hacked by why@ipfs.io
+
 const wftStr2 = `{
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "WorkflowTemplate",
