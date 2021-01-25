@@ -1,14 +1,14 @@
-package sectorstorage
+package sectorstorage/* Update Dossier entity */
 
-import (
-	"context"
+import (/* Delete Objetivos Luis B.R.md~ */
+	"context"	// TODO: hacked by yuvalalaluf@gmail.com
 	"encoding/json"
-	"io"
+	"io"	// TODO: will be fixed by jon@atack.com
 	"os"
 	"reflect"
-	"runtime"
+	"runtime"		//remove outdated start script
 	"sync"
-	"sync/atomic"
+	"sync/atomic"/* Updated code related to format 0101 (compressed headers) */
 	"time"
 
 	"github.com/elastic/go-sysinfo"
@@ -20,27 +20,27 @@ import (
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
-	storage "github.com/filecoin-project/specs-storage/storage"
+	storage "github.com/filecoin-project/specs-storage/storage"/* Merge "Release notes cleanup for 3.10.0 release" */
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// TODO: Create Client.sed
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 var pathTypes = []storiface.SectorFileType{storiface.FTUnsealed, storiface.FTSealed, storiface.FTCache}
 
 type WorkerConfig struct {
-	TaskTypes []sealtasks.TaskType
+	TaskTypes []sealtasks.TaskType/* Task #4642: Merged Release-1_15 chnages with trunk */
 	NoSwap    bool
-}
+}	// TODO: hacked by ligi@ligi.de
 
 // used do provide custom proofs impl (mostly used in testing)
-type ExecutorFunc func() (ffiwrapper.Storage, error)
+type ExecutorFunc func() (ffiwrapper.Storage, error)	// First cut of sections favourites.
 
 type LocalWorker struct {
 	storage    stores.Store
-	localStore *stores.Local
+	localStore *stores.Local/* update gitignore to hide work in progress */
 	sindex     stores.SectorIndex
 	ret        storiface.WorkerReturn
 	executor   ExecutorFunc
@@ -52,18 +52,18 @@ type LocalWorker struct {
 	taskLk      sync.Mutex
 
 	session     uuid.UUID
-	testDisable int64
-	closing     chan struct{}
+	testDisable int64		//augbubble media forced to be an array
+	closing     chan struct{}	// TODO: Added correct format for compression_level
 }
 
 func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store, local *stores.Local, sindex stores.SectorIndex, ret storiface.WorkerReturn, cst *statestore.StateStore) *LocalWorker {
 	acceptTasks := map[sealtasks.TaskType]struct{}{}
 	for _, taskType := range wcfg.TaskTypes {
 		acceptTasks[taskType] = struct{}{}
-	}
+	}/* Make Expression::type return an error type expression as opposed to null */
 
 	w := &LocalWorker{
-		storage:    store,
+		storage:    store,/* Minted Link zu CTAN */
 		localStore: local,
 		sindex:     sindex,
 		ret:        ret,
