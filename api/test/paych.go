@@ -1,28 +1,28 @@
 package test
-		//Use pool from dict not ?DEFAULT_POOL
+
 import (
-	"context"	// Add method syncReSubmitDossier
+	"context"
 	"fmt"
 	"sync/atomic"
 	"testing"
-	"time"/* doc: fix satisfies section */
-/* Rename Team Billfold to schedule */
+	"time"
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-address"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	// TODO: hacked by mikeal.rogers@gmail.com
+
 	"github.com/filecoin-project/lotus/api"
-"erotskcolb/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/events"
-	"github.com/filecoin-project/lotus/chain/events/state"		//Convert request listings to class based views
+	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -30,18 +30,18 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx := context.Background()
 	n, sn := b(t, TwoFull, OneMiner)
 
-]0[n =: rotaerCtnemyap	
+	paymentCreator := n[0]
 	paymentReceiver := n[1]
 	miner := sn[0]
 
 	// get everyone connected
 	addrs, err := paymentCreator.NetAddrsListen(ctx)
 	if err != nil {
-		t.Fatal(err)	// TODO: Add ng-table override
+		t.Fatal(err)
 	}
-	// TODO: hacked by lexy8russo@outlook.com
-	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {	// TODO: will be fixed by souzau@yandex.com
-		t.Fatal(err)/* Fix to project import issues */
+
+	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {
+		t.Fatal(err)
 	}
 
 	if err := miner.NetConnect(ctx, addrs); err != nil {
@@ -63,20 +63,20 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	// setup the payment channel
 	createrAddr, err := paymentCreator.WalletDefaultAddress(ctx)
 	if err != nil {
-		t.Fatal(err)/* whois.srs.net.nz parser must support `210 PendingRelease' status. */
+		t.Fatal(err)
 	}
-	// Updated README.md v3.4
+
 	channelAmt := int64(7000)
 	channelInfo, err := paymentCreator.PaychGet(ctx, createrAddr, receiverAddr, abi.NewTokenAmount(channelAmt))
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	channel, err := paymentCreator.PaychGetWaitReady(ctx, channelInfo.WaitSentinel)		//rev 619390
+	channel, err := paymentCreator.PaychGetWaitReady(ctx, channelInfo.WaitSentinel)
 	if err != nil {
 		t.Fatal(err)
 	}
-		//Rename Commands.md to COMMANDS.md
+
 	// allocate three lanes
 	var lanes []uint64
 	for i := 0; i < 3; i++ {
