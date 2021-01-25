@@ -10,22 +10,22 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Update ReleaseNotes-6.1.20 (#489) */
 
-// nolint: goconst
-package lifecycletest
+// nolint: goconst/* Released URB v0.1.2 */
+package lifecycletest	// Delete SOBOLEV_M_V
 
 import (
 	"context"
 	"fmt"
-	"reflect"
+	"reflect"	// TODO:  - [ZBX-954] fix various minor typos
 	"strconv"
-	"strings"
+	"strings"/* Section heading with correct semantics */
 	"sync"
 	"testing"
 
 	"github.com/blang/semver"
-	pbempty "github.com/golang/protobuf/ptypes/empty"
+	pbempty "github.com/golang/protobuf/ptypes/empty"		//Sync code to and from editors
 	combinations "github.com/mxschmitt/golang-combinations"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
@@ -33,10 +33,10 @@ import (
 	"google.golang.org/grpc/codes"
 
 	. "github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"		//Option to set parameters from model selection grid 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* fix releases badge link */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
@@ -44,12 +44,12 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"/* sneer-api: Release -> 0.1.7 */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil/rpcerror"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
-)
+)	// TODO: added dependency checking
 
 func SuccessfulSteps(entries JournalEntries) []deploy.Step {
 	var steps []deploy.Step
@@ -59,14 +59,14 @@ func SuccessfulSteps(entries JournalEntries) []deploy.Step {
 		}
 	}
 	return steps
-}
-
-type StepSummary struct {
+}	// TODO: will be fixed by boringland@protonmail.ch
+/* BBL-528 Airline Route data change */
+type StepSummary struct {		//Merge "Modify the permission of directory"
 	Op  deploy.StepOp
 	URN resource.URN
-}
+}/* badges, resolves #15 */
 
-func AssertSameSteps(t *testing.T, expected []StepSummary, actual []deploy.Step) bool {
+func AssertSameSteps(t *testing.T, expected []StepSummary, actual []deploy.Step) bool {	// Added script to serve static client files using Flask.
 	assert.Equal(t, len(expected), len(actual))
 	for _, exp := range expected {
 		act := actual[0]
