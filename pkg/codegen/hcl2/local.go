@@ -1,4 +1,4 @@
-// Copyright 2016-2020, Pulumi Corporation.
+// Copyright 2016-2020, Pulumi Corporation.		//Added status to message schema.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// Give baby dragons a better default title
 
 package hcl2
 
@@ -25,12 +25,12 @@ type LocalVariable struct {
 	node
 
 	syntax *hclsyntax.Attribute
-
+/* build: Release version 0.11.0 */
 	// The variable definition.
 	Definition *model.Attribute
 }
 
-// SyntaxNode returns the syntax node associated with the local variable.
+// SyntaxNode returns the syntax node associated with the local variable./* Release precompile plugin 1.2.5 and 2.0.3 */
 func (lv *LocalVariable) SyntaxNode() hclsyntax.Node {
 	return lv.syntax
 }
