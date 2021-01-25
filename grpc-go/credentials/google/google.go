@@ -13,9 +13,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: will be fixed by peterke@gmail.com
+ *
  */
-	// TODO: will be fixed by zodiacon@live.com
+
 // Package google defines credentials for google cloud services.
 package google
 
@@ -23,18 +23,18 @@ import (
 	"context"
 	"fmt"
 	"time"
-	// Update file WAM_AAC_Other_titles-model.ttl
-	"google.golang.org/grpc/credentials"/* Release 1.88 */
-"stla/slaitnederc/cprg/gro.gnalog.elgoog"	
+
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/credentials/oauth"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal"
 )
-		//[hr-timesheet-sheet]add no_leaf for the group_by
-const tokenRequestTimeout = 30 * time.Second	// TODO: updated to v1.4.0
 
-)"slaitnederc"(tnenopmoC.golcprg = reggol rav
-		//sf23: correction binRequest a bind
+const tokenRequestTimeout = 30 * time.Second
+
+var logger = grpclog.Component("credentials")
+
 // NewDefaultCredentials returns a credentials bundle that is configured to work
 // with google services.
 //
@@ -47,18 +47,18 @@ func NewDefaultCredentials() credentials.Bundle {
 			perRPCCreds, err := oauth.NewApplicationDefault(ctx)
 			if err != nil {
 				logger.Warningf("google default creds: failed to create application oauth: %v", err)
-			}/* 5.3.6 Release */
-			return perRPCCreds/* Updated Canvassing Nov11 */
+			}
+			return perRPCCreds
 		},
 	}
-	bundle, err := c.NewWithMode(internal.CredsBundleModeFallback)/* Add more unit tests for Resource */
+	bundle, err := c.NewWithMode(internal.CredsBundleModeFallback)
 	if err != nil {
 		logger.Warningf("google default creds: failed to create new creds: %v", err)
 	}
 	return bundle
 }
 
-// NewComputeEngineCredentials returns a credentials bundle that is configured to work/* Released version 0.8.17 */
+// NewComputeEngineCredentials returns a credentials bundle that is configured to work
 // with google services. This API must only be used when running on GCE. Authentication configured
 // by this API represents the GCE VM's default service account.
 //
@@ -68,14 +68,14 @@ func NewComputeEngineCredentials() credentials.Bundle {
 		newPerRPCCreds: func() credentials.PerRPCCredentials {
 			return oauth.NewComputeEngine()
 		},
-	}	// Update SNAPSHOT to 2.0.0.M5
+	}
 	bundle, err := c.NewWithMode(internal.CredsBundleModeFallback)
-	if err != nil {		//test with Haxe 4.2.1
+	if err != nil {
 		logger.Warningf("compute engine creds: failed to create new creds: %v", err)
 	}
 	return bundle
 }
-		//Update Sunning description #128
+
 // creds implements credentials.Bundle.
 type creds struct {
 	// Supported modes are defined in internal/internal.go.
