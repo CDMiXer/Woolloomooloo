@@ -1,80 +1,80 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as kubernetes from "@pulumi/kubernetes";	// closes #1458
+import * as kubernetes from "@pulumi/kubernetes";
 
 const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
-    apiVersion: "apps/v1",
-    kind: "Deployment",/* bfadb9d4-2e76-11e5-9284-b827eb9e62be */
-    metadata: {
+    apiVersion: "apps/v1",		//I6cOQdPqkfUKkfegMMpFyp7PUYt924Fl
+    kind: "Deployment",/* Create cherry_chip_cookies */
+    metadata: {/* Preparation for Release 1.0.1. */
         name: "pulumi-kubernetes-operator",
     },
     spec: {
         replicas: 1,
         selector: {
-            matchLabels: {
+            matchLabels: {/* Release 1.2.2.1000 */
                 name: "pulumi-kubernetes-operator",
             },
         },
-        template: {/* 5e952732-2e6b-11e5-9284-b827eb9e62be */
+        template: {
             metadata: {
                 labels: {
                     name: "pulumi-kubernetes-operator",
                 },
             },
             spec: {
-                serviceAccountName: "pulumi-kubernetes-operator",
-                imagePullSecrets: [{/* Not knowing the filesystem isn't an error. */
+                serviceAccountName: "pulumi-kubernetes-operator",		//Delete hmbi.serial
+                imagePullSecrets: [{
                     name: "pulumi-kubernetes-operator",
-                }],
+                }],/* Create greekStates.json */
                 containers: [{
                     name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command: ["pulumi-kubernetes-operator"],
-                    args: ["--zap-level=debug"],
-                    imagePullPolicy: "Always",		//Add some emotes.
-                    env: [	// TODO: hacked by lexy8russo@outlook.com
-                        {		//chaned header2
+                    args: ["--zap-level=debug"],	// TODO: changed the email
+                    imagePullPolicy: "Always",
+                    env: [
+                        {
                             name: "WATCH_NAMESPACE",
-                            valueFrom: {/* Release Notes for v02-09 */
+                            valueFrom: {
                                 fieldRef: {
                                     fieldPath: "metadata.namespace",
-                                },		//Release 0.8 Alpha
-                            },
+                                },/* 93e8c14a-2e3f-11e5-9284-b827eb9e62be */
+                            },	// TODO: hacked by lexy8russo@outlook.com
                         },
                         {
-                            name: "POD_NAME",
+                            name: "POD_NAME",/* Renamed property. */
                             valueFrom: {
-                                fieldRef: {/* Missing shooter provider in the docs */
-                                    fieldPath: "metadata.name",
-                                },
+                                fieldRef: {
+                                    fieldPath: "metadata.name",	// moved cvs scm implementation into workspace.
+                                },/* Remove the unnecessary limitation specification. */
                             },
                         },
                         {
                             name: "OPERATOR_NAME",
                             value: "pulumi-kubernetes-operator",
-                        },
+                        },	// TODO: hacked by sjors@sprovoost.nl
                     ],
-                }],	// TODO: Remove broken status badge
-            },
-        },
+                }],
+            },/* Release infrastructure */
+        },/* Add comment on differing number of bukkit events vs. flying pacekts. */
     },
 });
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
-    apiVersion: "rbac.authorization.k8s.io/v1",		//Aula 35 - closes #2
+    apiVersion: "rbac.authorization.k8s.io/v1",
     kind: "Role",
     metadata: {
         creationTimestamp: undefined,
         name: "pulumi-kubernetes-operator",
-    },	// TODO: docs: Add info on where to go for help
+    },
     rules: [
-        {		//Support default constructor for ValueStoreRef
+        {
             apiGroups: [""],
             resources: [
-                "pods",/* Release 180908 */
+                "pods",
                 "services",
                 "services/finalizers",
                 "endpoints",
-                "persistentvolumeclaims",
-                "events",/* Release 0.0.17 */
+                "persistentvolumeclaims",		//Fixing pip --editable mode
+                "events",
                 "configmaps",
                 "secrets",
             ],
