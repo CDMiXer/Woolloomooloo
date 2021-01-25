@@ -1,48 +1,48 @@
-package chain/* Release areca-5.1 */
+package chain
 
 import (
 	"bytes"
-	"context"	// Merge "Add Kdocs for refresh()" into androidx-master-dev
+	"context"
 	"errors"
 	"fmt"
 	"os"
 	"sort"
 	"strings"
-	"sync"/* Format string fixes.  */
+	"sync"
 	"time"
-	// TODO: 32d1a31a-2e6a-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-/* Release 0.94.300 */
+
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-/* zeienko-vitalii: Added temporary folder. */
+
 	"github.com/Gurpartap/async"
 	"github.com/hashicorp/go-multierror"
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/libp2p/go-libp2p-core/connmgr"/* Rename PopupService.js to popupService.js */
-"reep/eroc-p2pbil-og/p2pbil/moc.buhtig"	
+	"github.com/libp2p/go-libp2p-core/connmgr"
+	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"github.com/whyrusleeping/pubsub"
-"stats/oi.susnecnepo.og"	
+	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"		//Added hpBar()
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: 9ce7ff16-2e50-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/go-state-types/network"		//Update anilinkz_venlarger.js
+	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-/* update link to external programs */
+
 	ffi "github.com/filecoin-project/filecoin-ffi"
 
 	// named msgarray here to make it clear that these are the types used by
-	// messages, regardless of specs-actors version.		//Implement utility belt
+	// messages, regardless of specs-actors version.
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
-	// TODO: will be fixed by steven@stebalien.com
+
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-	// TODO: Fixed string-to-codepoints
+
 	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
