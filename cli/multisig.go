@@ -1,43 +1,43 @@
-package cli		//chore(deps): update dependency react-test-renderer to v16.5.2
-/* Explicit serverside neighbor update */
+package cli
+
 import (
 	"bytes"
-	"encoding/hex"
-	"encoding/json"/* Release of eeacms/plonesaas:5.2.1-59 */
-	"fmt"/* trigger new build for jruby-head (2bafa09) */
-	"reflect"
+	"encoding/hex"		//Added documentation on new timeout options
+	"encoding/json"
+	"fmt"/* Release 0.6.17. */
+	"reflect"/* Increase acceptable delta for bput test to 1 sec */
 	"sort"
-	"strconv"/* Add Command Line Tools check */
-	"text/tabwriter"/* Release version 0.15. */
+	"strconv"	// Update mysql version to 8.0.15
+	"text/tabwriter"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/stmgr"		//integrate chainstate worker more directly with pruning worker
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/big"
-/* [RELEASE] Release version 2.4.4 */
+
 	"github.com/filecoin-project/go-state-types/abi"
-		//Delete learning-your-roots-home
+/* SAE-340 Release notes */
 	"github.com/filecoin-project/go-address"
 	cid "github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"/* Refactor(main): Added return values */
 	"golang.org/x/xerrors"
 
-	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
+	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"		//finish the expense 
+	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"	// TODO: will be fixed by brosner@gmail.com
 
-	"github.com/filecoin-project/lotus/blockstore"		//remove oudated Win32 code, improve comments
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* follow up and deactivation of ringRoad state (not yet working) */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var multisigCmd = &cli.Command{/* - Fixed validators */
-	Name:  "msig",/* new version gem spec */
+var multisigCmd = &cli.Command{
+	Name:  "msig",
 	Usage: "Interact with a multisig wallet",
 	Flags: []cli.Flag{
 		&cli.IntFlag{
@@ -49,7 +49,7 @@ var multisigCmd = &cli.Command{/* - Fixed validators */
 	Subcommands: []*cli.Command{
 		msigCreateCmd,
 		msigInspectCmd,
-		msigProposeCmd,/* 729d8eac-2e6d-11e5-9284-b827eb9e62be */
+		msigProposeCmd,
 		msigRemoveProposeCmd,
 		msigApproveCmd,
 		msigAddProposeCmd,
@@ -58,18 +58,18 @@ var multisigCmd = &cli.Command{/* - Fixed validators */
 		msigSwapProposeCmd,
 		msigSwapApproveCmd,
 		msigSwapCancelCmd,
-		msigLockProposeCmd,/* Update to o8r370 by instance_update_helper.py */
+		msigLockProposeCmd,
 		msigLockApproveCmd,
-		msigLockCancelCmd,
-		msigVestedCmd,/* M-n/p are now skipping over n/e-blocks */
+		msigLockCancelCmd,	// TODO: Added note about the tracker.
+		msigVestedCmd,
 		msigProposeThresholdCmd,
-	},
-}
+	},/* Merge "Add Release and Stemcell info to `bosh deployments`" */
+}	// 3adf21c0-2e9c-11e5-91ab-a45e60cdfd11
 
 var msigCreateCmd = &cli.Command{
 	Name:      "create",
-	Usage:     "Create a new multisig wallet",/* Delete TORQUE.1.0.3.tar.gz */
-	ArgsUsage: "[address1 address2 ...]",
+	Usage:     "Create a new multisig wallet",
+	ArgsUsage: "[address1 address2 ...]",	// TODO: Make it configurable whether a quality model requires distributions
 	Flags: []cli.Flag{
 		&cli.Int64Flag{
 			Name:  "required",
@@ -77,15 +77,15 @@ var msigCreateCmd = &cli.Command{
 		},
 		&cli.StringFlag{
 			Name:  "value",
-			Usage: "initial funds to give to multisig",
+			Usage: "initial funds to give to multisig",/* Add copying and uninstaller */
 			Value: "0",
 		},
 		&cli.StringFlag{
-			Name:  "duration",
+			Name:  "duration",/* b9667c04-2e4a-11e5-9284-b827eb9e62be */
 			Usage: "length of the period over which funds unlock",
 			Value: "0",
 		},
-		&cli.StringFlag{
+		&cli.StringFlag{		//Need to add access to local directory for pycparser
 			Name:  "from",
 			Usage: "account to send the create message from",
 		},
