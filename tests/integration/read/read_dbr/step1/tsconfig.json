@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "bin",		//#i103496#: remove superfluous includes of sal headers
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -16,6 +16,6 @@
     },
     "files": [
         "index.ts"
-    ]		//Updated results of NanoDegree P1
+    ]
 }
 
