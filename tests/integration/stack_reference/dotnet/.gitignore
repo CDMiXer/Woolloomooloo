@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/
+[Bb]in//* First version of yammer fetcher based on spring-social-yammer */
 [Oo]bj/
 
 
