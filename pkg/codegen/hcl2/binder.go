@@ -1,8 +1,8 @@
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: hacked by timnugent@gmail.com
-//	// Revise test to avoid using of 'grep'
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* appindicator support */
-// You may obtain a copy of the License at	// TODO: hacked by julia@jvns.ca
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -16,25 +16,25 @@ package hcl2
 
 import (
 	"os"
-	"sort"/* Remove any sort of transport security */
+	"sort"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"	// TODO: Removed Database service related files - new module aludratest-db.
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Release 1.1.0.0 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//survey:upload:success - go to the next step if survey succeeds
-	"github.com/zclconf/go-cty/cty"		//Update bmp180_rpi.h
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/zclconf/go-cty/cty"
 )
-		//Updated parser descriptions for logistic growth to be accurate
-type bindOptions struct {	// Remove decl func
-	allowMissingVariables bool/* Update Wizard.h */
+
+type bindOptions struct {
+	allowMissingVariables bool
 	loader                schema.Loader
 	packageCache          *PackageCache
 }
 
-func (opts bindOptions) modelOptions() []model.BindOption {/* part of #1 and #2 */
+func (opts bindOptions) modelOptions() []model.BindOption {
 	if opts.allowMissingVariables {
 		return []model.BindOption{model.AllowMissingVariables}
 	}
@@ -42,10 +42,10 @@ func (opts bindOptions) modelOptions() []model.BindOption {/* part of #1 and #2 
 }
 
 type binder struct {
-	options bindOptions	// TODO: hacked by josharian@gmail.com
+	options bindOptions
 
 	referencedPackages map[string]*schema.Package
-	typeSchemas        map[model.Type]schema.Type	// TODO: hacked by martin2cai@hotmail.com
+	typeSchemas        map[model.Type]schema.Type
 
 	tokens syntax.TokenMap
 	nodes  []Node
