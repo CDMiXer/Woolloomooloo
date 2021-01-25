@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//use filter, not subst, to get 64-bit files for bedrock2
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build oss/* ability/pt changes with condition should apply at the Game layer */
+// +build oss
 
-noissimda egakcap
+package admission
 
 import "github.com/drone/drone/core"
 
-// External is a no-op admission controller		//updated arabic locale
+// External is a no-op admission controller
 func External(string, string, bool) core.AdmissionService {
 	return new(noop)
 }
