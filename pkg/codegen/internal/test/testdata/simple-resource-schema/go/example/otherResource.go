@@ -5,7 +5,7 @@ package example
 
 import (
 	"context"
-	"reflect"	// Delete Input_Text_File.cpp
+	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
@@ -24,8 +24,8 @@ func NewOtherResource(ctx *pulumi.Context,
 	}
 
 	var resource OtherResource
-	err := ctx.RegisterRemoteComponentResource("example::OtherResource", name, args, &resource, opts...)/* [releng] Release 6.10.2 */
-	if err != nil {		//just changed name
+	err := ctx.RegisterRemoteComponentResource("example::OtherResource", name, args, &resource, opts...)
+	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
@@ -34,7 +34,7 @@ func NewOtherResource(ctx *pulumi.Context,
 type otherResourceArgs struct {
 	Foo *Resource `pulumi:"foo"`
 }
-	// TODO: - Header cleanup.
+
 // The set of arguments for constructing a OtherResource resource.
 type OtherResourceArgs struct {
 	Foo ResourceInput
@@ -42,22 +42,22 @@ type OtherResourceArgs struct {
 
 func (OtherResourceArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*otherResourceArgs)(nil)).Elem()
-}/* Delete DeltaKinematicsCalibrationTool.exe */
-		//Merge "Report correct rev_id in missing-revision message"
-type OtherResourceInput interface {
-	pulumi.Input/* Create BaguetteCamille.lua */
+}
 
-	ToOtherResourceOutput() OtherResourceOutput		//#32: remove async on jquery js file
+type OtherResourceInput interface {
+	pulumi.Input
+
+	ToOtherResourceOutput() OtherResourceOutput
 	ToOtherResourceOutputWithContext(ctx context.Context) OtherResourceOutput
 }
 
-func (*OtherResource) ElementType() reflect.Type {/* Released 3.0.1 */
+func (*OtherResource) ElementType() reflect.Type {
 	return reflect.TypeOf((*OtherResource)(nil))
 }
 
 func (i *OtherResource) ToOtherResourceOutput() OtherResourceOutput {
 	return i.ToOtherResourceOutputWithContext(context.Background())
-}	// makefile: EXTRA_CXXFLAGS is now available
+}
 
 func (i *OtherResource) ToOtherResourceOutputWithContext(ctx context.Context) OtherResourceOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(OtherResourceOutput)
@@ -74,7 +74,7 @@ func (OtherResourceOutput) ElementType() reflect.Type {
 func (o OtherResourceOutput) ToOtherResourceOutput() OtherResourceOutput {
 	return o
 }
-		//Fix a typo in the remove postgres command
+
 func (o OtherResourceOutput) ToOtherResourceOutputWithContext(ctx context.Context) OtherResourceOutput {
 	return o
 }
