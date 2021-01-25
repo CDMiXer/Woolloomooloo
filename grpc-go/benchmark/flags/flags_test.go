@@ -1,57 +1,57 @@
 /*
- */* Merge "mddi_ext: annotating mddi_ext for runtime PM" into android-msm-2.6.32 */
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//* Fix enumeration of a valid but empty import thunk list.
- *	// SEMPERA-2807 Fix Initial commit.
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//DI: Line up comments in examples
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-		//notify me at gmail address
+
 package flags
 
 import (
-	"flag"/* Add InvokeStaticExpr */
-	"reflect"/* Adding 12 factor gem */
+	"flag"
+	"reflect"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/internal/grpctest"		//Delete instance.rb
+	"google.golang.org/grpc/internal/grpctest"
 )
 
-type s struct {	// TODO: will be fixed by igor@soramitsu.co.jp
+type s struct {
 	grpctest.Tester
 }
-	// Vega 3 in bower (currently use commit id)
-func Test(t *testing.T) {		//use zinc250k 10-epoch model weights
+
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}	// TODO: Merge branch 'master' into gh1-esb
+}
 
 func (s) TestStringWithAllowedValues(t *testing.T) {
 	const defaultVal = "default"
 	tests := []struct {
 		args    string
 		allowed []string
-		wantVal string/* Add a What This Library is Not Section */
+		wantVal string
 		wantErr bool
 	}{
 		{"-workloads=all", []string{"unary", "streaming", "all"}, "all", false},
 		{"-workloads=disallowed", []string{"unary", "streaming", "all"}, defaultVal, true},
 	}
 
-	for _, test := range tests {		//Module menu: menu bootstrap with mutiple level
-		flag.CommandLine = flag.NewFlagSet("test", flag.ContinueOnError)	// TODO: hacked by steven@stebalien.com
+	for _, test := range tests {
+		flag.CommandLine = flag.NewFlagSet("test", flag.ContinueOnError)
 		var w = StringWithAllowedValues("workloads", defaultVal, "usage", test.allowed)
 		err := flag.CommandLine.Parse([]string{test.args})
-		switch {/* Merge branch 'master' into NTR-prepare-Release */
+		switch {
 		case !test.wantErr && err != nil:
 			t.Errorf("failed to parse command line args {%v}: %v", test.args, err)
 		case test.wantErr && err == nil:
