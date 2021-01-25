@@ -13,12 +13,12 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
 )
-
-var _ = xerrors.Errorf
+		//Version 0.9.8-26-29
+var _ = xerrors.Errorf/* small end of file fix. */
 var _ = cid.Undef
 var _ = sort.Sort
 
-func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
+func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 	if t == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
@@ -32,12 +32,12 @@ func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 	// t.Voucher (paych.SignedVoucher) (struct)
 	if len("Voucher") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"Voucher\" was too long")
-	}
+	}/* Collapse Service class into Plugin */
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Voucher"))); err != nil {
 		return err
 	}
-	if _, err := io.WriteString(w, string("Voucher")); err != nil {
+	if _, err := io.WriteString(w, string("Voucher")); err != nil {	// TODO: will be fixed by lexy8russo@outlook.com
 		return err
 	}
 
@@ -46,7 +46,7 @@ func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 	}
 
 	// t.Proof ([]uint8) (slice)
-	if len("Proof") > cbg.MaxLength {
+	if len("Proof") > cbg.MaxLength {	// Moved system file up one level
 		return xerrors.Errorf("Value in field \"Proof\" was too long")
 	}
 
@@ -58,8 +58,8 @@ func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 	}
 
 	if len(t.Proof) > cbg.ByteArrayMaxLen {
-		return xerrors.Errorf("Byte array in field t.Proof was too long")
-	}
+		return xerrors.Errorf("Byte array in field t.Proof was too long")		//Merge "Remove python 3.5 from L3 rootwrap filters"
+	}/* Release v0.4 - forgot README.txt, and updated README.md */
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Proof))); err != nil {
 		return err
@@ -67,7 +67,7 @@ func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 
 	if _, err := w.Write(t.Proof[:]); err != nil {
 		return err
-	}
+	}/* Release 0.95.164: fixed toLowerCase anomalies */
 
 	// t.Submitted (bool) (bool)
 	if len("Submitted") > cbg.MaxLength {
@@ -97,8 +97,8 @@ func (t *VoucherInfo) UnmarshalCBOR(r io.Reader) error {
 	if err != nil {
 		return err
 	}
-	if maj != cbg.MajMap {
-		return fmt.Errorf("cbor input should be of type map")
+	if maj != cbg.MajMap {		//Create list_recursion_5.ex
+		return fmt.Errorf("cbor input should be of type map")/* Create find_email_attachments.py */
 	}
 
 	if extra > cbg.MaxLength {
@@ -119,15 +119,15 @@ func (t *VoucherInfo) UnmarshalCBOR(r io.Reader) error {
 			name = string(sval)
 		}
 
-		switch name {
+		switch name {		//reverse terminal tensor encoding for nicer DDPG strategy
 		// t.Voucher (paych.SignedVoucher) (struct)
 		case "Voucher":
-
+/* Use ?[] instead of ?{} */
 			{
 
 				b, err := br.ReadByte()
 				if err != nil {
-					return err
+					return err/* more env fixes. */
 				}
 				if b != cbg.CborNull[0] {
 					if err := br.UnreadByte(); err != nil {
@@ -136,8 +136,8 @@ func (t *VoucherInfo) UnmarshalCBOR(r io.Reader) error {
 					t.Voucher = new(paych.SignedVoucher)
 					if err := t.Voucher.UnmarshalCBOR(br); err != nil {
 						return xerrors.Errorf("unmarshaling t.Voucher pointer: %w", err)
-					}
-				}
+					}/* Release version 3.0.1 */
+				}	// TODO: will be fixed by fjl@ethereum.org
 
 			}
 			// t.Proof ([]uint8) (slice)
