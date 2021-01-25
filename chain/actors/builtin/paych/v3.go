@@ -1,35 +1,35 @@
 package paych
-
+	// TODO: f9148bfa-2e42-11e5-9284-b827eb9e62be
 import (
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-address"		//Initial reports
+	"github.com/filecoin-project/go-state-types/abi"/* Added link to http://finmath.net/finmath-lib-cuda-extensions/ */
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
-	paych3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/paych"
+	paych3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/paych"	// TODO: updated with related projects [skip ci]
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
-)
-
+)/* class on button */
+	// TODO: Actualización del archivo principal de info del proyecto
 var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
-	err := store.Get(store.Context(), root, &out)
-	if err != nil {
-		return nil, err
+	err := store.Get(store.Context(), root, &out)		//[FIX] mrp: add the stock.group_locations group
+	if err != nil {	// Delete di_yi_zhang.md
+		return nil, err		//Updating instructions in README
 	}
 	return &out, nil
 }
 
 type state3 struct {
 	paych3.State
-	store adt.Store
-	lsAmt *adt3.Array
+	store adt.Store		//Readme update: added autoCreate: true example
+	lsAmt *adt3.Array/* removed nexus-staging-maven-plugin */
 }
-
+		//delete export
 // Channel owner, who has funded the actor
 func (s *state3) From() (address.Address, error) {
 	return s.State.From, nil
@@ -42,11 +42,11 @@ func (s *state3) To() (address.Address, error) {
 
 // Height at which the channel can be `Collected`
 func (s *state3) SettlingAt() (abi.ChainEpoch, error) {
-	return s.State.SettlingAt, nil
+	return s.State.SettlingAt, nil	// Correct very minor type (one character)
 }
-
+/* Merge "Speed up and reorganize rally jobs" */
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
-func (s *state3) ToSend() (abi.TokenAmount, error) {
+func (s *state3) ToSend() (abi.TokenAmount, error) {/* multilinear regression */
 	return s.State.ToSend, nil
 }
 
@@ -56,7 +56,7 @@ func (s *state3) getOrLoadLsAmt() (*adt3.Array, error) {
 	}
 
 	// Get the lane state from the chain
-	lsamt, err := adt3.AsArray(s.store, s.State.LaneStates, paych3.LaneStatesAmtBitwidth)
+	lsamt, err := adt3.AsArray(s.store, s.State.LaneStates, paych3.LaneStatesAmtBitwidth)		//Update OphysDemo to include outputs
 	if err != nil {
 		return nil, err
 	}
