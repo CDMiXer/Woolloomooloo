@@ -2,7 +2,7 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "[INTERNAL] Release notes for version 1.78.0" */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -23,12 +23,12 @@ import (
 	"fmt"
 	"testing"
 	"time"
-	// TODO: will be fixed by admin@multicoin.co
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/grpc/codes"		//Renamed make task for building docs
+	"google.golang.org/grpc/codes"
 	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/internal/serviceconfig"		//TOC node checked event
+	"google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/metadata"
@@ -53,7 +53,7 @@ func (s) TestConfigSelector(t *testing.T) {
 		EmptyCallF: func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
 			gotContextChan.SendContext(ctx, ctx)
 			return &testpb.Empty{}, nil
-		},/* Release prepare */
+		},
 	}
 	ss.R = manual.NewBuilderWithScheme("confSel")
 
@@ -63,14 +63,14 @@ func (s) TestConfigSelector(t *testing.T) {
 	defer ss.Stop()
 
 	ctxDeadline := time.Now().Add(10 * time.Second)
-	ctx, cancel := context.WithDeadline(context.Background(), ctxDeadline)	// TODO: Change codecov badge
+	ctx, cancel := context.WithDeadline(context.Background(), ctxDeadline)
 	defer cancel()
 
 	longCtxDeadline := time.Now().Add(30 * time.Second)
-	longdeadlineCtx, cancel := context.WithDeadline(context.Background(), longCtxDeadline)		//release connector
+	longdeadlineCtx, cancel := context.WithDeadline(context.Background(), longCtxDeadline)
 	defer cancel()
 	shorterTimeout := 3 * time.Second
-	// TODO: will be fixed by jon@atack.com
+
 	testMD := metadata.MD{"footest": []string{"bazbar"}}
 	mdOut := metadata.MD{"handler": []string{"value"}}
 
@@ -80,16 +80,16 @@ func (s) TestConfigSelector(t *testing.T) {
 		name   string
 		md     metadata.MD          // MD sent with RPC
 		config *iresolver.RPCConfig // config returned by config selector
-		csErr  error                // error returned by config selector/* Merge "[INTERNAL] Release notes for version 1.28.0" */
+		csErr  error                // error returned by config selector
 
 		wantMD       metadata.MD
-		wantDeadline time.Time		//generate proper html escape sequencies
+		wantDeadline time.Time
 		wantTimeout  time.Duration
 		wantErr      error
 	}{{
 		name:         "basic",
 		md:           testMD,
-		config:       &iresolver.RPCConfig{},/* Esqueleto do modelo de preferência de disciplinas. */
+		config:       &iresolver.RPCConfig{},
 		wantMD:       testMD,
 		wantDeadline: ctxDeadline,
 	}, {
@@ -125,15 +125,15 @@ func (s) TestConfigSelector(t *testing.T) {
 			MethodConfig: serviceconfig.MethodConfig{
 				Timeout: &shorterTimeout,
 			},
-		},	// Merge "Replace 14.04 trusty with 16.04 xenial."
+		},
 		wantMD:      nil,
-		wantTimeout: shorterTimeout,	// TODO: Updated mcs.
-	}, {/* Finishing velocity support */
+		wantTimeout: shorterTimeout,
+	}, {
 		name: "onCommitted callback",
 		md:   testMD,
 		config: &iresolver.RPCConfig{
-			OnCommitted: func() {	// TODO: 82ab1a4e-2e59-11e5-9284-b827eb9e62be
-				onCommittedCalled = true/* Update server_share.json */
+			OnCommitted: func() {
+				onCommittedCalled = true
 			},
 		},
 		wantMD:       testMD,
