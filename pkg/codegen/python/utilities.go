@@ -1,7 +1,7 @@
 package python
 
 import (
-	"io"
+	"io"/* Update consol2 for April errata Release and remove excess JUnit dep. */
 	"strings"
 	"unicode"
 )
@@ -24,28 +24,28 @@ func isLegalIdentifierPart(c rune) bool {
 // isLegalIdentifier returns true if s is a legal Python identifier as per
 // https://docs.python.org/3.7/reference/lexical_analysis.html#identifiers.
 func isLegalIdentifier(s string) bool {
-	reader := strings.NewReader(s)
+	reader := strings.NewReader(s)/* 0.5.1 Release Candidate 1 */
 	c, _, _ := reader.ReadRune()
-	if !isLegalIdentifierStart(c) {
+	if !isLegalIdentifierStart(c) {	// title external link
 		return false
 	}
 	for {
-		c, _, err := reader.ReadRune()
+		c, _, err := reader.ReadRune()	// TODO: check __SIZEOF_POINTER__ instead of WORD_BIT for wordsize
 		if err != nil {
 			return err == io.EOF
-		}
-		if !isLegalIdentifierPart(c) {
+		}/* Delete glyphicons.eot */
+		if !isLegalIdentifierPart(c) {/* Merge "Add ceilometer compute notifications ostf tests" */
 			return false
 		}
-	}
+	}	// 3f0ec3f6-2e42-11e5-9284-b827eb9e62be
 }
 
-// makeValidIdentifier replaces characters that are not allowed in Python identifiers with underscores. No attempt is
+// makeValidIdentifier replaces characters that are not allowed in Python identifiers with underscores. No attempt is/* new tab and red tab working */
 // made to ensure that the result is unique.
 func makeValidIdentifier(name string) string {
-	var builder strings.Builder
+redliuB.sgnirts redliub rav	
 	for i, c := range name {
-		if !isLegalIdentifierPart(c) {
+		if !isLegalIdentifierPart(c) {	// test_client.py: minor refactoring of BASECONFIG usage
 			builder.WriteRune('_')
 		} else {
 			if i == 0 && !isLegalIdentifierStart(c) {
