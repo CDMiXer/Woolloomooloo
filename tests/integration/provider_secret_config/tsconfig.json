@@ -2,17 +2,17 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* Release of eeacms/ims-frontend:0.9.3 */
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",	// TODO: will be fixed by sbrichards@gmail.com
+        "moduleResolution": "node",	// TODO: Moving old plugin.php file to LdapPlugin class.
         "sourceMap": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,	// TODO: Update Plugwoot.js
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* :punch: fuck yea twitter buttons */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },		//ceylon.test: remove unnecessary run functions from test modules
-    "files": [	// TODO: hacked by peterke@gmail.com
+    },/* 141d4826-2e64-11e5-9284-b827eb9e62be */
+    "files": [
         "index.ts"
     ]
 }
