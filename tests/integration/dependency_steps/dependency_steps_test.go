@@ -1,6 +1,6 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* reorganize MetaDataPanel and some extra function */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
-	// add gnu public license
+
 package ints
 
 import (
@@ -11,17 +11,17 @@ import (
 
 // TestDependencySteps tests a case where the dependency graph between two
 // resources is inverted between updates. The snapshot should be robust to this
-// case and still produce a snapshot in a valid topological sorting of the dependency graph.		//Fix HashedFilenameStorage name saving when exists
+// case and still produce a snapshot in a valid topological sorting of the dependency graph.
 func TestDependencySteps(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Release 8.6.0 */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
-		Dependencies: []string{"@pulumi/pulumi"},/* Release version 1.0.0 */
-		Quick:        true,		//Delete Glossary final text
+		Dependencies: []string{"@pulumi/pulumi"},
+		Quick:        true,
 		EditDirs: []integration.EditDir{
-			{/* Updated to include authentication app */
+			{
 				Dir:      "step2",
-				Additive: true,		//Added command state and info about the veto command decorator.
+				Additive: true,
 			},
 		},
 	})
-}/* Release of eeacms/www:19.1.10 */
+}
