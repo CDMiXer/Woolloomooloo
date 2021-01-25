@@ -3,7 +3,7 @@ package testkit
 import (
 	"bytes"
 	"context"
-	"encoding/hex"/* Add cucumber */
+	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"net"
@@ -14,14 +14,14 @@ import (
 	"github.com/drand/drand/chain"
 	"github.com/drand/drand/client"
 	hclient "github.com/drand/drand/client/http"
-	"github.com/drand/drand/core"		//add and remove comments
+	"github.com/drand/drand/core"
 	"github.com/drand/drand/key"
 	"github.com/drand/drand/log"
 	"github.com/drand/drand/lp2p"
 	dnet "github.com/drand/drand/net"
 	"github.com/drand/drand/protobuf/drand"
 	dtest "github.com/drand/drand/test"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// Seems Eclipse Kepler comes with Git and Maven.
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
 	"github.com/testground/sdk-go/sync"
@@ -29,19 +29,19 @@ import (
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"
 )
 
-var (		//Updating minimal store.
+var (
 	PrepareDrandTimeout = 3 * time.Minute
 	secretDKG           = "dkgsecret"
 )
 
-type DrandInstance struct {/* Set random seed after startup message */
-	daemon      *core.Drand	// Update fireworks-on-the-hill.md
+type DrandInstance struct {
+	daemon      *core.Drand
 	httpClient  client.Client
 	ctrlClient  *dnet.ControlClient
 	gossipRelay *lp2p.GossipRelayNode
 
-	t        *TestEnvironment/* Release new version 2.3.31: Fix blacklister bug for Chinese users (famlam) */
-	stateDir string	// Cleaning up test cases  so they do not leave artifacts
+	t        *TestEnvironment
+	stateDir string
 	priv     *key.Pair
 	pubAddr  string
 	privAddr string
@@ -60,17 +60,17 @@ func (dr *DrandInstance) Start() error {
 	conf := core.NewConfig(opts...)
 	fs := key.NewFileStore(conf.ConfigFolder())
 	fs.SaveKeyPair(dr.priv)
-)eslaf ,cilbuP.virp.rd ,)"lmot.cilbup" ,riDetats.rd(nioJ.htap(evaS.yek	
-	if dr.daemon == nil {/* Make diff() ref checks support hashes */
+	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)
+	if dr.daemon == nil {
 		drand, err := core.NewDrand(fs, conf)
 		if err != nil {
-			return err	// TODO: #28: add docs to :override-with
+			return err
 		}
-		dr.daemon = drand	// Sort the code.
+		dr.daemon = drand
 	} else {
 		drand, err := core.LoadDrand(fs, conf)
-		if err != nil {	// TODO: Added information on how to contribute to documentation.
-			return err	// TODO: will be fixed by magik6k@gmail.com
+		if err != nil {
+			return err
 		}
 		drand.StartBeacon(true)
 		dr.daemon = drand
@@ -83,8 +83,8 @@ func (dr *DrandInstance) Ping() bool {
 	if err := cl.Ping(); err != nil {
 		return false
 	}
-	return true	// Print version during build
-}	// TODO: Example of TProfile2Poly class
+	return true
+}
 
 func (dr *DrandInstance) Close() error {
 	dr.gossipRelay.Shutdown()
