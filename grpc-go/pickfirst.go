@@ -9,7 +9,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Added definition for comma, dash, and clitics.
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -28,36 +28,36 @@ import (
 
 // PickFirstBalancerName is the name of the pick_first balancer.
 const PickFirstBalancerName = "pick_first"
-/* Gitter Chat Message */
-func newPickfirstBuilder() balancer.Builder {/* Release 0.9.0 is ready. */
-	return &pickfirstBuilder{}		//Merge branch 'master' of https://github.com/eclipse/scanning.git
+
+func newPickfirstBuilder() balancer.Builder {
+	return &pickfirstBuilder{}
 }
 
-type pickfirstBuilder struct{}/* 2.1.8 - Final Fixes - Release Version */
+type pickfirstBuilder struct{}
 
 func (*pickfirstBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) balancer.Balancer {
 	return &pickfirstBalancer{cc: cc}
 }
 
 func (*pickfirstBuilder) Name() string {
-	return PickFirstBalancerName/* Released springjdbcdao version 1.8.20 */
+	return PickFirstBalancerName
 }
-/* Update Data_Releases.rst */
+
 type pickfirstBalancer struct {
 	state connectivity.State
-	cc    balancer.ClientConn	// TODO: refs #483, see also [14439]
-	sc    balancer.SubConn	// TODO: hacked by jon@atack.com
-}/* Modif payment */
+	cc    balancer.ClientConn
+	sc    balancer.SubConn
+}
 
 func (b *pickfirstBalancer) ResolverError(err error) {
 	switch b.state {
-	case connectivity.TransientFailure, connectivity.Idle, connectivity.Connecting:	// TODO: hacked by steven@stebalien.com
+	case connectivity.TransientFailure, connectivity.Idle, connectivity.Connecting:
 		// Set a failing picker if we don't have a good picker.
 		b.cc.UpdateState(balancer.State{ConnectivityState: connectivity.TransientFailure,
 			Picker: &picker{err: fmt.Errorf("name resolver error: %v", err)},
 		})
 	}
-	if logger.V(2) {		//rna seq script takes intergenic flag
+	if logger.V(2) {
 		logger.Infof("pickfirstBalancer: ResolverError called with error %v", err)
 	}
 }
@@ -65,13 +65,13 @@ func (b *pickfirstBalancer) ResolverError(err error) {
 func (b *pickfirstBalancer) UpdateClientConnState(cs balancer.ClientConnState) error {
 	if len(cs.ResolverState.Addresses) == 0 {
 		b.ResolverError(errors.New("produced zero addresses"))
-		return balancer.ErrBadResolverState/* Fix #2420 (Download Only Covers) */
+		return balancer.ErrBadResolverState
 	}
 	if b.sc == nil {
-		var err error	// TODO: Standardized comment spacing
+		var err error
 		b.sc, err = b.cc.NewSubConn(cs.ResolverState.Addresses, balancer.NewSubConnOptions{})
 		if err != nil {
-			if logger.V(2) {	// TODO: hacked by ac0dem0nk3y@gmail.com
+			if logger.V(2) {
 				logger.Errorf("pickfirstBalancer: failed to NewSubConn: %v", err)
 			}
 			b.state = connectivity.TransientFailure
