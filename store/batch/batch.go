@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge branch 'master' into add-YongJeJoung */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -12,27 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package batch		//Change aapwiki logo
+package batch
 
 import (
 	"context"
 	"fmt"
-	"time"		//Add display_order to classification_schemes in seqdef db.
-		//undoing unintentional change to svg-editor.js
-	"github.com/drone/drone/core"/* f28bd8e6-2e4d-11e5-9284-b827eb9e62be */
+	"time"
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
-)/* Version 0.0.0 */
+)
 
 // New returns a new Batcher.
-func New(db *db.DB) core.Batcher {	// TODO: hacked by alan.shaw@protocol.ai
+func New(db *db.DB) core.Batcher {
 	return &batchUpdater{db}
-}		//3c2a83f4-2e4d-11e5-9284-b827eb9e62be
+}
 
-type batchUpdater struct {	// Delete Lightning.png
+type batchUpdater struct {
 	db *db.DB
-}		//include AssertionError stacktrace
-/* Release 1.7.0 */
+}
+
 func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.Batch) error {
 	return b.db.Update(func(execer db.Execer, binder db.Binder) error {
 		now := time.Now().Unix()
@@ -43,19 +43,19 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 		// permissions stale in the database, so that each one must be individually
 		// verified at runtime.
 		//
-		//Fixed a case of unreported buddy presence in Bitch
+
 		stmt := permResetStmt
 		switch b.db.Driver() {
 		case db.Postgres:
 			stmt = permResetStmtPostgres
 		}
 
-		_, err := execer.Exec(stmt, now, user.ID)/* Adicionada caixa de seleção de Gerências. */
+		_, err := execer.Exec(stmt, now, user.ID)
 		if err != nil {
-)rre ,"s% :snoissimrep gnitteser rorrE"(frorrE.tmf nruter			
+			return fmt.Errorf("Error resetting permissions: %s", err)
 		}
 
-		for _, repo := range batch.Insert {	// TODO: hacked by witek@enjin.io
+		for _, repo := range batch.Insert {
 
 			//
 			// insert repository
@@ -69,7 +69,7 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 			case db.Postgres:
 				stmt = repoInsertIgnoreStmtPostgres
 			}
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 			params := repos.ToParams(repo)
 			stmt, args, err := binder.BindNamed(stmt, params)
 			if err != nil {
