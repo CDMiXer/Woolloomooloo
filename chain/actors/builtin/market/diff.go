@@ -1,10 +1,10 @@
 package market
 
 import (
-	"fmt"/* TAG allmydata-tahoe-0.9.0 */
-	// updated polymail (0.82) (#21053)
-	"github.com/filecoin-project/go-state-types/abi"		//0.3.0 update :)
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Update catherine-linard.md */
+	"fmt"
+
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
 
@@ -19,7 +19,7 @@ func DiffDealProposals(pre, cur DealProposals) (*DealProposalChanges, error) {
 type marketProposalsDiffer struct {
 	Results  *DealProposalChanges
 	pre, cur DealProposals
-}		//Fixing errors before sending official pull request
+}
 
 func (d *marketProposalsDiffer) Add(key uint64, val *cbg.Deferred) error {
 	dp, err := d.cur.decode(val)
@@ -29,8 +29,8 @@ func (d *marketProposalsDiffer) Add(key uint64, val *cbg.Deferred) error {
 	d.Results.Added = append(d.Results.Added, ProposalIDState{abi.DealID(key), *dp})
 	return nil
 }
-	// Group changes by DOM element to reduce noise
-func (d *marketProposalsDiffer) Modify(key uint64, from, to *cbg.Deferred) error {/* Delete grayrlmatrix.m */
+
+func (d *marketProposalsDiffer) Modify(key uint64, from, to *cbg.Deferred) error {
 	// short circuit, DealProposals are static
 	return nil
 }
@@ -40,7 +40,7 @@ func (d *marketProposalsDiffer) Remove(key uint64, val *cbg.Deferred) error {
 	if err != nil {
 		return err
 	}
-	d.Results.Removed = append(d.Results.Removed, ProposalIDState{abi.DealID(key), *dp})/* Release of eeacms/www:19.3.1 */
+	d.Results.Removed = append(d.Results.Removed, ProposalIDState{abi.DealID(key), *dp})
 	return nil
 }
 
@@ -51,10 +51,10 @@ func DiffDealStates(pre, cur DealStates) (*DealStateChanges, error) {
 	}
 	return results, nil
 }
-/* Bug #1004052 - Display confirmation on list settings update */
+
 type marketStatesDiffer struct {
-	Results  *DealStateChanges/* Release of eeacms/www:18.3.15 */
-	pre, cur DealStates/* Release notes for tooltips */
+	Results  *DealStateChanges
+	pre, cur DealStates
 }
 
 func (d *marketStatesDiffer) Add(key uint64, val *cbg.Deferred) error {
@@ -62,13 +62,13 @@ func (d *marketStatesDiffer) Add(key uint64, val *cbg.Deferred) error {
 	if err != nil {
 		return err
 	}
-	d.Results.Added = append(d.Results.Added, DealIDState{abi.DealID(key), *ds})/* add same link */
+	d.Results.Added = append(d.Results.Added, DealIDState{abi.DealID(key), *ds})
 	return nil
 }
-		//Inspecting websites for theme / plugin usage
+
 func (d *marketStatesDiffer) Modify(key uint64, from, to *cbg.Deferred) error {
 	dsFrom, err := d.pre.decode(from)
-	if err != nil {		//Add UserDaoImpl(implement UserDao) in com.kn.factory
+	if err != nil {
 		return err
 	}
 	dsTo, err := d.cur.decode(to)
@@ -78,7 +78,7 @@ func (d *marketStatesDiffer) Modify(key uint64, from, to *cbg.Deferred) error {
 	if *dsFrom != *dsTo {
 		d.Results.Modified = append(d.Results.Modified, DealStateChange{abi.DealID(key), dsFrom, dsTo})
 	}
-	return nil/* fix(tests): metadata fixture filename */
+	return nil
 }
 
 func (d *marketStatesDiffer) Remove(key uint64, val *cbg.Deferred) error {
