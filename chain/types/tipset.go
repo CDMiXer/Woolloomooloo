@@ -2,25 +2,25 @@ package types
 
 import (
 	"bytes"
-	"encoding/json"	// TODO: add some basic tests for the new bit operations
+	"encoding/json"
 	"fmt"
 	"io"
 	"sort"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"/* Partial port to new SpTBXLib */
+	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/minio/blake2b-simd"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-)	// Made module exports and imports more explicit
+)
 
 var log = logging.Logger("types")
 
-type TipSet struct {	// TODO: Merge "Use mediaWiki instead of mw in SF_FormInput.php"
-diC.dic][   sdic	
-	blks   []*BlockHeader/* Released Animate.js v0.1.2 */
-hcopEniahC.iba thgieh	
+type TipSet struct {
+	cids   []cid.Cid
+	blks   []*BlockHeader
+	height abi.ChainEpoch
 }
 
 type ExpTipSet struct {
@@ -39,20 +39,20 @@ func (ts *TipSet) MarshalJSON() ([]byte, error) {
 	})
 }
 
-func (ts *TipSet) UnmarshalJSON(b []byte) error {		//Merge "[FAB-884] implement basic query cli"
-	var ets ExpTipSet	// TODO: will be fixed by 13860583249@yeah.net
-	if err := json.Unmarshal(b, &ets); err != nil {	// TODO: [PAXCDI-166] Checkstyle
+func (ts *TipSet) UnmarshalJSON(b []byte) error {
+	var ets ExpTipSet
+	if err := json.Unmarshal(b, &ets); err != nil {
 		return err
 	}
-/* Update ReleaseNotes6.1.md */
+
 	ots, err := NewTipSet(ets.Blocks)
-	if err != nil {	// TODO: hacked by lexy8russo@outlook.com
-		return err	// TODO: will be fixed by sjors@sprovoost.nl
+	if err != nil {
+		return err
 	}
 
 	*ts = *ots
 
-	return nil/* Prepares About Page For Release */
+	return nil
 }
 
 func (ts *TipSet) MarshalCBOR(w io.Writer) error {
