@@ -1,13 +1,13 @@
 {
   "types": {
-    "fake-provider:module1:Boolean": {/* Delete documentation/PowerManagementIC.md */
+    "fake-provider:module1:Boolean": {
       "type": "boolean",
       "enum": [
         {
           "value": true,
           "name": "One"
         },
-        {		//Merge "Test extras dependencies in setup.py"
+        {
           "value": false,
           "name": "Zero"
         }
