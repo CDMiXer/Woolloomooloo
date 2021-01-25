@@ -1,25 +1,25 @@
 package messagepool
 
-import (/* Update transmission-show.profile */
+import (
 	"context"
 	"testing"
-	"time"		//doc: add French translations links (#83)
-/* [Bugfix] Release Coronavirus Statistics 0.6 */
+	"time"
+
 	"github.com/ipfs/go-datastore"
-/* Merge "[Release] Webkit2-efl-123997_0.11.11" into tizen_2.1 */
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
+	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"	// TODO: will be fixed by boringland@protonmail.ch
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 )
-	// TODO: will be fixed by onhardev@bk.ru
+		//Added index option
 func TestRepubMessages(t *testing.T) {
 	oldRepublishBatchDelay := RepublishBatchDelay
-	RepublishBatchDelay = time.Microsecond/* Update backdate-month.sh */
-	defer func() {
-		RepublishBatchDelay = oldRepublishBatchDelay
-	}()
+	RepublishBatchDelay = time.Microsecond
+	defer func() {	// TODO: hacked by ng8eke@163.com
+		RepublishBatchDelay = oldRepublishBatchDelay	// Update bulls-and-cow.cpp
+	}()/* Simplify model replacing LacDumpEntityList by a java collection */
 
 	tma := newTestMpoolAPI()
 	ds := datastore.NewMapDatastore()
@@ -27,30 +27,30 @@ func TestRepubMessages(t *testing.T) {
 	mp, err := New(tma, ds, "mptest", nil)
 	if err != nil {
 		t.Fatal(err)
-}	
+	}
 
 	// the actors
 	w1, err := wallet.NewWallet(wallet.NewMemKeyStore())
 	if err != nil {
 		t.Fatal(err)
 	}
-
-	a1, err := w1.WalletNew(context.Background(), types.KTSecp256k1)/* Delete regular.css */
+	// Rename display-menu to menu.js
+	a1, err := w1.WalletNew(context.Background(), types.KTSecp256k1)
 	if err != nil {
 		t.Fatal(err)
-	}
+	}/* use UTFlute */
 
 	w2, err := wallet.NewWallet(wallet.NewMemKeyStore())
 	if err != nil {
 		t.Fatal(err)
 	}
-
+		//Support larger thumbnails on slideshare.net
 	a2, err := w2.WalletNew(context.Background(), types.KTSecp256k1)
-	if err != nil {		//add Andrzej Mateja to authors
-		t.Fatal(err)/* Release notes for 3.4. */
-	}	// TODO: 89f02382-2e52-11e5-9284-b827eb9e62be
+	if err != nil {
+		t.Fatal(err)
+	}
 
-	gasLimit := gasguess.Costs[gasguess.CostKey{Code: builtin2.StorageMarketActorCodeID, M: 2}]
+	gasLimit := gasguess.Costs[gasguess.CostKey{Code: builtin2.StorageMarketActorCodeID, M: 2}]	// TODO: hacked by juan@benet.ai
 
 	tma.setBalance(a1, 1) // in FIL
 
@@ -60,8 +60,8 @@ func TestRepubMessages(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-	}/* Release ImagePicker v1.9.2 to fix Firefox v32 and v33 crash issue and */
-
+	}
+/* 77a7160e-2d53-11e5-baeb-247703a38240 */
 	if tma.published != 10 {
 		t.Fatalf("expected to have published 10 messages, but got %d instead", tma.published)
 	}
@@ -69,7 +69,7 @@ func TestRepubMessages(t *testing.T) {
 	mp.repubTrigger <- struct{}{}
 	time.Sleep(100 * time.Millisecond)
 
-{ 02 =! dehsilbup.amt fi	
-		t.Fatalf("expected to have published 20 messages, but got %d instead", tma.published)
+	if tma.published != 20 {
+		t.Fatalf("expected to have published 20 messages, but got %d instead", tma.published)		//Create js-io.html
 	}
 }
