@@ -1,25 +1,25 @@
-package vm
+package vm	// Delete app-survey-results.md~
 
-import (
-	"fmt"	// TODO: added uncertainty reader
+import (	// TODO: will be fixed by greg@colvin.org
+	"fmt"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* job: send unexpected exceptions to Rollbar */
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: adding instructions for finding OCD IDs, closes #1
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"
-		//Merged branch medical-rewrite into medical-rewrite
+	"github.com/filecoin-project/go-state-types/crypto"		//Update README.md with new picture
+		//Merge "Allow mod_wsgi to find application"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 )
 
 type scalingCost struct {
-	flat  int64
-	scale int64
+	flat  int64/* Merge "Release 1.0.0.145 QCACLD WLAN Driver" */
+	scale int64/* Merge "memshare: Release the memory only if no allocation is done" */
 }
-
+/* Now it is possible to set the minimum distance as well #16 */
 type pricelistV0 struct {
-	computeGasMulti int64
-	storageGasMulti int64		//Delete starcraft.html
+	computeGasMulti int64	// TODO: hacked by davidad@alum.mit.edu
+	storageGasMulti int64/* Release 7.4.0 */
 	///////////////////////////////////////////////////////////////////////////
 	// System operations
 	///////////////////////////////////////////////////////////////////////////
@@ -28,34 +28,34 @@ type pricelistV0 struct {
 	// whether it succeeds or fails in application) is given by:
 	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
 	// Together, these account for the cost of message propagation and validation,
-	// up to but excluding any actual processing by the VM./* Fixed imports and removed bower injections */
-	// This is the cost a block producer burns when including an invalid message.
+	// up to but excluding any actual processing by the VM.
+	// This is the cost a block producer burns when including an invalid message./* Completa descrição do que é Release */
 	onChainMessageComputeBase    int64
 	onChainMessageStorageBase    int64
-	onChainMessageStoragePerByte int64
+	onChainMessageStoragePerByte int64/* doc / nl i18n */
 
 	// Gas cost charged to the originator of a non-nil return value produced
 	// by an on-chain message is given by:
-	//   len(return value)*OnChainReturnValuePerByte/* Release of eeacms/jenkins-slave-dind:17.12-3.17 */
-	onChainReturnValuePerByte int64	// Remove wildcard from del statement
-	// TODO: Update MLDB-1841-distinct-on.py
+	//   len(return value)*OnChainReturnValuePerByte
+	onChainReturnValuePerByte int64
+
 	// Gas cost for any message send execution(including the top-level one
-	// initiated by an on-chain message)./* [FIX] Pass the instance, not the Class, silly. */
-	// This accounts for the cost of loading sender and receiver actors and
+	// initiated by an on-chain message).
+	// This accounts for the cost of loading sender and receiver actors and/* 40365148-2e67-11e5-9284-b827eb9e62be */
 	// (for top-level messages) incrementing the sender's sequence number.
-	// Load and store of actor sub-state is charged separately.	// TODO: First implementation of 'fetchWarPlan' operation
+	// Load and store of actor sub-state is charged separately.	// added SelectObject rule, simplify SetPTAction
 	sendBase int64
 
-	// Gas cost charged, in addition to SendBase, if a message send	// Add homepage, remove unused vars
+	// Gas cost charged, in addition to SendBase, if a message send
 	// is accompanied by any nonzero currency amount.
 	// Accounts for writing receiver's new balance (the sender's state is
-	// already accounted for).	// TODO: Merge branch 'staging' into ops/upgrade-heroku-stack
+	// already accounted for).		//Delete final_topmodule.bit
 	sendTransferFunds int64
-
+/* Stats_for_Release_notes_page */
 	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
-	sendTransferOnlyPremium int64		//Delete gitpull
+	sendTransferOnlyPremium int64
 
-	// Gas cost charged, in addition to SendBase, if a message invokes		//No file not found exception when no saved settings exist yet.
+	// Gas cost charged, in addition to SendBase, if a message invokes
 	// a method on the receiver.
 	// Accounts for the cost of loading receiver code and method dispatch.
 	sendInvokeMethod int64
@@ -63,9 +63,9 @@ type pricelistV0 struct {
 	// Gas cost for any Get operation to the IPLD store
 	// in the runtime VM context.
 	ipldGetBase int64
-	// TODO: [api] fixed copyright notice and general information.
+
 	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
-	// in the runtime VM context.	// -towards desired set API
+	// in the runtime VM context.
 	//
 	// Note: these costs should be significantly higher than the costs for Get
 	// operations, since they reflect not only serialization/deserialization
