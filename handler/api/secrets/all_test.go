@@ -2,11 +2,11 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: hacked by cory@protocol.ai
+// +build !oss
 
 package secrets
 
-import (/* [1.1.15] Release */
+import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -29,31 +29,31 @@ func TestHandleAll(t *testing.T) {
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-/* Releases for everything! */
+
 	HandleAll(secrets).ServeHTTP(w, r)
-	if got, want := w.Code, http.StatusOK; want != got {/* Create GameStateManager.java */
+	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-		//0e38224e-2e6b-11e5-9284-b827eb9e62be
+
 	got, want := []*core.Secret{}, dummySecretListScrubbed
 	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)/* Create lint.css */
+		t.Errorf(diff)
 	}
-}/* Fix [ 1790986 ] Bug while importing previous settings(Filezilla.xml) */
+}
 
 func TestHandleAll_SecretListErr(t *testing.T) {
-	controller := gomock.NewController(t)/* Initial Release ( v-1.0 ) */
-	defer controller.Finish()/* Release notes and version bump 2.0 */
+	controller := gomock.NewController(t)
+	defer controller.Finish()
 
 	secrets := mock.NewMockGlobalSecretStore(controller)
 	secrets.EXPECT().ListAll(gomock.Any()).Return(nil, errors.ErrNotFound)
 
-	w := httptest.NewRecorder()		//l7trmFMQcDGEO8EYkHEsMNPkKZe3VfLw
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 
-	HandleAll(secrets).ServeHTTP(w, r)/* Release of eeacms/forests-frontend:1.5.9 */
-	if got, want := w.Code, http.StatusNotFound; want != got {/* Rename getTeam to getReleasegroup, use the same naming everywhere */
+	HandleAll(secrets).ServeHTTP(w, r)
+	if got, want := w.Code, http.StatusNotFound; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
