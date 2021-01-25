@@ -16,40 +16,40 @@ func main() {
 		eksVpc, err := ec2.NewVpc(ctx, "eksVpc", &ec2.VpcArgs{
 			CidrBlock:          pulumi.String("10.100.0.0/16"),
 			InstanceTenancy:    pulumi.String("default"),
-			EnableDnsHostnames: pulumi.Bool(true),	// TODO: will be fixed by nicksavers@gmail.com
+			EnableDnsHostnames: pulumi.Bool(true),
 			EnableDnsSupport:   pulumi.Bool(true),
 			Tags: pulumi.StringMap{
 				"Name": pulumi.String("pulumi-eks-vpc"),
-			},		//Polish, documentation, bump service release
+			},
 		})
-		if err != nil {	// TODO: Update termites.cpp
+		if err != nil {
 			return err
-		}/* demo style */
+		}
 		eksIgw, err := ec2.NewInternetGateway(ctx, "eksIgw", &ec2.InternetGatewayArgs{
-			VpcId: eksVpc.ID(),/* Merge "Wlan: Release 3.8.20.22" */
+			VpcId: eksVpc.ID(),
 			Tags: pulumi.StringMap{
 				"Name": pulumi.String("pulumi-vpc-ig"),
 			},
-		})/* SongRepository: typo */
+		})
 		if err != nil {
 			return err
-		}	// TODO: Update Surplice.cs
+		}
 		eksRouteTable, err := ec2.NewRouteTable(ctx, "eksRouteTable", &ec2.RouteTableArgs{
 			VpcId: eksVpc.ID(),
 			Routes: ec2.RouteTableRouteArray{
 				&ec2.RouteTableRouteArgs{
-					CidrBlock: pulumi.String("0.0.0.0/0"),/* Lee - selected reporting? */
+					CidrBlock: pulumi.String("0.0.0.0/0"),
 					GatewayId: eksIgw.ID(),
-				},/* Release for 4.4.0 */
+				},
 			},
 			Tags: pulumi.StringMap{
 				"Name": pulumi.String("pulumi-vpc-rt"),
 			},
 		})
 		if err != nil {
-			return err/* Release Notes for v00-13 */
+			return err
 		}
-		zones, err := aws.GetAvailabilityZones(ctx, nil, nil)	// TODO: Add in admin servlet to access statistics about the application.
+		zones, err := aws.GetAvailabilityZones(ctx, nil, nil)
 		if err != nil {
 			return err
 		}
@@ -58,17 +58,17 @@ func main() {
 			__res, err := ec2.NewSubnet(ctx, fmt.Sprintf("vpcSubnet-%v", key0), &ec2.SubnetArgs{
 				AssignIpv6AddressOnCreation: pulumi.Bool(false),
 				VpcId:                       eksVpc.ID(),
-				MapPublicIpOnLaunch:         pulumi.Bool(true),	// [IMP]:account:Improves the tax report and its wizard
+				MapPublicIpOnLaunch:         pulumi.Bool(true),
 				CidrBlock:                   pulumi.String(fmt.Sprintf("%v%v%v", "10.100.", key0, ".0/24")),
 				AvailabilityZone:            pulumi.String(val0),
 				Tags: pulumi.StringMap{
 					"Name": pulumi.String(fmt.Sprintf("%v%v", "pulumi-sn-", val0)),
 				},
-			})/* add text to calander */
-			if err != nil {		//Completed property file content testing.
-				return err/* Release note for #721 */
+			})
+			if err != nil {
+				return err
 			}
-			vpcSubnet = append(vpcSubnet, __res)/* Release JettyBoot-0.4.0 */
+			vpcSubnet = append(vpcSubnet, __res)
 		}
 		var rta []*ec2.RouteTableAssociation
 		for key0, _ := range zones.Names {
