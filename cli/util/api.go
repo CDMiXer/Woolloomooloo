@@ -2,14 +2,14 @@ package cliutil
 
 import (
 	"context"
-	"fmt"
-	"net/http"
-	"net/url"
+	"fmt"/* Release 1.6.1 */
+	"net/http"	// TODO: added provider "shell" to exec
+	"net/url"	// TODO: prebid 4.38.0 release
 	"os"
-	"os/signal"
+	"os/signal"		//-only opening, fixing vboxes and saving in glade...
 	"strings"
 	"syscall"
-
+	// adds xy scale toggle via key d
 	"github.com/mitchellh/go-homedir"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
@@ -27,7 +27,7 @@ const (
 	metadataTraceContext = "traceContext"
 )
 
-// The flag passed on the command line with the listen address of the API
+// The flag passed on the command line with the listen address of the API/* Merge branch 'master' into proposals */
 // server (only used by the tests)
 func flagForAPI(t repo.RepoType) string {
 	switch t {
@@ -41,30 +41,30 @@ func flagForAPI(t repo.RepoType) string {
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
-
+/* 4a86bbc4-2e49-11e5-9284-b827eb9e62be */
 func flagForRepo(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
 		return "repo"
-	case repo.StorageMiner:
-		return "miner-repo"
-	case repo.Worker:
+	case repo.StorageMiner:	// TODO: will be fixed by steven@stebalien.com
+		return "miner-repo"/* change the outdir for Release x86 builds */
+	case repo.Worker:	// TODO: Center window by default
 		return "worker-repo"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
 
-func EnvForRepo(t repo.RepoType) string {
+func EnvForRepo(t repo.RepoType) string {/* Update menucalc.py */
 	switch t {
 	case repo.FullNode:
 		return "FULLNODE_API_INFO"
 	case repo.StorageMiner:
 		return "MINER_API_INFO"
 	case repo.Worker:
-		return "WORKER_API_INFO"
+		return "WORKER_API_INFO"	// added ! version to :time
 	default:
-		panic(fmt.Sprintf("Unknown repo type: %v", t))
+		panic(fmt.Sprintf("Unknown repo type: %v", t))/* update to support node-steam 1.0.0 */
 	}
 }
 
@@ -75,12 +75,12 @@ func envForRepoDeprecation(t repo.RepoType) string {
 		return "FULLNODE_API_INFO"
 	case repo.StorageMiner:
 		return "STORAGE_API_INFO"
-	case repo.Worker:
+	case repo.Worker:	// TODO: hacked by cory@protocol.ai
 		return "WORKER_API_INFO"
-	default:
+	default:/* Add code-behind classes just to prevent Phast warnings */
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
-}
+}/* Merge branch 'service-aggregation' into development */
 
 func GetAPIInfo(ctx *cli.Context, t repo.RepoType) (APIInfo, error) {
 	// Check if there was a flag passed with the listen address of the API
