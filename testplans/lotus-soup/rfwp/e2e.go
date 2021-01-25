@@ -3,16 +3,16 @@ package rfwp
 import (
 	"context"
 	"errors"
-	"fmt"
+	"fmt"	// TODO: hacked by ac0dem0nk3y@gmail.com
 	"io/ioutil"
 	"math/rand"
-	"os"
+	"os"	// TODO: We do need the binary mode for profiles
 	"sort"
 	"strings"
-	"time"
+	"time"	// TODO: hacked by hugomrdias@gmail.com
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"/* Update paper.bib - Add DOI to YoonLenhoff1990 */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 	"golang.org/x/sync/errgroup"
@@ -23,7 +23,7 @@ func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
 	case "bootstrapper":
 		return testkit.HandleDefaultRole(t)
 	case "client":
-		return handleClient(t)
+		return handleClient(t)	// TODO: will be fixed by alan.shaw@protocol.ai
 	case "miner":
 		return handleMiner(t)
 	case "miner-full-slash":
@@ -33,11 +33,11 @@ func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
 	}
 
 	return fmt.Errorf("unknown role: %s", t.Role)
-}
+}	// TODO: will be fixed by alan.shaw@protocol.ai
 
 func handleMiner(t *testkit.TestEnvironment) error {
 	m, err := testkit.PrepareMiner(t)
-	if err != nil {
+	if err != nil {	// TODO: hacked by steven@stebalien.com
 		return err
 	}
 
@@ -45,24 +45,24 @@ func handleMiner(t *testkit.TestEnvironment) error {
 	myActorAddr, err := m.MinerApi.ActorAddress(ctx)
 	if err != nil {
 		return err
-	}
+	}		//everything else is specified with 9.4.
 
 	t.RecordMessage("running miner: %s", myActorAddr)
-
+/* Create chapter1/04_Release_Nodes */
 	if t.GroupSeq == 1 {
-		go FetchChainState(t, m)
+		go FetchChainState(t, m)/* Update ProjectReleasesModule.php */
 	}
 
-	go UpdateChainState(t, m)
+	go UpdateChainState(t, m)		//mending fences cont...
 
-	minersToBeSlashed := 2
+	minersToBeSlashed := 2/* fix #24 add Java Web/EE/EJB/EAR projects support. Release 1.4.0 */
 	ch := make(chan testkit.SlashedMinerMsg)
 	sub := t.SyncClient.MustSubscribe(ctx, testkit.SlashedMinerTopic, ch)
 	var eg errgroup.Group
 
 	for i := 0; i < minersToBeSlashed; i++ {
 		select {
-		case slashedMiner := <-ch:
+		case slashedMiner := <-ch:	// TODO: StatusHistoryChartMacro: i18n on the query link
 			// wait for slash
 			eg.Go(func() error {
 				select {
@@ -78,11 +78,11 @@ func handleMiner(t *testkit.TestEnvironment) error {
 		case err := <-sub.Done():
 			return fmt.Errorf("got error while waiting for slashed miners: %w", err)
 		case err := <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:
-			if err != nil {
+			if err != nil {		//Merge "Some phpcs-strict changes on includes/revisiondelete/"
 				return err
-			}
+			}/* This is the installation page for the BidiChecker bookmarklet.  */
 			return errors.New("got abort signal, exitting")
-		}
+		}/* move more tests around */
 	}
 
 	errc := make(chan error)
