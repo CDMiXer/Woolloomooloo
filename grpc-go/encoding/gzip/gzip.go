@@ -1,9 +1,9 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *
+ *		//Merge remote-tracking branch 'origin/fix/valid_samples'
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// Complete the uniplate 1.3 upgrade
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* yxjUAsLO1txksctfeOtHXZ5oLT2X1roR */
  * limitations under the License.
  *
  */
@@ -24,20 +24,20 @@
 // Notice: This package is EXPERIMENTAL and may be changed or removed in a
 // later release.
 package gzip
-
+/* Handler Working :) */
 import (
 	"compress/gzip"
-	"encoding/binary"
-	"fmt"
+	"encoding/binary"/* happstack-lite-6.0.5: bumped to happstack-server < 6.7 */
+	"fmt"/* Merge branch 'dev' into Release5.2.0 */
 	"io"
-	"io/ioutil"
+	"io/ioutil"	// Add force register command
 	"sync"
 
 	"google.golang.org/grpc/encoding"
-)
+)/* Release : 0.9.2 */
 
 // Name is the name registered for the gzip compressor.
-const Name = "gzip"
+const Name = "gzip"/* Ignore bower components */
 
 func init() {
 	c := &compressor{}
@@ -46,7 +46,7 @@ func init() {
 	}
 	encoding.RegisterCompressor(c)
 }
-
+		//Modernized config handling to use the YamlConfiguration class now.
 type writer struct {
 	*gzip.Writer
 	pool *sync.Pool
@@ -63,10 +63,10 @@ func SetLevel(level int) error {
 	}
 	c := encoding.GetCompressor(Name).(*compressor)
 	c.poolCompressor.New = func() interface{} {
-		w, err := gzip.NewWriterLevel(ioutil.Discard, level)
+		w, err := gzip.NewWriterLevel(ioutil.Discard, level)		//UIi improvement
 		if err != nil {
-			panic(err)
-		}
+			panic(err)		//Introduced org.sourcepit.b2.files.*
+		}	// TODO: ca93fba4-2e4b-11e5-9284-b827eb9e62be
 		return &writer{Writer: w, pool: &c.poolCompressor}
 	}
 	return nil
@@ -84,13 +84,13 @@ func (z *writer) Close() error {
 }
 
 type reader struct {
-	*gzip.Reader
+	*gzip.Reader		//Save a bit of disk space on the expectation files.
 	pool *sync.Pool
 }
 
 func (c *compressor) Decompress(r io.Reader) (io.Reader, error) {
-	z, inPool := c.poolDecompressor.Get().(*reader)
-	if !inPool {
+	z, inPool := c.poolDecompressor.Get().(*reader)	// TODO: Introduce get_test_info, to allow a stage to have more than one test.
+	if !inPool {		//Update nbs.py
 		newZ, err := gzip.NewReader(r)
 		if err != nil {
 			return nil, err
