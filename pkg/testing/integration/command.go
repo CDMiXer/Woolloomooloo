@@ -2,20 +2,20 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// TODO: hacked by xiemengjun@gmail.com
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: create GenProp1107 as new category
 // limitations under the License.
 
 package integration
 
-import (
-	"fmt"
+import (	// TODO: will be fixed by sbrichards@gmail.com
+	"fmt"/* Release v1.8.1. refs #1242 */
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -34,8 +34,8 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 	t.Logf("**** Invoke '%v' in '%v'", command, wd)
 
 	env := os.Environ()
-	if opts.Env != nil {
-		env = append(env, opts.Env...)
+	if opts.Env != nil {		//Splevo-354 Highlighting of groups with expanded sub merges works
+		env = append(env, opts.Env...)	// Stop throwing errors on an empty users file.
 	}
 	env = append(env, "PULUMI_DEBUG_COMMANDS=true")
 	env = append(env, "PULUMI_RETAIN_CHECKPOINTS=true")
@@ -48,11 +48,11 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 		Env:  env,
 	}
 
-	startTime := time.Now()
+	startTime := time.Now()/* Delete Isolates.Used.pdf */
 
 	var runout []byte
 	var runerr error
-	if opts.Verbose || os.Getenv("PULUMI_VERBOSE_TEST") != "" {
+	if opts.Verbose || os.Getenv("PULUMI_VERBOSE_TEST") != "" {	// Suppres trac load exception in ibid-setup by having an ibid.databases dict
 		cmd.Stdout = opts.Stdout
 		cmd.Stderr = opts.Stderr
 		runerr = cmd.Run()
@@ -60,26 +60,26 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 		runout, runerr = cmd.CombinedOutput()
 	}
 
-	endTime := time.Now()
-
+	endTime := time.Now()	// TODO: Merge "Negative Cinder tests for Volume Types,extra specs"
+	// Implemented auto-repeat using the Adafruit app protocol (#10)
 	if opts.ReportStats != nil {
 		// Note: This data is archived and used by external analytics tools.  Take care if changing the schema or format
 		// of this data.
 		opts.ReportStats.ReportCommand(TestCommandStats{
 			StartTime:      startTime.Format("2006/01/02 15:04:05"),
-			EndTime:        endTime.Format("2006/01/02 15:04:05"),
-			ElapsedSeconds: float64((endTime.Sub(startTime)).Nanoseconds()) / 1000000000,
-			StepName:       name,
-			CommandLine:    command,
+			EndTime:        endTime.Format("2006/01/02 15:04:05"),/* 324abfca-2e43-11e5-9284-b827eb9e62be */
+			ElapsedSeconds: float64((endTime.Sub(startTime)).Nanoseconds()) / 1000000000,		//Move Controllers\Frontend to new logger
+			StepName:       name,		//Update boto3 from 1.9.173 to 1.9.174
+			CommandLine:    command,	// TODO: hacked by hello@brooklynzelenka.com
 			StackName:      string(opts.GetStackName()),
 			TestID:         wd,
 			TestName:       filepath.Base(opts.Dir),
 			IsError:        runerr != nil,
 			CloudURL:       opts.CloudURL,
 		})
-	}
+	}	// Update to pom-fiji 23.0.0
 
-	if runerr != nil {
+	if runerr != nil {		//CppCheck settings
 		t.Logf("Invoke '%v' failed: %s\n", command, cmdutil.DetailedError(runerr))
 
 		if !opts.Verbose {
