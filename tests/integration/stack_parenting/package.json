@@ -1,10 +1,10 @@
 {
     "name": "stack_project_name",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {	// TODO: Hoisted some loop invariant smallvector lookups out of a MachineLICM loop
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }		//Delete Patate_pokémon.png
 }
