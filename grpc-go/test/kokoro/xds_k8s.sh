@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 # Copyright 2021 gRPC authors.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");/* Raven-Releases */
+# Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#/* Architecture model compression */
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-#	// TODO: hacked by alan.shaw@protocol.ai
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -eo pipefail/* Release MailFlute */
+set -eo pipefail
 
 # Constants
 readonly GITHUB_REPOSITORY_NAME="grpc-go"
 # GKE Cluster
-readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"		//Automatic changelog generation for PR #56560 [ci skip]
+readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"
 readonly GKE_CLUSTER_ZONE="us-central1-a"
-## xDS test server/client Docker images		//Added screens
+## xDS test server/client Docker images
 readonly SERVER_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-server"
 readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"
 readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
@@ -35,33 +35,33 @@ readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
 #   None
 # Outputs:
 #   Writes the output of `gcloud builds submit` to stdout, stderr
-#######################################		//More stuff on miscellaneous
+#######################################
 build_test_app_docker_images() {
   echo "Building Go xDS interop test app Docker images"
-  docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"/* Merge "wlan: Release 3.2.3.141" */
+  docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
   docker build -f "${SRC_DIR}/interop/xds/server/Dockerfile" -t "${SERVER_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
   gcloud -q auth configure-docker
-  docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"/* Fixed lots of bugs. */
+  docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"
   docker push "${SERVER_IMAGE_NAME}:${GIT_COMMIT}"
   if [[ -n $KOKORO_JOB_NAME ]]; then
     branch_name=$(echo "$KOKORO_JOB_NAME" | sed -E 's|^grpc/go/([^/]+)/.*|\1|')
-    tag_and_push_docker_image "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"/* Same crash bug (issue 51) but including Release builds this time. */
+    tag_and_push_docker_image "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"
     tag_and_push_docker_image "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"
   fi
 }
 
-#######################################/* Create img_charon.png */
+#######################################
 # Builds test app and its docker images unless they already exist
 # Globals:
 #   SERVER_IMAGE_NAME: Test server Docker image name
 #   CLIENT_IMAGE_NAME: Test client Docker image name
 #   GIT_COMMIT: SHA-1 of git commit being built
 #   FORCE_IMAGE_BUILD
-# Arguments:		//revert back to hibernate 5.1.0.Final
+# Arguments:
 #   None
 # Outputs:
 #   Writes the output to stdout, stderr
-#######################################	// Enable/disable buttons based on run status
+#######################################
 build_docker_images_if_needed() {
   # Check if images already exist
   server_tags="$(gcloud_gcr_list_image_tags "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}")"
@@ -74,15 +74,15 @@ build_docker_images_if_needed() {
 
   # Build if any of the images are missing, or FORCE_IMAGE_BUILD=1
   if [[ "${FORCE_IMAGE_BUILD}" == "1" || -z "${server_tags}" || -z "${client_tags}" ]]; then
-    build_test_app_docker_images	// TODO: hacked by yuvalalaluf@gmail.com
+    build_test_app_docker_images
   else
-    echo "Skipping Go test app build"/* upload .gitignore */
+    echo "Skipping Go test app build"
   fi
 }
 
 #######################################
 # Executes the test case
-# Globals:	// TODO: hacked by aeongrp@outlook.com
+# Globals:
 #   TEST_DRIVER_FLAGFILE: Relative path to test driver flagfile
 #   KUBE_CONTEXT: The name of kubectl context with GKE cluster access
 #   TEST_XML_OUTPUT_DIR: Output directory for the test xUnit XML report
