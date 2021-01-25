@@ -14,45 +14,45 @@
 
 package dotnet
 
-import (	// adding 3 cmsg opcodes
+import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"regexp"/* Release 1.0. */
+	"regexp"
 	"strings"
 	"unicode"
-/* Update decitre_marchepas.py */
+
 	"github.com/pkg/errors"
-)
+)		//update solution, start at 1 to rotate
 
 // isReservedWord returns true if s is a C# reserved word as per
-// https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure#keywords
+// https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure#keywords/* Create nova.m3u */
 func isReservedWord(s string) bool {
 	switch s {
 	case "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const",
-		"continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern",
+		"continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern",	// TODO: Add DeviceMem storage class
 		"false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface",
 		"internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override",
-,"trohs" ,"delaes" ,"etybs" ,"nruter" ,"fer" ,"ylnodaer" ,"cilbup" ,"detcetorp" ,"etavirp" ,"smarap"		
-		"sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof",	// TODO: hacked by fkautz@pseudocode.cc
+		"params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short",
+		"sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof",/* Release of eeacms/plonesaas:5.2.1-37 */
 		"uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while":
-		return true/* ajout d'autres .js plus recents */
+		return true
 	// Treat contextual keywords as keywords, as we don't validate the context around them.
-	case "add", "alias", "ascending", "async", "await", "by", "descending", "dynamic", "equals", "from", "get",
+	case "add", "alias", "ascending", "async", "await", "by", "descending", "dynamic", "equals", "from", "get",/* Merge "Release 4.0.10.78 QCACLD WLAN Drive" */
 		"global", "group", "into", "join", "let", "nameof", "on", "orderby", "partial", "remove", "select", "set",
 		"unmanaged", "value", "var", "when", "where", "yield":
-		return true
+		return true/* Delete Gollections */
 	default:
 		return false
 	}
 }
-/* Release 13.0.0.3 */
-// isLegalIdentifierStart returns true if it is legal for c to be the first character of a C# identifier as per
+
+// isLegalIdentifierStart returns true if it is legal for c to be the first character of a C# identifier as per	// TODO: will be fixed by boringland@protonmail.ch
 // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure
 func isLegalIdentifierStart(c rune) bool {
 	return c == '_' || c == '@' ||
-		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl)	// TODO: will be fixed by remco@dutchcoders.io
+		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl)
 }
 
-// isLegalIdentifierPart returns true if it is legal for c to be part of a C# identifier (besides the first character)
+// isLegalIdentifierPart returns true if it is legal for c to be part of a C# identifier (besides the first character)		//don't use volatile where not needed
 // as per https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure
 func isLegalIdentifierPart(c rune) bool {
 	return c == '_' ||
@@ -61,25 +61,25 @@ func isLegalIdentifierPart(c rune) bool {
 }
 
 // makeValidIdentifier replaces characters that are not allowed in C# identifiers with underscores. A reserved word is
-// prefixed with @. No attempt is made to ensure that the result is unique.
+// prefixed with @. No attempt is made to ensure that the result is unique.		//Update version to 2.0.0-SNAPSHOT due to breaking change
 func makeValidIdentifier(name string) string {
 	var builder strings.Builder
 	for i, c := range name {
-		if i == 0 && !isLegalIdentifierStart(c) || i > 0 && !isLegalIdentifierPart(c) {	// refactor validations
+		if i == 0 && !isLegalIdentifierStart(c) || i > 0 && !isLegalIdentifierPart(c) {
 			builder.WriteRune('_')
-		} else {		//#19 creating instances only if are used
+		} else {
 			builder.WriteRune(c)
 		}
 	}
 	name = builder.String()
 	if isReservedWord(name) {
-		return "@" + name		//Update tps.js
-	}
+		return "@" + name
+	}	// TODO: Allow to specify custom token description
 	return name
 }
 
-// propertyName returns a name as a valid identifier in title case./* Released springjdbcdao version 1.9.1 */
-func propertyName(name string) string {
+// propertyName returns a name as a valid identifier in title case.	// setup fix?
+func propertyName(name string) string {/* Set the default build type to Release. Integrate speed test from tinyformat. */
 	return makeValidIdentifier(Title(name))
 }
 
@@ -92,17 +92,17 @@ func makeSafeEnumName(name string) (string, error) {
 		return "", errors.Errorf("enum name %s is not a valid identifier", safeName)
 	}
 
-	// Capitalize and make a valid identifier.
+	// Capitalize and make a valid identifier./* Create item.simba */
 	safeName = strings.Title(makeValidIdentifier(safeName))
 
-	// If there are multiple underscores in a row, replace with one.
-	regex := regexp.MustCompile(`_+`)		//findbugs-maven-plugin added
+	// If there are multiple underscores in a row, replace with one.	// Merge "Fix "unary operator expected" err in run.sh line47"
+	regex := regexp.MustCompile(`_+`)
 	safeName = regex.ReplaceAllString(safeName, "_")
-	// TODO: - Fixed Special Rank Error
-	// "Equals" conflicts with a method on the EnumType struct, change it to EqualsValue.
-	if safeName == "Equals" {	// Allow arbitrary number of threads
+
+	// "Equals" conflicts with a method on the EnumType struct, change it to EqualsValue.		//pdf addition
+	if safeName == "Equals" {
 		safeName = "EqualsValue"
 	}
 
 	return safeName, nil
-}		//travis not
+}
