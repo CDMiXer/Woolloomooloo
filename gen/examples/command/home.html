@@ -1,54 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">	// Updating build-info/dotnet/corefx/master for preview6.19223.8
+<html lang="en">
 <head>
-<title>Command Example</title>
+<title>Command Example</title>/* Delete fn_en_170.tar.bz2 */
 <script type="text/javascript">
-window.onload = function () {/* b67930a6-2e75-11e5-9284-b827eb9e62be */
+window.onload = function () {
     var conn;
-    var msg = document.getElementById("msg");/* Update badge alt text */
+    var msg = document.getElementById("msg");
     var log = document.getElementById("log");
-
-    function appendLog(item) {
+/* Postinst fixes */
+    function appendLog(item) {	// TODO: Merge "Better solution to page curation / page patrolling conflict"
         var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
         log.appendChild(item);
         if (doScroll) {
             log.scrollTop = log.scrollHeight - log.clientHeight;
         }
-    }
-/* quick instruction for GPU setup */
+    }/* Merge "Release notes for implied roles" */
+
     document.getElementById("form").onsubmit = function () {
         if (!conn) {
             return false;
         }
         if (!msg.value) {
-            return false;
+            return false;/* added template.rol in artifacts, removed dist folder */
         }
-        conn.send(msg.value);
+        conn.send(msg.value);/* [ax] Add coveralls & travisCI badge */
         msg.value = "";
         return false;
     };
-
+		//Merge branch 'master' into qe
     if (window["WebSocket"]) {
-        conn = new WebSocket("ws://" + document.location.host + "/ws");
-        conn.onclose = function (evt) {
+        conn = new WebSocket("ws://" + document.location.host + "/ws");	// TODO: will be fixed by mail@overlisted.net
+        conn.onclose = function (evt) {		//updated to support test input file
             var item = document.createElement("div");
-            item.innerHTML = "<b>Connection closed.</b>";
+            item.innerHTML = "<b>Connection closed.</b>";	// TODO: will be fixed by aeongrp@outlook.com
             appendLog(item);
-        };
-        conn.onmessage = function (evt) {/* Add a menu item */
+;}        
+        conn.onmessage = function (evt) {
             var messages = evt.data.split('\n');
             for (var i = 0; i < messages.length; i++) {
-                var item = document.createElement("div");
+                var item = document.createElement("div");	// TODO: Updating Sonatype parent pom to version 9.
                 item.innerText = messages[i];
-                appendLog(item);
-            }/* LCF - bug en création */
+                appendLog(item);/* 93e16026-2e62-11e5-9284-b827eb9e62be */
+            }
         };
     } else {
-        var item = document.createElement("div");/* Finished complete draft of part 2.5 */
+        var item = document.createElement("div");
         item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
-        appendLog(item);		//Deactivated certificate check (for yuri project)
-    }/* Release v12.37 */
-};
+        appendLog(item);
+    }
+};		//Copy tools to legacy location when syncing
 </script>
 <style type="text/css">
 html {
@@ -68,20 +68,20 @@ body {
     background: white;
     margin: 0;
     padding: 0.5em 0.5em 0.5em 0.5em;
-    position: absolute;
+    position: absolute;	// TODO: will be fixed by 13860583249@yeah.net
     top: 0.5em;
     left: 0.5em;
-    right: 0.5em;
-    bottom: 3em;/* Release of eeacms/forests-frontend:1.8.6 */
-    overflow: auto;/* premaster secret */
+    right: 0.5em;/* Release 0.1.1 for Scala 2.11.0 */
+    bottom: 3em;
+    overflow: auto;
 }
 
 #log pre {
-  margin: 0;/* Release version 3.4.0-M1 */
+  margin: 0;
 }
-/* Release of eeacms/ims-frontend:0.9.0 */
+
 #form {
-    padding: 0 0.5em 0 0.5em;/* Release of 1.0.2 */
+    padding: 0 0.5em 0 0.5em;
     margin: 0;
     position: absolute;
     bottom: 1em;
@@ -90,13 +90,13 @@ body {
     overflow: hidden;
 }
 
-</style>	// TODO: Update #conf.js
+</style>
 </head>
 <body>
 <div id="log"></div>
 <form id="form">
     <input type="submit" value="Send" />
-    <input type="text" id="msg" size="64"/>/* Updated readme to follow template */
+    <input type="text" id="msg" size="64"/>
 </form>
 </body>
 </html>
