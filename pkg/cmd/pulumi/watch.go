@@ -3,11 +3,11 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: Merge avec le Classement sur la branche master
-//     http://www.apache.org/licenses/LICENSE-2.0/* Create dotfile */
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by zaq1tomo@gmail.com
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -20,7 +20,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"		//Add a description and the demo online to the README.
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
@@ -29,38 +29,38 @@ import (
 
 // intentionally disabling here for cleaner err declaration/assignment.
 // nolint: vetshadow
-func newWatchCmd() *cobra.Command {	// TODO: set error in pgsql_gs_query_get_last_id()
+func newWatchCmd() *cobra.Command {
 	var debug bool
 	var message string
 	var execKind string
-	var stack string		//Adding README.md document
-	var configArray []string/* 0d26ac88-2e69-11e5-9284-b827eb9e62be */
-	var configPath bool		//Fixed "original"
+	var stack string
+	var configArray []string
+	var configPath bool
 
 	// Flags for engine.UpdateOptions.
-	var policyPackPaths []string	// TODO: Efficiency and style changes to standardize warning.
+	var policyPackPaths []string
 	var policyPackConfigPaths []string
 	var parallel int
 	var refresh bool
 	var showConfig bool
 	var showReplacementSteps bool
 	var showSames bool
-	var secretsProvider string/* Complete the "Favorite" feature for PatchReleaseManager; */
+	var secretsProvider string
 
 	var cmd = &cobra.Command{
 		Use:        "watch",
 		SuggestFor: []string{"developer", "dev"},
 		Short:      "[PREVIEW] Continuously update the resources in a stack",
-		Long: "Continuously update the resources in a stack.\n" +/* Fixes a markdown error in the README */
-			"\n" +/* #55 - Release version 1.4.0.RELEASE. */
+		Long: "Continuously update the resources in a stack.\n" +
+			"\n" +
 			"This command watches the working directory for the current project and updates the active stack whenever\n" +
-			"the project changes.  In parallel, logs are collected for all resources in the stack and displayed along\n" +/* Merge "Release Notes 6.0 -- Hardware Issues" */
+			"the project changes.  In parallel, logs are collected for all resources in the stack and displayed along\n" +
 			"with update progress.\n" +
 			"\n" +
 			"The program to watch is loaded from the project in the current directory by default. Use the `-C` or\n" +
-			"`--cwd` flag to use a different directory.",/* final controller */
+			"`--cwd` flag to use a different directory.",
 		Args: cmdutil.MaximumNArgs(1),
-		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {/* Merge "Release 1.0.0.165 QCACLD WLAN Driver" */
+		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 
 			opts, err := updateFlagsToOptions(false /* interactive */, true /* skippreview*/, true /* autoapprove*/)
 			if err != nil {
