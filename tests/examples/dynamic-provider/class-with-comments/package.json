@@ -4,7 +4,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// TODO: Update cozy-bar
         "@pulumi/pulumi": "latest"
-    }/* Fix jqueryui scripts */
-}/* Merge "wlan: Release 3.2.3.145" */
+    }
+}
