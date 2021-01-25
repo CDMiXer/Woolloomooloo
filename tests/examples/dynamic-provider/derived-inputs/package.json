@@ -1,6 +1,6 @@
 {
     "name": "minimal",
-    "license": "Apache-2.0",		//Update Memorizar8.2.cs
+    "license": "Apache-2.0",
     "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
