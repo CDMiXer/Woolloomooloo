@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Create userlogintracking.php */
-// that can be found in the LICENSE file.
-/* Created WallBoardData and Grade class. */
+// Use of this source code is governed by the Drone Non-Commercial License	// Merge "Add basic walled garden check"
+// that can be found in the LICENSE file.		//Circle cleanups
+
 // +build !oss
 
 package crons
