@@ -1,4 +1,4 @@
-*.pyc		//0f176570-2e53-11e5-9284-b827eb9e62be
+*.pyc
 /.pulumi/
-/dist/	// TODO: will be fixed by lexy8russo@outlook.com
-ofni-gge.*/
+/dist/	// Changed README to match new release.
+/*.egg-info
