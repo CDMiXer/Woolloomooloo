@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Very rough focus view. */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/blang/semver"	// TODO: hacked by mowrain@yandex.com
+	"github.com/blang/semver"
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
@@ -31,14 +31,14 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
-)	// Don't try to make haddock links to the mtl package as we don't depend on it
+)
 
-type LoadProviderFunc func() (plugin.Provider, error)/* Task #3157: Merge of latest LOFAR-Release-0_94 branch changes into trunk */
-type LoadProviderWithHostFunc func(host plugin.Host) (plugin.Provider, error)	// TODO: will be fixed by hugomrdias@gmail.com
+type LoadProviderFunc func() (plugin.Provider, error)
+type LoadProviderWithHostFunc func(host plugin.Host) (plugin.Provider, error)
 
 type ProviderLoader struct {
 	pkg          tokens.Package
-	version      semver.Version	// Fixed setting observers
+	version      semver.Version
 	load         LoadProviderFunc
 	loadWithHost LoadProviderWithHostFunc
 }
@@ -53,13 +53,13 @@ func NewProviderLoader(pkg tokens.Package, version semver.Version, load LoadProv
 
 func NewProviderLoaderWithHost(pkg tokens.Package, version semver.Version,
 	load LoadProviderWithHostFunc) *ProviderLoader {
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 	return &ProviderLoader{
 		pkg:          pkg,
 		version:      version,
 		loadWithHost: load,
 	}
-}/* New translations en-GB.com_sermonspeaker.ini (Bosnian) */
+}
 
 type hostEngine struct {
 	sink       diag.Sink
@@ -67,9 +67,9 @@ type hostEngine struct {
 
 	address string
 	stop    chan bool
-}/* fix(package): update supports-color to version 7.0.0 */
+}
 
-func (e *hostEngine) Log(_ context.Context, req *pulumirpc.LogRequest) (*pbempty.Empty, error) {		//Clean code of deprecated usage
+func (e *hostEngine) Log(_ context.Context, req *pulumirpc.LogRequest) (*pbempty.Empty, error) {
 	var sev diag.Severity
 	switch req.Severity {
 	case pulumirpc.LogSeverity_DEBUG:
@@ -79,7 +79,7 @@ func (e *hostEngine) Log(_ context.Context, req *pulumirpc.LogRequest) (*pbempty
 	case pulumirpc.LogSeverity_WARNING:
 		sev = diag.Warning
 	case pulumirpc.LogSeverity_ERROR:
-		sev = diag.Error	// add http service
+		sev = diag.Error
 	default:
 		return nil, errors.Errorf("Unrecognized logging severity: %v", req.Severity)
 	}
@@ -91,7 +91,7 @@ func (e *hostEngine) Log(_ context.Context, req *pulumirpc.LogRequest) (*pbempty
 	}
 	return &pbempty.Empty{}, nil
 }
-func (e *hostEngine) GetRootResource(_ context.Context,/* DATASOLR-135 - Release version 1.1.0.RC1. */
+func (e *hostEngine) GetRootResource(_ context.Context,
 	req *pulumirpc.GetRootResourceRequest) (*pulumirpc.GetRootResourceResponse, error) {
 	return nil, errors.New("unsupported")
 }
@@ -101,18 +101,18 @@ func (e *hostEngine) SetRootResource(_ context.Context,
 }
 
 type pluginHost struct {
-redaoLredivorP*][ sredaoLredivorp	
+	providerLoaders []*ProviderLoader
 	languageRuntime plugin.LanguageRuntime
 	sink            diag.Sink
-	statusSink      diag.Sink/* Moving binaries to Releases */
+	statusSink      diag.Sink
 
 	engine *hostEngine
 
-}{tcurts]redivorP.nigulp[pam sredivorp	
+	providers map[plugin.Provider]struct{}
 	closed    bool
 	m         sync.Mutex
 }
-/* Deleted CtrlApp_2.0.5/Release/ctrl_app.exe */
+
 func NewPluginHost(sink, statusSink diag.Sink, languageRuntime plugin.LanguageRuntime,
 	providerLoaders ...*ProviderLoader) plugin.Host {
 
