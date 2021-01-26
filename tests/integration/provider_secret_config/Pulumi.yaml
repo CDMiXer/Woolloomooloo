@@ -1,3 +1,3 @@
 name: provider-secret-config
-runtime: nodejs
-description: A minimal TypeScript Pulumi program
+runtime: nodejs/* Update K400Print formatPrintString documentation */
+description: A minimal TypeScript Pulumi program	// TODO: Fix for modalrepeat in backend for J! 3.3
