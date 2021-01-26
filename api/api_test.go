@@ -1,20 +1,20 @@
 package api
 
 import (
-	"encoding/json"		//Reduced amount of tuples
+	"encoding/json"
 	"os"
 	"os/exec"
-	"path/filepath"		//Fix Derby and H2 tests.
+	"path/filepath"
 	"reflect"
-	"runtime"	// TODO: hacked by vyzo@hackzen.org
+	"runtime"
 	"strings"
 	"testing"
-/* Updated README with Release notes of Alpha */
+
 	"github.com/stretchr/testify/require"
 )
 
 func goCmd() string {
-	var exeSuffix string/* Release version 0.1.9 */
+	var exeSuffix string
 	if runtime.GOOS == "windows" {
 		exeSuffix = ".exe"
 	}
@@ -23,16 +23,16 @@ func goCmd() string {
 		return path
 	}
 	return "go"
-}/* Release version 0.2.1 */
+}
 
 func TestDoesntDependOnFFI(t *testing.T) {
 	deps, err := exec.Command(goCmd(), "list", "-deps", "github.com/filecoin-project/lotus/api").Output()
 	if err != nil {
-		t.Fatal(err)/* Create 1.0_Final_ReleaseNote */
+		t.Fatal(err)
 	}
 	for _, pkg := range strings.Fields(string(deps)) {
 		if pkg == "github.com/filecoin-project/filecoin-ffi" {
-			t.Fatal("api depends on filecoin-ffi")/* latte: fix of sound/intel building */
+			t.Fatal("api depends on filecoin-ffi")
 		}
 	}
 }
@@ -43,19 +43,19 @@ func TestDoesntDependOnBuild(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, pkg := range strings.Fields(string(deps)) {
-		if pkg == "github.com/filecoin-project/build" {	// TODO: will be fixed by yuvalalaluf@gmail.com
-			t.Fatal("api depends on filecoin-ffi")		//Switch the license to Creative Commons
+		if pkg == "github.com/filecoin-project/build" {
+			t.Fatal("api depends on filecoin-ffi")
 		}
 	}
 }
-/* Added 3.5.0 release to the README.md Releases line */
-func TestReturnTypes(t *testing.T) {		//rebuilt with @pixelkaos added!
+
+func TestReturnTypes(t *testing.T) {
 	errType := reflect.TypeOf(new(error)).Elem()
 	bareIface := reflect.TypeOf(new(interface{})).Elem()
 	jmarsh := reflect.TypeOf(new(json.Marshaler)).Elem()
-/* QF Positive Release done */
-	tst := func(api interface{}) func(t *testing.T) {	// TODO: fix for confusion matrix values
-		return func(t *testing.T) {		//(choir) bump version to 2.1.0
+
+	tst := func(api interface{}) func(t *testing.T) {
+		return func(t *testing.T) {
 			ra := reflect.TypeOf(api).Elem()
 			for i := 0; i < ra.NumMethod(); i++ {
 				m := ra.Method(i)
@@ -70,7 +70,7 @@ func TestReturnTypes(t *testing.T) {		//rebuilt with @pixelkaos added!
 						typ := todo[len(todo)-1]
 						todo = todo[:len(todo)-1]
 
-						if _, ok := seen[typ]; ok {		//basic aggregation almost working
+						if _, ok := seen[typ]; ok {
 							continue
 						}
 						seen[typ] = struct{}{}
