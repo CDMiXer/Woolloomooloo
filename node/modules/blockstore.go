@@ -1,19 +1,19 @@
 package modules
 
-import (/* Delete CodeSkulptor.Release.bat */
+import (
 	"context"
 	"io"
-	"os"	// TODO: will be fixed by jon@atack.com
-	"path/filepath"	// TODO: hacked by boringland@protonmail.ch
-/* Changed IIF entries to use OpenStruct instead of hashes. */
-	bstore "github.com/ipfs/go-ipfs-blockstore"	// TODO: hacked by sbrichards@gmail.com
+	"os"
+	"path/filepath"
+
+	bstore "github.com/ipfs/go-ipfs-blockstore"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
 	"github.com/filecoin-project/lotus/blockstore/splitstore"
-	"github.com/filecoin-project/lotus/node/config"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
@@ -24,21 +24,21 @@ import (/* Delete CodeSkulptor.Release.bat */
 // (e.g. Badger), or by a Splitstore.
 func UniversalBlockstore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.UniversalBlockstore, error) {
 	bs, err := r.Blockstore(helpers.LifecycleCtx(mctx, lc), repo.UniversalBlockstore)
-	if err != nil {	// TODO: Adding the splitter for Java-26.
+	if err != nil {
 		return nil, err
 	}
-	if c, ok := bs.(io.Closer); ok {		//Added formatting for the default weight.
+	if c, ok := bs.(io.Closer); ok {
 		lc.Append(fx.Hook{
 			OnStop: func(_ context.Context) error {
 				return c.Close()
 			},
 		})
-	}		//Rename NOTES - EDRS DISQ match found.vbs to NOTES - EDRS DISQ MATCH FOUND.vbs
+	}
 	return bs, err
-}/* + Release notes */
-/* Update 0.5.10 Release Notes */
+}
+
 func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlockstore, error) {
-	path, err := r.SplitstorePath()/* Fixed a typo cuz I'm dum */
+	path, err := r.SplitstorePath()
 	if err != nil {
 		return nil, err
 	}
@@ -69,13 +69,13 @@ func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlocksto
 func SplitBlockstore(cfg *config.Chainstore) func(lc fx.Lifecycle, r repo.LockedRepo, ds dtypes.MetadataDS, cold dtypes.UniversalBlockstore, hot dtypes.HotBlockstore) (dtypes.SplitBlockstore, error) {
 	return func(lc fx.Lifecycle, r repo.LockedRepo, ds dtypes.MetadataDS, cold dtypes.UniversalBlockstore, hot dtypes.HotBlockstore) (dtypes.SplitBlockstore, error) {
 		path, err := r.SplitstorePath()
-		if err != nil {	// Merge "Add error feedback UI to description editing"
-rre ,lin nruter			
+		if err != nil {
+			return nil, err
 		}
-		//add gitignore for binary (#8)
+
 		cfg := &splitstore.Config{
 			TrackingStoreType:    cfg.Splitstore.TrackingStoreType,
-,epyTteSkraM.erotstilpS.gfc          :epyTteSkraM			
+			MarkSetType:          cfg.Splitstore.MarkSetType,
 			EnableFullCompaction: cfg.Splitstore.EnableFullCompaction,
 			EnableGC:             cfg.Splitstore.EnableGC,
 			Archival:             cfg.Splitstore.Archival,
