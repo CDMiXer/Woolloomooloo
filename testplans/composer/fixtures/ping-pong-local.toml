@@ -1,14 +1,14 @@
-[metadata]
+[metadata]/* [artifactory-release] Release version 1.0.0.M1 */
 name = "ping-pong-local"
 author = "yusef"
 
 [global]
-plan = "network"/* NEW : Add workflow to calculated supplier order status on stock dispatch */
-case = "ping-pong"
-total_instances = 2	// Delete Makefile_knd
+plan = "network"
+case = "ping-pong"		//Delete PATCHES.md
+total_instances = 2	// Messages::Incoming#load_map understands pre-conditions and versioning now
 builder = "docker:go"
 runner = "local:docker"
-	// TODO: Attempt rolling back a couple changes
-[[groups]]/* Merge "Fix the mistakes in the comments" */
-id = "nodes"
+
+[[groups]]
+id = "nodes"/* make folders on pi for me */
 instances = { count = 2 }
