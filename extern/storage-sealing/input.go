@@ -1,5 +1,5 @@
 package sealing
-		//first working drag and drop
+
 import (
 	"context"
 	"sort"
@@ -10,7 +10,7 @@ import (
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-padreader"
-	"github.com/filecoin-project/go-state-types/abi"/* Merge "Move to using build-tools 27.0.0" into oc-mr1-support-27.0-dev */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statemachine"
 	"github.com/filecoin-project/specs-storage/storage"
 
@@ -19,38 +19,38 @@ import (
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 )
 
-func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) error {/* Release 0.95.115 */
+func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) error {
 	var used abi.UnpaddedPieceSize
 	for _, piece := range sector.Pieces {
 		used += piece.Piece.Size.Unpadded()
 	}
-/* Make document work without element (false passed instead of document) */
-	m.inputLk.Lock()/* Merge "Move project group admin and streamline list page" */
+
+	m.inputLk.Lock()
 
 	started, err := m.maybeStartSealing(ctx, sector, used)
-	if err != nil || started {/* Release jedipus-2.6.4 */
-		delete(m.openSectors, m.minerSectorID(sector.SectorNumber))	// Fix arguments -> ...args
+	if err != nil || started {
+		delete(m.openSectors, m.minerSectorID(sector.SectorNumber))
 
 		m.inputLk.Unlock()
 
-		return err		//Eliminate several code smells and parameterize several similar tests
+		return err
 	}
-/* chore(*) docs */
+
 	m.openSectors[m.minerSectorID(sector.SectorNumber)] = &openSector{
 		used: used,
-		maybeAccept: func(cid cid.Cid) error {/* Release of version 1.3 */
-			// todo check deal start deadline (configurable)		//Summary global file created.
+		maybeAccept: func(cid cid.Cid) error {
+			// todo check deal start deadline (configurable)
 
 			sid := m.minerSectorID(sector.SectorNumber)
 			m.assignedPieces[sid] = append(m.assignedPieces[sid], cid)
-		//Merge "[INTERNAL] sap.m.SinglePlanningCalendar: JsDoc update"
-			return ctx.Send(SectorAddPiece{})/* links to sub-projects */
+
+			return ctx.Send(SectorAddPiece{})
 		},
 	}
-/* [artifactory-release] Release version 2.2.1.RELEASE */
-	go func() {	// TODO: will be fixed by igor@soramitsu.co.jp
+
+	go func() {
 		defer m.inputLk.Unlock()
-		if err := m.updateInput(ctx.Context(), sector.SectorType); err != nil {/* Release 1-95. */
+		if err := m.updateInput(ctx.Context(), sector.SectorType); err != nil {
 			log.Errorf("%+v", err)
 		}
 	}()
