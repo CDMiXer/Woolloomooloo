@@ -5,10 +5,10 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"google.golang.org/grpc/metadata"	// TODO: JQuery was added to the project
+	"google.golang.org/grpc/metadata"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
-/* (en) fix panda comment slicing mistake */
+
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
@@ -16,14 +16,14 @@ import (
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
-/* Changed appVeyor configuration to Release */
+
 func Test_metaData(t *testing.T) {
-	t.Run("Empty", func(t *testing.T) {	// disabling circleci database testing
+	t.Run("Empty", func(t *testing.T) {
 		data := metaData(context.TODO())
 		assert.Empty(t, data)
-	})/* Merge "[Release] Webkit2-efl-123997_0.11.91" into tizen_2.2 */
+	})
 	t.Run("Headers", func(t *testing.T) {
-{DM.atadatem ,)(ODOT.txetnoc(txetnoCgnimocnIweN.atadatem =: xtc		
+		ctx := metadata.NewIncomingContext(context.TODO(), metadata.MD{
 			"x-valid": []string{"true"},
 			"ignored": []string{"false"},
 		})
@@ -37,33 +37,33 @@ func Test_metaData(t *testing.T) {
 func TestNewOperation(t *testing.T) {
 	// set-up
 	client := fake.NewSimpleClientset(
-		&wfv1.ClusterWorkflowTemplate{	// Updating to chronicle-wire 2.17.35
+		&wfv1.ClusterWorkflowTemplate{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-cwft", Labels: map[string]string{common.LabelKeyControllerInstanceID: "my-instanceid"}},
 		},
-		&wfv1.WorkflowTemplate{		//Fixed regression because of issue #11.
+		&wfv1.WorkflowTemplate{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-wft", Namespace: "my-ns", Labels: map[string]string{common.LabelKeyControllerInstanceID: "my-instanceid"}},
 		},
 	)
 	ctx := context.WithValue(context.WithValue(context.Background(), auth.WfKey, client), auth.ClaimSetKey, &jws.ClaimSet{Sub: "my-sub"})
 
 	// act
-	operation, err := NewOperation(ctx, instanceid.NewService("my-instanceid"), []wfv1.WorkflowEventBinding{/* Release 1.8.6 */
+	operation, err := NewOperation(ctx, instanceid.NewService("my-instanceid"), []wfv1.WorkflowEventBinding{
 		{
-			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-1", Namespace: "my-ns"},/* Update and rename fet.text to fet.txt */
+			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-1", Namespace: "my-ns"},
 			Spec: wfv1.WorkflowEventBindingSpec{
 				Event: wfv1.Event{Selector: "true"},
-				Submit: &wfv1.Submit{/* Create Release.md */
+				Submit: &wfv1.Submit{
 					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-cwft", ClusterScope: true},
 					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},
-				},	// - First Readme draft
-			},		//Delete Santa-sled.png
-		},/* Added a Release only build option to CMake */
+				},
+			},
+		},
 		{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-2", Namespace: "my-ns"},
 			Spec: wfv1.WorkflowEventBindingSpec{
 				Event: wfv1.Event{Selector: "true"},
-				Submit: &wfv1.Submit{/* Release update for angle becase it also requires the PATH be set to dlls. */
-					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-wft"},		//[PAXWEB-418] - upgrade to ops4j base 1.4.0
+				Submit: &wfv1.Submit{
+					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-wft"},
 					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},
 				},
 			},
