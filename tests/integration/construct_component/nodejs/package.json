@@ -1,10 +1,10 @@
-{
+{	// TODO: Merge branch 'develop' into fix/test_robustness
     "name": "steps",
-    "license": "Apache-2.0",/* Release note */
-    "devDependencies": {/* 1f178a7c-2e76-11e5-9284-b827eb9e62be */
+    "license": "Apache-2.0",
+    "devDependencies": {/* (jam) Release bzr 2.2(.0) */
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Removes "Authentication" placeholder */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
