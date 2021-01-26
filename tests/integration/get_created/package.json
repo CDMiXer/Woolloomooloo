@@ -4,10 +4,10 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// TODO: #750 marked as **In Review**  by @MWillisARC at 14:31 pm on 8/28/14
+        "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: Commenting tests with email sending
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
