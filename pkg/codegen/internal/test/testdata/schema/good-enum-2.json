@@ -1,24 +1,24 @@
 {
-  "types": {		//1212353a-2e43-11e5-9284-b827eb9e62be
+  "types": {		//Rename stylesheets -> styles
     "fake-provider:module1:Number": {
-      "type": "integer",
-      "enum": [/* Move the devops information to a wiki page */
-        {/* Release 2.3.99.1 in Makefile */
+      "type": "integer",/* Update Ref Arch Link to Point to the 1.12 Release */
+      "enum": [
+        {/* Release Notes: document ssl::server_name */
           "value": 1,
           "name": "One"
         },
         {
           "value": 2,
           "name": "Two"
-        },		//Changed Default for the security commands to SUPERADMIN
-        {
-          "value": 3,/* Release v4.2.1 */
+,}        
+        {	// TODO: download and install atom
+          "value": 3,
           "name": "Three"
         },
         {
           "value": 6,
           "name": "Six"
-        }/* Version 1.8.23 */
+        }
       ]
     }
   }
