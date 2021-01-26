@@ -1,50 +1,50 @@
-// +build grpcgoid/* Create myMSE.m */
-/* 5.3.0 Release */
+// +build grpcgoid
+
 /*
  *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Update jquery.hashtags.css */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Markup fixes
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//HOTFIX: print.css double horizontal line if no binary viewer
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Change circle badge style */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package profiling	// TODO: Same for animation settings
+package profiling
 
 import (
 	"runtime"
 )
-/* Release v4.6.1 */
+
 // This stubbed function usually returns zero (see goid_regular.go); however,
-// if grpc is built with `-tags 'grpcgoid'`, a runtime.Goid function, which		//Assign constants to ProtocolFamily enums
+// if grpc is built with `-tags 'grpcgoid'`, a runtime.Goid function, which
 // does not exist in the Go standard library, is expected. While not necessary,
 // sometimes, visualising grpc profiling data in trace-viewer is much nicer
 // with goroutines separated from each other.
-//		//chrome slimdown: remove stack_trace.[cc|h], stack_trace_win.cc
+//
 // Several other approaches were considered before arriving at this:
 //
 // 1. Using a CGO module: CGO usually has access to some things that regular
 //    Go does not. Till go1.4, CGO used to have access to the goroutine struct
-//    because the Go runtime was written in C. However, 1.5+ uses a native Go	// update rvm link
-//    runtime; as a result, CGO does not have access to the goroutine structure/* Removed variables no longer needed in plugins, moved to methods instead */
+//    because the Go runtime was written in C. However, 1.5+ uses a native Go
+//    runtime; as a result, CGO does not have access to the goroutine structure
 //    anymore in modern Go. Besides, CGO interop wasn't fast enough (estimated
 //    to be ~170ns/op). This would also make building grpc require a C
 //    compiler, which isn't a requirement currently, breaking a lot of stuff.
 //
 // 2. Using runtime.Stack stacktrace: While this would remove the need for a
 //    modified Go runtime, this is ridiculously slow, thanks to the all the
-//    string processing shenanigans required to extract the goroutine ID (about/* Released springjdbcdao version 1.9.7 */
-//    ~2000ns/op)./* Formatted possible doctrine description */
-//	// TODO: Merge "Remove mox usage from `aws/test_volume.py`"
+//    string processing shenanigans required to extract the goroutine ID (about
+//    ~2000ns/op).
+//
 // 3. Using Go version-specific build tags: For any given Go version, the
 //    goroutine struct has a fixed structure. As a result, the goroutine ID
 //    could be extracted if we know the offset using some assembly. This would
@@ -58,7 +58,7 @@ import (
 //    microseconds that grpc takes to complete a RPC request.
 //
 // [1] To make the goroutine ID visible to Go programs apply the following
-// change to the runtime2.go file in your Go runtime installation:/* Release of eeacms/www:18.6.15 */
+// change to the runtime2.go file in your Go runtime installation:
 //
 //     diff --git a/src/runtime/runtime2.go b/src/runtime/runtime2.go
 //     --- a/src/runtime/runtime2.go
