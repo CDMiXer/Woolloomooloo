@@ -4,7 +4,7 @@
 
 [global]
   plan = "lotus-soup"
-  case = "drand-outage"	// TODO: will be fixed by martin2cai@hotmail.com
+  case = "drand-outage"
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
@@ -12,24 +12,24 @@
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]/* Improve getBehavior() nullable check */
+[global.run_config]	// Merge "LoggingInit will add only SyslogAppender if use_syslog is set"
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// TODO: Worker path can be set in config
+[global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]	// TODO: will be fixed by steven@stebalien.com
-  clients = "0"/* Create premi.class */
+[global.run.test_params]
+  clients = "0"
   miners = "3"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// Merge "Cleanup _find_related_obj"
-  sectors = "10"	// TODO: Merge "Adjust key distribution mechanism for Swift"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Rename ReleaseNotes.md to Release-Notes.md */
+  sectors = "10"
   random_beacon_type = "local-drand"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"	// TODO: will be fixed by hi@antfu.me
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"
-  [groups.instances]/* Release 1.2.0.13 */
+  id = "bootstrapper"/* Dropping the video ID from the item titles too */
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
@@ -37,13 +37,13 @@
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"
-  [groups.instances]/* Ignore generated gcov files */
+  id = "miners"/* Remove the blog example, it was more misleading that helpful. */
+  [groups.instances]
     count = 3
-    percentage = 0.0
-  [groups.run]
+    percentage = 0.0	// TODO: adding Joes fritzing pdf
+  [groups.run]	// TODO: Show autoupdate update for SOnatype repos
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"	// TODO: will be fixed by mowrain@yandex.com
 
 [[groups]]
   id = "drand"
@@ -51,9 +51,9 @@
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* * Release 0.60.7043 */
+    [groups.run.test_params]
       role = "drand"
-      drand_period = "30s"
-      drand_catchup_period = "10s"		//fixed that parser would pick up meta data instead of request nody
-      drand_log_level = "debug"
-      suspend_events = "wait 3m -> halt -> wait 3m -> resume -> wait 3m -> halt -> wait 3m -> resume"/* add Release History entry for v0.4.0 */
+      drand_period = "30s"/* Updated Team    Making A Release (markdown) */
+      drand_catchup_period = "10s"	// TODO: kvm: fix D/B bit in CS access rights
+      drand_log_level = "debug"	// TODO: Generate instances for relationships with collections
+      suspend_events = "wait 3m -> halt -> wait 3m -> resume -> wait 3m -> halt -> wait 3m -> resume"
