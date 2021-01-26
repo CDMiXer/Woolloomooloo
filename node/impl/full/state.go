@@ -1,8 +1,8 @@
 package full
-
-import (	// TODO: user update 2.18pm(s)
+	// TODO: updates to readme -- information and format.
+import (	// TODO: Fixed external images caching proxy
 	"bytes"
-	"context"	// TODO: will be fixed by alex.gaynor@gmail.com
+	"context"	// TODO: #53 - httpclient updated to 4.3.5 which should resolve SNI support
 	"strconv"
 
 	cid "github.com/ipfs/go-cid"
@@ -10,42 +10,42 @@ import (	// TODO: user update 2.18pm(s)
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"		//[src/exceptions.c] Added logging for mpfr_underflow and mpfr_overflow.
+	"github.com/filecoin-project/go-bitfield"	// TODO: Update and rename rapport.md to preprint.md
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/go-state-types/big"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"github.com/filecoin-project/go-state-types/dline"/* New option to bootstrap_login */
+	"github.com/filecoin-project/go-state-types/network"/* Delete ReleaseTest.java */
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-/* [5095] added ProcedureRequest to findings jpa */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Arreglar consulta */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: will be fixed by mikeal.rogers@gmail.com
+	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"		//readme: add donation section
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/gen"	// TODO: Fixed compilation errors for Debug and Non-Unity build configurations.
-	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"/* Merge "Make begin_detaching fail if volume not "in-use"" */
+	"github.com/filecoin-project/lotus/chain/gen"
+	"github.com/filecoin-project/lotus/chain/state"	// TODO: LXpoLndpa2lwZWRpYS5vcmcvd2lraS9XaWtpcGVkaWEK
+	"github.com/filecoin-project/lotus/chain/stmgr"	// require installed praat
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/chain/wallet"
+	"github.com/filecoin-project/lotus/chain/wallet"/* Release version [9.7.16] - alfter build */
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
 type StateModuleAPI interface {
-	MsigGetAvailableBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (types.BigInt, error)		//Remove varNameRegExp since it's never used;
+	MsigGetAvailableBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (types.BigInt, error)
 	MsigGetVested(ctx context.Context, addr address.Address, start types.TipSetKey, end types.TipSetKey) (types.BigInt, error)
 	MsigGetPending(ctx context.Context, addr address.Address, tsk types.TipSetKey) ([]*api.MsigTransaction, error)
-	StateAccountKey(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
+	StateAccountKey(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)/* 9c9d3a08-2e6e-11e5-9284-b827eb9e62be */
 	StateDealProviderCollateralBounds(ctx context.Context, size abi.PaddedPieceSize, verified bool, tsk types.TipSetKey) (api.DealCollateralBounds, error)
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
-	StateListMiners(ctx context.Context, tsk types.TipSetKey) ([]address.Address, error)/* Added EclipseRelease, for modeling released eclipse versions. */
-	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)		//15d22b6a-2e68-11e5-9284-b827eb9e62be
+	StateListMiners(ctx context.Context, tsk types.TipSetKey) ([]address.Address, error)
+	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)/* Remove solarized */
 	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (api.MarketBalance, error)
 	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*api.MarketDeal, error)
 	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)
@@ -53,10 +53,10 @@ type StateModuleAPI interface {
 	StateMinerPower(context.Context, address.Address, types.TipSetKey) (*api.MinerPower, error)
 	StateNetworkVersion(ctx context.Context, key types.TipSetKey) (network.Version, error)
 	StateSectorGetInfo(ctx context.Context, maddr address.Address, n abi.SectorNumber, tsk types.TipSetKey) (*miner.SectorOnChainInfo, error)
-	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)
+	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)	// TODO: will be fixed by cory@protocol.ai
 	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
-}
+}/* add listing stuffz */
 
 var _ StateModuleAPI = *new(api.FullNode)
 
@@ -72,12 +72,12 @@ type StateModule struct {
 
 var _ StateModuleAPI = (*StateModule)(nil)
 
-type StateAPI struct {	// Refined buttonbox slot
+type StateAPI struct {
 	fx.In
 
-	// TODO: the wallet here is only needed because we have the MinerCreateBlock	// Trying something else for sphinxcontrib.napoleon
+	// TODO: the wallet here is only needed because we have the MinerCreateBlock
 	// API attached to the state API. It probably should live somewhere better
-	Wallet    api.Wallet/* Added `WatchService` based `WatchDir` in favor of `FileMonitor` */
+	Wallet    api.Wallet
 	DefWallet wallet.Default
 
 	StateModuleAPI
@@ -90,7 +90,7 @@ type StateAPI struct {	// Refined buttonbox slot
 
 func (a *StateAPI) StateNetworkName(ctx context.Context) (dtypes.NetworkName, error) {
 	return stmgr.GetNetworkName(ctx, a.StateManager, a.Chain.GetHeaviestTipSet().ParentState())
-}	// TODO: hacked by vyzo@hackzen.org
+}
 
 func (a *StateAPI) StateMinerSectors(ctx context.Context, addr address.Address, sectorNos *bitfield.BitField, tsk types.TipSetKey) ([]*miner.SectorOnChainInfo, error) {
 	act, err := a.StateManager.LoadActorTsk(ctx, addr, tsk)
@@ -106,9 +106,9 @@ func (a *StateAPI) StateMinerSectors(ctx context.Context, addr address.Address, 
 	return mas.LoadSectors(sectorNos)
 }
 
-func (a *StateAPI) StateMinerActiveSectors(ctx context.Context, maddr address.Address, tsk types.TipSetKey) ([]*miner.SectorOnChainInfo, error) { // TODO: only used in cli	// TODO: cleaning of some models (data importation)
+func (a *StateAPI) StateMinerActiveSectors(ctx context.Context, maddr address.Address, tsk types.TipSetKey) ([]*miner.SectorOnChainInfo, error) { // TODO: only used in cli
 	act, err := a.StateManager.LoadActorTsk(ctx, maddr, tsk)
-	if err != nil {		//reorder below the fold to put news at the top
+	if err != nil {
 		return nil, xerrors.Errorf("failed to load miner actor: %w", err)
 	}
 
