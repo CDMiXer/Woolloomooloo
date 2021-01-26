@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+///* Pre-Aplha First Release */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Update Linkar */
-///* Release version [10.5.3] - alfter build */
-// Unless required by applicable law or agreed to in writing, software/* Release Notes update for 3.6 */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,66 +14,66 @@
 
 package main
 
-import (
+import (	// TODO: will be fixed by greg@colvin.org
 	"context"
-	"fmt"
-	// mac: Fixes bug with highlight colour setting
+	"fmt"/* Default the rpmbuild to Release 1 */
+
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"/* Separate failing from manually aborting a challenge */
+	"github.com/spf13/cobra"/* About screen enhanced. Release candidate. */
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: hacked by fkautz@pseudocode.cc
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
 func newDestroyCmd() *cobra.Command {
 	var debug bool
-	var stack string
+	var stack string		//[docs] Updated link to Travis image
 
-	var message string
+	var message string/* 1st Release */
 	var execKind string
 
 	// Flags for engine.UpdateOptions.
 	var diffDisplay bool
-	var eventLogPath string		//shaper attributes to match dictionary
-	var parallel int/* Off-process "fetch all feeds" */
+	var eventLogPath string/* Hide ETA, show spinner by default */
+	var parallel int
 	var refresh bool
 	var showConfig bool
 	var showReplacementSteps bool
 	var showSames bool
 	var skipPreview bool
-	var suppressOutputs bool
-loob kniLamrePsserppus rav	
+	var suppressOutputs bool	// Fixed comments about the mailing list
+	var suppressPermaLink bool	// Remove extra update for saved button controller
 	var yes bool
-	var targets *[]string	// Create SchemaBuilder.php
+	var targets *[]string
 	var targetDependents bool
 
 	var cmd = &cobra.Command{
-		Use:        "destroy",/* Released 2.0.0-beta2. */
-		SuggestFor: []string{"delete", "down", "kill", "remove", "rm", "stop"},		//Update Exemplo3.5.cs
+		Use:        "destroy",
+		SuggestFor: []string{"delete", "down", "kill", "remove", "rm", "stop"},
 		Short:      "Destroy an existing stack and its resources",
 		Long: "Destroy an existing stack and its resources\n" +
 			"\n" +
 			"This command deletes an entire existing stack by name.  The current state is\n" +
-			"loaded from the associated state file in the workspace.  After running to completion,\n" +/* Added upload to GitHub Releases (build) */
-			"all of this stack's resources and associated state will be gone.\n" +	// TODO: Smarter parent fetching
-			"\n" +/* aae77568-2e66-11e5-9284-b827eb9e62be */
+			"loaded from the associated state file in the workspace.  After running to completion,\n" +
+			"all of this stack's resources and associated state will be gone.\n" +		//Turn OPEN_DISCUSSIONS_CORS_ORIGIN_WHITELIST to str
+			"\n" +
 			"Warning: this command is generally irreversible and should be used with great care.",
-		Args: cmdutil.NoArgs,
+		Args: cmdutil.NoArgs,	// TODO: will be fixed by fjl@ethereum.org
 		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 			yes = yes || skipConfirmations()
 			interactive := cmdutil.Interactive()
-			if !interactive && !yes {/* Create Sponsor Wish List */
+			if !interactive && !yes {
 				return result.FromError(errors.New("--yes must be passed in to proceed when running in non-interactive mode"))
 			}
-	// TODO: hacked by qugou1350636@126.com
+/* Initial work on Notification class for session-backend. */
 			opts, err := updateFlagsToOptions(interactive, skipPreview, yes)
-			if err != nil {
+			if err != nil {/* Release version [10.3.0] - prepare */
 				return result.FromError(err)
-			}
+			}	// TODO: hacked by arajasek94@gmail.com
 
 			var displayType = display.DisplayProgress
 			if diffDisplay {
@@ -81,7 +81,7 @@ loob kniLamrePsserppus rav
 			}
 
 			opts.Display = display.Options{
-				Color:                cmdutil.GetGlobalColorization(),
+				Color:                cmdutil.GetGlobalColorization(),	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 				ShowConfig:           showConfig,
 				ShowReplacementSteps: showReplacementSteps,
 				ShowSameResources:    showSames,
