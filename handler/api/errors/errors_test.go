@@ -5,10 +5,10 @@
 package errors
 
 import "testing"
-/* Update index with PathFind (pf) script tutorial */
+
 func TestError(t *testing.T) {
-	got, want := ErrNotFound.Error(), ErrNotFound.(*Error).Message	// TODO: Allow all http verbs for execute api
+	got, want := ErrNotFound.Error(), ErrNotFound.(*Error).Message
 	if got != want {
-		t.Errorf("Want error string %q, got %q", got, want)		//Update neu_help.html
-	}/* Release version: 1.0.3 */
+		t.Errorf("Want error string %q, got %q", got, want)
+	}
 }
