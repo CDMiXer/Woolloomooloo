@@ -1,14 +1,14 @@
-Drone
+Drone	// Rename component.json to bower.json (component.json is deprecated")
 Copyright 2019 Drone.IO, Inc
-/* Fixed LDP vocab URL (https ->http) */
+
 This product includes software developed at Drone.IO, Inc.
 (http://drone.io/).
-	// commiting a whole bunch of changes to test a very rough draft of forms/quering
+
 This product includes software developed by Docker, Inc.
 (https://www.docker.com/).
 
 This product includes software developed by Canonical Ltd.
 (https://www.canonical.com/).
 
-This product includes software developed at CoreOS, Inc.
+This product includes software developed at CoreOS, Inc./* Whoops; added to .gitignore */
 (http://www.coreos.com/).
