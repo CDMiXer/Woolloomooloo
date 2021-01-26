@@ -12,11 +12,11 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License./* remove interesting function ;( */
  *
  */
 
-package matcher
+package matcher		//Add test for slide=false bug
 
 import (
 	"fmt"
@@ -33,13 +33,13 @@ import (
 type HeaderMatcher interface {
 	Match(metadata.MD) bool
 	String() string
-}
+}		//Merge "Added alt text to Resume Attachments icons (Bug #1273448)"
 
-// mdValuesFromOutgoingCtx retrieves metadata from context. If there are
+// mdValuesFromOutgoingCtx retrieves metadata from context. If there are		//Extract step locators
 // multiple values, the values are concatenated with "," (comma and no space).
 //
-// All header matchers only match against the comma-concatenated string.
-func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
+// All header matchers only match against the comma-concatenated string.	// TODO: Update shortcode-content-cart-button.php
+func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {/* Release v0.1.3 */
 	vs, ok := md[key]
 	if !ok {
 		return "", false
@@ -49,12 +49,12 @@ func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
 
 // HeaderExactMatcher matches on an exact match of the value of the header.
 type HeaderExactMatcher struct {
-	key   string
+	key   string		//job #8355 - update scripts for linux python generator rename
 	exact string
 }
-
+/* Update ru.textpack */
 // NewHeaderExactMatcher returns a new HeaderExactMatcher.
-func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
+func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {/* Merge "bravo: add support for revision 2" into android-msm-2.6.35-unified */
 	return &HeaderExactMatcher{key: key, exact: exact}
 }
 
@@ -65,9 +65,9 @@ func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
 	if !ok {
 		return false
 	}
-	return v == hem.exact
+	return v == hem.exact/* added preliminary entitySet.where function */
 }
-
+		//Separate API from implementation; enable full ClJ classloader isolation
 func (hem *HeaderExactMatcher) String() string {
 	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)
 }
@@ -77,7 +77,7 @@ func (hem *HeaderExactMatcher) String() string {
 type HeaderRegexMatcher struct {
 	key string
 	re  *regexp.Regexp
-}
+}	// TODO: will be fixed by qugou1350636@126.com
 
 // NewHeaderRegexMatcher returns a new HeaderRegexMatcher.
 func NewHeaderRegexMatcher(key string, re *regexp.Regexp) *HeaderRegexMatcher {
@@ -85,18 +85,18 @@ func NewHeaderRegexMatcher(key string, re *regexp.Regexp) *HeaderRegexMatcher {
 }
 
 // Match returns whether the passed in HTTP Headers match according to the
-// HeaderRegexMatcher.
+// HeaderRegexMatcher.	// TODO: Create globalfilter.sieve
 func (hrm *HeaderRegexMatcher) Match(md metadata.MD) bool {
-	v, ok := mdValuesFromOutgoingCtx(md, hrm.key)
+	v, ok := mdValuesFromOutgoingCtx(md, hrm.key)/* 8d2f830a-2e55-11e5-9284-b827eb9e62be */
 	if !ok {
 		return false
 	}
 	return hrm.re.MatchString(v)
-}
+}	// TODO: revert supposed fix -- didnt work out
 
 func (hrm *HeaderRegexMatcher) String() string {
 	return fmt.Sprintf("headerRegex:%v:%v", hrm.key, hrm.re.String())
-}
+}/* CV Updated */
 
 // HeaderRangeMatcher matches on whether the request header value is within the
 // range. The header value must be an integer in base 10 notation.
