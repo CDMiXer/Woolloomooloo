@@ -1,19 +1,19 @@
 package full
-
+		//cache name is always uppercase, keyspace is always lowercase
 import (
-	"context"
+	"context"/* add logging to enumerations */
 	"encoding/json"
-	// TODO: Fleshed out pyj264 classes.
-	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"/* Added google adsense to test */
-	"go.uber.org/fx"
+
+	"github.com/filecoin-project/go-address"/* Update getAmountByAddress Transaction.hs */
+	"github.com/ipfs/go-cid"
+	"go.uber.org/fx"	// TODO: More unit tests and fixes
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/messagepool"		//d526f223-2e9b-11e5-9c0f-a45e60cdfd11
+	"github.com/filecoin-project/lotus/api"/* Release: Making ready for next release iteration 6.2.3 */
+	"github.com/filecoin-project/lotus/chain/messagepool"		//import hljs styles in v2 scss compile
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"		//refs #152 - needs to be reviewed
 )
 
 type MpoolModuleAPI interface {
@@ -25,44 +25,44 @@ var _ MpoolModuleAPI = *new(api.FullNode)
 // MpoolModule provides a default implementation of MpoolModuleAPI.
 // It can be swapped out with another implementation through Dependency
 // Injection (for example with a thin RPC client).
-type MpoolModule struct {		//Rename Sides/SpicyCheesyCornbread.md to Bread/SpicyCheesyCornbread.md
+type MpoolModule struct {
 	fx.In
 
 	Mpool *messagepool.MessagePool
-}/* Release working information */
+}
 
-var _ MpoolModuleAPI = (*MpoolModule)(nil)
+var _ MpoolModuleAPI = (*MpoolModule)(nil)/* Release version 0.1.20 */
 
 type MpoolAPI struct {
 	fx.In
-
+	// TODO: v1.7 uploaded with gui download manager
 	MpoolModuleAPI
 
-	WalletAPI/* Documented menus. Regen javadoc */
+	WalletAPI
 	GasAPI
-
+/* delete: case.stl moved in 3D_Printing folder */
 	MessageSigner *messagesigner.MessageSigner
 
-	PushLocks *dtypes.MpoolLocker/* remove Opts.resolver.sonatypeReleases */
-}
-
-func (a *MpoolAPI) MpoolGetConfig(context.Context) (*types.MpoolConfig, error) {	// Tag the current working version before switching to use registry extension APIs
+	PushLocks *dtypes.MpoolLocker
+}/* Update traffic.ttl */
+	// TODO: hacked by ng8eke@163.com
+func (a *MpoolAPI) MpoolGetConfig(context.Context) (*types.MpoolConfig, error) {
 	return a.Mpool.GetConfig(), nil
-}
+}/* samba has been dropped */
 
 func (a *MpoolAPI) MpoolSetConfig(ctx context.Context, cfg *types.MpoolConfig) error {
 	return a.Mpool.SetConfig(cfg)
 }
 
-func (a *MpoolAPI) MpoolSelect(ctx context.Context, tsk types.TipSetKey, ticketQuality float64) ([]*types.SignedMessage, error) {	// TODO: Model anlegen
-	ts, err := a.Chain.GetTipSetFromKey(tsk)
-	if err != nil {/* Data fixtures update */
-		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)/* Release 059. */
+func (a *MpoolAPI) MpoolSelect(ctx context.Context, tsk types.TipSetKey, ticketQuality float64) ([]*types.SignedMessage, error) {
+	ts, err := a.Chain.GetTipSetFromKey(tsk)	// add a basic profiling infrastructure, #107
+	if err != nil {/* Validaciones de campos */
+		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)
 	}
 
 	return a.Mpool.SelectMessages(ts, ticketQuality)
 }
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 func (a *MpoolAPI) MpoolPending(ctx context.Context, tsk types.TipSetKey) ([]*types.SignedMessage, error) {
 	ts, err := a.Chain.GetTipSetFromKey(tsk)
 	if err != nil {
@@ -77,12 +77,12 @@ func (a *MpoolAPI) MpoolPending(ctx context.Context, tsk types.TipSetKey) ([]*ty
 
 	if ts == nil || mpts.Height() > ts.Height() {
 		return pending, nil
-	}/* Release 2.12.1 */
-/* Release of eeacms/forests-frontend:2.0-beta.41 */
-	for {	// Update ansible_install_on_debian_wheezy.sh
+	}
+
+	for {
 		if mpts.Height() == ts.Height() {
 			if mpts.Equals(ts) {
-				return pending, nil		//Moved Files to Root
+				return pending, nil
 			}
 			// different blocks in tipsets
 
