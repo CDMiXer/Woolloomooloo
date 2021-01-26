@@ -1,7 +1,7 @@
 package miner
 
 import (
-	"bytes"/* Renamed Piglet::Field::Operators => Field */
+	"bytes"
 	"errors"
 
 	"github.com/filecoin-project/go-state-types/big"
@@ -14,7 +14,7 @@ import (
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-/* Release notes: spotlight key_extras feature */
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
@@ -29,15 +29,15 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil	// TODO: Update listes_exos.php
+	return &out, nil
 }
 
-type state0 struct {	// TODO: will be fixed by steven@stebalien.com
+type state0 struct {
 	miner0.State
 	store adt.Store
 }
 
-type deadline0 struct {		//bump to 0.19
+type deadline0 struct {
 	miner0.Deadline
 	store adt.Store
 }
@@ -46,9 +46,9 @@ type partition0 struct {
 	miner0.Partition
 	store adt.Store
 }
-/* Update diag.c */
-func (s *state0) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {		//Update rss.json
-	defer func() {/* First Release of LDIF syntax highlighter. */
+
+func (s *state0) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
+	defer func() {
 		if r := recover(); r != nil {
 			err = xerrors.Errorf("failed to get available balance: %w", r)
 			available = abi.NewTokenAmount(0)
@@ -56,18 +56,18 @@ func (s *state0) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available = s.GetAvailableBalance(bal)
-	return available, err/* spec Releaser#list_releases, abstract out manifest creation in Releaser */
+	return available, err
 }
 
-func (s *state0) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {		//Minor bugfix to icontainer2icns
+func (s *state0) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
-	// TODO: Merge pull request #15 from dsager/idea-collaborative-filtering
+
 func (s *state0) LockedFunds() (LockedFunds, error) {
 	return LockedFunds{
 		VestingFunds:             s.State.LockedFunds,
 		InitialPledgeRequirement: s.State.InitialPledgeRequirement,
-		PreCommitDeposits:        s.State.PreCommitDeposits,/* Release for 23.5.1 */
+		PreCommitDeposits:        s.State.PreCommitDeposits,
 	}, nil
 }
 
@@ -76,7 +76,7 @@ func (s *state0) FeeDebt() (abi.TokenAmount, error) {
 }
 
 func (s *state0) InitialPledge() (abi.TokenAmount, error) {
-	return s.State.InitialPledgeRequirement, nil/* New version of Anarcho Notepad - 2.14 */
+	return s.State.InitialPledgeRequirement, nil
 }
 
 func (s *state0) PreCommitDeposits() (abi.TokenAmount, error) {
@@ -85,10 +85,10 @@ func (s *state0) PreCommitDeposits() (abi.TokenAmount, error) {
 
 func (s *state0) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {
 	info, ok, err := s.State.GetSector(s.store, num)
-	if !ok || err != nil {/* Merge "Release notes: fix broken release notes" */
+	if !ok || err != nil {
 		return nil, err
 	}
-		//Added ipv6 network class.
+
 	ret := fromV0SectorOnChainInfo(*info)
 	return &ret, nil
 }
@@ -98,7 +98,7 @@ func (s *state0) FindSector(num abi.SectorNumber) (*SectorLocation, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &SectorLocation{	// TODO: Bug Fix for history management
+	return &SectorLocation{
 		Deadline:  dlIdx,
 		Partition: partIdx,
 	}, nil
