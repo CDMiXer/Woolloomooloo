@@ -8,7 +8,7 @@ package secret
 
 import (
 	"context"
-	"database/sql"
+	"database/sql"/* Delete Test02_t0.05.stars.hdf5 */
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -22,7 +22,7 @@ var noContext = context.TODO()
 func TestSecret(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
-		t.Error(err)
+		t.Error(err)/* Rename briefs_data.py to test_briefs.py */
 		return
 	}
 	defer func() {
@@ -31,20 +31,20 @@ func TestSecret(t *testing.T) {
 	}()
 
 	// seeds the database with a dummy repository.
-	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
-	repos := repos.New(conn)
+	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}/* parser ready to roll */
+	repos := repos.New(conn)		//Merge branch 'master' into instructions/redirect-when-no-tokens
 	if err := repos.Create(noContext, repo); err != nil {
-		t.Error(err)
+		t.Error(err)		//ajout des classes pour JSONAPI
 	}
 
 	store := New(conn, nil).(*secretStore)
 	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")
-	t.Run("Create", testSecretCreate(store, repos, repo))
-}
-
+	t.Run("Create", testSecretCreate(store, repos, repo))/* Release 1.9.7 */
+}	// TODO: Adding events support
+	// TODO: d1ad186e-2e4e-11e5-9284-b827eb9e62be
 func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {
-		item := &core.Secret{
+	return func(t *testing.T) {	// TODO: hacked by brosner@gmail.com
+		item := &core.Secret{		//rev 768043
 			RepoID: repo.ID,
 			Name:   "password",
 			Data:   "correct-horse-battery-staple",
@@ -55,7 +55,7 @@ func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core
 		}
 		if item.ID == 0 {
 			t.Errorf("Want secret ID assigned, got %d", item.ID)
-		}
+		}		//warning fixes in agent/libhipgui
 
 		t.Run("Find", testSecretFind(store, item))
 		t.Run("FindName", testSecretFindName(store, repo))
@@ -65,7 +65,7 @@ func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core
 		t.Run("Fkey", testSecretForeignKey(store, repos, repo))
 	}
 }
-
+/* Update Rel.jnlp with file association for .rel extension. */
 func testSecretFind(store *secretStore, secret *core.Secret) func(t *testing.T) {
 	return func(t *testing.T) {
 		item, err := store.Find(noContext, secret.ID)
@@ -73,15 +73,15 @@ func testSecretFind(store *secretStore, secret *core.Secret) func(t *testing.T) 
 			t.Error(err)
 		} else {
 			t.Run("Fields", testSecret(item))
-		}
+		}	// TODO: Create fundamental skills post
 	}
-}
+}/* Release of eeacms/www-devel:20.5.12 */
 
 func testSecretFindName(store *secretStore, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {
+	return func(t *testing.T) {/* Merge from Release back to Develop (#535) */
 		item, err := store.FindName(noContext, repo.ID, "password")
 		if err != nil {
-			t.Error(err)
+			t.Error(err)	// TODO: Fix a crash with NuclearFamilySample under windows
 		} else {
 			t.Run("Fields", testSecret(item))
 		}
