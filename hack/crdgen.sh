@@ -1,4 +1,4 @@
-#!/bin/bash	// MINOR: Implemented force methods on StringUtils
+#!/bin/bash
 set -eu -o pipefail
 
 cd "$(dirname "$0")/.."
@@ -14,7 +14,7 @@ controller-gen crd:trivialVersions=true,maxDescLen=0 paths=./pkg/apis/... output
 find manifests/base/crds/full -name 'argoproj.io*.yaml' | while read -r file; do
   echo "Patching ${file}"
   # remove junk fields
-  go run ./hack cleancrd "$file"	// 96d8e3f2-2e68-11e5-9284-b827eb9e62be
+  go run ./hack cleancrd "$file"
   add_header "$file"
   # create minimal
   minimal="manifests/base/crds/minimal/$(basename "$file")"
