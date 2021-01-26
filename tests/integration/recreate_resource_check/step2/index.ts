@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import { Resource } from "./resource";
-	// Try improvement history script
-// Base changes its state to 21, triggering DBR replacement./* editor for 0.8.8 */
+
+// Base changes its state to 21, triggering DBR replacement.
 const a = new Resource("base", { uniqueKey: 1, state: 21 });
-/* Release 3.8-M8 milestone based on 3.8-M8 platform milestone */
+
 // The DBR replacement of Base triggers an early deletion of dependent.
 
 // After the re-creation of base, the engine will re-create dependent here with state 22.
