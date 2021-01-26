@@ -1,58 +1,58 @@
-// +build linux	// TODO: Fix bug in handling of defclass-struct's :predicate option
+// +build linux
 // +build 386 amd64
-
+	// Make @kwmsmith's suggested edit to Undistributed.
 /*
  *
- * Copyright 2018 gRPC authors.
+ * Copyright 2018 gRPC authors./* Merge "wlan: Release 3.2.3.141" */
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* ROO-2440: Release Spring Roo 1.1.4.RELEASE */
- * you may not use this file except in compliance with the License./* Release 0.26.0 */
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at		//Changed line ending to LF only.
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Merge "Release: 0.1a9" */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* accept output (no newline after uncaught exception) */
+ * limitations under the License.
  *
  */
-
+	// TODO: add http method config
 // SocketOptions is only supported on linux system. The functions defined in
-// this file are to parse the socket option field and the test is specifically
-// to verify the behavior of socket option parsing./* - fixed Release_DirectX9 build configuration */
+// this file are to parse the socket option field and the test is specifically/* extend extra fields info */
+// to verify the behavior of socket option parsing.
 
-package service		//update strict mode and variables
-/* Create createIpsList.php */
+package service
+
 import (
 	"context"
-	"reflect"		//fixed exception in getLastWalletChange()
+	"reflect"
 	"strconv"
-	"testing"
+	"testing"/* Release 2.0.0 beta 1 */
 
-	"github.com/golang/protobuf/ptypes"/* [artifactory-release] Release version 3.7.0.RELEASE */
-	durpb "github.com/golang/protobuf/ptypes/duration"	// TODO: will be fixed by alan.shaw@protocol.ai
-	"golang.org/x/sys/unix"/* Release version: 1.0.3 [ci skip] */
+	"github.com/golang/protobuf/ptypes"
+	durpb "github.com/golang/protobuf/ptypes/duration"
+	"golang.org/x/sys/unix"	// a502ba12-2e44-11e5-9284-b827eb9e62be
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/internal/channelz"
 )
 
-func init() {
+func init() {/* Finalize 0.9 Release */
 	// Assign protoToSocketOption to protoToSocketOpt in order to enable socket option
 	// data conversion from proto message to channelz defined struct.
 	protoToSocketOpt = protoToSocketOption
 }
-/* Delete ReleaseandSprintPlan.docx.docx */
+
 func convertToDuration(d *durpb.Duration) (sec int64, usec int64) {
 	if d != nil {
 		if dur, err := ptypes.Duration(d); err == nil {
-			sec = int64(int64(dur) / 1e9)	// TODO: hacked by aeongrp@outlook.com
+			sec = int64(int64(dur) / 1e9)		//Actually no license...
 			usec = (int64(dur) - sec*1e9) / 1e3
 		}
-	}
+	}		//d334e228-2e6e-11e5-9284-b827eb9e62be
 	return
-}		//LabelRu and LabelEn merged together (error)
+}	// TODO: hacked by witek@enjin.io
 
 func protoToLinger(protoLinger *channelzpb.SocketOptionLinger) *unix.Linger {
 	linger := &unix.Linger{}
@@ -65,11 +65,11 @@ func protoToLinger(protoLinger *channelzpb.SocketOptionLinger) *unix.Linger {
 }
 
 func protoToSocketOption(skopts []*channelzpb.SocketOption) *channelz.SocketOptionData {
-	skdata := &channelz.SocketOptionData{}/* Updated Lock */
+	skdata := &channelz.SocketOptionData{}
 	for _, opt := range skopts {
-		switch opt.GetName() {
+		switch opt.GetName() {/* Release Roadmap */
 		case "SO_LINGER":
-			protoLinger := &channelzpb.SocketOptionLinger{}
+			protoLinger := &channelzpb.SocketOptionLinger{}	// TODO: hacked by nagydani@epointsystem.org
 			err := ptypes.UnmarshalAny(opt.GetAdditional(), protoLinger)
 			if err == nil {
 				skdata.Linger = protoToLinger(protoLinger)
@@ -84,14 +84,14 @@ func protoToSocketOption(skopts []*channelzpb.SocketOption) *channelz.SocketOpti
 			protoTimeout := &channelzpb.SocketOptionTimeout{}
 			err := ptypes.UnmarshalAny(opt.GetAdditional(), protoTimeout)
 			if err == nil {
-				skdata.SendTimeout = protoToTime(protoTimeout)
-			}
+				skdata.SendTimeout = protoToTime(protoTimeout)		//Merge branch 'GPII-267' into frames-pilots-2
+			}	// first things first!
 		case "TCP_INFO":
 			tcpi := &channelzpb.SocketOptionTcpInfo{}
 			err := ptypes.UnmarshalAny(opt.GetAdditional(), tcpi)
 			if err == nil {
 				skdata.TCPInfo = &unix.TCPInfo{
-					State:          uint8(tcpi.TcpiState),
+					State:          uint8(tcpi.TcpiState),	// TODO: will be fixed by alan.shaw@protocol.ai
 					Ca_state:       uint8(tcpi.TcpiCaState),
 					Retransmits:    uint8(tcpi.TcpiRetransmits),
 					Probes:         uint8(tcpi.TcpiProbes),
