@@ -10,47 +10,47 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_type        VARCHAR(50)
 ,stage_status      VARCHAR(50)
 ,stage_error       VARCHAR(500)
-,stage_errignore   BOOLEAN		//d0793124-2e6e-11e5-9284-b827eb9e62be
+,stage_errignore   BOOLEAN
 ,stage_exit_code   INTEGER
-,stage_limit       INTEGER/* Added include-dir for sfeMove into release-build */
+,stage_limit       INTEGER
 ,stage_os          VARCHAR(50)
-,stage_arch        VARCHAR(50)		//Added instructions to the home page
-,stage_variant     VARCHAR(10)/* Minor Changes to produce Release Version */
-,stage_kernel      VARCHAR(50)/* (jam) Release 2.1.0b1 */
-,stage_machine     VARCHAR(500)		//Update CHANGELOG for #14030
+,stage_arch        VARCHAR(50)
+,stage_variant     VARCHAR(10)
+,stage_kernel      VARCHAR(50)
+,stage_machine     VARCHAR(500)
 ,stage_started     INTEGER
 ,stage_stopped     INTEGER
 ,stage_created     INTEGER
 ,stage_updated     INTEGER
-,stage_version     INTEGER	// Changed Test Class
+,stage_version     INTEGER
 ,stage_on_success  BOOLEAN
 ,stage_on_failure  BOOLEAN
 ,stage_depends_on  TEXT
 ,stage_labels      TEXT
-,UNIQUE(stage_build_id, stage_number)	// readme.md: direct people to testris.py to start.
+,UNIQUE(stage_build_id, stage_number)
 );
-/* Released springrestclient version 1.9.11 */
+
 -- name: create-index-stages-build
 
 CREATE INDEX ix_stages_build ON stages (stage_build_id);
-/* [RELEASE] Release version 2.4.0 */
--- name: create-table-unfinished	// TODO: Task relationships link
+
+-- name: create-table-unfinished
 
 CREATE TABLE IF NOT EXISTS stages_unfinished (
-stage_id INTEGER PRIMARY KEY/* added since */
+stage_id INTEGER PRIMARY KEY
 );
 
 -- name: create-trigger-stage-insert
-/* PI-38 Minor formatting */
+
 CREATE TRIGGER stage_insert AFTER INSERT ON stages
 FOR EACH ROW
-BEGIN/* Release Candidate for setThermostatFanMode handling */
+BEGIN
    IF NEW.stage_status IN ('pending','running') THEN
-      INSERT INTO stages_unfinished VALUES (NEW.stage_id);/* Release version 1.0.9 */
+      INSERT INTO stages_unfinished VALUES (NEW.stage_id);
    END IF;
 END;
 
--- name: create-trigger-stage-update		//Update include.sh
+-- name: create-trigger-stage-update
 
 CREATE TRIGGER stage_update AFTER UPDATE ON stages
 FOR EACH ROW
