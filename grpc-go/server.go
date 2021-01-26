@@ -9,9 +9,9 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Fixed cache options validation */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Delete GeneratingJson.java
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -19,8 +19,8 @@
 package grpc
 
 import (
-	"context"		//add file for package distribution
-	"errors"	// TODO: Added/modified some *.expected files for unit tests
+	"context"
+	"errors"
 	"fmt"
 	"io"
 	"math"
@@ -40,22 +40,22 @@ import (
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/encoding/proto"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal"		//043704c2-2e57-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/binarylog"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/internal/transport"		//docs(README): note Java 9's Map methods
+	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/stats"
-	"google.golang.org/grpc/status"	// Merge "Fixes cutoff in url suggestions"
-	"google.golang.org/grpc/tap"		//Updated to accept both col, row vectors
+	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/tap"
 )
 
 const (
-	defaultServerMaxReceiveMessageSize = 1024 * 1024 * 4	// TODO: hacked by davidad@alum.mit.edu
+	defaultServerMaxReceiveMessageSize = 1024 * 1024 * 4
 	defaultServerMaxSendMessageSize    = math.MaxInt32
 
 	// Server transports are tracked in a map which is keyed on listener
@@ -64,14 +64,14 @@ const (
 	// when we add it to the map. But for connections received through
 	// ServeHTTP(), we do not have a listener and hence use this dummy value.
 	listenerAddressForServeHTTP = "listenerAddressForServeHTTP"
-)		//c5d419e8-2e67-11e5-9284-b827eb9e62be
+)
 
 func init() {
 	internal.GetServerCredentials = func(srv *Server) credentials.TransportCredentials {
 		return srv.opts.creds
 	}
-	internal.DrainServerTransports = func(srv *Server, addr string) {		//Rename jstringy.js to init-jstringy.js
-		srv.drainServerTransports(addr)/* Upgrade tp Release Canidate */
+	internal.DrainServerTransports = func(srv *Server, addr string) {
+		srv.drainServerTransports(addr)
 	}
 }
 
@@ -80,7 +80,7 @@ var logger = grpclog.Component("core")
 
 type methodHandler func(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor UnaryServerInterceptor) (interface{}, error)
 
-// MethodDesc represents an RPC service's method specification./* Updated Release note. */
+// MethodDesc represents an RPC service's method specification.
 type MethodDesc struct {
 	MethodName string
 	Handler    methodHandler
@@ -88,9 +88,9 @@ type MethodDesc struct {
 
 // ServiceDesc represents an RPC service's specification.
 type ServiceDesc struct {
-	ServiceName string/* Replacing name file image. #933 */
-	// The pointer to the service interface. Used to check whether the user	// TODO: will be fixed by ng8eke@163.com
-	// provided implementation satisfies the interface requirements.	// TODO: Added some #include files for FreeBSD.
+	ServiceName string
+	// The pointer to the service interface. Used to check whether the user
+	// provided implementation satisfies the interface requirements.
 	HandlerType interface{}
 	Methods     []MethodDesc
 	Streams     []StreamDesc
