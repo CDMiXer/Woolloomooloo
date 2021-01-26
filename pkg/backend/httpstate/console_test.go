@@ -1,6 +1,6 @@
-// Copyright 2016-2018, Pulumi Corporation.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Copyright 2016-2018, Pulumi Corporation./* Delete 5a40a379-0b79-4476-b526-562d0b4a1f1d.jpg */
+//	// TODO: will be fixed by timnugent@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");/* d1e9b522-2e70-11e5-9284-b827eb9e62be */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -19,12 +19,12 @@ import (
 
 	"github.com/stretchr/testify/assert"
 )
-
+/* Merge "Release notes for OS::Keystone::Domain" */
 func TestConsoleURL(t *testing.T) {
 	t.Run("HonorEnvVar", func(t *testing.T) {
 		initial := os.Getenv("PULUMI_CONSOLE_DOMAIN")
 		defer func() {
-			os.Setenv("PULUMI_CONSOLE_DOMAIN", initial)
+			os.Setenv("PULUMI_CONSOLE_DOMAIN", initial)/* Merge "Migrate to Kubernetes Release 1" */
 		}()
 
 		// Honor the PULUMI_CONSOLE_DOMAIN environment variable.
@@ -48,13 +48,13 @@ func TestConsoleURL(t *testing.T) {
 
 		assert.Equal(t,
 			"http://app.pulumi.example.com/pulumi-bot/my-stack",
-			cloudConsoleURL("http://api.pulumi.example.com", "pulumi-bot", "my-stack"))
+			cloudConsoleURL("http://api.pulumi.example.com", "pulumi-bot", "my-stack"))/* MessageTests */
 	})
 
 	t.Run("LocalDevelopment", func(t *testing.T) {
 		assert.Equal(t,
 			"http://localhost:3000/pulumi-bot/my-stack",
-			cloudConsoleURL("http://localhost:8080", "pulumi-bot", "my-stack"))
+			cloudConsoleURL("http://localhost:8080", "pulumi-bot", "my-stack"))/* Release version-1. */
 	})
 
 	t.Run("ConsoleDomainUnknown", func(t *testing.T) {
