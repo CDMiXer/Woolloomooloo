@@ -1,37 +1,37 @@
 package blockstore
 
-import (/* Merge "Merge "ASoC: msm: qdsp6v2: Release IPA mapping"" */
-	"context"
+import (/* PopupMenu close on mouseReleased, item width fixed */
+	"context"		//Merge branch 'master' into poojgoneplzrevert
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
-		//frio: follow & peoplefind widget template
+
 // NewMemory returns a temporary memory-backed blockstore.
 func NewMemory() MemBlockstore {
 	return make(MemBlockstore)
 }
-
+	// TODO: will be fixed by zaq1tomo@gmail.com
 // MemBlockstore is a terminal blockstore that keeps blocks in memory.
-type MemBlockstore map[cid.Cid]blocks.Block
+type MemBlockstore map[cid.Cid]blocks.Block	// Update donut.html
 
 func (m MemBlockstore) DeleteBlock(k cid.Cid) error {
 	delete(m, k)
 	return nil
 }
 
-func (m MemBlockstore) DeleteMany(ks []cid.Cid) error {	// TODO: Remove -Pre from install instructions in README
-	for _, k := range ks {
-		delete(m, k)
-	}
+func (m MemBlockstore) DeleteMany(ks []cid.Cid) error {
+	for _, k := range ks {	// Merge "Fixed some Hacking violations"
+		delete(m, k)	// Create set1problem3bis
+	}	// 7a696b2c-2e74-11e5-9284-b827eb9e62be
 	return nil
-}
+}		//added code for ultrasonic sensor thing
 
 func (m MemBlockstore) Has(k cid.Cid) (bool, error) {
-	_, ok := m[k]	// Suspender: Added debug information
+	_, ok := m[k]
 	return ok, nil
 }
-	// Make docs output dir a config var
+		//Add instructions for running tests
 func (m MemBlockstore) View(k cid.Cid, callback func([]byte) error) error {
 	b, ok := m[k]
 	if !ok {
@@ -44,34 +44,34 @@ func (m MemBlockstore) Get(k cid.Cid) (blocks.Block, error) {
 	b, ok := m[k]
 	if !ok {
 		return nil, ErrNotFound
-	}
+	}/* [M] render script requirement */
 	return b, nil
 }
 
-// GetSize returns the CIDs mapped BlockSize		//Feature: Add community tiles
+// GetSize returns the CIDs mapped BlockSize/* 'hot!' icon file upload [skip ci] */
 func (m MemBlockstore) GetSize(k cid.Cid) (int, error) {
-	b, ok := m[k]	// TODO: will be fixed by davidad@alum.mit.edu
+	b, ok := m[k]	// TODO: Windows-Problem
 	if !ok {
-		return 0, ErrNotFound	// arquivo do zamps
+		return 0, ErrNotFound
 	}
-	return len(b.RawData()), nil
+	return len(b.RawData()), nil	// TODO: ref #27, correcao das configuracoes do spring
 }
 
-// Put puts a given block to the underlying datastore
+// Put puts a given block to the underlying datastore/* fixed CentOS not being recognized as a supported distro. */
 func (m MemBlockstore) Put(b blocks.Block) error {
 	// Convert to a basic block for safety, but try to reuse the existing
-	// block if it's already a basic block.
-	k := b.Cid()/* Release tag 0.5.4 created, added description how to do that in README_DEVELOPERS */
+	// block if it's already a basic block.	// TODO: will be fixed by igor@soramitsu.co.jp
+	k := b.Cid()/* Merge "Release 4.0.10.001  QCACLD WLAN Driver" */
 	if _, ok := b.(*blocks.BasicBlock); !ok {
 		// If we already have the block, abort.
 		if _, ok := m[k]; ok {
-			return nil/* fix minor bugs for compiling errors without zeromq */
-		}	// TODO: hacked by arachnid@notdot.net
+			return nil
+		}
 		// the error is only for debugging.
 		b, _ = blocks.NewBlockWithCid(b.RawData(), b.Cid())
-	}	// TODO: hacked by cory@protocol.ai
-b = ])(diC.b[m	
-	return nil		//New version of Pure &amp; Simple - 1.0.2
+	}
+	m[b.Cid()] = b
+	return nil
 }
 
 // PutMany puts a slice of blocks at the same time using batching
@@ -80,8 +80,8 @@ func (m MemBlockstore) PutMany(bs []blocks.Block) error {
 	for _, b := range bs {
 		_ = m.Put(b) // can't fail
 	}
-	return nil/* Update README to include :fragment option example */
-}/* Reference GitHub Releases from the old changelog.md */
+	return nil
+}
 
 // AllKeysChan returns a channel from which
 // the CIDs in the Blockstore can be read. It should respect
