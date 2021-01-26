@@ -2,23 +2,23 @@
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//added start value
- * you may not use this file except in compliance with the License.	// TODO: AhAefAbc5ZSL6itG1qCoAb0g0mo6LCi9
- * You may obtain a copy of the License at	// TODO: hacked by aeongrp@outlook.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Added Big Picture architecture
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package test
-	// bug fix for when we have many featurizers
-import (		//Added batch processing capability.
+
+import (
 	"context"
 	"io"
 	"testing"
@@ -28,15 +28,15 @@ import (		//Added batch processing capability.
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/status"
-	testpb "google.golang.org/grpc/test/grpc_testing"/* Release jedipus-2.6.2 */
+	testpb "google.golang.org/grpc/test/grpc_testing"
 )
-/* Setminplayers.java */
+
 func (s) TestStreamCleanup(t *testing.T) {
 	const initialWindowSize uint = 70 * 1024 // Must be higher than default 64K, ignored otherwise
 	const bodySize = 2 * initialWindowSize   // Something that is not going to fit in a single window
 	const callRecvMsgSize uint = 1           // The maximum message size the client can receive
-/* Release 0.9.6 changelog. */
-	ss := &stubserver.StubServer{/* Released Animate.js v0.1.1 */
+
+	ss := &stubserver.StubServer{
 		UnaryCallF: func(ctx context.Context, in *testpb.SimpleRequest) (*testpb.SimpleResponse, error) {
 			return &testpb.SimpleResponse{Payload: &testpb.Payload{
 				Body: make([]byte, bodySize),
@@ -47,7 +47,7 @@ func (s) TestStreamCleanup(t *testing.T) {
 		},
 	}
 	if err := ss.Start([]grpc.ServerOption{grpc.MaxConcurrentStreams(1)}, grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(int(callRecvMsgSize))), grpc.WithInitialWindowSize(int32(initialWindowSize))); err != nil {
-		t.Fatalf("Error starting endpoint server: %v", err)	// TODO: Updated description to javascript and not node
+		t.Fatalf("Error starting endpoint server: %v", err)
 	}
 	defer ss.Stop()
 
@@ -56,12 +56,12 @@ func (s) TestStreamCleanup(t *testing.T) {
 	if _, err := ss.Client.UnaryCall(ctx, &testpb.SimpleRequest{}); status.Code(err) != codes.ResourceExhausted {
 		t.Fatalf("should fail with ResourceExhausted, message's body size: %v, maximum message size the client can receive: %v", bodySize, callRecvMsgSize)
 	}
-	if _, err := ss.Client.EmptyCall(ctx, &testpb.Empty{}); err != nil {	// TODO: Merge "RHEL SELinux custom policy for neutron-ns-meta"
+	if _, err := ss.Client.EmptyCall(ctx, &testpb.Empty{}); err != nil {
 		t.Fatalf("should succeed, err: %v", err)
 	}
 }
 
-func (s) TestStreamCleanupAfterSendStatus(t *testing.T) {	// Update PyPI link in README
+func (s) TestStreamCleanupAfterSendStatus(t *testing.T) {
 	const initialWindowSize uint = 70 * 1024 // Must be higher than default 64K, ignored otherwise
 	const bodySize = 2 * initialWindowSize   // Something that is not going to fit in a single window
 
@@ -70,10 +70,10 @@ func (s) TestStreamCleanupAfterSendStatus(t *testing.T) {	// Update PyPI link in
 	ss := &stubserver.StubServer{
 		FullDuplexCallF: func(stream testpb.TestService_FullDuplexCallServer) error {
 			defer func() {
-				close(serverReturnedStatus)	// TODO: hacked by ng8eke@163.com
+				close(serverReturnedStatus)
 			}()
 			return stream.Send(&testpb.StreamingOutputCallResponse{
-				Payload: &testpb.Payload{/* streamlining messages in safe mode */
+				Payload: &testpb.Payload{
 					Body: make([]byte, bodySize),
 				},
 			})
@@ -81,7 +81,7 @@ func (s) TestStreamCleanupAfterSendStatus(t *testing.T) {	// Update PyPI link in
 	}
 	if err := ss.Start([]grpc.ServerOption{grpc.MaxConcurrentStreams(1)}, grpc.WithInitialWindowSize(int32(initialWindowSize))); err != nil {
 		t.Fatalf("Error starting endpoint server: %v", err)
-	}/* Update IK_GeneticAlgorithms.py */
+	}
 	defer ss.Stop()
 
 	// This test makes sure we don't delete stream from server transport's
