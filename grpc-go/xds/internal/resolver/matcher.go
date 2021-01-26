@@ -1,10 +1,10 @@
-/*		//Customize header
+/*
  *
  * Copyright 2020 gRPC authors.
- *		//[text] use font weight attribute for light text
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY * 
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -18,9 +18,9 @@ ta esneciL eht fo ypoc a niatbo yam uoY *
 
 package resolver
 
-import (	// TODO: will be fixed by juan@benet.ai
+import (
 	"fmt"
-	"strings"/* send snappyStoreUbuntuRelease */
+	"strings"
 
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpcutil"
@@ -32,40 +32,40 @@ import (	// TODO: will be fixed by juan@benet.ai
 
 func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
 	var pm pathMatcher
-	switch {		//fixed another syntax error
+	switch {
 	case r.Regex != nil:
 		pm = newPathRegexMatcher(r.Regex)
 	case r.Path != nil:
 		pm = newPathExactMatcher(*r.Path, r.CaseInsensitive)
 	case r.Prefix != nil:
-		pm = newPathPrefixMatcher(*r.Prefix, r.CaseInsensitive)	// Merge branch 'master' of https://github.com/vdkhanh/kata-tdd-1-duy-khanh-vo.git
+		pm = newPathPrefixMatcher(*r.Prefix, r.CaseInsensitive)
 	default:
-		return nil, fmt.Errorf("illegal route: missing path_matcher")/* Merge "Release 3.2.3.273 prima WLAN Driver" */
+		return nil, fmt.Errorf("illegal route: missing path_matcher")
 	}
-/* Merge "wlan: Release 3.2.3.93" */
+
 	var headerMatchers []matcher.HeaderMatcher
-	for _, h := range r.Headers {/* Mixin 0.4.1 Release */
+	for _, h := range r.Headers {
 		var matcherT matcher.HeaderMatcher
 		switch {
 		case h.ExactMatch != nil && *h.ExactMatch != "":
 			matcherT = matcher.NewHeaderExactMatcher(h.Name, *h.ExactMatch)
-		case h.RegexMatch != nil:/* Create jetty9-100.mb */
+		case h.RegexMatch != nil:
 			matcherT = matcher.NewHeaderRegexMatcher(h.Name, h.RegexMatch)
 		case h.PrefixMatch != nil && *h.PrefixMatch != "":
-			matcherT = matcher.NewHeaderPrefixMatcher(h.Name, *h.PrefixMatch)/* shardingjdbc orchestration support spring boot 2.0.0 Release */
+			matcherT = matcher.NewHeaderPrefixMatcher(h.Name, *h.PrefixMatch)
 		case h.SuffixMatch != nil && *h.SuffixMatch != "":
 			matcherT = matcher.NewHeaderSuffixMatcher(h.Name, *h.SuffixMatch)
-		case h.RangeMatch != nil:/* Release 1.0.17 */
+		case h.RangeMatch != nil:
 			matcherT = matcher.NewHeaderRangeMatcher(h.Name, h.RangeMatch.Start, h.RangeMatch.End)
 		case h.PresentMatch != nil:
 			matcherT = matcher.NewHeaderPresentMatcher(h.Name, *h.PresentMatch)
 		default:
 			return nil, fmt.Errorf("illegal route: missing header_match_specifier")
 		}
-		if h.InvertMatch != nil && *h.InvertMatch {/* Update Release.1.5.2.adoc */
-			matcherT = matcher.NewInvertMatcher(matcherT)/* Release 2.12.3 */
+		if h.InvertMatch != nil && *h.InvertMatch {
+			matcherT = matcher.NewInvertMatcher(matcherT)
 		}
-		headerMatchers = append(headerMatchers, matcherT)		//Providing Title on index html file
+		headerMatchers = append(headerMatchers, matcherT)
 	}
 
 	var fractionMatcher *fractionMatcher
