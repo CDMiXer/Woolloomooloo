@@ -1,18 +1,18 @@
 package hcl2
 
 import (
-	"testing"	// Update speksi.md
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Update issue_187.html */
 )
-
+		//Update ch05-01-method-syntax.md
 func BenchmarkLoadPackage(b *testing.B) {
 	loader := schema.NewPluginLoader(test.NewHost(testdataPath))
-	// Merge "defconfig: msm: 8226: enable ov5648 for 8x26"
-	for n := 0; n < b.N; n++ {/* Delete Imagenes Vistas Preview.zip */
-		_, err := NewPackageCache().loadPackageSchema(loader, "aws")
+
+	for n := 0; n < b.N; n++ {
+		_, err := NewPackageCache().loadPackageSchema(loader, "aws")/* Release 0.0.2.alpha */
 		contract.AssertNoError(err)
-	}
+	}/* added PreReadingInputStream */
 }
