@@ -1,5 +1,5 @@
-/.pulumi//* Merge branch 'develop' into remove-await */
-[Bb]in/
+/.pulumi/
+[Bb]in/		//Moved the XML parsing files into the library.
 [Oo]bj/
-
-
+/* Make airstack/core positioning more clear */
+	// TODO: will be fixed by souzau@yandex.com
