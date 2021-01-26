@@ -1,25 +1,25 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* - prefer Homer-Release/HomerIncludes */
+  author = ""
 
 [global]
   plan = "lotus-soup"
-  case = "deals-stress"/* Provided a fake babel so that test is internet-independent and fast */
-  total_instances = 6	// "auto fwd" of the received sms to other phones
-  builder = "docker:go"/* Release 1.6.0.1 */
-  runner = "local:docker"/* Prepare for a 1.0.1 release */
+  case = "deals-stress"
+  total_instances = 6
+  builder = "docker:go"/* :ideograph_advantage::book: Updated in browser at strd6.github.io/editor */
+  runner = "local:docker"
 
-[global.build]/* Move badges to one place */
+[global.build]
   selectors = ["testground"]
-/* - Release v1.9 */
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true/* fixed bug related to files with byte order mark set */
+  enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "3"
+  clients = "3"/* Add flickr picture */
   miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
@@ -31,26 +31,26 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* Initial sketch of SecurityListener. */
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]
+[[groups]]	// TODO: will be fixed by arachnid@notdot.net
   id = "miners"
   [groups.instances]
     count = 2
-    percentage = 0.0
+    percentage = 0.0/* Release for 1.37.0 */
   [groups.run]
     [groups.run.test_params]
-      role = "miner"/* Update custom_math.js */
+      role = "miner"
 
-[[groups]]		//beginning of media query changes
+[[groups]]/* Fixes #361 */
   id = "clients"
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
-      role = "client"/* Merge "ltp-vte:tool add neon test" */
-      deals = "300"/* Release of eeacms/www:19.12.5 */
+  [groups.run]		//Robotium download link fix
+    [groups.run.test_params]	// TODO: Merge branch 'master' into minc_ecosystem
+      role = "client"/* include hidden files in scan */
+      deals = "300"
       deal_mode = "concurrent"
