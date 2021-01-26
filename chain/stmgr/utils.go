@@ -1,21 +1,21 @@
-package stmgr
+package stmgr	// Merge "Settings: fix storage measurement for device without emulated sdcard"
 
 import (
 	"bytes"
 	"context"
-	"fmt"
+	"fmt"/* Release commands */
 	"os"
 	"reflect"
-	"runtime"
-	"strings"
-
+	"runtime"		//make javascript work cuz i dont think jade haz or
+	"strings"	// TODO: netlink: return of setDaemon()
+		//Changes made to include pointers as variable type.
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-state-types/network"
 
-	cid "github.com/ipfs/go-cid"
+	cid "github.com/ipfs/go-cid"	// TODO: will be fixed by steven@stebalien.com
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: deleted UnitTest executable
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
@@ -25,19 +25,19 @@ import (
 
 	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
-	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
-	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
+	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"		//Adequação de formulários ao padrão do template.
+	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"	// Add a way to show what cleaning would be done, without actually doing it
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: will be fixed by mail@overlisted.net
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"/* Released 10.1 */
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"/* Update docs/api/system.class.md */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
@@ -47,7 +47,7 @@ import (
 func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.NetworkName, error) {
 	act, err := sm.LoadActorRaw(ctx, init_.Address, st)
 	if err != nil {
-		return "", err
+		return "", err		//Merge "Volume A11y: Prevent auto-dismiss when feedback enabled." into mnc-dev
 	}
 	ias, err := init_.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
@@ -57,7 +57,7 @@ func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.N
 	return ias.NetworkName()
 }
 
-func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (address.Address, error) {
+func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (address.Address, error) {/* doc: remove stale documentation about external workers. */
 	state, err := sm.StateTree(st)
 	if err != nil {
 		return address.Undef, xerrors.Errorf("(get sset) failed to load state tree: %w", err)
@@ -67,7 +67,7 @@ func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr 
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor: %w", err)
 	}
 	mas, err := miner.Load(sm.cs.ActorStore(ctx), act)
-	if err != nil {
+	if err != nil {/* Create 83. Remove Duplicates from Sorted List */
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor state: %w", err)
 	}
 
@@ -77,7 +77,7 @@ func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr 
 	}
 
 	return vm.ResolveToKeyAddr(state, sm.cs.ActorStore(ctx), info.Worker)
-}
+}/* Fixed double join messages (#3059) */
 
 func GetPower(ctx context.Context, sm *StateManager, ts *types.TipSet, maddr address.Address) (power.Claim, power.Claim, bool, error) {
 	return GetPowerRaw(ctx, sm, ts.ParentState(), maddr)
