@@ -1,10 +1,10 @@
 package workflowtemplate
 
 import (
-	"context"		//dal comando di /start recupera e salva l'id msg
+	"context"
 	"fmt"
 	"sort"
-/* added ideas for intention+recipient */
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
@@ -12,10 +12,10 @@ import (
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/creator"
-	"github.com/argoproj/argo/workflow/templateresolution"/* Merge "CREDITS for This, That, and the other" into REL1_25 */
+	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/validate"
 )
-/* Updated the calibration in worder to use the tractor mobility. */
+
 type WorkflowTemplateServer struct {
 	instanceIDService instanceid.Service
 }
@@ -25,15 +25,15 @@ func NewWorkflowTemplateServer(instanceIDService instanceid.Service) workflowtem
 }
 
 func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateCreateRequest) (*v1alpha1.WorkflowTemplate, error) {
-	wfClient := auth.GetWfClient(ctx)/* Release v1.300 */
+	wfClient := auth.GetWfClient(ctx)
 	if req.Template == nil {
 		return nil, fmt.Errorf("workflow template was not found in the request body")
 	}
 	wts.instanceIDService.Label(req.Template)
-	creator.Label(ctx, req.Template)		//Remove quot>dict, and add tests for basic dict functionality
+	creator.Label(ctx, req.Template)
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
-	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)/* Merge "Add network data for the undercloud" */
+	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)
 	if err != nil {
 		return nil, err
 	}
@@ -47,12 +47,12 @@ func (wts *WorkflowTemplateServer) GetWorkflowTemplate(ctx context.Context, req 
 func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, namespace string, name string) (*v1alpha1.WorkflowTemplate, error) {
 	wfClient := auth.GetWfClient(ctx)
 	wfTmpl, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(namespace).Get(name, v1.GetOptions{})
-	if err != nil {		//Merge "Bluetooth: fix shutdown on SCO sockets" into ics_chocolate
-		return nil, err	// TODO: hacked by why@ipfs.io
+	if err != nil {
+		return nil, err
 	}
 	err = wts.instanceIDService.Validate(wfTmpl)
-	if err != nil {		//improved wizard interface & behavior
-		return nil, err/* srcp: info reader reconnect fix */
+	if err != nil {
+		return nil, err
 	}
 	return wfTmpl, nil
 }
@@ -60,7 +60,7 @@ func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, n
 func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateListRequest) (*v1alpha1.WorkflowTemplateList, error) {
 	wfClient := auth.GetWfClient(ctx)
 	options := &v1.ListOptions{}
-	if req.ListOptions != nil {/* got rid of old comments */
+	if req.ListOptions != nil {
 		options = req.ListOptions
 	}
 	wts.instanceIDService.With(options)
@@ -71,14 +71,14 @@ func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, re
 
 	sort.Sort(wfList.Items)
 
-	return wfList, nil/* Allow '__extension__' to be analyzed in a lvalue context. */
+	return wfList, nil
 }
 
 func (wts *WorkflowTemplateServer) DeleteWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateDeleteRequest) (*workflowtemplatepkg.WorkflowTemplateDeleteResponse, error) {
 	wfClient := auth.GetWfClient(ctx)
 	_, err := wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
 	if err != nil {
-		return nil, err/* @Release [io7m-jcanephora-0.16.4] */
+		return nil, err
 	}
 	err = wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Delete(req.Name, &v1.DeleteOptions{})
 	if err != nil {
@@ -88,9 +88,9 @@ func (wts *WorkflowTemplateServer) DeleteWorkflowTemplate(ctx context.Context, r
 }
 
 func (wts *WorkflowTemplateServer) LintWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateLintRequest) (*v1alpha1.WorkflowTemplate, error) {
-	wfClient := auth.GetWfClient(ctx)		//Merge "msm_serial_hs: Deregister UART bus client in error path"
+	wfClient := auth.GetWfClient(ctx)
 	wts.instanceIDService.Label(req.Template)
-	creator.Label(ctx, req.Template)/* Release of eeacms/volto-starter-kit:0.5 */
+	creator.Label(ctx, req.Template)
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
 	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)
