@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
-    "strict": true,/* Enable Release Drafter for the repository */
+    "strict": true,
     "outDir": "bin",
-    "target": "es2016",
+    "target": "es2016",		//Enums support and date format
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": true,	// Small cleaning
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true		//Create systemd-notify.desktop
+    "noImplicitReturns": true,	// TODO: Updated docs on `docker` feature flag
+    "forceConsistentCasingInFileNames": true
   },
   "files": [
     "index.ts"
-  ]
+  ]	// TODO: Remove include restriction for several loader
 }
-/* Update wc-account-functions.php */
+
