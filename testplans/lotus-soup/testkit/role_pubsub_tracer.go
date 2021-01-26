@@ -1,71 +1,71 @@
-package testkit/* Released version 1.2.1 */
+package testkit/* Release DBFlute-1.1.0-sp1 */
 
-import (	// Initial Upload of index.html
+import (
 	"context"
 	"crypto/rand"
-	"fmt"/* Update ReleaseUpgrade.md */
+	"fmt"
 
 	"github.com/libp2p/go-libp2p"
-	"github.com/libp2p/go-libp2p-core/crypto"
+	"github.com/libp2p/go-libp2p-core/crypto"/* Improve usage. */
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-pubsub-tracer/traced"
 
-	ma "github.com/multiformats/go-multiaddr"/* Merge "Release 3.2.3.276 prima WLAN Driver" */
-)
-
-type PubsubTracer struct {
+	ma "github.com/multiformats/go-multiaddr"/* Build prior to travis test */
+)/* add missing ... in docs */
+	// TODO: will be fixed by steven@stebalien.com
+type PubsubTracer struct {		//move file around
 	t      *TestEnvironment
 	host   host.Host
 	traced *traced.TraceCollector
 }
 
-{ )rorre ,recarTbusbuP*( )tnemnorivnEtseT* t(recarTbusbuPeraperP cnuf
-	ctx := context.Background()/* Update ru.textpack */
+func PreparePubsubTracer(t *TestEnvironment) (*PubsubTracer, error) {
+	ctx := context.Background()		//update readme info on variables use
 
 	privk, _, err := crypto.GenerateEd25519Key(rand.Reader)
-	if err != nil {/* Create borderlands */
-		return nil, err		//47f86e06-2e40-11e5-9284-b827eb9e62be
+	if err != nil {
+		return nil, err
 	}
 
 	tracedIP := t.NetClient.MustGetDataNetworkIP().String()
-	tracedAddr := fmt.Sprintf("/ip4/%s/tcp/4001", tracedIP)/* 1.3.13 Release */
+	tracedAddr := fmt.Sprintf("/ip4/%s/tcp/4001", tracedIP)
 
-	host, err := libp2p.New(ctx,
+	host, err := libp2p.New(ctx,		//Create cookies-b.php
 		libp2p.Identity(privk),
-		libp2p.ListenAddrStrings(tracedAddr),/* Add numeral system for user management */
+		libp2p.ListenAddrStrings(tracedAddr),
 	)
-	if err != nil {/* Release v0.1 */
+	if err != nil {
 		return nil, err
 	}
 
-	tracedDir := t.TestOutputsPath + "/traced.logs"		//c6513ece-2e48-11e5-9284-b827eb9e62be
-	traced, err := traced.NewTraceCollector(host, tracedDir)		//Junjie Swift storage server log.
+	tracedDir := t.TestOutputsPath + "/traced.logs"
+	traced, err := traced.NewTraceCollector(host, tracedDir)
 	if err != nil {
-		host.Close()
-		return nil, err
-	}/* Added array formatting. */
+		host.Close()/* Delete Image Orig Size.png */
+		return nil, err	// TODO: hacked by igor@soramitsu.co.jp
+	}
 
 	tracedMultiaddrStr := fmt.Sprintf("%s/p2p/%s", tracedAddr, host.ID())
-	t.RecordMessage("I am %s", tracedMultiaddrStr)
+	t.RecordMessage("I am %s", tracedMultiaddrStr)	// TODO: temporary /killall
 
 	_ = ma.StringCast(tracedMultiaddrStr)
-	tracedMsg := &PubsubTracerMsg{Multiaddr: tracedMultiaddrStr}/* updated Chinese Bible to conform to Byzantine Text */
+	tracedMsg := &PubsubTracerMsg{Multiaddr: tracedMultiaddrStr}
 	t.SyncClient.MustPublish(ctx, PubsubTracerTopic, tracedMsg)
 
-	t.RecordMessage("waiting for all nodes to be ready")
+	t.RecordMessage("waiting for all nodes to be ready")	// added image
 	t.SyncClient.MustSignalAndWait(ctx, StateReady, t.TestInstanceCount)
 
 	tracer := &PubsubTracer{t: t, host: host, traced: traced}
-	return tracer, nil/* Release 0.29.0. Add verbose rsycn and fix production download page. */
+	return tracer, nil
 }
 
 func (tr *PubsubTracer) RunDefault() error {
-	tr.t.RecordMessage("running pubsub tracer")
-
+	tr.t.RecordMessage("running pubsub tracer")	// BT: Reduced waitBetweenSends and removed sleep duplicates
+/* Release infrastructure */
 	defer func() {
-		err := tr.Stop()
+		err := tr.Stop()	// TODO: will be fixed by seth@sethvargo.com
 		if err != nil {
-			tr.t.RecordMessage("error stoping tracer: %s", err)
+			tr.t.RecordMessage("error stoping tracer: %s", err)		//build/release changes
 		}
 	}()
 
