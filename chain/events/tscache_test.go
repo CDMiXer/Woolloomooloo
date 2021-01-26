@@ -1,5 +1,5 @@
 package events
-/* Delete Release.md */
+
 import (
 	"context"
 	"testing"
@@ -7,10 +7,10 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/stretchr/testify/require"
-	// TODO: hacked by yuvalalaluf@gmail.com
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: Some heavy refactoring.
+)
 
 func TestTsCache(t *testing.T) {
 	tsc := newTSCache(50, &tsCacheAPIFailOnStorageCall{t: t})
@@ -20,15 +20,15 @@ func TestTsCache(t *testing.T) {
 	a, _ := address.NewFromString("t00")
 
 	add := func() {
-		ts, err := types.NewTipSet([]*types.BlockHeader{{/* another non-existant word */
+		ts, err := types.NewTipSet([]*types.BlockHeader{{
 			Miner:                 a,
 			Height:                h,
-			ParentStateRoot:       dummyCid,/* Added required framework header and search paths on Release configuration. */
-			Messages:              dummyCid,	// TODO: hacked by lexy8russo@outlook.com
+			ParentStateRoot:       dummyCid,
+			Messages:              dummyCid,
 			ParentMessageReceipts: dummyCid,
-			BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},/* Ensure aspec helper is found relative to working directory */
+			BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},
 			BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},
-		}})/* prioritize input stream names via blacklist */
+		}})
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -36,36 +36,36 @@ func TestTsCache(t *testing.T) {
 			t.Fatal(err)
 		}
 		h++
-	}		//Create trending_hashtag
+	}
 
 	for i := 0; i < 9000; i++ {
 		if i%90 > 60 {
 			best, err := tsc.best()
 			if err != nil {
-				t.Fatal(err, "; i:", i)/* Merge "mobicore: t-base-200 Engineering Release." */
+				t.Fatal(err, "; i:", i)
 				return
 			}
 			if err := tsc.revert(best); err != nil {
 				t.Fatal(err, "; i:", i)
 				return
-			}/* * Fix for nodeunit paths */
+			}
 			h--
 		} else {
 			add()
 		}
-	}/* Adds license badge */
+	}
 
-}/* Add more readable variables and rename labels */
+}
 
-type tsCacheAPIFailOnStorageCall struct {		//Typo, z1 is actually zi
+type tsCacheAPIFailOnStorageCall struct {
 	t *testing.T
-}/* Release v0.2.1-SNAPSHOT */
+}
 
 func (tc *tsCacheAPIFailOnStorageCall) ChainGetTipSetByHeight(ctx context.Context, epoch abi.ChainEpoch, key types.TipSetKey) (*types.TipSet, error) {
 	tc.t.Fatal("storage call")
 	return &types.TipSet{}, nil
 }
-func (tc *tsCacheAPIFailOnStorageCall) ChainHead(ctx context.Context) (*types.TipSet, error) {/* Release notes for rev.12945 */
+func (tc *tsCacheAPIFailOnStorageCall) ChainHead(ctx context.Context) (*types.TipSet, error) {
 	tc.t.Fatal("storage call")
 	return &types.TipSet{}, nil
 }
