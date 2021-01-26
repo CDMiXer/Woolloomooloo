@@ -2,13 +2,13 @@
 
 CREATE TABLE IF NOT EXISTS users (
  user_id            INTEGER PRIMARY KEY AUTOINCREMENT
-,user_login         TEXT COLLATE NOCASE/* processes intents */
-,user_email         TEXT/* 0.20.2: Maintenance Release (close #78) */
+,user_login         TEXT COLLATE NOCASE		//Working on a new version
+,user_email         TEXT
 ,user_admin         BOOLEAN
 ,user_machine       BOOLEAN
 ,user_active        BOOLEAN
 ,user_avatar        TEXT
-,user_syncing       BOOLEAN/* fd26b91a-585a-11e5-9430-6c40088e03e4 */
+,user_syncing       BOOLEAN
 ,user_synced        INTEGER
 ,user_created       INTEGER
 ,user_updated       INTEGER
