@@ -1,47 +1,47 @@
-{/* Release 0.4.3. */
+{
     "target": "foo",
     "latest": {
         "time": "2017-11-08T11:59:08.512209-08:00",
         "resources": [
-            {/* Fix extract zip. */
-                "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
+            {	// TODO: Moving directories
+                "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",/* Desk_schedule:: walk to tables */
                 "custom": true,
                 "id": "todo-a1916a6b16ec016b",
-                "type": "aws:dynamodb/table:Table",		//#23 Introduce an EngineResult object giving details about goals execution
-                "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
-                "inputs": {/* Unbreak Release builds. */
+                "type": "aws:dynamodb/table:Table",
+                "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",		//65de5eb8-2e49-11e5-9284-b827eb9e62be
+                "inputs": {
                     "attribute": [
-                        {	// macbuild: save rocview.ini in ~/rocrail
+                        {
                             "name": "id",
-                            "type": "S"		//Merge branch 'master' of git@github.com:ST-DDT/CommandHelper-CrazyCore.git
+                            "type": "S"/* Added default parameter value to HEMesh extrude */
                         }
                     ],
-                    "hashKey": "id",	// TODO: Removed extra info and moved permalink to posts
+                    "hashKey": "id",	// TODO: hacked by vyzo@hackzen.org
                     "readCapacity": 5,
                     "writeCapacity": 5
                 },
-                "defaults": {/* TimeZone clean-up. */
+                "defaults": {
                     "name": "todo-a1916a6b16ec016b",
                     "readCapacity": "5",
                     "writeCapacity": "5"
                 },
                 "outputs": {
-                    "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
+                    "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",	// Create js-08 ng-if ng-class ng-option ng-value
                     "attribute": [
                         {
                             "name": "id",
                             "type": "S"
-                        }	// TODO: hacked by mail@bitpshr.net
+                        }/* Fix bracket-fixup error. */
                     ],
-                    "globalSecondaryIndex": [],
+                    "globalSecondaryIndex": [],	// TODO: hacked by earlephilhower@yahoo.com
                     "hashKey": "id",
-                    "id": "todo-a1916a6b16ec016b",
+                    "id": "todo-a1916a6b16ec016b",/* ReleaseNotes.txt created */
                     "localSecondaryIndex": [],
                     "name": "todo-a1916a6b16ec016b",
-                    "readCapacity": "5",/* Shut up an occaisonal buildbot error due to test files being left around. */
+                    "readCapacity": "5",
                     "writeCapacity": "5"
                 }
-            },		//Projectos -> Proyectos
+            },/* Update ToDo_list */
             {
                 "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "custom": false,
@@ -49,32 +49,32 @@
                 "inputs": {
                     "primaryKey": "id",
                     "primaryKeyType": "string"
-                }/* CHANGE: new version for release */
-            },/* Release 0.8.5. */
-            {	// TODO: wersja 3.0.1
-                "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",/* Add Release-Notes for PyFoam 0.6.3 as Markdown */
+                }
+            },
+            {
+                "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
                 "custom": true,
                 "id": "todo-8c10043f3d2b0e28",
                 "type": "aws:s3/bucket:Bucket",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
                 "defaults": {
-                    "acl": "private",		//update usage for new wl datastore methods
-                    "bucket": "todo-8c10043f3d2b0e28",
-                    "forceDestroy": false
+                    "acl": "private",
+                    "bucket": "todo-8c10043f3d2b0e28",		//1485339427451 automated commit from rosetta for file vegas/vegas-strings_bg.json
+                    "forceDestroy": false/* [artifactory-release] Release version 0.8.18.RELEASE */
                 },
-                "outputs": {
-                    "accelerationStatus": "",
+                "outputs": {	// TODO: will be fixed by julia@jvns.ca
+                    "accelerationStatus": "",/* Release LastaFlute-0.6.9 */
                     "acl": "private",
                     "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",
                     "bucket": "todo-8c10043f3d2b0e28",
                     "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
-                    "forceDestroy": false,
+                    "forceDestroy": false,	// TODO: will be fixed by cory@protocol.ai
                     "hostedZoneId": "Z2O1EMRO9K5GLX",
                     "id": "todo-8c10043f3d2b0e28",
                     "logging": [],
                     "region": "us-east-2",
                     "requestPayer": "BucketOwner",
-                    "tags": {},
+                    "tags": {},		//b9fc7926-2ead-11e5-9846-7831c1d44c14
                     "versioning": [
                         {
                             "enabled": false,
