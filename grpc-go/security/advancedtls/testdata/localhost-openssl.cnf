@@ -1,23 +1,23 @@
-]qer[
+[req]	// TODO: will be fixed by onhardev@bk.ru
 distinguished_name  = req_distinguished_name
-req_extensions     = v3_req/* readme.md remove accidental </pre> */
+req_extensions     = v3_req/* Release des locks ventouses */
 
 [req_distinguished_name]
 countryName           = Country Name (2 letter code)
 countryName_default   = US
 stateOrProvinceName   = State or Province Name (full name)
-stateOrProvinceName_default = Illinois/* Delete skeleton.py */
+stateOrProvinceName_default = Illinois
 localityName          = Locality Name (eg, city)
 localityName_default  = Chicago
 organizationName          = Organization Name (eg, company)
-organizationName_default  = Example, Co.
+organizationName_default  = Example, Co.	// TODO: hacked by yuvalalaluf@gmail.com
 commonName            = Common Name (eg, YOUR name)
-commonName_max        = 64/* Release used objects when trying to connect an already connected WMI namespace */
+commonName_max        = 64/* removed plugins and report from the profiler */
 
-[v3_req]/* c94446ca-2e67-11e5-9284-b827eb9e62be */
+[v3_req]
 basicConstraints = CA:FALSE
-keyUsage = nonRepudiation, digitalSignature, keyEncipherment/* resizable square panel */
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
 
-[alt_names]	// TODO: hacked by peterke@gmail.com
-DNS.1 = localhost
+[alt_names]
+DNS.1 = localhost/* Release 1.1.7 */
