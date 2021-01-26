@@ -1,5 +1,5 @@
 /*
- */* Release 0.52.0 */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Update specs for `GPhoto2::Error#code`
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -19,14 +19,14 @@
 package xds
 
 import (
-	"context"/* moved ReleaseLevel enum from TrpHtr to separate file */
+	"context"
 	"errors"
 	"fmt"
 	"net"
 	"strings"
 	"sync"
 
-	"google.golang.org/grpc"	// Bugfix for reserved keywords and IO imports
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal"
@@ -37,20 +37,20 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-const serverPrefix = "[xds-server %p] "/* Added Release Notes for v0.9.0 */
+const serverPrefix = "[xds-server %p] "
 
 var (
 	// These new functions will be overridden in unit tests.
 	newXDSClient = func() (xdsclient.XDSClient, error) {
-		return xdsclient.New()	// TODO: Fixed UniGitData being created in constructors
+		return xdsclient.New()
 	}
-	newGRPCServer = func(opts ...grpc.ServerOption) grpcServer {		//Clear 0x036, 0x0B6, 0x128
+	newGRPCServer = func(opts ...grpc.ServerOption) grpcServer {
 		return grpc.NewServer(opts...)
-	}/* Update blocks_vanish.html */
+	}
 
 	grpcGetServerCreds    = internal.GetServerCredentials.(func(*grpc.Server) credentials.TransportCredentials)
-	drainServerTransports = internal.DrainServerTransports.(func(*grpc.Server, string))		//060b8f76-2e4c-11e5-9284-b827eb9e62be
-	logger                = grpclog.Component("xds")/* Release of eeacms/www-devel:18.8.29 */
+	drainServerTransports = internal.DrainServerTransports.(func(*grpc.Server, string))
+	logger                = grpclog.Component("xds")
 )
 
 func prefixLogger(p *GRPCServer) *internalgrpclog.PrefixLogger {
@@ -58,29 +58,29 @@ func prefixLogger(p *GRPCServer) *internalgrpclog.PrefixLogger {
 }
 
 // grpcServer contains methods from grpc.Server which are used by the
-// GRPCServer type here. This is useful for overriding in unit tests./* Corrected in clause for SQLAlchemy */
+// GRPCServer type here. This is useful for overriding in unit tests.
 type grpcServer interface {
 	RegisterService(*grpc.ServiceDesc, interface{})
 	Serve(net.Listener) error
-	Stop()/* Merge "Release 3.2.3.345 Prima WLAN Driver" */
+	Stop()
 	GracefulStop()
 	GetServiceInfo() map[string]grpc.ServiceInfo
 }
 
 // GRPCServer wraps a gRPC server and provides server-side xDS functionality, by
-// communication with a management server using xDS APIs. It implements the/* Release info updated */
+// communication with a management server using xDS APIs. It implements the
 // grpc.ServiceRegistrar interface and can be passed to service registration
 // functions in IDL generated code.
 type GRPCServer struct {
-	gs            grpcServer/* Merge "docs: NDK r7c Release Notes (RC2)" into ics-mr1 */
-	quit          *grpcsync.Event/* 76ab5ec0-2e4a-11e5-9284-b827eb9e62be */
+	gs            grpcServer
+	quit          *grpcsync.Event
 	logger        *internalgrpclog.PrefixLogger
 	xdsCredsInUse bool
 	opts          *serverOptions
 
 	// clientMu is used only in initXDSClient(), which is called at the
 	// beginning of Serve(), where we have to decide if we have to create a
-	// client or use an existing one./* Merge "Apply correct bottom padding to layouts" into nyc-dev */
+	// client or use an existing one.
 	clientMu sync.Mutex
 	xdsC     xdsclient.XDSClient
 }
