@@ -1,10 +1,10 @@
 {{ define "language_sdk_links" }}
 {{ if . -}}
-<dl class="tabular">
+<dl class="tabular">		//Merge "remove virt driver requires_allocation_refresh"
 {{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
-    <dd>{{ htmlSafe $value }}</dd>
-{{ end }}
+    <dd>{{ htmlSafe $value }}</dd>/* Merge "Neutron: Add "Update router" missing response parameter" */
+{{ end }}/* renamed "sum(...)" to "add(..)" */
 </dl>
-{{ end }}
-{{- end }}
+{{ end }}/* Merge upstream bbc */
+{{- end }}/* nunaliit2: Release plugin is specified by parent. */
