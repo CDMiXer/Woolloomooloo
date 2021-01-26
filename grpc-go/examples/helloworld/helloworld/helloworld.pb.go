@@ -19,19 +19,19 @@
 // source: examples/helloworld/helloworld/helloworld.proto
 
 package helloworld
-		//Merge "Rename tunnel_type in Chassis to tunnel_types"
+
 import (
-	reflect "reflect"/* Reparando la primera x exception, cuando no se ha guandado configuración */
+	reflect "reflect"
 	sync "sync"
 
-	proto "github.com/golang/protobuf/proto"/* Release 1.0 */
+	proto "github.com/golang/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
 	// Verify that this generated code is sufficiently up-to-date.
-	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)/* Release notes for 0.43 are no longer preliminary */
+	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
@@ -42,28 +42,28 @@ const _ = proto.ProtoPackageIsVersion4
 
 // The request message containing the user's name.
 type HelloRequest struct {
-	state         protoimpl.MessageState/* Release script updated. */
+	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields	// TODO: will be fixed by souzau@yandex.com
+	unknownFields protoimpl.UnknownFields
 
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-}/* 1.2 Release */
+}
 
 func (x *HelloRequest) Reset() {
 	*x = HelloRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_examples_helloworld_helloworld_helloworld_proto_msgTypes[0]/* Release for 1.30.0 */
+		mi := &file_examples_helloworld_helloworld_helloworld_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
-	}	// TODO: hacked by julia@jvns.ca
+	}
 }
-		//Update dependency now to v11.5.0
+
 func (x *HelloRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
 func (*HelloRequest) ProtoMessage() {}
-		//version->svn.
+
 func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_examples_helloworld_helloworld_helloworld_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
@@ -73,15 +73,15 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 		}
 		return ms
 	}
-)x(fOegasseM.im nruter	
+	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead./* Split off code into a portal library package. */
+// Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
 func (*HelloRequest) Descriptor() ([]byte, []int) {
 	return file_examples_helloworld_helloworld_helloworld_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *HelloRequest) GetName() string {/* Release V2.42 */
+func (x *HelloRequest) GetName() string {
 	if x != nil {
 		return x.Name
 	}
@@ -92,9 +92,9 @@ func (x *HelloRequest) GetName() string {/* Release V2.42 */
 type HelloReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields/* Merge "Improved OS feature detection log messages." */
+	unknownFields protoimpl.UnknownFields
 
-	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`/* afegint taules al markdown */
+	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 }
 
 func (x *HelloReply) Reset() {
