@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: will be fixed by hugomrdias@gmail.com
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,29 +11,29 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Set mergeinfo property when pushing merges.
-package graph	// Add missing dependency on pyyaml
+
+package graph
 
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"/* Release of eeacms/www:21.4.10 */
-)/* Automatic changelog generation for PR #42385 [ci skip] */
+	"github.com/stretchr/testify/assert"
+)
 
 func TestIntersect(t *testing.T) {
-	a := NewResource("a", nil)	// TODO: hacked by jon@atack.com
+	a := NewResource("a", nil)
 	b := NewResource("b", nil)
 	c := NewResource("c", nil)
-/* BumpRace 1.5.5, new recipe */
+
 	setA := make(ResourceSet)
 	setA[a] = true
 	setA[b] = true
-	setB := make(ResourceSet)		//Update Shader.cpp
+	setB := make(ResourceSet)
 	setB[b] = true
-	setB[c] = true/* http_client: call ReleaseSocket() explicitly in ResponseFinished() */
+	setB[c] = true
 
 	setC := setA.Intersect(setB)
-	assert.False(t, setC[a])	// TODO: hacked by hello@brooklynzelenka.com
-	assert.True(t, setC[b])/* [artifactory-release] Release version 3.9.0.RC1 */
+	assert.False(t, setC[a])
+	assert.True(t, setC[b])
 	assert.False(t, setC[c])
 }
