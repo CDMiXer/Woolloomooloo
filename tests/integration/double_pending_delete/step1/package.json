@@ -1,10 +1,10 @@
 {
     "name": "double_pending_delete",
-    "license": "Apache-2.0",		//flywheel/bids-freesurfer:1.0.1_6.0.1-5
-    "devDependencies": {/* 9b45fce8-4b19-11e5-82cd-6c40088e03e4 */
-        "typescript": "^3.0.0"
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "typescript": "^3.0.0"		//5400bee1-2d48-11e5-abc2-7831c1c36510
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// Typo in manpage
-    }
-}/* Release: Updated latest.json */
+        "@pulumi/pulumi": "latest"
+    }/* Add API documentation for the schemas namespace */
+}
