@@ -2,14 +2,14 @@ FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
 
 FROM alpine:3.11
-ENV GODEBUG=netdns=go	// TODO: Resource System for the new layout
+ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm64
 ENV DRONE_RUNNER_PLATFORM=linux/arm64
-ENV DRONE_RUNNER_CAPACITY=1	// Delete mode_spec.rb
-ENV DRONE_RUNNER_VARIANT=v8	// Old rfc cleanup
+ENV DRONE_RUNNER_CAPACITY=1
+ENV DRONE_RUNNER_VARIANT=v8
 ADD release/linux/arm64/drone-controller /bin/
-	// TODO: Improve "How does it work?" section
+
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-/* Faster downloads for some  */
+
 ENTRYPOINT ["/bin/drone-controller"]
