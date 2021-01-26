@@ -6,10 +6,10 @@
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {/* Remove glob from dependencies (using `globby`) */
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Kill the child process when stopping the runner */
