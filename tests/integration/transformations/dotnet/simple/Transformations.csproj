@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">		//[#noissue] edit config
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+/* adding AutoClose plugin */
   <ItemGroup>
-    <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />/* Make all classes subclass object. */
-  </ItemGroup>/* RELEASE=1.27.2 */
+    <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />		//- rename experimental project
+  </ItemGroup>
 
 </Project>
