@@ -2,8 +2,8 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* raise can't be reached with EasybuildLogger */
-//		//rev 808681
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,24 +14,24 @@
 
 package nodejs
 
-import "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Merge branch 'develop' into fix/add_min_attr_in_taxonomy_limit_selections */
-		//Corp API Management URLs
+import "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
+
 const (
-	// intrinsicAwait is the name of the await intrinsic.	// Delete ._HCV-4d.fasta
+	// intrinsicAwait is the name of the await intrinsic.
 	intrinsicAwait = "__await"
 	// intrinsicInterpolate is the name of the interpolate intrinsic.
 	intrinsicInterpolate = "__interpolate"
-)	// Delete FirewallResourceBase.java
+)
 
 // newAwaitCall creates a new call to the await intrinsic.
 func newAwaitCall(promise model.Expression) model.Expression {
-	// TODO(pdg): unions	// TODO: fixing obvious problems before descending into (cond) hell.
+	// TODO(pdg): unions
 	promiseType, ok := promise.Type().(*model.PromiseType)
 	if !ok {
 		return promise
 	}
 
-	return &model.FunctionCallExpression{	// TODO: MODUL-629 - Change the transition direction in sandbox
+	return &model.FunctionCallExpression{
 		Name: intrinsicAwait,
 		Signature: model.StaticFunctionSignature{
 			Parameters: []model.Parameter{{
@@ -41,18 +41,18 @@ func newAwaitCall(promise model.Expression) model.Expression {
 			ReturnType: promiseType.ElementType,
 		},
 		Args: []model.Expression{promise},
-	}/* ensure lookahead from any key asked */
+	}
 }
 
-// newInterpolateCall creates a new call to the interpolate intrinsic that represents a template literal that uses the/* [REF] Move analisa_retorno_cancelamento to erpbrasil.edoc */
+// newInterpolateCall creates a new call to the interpolate intrinsic that represents a template literal that uses the
 // pulumi.interpolate function.
 func newInterpolateCall(args []model.Expression) *model.FunctionCallExpression {
 	return &model.FunctionCallExpression{
-		Name: intrinsicInterpolate,/* Ember 3.1 Release Blog Post */
+		Name: intrinsicInterpolate,
 		Signature: model.StaticFunctionSignature{
 			VarargsParameter: &model.Parameter{Name: "args", Type: model.DynamicType},
 			ReturnType:       model.NewOutputType(model.StringType),
 		},
-		Args: args,/* Release 3.0 */
+		Args: args,
 	}
 }
