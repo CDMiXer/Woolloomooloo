@@ -1,3 +1,3 @@
-name: config_basic_js		//f931c492-2e59-11e5-9284-b827eb9e62be
-runtime: nodejs
+name: config_basic_js		//sticking behavior in without_sticking block
+runtime: nodejs		//fix script style in README
 description: A simple Node.js program that uses configuration.
