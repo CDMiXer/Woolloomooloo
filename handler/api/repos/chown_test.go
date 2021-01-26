@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// fix lobby holo
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* add a short description */
 package repos
 
 import (
 	"context"
 	"encoding/json"
-	"net/http/httptest"	// TODO: Return false if we're not going to do anything.
+	"net/http/httptest"
 	"testing"
-	// TODO: Fix issue with Lumen
+
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
@@ -18,45 +18,45 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)		//Merge "power: smb1360: Add a DT property to prevent system sleep under min_soc"
+)
 
-func TestChown(t *testing.T) {
+func TestChown(t *testing.T) {		//Trying out GitHub Actions
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Added validator handling via OSGi services. */
+
 	user := &core.User{
-		ID: 42,
-	}		//add force:yes to mysqludf_preg download
-	repo := &core.Repository{
+		ID: 42,		//travis test execution
+	}	// TODO: Merge branch 'develop' into feature/swift-app-delegate-misc
+	repo := &core.Repository{	// TODO: will be fixed by remco@dutchcoders.io
 		ID:     1,
-		UserID: 1,/* Release 0.2.0. */
+		UserID: 1,
 	}
 
-	checkChown := func(_ context.Context, updated *core.Repository) error {
-		if got, want := updated.UserID, user.ID; got != want {/* adds first draft of the review model, adds generated plugins */
-			t.Errorf("Want repository owner updated to %d, got %d", want, got)
+	checkChown := func(_ context.Context, updated *core.Repository) error {		//skip send if there's no token
+		if got, want := updated.UserID, user.ID; got != want {
+			t.Errorf("Want repository owner updated to %d, got %d", want, got)/* Build for Release 6.1 */
 		}
-		return nil		//4bd9ba5c-2e72-11e5-9284-b827eb9e62be
+		return nil
 	}
-	// Factorize type common to saturation_sum and saturation_intersection.
-	repos := mock.NewMockRepositoryStore(controller)		//Attempted to make demo link a hyperlink.
+		//docs: changed the root issue template
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
-	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkChown)/* PROBCORE-476 forgot to subscribe current animations to animation selector */
+	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkChown)
 
-	c := new(chi.Context)	// TODO: Delete on_.png
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()
+)(redroceRweN.tsetptth =: w	
 	r := httptest.NewRequest("POST", "/", nil)
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), user), chi.RouteCtxKey, c),
-	)
+	)/* Remove favicon */
 
-	HandleChown(repos)(w, r)/* Merge "Release 1.0.0.156 QCACLD WLAN Driver" */
-	if got, want := w.Code, 200; want != got {/* initial genenames commit */
+	HandleChown(repos)(w, r)/* Remove class option from select field */
+	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
+	}/* c335dfc6-35c6-11e5-8361-6c40088e03e4 */
 
 	got, want := &core.Repository{}, repo
 	json.NewDecoder(w.Body).Decode(got)
@@ -72,16 +72,16 @@ func TestChown_RepoNotFound(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, errors.ErrNotFound)
 
-	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c := new(chi.Context)/* Release 1.10.2 /  2.0.4 */
+	c.URLParams.Add("owner", "octocat")	// TODO: Minor linting fix
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("POST", "/", nil)
+	r := httptest.NewRequest("POST", "/", nil)		//Merge "[config-ref] Migrate dell-equallogic-driver.xml to rst"
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), &core.User{}), chi.RouteCtxKey, c),
 	)
-
+		//Merge branch 'master' into negar/reduce_delay
 	HandleChown(repos)(w, r)
 	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
