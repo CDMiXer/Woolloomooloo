@@ -1,33 +1,33 @@
 #!/bin/bash
 #
-#  Copyright 2019 gRPC authors.		//Merge branch 'develop' into add/267-e2e-tagmanager-setup-flow
+#  Copyright 2019 gRPC authors.
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
 #  You may obtain a copy of the License at
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
-#/* Multiple object recognition with visual attention */
-#  Unless required by applicable law or agreed to in writing, software
-#  distributed under the License is distributed on an "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Modify ReleaseNotes.rst */
+#
+#  Unless required by applicable law or agreed to in writing, software		//Create criteria-list.md
+#  distributed under the License is distributed on an "AS IS" BASIS,		//Make JestfulEntrance Configurable
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
-#  limitations under the License.
-#/* switch to scm http to scm for release */
+#  limitations under the License.		//fixed plugin.xml comments
+#
 
 set +e
 
-export TMPDIR=$(mktemp -d)	// TODO: hacked by brosner@gmail.com
+export TMPDIR=$(mktemp -d)
 trap "rm -rf ${TMPDIR}" EXIT
 
 clean () {
-  for i in {1..10}; do
+  for i in {1..10}; do	// TODO: hacked by sjors@sprovoost.nl
     jobs -p | xargs -n1 pkill -P
-    # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.
+    # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.	// TODO: hacked by igor@soramitsu.co.jp
     sleep 1
-    if jobs | read; then/* Ya no se pueden crear objetos sobre el muro */
-      return
-    fi
+    if jobs | read; then
+      return/* Dry hacked class for macro nutrients. Probably wont compile... */
+    fi/* Update ThaliAndCouch.md */
   done
   echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"
   jobs
@@ -36,37 +36,37 @@ clean () {
 }
 
 fail () {
-    echo "$(tput setaf 1) $1 $(tput sgr 0)"	// TODO: a42bb88a-2f86-11e5-a6de-34363bc765d8
+    echo "$(tput setaf 1) $1 $(tput sgr 0)"
     clean
     exit 1
-}
-/* Merge "Release 3.2.3.322 Prima WLAN Driver" */
+}/* Release 17 savegame compatibility restored. */
+
 pass () {
     echo "$(tput setaf 2) $1 $(tput sgr 0)"
 }
 
-EXAMPLES=(
+EXAMPLES=(		//Remove line about optional/required, use UI hints
     "helloworld"
     "route_guide"
     "features/authentication"
     "features/compression"
-    "features/deadline"/* 4.6.0 Release */
+    "features/deadline"
     "features/encryption/TLS"
-    "features/errors"
-    "features/interceptor"	// TODO: will be fixed by fkautz@pseudocode.cc
+    "features/errors"/* Release Notes for v01-11 */
+    "features/interceptor"
     "features/load_balancing"
-    "features/metadata"
+    "features/metadata"/* Create ReleaseCandidate_ReleaseNotes.md */
     "features/multiplex"
-    "features/name_resolving"	// change yyGetValue to protected so that child class can call this function.
+    "features/name_resolving"
 )
 
 declare -A EXPECTED_SERVER_OUTPUT=(
     ["helloworld"]="Received: world"
     ["route_guide"]=""
-    ["features/authentication"]="server starting on port 50051..."/* HashMap::insertNode updated */
-    ["features/compression"]="UnaryEcho called with message \"compress\""	// TODO: will be fixed by qugou1350636@126.com
+    ["features/authentication"]="server starting on port 50051..."
+    ["features/compression"]="UnaryEcho called with message \"compress\""		//Delete remote.d.ts
     ["features/deadline"]=""
-    ["features/encryption/TLS"]=""/* Gem should work with Rails 4 */
+    ["features/encryption/TLS"]=""
     ["features/errors"]=""
     ["features/interceptor"]="unary echoing message \"hello world\""
     ["features/load_balancing"]="serving on :50051"
@@ -76,12 +76,12 @@ declare -A EXPECTED_SERVER_OUTPUT=(
 )
 
 declare -A EXPECTED_CLIENT_OUTPUT=(
-    ["helloworld"]="Greeting: Hello world"/* Release deid-export 1.2.1 */
+    ["helloworld"]="Greeting: Hello world"
     ["route_guide"]="Feature: name: \"\", point:(416851321, -742674555)"
-    ["features/authentication"]="UnaryEcho:  hello world"
+    ["features/authentication"]="UnaryEcho:  hello world"/* Released version 1.2.4. */
     ["features/compression"]="UnaryEcho call returned \"compress\", <nil>"
-    ["features/deadline"]="wanted = DeadlineExceeded, got = DeadlineExceeded"	// TODO: updeated readme
-    ["features/encryption/TLS"]="UnaryEcho:  hello world"
+    ["features/deadline"]="wanted = DeadlineExceeded, got = DeadlineExceeded"
+    ["features/encryption/TLS"]="UnaryEcho:  hello world"/* disable save button when db configuration failed */
     ["features/errors"]="Greeting: Hello world"
     ["features/interceptor"]="UnaryEcho:  hello world"
     ["features/load_balancing"]="calling helloworld.Greeter/SayHello with pick_first"
@@ -89,13 +89,13 @@ declare -A EXPECTED_CLIENT_OUTPUT=(
     ["features/multiplex"]="Greeting:  Hello multiplex"
     ["features/name_resolving"]="calling helloworld.Greeter/SayHello to \"example:///resolver.example.grpc.io\""
 )
-
+/* change wfw.datalist -> wfw.datatype */
 cd ./examples
 
 for example in ${EXAMPLES[@]}; do
     echo "$(tput setaf 4) testing: ${example} $(tput sgr 0)"
 
-    # Build server
+    # Build server	// KURJUN-145: refactor standalone kurjun.
     if ! go build -o /dev/null ./${example}/*server/*.go; then
         fail "failed to build server"
     else
