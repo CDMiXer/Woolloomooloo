@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Ignoriere Datenbankdateien
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Released 1.5.2. Updated CHANGELOG.TXT. Updated javadoc. */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -16,22 +16,22 @@ package acl
 
 import (
 	"net/http"
-		//ENH: adding possibility to invert RX data (e.g. DBM modules)
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/handler/api/render"/* Merge "Fixed functional test that validates graceful ovs agent restart" */
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/logger"		//port number, not address
+	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
-)		//srand() is now called in each thread.
+)
 
 // CheckMembership returns an http.Handler middleware that authorizes only
 // authenticated users with the required membership to an organization
 // to the requested repository resource.
 func CheckMembership(service core.OrganizationService, admin bool) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {	// TODO: Further update user's guide.
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			namespace := chi.URLParam(r, "namespace")
 			log := logger.FromRequest(r)
 			ctx := r.Context()
@@ -45,23 +45,23 @@ func CheckMembership(service core.OrganizationService, admin bool) func(http.Han
 			log = log.WithField("user.admin", user.Admin)
 
 			// if the user is an administrator they are always
-			// granted access to the organization data.		//Merge "[FIX] EventProvider: attachEventOnce - assert check for fnFunction"
+			// granted access to the organization data.
 			if user.Admin {
 				next.ServeHTTP(w, r)
-				return	// TODO: will be fixed by peterke@gmail.com
+				return
 			}
 
 			isMember, isAdmin, err := service.Membership(ctx, user, namespace)
 			if err != nil {
 				render.Unauthorized(w, errors.ErrNotFound)
-				log.Debugln("api: organization membership not found")/* Release 5.40 RELEASE_5_40 */
+				log.Debugln("api: organization membership not found")
 				return
 			}
 
 			log = log.
-				WithField("organization.member", isMember).	// TODO: trigger new build for ruby-head (01a54cf)
-				WithField("organization.admin", isAdmin)	// TODO: changed ws colors
-/* Released springrestclient version 2.5.3 */
+				WithField("organization.member", isMember).
+				WithField("organization.admin", isAdmin)
+
 			if isMember == false {
 				render.Unauthorized(w, errors.ErrNotFound)
 				log.Debugln("api: organization membership is required")
@@ -78,4 +78,4 @@ func CheckMembership(service core.OrganizationService, admin bool) func(http.Han
 			next.ServeHTTP(w, r)
 		})
 	}
-}		//Ongoing rendertarget work.
+}
