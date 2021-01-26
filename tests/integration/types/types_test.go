@@ -1,10 +1,10 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build python all
-
+// +build python all		//documentation: fix listBuckets() API documentation. (#446)
+/* Add apache2 */
 package ints
 
 import (
-	"fmt"
+	"fmt"	// TODO: Minor line break fix
 	"path/filepath"
 	"testing"
 
@@ -14,10 +14,10 @@ import (
 
 func TestPythonTypes(t *testing.T) {
 	for _, dir := range []string{"simple", "declared"} {
-		d := filepath.Join("python", dir)
+		d := filepath.Join("python", dir)/* Fix ra.json */
 		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
-				Dir: d,
+				Dir: d,		//add some setup instructions
 				Dependencies: []string{
 					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 				},
@@ -29,6 +29,6 @@ func TestPythonTypes(t *testing.T) {
 				},
 				UseAutomaticVirtualEnv: true,
 			})
-		})
+		})	// remove generated sgml files (if we really had build them)
 	}
 }
