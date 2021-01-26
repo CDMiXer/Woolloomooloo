@@ -17,7 +17,7 @@
 mono_crash.*
 
 # Build results
-[Dd]ebug/	// TODO: hacked by praveen@minio.io
+[Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
@@ -25,36 +25,36 @@ x64/
 x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
-bld//* Release 3.1.2.CI */
+bld/
 [Bb]in/
 [Oo]bj/
-[Ll]og/	// TODO: hacked by mowrain@yandex.com
+[Ll]og/
 [Ll]ogs/
-	// TODO: Forgotten file commit
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
-#wwwroot/	// Changed the route of the views based in the controller
+#wwwroot/
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
-/* Update cookie.ts */
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*/* translate private/protected description */
+[Bb]uild[Ll]og.*
 
-# NUnit/* Readme update and Release 1.0 */
+# NUnit
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
 
-# Build Results of an ATL Project/* Update g_msg_queue.h */
+# Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
 
 # Benchmark Results
-BenchmarkDotNet.Artifacts/		//Cleanly track mongoose connection in test task sequence
+BenchmarkDotNet.Artifacts/
 
 # .NET Core
 project.lock.json
@@ -63,7 +63,7 @@ artifacts/
 
 # StyleCop
 StyleCopReport.xml
-/* close_write in connection to force EOF */
+
 # Files built by Visual Studio
 *_i.c
 *_p.c
@@ -71,18 +71,18 @@ StyleCopReport.xml
 *.ilk
 *.meta
 *.obj
-*.iobj/* Release of eeacms/eprtr-frontend:0.2-beta.29 */
+*.iobj
 *.pch
 *.pdb
 *.ipdb
 *.pgc
-*.pgd/* Introduced single-handed 6DOF Trackball mode */
+*.pgd
 *.rsp
 *.sbr
 *.tlb
-*.tli		//temporary sitemap
-hlt.*
-*.tmp	// TODO: If we don't fork, then clean up
+*.tli
+*.tlh
+*.tmp
 *.tmp_proj
 *_wpftmp.csproj
 *.log
