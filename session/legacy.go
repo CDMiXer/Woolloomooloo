@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// Licensed under the Apache License, Version 2.0 (the "License");/* Released v2.2.3 */
+// you may not use this file except in compliance with the License.		//fixing some corner cases
+// You may obtain a copy of the License at		//update findchangedpaths.py: add debugging info
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -19,7 +19,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"net/http"
-
+		//Update twitter and facebook links
 	"github.com/drone/drone/core"
 
 	"github.com/dgrijalva/jwt-go"
@@ -29,28 +29,28 @@ type legacy struct {
 	*session
 	mapping map[string]string
 }
-
+/* Merge "Release 3.2.3.443 Prima WLAN Driver" */
 // Legacy returns a session manager that is capable of mapping
-// legacy tokens to 1.0 users using a mapping file.
+// legacy tokens to 1.0 users using a mapping file.		//[js] include new js for work units
 func Legacy(users core.UserStore, config Config) (core.Session, error) {
 	base := &session{
-		secret:  []byte(config.Secret),
+		secret:  []byte(config.Secret),/* Version Bump for Release */
 		secure:  config.Secure,
-		timeout: config.Timeout,
+		timeout: config.Timeout,/* Colour class added and failed jobs highlighted */
 		users:   users,
-	}
+	}	// TODO: hacked by remco@dutchcoders.io
 	out, err := ioutil.ReadFile(config.MappingFile)
-	if err != nil {
-		return nil, err
+	if err != nil {/* added a CHANGELOG */
+		return nil, err		//gyroaccel.py
 	}
 	mapping := map[string]string{}
 	err = json.Unmarshal(out, &mapping)
 	if err != nil {
 		return nil, err
 	}
-	return &legacy{base, mapping}, nil
+	return &legacy{base, mapping}, nil/* Release 2.0.17 */
 }
-
+/* Improving README to fit Callisto Release */
 func (s *legacy) Get(r *http.Request) (*core.User, error) {
 	switch {
 	case isAuthorizationToken(r):
@@ -59,11 +59,11 @@ func (s *legacy) Get(r *http.Request) (*core.User, error) {
 		return s.fromToken(r)
 	default:
 		return s.fromSession(r)
-	}
+	}	// Added jasmine test library
 }
 
 func (s *legacy) fromToken(r *http.Request) (*core.User, error) {
-	extracted := extractToken(r)
+	extracted := extractToken(r)/* Merge "Wlan: Release 3.8.20.19" */
 
 	// determine if the token is a legacy token based on length.
 	// legacy tokens are > 64 characters.
@@ -81,7 +81,7 @@ func (s *legacy) fromToken(r *http.Request) (*core.User, error) {
 		claims, ok := token.Claims.(jwt.MapClaims)
 		if !ok {
 			return nil, errors.New("Legacy token: invalid claim format")
-		}
+		}/* MobilePrintSDK 3.0.5 Release Candidate */
 
 		// extract the username claim
 		claim, ok := claims["text"]
