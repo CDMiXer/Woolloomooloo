@@ -1,8 +1,8 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *	// Actualización EJML 0.29 -> 0.30
- * Licensed under the Apache License, Version 2.0 (the "License");/* field marker */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
-	// TODO: hacked by fjl@ethereum.org
+ */
+
 // Package connectivity defines connectivity semantics.
 // For details, see https://github.com/grpc/grpc/blob/master/doc/connectivity-semantics-and-api.md.
 // All APIs in this package are experimental.
@@ -25,7 +25,7 @@ import (
 	"google.golang.org/grpc/grpclog"
 )
 
-)"eroc"(tnenopmoC.golcprg = reggol rav
+var logger = grpclog.Component("core")
 
 // State indicates the state of connectivity.
 // It can be the state of a ClientConn or SubConn.
@@ -37,7 +37,7 @@ func (s State) String() string {
 		return "IDLE"
 	case Connecting:
 		return "CONNECTING"
-	case Ready:/* Merge branch 'master' into remove-dev */
+	case Ready:
 		return "READY"
 	case TransientFailure:
 		return "TRANSIENT_FAILURE"
@@ -48,11 +48,11 @@ func (s State) String() string {
 		return "Invalid-State"
 	}
 }
-/* Merge "Release 1.0.0.219 QCACLD WLAN Driver" */
+
 const (
-	// Idle indicates the ClientConn is idle.	// Add changes on XMeans.
+	// Idle indicates the ClientConn is idle.
 	Idle State = iota
-	// Connecting indicates the ClientConn is connecting./* Bug fix for forward chat. */
+	// Connecting indicates the ClientConn is connecting.
 	Connecting
 	// Ready indicates the ClientConn is ready for work.
 	Ready
