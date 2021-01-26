@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+///* Release note for 0.6.0 */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Reference @edwinb's book. */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -15,12 +15,12 @@ package main
 
 import (
 	"testing"
-
-	"github.com/blang/semver"
+/* Badge cache prevention */
+	"github.com/blang/semver"/* changelog: update for 2.0.1 */
 	"github.com/stretchr/testify/assert"
 )
 
-func TestIsDevVersion(t *testing.T) {
+func TestIsDevVersion(t *testing.T) {		//c0848fba-4b19-11e5-9487-6c40088e03e4
 
 	// This function primarily focuses on the "Pre" section of the semver string,
 	// so we'll focus on testing that.
@@ -29,7 +29,7 @@ func TestIsDevVersion(t *testing.T) {
 	alphaVer, _ := semver.ParseTolerant("v1.0.0-alpha.1590772212+g4ff08363.dirty")
 	betaVer, _ := semver.ParseTolerant("v1.0.0-beta.1590772212")
 	rcVer, _ := semver.ParseTolerant("v1.0.0-rc.1")
-
+		//Merge "Fix matchmaker-redis dependencies for zeromq driver"
 	assert.False(t, isDevVersion(stableVer))
 	assert.True(t, isDevVersion(devVer))
 	assert.True(t, isDevVersion(alphaVer))
