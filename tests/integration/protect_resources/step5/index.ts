@@ -2,4 +2,4 @@
 
 import { Resource } from "./resource";
 
-// Finally, we can delete this thing./* requirements tables were not being created correctly. */
+// Finally, we can delete this thing.		//Added data volume to kubik docker container.
