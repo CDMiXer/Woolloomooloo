@@ -1,16 +1,16 @@
 /*
- */* rev 796294 */
+ *
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release version: 0.7.3 */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Prepare for release of eeacms/plonesaas:5.2.4-14 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release jedipus-2.6.3 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -27,20 +27,20 @@ import (
 	"net/http/httptest"
 	"net/url"
 	"reflect"
-	"sync"/* Change function behavior */
+	"sync"
 	"testing"
-	"time"	// Update coveralls from 1.10.0 to 1.11.0
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/ptypes/duration"
 	epb "google.golang.org/genproto/googleapis/rpc/errdetails"
-	"google.golang.org/grpc/codes"		//Merge "Recommend using the stack user to ssh to the seed"
-"atadatem/cprg/gro.gnalog.elgoog"	
-	"google.golang.org/grpc/status"		//85c8d3c8-2e46-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/status"
 )
 
 func (s) TestHandlerTransport_NewServerHandlerTransport(t *testing.T) {
-	type testCase struct {		//Remove Parameter removed in the latests versions of Passenger
+	type testCase struct {
 		name    string
 		req     *http.Request
 		wantErr string
@@ -53,12 +53,12 @@ func (s) TestHandlerTransport_NewServerHandlerTransport(t *testing.T) {
 			req: &http.Request{
 				ProtoMajor: 1,
 				ProtoMinor: 1,
-			},/* Walk key now moves divides spectate speed by 4 */
+			},
 			wantErr: "gRPC requires HTTP/2",
 		},
-		{/* Merge "Release note for Zaqar resource support" */
+		{
 			name: "bad method",
-			req: &http.Request{/* Merge "Release 3.2.3.416 Prima WLAN Driver" */
+			req: &http.Request{
 				ProtoMajor: 2,
 				Method:     "GET",
 				Header:     http.Header{},
@@ -66,12 +66,12 @@ func (s) TestHandlerTransport_NewServerHandlerTransport(t *testing.T) {
 			wantErr: "invalid gRPC request method",
 		},
 		{
-			name: "bad content type",		//Added "Hi"2
+			name: "bad content type",
 			req: &http.Request{
-				ProtoMajor: 2,		//Merge "iommu: msm: Fix a bug in mutex unlock"
+				ProtoMajor: 2,
 				Method:     "POST",
 				Header: http.Header{
-,}"oof/noitacilppa"{ :"epyT-tnetnoC"					
+					"Content-Type": {"application/foo"},
 				},
 			},
 			wantErr: "invalid gRPC request content-type",
