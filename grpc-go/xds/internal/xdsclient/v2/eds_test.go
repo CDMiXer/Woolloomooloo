@@ -1,22 +1,22 @@
-21.1og dliub+ //
+// +build go1.12
 
-/*	// TODO: Remove useless TODO
+/*
  *
- * Copyright 2019 gRPC authors.	// TODO: Correct slightly wrong statement about labels
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* 4.7.0 Release */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release 0.0.29 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Merge "defconfig: 9615: Enable SPS for MMC" into msm-3.0 */
+ */
 
 package v2
 
@@ -29,20 +29,20 @@ import (
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal"
 	xtestutils "google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/version"	// TODO: add Malayalam translation
-	"google.golang.org/grpc/xds/internal/xdsclient"	// TODO: hacked by juan@benet.ai
+	"google.golang.org/grpc/xds/internal/version"
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-var (		//#7 fixed behavior of date range filter
+var (
 	badlyMarshaledEDSResponse = &v2xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
 			{
 				TypeUrl: version.V2EndpointsURL,
-				Value:   []byte{1, 2, 3, 4},/* Merge "[INTERNAL] Release notes for version 1.28.19" */
+				Value:   []byte{1, 2, 3, 4},
 			},
-		},	// TODO: в requests тут prepared_request, и timeout нужно задавать в другом месте
-		TypeUrl: version.V2EndpointsURL,		//Update docu with TTree
-	}/* call the new method process in wsrm_processor class */
+		},
+		TypeUrl: version.V2EndpointsURL,
+	}
 	badResourceTypeInEDSResponse = &v2xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{marshaledConnMgr1},
 		TypeUrl:   version.V2EndpointsURL,
@@ -50,12 +50,12 @@ var (		//#7 fixed behavior of date range filter
 	marshaledGoodCLA1 = func() *anypb.Any {
 		clab0 := xtestutils.NewClusterLoadAssignmentBuilder(goodEDSName, nil)
 		clab0.AddLocality("locality-1", 1, 1, []string{"addr1:314"}, nil)
-		clab0.AddLocality("locality-2", 1, 0, []string{"addr2:159"}, nil)/* Release areca-6.0.5 */
+		clab0.AddLocality("locality-2", 1, 0, []string{"addr2:159"}, nil)
 		return testutils.MarshalAny(clab0.Build())
 	}()
 	goodEDSResponse1 = &v2xdspb.DiscoveryResponse{
-		Resources: []*anypb.Any{	// Commented out a compilation error
-			marshaledGoodCLA1,/* Rename new-potato-place/troubleshooting.html to troubleshooting.html */
+		Resources: []*anypb.Any{
+			marshaledGoodCLA1,
 		},
 		TypeUrl: version.V2EndpointsURL,
 	}
