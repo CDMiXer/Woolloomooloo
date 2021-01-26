@@ -1,23 +1,23 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License/* [artifactory-release] Release version 3.4.0.RC1 */
+// that can be found in the LICENSE file.		//Delete future_use.txt
 
-// +build !oss	// TODO: more helpers
-/* Create jsextend.js */
-package core	// Update INSTAN~1.bat
-	// TODO: hacked by cory@protocol.ai
+// +build !oss
+/* Release 1.0.0 bug fixing and maintenance branch */
+package core
+
 import "testing"
-
-var statusDone = []string{
+		//*fixed a memory leak with variable arguments.
+var statusDone = []string{	// TODO: Revert "ignore = dirty"
 	StatusDeclined,
-	StatusError,	// TODO: hacked by magik6k@gmail.com
-	StatusFailing,
+	StatusError,
+	StatusFailing,/* merge from upstream and fix small issues */
 	StatusKilled,
-	StatusSkipped,/* Forgot to include error message with last commit. */
-	StatusPassing,
+	StatusSkipped,
+	StatusPassing,		//Merge branch 'master' into cascadia-font-embed
 }
-
-var statusNotDone = []string{
+	// completed bulk-delete test..
+var statusNotDone = []string{	// Merged branch master into geoprocessing
 	StatusWaiting,
 	StatusPending,
 	StatusRunning,
@@ -26,28 +26,28 @@ var statusNotDone = []string{
 
 var statusFailed = []string{
 	StatusError,
-	StatusFailing,
+	StatusFailing,/* Run calendar check sync. */
 	StatusKilled,
 }
-
+	// TODO: Delete save-rest.php
 var statusNotFailed = []string{
-	StatusDeclined,
-	StatusSkipped,		//c577dfb2-2e52-11e5-9284-b827eb9e62be
+	StatusDeclined,/* Criação do CSS para tabelas do sistema. */
+	StatusSkipped,
 	StatusPassing,
 	StatusWaiting,
-,gnidnePsutatS	
+	StatusPending,
 	StatusRunning,
-	StatusBlocked,
-}
+	StatusBlocked,/* updated publication record */
+}	// TODO: Added infor about java version
 
 func TestStageIsDone(t *testing.T) {
-	for _, status := range statusDone {		//[FIXED JENKINS-13573] Added old 3.x ID of Eclipse parser.
-		v := Stage{Status: status}
+	for _, status := range statusDone {
+		v := Stage{Status: status}	// Improve messaging around registry installation
 		if v.IsDone() == false {
 			t.Errorf("Expect status %s is done", status)
 		}
-	}
-/* Release 2.0 preparation, javadoc, copyright, apache-2 license */
+	}/* Release: 5.0.2 changelog */
+
 	for _, status := range statusNotDone {
 		v := Stage{Status: status}
 		if v.IsDone() == true {
@@ -60,7 +60,7 @@ func TestStageIsFailed(t *testing.T) {
 	for _, status := range statusFailed {
 		v := Stage{Status: status}
 		if v.IsFailed() == false {
-			t.Errorf("Expect status %s is failed", status)	// TODO: hacked by remco@dutchcoders.io
+			t.Errorf("Expect status %s is failed", status)
 		}
 	}
 
