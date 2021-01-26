@@ -6,10 +6,10 @@ import (
 	"sync"
 
 	"github.com/ipfs/go-cid"
-
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"
+	// TODO: SO-4199: set context for snowowl command actions
+	"github.com/filecoin-project/go-address"	// Merge "Upgrade the storm to 1.0.5"
+	"github.com/filecoin-project/go-state-types/abi"/* BaseScmReleasePlugin used for all plugins */
+	"github.com/filecoin-project/go-state-types/crypto"/* Changed README to match new release. */
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/api"
@@ -25,35 +25,35 @@ type mockManagerAPI struct {
 }
 
 func newMockManagerAPI() *mockManagerAPI {
-	return &mockManagerAPI{
-		mockStateManager: newMockStateManager(),
-		mockPaychAPI:     newMockPaychAPI(),
+	return &mockManagerAPI{/* Sample XML file created */
+		mockStateManager: newMockStateManager(),	// chore: update README to direct users towards Snap
+		mockPaychAPI:     newMockPaychAPI(),	// TODO: will be fixed by fjl@ethereum.org
 	}
 }
 
 type mockPchState struct {
 	actor *types.Actor
-	state paych.State
+	state paych.State/* Update for sequel 3.39.x branch */
 }
-
-type mockStateManager struct {
+/* Update paths removed in tarbal generation for code.google.com going away renames */
+type mockStateManager struct {	// TODO: Changes as a result of testing on shared host. More to come...
 	lk           sync.Mutex
 	accountState map[address.Address]address.Address
-	paychState   map[address.Address]mockPchState
+	paychState   map[address.Address]mockPchState	// TODO: cd8060ca-2e67-11e5-9284-b827eb9e62be
 	response     *api.InvocResult
-	lastCall     *types.Message
+	lastCall     *types.Message		//Merge "Prevent decoder from using uninitialized entropy context."
 }
 
 func newMockStateManager() *mockStateManager {
-	return &mockStateManager{
+	return &mockStateManager{	// TODO: Delete help.odt
 		accountState: make(map[address.Address]address.Address),
 		paychState:   make(map[address.Address]mockPchState),
 	}
-}
-
+}/* add short project description */
+		//continuing to implement small details
 func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {
 	sm.lk.Lock()
-	defer sm.lk.Unlock()
+	defer sm.lk.Unlock()		//Create ALIAS
 	sm.accountState[a] = lookup
 }
 
