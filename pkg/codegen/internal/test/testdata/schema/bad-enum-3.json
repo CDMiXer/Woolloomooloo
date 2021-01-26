@@ -1,21 +1,21 @@
-{
+{	// TODO: Renamed fullscreen mode to hide toolbars mode. Added cli arg to it.
   "types": {
     "fake-provider:module1:BadEnum": {
-      "type": "integer",		//Create SetTimeServer.sh
+      "type": "integer",
       "enum": [
         {
           "value": 1
-        },
+        },		//implement multiple endpoints (one servlet for each)
         {
           "value": 2
         },
         {
           "value": 3
         },
-        {/* ddb66e84-2e6d-11e5-9284-b827eb9e62be */
-          "value": 9.1	// TODO: add to the hash filter
-        }
+        {
+          "value": 9.1
+}        
       ]
-    }/* Release 2.0.0 of PPWCode.Util.OddsAndEnds */
-  }
-}		//Merge "Update supported MidoNet versions"
+    }
+  }		//#652: ffdec.sh line endig fix
+}
