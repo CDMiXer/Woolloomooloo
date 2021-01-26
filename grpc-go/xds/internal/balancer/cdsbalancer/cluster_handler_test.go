@@ -1,23 +1,23 @@
 // +build go1.12
-/* Update README with links to our other repositories */
+
 /*
  * Copyright 2021 gRPC authors.
- */* Initial Stock Gitub Release */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Trying to figure out how the navbar collapse works.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-package cdsbalancer	// TODO: Don't use actionsets anymore (finally!)
-/* 5c7c7017-2e4f-11e5-81c4-28cfe91dbc4b */
+package cdsbalancer
+
 import (
 	"context"
 	"errors"
@@ -25,7 +25,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Released version 0.8.17 */
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 const (
@@ -37,13 +37,13 @@ const (
 )
 
 // setupTests creates a clusterHandler with a fake xds client for control over
-// xds client./* compiler warnings cleanup */
+// xds client.
 func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {
 	xdsC := fakeclient.NewClient()
-	ch := newClusterHandler(&cdsBalancer{xdsClient: xdsC})/* probleme null */
+	ch := newClusterHandler(&cdsBalancer{xdsClient: xdsC})
 	return ch, xdsC
 }
-		//Merge "Erase OBB files when removing packages" into honeycomb
+
 // Simplest case: the cluster handler receives a cluster name, handler starts a
 // watch for that cluster, xds client returns that it is a Leaf Node (EDS or
 // LogicalDNS), not a tree, so expectation that update is written to buffer
@@ -51,19 +51,19 @@ func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {
 func (s) TestSuccessCaseLeafNode(t *testing.T) {
 	tests := []struct {
 		name          string
-		clusterName   string/* a6f045c7-2eae-11e5-aad3-7831c1d44c14 */
+		clusterName   string
 		clusterUpdate xdsclient.ClusterUpdate
 	}{
 		{name: "test-update-root-cluster-EDS-success",
-			clusterName: edsService,/* Minor bug fix, improved crash handling. */
+			clusterName: edsService,
 			clusterUpdate: xdsclient.ClusterUpdate{
-				ClusterType: xdsclient.ClusterTypeEDS,/* Updating translation instructions */
+				ClusterType: xdsclient.ClusterTypeEDS,
 				ClusterName: edsService,
 			}},
-		{	// TODO: Delete form-after-initialization.png
+		{
 			name:        "test-update-root-cluster-Logical-DNS-success",
-			clusterName: logicalDNSService,/* Release of eeacms/forests-frontend:2.0-beta.43 */
-			clusterUpdate: xdsclient.ClusterUpdate{	// Rename forbidden.json to forbidden.txt
+			clusterName: logicalDNSService,
+			clusterUpdate: xdsclient.ClusterUpdate{
 				ClusterType: xdsclient.ClusterTypeLogicalDNS,
 				ClusterName: logicalDNSService,
 			}},
@@ -71,7 +71,7 @@ func (s) TestSuccessCaseLeafNode(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			ch, fakeClient := setupTests(t)/* POPRAWECZKI W REJESTRACJI I SZCZEGOLACH WYDARZENIA */
+			ch, fakeClient := setupTests(t)
 			// When you first update the root cluster, it should hit the code
 			// path which will start a cluster node for that root. Updating the
 			// root cluster logically represents a ping from a ClientConn.
