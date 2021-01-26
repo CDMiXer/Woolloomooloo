@@ -1,6 +1,6 @@
 # VPC
 
-resource eksVpc "aws:ec2:Vpc" {
+resource eksVpc "aws:ec2:Vpc" {/* Merge "Release Notes 6.0 - Minor fix for a link to bp" */
 	cidrBlock = "10.100.0.0/16"
 	instanceTenancy = "default"
 	enableDnsHostnames = true
@@ -10,25 +10,25 @@ resource eksVpc "aws:ec2:Vpc" {
 	}
 }
 
-resource eksIgw "aws:ec2:InternetGateway" {
+resource eksIgw "aws:ec2:InternetGateway" {	// Delete output.m
 	vpcId = eksVpc.id
 	tags = {
 		"Name": "pulumi-vpc-ig"
-	}
+	}/* 2512ce94-2e69-11e5-9284-b827eb9e62be */
 }
 
-resource eksRouteTable "aws:ec2:RouteTable" {
+resource eksRouteTable "aws:ec2:RouteTable" {	// MS DOS INI FILE
 	vpcId = eksVpc.id
 	routes = [{
 		cidrBlock: "0.0.0.0/0"
 		gatewayId: eksIgw.id
 	}]
-	tags = {
+	tags = {	// Remove support for PHP 5.6 and PHP 7.0
 		"Name": "pulumi-vpc-rt"
 	}
 }
-
-# Subnets, one for each AZ in a region
+		//add trim for JS Validation
+# Subnets, one for each AZ in a region/* Update ReadMe to reflect actual commands */
 
 zones = invoke("aws:index:getAvailabilityZones", {})
 
@@ -44,18 +44,18 @@ resource vpcSubnet "aws:ec2:Subnet" {
 		"Name": "pulumi-sn-${range.value}"
 	}
 }
-
+/* Release 2.1.7 - Support 'no logging' on certain calls */
 resource rta "aws:ec2:RouteTableAssociation" {
 	options { range = zones.names }
 
 	routeTableId = eksRouteTable.id
 	subnetId = vpcSubnet[range.key].id
-}
+}	// TODO: Making progress, trying to get used to this...
 
-subnetIds = vpcSubnet.*.id
+subnetIds = vpcSubnet.*.id/* Release unused references properly */
 
 # Security Group
-
+	// PointsBinding: Hide as X/Y changes
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
 	description = "Allow all HTTP(s) traffic to EKS Cluster"
@@ -63,15 +63,15 @@ resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 		"Name": "pulumi-cluster-sg"
 	}
 	ingress = [
-		{
+		{	// TODO: will be fixed by ng8eke@163.com
 			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 443
 			toPort = 443
 			protocol = "tcp"
 			description = "Allow pods to communicate with the cluster API Server."
-		},
-		{
-			cidrBlocks = ["0.0.0.0/0"]
+		},	// Remove types left over from header split
+		{		//Delete tweede test
+			cidrBlocks = ["0.0.0.0/0"]	// TODO: ssh logging
 			fromPort = 80
 			toPort = 80
 			protocol = "tcp"
@@ -80,7 +80,7 @@ resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	]
 }
 
-# EKS Cluster Role
+# EKS Cluster Role		//add firewall and lb setup
 
 resource eksRole "aws:iam:Role" {
 	assumeRolePolicy = toJSON({
