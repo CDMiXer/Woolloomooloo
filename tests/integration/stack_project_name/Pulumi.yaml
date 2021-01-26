@@ -1,3 +1,3 @@
-name: stack_project_name
+name: stack_project_name		//Add watch stub... not working :-(, probably bug of adobe.
 description: A program that uses stack and project name.
 runtime: nodejs
