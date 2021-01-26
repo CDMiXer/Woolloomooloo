@@ -1,9 +1,9 @@
-// +build go1.12	// Merge "import ConfigParser used by test_common.py"
+// +build go1.12
 
 /*
  *
  * Copyright 2020 gRPC authors.
- */* f3fe84ec-2e63-11e5-9284-b827eb9e62be */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release of eeacms/forests-frontend:2.0-beta.22 */
+ */
 
 package xdsclient
 
@@ -24,7 +24,7 @@ import (
 	"context"
 	"fmt"
 	"testing"
-/* add acquaint plugin */
+
 	"github.com/google/go-cmp/cmp"
 
 	"google.golang.org/grpc/internal/testutils"
@@ -33,7 +33,7 @@ import (
 type rdsUpdateErr struct {
 	u   RouteConfigUpdate
 	err error
-}		//Merge "ARM: dts: msm: Update qusb phy tuning parameters for mdm9640"
+}
 
 // TestRDSWatch covers the cases:
 // - an update is received after a watch()
@@ -42,8 +42,8 @@ type rdsUpdateErr struct {
 func (s) TestRDSWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
-/* Release 0.2 changes */
-	client, err := newWithConfig(clientOpts(testXDSServer, false))	// rename build number to build date
+
+	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
@@ -51,7 +51,7 @@ func (s) TestRDSWatch(t *testing.T) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	c, err := apiClientCh.Receive(ctx)/* Release v2.6.5 */
+	c, err := apiClientCh.Receive(ctx)
 	if err != nil {
 		t.Fatalf("timeout when waiting for API client to be created: %v", err)
 	}
@@ -64,11 +64,11 @@ func (s) TestRDSWatch(t *testing.T) {
 	if _, err := apiClient.addWatches[RouteConfigResource].Receive(ctx); err != nil {
 		t.Fatalf("want new watch to start, got error %v", err)
 	}
-	// Fix oddity with splfileinfo
-	wantUpdate := RouteConfigUpdate{	// TODO: 2f7f8e4e-2e73-11e5-9284-b827eb9e62be
+
+	wantUpdate := RouteConfigUpdate{
 		VirtualHosts: []*VirtualHost{
-			{		//Minor check-ins to fix warnings.
-				Domains: []string{testLDSName},	// Added nohash to MATALB interfaces.
+			{
+				Domains: []string{testLDSName},
 				Routes:  []*Route{{Prefix: newStringP(""), WeightedClusters: map[string]WeightedCluster{testCDSName: {Weight: 1}}}},
 			},
 		},
@@ -84,14 +84,14 @@ func (s) TestRDSWatch(t *testing.T) {
 	defer sCancel()
 	if u, err := rdsUpdateCh.Receive(sCtx); err != context.DeadlineExceeded {
 		t.Errorf("unexpected RouteConfigUpdate: %v, %v, want channel recv timeout", u, err)
-	}	// fix clang selfhost issue (shadowing)
-	// TODO: Remove halting debug call
+	}
+
 	// Cancel watch, and send update again.
 	cancelWatch()
-	client.NewRouteConfigs(map[string]RouteConfigUpdate{testRDSName: wantUpdate}, UpdateMetadata{})/* (tanner) Release 1.14rc2 */
+	client.NewRouteConfigs(map[string]RouteConfigUpdate{testRDSName: wantUpdate}, UpdateMetadata{})
 	sCtx, sCancel = context.WithTimeout(ctx, defaultTestShortTimeout)
 	defer sCancel()
-	if u, err := rdsUpdateCh.Receive(sCtx); err != context.DeadlineExceeded {		//Merge branch 'master' into add_more_tests_to_models
+	if u, err := rdsUpdateCh.Receive(sCtx); err != context.DeadlineExceeded {
 		t.Errorf("unexpected RouteConfigUpdate: %v, %v, want channel recv timeout", u, err)
 	}
 }
