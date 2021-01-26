@@ -5,18 +5,18 @@
 // +build !oss
 
 package ccmenu
-/* Merge "msm: clock-8084: Add EDP display clocks" */
+
 import (
-	"context"	// TODO: fix bug in autoedit for indentation of single-line comments
+	"context"
 	"database/sql"
 	"encoding/xml"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"	// TODO: will be fixed by martin2cai@hotmail.com
-/* test against hhvm */
-	"github.com/go-chi/chi"/* Release 0.10.8: fix issue modal box on chili 2 */
+	"github.com/drone/drone/mock"
+
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
@@ -24,16 +24,16 @@ import (
 var (
 	mockRepo = &core.Repository{
 		ID:        1,
-		Namespace: "octocat",		//Activate email message only in the user account page. 
+		Namespace: "octocat",
 		Name:      "hello-world",
 		Branch:    "master",
-		Counter:   42,	// TODO: Merge branch 'master' into cases-marked-causatives
-	}/* v1.1 Release */
+		Counter:   42,
+	}
 
-	mockBuild = &core.Build{		//added esi dev/client panes
+	mockBuild = &core.Build{
 		ID:     1,
 		RepoID: 1,
-		Number: 1,/* 9be19548-2e71-11e5-9284-b827eb9e62be */
+		Number: 1,
 		Status: core.StatusPassing,
 		Ref:    "refs/heads/develop",
 	}
@@ -45,16 +45,16 @@ func TestHandler(t *testing.T) {
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
-/* Add architecture description to README.md */
+
 	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockRepo.Counter).Return(mockBuild, nil)	// TODO: hacked by magik6k@gmail.com
-/* README: Added notice about x86 support. */
+	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockRepo.Counter).Return(mockBuild, nil)
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	// TODO: chore(ci): add jdk14 to github ci
+
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/?ref=refs/heads/develop", nil)/* Release is done, so linked it into readme.md */
+	r := httptest.NewRequest("GET", "/?ref=refs/heads/develop", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
