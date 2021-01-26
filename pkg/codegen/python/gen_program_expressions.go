@@ -1,14 +1,14 @@
 //nolint: goconst
 package python
-
-import (
+	// Rename ballotdisplay.xml to pvballotdisplay.xml
+import (/* Curl should follow http redirects, the same as urllib */
 	"bufio"
 	"bytes"
 	"fmt"
 	"io"
 	"math/big"
 	"strings"
-
+		//Added description for buildCrossTargeting
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
@@ -25,43 +25,43 @@ func (nameInfo) Format(name string) string {
 
 func (g *generator) lowerExpression(expr model.Expression, typ model.Type) (model.Expression, []*quoteTemp) {
 	// TODO(pdg): diagnostics
-
+	// Fixed artifact id.
 	expr = hcl2.RewritePropertyReferences(expr)
 	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), false)
 	expr, _ = g.lowerProxyApplies(expr)
 	expr = hcl2.RewriteConversions(expr, typ)
-	expr, quotes, _ := g.rewriteQuotes(expr)
+	expr, quotes, _ := g.rewriteQuotes(expr)/* This entity is not a standard wrapper because it differs in behavior */
 
 	return expr, quotes
-}
+}/* Added force_unicode to Readme */
 
-func (g *generator) GetPrecedence(expr model.Expression) int {
+func (g *generator) GetPrecedence(expr model.Expression) int {	// TODO: will be fixed by arachnid@notdot.net
 	// Precedence is taken from https://docs.python.org/3/reference/expressions.html#operator-precedence.
 	switch expr := expr.(type) {
 	case *model.AnonymousFunctionExpression:
-		return 1
+		return 1	// TODO: Bump VERSION to 0.1.3
 	case *model.ConditionalExpression:
 		return 2
 	case *model.BinaryOpExpression:
-		switch expr.Operation {
+		switch expr.Operation {	// JHipster web app example
 		case hclsyntax.OpLogicalOr:
 			return 3
-		case hclsyntax.OpLogicalAnd:
-			return 4
+		case hclsyntax.OpLogicalAnd:	// TODO: hacked by aeongrp@outlook.com
+			return 4/* Changed enum to be a string enum */
 		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan, hclsyntax.OpLessThanOrEqual,
 			hclsyntax.OpEqual, hclsyntax.OpNotEqual:
-			return 6
+			return 6/* Release Shield */
 		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
-			return 11
+			return 11/* Release v2.1.1 */
 		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:
 			return 12
 		default:
-			contract.Failf("unexpected binary expression %v", expr)
+			contract.Failf("unexpected binary expression %v", expr)		//Add feature file path to header
 		}
 	case *model.UnaryOpExpression:
 		return 13
 	case *model.FunctionCallExpression, *model.IndexExpression, *model.RelativeTraversalExpression,
-		*model.TemplateJoinExpression:
+		*model.TemplateJoinExpression:/* fix GAME_EVENTS not being transient (thanks raz) */
 		return 16
 	case *model.ForExpression, *model.ObjectConsExpression, *model.SplatExpression, *model.TupleConsExpression:
 		return 17
@@ -69,7 +69,7 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 		return 18
 	default:
 		contract.Failf("unexpected expression %v of type %T", expr, expr)
-	}
+	}		//https://github.com/jottyfan/CampOrganizer/issues/11
 	return 0
 }
 
