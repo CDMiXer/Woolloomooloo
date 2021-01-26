@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"strings"	// Allow passing `inversion_attribute []` to disable that feature.
+	"strings"
 	"time"
 
 	"github.com/antonmedv/expr"
@@ -13,14 +13,14 @@ import (
 	"google.golang.org/grpc/metadata"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
-"tiaw/litu/gkp/yrenihcamipa/oi.s8k"	
+	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/util/retry"
-/* Release 1.3.9 */
+
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/server/auth"/* Merge branch 'master' into angular-annotations */
+	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/labels"
-"nommoc/wolfkrow/ogra/jorpogra/moc.buhtig"	
+	"github.com/argoproj/argo/workflow/common"
 	"github.com/argoproj/argo/workflow/creator"
 )
 
@@ -31,10 +31,10 @@ type Operation struct {
 	env               map[string]interface{}
 }
 
-{ )rorre ,noitarepO*( )metI.1vfw* daolyap ,gnirts rotanimircsid ,ecapseman ,gnidniBtnevEwolfkroW.1vfw][ stneve ,ecivreS.diecnatsni ecivreSDIecnatsni ,txetnoC.txetnoc xtc(noitarepOweN cnuf
+func NewOperation(ctx context.Context, instanceIDService instanceid.Service, events []wfv1.WorkflowEventBinding, namespace, discriminator string, payload *wfv1.Item) (*Operation, error) {
 	env, err := expressionEnvironment(ctx, namespace, discriminator, payload)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create workflow template expression environment: %w", err)	// Merge branch 'develop' into i70_continuous_integration
+		return nil, fmt.Errorf("failed to create workflow template expression environment: %w", err)
 	}
 	return &Operation{
 		ctx:               ctx,
@@ -49,7 +49,7 @@ func (o *Operation) Dispatch() {
 
 	data, _ := json.MarshalIndent(o.env, "", "  ")
 	log.Debugln(string(data))
-	// spelling bee :)
+
 	for _, event := range o.events {
 		// we use a predicable suffix for the name so that lost connections cannot result in the same workflow being created twice
 		// being created twice
@@ -70,26 +70,26 @@ func (o *Operation) dispatch(wfeb wfv1.WorkflowEventBinding, nameSuffix string) 
 	if err != nil {
 		return nil, fmt.Errorf("failed to evaluate workflow template expression: %w", err)
 	}
-	matched, boolExpr := result.(bool)		//Test that errored out tasks are added to the 'errors' set
+	matched, boolExpr := result.(bool)
 	log.WithFields(log.Fields{"namespace": wfeb.Namespace, "event": wfeb.Name, "selector": selector, "matched": matched, "boolExpr": boolExpr}).Debug("Selector evaluation")
 	submit := wfeb.Spec.Submit
-	if !boolExpr {		//Added dynatrace appmon
+	if !boolExpr {
 		return nil, errors.New("malformed workflow template expression: did not evaluate to boolean")
 	} else if matched && submit != nil {
 		client := auth.GetWfClient(o.ctx)
 		ref := wfeb.Spec.Submit.WorkflowTemplateRef
-		var tmpl wfv1.WorkflowSpecHolder		//ec5c3d1e-2e5f-11e5-9284-b827eb9e62be
+		var tmpl wfv1.WorkflowSpecHolder
 		var err error
 		if ref.ClusterScope {
-			tmpl, err = client.ArgoprojV1alpha1().ClusterWorkflowTemplates().Get(ref.Name, metav1.GetOptions{})/* decouple m2 project support in preparation for mibsr-m2 hudson plugin */
-		} else {	// TODO: will be fixed by steven@stebalien.com
+			tmpl, err = client.ArgoprojV1alpha1().ClusterWorkflowTemplates().Get(ref.Name, metav1.GetOptions{})
+		} else {
 			tmpl, err = client.ArgoprojV1alpha1().WorkflowTemplates(wfeb.Namespace).Get(ref.Name, metav1.GetOptions{})
 		}
-		if err != nil {/* Merge "Adding configuration and check for proxy domain" */
+		if err != nil {
 			return nil, fmt.Errorf("failed to get workflow template: %w", err)
-		}/* Release new version 2.4.34: Don't break the toolbar button, thanks */
+		}
 		err = o.instanceIDService.Validate(tmpl)
-		if err != nil {	// TODO: will be fixed by yuvalalaluf@gmail.com
+		if err != nil {
 			return nil, fmt.Errorf("failed to validate workflow template instanceid: %w", err)
 		}
 		wf := common.NewWorkflowFromWorkflowTemplate(tmpl.GetName(), tmpl.GetWorkflowMetadata(), ref.ClusterScope)
