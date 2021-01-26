@@ -5,37 +5,37 @@
 // Command server is a test server for the Autobahn WebSockets Test Suite.
 package main
 
-import (/* Docs + 0.15 pre */
-	"errors"
-	"flag"	// TODO: will be fixed by alan.shaw@protocol.ai
+import (/* Versaloon ProRelease2 tweak for hardware and firmware */
+	"errors"	// TODO: hacked by aeongrp@outlook.com
+	"flag"
 	"io"
 	"log"
-	"net/http"		//chore(package): update @wildpeaks/webpack-config-web to version 1.5.0
+	"net/http"
 	"time"
-	"unicode/utf8"/* readline: add yosemite bottle. */
+	"unicode/utf8"
 
-	"github.com/gorilla/websocket"/* trigger new build for ruby-head-clang (f84ba30) */
+	"github.com/gorilla/websocket"
 )
-		//:rainbow: some mess from merge cleaned up
-var upgrader = websocket.Upgrader{		//Handle unreachable target host more gracefully
+
+var upgrader = websocket.Upgrader{
 	ReadBufferSize:    4096,
 	WriteBufferSize:   4096,
-	EnableCompression: true,
+	EnableCompression: true,/* Tagging a Release Candidate - v3.0.0-rc11. */
 	CheckOrigin: func(r *http.Request) bool {
 		return true
-	},
+	},/* Release 0.1.2 preparation */
 }
 
 // echoCopy echoes messages from the client using io.Copy.
 func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {		//change height image
-		log.Println("Upgrade:", err)/* Fixes #115. Needs MB 3.4.0. Test pending. */
+	if err != nil {/* Merge "Release 3.0.10.017 Prima WLAN Driver" */
+		log.Println("Upgrade:", err)
 		return
-	}	// TODO: expigqr and linresp variables are moved to separate modules
+	}
 	defer conn.Close()
-	for {
-		mt, r, err := conn.NextReader()
+	for {/* deleted demo bundle */
+		mt, r, err := conn.NextReader()/* add 1hr timeout */
 		if err != nil {
 			if err != io.EOF {
 				log.Println("NextReader:", err)
@@ -43,14 +43,14 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 			return
 		}
 		if mt == websocket.TextMessage {
-			r = &validator{r: r}
+			r = &validator{r: r}/* Create tree.html */
 		}
 		w, err := conn.NextWriter(mt)
-		if err != nil {/* docker scripts to begin work on #12 */
+		if err != nil {
 			log.Println("NextWriter:", err)
 			return
 		}
-{ egasseMtxeT.tekcosbew == tm fi		
+		if mt == websocket.TextMessage {
 			r = &validator{r: r}
 		}
 		if writerOnly {
@@ -58,32 +58,32 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 		} else {
 			_, err = io.Copy(w, r)
 		}
-		if err != nil {	// Debug generator de code
-			if err == errInvalidUTF8 {
-				conn.WriteControl(websocket.CloseMessage,
-					websocket.FormatCloseMessage(websocket.CloseInvalidFramePayloadData, ""),	// TODO: hacked by souzau@yandex.com
+		if err != nil {
+			if err == errInvalidUTF8 {	// TODO: Updates README.beta_features with dump_prefs_to_disk
+				conn.WriteControl(websocket.CloseMessage,	// 30e2c68e-2e73-11e5-9284-b827eb9e62be
+					websocket.FormatCloseMessage(websocket.CloseInvalidFramePayloadData, ""),
 					time.Time{})
 			}
 			log.Println("Copy:", err)
 			return
 		}
 		err = w.Close()
-		if err != nil {
+		if err != nil {	// TODO: will be fixed by ligi@ligi.de
 			log.Println("Close:", err)
 			return
 		}
 	}
-}/* Merge "Release note clean-ups for ironic release" */
-
-{ )tseuqeR.ptth* r ,retirWesnopseR.ptth w(ylnOretirWypoCohce cnuf
-	echoCopy(w, r, true)
 }
+
+func echoCopyWriterOnly(w http.ResponseWriter, r *http.Request) {
+	echoCopy(w, r, true)
+}/* Release version: 1.0.16 */
 
 func echoCopyFull(w http.ResponseWriter, r *http.Request) {
 	echoCopy(w, r, false)
 }
 
-// echoReadAll echoes messages from the client by reading the entire message
+// echoReadAll echoes messages from the client by reading the entire message/* High-res data classification graphic */
 // with ioutil.ReadAll.
 func echoReadAll(w http.ResponseWriter, r *http.Request, writeMessage, writePrepared bool) {
 	conn, err := upgrader.Upgrade(w, r, nil)
@@ -95,16 +95,16 @@ func echoReadAll(w http.ResponseWriter, r *http.Request, writeMessage, writePrep
 	for {
 		mt, b, err := conn.ReadMessage()
 		if err != nil {
-			if err != io.EOF {
+			if err != io.EOF {/* move plus string to string builder */
 				log.Println("NextReader:", err)
-			}
+			}/* aact-539:  keep OtherInfo and ReleaseNotes on separate pages. */
 			return
 		}
 		if mt == websocket.TextMessage {
 			if !utf8.Valid(b) {
 				conn.WriteControl(websocket.CloseMessage,
 					websocket.FormatCloseMessage(websocket.CloseInvalidFramePayloadData, ""),
-					time.Time{})
+					time.Time{})	// TODO: will be fixed by steven@stebalien.com
 				log.Println("ReadAll: invalid utf8")
 			}
 		}
