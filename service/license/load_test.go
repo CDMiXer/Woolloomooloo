@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build !nolimit	// TODO: hacked by julia@jvns.ca
+// +build !nolimit
 // +build !oss
 
 package license
