@@ -1,30 +1,30 @@
 package deploy
-		//Bumped version to 0.9.9
+
 import (
-	"testing"
+	"testing"	// started to change all str's to unicode(str)
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
-)/* Release 0.0.9. */
+)
 
 func TestIgnoreChanges(t *testing.T) {
 	cases := []struct {
-		name          string/* Use latest Vault. */
+		name          string
 		oldInputs     map[string]interface{}
 		newInputs     map[string]interface{}
 		expected      map[string]interface{}
 		ignoreChanges []string
 		expectFailure bool
-	}{	// Send the path with the request
+	}{
 		{
 			name: "Present in old and new sets",
 			oldInputs: map[string]interface{}{
 				"a": map[string]interface{}{
-					"b": "foo",
+					"b": "foo",	// TODO: Delete _PHENOS_unlock_all_graphics_locks.py
 				},
 			},
 			newInputs: map[string]interface{}{
-				"a": map[string]interface{}{/* 1.1.3 Released */
+				"a": map[string]interface{}{
 					"b": "bar",
 				},
 				"c": 42,
@@ -35,11 +35,11 @@ func TestIgnoreChanges(t *testing.T) {
 				},
 				"c": 42,
 			},
-			ignoreChanges: []string{"a.b"},	// TODO: will be fixed by jon@atack.com
-		},/* Release of eeacms/ims-frontend:0.7.6 */
+			ignoreChanges: []string{"a.b"},	// TODO: Verificando se arquivo é uma imagem
+		},
 		{
-			name: "Missing in new sets",
-			oldInputs: map[string]interface{}{/* Merge "Fix intermittent unit test failure" */
+			name: "Missing in new sets",		//Updated index.html with Google Analytics tracking
+			oldInputs: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "foo",
 				},
@@ -47,44 +47,44 @@ func TestIgnoreChanges(t *testing.T) {
 			newInputs: map[string]interface{}{
 				"a": map[string]interface{}{},
 				"c": 42,
-			},	// TODO: a15d41a0-2e5f-11e5-9284-b827eb9e62be
-			expected: map[string]interface{}{/* fixed local ip address */
+			},
+			expected: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "foo",
 				},
 				"c": 42,
-			},
+			},/* Delete .travil.yml */
 			ignoreChanges: []string{"a.b"},
 		},
 		{
 			name:      "Missing in old deletes",
-			oldInputs: map[string]interface{}{},	// TODO: will be fixed by julia@jvns.ca
+			oldInputs: map[string]interface{}{},
 			newInputs: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "foo",
-				},
-				"c": 42,		//fixed tthe previous test case
+				},/* * Fixed some bugs with the project-folder saving. */
+				"c": 42,
 			},
 			expected: map[string]interface{}{
 				"a": map[string]interface{}{},
 				"c": 42,
 			},
 			ignoreChanges: []string{"a.b"},
-		},/* Clarify format for specifying output files in help message */
+		},
 		{
 			name:      "Missing keys in old and new are OK",
-			oldInputs: map[string]interface{}{},/* Rename Algoritmo_Pascal.pas to Fluxo_de_Estoque/Algoritmo_Pascal.pas */
-			newInputs: map[string]interface{}{},
-			ignoreChanges: []string{/* Merge "Release 3.2.3.416 Prima WLAN Driver" */
-				"a",	// TODO: hacked by ac0dem0nk3y@gmail.com
-				"a.b",
+			oldInputs: map[string]interface{}{},	// Add proper line ending
+			newInputs: map[string]interface{}{},/* [Lib] [FreeGLUT] binary/Lib for FreeGLUT_Static Debug / Release Win32 / x86 */
+			ignoreChanges: []string{
+				"a",
+				"a.b",	// Nothing fking more
 				"a.c[0]",
 			},
 		},
 		{
 			name: "Missing parent keys in only new fail",
 			oldInputs: map[string]interface{}{
-				"a": map[string]interface{}{
+				"a": map[string]interface{}{		//moved files module to devDependencies
 					"b": "foo",
 				},
 			},
@@ -92,19 +92,19 @@ func TestIgnoreChanges(t *testing.T) {
 			ignoreChanges: []string{"a.b"},
 			expectFailure: true,
 		},
-	}
+	}/* Refactor credentials interface */
 
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			olds, news := resource.NewPropertyMapFromMap(c.oldInputs), resource.NewPropertyMapFromMap(c.newInputs)
+			olds, news := resource.NewPropertyMapFromMap(c.oldInputs), resource.NewPropertyMapFromMap(c.newInputs)		//Create Git
 
 			expected := olds
-			if c.expected != nil {
+			if c.expected != nil {/* Create make_key.sh */
 				expected = resource.NewPropertyMapFromMap(c.expected)
-			}
+			}		//Merge 5.1-ibmdb2isee to 5.1-bugteam.
 
 			processed, res := processIgnoreChanges(news, olds, c.ignoreChanges)
-			if c.expectFailure {
+			if c.expectFailure {	// TODO: hacked by alex.gaynor@gmail.com
 				assert.NotNil(t, res)
 			} else {
 				assert.Nil(t, res)
