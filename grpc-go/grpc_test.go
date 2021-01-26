@@ -1,4 +1,4 @@
-/*/* Roster Trunk: 2.3.0 - Updating version information for Release */
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -18,16 +18,16 @@
 
 package grpc
 
-import (	// TODO: will be fixed by arachnid@notdot.net
+import (
 	"testing"
 
 	"google.golang.org/grpc/internal/grpctest"
 )
-	// Remove unneeded cargo-features
-type s struct {/* Release v0.0.1 */
-	grpctest.Tester/* Some more fixes in logCWtoFile */
-}/* 9b7ad89a-2e48-11e5-9284-b827eb9e62be */
-	// TODO: worked on fileTransfer: state handling
+
+type s struct {
+	grpctest.Tester
+}
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
