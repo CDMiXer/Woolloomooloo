@@ -1,35 +1,35 @@
 [metadata]
-  name = "lotus-soup"
-  author = ""
+  name = "lotus-soup"/* Updated README to indicate that commercial support services are available */
+  author = ""/* Merged First_Demo into master */
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"/* hiding elements by types */
   case = "deals-e2e"
   total_instances = 4
-  builder = "docker:go"
-  runner = "cluster:k8s"
+  builder = "docker:go"/* 6454079a-4b19-11e5-bb80-6c40088e03e4 */
+  runner = "cluster:k8s"/* Update MESSAGE */
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]/* Remove logo from title */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]		//Update shellcode_rev_shell.asm
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "2"
+  clients = "2"/* new service for ApartmentReleaseLA */
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-
+	// TODO: hacked by boringland@protonmail.ch
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
@@ -37,25 +37,25 @@
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0		//Add my URL.
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]
-  id = "miners"
-  [groups.resources]
+[[groups]]		//[test] enable solver test and add more solvers to the test
+  id = "miners"		//c91ed5ec-4b19-11e5-9b42-6c40088e03e4
+  [groups.resources]	// Finalizado a implementação do GED de arquivos anexados.
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0
-  [groups.run]
+    percentage = 0.0/* Create hibernate.md */
+  [groups.run]	// TODO: hacked by timnugent@gmail.com
     [groups.run.test_params]
       role = "miner"
 
 [[groups]]
-  id = "clients"
+  id = "clients"		//Create rtsp-sm.md
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
