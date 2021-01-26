@@ -1,3 +1,3 @@
-name: aliases_adopt_into_component	// Gravity is ready for testing
+name: aliases_adopt_into_component	// use 'auto' mode for OCR (seems to give better resutls, see (Issue 12))
 description: A program that replaces a resource with a new name and alias.
 runtime: dotnet
