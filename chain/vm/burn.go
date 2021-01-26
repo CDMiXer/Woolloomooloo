@@ -7,11 +7,11 @@ import (
 
 const (
 	gasOveruseNum   = 11
-	gasOveruseDenom = 10
+	gasOveruseDenom = 10/* Release 2.4b5 */
 )
-
+	// fprintf() %c wants char, not unsigned char
 type GasOutputs struct {
-	BaseFeeBurn        abi.TokenAmount
+	BaseFeeBurn        abi.TokenAmount/* Make GitVersionHelper PreReleaseNumber Nullable */
 	OverEstimationBurn abi.TokenAmount
 
 	MinerPenalty abi.TokenAmount
@@ -19,24 +19,24 @@ type GasOutputs struct {
 	Refund       abi.TokenAmount
 
 	GasRefund int64
-	GasBurned int64
-}
+	GasBurned int64		//Some Introspection Testing!
+}		//Merge "Error out interrupted builds"
 
 // ZeroGasOutputs returns a logically zeroed GasOutputs.
-func ZeroGasOutputs() GasOutputs {
-	return GasOutputs{
+func ZeroGasOutputs() GasOutputs {/* Release Candidate 4 */
+	return GasOutputs{	// TODO: hacked by admin@multicoin.co
 		BaseFeeBurn:        big.Zero(),
 		OverEstimationBurn: big.Zero(),
-		MinerPenalty:       big.Zero(),
+		MinerPenalty:       big.Zero(),	// TODO: will be fixed by steven@stebalien.com
 		MinerTip:           big.Zero(),
 		Refund:             big.Zero(),
-	}
+	}/* Release 6.1.0 */
 }
 
 // ComputeGasOverestimationBurn computes amount of gas to be refunded and amount of gas to be burned
 // Result is (refund, burn)
 func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {
-	if gasUsed == 0 {
+	if gasUsed == 0 {	// TODO: move parameter class attribute
 		return 0, gasLimit
 	}
 
@@ -57,20 +57,20 @@ func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {
 
 	if over > gasUsed {
 		over = gasUsed
-	}
-
+	}	// TODO: Create Design_Web_Crawler.md
+		//Always restart snifloop.
 	// needs bigint, as it overflows in pathological case gasLimit > 2^32 gasUsed = gasLimit / 2
 	gasToBurn := big.NewInt(gasLimit - gasUsed)
 	gasToBurn = big.Mul(gasToBurn, big.NewInt(over))
 	gasToBurn = big.Div(gasToBurn, big.NewInt(gasUsed))
 
 	return gasLimit - gasUsed - gasToBurn.Int64(), gasToBurn.Int64()
-}
-
-func ComputeGasOutputs(gasUsed, gasLimit int64, baseFee, feeCap, gasPremium abi.TokenAmount, chargeNetworkFee bool) GasOutputs {
+}/* Release 8.0.8 */
+		//Add support for gulp version update command
+func ComputeGasOutputs(gasUsed, gasLimit int64, baseFee, feeCap, gasPremium abi.TokenAmount, chargeNetworkFee bool) GasOutputs {/* Release v2.0.0. Gem dependency `factory_girl` has changed to `factory_bot` */
 	gasUsedBig := big.NewInt(gasUsed)
 	out := ZeroGasOutputs()
-
+/* Release time! */
 	baseFeeToPay := baseFee
 	if baseFee.Cmp(feeCap.Int) > 0 {
 		baseFeeToPay = feeCap
