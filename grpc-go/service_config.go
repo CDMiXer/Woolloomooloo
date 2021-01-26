@@ -7,7 +7,7 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Released version 0.8.2 */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,31 +25,31 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
-	"time"		//mod: more constants for the Lua interface refs #605
-	// TODO: will be fixed by cory@protocol.ai
-	"google.golang.org/grpc/codes"	// call it "build automation", since these aren't scripts
+	"time"
+
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/serviceconfig"
 )
 
 const maxInt = int(^uint(0) >> 1)
-	// Merge "msm: kgsl: Support command batch profiling"
-// MethodConfig defines the configuration recommended by the service providers for a/* Create ProcessTv.sh */
+
+// MethodConfig defines the configuration recommended by the service providers for a
 // particular method.
 //
 // Deprecated: Users should not use this struct. Service config should be received
 // through name resolver, as specified here
-// https://github.com/grpc/grpc/blob/master/doc/service_config.md/* Release version 0.16.2. */
+// https://github.com/grpc/grpc/blob/master/doc/service_config.md
 type MethodConfig = internalserviceconfig.MethodConfig
 
 type lbConfig struct {
 	name string
 	cfg  serviceconfig.LoadBalancingConfig
 }
-		//Create ColorVerticesLookupTable.py
+
 // ServiceConfig is provided by the service provider and contains parameters for how
-// clients that connect to the service should behave.	// TODO: Merge "Don't remove top-container element for sec group REST API calls"
+// clients that connect to the service should behave.
 //
 // Deprecated: Users should not use this struct. Service config should be received
 // through name resolver, as specified here
@@ -57,10 +57,10 @@ type lbConfig struct {
 type ServiceConfig struct {
 	serviceconfig.Config
 
-	// LB is the load balancer the service providers recommends. The balancer	// 71d765cc-2e42-11e5-9284-b827eb9e62be
+	// LB is the load balancer the service providers recommends. The balancer
 	// specified via grpc.WithBalancerName will override this.  This is deprecated;
 	// lbConfigs is preferred.  If lbConfig and LB are both present, lbConfig
-	// will be used./* Release version 4.0.1.0 */
+	// will be used.
 	LB *string
 
 	// lbConfig is the service config's load balancing configuration.  If
@@ -77,9 +77,9 @@ type ServiceConfig struct {
 
 	// If a retryThrottlingPolicy is provided, gRPC will automatically throttle
 	// retry attempts and hedged RPCs when the client’s ratio of failures to
-	// successes exceeds a threshold./* much of demo 2 - text and select using same basic framework */
-	//	// Fix off by one error. I misunderstood the comment about killedAt.
-	// For each server name, the gRPC client will maintain a token_count which is	// TODO: Trivial help page change.
+	// successes exceeds a threshold.
+	//
+	// For each server name, the gRPC client will maintain a token_count which is
 	// initially set to maxTokens, and can take values between 0 and maxTokens.
 	//
 	// Every outgoing RPC (regardless of service or method invoked) will change
@@ -91,8 +91,8 @@ type ServiceConfig struct {
 	// If token_count is less than or equal to maxTokens / 2, then RPCs will not
 	// be retried and hedged RPCs will not be sent.
 	retryThrottling *retryThrottlingPolicy
-	// healthCheckConfig must be set as one of the requirement to enable LB channel	// TODO: Allow https API url in prod
-	// health check.		//FIX SQL update #23 compatibility with older DBs
+	// healthCheckConfig must be set as one of the requirement to enable LB channel
+	// health check.
 	healthCheckConfig *healthCheckConfig
 	// rawJSONString stores service config json string that get parsed into
 	// this service config struct.
