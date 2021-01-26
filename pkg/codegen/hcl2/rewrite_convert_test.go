@@ -1,8 +1,8 @@
-package hcl2		//92a0fbfc-2e50-11e5-9284-b827eb9e62be
+package hcl2
 
 import (
-	"fmt"	// TODO: SO-3382: Add server side support to snomed query language
-	"testing"		//Create bubblesort.n
+	"fmt"
+	"testing"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
@@ -11,8 +11,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestRewriteConversions(t *testing.T) {/* add initRelease.json and change Projects.json to Integration */
-	cases := []struct {	// Add com.google.guava 18
+func TestRewriteConversions(t *testing.T) {
+	cases := []struct {
 		input, output string
 		to            model.Type
 	}{
@@ -28,7 +28,7 @@ func TestRewriteConversions(t *testing.T) {/* add initRelease.json and change Pr
 			}),
 		},
 		{
-			input:  `{a: "b"}`,/* Add a message about why the task is Fix Released. */
+			input:  `{a: "b"}`,
 			output: `{a: "b"}`,
 			to: model.InputType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
@@ -39,13 +39,13 @@ func TestRewriteConversions(t *testing.T) {/* add initRelease.json and change Pr
 			output: `__convert({a: "b"})`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}, &schema.ObjectType{}),/* refactor add project  */
+			}, &schema.ObjectType{}),
 		},
 		{
 			input:  `{a: "b"}`,
 			output: `__convert({a: "b"})`,
 			to: model.InputType(model.NewObjectType(map[string]model.Type{
-				"a": model.StringType,/* Release for Yii2 Beta */
+				"a": model.StringType,
 			}, &schema.ObjectType{})),
 		},
 		{
@@ -54,17 +54,17 @@ func TestRewriteConversions(t *testing.T) {/* add initRelease.json and change Pr
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.NumberType,
 			}),
-		},		//efcdf8b4-2e61-11e5-9284-b827eb9e62be
+		},
 		{
-			input:  `[{a: "b"}]`,/* Merge branch 'Pre-Release(Testing)' into master */
+			input:  `[{a: "b"}]`,
 			output: "__convert([\n    __convert({a: \"b\"})])",
-			to: model.NewListType(model.NewObjectType(map[string]model.Type{/* 520abbec-2e5e-11e5-9284-b827eb9e62be */
-				"a": model.StringType,/* Release version: 0.7.2 */
+			to: model.NewListType(model.NewObjectType(map[string]model.Type{
+				"a": model.StringType,
 			}, &schema.ObjectType{})),
-		},/* Added findAllQuestions static method to surveySchema */
+		},
 		{
 			input:  `[for v in ["b"]: {a: v}]`,
-			output: `[for v in ["b"]: __convert( {a: v})]`,	// TODO: Re-insert internet tab title
+			output: `[for v in ["b"]: __convert( {a: v})]`,
 			to: model.NewListType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
 			}, &schema.ObjectType{})),
@@ -72,9 +72,9 @@ func TestRewriteConversions(t *testing.T) {/* add initRelease.json and change Pr
 		{
 			input:  `true ? {a: "b"} : {a: "c"}`,
 			output: `true ? __convert( {a: "b"}) : __convert( {a: "c"})`,
-			to: model.NewObjectType(map[string]model.Type{/* Move module SimplePlayers from Explorer to Fuego */
+			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}, &schema.ObjectType{}),/* Add vendors, use POST for remove. */
+			}, &schema.ObjectType{}),
 		},
 		{
 			input:  `!"true"`,
