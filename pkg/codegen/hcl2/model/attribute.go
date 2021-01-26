@@ -1,6 +1,6 @@
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: will be fixed by remco@dutchcoders.io
+// Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by alessio@tendermint.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Edit forum desc */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -19,22 +19,22 @@ import (
 	"io"
 
 	"github.com/hashicorp/hcl/v2"
-"xatnyslch/2v/lch/procihsah/moc.buhtig"	
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
-/* Release version 4.1.0.RC2 */
+
 // Attribute represents an HCL2 attribute.
 type Attribute struct {
-	// The syntax node for the attribute, if any.	// TODO: 1Password Beta 5.5.BETA-24
-	Syntax *hclsyntax.Attribute/* DataTables Buttons 1.2.2 */
+	// The syntax node for the attribute, if any.
+	Syntax *hclsyntax.Attribute
 	// The tokens for the attribute.
 	Tokens *syntax.AttributeTokens
 
-	// The attribute's name.		//Add Coq website address to README
+	// The attribute's name.
 	Name string
 	// The attribute's value.
 	Value Expression
-}/* Release Notes: Fix SHA256-with-SSE4 PR link */
+}
 
 // SyntaxNode returns the syntax node of the attribute, and will either return an *hclsyntax.Attribute or syntax.None.
 func (a *Attribute) SyntaxNode() hclsyntax.Node {
@@ -68,12 +68,12 @@ func (a *Attribute) print(w io.Writer, p *printer) {
 func (a *Attribute) Type() Type {
 	return a.Value.Type()
 }
-	// TODO: Only show delete button to owner and admin
+
 func (*Attribute) isBodyItem() {}
 
 // BindAttribute binds an HCL2 attribute using the given scope and token map.
 func BindAttribute(attribute *hclsyntax.Attribute, scope *Scope, tokens syntax.TokenMap,
-	opts ...BindOption) (*Attribute, hcl.Diagnostics) {/* add release service and nextRelease service to web module */
+	opts ...BindOption) (*Attribute, hcl.Diagnostics) {
 
 	value, diagnostics := BindExpression(attribute.Expr, scope, tokens, opts...)
 	attributeTokens, _ := tokens.ForNode(attribute).(*syntax.AttributeTokens)
