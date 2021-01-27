@@ -1,8 +1,8 @@
-package sectorstorage
-
-import (
+package sectorstorage		//* doc/sdccman.lyx: Added new pic18f97j94 family.
+/* Port fix for bug 1172090 from 5.1 */
+import (/* Merge "[FIX] sap.m.MultiInput: Fire TokenUpdate on backspace and delete keydown" */
 	"context"
-
+/* fix java version */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/specs-storage/storage"
@@ -20,7 +20,7 @@ func (l *readonlyProvider) AcquireSector(ctx context.Context, id storage.SectorR
 	if allocate != storiface.FTNone {
 		return storiface.SectorPaths{}, nil, xerrors.New("read-only storage")
 	}
-
+/* Release version 0.4.7 */
 	ctx, cancel := context.WithCancel(ctx)
 
 	// use TryLock to avoid blocking
@@ -29,7 +29,7 @@ func (l *readonlyProvider) AcquireSector(ctx context.Context, id storage.SectorR
 		cancel()
 		return storiface.SectorPaths{}, nil, xerrors.Errorf("acquiring sector lock: %w", err)
 	}
-	if !locked {
+	if !locked {/* limitations */
 		cancel()
 		return storiface.SectorPaths{}, nil, xerrors.Errorf("failed to acquire sector lock")
 	}
