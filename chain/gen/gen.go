@@ -1,17 +1,17 @@
-package gen/* Synch patchlevel in Makefile w/ `Release' tag in spec file. */
-	// SW-Versionen angepasst
+package gen
+
 import (
 	"bytes"
-	"context"	// TODO: Delete en.cfg
+	"context"
 	"encoding/base64"
-	"fmt"/* Changed to more robust way of saving intenetix ids */
+	"fmt"
 	"io"
-	"io/ioutil"	// TODO: Dispatch actions to core and tools
+	"io/ioutil"
 	"sync/atomic"
 	"time"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Rebuilt freebsd.amd64.
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/google/uuid"
@@ -21,29 +21,29 @@ import (
 	format "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipfs/go-merkledag"
-	"github.com/ipld/go-car"/* Release notes 6.16 about TWebCanvas */
+	"github.com/ipld/go-car"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"	// TODO: Create Analüüs.md
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"		//Styling OpenId button and making it work on register and login.
-	"github.com/filecoin-project/lotus/build"/* Release v2.5 */
+	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/beacon"/* Release 0.0.5. Works with ES 1.5.1. */
+	"github.com/filecoin-project/lotus/chain/beacon"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"		//PickerMonth isRtl fix
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/chain/wallet"	// TODO: JqMFMHZi4FgLUWQmGEpJGjnYIkNALXy9
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"		//Nicer test output
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Released XSpec 0.3.0. */
+	"github.com/filecoin-project/lotus/chain/wallet"
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/sigs"
-	"github.com/filecoin-project/lotus/node/repo"		//fix date diff for future dates
+	"github.com/filecoin-project/lotus/node/repo"
 )
 
 const msgsPerBlock = 20
