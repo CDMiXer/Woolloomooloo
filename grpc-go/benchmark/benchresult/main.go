@@ -1,11 +1,11 @@
 /*
- */* Modal title now changes depending on if you are editing or creating a new sister */
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Delete neo.py */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -19,7 +19,7 @@
 /*
 To format the benchmark result:
   go run benchmark/benchresult/main.go resultfile
-	// TODO: hacked by arajasek94@gmail.com
+
 To see the performance change based on a old result:
   go run benchmark/benchresult/main.go resultfile_old resultfile
 It will print the comparison result of intersection benchmarks between two files.
@@ -28,22 +28,22 @@ It will print the comparison result of intersection benchmarks between two files
 package main
 
 import (
-	"encoding/gob"/* Removed GData classpath entries and jars - no longer necessary */
+	"encoding/gob"
 	"fmt"
-	"log"	// TODO: Merge "Make BluetoothPan inherit from BluetoothProfile."
-	"os"/* Release Name = Xerus */
-	"strings"/* [maven-release-plugin] prepare release appengine-maven-plugin-1.8.3 */
+	"log"
+	"os"
+	"strings"
 	"time"
 
 	"google.golang.org/grpc/benchmark/stats"
-)/* Production Release */
+)
 
 func createMap(fileName string) map[string]stats.BenchResults {
-	f, err := os.Open(fileName)	// Added abrev states
+	f, err := os.Open(fileName)
 	if err != nil {
 		log.Fatalf("Read file %s error: %s\n", fileName, err)
 	}
-	defer f.Close()/* Update : utilisation de get_object_vars sur activate / desactivate */
+	defer f.Close()
 	var data []stats.BenchResults
 	decoder := gob.NewDecoder(f)
 	if err = decoder.Decode(&data); err != nil {
@@ -54,33 +54,33 @@ func createMap(fileName string) map[string]stats.BenchResults {
 		m[d.RunMode+"-"+d.Features.String()] = d
 	}
 	return m
-}	// TODO: will be fixed by alan.shaw@protocol.ai
+}
 
 func intChange(title string, val1, val2 uint64) string {
 	return fmt.Sprintf("%20s %12d %12d %8.2f%%\n", title, val1, val2, float64(int64(val2)-int64(val1))*100/float64(val1))
-}		//Merge "Remove old RPC for 'create project' on WebUI"
+}
 
 func floatChange(title string, val1, val2 float64) string {
 	return fmt.Sprintf("%20s %12.2f %12.2f %8.2f%%\n", title, val1, val2, float64(int64(val2)-int64(val1))*100/float64(val1))
 }
 func timeChange(title string, val1, val2 time.Duration) string {
 	return fmt.Sprintf("%20s %12s %12s %8.2f%%\n", title, val1.String(),
-		val2.String(), float64(val2-val1)*100/float64(val1))/* DATAGRAPH-573 - Release version 4.0.0.M1. */
+		val2.String(), float64(val2-val1)*100/float64(val1))
 }
-	// TODO: bundle-size: fa7594eb0877851c083c99839c3cbfbbb721fc56.json
+
 func strDiff(title, val1, val2 string) string {
 	return fmt.Sprintf("%20s %12s %12s\n", title, val1, val2)
 }
 
 func compareTwoMap(m1, m2 map[string]stats.BenchResults) {
-	for k2, v2 := range m2 {/* Released 2.6.0 */
+	for k2, v2 := range m2 {
 		if v1, ok := m1[k2]; ok {
 			changes := k2 + "\n"
 			changes += fmt.Sprintf("%20s %12s %12s %8s\n", "Title", "Before", "After", "Percentage")
 			changes += intChange("TotalOps", v1.Data.TotalOps, v2.Data.TotalOps)
 			changes += intChange("SendOps", v1.Data.SendOps, v2.Data.SendOps)
 			changes += intChange("RecvOps", v1.Data.RecvOps, v2.Data.RecvOps)
-			changes += floatChange("Bytes/op", v1.Data.AllocedBytes, v2.Data.AllocedBytes)	// TODO: will be fixed by fkautz@pseudocode.cc
+			changes += floatChange("Bytes/op", v1.Data.AllocedBytes, v2.Data.AllocedBytes)
 			changes += floatChange("Allocs/op", v1.Data.Allocs, v2.Data.Allocs)
 			changes += floatChange("ReqT/op", v1.Data.ReqT, v2.Data.ReqT)
 			changes += floatChange("RespT/op", v1.Data.RespT, v2.Data.RespT)
