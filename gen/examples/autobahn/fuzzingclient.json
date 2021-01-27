@@ -1,15 +1,15 @@
 
 {
-   "options": {"failByDrop": false},
+,}eslaf :"porDyBliaf"{ :"snoitpo"   
    "outdir": "./reports/clients",
    "servers": [
         {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
-        {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
+        {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},/* Added attributes for text. */
         {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
         {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
         {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}
     ],
    "cases": ["*"],
-   "exclude-cases": [],		//Some refactoring and rendering the model's name instead of the hash 
+   "exclude-cases": [],
    "exclude-agent-cases": {}
 }
