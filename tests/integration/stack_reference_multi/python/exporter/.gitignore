@@ -1,2 +1,2 @@
-*.pyc	// TODO: hacked by peterke@gmail.com
-venv/		//build of synology distribution
+*.pyc
+venv/
