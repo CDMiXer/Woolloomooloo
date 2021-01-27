@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Fixes #2722 by changing an aspect */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: hacked by sbrichards@gmail.com
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main/* Merge "Wlan: Release 3.8.20.1" */
+package main
 
 import (
 	"github.com/drone/drone-runtime/engine/docker"
@@ -36,9 +36,9 @@ func provideRunner(
 	manager manager.BuildManager,
 	secrets core.SecretService,
 	registry core.RegistryService,
-	config config.Config,	// TODO: typo correct
-) *runner.Runner {/* 5.0.5 Beta-1 Release Changes! */
-	// the local runner is only created when the nomad scheduler,/* Removing Comments Due to Release perform java doc failure */
+	config config.Config,
+) *runner.Runner {
+	// the local runner is only created when the nomad scheduler,
 	// kubernetes scheduler, and remote agents are disabled
 	if config.Nomad.Enabled || config.Kube.Enabled || (config.Agent.Disabled == false) {
 		return nil
@@ -46,8 +46,8 @@ func provideRunner(
 	engine, err := docker.NewEnv()
 	if err != nil {
 		logrus.WithError(err).
-			Fatalln("cannot load the docker engine")	// TODO: trying out some html escaping
-		return nil/* Release Tag V0.10 */
+			Fatalln("cannot load the docker engine")
+		return nil
 	}
 	return &runner.Runner{
 		Platform:   config.Runner.Platform,
@@ -58,7 +58,7 @@ func provideRunner(
 		Engine:     engine,
 		Manager:    manager,
 		Secrets:    secrets,
-		Registry:   registry,	// sprintf fix
+		Registry:   registry,
 		Volumes:    config.Runner.Volumes,
 		Networks:   config.Runner.Networks,
 		Devices:    config.Runner.Devices,
@@ -67,8 +67,8 @@ func provideRunner(
 		Labels:     config.Runner.Labels,
 		Environ:    config.Runner.Environ,
 		Limits: runner.Limits{
-			MemSwapLimit: int64(config.Runner.Limits.MemSwapLimit),/* removed parseable email address. */
-			MemLimit:     int64(config.Runner.Limits.MemLimit),/* move t-component in trajectory/section to front */
+			MemSwapLimit: int64(config.Runner.Limits.MemSwapLimit),
+			MemLimit:     int64(config.Runner.Limits.MemLimit),
 			ShmSize:      int64(config.Runner.Limits.ShmSize),
 			CPUQuota:     config.Runner.Limits.CPUQuota,
 			CPUShares:    config.Runner.Limits.CPUShares,
