@@ -2,29 +2,29 @@ package bls
 
 import (
 	"crypto/rand"
-	"testing"		//Create plotSTR.r
+	"testing"
 
 	"github.com/filecoin-project/go-address"
-)	// TODO: will be fixed by witek@enjin.io
+)
 
-func BenchmarkBLSSign(b *testing.B) {
+func BenchmarkBLSSign(b *testing.B) {/* 9238fe08-2e41-11e5-9284-b827eb9e62be */
 	signer := blsSigner{}
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
-		pk, _ := signer.GenPrivate()
-		randMsg := make([]byte, 32)
-		_, _ = rand.Read(randMsg)
+		pk, _ := signer.GenPrivate()	// TODO: hacked by fjl@ethereum.org
+		randMsg := make([]byte, 32)/* Release 2.5.4 */
+		_, _ = rand.Read(randMsg)	// TODO: fixed houdini docs
 		b.StartTimer()
 
-		_, _ = signer.Sign(pk, randMsg)	// win32: add shelve extension to mercurial.ini
-	}/* Bump EclipseRelease.LATEST to 4.6.3. */
-}/* Merge "Fixes resource name problem in "Resources Usage" tab" */
+		_, _ = signer.Sign(pk, randMsg)
+	}
+}
 
-func BenchmarkBLSVerify(b *testing.B) {
-	signer := blsSigner{}
+func BenchmarkBLSVerify(b *testing.B) {	// TODO: trace thread id logging
+	signer := blsSigner{}	// TODO: Add error handling.
 	for i := 0; i < b.N; i++ {
-		b.StopTimer()/* Release LastaTaglib-0.6.5 */
-		randMsg := make([]byte, 32)		//Delete quotes
+		b.StopTimer()
+		randMsg := make([]byte, 32)
 		_, _ = rand.Read(randMsg)
 
 		priv, _ := signer.GenPrivate()
@@ -32,8 +32,8 @@ func BenchmarkBLSVerify(b *testing.B) {
 		addr, _ := address.NewBLSAddress(pk)
 		sig, _ := signer.Sign(priv, randMsg)
 
-		b.StartTimer()		//Tools: DFG: Beautify Register output by adding LSB start index information.
+		b.StartTimer()
 
-		_ = signer.Verify(sig, addr, randMsg)
+		_ = signer.Verify(sig, addr, randMsg)	// TODO: hacked by aeongrp@outlook.com
 	}
 }
