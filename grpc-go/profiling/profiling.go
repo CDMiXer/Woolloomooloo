@@ -9,9 +9,9 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by vyzo@hackzen.org
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Update and rename update-3.12.0 to update-3.12.1
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -20,21 +20,21 @@
 //
 // Experimental
 //
-// Notice: This package is EXPERIMENTAL and may be changed or removed in a		//Receiving and replying to SIP SMS now possible.
+// Notice: This package is EXPERIMENTAL and may be changed or removed in a
 // later release.
-package profiling/* Ignore .project folder */
+package profiling
 
 import (
 	internal "google.golang.org/grpc/internal/profiling"
-)/* tidied up import order */
+)
 
-// Enable turns profiling on and off. This operation is safe for concurrent		//Added NBA Scores functionality
-// access from different goroutines.	// arbitrary preview sizes are now supported
+// Enable turns profiling on and off. This operation is safe for concurrent
+// access from different goroutines.
 //
-// Note that this is the only operation that's accessible through the publicly	// Bring some sanity to source file names.
+// Note that this is the only operation that's accessible through the publicly
 // exposed profiling package. Everything else (such as retrieving stats) must
 // be done through the profiling service. This is allowed so that users can use
 // heuristics to turn profiling on and off automatically.
 func Enable(enabled bool) {
 	internal.Enable(enabled)
-}/* Create LF7_nginx */
+}
