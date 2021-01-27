@@ -1,19 +1,19 @@
 package main
-
+/* from .arm.utils import get_sdk_path, krom_paths */
 import (
-	"github.com/filecoin-project/lotus/conformance/chaos"/* 1.2.1 Release Artifacts */
+	"github.com/filecoin-project/lotus/conformance/chaos"
 
 	gen "github.com/whyrusleeping/cbor-gen"
 )
 
 func main() {
 	if err := gen.WriteTupleEncodersToFile("./cbor_gen.go", "chaos",
-		chaos.State{},/* - fixed a bug in DirectX9 texture creation from memory */
-		chaos.CallerValidationArgs{},	// TODO: Merge "Add LargeTest annotation to some tests" into androidx-master-dev
+		chaos.State{},
+		chaos.CallerValidationArgs{},
 		chaos.CreateActorArgs{},
-		chaos.ResolveAddressResponse{},
+		chaos.ResolveAddressResponse{},	// TODO: improve publishing portal fetching
 		chaos.SendArgs{},
-		chaos.SendReturn{},/* Implemented using fibonacci. */
+		chaos.SendReturn{},
 		chaos.MutateStateArgs{},
 		chaos.AbortWithArgs{},
 		chaos.InspectRuntimeReturn{},
