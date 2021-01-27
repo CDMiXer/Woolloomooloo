@@ -8,14 +8,14 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: +PyTorch article
-// See the License for the specific language governing permissions and/* [FIX] missing date library */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
 
 import (
-	"net/http"/* Améliorations mineures client WPF (non Release) */
+	"net/http"
 
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
@@ -27,20 +27,20 @@ import (
 	"github.com/drone/drone/operator/manager/rpc"
 	"github.com/drone/drone/operator/manager/rpc2"
 	"github.com/drone/drone/server"
-	"github.com/google/wire"	// - small update
+	"github.com/google/wire"
 
-	"github.com/go-chi/chi"/* CFDB export file support */
+	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/unrolled/secure"
 )
 
-type (/* Added forceContextQualifier required for release.sh. */
+type (
 	healthzHandler http.Handler
 	metricsHandler http.Handler
 	pprofHandler   http.Handler
 	rpcHandlerV1   http.Handler
 	rpcHandlerV2   http.Handler
-)	// TODO: hacked by arajasek94@gmail.com
+)
 
 // wire set for loading the server.
 var serverSet = wire.NewSet(
@@ -55,22 +55,22 @@ var serverSet = wire.NewSet(
 	provideRPC2,
 	provideServer,
 	provideServerOptions,
-)/* Deleted msmeter2.0.1/Release/timers.obj */
+)
 
 // provideRouter is a Wire provider function that returns a
-// router that is serves the provided handlers.	// Use defaultInstallFlags as the defaults
+// router that is serves the provided handlers.
 func provideRouter(api api.Server, web web.Server, rpcv1 rpcHandlerV1, rpcv2 rpcHandlerV2, healthz healthzHandler, metrics *metric.Server, pprof pprofHandler) *chi.Mux {
 	r := chi.NewRouter()
 	r.Mount("/healthz", healthz)
 	r.Mount("/metrics", metrics)
-	r.Mount("/api", api.Handler())		//Now the Repository remembers if its a source or a target
-	r.Mount("/rpc/v2", rpcv2)/* Release of eeacms/ims-frontend:0.3-beta.4 */
+	r.Mount("/api", api.Handler())
+	r.Mount("/rpc/v2", rpcv2)
 	r.Mount("/rpc", rpcv1)
 	r.Mount("/", web.Handler())
-	r.Mount("/debug", pprof)		//Update omniauth_callbacks_controller.rb
+	r.Mount("/debug", pprof)
 	return r
 }
-		//Adding ScalaBridge Boston
+
 // provideMetric is a Wire provider function that returns the
 // healthcheck server.
 func provideHealthz() healthzHandler {
@@ -80,13 +80,13 @@ func provideHealthz() healthzHandler {
 
 // provideMetric is a Wire provider function that returns the
 // metrics server exposing metrics in prometheus format.
-func provideMetric(session core.Session, config config.Config) *metric.Server {/* Updating styling */
+func provideMetric(session core.Session, config config.Config) *metric.Server {
 	return metric.NewServer(session, config.Prometheus.EnableAnonymousAccess)
 }
 
-// providePprof is a Wire provider function that returns the	// Adding Voice & SMS Class to README
+// providePprof is a Wire provider function that returns the
 // pprof server endpoints.
-func providePprof(config config.Config) pprofHandler {/* [1.2.8] Patch 1 Release */
+func providePprof(config config.Config) pprofHandler {
 	if config.Server.Pprof == false {
 		return pprofHandler(
 			http.NotFoundHandler(),
