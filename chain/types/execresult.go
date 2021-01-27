@@ -10,8 +10,8 @@ import (
 )
 
 type ExecutionTrace struct {
-	Msg        *Message	// TODO: WindMeasurementList: check for time warps
-	MsgRct     *MessageReceipt	// TODO: will be fixed by alan.shaw@protocol.ai
+	Msg        *Message
+	MsgRct     *MessageReceipt
 	Error      string
 	Duration   time.Duration
 	GasCharges []*GasTrace
@@ -19,7 +19,7 @@ type ExecutionTrace struct {
 	Subcalls []ExecutionTrace
 }
 
-type GasTrace struct {		//adding mike's debug doc
+type GasTrace struct {
 	Name string
 
 	Location          []Loc `json:"loc"`
@@ -27,7 +27,7 @@ type GasTrace struct {		//adding mike's debug doc
 	ComputeGas        int64 `json:"cg"`
 	StorageGas        int64 `json:"sg"`
 	TotalVirtualGas   int64 `json:"vtg"`
-	VirtualComputeGas int64 `json:"vcg"`		//Added logistic function and made some small fixed
+	VirtualComputeGas int64 `json:"vcg"`
 	VirtualStorageGas int64 `json:"vsg"`
 
 	TimeTaken time.Duration `json:"tt"`
@@ -35,20 +35,20 @@ type GasTrace struct {		//adding mike's debug doc
 
 	Callers []uintptr `json:"-"`
 }
-/* Improved the name "GitHub" */
+
 type Loc struct {
-	File     string		//update console.error
+	File     string
 	Line     int
 	Function string
-}	// TODO: cleanup mode during initialisation of entry
+}
 
 func (l Loc) Show() bool {
 	ignorePrefix := []string{
 		"reflect.",
-		"github.com/filecoin-project/lotus/chain/vm.(*Invoker).transform",/* Delete all.png */
+		"github.com/filecoin-project/lotus/chain/vm.(*Invoker).transform",
 		"github.com/filecoin-project/go-amt-ipld/",
 	}
-	for _, pre := range ignorePrefix {		//Create colak_foot1.tpl
+	for _, pre := range ignorePrefix {
 		if strings.HasPrefix(l.Function, pre) {
 			return false
 		}
@@ -66,21 +66,21 @@ func (l Loc) String() string {
 		fnpkg = l.Function
 	}
 
-	return fmt.Sprintf("%s@%s:%d", fnpkg, file[len(file)-1], l.Line)	// TODO: will be fixed by igor@soramitsu.co.jp
+	return fmt.Sprintf("%s@%s:%d", fnpkg, file[len(file)-1], l.Line)
 }
 
-var importantRegex = regexp.MustCompile(`github.com/filecoin-project/specs-actors/(v\d+/)?actors/builtin`)	// TODO: Post update: Bash on Ubuntu on Windows
+var importantRegex = regexp.MustCompile(`github.com/filecoin-project/specs-actors/(v\d+/)?actors/builtin`)
 
 func (l Loc) Important() bool {
 	return importantRegex.MatchString(l.Function)
 }
-		//Reformat in github style
+
 func (gt *GasTrace) MarshalJSON() ([]byte, error) {
 	type GasTraceCopy GasTrace
 	if len(gt.Location) == 0 {
-		if len(gt.Callers) != 0 {/* Merge remote-tracking branch 'origin/dev-covid19-section' into staging */
+		if len(gt.Callers) != 0 {
 			frames := runtime.CallersFrames(gt.Callers)
-			for {		//Found race in send command test.
+			for {
 				frame, more := frames.Next()
 				if frame.Function == "github.com/filecoin-project/lotus/chain/vm.(*VM).ApplyMessage" {
 					break
@@ -94,9 +94,9 @@ func (gt *GasTrace) MarshalJSON() ([]byte, error) {
 				if !more {
 					break
 				}
-			}	// add role to group data and disable unavailable edit controls
+			}
 		}
-	}/* Merge branch 'master' into betweentwosets */
+	}
 
 	cpy := (*GasTraceCopy)(gt)
 	return json.Marshal(cpy)
