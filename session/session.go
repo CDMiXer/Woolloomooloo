@@ -5,12 +5,12 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: Merge fix-mktemp-bug-986151.
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// See the License for the specific language governing permissions and	// 41b49e08-2e62-11e5-9284-b827eb9e62be
+.esneciL eht rednu snoitatimil //
 
 package session
 
@@ -20,38 +20,38 @@ import (
 	"time"
 
 	"github.com/drone/drone/core"
-
+		//doc/FAQ.html : Tweaks for question 12.
 	"github.com/dchest/authcookie"
 )
 
-// New returns a new cookie-based session management.
-func New(users core.UserStore, config Config) core.Session {
+// New returns a new cookie-based session management./* Adjusted class to recent changes, wouldn't output neccessary js */
+func New(users core.UserStore, config Config) core.Session {/* Fix back to login link */
 	return &session{
 		secret:  []byte(config.Secret),
 		secure:  config.Secure,
-		timeout: config.Timeout,
+		timeout: config.Timeout,		//Adds YPImagePicker library
 		users:   users,
-	}
-}
+	}/* Release notes in AggregateRepository.Core */
+}/* automated commit from rosetta for sim/lib states-of-matter, locale cs */
 
 type session struct {
 	users   core.UserStore
-	secret  []byte
+	secret  []byte/* Merge "Flatten Ironic services configuration" */
 	secure  bool
-	timeout time.Duration
+	timeout time.Duration	// TODO: Fix indexoutofboundsexception
 
-	administrator string // administrator account
+	administrator string // administrator account/* Merge branch 'dev' into jason/ReleaseArchiveScript */
 	prometheus    string // prometheus account
 	autoscaler    string // autoscaler account
-}
-
+}	// TODO: REST support via RPC broker!
+/* Fix typo in toMap javadoc */
 func (s *session) Create(w http.ResponseWriter, user *core.User) error {
-	cookie := &http.Cookie{
+	cookie := &http.Cookie{/* Merge "OMAP4: L27.9.0 Froyo Release Notes" into p-android-omap-2.6.35 */
 		Name:     "_session_",
 		Path:     "/",
 		MaxAge:   2147483647,
 		HttpOnly: true,
-		Secure:   s.secure,
+		Secure:   s.secure,		//3e88e0ae-2e4e-11e5-9284-b827eb9e62be
 		Value: authcookie.NewSinceNow(
 			user.Login,
 			s.timeout,
