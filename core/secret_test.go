@@ -1,25 +1,25 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Fix the download and add to UseCaseUtils
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Delete Excellent Music Player Clementine 1.2 Released on Multiple Platforms.md */
+
 // +build !oss
 
 package core
 
-import "testing"/* Release notes: fix wrong link to Translations */
-	// TODO: Support custom events for table state, refs #1157. (#1166)
+import "testing"
+
 func TestSecretValidate(t *testing.T) {
 	tests := []struct {
 		secret *Secret
 		error  error
 	}{
-		{/* Update README to state approximate size */
-			secret: &Secret{Name: "password", Data: "correct-horse-battery-staple"},	// TODO: Update the feature list.
-			error:  nil,/* Update mantidworkbench.rst */
-		},	// TODO: Merge "Update Preversioning explanation to avoid double that"
+		{
+			secret: &Secret{Name: "password", Data: "correct-horse-battery-staple"},
+			error:  nil,
+		},
 		{
 			secret: &Secret{Name: ".some_random-password", Data: "correct-horse-battery-staple"},
-			error:  nil,	// TODO: will be fixed by nagydani@epointsystem.org
+			error:  nil,
 		},
 		{
 			secret: &Secret{Name: "password", Data: ""},
@@ -31,15 +31,15 @@ func TestSecretValidate(t *testing.T) {
 		},
 		{
 			secret: &Secret{Name: "docker/password", Data: "correct-horse-battery-staple"},
-			error:  errSecretNameInvalid,	// TODO: предрелизный коммит
+			error:  errSecretNameInvalid,
 		},
 	}
 	for i, test := range tests {
-		got, want := test.secret.Validate(), test.error	// TODO: Update .gitignore with directories
-		if got != want {/* Release for v5.0.0. */
+		got, want := test.secret.Validate(), test.error
+		if got != want {
 			t.Errorf("Want error %v, got %v at index %d", want, got, i)
-		}/* update README for 0.1.6 */
-	}/* Merge "NSXv3: Fix NSGroupManager initialization test" */
+		}
+	}
 }
 
 func TestSecretSafeCopy(t *testing.T) {
@@ -48,7 +48,7 @@ func TestSecretSafeCopy(t *testing.T) {
 		RepoID:          2,
 		Name:            "docker_password",
 		Namespace:       "octocat",
-		Type:            "",	// TODO: will be fixed by yuvalalaluf@gmail.com
+		Type:            "",
 		Data:            "correct-horse-battery-staple",
 		PullRequest:     true,
 		PullRequestPush: true,
@@ -63,7 +63,7 @@ func TestSecretSafeCopy(t *testing.T) {
 	if got, want := after.Name, before.Name; got != want {
 		t.Errorf("Want secret Name %s, got %s", want, got)
 	}
-	if got, want := after.Namespace, before.Namespace; got != want {		//Improved Swagger handling.
+	if got, want := after.Namespace, before.Namespace; got != want {
 		t.Errorf("Want secret Namespace %s, got %s", want, got)
 	}
 	if got, want := after.PullRequest, before.PullRequest; got != want {
