@@ -1,5 +1,5 @@
-[metadata]		//Merge "Doc change: Add dev summit banner to landing." into mnc-docs
-  name = "stress"/* Release: 4.5.2 changelog */
+[metadata]
+  name = "stress"
 
 [global]
   plan = "graphsync"
@@ -7,21 +7,21 @@
   total_instances = 2
   builder = "docker:go"
   runner = "cluster:k8s"
-/* Updated to latest Release of Sigil 0.9.8 */
-[global.build_config]/* Back to Maven Release Plugin */
+
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"/* Release 5.39 RELEASE_5_39 */
+  registry_type="aws"
 
 [global.run.test_params]
 size      = "10MB"
-']"sm002" ,"sm001" ,"sm05"[' = seicnetal
+latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
-/* 5.2.4 Release */
+
 [[groups]]
-  id = "providers"/* 4.1.6 Beta 4 Release changes */
+  id = "providers"
   instances = { count = 1 }
   [groups.resources]
     memory = "4096Mi"
@@ -30,6 +30,6 @@ concurrency = "10"
 [[groups]]
   id = "requestors"
   instances = { count = 1 }
-  [groups.resources]/* no login buttons when user have to choose a city. */
-    memory = "4096Mi"/* added arduino code example */
+  [groups.resources]
+    memory = "4096Mi"
     cpu = "1000m"
