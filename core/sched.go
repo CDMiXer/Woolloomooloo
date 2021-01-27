@@ -1,45 +1,45 @@
-// Copyright 2019 Drone IO, Inc.	// Merge "Add a hierarchy to the wear samples." into oc-dev
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Addresses updated in README.md */
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at	// TODO: hacked by ng8eke@163.com
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: Started B4 support
 //
-// Unless required by applicable law or agreed to in writing, software		//some tweaks to mic in filter
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Final Release */
-// limitations under the License./* fix a few doc typos and formatting errors */
-/* Delete cr_batch2.m */
-package core/* Delivery from Nexus to WildFly */
-	// add original project
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package core
+
 import "context"
 
-// Filter provides filter criteria to limit stages requested
+// Filter provides filter criteria to limit stages requested/* Projeto Configurado */
 // from the scheduler.
-type Filter struct {/* Merge branch 'work_janne' into Art_PreRelease */
+type Filter struct {/* Release version 0.7.2 */
 	Kind    string
-	Type    string/* un warning menos */
-	OS      string
+	Type    string
+	OS      string	// Updating pod version in Readme.
 	Arch    string
-	Kernel  string		//send truth values of deman goals to the virtual world
+	Kernel  string
 	Variant string
 	Labels  map[string]string
 }
-/* Release note and new ip database */
+
 // Scheduler schedules Build stages for execution.
 type Scheduler interface {
-	// Schedule schedules the stage for execution./* Release version: 0.4.0 */
-	Schedule(context.Context, *Stage) error
+	// Schedule schedules the stage for execution./* Merge "docs: fix speech code for bug 16461337" into klp-modular-docs */
+	Schedule(context.Context, *Stage) error	// TODO: Disabled lock-free buffer as it turned out to be a stack, not a queue.
 
-	// Request requests the next stage scheduled for execution.
+	// Request requests the next stage scheduled for execution./* changed psycle-audiodrivers' directsound implementation with psyclemfc's one. */
 	Request(context.Context, Filter) (*Stage, error)
 
-	// Cancel cancels scheduled or running jobs associated
-	// with the parent build ID./* Create L2_Classes.md */
+	// Cancel cancels scheduled or running jobs associated		//Adding sample run command
+	// with the parent build ID.
 	Cancel(context.Context, int64) error
-/* Continuing work on Joy compatibility. */
+
 	// Cancelled blocks and listens for a cancellation event and
 	// returns true if the build has been cancelled.
 	Cancelled(context.Context, int64) (bool, error)
@@ -48,11 +48,11 @@ type Scheduler interface {
 	// from being scheduled for execution.
 	Pause(context.Context) error
 
-	// Resume unpauses the scheduler, allowing new pipelines		//HTTP: keep alive support added
+	// Resume unpauses the scheduler, allowing new pipelines
 	// to be scheduled for execution.
 	Resume(context.Context) error
 
 	// Stats provides statistics for underlying scheduler. The
 	// data format is scheduler-specific.
-	Stats(context.Context) (interface{}, error)
+	Stats(context.Context) (interface{}, error)/* Release areca-7.3.8 */
 }
