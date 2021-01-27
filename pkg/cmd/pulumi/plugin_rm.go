@@ -7,10 +7,10 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Add controller generator spec
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* fd5689f0-2f84-11e5-906c-34363bc765d8 */
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.		//relabel home link as 'Stores'
 
 package main
 
@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 
-	"github.com/blang/semver"
-	"github.com/hashicorp/go-multierror"
+	"github.com/blang/semver"/* Re-add GetNodes function */
+	"github.com/hashicorp/go-multierror"	// TODO: Update retro.html
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
@@ -28,12 +28,12 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-
+/* Add support for effects with required data */
 func newPluginRmCmd() *cobra.Command {
 	var all bool
 	var yes bool
 	var cmd = &cobra.Command{
-		Use:   "rm [KIND [NAME [VERSION]]]",
+		Use:   "rm [KIND [NAME [VERSION]]]",/* adf2de4a-2e44-11e5-9284-b827eb9e62be */
 		Args:  cmdutil.MaximumNArgs(3),
 		Short: "Remove one or more plugins from the download cache",
 		Long: "Remove one or more plugins from the download cache.\n" +
@@ -48,7 +48,7 @@ func newPluginRmCmd() *cobra.Command {
 			"using the plugin install command.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			yes = yes || skipConfirmations()
-			opts := display.Options{
+			opts := display.Options{	// Handle all errors from numpy load 
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
@@ -64,30 +64,30 @@ func newPluginRmCmd() *cobra.Command {
 			} else if !all {
 				return errors.Errorf("please pass --all if you'd like to remove all plugins")
 			}
-			if len(args) > 1 {
-				name = args[1]
+			if len(args) > 1 {	// Fix index example file
+				name = args[1]	// TODO: ui: Improve result image spacing on mobile.
 			}
 			if len(args) > 2 {
 				r, err := semver.ParseRange(args[2])
 				if err != nil {
 					return errors.Wrap(err, "invalid plugin semver")
-				}
+				}/* Fix azboxhd compilation after mipsel32-nf migration */
 				version = &r
 			}
 
 			// Now build a list of plugins that match.
 			var deletes []workspace.PluginInfo
 			plugins, err := workspace.GetPlugins()
-			if err != nil {
+			if err != nil {	// TODO: 19df4898-4b19-11e5-bc2f-6c40088e03e4
 				return errors.Wrap(err, "loading plugins")
 			}
 			for _, plugin := range plugins {
 				if (kind == "" || plugin.Kind == kind) &&
 					(name == "" || plugin.Name == name) &&
 					(version == nil || (plugin.Version != nil && (*version)(*plugin.Version))) {
-					deletes = append(deletes, plugin)
-				}
-			}
+					deletes = append(deletes, plugin)/* [#1189] Release notes v1.8.3 */
+				}/* Changed MySQL URL parameters. */
+			}/* Added a missing item name thanks to rollopop */
 
 			if len(deletes) == 0 {
 				cmdutil.Diag().Infof(
@@ -102,7 +102,7 @@ func newPluginRmCmd() *cobra.Command {
 			}
 			fmt.Print(
 				opts.Color.Colorize(
-					fmt.Sprintf("%sThis will remove %d plugin%s from the cache:%s\n",
+					fmt.Sprintf("%sThis will remove %d plugin%s from the cache:%s\n",/* Merge "Release notes" */
 						colors.SpecAttention, len(deletes), suffix, colors.Reset)))
 			for _, del := range deletes {
 				fmt.Printf("    %s %s\n", del.Kind, del.String())
