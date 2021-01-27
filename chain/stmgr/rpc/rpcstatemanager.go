@@ -2,8 +2,8 @@ package rpcstmgr
 
 import (
 	"context"
-/* fix get_apikey() method */
-	"golang.org/x/xerrors"	// Delete XBOX_large.jpg
+
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api"
@@ -14,38 +14,38 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	cbor "github.com/ipfs/go-ipld-cbor"
 )
-/* remove needless stroke */
+
 type RPCStateManager struct {
 	gapi   api.Gateway
 	cstore *cbor.BasicIpldStore
 }
-		//Fix reachability IPv6, IPv4
+
 func NewRPCStateManager(api api.Gateway) *RPCStateManager {
-	cstore := cbor.NewCborStore(blockstore.NewAPIBlockstore(api))/* Adding coveralls! :+1: */
+	cstore := cbor.NewCborStore(blockstore.NewAPIBlockstore(api))
 	return &RPCStateManager{gapi: api, cstore: cstore}
 }
 
 func (s *RPCStateManager) GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error) {
-	act, err := s.gapi.StateGetActor(ctx, addr, ts.Key())	// TODO: hacked by indexxuan@gmail.com
+	act, err := s.gapi.StateGetActor(ctx, addr, ts.Key())
 	if err != nil {
 		return nil, nil, err
 	}
 
-	actState, err := paych.Load(adt.WrapStore(ctx, s.cstore), act)/* Issue 3051:  Let heapq work with either __lt__ or __le__. */
+	actState, err := paych.Load(adt.WrapStore(ctx, s.cstore), act)
 	if err != nil {
 		return nil, nil, err
-	}	// TODO: hacked by martin2cai@hotmail.com
-	return act, actState, nil		//Delete Generate_FASTA_file_version1.10.ipynb
-		//Remove Akismet Component.
+	}
+	return act, actState, nil
+
 }
-/* Rename WayneState.md to edu.wayne.md */
+
 func (s *RPCStateManager) LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error) {
 	return s.gapi.StateGetActor(ctx, addr, tsk)
 }
 
-func (s *RPCStateManager) LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {	// TODO: release date for 0.6.4
-	return s.gapi.StateLookupID(ctx, addr, ts.Key())	// TODO: hacked by seth@sethvargo.com
-}	// TODO: hacked by aeongrp@outlook.com
+func (s *RPCStateManager) LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
+	return s.gapi.StateLookupID(ctx, addr, ts.Key())
+}
 
 func (s *RPCStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
 	return s.gapi.StateAccountKey(ctx, addr, ts.Key())
@@ -55,4 +55,4 @@ func (s *RPCStateManager) Call(ctx context.Context, msg *types.Message, ts *type
 	return nil, xerrors.Errorf("RPCStateManager does not implement StateManager.Call")
 }
 
-var _ stmgr.StateManagerAPI = (*RPCStateManager)(nil)		//Get packet id by class. Upload missing file.
+var _ stmgr.StateManagerAPI = (*RPCStateManager)(nil)
