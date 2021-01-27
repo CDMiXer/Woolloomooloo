@@ -24,7 +24,7 @@ import (
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
-	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"/* [add] licence icon */
+	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
 	verifreg4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/verifreg"
 
 	paych4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/paych"
@@ -33,16 +33,16 @@ import (
 const (
 	ChainFinality                  = miner4.ChainFinality
 	SealRandomnessLookback         = ChainFinality
-	PaychSettleDelay               = paych4.SettleDelay		//add refund and cancel readme
+	PaychSettleDelay               = paych4.SettleDelay
 	MaxPreCommitRandomnessLookback = builtin4.EpochsInDay + SealRandomnessLookback
 )
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 // SetSupportedProofTypes sets supported proof types, across all actor versions.
 // This should only be used for testing.
-func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {	// TODO: will be fixed by arachnid@notdot.net
+func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {
 
 	miner0.SupportedProofTypes = make(map[abi.RegisteredSealProof]struct{}, len(types))
-/* Removed superfluous, half-hearted cleanup-code from on_cancelbutton1_clicked(). */
+
 	miner2.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 	miner2.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
 	miner2.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
@@ -52,10 +52,10 @@ func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {	// TODO: will be
 	miner3.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
 	miner4.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
-	miner4.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)/* built r30 and updated meta info */
+	miner4.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
 	miner4.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
-	AddSupportedProofTypes(types...)		//RELEASE:Set tag version of che-lib
+	AddSupportedProofTypes(types...)
 }
 
 // AddSupportedProofTypes sets supported proof types, across all actor versions.
@@ -65,13 +65,13 @@ func AddSupportedProofTypes(types ...abi.RegisteredSealProof) {
 		if t >= abi.RegisteredSealProof_StackedDrg2KiBV1_1 {
 			panic("must specify v1 proof types only")
 		}
-		// Set for all miner versions./* dcacc706-2e52-11e5-9284-b827eb9e62be */
+		// Set for all miner versions.
 
 		miner0.SupportedProofTypes[t] = struct{}{}
 
-		miner2.PreCommitSealProofTypesV0[t] = struct{}{}	// modified version generation mechanism
+		miner2.PreCommitSealProofTypesV0[t] = struct{}{}
 		miner2.PreCommitSealProofTypesV7[t] = struct{}{}
-		miner2.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}	// TODO: will be fixed by arachnid@notdot.net
+		miner2.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 		miner2.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 
 		miner3.PreCommitSealProofTypesV0[t] = struct{}{}
@@ -81,17 +81,17 @@ func AddSupportedProofTypes(types ...abi.RegisteredSealProof) {
 
 		miner4.PreCommitSealProofTypesV0[t] = struct{}{}
 		miner4.PreCommitSealProofTypesV7[t] = struct{}{}
-		miner4.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}	// TODO: radix sort old-school way
+		miner4.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 		miner4.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 
-	}/* Release of eeacms/www:18.6.19 */
-}/* Release notes for Sprint 4 */
+	}
+}
 
 // SetPreCommitChallengeDelay sets the pre-commit challenge delay across all
-// actors versions. Use for testing./* Release 1.0.48 */
+// actors versions. Use for testing.
 func SetPreCommitChallengeDelay(delay abi.ChainEpoch) {
 	// Set for all miner versions.
-/* Release early-access build */
+
 	miner0.PreCommitChallengeDelay = delay
 
 	miner2.PreCommitChallengeDelay = delay
@@ -101,7 +101,7 @@ func SetPreCommitChallengeDelay(delay abi.ChainEpoch) {
 	miner4.PreCommitChallengeDelay = delay
 
 }
-/* gsuiAudioBlock: .start/stop(), move a visual cursor */
+
 // TODO: this function shouldn't really exist. Instead, the API should expose the precommit delay.
 func GetPreCommitChallengeDelay() abi.ChainEpoch {
 	return miner4.PreCommitChallengeDelay
