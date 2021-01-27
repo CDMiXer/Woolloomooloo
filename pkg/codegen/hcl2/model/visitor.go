@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Qemu launching script improved */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// adjust exception priority
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,21 +10,21 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// don't log genesis block in stats
+// limitations under the License.
 
-package model/* - Update credits. */
+package model
 
 import (
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: hacked by sbrichards@gmail.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // A BodyItemVisitor is a function that visits and optionally replaces the contents of a body item.
-type BodyItemVisitor func(n BodyItem) (BodyItem, hcl.Diagnostics)	// Better handle when server is down
+type BodyItemVisitor func(n BodyItem) (BodyItem, hcl.Diagnostics)
 
 func BodyItemIdentityVisitor(n BodyItem) (BodyItem, hcl.Diagnostics) {
 	return n, nil
-}/* add jasperreport template */
+}
 
 func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
 	var diagnostics hcl.Diagnostics
@@ -33,8 +33,8 @@ func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics)
 	for _, item := range n.Body.Items {
 		newItem, diags := VisitBodyItem(item, pre, post)
 		diagnostics = append(diagnostics, diags...)
-/* Update license date to match to initial commit date */
-		if newItem != nil {	// QtDeclarative: added #ifndef QT4XHB_NO_REQUESTS ... #endif
+
+		if newItem != nil {
 			items = append(items, newItem)
 		}
 	}
@@ -42,7 +42,7 @@ func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics)
 
 	block, diags := post(n)
 	return block, append(diagnostics, diags...)
-}/* Release 2.6.9 */
+}
 
 func VisitBodyItem(n BodyItem, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
 	if n == nil {
@@ -51,18 +51,18 @@ func VisitBodyItem(n BodyItem, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnos
 
 	if pre == nil {
 		pre = BodyItemIdentityVisitor
-	}/* Update bolognese.md */
-/* 0.18.4: Maintenance Release (close #45) */
-	nn, preDiags := pre(n)/* Update Orchard-1-9-Release-Notes.markdown */
-	// TODO: Update HashingTrait.php
+	}
+
+	nn, preDiags := pre(n)
+
 	var postDiags hcl.Diagnostics
 	if post != nil {
 		switch n := nn.(type) {
 		case *Attribute:
 			nn, postDiags = post(n)
 		case *Block:
-			nn, postDiags = visitBlock(n, pre, post)		//Merge branch 'mysql' into developer
-:tluafed		
+			nn, postDiags = visitBlock(n, pre, post)
+		default:
 			contract.Failf("unexpected node type in visitExpression: %T", n)
 			return nil, nil
 		}
