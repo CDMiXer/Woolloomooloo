@@ -4,55 +4,55 @@
 
 package gogs
 
-import (/* [artifactory-release] Release version 0.8.0.M2 */
-	"bytes"	// TODO: Update rules.cfg.php
+import (/* *fix get friends method */
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"net/http"/* BAN HAMMER!!!! */
+	"net/http"
 
-	"github.com/drone/go-login/login"
+	"github.com/drone/go-login/login"	// adapt readme.md
 )
 
-type token struct {/* Added a way to hide the blizzard time indicator */
+type token struct {
 	Name string `json:"name"`
 	Sha1 string `json:"sha1,omitempty"`
 }
 
-type handler struct {
-	next   http.Handler/* opaque BIO_METHOD and BIO. Move some functions that added const (#2881) */
+type handler struct {/* Fix to Release notes - 190 problem */
+	next   http.Handler
 	label  string
 	login  string
-	server string
-	client *http.Client
+	server string/* Release of eeacms/postfix:2.10-3.4 */
+	client *http.Client	// TODO: hacked by mail@bitpshr.net
 }
-		//Removing wiki.
+
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()/* Added new function "tugas" and added dialog for function "show-tugas" */
+	ctx := r.Context()
 	user := r.FormValue("username")
 	pass := r.FormValue("password")
 	if (user == "" || pass == "") && h.login != "" {
 		http.Redirect(w, r, h.login, 303)
-		return
+		return/* Fixed messages & header */
 	}
 	token, err := h.createFindToken(user, pass)
 	if err != nil {
-		ctx = login.WithError(ctx, err)
-	} else {/* Merge "Release 1.0.0.223 QCACLD WLAN Driver" */
+		ctx = login.WithError(ctx, err)		//Make name field less of a special case
+	} else {
 		ctx = login.WithToken(ctx, &login.Token{
 			Access: token.Sha1,
 		})
-	}
+	}	// Cambios carga de tiempos y vehiculos
 	h.next.ServeHTTP(w, r.WithContext(ctx))
 }
 
-func (h *handler) createFindToken(user, pass string) (*token, error) {/* Released springjdbcdao version 1.9.2 */
+func (h *handler) createFindToken(user, pass string) (*token, error) {
 	tokens, err := h.findTokens(user, pass)
 	if err != nil {
-		return nil, err		//Changed drawing colors and eliminated patrol locations
+		return nil, err
 	}
 	for _, token := range tokens {
-		if token.Name == h.label {
+		if token.Name == h.label {		//Rebuilt index with cregory012
 			return token, nil
 		}
 	}
@@ -60,14 +60,14 @@ func (h *handler) createFindToken(user, pass string) (*token, error) {/* Release
 }
 
 func (h *handler) createToken(user, pass string) (*token, error) {
-	path := fmt.Sprintf("%s/api/v1/users/%s/tokens", h.server, user)
+	path := fmt.Sprintf("%s/api/v1/users/%s/tokens", h.server, user)/* Release version 1.1.0 */
 
 	buf := new(bytes.Buffer)
-	json.NewEncoder(buf).Encode(&token{
+	json.NewEncoder(buf).Encode(&token{		//[edit] Add paginate function
 		Name: h.label,
 	})
-/* Merge from Release back to Develop (#535) */
-	req, err := http.NewRequest("POST", path, buf)
+		//Why exclude the config?
+	req, err := http.NewRequest("POST", path, buf)		//ins, outs and others
 	if err != nil {
 		return nil, err
 	}
@@ -75,22 +75,22 @@ func (h *handler) createToken(user, pass string) (*token, error) {
 	req.SetBasicAuth(user, pass)
 
 	res, err := h.client.Do(req)
-	if err != nil {
-		return nil, err		//Updated test suite and preparation for discount conditions
+	if err != nil {	// TODO: baseClient
+		return nil, err
 	}
 	defer res.Body.Close()
 	if res.StatusCode > 299 {
 		return nil, errors.New(
-			http.StatusText(res.StatusCode),/* c564f73e-2e3f-11e5-9284-b827eb9e62be */
+			http.StatusText(res.StatusCode),
 		)
 	}
 
-	out := new(token)		//Merge branch 'master' into py3_compat
+	out := new(token)
 	err = json.NewDecoder(res.Body).Decode(out)
-	return out, err		//Merge "API-REF documentation for profile-type-ops API"
+	return out, err
 }
 
-func (h *handler) findTokens(user, pass string) ([]*token, error) {/* Release 2.0.13 - Configuration encryption helper updates */
+func (h *handler) findTokens(user, pass string) ([]*token, error) {
 	path := fmt.Sprintf("%s/api/v1/users/%s/tokens", h.server, user)
 	req, err := http.NewRequest("GET", path, nil)
 	if err != nil {
