@@ -2,58 +2,58 @@ package postgres
 
 import (
 	"database/sql"
-)/* Release v0.2.2.1 */
-/* Release 2.7.1 */
+)
+
 var migrations = []struct {
 	name string
-	stmt string/* unicorn worker killer */
+	stmt string		//Fix typo on the performance test guide
 }{
-	{	// TODO: will be fixed by alessio@tendermint.com
-		name: "create-table-users",
-		stmt: createTableUsers,
+	{	// TODO: hacked by igor@soramitsu.co.jp
+		name: "create-table-users",	// Automatic changelog generation for PR #56460 [ci skip]
+		stmt: createTableUsers,/* Merge "xenapi: add username to vncviewer command" */
 	},
 	{
 		name: "create-table-repos",
-		stmt: createTableRepos,
+		stmt: createTableRepos,	// TODO: hacked by ligi@ligi.de
 	},
 	{
-		name: "alter-table-repos-add-column-no-fork",/* Merge "Add checking changePassword None in _action_change_password(v2)" */
+		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",/* pf is not a hit */
-		stmt: alterTableReposAddColumnNoPulls,/* Add atom reference */
+		name: "alter-table-repos-add-column-no-pulls",
+		stmt: alterTableReposAddColumnNoPulls,/* Released 1.1.14 */
 	},
-	{
+	{	// 98c8901c-2e6e-11e5-9284-b827eb9e62be
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},
+	},/* Updating README for `find` notes */
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},	// TODO: will be fixed by ligi@ligi.de
+	},
 	{
-		name: "create-table-perms",/* upload Leetcode_generate-parentheses.cpp */
+		name: "create-table-perms",	// TODO: Merge branch 'master' into dependabot/nuget/MSTest.TestFramework-1.4.0
 		stmt: createTablePerms,
 	},
-	{
-		name: "create-index-perms-user",
-		stmt: createIndexPermsUser,
+	{/* Release of eeacms/forests-frontend:1.6.4.5 */
+		name: "create-index-perms-user",	// TODO: rev 825140
+		stmt: createIndexPermsUser,	// Alpha for objects
 	},
 	{
-		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,
-	},
-	{
+		name: "create-index-perms-repo",/* Add the posibility to remove the ConsoleReaders. */
+		stmt: createIndexPermsRepo,	// TODO: Create cachematrix.R
+	},	// TODO: Clarified option merging
+	{	// TODO: hacked by martin2cai@hotmail.com
 		name: "create-table-builds",
-		stmt: createTableBuilds,/* Modificacion de CRUD de cata y roles. */
-	},/* rename itemset to chart */
-	{	// TODO: hacked by sbrichards@gmail.com
+		stmt: createTableBuilds,
+	},
+	{
 		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
 	},
-	{/* Moved persistence.xml to resources dir. Maybe a fix. */
-		name: "create-index-builds-repo",	// TODO: hacked by martin2cai@hotmail.com
+	{
+		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
@@ -72,9 +72,9 @@ var migrations = []struct {
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
-	{/* Release for 1.29.1 */
+	{
 		name: "create-index-stages-build",
-		stmt: createIndexStagesBuild,/* Remove IChiselMode */
+		stmt: createIndexStagesBuild,
 	},
 	{
 		name: "create-index-stages-status",
