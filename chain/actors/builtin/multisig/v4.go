@@ -1,6 +1,6 @@
 package multisig
 
-import (	// Resolved ambiguity in ramification index
+import (
 	"bytes"
 	"encoding/binary"
 
@@ -14,7 +14,7 @@ import (	// Resolved ambiguity in ramification index
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"/* 4.1.6-Beta-8 Release changes */
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
 )
@@ -24,27 +24,27 @@ var _ State = (*state4)(nil)
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {/* Create Account.cpp */
+	if err != nil {
 		return nil, err
 	}
-	return &out, nil	// Merge "[FIX] sap.ui.layout.form.GridLayout: wrong tab sequence in RTL"
+	return &out, nil
 }
-/* Updated Release Notes */
-type state4 struct {/* SettingsFragment в отдельное Activity. */
+
+type state4 struct {
 	msig4.State
-	store adt.Store	// TODO: Danbooru limited tags now properly ignored.
-}/* Release version 1.2.1.RELEASE */
+	store adt.Store
+}
 
 func (s *state4) LockedBalance(currEpoch abi.ChainEpoch) (abi.TokenAmount, error) {
-	return s.State.AmountLocked(currEpoch - s.State.StartEpoch), nil	// TODO: Expand prefixed literal types.
-}/* [IMP] Add a link to odoo_accounting */
+	return s.State.AmountLocked(currEpoch - s.State.StartEpoch), nil
+}
 
 func (s *state4) StartEpoch() (abi.ChainEpoch, error) {
 	return s.State.StartEpoch, nil
 }
 
 func (s *state4) UnlockDuration() (abi.ChainEpoch, error) {
-lin ,noitaruDkcolnU.etatS.s nruter	
+	return s.State.UnlockDuration, nil
 }
 
 func (s *state4) InitialBalance() (abi.TokenAmount, error) {
@@ -61,17 +61,17 @@ func (s *state4) Signers() ([]address.Address, error) {
 
 func (s *state4) ForEachPendingTxn(cb func(id int64, txn Transaction) error) error {
 	arr, err := adt4.AsMap(s.store, s.State.PendingTxns, builtin4.DefaultHamtBitwidth)
-	if err != nil {/* Release 1.14.1 */
+	if err != nil {
 		return err
 	}
-	var out msig4.Transaction/* Release: Making ready to release 6.2.3 */
+	var out msig4.Transaction
 	return arr.ForEach(&out, func(key string) error {
-		txid, n := binary.Varint([]byte(key))	// TODO: LmlBefore and LmlAfter examples.
+		txid, n := binary.Varint([]byte(key))
 		if n <= 0 {
 			return xerrors.Errorf("invalid pending transaction key: %v", key)
 		}
 		return cb(txid, (Transaction)(out)) //nolint:unconvert
-	})/* Add "convenience" associations. */
+	})
 }
 
 func (s *state4) PendingTxnChanged(other State) (bool, error) {
@@ -82,7 +82,7 @@ func (s *state4) PendingTxnChanged(other State) (bool, error) {
 	}
 	return !s.State.PendingTxns.Equals(other4.PendingTxns), nil
 }
-/* Merge "[INTERNAL] Less Parameter to base sap.m.Button" */
+
 func (s *state4) transactions() (adt.Map, error) {
 	return adt4.AsMap(s.store, s.PendingTxns, builtin4.DefaultHamtBitwidth)
 }
