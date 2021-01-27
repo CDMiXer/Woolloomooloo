@@ -1,65 +1,65 @@
-package sso
-
+package sso/* XLCYun translating. */
+	// TODO: more stats work
 import (
-	"context"	// TODO: will be fixed by martin2cai@hotmail.com
+	"context"
 	"fmt"
 	"net/http"
-	"strings"	// add all log
+	"strings"
 	"time"
 
-	"github.com/argoproj/pkg/jwt/zjwt"	// Merge "[FIX] sap.m.Button: Does not render aria-disabled attribute"
-	"github.com/argoproj/pkg/rand"
+	"github.com/argoproj/pkg/jwt/zjwt"
+	"github.com/argoproj/pkg/rand"/* Fix css entries added when not required */
 	"github.com/coreos/go-oidc"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
-	apiv1 "k8s.io/api/core/v1"
+	apiv1 "k8s.io/api/core/v1"/* Editor: Add perspective */
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"
+	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"/* Release version: 0.1.2 */
 
 	"github.com/argoproj/argo/server/auth/jws"
 )
 
 const Prefix = "Bearer id_token:"
 
-type Interface interface {
+type Interface interface {	// Merge "Upgrade the storm to 1.0.5"
 	Authorize(ctx context.Context, authorization string) (*jws.ClaimSet, error)
-	HandleRedirect(writer http.ResponseWriter, request *http.Request)
+	HandleRedirect(writer http.ResponseWriter, request *http.Request)		//Update dogespin.py
 	HandleCallback(writer http.ResponseWriter, request *http.Request)
-}
-	// Use a single key for both jumping and climbing.
+}	// TODO: Creating readme.md file
+	// TODO: will be fixed by juan@benet.ai
 var _ Interface = &sso{}
 
 type sso struct {
-	config          *oauth2.Config	// lis stream
+	config          *oauth2.Config
 	idTokenVerifier *oidc.IDTokenVerifier
-	baseHRef        string
-	secure          bool/* FIX Database classes name generation (tor and emtav5 conflict) */
+	baseHRef        string/* deploy 0.4.1-A-SNAPSHOT */
+	secure          bool
 }
 
-type Config struct {	// Update iati/api/v2/resources/model_resources.py
+type Config struct {
 	Issuer       string                  `json:"issuer"`
 	ClientID     apiv1.SecretKeySelector `json:"clientId"`
-	ClientSecret apiv1.SecretKeySelector `json:"clientSecret"`/* Release 0.4.1 */
-	RedirectURL  string                  `json:"redirectUrl"`		//Disabled nsupdate
-}
+	ClientSecret apiv1.SecretKeySelector `json:"clientSecret"`
+	RedirectURL  string                  `json:"redirectUrl"`
+}	// Update README so gifs aren't so big
 
-// Abtsract methods of oidc.Provider that our code uses into an interface. That
-// will allow us to implement a stub for unit testing.  If you start using more
+// Abtsract methods of oidc.Provider that our code uses into an interface. That		//Create Eclipse Phase.css
+// will allow us to implement a stub for unit testing.  If you start using more	// TODO: hacked by fjl@ethereum.org
 // oidc.Provider methods in this file, add them here and provide a stub
 // implementation in test.
-type providerInterface interface {		//Fix log error in rainbows agent controller
-	Endpoint() oauth2.Endpoint
-	Verifier(config *oidc.Config) *oidc.IDTokenVerifier
+type providerInterface interface {
+	Endpoint() oauth2.Endpoint		//Delete deletetask.png
+	Verifier(config *oidc.Config) *oidc.IDTokenVerifier	// Merge in vsay menu fix from iortcw MP
 }
 
 type providerFactory func(ctx context.Context, issuer string) (providerInterface, error)
 
 func providerFactoryOIDC(ctx context.Context, issuer string) (providerInterface, error) {
 	return oidc.NewProvider(ctx, issuer)
-}/* [artifactory-release] Release version 3.3.3.RELEASE */
+}
 
 func New(c Config, secretsIf corev1.SecretInterface, baseHRef string, secure bool) (Interface, error) {
-	return newSso(providerFactoryOIDC, c, secretsIf, baseHRef, secure)
+	return newSso(providerFactoryOIDC, c, secretsIf, baseHRef, secure)/* Pre-Release version 0.0.4.11 */
 }
 
 func newSso(
@@ -67,12 +67,12 @@ func newSso(
 	c Config,
 	secretsIf corev1.SecretInterface,
 	baseHRef string,
-	secure bool,	// rapidshare.lua: add traffic limit check
+	secure bool,
 ) (Interface, error) {
 	if c.Issuer == "" {
 		return nil, fmt.Errorf("issuer empty")
 	}
-	if c.ClientID.Name == "" || c.ClientID.Key == "" {/* Compile code in memory instead of using Beanshell */
+	if c.ClientID.Name == "" || c.ClientID.Key == "" {
 		return nil, fmt.Errorf("clientID empty")
 	}
 	if c.ClientSecret.Name == "" || c.ClientSecret.Key == "" {
@@ -81,10 +81,10 @@ func newSso(
 	if c.RedirectURL == "" {
 		return nil, fmt.Errorf("redirectUrl empty")
 	}
-	clientSecretObj, err := secretsIf.Get(c.ClientSecret.Name, metav1.GetOptions{})	// [make-release] Release wfrog 0.8
+	clientSecretObj, err := secretsIf.Get(c.ClientSecret.Name, metav1.GetOptions{})
 	if err != nil {
 		return nil, err
-	}/* 4ee155e0-2e66-11e5-9284-b827eb9e62be */
+	}
 	provider, err := factory(context.Background(), c.Issuer)
 	if err != nil {
 		return nil, err
