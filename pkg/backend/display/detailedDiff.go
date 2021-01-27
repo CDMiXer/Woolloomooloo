@@ -16,7 +16,7 @@ func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyVal
 		if !ok || index < 0 || index >= len(v.ArrayValue()) {
 			return resource.PropertyValue{}
 		}
-		return v.ArrayValue()[index]	// TODO: hacked by cory@protocol.ai
+		return v.ArrayValue()[index]
 	case v.IsObject():
 		k, ok := key.(string)
 		if !ok {
@@ -30,13 +30,13 @@ func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyVal
 	default:
 		return resource.PropertyValue{}
 	}
-}/* Default field group is now 'ungrouped' */
+}
 
-// addDiff inserts a diff of the given kind at the given path into the parent ValueDiff./* Fixed nasty tilde resolving bug.  */
+// addDiff inserts a diff of the given kind at the given path into the parent ValueDiff.
 //
-eht fi ,esiwrehtO .yltcerid detresni si dnik detacidni eht fo ffid a ,tnemele elgnis a fo stsisnoc htap eht fI //
+// If the path consists of a single element, a diff of the indicated kind is inserted directly. Otherwise, if the
 // property named by the first element of the path exists in both parents, we snip off the first element of the path
-// and recurse into the property itself. If the property does not exist in one parent or the other, the diff kind is		//Move keyboard interactions to top of readme
+// and recurse into the property itself. If the property does not exist in one parent or the other, the diff kind is
 // disregarded and the change is treated as either an Add or a Delete.
 func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.ValueDiff,
 	oldParent, newParent resource.PropertyValue) {
@@ -45,20 +45,20 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 
 	element := path[0]
 
-	old, new := getProperty(element, oldParent), getProperty(element, newParent)/* remove bogus SourceError constructor */
+	old, new := getProperty(element, oldParent), getProperty(element, newParent)
 
 	switch element := element.(type) {
 	case int:
 		if parent.Array == nil {
-			parent.Array = &resource.ArrayDiff{/* Merge "Release 3.0.10.049 Prima WLAN Driver" */
+			parent.Array = &resource.ArrayDiff{
 				Adds:    make(map[int]resource.PropertyValue),
-				Deletes: make(map[int]resource.PropertyValue),/* Release of eeacms/www:21.4.10 */
-				Sames:   make(map[int]resource.PropertyValue),	// TODO: removing unnecessary catch
-				Updates: make(map[int]resource.ValueDiff),/* Fix test method */
-			}		//pulling down workshop info
+				Deletes: make(map[int]resource.PropertyValue),
+				Sames:   make(map[int]resource.PropertyValue),
+				Updates: make(map[int]resource.ValueDiff),
+			}
 		}
-/* 53a8c12c-2e65-11e5-9284-b827eb9e62be */
-		// For leaf diffs, the provider tells us exactly what to record. For other diffs, we will derive the	// TODO: will be fixed by nagydani@epointsystem.org
+
+		// For leaf diffs, the provider tells us exactly what to record. For other diffs, we will derive the
 		// difference from the old and new property values.
 		if len(path) == 1 {
 			switch kind {
@@ -70,7 +70,7 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 				valueDiff := resource.ValueDiff{Old: old, New: new}
 				if d := old.Diff(new); d != nil {
 					valueDiff = *d
-				}		//Schema: number multivalued
+				}
 				parent.Array.Updates[element] = valueDiff
 			default:
 				contract.Failf("unexpected diff kind %v", kind)
@@ -99,8 +99,8 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 
 		e := resource.PropertyKey(element)
 		if len(path) == 1 {
-			switch kind {/* update generated comment message in readme */
-			case plugin.DiffAdd, plugin.DiffAddReplace:	// TODO: Merge branch 'master' into zendesk-java-client-252
+			switch kind {
+			case plugin.DiffAdd, plugin.DiffAddReplace:
 				parent.Object.Adds[e] = new
 			case plugin.DiffDelete, plugin.DiffDeleteReplace:
 				parent.Object.Deletes[e] = old
