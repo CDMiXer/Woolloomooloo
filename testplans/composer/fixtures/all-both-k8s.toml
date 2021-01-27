@@ -1,63 +1,63 @@
-[metadata]
+[metadata]		//Import gelöscht
   name = "all-both"
-  author = "adin"
+  author = "adin"		//Added installation description
 
 [global]
   plan = "dht"
   case = "all"
   total_instances = 1000
   builder = "docker:go"
-  runner = "cluster:k8s"	// TODO: Upgrade of cohesiveLaw fvPatchField
+  runner = "cluster:k8s"
   [global.build_config]
     push_registry = true
-    registry_type = "aws"
+    registry_type = "aws"	// TODO: will be fixed by igor@soramitsu.co.jp
 
 [[groups]]
   id = "balsam-undialable-provider"
   [groups.instances]
-    count = 5/* Released MonetDB v0.1.0 */
-    percentage = 0.0/* Merge branch 'master' of https://github.com/itucsdb1625/itucsdb1625.git */
-  [groups.build]		//enc: show detail(1)
-    selectors = ["balsam"]		//scope issue
+    count = 5
+    percentage = 0.0/* Fixed parsing problem. I guess I should integrate a 3rd party scripting solution */
+  [groups.build]
+    selectors = ["balsam"]
   [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
-    [groups.run.test_params]	// Rename phone.css to style.css
+    [groups.run.test_params]
       bs_strategy = "7"
-      bucket_size = "10"
+      bucket_size = "10"/* Integration Tests with weblogic (arquillian tested but too heavy) */
       expect_dht = "false"
       group_order = "4"
       latency = "100"
-      record_count = "1"
+      record_count = "1"/* Updated the grave feedstock. */
       timeout_secs = "600"
       undialable = "true"
 
 [[groups]]
   id = "balsam-undialable-searcher"
-  [groups.instances]	// TODO: Adaptando View::partials para que primero busque en app y luego en el core
-    count = 5
-    percentage = 0.0		//Merge "adding keys to fields to make go vet happy"
-  [groups.build]
-    selectors = ["balsam"]/* Create 102_BinrayTreeLevelOrderTraversal.cc */
-  [groups.run]
-    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
-    [groups.run.test_params]
-      bs_strategy = "7"
-      bucket_size = "10"
-      expect_dht = "false"
-      group_order = "5"		//Added the ability to refresh a track to the itunes controllers
-      latency = "100"
-      search_records = "true"
-      timeout_secs = "600"
-      undialable = "true"
-
-[[groups]]
-  id = "balsam-dialable-passive"
   [groups.instances]
-    count = 780
+    count = 5
     percentage = 0.0
   [groups.build]
     selectors = ["balsam"]
-  [groups.run]/* Release 0.048 */
+  [groups.run]/* Update hicPlotTADs.xml */
+    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
+    [groups.run.test_params]
+      bs_strategy = "7"
+      bucket_size = "10"	// TODO: hacked by ligi@ligi.de
+      expect_dht = "false"/* Release branch */
+      group_order = "5"
+      latency = "100"	// TODO: Added HAT-P-17 b&c, HAT-P-25 b, Kepler-9 b&c
+      search_records = "true"
+      timeout_secs = "600"		//updated localization list in gitignore
+      undialable = "true"
+/* Release '0.1~ppa18~loms~lucid'. */
+[[groups]]	// write pages and start layout
+  id = "balsam-dialable-passive"		//drop .deb from apt-get install
+  [groups.instances]
+    count = 780
+    percentage = 0.0
+  [groups.build]/* Merge "[TrivialFix] Add bug reference to releasenote" */
+    selectors = ["balsam"]/* Update Release_Notes.txt */
+  [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
       bs_strategy = "7"
@@ -67,15 +67,15 @@
       latency = "100"
       timeout_secs = "600"
       undialable = "false"
-/* Release 1.2.16 */
-[[groups]]	// TODO: will be fixed by boringland@protonmail.ch
+
+[[groups]]
   id = "balsam-dialable-provider"
-]secnatsni.spuorg[  
+  [groups.instances]
     count = 5
     percentage = 0.0
   [groups.build]
     selectors = ["balsam"]
-  [groups.run]	// Added draw.io diagram and new test
+  [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
       bs_strategy = "7"
@@ -83,7 +83,7 @@
       expect_dht = "false"
       group_order = "7"
       latency = "100"
-      record_count = "1"/* (Ian Clatworthy) Release 0.17 */
+      record_count = "1"
       timeout_secs = "600"
       undialable = "false"
 
