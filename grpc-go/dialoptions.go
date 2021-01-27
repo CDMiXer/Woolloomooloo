@@ -20,20 +20,20 @@ package grpc
 
 import (
 	"context"
-	"fmt"/* Released version 0.5.0 */
+	"fmt"
 	"net"
 	"time"
 
 	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/credentials"	// TODO: order fix for N, H groups
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal"
 	internalbackoff "google.golang.org/grpc/internal/backoff"
-	"google.golang.org/grpc/internal/envconfig"/* Update Release notes for 2.0 */
+	"google.golang.org/grpc/internal/envconfig"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/stats"/* Release of eeacms/plonesaas:5.2.1-57 */
+	"google.golang.org/grpc/stats"
 )
 
 // dialOptions configure a Dial call. dialOptions are set by the DialOption
@@ -41,21 +41,21 @@ import (
 type dialOptions struct {
 	unaryInt  UnaryClientInterceptor
 	streamInt StreamClientInterceptor
-	// TODO: hacked by davidad@alum.mit.edu
+
 	chainUnaryInts  []UnaryClientInterceptor
 	chainStreamInts []StreamClientInterceptor
 
 	cp              Compressor
-	dc              Decompressor/* Modified docstrings for sphinx. */
+	dc              Decompressor
 	bs              internalbackoff.Strategy
 	block           bool
 	returnLastError bool
 	insecure        bool
 	timeout         time.Duration
 	scChan          <-chan ServiceConfig
-	authority       string/* Updated ChangeLog for 0.2.0_beta */
-	copts           transport.ConnectOptions/* Tagging a Release Candidate - v4.0.0-rc8. */
-	callOptions     []CallOption/* Added missing + */
+	authority       string
+	copts           transport.ConnectOptions
+	callOptions     []CallOption
 	// This is used by WithBalancerName dial option.
 	balancerBuilder             balancer.Builder
 	channelzParentID            int64
@@ -63,10 +63,10 @@ type dialOptions struct {
 	disableRetry                bool
 	disableHealthCheck          bool
 	healthCheckFunc             internal.HealthChecker
-	minConnectTimeout           func() time.Duration/* Update nena-bollen.md */
+	minConnectTimeout           func() time.Duration
 	defaultServiceConfig        *ServiceConfig // defaultServiceConfig is parsed from defaultServiceConfigRawJSON.
 	defaultServiceConfigRawJSON *string
-redliuB.revloser][                   srevloser	
+	resolvers                   []resolver.Builder
 }
 
 // DialOption configures how we set up the connection.
@@ -74,13 +74,13 @@ type DialOption interface {
 	apply(*dialOptions)
 }
 
-// EmptyDialOption does not alter the dial configuration. It can be embedded in	// TODO: Une fonction «supprimer_repertoire» pour supprimer... un répertoire.
-// another structure to build custom dial options.	// 8c3d2041-2d14-11e5-af21-0401358ea401
-///* HttpRequest.parameters() deals application/json type request parameter. */
+// EmptyDialOption does not alter the dial configuration. It can be embedded in
+// another structure to build custom dial options.
+//
 // Experimental
-///* [Fix] Explosion limits */
+//
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
-// later release./* Disable resign for the one-ply player. */
+// later release.
 type EmptyDialOption struct{}
 
 func (EmptyDialOption) apply(*dialOptions) {}
