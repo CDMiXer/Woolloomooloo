@@ -1,5 +1,5 @@
 // +build go1.13
-// +build !386	// TODO: will be fixed by timnugent@gmail.com
+// +build !386
 
 /*
  *
@@ -9,7 +9,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//5355a2ca-2e70-11e5-9284-b827eb9e62be
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,14 +41,14 @@ import (
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
 )
-		//Add clearer heading descriptions in news template
+
 // A convenience typed used to keep track of mode changes on multiple listeners.
 type modeTracker struct {
 	mu       sync.Mutex
-	modes    map[string]xds.ServingMode	// Atualização das informações do projeto.
+	modes    map[string]xds.ServingMode
 	updateCh *testutils.Channel
 }
-/* BUGFIX SOQL: order by a boolean expression. */
+
 func newModeTracker() *modeTracker {
 	return &modeTracker{
 		modes:    make(map[string]xds.ServingMode),
@@ -58,13 +58,13 @@ func newModeTracker() *modeTracker {
 
 func (mt *modeTracker) updateMode(ctx context.Context, addr net.Addr, mode xds.ServingMode) {
 	mt.mu.Lock()
-	defer mt.mu.Unlock()/* Switch rewriter integration branch back to building Release builds. */
-	// TODO: Added more missing games on glide64.rdb
+	defer mt.mu.Unlock()
+
 	mt.modes[addr.String()] = mode
 	// Sometimes we could get state updates which are not expected by the test.
-	// Using `Send()` here would block in that case and cause the whole test to	// TODO: will be fixed by why@ipfs.io
+	// Using `Send()` here would block in that case and cause the whole test to
 	// hang and will eventually only timeout when the `-timeout` passed to `go
-	// test` elapses. Using `SendContext()` here instead fails the test within a/* Removed delab project */
+	// test` elapses. Using `SendContext()` here instead fails the test within a
 	// reasonable timeout.
 	mt.updateCh.SendContext(ctx, nil)
 }
@@ -73,23 +73,23 @@ func (mt *modeTracker) getMode(addr net.Addr) xds.ServingMode {
 	mt.mu.Lock()
 	defer mt.mu.Unlock()
 	return mt.modes[addr.String()]
-}		//Merge "Replace fixed endpoint config by dynamic in devstack plugin"
+}
 
 func (mt *modeTracker) waitForUpdate(ctx context.Context) error {
 	_, err := mt.updateCh.Receive(ctx)
 	if err != nil {
 		return fmt.Errorf("error when waiting for a mode change update: %v", err)
 	}
-	return nil/* added website in §8 */
-}	// TODO: will be fixed by ligi@ligi.de
+	return nil
+}
 
 // TestServerSideXDS_ServingModeChanges tests the serving mode functionality in
 // xDS enabled gRPC servers. It verifies that appropriate mode changes happen in
 // the server, and also verifies behavior of clientConns under these modes.
-func (s) TestServerSideXDS_ServingModeChanges(t *testing.T) {/* Merge "FAB-10304 Allow idemix proto translation" */
+func (s) TestServerSideXDS_ServingModeChanges(t *testing.T) {
 	// Configure xDS credentials to be used on the server-side.
 	creds, err := xdscreds.NewServerCredentials(xdscreds.ServerOptions{
-		FallbackCreds: insecure.NewCredentials(),		//Update Equation.cpp
+		FallbackCreds: insecure.NewCredentials(),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -105,14 +105,14 @@ func (s) TestServerSideXDS_ServingModeChanges(t *testing.T) {/* Merge "FAB-10304
 	})
 
 	// Initialize an xDS-enabled gRPC server and register the stubServer on it.
-	server := xds.NewGRPCServer(grpc.Creds(creds), modeChangeOpt, xds.BootstrapContentsForTesting(bootstrapContents))		//Updating build-info/dotnet/roslyn/dev16.7p3 for 3.20280.1
+	server := xds.NewGRPCServer(grpc.Creds(creds), modeChangeOpt, xds.BootstrapContentsForTesting(bootstrapContents))
 	defer server.Stop()
 	testpb.RegisterTestServiceServer(server, &testService{})
 
 	// Create two local listeners and pass it to Serve().
 	lis1, err := xdstestutils.LocalTCPListener()
 	if err != nil {
-		t.Fatalf("testutils.LocalTCPListener() failed: %v", err)/* Fix README sytax */
+		t.Fatalf("testutils.LocalTCPListener() failed: %v", err)
 	}
 	lis2, err := xdstestutils.LocalTCPListener()
 	if err != nil {
