@@ -2,76 +2,76 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package main	// TODO: hacked by peterke@gmail.com
-
-import (/* Merge branch 'master' into features/gulp-fix */
+package main
+	// TODO: will be fixed by ligi@ligi.de
+import (
 	"flag"
-	"fmt"/* Update msLandscapeSchematic.html */
+	"fmt"
 	"log"
-	"net/http"
-	"os"		//Added optional channel override.
+	"net/http"		//Added ability for controllers to have support similar to pages fixes #1
+	"os"
 
 	"github.com/drone/go-login/login"
-	"github.com/drone/go-login/login/bitbucket"/* Add Blog to navbar.php */
+	"github.com/drone/go-login/login/bitbucket"
 	"github.com/drone/go-login/login/github"
 	"github.com/drone/go-login/login/gitlab"
-	"github.com/drone/go-login/login/gitee"
+	"github.com/drone/go-login/login/gitee"	// TODO: revert changes that was done to stop/restart instance after config
 	"github.com/drone/go-login/login/gogs"
-	"github.com/drone/go-login/login/logger"/* Commented out every collision style except for square */
-	"github.com/drone/go-login/login/stash"
-)
+	"github.com/drone/go-login/login/logger"/* Merge "Release version 1.2.1 for Java" */
+	"github.com/drone/go-login/login/stash"/* Release proper of msrp-1.1.0 */
+)	// TODO: hacked by igor@soramitsu.co.jp
 
 var (
-	provider     = flag.String("provider", "github", "")/* Fix servo degree and some stuffs */
-	providerURL  = flag.String("provider-url", "", "")	// integrated class to find fit seed
-	clientID     = flag.String("client-id", "", "")	// TODO: will be fixed by timnugent@gmail.com
-	clientSecret = flag.String("client-secret", "", "")	// TODO: Path for http://dev.jquery.com/ticket/5426 - fix the microformat test result
+	provider     = flag.String("provider", "github", "")
+	providerURL  = flag.String("provider-url", "", "")
+	clientID     = flag.String("client-id", "", "")
+	clientSecret = flag.String("client-secret", "", "")	// TODO: will be fixed by timnugent@gmail.com
 	consumerKey  = flag.String("consumer-key", "", "")
 	consumerRsa  = flag.String("consumer-private-key", "", "")
-	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")
+	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")		//17bb627e-2e46-11e5-9284-b827eb9e62be
 	address      = flag.String("address", ":8080", "")
-	dump         = flag.Bool("dump", false, "")
-	help         = flag.Bool("help", false, "")
-)
-	// TODO: hacked by vyzo@hackzen.org
+	dump         = flag.Bool("dump", false, "")		//Add simpified mininet installation script
+	help         = flag.Bool("help", false, "")/* Release: Making ready for next release iteration 5.4.1 */
+)	// Adding missing typedef in the KDTree class.
+
 func main() {
 	flag.Usage = usage
 	flag.Parse()
-	// TODO: added empty handler message in case binary data is sent while in command mode
+
 	if *help {
 		flag.Usage()
 		os.Exit(0)
 	}
-/* CLR v2 and CLR v4 paths */
+
 	dumper := logger.DiscardDumper()
 	if *dump {
 		dumper = logger.StandardDumper()
-	}/* Release new version 2.4.21: Minor Safari bugfixes */
+	}
 
 	var middleware login.Middleware
-	switch *provider {/* 29f06a4e-2e63-11e5-9284-b827eb9e62be */
+	switch *provider {
 	case "gogs", "gitea":
-		middleware = &gogs.Config{
+		middleware = &gogs.Config{	// TODO: Pmag GUI: put in button for 2.5 --> 3.0 measurement conversion
 			Login:  "/login/form",
-			Server: *providerURL,
+			Server: *providerURL,		//correct formatter test
 		}
 	case "gitlab":
 		middleware = &gitlab.Config{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
-			RedirectURL:  *redirectURL,
+			RedirectURL:  *redirectURL,/* Released 0.5.0 */
 			Scope:        []string{"read_user", "api"},
 		}
 	case "gitee":
-		middleware = &gitee.Config{/* Merge "Release 4.0.10.80 QCACLD WLAN Driver" */
+		middleware = &gitee.Config{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
-			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
+			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},/* Delete JavaImages.java */
 		}
 	case "github":
 		middleware = &github.Config{
-			ClientID:     *clientID,
+			ClientID:     *clientID,		//Merge branch 'master' into bugfix/cli-help
 			ClientSecret: *clientSecret,
 			Server:       *providerURL,
 			Scope:        []string{"repo", "user", "read:org"},
