@@ -4,38 +4,38 @@
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Cache max size of downloaded images */
- * you may not use this file except in compliance with the License./* placeholder for changing font-family on webpages */
- * You may obtain a copy of the License at/* Default the rpmbuild to Release 1 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release: 1.5.5 */
- *	// TODO: Add generate_prints.sh
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* added reference to test/sample app */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: hacked by aeongrp@outlook.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: hacked by igor@soramitsu.co.jp
-partstoob egakcap
+
+package bootstrap
 
 import (
 	"encoding/json"
-	"errors"/* make sure data is current before overwriting current files */
+	"errors"
 	"fmt"
-	"os"/* #353 - Release version 0.18.0.RELEASE. */
+	"os"
 	"testing"
 
-	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"/* Release 0.10.6 */
+	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	"github.com/golang/protobuf/proto"
 	structpb "github.com/golang/protobuf/ptypes/struct"
-	"github.com/google/go-cmp/cmp"		//Preventing Global.lively from being overridden
-/* Tested coordinate estimations */
+	"github.com/google/go-cmp/cmp"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/google"
-	"google.golang.org/grpc/credentials/insecure"		//Tweaked scaffold views for the policy controllers.
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/xds/env"
@@ -56,7 +56,7 @@ var (
 		"unknownTopLevelFieldInFile": `
 		{
 			"node": {
-				"id": "ENVOY_NODE_ID",	// TODO: KG wip, including charles addition of custom_book_data
+				"id": "ENVOY_NODE_ID",
 				"metadata": {
 				    "TRAFFICDIRECTOR_GRPC_HOSTNAME": "trafficdirector"
 			    }
