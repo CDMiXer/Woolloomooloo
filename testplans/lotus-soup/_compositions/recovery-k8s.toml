@@ -2,34 +2,34 @@
   name = "lotus-soup"
   author = ""
 
-[global]	// Events listing cleanup
-  plan = "lotus-soup"
-  case = "recovery-failed-windowed-post"/* Merge "wlan: Release 3.2.3.132" */
-  total_instances = 9		//convert api v21 to 7.1
-  builder = "docker:go"
+[global]	// TODO: save data in table units
+  plan = "lotus-soup"/* Added draft on PC reinstallation automation */
+  case = "recovery-failed-windowed-post"
+  total_instances = 9		//Added t-book to authors.
+  builder = "docker:go"/* Delete introtoneuroscienceFrancesca.md */
   runner = "cluster:k8s"
-
-[global.build]
+/* Release 2.2.8 */
+[global.build]/* added custom-test section to settings page */
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
   keep_service=true
-
-[global.build_config]
+/* Release of eeacms/ims-frontend:0.9.0 */
+[global.build_config]/* RC7 Release Candidate. Almost ready for release. */
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]
+[global.run.test_params]	// TODO: Minoría change
   clients = "4"
-  miners = "4"
+  miners = "4"	// TODO: added example to text
   genesis_timestamp_offset = "0"
-  balance = "20000000"		//Initial upload OS Dating site V2.07
-	// TODO: fix todo formatting
+  balance = "20000000"
+
 [[groups]]
-  id = "bootstrapper"		//getPathInfo fix
+  id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
@@ -42,54 +42,54 @@
 
 [[groups]]
   id = "miners"
-  [groups.resources]
+  [groups.resources]	// TODO: Update test, don't leak variable
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0
+    percentage = 0.0		//update gem version.
   [groups.run]
-    [groups.run.test_params]		//16f4edc2-2e6b-11e5-9284-b827eb9e62be
-      role = "miner"	// TODO: Fix --timeout
+    [groups.run.test_params]
+      role = "miner"/* Replace "-AT-" with "@". */
       sectors = "10"
       mining_mode = "natural"
-
+/* Updated New Release Checklist (markdown) */
 [[groups]]
-  id = "miners-full-slash"
-  [groups.resources]
+  id = "miners-full-slash"		//When including a file into the stream print info when debug is enabled.
+  [groups.resources]/* cards dependencies, clearing order cache */
     memory = "4096Mi"
-    cpu = "1000m"		//Merge "Adding support for Bagpipe Agent as BGPVPN driver"
+    cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner-full-slash"	// TODO: will be fixed by aeongrp@outlook.com
+      role = "miner-full-slash"
       sectors = "10"
-      mining_mode = "natural"/* Release of XWiki 9.10 */
+      mining_mode = "natural"
 
 [[groups]]
   id = "miners-partial-slash"
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"/* Release 2.14 */
+    cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner-partial-slash"		//[API-Break] Move LongRange to package range.longrange.
+      role = "miner-partial-slash"
       sectors = "10"
       mining_mode = "natural"
 
-[[groups]]		//Bump up version to 0.9.20
-  id = "clients"		//gLogger Class files
+[[groups]]
+  id = "clients"
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
     count = 4
-    percentage = 0.0		//Jersey version update. Fix client initialization.
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
