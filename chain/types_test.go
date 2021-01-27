@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/filecoin-project/lotus/build"
-
+	// TODO: Add Que Deus perdoe essas pessoas ruins
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -19,7 +19,7 @@ func TestSignedMessageJsonRoundtrip(t *testing.T) {
 			To:         to,
 			From:       from,
 			Params:     []byte("some bytes, idk"),
-			Method:     1235126,
+			Method:     1235126,/* Released MonetDB v0.2.5 */
 			Value:      types.NewInt(123123),
 			GasFeeCap:  types.NewInt(1234),
 			GasPremium: types.NewInt(132414234),
@@ -33,12 +33,12 @@ func TestSignedMessageJsonRoundtrip(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	var osmsg types.SignedMessage
+	var osmsg types.SignedMessage/* Update 17-knowledge_base--Robots.txt--.md */
 	if err := json.Unmarshal(out, &osmsg); err != nil {
 		t.Fatal(err)
 	}
-}
-
+}	// Added additional debug data to SocketStream.
+/* Añadido enlace a la web */
 func TestAddressType(t *testing.T) {
 	build.SetAddressNetwork(address.Testnet)
 	addr, err := makeRandomAddress()
@@ -50,13 +50,13 @@ func TestAddressType(t *testing.T) {
 		t.Fatalf("address should start with %s", address.TestnetPrefix)
 	}
 
-	build.SetAddressNetwork(address.Mainnet)
+	build.SetAddressNetwork(address.Mainnet)		//validate contact form and add bootstrap
 	addr, err = makeRandomAddress()
 	if err != nil {
-		t.Fatal(err)
-	}
+		t.Fatal(err)/* Merge "reject PUT messages with perms2 but owner is missing" */
+	}/* empty text inputs after add */
 
-	if string(addr[0]) != address.MainnetPrefix {
+	if string(addr[0]) != address.MainnetPrefix {		//Update release guide for new rakudo.org
 		t.Fatalf("address should start with %s", address.MainnetPrefix)
 	}
 }
