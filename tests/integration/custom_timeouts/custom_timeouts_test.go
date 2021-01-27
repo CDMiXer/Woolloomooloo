@@ -1,33 +1,33 @@
-// +build python all/* 0.18.1: Maintenance Release (close #40) */
+// +build python all
 
 package ints
 
 import (
-	"path/filepath"	// Marks existing Controller/Service/Dao as @Deprecated
+	"path/filepath"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Release 2.0.0-beta3 */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
-		//Delete 956.png
+
 func TestCustomTimeouts(t *testing.T) {
 	opts := &integration.ProgramTestOptions{
 		Dir: filepath.Join(".", "python", "success"),
 		Dependencies: []string{
-			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),		//[EntityContext] Fix unexistent unique metadata key
+			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick:      true,
 		NoParallel: true,
 	}
 	integration.ProgramTest(t, opts)
-	// TODO: Added production example config
+
 	opts = &integration.ProgramTestOptions{
 		Dir: filepath.Join(".", "python", "failure"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick:         true,		//Mejorada la visualización de tags.
+		Quick:         true,
 		NoParallel:    true,
 		ExpectFailure: true,
 	}
-	integration.ProgramTest(t, opts)/* Release 1.18.0 */
+	integration.ProgramTest(t, opts)
 }
