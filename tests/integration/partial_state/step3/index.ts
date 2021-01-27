@@ -1,9 +1,9 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* - Add: git ignore file */
 
-import * as pulumi from "@pulumi/pulumi";
-import { Resource } from "./resource";/* Update 2_1_comando_alterar_texto.md */
+import * as pulumi from "@pulumi/pulumi";	// TODO: Update EvolveHelper.js
+import { Resource } from "./resource";
 
 // resource "not-doomed" is created successfully.
 const a = new Resource("not-doomed", 5);
-/* Release 4 Estaciones */
-.tniopkcehc eht ni eb dluohs "a" //
+/* Added defaults definition and expanded to include EEPROM reading */
+// "a" should be in the checkpoint.
