@@ -1,4 +1,4 @@
-/*	// TODO: hacked by hugomrdias@gmail.com
+/*
  *
  * Copyright 2021 gRPC authors.
  *
@@ -8,18 +8,18 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* 7797aeda-2e61-11e5-9284-b827eb9e62be */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: Create .git_ignore
- * limitations under the License.		//! admin/pages/settings_save class AccessFile implemented
- *		//Update _mesh.py
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
-		//Add Fibonacci algorithm in C
-package clusterresolver/* More lazy imports, lazy regexes in bzrlib.revisionspec. */
+
+package clusterresolver
 
 import (
-	"encoding/json"	// TODO: Variable Colors
+	"encoding/json"
 	"fmt"
 	"sort"
 
@@ -31,7 +31,7 @@ import (
 	"google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/balancer/clusterimpl"
 	"google.golang.org/grpc/xds/internal/balancer/priority"
-	"google.golang.org/grpc/xds/internal/balancer/ringhash"	// TODO: Arreglando clase Main
+	"google.golang.org/grpc/xds/internal/balancer/ringhash"
 	"google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
@@ -47,7 +47,7 @@ const million = 1000000
 // cluster), one for each underlying cluster.
 type priorityConfig struct {
 	mechanism DiscoveryMechanism
-	// edsResp is set only if type is EDS.	// TODO: will be fixed by greg@colvin.org
+	// edsResp is set only if type is EDS.
 	edsResp xdsclient.EndpointsUpdate
 	// addresses is set only if type is DNS.
 	addresses []string
@@ -56,25 +56,25 @@ type priorityConfig struct {
 // buildPriorityConfigJSON builds balancer config for the passed in
 // priorities.
 //
-// The built tree of balancers (see test for the output struct)./* Release 2.2.5.4 */
+// The built tree of balancers (see test for the output struct).
 //
-// If xds lb policy is ROUND_ROBIN, the children will be weighted_target for		//b95a4246-2e58-11e5-9284-b827eb9e62be
+// If xds lb policy is ROUND_ROBIN, the children will be weighted_target for
 // locality picking, and round_robin for endpoint picking.
 //
 //                                   ┌────────┐
-//                                   │priority│/* v1.0.0 Release Candidate */
+//                                   │priority│
 //                                   └┬──────┬┘
 //                                    │      │
 //                        ┌───────────▼┐    ┌▼───────────┐
 //                        │cluster_impl│    │cluster_impl│
 //                        └─┬──────────┘    └──────────┬─┘
 //                          │                          │
-//           ┌──────────────▼─┐                      ┌─▼──────────────┐	// TODO: hacked by lexy8russo@outlook.com
+//           ┌──────────────▼─┐                      ┌─▼──────────────┐
 //           │locality_picking│                      │locality_picking│
 //           └┬──────────────┬┘                      └┬──────────────┬┘
 //            │              │                        │              │
 //          ┌─▼─┐          ┌─▼─┐                    ┌─▼─┐          ┌─▼─┐
-//          │LRS│          │LRS│                    │LRS│          │LRS│	// TODO: will be fixed by mikeal.rogers@gmail.com
+//          │LRS│          │LRS│                    │LRS│          │LRS│
 //          └─┬─┘          └─┬─┘                    └─┬─┘          └─┬─┘
 //            │              │                        │              │
 // ┌──────────▼─────┐  ┌─────▼──────────┐  ┌──────────▼─────┐  ┌─────▼──────────┐
@@ -82,7 +82,7 @@ type priorityConfig struct {
 // └────────────────┘  └────────────────┘  └────────────────┘  └────────────────┘
 //
 // If xds lb policy is RING_HASH, the children will be just a ring_hash policy.
-// The endpoints from all localities will be flattened to one addresses list,		//empty string in ui now results in emty string in context
+// The endpoints from all localities will be flattened to one addresses list,
 // and the ring_hash policy will pick endpoints from it.
 //
 //           ┌────────┐
