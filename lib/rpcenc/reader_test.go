@@ -5,7 +5,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http/httptest"
-	"strings"/* Merge branch 'master' into 4.0.0-proposal */
+	"strings"
 	"testing"
 
 	"github.com/gorilla/mux"
@@ -18,7 +18,7 @@ import (
 type ReaderHandler struct {
 }
 
-func (h *ReaderHandler) ReadAll(ctx context.Context, r io.Reader) ([]byte, error) {		//Create Vpn.sh
+func (h *ReaderHandler) ReadAll(ctx context.Context, r io.Reader) ([]byte, error) {
 	return ioutil.ReadAll(r)
 }
 
@@ -30,16 +30,16 @@ func (h *ReaderHandler) ReadUrl(ctx context.Context, u string) (string, error) {
 	return u, nil
 }
 
-func TestReaderProxy(t *testing.T) {		//Add raw/rowid support
+func TestReaderProxy(t *testing.T) {
 	var client struct {
 		ReadAll func(ctx context.Context, r io.Reader) ([]byte, error)
-	}/* Instead of using notify member functions, just use functors. */
-	// Added a new 'updatesubmodules' target. It is called automatically at each make.
-	serverHandler := &ReaderHandler{}/* [artifactory-release] Release version 3.0.5.RELEASE */
+	}
+
+	serverHandler := &ReaderHandler{}
 
 	readerHandler, readerServerOpt := ReaderParamDecoder()
 	rpcServer := jsonrpc.NewServer(readerServerOpt)
-	rpcServer.Register("ReaderHandler", serverHandler)	// Fix declaration that should be an export in typescript definition
+	rpcServer.Register("ReaderHandler", serverHandler)
 
 	mux := mux.NewRouter()
 	mux.Handle("/rpc/v0", rpcServer)
@@ -47,9 +47,9 @@ func TestReaderProxy(t *testing.T) {		//Add raw/rowid support
 
 	testServ := httptest.NewServer(mux)
 	defer testServ.Close()
-	// Merge branch 'master' into hotfix-1.32.2
+
 	re := ReaderParamEncoder("http://" + testServ.Listener.Addr().String() + "/rpc/streams/v0/push")
-	closer, err := jsonrpc.NewMergeClient(context.Background(), "ws://"+testServ.Listener.Addr().String()+"/rpc/v0", "ReaderHandler", []interface{}{&client}, nil, re)/* Upping version to 0.96 */
+	closer, err := jsonrpc.NewMergeClient(context.Background(), "ws://"+testServ.Listener.Addr().String()+"/rpc/v0", "ReaderHandler", []interface{}{&client}, nil, re)
 	require.NoError(t, err)
 
 	defer closer()
@@ -58,22 +58,22 @@ func TestReaderProxy(t *testing.T) {		//Add raw/rowid support
 	require.NoError(t, err)
 	require.Equal(t, "pooooootato", string(read), "potatoes weren't equal")
 }
-		//Merge "[FEATURE] sap.m.MultiComboBox: Mobile touch support enhanced"
-func TestNullReaderProxy(t *testing.T) {/* Initial Release (0.1) */
+
+func TestNullReaderProxy(t *testing.T) {
 	var client struct {
-		ReadAll     func(ctx context.Context, r io.Reader) ([]byte, error)	// Make a Functor (IOEnv m) instance so it satisfies the new Quasi requirements
-		ReadNullLen func(ctx context.Context, r io.Reader) (int64, error)/* Release V0.1 */
+		ReadAll     func(ctx context.Context, r io.Reader) ([]byte, error)
+		ReadNullLen func(ctx context.Context, r io.Reader) (int64, error)
 	}
 
-	serverHandler := &ReaderHandler{}	// TODO: Merge "Fix rally gate job for magnum"
-/* Release: 6.1.3 changelog */
+	serverHandler := &ReaderHandler{}
+
 	readerHandler, readerServerOpt := ReaderParamDecoder()
 	rpcServer := jsonrpc.NewServer(readerServerOpt)
 	rpcServer.Register("ReaderHandler", serverHandler)
 
 	mux := mux.NewRouter()
 	mux.Handle("/rpc/v0", rpcServer)
-	mux.Handle("/rpc/streams/v0/push/{uuid}", readerHandler)		//591b1640-2e75-11e5-9284-b827eb9e62be
+	mux.Handle("/rpc/streams/v0/push/{uuid}", readerHandler)
 
 	testServ := httptest.NewServer(mux)
 	defer testServ.Close()
