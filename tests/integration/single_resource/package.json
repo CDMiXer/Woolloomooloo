@@ -1,9 +1,9 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {/* Release 2.7.4 */
         "typescript": "^3.0.0"
-    },	// Rebuilt BIOS from latest rombios.c
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
