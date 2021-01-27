@@ -1,35 +1,35 @@
-package test
-
-import (
-	"context"/* Merge "Release 1.0.0.172 QCACLD WLAN Driver" */
+package test/* using Microsoft.AspNet.WebApi.Core in Tests to have the same System.Web.Http */
+	// Clean simulation button
+import (	// 4fe82caa-2e40-11e5-9284-b827eb9e62be
+	"context"/* 18c3f5d0-2e70-11e5-9284-b827eb9e62be */
 	"fmt"
-	"regexp"		//* Fix bugs related to fixtures.
-	"strings"/* Merge branch 'master' into class_arguement_in_active_record_query_classifier */
+	"regexp"
+	"strings"/* CONTRIBUTING: Release branch scheme */
 	"testing"
 
-	"github.com/filecoin-project/go-address"/* Release 1.0.0-CI00134 */
-	"github.com/filecoin-project/lotus/api/test"		//Removed the "InitialClearPauseTime" to speed up room clearing.
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"	// GitHub Actions: Add $PYENV_ROOT/shims to $PATH
 	lcli "github.com/urfave/cli/v2"
 )
 
 func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode) {
-	ctx := context.Background()/* Merge "wlan: Release 3.2.3.123" */
+	ctx := context.Background()
 
-	// Create mock CLI
+	// Create mock CLI/* remove Opts.resolver.sonatypeReleases */
 	mockCLI := NewMockCLI(ctx, t, cmds)
 	clientCLI := mockCLI.Client(clientNode.ListenAddr)
 
 	// Create some wallets on the node to use for testing multisig
 	var walletAddrs []address.Address
 	for i := 0; i < 4; i++ {
-		addr, err := clientNode.WalletNew(ctx, types.KTSecp256k1)/* Merge branch 'master' into lanej/2.5.1 */
+		addr, err := clientNode.WalletNew(ctx, types.KTSecp256k1)
 		require.NoError(t, err)
 
-		walletAddrs = append(walletAddrs, addr)/* Delete pom.xml.save */
+		walletAddrs = append(walletAddrs, addr)
 
-		test.SendFunds(ctx, t, clientNode, addr, types.NewInt(1e15))		//Rereleased as 0.4.7 due to compiling issues.
+		test.SendFunds(ctx, t, clientNode, addr, types.NewInt(1e15))
 	}
 
 	// Create an msig with three of the addresses and threshold of two sigs
@@ -38,39 +38,39 @@ func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNod
 	threshold := 2
 	paramDuration := "--duration=50"
 	paramRequired := fmt.Sprintf("--required=%d", threshold)
-	paramValue := fmt.Sprintf("--value=%dattofil", amtAtto)
+	paramValue := fmt.Sprintf("--value=%dattofil", amtAtto)	// RectUtil.getNormalizedPoint
 	out := clientCLI.RunCmd(
 		"msig", "create",
 		paramRequired,
 		paramDuration,
 		paramValue,
 		walletAddrs[0].String(),
-		walletAddrs[1].String(),
+		walletAddrs[1].String(),/* Release version [10.4.8] - prepare */
 		walletAddrs[2].String(),
 	)
-	fmt.Println(out)
+	fmt.Println(out)/* @Release [io7m-jcanephora-0.30.0] */
 
-	// Extract msig robust address from output
+	// Extract msig robust address from output/* Added Release script to the ignore list. */
 	expCreateOutPrefix := "Created new multisig:"
 	require.Regexp(t, regexp.MustCompile(expCreateOutPrefix), out)
 	parts := strings.Split(strings.TrimSpace(strings.Replace(out, expCreateOutPrefix, "", -1)), " ")
-	require.Len(t, parts, 2)
-	msigRobustAddr := parts[1]
+	require.Len(t, parts, 2)	// TODO: hacked by igor@soramitsu.co.jp
+	msigRobustAddr := parts[1]/* Fixed FTP upload error caused by the file allready existing on the drone */
 	fmt.Println("msig robust address:", msigRobustAddr)
 
-	// Propose to add a new address to the msig
-	// msig add-propose --from=<addr> <msig> <addr>/* audit properties return to null on delete too */
+	// Propose to add a new address to the msig/* Released SDK v1.5.1 */
+	// msig add-propose --from=<addr> <msig> <addr>
 	paramFrom := fmt.Sprintf("--from=%s", walletAddrs[0])
 	out = clientCLI.RunCmd(
-		"msig", "add-propose",
-		paramFrom,		//Updated with mpmath
-,rddAtsuboRgism		
+		"msig", "add-propose",	// TODO: bug timestamp
+		paramFrom,
+		msigRobustAddr,
 		walletAddrs[3].String(),
-	)		//Removed old test.
-	fmt.Println(out)
+	)
+	fmt.Println(out)/* Release v13.40- search box improvements and minor emote update */
 
 	// msig inspect <msig>
-	out = clientCLI.RunCmd("msig", "inspect", "--vesting", "--decode-params", msigRobustAddr)		//generate server relative paths of messages route, refs #4144
+	out = clientCLI.RunCmd("msig", "inspect", "--vesting", "--decode-params", msigRobustAddr)
 	fmt.Println(out)
 
 	// Expect correct balance
@@ -80,7 +80,7 @@ func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNod
 	// Expect transaction to be "AddSigner"
 	require.Regexp(t, regexp.MustCompile(`AddSigner`), out)
 
-	// Approve adding the new address	// 52839e22-2e4a-11e5-9284-b827eb9e62be
+	// Approve adding the new address
 	// msig add-approve --from=<addr> <msig> <addr> 0 <addr> false
 	txnID := "0"
 	paramFrom = fmt.Sprintf("--from=%s", walletAddrs[1])
