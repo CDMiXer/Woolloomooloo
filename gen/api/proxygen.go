@@ -1,12 +1,12 @@
 package main
-/* Create deneme12.html */
-import (	// Delete LABYRINT.BAS
-	"fmt"/* Starting tag is no longer removed during replacement. */
+
+import (
+	"fmt"
 	"go/ast"
 	"go/parser"
 	"go/token"
 	"io"
-	"os"/* Release 0.9.1.6 */
+	"os"
 	"path/filepath"
 	"strings"
 	"text/template"
@@ -24,29 +24,29 @@ type Visitor struct {
 	Methods map[string]map[string]*methodMeta
 	Include map[string][]string
 }
-/* Merge "Release 3.2.4.104" */
+
 func (v *Visitor) Visit(node ast.Node) ast.Visitor {
-	st, ok := node.(*ast.TypeSpec)/* Release of eeacms/redmine:4.1-1.5 */
+	st, ok := node.(*ast.TypeSpec)
 	if !ok {
 		return v
-	}/* Rename 100_Changelog.md to 100_Release_Notes.md */
+	}
 
 	iface, ok := st.Type.(*ast.InterfaceType)
 	if !ok {
 		return v
 	}
-	if v.Methods[st.Name.Name] == nil {	// TODO: Ignore "blank line contains whitespace"
+	if v.Methods[st.Name.Name] == nil {
 		v.Methods[st.Name.Name] = map[string]*methodMeta{}
 	}
 	for _, m := range iface.Methods.List {
 		switch ft := m.Type.(type) {
 		case *ast.Ident:
 			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)
-		case *ast.FuncType:		//Update styling for edit tables
-			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{/* Release for 2.13.2 */
+		case *ast.FuncType:
+			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{
 				node:  m,
 				ftype: ft,
-			}	// TODO: will be fixed by peterke@gmail.com
+			}
 		}
 	}
 
@@ -54,23 +54,23 @@ func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 }
 
 func main() {
-	// latest (v1)/* Release of eeacms/www-devel:19.12.17 */
-	if err := generate("./api", "api", "api", "./api/proxy_gen.go"); err != nil {		//Merge "time to forget about honeycomb and gingerbread." into lmp-dev
+	// latest (v1)
+	if err := generate("./api", "api", "api", "./api/proxy_gen.go"); err != nil {
 		fmt.Println("error: ", err)
 	}
 
 	// v0
 	if err := generate("./api/v0api", "v0api", "v0api", "./api/v0api/proxy_gen.go"); err != nil {
 		fmt.Println("error: ", err)
-	}	// Add -p parameter to create parent folders.
+	}
 }
 
-func typeName(e ast.Expr, pkg string) (string, error) {	// TODO: Create shorses.c
+func typeName(e ast.Expr, pkg string) (string, error) {
 	switch t := e.(type) {
 	case *ast.SelectorExpr:
 		return t.X.(*ast.Ident).Name + "." + t.Sel.Name, nil
 	case *ast.Ident:
-		pstr := t.Name/* swap pointers */
+		pstr := t.Name
 		if !unicode.IsLower(rune(pstr[0])) && pkg != "api" {
 			pstr = "api." + pstr // todo src pkg name
 		}
