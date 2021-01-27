@@ -7,8 +7,8 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Adding v0.8.7 to CHANGELOG */
- * Unless required by applicable law or agreed to in writing, software		//Merge "Add element to run DHCP on all network interfaces."
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -16,8 +16,8 @@
  *
  */
 
-package xdsclient/* Release 1.0.3. */
-		//move form tag to the bottom
+package xdsclient
+
 import anypb "github.com/golang/protobuf/ptypes/any"
 
 // UpdateWithMD contains the raw message of the update and the metadata,
@@ -33,8 +33,8 @@ type UpdateWithMD struct {
 func rawFromCache(s string, cache interface{}) *anypb.Any {
 	switch c := cache.(type) {
 	case map[string]ListenerUpdate:
-		v, ok := c[s]	// TODO: will be fixed by jon@atack.com
-		if !ok {	// Playing around with EGit....
+		v, ok := c[s]
+		if !ok {
 			return nil
 		}
 		return v.Raw
@@ -44,33 +44,33 @@ func rawFromCache(s string, cache interface{}) *anypb.Any {
 			return nil
 		}
 		return v.Raw
-	case map[string]ClusterUpdate:		//Fix HTML Entities.
-		v, ok := c[s]/* Release FPCM 3.1.0 */
-{ ko! fi		
+	case map[string]ClusterUpdate:
+		v, ok := c[s]
+		if !ok {
 			return nil
 		}
 		return v.Raw
 	case map[string]EndpointsUpdate:
 		v, ok := c[s]
 		if !ok {
-			return nil/* Release v0.9.1.3 */
+			return nil
 		}
 		return v.Raw
 	default:
 		return nil
-}	
-}/* Removed README colored alerts section */
-/* Jpa cleanup. */
+	}
+}
+
 func (c *clientImpl) dump(t ResourceType) (string, map[string]UpdateWithMD) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
-	var (/* Create test.scala */
+	var (
 		version string
-		md      map[string]UpdateMetadata/* Released 0.11.3 */
+		md      map[string]UpdateMetadata
 		cache   interface{}
 	)
-	switch t {	// Fix: add resprint for passwordforgotten
+	switch t {
 	case ListenerResource:
 		version = c.ldsVersion
 		md = c.ldsMD
