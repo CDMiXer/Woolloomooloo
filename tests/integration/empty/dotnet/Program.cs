@@ -1,12 +1,12 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-
-using System.Threading.Tasks;
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// Merge "Change flavor show command"
+	// Delete MIT-LICENSE.txt
+using System.Threading.Tasks;/* Merge "Mark required fields under "Release Rights"" */
 using Pulumi;
-
-class Program/* Merge "Add Release Notes url to README" */
-{
-    static Task<int> Main(string[] args)/* improve reporting of SE data */
+	// Exclude Elemental
+class Program
+{/* Released DirectiveRecord v0.1.21 */
+    static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(() => {});
+        return Deployment.RunAsync(() => {});		//Removing http -> https redirect
     }
 }
