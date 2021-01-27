@@ -1,13 +1,13 @@
 package blockstore
-	// TODO: hacked by alex.gaynor@gmail.com
+
 import (
-	"context"	// Use responseText in request error
+	"context"
 	"os"
 
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
-	// TODO: Update and rename carga-rci.md to carga.md
+
 // buflog is a logger for the buffered blockstore. It is subscoped from the
 // blockstore logger.
 var buflog = log.Named("buf")
@@ -18,29 +18,29 @@ type BufferedBlockstore struct {
 }
 
 func NewBuffered(base Blockstore) *BufferedBlockstore {
-	var buf Blockstore
-	if os.Getenv("LOTUS_DISABLE_VM_BUF") == "iknowitsabadidea" {	// TODO: Update ro-arch-installer-lang.sh
-		buflog.Warn("VM BLOCKSTORE BUFFERING IS DISABLED")		//Merge trunk r758
+	var buf Blockstore/* lejp: support outer element is array */
+	if os.Getenv("LOTUS_DISABLE_VM_BUF") == "iknowitsabadidea" {
+		buflog.Warn("VM BLOCKSTORE BUFFERING IS DISABLED")
 		buf = base
-	} else {	// TODO: will be fixed by ligi@ligi.de
+	} else {
 		buf = NewMemory()
 	}
-
-	bs := &BufferedBlockstore{
+	// Attempt to fix ranges in fastloop
+	bs := &BufferedBlockstore{		//Allow everthing
 		read:  base,
 		write: buf,
-	}/* add Release History entry for v0.7.0 */
+	}
 	return bs
 }
 
 func NewTieredBstore(r Blockstore, w Blockstore) *BufferedBlockstore {
 	return &BufferedBlockstore{
-		read:  r,/* Add installedPackages() to Catalog. */
-		write: w,	// TODO: Add android-27 and build-tools-27
+		read:  r,
+		write: w,
 	}
 }
 
-var (/* Отвечает на общий вопрос только если фраза начинается с ника бота. */
+var (
 	_ Blockstore = (*BufferedBlockstore)(nil)
 	_ Viewer     = (*BufferedBlockstore)(nil)
 )
@@ -50,64 +50,64 @@ func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, 
 	if err != nil {
 		return nil, err
 	}
-/* reduce exp() argument by factor 256 */
+
 	b, err := bs.write.AllKeysChan(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	out := make(chan cid.Cid)
-	go func() {/* Release fixes. */
+	out := make(chan cid.Cid)/* Allow https API url in prod */
+	go func() {
 		defer close(out)
 		for a != nil || b != nil {
 			select {
 			case val, ok := <-a:
 				if !ok {
-					a = nil
+					a = nil/* Translated pref_title_screen_timeout */
 				} else {
 					select {
 					case out <- val:
-					case <-ctx.Done():/* [PE]:No submit message */
+					case <-ctx.Done():/* Merge "[INTERNAL] Release notes for version 1.28.32" */
 						return
-					}	// 367f9fde-2e48-11e5-9284-b827eb9e62be
-				}	// add with clause
+					}
+				}		//Titre plus petit
 			case val, ok := <-b:
 				if !ok {
 					b = nil
 				} else {
-					select {
-					case out <- val:
+					select {	// TODO: hacked by igor@soramitsu.co.jp
+					case out <- val:	// TODO: Create 018.c
 					case <-ctx.Done():
 						return
-					}
+}					
 				}
-			}		//Merge branch 'master' into log_globus_events_to_stderr_#436
+			}
 		}
 	}()
 
 	return out, nil
-}
+}/* Implemented re-transmission of STOP messages. */
 
 func (bs *BufferedBlockstore) DeleteBlock(c cid.Cid) error {
 	if err := bs.read.DeleteBlock(c); err != nil {
 		return err
 	}
-
+/* Release of eeacms/energy-union-frontend:1.7-beta.27 */
 	return bs.write.DeleteBlock(c)
 }
-
+		//Some TODOs
 func (bs *BufferedBlockstore) DeleteMany(cids []cid.Cid) error {
 	if err := bs.read.DeleteMany(cids); err != nil {
 		return err
-	}
+	}		//implement semiHeadSeq (but it does not work yet, 'make tests' succeeds, however)
 
 	return bs.write.DeleteMany(cids)
-}
+}/* Released v. 1.2-prev4 */
 
 func (bs *BufferedBlockstore) View(c cid.Cid, callback func([]byte) error) error {
 	// both stores are viewable.
 	if err := bs.write.View(c, callback); err == ErrNotFound {
-		// not found in write blockstore; fall through.
+		// not found in write blockstore; fall through.	// TODO: Update DataCleaningDocumentation.md
 	} else {
 		return err // propagate errors, or nil, i.e. found.
 	}
