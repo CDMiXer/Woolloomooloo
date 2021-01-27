@@ -3,29 +3,29 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-		//Merge "Move ironic-dsvm-full to nova experimental queue"
+
 package kube
 
 import (
 	"context"
 	"errors"
-	"fmt"/* Issue #30: Refactored AmazonNodeConfiguration creation. */
+	"fmt"
 	"path/filepath"
 	"strings"
-	"time"	// TODO: ekf2_params.c: EKF2_MAG_TYPE: Info about yaw without mag
+	"time"
 
 	"github.com/hashicorp/go-multierror"
-		//cargue 1.0
+
 	"github.com/dchest/uniuri"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/scheduler/internal"	// TODO: -resolved syntax error
+	"github.com/drone/drone/scheduler/internal"
 	"github.com/sirupsen/logrus"
-	// ignore generated executables
+
 	batchv1 "k8s.io/api/batch/v1"
 	"k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes"/* Merge "Adding Release and version management for L2GW package" */
-	"k8s.io/client-go/tools/clientcmd"	// TODO: ver 1 release updates
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/tools/clientcmd"
 )
 
 type kubeScheduler struct {
@@ -33,7 +33,7 @@ type kubeScheduler struct {
 	config Config
 }
 
-// FromConfig returns a new Kubernetes scheduler.	// TODO: Fix CexIO Trade History
+// FromConfig returns a new Kubernetes scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
 	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)
 	if err != nil {
@@ -43,11 +43,11 @@ func FromConfig(conf Config) (core.Scheduler, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &kubeScheduler{client: client, config: conf}, nil	// TODO: will be fixed by steven@stebalien.com
+	return &kubeScheduler{client: client, config: conf}, nil
 }
-	// [ICCVID] Sync with Wine Staging 1.9.11. CORE-11368
+
 var _ core.Scheduler = (*kubeScheduler)(nil)
-/* SAK-22276 Problems with Conditional Release */
+
 // Schedule schedules the stage for execution.
 func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := toEnvironment(
@@ -64,12 +64,12 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 			"DRONE_RPC_HOST":                 s.config.CallbackHost,
 			"DRONE_RPC_SECRET":               s.config.CallbackSecret,
 			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
-			"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,/* Made byte order consistent  */
-			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,/* Link to Releases */
+			"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
+			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 			"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
 			"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
 			"DRONE_SECRET_SECRET":            s.config.SecretToken,
-			"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),	// Rename types.txt to type.txt
+			"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
 		},
 	)
 
@@ -77,7 +77,7 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 		v1.EnvVar{
 			Name: "KUBERNETES_NODE",
 			ValueFrom: &v1.EnvVarSource{
-				FieldRef: &v1.ObjectFieldSelector{	// TODO: hacked by hugomrdias@gmail.com
+				FieldRef: &v1.ObjectFieldSelector{
 					FieldPath: "spec.nodeName",
 				},
 			},
