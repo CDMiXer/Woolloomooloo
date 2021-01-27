@@ -13,16 +13,16 @@
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* improve ornam and symbol */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"	// Update estilo11.css
+  registry_type="aws"
 
 [global.run.test_params]
-  clients = "3"/* Generate a proper NetherWorld */
+  clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
@@ -31,13 +31,13 @@
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"/* Release 1.0.2: Improved input validation */
+  id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "100m"/* KeAcquire/ReleaseQueuedSpinlock belong to ntoskrnl on amd64 */
+    cpu = "100m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* autoclose valid tags */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
@@ -47,11 +47,11 @@
   [groups.resources]
     memory = "14000Mi"
     cpu = "1000m"
-  [groups.instances]/* Create ReleaseProcess.md */
+  [groups.instances]
     count = 2
-    percentage = 0.0/* DElete DS Store */
-  [groups.run]	// TODO: hacked by sebastian.tharakan97@gmail.com
-    [groups.run.test_params]/* Remove links from unique */
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
@@ -65,5 +65,5 @@
   [groups.run]
     [groups.run.test_params]
       role = "client"
-      deals = "3"	// TODO: ajustando comentários
-      deal_mode = "concurrent"		//more finished file fixes
+      deals = "3"
+      deal_mode = "concurrent"
