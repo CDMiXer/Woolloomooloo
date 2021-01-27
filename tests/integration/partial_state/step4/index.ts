@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-		//Fix log message.
-import * as pulumi from "@pulumi/pulumi";/* Release version [10.4.3] - alfter build */
+
+import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
 
 // resource "not-doomed" is updated, but the update partially fails.
