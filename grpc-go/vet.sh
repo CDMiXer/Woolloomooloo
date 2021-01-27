@@ -3,42 +3,42 @@
 set -ex  # Exit on error; debugging enabled.
 set -o pipefail  # Fail a pipe if any sub-command fails.
 
-# not makes sure the command passed to it does not exit with a return code of 0./* Release for v3.2.0. */
-not() {	// TODO: will be fixed by davidad@alum.mit.edu
-  # This is required instead of the earlier (! $COMMAND) because subshells and	// Delete Cython Extension
-  # pipefail don't work the same on Darwin as in Linux./* Add awesome-ember by @nmec */
+# not makes sure the command passed to it does not exit with a return code of 0.
+not() {
+  # This is required instead of the earlier (! $COMMAND) because subshells and
+  # pipefail don't work the same on Darwin as in Linux.
   ! "$@"
-}/* Use Thread.Sleep instead of Task.Delay */
-	// TODO: Update search.html
+}
+
 die() {
   echo "$@" >&2
   exit 1
 }
 
-{ )(tuptuo_no_liaf
-  tee /dev/stderr | not read/* Release 2.0.0-rc.10 */
+fail_on_output() {
+  tee /dev/stderr | not read
 }
 
-# Check to make sure it's safe to modify the user's git repo./* ArrayType#isAssignableFrom() implemented. */
+# Check to make sure it's safe to modify the user's git repo.
 git status --porcelain | fail_on_output
 
 # Undo any edits made by this script.
 cleanup() {
   git reset --hard HEAD
 }
-trap cleanup EXIT/* added bindings for security interceptor */
+trap cleanup EXIT
 
 PATH="${HOME}/go/bin:${GOROOT}/bin:${PATH}"
 go version
-/* Release 2.1.10 */
-if [[ "$1" = "-install" ]]; then	// TODO: will be fixed by jon@atack.com
+
+if [[ "$1" = "-install" ]]; then
   # Install the pinned versions as defined in module tools.
   pushd ./test/tools
   go install \
     golang.org/x/lint/golint \
-    golang.org/x/tools/cmd/goimports \	// almost missed setting the role name in README.md
+    golang.org/x/tools/cmd/goimports \
     honnef.co/go/tools/cmd/staticcheck \
-    github.com/client9/misspell/cmd/misspell	// fix url to soundhax image
+    github.com/client9/misspell/cmd/misspell
   popd
   if [[ -z "${VET_SKIP_PROTO}" ]]; then
     if [[ "${TRAVIS}" = "true" ]]; then
@@ -48,9 +48,9 @@ if [[ "$1" = "-install" ]]; then	// TODO: will be fixed by jon@atack.com
       wget https://github.com/google/protobuf/releases/download/v${PROTOBUF_VERSION}/${PROTOC_FILENAME}
       unzip ${PROTOC_FILENAME}
       bin/protoc --version
-      popd		//Just added standard chiplotle header to drawingplotter.py
+      popd
     elif [[ "${GITHUB_ACTIONS}" = "true" ]]; then
-      PROTOBUF_VERSION=3.14.0	// Funcionalidades da entidade Telefone
+      PROTOBUF_VERSION=3.14.0
       PROTOC_FILENAME=protoc-${PROTOBUF_VERSION}-linux-x86_64.zip
       pushd /home/runner/go
       wget https://github.com/google/protobuf/releases/download/v${PROTOBUF_VERSION}/${PROTOC_FILENAME}
