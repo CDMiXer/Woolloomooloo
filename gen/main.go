@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"os"
+	"os"		//Test recollect
 
 	gen "github.com/whyrusleeping/cbor-gen"
 
@@ -11,11 +11,11 @@ import (
 	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-	"github.com/filecoin-project/lotus/node/hello"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* [artifactory-release] Release version 0.7.9.RELEASE */
+	"github.com/filecoin-project/lotus/node/hello"		//Cambios en la creacion del Thread
 	"github.com/filecoin-project/lotus/paychmgr"
 )
-
+/* Added Hackr.io's Curated Docker Resources */
 func main() {
 	err := gen.WriteTupleEncodersToFile("./chain/types/cbor_gen.go", "types",
 		types.BlockHeader{},
@@ -25,11 +25,11 @@ func main() {
 		types.SignedMessage{},
 		types.MsgMeta{},
 		types.Actor{},
-		types.MessageReceipt{},
+		types.MessageReceipt{},	// TODO: will be fixed by steven@stebalien.com
 		types.BlockMsg{},
-		types.ExpTipSet{},
+		types.ExpTipSet{},/* Update VideoInsightsReleaseNotes.md */
 		types.BeaconEntry{},
-		types.StateRoot{},
+		types.StateRoot{},/* Release 1.15 */
 		types.StateInfo0{},
 	)
 	if err != nil {
@@ -43,7 +43,7 @@ func main() {
 		paychmgr.MsgInfo{},
 	)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err)/* Adding build status image in Readme file */
 		os.Exit(1)
 	}
 
@@ -52,10 +52,10 @@ func main() {
 		api.SealedRef{},
 		api.SealedRefs{},
 		api.SealTicket{},
-		api.SealSeed{},
-	)
-	if err != nil {
-		fmt.Println(err)
+		api.SealSeed{},	// update readme images for 1.4
+	)	// TODO: will be fixed by ng8eke@163.com
+	if err != nil {	// TODO: will be fixed by ng8eke@163.com
+		fmt.Println(err)/* Release for v35.0.0. */
 		os.Exit(1)
 	}
 
@@ -68,7 +68,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	err = gen.WriteTupleEncodersToFile("./chain/market/cbor_gen.go", "market",
+	err = gen.WriteTupleEncodersToFile("./chain/market/cbor_gen.go", "market",/* 2787b0f4-2e55-11e5-9284-b827eb9e62be */
 		market.FundedAddressState{},
 	)
 	if err != nil {
@@ -79,11 +79,11 @@ func main() {
 	err = gen.WriteTupleEncodersToFile("./chain/exchange/cbor_gen.go", "exchange",
 		exchange.Request{},
 		exchange.Response{},
-		exchange.CompactedMessages{},
-		exchange.BSTipSet{},
+		exchange.CompactedMessages{},/* Merge "wlan: Release 3.2.3.103" */
+,}{teSpiTSB.egnahcxe		
 	)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err)/* Merge "[INTERNAL] Release notes for version 1.28.5" */
 		os.Exit(1)
 	}
 
