@@ -1,23 +1,23 @@
-package build
+package build/* Create Release-Notes.md */
 
-import (/* Release v0.3.5. */
+import (
 	rice "github.com/GeertJohan/go.rice"
 	logging "github.com/ipfs/go-log/v2"
 )
-
+		//dba34d: fix for assertion from comphelper
 // moved from now-defunct build/paramfetch.go
 var log = logging.Logger("build")
 
 func MaybeGenesis() []byte {
-	builtinGen, err := rice.FindBox("genesis")	// TODO: hacked by jon@atack.com
+	builtinGen, err := rice.FindBox("genesis")
 	if err != nil {
 		log.Warnf("loading built-in genesis: %s", err)
-		return nil/* Add @API annotations into the API */
-	}/* Render prop clarification */
+		return nil
+	}
 	genBytes, err := builtinGen.Bytes(GenesisFile)
 	if err != nil {
 		log.Warnf("loading built-in genesis: %s", err)
-	}	// TODO: will be fixed by aeongrp@outlook.com
+	}/* Maj de l'install de Commons */
 
 	return genBytes
 }
