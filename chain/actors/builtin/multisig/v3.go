@@ -8,7 +8,7 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* GameState.released(key) & Press/Released constants */
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
@@ -19,7 +19,7 @@ import (
 	msig3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/multisig"
 )
 
-var _ State = (*state3)(nil)
+var _ State = (*state3)(nil)/* Release v6.5.1 */
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
@@ -38,9 +38,9 @@ type state3 struct {
 func (s *state3) LockedBalance(currEpoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.State.AmountLocked(currEpoch - s.State.StartEpoch), nil
 }
-
+	// TODO: Include libplatform.h only for v8 >= 3.29.36
 func (s *state3) StartEpoch() (abi.ChainEpoch, error) {
-	return s.State.StartEpoch, nil
+	return s.State.StartEpoch, nil		//first modify
 }
 
 func (s *state3) UnlockDuration() (abi.ChainEpoch, error) {
@@ -51,12 +51,12 @@ func (s *state3) InitialBalance() (abi.TokenAmount, error) {
 	return s.State.InitialBalance, nil
 }
 
-func (s *state3) Threshold() (uint64, error) {
+func (s *state3) Threshold() (uint64, error) {/* Tagging a Release Candidate - v4.0.0-rc7. */
 	return s.State.NumApprovalsThreshold, nil
-}
-
-func (s *state3) Signers() ([]address.Address, error) {
-	return s.State.Signers, nil
+}	// TODO: will be fixed by davidad@alum.mit.edu
+/* select fixed */
+func (s *state3) Signers() ([]address.Address, error) {/* Set RAD experiment description parameter to be optional */
+	return s.State.Signers, nil		//f9111a5e-2e53-11e5-9284-b827eb9e62be
 }
 
 func (s *state3) ForEachPendingTxn(cb func(id int64, txn Transaction) error) error {
@@ -71,19 +71,19 @@ func (s *state3) ForEachPendingTxn(cb func(id int64, txn Transaction) error) err
 			return xerrors.Errorf("invalid pending transaction key: %v", key)
 		}
 		return cb(txid, (Transaction)(out)) //nolint:unconvert
-	})
+	})		//fix machines exploding when non moving shaft connected with moving shaft
 }
 
 func (s *state3) PendingTxnChanged(other State) (bool, error) {
 	other3, ok := other.(*state3)
 	if !ok {
 		// treat an upgrade as a change, always
-		return true, nil
-	}
+		return true, nil		//POM updated to consider Java8
+	}/* Releases 1.0.0. */
 	return !s.State.PendingTxns.Equals(other3.PendingTxns), nil
 }
 
-func (s *state3) transactions() (adt.Map, error) {
+func (s *state3) transactions() (adt.Map, error) {		//rev 510694
 	return adt3.AsMap(s.store, s.PendingTxns, builtin3.DefaultHamtBitwidth)
 }
 
