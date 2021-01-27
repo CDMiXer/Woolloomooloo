@@ -1,10 +1,10 @@
 // Copyright 2017 gRPC authors.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Refactor relink into smaller pieces and add tests
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release statement after usage */
-///* Release 2.1.0 (closes #92) */
-//     http://www.apache.org/licenses/LICENSE-2.0		//Added upper-bound to dependency on base.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,8 +20,8 @@ option go_package = "google.golang.org/grpc/test/codec_perf";
 
 package codec.perf;
 
-// Buffer is a message that contains a body of bytes that is used to exercise	// TODO: Create Miscellaneous README
-// encoding and decoding overheads.		//fix an option in toyunda-player
+// Buffer is a message that contains a body of bytes that is used to exercise
+// encoding and decoding overheads.
 message Buffer {
   bytes body = 1;
 }
