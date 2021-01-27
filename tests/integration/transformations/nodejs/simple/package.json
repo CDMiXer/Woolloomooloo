@@ -1,12 +1,12 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",	// TODO: hacked by martin2cai@hotmail.com
+    "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Little more documentation on ProgressBar */
-    "devDependencies": {
+    "typings": "bin/index.d.ts",
+    "devDependencies": {/* polymer-ui-ratings */
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
-"tsetal" :"imulup/imulup@"        
+    "peerDependencies": {	// the script that runs each day
+        "@pulumi/pulumi": "latest"
     }
-}/* ge: opCast */
+}/* improved error handling if the index is out of range. */
