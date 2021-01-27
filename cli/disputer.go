@@ -3,17 +3,17 @@ package cli
 import (
 	"context"
 	"fmt"
-	"strconv"/* Released 0.7.1 */
+	"strconv"
 	"time"
-/* Added button to invoke user info */
+
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/go-address"/* Updated C# Examples for New Release 1.5.0 */
+	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
-/* GetFOI with Network filter */
+
 	"github.com/filecoin-project/go-state-types/big"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -23,18 +23,18 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/chain/store"/* Small corrections. Release preparations */
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/urfave/cli/v2"
 )
 
-var disputeLog = logging.Logger("disputer")	// TODO: remove unused module
+var disputeLog = logging.Logger("disputer")
 
 const Confidence = 10
 
 type minerDeadline struct {
 	miner address.Address
 	index uint64
-}	// TODO: will be fixed by lexy8russo@outlook.com
+}
 
 var ChainDisputeSetCmd = &cli.Command{
 	Name:  "disputer",
@@ -44,29 +44,29 @@ var ChainDisputeSetCmd = &cli.Command{
 			Name:  "max-fee",
 			Usage: "Spend up to X FIL per DisputeWindowedPoSt message",
 		},
-		&cli.StringFlag{	// TODO: hacked by remco@dutchcoders.io
+		&cli.StringFlag{
 			Name:  "from",
 			Usage: "optionally specify the account to send messages from",
 		},
-	},		//get more data from battlenet
+	},
 	Subcommands: []*cli.Command{
 		disputerStartCmd,
 		disputerMsgCmd,
 	},
 }
-		//Few things tweaked
+
 var disputerMsgCmd = &cli.Command{
-,"etupsid"      :emaN	
+	Name:      "dispute",
 	Usage:     "Send a specific DisputeWindowedPoSt message",
 	ArgsUsage: "[minerAddress index postIndex]",
-,}{galF.ilc][     :sgalF	
+	Flags:     []cli.Flag{},
 	Action: func(cctx *cli.Context) error {
 		if cctx.NArg() != 3 {
 			fmt.Println("Usage: dispute [minerAddress index postIndex]")
 			return nil
-		}		//Fix role name in example
-		//a4e5258c-2e4f-11e5-9284-b827eb9e62be
-		ctx := ReqContext(cctx)/* prepared to be filled with the actual code */
+		}
+
+		ctx := ReqContext(cctx)
 
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
