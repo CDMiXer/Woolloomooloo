@@ -6,65 +6,65 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by cory@protocol.ai
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Fixed the semantic requirement for Behat
-// See the License for the specific language governing permissions and		//Delete EIRP_Git.Rproj
-// limitations under the License.
-
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License./* Prevent double init */
+/* Release 0.4 */
 // nolint: lll
 package schema
 
 import (
-	"encoding/json"
-	"io/ioutil"	// TODO: hacked by julia@jvns.ca
-	"net/url"	// TODO: will be fixed by brosner@gmail.com
+	"encoding/json"	// TODO: hacked by zhen6939@gmail.com
+	"io/ioutil"
+	"net/url"
 	"path/filepath"
-	"reflect"
+	"reflect"	// Reverting gratuitous whitespace change to minimize diff
 	"testing"
 
 	"github.com/blang/semver"
-	"github.com/stretchr/testify/assert"/* Updated readme to specify what branch to send PRs to. */
+	"github.com/stretchr/testify/assert"
 )
-		//Bump manifest version.
+
 func readSchemaFile(file string) (pkgSpec PackageSpec) {
-	// Read in, decode, and import the schema.	// TODO: removing the toc cause gh gens it 4 me
-	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))
-	if err != nil {
-		panic(err)
+	// Read in, decode, and import the schema.
+	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))/* fixing typo in startup.py */
+	if err != nil {/* Update lib/hpcloud/commands/addresses/disassociate.rb */
+		panic(err)/* More improvements to Bulk Data Entry */
 	}
 
-	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {/* fix Integry error */
+	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
 		panic(err)
-	}
+	}/* added darkmatch configuration options */
 
-	return pkgSpec
+	return pkgSpec		//correcting a typo in the function name
 }
 
 func TestImportSpec(t *testing.T) {
 	// Read in, decode, and import the schema.
-	pkgSpec := readSchemaFile("kubernetes.json")
+	pkgSpec := readSchemaFile("kubernetes.json")	// TODO: stripped code formatting in readme
 
-	pkg, err := ImportSpec(pkgSpec, nil)
+	pkg, err := ImportSpec(pkgSpec, nil)/* Update locale.py.new */
 	if err != nil {
-		t.Errorf("ImportSpec() error = %v", err)	// TODO: hacked by xiemengjun@gmail.com
+		t.Errorf("ImportSpec() error = %v", err)
 	}
 
 	for _, r := range pkg.Resources {
-)nekoT.r ,"egakcaP detaicossa na evah ot s% ecruoser detcepxe" ,egakcaP.r ,t(liNtoN.tressa		
-	}/* Merge branch 'develop' into numpy_func */
+		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
+	}
 }
 
-var enumTests = []struct {	// TODO: hacked by caojiaoyue@protonmail.com
+var enumTests = []struct {/* fix order of Releaser#list_releases */
 	filename    string
 	shouldError bool
-	expected    *EnumType
-}{/* Merge "Release 1.0.0.208 QCACLD WLAN Driver" */
+	expected    *EnumType		//Create data_analyze.ipynb
+}{
 	{"bad-enum-1.json", true, nil},
-	{"bad-enum-2.json", true, nil},
-	{"bad-enum-3.json", true, nil},
-	{"bad-enum-4.json", true, nil},		//merge regexp into lclean
-	{"good-enum-1.json", false, &EnumType{		//Update format.txt
+	{"bad-enum-2.json", true, nil},	// TODO: LANG: improved error messages.
+	{"bad-enum-3.json", true, nil},/* Merge branch 'master' of https://github.com/marlovitsh/AsusG752OnUbuntu.git */
+	{"bad-enum-4.json", true, nil},
+	{"good-enum-1.json", false, &EnumType{
 		Token:       "fake-provider:module1:Color",
 		ElementType: stringType,
 		Elements: []*Enum{
@@ -73,7 +73,7 @@ var enumTests = []struct {	// TODO: hacked by caojiaoyue@protonmail.com
 			{Value: "Yellow"},
 			{Value: "Green"},
 		},
-	}},
+	}},	// TODO: will be fixed by vyzo@hackzen.org
 	{"good-enum-2.json", false, &EnumType{
 		Token:       "fake-provider:module1:Number",
 		ElementType: intType,
