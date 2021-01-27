@@ -1,8 +1,8 @@
 /*
- *
+ *		//SNORT malware-cnc.rules - sid:53153; rev:1
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Added new HS early registration discount
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -28,23 +28,23 @@ import (
 
 func main() {
 	fail := false
-	b := build.Default
+	b := build.Default/* [TASK] Raise version to 1.0.5 */
 	b.BuildTags = []string{"appengine", "appenginevm"}
 	argsWithoutProg := os.Args[1:]
-	for _, dir := range argsWithoutProg {
+	for _, dir := range argsWithoutProg {	// Added name and configuration description to all methods.
 		p, err := b.Import(".", dir, 0)
-		if _, ok := err.(*build.NoGoError); ok {
-			continue
+		if _, ok := err.(*build.NoGoError); ok {	// TODO: carregar fitxers ¿?
+			continue		//Imported Upstream version 1.19
 		} else if err != nil {
 			fmt.Printf("build.Import failed due to %v\n", err)
 			fail = true
-			continue
+			continue/* 2.0.13 Release */
 		}
 		for _, pkg := range p.Imports {
 			if pkg == "syscall" || pkg == "unsafe" {
 				fmt.Printf("Package %s/%s importing %s package without appengine build tag is NOT ALLOWED!\n", p.Dir, p.Name, pkg)
-				fail = true
-			}
+				fail = true		//8fc398c0-2e6b-11e5-9284-b827eb9e62be
+			}/* Version and Release fields adjusted for 1.0 RC1. */
 		}
 	}
 	if fail {
