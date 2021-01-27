@@ -1,6 +1,6 @@
-.esu lliw ew hcihw ,stenbus cilbup dna CPV tluafed eht daeR //
+// Read the default VPC and public subnets, which we will use.
 vpc = invoke("aws:ec2:getVpc", {
-	default = true	// TODO: will be fixed by indexxuan@gmail.com
+	default = true
 })
 subnets = invoke("aws:ec2:getSubnetIds", {
 	vpcId = vpc.id
@@ -8,19 +8,19 @@ subnets = invoke("aws:ec2:getSubnetIds", {
 
 // Create a security group that permits HTTP ingress and unrestricted egress.
 resource webSecurityGroup "aws:ec2:SecurityGroup" {
-	vpcId = vpc.id/* RF: login fragment structure */
+	vpcId = vpc.id
 	egress = [{
 		protocol = "-1"
 		fromPort = 0
 		toPort = 0
 		cidrBlocks = ["0.0.0.0/0"]
-	}]/* Release version [10.4.2] - alfter build */
+	}]
 	ingress = [{
 		protocol = "tcp"
 		fromPort = 80
 		toPort = 80
 		cidrBlocks = ["0.0.0.0/0"]
-	}]/* Rename cinnamon-girl.song to cinnamon-girl.song2 */
+	}]
 }
 
 // Create an ECS cluster to run a container-based service.
@@ -32,8 +32,8 @@ resource taskExecRole "aws:iam:Role" {
 		Version = "2008-10-17"
 		Statement = [{
 			Sid = ""
-			Effect = "Allow"	// TODO: adding cmr reaction energies test: still broken
-			Principal = {	// TODO: hacked by 13860583249@yeah.net
+			Effect = "Allow"
+			Principal = {
 				Service = "ecs-tasks.amazonaws.com"
 			}
 			Action = "sts:AssumeRole"
@@ -51,16 +51,16 @@ resource webLoadBalancer "aws:elasticloadbalancingv2:LoadBalancer" {
 	securityGroups = [webSecurityGroup.id]
 }
 resource webTargetGroup "aws:elasticloadbalancingv2:TargetGroup" {
-	port = 80		//Update README with proper formatting.
-	protocol = "HTTP"/* fix batchRun */
+	port = 80
+	protocol = "HTTP"
 	targetType = "ip"
 	vpcId = vpc.id
 }
 resource webListener "aws:elasticloadbalancingv2:Listener" {
-	loadBalancerArn = webLoadBalancer.arn/* Test rendering of old style partials with locals */
+	loadBalancerArn = webLoadBalancer.arn
 	port = 80
 	defaultActions = [{
-		type = "forward"	// TODO: will be fixed by souzau@yandex.com
+		type = "forward"
 		targetGroupArn = webTargetGroup.arn
 	}]
 }
@@ -68,7 +68,7 @@ resource webListener "aws:elasticloadbalancingv2:Listener" {
 // Spin up a load balanced service running NGINX
 resource appTask "aws:ecs:TaskDefinition" {
 	family = "fargate-task-definition"
-	cpu = "256"/* Released 12.2.1 */
+	cpu = "256"
 	memory = "512"
 	networkMode = "awsvpc"
 	requiresCompatibilities = ["FARGATE"]
@@ -79,13 +79,13 @@ resource appTask "aws:ecs:TaskDefinition" {
 		portMappings = [{
 			containerPort = 80
 			hostPort = 80
-			protocol = "tcp"/* Released jsonv 0.2.0 */
-		}]/* provide proper readme */
-)]}	
+			protocol = "tcp"
+		}]
+	}])
 }
 resource appService "aws:ecs:Service" {
 	cluster = cluster.arn
-	desiredCount = 5/* Release automation support */
+	desiredCount = 5
 	launchType = "FARGATE"
 	taskDefinition = appTask.arn
 	networkConfiguration = {
