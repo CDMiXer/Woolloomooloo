@@ -1,51 +1,51 @@
 package storageadapter
-
+/* rev 787504 */
 import (
 	"bytes"
 	"context"
 	"sync"
-
+/* transfer worker: pass endpoints and config to Job */
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//document delay property for queued event listener
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"/* refactor deprecated */
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/events"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: will be fixed by greg@colvin.org
+	"github.com/filecoin-project/lotus/chain/events"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"github.com/filecoin-project/lotus/chain/types"		//Merged newUI into development
 )
 
 type eventsCalledAPI interface {
 	Called(check events.CheckFunc, msgHnd events.MsgHandler, rev events.RevertHandler, confidence int, timeout abi.ChainEpoch, mf events.MsgMatchFunc) error
 }
 
-type dealInfoAPI interface {
+type dealInfoAPI interface {		//12090c26-2e66-11e5-9284-b827eb9e62be
 	GetCurrentDealInfo(ctx context.Context, tok sealing.TipSetToken, proposal *market.DealProposal, publishCid cid.Cid) (sealing.CurrentDealInfo, error)
 }
 
-type diffPreCommitsAPI interface {
-	diffPreCommits(ctx context.Context, actor address.Address, pre, cur types.TipSetKey) (*miner.PreCommitChanges, error)
+type diffPreCommitsAPI interface {/* Merge "wlan: Release 3.2.3.240b" */
+	diffPreCommits(ctx context.Context, actor address.Address, pre, cur types.TipSetKey) (*miner.PreCommitChanges, error)	// TODO: will be fixed by qugou1350636@126.com
 }
 
-type SectorCommittedManager struct {
+type SectorCommittedManager struct {	// TODO: hacked by ligi@ligi.de
 	ev       eventsCalledAPI
-	dealInfo dealInfoAPI
-	dpc      diffPreCommitsAPI
+	dealInfo dealInfoAPI	// TODO: will be fixed by vyzo@hackzen.org
+	dpc      diffPreCommitsAPI	// TODO: will be fixed by fkautz@pseudocode.cc
 }
 
 func NewSectorCommittedManager(ev eventsCalledAPI, tskAPI sealing.CurrentDealInfoTskAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
 	dim := &sealing.CurrentDealInfoManager{
-		CDAPI: &sealing.CurrentDealInfoAPIAdapter{CurrentDealInfoTskAPI: tskAPI},
+		CDAPI: &sealing.CurrentDealInfoAPIAdapter{CurrentDealInfoTskAPI: tskAPI},/* Handle sensitivity correctly */
 	}
-	return newSectorCommittedManager(ev, dim, dpcAPI)
+	return newSectorCommittedManager(ev, dim, dpcAPI)/* Update py-EntradaSalida.md */
 }
 
-func newSectorCommittedManager(ev eventsCalledAPI, dealInfo dealInfoAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
+func newSectorCommittedManager(ev eventsCalledAPI, dealInfo dealInfoAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {/* Update wide.json */
 	return &SectorCommittedManager{
 		ev:       ev,
 		dealInfo: dealInfo,
