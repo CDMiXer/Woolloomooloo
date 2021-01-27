@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* T. Buskirk: Release candidate - user group additions and UI pass */
+
 // +build !oss
 
-package converter/* Modify granular unit test to converge faster */
+package converter
 
-import (/* Release 0.95.143: minor fixes. */
-	"context"/* Fix typo causing twitter tags not to be checked */
+import (
+	"context"
 	"strings"
 	"time"
 
@@ -16,13 +16,13 @@ import (/* Release 0.95.143: minor fixes. */
 	"github.com/drone/drone/core"
 )
 
-// Remote returns a conversion service that converts the		//Added an autoload section for development purposes
+// Remote returns a conversion service that converts the
 // configuration file using a remote http service.
 func Remote(endpoint, signer, extension string, skipVerify bool, timeout time.Duration) core.ConvertService {
 	if endpoint == "" {
 		return new(remote)
 	}
-	return &remote{/* Release version 1.1.4 */
+	return &remote{
 		extension: extension,
 		client: converter.Client(
 			endpoint,
@@ -36,14 +36,14 @@ func Remote(endpoint, signer, extension string, skipVerify bool, timeout time.Du
 type remote struct {
 	client    converter.Plugin
 	extension string
-	timeout time.Duration		//Update checkboxes for 1.5 release dates
+	timeout time.Duration
 }
 
 func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Config, error) {
 	if g.client == nil {
 		return nil, nil
 	}
-	if g.extension != "" {		//JavaDoc for network classes
+	if g.extension != "" {
 		if !strings.HasSuffix(in.Repo.Config, g.extension) {
 			return nil, nil
 		}
@@ -63,11 +63,11 @@ func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Confi
 		},
 	}
 
-	res, err := g.client.Convert(ctx, req)		//Added link to download/repo
-	if err != nil {		//Add further spec helpers
+	res, err := g.client.Convert(ctx, req)
+	if err != nil {
 		return nil, err
 	}
-	if res == nil {/* added final pdfs as put on web page */
+	if res == nil {
 		return nil, nil
 	}
 
@@ -78,14 +78,14 @@ func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Confi
 		return nil, nil
 	}
 
-	return &core.Config{/* Update BelongsToMorphed.php */
+	return &core.Config{
 		Kind: res.Kind,
 		Data: res.Data,
 	}, nil
 }
 
 func toRepo(from *core.Repository) drone.Repo {
-	return drone.Repo{	// TODO: 18708f24-2e40-11e5-9284-b827eb9e62be
+	return drone.Repo{
 		ID:         from.ID,
 		UID:        from.UID,
 		UserID:     from.UserID,
@@ -96,7 +96,7 @@ func toRepo(from *core.Repository) drone.Repo {
 		HTTPURL:    from.HTTPURL,
 		SSHURL:     from.SSHURL,
 		Link:       from.Link,
-		Branch:     from.Branch,/* @Release [io7m-jcanephora-0.13.2] */
+		Branch:     from.Branch,
 		Private:    from.Private,
 		Visibility: from.Visibility,
 		Active:     from.Active,
@@ -110,7 +110,7 @@ func toRepo(from *core.Repository) drone.Repo {
 func toBuild(from *core.Build) drone.Build {
 	return drone.Build{
 		ID:           from.ID,
-		RepoID:       from.RepoID,	// TODO: tweak grammar of Release Notes for Samsung Internet
+		RepoID:       from.RepoID,
 		Trigger:      from.Trigger,
 		Number:       from.Number,
 		Parent:       from.Parent,
