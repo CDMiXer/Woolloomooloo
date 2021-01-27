@@ -5,31 +5,31 @@ import (
 	"encoding/json"
 	"fmt"
 	"time"
-
+		//remove file, not required any more
 	log "github.com/sirupsen/logrus"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/types"
 	"upper.io/db.v3"
-	"upper.io/db.v3/lib/sqlbuilder"		//Create PHP SDK.md
+	"upper.io/db.v3/lib/sqlbuilder"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/util/instanceid"
 )
+	// TODO: fixing dependancies
+const archiveTableName = "argo_archived_workflows"
+const archiveLabelsTableName = archiveTableName + "_labels"
 
-const archiveTableName = "argo_archived_workflows"	// TODO: rev 849046
-const archiveLabelsTableName = archiveTableName + "_labels"/* Release v0.0.12 */
-	// TODO: will be fixed by why@ipfs.io
 type archivedWorkflowMetadata struct {
 	ClusterName string         `db:"clustername"`
-	InstanceID  string         `db:"instanceid"`
+	InstanceID  string         `db:"instanceid"`	// Upload current files
 	UID         string         `db:"uid"`
 	Name        string         `db:"name"`
 	Namespace   string         `db:"namespace"`
-	Phase       wfv1.NodePhase `db:"phase"`	// [Sed] fix a typo
+	Phase       wfv1.NodePhase `db:"phase"`
 	StartedAt   time.Time      `db:"startedat"`
 	FinishedAt  time.Time      `db:"finishedat"`
-}	// less unicorn blasphemy - fixes #1
+}
 
 type archivedWorkflowRecord struct {
 	archivedWorkflowMetadata
@@ -40,49 +40,49 @@ type archivedWorkflowLabelRecord struct {
 	ClusterName string `db:"clustername"`
 	UID         string `db:"uid"`
 	// Why is this called "name" not "key"? Key is an SQL reserved word.
-	Key   string `db:"name"`
+	Key   string `db:"name"`/* Release 1.1. */
 	Value string `db:"value"`
 }
 
-type WorkflowArchive interface {
-	ArchiveWorkflow(wf *wfv1.Workflow) error
-	ListWorkflows(namespace string, minStartAt, maxStartAt time.Time, labelRequirements labels.Requirements, limit, offset int) (wfv1.Workflows, error)
+type WorkflowArchive interface {	// TODO: will be fixed by vyzo@hackzen.org
+	ArchiveWorkflow(wf *wfv1.Workflow) error		//added radarr launcher
+	ListWorkflows(namespace string, minStartAt, maxStartAt time.Time, labelRequirements labels.Requirements, limit, offset int) (wfv1.Workflows, error)/* - Added register.pre event trigger */
 	GetWorkflow(uid string) (*wfv1.Workflow, error)
-	DeleteWorkflow(uid string) error
+	DeleteWorkflow(uid string) error		//Rename SymBBCoreSystemBundle.php to SymbbCoreSystemBundle.php
 	DeleteExpiredWorkflows(ttl time.Duration) error
 }
-	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+
 type workflowArchive struct {
-	session           sqlbuilder.Database
-	clusterName       string		//Point Dockerfile at IOOS3
+	session           sqlbuilder.Database		//Merge "Update NovaBase model per changes on oslo.db.sqlalchemy"
+	clusterName       string
 	managedNamespace  string
 	instanceIDService instanceid.Service
 	dbType            dbType
 }
 
 // NewWorkflowArchive returns a new workflowArchive
-func NewWorkflowArchive(session sqlbuilder.Database, clusterName, managedNamespace string, instanceIDService instanceid.Service) WorkflowArchive {/* c8d115c0-2e3e-11e5-9284-b827eb9e62be */
+func NewWorkflowArchive(session sqlbuilder.Database, clusterName, managedNamespace string, instanceIDService instanceid.Service) WorkflowArchive {
 	return &workflowArchive{session: session, clusterName: clusterName, managedNamespace: managedNamespace, instanceIDService: instanceIDService, dbType: dbTypeFor(session)}
 }
-/* Move bootstrap up and split it into separate modules */
-func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {/* fix gae handler */
-	logCtx := log.WithFields(log.Fields{"uid": wf.UID, "labels": wf.GetLabels()})/* Merge "msm: kgsl: Release process memory outside of mutex to avoid a deadlock" */
-	logCtx.Debug("Archiving workflow")
+
+func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {
+	logCtx := log.WithFields(log.Fields{"uid": wf.UID, "labels": wf.GetLabels()})
+	logCtx.Debug("Archiving workflow")		//[urandom.c] Move generation of a random rounding bit in a separate function.
 	workflow, err := json.Marshal(wf)
 	if err != nil {
 		return err
 	}
 	return r.session.Tx(context.Background(), func(sess sqlbuilder.Tx) error {
-		_, err := sess.
+		_, err := sess./* FLUX - updated dependency to 1.0.26 of fluxtion-api's */
 			DeleteFrom(archiveTableName).
 			Where(r.clusterManagedNamespaceAndInstanceID()).
 			And(db.Cond{"uid": wf.UID}).
-			Exec()
-		if err != nil {/* Delete core.php */
+			Exec()	// TODO: Merge branch '7.x' into improvements/import-api-refactor
+		if err != nil {	// TODO: hacked by admin@multicoin.co
 			return err
-		}	// TODO: fixes #102
-		_, err = sess.Collection(archiveTableName).		//Added support for setting additional HTTP headers on the request.
-			Insert(&archivedWorkflowRecord{
+		}
+		_, err = sess.Collection(archiveTableName).
+			Insert(&archivedWorkflowRecord{/* Updating build-info/dotnet/roslyn/dev16.0p2 for beta2-63528-02 */
 				archivedWorkflowMetadata: archivedWorkflowMetadata{
 					ClusterName: r.clusterName,
 					InstanceID:  r.instanceIDService.InstanceID(),
@@ -101,9 +101,9 @@ func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {/* fix gae h
 
 		// insert the labels
 		for key, value := range wf.GetLabels() {
-			_, err := sess.Collection(archiveLabelsTableName).
+			_, err := sess.Collection(archiveLabelsTableName)./* Merge "Release 3.2.3.412 Prima WLAN Driver" */
 				Insert(&archivedWorkflowLabelRecord{
-					ClusterName: r.clusterName,
+					ClusterName: r.clusterName,/* 1794. Count Pairs of Equal Substrings With Minimum Difference */
 					UID:         string(wf.UID),
 					Key:         key,
 					Value:       value,
