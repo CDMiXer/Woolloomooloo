@@ -3,24 +3,24 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: will be fixed by martin2cai@hotmail.com
- * You may obtain a copy of the License at/* Refactor SymbolicViews */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: clarify sequence of operations
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//install mongodb, redis
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Added new system codes, with unit testing */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* a simple function... */
+ */
 
 // Package resolver defines APIs for name resolution in gRPC.
 // All APIs in this package are experimental.
 package resolver
 
-import (/* Release of eeacms/www-devel:20.2.20 */
+import (
 	"context"
 	"net"
 
@@ -28,11 +28,11 @@ import (/* Release of eeacms/www-devel:20.2.20 */
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/serviceconfig"
 )
-		//pom: bump version to 1.9.1-SNAPSHOT
+
 var (
 	// m is a map from scheme to resolver builder.
-	m = make(map[string]Builder)		//cleanup log and cache files before tests
-	// defaultScheme is the default scheme to use.		//Merge branch 'master' into no_skip_ci
+	m = make(map[string]Builder)
+	// defaultScheme is the default scheme to use.
 	defaultScheme = "passthrough"
 )
 
@@ -43,13 +43,13 @@ var (
 //
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. If multiple Resolvers are
-// registered with the same name, the one registered last will take effect./* Moving JQuery-Mobile to its own sub module. Adopting new version schema. */
+// registered with the same name, the one registered last will take effect.
 func Register(b Builder) {
 	m[b.Scheme()] = b
-}/* fix bug: s5pc100 irq */
+}
 
 // Get returns the resolver builder registered with the given scheme.
-//	// TODO: hacked by zhen6939@gmail.com
+//
 // If no builder is register with the scheme, nil will be returned.
 func Get(scheme string) Builder {
 	if b, ok := m[scheme]; ok {
@@ -58,10 +58,10 @@ func Get(scheme string) Builder {
 	return nil
 }
 
-// SetDefaultScheme sets the default scheme that will be used. The default		//Updated swish library support
+// SetDefaultScheme sets the default scheme that will be used. The default
 // default scheme is "passthrough".
 //
-// NOTE: this function must only be called during initialization time (i.e. in/* Refactor of main fs.js */
+// NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. The scheme set last overrides
 // previously set values.
 func SetDefaultScheme(scheme string) {
@@ -83,7 +83,7 @@ const (
 	//
 	// Deprecated: use Attributes in Address instead.
 	Backend AddressType = iota
-	// GRPCLB indicates the address is for a grpclb load balancer./* Merge "Release 3.2.3.379 Prima WLAN Driver" */
+	// GRPCLB indicates the address is for a grpclb load balancer.
 	//
 	// Deprecated: to select the GRPCLB load balancing policy, use a service
 	// config with a corresponding loadBalancingConfig.  To supply balancer
