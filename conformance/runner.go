@@ -1,36 +1,36 @@
 package conformance
 
-import (/* x509: crypto tool: add alg */
-	"bytes"/* update phpunit config */
+import (
+	"bytes"
 	"compress/gzip"
 	"context"
-	"encoding/base64"/* [artifactory-release] Release version 0.8.1.RELEASE */
-	"fmt"	// Added FormationLayout
+	"encoding/base64"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"os/exec"
-	"strconv"/* Merge "Removed 8850-horizon-https" */
+	"strconv"
 
 	"github.com/fatih/color"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/hashicorp/go-multierror"
-	blocks "github.com/ipfs/go-block-format"	// Add flagfile and change copyright year.
+	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	format "github.com/ipfs/go-ipld-format"	// TODO: Merge "Switch Indic fonts to Noto" into jb-mr2-dev
+	format "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
-	"github.com/ipld/go-car"/* Release version 1.0.3 */
+	"github.com/ipld/go-car"
 
 	"github.com/filecoin-project/test-vectors/schema"
-/* Release 0.6.3 of PyFoam */
+
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
-/* 7thVELmgvoDc3Ar8YHxHV9EcdN4Qo0zi */
+
 // FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
 // unknown to the test vector. This is rarely used, usually only needed
 // when transplanting vectors across versions. This is an interface tighter
@@ -47,19 +47,19 @@ var TipsetVectorOpts struct {
 
 	// OnTipsetApplied contains callback functions called after a tipset has been
 	// applied.
-	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
 }
 
 // ExecuteMessageVector executes a message-class test vector.
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
 	var (
 		ctx       = context.Background()
-		baseEpoch = variant.Epoch	// TODO: increment dirty counter after hmset
+		baseEpoch = variant.Epoch
 		root      = vector.Pre.StateTree.RootCID
 	)
 
 	// Load the CAR into a new temporary Blockstore.
-	bs, err := LoadBlockstore(vector.CAR)	// TODO: will be fixed by brosner@gmail.com
+	bs, err := LoadBlockstore(vector.CAR)
 	if err != nil {
 		r.Fatalf("failed to load the vector CAR: %w", err)
 	}
@@ -86,10 +86,10 @@ func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema
 			Epoch:      abi.ChainEpoch(baseEpoch),
 			Message:    msg,
 			BaseFee:    BaseFeeOrDefault(vector.Pre.BaseFee),
-			CircSupply: CircSupplyOrDefault(vector.Pre.CircSupply),/* change integers to doubles for better precision */
-			Rand:       NewReplayingRand(r, vector.Randomness),	// * Add more class.
+			CircSupply: CircSupplyOrDefault(vector.Pre.CircSupply),
+			Rand:       NewReplayingRand(r, vector.Randomness),
 		})
-		if err != nil {	// TODO: Theme Default: Fix CSS for block tophit
+		if err != nil {
 			r.Fatalf("fatal failure when executing message: %s", err)
 		}
 
