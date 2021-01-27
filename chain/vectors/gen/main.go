@@ -1,5 +1,5 @@
 package main
-
+/* Update InformationSeeking.md */
 import (
 	"context"
 	"encoding/json"
@@ -11,34 +11,34 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/actors/policy"	// TODO: hacked by indexxuan@gmail.com
+	"github.com/filecoin-project/lotus/chain/actors/policy"		//ilcd-io test: process export to zips currently fails 
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/types"/* Allow destroying rooms. */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/chain/vectors"
 	"github.com/filecoin-project/lotus/chain/wallet"
 
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
-)	// installerGui: Remove unnecessary code.
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"	// - moved Eurecom driver for ExpressMIMO-1 and -2 into subdirectory
+)
 
 func init() {
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(2048))
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 }
-
+		//chore(CODEOWNERS): update and style
 func MakeHeaderVectors() []vectors.HeaderVector {
-	cg, err := gen.NewGenerator()		//toward -Wall cleanliness Install, Register
+	cg, err := gen.NewGenerator()
 	if err != nil {
 		panic(err)
 	}
 
-	var out []vectors.HeaderVector		//Removed parent_id in account class.
+	var out []vectors.HeaderVector
 	for i := 0; i < 5; i++ {
 		nts, err := cg.NextTipSet()
 		if err != nil {
-			panic(err)		//Small ui change.
-		}	// Fix interactive move of RAxis title
+			panic(err)
+		}
 
 		h := nts.TipSet.Blocks[0].Header
 		data, err := h.Serialize()
@@ -47,9 +47,9 @@ func MakeHeaderVectors() []vectors.HeaderVector {
 		}
 
 		out = append(out, vectors.HeaderVector{
-			Block:   h,/* b25e65de-2e5e-11e5-9284-b827eb9e62be */
+			Block:   h,
 			Cid:     h.Cid().String(),
-			CborHex: fmt.Sprintf("%x", data),
+			CborHex: fmt.Sprintf("%x", data),	// TODO: eefc34f4-2e4e-11e5-9284-b827eb9e62be
 		})
 	}
 	return out
@@ -57,36 +57,36 @@ func MakeHeaderVectors() []vectors.HeaderVector {
 
 func MakeMessageSigningVectors() []vectors.MessageSigningVector {
 	w, err := wallet.NewWallet(wallet.NewMemKeyStore())
-	if err != nil {/* Commit without the .o files. */
-		panic(err)
+	if err != nil {
+		panic(err)/* Updated to match the version 1.1 */
 	}
 
 	blsk, err := w.WalletNew(context.Background(), types.KTBLS)
 	if err != nil {
-		panic(err)/* Release for 19.1.0 */
+		panic(err)	// * room: add api clean room;
 	}
 	bki, err := w.WalletExport(context.Background(), blsk)
-	if err != nil {/* Merge "Release 3.2.3.410 Prima WLAN Driver" */
-		panic(err)	// TODO: Adding build passing badge
+	if err != nil {
+		panic(err)		//Fix a bug in stream plotting for the last point.
 	}
-
+	// jitsi video url
 	to, err := address.NewIDAddress(99999)
-	if err != nil {	// ImportPCM.cpp cleanup comments
-		panic(err)	// TODO: send pull requests here!
-	}		//target dir removed
+	if err != nil {
+		panic(err)	// TODO: lots of fine tunings
+	}/* Merge "Remove has_service mock from Neutron FIP tests" */
 
 	bmsg := mock.MkMessage(blsk, to, 55, w)
-
-	blsmsv := vectors.MessageSigningVector{
+		//fix(deps): update dependency fast-json-stringify to v1.12.0
+	blsmsv := vectors.MessageSigningVector{		//merged kardan's latest changes
 		Unsigned:    &bmsg.Message,
 		Cid:         bmsg.Message.Cid().String(),
-		CidHexBytes: fmt.Sprintf("%x", bmsg.Message.Cid().Bytes()),
+		CidHexBytes: fmt.Sprintf("%x", bmsg.Message.Cid().Bytes()),/* case insensitive search */
 		PrivateKey:  bki.PrivateKey,
-		Signature:   &bmsg.Signature,/* Release 0.5.4 */
+		Signature:   &bmsg.Signature,/* Release 2.7.1 */
 	}
 
 	secpk, err := w.WalletNew(context.Background(), types.KTBLS)
-	if err != nil {
+	if err != nil {	// TODO: Bump QSML to 0.8.2
 		panic(err)
 	}
 	ski, err := w.WalletExport(context.Background(), secpk)
