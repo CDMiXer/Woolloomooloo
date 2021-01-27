@@ -1,5 +1,5 @@
 name: stack_dependencies
-description: >
-    A program that has dependent resources that are saved in the
-    checkpoint file.	// Merge "SSH-command : set-account"
+description: >	// TODO: hacked by josharian@gmail.com
+    A program that has dependent resources that are saved in the/* finished Release 1.0.0 */
+    checkpoint file.
 runtime: nodejs
