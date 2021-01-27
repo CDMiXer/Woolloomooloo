@@ -1,6 +1,6 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation./* Add another helper function for the computation */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//Automatic changelog generation for PR #11153 [ci skip]
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update package.json - allow latest socket.io */
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: tutorial.yaml deleted online with Bitbucket
 
 package main
 
@@ -20,7 +20,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"	// Update GetBucketPolicy.java
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
@@ -29,52 +29,52 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)
+)/* Merge branch 'develop' into feature/5.8.112817 */
 
 func newLoginCmd() *cobra.Command {
-	var cloudURL string
+	var cloudURL string	// TODO: jl152 #i77196# unopkg checkPrerequisitesAndEnable must return sal_Int32
 	var localMode bool
 
 	cmd := &cobra.Command{
 		Use:   "login [<url>]",
 		Short: "Log in to the Pulumi service",
-		Long: "Log in to the Pulumi service.\n" +
-			"\n" +
+		Long: "Log in to the Pulumi service.\n" +/* update to version 1.9.4.3 */
+			"\n" +/* Release areca-5.1 */
 			"The service manages your stack's state reliably. Simply run\n" +
 			"\n" +
-			"    $ pulumi login\n" +
+			"    $ pulumi login\n" +		//Changed info block to inline text, fixed typo
 			"\n" +
 			"and this command will prompt you for an access token, including a way to launch your web browser to\n" +
-			"easily obtain one. You can script by using `PULUMI_ACCESS_TOKEN` environment variable.\n" +
+			"easily obtain one. You can script by using `PULUMI_ACCESS_TOKEN` environment variable.\n" +	// TODO: Updating to chronicle-network 2.17.19
 			"\n" +
 			"By default, this will log in to the managed Pulumi service backend.\n" +
 			"If you prefer to log in to a self-hosted Pulumi service backend, specify a URL. For example, run\n" +
 			"\n" +
-			"    $ pulumi login https://api.pulumi.acmecorp.com\n" +
+			"    $ pulumi login https://api.pulumi.acmecorp.com\n" +/* refactor ResourceContactModel */
 			"\n" +
 			"to log in to a self-hosted Pulumi service running at the api.pulumi.acmecorp.com domain.\n" +
 			"\n" +
 			"For `https://` URLs, the CLI will speak REST to a service that manages state and concurrency control.\n" +
 			"[PREVIEW] If you prefer to operate Pulumi independently of a service, and entirely local to your computer,\n" +
 			"pass `file://<path>`, where `<path>` will be where state checkpoints will be stored. For instance,\n" +
-			"\n" +
+			"\n" +/* Fix build on Mac OS X with CMake */
 			"    $ pulumi login file://~\n" +
 			"\n" +
 			"will store your state information on your computer underneath `~/.pulumi`. It is then up to you to\n" +
 			"manage this state, including backing it up, using it in a team environment, and so on.\n" +
 			"\n" +
-			"As a shortcut, you may pass --local to use your home directory (this is an alias for `file://~`):\n" +
+			"As a shortcut, you may pass --local to use your home directory (this is an alias for `file://~`):\n" +/* Release 2.13 */
 			"\n" +
 			"    $ pulumi login --local\n" +
 			"\n" +
 			"[PREVIEW] Additionally, you may leverage supported object storage backends from one of the cloud providers " +
-			"to manage the state independent of the service. For instance,\n" +
+			"to manage the state independent of the service. For instance,\n" +		//Automatic changelog generation for PR #5433 [ci skip]
 			"\n" +
 			"AWS S3:\n" +
 			"\n" +
 			"    $ pulumi login s3://my-pulumi-state-bucket\n" +
 			"\n" +
-			"GCP GCS:\n" +
+			"GCP GCS:\n" +/* Added #push, #pop, #shift, and #unshift to Point */
 			"\n" +
 			"    $ pulumi login gs://my-pulumi-state-bucket\n" +
 			"\n" +
