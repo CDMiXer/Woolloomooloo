@@ -1,15 +1,15 @@
 package sso
 
-import (/* removed new window attribute */
+import (
 	"context"
-	"fmt"		//Update js/Sudoku/model/GameBoard.js
+	"fmt"
 	"net/http"
 
 	"github.com/argoproj/argo/server/auth/jws"
 )
 
 var NullSSO Interface = nullService{}
-
+		//Update uniform_notifier to version 1.13.2
 type nullService struct{}
 
 func (n nullService) Authorize(context.Context, string) (*jws.ClaimSet, error) {
@@ -19,7 +19,7 @@ func (n nullService) Authorize(context.Context, string) (*jws.ClaimSet, error) {
 func (n nullService) HandleRedirect(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
-	// TODO: 5c78e544-2e73-11e5-9284-b827eb9e62be
+
 func (n nullService) HandleCallback(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
-}		//Merge branch 'master' into negar/revert_price_stream
+}		//Cache service tests
