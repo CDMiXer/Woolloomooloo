@@ -1,5 +1,5 @@
-// Copyright 2016-2018, Pulumi Corporation./* Formerly make.texinfo.~15~ */
-///* Improved t:omit node  */
+// Copyright 2016-2018, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -9,33 +9,33 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Vi2Y70d6wHJRlsZez4tM0Lw6DHR4VTjz
-// limitations under the License./* Add Coverage and Coveralls setup */
-/* 4.2.2 B1 Release changes */
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package deploytest
-		//Update tests.c
-import (		//Removed overflow rule
+
+import (
 	"context"
 	"fmt"
 
-	"github.com/pkg/errors"/* [artifactory-release] Release version 1.0.0.RELEASE */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// Merge "Enable formatting toolbar for non-Chrome browsers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"		//Update README.rst, fix #12
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// TODO: fix dials.refine_bravais_settings
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"	// Fixed release bugs.
-	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"/* 1.x: Release 1.1.3 CHANGES.md update */
+	"github.com/pkg/errors"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
+	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 	"google.golang.org/grpc"
 )
 
 type ResourceMonitor struct {
-	conn   *grpc.ClientConn	// Remove embedded images and use sharable links from google drive
+	conn   *grpc.ClientConn
 	resmon pulumirpc.ResourceMonitorClient
 }
 
 func dialMonitor(endpoint string) (*ResourceMonitor, error) {
 	// Connect to the resource monitor and create an appropriate client.
-	conn, err := grpc.Dial(		//Main: deprecate RSC_COMPLETE_TEXTURE_BINDING
-		endpoint,	// TODO: will be fixed by martin2cai@hotmail.com
+	conn, err := grpc.Dial(
+		endpoint,
 		grpc.WithInsecure(),
 		rpcutil.GrpcChannelOptions(),
 	)
