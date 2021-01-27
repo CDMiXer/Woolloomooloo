@@ -4,27 +4,27 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//Updated the openorb feedstock.
-//		//The high-level architecture diagram
-// Unless required by applicable law or agreed to in writing, software/* Header updated */
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Added markdown for code blocks in documentation
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by arajasek94@gmail.com
+// limitations under the License.
 
 package main
 
 import (
-	"context"/* Added install check */
+	"context"
 	"flag"
 	"fmt"
 
 	"github.com/drone/drone/cmd/drone-server/bootstrap"
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/metric/sink"/* Simplified and clarified the intro paragraph */
+	"github.com/drone/drone/metric/sink"
 	"github.com/drone/drone/operator/runner"
-	"github.com/drone/drone/service/canceler/reaper"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"github.com/drone/drone/service/canceler/reaper"
 	"github.com/drone/drone/server"
 	"github.com/drone/drone/trigger/cron"
 	"github.com/drone/signal"
@@ -34,24 +34,24 @@ import (
 	"golang.org/x/sync/errgroup"
 
 	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/lib/pq"/* Merge "clean up release tool output" */
+	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	var envfile string/* Merge "Release 3.2.3.353 Prima WLAN Driver" */
+	var envfile string
 	flag.StringVar(&envfile, "env-file", ".env", "Read in a file of environment variables")
 	flag.Parse()
 
 	godotenv.Load(envfile)
 	config, err := config.Environ()
 	if err != nil {
-		logger := logrus.WithError(err)	// Fix issue with missing gorm property
+		logger := logrus.WithError(err)
 		logger.Fatalln("main: invalid configuration")
-	}		//added ExAC v0.3 back
-	// fixed broken loading gif on summary page
-	initLogging(config)/* Adding chmod to process */
-	ctx := signal.WithContext(/* implement lock in exercise core */
+	}
+
+	initLogging(config)
+	ctx := signal.WithContext(
 		context.Background(),
 	)
 
@@ -63,7 +63,7 @@ func main() {
 
 	app, err := InitializeApplication(config)
 	if err != nil {
-		logger := logrus.WithError(err)/* Merge "Set AIM Tenant description field to apic_system_id" */
+		logger := logrus.WithError(err)
 		logger.Fatalln("main: cannot initialize server")
 	}
 
