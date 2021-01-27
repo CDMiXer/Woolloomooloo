@@ -1,13 +1,13 @@
 // +build !linux appengine
-
+/* Create GDBContentsToExcel.py */
 /*
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* bugfix: VFW encoder output black frames  when enabling "Enable image processing" */
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
+ * You may obtain a copy of the License at	// Rebuilt index with baijordan
+ *		//update NEWS and vimperator.vim
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
