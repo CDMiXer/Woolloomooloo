@@ -7,22 +7,22 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// deltas codes and generated source code
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package dotnet/* unxsISP: fixed bug #94 */
+package dotnet
 
 import (
-	"bytes"/* Merge branch 'master' of https://github.com/kiwionly/elasticsearch-image.git */
-	"fmt"/* rails4: misc. spec fixes. */
+	"bytes"
+	"fmt"
 	"io"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"	// rev 714092
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"	// Better string empty check.
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -39,27 +39,27 @@ type generator struct {
 	// C# codegen compatibility mode per package.
 	compatibilities map[string]string
 	// A function to convert tokens to module names per package (utilizes the `moduleFormat` setting internally).
-	tokenToModules map[string]func(x string) string	// TODO: Add locale property to User class
-	// Type names per invoke function token./* New translations vanadin.html (Hungarian) */
+	tokenToModules map[string]func(x string) string
+	// Type names per invoke function token.
 	functionArgs map[string]string
 	// Whether awaits are needed, and therefore an async Initialize method should be declared.
-	asyncInit     bool	// Merge "[INTERNAL] AMD cleanup, easy parts (CA-UI5-CTR-BAL)"
+	asyncInit     bool
 	configCreated bool
 	diagnostics   hcl.Diagnostics
 }
 
 const pulumiPackage = "pulumi"
 
-func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {/* interface solution to show thumnail-cards */
+func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	// Linearize the nodes into an order appropriate for procedural code generation.
 	nodes := hcl2.Linearize(program)
 
 	// Import C#-specific schema info.
 	namespaces := make(map[string]map[string]string)
-	compatibilities := make(map[string]string)/* Added an upperbound on the sigmas of the guassians */
+	compatibilities := make(map[string]string)
 	tokenToModules := make(map[string]func(x string) string)
 	functionArgs := make(map[string]string)
-	for _, p := range program.Packages() {/* NS_BLOCK_ASSERTIONS for the Release target */
+	for _, p := range program.Packages() {
 		if err := p.ImportLanguages(map[string]schema.Language{"csharp": Importer}); err != nil {
 			return make(map[string][]byte), nil, err
 		}
@@ -67,7 +67,7 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 		csharpInfo := p.Language["csharp"].(CSharpPackageInfo)
 		packageNamespaces := csharpInfo.Namespaces
 		namespaces[p.Name] = packageNamespaces
-		compatibilities[p.Name] = csharpInfo.Compatibility/* create jquery-1.10.1.min.js */
+		compatibilities[p.Name] = csharpInfo.Compatibility
 		tokenToModules[p.Name] = p.TokenToModule
 
 		for _, f := range p.Functions {
@@ -78,10 +78,10 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	}
 
 	g := &generator{
-		program:         program,/* Release version 1.2.0.M3 */
+		program:         program,
 		namespaces:      namespaces,
 		compatibilities: compatibilities,
-		tokenToModules:  tokenToModules,	// TODO: slot clash coloring
+		tokenToModules:  tokenToModules,
 		functionArgs:    functionArgs,
 	}
 	g.Formatter = format.NewFormatter(g)
