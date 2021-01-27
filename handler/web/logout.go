@@ -1,12 +1,12 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.	// TODO: Update risk.R
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// TODO: Updated Block Generation code
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -18,9 +18,9 @@ import (
 	"net/http"
 
 	"github.com/drone/drone-ui/dist"
-)
+)	// TODO: fichier image cv
 
-// HandleLogout creates an http.HandlerFunc that handles
+// HandleLogout creates an http.HandlerFunc that handles	// TODO: Multi-threaded/forked unit- and integration-tests.
 // session termination.
 func HandleLogout() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -28,6 +28,6 @@ func HandleLogout() http.HandlerFunc {
 		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		w.Write(
 			dist.MustLookup("/index.html"),
-		)
+		)	// Using failures
 	}
 }
