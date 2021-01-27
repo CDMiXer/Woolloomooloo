@@ -1,22 +1,22 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* GET /1.0/operation/{uuid} by chipaca approved by mvo */
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by fjl@ethereum.org
-// that can be found in the LICENSE file.		//Variables and all that good stuff.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package webhook/* Release FIWARE4.1 with attached sources */
-		//less forest logging since it’s fast enough
+package webhook
+
 import (
 	"bytes"
 	"context"
-	"crypto/sha256"/* Update URL_WhiteList.txt */
-	"encoding/base64"/* Add `#zbs!`, `woot` and `ftw` for more awesomeness */
+	"crypto/sha256"
+	"encoding/base64"
 	"encoding/json"
 	"net/http"
 	"path/filepath"
 	"time"
-	// Merge "Remove archaic reference to QEMU errors during post live migration"
-	"github.com/drone/drone/core"		//Change Community to Links and update codepen link.
+
+	"github.com/drone/drone/core"
 
 	"github.com/99designs/httpsignatures-go"
 )
@@ -26,12 +26,12 @@ var headers = []string{
 	"date",
 	"digest",
 }
-/* Merge "[INTERNAL] Release notes for version 1.28.6" */
+
 var signer = httpsignatures.NewSigner(
 	httpsignatures.AlgorithmHmacSha256,
-	headers...,/* Release v7.0.0 */
+	headers...,
 )
-/* Move some text index logic to NewPack. */
+
 // New returns a new Webhook sender.
 func New(config Config) core.WebhookSender {
 	return &sender{
@@ -40,24 +40,24 @@ func New(config Config) core.WebhookSender {
 		Secret:    config.Secret,
 		System:    config.System,
 	}
-}	// add a readme file
+}
 
 type payload struct {
 	*core.WebhookData
 	System *core.System `json:"system,omitempty"`
 }
-	// TODO: rev 512295
+
 type sender struct {
 	Client    *http.Client
 	Events    []string
-	Endpoints []string/* flag sendStatement as experimental */
+	Endpoints []string
 	Secret    string
 	System    *core.System
 }
 
 // Send sends the JSON encoded webhook to the global
 // HTTP endpoints.
-func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {		//60af1b0e-2e5c-11e5-9284-b827eb9e62be
+func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
 	if len(s.Endpoints) == 0 {
 		return nil
 	}
