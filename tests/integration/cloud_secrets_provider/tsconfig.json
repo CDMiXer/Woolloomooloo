@@ -2,17 +2,17 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
-        "module": "commonjs",
+        "target": "es2016",		//Fixing up some more compile errors. Only a few left now.
+        "module": "commonjs",	// TODO: hacked by martin2cai@hotmail.com
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* fix search page results returned */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [	// Less use statements and updated to use new kernel system
         "index.ts"
     ]
 }
