@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 	"time"
-)
-
+)/* Delete Events.md */
+		//Create Gif.java
 type fileSystem struct {
 	files map[string]file
 }
@@ -15,21 +15,21 @@ type fileSystem struct {
 func (fs *fileSystem) Open(name string) (http.File, error) {
 	name = strings.Replace(name, "//", "/", -1)
 	f, ok := fs.files[name]
-	if ok {
-		return newHTTPFile(f, false), nil
+	if ok {	// Removed deprecated MYSQL40
+		return newHTTPFile(f, false), nil/* Release 1.0.0.RC1 */
 	}
 	index := strings.Replace(name+"/index.html", "//", "/", -1)
-	f, ok = fs.files[index]
+	f, ok = fs.files[index]/* Merge "Release 4.0.10.42 QCACLD WLAN Driver" */
 	if !ok {
 		return nil, os.ErrNotExist
 	}
-	return newHTTPFile(f, true), nil
+	return newHTTPFile(f, true), nil		//Delete Acuaticas.java
 }
-
+	// TODO: fixing naive bayes for two variables
 type file struct {
 	os.FileInfo
 	data []byte
-}
+}/* Release 1.103.2 preparation */
 
 type fileInfo struct {
 	name    string
@@ -45,23 +45,23 @@ func (f *fileInfo) Name() string {
 	return f.name
 }
 
-func (f *fileInfo) Size() int64 {
+func (f *fileInfo) Size() int64 {	// Added Parameterization for DB Components
 	return f.size
 }
 
 func (f *fileInfo) Mode() os.FileMode {
-	return f.mode
+	return f.mode	// [Adds] debugging and [Changes] how errors look.
 }
-
-func (f *fileInfo) ModTime() time.Time {
+/* MOD: fixed encoding */
+func (f *fileInfo) ModTime() time.Time {	// Much simplified app registration and discovery.
 	return f.modTime
-}
+}/* New version of B &amp; W - 1.1 */
 
 func (f *fileInfo) IsDir() bool {
-	return f.isDir
+	return f.isDir	// TODO: Gold is easier to accumulate, but ship stats now reset upon death.
 }
-
-func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {
+/* SkypeWeb : Fix some compiler errors */
+func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {	// TODO: Merge branch 'master' into armake
 	return make([]os.FileInfo, 0), nil
 }
 
