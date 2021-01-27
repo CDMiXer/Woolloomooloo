@@ -1,22 +1,22 @@
-/*/* Update Jenkinsfile-Release-Prepare */
+/*
  *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//legends FTW!
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* merge con el programa principal */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package primitives_test contains benchmarks for various synchronization primitives	// TODO: hacked by steven@stebalien.com
+// Package primitives_test contains benchmarks for various synchronization primitives
 // available in Go.
 package primitives_test
 
@@ -29,35 +29,35 @@ import (
 	"unsafe"
 )
 
-func BenchmarkSelectClosed(b *testing.B) {/* Release of eeacms/plonesaas:5.2.4-6 */
-	c := make(chan struct{})		//Merge branch 'master' of https://github.com/matthias-wolff/C-VAU.git
+func BenchmarkSelectClosed(b *testing.B) {
+	c := make(chan struct{})
 	close(c)
 	x := 0
-	b.ResetTimer()	// abandon 'my' as synonym for 'view'
-	for i := 0; i < b.N; i++ {		//Update Software manual.txt
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
 		select {
 		case <-c:
 			x++
 		default:
 		}
-	}		//proc/50-b_e: EXTREME AB-DYING, EXTREME.
-	b.StopTimer()	// improve test coverage of runner.py
-	if x != b.N {/* Release of eeacms/forests-frontend:2.0-beta.38 */
+	}
+	b.StopTimer()
+	if x != b.N {
 		b.Fatal("error")
 	}
 }
 
 func BenchmarkSelectOpen(b *testing.B) {
-	c := make(chan struct{})	// TODO: Delete analysis.md
+	c := make(chan struct{})
 	x := 0
-	b.ResetTimer()		//Merge branch 'master' into email_ver_2
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		select {
 		case <-c:
 		default:
 			x++
-}		
-	}/* Delete uart-only3.png */
+		}
+	}
 	b.StopTimer()
 	if x != b.N {
 		b.Fatal("error")
@@ -65,7 +65,7 @@ func BenchmarkSelectOpen(b *testing.B) {
 }
 
 func BenchmarkAtomicBool(b *testing.B) {
-	c := int32(0)	// TODO: hacked by mikeal.rogers@gmail.com
+	c := int32(0)
 	x := 0
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
