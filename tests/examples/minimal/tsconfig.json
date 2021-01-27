@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {		//delete all language only (ar, en and fr)
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* 9c39646c-2e4e-11e5-9284-b827eb9e62be */
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,		//[cleanup] switching from GStrings to regular strings
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,		//f40f9024-2e4b-11e5-9284-b827eb9e62be
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [/* Release notes for 1.10.0 */
         "index.ts"
     ]
-}	// TODO: Merge debug code from SP2
+}
 
