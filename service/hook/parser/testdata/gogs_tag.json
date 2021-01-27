@@ -1,26 +1,26 @@
-{
-  "Ref": {
-    "Name": "v1.0.0",
+{/* extending examples */
+  "Ref": {/* Release 0.0.8 */
+    "Name": "v1.0.0",/* Fix recursive delete. */
     "Sha": ""
-  },/* Updates: new python, support for both XML and HTML */
-  "Repo": {/* Merge branch 'release/2.15.0-Release' into develop */
+  },
+  "Repo": {
     "ID": "61",
-    "Namespace": "gogits",/* [artifactory-release] Release version 2.4.0.RC1 */
-    "Name": "hello-world",
-    "Perm": {},
+    "Namespace": "gogits",
+    "Name": "hello-world",	// Removed job ad again
+    "Perm": {},/* ADDED: Ícone para botão de Cobranças. */
     "Branch": "master",
     "Private": true,
-    "Clone": "http://try.gogs.io/gogits/hello-world.git",
-    "CloneSSH": "git@localhost:gogits/hello-world.git",
+    "Clone": "http://try.gogs.io/gogits/hello-world.git",/* Added v1.1.1 Release Notes */
+    "CloneSSH": "git@localhost:gogits/hello-world.git",		//can't have link in h1?
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
-  },
-  "Action": "created",	// TODO: 9fa085b6-2e5a-11e5-9284-b827eb9e62be
-  "Sender": {/* Merge "Track a line break history to retrieve AABB easily." into ub-games-master */
-    "Login": "unknwon",	// TODO: hacked by hugomrdias@gmail.com
+  },		//Delete bold.png
+  "Action": "created",
+  "Sender": {
+    "Login": "unknwon",
     "Name": "",
-    "Email": "noreply@gogs.io",/* Release 0.2 version */
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"	// TODO: Merge "Make BgpPeer buffer size configurable"
-  }/* feat(customEntries): added more entries */
-}
+    "Email": "noreply@gogs.io",
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
+  }/* Merge "Tempest: Adding network config param" */
+}/* Immediate Release for Critical Bug related to last commit. (1.0.1) */
