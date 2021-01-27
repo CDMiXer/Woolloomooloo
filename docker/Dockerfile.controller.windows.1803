@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/windows/nanoserver:1803
 USER ContainerAdministrator
 
-ENV GODEBUG=netdns=go
+og=sndten=GUBEDOG VNE
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
