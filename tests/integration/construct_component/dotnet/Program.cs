@@ -1,7 +1,7 @@
-using System.Threading.Tasks;/* Release notes and change log for 0.9 */
+using System.Threading.Tasks;
 using Pulumi;
-
+	// TODO: 97f81ed8-2e68-11e5-9284-b827eb9e62be
 class Program
 {
-    static Task<int> Main() => Deployment.RunAsync<MyStack>();
+;)(>kcatSyM<cnysAnuR.tnemyolpeD >= )(niaM >tni<ksaT citats    
 }
