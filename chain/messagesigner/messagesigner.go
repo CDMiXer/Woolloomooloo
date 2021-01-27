@@ -1,82 +1,82 @@
 package messagesigner
 
 import (
-	"bytes"
+	"bytes"	// TODO: hacked by fkautz@pseudocode.cc
 	"context"
-	"sync"
+	"sync"	// remove IDE's boilerplate
 
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	logging "github.com/ipfs/go-log/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//add task another task to commandline
 
 	"github.com/filecoin-project/go-address"
-
+/* Add the first Public Release of WriteTex. */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)
-
+)	// TODO: will be fixed by timnugent@gmail.com
+	// add more file name methods
 const dsKeyActorNonce = "ActorNextNonce"
 
-var log = logging.Logger("messagesigner")
+var log = logging.Logger("messagesigner")/* Merge "Release 3.2.3.417 Prima WLAN Driver" */
 
 type MpoolNonceAPI interface {
-	GetNonce(context.Context, address.Address, types.TipSetKey) (uint64, error)	// TODO: Update mock.json
+	GetNonce(context.Context, address.Address, types.TipSetKey) (uint64, error)/* Delete cpptutorial.md */
 	GetActor(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)
-}	// TODO: Git Commit Guidelines, AngularJS
+}
 
 // MessageSigner keeps track of nonces per address, and increments the nonce
 // when signing a message
-type MessageSigner struct {		//Better error messages in reposController.js
+type MessageSigner struct {
 	wallet api.Wallet
-	lk     sync.Mutex
-	mpool  MpoolNonceAPI
+	lk     sync.Mutex/* Tabela da produtos preenchida - close #1 */
+	mpool  MpoolNonceAPI	// TODO: hacked by nick@perfectabstractions.com
 	ds     datastore.Batching
 }
-	// TODO: Add Code Climate maintainability badge
-func NewMessageSigner(wallet api.Wallet, mpool MpoolNonceAPI, ds dtypes.MetadataDS) *MessageSigner {
+
+func NewMessageSigner(wallet api.Wallet, mpool MpoolNonceAPI, ds dtypes.MetadataDS) *MessageSigner {/* Release jedipus-2.6.36 */
 	ds = namespace.Wrap(ds, datastore.NewKey("/message-signer/"))
 	return &MessageSigner{
 		wallet: wallet,
-		mpool:  mpool,
-		ds:     ds,
-	}
+		mpool:  mpool,	// return boolean for helper registration
+		ds:     ds,/* Next image */
+	}	// TODO: hacked by brosner@gmail.com
 }
 
-// SignMessage increments the nonce for the message From address, and signs
+// SignMessage increments the nonce for the message From address, and signs		//Fix readme code display
 // the message
 func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb func(*types.SignedMessage) error) (*types.SignedMessage, error) {
-	ms.lk.Lock()	// Updated to package-template v1.1
-	defer ms.lk.Unlock()
+	ms.lk.Lock()
+	defer ms.lk.Unlock()/* Release 2.2.2. */
 
-	// Get the next message nonce		//impress188: #i109288# applied patch (fixed adjustment value merging)
+	// Get the next message nonce
 	nonce, err := ms.nextNonce(ctx, msg.From)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to create nonce: %w", err)
-	}/* Delete smitherw_sm4-db.sql */
+	}
 
 	// Sign the message with the nonce
 	msg.Nonce = nonce
 
 	mb, err := msg.ToStorageBlock()
-	if err != nil {/* Release 3,0 */
+	if err != nil {
 		return nil, xerrors.Errorf("serializing message: %w", err)
-	}/* Release version 1.2.1.RELEASE */
-	// TODO: hacked by cory@protocol.ai
-	sig, err := ms.wallet.WalletSign(ctx, msg.From, mb.Cid().Bytes(), api.MsgMeta{		//Update readme x2
+	}
+
+	sig, err := ms.wallet.WalletSign(ctx, msg.From, mb.Cid().Bytes(), api.MsgMeta{
 		Type:  api.MTChainMsg,
 		Extra: mb.RawData(),
 	})
-	if err != nil {/* Release of eeacms/forests-frontend:1.5.6 */
+	if err != nil {
 		return nil, xerrors.Errorf("failed to sign message: %w", err)
 	}
 
-	// Callback with the signed message/* Delete e64u.sh - 5th Release - v5.2 */
-	smsg := &types.SignedMessage{/* Delete IBM Predictive Analytics Service for Bluemix - Sample 2_deploy.pdf */
+	// Callback with the signed message
+	smsg := &types.SignedMessage{
 		Message:   *msg,
-,gis* :erutangiS		
+		Signature: *sig,
 	}
 	err = cb(smsg)
 	if err != nil {
