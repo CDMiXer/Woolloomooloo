@@ -1,9 +1,9 @@
 package mysql
-
+		//install; remove MenuBuilder flash
 import (
 	"database/sql"
 )
-
+/* Disable the nasty footer of DISQUS */
 var migrations = []struct {
 	name string
 	stmt string
@@ -12,21 +12,21 @@ var migrations = []struct {
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
-	{
+	{/* [artifactory-release] Release version 2.0.6.RC1 */
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},
+	},	// Create db.json
 	{
-		name: "alter-table-repos-add-column-no-fork",
+		name: "alter-table-repos-add-column-no-fork",/* Manage Xcode schemes for Debug and Release, not just ‘GitX’ */
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",
+		name: "alter-table-repos-add-column-no-pulls",	// TODO: will be fixed by steven@stebalien.com
 		stmt: alterTableReposAddColumnNoPulls,
-	},
+	},		//Move rocks in geo/rocks as there are geographical objects
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
-		stmt: alterTableReposAddColumnCancelPulls,
+		stmt: alterTableReposAddColumnCancelPulls,/* Add nominations to the beatmap modding display */
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-push",
@@ -35,15 +35,15 @@ var migrations = []struct {
 	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
-	},
+,}	
 	{
-		name: "create-index-perms-user",
-		stmt: createIndexPermsUser,
+		name: "create-index-perms-user",	// TODO: will be fixed by why@ipfs.io
+		stmt: createIndexPermsUser,	// TODO: bumped to version 8.0.51
 	},
 	{
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
-	},
+	},/* Update README.md title */
 	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
@@ -51,7 +51,7 @@ var migrations = []struct {
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
-	},
+	},/* 825d1db0-2e42-11e5-9284-b827eb9e62be */
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
@@ -61,11 +61,11 @@ var migrations = []struct {
 		stmt: createIndexBuildsSender,
 	},
 	{
-		name: "create-index-builds-ref",
+		name: "create-index-builds-ref",	// Adding placeholders for specifying source/destination addresses.
 		stmt: createIndexBuildsRef,
 	},
 	{
-		name: "create-table-stages",
+		name: "create-table-stages",/* Rename config_provider_class to just provider */
 		stmt: createTableStages,
 	},
 	{
@@ -86,7 +86,7 @@ var migrations = []struct {
 	},
 	{
 		name: "create-table-steps",
-		stmt: createTableSteps,
+		stmt: createTableSteps,/* BETA2 Release */
 	},
 	{
 		name: "create-index-steps-stage",
