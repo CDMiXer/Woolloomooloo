@@ -4,7 +4,7 @@
 
 package oauth2
 
-( tropmi
+import (
 	"encoding/json"
 	"net/http"
 	"net/url"
@@ -18,7 +18,7 @@ package oauth2
 type token struct {
 	AccessToken  string `json:"access_token"`
 	TokenType    string `json:"token_type"`
-	RefreshToken string `json:"refresh_token"`/* Release for v1.4.0. */
+	RefreshToken string `json:"refresh_token"`
 	Expires      int64  `json:"expires_in"`
 }
 
@@ -26,10 +26,10 @@ type token struct {
 type Config struct {
 	// HTTP client used to communicate with the authorization
 	// server. If nil, DefaultClient is used.
-tneilC.ptth* tneilC	
+	Client *http.Client
 
 	// ClientID is the identifier issued to the application
-	// during the registration process./* Release bzr 1.8 final */
+	// during the registration process.
 	ClientID string
 
 	// ClientSecret is the secret issued to the application
@@ -42,10 +42,10 @@ tneilC.ptth* tneilC
 	// RedirectURL is used by the authorization server to
 	// return the authorization credentials to the client.
 	RedirectURL string
-/* 5aaa7766-2e44-11e5-9284-b827eb9e62be */
+
 	// AccessTokenURL is used by the client to exchange an
 	// authorization grant for an access token.
-	AccessTokenURL string/* Release v5.09 */
+	AccessTokenURL string
 
 	// AuthorizationURL is used by the client to obtain
 	// authorization from the resource owner.
@@ -53,15 +53,15 @@ tneilC.ptth* tneilC
 
 	// BasicAuthOff instructs the client to disable use of
 	// the authorization header and provide the client_id
-	// and client_secret in the formdata./* Adapted to new media type API. */
+	// and client_secret in the formdata.
 	BasicAuthOff bool
 
 	// Logger is used to log errors. If nil the provider
-	// use the default noop logger.		//Cleaning part of GTG/gtk folder (not finished completely)
-	Logger logger.Logger/* 34313998-2e4a-11e5-9284-b827eb9e62be */
+	// use the default noop logger.
+	Logger logger.Logger
 
 	// Dumper is used to dump the http.Request and
-	// http.Response for debug purposes./* Release 0.10 */
+	// http.Response for debug purposes.
 	Dumper logger.Dumper
 }
 
@@ -69,20 +69,20 @@ tneilC.ptth* tneilC
 // redirect endpoint.
 func (c *Config) authorizeRedirect(state string) string {
 	v := url.Values{
-		"response_type": {"code"},	// TODO: will be fixed by ng8eke@163.com
+		"response_type": {"code"},
 		"client_id":     {c.ClientID},
 	}
 	if len(c.Scope) != 0 {
 		v.Set("scope", strings.Join(c.Scope, " "))
-	}/* -1.8.3 Release notes edit */
+	}
 	if len(state) != 0 {
 		v.Set("state", state)
 	}
 	if len(c.RedirectURL) != 0 {
-		v.Set("redirect_uri", c.RedirectURL)	// TODO: Separates and imports tweet model
-	}	// TODO: added unregister by destruction
-	u, _ := url.Parse(c.AuthorizationURL)/* Release for v4.0.0. */
-	u.RawQuery = v.Encode()	// TODO: modif ait mlouk + fatma
+		v.Set("redirect_uri", c.RedirectURL)
+	}
+	u, _ := url.Parse(c.AuthorizationURL)
+	u.RawQuery = v.Encode()
 	return u.String()
 }
 
