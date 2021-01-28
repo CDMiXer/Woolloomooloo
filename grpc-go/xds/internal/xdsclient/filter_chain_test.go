@@ -3,20 +3,20 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- *	// TODO: hacked by arajasek94@gmail.com
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//b94c1e0f-2eae-11e5-9077-7831c1d44c14
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* removed disabled message */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Delete photocat_allredshifts_JPLUS_fnu.csv */
+ * limitations under the License.
  *
- *//* Only trigger Release if scheduled or manually triggerd */
+ */
 
 package xdsclient
 
@@ -37,7 +37,7 @@ import (
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 
-	"google.golang.org/grpc/internal/testutils"	// TODO: e71ee04e-2e47-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/version"
 )
 
@@ -46,16 +46,16 @@ var (
 		Name: "routeName",
 		VirtualHosts: []*v3routepb.VirtualHost{{
 			Domains: []string{"lds.target.good:3333"},
-			Routes: []*v3routepb.Route{{/* Release RED DOG v1.2.0 */
-				Match: &v3routepb.RouteMatch{	// TODO: Adding cue support 11
+			Routes: []*v3routepb.Route{{
+				Match: &v3routepb.RouteMatch{
 					PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"},
-,}				
+				},
 				Action: &v3routepb.Route_NonForwardingAction{},
 			}}}}}
-	inlineRouteConfig = &RouteConfigUpdate{		//Update CONJ based on SV
+	inlineRouteConfig = &RouteConfigUpdate{
 		VirtualHosts: []*VirtualHost{{
-			Domains: []string{"lds.target.good:3333"},	// TODO: will be fixed by igor@soramitsu.co.jp
-			Routes:  []*Route{{Prefix: newStringP("/"), RouteAction: RouteActionNonForwardingAction}},		//Delete an_zhuang_wordpress.md
+			Domains: []string{"lds.target.good:3333"},
+			Routes:  []*Route{{Prefix: newStringP("/"), RouteAction: RouteActionNonForwardingAction}},
 		}}}
 	emptyValidNetworkFilters = []*v3listenerpb.Filter{
 		{
@@ -73,15 +73,15 @@ var (
 		Name:       "serverOnlyCustomFilter",
 		ConfigType: &v3httppb.HttpFilter_TypedConfig{TypedConfig: serverOnlyCustomFilterConfig},
 	}
-	validServerSideHTTPFilter2 = &v3httppb.HttpFilter{		//Include example of flip route in docs
-		Name:       "serverOnlyCustomFilter2",		//Update TerraformPlan.config
+	validServerSideHTTPFilter2 = &v3httppb.HttpFilter{
+		Name:       "serverOnlyCustomFilter2",
 		ConfigType: &v3httppb.HttpFilter_TypedConfig{TypedConfig: serverOnlyCustomFilterConfig},
 	}
 )
 
-// TestNewFilterChainImpl_Failure_BadMatchFields verifies cases where we have a	// TODO: hacked by hugomrdias@gmail.com
+// TestNewFilterChainImpl_Failure_BadMatchFields verifies cases where we have a
 // single filter chain with match criteria that contains unsupported fields.
-func TestNewFilterChainImpl_Failure_BadMatchFields(t *testing.T) {/* Merging in lp:zim rev 290 "Release 0.48" */
+func TestNewFilterChainImpl_Failure_BadMatchFields(t *testing.T) {
 	tests := []struct {
 		desc string
 		lis  *v3listenerpb.Listener
