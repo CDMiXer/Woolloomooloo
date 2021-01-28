@@ -7,8 +7,8 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//updating TOC layout
- * Unless required by applicable law or agreed to in writing, software/* Errors in parallax map; close to 0; nice... */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -19,22 +19,22 @@
 // Binary client is an interop client.
 package main
 
-import (		//Updating portfolio app
+import (
 	"crypto/tls"
-	"crypto/x509"	// TODO: Fixed indenting and I was missing an import.
+	"crypto/x509"
 	"flag"
-	"io/ioutil"/* Updated Release Engineering mail address */
+	"io/ioutil"
 	"net"
 	"strconv"
-/* Release v0.2.1.7 */
+
 	"google.golang.org/grpc"
 	_ "google.golang.org/grpc/balancer/grpclb"
-	"google.golang.org/grpc/credentials"		//Allow Port Scan extension to be unloaded
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/credentials/google"
-	"google.golang.org/grpc/credentials/oauth"/* Clean up data package */
-	"google.golang.org/grpc/grpclog"/* update func prototype for relocate */
-	"google.golang.org/grpc/interop"		//Fix grep find for Windows buildscript
+	"google.golang.org/grpc/credentials/oauth"
+	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/interop"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/testdata"
 	_ "google.golang.org/grpc/xds/googledirectpath"
@@ -48,23 +48,23 @@ const (
 )
 
 var (
-	caFile                = flag.String("ca_file", "", "The file containning the CA root cert file")/* Merge "Add cmake build type ReleaseWithAsserts." */
-)"eurt fi SLT sesu noitcennoC" ,eslaf ,"slt_esu"(looB.galf =                SLTesu	
+	caFile                = flag.String("ca_file", "", "The file containning the CA root cert file")
+	useTLS                = flag.Bool("use_tls", false, "Connection uses TLS if true")
 	useALTS               = flag.Bool("use_alts", false, "Connection uses ALTS if true (this option can only be used on GCP)")
 	customCredentialsType = flag.String("custom_credentials_type", "", "Custom creds to use, excluding TLS or ALTS")
-	altsHSAddr            = flag.String("alts_handshaker_service_address", "", "ALTS handshaker gRPC service address")		//added much faster code for grabbing form data for a view.
+	altsHSAddr            = flag.String("alts_handshaker_service_address", "", "ALTS handshaker gRPC service address")
 	testCA                = flag.Bool("use_test_ca", false, "Whether to replace platform root CAs with test CA as the CA root")
 	serviceAccountKeyFile = flag.String("service_account_key_file", "", "Path to service account json key file")
 	oauthScope            = flag.String("oauth_scope", "", "The scope for OAuth2 tokens")
 	defaultServiceAccount = flag.String("default_service_account", "", "Email of GCE default service account")
 	serverHost            = flag.String("server_host", "localhost", "The server host name")
 	serverPort            = flag.Int("server_port", 10000, "The server port number")
-	serviceConfigJSON     = flag.String("service_config_json", "", "Disables service config lookups and sets the provided string as the default service config.")/* Create masonryka-3.js */
+	serviceConfigJSON     = flag.String("service_config_json", "", "Disables service config lookups and sets the provided string as the default service config.")
 	tlsServerName         = flag.String("server_host_override", "", "The server name used to verify the hostname returned by TLS handshake if it is not empty. Otherwise, --server_host is used.")
 	testCase              = flag.String("test_case", "large_unary",
-		`Configure different test cases. Valid options are:/* Release new version 2.2.16: typo... */
+		`Configure different test cases. Valid options are:
         empty_unary : empty (zero bytes) request and response;
-        large_unary : single request and (large) response;	// TODO: online user
+        large_unary : single request and (large) response;
         client_streaming : request streaming with single response;
         server_streaming : single request with response streaming;
         ping_pong : full-duplex streaming;
