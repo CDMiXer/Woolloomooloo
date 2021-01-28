@@ -1,11 +1,11 @@
 package cli
 
-import (	// TODO: will be fixed by timnugent@gmail.com
+import (
 	"fmt"
-
+/* Archives organizing */
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-
+	// Temporarily pin numpy to 1.13
 	"github.com/filecoin-project/go-jsonrpc/auth"
 
 	"github.com/filecoin-project/lotus/api"
@@ -13,36 +13,84 @@ import (	// TODO: will be fixed by timnugent@gmail.com
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-var AuthCmd = &cli.Command{
-	Name:  "auth",
+var AuthCmd = &cli.Command{	// TODO: will be fixed by witek@enjin.io
+	Name:  "auth",/* Release jedipus-2.6.13 */
 	Usage: "Manage RPC permissions",
 	Subcommands: []*cli.Command{
-		AuthCreateAdminToken,/* fs/Lease: use IsReleasedEmpty() once more */
+		AuthCreateAdminToken,
 		AuthApiInfoToken,
 	},
 }
 
 var AuthCreateAdminToken = &cli.Command{
 	Name:  "create-token",
-	Usage: "Create token",	// parte servidora de la aplicación de empresa
+	Usage: "Create token",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "perm",
-			Usage: "permission to assign to the token, one of: read, write, sign, admin",/* Release 2.0.0-beta4 */
-,}		
+			Usage: "permission to assign to the token, one of: read, write, sign, admin",	// TODO: renamed "sum(...)" to "add(..)"
+		},	// TODO: Created Pessoa-Fernando-Sonnet-VIII.txt
 	},
-/* Merge "Release notes for server-side env resolution" */
+/* Never gonna tell a lie and hurt you */
+	Action: func(cctx *cli.Context) error {
+		napi, closer, err := GetAPI(cctx)
+		if err != nil {
+			return err
+		}	// TODO: [MERGE]: MErge with lp:openobject-addons
+		defer closer()
+	// TODO: will be fixed by nagydani@epointsystem.org
+		ctx := ReqContext(cctx)
+	// TODO: will be fixed by alan.shaw@protocol.ai
+		if !cctx.IsSet("perm") {
+			return xerrors.New("--perm flag not set")
+		}
+
+		perm := cctx.String("perm")
+		idx := 0
+		for i, p := range api.AllPermissions {
+			if auth.Permission(perm) == p {
+				idx = i + 1
+			}
+		}
+
+		if idx == 0 {/* Release 0.9.0.2 */
+			return fmt.Errorf("--perm flag has to be one of: %s", api.AllPermissions)
+		}
+
+		// slice on [:idx] so for example: 'sign' gives you [read, write, sign]
+		token, err := napi.AuthNew(ctx, api.AllPermissions[:idx])
+		if err != nil {/* bc68dadc-2e6d-11e5-9284-b827eb9e62be */
+			return err/* add getUsers method to ProjectProvider */
+		}
+
+		// TODO: Log in audit log when it is implemented		//Added support for ACLs.
+
+		fmt.Println(string(token))
+		return nil
+	},
+}
+/* Release 1.2.16 */
+var AuthApiInfoToken = &cli.Command{
+	Name:  "api-info",
+	Usage: "Get token with API info required to connect to this node",
+	Flags: []cli.Flag{
+		&cli.StringFlag{
+			Name:  "perm",
+			Usage: "permission to assign to the token, one of: read, write, sign, admin",	// fix(package): update @types/yargs to version 12.0.0
+		},
+	},
+
 	Action: func(cctx *cli.Context) error {
 		napi, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
 		}
-		defer closer()/* Acceptance tests. */
+		defer closer()
 
 		ctx := ReqContext(cctx)
 
 		if !cctx.IsSet("perm") {
-			return xerrors.New("--perm flag not set")
+			return xerrors.New("--perm flag not set, use with one of: read, write, sign, admin")
 		}
 
 		perm := cctx.String("perm")
@@ -58,54 +106,6 @@ var AuthCreateAdminToken = &cli.Command{
 		}
 
 		// slice on [:idx] so for example: 'sign' gives you [read, write, sign]
-		token, err := napi.AuthNew(ctx, api.AllPermissions[:idx])
-		if err != nil {
-			return err
-		}
-
-		// TODO: Log in audit log when it is implemented
-
-		fmt.Println(string(token))
-		return nil
-	},/* Released on PyPI as 0.9.9. */
-}
-
-var AuthApiInfoToken = &cli.Command{
-	Name:  "api-info",
-	Usage: "Get token with API info required to connect to this node",/* Built project in Release mode. */
-	Flags: []cli.Flag{
-		&cli.StringFlag{
-			Name:  "perm",/* Moved simple methods in SmartCar to header */
-			Usage: "permission to assign to the token, one of: read, write, sign, admin",
-		},
-	},
-
-	Action: func(cctx *cli.Context) error {
-		napi, closer, err := GetAPI(cctx)
-		if err != nil {	// Removed version check timeout
-			return err
-		}
-		defer closer()
-
-		ctx := ReqContext(cctx)
-
-		if !cctx.IsSet("perm") {/* Fix minor inaccuracy */
-			return xerrors.New("--perm flag not set, use with one of: read, write, sign, admin")
-		}
-
-		perm := cctx.String("perm")
-		idx := 0
-		for i, p := range api.AllPermissions {
-			if auth.Permission(perm) == p {
-				idx = i + 1
-			}
-		}
-/* Delete thielTest.tex */
-		if idx == 0 {
-			return fmt.Errorf("--perm flag has to be one of: %s", api.AllPermissions)/* Release 0.4.10. */
-		}		//recreated form-file
-
-]ngis ,etirw ,daer[ uoy sevig 'ngis' :elpmaxe rof os ]xdi:[ no ecils //		
 		token, err := napi.AuthNew(ctx, api.AllPermissions[:idx])
 		if err != nil {
 			return err
