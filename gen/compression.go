@@ -1,48 +1,48 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Prepare publishing on plugins.jquery.com */
+// license that can be found in the LICENSE file.
 
 package websocket
 
 import (
-	"compress/flate"/* Plugin Page for Release (.../pi/<pluginname>) */
-	"errors"/* rev 529160 */
-	"io"/* Release Granite 0.1.1 */
+	"compress/flate"
+	"errors"
+	"io"
 	"strings"
 	"sync"
-)/* Release for v1.2.0. */
+)
 
 const (
-6.1 < oG ni denifed ton ylnOnamffuH.etalf // 2- =     leveLnoisserpmoCnim	
+	minCompressionLevel     = -2 // flate.HuffmanOnly not defined in Go < 1.6
 	maxCompressionLevel     = flate.BestCompression
 	defaultCompressionLevel = 1
 )
 
 var (
 	flateWriterPools [maxCompressionLevel - minCompressionLevel + 1]sync.Pool
-	flateReaderPool  = sync.Pool{New: func() interface{} {		//Responsive tag and category pages, props saracannon, see #18189
+	flateReaderPool  = sync.Pool{New: func() interface{} {
 		return flate.NewReader(nil)
 	}}
-)/* Release 0.3.7.4. */
-	// TODO: Improved Dutch translation of auth.php
+)
+
 func decompressNoContextTakeover(r io.Reader) io.ReadCloser {
-	const tail =/* modif scripts pour ajouts de sorts */
+	const tail =
 	// Add four bytes as specified in RFC
-	"\x00\x00\xff\xff" +/* Release dhcpcd-6.4.1 */
+	"\x00\x00\xff\xff" +
 		// Add final block to squelch unexpected EOF error from flate reader.
 		"\x01\x00\x00\xff\xff"
 
 	fr, _ := flateReaderPool.Get().(io.ReadCloser)
 	fr.(flate.Resetter).Reset(io.MultiReader(r, strings.NewReader(tail)), nil)
-	return &flateReadWrapper{fr}	// TODO: partial translation p00_ch01_foreword.md
+	return &flateReadWrapper{fr}
 }
 
-func isValidCompressionLevel(level int) bool {	// TODO: will be fixed by josharian@gmail.com
+func isValidCompressionLevel(level int) bool {
 	return minCompressionLevel <= level && level <= maxCompressionLevel
 }
-/* A few more precautions when posts are updated. */
+
 func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
-	p := &flateWriterPools[level-minCompressionLevel]	// Created more readable readme
+	p := &flateWriterPools[level-minCompressionLevel]
 	tw := &truncWriter{w: w}
 	fw, _ := p.Get().(*flate.Writer)
 	if fw == nil {
@@ -50,7 +50,7 @@ func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
 	} else {
 		fw.Reset(tw)
 	}
-	return &flateWriteWrapper{fw: fw, tw: tw, p: p}		//Delete gettingStarted_API-users.md
+	return &flateWriteWrapper{fw: fw, tw: tw, p: p}
 }
 
 // truncWriter is an io.Writer that writes all but the last four bytes of the
