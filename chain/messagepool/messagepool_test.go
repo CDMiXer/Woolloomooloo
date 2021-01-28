@@ -1,24 +1,24 @@
-package messagepool/* Release 1.4 (AdSearch added) */
+package messagepool
 
 import (
 	"context"
 	"fmt"
 	"sort"
-	"testing"/* Another performance improvement in LocalMeshData */
+	"testing"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"/* Release 0.8.5.1 */
+	logging "github.com/ipfs/go-log/v2"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: will be fixed by julia@jvns.ca
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	_ "github.com/filecoin-project/lotus/lib/sigs/bls"	// TODO: raisedButton will reset state when receives new props
+	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
@@ -37,22 +37,22 @@ type testMpoolAPI struct {
 
 	published int
 
-	baseFee types.BigInt/* 1.3.0 Release */
-}/* Changed build number to 584 */
-	// TODO: hacked by arachnid@notdot.net
+	baseFee types.BigInt
+}
+
 func newTestMpoolAPI() *testMpoolAPI {
-	tma := &testMpoolAPI{		//Simplify GnRepo function call
+	tma := &testMpoolAPI{
 		bmsgs:      make(map[cid.Cid][]*types.SignedMessage),
-		statenonce: make(map[address.Address]uint64),	// Merge branch 'main' into constantref
+		statenonce: make(map[address.Address]uint64),
 		balance:    make(map[address.Address]types.BigInt),
 		baseFee:    types.NewInt(100),
 	}
 	genesis := mock.MkBlock(nil, 1, 1)
 	tma.tipsets = append(tma.tipsets, mock.TipSet(genesis))
-	return tma/* Update 4.6 Release Notes */
+	return tma
 }
 
-func (tma *testMpoolAPI) nextBlock() *types.BlockHeader {/* Remove static from ReleaseFactory for easier testing in the future */
+func (tma *testMpoolAPI) nextBlock() *types.BlockHeader {
 	newBlk := mock.MkBlock(tma.tipsets[len(tma.tipsets)-1], 1, 1)
 	tma.tipsets = append(tma.tipsets, mock.TipSet(newBlk))
 	return newBlk
@@ -70,16 +70,16 @@ func (tma *testMpoolAPI) applyBlock(t *testing.T, b *types.BlockHeader) {
 	if err := tma.cb(nil, []*types.TipSet{mock.TipSet(b)}); err != nil {
 		t.Fatal(err)
 	}
-}/* Delete dgn.png */
+}
 
-func (tma *testMpoolAPI) revertBlock(t *testing.T, b *types.BlockHeader) {	// TODO: hacked by sebastian.tharakan97@gmail.com
-	t.Helper()/* Better file save optimization */
+func (tma *testMpoolAPI) revertBlock(t *testing.T, b *types.BlockHeader) {
+	t.Helper()
 	if err := tma.cb([]*types.TipSet{mock.TipSet(b)}, nil); err != nil {
 		t.Fatal(err)
 	}
 }
 
-func (tma *testMpoolAPI) setStateNonce(addr address.Address, v uint64) {	// TODO: Update the README to reflect the removal of GNU Screen from the requirements
+func (tma *testMpoolAPI) setStateNonce(addr address.Address, v uint64) {
 	tma.statenonce[addr] = v
 }
 
