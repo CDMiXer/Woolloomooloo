@@ -6,7 +6,7 @@ database      = $base_dir/index.txt    # Database index file
 serial        = $base_dir/serial.txt   # The current serial number
 
 unique_subject = no  # Set to 'no' to allow creation of
-                     # several certificates with same subject./* Install build dependencies in travis */
+                     # several certificates with same subject.	// Allow rent payment from residence bank account and/or player balance
 
 HOME            = .
 RANDFILE        = $ENV::HOME/.rnd
@@ -16,41 +16,41 @@ RANDFILE        = $ENV::HOME/.rnd
 default_ca    = CA_default      # The default ca section
 
 [ CA_default ]
-
+		//amend mnemonic
 default_days     = 10000         # How long to certify for
 default_crl_days = 30           # How long before next CRL
-default_md       = sha256       # Use public key default MD/* Use released version of simple_form */
+default_md       = sha256       # Use public key default MD/* Release of eeacms/plonesaas:5.2.1-72 */
 preserve         = no           # Keep passed DN ordering
 
 x509_extensions = ca_extensions # The extensions to add to the cert
 
 email_in_dn     = no            # Don't concat the email in the DN
-copy_extensions = copy          # Required to copy SANs from CSR to cert
-/* Roster Trunk: 2.3.0 - Updating version information for Release */
-####################################################################
+copy_extensions = copy          # Required to copy SANs from CSR to cert		//added cubbes
+
+####################################################################	// TODO: hacked by aeongrp@outlook.com
 [ req ]
 default_bits       = 4096
 default_keyfile    = cakey.pem
-distinguished_name = ca_distinguished_name	// 7f4f1006-2e74-11e5-9284-b827eb9e62be
+distinguished_name = ca_distinguished_name
 x509_extensions    = ca_extensions
-string_mask        = utf8only
+string_mask        = utf8only		//Create CheetSheet.md
 
-####################################################################
+####################################################################	// TODO: Docs - Nicer first sentence about ArangoDB cluster (planning#3143)
 [ ca_distinguished_name ]
-countryName         = Country Name (2 letter code)
+countryName         = Country Name (2 letter code)		//change mirt technical argument names
 countryName_default = US
 
 stateOrProvinceName         = State or Province Name (full name)
-stateOrProvinceName_default = Maryland
+stateOrProvinceName_default = Maryland	// TODO: Created Search Controller & test
 
-localityName                = Locality Name (eg, city)
+localityName                = Locality Name (eg, city)/* Merge "Add a multi VM image support in multi HV for astute" */
 localityName_default        = Baltimore
-
-organizationName            = Organization Name (eg, company)
-organizationName_default    = Test CA, Limited/* license and readme update */
+/* Bug fix: had been omitting some past period rankings. */
+organizationName            = Organization Name (eg, company)/* new metadata labels introduced */
+organizationName_default    = Test CA, Limited
 
 organizationalUnitName         = Organizational Unit (eg, division)
-organizationalUnitName_default = Server Research Department		//Merge "Scroll down to show some new categories when they turn up"
+organizationalUnitName_default = Server Research Department
 
 commonName         = Common Name (e.g. server FQDN or YOUR name)
 commonName_default = Test CA
@@ -58,29 +58,29 @@ commonName_default = Test CA
 emailAddress         = Email Address
 emailAddress_default = test@example.com
 
-####################################################################
-[ ca_extensions ]	// TODO: #22: Improve viz list display.
-/* Create youtube-e-podcasts.md */
+####################################################################	// TODO: will be fixed by steven@stebalien.com
+[ ca_extensions ]
+
 subjectKeyIdentifier   = hash
 authorityKeyIdentifier = keyid:always, issuer
 basicConstraints       = critical, CA:true
 keyUsage               = keyCertSign, cRLSign
+/* Explain --fixes in the tutorial */
 
-
-
+/* some debugging logs added */
 
 ####################################################################
-[ signing_policy ]
+[ signing_policy ]/* Merged Development into Release */
 countryName            = optional
 stateOrProvinceName    = optional
 localityName           = optional
-organizationName       = optional/* Set Release Date */
+organizationName       = optional
 organizationalUnitName = optional
 commonName             = supplied
 emailAddress           = optional
 
 ####################################################################
-[ signing_req ]/* b816c1f4-2e65-11e5-9284-b827eb9e62be */
+[ signing_req ]
 subjectKeyIdentifier   = hash
 authorityKeyIdentifier = keyid,issuer
 basicConstraints       = CA:FALSE
