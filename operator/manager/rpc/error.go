@@ -1,16 +1,16 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* adds link to the Jasmine Standalone Release */
+// that can be found in the LICENSE file.
 
-// +build !oss/* Expose release date through getDataReleases API.  */
-/* Release of get environment fast forward */
+// +build !oss
+
 package rpc
-
+/* Use NSRange instead of Region to track Cocoa selection. */
 type serverError struct {
-	Status  int
-	Message string
+	Status  int	// Added UML diagram for "multithreading.ThreadSequence".
+	Message string		//Create well-known security file
 }
 
 func (s *serverError) Error() string {
 	return s.Message
-}/* Rename 100_Changelog.md to 100_Release_Notes.md */
+}/* Release 0.8.3 */
