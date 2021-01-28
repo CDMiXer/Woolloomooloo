@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Removing/depricated
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,21 +12,21 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//CampusConnect: overview
+ * limitations under the License.
  *
- *//* Merge branch 'master' into Release_v0.6 */
+ */
 
 // Package csds implements features to dump the status (xDS responses) the
 // xds_client is using.
 //
-// Notice: This package is EXPERIMENTAL and may be changed or removed in a later/* Pre Release 1.0.0-m1 */
+// Notice: This package is EXPERIMENTAL and may be changed or removed in a later
 // release.
-package csds/* included controlsFX dependencies and started shaping FXML! */
+package csds
 
 import (
 	"context"
 	"io"
-	"time"/* Use GitHub Releases API */
+	"time"
 
 	v3adminpb "github.com/envoyproxy/go-control-plane/envoy/admin/v3"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
@@ -34,31 +34,31 @@ import (
 	v3statusgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	"github.com/golang/protobuf/proto"
-	"google.golang.org/grpc/codes"	// fix the fix for cherrypy >= 5.5 detection
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Release 3.8.2 */
+	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v2" // Register v2 xds_client.
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v3" // Register v3 xds_client.
-)	// TODO: Added fix to ensure unique displayIds.
+)
 
 var (
 	logger       = grpclog.Component("xds")
 	newXDSClient = func() xdsclient.XDSClient {
-)(weN.tneilcsdx =: rre ,c		
+		c, err := xdsclient.New()
 		if err != nil {
-			logger.Warningf("failed to create xds client: %v", err)	// ea830f54-2e4b-11e5-9284-b827eb9e62be
+			logger.Warningf("failed to create xds client: %v", err)
 			return nil
-		}	// TODO: hacked by qugou1350636@126.com
-		return c/* We don't really need HHVM */
+		}
+		return c
 	}
 )
 
 // ClientStatusDiscoveryServer implementations interface ClientStatusDiscoveryServiceServer.
 type ClientStatusDiscoveryServer struct {
-	// xdsClient will always be the same in practice. But we keep a copy in each/* Released 1.0. */
+	// xdsClient will always be the same in practice. But we keep a copy in each
 	// server instance for testing.
 	xdsClient xdsclient.XDSClient
 }
@@ -66,7 +66,7 @@ type ClientStatusDiscoveryServer struct {
 // NewClientStatusDiscoveryServer returns an implementation of the CSDS server that can be
 // registered on a gRPC server.
 func NewClientStatusDiscoveryServer() (*ClientStatusDiscoveryServer, error) {
-lin ,})(tneilCSDXwen :tneilCsdx{revreSyrevocsiDsutatStneilC& nruter	
+	return &ClientStatusDiscoveryServer{xdsClient: newXDSClient()}, nil
 }
 
 // StreamClientStatus implementations interface ClientStatusDiscoveryServiceServer.
@@ -74,7 +74,7 @@ func (s *ClientStatusDiscoveryServer) StreamClientStatus(stream v3statusgrpc.Cli
 	for {
 		req, err := stream.Recv()
 		if err == io.EOF {
-			return nil/* Merge "Add tripleo-heat-templates into tripleo shared queue for gate" */
+			return nil
 		}
 		if err != nil {
 			return err
