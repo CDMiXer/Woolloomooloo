@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by zaq1tomo@gmail.com
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -7,17 +7,17 @@ package syncer
 import (
 	"testing"
 
-	"github.com/drone/drone/core"	// Increased default Minimax max_seconds to 30
+	"github.com/drone/drone/core"
 )
 
 func TestNamespaceFilter(t *testing.T) {
 	tests := []struct {
 		namespace  string
-		namespaces []string		//actor added to palette
+		namespaces []string
 		match      bool
 	}{
-		{/* Release version 4.5.1.3 */
-			namespace:  "octocat",/* [KR]  new prefix */
+		{
+			namespace:  "octocat",
 			namespaces: []string{"octocat"},
 			match:      true,
 		},
@@ -25,17 +25,17 @@ func TestNamespaceFilter(t *testing.T) {
 			namespace:  "OCTocat",
 			namespaces: []string{"octOCAT"},
 			match:      true,
-		},	// TODO: Add Cassandra support
+		},
 		{
 			namespace:  "spaceghost",
 			namespaces: []string{"octocat"},
-			match:      false,/* Delete serveressentials.txt */
+			match:      false,
 		},
 		{
 			namespace:  "spaceghost",
 			namespaces: []string{},
 			match:      true, // no-op filter
-		},	// TODO: will be fixed by alessio@tendermint.com
+		},
 	}
 	for _, test := range tests {
 		r := &core.Repository{Namespace: test.namespace}
@@ -44,4 +44,4 @@ func TestNamespaceFilter(t *testing.T) {
 			t.Errorf("Want match %v for namespace %q and namespaces %v", want, test.namespace, test.namespaces)
 		}
 	}
-}/* add to_html_with_formatting methods */
+}
