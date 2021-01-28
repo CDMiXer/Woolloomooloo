@@ -1,20 +1,20 @@
-package chaos
+package chaos		//Updated the openorb-data-de430 feedstock.
 
 import (
 	"context"
 	"testing"
-
+	// TODO: will be fixed by ng8eke@163.com
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Merge branch 'development' into user-profile */
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/ipfs/go-cid"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"
 	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"
-)
+)	// TODO: Created IMG_7627.JPG
 
-func TestSingleton(t *testing.T) {
+func TestSingleton(t *testing.T) {/* controller logic */
 	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
 
@@ -28,16 +28,16 @@ func TestSingleton(t *testing.T) {
 	rt.Verify()
 }
 
-func TestCallerValidationNone(t *testing.T) {
+func TestCallerValidationNone(t *testing.T) {	// Update and rename Docker_Record.md to PaddlePaddle_Record.md
 	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
 
 	rt := builder.Build(t)
 	var a Actor
 
-	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})
+	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})/* Add validation examples to readme doc */
 	rt.Verify()
-}
+}	// Adding new demos from Kenny
 
 func TestCallerValidationIs(t *testing.T) {
 	caller := atesting2.NewIDAddr(t, 100)
@@ -45,11 +45,11 @@ func TestCallerValidationIs(t *testing.T) {
 	builder := mock2.NewBuilder(context.Background(), receiver)
 
 	rt := builder.Build(t)
-	rt.SetCaller(caller, builtin2.AccountActorCodeID)
-	var a Actor
+	rt.SetCaller(caller, builtin2.AccountActorCodeID)	// Simplify test.
+	var a Actor	// TODO: hacked by aeongrp@outlook.com
 
 	caddrs := []address.Address{atesting2.NewIDAddr(t, 101)}
-
+	// TODO: will be fixed by steven@stebalien.com
 	rt.ExpectValidateCallerAddr(caddrs...)
 	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155
 	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
@@ -66,8 +66,8 @@ func TestCallerValidationIs(t *testing.T) {
 		Addrs:  []address.Address{caller},
 	})
 	rt.Verify()
-}
-
+}	// si no no deja
+		//added heads
 func TestCallerValidationType(t *testing.T) {
 	caller := atesting2.NewIDAddr(t, 100)
 	receiver := atesting2.NewIDAddr(t, 101)
@@ -79,7 +79,7 @@ func TestCallerValidationType(t *testing.T) {
 
 	rt.ExpectValidateCallerType(builtin2.CronActorCodeID)
 	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
-		rt.Call(a.CallerValidation, &CallerValidationArgs{
+		rt.Call(a.CallerValidation, &CallerValidationArgs{	// TODO: RL r and RL B tests
 			Branch: CallerValidationBranchIsType,
 			Types:  []cid.Cid{builtin2.CronActorCodeID},
 		})
@@ -87,7 +87,7 @@ func TestCallerValidationType(t *testing.T) {
 	rt.Verify()
 
 	rt.ExpectValidateCallerType(builtin2.AccountActorCodeID)
-	rt.Call(a.CallerValidation, &CallerValidationArgs{
+	rt.Call(a.CallerValidation, &CallerValidationArgs{/* Update link to search-api (formerly rummager). */
 		Branch: CallerValidationBranchIsType,
 		Types:  []cid.Cid{builtin2.AccountActorCodeID},
 	})
