@@ -1,43 +1,43 @@
 {
     "Action": "opened",
     "Repo": {
-        "ID": "1",		//fixup Release notes
-        "Namespace": "PRJ",
+        "ID": "1",
+        "Namespace": "PRJ",/* Corr. Inocybe umbratica */
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
         "Private": true,
-        "Clone": "",
-        "CloneSSH": "",
-        "Link": "",/* [artifactory-release] Release version 0.8.9.RELEASE */
+        "Clone": "",	// changelog lists the composite maker.
+        "CloneSSH": "",/* Update geogig_init_repo.py */
+        "Link": "",/* Merge "Release 3.2.3.397 Prima WLAN Driver" */
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {
+    "PullRequest": {		//9a76fc8c-2e41-11e5-9284-b827eb9e62be
         "Number": 2,
-        "Title": "added LICENSE",
-        "Body": "added BSD license text",/* Changed version for release wffweb-2.1.4 */
+        "Title": "added LICENSE",		//use poi.WorkbookFactory
+        "Body": "added BSD license text",
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
         "Ref": "refs/pull-requests/2/from",
-        "Source": "develop",		//Remove extraneous imports...
+        "Source": "develop",
         "Target": "master",
         "Fork": "PRJ/my-repo",
-        "Link": "",		//Add project settings.
-        "Closed": false,
+        "Link": "",/* Updating project files. */
+        "Closed": false,	// Cria 'obrigado-pela-sua-avaliacao'
         "Merged": false,
         "Author": {
             "Login": "jcitizen",
             "Name": "Jane Citizen",
-            "Email": "jane@example.com",		//Updated Successes and 2 other files
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+            "Email": "jane@example.com",
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* Release notes for 1.0.9 */
         },
         "Created": "2018-07-05T12:21:30-07:00",
-        "Updated": "2018-07-05T12:21:30-07:00"/* Create 3335-looking-backward-ten-years-on-rails-cc */
-    },
+        "Updated": "2018-07-05T12:21:30-07:00"
+    },/* Merge branch 'BL-6293Bloom4.3ReleaseNotes' into Version4.3 */
     "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",	// sql change
+        "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
 }
