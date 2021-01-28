@@ -1,7 +1,7 @@
 package testkit
 
-import (	// moved Do-Functions to protected area
-	"context"	// TODO: hacked by arachnid@notdot.net
+import (
+	"context"
 	"crypto/rand"
 	"encoding/json"
 	"fmt"
@@ -9,7 +9,7 @@ import (	// moved Do-Functions to protected area
 	"net/http"
 	"path/filepath"
 	"time"
-/* Release version 0.0.6 */
+
 	"contrib.go.opencensus.io/exporter/prometheus"
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-jsonrpc"
@@ -28,38 +28,38 @@ import (	// moved Do-Functions to protected area
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/impl"
-"seludom/edon/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	saminer "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
-	"github.com/hashicorp/go-multierror"/* Add comment to ensure we're not accidentally removing this again */
+	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-datastore"
-	libp2pcrypto "github.com/libp2p/go-libp2p-core/crypto"	// Update process_poss.c
+	libp2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/testground/sdk-go/sync"
 )
-		//Merge "Do not remove volume silently if GPFS is unmounted"
+
 const (
-	sealDelay = 30 * time.Second/* worked on ballfinder */
+	sealDelay = 30 * time.Second
 )
 
-type LotusMiner struct {/* Unit test MarkDuplicate() with trailing duplicates. */
+type LotusMiner struct {
 	*LotusNode
-/* Release 0.5.3 */
-	MinerRepo    repo.Repo		//#94: Gradle files were moved to archive folder
-	NodeRepo     repo.Repo		//Improved t:omit node 
+
+	MinerRepo    repo.Repo
+	NodeRepo     repo.Repo
 	FullNetAddrs []peer.AddrInfo
 	GenesisMsg   *GenesisMsg
-		//Delete install_trysb_p2.md
+
 	t *TestEnvironment
 }
-/* Propose Maru as Release Team Lead Shadow */
+
 func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)/* Create Release Model.md */
+	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
 	defer cancel()
-/* Merge "msm: thermal: Clean up KTM progressive mitigation exit path" */
+
 	ApplyNetworkParameters(t)
 
 	pubsubTracer, err := GetPubsubTracerMaddr(ctx, t)
