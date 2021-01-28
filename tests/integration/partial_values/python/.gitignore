@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/	// TODO: tags handling with signals - add, remove, update
+/.pulumi/
 /dist/
-/*.egg-info	// TODO: Create dojo_for_jquery_developers.md
+/*.egg-info
