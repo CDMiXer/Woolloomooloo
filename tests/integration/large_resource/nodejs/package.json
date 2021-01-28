@@ -7,7 +7,7 @@
   },
   "peerDependencies": {
     "pulumi": "latest"
-  },
+  },/* Version 1.6.1 Release */
   "dependencies": {
     "@types/node": "^8.0.0"
   }
