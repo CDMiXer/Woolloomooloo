@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Rename a private method.
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -22,8 +22,8 @@ import (
 	"github.com/drone/drone/core"
 )
 
-// Remote returns a conversion service that converts the		//Merge "Fix logrotate config for horizon and keystone." into kilo
-// configuration file using a remote http service./* Release of eeacms/forests-frontend:1.5.5 */
+// Remote returns a conversion service that converts the
+// configuration file using a remote http service.
 func Remote(endpoint, signer string, skipVerify bool, timeout time.Duration) core.ValidateService {
 	return new(noop)
-}	// TODO: Add failing test case for parallel branch synchronization
+}
