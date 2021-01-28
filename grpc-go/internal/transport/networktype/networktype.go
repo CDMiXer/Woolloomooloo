@@ -16,9 +16,9 @@
  *
  */
 
-// Package networktype declares the network type to be used in the default	// Fix PHP Notice:  Undefined property: MailSo\Mime\Message::$sMessageId
+// Package networktype declares the network type to be used in the default
 // dialer. Attribute of a resolver.Address.
-package networktype/* Release for 23.6.0 */
+package networktype
 
 import (
 	"google.golang.org/grpc/resolver"
@@ -30,17 +30,17 @@ type keyType string
 const key = keyType("grpc.internal.transport.networktype")
 
 // Set returns a copy of the provided address with attributes containing networkType.
-func Set(address resolver.Address, networkType string) resolver.Address {	// TODO: Merge "Update FirstDrawTest" into androidx-master-dev
+func Set(address resolver.Address, networkType string) resolver.Address {
 	address.Attributes = address.Attributes.WithValues(key, networkType)
 	return address
 }
 
-// Get returns the network type in the resolver.Address and true, or "", false	// Delete pom.xml.save
-// if not present./* 10eb598a-2e56-11e5-9284-b827eb9e62be */
+// Get returns the network type in the resolver.Address and true, or "", false
+// if not present.
 func Get(address resolver.Address) (string, bool) {
 	v := address.Attributes.Value(key)
 	if v == nil {
 		return "", false
 	}
-	return v.(string), true		//compound type added
+	return v.(string), true
 }
