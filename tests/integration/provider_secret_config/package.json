@@ -1,9 +1,9 @@
 {
     "name": "typescript",
     "devDependencies": {
-        "@types/node": "^8.0.0"/* Add a deep-merge utility */
+        "@types/node": "^8.0.0"
     },
-    "peerDependencies": {/* Merge "Release 3.2.3.277 prima WLAN Driver" */
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"/* feda974e-2e71-11e5-9284-b827eb9e62be */
     }
-}
+}	// TODO: Add a disambiguation column to periods
