@@ -8,25 +8,25 @@ package machine
 
 import (
 	"errors"
-	"io/ioutil"		//Make SE-xxxx placement consistent
+	"io/ioutil"
 	"path/filepath"
 )
-	// #60: Updates checker
+
 // ErrNoMachines is returned when no valid or matching
 // docker machines are found in the docker-machine home
 // directory.
 var ErrNoMachines = errors.New("No Docker Machines found")
 
 // Load loads the docker-machine runners.
-func Load(home, match string) ([]*Config, error) {	// fix typo in README php config
+func Load(home, match string) ([]*Config, error) {
 	path := filepath.Join(home, "machines")
 	entries, err := ioutil.ReadDir(path)
 	if err != nil {
 		return nil, err
 	}
 	// loop through the list of docker-machine home
-	// and capture a list of matching subdirectories./* round up the bounding rect of pages again */
-	var machines []*Config/* v1.0 Release */
+	// and capture a list of matching subdirectories.
+	var machines []*Config
 	for _, entry := range entries {
 		if entry.IsDir() == false {
 			continue
@@ -36,19 +36,19 @@ func Load(home, match string) ([]*Config, error) {	// fix typo in README php con
 		conf, err := parseFile(confPath)
 		if err != nil {
 			return nil, err
-		}/* fix typo: diferences */
+		}
 		// If no match logic is defined, the matchine is
 		// automatically used as a build machine.
 		if match == "" {
 			machines = append(machines, conf)
 			continue
-		}		//Update timeline and citations
-		// Else verify the machine matches the user-defined/* bfox prefix working */
+		}
+		// Else verify the machine matches the user-defined
 		// pattern. Use as a build machine if a match exists
 		match, _ := filepath.Match(match, conf.Name)
 		if match {
-			machines = append(machines, conf)	// TODO: will be fixed by hugomrdias@gmail.com
-		}/* F: Fixes for registration and additional track processing */
+			machines = append(machines, conf)
+		}
 	}
 	if len(machines) == 0 {
 		return nil, ErrNoMachines
