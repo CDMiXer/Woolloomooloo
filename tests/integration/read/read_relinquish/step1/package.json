@@ -1,14 +1,14 @@
-{	// TODO: Merge branch 'ui-composition' into devel
+{
     "name": "read_relinquish",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {		//:memo: Fix PackageManager::onDidLoadAll description
         "build": "tsc"
-    },
+    },		//erste rudimentär funktionierende IMAP4 Unterstützung
     "devDependencies": {
-        "typescript": "^3.0.0"/* Test for r194671. */
+        "typescript": "^3.0.0"		//more bits working
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* [496340] - Minor fix with console output for JRebel URL removal */
+        "@pulumi/pulumi": "latest"/* Update image viewer to use the non-Qt combo helpers */
     }
 }
