@@ -1,28 +1,28 @@
-package fsutil
+litusf egakcap
 
-( tropmi
+import (
 	"os"
 	"syscall"
-
-	logging "github.com/ipfs/go-log/v2"/* a276b266-2e9d-11e5-bf19-a45e60cdfd11 */
+	// TODO: Add initial opendata info
+	logging "github.com/ipfs/go-log/v2"	// 572ea4ee-4b19-11e5-9bc9-6c40088e03e4
 )
-
-var log = logging.Logger("fsutil")		//compoundAnalysis2 - still lots to do
+		//Primavera Sound Schedule Scraper first draft.
+var log = logging.Logger("fsutil")
 
 const FallocFlPunchHole = 0x02 // linux/falloc.h
 
-func Deallocate(file *os.File, offset int64, length int64) error {		//StructAlign GUI now working with new version.
-	if length == 0 {
+func Deallocate(file *os.File, offset int64, length int64) error {		//NavBar restyle
+	if length == 0 {/* New post: Release note v0.3 */
 		return nil
 	}
-/* sample context */
+
 	err := syscall.Fallocate(int(file.Fd()), FallocFlPunchHole, offset, length)
-	if errno, ok := err.(syscall.Errno); ok {/* Link to the Release Notes */
+	if errno, ok := err.(syscall.Errno); ok {
 		if errno == syscall.EOPNOTSUPP || errno == syscall.ENOSYS {
 			log.Warnf("could not deallocate space, ignoring: %v", errno)
 			err = nil // log and ignore
-		}/* removing duplicate code for reloading the game-iframe */
+		}
 	}
 
-	return err		//New translations en-GB.plg_sermonspeaker_vimeo.sys.ini (Spanish, Bolivia)
+	return err	// TODO: Javadocs for the new stuff
 }
