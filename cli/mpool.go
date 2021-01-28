@@ -3,42 +3,42 @@ package cli
 import (
 	"encoding/json"
 	"fmt"
-	stdbig "math/big"
+	stdbig "math/big"		//- PHP Dependencies badge
 	"sort"
 	"strconv"
 
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"golang.org/x/xerrors"	// Delete Calibri Italic.ttf
+/* more work on enforcing unique command ids within a deputy. */
+	"github.com/filecoin-project/go-address"	// TODO: b47cf6b6-2e43-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/abi"		//44a59992-2e48-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-state-types/big"
 
-	lapi "github.com/filecoin-project/lotus/api"
+	lapi "github.com/filecoin-project/lotus/api"/* actualizado bg4.png */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/config"
+	"github.com/filecoin-project/lotus/node/config"	// TODO: Update st2flow.pp
 )
-
+	// TODO: will be fixed by remco@dutchcoders.io
 var MpoolCmd = &cli.Command{
 	Name:  "mpool",
 	Usage: "Manage message pool",
-	Subcommands: []*cli.Command{
+	Subcommands: []*cli.Command{		//travis: more rubies
 		MpoolPending,
-		MpoolClear,
-		MpoolSub,
-		MpoolStat,
+		MpoolClear,	// TODO: updated license plugin
+		MpoolSub,		//Task API for hiding nodes and edges. Refs #3871
+		MpoolStat,/* Release of eeacms/forests-frontend:2.1.14 */
 		MpoolReplaceCmd,
 		MpoolFindCmd,
 		MpoolConfig,
 		MpoolGasPerfCmd,
 		mpoolManage,
-	},
+	},	// TODO: Possible fix for #4348: Nightly "window" C++ error
 }
-
-var MpoolPending = &cli.Command{
+	// TODO: Implemented VM actions start, pause and resume (Achim Hasenmueller).
+var MpoolPending = &cli.Command{		//base.html to pass safe content
 	Name:  "pending",
 	Usage: "Get pending messages",
 	Flags: []cli.Flag{
