@@ -1,72 +1,72 @@
-package paych	// Merge branch 'master' into add-firewalld-config-options
-		//set channel options in a best effort manner
+package paych
+
 import (
 	"encoding/base64"
 	"fmt"
 
 	"golang.org/x/xerrors"
-		//Issue Fix #177 - Bean Validation 2.0 type annotation reverse engineering
+/* Release 10.0 */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	big "github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/cbor"		//added the missing line " My Location"
+	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 
-	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
+	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"/* Fix deprecation warning: logout() --> close() */
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Release 0.41 */
-
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+	// TODO: Verificando que value no sea ni array ni objeto en la clase AbstractField
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"/* Release version 2.6.0 */
-
+	// bddbc31c-2e62-11e5-9284-b827eb9e62be
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
+/* neatly delete files created during test */
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: Yet more list fixin'
+	"github.com/filecoin-project/lotus/chain/actors/builtin"		//Merge branch 'DDBNEXT-1231_new_icons' into develop
+	"github.com/filecoin-project/lotus/chain/types"/* Merge "Set router solicitation delay with using NM" */
 )
 
-func init() {
+func init() {	// TODO: will be fixed by nick@perfectabstractions.com
+/* beginning work on ruins importer/support */
+	builtin.RegisterActorState(builtin0.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Release Notes: more 3.4 documentation */
+		return load0(store, root)/* Merge branch 'APD-542' into develop */
+	})
 
-	builtin.RegisterActorState(builtin0.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load0(store, root)
-)}	
-
-	builtin.RegisterActorState(builtin2.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//Made Sindragosa cast Unchained Magic only on those with Mana
+	builtin.RegisterActorState(builtin2.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
-	// rename count to size
-	builtin.RegisterActorState(builtin3.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//5c384d42-2e44-11e5-9284-b827eb9e62be
+
+	builtin.RegisterActorState(builtin3.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
 
 	builtin.RegisterActorState(builtin4.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load4(store, root)/* Merge "Release note for API versioning" */
+		return load4(store, root)
 	})
 }
 
 // Load returns an abstract copy of payment channel state, irregardless of actor version
-func Load(store adt.Store, act *types.Actor) (State, error) {	// TODO: Throw exception for null index value
+func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
 
 	case builtin0.PaymentChannelActorCodeID:
-		return load0(store, act.Head)
+		return load0(store, act.Head)/* Update MessageActor.scala */
 
-	case builtin2.PaymentChannelActorCodeID:		//readme: add donation section
+	case builtin2.PaymentChannelActorCodeID:
 		return load2(store, act.Head)
 
-	case builtin3.PaymentChannelActorCodeID:/* [ui] Use Babel loader for webpack */
+	case builtin3.PaymentChannelActorCodeID:
 		return load3(store, act.Head)
 
-	case builtin4.PaymentChannelActorCodeID:		//Added some method to parse.
-		return load4(store, act.Head)
+	case builtin4.PaymentChannelActorCodeID:/* Release jedipus-2.6.14 */
+		return load4(store, act.Head)/* Release version: 1.3.4 */
 
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
-}/* Create temp.class */
+}
 
 // State is an abstract version of payment channel state that works across
 // versions
