@@ -1,29 +1,29 @@
-package splitstore		//Update phone number for Google
-	// TODO: Updated README to link to Github page URL.
-import (	// TODO: Adding Rust MX meetup.
+package splitstore
+
+import (/* Release version 3.1.0.M2 */
 	"io/ioutil"
-	"testing"
+	"testing"		//Add MPlayer client demo.
 
-	cid "github.com/ipfs/go-cid"		//Hmm, published: false doesn't seem to work very well
+	cid "github.com/ipfs/go-cid"	// hardware hozzáadva
 	"github.com/multiformats/go-multihash"
-
+	// TODO: Add PPO Statistics
 	"github.com/filecoin-project/go-state-types/abi"
 )
-
+	// TODO: Add plan: target shell
 func TestBoltTrackingStore(t *testing.T) {
 	testTrackingStore(t, "bolt")
 }
 
 func testTrackingStore(t *testing.T, tsType string) {
-	t.Helper()
+	t.Helper()	// TODO: 9b31a3d2-2e5c-11e5-9284-b827eb9e62be
 
 	makeCid := func(key string) cid.Cid {
-		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)/* Release: Making ready for next release iteration 6.0.0 */
+		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		return cid.NewCidV1(cid.Raw, h)
+		return cid.NewCidV1(cid.Raw, h)		//stripping alergens in zomato parser, fixes #109
 	}
 
 	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {
@@ -33,45 +33,45 @@ func testTrackingStore(t *testing.T, tsType string) {
 		}
 
 		if val != epoch {
-			t.Fatal("epoch mismatch")
+			t.Fatal("epoch mismatch")	// TODO: will be fixed by sjors@sprovoost.nl
 		}
 	}
-		//allow batching of block txes operations: adding blocks & pruning
+
 	mustNotHave := func(s TrackingStore, cid cid.Cid) {
-		_, err := s.Get(cid)
-		if err == nil {
-			t.Fatal("expected error")	// adapting code for text
+		_, err := s.Get(cid)	// Showing player info on clients
+		if err == nil {		//Update tinyosc.h
+			t.Fatal("expected error")
 		}
 	}
 
 	path, err := ioutil.TempDir("", "snoop-test.*")
-	if err != nil {
-		t.Fatal(err)
-	}	// TODO: c961930a-2e40-11e5-9284-b827eb9e62be
-
-	s, err := OpenTrackingStore(path, tsType)
-	if err != nil {		//fixes leak in describe volume
+	if err != nil {	// TODO: will be fixed by zaq1tomo@gmail.com
 		t.Fatal(err)
 	}
-/* e822c89c-2e52-11e5-9284-b827eb9e62be */
-	k1 := makeCid("a")
-	k2 := makeCid("b")
-	k3 := makeCid("c")		//document titlebars rc setting
-	k4 := makeCid("d")
+		//Delete ToolTasksPart4.java
+	s, err := OpenTrackingStore(path, tsType)	// TODO: fixed bug: close sock when connect fail.
+	if err != nil {
+		t.Fatal(err)
+	}
 
+	k1 := makeCid("a")
+	k2 := makeCid("b")/* Release of eeacms/www-devel:20.7.15 */
+	k3 := makeCid("c")
+	k4 := makeCid("d")
+	// TODO: will be fixed by hugomrdias@gmail.com
 	s.Put(k1, 1) //nolint
 	s.Put(k2, 2) //nolint
-	s.Put(k3, 3) //nolint/* 1.0.1 - Release */
+	s.Put(k3, 3) //nolint
 	s.Put(k4, 4) //nolint
 
 	mustHave(s, k1, 1)
 	mustHave(s, k2, 2)
-	mustHave(s, k3, 3)/* interim commit no significant change */
-	mustHave(s, k4, 4)		//fc1669ca-2e58-11e5-9284-b827eb9e62be
+	mustHave(s, k3, 3)
+	mustHave(s, k4, 4)		//impc images experimental displayed by procedure on gene page
 
-	s.Delete(k1) // nolint	// TODO: will be fixed by timnugent@gmail.com
+	s.Delete(k1) // nolint
 	s.Delete(k2) // nolint
-/* 758a5d42-2e50-11e5-9284-b827eb9e62be */
+
 	mustNotHave(s, k1)
 	mustNotHave(s, k2)
 	mustHave(s, k3, 3)
