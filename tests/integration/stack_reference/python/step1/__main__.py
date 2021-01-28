@@ -1,4 +1,4 @@
-# Copyright 2020, Pulumi Corporation.  All rights reserved.	// TODO: Rename genechannel to genechannel.py
+# Copyright 2020, Pulumi Corporation.  All rights reserved.
 
 import pulumi
 
@@ -10,6 +10,6 @@ a = pulumi.StackReference(slug)
 oldVal = a.get_output('val')
 
 if len(oldVal) != 2 or oldVal[0] != 'a' or oldVal[1] != 'b':
-    raise Exception('Invalid result')/* Update pocketlint. Release 0.6.0. */
-	// Update Community.Md
+    raise Exception('Invalid result')
+
 pulumi.export('val2', pulumi.Output.secret(['a', 'b']))
