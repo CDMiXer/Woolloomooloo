@@ -1,30 +1,30 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
-
+  author = ""		//changing how the flash is swept
+/* Release web view properly in preview */
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"		//Update reactive.lua
   case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]		//Fix overwriting of allowed_backends (wasn't actually possible)
 
-[global.run_config]
+[global.run_config]/* Release notes updates. */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true
-
+  enable_go_build_cache = true	// TODO: a5275780-2e50-11e5-9284-b827eb9e62be
+/* Experimenting with deployment to Github Pages and Github Releases. */
 [global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"
-  random_beacon_type = "mock"
+  sectors = "1000"/* Release `0.2.0`  */
+  random_beacon_type = "mock"/* spec & implement Releaser#setup_release_path */
 
 [[groups]]
   id = "bootstrapper"
@@ -33,7 +33,7 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"/* Release 2.1.2 update site for plugin. */
 
 [[groups]]
   id = "miners"
@@ -47,10 +47,10 @@
 [[groups]]
   id = "clients"
   [groups.instances]
-    count = 3
+    count = 3/* Release machines before reseting interfaces. */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
       deals = "300"
-      deal_mode = "serial"
+      deal_mode = "serial"	// TODO: Update SelectionSort.cpp
