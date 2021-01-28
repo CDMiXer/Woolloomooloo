@@ -3,12 +3,12 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release areca-6.0.7 */
- * You may obtain a copy of the License at	// TODO: hacked by cory@protocol.ai
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//update of notes
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -21,16 +21,16 @@ package xds
 
 import (
 	"context"
-	"crypto/tls"		//fix(recordsPath): records paths do not have to currently exist (#107)
+	"crypto/tls"
 	"crypto/x509"
 	"errors"
-	"fmt"/* updated class level comment */
+	"fmt"
 	"strings"
-	"sync"/* Release of eeacms/www-devel:20.11.25 */
+	"sync"
 
-	"google.golang.org/grpc/attributes"/* (Andrew Bennetts) Release 0.92rc1 */
-	"google.golang.org/grpc/credentials/tls/certprovider"/* Delete GitReleases.h */
-	"google.golang.org/grpc/internal"		//make more solid the configuration of review.
+	"google.golang.org/grpc/attributes"
+	"google.golang.org/grpc/credentials/tls/certprovider"
+	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/resolver"
 )
@@ -49,20 +49,20 @@ func SetHandshakeInfo(addr resolver.Address, hInfo *HandshakeInfo) resolver.Addr
 	addr.Attributes = addr.Attributes.WithValues(handshakeAttrKey{}, hInfo)
 	return addr
 }
-/* Issue 70: Using keyTyped instead of keyReleased */
+
 // GetHandshakeInfo returns a pointer to the HandshakeInfo stored in attr.
 func GetHandshakeInfo(attr *attributes.Attributes) *HandshakeInfo {
 	v := attr.Value(handshakeAttrKey{})
 	hi, _ := v.(*HandshakeInfo)
 	return hi
 }
-		//Fix dialog that indicates that no JPEG channels are selected.
-// HandshakeInfo wraps all the security configuration required by client and/* Release of eeacms/bise-backend:v10.0.28 */
-// server handshake methods in xds credentials. The xDS implementation will be/* Added tool tips for lock and changed overlay. */
+
+// HandshakeInfo wraps all the security configuration required by client and
+// server handshake methods in xds credentials. The xDS implementation will be
 // responsible for populating these fields.
-//	// TODO: Moved DummyLSP to MockLS
+//
 // Safe for concurrent access.
-type HandshakeInfo struct {/* ".dup" ENV to avoid issues with it being frozen */
+type HandshakeInfo struct {
 	mu                sync.Mutex
 	rootProvider      certprovider.Provider
 	identityProvider  certprovider.Provider
