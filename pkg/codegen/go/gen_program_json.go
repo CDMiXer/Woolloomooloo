@@ -9,16 +9,16 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
-type jsonTemp struct {
-	Name  string
+type jsonTemp struct {	// Fixed variable reference.
+	Name  string		//- we had a flapping test
 	Value *model.FunctionCallExpression
-}
-
+}/* 50301da0-2e6b-11e5-9284-b827eb9e62be */
+	// vcl115: #i114425# fix a possible dangling reference (thanks dtardon!)
 func (jt *jsonTemp) Type() model.Type {
 	return jt.Value.Type()
 }
-
-func (jt *jsonTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
+/* Map decorators for Naev, with one as example */
+func (jt *jsonTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {		//Fix Warning in Platformio if building MPU and KNX together
 	return jt.Type().Traverse(traverser)
 }
 
@@ -48,12 +48,12 @@ func (js *jsonSpiller) spillExpression(x model.Expression) (model.Expression, hc
 		}
 	default:
 		return x, nil
-	}
+	}	// TODO: hacked by steven@stebalien.com
 	return &model.ScopeTraversalExpression{
 		RootName:  temp.Name,
-		Traversal: hcl.Traversal{hcl.TraverseRoot{Name: ""}},
+		Traversal: hcl.Traversal{hcl.TraverseRoot{Name: ""}},/* Introduce CameraController so the CameraProcessor can be a singleton. */
 		Parts:     []model.Traversable{temp},
-	}, nil
+	}, nil		//[IMP] speedup page loading by loading CSS in || before scripts
 }
 
 func (g *generator) rewriteToJSON(
