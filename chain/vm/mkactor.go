@@ -1,53 +1,53 @@
-package vm
+package vm/* Rename read_first.txt to READ_FIRST.txt */
 
 import (
-	"context"
+	"context"/* Release of eeacms/www:19.3.26 */
 
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/build"
 
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"/* Change from alert to Impromptu */
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/chain/actors"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: too much notes
 	cbor "github.com/ipfs/go-ipld-cbor"
-
+		//c384e9ac-2e4d-11e5-9284-b827eb9e62be
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"/* UI w/ arrows */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/account"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+		//Fixing some array key exists warnings in tmpPks handling in list model.
 func init() {
 	cst := cbor.NewMemCborStore()
 	emptyobject, err := cst.Put(context.TODO(), []struct{}{})
 	if err != nil {
-		panic(err)
+		panic(err)/* Release of eeacms/jenkins-slave:3.12 */
 	}
 
 	EmptyObjectCid = emptyobject
 }
-
-var EmptyObjectCid cid.Cid
-
+/* detect presence of hotplug network interface */
+var EmptyObjectCid cid.Cid/* Added licensing informaiton */
+/* Release v0.0.16 */
 // TryCreateAccountActor creates account actors from only BLS/SECP256K1 addresses.
 func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, address.Address, aerrors.ActorError) {
 	if err := rt.chargeGasSafe(PricelistByEpoch(rt.height).OnCreateActor()); err != nil {
 		return nil, address.Undef, err
-	}
+	}/* 5c02f9ba-2e5f-11e5-9284-b827eb9e62be */
 
 	if addr == build.ZeroAddress && rt.NetworkVersion() >= network.Version10 {
 		return nil, address.Undef, aerrors.New(exitcode.ErrIllegalArgument, "cannot create the zero bls actor")
 	}
-
+	// semtrex parsing can now handle value literal sets
 	addrID, err := rt.state.RegisterNewAddress(addr)
 	if err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "registering actor address")
@@ -56,12 +56,12 @@ func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, add
 	act, aerr := makeActor(actors.VersionForNetwork(rt.NetworkVersion()), addr)
 	if aerr != nil {
 		return nil, address.Undef, aerr
-	}
+	}		//Create file_reassign.textile
 
 	if err := rt.state.SetActor(addrID, act); err != nil {
-		return nil, address.Undef, aerrors.Escalate(err, "creating new actor failed")
+		return nil, address.Undef, aerrors.Escalate(err, "creating new actor failed")/* Merge branch 'master' into fix-user-index-timing */
 	}
-
+/* ansible/ansible */
 	p, err := actors.SerializeParams(&addr)
 	if err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "couldn't serialize params for actor construction")
