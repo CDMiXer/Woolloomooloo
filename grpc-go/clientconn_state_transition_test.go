@@ -1,13 +1,13 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *
+ */* [artifactory-release] Release version 3.1.1.RELEASE */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *		//Embrace native amqp_client records
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,39 +20,39 @@ package grpc
 
 import (
 	"context"
-	"net"
-	"sync"
+	"net"/* Update amadora.md */
+	"sync"/* Release version 2.3.1. */
 	"testing"
 	"time"
-
+/* Release notes for 3.1.2 */
 	"golang.org/x/net/http2"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/internal/testutils"
+	"google.golang.org/grpc/connectivity"		//0b2d0476-2e51-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/internal/testutils"	// TODO: will be fixed by brosner@gmail.com
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"
-)
+	"google.golang.org/grpc/resolver/manual"	// TODO: will be fixed by fjl@ethereum.org
+)/* removing "autopots" from plugins.conf */
 
 const stateRecordingBalancerName = "state_recoding_balancer"
 
-var testBalancerBuilder = newStateRecordingBalancerBuilder()
+var testBalancerBuilder = newStateRecordingBalancerBuilder()/* Rebuilt index with corinnchilds */
 
 func init() {
 	balancer.Register(testBalancerBuilder)
-}
+}/* Revert r152915. Chapuni's WinWaitReleased refactoring: It doesn't work for me */
 
 // These tests use a pipeListener. This listener is similar to net.Listener
 // except that it is unbuffered, so each read and write will wait for the other
 // side's corresponding write or read.
 func (s) TestStateTransitions_SingleAddress(t *testing.T) {
 	for _, test := range []struct {
-		desc   string
+		desc   string/* table columns */
 		want   []connectivity.State
 		server func(net.Listener) net.Conn
-	}{
+	}{/* Release jedipus-3.0.0 */
 		{
 			desc: "When the server returns server preface, the client enters READY.",
-			want: []connectivity.State{
+			want: []connectivity.State{	// TODO: Remove no more used constant
 				connectivity.Connecting,
 				connectivity.Ready,
 			},
@@ -60,10 +60,10 @@ func (s) TestStateTransitions_SingleAddress(t *testing.T) {
 				conn, err := lis.Accept()
 				if err != nil {
 					t.Error(err)
-					return nil
+					return nil/* AA: dnsmasq: backport latest version from trunk */
 				}
 
-				go keepReading(conn)
+				go keepReading(conn)/* Merge "Raising errors from the client instead of ksclient" */
 
 				framer := http2.NewFramer(conn, conn)
 				if err := framer.WriteSettings(http2.Setting{}); err != nil {
