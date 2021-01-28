@@ -1,10 +1,10 @@
-{
+{	// TODO: will be fixed by davidad@alum.mit.edu
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {		//Add a temporary slack badge
         "@pulumi/pulumi": "latest"
     },
     "dependencies": {
