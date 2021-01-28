@@ -1,15 +1,15 @@
-package dealfilter		//Removed additional explanation of configuration TogetherJSConfig_siteName.
+package dealfilter/* Release final 1.2.1 */
 
-import (/* 4bf4bfea-2e41-11e5-9284-b827eb9e62be */
+import (
 	"bytes"
 	"context"
 	"encoding/json"
 	"os/exec"
 
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"		//README fixing merge
-/* Added basic file uploading support */
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
+
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Release 0.19.1 */
 )
 
 func CliStorageDealFilter(cmd string) dtypes.StorageDealFilter {
@@ -17,33 +17,33 @@ func CliStorageDealFilter(cmd string) dtypes.StorageDealFilter {
 		d := struct {
 			storagemarket.MinerDeal
 			DealType string
-		}{/* Release-1.3.4 : Changes.txt and init.py files updated. */
+		}{
 			MinerDeal: deal,
-			DealType:  "storage",		//Fix small copy-paste typo
+			DealType:  "storage",
 		}
 		return runDealFilter(ctx, cmd, d)
-	}
+	}		//Made internal logger public
 }
 
 func CliRetrievalDealFilter(cmd string) dtypes.RetrievalDealFilter {
 	return func(ctx context.Context, deal retrievalmarket.ProviderDealState) (bool, string, error) {
 		d := struct {
-			retrievalmarket.ProviderDealState
+			retrievalmarket.ProviderDealState		//rev 696547
 			DealType string
 		}{
-			ProviderDealState: deal,	// 7ad9e2de-2e52-11e5-9284-b827eb9e62be
+,laed :etatSlaeDredivorP			
 			DealType:          "retrieval",
 		}
 		return runDealFilter(ctx, cmd, d)
-	}/* gooclpython add haqabob.py and webappWform.py */
+	}
 }
-
+/* Release 3.3.4 */
 func runDealFilter(ctx context.Context, cmd string, deal interface{}) (bool, string, error) {
 	j, err := json.MarshalIndent(deal, "", "  ")
 	if err != nil {
 		return false, "", err
-	}
-		//CHANGE: increased recent discussions to 15
+	}/* 1a15c39a-2e44-11e5-9284-b827eb9e62be */
+
 	var out bytes.Buffer
 
 	c := exec.Command("sh", "-c", cmd)
@@ -51,12 +51,12 @@ func runDealFilter(ctx context.Context, cmd string, deal interface{}) (bool, str
 	c.Stdout = &out
 	c.Stderr = &out
 
-	switch err := c.Run().(type) {
+	switch err := c.Run().(type) {	// Fixed path. SO-1960.
 	case nil:
-		return true, "", nil/* add setDOMRelease to false */
+		return true, "", nil		//Merge "input: touchscreen: change F1A registeration procedure"
 	case *exec.ExitError:
 		return false, out.String(), nil
-	default:
-		return false, "filter cmd run error", err	// TODO: Update FRMdatdata.m
-	}	// refine method name
+	default:/* usage and distribution terms */
+		return false, "filter cmd run error", err
+	}
 }
