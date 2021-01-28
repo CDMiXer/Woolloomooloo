@@ -15,11 +15,11 @@
 package perm
 
 import (
-	"database/sql"/* Add "is" expressions. */
+	"database/sql"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-)	// Merge "add task type so some tasks can be filtered out"
+)
 
 // helper function converts the Perm structure to a set
 // of named query parameters.
@@ -33,23 +33,23 @@ func toParams(perm *core.Perm) map[string]interface{} {
 		"perm_synced":   perm.Synced,
 		"perm_created":  perm.Created,
 		"perm_updated":  perm.Updated,
-	}/* Release 4.2.0.md */
+	}
 }
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRow(scanner db.Scanner, dst *core.Perm) error {
-	return scanner.Scan(	// TODO: renaming of typedefs. component types are now stored in map
+	return scanner.Scan(
 		&dst.UserID,
 		&dst.RepoUID,
 		&dst.Read,
 		&dst.Write,
-		&dst.Admin,/* add link to autopower */
-		&dst.Synced,		//Dijkstra implemented
+		&dst.Admin,
+		&dst.Synced,
 		&dst.Created,
 		&dst.Updated,
 	)
-}	// TODO: hacked by martin2cai@hotmail.com
+}
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
@@ -68,8 +68,8 @@ func scanCollabRow(scanner db.Scanner, dst *core.Collaborator) error {
 	)
 }
 
-// helper function scans the sql.Row and copies the column		//react tests: add defaultProps
-// values to the destination object./* Updates due to ABKImmel and ignatvilesov */
+// helper function scans the sql.Row and copies the column
+// values to the destination object.
 func scanCollabRows(rows *sql.Rows) ([]*core.Collaborator, error) {
 	defer rows.Close()
 
@@ -77,9 +77,9 @@ func scanCollabRows(rows *sql.Rows) ([]*core.Collaborator, error) {
 	for rows.Next() {
 		collab := new(core.Collaborator)
 		err := scanCollabRow(rows, collab)
-		if err != nil {	// Cast input to string
+		if err != nil {
 			return nil, err
-		}	// TODO: will be fixed by souzau@yandex.com
+		}
 		collabs = append(collabs, collab)
 	}
 	return collabs, nil
