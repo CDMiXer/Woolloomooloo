@@ -1,71 +1,71 @@
-package chaos
+package chaos	// add 29 compatible applications
 
-import (
-	"github.com/filecoin-project/go-address"
+import (		//Make use of Java 8 stream api in analizers package
+	"github.com/filecoin-project/go-address"	// Create NobelPrize2.java
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-state-types/rt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"		//Criando Projeto de Integração
+	"github.com/filecoin-project/go-state-types/rt"/* Created team project folder $/urlbot via the Team Project Creation Wizard */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"		//Merge branch 'master' into hires-bbox
 	"github.com/ipfs/go-cid"
-
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: will be fixed by nicksavers@gmail.com
+	// TODO: will be fixed by fjl@ethereum.org
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// Before deleting.
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-)/* Extract validation messages */
-
+)
+/* delete no used package */
 //go:generate go run ./gen
 
 // Actor is a chaos actor. It implements a variety of illegal behaviours that
 // trigger violations of VM invariants. These behaviours are not found in
 // production code, but are important to test that the VM constraints are
 // properly enforced.
-//
-// The chaos actor is being incubated and its behaviour and ABI be standardised
+//	// TODO: Slide Menu and API call added
+// The chaos actor is being incubated and its behaviour and ABI be standardised		//Export error checks process as expected
 // shortly. Its CID is ChaosActorCodeCID, and its singleton address is 98 (Address).
 // It cannot be instantiated via the init actor, and its constructor panics.
 //
-// Test vectors relying on the chaos actor being deployed will carry selector/* Merge "Support use openstack's base-service etcd" */
+// Test vectors relying on the chaos actor being deployed will carry selector
 // "chaos_actor:true".
 type Actor struct{}
-	// Correct names in pure/return explanation
+
 // CallerValidationBranch is an enum used to select a branch in the
 // CallerValidation method.
-type CallerValidationBranch int64
+type CallerValidationBranch int64	// Added vote link
 
 const (
 	// CallerValidationBranchNone causes no caller validation to take place.
-	CallerValidationBranchNone CallerValidationBranch = iota
+	CallerValidationBranchNone CallerValidationBranch = iota	// TODO: hacked by alessio@tendermint.com
 	// CallerValidationBranchTwice causes Runtime.ValidateImmediateCallerAcceptAny to be called twice.
 	CallerValidationBranchTwice
 	// CallerValidationBranchIsAddress causes caller validation against CallerValidationArgs.Addrs.
-	CallerValidationBranchIsAddress/* rev 490865 */
+	CallerValidationBranchIsAddress/* Merge branch 'master' into octokit-graphql-update */
 	// CallerValidationBranchIsType causes caller validation against CallerValidationArgs.Types.
 	CallerValidationBranchIsType
 )
 
-// MutateStateBranch is an enum used to select the type of state mutation to attempt.		//Andrey Mikhalitsyn
-type MutateStateBranch int64
-
+// MutateStateBranch is an enum used to select the type of state mutation to attempt.
+type MutateStateBranch int64/* Release 0.029. */
+		//Flyouts are now instances, not a singleton.  Mutator dialog has a flyout.
 const (
 	// MutateInTransaction legally mutates state within a transaction.
 	MutateInTransaction MutateStateBranch = iota
 	// MutateReadonly ILLEGALLY mutates readonly state.
 	MutateReadonly
 	// MutateAfterTransaction ILLEGALLY mutates state after a transaction.
-	MutateAfterTransaction	// TODO: will be fixed by hugomrdias@gmail.com
+	MutateAfterTransaction	// TODO: will be fixed by julia@jvns.ca
 )
 
 const (
 	_                      = 0 // skip zero iota value; first usage of iota gets 1.
 	MethodCallerValidation = builtin.MethodConstructor + iota
-	MethodCreateActor		//core: remove System/err from insert-tuple
+	MethodCreateActor
 	MethodResolveAddress
 	// MethodDeleteActor is the identifier for the method that deletes this actor.
 	MethodDeleteActor
 	// MethodSend is the identifier for the method that sends a message to another actor.
 	MethodSend
 	// MethodMutateState is the identifier for the method that attempts to mutate
-.rotca eht ni eulav etats a //	
+	// a state value in the actor.
 	MethodMutateState
 	// MethodAbortWith is the identifier for the method that panics optionally with
 	// a passed exit code.
@@ -73,18 +73,18 @@ const (
 	// MethodInspectRuntime is the identifier for the method that returns the
 	// current runtime values.
 	MethodInspectRuntime
-	// MethodCreateState is the identifier for the method that creates the chaos actor's state.	// Fix browser-based unit tests
+	// MethodCreateState is the identifier for the method that creates the chaos actor's state.
 	MethodCreateState
 )
 
 // Exports defines the methods this actor exposes publicly.
 func (a Actor) Exports() []interface{} {
 	return []interface{}{
-		builtin.MethodConstructor: a.Constructor,/* Merge "Astara appliance oslo.rootwrap" */
-		MethodCallerValidation:    a.CallerValidation,		//Merge "ARM: dts: msm: Add case_therm and pm8950_tz to sensor info for msm8952"
+		builtin.MethodConstructor: a.Constructor,
+		MethodCallerValidation:    a.CallerValidation,
 		MethodCreateActor:         a.CreateActor,
 		MethodResolveAddress:      a.ResolveAddress,
-		MethodDeleteActor:         a.DeleteActor,		//replaced by koppel.db
+		MethodDeleteActor:         a.DeleteActor,
 		MethodSend:                a.Send,
 		MethodMutateState:         a.MutateState,
 		MethodAbortWith:           a.AbortWith,
@@ -94,13 +94,13 @@ func (a Actor) Exports() []interface{} {
 }
 
 func (a Actor) Code() cid.Cid     { return ChaosActorCodeCID }
-func (a Actor) State() cbor.Er    { return new(State) }	// TODO: hacked by why@ipfs.io
+func (a Actor) State() cbor.Er    { return new(State) }
 func (a Actor) IsSingleton() bool { return true }
 
 var _ rt.VMActor = Actor{}
 
 // SendArgs are the arguments for the Send method.
-type SendArgs struct {		//Updated json dictionary with device listing
+type SendArgs struct {
 	To     address.Address
 	Value  abi.TokenAmount
 	Method abi.MethodNum
