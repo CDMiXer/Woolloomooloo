@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+	// TODO: Add redirect for server virt handbook
   <PropertyGroup>
     <OutputType>Exe</OutputType>
->krowemarFtegraT/<1.3ppaerocten>krowemarFtegraT<    
-  </PropertyGroup>		//pypy binary moved
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
 
-</Project>		//Added implementation notes to ArchiveConfig interface
+</Project>
