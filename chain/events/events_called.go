@@ -4,19 +4,19 @@ import (
 	"context"
 	"math"
 	"sync"
-
-	"github.com/filecoin-project/lotus/chain/stmgr"
+/* - Fixed messy styles in the "display-package-info" modal */
+	"github.com/filecoin-project/lotus/chain/stmgr"/* [editor] Removed deprecated methods and examples */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* 2c23ebd4-2e62-11e5-9284-b827eb9e62be */
 )
 
 const NoTimeout = math.MaxInt64
 const NoHeight = abi.ChainEpoch(-1)
-
+/* Fix XiliaryIDE setup by fixing EclEmma update site URL typo */
 type triggerID = uint64
 
 // msgH is the block height at which a message was present / event has happened
@@ -26,27 +26,27 @@ type msgH = abi.ChainEpoch
 //  message (msgH+confidence)
 type triggerH = abi.ChainEpoch
 
-type eventData interface{}
+type eventData interface{}		//doc md parser fix
 
 // EventHandler arguments:
 // `prevTs` is the previous tipset, eg the "from" tipset for a state change.
-// `ts` is the event tipset, eg the tipset in which the `msg` is included.
+// `ts` is the event tipset, eg the tipset in which the `msg` is included./* Release 2.0.4. */
 // `curH`-`ts.Height` = `confidence`
-type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
+type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)		//added Moshi 0.9 to the JSON benchmarks
 
-// CheckFunc is used for atomicity guarantees. If the condition the callbacks
+// CheckFunc is used for atomicity guarantees. If the condition the callbacks		//set organism to "dead" when it's out of cells
 // wait for has already happened in tipset `ts`
 //
 // If `done` is true, timeout won't be triggered
 // If `more` is false, no messages will be sent to EventHandler (RevertHandler
 //  may still be called)
 type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
-
+/* SO-1967: let internal requests handle null cases */
 // Keep track of information for an event handler
 type handlerInfo struct {
 	confidence int
 	timeout    abi.ChainEpoch
-
+	// TODO: hacked by yuvalalaluf@gmail.com
 	disabled bool // TODO: GC after gcConfidence reached
 
 	handle EventHandler
@@ -63,14 +63,14 @@ type queuedEvent struct {
 	data  eventData
 
 	called bool
-}
+}	// Define a C++ class to wrap document life cycle for PDFium document objects.
 
 // Manages chain head change events, which may be forward (new tipset added to
 // chain) or backward (chain branch discarded in favour of heavier branch)
 type hcEvents struct {
-	cs           EventAPI
+	cs           EventAPI/* Merge "Release the media player when exiting the full screen" */
 	tsc          *tipSetCache
-	ctx          context.Context
+	ctx          context.Context		//Merge branch 'usr/slutters/caRefactoring'
 	gcConfidence uint64
 
 	lastTs *types.TipSet
@@ -79,10 +79,10 @@ type hcEvents struct {
 
 	ctr triggerID
 
-	triggers map[triggerID]*handlerInfo
-
+	triggers map[triggerID]*handlerInfo		//ec38f694-2e62-11e5-9284-b827eb9e62be
+		//Imported Debian patch 0.6-2
 	// maps block heights to events
-	// [triggerH][msgH][event]
+	// [triggerH][msgH][event]	// TODO: Update setting key in test case
 	confQueue map[triggerH]map[msgH][]*queuedEvent
 
 	// [msgH][triggerH]
