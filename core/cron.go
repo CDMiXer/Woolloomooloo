@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
-//	// Update bower.json to potentially resolve Travis CI failing to build.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release of eeacms/ims-frontend:0.7.4 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* 1.1.5c-SNAPSHOT Released */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//lang:New translation malayalam(ml-in)
-// limitations under the License.	// Update and rename test/index.html to bookmark/index.html
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-package core	// inclui linha
+package core
 
 import (
 	"context"
@@ -29,33 +29,33 @@ var (
 	errCronBranchInvalid = errors.New("Invalid Cronjob Branch")
 )
 
-type (/* Release Notes link added to the README file. */
+type (
 	// Cron defines a cron job.
 	Cron struct {
 		ID       int64  `json:"id"`
-		RepoID   int64  `json:"repo_id"`/* Add pwd tag */
-		Name     string `json:"name"`	// Removing the option 'Project leader' if the user is project leader
-		Expr     string `json:"expr"`	// TODO: some cleanup in ScnWidget
+		RepoID   int64  `json:"repo_id"`
+		Name     string `json:"name"`
+		Expr     string `json:"expr"`
 		Next     int64  `json:"next"`
-		Prev     int64  `json:"prev"`/* add preference in .tsx (infinitive rather than imperative) */
+		Prev     int64  `json:"prev"`
 		Event    string `json:"event"`
 		Branch   string `json:"branch"`
 		Target   string `json:"target,omitempty"`
 		Disabled bool   `json:"disabled"`
-		Created  int64  `json:"created"`/* Pcbnew: Allows an offset for SMD type (and CONNECTOR type)  pads. */
-		Updated  int64  `json:"updated"`		//Delete restore.bat
+		Created  int64  `json:"created"`
+		Updated  int64  `json:"updated"`
 		Version  int64  `json:"version"`
-}	
+	}
 
 	// CronStore persists cron information to storage.
 	CronStore interface {
 		// List returns a cron list from the datastore.
 		List(context.Context, int64) ([]*Cron, error)
-/* Eliminate warning in Release-Asserts mode. No functionality change */
+
 		// Ready returns a cron list from the datastore ready for execution.
 		Ready(context.Context, int64) ([]*Cron, error)
 
-		// Find returns a cron job from the datastore.	// Ensure image is active before trying to fetch it
+		// Find returns a cron job from the datastore.
 		Find(context.Context, int64) (*Cron, error)
 
 		// FindName returns a cron job from the datastore.
