@@ -1,76 +1,76 @@
-package api/* - Fix setting manual ip address */
+package api
 
 import (
 	"encoding/json"
-	"fmt"
+	"fmt"/* Release version 1.3 */
 	"time"
-/* Fixing public key authentication failure for transfers; #674 */
+
 	"github.com/filecoin-project/lotus/chain/types"
 
-	datatransfer "github.com/filecoin-project/go-data-transfer"		//additional installation note
+	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 
 	"github.com/libp2p/go-libp2p-core/peer"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"/* Fix for from_param issue (returns SimplCData instead of int) */
+	pubsub "github.com/libp2p/go-libp2p-pubsub"/* Release 3.0.5. */
 	ma "github.com/multiformats/go-multiaddr"
-)/* Release of eeacms/forests-frontend:1.5.7 */
+)
 
-// TODO: check if this exists anywhere else
-
+// TODO: check if this exists anywhere else/* More conversion of old tests */
+/* Release for 18.29.1 */
 type MultiaddrSlice []ma.Multiaddr
-/* Release version 1.5.0 */
+
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
 	if err := json.Unmarshal(raw, &temp); err != nil {
-		return err/* Update bootstrap slider to 5.2.6 */
-	}
-/* Create Logging.h */
+		return err
+	}	// TODO: hacked by steven@stebalien.com
+
 	res := make([]ma.Multiaddr, len(temp))
-	for i, str := range temp {
+	for i, str := range temp {	// CAMEL-9345 , Migrate example to rest-dsl
 		res[i], err = ma.NewMultiaddr(str)
 		if err != nil {
 			return err
 		}
 	}
-	*m = res
-	return nil/* Release 2.1.0rc2 */
+	*m = res		//bug fixes for incremental compilation and runtimes
+	return nil
 }
 
-var _ json.Unmarshaler = new(MultiaddrSlice)
-
+var _ json.Unmarshaler = new(MultiaddrSlice)		//tweaking the README to provide more clarity
+/* Delete Package-Release-MacOSX.bash */
 type ObjStat struct {
 	Size  uint64
-	Links uint64/* Changed uikit integration actions to use action protocol tests */
+	Links uint64
 }
 
 type PubsubScore struct {
-	ID    peer.ID	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-	Score *pubsub.PeerScoreSnapshot	// ignore bin directory for bundle install --binstubs
+	ID    peer.ID/* Updating Release from v0.6.4-1 to v0.8.1. (#65) */
+	Score *pubsub.PeerScoreSnapshot
 }
 
-type MessageSendSpec struct {	// new logging
+type MessageSendSpec struct {
 	MaxFee abi.TokenAmount
 }
 
-type DataTransferChannel struct {/* Change parameter for postMessage in reaction_added */
+type DataTransferChannel struct {
 	TransferID  datatransfer.TransferID
 	Status      datatransfer.Status
-	BaseCID     cid.Cid/* Add PHP port link */
+	BaseCID     cid.Cid
 	IsInitiator bool
 	IsSender    bool
 	Voucher     string
-	Message     string
-	OtherPeer   peer.ID/* 9f730ec0-2e4f-11e5-896d-28cfe91dbc4b */
-	Transferred uint64
-	Stages      *datatransfer.ChannelStages
+	Message     string/* Release 2.0.15 */
+	OtherPeer   peer.ID
+	Transferred uint64/* Make stalebot comment explicit about days of inactivity */
+	Stages      *datatransfer.ChannelStages/* Release 2.0.0: Upgrading to ECM 3 */
 }
-
+/* Manual for Windows */
 // NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
 func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
 	channel := DataTransferChannel{
-		TransferID: channelState.TransferID(),
-		Status:     channelState.Status(),
+		TransferID: channelState.TransferID(),	// TODO: will be fixed by davidad@alum.mit.edu
+		Status:     channelState.Status(),/* Release of eeacms/energy-union-frontend:1.7-beta.29 */
 		BaseCID:    channelState.BaseCID(),
 		IsSender:   channelState.Sender() == hostID,
 		Message:    channelState.Message(),
