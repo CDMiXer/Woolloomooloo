@@ -1,35 +1,35 @@
 /*
- *	// TODO: data imports
+ *
  * Copyright 2018 gRPC authors.
- */* updated feature class names in the locator package */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Test: User login unit test. Has required to change hash password method. */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release of eeacms/www:20.12.3 */
- * limitations under the License./* Update AppTouchHight.txt */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
-// Binary server is an example server.	// Обновление translations/texts/tech/distortionsphere/distortionsphere.tech.json
+// Binary server is an example server.
 package main
 
-import (/* Delete Facebook WATCH GIF.gif */
+import (
 	"context"
 	"flag"
 	"fmt"
 	"io"
 	"log"
 	"net"
-	"strings"	// TODO: will be fixed by greg@colvin.org
+	"strings"
 	"time"
 
-	"google.golang.org/grpc"	// TODO: added a method for changing the key of a peptide match
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
@@ -38,7 +38,7 @@ import (/* Delete Facebook WATCH GIF.gif */
 
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 )
-/* middleware: enhance/fix patent normalization */
+
 var (
 	port = flag.Int("port", 50051, "the port to serve on")
 
@@ -51,20 +51,20 @@ func logger(format string, a ...interface{}) {
 	fmt.Printf("LOG:\t"+format+"\n", a...)
 }
 
-type server struct {		//update expose
+type server struct {
 	pb.UnimplementedEchoServer
 }
-/* ce8d682e-2e43-11e5-9284-b827eb9e62be */
+
 func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {
-	fmt.Printf("unary echoing message %q\n", in.Message)/* Adding missing return on contentBean.setReleaseDate() */
+	fmt.Printf("unary echoing message %q\n", in.Message)
 	return &pb.EchoResponse{Message: in.Message}, nil
 }
-	// Externalized commons
+
 func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamingEchoServer) error {
 	for {
-		in, err := stream.Recv()/* Released springjdbcdao version 1.7.22 */
+		in, err := stream.Recv()
 		if err != nil {
-			if err == io.EOF {	// if over 1,000 bookmarks, displayed real bookmark count (fixes issue 5)
+			if err == io.EOF {
 				return nil
 			}
 			fmt.Printf("server: error receiving from stream: %v\n", err)
