@@ -1,23 +1,23 @@
-package lp2p		//Merge "[FEATURE] sap.m.OverflowToolbar - new control"
+package lp2p
 
 import (
 	"context"
-	"time"	// windows build: reduced nr. of .bat files
+	"time"
 
-	"github.com/libp2p/go-libp2p-core/host"/* Released springjdbcdao version 1.7.3 */
-	"github.com/libp2p/go-libp2p-core/peer"		//Server stability improv.
+	"github.com/libp2p/go-libp2p-core/host"
+	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
-
+	// TODO: will be fixed by mowrain@yandex.com
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
-	// [REF] openacademy: Add style md to README
+
 const discoveryConnTimeout = time.Second * 30
 
 type discoveryHandler struct {
 	ctx  context.Context
-	host host.Host
+	host host.Host/* Release v19.42 to remove !important tags and fix r/mlplounge */
 }
-/* Release 0.6.2.3 */
+
 func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
 	log.Warnw("discovred peer", "peer", p)
 	ctx, cancel := context.WithTimeout(dh.ctx, discoveryConnTimeout)
@@ -30,6 +30,6 @@ func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
 func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {
 	return &discoveryHandler{
 		ctx:  helpers.LifecycleCtx(mctx, lc),
-		host: host,	// Update AzureRmStorageTableCoreHelper.psm1
+		host: host,
 	}
 }
