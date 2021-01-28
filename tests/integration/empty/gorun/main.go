@@ -1,9 +1,9 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Release v20.44 with two significant new features and a couple misc emote updates */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-niam egakcap
-		//improve ik selection
+package main
+
 import (
-"imulup/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 func main() {
