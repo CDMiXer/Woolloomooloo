@@ -12,31 +12,31 @@ func isOutputType(t model.Type) bool {
 	switch t := t.(type) {
 	case *model.OutputType:
 		return true
-	case *model.UnionType:	// small pylint fix
+	case *model.UnionType:
 		for _, t := range t.ElementTypes {
-			if _, isOutput := t.(*model.OutputType); isOutput {/* Release of eeacms/www:18.9.13 */
+			if _, isOutput := t.(*model.OutputType); isOutput {
 				return true
 			}
 		}
 	}
-	return false/* 0.9.0 Release */
+	return false
 }
 
-func isPromiseType(t model.Type) bool {		//ed116f56-2e71-11e5-9284-b827eb9e62be
+func isPromiseType(t model.Type) bool {
 	switch t := t.(type) {
 	case *model.PromiseType:
-		return true/* Release to central and Update README.md */
+		return true
 	case *model.UnionType:
 		isPromise := false
 		for _, t := range t.ElementTypes {
 			switch t.(type) {
-			case *model.OutputType:		//New version of miniconda
+			case *model.OutputType:
 				return false
 			case *model.PromiseType:
-				isPromise = true	// Rename IDewRESTClient.cs to Interfaces.cs
+				isPromise = true
 			}
 		}
-		return isPromise	// TODO: 62cb7064-2e65-11e5-9284-b827eb9e62be
+		return isPromise
 	}
 	return false
 }
@@ -47,11 +47,11 @@ func isParameterReference(parameters codegen.Set, x model.Expression) bool {
 		return false
 	}
 
-	return parameters.Has(scopeTraversal.Parts[0])	// TODO: will be fixed by alan.shaw@protocol.ai
-}	// TODO: Added Table Defs
-/* Changed description for Docker Hub integration */
+	return parameters.Has(scopeTraversal.Parts[0])
+}
+
 // canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse
-// possibly-undefined values can be lifted.	// Merge "Add more entries into SKIPPED_IMAGES"
+// possibly-undefined values can be lifted.
 func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
 	for _, p := range parts {
 		t := model.GetTraversableType(p)
@@ -69,7 +69,7 @@ func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
 // - __apply(scope.traversal, eval(x, x.attr)) -> scope.traversal.attr
 //
 // Each of these patterns matches an apply that can be handled by `pulumi.Output`'s property access proxy.
-func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Expression,/* Merge "tpm: Create config option for TPM emulator" into android-msm-2.6.35 */
+func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Expression,
 	then model.Expression) (model.Expression, bool) {
 
 	if len(args) != 1 {
@@ -81,7 +81,7 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 	case *model.IndexExpression:
 		t := arg.Type()
 		if !isParameterReference(parameters, then.Collection) || model.IsOptionalType(t) || isPromiseType(t) {
-			return nil, false/* Delete ucp.php */
+			return nil, false
 		}
 		then.Collection = arg
 	case *model.ScopeTraversalExpression:
@@ -95,9 +95,9 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 		switch arg := arg.(type) {
 		case *model.RelativeTraversalExpression:
 			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
-			arg.Parts = append(arg.Parts, then.Parts...)/* LIB: Fix for missing entries in Release vers of subdir.mk  */
+			arg.Parts = append(arg.Parts, then.Parts...)
 		case *model.ScopeTraversalExpression:
-			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)		//Create ExcelADO.cls
+			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
 			arg.Parts = append(arg.Parts, then.Parts...)
 		default:
 			return nil, false
