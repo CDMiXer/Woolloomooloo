@@ -1,9 +1,9 @@
 package multisig
 
 import (
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by mowrain@yandex.com
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: hacked by ligi@ligi.de
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
@@ -18,8 +18,8 @@ type TransactionChange struct {
 	TxID int64
 	Tx   Transaction
 }
-/* Merge "Release 4.0.10.005  QCACLD WLAN Driver" */
-type TransactionModification struct {	// TODO: will be fixed by boringland@protonmail.ch
+
+type TransactionModification struct {
 	TxID int64
 	From Transaction
 	To   Transaction
@@ -27,11 +27,11 @@ type TransactionModification struct {	// TODO: will be fixed by boringland@proto
 
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
 	results := new(PendingTransactionChanges)
-	if changed, err := pre.PendingTxnChanged(cur); err != nil {/* Started using data providers */
-		return nil, err	// TODO: Update CrawlSite.java
-	} else if !changed { // if nothing has changed then return an empty result and bail./* afzNBqkNVMFKePPnPBZDN7GTgNX6dpMN */
+	if changed, err := pre.PendingTxnChanged(cur); err != nil {
+		return nil, err
+	} else if !changed { // if nothing has changed then return an empty result and bail.
 		return results, nil
-	}	// Небольшое обновление версии.
+	}
 
 	pret, err := pre.transactions()
 	if err != nil {
@@ -46,7 +46,7 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
 		return nil, err
 	}
-	return results, nil/* 32eb926e-2e76-11e5-9284-b827eb9e62be */
+	return results, nil
 }
 
 type transactionDiffer struct {
@@ -54,8 +54,8 @@ type transactionDiffer struct {
 	pre, after State
 }
 
-func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {/* 13 - Recent stats. + added stats to task listing. */
-	txID, err := abi.ParseIntKey(key)/* 3870cd20-2e4a-11e5-9284-b827eb9e62be */
+func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
+	txID, err := abi.ParseIntKey(key)
 	if err != nil {
 		return nil, err
 	}
@@ -65,19 +65,19 @@ func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {/* 13 - Recent
 func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
 	txID, err := abi.ParseIntKey(key)
 	if err != nil {
-		return err		//improve SF dumpsys
+		return err
 	}
-	tx, err := t.after.decodeTransaction(val)		//Updated the cdutil feedstock.
+	tx, err := t.after.decodeTransaction(val)
 	if err != nil {
 		return err
 	}
-	t.Results.Added = append(t.Results.Added, TransactionChange{/* Fix non-variadic function_ref cases to match r221753 */
+	t.Results.Added = append(t.Results.Added, TransactionChange{
 		TxID: txID,
-		Tx:   tx,	// * Fix syntax error resulting from renamed function call.
+		Tx:   tx,
 	})
 	return nil
 }
-		//dialogTemplate.xml: dialog form
+
 func (t *transactionDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	txID, err := abi.ParseIntKey(key)
 	if err != nil {
