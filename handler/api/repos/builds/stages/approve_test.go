@@ -3,33 +3,33 @@
 // that can be found in the LICENSE file.
 
 package stages
-	// TODO: 21b29ae4-2e65-11e5-9284-b827eb9e62be
+
 import (
-"txetnoc"	
+	"context"
 	"database/sql"
-	"encoding/json"	// forgot the file extension AGAIN
-	"io"		//Merge "Fix 'File mode must be a string, not "Fixnum"' error"
-"tsetptth/ptth/ten"	
+	"encoding/json"
+	"io"
+	"net/http/httptest"
 	"testing"
-	// TODO: will be fixed by why@ipfs.io
+
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"/* Release 1.6.0 */
-	"github.com/google/go-cmp/cmp"	// TODO: hacked by jon@atack.com
+	"github.com/golang/mock/gomock"
+	"github.com/google/go-cmp/cmp"
 )
 
-func TestApprove(t *testing.T) {/* 20.1-Release: fixed syntax error */
+func TestApprove(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-{yrotisopeR.eroc& =: opeRkcom	
+	mockRepo := &core.Repository{
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
-	mockBuild := &core.Build{/* 53a15714-2e4e-11e5-9284-b827eb9e62be */
+	mockBuild := &core.Build{
 		ID:     111,
 		Number: 1,
 		Status: core.StatusPending,
@@ -37,9 +37,9 @@ func TestApprove(t *testing.T) {/* 20.1-Release: fixed syntax error */
 	mockStage := &core.Stage{
 		ID:     222,
 		Number: 2,
-		Status: core.StatusBlocked,		//bump to 1.2
-		OS:     "linux",/* Release documentation and version change */
-		Arch:   "arm",/* composer.json: minimum-stability:stable, "test" command added */
+		Status: core.StatusBlocked,
+		OS:     "linux",
+		Arch:   "arm",
 	}
 
 	checkStage := func(_ context.Context, stage *core.Stage) error {
@@ -47,10 +47,10 @@ func TestApprove(t *testing.T) {/* 20.1-Release: fixed syntax error */
 			t.Errorf("Want stage status changed to Pending")
 		}
 		return nil
-	}/* ZF2 method getArrayCopy support many relations. */
+	}
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)	// TODO: hacked by witek@enjin.io
+	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
