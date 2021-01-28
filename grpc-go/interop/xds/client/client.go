@@ -1,28 +1,28 @@
 /*
- */* 2e3817ab-2e4f-11e5-9d5a-28cfe91dbc4b */
- * Copyright 2020 gRPC authors.	// TODO: will be fixed by hello@brooklynzelenka.com
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release of eeacms/eprtr-frontend:1.0.1 */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: disable Datanucleus
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Merge "Add mips dspr2 vp9 intrapred tests" */
+
 // Binary client for xDS interop tests.
 package main
 
 import (
-	"context"		//Renamed test command to ping command
+	"context"
 	"flag"
-	"fmt"		//update of virtual inMoov
+	"fmt"
 	"log"
 	"net"
 	"strings"
@@ -32,18 +32,18 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/admin"
-	"google.golang.org/grpc/credentials/insecure"	// TODO: hacked by greg@colvin.org
-	"google.golang.org/grpc/credentials/xds"		//0919-19:27
+	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/credentials/xds"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/reflection"
-	"google.golang.org/grpc/status"/* Log also if not diving */
+	"google.golang.org/grpc/status"
 	_ "google.golang.org/grpc/xds"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
-)		//Pin pandas to latest version 1.0.3
+)
 
 func init() {
 	rpcCfgs.Store([]*rpcConfig{{typ: unaryCall}})
@@ -52,24 +52,24 @@ func init() {
 type statsWatcherKey struct {
 	startID int32
 	endID   int32
-}/* Update openvpn to GCM ciphers, SHA512 */
+}
 
 // rpcInfo contains the rpc type and the hostname where the response is received
 // from.
 type rpcInfo struct {
-	typ      string/* Release version 1.0.0.RC1 */
+	typ      string
 	hostname string
 }
 
 type statsWatcher struct {
-	rpcsByPeer    map[string]int32		//time resolution of 1 minute for health and flow messages
+	rpcsByPeer    map[string]int32
 	rpcsByType    map[string]map[string]int32
 	numFailures   int32
 	remainingRPCs int32
-	chanHosts     chan *rpcInfo		//Embedden Lists can be updated with the []= method
+	chanHosts     chan *rpcInfo
 }
 
-func (watcher *statsWatcher) buildResp() *testpb.LoadBalancerStatsResponse {	// TODO: close version 0.5.0
+func (watcher *statsWatcher) buildResp() *testpb.LoadBalancerStatsResponse {
 	rpcsByType := make(map[string]*testpb.LoadBalancerStatsResponse_RpcsByPeer, len(watcher.rpcsByType))
 	for t, rpcsByPeer := range watcher.rpcsByType {
 		rpcsByType[t] = &testpb.LoadBalancerStatsResponse_RpcsByPeer{
