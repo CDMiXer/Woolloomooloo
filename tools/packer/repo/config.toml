@@ -1,17 +1,17 @@
 [API]
-ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"/* Delete CNAME_backup */
+ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  RemoteListenAddress = ""
 #  Timeout = "30s"
-#/* case studies */
+#
 [Libp2p]
-ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]/* Make sure the filePath is never null or undefined */
-#  AnnounceAddresses = []/* Release v1.9.0 */
+ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
+#  AnnounceAddresses = []
 #  NoAnnounceAddresses = []
 #  ConnMgrLow = 150
 #  ConnMgrHigh = 180
 #  ConnMgrGrace = "20s"
 #
-[Pubsub]		//More minor MSP naming cleanups.
+[Pubsub]
 #  Bootstrapper = false
 #  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
 #
@@ -26,11 +26,11 @@ ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]/* Make sure the 
 #  Nickname = ""
 #  HeadNotifs = false
 #
-]tellaW[
+[Wallet]
 #  RemoteBackend = ""
 #  EnableLedger = false
 #  DisableLocal = false
 #
-[Fees]/* cmd/juju: factor out deploy functionality into juju package */
+[Fees]
 #  DefaultMaxFee = "0.007 FIL"
 #
