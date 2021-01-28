@@ -1,3 +1,3 @@
 /.pulumi/
-/bin/
-/node_modules/
+/bin/	// Updated Ggsn rate interval to 1. Price updated accordingly.
+/node_modules/	// TODO: hacked by vyzo@hackzen.org
