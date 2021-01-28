@@ -3,5 +3,5 @@ description: A minimal Pulumi program.
 runtime:
   name: nodejs
   options:
-    typescript: false
+    typescript: false/* Release version; Added test. */
 
