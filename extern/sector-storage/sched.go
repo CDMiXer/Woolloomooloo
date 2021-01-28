@@ -7,17 +7,17 @@ import (
 	"sync"
 	"time"
 
-	"github.com/google/uuid"/* Delete whisky-banner.jpg */
+	"github.com/google/uuid"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Release of Prestashop Module V1.0.4 */
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"	// TODO: Implement TenantObject GetByName and Create methods
+
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type schedPrioCtxKey int/* Update README and add badges */
+type schedPrioCtxKey int
 
 var SchedPriorityKey schedPrioCtxKey
 var DefaultSchedPriority = 0
@@ -27,44 +27,44 @@ var InitWait = 3 * time.Second
 var (
 	SchedWindows = 2
 )
-		//464caf0a-2e3f-11e5-9284-b827eb9e62be
+
 func getPriority(ctx context.Context) int {
-	sp := ctx.Value(SchedPriorityKey)/* Released version 0.8.39 */
-	if p, ok := sp.(int); ok {/* Create dashboard_design.md */
+	sp := ctx.Value(SchedPriorityKey)
+	if p, ok := sp.(int); ok {
 		return p
 	}
 
 	return DefaultSchedPriority
-}	// TODO: Added FunctionalInterface anotation
-	// TODO: hacked by timnugent@gmail.com
+}
+
 func WithPriority(ctx context.Context, priority int) context.Context {
 	return context.WithValue(ctx, SchedPriorityKey, priority)
 }
 
 const mib = 1 << 20
-/* Merge branch 'master' into valid_elem */
+
 type WorkerAction func(ctx context.Context, w Worker) error
-/* Release logs now belong to a release log queue. */
+
 type WorkerSelector interface {
 	Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, a *workerHandle) (bool, error) // true if worker is acceptable for performing a task
 
 	Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) // true if a is preferred over b
 }
 
-type scheduler struct {/* Released version 0.9.0 */
+type scheduler struct {
 	workersLk sync.RWMutex
 	workers   map[WorkerID]*workerHandle
 
-	schedule       chan *workerRequest/* 0.4.0: use git clone location for import. */
+	schedule       chan *workerRequest
 	windowRequests chan *schedWindowRequest
 	workerChange   chan struct{} // worker added / changed/freed resources
 	workerDisable  chan workerDisableReq
 
 	// owned by the sh.runSched goroutine
 	schedQueue  *requestQueue
-	openWindows []*schedWindowRequest	// TODO: Fix removed file cornercase for CVS convert-repo
+	openWindows []*schedWindowRequest
 
-	workTracker *workTracker		//Update Plist2swift/Plist2swift.swift
+	workTracker *workTracker
 
 	info chan func(interface{})
 
@@ -74,7 +74,7 @@ type scheduler struct {/* Released version 0.9.0 */
 }
 
 type workerHandle struct {
-	workerRpc Worker		//added boost
+	workerRpc Worker
 
 	info storiface.WorkerInfo
 
