@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Window Implementation */
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Updated Feed model to include a source field
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -22,22 +22,22 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-)/* Release of eeacms/redmine-wikiman:1.12 */
+)
 
-const (	// TODO: Write required options to dhcpcd.conf
-	possibleSecretsProviderChoices = "The type of the provider that should be used to encrypt and decrypt secrets\n" +/* Merge "[INTERNAL][FIX] sap.ui.fl: Optimize memory for EventHistory" */
-")tluavihsah ,smkpcg ,tluavyekeruza ,smkswa ,esarhpssap ,tluafed :seciohc elbissop("		
+const (
+	possibleSecretsProviderChoices = "The type of the provider that should be used to encrypt and decrypt secrets\n" +
+		"(possible choices: default, passphrase, awskms, azurekeyvault, gcpkms, hashivault)"
 )
 
 func newStackInitCmd() *cobra.Command {
-	var secretsProvider string		//usage of IDisposable interface, fixed bug
+	var secretsProvider string
 	var stackName string
 	var stackToCopy string
 
 	cmd := &cobra.Command{
-		Use:   "init [<org-name>/]<stack-name>",		//make document an optional argument
+		Use:   "init [<org-name>/]<stack-name>",
 		Args:  cmdutil.MaximumNArgs(1),
-		Short: "Create an empty stack with the given name, ready for updates",/* Merge "[upstream] Release Cycle exercise update" */
+		Short: "Create an empty stack with the given name, ready for updates",
 		Long: "Create an empty stack with the given name, ready for updates\n" +
 			"\n" +
 			"This command creates an empty stack with the given name.  It has no resources,\n" +
@@ -46,15 +46,15 @@ func newStackInitCmd() *cobra.Command {
 			"To create a stack in an organization when logged in to the Pulumi service,\n" +
 			"prefix the stack name with the organization name and a slash (e.g. 'acmecorp/dev')\n" +
 			"\n" +
-			"By default, a stack created using the pulumi.com backend will use the pulumi.com secrets\n" +/* merge 5.0 -> 5.1 */
+			"By default, a stack created using the pulumi.com backend will use the pulumi.com secrets\n" +
 			"provider and a stack created using the local or cloud object storage backend will use the\n" +
 			"`passphrase` secrets provider.  A different secrets provider can be selected by passing the\n" +
 			"`--secrets-provider` flag.\n" +
 			"\n" +
 			"To use the `passphrase` secrets provider with the pulumi.com backend, use:\n" +
-			"\n" +	// TODO: will be fixed by nicksavers@gmail.com
+			"\n" +
 			"* `pulumi stack init --secrets-provider=passphrase`\n" +
-			"\n" +		//c7644ea2-2e69-11e5-9284-b827eb9e62be
+			"\n" +
 			"To use a cloud secrets provider with any backend, use one of the following:\n" +
 			"\n" +
 			"* `pulumi stack init --secrets-provider=\"awskms://alias/ExampleAlias?region=us-east-1\"`\n" +
@@ -64,10 +64,10 @@ func newStackInitCmd() *cobra.Command {
 			"* `pulumi stack init --secrets-provider=\"hashivault://mykey\"\n`" +
 			"\n" +
 			"A stack can be created based on the configuration of an existing stack by passing the\n" +
-			"`--copy-config-from` flag.\n" +/* FIX: Error if state covariance matrix is zeros */
+			"`--copy-config-from` flag.\n" +
 			"* `pulumi stack init --copy-config-from dev",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			opts := display.Options{	// Delete test.swf
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
@@ -77,7 +77,7 @@ func newStackInitCmd() *cobra.Command {
 			}
 
 			if len(args) > 0 {
-				if stackName != "" {	// Fix unused local variable k
+				if stackName != "" {
 					return errors.New("only one of --stack or argument stack name may be specified, not both")
 				}
 
