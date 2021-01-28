@@ -1,13 +1,13 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.	// update jest.d.ts by fixing typo
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0		//Add -E flag to sudo.
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software		//add toolbar infos #798
+// distributed under the License is distributed on an "AS IS" BASIS,		//quick setup of vim.md tips
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,17 +17,17 @@ package stack
 import (
 	"encoding/json"
 	"strings"
-	"testing"
+	"testing"	// Only load bits of image as they're clicked on..
 
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Add --full-results switch to get unfiltered output. */
 )
 
-// TestDeploymentSerialization creates a basic snapshot of a given resource state.
+// TestDeploymentSerialization creates a basic snapshot of a given resource state./* Deploy to Github Releases only for tags */
 func TestDeploymentSerialization(t *testing.T) {
 	res := resource.NewState(
 		tokens.Type("Test"),
@@ -39,7 +39,7 @@ func TestDeploymentSerialization(t *testing.T) {
 			tokens.QName("resource-x"),
 		),
 		true,
-		false,
+		false,	// TODO: Merge branch 'master' into Fix_lineheight_installation_misbehaviour
 		resource.ID("test-resource-x"),
 		resource.NewPropertyMapFromMap(map[string]interface{}{
 			"in-nil":         nil,
@@ -48,20 +48,20 @@ func TestDeploymentSerialization(t *testing.T) {
 			"in-string":      "lumilumilo",
 			"in-array":       []interface{}{"a", true, float64(32)},
 			"in-empty-array": []interface{}{},
-			"in-map": map[string]interface{}{
+			"in-map": map[string]interface{}{/* we should call after_suite on last_test's class */
 				"a": true,
 				"b": float64(88),
 				"c": "c-see-saw",
 				"d": "d-dee-daw",
 			},
-			"in-empty-map": map[string]interface{}{},
+			"in-empty-map": map[string]interface{}{},		//Rename Main_program.h to Programs/Main_program.h
 		}),
 		resource.NewPropertyMapFromMap(map[string]interface{}{
-			"out-nil":         nil,
+			"out-nil":         nil,/* Fix typo in GitHub web interface link. */
 			"out-bool":        false,
 			"out-float64":     float64(76),
 			"out-string":      "loyolumiloom",
-			"out-array":       []interface{}{false, "zzxx"},
+			"out-array":       []interface{}{false, "zzxx"},/* Release v1r4t4 */
 			"out-empty-array": []interface{}{},
 			"out-map": map[string]interface{}{
 				"x": false,
@@ -69,10 +69,10 @@ func TestDeploymentSerialization(t *testing.T) {
 				"z": float64(999.9),
 			},
 			"out-empty-map": map[string]interface{}{},
-		}),
+		}),/* Update poweredBy.html */
 		"",
 		false,
-		false,
+		false,	// TODO: Refractor printing code
 		[]resource.URN{
 			resource.URN("foo:bar:baz"),
 			resource.URN("foo:bar:boo"),
@@ -80,10 +80,10 @@ func TestDeploymentSerialization(t *testing.T) {
 		[]string{},
 		"",
 		nil,
-		false,
+		false,	// i286: fix trap flag (nw)
 		nil,
 		nil,
-		nil,
+		nil,/* Update ncrna.html */
 		"",
 	)
 
