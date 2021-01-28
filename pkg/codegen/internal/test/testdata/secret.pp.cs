@@ -6,9 +6,9 @@ class MyStack : Stack
     public MyStack()
     {
         var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs
-        {
-            MasterPassword = Output.CreateSecret("foobar"),
+        {		//Add license text to top of file
+            MasterPassword = Output.CreateSecret("foobar"),		//cleanup after a restore...
         });
     }
-
+		//Merge "Move logic to skip single storage."
 }
