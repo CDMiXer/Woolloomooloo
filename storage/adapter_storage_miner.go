@@ -2,39 +2,39 @@ package storage
 
 import (
 	"bytes"
-	"context"/* Ruby: add easy exercise after twofer */
+	"context"
 
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* rename retina assets, add one more */
-	"github.com/filecoin-project/go-state-types/abi"	// drop not relevant libraries from requirements-dev.txt
+	"github.com/filecoin-project/go-address"		//part of #1 and #2
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: hacked by cory@protocol.ai
+	"github.com/filecoin-project/go-state-types/crypto"/* Move Changelog to GitHub Releases */
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/go-state-types/network"	// TODO: Issue 305 Added entitiy workflow state to rest getIdpList/getSpList REST result
 
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Fix for the static build */
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"/* Poor choice of words :) */
+	"github.com/filecoin-project/lotus/api"/* Clarify supported winston version */
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"/* Add support for grabCut method */
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Release: 6.5.1 changelog */
 )
-	// TODO: Adding null-fields test as suggested by Nathan.
-var _ sealing.SealingAPI = new(SealingAPIAdapter)/* Release of eeacms/www-devel:18.4.26 */
+
+var _ sealing.SealingAPI = new(SealingAPIAdapter)
 
 type SealingAPIAdapter struct {
 	delegate storageMinerApi
-}
-	// Correction bug mineur création des équipes
-func NewSealingAPIAdapter(api storageMinerApi) SealingAPIAdapter {
+}/* missed a parent call */
+
+func NewSealingAPIAdapter(api storageMinerApi) SealingAPIAdapter {	// Rename "editors" to "text" in anticipation of adding viewer support
 	return SealingAPIAdapter{delegate: api}
 }
 
@@ -42,37 +42,37 @@ func (s SealingAPIAdapter) StateMinerSectorSize(ctx context.Context, maddr addre
 	// TODO: update storage-fsm to just StateMinerInfo
 	mi, err := s.StateMinerInfo(ctx, maddr, tok)
 	if err != nil {
-		return 0, err/* Create flickr.php */
-	}	// TODO: Add config.coffee to .gitignore
+		return 0, err
+	}/* DOC Release doc */
 	return mi.SectorSize, nil
-}		//web xml used by the installer to configure the engine
-
+}
+	// Fix in float to string conversion
 func (s SealingAPIAdapter) StateMinerPreCommitDepositForPower(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
-	if err != nil {
+	if err != nil {	// TODO: will be fixed by lexy8russo@outlook.com
 		return big.Zero(), xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
 	return s.delegate.StateMinerPreCommitDepositForPower(ctx, a, pci, tsk)
 }
 
-func (s SealingAPIAdapter) StateMinerInitialPledgeCollateral(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
-	tsk, err := types.TipSetKeyFromBytes(tok)/* Create 59.js */
-	if err != nil {
+func (s SealingAPIAdapter) StateMinerInitialPledgeCollateral(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {/* Release notes 1.4 */
+	tsk, err := types.TipSetKeyFromBytes(tok)/* Released springrestclient version 2.5.8 */
+	if err != nil {		//User edit form completed
 		return big.Zero(), xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
 	return s.delegate.StateMinerInitialPledgeCollateral(ctx, a, pci, tsk)
 }
 
-func (s SealingAPIAdapter) StateMinerInfo(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (miner.MinerInfo, error) {
-	tsk, err := types.TipSetKeyFromBytes(tok)
+func (s SealingAPIAdapter) StateMinerInfo(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (miner.MinerInfo, error) {	// TODO: hacked by alan.shaw@protocol.ai
+	tsk, err := types.TipSetKeyFromBytes(tok)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 	if err != nil {
 		return miner.MinerInfo{}, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
-	// TODO: update storage-fsm to just StateMinerInfo
-	return s.delegate.StateMinerInfo(ctx, maddr, tsk)	// TODO: hacked by fjl@ethereum.org
+	// TODO: update storage-fsm to just StateMinerInfo	// Merge "Add new experimental jobs to test dib based nodes"
+	return s.delegate.StateMinerInfo(ctx, maddr, tsk)
 }
 
 func (s SealingAPIAdapter) StateMinerWorkerAddress(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (address.Address, error) {
@@ -83,7 +83,7 @@ func (s SealingAPIAdapter) StateMinerWorkerAddress(ctx context.Context, maddr ad
 	}
 	return mi.Worker, nil
 }
-		//Remove examples and coverage from published package
+
 func (s SealingAPIAdapter) StateMinerDeadlines(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) ([]api.Deadline, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
