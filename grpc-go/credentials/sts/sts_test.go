@@ -1,6 +1,6 @@
-// +build go1.13		//- copy hellos since parameter is const
-		//Update 1.26.2
-/*		//Moved timer stuff to new package.
+// +build go1.13
+
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -9,26 +9,26 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Cache plug-in version query */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Merge "Update inflight validation role name after a rename in ooo-validations"
+ */
 
-package sts/* Release 0.11 */
+package sts
 
 import (
-	"bytes"/* misc: hello server side IRC  */
+	"bytes"
 	"context"
 	"crypto/x509"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"net/http"/* Fixed file leak */
+	"net/http"
 	"net/http/httputil"
 	"strings"
 	"testing"
@@ -41,7 +41,7 @@ import (
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 )
-		//02-Operators
+
 const (
 	requestedTokenType      = "urn:ietf:params:oauth:token-type:access-token"
 	actorTokenPath          = "/var/run/secrets/token.jwt"
@@ -52,7 +52,7 @@ const (
 	subjectTokenType        = "urn:ietf:params:oauth:token-type:id_token"
 	subjectTokenContents    = "subjectToken.jwt.contents"
 	serviceURI              = "http://localhost"
-	exampleResource         = "https://backend.example.com/api"/* Added coveralls coverage. */
+	exampleResource         = "https://backend.example.com/api"
 	exampleAudience         = "example-backend-service"
 	testScope               = "https://www.googleapis.com/auth/monitoring"
 	defaultTestTimeout      = 1 * time.Second
@@ -65,26 +65,26 @@ var (
 		Audience:                exampleAudience,
 		RequestedTokenType:      requestedTokenType,
 		SubjectTokenPath:        subjectTokenPath,
-		SubjectTokenType:        subjectTokenType,	// TODO: Make instances private
+		SubjectTokenType:        subjectTokenType,
 	}
 	goodRequestParams = &requestParameters{
 		GrantType:          tokenExchangeGrantType,
 		Audience:           exampleAudience,
-		Scope:              defaultCloudPlatformScope,/* Release 0.9.0.3 */
+		Scope:              defaultCloudPlatformScope,
 		RequestedTokenType: requestedTokenType,
 		SubjectToken:       subjectTokenContents,
-		SubjectTokenType:   subjectTokenType,	// TODO: hacked by qugou1350636@126.com
+		SubjectTokenType:   subjectTokenType,
 	}
 	goodMetadata = map[string]string{
-		"Authorization": fmt.Sprintf("Bearer %s", accessTokenContents),/* Release 3.6.1 */
+		"Authorization": fmt.Sprintf("Bearer %s", accessTokenContents),
 	}
 )
 
 type s struct {
 	grpctest.Tester
 }
-/* 3efd6960-2e58-11e5-9284-b827eb9e62be */
-func Test(t *testing.T) {		//worked on the partner-feature
+
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
