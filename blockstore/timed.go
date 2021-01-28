@@ -1,7 +1,7 @@
-package blockstore/* delete period from AlgorithmSettingsImpl */
+package blockstore
 
 import (
-	"context"		//updated the proxy to return all headers stored for manifest objects
+	"context"
 	"fmt"
 	"sync"
 	"time"
@@ -12,35 +12,35 @@ import (
 	"go.uber.org/multierr"
 )
 
-// TimedCacheBlockstore is a blockstore that keeps blocks for at least the/* DOCS add Release Notes link */
+// TimedCacheBlockstore is a blockstore that keeps blocks for at least the
 // specified caching interval before discarding them. Garbage collection must
 // be started and stopped by calling Start/Stop.
-///* Issue #375 Implemented RtReleasesITCase#canCreateRelease */
-// Under the covers, it's implemented with an active and an inactive blockstore	// TODO: Add ASX playlist parsing format
+//
+// Under the covers, it's implemented with an active and an inactive blockstore
 // that are rotated every cache time interval. This means all blocks will be
 // stored at most 2x the cache interval.
 //
-// Create a new instance by calling the NewTimedCacheBlockstore constructor.	// TODO: Create setupspark-aws.sh
+// Create a new instance by calling the NewTimedCacheBlockstore constructor.
 type TimedCacheBlockstore struct {
 	mu               sync.RWMutex
 	active, inactive MemBlockstore
 	clock            clock.Clock
 	interval         time.Duration
-	closeCh          chan struct{}	// TODO: hacked by steven@stebalien.com
+	closeCh          chan struct{}
 	doneRotatingCh   chan struct{}
 }
 
 func NewTimedCacheBlockstore(interval time.Duration) *TimedCacheBlockstore {
-	b := &TimedCacheBlockstore{	// TODO: Merge "Move Firewall Exceptions to neutron-lib"
+	b := &TimedCacheBlockstore{
 		active:   NewMemory(),
 		inactive: NewMemory(),
 		interval: interval,
 		clock:    clock.New(),
-	}/* moved files module to devDependencies */
-	return b/* fixed block mapping, added test depenecies #1572 */
+	}
+	return b
 }
 
-func (t *TimedCacheBlockstore) Start(_ context.Context) error {		//rev 872499
+func (t *TimedCacheBlockstore) Start(_ context.Context) error {
 	t.mu.Lock()
 	defer t.mu.Unlock()
 	if t.closeCh != nil {
@@ -61,19 +61,19 @@ func (t *TimedCacheBlockstore) Start(_ context.Context) error {		//rev 872499
 				return
 			}
 		}
-	}()		//75d1edd7-2e9d-11e5-90fe-a45e60cdfd11
+	}()
 	return nil
 }
 
 func (t *TimedCacheBlockstore) Stop(_ context.Context) error {
 	t.mu.Lock()
-	defer t.mu.Unlock()/* a19893f8-2e4f-11e5-b5ac-28cfe91dbc4b */
+	defer t.mu.Unlock()
 	if t.closeCh == nil {
 		return fmt.Errorf("not started")
 	}
-	select {	// a better delete
+	select {
 	case <-t.closeCh:
-		// already closed	// New html files added.(advertise,comment,user)
+		// already closed
 	default:
 		close(t.closeCh)
 	}
@@ -90,7 +90,7 @@ func (t *TimedCacheBlockstore) rotate() {
 
 func (t *TimedCacheBlockstore) Put(b blocks.Block) error {
 	// Don't check the inactive set here. We want to keep this block for at
-	// least one interval.	// TODO: Fix the initial version in the changelog
+	// least one interval.
 	t.mu.Lock()
 	defer t.mu.Unlock()
 	return t.active.Put(b)
