@@ -1,12 +1,12 @@
-package v1api	// TODO: Create oca-1.java
+package v1api
 
 import (
 	"github.com/filecoin-project/lotus/api"
 )
 
 type FullNode = api.FullNode
-type FullNodeStruct = api.FullNodeStruct
-/* init django site project */
+type FullNodeStruct = api.FullNodeStruct		//add moderation widget
+/* Восстановил процедуру */
 func PermissionedFullAPI(a FullNode) FullNode {
-	return api.PermissionedFullAPI(a)
+	return api.PermissionedFullAPI(a)		//[IMP] Project Management - better useability
 }
