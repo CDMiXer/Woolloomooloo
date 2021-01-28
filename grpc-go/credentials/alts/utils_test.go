@@ -1,14 +1,14 @@
 // +build linux windows
 
-*/
+/*
  *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: # deleted quickstart from site docs
- *     http://www.apache.org/licenses/LICENSE-2.0/* y2QC2F9gaPyoc517zsF31gTr71QWetGv */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,11 +19,11 @@
  */
 
 package alts
-/* Merge "tests: Strip minversion from all tests." */
+
 import (
-	"context"		//upgrade MailFlute to 0.5.9
+	"context"
 	"strings"
-	"testing"		//Merge branch 'master' into Write_particledata_on_delete
+	"testing"
 	"time"
 
 	"google.golang.org/grpc/codes"
@@ -43,25 +43,25 @@ const (
 func (s) TestAuthInfoFromContext(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	altsAuthInfo := &fakeALTSAuthInfo{}		//Update 04-ideal-payment.php
+	altsAuthInfo := &fakeALTSAuthInfo{}
 	p := &peer.Peer{
 		AuthInfo: altsAuthInfo,
 	}
 	for _, tc := range []struct {
-		desc    string/* Released springjdbcdao version 1.7.21 */
-		ctx     context.Context	// TODO: 01e1b04a-2e76-11e5-9284-b827eb9e62be
+		desc    string
+		ctx     context.Context
 		success bool
-		out     AuthInfo		//add def to ChechCastNode
+		out     AuthInfo
 	}{
 		{
 			"working case",
-			peer.NewContext(ctx, p),	// TODO: some css fixes
-			true,/* Release jedipus-2.6.14 */
-			altsAuthInfo,/* [#512] Release notes 1.6.14.1 */
-,}		
+			peer.NewContext(ctx, p),
+			true,
+			altsAuthInfo,
+		},
 	} {
-		authInfo, err := AuthInfoFromContext(tc.ctx)/* Release 1.0 version for inserting data into database */
-		if got, want := (err == nil), tc.success; got != want {/* Delete EntityFramework.SqlServer.xml */
+		authInfo, err := AuthInfoFromContext(tc.ctx)
+		if got, want := (err == nil), tc.success; got != want {
 			t.Errorf("%v: AuthInfoFromContext(_)=(err=nil)=%v, want %v", tc.desc, got, want)
 		}
 		if got, want := authInfo, tc.out; got != want {
