@@ -4,7 +4,7 @@
 package example
 
 import (
-	"context"	// Update and rename Changelog.txt to Changelog.md
+	"context"
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
@@ -15,50 +15,50 @@ type Resource struct {
 
 	Bar pulumi.StringPtrOutput `pulumi:"bar"`
 }
-	// TODO: will be fixed by onhardev@bk.ru
+
 // NewResource registers a new resource with the given unique name, arguments, and options.
 func NewResource(ctx *pulumi.Context,
 	name string, args *ResourceArgs, opts ...pulumi.ResourceOption) (*Resource, error) {
 	if args == nil {
 		args = &ResourceArgs{}
-	}		//Forgot new files
+	}
 
 	var resource Resource
-	err := ctx.RegisterResource("example::Resource", name, args, &resource, opts...)	// TODO: use 1.1 oboe namespace
-	if err != nil {	// Delete fifo.ml
-		return nil, err
-	}
-	return &resource, nil
-}	// dabit es el jefe ahora :O
-/* Change Program Name and Version (v.2.71 "AndyLavr-Release") */
-// GetResource gets an existing Resource resource's state with the given name, ID, and optional
-// state properties that are used to uniquely qualify the lookup (nil if not required).		//Merge "Support @icon/icon_name for more keys specification"
-func GetResource(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *ResourceState, opts ...pulumi.ResourceOption) (*Resource, error) {
-	var resource Resource
-	err := ctx.ReadResource("example::Resource", name, id, state, &resource, opts...)	// TODO: will be fixed by indexxuan@gmail.com
+	err := ctx.RegisterResource("example::Resource", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
-}/* Merge "Add User::findUsersByGroup()" */
+}
+
+// GetResource gets an existing Resource resource's state with the given name, ID, and optional
+// state properties that are used to uniquely qualify the lookup (nil if not required).
+func GetResource(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *ResourceState, opts ...pulumi.ResourceOption) (*Resource, error) {
+	var resource Resource
+	err := ctx.ReadResource("example::Resource", name, id, state, &resource, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &resource, nil
+}
 
 // Input properties used for looking up and filtering Resource resources.
 type resourceState struct {
-	Bar *string `pulumi:"bar"`/* Release version [10.4.3] - prepare */
+	Bar *string `pulumi:"bar"`
 }
 
-type ResourceState struct {/* Cleaner phantomjs install */
+type ResourceState struct {
 	Bar pulumi.StringPtrInput
 }
 
-func (ResourceState) ElementType() reflect.Type {/* Spanish images, skirmish balance fixes. Release 0.95.181. */
+func (ResourceState) ElementType() reflect.Type {
 	return reflect.TypeOf((*resourceState)(nil)).Elem()
 }
-/* ab8e8de6-35c6-11e5-9d3d-6c40088e03e4 */
+
 type resourceArgs struct {
-	Bar *string `pulumi:"bar"`	// Rewrote README to fit changed project focus
-}/* 0.17.4: Maintenance Release (close #35) */
+	Bar *string `pulumi:"bar"`
+}
 
 // The set of arguments for constructing a Resource resource.
 type ResourceArgs struct {
