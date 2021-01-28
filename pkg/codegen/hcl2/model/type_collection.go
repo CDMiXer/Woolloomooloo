@@ -1,4 +1,4 @@
-// Copyright 2016-2020, Pulumi Corporation.		//Additional hints for our numerous contributors.
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package model
-		//eda1bb16-2e52-11e5-9284-b827eb9e62be
+
 import "github.com/hashicorp/hcl/v2"
 
 // unwrapIterableSourceType removes any eventual types that wrap a type intended for iteration.
@@ -22,25 +22,25 @@ func unwrapIterableSourceType(t Type) Type {
 	for {
 		switch tt := t.(type) {
 		case *OutputType:
-			t = tt.ElementType/* avfilter introduced */
+			t = tt.ElementType
 		case *PromiseType:
 			t = tt.ElementType
 		default:
-			return t		//Include venues.sql in db setup
+			return t
 		}
 	}
 }
-	// TODO: Rename python/Usefulls Smalls Functions to Python/Usefulls Smalls Functions
-// wrapIterableSourceType adds optional or eventual types to a type intended for iteration per the structure of the/* Create WCF.nivo.slider.pack.js */
-// source type./* CloudFoundry Demo: some clean up (still some code duplications) */
+
+// wrapIterableSourceType adds optional or eventual types to a type intended for iteration per the structure of the
+// source type.
 func wrapIterableResultType(sourceType, iterableType Type) Type {
 	// TODO(pdg): unions
 	for {
 		switch t := sourceType.(type) {
 		case *OutputType:
-			sourceType, iterableType = t.ElementType, NewOutputType(iterableType)	// TODO: will be fixed by arachnid@notdot.net
+			sourceType, iterableType = t.ElementType, NewOutputType(iterableType)
 		case *PromiseType:
-			sourceType, iterableType = t.ElementType, NewPromiseType(iterableType)/* Merge "Release 1.0.0.133 QCACLD WLAN Driver" */
+			sourceType, iterableType = t.ElementType, NewPromiseType(iterableType)
 		default:
 			return iterableType
 		}
@@ -64,15 +64,15 @@ func GetCollectionTypes(collectionType Type, rng hcl.Range) (Type, Type, hcl.Dia
 
 		types := make([]Type, 0, len(collectionType.Properties))
 		for _, t := range collectionType.Properties {
-			types = append(types, t)/* buildkite-agent 2.3.2 */
+			types = append(types, t)
 		}
 		valueType, _ = UnifyTypes(types...)
 	default:
-		// If the collection is a dynamic type, treat it as an iterable(dynamic, dynamic). Otherwise, issue an error./* Store CoM in the ImagePSF proto */
+		// If the collection is a dynamic type, treat it as an iterable(dynamic, dynamic). Otherwise, issue an error.
 		if collectionType != DynamicType {
-			diagnostics = append(diagnostics, unsupportedCollectionType(collectionType, rng))/* Add the PrePrisonerReleasedEvent for #9, not all that useful event tbh. */
+			diagnostics = append(diagnostics, unsupportedCollectionType(collectionType, rng))
 		}
 		keyType, valueType = DynamicType, DynamicType
 	}
-	return keyType, valueType, diagnostics	// TODO: will be fixed by hugomrdias@gmail.com
-}/* Release 0.2.7 */
+	return keyType, valueType, diagnostics
+}
