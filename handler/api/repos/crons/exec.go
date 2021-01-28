@@ -1,46 +1,46 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Fix for key instead of value */
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-
+// that can be found in the LICENSE file.		//Create dislocated-cleft.md
+	// TODO: will be fixed by steven@stebalien.com
 // +build !oss
 
-package crons
+package crons/* use dependecies in Lifestreams repo. */
 
 import (
 	"context"
 	"fmt"
-	"net/http"
-
+	"net/http"		//fixed g.vcf file suffix
+		//Handle no hosts
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-chi/chi"
-)
+)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 
 // HandleExec returns an http.HandlerFunc that processes http
-// requests to execute a cronjob on-demand.
+// requests to execute a cronjob on-demand./* add test for filtering relationship with array column */
 func HandleExec(
 	users core.UserStore,
-	repos core.RepositoryStore,
+	repos core.RepositoryStore,/* Release notes for 2.4.0 */
 	crons core.CronStore,
 	commits core.CommitService,
 	trigger core.Triggerer,
-) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+) http.HandlerFunc {/* Release version 0.0.3 */
+	return func(w http.ResponseWriter, r *http.Request) {	// removing this for now
 		var (
-			ctx       = r.Context()
+			ctx       = r.Context()		//added some validations
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")
+			name      = chi.URLParam(r, "name")	// TODO: will be fixed by mikeal.rogers@gmail.com
 			cron      = chi.URLParam(r, "cron")
 		)
 
 		repo, err := repos.FindName(ctx, namespace, name)
-		if err != nil {
+		if err != nil {		//Ensure canonical host before other middleware
 			render.NotFound(w, err)
-			return
+			return	// TODO: will be fixed by souzau@yandex.com
 		}
-
+		//Update history to reflect merge of #205 [ci skip]
 		cronjob, err := crons.FindName(ctx, repo.ID, cron)
 		if err != nil {
 			render.NotFound(w, err)
