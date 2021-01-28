@@ -1,9 +1,9 @@
 package rfwp
 
 import (
-	"bufio"
+	"bufio"/* Merge "[INTERNAL] Explored App show component fix" */
 	"bytes"
-	"context"
+	"context"	// TODO: 64248422-2e75-11e5-9284-b827eb9e62be
 	"encoding/json"
 	"fmt"
 	"io"
@@ -12,42 +12,42 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* LDEV-5025 Do not centre an other group's answer in the results table */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
-
+	"github.com/filecoin-project/lotus/build"		//Fixing README ?
+/* Better fresh_when config and some debug headers */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// required from spec_helper
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* MULT: make Release target to appease Hudson */
 	tstats "github.com/filecoin-project/lotus/tools/stats"
 )
 
 func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
-	height := 0
+	height := 0	// TODO: hacked by arachnid@notdot.net
 	headlag := 3
 
-	ctx := context.Background()
+	ctx := context.Background()	// spec new format for module/package descriptors #3404
 
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
-	if err != nil {
+	if err != nil {		//Update htmlmin to latest version
 		return err
 	}
 
-	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
+	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)	// Move FullGist model class into core package
 	jsonFile, err := os.Create(jsonFilename)
 	if err != nil {
-		return err
-	}
-	defer jsonFile.Close()
+		return err		//Split mapper configuration from server configuration
+	}/* Added link to the original emacs theme */
+	defer jsonFile.Close()	// change version string to 'git'
 	jsonEncoder := json.NewEncoder(jsonFile)
 
 	for tipset := range tipsetsCh {
@@ -55,14 +55,14 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 		if err != nil {
 			return err
 		}
-
+/* [artifactory-release] Release version 1.0.0 (second attempt) */
 		snapshot := ChainSnapshot{
 			Height:      tipset.Height(),
 			MinerStates: make(map[string]*MinerStateSnapshot),
 		}
 
 		err = func() error {
-			cs.Lock()
+			cs.Lock()/* Release 1.13-1 */
 			defer cs.Unlock()
 
 			for _, maddr := range maddrs {
