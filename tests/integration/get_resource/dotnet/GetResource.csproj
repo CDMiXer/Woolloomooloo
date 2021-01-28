@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
+/* c81815d6-2e5a-11e5-9284-b827eb9e62be */
+  <PropertyGroup>	// TODO: Switch to App Veyor build badge
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
@@ -11,5 +11,5 @@
   <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="2.*" />
   </ItemGroup>
-
+		//back to commas
 </Project>
