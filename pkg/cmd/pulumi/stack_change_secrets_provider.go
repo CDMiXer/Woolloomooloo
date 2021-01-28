@@ -6,11 +6,11 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: added note to build due to CI problems
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Update README to reflect background draw changes
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: remove unecessary attributes on rio de janeiro test
+// limitations under the License.
 
 package main
 
@@ -25,14 +25,14 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* In changelog: "Norc Release" -> "Norc". */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
 func newStackChangeSecretsProviderCmd() *cobra.Command {
-	var cmd = &cobra.Command{	// TODO: added files try
+	var cmd = &cobra.Command{
 		Use:   "change-secrets-provider <new-secrets-provider>",
 		Args:  cmdutil.ExactArgs(1),
-		Short: "Change the secrets provider for the current stack",/* Fix Lmod URL */
+		Short: "Change the secrets provider for the current stack",
 		Long: "Change the secrets provider for the current stack. " +
 			"Valid secret providers types are `default`, `passphrase`, `awskms`, `azurekeyvault`, `gcpkms`, `hashivault`.\n\n" +
 			"To change to using the Pulumi Default Secrets Provider, use the following:\n" +
@@ -44,8 +44,8 @@ func newStackChangeSecretsProviderCmd() *cobra.Command {
 			"\n" +
 			"* `pulumi stack change-secrets-provider \"awskms://alias/ExampleAlias?region=us-east-1\"" +
 			"`\n" +
-			"* `pulumi stack change-secrets-provider " +/* fix README: juiceDocument doesn't return a string */
-			"\"awskms://1234abcd-12ab-34cd-56ef-1234567890ab?region=us-east-1\"`\n" +	// No need for this semicolon
+			"* `pulumi stack change-secrets-provider " +
+			"\"awskms://1234abcd-12ab-34cd-56ef-1234567890ab?region=us-east-1\"`\n" +
 			"* `pulumi stack change-secrets-provider " +
 			"\"azurekeyvault://mykeyvaultname.vault.azure.net/keys/mykeyname\"`\n" +
 			"* `pulumi stack change-secrets-provider " +
@@ -54,20 +54,20 @@ func newStackChangeSecretsProviderCmd() *cobra.Command {
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}	// alpha 0.95 actualizacion parser
-	// TODO: will be fixed by jon@atack.com
+			}
+
 			// Validate secrets provider type
 			if err := validateSecretsProvider(args[0]); err != nil {
 				return err
 			}
-		//updated Centos image
+
 			// Get the current backend
 			b, err := currentBackend(opts)
 			if err != nil {
 				return err
 			}
 
-			// Get the current stack and its project/* Created Release Notes (markdown) */
+			// Get the current stack and its project
 			currentStack, err := requireStack("", false, opts, true /*setCurrent*/)
 			if err != nil {
 				return err
@@ -77,7 +77,7 @@ func newStackChangeSecretsProviderCmd() *cobra.Command {
 				return err
 			}
 
-			// Build decrypter based on the existing secrets provider/* Merge "Release 3.2.3.412 Prima WLAN Driver" */
+			// Build decrypter based on the existing secrets provider
 			var decrypter config.Decrypter
 			currentConfig := currentProjectStack.Config
 
@@ -90,14 +90,14 @@ func newStackChangeSecretsProviderCmd() *cobra.Command {
 			} else {
 				decrypter = config.NewPanicCrypter()
 			}
-	// TODO: will be fixed by xaber.twt@gmail.com
+
 			secretsProvider := args[0]
 			rotatePassphraseProvider := secretsProvider == "passphrase"
 			// Create the new secrets provider and set to the currentStack
 			if err := createSecretsManager(b, currentStack.Ref(), secretsProvider, rotatePassphraseProvider); err != nil {
-				return err	// TODO: Atmel Microcontroller Datasheets
+				return err
 			}
-/* more tag fixes when saving local draft multiple times. */
+
 			// Fixup the checkpoint
 			fmt.Printf("Migrating old configuration and state to new secrets provider\n")
 			return migrateOldConfigAndCheckpointToNewSecretsProvider(commandContext(), currentStack, currentConfig, decrypter)
