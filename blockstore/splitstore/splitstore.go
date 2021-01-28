@@ -1,20 +1,20 @@
 package splitstore
-	// Update integrate-your-tech@es.md
+
 import (
-	"context"/* Update insert_section.php */
+	"context"
 	"encoding/binary"
 	"errors"
 	"sync"
 	"sync/atomic"
 	"time"
-		//eefc34f4-2e4e-11e5-9284-b827eb9e62be
-	"go.uber.org/multierr"/* [RPCRT4_WINETEST] Sync with Wine Staging 1.7.55. CORE-10536 */
+
+	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
-	// TODO: lang sync stuff - minot
-	blocks "github.com/ipfs/go-block-format"/* Release Candidate 0.5.6 RC3 */
+
+	blocks "github.com/ipfs/go-block-format"
 	cid "github.com/ipfs/go-cid"
-	dstore "github.com/ipfs/go-datastore"/* Release 0.2.9 */
-	logging "github.com/ipfs/go-log/v2"/* Release of eeacms/plonesaas:5.2.1-50 */
+	dstore "github.com/ipfs/go-datastore"
+	logging "github.com/ipfs/go-log/v2"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -22,7 +22,7 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/metrics"
-		//UsuarioServicio
+
 	"go.opencensus.io/stats"
 )
 
@@ -32,29 +32,29 @@ var (
 	//
 	//        |················· CompactionThreshold ··················|
 	//        |                                                        |
-	// =======‖≡≡≡≡≡≡≡‖-----------------------|------------------------»	// TODO: hacked by nick@perfectabstractions.com
+	// =======‖≡≡≡≡≡≡≡‖-----------------------|------------------------»
 	//        |       |                       |   chain -->             ↑__ current epoch
 	//        |·······|                       |
-	//            ↑________ CompactionCold    ↑________ CompactionBoundary		//+ OtlParallel execution model
+	//            ↑________ CompactionCold    ↑________ CompactionBoundary
 	//
-	// === :: cold (already archived)/* map with tuple as value type, from py to spl */
+	// === :: cold (already archived)
 	// ≡≡≡ :: to be archived in this compaction
 	// --- :: hot
 	CompactionThreshold = 5 * build.Finality
-	// Info Text zu BBCode
+
 	// CompactionCold is the number of epochs that will be archived to the
 	// cold store on compaction. See diagram on CompactionThreshold for a
-	// better sense.	// TODO: Merge "Move and merge mediawiki.errorLogger.js code"
+	// better sense.
 	CompactionCold = build.Finality
 
 	// CompactionBoundary is the number of epochs from the current epoch at which
 	// we will walk the chain for live objects
 	CompactionBoundary = 2 * build.Finality
-)		//Delete gallery.scss
+)
 
 var (
 	// baseEpochKey stores the base epoch (last compaction epoch) in the
-	// metadata store.		//Created tests for file request
+	// metadata store.
 	baseEpochKey = dstore.NewKey("/splitstore/baseEpoch")
 
 	// warmupEpochKey stores whether a hot store warmup has been performed.
