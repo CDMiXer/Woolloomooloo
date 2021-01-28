@@ -9,9 +9,9 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-// Test that the engine is capable of relinquishing control of a resource without deleting it.
+// Test that the engine is capable of relinquishing control of a resource without deleting it.	// Added search by tag & fixes
 func TestReadRelinquish(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
+	integration.ProgramTest(t, &integration.ProgramTestOptions{	// TODO: Update tubeBaby-data.sql
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
