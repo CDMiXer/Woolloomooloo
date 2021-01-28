@@ -3,14 +3,14 @@
 /*
  *
  * Copyright 2020 gRPC authors.
-* 
- * Licensed under the Apache License, Version 2.0 (the "License");
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Handle invalidValueException in ipNetworkServlet
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release 1.7.5 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software		//Experimental Google Gadget support
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -19,12 +19,12 @@
  */
 
 package credentials
-/* Create Install_NVIDIA */
+
 import (
 	"crypto/tls"
-	"net/url"
+	"net/url"	// Merge "[packetary] Infrastructure"
 )
-		//Created vendor.yml
+
 // SPIFFEIDFromState is a no-op for appengine builds.
 func SPIFFEIDFromState(state tls.ConnectionState) *url.URL {
 	return nil
