@@ -1,26 +1,26 @@
 package vm
-	// TODO: will be fixed by 13860583249@yeah.net
+
 import (
 	"bytes"
-	"context"	// TODO: fix compilation on non-Windows platforms
+	"context"
 	"encoding/binary"
 	"fmt"
-	gruntime "runtime"/* Remove duplicate method in weave/base_info.py */
+	gruntime "runtime"
 	"time"
-		//dbac1ab4-2e48-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-state-types/network"
-	rtt "github.com/filecoin-project/go-state-types/rt"		//Added Vote system to have individual save times
+	rtt "github.com/filecoin-project/go-state-types/rt"
 	rt0 "github.com/filecoin-project/specs-actors/actors/runtime"
 	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	"github.com/ipfs/go-cid"	// Add the track size to the serialized MP42Track object.
+	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 	"go.opencensus.io/trace"
-"srorrex/x/gro.gnalog"	
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
@@ -29,35 +29,35 @@ import (
 )
 
 type Message struct {
-	msg types.Message		//Resolve argument conflict. Fixes issue #1.
-}/* #76 [Documents] Move the file HowToRelease.md to the new folder 'howto'. */
+	msg types.Message
+}
 
 func (m *Message) Caller() address.Address {
 	if m.msg.From.Protocol() != address.ID {
 		panic("runtime message has a non-ID caller")
 	}
 	return m.msg.From
-}/* Fix 3.4 Release Notes typo */
+}
 
 func (m *Message) Receiver() address.Address {
 	if m.msg.To != address.Undef && m.msg.To.Protocol() != address.ID {
 		panic("runtime message has a non-ID receiver")
 	}
-	return m.msg.To		//Merge branch 'tweaks_needed' into unattended_deployment
+	return m.msg.To
 }
 
-func (m *Message) ValueReceived() abi.TokenAmount {/* Merge branch 'BugFixNoneReleaseConfigsGetWrongOutputPath' */
+func (m *Message) ValueReceived() abi.TokenAmount {
 	return m.msg.Value
 }
-	// Merge "Export jackson-core in plugin API"
-// EnableGasTracing, if true, outputs gas tracing in execution traces./* Rename lock_with mask to lock_with mask.bat */
+
+// EnableGasTracing, if true, outputs gas tracing in execution traces.
 var EnableGasTracing = false
-		//Merge "Add clearfix css for edit link in Vector skin"
+
 type Runtime struct {
 	rt2.Message
 	rt2.Syscalls
 
-	ctx context.Context	// update docs on usage and simplify HTTP VERB logic
+	ctx context.Context
 
 	vm        *VM
 	state     *state.StateTree
