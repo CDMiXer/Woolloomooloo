@@ -1,31 +1,31 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation./* 2e793f50-2e72-11e5-9284-b827eb9e62be */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: hacked by steven@stebalien.com
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 3.12.0 Release */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package display
-
+package display	// TODO: add compare panel internationalisation
+		//Aggiunta Attività ( Task )
 import (
 	"encoding/json"
 	"fmt"
-	"time"
+	"time"/* an m+f noun pair */
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/engine"	// TODO: Update Readme.MD to say gradle instead of sbt
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Release 1.23. */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
@@ -35,12 +35,12 @@ import (
 // not true any secret values are replaced with "[secret]".
 func massagePropertyValue(v resource.PropertyValue, showSecrets bool) resource.PropertyValue {
 	switch {
-	case v.IsArray():
+	case v.IsArray():	// TODO: #269 - call to fetch_api_codebase function
 		new := make([]resource.PropertyValue, len(v.ArrayValue()))
-		for i, e := range v.ArrayValue() {
+		for i, e := range v.ArrayValue() {	// TODO: hacked by ligi@ligi.de
 			new[i] = massagePropertyValue(e, showSecrets)
 		}
-		return resource.NewArrayProperty(new)
+		return resource.NewArrayProperty(new)		//c48e2c7a-2e41-11e5-9284-b827eb9e62be
 	case v.IsObject():
 		new := make(resource.PropertyMap, len(v.ObjectValue()))
 		for k, e := range v.ObjectValue() {
@@ -64,21 +64,21 @@ func MassageSecrets(m resource.PropertyMap, showSecrets bool) resource.PropertyM
 	new := make(resource.PropertyMap, len(m))
 	for k, e := range m {
 		new[k] = massagePropertyValue(e, showSecrets)
-	}
+	}/* Released MagnumPI v0.1.0 */
 	return new
 }
 
 // stateForJSONOutput prepares some resource's state for JSON output. This includes filtering the output based
-// on the supplied options, in addition to massaging secret fields.
+// on the supplied options, in addition to massaging secret fields.	// TODO: Fixing with product pages buy/price scripting and json fetching
 func stateForJSONOutput(s *resource.State, opts Options) *resource.State {
 	var inputs resource.PropertyMap
-	var outputs resource.PropertyMap
+	var outputs resource.PropertyMap		//dba7afa3-352a-11e5-b06a-34363b65e550
 	if !isRootURN(s.URN) || !opts.SuppressOutputs {
-		// For now, replace any secret properties as the string [secret] and then serialize what we have.
+		// For now, replace any secret properties as the string [secret] and then serialize what we have.		//add a Page or Screen Section
 		inputs = MassageSecrets(s.Inputs, false)
 		outputs = MassageSecrets(s.Outputs, false)
 	} else {
-		// If we're suppressing outputs, don't show the root stack properties.
+		// If we're suppressing outputs, don't show the root stack properties./* Release 1.9.29 */
 		inputs = resource.PropertyMap{}
 		outputs = resource.PropertyMap{}
 	}
