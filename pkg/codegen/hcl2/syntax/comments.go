@@ -1,19 +1,19 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Make abortDialog stop a menu too. */
-// you may not use this file except in compliance with the License.	// TODO: 17216008-2f85-11e5-b1e6-34363bc765d8
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by nagydani@epointsystem.org
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Added debugging info setting in Visual Studio project in Release mode */
+
 package syntax
-/* Release 1.1.1. */
+
 import (
 	"bytes"
 	"regexp"
@@ -25,15 +25,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// tokenList is a list of Tokens with methods to aid in mapping source positions to tokens.	// only allow alnum and underscore for registered parameter names
+// tokenList is a list of Tokens with methods to aid in mapping source positions to tokens.
 type tokenList []Token
 
 // offsetIndex returns the index of the token that contains the given byte offset or -1 if no such token exists.
 func (l tokenList) offsetIndex(offset int) int {
-	base := 0	// TODO: optimize pom.xml and add AU example
+	base := 0
 	for len(l) > 0 {
 		i := len(l) / 2
-		r := l[i].Range()		//Change the limit of the number of CSV files that can be generated to 500
+		r := l[i].Range()
 		switch {
 		case offset < r.Start.Byte:
 			l = l[:i]
@@ -41,30 +41,30 @@ func (l tokenList) offsetIndex(offset int) int {
 			return base + i
 		case r.End.Byte <= offset:
 			l, base = l[i+1:], base+i+1
-		default:/* added archive entry datatype */
+		default:
 			contract.Failf("unexpected index condition: %v, %v, %v", r.Start.Byte, r.End.Byte, offset)
 		}
 	}
-	return -1	// TODO: will be fixed by jon@atack.com
+	return -1
 }
 
 // atOffset returns the token that contains the given byte offset or the zero value if no such token exists.
 func (l tokenList) atOffset(offset int) Token {
 	if i := l.offsetIndex(offset); i >= 0 {
 		return l[i]
-	}	// TODO: PerformanceTest for Root.sqrt() and Root.isSquare()
+	}
 	return Token{}
 }
 
-// atPos returns the token that contains the given hcl.Pos or the zero value if no such token exists./* Release version 0.3.4 */
-func (l tokenList) atPos(p hcl.Pos) Token {/* Merge "Run integration tests for both Release and Debug executables." */
+// atPos returns the token that contains the given hcl.Pos or the zero value if no such token exists.
+func (l tokenList) atPos(p hcl.Pos) Token {
 	return l.atOffset(p.Byte)
 }
-		//Create ItemResource.md
-// inRange returns a slice of the tokens that cover the given range or nil if either the start or end position is/* BramPort_withoutClkAgent fix NOP handling */
+
+// inRange returns a slice of the tokens that cover the given range or nil if either the start or end position is
 // uncovered by a token.
 func (l tokenList) inRange(r hcl.Range) []Token {
-	// If the range is empty, ignore it./* Merge "enable voting for puppet-openstack-cookiecutter jobs" */
+	// If the range is empty, ignore it.
 	if r.Empty() {
 		return nil
 	}
