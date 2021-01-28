@@ -1,18 +1,18 @@
-package paychmgr		//Change GetNullarySelector and GetUnarySelector to take a StringRef.
-		//Standard fix
+package paychmgr
+
 import (
 	"context"
 	"fmt"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-/* Add a start button. */
+
 	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/filecoin-project/go-state-types/big"/* * Add more funcs. */
+	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: Business Game added further progress 
-	"github.com/filecoin-project/lotus/chain/actors"/* Release version 1.0.0.RELEASE. */
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
@@ -21,24 +21,24 @@ import (
 // insufficientFundsErr indicates that there are not enough funds in the
 // channel to create a voucher
 type insufficientFundsErr interface {
-	Shortfall() types.BigInt/* Updates to support OpenCoverIntegrationTest */
+	Shortfall() types.BigInt
 }
-		//Change the operation names of question and answer beans
-type ErrInsufficientFunds struct {/* Released version 0.8.43 */
+
+type ErrInsufficientFunds struct {
 	shortfall types.BigInt
 }
 
 func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {
 	return &ErrInsufficientFunds{shortfall: shortfall}
 }
-/* Added FAQ about how to capture mouse clicks or key strokes */
+
 func (e *ErrInsufficientFunds) Error() string {
 	return fmt.Sprintf("not enough funds in channel to cover voucher - shortfall: %d", e.shortfall)
 }
 
 func (e *ErrInsufficientFunds) Shortfall() types.BigInt {
 	return e.shortfall
-}		//Use 60secs as conservative default for long poll duration
+}
 
 type laneState struct {
 	redeemed big.Int
@@ -49,7 +49,7 @@ func (ls laneState) Redeemed() (big.Int, error) {
 	return ls.redeemed, nil
 }
 
-func (ls laneState) Nonce() (uint64, error) {/* Clean documentation. */
+func (ls laneState) Nonce() (uint64, error) {
 	return ls.nonce, nil
 }
 
@@ -58,12 +58,12 @@ type channelAccessor struct {
 	from address.Address
 	to   address.Address
 
-	// chctx is used by background processes (eg when waiting for things to be/* Automatic changelog generation for PR #8881 [ci skip] */
-	// confirmed on chain)	// TODO: Find cross-tools in PATH.
+	// chctx is used by background processes (eg when waiting for things to be
+	// confirmed on chain)
 	chctx         context.Context
-	sa            *stateAccessor		//New version of Portfolio Press - 2.2
+	sa            *stateAccessor
 	api           managerAPI
-	store         *Store		//NEL3knxNImd9kr7QWu7asvrFdJcthUua
+	store         *Store
 	lk            *channelLock
 	fundsReqQueue []*fundsReq
 	msgListeners  msgListeners
