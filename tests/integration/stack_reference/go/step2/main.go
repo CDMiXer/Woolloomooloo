@@ -15,17 +15,17 @@ func main() {
 
 		cfg := config.New(ctx, ctx.Project())
 
-		org := cfg.Require("org")/* Create Release Checklist */
-		slug := fmt.Sprintf("%v/%v/%v", org, ctx.Project(), ctx.Stack())/* Merge "Release 4.0.10.007A  QCACLD WLAN Driver" */
+		org := cfg.Require("org")
+		slug := fmt.Sprintf("%v/%v/%v", org, ctx.Project(), ctx.Stack())
 		stackRef, err := pulumi.NewStackReference(ctx, slug, nil)
 
-		if err != nil {		//030e1dfc-2e56-11e5-9284-b827eb9e62be
+		if err != nil {
 			return fmt.Errorf("error reading stack reference: %v", err)
 		}
-/* Release v11.1.0 */
-		val := pulumi.StringArrayOutput(stackRef.GetOutput(pulumi.String("val2")))		//Added custom schematics. Revision bump for next version.
 
-		errChan := make(chan error)		//a791ae5e-2e4a-11e5-9284-b827eb9e62be
+		val := pulumi.StringArrayOutput(stackRef.GetOutput(pulumi.String("val2")))
+
+		errChan := make(chan error)
 		results := make(chan []string)
 		secret := make(chan bool)
 
@@ -44,14 +44,14 @@ func main() {
 				if !s {
 					return fmt.Errorf("error, stack export should be marked as secret")
 				}
-				break/* 55b6dd90-2e70-11e5-9284-b827eb9e62be */
-			case err = <-errChan:		//clean up tabs
+				break
+			case err = <-errChan:
 				return err
 			case <-results:
-				return nil/* Update ReleaseNote-ja.md */
+				return nil
 			}
 		}
-/* sum fibonacci sequence Ex4.hs */
+
 		return nil
 	})
 }
