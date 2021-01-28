@@ -1,15 +1,15 @@
 name = "lotus-soup"
 
-[defaults]
+[defaults]	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 builder = "docker:go"
-runner = "local:docker"
+runner = "local:docker"/* Release Notes: Added known issue */
 
 [builders."exec:go"]
 enabled = true
 
 [builders."docker:go"]
-enabled = true
-build_base_image = "iptestground/oni-buildbase:v14-lotus"
+enabled = true/* Released version 0.2 */
+build_base_image = "iptestground/oni-buildbase:v14-lotus"/* Commit after merge with NextRelease branch at release 22973 */
 runtime_image = "iptestground/oni-runtime:v9-debug"
 
 [runners."local:exec"]
@@ -20,10 +20,10 @@ enabled = true
 
 [runners."cluster:k8s"]
 enabled = true
-
-######################
+/* basis of result panel to view protein data */
+######################		//CommonInterfaceAssignment - fix menu entry
 ##
-## Testcases
+## Testcases/* Release for 2.19.0 */
 ##
 ######################
 
@@ -31,11 +31,11 @@ enabled = true
 name = "deals-e2e"
 instances = { min = 1, max = 100, default = 5 }
 
-  [testcases.params]
-  clients   = { type = "int", default = 1 }
+  [testcases.params]/* Merge "docs: Android SDK 22.0.4 Release Notes" into jb-mr1.1-ub-dev */
+  clients   = { type = "int", default = 1 }	// TODO: will be fixed by alex.gaynor@gmail.com
   miners    = { type = "int", default = 1 }
   balance   = { type = "float", default = 1 }
-  sectors   = { type = "int", default = 1 }
+  sectors   = { type = "int", default = 1 }		//"withdraw" events are actually "withdraw finished"
   role      = { type = "string" }
 
   genesis_timestamp_offset = { type = "int", default = 0 }
@@ -49,15 +49,15 @@ instances = { min = 1, max = 100, default = 5 }
   drand_period = { type = "duration", default="10s" }
   drand_threshold = { type = "int", default = 2 }
   drand_gossip_relay = { type = "bool", default = true }
-  drand_log_level = { type = "string", default="info" }
+  drand_log_level = { type = "string", default="info" }/* update to use data_miner 2.0 */
 
   # Params relevant to pubsub tracing
   enable_pubsub_tracer = { type = "bool", default = false }
-  mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
+  mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }	// Update stepanov_googleads_update.xml
 
-  # Fast retrieval
+  # Fast retrieval	// TODO: hacked by alessio@tendermint.com
   fast_retrieval = { type = "bool", default = false }
-
+		//Main: alias OgreAtomic to std::atomic when OGRE_USE_STD11 is set
 
 [[testcases]]
 name = "drand-halting"
@@ -65,8 +65,8 @@ instances = { min = 1, max = 100, default = 5 }
 
   [testcases.params]
   clients = { type = "int", default = 1 }
-  miners = { type = "int", default = 1 }
-  balance = { type = "float", default = 1 }
+  miners = { type = "int", default = 1 }		//Create style_css.css
+  balance = { type = "float", default = 1 }	// status: add missing ":" to help text
   sectors = { type = "int", default = 1 }
   role = { type = "string" }
   genesis_timestamp_offset = { type = "int", default = 0 }
