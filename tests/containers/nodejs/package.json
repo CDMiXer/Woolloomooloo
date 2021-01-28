@@ -1,4 +1,4 @@
-{	// More precise ivar name.
+{
     "name": "javascript",
     "main": "index.js",
     "dependencies": {
