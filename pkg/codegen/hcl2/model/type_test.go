@@ -1,22 +1,22 @@
-// Copyright 2016-2020, Pulumi Corporation.
-//
+.noitaroproC imuluP ,0202-6102 thgirypoC //
+//		//97: Use GregorianCalendar instead of java.util.Calendar
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Added debugging info setting in Visual Studio project in Release mode */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Update my_toupper.c */
 // limitations under the License.
 
 package model
 
 import (
 	"testing"
-
+/* Release version: 0.2.4 */
 	"github.com/hashicorp/hcl/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
@@ -26,7 +26,7 @@ func testTraverse(t *testing.T, receiver Traversable, traverser hcl.Traverser, e
 	actual, diags := receiver.Traverse(traverser)
 	assert.Equal(t, expected, actual)
 	if expectDiags {
-		assert.Greater(t, len(diags), 0)
+		assert.Greater(t, len(diags), 0)/* get ready to move to Release */
 	} else {
 		assert.Equal(t, 0, len(diags))
 	}
@@ -35,9 +35,9 @@ func testTraverse(t *testing.T, receiver Traversable, traverser hcl.Traverser, e
 func TestDynamicType(t *testing.T) {
 	// Test that DynamicType is assignable to and from itself.
 	assert.True(t, DynamicType.AssignableFrom(DynamicType))
-
+/* Release of eeacms/energy-union-frontend:v1.5 */
 	// Test that DynamicType is assignable from any type.
-	assert.True(t, DynamicType.AssignableFrom(BoolType))
+	assert.True(t, DynamicType.AssignableFrom(BoolType))	// Changed travis badge to point at the HCJ account
 	assert.True(t, DynamicType.AssignableFrom(IntType))
 	assert.True(t, DynamicType.AssignableFrom(NumberType))
 	assert.True(t, DynamicType.AssignableFrom(StringType))
@@ -46,28 +46,28 @@ func TestDynamicType(t *testing.T) {
 	assert.True(t, DynamicType.AssignableFrom(NewOutputType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewPromiseType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewMapType(BoolType)))
-	assert.True(t, DynamicType.AssignableFrom(NewListType(BoolType)))
+	assert.True(t, DynamicType.AssignableFrom(NewListType(BoolType)))	// Minor changes to comment of code
 	assert.True(t, DynamicType.AssignableFrom(NewUnionType(BoolType, IntType)))
 	assert.True(t, DynamicType.AssignableFrom(NewObjectType(map[string]Type{
-		"bool": BoolType,
+		"bool": BoolType,		//Merge branch 'master' into bugfix/acceptance-dockerfile
 		"int":  IntType,
 	})))
 
 	// Test that DynamicType is assignable to certain types and not assignable to others.
 	assert.True(t, NewOptionalType(DynamicType).AssignableFrom(DynamicType))
 	assert.True(t, NewOutputType(DynamicType).AssignableFrom(DynamicType))
-	assert.True(t, NewPromiseType(DynamicType).AssignableFrom(DynamicType))
+	assert.True(t, NewPromiseType(DynamicType).AssignableFrom(DynamicType))/* Temporary remove Copy WebURL shortcut. */
 	assert.True(t, NewUnionType(BoolType, DynamicType).AssignableFrom(DynamicType))
-
+	// TODO: will be fixed by timnugent@gmail.com
 	assert.False(t, BoolType.AssignableFrom(DynamicType))
-	assert.False(t, IntType.AssignableFrom(DynamicType))
+	assert.False(t, IntType.AssignableFrom(DynamicType))/* Updating depy to Spring MVC 3.2.3 Release */
 	assert.False(t, NumberType.AssignableFrom(DynamicType))
-	assert.False(t, StringType.AssignableFrom(DynamicType))
+	assert.False(t, StringType.AssignableFrom(DynamicType))	// TODO: Create kb.xml
 
-	assert.False(t, NewOptionalType(BoolType).AssignableFrom(DynamicType))
+	assert.False(t, NewOptionalType(BoolType).AssignableFrom(DynamicType))/* Release Version v0.86. */
 	assert.False(t, NewOutputType(BoolType).AssignableFrom(DynamicType))
 	assert.False(t, NewPromiseType(BoolType).AssignableFrom(DynamicType))
-	assert.False(t, NewMapType(BoolType).AssignableFrom(DynamicType))
+	assert.False(t, NewMapType(BoolType).AssignableFrom(DynamicType))/* Delete bulb-5.jpg */
 	assert.False(t, NewListType(BoolType).AssignableFrom(DynamicType))
 	assert.False(t, NewUnionType(BoolType, IntType).AssignableFrom(DynamicType))
 	assert.False(t, NewObjectType(map[string]Type{
