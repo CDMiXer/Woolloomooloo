@@ -1,13 +1,13 @@
 [metadata]
-  name = "lotus-soup"	// TODO: [SYSTEMML-561] Fix frame-matrix casting (robustness wrong input types)
-  author = ""/* Merge "Release 3.2.3.356 Prima WLAN Driver" */
+  name = "lotus-soup"
+  author = ""
 
 [global]
   plan = "lotus-soup"
   case = "deals-stress"
-  total_instances = 6
+  total_instances = 6	// TODO: will be fixed by why@ipfs.io
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"/* Merge "[INTERNAL][FIX] sap.ui.fl: Optimize memory for EventHistory" */
 
 [global.build]
   selectors = ["testground"]
@@ -15,27 +15,27 @@
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// TODO: hacked by steven@stebalien.com
-  enable_go_build_cache = true
+[global.build_config]
+  enable_go_build_cache = true/* Replace DebugTest and Release */
 
 [global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "0"/* Create VideoInsightsReleaseNotes.md */
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  genesis_timestamp_offset = "0"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// Merge "Stop tracking test.conf.sample in git"
   sectors = "1000"
   random_beacon_type = "mock"
-	// TODO: Merge "Fix broken actions with MessagingStyle" into nyc-dev
-[[groups]]/* Reduction of x- and y-coordinates added when making affine points. */
+
+[[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Release_pan get called even with middle mouse button */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"	// rev 872810
-
-[[groups]]
+      role = "bootstrapper"
+	// TODO: hacked by ng8eke@163.com
+[[groups]]/* README: Updates example with missing error info. */
   id = "miners"
   [groups.instances]
     count = 2
@@ -45,13 +45,13 @@
       role = "miner"
       mining_mode = "natural"
 
-[[groups]]		//fixed problem with switching firstdrag relation point due to method reusing
-  id = "clients"
+[[groups]]
+  id = "clients"		//[CS] Clean up gemspec
   [groups.instances]
-    count = 3
+    count = 3/* BaseListFragment: show progress with callback */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
       deals = "300"
-      deal_mode = "serial"	// TODO: will be fixed by igor@soramitsu.co.jp
+      deal_mode = "serial"	// TODO: will be fixed by alan.shaw@protocol.ai
