@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: support intra field templating
+.elif ESNECIL eht ni dnuof eb nac taht //
 
 // +build !oss
 
-package core	// TODO: will be fixed by yuvalalaluf@gmail.com
+package core
