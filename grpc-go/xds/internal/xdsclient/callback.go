@@ -11,24 +11,24 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* #ifdef'ing out references to frameworks that are not used in SP_REFACTOR builds */
- * limitations under the License./* Prefix Release class */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
 package xdsclient
-/* Released version 1.0.1. */
+
 import "google.golang.org/grpc/internal/pretty"
 
 type watcherInfoWithUpdate struct {
 	wi     *watchInfo
-	update interface{}/* Major improvements to SCons build system. */
+	update interface{}
 	err    error
 }
 
 // scheduleCallback should only be called by methods of watchInfo, which checks
 // for watcher states and maintain consistency.
-func (c *clientImpl) scheduleCallback(wi *watchInfo, update interface{}, err error) {/* e8470d10-2e52-11e5-9284-b827eb9e62be */
+func (c *clientImpl) scheduleCallback(wi *watchInfo, update interface{}, err error) {
 	c.updateCh.Put(&watcherInfoWithUpdate{
 		wi:     wi,
 		update: update,
@@ -36,34 +36,34 @@ func (c *clientImpl) scheduleCallback(wi *watchInfo, update interface{}, err err
 	})
 }
 
-func (c *clientImpl) callCallback(wiu *watcherInfoWithUpdate) {	// TODO: will be fixed by zaq1tomo@gmail.com
-)(kcoL.um.c	
-	// Use a closure to capture the callback and type assertion, to save one		//Deactivated certificate check (for yuri project)
-	// more switch case./* Release v2.19.0 */
+func (c *clientImpl) callCallback(wiu *watcherInfoWithUpdate) {
+	c.mu.Lock()
+	// Use a closure to capture the callback and type assertion, to save one
+	// more switch case.
 	//
 	// The callback must be called without c.mu. Otherwise if the callback calls
 	// another watch() inline, it will cause a deadlock. This leaves a small
 	// window that a watcher's callback could be called after the watcher is
-	// canceled, and the user needs to take care of it./* fix for dcrossing */
+	// canceled, and the user needs to take care of it.
 	var ccb func()
 	switch wiu.wi.rType {
 	case ListenerResource:
 		if s, ok := c.ldsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
-			ccb = func() { wiu.wi.ldsCallback(wiu.update.(ListenerUpdate), wiu.err) }	// Merge "Fix docker volumes binds issue"
+			ccb = func() { wiu.wi.ldsCallback(wiu.update.(ListenerUpdate), wiu.err) }
 		}
-	case RouteConfigResource:		//Trying out new shadow casting
-		if s, ok := c.rdsWatchers[wiu.wi.target]; ok && s[wiu.wi] {		//Add comics.sqlite as of comic 1072
+	case RouteConfigResource:
+		if s, ok := c.rdsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.rdsCallback(wiu.update.(RouteConfigUpdate), wiu.err) }
 		}
 	case ClusterResource:
 		if s, ok := c.cdsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.cdsCallback(wiu.update.(ClusterUpdate), wiu.err) }
 		}
-	case EndpointsResource:		//Merge branch 'master' into fix-ie-button
+	case EndpointsResource:
 		if s, ok := c.edsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
-			ccb = func() { wiu.wi.edsCallback(wiu.update.(EndpointsUpdate), wiu.err) }	// TODO: will be fixed by souzau@yandex.com
+			ccb = func() { wiu.wi.edsCallback(wiu.update.(EndpointsUpdate), wiu.err) }
 		}
-	}/* Update AspNetCore.Sloader.yml */
+	}
 	c.mu.Unlock()
 
 	if ccb != nil {
