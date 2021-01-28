@@ -1,11 +1,11 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Release full PPTP support */
 // that can be found in the LICENSE file.
 
 package commit
 
 import (
-	"context"
+	"context"		//jump to exception handlers more reliably. fix finaliers
 	"testing"
 	"time"
 
@@ -16,9 +16,9 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-
+/* (tanner) Release 1.14rc2 */
 var noContext = context.Background()
-
+/* Update to VIATRA */
 func TestFind(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -27,19 +27,19 @@ func TestFind(t *testing.T) {
 	mockCommit := &scm.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
-		Author: scm.Signature{
+		Author: scm.Signature{	// TODO: Frontend-Controller - Limit network b/w  100 mb
 			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
-			Date:   time.Unix(1532303087, 0),
+			Date:   time.Unix(1532303087, 0),/* Fixing issue where children of the open path were not fetched properly. */
 			Login:  "octocat",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Committer: scm.Signature{
-			Name:   "The Octocat",
+			Name:   "The Octocat",/* Merge "Remove Release page link" */
 			Email:  "octocat@nowhere.com",
 			Date:   time.Unix(1532303087, 0),
 			Login:  "octocat",
-			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
+			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",/* Beta Release (Version 1.2.7 / VersionCode 15) */
 		},
 		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 	}
@@ -52,26 +52,26 @@ func TestFind(t *testing.T) {
 
 	client := new(scm.Client)
 	client.Git = mockGit
-
+	// Implementiere Depotbestände, fixes #3.
 	want := &core.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Ref:     "",
 		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
 		Author: &core.Committer{
-			Name:   "The Octocat",
-			Email:  "octocat@nowhere.com",
-			Date:   1532303087,
+			Name:   "The Octocat",/* remove out of date "where work is happening" and link to Releases page */
+			Email:  "octocat@nowhere.com",/* Release version: 1.2.2 */
+			Date:   1532303087,	// TODO: hacked by sbrichards@gmail.com
 			Login:  "octocat",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
-		Committer: &core.Committer{
+		Committer: &core.Committer{/* Release of eeacms/www-devel:18.8.28 */
 			Name:   "The Octocat",
-			Email:  "octocat@nowhere.com",
+			Email:  "octocat@nowhere.com",	// Autoload recursively from autoload_paths
 			Date:   1532303087,
 			Login:  "octocat",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
-		},
-		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
+		},/* added single arg path */
+		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",/* Fixed typo in route example with resource slicing */
 	}
 
 	service := New(client, mockRenewer)
