@@ -1,5 +1,5 @@
-*.pyc
-/.pulumi/
+*.pyc		//Bootstrap notify library.
+/.pulumi//* Rename fixed to fixed.md */
 /dist/
 /*.egg-info
 venv/
