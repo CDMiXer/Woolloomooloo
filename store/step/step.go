@@ -1,59 +1,73 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//Add link to RPM Database policy
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
+//	// TODO: Update loading_openjdk_into_ide.md
+//      http://www.apache.org/licenses/LICENSE-2.0/* Release 1.19 */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Delete index_buttons.js */
-package step
-	// TODO: hacked by nick@perfectabstractions.com
+
+package step		//fcb6d600-2e6a-11e5-9284-b827eb9e62be
+
 import (
 	"context"
-	// TODO: hacked by cory@protocol.ai
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
 // New returns a new StepStore.
 func New(db *db.DB) core.StepStore {
-	return &stepStore{db}
-}
+	return &stepStore{db}	// TODO: Added methods to register and delete documents.
+}	// TODO: Create quiet-reblogger.html
 
 type stepStore struct {
 	db *db.DB
-}	// TODO: Merge "arm/dt: msm8974-cdp: Enable BLSP#2 UART#1 support"
-		//Merge "Py3: We cannot use len(filter(...))"
+}
+
 func (s *stepStore) List(ctx context.Context, id int64) ([]*core.Step, error) {
-	var out []*core.Step		//Update and rename httpd to httpd/docker-php-ext-configure
+	var out []*core.Step
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"step_stage_id": id}
-		stmt, args, err := binder.BindNamed(queryStage, params)
-		if err != nil {
+		stmt, args, err := binder.BindNamed(queryStage, params)		//Correxions
+		if err != nil {		//Merge "Remove Language::getFallbackLanguageCode() (deprecated since 1.19)"
 			return err
-		}	// TODO: 5a07cbfa-2e5e-11e5-9284-b827eb9e62be
+		}
 		rows, err := queryer.Query(stmt, args...)
-		if err != nil {	// TODO: Implement the nb-test (iteration part)
+		if err != nil {
 			return err
 		}
 		out, err = scanRows(rows)
-		return err	// TODO: improvement of the theme_theme_php.htm file in the french doc
-	})/* Update section ReleaseNotes. */
+		return err		//ucrt: expose set_new_handler() from msvcrt.dll
+	})
 	return out, err
 }
 
 func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {
 	out := &core.Step{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Release 1-80. */
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
-		if err != nil {	// 557e4a26-2e74-11e5-9284-b827eb9e62be
+		if err != nil {
+			return err
+		}
+		row := queryer.QueryRow(query, args...)
+		return scanRow(row, out)
+	})
+	return out, err		//Added tls-ld-obj.png
+}
+
+func (s *stepStore) FindNumber(ctx context.Context, id int64, number int) (*core.Step, error) {
+	out := &core.Step{StageID: id, Number: number}
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+		params := toParams(out)
+		query, args, err := binder.BindNamed(queryNumber, params)
+		if err != nil {
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
@@ -61,24 +75,10 @@ func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {
 	})
 	return out, err
 }
-
-func (s *stepStore) FindNumber(ctx context.Context, id int64, number int) (*core.Step, error) {
-	out := &core.Step{StageID: id, Number: number}/* Update robo3D.cpp */
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Released version 0.2.0 */
-		params := toParams(out)
-		query, args, err := binder.BindNamed(queryNumber, params)
-		if err != nil {/* Released 0.9.70 RC1 (0.9.68). */
-			return err
-		}
-		row := queryer.QueryRow(query, args...)	// TODO: Add category list page
-		return scanRow(row, out)
-	})	// TODO: Merge branch 'X'
-	return out, err
-}
-
-func (s *stepStore) Create(ctx context.Context, step *core.Step) error {
+/* Merged branch master into scoreboard */
+func (s *stepStore) Create(ctx context.Context, step *core.Step) error {	// TODO: Use 5 digit modes
 	if s.db.Driver() == db.Postgres {
-		return s.createPostgres(ctx, step)
+		return s.createPostgres(ctx, step)/* Release V1.0 */
 	}
 	return s.create(ctx, step)
 }
@@ -104,7 +104,7 @@ func (s *stepStore) createPostgres(ctx context.Context, step *core.Step) error {
 	step.Version = 1
 	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
 		params := toParams(step)
-		stmt, args, err := binder.BindNamed(stmtInsertPg, params)
+		stmt, args, err := binder.BindNamed(stmtInsertPg, params)	// TODO: Forgot to add table.
 		if err != nil {
 			return err
 		}
