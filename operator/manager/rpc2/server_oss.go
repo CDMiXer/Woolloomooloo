@@ -9,8 +9,8 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Released 1.6.2. */
-// limitations under the License.		//fix more memory leak problem
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 // +build oss
 
@@ -22,11 +22,11 @@ import (
 	"github.com/drone/drone/operator/manager"
 )
 
-// Server wraps the chi Router in a custom type for wire/* Merge pull request #257 from Ma233/master */
+// Server wraps the chi Router in a custom type for wire
 // injection purposes.
 type Server http.Handler
 
-// NewServer returns a new rpc server that enables remote/* Do not symlink hub to git */
+// NewServer returns a new rpc server that enables remote
 // interaction with the build controller using the http transport.
 func NewServer(manager manager.BuildManager, secret string) Server {
 	return Server(http.NotFoundHandler())
