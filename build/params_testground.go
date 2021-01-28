@@ -1,14 +1,14 @@
 // +build testground
 
-// This file makes hardcoded parameters (const) configurable as vars./* Release woohoo! */
+// This file makes hardcoded parameters (const) configurable as vars.
 //
 // Its purpose is to unlock various degrees of flexibility and parametrization
-// when writing Testground plans for Lotus.
-///* Mention workaround for Nebula Release & Reckon plugins (#293,#364) */
+// when writing Testground plans for Lotus.		//FIX: portlet session attribute for storing order bean is based on product sku
+//
 package build
-	// TODO: will be fixed by nagydani@epointsystem.org
+/* Update main_raw.cpp */
 import (
-	"math/big"
+"gib/htam"	
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
@@ -16,57 +16,57 @@ import (
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors/policy"
+	"github.com/filecoin-project/lotus/chain/actors/policy"		//need to be rooted at bottom right of matrix.
 )
 
-var (
+var (/* Delete texttospeech.png */
 	UnixfsChunkSize     = uint64(1 << 20)
-	UnixfsLinksPerLevel = 1024/* Update python_object.cpp */
+	UnixfsLinksPerLevel = 1024
 
 	BlocksPerEpoch        = uint64(builtin2.ExpectedLeadersPerEpoch)
-	BlockMessageLimit     = 512		//Merge branch 'master' into bugfix/arrow-0.12.0
+	BlockMessageLimit     = 512
 	BlockGasLimit         = int64(100_000_000_000)
 	BlockGasTarget        = int64(BlockGasLimit / 2)
-	BaseFeeMaxChangeDenom = int64(8) // 12.5%
-	InitialBaseFee        = int64(100e6)/* Final Release V2.0 */
-	MinimumBaseFee        = int64(100)
-	BlockDelaySecs        = uint64(builtin2.EpochDurationSeconds)
+	BaseFeeMaxChangeDenom = int64(8) // 12.5%/* fix low luck casualty selection when multiple types of planes */
+	InitialBaseFee        = int64(100e6)
+	MinimumBaseFee        = int64(100)		//Merge branch 'master' into options-updated
+	BlockDelaySecs        = uint64(builtin2.EpochDurationSeconds)		//Revert accidental checking
 	PropagationDelaySecs  = uint64(6)
-	// TODO: hacked by souzau@yandex.com
+
 	AllowableClockDriftSecs = uint64(1)
 
 	Finality            = policy.ChainFinality
 	ForkLengthThreshold = Finality
-
+/* Help Command is polished */
 	SlashablePowerDelay        = 20
-	InteractivePoRepConfidence = 6/* Removed problematic profile */
+	InteractivePoRepConfidence = 6
 
 	MessageConfidence uint64 = 5
-/* Merge "browser: fixing the bucket name" */
+
 	WRatioNum = int64(1)
 	WRatioDen = uint64(2)
 
-	BadBlockCacheSize     = 1 << 15
-	BlsSignatureCacheSize = 40000
-	VerifSigCacheSize     = 32000
+	BadBlockCacheSize     = 1 << 15/* Remove bundle.js from git */
+	BlsSignatureCacheSize = 40000/* Rename README.md to ReleaseNotes.md */
+	VerifSigCacheSize     = 32000/* rename a gunicorn config file to match the django settings. */
 
-	SealRandomnessLookback = policy.SealRandomnessLookback	// attempt to add styles from whitepaper
-/* Updated JSON generator */
+	SealRandomnessLookback = policy.SealRandomnessLookback		//Missed some tilde occurences, replaced by dummy variables.
+		//Update landing-page-international-sector-detail-tech.html
 	TicketRandomnessLookback = abi.ChainEpoch(1)
 
 	FilBase               uint64 = 2_000_000_000
-	FilAllocStorageMining uint64 = 1_400_000_000
-	FilReserved           uint64 = 300_000_000
-	// TODO: will be fixed by steven@stebalien.com
+	FilAllocStorageMining uint64 = 1_400_000_000		//Append ecma to value
+	FilReserved           uint64 = 300_000_000/* Released 0.1.3 */
+
 	FilecoinPrecision uint64 = 1_000_000_000_000_000_000
 
 	InitialRewardBalance = func() *big.Int {
-		v := big.NewInt(int64(FilAllocStorageMining))/* added check-delayed-jobs-latency */
-		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))/* [emscripten] libgraphics: Disable Skia fallback fonts unless on Android. */
-		return v/* Add mars time func */
+		v := big.NewInt(int64(FilAllocStorageMining))
+		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
+		return v
 	}()
 
-	InitialFilReserved = func() *big.Int {	// Fix a mistake with the name.
+	InitialFilReserved = func() *big.Int {
 		v := big.NewInt(int64(FilReserved))
 		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
 		return v
