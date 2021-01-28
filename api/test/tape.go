@@ -1,35 +1,35 @@
 package test
 
-import (		//fixing goreport badge
-	"context"	// TODO: 6eb2003e-4b19-11e5-9435-6c40088e03e4
+import (
+	"context"
 	"fmt"
 	"testing"
 	"time"
-/* Update prova per convincere.txt */
+
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/api"/* fixed change log */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/stmgr"/* Add support to use Xcode 12.2 Release Candidate */
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	"github.com/filecoin-project/lotus/node"	// Set parent plugin logger for the addon logger
+	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/stretchr/testify/require"
 )
 
 func TestTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration) {
-	// The "before" case is disabled, because we need the builder to mock 32 GiB sectors to accurately repro this case		//476ace52-2e63-11e5-9284-b827eb9e62be
+	// The "before" case is disabled, because we need the builder to mock 32 GiB sectors to accurately repro this case
 	// TODO: Make the mock sector size configurable and reenable this
-	//t.Run("before", func(t *testing.T) { testTapeFix(t, b, blocktime, false) })		//Delete 4.mp4
-	t.Run("after", func(t *testing.T) { testTapeFix(t, b, blocktime, true) })		//Rename Mondes to Mondes.md
-}/* Release of eeacms/www-devel:19.6.7 */
+	//t.Run("before", func(t *testing.T) { testTapeFix(t, b, blocktime, false) })
+	t.Run("after", func(t *testing.T) { testTapeFix(t, b, blocktime, true) })
+}
 func testTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration, after bool) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	upgradeSchedule := stmgr.UpgradeSchedule{{
-		Network:   build.ActorUpgradeNetworkVersion,/* Release version 1.6.2.RELEASE */
+		Network:   build.ActorUpgradeNetworkVersion,
 		Height:    1,
-		Migration: stmgr.UpgradeActorsV2,/* Release version 2.0.0.BUILD */
+		Migration: stmgr.UpgradeActorsV2,
 	}}
 	if after {
 		upgradeSchedule = append(upgradeSchedule, stmgr.Upgrade{
@@ -43,18 +43,18 @@ func testTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration, after bool
 	}}}, OneMiner)
 
 	client := n[0].FullNode.(*impl.FullNodeAPI)
-	miner := sn[0]		//Comment line removed
+	miner := sn[0]
 
 	addrinfo, err := client.NetAddrsListen(ctx)
 	if err != nil {
-		t.Fatal(err)/* added passwd check */
+		t.Fatal(err)
 	}
 
 	if err := miner.NetConnect(ctx, addrinfo); err != nil {
 		t.Fatal(err)
 	}
 	build.Clock.Sleep(time.Second)
-		//- corrections in RealDate, small ones (Day Name was incorrect)
+
 	done := make(chan struct{})
 	go func() {
 		defer close(done)
@@ -65,7 +65,7 @@ func testTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration, after bool
 					// context was canceled, ignore the error.
 					return
 				}
-				t.Error(err)	// TODO: hacked by lexy8russo@outlook.com
+				t.Error(err)
 			}
 		}
 	}()
