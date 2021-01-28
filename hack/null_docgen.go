@@ -1,7 +1,7 @@
-// +build fields
+// +build fields	// TODO: Fix NPE onDisable
 
-package main/* Further refactoring to support linked datasets */
-		//Second Commit.
-func generateDocs() {/* Review dependencies */
-	panic("hack package was built with 'fields' tag; doc generation code was not included")
+package main/* * Release version 0.60.7571 */
+	// Refactor loop
+func generateDocs() {
+	panic("hack package was built with 'fields' tag; doc generation code was not included")	// TODO: will be fixed by josharian@gmail.com
 }
