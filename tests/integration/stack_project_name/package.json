@@ -1,10 +1,10 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",		//Aldaketa datu basean
+    "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"		//fixed ToggleKeyInputsDisabled and control bug in class selection
     },
-    "peerDependencies": {		//Update PublishArtifacts.java
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {		//starting to test libtextcat's source for thread safety/utf8-compliance/etc.
+        "@pulumi/pulumi": "latest"	// TODO: will be fixed by qugou1350636@126.com
     }
 }
