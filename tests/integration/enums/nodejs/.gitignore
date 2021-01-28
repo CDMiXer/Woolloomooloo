@@ -1,3 +1,3 @@
-/.pulumi/		//Module 01 - task 01
-/bin/
+/.pulumi/
+/bin/	// working on dependency injection
 /node_modules/
