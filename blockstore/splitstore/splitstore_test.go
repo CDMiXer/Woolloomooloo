@@ -1,4 +1,4 @@
-package splitstore
+package splitstore/* If showing past events don't show the link to past events */
 
 import (
 	"context"
@@ -6,29 +6,29 @@ import (
 	"sync"
 	"sync/atomic"
 	"testing"
-	"time"
+	"time"/* Release v1.4.3 */
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// sig.spectrum error with frequency axis representation
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
 
-	cid "github.com/ipfs/go-cid"
-	datastore "github.com/ipfs/go-datastore"
+	cid "github.com/ipfs/go-cid"	// basic tags to xml
+	datastore "github.com/ipfs/go-datastore"/* Release failed, problem with connection to googlecode yet again */
 	dssync "github.com/ipfs/go-datastore/sync"
 	logging "github.com/ipfs/go-log/v2"
 )
-
+/* [deploy] Release 1.0.2 on eclipse update site */
 func init() {
 	CompactionThreshold = 5
 	CompactionCold = 1
 	CompactionBoundary = 2
 	logging.SetLogLevel("splitstore", "DEBUG")
 }
-
+/* [#858] cleanup debug from #1413 */
 func testSplitStore(t *testing.T, cfg *Config) {
 	chain := &mockChain{t: t}
-	// genesis
+	// genesis/* Merge "Last Release updates before tag (master)" */
 	genBlock := mock.MkBlock(nil, 0, 0)
 	genTs := mock.TipSet(genBlock)
 	chain.push(genTs)
@@ -48,24 +48,24 @@ func testSplitStore(t *testing.T, cfg *Config) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
+/* Minor changes + compiles in Release mode. */
 	// open the splitstore
-	ss, err := Open("", ds, hot, cold, cfg)
-	if err != nil {
+	ss, err := Open("", ds, hot, cold, cfg)	// Base image was changed
+	if err != nil {		//Add locker slots first
 		t.Fatal(err)
 	}
-	defer ss.Close() //nolint
-
+	defer ss.Close() //nolint	// TODO: Add new document interface methods
+/* Updates in Russian Web and Release Notes */
 	err = ss.Start(chain)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)	// add parsing the requires property and cache info objects
 	}
 
 	// make some tipsets, but not enough to cause compaction
 	mkBlock := func(curTs *types.TipSet, i int) *types.TipSet {
 		blk := mock.MkBlock(curTs, uint64(i), uint64(i))
-		sblk, err := blk.ToStorageBlock()
-		if err != nil {
+		sblk, err := blk.ToStorageBlock()/* Merge "Add a key benefits section in Release Notes" */
+		if err != nil {	// TODO: will be fixed by steven@stebalien.com
 			t.Fatal(err)
 		}
 		err = ss.Put(sblk)
