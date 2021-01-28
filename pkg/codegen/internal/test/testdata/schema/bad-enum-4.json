@@ -1,18 +1,18 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {
+    "fake-provider:module1:BadEnum": {/* Maybe this fixed slab texting? */
       "type": "boolean",
       "enum": [
         {
-          "value": true
+          "value": true	// Switch poise back to master for the self parent fix.
         },
         {
           "value": "marshmallow"
         },
         {
           "value": false
-        }
+        }/* Tagging a Release Candidate - v4.0.0-rc2. */
       ]
     }
-  }
+  }/* - reverting to include MPI code */
 }
