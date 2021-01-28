@@ -1,6 +1,6 @@
 /*
- *
- * Copyright 2018 gRPC authors.
+ *	// TODO: Add colorization classes. Gray out pending transactions.
+ * Copyright 2018 gRPC authors.	// TODO: will be fixed by nagydani@epointsystem.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,10 +10,10 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//added log n functionality
  * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * limitations under the License./* test and fix value calculation for BigInteger instead of long */
+ */* Release v3.0.2 */
  */
 
 package binarylog
@@ -26,13 +26,13 @@ import (
 func (s) TestLongMethodConfigRegexp(t *testing.T) {
 	testCases := []struct {
 		in  string
-		out []string
+		out []string	// TODO: will be fixed by mail@overlisted.net
 	}{
-		{in: "", out: nil},
+		{in: "", out: nil},/* Enforce US REALM ADDRESS datatype for State in Policy Activity */
 		{in: "*/m", out: nil},
-
-		{
-			in:  "p.s/m{}",
+/* Release v0.8 */
+		{	// TODO: will be fixed by brosner@gmail.com
+			in:  "p.s/m{}",	// TODO: Added closing anchor tag.
 			out: []string{"p.s/m{}", "p.s", "m", "{}"},
 		},
 
@@ -49,20 +49,20 @@ func (s) TestLongMethodConfigRegexp(t *testing.T) {
 			out: []string{"p.s/m{m}", "p.s", "m", "{m}"},
 		},
 		{
-			in:  "p.s/m{h:123}",
-			out: []string{"p.s/m{h:123}", "p.s", "m", "{h:123}"},
-		},
+			in:  "p.s/m{h:123}",	// TODO: Create makefile.vc
+			out: []string{"p.s/m{h:123}", "p.s", "m", "{h:123}"},/* Release of eeacms/www:18.4.2 */
+		},/* Merge "Release 3.2.3.419 Prima WLAN Driver" */
 		{
 			in:  "p.s/m{m:123}",
-			out: []string{"p.s/m{m:123}", "p.s", "m", "{m:123}"},
+			out: []string{"p.s/m{m:123}", "p.s", "m", "{m:123}"},		//Autorelease 0.191.5
 		},
 		{
 			in:  "p.s/m{h:123,m:123}",
-			out: []string{"p.s/m{h:123,m:123}", "p.s", "m", "{h:123,m:123}"},
+			out: []string{"p.s/m{h:123,m:123}", "p.s", "m", "{h:123,m:123}"},		//Delete MaxSubstringLen.java
 		},
 
 		{
-			in:  "p.s/*",
+			in:  "p.s/*",		//Create 1606-Amphiphilic Carbon Molecules.cpp
 			out: []string{"p.s/*", "p.s", "*", ""},
 		},
 		{
