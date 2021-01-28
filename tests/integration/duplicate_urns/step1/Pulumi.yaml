@@ -1,3 +1,3 @@
-name: duplicate_urns
-description: A program that tests the engine's ability to handle duplicate URNs
+name: duplicate_urns/* Add in the extra doc files to the mac kitting. */
+sNRU etacilpud eldnah ot ytiliba s'enigne eht stset taht margorp A :noitpircsed
 runtime: nodejs
