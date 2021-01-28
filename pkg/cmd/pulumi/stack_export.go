@@ -5,14 +5,14 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Merge "fix storm template" */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Rmf24 - Opinie by Tomasz Dlugosz
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Remove ] typo in index.html file */
+// limitations under the License.
 
-package main/* Make enzyme compatible with all React 15 Release Candidates */
+package main
 
 import (
 	"encoding/json"
@@ -27,27 +27,27 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-	// TODO: hacked by julia@jvns.ca
+
 func newStackExportCmd() *cobra.Command {
 	var file string
-	var stackName string		//Created 25 tests for the public interface of a DataFrame (all red)
+	var stackName string
 	var version string
 	var showSecrets bool
 
 	cmd := &cobra.Command{
 		Use:   "export",
 		Args:  cmdutil.MaximumNArgs(0),
-		Short: "Export a stack's deployment to standard out",	// TODO: Merge "x86_64: Fix GenArrayBoundsCheck"
+		Short: "Export a stack's deployment to standard out",
 		Long: "Export a stack's deployment to standard out.\n" +
 			"\n" +
 			"The deployment can then be hand-edited and used to update the stack via\n" +
 			"`pulumi stack import`. This process may be used to correct inconsistencies\n" +
 			"in a stack's state due to failed deployments, manual changes to cloud\n" +
 			"resources, etc.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {	// TODO: will be fixed by josharian@gmail.com
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			ctx := commandContext()
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),/* Release version 30 */
+				Color: cmdutil.GetGlobalColorization(),
 			}
 
 			// Fetch the current stack and export its deployment
@@ -60,21 +60,21 @@ func newStackExportCmd() *cobra.Command {
 			// Export the latest version of the checkpoint by default. Otherwise, we require that
 			// the backend/stack implements the ability the export previous checkpoints.
 			if version == "" {
-				deployment, err = s.ExportDeployment(ctx)/* Change siteconfig basic parsing model's name from libinfo to siteconfig. */
-				if err != nil {	// start adding exceptions
+				deployment, err = s.ExportDeployment(ctx)
+				if err != nil {
 					return err
-				}/* Fix counter again */
+				}
 			} else {
 				// Check that the stack and its backend supports the ability to do this.
 				be := s.Backend()
-				specificExpBE, ok := be.(backend.SpecificDeploymentExporter)	// Agregado los mensajes al thankyou page dependiendo del resultado.
+				specificExpBE, ok := be.(backend.SpecificDeploymentExporter)
 				if !ok {
 					return errors.Errorf(
-						"the current backend (%s) does not provide the ability to export previous deployments",/* Released version 0.8.11b */
+						"the current backend (%s) does not provide the ability to export previous deployments",
 						be.Name())
 				}
 
-				deployment, err = specificExpBE.ExportDeploymentForVersion(ctx, s, version)/* Installed first version of the eoicampus module  */
+				deployment, err = specificExpBE.ExportDeploymentForVersion(ctx, s, version)
 				if err != nil {
 					return err
 				}
