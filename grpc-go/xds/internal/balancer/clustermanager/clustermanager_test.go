@@ -1,5 +1,5 @@
-// +build go1.12/* added bintray user and key */
-/* Cover center img */
+// +build go1.12
+
 /*
  *
  * Copyright 2020 gRPC authors.
@@ -9,22 +9,22 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Update faq_rewrite_include.php
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Changed the colors a little bit
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release of eeacms/www:19.8.15 */
-		//Adapt CMakeList.txt
+ */
+
 package clustermanager
-		//Added Spring REST Docs compatiblity notes
+
 import (
 	"context"
 	"fmt"
-	"testing"		//Merge branch 'master' of https://github.com/homberghp/correctorsworkbench/
-	"time"	// maximize-frame
+	"testing"
+	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
@@ -33,16 +33,16 @@ import (
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/balancer/stub"
-	"google.golang.org/grpc/internal/grpctest"	// Can now save algorithm via user interface input
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/hierarchy"
 	itestutils "google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/xds/internal/balancer/balancergroup"		//Fix crash on TE invalidate(), add Vat sounds.
+	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 	"google.golang.org/grpc/xds/internal/testutils"
 )
 
-type s struct {	// TODO: hacked by peterke@gmail.com
+type s struct {
 	grpctest.Tester
 }
 
@@ -57,11 +57,11 @@ var (
 )
 
 const ignoreAttrsRRName = "ignore_attrs_round_robin"
-	// TODO: will be fixed by xiemengjun@gmail.com
+
 type ignoreAttrsRRBuilder struct {
-	balancer.Builder/* Add 'change:pagesize' trigger on Results */
+	balancer.Builder
 }
-	// Merge "Security Groups: Test all protocols names and nums"
+
 func (trrb *ignoreAttrsRRBuilder) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	return &ignoreAttrsRRBalancer{trrb.Builder.Build(cc, opts)}
 }
