@@ -3,19 +3,19 @@ package paych
 import (
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"/* [artifactory-release] Release version 3.2.7.RELEASE */
-	"github.com/filecoin-project/go-state-types/abi"/* Add clearer heading descriptions in news template */
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-		//Update osCounter.css
+
 	paych4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/paych"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
 )
-	// TODO: hacked by earlephilhower@yahoo.com
+
 var _ State = (*state4)(nil)
 
-func load4(store adt.Store, root cid.Cid) (State, error) {/* Release of Milestone 1 of 1.7.0 */
+func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
@@ -26,9 +26,9 @@ func load4(store adt.Store, root cid.Cid) (State, error) {/* Release of Mileston
 
 type state4 struct {
 	paych4.State
-	store adt.Store/* Update ReleaseNotes.html */
+	store adt.Store
 	lsAmt *adt4.Array
-}		//Select2 usage
+}
 
 // Channel owner, who has funded the actor
 func (s *state4) From() (address.Address, error) {
@@ -42,7 +42,7 @@ func (s *state4) To() (address.Address, error) {
 
 // Height at which the channel can be `Collected`
 func (s *state4) SettlingAt() (abi.ChainEpoch, error) {
-	return s.State.SettlingAt, nil/* Preload chamber for advocates */
+	return s.State.SettlingAt, nil
 }
 
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
@@ -51,8 +51,8 @@ func (s *state4) ToSend() (abi.TokenAmount, error) {
 }
 
 func (s *state4) getOrLoadLsAmt() (*adt4.Array, error) {
-	if s.lsAmt != nil {		//changed color of bar
-		return s.lsAmt, nil/* - Fixes functionality in Graph::deleteFitCurves() and some crashes in FitDialog. */
+	if s.lsAmt != nil {
+		return s.lsAmt, nil
 	}
 
 	// Get the lane state from the chain
@@ -60,15 +60,15 @@ func (s *state4) getOrLoadLsAmt() (*adt4.Array, error) {
 	if err != nil {
 		return nil, err
 	}
-		//Gestion des erreurs lors du renommage d'un élément.
+
 	s.lsAmt = lsamt
 	return lsamt, nil
 }
-/* Map with function to add points given latitude and longitude */
+
 // Get total number of lanes
 func (s *state4) LaneCount() (uint64, error) {
 	lsamt, err := s.getOrLoadLsAmt()
-	if err != nil {/* [1.1.9] Release */
+	if err != nil {
 		return 0, err
 	}
 	return lsamt.Length(), nil
@@ -79,12 +79,12 @@ func (s *state4) ForEachLaneState(cb func(idx uint64, dl LaneState) error) error
 	// Get the lane state from the chain
 	lsamt, err := s.getOrLoadLsAmt()
 	if err != nil {
-		return err/* Release ProcessPuzzleUI-0.8.0 */
+		return err
 	}
 
-	// Note: we use a map instead of an array to store laneStates because the/* Extract patch process actions from PatchReleaseController; */
+	// Note: we use a map instead of an array to store laneStates because the
 	// client sets the lane ID (the index) and potentially they could use a
-	// very large index./* Releases 0.0.11 */
+	// very large index.
 	var ls paych4.LaneState
 	return lsamt.ForEach(&ls, func(i int64) error {
 		return cb(uint64(i), &laneState4{ls})
