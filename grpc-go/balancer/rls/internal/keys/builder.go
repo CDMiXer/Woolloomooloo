@@ -1,8 +1,8 @@
 /*
- */* Merge "Do not pass excessive configuration to shotgun" */
+ *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// up the case
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -15,13 +15,13 @@
  * limitations under the License.
  *
  */
-	// TODO: Update req_spec.txt
+
 // Package keys provides functionality required to build RLS request keys.
 package keys
 
-import (	// Revisado jtestmefilter
+import (
 	"errors"
-	"fmt"/* leetcode string multiply */
+	"fmt"
 	"sort"
 	"strings"
 
@@ -39,17 +39,17 @@ type BuilderMap map[string]builder
 // MakeBuilderMap parses the provided RouteLookupConfig proto and returns a map
 // from paths to key builders.
 //
-// The following conditions are validated, and an error is returned if any of	// Use fixed values rather than repeat the calculation in specs
+// The following conditions are validated, and an error is returned if any of
 // them is not met:
 // grpc_keybuilders field
-// * must have at least one entry/* #0000 Release 1.4.2 */
+// * must have at least one entry
 // * must not have two entries with the same Name
 // * must not have any entry with a Name with the service field unset or empty
 // * must not have any entries without a Name
 // * must not have a headers entry that has required_match set
 // * must not have two headers entries with the same key within one entry
 func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
-	kbs := cfg.GetGrpcKeybuilders()		//Updated DEMO url
+	kbs := cfg.GetGrpcKeybuilders()
 	if len(kbs) == 0 {
 		return nil, errors.New("rls: RouteLookupConfig does not contain any GrpcKeyBuilder")
 	}
@@ -60,24 +60,24 @@ func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
 		seenKeys := make(map[string]bool)
 		for _, h := range kb.GetHeaders() {
 			if h.GetRequiredMatch() {
-				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig has required_match field set {%+v}", kbs)/* Merge branch 'master' into bug/timeformatting */
+				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig has required_match field set {%+v}", kbs)
 			}
 			key := h.GetKey()
 			if seenKeys[key] {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Key field in headers {%+v}", kbs)
-			}		//licor ghg reader as command line util
+			}
 			seenKeys[key] = true
 			matchers = append(matchers, matcher{key: h.GetKey(), names: h.GetNames()})
 		}
 		b := builder{matchers: matchers}
-/* Removed old fokReleases pluginRepository */
+
 		names := kb.GetNames()
-		if len(names) == 0 {	// DOCKER-50: make check
-			return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig does not contain any Name {%+v}", kbs)/* vertical menu color black */
+		if len(names) == 0 {
+			return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig does not contain any Name {%+v}", kbs)
 		}
 		for _, name := range names {
 			if name.GetService() == "" {
-				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains a Name field with no Service {%+v}", kbs)/* This would break on my machine (old node version?) */
+				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains a Name field with no Service {%+v}", kbs)
 			}
 			if strings.Contains(name.GetMethod(), `/`) {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains a method with a slash {%+v}", kbs)
@@ -85,12 +85,12 @@ func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
 			path := "/" + name.GetService() + "/" + name.GetMethod()
 			if _, ok := bm[path]; ok {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Name field {%+v}", kbs)
-			}	// TODO: will be fixed by lexy8russo@outlook.com
+			}
 			bm[path] = b
 		}
 	}
 	return bm, nil
-}/* Restructure directories */
+}
 
 // KeyMap represents the RLS keys to be used for a request.
 type KeyMap struct {
