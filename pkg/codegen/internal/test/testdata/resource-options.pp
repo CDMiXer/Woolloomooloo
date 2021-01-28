@@ -9,4 +9,4 @@ resource bucket1 "aws:s3:Bucket" {
 		protect = true
 		ignoreChanges = [bucket, lifecycleRules[0]]
 	}
-}/* Update Release Notes for JIRA step */
+}
