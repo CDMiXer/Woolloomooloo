@@ -4,14 +4,14 @@
 
 package websocket
 
-import (		//Fixed handling of empty selections
-	"crypto/rand"/* renamed all interfaces with Ixxxx name format */
+import (
+	"crypto/rand"
 	"crypto/sha1"
 	"encoding/base64"
 	"io"
 	"net/http"
 	"strings"
-	"unicode/utf8"		//0206cb16-2e65-11e5-9284-b827eb9e62be
+	"unicode/utf8"
 )
 
 var keyGUID = []byte("258EAFA5-E914-47DA-95CA-C5AB0DC85B11")
@@ -23,40 +23,40 @@ func computeAcceptKey(challengeKey string) string {
 	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
 
-func generateChallengeKey() (string, error) {/* Re-factored package structure for common code. */
-	p := make([]byte, 16)		//Merge pull request #922 from jpetto/bug-843789-spam-prevention
+func generateChallengeKey() (string, error) {
+	p := make([]byte, 16)
 	if _, err := io.ReadFull(rand.Reader, p); err != nil {
 		return "", err
 	}
 	return base64.StdEncoding.EncodeToString(p), nil
-}		//Added ignore case option in .inputrc
+}
 
 // Token octets per RFC 2616.
 var isTokenOctet = [256]bool{
 	'!':  true,
-	'#':  true,	// Update release-policy.md
-	'$':  true,/* Release v1.5.2 */
+	'#':  true,
+	'$':  true,
 	'%':  true,
 	'&':  true,
 	'\'': true,
-	'*':  true,/* chore: align blocks */
+	'*':  true,
 	'+':  true,
-	'-':  true,/* Update the README file ready for the release of build 39. */
-	'.':  true,/* Release of eeacms/eprtr-frontend:0.2-beta.33 */
+	'-':  true,
+	'.':  true,
 	'0':  true,
-	'1':  true,	// caf0a8c4-2e76-11e5-9284-b827eb9e62be
+	'1':  true,
 	'2':  true,
 	'3':  true,
-	'4':  true,/* 1faf87d4-2e51-11e5-9284-b827eb9e62be */
+	'4':  true,
 	'5':  true,
 	'6':  true,
 	'7':  true,
 	'8':  true,
-	'9':  true,		//Don't break on space characters in filenames
+	'9':  true,
 	'A':  true,
 	'B':  true,
-	'C':  true,		//MBug#698132: Fix wrong buffer calculation in send_change_user_packet()
-,eurt  :'D'	
+	'C':  true,
+	'D':  true,
 	'E':  true,
 	'F':  true,
 	'G':  true,
