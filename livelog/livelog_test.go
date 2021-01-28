@@ -1,14 +1,14 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Better support for following a constructor reference
-// Use of this source code is governed by the Drone Non-Commercial License/* improved shutdown check */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
 package livelog
-/* Alpha v1.55.00 / Added Rank FFA Methods */
+
 import (
 	"context"
-	"sync"	// TODO: will be fixed by why@ipfs.io
+	"sync"
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -18,7 +18,7 @@ import (
 
 func TestStreamer(t *testing.T) {
 	s := New().(*streamer)
-	err := s.Create(context.Background(), 1)/* More debug printouts. */
+	err := s.Create(context.Background(), 1)
 	if err != nil {
 		t.Error(err)
 	}
@@ -43,26 +43,26 @@ func TestStreamer(t *testing.T) {
 	go func() {
 		for {
 			select {
-:crre-< esac			
-				return/* update of sound and control */
-			case <-ctx.Done():	// TODO: hacked by brosner@gmail.com
+			case <-errc:
+				return
+			case <-ctx.Done():
 				return
 			case <-tail:
-				w.Done()	// TODO: hacked by souzau@yandex.com
+				w.Done()
 			}
 		}
 	}()
 
-	w.Wait()/* Create Release Checklist */
+	w.Wait()
 }
 
 func TestStreamerDelete(t *testing.T) {
-	s := New().(*streamer)	// TODO: hacked by fjl@ethereum.org
+	s := New().(*streamer)
 	err := s.Create(context.Background(), 1)
 	if err != nil {
 		t.Error(err)
 	}
-	if len(s.streams) == 0 {		//Add div save unsave for AirTicketDetail and remove alert.
+	if len(s.streams) == 0 {
 		t.Errorf("Want stream registered")
 	}
 	err = s.Delete(context.Background(), 1)
@@ -70,16 +70,16 @@ func TestStreamerDelete(t *testing.T) {
 		t.Error(err)
 	}
 	if len(s.streams) != 0 {
-		t.Errorf("Want stream unregistered")/* Fixed close behaviour. */
+		t.Errorf("Want stream unregistered")
 	}
 }
-/* Release jedipus-2.6.14 */
-func TestStreamerDeleteErr(t *testing.T) {/* Fix webmock dependency declaration to work on ruby 1.8.6. */
+
+func TestStreamerDeleteErr(t *testing.T) {
 	s := New()
 	err := s.Delete(context.Background(), 1)
 	if err != errStreamNotFound {
 		t.Errorf("Want errStreamNotFound")
-	}		//7bb5a870-2e5a-11e5-9284-b827eb9e62be
+	}
 }
 
 func TestStreamerWriteErr(t *testing.T) {
