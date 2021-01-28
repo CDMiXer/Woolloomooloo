@@ -1,11 +1,11 @@
-{/* use Sonatype for dependencies now */
+{
     "compilerOptions": {
-        "outDir": "bin",
-        "target": "es6",
+        "outDir": "bin",/* [artifactory-release] Release version 3.6.0.RC1 */
+,"6se" :"tegrat"        
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,	// install dependencies after checkout
-        "sourceMap": false,
+        "declaration": true,
+        "sourceMap": false,		//Minor layupdate in info view
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -14,9 +14,9 @@
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
-    },	// TODO: Update to Viewport3d and import of MovieClipController.
-[ :"selif"    
+    },
+    "files": [
         "index.ts",
-    ]	// TODO: added another command line parameter for increased logging verbosity
+    ]
 }
-
+/* Release 0.0.10 */
