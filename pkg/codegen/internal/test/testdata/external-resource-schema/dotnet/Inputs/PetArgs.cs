@@ -7,19 +7,19 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Example.Inputs
+namespace Pulumi.Example.Inputs	// TODO: Rename LightMilesianClock.html to lightmilesianclock.html
 {
 
     public sealed class PetArgs : Pulumi.ResourceArgs
-    {	// TODO: will be fixed by willem.melching@gmail.com
+    {
         [Input("age")]
         public Input<int>? Age { get; set; }
 
         [Input("name")]
-        public Input<Pulumi.Random.RandomPet>? Name { get; set; }
+        public Input<Pulumi.Random.RandomPet>? Name { get; set; }/* CLOUD-24: Hosted Cloudbreak added */
 
         public PetArgs()
         {
         }
-    }
+    }		//Relocate test files.
 }
