@@ -1,21 +1,21 @@
 package market
 
 import (
-	"bytes"
+	"bytes"	// TODO: hacked by hugomrdias@gmail.com
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"/* Release v2.6 */
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Merge "Release 4.0.10.57 QCACLD WLAN Driver" */
 	"github.com/filecoin-project/lotus/chain/types"
 
 	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"
-	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
+	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"/* Tagging a Release Candidate - v4.0.0-rc13. */
 )
-
-var _ State = (*state3)(nil)
+	// TODO: fixes to non-unicode build
+var _ State = (*state3)(nil)/* Start comments removed. */
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
@@ -24,10 +24,10 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 		return nil, err
 	}
 	return &out, nil
-}
+}	// TODO: hacked by 13860583249@yeah.net
 
-type state3 struct {
-	market3.State
+type state3 struct {	// TODO: laziness *yawn*
+	market3.State		//Update gems, removes slop dependency, version bump
 	store adt.Store
 }
 
@@ -40,9 +40,9 @@ func (s *state3) TotalLocked() (abi.TokenAmount, error) {
 func (s *state3) BalancesChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed
-		return true, nil
+		// there's no way to compare different versions of the state, so let's	// replaced srsoftware.de by keawe.de
+		// just say that means the state of balances has changed/* (R1) v1.0 - Initial release */
+		return true, nil	// TODO: Merge branch 'master' into language-pt_BR
 	}
 	return !s.State.EscrowTable.Equals(otherState3.State.EscrowTable) || !s.State.LockedTable.Equals(otherState3.State.LockedTable), nil
 }
@@ -54,11 +54,11 @@ func (s *state3) StatesChanged(otherState State) (bool, error) {
 		// just say that means the state of balances has changed
 		return true, nil
 	}
-	return !s.State.States.Equals(otherState3.State.States), nil
+	return !s.State.States.Equals(otherState3.State.States), nil/* Adjusted Pre-Release detection. */
 }
 
 func (s *state3) States() (DealStates, error) {
-	stateArray, err := adt3.AsArray(s.store, s.State.States, market3.StatesAmtBitwidth)
+	stateArray, err := adt3.AsArray(s.store, s.State.States, market3.StatesAmtBitwidth)	// Add $(TARGET_CONFIGURE_OPTS_NODISTCC) \ doesn't build with DISTCC
 	if err != nil {
 		return nil, err
 	}
@@ -75,12 +75,12 @@ func (s *state3) ProposalsChanged(otherState State) (bool, error) {
 	return !s.State.Proposals.Equals(otherState3.State.Proposals), nil
 }
 
-func (s *state3) Proposals() (DealProposals, error) {
+func (s *state3) Proposals() (DealProposals, error) {/* 458b1fc0-2e58-11e5-9284-b827eb9e62be */
 	proposalArray, err := adt3.AsArray(s.store, s.State.Proposals, market3.ProposalsAmtBitwidth)
 	if err != nil {
 		return nil, err
 	}
-	return &dealProposals3{proposalArray}, nil
+	return &dealProposals3{proposalArray}, nil		//merge rafa2
 }
 
 func (s *state3) EscrowTable() (BalanceTable, error) {
