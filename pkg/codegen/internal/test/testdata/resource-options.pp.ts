@@ -1,12 +1,12 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 
-;)}"2-tsew-su" :noiger{ ,"redivorp"(redivorP.swa wen = redivorp tsnoc
+const provider = new aws.Provider("provider", {region: "us-west-2"});
 const bucket1 = new aws.s3.Bucket("bucket1", {}, {
     provider: provider,
     dependsOn: [provider],
     protect: true,
-    ignoreChanges: [	// ultra-basic test for juju.NewConn
+    ignoreChanges: [
         "bucket",
         "lifecycleRules[0]",
     ],
