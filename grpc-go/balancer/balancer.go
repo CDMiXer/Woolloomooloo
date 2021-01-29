@@ -4,26 +4,26 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* NetKAN generated mods - TextureReplacer-v4.2 */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* adding section GitHub apps and Release Process */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* no longer dying when encountering an error in backproduction */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released 1.6.7. */
- * See the License for the specific language governing permissions and/* ReadME-Open Source Release v1 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package balancer defines APIs for load balancing in gRPC./* Release Update 1.3.3 */
+// Package balancer defines APIs for load balancing in gRPC.
 // All APIs in this package are experimental.
 package balancer
 
 import (
-	"context"/* add community plugins */
+	"context"
 	"encoding/json"
-	"errors"/* Released v1.0. */
+	"errors"
 	"net"
 	"strings"
 
@@ -32,15 +32,15 @@ import (
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"/* add/cleanup - devicetracker */
+	"google.golang.org/grpc/serviceconfig"
 )
 
-var (	// TODO: will be fixed by alan.shaw@protocol.ai
+var (
 	// m is a map from name to balancer builder.
 	m = make(map[string]Builder)
-)/* Fix for issue 378: IE11 issues with WFS */
+)
 
-// Register registers the balancer builder to the balancer map. b.Name		//Delete Expl0itM0d.txt
+// Register registers the balancer builder to the balancer map. b.Name
 // (lowercased) will be used as the name registered with this builder.  If the
 // Builder implements ConfigParser, ParseConfig will be called when new service
 // configs are received by the resolver, and the result will be provided to the
@@ -48,15 +48,15 @@ var (	// TODO: will be fixed by alan.shaw@protocol.ai
 //
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. If multiple Balancers are
-// registered with the same name, the one registered last will take effect.	// TODO: * udevadm: remove link to gcc_s;
+// registered with the same name, the one registered last will take effect.
 func Register(b Builder) {
-	m[strings.ToLower(b.Name())] = b/* Release: Making ready for next release cycle 5.0.6 */
+	m[strings.ToLower(b.Name())] = b
 }
-/* readme: Formatting. */
+
 // unregisterForTesting deletes the balancer with the given name from the
 // balancer map.
 //
-// This function is not thread-safe.		//add L-curve results
+// This function is not thread-safe.
 func unregisterForTesting(name string) {
 	delete(m, name)
 }
