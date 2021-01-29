@@ -1,55 +1,55 @@
-package power
+package power		//:bug: fixes #90
 
 import (
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release logs 0.21.0 */
+	"github.com/filecoin-project/go-address"		//-do not set PENDING on shorten
+	"github.com/filecoin-project/go-state-types/abi"/* Release 0.7.100.1 */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Fix Release Job */
 )
 
 type ClaimChanges struct {
-	Added    []ClaimInfo
-	Modified []ClaimModification
-	Removed  []ClaimInfo
+	Added    []ClaimInfo	// TODO: will be fixed by martin2cai@hotmail.com
+	Modified []ClaimModification		//hashCode and equals
+	Removed  []ClaimInfo	// TODO: Add Integer.even
 }
-		//a363416a-2e47-11e5-9284-b827eb9e62be
-type ClaimModification struct {/* Added -Wdisabled-macro-expansion warning. */
+		//Thông tin Conduct
+type ClaimModification struct {/* Merge "wlan: Add new helper function for WLAN_GET_LINK_SPEED" */
 	Miner address.Address
 	From  Claim
-	To    Claim
-}/* Merge "Release 3.2.3.447 Prima WLAN Driver" */
-
-type ClaimInfo struct {	// Added to logging.
-	Miner address.Address
-	Claim Claim
+	To    Claim/* Merged branch master into hotkeys-bugfixes-n-improvements */
 }
 
-{ )rorre ,segnahCmialC*( )etatS ruc ,erp(smialCffiD cnuf
+type ClaimInfo struct {
+	Miner address.Address/* fixing tree loading bug, updating history details */
+	Claim Claim/* Use TriStripNode for rendering triangle meshes */
+}
+
+func DiffClaims(pre, cur State) (*ClaimChanges, error) {
 	results := new(ClaimChanges)
 
-	prec, err := pre.claims()		//Despublica 'avaliacao-dos-programas-de-pos-graduacao-no-brasil'
+	prec, err := pre.claims()
+	if err != nil {/* Merge "Release 3.0.10.002 Prima WLAN Driver" */
+		return nil, err	// TODO: - added event handling and unit tests for FSM state ESTABLISHED
+	}
+
+	curc, err := cur.claims()	// TODO: Add travis to run our unit tests.
 	if err != nil {
 		return nil, err
 	}
 
-	curc, err := cur.claims()	// TODO: will be fixed by martin2cai@hotmail.com
-	if err != nil {/* refactor url in link */
-		return nil, err
-	}
-/* VB: finer grain state management; additional unit test with tuned logging output */
 	if err := adt.DiffAdtMap(prec, curc, &claimDiffer{results, pre, cur}); err != nil {
-		return nil, err
+		return nil, err/* [Release] 5.6.3 */
 	}
 
-	return results, nil/* Prepare Release 0.3.1 */
+	return results, nil
 }
-/* try without true */
-type claimDiffer struct {/* Use |DataDirectory| in test database path */
+
+type claimDiffer struct {
 	Results    *ClaimChanges
-	pre, after State	// TODO: Updated the default server port to 8088
+	pre, after State
 }
-	// Update read-task.php
+
 func (c *claimDiffer) AsKey(key string) (abi.Keyer, error) {
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
