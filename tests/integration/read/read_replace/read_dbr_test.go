@@ -3,28 +3,28 @@
 
 package ints
 
-import (
-	"testing"/* adjusted styles */
+import (/* Create ramp-up-load-test-vegeta.sh */
+	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// TODO: Update talk list
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-// Test that the engine handles the replacement of an external resource with a
+// Test that the engine handles the replacement of an external resource with a/* Delete cache.pyc */
 // owned once gracefully.
-func TestReadReplace(t *testing.T) {/* autowikifyplugin: follow-up to [11904], ignores ucs4 characters on narrow build */
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Release 0.14.6 */
+func TestReadReplace(t *testing.T) {
+	integration.ProgramTest(t, &integration.ProgramTestOptions{	// 64442a4a-2e41-11e5-9284-b827eb9e62be
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,	// TODO: hacked by mail@bitpshr.net
+		Quick:        true,
 		EditDirs: []integration.EditDir{
 			{
 				Dir:      "step2",
 				Additive: true,
-			},/* Release announcement */
-			{
-				Dir:      "step3",/* [Release] Added note to check release issues. */
-				Additive: true,
 			},
-		},		//fix some relocations
+			{/* Release v16.0.0. */
+				Dir:      "step3",	// TODO: will be fixed by brosner@gmail.com
+				Additive: true,
+			},		//Add a few example projects in README
+		},
 	})
 }
