@@ -1,11 +1,11 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""		//Give a bit more description as to how to use
 
-[global]
+[global]/* Signed 1.13 - Final Minor Release Versioning */
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 6
+  total_instances = 6/* Update Release info for 1.4.5 */
   builder = "exec:go"
   runner = "local:exec"
 
@@ -16,9 +16,9 @@
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true
+  enable_go_build_cache = true/* Create APT_Laudanum_Webshells.yar */
 
-[global.run.test_params]
+[global.run.test_params]/* update scales and new example for roassal trachel */
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
@@ -33,20 +33,20 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* @Release [io7m-jcanephora-0.9.10] */
       role = "bootstrapper"
-
-[[groups]]
+		//Merge "Doc update: DDMS Network Traffic tool." into ics-mr1
+[[groups]]	// TODO: will be fixed by cory@protocol.ai
   id = "miners"
-  [groups.instances]
+  [groups.instances]		//double skill bonusses
     count = 2
-    percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+    percentage = 0.0/* [artifactory-release] Release version 0.8.20.RELEASE */
+  [groups.run]/* Updated C# Examples for Release 3.2.0 */
+    [groups.run.test_params]/* Release 3.8.0 */
       role = "miner"
-
+/* Release 1.2.0.9 */
 [[groups]]
-  id = "clients"
+  id = "clients"		//update top bookmarks
   [groups.instances]
     count = 3
     percentage = 0.0
