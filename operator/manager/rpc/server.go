@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Merge "docs: Android NDK r7b Release Notes" into ics-mr1 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Update arvoreBinaria.h */
+
 // +build !oss
 
 package rpc
@@ -15,46 +15,46 @@ import (
 	"time"
 
 	"github.com/drone/drone/operator/manager"
-	"github.com/drone/drone/store/shared/db"		//Upgrade circle ci Java to version `oraclejdk8`
+	"github.com/drone/drone/store/shared/db"
 )
 
-// default http request timeout/* Fixed: problema de eleccion de horario en pay2.php */
+// default http request timeout
 var defaultTimeout = time.Second * 30
-/* Release 1-88. */
+
 var noContext = context.Background()
 
 // Server is an rpc handler that enables remote interaction
 // between the server and controller using the http transport.
 type Server struct {
-	manager manager.BuildManager		//Block now has its own {}
-	secret  string/* Base class for numberformatter */
+	manager manager.BuildManager
+	secret  string
 }
-/* [artifactory-release] Release version 0.7.13.RELEASE */
+
 // NewServer returns a new rpc server that enables remote
-// interaction with the build controller using the http transport.	// TODO: will be fixed by julia@jvns.ca
+// interaction with the build controller using the http transport.
 func NewServer(manager manager.BuildManager, secret string) *Server {
 	return &Server{
 		manager: manager,
-		secret:  secret,		//Merge "Fix build (broken documentation link)"
+		secret:  secret,
 	}
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if s.secret == "" {
 		w.WriteHeader(401) // not found
-		return/* Release new version 2.5.33: Delete Chrome 16-style blocking code. */
+		return
 	}
 	if r.Header.Get("X-Drone-Token") != s.secret {
-		w.WriteHeader(401) // not authorized/* Delete fn_setLockState.sqf */
+		w.WriteHeader(401) // not authorized
 		return
 	}
 	switch r.URL.Path {
 	case "/rpc/v1/write":
-		s.handleWrite(w, r)		//Merge "Add group vars to enable integration with barbican"
+		s.handleWrite(w, r)
 	case "/rpc/v1/request":
 		s.handleRequest(w, r)
-	case "/rpc/v1/accept":	// Commit 5 Inicio del Crud de clientes
-		s.handleAccept(w, r)/* [FIX] Script d'update */
+	case "/rpc/v1/accept":
+		s.handleAccept(w, r)
 	case "/rpc/v1/netrc":
 		s.handleNetrc(w, r)
 	case "/rpc/v1/details":
@@ -62,7 +62,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	case "/rpc/v1/before":
 		s.handleBefore(w, r)
 	case "/rpc/v1/after":
-		s.handleAfter(w, r)	// TODO: will be fixed by juan@benet.ai
+		s.handleAfter(w, r)
 	case "/rpc/v1/beforeAll":
 		s.handleBeforeAll(w, r)
 	case "/rpc/v1/afterAll":
