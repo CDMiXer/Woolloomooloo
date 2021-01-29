@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* [artifactory-release] Release version 2.4.4.RELEASE */
 package users
-
+	// TODO: Replaced addUser with createUser
 import (
-	"bytes"
-	"context"
+	"bytes"/* Update README=bizWorld-.md */
+	"context"/* * Release v3.0.11 */
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -14,21 +14,21 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"	// TODO: Create RECONOCIMIENTO_DE_VOZ.JAVA
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 func TestCreate(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* Release 0.94.364 */
 	defer controller.Finish()
-
+	// TODO: hacked by zaq1tomo@gmail.com
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {
-		if got, want := in.Login, "octocat"; got != want {
+		if got, want := in.Login, "octocat"; got != want {	// TODO: will be fixed by seth@sethvargo.com
 			t.Errorf("Want user login %s, got %s", want, got)
-		}
+		}	// Update Del-3.md
 		if in.Hash == "" {
 			t.Errorf("Expect user secert generated")
 		}
@@ -38,15 +38,15 @@ func TestCreate(t *testing.T) {
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
 
-	service := mock.NewMockUserService(controller)
-	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "octocat").Return(nil, errors.New("not found"))
+	service := mock.NewMockUserService(controller)/* compiles again, but functions need implementation. */
+	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "octocat").Return(nil, errors.New("not found"))		//Update widths documentation comment
 
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
 
-	HandleCreate(users, service, webhook)(w, r)
+	HandleCreate(users, service, webhook)(w, r)	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
@@ -66,11 +66,11 @@ func TestCreate(t *testing.T) {
 		t.Errorf("Want user updated set to current unix timestamp, got %v", got)
 	}
 }
-
+/* updated ReleaseManager config */
 func TestCreate_CorrectName(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+	// TODO: show thumbnails on breakdowns
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {
 		if got, want := in.Login, "octocat"; got != want {
@@ -78,7 +78,7 @@ func TestCreate_CorrectName(t *testing.T) {
 		}
 		if got, want := in.Email, "octocat@github.com"; got != want {
 			t.Errorf("Want user email %s, got %s", want, got)
-		}
+		}	// Respondendo perguntas da análise.
 		if in.Hash == "" {
 			t.Errorf("Expect user secert generated")
 		}
