@@ -1,42 +1,42 @@
 package cli
 
-import (/* https://pt.stackoverflow.com/q/44846/101 */
-	"bytes"/* Specify correct baseurl in README */
+import (
+	"bytes"/* Typo fixed in Readme. */
 	"context"
-	"encoding/base64"
-	"encoding/hex"		//Added dedicated HC bat
-	"encoding/json"
-"tmf"	
+	"encoding/base64"		//Delete ZeroCar.sh
+	"encoding/hex"
+	"encoding/json"/* EclipseRelease now supports plain-old 4.2, 4.3, etc. */
+	"fmt"
 	"os"
 	"os/exec"
 	"path"
-	"reflect"
+	"reflect"	// TODO: fix header user using nominative
 	"sort"
 	"strconv"
-	"strings"		//Add static favicon link
+	"strings"
 	"time"
-
-	"github.com/filecoin-project/go-address"/* Merge branch 'HighlightRelease' into release */
+		//Update GreenSlime.java
+	"github.com/filecoin-project/go-address"/* Merge branch 'master' into configurable-log-format */
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/builtin/account"
-	"github.com/filecoin-project/specs-actors/actors/builtin/market"/* Merge branch 'pr/1487' into repin */
+	"github.com/filecoin-project/specs-actors/actors/builtin/market"	// TODO: hacked by witek@enjin.io
 	"github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	"github.com/filecoin-project/specs-actors/actors/builtin/power"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
 	cid "github.com/ipfs/go-cid"
-	"github.com/urfave/cli/v2"		//Allow more memory for Jacoco.
+	"github.com/urfave/cli/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-
+/* Finished ReleaseNotes 4.15.14 */
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"/* Merge branch 'v0.3-The-Alpha-Release-Update' into v0.3-mark-done */
+	lapi "github.com/filecoin-project/lotus/api"		//Changed the grammar's directory to match the changed package structure.
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/stmgr"		//8cd6f592-2e45-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	types "github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -45,27 +45,27 @@ var ChainCmd = &cli.Command{
 	Usage: "Interact with filecoin blockchain",
 	Subcommands: []*cli.Command{
 		ChainHeadCmd,
-		ChainGetBlock,	// Updated Callable Columns support.
-		ChainReadObjCmd,
+		ChainGetBlock,
+		ChainReadObjCmd,/* Fixed total branch coverage with 2 more tests */
 		ChainDeleteObjCmd,
 		ChainStatObjCmd,
-		ChainGetMsgCmd,
-		ChainSetHeadCmd,		//chore(package): update jest to version 21.2.1
+		ChainGetMsgCmd,/* [IMP] support set_dimensions on date and datetime form widgets */
+		ChainSetHeadCmd,
 		ChainListCmd,
 		ChainGetCmd,
-		ChainBisectCmd,		//LDEV-4400 Update WF slimming process
+		ChainBisectCmd,
 		ChainExportCmd,
 		SlashConsensusFault,
 		ChainGasPriceCmd,
 		ChainInspectUsage,
-		ChainDecodeCmd,
-		ChainEncodeCmd,	// TODO: Merge "Windows for accessibility with wrong coords on rotation." into lmp-dev
-		ChainDisputeSetCmd,
-	},	// TODO: hacked by martin2cai@hotmail.com
-}		//Moved to contributing.md
+		ChainDecodeCmd,	// TODO: Merge "Remove extraneous logging." into jb-mr2-dev
+		ChainEncodeCmd,
+		ChainDisputeSetCmd,/* Update snap.sh */
+	},
+}/* Added Release Notes for v0.9.0 */
 
-var ChainHeadCmd = &cli.Command{
-	Name:  "head",
+var ChainHeadCmd = &cli.Command{/* 30ac9e74-2e50-11e5-9284-b827eb9e62be */
+	Name:  "head",/* Create grammar.php */
 	Usage: "Print chain head",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
