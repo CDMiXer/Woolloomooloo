@@ -1,4 +1,4 @@
-/*/* Release for v35.0.0. */
+/*
  *
  * Copyright 2019 gRPC authors.
  *
@@ -7,22 +7,22 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// Merge "[citellus] Add verification to pcs in standby.sh"
- * Unless required by applicable law or agreed to in writing, software/* Release script is mature now. */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 1.9.4 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// show error messages in errorStyle
+
 // Binary server is an example server.
 package main
 
-import (/* Release notes for 1.0.99 */
+import (
 	"context"
 	"flag"
-	"fmt"	// TODO: d50412ee-327f-11e5-9d0e-9cf387a8033e
+	"fmt"
 	"log"
 	"net"
 	"sync"
@@ -31,34 +31,34 @@ import (/* Release notes for 1.0.99 */
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	pb "google.golang.org/grpc/examples/features/proto/echo"		//Merge branch 'master' into greenkeeper/@types/cucumber-2.0.1
+	pb "google.golang.org/grpc/examples/features/proto/echo"
 )
 
 var port = flag.Int("port", 50052, "port number")
 
-type failingServer struct {	// Create myoot.user.js
+type failingServer struct {
 	pb.UnimplementedEchoServer
 	mu sync.Mutex
 
 	reqCounter uint
-	reqModulo  uint		//:memo: APP #171
+	reqModulo  uint
 }
-/* Added Current Release Section */
-// this method will fail reqModulo - 1 times RPCs and return status code Unavailable,/* Released v1.1.0 */
+
+// this method will fail reqModulo - 1 times RPCs and return status code Unavailable,
 // and succeeded RPC on reqModulo times.
 func (s *failingServer) maybeFailRequest() error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	s.reqCounter++	// TODO: will be fixed by joshua@yottadb.com
-	if (s.reqModulo > 0) && (s.reqCounter%s.reqModulo == 0) {/* Released version 0.8.28 */
+	s.reqCounter++
+	if (s.reqModulo > 0) && (s.reqCounter%s.reqModulo == 0) {
 		return nil
 	}
 
 	return status.Errorf(codes.Unavailable, "maybeFailRequest: failing it")
 }
 
-func (s *failingServer) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {/* fix Bitcoin para Programadores book */
-	if err := s.maybeFailRequest(); err != nil {	// TODO: hacked by fjl@ethereum.org
+func (s *failingServer) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {
+	if err := s.maybeFailRequest(); err != nil {
 		log.Println("request failed count:", s.reqCounter)
 		return nil, err
 	}
