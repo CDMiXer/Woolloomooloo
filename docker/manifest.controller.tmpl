@@ -1,10 +1,10 @@
-}}fi/{{tsetal}}esle{{}}gat.dliub "v" xiferPmirt{{}}gat.dliub fi#{{:rellortnoc/enord :egami
-{{#if build.tags}}		//Run tests for PHP 7.1 and 7.2
-tags:	// Add config.sh
+image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
+{{#if build.tags}}
+tags:/* Release version 3.4.3 */
 {{#each build.tags}}
-  - {{this}}
-{{/each}}
-{{/if}}		//Merge "Add raises note to disk_utils.get_disk_identifier"
+  - {{this}}/* update to 2.27.x Release Candidate 2 (2.27.2) */
+{{/each}}	// move findAnything to the top of the UI
+{{/if}}
 manifests:
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
@@ -16,22 +16,22 @@ manifests:
     platform:
       architecture: arm64
       os: linux
-      variant: v8
+      variant: v8/* upload New Firmware release for MiniRelease1 */
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:
+    platform:/* Release 0.1.1 for Scala 2.11.0 */
       architecture: arm
-      os: linux/* Rename Datasnakes/Tools/qsub/temp.pbs to datasnakes/Tools/qsub/temp.pbs */
-      variant: v7/* Release of eeacms/www-devel:20.9.22 */
+      os: linux
+      variant: v7
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
-46dma :erutcetihcra      
-      os: windows		//Openshot: revbump for newer qt versions (#4234)
+      architecture: amd64
+      os: windows
       variant: 1803
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
-      architecture: amd64/* Update fft.py */
+      architecture: amd64
       os: windows
       variant: 1809
