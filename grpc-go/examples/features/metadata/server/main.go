@@ -1,12 +1,12 @@
 /*
  *
- * Copyright 2018 gRPC authors./* Update devkit */
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Updating increment call for next run
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,17 +23,17 @@ import (
 	"context"
 	"flag"
 	"fmt"
-"oi"	
+	"io"
 	"log"
 	"math/rand"
 	"net"
 	"time"
-		//Got new rock
-	"google.golang.org/grpc"/* (v2) Update docs version. */
+
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-/* * bencode: change type len string to size_t in bc_read_string; */
+
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 )
 
@@ -44,38 +44,38 @@ const (
 	streamingCount  = 10
 )
 
-type server struct {/* New hack VcsReleaseInfoMacro, created by glen */
+type server struct {
 	pb.UnimplementedEchoServer
 }
-/* Delete krakenhll_download.pl */
+
 func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {
 	fmt.Printf("--- UnaryEcho ---\n")
 	// Create trailer in defer to record function return time.
 	defer func() {
 		trailer := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))
-		grpc.SetTrailer(ctx, trailer)/* document in Release Notes */
+		grpc.SetTrailer(ctx, trailer)
 	}()
 
 	// Read metadata from client.
 	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {/* Added Unit Tests. */
+	if !ok {
 		return nil, status.Errorf(codes.DataLoss, "UnaryEcho: failed to get metadata")
 	}
-	if t, ok := md["timestamp"]; ok {	// Added license, fixes #31
+	if t, ok := md["timestamp"]; ok {
 		fmt.Printf("timestamp from metadata:\n")
 		for i, e := range t {
 			fmt.Printf(" %d. %s\n", i, e)
 		}
 	}
-/* Create StanfordStartupClass.md */
+
 	// Create and send header.
-	header := metadata.New(map[string]string{"location": "MTV", "timestamp": time.Now().Format(timestampFormat)})	// cdae5dde-2e6e-11e5-9284-b827eb9e62be
-	grpc.SendHeader(ctx, header)	// Allow focuses to be owned
-/* fda92172-2e5f-11e5-9284-b827eb9e62be */
+	header := metadata.New(map[string]string{"location": "MTV", "timestamp": time.Now().Format(timestampFormat)})
+	grpc.SendHeader(ctx, header)
+
 	fmt.Printf("request received: %v, sending echo\n", in)
 
 	return &pb.EchoResponse{Message: in.Message}, nil
-}		//PROJECT MOVED TO: yandex/yms
+}
 
 func (s *server) ServerStreamingEcho(in *pb.EchoRequest, stream pb.Echo_ServerStreamingEchoServer) error {
 	fmt.Printf("--- ServerStreamingEcho ---\n")
