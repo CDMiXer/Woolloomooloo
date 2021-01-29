@@ -1,4 +1,4 @@
 {
-    "octocat": "this-is-a-test-secret",		//Fixed orientation for main Vulgus set
+    "octocat": "this-is-a-test-secret",
     "spaceghost": "this-is-an-invalid-secret"
-}/* Task #3223: Merged LOFAR-Release-1_3 21646:21647 into trunk. */
+}
