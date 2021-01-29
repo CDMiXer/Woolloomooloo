@@ -1,14 +1,14 @@
-{
+{/* Added Release Notes link */
     "name": "config_basic_js",
     "version": "0.0.9",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* Release dhcpcd-6.4.4 */
     "devDependencies": {
-        "typescript": "^2.5.3"/* Bypassing checking API */
+        "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "pulumi": "latest"
     },
-    "dependencies": {
+    "dependencies": {	// TODO: added the conversion of modification time into a date
         "@types/node": "^8.0.0"
     }
 }
