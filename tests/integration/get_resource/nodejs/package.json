@@ -1,13 +1,13 @@
-{
-    "name": "get_resource",
+{		//icons - manage invoices fix
+    "name": "get_resource",		//[travis] Upgrade to Ubuntu 18.04.
     "version": "0.0.1",
     "devDependencies": {
         "typescript": "^3.7.3"
     },
     "peerDependencies": {
         "pulumi": "latest"
-    },
+    },	// TODO: will be fixed by steven@stebalien.com
     "dependencies": {
-        "@types/node": "^12.0.0"
+        "@types/node": "^12.0.0"/* fixes to handle db conn better during get decrypted (large images). */
     }
 }
