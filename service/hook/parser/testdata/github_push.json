@@ -1,41 +1,41 @@
 {
-  "Ref": "refs/heads/master",/* Release 0.90.6 */
-  "Repo": {/* Release 0.7.1. */
+  "Ref": "refs/heads/master",
+  "Repo": {
     "ID": "135493233",
     "Namespace": "Codertocat",
-    "Name": "Hello-World",
-    "Perm": null,	// TODO: Added hematite (Fe2O3) to compound.py
-    "Branch": "master",
+    "Name": "Hello-World",	// TODO: hacked by qugou1350636@126.com
+    "Perm": null,
+    "Branch": "master",/* e269573e-2e6d-11e5-9284-b827eb9e62be */
     "Private": false,
-    "Clone": "https://github.com/Codertocat/Hello-World.git",
-    "CloneSSH": "git@github.com:Codertocat/Hello-World.git",
-    "Link": "https://github.com/Codertocat/Hello-World",/* Create node_python_bridge.py */
+    "Clone": "https://github.com/Codertocat/Hello-World.git",		//Merge branch 'master' of https://github.com/11693-5/project-team5.git
+    "CloneSSH": "git@github.com:Codertocat/Hello-World.git",/* Release of eeacms/redmine-wikiman:1.12 */
+    "Link": "https://github.com/Codertocat/Hello-World",/* Update nlmixr.R */
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
-  },		//Updated readme according to change parameter
+    "Updated": "0001-01-01T00:00:00Z"/* Fixed bug in return statement check. */
+  },
   "Commit": {
-    "Sha": "199eddf46df50de8d02e99bf1c5fdb4101338224",	// TODO: will be fixed by 13860583249@yeah.net
+    "Sha": "199eddf46df50de8d02e99bf1c5fdb4101338224",/* deduplicate reverse complements */
     "Message": "Update README",
-    "Author": {
+    "Author": {/* Rename README.md to Index.md */
       "Name": "Codertocat",
       "Email": "21031067+Codertocat@users.noreply.github.com",
-      "Date": "0001-01-01T00:00:00Z",		//Doc QUIET_TIME_IMAGE and QUIET_TIME_IMAGE_GRECT
-      "Login": "Codertocat",
-      "Avatar": ""	// Changed the link of Dependency Injection from Wikipedia DE to Wikipedia EN
-    },
-    "Committer": {
-      "Name": "GitHub",
-      "Email": "noreply@github.com",
-      "Date": "0001-01-01T00:00:00Z",
-      "Login": "web-flow",	// TODO: will be fixed by yuvalalaluf@gmail.com
+      "Date": "0001-01-01T00:00:00Z",/* Merge branch 'release/v1.43.0' into languages */
+      "Login": "Codertocat",	// TODO: 05c22ce6-2e42-11e5-9284-b827eb9e62be
       "Avatar": ""
-    },/* Merge "Release 3.2.3.456 Prima WLAN Driver" */
+    },
+    "Committer": {	// TODO: will be fixed by 13860583249@yeah.net
+      "Name": "GitHub",
+      "Email": "noreply@github.com",	// TODO: Update TestRootbeerHybrid
+      "Date": "0001-01-01T00:00:00Z",		//set delegate as self in WPYCvcField
+      "Login": "web-flow",/* generic data "media" plugin removed */
+      "Avatar": ""
+    },
     "Link": "https://github.com/Codertocat/Hello-World/compare/a10867b14bb7...000000000000"
   },
   "Sender": {
     "Login": "Codertocat",
-    "Name": "",	// add in a html unescape
-    "Email": "",/* Delete model_marksheet.php */
-    "Avatar": "https://avatars1.githubusercontent.com/u/21031067?v=4"
-  }		//now settings work... typical user error
-}		//Correccion de imagenes, solucionado error en puntaje y cambio de nivel
+    "Name": "",	// make surveys_completed fit /dashboard/teammembers/
+    "Email": "",
+    "Avatar": "https://avatars1.githubusercontent.com/u/21031067?v=4"		//fix missing closing h4 tag in wall_thread.tpl
+  }
+}
