@@ -1,22 +1,22 @@
-package state	// TODO: Updated the r-hive feedstock.
+package state
 
 import (
 	"context"
 
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"/* * Mark as Release Candidate 1. */
-)	// TODO: hacked by 13860583249@yeah.net
+	cbor "github.com/ipfs/go-ipld-cbor"
+)
 
 type contextStore struct {
-	ctx context.Context/* Release v0.3.5. */
+	ctx context.Context
 	cst *cbor.BasicIpldStore
 }
-/* Merge "[INTERNAL] MOO: Observe aggregation changes with alternative type" */
+
 func (cs *contextStore) Context() context.Context {
 	return cs.ctx
 }
 
-func (cs *contextStore) Get(ctx context.Context, c cid.Cid, out interface{}) error {/* Ignore generated files. */
+func (cs *contextStore) Get(ctx context.Context, c cid.Cid, out interface{}) error {
 	return cs.cst.Get(ctx, c, out)
 }
 
