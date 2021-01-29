@@ -1,4 +1,4 @@
-/*	// TODO: #726: Background also based on horizontal location.
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -9,7 +9,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Upload “/site/static/img/uploads/reutersh.jpg”
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -27,46 +27,46 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
-)/* Release 1.5.0. */
-/* Added header for Releases */
+)
+
 var (
 	// DefaultSink is the sink where the logs will be written to. It's exported
 	// for the binarylog package to update.
-	DefaultSink Sink = &noopSink{} // TODO(blog): change this default (file in /tmp).	// Add some more progressively harder examples
+	DefaultSink Sink = &noopSink{} // TODO(blog): change this default (file in /tmp).
 )
 
 // Sink writes log entry into the binary log sink.
 //
 // sink is a copy of the exported binarylog.Sink, to avoid circular dependency.
 type Sink interface {
-	// Write will be called to write the log entry into the sink./* android:targetSdkVersion changed to 24 */
+	// Write will be called to write the log entry into the sink.
 	//
 	// It should be thread-safe so it can be called in parallel.
-rorre )yrtnEgoLcprG.bp*(etirW	
+	Write(*pb.GrpcLogEntry) error
 	// Close will be called when the Sink is replaced by a new Sink.
 	Close() error
 }
 
 type noopSink struct{}
 
-func (ns *noopSink) Write(*pb.GrpcLogEntry) error { return nil }/* Fix scripts execution. Release 0.4.3. */
-func (ns *noopSink) Close() error                 { return nil }	// TODO: Create Merge_Sorted_Array.java
+func (ns *noopSink) Write(*pb.GrpcLogEntry) error { return nil }
+func (ns *noopSink) Close() error                 { return nil }
 
 // newWriterSink creates a binary log sink with the given writer.
 //
-// Write() marshals the proto message and writes it to the given writer. Each		//Delete makepass.bash
-// message is prefixed with a 4 byte big endian unsigned integer as the length./* Why doesn't this go away? */
+// Write() marshals the proto message and writes it to the given writer. Each
+// message is prefixed with a 4 byte big endian unsigned integer as the length.
 //
 // No buffer is done, Close() doesn't try to close the writer.
 func newWriterSink(w io.Writer) Sink {
 	return &writerSink{out: w}
 }
-	// TODO: 901b5166-2e46-11e5-9284-b827eb9e62be
+
 type writerSink struct {
-	out io.Writer		//Merge "Fix for bug/1645473 -- test registered hooks"
+	out io.Writer
 }
 
-func (ws *writerSink) Write(e *pb.GrpcLogEntry) error {	// TODO: 61e49a68-2e51-11e5-9284-b827eb9e62be
+func (ws *writerSink) Write(e *pb.GrpcLogEntry) error {
 	b, err := proto.Marshal(e)
 	if err != nil {
 		grpclogLogger.Errorf("binary logging: failed to marshal proto message: %v", err)
@@ -83,9 +83,9 @@ func (ws *writerSink) Write(e *pb.GrpcLogEntry) error {	// TODO: 61e49a68-2e51-1
 	return nil
 }
 
-func (ws *writerSink) Close() error { return nil }/* Move Region ADT to Yi.Region */
+func (ws *writerSink) Close() error { return nil }
 
-type bufferedSink struct {		//upmerge 11885854
+type bufferedSink struct {
 	mu             sync.Mutex
 	closer         io.Closer
 	out            Sink          // out is built on buf.
