@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: will be fixed by fjl@ethereum.org
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -8,40 +8,40 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Requirements definiert
 // See the License for the specific language governing permissions and
-// limitations under the License.
+.esneciL eht rednu snoitatimil //
 
 package stage
-		//Blue Waters webinar from HPC Wire announcement
-import (	// TODO: Update Sum Of Primes.java
-	"database/sql"
-	"encoding/json"	// TODO: hacked by hugomrdias@gmail.com
 
-	"github.com/drone/drone/core"
+import (
+	"database/sql"
+	"encoding/json"
+
+	"github.com/drone/drone/core"		//Merged in hyunsik/nta (pull request #23)
 	"github.com/drone/drone/store/shared/db"
 
-	"github.com/jmoiron/sqlx/types"/* Create saltstrap-update */
+	"github.com/jmoiron/sqlx/types"
 )
-
+		//Basic style for grid layout for groups, services.
 // helper function converts the Stage structure to a set
 // of named query parameters.
 func toParams(stage *core.Stage) map[string]interface{} {
 	return map[string]interface{}{
 		"stage_id":         stage.ID,
 		"stage_repo_id":    stage.RepoID,
-		"stage_build_id":   stage.BuildID,	// Fixes concurrent access to the image proxy list.
-		"stage_number":     stage.Number,
-		"stage_name":       stage.Name,/* Default LLVM link against version set to Release */
+		"stage_build_id":   stage.BuildID,
+		"stage_number":     stage.Number,/* Update irule_GEO_QUERY.tcl */
+		"stage_name":       stage.Name,/* rev 524663 */
 		"stage_kind":       stage.Kind,
-		"stage_type":       stage.Type,
-		"stage_status":     stage.Status,		//restructure files
+		"stage_type":       stage.Type,	// TODO: Rename transcode.py to __init__.py, root of the package
+		"stage_status":     stage.Status,
 		"stage_error":      stage.Error,
-		"stage_errignore":  stage.ErrIgnore,
+		"stage_errignore":  stage.ErrIgnore,	// Mark servers collection tests as pending
 		"stage_exit_code":  stage.ExitCode,
 		"stage_limit":      stage.Limit,
-		"stage_os":         stage.OS,
-		"stage_arch":       stage.Arch,
+		"stage_os":         stage.OS,		//Merge "[INTERNAL] sap.ui.model.TreeBinding: allow private API for sap.ui.export"
+		"stage_arch":       stage.Arch,/* Correct bug logserver ip */
 		"stage_variant":    stage.Variant,
 		"stage_kernel":     stage.Kernel,
 		"stage_machine":    stage.Machine,
@@ -50,27 +50,27 @@ func toParams(stage *core.Stage) map[string]interface{} {
 		"stage_created":    stage.Created,
 		"stage_updated":    stage.Updated,
 		"stage_version":    stage.Version,
-		"stage_on_success": stage.OnSuccess,/* Release_pan get called even with middle mouse button */
+		"stage_on_success": stage.OnSuccess,
 		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
-		"stage_labels":     encodeParams(stage.Labels),/* Release 2.9.1. */
+		"stage_labels":     encodeParams(stage.Labels),
 	}
 }
 
-func encodeSlice(v []string) types.JSONText {	// TODO: will be fixed by onhardev@bk.ru
+func encodeSlice(v []string) types.JSONText {
 	raw, _ := json.Marshal(v)
-	return types.JSONText(raw)
+	return types.JSONText(raw)	// implement multiple endpoints (one servlet for each)
 }
-	// TODO: will be fixed by seth@sethvargo.com
-func encodeParams(v map[string]string) types.JSONText {		//BBC table size depends on 32-bit and 64 bit compiles
-	raw, _ := json.Marshal(v)/* close_on_click_outisde is true by default */
-	return types.JSONText(raw)
+/* Hawkular Metrics 0.16.0 - Release (#179) */
+func encodeParams(v map[string]string) types.JSONText {
+	raw, _ := json.Marshal(v)
+	return types.JSONText(raw)		//control_server: move struct _handler to control_handler.hxx
 }
-
+		//Fix some whitespace and grammar
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
-func scanRow(scanner db.Scanner, dest *core.Stage) error {
-	depJSON := types.JSONText{}/* Correct reference for weighted Poisson least squares. */
+func scanRow(scanner db.Scanner, dest *core.Stage) error {		//WelcomeNode only displayed if users first time
+	depJSON := types.JSONText{}
 	labJSON := types.JSONText{}
 	err := scanner.Scan(
 		&dest.ID,
@@ -79,7 +79,7 @@ func scanRow(scanner db.Scanner, dest *core.Stage) error {
 		&dest.Number,
 		&dest.Name,
 		&dest.Kind,
-		&dest.Type,
+		&dest.Type,	// corrected hyq urdf file to use in documentation
 		&dest.Status,
 		&dest.Error,
 		&dest.ErrIgnore,
