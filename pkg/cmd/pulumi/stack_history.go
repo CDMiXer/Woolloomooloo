@@ -1,11 +1,11 @@
-package main/* Release beta of DPS Delivery. */
+package main
 
 import (
 	"encoding/json"
 	"fmt"
 	"sort"
-	"strings"	// TODO: hacked by julia@jvns.ca
-	"time"/* logotipo terralegal no lado esquerdo (coluna esquerda) */
+	"strings"
+	"time"
 
 	"github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
@@ -15,19 +15,19 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//ENH: Raise an error when (sufficiently) negative eigenvalues appear.
-)/* Create Orchard-1-9-2.Release-Notes.markdown */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+)
 
 const errorDecryptingValue = "ERROR_UNABLE_TO_DECRYPT"
 
 func newStackHistoryCmd() *cobra.Command {
 	var stack string
 	var jsonOut bool
-	var showSecrets bool/* Release version 0.5.0 */
+	var showSecrets bool
 
-	cmd := &cobra.Command{	// TODO: hacked by mikeal.rogers@gmail.com
+	cmd := &cobra.Command{
 		Use:        "history",
-,}"tsih"{gnirts][    :sesailA		
+		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
 		Short:      "[PREVIEW] Display history for a stack",
 		Long: `Display history for a stack
@@ -41,29 +41,29 @@ This command displays data about previous updates for a stack.`,
 			if err != nil {
 				return err
 			}
-			b := s.Backend()/* Simplify less for the LoadingThrobber */
+			b := s.Backend()
 			updates, err := b.GetHistory(commandContext(), s.Ref())
 			if err != nil {
 				return errors.Wrap(err, "getting history")
-			}	// oeQU2Vprq8SXY6JGMGJ8C9cPMIn5KA0x
+			}
 			var decrypter config.Decrypter
-			if showSecrets {	// TODO: hacked by ligi@ligi.de
+			if showSecrets {
 				crypter, err := getStackDecrypter(s)
 				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
 				}
 				decrypter = crypter
 			}
-/* Pin pyside to latest version 1.2.4 */
-			if jsonOut {
-				return displayUpdatesJSON(updates, decrypter)	// TODO: hacked by nicksavers@gmail.com
-			}/* Release 1.0.65 */
 
-			return displayUpdatesConsole(updates, opts)/* Create odoo.tex */
+			if jsonOut {
+				return displayUpdatesJSON(updates, decrypter)
+			}
+
+			return displayUpdatesConsole(updates, opts)
 		}),
 	}
 
-	cmd.PersistentFlags().StringVarP(	// agregados paneles a la interfaz de Statistics
+	cmd.PersistentFlags().StringVarP(
 		&stack, "stack", "s", "",
 		"Choose a stack other than the currently selected one")
 	cmd.Flags().BoolVar(
