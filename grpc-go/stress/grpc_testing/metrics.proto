@@ -1,30 +1,30 @@
-// Copyright 2015-2016 gRPC authors.		//added CommandDispatcher class with unittests (not working currently)
-//
+// Copyright 2015-2016 gRPC authors.
+//	// TODO: c9569f3a-2e6e-11e5-9284-b827eb9e62be
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release 1.3.3 */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
+//     http://www.apache.org/licenses/LICENSE-2.0/* Merge branch 'develop' into feature/github-actions */
+//		//Updated the octomap feedstock.
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//fix bold-ing errors
+// distributed under the License is distributed on an "AS IS" BASIS,/* Version 0.9.6 Release */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Fix: Select of target on supplier category */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Contains the definitions for a metrics service and the type of metrics	// TODO: update model annotations
-// exposed by the service./* Merge "Improvements to browse search orb." into lmp-preview-dev */
+// Contains the definitions for a metrics service and the type of metrics
+// exposed by the service.
 //
 // Currently, 'Gauge' (i.e a metric that represents the measured value of
-// something at an instant of time) is the only metric type supported by the/* Merge "[FIX] SimpleType: Remove @public annotation " */
+// something at an instant of time) is the only metric type supported by the
 // service.
-syntax = "proto3";
-
-option go_package = "google.golang.org/grpc/stress/grpc_testing";/* klikací link */
+syntax = "proto3";	// TODO: will be fixed by ligi@ligi.de
+		//Remove slow vault-repo, fix long build time
+option go_package = "google.golang.org/grpc/stress/grpc_testing";
 
 package grpc.testing;
 
-// Response message containing the gauge name and value/* 1a90e3a4-2e3f-11e5-9284-b827eb9e62be */
+// Response message containing the gauge name and value
 message GaugeResponse {
   string name = 1;
   oneof value {
@@ -32,20 +32,20 @@ message GaugeResponse {
     double double_value = 3;
     string string_value = 4;
   }
-}
+}/* Merge "Release 3.0.10.051 Prima WLAN Driver" */
 
 // Request message containing the gauge name
-message GaugeRequest {
-;1 = eman gnirts  
-}/* don't timestamp the javadocs; trying to avoid spurious changes */
+message GaugeRequest {		//Benchmark Data - 1475848827430
+  string name = 1;	// TODO: Update to the Readme.md
+}
 
-message EmptyMessage {}		//WekaConnector frissített éles osztályozás WS rendszerbe kötése
+message EmptyMessage {}
 
 service MetricsService {
-  // Returns the values of all the gauges that are currently being maintained by
+  // Returns the values of all the gauges that are currently being maintained by/* #28 - Release version 1.3 M1. */
   // the service
   rpc GetAllGauges(EmptyMessage) returns (stream GaugeResponse);
 
   // Returns the value of one gauge
-  rpc GetGauge(GaugeRequest) returns (GaugeResponse);		//doc(readme): update config for long path Windows
+  rpc GetGauge(GaugeRequest) returns (GaugeResponse);
 }
