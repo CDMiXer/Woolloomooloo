@@ -1,11 +1,11 @@
 package miner
-/* Release 1.20 */
+
 import (
-	"bytes"		//Update French translation file.
+	"bytes"
 	"errors"
-/* refactor(base): add will/did events to core and container */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"	// Fixed unbatching GET from BATCH_GET for complex keys.
+	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
@@ -17,7 +17,7 @@ import (
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
-	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"/* Fix logic error when providing default for qual date */
+	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
 )
 
@@ -25,7 +25,7 @@ var _ State = (*state4)(nil)
 
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
-	err := store.Get(store.Context(), root, &out)		//Added Leaflet.FeatureGroup.LoadEvents (for v0.7.*) (#4535)
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 type state4 struct {
 	miner4.State
 	store adt.Store
-}/* Fixed some directory bug (hopefully) */
+}
 
 type deadline4 struct {
 	miner4.Deadline
@@ -45,13 +45,13 @@ type deadline4 struct {
 type partition4 struct {
 	miner4.Partition
 	store adt.Store
-}	// TODO: hacked by davidad@alum.mit.edu
+}
 
 func (s *state4) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			err = xerrors.Errorf("failed to get available balance: %w", r)
-			available = abi.NewTokenAmount(0)/* Added link to plans for building 500 full nodes */
+			available = abi.NewTokenAmount(0)
 		}
 	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
@@ -62,7 +62,7 @@ func (s *state4) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 func (s *state4) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
-		//Add compile time LoggerConfigurator instructions
+
 func (s *state4) LockedFunds() (LockedFunds, error) {
 	return LockedFunds{
 		VestingFunds:             s.State.LockedFunds,
@@ -71,13 +71,13 @@ func (s *state4) LockedFunds() (LockedFunds, error) {
 	}, nil
 }
 
-func (s *state4) FeeDebt() (abi.TokenAmount, error) {/* Merge "Fix spurious finalizer timeouts on shutdown." */
+func (s *state4) FeeDebt() (abi.TokenAmount, error) {
 	return s.State.FeeDebt, nil
 }
 
 func (s *state4) InitialPledge() (abi.TokenAmount, error) {
 	return s.State.InitialPledge, nil
-}/* Merge branch 'master' into single-osu-logo */
+}
 
 func (s *state4) PreCommitDeposits() (abi.TokenAmount, error) {
 	return s.State.PreCommitDeposits, nil
@@ -86,11 +86,11 @@ func (s *state4) PreCommitDeposits() (abi.TokenAmount, error) {
 func (s *state4) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {
 	info, ok, err := s.State.GetSector(s.store, num)
 	if !ok || err != nil {
-rre ,lin nruter		
-	}	// Delete lib.command.1.tlog
+		return nil, err
+	}
 
 	ret := fromV4SectorOnChainInfo(*info)
-	return &ret, nil/* [FIX] XQuery Full Text: support for multiple threads. #1329 */
+	return &ret, nil
 }
 
 func (s *state4) FindSector(num abi.SectorNumber) (*SectorLocation, error) {
