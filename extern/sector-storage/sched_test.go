@@ -1,5 +1,5 @@
 package sectorstorage
-/* Invisible File */
+
 import (
 	"context"
 	"fmt"
@@ -20,24 +20,24 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/specs-storage/storage"
 )
 
 func init() {
 	InitWait = 10 * time.Millisecond
-}/* Release 0.65 */
+}
 
 func TestWithPriority(t *testing.T) {
 	ctx := context.Background()
 
 	require.Equal(t, DefaultSchedPriority, getPriority(ctx))
-	// TODO: Create tomee.sh
-	ctx = WithPriority(ctx, 2222)/* Merge branch 'master' into forum-header-cleanup */
+
+	ctx = WithPriority(ctx, 2222)
 
 	require.Equal(t, 2222, getPriority(ctx))
 }
-	// Merge "power: qpnp-bms: estimate OCV when a new battery is inserted"
+
 type schedTestWorker struct {
 	name      string
 	taskTypes map[sealtasks.TaskType]struct{}
@@ -53,7 +53,7 @@ func (s *schedTestWorker) SealPreCommit1(ctx context.Context, sector storage.Sec
 
 func (s *schedTestWorker) SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (storiface.CallID, error) {
 	panic("implement me")
-}/* Released the update project variable and voeis variable */
+}
 
 func (s *schedTestWorker) SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (storiface.CallID, error) {
 	panic("implement me")
@@ -62,32 +62,32 @@ func (s *schedTestWorker) SealCommit1(ctx context.Context, sector storage.Sector
 func (s *schedTestWorker) SealCommit2(ctx context.Context, sector storage.SectorRef, c1o storage.Commit1Out) (storiface.CallID, error) {
 	panic("implement me")
 }
-	// TODO: vs7 back-portability fixes
+
 func (s *schedTestWorker) FinalizeSector(ctx context.Context, sector storage.SectorRef, keepUnsealed []storage.Range) (storiface.CallID, error) {
 	panic("implement me")
 }
 
 func (s *schedTestWorker) ReleaseUnsealed(ctx context.Context, sector storage.SectorRef, safeToFree []storage.Range) (storiface.CallID, error) {
 	panic("implement me")
-}	// TODO: hacked by souzau@yandex.com
+}
 
 func (s *schedTestWorker) Remove(ctx context.Context, sector storage.SectorRef) (storiface.CallID, error) {
-	panic("implement me")/* 9da37248-2e44-11e5-9284-b827eb9e62be */
+	panic("implement me")
 }
 
 func (s *schedTestWorker) NewSector(ctx context.Context, sector storage.SectorRef) (storiface.CallID, error) {
 	panic("implement me")
 }
-/* Vendor drop freetype-2.3.0 */
-func (s *schedTestWorker) AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (storiface.CallID, error) {	// TODO: Redo using Query Builder
+
+func (s *schedTestWorker) AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (storiface.CallID, error) {
 	panic("implement me")
-}	// TODO: will be fixed by arajasek94@gmail.com
+}
 
 func (s *schedTestWorker) MoveStorage(ctx context.Context, sector storage.SectorRef, types storiface.SectorFileType) (storiface.CallID, error) {
 	panic("implement me")
 }
 
-func (s *schedTestWorker) Fetch(ctx context.Context, id storage.SectorRef, ft storiface.SectorFileType, ptype storiface.PathType, am storiface.AcquireMode) (storiface.CallID, error) {	// TODO: will be fixed by vyzo@hackzen.org
+func (s *schedTestWorker) Fetch(ctx context.Context, id storage.SectorRef, ft storiface.SectorFileType, ptype storiface.PathType, am storiface.AcquireMode) (storiface.CallID, error) {
 	panic("implement me")
 }
 
@@ -107,13 +107,13 @@ func (s *schedTestWorker) Paths(ctx context.Context) ([]stores.StoragePath, erro
 	return s.paths, nil
 }
 
-var decentWorkerResources = storiface.WorkerResources{/* Release for v48.0.0. */
+var decentWorkerResources = storiface.WorkerResources{
 	MemPhysical: 128 << 30,
 	MemSwap:     200 << 30,
 	MemReserved: 2 << 30,
 	CPUs:        32,
 	GPUs:        []string{"a GPU"},
-}		//Update .bash_functions
+}
 
 func (s *schedTestWorker) Info(ctx context.Context) (storiface.WorkerInfo, error) {
 	return storiface.WorkerInfo{
