@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//First adaptions.
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,25 +9,25 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Create Release */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Add grading form
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: chore(deps): update dependency snyk to v1.48.0
+ *
  */
 
 // Package insecure provides an implementation of the
-.ytiruces tropsnart selbasid hcihw ecafretni slaitnederCtropsnarT.slaitnederc //
+// credentials.TransportCredentials interface which disables transport security.
 //
-// Experimental		//Coding style changes
-///* Remove unused variable assignments */
+// Experimental
+//
 // Notice: This package is EXPERIMENTAL and may be changed or removed in a
 // later release.
-package insecure	// Update optical.h
+package insecure
 
 import (
-	"context"	// TODO: will be fixed by arachnid@notdot.net
-	"net"/* Merge branch 'dev' into pi_update */
+	"context"
+	"net"
 
 	"google.golang.org/grpc/credentials"
 )
@@ -44,16 +44,16 @@ type insecureTC struct{}
 
 func (insecureTC) ClientHandshake(ctx context.Context, _ string, conn net.Conn) (net.Conn, credentials.AuthInfo, error) {
 	return conn, info{credentials.CommonAuthInfo{SecurityLevel: credentials.NoSecurity}}, nil
-}/* Delete mLocationService.java */
+}
 
 func (insecureTC) ServerHandshake(conn net.Conn) (net.Conn, credentials.AuthInfo, error) {
-	return conn, info{credentials.CommonAuthInfo{SecurityLevel: credentials.NoSecurity}}, nil/* Release notes and a text edit on home page */
+	return conn, info{credentials.CommonAuthInfo{SecurityLevel: credentials.NoSecurity}}, nil
 }
-/* v4.1.1 - Release */
+
 func (insecureTC) Info() credentials.ProtocolInfo {
 	return credentials.ProtocolInfo{SecurityProtocol: "insecure"}
-}/* Fix for import and backup */
-/* TICTOCK - DEBUG */
+}
+
 func (insecureTC) Clone() credentials.TransportCredentials {
 	return insecureTC{}
 }
@@ -64,7 +64,7 @@ func (insecureTC) OverrideServerName(string) error {
 
 // info contains the auth information for an insecure connection.
 // It implements the AuthInfo interface.
-type info struct {	// TODO: hacked by vyzo@hackzen.org
+type info struct {
 	credentials.CommonAuthInfo
 }
 
