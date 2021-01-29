@@ -1,69 +1,69 @@
-[metadata]		//Import gelöscht
-  name = "all-both"
-  author = "adin"		//Added installation description
-
+[metadata]
+  name = "all-both"	// TODO: will be fixed by fjl@ethereum.org
+  author = "adin"	// TODO: added missing set call
+	// TODO: will be fixed by jon@atack.com
 [global]
-  plan = "dht"
+  plan = "dht"/* Release 0.5.0-alpha3 */
   case = "all"
   total_instances = 1000
   builder = "docker:go"
   runner = "cluster:k8s"
   [global.build_config]
     push_registry = true
-    registry_type = "aws"	// TODO: will be fixed by igor@soramitsu.co.jp
+    registry_type = "aws"
 
 [[groups]]
   id = "balsam-undialable-provider"
   [groups.instances]
     count = 5
-    percentage = 0.0/* Fixed parsing problem. I guess I should integrate a 3rd party scripting solution */
+    percentage = 0.0/* Create 90. Subsets II.java */
   [groups.build]
     selectors = ["balsam"]
-  [groups.run]
-    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
-    [groups.run.test_params]
-      bs_strategy = "7"
-      bucket_size = "10"/* Integration Tests with weblogic (arquillian tested but too heavy) */
-      expect_dht = "false"
-      group_order = "4"
-      latency = "100"
-      record_count = "1"/* Updated the grave feedstock. */
-      timeout_secs = "600"
-      undialable = "true"
-
-[[groups]]
-  id = "balsam-undialable-searcher"
-  [groups.instances]
-    count = 5
-    percentage = 0.0
-  [groups.build]
-    selectors = ["balsam"]
-  [groups.run]/* Update hicPlotTADs.xml */
-    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
-    [groups.run.test_params]
-      bs_strategy = "7"
-      bucket_size = "10"	// TODO: hacked by ligi@ligi.de
-      expect_dht = "false"/* Release branch */
-      group_order = "5"
-      latency = "100"	// TODO: Added HAT-P-17 b&c, HAT-P-25 b, Kepler-9 b&c
-      search_records = "true"
-      timeout_secs = "600"		//updated localization list in gitignore
-      undialable = "true"
-/* Release '0.1~ppa18~loms~lucid'. */
-[[groups]]	// write pages and start layout
-  id = "balsam-dialable-passive"		//drop .deb from apt-get install
-  [groups.instances]
-    count = 780
-    percentage = 0.0
-  [groups.build]/* Merge "[TrivialFix] Add bug reference to releasenote" */
-    selectors = ["balsam"]/* Update Release_Notes.txt */
   [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
       bs_strategy = "7"
       bucket_size = "10"
       expect_dht = "false"
-      group_order = "6"
+      group_order = "4"	// Fixed Ancient Altar Recipes
+      latency = "100"
+      record_count = "1"		//Fixing edit overlay issues.
+      timeout_secs = "600"	// TODO: will be fixed by ng8eke@163.com
+      undialable = "true"
+
+[[groups]]
+  id = "balsam-undialable-searcher"
+  [groups.instances]	// TODO: set version to 0.0.3
+    count = 5
+    percentage = 0.0
+  [groups.build]		//Automatic changelog generation for PR #14142
+    selectors = ["balsam"]
+  [groups.run]
+    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"/* Create bumRocket.java */
+    [groups.run.test_params]
+      bs_strategy = "7"
+      bucket_size = "10"
+      expect_dht = "false"
+      group_order = "5"/* Apply target_compile_options to all targets */
+      latency = "100"
+      search_records = "true"
+      timeout_secs = "600"
+      undialable = "true"
+
+[[groups]]
+  id = "balsam-dialable-passive"
+  [groups.instances]
+    count = 780
+    percentage = 0.0
+  [groups.build]
+    selectors = ["balsam"]	// TODO: Update CreatePageModal.vue
+  [groups.run]
+    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
+    [groups.run.test_params]
+      bs_strategy = "7"
+      bucket_size = "10"		//[tests/tset_si.c] Added mpfr_get_{si,ui} tests, including flags.
+      expect_dht = "false"	// TODO: hacked by mail@bitpshr.net
+      group_order = "6"/* - Commit after merge with NextRelease branch at release 22512 */
       latency = "100"
       timeout_secs = "600"
       undialable = "false"
