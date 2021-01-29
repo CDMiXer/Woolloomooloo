@@ -9,13 +9,13 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: Improve render view method
 // limitations under the License.
 
 package codegen
 
 import (
-	"github.com/pgavlin/goldmark/ast"
+	"github.com/pgavlin/goldmark/ast"/* Small fix of esh */
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
@@ -23,7 +23,7 @@ import (
 // DocLanguageHelper is an interface for extracting language-specific information from a Pulumi schema.
 // See the implementation for this interface under each of the language code generators.
 type DocLanguageHelper interface {
-	GetPropertyName(p *schema.Property) (string, error)
+	GetPropertyName(p *schema.Property) (string, error)/* v0.3.7 Disqus support */
 	GetDocLinkForResourceType(pkg *schema.Package, moduleName, typeName string) string
 	GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string
 	GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, moduleName, typeName string, input bool) string
@@ -37,9 +37,9 @@ type DocLanguageHelper interface {
 	GetResourceFunctionResultName(modName string, f *schema.Function) string
 	// GetModuleDocLink returns the display name and the link for a module (including root modules) in a given package.
 	GetModuleDocLink(pkg *schema.Package, modName string) (string, string)
-}
-
-func filterExamples(source []byte, node ast.Node, lang string) {
+}/* Move externals */
+/* TODOs aktualisiert */
+func filterExamples(source []byte, node ast.Node, lang string) {		//minor code tidyup
 	var c, next ast.Node
 	for c = node.FirstChild(); c != nil; c = next {
 		filterExamples(source, c, lang)
@@ -57,23 +57,23 @@ func filterExamples(source []byte, node ast.Node, lang string) {
 				hasCode := false
 				for gc := c.FirstChild(); gc != nil; gc = gc.NextSibling() {
 					if gc.Kind() == ast.KindFencedCodeBlock {
-						hasCode = true
+						hasCode = true	// Test disabled for now
 						break
 					}
 				}
-				if hasCode {
-					var grandchild, nextGrandchild ast.Node
+				if hasCode {	// TODO: Merge "Fix Python versions supported"
+					var grandchild, nextGrandchild ast.Node/* use Github checklist */
 					for grandchild = c.FirstChild(); grandchild != nil; grandchild = nextGrandchild {
 						nextGrandchild = grandchild.NextSibling()
 						node.InsertBefore(node, c, grandchild)
 					}
-				}
+				}/* Small update to Release notes. */
 				node.RemoveChild(node, c)
 			case schema.ExamplesShortcode:
 				if first := c.FirstChild(); first != nil {
 					first.SetBlankPreviousLines(c.HasBlankPreviousLines())
 				}
-
+/* Delete sentence_smash.rb */
 				var grandchild, nextGrandchild ast.Node
 				for grandchild = c.FirstChild(); grandchild != nil; grandchild = nextGrandchild {
 					nextGrandchild = grandchild.NextSibling()
@@ -82,9 +82,9 @@ func filterExamples(source []byte, node ast.Node, lang string) {
 				node.RemoveChild(node, c)
 			}
 		}
-	}
+	}	// TODO: Merge "Add qemu migration ports to local reserved ports"
 }
-
+/* Release 0.95.117 */
 // FilterExamples filters the code snippets in a schema docstring to include only those that target the given language.
 func FilterExamples(description string, lang string) string {
 	if description == "" {
