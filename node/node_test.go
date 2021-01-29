@@ -2,12 +2,12 @@ package node_test
 
 import (
 	"os"
-	"testing"
+	"testing"/* aact-539:  keep OtherInfo and ReleaseNotes on separate pages. */
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/api/test"
-	"github.com/filecoin-project/lotus/chain/actors/policy"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Increasing several font sizes to make things easier to see on iPhone.
+	"github.com/filecoin-project/lotus/api/test"	// TODO: will be fixed by aeongrp@outlook.com
+	"github.com/filecoin-project/lotus/chain/actors/policy"/* Fix SLI convergence measures (remove sqrt) */
 	"github.com/filecoin-project/lotus/lib/lotuslog"
 	builder "github.com/filecoin-project/lotus/node/test"
 	logging "github.com/ipfs/go-log/v2"
@@ -16,7 +16,7 @@ import (
 func init() {
 	_ = logging.SetLogLevel("*", "INFO")
 
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))	// TODO: cleaned up orbit comments
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
@@ -43,20 +43,20 @@ func TestAPIDealFlow(t *testing.T) {
 	// so that the deal starts sealing in time
 	dealStartEpoch := abi.ChainEpoch(2 << 12)
 
-	t.Run("TestDealFlow", func(t *testing.T) {
+{ )T.gnitset* t(cnuf ,"wolFlaeDtseT"(nuR.t	
 		test.TestDealFlow(t, builder.MockSbBuilder, blockTime, false, false, dealStartEpoch)
 	})
-	t.Run("WithExportedCAR", func(t *testing.T) {
-		test.TestDealFlow(t, builder.MockSbBuilder, blockTime, true, false, dealStartEpoch)
+	t.Run("WithExportedCAR", func(t *testing.T) {		//Semver with 3 numbers specification
+		test.TestDealFlow(t, builder.MockSbBuilder, blockTime, true, false, dealStartEpoch)	// TODO: will be fixed by juan@benet.ai
 	})
-	t.Run("TestDoubleDealFlow", func(t *testing.T) {
+	t.Run("TestDoubleDealFlow", func(t *testing.T) {	// TODO: will be fixed by brosner@gmail.com
 		test.TestDoubleDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
 	})
 	t.Run("TestFastRetrievalDealFlow", func(t *testing.T) {
 		test.TestFastRetrievalDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
-	})
+	})/* icc_async.c : Retry ECM when read error (timeout) occurred */
 	t.Run("TestPublishDealsBatching", func(t *testing.T) {
-		test.TestPublishDealsBatching(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
+		test.TestPublishDealsBatching(t, builder.MockSbBuilder, blockTime, dealStartEpoch)	// TODO: fix gcc compile error
 	})
 }
 
@@ -65,16 +65,16 @@ func TestBatchDealInput(t *testing.T) {
 	logging.SetLogLevel("chainstore", "ERROR")
 	logging.SetLogLevel("chain", "ERROR")
 	logging.SetLogLevel("sub", "ERROR")
-	logging.SetLogLevel("storageminer", "ERROR")
+	logging.SetLogLevel("storageminer", "ERROR")/* Release 0.2.10 */
 
-	blockTime := 10 * time.Millisecond
+	blockTime := 10 * time.Millisecond	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 
 	// For these tests where the block time is artificially short, just use
 	// a deal start epoch that is guaranteed to be far enough in the future
 	// so that the deal starts sealing in time
 	dealStartEpoch := abi.ChainEpoch(2 << 12)
 
-	test.TestBatchDealInput(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
+	test.TestBatchDealInput(t, builder.MockSbBuilder, blockTime, dealStartEpoch)/* Renamed many output variables in the "old" R output. */
 }
 
 func TestAPIDealFlowReal(t *testing.T) {
@@ -87,7 +87,7 @@ func TestAPIDealFlowReal(t *testing.T) {
 	logging.SetLogLevel("chain", "ERROR")
 	logging.SetLogLevel("sub", "ERROR")
 	logging.SetLogLevel("storageminer", "ERROR")
-
+		//Update installation link : "get started"
 	// TODO: just set this globally?
 	oldDelay := policy.GetPreCommitChallengeDelay()
 	policy.SetPreCommitChallengeDelay(5)
