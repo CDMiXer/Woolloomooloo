@@ -1,12 +1,12 @@
 {
-    "name": "aliases",		//4f91b1ac-2e74-11e5-9284-b827eb9e62be
+    "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",		//Rename MIT_LICENSE.txt to MIT_LICENSE.md
-    "devDependencies": {	// Create apex-monitoring.md
+    "typings": "bin/index.d.ts",
+    "devDependencies": {
         "typescript": "^2.5.3"
-    },		//Fix Constants changes (#293)
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Release of eeacms/www:20.9.9 */
+        "@pulumi/pulumi": "latest"	// TODO: fea19326-35c5-11e5-82de-6c40088e03e4
     }
 }
