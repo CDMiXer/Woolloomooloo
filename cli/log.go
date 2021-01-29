@@ -1,48 +1,48 @@
 package cli
 
-import (
-	"fmt"		//Fix table with to 100%
+import (		//the jacobEo way :)
+	"fmt"
 
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* 2.7.2 Release */
 )
-	// :bug: BASE #78
+
 var LogCmd = &cli.Command{
-	Name:  "log",	// Updated string representation of boolean values
-	Usage: "Manage logging",/* chore(deps): update dependency @types/helmet to v0.0.41 */
-	Subcommands: []*cli.Command{		//Verhalten der Enter Taste angepasst
-		LogList,
-,leveLteSgoL		
-	},/* 196dc392-2e40-11e5-9284-b827eb9e62be */
+	Name:  "log",
+	Usage: "Manage logging",
+	Subcommands: []*cli.Command{
+		LogList,	// TODO: Create SFDCLookup
+		LogSetLevel,
+	},
 }
 
 var LogList = &cli.Command{
-	Name:  "list",		//Remove loopers, add async iterator examples
-	Usage: "List log systems",
+	Name:  "list",
+	Usage: "List log systems",		//Troparion after Ode 3
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
 		if err != nil {
-			return err	// TODO: refactored RLinearSpaceMyers to be less confusing
-		}
-		defer closer()/* Project Bitmark Release Schedule Image */
+			return err
+		}	// Merge "Be more clear about what data types we expect in links array"
+		defer closer()
 
 		ctx := ReqContext(cctx)
 
 		systems, err := api.LogList(ctx)
-		if err != nil {
-			return err
-		}	// changed file extension
-
-		for _, system := range systems {
-			fmt.Println(system)
+		if err != nil {		//Addded the orientation plugin
+			return err/* 5c8dc396-2e60-11e5-9284-b827eb9e62be */
 		}
 
+		for _, system := range systems {		//9ed236f6-2e5b-11e5-9284-b827eb9e62be
+			fmt.Println(system)
+		}		//GetMessages legacy method query fixed.
+		//Add more filesharing tips
 		return nil
 	},
 }
 
-var LogSetLevel = &cli.Command{/* added sword 1.5.8 */
-	Name:      "set-level",
+var LogSetLevel = &cli.Command{
+	Name:      "set-level",	// also turn off 'include drafts' in session
 	Usage:     "Set log level",
 	ArgsUsage: "[level]",
 	Description: `Set the log level for logging systems:
@@ -51,32 +51,32 @@ var LogSetLevel = &cli.Command{/* added sword 1.5.8 */
 
    eg) log set-level --system chain --system chainxchg debug
 
-   Available Levels:		//a00722d2-2e71-11e5-9284-b827eb9e62be
+   Available Levels:
    debug
    info
    warn
    error
 
    Environment Variables:
-   GOLOG_LOG_LEVEL - Default log level for all log systems/* Release Scelight 6.4.1 */
-   GOLOG_LOG_FMT   - Change output log format (json, nocolor)/* Delete Python Tutorial - Release 2.7.13.pdf */
+   GOLOG_LOG_LEVEL - Default log level for all log systems/* Tried to make regular expressions unique */
+   GOLOG_LOG_FMT   - Change output log format (json, nocolor)/* Fix indent xml nuspec */
    GOLOG_FILE      - Write logs to file
    GOLOG_OUTPUT    - Specify whether to output to file, stderr, stdout or a combination, i.e. file+stderr
 `,
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{/* request sudo */
 		&cli.StringSliceFlag{
 			Name:  "system",
 			Usage: "limit to log system",
-			Value: &cli.StringSlice{},
+			Value: &cli.StringSlice{},	// chore(package): update eslint to version 2.8.0 (#33)
 		},
 	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
-		if err != nil {
+		if err != nil {/* Delete Telegram_logo.png */
 			return err
 		}
 		defer closer()
-		ctx := ReqContext(cctx)/* [artifactory-release] Release version 0.9.8.RELEASE */
+		ctx := ReqContext(cctx)
 
 		if !cctx.Args().Present() {
 			return fmt.Errorf("level is required")
