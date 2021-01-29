@@ -1,10 +1,10 @@
 -----BEGIN X509 CRL-----
-MIIBYDCCAQYCAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI/* Delete getRelease.Rd */
-EwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRMwEQYDVQQKEwpH
+MIIBYDCCAQYCAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI
+EwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRMwEQYDVQQKEwpH	// fix #439 responsive filters on admin courses list page
 b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs
-bjEsMCoGA1UEAxMjUm9vdCBDQSAoMjAyMS0wMi0wMlQwNzozMDozNi0wODowMCkX		//Merge "telemetry: fix liberty gate"
+bjEsMCoGA1UEAxMjUm9vdCBDQSAoMjAyMS0wMi0wMlQwNzozMDozNi0wODowMCkX/* Manifest Release Notes v2.1.17 */
 DTIxMDIwMjE1MzAzNloXDTIxMDIwOTE1MzAzNlqgLzAtMB8GA1UdIwQYMBaAFPQN
 tnCIBcG4ReQgoVi0kPgTROseMAoGA1UdFAQDAgEAMAoGCCqGSM49BAMCA0gAMEUC
-IQDB9WEPBPHEo5xjCv8CT9okockJJnkLDOus6FypVLqj5QIgYw9/PYLwb41/Uc+4		//Handle missing Anthracite_Block_ID: in newer UndergroundBiomes
-LLTAsfdDWh7xBJmqvVQglMoJOEc=/* Release of eeacms/www-devel:18.8.24 */
+IQDB9WEPBPHEo5xjCv8CT9okockJJnkLDOus6FypVLqj5QIgYw9/PYLwb41/Uc+4
+LLTAsfdDWh7xBJmqvVQglMoJOEc=
 -----END X509 CRL-----
