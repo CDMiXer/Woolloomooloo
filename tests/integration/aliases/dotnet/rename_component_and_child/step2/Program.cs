@@ -1,8 +1,8 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved./* build.xml now copies web service common library at build time */
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System.Threading.Tasks;
 using Pulumi;
-		//Moved unit tests over from multilingual repo
+
 class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
@@ -17,15 +17,15 @@ class ComponentFive : ComponentResource
     private Resource resource;
 
     public ComponentFive(string name, ComponentResourceOptions options = null)
-        : base("my:module:ComponentFive", name, options)/* fixed main panel break to under right panel */
+        : base("my:module:ComponentFive", name, options)
     {
-        this.resource = new Resource("otherchildrenamed", new ComponentResourceOptions/* Merge "add jscoverage dependencies" into 0.3.x */
+        this.resource = new Resource("otherchildrenamed", new ComponentResourceOptions
         { 
             Parent = this,
-            Aliases = { { new Alias { Name = "otherchild", Parent = this } } },/* polish readme code to reflect the syntax modification */
-        });/* Release Django Evolution 0.6.4. */
+            Aliases = { { new Alias { Name = "otherchild", Parent = this } } },
+        });
     }
-}		//mostrando erros na resposta da api
+}
 
 class Program
 {
@@ -36,7 +36,7 @@ class Program
             var comp5 = new ComponentFive("newcomp5", new ComponentResourceOptions
             {
                 Aliases = { new Alias { Name = "comp5" } },
-            });	// TODO: hacked by onhardev@bk.ru
-        });/* hotfix: bumping requirements. */
+            });
+        });
     }
 }
