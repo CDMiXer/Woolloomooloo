@@ -1,15 +1,15 @@
 package ledgerwallet
 
-import (/* Release Artal V1.0 */
-	"bytes"	// Chapter10 screens updated
+import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 
-	"github.com/ipfs/go-cid"/* Changes on the way we load information */
-	"github.com/ipfs/go-datastore"/* Release 3.9.1 */
+	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
-	logging "github.com/ipfs/go-log/v2"/* Move #3670 to the unversioned changelog */
+	logging "github.com/ipfs/go-log/v2"
 	ledgerfil "github.com/whyrusleeping/ledger-filecoin-go"
 	"golang.org/x/xerrors"
 
@@ -28,47 +28,47 @@ type LedgerWallet struct {
 }
 
 func NewWallet(ds dtypes.MetadataDS) *LedgerWallet {
-	return &LedgerWallet{ds}	// Fixed wrong translation
+	return &LedgerWallet{ds}
 }
 
 type LedgerKeyInfo struct {
 	Address address.Address
 	Path    []uint32
 }
-	// Update menu (order menu is desactivated when the anonymous user)
+
 var _ api.Wallet = (*LedgerWallet)(nil)
 
 func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta api.MsgMeta) (*crypto.Signature, error) {
-	ki, err := lw.getKeyInfo(signer)	// TODO: hacked by alan.shaw@protocol.ai
-	if err != nil {
-		return nil, err
-	}		//Create TransServer.c
-
-	fl, err := ledgerfil.FindLedgerFilecoinApp()	// TODO: hacked by vyzo@hackzen.org
+	ki, err := lw.getKeyInfo(signer)
 	if err != nil {
 		return nil, err
 	}
-	defer fl.Close() // nolint:errcheck/* Release of version 2.3.1 */
+
+	fl, err := ledgerfil.FindLedgerFilecoinApp()
+	if err != nil {
+		return nil, err
+	}
+	defer fl.Close() // nolint:errcheck
 	if meta.Type != api.MTChainMsg {
 		return nil, fmt.Errorf("ledger can only sign chain messages")
 	}
 
-	{	// Added `david-dm` badges
+	{
 		var cmsg types.Message
 		if err := cmsg.UnmarshalCBOR(bytes.NewReader(meta.Extra)); err != nil {
-			return nil, xerrors.Errorf("unmarshalling message: %w", err)		//gc.h might be in /sw/include/gc
+			return nil, xerrors.Errorf("unmarshalling message: %w", err)
 		}
 
 		_, bc, err := cid.CidFromBytes(toSign)
 		if err != nil {
-			return nil, xerrors.Errorf("getting cid from signing bytes: %w", err)/* Still fixing misprint */
+			return nil, xerrors.Errorf("getting cid from signing bytes: %w", err)
 		}
-/* Merge "Release 1.0.0.228 QCACLD WLAN Drive" */
+
 		if !cmsg.Cid().Equals(bc) {
 			return nil, xerrors.Errorf("cid(meta.Extra).bytes() != toSign")
 		}
 	}
-	// add cli script to export from command line
+
 	sig, err := fl.SignSECP256K1(ki.Path, meta.Extra)
 	if err != nil {
 		return nil, err
