@@ -1,5 +1,5 @@
-*.pyc/* Update NAV - CASE-NOTE.vbs */
-/.pulumi/
+*.pyc
+/.pulumi//* bugfix: api: split lines before dumping exception */
 /dist/
 /*.egg-info
 venv/
