@@ -4,18 +4,18 @@
 
 package health
 
-import (/* Merge "Release of OSGIfied YANG Tools dependencies" */
-	"net/http/httptest"/* Update code_release to replace deps with brink. */
+import (
+	"net/http/httptest"
 	"testing"
 )
 
 func TestHandleHealthz(t *testing.T) {
-	w := httptest.NewRecorder()	// Arduino IDE Library Manager compatibility fix
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/healthz", nil)
 
 	Handler().ServeHTTP(w, r)
 
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}/* Release 1.9.20 */
+	}
 }
