@@ -1,10 +1,10 @@
 {
-    "name": "steps",/* Add Tests for Dashboard PRs 406 & 410 */
-    "license": "Apache-2.0",	// added plot function for testing only
+    "name": "steps",
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//don't fail if the last line in the file doesn't have a newline ending it.
-}	// add linewrap to udeb postinst and fix a syntax error
+    }
+}
