@@ -1,4 +1,4 @@
 package dtypes
 
-type NetworkName string		//added summarize() function
+type NetworkName string
 type AfterGenesisSet struct{}
