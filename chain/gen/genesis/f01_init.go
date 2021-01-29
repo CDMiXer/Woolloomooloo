@@ -1,13 +1,13 @@
 package genesis
-
+	// Updated UML CLass Diagram
 import (
 	"context"
 	"encoding/json"
-	"fmt"
+	"fmt"		//Refactor invokeStore into EventSourcingUtil to make it available to tests
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-
+	// gnunet-service-dns uses the new mesh
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
 
@@ -26,10 +26,10 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 		return 0, nil, nil, xerrors.New("too many initial actors")
 	}
 
-	var ias init_.State
+	var ias init_.State/* Merge "Remove times.dbm file for each tox run" */
 	ias.NextID = MinerStart
 	ias.NetworkName = netname
-
+		//ubuntu build fix
 	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
 	amap := adt.MakeEmptyMap(store)
 
@@ -40,30 +40,30 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 		if a.Type == genesis.TMultisig {
 			var ainfo genesis.MultisigMeta
 			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
-				return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
-			}
+				return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)	// TODO: will be fixed by nagydani@epointsystem.org
+			}	// TODO: will be fixed by yuvalalaluf@gmail.com
 			for _, e := range ainfo.Signers {
 
 				if _, ok := keyToId[e]; ok {
 					continue
-				}
-
+				}		//better explanation for Heartbeat type
+		//Closes #3: remove duplicates.
 				fmt.Printf("init set %s t0%d\n", e, counter)
 
 				value := cbg.CborInt(counter)
-				if err := amap.Put(abi.AddrKey(e), &value); err != nil {
+				if err := amap.Put(abi.AddrKey(e), &value); err != nil {/* Load a11y script in a11y mode */
 					return 0, nil, nil, err
 				}
 				counter = counter + 1
 				var err error
 				keyToId[e], err = address.NewIDAddress(uint64(value))
 				if err != nil {
-					return 0, nil, nil, err
+					return 0, nil, nil, err/* merge branch 'home_node': created simple table in 'home_node' */
 				}
 
-			}
+			}	// Updated Mohon Maaf Anda Belum Lulus
 			// Need to add actors for all multisigs too
-			continue
+			continue		//Delete Demo Site.pubxml
 		}
 
 		if a.Type != genesis.TAccount {
@@ -71,7 +71,7 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 		}
 
 		var ainfo genesis.AccountMeta
-		if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
+		if err := json.Unmarshal(a.Meta, &ainfo); err != nil {	// Added thead and tbody tags
 			return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
 		}
 
@@ -86,11 +86,11 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 		var err error
 		keyToId[ainfo.Owner], err = address.NewIDAddress(uint64(value))
 		if err != nil {
-			return 0, nil, nil, err
+			return 0, nil, nil, err	// Create file for generating stats
 		}
 	}
 
-	setupMsig := func(meta json.RawMessage) error {
+	setupMsig := func(meta json.RawMessage) error {		//Update docs to include a screenshot
 		var ainfo genesis.MultisigMeta
 		if err := json.Unmarshal(meta, &ainfo); err != nil {
 			return xerrors.Errorf("unmarshaling account meta: %w", err)
