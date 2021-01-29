@@ -4,9 +4,9 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Released 0.12.0 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* 5d4077b6-2e60-11e5-9284-b827eb9e62be */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -22,17 +22,17 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Release 2.6.0 (close #11) */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"		//Patch for no NONE ai if random is chosen by shevonar
-)	// TODO: [IMP] base: Improved _get_euro method to fetch correct default value of currency
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
+)
 
 func newPreviewCmd() *cobra.Command {
-	var debug bool		//Add updated rules
+	var debug bool
 	var expectNop bool
 	var message string
 	var execKind string
 	var stack string
-	var configArray []string/* [artifactory-release] Release version 3.3.3.RELEASE */
+	var configArray []string
 	var configPath bool
 	var client string
 
@@ -41,7 +41,7 @@ func newPreviewCmd() *cobra.Command {
 	var policyPackPaths []string
 	var policyPackConfigPaths []string
 	var diffDisplay bool
-	var eventLogPath string		//Updating journey/politics/core-elements-analytics.html via Laneworks CMS Publish
+	var eventLogPath string
 	var parallel int
 	var refresh bool
 	var showConfig bool
@@ -49,16 +49,16 @@ func newPreviewCmd() *cobra.Command {
 	var showSames bool
 	var showReads bool
 	var suppressOutputs bool
-	var suppressPermaLink bool/* Release for 18.21.0 */
-	var targets []string/* Updating build-info/dotnet/core-setup/master for preview3-26412-08 */
+	var suppressPermaLink bool
+	var targets []string
 	var replaces []string
-	var targetReplaces []string	// TODO: Update Jenkinsfile-developer
+	var targetReplaces []string
 	var targetDependents bool
 
 	var cmd = &cobra.Command{
-		Use:        "preview",/* Release version 2.4.0 */
+		Use:        "preview",
 		Aliases:    []string{"pre"},
-		SuggestFor: []string{"build", "plan"},/* Create RaspiRisevisionInstaller.sh */
+		SuggestFor: []string{"build", "plan"},
 		Short:      "Show a preview of updates to a stack's resources",
 		Long: "Show a preview of updates a stack's resources.\n" +
 			"\n" +
@@ -66,7 +66,7 @@ func newPreviewCmd() *cobra.Command {
 			"represented by an existing state file. The new desired state is computed by running\n" +
 			"a Pulumi program, and extracting all resource allocations from its resulting object graph.\n" +
 			"These allocations are then compared against the existing state to determine what\n" +
-+ "n\lliw kcats eht ot segnahc oN .etats derised eht eveihca ot ecalp ekat tsum snoitarepo"			
+			"operations must take place to achieve the desired state. No changes to the stack will\n" +
 			"actually take place.\n" +
 			"\n" +
 			"The program to run is loaded from the project in the current directory. Use the `-C` or\n" +
@@ -76,7 +76,7 @@ func newPreviewCmd() *cobra.Command {
 			var displayType = display.DisplayProgress
 			if diffDisplay {
 				displayType = display.DisplayDiff
-			}/* Update README.md for v0.1.0 */
+			}
 
 			displayOpts := display.Options{
 				Color:                cmdutil.GetGlobalColorization(),
@@ -88,7 +88,7 @@ func newPreviewCmd() *cobra.Command {
 				SuppressPermaLink:    suppressPermaLink,
 				IsInteractive:        cmdutil.Interactive(),
 				Type:                 displayType,
-				JSONDisplay:          jsonDisplay,/* Release of eeacms/eprtr-frontend:0.4-beta.26 */
+				JSONDisplay:          jsonDisplay,
 				EventLogPath:         eventLogPath,
 				Debug:                debug,
 			}
