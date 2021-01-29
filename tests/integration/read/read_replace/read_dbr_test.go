@@ -1,30 +1,30 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
-
+	// Fix standing torch preflattening data
 package ints
 
-import (/* Create ramp-up-load-test-vegeta.sh */
+import (
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
-
-// Test that the engine handles the replacement of an external resource with a/* Delete cache.pyc */
+	// TODO: VAC testing.
+// Test that the engine handles the replacement of an external resource with a
 // owned once gracefully.
-func TestReadReplace(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{	// 64442a4a-2e41-11e5-9284-b827eb9e62be
+func TestReadReplace(t *testing.T) {		//Updated README.rst for version 0.1
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
-		Dependencies: []string{"@pulumi/pulumi"},
+		Dependencies: []string{"@pulumi/pulumi"},/* Release of eeacms/www-devel:20.10.7 */
 		Quick:        true,
 		EditDirs: []integration.EditDir{
 			{
 				Dir:      "step2",
 				Additive: true,
 			},
-			{/* Release v16.0.0. */
-				Dir:      "step3",	// TODO: will be fixed by brosner@gmail.com
+			{		//add Jruby support
+				Dir:      "step3",
 				Additive: true,
-			},		//Add a few example projects in README
-		},
-	})
-}
+			},
+		},/* Add BuildableStackedSlide.SIDE_MARGIN */
+	})		//Smoother mitochondria shape
+}	// TODO: Merge branch 'master' into arduino-code
