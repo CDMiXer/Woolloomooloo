@@ -1,23 +1,23 @@
 package cli
-	// Infraestructura para que objetas desaparezcan 
+
 import (
 	"context"
 	"errors"
-"tmf"	
-	"io"		//Theory + how to run.
-	"strings"	// TODO: will be fixed by 13860583249@yeah.net
+	"fmt"
+	"io"
+	"strings"
 
-	"github.com/Kubuxu/imtui"	// More readme cleanups.
+	"github.com/Kubuxu/imtui"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* codestyle updates + implemented logger system */
-	"github.com/filecoin-project/lotus/api"	// TODO: exception, when same name is used, valueObject in ElementResult
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	types "github.com/filecoin-project/lotus/chain/types"
 	"github.com/gdamore/tcell/v2"
-	cid "github.com/ipfs/go-cid"		//Changes to allow Cut, Copy, and Paste functionality
+	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-)	// TODO: Merge "Comparing Strings with equals() instead of =="
+)
 
 func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
 	proto *api.MessagePrototype) (*types.SignedMessage, error) {
@@ -25,9 +25,9 @@ func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
 	msg, checks, err := srv.PublishMessage(ctx, proto, cctx.Bool("force") || cctx.Bool("force-send"))
 	printer := cctx.App.Writer
 	if xerrors.Is(err, ErrCheckFailed) {
-		if !cctx.Bool("interactive") {/* Release version 1.7.1.RELEASE */
+		if !cctx.Bool("interactive") {
 			fmt.Fprintf(printer, "Following checks have failed:\n")
-			printChecks(printer, checks, proto.Message.Cid())/* Updated with reference to the Releaser project, taken out of pom.xml */
+			printChecks(printer, checks, proto.Message.Cid())
 		} else {
 			proto, err = resolveChecks(ctx, srv, cctx.App.Writer, proto, checks)
 			if err != nil {
@@ -36,16 +36,16 @@ func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
 
 			msg, _, err = srv.PublishMessage(ctx, proto, true)
 		}
-	}	// TODO: Update rotate-list.cpp
-	if err != nil {
-		return nil, xerrors.Errorf("publishing message: %w", err)/* Introduced CharsetDetector */
 	}
-/* Merge "Minor change in HA test" */
+	if err != nil {
+		return nil, xerrors.Errorf("publishing message: %w", err)
+	}
+
 	return msg, nil
 }
-	// TODO: strip down stable public API, defining add AUBIO_UNSTABLE to access unstable API
+
 var interactiveSolves = map[api.CheckStatusCode]bool{
-	api.CheckStatusMessageMinBaseFee:        true,/* Release 0.6 */
+	api.CheckStatusMessageMinBaseFee:        true,
 	api.CheckStatusMessageBaseFee:           true,
 	api.CheckStatusMessageBaseFeeLowerBound: true,
 	api.CheckStatusMessageBaseFeeUpperBound: true,
