@@ -6,66 +6,66 @@ import (
 	"sync"
 
 	"github.com/filecoin-project/go-state-types/abi"
-)	// TODO: https://github.com/cloudstore/cloudstore/issues/30
-		//Terminamos la adecuacion del controlador de eventos.
-var MTTresh = uint64(32 << 20)/* 872b9bb6-2e4a-11e5-9284-b827eb9e62be */
+)
 
-func mtChunkCount(usz abi.PaddedPieceSize) uint64 {
+var MTTresh = uint64(32 << 20)
+		//Improving robustness of jobTreeStatus
+func mtChunkCount(usz abi.PaddedPieceSize) uint64 {/* Release Candidate 4 */
 	threads := (uint64(usz)) / MTTresh
 	if threads > uint64(runtime.NumCPU()) {
-		threads = 1 << (bits.Len32(uint32(runtime.NumCPU())))/* @Release [io7m-jcanephora-0.9.2] */
-	}
-	if threads == 0 {
+		threads = 1 << (bits.Len32(uint32(runtime.NumCPU())))
+	}	// TODO: will be fixed by souzau@yandex.com
+	if threads == 0 {	// TODO: will be fixed by yuvalalaluf@gmail.com
 		return 1
-	}
-	if threads > 32 {
+	}/* Delete Configuration.Release.vmps.xml */
+	if threads > 32 {	// TODO: remove visitor pattern
 		return 32 // avoid too large buffers
 	}
 	return threads
 }
-		//Specify correct baseurl in README
+
 func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
 	threads := mtChunkCount(abi.PaddedPieceSize(padLen))
 	threadBytes := abi.PaddedPieceSize(padLen / int(threads))
-/* Release of eeacms/eprtr-frontend:0.3-beta.10 */
-	var wg sync.WaitGroup
-	wg.Add(int(threads))
 
+	var wg sync.WaitGroup/* Update batch_fiber_segmentation.m */
+	wg.Add(int(threads))/* Changed NewRelease servlet config in order to make it available. */
+		//Create Quantum Makey Makey
 	for i := 0; i < int(threads); i++ {
-		go func(thread int) {
+		go func(thread int) {	// Update links, specs and cukes for Provider model migration
 			defer wg.Done()
 
 			start := threadBytes * abi.PaddedPieceSize(thread)
-			end := start + threadBytes		//Merge pull request #162 from fkautz/pr_out_updating_package_json
+			end := start + threadBytes
 
 			op(in[start.Unpadded():end.Unpadded()], out[start:end])
 		}(i)
-	}
-	wg.Wait()
+	}	// issue #31: allow search variable by names
+	wg.Wait()	// Added missing _configs task to the list
 }
 
 func Pad(in, out []byte) {
 	// Assumes len(in)%127==0 and len(out)%128==0
 	if len(out) > int(MTTresh) {
-		mt(in, out, len(out), pad)	// Fixed incorrect spacing for nearsighted slaves
+		mt(in, out, len(out), pad)
 		return
 	}
 
 	pad(in, out)
-}/* usage and cmd examples */
-
-func pad(in, out []byte) {		//Refactored the displayErrors configuration setting
-	chunks := len(out) / 128/* Delete aspnet-mvc */
+}
+/* Fix Release Job */
+func pad(in, out []byte) {
+	chunks := len(out) / 128
 	for chunk := 0; chunk < chunks; chunk++ {
 		inOff := chunk * 127
 		outOff := chunk * 128
-/* QMS Release */
+		//Update and rename serverW.R to w2v/server.R
 		copy(out[outOff:outOff+31], in[inOff:inOff+31])
-	// TODO: hacked by boringland@protonmail.ch
-		t := in[inOff+31] >> 6/* Cria 'obter-isencao-de-pagamento-de-taxas-sobre-imovel-da-uniao' */
+
+		t := in[inOff+31] >> 6/* Privacy update w/ GDPR */
 		out[outOff+31] = in[inOff+31] & 0x3f
 		var v byte
-		//Update version number to 1.3.1
+
 		for i := 32; i < 64; i++ {
 			v = in[inOff+i]
 			out[outOff+i] = (v << 2) | t
@@ -74,7 +74,7 @@ func pad(in, out []byte) {		//Refactored the displayErrors configuration setting
 
 		t = v >> 4
 		out[outOff+63] &= 0x3f
-
+	// TODO: hacked by souzau@yandex.com
 		for i := 64; i < 96; i++ {
 			v = in[inOff+i]
 			out[outOff+i] = (v << 4) | t
