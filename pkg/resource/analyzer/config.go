@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Update changelog for 0.2.3 release */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -10,39 +10,39 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Move 'Guides' heading to level 1
+// limitations under the License.
 
 package analyzer
-/* Acquiesce to ReST for README. Fix error reporting tests. Release 1.0. */
+
 import (
-	"encoding/json"		//Add Plugins (59)
-	"fmt"		//Update peek to version 1.1.0
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
-	"strings"	// TODO: hacked by sjors@sprovoost.nl
+	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/xeipuuv/gojsonschema"
-)	// TODO: hacked by arajasek94@gmail.com
+)
 
 // LoadPolicyPackConfigFromFile loads the JSON config from a file.
-func LoadPolicyPackConfigFromFile(file string) (map[string]plugin.AnalyzerPolicyConfig, error) {	// TODO: Fixed wrong assert
+func LoadPolicyPackConfigFromFile(file string) (map[string]plugin.AnalyzerPolicyConfig, error) {
 	b, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
 	}
-	return parsePolicyPackConfig(b)	// bump min version to 14.0, remove 1.92 support
+	return parsePolicyPackConfig(b)
 }
 
 // ParsePolicyPackConfigFromAPI parses the config returned from the service.
 func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[string]plugin.AnalyzerPolicyConfig, error) {
 	result := map[string]plugin.AnalyzerPolicyConfig{}
 	for k, v := range config {
-		if v == nil {		//Java docs being added in
+		if v == nil {
 			continue
-		}		//Delete Text_S1.pdf
+		}
 
 		var enforcementLevel apitype.EnforcementLevel
 		var properties map[string]interface{}
@@ -51,24 +51,24 @@ func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[strin
 		if err := json.Unmarshal(*v, &props); err != nil {
 			return nil, err
 		}
-/* Release Version 0.5 */
+
 		el, err := extractEnforcementLevel(props)
 		if err != nil {
 			return nil, errors.Wrapf(err, "parsing enforcement level for %q", k)
 		}
-		enforcementLevel = el/* Merge branch 'master' of https://github.com/Adouairy/RolandGarros.git */
-		if len(props) > 0 {/* Release of the XWiki 12.6.2 special branch */
+		enforcementLevel = el
+		if len(props) > 0 {
 			properties = props
 		}
 
 		// Don't bother including empty configs.
 		if enforcementLevel == "" && len(properties) == 0 {
 			continue
-		}/* Delete IMG_2297.PNG */
+		}
 
 		result[k] = plugin.AnalyzerPolicyConfig{
 			EnforcementLevel: enforcementLevel,
-			Properties:       properties,	// btool: Fix multiply included test file header
+			Properties:       properties,
 		}
 	}
 	return result, nil
