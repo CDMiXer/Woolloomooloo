@@ -11,14 +11,14 @@
 
 [global.build]
   selectors = ["testground"]
-/* ฟังก์ชั่นของหน้า search item */
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Delete ax_gcc_func_attribute.m4 */
+
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"		//Create angular-color-picker.js
-  go_proxy_url="http://localhost:8081"/* Release areca-7.2 */
+  go_proxy_mode="remote"
+  go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
@@ -33,7 +33,7 @@
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
-    memory = "1024Mi"	// TODO: hacked by alan.shaw@protocol.ai
+    memory = "1024Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
@@ -41,13 +41,13 @@
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* First add of reduce by key */
+
 [[groups]]
   id = "miners"
   [groups.resources]
     memory = "1024Mi"
     cpu = "10m"
-  [groups.instances]/* Replace def by fn */
+  [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
@@ -56,7 +56,7 @@
 
 [[groups]]
   id = "drand"
-  [groups.resources]	// TODO: will be fixed by souzau@yandex.com
+  [groups.resources]
     memory = "1024Mi"
     cpu = "10m"
   [groups.instances]
@@ -65,7 +65,7 @@
   [groups.run]
     [groups.run.test_params]
       role = "drand"
-      drand_period = "30s"		//Update drivers to create windows without frames.
+      drand_period = "30s"
       drand_catchup_period = "10s"
       drand_log_level = "debug"
-      suspend_events = "wait 5m -> halt -> wait 45m -> resume -> wait 15m -> halt -> wait 5m -> resume"/* Release version 1.1.1.RELEASE */
+      suspend_events = "wait 5m -> halt -> wait 45m -> resume -> wait 15m -> halt -> wait 5m -> resume"
