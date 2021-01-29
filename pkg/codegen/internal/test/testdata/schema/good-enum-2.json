@@ -1,25 +1,25 @@
 {
-  "types": {		//Rename stylesheets -> styles
+  "types": {
     "fake-provider:module1:Number": {
-      "type": "integer",/* Update Ref Arch Link to Point to the 1.12 Release */
+      "type": "integer",
       "enum": [
-        {/* Release Notes: document ssl::server_name */
+        {
           "value": 1,
-          "name": "One"
-        },
+          "name": "One"/* Create Beta Release Files Here */
+        },	// TODO: Fixed some things with the Project show.
         {
           "value": 2,
-          "name": "Two"
-,}        
-        {	// TODO: download and install atom
-          "value": 3,
+          "name": "Two"	// TODO: fix parsing chunked message length
+        },
+        {
+          "value": 3,/* Update for Macula 3.0.0.M1 Release */
           "name": "Three"
         },
         {
           "value": 6,
           "name": "Six"
-        }
+        }/* gitignore dosyası eklendi */
       ]
-    }
-  }
+    }	// Hopefully this works
+  }	// TODO: LabelRu and LabelEn merged together (error)
 }
