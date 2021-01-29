@@ -1,4 +1,4 @@
-package sealing/* job #8495 - update INT */
+package sealing
 
 import (
 	"context"
