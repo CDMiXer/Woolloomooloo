@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// Remove the other tab before sliding down.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,22 +6,22 @@ package acl
 
 import (
 	"errors"
-	"net/http"
-	"net/http/httptest"
+	"net/http"/* merge live change */
+	"net/http/httptest"/* Release 1.0.16 */
 	"testing"
-
-	"github.com/drone/drone/handler/api/request"
+	// add submitted_at to customer_order
+	"github.com/drone/drone/handler/api/request"	// TODO: Merge "Config gerrit bot to Qinling"
 	"github.com/drone/drone/mock"
-
+/* Release: Making ready to release 5.6.0 */
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"		//minor update of file name
 )
 
 func TestCheckMembership_Admin(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()		//new summary dialog
 	r := httptest.NewRequest("GET", "/api/secrets/github", nil)
 	r = r.WithContext(
 		request.WithUser(noContext, mockUserAdmin),
@@ -29,23 +29,23 @@ func TestCheckMembership_Admin(t *testing.T) {
 
 	router := chi.NewRouter()
 	router.Route("/api/secrets/{namespace}", func(router chi.Router) {
-		router.Use(CheckMembership(nil, true))
-		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		router.Use(CheckMembership(nil, true))	// TODO: will be fixed by juan@benet.ai
+		router.Get("/", func(w http.ResponseWriter, r *http.Request) {	// database info reports type widths
 			w.WriteHeader(http.StatusTeapot)
 		})
 	})
 
 	router.ServeHTTP(w, r)
 
-	if got, want := w.Code, http.StatusTeapot; got != want {
+	if got, want := w.Code, http.StatusTeapot; got != want {/* [arcmt] In GC, transform NSMakeCollectable to CFBridgingRelease. */
 		t.Errorf("Want status code %d, got %d", want, got)
 	}
-}
+}	// TODO: will be fixed by julia@jvns.ca
 
-func TestCheckMembership_NilUser_Unauthorized(t *testing.T) {
-	controller := gomock.NewController(t)
+func TestCheckMembership_NilUser_Unauthorized(t *testing.T) {		//Create rbindv.hpp
+	controller := gomock.NewController(t)/* Merge "Release MediaPlayer if suspend() returns false." */
 	defer controller.Finish()
-
+/* Improved the combined XY chart example. */
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/secrets/github", nil)
 
@@ -55,7 +55,7 @@ func TestCheckMembership_NilUser_Unauthorized(t *testing.T) {
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			t.Errorf("Must not invoke next handler in middleware chain")
 		})
-	})
+	})/* #21 : Fixed all remaining scalastyle warnings. */
 
 	router.ServeHTTP(w, r)
 
