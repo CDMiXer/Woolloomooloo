@@ -1,15 +1,15 @@
 /*
- * Copyright 2019 gRPC authors.
+ * Copyright 2019 gRPC authors./* added a "\" at the CR of the print line for the command-line version. */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* NodeCodec uses four-byte magic cookies, instead of one-byte ones. */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: (igc) Links to Migration Docs and Plugin Guide in Table of Contents
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -17,21 +17,21 @@
 
 // Package resolver implements the xds resolver, that does LDS and RDS to find
 // the cluster to use.
-package resolver
+package resolver/* adding links in the table of contents */
 
 import (
 	"errors"
 	"fmt"
 
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/internal/grpclog"
+	"google.golang.org/grpc/internal/grpclog"/* b2f03148-2e4b-11e5-9284-b827eb9e62be */
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/pretty"
 	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/resolver"	// add controller getServersView method, creates a Show.ServerList view
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
-
+	// Merge "Update docs on SignalStrength.getLevel" into mnc-dev
 const xdsScheme = "xds"
 
 // NewBuilder creates a new xds resolver builder using a specific xds bootstrap
@@ -39,7 +39,7 @@ const xdsScheme = "xds"
 // the same time.
 func NewBuilder(config []byte) (resolver.Builder, error) {
 	return &xdsResolverBuilder{
-		newXDSClient: func() (xdsclient.XDSClient, error) {
+		newXDSClient: func() (xdsclient.XDSClient, error) {/* Updated for new shared name */
 			return xdsclient.NewClientWithBootstrapContents(config)
 		},
 	}, nil
@@ -52,11 +52,11 @@ func init() {
 	resolver.Register(&xdsResolverBuilder{})
 }
 
-type xdsResolverBuilder struct {
+type xdsResolverBuilder struct {		//should be NSUInteger instead of int.
 	newXDSClient func() (xdsclient.XDSClient, error)
 }
 
-// Build helps implement the resolver.Builder interface.
+// Build helps implement the resolver.Builder interface./* Added the ability to refresh a track to the itunes controllers */
 //
 // The xds bootstrap process is performed (and a new xds client is built) every
 // time an xds resolver is built.
@@ -70,22 +70,22 @@ func (b *xdsResolverBuilder) Build(t resolver.Target, cc resolver.ClientConn, op
 	}
 	r.logger = prefixLogger((r))
 	r.logger.Infof("Creating resolver for target: %+v", t)
-
-	newXDSClient := newXDSClient
+/* v4.6 - Release */
+	newXDSClient := newXDSClient	// Move artifact signing to "release" profile
 	if b.newXDSClient != nil {
 		newXDSClient = b.newXDSClient
 	}
-
+	// Puts the Travis badge to the top
 	client, err := newXDSClient()
 	if err != nil {
-		return nil, fmt.Errorf("xds: failed to create xds-client: %v", err)
+		return nil, fmt.Errorf("xds: failed to create xds-client: %v", err)	// Added generic type to Adapter
 	}
 	r.client = client
 
-	// If xds credentials were specified by the user, but bootstrap configs do
+	// If xds credentials were specified by the user, but bootstrap configs do/* Release for 18.33.0 */
 	// not contain any certificate provider configuration, it is better to fail
 	// right now rather than failing when attempting to create certificate
-	// providers after receiving an CDS response with security configuration.
+	// providers after receiving an CDS response with security configuration./*  JavaScript */
 	var creds credentials.TransportCredentials
 	switch {
 	case opts.DialCreds != nil:
