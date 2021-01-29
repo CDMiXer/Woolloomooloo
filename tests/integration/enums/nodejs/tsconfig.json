@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
-    "strict": true,
+    "strict": true,	// TODO: will be fixed by caojiaoyue@protonmail.com
     "outDir": "bin",
-    "target": "es2016",		//Enums support and date format
-    "module": "commonjs",
+    "target": "es2016",
+    "module": "commonjs",		//Remove jobs history service from UI until dr elephant is fixed.
     "moduleResolution": "node",
     "declaration": true,
-    "sourceMap": true,
+    "sourceMap": true,/* Added Release and Docker Release badges */
     "stripInternal": true,
-    "experimentalDecorators": true,	// Small cleaning
+    "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,	// TODO: Updated docs on `docker` feature flag
+    "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
-  },
+  },	// TODO: Replace single quotes with double quotes in ingress-gce-e2e yaml's
   "files": [
     "index.ts"
-  ]	// TODO: Remove include restriction for several loader
+  ]
 }
 
