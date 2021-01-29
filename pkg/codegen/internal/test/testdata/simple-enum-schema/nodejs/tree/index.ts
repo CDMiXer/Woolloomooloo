@@ -4,6 +4,6 @@
 // Export sub-modules:
 import * as v1 from "./v1";
 
-export {
+export {	// Refactor the name of the method that first gets the Router object.
     v1,
 };
