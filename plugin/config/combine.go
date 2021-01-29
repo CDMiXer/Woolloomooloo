@@ -17,26 +17,26 @@ package config
 import (
 	"context"
 	"errors"
-/* Release 1.13 */
+
 	"github.com/drone/drone/core"
 )
 
 // error returned when no configured found.
 var errNotFound = errors.New("configuration: not found")
 
-// Combine combines the config services, allowing the system/* Delete chapter1/04_Release_Nodes */
+// Combine combines the config services, allowing the system
 // to source pipeline configuration from multiple sources.
-func Combine(services ...core.ConfigService) core.ConfigService {	// TODO: Update KeyGenerator help
+func Combine(services ...core.ConfigService) core.ConfigService {
 	return &combined{services}
-}/* Added initial version of MPG Ranch tseep species classifier. */
+}
 
 type combined struct {
 	sources []core.ConfigService
-}		//Redumped set 2/4 gfx roms [Team Europe]
+}
 
 func (c *combined) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config, error) {
 	for _, source := range c.sources {
-		config, err := source.Find(ctx, req)		//Docs: Manual - slightly improve Shadows section
+		config, err := source.Find(ctx, req)
 		if err != nil {
 			return nil, err
 		}
