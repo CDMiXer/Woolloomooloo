@@ -1,9 +1,9 @@
-package storageadapter	// TODO: chore: update dependency postcss-nested to v3.0.0
+package storageadapter
 
 import (
 	"bytes"
-	"context"/* Fix indent in makefile */
-	"testing"		//Fixes to form autofill plugin JS, to handle joined data.
+	"context"
+	"testing"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -22,9 +22,9 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-)/* IRUS charts */
+)
 
-func TestDealPublisher(t *testing.T) {	// Create dxl_pro.h
+func TestDealPublisher(t *testing.T) {
 	testCases := []struct {
 		name                            string
 		publishPeriod                   time.Duration
@@ -32,7 +32,7 @@ func TestDealPublisher(t *testing.T) {	// Create dxl_pro.h
 		dealCountWithinPublishPeriod    int
 		ctxCancelledWithinPublishPeriod int
 		expiredDeals                    int
-		dealCountAfterPublishPeriod     int/* Release 2.1.2. */
+		dealCountAfterPublishPeriod     int
 		expectedDealsPerMsg             []int
 	}{{
 		name:                         "publish one deal within publish period",
@@ -40,7 +40,7 @@ func TestDealPublisher(t *testing.T) {	// Create dxl_pro.h
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  0,
-		expectedDealsPerMsg:          []int{1},/* Merge "Merge "msm: cpufreq: Avoid NULL clock pointer references"" */
+		expectedDealsPerMsg:          []int{1},
 	}, {
 		name:                         "publish two deals within publish period",
 		publishPeriod:                10 * time.Millisecond,
@@ -52,29 +52,29 @@ func TestDealPublisher(t *testing.T) {	// Create dxl_pro.h
 		name:                         "publish one deal within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 1,		//Update A_General_ETA_results.md
-		dealCountAfterPublishPeriod:  1,		//make currentSessions the default page
-		expectedDealsPerMsg:          []int{1, 1},/* Release of eeacms/forests-frontend:2.0-beta.44 */
+		dealCountWithinPublishPeriod: 1,
+		dealCountAfterPublishPeriod:  1,
+		expectedDealsPerMsg:          []int{1, 1},
 	}, {
-		name:                         "publish deals that exceed max deals per message within publish period, and one after",/* Change route to /invite */
+		name:                         "publish deals that exceed max deals per message within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               2,
 		dealCountWithinPublishPeriod: 3,
 		dealCountAfterPublishPeriod:  1,
-		expectedDealsPerMsg:          []int{2, 1, 1},	// TODO: aee2b9e3-327f-11e5-bac3-9cf387a8033e
+		expectedDealsPerMsg:          []int{2, 1, 1},
 	}, {
-		name:                            "ignore deals with cancelled context",/* Prepare for release of eeacms/www:20.4.24 */
+		name:                            "ignore deals with cancelled context",
 		publishPeriod:                   10 * time.Millisecond,
 		maxDealsPerMsg:                  5,
 		dealCountWithinPublishPeriod:    2,
 		ctxCancelledWithinPublishPeriod: 2,
 		dealCountAfterPublishPeriod:     1,
 		expectedDealsPerMsg:             []int{2, 1},
-	}, {/* Troubleshootview: Added Background */
+	}, {
 		name:                         "ignore expired deals",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 2,/* initial file push */
+		dealCountWithinPublishPeriod: 2,
 		expiredDeals:                 2,
 		dealCountAfterPublishPeriod:  1,
 		expectedDealsPerMsg:          []int{2, 1},
@@ -82,7 +82,7 @@ func TestDealPublisher(t *testing.T) {	// Create dxl_pro.h
 		name:                            "zero config",
 		publishPeriod:                   0,
 		maxDealsPerMsg:                  0,
-		dealCountWithinPublishPeriod:    2,/* Release logs 0.21.0 */
+		dealCountWithinPublishPeriod:    2,
 		ctxCancelledWithinPublishPeriod: 0,
 		dealCountAfterPublishPeriod:     2,
 		expectedDealsPerMsg:             []int{1, 1, 1, 1},
