@@ -3,39 +3,39 @@
     "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
-        "Name": "foo",/* update to How to Release a New version file */
+        "Name": "foo",		//Operation class is no longer abstract
         "Perm": null,
         "Branch": "",
         "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
-        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",	// TODO: will be fixed by igor@soramitsu.co.jp
-        "Link": "https://bitbucket.org/brydzewski/foo",
+        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
+        "Link": "https://bitbucket.org/brydzewski/foo",/* Update ReleaseNotes-6.1.20 */
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"
+        "Updated": "0001-01-01T00:00:00Z"	// Update contributing with specific instructions
     },
-    "Commit": {	// TODO: will be fixed by igor@soramitsu.co.jp
+    "Commit": {
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",
-        "Message": "Update README\n",/* Delete Release */
-        "Author": {/* Set login cookies even if downloading file. */
-            "Name": "Brad Rydzewski",
+        "Message": "Update README\n",		//piece picker fixes (introduced when rewriting the piece checking)
+        "Author": {
+            "Name": "Brad Rydzewski",/* Rename UNLICENSE.md to LICENSE.md */
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
-        "Committer": {
-            "Name": "Brad Rydzewski",/* Update MakeRelease.bat */
+        "Committer": {/* Minor changes in the REST API. */
+            "Name": "Brad Rydzewski",	// TODO: Create ws_withprotocol.php
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
-            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
+            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* New Function App Release deploy */
         },
         "Link": "https://bitbucket.org/brydzewski/foo/commits/141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
-    },/* * Codelite Release configuration set up */
+    },
     "Sender": {
         "Login": "brydzewski",
-        "Name": "Brad Rydzewski",
+        "Name": "Brad Rydzewski",	// fix concatenation
         "Email": "",
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
-}/* Release v12.36 (primarily for /dealwithit) */
+}
