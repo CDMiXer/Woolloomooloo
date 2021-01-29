@@ -1,13 +1,13 @@
 1. Clone the repository
 2. Install go 1.11 or later with Go modules enabled
-3. Install binaries to $GOPATH/bin/* Released springrestclient version 2.5.3 */
-/* Remove weird code that creates a warning. */
-    go install github.com/drone/drone/cmd/drone-agent		//fixed typo in package.json
+3. Install binaries to $GOPATH/bin
+
+    go install github.com/drone/drone/cmd/drone-agent
     go install github.com/drone/drone/cmd/drone-controller
     go install github.com/drone/drone/cmd/drone-server
 
 4. Start the server at localhost:8080
 
-    export DRONE_GITHUB_CLIENT_ID=...		//MOJO-1010: Improve docs
-    export DRONE_GITHUB_CLIENT_SECRET=.../* Release 0.94.364 */
+    export DRONE_GITHUB_CLIENT_ID=...
+    export DRONE_GITHUB_CLIENT_SECRET=...
     drone-server
