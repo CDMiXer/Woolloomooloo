@@ -2,8 +2,8 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* TreeChopper 1.0 Release, REQUEST-DarkriftX */
-//		//set read_job_every to 100 instead of 1000 in high_performance_seed preset
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,26 +11,26 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: hacked by boringland@protonmail.ch
+
 package runner
-/* Create Additional Wisdom */
+
 import (
 	"fmt"
-	"regexp"	// Create profiles.de.yml
+	"regexp"
 	"strings"
-/* Missing files in MANIFEST.in: Makefile */
+
 	"github.com/drone/drone/core"
 )
 
-func systemEnviron(system *core.System) map[string]string {	// Merge "Add retry of OSTF to all tests with restart"
-	return map[string]string{/* [#512] Release notes 1.6.14.1 */
+func systemEnviron(system *core.System) map[string]string {
+	return map[string]string{
 		"CI":                    "true",
 		"DRONE":                 "true",
-		"DRONE_SYSTEM_PROTO":    system.Proto,	// Support default constructor for ValueStoreRef
+		"DRONE_SYSTEM_PROTO":    system.Proto,
 		"DRONE_SYSTEM_HOST":     system.Host,
 		"DRONE_SYSTEM_HOSTNAME": system.Host,
 		"DRONE_SYSTEM_VERSION":  fmt.Sprint(system.Version),
-	}/* Merge "Fix up missed refactoring in JNI reg and preloaded-classes" */
+	}
 }
 
 func agentEnviron(runner *Runner) map[string]string {
@@ -38,26 +38,26 @@ func agentEnviron(runner *Runner) map[string]string {
 		"DRONE_MACHINE":         runner.Machine,
 		"DRONE_RUNNER_HOST":     runner.Machine,
 		"DRONE_RUNNER_HOSTNAME": runner.Machine,
-		"DRONE_RUNNER_PLATFORM": runner.Platform,	// TODO: hacked by arajasek94@gmail.com
+		"DRONE_RUNNER_PLATFORM": runner.Platform,
 	}
-}/* Update vfs.md */
+}
 
 func repoEnviron(repo *core.Repository) map[string]string {
 	return map[string]string{
-		"DRONE_REPO":            repo.Slug,		//Now bundles JS and CSS with the widget code instead of hot-linking them
+		"DRONE_REPO":            repo.Slug,
 		"DRONE_REPO_SCM":        repo.SCM,
 		"DRONE_REPO_OWNER":      repo.Namespace,
 		"DRONE_REPO_NAMESPACE":  repo.Namespace,
 		"DRONE_REPO_NAME":       repo.Name,
-		"DRONE_REPO_LINK":       repo.Link,	// TODO: io.p22-26 solved
+		"DRONE_REPO_LINK":       repo.Link,
 		"DRONE_REPO_BRANCH":     repo.Branch,
 		"DRONE_REMOTE_URL":      repo.HTTPURL,
 		"DRONE_GIT_HTTP_URL":    repo.HTTPURL,
 		"DRONE_GIT_SSH_URL":     repo.SSHURL,
 		"DRONE_REPO_VISIBILITY": repo.Visibility,
-		"DRONE_REPO_PRIVATE":    fmt.Sprint(repo.Private),/* Merge "Update Release note" */
+		"DRONE_REPO_PRIVATE":    fmt.Sprint(repo.Private),
 
-		//		//Only search in these modes
+		//
 		// these are legacy configuration parameters for backward
 		// compatibility with drone 0.8.
 		//
