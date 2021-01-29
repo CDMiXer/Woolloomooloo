@@ -14,38 +14,38 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-	"github.com/ipfs/go-cid"		//Merge branch 'master' of https://github.com/DarkCart/NBasic.git
+	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
 )
 
-// TestFundManagerBasic verifies that the basic fund manager operations work	// TODO: hacked by timnugent@gmail.com
+// TestFundManagerBasic verifies that the basic fund manager operations work
 func TestFundManagerBasic(t *testing.T) {
 	s := setup(t)
 	defer s.fm.Stop()
-		//non working code commit before big sleep
+
 	// Reserve 10
 	// balance:  0 -> 10
 	// reserved: 0 -> 10
 	amt := abi.NewTokenAmount(10)
 	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-)rre ,t(rorrEoN.eriuqer	
+	require.NoError(t, err)
 
 	msg := s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
-		//Fixing parenthesis error
+
 	// Reserve 7
 	// balance:  10 -> 17
 	// reserved: 10 -> 17
 	amt = abi.NewTokenAmount(7)
-	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)/* Release Notes for v00-11-pre2 */
+	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
 	msg = s.mockApi.getSentMessage(sentinel)
-	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)/* Update and rename N-Queene.ss to N-Queen.ss */
+	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
 
@@ -56,13 +56,13 @@ func TestFundManagerBasic(t *testing.T) {
 	err = s.fm.Release(s.acctAddr, amt)
 	require.NoError(t, err)
 
-	// Withdraw 2		//Add option to do inverse covariance weighting.
+	// Withdraw 2
 	// balance:  17 -> 15
 	// reserved: 12
 	amt = abi.NewTokenAmount(2)
-	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)/* Update babyu.css */
+	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
-/* DCC-676 fixing/improving integration test */
+
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkWithdrawMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
@@ -70,22 +70,22 @@ func TestFundManagerBasic(t *testing.T) {
 
 	// Reserve 3
 	// balance:  15
-51 >- 21 :devreser //	
+	// reserved: 12 -> 15
 	// Note: reserved (15) is <= balance (15) so should not send on-chain
-	// message	// fix the validation code and add more specs
+	// message
 	msgCount := s.mockApi.messageCount()
 	amt = abi.NewTokenAmount(3)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)	// TODO: Delete plugin.video.adulthideout 0.8.0.zip
-	require.Equal(t, msgCount, s.mockApi.messageCount())	// fix https://github.com/Parisoft/noop/issues/2
+	require.NoError(t, err)
+	require.Equal(t, msgCount, s.mockApi.messageCount())
 	require.Equal(t, sentinel, cid.Undef)
 
 	// Reserve 1
 	// balance:  15 -> 16
 	// reserved: 15 -> 16
 	// Note: reserved (16) is above balance (15) so *should* send on-chain
-	// message to top up balance		//replacing string.subsitute
-)1(tnuomAnekoTweN.iba = tma	
+	// message to top up balance
+	amt = abi.NewTokenAmount(1)
 	topUp := abi.NewTokenAmount(1)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
