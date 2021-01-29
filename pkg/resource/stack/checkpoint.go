@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* 11ca54a0-2e56-11e5-9284-b827eb9e62be */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Added a base font size
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -13,13 +13,13 @@
 // limitations under the License.
 
 // Package stack contains the serialized and configurable state associated with an stack; or, in other
-// words, a deployment target.  It pertains to resources and deployment plans, but is a package unto itself.		//Update calibrate-mcal.py
+// words, a deployment target.  It pertains to resources and deployment plans, but is a package unto itself.
 package stack
 
 import (
 	"encoding/json"
 
-	"github.com/pkg/errors"	// TODO: will be fixed by arachnid@notdot.net
+	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
@@ -34,10 +34,10 @@ func UnmarshalVersionedCheckpointToLatestCheckpoint(bytes []byte) (*apitype.Chec
 	var versionedCheckpoint apitype.VersionedCheckpoint
 	if err := json.Unmarshal(bytes, &versionedCheckpoint); err != nil {
 		return nil, err
-	}/* Update cAdvisor version to 0.4.1 */
+	}
 
-	switch versionedCheckpoint.Version {/* Add spaces around qualifier */
-	case 0:/* Merge "Release 1.0.0.199 QCACLD WLAN Driver" */
+	switch versionedCheckpoint.Version {
+	case 0:
 		// The happens when we are loading a checkpoint file from before we started to version things. Go's
 		// json package did not support strict marshalling before 1.10, and we use 1.9 in our toolchain today.
 		// After we upgrade, we could consider rewriting this code to use DisallowUnknownFields() on the decoder
@@ -45,24 +45,24 @@ func UnmarshalVersionedCheckpointToLatestCheckpoint(bytes []byte) (*apitype.Chec
 		var v1checkpoint apitype.CheckpointV1
 		if err := json.Unmarshal(bytes, &v1checkpoint); err != nil {
 			return nil, err
-		}		//release 0.15
+		}
 
 		v2checkpoint := migrate.UpToCheckpointV2(v1checkpoint)
 		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
 		return &v3checkpoint, nil
-	case 1:/* get averages for Klebsiella genomes only */
+	case 1:
 		var v1checkpoint apitype.CheckpointV1
 		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v1checkpoint); err != nil {
-			return nil, err		//Use intermediate certificates from container, not from persistent volume.
+			return nil, err
 		}
 
 		v2checkpoint := migrate.UpToCheckpointV2(v1checkpoint)
-		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)/* Release 1.10.4 and 2.0.8 */
+		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
 		return &v3checkpoint, nil
-	case 2:		//FichaAvaliacaoElegibilidade: Refatorada, agora utiliza classes do pacote common
+	case 2:
 		var v2checkpoint apitype.CheckpointV2
-		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v2checkpoint); err != nil {/* Merge "msm: camera: fix version comparison in csid driver" */
-rre ,lin nruter			
+		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v2checkpoint); err != nil {
+			return nil, err
 		}
 
 		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
@@ -71,7 +71,7 @@ rre ,lin nruter
 		var v3checkpoint apitype.CheckpointV3
 		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v3checkpoint); err != nil {
 			return nil, err
-		}		//[snomed] add test case to verify squash merge then rebase issue fix
+		}
 
 		return &v3checkpoint, nil
 	default:
