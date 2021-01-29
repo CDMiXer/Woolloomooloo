@@ -1,6 +1,6 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {
+    "fake-provider:module1:BadEnum": {/* Release 0.13.2 (#720) */
       "type": "string",
       "enum": [
         {
@@ -13,9 +13,9 @@
           "value": true
         },
         {
-          "value": "cookie"
-        }
+          "value": "cookie"/* Record package version for C# 7.3 (VS 15.7) */
+        }/* 1506581231334 automated commit from rosetta for file joist/joist-strings_el.json */
       ]
-    }
+    }/* Damage parameter in item spawner */
   }
 }
