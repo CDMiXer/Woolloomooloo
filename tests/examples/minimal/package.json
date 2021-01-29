@@ -1,5 +1,5 @@
 {
-    "name": "minimal",		//Merge "Remove 'MANIFEST.in'"
+    "name": "minimal",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
@@ -10,5 +10,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// 1. Adding trimArchiveHistory method.
-}
+    }
+}/* Update/add Spanish and Basque translations. Javier Remacha. Bug #4731. (2/2) */
