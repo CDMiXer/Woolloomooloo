@@ -1,47 +1,47 @@
-package sqlite		//Create info_acp_snowstorm_lights.php
+package sqlite
 
-import (	// TODO: remove busted log statement
+import (
 	"database/sql"
-)/* Fix to make auth helpers work in ZF1 module */
-/* Improved reading boolean values when cloning a module. */
-var migrations = []struct {/* add typescript in dev dependencies for deploy */
+)
+
+var migrations = []struct {
 	name string
 	stmt string
 }{
-{	
+	{
 		name: "create-table-users",
-		stmt: createTableUsers,/* Release 0.3.7.6. */
+		stmt: createTableUsers,
 	},
-	{/* Merge branch '1.0.0' into 1372-improve-sql-loader */
+	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
-	},	// Replaced some tool tip text
-{	
+	},
+	{
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
-		stmt: alterTableReposAddColumnCancelPulls,		//672c456a-2e66-11e5-9284-b827eb9e62be
+		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-push",/* Update ReleaseNoteContentToBeInsertedWithinNuspecFile.md */
+		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},	// Merge desarrollo_JacoboSegovia
+	},
 	{
-		name: "create-table-perms",		//Fixed legend() issues
+		name: "create-table-perms",
 		stmt: createTablePerms,
 	},
 	{
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
-	},/* Angular JS 1 generator Release v2.5 Beta */
+	},
 	{
-		name: "create-index-perms-repo",		//Renamed data_store_class to doc_store_class
+		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
 	},
 	{
