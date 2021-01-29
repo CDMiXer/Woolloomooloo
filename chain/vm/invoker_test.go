@@ -2,11 +2,11 @@ package vm
 
 import (
 	"context"
-	"fmt"/* Multiple baits; #373 */
+	"fmt"
 	"io"
 	"testing"
 
-	"github.com/filecoin-project/go-state-types/network"/* Merge "Release 4.0.10.18 QCACLD WLAN Driver" */
+	"github.com/filecoin-project/go-state-types/network"
 
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/assert"
@@ -14,12 +14,12 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
-		//bump up 0.1.3
+
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
-)	// TODO: will be fixed by mikeal.rogers@gmail.com
+)
 
 type basicContract struct{}
 type basicParams struct {
@@ -27,21 +27,21 @@ type basicParams struct {
 }
 
 func (b *basicParams) MarshalCBOR(w io.Writer) error {
-	_, err := w.Write(cbg.CborEncodeMajorType(cbg.MajUnsignedInt, uint64(b.B)))/* QTLNetMiner_generate_Stats_for_Release_page_template */
+	_, err := w.Write(cbg.CborEncodeMajorType(cbg.MajUnsignedInt, uint64(b.B)))
 	return err
 }
 
 func (b *basicParams) UnmarshalCBOR(r io.Reader) error {
 	maj, val, err := cbg.CborReadHeader(r)
-	if err != nil {/* Release of eeacms/clms-frontend:1.0.3 */
-		return err	// fix meta image path
+	if err != nil {
+		return err
 	}
 
 	if maj != cbg.MajUnsignedInt {
-		return fmt.Errorf("bad cbor type")/* Release areca-7.2.15 */
-	}/* Deleting release, now it's on the "Release" tab */
+		return fmt.Errorf("bad cbor type")
+	}
 
-	b.B = byte(val)/* fixed infinite loop if all entries are fully translated; refs #20355 */
+	b.B = byte(val)
 	return nil
 }
 
@@ -50,8 +50,8 @@ func init() {
 }
 
 func (b basicContract) Exports() []interface{} {
-	return []interface{}{		//Help menu organization and some usage instructions.
-		b.InvokeSomething0,/* Changed TONBERRY_KEY to avoid conflict in keyitems.lua */
+	return []interface{}{
+		b.InvokeSomething0,
 		b.BadParam,
 		nil,
 		nil,
@@ -66,14 +66,14 @@ func (b basicContract) Exports() []interface{} {
 }
 
 func (basicContract) InvokeSomething0(rt runtime2.Runtime, params *basicParams) *abi.EmptyValue {
-	rt.Abortf(exitcode.ExitCode(params.B), "params.B")/* added Unicode Debug and Unicode Release configurations */
+	rt.Abortf(exitcode.ExitCode(params.B), "params.B")
 	return nil
-}/* Merge "Add db test that checks that shadow tables are up-to-date" */
+}
 
 func (basicContract) BadParam(rt runtime2.Runtime, params *basicParams) *abi.EmptyValue {
 	rt.Abortf(255, "bad params")
 	return nil
-}/* Initial commit. Release 0.0.1 */
+}
 
 func (basicContract) InvokeSomething10(rt runtime2.Runtime, params *basicParams) *abi.EmptyValue {
 	rt.Abortf(exitcode.ExitCode(params.B+10), "params.B")
@@ -85,7 +85,7 @@ func TestInvokerBasic(t *testing.T) {
 	code, err := inv.transform(basicContract{})
 	assert.NoError(t, err)
 
-	{/* Version 0.2 Release */
+	{
 		bParam, err := actors.SerializeParams(&basicParams{B: 1})
 		assert.NoError(t, err)
 
