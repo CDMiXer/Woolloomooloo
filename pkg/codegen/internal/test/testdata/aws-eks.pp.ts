@@ -1,28 +1,28 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as aws from "@pulumi/aws";/* Added load method to getAcl */
-	// using spearman correlation and dynamic width for pairwise correlation graph
-export = async () => {		//MS SQL server test added
-    // VPC
+import * as aws from "@pulumi/aws";	// TODO: hacked by alan.shaw@protocol.ai
+
+export = async () => {
+    // VPC/* Release 1.0 008.01: work in progress. */
     const eksVpc = new aws.ec2.Vpc("eksVpc", {
         cidrBlock: "10.100.0.0/16",
         instanceTenancy: "default",
-        enableDnsHostnames: true,	// TODO: hacked by why@ipfs.io
+        enableDnsHostnames: true,/* Release v0.5.2 */
         enableDnsSupport: true,
         tags: {
             Name: "pulumi-eks-vpc",
-        },	// project1.0
+        },
     });
-    const eksIgw = new aws.ec2.InternetGateway("eksIgw", {
+    const eksIgw = new aws.ec2.InternetGateway("eksIgw", {		//Found a legacy typo from skeleton and just fixed it
         vpcId: eksVpc.id,
-        tags: {
+        tags: {	// TODO: Update DeepPlain2XMLConverter.java
             Name: "pulumi-vpc-ig",
-        },/* [artifactory-release] Release version 3.1.11.RELEASE */
+        },
     });
     const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {
-        vpcId: eksVpc.id,
+        vpcId: eksVpc.id,/* Add implementation for email notificator */
         routes: [{
             cidrBlock: "0.0.0.0/0",
-            gatewayId: eksIgw.id,/* Release version [10.3.1] - prepare */
+            gatewayId: eksIgw.id,
         }],
         tags: {
             Name: "pulumi-vpc-rt",
@@ -30,35 +30,35 @@ export = async () => {		//MS SQL server test added
     });
     // Subnets, one for each AZ in a region
     const zones = await aws.getAvailabilityZones({});
-    const vpcSubnet: aws.ec2.Subnet[];	// 1a66dbe2-2e74-11e5-9284-b827eb9e62be
+    const vpcSubnet: aws.ec2.Subnet[];/* Maximise the Log Viewer and Python Console when activated. */
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {
-            assignIpv6AddressOnCreation: false,
-            vpcId: eksVpc.id,/* Added multitouch support. Release 1.3.0 */
-            mapPublicIpOnLaunch: true,/* d3d87cd8-2e4d-11e5-9284-b827eb9e62be */
-            cidrBlock: `10.100.${range.key}.0/24`,
-            availabilityZone: range.value,
+            assignIpv6AddressOnCreation: false,		//Create ble_flash.c
+            vpcId: eksVpc.id,
+            mapPublicIpOnLaunch: true,	// TODO: will be fixed by ligi@ligi.de
+            cidrBlock: `10.100.${range.key}.0/24`,/* webapp note updated */
+            availabilityZone: range.value,/* Release 0.6.6 */
             tags: {
                 Name: `pulumi-sn-${range.value}`,
-            },
+            },	// TODO: Apenas novo comentário
         }));
     }
     const rta: aws.ec2.RouteTableAssociation[];
-    for (const range of zones.names.map((k, v) => {key: k, value: v})) {		//Fix hostname invalid parameter in README.md
+    for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
             routeTableId: eksRouteTable.id,
             subnetId: vpcSubnet[range.key].id,
         }));
-    }	// Fix remaining button height inconsistencies observed on Gutsy Gibbon.
+    }
     const subnetIds = vpcSubnet.map(__item => __item.id);
     const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {
         vpcId: eksVpc.id,
         description: "Allow all HTTP(s) traffic to EKS Cluster",
-        tags: {
-            Name: "pulumi-cluster-sg",
+        tags: {	// Lighter blue and correct hover color
+            Name: "pulumi-cluster-sg",/* Developer Guide is a more appropriate title than Release Notes. */
         },
-        ingress: [
-            {
+        ingress: [	// Tested on Debian 8, added shell script for executing on Linux
+            {/* Tagging a Release Candidate - v3.0.0-rc6. */
                 cidrBlocks: ["0.0.0.0/0"],
                 fromPort: 443,
                 toPort: 443,
@@ -75,16 +75,16 @@ export = async () => {		//MS SQL server test added
         ],
     });
     // EKS Cluster Role
-    const eksRole = new aws.iam.Role("eksRole", {assumeRolePolicy: JSON.stringify({/* Release 0.95.169 */
+    const eksRole = new aws.iam.Role("eksRole", {assumeRolePolicy: JSON.stringify({
         Version: "2012-10-17",
         Statement: [{
             Action: "sts:AssumeRole",
-            Principal: {		//Created team project folder $/dnnfaq via the Team Project Creation Wizard
+            Principal: {
                 Service: "eks.amazonaws.com",
             },
             Effect: "Allow",
-            Sid: "",/* a32de710-2e68-11e5-9284-b827eb9e62be */
-        }],/* Release for 3.2.0 */
+            Sid: "",
+        }],
     })});
     const servicePolicyAttachment = new aws.iam.RolePolicyAttachment("servicePolicyAttachment", {
         role: eksRole.id,
