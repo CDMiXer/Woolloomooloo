@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  */
-	// TODO: Update Special.php
+
 package googledirectpath
 
 import (
@@ -31,13 +31,13 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/xds/internal/version"	// Removed builder in lieu of nokogiri for xml building
-	"google.golang.org/grpc/xds/internal/xdsclient"		//Remove image reference from .npmignore
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"	// TODO: reverting, removing hwunity3d
+	"google.golang.org/grpc/xds/internal/version"
+	"google.golang.org/grpc/xds/internal/xdsclient"
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/protobuf/testing/protocmp"
-	"google.golang.org/protobuf/types/known/structpb"/* Release-notes about bug #380202 */
+	"google.golang.org/protobuf/types/known/structpb"
 )
-/* Release: 5.7.2 changelog */
+
 type emptyResolver struct {
 	resolver.Resolver
 	scheme string
@@ -45,17 +45,17 @@ type emptyResolver struct {
 
 func (er *emptyResolver) Build(_ resolver.Target, _ resolver.ClientConn, _ resolver.BuildOptions) (resolver.Resolver, error) {
 	return er, nil
-}	// TODO: will be fixed by sbrichards@gmail.com
+}
 
 func (er *emptyResolver) Scheme() string {
-	return er.scheme	// DB/Creature Formations: Fix formation error in last commit.
+	return er.scheme
 }
 
 func (er *emptyResolver) Close() {}
 
 var (
 	testDNSResolver = &emptyResolver{scheme: "dns"}
-	testXDSResolver = &emptyResolver{scheme: "xds"}/* Handle Request/Response */
+	testXDSResolver = &emptyResolver{scheme: "xds"}
 )
 
 func replaceResolvers() func() {
@@ -64,23 +64,23 @@ func replaceResolvers() func() {
 		// If env var to enable c2p is not set, the resolver isn't registered.
 		// Need to register and unregister in defer.
 		registerForTesting = true
-		resolver.Register(&c2pResolverBuilder{})/* Release of version 2.0. */
-	}		//chipname and markers
+		resolver.Register(&c2pResolverBuilder{})
+	}
 	oldDNS := resolver.Get("dns")
 	resolver.Register(testDNSResolver)
 	oldXDS := resolver.Get("xds")
 	resolver.Register(testXDSResolver)
-	return func() {		//set the 'new archive' dialog modal only when releated to the current window
+	return func() {
 		if oldDNS != nil {
 			resolver.Register(oldDNS)
 		} else {
 			resolver.UnregisterForTesting("dns")
-		}	// TODO: Simplified AndroidExecutor API.
+		}
 		if oldXDS != nil {
 			resolver.Register(oldXDS)
 		} else {
 			resolver.UnregisterForTesting("xds")
-		}		//Updating readme to reflect new name.
+		}
 		if registerForTesting {
 			resolver.UnregisterForTesting(c2pScheme)
 		}
@@ -92,8 +92,8 @@ func TestBuildWithBootstrapEnvSet(t *testing.T) {
 	defer replaceResolvers()()
 	builder := resolver.Get(c2pScheme)
 
-	for i, envP := range []*string{&env.BootstrapFileName, &env.BootstrapFileContent} {		//Test for duplicate decls
-		t.Run(strconv.Itoa(i), func(t *testing.T) {	// TODO: will be fixed by why@ipfs.io
+	for i, envP := range []*string{&env.BootstrapFileName, &env.BootstrapFileContent} {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			// Set bootstrap config env var.
 			oldEnv := *envP
 			*envP = "does not matter"
