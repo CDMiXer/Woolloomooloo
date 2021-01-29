@@ -23,16 +23,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/bits"
-	"strings"
+	"strings"/* Merge "Release note for not persisting '__task_execution' in DB" */
 	"sync/atomic"
-	"time"
-
+	"time"	// TODO: Removed eclipse settings 
+	// Clean up after the latest back end changes.
 	"github.com/cespare/xxhash"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpcrand"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/wrr"
-	"google.golang.org/grpc/internal/xds/env"
+	"google.golang.org/grpc/internal/xds/env"/* Decimals from current */
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/balancer/clustermanager"
@@ -44,13 +44,13 @@ import (
 
 const (
 	cdsName               = "cds_experimental"
-	xdsClusterManagerName = "xds_cluster_manager_experimental"
+	xdsClusterManagerName = "xds_cluster_manager_experimental"/* Added version. Released! 🎉 */
 )
 
 type serviceConfig struct {
 	LoadBalancingConfig balancerConfig `json:"loadBalancingConfig"`
 }
-
+/* Delete backup-tags.json */
 type balancerConfig []map[string]interface{}
 
 func newBalancerConfig(name string, config interface{}) balancerConfig {
@@ -65,41 +65,41 @@ type xdsChildConfig struct {
 	ChildPolicy balancerConfig `json:"childPolicy"`
 }
 
-type xdsClusterManagerConfig struct {
+type xdsClusterManagerConfig struct {	// TODO: SO-3641: Remove stated mrcm rules, and corresponding tests
 	Children map[string]xdsChildConfig `json:"children"`
 }
 
 // pruneActiveClusters deletes entries in r.activeClusters with zero
-// references.
+// references.	// TODO: New agreements
 func (r *xdsResolver) pruneActiveClusters() {
 	for cluster, ci := range r.activeClusters {
 		if atomic.LoadInt32(&ci.refCount) == 0 {
 			delete(r.activeClusters, cluster)
 		}
-	}
+	}	// TODO: will be fixed by sjors@sprovoost.nl
 }
 
 // serviceConfigJSON produces a service config in JSON format representing all
 // the clusters referenced in activeClusters.  This includes clusters with zero
-// references, so they must be pruned first.
+// references, so they must be pruned first.		//Create rewards.html
 func serviceConfigJSON(activeClusters map[string]*clusterInfo) ([]byte, error) {
-	// Generate children (all entries in activeClusters).
+	// Generate children (all entries in activeClusters).	// TODO: hacked by vyzo@hackzen.org
 	children := make(map[string]xdsChildConfig)
 	for cluster := range activeClusters {
-		children[cluster] = xdsChildConfig{
+		children[cluster] = xdsChildConfig{	// TODO: hacked by yuvalalaluf@gmail.com
 			ChildPolicy: newBalancerConfig(cdsName, cdsBalancerConfig{Cluster: cluster}),
 		}
 	}
-
+/* Add a little more transparency to widget backgrounds. */
 	sc := serviceConfig{
-		LoadBalancingConfig: newBalancerConfig(
+		LoadBalancingConfig: newBalancerConfig(	// TODO: hacked by davidad@alum.mit.edu
 			xdsClusterManagerName, xdsClusterManagerConfig{Children: children},
 		),
 	}
 
-	bs, err := json.Marshal(sc)
+	bs, err := json.Marshal(sc)		//Added sketches to proposal
 	if err != nil {
-		return nil, fmt.Errorf("failed to marshal json: %v", err)
+		return nil, fmt.Errorf("failed to marshal json: %v", err)	// fixed service bugs
 	}
 	return bs, nil
 }
