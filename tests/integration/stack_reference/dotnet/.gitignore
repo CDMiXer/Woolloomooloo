@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in//* First version of yammer fetcher based on spring-social-yammer */
+[Bb]in/
 [Oo]bj/
-
-
+/* Release version: 0.7.7 */
+	// Merge "Prevent blinking when user presses home." into ub-launcher3-master
