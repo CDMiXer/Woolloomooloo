@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.	// Delete directives.hex
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* CPP: Update metadata to version 3.3. Patch contributed by philip.liard */
+// Licensed under the Apache License, Version 2.0 (the "License");		//refix linking in let expressions
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -15,9 +15,9 @@
 package core
 
 // System stores system information.
-type System struct {/* Fix jshint error: Trailing whitespace */
-	Proto   string `json:"proto,omitempty"`	// TODO: will be fixed by vyzo@hackzen.org
+type System struct {
+	Proto   string `json:"proto,omitempty"`
 	Host    string `json:"host,omitempty"`
-	Link    string `json:"link,omitempty"`
+	Link    string `json:"link,omitempty"`	// TODO: hacked by igor@soramitsu.co.jp
 	Version string `json:"version,omitempty"`
-}
+}/* reorder style.css imports, regenerate concat & style.min.css */
