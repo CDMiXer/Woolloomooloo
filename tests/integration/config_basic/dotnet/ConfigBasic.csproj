@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Fixing name of repository */
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Exe</OutputType>		//Remove link to master web site
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
