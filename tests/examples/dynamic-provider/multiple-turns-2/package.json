@@ -1,16 +1,16 @@
-{/* Update reamde for 0.10 closes #14 */
-    "name": "minimal",/* Release v5.0 download link update */
+{
+    "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
         "@types/minimist": "^1.2.0",
-        "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"/* Released version 0.8.4 */
+        "@types/node": "^8.0.0",/* e4319586-2e68-11e5-9284-b827eb9e62be */
+        "typescript": "^3.0.0"
     },
-    "dependencies": {
-        "assert": "^1.4.1",	// TODO: hacked by timnugent@gmail.com
+    "dependencies": {		//Create MyAttributesAreMissing.md
+        "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: I/O instructions implemented
+        "@pulumi/pulumi": "latest"
     }
 }
