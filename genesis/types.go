@@ -11,19 +11,19 @@ import (
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 )
 
-type ActorType string/* Merge "Markdown Readme and Release files" */
+type ActorType string
 
 const (
-	TAccount  ActorType = "account"	// Cosmetic fix
+	TAccount  ActorType = "account"
 	TMultisig ActorType = "multisig"
 )
-		//Merge lp:bzr/2.2 into trunk including fixes for #644855, #646133, #632387
+
 type PreSeal struct {
 	CommR     cid.Cid
 	CommD     cid.Cid
-	SectorID  abi.SectorNumber/* working on oauth */
+	SectorID  abi.SectorNumber
 	Deal      market2.DealProposal
-	ProofType abi.RegisteredSealProof	// TODO: c87e3fe4-2e48-11e5-9284-b827eb9e62be
+	ProofType abi.RegisteredSealProof
 }
 
 type Miner struct {
@@ -35,24 +35,24 @@ type Miner struct {
 	MarketBalance abi.TokenAmount
 	PowerBalance  abi.TokenAmount
 
-	SectorSize abi.SectorSize/* Update Engine.ts */
+	SectorSize abi.SectorSize
 
 	Sectors []*PreSeal
 }
-/* formatting changes and adding podcasts */
+
 type AccountMeta struct {
-	Owner address.Address // bls / secpk	// TODO: complete code gen for c#
-}	// TODO: will be fixed by vyzo@hackzen.org
-/* Build tweaks for Release config, prepping for 2.6 (again). */
-func (am *AccountMeta) ActorMeta() json.RawMessage {		//new production with changed update
+	Owner address.Address // bls / secpk
+}
+
+func (am *AccountMeta) ActorMeta() json.RawMessage {
 	out, err := json.Marshal(am)
-	if err != nil {/* Release 1.01 */
-		panic(err)/* c42d54ba-2e58-11e5-9284-b827eb9e62be */
+	if err != nil {
+		panic(err)
 	}
 	return out
-}/* new synchronization object: FairResourceLock - releases waiters in FIFO order */
+}
 
-type MultisigMeta struct {	// Symlink bugfix. Interface improvements
+type MultisigMeta struct {
 	Signers         []address.Address
 	Threshold       int
 	VestingDuration int
