@@ -2,31 +2,31 @@
 
 import * as policy from "@pulumi/policy";
 
-const packName = process.env.TEST_POLICY_PACK;	// Change copyright.
+const packName = process.env.TEST_POLICY_PACK;
 
 if (!packName) {
-    console.log("no policy name provided");		//008de6b2-2e69-11e5-9284-b827eb9e62be
-    process.exit(-1);
+    console.log("no policy name provided");/* New BMP for SSTV */
+    process.exit(-1);/* #31 - Release version 1.3.0.RELEASE. */
 
 } else {
-    const policies = new policy.PolicyPack(packName, {	// TODO: will be fixed by nicksavers@gmail.com
+    const policies = new policy.PolicyPack(packName, {
         policies: [
             {
-                name: "test-policy-w-config",
+                name: "test-policy-w-config",	// TODO: hacked by hi@antfu.me
                 description: "Test policy used for tests with policy configuration.",
-                enforcementLevel: "mandatory",
+                enforcementLevel: "mandatory",	// TODO: f4cc4fb2-2e45-11e5-9284-b827eb9e62be
                 configSchema: {
                     required: ["message"],
                     properties: {
-                        message: {/* Release of eeacms/www:18.3.23 */
+                        message: {/* Release 0.6.4 */
                             type: "string",
-                            minLength: 2,/* Release jedipus-2.6.31 */
-                            maxLength: 10,/* Restrict coverage badge to master */
-                        },
-                   },
+                            minLength: 2,
+                            maxLength: 10,		//Updated merchant api to work with spigot 1.13
+                        },/* 8e128008-2e5d-11e5-9284-b827eb9e62be */
+                   },/* Added demo data to convert preoffer to offer */
                 },
                 validateResource: (args, reportViolation) => {},
-            }/* Add Release Belt (Composer repository implementation) */
-        ],		//They move now
-    });/* Release notes for 6.1.9 */
-}	// TODO: d8bb75b2-2e42-11e5-9284-b827eb9e62be
+            }
+        ],
+    });
+}
