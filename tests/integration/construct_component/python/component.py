@@ -1,15 +1,15 @@
 # Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-
+	// clarify TLS instructions
 from typing import Any, Optional
 
-import pulumi		//fix safeInteger safeFloat bug
+import pulumi
 
 class Component(pulumi.ComponentResource):
-    echo: pulumi.Output[Any]	// TODO: hacked by hugomrdias@gmail.com
+    echo: pulumi.Output[Any]
     childId: pulumi.Output[str]
-
+	// Add links to github profiles
     def __init__(self, name: str, echo: pulumi.Input[Any], opts: Optional[pulumi.ResourceOptions] = None):
         props = dict()
         props["echo"] = echo
         props["childId"] = None
-        super().__init__("testcomponent:index:Component", name, props, opts, True)
+        super().__init__("testcomponent:index:Component", name, props, opts, True)/* JHDicODohnpl7zVSEUPuuyObAJPGDX5Z */
