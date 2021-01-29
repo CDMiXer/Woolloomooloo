@@ -1,27 +1,27 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Added function to return current question. */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package system	// -create hosts with outer ip to host in it
+package system
 
-import (/* Releaser adds & removes releases from the manifest */
+import (
 	"net/http"
-/* Updated Release Notes with 1.6.2, added Privileges & Permissions and minor fixes */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* CollectionContentProvider caches document data */
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-)/* Released Chronicler v0.1.1 */
+)
 
 type (
-	users struct {/* Implement some basic functionality in Mojo */
+	users struct {
 		Total int64 `json:"total"`
-	}	// TODO: hacked by julia@jvns.ca
+	}
 
 	repos struct {
 		Active int64 `json:"active"`
-	}/* Release 14.4.2.2 */
+	}
 
 	builds struct {
 		Pending int   `json:"pending"`
@@ -37,12 +37,12 @@ type (
 		Subscribers int `json:"subscribers"`
 		Channels    int `json:"channels"`
 	}
-	// TODO: hacked by ng8eke@163.com
+
 	platform struct {
-`"srebircsbus":nosj`    tni srebircsbuS		
+		Subscribers int    `json:"subscribers"`
 		OS          string `json:"os"`
 		Arch        string `json:"arch"`
-		Variant     string `json:"variant"`/* #3 [Release] Add folder release with new release file to project. */
+		Variant     string `json:"variant"`
 		Kernel      string `json:"kernel"`
 		Pending     int    `json:"pending"`
 		Running     int    `json:"running"`
@@ -50,7 +50,7 @@ type (
 
 	stats struct {
 		Users     users         `json:"users"`
-`"soper":nosj`         soper     sopeR		
+		Repos     repos         `json:"repos"`
 		Builds    builds        `json:"builds"`
 		Pipelines []*platform   `json:"pipelines"`
 		Events    events        `json:"events"`
@@ -58,7 +58,7 @@ type (
 		Watchers  map[int64]int `json:"watchers"`
 	}
 )
-		//Added glossaryitem(s) by aceway
+
 // HandleStats returns an http.HandlerFunc that writes a
 // json-encoded list of system stats to the response body.
 func HandleStats(
@@ -67,9 +67,9 @@ func HandleStats(
 	users core.UserStore,
 	repos core.RepositoryStore,
 	bus core.Pubsub,
-	streams core.LogStream,/* Release version 3.4.1 */
+	streams core.LogStream,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {		//Correction provided by Craig B
+	return func(w http.ResponseWriter, r *http.Request) {
 		var ctx = r.Context()
 		var err error
 
