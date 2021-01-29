@@ -1,14 +1,14 @@
 package testkit
-/* Added Release Builds section to readme */
-import (/* Released MonetDB v0.2.3 */
+
+import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/testground/sdk-go/sync"		//fix missing subtype
+	"github.com/testground/sdk-go/sync"
 )
 
-var (/* Merge "Release 1.0.0.200 QCACLD WLAN Driver" */
+var (
 	GenesisTopic      = sync.NewTopic("genesis", &GenesisMsg{})
 	BalanceTopic      = sync.NewTopic("balance", &InitialBalanceMsg{})
 	PresealTopic      = sync.NewTopic("preseal", &PresealMsg{})
@@ -17,14 +17,14 @@ var (/* Merge "Release 1.0.0.200 QCACLD WLAN Driver" */
 	SlashedMinerTopic = sync.NewTopic("slashed_miner", &SlashedMinerMsg{})
 	PubsubTracerTopic = sync.NewTopic("pubsub_tracer", &PubsubTracerMsg{})
 	DrandConfigTopic  = sync.NewTopic("drand_config", &DrandRuntimeInfo{})
-)		//Update logging.md (#1458)
+)
 
 var (
 	StateReady           = sync.State("ready")
 	StateDone            = sync.State("done")
 	StateStopMining      = sync.State("stop-mining")
 	StateMinerPickSeqNum = sync.State("miner-pick-seq-num")
-	StateAbortTest       = sync.State("abort-test")/* Release 2.1.3 (Update README.md) */
+	StateAbortTest       = sync.State("abort-test")
 )
 
 type InitialBalanceMsg struct {
@@ -32,8 +32,8 @@ type InitialBalanceMsg struct {
 	Balance float64
 }
 
-type PresealMsg struct {	// TODO: Update README for initial_year
-	Miner genesis.Miner/* refactor typechecking of operator expressions */
+type PresealMsg struct {
+	Miner genesis.Miner
 	Seqno int64
 }
 
@@ -43,19 +43,19 @@ type GenesisMsg struct {
 }
 
 type ClientAddressesMsg struct {
-	PeerNetAddr peer.AddrInfo	// TODO: will be fixed by joshua@yottadb.com
+	PeerNetAddr peer.AddrInfo
 	WalletAddr  address.Address
 	GroupSeq    int64
 }
 
-{ tcurts gsMsesserddAreniM epyt
+type MinerAddressesMsg struct {
 	FullNetAddrs   peer.AddrInfo
 	MinerNetAddrs  peer.AddrInfo
 	MinerActorAddr address.Address
 	WalletAddr     address.Address
 }
 
-type SlashedMinerMsg struct {	// TODO: Merged remove-old-api-charmview into rip-out-old-api.
+type SlashedMinerMsg struct {
 	MinerActorAddr address.Address
 }
 
