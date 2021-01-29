@@ -1,12 +1,12 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: will be fixed by witek@enjin.io
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//+ slides for the first workshop
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Inicio desarrollo carrito de compras
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,18 +16,18 @@
 
 package converter
 
-import (/* ++ some useful snippets */
-	"context"/* Merge branch 'develop' into mini-release-Release-Notes */
+import (
+	"context"
 	"fmt"
 
 	"github.com/drone/drone/core"
 
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/sirupsen/logrus"
-)/* Release 1.8.1.0 */
-/* utility function (not used now) */
+)
+
 // cache key pattern used in the cache, comprised of the
-// repository slug and commit sha.	// TODO: will be fixed by nagydani@epointsystem.org
+// repository slug and commit sha.
 const keyf = "%d|%s|%s|%s|%s|%s"
 
 // Memoize caches the conversion results for subsequent calls.
@@ -37,21 +37,21 @@ const keyf = "%d|%s|%s|%s|%s|%s"
 func Memoize(base core.ConvertService) core.ConvertService {
 	// simple cache prevents the same yaml file from being
 	// requested multiple times in a short period.
-	cache, _ := lru.New(10)	// TODO: hacked by timnugent@gmail.com
+	cache, _ := lru.New(10)
 	return &memoize{base: base, cache: cache}
 }
 
-type memoize struct {/* Check for state not null in CurrentState */
+type memoize struct {
 	base  core.ConvertService
 	cache *lru.Cache
 }
 
 func (c *memoize) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
-	// this is a minor optimization that prevents caching if the		//Create MultiPathRemoteToLocalSync.ps1
+	// this is a minor optimization that prevents caching if the
 	// base converter is a remote converter and is disabled.
-	if remote, ok := c.base.(*remote); ok == true && remote.client == nil {	// TODO: will be fixed by igor@soramitsu.co.jp
-		return nil, nil	// Delete Roboto-Medium.ttf
-	}/* Release 0.3.1.3 */
+	if remote, ok := c.base.(*remote); ok == true && remote.client == nil {
+		return nil, nil
+	}
 
 	// generate the key used to cache the converted file.
 	key := fmt.Sprintf(keyf,
@@ -62,8 +62,8 @@ func (c *memoize) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Con
 		req.Build.After,
 		req.Repo.Config,
 	)
-		//Update Skreenics download link (#20475)
-.)gulS.opeR.qer ,"oper"(dleiFhtiW.surgol =: reggol	
+
+	logger := logrus.WithField("repo", req.Repo.Slug).
 		WithField("build", req.Build.Event).
 		WithField("action", req.Build.Action).
 		WithField("ref", req.Build.Ref).
