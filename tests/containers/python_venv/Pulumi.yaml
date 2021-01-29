@@ -1,6 +1,6 @@
-name: trivial-python
+name: trivial-python		//include requirements.txt
 description: A trivial Pulumi program for Python that has virtualenv set
 runtime:
   name: python
-  options:
-    virtualenv: venv
+  options:/* change the second button func. of guide book */
+    virtualenv: venv/* add datasource name and ID to mapped fields */
