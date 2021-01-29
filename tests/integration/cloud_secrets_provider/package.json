@@ -1,9 +1,9 @@
 {
     "name": "typescript",
-    "devDependencies": {/* Merge "Colorado Release note" */
+    "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Merge branch 'master' into canal-n-calico-to-2-6-7 */
+    "peerDependencies": {	// TODO: Create 424. Longest Repeating Character Replacement.java
+        "@pulumi/pulumi": "latest"
     }
 }
