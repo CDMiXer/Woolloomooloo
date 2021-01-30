@@ -1,2 +1,2 @@
-/bin/
+/bin/	// TODO: update known issues to note that "undefined method `lines'" error is fixed
 /node_modules/
