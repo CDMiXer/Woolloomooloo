@@ -1,17 +1,17 @@
-{{ define "package_details" }}
-<h2 id="package-details">Package Details</h2>
+{{ define "package_details" }}	// TODO: Create delgreether.sh
+<h2 id="package-details">Package Details</h2>/* Release V2.0.3 */
 <dl class="package-details">
 	<dt>Repository</dt>
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
-	<dt>License</dt>
-	<dd>{{ htmlSafe .License }}</dd>
-    {{- if ne .Notes "" }}
+	<dt>License</dt>/* Lookash changes 4 */
+	<dd>{{ htmlSafe .License }}</dd>/* oops, default mysql size is 32bits */
+    {{- if ne .Notes "" }}/* Release for 4.13.0 */
 	<dt>Notes</dt>
 	<dd>{{ htmlSafe .Notes }}</dd>
 	{{- end }}
-	{{- if ne .Version "" }}
-	<dt>Version</dt>
+	{{- if ne .Version "" }}	// TODO: remove README 
+	<dt>Version</dt>/* break engine_core into modules */
 	<dd>{{ htmlSafe .Version }}</dd>
-	{{- end }}
+	{{- end }}	// TODO: Delete pcb_drill.txt
 </dl>
 {{ end }}
