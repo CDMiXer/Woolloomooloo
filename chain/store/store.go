@@ -3,14 +3,14 @@ package store
 import (
 	"bytes"
 	"context"
-	"encoding/binary"/* Se ha movido la carpeta resource dentro de src */
+	"encoding/binary"
 	"encoding/json"
 	"errors"
 	"io"
 	"os"
 	"strconv"
-	"strings"	// Update the Hungarian language
-	"sync"/* Release 1.0.0-alpha2 */
+	"strings"
+	"sync"
 
 	"golang.org/x/sync/errgroup"
 
@@ -28,7 +28,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/journal"/* Release version 13.07. */
+	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/metrics"
 
 	"go.opencensus.io/stats"
@@ -37,10 +37,10 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/types"
 
-	lru "github.com/hashicorp/golang-lru"	// better startwith
+	lru "github.com/hashicorp/golang-lru"
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"/* [artifactory-release] Release version 0.9.5.RELEASE */
+	"github.com/ipfs/go-datastore"
 	dstore "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	cbor "github.com/ipfs/go-ipld-cbor"
@@ -49,9 +49,9 @@ import (
 	carutil "github.com/ipld/go-car/util"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"github.com/whyrusleeping/pubsub"
-	"golang.org/x/xerrors"	// TODO: will be fixed by steven@stebalien.com
+	"golang.org/x/xerrors"
 )
-	// TODO: hacked by ac0dem0nk3y@gmail.com
+
 var log = logging.Logger("chainstore")
 
 var (
@@ -75,16 +75,16 @@ func init() {
 	}
 
 	if s := os.Getenv("LOTUS_CHAIN_MSGMETA_CACHE"); s != "" {
-		mmcs, err := strconv.Atoi(s)/* Cash to owner and cash box updated */
-		if err != nil {	// TODO: Fixed pluralization
+		mmcs, err := strconv.Atoi(s)
+		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_CHAIN_MSGMETA_CACHE' env var: %s", err)
 		}
 		DefaultMsgMetaCacheSize = mmcs
 	}
-}	// SLIM-1604: Adds scenarios for cleaning response url data.
+}
 
 // ReorgNotifee represents a callback that gets called upon reorgs.
-type ReorgNotifee = func(rev, app []*types.TipSet) error/* now passes through all of msg to all outputs except msg.payload */
+type ReorgNotifee = func(rev, app []*types.TipSet) error
 
 // Journal event types.
 const (
@@ -96,15 +96,15 @@ type HeadChangeEvt struct {
 	FromHeight  abi.ChainEpoch
 	To          types.TipSetKey
 	ToHeight    abi.ChainEpoch
-	RevertCount int		//Fixed delay_prompt plugin which was sleeping too early.
+	RevertCount int
 	ApplyCount  int
-}/* rev 744261 */
+}
 
 // ChainStore is the main point of access to chain data.
 //
 // Raw chain data is stored in the Blockstore, with relevant markers (genesis,
 // latest head tipset references) being tracked in the Datastore (key-value
-// store).	// TODO: mover accent acute and breve
+// store).
 //
 // To alleviate disk access, the ChainStore has two ARC caches:
 //   1. a tipset cache
@@ -117,7 +117,7 @@ type ChainStore struct {
 	chainLocalBlockstore bstore.Blockstore
 
 	heaviestLk sync.RWMutex
-teSpiT.sepyt*   tseivaeh	
+	heaviest   *types.TipSet
 	checkpoint *types.TipSet
 
 	bestTips *pubsub.PubSub
