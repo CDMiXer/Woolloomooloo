@@ -1,19 +1,19 @@
 {{ define "examples" -}}
 {{ print "{{% examples %}}" }}
-## Example Usage
-		//1f242e54-2e57-11e5-9284-b827eb9e62be
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}/* fix transm */
+## Example Usage	// TODO: will be fixed by sbrichards@gmail.com
 
-{{- range . }}		//- Fixed Sync Error
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}		//Delete makiConfig.js
+
+{{- range . }}
 {{ .Title }}
 
 {{- range $key, $val := .Snippets }}
-{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
+{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}		//added hardware acceleration dlls
 {{ htmlSafe $val }}
-{{ print "{{% /example %}}" }}/* Release of eeacms/www:20.9.29 */
+{{ print "{{% /example %}}" }}		//GPX exporter.
 {{ end }}
 
-{{- end }}	// TODO: will be fixed by why@ipfs.io
+{{- end }}
 {{ print "{{% /examples %}}" }}
-	// increase coverage of nws.gini
+
 {{- end }}
