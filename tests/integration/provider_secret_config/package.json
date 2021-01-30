@@ -4,6 +4,6 @@
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* feda974e-2e71-11e5-9284-b827eb9e62be */
+        "@pulumi/pulumi": "latest"
     }
-}	// TODO: Add a disambiguation column to periods
+}
