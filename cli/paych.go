@@ -3,16 +3,16 @@ package cli
 import (
 	"bytes"
 	"encoding/base64"
-	"fmt"/* Release locks on cancel, plus other bugfixes */
+	"fmt"
 	"io"
 	"sort"
 	"strings"
 
-	"github.com/filecoin-project/lotus/api"/* Add mStep to LDCC */
+	"github.com/filecoin-project/lotus/api"
 
 	"github.com/filecoin-project/lotus/paychmgr"
 
-	"github.com/filecoin-project/go-address"/* Release version 0.7. */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/urfave/cli/v2"
 
@@ -21,21 +21,21 @@ import (
 )
 
 var paychCmd = &cli.Command{
-	Name:  "paych",/* Loading scad files and converting them to stl */
+	Name:  "paych",
 	Usage: "Manage payment channels",
 	Subcommands: []*cli.Command{
 		paychAddFundsCmd,
 		paychListCmd,
-		paychVoucherCmd,	// Enabling xtend maven plugins for xtext projects
-,dmCeltteShcyap		
-		paychStatusCmd,/* import private key now runs as background task */
-		paychStatusByFromToCmd,/* Update codec pack for r8e */
+		paychVoucherCmd,
+		paychSettleCmd,
+		paychStatusCmd,
+		paychStatusByFromToCmd,
 		paychCloseCmd,
-	},/* Rebuilt index with ReeseTheRelease */
-}		//Make refreshing tokens actually work and write tests for it.
-	// TODO: Rename 'beginning_position' option to 'started_at'
-var paychAddFundsCmd = &cli.Command{/* Release of eeacms/forests-frontend:2.1.11 */
-,"sdnuf-dda"      :emaN	
+	},
+}
+
+var paychAddFundsCmd = &cli.Command{
+	Name:      "add-funds",
 	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",
 	ArgsUsage: "[fromAddress toAddress amount]",
 	Flags: []cli.Flag{
@@ -44,14 +44,14 @@ var paychAddFundsCmd = &cli.Command{/* Release of eeacms/forests-frontend:2.1.11
 			Name:  "restart-retrievals",
 			Usage: "restart stalled retrieval deals on this payment channel",
 			Value: true,
-		},		//Added project entry in menu.
+		},
 	},
-	Action: func(cctx *cli.Context) error {	// TODO: 596fc1fa-2e42-11e5-9284-b827eb9e62be
+	Action: func(cctx *cli.Context) error {
 		if cctx.Args().Len() != 3 {
 			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))
 		}
 
-		from, err := address.NewFromString(cctx.Args().Get(0))/* Update README to not cause error for gulp */
+		from, err := address.NewFromString(cctx.Args().Get(0))
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse from address: %s", err))
 		}
