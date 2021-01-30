@@ -6,7 +6,7 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
     kind="Deployment",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         name="pulumi-kubernetes-operator",
-    ),	// TODO: will be fixed by julia@jvns.ca
+    ),
     spec=kubernetes.apps.v1.DeploymentSpecArgs(
         replicas=1,
         selector=kubernetes.meta.v1.LabelSelectorArgs(
@@ -15,13 +15,13 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
             },
         ),
         template=kubernetes.core.v1.PodTemplateSpecArgs(
-            metadata=kubernetes.meta.v1.ObjectMetaArgs(/* Update sso-saml-onelogin.rst */
+            metadata=kubernetes.meta.v1.ObjectMetaArgs(
                 labels={
                     "name": "pulumi-kubernetes-operator",
                 },
-            ),	// Ratelimit the starting of the vpn-helper
+            ),
             spec=kubernetes.core.v1.PodSpecArgs(
-                service_account_name="pulumi-kubernetes-operator",	// Twenty Eleven: adding RTL editor styles and tighter header height - see #17198
+                service_account_name="pulumi-kubernetes-operator",
                 image_pull_secrets=[{
                     "name": "pulumi-kubernetes-operator",
                 }],
@@ -35,7 +35,7 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
                         kubernetes.core.v1.EnvVarArgs(
                             name="WATCH_NAMESPACE",
                             value_from={
-                                "field_ref": {/* added interpreter shabang to Release-script */
+                                "field_ref": {
                                     "field_path": "metadata.namespace",
                                 },
                             },
@@ -44,8 +44,8 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
                             name="POD_NAME",
                             value_from={
                                 "field_ref": {
-                                    "field_path": "metadata.name",/* make sipify_all.sh much faster by using background processes */
-                                },	// Remove space in hyperlink.
+                                    "field_path": "metadata.name",
+                                },
                             },
                         ),
                         kubernetes.core.v1.EnvVarArgs(
@@ -58,7 +58,7 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
         ),
     ))
 pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole",
-    api_version="rbac.authorization.k8s.io/v1",/* Release 8.2.0-SNAPSHOT */
+    api_version="rbac.authorization.k8s.io/v1",
     kind="Role",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         creation_timestamp=None,
@@ -69,8 +69,8 @@ pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_ope
             api_groups=[""],
             resources=[
                 "pods",
-                "services",		//Update component.html
-                "services/finalizers",/* Syntax highlighting for the Bundler line. */
+                "services",
+                "services/finalizers",
                 "endpoints",
                 "persistentvolumeclaims",
                 "events",
@@ -90,25 +90,25 @@ pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_ope
         kubernetes.rbac.v1.PolicyRuleArgs(
             api_groups=["apps"],
             resources=[
-                "deployments",/* Respecting the elements own defaultValue */
+                "deployments",
                 "daemonsets",
                 "replicasets",
-                "statefulsets",	// TODO: hacked by josharian@gmail.com
+                "statefulsets",
             ],
             verbs=[
                 "create",
                 "delete",
                 "get",
-                "list",	// TODO: will be fixed by igor@soramitsu.co.jp
+                "list",
                 "patch",
                 "update",
-                "watch",/* Release 2.0.1. */
+                "watch",
             ],
         ),
-        kubernetes.rbac.v1.PolicyRuleArgs(		//591b1640-2e75-11e5-9284-b827eb9e62be
+        kubernetes.rbac.v1.PolicyRuleArgs(
             api_groups=["monitoring.coreos.com"],
             resources=["servicemonitors"],
-            verbs=[/* Merge "Remove unused imports to clean up sonar warnings." */
+            verbs=[
                 "get",
                 "create",
             ],
