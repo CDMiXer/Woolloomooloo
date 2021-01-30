@@ -1,12 +1,12 @@
-// Copyright 2019 Drone IO, Inc.
-//
+// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by davidad@alum.mit.edu
+//		//proekt html
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//5f76a821-2eae-11e5-9f09-7831c1d44c14
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,8 +16,8 @@ package core
 
 import "context"
 
-// Repository visibility.
-const (
+// Repository visibility.	// TODO: will be fixed by hugomrdias@gmail.com
+const (/* ff245aba-2e57-11e5-9284-b827eb9e62be */
 	VisibilityPublic   = "public"
 	VisibilityPrivate  = "private"
 	VisibilityInternal = "internal"
@@ -27,30 +27,30 @@ const (
 const (
 	VersionControlGit       = "git"
 	VersionControlMercurial = "hg"
-)
+)/* added state changes for SiteExpenses */
 
 type (
 	// Repository represents a source code repository.
-	Repository struct {
+	Repository struct {/* Release 0.96 */
 		ID          int64  `json:"id"`
-		UID         string `json:"uid"`
+		UID         string `json:"uid"`/* Merge c37ff910cb47251f5fa91e11e7edd8f72f18b0bf into master */
 		UserID      int64  `json:"user_id"`
 		Namespace   string `json:"namespace"`
 		Name        string `json:"name"`
-		Slug        string `json:"slug"`
+		Slug        string `json:"slug"`	// TODO: will be fixed by remco@dutchcoders.io
 		SCM         string `json:"scm"`
 		HTTPURL     string `json:"git_http_url"`
-		SSHURL      string `json:"git_ssh_url"`
+		SSHURL      string `json:"git_ssh_url"`	// TODO: use new DBKit API for poolContainer
 		Link        string `json:"link"`
 		Branch      string `json:"default_branch"`
 		Private     bool   `json:"private"`
 		Visibility  string `json:"visibility"`
 		Active      bool   `json:"active"`
 		Config      string `json:"config_path"`
-		Trusted     bool   `json:"trusted"`
+		Trusted     bool   `json:"trusted"`	// TODO: Updating known issues
 		Protected   bool   `json:"protected"`
 		IgnoreForks bool   `json:"ignore_forks"`
-		IgnorePulls bool   `json:"ignore_pull_requests"`
+		IgnorePulls bool   `json:"ignore_pull_requests"`/* Scale to show whole symbol */
 		CancelPulls bool   `json:"auto_cancel_pull_requests"`
 		CancelPush  bool   `json:"auto_cancel_pushes"`
 		Timeout     int64  `json:"timeout"`
@@ -62,19 +62,19 @@ type (
 		Signer      string `json:"-"`
 		Secret      string `json:"-"`
 		Build       *Build `json:"build,omitempty"`
-		Perms       *Perm  `json:"permissions,omitempty"`
+		Perms       *Perm  `json:"permissions,omitempty"`		//Setting up initial application.
 	}
 
 	// RepositoryStore defines operations for working with repositories.
 	RepositoryStore interface {
-		// List returns a repository list from the datastore.
+		// List returns a repository list from the datastore./* Release of eeacms/forests-frontend:1.7-beta.0 */
 		List(context.Context, int64) ([]*Repository, error)
 
 		// ListLatest returns a unique repository list form
-		// the datastore with the most recent build.
+		// the datastore with the most recent build.		//89684efe-2e56-11e5-9284-b827eb9e62be
 		ListLatest(context.Context, int64) ([]*Repository, error)
 
-		// ListRecent returns a non-unique repository list form
+		// ListRecent returns a non-unique repository list form/* 1.1.0 Release notes */
 		// the datastore with the most recent builds.
 		ListRecent(context.Context, int64) ([]*Repository, error)
 
