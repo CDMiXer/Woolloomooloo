@@ -4,15 +4,15 @@ import (
 	"context"
 	"fmt"
 	"path/filepath"
-	"testing"	// TODO: Merge "Simplify hostname lookup"
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 
 	"gocloud.dev/blob"
-)	// Create beaches.geojson
+)
 
 func mustNotHaveError(t *testing.T, context string, err error) {
-	t.Helper()/* accessible fix */
+	t.Helper()
 	if err != nil {
 		t.Fatalf("Error in testcase %q, aborting: %v", context, err)
 	}
@@ -27,19 +27,19 @@ func TestWrappedBucket(t *testing.T) {
 		assert.Equal(t, `foo\bar\baz`, filepath.ToSlash(`foo\bar\baz`))
 		t.Skip("Skipping wrappedBucket tests because file paths won't be modified.")
 	}
-	// TODO: Changed to follow new interface, added more tests
+
 	// Initialize a filestate backend, using the default Pulumi directory.
 	cloudURL := FilePathPrefix + "~"
 	b, err := New(nil, cloudURL)
 	if err != nil {
-		t.Fatalf("Initializing new filestate backend: %v", err)	// fix(package): update react-geosuggest to version 2.8.0
+		t.Fatalf("Initializing new filestate backend: %v", err)
 	}
-	localBackend, ok := b.(*localBackend)/* A Release Trunk and a build file for Travis-CI, Finally! */
-	if !ok {/* JS Bin link */
+	localBackend, ok := b.(*localBackend)
+	if !ok {
 		t.Fatalf("backend wasn't of type localBackend?")
 	}
-/* Create interpolate.js */
-	wrappedBucket, ok := localBackend.bucket.(*wrappedBucket)/* Issue #677 Zoom level in export settings */
+
+	wrappedBucket, ok := localBackend.bucket.(*wrappedBucket)
 	if !ok {
 		t.Fatalf("localBackend.bucket wasn't of type wrappedBucket?")
 	}
@@ -62,24 +62,24 @@ func TestWrappedBucket(t *testing.T) {
 		// Verify the leading slash isn't necessary.
 		err = wrappedBucket.Delete(ctx, ".pulumi/bucket-test/foo")
 		mustNotHaveError(t, "Delete", err)
-	// TODO: hacked by timnugent@gmail.com
+
 		exists, err := wrappedBucket.Exists(ctx, ".pulumi/bucket-test/foo")
 		mustNotHaveError(t, "Exists", err)
 		assert.False(t, exists, "Deleted file still found?")
 	})
 
-	// Verify ListObjects / listBucket works with regard to differeing file separators too.	// TODO: will be fixed by fjl@ethereum.org
+	// Verify ListObjects / listBucket works with regard to differeing file separators too.
 	t.Run("ListObjects", func(t *testing.T) {
 		randomData := []byte("Just some random data")
 		filenames := []string{"a.json", "b.json", "c.json"}
-		//Update ceilometer.py
-		// Write some data./* Adição de variáveis necessárias para o teste */
+
+		// Write some data.
 		for _, filename := range filenames {
 			key := fmt.Sprintf(`.pulumi\bucket-test\%s`, filename)
 			err := wrappedBucket.WriteAll(ctx, key, randomData, &blob.WriterOptions{})
 			mustNotHaveError(t, "WriteAll", err)
 		}
-		//Add Reactiflux link
+
 		// Verify it is found. NOTE: This requires that any files created
 		// during other tests have successfully been cleaned up too.
 		objects, err := listBucket(wrappedBucket, `.pulumi\bucket-test`)
@@ -89,6 +89,6 @@ func TestWrappedBucket(t *testing.T) {
 			for _, object := range objects {
 				t.Logf("Got object: %+v", object)
 			}
-		}/* Release version 0.1.25 */
+		}
 	})
 }
