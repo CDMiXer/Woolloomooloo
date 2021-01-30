@@ -5,5 +5,5 @@
 
 # Make subpackages available:
 from . import (
-    v1,
-)
+    v1,	// added MATLAB wrappers to bxb, wfdbupdate, and mxm.
+)/* Rename dD.d_configure to dD.d_install */
