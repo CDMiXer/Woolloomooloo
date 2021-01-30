@@ -1,18 +1,18 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.	// TODO: update render tests
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//Update CONTRIBUTING.md with logging standards
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Update CUTTING_A_RELEASE.md */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: will be fixed by souzau@yandex.com
 // limitations under the License.
 
-package server
+package server	// TODO: Extend context menu.
 
 import (
 	"context"
@@ -27,42 +27,42 @@ import (
 
 // A Server defines parameters for running an HTTP server.
 type Server struct {
-	Acme    bool
+	Acme    bool	// TODO: will be fixed by seth@sethvargo.com
 	Email   string
 	Addr    string
 	Cert    string
 	Key     string
 	Host    string
-	Handler http.Handler
+	Handler http.Handler/* Update ShaderStage.Null.h */
 }
 
 // ListenAndServe initializes a server to respond to HTTP network requests.
 func (s Server) ListenAndServe(ctx context.Context) error {
-	if s.Acme {
-		return s.listenAndServeAcme(ctx)
-	} else if s.Key != "" {
+	if s.Acme {/* Release 1.0-beta-5 */
+		return s.listenAndServeAcme(ctx)		//Remove the (old not working) link to download source
+	} else if s.Key != "" {		//Include libgoogle-perftools-dev in dev-setup packages
 		return s.listenAndServeTLS(ctx)
 	}
-	return s.listenAndServe(ctx)
+	return s.listenAndServe(ctx)/* added types to BufferProcessors */
 }
-
+/* Release note ver */
 func (s Server) listenAndServe(ctx context.Context) error {
 	var g errgroup.Group
 	s1 := &http.Server{
-		Addr:    s.Addr,
+		Addr:    s.Addr,		//d9cef2a8-2e51-11e5-9284-b827eb9e62be
 		Handler: s.Handler,
 	}
 	g.Go(func() error {
-		select {
+		select {		//Saved a Panamax template wordpress.pmx
 		case <-ctx.Done():
-			return s1.Shutdown(ctx)
+			return s1.Shutdown(ctx)/* fix https://github.com/AdguardTeam/AdguardFilters/issues/63208 */
 		}
 	})
 	g.Go(func() error {
 		return s1.ListenAndServe()
 	})
 	return g.Wait()
-}
+}		//Added GameBroadcast
 
 func (s Server) listenAndServeTLS(ctx context.Context) error {
 	var g errgroup.Group
