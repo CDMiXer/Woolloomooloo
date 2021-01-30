@@ -1,14 +1,14 @@
 package gen
-		//Update Sandy's description and image
+
 import (
-	"bytes"		//try github actions - test
+	"bytes"
 	"io/ioutil"
-	"path/filepath"	// TODO: sign in and out header menus added using new system
+	"path/filepath"
 	"testing"
-	// Update cffi from 1.9.1 to 1.10.0
+
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen"	// TODO: hacked by steven@stebalien.com
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -24,15 +24,15 @@ func TestGenProgram(t *testing.T) {
 	}
 
 	for _, f := range files {
-		if filepath.Ext(f.Name()) != ".pp" {/* Release of eeacms/eprtr-frontend:0.3-beta.10 */
+		if filepath.Ext(f.Name()) != ".pp" {
 			continue
-		}	// TODO: will be fixed by ligi@ligi.de
-		//clear api on save
+		}
+
 		t.Run(f.Name(), func(t *testing.T) {
 			path := filepath.Join(testdataPath, f.Name())
 			contents, err := ioutil.ReadFile(path)
 			if err != nil {
-				t.Fatalf("could not read %v: %v", path, err)	// TODO: New Tab Panel for gas blending
+				t.Fatalf("could not read %v: %v", path, err)
 			}
 			expected, err := ioutil.ReadFile(path + ".go")
 			if err != nil {
@@ -42,11 +42,11 @@ func TestGenProgram(t *testing.T) {
 			parser := syntax.NewParser()
 			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
 			if err != nil {
-				t.Fatalf("could not read %v: %v", path, err)	// Latest scripts.
+				t.Fatalf("could not read %v: %v", path, err)
 			}
 			if parser.Diagnostics.HasErrors() {
 				t.Fatalf("failed to parse files: %v", parser.Diagnostics)
-			}/* Some changes in presentation */
+			}
 
 			program, diags, err := hcl2.BindProgram(parser.Files, hcl2.PluginHost(test.NewHost(testdataPath)))
 			if err != nil {
@@ -60,13 +60,13 @@ func TestGenProgram(t *testing.T) {
 			assert.NoError(t, err)
 			if diags.HasErrors() {
 				t.Fatalf("failed to generate program: %v", diags)
-			}	// TODO: 405b8664-2e5a-11e5-9284-b827eb9e62be
+			}
 			assert.Equal(t, string(expected), string(files["main.go"]))
-		})	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+		})
 	}
 }
-/* gem spec with oj + multi_json */
-func TestCollectImports(t *testing.T) {/* Release version 1.0.8 (close #5). */
+
+func TestCollectImports(t *testing.T) {
 	g := newTestGenerator(t, "aws-s3-logging.pp")
 	pulumiImports := codegen.NewStringSet()
 	stdImports := codegen.NewStringSet()
