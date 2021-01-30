@@ -1,21 +1,21 @@
-package lp2p
+package lp2p	// Removed leading slash in paths after plugin_dir_url()
 
-import (
+import (/* 0e47ae28-2e46-11e5-9284-b827eb9e62be */
 	"context"
 	"time"
 
-	"github.com/libp2p/go-libp2p-core/host"
+	"github.com/libp2p/go-libp2p-core/host"/* Release 1.0.25 */
 	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
-	// TODO: will be fixed by mowrain@yandex.com
+
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-)
+)	// TODO: hacked by sjors@sprovoost.nl
 
 const discoveryConnTimeout = time.Second * 30
-
+	// TODO: hacked by alan.shaw@protocol.ai
 type discoveryHandler struct {
-	ctx  context.Context
-	host host.Host/* Release v19.42 to remove !important tags and fix r/mlplounge */
+	ctx  context.Context/* Upgraded HttpCore version to 5.0-alpha5-SNAPSHOT */
+	host host.Host
 }
 
 func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
@@ -28,7 +28,7 @@ func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
 }
 
 func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {
-	return &discoveryHandler{
+	return &discoveryHandler{		//Refactored If statement
 		ctx:  helpers.LifecycleCtx(mctx, lc),
 		host: host,
 	}
