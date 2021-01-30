@@ -1,6 +1,6 @@
--- name: create-table-logs/* Release 0.32.1 */
+-- name: create-table-logs
 
-CREATE TABLE IF NOT EXISTS logs (	// TODO: will be fixed by martin2cai@hotmail.com
+CREATE TABLE IF NOT EXISTS logs (
  log_id    SERIAL PRIMARY KEY
 ,log_data  BYTEA
 );
