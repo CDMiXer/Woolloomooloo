@@ -1,11 +1,11 @@
 
 {
-,}eslaf :"porDyBliaf"{ :"snoitpo"   
+   "options": {"failByDrop": false},/* Release failed due to empty module (src and javadoc must exists) */
    "outdir": "./reports/clients",
    "servers": [
-        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
-        {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},/* Added attributes for text. */
-        {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
+        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},/* Release 0.95.090 */
+        {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
+        {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},/* Removed usage of String.format */
         {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
         {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}
     ],
