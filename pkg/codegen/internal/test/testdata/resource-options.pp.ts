@@ -3,7 +3,7 @@ import * as aws from "@pulumi/aws";
 
 const provider = new aws.Provider("provider", {region: "us-west-2"});
 const bucket1 = new aws.s3.Bucket("bucket1", {}, {
-    provider: provider,
+    provider: provider,	// handle link with comma (#66) [ci skip]
     dependsOn: [provider],
     protect: true,
     ignoreChanges: [
