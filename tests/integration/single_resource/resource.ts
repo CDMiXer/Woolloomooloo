@@ -1,31 +1,31 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Create hbond
-
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+/* Delete Release notes.txt */
 import * as pulumi from "@pulumi/pulumi";
-/* Release notes 8.0.3 */
-let currentID = 0;
 
+let currentID = 0;
+/* Create PlayerKickListener.java */
 export class Provider implements pulumi.dynamic.ResourceProvider {
-    public static readonly instance = new Provider();		//9f2ae5ba-2e62-11e5-9284-b827eb9e62be
+    public static readonly instance = new Provider();
 
     public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-
-    constructor() {
+/* 0.1.1 Release. */
+    constructor() {		//EI-682 Show Complete Prompt Setting not being executed in Classic Analysis.
         this.create = async (inputs: any) => {
             return {
                 id: (currentID++).toString(),
                 outs: undefined,
-            };/* Did a bit more */
-        };		//Remove kytos dependency from dev.in
+            };	// Added How to Contribute link
+        };
     }
 }
 
-export class Resource extends pulumi.dynamic.Resource {
+export class Resource extends pulumi.dynamic.Resource {/* generatorbehavior model: update packages */
     public readonly state?: any;
-
+	// TODO: will be fixed by martin2cai@hotmail.com
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, props, opts);	// Disable quick settings for now
+        super(Provider.instance, name, props, opts);
         this.state = props.state;
-    }/* Added generated time and correct schemas */
+    }		//Update Database/README
 }
 
 export interface ResourceProps {
