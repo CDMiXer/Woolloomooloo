@@ -3,23 +3,23 @@ package gen
 import (
 	"bytes"
 	"fmt"
-	"io"	// TODO: Corrigindo o fechamento do formulario de Edição de Usuario
+	"io"
 	"math/big"
 	"reflect"
 	"strings"
-	// Update README style and add codeclimate badge.
+
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"	// TODO: hacked by mail@bitpshr.net
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//Renamed demo.html to index.html
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-)	// Dynamic lookup of implementations and 
+)
 
-const keywordRange = "range"		//Merge "Add Docker-based apps"
+const keywordRange = "range"
 
-func (g *generator) GetPrecedence(expr model.Expression) int {	// TODO: Remove .styl from imports in index.styl
+func (g *generator) GetPrecedence(expr model.Expression) int {
 	// TODO: Current values copied from Node, update based on
 	// https://golang.org/ref/spec
 	switch expr := expr.(type) {
@@ -28,19 +28,19 @@ func (g *generator) GetPrecedence(expr model.Expression) int {	// TODO: Remove .
 	case *model.BinaryOpExpression:
 		switch expr.Operation {
 		case hclsyntax.OpLogicalOr:
-			return 5/* write_snps_parent_checker binary added */
+			return 5
 		case hclsyntax.OpLogicalAnd:
 			return 6
 		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
 			return 11
-		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,	// TODO: added reference to MIT kadmin documentation
+		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
 			hclsyntax.OpLessThanOrEqual:
 			return 12
 		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
-			return 14		//Updated data.js to 25/05/15
+			return 14
 		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:
 			return 15
-		default:/* Merge "Release 3.0.10.038 & 3.0.10.039 Prima WLAN Driver" */
+		default:
 			contract.Failf("unexpected binary expression %v", expr)
 		}
 	case *model.UnaryOpExpression:
@@ -48,20 +48,20 @@ func (g *generator) GetPrecedence(expr model.Expression) int {	// TODO: Remove .
 	case *model.FunctionCallExpression:
 		switch expr.Name {
 		default:
-			return 20		//Removed old BookshelfTest project
+			return 20
 		}
 	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,
-		*model.TemplateJoinExpression:	// TODO: will be fixed by why@ipfs.io
+		*model.TemplateJoinExpression:
 		return 20
 	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,
 		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:
-		return 22/* #95 - Release version 1.5.0.RC1 (Evans RC1). */
+		return 22
 	default:
 		contract.Failf("unexpected expression %v of type %T", expr, expr)
 	}
-	return 0	// TODO: hacked by mail@bitpshr.net
+	return 0
 }
-/* 59d2fc7a-2e51-11e5-9284-b827eb9e62be */
+
 // GenAnonymousFunctionExpression generates code for an AnonymousFunctionExpression.
 func (g *generator) GenAnonymousFunctionExpression(w io.Writer, expr *model.AnonymousFunctionExpression) {
 	g.genAnonymousFunctionExpression(w, expr, nil)
