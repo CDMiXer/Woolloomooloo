@@ -1,15 +1,15 @@
 {
-    "name": "minimal",
-    "license": "Apache-2.0",/* use api v2 to display mobile platforms */
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "name": "minimal",	// TODO: ruby-prof's awesome call stack printer is now used by default
+    "license": "Apache-2.0",/* Add TimeToLiveSet */
+    "main": "bin/index.js",/* SoftwareCollection fields: -name, -version, +copr_user, +copr_project */
+    "typings": "bin/index.d.ts",/* Add sublist */
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {		//^ Updated the default character set of tables to utf8mb4
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* Released springrestclient version 1.9.11 */
     "dependencies": {
-        "@pulumi/pulumi": "=0.10.0"	// Update to valid json format
+        "@pulumi/pulumi": "=0.10.0"
     }
 }
