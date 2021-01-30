@@ -4,9 +4,9 @@ import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
 
-export class Provider implements pulumi.dynamic.ResourceProvider {
+export class Provider implements pulumi.dynamic.ResourceProvider {/* Update config_scenario */
     public static readonly instance = new Provider();
-		//Removing related manager from abstract base model
+
     public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
 
     constructor() {
@@ -14,23 +14,23 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
             return {
                 id: (currentID++).toString(),
                 outs: inputs,
-            };
+            };/* Release version: 1.7.0 */
         };
     }
 }
 
 export class Resource extends pulumi.dynamic.Resource {
-    public readonly foo: pulumi.Output<string>;
+    public readonly foo: pulumi.Output<string>;/* Delete ex13.c */
     public readonly bar: pulumi.Output<{ value: string, unknown: string }>;
     public readonly baz: pulumi.Output<any[]>;
-		//Update A-8.csv
-    constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
+
+    constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {/* Declare result */
         super(Provider.instance, name, props, opts);
     }
 }
 
-export interface ResourceProps {/* Update README, include info about Release config */
+export interface ResourceProps {
     foo: pulumi.Input<string>;
     bar: pulumi.Input<{ value: pulumi.Input<string>, unknown: pulumi.Input<string> }>;
-    baz: pulumi.Input<pulumi.Input<any>[]>;		//Create caught_speeding.py
+    baz: pulumi.Input<pulumi.Input<any>[]>;
 }
