@@ -1,15 +1,15 @@
-package display/* Update README.md - added links */
+package display
 
 import (
-	"testing"		//Merge "Make swift-oldies py3-compatible"
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// [Statistiques] Ne prendre en compte que les ventes terminées
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
-	// rev 496120
+
 func TestTranslateDetailedDiff(t *testing.T) {
 	var (
 		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
@@ -25,24 +25,24 @@ func TestTranslateDetailedDiff(t *testing.T) {
 		expected     *resource.ObjectDiff
 	}{
 		{
-			state: map[string]interface{}{/* fix shortcodes */
+			state: map[string]interface{}{
 				"foo": 42,
 			},
 			inputs: map[string]interface{}{
-				"foo": 24,/* Add  repeated-string-English.pdf */
+				"foo": 24,
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
 			},
-			expected: &resource.ObjectDiff{/* 70b572e4-2e5e-11e5-9284-b827eb9e62be */
+			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
-				Sames:   resource.PropertyMap{},		//Remove benchmark TODO from README
+				Sames:   resource.PropertyMap{},
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(24),
-					},/* GROOVY-10067: use bounded placeholder from context in method return type */
+					},
 				},
 			},
 		},
@@ -51,22 +51,22 @@ func TestTranslateDetailedDiff(t *testing.T) {
 				"foo": 42,
 			},
 			inputs: map[string]interface{}{
-				"foo": 42,/* Update appClass required in readme. */
-			},/* Release of eeacms/www:19.11.1 */
+				"foo": 42,
+			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
 			},
 			expected: &resource.ObjectDiff{
-				Adds:    resource.PropertyMap{},		//Added functionality to time earned data to the database.
+				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
-					"foo": {/* Adjust my categorize, special-casing output.pdf */
-						Old: resource.NewNumberProperty(42),		//cpl of entries
+					"foo": {
+						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(42),
-					},	// [FIX] fix wrong link
+					},
 				},
-			},/* Add new clang slave/builder pandaboard cortex-a9. */
+			},
 		},
 		{
 			state: map[string]interface{}{
