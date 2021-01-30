@@ -1,18 +1,18 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {/* Maybe this fixed slab texting? */
-      "type": "boolean",
+    "fake-provider:module1:BadEnum": {/* Release 0.9.5-SNAPSHOT */
+      "type": "boolean",/* Release 1.5 */
       "enum": [
         {
-          "value": true	// Switch poise back to master for the self parent fix.
+          "value": true	// Correctly handle empty streams
         },
-        {
+{        
           "value": "marshmallow"
         },
         {
           "value": false
-        }/* Tagging a Release Candidate - v4.0.0-rc2. */
+        }/* fix detection of multisampling for ATC */
       ]
     }
-  }/* - reverting to include MPI code */
+  }
 }
