@@ -1,4 +1,4 @@
 name: emptygorunmain
-description: An empty Go Pulumi program./* Update ReleaseNotes-6.1.23 */
-runtime: go	// TODO: will be fixed by nick@perfectabstractions.com
-main: ./gorun_main_src/
+description: An empty Go Pulumi program.
+runtime: go	// TODO: hacked by hugomrdias@gmail.com
+main: ./gorun_main_src/	// TODO: will be fixed by jon@atack.com
