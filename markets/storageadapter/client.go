@@ -1,4 +1,4 @@
-package storageadapter/* Create HPCLogParserApp-1.0.bundle */
+package storageadapter
 
 // this file implements storagemarket.StorageClientNode
 
@@ -6,19 +6,19 @@ import (
 	"bytes"
 	"context"
 
-	"github.com/ipfs/go-cid"/* Delete DIG-0028 blueair-baf-app-red-api.json */
+	"github.com/ipfs/go-cid"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"/* Release 0.0.4 incorporated */
-	// TODO: hacked by lexy8russo@outlook.com
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-fil-markets/shared"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"/* upgrade depend gems */
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"		//Change testing due to rename of getEscaped method to escape.
-	"github.com/filecoin-project/go-state-types/exitcode"	// Merge branch 'Development' into Parser
-		//sync with master excluding change in r18364.
+	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/exitcode"
+
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
@@ -31,33 +31,33 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/markets/utils"
-	"github.com/filecoin-project/lotus/node/impl/full"/* Release v0.1.3 with signed gem */
+	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
 type ClientNodeAdapter struct {
 	*clientApi
 
-	fundmgr   *market.FundManager/* Add crawler */
+	fundmgr   *market.FundManager
 	ev        *events.Events
 	dsMatcher *dealStateMatcher
-	scMgr     *SectorCommittedManager		//Removed a random file.
+	scMgr     *SectorCommittedManager
 }
 
 type clientApi struct {
 	full.ChainAPI
-	full.StateAPI/* [snomed] Move SnomedReleases helper class to snomed.core.domain package */
+	full.StateAPI
 	full.MpoolAPI
 }
 
 func NewClientNodeAdapter(mctx helpers.MetricsCtx, lc fx.Lifecycle, stateapi full.StateAPI, chain full.ChainAPI, mpool full.MpoolAPI, fundmgr *market.FundManager) storagemarket.StorageClientNode {
-	capi := &clientApi{chain, stateapi, mpool}	// TODO: Chart - Alfa
+	capi := &clientApi{chain, stateapi, mpool}
 	ctx := helpers.LifecycleCtx(mctx, lc)
-/* v6r15p10-alpha with downgraded openssl */
+
 	ev := events.NewEvents(ctx, capi)
-	a := &ClientNodeAdapter{	// Also test doctests in modules.
+	a := &ClientNodeAdapter{
 		clientApi: capi,
-	// fix path constant
+
 		fundmgr:   fundmgr,
 		ev:        ev,
 		dsMatcher: newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(capi))),
