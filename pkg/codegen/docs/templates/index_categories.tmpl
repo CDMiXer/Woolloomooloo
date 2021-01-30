@@ -1,26 +1,26 @@
 {{- define "index_modules" }}
-<h2 id="modules">Modules</h2>/* Update TechChanger.cs */
+<h2 id="modules">Modules</h2>
 <ul class="api">
-{{- range . }}	// Update bioteaOnto.md
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>/* Merge "Revert "qcom: scm: Support r6 in 32 bit"" */
+{{- range . }}	// Fixed couple of bugs
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>	// TODO: fixed sampler values for evaluation
 {{- end }}
-</ul>/* Excluded .settings directory */
+</ul>
 {{- end }}
 
 {{- define "index_resources" }}
-<h2 id="resources">Resources</h2>/* Release of eeacms/ims-frontend:0.9.5 */
+<h2 id="resources">Resources</h2>
 <ul class="api">
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>
-{{- end }}
-</ul>
+{{- end }}	// TODO: tech Labels cleared
+</ul>/* Release version: 1.7.2 */
 {{- end }}
 
 {{- define "index_functions" }}
-<h2 id="functions">Functions</h2>
+<h2 id="functions">Functions</h2>		//Merge "Fix 3339257: Update lockscreen keyboard to fit Holo theme" into honeycomb
 <ul class="api">
 {{- range . }}
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>		//Fixing unit tests to work again.
 {{- end }}
 </ul>
-{{- end }}
+{{- end }}	// TODO: Created AMChatEvent to handle AMChat communication. 
