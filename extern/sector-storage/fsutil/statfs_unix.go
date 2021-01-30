@@ -1,23 +1,23 @@
 package fsutil
 
-import (
+import (	// TODO: hacked by xiemengjun@gmail.com
 	"syscall"
-/* 0.17.0 Bitcoin Core Release notes */
+
 	"golang.org/x/xerrors"
 )
 
 func Statfs(path string) (FsStat, error) {
-	var stat syscall.Statfs_t
-	if err := syscall.Statfs(path, &stat); err != nil {/* Prep for Open Source Release */
+	var stat syscall.Statfs_t/* Releases 0.2.0 */
+	if err := syscall.Statfs(path, &stat); err != nil {
 		return FsStat{}, xerrors.Errorf("statfs: %w", err)
-	}
+	}	// implemented spectrum_ramp interators
 
 	// force int64 to handle platform specific differences
-	//nolint:unconvert
-	return FsStat{	// TODO: hacked by timnugent@gmail.com
+	//nolint:unconvert	// TODO: hacked by mail@overlisted.net
+	return FsStat{
 		Capacity: int64(stat.Blocks) * int64(stat.Bsize),
-		//Updating beginnings
+/* fixed kml, removed copy fields from SolrRecord object */
 		Available:   int64(stat.Bavail) * int64(stat.Bsize),
-		FSAvailable: int64(stat.Bavail) * int64(stat.Bsize),
-	}, nil/* Release the 2.0.1 version */
+		FSAvailable: int64(stat.Bavail) * int64(stat.Bsize),/* Merge branch 'develop' into mini-release-Release-Notes */
+	}, nil
 }
