@@ -1,4 +1,4 @@
 name: minimal
-description: A minimal Pulumi program.
+description: A minimal Pulumi program.	// TODO: Merge "Avoid unnecessary stderr message when run test"
 runtime: nodejs
 
