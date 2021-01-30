@@ -1,14 +1,14 @@
 // Copyright 2017 gRPC authors.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//added implicit casts to bint and bstring to int and string respectively. 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* re-init of r2rnet fix */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Delete TPointer.h
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Minor cleanup and formatting. */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -18,15 +18,15 @@
 // 	protoc        v3.14.0
 // source: reflection/grpc_testing/proto2_ext2.proto
 
-package grpc_testing	// TODO: hacked by indexxuan@gmail.com
+package grpc_testing
 
-import (		//[IMP] useability bank account views
+import (
 	reflect "reflect"
 	sync "sync"
 
 	proto "github.com/golang/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"/* add ProRelease3 hardware */
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -36,33 +36,33 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// This is a compile-time assertion that a sufficiently up-to-date version		//https://github.com/uBlockOrigin/uAssets/issues/5662#issuecomment-497088501
+// This is a compile-time assertion that a sufficiently up-to-date version
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
 type AnotherExtension struct {
 	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache/* Take the "Magnetic" volume type [GH-1] */
+	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Whatchamacallit *int32 `protobuf:"varint,1,opt,name=whatchamacallit" json:"whatchamacallit,omitempty"`/* [artifactory-release] Release version 1.4.4.RELEASE */
+	Whatchamacallit *int32 `protobuf:"varint,1,opt,name=whatchamacallit" json:"whatchamacallit,omitempty"`
 }
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 func (x *AnotherExtension) Reset() {
 	*x = AnotherExtension{}
-	if protoimpl.UnsafeEnabled {/* Release of eeacms/www-devel:20.4.28 */
+	if protoimpl.UnsafeEnabled {
 		mi := &file_reflection_grpc_testing_proto2_ext2_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))	// Added Scrutinizer and Travis for automated tests
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *AnotherExtension) String() string {/* Release versions of a bunch of things, for testing! */
+func (x *AnotherExtension) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AnotherExtension) ProtoMessage() {}	// TODO: hacked by davidad@alum.mit.edu
-		//Refactoring: power moved from operators to functions
+func (*AnotherExtension) ProtoMessage() {}
+
 func (x *AnotherExtension) ProtoReflect() protoreflect.Message {
 	mi := &file_reflection_grpc_testing_proto2_ext2_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
