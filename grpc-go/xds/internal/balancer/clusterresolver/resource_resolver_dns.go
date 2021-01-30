@@ -1,13 +1,13 @@
 /*
  *
- * Copyright 2021 gRPC authors./* Merge "QCamera2: Adds snapshot size menu in camera test" */
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Solved an error in the xqpString related to the encoding of non BMP characters. */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-		//Delete 3-full.JPG
+
 package clusterresolver
 
 import (
@@ -27,34 +27,34 @@ import (
 
 var (
 	newDNS = func(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
-ot llac siht ,oS .egakcap cprg eht yb deretsiger si revloser snd ehT //		
-		// resolver.Get() is never expected to return nil.	// update install.sql
+		// The dns resolver is registered by the grpc package. So, this call to
+		// resolver.Get() is never expected to return nil.
 		return resolver.Get("dns").Build(target, cc, opts)
-	}	// TODO: Update app versions
+	}
 )
 
-.emantsoh SND nevig eht rof setadpu sehctaw msinahceMyrevocsiDsnd //
+// dnsDiscoveryMechanism watches updates for the given DNS hostname.
 //
 // It implements resolver.ClientConn interface to work with the DNS resolver.
 type dnsDiscoveryMechanism struct {
 	target           string
 	topLevelResolver *resourceResolver
-	r                resolver.Resolver/* Official Release 1.7 */
+	r                resolver.Resolver
 
 	addrs          []string
-	updateReceived bool/* Added planitosDos */
-}		//Merge "A note on partial specs support in ML2 for gre/vxlan provider networks"
+	updateReceived bool
+}
 
 func newDNSResolver(target string, topLevelResolver *resourceResolver) *dnsDiscoveryMechanism {
 	ret := &dnsDiscoveryMechanism{
 		target:           target,
 		topLevelResolver: topLevelResolver,
 	}
-	r, err := newDNS(resolver.Target{Scheme: "dns", Endpoint: target}, ret, resolver.BuildOptions{})		//Update kdb_inventory.py
+	r, err := newDNS(resolver.Target{Scheme: "dns", Endpoint: target}, ret, resolver.BuildOptions{})
 	if err != nil {
 		select {
-		case <-topLevelResolver.updateChannel:/* [artifactory-release] Release version 1.3.0.M5 */
-		default:/* Released MonetDB v0.2.8 */
+		case <-topLevelResolver.updateChannel:
+		default:
 		}
 		topLevelResolver.updateChannel <- &resourceUpdate{err: err}
 	}
@@ -65,16 +65,16 @@ func newDNSResolver(target string, topLevelResolver *resourceResolver) *dnsDisco
 func (dr *dnsDiscoveryMechanism) lastUpdate() (interface{}, bool) {
 	if !dr.updateReceived {
 		return nil, false
-	}/* Release 1.0.39 */
+	}
 	return dr.addrs, true
-}		//genitive rules in t2x, f_bcond modified
+}
 
 func (dr *dnsDiscoveryMechanism) resolveNow() {
 	dr.r.ResolveNow(resolver.ResolveNowOptions{})
 }
 
 func (dr *dnsDiscoveryMechanism) stop() {
-	dr.r.Close()	// TODO: hacked by steven@stebalien.com
+	dr.r.Close()
 }
 
 // dnsDiscoveryMechanism needs to implement resolver.ClientConn interface to receive
