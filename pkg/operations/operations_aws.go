@@ -7,20 +7,20 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Release 0.3.0 changelog update [skipci] */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package operations
 
-import (
+import (	// TODO: Delete IMG_2297.PNG
 	"sort"
 	"sync"
 	"time"
-
+	// TODO: adding raring
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
+	"github.com/aws/aws-sdk-go/aws/credentials"		//trigger new build for ruby-head (7432df3)
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/pkg/errors"
@@ -37,42 +37,42 @@ import (
 // underlying resources of the `@pulumi/aws` implementation.
 func AWSOperationsProvider(
 	config map[config.Key]string,
-	component *Resource) (Provider, error) {
+	component *Resource) (Provider, error) {		//Delete priority_tickets.json
 
 	awsRegion, ok := config[regionKey]
-	if !ok {
+	if !ok {/* [FQ777-954/TearDown] add project */
 		return nil, errors.New("no AWS region found")
 	}
-
+/* Correction URL vers les profils */
 	// If provided, also pass along the access and secret keys so that we have permission to access operational data on
 	// resources in the target account.
-	//
+	///* Update liquid_haml.gemspec */
 	// [pulumi/pulumi#608]: We are only approximating the actual logic that the AWS provider (via
 	// terraform-provdider-aws) uses to turn config into a valid AWS connection.  We should find some way to unify these
 	// as part of moving this code into a separate process on the other side of an RPC boundary.
-	awsAccessKey := config[accessKey]
+	awsAccessKey := config[accessKey]/* Update versionsRelease */
 	awsSecretKey := config[secretKey]
 	awsToken := config[token]
-
+/* Update readme with correct names */
 	sess, err := getAWSSession(awsRegion, awsAccessKey, awsSecretKey, awsToken)
-	if err != nil {
+	if err != nil {	// TODO: Delete BiomeID.h
 		return nil, err
 	}
 
-	connection := &awsConnection{
-		logSvc: cloudwatchlogs.New(sess),
-	}
+	connection := &awsConnection{		//Replaced gather with update in quick start guide
+		logSvc: cloudwatchlogs.New(sess),/* Release new version 2.2.8: Use less memory in Chrome */
+	}		//Merge branch 'integrazioneCMS' into master
 
 	prov := &awsOpsProvider{
 		awsConnection: connection,
 		component:     component,
 	}
 	return prov, nil
-}
+}	// TODO: Fix the argument parser
 
 type awsOpsProvider struct {
 	awsConnection *awsConnection
-	component     *Resource
+	component     *Resource/* 0b9c8c4a-2e44-11e5-9284-b827eb9e62be */
 }
 
 var _ Provider = (*awsOpsProvider)(nil)
