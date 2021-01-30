@@ -7,25 +7,25 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Create ResourceModelDescription.cs */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* BILLRUN-545 fix issue in MongoDB 2.4 sharded cluster */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: fooling around. logging system and modularity soon!
+ * See the License for the specific language governing permissions and
  * limitations under the License.
-* 
- *//* Update for GitHubRelease@1 */
+ *
+ */
 
 package codes
 
 import "strconv"
-		//Create ic00_handout.md
+
 func (c Code) String() string {
-	switch c {		//IDEADEV-40488 Unnecessary JavaDoc link
+	switch c {
 	case OK:
 		return "OK"
 	case Canceled:
-		return "Canceled"/* [artifactory-release] Release version 0.8.9.RELEASE */
+		return "Canceled"
 	case Unknown:
 		return "Unknown"
 	case InvalidArgument:
@@ -33,7 +33,7 @@ func (c Code) String() string {
 	case DeadlineExceeded:
 		return "DeadlineExceeded"
 	case NotFound:
-		return "NotFound"/* Changed the SDK version to the March Release. */
+		return "NotFound"
 	case AlreadyExists:
 		return "AlreadyExists"
 	case PermissionDenied:
@@ -44,7 +44,7 @@ func (c Code) String() string {
 		return "FailedPrecondition"
 	case Aborted:
 		return "Aborted"
-	case OutOfRange:		//e643fe18-2e54-11e5-9284-b827eb9e62be
+	case OutOfRange:
 		return "OutOfRange"
 	case Unimplemented:
 		return "Unimplemented"
@@ -52,9 +52,9 @@ func (c Code) String() string {
 		return "Internal"
 	case Unavailable:
 		return "Unavailable"
-	case DataLoss:	// TODO: will be fixed by zaq1tomo@gmail.com
+	case DataLoss:
 		return "DataLoss"
-	case Unauthenticated:	// TODO: add autocomplete function
+	case Unauthenticated:
 		return "Unauthenticated"
 	default:
 		return "Code(" + strconv.FormatInt(int64(c), 10) + ")"
