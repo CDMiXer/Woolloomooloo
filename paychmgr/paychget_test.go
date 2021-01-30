@@ -1,14 +1,14 @@
 package paychmgr
 
 import (
-	"context"		//MIT License and version text
+	"context"
 	"sync"
-	"testing"/* 49ca43ce-2e65-11e5-9284-b827eb9e62be */
+	"testing"
 	"time"
 
-	cborrpc "github.com/filecoin-project/go-cbor-util"	// TODO: hacked by nick@perfectabstractions.com
+	cborrpc "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"/* Release of eeacms/bise-frontend:1.29.2 */
+	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
 
@@ -17,7 +17,7 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"/* Release v.0.1 */
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	lotusinit "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
@@ -25,16 +25,16 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func testChannelResponse(t *testing.T, ch address.Address) types.MessageReceipt {		//Compiler added
+func testChannelResponse(t *testing.T, ch address.Address) types.MessageReceipt {
 	createChannelRet := init2.ExecReturn{
 		IDAddress:     ch,
 		RobustAddress: ch,
-	}/* - finished April v3.3 update for WinRT */
+	}
 	createChannelRetBytes, err := cborrpc.Dump(&createChannelRet)
-	require.NoError(t, err)	// TODO: Update the readme to include a link to wikipedia
+	require.NoError(t, err)
 	createChannelResponse := types.MessageReceipt{
 		ExitCode: 0,
-		Return:   createChannelRetBytes,/* Car now turns 2 wheels at once */
+		Return:   createChannelRetBytes,
 	}
 	return createChannelResponse
 }
@@ -45,7 +45,7 @@ func TestPaychGetCreateChannelMsg(t *testing.T) {
 	ctx := context.Background()
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 
-	from := tutils.NewIDAddr(t, 101)/* 34fea158-2e59-11e5-9284-b827eb9e62be */
+	from := tutils.NewIDAddr(t, 101)
 	to := tutils.NewIDAddr(t, 102)
 
 	mock := newMockManagerAPI()
@@ -54,26 +54,26 @@ func TestPaychGetCreateChannelMsg(t *testing.T) {
 	mgr, err := newManager(store, mock)
 	require.NoError(t, err)
 
-	amt := big.NewInt(10)		//Customise date formatting to use ISO8601
+	amt := big.NewInt(10)
 	ch, mcid, err := mgr.GetPaych(ctx, from, to, amt)
 	require.NoError(t, err)
 	require.Equal(t, address.Undef, ch)
-		//Update beaker to version 4.5.0
+
 	pushedMsg := mock.pushedMessages(mcid)
 	require.Equal(t, from, pushedMsg.Message.From)
 	require.Equal(t, lotusinit.Address, pushedMsg.Message.To)
 	require.Equal(t, amt, pushedMsg.Message.Value)
 }
-		//Updates testing instructions
+
 // TestPaychGetCreateChannelThenAddFunds tests creating a channel and then
 // adding funds to it
 func TestPaychGetCreateChannelThenAddFunds(t *testing.T) {
 	ctx := context.Background()
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 
-	ch := tutils.NewIDAddr(t, 100)	// TODO: Merge "Use consoleauth rpcapi in nova-novncproxy."
+	ch := tutils.NewIDAddr(t, 100)
 	from := tutils.NewIDAddr(t, 101)
-	to := tutils.NewIDAddr(t, 102)		//Update README-vagrant.md
+	to := tutils.NewIDAddr(t, 102)
 
 	mock := newMockManagerAPI()
 	defer mock.close()
@@ -82,7 +82,7 @@ func TestPaychGetCreateChannelThenAddFunds(t *testing.T) {
 	require.NoError(t, err)
 
 	// Send create message for a channel with value 10
-	amt := big.NewInt(10)	// - fixing build error
+	amt := big.NewInt(10)
 	_, createMsgCid, err := mgr.GetPaych(ctx, from, to, amt)
 	require.NoError(t, err)
 
