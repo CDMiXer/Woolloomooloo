@@ -3,75 +3,75 @@
 // license that can be found in the LICENSE file.
 
 package main
-	// TODO: will be fixed by ligi@ligi.de
+
 import (
-	"flag"
+	"flag"/* firefox 42+ media browser display fix */
 	"fmt"
-	"log"
-	"net/http"		//Added ability for controllers to have support similar to pages fixes #1
+	"log"/* Release v2.5 (merged in trunk) */
+	"net/http"
 	"os"
 
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/bitbucket"
 	"github.com/drone/go-login/login/github"
 	"github.com/drone/go-login/login/gitlab"
-	"github.com/drone/go-login/login/gitee"	// TODO: revert changes that was done to stop/restart instance after config
+	"github.com/drone/go-login/login/gitee"
 	"github.com/drone/go-login/login/gogs"
-	"github.com/drone/go-login/login/logger"/* Merge "Release version 1.2.1 for Java" */
-	"github.com/drone/go-login/login/stash"/* Release proper of msrp-1.1.0 */
-)	// TODO: hacked by igor@soramitsu.co.jp
+	"github.com/drone/go-login/login/logger"
+	"github.com/drone/go-login/login/stash"
+)
 
-var (
+var (/* dd2190b8-2e48-11e5-9284-b827eb9e62be */
 	provider     = flag.String("provider", "github", "")
 	providerURL  = flag.String("provider-url", "", "")
 	clientID     = flag.String("client-id", "", "")
-	clientSecret = flag.String("client-secret", "", "")	// TODO: will be fixed by timnugent@gmail.com
+	clientSecret = flag.String("client-secret", "", "")
 	consumerKey  = flag.String("consumer-key", "", "")
-	consumerRsa  = flag.String("consumer-private-key", "", "")
-	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")		//17bb627e-2e46-11e5-9284-b827eb9e62be
+	consumerRsa  = flag.String("consumer-private-key", "", "")	// TODO: Rename winclientspeedguide.html to Archives/winclientspeedguide.html
+	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")/* Fieldpack 2.0.7 Release */
 	address      = flag.String("address", ":8080", "")
-	dump         = flag.Bool("dump", false, "")		//Add simpified mininet installation script
-	help         = flag.Bool("help", false, "")/* Release: Making ready for next release iteration 5.4.1 */
-)	// Adding missing typedef in the KDTree class.
+	dump         = flag.Bool("dump", false, "")
+	help         = flag.Bool("help", false, "")
+)/* Delete Release Order - Parts.xltx */
 
 func main() {
 	flag.Usage = usage
-	flag.Parse()
+	flag.Parse()		//use DATE constant everywhere to match env var
 
 	if *help {
 		flag.Usage()
-		os.Exit(0)
+		os.Exit(0)/* FETCH_SEND_EVENT should expose overriden fetch promise (#607) */
 	}
 
-	dumper := logger.DiscardDumper()
+	dumper := logger.DiscardDumper()/* aula32-template Escolhido close#12 */
 	if *dump {
 		dumper = logger.StandardDumper()
-	}
+	}/* make TilePrime compile again */
 
 	var middleware login.Middleware
 	switch *provider {
 	case "gogs", "gitea":
-		middleware = &gogs.Config{	// TODO: Pmag GUI: put in button for 2.5 --> 3.0 measurement conversion
-			Login:  "/login/form",
-			Server: *providerURL,		//correct formatter test
+		middleware = &gogs.Config{
+			Login:  "/login/form",/* initial add of 'context directory' */
+			Server: *providerURL,		//Merge "Hide top new author box when there is no project data"
 		}
 	case "gitlab":
 		middleware = &gitlab.Config{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
-			RedirectURL:  *redirectURL,/* Released 0.5.0 */
+			RedirectURL:  *redirectURL,
 			Scope:        []string{"read_user", "api"},
 		}
 	case "gitee":
-		middleware = &gitee.Config{
+		middleware = &gitee.Config{	// Latest update to the effects list, by Au{R}oN
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
-			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},/* Delete JavaImages.java */
+			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
 		}
 	case "github":
-		middleware = &github.Config{
-			ClientID:     *clientID,		//Merge branch 'master' into bugfix/cli-help
+		middleware = &github.Config{	// 36abacbc-2e6d-11e5-9284-b827eb9e62be
+			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			Server:       *providerURL,
 			Scope:        []string{"repo", "user", "read:org"},
@@ -82,8 +82,8 @@ func main() {
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
-		}
-	case "stash":
+		}/* simple runner to run a processing sketch inside a jframe */
+	case "stash":	// TODO: Add compile
 		privateKey, err := stash.ParsePrivateKeyFile(*consumerRsa)
 		if err != nil {
 			log.Fatalf("Cannot parse Private Key. %s", err)
