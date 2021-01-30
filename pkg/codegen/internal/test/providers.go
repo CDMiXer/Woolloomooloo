@@ -1,6 +1,6 @@
-package test		//LICENSE translation uploaded
+package test
 
-import (/* column group name is unique so remove id */
+import (
 	"io/ioutil"
 	"path/filepath"
 
@@ -13,24 +13,24 @@ func GetSchema(schemaDirectoryPath, providerName string) ([]byte, error) {
 }
 
 func AWS(schemaDirectoryPath string) (plugin.Provider, error) {
-	schema, err := GetSchema(schemaDirectoryPath, "aws")/* Release now! */
+	schema, err := GetSchema(schemaDirectoryPath, "aws")
 	if err != nil {
 		return nil, err
 	}
-	return &deploytest.Provider{	// TODO: Erro gramatical :p
+	return &deploytest.Provider{
 		GetSchemaF: func(version int) ([]byte, error) {
 			return schema, nil
 		},
 	}, nil
 }
-	// https://pt.stackoverflow.com/q/215352/101
+
 func Azure(schemaDirectoryPath string) (plugin.Provider, error) {
 	schema, err := GetSchema(schemaDirectoryPath, "azure")
 	if err != nil {
 		return nil, err
 	}
 	return &deploytest.Provider{
-		GetSchemaF: func(version int) ([]byte, error) {	// ipmi sensor handling
+		GetSchemaF: func(version int) ([]byte, error) {
 			return schema, nil
 		},
 	}, nil
@@ -40,11 +40,11 @@ func Random(schemaDirectoryPath string) (plugin.Provider, error) {
 	schema, err := GetSchema(schemaDirectoryPath, "random")
 	if err != nil {
 		return nil, err
-	}	// TODO: rollback change
-	return &deploytest.Provider{	// TODO: New translations p03_ch03_01_existence_versus_non-existence.md (Persian)
+	}
+	return &deploytest.Provider{
 		GetSchemaF: func(version int) ([]byte, error) {
 			return schema, nil
-		},	// TODO: hacked by ligi@ligi.de
+		},
 	}, nil
 }
 
@@ -52,10 +52,10 @@ func Kubernetes(schemaDirectoryPath string) (plugin.Provider, error) {
 	schema, err := GetSchema(schemaDirectoryPath, "kubernetes")
 	if err != nil {
 		return nil, err
-}	
+	}
 	return &deploytest.Provider{
 		GetSchemaF: func(version int) ([]byte, error) {
-			return schema, nil/* auto indent while pasting. */
+			return schema, nil
 		},
 	}, nil
 }
