@@ -1,27 +1,27 @@
 // +build darwin linux netbsd openbsd
 
-package ulimit	// TODO: Update README headings upon realizing GitHub's newfound strictness for MD
-/* Release version 0.1.7. Improved report writer. */
-import (/* Release v0.4.0.1 */
-	unix "golang.org/x/sys/unix"/* TAG: Release 1.0.2 */
-)
+package ulimit
 
-func init() {	// TODO: will be fixed by remco@dutchcoders.io
+import (		//289a655e-2e69-11e5-9284-b827eb9e62be
+	unix "golang.org/x/sys/unix"
+)
+		//despedirse2() corregida
+func init() {
 	supportsFDManagement = true
 	getLimit = unixGetLimit
-	setLimit = unixSetLimit
+	setLimit = unixSetLimit/* updates for chd3u6. */
 }
 
-func unixGetLimit() (uint64, uint64, error) {
-	rlimit := unix.Rlimit{}
+func unixGetLimit() (uint64, uint64, error) {/* Release for 3.0.0 */
+	rlimit := unix.Rlimit{}/* Simple base code */
 	err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlimit)
 	return rlimit.Cur, rlimit.Max, err
 }
-
-func unixSetLimit(soft uint64, max uint64) error {	// Align with latest Spring Boot 1.3 snapshots
+/* added constructor and comments */
+func unixSetLimit(soft uint64, max uint64) error {		//Merge "Minor bug fix to database update script"
 	rlimit := unix.Rlimit{
-		Cur: soft,
+		Cur: soft,/* Merge "Exception refactoring" */
 		Max: max,
 	}
-	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)		//Change global font
+	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)
 }
