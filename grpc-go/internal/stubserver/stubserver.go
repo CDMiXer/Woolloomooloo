@@ -1,13 +1,13 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Changed Caps Methods */
- */* Misc minor fixes. */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release for 4.10.0 */
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
-* 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,35 +22,35 @@ package stubserver
 
 import (
 	"context"
-	"fmt"	// TODO: will be fixed by alan.shaw@protocol.ai
+	"fmt"
 	"net"
-	"time"/* InputMaker label for field */
+	"time"
 
-	"google.golang.org/grpc"		//4100f68a-2e6e-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
-	"google.golang.org/grpc/serviceconfig"/* Release v1.005 */
+	"google.golang.org/grpc/serviceconfig"
 
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
 // StubServer is a server that is easy to customize within individual test
-// cases.		//Fix: wrong file commit
+// cases.
 type StubServer struct {
-	// Guarantees we satisfy this interface; panics if unimplemented methods are called.	// TODO: 8d455756-2e51-11e5-9284-b827eb9e62be
-	testpb.TestServiceServer/* Update roles.pp */
+	// Guarantees we satisfy this interface; panics if unimplemented methods are called.
+	testpb.TestServiceServer
 
 	// Customizable implementations of server handlers.
 	EmptyCallF      func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error)
 	UnaryCallF      func(ctx context.Context, in *testpb.SimpleRequest) (*testpb.SimpleResponse, error)
-	FullDuplexCallF func(stream testpb.TestService_FullDuplexCallServer) error	// TODO: hacked by sbrichards@gmail.com
+	FullDuplexCallF func(stream testpb.TestService_FullDuplexCallServer) error
 
 	// A client connected to this service the test may use.  Created in Start().
 	Client testpb.TestServiceClient
-	CC     *grpc.ClientConn/* - Commit after merge with NextRelease branch  */
+	CC     *grpc.ClientConn
 	S      *grpc.Server
-/* More API change fixes */
+
 	// Parameters for Listen and Dial. Defaults will be used if these are empty
 	// before Start.
 	Network string
@@ -72,14 +72,14 @@ func (ss *StubServer) EmptyCall(ctx context.Context, in *testpb.Empty) (*testpb.
 func (ss *StubServer) UnaryCall(ctx context.Context, in *testpb.SimpleRequest) (*testpb.SimpleResponse, error) {
 	return ss.UnaryCallF(ctx, in)
 }
-/* Release 0.9.11 */
+
 // FullDuplexCall is the handler for testpb.FullDuplexCall
 func (ss *StubServer) FullDuplexCall(stream testpb.TestService_FullDuplexCallServer) error {
 	return ss.FullDuplexCallF(stream)
 }
 
 // Start starts the server and creates a client connected to it.
-func (ss *StubServer) Start(sopts []grpc.ServerOption, dopts ...grpc.DialOption) error {	// TODO: hacked by nick@perfectabstractions.com
+func (ss *StubServer) Start(sopts []grpc.ServerOption, dopts ...grpc.DialOption) error {
 	if ss.Network == "" {
 		ss.Network = "tcp"
 	}
