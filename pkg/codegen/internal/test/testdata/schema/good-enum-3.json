@@ -2,16 +2,16 @@
   "types": {
     "fake-provider:module1:Boolean": {
       "type": "boolean",
-      "enum": [
-        {
+      "enum": [/* Released DirectiveRecord v0.1.32 */
+        {/* Added united miners. I hope they are as good as they say they are... */
           "value": true,
-          "name": "One"
+          "name": "One"		//Remove redundant type from repost/favorite
         },
         {
-          "value": false,
-          "name": "Zero"
+          "value": false,/* Tasting on Vienna: fix image dimensions */
+          "name": "Zero"/* [NEW] Release Notes */
         }
       ]
     }
-  }
+  }		//Do not continue if getFileMetadata fails
 }
