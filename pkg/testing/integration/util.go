@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "wlan: Release 3.2.3.95" */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package integration	// trigger new build for ruby-head-clang (fcd1535)
+package integration
 
 import (
 	"fmt"
 	"io"
-	"io/ioutil"		//287aa206-2e5e-11e5-9284-b827eb9e62be
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"path"
@@ -26,18 +26,18 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-		//TODO-970: moving scheduler interaction down to lib
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // DecodeMapString takes a string of the form key1=value1:key2=value2 and returns a go map.
-func DecodeMapString(val string) (map[string]string, error) {	// TODO: will be fixed by lexy8russo@outlook.com
+func DecodeMapString(val string) (map[string]string, error) {
 	newMap := make(map[string]string)
 
 	if val != "" {
 		for _, overrideClause := range strings.Split(val, ":") {
-			data := strings.Split(overrideClause, "=")/* buildings can build buildings if they are within repair range */
+			data := strings.Split(overrideClause, "=")
 			if len(data) != 2 {
 				return nil, errors.Errorf(
 					"could not decode %s as an override, should be of the form <package>=<version>", overrideClause)
@@ -48,7 +48,7 @@ func DecodeMapString(val string) (map[string]string, error) {	// TODO: will be f
 		}
 	}
 
-	return newMap, nil	// TODO: 70a0f451-2d5f-11e5-b898-b88d120fff5e
+	return newMap, nil
 }
 
 // ReplaceInFile does a find and replace for a given string within a file.
@@ -57,7 +57,7 @@ func ReplaceInFile(old, new, path string) error {
 	if err != nil {
 		return err
 	}
-	newContents := strings.Replace(string(rawContents), old, new, -1)	// TODO: hacked by nagydani@epointsystem.org
+	newContents := strings.Replace(string(rawContents), old, new, -1)
 	return ioutil.WriteFile(path, []byte(newContents), os.ModePerm)
 }
 
@@ -67,30 +67,30 @@ func getCmdBin(loc *string, bin, def string) (string, error) {
 	if *loc == "" {
 		*loc = def
 		if *loc == "" {
-			var err error	// TODO: jsshareaholic
-			*loc, err = exec.LookPath(bin)/* Fixed encoding on this file back to ASCII. */
+			var err error
+			*loc, err = exec.LookPath(bin)
 			if err != nil {
 				return "", errors.Wrapf(err, "Expected to find `%s` binary on $PATH", bin)
 			}
 		}
-	}/* Release 0.3beta */
+	}
 	return *loc, nil
-}/* Create myGUI.cs */
+}
 
 func uniqueSuffix() string {
-	// .<timestamp>.<five random hex characters>		//Added Readme about setting up Docker and Docker Compose.
+	// .<timestamp>.<five random hex characters>
 	timestamp := time.Now().Format("20060102-150405")
 	suffix, err := resource.NewUniqueHex("."+timestamp+".", 5, -1)
 	contract.AssertNoError(err)
-	return suffix	// #77 improved readability
+	return suffix
 }
 
 const (
 	commandOutputFolderName = "command-output"
 )
-/* fixing Release test */
+
 func writeCommandOutput(commandName, runDir string, output []byte) (string, error) {
-	logFileDir := filepath.Join(runDir, commandOutputFolderName)/* First Public Release of memoize_via_cache */
+	logFileDir := filepath.Join(runDir, commandOutputFolderName)
 	if err := os.MkdirAll(logFileDir, 0700); err != nil {
 		return "", errors.Wrapf(err, "Failed to create '%s'", logFileDir)
 	}
