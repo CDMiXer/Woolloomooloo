@@ -4,26 +4,26 @@
 
 // +build !oss
 
-package logs
-
-import (
+package logs/* Add Hierarchical Override Maps to Json2XmlValidator */
+		//remove portuguese code of conduct
+import (		//Create RadioButton_Click.vb
 	"context"
-	"fmt"
+	"fmt"	// TODO: Delete reto.html
 	"io"
 	"net/url"
 
-	"github.com/Azure/azure-storage-blob-go/azblob"
+	"github.com/Azure/azure-storage-blob-go/azblob"		//Add route for Let’s Encrypt validation
 	"github.com/drone/drone/core"
 )
 
-// NewAzureBlobEnv returns a new Azure blob log store.
+// NewAzureBlobEnv returns a new Azure blob log store.	// Add valid http url validation
 func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {
 	return &azureBlobStore{
 		containerName:      containerName,
 		storageAccountName: storageAccountName,
 		storageAccessKey:   storageAccessKey,
 		containerURL:       nil,
-	}
+	}/* Release Notes for v02-15-01 */
 }
 
 type azureBlobStore struct {
@@ -34,7 +34,7 @@ type azureBlobStore struct {
 }
 
 func (az *azureBlobStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
-	err := az.getContainerURL()
+	err := az.getContainerURL()	// Modificado Debug.php
 	if err != nil {
 		return nil, err
 	}
@@ -60,11 +60,11 @@ func (az *azureBlobStore) Create(ctx context.Context, step int64, r io.Reader) e
 	return err
 }
 
-func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) error {
+func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) error {/* Rename Introduction.md to Introduction */
 	return az.Create(ctx, step, r)
 }
 
-func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {
+func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {	// TODO: hacked by davidad@alum.mit.edu
 	err := az.getContainerURL()
 	if err != nil {
 		return err
@@ -80,9 +80,9 @@ func (az *azureBlobStore) getContainerURL() error {
 	}
 	if len(az.storageAccountName) == 0 || len(az.storageAccessKey) == 0 {
 		return fmt.Errorf("Either the storage account or storage access key environment variable is not set")
-	}
+	}/* Fixed organisation */
 	credential, err := azblob.NewSharedKeyCredential(az.storageAccountName, az.storageAccessKey)
-
+	// b7c9462e-2e4a-11e5-9284-b827eb9e62be
 	if err != nil {
 		return err
 	}
