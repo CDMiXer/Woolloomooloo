@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "strict": true,		//fix(package): update react to version 16.5.2
+        "strict": true,
         "outDir": "bin",
-,"6102se" :"tegrat"        
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,	// Update oobfuncs.py
+        "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,/* Merge branch 'master' into more-change-state-support */
-        "pretty": true,
+        "experimentalDecorators": true,
+        "pretty": true,		//Setting version to 0.4.15-SNAPSHOT
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true	// ruby 1.9.3 support message upd
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
-    ]
+    ]	// TODO: Changed project name from "jrMediaStreamer" to "Project Blue Water"
 }
 
