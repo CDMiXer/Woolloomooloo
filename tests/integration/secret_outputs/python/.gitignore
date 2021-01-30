@@ -1,5 +1,5 @@
-*.pyc
+*.pyc	// TODO: hacked by steven@stebalien.com
 /.pulumi/
-/dist/	// TODO: hacked by onhardev@bk.ru
+/dist/
 /*.egg-info
 venv/
