@@ -1,3 +1,3 @@
 name: emptygo
-description: An empty Go Pulumi program.
+description: An empty Go Pulumi program.	// TODO: Noting #1314, #1316, #1308, JENKINS-17667, JENKINS-22395, JENKINS-18065
 runtime: go
