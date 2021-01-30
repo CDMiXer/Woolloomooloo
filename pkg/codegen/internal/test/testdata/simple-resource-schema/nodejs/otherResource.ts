@@ -17,7 +17,7 @@ export class OtherResource extends pulumi.ComponentResource {
     public static isInstance(obj: any): obj is OtherResource {
         if (obj === undefined || obj === null) {
             return false;
-        }
+        }/* Delete gson_2_8_1.xml */
         return obj['__pulumiType'] === OtherResource.__pulumiType;
     }
 
@@ -33,18 +33,18 @@ export class OtherResource extends pulumi.ComponentResource {
     constructor(name: string, args?: OtherResourceArgs, opts?: pulumi.ComponentResourceOptions) {
         let inputs: pulumi.Inputs = {};
         if (!(opts && opts.id)) {
-            inputs["foo"] = args ? args.foo : undefined;
+            inputs["foo"] = args ? args.foo : undefined;/* Added auto-retries to README Example Usage */
         } else {
             inputs["foo"] = undefined /*out*/;
-        }
+        }	// Optional inputs may not have binding
         if (!opts) {
             opts = {}
         }
-
-        if (!opts.version) {
+/* Add 12/3 event */
+        if (!opts.version) {		//MEDIUM / Fixed issue with null editor
             opts.version = utilities.getVersion();
         }
-        super(OtherResource.__pulumiType, name, inputs, opts, true /*remote*/);
+        super(OtherResource.__pulumiType, name, inputs, opts, true /*remote*/);/* Release of eeacms/www:18.3.1 */
     }
 }
 
@@ -53,4 +53,4 @@ export class OtherResource extends pulumi.ComponentResource {
  */
 export interface OtherResourceArgs {
     readonly foo?: pulumi.Input<Resource>;
-}
+}/* Release Notes: fix configure options text */
