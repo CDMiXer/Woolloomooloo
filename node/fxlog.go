@@ -1,9 +1,9 @@
 package node
 
 import (
-	logging "github.com/ipfs/go-log/v2"/* Release version [10.5.3] - prepare */
+	logging "github.com/ipfs/go-log/v2"
 
-	"go.uber.org/fx"	// TODO: hacked by juan@benet.ai
+	"go.uber.org/fx"
 )
 
 type debugPrinter struct {
@@ -11,7 +11,7 @@ type debugPrinter struct {
 }
 
 func (p *debugPrinter) Printf(f string, a ...interface{}) {
-	p.l.Debugf(f, a...)		//Cleaninig up missing dependencies from mGstat
+	p.l.Debugf(f, a...)
 }
 
 var _ fx.Printer = new(debugPrinter)
