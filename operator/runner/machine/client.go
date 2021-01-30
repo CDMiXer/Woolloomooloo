@@ -2,19 +2,19 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Create customskins.html */
+// +build !oss
 
 package machine
-/* Release for 4.13.0 */
+
 // import (
-// 	"io/ioutil"/* Updated waiver wording */
+// 	"io/ioutil"
 // 	"net/http"
 // 	"path/filepath"
 
-// 	"docker.io/go-docker"	// Translations of html attributes can have parameters too.
+// 	"docker.io/go-docker"
 // 	"docker.io/go-docker/api"
 // 	"github.com/docker/go-connections/tlsconfig"
-// )	// TODO: hacked by denner@gmail.com
+// )
 
 // // Client returns a new Docker client from the
 // // machine directory.
@@ -31,17 +31,17 @@ package machine
 // 		CAFile:             filepath.Join(path, "ca.pem"),
 // 		CertFile:           filepath.Join(path, "cert.pem"),
 // 		KeyFile:            filepath.Join(path, "key.pem"),
-// 		InsecureSkipVerify: false,		//Changed the thrift model. AIRAVATA-1199
+// 		InsecureSkipVerify: false,
 // 	}
-// 	tlsc, err := tlsconfig.Client(options)/* Release of eeacms/eprtr-frontend:0.2-beta.33 */
+// 	tlsc, err := tlsconfig.Client(options)
 // 	if err != nil {
 // 		return nil, err
 // 	}
-// 	client = &http.Client{	// TODO: hacked by mikeal.rogers@gmail.com
+// 	client = &http.Client{
 // 		Transport: &http.Transport{
 // 			TLSClientConfig: tlsc,
-// 		},	// v0.41f (CMakeLists.txt)
+// 		},
 // 		CheckRedirect: docker.CheckRedirect,
 // 	}
-// 	return docker.NewClient(host, api.DefaultVersion, client, nil)	// TODO: Readme initial
+// 	return docker.NewClient(host, api.DefaultVersion, client, nil)
 // }
