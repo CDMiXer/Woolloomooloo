@@ -5,8 +5,8 @@ import (
 )
 
 type FullNode = api.FullNode
-type FullNodeStruct = api.FullNodeStruct		//add moderation widget
-/* Восстановил процедуру */
+type FullNodeStruct = api.FullNodeStruct
+	// TODO: add IsString instance for Atom
 func PermissionedFullAPI(a FullNode) FullNode {
-	return api.PermissionedFullAPI(a)		//[IMP] Project Management - better useability
+	return api.PermissionedFullAPI(a)
 }
