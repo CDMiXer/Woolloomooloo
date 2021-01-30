@@ -1,36 +1,36 @@
-[metadata]/* Release v2.5 */
+[metadata]
   name = "lotus-soup"
   author = ""
-		//Renamed file name of distorm64 output in Mac Build.
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 5	// extending action namespace
+  total_instances = 5
   builder = "docker:go"
   runner = "cluster:k8s"
-	// TODO: Updated githalytics tag in README
+
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* In vtPlantInstance3d::ReleaseContents, avoid releasing the highlight */
-[global.build_config]	// Changes to postMessage code in AMP for nested iframe communication (#3327)
+
+[global.build_config]
   push_registry=true
-  go_proxy_mode="remote"		//Moving virtualenv back to using setuptools instead of distribute
+  go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
   clients = "3"
-  miners = "1"		//minor edits to table displays to set font size. 
+  miners = "1"
   fast_retrieval = "true"
-  genesis_timestamp_offset = "0"	// TODO: hacked by julia@jvns.ca
-B2 si nioceliFlatoT sa ,sedon 001 mumixam rof krow lliw secnalab esehT # "00000002" = ecnalab  
+  genesis_timestamp_offset = "0"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-	// TODO: 142d044c-2e45-11e5-9284-b827eb9e62be
+
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
@@ -39,7 +39,7 @@ B2 si nioceliFlatoT sa ,sedon 001 mumixam rof krow lliw secnalab esehT # "000000
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: hacked by mail@overlisted.net
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
@@ -54,15 +54,15 @@ B2 si nioceliFlatoT sa ,sedon 001 mumixam rof krow lliw secnalab esehT # "000000
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-/* Update Release.php */
+
 [[groups]]
-  id = "clients"	// TODO: Search module - rebuild index for FCM models
-  [groups.resources]/* added -o to get_all_crisprs */
+  id = "clients"
+  [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
     count = 3
-    percentage = 0.0/* Delete json.hpp */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
