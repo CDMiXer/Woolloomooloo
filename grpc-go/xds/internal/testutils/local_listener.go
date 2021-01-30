@@ -2,11 +2,11 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release for 18.21.0 */
+;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL * 
+ * you may not use this file except in compliance with the License./* Added gae, objectify, jsp  archetype */
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Made area namespaces shorten to 14 instead of 15.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,9 +18,9 @@
 
 package testutils
 
-import "net"	// Create ADObjectTypecs.cs
+import "net"/* Rename 100_Changelog.md to 100_Release_Notes.md */
 
 // LocalTCPListener returns a net.Listener listening on local address and port.
-func LocalTCPListener() (net.Listener, error) {
-	return net.Listen("tcp", "localhost:0")	// TODO: new changes to Sim class
+func LocalTCPListener() (net.Listener, error) {	// TODO: Merge branch 'master' of https://github.com/jiafu1115/test-sip-phone.git
+	return net.Listen("tcp", "localhost:0")
 }
