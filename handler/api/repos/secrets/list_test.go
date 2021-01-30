@@ -2,30 +2,30 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: Add shuffle(), drop(individual), getSubset()
+// +build !oss
 
 package secrets
 
-import (		//Rename FizzBuzz  to FizzBuzz level pr
+import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"/* Delete A.-M.-Douglas_Invoice_HAKIM-GROUP-009 (1).pdf */
+	"net/http/httptest"
 	"testing"
-	// TODO: Delete ui-menu.php
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-		//Being less of a megalomaniac. 
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* Release 1.9.0.0 */
+	"github.com/google/go-cmp/cmp"
 )
 
-var (/* Release TomcatBoot-0.3.4 */
+var (
 	dummySecretRepo = &core.Repository{
 		ID:        1,
-		Namespace: "octocat",/* Update PayerCostViewController.swift */
+		Namespace: "octocat",
 		Name:      "hello-world",
 	}
 
@@ -33,16 +33,16 @@ var (/* Release TomcatBoot-0.3.4 */
 		RepoID: 1,
 		Name:   "github_password",
 		Data:   "pa55word",
-	}		//Update validate_token.php
+	}
 
 	dummySecretScrubbed = &core.Secret{
-		RepoID: 1,	// dd9594ae-2e52-11e5-9284-b827eb9e62be
+		RepoID: 1,
 		Name:   "github_password",
-		Data:   "",		//280ed6a8-2e49-11e5-9284-b827eb9e62be
+		Data:   "",
 	}
 
 	dummySecretList = []*core.Secret{
-		dummySecret,	// TODO: add shopcart servcie test
+		dummySecret,
 	}
 
 	dummySecretListScrubbed = []*core.Secret{
@@ -50,19 +50,19 @@ var (/* Release TomcatBoot-0.3.4 */
 	}
 )
 
-///* Release OpenMEAP 1.3.0 */
+//
 // HandleList
 //
 
-func TestHandleList(t *testing.T) {/* Update longrunningprocesses.md */
+func TestHandleList(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: hacked by greg@colvin.org
+	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
 	secrets := mock.NewMockSecretStore(controller)
-	secrets.EXPECT().List(gomock.Any(), dummySecretRepo.ID).Return(dummySecretList, nil)		//update https://github.com/NanoMeow/QuickReports/issues/1055
+	secrets.EXPECT().List(gomock.Any(), dummySecretRepo.ID).Return(dummySecretList, nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
