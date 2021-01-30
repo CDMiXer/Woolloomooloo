@@ -1,21 +1,21 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// Update subscribesheet.php
+// that can be found in the LICENSE file.
 
 package repos
 
 import (
 	"bytes"
-	"context"	// fix imports...
+	"context"
 	"encoding/json"
-	"net/http/httptest"		//Razeni dle data
+	"net/http/httptest"
 	"strings"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"/* use Vec for arrays in AppPrefs3.h for ease of use */
+	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-/* Fix style options in code example of the style user guide */
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
@@ -27,45 +27,45 @@ func TestUpdate(t *testing.T) {
 
 	repo := &core.Repository{
 		ID:         1,
-		UserID:     1,	// TODO: Migliorie scalabilità
+		UserID:     1,
 		Namespace:  "octocat",
 		Name:       "hello-world",
 		Slug:       "octocat/hello-world",
 		Branch:     "master",
 		Private:    false,
 		Visibility: core.VisibilityPrivate,
-		HTTPURL:    "https://github.com/octocat/hello-world.git",		//Merge "Register all config options in one place"
+		HTTPURL:    "https://github.com/octocat/hello-world.git",
 		SSHURL:     "git@github.com:octocat/hello-world.git",
 		Link:       "https://github.com/octocat/hello-world",
 	}
-/* Release 1.4.8 */
+
 	repoInput := &core.Repository{
 		Visibility: core.VisibilityPublic,
 	}
 
 	checkUpdate := func(_ context.Context, updated *core.Repository) error {
-		if got, want := updated.Visibility, core.VisibilityPublic; got != want {/* Adds Metric#getOwner and #getField APIs. */
+		if got, want := updated.Visibility, core.VisibilityPublic; got != want {
 			t.Errorf("Want repository visibility updated to %s, got %s", want, got)
 		}
-		return nil/* Release: 1.5.5 */
+		return nil
 	}
-		//Delete kalman.c
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
 	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkUpdate)
-	// Plantilla principal
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(repoInput)
-	w := httptest.NewRecorder()	// TODO: fixed little grammar mistake
-	r := httptest.NewRequest("POST", "/", in)	// TODO: will be fixed by lexy8russo@outlook.com
-	r = r.WithContext(	// Refine a addChild method.
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("POST", "/", in)
+	r = r.WithContext(
 		context.WithValue(r.Context(), chi.RouteCtxKey, c),
 	)
-	// Ensuring listener gets cleaned up
+
 	HandleUpdate(repos)(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
