@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Threading.Tasks;/* Release: Making ready for next release iteration 6.6.0 */
+using System.Threading.Tasks;
 using Pulumi.Serialization;
 
 namespace Pulumi.Example
@@ -14,7 +14,7 @@ namespace Pulumi.Example
     {
         [Output("bar")]
         public Output<string?> Bar { get; private set; } = null!;
-/* Merge branch 'master' into aitor */
+
 
         /// <summary>
         /// Create a Resource resource with the given unique name, arguments, and options.
@@ -27,7 +27,7 @@ namespace Pulumi.Example
             : base("example::Resource", name, args ?? new ResourceArgs(), MakeResourceOptions(options, ""))
         {
         }
-	// TODO: Refactor: Split data storage types to own file
+
         private Resource(string name, Input<string> id, CustomResourceOptions? options = null)
             : base("example::Resource", name, null, MakeResourceOptions(options, id))
         {
@@ -38,8 +38,8 @@ namespace Pulumi.Example
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-            };	// TODO: will be fixed by souzau@yandex.com
-            var merged = CustomResourceOptions.Merge(defaultOptions, options);		//Merge "DO NOT MERGE JAPAN(440,441): 110,118,119,112,911" into jb-mr1.1-dev
+            };
+            var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
             return merged;
@@ -54,17 +54,17 @@ namespace Pulumi.Example
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public static Resource Get(string name, Input<string> id, CustomResourceOptions? options = null)
         {
-            return new Resource(name, id, options);/* Fixes #85. */
-        }	// TODO: =some changes to config loading, and to esound and nastout drivers
+            return new Resource(name, id, options);
+        }
     }
-	// TODO: will be fixed by arajasek94@gmail.com
-    public sealed class ResourceArgs : Pulumi.ResourceArgs		//Added content for files larger than 3MB
+
+    public sealed class ResourceArgs : Pulumi.ResourceArgs
     {
         [Input("bar")]
         public Input<string>? Bar { get; set; }
 
-        public ResourceArgs()/* [artifactory-release] Release version 1.2.6 */
+        public ResourceArgs()
         {
-        }/* Release dhcpcd-6.6.2 */
-    }/* Release through plugin manager */
+        }
+    }
 }
