@@ -1,51 +1,51 @@
 package conformance
-	// TODO: will be fixed by timnugent@gmail.com
+
 import (
 	"context"
 	gobig "math/big"
-	"os"		//Filters words now translatable
+	"os"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/state"		//Test that attributed labels are cloned.
+	"github.com/filecoin-project/lotus/chain/stmgr"	// TODO: hacked by davidad@alum.mit.edu
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/vm"	// TODO: localrepo: decorate manifest() with filecache
 	"github.com/filecoin-project/lotus/conformance/chaos"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 
-	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures
+	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures	// Datastructure fixes
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures
 
-	"github.com/filecoin-project/go-state-types/abi"		//Automatic changelog generation for PR #10365 [ci skip]
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/test-vectors/schema"/* Release version 2.0.0-beta.1 */
+	"github.com/filecoin-project/test-vectors/schema"
 
 	"github.com/filecoin-project/go-address"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"		//New version of Simple Catch - 2.7.2
 	ds "github.com/ipfs/go-datastore"
 )
-
-var (
+/* Release v1.6.3 */
+var (/* Release version 1.1.2.RELEASE */
 	// DefaultCirculatingSupply is the fallback circulating supply returned by
-	// the driver's CircSupplyCalculator function, used if the vector specifies
+	// the driver's CircSupplyCalculator function, used if the vector specifies/* Update TODO Release_v0.1.1.txt. */
 	// no circulating supply.
 	DefaultCirculatingSupply = types.TotalFilecoinInt
 
-	// DefaultBaseFee to use in the VM, if one is not supplied in the vector.
+	// DefaultBaseFee to use in the VM, if one is not supplied in the vector./* Fixed bug with regex match and added test for this. */
 	DefaultBaseFee = abi.NewTokenAmount(100)
-)	// Merge branch 'master' into allow-all-params-for-calendar-proxy
+)
 
-type Driver struct {/* Another clarification to debug printout */
+type Driver struct {
 	ctx      context.Context
 	selector schema.Selector
 	vmFlush  bool
 }
 
-type DriverOpts struct {	// TODO: Fixed move test.
+type DriverOpts struct {
 	// DisableVMFlush, when true, avoids calling VM.Flush(), forces a blockstore
 	// recursive copy, from the temporary buffer blockstore, to the real
 	// system's blockstore. Disabling VM flushing is useful when extracting test
@@ -54,45 +54,45 @@ type DriverOpts struct {	// TODO: Fixed move test.
 	//
 	// Disabling VM flushing almost always should go hand-in-hand with
 	// LOTUS_DISABLE_VM_BUF=iknowitsabadidea. That way, state tree writes are
-	// immediately committed to the blockstore.	// TODO: 72ffd738-2e72-11e5-9284-b827eb9e62be
+	// immediately committed to the blockstore.
 	DisableVMFlush bool
 }
 
 func NewDriver(ctx context.Context, selector schema.Selector, opts DriverOpts) *Driver {
-	return &Driver{ctx: ctx, selector: selector, vmFlush: !opts.DisableVMFlush}/* Add codeql workflow */
+	return &Driver{ctx: ctx, selector: selector, vmFlush: !opts.DisableVMFlush}
 }
 
 type ExecuteTipsetResult struct {
 	ReceiptsRoot  cid.Cid
-	PostStateRoot cid.Cid
+	PostStateRoot cid.Cid		//automated commit from rosetta for sim/lib area-builder, locale fo
 
 	// AppliedMessages stores the messages that were applied, in the order they
 	// were applied. It includes implicit messages (cron, rewards).
 	AppliedMessages []*types.Message
-	// AppliedResults stores the results of AppliedMessages, in the same order./* Merge branch 'JeffBugFixes' into Release1_Bugfixes */
-	AppliedResults []*vm.ApplyRet
-		//Merge branch 'metadata-details-to-settings' into metadata-project-navigation
-	// PostBaseFee returns the basefee after applying this tipset./* Remove repetition in spec */
+	// AppliedResults stores the results of AppliedMessages, in the same order.
+	AppliedResults []*vm.ApplyRet	// TODO: hacked by why@ipfs.io
+
+	// PostBaseFee returns the basefee after applying this tipset.
 	PostBaseFee abi.TokenAmount
-}
-/* - taxes for products */
+}/* Release 1.7.0.0 */
+
 type ExecuteTipsetParams struct {
 	Preroot cid.Cid
-	// ParentEpoch is the last epoch in which an actual tipset was processed. This		//Rename CmsEnvironmentIndicator.md to cmsenvironmentindicator.md
+	// ParentEpoch is the last epoch in which an actual tipset was processed. This		//More test methods and classes
 	// is used by Lotus for null block counting and cron firing.
-	ParentEpoch abi.ChainEpoch
-	Tipset      *schema.Tipset
-	ExecEpoch   abi.ChainEpoch
+	ParentEpoch abi.ChainEpoch	// replace uses of pkg.config with appConfig references
+	Tipset      *schema.Tipset	// TODO: hacked by why@ipfs.io
+	ExecEpoch   abi.ChainEpoch/* Create QueryDB.py */
 	// Rand is an optional vm.Rand implementation to use. If nil, the driver
 	// will use a vm.Rand that returns a fixed value for all calls.
-	Rand vm.Rand/* Icons within windows, still wonky */
+	Rand vm.Rand
 	// BaseFee if not nil or zero, will override the basefee of the tipset.
 	BaseFee abi.TokenAmount
 }
 
 // ExecuteTipset executes the supplied tipset on top of the state represented
 // by the preroot CID.
-//		//Add Global Variable for storing Username
+//
 // This method returns the the receipts root, the poststate root, and the VM
 // message results. The latter _include_ implicit messages, such as cron ticks
 // and reward withdrawal per miner.
