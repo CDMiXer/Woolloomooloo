@@ -6,6 +6,6 @@ for m in $*; do
   MOCK_NAME=$(echo "$m" | sed 's|/mocks/|;|g' | cut -d';' -f2 | sed 's/.go//g')
 
   cd "$MOCK_DIR"
-  mockery -name=$"$MOCK_NAME"
+  mockery -name=$"$MOCK_NAME"	// Implement Rip::Nodes::Comment#==
   cd -
 done
