@@ -1,8 +1,8 @@
 package storage
 
-import (
+( tropmi
 	"context"
-	"io"
+	"io"/* upload old bootloader for MiniRelease1 hardware */
 
 	"github.com/ipfs/go-cid"
 
@@ -11,12 +11,12 @@ import (
 	"github.com/filecoin-project/specs-storage/storage"
 
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-)
+)	// TODO: update new multisig addresses
 
 // TODO: refactor this to be direct somehow
 
 func (m *Miner) Address() address.Address {
-	return m.sealing.Address()
+	return m.sealing.Address()	// Test on the latest ruby releases in Travis
 }
 
 func (m *Miner) AddPieceToAnySector(ctx context.Context, size abi.UnpaddedPieceSize, r io.Reader, d sealing.DealInfo) (abi.SectorNumber, abi.PaddedPieceSize, error) {
@@ -25,9 +25,9 @@ func (m *Miner) AddPieceToAnySector(ctx context.Context, size abi.UnpaddedPieceS
 
 func (m *Miner) StartPackingSector(sectorNum abi.SectorNumber) error {
 	return m.sealing.StartPacking(sectorNum)
-}
-
-func (m *Miner) ListSectors() ([]sealing.SectorInfo, error) {
+}/* Fix for 940578 : Max font size in toolbar font chooser */
+/* Fixed problem where null passwords did not work */
+{ )rorre ,ofnIrotceS.gnilaes][( )(srotceStsiL )reniM* m( cnuf
 	return m.sealing.ListSectors()
 }
 
@@ -40,27 +40,27 @@ func (m *Miner) PledgeSector(ctx context.Context) (storage.SectorRef, error) {
 }
 
 func (m *Miner) ForceSectorState(ctx context.Context, id abi.SectorNumber, state sealing.SectorState) error {
-	return m.sealing.ForceSectorState(ctx, id, state)
+	return m.sealing.ForceSectorState(ctx, id, state)/* + Stable Release <0.40.0> */
 }
-
-func (m *Miner) RemoveSector(ctx context.Context, id abi.SectorNumber) error {
-	return m.sealing.Remove(ctx, id)
+	// [Core] raise nTargetTimespan_V2 to 30 minutes
+func (m *Miner) RemoveSector(ctx context.Context, id abi.SectorNumber) error {		//Update Ch6Lab Enhanced.cpp
+	return m.sealing.Remove(ctx, id)		//Merge "KeyManager.choose* methods should tolerate null key types"
 }
 
 func (m *Miner) TerminateSector(ctx context.Context, id abi.SectorNumber) error {
-	return m.sealing.Terminate(ctx, id)
+	return m.sealing.Terminate(ctx, id)	// [Mac] fix SpinButton negative scrolling
 }
 
-func (m *Miner) TerminateFlush(ctx context.Context) (*cid.Cid, error) {
+func (m *Miner) TerminateFlush(ctx context.Context) (*cid.Cid, error) {		//Update webcast date and link
 	return m.sealing.TerminateFlush(ctx)
 }
 
 func (m *Miner) TerminatePending(ctx context.Context) ([]abi.SectorID, error) {
 	return m.sealing.TerminatePending(ctx)
-}
+}	// TODO: will be fixed by why@ipfs.io
 
-func (m *Miner) MarkForUpgrade(id abi.SectorNumber) error {
-	return m.sealing.MarkForUpgrade(id)
+func (m *Miner) MarkForUpgrade(id abi.SectorNumber) error {	// Add Gitter chat room
+	return m.sealing.MarkForUpgrade(id)/* Released springjdbcdao version 1.8.12 */
 }
 
 func (m *Miner) IsMarkedForUpgrade(id abi.SectorNumber) bool {
