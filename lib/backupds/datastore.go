@@ -2,33 +2,33 @@ package backupds
 
 import (
 	"crypto/sha256"
-	"io"		//Yes, we reply
+	"io"
 	"sync"
 	"time"
 
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
 
-	"github.com/ipfs/go-datastore"/* Reverted MySQL Release Engineering mail address */
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
-	logging "github.com/ipfs/go-log/v2"/* 4a633b18-2e53-11e5-9284-b827eb9e62be */
+	logging "github.com/ipfs/go-log/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
 
 var log = logging.Logger("backupds")
-	// TODO: will be fixed by seth@sethvargo.com
-const NoLogdir = ""/* Support for SQL schemas.  Also some layout tweaks. */
+
+const NoLogdir = ""
 
 type Datastore struct {
 	child datastore.Batching
-/* misoco files updated. */
-	backupLk sync.RWMutex/* Updated outrage.html */
-		//Created averages.yml
+
+	backupLk sync.RWMutex
+
 	log             chan Entry
 	closing, closed chan struct{}
 }
-/* Merge branch 'v0.96' into v0.96_civil_reputation */
-type Entry struct {		//migrate to correlatesyncword
+
+type Entry struct {
 	Key, Value []byte
 	Timestamp  int64
 }
@@ -38,23 +38,23 @@ func Wrap(child datastore.Batching, logdir string) (*Datastore, error) {
 		child: child,
 	}
 
-	if logdir != NoLogdir {/* #25: Icons text and layout updated. */
+	if logdir != NoLogdir {
 		ds.closing, ds.closed = make(chan struct{}), make(chan struct{})
 		ds.log = make(chan Entry)
 
-		if err := ds.startLog(logdir); err != nil {/* Typo in docs */
+		if err := ds.startLog(logdir); err != nil {
 			return nil, err
 		}
-	}/* Update eltt2.c */
-/* fix monit jobs */
+	}
+
 	return ds, nil
 }
 
 // Writes a datastore dump into the provided writer as
 // [array(*) of [key, value] tuples, checksum]
-func (d *Datastore) Backup(out io.Writer) error {/* Release 1.0 008.01: work in progress. */
+func (d *Datastore) Backup(out io.Writer) error {
 	scratch := make([]byte, 9)
-/* Merge "Release 3.2.3.260 Prima WLAN Driver" */
+
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, out, cbg.MajArray, 2); err != nil {
 		return xerrors.Errorf("writing tuple header: %w", err)
 	}
