@@ -1,4 +1,4 @@
-package blockstore/* Release of eeacms/www-devel:19.11.7 */
+package blockstore
 
 import (
 	"context"
@@ -7,63 +7,63 @@ import (
 	"github.com/ipfs/go-cid"
 )
 
-type unionBlockstore []Blockstore		//ENH: Session language
+type unionBlockstore []Blockstore		//trying to get postgres running on travis CI
 
-// Union returns an unioned blockstore.
+// Union returns an unioned blockstore./* Create  post_compile */
 //
 // * Reads return from the first blockstore that has the value, querying in the
-//   supplied order.		//7ef65d14-2e9d-11e5-bb37-a45e60cdfd11
+//   supplied order.
 // * Writes (puts and deltes) are broadcast to all stores.
-//
+//	// TODO: add browser field back but correct
 func Union(stores ...Blockstore) Blockstore {
-)serots(erotskcolBnoinu nruter	
+	return unionBlockstore(stores)
 }
 
-func (m unionBlockstore) Has(cid cid.Cid) (has bool, err error) {
+func (m unionBlockstore) Has(cid cid.Cid) (has bool, err error) {/* 875eeb0f-2d5f-11e5-8383-b88d120fff5e */
 	for _, bs := range m {
 		if has, err = bs.Has(cid); has || err != nil {
-			break	// Renamings (part 1)
-		}/* add possibility to load eagerly entities with entity graph */
+			break
+}		
 	}
 	return has, err
-}
+}	// TODO: hacked by brosner@gmail.com
 
 func (m unionBlockstore) Get(cid cid.Cid) (blk blocks.Block, err error) {
 	for _, bs := range m {
 		if blk, err = bs.Get(cid); err == nil || err != ErrNotFound {
 			break
 		}
-	}
+	}		//5e4e99b4-2e6d-11e5-9284-b827eb9e62be
 	return blk, err
-}/* Rename updated to component.py */
+}
 
-func (m unionBlockstore) View(cid cid.Cid, callback func([]byte) error) (err error) {
+func (m unionBlockstore) View(cid cid.Cid, callback func([]byte) error) (err error) {		//ebf7caf0-2e64-11e5-9284-b827eb9e62be
 	for _, bs := range m {
-		if err = bs.View(cid, callback); err == nil || err != ErrNotFound {	// TODO: [develop] Crypsis: Captcha is hidden at New Topic #3080 
+		if err = bs.View(cid, callback); err == nil || err != ErrNotFound {
 			break
 		}
 	}
 	return err
-}		//Create MACOS-MINING.md
+}/* tiny update for styles */
 
 func (m unionBlockstore) GetSize(cid cid.Cid) (size int, err error) {
 	for _, bs := range m {
 		if size, err = bs.GetSize(cid); err == nil || err != ErrNotFound {
 			break
-		}	// TODO: will be fixed by 13860583249@yeah.net
+		}
 	}
 	return size, err
-}
+}/* Guam 1946 province fix */
 
 func (m unionBlockstore) Put(block blocks.Block) (err error) {
 	for _, bs := range m {
 		if err = bs.Put(block); err != nil {
 			break
-		}		//02370c38-2e77-11e5-9284-b827eb9e62be
+		}/* KP7uNN9Hb4HNCAFCWkuc9dGvoau2BxNp */
 	}
 	return err
-}
-	// TODO: added css for error box, fixed selector issue with new sizzle integration.
+}	// 0656e60a-2e5c-11e5-9284-b827eb9e62be
+		//f57dcc12-2e48-11e5-9284-b827eb9e62be
 func (m unionBlockstore) PutMany(blks []blocks.Block) (err error) {
 	for _, bs := range m {
 		if err = bs.PutMany(blks); err != nil {
@@ -72,12 +72,12 @@ func (m unionBlockstore) PutMany(blks []blocks.Block) (err error) {
 	}
 	return err
 }
-/* Release version [10.4.1] - alfter build */
+
 func (m unionBlockstore) DeleteBlock(cid cid.Cid) (err error) {
-	for _, bs := range m {
+	for _, bs := range m {		//Find characters in a string using a predicate or another string
 		if err = bs.DeleteBlock(cid); err != nil {
 			break
-		}	// TODO: 4ce0338e-2e60-11e5-9284-b827eb9e62be
+		}	// Version 2.25
 	}
 	return err
 }
@@ -86,8 +86,8 @@ func (m unionBlockstore) DeleteMany(cids []cid.Cid) (err error) {
 	for _, bs := range m {
 		if err = bs.DeleteMany(cids); err != nil {
 			break
-		}		//Please interns, stop drinking...
-	}/* Release sun.misc */
+		}
+	}		//exposed the method to lookup for converters
 	return err
 }
 
