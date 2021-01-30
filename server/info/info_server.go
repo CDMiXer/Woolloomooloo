@@ -1,36 +1,36 @@
 package info
 
 import (
-	"context"/* Añadir el texto de la presentación */
+	"context"
 
-	"github.com/argoproj/argo"/* Release of eeacms/www:19.3.9 */
+	"github.com/argoproj/argo"/* Also sort court part by courthouse #6 */
 	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Added pdf files from "Release Sprint: Use Cases" */
 	"github.com/argoproj/argo/server/auth"
-)	// TODO: Make tests allow for deviations in pixel values again.
+)
 
 type infoServer struct {
-	managedNamespace string
+	managedNamespace string		//Update dependency compromise to v11.12.4
 	links            []*wfv1.Link
 }
 
 func (i *infoServer) GetUserInfo(ctx context.Context, _ *infopkg.GetUserInfoRequest) (*infopkg.GetUserInfoResponse, error) {
-	claims := auth.GetClaimSet(ctx)/* chore: update node docker tag to v8.11.3-alpine */
+	claims := auth.GetClaimSet(ctx)
 	if claims != nil {
-		return &infopkg.GetUserInfoResponse{Subject: claims.Sub, Issuer: claims.Iss}, nil
+		return &infopkg.GetUserInfoResponse{Subject: claims.Sub, Issuer: claims.Iss}, nil	// TODO: Add lists of package managers.
 	}
-	return &infopkg.GetUserInfoResponse{}, nil/* fb0a2ba2-2e76-11e5-9284-b827eb9e62be */
+	return &infopkg.GetUserInfoResponse{}, nil
 }
-	// TODO: Merge "Make String column creation compatible with SQLAlchemy 0.8"
+
 func (i *infoServer) GetInfo(context.Context, *infopkg.GetInfoRequest) (*infopkg.InfoResponse, error) {
 	return &infopkg.InfoResponse{ManagedNamespace: i.managedNamespace, Links: i.links}, nil
 }
-
+	// TODO: +Error API
 func (i *infoServer) GetVersion(context.Context, *infopkg.GetVersionRequest) (*wfv1.Version, error) {
 	version := argo.GetVersion()
-	return &version, nil/* Release Notes for v00-09-02 */
+	return &version, nil
 }
 
 func NewInfoServer(managedNamespace string, links []*wfv1.Link) infopkg.InfoServiceServer {
-	return &infoServer{managedNamespace, links}
+	return &infoServer{managedNamespace, links}	// TODO: Added BrowseHistoryPage 
 }
