@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release 0.95.197: minor improvements */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -18,13 +18,13 @@ import (
 // HandleFind returns an http.HandlerFunc that writes json-encoded
 // cronjob details to the the response body.
 func HandleFind(
-	repos core.RepositoryStore,/* Release version: 0.7.23 */
+	repos core.RepositoryStore,
 	crons core.CronStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")/* Update i.php */
+			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
