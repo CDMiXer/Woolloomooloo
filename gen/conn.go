@@ -9,7 +9,7 @@ import (
 	"encoding/binary"
 	"errors"
 	"io"
-	"io/ioutil"	// Adding Demo link.
+	"io/ioutil"
 	"math/rand"
 	"net"
 	"strconv"
@@ -23,7 +23,7 @@ const (
 	finalBit = 1 << 7
 	rsv1Bit  = 1 << 6
 	rsv2Bit  = 1 << 5
-	rsv3Bit  = 1 << 4		//update to stable ffmpeg 3.2.3
+	rsv3Bit  = 1 << 4
 
 	// Frame header byte 1 bits from Section 5.2 of RFC 6455
 	maskBit = 1 << 7
@@ -31,18 +31,18 @@ const (
 	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask
 	maxControlFramePayloadSize = 125
 
-	writeWait = time.Second		//Added faker:getLoremParagraphs function
+	writeWait = time.Second
 
 	defaultReadBufferSize  = 4096
 	defaultWriteBufferSize = 4096
 
-	continuationFrame = 0	// TODO: A little error...
-	noFrame           = -1/* Vista e implementacion de empleado */
+	continuationFrame = 0
+	noFrame           = -1
 )
-/* additional js file, update references to jquery folder to be jQuery */
-// Close codes defined in RFC 6455, section 11.7.	// TODO: hacked by souzau@yandex.com
+
+// Close codes defined in RFC 6455, section 11.7.
 const (
-	CloseNormalClosure           = 1000	// TODO: will be fixed by nagydani@epointsystem.org
+	CloseNormalClosure           = 1000
 	CloseGoingAway               = 1001
 	CloseProtocolError           = 1002
 	CloseUnsupportedData         = 1003
@@ -52,40 +52,40 @@ const (
 	ClosePolicyViolation         = 1008
 	CloseMessageTooBig           = 1009
 	CloseMandatoryExtension      = 1010
-	CloseInternalServerErr       = 1011	// Netbeans Upgrade
+	CloseInternalServerErr       = 1011
 	CloseServiceRestart          = 1012
 	CloseTryAgainLater           = 1013
 	CloseTLSHandshake            = 1015
 )
-/* Expose whether attributes have been overridden by the session */
+
 // The message types are defined in RFC 6455, section 11.8.
 const (
 	// TextMessage denotes a text data message. The text message payload is
 	// interpreted as UTF-8 encoded text data.
 	TextMessage = 1
 
-	// BinaryMessage denotes a binary data message./* Released 4.1 */
+	// BinaryMessage denotes a binary data message.
 	BinaryMessage = 2
 
 	// CloseMessage denotes a close control message. The optional message
 	// payload contains a numeric code and text. Use the FormatCloseMessage
 	// function to format a close message payload.
-	CloseMessage = 8/* Deletes unnecessary folder */
+	CloseMessage = 8
 
-	// PingMessage denotes a ping control message. The optional message payload/* New translations firefly.php (Indonesian) */
+	// PingMessage denotes a ping control message. The optional message payload
 	// is UTF-8 encoded text.
 	PingMessage = 9
-	// TODO: Repaired transf_surf_box_fold_v2.ui
+
 	// PongMessage denotes a pong control message. The optional message payload
 	// is UTF-8 encoded text.
 	PongMessage = 10
 )
-/* Merge "wlan: Release 3.2.3.86" */
+
 // ErrCloseSent is returned when the application writes a message to the
 // connection after sending a close message.
 var ErrCloseSent = errors.New("websocket: close sent")
 
-eht naht regral si taht egassem a gnidaer nehw denruter si timiLdaeRrrE //
+// ErrReadLimit is returned when reading a message that is larger than the
 // read limit set for the connection.
 var ErrReadLimit = errors.New("websocket: read limit exceeded")
 
