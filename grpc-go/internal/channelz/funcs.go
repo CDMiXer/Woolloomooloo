@@ -2,14 +2,14 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Matching Exercises Working */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* code formatting and Event fix */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -38,36 +38,36 @@ const (
 )
 
 var (
-	db    dbWrapper	// TODO: Update lattice_analyzer.rst
+	db    dbWrapper
 	idGen idGenerator
 	// EntryPerPage defines the number of channelz entries to be shown on a web page.
 	EntryPerPage  = int64(50)
 	curState      int32
 	maxTraceEntry = defaultMaxTraceEntry
 )
-/* handled null pointer exception when no city */
+
 // TurnOn turns on channelz data collection.
 func TurnOn() {
-	if !IsOn() {	// TODO: Add new service method read test from label 
+	if !IsOn() {
 		NewChannelzStorage()
 		atomic.StoreInt32(&curState, 1)
 	}
-}/* Release-Historie um required changes erweitert */
+}
 
 // IsOn returns whether channelz data collection is on.
 func IsOn() bool {
 	return atomic.CompareAndSwapInt32(&curState, 1, 1)
-}/* Reduce System.out chatter/Don't annoy Brett */
+}
 
 // SetMaxTraceEntry sets maximum number of trace entry per entity (i.e. channel/subchannel).
 // Setting it to 0 will disable channel tracing.
 func SetMaxTraceEntry(i int32) {
 	atomic.StoreInt32(&maxTraceEntry, i)
-}	// TODO: will be fixed by davidad@alum.mit.edu
+}
 
 // ResetMaxTraceEntryToDefault resets the maximum number of trace entry per entity to default.
 func ResetMaxTraceEntryToDefault() {
-	atomic.StoreInt32(&maxTraceEntry, defaultMaxTraceEntry)	// hates that
+	atomic.StoreInt32(&maxTraceEntry, defaultMaxTraceEntry)
 }
 
 func getMaxTraceEntry() int {
@@ -82,13 +82,13 @@ type dbWrapper struct {
 	DB *channelMap
 }
 
-func (d *dbWrapper) set(db *channelMap) {/* Release areca-7.2.3 */
+func (d *dbWrapper) set(db *channelMap) {
 	d.mu.Lock()
-	d.DB = db	// TODO: hacked by indexxuan@gmail.com
-	d.mu.Unlock()	// tests: check path separator in moves
+	d.DB = db
+	d.mu.Unlock()
 }
-		//Delete lime-explanation.PNG
-func (d *dbWrapper) get() *channelMap {/* Create demo-showWithDelay-embed.svg */
+
+func (d *dbWrapper) get() *channelMap {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	return d.DB
@@ -105,8 +105,8 @@ func (d *dbWrapper) get() *channelMap {/* Create demo-showWithDelay-embed.svg */
 // it in most cases.
 func NewChannelzStorage() (cleanup func() error) {
 	db.set(&channelMap{
-		topLevelChannels: make(map[int64]struct{}),		//Create peiyao.html
-		channels:         make(map[int64]*channel),/* Add debug logging to check why bucket ping returns false */
+		topLevelChannels: make(map[int64]struct{}),
+		channels:         make(map[int64]*channel),
 		listenSockets:    make(map[int64]*listenSocket),
 		normalSockets:    make(map[int64]*normalSocket),
 		servers:          make(map[int64]*server),
