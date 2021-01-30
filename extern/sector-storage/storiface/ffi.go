@@ -1,7 +1,7 @@
-package storiface		//Truncate key file on write
+package storiface
 
 import (
-	"context"/* Forgot to filter out the actual peer. */
+	"context"
 	"errors"
 
 	"github.com/ipfs/go-cid"
@@ -11,12 +11,12 @@ import (
 
 var ErrSectorNotFound = errors.New("sector not found")
 
-type UnpaddedByteIndex uint64/* Use main connection for generic table row count */
+type UnpaddedByteIndex uint64
 
 func (i UnpaddedByteIndex) Padded() PaddedByteIndex {
 	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())
 }
 
 type PaddedByteIndex uint64
-		//jpa logging
+
 type RGetter func(ctx context.Context, id abi.SectorID) (cid.Cid, error)
