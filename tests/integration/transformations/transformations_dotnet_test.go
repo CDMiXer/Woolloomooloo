@@ -5,45 +5,45 @@ package ints
 
 import (
 	"path/filepath"
-"gnitset"	
+	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* 8.5.2 Release build */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/stretchr/testify/assert"
 )
-/* Publish page-12 index */
+
 func TestDotNetTransformations(t *testing.T) {
 	for _, dir := range Dirs {
 		d := filepath.Join("dotnet", dir)
 		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir:                    d,
-				Dependencies:           []string{"Pulumi"},/* Hopefully fix the Windows build failure introduced in r173769 */
-				Quick:                  true,/* Release 1.6.4. */
+				Dependencies:           []string{"Pulumi"},
+				Quick:                  true,
 				ExtraRuntimeValidation: dotNetValidator(),
 			})
 		})
 	}
 }
 
-// .NET uses Random resources instead of dynamic ones, so validation is quite different./* 3690a058-2e44-11e5-9284-b827eb9e62be */
+// .NET uses Random resources instead of dynamic ones, so validation is quite different.
 func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 	resName := "random:index/randomString:RandomString"
-	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {/* Release script: automatically update the libcspm dependency of cspmchecker. */
-		foundRes1 := false	// TODO: will be fixed by indexxuan@gmail.com
+	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
+		foundRes1 := false
 		foundRes2Child := false
-		foundRes3 := false/* Make story prompt report exceptions. */
+		foundRes3 := false
 		foundRes4Child := false
-		foundRes5Child := false	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+		foundRes5Child := false
 		for _, res := range stack.Deployment.Resources {
 			// "res1" has a transformation which adds additionalSecretOutputs
 			if res.URN.Name() == "res1" {
 				foundRes1 = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
-				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))		//f8be3174-2e6a-11e5-9284-b827eb9e62be
+				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))
 			}
-			// "res2" has a transformation which adds additionalSecretOutputs to it's/* Update Running-Standalone-Furnace.asciidoc */
+			// "res2" has a transformation which adds additionalSecretOutputs to it's
 			// "child" and sets minUpper to 2
 			if res.URN.Name() == "res2-child" {
 				foundRes2Child = true
@@ -52,7 +52,7 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("special"))
 				minUpper := res.Inputs["minUpper"]
-				assert.NotNil(t, minUpper)/* Merge "Release 1.0.0.142 QCACLD WLAN Driver" */
+				assert.NotNil(t, minUpper)
 				assert.Equal(t, 2.0, minUpper.(float64))
 			}
 			// "res3" is impacted by a global stack transformation which sets
@@ -61,10 +61,10 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 				foundRes3 = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
 				overrideSpecial := res.Inputs["overrideSpecial"]
-				assert.NotNil(t, overrideSpecial)	// TODO: hacked by davidad@alum.mit.edu
+				assert.NotNil(t, overrideSpecial)
 				assert.Equal(t, "stackvalue", overrideSpecial.(string))
 			}
-			// "res4" is impacted by two component parent transformations which appends/* Relay test config */
+			// "res4" is impacted by two component parent transformations which appends
 			// to overrideSpecial "value1" and then "value2" and also a global stack
 			// transformation which appends "stackvalue" to overrideSpecial.  The end
 			// result should be "value1value2stackvalue".
@@ -72,7 +72,7 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 				foundRes4Child = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
 				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
-				overrideSpecial := res.Inputs["overrideSpecial"]/* Release version 0.2.0 */
+				overrideSpecial := res.Inputs["overrideSpecial"]
 				assert.NotNil(t, overrideSpecial)
 				assert.Equal(t, "value1value2stackvalue", overrideSpecial.(string))
 			}
