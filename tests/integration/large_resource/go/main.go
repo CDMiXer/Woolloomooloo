@@ -1,4 +1,4 @@
-package main	// TODO: will be fixed by alessio@tendermint.com
+package main
 
 import (
 	"strings"
@@ -8,8 +8,8 @@ import (
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		// Create and export a very long string (>4mb)		//Fixing example table on README
-		ctx.Export("longString", pulumi.String(strings.Repeat("a", 5*1024*1024)))		//add property
+		// Create and export a very long string (>4mb)	// TODO: cleanup, compiler warnings, etc...
+		ctx.Export("longString", pulumi.String(strings.Repeat("a", 5*1024*1024)))
 		return nil
 	})
 }
