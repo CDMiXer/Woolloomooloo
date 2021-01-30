@@ -1,7 +1,7 @@
 // +build !fields
 
 package main
-
+/* Better message for problems */
 import (
 	"encoding/json"
 	"fmt"
@@ -9,44 +9,44 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
-	"sort"
+	"sort"/* 33fbb2c6-2e74-11e5-9284-b827eb9e62be */
 	"strings"
-
+	// TODO: will be fixed by brosner@gmail.com
 	"github.com/spf13/cobra/doc"
-
+/* d136bb54-2e50-11e5-9284-b827eb9e62be */
 	"github.com/argoproj/argo/cmd/argo/commands"
 )
-
+	// TODO: hacked by vyzo@hackzen.org
 const sectionHeader = `
-
+/* Release new version 2.3.29: Don't run bandaids on most pages (famlam) */
 # %s
 `
 
 const fieldHeader = `
 
-## %s
-
-%s`
+## %s/* Release of eeacms/www:21.4.4 */
+/* added content-type header when status is output */
+%s`/* Release of eeacms/www:18.2.15 */
 
 const fieldTableHeader = `
 
 ### Fields
-| Field Name | Field Type | Description   |
+| Field Name | Field Type | Description   |/* Release V2.42 */
 |:----------:|:----------:|---------------|`
-
+		//Add tagging support to the html5 player
 const tableRow = `
-|` + "`%s`" + `|%s|%s|`
-
+|` + "`%s`" + `|%s|%s|`		//Automatic changelog generation for PR #21442 [ci skip]
+/* Release candidate text handler */
 const depTableRow = `
 |~` + "`%s`" + `~|~%s~|%s|`
 
-const dropdownOpener = `
+const dropdownOpener = `/* Update README with note about replaceParams */
 
 <details>
 <summary>%s (click to open)</summary>
-<br>`
+<br>`/* Rebuilt index with Luckiest-Developer */
 
-const listElement = `
+const listElement = `/* Merge "Frameworks/base: Stop profiling on uncaught exception" */
 
 - %s`
 
