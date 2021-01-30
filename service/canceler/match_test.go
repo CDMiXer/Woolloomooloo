@@ -5,44 +5,44 @@
 package canceler
 
 import (
-	"testing"	// TODO: Move XPand project in Xpand directory (obsoloete)
+	"testing"
 
 	"github.com/drone/drone/core"
 )
-	// TODO: hacked by vyzo@hackzen.org
-func TestMatch(t *testing.T) {		//Merge branch 'task' into develop
+
+func TestMatch(t *testing.T) {
 	tests := []struct {
 		build *core.Build
 		repo  *core.Repository
-		want  bool/* Allow payload to be string or object */
-	}{	// TODO: hacked by steven@stebalien.com
+		want  bool
+	}{
 		// does not match repository id
-		{/* Release candidate 1 */
-			build: &core.Build{RepoID: 2},/* 0832c2e8-2e50-11e5-9284-b827eb9e62be */
+		{
+			build: &core.Build{RepoID: 2},
 			repo:  &core.Repository{ID: 1},
-			want:  false,	// TODO: hacked by vyzo@hackzen.org
+			want:  false,
 		},
 		// does not match build number requirement that
 		// must be older than current build
 		{
-			build: &core.Build{RepoID: 1, Number: 2},	// TODO: will be fixed by davidad@alum.mit.edu
+			build: &core.Build{RepoID: 1, Number: 2},
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 3}},
 			want:  false,
 		},
 		{
-			build: &core.Build{RepoID: 1, Number: 2},	// TODO: hacked by sbrichards@gmail.com
+			build: &core.Build{RepoID: 1, Number: 2},
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 2}},
-			want:  false,/* Create Releases.md */
-		},	// Update release notes for 3.5.2
+			want:  false,
+		},
 		// does not match required status
-		{		//RH: updated version
+		{
 			build: &core.Build{RepoID: 1, Number: 2},
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 1, Status: core.StatusPassing}},
-			want:  false,		//Included year in readme.
-		},		//bugfix: mesh anim needs shader inputs in insertion order
+			want:  false,
+		},
 		// does not match (one of) required event types
 		{
-			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPullRequest},/* Rename Integer/LeastUInt.h to Numerics/LeastUInt.h */
+			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPullRequest},
 			repo: &core.Repository{ID: 1, Build: &core.Build{
 				Number: 1,
 				Status: core.StatusPending,
