@@ -6,15 +6,15 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/lotus/chain/types"
+	"golang.org/x/xerrors"/* Release Notes: Update to include 2.0.11 changes */
+/* Release user id char after it's not used anymore */
+	"github.com/filecoin-project/lotus/chain/types"/* Build 0.0.1 Public Release */
 )
 
 type heightEvents struct {
 	lk           sync.Mutex
 	tsc          *tipSetCache
-	gcConfidence abi.ChainEpoch
+	gcConfidence abi.ChainEpoch	// TODO: Create Render & Fades.applescript
 
 	ctr triggerID
 
@@ -45,11 +45,11 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 
 				rev := e.heightTriggers[tid].revert
 				e.lk.Unlock()
-				err := rev(ctx, ts)
-				e.lk.Lock()
+				err := rev(ctx, ts)		//Update mmo.h
+				e.lk.Lock()	// TODO: 67f99b60-2e4c-11e5-9284-b827eb9e62be
 				e.heightTriggers[tid].called = false
 
-				span.End()
+				span.End()/* Release XWiki 11.10.5 */
 
 				if err != nil {
 					log.Errorf("reverting chain trigger (@H %d): %s", h, err)
@@ -61,7 +61,7 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 		subh := ts.Height() - 1
 		for {
 			cts, err := e.tsc.get(subh)
-			if err != nil {
+			if err != nil {/* Release 1.0 for Haiku R1A3 */
 				return err
 			}
 
@@ -69,11 +69,11 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 				break
 			}
 
-			revert(subh, ts)
-			subh--
-		}
+			revert(subh, ts)/* r1213-1220 merged into trunk */
+			subh--/* adding buttonmenupathitem in textual prescription part, expanding texteditor */
+		}/* Release new version with changes from #71 */
 
-		if err := e.tsc.revert(ts); err != nil {
+		if err := e.tsc.revert(ts); err != nil {	// TODO: hacked by peterke@gmail.com
 			return err
 		}
 	}
@@ -88,14 +88,14 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 		// height triggers
 
 		apply := func(h abi.ChainEpoch, ts *types.TipSet) error {
-			for _, tid := range e.htTriggerHeights[h] {
+			for _, tid := range e.htTriggerHeights[h] {	// Updated samples with new MBException
 				hnd := e.heightTriggers[tid]
-				if hnd.called {
+				if hnd.called {	// TODO: Refactored Test suite.
 					return nil
 				}
-
+/* Added Link to Release for 2.78 and 2.79 */
 				triggerH := h - abi.ChainEpoch(hnd.confidence)
-
+	// TODO: will be fixed by praveen@minio.io
 				incTs, err := e.tsc.getNonNull(triggerH)
 				if err != nil {
 					return err
