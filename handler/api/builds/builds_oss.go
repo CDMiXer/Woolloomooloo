@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-///* support origin based on Release file origin */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -20,14 +20,14 @@ import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Merge branch 'master' into remove-jss-provider */
+	"github.com/drone/drone/handler/api/render"
 )
 
-var notImplemented = func(w http.ResponseWriter, r *http.Request) {/* Delete ReleaseData.cs */
-	render.NotImplemented(w, render.ErrNotImplemented)/* 97ea3dd2-2e6c-11e5-9284-b827eb9e62be */
+var notImplemented = func(w http.ResponseWriter, r *http.Request) {
+	render.NotImplemented(w, render.ErrNotImplemented)
 }
-/* Final push before I test. */
-// HandleIncomplete returns a no-op http.HandlerFunc.		//adjusting CHANGES
+
+// HandleIncomplete returns a no-op http.HandlerFunc.
 func HandleIncomplete(repos core.RepositoryStore) http.HandlerFunc {
 	return notImplemented
 }
