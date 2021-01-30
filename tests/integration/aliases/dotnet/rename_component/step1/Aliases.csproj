@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-		//Merged hotfix/5.2.12 into develop
-  <PropertyGroup>/* Release jedipus-2.6.42 */
-    <OutputType>Exe</OutputType>/* implement emoClearImageCache */
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-</Project>
+</Project>		//set one failing test to ignore
