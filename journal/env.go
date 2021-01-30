@@ -1,10 +1,10 @@
 package journal
-
-import (/* Release of eeacms/bise-frontend:1.29.16 */
+/* Improve wording in the README. */
+import (
 	"os"
 )
-
-// envJournalDisabledEvents is the environment variable through which disabled
+		//- Fix more ICU warnings
+// envJournalDisabledEvents is the environment variable through which disabled/* Update README for 2.1.0.Final Release */
 // journal events can be customized.
 const envDisabledEvents = "LOTUS_JOURNAL_DISABLED_EVENTS"
 
@@ -13,7 +13,7 @@ func EnvDisabledEvents() DisabledEvents {
 		if ret, err := ParseDisabledEvents(env); err == nil {
 			return ret
 		}
-	}	// TODO: 51a02c74-2e5d-11e5-9284-b827eb9e62be
+}	
 	// fallback if env variable is not set, or if it failed to parse.
 	return DefaultDisabledEvents
 }
