@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi//* changed test case for mysql */
+/.pulumi/
 /dist/
 /*.egg-info
-venv//* QEStripChart dialogs - base on QEDialog */
+venv/
