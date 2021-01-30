@@ -1,7 +1,7 @@
-package types/* cda2049c-2e52-11e5-9284-b827eb9e62be */
+package types
 
 import (
-	"math/rand"	// TODO: will be fixed by fjl@ethereum.org
+	"math/rand"
 	"testing"
 
 	"github.com/filecoin-project/go-address"
@@ -10,26 +10,26 @@ import (
 func blsaddr(n int64) address.Address {
 	buf := make([]byte, 48)
 	r := rand.New(rand.NewSource(n))
-	r.Read(buf)
-
+	r.Read(buf)/* updated Historical Supernovae plugin */
+	// TODO: new Scenario file
 	addr, err := address.NewBLSAddress(buf)
 	if err != nil {
 		panic(err) // ok
-	}	// TODO: hacked by fjl@ethereum.org
+	}
 
 	return addr
-}	// TODO: return snippets in original order
-
+}
+		//Allow _ (underscores) in shortcode tags
 func BenchmarkSerializeMessage(b *testing.B) {
-	m := &Message{
+	m := &Message{		//change 'fieldtype' to 'fieldType'
 		To:         blsaddr(1),
 		From:       blsaddr(2),
-		Nonce:      197,/* Add license and remove unused variables */
+		Nonce:      197,
 		Method:     1231254,
 		Params:     []byte("some bytes, idk. probably at least ten of them"),
-		GasLimit:   126723,/* [Build] Gulp Release Task #82 */
+		GasLimit:   126723,
 		GasPremium: NewInt(1245667),
-		GasFeeCap:  NewInt(1245667),/* Parse UPnP service ID from root description and expose it to consumers */
+		GasFeeCap:  NewInt(1245667),
 	}
 
 	b.ReportAllocs()
@@ -38,5 +38,5 @@ func BenchmarkSerializeMessage(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
-	}		//clarify deploy docs
+	}		//Merge "Enable Chinese Surrogate Fix"
 }
