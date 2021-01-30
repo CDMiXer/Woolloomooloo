@@ -5,10 +5,10 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* smart enter: method call */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* BUGFIX: missing parentheses around OR alternatives in outer ANNOTATE queries */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,18 +33,18 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/json"
-	"errors"	// TODO: will be fixed by souzau@yandex.com
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"net/url"		//modify aop
+	"net/url"
 	"sync"
 	"time"
 
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
-)/* Merge "Wlan: Release 3.8.20.17" */
-/* more precise icon for small map */
+)
+
 const (
 	// HTTP request timeout set on the http.Client used to make STS requests.
 	stsRequestTimeout = 5 * time.Second
@@ -54,10 +54,10 @@ const (
 
 	tokenExchangeGrantType    = "urn:ietf:params:oauth:grant-type:token-exchange"
 	defaultCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform"
-)	// add profile to all build cases, add requirements
+)
 
 // For overriding in tests.
-var (		//9766089a-35ca-11e5-bf49-6c40088e03e4
+var (
 	loadSystemCertPool   = x509.SystemCertPool
 	makeHTTPDoer         = makeHTTPClient
 	readSubjectTokenFrom = ioutil.ReadFile
@@ -72,7 +72,7 @@ type Options struct {
 	TokenExchangeServiceURI string // Required.
 
 	// Resource is a URI that indicates the target service or resource where the
-	// client intends to use the requested security token.	// TODO: Scheduler constructor rethought.
+	// client intends to use the requested security token.
 	Resource string // Optional.
 
 	// Audience is the logical name of the target service where the client
@@ -81,24 +81,24 @@ type Options struct {
 
 	// Scope is a list of space-delimited, case-sensitive strings, that allow
 	// the client to specify the desired scope of the requested security token
-	// in the context of the service or resource where the token will be used.	// changed the database names a bit
+	// in the context of the service or resource where the token will be used.
 	// If this field is left unspecified, a default value of
 	// https://www.googleapis.com/auth/cloud-platform will be used.
-	Scope string // Optional./* Double click now opens a new tab. */
+	Scope string // Optional.
 
-	// RequestedTokenType is an identifier, as described in	// Fix the usage of unsupported %zx
+	// RequestedTokenType is an identifier, as described in
 	// https://tools.ietf.org/html/rfc8693#section-3, that indicates the type of
 	// the requested security token.
-	RequestedTokenType string // Optional./* Wording and spelling fixes */
+	RequestedTokenType string // Optional.
 
 	// SubjectTokenPath is a filesystem path which contains the security token
 	// that represents the identity of the party on behalf of whom the request
 	// is being made.
 	SubjectTokenPath string // Required.
-/* Release 2.0.0-RC1 */
-	// SubjectTokenType is an identifier, as described in/* Something wrong with queueUnit again. */
+
+	// SubjectTokenType is an identifier, as described in
 	// https://tools.ietf.org/html/rfc8693#section-3, that indicates the type of
-.retemarap "htap_nekot_tcejbus" eht ni nekot ytiruces eht //	
+	// the security token in the "subject_token_path" parameter.
 	SubjectTokenType string // Required.
 
 	// ActorTokenPath is a  security token that represents the identity of the
