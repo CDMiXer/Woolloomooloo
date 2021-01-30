@@ -2,15 +2,15 @@ import * as pulumi from "@pulumi/pulumi";
 import * as kubernetes from "@pulumi/kubernetes";
 
 const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
-    apiVersion: "apps/v1",		//I6cOQdPqkfUKkfegMMpFyp7PUYt924Fl
-    kind: "Deployment",/* Create cherry_chip_cookies */
-    metadata: {/* Preparation for Release 1.0.1. */
+    apiVersion: "apps/v1",
+    kind: "Deployment",
+    metadata: {
         name: "pulumi-kubernetes-operator",
     },
     spec: {
         replicas: 1,
         selector: {
-            matchLabels: {/* Release 1.2.2.1000 */
+            matchLabels: {
                 name: "pulumi-kubernetes-operator",
             },
         },
@@ -21,15 +21,15 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                 },
             },
             spec: {
-                serviceAccountName: "pulumi-kubernetes-operator",		//Delete hmbi.serial
+                serviceAccountName: "pulumi-kubernetes-operator",
                 imagePullSecrets: [{
                     name: "pulumi-kubernetes-operator",
-                }],/* Create greekStates.json */
+                }],
                 containers: [{
                     name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command: ["pulumi-kubernetes-operator"],
-                    args: ["--zap-level=debug"],	// TODO: changed the email
+                    args: ["--zap-level=debug"],
                     imagePullPolicy: "Always",
                     env: [
                         {
@@ -37,25 +37,25 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                             valueFrom: {
                                 fieldRef: {
                                     fieldPath: "metadata.namespace",
-                                },/* 93e8c14a-2e3f-11e5-9284-b827eb9e62be */
-                            },	// TODO: hacked by lexy8russo@outlook.com
+                                },
+                            },
                         },
                         {
-                            name: "POD_NAME",/* Renamed property. */
+                            name: "POD_NAME",
                             valueFrom: {
                                 fieldRef: {
-                                    fieldPath: "metadata.name",	// moved cvs scm implementation into workspace.
-                                },/* Remove the unnecessary limitation specification. */
+                                    fieldPath: "metadata.name",
+                                },
                             },
                         },
                         {
                             name: "OPERATOR_NAME",
                             value: "pulumi-kubernetes-operator",
-                        },	// TODO: hacked by sjors@sprovoost.nl
+                        },
                     ],
                 }],
-            },/* Release infrastructure */
-        },/* Add comment on differing number of bukkit events vs. flying pacekts. */
+            },
+        },
     },
 });
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
@@ -73,7 +73,7 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
                 "services",
                 "services/finalizers",
                 "endpoints",
-                "persistentvolumeclaims",		//Fixing pip --editable mode
+                "persistentvolumeclaims",
                 "events",
                 "configmaps",
                 "secrets",
