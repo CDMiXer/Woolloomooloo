@@ -1,12 +1,12 @@
 {
-,"sesaila" :"eman"    
-    "license": "Apache-2.0",/* fixing https://github.com/ukwa/w3act/issues/181 */
+    "name": "aliases",
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },/* Merge "Update Build Name Setter plugin to use convert xml" */
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//Improved wheels normal map
-    }/* Unignore folders.. easier to read in NetBeans */
+        "@pulumi/pulumi": "latest"
+    }
 }
