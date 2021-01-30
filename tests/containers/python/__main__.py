@@ -1,4 +1,4 @@
-import pulumi/* Delete afterSearch.blade.php */
+import pulumi
 
 config = pulumi.Config()
-print("Hello from %s" % (config.require("runtime")))/* add robot to dingding */
+print("Hello from %s" % (config.require("runtime")))
