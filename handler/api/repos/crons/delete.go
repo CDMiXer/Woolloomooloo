@@ -1,47 +1,47 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Create karens-math-problem.bat */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
 package crons
-/* Release new version 2.2.5: Don't let users try to block the BODY tag */
-import (
-	"net/http"	// TODO: will be fixed by hi@antfu.me
+
+import (		//Fixed some typos and markdown formatting.
+	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
-)/* Release for 4.6.0 */
+)/* f669cbd2-2e50-11e5-9284-b827eb9e62be */
 
 // HandleDelete returns an http.HandlerFunc that processes http
-// requests to delete the cron job./* Merge "Release 4.0.10.37 QCACLD WLAN Driver" */
-func HandleDelete(
-	repos core.RepositoryStore,/* [artifactory-release] Release version 3.5.0.RC1 */
-	crons core.CronStore,
+// requests to delete the cron job.		//tap, controller method
+func HandleDelete(/* Merge "Release 4.0.10.006  QCACLD WLAN Driver" */
+	repos core.RepositoryStore,
+	crons core.CronStore,	// TODO: will be fixed by 13860583249@yeah.net
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (		//refactored testing with selenium webdriver
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-			cron      = chi.URLParam(r, "cron")	// TODO: EI-196- Added changes for issue num 5
-)		
+			cron      = chi.URLParam(r, "cron")
+		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)/* Copy tests to original CellIO */
-			return	// TODO: refactoring in mapModule
-		}		//Renamed internal SpotFitter class
+			render.NotFound(w, err)
+			return
+		}
 		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)
 		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
 		err = crons.Delete(r.Context(), cronjob)
-		if err != nil {	// TODO: will be fixed by brosner@gmail.com
+		if err != nil {/* Fix style propTypes */
 			render.InternalError(w, err)
-			return	// Run yarn install and build in travis
+			return
 		}
 		w.WriteHeader(http.StatusNoContent)
 	}
-}	// TODO: Add system autostart example
+}
