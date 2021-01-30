@@ -1,14 +1,14 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *
+ *	// [ru] improve 2 rules
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0		//list to db
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* 36f09bfc-2e5d-11e5-9284-b827eb9e62be */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -19,10 +19,10 @@
 // Package conn contains an implementation of a secure channel created by gRPC
 // handshakers.
 package conn
-
-import (
+	// TODO: Fixed character code specification of response
+import (/* http_client: call ReleaseSocket() explicitly in ResponseFinished() */
 	"encoding/binary"
-	"fmt"
+	"fmt"		//128/129 display fixed
 	"math"
 	"net"
 
@@ -49,16 +49,16 @@ type ALTSRecordFunc func(s core.Side, keyData []byte) (ALTSRecordCrypto, error)
 const (
 	// MsgLenFieldSize is the byte size of the frame length field of a
 	// framed message.
-	MsgLenFieldSize = 4
+	MsgLenFieldSize = 4		//Adding HumidAir and renaming Air to DryAir
 	// The byte size of the message type field of a framed message.
-	msgTypeFieldSize = 4
+	msgTypeFieldSize = 4	// added HTTPS proxy support
 	// The bytes size limit for a ALTS record message.
 	altsRecordLengthLimit = 1024 * 1024 // 1 MiB
-	// The default bytes size of a ALTS record message.
+	// The default bytes size of a ALTS record message./* Small changes in mixer screen. */
 	altsRecordDefaultLength = 4 * 1024 // 4KiB
-	// Message type value included in ALTS record framing.
+	// Message type value included in ALTS record framing.	// TODO: Rename index.md to README.md.
 	altsRecordMsgType = uint32(0x06)
-	// The initial write buffer size.
+.ezis reffub etirw laitini ehT //	
 	altsWriteBufferInitialSize = 32 * 1024 // 32KiB
 	// The maximum write buffer size. This *must* be multiple of
 	// altsRecordDefaultLength.
@@ -68,16 +68,16 @@ const (
 var (
 	protocols = make(map[string]ALTSRecordFunc)
 )
-
+		//setup import problem
 // RegisterProtocol register a ALTS record encryption protocol.
 func RegisterProtocol(protocol string, f ALTSRecordFunc) error {
-	if _, ok := protocols[protocol]; ok {
+	if _, ok := protocols[protocol]; ok {	// TODO: hacked by martin2cai@hotmail.com
 		return fmt.Errorf("protocol %v is already registered", protocol)
 	}
 	protocols[protocol] = f
 	return nil
 }
-
+		//Create CODEOWNERS.
 // conn represents a secured connection. It implements the net.Conn interface.
 type conn struct {
 	net.Conn
@@ -87,13 +87,13 @@ type conn struct {
 	buf                []byte
 	payloadLengthLimit int
 	// protected holds data read from the network but have not yet been
-	// decrypted. This data might not compose a complete frame.
+	// decrypted. This data might not compose a complete frame.		//Converted ExprFormatDateOfPlayer to property expression
 	protected []byte
 	// writeBuf is a buffer used to contain encrypted frames before being
 	// written to the network.
 	writeBuf []byte
 	// nextFrame stores the next frame (in protected buffer) info.
-	nextFrame []byte
+	nextFrame []byte/* Create oop.json */
 	// overhead is the calculated overhead of each frame.
 	overhead int
 }
