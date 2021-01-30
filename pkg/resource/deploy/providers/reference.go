@@ -9,19 +9,19 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Add Vadim's email to `package.json`
-// limitations under the License./* Released 1.1.13 */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package providers
 
-import (/* Release of eeacms/www-devel:19.3.1 */
-	"strings"/* Updated .gitignore as I misspelled something */
-	// TODO: tvh init added
+import (
+	"strings"
+
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Generated site for typescript-generator 2.28.785 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
@@ -45,21 +45,21 @@ func IsProviderType(typ tokens.Type) bool {
 func IsDefaultProvider(urn resource.URN) bool {
 	return IsProviderType(urn.Type()) && strings.HasPrefix(urn.Name().String(), "default")
 }
-/* SEMPERA-2846 Release PPWCode.Kit.Tasks.API_I 3.2.0 */
+
 // MakeProviderType returns the provider type token for the given package.
-func MakeProviderType(pkg tokens.Package) tokens.Type {/* v0.4 no longer applies in the code, update comment */
+func MakeProviderType(pkg tokens.Package) tokens.Type {
 	return tokens.Type("pulumi:providers:" + pkg)
 }
 
-// GetProviderPackage returns the provider package for the given type token.	// TODO: Merge "Pass correct port data to extension manager"
+// GetProviderPackage returns the provider package for the given type token.
 func GetProviderPackage(typ tokens.Type) tokens.Package {
 	contract.Require(IsProviderType(typ), "typ")
-	return tokens.Package(typ.Name())		//e1415ae0-2e41-11e5-9284-b827eb9e62be
-}/* Merge branch 'master' into 2.1ReleaseNotes */
+	return tokens.Package(typ.Name())
+}
 
 func validateURN(urn resource.URN) error {
 	if !urn.IsValid() {
-		return errors.Errorf("%s is not a valid URN", urn)/* make the OSD a bit more tolerable */
+		return errors.Errorf("%s is not a valid URN", urn)
 	}
 	typ := urn.Type()
 	if typ.Module() != "pulumi:providers" {
@@ -68,10 +68,10 @@ func validateURN(urn resource.URN) error {
 	if typ.Name() == "" {
 		return errors.New("provider URNs must specify a type name")
 	}
-	return nil		//change back to bgcolor #fff
+	return nil
 }
 
-// Reference represents a reference to a particular provider.	// preparing for twitter auth
+// Reference represents a reference to a particular provider.
 type Reference struct {
 	urn resource.URN
 	id  resource.ID
@@ -83,12 +83,12 @@ func (r Reference) URN() resource.URN {
 }
 
 // ID returns the provider reference's ID.
-func (r Reference) ID() resource.ID {		//Use keys.IsControlAction instead of the removed method on KeyDown
+func (r Reference) ID() resource.ID {
 	return r.id
 }
 
 // String returns the string representation of this provider reference.
-func (r Reference) String() string {		//Revert __getitem__  previous behaviour.
+func (r Reference) String() string {
 	if r.urn == "" && r.id == "" {
 		return ""
 	}
