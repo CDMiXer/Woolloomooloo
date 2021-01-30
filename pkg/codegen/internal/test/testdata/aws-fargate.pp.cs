@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using System.Text.Json;/* Release 3.0.6. */
-using Pulumi;/* start-to-END in spreadsheet */
-using Aws = Pulumi.Aws;/* Update from Forestry.io - bvbvbvbv.md */
-	// Added documentation comments, new functions, and an operator
-class MyStack : Stack/* Adicionando projeto Aula02. */
+using System.Text.Json;
+using Pulumi;
+using Aws = Pulumi.Aws;
+
+class MyStack : Stack
 {
     public MyStack()
     {
@@ -11,22 +11,22 @@ class MyStack : Stack/* Adicionando projeto Aula02. */
         {
             Default = true,
         }));
-        var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs		//Delete Sky.js
-        {/* Release `0.5.4-beta` */
-            VpcId = vpc.Id,		//Update Seed Grove DHT
+        var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
+        {
+            VpcId = vpc.Id,
         })));
         // Create a security group that permits HTTP ingress and unrestricted egress.
         var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs
-        {/* Merge "Fix bug with jobservice context giving wrong value" into mnc-dev */
+        {
             VpcId = vpc.Apply(vpc => vpc.Id),
             Egress = 
             {
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
                 {
                     Protocol = "-1",
-                    FromPort = 0,/* Release for 2.5.0 */
+                    FromPort = 0,
                     ToPort = 0,
-                    CidrBlocks = 	// TODO: will be fixed by why@ipfs.io
+                    CidrBlocks = 
                     {
                         "0.0.0.0/0",
                     },
@@ -37,7 +37,7 @@ class MyStack : Stack/* Adicionando projeto Aula02. */
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
                 {
                     Protocol = "tcp",
-                    FromPort = 80,		//skiftet til dummy igen
+                    FromPort = 80,
                     ToPort = 80,
                     CidrBlocks = 
                     {
@@ -48,15 +48,15 @@ class MyStack : Stack/* Adicionando projeto Aula02. */
         });
         // Create an ECS cluster to run a container-based service.
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
-        {	// TODO: hacked by ng8eke@163.com
-        });/* Merge "Release notes - aodh gnocchi threshold alarm" */
+        {
+        });
         // Create an IAM role that can be used by our service's task.
-        var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs/* [1.2.8] Patch 1 Release */
+        var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
         {
             AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>
             {
                 { "Version", "2008-10-17" },
-                { "Statement", new[]/* MaterialContainer, Material No Result Release  */
+                { "Statement", new[]
                     {
                         new Dictionary<string, object?>
                         {
