@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {/* Create AnomalyDetection.scala */
-        "strict": true,/* Fix primitive types. */
+    "compilerOptions": {/* Updated the lit feedstock. */
+        "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+,"6102se" :"tegrat"        
         "module": "commonjs",
-        "moduleResolution": "node",		//4acfcc56-2e58-11e5-9284-b827eb9e62be
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,	// State Treasurer seal.
+        "stripInternal": true,/* Release 3.0.4 */
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,/* added support for conversion from Cloud Spanner to PostgreSQL */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },
-    "files": [
-        "index.ts"
+        "forceConsistentCasingInFileNames": true/* Rename epigram-13.html to OLT.html */
+    },	// TODO: 20d751d6-2e52-11e5-9284-b827eb9e62be
+    "files": [	// TODO: Make MAX_MEMORY_IMAGE_CACHE 20% of maxMameory().  Log this value on use.
+        "index.ts"/* Expose embed.ts as module */
     ]
-}		//Avoid out-of-bounds access of `double_bytes`.
-
+}	// fix pull request template link
+/* Merge "Use stock BagOStuff lock methods in MessageCache" */
