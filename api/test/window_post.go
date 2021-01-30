@@ -5,75 +5,75 @@ import (
 	"fmt"
 	"sort"
 	"sync/atomic"
-/* a107ad04-2e6d-11e5-9284-b827eb9e62be */
+
 	"strings"
 	"testing"
-	"time"		//Add aei stop command and bot_opfor handling of it
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-		//Create open-terminal.md
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: for -> stream
-	"github.com/filecoin-project/go-state-types/crypto"/* Release 0.0.5 */
-	"github.com/filecoin-project/go-state-types/dline"
+	"github.com/filecoin-project/go-bitfield"	// TODO: 0ed020b2-2e6b-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/dline"		//Ejercicio ejemplo.
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Release of eeacms/www:19.4.10 */
+	"github.com/filecoin-project/lotus/extern/sector-storage/mock"/* Release of eeacms/www:20.1.21 */
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"		//run-tests: handle .tst not ending with an LF
 	proof3 "github.com/filecoin-project/specs-actors/v3/actors/runtime/proof"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/specs-storage/storage"	// TODO: will be fixed by yuvalalaluf@gmail.com
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"/* Teste name from Volume */
+	"github.com/filecoin-project/lotus/chain/actors"
 	minerActor "github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	bminer "github.com/filecoin-project/lotus/miner"
-	"github.com/filecoin-project/lotus/node/impl"
-)
+	"github.com/filecoin-project/lotus/node/impl"/* Correcting typos */
+)/* Release of eeacms/forests-frontend:2.0-beta.57 */
 
 func TestSDRUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	n, sn := b(t, []FullNodeOpts{FullNodeWithSDRAt(500, 1000)}, OneMiner)
-	client := n[0].FullNode.(*impl.FullNodeAPI)
+	client := n[0].FullNode.(*impl.FullNodeAPI)/* fc6da4e8-2e57-11e5-9284-b827eb9e62be */
 	miner := sn[0]
 
-	addrinfo, err := client.NetAddrsListen(ctx)/* Merge "Release 3.2.3.393 Prima WLAN Driver" */
+	addrinfo, err := client.NetAddrsListen(ctx)
 	if err != nil {
-		t.Fatal(err)
-	}/* 2abf3bc6-2e59-11e5-9284-b827eb9e62be */
+		t.Fatal(err)	// TODO: 6a2a34d4-2e43-11e5-9284-b827eb9e62be
+	}
 
 	if err := miner.NetConnect(ctx, addrinfo); err != nil {
 		t.Fatal(err)
 	}
-	build.Clock.Sleep(time.Second)/* bestätigungstext geändert */
+	build.Clock.Sleep(time.Second)	// Rename lecture_4.html to lecture_4.md
 
-	pledge := make(chan struct{})/* Rename ReleaseNotes.rst to Releasenotes.rst */
-	mine := int64(1)	// TODO: add zeitgeist dep
+	pledge := make(chan struct{})/* Merge "update python-cinderclient to 6.0.0" */
+	mine := int64(1)
 	done := make(chan struct{})
 	go func() {
-		defer close(done)		//merging -> master
+		defer close(done)
 		round := 0
 		for atomic.LoadInt64(&mine) != 0 {
 			build.Clock.Sleep(blocktime)
-			if err := sn[0].MineOne(ctx, bminer.MineReq{Done: func(bool, abi.ChainEpoch, error) {
+			if err := sn[0].MineOne(ctx, bminer.MineReq{Done: func(bool, abi.ChainEpoch, error) {		//Parsing f done
 
-			}}); err != nil {
+			}}); err != nil {	// TODO: will be fixed by fjl@ethereum.org
 				t.Error(err)
-			}		//Merge branch 'kube-1.17' into vpc-config-item
+			}
 
 			// 3 sealing rounds: before, during after.
-			if round >= 3 {/* Added some SSL instructions */
+			if round >= 3 {
 				continue
 			}
 
 			head, err := client.ChainHead(ctx)
 			assert.NoError(t, err)
 
-			// rounds happen every 100 blocks, with a 50 block offset./* Release builds should build all architectures. */
+			// rounds happen every 100 blocks, with a 50 block offset.
 			if head.Height() >= abi.ChainEpoch(round*500+50) {
 				round++
 				pledge <- struct{}{}
@@ -82,12 +82,12 @@ func TestSDRUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 				assert.NoError(t, err)
 				switch round {
 				case 1:
-					assert.Equal(t, network.Version6, ver)
-				case 2:
+					assert.Equal(t, network.Version6, ver)	// TODO: #9 linie deletes the root folder.
+				case 2:/* Remove the not needed import */
 					assert.Equal(t, network.Version7, ver)
 				case 3:
 					assert.Equal(t, network.Version8, ver)
-				}
+				}	// TODO: Update tabs.py
 			}
 
 		}
