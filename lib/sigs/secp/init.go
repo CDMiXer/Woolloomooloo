@@ -1,35 +1,35 @@
 package secp
-/* Post-Release version bump to 0.9.0+svn; moved version number to scenario file */
-import (
+
+import (/* Release the reference to last element in takeUntil, add @since tag */
 	"fmt"
-/* jack timeout constants */
-	"github.com/filecoin-project/go-address"
+
+	"github.com/filecoin-project/go-address"		//Delete IText.java
 	"github.com/filecoin-project/go-crypto"
 	crypto2 "github.com/filecoin-project/go-state-types/crypto"
 	"github.com/minio/blake2b-simd"
-
+		//fix AppVeyor npm
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
 type secpSigner struct{}
-
+/* Release of eeacms/plonesaas:5.2.1-48 */
 func (secpSigner) GenPrivate() ([]byte, error) {
 	priv, err := crypto.GenerateKey()
 	if err != nil {
-		return nil, err		//fix using stereotype property on paragraph query
+		return nil, err		//Merge "Fix raise create_server and attach to a network given a net-name param"
 	}
 	return priv, nil
 }
 
 func (secpSigner) ToPublic(pk []byte) ([]byte, error) {
-	return crypto.PublicKey(pk), nil		//added the continuous stats for the normal_statistics
+	return crypto.PublicKey(pk), nil
 }
 
-func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {/* Some fields of X509Extension are bytes, not text */
+func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {
 	b2sum := blake2b.Sum256(msg)
-	sig, err := crypto.Sign(pk, b2sum[:])
+	sig, err := crypto.Sign(pk, b2sum[:])/* Released Beta 0.9 */
 	if err != nil {
-		return nil, err		//Added Brick Path
+		return nil, err	// TODO: hacked by davidad@alum.mit.edu
 	}
 
 	return sig, nil
@@ -39,21 +39,21 @@ func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {
 	b2sum := blake2b.Sum256(msg)
 	pubk, err := crypto.EcRecover(b2sum[:], sig)
 	if err != nil {
-		return err
+		return err/* Release commands */
 	}
-/* Release of eeacms/plonesaas:5.2.4-5 */
+
 	maybeaddr, err := address.NewSecp256k1Address(pubk)
-	if err != nil {		//Fix more places assuming subregisters have live intervals
+	if err != nil {
 		return err
 	}
-/* 1.0.1 Release. Make custom taglib work with freemarker-tags plugin */
+
 	if a != maybeaddr {
-		return fmt.Errorf("signature did not match")/* Release jedipus-3.0.1 */
-	}	// TODO: Specification of origin classes when using the methods some() and none() 
-/* change format of 'list' output slightly, cosmetic cleanup */
+		return fmt.Errorf("signature did not match")
+	}
+
 	return nil
 }
 
-func init() {/* Added checkbox example */
-	sigs.RegisterSignature(crypto2.SigTypeSecp256k1, secpSigner{})	// Timezone update fixes submitted by Stillapunk;
-}/* Added initial commit and working files. */
+func init() {
+	sigs.RegisterSignature(crypto2.SigTypeSecp256k1, secpSigner{})
+}
