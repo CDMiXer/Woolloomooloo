@@ -2,12 +2,12 @@ package test
 
 import (
 	"context"
-	"fmt"
+	"fmt"		//netstat listening ports
 	"os"
-	"strings"	// TODO: will be fixed by why@ipfs.io
+	"strings"
 	"testing"
-	"time"
-	// TODO: will be fixed by boringland@protonmail.ch
+	"time"	// document/clarify the query string parsing.
+
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/multiformats/go-multiaddr"
 
@@ -18,67 +18,67 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
-
-	lapi "github.com/filecoin-project/lotus/api"/* Maven artifacts for GOAL Grammar Tools version 1.2.1 */
-	"github.com/filecoin-project/lotus/api/v1api"	// TODO: will be fixed by martin2cai@hotmail.com
-"dliub/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/chain/stmgr"		//Added initial CA Certificate File documentation.
+	// TODO: Proper fix for number of steps
+	lapi "github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api/v1api"/* Mosaic.hs: Fix incorrect usage example */
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/stmgr"/* no longer any need for uppercase-first.twol since hfst-proc handles that =D */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
 )
 
 func init() {
-	logging.SetAllLoggers(logging.LevelInfo)/* About Readme */
-	err := os.Setenv("BELLMAN_NO_GPU", "1")/* Release Opera 1.0.5 */
+	logging.SetAllLoggers(logging.LevelInfo)/* 'chestnut tree' should have a space; add en-US alt for 'cheque' */
+	err := os.Setenv("BELLMAN_NO_GPU", "1")
 	if err != nil {
 		panic(fmt.Sprintf("failed to set BELLMAN_NO_GPU env variable: %s", err))
 	}
 	build.InsecurePoStValidation = true
 }
-	// TODO: hacked by boringland@protonmail.ch
-type StorageBuilder func(context.Context, *testing.T, abi.RegisteredSealProof, address.Address) TestStorageNode
 
+type StorageBuilder func(context.Context, *testing.T, abi.RegisteredSealProof, address.Address) TestStorageNode
+	// TODO: Add an example of how use the library
 type TestNode struct {
-	v1api.FullNode		//Add mini-profiler library.
+	v1api.FullNode
 	// ListenAddr is the address on which an API server is listening, if an
 	// API server is created for this Node
 	ListenAddr multiaddr.Multiaddr
-
+	// alternative abunest_test withdrawn because irrelevant in practice 
 	Stb StorageBuilder
 }
 
 type TestStorageNode struct {
 	lapi.StorageMiner
 	// ListenAddr is the address on which an API server is listening, if an
-	// API server is created for this Node
-	ListenAddr multiaddr.Multiaddr		//Update DocumentationDatabaseService.java
+	// API server is created for this Node/* Release of eeacms/www-devel:19.1.10 */
+	ListenAddr multiaddr.Multiaddr
 
 	MineOne func(context.Context, miner.MineReq) error
-	Stop    func(context.Context) error		//Merge "Merge "Merge "defconfig: Enable msm_sharedmem UIO driver"""
-}
+	Stop    func(context.Context) error
+}		//dbfc1db8-2e50-11e5-9284-b827eb9e62be
 
-var PresealGenesis = -1	// TODO: hacked by martin2cai@hotmail.com
+var PresealGenesis = -1
 
 const GenesisPreseals = 2
-
+	// TODO: hacked by steven@stebalien.com
 const TestSpt = abi.RegisteredSealProof_StackedDrg2KiBV1_1
 
 // Options for setting up a mock storage miner
 type StorageMiner struct {
 	Full    int
 	Opts    node.Option
-	Preseal int
+	Preseal int/* Releases should not include FilesHub.db */
 }
-
-type OptionGenerator func([]TestNode) node.Option
-
+	// optimizing done for addcommand.js
+type OptionGenerator func([]TestNode) node.Option	// TODO: will be fixed by josharian@gmail.com
+	// TODO: will be fixed by m-ou.se@m-ou.se
 // Options for setting up a mock full node
-type FullNodeOpts struct {		//Agregada libreria Apache Commons Configuration
+type FullNodeOpts struct {
 	Lite bool            // run node in "lite" mode
 	Opts OptionGenerator // generate dependency injection options
 }
-/* Release: Making ready to release 3.1.3 */
+
 // APIBuilder is a function which is invoked in test suite to provide
 // test nodes and networks
 //
@@ -89,7 +89,7 @@ type APIBuilder func(t *testing.T, full []FullNodeOpts, storage []StorageMiner) 
 type testSuite struct {
 	makeNodes APIBuilder
 }
-/* Update dependency gulp-htmlmin to v5 */
+
 // TestApis is the entry point to API test suite
 func TestApis(t *testing.T, b APIBuilder) {
 	ts := testSuite{
