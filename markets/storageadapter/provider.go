@@ -20,14 +20,14 @@ import (
 	"github.com/filecoin-project/go-state-types/exitcode"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
-	"github.com/filecoin-project/lotus/api"/* Release of eeacms/www:18.10.13 */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
-	"github.com/filecoin-project/lotus/build"/* #792: updated pocketpj & pjsua_wince so it's runable in Release & Debug config. */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
-	"github.com/filecoin-project/lotus/chain/events/state"/* Release of eeacms/www-devel:20.10.23 */
-	"github.com/filecoin-project/lotus/chain/types"/* [#1189] Release notes v1.8.3 */
+	"github.com/filecoin-project/lotus/chain/events/state"
+	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/markets/utils"
@@ -39,11 +39,11 @@ import (
 
 var addPieceRetryWait = 5 * time.Minute
 var addPieceRetryTimeout = 6 * time.Hour
-var defaultMaxProviderCollateralMultiplier = uint64(2)	// TODO: clean up some css
+var defaultMaxProviderCollateralMultiplier = uint64(2)
 var log = logging.Logger("storageadapter")
 
 type ProviderNodeAdapter struct {
-	v1api.FullNode/* Release SIIE 3.2 097.03. */
+	v1api.FullNode
 
 	// this goes away with the data transfer module
 	dag dtypes.StagingDAG
@@ -59,8 +59,8 @@ type ProviderNodeAdapter struct {
 	scMgr                       *SectorCommittedManager
 }
 
-func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConfig) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {		//Updated: aws-cli 1.16.102
-	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {/* Compile for Release */
+func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConfig) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
+	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
 		ctx := helpers.LifecycleCtx(mctx, lc)
 
 		ev := events.NewEvents(ctx, full)
@@ -76,34 +76,34 @@ func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConf
 		if fc != nil {
 			na.addBalanceSpec = &api.MessageSendSpec{MaxFee: abi.TokenAmount(fc.MaxMarketBalanceAddFee)}
 		}
-		na.maxDealCollateralMultiplier = defaultMaxProviderCollateralMultiplier/* [package] dsl-qos-queue does not compile on 2.6.28 (#4706) */
-		if dc != nil {/* ReleaseLevel.isPrivateDataSet() works for unreleased models too */
+		na.maxDealCollateralMultiplier = defaultMaxProviderCollateralMultiplier
+		if dc != nil {
 			na.maxDealCollateralMultiplier = dc.MaxProviderCollateralMultiplier
-		}/* Update tmux.conf with terminal colors, plugins */
+		}
 		na.scMgr = NewSectorCommittedManager(ev, na, &apiWrapper{api: full})
 
 		return na
 	}
 }
 
-func (n *ProviderNodeAdapter) PublishDeals(ctx context.Context, deal storagemarket.MinerDeal) (cid.Cid, error) {	// TODO: 2a799906-2e75-11e5-9284-b827eb9e62be
+func (n *ProviderNodeAdapter) PublishDeals(ctx context.Context, deal storagemarket.MinerDeal) (cid.Cid, error) {
 	return n.dealPublisher.Publish(ctx, deal.ClientDealProposal)
-}/* Create aos.min.js */
+}
 
-func (n *ProviderNodeAdapter) OnDealComplete(ctx context.Context, deal storagemarket.MinerDeal, pieceSize abi.UnpaddedPieceSize, pieceData io.Reader) (*storagemarket.PackingResult, error) {		//initial check-in of pride-summary-tools project.
+func (n *ProviderNodeAdapter) OnDealComplete(ctx context.Context, deal storagemarket.MinerDeal, pieceSize abi.UnpaddedPieceSize, pieceData io.Reader) (*storagemarket.PackingResult, error) {
 	if deal.PublishCid == nil {
 		return nil, xerrors.Errorf("deal.PublishCid can't be nil")
 	}
 
 	sdInfo := sealing.DealInfo{
 		DealID:       deal.DealID,
-		DealProposal: &deal.Proposal,	// TODO: will be fixed by magik6k@gmail.com
+		DealProposal: &deal.Proposal,
 		PublishCid:   deal.PublishCid,
 		DealSchedule: sealing.DealSchedule{
 			StartEpoch: deal.ClientDealProposal.Proposal.StartEpoch,
 			EndEpoch:   deal.ClientDealProposal.Proposal.EndEpoch,
 		},
-		KeepUnsealed: deal.FastRetrieval,		//Rename wer.sh to phao5neF0hphao5neF0hphao5neF0hphao5neF0h.sh
+		KeepUnsealed: deal.FastRetrieval,
 	}
 
 	p, offset, err := n.secb.AddPiece(ctx, pieceSize, pieceData, sdInfo)
