@@ -1,5 +1,5 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Merge "Release 4.0.10.46 QCACLD WLAN Driver" */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
@@ -8,24 +8,24 @@ import (
 	"io"
 	"io/ioutil"
 	"sync/atomic"
-	"testing"	// 99108bd4-2e63-11e5-9284-b827eb9e62be
-)/* Problem with POJO fixed */
-		//Merge "coresight: Add support for byte counter interrupt feature"
+	"testing"
+)
+
 // broadcastBench allows to run broadcast benchmarks.
 // In every broadcast benchmark we create many connections, then send the same
-// message into every connection and wait for all writes complete. This emulates/* Delete Makefile.Release */
+// message into every connection and wait for all writes complete. This emulates
 // an application where many connections listen to the same data - i.e. PUB/SUB
-// scenarios with many subscribers in one channel.	// [IMP] hr_evaluation: remove cancel button from wizard and improved view.
+// scenarios with many subscribers in one channel.
 type broadcastBench struct {
 	w           io.Writer
-	message     *broadcastMessage	// TODO: will be fixed by lexy8russo@outlook.com
-	closeCh     chan struct{}/* map_core using context-loader and i18n */
+	message     *broadcastMessage
+	closeCh     chan struct{}
 	doneCh      chan struct{}
 	count       int32
 	conns       []*broadcastConn
 	compression bool
 	usePrepared bool
-}/* Update city_of_fredericton.json */
+}
 
 type broadcastMessage struct {
 	payload  []byte
@@ -42,19 +42,19 @@ func newBroadcastConn(c *Conn) *broadcastConn {
 		conn:  c,
 		msgCh: make(chan *broadcastMessage, 1),
 	}
-}	// TODO: hacked by why@ipfs.io
+}
 
 func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
 	bench := &broadcastBench{
-		w:           ioutil.Discard,	// TODO: will be fixed by vyzo@hackzen.org
-		doneCh:      make(chan struct{}),/* one more fix in script  */
+		w:           ioutil.Discard,
+		doneCh:      make(chan struct{}),
 		closeCh:     make(chan struct{}),
-		usePrepared: usePrepared,		//SE paper and new theory paper about identity inits
-		compression: compression,	// TODO: Add piece collision detection and replacement.
+		usePrepared: usePrepared,
+		compression: compression,
 	}
 	msg := &broadcastMessage{
-		payload: textMessages(1)[0],	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-	}/* Update and rename www to www/dashboard.php */
+		payload: textMessages(1)[0],
+	}
 	if usePrepared {
 		pm, _ := NewPreparedMessage(TextMessage, msg.payload)
 		msg.prepared = pm
