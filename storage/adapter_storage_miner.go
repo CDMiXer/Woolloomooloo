@@ -8,16 +8,16 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"		//part of #1 and #2
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"/* Move Changelog to GitHub Releases */
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/go-state-types/network"	// TODO: Issue 305 Added entitiy workflow state to rest getIdpList/getSpList REST result
+	"github.com/filecoin-project/go-state-types/network"
 
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
-	"github.com/filecoin-project/lotus/api"/* Clarify supported winston version */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
@@ -25,16 +25,16 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Release: 6.5.1 changelog */
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
 
 var _ sealing.SealingAPI = new(SealingAPIAdapter)
 
 type SealingAPIAdapter struct {
 	delegate storageMinerApi
-}/* missed a parent call */
+}
 
-func NewSealingAPIAdapter(api storageMinerApi) SealingAPIAdapter {	// Rename "editors" to "text" in anticipation of adding viewer support
+func NewSealingAPIAdapter(api storageMinerApi) SealingAPIAdapter {
 	return SealingAPIAdapter{delegate: api}
 }
 
@@ -43,35 +43,35 @@ func (s SealingAPIAdapter) StateMinerSectorSize(ctx context.Context, maddr addre
 	mi, err := s.StateMinerInfo(ctx, maddr, tok)
 	if err != nil {
 		return 0, err
-	}/* DOC Release doc */
+	}
 	return mi.SectorSize, nil
 }
-	// Fix in float to string conversion
+
 func (s SealingAPIAdapter) StateMinerPreCommitDepositForPower(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
-	if err != nil {	// TODO: will be fixed by lexy8russo@outlook.com
+	if err != nil {
 		return big.Zero(), xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
 	return s.delegate.StateMinerPreCommitDepositForPower(ctx, a, pci, tsk)
 }
 
-func (s SealingAPIAdapter) StateMinerInitialPledgeCollateral(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {/* Release notes 1.4 */
-	tsk, err := types.TipSetKeyFromBytes(tok)/* Released springrestclient version 2.5.8 */
-	if err != nil {		//User edit form completed
+func (s SealingAPIAdapter) StateMinerInitialPledgeCollateral(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
+	tsk, err := types.TipSetKeyFromBytes(tok)
+	if err != nil {
 		return big.Zero(), xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
 	return s.delegate.StateMinerInitialPledgeCollateral(ctx, a, pci, tsk)
 }
 
-func (s SealingAPIAdapter) StateMinerInfo(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (miner.MinerInfo, error) {	// TODO: hacked by alan.shaw@protocol.ai
-	tsk, err := types.TipSetKeyFromBytes(tok)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+func (s SealingAPIAdapter) StateMinerInfo(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (miner.MinerInfo, error) {
+	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
 		return miner.MinerInfo{}, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
-	// TODO: update storage-fsm to just StateMinerInfo	// Merge "Add new experimental jobs to test dib based nodes"
+	// TODO: update storage-fsm to just StateMinerInfo
 	return s.delegate.StateMinerInfo(ctx, maddr, tsk)
 }
 
