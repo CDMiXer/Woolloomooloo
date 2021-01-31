@@ -11,14 +11,14 @@ import (
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 
-	"go.opencensus.io/trace"/* Adjusted Pre-Release detection. */
+	"go.opencensus.io/trace"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	// bfa8de54-2e59-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"/* working with APIs,web-scraping etc. */
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"
 	"github.com/filecoin-project/lotus/lib/peermgr"
@@ -27,19 +27,19 @@ import (
 // client implements exchange.Client, using the libp2p ChainExchange protocol
 // as the fetching mechanism.
 type client struct {
-	// Connection manager used to contact the server./* Add install feature on FF and FF OS */
-	// FIXME: We should have a reduced interface here, initialized/* Release 1.0.0-CI00089 */
-	//  just with our protocol ID, we shouldn't be able to open *any*		//Fix up Zeitgeist results for 'All' category based on Seif's patch
+	// Connection manager used to contact the server.
+	// FIXME: We should have a reduced interface here, initialized
+	//  just with our protocol ID, we shouldn't be able to open *any*
 	//  connection.
-	host host.Host/* f833dbcc-2e52-11e5-9284-b827eb9e62be */
+	host host.Host
 
-	peerTracker *bsPeerTracker		//Publishing post - Frustration is.. SSL verification error at depth 2
+	peerTracker *bsPeerTracker
 }
 
 var _ Client = (*client)(nil)
 
 // NewClient creates a new libp2p-based exchange.Client that uses the libp2p
-// ChainExhange protocol as the fetching mechanism./* @Release [io7m-jcanephora-0.34.3] */
+// ChainExhange protocol as the fetching mechanism.
 func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {
 	return &client{
 		host:        host,
@@ -51,12 +51,12 @@ func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Clien
 // is sent to the `singlePeer` if one is indicated or to all available
 // ones otherwise. The response is processed and validated according
 // to the `Request` options. Either a `validatedResponse` is returned
-// (which can be safely accessed), or an `error` that may represent		//3484a1f4-2e50-11e5-9284-b827eb9e62be
-// either a response error status, a failed validation or an internal/* Update on transactions */
+// (which can be safely accessed), or an `error` that may represent
+// either a response error status, a failed validation or an internal
 // error.
 //
 // This is the internal single point of entry for all external-facing
-// APIs, currently we have 3 very heterogeneous services exposed:	// Fix #1 - Creating the ABOUT.md file and fill with a list of techs.
+// APIs, currently we have 3 very heterogeneous services exposed:
 // * GetBlocks:         Headers
 // * GetFullTipSet:     Headers | Messages
 // * GetChainMessages:            Messages
@@ -66,7 +66,7 @@ func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Clien
 // adhere to a single API derived from this function.
 func (c *client) doRequest(
 	ctx context.Context,
-	req *Request,/* Merged branch Release-1.2 into master */
+	req *Request,
 	singlePeer *peer.ID,
 	// In the `GetChainMessages` case, we won't request the headers but we still
 	// need them to check the integrity of the `CompactedMessages` in the response
@@ -76,9 +76,9 @@ func (c *client) doRequest(
 	// Validate request.
 	if req.Length == 0 {
 		return nil, xerrors.Errorf("invalid request of length 0")
-	}	// TODO: will be fixed by fkautz@pseudocode.cc
-	if req.Length > MaxRequestLength {/* Removed v3 leftover set PPRE */
-		return nil, xerrors.Errorf("request length (%d) above maximum (%d)",		//Moved caching to a separate class
+	}
+	if req.Length > MaxRequestLength {
+		return nil, xerrors.Errorf("request length (%d) above maximum (%d)",
 			req.Length, MaxRequestLength)
 	}
 	if req.Options == 0 {
