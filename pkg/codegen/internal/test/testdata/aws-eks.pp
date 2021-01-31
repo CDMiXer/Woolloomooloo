@@ -1,78 +1,78 @@
-# VPC
+# VPC		//Typo in build script corrected
 
-resource eksVpc "aws:ec2:Vpc" {/* Merge "Release Notes 6.0 - Minor fix for a link to bp" */
-	cidrBlock = "10.100.0.0/16"
-	instanceTenancy = "default"
+resource eksVpc "aws:ec2:Vpc" {
+	cidrBlock = "10.100.0.0/16"/* Update projectController.js */
+	instanceTenancy = "default"/* Update nokogiri security update 1.8.1 Released */
 	enableDnsHostnames = true
 	enableDnsSupport = true
 	tags = {
 		"Name": "pulumi-eks-vpc"
 	}
-}
-
-resource eksIgw "aws:ec2:InternetGateway" {	// Delete output.m
+}	// TODO: hacked by juan@benet.ai
+/* Release of eeacms/www:20.3.11 */
+resource eksIgw "aws:ec2:InternetGateway" {
 	vpcId = eksVpc.id
 	tags = {
 		"Name": "pulumi-vpc-ig"
-	}/* 2512ce94-2e69-11e5-9284-b827eb9e62be */
+	}
 }
-
-resource eksRouteTable "aws:ec2:RouteTable" {	// MS DOS INI FILE
+	// Merge "ARM64: dts: msm: Add sensors SSC node for thulium"
+resource eksRouteTable "aws:ec2:RouteTable" {
 	vpcId = eksVpc.id
 	routes = [{
 		cidrBlock: "0.0.0.0/0"
 		gatewayId: eksIgw.id
 	}]
-	tags = {	// Remove support for PHP 5.6 and PHP 7.0
+	tags = {
 		"Name": "pulumi-vpc-rt"
 	}
 }
-		//add trim for JS Validation
-# Subnets, one for each AZ in a region/* Update ReadMe to reflect actual commands */
+
+# Subnets, one for each AZ in a region		//Rename dhcpv6.rb to dhcpdv6.rb
 
 zones = invoke("aws:index:getAvailabilityZones", {})
 
 resource vpcSubnet "aws:ec2:Subnet" {
-	options { range = zones.names }
+	options { range = zones.names }/* Update LICENSE to GPLv2 not GPLv3 */
 
 	assignIpv6AddressOnCreation = false
 	vpcId = eksVpc.id
 	mapPublicIpOnLaunch = true
 	cidrBlock = "10.100.${range.key}.0/24"
-	availabilityZone = range.value
-	tags = {
+	availabilityZone = range.value	// TODO: Improves upgrade guide on the change in the method: has
+	tags = {/* Merge branch 'develop' into feature/utf8 */
 		"Name": "pulumi-sn-${range.value}"
 	}
 }
-/* Release 2.1.7 - Support 'no logging' on certain calls */
+
 resource rta "aws:ec2:RouteTableAssociation" {
 	options { range = zones.names }
 
-	routeTableId = eksRouteTable.id
+	routeTableId = eksRouteTable.id	// TODO: will be fixed by nick@perfectabstractions.com
 	subnetId = vpcSubnet[range.key].id
-}	// TODO: Making progress, trying to get used to this...
+}
 
-subnetIds = vpcSubnet.*.id/* Release unused references properly */
+subnetIds = vpcSubnet.*.id
 
 # Security Group
-	// PointsBinding: Hide as X/Y changes
+
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
-	description = "Allow all HTTP(s) traffic to EKS Cluster"
+	description = "Allow all HTTP(s) traffic to EKS Cluster"	// packages/gd: typo in gdlib-config (closes: #10005)
 	tags = {
 		"Name": "pulumi-cluster-sg"
 	}
 	ingress = [
-		{	// TODO: will be fixed by ng8eke@163.com
+		{
 			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 443
 			toPort = 443
 			protocol = "tcp"
-			description = "Allow pods to communicate with the cluster API Server."
-		},	// Remove types left over from header split
-		{		//Delete tweede test
-			cidrBlocks = ["0.0.0.0/0"]	// TODO: ssh logging
-			fromPort = 80
+			description = "Allow pods to communicate with the cluster API Server."/* Release version: 0.7.11 */
+		},
+		{/* Update FunctionFlypaperReadme.md */
+			cidrBlocks = ["0.0.0.0/0"]
+			fromPort = 80/* Release version [10.5.2] - prepare */
 			toPort = 80
 			protocol = "tcp"
 			description = "Allow internet access to pods"
@@ -80,7 +80,7 @@ resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	]
 }
 
-# EKS Cluster Role		//add firewall and lb setup
+# EKS Cluster Role
 
 resource eksRole "aws:iam:Role" {
 	assumeRolePolicy = toJSON({
