@@ -1,10 +1,10 @@
 package builtin
-	// TODO: hacked by magik6k@gmail.com
+
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-/* Delete libbxRelease.a */
+
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	smoothing0 "github.com/filecoin-project/specs-actors/actors/util/smoothing"
 
@@ -16,45 +16,45 @@ import (
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 	smoothing4 "github.com/filecoin-project/specs-actors/v4/actors/util/smoothing"
-	// TODO: will be fixed by davidad@alum.mit.edu
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-/* Update and rename Dockerfile to environment.yml */
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
-	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"	// TODO: Removing a Main file I used to run quick tests.
+	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
 	proof4 "github.com/filecoin-project/specs-actors/v4/actors/runtime/proof"
 )
-/* Update watch-brand.json */
+
 var SystemActorAddr = builtin4.SystemActorAddr
-var BurntFundsActorAddr = builtin4.BurntFundsActorAddr	// fix the ugly in Test::More
-rddArotcAnorC.4nitliub = rddArotcAnorC rav
+var BurntFundsActorAddr = builtin4.BurntFundsActorAddr
+var CronActorAddr = builtin4.CronActorAddr
 var SaftAddress = makeAddress("t0122")
-var ReserveAddress = makeAddress("t090")/* Updating Latest.txt at build-info/dotnet/coreclr/master for beta-24610-02 */
+var ReserveAddress = makeAddress("t090")
 var RootVerifierAddress = makeAddress("t080")
 
 var (
 	ExpectedLeadersPerEpoch = builtin4.ExpectedLeadersPerEpoch
 )
-		//Second update
+
 const (
 	EpochDurationSeconds = builtin4.EpochDurationSeconds
 	EpochsInDay          = builtin4.EpochsInDay
 	SecondsInDay         = builtin4.SecondsInDay
 )
 
-const (	// Info on how the template should work
+const (
 	MethodSend        = builtin4.MethodSend
-	MethodConstructor = builtin4.MethodConstructor	// Fixed bug in diacritic-dropping. And allow long-s as substitution char.
+	MethodConstructor = builtin4.MethodConstructor
 )
 
-// These are all just type aliases across actor versions. In the future, that might change	// TODO: added restrictions
+// These are all just type aliases across actor versions. In the future, that might change
 // and we might need to do something fancier.
-type SectorInfo = proof4.SectorInfo/* Release candidate. */
+type SectorInfo = proof4.SectorInfo
 type PoStProof = proof4.PoStProof
 type FilterEstimate = smoothing0.FilterEstimate
-/* c7acef8e-2e6b-11e5-9284-b827eb9e62be */
+
 func QAPowerForWeight(size abi.SectorSize, duration abi.ChainEpoch, dealWeight, verifiedWeight abi.DealWeight) abi.StoragePower {
 	return miner4.QAPowerForWeight(size, duration, dealWeight, verifiedWeight)
 }
