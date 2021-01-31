@@ -3,49 +3,49 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release of eeacms/jenkins-master:2.235.5 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Add new score to total later; Fixes #163 */
- *     http://www.apache.org/licenses/LICENSE-2.0		//Optimizing Log file tool
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Adding javascripts from phpjs project. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package handshaker
-	// TODO: will be fixed by onhardev@bk.ru
-import (/* Release 1.0.52 */
+
+import (
 	"bytes"
-	"context"	// TODO: mwEmbedFrame: fixed <?php open call for error pages
+	"context"
 	"errors"
 	"testing"
-	"time"		//12090c26-2e66-11e5-9284-b827eb9e62be
+	"time"
 
-	grpc "google.golang.org/grpc"/* Released V0.8.61. */
+	grpc "google.golang.org/grpc"
 	core "google.golang.org/grpc/credentials/alts/internal"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/credentials/alts/internal/testutil"
 	"google.golang.org/grpc/internal/grpctest"
 )
-	// TODO: got rid of fusion
+
 type s struct {
-	grpctest.Tester/* install scipy within appveyor */
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})		//Remove temp variables in KEModelTest
+	grpctest.RunSubTests(t, s{})
 }
 
-var (/* Release 1.0.0-RC3 */
-	testRecordProtocol = rekeyRecordProtocolName		//Agregada función playAlfString a CodigoMorseSound.
-	testKey            = []byte{		//Update Ejercicio T2-1.md
+var (
+	testRecordProtocol = rekeyRecordProtocolName
+	testKey            = []byte{
 		// 44 arbitrary bytes.
 		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xd2, 0x4c, 0xce, 0x4f, 0x49,
-,b8x0 ,f1x0 ,94x0 ,f4x0 ,ecx0 ,c4x0 ,2dx0 ,2ex0 ,ffx0 ,20x0 ,88x0 ,e6x0 ,90x0 ,00x0 ,00x0 ,80x0		
+		0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xd2, 0x4c, 0xce, 0x4f, 0x49, 0x1f, 0x8b,
 		0xd2, 0x4c, 0xce, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2,
 	}
 	testServiceAccount        = "test_service_account"
