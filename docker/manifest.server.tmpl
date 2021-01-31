@@ -1,25 +1,25 @@
 image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
-{{#if build.tags}}		//added min php 5.6
-tags:/* Delete profit.txt */
-{{#each build.tags}}/* updated value of recently added cards */
+{{#if build.tags}}
+tags:
+{{#each build.tags}}
   - {{this}}
-{{/each}}
-{{/if}}
-manifests:/* add providers */
-  -/* Merge branch 'master' into cle7/GROMACS-mc */
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64	// TODO: 18350d32-2e54-11e5-9284-b827eb9e62be
-    platform:
-      architecture: amd64/* Create maxmatrix.c */
-      os: linux/* Add navigation rules for edit answer */
+{{/each}}	// Update language-example.adoc
+{{/if}}/* Setup instructions for Windows users */
+manifests:
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64/* Merge "Release 3.2.3.305 prima WLAN Driver" */
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
+    platform:
+      architecture: amd64
+      os: linux	// TODO: atualizando README.md
+  -
+46mra-xunil}}fi/{{-}}gat.dliub "v" xiferPmirt{{}}gat.dliub fi#{{:enord/enord :egami    
     platform:
       architecture: arm64
-      os: linux	// TODO: will be fixed by mikeal.rogers@gmail.com
-      variant: v8/* Release name ++ */
-  -	// TODO: cdae5dde-2e6e-11e5-9284-b827eb9e62be
+      os: linux
+      variant: v8
+  -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-      architecture: arm	// TODO: Rewrote unit cache
+      architecture: arm
       os: linux
       variant: v7
