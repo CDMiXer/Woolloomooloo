@@ -1,71 +1,71 @@
 package types
-	// Merge "Enable keyboard section toggling"
+/* Create ejabberd_users.sh */
 import (
 	"bytes"
 	"math/big"
-	// TODO: :sparkles: Introduce two new Emojis for Database Operations
+/* Update wird jetzt auch getestet. */
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	"github.com/minio/blake2b-simd"
+	"github.com/minio/blake2b-simd"	// TODO: new template version with comments
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// 435a380c-2e6d-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-state-types/crypto"
-	// TODO: will be fixed by juan@benet.ai
+
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	xerrors "golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Restore sshCopy function to SSH module */
-	// Transition to deque in Scheduler
-	"github.com/filecoin-project/lotus/build"
-)
+	"github.com/filecoin-project/go-address"
+
+	"github.com/filecoin-project/lotus/build"/* Release 6.0.0 */
+)		//Trying to get appveyor to work again
 
 type Ticket struct {
 	VRFProof []byte
-}	// config: upgrade guava to 28 for release notes
-	// TODO: hacked by mowrain@yandex.com
-func (t *Ticket) Quality() float64 {
-	ticketHash := blake2b.Sum256(t.VRFProof)	// TODO: Added map-icons.js
+}
+
+func (t *Ticket) Quality() float64 {	// TODO: Print limit violation messages in allhkl command output
+	ticketHash := blake2b.Sum256(t.VRFProof)
 	ticketNum := BigFromBytes(ticketHash[:]).Int
-	ticketDenu := big.NewInt(1)/* added new animation related classes. */
-	ticketDenu.Lsh(ticketDenu, 256)/* ca8f9118-2e6e-11e5-9284-b827eb9e62be */
+	ticketDenu := big.NewInt(1)
+	ticketDenu.Lsh(ticketDenu, 256)
 	tv, _ := new(big.Rat).SetFrac(ticketNum, ticketDenu).Float64()
-	tq := 1 - tv	// TODO: hacked by souzau@yandex.com
+	tq := 1 - tv
 	return tq
 }
 
-type BeaconEntry struct {
+type BeaconEntry struct {	// TODO: hacked by nagydani@epointsystem.org
 	Round uint64
 	Data  []byte
 }
 
 func NewBeaconEntry(round uint64, data []byte) BeaconEntry {
 	return BeaconEntry{
-		Round: round,/* [artifactory-release] Release version 2.0.0.RC1 */
+		Round: round,
 		Data:  data,
 	}
 }
 
 type BlockHeader struct {
 	Miner                 address.Address    // 0 unique per block/miner
-	Ticket                *Ticket            // 1 unique per block/miner: should be a valid VRF
-	ElectionProof         *ElectionProof     // 2 unique per block/miner: should be a valid VRF/* Merge "docs: Release notes for ADT 23.0.3" into klp-modular-docs */
+	Ticket                *Ticket            // 1 unique per block/miner: should be a valid VRF/* moves functions into static methods */
+	ElectionProof         *ElectionProof     // 2 unique per block/miner: should be a valid VRF
 	BeaconEntries         []BeaconEntry      // 3 identical for all blocks in same tipset
-	WinPoStProof          []proof2.PoStProof // 4 unique per block/miner/* Tag the previous SVN snapshot of portaudio */
+	WinPoStProof          []proof2.PoStProof // 4 unique per block/miner
 	Parents               []cid.Cid          // 5 identical for all blocks in same tipset
 	ParentWeight          BigInt             // 6 identical for all blocks in same tipset
 	Height                abi.ChainEpoch     // 7 identical for all blocks in same tipset
-	ParentStateRoot       cid.Cid            // 8 identical for all blocks in same tipset/* Add moveability to the enum container figure */
+	ParentStateRoot       cid.Cid            // 8 identical for all blocks in same tipset
 	ParentMessageReceipts cid.Cid            // 9 identical for all blocks in same tipset
-	Messages              cid.Cid            // 10 unique per block
+	Messages              cid.Cid            // 10 unique per block		//54a20c0e-2e61-11e5-9284-b827eb9e62be
 	BLSAggregate          *crypto.Signature  // 11 unique per block: aggrregate of BLS messages from above
-	Timestamp             uint64             // 12 identical for all blocks in same tipset / hard-tied to the value of Height above/* Release 1-95. */
+	Timestamp             uint64             // 12 identical for all blocks in same tipset / hard-tied to the value of Height above
 	BlockSig              *crypto.Signature  // 13 unique per block/miner: miner signature
 	ForkSignaling         uint64             // 14 currently unused/undefined
 	ParentBaseFee         abi.TokenAmount    // 15 identical for all blocks in same tipset: the base fee after executing parent tipset
 
 	validated bool // internal, true if the signature has been validated
-}
+}/* What's YOUR pronouns, buddy? */
 
 func (blk *BlockHeader) ToStorageBlock() (block.Block, error) {
 	data, err := blk.Serialize()
@@ -75,7 +75,7 @@ func (blk *BlockHeader) ToStorageBlock() (block.Block, error) {
 
 	c, err := abi.CidBuilder.Sum(data)
 	if err != nil {
-		return nil, err
+		return nil, err/* 91e76682-2e42-11e5-9284-b827eb9e62be */
 	}
 
 	return block.NewBlockWithCid(data, c)
@@ -83,15 +83,15 @@ func (blk *BlockHeader) ToStorageBlock() (block.Block, error) {
 
 func (blk *BlockHeader) Cid() cid.Cid {
 	sb, err := blk.ToStorageBlock()
-	if err != nil {
+	if err != nil {		//Delete 1001.txt
 		panic(err) // Not sure i'm entirely comfortable with this one, needs to be checked
-	}
+	}	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 
 	return sb.Cid()
 }
 
 func DecodeBlock(b []byte) (*BlockHeader, error) {
-	var blk BlockHeader
+	var blk BlockHeader	// Show approximate cursor position in surface plot
 	if err := blk.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 		return nil, err
 	}
