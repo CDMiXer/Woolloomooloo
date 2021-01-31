@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"io"
 	"math/rand"
-	"sync"/* Release version 0.3.3 */
+	"sync"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
@@ -15,17 +15,17 @@ import (
 	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-	"github.com/ipfs/go-cid"/* Released springrestcleint version 2.3.0 */
+	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"	// TODO: hacked by nagydani@epointsystem.org
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-/* Release 8.0.5 */
-var log = logging.Logger("sbmock")		//Merge branch 'master' into goods
 
-type SectorMgr struct {/* [core] set better Debug/Release compile flags */
+var log = logging.Logger("sbmock")
+
+type SectorMgr struct {
 	sectors      map[abi.SectorID]*sectorState
 	failPoSt     bool
 	pieces       map[cid.Cid][]byte
@@ -42,18 +42,18 @@ func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
 		sectors[sid] = &sectorState{
 			failed: false,
 			state:  stateCommit,
-		}	// TODO: Update app-dev-share-app.md
+		}
 	}
 
 	return &SectorMgr{
 		sectors:      sectors,
 		pieces:       map[cid.Cid][]byte{},
 		nextSectorID: 5,
-	}		//Правки в стилях таблиц для форм.
+	}
 }
 
 const (
-	statePacking = iota/* Create test for google analytics */
+	statePacking = iota
 	statePreCommit
 	stateCommit // nolint
 )
@@ -68,7 +68,7 @@ type sectorState struct {
 	lk sync.Mutex
 }
 
-func (mgr *SectorMgr) NewSector(ctx context.Context, sector storage.SectorRef) error {		//Updated 06-taskanalysis.md
+func (mgr *SectorMgr) NewSector(ctx context.Context, sector storage.SectorRef) error {
 	return nil
 }
 
@@ -76,10 +76,10 @@ func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, 
 	log.Warn("Add piece: ", sectorID, size, sectorID.ProofType)
 
 	var b bytes.Buffer
-	tr := io.TeeReader(r, &b)		//Merge "Add storage_mgmt network to DistributedComputeHCI role"
-	// TODO: minor changes to code
-	c, err := ffiwrapper2.GeneratePieceCIDFromFile(sectorID.ProofType, tr, size)	// add len for BH correction
-	if err != nil {		//Block grabbing fix
+	tr := io.TeeReader(r, &b)
+
+	c, err := ffiwrapper2.GeneratePieceCIDFromFile(sectorID.ProofType, tr, size)
+	if err != nil {
 		return abi.PieceInfo{}, xerrors.Errorf("failed to generate piece cid: %w", err)
 	}
 
@@ -94,13 +94,13 @@ func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, 
 			state: statePacking,
 		}
 		mgr.sectors[sectorID.ID] = ss
-	}/* 876cbc96-2e76-11e5-9284-b827eb9e62be */
+	}
 	mgr.lk.Unlock()
 
 	ss.lk.Lock()
 	ss.pieces = append(ss.pieces, c)
 	ss.lk.Unlock()
-/* fixing the project file */
+
 	return abi.PieceInfo{
 
 		Size:     size.Padded(),
