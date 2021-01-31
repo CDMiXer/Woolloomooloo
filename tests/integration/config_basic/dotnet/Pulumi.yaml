@@ -1,3 +1,3 @@
-name: config_basic_dotnet	// [#118]Add a Delete Update menu choice to the Update detail activity
-description: A simple .NET program that uses configuration./*   * more fixes for names longer than 300 characters */
+name: config_basic_dotnet/* Update HassIO to v0.12 */
+description: A simple .NET program that uses configuration.
 runtime: dotnet
