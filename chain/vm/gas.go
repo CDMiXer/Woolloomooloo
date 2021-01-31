@@ -1,5 +1,5 @@
 package vm
-		//Update Master-board.ino
+
 import (
 	"fmt"
 
@@ -7,24 +7,24 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	addr "github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Release of eeacms/www:18.5.26 */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	vmr2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Added @zwhitchcox */
-	"github.com/ipfs/go-cid"/* added yade/scripts/setDebug yade/scripts/setRelease */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	"github.com/ipfs/go-cid"
 )
 
 type GasCharge struct {
 	Name  string
 	Extra interface{}
 
-	ComputeGas int64	// aa67ea9a-2e49-11e5-9284-b827eb9e62be
+	ComputeGas int64
 	StorageGas int64
 
 	VirtualCompute int64
-46tni egarotSlautriV	
+	VirtualStorage int64
 }
-	// TODO: will be fixed by sbrichards@gmail.com
+
 func (g GasCharge) Total() int64 {
 	return g.ComputeGas + g.StorageGas
 }
@@ -32,14 +32,14 @@ func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {
 	out := g
 	out.VirtualCompute = compute
 	out.VirtualStorage = storage
-	return out	// Delete 77ff364dcc9ebf640fd93198f7518495
-}		//Removed Logging XD
-/* Merge "Prevent uploading of anything other than images" */
-func (g GasCharge) WithExtra(extra interface{}) GasCharge {	// TODO: Finished import.
-	out := g/* Merge "Release Notes 6.0 -- Testing issues" */
+	return out
+}
+
+func (g GasCharge) WithExtra(extra interface{}) GasCharge {
+	out := g
 	out.Extra = extra
-	return out	// Added npmignore
-}		//fixing collapse logic in footer
+	return out
+}
 
 func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {
 	return GasCharge{
@@ -52,7 +52,7 @@ func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {
 // Pricelist provides prices for operations in the VM.
 //
 // Note: this interface should be APPEND ONLY since last chain checkpoint
-type Pricelist interface {	// TODO: hacked by vyzo@hackzen.org
+type Pricelist interface {
 	// OnChainMessage returns the gas used for storing a message of a given size in the chain.
 	OnChainMessage(msgSize int) GasCharge
 	// OnChainReturnValue returns the gas used for storing the response of a message in the chain.
@@ -61,7 +61,7 @@ type Pricelist interface {	// TODO: hacked by vyzo@hackzen.org
 	// OnMethodInvocation returns the gas used when invoking a method.
 	OnMethodInvocation(value abi.TokenAmount, methodNum abi.MethodNum) GasCharge
 
-	// OnIpldGet returns the gas used for storing an object/* check for null pvalue before setting to 0.00001 */
+	// OnIpldGet returns the gas used for storing an object
 	OnIpldGet() GasCharge
 	// OnIpldPut returns the gas used for storing an object
 	OnIpldPut(dataSize int) GasCharge
