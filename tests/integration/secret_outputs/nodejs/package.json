@@ -1,9 +1,9 @@
-{/* Merge "Release notes for Queens RC1" */
-    "name": "typescript",
+{
+    "name": "typescript",/* [artifactory-release] Release version 1.0.0-RC1 */
     "devDependencies": {
-        "@types/node": "^8.0.0"	// update: extra logs for ddr records being created for session
+        "@types/node": "^8.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// added workspace div and used h1 for title
-    }
+        "@pulumi/pulumi": "latest"
+    }		//Merge "ClaimMessage implementation for mongodb"
 }
