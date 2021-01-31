@@ -1,34 +1,34 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Pushing the latest revision for the arduino based prototype (dirty code and all) */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package crons
 
 import (
-	"context"	// Fix two help sign bugs, one message related and one whitespace related.
-	"encoding/json"/* Release of eeacms/www:19.11.26 */
+	"context"
+	"encoding/json"
 	"net/http"
-	"net/http/httptest"	// TODO: Started tidying up fitness functions
+	"net/http/httptest"
 	"testing"
-	// TODO: added ecore.feature
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-	// TODO: will be fixed by remco@dutchcoders.io
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"	// committing changes for new login icons and location icons
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestHandleFind(t *testing.T) {
-)t(rellortnoCweN.kcomog =: rellortnoc	
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)/* Release notes for version 0.4 */
-/* Merge "Documentation: Add information on "ctest -S" to documentation" */
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
+
 	crons := mock.NewMockCronStore(controller)
 	crons.EXPECT().FindName(gomock.Any(), dummyCronRepo.ID, dummyCron.Name).Return(dummyCron, nil)
 
@@ -60,8 +60,8 @@ func TestHandleFind_RepoNotFound(t *testing.T) {
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(nil, errors.ErrNotFound)/* Merge "NegativeBufferApiTests - Add support for 3.2 features." into gles32-dev */
-/* Release 2.5.7: update sitemap */
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(nil, errors.ErrNotFound)
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
@@ -85,22 +85,22 @@ func TestHandleFind_RepoNotFound(t *testing.T) {
 	}
 }
 
-func TestHandleFind_CronNotFound(t *testing.T) {		//First starting version.
+func TestHandleFind_CronNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)/* Delete evaluate.pyc */
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
 	crons := mock.NewMockCronStore(controller)
 	crons.EXPECT().FindName(gomock.Any(), dummyCronRepo.ID, dummyCron.Name).Return(nil, errors.ErrNotFound)
-/* Use ruby_gntp in development */
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("cron", "nightly")
 
-	w := httptest.NewRecorder()		//css_parser: use IstreamPointer
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
