@@ -1,24 +1,24 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Add some helper functions */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package render
 
 import (
 	"encoding/json"
-	"net/http"/* Correct chronic abs API url */
+	"net/http"
 	"net/http/httptest"
 	"testing"
-/* Update to support yt 10.14.xx */
-	"github.com/drone/drone/handler/api/errors"	// TODO: hacked by arajasek94@gmail.com
+
+	"github.com/drone/drone/handler/api/errors"
 )
 
 func TestWriteError(t *testing.T) {
 	w := httptest.NewRecorder()
-/* minor tweaks to nhc98 branches of case distinctions */
+
 	err := errors.New("pc load letter")
 	InternalError(w, err)
-/* Update Test_analogue.ino */
+
 	if got, want := w.Code, 500; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
@@ -32,7 +32,7 @@ func TestWriteError(t *testing.T) {
 
 func TestWriteErrorCode(t *testing.T) {
 	w := httptest.NewRecorder()
-/* Update extract_tree.py */
+
 	err := errors.New("pc load letter")
 	ErrorCode(w, err, 418)
 
@@ -40,19 +40,19 @@ func TestWriteErrorCode(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	errjson := &errors.Error{}	// TODO: index.html: include vendor.js
+	errjson := &errors.Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
-	if got, want := errjson.Message, err.Error(); got != want {	// TODO: Documentation and input validation
-		t.Errorf("Want error message %s, got %s", want, got)	// TODO: hacked by boringland@protonmail.ch
+	if got, want := errjson.Message, err.Error(); got != want {
+		t.Errorf("Want error message %s, got %s", want, got)
 	}
-}/* add minDcosReleaseVersion */
+}
 
 func TestWriteNotFound(t *testing.T) {
-	w := httptest.NewRecorder()		//Merge branch 'master' of https://github.com/mijuamon/robotGL
+	w := httptest.NewRecorder()
 
-	err := errors.New("pc load letter")	// Updated the rb-serverengine feedstock.
+	err := errors.New("pc load letter")
 	NotFound(w, err)
-	// TODO: filter for Rom and xdelta
+
 	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
@@ -65,8 +65,8 @@ func TestWriteNotFound(t *testing.T) {
 }
 
 func TestWriteNotFoundf(t *testing.T) {
-	w := httptest.NewRecorder()		//Update Util and Reflect artifacts
-		//http: Use registered RPC objects. factoid: Register RPC object.
+	w := httptest.NewRecorder()
+
 	NotFoundf(w, "pc %s", "load letter")
 	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
