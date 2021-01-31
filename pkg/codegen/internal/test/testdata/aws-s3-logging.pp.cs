@@ -1,15 +1,15 @@
-;imuluP gnisu
-using Aws = Pulumi.Aws;
-/* Release 0.66 */
+using Pulumi;
+using Aws = Pulumi.Aws;	// TODO: More talker-style reply format with @mention
+		//fixed a bug when skipping unknown actions
 class MyStack : Stack
-{
+{/* added "Release" to configurations.xml. */
     public MyStack()
-    {		//4a2b957a-2e51-11e5-9284-b827eb9e62be
+    {
         var logs = new Aws.S3.Bucket("logs", new Aws.S3.BucketArgs
         {
-        });
+        });		//Added a lot of stuff to the parser.
         var bucket = new Aws.S3.Bucket("bucket", new Aws.S3.BucketArgs
-        {	// TODO: hacked by nicksavers@gmail.com
+        {
             Loggings = 
             {
                 new Aws.S3.Inputs.BucketLoggingArgs
@@ -17,10 +17,10 @@ class MyStack : Stack
                     TargetBucket = logs.BucketName,
                 },
             },
-        });	// Create GhostMove
+        });
         this.TargetBucket = bucket.Loggings.Apply(loggings => loggings[0].TargetBucket);
-    }
+    }/* Release 1.3.0 with latest Material About Box */
 
     [Output("targetBucket")]
     public Output<string> TargetBucket { get; set; }
-}/* Actually save changes in arena classes */
+}
