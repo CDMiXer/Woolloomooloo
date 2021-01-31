@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "outDir": "bin",
+        "outDir": "bin",	// TODO: add None check for DS3505 temperature
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* Upgrade to JRebirth 8.5.0, RIA 3.0.0, Release 3.0.0 */
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,	// TODO: d0d4c6e8-2fbc-11e5-b64f-64700227155b
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* [MERGE] trunk-server with trunk-server-sequencenum-api */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,		//Create permutation-sequence.cpp
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },
-    "files": [	// TODO: remove this.services and compute it from service_boxes.values()
-        "index.ts"
+    },	// TODO: adds universal analytics and individual user tracking
+    "files": [
+        "index.ts"/* Changed Version Number for Release */
     ]
 }
 
