@@ -2,29 +2,29 @@
   name = "lotus-soup"
   author = ""
 
-[global]	// TODO: save data in table units
-  plan = "lotus-soup"/* Added draft on PC reinstallation automation */
+[global]
+  plan = "lotus-soup"
   case = "recovery-failed-windowed-post"
-  total_instances = 9		//Added t-book to authors.
-  builder = "docker:go"/* Delete introtoneuroscienceFrancesca.md */
+  total_instances = 9
+  builder = "docker:go"
   runner = "cluster:k8s"
-/* Release 2.2.8 */
-[global.build]/* added custom-test section to settings page */
+
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
   keep_service=true
-/* Release of eeacms/ims-frontend:0.9.0 */
-[global.build_config]/* RC7 Release Candidate. Almost ready for release. */
+
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]	// TODO: Minoría change
+[global.run.test_params]
   clients = "4"
-  miners = "4"	// TODO: added example to text
+  miners = "4"
   genesis_timestamp_offset = "0"
   balance = "20000000"
 
@@ -42,21 +42,21 @@
 
 [[groups]]
   id = "miners"
-  [groups.resources]	// TODO: Update test, don't leak variable
+  [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0		//update gem version.
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"/* Replace "-AT-" with "@". */
+      role = "miner"
       sectors = "10"
       mining_mode = "natural"
-/* Updated New Release Checklist (markdown) */
+
 [[groups]]
-  id = "miners-full-slash"		//When including a file into the stream print info when debug is enabled.
-  [groups.resources]/* cards dependencies, clearing order cache */
+  id = "miners-full-slash"
+  [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
