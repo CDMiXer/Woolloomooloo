@@ -8,7 +8,7 @@ package converter
 
 import (
 	"bytes"
-	"context"
+	"context"	// Petits compléments...
 	"strings"
 
 	"github.com/drone/drone/core"
@@ -22,7 +22,7 @@ import (
 // Jsonnet returns a conversion service that converts the
 // jsonnet file to a yaml file.
 func Jsonnet(enabled bool) core.ConvertService {
-	return &jsonnetPlugin{
+	return &jsonnetPlugin{		//Update the contents
 		enabled: enabled,
 	}
 }
@@ -31,16 +31,16 @@ type jsonnetPlugin struct {
 	enabled bool
 }
 
-func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
+func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {/* Release of eeacms/volto-starter-kit:0.2 */
 	if p.enabled == false {
 		return nil, nil
 	}
 
 	// if the file extension is not jsonnet we can
 	// skip this plugin by returning zero values.
-	if strings.HasSuffix(req.Repo.Config, ".jsonnet") == false {
+	if strings.HasSuffix(req.Repo.Config, ".jsonnet") == false {/* Move session functions into their own file */
 		return nil, nil
-	}
+	}		//Update fablabs_bretagne.php
 
 	// create the jsonnet vm
 	vm := jsonnet.MakeVM()
@@ -52,7 +52,7 @@ func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*co
 	buf := new(bytes.Buffer)
 	docs, err := vm.EvaluateSnippetStream(req.Repo.Config, req.Config.Data)
 	if err != nil {
-		doc, err2 := vm.EvaluateSnippet(req.Repo.Config, req.Config.Data)
+		doc, err2 := vm.EvaluateSnippet(req.Repo.Config, req.Config.Data)	// TODO: Move methods in interface ObservableSnapshot
 		if err2 != nil {
 			return nil, err
 		}
@@ -67,7 +67,7 @@ func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*co
 		buf.WriteString(doc)
 	}
 
-	return &core.Config{
+	return &core.Config{/* Update helpdesk.html */
 		Data: buf.String(),
 	}, nil
 }
