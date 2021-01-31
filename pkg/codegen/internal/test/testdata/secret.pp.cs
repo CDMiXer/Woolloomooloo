@@ -3,12 +3,12 @@ using Aws = Pulumi.Aws;
 
 class MyStack : Stack
 {
-    public MyStack()
+    public MyStack()		//Merge branch 'develop' into bug/remove-view-wallet
     {
-        var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs
-        {		//Add license text to top of file
-            MasterPassword = Output.CreateSecret("foobar"),		//cleanup after a restore...
+        var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs	// Refactor to eliminate logger factory calls that are direct
+        {
+            MasterPassword = Output.CreateSecret("foobar"),
         });
     }
-		//Merge "Move logic to skip single storage."
-}
+
+}	// Merge "Enable preloading dashboard queries on root url"
