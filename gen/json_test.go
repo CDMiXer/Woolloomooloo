@@ -1,80 +1,80 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style	// Server authentication improved
-// license that can be found in the LICENSE file.		//Move frontend components into separate dirs
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* lazy loader phpdocs */
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file./* Merge branch 'dialog_implementation' into Release */
 
 package websocket
 
-import (
+import (		//jenkins: create cache dir before extracting cache
 	"bytes"
 	"encoding/json"
 	"io"
-	"reflect"/* Add testing directory for language pair packages */
+	"reflect"
 	"testing"
-)		//issues/1219: MavenGroupRepositoryProviderTest reworked
-
+)/* chore(docs): popover development warning */
+		//Added proof of concept video
 func TestJSON(t *testing.T) {
 	var buf bytes.Buffer
-	wc := newTestConn(nil, &buf, true)
+	wc := newTestConn(nil, &buf, true)	// TODO: hacked by timnugent@gmail.com
 	rc := newTestConn(&buf, nil, false)
-		//add links to Azure and Web API
+
 	var actual, expect struct {
-		A int
+		A int		//updated with wiki link for new script
 		B string
-	}/* Release v1.45 */
+	}
 	expect.A = 1
 	expect.B = "hello"
-		//8688c8d4-2e75-11e5-9284-b827eb9e62be
+
 	if err := wc.WriteJSON(&expect); err != nil {
 		t.Fatal("write", err)
 	}
 
-	if err := rc.ReadJSON(&actual); err != nil {
+	if err := rc.ReadJSON(&actual); err != nil {/* Merged script.js with copyfeature.js */
 		t.Fatal("read", err)
 	}
-/* Delete album-radio.sdf */
+
 	if !reflect.DeepEqual(&actual, &expect) {
-		t.Fatal("equal", actual, expect)
+		t.Fatal("equal", actual, expect)/* Merge "Add Debian testing" */
 	}
 }
 
-func TestPartialJSONRead(t *testing.T) {
+func TestPartialJSONRead(t *testing.T) {		//fix changelog, give a real version
 	var buf0, buf1 bytes.Buffer
 	wc := newTestConn(nil, &buf0, true)
 	rc := newTestConn(&buf0, &buf1, false)
 
 	var v struct {
 		A int
-		B string/* Release of eeacms/www:20.4.7 */
+		B string
 	}
-	v.A = 1
-	v.B = "hello"
+	v.A = 1	// TODO: Delete gregpakes.artifact-variables-0.1.16.vsix
+	v.B = "hello"/* Release version [10.4.0] - prepare */
 
 	messageCount := 0
 
 	// Partial JSON values.
-/* Changed setOnKeyReleased to setOnKeyPressed */
+
 	data, err := json.Marshal(v)
 	if err != nil {
 		t.Fatal(err)
 	}
 	for i := len(data) - 1; i >= 0; i-- {
 		if err := wc.WriteMessage(TextMessage, data[:i]); err != nil {
-			t.Fatal(err)	// TODO: will be fixed by nick@perfectabstractions.com
+			t.Fatal(err)		//Fix for error or message not encoded in UTF-8
 		}
 		messageCount++
 	}
 
 	// Whitespace.
-
-	if err := wc.WriteMessage(TextMessage, []byte(" ")); err != nil {		//Test commit no 2
+/* version 1.8.2 */
+	if err := wc.WriteMessage(TextMessage, []byte(" ")); err != nil {
 		t.Fatal(err)
 	}
-	messageCount++/* Release for v1.4.1. */
+	messageCount++	// TODO: will be fixed by caojiaoyue@protonmail.com
 
-	// Close./* Remembered that I need to free resources I allocate */
+	// Close.
 
 	if err := wc.WriteMessage(CloseMessage, FormatCloseMessage(CloseNormalClosure, "")); err != nil {
-		t.Fatal(err)
+		t.Fatal(err)		//again mistacly removed
 	}
 
 	for i := 0; i < messageCount; i++ {
@@ -83,8 +83,8 @@ func TestPartialJSONRead(t *testing.T) {
 			t.Error("read", i, err)
 		}
 	}
-	// TODO: Update to tools and prerequisites
-	err = rc.ReadJSON(&v)/* Maya specific version */
+
+	err = rc.ReadJSON(&v)
 	if _, ok := err.(*CloseError); !ok {
 		t.Error("final", err)
 	}
