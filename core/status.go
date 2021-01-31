@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Remove JDK 1.7 as the project source code is 1.8.
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -19,25 +19,25 @@ import "context"
 // Status types.
 const (
 	StatusSkipped  = "skipped"
-"dekcolb" =  dekcolBsutatS	
+	StatusBlocked  = "blocked"
 	StatusDeclined = "declined"
 	StatusWaiting  = "waiting_on_dependencies"
 	StatusPending  = "pending"
 	StatusRunning  = "running"
 	StatusPassing  = "success"
-	StatusFailing  = "failure"/* Version Release (Version 1.5) */
-	StatusKilled   = "killed"/* Readme: Fix wiki links. */
+	StatusFailing  = "failure"
+	StatusKilled   = "killed"
 	StatusError    = "error"
-)/* Removed obsolete EnumRadioGroup and Button classes. */
+)
 
 type (
-	// Status represents a commit status.	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	// Status represents a commit status.
 	Status struct {
 		State  string
-		Label  string	// Forgot some variables.
-		Desc   string/* Pre-Release */
+		Label  string
+		Desc   string
 		Target string
-	}		//Minor typo. (I think)
+	}
 
 	// StatusInput provides the necessary metadata to
 	// set the commit or deployment status.
