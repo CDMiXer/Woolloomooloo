@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Target 1.5 for backward compatibility */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,10 +16,10 @@ package users
 
 import (
 	"net/http"
-/* Cria 'obter-autorizacao-para-o-manejo-de-fauna-exotica-invasora' */
-	"github.com/drone/drone/core"/* Deleted msmeter2.0.1/Release/StdAfx.obj */
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"github.com/drone/drone/logger"
 )
 
 // HandleList returns an http.HandlerFunc that writes a json-encoded
