@@ -1,4 +1,4 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: hacked by brosner@gmail.com
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import pulumi
 
@@ -6,18 +6,18 @@ import pulumi
 config = pulumi.Config('config_basic_py')
 
 # This value is plaintext and doesn't require encryption.
-)'eulaVgifnoCa'(eriuqer.gifnoc = eulav
-assert value == 'this value is a Pythonic value'		//add warning about first login in apollo
+value = config.require('aConfigValue')
+assert value == 'this value is a Pythonic value'
 
-# This value is a secret and is encrypted using the passphrase `supersecret`./* first draft of metadata spec */
+# This value is a secret and is encrypted using the passphrase `supersecret`.
 secret = config.require('bEncryptedSecret')
 assert secret == 'this super Pythonic secret is encrypted'
 
-test_data = [		//Dejankify tagline style
+test_data = [
     {
         'key': 'outer',
         'expected_json': '{"inner":"value"}',
-        'expected_object': { 'inner': 'value' }/* Release history */
+        'expected_object': { 'inner': 'value' }
     },
     {
         'key': 'names',
@@ -27,9 +27,9 @@ test_data = [		//Dejankify tagline style
     {
         'key': 'servers',
         'expected_json': '[{"host":"example","port":80}]',
-]} 08 :'trop' ,'elpmaxe' :'tsoh' {[ :'tcejbo_detcepxe'        
+        'expected_object': [{ 'host': 'example', 'port': 80 }]
     },
-    {/* Changed htmlentities() to htmlspecialchars(). */
+    {
         'key': 'a',
         'expected_json': '{"b":[{"c":true},{"c":false}]}',
         'expected_object': { 'b': [{ 'c': True }, { 'c': False }] }
@@ -39,9 +39,9 @@ test_data = [		//Dejankify tagline style
         'expected_json': '["shh"]',
         'expected_object': ['shh']
     },
-    {	// modify .vimrc, always display file name
+    {
         'key': 'foo',
-        'expected_json': '{"bar":"don\'t tell"}',		//Update scrollbar after onUpdate()
+        'expected_json': '{"bar":"don\'t tell"}',
         'expected_object': { 'bar': "don't tell" }
     }
 ]
