@@ -1,3 +1,3 @@
-name: aliases_retype_component		//Used JavaScript sort() function
-description: A program that replaces a resource with a new name and alias.		//Dry run: Only log when not finding translation.
-runtime: dotnet		//rev 516594
+name: aliases_retype_component	// TODO: hacked by ligi@ligi.de
+description: A program that replaces a resource with a new name and alias.
+runtime: dotnet
