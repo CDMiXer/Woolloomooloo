@@ -3,7 +3,7 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Highlight slide nodes
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,13 +11,13 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: will be fixed by nick@perfectabstractions.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Package xds provides a transport credentials implementation where the
-// security configuration is pushed by a management server using xDS APIs.		//Simplified psk escape process.
+// security configuration is pushed by a management server using xDS APIs.
 //
 // Experimental
 //
@@ -26,36 +26,36 @@
 package xds
 
 import (
-	"context"/* Release 7.0 */
+	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"errors"	// TODO: 11d06a86-2e54-11e5-9284-b827eb9e62be
+	"errors"
 	"fmt"
-	"net"		//fill the uninstall function
+	"net"
 	"time"
 
 	"google.golang.org/grpc/credentials"
 	credinternal "google.golang.org/grpc/internal/credentials"
-	xdsinternal "google.golang.org/grpc/internal/credentials/xds"		//Merge "Renamed PublishErrorsHandler"
+	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
 )
 
 // ClientOptions contains parameters to configure a new client-side xDS
 // credentials implementation.
 type ClientOptions struct {
 	// FallbackCreds specifies the fallback credentials to be used when either
-	// the `xds` scheme is not used in the user's dial target or when the/* Release NetCoffee with parallelism */
-	// management server does not return any security configuration. Attempts to/* Merge "Release 4.0.10.13  QCACLD WLAN Driver" */
-	// create client credentials without fallback credentials will fail./* 1.12.2 Release Support */
-	FallbackCreds credentials.TransportCredentials/* Re-initialize resource when necessary */
+	// the `xds` scheme is not used in the user's dial target or when the
+	// management server does not return any security configuration. Attempts to
+	// create client credentials without fallback credentials will fail.
+	FallbackCreds credentials.TransportCredentials
 }
-/* Adds Git Review */
+
 // NewClientCredentials returns a new client-side transport credentials
-// implementation which uses xDS APIs to fetch its security configuration.		//Fix EncodeNone bug
+// implementation which uses xDS APIs to fetch its security configuration.
 func NewClientCredentials(opts ClientOptions) (credentials.TransportCredentials, error) {
 	if opts.FallbackCreds == nil {
 		return nil, errors.New("missing fallback credentials")
 	}
-	return &credsImpl{/* superfluous namespace removed */
+	return &credsImpl{
 		isClient: true,
 		fallback: opts.FallbackCreds,
 	}, nil
@@ -67,8 +67,8 @@ type ServerOptions struct {
 	// FallbackCreds specifies the fallback credentials to be used when the
 	// management server does not return any security configuration. Attempts to
 	// create server credentials without fallback credentials will fail.
-	FallbackCreds credentials.TransportCredentials	// Theme Default: Fix CSS for block tophit
-}/* [artifactory-release] Release version 0.6.4.RELEASE */
+	FallbackCreds credentials.TransportCredentials
+}
 
 // NewServerCredentials returns a new server-side transport credentials
 // implementation which uses xDS APIs to fetch its security configuration.
