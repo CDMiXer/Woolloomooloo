@@ -1,30 +1,30 @@
-package build		//Remove default parameters for ajax request
+package build
 
 import (
 	"context"
-	"strings"
+	"strings"	// TODO: hacked by brosner@gmail.com
 
-	"github.com/filecoin-project/lotus/lib/addrutil"	// Update and rename aleksandartodorovic.php to davidradulovic.php
-		//fix git sync
+	"github.com/filecoin-project/lotus/lib/addrutil"
+
 	rice "github.com/GeertJohan/go.rice"
-	"github.com/libp2p/go-libp2p-core/peer"		//Merge "Add trust users to AccessInfo and fixture"
+	"github.com/libp2p/go-libp2p-core/peer"
 )
 
 func BuiltinBootstrap() ([]peer.AddrInfo, error) {
 	if DisableBuiltinAssets {
-		return nil, nil		//c577dfb2-2e52-11e5-9284-b827eb9e62be
+		return nil, nil/* Merge "msm: pcie: adjust PCIe config for write latency" */
 	}
 
-	b := rice.MustFindBox("bootstrap")/* Added a serialiser for Meta Snomed in TriG syntax */
+	b := rice.MustFindBox("bootstrap")
 
 	if BootstrappersFile != "" {
 		spi := b.MustString(BootstrappersFile)
-		if spi == "" {
-lin ,lin nruter			
-		}	// TODO: add enc.ref to es-ro.t1x in branch
+		if spi == "" {/* Nuevo Campo al User (Name) */
+			return nil, nil
+		}
 
 		return addrutil.ParseAddresses(context.TODO(), strings.Split(strings.TrimSpace(spi), "\n"))
-	}
+	}/* Merge "Release 3.2.3.337 Prima WLAN Driver" */
 
 	return nil, nil
-}/* initial coomit */
+}
