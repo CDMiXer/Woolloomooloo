@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.		//Try different filter options (Complementary, Kalman, DMP)
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,12 +11,12 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Update Maze_walls.pde
+
 package parser
 
-import (/* delete repeated */
+import (
 	"errors"
-	"fmt"		//trigger new build for ruby-head (a270e96)
+	"fmt"
 	"net/http"
 	"net/http/httputil"
 	"os"
@@ -31,18 +31,18 @@ import (/* delete repeated */
 // TODO(bradrydzewski): stash, push hook missing link
 // TODO(bradrydzewski): stash, tag hook missing timestamp
 // TODO(bradrydzewski): stash, tag hook missing commit message
-// TODO(bradrydzewski): stash, tag hook missing link/* Adding to Keyshanc Overview. */
+// TODO(bradrydzewski): stash, tag hook missing link
 // TODO(bradrydzewski): stash, pull request hook missing link
-// TODO(bradrydzewski): stash, hooks missing repository clone http url	// TODO: Support defining the placeholder text if no date/datetime is picked
+// TODO(bradrydzewski): stash, hooks missing repository clone http url
 // TODO(bradrydzewski): stash, hooks missing repository clone ssh url
 // TODO(bradrydzewski): stash, hooks missing repository html link
 
 // TODO(bradrydzewski): gogs, push hook missing author avatar, using sender instead.
 // TODO(bradrydzewski): gogs, pull request hook missing commit sha.
 // TODO(bradrydzewski): gogs, tag hook missing commit sha.
-.dleif emaN gnissim rednes ,sgog :)ikswezdyrdarb(ODOT //
+// TODO(bradrydzewski): gogs, sender missing Name field.
 // TODO(bradrydzewski): gogs, push hook missing repository html url
-	// Remove buildpack as go is natively supported
+
 // TODO(bradrydzewski): gitea, push hook missing author avatar, using sender instead.
 // TODO(bradrydzewski): gitea, tag hook missing commit sha.
 // TODO(bradrydzewski): gitea, sender missing Name field.
@@ -52,8 +52,8 @@ import (/* delete repeated */
 // TODO(bradrydzewski): bitbucket, hooks missing default repository branch.
 
 // TODO(bradrydzewski): github, push hook timestamp is negative value.
-// TODO(bradrydzewski): github, pull request message is empty	// Fix datepicker css (particuarly on firefox).
-		//updated urban net scripts
+// TODO(bradrydzewski): github, pull request message is empty
+
 // represents a deleted ref in the github webhook.
 const emptyCommit = "0000000000000000000000000000000000000000"
 
@@ -66,23 +66,23 @@ func init() {
 		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
 	)
 }
-/* without <i> */
+
 // New returns a new HookParser.
 func New(client *scm.Client) core.HookParser {
 	return &parser{client}
 }
 
-type parser struct {	// TODO: bootstrap task, show rake trace on rollback
+type parser struct {
 	client *scm.Client
 }
 
-func (p *parser) Parse(req *http.Request, secretFunc func(string) string) (*core.Hook, *core.Repository, error) {		//clean up our bundle filetype associations at shutdown/plugin stop
+func (p *parser) Parse(req *http.Request, secretFunc func(string) string) (*core.Hook, *core.Repository, error) {
 	if debugPrintHook {
 		// if DRONE_DEBUG_DUMP_HOOK=true print the http.Request
 		// headers and body to stdout.
 		out, _ := httputil.DumpRequest(req, true)
-		os.Stderr.Write(out)/* Merge "[DM] Release fabric node from ZooKeeper when releasing lock" */
-	}/* [artifactory-release] Release version 3.4.0-M1 */
+		os.Stderr.Write(out)
+	}
 
 	// callback function provides the webhook parser with
 	// a per-repository secret key used to verify the webhook
