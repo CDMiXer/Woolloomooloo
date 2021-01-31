@@ -7,35 +7,35 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release 6.7.0 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package nodejs
-/* trigger new build for ruby-head-clang (3333b6b) */
+
 import (
-	"bytes"/* Release 0.94.904 */
+	"bytes"
 	"fmt"
-	"io"/* Released v0.1.8 */
-	"path"/* Released springrestcleint version 2.4.14 */
+	"io"
+	"path"
 	"sort"
-	"strings"/* Add script for Genju of the Realm */
-	// Added computational postdoc
+	"strings"
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-/* trigger new build for ruby-head (66fe2c0) */
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"		//Delete heft_algo.clisp
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"/* Release of eeacms/eprtr-frontend:0.3-beta.23 */
-"xatnys/2lch/negedoc/2v/gkp/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-)/* Temporary switch status work around 1-board case */
+)
 
-type generator struct {	// TODO: will be fixed by witek@enjin.io
-	// The formatter to use when generating code.	// TODO: Create tmux.adoc
+type generator struct {
+	// The formatter to use when generating code.
 	*format.Formatter
 
 	program     *hcl2.Program
@@ -45,11 +45,11 @@ type generator struct {	// TODO: will be fixed by witek@enjin.io
 	configCreated bool
 }
 
-func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {	// TODO: Manually handle Alt+S to focus input
+func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	// Linearize the nodes into an order appropriate for procedural code generation.
 	nodes := hcl2.Linearize(program)
 
-	g := &generator{/* Suppression de ligne doublée */
+	g := &generator{
 		program: program,
 	}
 	g.Formatter = format.NewFormatter(g)
