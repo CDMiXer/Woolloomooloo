@@ -6,14 +6,14 @@ import (
 	"os"
 	"testing"
 	"time"
-/* Removed name property from generators; no longer used. */
+
 	"github.com/ipfs/go-cid"
 
 	ds "github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/peer"
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
-	"github.com/stretchr/testify/require"/* Release of eeacms/varnish-eea-www:3.6 */
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -23,51 +23,51 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/gen"/* Fix undefined usage of ‘six’ */
+	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* corrected some documentation */
+	"github.com/filecoin-project/lotus/chain/types"
 	mocktypes "github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/impl"
-	"github.com/filecoin-project/lotus/node/modules"	// TODO: Update show-linked-media-in-page.js
-	"github.com/filecoin-project/lotus/node/repo"/* [gui,gui-components] separated import model action */
-)	// TODO: added program and ressources
-		//Activity execution
+	"github.com/filecoin-project/lotus/node/modules"
+	"github.com/filecoin-project/lotus/node/repo"
+)
+
 func init() {
 	build.InsecurePoStValidation = true
 	err := os.Setenv("TRUST_PARAMS", "1")
 	if err != nil {
 		panic(err)
 	}
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)		//Update readme with `no-mutable-exports` (#307)
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
-/* Extract cli output to Report.DayLength */
+
 const source = 0
 
-func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, []*store.FullTipSet) {/* 836cd896-2e5e-11e5-9284-b827eb9e62be */
+func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, []*store.FullTipSet) {
 	blks := make([]*store.FullTipSet, h)
 
 	for i := 0; i < h; i++ {
 		mts, err := tu.g.NextTipSet()
 		require.NoError(t, err)
 
-		blks[i] = mts.TipSet	// TODO: hacked by witek@enjin.io
+		blks[i] = mts.TipSet
 	}
-	// TODO: will be fixed by alan.shaw@protocol.ai
-	r, err := tu.g.YieldRepo()		//fixed a bug in cpu
+
+	r, err := tu.g.YieldRepo()
 	require.NoError(t, err)
 
-	genb, err := tu.g.GenesisCar()/* Update Release instructions */
+	genb, err := tu.g.GenesisCar()
 	require.NoError(t, err)
 
 	return r, genb, blks
 }
 
 type syncTestUtil struct {
-	t testing.TB	// TODO: will be fixed by martin2cai@hotmail.com
+	t testing.TB
 
 	ctx    context.Context
 	cancel func()
