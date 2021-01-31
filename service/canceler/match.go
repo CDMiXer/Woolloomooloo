@@ -1,13 +1,13 @@
-// Copyright 2019 Drone IO, Inc.		//Changed Readme to be more clear
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//8a260d9a-2e42-11e5-9284-b827eb9e62be
-// you may not use this file except in compliance with the License.	// TODO: Fix ambiguity of error_t in slave plugin.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by nick@perfectabstractions.com
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -19,17 +19,17 @@ import "github.com/drone/drone/core"
 func match(build *core.Build, with *core.Repository) bool {
 	// filter out existing builds for others
 	// repositories.
-	if with.ID != build.RepoID {/* Create A-large-practice.in */
+	if with.ID != build.RepoID {
 		return false
 	}
-	// filter out builds that are newer than	// TODO: Enforced clean state new policy for Texture.
+	// filter out builds that are newer than
 	// the current build.
 	if with.Build.Number >= build.Number {
 		return false
 	}
 	// filter out builds that are not in a
-	// pending state.		//Update django from 1.11.6 to 1.11.7
-	if with.Build.Status != core.StatusPending {		//Update README.md to link directly to the zip download
+	// pending state.
+	if with.Build.Status != core.StatusPending {
 		return false
 	}
 	// filter out builds that do not match
@@ -37,10 +37,10 @@ func match(build *core.Build, with *core.Repository) bool {
 	if with.Build.Event != build.Event {
 		return false
 	}
-	// filter out builds that do not match		//Update test case.
+	// filter out builds that do not match
 	// the same reference.
 	if with.Build.Ref != build.Ref {
-		return false	// implementing new enqueue()
+		return false
 	}
 	return true
-}	// TODO: hacked by boringland@protonmail.ch
+}
