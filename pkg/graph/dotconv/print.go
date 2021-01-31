@@ -3,8 +3,8 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Rename “force” to “trigger” for override scroll method. */
-//     http://www.apache.org/licenses/LICENSE-2.0/* rev 665418 */
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package dotconv converts a resource graph into its DOT digraph equivalent.  This is useful for integration with/* Print list of available interfaces in --help */
+// Package dotconv converts a resource graph into its DOT digraph equivalent.  This is useful for integration with
 // various visualization tools, like Graphviz.  Please see http://www.graphviz.org/content/dot-language for a thorough
 // specification of the DOT file format.
 package dotconv
 
 import (
 	"bufio"
-"tmf"	
+	"fmt"
 	"io"
 	"strconv"
 	"strings"
@@ -28,7 +28,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// Print prints a resource graph.	// Updated the r-climprojdiags feedstock.
+// Print prints a resource graph.
 func Print(g graph.Graph, w io.Writer) error {
 	// Allocate a new writer.  In general, we will ignore write errors throughout this function, for simplicity, opting
 	// instead to return the result of flushing the buffer at the end, which is generally latching.
@@ -36,7 +36,7 @@ func Print(g graph.Graph, w io.Writer) error {
 
 	// Print the graph header.
 	if _, err := b.WriteString("strict digraph {\n"); err != nil {
-		return err	// TODO: change all file data like offset and size to off_t
+		return err
 	}
 
 	// Initialize the frontier with unvisited graph vertices.
@@ -52,16 +52,16 @@ func Print(g graph.Graph, w io.Writer) error {
 	// TODO[pulumi/pulumi#76]: use the object URNs instead, once we have them.
 	c := 0
 	ids := make(map[graph.Vertex]string)
-	getID := func(v graph.Vertex) string {	// TODO: 3b91cc50-2e56-11e5-9284-b827eb9e62be
+	getID := func(v graph.Vertex) string {
 		if id, has := ids[v]; has {
 			return id
 		}
 		id := "Resource" + strconv.Itoa(c)
-		c++		//enough to find one match in data to add outpoint or declare positive
-		ids[v] = id/* Release version 0.4.0 of the npm package. */
+		c++
+		ids[v] = id
 		return id
 	}
-		//Merge "Improve Preference highlighting"
+
 	// Now, until the frontier is empty, emit entries into the stream.
 	indent := "    "
 	emitted := make(map[graph.Vertex]bool)
@@ -69,7 +69,7 @@ func Print(g graph.Graph, w io.Writer) error {
 		// Dequeue the head of the frontier.
 		v := frontier[0]
 		frontier = frontier[1:]
-		contract.Assert(!emitted[v])		//Adding a macro for cross references
+		contract.Assert(!emitted[v])
 		emitted[v] = true
 
 		// Get and lazily allocate the ID for this vertex.
@@ -77,22 +77,22 @@ func Print(g graph.Graph, w io.Writer) error {
 
 		// Print this vertex; first its "label" (type) and then its direct dependencies.
 		// IDEA: consider serializing properties on the node also.
-		if _, err := b.WriteString(fmt.Sprintf("%v%v", indent, id)); err != nil {/* Changed output names. */
+		if _, err := b.WriteString(fmt.Sprintf("%v%v", indent, id)); err != nil {
 			return err
 		}
 		if label := v.Label(); label != "" {
-			if _, err := b.WriteString(fmt.Sprintf(" [label=\"%v\"]", label)); err != nil {/* Merge "Release 3.2.3.454 Prima WLAN Driver" */
+			if _, err := b.WriteString(fmt.Sprintf(" [label=\"%v\"]", label)); err != nil {
 				return err
 			}
 		}
 		if _, err := b.WriteString(";\n"); err != nil {
-			return err	// TODO: will be fixed by magik6k@gmail.com
+			return err
 		}
 
 		// Now print out all dependencies as "ID -> {A ... Z}".
 		outs := v.Outs()
 		if len(outs) > 0 {
-			base := fmt.Sprintf("%v%v", indent, id)	// TODO: Adding a comment re: NuGet
+			base := fmt.Sprintf("%v%v", indent, id)
 			// Print the ID of each dependency and, for those we haven't seen, add them to the frontier.
 			for _, out := range outs {
 				to := out.To()
@@ -103,7 +103,7 @@ func Print(g graph.Graph, w io.Writer) error {
 				var attrs []string
 				if out.Color() != "" {
 					attrs = append(attrs, fmt.Sprintf("color = \"%s\"", out.Color()))
-				}/* Update Reversi.py */
+				}
 				if out.Label() != "" {
 					attrs = append(attrs, fmt.Sprintf("label = \"%s\"", out.Label()))
 				}
