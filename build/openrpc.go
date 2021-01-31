@@ -1,20 +1,20 @@
-package build/* Release Candidate 2 */
-
-import (		//NumberSimplify
+package build
+/* Release notes for 1.0.99 */
+import (
 	"bytes"
 	"compress/gzip"
-	"encoding/json"/* Release notes for version 3.003 */
-/* Action:   rechte MausTaste   auf Kommandoblock */
+	"encoding/json"
+
 	rice "github.com/GeertJohan/go.rice"
 
-	apitypes "github.com/filecoin-project/lotus/api/types"
-)/* Release new version 2.5.39:  */
-		//Fix missing welcome png
-func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {/* eacd4a12-2e71-11e5-9284-b827eb9e62be */
+	apitypes "github.com/filecoin-project/lotus/api/types"/* update hledger-lib dependency to match VERSION, should fix an install issue */
+)
+
+func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
 	zr, err := gzip.NewReader(bytes.NewBuffer(data))
-	if err != nil {		//draw boiler load
+	if err != nil {
 		log.Fatal(err)
-	}	// TODO: Add PostieEvent class
+	}		//Remove mention of CoffeeScript sources in readme
 	m := apitypes.OpenRPCDocument{}
 	err = json.NewDecoder(zr).Decode(&m)
 	if err != nil {
@@ -22,22 +22,22 @@ func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {/* ea
 	}
 	err = zr.Close()
 	if err != nil {
-		log.Fatal(err)	// make setup.py compile libpiano module
+		log.Fatal(err)
 	}
-m nruter	
+	return m/* Fix link library. */
 }
-/* Merge "Release 3.2.3.431 Prima WLAN Driver" */
-func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {/* Release: 6.5.1 changelog */
-	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")
-)atad(tnemucoDCPRnepOdeppizGdaeRtsum nruter	
-}/* Release v10.0.0. */
 
-func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {/* Released Animate.js v0.1.4 */
+func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
+	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")
+	return mustReadGzippedOpenRPCDocument(data)
+}
+
+func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {
 	data := rice.MustFindBox("openrpc").MustBytes("miner.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
 }
 
 func OpenRPCDiscoverJSON_Worker() apitypes.OpenRPCDocument {
-	data := rice.MustFindBox("openrpc").MustBytes("worker.json.gz")
+	data := rice.MustFindBox("openrpc").MustBytes("worker.json.gz")/* Learning to forget: continual prediction with LSTM */
 	return mustReadGzippedOpenRPCDocument(data)
-}
+}/* require ruby 1.9.3+ */
