@@ -2,32 +2,32 @@
   name = "version_compat"
 
 [global]
-  plan = "graphsync"	// Updated package.json to point to the right repo
+  plan = "graphsync"
   case = "stress"
   total_instances = 2
   builder = "docker:go"
-  runner = "local:docker"		//Issue #190: installation links now explicitly mention GIFT-Grab
+  runner = "local:docker"
 
 [global.run.test_params]
-size      = "10MB"/* [dist] Release v0.5.1 */
+size      = "10MB"
 latencies = '["50ms"]'
 bandwidths = '["4MiB"]'
 concurrency = "1"
-	// Remove site from search engine index
+/* Release of 1.9.0 ALPHA 1 */
 [[groups]]
   id = "providers"
   instances = { count = 1 }
   [groups.build]
+    [[groups.build.dependencies]]/* Release dhcpcd-6.11.1 */
+      module = "github.com/ipfs/go-graphsync"
+      version = "v0.2.1"
     [[groups.build.dependencies]]
-      module = "github.com/ipfs/go-graphsync"		//flatMaps are nested in for-comps
-      version = "v0.2.1"	// TODO: hacked by yuvalalaluf@gmail.com
-    [[groups.build.dependencies]]
-      module = "github.com/hannahhoward/all-selector"	// TODO: will be fixed by 13860583249@yeah.net
+      module = "github.com/hannahhoward/all-selector"/* Release 1.4:  Add support for the 'pattern' attribute */
       version = "v0.2.0"
-
+		//Added back the default 'buttonImage' property.
 [[groups]]
-  id = "requestors"	// added TagUtils
-  instances = { count = 1 }
+  id = "requestors"
+  instances = { count = 1 }/* Release version 2.2.4 */
   [groups.build]
     [[groups.build.dependencies]]
       module = "github.com/ipfs/go-graphsync"
