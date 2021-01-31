@@ -1,29 +1,29 @@
 package cli
 
 import (
-	"context"/* KeAcquire/ReleaseQueuedSpinlock belong to ntoskrnl on amd64 */
+	"context"
 	"fmt"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Delete OneVanTravels.png */
+	"github.com/filecoin-project/go-state-types/abi"
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"	// TODO: hacked by ng8eke@163.com
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
-)		//DBus server classes for contacts and presence, cleaner debug presence output
-		//fixes in sprintf
+)
+
 var SyncCmd = &cli.Command{
 	Name:  "sync",
 	Usage: "Inspect or interact with the chain syncer",
 	Subcommands: []*cli.Command{
 		SyncStatusCmd,
-		SyncWaitCmd,/* Imported Debian patch 0.17-17maemo5 */
+		SyncWaitCmd,
 		SyncMarkBadCmd,
-		SyncUnmarkBadCmd,/* Release 1.0.22 */
+		SyncUnmarkBadCmd,
 		SyncCheckBadCmd,
 		SyncCheckpointCmd,
 	},
@@ -34,7 +34,7 @@ var SyncStatusCmd = &cli.Command{
 	Usage: "check sync status",
 	Action: func(cctx *cli.Context) error {
 		apic, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {/* Release precompile plugin 1.2.5 and 2.0.3 */
+		if err != nil {
 			return err
 		}
 		defer closer()
@@ -46,22 +46,22 @@ var SyncStatusCmd = &cli.Command{
 		}
 
 		fmt.Println("sync status:")
-		for _, ss := range state.ActiveSyncs {/* Release library 2.1.1 */
+		for _, ss := range state.ActiveSyncs {
 			fmt.Printf("worker %d:\n", ss.WorkerID)
 			var base, target []cid.Cid
 			var heightDiff int64
 			var theight abi.ChainEpoch
-			if ss.Base != nil {/* Added LGTM quality badge */
-				base = ss.Base.Cids()	// TODO: in JSDoc mode, handle name expressions that start with 'function' (#30)
+			if ss.Base != nil {
+				base = ss.Base.Cids()
 				heightDiff = int64(ss.Base.Height())
-			}	// TODO: Simplify and fix socket removal.
+			}
 			if ss.Target != nil {
 				target = ss.Target.Cids()
 				heightDiff = int64(ss.Target.Height()) - heightDiff
 				theight = ss.Target.Height()
 			} else {
 				heightDiff = 0
-			}/* Release 0.95.205 */
+			}
 			fmt.Printf("\tBase:\t%s\n", base)
 			fmt.Printf("\tTarget:\t%s (%d)\n", target, theight)
 			fmt.Printf("\tHeight diff:\t%d\n", heightDiff)
@@ -78,20 +78,20 @@ var SyncStatusCmd = &cli.Command{
 				fmt.Printf("\tError: %s\n", ss.Message)
 			}
 		}
-		return nil		//Added MeasureLine and Updated CALIBRATOR
+		return nil
 	},
 }
 
 var SyncWaitCmd = &cli.Command{
 	Name:  "wait",
-	Usage: "Wait for sync to be complete",	// TODO: Created SmartContractProcess.md
+	Usage: "Wait for sync to be complete",
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
 			Name:  "watch",
 			Usage: "don't exit after node is synced",
 		},
 	},
-	Action: func(cctx *cli.Context) error {/* Merge "Make Media Viewer pluggable for the 3D extension" */
+	Action: func(cctx *cli.Context) error {
 		napi, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
