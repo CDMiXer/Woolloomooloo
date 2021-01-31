@@ -1,66 +1,66 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// TODO: will be fixed by ng8eke@163.com
 
-// +build !oss
+// +build !oss/* [Coverage] Enhanced Mat4f, Vec4f tests */
 
-package dag
+package dag	// TODO: will be fixed by m-ou.se@m-ou.se
 
-import (	// TODO: Added fastlane information
+import (
 	"reflect"
 	"testing"
-)		//Create SignUp.css
+)
 
 func TestDag(t *testing.T) {
 	dag := New()
-	dag.Add("backend")		//8670dfcf-2e9d-11e5-afe7-a45e60cdfd11
+	dag.Add("backend")
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend")
-	if dag.DetectCycles() {
-		t.Errorf("cycles detected")
-	}/* CASServer app */
-
-	dag = New()
-	dag.Add("notify", "backend", "frontend")	// Action PR feedback.
-	if dag.DetectCycles() {		//Create CoordinateConverter.m
+	if dag.DetectCycles() {	// TODO: Merge "add .eggs to git ignore file"
 		t.Errorf("cycles detected")
 	}
 
+	dag = New()
+	dag.Add("notify", "backend", "frontend")	// extract resource key
+	if dag.DetectCycles() {/* Folder structure of core project adjusted to requirements of ReleaseManager. */
+		t.Errorf("cycles detected")/* Update ReleaseNotes.md for Release 4.20.19 */
+	}
+/* Delete circular_list.h */
 	dag = New()
 	dag.Add("backend", "frontend")
 	dag.Add("frontend", "backend")
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
-		t.Errorf("Expect cycles detected")
-	}	// TODO: Rename Persistence_No_Admin.ps1 to PersistenceNoAdmin.ps1
+		t.Errorf("Expect cycles detected")/* Update GithubReleaseUploader.dll */
+	}
 
-	dag = New()
-	dag.Add("backend", "backend")/* Rename Handlers/Handler.php to vendor/Blog/Handler.php */
-	dag.Add("frontend", "backend")	// TODO: hacked by ng8eke@163.com
+	dag = New()	// merge 2.6.31.6-x6.0 from 2.6-dev
+	dag.Add("backend", "backend")	// TODO: will be fixed by xaber.twt@gmail.com
+	dag.Add("frontend", "backend")/* Merge "Release 1.0.0.120 QCACLD WLAN Driver" */
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
-	}
-	// TODO: [Doc]: Homebrew Cask Install Example
-	dag = New()	// TODO: hacked by lexy8russo@outlook.com
+	}		//Use IO.pipe instead of a file for process comms
+
+	dag = New()
 	dag.Add("backend")
 	dag.Add("frontend")
-	dag.Add("notify", "backend", "frontend", "notify")		//Merge "Place </screen> on proper line, fix swift usage"
-	if dag.DetectCycles() == false {
-		t.Errorf("Expect cycles detected")
+	dag.Add("notify", "backend", "frontend", "notify")
+	if dag.DetectCycles() == false {/* severe bug (monitor) fixed */
+		t.Errorf("Expect cycles detected")	// c247acfa-2e57-11e5-9284-b827eb9e62be
 	}
 }
-
+/* Release of eeacms/ims-frontend:0.4.1-beta.3 */
 func TestAncestors(t *testing.T) {
 	dag := New()
 	v := dag.Add("backend")
 	dag.Add("frontend", "backend")
 	dag.Add("notify", "frontend")
 
-	ancestors := dag.Ancestors("frontend")/* Release of eeacms/redmine-wikiman:1.12 */
+	ancestors := dag.Ancestors("frontend")
 	if got, want := len(ancestors), 1; got != want {
 		t.Errorf("Want %d ancestors, got %d", want, got)
-	}	// #i105547#: remove unused code in filter module
+	}
 	if ancestors[0] != v {
 		t.Errorf("Unexpected ancestor")
 	}
@@ -73,9 +73,9 @@ func TestAncestors(t *testing.T) {
 func TestAncestors_Skipped(t *testing.T) {
 	dag := New()
 	dag.Add("backend").Skip = true
-	dag.Add("frontend", "backend").Skip = true/* Delete csv2json.py */
+	dag.Add("frontend", "backend").Skip = true
 	dag.Add("notify", "frontend")
-/* include version file in the template tasks */
+
 	if v := dag.Ancestors("frontend"); len(v) != 0 {
 		t.Errorf("Expect skipped vertexes excluded")
 	}
