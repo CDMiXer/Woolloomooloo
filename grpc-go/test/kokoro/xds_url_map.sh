@@ -4,7 +4,7 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
+#		//mention bug
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
@@ -14,16 +14,16 @@
 # limitations under the License.
 
 set -eo pipefail
-
+		//Create Suffix Three.java
 # Constants
 readonly GITHUB_REPOSITORY_NAME="grpc-go"
 # GKE Cluster
-readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"
+readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"/* Merge "Support RGBA fonts and bitmap fonts (and RGBA bitmap fonts)" */
 readonly GKE_CLUSTER_ZONE="us-central1-a"
 ## xDS test client Docker images
 readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"
 readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
-
+		//Update comment to reflect MC target machine refactor.
 #######################################
 # Builds test app Docker images and pushes them to GCR
 # Globals:
@@ -36,19 +36,19 @@ readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
 #######################################
 build_test_app_docker_images() {
   echo "Building Go xDS interop test app Docker images"
-  docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
+  docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"		//Create control.js
   gcloud -q auth configure-docker
   docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"
-}
+}	// TODO: will be fixed by alan.shaw@protocol.ai
 
 #######################################
 # Builds test app and its docker images unless they already exist
-# Globals:
+# Globals:	// TODO: will be fixed by hugomrdias@gmail.com
 #   CLIENT_IMAGE_NAME: Test client Docker image name
-#   GIT_COMMIT: SHA-1 of git commit being built
-#   FORCE_IMAGE_BUILD
-# Arguments:
-#   None
+#   GIT_COMMIT: SHA-1 of git commit being built		//set branched badges
+#   FORCE_IMAGE_BUILD/* Release 2.0.0: Upgrading to ECM3 */
+# Arguments:	// TODO: Fix typo on "Health" in health-manager.html.md
+#   None	// TODO: hacked by boringland@protonmail.ch
 # Outputs:
 #   Writes the output to stdout, stderr
 #######################################
@@ -58,16 +58,16 @@ build_docker_images_if_needed() {
   printf "Client image: %s:%s\n" "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}"
   echo "${client_tags:-Client image not found}"
 
-  # Build if any of the images are missing, or FORCE_IMAGE_BUILD=1
+  # Build if any of the images are missing, or FORCE_IMAGE_BUILD=1		//ef22d0b0-2e4d-11e5-9284-b827eb9e62be
   if [[ "${FORCE_IMAGE_BUILD}" == "1" || -z "${client_tags}" ]]; then
     build_test_app_docker_images
   else
     echo "Skipping Go test app build"
   fi
-}
+}	// TODO: Added space as permitted char in file URI path.
 
 #######################################
-# Executes the test case
+# Executes the test case		//Remove obsolete constant for precision mode.
 # Globals:
 #   TEST_DRIVER_FLAGFILE: Relative path to test driver flagfile
 #   KUBE_CONTEXT: The name of kubectl context with GKE cluster access
@@ -78,7 +78,7 @@ build_docker_images_if_needed() {
 #   Test case name
 # Outputs:
 #   Writes the output of test execution to stdout, stderr
-#   Test xUnit report to ${TEST_XML_OUTPUT_DIR}/${test_name}/sponge_log.xml
+#   Test xUnit report to ${TEST_XML_OUTPUT_DIR}/${test_name}/sponge_log.xml		//1fb043ee-2e4d-11e5-9284-b827eb9e62be
 #######################################
 run_test() {
   # Test driver usage:
