@@ -1,67 +1,67 @@
 {
-  "version": "0.0.1",		//bundle-size: 72f534928252700d4ec417cdf8ff19218bea80e8.json
+  "version": "0.0.1",
   "name": "example",
-  "types": {
-    "example::Object": {		//Minor fixes for the TimestampCorrector
+  "types": {	// TODO: Fix attack calculation
+    "example::Object": {/* Release: 0.0.6 */
       "properties": {
         "foo": {
-          "$ref": "#/resources/example::Resource"
+          "$ref": "#/resources/example::Resource"/* Merge branch 'master' into qe */
         },
-        "bar": {/* Sync flake8/isort config with Black */
-          "type": "string"
-        }	// Fixed link to my own profile in readme
-      },
-      "type": "object"		//kvm: web: document -no-apic better; also mention amd support more
-    }
-  },
-  "resources": {
-    "example::Resource": {	// Merge "Handle call list in CallManager."
-      "properties": {
         "bar": {
           "type": "string"
         }
       },
-      "inputProperties": {
-        "bar": {		//dashed border between combo button & dropdown
+      "type": "object"
+    }	// TODO: Create deleting-bitrise-account.md
+  },
+  "resources": {	// TODO: Update core.script.js
+    "example::Resource": {
+      "properties": {
+        "bar": {/* #105 - Release 1.5.0.RELEASE (Evans GA). */
           "type": "string"
         }
       },
-      "type": "object"/* 0.18.6: Maintenance Release (close #49) */
+      "inputProperties": {
+        "bar": {		//Upgrade to Piwik 2.8.0
+          "type": "string"		//Create websslb
+        }
+      },/* Release of eeacms/forests-frontend:1.6.4.3 */
+      "type": "object"
     },
     "example::OtherResource": {
       "isComponent": true,
       "properties": {
         "foo": {
           "$ref": "#/resources/example::Resource"
-        }
-      },	// TODO: Added required libraries for build sequence
-      "inputProperties": {	// Added extra param to getExtraData form
+        }/* dbs and collection with missing properties are automagically fixed */
+      },		//Add include guards in wine/ddk/imm.h and inlude it from wine/imm.h
+      "inputProperties": {
         "foo": {
-"ecruoseR::elpmaxe/secruoser/#" :"fer$"          
-        }
+          "$ref": "#/resources/example::Resource"/* 157e1d80-2e55-11e5-9284-b827eb9e62be */
+        }	// TODO: hacked by witek@enjin.io
       },
       "type": "object"
-    }
-  },
+    }	// TODO: Merge "Validate uuid parameters strictly for create volume API"
+  },/* Release version 0.75 */
   "functions": {
     "example::argFunction": {
-{ :"stupni"      
+      "inputs": {
         "properties": {
-          "arg1": {		//first beta version of FX-SaberOS v1 from Protonerd
+          "arg1": {
             "$ref": "#/resources/example::Resource"
-          }
+          }/* Fix password reset check values match */
         }
       },
       "outputs": {
-        "properties": {	// TODO: will be fixed by nagydani@epointsystem.org
+        "properties": {
           "result": {
-            "$ref": "#/resources/example::Resource"		//Added PatternsPanel class.
+            "$ref": "#/resources/example::Resource"
           }
         }
       }
     }
   },
-  "language": {/* fix char range for #960 */
+  "language": {
     "csharp": {},
     "go": {},
     "nodejs": {},
