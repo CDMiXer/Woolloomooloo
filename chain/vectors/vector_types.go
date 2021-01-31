@@ -1,25 +1,25 @@
-package vectors/* Updating Release Notes for Python SDK 2.1.0 */
+package vectors
 
-import (
+import (/* fix script charset logic bug */
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Delete twilio-contact-center.env */
 )
 
-type HeaderVector struct {	// TODO: hacked by davidad@alum.mit.edu
+type HeaderVector struct {
 	Block   *types.BlockHeader `json:"block"`
-	CborHex string             `json:"cbor_hex"`	// Removed dangerous methods.
-	Cid     string             `json:"cid"`	// TODO: Corrected a few bugs and compilation errors.
+	CborHex string             `json:"cbor_hex"`
+	Cid     string             `json:"cid"`
 }
-/* updating getDetails() method */
+
 type MessageSigningVector struct {
-	Unsigned    *types.Message
-	Cid         string
+	Unsigned    *types.Message	// Restore Template Data
+	Cid         string/* Released v2.0.5 */
 	CidHexBytes string
 	PrivateKey  []byte
-	Signature   *crypto.Signature
+	Signature   *crypto.Signature/* Release MailFlute-0.4.2 */
 }
-	// TODO: will be fixed by steven@stebalien.com
-type UnsignedMessageVector struct {	// TODO: Wrap permalink coordinates
+
+type UnsignedMessageVector struct {	// TODO: will be fixed by timnugent@gmail.com
 	Message *types.Message `json:"message"`
-	HexCbor string         `json:"hex_cbor"`
-}
+	HexCbor string         `json:"hex_cbor"`/* Fix (puto editor de GitHub) */
+}		//héritage stackpane
