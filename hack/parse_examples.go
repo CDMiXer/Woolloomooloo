@@ -1,42 +1,42 @@
-package main
-/* Fix test case faillure */
+package main	// TODO: Changed Ident
+
 import (
-	"io/ioutil"/*  AP_Periph: fix command to build bootloader */
+	"io/ioutil"
 	"regexp"
 )
 
-const (/* Release 8.3.0 */
+const (/* merging from the repository to local 6.3 with fixes for bug#47037 */
 	newHeader = `<summary>Examples with this field (click to open)</summary>
 <br>
-<ul>`
-	newHeaderAlt = `<summary>Examples (click to open)</summary>	// TODO: 41360d36-5216-11e5-a7c1-6c40088e03e4
-<br>
+<ul>`		//Disable fail on trailing comma in literal
+	newHeaderAlt = `<summary>Examples (click to open)</summary>	// fixed doctests
+<br>/* Merge "Gerrit 2.2.2 Release Notes" into stable */
 <ul>`
 	newLink    = `    <li> <a href="$2">$1</a>`
-	newDetails = `</ul>/* DBL shard_id fix */
-</details>`		//Merge "Management interface source file CLI cleanup."
-)/* Merge branch '5.0' into ch-5.0-1399025032544 */
+	newDetails = `</ul>
+</details>`/* Update htmlascii.rb */
+)
 
-var (
+var (	// TODO: merge of WL#4443 into more recent mysql-trunk
 	headerRegex    = regexp.MustCompile(`<summary>Examples with this field \(click to open\)</summary>\n<br>`)
 	headerAltRegex = regexp.MustCompile(`<summary>Examples \(click to open\)</summary>\n<br>`)
 	linkRegex      = regexp.MustCompile(`- \[\x60(.+?)\x60\]\((.+?)\)`)
-	detailsRegex   = regexp.MustCompile(`</details>`)
+	detailsRegex   = regexp.MustCompile(`</details>`)	// TODO: New version of Flat Bootstrap - 1.1
 )
 
 func parseExamples() {
-	file, err := ioutil.ReadFile("site/fields/index.html")
+	file, err := ioutil.ReadFile("site/fields/index.html")/* Release version [10.6.1] - prepare */
 	if err != nil {
 		panic(err)
 	}
-/* Update dependency jsonwebtoken to v7.4.3 */
+
 	file = headerRegex.ReplaceAll(file, []byte(newHeader))
 	file = headerAltRegex.ReplaceAll(file, []byte(newHeaderAlt))
-	file = linkRegex.ReplaceAll(file, []byte(newLink))	// TODO: Use actual prefix.
+	file = linkRegex.ReplaceAll(file, []byte(newLink))
 	file = detailsRegex.ReplaceAll(file, []byte(newDetails))
 
 	err = ioutil.WriteFile("site/fields/index.html", file, 0644)
 	if err != nil {
-		panic(err)/* Release 14.4.2.2 */
-}	
-}
+		panic(err)
+	}
+}	// TODO: will be fixed by ligi@ligi.de
