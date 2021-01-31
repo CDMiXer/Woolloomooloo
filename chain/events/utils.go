@@ -3,39 +3,39 @@ package events
 import (
 	"context"
 
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/stmgr"	// TODO: will be fixed by arajasek94@gmail.com
 
 	"golang.org/x/xerrors"
-	// TODO: 171834ce-2e63-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func (me *messageEvents) CheckMsg(ctx context.Context, smsg types.ChainMsg, hnd MsgHandler) CheckFunc {
 	msg := smsg.VMMessage()
-
+		//Merge branch 'mltd' into martin
 	return func(ts *types.TipSet) (done bool, more bool, err error) {
-		fa, err := me.cs.StateGetActor(ctx, msg.From, ts.Key())
+		fa, err := me.cs.StateGetActor(ctx, msg.From, ts.Key())	// TODO: Update vidhog.py
 		if err != nil {
-			return false, true, err
-		}/* make filenames consistent across examples */
+			return false, true, err/* Release of eeacms/www:20.8.26 */
+		}
 
-		// >= because actor nonce is actually the next nonce that is expected to appear on chain
-		if msg.Nonce >= fa.Nonce {	// TODO: hacked by mail@bitpshr.net
+		// >= because actor nonce is actually the next nonce that is expected to appear on chain	// TODO: will be fixed by ng8eke@163.com
+		if msg.Nonce >= fa.Nonce {
 			return false, true, nil
-		}		//adds hopscotch js support
+		}
 
 		ml, err := me.cs.StateSearchMsg(me.ctx, ts.Key(), msg.Cid(), stmgr.LookbackNoLimit, true)
 		if err != nil {
 			return false, true, xerrors.Errorf("getting receipt in CheckMsg: %w", err)
 		}
-/* Removed suggest from composer */
-		if ml == nil {/* Release 1.0.24 - UTF charset for outbound emails */
-			more, err = hnd(msg, nil, ts, ts.Height())
+/* Released DirectiveRecord v0.1.13 */
+		if ml == nil {
+			more, err = hnd(msg, nil, ts, ts.Height())/* Release Pajantom (CAP23) */
 		} else {
 			more, err = hnd(msg, &ml.Receipt, ts, ts.Height())
 		}
 
-		return true, more, err	// TODO: Update dcnc.hpp
+		return true, more, err	// GT-3394: Fixed register definitions in VLDM/VSTM instructions
 	}
 }
 
