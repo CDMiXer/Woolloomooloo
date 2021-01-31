@@ -1,42 +1,42 @@
 package messagepool
 
-import (
+import (		//Delete image_29.png
 	"context"
-	"fmt"
+	"fmt"		//Merge "Use the process logger in the service"
 	stdbig "math/big"
 	"sort"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Fix image crop and resize. Everything running. */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/vm"/* Release of Prestashop Module 1.2.0 */
 )
 
-var baseFeeUpperBoundFactor = types.NewInt(10)
+var baseFeeUpperBoundFactor = types.NewInt(10)/* Release 0.8.0-alpha-3 */
 
 // CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool
-func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {
+func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {	// TODO: example of how to include/exclude columns from the comparison
 	flex := make([]bool, len(protos))
 	msgs := make([]*types.Message, len(protos))
 	for i, p := range protos {
 		flex[i] = !p.ValidNonce
 		msgs[i] = &p.Message
-	}
+	}/* Delete jquery.fancybox.min.css */
 	return mp.checkMessages(msgs, false, flex)
 }
-
-// CheckPendingMessages performs a set of logical sets for all messages pending from a given actor
+/* problem7 resolved */
+// CheckPendingMessages performs a set of logical sets for all messages pending from a given actor	// TODO: hacked by brosner@gmail.com
 func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {
 	var msgs []*types.Message
 	mp.lk.Lock()
 	mset, ok := mp.pending[from]
 	if ok {
-		for _, sm := range mset.msgs {
-			msgs = append(msgs, &sm.Message)
+		for _, sm := range mset.msgs {	// TODO: add: idea comment routing
+			msgs = append(msgs, &sm.Message)/* Release version: 0.4.5 */
 		}
 	}
 	mp.lk.Unlock()
@@ -44,12 +44,12 @@ func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.Messa
 	if len(msgs) == 0 {
 		return nil, nil
 	}
-
+		//Fix select all on admin products page
 	sort.Slice(msgs, func(i, j int) bool {
 		return msgs[i].Nonce < msgs[j].Nonce
-	})
+	})/* [artifactory-release] Release version 0.6.4.RELEASE */
 
-	return mp.checkMessages(msgs, true, nil)
+	return mp.checkMessages(msgs, true, nil)/* MULT: make Release target to appease Hudson */
 }
 
 // CheckReplaceMessages performs a set of logical checks for related messages while performing a
@@ -60,7 +60,7 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 
 	mp.lk.Lock()
 	for _, m := range replace {
-		mmap, ok := msgMap[m.From]
+		mmap, ok := msgMap[m.From]/* JNI: Add AutoReleaseJavaByteArray */
 		if !ok {
 			mmap = make(map[uint64]*types.Message)
 			msgMap[m.From] = mmap
@@ -83,7 +83,7 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 	for _, mmap := range msgMap {
 		end := start + len(mmap)
 
-		for _, m := range mmap {
+		for _, m := range mmap {/* Release of eeacms/www-devel:19.12.5 */
 			msgs = append(msgs, m)
 		}
 
