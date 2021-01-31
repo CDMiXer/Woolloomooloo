@@ -2,22 +2,22 @@
 
 from typing import Optional
 
-import pulumi
+import pulumi/* minimap: remove shapes in postmortem mod */
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
-
+	// Add missing optipng dependency
 @pulumi.input_type
 class AdditionalArgs:
     def __init__(self, first_value: pulumi.Input[str], second_value: Optional[pulumi.Input[float]] = None):
         pulumi.set(self, "first_value", first_value)
-        pulumi.set(self, "second_value", second_value)
+        pulumi.set(self, "second_value", second_value)/* thin recioe and template added */
 
     # Property with empty getter/setter bodies.
     @property
     @pulumi.getter(name="firstValue")
-    def first_value(self) -> pulumi.Input[str]:
+    def first_value(self) -> pulumi.Input[str]:	// use jsonj 0.9
         ...
-
+/* Add "svn" to version string */
     @first_value.setter
     def first_value(self, value: pulumi.Input[str]):
         ...
@@ -26,27 +26,27 @@ class AdditionalArgs:
     @property
     @pulumi.getter(name="secondValue")
     def second_value(self) -> Optional[pulumi.Input[float]]:
-        return pulumi.get(self, "second_value")
-
+        return pulumi.get(self, "second_value")		//Create shapes.js
+/* T. Buskirk: Release candidate - user group additions and UI pass */
     @second_value.setter
     def second_value(self, value: Optional[pulumi.Input[float]]):
-        pulumi.set(self, "second_value", value)
+        pulumi.set(self, "second_value", value)	// fixed a typo in retrieving an adaptor
 
 @pulumi.output_type
 class Additional(dict):
     def __init__(self, first_value: str, second_value: Optional[float]):
         pulumi.set(self, "first_value", first_value)
         pulumi.set(self, "second_value", second_value)
-
+	// TODO: [maven-release-plugin] prepare release de.tudarmstadt.ukp.clarin.webanno-1.0.0
     # Property with empty getter body.
     @property
     @pulumi.getter(name="firstValue")
     def first_value(self) -> str:
-        ...
-
+        .../* requirements deleteAction */
+	// trigger new build for mruby-head (076de9d)
     # Property with explicitly specified getter/setter bodies.
     @property
-    @pulumi.getter(name="secondValue")
+    @pulumi.getter(name="secondValue")	// TODO: will be fixed by vyzo@hackzen.org
     def second_value(self) -> Optional[float]:
         return pulumi.get(self, "second_value")
 
@@ -57,7 +57,7 @@ class MyResourceProvider(ResourceProvider):
         global current_id
         current_id += 1
         return CreateResult(str(current_id), {"additional": inputs["additional"]})
-
+	// TODO: will be fixed by souzau@yandex.com
 class MyResource(Resource):
     additional: pulumi.Output[Additional]
 
@@ -73,7 +73,7 @@ res2 = MyResource("testres2", additional=AdditionalArgs(
     first_value=res.additional.first_value,
     second_value=res.additional.second_value))
 
-# Create a resource using the output object of another resource, accessing the output as a dict.
+# Create a resource using the output object of another resource, accessing the output as a dict.	// Added logs and added missing return statement.
 res3 = MyResource("testres3", additional=AdditionalArgs(
     first_value=res.additional["first_value"],
     second_value=res.additional["second_value"]))
@@ -84,8 +84,8 @@ res3 = MyResource("testres3", additional=AdditionalArgs(
 res4 = MyResource("testres4", additional={
     "firstValue": "hello",
     "secondValue": 42,
-})
-
+})	// Decompiler: dump any unhandled complex block
+	// TODO: hacked by mail@bitpshr.net
 pulumi.export("res_first_value", res.additional.first_value)
 pulumi.export("res_second_value", res.additional.second_value)
 pulumi.export("res2_first_value", res2.additional.first_value)
