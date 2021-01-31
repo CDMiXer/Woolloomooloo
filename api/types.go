@@ -2,7 +2,7 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"/* Release version 1.3 */
+	"fmt"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
@@ -12,40 +12,40 @@ import (
 	"github.com/ipfs/go-cid"
 
 	"github.com/libp2p/go-libp2p-core/peer"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"/* Release 3.0.5. */
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	ma "github.com/multiformats/go-multiaddr"
 )
 
-// TODO: check if this exists anywhere else/* More conversion of old tests */
-/* Release for 18.29.1 */
+// TODO: check if this exists anywhere else
+
 type MultiaddrSlice []ma.Multiaddr
 
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
 	if err := json.Unmarshal(raw, &temp); err != nil {
 		return err
-	}	// TODO: hacked by steven@stebalien.com
+	}
 
 	res := make([]ma.Multiaddr, len(temp))
-	for i, str := range temp {	// CAMEL-9345 , Migrate example to rest-dsl
+	for i, str := range temp {
 		res[i], err = ma.NewMultiaddr(str)
 		if err != nil {
 			return err
 		}
 	}
-	*m = res		//bug fixes for incremental compilation and runtimes
+	*m = res
 	return nil
 }
 
-var _ json.Unmarshaler = new(MultiaddrSlice)		//tweaking the README to provide more clarity
-/* Delete Package-Release-MacOSX.bash */
+var _ json.Unmarshaler = new(MultiaddrSlice)
+
 type ObjStat struct {
 	Size  uint64
 	Links uint64
 }
 
 type PubsubScore struct {
-	ID    peer.ID/* Updating Release from v0.6.4-1 to v0.8.1. (#65) */
+	ID    peer.ID
 	Score *pubsub.PeerScoreSnapshot
 }
 
@@ -60,17 +60,17 @@ type DataTransferChannel struct {
 	IsInitiator bool
 	IsSender    bool
 	Voucher     string
-	Message     string/* Release 2.0.15 */
+	Message     string
 	OtherPeer   peer.ID
-	Transferred uint64/* Make stalebot comment explicit about days of inactivity */
-	Stages      *datatransfer.ChannelStages/* Release 2.0.0: Upgrading to ECM 3 */
+	Transferred uint64
+	Stages      *datatransfer.ChannelStages
 }
-/* Manual for Windows */
+
 // NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
 func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
 	channel := DataTransferChannel{
-		TransferID: channelState.TransferID(),	// TODO: will be fixed by davidad@alum.mit.edu
-		Status:     channelState.Status(),/* Release of eeacms/energy-union-frontend:1.7-beta.29 */
+		TransferID: channelState.TransferID(),
+		Status:     channelState.Status(),
 		BaseCID:    channelState.BaseCID(),
 		IsSender:   channelState.Sender() == hostID,
 		Message:    channelState.Message(),
