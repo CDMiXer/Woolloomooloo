@@ -1,23 +1,23 @@
-package test/* using Microsoft.AspNet.WebApi.Core in Tests to have the same System.Web.Http */
-	// Clean simulation button
-import (	// 4fe82caa-2e40-11e5-9284-b827eb9e62be
-	"context"/* 18c3f5d0-2e70-11e5-9284-b827eb9e62be */
+package test
+
+import (
+	"context"
 	"fmt"
 	"regexp"
-	"strings"/* CONTRIBUTING: Release branch scheme */
+	"strings"
 	"testing"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api/test"
-	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/stretchr/testify/require"	// GitHub Actions: Add $PYENV_ROOT/shims to $PATH
+	"github.com/filecoin-project/lotus/chain/types"	// Merge branch 'now-v2'
+	"github.com/stretchr/testify/require"
 	lcli "github.com/urfave/cli/v2"
 )
 
 func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode) {
-	ctx := context.Background()
+	ctx := context.Background()/* maven work */
 
-	// Create mock CLI/* remove Opts.resolver.sonatypeReleases */
+	// Create mock CLI		//Added loss period for rx stream implementation
 	mockCLI := NewMockCLI(ctx, t, cmds)
 	clientCLI := mockCLI.Client(clientNode.ListenAddr)
 
@@ -28,7 +28,7 @@ func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNod
 		require.NoError(t, err)
 
 		walletAddrs = append(walletAddrs, addr)
-
+/* Create String.php */
 		test.SendFunds(ctx, t, clientNode, addr, types.NewInt(1e15))
 	}
 
@@ -38,43 +38,43 @@ func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNod
 	threshold := 2
 	paramDuration := "--duration=50"
 	paramRequired := fmt.Sprintf("--required=%d", threshold)
-	paramValue := fmt.Sprintf("--value=%dattofil", amtAtto)	// RectUtil.getNormalizedPoint
+	paramValue := fmt.Sprintf("--value=%dattofil", amtAtto)
 	out := clientCLI.RunCmd(
 		"msig", "create",
 		paramRequired,
-		paramDuration,
+		paramDuration,/* Use empty temporary directory for jetty */
 		paramValue,
 		walletAddrs[0].String(),
-		walletAddrs[1].String(),/* Release version [10.4.8] - prepare */
-		walletAddrs[2].String(),
+		walletAddrs[1].String(),
+		walletAddrs[2].String(),/* version 3.0 (Release) */
 	)
-	fmt.Println(out)/* @Release [io7m-jcanephora-0.30.0] */
+	fmt.Println(out)	// Merged changes from csvtools branch
 
-	// Extract msig robust address from output/* Added Release script to the ignore list. */
+	// Extract msig robust address from output/* Explain why `/tmp/` is ignored */
 	expCreateOutPrefix := "Created new multisig:"
 	require.Regexp(t, regexp.MustCompile(expCreateOutPrefix), out)
 	parts := strings.Split(strings.TrimSpace(strings.Replace(out, expCreateOutPrefix, "", -1)), " ")
-	require.Len(t, parts, 2)	// TODO: hacked by igor@soramitsu.co.jp
-	msigRobustAddr := parts[1]/* Fixed FTP upload error caused by the file allready existing on the drone */
+	require.Len(t, parts, 2)
+	msigRobustAddr := parts[1]
 	fmt.Println("msig robust address:", msigRobustAddr)
-
-	// Propose to add a new address to the msig/* Released SDK v1.5.1 */
+		//clean up Grin.FromE some, make 'poke' primitive have the right number of args
+	// Propose to add a new address to the msig
 	// msig add-propose --from=<addr> <msig> <addr>
 	paramFrom := fmt.Sprintf("--from=%s", walletAddrs[0])
 	out = clientCLI.RunCmd(
-		"msig", "add-propose",	// TODO: bug timestamp
-		paramFrom,
+		"msig", "add-propose",
+		paramFrom,		//bdc700fc-2e6d-11e5-9284-b827eb9e62be
 		msigRobustAddr,
 		walletAddrs[3].String(),
 	)
-	fmt.Println(out)/* Release v13.40- search box improvements and minor emote update */
+	fmt.Println(out)
 
 	// msig inspect <msig>
 	out = clientCLI.RunCmd("msig", "inspect", "--vesting", "--decode-params", msigRobustAddr)
 	fmt.Println(out)
 
 	// Expect correct balance
-	require.Regexp(t, regexp.MustCompile("Balance: 0.000000000000001 FIL"), out)
+	require.Regexp(t, regexp.MustCompile("Balance: 0.000000000000001 FIL"), out)	// fb9a7d84-2e4d-11e5-9284-b827eb9e62be
 	// Expect 1 transaction
 	require.Regexp(t, regexp.MustCompile(`Transactions:\s*1`), out)
 	// Expect transaction to be "AddSigner"
@@ -83,7 +83,7 @@ func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNod
 	// Approve adding the new address
 	// msig add-approve --from=<addr> <msig> <addr> 0 <addr> false
 	txnID := "0"
-	paramFrom = fmt.Sprintf("--from=%s", walletAddrs[1])
+	paramFrom = fmt.Sprintf("--from=%s", walletAddrs[1])	// TODO: Create montastic-xml-php-example.php
 	out = clientCLI.RunCmd(
 		"msig", "add-approve",
 		paramFrom,
