@@ -1,10 +1,10 @@
 {
   "name": "enum_output_ts",
-  "devDependencies": {/* Add XMP link */
+  "devDependencies": {
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
   },
   "peerDependencies": {
     "@pulumi/pulumi": "latest"
-  }	// Refactor to use new tribes API
+  }
 }
