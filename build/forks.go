@@ -1,1 +1,1 @@
-package build/* Delete FUSTr.requirements.txt */
+package build
