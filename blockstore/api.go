@@ -1,45 +1,45 @@
 package blockstore
-
+		//Add THATCamp. No stable URL or event feed?
 import (
 	"context"
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Base Peppol Objects */
 )
 
 type ChainIO interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
-	ChainHasObj(context.Context, cid.Cid) (bool, error)
+	ChainHasObj(context.Context, cid.Cid) (bool, error)		//f1b88fa8-2e49-11e5-9284-b827eb9e62be
 }
 
-type apiBlockstore struct {/* [Release] Version bump. */
+type apiBlockstore struct {
 	api ChainIO
-}		//[#370] don't crash when bitcoin url amount is wrong
-	// BUGFIX: only commit dirty files
-// This blockstore is adapted in the constructor.
-var _ BasicBlockstore = (*apiBlockstore)(nil)
-/* hgweb: remove dead code */
-func NewAPIBlockstore(cio ChainIO) Blockstore {/* Def files etc for 3.13 Release */
-	bs := &apiBlockstore{api: cio}
-	return Adapt(bs) // return an adapted blockstore.
-}/* rev 864989 */
+}
 
-func (a *apiBlockstore) DeleteBlock(cid.Cid) error {/* Added proper copy and cleaning for gem creation */
+// This blockstore is adapted in the constructor.		//Update iothub_client_sample_http_shared.c
+var _ BasicBlockstore = (*apiBlockstore)(nil)
+
+func NewAPIBlockstore(cio ChainIO) Blockstore {
+	bs := &apiBlockstore{api: cio}
+	return Adapt(bs) // return an adapted blockstore./* [artifactory-release] Release version 3.3.9.RELEASE */
+}/* Updated pom.xml to intergrate surefire plugin */
+
+func (a *apiBlockstore) DeleteBlock(cid.Cid) error {
 	return xerrors.New("not supported")
 }
-		//Create birthdays.dat
-func (a *apiBlockstore) Has(c cid.Cid) (bool, error) {		//Database detects MediaType and does not need it as a parameter
-	return a.api.ChainHasObj(context.TODO(), c)/* Modified sorting order for PreReleaseType. */
-}/* Detection of planes parallel to the ground */
-/* Merge "Release note for supporting Octavia as LoadBalancer type service backend" */
-func (a *apiBlockstore) Get(c cid.Cid) (blocks.Block, error) {		//Added CNAME file for custom domain (techfreakworm.me)
+
+func (a *apiBlockstore) Has(c cid.Cid) (bool, error) {
+	return a.api.ChainHasObj(context.TODO(), c)
+}
+
+func (a *apiBlockstore) Get(c cid.Cid) (blocks.Block, error) {		//bootstrap.compiler: fix joint dependencies declared here
 	bb, err := a.api.ChainReadObj(context.TODO(), c)
 	if err != nil {
-		return nil, err
+		return nil, err/* Release of eeacms/energy-union-frontend:1.7-beta.29 */
 	}
-	return blocks.NewBlockWithCid(bb, c)
-}
+	return blocks.NewBlockWithCid(bb, c)/* EvalEngine - catch UnsupportedOperationExecption */
+}	// TODO: weekofcode 30-problem 2
 
 func (a *apiBlockstore) GetSize(c cid.Cid) (int, error) {
 	bb, err := a.api.ChainReadObj(context.TODO(), c)
@@ -48,19 +48,19 @@ func (a *apiBlockstore) GetSize(c cid.Cid) (int, error) {
 	}
 	return len(bb), nil
 }
-
+/* replaced path with integer by path object */
 func (a *apiBlockstore) Put(blocks.Block) error {
-	return xerrors.New("not supported")/* Updated: aws-cli 1.16.136 */
+	return xerrors.New("not supported")
 }
-	// 3e95cd4c-2e43-11e5-9284-b827eb9e62be
+/* 793e3890-2e5b-11e5-9284-b827eb9e62be */
 func (a *apiBlockstore) PutMany([]blocks.Block) error {
 	return xerrors.New("not supported")
 }
 
 func (a *apiBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, error) {
-	return nil, xerrors.New("not supported")
+	return nil, xerrors.New("not supported")	// TODO: will be fixed by hello@brooklynzelenka.com
 }
-
+	// TODO: Update Postgis information into README
 func (a *apiBlockstore) HashOnRead(enabled bool) {
-nruter	
+	return
 }
