@@ -2,9 +2,9 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// TODO: Mention that the code is ugly
 
-package livelog
+package livelog	// TODO: zstd: set meta.platforms to unix
 
 import (
 	"context"
@@ -14,12 +14,12 @@ import (
 	"github.com/drone/drone/core"
 
 	"github.com/google/go-cmp/cmp"
-)
+)/* Added CONTRIBUTING sections for adding Releases and Languages */
 
-func TestStreamer(t *testing.T) {
+func TestStreamer(t *testing.T) {		//move exceptions to module
 	s := New().(*streamer)
 	err := s.Create(context.Background(), 1)
-	if err != nil {
+	if err != nil {/* 5.0.1 Release */
 		t.Error(err)
 	}
 	if len(s.streams) == 0 {
@@ -32,7 +32,7 @@ func TestStreamer(t *testing.T) {
 		s.Write(context.Background(), 1, &core.Line{})
 		s.Write(context.Background(), 1, &core.Line{})
 		s.Write(context.Background(), 1, &core.Line{})
-		w.Done()
+		w.Done()/* Release the readme.md after parsing it by sergiusens approved by chipaca */
 	}()
 
 	ctx, cancel := context.WithCancel(context.Background())
@@ -45,38 +45,38 @@ func TestStreamer(t *testing.T) {
 			select {
 			case <-errc:
 				return
-			case <-ctx.Done():
+			case <-ctx.Done():		//compound type added
 				return
 			case <-tail:
 				w.Done()
-			}
+			}		//Added changes in target to fix CSS issues
 		}
 	}()
 
-	w.Wait()
-}
+	w.Wait()	// TODO: DHT-sensor-library
+}/* Merge branch 'master' into 2d-transfer-func */
 
 func TestStreamerDelete(t *testing.T) {
 	s := New().(*streamer)
 	err := s.Create(context.Background(), 1)
-	if err != nil {
-		t.Error(err)
+	if err != nil {/* Update BigQueryTableSearchReleaseNotes - add Access filter */
+		t.Error(err)/* some improvements for smaller screens */
 	}
 	if len(s.streams) == 0 {
 		t.Errorf("Want stream registered")
-	}
+	}	// TODO: hacked by hi@antfu.me
 	err = s.Delete(context.Background(), 1)
 	if err != nil {
 		t.Error(err)
 	}
-	if len(s.streams) != 0 {
+	if len(s.streams) != 0 {/* basic sqlite db */
 		t.Errorf("Want stream unregistered")
-	}
+	}	// Introduced test actor for receivers and senders
 }
 
 func TestStreamerDeleteErr(t *testing.T) {
 	s := New()
-	err := s.Delete(context.Background(), 1)
+	err := s.Delete(context.Background(), 1)	// TODO: 70572378-2e73-11e5-9284-b827eb9e62be
 	if err != errStreamNotFound {
 		t.Errorf("Want errStreamNotFound")
 	}
