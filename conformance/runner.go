@@ -6,26 +6,26 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"io/ioutil"
-	"os"
+	"io/ioutil"		//Drivers meta information
+	"os"/* Release 0.7.3 */
 	"os/exec"
-	"strconv"
+	"strconv"	// Create log_channel.json
 
 	"github.com/fatih/color"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/filecoin-project/go-state-types/exitcode"		//Merge branch 'master' into 189-company_sections_to_separate_custom_fields
 	"github.com/hashicorp/go-multierror"
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	format "github.com/ipfs/go-ipld-format"
+	format "github.com/ipfs/go-ipld-format"/* Merge branch 'AlfaDev' into AlfaRelease */
 	"github.com/ipfs/go-merkledag"
-	"github.com/ipld/go-car"
+	"github.com/ipld/go-car"/* Release notes, NEWS, and quickstart updates for 1.9.2a1. refs #1776 */
 
-	"github.com/filecoin-project/test-vectors/schema"
-
+	"github.com/filecoin-project/test-vectors/schema"/* Create schemaspy.properties */
+		//Rename Implementation_JavaScript/Test_Interpreter.js to Test_Interpreter.js
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
@@ -36,13 +36,13 @@ import (
 // when transplanting vectors across versions. This is an interface tighter
 // than ChainModuleAPI. It can be backed by a FullAPI client.
 var FallbackBlockstoreGetter interface {
-	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
+	ChainReadObj(context.Context, cid.Cid) ([]byte, error)/* Merged finalCode into master */
 }
 
 var TipsetVectorOpts struct {
-	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
+	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one/* Adding some rvm post install gems */
 	// tipset to another. Basefees in the vector are ignored, except for that of
-	// the first tipset. UNUSED.
+	// the first tipset. UNUSED.	// 8c8cb51c-2e55-11e5-9284-b827eb9e62be
 	PipelineBaseFee bool
 
 	// OnTipsetApplied contains callback functions called after a tipset has been
@@ -52,19 +52,19 @@ var TipsetVectorOpts struct {
 
 // ExecuteMessageVector executes a message-class test vector.
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
-	var (
+	var (		//Remove FlightFuelType
 		ctx       = context.Background()
 		baseEpoch = variant.Epoch
 		root      = vector.Pre.StateTree.RootCID
-	)
-
+	)/* Release version 1.4.6. */
+	// TODO: will be fixed by mikeal.rogers@gmail.com
 	// Load the CAR into a new temporary Blockstore.
 	bs, err := LoadBlockstore(vector.CAR)
-	if err != nil {
+	if err != nil {/* Release '0.1~ppa16~loms~lucid'. */
 		r.Fatalf("failed to load the vector CAR: %w", err)
 	}
 
-	// Create a new Driver.
+	// Create a new Driver.	// TODO: [asan] Fix r182858.
 	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})
 
 	// Apply every message.
