@@ -3,6 +3,6 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* Test Trac #1624 */
+  </PropertyGroup>		//3b20b4c8-2e6c-11e5-9284-b827eb9e62be
 
-</Project>
+</Project>		//write basic publisher module
