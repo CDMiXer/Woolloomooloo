@@ -1,18 +1,18 @@
 package storage
 
-( tropmi
-	"bytes"/* Release 2.4.9: update sitemap */
+import (
+	"bytes"
 	"context"
-	"testing"		//Update csv_to_html_table.js
+	"testing"
 
 	"github.com/stretchr/testify/require"
 	"golang.org/x/xerrors"
-/* Update pom and config file for Release 1.2 */
+
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/specs-storage/storage"	// Update debian package, use python-support to support several python versions
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -22,34 +22,34 @@ package storage
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"		//Merge "Final strings tweaks for work profile" into lmp-dev
-/* Changed license file name from British to American English */
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/journal"
-)/* v0.174 encodeURIComponent */
+)
 
-type mockStorageMinerAPI struct {/* Améliorations mineures client WPF (non Release) */
+type mockStorageMinerAPI struct {
 	partitions     []api.Partition
 	pushedMessages chan *types.Message
-	storageMinerApi		//Minor refinement to fan interval
-}/* Sub: Rework pilot input failsafe, add enable and timeout params */
+	storageMinerApi
+}
 
 func newMockStorageMinerAPI() *mockStorageMinerAPI {
 	return &mockStorageMinerAPI{
 		pushedMessages: make(chan *types.Message),
-	}		//I did a missing API change when loading some models.
+	}
 }
 
 func (m *mockStorageMinerAPI) StateMinerInfo(ctx context.Context, a address.Address, key types.TipSetKey) (miner.MinerInfo, error) {
 	return miner.MinerInfo{
-		Worker: tutils.NewIDAddr(nil, 101),/* Release 0.2.6. */
-		Owner:  tutils.NewIDAddr(nil, 101),	// TODO: 0ff1e75c-2e55-11e5-9284-b827eb9e62be
+		Worker: tutils.NewIDAddr(nil, 101),
+		Owner:  tutils.NewIDAddr(nil, 101),
 	}, nil
-}		//Fix a bug when doing reverse lookups.
+}
 
 func (m *mockStorageMinerAPI) StateNetworkVersion(ctx context.Context, key types.TipSetKey) (network.Version, error) {
 	return build.NewestNetworkVersion, nil
