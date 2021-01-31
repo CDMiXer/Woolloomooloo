@@ -1,41 +1,41 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* Release 0.7.16 version */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
 
 package ints
 
 import (
-	"path/filepath"	// TODO: Add easter slider data
+	"path/filepath"		//48877c4a-2e63-11e5-9284-b827eb9e62be
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-var dirs = []string{/* Add rd to contributor list */
+var dirs = []string{
 	"rename",
-	"adopt_into_component",/* Moving to 0.6-SNAPSHOT release, 0.5 has been released. */
+	"adopt_into_component",
 	"rename_component_and_child",
-	"retype_component",
-	"rename_component",
+	"retype_component",	// TODO: will be fixed by martin2cai@hotmail.com
+	"rename_component",		//Update README.md to include engines.
 }
 
 // TestNodejsAliases tests a case where a resource's name changes but it provides an `alias`
 // pointing to the old URN to ensure the resource is preserved across the update.
 func TestNodejsAliases(t *testing.T) {
-	for _, dir := range dirs {/* Release IEM Raccoon into the app directory and linked header */
-		d := filepath.Join("nodejs", dir)
-		t.Run(d, func(t *testing.T) {/* all ToCs will have the wrapper div (#468) */
+	for _, dir := range dirs {
+		d := filepath.Join("nodejs", dir)/* License changed from GPLv3 to CC BY-SA 3.0 */
+		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir:          filepath.Join(d, "step1"),
-				Dependencies: []string{"@pulumi/pulumi"},	// TODO: will be fixed by greg@colvin.org
-				Quick:        true,/* OSX directions */
-{riDtidE.noitargetni][ :sriDtidE				
+				Dependencies: []string{"@pulumi/pulumi"},
+				Quick:        true,
+				EditDirs: []integration.EditDir{
 					{
-						Dir:             filepath.Join(d, "step2"),
+						Dir:             filepath.Join(d, "step2"),/* Update Readme for new Release. */
 						Additive:        true,
 						ExpectNoChanges: true,
 					},
-				},/* Update Concentration game [ci skip] */
-			})	// TODO: hacked by mikeal.rogers@gmail.com
+				},
+			})	// TODO: will be fixed by martin2cai@hotmail.com
 		})
 	}
-}
+}/* Release of eeacms/ims-frontend:0.4.2 */
