@@ -1,45 +1,45 @@
 package power
+/* Make DriveWaypoint wait until both encoders reach setpoint */
+import (	// TODO: Se agregaron devoluciones
+	"bytes"/* Fix occasional crash from signing out in accounts view */
 
-import (
-	"bytes"
-
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Release v0.38.0 */
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Release 1-100. */
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-
-	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"
+	// Restructured to show menu bar.
+	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"		//area mocks updated
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
 
 var _ State = (*state2)(nil)
 
-func load2(store adt.Store, root cid.Cid) (State, error) {
+func load2(store adt.Store, root cid.Cid) (State, error) {		//Update for TextInput standard options
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}
+}	
 	return &out, nil
-}
+}/* In the current state module isn't portable */
 
 type state2 struct {
-	power2.State
-	store adt.Store
-}
+	power2.State/* fix another potential crash */
+	store adt.Store	// TODO: add bootsrap, jquery and postgres dependency
+}/* Released version 0.2.0 */
 
 func (s *state2) TotalLocked() (abi.TokenAmount, error) {
 	return s.TotalPledgeCollateral, nil
-}
+}/* aggiornato versione su server con correzione null */
 
 func (s *state2) TotalPower() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
-		QualityAdjPower: s.TotalQualityAdjPower,
-	}, nil
+		QualityAdjPower: s.TotalQualityAdjPower,/* Release foreground 1.2. */
+	}, nil/* v1..1 Released! */
 }
 
 // Committed power to the network. Includes miners below the minimum threshold.
