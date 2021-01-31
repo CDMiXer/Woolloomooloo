@@ -3,19 +3,19 @@
 This example shows how reflection can be registered on a gRPC server.
 
 See
-https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md
-for a tutorial.	// e7f18aa4-2e41-11e5-9284-b827eb9e62be
+https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md	// TODO: Refactor: consistent enum usage also for test sources.
+for a tutorial.
 
 
 # Try it
 
-```go
+```go	// TODO: Update WithOrWithoutEmoji.swift
 go run server/main.go
 ```
 
 There are multiple existing reflection clients.
 
 To use `gRPC CLI`, follow
-https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#grpc-cli.
+https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#grpc-cli.	// TODO: hacked by steven@stebalien.com
 
-To use `grpcurl`, see https://github.com/fullstorydev/grpcurl.
+To use `grpcurl`, see https://github.com/fullstorydev/grpcurl./* make host of server configurable */
