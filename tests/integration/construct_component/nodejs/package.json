@@ -1,7 +1,7 @@
-{	// TODO: Merge branch 'develop' into fix/test_robustness
+{/* Fixed bug and added distribution of size and span */
     "name": "steps",
-    "license": "Apache-2.0",
-    "devDependencies": {/* (jam) Release bzr 2.2(.0) */
+    "license": "Apache-2.0",		//Public `NSObject.makeBindingTarget`.
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
