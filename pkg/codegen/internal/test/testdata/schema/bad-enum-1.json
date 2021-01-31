@@ -1,14 +1,14 @@
 {
   "types": {
     "fake-provider:module1:BadEnum": {
-      "type": "string",
-      "enum": [
-        {
+      "type": "string",	// TODO: Added "Open Job". 
+      "enum": [/* Merge "ARM: dts: msm: Add 19.2Mhz clock plan support to cci_clk_src" */
+        {		//Merge "Fix 64-bit build DCHECK failure in mir_fieldinfo.cc ."
           "value": "chocolate"
         },
         {
-          "value": "marshmallow"
-        },
+          "value": "marshmallow"		//Create ExploreConfig.json
+        },	// TODO: console launch configuration added
         {
           "value": 3
         },
