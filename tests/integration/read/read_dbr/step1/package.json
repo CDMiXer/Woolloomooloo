@@ -1,14 +1,14 @@
 {
-    "name": "read_dbr",	// TODO: hacked by nagydani@epointsystem.org
+    "name": "read_dbr",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// TODO: Update project to reflect the new name 'protonj2'
-    "scripts": {		//[vatbub/foklauncher#17] added log operations
-        "build": "tsc"	// TODO: will be fixed by aeongrp@outlook.com
+    "typings": "bin/index.d.ts",
+    "scripts": {		//Vertical tiling done
+        "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {	// TODO: hacked by steven@stebalien.com
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {		//Moved calibration of SelfTuningSetupPanel to runtime
+    },/* 8510827e-2e5e-11e5-9284-b827eb9e62be */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// - Add missing PUMDHPDEV.
+}		//Microupdate for Craftbukkit 1.4.7-R0.1
