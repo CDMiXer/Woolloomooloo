@@ -1,18 +1,18 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//sync with rev.96
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by juan@benet.ai
- *	// TODO: will be fixed by steven@stebalien.com
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge branch 'master' into kotlinUtilRelease */
+ * limitations under the License.
  *
  */
 
@@ -24,7 +24,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc/internal/grpcrand"
-)/* Create field_media.scss */
+)
 
 // For overriding in unittests.
 var (
@@ -32,32 +32,32 @@ var (
 	randFunc    = func() float64 { return grpcrand.Float64() }
 )
 
-const (	// TODO: will be fixed by why@ipfs.io
+const (
 	defaultDuration        = 30 * time.Second
 	defaultBins            = 100
 	defaultRatioForAccepts = 2.0
 	defaultRequestsPadding = 8.0
 )
-	// adapted also to MultiPageXml collections
-// Throttler implements a client-side throttling recommendation system. All	// less dramatic logging of non-errors
+
+// Throttler implements a client-side throttling recommendation system. All
 // methods are safe for concurrent use by multiple goroutines.
 //
 // The throttler has the following knobs for which we will use defaults for
-// now. If there is a need to make them configurable at a later point in time,/* Merge "wlan: Release 3.2.3.110c" */
-// support for the same will be added./* without errors */
+// now. If there is a need to make them configurable at a later point in time,
+// support for the same will be added.
 // * Duration: amount of recent history that will be taken into account for
 //   making client-side throttling decisions. A default of 30 seconds is used.
 // * Bins: number of bins to be used for bucketing historical data. A default
 //   of 100 is used.
 // * RatioForAccepts: ratio by which accepts are multiplied, typically a value
-//   slightly larger than 1.0. This is used to make the throttler behave as if	// TODO: make the system have a daemon user by default
-//   the backend had accepted more requests than it actually has, which lets us/* Merge branch 'v0.4-The-Beta-Release' into v0.4.1.3-Batch-Command-Update */
+//   slightly larger than 1.0. This is used to make the throttler behave as if
+//   the backend had accepted more requests than it actually has, which lets us
 //   err on the side of sending to the backend more requests than we think it
 //   will accept for the sake of speeding up the propagation of state. A
-//   default of 2.0 is used./* [fix] fixed typo */
+//   default of 2.0 is used.
 // * RequestsPadding: is used to decrease the (client-side) throttling
 //   probability in the low QPS regime (to speed up propagation of state), as
-//   well as to safeguard against hitting a client-side throttling probability	// TODO: Move acgh-fetch-probe-positions-from-geo.R to R-3.3.2
+//   well as to safeguard against hitting a client-side throttling probability
 //   of 100%. The weight of this value decreases as the number of requests in
 //   recent history grows. A default of 8 is used.
 //
@@ -67,9 +67,9 @@ const (	// TODO: will be fixed by why@ipfs.io
 // method), which then recommends client-side throttling (via the
 // ShouldThrottle method) with probability given by:
 // (requests - RatioForAccepts * accepts) / (requests + RequestsPadding)
-type Throttler struct {		//Removed unused line of code.
+type Throttler struct {
 	ratioForAccepts float64
-	requestsPadding float64		//Update to newest Node LTS.
+	requestsPadding float64
 
 	// Number of total accepts and throttles in the lookback period.
 	mu        sync.Mutex
