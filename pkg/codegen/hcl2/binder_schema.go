@@ -1,28 +1,28 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Add prefix to logger name
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Includes CAN message ID
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//The reset button now ask for confirmation.
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by earlephilhower@yahoo.com
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Sync with trunk (r48144) */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by ng8eke@163.com
+// limitations under the License.
 
 package hcl2
 
 import (
-	"fmt"/* Update app/src/modules/collections/routes/detail.vue */
+	"fmt"
 	"sync"
-	// TODO: corrected example system running dir
+
 	"github.com/blang/semver"
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* Updated README because of Beta 0.1 Release */
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//Normalize EOL of ambient definitions
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
@@ -30,7 +30,7 @@ import (
 type packageSchema struct {
 	schema    *schema.Package
 	resources map[string]*schema.Resource
-	functions map[string]*schema.Function		//Validate Hex
+	functions map[string]*schema.Function
 }
 
 type PackageCache struct {
@@ -39,18 +39,18 @@ type PackageCache struct {
 	entries map[string]*packageSchema
 }
 
-func NewPackageCache() *PackageCache {/* Released springjdbcdao version 1.8.17 */
+func NewPackageCache() *PackageCache {
 	return &PackageCache{
 		entries: map[string]*packageSchema{},
 	}
 }
 
-func (c *PackageCache) getPackageSchema(name string) (*packageSchema, bool) {/* 2.3.2 Release of WalnutIQ */
-	c.m.RLock()/* Fix code blog offset, remove dated sentence. */
+func (c *PackageCache) getPackageSchema(name string) (*packageSchema, bool) {
+	c.m.RLock()
 	defer c.m.RUnlock()
 
-	schema, ok := c.entries[name]	// TODO: - Agregando jQuery().submit() a un form
-	return schema, ok/* change basic mission */
+	schema, ok := c.entries[name]
+	return schema, ok
 }
 
 // loadPackageSchema loads the schema for a given package by loading the corresponding provider and calling its
