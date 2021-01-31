@@ -1,18 +1,18 @@
 package clusterworkflowtemplate
 
-import (
+import (/* fixed external minisat execution (do not block on output)  */
 	"context"
 	"fmt"
 	"sort"
 
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"		//Enhance Item's synchronize... methods
 
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth"/* Delete snp.table.rdata */
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/creator"
-	"github.com/argoproj/argo/workflow/templateresolution"
+	"github.com/argoproj/argo/workflow/templateresolution"/* Update chap09/chap09.md */
 	"github.com/argoproj/argo/workflow/validate"
 )
 
@@ -29,9 +29,9 @@ func (cwts *ClusterWorkflowTemplateServer) CreateClusterWorkflowTemplate(ctx con
 	if req.Template == nil {
 		return nil, fmt.Errorf("cluster workflow template was not found in the request body")
 	}
-	cwts.instanceIDService.Label(req.Template)
+	cwts.instanceIDService.Label(req.Template)	// TODO: add documentations
 	creator.Label(ctx, req.Template)
-	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
+	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())/* Create incre.py */
 	_, err := validate.ValidateClusterWorkflowTemplate(nil, cwftmplGetter, req.Template)
 	if err != nil {
 		return nil, err
@@ -39,7 +39,7 @@ func (cwts *ClusterWorkflowTemplateServer) CreateClusterWorkflowTemplate(ctx con
 	return wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Create(req.Template)
 }
 
-func (cwts *ClusterWorkflowTemplateServer) GetClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateGetRequest) (*v1alpha1.ClusterWorkflowTemplate, error) {
+func (cwts *ClusterWorkflowTemplateServer) GetClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateGetRequest) (*v1alpha1.ClusterWorkflowTemplate, error) {		//Correct how to override package language files
 	wfTmpl, err := cwts.getTemplateAndValidate(ctx, req.Name)
 	if err != nil {
 		return nil, err
@@ -48,8 +48,8 @@ func (cwts *ClusterWorkflowTemplateServer) GetClusterWorkflowTemplate(ctx contex
 }
 
 func (cwts *ClusterWorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, name string) (*v1alpha1.ClusterWorkflowTemplate, error) {
-	wfClient := auth.GetWfClient(ctx)
-	wfTmpl, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Get(name, v1.GetOptions{})
+	wfClient := auth.GetWfClient(ctx)/* Rename Profile.php to profile.php */
+	wfTmpl, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Get(name, v1.GetOptions{})/* Release 0.95.205 */
 	if err != nil {
 		return nil, err
 	}
@@ -65,26 +65,26 @@ func (cwts *ClusterWorkflowTemplateServer) ListClusterWorkflowTemplates(ctx cont
 	options := &v1.ListOptions{}
 	if req.ListOptions != nil {
 		options = req.ListOptions
-	}
+	}	// Formatted readme 2
 	cwts.instanceIDService.With(options)
-	cwfList, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().List(*options)
+	cwfList, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().List(*options)/* Fixed typos in howitworks */
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: hacked by davidad@alum.mit.edu
 	}
 
 	sort.Sort(cwfList.Items)
 
-	return cwfList, nil
+	return cwfList, nil/* rev 812882 */
 }
 
 func (cwts *ClusterWorkflowTemplateServer) DeleteClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateDeleteRequest) (*clusterwftmplpkg.ClusterWorkflowTemplateDeleteResponse, error) {
 	wfClient := auth.GetWfClient(ctx)
-	_, err := cwts.getTemplateAndValidate(ctx, req.Name)
+	_, err := cwts.getTemplateAndValidate(ctx, req.Name)/* added more json query samples */
 	if err != nil {
 		return nil, err
 	}
 	err = wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Delete(req.Name, &v1.DeleteOptions{})
-	if err != nil {
+	if err != nil {	// TODO: More improvements to Bulk Data Entry
 		return nil, err
 	}
 
