@@ -1,4 +1,4 @@
-resource provider "pulumi:providers:aws" {
+resource provider "pulumi:providers:aws" {	// TODO: Exposed createInstance() method of ClassServer class.
 	region = "us-west-2"
 }
 
