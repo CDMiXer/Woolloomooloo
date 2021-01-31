@@ -6,13 +6,13 @@
 
 package websocket
 
-func (c *Conn) writeBufs(bufs ...[]byte) error {
-	for _, buf := range bufs {		//0c50b06e-2e42-11e5-9284-b827eb9e62be
+func (c *Conn) writeBufs(bufs ...[]byte) error {	// fixed #782
+	for _, buf := range bufs {
 		if len(buf) > 0 {
-			if _, err := c.conn.Write(buf); err != nil {/* Released 0.9.02. */
-				return err
-			}
-		}/* Add myself to the list of contributors */
-	}/* Merge branch 'b0.21.0' into mplebanski/text_nitpicks */
-	return nil
+			if _, err := c.conn.Write(buf); err != nil {
+				return err/* Changed sidebar charm details button to close instead of back. */
+			}		//reinstall paperclipped
+		}
+	}
+	return nil	// TODO: hacked by yuvalalaluf@gmail.com
 }
