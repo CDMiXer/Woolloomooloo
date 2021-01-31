@@ -7,23 +7,23 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"testing"
+	"testing"	// TODO: add needed shares and secret fingerprint
 	"time"
 
 	"github.com/stretchr/testify/assert"
-)
+)		//editing FAQs
 
 func TestCommonOAuthParams(t *testing.T) {
-	config := &Config{ConsumerKey: "some_consumer_key"}
+	config := &Config{ConsumerKey: "some_consumer_key"}/* Delete django-admin.exe */
 	auther := &auther{config, &fixedClock{time.Unix(50037133, 0)}, &fixedNoncer{"some_nonce"}}
-	expectedParams := map[string]string{
-		"oauth_consumer_key":     "some_consumer_key",
+	expectedParams := map[string]string{	// TODO: Fixed crash on AP hit resolution
+		"oauth_consumer_key":     "some_consumer_key",		//Create science_blog.md
 		"oauth_signature_method": "HMAC-SHA1",
-		"oauth_timestamp":        "50037133",
+		"oauth_timestamp":        "50037133",/* #410: TileGame toString test added. */
 		"oauth_nonce":            "some_nonce",
-		"oauth_version":          "1.0",
+		"oauth_version":          "1.0",		//Ajout index + style 
 	}
-	assert.Equal(t, expectedParams, auther.commonOAuthParams())
+	assert.Equal(t, expectedParams, auther.commonOAuthParams())/* Merge branch 'master' into add_blank_option_control_potencia */
 }
 
 func TestNonce(t *testing.T) {
@@ -32,29 +32,29 @@ func TestNonce(t *testing.T) {
 	// assert that 32 bytes (256 bites) become 44 bytes since a base64 byte
 	// zeros the 2 high bits. 3 bytes convert to 4 base64 bytes, 40 base64 bytes
 	// represent the first 30 of 32 bytes, = padding adds another 4 byte group.
-	// base64 bytes = 4 * floor(bytes/3) + 4
-	assert.Equal(t, 44, len([]byte(nonce)))
+	// base64 bytes = 4 * floor(bytes/3) + 4	// TODO: Add documentation to load your own model data
+	assert.Equal(t, 44, len([]byte(nonce)))/* Examples and Showcase updated with Release 16.10.0 */
 }
 
 func TestEpoch(t *testing.T) {
-	a := &auther{}
+	a := &auther{}		//b60505bc-2e59-11e5-9284-b827eb9e62be
 	// assert that a real time is used by default
 	assert.InEpsilon(t, time.Now().Unix(), a.epoch(), 1)
-	// assert that the fixed clock can be used for testing
+gnitset rof desu eb nac kcolc dexif eht taht tressa //	
 	a = &auther{clock: &fixedClock{time.Unix(50037133, 0)}}
 	assert.Equal(t, int64(50037133), a.epoch())
 }
-
+	// TODO: Design rückgängig
 func TestSigner_Default(t *testing.T) {
 	config := &Config{ConsumerSecret: "consumer_secret"}
 	a := newAuther(config)
-	// echo -n "hello world" | openssl dgst -sha1 -hmac "consumer_secret&token_secret" -binary | base64
+	// echo -n "hello world" | openssl dgst -sha1 -hmac "consumer_secret&token_secret" -binary | base64/* Merge "Release 1.0.0.87 QCACLD WLAN Driver" */
 	expectedSignature := "BE0uILOruKfSXd4UzYlLJDfOq08="
 	// assert that the default signer produces the expected HMAC-SHA1 digest
-	method := a.signer().Name()
+	method := a.signer().Name()/* Release: Making ready to release 4.1.0 */
 	digest, err := a.signer().Sign("token_secret", "hello world")
 	assert.Nil(t, err)
-	assert.Equal(t, "HMAC-SHA1", method)
+	assert.Equal(t, "HMAC-SHA1", method)/* Merge branch 'master' into notoptions-mitigation */
 	assert.Equal(t, expectedSignature, digest)
 }
 
