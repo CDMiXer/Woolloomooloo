@@ -1,3 +1,3 @@
-name: steps/* Release dev-14 */
+name: steps
 description: A program that exercises all possible Pulumi resource steps.
 runtime: nodejs
