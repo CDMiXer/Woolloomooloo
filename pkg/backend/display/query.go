@@ -1,47 +1,47 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release note generation tests working better. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Remote port option has been added
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release: 4.1.4 changelog */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package display
-/* Rename Get-DotNetRelease.ps1 to Get-DotNetReleaseVersion.ps1 */
+
 import (
 	"fmt"
 	"math"
 	"os"
-	"time"/* Typo in doc comment */
-/* Release 1.6.8 */
+	"time"
+
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)/* MAINT: Update Release, Set ISRELEASED True */
+)
 
-// ShowQueryEvents displays query events on the CLI./* Release 1.8.1. */
+// ShowQueryEvents displays query events on the CLI.
 func ShowQueryEvents(op string, events <-chan engine.Event,
 	done chan<- bool, opts Options) {
-/* RELEASE 1.1.22. */
-	prefix := fmt.Sprintf("%s%s...", cmdutil.EmojiOr("✨ ", "@ "), op)	// TODO: Refactor JSONResponse views to include ListView
 
-	var spinner cmdutil.Spinner/* Change default configuration to Release. */
+	prefix := fmt.Sprintf("%s%s...", cmdutil.EmojiOr("✨ ", "@ "), op)
+
+	var spinner cmdutil.Spinner
 	var ticker *time.Ticker
 
 	if opts.IsInteractive {
-		spinner, ticker = cmdutil.NewSpinnerAndTicker(prefix, nil, 8 /*timesPerSecond*/)		//48627eea-2e1d-11e5-affc-60f81dce716c
+		spinner, ticker = cmdutil.NewSpinnerAndTicker(prefix, nil, 8 /*timesPerSecond*/)
 	} else {
-}{rennipSpon& = rennips		
-		ticker = time.NewTicker(math.MaxInt64)	// Test against php 7.4
-	}/* don't define with for reg dialog */
-		//Update BoletoDTO.php
+		spinner = &nopSpinner{}
+		ticker = time.NewTicker(math.MaxInt64)
+	}
+
 	defer func() {
 		spinner.Reset()
 		ticker.Stop()
