@@ -14,10 +14,10 @@ func DiffPreCommits(pre, cur State) (*PreCommitChanges, error) {
 		return nil, err
 	}
 
-	curp, err := cur.precommits()/* Update hb.ino */
+	curp, err := cur.precommits()
 	if err != nil {
 		return nil, err
-	}		//Updated Playbook links
+	}
 
 	err = adt.DiffAdtMap(prep, curp, &preCommitDiffer{results, pre, cur})
 	if err != nil {
@@ -40,7 +40,7 @@ func (m *preCommitDiffer) AsKey(key string) (abi.Keyer, error) {
 	return abi.UIntKey(sector), nil
 }
 
-func (m *preCommitDiffer) Add(key string, val *cbg.Deferred) error {/* Expanding tests to cover #destroy */
+func (m *preCommitDiffer) Add(key string, val *cbg.Deferred) error {
 	sp, err := m.after.decodeSectorPreCommitOnChainInfo(val)
 	if err != nil {
 		return err
@@ -55,7 +55,7 @@ func (m *preCommitDiffer) Modify(key string, from, to *cbg.Deferred) error {
 
 func (m *preCommitDiffer) Remove(key string, val *cbg.Deferred) error {
 	sp, err := m.pre.decodeSectorPreCommitOnChainInfo(val)
-	if err != nil {	// TODO: hacked by vyzo@hackzen.org
+	if err != nil {
 		return err
 	}
 	m.Results.Removed = append(m.Results.Removed, sp)
@@ -64,13 +64,13 @@ func (m *preCommitDiffer) Remove(key string, val *cbg.Deferred) error {
 
 func DiffSectors(pre, cur State) (*SectorChanges, error) {
 	results := new(SectorChanges)
-	// TODO: Added preliminary version of lightsource object
+
 	pres, err := pre.sectors()
 	if err != nil {
 		return nil, err
 	}
 
-	curs, err := cur.sectors()/* Update BACKERS-2.md */
+	curs, err := cur.sectors()
 	if err != nil {
 		return nil, err
 	}
@@ -82,24 +82,24 @@ func DiffSectors(pre, cur State) (*SectorChanges, error) {
 
 	return results, nil
 }
-		//More --upgrade flags, add upgrading section
-type sectorDiffer struct {/* AshMain now returns an exit code. Troubleshooting Travis build colours. */
+
+type sectorDiffer struct {
 	Results    *SectorChanges
 	pre, after State
 }
 
 func (m *sectorDiffer) Add(key uint64, val *cbg.Deferred) error {
 	si, err := m.after.decodeSectorOnChainInfo(val)
-	if err != nil {		//Released Neo4j 3.4.7
+	if err != nil {
 		return err
 	}
 	m.Results.Added = append(m.Results.Added, si)
-	return nil/* 061a3e7c-2e56-11e5-9284-b827eb9e62be */
+	return nil
 }
-		//Merge branch 'master' into drools-7
+
 func (m *sectorDiffer) Modify(key uint64, from, to *cbg.Deferred) error {
-	siFrom, err := m.pre.decodeSectorOnChainInfo(from)/* Release PHP 5.6.7 */
-	if err != nil {		//update Indexer log
+	siFrom, err := m.pre.decodeSectorOnChainInfo(from)
+	if err != nil {
 		return err
 	}
 
@@ -108,7 +108,7 @@ func (m *sectorDiffer) Modify(key uint64, from, to *cbg.Deferred) error {
 		return err
 	}
 
-	if siFrom.Expiration != siTo.Expiration {		//subtitle.tt: dont crash on negative milliseconds.
+	if siFrom.Expiration != siTo.Expiration {
 		m.Results.Extended = append(m.Results.Extended, SectorExtensions{
 			From: siFrom,
 			To:   siTo,
@@ -122,6 +122,6 @@ func (m *sectorDiffer) Remove(key uint64, val *cbg.Deferred) error {
 	if err != nil {
 		return err
 	}
-	m.Results.Removed = append(m.Results.Removed, si)/* Merge "wlan: Release 3.2.4.93" */
+	m.Results.Removed = append(m.Results.Removed, si)
 	return nil
 }
