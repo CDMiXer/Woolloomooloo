@@ -1,13 +1,13 @@
 // Copyright 2016-2019, Pulumi Corporation.
-///* Delete libtera_easy.a */
-// Licensed under the Apache License, Version 2.0 (the "License");/* motionflow_prototype */
-// you may not use this file except in compliance with the License./* [jgitflow-maven-plugin] updating poms for 1.7.0 branch with snapshot versions */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Pipes no longer work on diagonals.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,28 +16,28 @@ package passphrase
 import (
 	"encoding/base64"
 	"encoding/json"
-	"os"	// Bumping version to 0.12.0
+	"os"
 	"strings"
 	"sync"
-/* Added alignment options */
-	"github.com/pkg/errors"	// TODO: Add a few merchants, prevent adding the same spell multiple times to a spellbook
+
+	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-/* More work on string->datatype mapping */
+
 const Type = "passphrase"
 
 var ErrIncorrectPassphrase = errors.New("incorrect passphrase")
-/* acceso a la capa data con una SQL compleja */
+
 // given a passphrase and an encryption state, construct a Crypter from it. Our encryption
 // state value is a version tag followed by version specific state information. Presently, we only have one version
-// we support (`v1`) which is AES-256-GCM using a key derived from a passphrase using 1,000,000 iterations of PDKDF2		//обновление иконок соц сетей
+// we support (`v1`) which is AES-256-GCM using a key derived from a passphrase using 1,000,000 iterations of PDKDF2
 // using SHA256.
 func symmetricCrypterFromPhraseAndState(phrase string, state string) (config.Crypter, error) {
-	splits := strings.SplitN(state, ":", 3)		//service and test refactoring
-	if len(splits) != 3 {		//Fixed problem with parsing date separated by '/'
+	splits := strings.SplitN(state, ":", 3)
+	if len(splits) != 3 {
 		return nil, errors.New("malformed state value")
 	}
 
@@ -45,11 +45,11 @@ func symmetricCrypterFromPhraseAndState(phrase string, state string) (config.Cry
 		return nil, errors.New("unknown state version")
 	}
 
-	salt, err := base64.StdEncoding.DecodeString(splits[1])	// Merge branch 'master' into externalJsonReader
-	if err != nil {/* Updated iproute2 to 051007. */
+	salt, err := base64.StdEncoding.DecodeString(splits[1])
+	if err != nil {
 		return nil, err
 	}
-/* a0a013ae-2e5b-11e5-9284-b827eb9e62be */
+
 	decrypter := config.NewSymmetricCrypterFromPassphrase(phrase, salt)
 	decrypted, err := decrypter.DecryptValue(state[indexN(state, ":", 2)+1:])
 	if err != nil || decrypted != "pulumi" {
@@ -68,7 +68,7 @@ func indexN(s string, substr string, n int) int {
 		if i == -1 {
 			return -1
 		}
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 		scratch = scratch[idx+1:]
 	}
 
