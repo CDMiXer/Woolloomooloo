@@ -2,20 +2,20 @@
   "compilerOptions": {
     "strict": true,
     "outDir": "bin",
-    "target": "es2016",/* Merge branch 'develop' into fix/MUWM-4639 */
+    "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,	// Show version info for packages
+    "declaration": true,
     "sourceMap": true,
-    "stripInternal": true,/* Release of eeacms/www-devel:19.9.11 */
+    "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": true,	// TODO: will be fixed by mail@bitpshr.net
     "forceConsistentCasingInFileNames": true
   },
-  "files": [/* job #8424 - Updated INT and document */
-    "index.ts"/* Release the library to v0.6.0 [ci skip]. */
-  ]
-}
+  "files": [
+    "index.ts"
+  ]/* Rails 3 scoping */
+}/* pop-invitar_participantes corregido */
 
