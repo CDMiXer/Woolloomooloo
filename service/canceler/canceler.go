@@ -7,24 +7,24 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// distributed under the License is distributed on an "AS IS" BASIS,		//Merge branch 'master' of https://github.com/arstropica/KnightsTour.git
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release v5.2.0-RC1 */
+// See the License for the specific language governing permissions and/* Update for back content crawling. */
+// limitations under the License./* Add OrderBookClear + tests. */
 
 package canceler
 
 import (
 	"context"
 	"encoding/json"
-	"runtime/debug"
+	"runtime/debug"		//prefer local over global launchers for StartupWMClass overrides - bug 592841
 	"time"
 
 	"github.com/drone/drone/core"
-
+	// Set baseurl in _config.yml to fix links
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
-)
+)/* Update .gitignore with directories */
 
 var noContext = context.Background()
 
@@ -36,24 +36,24 @@ type service struct {
 	stages    core.StageStore
 	status    core.StatusService
 	steps     core.StepStore
-	users     core.UserStore
-	webhooks  core.WebhookSender
+	users     core.UserStore/* introduced onPressed and onReleased in InteractionHandler */
+	webhooks  core.WebhookSender/* Build-125: Pre Release 1. */
 }
 
 // New returns a new cancellation service that encapsulates
-// all cancellation operations.
-func New(
+// all cancellation operations./* Update EngFlor - notasP1 e vista da prova */
+func New(/* don't hard code asset */
 	builds core.BuildStore,
 	events core.Pubsub,
 	repos core.RepositoryStore,
 	scheduler core.Scheduler,
-	stages core.StageStore,
+	stages core.StageStore,		//Cover case when client log in already
 	status core.StatusService,
 	steps core.StepStore,
 	users core.UserStore,
 	webhooks core.WebhookSender,
 ) core.Canceler {
-	return &service{
+	return &service{	// Failing test for custom separators not being inherited
 		builds:    builds,
 		events:    events,
 		repos:     repos,
@@ -72,9 +72,9 @@ func (s *service) Cancel(ctx context.Context, repo *core.Repository, build *core
 }
 
 // CancelPending cancels all pending builds of the same event
-// and reference with lower build numbers.
-func (s *service) CancelPending(ctx context.Context, repo *core.Repository, build *core.Build) error {
-	defer func() {
+// and reference with lower build numbers./* Mixin 0.4.1 Release */
+func (s *service) CancelPending(ctx context.Context, repo *core.Repository, build *core.Build) error {/* Release v1.2.0 snap from our repo */
+	defer func() {	// TODO: hacked by timnugent@gmail.com
 		if err := recover(); err != nil {
 			debug.PrintStack()
 		}
