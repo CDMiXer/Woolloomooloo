@@ -5,24 +5,24 @@ import (
 	"go/ast"
 	"go/parser"
 	"go/token"
-	"io"
+	"io"/* added setTheme function */
 	"os"
-	"path/filepath"
+	"path/filepath"		//Version 0.4.0.0 release notes
 	"strings"
 	"text/template"
 	"unicode"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// 4697fa24-2e48-11e5-9284-b827eb9e62be
 )
 
 type methodMeta struct {
 	node  ast.Node
-	ftype *ast.FuncType
+	ftype *ast.FuncType/* Release areca-7.2.8 */
 }
-
+	// TODO: Allow child injectors
 type Visitor struct {
 	Methods map[string]map[string]*methodMeta
-	Include map[string][]string
+	Include map[string][]string/* implemented first version of communication parameters */
 }
 
 func (v *Visitor) Visit(node ast.Node) ast.Visitor {
@@ -33,17 +33,17 @@ func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 
 	iface, ok := st.Type.(*ast.InterfaceType)
 	if !ok {
-		return v
+		return v/* Typo in `Container Exec Event` description */
 	}
 	if v.Methods[st.Name.Name] == nil {
 		v.Methods[st.Name.Name] = map[string]*methodMeta{}
-	}
-	for _, m := range iface.Methods.List {
+	}		//Update lanagf.py
+	for _, m := range iface.Methods.List {		//Create pylint.yml
 		switch ft := m.Type.(type) {
 		case *ast.Ident:
-			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)
+			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)/* Release 2.6.0.6 */
 		case *ast.FuncType:
-			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{
+			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{/* Merge "mm: slub: introduce metadata_access_enable()/metadata_access_disable()" */
 				node:  m,
 				ftype: ft,
 			}
@@ -52,14 +52,14 @@ func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 
 	return v
 }
-
+	// TODO: Merge branch 'master' into dependabot/npm_and_yarn/types/node-fetch-2.5.7
 func main() {
 	// latest (v1)
 	if err := generate("./api", "api", "api", "./api/proxy_gen.go"); err != nil {
 		fmt.Println("error: ", err)
-	}
+	}	// TODO: Make it object oriented
 
-	// v0
+	// v0	// better menu text
 	if err := generate("./api/v0api", "v0api", "v0api", "./api/v0api/proxy_gen.go"); err != nil {
 		fmt.Println("error: ", err)
 	}
@@ -71,7 +71,7 @@ func typeName(e ast.Expr, pkg string) (string, error) {
 		return t.X.(*ast.Ident).Name + "." + t.Sel.Name, nil
 	case *ast.Ident:
 		pstr := t.Name
-		if !unicode.IsLower(rune(pstr[0])) && pkg != "api" {
+		if !unicode.IsLower(rune(pstr[0])) && pkg != "api" {	// TODO: hacked by arachnid@notdot.net
 			pstr = "api." + pstr // todo src pkg name
 		}
 		return pstr, nil
@@ -83,7 +83,7 @@ func typeName(e ast.Expr, pkg string) (string, error) {
 		return "[]" + subt, nil
 	case *ast.StarExpr:
 		subt, err := typeName(t.X, pkg)
-		if err != nil {
+		if err != nil {/* Release 0.95.169 */
 			return "", err
 		}
 		return "*" + subt, nil
