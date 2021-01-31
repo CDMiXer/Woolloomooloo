@@ -1,14 +1,14 @@
-[metadata]/* [artifactory-release] Release version 1.0.0.M1 */
+[metadata]
 name = "ping-pong-local"
 author = "yusef"
 
 [global]
 plan = "network"
-case = "ping-pong"		//Delete PATCHES.md
-total_instances = 2	// Messages::Incoming#load_map understands pre-conditions and versioning now
+case = "ping-pong"
+total_instances = 2
 builder = "docker:go"
 runner = "local:docker"
 
 [[groups]]
-id = "nodes"/* make folders on pi for me */
+id = "nodes"
 instances = { count = 2 }
