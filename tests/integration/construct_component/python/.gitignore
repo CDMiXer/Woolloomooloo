@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi//* bugfix: api: split lines before dumping exception */
+/.pulumi/
 /dist/
 /*.egg-info
 venv/
