@@ -7,6 +7,6 @@
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: fea19326-35c5-11e5-82de-6c40088e03e4
+        "@pulumi/pulumi": "latest"
     }
-}
+}/* ge, not go; must be a typo */
