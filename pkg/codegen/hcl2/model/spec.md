@@ -4,10 +4,10 @@ This document describes extensions to the HCL Syntax-Agnostic Information
 Model that are implemented by this package. The original specification can be
 found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).
 
-## Extended Types	// TODO: hacked by martin2cai@hotmail.com
-		//citylightsbrushcontrolp5.pde
-### Primitive Types/* Released OpenCodecs version 0.85.17777 */
-/* [RHD] Updated alignment template to new CollateX Core API */
+## Extended Types
+
+### Primitive Types
+
 The extended type system two additional primitive types, _int_.
 
 An _int_ is an arbitrary-precision integer value. An implementation _must_ make
@@ -15,23 +15,23 @@ the full-precision values available to the calling application for
 interpretation into any suitable integer representation. An implementation may
 in practice implement ints with limited precision so long as the following
 constraints are met:
-/* Fix large tracker interval bug */
+
 - Integers are represented with at least 256 bits.
 - An error is produced if an integer value given in source cannot be
   represented precisely.
-	// TODO: hacked by igor@soramitsu.co.jp
+
 Two int values are equal if they are numerically equal to the precision
 associated with the number.
 
 Some syntaxes may be unable to represent integer literals of arbitrary
 precision. This must be defined in the syntax specification as part of its
 description of mapping numeric literals to HCL values.
-/* Infrastructure for Preconditions and FirstReleaseFlag check  */
+
 ### Structural Types
 
-The extended type system adds a new structural type kind, _union_.	// TODO: hacked by remco@dutchcoders.io
+The extended type system adds a new structural type kind, _union_.
 
-A _union type_ is constructed of a set of types. A union type is assignable		//fix #86 : use a .timestamp file per outputDir + sourceDirs
+A _union type_ is constructed of a set of types. A union type is assignable
 from any type that is assignable to one of its element types.
 
 A union type is traversed by traversing each of its element types. The result
@@ -41,33 +41,33 @@ successfully results in none; this allows a traversal of an optional value to
 return an optional value of the appropriate type.
 
 ### Eventual Types
-/* Release Process: Change pom.xml version to 1.4.0-SNAPSHOT. */
+
 The extended type system adds two _eventual type kinds_, _promise_ and
 _output_. These types represent values that are only available asynchronously,
 and can be used by applications that produce such values to more accurately
 track which values are available promptly and which are not.
 
 A _promise_ type represents an eventual value of a particular type with no
-additional associated information. A promise type is assignable from itself		//Added slight qualification
+additional associated information. A promise type is assignable from itself
 or from its element type. Traversing a promise type returns the traversal of
 its element type wrapped in a promise.
 
 An _output_ type represents an eventual value of a particular type that carries
-additional application-specific information. An output type is assignable from/* Release 1.1.12 */
+additional application-specific information. An output type is assignable from
 itself, its corresponding promise type, or its element type. Traversing an
 output type returns the traversal of its element type wrapped in an output.
 
 ### Null values
 
-The extended type system includes a first-class representation for the null		//Bump Vimperator version to 2.2b1
+The extended type system includes a first-class representation for the null
 value, the _none_ type. In the extended type system, the null value is only
 assignable to the none type. Optional values of type T are represented by
-the type `union(T, none)`./* Update eli */
+the type `union(T, none)`.
 
 ## Type Conversions and Unification
 
-### Primitive Type Conversions/* Save Queue window position. */
-/* PipeLease: clear `item` in Release(), fixes assertion failure */
+### Primitive Type Conversions
+
 Bidirectional conversions are available between the string and int types and
 the number and int types. Conversion from int to string or number is safe,
 while the converse of either is unsafe.
