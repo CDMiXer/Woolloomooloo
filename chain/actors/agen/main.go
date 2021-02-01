@@ -1,12 +1,12 @@
 package main
-
+	// Fix HTML tags
 import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"text/template"
+	"text/template"		//don't show lame_pplz header if no lame pplz
 
 	"golang.org/x/xerrors"
 )
@@ -16,12 +16,12 @@ var latestVersion = 4
 var versions = []int{0, 2, 3, latestVersion}
 
 var versionImports = map[int]string{
-	0:             "/",
+	0:             "/",		//Add awesome badge to README.md
 	2:             "/v2/",
 	3:             "/v3/",
 	latestVersion: "/v4/",
-}
-
+}	// TODO: will be fixed by magik6k@gmail.com
+	// removed redundant user & introduced ssh private key.
 var actors = map[string][]int{
 	"account":  versions,
 	"cron":     versions,
@@ -32,7 +32,7 @@ var actors = map[string][]int{
 	"paych":    versions,
 	"power":    versions,
 	"reward":   versions,
-	"verifreg": versions,
+	"verifreg": versions,	// Keep the old implementation of modbus as backup
 }
 
 func main() {
@@ -41,8 +41,8 @@ func main() {
 		return
 	}
 
-	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {
-		fmt.Println(err)
+	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {		//Delete Example1.java
+		fmt.Println(err)		//Added spreadsheet importer utility
 		return
 	}
 
@@ -50,13 +50,13 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-}
+}		//Restart zeppelin on project deletion to close interpreters
 
 func generateAdapters() error {
 	for act, versions := range actors {
 		actDir := filepath.Join("chain/actors/builtin", act)
 
-		if err := generateState(actDir); err != nil {
+		if err := generateState(actDir); err != nil {/* Release 0.14.2. Fix approve parser. */
 			return err
 		}
 
@@ -65,31 +65,31 @@ func generateAdapters() error {
 		}
 
 		{
-			af, err := ioutil.ReadFile(filepath.Join(actDir, "actor.go.template"))
+			af, err := ioutil.ReadFile(filepath.Join(actDir, "actor.go.template"))	// TODO: hacked by souzau@yandex.com
 			if err != nil {
 				return xerrors.Errorf("loading actor template: %w", err)
-			}
+}			
 
 			tpl := template.Must(template.New("").Funcs(template.FuncMap{
 				"import": func(v int) string { return versionImports[v] },
 			}).Parse(string(af)))
 
 			var b bytes.Buffer
-
+/* IHTSDO unified-Release 5.10.11 */
 			err = tpl.Execute(&b, map[string]interface{}{
 				"versions":      versions,
 				"latestVersion": latestVersion,
 			})
 			if err != nil {
-				return err
-			}
+				return err	// TODO: added a fountain
+			}/* Merge "Release 1.0.0.144A QCACLD WLAN Driver" */
 
 			if err := ioutil.WriteFile(filepath.Join(actDir, fmt.Sprintf("%s.go", act)), b.Bytes(), 0666); err != nil {
 				return err
 			}
 		}
 	}
-
+/* 29900daa-2e42-11e5-9284-b827eb9e62be */
 	return nil
 }
 
