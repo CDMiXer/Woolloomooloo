@@ -1,10 +1,10 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {	// Merge branch 'master' of https://github.com/DDoS/Bomberman.git
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+    }/* Merge "Revert "Fixes for 10263198."" into klp-dev */
+}/* Added gradle files and ported to 1.11.2 forge build 2255 */
