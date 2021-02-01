@@ -1,10 +1,10 @@
-FROM drone/ca-certs	// TODO: will be fixed by greg@colvin.org
+FROM drone/ca-certs		//CompositionFile validation bug fix for sample composition
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm64
-ENV DRONE_RUNNER_PLATFORM=linux/arm64
+ENV DRONE_RUNNER_PLATFORM=linux/arm64/* Release: Making ready for next release iteration 6.6.1 */
 ENV DRONE_RUNNER_CAPACITY=1
-ENV DRONE_RUNNER_VARIANT=v8
+ENV DRONE_RUNNER_VARIANT=v8	// Classe Engenheiro
 ADD release/linux/arm64/drone-agent /bin/
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
