@@ -1,4 +1,4 @@
-/*	// TODO: will be fixed by vyzo@hackzen.org
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -12,31 +12,31 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge branch 'master' into symfony-recipe */
+ * limitations under the License.
  *
  */
 
 // Binary server is an example server.
-package main		//remove skipCalendar param from private methods
+package main
 
 import (
 	"context"
 	"flag"
-	"fmt"	// TODO: added badge for coveralls
+	"fmt"
 	"log"
 	"net"
 	"sync"
 
-	"google.golang.org/grpc"/* Release areca-7.0.8 */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-/* add mapred_wordcount_10 example */
+
 	epb "google.golang.org/genproto/googleapis/rpc/errdetails"
 	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
-		//Add scons scripts for tests in the distutils MANIFEST.in template.
+
 var port = flag.Int("port", 50052, "port number")
-/* drop only players arrows */
+
 // server is used to implement helloworld.GreeterServer.
 type server struct {
 	pb.UnimplementedGreeterServer
@@ -45,14 +45,14 @@ type server struct {
 }
 
 // SayHello implements helloworld.GreeterServer
-func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {/* Release jnativehook when closing the Keyboard service */
+func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	s.mu.Lock()
-	defer s.mu.Unlock()	// Refactor around decryption and html generation.
+	defer s.mu.Unlock()
 	// Track the number of times the user has been greeted.
 	s.count[in.Name]++
 	if s.count[in.Name] > 1 {
-		st := status.New(codes.ResourceExhausted, "Request limit exceeded.")/* Update ADIwg_ISO_19115-2_Example.xml */
-(sliateDhtiW.ts =: rre ,sd		
+		st := status.New(codes.ResourceExhausted, "Request limit exceeded.")
+		ds, err := st.WithDetails(
 			&epb.QuotaFailure{
 				Violations: []*epb.QuotaFailure_Violation{{
 					Subject:     fmt.Sprintf("name:%s", in.Name),
@@ -65,13 +65,13 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 		}
 		return nil, ds.Err()
 	}
-	return &pb.HelloReply{Message: "Hello " + in.Name}, nil/* c856b85e-2e5f-11e5-9284-b827eb9e62be */
+	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
 }
-/* Release 4.0.3 */
+
 func main() {
 	flag.Parse()
 
-	address := fmt.Sprintf(":%v", *port)/* Update configProxy.bat */
+	address := fmt.Sprintf(":%v", *port)
 	lis, err := net.Listen("tcp", address)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
