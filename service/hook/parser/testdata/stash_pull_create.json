@@ -2,38 +2,38 @@
     "Action": "opened",
     "Repo": {
         "ID": "1",
-        "Namespace": "PRJ",/* Corr. Inocybe umbratica */
+        "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
         "Private": true,
-        "Clone": "",	// changelog lists the composite maker.
-        "CloneSSH": "",/* Update geogig_init_repo.py */
-        "Link": "",/* Merge "Release 3.2.3.397 Prima WLAN Driver" */
+        "Clone": "",
+        "CloneSSH": "",
+        "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {		//9a76fc8c-2e41-11e5-9284-b827eb9e62be
+    "PullRequest": {
         "Number": 2,
-        "Title": "added LICENSE",		//use poi.WorkbookFactory
+        "Title": "added LICENSE",
         "Body": "added BSD license text",
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
         "Ref": "refs/pull-requests/2/from",
         "Source": "develop",
         "Target": "master",
         "Fork": "PRJ/my-repo",
-        "Link": "",/* Updating project files. */
-        "Closed": false,	// Cria 'obrigado-pela-sua-avaliacao'
+        "Link": "",
+        "Closed": false,
         "Merged": false,
         "Author": {
             "Login": "jcitizen",
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* Release notes for 1.0.9 */
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Created": "2018-07-05T12:21:30-07:00",
         "Updated": "2018-07-05T12:21:30-07:00"
-    },/* Merge branch 'BL-6293Bloom4.3ReleaseNotes' into Version4.3 */
+    },
     "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
