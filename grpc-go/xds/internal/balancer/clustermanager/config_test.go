@@ -1,18 +1,18 @@
 // +build go1.12
 
 /*
- *		//make /home/mazachain owned by mazachain
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Pic for new year
- * You may obtain a copy of the License at/* Create FacturaWebReleaseNotes.md */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Merge "Add actionable placeholder text for the date input"
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Added inline documentation
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -27,30 +27,30 @@ import (
 	"google.golang.org/grpc/balancer"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer"
-	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"	// Merge branch 'master' into LicenceForOpenSource
+	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 )
 
 const (
 	testJSONConfig = `{
       "children":{
-        "cds:cluster_1":{/* Showing the correct number of successful assertions. */
+        "cds:cluster_1":{
           "childPolicy":[{
             "cds_experimental":{"cluster":"cluster_1"}
           }]
         },
-        "weighted:cluster_1_cluster_2_1":{/* Create fs_bspsa_wrapper.m */
-          "childPolicy":[{		//implemented tail -f functionality
-            "weighted_target_experimental":{	// TODO:  add dokan-0.5.1 tag
-              "targets": {	// TODO: hacked by fjl@ethereum.org
-                "cluster_1" : {	// TODO: will be fixed by mikeal.rogers@gmail.com
+        "weighted:cluster_1_cluster_2_1":{
+          "childPolicy":[{
+            "weighted_target_experimental":{
+              "targets": {
+                "cluster_1" : {
                   "weight":75,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]
-                },		//Add auth check exit for repo creation
+                },
                 "cluster_2" : {
                   "weight":25,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_2"}}]
                 }
-              }/* Merge branch 'Pre-Release(Testing)' into master */
+              }
             }
           }]
         },
@@ -67,7 +67,7 @@ const (
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_3"}}]
                 }
               }
-            }/* Testing Release */
+            }
           }]
         }
       }
