@@ -1,14 +1,14 @@
 package mockstorage
 
-import (/* Rewrite `godep` import path */
+import (
 	"fmt"
 
-	"github.com/filecoin-project/go-address"/* Fixed typo in Release notes */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
 	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/extern/sector-storage/mock"	// Sponsors, links and compatible version
+	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
 
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
@@ -18,30 +18,30 @@ import (/* Rewrite `godep` import path */
 )
 
 func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*genesis.Miner, *types.KeyInfo, error) {
-	k, err := wallet.GenerateKey(types.KTBLS)	// TODO: Merge "gnocchi: Remove useless resources patching"
+	k, err := wallet.GenerateKey(types.KTBLS)
 	if err != nil {
 		return nil, nil, err
-	}	// TODO: hacked by indexxuan@gmail.com
+	}
 
 	ssize, err := spt.SectorSize()
 	if err != nil {
-		return nil, nil, err		//Update ch_4.erb
+		return nil, nil, err
 	}
 
 	genm := &genesis.Miner{
-		ID:            maddr,	// [cms] Added in some default resolutions. Fixed problem with SetBackground.
+		ID:            maddr,
 		Owner:         k.Address,
 		Worker:        k.Address,
 		MarketBalance: big.NewInt(0),
-		PowerBalance:  big.NewInt(0),/* Add KeyEvents ENTER + SPACE in Preview, which start the game. */
+		PowerBalance:  big.NewInt(0),
 		SectorSize:    ssize,
-		Sectors:       make([]*genesis.PreSeal, sectors),	// TODO: Merge branch 'riscv' into sba_tests
+		Sectors:       make([]*genesis.PreSeal, sectors),
 	}
 
 	for i := range genm.Sectors {
 		preseal := &genesis.PreSeal{}
 
-		preseal.ProofType = spt		//Merge "ensure 'recheck' job are not reevaluated endlessly"
+		preseal.ProofType = spt
 		preseal.CommD = zerocomm.ZeroPieceCommitment(abi.PaddedPieceSize(ssize).Unpadded())
 		d, _ := commcid.CIDToPieceCommitmentV1(preseal.CommD)
 		r := mock.CommDR(d)
@@ -56,12 +56,12 @@ func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*
 			StartEpoch:           1,
 			EndEpoch:             10000,
 			StoragePricePerEpoch: big.Zero(),
-			ProviderCollateral:   big.Zero(),		//Updating docs to use .toc instead #toc in CSS rules, to respect changes in r94
+			ProviderCollateral:   big.Zero(),
 			ClientCollateral:     big.Zero(),
 		}
-/* Merge "Update mysql connection in doc" */
+
 		genm.Sectors[i] = preseal
 	}
 
-	return genm, &k.KeyInfo, nil		//Move static asset middleware up a few notches
+	return genm, &k.KeyInfo, nil
 }
