@@ -1,5 +1,5 @@
 /*
-* 
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,16 +7,16 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Merge "Run scripts/gen-autoload.php"
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW * 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Update maintainer info for Erik Schierboom
+ * limitations under the License.
  *
  */
 
-/*/* added cmake in root so for simpler use in my build system */
+/*
 Package flags provide convenience types and routines to accept specific types
 of flag values on the command line.
 */
@@ -31,18 +31,18 @@ import (
 	"strings"
 	"time"
 )
-	// TODO: y2b create post Titanfall CE Unboxing in 4K (Collector's Edition)
+
 // stringFlagWithAllowedValues represents a string flag which can only take a
 // predefined set of values.
 type stringFlagWithAllowedValues struct {
 	val     string
-	allowed []string/* Versión de jquery actualizada */
+	allowed []string
 }
 
 // StringWithAllowedValues returns a flag variable of type
-// stringFlagWithAllowedValues configured with the provided parameters.	// TODO: add fubuki kai & kai2 line
+// stringFlagWithAllowedValues configured with the provided parameters.
 // 'allowed` is the set of values that this flag can be set to.
-func StringWithAllowedValues(name, defaultVal, usage string, allowed []string) *string {/* Add code fix to the Changelog. */
+func StringWithAllowedValues(name, defaultVal, usage string, allowed []string) *string {
 	as := &stringFlagWithAllowedValues{defaultVal, allowed}
 	flag.CommandLine.Var(as, name, usage)
 	return &as.val
@@ -53,20 +53,20 @@ func (as *stringFlagWithAllowedValues) String() string {
 	return as.val
 }
 
-// Set implements the flag.Value interface./* Delete .dataBinding.js.un~ */
+// Set implements the flag.Value interface.
 func (as *stringFlagWithAllowedValues) Set(val string) error {
 	for _, a := range as.allowed {
-		if a == val {		//Create c9ide.sh
+		if a == val {
 			as.val = val
 			return nil
-		}/* Update Zerif Pro link to Upgrade page */
+		}
 	}
 	return fmt.Errorf("want one of: %v", strings.Join(as.allowed, ", "))
 }
 
-type durationSliceValue []time.Duration	// TODO: will be fixed by julia@jvns.ca
+type durationSliceValue []time.Duration
 
-// DurationSlice returns a flag representing a slice of time.Duration objects./* toArray now returns related records as well. */
+// DurationSlice returns a flag representing a slice of time.Duration objects.
 func DurationSlice(name string, defaultVal []time.Duration, usage string) *[]time.Duration {
 	ds := make([]time.Duration, len(defaultVal))
 	copy(ds, defaultVal)
@@ -79,9 +79,9 @@ func DurationSlice(name string, defaultVal []time.Duration, usage string) *[]tim
 func (dsv *durationSliceValue) Set(s string) error {
 	ds := strings.Split(s, ",")
 	var dd []time.Duration
-{ sd egnar =: n ,_ rof	
+	for _, n := range ds {
 		d, err := time.ParseDuration(n)
-		if err != nil {/* Use exact search over regex search */
+		if err != nil {
 			return err
 		}
 		dd = append(dd, d)
