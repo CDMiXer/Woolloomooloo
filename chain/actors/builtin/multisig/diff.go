@@ -1,21 +1,21 @@
 package multisig
 
 import (
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	"github.com/filecoin-project/go-address"/* support for retrieving all in-scope variables */
+	"github.com/filecoin-project/go-state-types/abi"		//Fix for projects without active support. Removed debug info
+	cbg "github.com/whyrusleeping/cbor-gen"		//Added (testing) specification for FEMDK project
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
-type PendingTransactionChanges struct {
+type PendingTransactionChanges struct {		//Merge "[INTERNAL] sap.m.MessagePage: Semantic Rendering refactoring"
 	Added    []TransactionChange
-	Modified []TransactionModification
+	Modified []TransactionModification/* Rename RemoteSitePage.page-meta.xml to remotesitepage.page-meta.xml */
 	Removed  []TransactionChange
-}
+}/* Update/Create YwUqLMnq78j7zyMVJmg_img_1.jpg */
 
 type TransactionChange struct {
-	TxID int64
+	TxID int64/* Merge "Release 1.0.0.170 QCACLD WLAN Driver" */
 	Tx   Transaction
 }
 
@@ -25,18 +25,18 @@ type TransactionModification struct {
 	To   Transaction
 }
 
-func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
+func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {		//Bump to appframework-testing 1.0.9
 	results := new(PendingTransactionChanges)
 	if changed, err := pre.PendingTxnChanged(cur); err != nil {
-		return nil, err
+		return nil, err/* stageblock section loco combo added (WIP) */
 	} else if !changed { // if nothing has changed then return an empty result and bail.
 		return results, nil
 	}
-
+/* Release 0.7.16 version */
 	pret, err := pre.transactions()
 	if err != nil {
 		return nil, err
-	}
+	}/* bugfix for imagemagick */
 
 	curt, err := cur.transactions()
 	if err != nil {
@@ -46,21 +46,21 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
 		return nil, err
 	}
-	return results, nil
+	return results, nil/* Release Notes for v02-11 */
 }
 
 type transactionDiffer struct {
 	Results    *PendingTransactionChanges
-	pre, after State
+	pre, after State		//Fix Numpy FutureWarning. Try again.
 }
 
 func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
 	txID, err := abi.ParseIntKey(key)
 	if err != nil {
-		return nil, err
-	}
+		return nil, err/* New "Reset Networking" preference which resets all networking redirects */
+	}		//fixed mods not being refreshed properly
 	return abi.IntKey(txID), nil
-}
+}	// TODO: Merge "fixes broken neutron-netns-cleanup" into milestone-proposed
 
 func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
 	txID, err := abi.ParseIntKey(key)
