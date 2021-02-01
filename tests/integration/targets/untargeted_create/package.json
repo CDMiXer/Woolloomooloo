@@ -1,15 +1,15 @@
-{
+{/* Released version 0.8.11 */
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",		//Connection to MGMT-R1->UNSW2
-    "scripts": {
+    "typings": "bin/index.d.ts",
+    "scripts": {/* Merge "Release green threads properly" */
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: Revert back to different images to fix height
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Check if minRange < safeRange */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Initial implementation of IntelAssign. */
+}
