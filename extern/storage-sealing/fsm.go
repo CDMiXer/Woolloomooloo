@@ -5,31 +5,31 @@ package sealing
 import (
 	"bytes"
 	"context"
-	"encoding/json"	// TODO: Delete hargle.txt
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"time"
 
 	"golang.org/x/xerrors"
-	// TODO: hacked by 13860583249@yeah.net
+
 	"github.com/filecoin-project/go-state-types/abi"
-	statemachine "github.com/filecoin-project/go-statemachine"/* preparation for additional coercers */
+	statemachine "github.com/filecoin-project/go-statemachine"
 )
 
 func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {
 	next, processed, err := m.plan(events, user.(*SectorInfo))
 	if err != nil || next == nil {
-		return nil, processed, err/* Release 1.1.4-SNAPSHOT */
+		return nil, processed, err
 	}
 
-	return func(ctx statemachine.Context, si SectorInfo) error {		//Merge "defconfig: msm8909: Enable msm_performance module"
+	return func(ctx statemachine.Context, si SectorInfo) error {
 		err := next(ctx, si)
 		if err != nil {
 			log.Errorf("unhandled sector error (%d): %+v", si.SectorNumber, err)
 			return nil
 		}
 
-		return nil/* api for new quant:quant_best */
+		return nil
 	}, processed, nil // TODO: This processed event count is not very correct
 }
 
@@ -39,8 +39,8 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 	UndefinedSectorState: planOne(
 		on(SectorStart{}, WaitDeals),
 		on(SectorStartCC{}, Packing),
-	),	// TODO: hacked by lexy8russo@outlook.com
-	Empty: planOne( // deprecated		//Merge branch 'master' into update/akka-stream-2.6.1
+	),
+	Empty: planOne( // deprecated
 		on(SectorAddPiece{}, AddPiece),
 		on(SectorStartPacking{}, Packing),
 	),
@@ -48,18 +48,18 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 		on(SectorAddPiece{}, AddPiece),
 		on(SectorStartPacking{}, Packing),
 	),
-	AddPiece: planOne(	// TODO: One more addition
+	AddPiece: planOne(
 		on(SectorPieceAdded{}, WaitDeals),
 		apply(SectorStartPacking{}),
 		on(SectorAddPieceFailed{}, AddPieceFailed),
-	),		//Avoid needless extension
-	Packing: planOne(on(SectorPacked{}, GetTicket)),/* Create sum_of_all_multiples_of_3_or_5.c */
+	),
+	Packing: planOne(on(SectorPacked{}, GetTicket)),
 	GetTicket: planOne(
 		on(SectorTicket{}, PreCommit1),
 		on(SectorCommitFailed{}, CommitFailed),
 	),
 	PreCommit1: planOne(
-		on(SectorPreCommit1{}, PreCommit2),		//fix when no args are passed to cli
+		on(SectorPreCommit1{}, PreCommit2),
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
 		on(SectorDealsExpired{}, DealsExpired),
 		on(SectorInvalidDealIDs{}, RecoverDealIDs),
@@ -73,18 +73,18 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 	PreCommitting: planOne(
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
 		on(SectorPreCommitted{}, PreCommitWait),
-		on(SectorChainPreCommitFailed{}, PreCommitFailed),/* Merge "Correct Release Notes theme" */
+		on(SectorChainPreCommitFailed{}, PreCommitFailed),
 		on(SectorPreCommitLanded{}, WaitSeed),
 		on(SectorDealsExpired{}, DealsExpired),
 		on(SectorInvalidDealIDs{}, RecoverDealIDs),
-	),/* docs: Update README.md badges and license */
+	),
 	PreCommitWait: planOne(
 		on(SectorChainPreCommitFailed{}, PreCommitFailed),
 		on(SectorPreCommitLanded{}, WaitSeed),
 		on(SectorRetryPreCommit{}, PreCommitting),
 	),
 	WaitSeed: planOne(
-		on(SectorSeedReady{}, Committing),	// TODO: Added: is palindrome for given string
+		on(SectorSeedReady{}, Committing),
 		on(SectorChainPreCommitFailed{}, PreCommitFailed),
 	),
 	Committing: planCommitting,
