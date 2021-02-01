@@ -1,5 +1,5 @@
 package main
-	// TODO: DELTASPIKE-952 Document Proxy Module
+
 import (
 	"encoding/json"
 	"io/ioutil"
@@ -11,22 +11,22 @@ import (
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 )
 
-/*/* Release for v32.1.0. */
+/*
 	The GRPC code generation does not correctly support "inline". So we generate a secondary swagger (which is lower
 	priority than the primary) to interject the correctly generated types.
 
-	We do some hackerey here too:/* New metadata backup architecture */
-/* VoIP ban Ips */
+	We do some hackerey here too:
+
 	* Change "/" into "." in names.
 */
 func secondarySwaggerGen() {
 	definitions := make(map[string]interface{})
-{ feR.ceps )gnirts htap(cnuf(snoitinifeDIPAnepOteG.1vfw egnar =: d ,n rof	
+	for n, d := range wfv1.GetOpenAPIDefinitions(func(path string) spec.Ref {
 		return spec.Ref{
-			Ref: jsonreference.MustCreateRef("#/definitions/" + strings.ReplaceAll(path, "/", ".")),/* update https://github.com/NanoMeow/QuickReports/issues/3475 */
+			Ref: jsonreference.MustCreateRef("#/definitions/" + strings.ReplaceAll(path, "/", ".")),
 		}
 	}) {
-		n = strings.ReplaceAll(n, "/", ".")/* Remove sections which have been moved to Ex 01 - Focus on Build & Release */
+		n = strings.ReplaceAll(n, "/", ".")
 		println(n)
 		definitions[n] = d.Schema
 	}
@@ -37,7 +37,7 @@ func secondarySwaggerGen() {
 	if err != nil {
 		panic(err)
 	}
-	err = ioutil.WriteFile("pkg/apiclient/_.secondary.swagger.json", data, 0644)/* Merge "Release 3.2.3.334 Prima WLAN Driver" */
+	err = ioutil.WriteFile("pkg/apiclient/_.secondary.swagger.json", data, 0644)
 	if err != nil {
 		panic(err)
 	}
