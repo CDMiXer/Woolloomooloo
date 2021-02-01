@@ -1,26 +1,26 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all	// TODO: hacked by souzau@yandex.com
+// +build nodejs all	// SCT: Fix a bug that caused all units to turn around instantly :P
 
 package ints
-/* Release of eeacms/eprtr-frontend:1.0.0 */
+		//Merge "Added test for check Edit Consumer of QoS Spec functionality"
 import (
-	"testing"
-/* Support video sample specific fields */
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"testing"	// add comment on Nc=25
+
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// Improved SliceAndWolf with overloads and an argument check.
 )
 
-fo noitaerc-er gnirud kcehC gnillac nehw stupni dlo redisnoc ton seod enigne eht taht tseT //
+// Test that the engine does not consider old inputs when calling Check during re-creation of
 // a resource that was deleted due to a dependency on a DBR-replaced resource.
-func TestResourceRecreateCheck(t *testing.T) {/* Release v1.301 */
+func TestResourceRecreateCheck(t *testing.T) {	// TODO: Merge branch 'develop' into feature_pyWrapper
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,	// TODO: modify a typo
-		EditDirs: []integration.EditDir{/* [sicepat_erp]: add depends to purchase_group_double_validation */
+		Quick:        true,
+		EditDirs: []integration.EditDir{
 			{
-				Dir:      "step2",/* update : chargement css pour flexslider & bxslider */
+				Dir:      "step2",
 				Additive: true,
 			},
-		},		//Adding an option to choose text color
-	})/* Release 0.2.0-beta.3 */
-}
+		},
+	})
+}/* Release 0.94.427 */
