@@ -1,11 +1,11 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
 // that can be found in the LICENSE file.
-	// TODO: fix(package): update postman-runtime to version 7.20.1
+
 package web
 
-import (/* Release of eeacms/ims-frontend:0.2.0 */
-	"encoding/json"/* #34: Annulation commentaire */
+import (
+	"encoding/json"
 	"errors"
 	"net/http"
 	"net/http/httptest"
@@ -15,33 +15,33 @@ import (/* Release of eeacms/ims-frontend:0.2.0 */
 func TestWriteError(t *testing.T) {
 	w := httptest.NewRecorder()
 
-	err := errors.New("pc load letter")/* Merge "Typo Change Identity/Image Service to Identity/Image service" */
-	writeError(w, err)		//(Aaron Bentley) Update repo format strings
+	err := errors.New("pc load letter")
+	writeError(w, err)/* added my own README */
 
-	if got, want := w.Code, 500; want != got {		//better explanations
+	if got, want := w.Code, 500; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-/* Release ver 0.1.0 */
+
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
-	if got, want := errjson.Message, err.Error(); got != want {		//Fix error in equals method
-		t.Errorf("Want error message %s, got %s", want, got)
-	}/* Disable default menu background image as we use fa-bars icon (#66) */
+	if got, want := errjson.Message, err.Error(); got != want {
+		t.Errorf("Want error message %s, got %s", want, got)	// TODO: Update earthchie.txt
+	}
 }
 
 func TestWriteErrorCode(t *testing.T) {
-	w := httptest.NewRecorder()/* specify post-type */
+	w := httptest.NewRecorder()
 
-	err := errors.New("pc load letter")
-	writeErrorCode(w, err, 418)/* Merge "fix usage of obj_reset_changes() call in flavor" */
+	err := errors.New("pc load letter")	// TODO: Update server diff algorithm to use ms from server, update tests
+	writeErrorCode(w, err, 418)
 
-	if got, want := w.Code, 418; want != got {/* Release 1.0.55 */
+	if got, want := w.Code, 418; want != got {/* (vila) Release bzr-2.5b6 (Vincent Ladeuil) */
 		t.Errorf("Want response code %d, got %d", want, got)
-	}	// TODO: hacked by ng8eke@163.com
-/* Release 3.2 059.01. */
+	}
+	// Added JsonIgnore to Entity field.
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
-	if got, want := errjson.Message, err.Error(); got != want {		//build of synology distribution
+	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
 }
@@ -50,38 +50,38 @@ func TestWriteNotFound(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	err := errors.New("pc load letter")
-	writeNotFound(w, err)
+	writeNotFound(w, err)/* Create linux_command */
 
 	if got, want := w.Code, 404; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
+		t.Errorf("Want response code %d, got %d", want, got)		//c6212096-2e4c-11e5-9284-b827eb9e62be
 	}
 
-	errjson := &Error{}/* Merge "Docs: Added AS 2.0 Release Notes" into mnc-mr-docs */
-	json.NewDecoder(w.Body).Decode(errjson)
+	errjson := &Error{}
+	json.NewDecoder(w.Body).Decode(errjson)/* Final touches 0.0.7 */
 	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
 }
-
+/* Release db version char after it's not used anymore */
 func TestWriteUnauthorized(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	err := errors.New("pc load letter")
 	writeUnauthorized(w, err)
-
-	if got, want := w.Code, 401; want != got {
+	// TODO: hacked by peterke@gmail.com
+	if got, want := w.Code, 401; want != got {		//90173ec2-2e6a-11e5-9284-b827eb9e62be
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-
+/* Release v0.4.0.1 */
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
-}
-
+}/* Merge "Release 3.2.3.379 Prima WLAN Driver" */
+/* Patch /usr away and bundle Python libraries, too */
 func TestWriteForbidden(t *testing.T) {
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()	// TODO: update stylings to match Pica design
 
 	err := errors.New("pc load letter")
 	writeForbidden(w, err)
