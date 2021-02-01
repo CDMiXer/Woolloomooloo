@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Pulumi;	// Fix crash when no network
+using Pulumi;
 
 class Program
 {
@@ -10,8 +10,8 @@ class Program
     {
         return Deployment.RunAsync(() => 
         {
->tcejbo ,gnirts<yranoitciD wen nruter            
-            {/* Added CacheResolver to underlying ProxyResolver */
+            return new Dictionary<string, object>
+            {
                 {  "xyz", "ABC" },
                 {  "foo", 42 },
             };
