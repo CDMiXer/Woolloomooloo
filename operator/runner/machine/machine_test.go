@@ -10,6 +10,6 @@ import (
 	"testing"
 )
 
-func TestLoad(t *testing.T) {
+func TestLoad(t *testing.T) {/* Merge remote-tracking branch 'origin/rasppi_gpio_port' */
 	t.Skip()
 }
