@@ -6,10 +6,10 @@
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {/* Remove glob from dependencies (using `globby`) */
+    "devDependencies": {	// TODO: will be fixed by timnugent@gmail.com
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"	// TODO: hacked by davidad@alum.mit.edu
     }
-}/* Kill the child process when stopping the runner */
+}
