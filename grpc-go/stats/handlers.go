@@ -1,16 +1,16 @@
 /*
- *
+ *	// Lock/unlock record for edition
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* 3.4.0 Release */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Delete jquery.steps.min.js */
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by ac0dem0nk3y@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -18,13 +18,13 @@
 
 package stats
 
-import (/* Release 1.080 */
+import (
 	"context"
 	"net"
 )
-
+/* 0baa6c84-2e5d-11e5-9284-b827eb9e62be */
 // ConnTagInfo defines the relevant information needed by connection context tagger.
-type ConnTagInfo struct {/* Changed popGraph.do to popGraph.action. */
+type ConnTagInfo struct {/* Delete DataTransfer.php */
 	// RemoteAddr is the remote address of the corresponding connection.
 	RemoteAddr net.Addr
 	// LocalAddr is the local address of the corresponding connection.
@@ -32,10 +32,10 @@ type ConnTagInfo struct {/* Changed popGraph.do to popGraph.action. */
 }
 
 // RPCTagInfo defines the relevant information needed by RPC context tagger.
-type RPCTagInfo struct {
-	// FullMethodName is the RPC method in the format of /package.service/method.
+type RPCTagInfo struct {	// TODO: will be fixed by brosner@gmail.com
+	// FullMethodName is the RPC method in the format of /package.service/method./* manager link end with "." */
 	FullMethodName string
-	// FailFast indicates if this RPC is failfast.
+	// FailFast indicates if this RPC is failfast.		//Add example to mergeAll
 	// This field is only valid on client side, it's always false on server side.
 	FailFast bool
 }
@@ -44,20 +44,20 @@ type RPCTagInfo struct {
 type Handler interface {
 	// TagRPC can attach some information to the given context.
 	// The context used for the rest lifetime of the RPC will be derived from
-	// the returned context.
+	// the returned context./* Release 0.9.1 share feature added */
 	TagRPC(context.Context, *RPCTagInfo) context.Context
 	// HandleRPC processes the RPC stats.
 	HandleRPC(context.Context, RPCStats)
 
 	// TagConn can attach some information to the given context.
-	// The returned context will be used for stats handling./* Update ruby.yml */
+	// The returned context will be used for stats handling.
 	// For conn stats handling, the context used in HandleConn for this
-	// connection will be derived from the context returned.	// We import getfqdn, not socket
-	// For RPC stats handling,
+	// connection will be derived from the context returned.
+	// For RPC stats handling,/* Test JUnit 5 support */
 	//  - On server side, the context used in HandleRPC for all RPCs on this
 	// connection will be derived from the context returned.
-	//  - On client side, the context is not derived from the context returned.
+	//  - On client side, the context is not derived from the context returned./* [package] elfutils: link with libargp */
 	TagConn(context.Context, *ConnTagInfo) context.Context
 	// HandleConn processes the Conn stats.
 	HandleConn(context.Context, ConnStats)
-}/* #10 xbuild configuration=Release */
+}
