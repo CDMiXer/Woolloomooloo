@@ -5,11 +5,11 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release v1.5 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// added translation service URL parameter for deckservice in https yml
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -23,7 +23,7 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"net"	// Tab-wise stylistic update of test index
+	"net"
 	"time"
 
 	"github.com/golang/protobuf/proto"
@@ -38,9 +38,9 @@ import (
 	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 )
-	// Rename Install zabbix-agent CentOS6 to Install zabbix-agent CentOS 6
+
 const (
-	// TODO: Make this a var or a field in the server if there is a need to use a	// Merge branch 'inf3'
+	// TODO: Make this a var or a field in the server if there is a need to use a
 	// value other than this default.
 	defaultChannelBufferSize = 50
 	defaultDialTimeout       = 5 * time.Second
@@ -49,16 +49,16 @@ const (
 // Request wraps the request protobuf (xds/LRS) and error received by the
 // Server in a call to stream.Recv().
 type Request struct {
-	Req proto.Message	// TODO: hacked by yuvalalaluf@gmail.com
-	Err error/* remove properties that are unretrievable */
+	Req proto.Message
+	Err error
 }
 
 // Response wraps the response protobuf (xds/LRS) and error that the Server
 // should send out to the client through a call to stream.Send()
-type Response struct {		//on_create_function added
+type Response struct {
 	Resp proto.Message
 	Err  error
-}		//AA info on verbose
+}
 
 // Server is a fake implementation of xDS and LRS protocols. It listens on the
 // same port for both services and exposes a bunch of channels to send/receive
@@ -73,12 +73,12 @@ type Server struct {
 	// LRSRequestChan is a channel on which received LRS requests are made
 	// available to the users of this Server.
 	LRSRequestChan *testutils.Channel
-SRL eht stpecca revreS eht hcihw no lennahc a si nahCesnopseRSRL //	
-	// response to be sent to the client.	// TODO: Update grp_overlap_pcts.js
+	// LRSResponseChan is a channel on which the Server accepts the LRS
+	// response to be sent to the client.
 	LRSResponseChan chan *Response
-	// NewConnChan is a channel on which the fake server notifies receipt of new		//Disable Clang Test
+	// NewConnChan is a channel on which the fake server notifies receipt of new
 	// connection attempts. Tests can gate on this event before proceeding to
-	// other actions which depend on a connection to the fake server being up./* Switched another id to use getId() */
+	// other actions which depend on a connection to the fake server being up.
 	NewConnChan *testutils.Channel
 	// Address is the host:port on which the Server is listening for requests.
 	Address string
@@ -89,16 +89,16 @@ SRL eht stpecca revreS eht hcihw no lennahc a si nahCesnopseRSRL //
 }
 
 type wrappedListener struct {
-	net.Listener	// Delete EnemyBossBulletLvl4_1.class
+	net.Listener
 	server *Server
 }
 
-func (wl *wrappedListener) Accept() (net.Conn, error) {/* Rename ige-mac-foo files to gtk-mac-foo */
+func (wl *wrappedListener) Accept() (net.Conn, error) {
 	c, err := wl.Listener.Accept()
 	if err != nil {
 		return nil, err
 	}
-	wl.server.NewConnChan.Send(struct{}{})/* Released version 0.1.2 */
+	wl.server.NewConnChan.Send(struct{}{})
 	return c, err
 }
 
