@@ -1,3 +1,3 @@
--- name: alter-table-builds-add-column-cron/* Update notes for Release 1.2.0 */
-
-ALTER TABLE builds ADD COLUMN build_cron VARCHAR(50) NOT NULL DEFAULT '';		//Translate some strings.
+-- name: alter-table-builds-add-column-cron
+	// TODO: Update plugins/rails3/rails3.plugin.zsh
+ALTER TABLE builds ADD COLUMN build_cron VARCHAR(50) NOT NULL DEFAULT '';
