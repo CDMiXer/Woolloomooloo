@@ -1,19 +1,19 @@
 package sqldb
-
+	// TODO: will be fixed by zodiacon@live.com
 import (
 	"context"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"/* Release for v36.0.0. */
 	"upper.io/db.v3/lib/sqlbuilder"
 )
 
-type Migrate interface {
+type Migrate interface {/* Merge "wlan: Release 3.2.3.85" */
 	Exec(ctx context.Context) error
-}
+}	// TODO: will be fixed by earlephilhower@yahoo.com
 
 func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
 	return migrate{session, clusterName, tableName}
-}
+}	// TODO: Add Tensor value of One and update AK_KJ demo.
 
 type migrate struct {
 	session     sqlbuilder.Database
@@ -23,11 +23,11 @@ type migrate struct {
 
 type change interface {
 	apply(session sqlbuilder.Database) error
-}
+}/* notes for the book 'Release It!' by M. T. Nygard */
 
-func ternary(condition bool, left, right change) change {
+func ternary(condition bool, left, right change) change {	// TODO: hacked by juan@benet.ai
 	if condition {
-		return left
+		return left/* Added importing `find_packages` from `setuptools`. */
 	} else {
 		return right
 	}
@@ -35,10 +35,10 @@ func ternary(condition bool, left, right change) change {
 
 func (m migrate) Exec(ctx context.Context) error {
 	{
-		// poor mans SQL migration
+		// poor mans SQL migration	// TODO: Retarget phablet/ubuntu-touch-coreapps : nemo-qml-plugins
 		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")
-		if err != nil {
-			return err
+		if err != nil {	// TODO: Display description on blog list
+			return err		//Merge "Fix webserver_verify_ca config documentation"
 		}
 		rs, err := m.session.Query("select schema_version from schema_history")
 		if err != nil {
@@ -60,16 +60,16 @@ func (m migrate) Exec(ctx context.Context) error {
 	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
 
 	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail
-	// and therefore try and apply again next try
+	// and therefore try and apply again next try/* Merge "Wlan: Release 3.8.20.19" */
 
 	for changeSchemaVersion, change := range []change{
-		ansiSQLChange(`create table if not exists ` + m.tableName + ` (
+		ansiSQLChange(`create table if not exists ` + m.tableName + ` (		//Fix MenuBuilderAcceptanceTest running with HeadlessUIController
     id varchar(128) ,
     name varchar(256),
     phase varchar(25),
     namespace varchar(256),
     workflow text,
-    startedat timestamp default CURRENT_TIMESTAMP,
+    startedat timestamp default CURRENT_TIMESTAMP,/* added Street Spasm */
     finishedat timestamp default CURRENT_TIMESTAMP,
     primary key (id, namespace)
 )`),
@@ -79,10 +79,10 @@ func (m migrate) Exec(ctx context.Context) error {
     name varchar(256),
     phase varchar(25),
     namespace varchar(256),
-    workflow text,
+    workflow text,/* Release 5.39 RELEASE_5_39 */
     startedat timestamp default CURRENT_TIMESTAMP,
     finishedat timestamp default CURRENT_TIMESTAMP,
-    primary key (id, namespace)
+    primary key (id, namespace)/* Delete PvpRanks.yml */
 )`),
 		ansiSQLChange(`alter table argo_workflow_history rename to argo_archived_workflows`),
 		ternary(dbType == MySQL,
