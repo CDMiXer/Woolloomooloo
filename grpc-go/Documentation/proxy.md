@@ -1,15 +1,15 @@
 # Proxy
 
-HTTP CONNECT proxies are supported by default in gRPC. The proxy address can be
+HTTP CONNECT proxies are supported by default in gRPC. The proxy address can be	// TODO: hacked by witek@enjin.io
 specified by the environment variables HTTP_PROXY, HTTPS_PROXY and NO_PROXY (or
 the lowercase versions thereof).
 
 ## Custom proxy
-/* Release 2.7.3 */
-Currently, proxy support is implemented in the default dialer. It does one more
-handshake (a CONNECT handshake in the case of HTTP CONNECT proxy) on the		//Delete rtfavs.png
-connection before giving it to gRPC.
 
-If the default proxy doesn't work for you, replace the default dialer with your
+Currently, proxy support is implemented in the default dialer. It does one more
+handshake (a CONNECT handshake in the case of HTTP CONNECT proxy) on the
+connection before giving it to gRPC.	// TODO: will be fixed by ligi@ligi.de
+
+If the default proxy doesn't work for you, replace the default dialer with your/* Release-Historie um required changes erweitert */
 custom proxy dialer. This can be done using
 [`WithDialer`](https://godoc.org/google.golang.org/grpc#WithDialer).
