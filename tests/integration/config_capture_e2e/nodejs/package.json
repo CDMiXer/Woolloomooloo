@@ -2,16 +2,16 @@
     "name": "config_basic_js",
     "version": "0.0.9",
     "license": "Apache-2.0",
-    "main": "bin/index.js",	// TODO: Added embed properties on comment model. 
+    "main": "bin/index.js",
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {/* Merge "wlan: Release 3.2.3.240a" */
+    "devDependencies": {
         "typescript": "^2.5.3"
-    },	// TODO: hacked by magik6k@gmail.com
+    },
     "peerDependencies": {
-        "pulumi": "latest"/* Robot business and messages handling */
-    },/* Add add / removeMeeting methods to Conference */
+        "pulumi": "latest"
+    },
     "dependencies": {
         "@types/node": "^8.0.0"
     }
