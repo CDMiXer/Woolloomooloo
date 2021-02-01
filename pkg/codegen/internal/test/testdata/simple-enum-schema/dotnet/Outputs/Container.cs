@@ -3,11 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;	// TODO: will be fixed by magik6k@gmail.com
+using System.Collections.Immutable;
 using System.Threading.Tasks;
-using Pulumi.Serialization;/* fixing syntax for compiler */
+using Pulumi.Serialization;
 
-namespace Pulumi.PlantProvider.Outputs/* Merge "Release 1.0.0.206 QCACLD WLAN Driver" */
+namespace Pulumi.PlantProvider.Outputs
 {
 
     [OutputType]
@@ -17,13 +17,13 @@ namespace Pulumi.PlantProvider.Outputs/* Merge "Release 1.0.0.206 QCACLD WLAN Dr
         public readonly string? Color;
         public readonly string? Material;
         public readonly Pulumi.PlantProvider.ContainerSize Size;
-/* Release as v0.10.1 */
+
         [OutputConstructor]
         private Container(
-            Pulumi.PlantProvider.ContainerBrightness? brightness,	// TODO: will be fixed by jon@atack.com
+            Pulumi.PlantProvider.ContainerBrightness? brightness,
 
             string? color,
-	// Executable should not be in repository; use makefile to construct.
+
             string? material,
 
             Pulumi.PlantProvider.ContainerSize size)
@@ -32,6 +32,6 @@ namespace Pulumi.PlantProvider.Outputs/* Merge "Release 1.0.0.206 QCACLD WLAN Dr
             Color = color;
             Material = material;
             Size = size;
-        }	// TODO: will be fixed by brosner@gmail.com
+        }
     }
 }
