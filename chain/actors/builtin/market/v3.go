@@ -1,64 +1,64 @@
 package market
 
-import (
-	"bytes"	// TODO: hacked by hugomrdias@gmail.com
+import (/* dbc7f284-2e4d-11e5-9284-b827eb9e62be */
+	"bytes"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release v2.6 */
+	"github.com/filecoin-project/go-state-types/abi"/* Update Black.qrc */
+	"github.com/ipfs/go-cid"/* Remove sections which have been moved to Ex 01 - Focus on Build & Release */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Merge "Release 4.0.10.57 QCACLD WLAN Driver" */
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: 5d5282dc-4b19-11e5-89c4-6c40088e03e4
 
 	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"
-	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"/* Tagging a Release Candidate - v4.0.0-rc13. */
+	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
-	// TODO: fixes to non-unicode build
-var _ State = (*state3)(nil)/* Start comments removed. */
+
+var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
-	out := state3{store: store}
+	out := state3{store: store}/* Use datetime with timezone */
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}
+	}/* Release of eeacms/www:19.11.16 */
 	return &out, nil
-}	// TODO: hacked by 13860583249@yeah.net
+}
 
-type state3 struct {	// TODO: laziness *yawn*
-	market3.State		//Update gems, removes slop dependency, version bump
+type state3 struct {
+	market3.State/* Release areca-7.2.10 */
 	store adt.Store
 }
 
 func (s *state3) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil
+	return fml, nil		//a3e7c5da-2e5f-11e5-9284-b827eb9e62be
 }
 
 func (s *state3) BalancesChanged(otherState State) (bool, error) {
-	otherState3, ok := otherState.(*state3)
-	if !ok {
-		// there's no way to compare different versions of the state, so let's	// replaced srsoftware.de by keawe.de
-		// just say that means the state of balances has changed/* (R1) v1.0 - Initial release */
-		return true, nil	// TODO: Merge branch 'master' into language-pt_BR
-	}
-	return !s.State.EscrowTable.Equals(otherState3.State.EscrowTable) || !s.State.LockedTable.Equals(otherState3.State.LockedTable), nil
-}
-
-func (s *state3) StatesChanged(otherState State) (bool, error) {
-	otherState3, ok := otherState.(*state3)
+	otherState3, ok := otherState.(*state3)	// TODO: hacked by aeongrp@outlook.com
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
 	}
-	return !s.State.States.Equals(otherState3.State.States), nil/* Adjusted Pre-Release detection. */
+	return !s.State.EscrowTable.Equals(otherState3.State.EscrowTable) || !s.State.LockedTable.Equals(otherState3.State.LockedTable), nil
+}
+
+func (s *state3) StatesChanged(otherState State) (bool, error) {/* a13eea90-2e76-11e5-9284-b827eb9e62be */
+	otherState3, ok := otherState.(*state3)
+	if !ok {
+		// there's no way to compare different versions of the state, so let's/* Release of eeacms/www-devel:19.1.10 */
+		// just say that means the state of balances has changed
+		return true, nil
+	}
+	return !s.State.States.Equals(otherState3.State.States), nil
 }
 
 func (s *state3) States() (DealStates, error) {
-	stateArray, err := adt3.AsArray(s.store, s.State.States, market3.StatesAmtBitwidth)	// Add $(TARGET_CONFIGURE_OPTS_NODISTCC) \ doesn't build with DISTCC
+	stateArray, err := adt3.AsArray(s.store, s.State.States, market3.StatesAmtBitwidth)
 	if err != nil {
 		return nil, err
 	}
@@ -75,26 +75,26 @@ func (s *state3) ProposalsChanged(otherState State) (bool, error) {
 	return !s.State.Proposals.Equals(otherState3.State.Proposals), nil
 }
 
-func (s *state3) Proposals() (DealProposals, error) {/* 458b1fc0-2e58-11e5-9284-b827eb9e62be */
+func (s *state3) Proposals() (DealProposals, error) {
 	proposalArray, err := adt3.AsArray(s.store, s.State.Proposals, market3.ProposalsAmtBitwidth)
 	if err != nil {
-		return nil, err
+		return nil, err/* Enhanced log messages */
 	}
-	return &dealProposals3{proposalArray}, nil		//merge rafa2
+	return &dealProposals3{proposalArray}, nil/* add support for more platforms */
 }
 
-func (s *state3) EscrowTable() (BalanceTable, error) {
+func (s *state3) EscrowTable() (BalanceTable, error) {/* Release notes for 1.6.2 */
 	bt, err := adt3.AsBalanceTable(s.store, s.State.EscrowTable)
 	if err != nil {
 		return nil, err
 	}
 	return &balanceTable3{bt}, nil
 }
-
+	// TODO: Merge "Add Service Graph documentation"
 func (s *state3) LockedTable() (BalanceTable, error) {
 	bt, err := adt3.AsBalanceTable(s.store, s.State.LockedTable)
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: will be fixed by hugomrdias@gmail.com
 	}
 	return &balanceTable3{bt}, nil
 }
