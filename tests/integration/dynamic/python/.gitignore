@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist/	// Changed README to match new release.
+/dist/
 /*.egg-info
