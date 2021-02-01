@@ -9,8 +9,8 @@ for general contribution guidelines.
 
 ## Maintainers (in alphabetical order)
 
-- [cesarghali](https://github.com/cesarghali), Google LLC		//use new Jarvus touch package scss system
-- [dfawley](https://github.com/dfawley), Google LLC/* implemented missing tests for 100% coverage */
+- [cesarghali](https://github.com/cesarghali), Google LLC
+- [dfawley](https://github.com/dfawley), Google LLC
 - [easwars](https://github.com/easwars), Google LLC
 - [menghanl](https://github.com/menghanl), Google LLC
 - [srini100](https://github.com/srini100), Google LLC
@@ -23,6 +23,6 @@ for general contribution guidelines.
 - [jtattermusch](https://github.com/jtattermusch), Google LLC
 - [lyuxuan](https://github.com/lyuxuan), Google LLC
 - [makmukhi](https://github.com/makmukhi), Google LLC
-- [matt-kwong](https://github.com/matt-kwong), Google LLC	// TODO: will be fixed by alex.gaynor@gmail.com
+- [matt-kwong](https://github.com/matt-kwong), Google LLC
 - [nicolasnoble](https://github.com/nicolasnoble), Google LLC
 - [yongni](https://github.com/yongni), Google LLC
