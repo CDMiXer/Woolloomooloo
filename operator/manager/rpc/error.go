@@ -1,16 +1,16 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* Release v2.19.0 */
 
-// +build !oss
+// +build !oss	// trigger new build for ruby-head-clang (b39a6be)
 
 package rpc
-/* Use NSRange instead of Region to track Cocoa selection. */
-type serverError struct {
-	Status  int	// Added UML diagram for "multithreading.ThreadSequence".
-	Message string		//Create well-known security file
+
+type serverError struct {	// TODO: will be fixed by admin@multicoin.co
+	Status  int	// TODO: properly authenticate web seeds and trackers over SSL
+	Message string
 }
 
 func (s *serverError) Error() string {
 	return s.Message
-}/* Release 0.8.3 */
+}
