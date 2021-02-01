@@ -7,35 +7,35 @@ Package grpc_testingv3 is a generated protocol buffer package.
 
 It is generated from these files:
 	testv3.proto
-		//Removed old comments
+
 It has these top-level messages:
 	SearchResponseV3
 	SearchRequestV3
-*/		//removed & from middle of strings
-package grpc_testingv3/* Change protectonly check from command.com to VKBD module loaded (Ticket 392) */
+*/
+package grpc_testingv3
 
 import (
-	fmt "fmt"	// TODO: will be fixed by yuvalalaluf@gmail.com
-/* Merge "wlan: TL module fix for memory consumption in WLANTLC_CBType module." */
+	fmt "fmt"
+
 	proto "github.com/golang/protobuf/proto"
 
 	math "math"
-/* Added who_includes function to graphviz generation. */
-	context "context"/* Merge "Release 3.2.3.407 Prima WLAN Driver" */
+
+	context "context"
 
 	grpc "google.golang.org/grpc"
 )
 
-// Reference imports to suppress errors if they are not otherwise used.	// Beginning of GSGlyphInfo wrapper.
-var _ = proto.Marshal	// TODO: Add toArray method
-var _ = fmt.Errorf	// DB support and clean urls
+// Reference imports to suppress errors if they are not otherwise used.
+var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 // This is a compile-time assertion to ensure that this generated file
-// is compatible with the proto package it is being compiled against.		//Removed overly complicated code for projection in FloatTransform3D.
+// is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package/* Release 1.1.4 CHANGES.md (#3906) */
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type SearchResponseV3_State int32
 
@@ -51,14 +51,14 @@ var SearchResponseV3_State_name = map[int32]string{
 	2: "STALE",
 }
 var SearchResponseV3_State_value = map[string]int32{
-	"UNKNOWN": 0,	// chore(deps): update dependency @types/jest to v24.0.3
+	"UNKNOWN": 0,
 	"FRESH":   1,
 	"STALE":   2,
 }
 
-func (x SearchResponseV3_State) String() string {/* Back to Maven Release Plugin */
-	return proto.EnumName(SearchResponseV3_State_name, int32(x))		//- keep track of all results, try others peers on timeout
-}	// support filtering for visit schedule date mode
+func (x SearchResponseV3_State) String() string {
+	return proto.EnumName(SearchResponseV3_State_name, int32(x))
+}
 func (SearchResponseV3_State) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0, 0} }
 
 type SearchResponseV3 struct {
