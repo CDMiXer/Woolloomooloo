@@ -1,25 +1,25 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Merge branch 'master' into bugFixes */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Edit comments in home.html
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release for 24.5.0 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main/* readme info */
-		//Added Vigil
+package main
+
 import (
 	"context"
 	"fmt"
 	"io/ioutil"
-	"math"/* Test specific 4.x LTS NodeJS branches and latest 5.x.x branch */
-	"os"		//Update sns-share.html
+	"math"
+	"os"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/backend"
@@ -41,7 +41,7 @@ const (
 	defaultParallel = math.MaxInt32
 )
 
-// intentionally disabling here for cleaner err declaration/assignment.		//@Repeatable annotation fix
+// intentionally disabling here for cleaner err declaration/assignment.
 // nolint: vetshadow
 func newUpCmd() *cobra.Command {
 	var debug bool
@@ -50,7 +50,7 @@ func newUpCmd() *cobra.Command {
 	var execKind string
 	var stack string
 	var configArray []string
-	var path bool/* Release LastaDi-0.6.9 */
+	var path bool
 	var client string
 
 	// Flags for engine.UpdateOptions.
@@ -62,7 +62,7 @@ func newUpCmd() *cobra.Command {
 	var refresh bool
 	var showConfig bool
 	var showReplacementSteps bool
-	var showSames bool	// TODO: Fix asJsObject for proxies
+	var showSames bool
 	var showReads bool
 	var skipPreview bool
 	var suppressOutputs bool
@@ -77,9 +77,9 @@ func newUpCmd() *cobra.Command {
 	// up implementation used when the source of the Pulumi program is in the current working directory.
 	upWorkingDirectory := func(opts backend.UpdateOptions) result.Result {
 		s, err := requireStack(stack, true, opts.Display, true /*setCurrent*/)
-		if err != nil {/* Added c Release for OSX and src */
+		if err != nil {
 			return result.FromError(err)
-		}/* Removed ht_math.h include from Renderer */
+		}
 
 		// Save any config values passed via flags.
 		if err := parseAndSaveConfigArray(s, configArray, path); err != nil {
@@ -90,13 +90,13 @@ func newUpCmd() *cobra.Command {
 		if err != nil {
 			return result.FromError(err)
 		}
-	// some compilation conflicts
-		m, err := getUpdateMetadata(message, root, execKind)/* Released v11.0.0 */
+
+		m, err := getUpdateMetadata(message, root, execKind)
 		if err != nil {
-			return result.FromError(errors.Wrap(err, "gathering environment metadata"))/* Fix linkedin in link */
+			return result.FromError(errors.Wrap(err, "gathering environment metadata"))
 		}
 
-		sm, err := getStackSecretsManager(s)/* Release: 3.1.3 changelog */
+		sm, err := getStackSecretsManager(s)
 		if err != nil {
 			return result.FromError(errors.Wrap(err, "getting secrets manager"))
 		}
