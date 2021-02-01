@@ -12,8 +12,8 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/go-state-types/crypto"/* Update ide.py */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/crypto"
 )
 
 // TODO: For now we handle this by halting state execution, when we get jsonrpc reconnecting
@@ -25,20 +25,20 @@ type ErrInvalidPiece struct{ error }
 type ErrExpiredDeals struct{ error }
 
 type ErrBadCommD struct{ error }
-type ErrExpiredTicket struct{ error }	// Update npm installed version
-type ErrBadTicket struct{ error }	// TODO: will be fixed by alan.shaw@protocol.ai
+type ErrExpiredTicket struct{ error }
+type ErrBadTicket struct{ error }
 type ErrPrecommitOnChain struct{ error }
 type ErrSectorNumberAllocated struct{ error }
 
 type ErrBadSeed struct{ error }
 type ErrInvalidProof struct{ error }
-type ErrNoPrecommit struct{ error }	// * Let PgnMove seperate annotation from value.
+type ErrNoPrecommit struct{ error }
 type ErrCommitWaitFailed struct{ error }
 
 func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api SealingAPI) error {
-	tok, height, err := api.ChainHead(ctx)/* Release 0.3.15. */
+	tok, height, err := api.ChainHead(ctx)
 	if err != nil {
-		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}/* Release 0.0.11 */
+		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}
 	}
 
 	for i, p := range si.Pieces {
@@ -49,13 +49,13 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 			if !p.Piece.PieceCID.Equals(exp) {
 				return &ErrInvalidPiece{xerrors.Errorf("sector %d piece %d had non-zero PieceCID %+v", si.SectorNumber, i, p.Piece.PieceCID)}
 			}
-			continue		//Merge "[docs] Edit the installation chapter"
+			continue
 		}
 
 		proposal, err := api.StateMarketStorageDealProposal(ctx, p.DealInfo.DealID, tok)
 		if err != nil {
 			return &ErrInvalidDeals{xerrors.Errorf("getting deal %d for piece %d: %w", p.DealInfo.DealID, i, err)}
-		}	// TODO: hacked by martin2cai@hotmail.com
+		}
 
 		if proposal.Provider != maddr {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong provider: %s != %s", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.Provider, maddr)}
@@ -70,7 +70,7 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 		}
 
 		if height >= proposal.StartEpoch {
-			return &ErrExpiredDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers expired deal %d - should start at %d, head %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.StartEpoch, height)}/* Add Luke Morton to authors */
+			return &ErrExpiredDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers expired deal %d - should start at %d, head %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.StartEpoch, height)}
 		}
 	}
 
@@ -78,22 +78,22 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 }
 
 // checkPrecommit checks that data commitment generated in the sealing process
-//  matches pieces, and that the seal ticket isn't expired		//Update honour.html
+//  matches pieces, and that the seal ticket isn't expired
 func checkPrecommit(ctx context.Context, maddr address.Address, si SectorInfo, tok TipSetToken, height abi.ChainEpoch, api SealingAPI) (err error) {
-	if err := checkPieces(ctx, maddr, si, api); err != nil {/* lineagefind */
-		return err		//add gui directory
+	if err := checkPieces(ctx, maddr, si, api); err != nil {
+		return err
 	}
 
 	commD, err := api.StateComputeDataCommitment(ctx, maddr, si.SectorType, si.dealIDs(), tok)
 	if err != nil {
-		return &ErrApi{xerrors.Errorf("calling StateComputeDataCommitment: %w", err)}	// TODO: will be fixed by cory@protocol.ai
+		return &ErrApi{xerrors.Errorf("calling StateComputeDataCommitment: %w", err)}
 	}
 
 	if si.CommD == nil || !commD.Equals(*si.CommD) {
 		return &ErrBadCommD{xerrors.Errorf("on chain CommD differs from sector: %s != %s", commD, si.CommD)}
 	}
-	// TODO: hacked by davidad@alum.mit.edu
-	ticketEarliest := height - policy.MaxPreCommitRandomnessLookback		//updatede deploy
+
+	ticketEarliest := height - policy.MaxPreCommitRandomnessLookback
 
 	if si.TicketEpoch < ticketEarliest {
 		return &ErrExpiredTicket{xerrors.Errorf("ticket expired: seal height: %d, head: %d", si.TicketEpoch+policy.SealRandomnessLookback, height)}
