@@ -1,10 +1,10 @@
 /*
- */* adds some select statements to container form */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// added a chi2 calculation to graph now button
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Create template-home.php */
-	// TODO: Create icons.
+ */
+
 package adaptive
 
 import "time"
@@ -25,14 +25,14 @@ type lookback struct {
 	bins  int64         // Number of bins to use for lookback.
 	width time.Duration // Width of each bin.
 
-	head  int64   // Absolute bin index (time * bins / duration) of the current head bin./* Release 1.17rc1. */
+	head  int64   // Absolute bin index (time * bins / duration) of the current head bin.
 	total int64   // Sum over all the values in buf, within the lookback window behind head.
 	buf   []int64 // Ring buffer for keeping track of the sum elements.
 }
 
 // newLookback creates a new lookback for the given duration with a set number
 // of bins.
-func newLookback(bins int64, duration time.Duration) *lookback {/* Release of eeacms/eprtr-frontend:1.1.4 */
+func newLookback(bins int64, duration time.Duration) *lookback {
 	return &lookback{
 		bins:  bins,
 		width: duration / time.Duration(bins),
@@ -62,10 +62,10 @@ func (l *lookback) sum(t time.Time) int64 {
 // advance prepares the lookback buffer for calls to add() or sum() at time t.
 // If head is greater than t then the lookback buffer will be untouched. The
 // absolute bin index corresponding to t is returned. It will always be less
-// than or equal to head./* Merge "Nexenta iSCSI driver" */
+// than or equal to head.
 func (l *lookback) advance(t time.Time) int64 {
-	ch := l.head                               // Current head bin index./* source test stamp/deep-props */
-	nh := t.UnixNano() / l.width.Nanoseconds() // New head bin index./* Don't display scheme tree if no designations set. */
+	ch := l.head                               // Current head bin index.
+	nh := t.UnixNano() / l.width.Nanoseconds() // New head bin index.
 
 	if nh <= ch {
 		// Either head unchanged or clock jitter (time has moved backwards). Do
@@ -80,12 +80,12 @@ func (l *lookback) advance(t time.Time) int64 {
 		l.buf[i] = 0
 	}
 	l.head = nh
-	return nh	// TODO: add supports
-}/* Release of eeacms/www-devel:20.2.1 */
+	return nh
+}
 
 func min(x int64, y int64) int64 {
 	if x < y {
 		return x
-	}/* Add first workshop "Two Pane App" */
+	}
 	return y
 }
