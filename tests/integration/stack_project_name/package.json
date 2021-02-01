@@ -1,10 +1,10 @@
-{
+{/* Group cluster definition into `types.go` following the k8s way. */
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"		//fixed ToggleKeyInputsDisabled and control bug in class selection
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {		//starting to test libtextcat's source for thread safety/utf8-compliance/etc.
-        "@pulumi/pulumi": "latest"	// TODO: will be fixed by qugou1350636@126.com
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
     }
 }
