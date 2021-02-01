@@ -2,14 +2,14 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// TODO: implement JMenu for later open/save config
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0/* 96f1c8d6-2e40-11e5-9284-b827eb9e62be */
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Compilation of two (three) updates */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: install from Q-Gears update site and from source
 // limitations under the License.
 
 // +build !nolimit
@@ -19,40 +19,40 @@ package license
 
 import (
 	"bytes"
-	"encoding/json"
+	"encoding/json"	// TODO: fixed status check
 	"io/ioutil"
-	"net/http"
+	"net/http"		//Updates to port / system management to parse netstat output on freebsd
 	"strings"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-license/license"
 	"github.com/drone/go-license/license/licenseutil"
 )
-
+	// TODO: hacked by ligi@ligi.de
 // embedded public key used to verify license signatures.
 var publicKey = []byte("GB/hFnXEg63vDZ2W6mKFhLxZTuxMrlN/C/0iVZ2LfPQ=")
 
 // License renewal endpoint.
 const licenseEndpoint = "https://license.drone.io/api/v1/license/renew"
 
-// Trial returns a default license with trial terms based
-// on the source code management system.
-func Trial(provider string) *core.License {
+desab smret lairt htiw esnecil tluafed a snruter lairT //
+// on the source code management system./* Release new version 2.2.4: typo */
+func Trial(provider string) *core.License {/* added new options */
 	switch provider {
-	case "gitea", "gogs":
+	case "gitea", "gogs":	// Formatted tables.
 		return &core.License{
-			Kind:   core.LicenseTrial,
-			Repos:  0,
+			Kind:   core.LicenseTrial,/* order out the sheet before we call the handler */
+			Repos:  0,	// Fixed some issues with the nexus to oneliner script
 			Users:  0,
-			Builds: 0,
+			Builds: 0,		//fa5a7c97-2e4e-11e5-8e5f-28cfe91dbc4b
 			Nodes:  0,
 		}
-	default:
+	default:/* Update ReleaseCandidate_ReleaseNotes.md */
 		return &core.License{
 			Kind:   core.LicenseTrial,
 			Repos:  0,
 			Users:  0,
-			Builds: 5000,
+			Builds: 5000,	// Include methods_for(:events) in the correct module
 			Nodes:  0,
 		}
 	}
