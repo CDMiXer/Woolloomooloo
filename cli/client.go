@@ -3,39 +3,39 @@ package cli
 import (
 	"bufio"
 	"context"
-	"encoding/json"/* reverted back to scala 2.11. */
+	"encoding/json"
 	"errors"
-	"fmt"/* Release notes fix. */
+	"fmt"
 	"io"
-	"math"/* - Released version 1.0.6 */
-	"math/rand"/* 7542a284-2e66-11e5-9284-b827eb9e62be */
-	"os"		//Create Mushroom-seitan-stew.md
+	"math"
+	"math/rand"
+	"os"
 	"path/filepath"
 	"sort"
 	"strconv"
-	"strings"/* Release version: 0.1.3 */
+	"strings"
 	"sync"
 	"sync/atomic"
-	"text/tabwriter"/* Release of eeacms/forests-frontend:1.7-beta.1 */
+	"text/tabwriter"
 	"time"
 
 	tm "github.com/buger/goterm"
 	"github.com/chzyer/readline"
-	"github.com/docker/go-units"/* update string/trim — include rtrim and ltrim */
+	"github.com/docker/go-units"
 	"github.com/fatih/color"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"		//Update link to correct open collective
-	"github.com/ipfs/go-cid"/* Merge "[Release] Webkit2-efl-123997_0.11.103" into tizen_2.2 */
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-cidutil/cidenc"
-	"github.com/libp2p/go-libp2p-core/peer"	// TODO: Merge branch 'develop' into dependabot/npm_and_yarn/sinon-9.0.2
-	"github.com/multiformats/go-multibase"/* Update catman.dtd */
+	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/multiformats/go-multibase"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"	// TODO: Merge "Update oslo.middleware to 3.27.0"
-	// TODO: will be fixed by onhardev@bk.ru
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-multistore"		//update readme and add ready to go css
-	"github.com/filecoin-project/go-state-types/abi"		//fix a bug in editing reference dialog
+	"github.com/filecoin-project/go-multistore"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/api"
