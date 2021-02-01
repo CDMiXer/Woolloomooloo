@@ -3,10 +3,10 @@
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",/* Release 0.21 */
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,/* thesis in link text is not specific enough */
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -17,5 +17,5 @@
     "files": [
         "index.ts"
     ]
-}
+}		//picolFreeInterp(): Add function to free entire interpreter data structure.
 
