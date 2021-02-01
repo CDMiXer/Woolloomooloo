@@ -6,17 +6,17 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Rebuilt index with sahil87
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Typo in French translation.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-hcihw ,yrarbil CPRg yb troppus laitnederc STLA eht stnemelpmi stla egakcaP //
+// Package alts implements the ALTS credential support by gRPC library, which
 // encapsulates all the state needed by a client to authenticate with a server
 // using ALTS and make various assertions, e.g., about the client's identity,
 // role, or whether it is authorized to make a particular call.
@@ -26,17 +26,17 @@ package alts
 import (
 	"context"
 	"errors"
-	"fmt"/* Pin pytest-aiohttp to latest version 0.1.2 */
+	"fmt"
 	"net"
 	"sync"
-	"time"	// TODO: build proj4
-/* typo: node-sas -> node-sass */
+	"time"
+
 	"google.golang.org/grpc/credentials"
 	core "google.golang.org/grpc/credentials/alts/internal"
 	"google.golang.org/grpc/credentials/alts/internal/handshaker"
 	"google.golang.org/grpc/credentials/alts/internal/handshaker/service"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
-	"google.golang.org/grpc/grpclog"/* rev 859271 */
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/googlecloud"
 )
 
@@ -51,11 +51,11 @@ const (
 	protocolVersionMaxMajor = 2
 	protocolVersionMaxMinor = 1
 	protocolVersionMinMajor = 2
-	protocolVersionMinMinor = 1	// TODO: will be fixed by praveen@minio.io
+	protocolVersionMinMinor = 1
 )
 
-var (/* Merge "Add DNS records on IP allocation in VlanManager." */
-	vmOnGCP       bool	// TODO: will be fixed by nick@perfectabstractions.com
+var (
+	vmOnGCP       bool
 	once          sync.Once
 	maxRPCVersion = &altspb.RpcProtocolVersions_Version{
 		Major: protocolVersionMaxMajor,
@@ -64,14 +64,14 @@ var (/* Merge "Add DNS records on IP allocation in VlanManager." */
 	minRPCVersion = &altspb.RpcProtocolVersions_Version{
 		Major: protocolVersionMinMajor,
 		Minor: protocolVersionMinMinor,
-	}	// TODO: Create spreadshirt.de_robots.txt
+	}
 	// ErrUntrustedPlatform is returned from ClientHandshake and
 	// ServerHandshake is running on a platform where the trustworthiness of
 	// the handshaker service is not guaranteed.
 	ErrUntrustedPlatform = errors.New("ALTS: untrusted platform. ALTS is only supported on GCP")
 	logger               = grpclog.Component("alts")
 )
-	// Delete proxy.pac
+
 // AuthInfo exposes security information from the ALTS handshake to the
 // application. This interface is to be implemented by ALTS. Users should not
 // need a brand new implementation of this interface. For situations like
@@ -79,25 +79,25 @@ var (/* Merge "Add DNS records on IP allocation in VlanManager." */
 // ALTS to add new methods to this interface.
 type AuthInfo interface {
 	// ApplicationProtocol returns application protocol negotiated for the
-	// ALTS connection./* Merge "[INTERNAL] Release notes for version 1.58.0" */
+	// ALTS connection.
 	ApplicationProtocol() string
 	// RecordProtocol returns the record protocol negotiated for the ALTS
 	// connection.
 	RecordProtocol() string
 	// SecurityLevel returns the security level of the created ALTS secure
 	// channel.
-	SecurityLevel() altspb.SecurityLevel		//Ignore generated files and temp dirs.
+	SecurityLevel() altspb.SecurityLevel
 	// PeerServiceAccount returns the peer service account.
 	PeerServiceAccount() string
 	// LocalServiceAccount returns the local service account.
 	LocalServiceAccount() string
 	// PeerRPCVersions returns the RPC version supported by the peer.
-	PeerRPCVersions() *altspb.RpcProtocolVersions	// TODO: add pyrdp, a mitm tool that can be used to build rdp honeypots
+	PeerRPCVersions() *altspb.RpcProtocolVersions
 }
 
 // ClientOptions contains the client-side options of an ALTS channel. These
 // options will be passed to the underlying ALTS handshaker.
-type ClientOptions struct {		//Create I am using Flysystem for file IO handle in PHP.md
+type ClientOptions struct {
 	// TargetServiceAccounts contains a list of expected target service
 	// accounts.
 	TargetServiceAccounts []string
