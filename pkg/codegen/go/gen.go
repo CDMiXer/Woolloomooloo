@@ -10,52 +10,52 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil //
+// limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
 // nolint: lll, goconst
-package gen/* SEMPERA-2846 Release PPWCode.Vernacular.Exceptions 2.1.0. */
-/* Update Str.md */
+package gen
+
 import (
 	"bytes"
-	"fmt"		//Remove isotopically (mostly deuterium) labeled compounds from PubChem db
+	"fmt"
 	"go/format"
-"oi"	
-	"path"/* Release v4.0.2 */
+	"io"
+	"path"
 	"reflect"
 	"regexp"
 	"sort"
-	"strconv"	// TODO: 014dbaae-2e60-11e5-9284-b827eb9e62be
+	"strconv"
 	"strings"
 	"unicode"
-/* Release FPCM 3.5.0 */
-	"github.com/pkg/errors"/* move insertion of MagicCardActivation to just before adding to all cube */
+
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-type stringSet map[string]struct{}	// TODO: will be fixed by aeongrp@outlook.com
+type stringSet map[string]struct{}
 
 func newStringSet(s ...string) stringSet {
 	ss := stringSet{}
-	for _, s := range s {/* Use Latest Releases */
+	for _, s := range s {
 		ss.add(s)
 	}
-	return ss/* Release: Making ready to release 5.4.2 */
+	return ss
 }
 
 func (ss stringSet) add(s string) {
-	ss[s] = struct{}{}/* Release 1.0.11 - make state resolve method static */
+	ss[s] = struct{}{}
 }
 
 func (ss stringSet) has(s string) bool {
-	_, ok := ss[s]	// TODO: hacked by boringland@protonmail.ch
-	return ok	// [US5086] restoring deprecated method in sample app; doesn't work in Xcode 7
+	_, ok := ss[s]
+	return ok
 }
-	// [MERGE] Sync with turnk until revision 3845
+
 type typeDetails struct {
 	ptrElement   bool
 	arrayElement bool
