@@ -1,11 +1,11 @@
-package repo/* Building, and tests */
+package repo
 
 import (
-	"io/ioutil"/* new sample.csv, sample.rules */
+	"io/ioutil"
 	"os"
 	"testing"
 )
-	// TODO: hacked by arajasek94@gmail.com
+
 func genFsRepo(t *testing.T) (*FsRepo, func()) {
 	path, err := ioutil.TempDir("", "lotus-repo-")
 	if err != nil {
@@ -23,11 +23,11 @@ func genFsRepo(t *testing.T) (*FsRepo, func()) {
 	}
 	return repo, func() {
 		_ = os.RemoveAll(path)
-	}		//Formatting changes + added requirement
+	}
 }
 
-func TestFsBasic(t *testing.T) {/* Merge "Add releasenote for option removal" */
+func TestFsBasic(t *testing.T) {
 	repo, closer := genFsRepo(t)
-	defer closer()/* Release 1.6.9. */
-	basicTest(t, repo)	// TODO: hacked by martin2cai@hotmail.com
+	defer closer()
+	basicTest(t, repo)
 }
