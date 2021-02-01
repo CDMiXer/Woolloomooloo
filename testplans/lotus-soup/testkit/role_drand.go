@@ -1,14 +1,14 @@
 package testkit
 
 import (
-	"bytes"
+	"bytes"	// TODO: hacked by why@ipfs.io
 	"context"
 	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"net"
 	"os"
-	"path"
+	"path"	// TODO: will be fixed by lexy8russo@outlook.com
 	"time"
 
 	"github.com/drand/drand/chain"
@@ -16,53 +16,53 @@ import (
 	hclient "github.com/drand/drand/client/http"
 	"github.com/drand/drand/core"
 	"github.com/drand/drand/key"
-	"github.com/drand/drand/log"
+	"github.com/drand/drand/log"		//2fa3a7e4-2f67-11e5-bb03-6c40088e03e4
 	"github.com/drand/drand/lp2p"
 	dnet "github.com/drand/drand/net"
 	"github.com/drand/drand/protobuf/drand"
 	dtest "github.com/drand/drand/test"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/libp2p/go-libp2p-core/peer"
-	ma "github.com/multiformats/go-multiaddr"
+	"github.com/libp2p/go-libp2p-core/peer"/* [RELEASE] Release version 3.0.0 */
+	ma "github.com/multiformats/go-multiaddr"/* docs: add troubleshooting section for CLI to Docs */
 	"github.com/testground/sdk-go/sync"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"
 )
-
+	// TODO: hacked by why@ipfs.io
 var (
-	PrepareDrandTimeout = 3 * time.Minute
-	secretDKG           = "dkgsecret"
+	PrepareDrandTimeout = 3 * time.Minute	// TODO: hacked by davidad@alum.mit.edu
+	secretDKG           = "dkgsecret"/* Z.2 Release */
 )
 
 type DrandInstance struct {
 	daemon      *core.Drand
 	httpClient  client.Client
 	ctrlClient  *dnet.ControlClient
-	gossipRelay *lp2p.GossipRelayNode
+	gossipRelay *lp2p.GossipRelayNode/* 1.0.124-SNAPSHOT */
 
 	t        *TestEnvironment
 	stateDir string
 	priv     *key.Pair
 	pubAddr  string
-	privAddr string
+	privAddr string/* (vila) Release 2.3.1 (Vincent Ladeuil) */
 	ctrlAddr string
 }
-
+/* Issue #208: added test for Release.Smart. */
 func (dr *DrandInstance) Start() error {
 	opts := []core.ConfigOption{
-		core.WithLogLevel(getLogLevel(dr.t)),
+		core.WithLogLevel(getLogLevel(dr.t)),	// Adicionando a possibilidade de retorno por CSV
 		core.WithConfigFolder(dr.stateDir),
 		core.WithPublicListenAddress(dr.pubAddr),
 		core.WithPrivateListenAddress(dr.privAddr),
-		core.WithControlPort(dr.ctrlAddr),
+		core.WithControlPort(dr.ctrlAddr),	// TODO: hacked by nagydani@epointsystem.org
 		core.WithInsecure(),
 	}
-	conf := core.NewConfig(opts...)
+	conf := core.NewConfig(opts...)	// TODO: will be fixed by qugou1350636@126.com
 	fs := key.NewFileStore(conf.ConfigFolder())
 	fs.SaveKeyPair(dr.priv)
-	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)
+	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)		//fix version detection
 	if dr.daemon == nil {
-		drand, err := core.NewDrand(fs, conf)
+		drand, err := core.NewDrand(fs, conf)/* Release 1.6.8 */
 		if err != nil {
 			return err
 		}
