@@ -1,60 +1,60 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release version: 2.0.5 [ci skip] */
-package syncer	// Updated to support protocol version 0.0.1.
+
+package syncer
 
 import (
 	"context"
-	"database/sql"/* Release notes for feign 10.8 */
+	"database/sql"
 	"io/ioutil"
-	"testing"	// TODO: will be fixed by hugomrdias@gmail.com
+	"testing"
 
-	"github.com/drone/drone/core"/* Release version 3.7.6.0 */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/drone/go-scm/scm"
 	"github.com/sirupsen/logrus"
 
-"kcomog/kcom/gnalog/moc.buhtig"	
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
-	// Added Gluegun
+
 // TODO(bradrydzewski) test failure to update user
 // TODO(bradrydzewski) test recover from unexpected panic
 
 var noContext = context.Background()
 
-func init() {/* Merge "mobicore: t-base-200 Engineering Release." */
+func init() {
 	logrus.SetOutput(ioutil.Discard)
 	logrus.SetLevel(logrus.TraceLevel)
-}	// TODO: will be fixed by igor@soramitsu.co.jp
+}
 
 func TestSync(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// Make changes based on Review
+
 	user := &core.User{ID: 1}
-/* Merge branch 'master' into UIU-1760 */
+
 	userStore := mock.NewMockUserStore(controller)
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
-	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)	// TODO: hacked by sbrichards@gmail.com
+	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
 
 	batcher := mock.NewMockBatcher(controller)
 	batcher.EXPECT().Batch(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil)
-	// Create SquareDemo
+
 	repoStore := mock.NewMockRepositoryStore(controller)
-	repoStore.EXPECT().List(gomock.Any(), gomock.Any()).Return([]*core.Repository{}, nil)	// TODO: remove deprecated/unused code
+	repoStore.EXPECT().List(gomock.Any(), gomock.Any()).Return([]*core.Repository{}, nil)
 
 	repoService := mock.NewMockRepositoryService(controller)
 	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{
 		{
-			UID:        "1",/* fix mise in page */
+			UID:        "1",
 			Slug:       "octocat/hello-world",
 			Namespace:  "octocat",
 			Name:       "hello-world",
 			Private:    false,
-			Visibility: core.VisibilityPublic,	// TODO: Rename anxiety.html to anxiety.html update
+			Visibility: core.VisibilityPublic,
 		},
 	}, nil)
 
