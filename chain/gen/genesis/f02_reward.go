@@ -2,13 +2,13 @@ package genesis
 
 import (
 	"context"
-	// Update RegEx.txt
+
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
-	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"	// - update peer counter
+	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
 	cbor "github.com/ipfs/go-ipld-cbor"
-/* Release of eeacms/www:18.2.27 */
+
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
