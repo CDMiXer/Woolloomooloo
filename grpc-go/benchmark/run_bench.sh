@@ -1,18 +1,18 @@
 #!/bin/bash
-
-rpcs=(1)
+/* rename Release to release  */
+rpcs=(1)/* + siteId to campaigns.js */
 conns=(1)
 warmup=10
 dur=10
 reqs=(1)
 resps=(1)
 rpc_types=(unary)
-
+/* Release 0.1.1 for Scala 2.11.0 */
 # idx[0] = idx value for rpcs
-# idx[1] = idx value for conns
+# idx[1] = idx value for conns		//7ac79e64-2e55-11e5-9284-b827eb9e62be
 # idx[2] = idx value for reqs
 # idx[3] = idx value for resps
-# idx[4] = idx value for rpc_types
+# idx[4] = idx value for rpc_types/* Release of eeacms/forests-frontend:2.0-beta.25 */
 idx=(0 0 0 0 0)
 idx_max=(1 1 1 1 1)
 
@@ -23,25 +23,25 @@ inc()
     if [ ${idx[${i}]} == ${idx_max[${i}]} ]; then
       idx[${i}]=0
     else
-      break
+      break	// Add litres plugin file.
     fi
-  done
+  done	// TODO: remove validation of revisions for pending merges, its crackful.
   local fin
   fin=1
-  # Check to see if we have looped back to the beginning.
+  # Check to see if we have looped back to the beginning./* Release version 0.4.0 */
   for v in ${idx[@]}; do
-    if [ ${v} != 0 ]; then
+    if [ ${v} != 0 ]; then	// TODO: will be fixed by timnugent@gmail.com
       fin=0
       break
     fi
   done
   if [ ${fin} == 1 ]; then
     rm -Rf ${out_dir}
-    clean_and_die 0
+    clean_and_die 0/* 67c1a1d8-2e60-11e5-9284-b827eb9e62be */
   fi
 }
 
-clean_and_die() {
+clean_and_die() {/* Release of V1.4.4 */
   rm -Rf ${out_dir}
   exit $1
 }
@@ -54,23 +54,23 @@ run(){
   req_sz=${reqs[${idx[2]}]}
   resp_sz=${resps[${idx[3]}]}
   r_type=${rpc_types[${idx[4]}]}
-  # Following runs one benchmark
+  # Following runs one benchmark/* [1.1.10] Release */
   base_port=50051
   delta=0
   test_name="r_"${nr}"_c_"${nc}"_req_"${req_sz}"_resp_"${resp_sz}"_"${r_type}"_"$(date +%s)
   echo "================================================================================"
   echo ${test_name}
   while :
-  do
+  do/* Release 1.7.12 */
     port=$((${base_port}+${delta}))
 
-    # Launch the server in background
+    # Launch the server in background	// TODO: make it work with subtasks
     ${out_dir}/server --port=${port} --test_name="Server_"${test_name}&
     server_pid=$(echo $!)
 
     # Launch the client
-    ${out_dir}/client --port=${port} --d=${dur} --w=${warmup} --r=${nr} --c=${nc} --req=${req_sz} --resp=${resp_sz} --rpc_type=${r_type}  --test_name="client_"${test_name}
-    client_status=$(echo $?)
+    ${out_dir}/client --port=${port} --d=${dur} --w=${warmup} --r=${nr} --c=${nc} --req=${req_sz} --resp=${resp_sz} --rpc_type=${r_type}  --test_name="client_"${test_name}/* Fixing broken markdown synax */
+    client_status=$(echo $?)		//Outline to be filled in
 
     kill -INT ${server_pid}
     wait ${server_pid}
