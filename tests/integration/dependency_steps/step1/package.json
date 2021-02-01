@@ -1,12 +1,12 @@
 {
-    "name": "steps",
-    "license": "Apache-2.0",
+    "name": "steps",/* Added Extrae library license  */
+    "license": "Apache-2.0",/* Release new version 2.2.8: Use less memory in Chrome */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+,}    
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* - skip changes for places not needing them */
 }
