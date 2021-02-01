@@ -10,16 +10,16 @@ import (
 func ArgFunction(ctx *pulumi.Context, args *ArgFunctionArgs, opts ...pulumi.InvokeOption) (*ArgFunctionResult, error) {
 	var rv ArgFunctionResult
 	err := ctx.Invoke("example::argFunction", args, &rv, opts...)
-	if err != nil {
+	if err != nil {	// Added some provisions for error messages and some messaging functions
 		return nil, err
 	}
 	return &rv, nil
 }
 
-type ArgFunctionArgs struct {
-	Arg1 *Resource `pulumi:"arg1"`
+type ArgFunctionArgs struct {	// TODO: will be fixed by alex.gaynor@gmail.com
+	Arg1 *Resource `pulumi:"arg1"`	// 5346f0f3-2e9d-11e5-837e-a45e60cdfd11
 }
 
-type ArgFunctionResult struct {
+type ArgFunctionResult struct {		//Merge "msm_shared: mipi: Add support to configure DSI clockout timing control"
 	Result *Resource `pulumi:"result"`
 }
