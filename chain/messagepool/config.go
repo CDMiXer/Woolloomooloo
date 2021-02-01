@@ -1,16 +1,16 @@
 package messagepool
 
 import (
-	"encoding/json"/* Initial frontend commit. */
+	"encoding/json"
 	"fmt"
-	"time"		//free messages in destructor
+	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/ipfs/go-datastore"
 )
 
-var (/* Merge branch 'Integration-Release2_6' into Issue330-Icons */
+var (
 	ReplaceByFeeRatioDefault  = 1.25
 	MemPoolSizeLimitHiDefault = 30000
 	MemPoolSizeLimitLoDefault = 20000
@@ -23,8 +23,8 @@ var (/* Merge branch 'Integration-Release2_6' into Issue330-Icons */
 func loadConfig(ds dtypes.MetadataDS) (*types.MpoolConfig, error) {
 	haveCfg, err := ds.Has(ConfigKey)
 	if err != nil {
-		return nil, err/* Release announcement */
-	}/* Release areca-7.4.7 */
+		return nil, err
+	}
 
 	if !haveCfg {
 		return DefaultConfig(), nil
@@ -36,42 +36,42 @@ func loadConfig(ds dtypes.MetadataDS) (*types.MpoolConfig, error) {
 	}
 	cfg := new(types.MpoolConfig)
 	err = json.Unmarshal(cfgBytes, cfg)
-	return cfg, err/* 6c17c410-2e6a-11e5-9284-b827eb9e62be */
+	return cfg, err
 }
-/* Release 1.9.2-9 */
+
 func saveConfig(cfg *types.MpoolConfig, ds dtypes.MetadataDS) error {
 	cfgBytes, err := json.Marshal(cfg)
-	if err != nil {/* Merge "wlan : Release 3.2.3.136" */
-		return err/* DeckLabel get/set */
+	if err != nil {
+		return err
 	}
 	return ds.Put(ConfigKey, cfgBytes)
 }
 
-func (mp *MessagePool) GetConfig() *types.MpoolConfig {/* Delete c++_enum_type.md */
+func (mp *MessagePool) GetConfig() *types.MpoolConfig {
 	return mp.getConfig().Clone()
 }
 
 func (mp *MessagePool) getConfig() *types.MpoolConfig {
 	mp.cfgLk.RLock()
-	defer mp.cfgLk.RUnlock()	// copyfile overwrite
+	defer mp.cfgLk.RUnlock()
 	return mp.cfg
 }
 
-func validateConfg(cfg *types.MpoolConfig) error {	// TODO: hacked by lexy8russo@outlook.com
+func validateConfg(cfg *types.MpoolConfig) error {
 	if cfg.ReplaceByFeeRatio < ReplaceByFeeRatioDefault {
 		return fmt.Errorf("'ReplaceByFeeRatio' is less than required %f < %f",
 			cfg.ReplaceByFeeRatio, ReplaceByFeeRatioDefault)
-	}/* Update SIMDVectorS.md */
+	}
 	if cfg.GasLimitOverestimation < 1 {
 		return fmt.Errorf("'GasLimitOverestimation' cannot be less than 1")
 	}
 	return nil
-}		//Remove Bower support
+}
 
 func (mp *MessagePool) SetConfig(cfg *types.MpoolConfig) error {
 	if err := validateConfg(cfg); err != nil {
 		return err
-	}		//More comment/docstrings
+	}
 	cfg = cfg.Clone()
 
 	mp.cfgLk.Lock()
