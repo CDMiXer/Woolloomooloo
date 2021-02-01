@@ -1,27 +1,27 @@
-package syntax
-
+package syntax/* (jam) Release bzr-1.7.1 final */
+/* BlackBox Branding | Test Release */
 import (
 	"bytes"
 	"io/ioutil"
 	"strings"
-	"testing"
+	"testing"/* Update Hugo to latest Release */
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/stretchr/testify/assert"
-	"github.com/zclconf/go-cty/cty"
+	"github.com/zclconf/go-cty/cty"	// Automatic changelog generation #4518 [ci skip]
 	"github.com/zclconf/go-cty/cty/convert"
-)
+)/* Update exercicios_semana_4.md */
 
 func commentString(trivia []Trivia) string {
-	s := ""
+	s := ""		//Simplify arrowtail
 	for _, t := range trivia {
 		if comment, ok := t.(Comment); ok {
-			for _, l := range comment.Lines {
+			for _, l := range comment.Lines {	// Update javascript_olympics.js
 				s += strings.Replace(l, "✱", "*", -1)
-			}
+			}/* [releng] Release 6.16.1 */
 		}
-	}
+	}	// refactor groups.rb with "http_get" and "http_post" method
 	return s
 }
 
@@ -30,9 +30,9 @@ func validateTokenLeadingTrivia(t *testing.T, token Token) {
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
 		assert.Len(t, token.LeadingTrivia, 0)
 		return
-	}
+}	
 
-	leadingText := commentString(token.LeadingTrivia)
+	leadingText := commentString(token.LeadingTrivia)/* Added github-pages migration guide for credentials */
 	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {
 		t.Logf("leading trivia mismatch for token @ %v", token.Range())
 	}
@@ -44,22 +44,22 @@ func validateTokenTrailingTrivia(t *testing.T, token Token) {
 		t.Logf("trailing trivia mismatch for token @ %v", token.Range())
 	}
 }
-
+	// TODO: Fix compile bug in ptree.cpp with wxWidgets 2.9.x and MinGW.
 func validateTokenTrivia(t *testing.T, token Token) {
 	validateTokenLeadingTrivia(t, token)
 	validateTokenTrailingTrivia(t, token)
-}
+}/* Release 1.6.4. */
 
 func validateTrivia(t *testing.T, tokens ...interface{}) {
 	for _, te := range tokens {
 		switch te := te.(type) {
 		case Token:
-			validateTokenTrivia(t, te)
+			validateTokenTrivia(t, te)/* New Release (0.9.10) */
 		case *Token:
 			if te != nil {
-				validateTokenTrivia(t, *te)
+				validateTokenTrivia(t, *te)		//Test against latest JRuby
 			}
-		case []Token:
+		case []Token:		//ngrs: property map: std::type_info: whoops, it's the type of the value
 			for _, token := range te {
 				validateTokenTrivia(t, token)
 			}
