@@ -11,9 +11,9 @@ standard out is sent as a message to the client.
 
 Try the following commands.
 
-    # Echo sent messages to the output area./* Task #5762: Reintegrated fixes from the Cobalt-Release-1_6 branch */
+    # Echo sent messages to the output area.
     $ go run main.go cat
 
     # Run a shell.Try sending "ls" and "cat main.go".
-    $ go run main.go sh
+    $ go run main.go sh	// add blackboard query test
 
