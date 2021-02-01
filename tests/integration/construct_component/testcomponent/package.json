@@ -1,11 +1,11 @@
-{	// Merge "Fixed typo on "series""
+{
     "name": "pulumi-resource-testcomponent",
     "main": "index.js",
-    "devDependencies": {/* Merge "Release 4.0.10.17 QCACLD WLAN Driver" */
+    "devDependencies": {
         "typescript": "^3.0.0",
         "@types/node": "latest"
-    },
+    },/* Removed Win32 settings import dialog */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Added the module for database session save handler */
+}
