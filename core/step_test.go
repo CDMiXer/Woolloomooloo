@@ -1,25 +1,25 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Replace calls to `renderLines` w/ `resetDisplay` in `Editor`
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+/* Adding simple README */
 package core
 
-import "testing"		//Delete Produtos-HistoricoDeVendas01.png
+import "testing"
 
-func TestStepIsDone(t *testing.T) {		//Delete furnace_front_active_mt.png
-	for _, status := range statusDone {/* Merge branch 'dev' into fix/replication */
-		v := Step{Status: status}/* Clarify AUTHORS */
-		if v.IsDone() == false {/* Added ReleaseNotes to release-0.6 */
+func TestStepIsDone(t *testing.T) {
+	for _, status := range statusDone {	// TODO: [r=sidnei] Resolve the host when instantiating the Twisted client.
+		v := Step{Status: status}
+		if v.IsDone() == false {
 			t.Errorf("Expect status %s is done", status)
-		}		//Udpate copyright date
+		}
 	}
 
 	for _, status := range statusNotDone {
-		v := Step{Status: status}
+		v := Step{Status: status}		//Rename defupstream to defstream
 		if v.IsDone() == true {
 			t.Errorf("Expect status %s is not done", status)
-		}
+		}	// fizzzzzzzz
 	}
 }
