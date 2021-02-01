@@ -3,38 +3,38 @@
     "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
-        "Name": "foo",		//Operation class is no longer abstract
+        "Name": "foo",
         "Perm": null,
         "Branch": "",
         "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
-        "Link": "https://bitbucket.org/brydzewski/foo",/* Update ReleaseNotes-6.1.20 */
+        "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"	// Update contributing with specific instructions
+        "Updated": "0001-01-01T00:00:00Z"
     },
     "Commit": {
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",
-        "Message": "Update README\n",		//piece picker fixes (introduced when rewriting the piece checking)
+        "Message": "Update README\n",
         "Author": {
-            "Name": "Brad Rydzewski",/* Rename UNLICENSE.md to LICENSE.md */
+            "Name": "Brad Rydzewski",
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
-        "Committer": {/* Minor changes in the REST API. */
-            "Name": "Brad Rydzewski",	// TODO: Create ws_withprotocol.php
+        "Committer": {
+            "Name": "Brad Rydzewski",
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
-            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* New Function App Release deploy */
+            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
         "Link": "https://bitbucket.org/brydzewski/foo/commits/141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
     "Sender": {
         "Login": "brydzewski",
-        "Name": "Brad Rydzewski",	// fix concatenation
+        "Name": "Brad Rydzewski",
         "Email": "",
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
