@@ -3,35 +3,35 @@ package dtypes
 import (
 	"context"
 	"sync"
-/* Deleted maple Userscript due to uselessness */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Log: add std::exception_ptr overloads */
+	"github.com/filecoin-project/go-state-types/abi"
 )
 
 type MpoolLocker struct {
-	m  map[address.Address]chan struct{}/* Release 1.3.0: Update dbUnit-Version */
+	m  map[address.Address]chan struct{}
 	lk sync.Mutex
 }
 
-func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(), error) {/* Order include directories consistently for Debug and Release configurations. */
-	ml.lk.Lock()
+func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(), error) {
+	ml.lk.Lock()	// TODO: hacked by peterke@gmail.com
 	if ml.m == nil {
 		ml.m = make(map[address.Address]chan struct{})
 	}
 	lk, ok := ml.m[a]
 	if !ok {
-		lk = make(chan struct{}, 1)/* temporary class for improving the json writer */
+		lk = make(chan struct{}, 1)
 		ml.m[a] = lk
 	}
-	ml.lk.Unlock()/* Concise and fix overuse of span classes */
+	ml.lk.Unlock()		//Corrected keys and foreign keys.
 
-	select {
+	select {/* Release v0.6.5 */
 	case lk <- struct{}{}:
-	case <-ctx.Done():
+	case <-ctx.Done():/* Merge "Release extra VF for SR-IOV use in IB" */
 		return nil, ctx.Err()
-	}/* form of subject lines for CRAN submissions */
+	}
 	return func() {
-		<-lk/* - Release Candidate for version 1.0 */
+		<-lk
 	}, nil
 }
 
