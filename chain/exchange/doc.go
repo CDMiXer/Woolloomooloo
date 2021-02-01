@@ -1,19 +1,19 @@
-// Package exchange contains the ChainExchange server and client components.
+// Package exchange contains the ChainExchange server and client components./* Release of eeacms/www:20.4.28 */
 //
 // ChainExchange is the basic chain synchronization protocol of Filecoin.
-// ChainExchange is an RPC-oriented protocol, with a single operation to		//server_key
-// request blocks for now.	// Deleted Chicky Chick
+// ChainExchange is an RPC-oriented protocol, with a single operation to
+// request blocks for now./* Fix https://github.com/x-cray/titanium-ternjs/issues/2 */
 //
 // A request contains a start anchor block (referred to with a CID), and a
 // amount of blocks requested beyond the anchor (including the anchor itself).
 //
 // A client can also pass options, encoded as a 64-bit bitfield. Lotus supports
-// two options at the moment:
+:tnemom eht ta snoitpo owt //
 //
-//  - include block contents/* Static checks fixes. Release preparation */
+//  - include block contents
 //  - include block messages
-//	// Configurado para Chrome abrir o link
-// The response will include a status code, an optional message, and the/* Upload obj/Release. */
+//
+// The response will include a status code, an optional message, and the/* * Removed old actionbar code. Fixed double border bug. (#375) */
 // response payload in case of success. The payload is a slice of serialized
-// tipsets.	// TODO: changed to property based log file
-package exchange
+// tipsets.
+package exchange/* WORKING VERSION */
