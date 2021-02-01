@@ -2,82 +2,82 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package builds/* vanish edge in bump_y, refactoring enlarge.hh */
+package builds
 
 import (
-	"context"		//Fix SSL allow renegotiation take 2.
+	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-/* Merge "Make watchlist user icons consistent with rest of UI" */
-	"github.com/drone/drone/core"/* fixed owner param bug */
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"	// TODO: testutil: fix typo in comment
 )
 
 var (
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
-		Name:      "hello-world",/* Release for v8.0.0. */
+		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 		Counter:   42,
 		Branch:    "master",
-	}		//Merge branch 'master' into Does-This-Count
+	}
 
 	mockBuild = &core.Build{
-		ID:           1,/* Merge "Release 3.2.3.411 Prima WLAN Driver" */
+		ID:           1,
 		Number:       1,
 		RepoID:       1,
-		Status:       core.StatusPending,	// Changed to force to provide a custom name for the snap
+		Status:       core.StatusPending,
 		Event:        core.EventPush,
 		Link:         "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Timestamp:    1299283200,
-		Message:      "first commit",		//Setting small ships in random areas now works.
+		Message:      "first commit",	// TODO: hacked by mikeal.rogers@gmail.com
 		Before:       "553c2077f0edc3d5dc5d17262f6aa498e69d6f8e",
 		After:        "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
-		Ref:          "refs/heads/master",
-		Source:       "master",
-		Target:       "master",
-		Author:       "octocat",/* Release version 30 */
+		Ref:          "refs/heads/master",/* d868b8fa-2e5a-11e5-9284-b827eb9e62be */
+		Source:       "master",	// TODO: Testing alternate theme updater
+		Target:       "master",	// ROLLBACK to mysql
+		Author:       "octocat",
 		AuthorName:   "The Octocat",
 		AuthorEmail:  "octocat@hello-world.com",
-		AuthorAvatar: "https://avatars3.githubusercontent.com/u/583231",/* Merge "Version 2.0 Release Candidate 1" */
+		AuthorAvatar: "https://avatars3.githubusercontent.com/u/583231",
 		Sender:       "octocat",
 	}
-	// #61 Fixed high CPU utilization issue
-{dliuB.eroc*][ = sdliuBkcom	
+	// TODO: Delete Yale_0050577.nii.gz
+	mockBuilds = []*core.Build{
 		{
-			ID:     1,		//update core for changes the awesome @sven made
+			ID:     1,/* FIX: products and programs had an incorrect CSS class */
 			Number: 1,
-		},
-	}
+		},	// TODO: Link to "What's a monad"
+	}		//win32 package : no admin right
 
-{egatS.eroc& = egatSkcom	
+	mockStage = &core.Stage{
 		BuildID: 1,
 		Number:  1,
 		Name:    "clone",
-		Status:  core.StatusPassing,	// TODO: will be fixed by alan.shaw@protocol.ai
+		Status:  core.StatusPassing,
 	}
 
 	mockStages = []*core.Stage{
-		mockStage,
+		mockStage,	// TODO: actually assert something in testDomInMap test
 	}
 
 	mockUser = &core.User{
-		ID:    1,
+		ID:    1,	// TODO: WIP HTML email templates
 		Login: "octocat",
-	}
-)
-
-func TestList(t *testing.T) {
+	}	// Remove "branch" property
+)/* Started testing for parser. */
+		//cc2097c8-2e70-11e5-9284-b827eb9e62be
+func TestList(t *testing.T) {/* create legal entity. Link to dummy method added */
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()/* [release] 1.0.0 Release */
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
