@@ -4,14 +4,14 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",	// TODO: Moving old plugin.php file to LdapPlugin class.
+        "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,	// TODO: Update Plugwoot.js
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* :punch: fuck yea twitter buttons */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },/* 141d4826-2e64-11e5-9284-b827eb9e62be */
+    },
     "files": [
         "index.ts"
     ]
