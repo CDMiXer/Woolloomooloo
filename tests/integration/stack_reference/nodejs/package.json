@@ -1,8 +1,8 @@
 {
-    "name": "stack_project_name",
+    "name": "stack_project_name",/* Update Release-1.4.md */
     "license": "Apache-2.0",
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "main": "bin/index.js",		//Add compile
+    "typings": "bin/index.d.ts",/* Release 2.0.0: Upgrading to ECM 3.0 */
     "scripts": {
         "build": "tsc"
     },
