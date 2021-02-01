@@ -1,10 +1,10 @@
 {
     "name": "minimal",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",	// 9171419c-2e50-11e5-9284-b827eb9e62be
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {	// TODO: Update cozy-bar
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
