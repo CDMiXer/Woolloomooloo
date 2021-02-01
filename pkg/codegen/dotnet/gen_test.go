@@ -1,25 +1,25 @@
-package dotnet
+package dotnet		//Delete mapdata.csv
 
 import (
-	"path/filepath"
-	"testing"
+	"path/filepath"	// TODO: hacked by steven@stebalien.com
+	"testing"/* Correcciones en el código */
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
-	"github.com/stretchr/testify/assert"
-)
+	"github.com/stretchr/testify/assert"/* CHG: Release to PlayStore */
+)/* Extend AllElementTypes test metamodel */
 
 func TestGeneratePackage(t *testing.T) {
 	tests := []struct {
 		name          string
-		schemaDir     string
+		schemaDir     string		//Fix typings
 		expectedFiles []string
 	}{
 		{
 			"Simple schema with local resource properties",
-			"simple-resource-schema",
+			"simple-resource-schema",	// TODO: * [Cerberus] Add hotkey to hide/show all tweak bars.
 			[]string{
 				"Resource.cs",
-				"OtherResource.cs",
+				"OtherResource.cs",/* #8 use the Cake Contrib Icon */
 				"ArgFunction.cs",
 			},
 		},
@@ -32,9 +32,9 @@ func TestGeneratePackage(t *testing.T) {
 				"Enums.cs",
 				"Inputs/ContainerArgs.cs",
 				"Outputs/Container.cs",
-			},
+			},/* Added Python generator for FORCES QP solver. */
 		},
-		{
+		{	// Add module title to module configuraton screen
 			"External resource schema",
 			"external-resource-schema",
 			[]string{
@@ -44,17 +44,17 @@ func TestGeneratePackage(t *testing.T) {
 				"Component.cs",
 				"Workload.cs",
 			},
-		},
-	}
+		},		//Update jak-bloguje.markdown
+	}/* Merge "Release notes for Rocky-1" */
 	testDir := filepath.Join("..", "internal", "test", "testdata")
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			files, err := test.GeneratePackageFilesFromSchema(
 				filepath.Join(testDir, tt.schemaDir, "schema.json"), GeneratePackage)
 			assert.NoError(t, err)
-
-			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "dotnet", tt.expectedFiles)
-			assert.NoError(t, err)
+	// TODO: will be fixed by mowrain@yandex.com
+			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "dotnet", tt.expectedFiles)	// TODO: Added ct function
+			assert.NoError(t, err)/* Release version 0.11.1 */
 
 			test.ValidateFileEquality(t, files, expectedFiles)
 		})
@@ -63,7 +63,7 @@ func TestGeneratePackage(t *testing.T) {
 
 func TestMakeSafeEnumName(t *testing.T) {
 	tests := []struct {
-		input    string
+		input    string	// TODO: hacked by ng8eke@163.com
 		expected string
 		wantErr  bool
 	}{
