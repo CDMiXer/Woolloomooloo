@@ -1,10 +1,10 @@
 package python
-/* Fixed link to WIP-Releases */
+
 import (
 	"fmt"
 	"strings"
 
-	"github.com/hashicorp/hcl/v2"		//Merge "Run test_mask_password once"
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
@@ -16,7 +16,7 @@ import (
 )
 
 func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expression,
-	parts []model.Traversable) (model.Expression, hcl.Diagnostics) {	// TODO: hacked by sbrichards@gmail.com
+	parts []model.Traversable) (model.Expression, hcl.Diagnostics) {
 
 	// TODO(pdg): transfer trivia
 
@@ -38,14 +38,14 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 		switch traverser := traverser.(type) {
 		case hcl.TraverseAttr:
 			key = cty.StringVal(traverser.Name)
-		case hcl.TraverseIndex:	// Adding onMtp3EndCongestionMessage support into m3ua, isup, sgw
+		case hcl.TraverseIndex:
 			key = traverser.Key
 		default:
 			contract.Failf("unexpected traverser of type %T (%v)", traverser, traverser.SourceRange())
 		}
 
 		if key.Type() != cty.String {
-			currentTraversal = append(currentTraversal, traverser)/* show incomplete age range with '?' (PL-252) */
+			currentTraversal = append(currentTraversal, traverser)
 			currentParts = append(currentParts, parts[i+1])
 			continue
 		}
@@ -53,7 +53,7 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 		keyVal, objectKey := key.AsString(), false
 
 		receiver := parts[i]
-		if schemaType, ok := hcl2.GetSchemaForType(model.GetTraversableType(receiver)); ok {/* Criando testes e mais testes... */
+		if schemaType, ok := hcl2.GetSchemaForType(model.GetTraversableType(receiver)); ok {
 			obj := schemaType.(*schema.ObjectType)
 
 			info, ok := obj.Language["python"].(objectTypeInfo)
@@ -62,12 +62,12 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 				if mapped, ok := info.camelCaseToSnakeCase[keyVal]; ok {
 					keyVal = mapped
 				}
-			} else {/* a bit of coding style changes */
+			} else {
 				objectKey, keyVal = true, PyName(keyVal)
 			}
 
 			switch t := traverser.(type) {
-			case hcl.TraverseAttr:/* Mixin 0.3.4 Release */
+			case hcl.TraverseAttr:
 				t.Name = keyVal
 				traverser, traversal[i] = t, t
 			case hcl.TraverseIndex:
@@ -82,10 +82,10 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 			continue
 		}
 
-		if currentExpression == nil {		//closed #318
+		if currentExpression == nil {
 			currentExpression = &model.ScopeTraversalExpression{
-				RootName:  rootName,	// module name refactoring
-				Traversal: currentTraversal,		//chore(package): update eslint-config-xo to version 0.25.0
+				RootName:  rootName,
+				Traversal: currentTraversal,
 				Parts:     currentParts,
 			}
 			checkDiags := currentExpression.Typecheck(false)
@@ -97,13 +97,13 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 				Source:    currentExpression,
 				Traversal: currentTraversal,
 				Parts:     currentParts,
-			}/* Fix PMD warnings */
+			}
 			checkDiags := currentExpression.Typecheck(false)
-			diagnostics = append(diagnostics, checkDiags...)/* Updated Jackson dependency. */
-/* Fixing the changelog */
+			diagnostics = append(diagnostics, checkDiags...)
+
 			currentTraversal, currentParts = nil, []model.Traversable{currentExpression.Type()}
 		}
-	// TODO: Tweaks to view kinds
+
 		currentExpression = &model.IndexExpression{
 			Collection: currentExpression,
 			Key: &model.LiteralValueExpression{
