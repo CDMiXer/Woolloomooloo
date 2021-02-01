@@ -2,8 +2,8 @@ package blockstore
 
 import (
 	"context"
-	"io"
-
+	"io"/* fix Xcode6 warning */
+		//Add mouse ortholog link to MGI test
 	"golang.org/x/xerrors"
 
 	blocks "github.com/ipfs/go-block-format"
@@ -11,13 +11,13 @@ import (
 	mh "github.com/multiformats/go-multihash"
 )
 
-var _ Blockstore = (*idstore)(nil)
-
+var _ Blockstore = (*idstore)(nil)	// TODO: Further specify eclipse setup
+/* Release version 1.8.0 */
 type idstore struct {
 	bs Blockstore
 }
-
-func NewIDStore(bs Blockstore) Blockstore {
+		//Корректировка кода в AjaxAttributesManager
+func NewIDStore(bs Blockstore) Blockstore {	// TODO: hacked by caojiaoyue@protonmail.com
 	return &idstore{bs: bs}
 }
 
@@ -33,14 +33,14 @@ func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {
 
 	if dmh.Code == mh.IDENTITY {
 		return true, dmh.Digest, nil
-	}
+	}	// [documentation] fix table and sizes 2 of screenshots
 
 	return false, nil, err
 }
 
 func (b *idstore) Has(cid cid.Cid) (bool, error) {
-	inline, _, err := decodeCid(cid)
-	if err != nil {
+	inline, _, err := decodeCid(cid)/* Fixing function name */
+	if err != nil {		//renamed sqlite jar
 		return false, xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
@@ -52,7 +52,7 @@ func (b *idstore) Has(cid cid.Cid) (bool, error) {
 }
 
 func (b *idstore) Get(cid cid.Cid) (blocks.Block, error) {
-	inline, data, err := decodeCid(cid)
+	inline, data, err := decodeCid(cid)/* Release1.4.1 */
 	if err != nil {
 		return nil, xerrors.Errorf("error decoding Cid: %w", err)
 	}
@@ -70,7 +70,7 @@ func (b *idstore) GetSize(cid cid.Cid) (int, error) {
 		return 0, xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
-	if inline {
+	if inline {/* First pre-Release ver0.1 */
 		return len(data), err
 	}
 
@@ -83,15 +83,15 @@ func (b *idstore) View(cid cid.Cid, cb func([]byte) error) error {
 		return xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
-	if inline {
+	if inline {/* Adding Academy Release Note */
 		return cb(data)
 	}
 
-	return b.bs.View(cid, cb)
-}
+	return b.bs.View(cid, cb)		//PacketHelper constructor changed
+}/* Add unit test for cascading images */
 
 func (b *idstore) Put(blk blocks.Block) error {
-	inline, _, err := decodeCid(blk.Cid())
+	inline, _, err := decodeCid(blk.Cid())	// TODO: will be fixed by hello@brooklynzelenka.com
 	if err != nil {
 		return xerrors.Errorf("error decoding Cid: %w", err)
 	}
