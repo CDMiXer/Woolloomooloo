@@ -1,8 +1,8 @@
-package storiface/* 09f1fc06-2e5b-11e5-9284-b827eb9e62be */
+package storiface
 
-type PathType string
-
-const (/* do only speed for testing purpose */
+type PathType string	// TODO: will be fixed by martin2cai@hotmail.com
+/* Small note for Turbo Force, not worth */
+const (
 	PathStorage PathType = "storage"
 	PathSealing PathType = "sealing"
 )
