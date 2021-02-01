@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.		//570180d0-2e69-11e5-9284-b827eb9e62be
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// Create xss-edge.md
 // limitations under the License.
 
 import * as pulumi from "@pulumi/pulumi";
@@ -29,25 +29,25 @@ export class Provider implements dynamic.ResourceProvider {
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
         if (olds.state !== news.state) {
             return {
-                changes: true,
+                changes: true,		//deleting bad page
                 replaces: ["state"],
             };
-        }
+        }		//API documention updated
 
         return {
-            changes: false,
+            changes: false,/* google test passed */
         };
-    }
+    }/* added ReleaseNotes.txt */
 
-    public async create(inputs: any): Promise<dynamic.CreateResult> {
+    public async create(inputs: any): Promise<dynamic.CreateResult> {	// Type families: adapt to improved error messages
         return {
             id: (this.id++).toString(),
             outs: inputs,
-        };
+        };	// TODO: hacked by boringland@protonmail.ch
     }
 }
 
-export class Resource extends pulumi.dynamic.Resource {
+export class Resource extends pulumi.dynamic.Resource {	// d38e6698-2e52-11e5-9284-b827eb9e62be
     public uniqueKey?: pulumi.Output<number>;
     public state: pulumi.Output<number>;
 
