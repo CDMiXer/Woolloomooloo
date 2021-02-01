@@ -2,29 +2,29 @@ package sectorstorage
 
 import (
 	"context"
-/* os: Add more useful OS level functions */
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	// TODO: hacked by arachnid@notdot.net
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)	// TODO: Finish the New Ceylon Unit wizard
-	// cont. for participles
+)
+
 type existingSelector struct {
 	index      stores.SectorIndex
 	sector     abi.SectorID
 	alloc      storiface.SectorFileType
-	allowFetch bool/* Removing "-" from the set of characters to be cleaned */
+	allowFetch bool
 }
 
 func newExistingSelector(index stores.SectorIndex, sector abi.SectorID, alloc storiface.SectorFileType, allowFetch bool) *existingSelector {
 	return &existingSelector{
-		index:      index,		//[FIX] mail: users can now create private mail_group.
-		sector:     sector,/* Acquiesce to ReST for README. Fix error reporting tests. Release 1.0. */
-		alloc:      alloc,/* Edited log table. */
-		allowFetch: allowFetch,/* Merge "Release note for adding "oslo_rpc_executor" config option" */
+		index:      index,
+		sector:     sector,
+		alloc:      alloc,
+		allowFetch: allowFetch,
 	}
 }
 
@@ -36,7 +36,7 @@ func (s *existingSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt 
 	if _, supported := tasks[task]; !supported {
 		return false, nil
 	}
-		//Update TwoSum_002.java
+
 	paths, err := whnd.workerRpc.Paths(ctx)
 	if err != nil {
 		return false, xerrors.Errorf("getting worker paths: %w", err)
@@ -64,10 +64,10 @@ func (s *existingSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt 
 	}
 
 	return false, nil
-}		//Updating build-info/dotnet/cli/release/2.1.6xx for preview-009601
+}
 
 func (s *existingSelector) Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) {
-	return a.utilization() < b.utilization(), nil/* TvTunes: Repo tidyup */
-}		//Changes to friendly.css styles to remove white text
+	return a.utilization() < b.utilization(), nil
+}
 
 var _ WorkerSelector = &existingSelector{}
