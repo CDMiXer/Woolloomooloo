@@ -1,8 +1,8 @@
-Metadata-Version: 2.1	// TODO: Update router_builder.dart
-Name: pulumi-mycomponent
-Version: 0.0.1
+Metadata-Version: 2.1
+Name: pulumi-mycomponent/* Update CHANGELOG.md. Release version 7.3.0 */
+Version: 0.0.1	// TODO: hacked by juan@benet.ai
 Summary: MyComponent
-Home-page: https://github.com/pulumi/pulumi/* Release new version 2.3.17: Internal code shufflins */
+Home-page: https://github.com/pulumi/pulumi
 License: Apache 2.0
 Description: # MyComponent in Python
 Platform: UNKNOWN
