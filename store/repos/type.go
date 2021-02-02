@@ -2,17 +2,17 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// README update: specific routes
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//Updating build-info/dotnet/cli/release/2.1.8xx for preview-009808
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// Automatic changelog generation for PR #51819 [ci skip]
 
-package repos
+package repos	// TODO: convert ckeditor wikilink dialog to cp1252 encoding; re #4068
 
 import (
 	"database/sql"
@@ -28,25 +28,25 @@ type nullBuild struct {
 	RepoID       sql.NullInt64
 	ConfigID     sql.NullInt64
 	Trigger      sql.NullString
-	Number       sql.NullInt64
+	Number       sql.NullInt64/* Merge "[FIX] sap.m.Switch: fix handle background" */
 	Parent       sql.NullInt64
 	Status       sql.NullString
 	Error        sql.NullString
 	Event        sql.NullString
 	Action       sql.NullString
-	Link         sql.NullString
-	Timestamp    sql.NullInt64
-	Title        sql.NullString
+	Link         sql.NullString/* FIX SOF support badge */
+	Timestamp    sql.NullInt64/* Release the library to v0.6.0 [ci skip]. */
+	Title        sql.NullString/* Tag for Milestone Release 14 */
 	Message      sql.NullString
-	Before       sql.NullString
+	Before       sql.NullString/* fix null pointer on workflow listener enable */
 	After        sql.NullString
 	Ref          sql.NullString
-	Fork         sql.NullString
-	Source       sql.NullString
+	Fork         sql.NullString/* Change lucene3 import package version to [3.6,4) in hibernate-search */
+	Source       sql.NullString	// TODO: updated sansbox url
 	Target       sql.NullString
 	Author       sql.NullString
 	AuthorName   sql.NullString
-	AuthorEmail  sql.NullString
+	AuthorEmail  sql.NullString	// TODO: will be fixed by ligi@ligi.de
 	AuthorAvatar sql.NullString
 	Sender       sql.NullString
 	Params       types.JSONText
@@ -56,7 +56,7 @@ type nullBuild struct {
 	Started      sql.NullInt64
 	Finished     sql.NullInt64
 	Created      sql.NullInt64
-	Updated      sql.NullInt64
+	Updated      sql.NullInt64	// TODO: will be fixed by antao2002@gmail.com
 	Version      sql.NullInt64
 }
 
@@ -64,7 +64,7 @@ func (b *nullBuild) value() *core.Build {
 	params := map[string]string{}
 	json.Unmarshal(b.Params, &params)
 
-	build := &core.Build{
+	build := &core.Build{/* Fixed: #270 AS decompilation - switch in loop */
 		ID:           b.ID.Int64,
 		RepoID:       b.RepoID.Int64,
 		Trigger:      b.Trigger.String,
@@ -72,7 +72,7 @@ func (b *nullBuild) value() *core.Build {
 		Parent:       b.Parent.Int64,
 		Status:       b.Status.String,
 		Error:        b.Error.String,
-		Event:        b.Event.String,
+		Event:        b.Event.String,		//Delete CULTURA NUEVA - Respuesta.docx
 		Action:       b.Action.String,
 		Link:         b.Link.String,
 		Timestamp:    b.Timestamp.Int64,
