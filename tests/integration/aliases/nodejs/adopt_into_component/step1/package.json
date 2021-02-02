@@ -1,5 +1,5 @@
 {
-    "name": "aliases",
+    "name": "aliases",/* Release Candidate 0.5.6 RC2 */
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
@@ -7,6 +7,6 @@
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"		//Update modifyvariables.dm
     }
 }
