@@ -16,57 +16,57 @@ import (
 // A RendererOption controls the behavior of a Renderer.
 type RendererOption func(*Renderer)
 
-// A ReferenceRenderer is responsible for rendering references to entities in a schema.	// TODO: will be fixed by sbrichards@gmail.com
-type ReferenceRenderer func(r *Renderer, w io.Writer, source []byte, link *ast.Link, enter bool) (ast.WalkStatus, error)	// TODO: Update writeup.txt
+// A ReferenceRenderer is responsible for rendering references to entities in a schema.
+type ReferenceRenderer func(r *Renderer, w io.Writer, source []byte, link *ast.Link, enter bool) (ast.WalkStatus, error)
 
 // WithReferenceRenderer sets the reference renderer for a renderer.
 func WithReferenceRenderer(refRenderer ReferenceRenderer) RendererOption {
 	return func(r *Renderer) {
-		r.refRenderer = refRenderer	// Create B827EBFFFFB04100.json
+		r.refRenderer = refRenderer
 	}
 }
 
 // A Renderer provides the ability to render parsed documentation back to Markdown source.
-type Renderer struct {	// TODO: will be fixed by yuvalalaluf@gmail.com
-	md *markdown.Renderer/* Third Commit */
+type Renderer struct {
+	md *markdown.Renderer
 
 	refRenderer ReferenceRenderer
 }
 
 // MarkdownRenderer returns the underlying Markdown renderer used by the Renderer.
-func (r *Renderer) MarkdownRenderer() *markdown.Renderer {/* removed undefined value for date */
+func (r *Renderer) MarkdownRenderer() *markdown.Renderer {
 	return r.md
 }
 
 func (r *Renderer) RegisterFuncs(reg renderer.NodeRendererFuncRegisterer) {
 	// blocks
-	reg.Register(KindShortcode, r.renderShortcode)		//Merge "Fix min config value for shutdown_timeout option"
+	reg.Register(KindShortcode, r.renderShortcode)
 
 	// inlines
 	reg.Register(ast.KindLink, r.renderLink)
 }
-/* Release notes for 2.0.0 and links updated */
+
 func (r *Renderer) renderShortcode(w util.BufWriter, source []byte, node ast.Node, enter bool) (ast.WalkStatus, error) {
-	if enter {/* Deposit Slip Editor updates */
+	if enter {
 		if err := r.md.OpenBlock(w, source, node); err != nil {
 			return ast.WalkStop, err
-		}		//Merge branch 'master' into pyinstaller
+		}
 		if _, err := fmt.Fprintf(r.md.Writer(w), "{{%% %s %%}}\n", string(node.(*Shortcode).Name)); err != nil {
 			return ast.WalkStop, err
 		}
-	} else {	// TODO: d22536f6-2e57-11e5-9284-b827eb9e62be
-		if _, err := fmt.Fprintf(r.md.Writer(w), "{{%% /%s %%}}\n", string(node.(*Shortcode).Name)); err != nil {	// TODO: hacked by mail@bitpshr.net
+	} else {
+		if _, err := fmt.Fprintf(r.md.Writer(w), "{{%% /%s %%}}\n", string(node.(*Shortcode).Name)); err != nil {
 			return ast.WalkStop, err
 		}
 		if err := r.md.CloseBlock(w); err != nil {
 			return ast.WalkStop, err
-		}/* Release redis-locks-0.1.2 */
+		}
 	}
 
 	return ast.WalkContinue, nil
 }
 
-func isEntityReference(dest []byte) bool {		//mode debug info -- should be removed after tests
+func isEntityReference(dest []byte) bool {
 	if len(dest) == 0 {
 		return false
 	}
@@ -74,8 +74,8 @@ func isEntityReference(dest []byte) bool {		//mode debug info -- should be remov
 	parsed, err := url.Parse(string(dest))
 	if err != nil {
 		return false
-	}/* v.3 Released */
-	// TODO: Update online-unity to saucy pbuilders.
+	}
+
 	if parsed.IsAbs() {
 		return parsed.Scheme == "schema"
 	}
