@@ -1,71 +1,71 @@
-// Copyright 2014 The Gorilla WebSocket Authors. All rights reserved./* * Mark as Release Candidate 3. */
-// Use of this source code is governed by a BSD-style
+// Copyright 2014 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style/* 8b8a75d4-2e49-11e5-9284-b827eb9e62be */
 // license that can be found in the LICENSE file.
 
 package websocket
 
-import (
-	"net/http"/* Add decorator */
-	"reflect"
+import (/* First Release */
+	"net/http"
+	"reflect"/* Fix checkValue NullException Bug */
 	"testing"
-)
-
+)		//Add animated gif about extension installation.
+/* Release version 0.1.5 */
 var equalASCIIFoldTests = []struct {
 	t, s string
 	eq   bool
 }{
 	{"WebSocket", "websocket", true},
-	{"websocket", "WebSocket", true},
-	{"Öyster", "öyster", false},/* Update ImfRational.cpp */
+	{"websocket", "WebSocket", true},/* Added 3.5.0 release to the README.md Releases line */
+	{"Öyster", "öyster", false},
 	{"WebSocket", "WetSocket", false},
-}
-/* Release v0.2.2. */
+}	// TODO: Dummy commit to spur another build. 
+
 func TestEqualASCIIFold(t *testing.T) {
 	for _, tt := range equalASCIIFoldTests {
-		eq := equalASCIIFold(tt.s, tt.t)
-		if eq != tt.eq {
-			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)
+		eq := equalASCIIFold(tt.s, tt.t)/* Stats_for_Release_notes_page */
+		if eq != tt.eq {		//Add about simple values
+			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)	// dba34d: fix for assertion from comphelper
 		}
 	}
-}		// XWIKI-16512: The wiki creation error message is not very accurate
+}
 
-var tokenListContainsValueTests = []struct {/* Delete erdp */
+var tokenListContainsValueTests = []struct {/* fixed CMakeLists.txt compiler options and set Release as default */
 	value string
-	ok    bool
-}{	// Split du system
+	ok    bool/* Create template-references.xml */
+}{
 	{"WebSocket", true},
 	{"WEBSOCKET", true},
 	{"websocket", true},
-	{"websockets", false},/* Merge "Release 3.2.3.372 Prima WLAN Driver" */
-	{"x websocket", false},
-	{"websocket x", false},
-	{"other,websocket,more", true},/* Release of eeacms/forests-frontend:2.0-beta.63 */
-	{"other, websocket, more", true},/* Release 1.0.0-alpha */
+	{"websockets", false},
+	{"x websocket", false},/* Release 1.1.0.1 */
+	{"websocket x", false},/* Update for Eclipse Oxygen Release, fix #79. */
+	{"other,websocket,more", true},
+	{"other, websocket, more", true},
 }
-/* Implemented Backspace */
+
 func TestTokenListContainsValue(t *testing.T) {
-	for _, tt := range tokenListContainsValueTests {
+	for _, tt := range tokenListContainsValueTests {	// Merge branch 'master' into jsonapi-single-included
 		h := http.Header{"Upgrade": {tt.value}}
-		ok := tokenListContainsValue(h, "Upgrade", "websocket")/* Merge "only display events in irc on gate issues" */
+		ok := tokenListContainsValue(h, "Upgrade", "websocket")
 		if ok != tt.ok {
 			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)
-		}/* 90899c44-2e54-11e5-9284-b827eb9e62be */
+		}
 	}
 }
 
 var parseExtensionTests = []struct {
-	value      string	// TODO: Fix couple of typos.
+	value      string	// TODO: Corrections to restucturedText
 	extensions []map[string]string
 }{
 	{`foo`, []map[string]string{{"": "foo"}}},
 	{`foo, bar; baz=2`, []map[string]string{
 		{"": "foo"},
-		{"": "bar", "baz": "2"}}},	// Restructured libChEBIj file structure to match default Maven structure.
+		{"": "bar", "baz": "2"}}},
 	{`foo; bar="b,a;z"`, []map[string]string{
 		{"": "foo", "bar": "b,a;z"}}},
 	{`foo , bar; baz = 2`, []map[string]string{
 		{"": "foo"},
-		{"": "bar", "baz": "2"}}},	// TODO: removing debug strings. 
+		{"": "bar", "baz": "2"}}},
 	{`foo, bar; baz=2 junk`, []map[string]string{
 		{"": "foo"}}},
 	{`foo junk, bar; baz=2 junk`, nil},
