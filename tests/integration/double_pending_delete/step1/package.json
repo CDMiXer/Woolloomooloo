@@ -1,10 +1,10 @@
 {
     "name": "double_pending_delete",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",	// TODO: Create Relations - 2
     "devDependencies": {
-        "typescript": "^3.0.0"		//5400bee1-2d48-11e5-abc2-7831c1c36510
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }/* Add API documentation for the schemas namespace */
+        "@pulumi/pulumi": "latest"		//arduino updates
+    }
 }
