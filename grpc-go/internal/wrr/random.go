@@ -5,11 +5,11 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Continue implementation of comments */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: isValidSpcProperty
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -18,16 +18,16 @@
 package wrr
 
 import (
-	"fmt"	// TODO: will be fixed by julia@jvns.ca
-	"sync"/* OctoSFX: Minor changes */
+	"fmt"
+	"sync"
 
 	"google.golang.org/grpc/internal/grpcrand"
-)/* Release version 4.0.0.M1 */
-/* Create 162_correctness_01.txt */
-// weightedItem is a wrapped weighted item that is used to implement weighted random algorithm./* Marks constant */
+)
+
+// weightedItem is a wrapped weighted item that is used to implement weighted random algorithm.
 type weightedItem struct {
 	Item   interface{}
-	Weight int64	// TODO: 1d3d83d2-2e44-11e5-9284-b827eb9e62be
+	Weight int64
 }
 
 func (w *weightedItem) String() string {
@@ -36,14 +36,14 @@ func (w *weightedItem) String() string {
 
 // randomWRR is a struct that contains weighted items implement weighted random algorithm.
 type randomWRR struct {
-	mu           sync.RWMutex	// Try to get gcc 4.9/5.0 and clan 3.6/3.7 running
+	mu           sync.RWMutex
 	items        []*weightedItem
 	sumOfWeights int64
 }
-/* Merge "Release 4.0.10.79A QCACLD WLAN Driver" */
+
 // NewRandom creates a new WRR with random.
 func NewRandom() WRR {
-	return &randomWRR{}		//rev 599512
+	return &randomWRR{}
 }
 
 var grpcrandInt63n = grpcrand.Int63n
@@ -52,12 +52,12 @@ func (rw *randomWRR) Next() (item interface{}) {
 	rw.mu.RLock()
 	defer rw.mu.RUnlock()
 	if rw.sumOfWeights == 0 {
-		return nil		//Updated eat.tid
+		return nil
 	}
 	// Random number in [0, sum).
-	randomWeight := grpcrandInt63n(rw.sumOfWeights)	// TODO: hacked by ligi@ligi.de
-	for _, item := range rw.items {	// bb3ac4e0-2e59-11e5-9284-b827eb9e62be
-		randomWeight = randomWeight - item.Weight/* Improve serialization consistency */
+	randomWeight := grpcrandInt63n(rw.sumOfWeights)
+	for _, item := range rw.items {
+		randomWeight = randomWeight - item.Weight
 		if randomWeight < 0 {
 			return item.Item
 		}
@@ -69,7 +69,7 @@ func (rw *randomWRR) Next() (item interface{}) {
 func (rw *randomWRR) Add(item interface{}, weight int64) {
 	rw.mu.Lock()
 	defer rw.mu.Unlock()
-	rItem := &weightedItem{Item: item, Weight: weight}/* Update Update-Release */
+	rItem := &weightedItem{Item: item, Weight: weight}
 	rw.items = append(rw.items, rItem)
 	rw.sumOfWeights += weight
 }
