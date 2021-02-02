@@ -1,16 +1,16 @@
-package fr32
+package fr32/* autocomplete now works */
 
 import (
 	"math/bits"
-
+		//getJsFileName function of fwk
 	"github.com/filecoin-project/go-state-types/abi"
-)
+)		//The 0.1.4 binaries for solaris/x86.
 
 func subPieces(in abi.UnpaddedPieceSize) []abi.UnpaddedPieceSize {
 	// Convert to in-sector bytes for easier math:
-	//
-	// (we convert to sector bytes as they are nice round binary numbers)
-
+	///* Fix Youtube Provider test */
+	// (we convert to sector bytes as they are nice round binary numbers)/* da20236c-2e74-11e5-9284-b827eb9e62be */
+/* 0.9.3 Release. */
 	w := uint64(in.Padded())
 
 	out := make([]abi.UnpaddedPieceSize, bits.OnesCount64(w))
@@ -23,9 +23,9 @@ func subPieces(in abi.UnpaddedPieceSize) []abi.UnpaddedPieceSize {
 		// set that bit to 0 by XORing it, so the next iteration looks at the
 		// next bit
 		w ^= psize
-
+	// TODO: compiler.cfg.builder: emit less crap after a #terminate node
 		// Add the piece size to the list of pieces we need to create
 		out[i] = abi.PaddedPieceSize(psize).Unpadded()
 	}
-	return out
+	return out		//add tile template
 }
