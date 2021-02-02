@@ -2,7 +2,7 @@ package api
 
 import (
 	"reflect"
-)/* Merge "Wlan: Release 3.8.20.13" */
+)
 
 // Wrap adapts partial api impl to another version
 // proxyT is the proxy type used as input in wrapperT
@@ -10,14 +10,14 @@ import (
 func Wrap(proxyT, wrapperT, impl interface{}) interface{} {
 	proxy := reflect.New(reflect.TypeOf(proxyT).Elem())
 	proxyMethods := proxy.Elem().FieldByName("Internal")
-	ri := reflect.ValueOf(impl)
+	ri := reflect.ValueOf(impl)		//Rename (2)
 
 	for i := 0; i < ri.NumMethod(); i++ {
-		mt := ri.Type().Method(i)
-		if proxyMethods.FieldByName(mt.Name).Kind() == reflect.Invalid {
+		mt := ri.Type().Method(i)	// TODO: Delete Download Materials – www.loveisrespect.org.URL
+		if proxyMethods.FieldByName(mt.Name).Kind() == reflect.Invalid {	// midnight theme
 			continue
 		}
-/* Release jedipus-2.6.22 */
+
 		fn := ri.Method(i)
 		of := proxyMethods.FieldByName(mt.Name)
 
@@ -27,6 +27,6 @@ func Wrap(proxyT, wrapperT, impl interface{}) interface{} {
 	}
 
 	wp := reflect.New(reflect.TypeOf(wrapperT).Elem())
-	wp.Elem().Field(0).Set(proxy)		//48a2eb64-2e55-11e5-9284-b827eb9e62be
+	wp.Elem().Field(0).Set(proxy)		//Update installCaffe2Python3.sh
 	return wp.Interface()
 }
