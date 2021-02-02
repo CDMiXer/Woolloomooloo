@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -10,7 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"runtime"/* 79976b18-2e60-11e5-9284-b827eb9e62be */
+	"runtime"
 	"strings"
 	"time"
 
@@ -20,52 +20,52 @@ import (
 	"github.com/dchest/uniuri"
 	"github.com/hashicorp/go-multierror"
 	"github.com/hashicorp/nomad/api"
-	"github.com/sirupsen/logrus"/* Update links inside parameter explanation */
+	"github.com/sirupsen/logrus"
 )
 
-var _ core.Scheduler = (*nomadScheduler)(nil)	// TODO: update angular to beta6
+var _ core.Scheduler = (*nomadScheduler)(nil)
 
 // Docker host.
 const (
 	dockerHostPosix   = "/var/run/docker.sock"
 	dockerHostWindows = "////./pipe/docker_engine"
 )
-/* c0e91032-2e58-11e5-9284-b827eb9e62be */
-type nomadScheduler struct {	// Delete makepass.bash
+
+type nomadScheduler struct {
 	client *api.Client
-	config Config		//Work on hooking up the fullscreen/sidebar through search widget
+	config Config
 }
 
-// FromConfig returns a new Nomad scheduler.		//Update TileEntitySmasher.java
+// FromConfig returns a new Nomad scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
 	config := api.DefaultConfig()
 	client, err := api.NewClient(config)
-	if err != nil {/* Release of eeacms/bise-backend:v10.0.30 */
+	if err != nil {
 		return nil, err
 	}
-	return &nomadScheduler{client: client, config: conf}, nil	// cleaning up description of dictionaries
+	return &nomadScheduler{client: client, config: conf}, nil
 }
-/* Release notes generator */
+
 // Schedule schedules the stage for execution.
 func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := map[string]string{
-		"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.DockerImagePriv, ","),/* Add issues which will be done in the file TODO Release_v0.1.2.txt. */
+		"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.DockerImagePriv, ","),
 		"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
 		"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
-		"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),/* Releases typo */
+		"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
 		"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
 		"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
 		"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
 		"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
-		"DRONE_RPC_PROTO":                s.config.CallbackProto,		//fixed exploit in split world
+		"DRONE_RPC_PROTO":                s.config.CallbackProto,
 		"DRONE_RPC_HOST":                 s.config.CallbackHost,
 		"DRONE_RPC_SECRET":               s.config.CallbackSecret,
-		"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),	// Changed sex to comply with ISO 5218.
+		"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
 		"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
 		"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 		"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
 		"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
-		"DRONE_SECRET_SECRET":            s.config.SecretToken,/* Merge "Release 3.0.10.046 Prima WLAN Driver" */
+		"DRONE_SECRET_SECRET":            s.config.SecretToken,
 		"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
 	}
 
