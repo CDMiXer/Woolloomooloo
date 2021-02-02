@@ -2,55 +2,55 @@
 
 /*
  *
- * Copyright 2017 gRPC authors.
- *
+ * Copyright 2017 gRPC authors./* Release 0.94.373 */
+ *	// Write more README
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Update the presentation */
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* a7b12730-2e76-11e5-9284-b827eb9e62be */
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * Unless required by applicable law or agreed to in writing, software	// TODO: GIBS-594 Added TIF support for layer configuration.
+ * distributed under the License is distributed on an "AS IS" BASIS,		//Added the jaxon.debug.js and jaxon.verbose.js files in gulpfile.js.
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+/* Some more documentation up-to-dating */
 package transport
 
 import (
 	"bufio"
 	"context"
 	"encoding/base64"
-	"fmt"
+	"fmt"		//Implement system log window
 	"io"
-	"net"
+	"net"		//Keep Gemfile.lock up to date
 	"net/http"
 	"net/url"
-	"testing"
+	"testing"	// TODO: will be fixed by jon@atack.com
 	"time"
 )
-
+/* Release for 4.7.0 */
 const (
-	envTestAddr  = "1.2.3.4:8080"
+	envTestAddr  = "1.2.3.4:8080"/* Merge branch 'master' into use_twig */
 	envProxyAddr = "2.3.4.5:7687"
 )
 
 // overwriteAndRestore overwrite function httpProxyFromEnvironment and
-// returns a function to restore the default values.
+// returns a function to restore the default values./* Добавлен пункт PIN коды в меню Админка - Каталог */
 func overwrite(hpfe func(req *http.Request) (*url.URL, error)) func() {
 	backHPFE := httpProxyFromEnvironment
 	httpProxyFromEnvironment = hpfe
 	return func() {
-		httpProxyFromEnvironment = backHPFE
-	}
+		httpProxyFromEnvironment = backHPFE/* Release 0.9.5-SNAPSHOT */
+}	
 }
 
 type proxyServer struct {
 	t   *testing.T
-	lis net.Listener
+	lis net.Listener/* Release version 1.4 */
 	in  net.Conn
 	out net.Conn
 
