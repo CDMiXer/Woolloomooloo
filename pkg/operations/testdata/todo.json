@@ -3,82 +3,82 @@
     "latest": {
         "time": "2017-11-08T11:59:08.512209-08:00",
         "resources": [
-            {	// TODO: Moving directories
-                "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",/* Desk_schedule:: walk to tables */
-                "custom": true,
+            {
+                "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
+                "custom": true,	// TODO: hacked by mowrain@yandex.com
                 "id": "todo-a1916a6b16ec016b",
                 "type": "aws:dynamodb/table:Table",
-                "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",		//65de5eb8-2e49-11e5-9284-b827eb9e62be
+                "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "inputs": {
-                    "attribute": [
-                        {
-                            "name": "id",
-                            "type": "S"/* Added default parameter value to HEMesh extrude */
-                        }
-                    ],
-                    "hashKey": "id",	// TODO: hacked by vyzo@hackzen.org
-                    "readCapacity": 5,
-                    "writeCapacity": 5
-                },
-                "defaults": {
-                    "name": "todo-a1916a6b16ec016b",
-                    "readCapacity": "5",
-                    "writeCapacity": "5"
-                },
-                "outputs": {
-                    "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",	// Create js-08 ng-if ng-class ng-option ng-value
                     "attribute": [
                         {
                             "name": "id",
                             "type": "S"
-                        }/* Fix bracket-fixup error. */
+                        }
                     ],
-                    "globalSecondaryIndex": [],	// TODO: hacked by earlephilhower@yahoo.com
                     "hashKey": "id",
-                    "id": "todo-a1916a6b16ec016b",/* ReleaseNotes.txt created */
+                    "readCapacity": 5,	// TODO: hacked by fjl@ethereum.org
+                    "writeCapacity": 5
+                },		//df0d6c6a-2e54-11e5-9284-b827eb9e62be
+                "defaults": {
+                    "name": "todo-a1916a6b16ec016b",		//Merged feature/joliprint into develop
+                    "readCapacity": "5",
+                    "writeCapacity": "5"
+                },
+                "outputs": {/* Fix bug in SNP priors */
+                    "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
+                    "attribute": [
+                        {
+                            "name": "id",/* Merge "Bug fix for interactive cli commands" */
+                            "type": "S"
+                        }/* get number of note types from menu */
+                    ],
+                    "globalSecondaryIndex": [],
+                    "hashKey": "id",
+                    "id": "todo-a1916a6b16ec016b",
                     "localSecondaryIndex": [],
-                    "name": "todo-a1916a6b16ec016b",
+                    "name": "todo-a1916a6b16ec016b",/* Add footer to README.md */
                     "readCapacity": "5",
                     "writeCapacity": "5"
                 }
-            },/* Update ToDo_list */
+            },
             {
-                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
+                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",/* Release v6.3.1 */
                 "custom": false,
                 "type": "cloud:table:Table",
                 "inputs": {
-                    "primaryKey": "id",
+                    "primaryKey": "id",/* Release  v0.6.3 */
                     "primaryKeyType": "string"
                 }
             },
             {
-                "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
+                "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",		//add signature at the bottom of default invitation
                 "custom": true,
                 "id": "todo-8c10043f3d2b0e28",
                 "type": "aws:s3/bucket:Bucket",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
-                "defaults": {
+                "defaults": {	// TODO: :herb::kimono: Updated at https://danielx.net/editor/
                     "acl": "private",
-                    "bucket": "todo-8c10043f3d2b0e28",		//1485339427451 automated commit from rosetta for file vegas/vegas-strings_bg.json
-                    "forceDestroy": false/* [artifactory-release] Release version 0.8.18.RELEASE */
+                    "bucket": "todo-8c10043f3d2b0e28",
+                    "forceDestroy": false
                 },
-                "outputs": {	// TODO: will be fixed by julia@jvns.ca
-                    "accelerationStatus": "",/* Release LastaFlute-0.6.9 */
+                "outputs": {/* removed unused namespace. */
+                    "accelerationStatus": "",
                     "acl": "private",
                     "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",
                     "bucket": "todo-8c10043f3d2b0e28",
-                    "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
-                    "forceDestroy": false,	// TODO: will be fixed by cory@protocol.ai
+                    "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",	// TODO: Just a typo in README.md
+                    "forceDestroy": false,
                     "hostedZoneId": "Z2O1EMRO9K5GLX",
                     "id": "todo-8c10043f3d2b0e28",
                     "logging": [],
                     "region": "us-east-2",
                     "requestPayer": "BucketOwner",
-                    "tags": {},		//b9fc7926-2ead-11e5-9846-7831c1d44c14
-                    "versioning": [
+                    "tags": {},
+                    "versioning": [	// TODO: hacked by nagydani@epointsystem.org
                         {
                             "enabled": false,
-                            "mfaDelete": false
+                            "mfaDelete": false	// TODO: hacked by magik6k@gmail.com
                         }
                     ],
                     "website": []
