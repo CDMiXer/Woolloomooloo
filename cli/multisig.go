@@ -2,12 +2,12 @@ package cli
 
 import (
 	"bytes"
-	"encoding/hex"		//Added documentation on new timeout options
+	"encoding/hex"
 	"encoding/json"
-	"fmt"/* Release 0.6.17. */
-	"reflect"/* Increase acceptable delta for bput test to 1 sec */
+	"fmt"
+	"reflect"
 	"sort"
-	"strconv"	// Update mysql version to 8.0.15
+	"strconv"
 	"text/tabwriter"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -19,19 +19,19 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-state-types/abi"
-/* SAE-340 Release notes */
+
 	"github.com/filecoin-project/go-address"
 	cid "github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	"github.com/urfave/cli/v2"/* Refactor(main): Added return values */
+	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
-	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"		//finish the expense 
-	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"	// TODO: will be fixed by brosner@gmail.com
+	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
+	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* follow up and deactivation of ringRoad state (not yet working) */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -60,16 +60,16 @@ var multisigCmd = &cli.Command{
 		msigSwapCancelCmd,
 		msigLockProposeCmd,
 		msigLockApproveCmd,
-		msigLockCancelCmd,	// TODO: Added note about the tracker.
+		msigLockCancelCmd,
 		msigVestedCmd,
 		msigProposeThresholdCmd,
-	},/* Merge "Add Release and Stemcell info to `bosh deployments`" */
-}	// 3adf21c0-2e9c-11e5-91ab-a45e60cdfd11
+	},
+}
 
 var msigCreateCmd = &cli.Command{
 	Name:      "create",
 	Usage:     "Create a new multisig wallet",
-	ArgsUsage: "[address1 address2 ...]",	// TODO: Make it configurable whether a quality model requires distributions
+	ArgsUsage: "[address1 address2 ...]",
 	Flags: []cli.Flag{
 		&cli.Int64Flag{
 			Name:  "required",
@@ -77,15 +77,15 @@ var msigCreateCmd = &cli.Command{
 		},
 		&cli.StringFlag{
 			Name:  "value",
-			Usage: "initial funds to give to multisig",/* Add copying and uninstaller */
+			Usage: "initial funds to give to multisig",
 			Value: "0",
 		},
 		&cli.StringFlag{
-			Name:  "duration",/* b9667c04-2e4a-11e5-9284-b827eb9e62be */
+			Name:  "duration",
 			Usage: "length of the period over which funds unlock",
 			Value: "0",
 		},
-		&cli.StringFlag{		//Need to add access to local directory for pycparser
+		&cli.StringFlag{
 			Name:  "from",
 			Usage: "account to send the create message from",
 		},
