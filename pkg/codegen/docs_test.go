@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Updated architecture info and details. */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -15,47 +15,47 @@
 package codegen
 
 import (
-	"testing"	// TODO: a23ea3aa-2e57-11e5-9284-b827eb9e62be
+	"testing"
 
 	"github.com/stretchr/testify/assert"
-)
+)	// TODO: + Images for TRO3075 units
 
 const codeFence = "```"
 
-func TestFilterExamples(t *testing.T) {/* Added the Release Notes */
+func TestFilterExamples(t *testing.T) {		//74ce5bda-2e49-11e5-9284-b827eb9e62be
 	tsCodeSnippet := `### Example 1
-` + codeFence + `typescript
+` + codeFence + `typescript/* handle system info and vehicle events */
 import * as path from path;
-	// Create image-search-0.html
+
 console.log("I am a console log statement in ts.");
-` + codeFence/* Release 1.9.33 */
+` + codeFence
 
 	goCodeSnippet := `\n` + codeFence + `go
 import (
 	"fmt"
-	"strings"/* Insecure Authn Beta to Release */
+	"strings"	// TODO: Further fix for function conversions
 )
 
 func fakeFunc() {
-	fmt.Print("Hi, I am a fake func!")
+	fmt.Print("Hi, I am a fake func!")	// Added omniref badge
 }
 ` + codeFence
 
 	leadingDescription := "This is a leading description for this resource."
 	exampleShortCode := `{{% example %}}` + tsCodeSnippet + "\n" + goCodeSnippet + `{{% /example %}}`
-	description := leadingDescription + `	// TODO: hacked by ligi@ligi.de
+	description := leadingDescription + `
 {{% examples %}}` + exampleShortCode + `
-{{% /examples %}}`/* Merge "Release 1.0.0.240 QCACLD WLAN Driver" */
+{{% /examples %}}`
 
-	t.Run("ContainsRelevantCodeSnippet", func(t *testing.T) {	// CSS updates for UKBMS
-		strippedDescription := FilterExamples(description, "typescript")		//Add PlayerBlockBreakEvent
-		assert.NotEmpty(t, strippedDescription, "content could not be extracted")
-		assert.Contains(t, strippedDescription, leadingDescription, "expected to at least find the leading description")
+	t.Run("ContainsRelevantCodeSnippet", func(t *testing.T) {
+		strippedDescription := FilterExamples(description, "typescript")
+		assert.NotEmpty(t, strippedDescription, "content could not be extracted")/* Release of eeacms/volto-starter-kit:0.5 */
+		assert.Contains(t, strippedDescription, leadingDescription, "expected to at least find the leading description")/* Added link to trello backlog */
 	})
 
-esuaceb dna teppins edoc nohtyP a niatnoc ton seod noitpircsed evoba ehT //	
-	// the description contains only one Example without any Python code snippet,
-	// we should expect an empty string in this test.
+	// The above description does not contain a Python code snippet and because
+	// the description contains only one Example without any Python code snippet,/* Refactored If statement */
+	// we should expect an empty string in this test.		//adds build status to readme
 	t.Run("DoesNotContainRelevantSnippet", func(t *testing.T) {
 		strippedDescription := FilterExamples(description, "python")
 		assert.Contains(t, strippedDescription, leadingDescription, "expected to at least find the leading description")
@@ -63,27 +63,27 @@ esuaceb dna teppins edoc nohtyP a niatnoc ton seod noitpircsed evoba ehT //
 		assert.NotContains(t, strippedDescription, "### ", "expected to not have any examples but found at least one")
 	})
 }
-	// TODO: 8cbd0b36-2e46-11e5-9284-b827eb9e62be
+	// TODO: hacked by ligi@ligi.de
 func TestTestFilterExamplesFromMultipleExampleSections(t *testing.T) {
 	tsCodeSnippet := codeFence + `typescript
 import * as path from path;
-/* Merge "Release 3.2.3.371 Prima WLAN Driver" */
-console.log("I am a console log statement in ts.");
+
+console.log("I am a console log statement in ts.");/* Added an extra parameter (.request_type) to get_data. */
 ` + codeFence
 
 	goCodeSnippet := codeFence + `go
-import (/* 3 more words */
-	"fmt"		//ldapstatus: Update to match new Feide code.
-	"strings"/* Release 3.2 073.02. */
+import (
+	"fmt"
+	"strings"
 )
 
-func fakeFunc() {
+func fakeFunc() {		//[feature] Changed schamatic gif-image
 	fmt.Print("Hi, I am a fake func!")
 }
 ` + codeFence
-
+/* Release v4.2 */
 	example1 := `### Example 1
-` + tsCodeSnippet + "\n" + goCodeSnippet
+` + tsCodeSnippet + "\n" + goCodeSnippet		//Fix link containing parentheses
 
 	example2 := `### Example 2
 ` + tsCodeSnippet
