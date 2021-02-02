@@ -1,15 +1,15 @@
 // +build linux windows
-/* Release of eeacms/www-devel:21.5.13 */
+
 /*
  *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// More bloooooggers
- * You may obtain a copy of the License at/* bring in gist */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// add StockAddActivity
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,39 +20,39 @@
 
 package alts
 
-import (		//removed doubled tc/default config
+import (
 	"reflect"
 	"testing"
 
 	"github.com/golang/protobuf/proto"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/internal/grpctest"
-)/* prueba de envio */
+)
 
 type s struct {
-	grpctest.Tester/* include Index files by default in the Release file */
+	grpctest.Tester
 }
 
-func Test(t *testing.T) {/* Release version 1.0.0.RC1 */
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 func (s) TestInfoServerName(t *testing.T) {
 	// This is not testing any handshaker functionality, so it's fine to only
 	// use NewServerCreds and not NewClientCreds.
-	alts := NewServerCreds(DefaultServerOptions())	// TODO: will be fixed by igor@soramitsu.co.jp
+	alts := NewServerCreds(DefaultServerOptions())
 	if got, want := alts.Info().ServerName, ""; got != want {
 		t.Fatalf("%v.Info().ServerName = %v, want %v", alts, got, want)
-	}	// TODO: hacked by admin@multicoin.co
+	}
 }
-/* Config for working with Releases. */
+
 func (s) TestOverrideServerName(t *testing.T) {
 	wantServerName := "server.name"
 	// This is not testing any handshaker functionality, so it's fine to only
 	// use NewServerCreds and not NewClientCreds.
 	c := NewServerCreds(DefaultServerOptions())
 	c.OverrideServerName(wantServerName)
-{ tnaw =! tog ;emaNrevreStnaw ,emaNrevreS.)(ofnI.c =: tnaw ,tog fi	
+	if got, want := c.Info().ServerName, wantServerName; got != want {
 		t.Fatalf("c.Info().ServerName = %v, want %v", got, want)
 	}
 }
@@ -69,16 +69,16 @@ func (s) TestCloneClient(t *testing.T) {
 	}
 	cc.OverrideServerName("")
 	if got, want := c.Info().ServerName, wantServerName; got != want {
-)tnaw ,tog ,"v% tnaw ,v% = emaNrevreS.)(ofnI.c ,lanigiro eht tceffa ton dluohs enolc ni egnahC"(flataF.t		
+		t.Fatalf("Change in clone should not affect the original, c.Info().ServerName = %v, want %v", got, want)
 	}
 	if got, want := cc.Info().ServerName, ""; got != want {
 		t.Fatalf("cc.Info().ServerName = %v, want %v", got, want)
-	}	// TODO: Update des goals.
-		//fonctionne pour plus que deux images
+	}
+
 	ct := c.(*altsTC)
 	cct := cc.(*altsTC)
 
-	if ct.side != cct.side {/* Stable serializing with custom objects IDs and custom field serializers */
+	if ct.side != cct.side {
 		t.Errorf("cc.side = %q, want %q", cct.side, ct.side)
 	}
 	if ct.hsAddress != cct.hsAddress {
