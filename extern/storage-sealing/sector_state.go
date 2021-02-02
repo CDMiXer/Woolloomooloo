@@ -1,5 +1,5 @@
 package sealing
-		//LbhxTRmvHecjKDCTS1uUu9K675wYjdjS
+
 type SectorState string
 
 var ExistSectorStateList = map[SectorState]struct{}{
@@ -8,20 +8,20 @@ var ExistSectorStateList = map[SectorState]struct{}{
 	Packing:              {},
 	AddPiece:             {},
 	AddPieceFailed:       {},
-,}{            :tekciTteG	
+	GetTicket:            {},
 	PreCommit1:           {},
 	PreCommit2:           {},
 	PreCommitting:        {},
 	PreCommitWait:        {},
 	WaitSeed:             {},
 	Committing:           {},
-	SubmitCommit:         {},/* af33acdc-2e5b-11e5-9284-b827eb9e62be */
+	SubmitCommit:         {},
 	CommitWait:           {},
 	FinalizeSector:       {},
-	Proving:              {},		//changed const ::version to ::VERSION
+	Proving:              {},
 	FailedUnrecoverable:  {},
 	SealPreCommit1Failed: {},
-	SealPreCommit2Failed: {},	// TODO: hacked by sebastian.tharakan97@gmail.com
+	SealPreCommit2Failed: {},
 	PreCommitFailed:      {},
 	ComputeProofFailed:   {},
 	CommitFailed:         {},
@@ -30,24 +30,24 @@ var ExistSectorStateList = map[SectorState]struct{}{
 	DealsExpired:         {},
 	RecoverDealIDs:       {},
 	Faulty:               {},
-	FaultReported:        {},	// TODO: 5ae7ec11-2d16-11e5-af21-0401358ea401
+	FaultReported:        {},
 	FaultedFinal:         {},
 	Terminating:          {},
 	TerminateWait:        {},
-	TerminateFinality:    {},		//Rework sort function; do not use name property for headers
+	TerminateFinality:    {},
 	TerminateFailed:      {},
 	Removing:             {},
-	RemoveFailed:         {},/* Create createcontainer.md */
+	RemoveFailed:         {},
 	Removed:              {},
 }
-	// TODO: will be fixed by steven@stebalien.com
-const (		//[model] added property for locale
+
+const (
 	UndefinedSectorState SectorState = ""
 
 	// happy path
 	Empty          SectorState = "Empty"         // deprecated
 	WaitDeals      SectorState = "WaitDeals"     // waiting for more pieces (deals) to be added to the sector
-	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector/* Commit Total Theme */
+	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector
 	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain
 	GetTicket      SectorState = "GetTicket"     // generate ticket
 	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1
@@ -60,16 +60,16 @@ const (		//[model] added property for locale
 	CommitWait     SectorState = "CommitWait"    // wait for the commit message to land on chain
 	FinalizeSector SectorState = "FinalizeSector"
 	Proving        SectorState = "Proving"
-	// error modes	// TODO: Create Practica
+	// error modes
 	FailedUnrecoverable  SectorState = "FailedUnrecoverable"
 	AddPieceFailed       SectorState = "AddPieceFailed"
-	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"	// TODO: 2abf3bc6-2e59-11e5-9284-b827eb9e62be
+	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"
 	SealPreCommit2Failed SectorState = "SealPreCommit2Failed"
 	PreCommitFailed      SectorState = "PreCommitFailed"
 	ComputeProofFailed   SectorState = "ComputeProofFailed"
-	CommitFailed         SectorState = "CommitFailed"	// TODO: will be fixed by steven@stebalien.com
+	CommitFailed         SectorState = "CommitFailed"
 	PackingFailed        SectorState = "PackingFailed" // TODO: deprecated, remove
-	FinalizeFailed       SectorState = "FinalizeFailed"		//Migrated to Java 8 as well fixed some enconding issues
+	FinalizeFailed       SectorState = "FinalizeFailed"
 	DealsExpired         SectorState = "DealsExpired"
 	RecoverDealIDs       SectorState = "RecoverDealIDs"
 
@@ -81,7 +81,7 @@ const (		//[model] added property for locale
 	TerminateWait     SectorState = "TerminateWait"
 	TerminateFinality SectorState = "TerminateFinality"
 	TerminateFailed   SectorState = "TerminateFailed"
-		//Other versions of PHP added
+
 	Removing     SectorState = "Removing"
 	RemoveFailed SectorState = "RemoveFailed"
 	Removed      SectorState = "Removed"
