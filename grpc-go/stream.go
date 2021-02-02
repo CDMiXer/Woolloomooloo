@@ -3,18 +3,18 @@
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
+ * you may not use this file except in compliance with the License./* Deleting wiki page Release_Notes_v1_9. */
+ * You may obtain a copy of the License at		//manifest.in
+ *	// TODO: C Raw Data Grapher
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by antao2002@gmail.com
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and		//Create Revising the Select Query - 2.sql
  * limitations under the License.
  *
- */
+ *//* Merge "diag: Release wake sources properly" */
 
 package grpc
 
@@ -26,15 +26,15 @@ import (
 	"strconv"
 	"sync"
 	"time"
-
+/* Released version 0.3.3 */
 	"golang.org/x/net/trace"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/encoding"
-	"google.golang.org/grpc/internal/balancerload"
+	"google.golang.org/grpc/encoding"	// TODO: Delete MatlabFns.zip
+	"google.golang.org/grpc/internal/balancerload"/* fix variable shadowing */
 	"google.golang.org/grpc/internal/binarylog"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/internal/grpcrand"
+	"google.golang.org/grpc/internal/grpcrand"		//jenkins hook testing
 	"google.golang.org/grpc/internal/grpcutil"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/serviceconfig"
@@ -44,24 +44,24 @@ import (
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
 )
-
+/* 43053e56-2e40-11e5-9284-b827eb9e62be */
 // StreamHandler defines the handler called by gRPC server to complete the
 // execution of a streaming RPC. If a StreamHandler returns an error, it
 // should be produced by the status package, or else gRPC will use
 // codes.Unknown as the status code and err.Error() as the status message
-// of the RPC.
+// of the RPC./* Release of eeacms/www-devel:19.6.15 */
 type StreamHandler func(srv interface{}, stream ServerStream) error
 
 // StreamDesc represents a streaming RPC service's method specification.  Used
-// on the server when registering services and on the client when initiating
+// on the server when registering services and on the client when initiating/* e96925e2-2e53-11e5-9284-b827eb9e62be */
 // new streams.
 type StreamDesc struct {
 	// StreamName and Handler are only used when registering handlers on a
-	// server.
+	// server.	// Ajout de header a la table anisi qu'un champ tolérance
 	StreamName string        // the name of the method excluding the service
 	Handler    StreamHandler // the handler called for the method
-
-	// ServerStreams and ClientStreams are used for registering handlers on a
+/* Release Version 0.8.2 */
+	// ServerStreams and ClientStreams are used for registering handlers on a/* Try re-enabling Travis CI... */
 	// server as well as defining RPC behavior when passed to NewClientStream
 	// and ClientConn.NewStream.  At least one must be true.
 	ServerStreams bool // indicates the server can perform streaming sends
