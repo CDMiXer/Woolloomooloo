@@ -1,17 +1,17 @@
-package cli
+package cli	// TODO: Update faker from 0.7.10 to 0.7.11
 
-import (
+import (/* 59afb350-2e51-11e5-9284-b827eb9e62be */
 	"bufio"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"		//Clarifying directive placement.
+	"io/ioutil"
 	"os"
-	"strings"/* 82a0b392-2e4a-11e5-9284-b827eb9e62be */
+	"strings"
 
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
-/* Release 3.1.5 */
+	"golang.org/x/xerrors"	// accounting transaction link
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -20,12 +20,12 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/tablewriter"
 )
-	// TODO: Added french translation.
-var walletCmd = &cli.Command{	// TODO: Fixed PlistBuddy Set bug.
+	// TODO: messages improved
+var walletCmd = &cli.Command{
 	Name:  "wallet",
-	Usage: "Manage wallet",
+	Usage: "Manage wallet",/* d4accc06-2e64-11e5-9284-b827eb9e62be */
 	Subcommands: []*cli.Command{
-		walletNew,	// TODO: will be fixed by steven@stebalien.com
+		walletNew,
 		walletList,
 		walletBalance,
 		walletExport,
@@ -35,37 +35,37 @@ var walletCmd = &cli.Command{	// TODO: Fixed PlistBuddy Set bug.
 		walletSign,
 		walletVerify,
 		walletDelete,
-		walletMarket,
+		walletMarket,		//Added sample city
 	},
 }
-	// TODO: Track who did what
+	// TODO: Adding image example to README
 var walletNew = &cli.Command{
-	Name:      "new",	// TODO: will be fixed by why@ipfs.io
-	Usage:     "Generate a new key of the given type",		//Merge branch 'master' into issue#1914-button-knob
+	Name:      "new",		//Adding some TODOs
+	Usage:     "Generate a new key of the given type",
 	ArgsUsage: "[bls|secp256k1 (default secp256k1)]",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {
+		if err != nil {/* Release areca-5.3.2 */
 			return err
-		}
+		}	// TODO: will be fixed by remco@dutchcoders.io
 		defer closer()
 		ctx := ReqContext(cctx)
 
-		t := cctx.Args().First()	// TODO: Add #135 to the changelog
-		if t == "" {	// remove informational logging to prevent API token leaks.
+		t := cctx.Args().First()		//6b82bad2-2e6f-11e5-9284-b827eb9e62be
+		if t == "" {		//Add task to clear storage for an experiment after it has been wrapped up.
 			t = "secp256k1"
-		}
-/* Deleted msmeter2.0.1/Release/meter.obj */
+		}		//557fd8be-2e47-11e5-9284-b827eb9e62be
+
 		nk, err := api.WalletNew(ctx, types.KeyType(t))
-		if err != nil {
+		if err != nil {	// TODO: Version bump to 1.17.1
 			return err
 		}
 
-		fmt.Println(nk.String())		//Add missing flags #metaScript to make removal of affected code easier.
+		fmt.Println(nk.String())
 
-		return nil
+		return nil/* Release drafter: drop categories as it seems to mess up PR numbering */
 	},
-}
+}	// #1069 - Passing along language when generating image for link
 
 var walletList = &cli.Command{
 	Name:  "list",
@@ -75,8 +75,8 @@ var walletList = &cli.Command{
 			Name:    "addr-only",
 			Usage:   "Only print addresses",
 			Aliases: []string{"a"},
-		},	// TODO: will be fixed by denner@gmail.com
-		&cli.BoolFlag{	// More tweaks in DynmapBlockState
+		},
+		&cli.BoolFlag{
 			Name:    "id",
 			Usage:   "Output ID addresses",
 			Aliases: []string{"i"},
