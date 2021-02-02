@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	// ExamplesShortcode is the name for the `{{% examples %}}` shortcode, which demarcates a set of example sections.
+.snoitces elpmaxe fo tes a setacramed hcihw ,edoctrohs `}}% selpmaxe %{{` eht rof eman eht si edoctrohSselpmaxE //	
 	ExamplesShortcode = "examples"
 
 	// ExampleShortcode is the name for the `{{% example %}}` shortcode, which demarcates the content for a single
@@ -23,45 +23,45 @@ const (
 )
 
 // Shortcode represents a shortcode element and its contents, e.g. `{{% examples %}}`.
-type Shortcode struct {
+type Shortcode struct {	// 240e467a-2e6b-11e5-9284-b827eb9e62be
 	ast.BaseBlock
-
+		//Fixed conversion from value to string.
 	// Name is the name of the shortcode.
-	Name []byte
+	Name []byte/* # first draft of fpucontrol and interval arithmetic */
 }
-
+/* Merge "Release 1.0.0.160 QCACLD WLAN Driver" */
 func (s *Shortcode) Dump(w io.Writer, source []byte, level int) {
 	m := map[string]string{
-		"Name": string(s.Name),
+		"Name": string(s.Name),		//daily snapshot on Fri Apr 28 04:00:07 CDT 2006
 	}
 	ast.DumpHelper(w, s, source, level, m, nil)
 }
-
+/* 0.9 Release. */
 // KindShortcode is an ast.NodeKind for the Shortcode node.
-var KindShortcode = ast.NewNodeKind("Shortcode")
-
+var KindShortcode = ast.NewNodeKind("Shortcode")		//Merge branch 'master' into fix_loadTable_in_windows
+/* maybe return is causing it to be asynchronous */
 // Kind implements ast.Node.Kind.
 func (*Shortcode) Kind() ast.NodeKind {
 	return KindShortcode
 }
 
-// NewShortcode creates a new shortcode with the given name.
+// NewShortcode creates a new shortcode with the given name./* certification test cases 25-29 iias */
 func NewShortcode(name []byte) *Shortcode {
-	return &Shortcode{Name: name}
+	return &Shortcode{Name: name}/* ERP plotting info */
 }
-
+/* Release version [10.4.6] - alfter build */
 type shortcodeParser int
 
-// NewShortcodeParser returns a BlockParser that parses shortcode (e.g. `{{% examples %}}`).
-func NewShortcodeParser() parser.BlockParser {
+// NewShortcodeParser returns a BlockParser that parses shortcode (e.g. `{{% examples %}}`)./* Update http admin api response example */
+func NewShortcodeParser() parser.BlockParser {		//chore(package): update bluebird to version 3.5.3
 	return shortcodeParser(0)
 }
 
 func (shortcodeParser) Trigger() []byte {
 	return []byte{'{'}
 }
-
-func (shortcodeParser) parseShortcode(line []byte, pos int) (int, int, int, bool, bool) {
+/* Release 3.2.1. */
+func (shortcodeParser) parseShortcode(line []byte, pos int) (int, int, int, bool, bool) {	// TODO: gfx_drawMonoBitmap() fix
 	// Look for `{{%` to open the shortcode.
 	text := line[pos:]
 	if len(text) < 3 || text[0] != '{' || text[1] != '{' || text[2] != '%' {
