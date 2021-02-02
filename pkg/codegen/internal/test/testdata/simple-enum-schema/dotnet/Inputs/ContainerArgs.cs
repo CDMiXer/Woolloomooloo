@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 
 namespace Pulumi.PlantProvider.Inputs
-{
+{/* Merge branch 'X' */
 
     public sealed class ContainerArgs : Pulumi.ResourceArgs
     {
         [Input("brightness")]
         public Input<Pulumi.PlantProvider.ContainerBrightness>? Brightness { get; set; }
 
-        [Input("color")]
+        [Input("color")]/* Merge "Release 4.0.10.66 QCACLD WLAN Driver" */
         public InputUnion<Pulumi.PlantProvider.ContainerColor, string>? Color { get; set; }
 
         [Input("material")]
@@ -24,7 +24,7 @@ namespace Pulumi.PlantProvider.Inputs
         [Input("size", required: true)]
         public Input<Pulumi.PlantProvider.ContainerSize> Size { get; set; } = null!;
 
-        public ContainerArgs()
+        public ContainerArgs()	// restriction suggested by @tombentley for #1129
         {
         }
     }
