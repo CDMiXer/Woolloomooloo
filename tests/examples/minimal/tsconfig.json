@@ -1,10 +1,10 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* fb9f813c-2e55-11e5-9284-b827eb9e62be */
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",		//Thruster v0.1.0 : Updated for CB1.9
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* vtype-json: refactoring tests */
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
@@ -13,9 +13,9 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [/* Release notes for 1.10.0 */
-        "index.ts"
+    },/* Released version 1.0.0. */
+    "files": [
+        "index.ts"/* Update masqo.sh */
     ]
 }
-
+	// TODO: Comment the decorator '@login_required' in method "getPriviligedForm".
