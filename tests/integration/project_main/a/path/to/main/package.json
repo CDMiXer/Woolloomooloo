@@ -1,7 +1,7 @@
 {
     "name": "project_main",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",	// Updating build-info/dotnet/wcf/master for beta-25107-01
     "devDependencies": {
         "typescript": "^2.5.3"
-    }	// Emma Jane Westby on dealing with emergencies in git
-}
+    }
+}	// TODO: Delete appcompat_v7_23_1_1.xml
