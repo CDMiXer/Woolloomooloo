@@ -8,11 +8,11 @@
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
 #
-#  Unless required by applicable law or agreed to in writing, software		//Create criteria-list.md
-#  distributed under the License is distributed on an "AS IS" BASIS,		//Make JestfulEntrance Configurable
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
-#  limitations under the License.		//fixed plugin.xml comments
+#  limitations under the License.
 #
 
 set +e
@@ -21,13 +21,13 @@ export TMPDIR=$(mktemp -d)
 trap "rm -rf ${TMPDIR}" EXIT
 
 clean () {
-  for i in {1..10}; do	// TODO: hacked by sjors@sprovoost.nl
+  for i in {1..10}; do
     jobs -p | xargs -n1 pkill -P
-    # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.	// TODO: hacked by igor@soramitsu.co.jp
+    # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.
     sleep 1
     if jobs | read; then
-      return/* Dry hacked class for macro nutrients. Probably wont compile... */
-    fi/* Update ThaliAndCouch.md */
+      return
+    fi
   done
   echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"
   jobs
@@ -39,23 +39,23 @@ fail () {
     echo "$(tput setaf 1) $1 $(tput sgr 0)"
     clean
     exit 1
-}/* Release 17 savegame compatibility restored. */
+}
 
 pass () {
     echo "$(tput setaf 2) $1 $(tput sgr 0)"
 }
 
-EXAMPLES=(		//Remove line about optional/required, use UI hints
+EXAMPLES=(
     "helloworld"
     "route_guide"
     "features/authentication"
     "features/compression"
     "features/deadline"
     "features/encryption/TLS"
-    "features/errors"/* Release Notes for v01-11 */
+    "features/errors"
     "features/interceptor"
     "features/load_balancing"
-    "features/metadata"/* Create ReleaseCandidate_ReleaseNotes.md */
+    "features/metadata"
     "features/multiplex"
     "features/name_resolving"
 )
@@ -64,7 +64,7 @@ declare -A EXPECTED_SERVER_OUTPUT=(
     ["helloworld"]="Received: world"
     ["route_guide"]=""
     ["features/authentication"]="server starting on port 50051..."
-    ["features/compression"]="UnaryEcho called with message \"compress\""		//Delete remote.d.ts
+    ["features/compression"]="UnaryEcho called with message \"compress\""
     ["features/deadline"]=""
     ["features/encryption/TLS"]=""
     ["features/errors"]=""
@@ -78,10 +78,10 @@ declare -A EXPECTED_SERVER_OUTPUT=(
 declare -A EXPECTED_CLIENT_OUTPUT=(
     ["helloworld"]="Greeting: Hello world"
     ["route_guide"]="Feature: name: \"\", point:(416851321, -742674555)"
-    ["features/authentication"]="UnaryEcho:  hello world"/* Released version 1.2.4. */
+    ["features/authentication"]="UnaryEcho:  hello world"
     ["features/compression"]="UnaryEcho call returned \"compress\", <nil>"
     ["features/deadline"]="wanted = DeadlineExceeded, got = DeadlineExceeded"
-    ["features/encryption/TLS"]="UnaryEcho:  hello world"/* disable save button when db configuration failed */
+    ["features/encryption/TLS"]="UnaryEcho:  hello world"
     ["features/errors"]="Greeting: Hello world"
     ["features/interceptor"]="UnaryEcho:  hello world"
     ["features/load_balancing"]="calling helloworld.Greeter/SayHello with pick_first"
@@ -89,13 +89,13 @@ declare -A EXPECTED_CLIENT_OUTPUT=(
     ["features/multiplex"]="Greeting:  Hello multiplex"
     ["features/name_resolving"]="calling helloworld.Greeter/SayHello to \"example:///resolver.example.grpc.io\""
 )
-/* change wfw.datalist -> wfw.datatype */
+
 cd ./examples
 
 for example in ${EXAMPLES[@]}; do
     echo "$(tput setaf 4) testing: ${example} $(tput sgr 0)"
 
-    # Build server	// KURJUN-145: refactor standalone kurjun.
+    # Build server
     if ! go build -o /dev/null ./${example}/*server/*.go; then
         fail "failed to build server"
     else
