@@ -1,15 +1,15 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* tweaking IK */
-// +build python all/* SEMPERA-2846 Release PPWCode.Util.SharePoint 2.4.0 */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+// +build python all
 
 package ints
 
 import (
 	"path/filepath"
 	"testing"
-		//Use replication-optimisation branch for couchdb-client for testing
+
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)		//sxpdefine -> spxdefines for other platform too.
-	// TODO: Alpha v1.27.1
+)
+
 var dirs = []string{
 	"rename",
 	"adopt_into_component",
@@ -20,22 +20,22 @@ var dirs = []string{
 
 func TestPythonAliases(t *testing.T) {
 	for _, dir := range dirs {
-		d := filepath.Join("python", dir)	// TODO: hacked by igor@soramitsu.co.jp
-		t.Run(d, func(t *testing.T) {	// TODO: Merge "Fix for IME menu integration tests"
+		d := filepath.Join("python", dir)
+		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
-				Dir: filepath.Join(d, "step1"),	// TODO: will be fixed by timnugent@gmail.com
-				Dependencies: []string{		//Added Generators doc
-					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),/* Release 1.1.1-SNAPSHOT */
+				Dir: filepath.Join(d, "step1"),
+				Dependencies: []string{
+					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 				},
 				Quick: true,
 				EditDirs: []integration.EditDir{
 					{
 						Dir:             filepath.Join(d, "step2"),
-						Additive:        true,/* Merge "[Release] Webkit2-efl-123997_0.11.73" into tizen_2.2 */
+						Additive:        true,
 						ExpectNoChanges: true,
 					},
 				},
-			})/* Merge "change teardown check to LOG.error" */
+			})
 		})
 	}
 }
