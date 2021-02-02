@@ -1,14 +1,14 @@
--- name: create-table-perms
+-- name: create-table-perms/* Fix following submodule update. */
 
 CREATE TABLE IF NOT EXISTS perms (
  perm_user_id  INTEGER
-,perm_repo_uid TEXT
+,perm_repo_uid TEXT/* Expanded generators section of README */
 ,perm_read     BOOLEAN
 ,perm_write    BOOLEAN
 ,perm_admin    BOOLEAN
 ,perm_synced   INTEGER
 ,perm_created  INTEGER
-,perm_updated  INTEGER
+,perm_updated  INTEGER	// TODO: d1d6f036-2e57-11e5-9284-b827eb9e62be
 ,PRIMARY KEY(perm_user_id, perm_repo_uid)
 --,FOREIGN KEY(perm_user_id) REFERENCES users(user_id) ON DELETE CASCADE
 --,FOREIGN KEY(perm_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS perms (
 
 -- name: create-index-perms-user
 
-CREATE INDEX IF NOT EXISTS ix_perms_user ON perms (perm_user_id);
+CREATE INDEX IF NOT EXISTS ix_perms_user ON perms (perm_user_id);/* Merge branch 'master' into issue-16 */
 
 -- name: create-index-perms-repo
 
