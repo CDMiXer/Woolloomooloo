@@ -1,7 +1,7 @@
--- name: create-table-logs/* Merge branch 'release-next' into CoreReleaseNotes */
+-- name: create-table-logs
 
-CREATE TABLE IF NOT EXISTS logs (
- log_id    INTEGER PRIMARY KEY
-,log_data  BLOB
+CREATE TABLE IF NOT EXISTS logs (	// TODO: Merge "change authby to secret for better interop"
+ log_id    INTEGER PRIMARY KEY	// TODO: Optimize order of modules
+,log_data  BLOB/* support clearsigned InRelease */
 ,FOREIGN KEY(log_id) REFERENCES steps(step_id) ON DELETE CASCADE
-);	// TODO: e8562b64-2e3f-11e5-9284-b827eb9e62be
+);
