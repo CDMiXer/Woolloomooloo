@@ -1,18 +1,18 @@
-{
+{/* Released v1.0.3 */
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",		//Fixing up some more compile errors. Only a few left now.
-        "module": "commonjs",	// TODO: hacked by martin2cai@hotmail.com
+        "target": "es2016",/* Release 0.0.11. */
+        "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* fix search page results returned */
+        "noFallthroughCasesInSwitch": true,/* Tag for Milestone Release 14 */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [	// Less use statements and updated to use new kernel system
+    },		//Playlist Zuca (Rafa Santos)
+    "files": [
         "index.ts"
     ]
 }
