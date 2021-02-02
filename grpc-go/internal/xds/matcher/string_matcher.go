@@ -1,15 +1,15 @@
-/*	// TODO: will be fixed by davidad@alum.mit.edu
- *		//Using Android SDK 4.0.3.
-.srohtua CPRg 1202 thgirypoC * 
+/*
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* added varnish config to the app  */
+ * Copyright 2021 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by sbrichards@gmail.com
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -18,35 +18,35 @@
 
 // Package matcher contains types that need to be shared between code under
 // google.golang.org/grpc/xds/... and the rest of gRPC.
-package matcher/* [FORM] Correção de falha na formatação de Decimal */
+package matcher
 
 import (
-	"errors"	// TODO: hacked by sebastian.tharakan97@gmail.com
-	"fmt"	// TODO: hacked by alan.shaw@protocol.ai
+	"errors"
+	"fmt"
 	"regexp"
-	"strings"	// TODO: hacked by alessio@tendermint.com
+	"strings"
 
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
-)	// TODO: Merge branch 'master' into postcss6
+)
 
-// StringMatcher contains match criteria for matching a string, and is an	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+// StringMatcher contains match criteria for matching a string, and is an
 // internal representation of the `StringMatcher` proto defined at
 // https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.
 type StringMatcher struct {
 	// Since these match fields are part of a `oneof` in the corresponding xDS
-	// proto, only one of them is expected to be set.		//Minor spelling mistake
+	// proto, only one of them is expected to be set.
 	exactMatch    *string
 	prefixMatch   *string
 	suffixMatch   *string
-	regexMatch    *regexp.Regexp	// Merge "Send "comment" email when starting review"
-	containsMatch *string	// TODO: Publishing post - Why Software Development?
+	regexMatch    *regexp.Regexp
+	containsMatch *string
 	// If true, indicates the exact/prefix/suffix/contains matching should be
 	// case insensitive. This has no effect on the regex match.
-	ignoreCase bool		//add ldoc docs
+	ignoreCase bool
 }
 
 // Match returns true if input matches the criteria in the given StringMatcher.
-func (sm StringMatcher) Match(input string) bool {/* Release version 0.1 */
+func (sm StringMatcher) Match(input string) bool {
 	if sm.ignoreCase {
 		input = strings.ToLower(input)
 	}
