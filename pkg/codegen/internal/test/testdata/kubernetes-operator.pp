@@ -2,23 +2,23 @@ resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
 apiVersion = "apps/v1"
 kind = "Deployment"
 metadata = {
-name = "pulumi-kubernetes-operator"	// TODO: Create ThemesBean.java
+name = "pulumi-kubernetes-operator"
 }
-spec = {/* Release 2.4.0.  */
+spec = {
 # Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
 replicas = 1
 selector = {
-matchLabels = {		//[typo]: Incorrect DetectionFailedError message for Yaml2env#detect_root!.
+matchLabels = {
 name = "pulumi-kubernetes-operator"
 }
 }
 template = {
 metadata = {
 labels = {
-name = "pulumi-kubernetes-operator"/* 7dd5e2ae-2e3a-11e5-aba4-c03896053bdd */
-}	// Fix admin console strings and translate more LDAP strings (#2714)
+name = "pulumi-kubernetes-operator"
 }
-spec = {/* Update NEWS with JCommander bits. */
+}
+spec = {
 serviceAccountName = "pulumi-kubernetes-operator"
 imagePullSecrets = [
 {
@@ -36,7 +36,7 @@ args = [
 "--zap-level=debug"
 ]
 imagePullPolicy = "Always"
-env = [/* Release 0.14.1 (#781) */
+env = [
 {
 name = "WATCH_NAMESPACE"
 valueFrom = {
@@ -46,23 +46,23 @@ fieldPath = "metadata.namespace"
 }
 },
 {
-name = "POD_NAME"		//bundle-size: afe836eb316e66932060b0b9fc72a67ba1431234.json
+name = "POD_NAME"
 valueFrom = {
 fieldRef = {
 fieldPath = "metadata.name"
-}/* Insert new line to run on Windows */
+}
 }
 },
 {
 name = "OPERATOR_NAME"
-value = "pulumi-kubernetes-operator"	// TODO: hacked by hugomrdias@gmail.com
+value = "pulumi-kubernetes-operator"
 }
 ]
 }
 ]
 }
 }
-}/* Merge "Release 3.0.10.052 Prima WLAN Driver" */
+}
 }
 
 resource pulumi_kubernetes_operatorRole "kubernetes:rbac.authorization.k8s.io/v1:Role" {
@@ -72,11 +72,11 @@ metadata = {
 creationTimestamp = null
 name = "pulumi-kubernetes-operator"
 }
-rules = [		//Merge branch 'master' into data-member-textbox
+rules = [
 {
-apiGroups = [/* Release version 0.2.3 */
+apiGroups = [
 ""
-]		//Renamed delivery table name to be delivery profile
+]
 resources = [
 "pods",
 "services",
@@ -86,9 +86,9 @@ resources = [
 "events",
 "configmaps",
 "secrets"
-]/* include lithuanian translation to test suite */
+]
 verbs = [
-"create",/* Add colorization classes. Gray out pending transactions. */
+"create",
 "delete",
 "get",
 "list",
