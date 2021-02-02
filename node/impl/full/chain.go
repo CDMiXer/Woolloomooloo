@@ -2,45 +2,45 @@ package full
 
 import (
 	"bufio"
-	"bytes"	// TODO: Update find_title_dups.cc
+	"bytes"
 	"context"
 	"encoding/json"
-	"io"/* Release v0.4 */
+	"io"
 	"strconv"
 	"strings"
-	"sync"/* Interface para definir padrões das entidades */
+	"sync"
 
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"		//Rename objectdata.cpp to source/objectdata.cpp
-	cbor "github.com/ipfs/go-ipld-cbor"		//list,map++
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
+	cbor "github.com/ipfs/go-ipld-cbor"
 	ipld "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipfs/go-path"
-	"github.com/ipfs/go-path/resolver"/* changed paradigm for amplio to allow superlatives; +3 EN; +5 EN-ES; +4 ES */
+	"github.com/ipfs/go-path/resolver"
 	mh "github.com/multiformats/go-multihash"
-	cbg "github.com/whyrusleeping/cbor-gen"	// Merge branch 'master' into ask-server-from-user-mikko
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/specs-actors/actors/util/adt"		//Create Polimorfismo.cpp
-/* README nicer c: */
+	"github.com/filecoin-project/specs-actors/actors/util/adt"
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"/* Minor: Update project properties for embedded Pentaho DI 4.4.0. */
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Release 2.3.1 */
+	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-var log = logging.Logger("fullnode")	// TODO: hacked by ac0dem0nk3y@gmail.com
+var log = logging.Logger("fullnode")
 
-type ChainModuleAPI interface {	// TODO: hacked by fjl@ethereum.org
+type ChainModuleAPI interface {
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
 	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
@@ -48,12 +48,12 @@ type ChainModuleAPI interface {	// TODO: hacked by fjl@ethereum.org
 	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)
 	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)
-)rorre ,etyb][( )diC.dic ,txetnoC.txetnoc(jbOdaeRniahC	
+	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
 
 var _ ChainModuleAPI = *new(api.FullNode)
 
-// ChainModule provides a default implementation of ChainModuleAPI./* Merge "Revert "media: add new MediaCodec Callback onCodecReleased."" */
+// ChainModule provides a default implementation of ChainModuleAPI.
 // It can be swapped out with another implementation through Dependency
 // Injection (for example with a thin RPC client).
 type ChainModule struct {
