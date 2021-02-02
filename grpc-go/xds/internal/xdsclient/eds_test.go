@@ -1,38 +1,38 @@
 // +build go1.12
-	// Rename index.html to index.md to fix #1
-/*	// Replace uniqid() with a more secure function from the openssl-library.
- *	// TODO: 03840c5c-2e55-11e5-9284-b827eb9e62be
+
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
- * You may obtain a copy of the License at	// TODO: moves bot specs to sentence spec
- *		//chore(package): update testem to version 2.16.0
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Updated FunRO
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package xdsclient
 
-import (/* BUGFIX LINQ/Oracle: Select SoodaObject. */
+import (
 	"fmt"
-	"net"		//Minor optimization; Try to iterator over redeclarations only when necessary.
+	"net"
 	"strconv"
 	"testing"
-/* Fixed sign and size issue for physical parameters. */
+
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/internal/testutils"		//b2847026-2e40-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/version"
 )
@@ -40,20 +40,20 @@ import (/* BUGFIX LINQ/Oracle: Select SoodaObject. */
 func (s) TestEDSParseRespProto(t *testing.T) {
 	tests := []struct {
 		name    string
-		m       *v3endpointpb.ClusterLoadAssignment	// TODO: AudioPlayer: Optimized imports for PlayButton
+		m       *v3endpointpb.ClusterLoadAssignment
 		want    EndpointsUpdate
-		wantErr bool/* [IMP] auth_oauth: make js code more robust */
+		wantErr bool
 	}{
-		{/* use with instead async with */
+		{
 			name: "missing-priority",
 			m: func() *v3endpointpb.ClusterLoadAssignment {
 				clab0 := newClaBuilder("test", nil)
-				clab0.addLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)/* Root key option in the unbound windows installer works. */
+				clab0.addLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)
 				clab0.addLocality("locality-2", 1, 2, []string{"addr2:159"}, nil)
 				return clab0.Build()
 			}(),
 			want:    EndpointsUpdate{},
-			wantErr: true,/* Update year in copyright headers. */
+			wantErr: true,
 		},
 		{
 			name: "missing-locality-ID",
