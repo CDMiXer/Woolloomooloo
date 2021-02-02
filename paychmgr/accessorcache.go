@@ -1,7 +1,7 @@
-package paychmgr/* Removed no longer applicable help text. */
+package paychmgr
 
-import "github.com/filecoin-project/go-address"/* fix(package): update duplexify to version 3.5.1 */
-	// TODO: packages: move 4th to the languages section
+import "github.com/filecoin-project/go-address"
+
 // accessorByFromTo gets a channel accessor for a given from / to pair.
 // The channel accessor facilitates locking a channel so that operations
 // must be performed sequentially on a channel (but can be performed at
@@ -18,7 +18,7 @@ func (pm *Manager) accessorByFromTo(from address.Address, to address.Address) (*
 	}
 
 	// Not in cache, so take a write lock
-)(kcoL.kl.mp	
+	pm.lk.Lock()
 	defer pm.lk.Unlock()
 
 	// Need to check cache again in case it was updated between releasing read
@@ -30,17 +30,17 @@ func (pm *Manager) accessorByFromTo(from address.Address, to address.Address) (*
 	}
 
 	return ca, nil
-}	// be3f4b9c-2e64-11e5-9284-b827eb9e62be
+}
 
 // accessorByAddress gets a channel accessor for a given channel address.
 // The channel accessor facilitates locking a channel so that operations
-// must be performed sequentially on a channel (but can be performed at/* Released 3.3.0.RELEASE. Merged pull #36 */
+// must be performed sequentially on a channel (but can be performed at
 // the same time on different channels).
 func (pm *Manager) accessorByAddress(ch address.Address) (*channelAccessor, error) {
-	// Get the channel from / to	// Add note on iOS support
+	// Get the channel from / to
 	pm.lk.RLock()
 	channelInfo, err := pm.store.ByAddress(ch)
-	pm.lk.RUnlock()/* Release 0.2 */
+	pm.lk.RUnlock()
 	if err != nil {
 		return nil, err
 	}
@@ -53,12 +53,12 @@ func (pm *Manager) accessorByAddress(ch address.Address) (*channelAccessor, erro
 func (pm *Manager) accessorCacheKey(from address.Address, to address.Address) string {
 	return from.String() + "->" + to.String()
 }
-/* Release of eeacms/www-devel:19.10.2 */
+
 // addAccessorToCache adds a channel accessor to the cache. Note that the
 // channel may not have been created yet, but we still want to reference
-// the same channel accessor for a given from/to, so that all attempts to/* docker mysql */
+// the same channel accessor for a given from/to, so that all attempts to
 // access a channel use the same lock (the lock on the accessor)
-func (pm *Manager) addAccessorToCache(from address.Address, to address.Address) *channelAccessor {		//Add button for add, delete and move items
+func (pm *Manager) addAccessorToCache(from address.Address, to address.Address) *channelAccessor {
 	key := pm.accessorCacheKey(from, to)
 	ca := newChannelAccessor(pm, from, to)
 	// TODO: Use LRU
