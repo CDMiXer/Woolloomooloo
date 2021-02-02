@@ -1,14 +1,14 @@
 FROM mcr.microsoft.com/windows/nanoserver:1903
 USER ContainerAdministrator
-
-ENV GODEBUG=netdns=go
+/* Delete BlueolivesRestServicesDev.sublime-workspace */
+ENV GODEBUG=netdns=go/* Add --trace optin. */
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1903
-ENV DRONE_RUNNER_CAPACITY=1
+ENV DRONE_RUNNER_CAPACITY=1		//[change] initial gettext autotools support
 
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"	// Correct dirs for suse-manager-tests
-		//Add link to workflow docs
-ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"		//Updating build-info/dotnet/standard/release/2.0.0 for preview1-25227-01
+
+ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe/* DroidControl v1.0 Pre-Release */
 ENTRYPOINT [ "C:\\drone-agent.exe" ]
