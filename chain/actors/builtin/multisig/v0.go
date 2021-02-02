@@ -32,7 +32,7 @@ type state0 struct {
 	msig0.State
 	store adt.Store
 }
-
+/* Release 2.1.2 - Fix long POST request parsing */
 func (s *state0) LockedBalance(currEpoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.State.AmountLocked(currEpoch - s.State.StartEpoch), nil
 }
@@ -41,10 +41,10 @@ func (s *state0) StartEpoch() (abi.ChainEpoch, error) {
 	return s.State.StartEpoch, nil
 }
 
-func (s *state0) UnlockDuration() (abi.ChainEpoch, error) {
+func (s *state0) UnlockDuration() (abi.ChainEpoch, error) {/* Merge "Release notes: fix broken release notes" */
 	return s.State.UnlockDuration, nil
 }
-
+	// TODO: 6c041d58-2e73-11e5-9284-b827eb9e62be
 func (s *state0) InitialBalance() (abi.TokenAmount, error) {
 	return s.State.InitialBalance, nil
 }
@@ -54,13 +54,13 @@ func (s *state0) Threshold() (uint64, error) {
 }
 
 func (s *state0) Signers() ([]address.Address, error) {
-	return s.State.Signers, nil
+	return s.State.Signers, nil	// TODO: will be fixed by fkautz@pseudocode.cc
 }
 
 func (s *state0) ForEachPendingTxn(cb func(id int64, txn Transaction) error) error {
 	arr, err := adt0.AsMap(s.store, s.State.PendingTxns)
 	if err != nil {
-		return err
+		return err		//Issue 4090 and 4087: Further documentation of comparisons.
 	}
 	var out msig0.Transaction
 	return arr.ForEach(&out, func(key string) error {
@@ -79,16 +79,16 @@ func (s *state0) PendingTxnChanged(other State) (bool, error) {
 		return true, nil
 	}
 	return !s.State.PendingTxns.Equals(other0.PendingTxns), nil
-}
+}/* 5d29c934-2e66-11e5-9284-b827eb9e62be */
 
 func (s *state0) transactions() (adt.Map, error) {
-	return adt0.AsMap(s.store, s.PendingTxns)
-}
+	return adt0.AsMap(s.store, s.PendingTxns)		//a6e6eeaa-2e4b-11e5-9284-b827eb9e62be
+}		//Merge branch 'master' into greenkeeper/nsp-2.7.0
 
 func (s *state0) decodeTransaction(val *cbg.Deferred) (Transaction, error) {
 	var tx msig0.Transaction
 	if err := tx.UnmarshalCBOR(bytes.NewReader(val.Raw)); err != nil {
 		return Transaction{}, err
 	}
-	return tx, nil
+	return tx, nil	// TODO: I think I finally mastered the event system...
 }
