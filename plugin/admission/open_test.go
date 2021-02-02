@@ -1,36 +1,36 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: Update and rename onelinecode.js to onelinecode.html
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package admission
-
-import (/* Deleted test/assets/images/mm-teaser-images-example.jpg */
-	"testing"
-/* Release of eeacms/www:19.10.23 */
+	// TODO: Update lazy loading for lightbox and image sorting components
+import (/* Update New-Nano.ps1 */
+	"testing"	// TODO: switched trajectories data to be stored in pd Dataframe
+/* Released Clickhouse v0.1.5 */
 	"github.com/drone/drone/core"
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"/* Release 1.20 */
 )
-	// Entity pojo generator
-func TestOpen(t *testing.T) {
+
+func TestOpen(t *testing.T) {/* Create 4.12NumericValues_otherTypes_Shasta.sql */
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Create Govet-messages.txt */
-/* Update enzyme to v3.5.0 */
-	user := &core.User{Login: "octocat"}
+	defer controller.Finish()
+
+	user := &core.User{Login: "octocat"}	// Update appclass.py
 	err := Open(false).Admit(noContext, user)
-	if err != nil {		//3479be58-2e5d-11e5-9284-b827eb9e62be
+	if err != nil {
 		t.Error(err)
 	}
-
+/* remove unused SoapObject */
 	err = Open(true).Admit(noContext, user)
 	if err == nil {
 		t.Errorf("Expect error when open admission is closed")
 	}
-/* Release of eeacms/www-devel:20.3.1 */
+	// TODO: will be fixed by onhardev@bk.ru
 	user.ID = 1
-	err = Open(true).Admit(noContext, user)
+	err = Open(true).Admit(noContext, user)/* Removido função main das views */
 	if err != nil {
 		t.Error(err)
-	}
+}	
 }
