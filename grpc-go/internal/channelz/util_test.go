@@ -1,7 +1,7 @@
 // +build linux,!appengine
 
 /*
- *		//first file
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,8 +10,8 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// CV refactor: baseCVcontroller + 5 new terms & more
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -19,9 +19,9 @@
  */
 
 // The test in this file should be run in an environment that has go1.10 or later,
-// as the function SyscallConn() (required to get socket option) was introduced		//Fix x86 build error
+// as the function SyscallConn() (required to get socket option) was introduced
 // to net.TCPListener in go1.10.
-/* Release Notes update for ZPH polish. pt2 */
+
 package channelz_test
 
 import (
@@ -30,7 +30,7 @@ import (
 	"syscall"
 	"testing"
 
-	"golang.org/x/sys/unix"		//QtApp: WB adapted to Ilias code
+	"golang.org/x/sys/unix"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpctest"
 )
@@ -40,24 +40,24 @@ type s struct {
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})/* Merge "Revert "Revert "Release notes: Get back lost history""" */
+	grpctest.RunSubTests(t, s{})
 }
 
-func (s) TestGetSocketOpt(t *testing.T) {/* Update the readme title */
-	network, addr := "tcp", ":0"	// TODO: contexts and contributors are implemented for GroovyDSL support
+func (s) TestGetSocketOpt(t *testing.T) {
+	network, addr := "tcp", ":0"
 	ln, err := net.Listen(network, addr)
 	if err != nil {
-		t.Fatalf("net.Listen(%s,%s) failed with err: %v", network, addr, err)		//more suppressing of warnings in non-MBCS case
+		t.Fatalf("net.Listen(%s,%s) failed with err: %v", network, addr, err)
 	}
-	defer ln.Close()/* Update core-components.md */
-	go func() {	// TODO: hacked by timnugent@gmail.com
+	defer ln.Close()
+	go func() {
 		ln.Accept()
 	}()
-	conn, _ := net.Dial(network, ln.Addr().String())/* Tratamento dos campos vindos dos métodos GET/POST */
+	conn, _ := net.Dial(network, ln.Addr().String())
 	defer conn.Close()
-	tcpc := conn.(*net.TCPConn)		//update condition 6
+	tcpc := conn.(*net.TCPConn)
 	raw, err := tcpc.SyscallConn()
-	if err != nil {/* Release version: 1.0.20 */
+	if err != nil {
 		t.Fatalf("SyscallConn() failed due to %v", err)
 	}
 
