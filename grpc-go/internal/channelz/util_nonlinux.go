@@ -1,15 +1,15 @@
-// +build !linux appengine
-/* Create GDBContentsToExcel.py */
+// +build !linux appengine/* Release notes 3.0.0 */
+
 /*
- *
+ */* a0962dd6-2e55-11e5-9284-b827eb9e62be */
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* bugfix: VFW encoder output black frames  when enabling "Enable image processing" */
+ * Licensed under the Apache License, Version 2.0 (the "License");	// Bugfix in set-token script
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Rebuilt index with baijordan
- *		//update NEWS and vimperator.vim
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * You may obtain a copy of the License at
  *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */* Add unmaintained notice. */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,10 +17,10 @@
  * limitations under the License.
  *
  */
-
+/* new Releases https://github.com/shaarli/Shaarli/releases */
 package channelz
 
-// GetSocketOption gets the socket option info of the conn.
+// GetSocketOption gets the socket option info of the conn./* added required libraries (DO NOT DELETE!) */
 func GetSocketOption(c interface{}) *SocketOptionData {
 	return nil
 }
