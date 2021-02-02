@@ -2,20 +2,20 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* New Release Cert thumbprint */
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,/* @synchronized around NSArray access, fix a crash. */
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,/* Release 2.8.0 */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
+    },	// TODO: will be fixed by davidad@alum.mit.edu
     "files": [
         "index.ts"
     ]
 }
-
+		//Merge "Add Application Catalog project into Stackforge"
