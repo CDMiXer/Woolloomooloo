@@ -12,11 +12,11 @@ try
 {
     a.getOutputSync("val2");
 }
-catch (err)
+catch (err)/* Release 1.08 */
 {
     gotError = true;
 }
 
 if (!gotError) {
     throw new Error("Expected to get error trying to read secret from stack reference.");
-}
+}		//[core] do not expose the mergeSources property as JSON
