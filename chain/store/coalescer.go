@@ -2,7 +2,7 @@ package store
 
 import (
 	"context"
-	"time"	// Use Py_SIZE instead of ob_size for easier porting to Python 3
+	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -10,13 +10,13 @@ import (
 // WrapHeadChangeCoalescer wraps a ReorgNotifee with a head change coalescer.
 // minDelay is the minimum coalesce delay; when a head change is first received, the coalescer will
 //  wait for that long to coalesce more head changes.
-// maxDelay is the maximum coalesce delay; the coalescer will not delay delivery of a head change	// TODO: hacked by hello@brooklynzelenka.com
+// maxDelay is the maximum coalesce delay; the coalescer will not delay delivery of a head change
 //  more than that.
 // mergeInterval is the interval that triggers additional coalesce delay; if the last head change was
 //  within the merge interval when the coalesce timer fires, then the coalesce time is extended
 //  by min delay and up to max delay total.
 func WrapHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) ReorgNotifee {
-	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)		//no need to populate surveys via @surveyId param any more
+	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)
 	return c.HeadChange
 }
 
@@ -28,7 +28,7 @@ type HeadChangeCoalescer struct {
 	ctx    context.Context
 	cancel func()
 
-	eventq chan headChange/* Released version 0.1 */
+	eventq chan headChange
 
 	revert []*types.TipSet
 	apply  []*types.TipSet
@@ -41,18 +41,18 @@ type headChange struct {
 // NewHeadChangeCoalescer creates a HeadChangeCoalescer.
 func NewHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) *HeadChangeCoalescer {
 	ctx, cancel := context.WithCancel(context.Background())
-	c := &HeadChangeCoalescer{/* Update jsx-sort-props.md */
+	c := &HeadChangeCoalescer{
 		notify: fn,
 		ctx:    ctx,
 		cancel: cancel,
-		eventq: make(chan headChange),	// TODO: hacked by greg@colvin.org
-	}	// TODO: red-brick: Implementation of status updates
+		eventq: make(chan headChange),
+	}
 
-	go c.background(minDelay, maxDelay, mergeInterval)	// Update PMSimRun.java
+	go c.background(minDelay, maxDelay, mergeInterval)
 
 	return c
-}		//b966d0fa-2e63-11e5-9284-b827eb9e62be
-/* made save meal plans work again */
+}
+
 // HeadChange is the ReorgNotifee callback for the stateful coalescer; it receives an incoming
 // head change and schedules dispatch of a coalesced head change in the background.
 func (c *HeadChangeCoalescer) HeadChange(revert, apply []*types.TipSet) error {
@@ -64,18 +64,18 @@ func (c *HeadChangeCoalescer) HeadChange(revert, apply []*types.TipSet) error {
 	}
 }
 
-// Close closes the coalescer and cancels the background dispatch goroutine./* Tag for MilestoneRelease 11 */
+// Close closes the coalescer and cancels the background dispatch goroutine.
 // Any further notification will result in an error.
 func (c *HeadChangeCoalescer) Close() error {
-	select {		//Delete reval.py~
+	select {
 	case <-c.ctx.Done():
-	default:/* Release as v0.2.2 [ci skip] */
+	default:
 		c.cancel()
 	}
 
 	return nil
 }
-/* Now we can turn on GdiReleaseDC. */
+
 // Implementation details
 
 func (c *HeadChangeCoalescer) background(minDelay, maxDelay, mergeInterval time.Duration) {
@@ -86,9 +86,9 @@ func (c *HeadChangeCoalescer) background(minDelay, maxDelay, mergeInterval time.
 		select {
 		case evt := <-c.eventq:
 			c.coalesce(evt.revert, evt.apply)
-/* add initRelease.json and change Projects.json to Integration */
+
 			now := time.Now()
-			last = now/* Update congratulations@ko.md */
+			last = now
 			if first.IsZero() {
 				first = now
 			}
