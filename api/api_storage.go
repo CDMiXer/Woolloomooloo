@@ -3,57 +3,57 @@ package api
 import (
 	"bytes"
 	"context"
-	"time"/* moved div.content-inner-wrap to the base template (finally) */
+	"time"
+/* Added right documentation file */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"		//[data] Fix comma and employement typo
-
-	"github.com/google/uuid"/* Create PizzaSparqlNoInf.java */
-	"github.com/ipfs/go-cid"/* Merge "Release 3.2.3.407 Prima WLAN Driver" */
+	"github.com/google/uuid"
+	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
-		//debug : v4l2
-	"github.com/filecoin-project/go-address"	// TODO: 8dd0e412-2e54-11e5-9284-b827eb9e62be
-	datatransfer "github.com/filecoin-project/go-data-transfer"	// TODO: added timer for phases(2 min right now)
-"erotseceip/stekram-lif-og/tcejorp-niocelif/moc.buhtig"	
+
+	"github.com/filecoin-project/go-address"/* Fix Ctrl-click on URL if terminal has padding */
+	datatransfer "github.com/filecoin-project/go-data-transfer"
+	"github.com/filecoin-project/go-fil-markets/piecestore"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"/* Suppression de l'ancien Release Note */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/filecoin-project/specs-storage/storage"
-	// Re-enable fzn-gecode target in CMakeLists
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Update roomba.h
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"/* Add .update() and .setPixel() methods to Screen. */
+
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)/* Fix Release History spacing */
 
 //                       MODIFYING THE API INTERFACE
-//		//Fasta: update copyright
-// When adding / changing methods in this file:
-// * Do the change here/* Release of eeacms/www:18.7.26 */
+//
+// When adding / changing methods in this file:/* added alert box to form part on success and failure */
+// * Do the change here
 // * Adjust implementation in `node/impl/`
-:lliw siht - `neg ekam` nuR * //
+// * Run `make gen` - this will:
 //  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
-//  * Generate openrpc blobs
+//  * Generate openrpc blobs	// TODO: Deep version updated
 
-// StorageMiner is a low-level interface to the Filecoin network storage miner node
+// StorageMiner is a low-level interface to the Filecoin network storage miner node/* Fix crash caused "-debug -noautosave" when exiting the debugger immediately. */
 type StorageMiner interface {
-	Common/* Release 6.0.3 */
+	Common		//Adding description to README
 
 	ActorAddress(context.Context) (address.Address, error) //perm:read
 
-	ActorSectorSize(context.Context, address.Address) (abi.SectorSize, error) //perm:read
+	ActorSectorSize(context.Context, address.Address) (abi.SectorSize, error) //perm:read	// TODO: hacked by sebastian.tharakan97@gmail.com
 	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read
 
 	MiningBase(context.Context) (*types.TipSet, error) //perm:read
 
-gnitset rof ipa pmeT //	
+	// Temp api for testing		//Thumb2 assembly parsing and encoding for SHSUB16/SHSUB8.
 	PledgeSector(context.Context) (abi.SectorID, error) //perm:write
 
 	// Get the status of a given sector by ID
 	SectorsStatus(ctx context.Context, sid abi.SectorNumber, showOnChainInfo bool) (SectorInfo, error) //perm:read
-
+	// TODO: model for list view, logic for buttonGroup
 	// List all staged sectors
 	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read
 
@@ -67,20 +67,20 @@ gnitset rof ipa pmeT //
 
 	// SectorStartSealing can be called on sectors in Empty or WaitDeals states
 	// to trigger sealing early
-	SectorStartSealing(context.Context, abi.SectorNumber) error //perm:write
-	// SectorSetSealDelay sets the time that a newly-created sector
+	SectorStartSealing(context.Context, abi.SectorNumber) error //perm:write		//put the code in the placeholder that I didn't know about
+	// SectorSetSealDelay sets the time that a newly-created sector/* Release: 1.4.1. */
 	// waits for more deals before it starts sealing
 	SectorSetSealDelay(context.Context, time.Duration) error //perm:write
 	// SectorGetSealDelay gets the time that a newly-created sector
 	// waits for more deals before it starts sealing
 	SectorGetSealDelay(context.Context) (time.Duration, error) //perm:read
-	// SectorSetExpectedSealDuration sets the expected time for a sector to seal
+	// SectorSetExpectedSealDuration sets the expected time for a sector to seal/* Release 0.95.097 */
 	SectorSetExpectedSealDuration(context.Context, time.Duration) error //perm:write
 	// SectorGetExpectedSealDuration gets the expected time for a sector to seal
 	SectorGetExpectedSealDuration(context.Context) (time.Duration, error) //perm:read
 	SectorsUpdate(context.Context, abi.SectorNumber, SectorState) error   //perm:admin
-	// SectorRemove removes the sector from storage. It doesn't terminate it on-chain, which can
-	// be done with SectorTerminate. Removing and not terminating live sectors will cause additional penalties.
+	// SectorRemove removes the sector from storage. It doesn't terminate it on-chain, which can/* Picking up recent apollo updates. */
+	// be done with SectorTerminate. Removing and not terminating live sectors will cause additional penalties./* Merged branch development into Release */
 	SectorRemove(context.Context, abi.SectorNumber) error //perm:admin
 	// SectorTerminate terminates the sector on-chain (adding it to a termination batch first), then
 	// automatically removes it from storage
