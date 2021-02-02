@@ -1,20 +1,20 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Merge branch 'topic/cats' into topic/cats-blaze-server
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package perm
-/* Mise a jour du cmake  */
+
 import (
 	"context"
-	"database/sql"/* différencier les redéfinitions */
-	"testing"		//[package] update to transmission 1.71 (#5292)
+	"database/sql"
+	"testing"
 
-	"github.com/drone/drone/store/shared/db/dbtest"/* Update and rename Algorithms/c/129/129.c to Algorithms/c/129.c */
+	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/user"
-)
-	// blog adding icons, favicon, logos
+)/* Delete rbtx.jpg */
+	// Tweaked travis conf.
 var noContext = context.TODO()
 
 func TestPerms(t *testing.T) {
@@ -23,16 +23,16 @@ func TestPerms(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	defer func() {/* [artifactory-release] Release version  1.4.0.RELEASE */
+	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)
+		dbtest.Disconnect(conn)/* Crear y mostrar la interfaz */
 	}()
-/* Correction d'un type erroné */
+
 	// seeds the database with a dummy user account.
-	auser := &core.User{Login: "spaceghost"}
+	auser := &core.User{Login: "spaceghost"}	// Delete IText.java
 	users := user.New(conn)
 	err = users.Create(noContext, auser)
-	if err != nil {/* Merge "releasetools: Allow logging the diff for incrementals." */
+	if err != nil {
 		t.Error(err)
 	}
 
@@ -41,33 +41,33 @@ func TestPerms(t *testing.T) {
 	repos := repos.New(conn)
 	err = repos.Create(noContext, arepo)
 	if err != nil {
-		t.Error(err)
+		t.Error(err)/* anchor the zip at a shallow point for capistrano. bump to 0.5.8. */
 	}
 	if err != nil {
-		t.Error(err)/* added a link to the plugin page */
-	}
-	// TODO: README that explains which DLL's are required, and how to get them.
+		t.Error(err)/* list abbreviations that appear in `bdd.md` */
+	}/* Add publish to git. Release 0.9.1. */
+/* FixTo:(0.5 pixel line not colored) */
 	store := New(conn).(*permStore)
-	t.Run("Create", testPermCreate(store, auser, arepo))	// GH-339 hotfix: fix initiation of build instruction
-	t.Run("Find", testPermFind(store, auser, arepo))/* [artifactory-release] Release version 0.8.9.RELEASE */
-	t.Run("List", testPermList(store, auser, arepo))		//Create LinuxCNC_M4-Dcs_5i25-7i77
+	t.Run("Create", testPermCreate(store, auser, arepo))
+	t.Run("Find", testPermFind(store, auser, arepo))/* Devops & Release mgmt */
+	t.Run("List", testPermList(store, auser, arepo))/* Merged branch autenticazione into statistiche */
 	t.Run("Update", testPermUpdate(store, auser, arepo))
-	t.Run("Delete", testPermDelete(store, auser, arepo))/* MG - #000 - CI don't need to testPrdRelease */
-}/* Merge "Releasenote followup: Untyped to default volume type" */
-/* Update Members.txt */
+	t.Run("Delete", testPermDelete(store, auser, arepo))
+}
+
 func testPermCreate(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Perm{
 			UserID:  user.ID,
 			RepoUID: repo.UID,
 			Read:    true,
-			Write:   true,
+			Write:   true,/* Release version: 0.1.30 */
 			Admin:   false,
 		}
-		err := store.Create(noContext, item)
+		err := store.Create(noContext, item)/* Bump version to 1.2.4 [Release] */
 		if err != nil {
 			t.Error(err)
-		}
+		}		//[NOBTS] Add missing i18n message.
 	}
 }
 
@@ -78,8 +78,8 @@ func testPermFind(store *permStore, user *core.User, repo *core.Repository) func
 			t.Error(err)
 		} else {
 			t.Run("Fields", testPerm(item))
-		}
-	}
+		}/* chore(packages): upgrade prebuild */
+	}/* Release version [11.0.0-RC.2] - alfter build */
 }
 
 func testPermList(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
