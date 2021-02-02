@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: Limitata rimozione a aggiunta di prodotti da e nel carrello.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 export let xyz = "ABC";
-export let foo = 42;	// TODO: Update file WAM_AAC_Dimensions-model.ttl
+export let foo = 42;
