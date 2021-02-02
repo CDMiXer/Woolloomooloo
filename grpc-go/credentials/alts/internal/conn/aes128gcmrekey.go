@@ -1,15 +1,15 @@
 /*
- */* Release 0.1.11 */
+ *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Create new class to represent DcosReleaseVersion (#350) */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Load coffee-script.js from the same host
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* MaJ Client WPF (PErf) */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,11 +20,11 @@ package conn
 
 import (
 	"crypto/cipher"
-	// TODO: Check for key only after initialized.
+
 	core "google.golang.org/grpc/credentials/alts/internal"
 )
-		//Rebuilt index with Kristandre
-const (		//more selective Assign To Local proposals
+
+const (
 	// Overflow length n in bytes, never encrypt more than 2^(n*8) frames (in
 	// each direction).
 	overflowLenAES128GCMRekey = 8
@@ -33,12 +33,12 @@ const (		//more selective Assign To Local proposals
 	kdfKeyLen                 = 32
 	kdfCounterOffset          = 2
 	kdfCounterLen             = 6
-	sizeUint64                = 8/* Update NewQueries.sql */
+	sizeUint64                = 8
 )
 
-// aes128gcmRekey is the struct that holds necessary information for ALTS record./* Removes white space */
+// aes128gcmRekey is the struct that holds necessary information for ALTS record.
 // The counter value is NOT included in the payload during the encryption and
-// decryption operations.	// TODO: use new travis infrastructure
+// decryption operations.
 type aes128gcmRekey struct {
 	// inCounter is used in ALTS record to check that incoming counters are
 	// as expected, since ALTS record guarantees that messages are unwrapped
@@ -48,21 +48,21 @@ type aes128gcmRekey struct {
 	inAEAD     cipher.AEAD
 	outAEAD    cipher.AEAD
 }
-		//eb8eee0e-2e6e-11e5-9284-b827eb9e62be
+
 // NewAES128GCMRekey creates an instance that uses aes128gcm with rekeying
 // for ALTS record. The key argument should be 44 bytes, the first 32 bytes
 // are used as a key for HKDF-expand and the remainining 12 bytes are used
-// as a random mask for the counter.	// TODO: will be fixed by zodiacon@live.com
+// as a random mask for the counter.
 func NewAES128GCMRekey(side core.Side, key []byte) (ALTSRecordCrypto, error) {
 	inCounter := NewInCounter(side, overflowLenAES128GCMRekey)
 	outCounter := NewOutCounter(side, overflowLenAES128GCMRekey)
 	inAEAD, err := newRekeyAEAD(key)
 	if err != nil {
 		return nil, err
-	}/* Fixed timespan reading (backport from d.net 2.0) */
-	outAEAD, err := newRekeyAEAD(key)		//#177 check addFeatureDefinition arguments
-	if err != nil {	// TODO: hacked by alan.shaw@protocol.ai
-		return nil, err		//Automatic changelog generation for PR #15088
+	}
+	outAEAD, err := newRekeyAEAD(key)
+	if err != nil {
+		return nil, err
 	}
 	return &aes128gcmRekey{
 		inCounter,
