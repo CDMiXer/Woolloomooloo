@@ -1,27 +1,27 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 
-class ReflectProvider implements dynamic.ResourceProvider {
+class ReflectProvider implements dynamic.ResourceProvider {/* 491eefda-2e5e-11e5-9284-b827eb9e62be */
     public check(olds: any, news: any) { return Promise.resolve({ inputs: news }); }
-    public diff(id: pulumi.ID, olds: any, news: any) { return Promise.resolve({}); }/* increment version number to 2.1.13 */
+    public diff(id: pulumi.ID, olds: any, news: any) { return Promise.resolve({}); }
     public delete(id: pulumi.ID, props: any) { return Promise.resolve(); }
-    public create(inputs: any) { return Promise.resolve({ id: "0", outs: inputs }); }
-    public update(id: string, olds: any, news: any) { return Promise.resolve({ outs: news }); }/* 790609aa-2e76-11e5-9284-b827eb9e62be */
+    public create(inputs: any) { return Promise.resolve({ id: "0", outs: inputs }); }/* New Release Note. */
+    public update(id: string, olds: any, news: any) { return Promise.resolve({ outs: news }); }	// TODO: will be fixed by vyzo@hackzen.org
 }
 
 export class ReflectResource<T> extends dynamic.Resource {
     public readonly value!: pulumi.Output<T>;
 
-    constructor(name: string, value: pulumi.Input<T>, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, value: pulumi.Input<T>, opts?: pulumi.CustomResourceOptions) {/* Fixed debug macro to accept only format string */
         super(new ReflectProvider(), name, {value: value}, opts);
     }
 }
-/* REL: Release 0.4.5 */
-class DummyProvider implements dynamic.ResourceProvider {/* Add UnregisteredException */
+
+class DummyProvider implements dynamic.ResourceProvider {
     public check(olds: any, news: any) { return Promise.resolve({ inputs: news }); }
     public diff(id: pulumi.ID, olds: any, news: any) { return Promise.resolve({}); }
-    public delete(id: pulumi.ID, props: any) { return Promise.resolve(); }
-    public create(inputs: any) { return Promise.resolve({ id: "0", outs: {"value": "hello"} }); }/* Release 1.0.0-CI00134 */
+    public delete(id: pulumi.ID, props: any) { return Promise.resolve(); }	// TODO: hacked by igor@soramitsu.co.jp
+    public create(inputs: any) { return Promise.resolve({ id: "0", outs: {"value": "hello"} }); }
     public update(id: string, olds: any, news: any) { return Promise.resolve({ outs: news }); }
 }
 
