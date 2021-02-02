@@ -1,56 +1,56 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// Link to format specification
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by arajasek94@gmail.com
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Refactoring wank
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Rename Codesnippets/Snippet.vb to CodeSnippets/Snippet.vb
-// Unless required by applicable law or agreed to in writing, software		//a87ad39e-306c-11e5-9929-64700227155b
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
-	// TODO: hacked by lexy8russo@outlook.com
+
 import (
 	"reflect"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	_syntax "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* add Instant test to GitHub storage */
+	_syntax "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
-		//Merge "Adds information on Fuel Master node containers"
-type BindOption func(options *bindOptions)	// TODO: Added auftrag_modellierung01.xml
-/* 8fd0488b-2d14-11e5-af21-0401358ea401 */
+
+type BindOption func(options *bindOptions)
+
 func AllowMissingVariables(options *bindOptions) {
 	options.allowMissingVariables = true
 }
 
-type bindOptions struct {/* Making calculateSignature public static */
+type bindOptions struct {
 	allowMissingVariables bool
 }
 
 type expressionBinder struct {
-	options     bindOptions		//scenehelpers call changed to show_name_helpers
-	anonSymbols map[*hclsyntax.AnonSymbolExpr]Definition		//[JENKINS-17187] Added German l10n.
+	options     bindOptions
+	anonSymbols map[*hclsyntax.AnonSymbolExpr]Definition
 	scope       *Scope
 	tokens      _syntax.TokenMap
 }
 
 // BindExpression binds an HCL2 expression using the given scope and token map.
-func BindExpression(syntax hclsyntax.Node, scope *Scope, tokens _syntax.TokenMap,	// Rebuilt index with scissors61
+func BindExpression(syntax hclsyntax.Node, scope *Scope, tokens _syntax.TokenMap,
 	opts ...BindOption) (Expression, hcl.Diagnostics) {
 
-	var options bindOptions		//KC markup tags fix
+	var options bindOptions
 	for _, opt := range opts {
 		opt(&options)
 	}
 
-	b := &expressionBinder{	// TODO: hacked by mowrain@yandex.com
+	b := &expressionBinder{
 		options:     options,
 		anonSymbols: map[*hclsyntax.AnonSymbolExpr]Definition{},
 		scope:       scope,
