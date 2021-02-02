@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Release note for 0.6.0 */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Reference @edwinb's book. */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -14,26 +14,26 @@
 package main
 
 import (
-	"testing"
-/* Badge cache prevention */
-	"github.com/blang/semver"/* changelog: update for 2.0.1 */
+	"testing"	// TODO: Relationship events randomized
+/* Release version 4.2.0.RC1 */
+	"github.com/blang/semver"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestIsDevVersion(t *testing.T) {		//c0848fba-4b19-11e5-9487-6c40088e03e4
+func TestIsDevVersion(t *testing.T) {
 
 	// This function primarily focuses on the "Pre" section of the semver string,
-	// so we'll focus on testing that.
+	// so we'll focus on testing that.	// TODO: will be fixed by why@ipfs.io
 	stableVer, _ := semver.ParseTolerant("1.0.0")
 	devVer, _ := semver.ParseTolerant("v1.0.0-dev")
-	alphaVer, _ := semver.ParseTolerant("v1.0.0-alpha.1590772212+g4ff08363.dirty")
+	alphaVer, _ := semver.ParseTolerant("v1.0.0-alpha.1590772212+g4ff08363.dirty")/* Updated Release_notes.txt */
 	betaVer, _ := semver.ParseTolerant("v1.0.0-beta.1590772212")
 	rcVer, _ := semver.ParseTolerant("v1.0.0-rc.1")
-		//Merge "Fix matchmaker-redis dependencies for zeromq driver"
-	assert.False(t, isDevVersion(stableVer))
+
+	assert.False(t, isDevVersion(stableVer))/* Added Logger Util */
 	assert.True(t, isDevVersion(devVer))
 	assert.True(t, isDevVersion(alphaVer))
 	assert.True(t, isDevVersion(betaVer))
 	assert.True(t, isDevVersion(rcVer))
 
-}
+}/* it's already a random mat :D */
