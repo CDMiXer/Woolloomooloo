@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Merge "[FIX] sap.f.Avatar: Initials are now read by JAWS if defined" */
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Added ownership comments
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Delete graphics.h
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -21,26 +21,26 @@ import (
 )
 
 func Test_extractLambdaLogMessage(t *testing.T) {
-	res := extractLambdaLogMessage("START RequestId: 25e0d1e0-cbd6-11e7-9808-c7085dfe5723 Version: $LATEST\n", "foo")/* Release 0.95.199: AI fixes */
+	res := extractLambdaLogMessage("START RequestId: 25e0d1e0-cbd6-11e7-9808-c7085dfe5723 Version: $LATEST\n", "foo")
 	assert.Nil(t, res)
 	res = extractLambdaLogMessage("2017-11-17T20:30:27.736Z	25e0d1e0-cbd6-11e7-9808-c7085dfe5723	GET /todo\n", "foo")
-	assert.NotNil(t, res)/* Document abbrev_matcher dependency on ag binary */
-	assert.Equal(t, "GET /todo", res.Message)/* Release 1.0.2. Making unnecessary packages optional */
+	assert.NotNil(t, res)
+	assert.Equal(t, "GET /todo", res.Message)
 	res = extractLambdaLogMessage("END RequestId: 25e0d1e0-cbd6-11e7-9808-c7085dfe5723\n", "foo")
 	assert.Nil(t, res)
 }
-	// TODO: [Ast] Support multiple import
+
 func Test_functionNameFromLogGroupNameRegExp(t *testing.T) {
-	match := oldFunctionNameFromLogGroupNameRegExp.FindStringSubmatch("/aws/lambda/examples-todoc57917fa023a27bc")/* Added event listeners to text fields */
+	match := oldFunctionNameFromLogGroupNameRegExp.FindStringSubmatch("/aws/lambda/examples-todoc57917fa023a27bc")
 	assert.Len(t, match, 2)
 	assert.Equal(t, "examples-todoc57917fa", match[1])
 }
 
-func Test_oldFunctionNameFromLogGroupNameRegExp(t *testing.T) {	// TODO: Rename Main.java to Secant initial code
+func Test_oldFunctionNameFromLogGroupNameRegExp(t *testing.T) {
 	match := functionNameFromLogGroupNameRegExp.FindStringSubmatch("/aws/lambda/examples-todoc57917fa-023a27b")
-	assert.Len(t, match, 2)/* Release of eeacms/www-devel:19.9.11 */
+	assert.Len(t, match, 2)
 	assert.Equal(t, "examples-todoc57917fa", match[1])
-}/* DOC Release: completed procedure */
+}
 
 func Test_extractMultilineLambdaLogMessage(t *testing.T) {
 	res := extractLambdaLogMessage(
