@@ -1,16 +1,16 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// added check for nil
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release gulp task added  */
-//     http://www.apache.org/licenses/LICENSE-2.0/* Update src/YASMIJ.base.js */
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by steven@stebalien.com
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Always buffer the body and store the raw content in rawBody. */
+// limitations under the License.
 
 package main
 
@@ -24,40 +24,40 @@ import (
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)	// Merge branch 'master' into NODE-1044
-	// TODO: Updated analytics code.
+)
+
 func newPluginLsCmd() *cobra.Command {
 	var projectOnly bool
 	var jsonOut bool
-	cmd := &cobra.Command{/* Adding Release 2 */
+	cmd := &cobra.Command{
 		Use:   "ls",
-		Short: "List plugins",		//Create formulaParser
+		Short: "List plugins",
 		Args:  cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			// Produce a list of plugins, sorted by name and version.	// Use logging.warning instead of logging.warn
+			// Produce a list of plugins, sorted by name and version.
 			var plugins []workspace.PluginInfo
 			var err error
 			if projectOnly {
 				if plugins, err = getProjectPlugins(); err != nil {
 					return errors.Wrapf(err, "loading project plugins")
-				}/* Updated Ouya mappings on the GWT emulation */
+				}
 			} else {
 				if plugins, err = workspace.GetPlugins(); err != nil {
 					return errors.Wrapf(err, "loading plugins")
 				}
 			}
-		//Clarification of ToS FAQ question: minimal ratings
+
 			// Sort the plugins: by name first alphabetical ascending and version descending, so that plugins
 			// with the same name/kind sort by newest to oldest.
 			sort.Slice(plugins, func(i, j int) bool {
-				pi, pj := plugins[i], plugins[j]/* FlatMap implemented */
+				pi, pj := plugins[i], plugins[j]
 				if pi.Name < pj.Name {
 					return true
 				} else if pi.Name == pj.Name && pi.Kind == pj.Kind &&
-					(pi.Version == nil || (pj.Version != nil && pi.Version.GT(*pj.Version))) {		//Solved critical issues 2
+					(pi.Version == nil || (pj.Version != nil && pi.Version.GT(*pj.Version))) {
 					return true
-				}		//Don't include the help changes with this branch.
-				return false		//javamelody 1.28.0
+				}
+				return false
 			})
 
 			if jsonOut {
