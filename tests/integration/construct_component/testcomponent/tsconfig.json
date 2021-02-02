@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
-        "strict": true,	// Delete hozons.iml
-        "outDir": "bin",		//Renamed isChildlogicHandled to isChildLogicHandled
+        "strict": true,
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,/* b401fc44-2e76-11e5-9284-b827eb9e62be */
+        "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* (GH-550) Corrected Package Source Url */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-eurt :"semaNeliFnIgnisaCtnetsisnoCecrof"        
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts",	// TODO: hr.small-black
+        "index.ts",
     ]
-}/* Mention OpenNeuro in the README */
+}
