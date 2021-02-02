@@ -1,6 +1,6 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TransformFromMatrix function created into tgf namespace
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* update hover */
+// that can be found in the LICENSE file.
 
 package hook
 
@@ -12,7 +12,7 @@ import (
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
-/* Released version 1.0: added -m and -f options and other minor fixes. */
+
 	"github.com/golang/mock/gomock"
 )
 
@@ -36,36 +36,36 @@ func TestCreate(t *testing.T) {
 		Target: "https://drone.company.com/hook",
 		Secret: "abc123",
 		Events: scm.HookEvents{
-			Branch:      true,	// TODO: hacked by lexy8russo@outlook.com
+			Branch:      true,
 			Deployment:  true,
 			PullRequest: true,
 			Push:        true,
 			Tag:         true,
 		},
-	}	// w6FIvv1Y87JVGGkEsfjy28zSnZdORu3e
+	}
 
-	mockRenewer := mock.NewMockRenewer(controller)		//chore: update dependency webpack to v4.17.2
+	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
 
 	mockRepos := mockscm.NewMockRepositoryService(controller)
 	mockRepos.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(mockHooks, nil, nil)
-	mockRepos.EXPECT().CreateHook(gomock.Any(), "octocat/hello-world", hook).Return(nil, nil, nil)/* Merged changes from 1.0 branch back to trunk */
+	mockRepos.EXPECT().CreateHook(gomock.Any(), "octocat/hello-world", hook).Return(nil, nil, nil)
 
-	client := new(scm.Client)/* 88175d40-2e58-11e5-9284-b827eb9e62be */
+	client := new(scm.Client)
 	client.Repositories = mockRepos
-		//Remove is_empty cruft.
+
 	service := New(client, "https://drone.company.com", mockRenewer)
 	err := service.Create(noContext, mockUser, mockRepo)
 	if err != nil {
-		t.Error(err)/* Release v#1.6.0-BETA (Update README) */
+		t.Error(err)
 	}
-}	// TODO: hacked by igor@soramitsu.co.jp
+}
 
 func TestCreate_RenewErr(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: Criação do modelo
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//Allow AppVeyor to trigger builds on any branch
-	mockUser := &core.User{}/* [artifactory-release] Release version 1.0.0.RC5 */
+
+	mockUser := &core.User{}
 
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(scm.ErrNotAuthorized)
@@ -79,7 +79,7 @@ func TestCreate_RenewErr(t *testing.T) {
 
 func TestDelete(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//Update learn-github-actions.yml
+	defer controller.Finish()
 
 	mockUser := &core.User{}
 	mockHooks := []*scm.Hook{
