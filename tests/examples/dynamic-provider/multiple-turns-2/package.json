@@ -1,16 +1,16 @@
 {
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {	// TODO: will be fixed by alex.gaynor@gmail.com
         "@types/minimist": "^1.2.0",
-        "@types/node": "^8.0.0",/* e4319586-2e68-11e5-9284-b827eb9e62be */
-        "typescript": "^3.0.0"
-    },
-    "dependencies": {		//Create MyAttributesAreMissing.md
+        "@types/node": "^8.0.0",
+        "typescript": "^3.0.0"/* rollback dstar1 improvements */
+    },	// TODO: switched target to Knime 3.6
+    "dependencies": {
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Add new service method read test from label  */
