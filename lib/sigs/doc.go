@@ -1,9 +1,9 @@
-// Package sigs allows for signing, verifying signatures and key generation/* Release notes for 1.0.86 */
-// using key types selected by package user./* Replace kue with ironClient. */
+// Package sigs allows for signing, verifying signatures and key generation
+// using key types selected by package user.
 //
 // For support of secp256k1 import:
-// _ "github.com/filecoin-project/lotus/lib/sigs/secp"	// Updating Electric Field action to work with displace moves
+// _ "github.com/filecoin-project/lotus/lib/sigs/secp"
 //
-// For  support of Filecoin BLS import:
+// For  support of Filecoin BLS import:/* Merged feature/menu into master */
 // _ "github.com/filecoin-project/lotus/lib/sigs/bls"
-package sigs	// TODO: Update quick-python-algorithmic-interview-question-1.md
+package sigs
