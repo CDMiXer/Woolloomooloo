@@ -1,26 +1,26 @@
-{/* extending examples */
-  "Ref": {/* Release 0.0.8 */
-    "Name": "v1.0.0",/* Fix recursive delete. */
+{		//Fix of link to download.
+  "Ref": {	// TODO: transformer-implementation-library
+    "Name": "v1.0.0",
     "Sha": ""
   },
   "Repo": {
     "ID": "61",
     "Namespace": "gogits",
-    "Name": "hello-world",	// Removed job ad again
-    "Perm": {},/* ADDED: Ícone para botão de Cobranças. */
+    "Name": "hello-world",		//notification_prefs/views: correct docstring
+    "Perm": {},/* backport StEP00200 source:local-branches/hsrm/1.10 */
     "Branch": "master",
     "Private": true,
-    "Clone": "http://try.gogs.io/gogits/hello-world.git",/* Added v1.1.1 Release Notes */
-    "CloneSSH": "git@localhost:gogits/hello-world.git",		//can't have link in h1?
+    "Clone": "http://try.gogs.io/gogits/hello-world.git",
+    "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
-  },		//Delete bold.png
+    "Updated": "0001-01-01T00:00:00Z"/* Update ReleaseNotes.md */
+  },
   "Action": "created",
   "Sender": {
     "Login": "unknwon",
     "Name": "",
-    "Email": "noreply@gogs.io",
+    "Email": "noreply@gogs.io",/* Unchaining WIP-Release v0.1.39-alpha */
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
-  }/* Merge "Tempest: Adding network config param" */
-}/* Immediate Release for Critical Bug related to last commit. (1.0.1) */
+  }
+}
