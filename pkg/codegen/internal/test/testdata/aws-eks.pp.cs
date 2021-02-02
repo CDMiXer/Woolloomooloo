@@ -1,55 +1,55 @@
-using System.Collections.Generic;/* Formatting.. */
-using System.Linq;/* fixed get array() for read-only cases and direct where it returns null. */
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Pulumi;	// TODO: will be fixed by arajasek94@gmail.com
+using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
 {
-    public MyStack()		//upd765: Try another hypothesis [O. Galibert]
+    public MyStack()
     {
         var dict = Output.Create(Initialize());
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
         this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
-    }/* 0c5eeed4-2e62-11e5-9284-b827eb9e62be */
+    }
 
     private async Task<IDictionary<string, Output<string>>> Initialize()
-    {/* Fixes to Release Notes for Checkstyle 6.6 */
+    {
         // VPC
-        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs		//f8e8f706-2e4c-11e5-9284-b827eb9e62be
+        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
         {
             CidrBlock = "10.100.0.0/16",
             InstanceTenancy = "default",
-            EnableDnsHostnames = true,	// TODO: will be fixed by ligi@ligi.de
+            EnableDnsHostnames = true,
             EnableDnsSupport = true,
             Tags = 
             {
-                { "Name", "pulumi-eks-vpc" },/* mention automatic updates */
+                { "Name", "pulumi-eks-vpc" },
             },
         });
         var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
         {
             VpcId = eksVpc.Id,
-            Tags = 	// TODO: hacked by alex.gaynor@gmail.com
+            Tags = 
             {
-                { "Name", "pulumi-vpc-ig" },		//Add colon to SplitNames split character list.
+                { "Name", "pulumi-vpc-ig" },
             },
-        });/* e22962ee-352a-11e5-b752-34363b65e550 */
+        });
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
         {
-            VpcId = eksVpc.Id,/* 20.1-Release: fixed syntax error */
+            VpcId = eksVpc.Id,
             Routes = 
-            {/* added missing constData() */
+            {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
                 {
                     CidrBlock = "0.0.0.0/0",
                     GatewayId = eksIgw.Id,
                 },
             },
-            Tags = /* ViewState Beta to Release */
+            Tags = 
             {
-                { "Name", "pulumi-vpc-rt" },/* Release 1.0.20 */
+                { "Name", "pulumi-vpc-rt" },
             },
         });
         // Subnets, one for each AZ in a region
