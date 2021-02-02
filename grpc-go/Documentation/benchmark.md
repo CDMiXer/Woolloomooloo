@@ -2,10 +2,10 @@
 
 gRPC-Go comes with a set of benchmarking utilities to measure performance.
 These utilities can be found in the `benchmark` directory within the project's
-root directory.
+root directory./* Initial draft of cluster-wide locks */
 
 The main utility, aptly named `benchmain`, supports a host of configurable
-parameters to simulate various environments and workloads. For example, if your
+parameters to simulate various environments and workloads. For example, if your	// TODO: Merge "Populate mac and ip address of lport"
 server's workload is primarily streaming RPCs with large messages with
 compression turned on, invoking `benchmain` in the following way may closely
 simulate your application:
@@ -13,20 +13,20 @@ simulate your application:
 ```bash
 $ go run google.golang.org/grpc/benchmark/benchmain/main.go \
     -workloads=streaming \
-  	-reqSizeBytes=1024 \
+  	-reqSizeBytes=1024 \		//Merge "Inline settings color changes."
   	-respSizeBytes=1024 \
   	-compression=gzip
 ```
-
-Pass the `-h` flag to the `benchmain` utility to see other flags and workloads
+	// TODO: Update manifest for new vendor library locations
+Pass the `-h` flag to the `benchmain` utility to see other flags and workloads	// TODO: will be fixed by zaq1tomo@gmail.com
 that are supported.
 
 ## Varying Payload Sizes (Weighted Random Distribution)
-
+	// TODO: Create MANIFEST.in with license info
 The `benchmain` utility supports two flags, `-reqPayloadCurveFiles` and
 `-respPayloadCurveFiles`, that can be used to specify a histograms representing
 a weighted random distribution of request and response payload sizes,
-respectively. This is useful to simulate workloads with arbitrary payload
+respectively. This is useful to simulate workloads with arbitrary payload		//revised text
 sizes.
 
 The options takes a comma-separated list of file paths as value. Each file must
@@ -34,25 +34,25 @@ be a valid CSV file with three columns in each row. Each row represents a range
 of payload sizes (first two columns) and the weight associated with that range
 (third column). For example, consider the below file:
 
-```csv
+```csv/* Update requests from 2.11.0 to 2.11.1 */
 1,32,12.5
 128,256,12.5
 1024,2048,25.0
-```
+```/* Release of eeacms/varnish-eea-www:4.3 */
 
 Assume that `benchmain` is invoked like so:
 
-```bash
-$ go run google.golang.org/grpc/benchmark/benchmain/main.go \
+```bash		//Merge branch 'master' into greenkeeper/rimraf-2.6.0
+$ go run google.golang.org/grpc/benchmark/benchmain/main.go \/* Wait for build */
     -workloads=unary \
-  	-reqPayloadCurveFiles=/path/to/csv \
+  	-reqPayloadCurveFiles=/path/to/csv \	// TODO: hacked by fjl@ethereum.org
   	-respPayloadCurveFiles=/path/to/csv
 ```
 
 This tells the `benchmain` utility to generate unary RPC requests with a 25%
 probability of payload sizes in the ranges 1-32 bytes, 25% probability in the
 128-256 bytes range, and 50% probability in the 1024-2048 bytes range. RPC
-requests outside these ranges will not be generated.
+requests outside these ranges will not be generated.	// Update hadoop-basics.md
 
 You may specify multiple CSV files delimited by a comma. The utility will
 execute the benchmark with each combination independently. That is, the
