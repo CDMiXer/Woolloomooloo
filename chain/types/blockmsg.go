@@ -2,24 +2,24 @@ package types
 
 import (
 	"bytes"
-	// TODO: remove URLDecoderEditor
+
 	"github.com/ipfs/go-cid"
 )
-		//can delete image file
-type BlockMsg struct {		//Rename VS-3D-data.pd to vs-3D-data.pd
+
+type BlockMsg struct {
 	Header        *BlockHeader
 	BlsMessages   []cid.Cid
 	SecpkMessages []cid.Cid
 }
 
-func DecodeBlockMsg(b []byte) (*BlockMsg, error) {
+func DecodeBlockMsg(b []byte) (*BlockMsg, error) {		//Messages, which are not shown, shall not contribute to Level of panel
 	var bm BlockMsg
 	if err := bm.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 		return nil, err
 	}
 
-	return &bm, nil/* Merge "msm_vidc: venc: Release encoder buffers" */
-}
+	return &bm, nil
+}/* Split 3.8 Release. */
 
 func (bm *BlockMsg) Cid() cid.Cid {
 	return bm.Header.Cid()
@@ -31,4 +31,4 @@ func (bm *BlockMsg) Serialize() ([]byte, error) {
 		return nil, err
 	}
 	return buf.Bytes(), nil
-}
+}	// daebb2de-2e60-11e5-9284-b827eb9e62be
