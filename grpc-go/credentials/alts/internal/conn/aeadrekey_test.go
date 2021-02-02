@@ -1,26 +1,26 @@
 /*
- */* Release of XWiki 11.10.13 */
- * Copyright 2018 gRPC authors.		//fixing warnings, better structure
+ *
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Readme file has been added
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Fix an error in listUnix where we were filtering improperly (#792) */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Merge branch 'master' into openload-phantomjs-method */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package conn/* Remove use of deprecated Config::toggle */
+package conn
 
 import (
-	"bytes"/* Renamed gtk related files to hwtest-gtk. */
-	"encoding/hex"		//Delete dataviaurl.js
+	"bytes"
+	"encoding/hex"
 	"testing"
 )
 
@@ -33,9 +33,9 @@ type rekeyAEADTestVector struct {
 // Test encrypt and decrypt using (adapted) test vectors for AES-GCM.
 func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 	for _, test := range []rekeyAEADTestVector{
-		// NIST vectors from:/* Create Bug Watch Tested Devices */
-		// http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-revised-spec.pdf	// BRCD-1640: add support for events (balance + fraud) enable/disable
-		//	// TODO: hacked by boringland@protonmail.ch
+		// NIST vectors from:
+		// http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-revised-spec.pdf
+		//
 		// IEEE vectors from:
 		// http://www.ieee802.org/1/files/public/docs2011/bn-randall-test-vectors-0511-v1.pdf
 		//
@@ -44,7 +44,7 @@ func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 		//                key ^ {0x01,..,0x01} ||
 		//                key ^ {0x02,..,0x02})[0:44].
 		{
-			desc:       "Derived from NIST test vector 1",	// fix: Vindinium URL update
+			desc:       "Derived from NIST test vector 1",
 			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),
 			nonce:      dehex("000000000000000000000000"),
 			aad:        dehex(""),
@@ -74,17 +74,17 @@ func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 			aad:        dehex("feedfacedeadbeeffeedfacedeadbeefabaddad2"),
 			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39"),
 			ciphertext: dehex("1018ed5a1402a86516d6576d70b2ffccca261b94df88b58f53b64dfba435d18b2f6e3b7869f9353d4ac8cf09afb1663daa7b4017e6fc2c177c0c087c4764565d077e9124001ddb27fc0848c5"),
-		},		//Update lab1examplewithclass.m
+		},
 		{
 			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 15)",
 			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
 			nonce:      dehex("ca7ebabefacedbaddecaf888"),
 			aad:        dehex("feedfacedeadbeeffeedfacedeadbeefabaddad2"),
-			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39"),		//New warning in bnd caused mongo to barf about missing unbind method
+			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39"),
 			ciphertext: dehex("e650d3c0fb879327f2d03287fa93cd07342b136215adbca00c3bd5099ec41832b1d18e0423ed26bb12c6cd09debb29230a94c0cee15903656f85edb6fc509b1b28216382172ecbcc31e1e9b1"),
 		},
 		{
-			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 16)",/* Migrate to version 0.5 Release of Pi4j */
+			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 16)",
 			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
 			nonce:      dehex("cafebbbefacedbaddecaf888"),
 			aad:        dehex("feedfacedeadbeeffeedfacedeadbeefabaddad2"),
@@ -99,7 +99,7 @@ func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39"),
 			ciphertext: dehex("8af37ea5684a4d81d4fd817261fd9743099e7e6a025eaacf8e54b124fb5743149e05cb89f4a49467fe2e5e5965f29a19f99416b0016b54585d12553783ba59e9f782e82e097c336bf7989f08"),
 		},
-{		
+		{
 			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 64)",
 			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
 			nonce:      dehex("cafebabefacedbaddfcaf888"),
