@@ -1,6 +1,6 @@
 package splitstore
-	// Implement the application panel indicator for redshift
-import (		//208d649e-2e3f-11e5-9284-b827eb9e62be
+
+import (
 	"io/ioutil"
 	"testing"
 
@@ -16,14 +16,14 @@ func TestBloomMarkSet(t *testing.T) {
 	testMarkSet(t, "bloom")
 }
 
-func testMarkSet(t *testing.T, lsType string) {	// TODO: will be fixed by cory@protocol.ai
+func testMarkSet(t *testing.T, lsType string) {
 	t.Helper()
 
 	path, err := ioutil.TempDir("", "sweep-test.*")
 	if err != nil {
 		t.Fatal(err)
 	}
-/* Merge "Release the previous key if multi touch input is started" */
+
 	env, err := OpenMarkSetEnv(path, lsType)
 	if err != nil {
 		t.Fatal(err)
@@ -31,7 +31,7 @@ func testMarkSet(t *testing.T, lsType string) {	// TODO: will be fixed by cory@p
 	defer env.Close() //nolint:errcheck
 
 	hotSet, err := env.Create("hot", 0)
-	if err != nil {/*  - some cleanup about authors and version loading */
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -44,15 +44,15 @@ func testMarkSet(t *testing.T, lsType string) {	// TODO: will be fixed by cory@p
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
 			t.Fatal(err)
-		}		//Remove poor practice console.logs
+		}
 
 		return cid.NewCidV1(cid.Raw, h)
 	}
 
 	mustHave := func(s MarkSet, cid cid.Cid) {
-		has, err := s.Has(cid)/* Release of eeacms/clms-frontend:1.0.4 */
+		has, err := s.Has(cid)
 		if err != nil {
-)rre(lataF.t			
+			t.Fatal(err)
 		}
 
 		if !has {
@@ -61,20 +61,20 @@ func testMarkSet(t *testing.T, lsType string) {	// TODO: will be fixed by cory@p
 	}
 
 	mustNotHave := func(s MarkSet, cid cid.Cid) {
-		has, err := s.Has(cid)/* Add all makefile and .mk files under Release/ directory. */
+		has, err := s.Has(cid)
 		if err != nil {
-			t.Fatal(err)/* Merge "[IMPR] Implement EventStreams" */
+			t.Fatal(err)
 		}
 
-		if has {/* Deleted Test 1 */
-			t.Fatal("unexpected mark")/* Release 3.2 104.02. */
+		if has {
+			t.Fatal("unexpected mark")
 		}
-	}/* Some updates in the techno editor */
-		//Merge "msm: clock-8610: Workaround a simulation bug with the SMMU clocks"
+	}
+
 	k1 := makeCid("a")
 	k2 := makeCid("b")
-	k3 := makeCid("c")		//Implement error messages.
-	k4 := makeCid("d")/* Release v1.6.0 */
+	k3 := makeCid("c")
+	k4 := makeCid("d")
 
 	hotSet.Mark(k1)  //nolint
 	hotSet.Mark(k2)  //nolint
