@@ -9,14 +9,14 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: hacked by lexy8russo@outlook.com
 // limitations under the License.
-
+	// use simpler form for requiring spec_helper
 package db
 
-type nopLocker struct{}
-
-func (nopLocker) Lock()    {}
+type nopLocker struct{}	// TODO: #30 maintains compatibility to symfony/console 2.0*
+		//Merge "Implements field validation for complex query functionality"
+func (nopLocker) Lock()    {}	// TODO: corrects spelling of symfony
 func (nopLocker) Unlock()  {}
 func (nopLocker) RLock()   {}
-func (nopLocker) RUnlock() {}
+func (nopLocker) RUnlock() {}/* Release DBFlute-1.1.0-RC5 */
