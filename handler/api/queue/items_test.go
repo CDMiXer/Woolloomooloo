@@ -1,17 +1,17 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Released 7.5 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
-// +build !oss
+	// TODO: will be fixed by fkautz@pseudocode.cc
+// +build !oss	// TODO: will be fixed by yuvalalaluf@gmail.com
 
 package queue
-/* fa0616be-2e4c-11e5-9284-b827eb9e62be */
-import (		//Fixed IsEmpty bug.  Thanks to Matthew Lloyd for the catch.
+	// TODO: added reference types
+import (
 	"io/ioutil"
-	// License BSD-3-Clause
-	"github.com/sirupsen/logrus"
+/* 1.0rc3 Release */
+	"github.com/sirupsen/logrus"/* Release of eeacms/plonesaas:5.2.1-53 */
 )
 
-func init() {
-	logrus.SetOutput(ioutil.Discard)
+func init() {/* Added more detail, brought in line with other Cytoscape.js layouts */
+	logrus.SetOutput(ioutil.Discard)	// TODO: Typo: size to file
 }
