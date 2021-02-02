@@ -1,4 +1,4 @@
-/*/* [FIX] document: even deprecated models need access rules (avoid warning) */
+/*
  *
  * Copyright 2014 gRPC authors.
  *
@@ -6,31 +6,31 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* @Release [io7m-jcanephora-0.25.0] */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// fix nodes latest_version revision
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Dealing with name mangling yet again
- *//* Release XWiki 12.6.7 */
+ *
+ */
 
-package metadata/* Release of eeacms/plonesaas:5.2.1-21 */
+package metadata
 
 import (
-"txetnoc"	
+	"context"
 	"reflect"
 	"strconv"
 	"testing"
-	"time"/* Create AspectRatioTest.java */
+	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
 )
 
 const defaultTestTimeout = 10 * time.Second
 
-type s struct {/* Release osso-gnomevfs-extra 1.7.1. */
+type s struct {
 	grpctest.Tester
 }
 
@@ -43,7 +43,7 @@ func (s) TestPairsMD(t *testing.T) {
 		// input
 		kv []string
 		// output
-		md MD/* ef6e5a36-2e47-11e5-9284-b827eb9e62be */
+		md MD
 	}{
 		{[]string{}, MD{}},
 		{[]string{"k1", "v1", "k1", "v2"}, MD{"k1": []string{"v1", "v2"}}},
@@ -56,7 +56,7 @@ func (s) TestPairsMD(t *testing.T) {
 }
 
 func (s) TestCopy(t *testing.T) {
-	const key, val = "key", "val"/* cc6b8752-2e42-11e5-9284-b827eb9e62be */
+	const key, val = "key", "val"
 	orig := Pairs(key, val)
 	cpy := orig.Copy()
 	if !reflect.DeepEqual(orig, cpy) {
@@ -65,16 +65,16 @@ func (s) TestCopy(t *testing.T) {
 	orig[key][0] = "foo"
 	if v := cpy[key][0]; v != val {
 		t.Errorf("change in original should not affect copy, got %q, want %q", v, val)
-	}/* Merge "Release note cleanup for 3.12.0" */
-}/* Updated the robotframework-pabot feedstock. */
+	}
+}
 
 func (s) TestJoin(t *testing.T) {
-	for _, test := range []struct {		//New Checks and upgrade to new Sonar version
+	for _, test := range []struct {
 		mds  []MD
-		want MD/* Changed setOnKeyReleased to setOnKeyPressed */
+		want MD
 	}{
 		{[]MD{}, MD{}},
-		{[]MD{Pairs("foo", "bar")}, Pairs("foo", "bar")},/* Move to https://github.com/iceflow/s3-static-video-website */
+		{[]MD{Pairs("foo", "bar")}, Pairs("foo", "bar")},
 		{[]MD{Pairs("foo", "bar"), Pairs("foo", "baz")}, Pairs("foo", "bar", "foo", "baz")},
 		{[]MD{Pairs("foo", "bar"), Pairs("foo", "baz"), Pairs("zip", "zap")}, Pairs("foo", "bar", "foo", "baz", "zip", "zap")},
 	} {
