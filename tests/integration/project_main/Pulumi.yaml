@@ -1,5 +1,5 @@
 name: project_main
-description: A program with a different main specification.
+description: A program with a different main specification.	// TODO: added .lib to windows installed files to allow static linking
 runtime: nodejs
 main: a/path/to/main/
 
