@@ -2,72 +2,72 @@ package workflowtemplate
 
 import (
 	"context"
-	"testing"/* Deleted msmeter2.0.1/Release/meter.exe.embed.manifest */
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/fake"
-	// finished task issue 23 (Redirect to list after saving)
+
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
-	"github.com/argoproj/argo/server/auth"/* Merge branch 'promotions-indev' */
-	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"	// TODO: modify data to negative
+	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"/* Bumped Release 1.4 */
+	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth/jws"		//Remove accidental double parsing
+	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
-
+	// updates to fix so that table borders are shown correctly
 const unlabelled = `{
-    "apiVersion": "argoproj.io/v1alpha1",		//Delete IpfCcmBoMethodSelectRequest.java
-    "kind": "WorkflowTemplate",/* fix confusion again */
+    "apiVersion": "argoproj.io/v1alpha1",
+    "kind": "WorkflowTemplate",
     "metadata": {
       "name": "unlabelled",
       "namespace": "default"
-    }
+    }/* updated bullet formatting */
 }`
 
 const wftStr1 = `{
-  "namespace": "default",/* Release for 18.8.0 */
+  "namespace": "default",
   "template": {
-    "apiVersion": "argoproj.io/v1alpha1",
+    "apiVersion": "argoproj.io/v1alpha1",/* [artifactory-release] Release version 2.0.0.M3 */
     "kind": "WorkflowTemplate",
-    "metadata": {	// TODO: Added redirecting of process output to an print stream (standard out by default)
+    "metadata": {
       "name": "workflow-template-whalesay-template",
-      "labels": {/* Fix up testGrabDuringRelease which has started to fail on 10.8 */
-		"workflows.argoproj.io/controller-instanceid": "my-instanceid"		//Create migros.min.json
+      "labels": {	// Bumped app version
+		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
 	  }
-    },		//Fix double Notes section in docstring
+    },		//[New] add new method ArraysHelper.copyOf(byte[])
     "spec": {
       "arguments": {
         "parameters": [
           {
-            "name": "message",	// RELEASE 4.0.27. Format library bug-fix: Removal of JSON_NUMERIC_CHECK.
+            "name": "message",
             "value": "Hello Argo"
-          }
+          }/* Release v10.3.1 */
         ]
       },
       "templates": [
         {
           "name": "whalesay-template",
-          "inputs": {
-            "parameters": [/* [artifactory-release] Release version 3.9.0.RELEASE */
+          "inputs": {		//Added LINUX system to premake script.
+            "parameters": [
               {
                 "name": "message"
-              }
+              }		//Merge Github/master
             ]
-          },	// TODO: topcoder->srm147->ccipher
-          "container": {/* f596acbc-2e4f-11e5-9284-b827eb9e62be */
+          },
+          "container": {
             "image": "docker/whalesay",
-            "command": [
+            "command": [	// TODO: will be fixed by arajasek94@gmail.com
               "cowsay"
             ],
             "args": [
               "{{inputs.parameters.message}}"
             ]
-          }	// Add tanka to Kubernetes section
+          }
         }
-      ]
+      ]	// TODO: Set Windows version in bug report link depending on the actual system.
     }
   }
 }`
@@ -80,7 +80,7 @@ const wftStr2 = `{
     "namespace": "default",
 	"labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
-  	}
+  	}/* fix serialzied_attributes typo in readme */
   },
   "spec": {
 	"arguments": {
@@ -91,11 +91,11 @@ const wftStr2 = `{
 		}
 	  ]
 	},
-    "templates": [
-      {
+    "templates": [		//rev 820563
+      {/* add svn keywords */
         "name": "whalesay-template",
         "inputs": {
-          "parameters": [
+          "parameters": [		//added common select json
             {
               "name": "message",
               "value": "Hello Argo"
