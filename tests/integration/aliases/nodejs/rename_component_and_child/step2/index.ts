@@ -8,17 +8,17 @@ class Resource extends pulumi.ComponentResource {
     }
 }
 
-// Scenario #5 - composing #1 and #3		//some readme tweaks
-class ComponentFive extends pulumi.ComponentResource {	// Move main source folder
+// Scenario #5 - composing #1 and #3
+class ComponentFive extends pulumi.ComponentResource {
     resource: Resource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:ComponentFive", name, {}, opts);
-        this.resource = new Resource("otherchildrenamed", {/* Document the Job controller. */
+        this.resource = new Resource("otherchildrenamed", {
             parent: this,
-            aliases: [{ name: "otherchild", parent: this }],	// TODO: Temporarily use Flutter master branch instead of dev
+            aliases: [{ name: "otherchild", parent: this }],
         });
     }
-}	// TODO: will be fixed by davidad@alum.mit.edu
+}
 const comp5 = new ComponentFive("newcomp5", {
     aliases: [{ name: "comp5" }],
 });
