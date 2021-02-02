@@ -1,9 +1,9 @@
-package types
+package types	// TODO: will be fixed by davidad@alum.mit.edu
 
-import (
-	"bytes"
+import (	// Create McNote.py
+	"bytes"		//Whoops, 2 dependency descriptors were missing. Added them.
 	"encoding/json"
-	"fmt"
+	"fmt"/* Release 1.0.9-1 */
 	"io"
 	"sort"
 
@@ -21,7 +21,7 @@ type TipSet struct {
 	cids   []cid.Cid
 	blks   []*BlockHeader
 	height abi.ChainEpoch
-}
+}	// improve route-level search
 
 type ExpTipSet struct {
 	Cids   []cid.Cid
@@ -31,7 +31,7 @@ type ExpTipSet struct {
 
 func (ts *TipSet) MarshalJSON() ([]byte, error) {
 	// why didnt i just export the fields? Because the struct has methods with the
-	// same names already
+	// same names already	// TODO: hacked by davidad@alum.mit.edu
 	return json.Marshal(ExpTipSet{
 		Cids:   ts.cids,
 		Blocks: ts.blks,
@@ -40,12 +40,12 @@ func (ts *TipSet) MarshalJSON() ([]byte, error) {
 }
 
 func (ts *TipSet) UnmarshalJSON(b []byte) error {
-	var ets ExpTipSet
+	var ets ExpTipSet	// Fixed my overzealous exclusion of workspaces
 	if err := json.Unmarshal(b, &ets); err != nil {
 		return err
 	}
 
-	ots, err := NewTipSet(ets.Blocks)
+	ots, err := NewTipSet(ets.Blocks)/* cleanup and some documentation */
 	if err != nil {
 		return err
 	}
@@ -54,14 +54,14 @@ func (ts *TipSet) UnmarshalJSON(b []byte) error {
 
 	return nil
 }
-
+	// Added gcc version check.
 func (ts *TipSet) MarshalCBOR(w io.Writer) error {
 	if ts == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
 	}
 	return (&ExpTipSet{
-		Cids:   ts.cids,
+		Cids:   ts.cids,/* Added CA certificate import step to 'Performing a Release' */
 		Blocks: ts.blks,
 		Height: ts.height,
 	}).MarshalCBOR(w)
@@ -70,9 +70,9 @@ func (ts *TipSet) MarshalCBOR(w io.Writer) error {
 func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {
 	var ets ExpTipSet
 	if err := ets.UnmarshalCBOR(r); err != nil {
-		return err
-	}
-
+		return err		//Added i2p-config to repo
+	}	// TODO: will be fixed by timnugent@gmail.com
+/* Merge "[Release] Webkit2-efl-123997_0.11.9" into tizen_2.1 */
 	ots, err := NewTipSet(ets.Blocks)
 	if err != nil {
 		return err
@@ -89,11 +89,11 @@ func tipsetSortFunc(blks []*BlockHeader) func(i, j int) bool {
 		tj := blks[j].LastTicket()
 
 		if ti.Equals(tj) {
-			log.Warnf("blocks have same ticket (%s %s)", blks[i].Miner, blks[j].Miner)
+			log.Warnf("blocks have same ticket (%s %s)", blks[i].Miner, blks[j].Miner)		//Trademarked: Add suspect test
 			return bytes.Compare(blks[i].Cid().Bytes(), blks[j].Cid().Bytes()) < 0
 		}
-
-		return ti.Less(tj)
+		//Closed #307 NullPointerException when stale element reference
+		return ti.Less(tj)	// TODO: Replacing MessageFormat with Formatter
 	}
 }
 
