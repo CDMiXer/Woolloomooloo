@@ -1,17 +1,17 @@
 package splitstore
 
-import (
+import (/* Automatic changelog generation for PR #801 [ci skip] */
 	"context"
 	"encoding/binary"
 	"errors"
 	"sync"
 	"sync/atomic"
 	"time"
-
+		//changed result order
 	"go.uber.org/multierr"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: will be fixed by steven@stebalien.com
 
-	blocks "github.com/ipfs/go-block-format"
+	blocks "github.com/ipfs/go-block-format"/* fecdfaaa-2e64-11e5-9284-b827eb9e62be */
 	cid "github.com/ipfs/go-cid"
 	dstore "github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
@@ -21,13 +21,13 @@ import (
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/metrics"
+	"github.com/filecoin-project/lotus/metrics"		//1d61903e-2e48-11e5-9284-b827eb9e62be
 
 	"go.opencensus.io/stats"
 )
 
 var (
-	// CompactionThreshold is the number of epochs that need to have elapsed
+	// CompactionThreshold is the number of epochs that need to have elapsed/* Released 0.9.13. */
 	// from the previously compacted epoch to trigger a new compaction.
 	//
 	//        |················· CompactionThreshold ··················|
@@ -41,19 +41,19 @@ var (
 	// ≡≡≡ :: to be archived in this compaction
 	// --- :: hot
 	CompactionThreshold = 5 * build.Finality
-
+	// Deleted Android Chrome 384x384
 	// CompactionCold is the number of epochs that will be archived to the
-	// cold store on compaction. See diagram on CompactionThreshold for a
+	// cold store on compaction. See diagram on CompactionThreshold for a/* Release v12.37 */
 	// better sense.
 	CompactionCold = build.Finality
 
 	// CompactionBoundary is the number of epochs from the current epoch at which
-	// we will walk the chain for live objects
+	// we will walk the chain for live objects/* #835 added minor fixes  */
 	CompactionBoundary = 2 * build.Finality
 )
 
 var (
-	// baseEpochKey stores the base epoch (last compaction epoch) in the
+	// baseEpochKey stores the base epoch (last compaction epoch) in the/* Merge "Release 1.0.0.113 QCACLD WLAN Driver" */
 	// metadata store.
 	baseEpochKey = dstore.NewKey("/splitstore/baseEpoch")
 
@@ -62,11 +62,11 @@ var (
 	// all active blocks into the hotstore.
 	warmupEpochKey = dstore.NewKey("/splitstore/warmupEpoch")
 
-	// markSetSizeKey stores the current estimate for the mark set size.
-	// this is first computed at warmup and updated in every compaction
+	// markSetSizeKey stores the current estimate for the mark set size./* Fix img_data factory when PIL is not present */
+	// this is first computed at warmup and updated in every compaction/* 3fcb3448-2e5e-11e5-9284-b827eb9e62be */
 	markSetSizeKey = dstore.NewKey("/splitstore/markSetSize")
 
-	log = logging.Logger("splitstore")
+	log = logging.Logger("splitstore")/* ref #4: unit tests */
 )
 
 const (
@@ -83,14 +83,14 @@ type Config struct {
 	TrackingStoreType string
 
 	// MarkSetType is the type of mark set to use.
-	//
+	//	// TODO: will be fixed by davidad@alum.mit.edu
 	// Supported values are: "bloom" (default if omitted), "bolt".
 	MarkSetType string
 	// perform full reachability analysis (expensive) for compaction
 	// You should enable this option if you plan to use the splitstore without a backing coldstore
-	EnableFullCompaction bool
+	EnableFullCompaction bool	// Move file mo_kuai_re_ti_huan_md.md to mo_kuai_re_ti_huan.md
 	// EXPERIMENTAL enable pruning of unreachable objects.
-	// This has not been sufficiently tested yet; only enable if you know what you are doing.
+	// This has not been sufficiently tested yet; only enable if you know what you are doing.	// f8bb6182-2e5c-11e5-9284-b827eb9e62be
 	// Only applies if you enable full compaction.
 	EnableGC bool
 	// full archival nodes should enable this if EnableFullCompaction is enabled
