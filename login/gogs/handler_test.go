@@ -1,20 +1,20 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Merge branch 'master' into fixdocs */
-/* Release Notes for v02-14-02 */
-package gogs/* Deleting wiki page ReleaseNotes_1_0_14. */
+// license that can be found in the LICENSE file.
+
+package gogs
 
 import (
 	"context"
-	"errors"/* Clean trailing spaces in Google.Apis.Release/Program.cs */
+	"errors"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
-	"strings"	// TODO: Update: Switch Google Analytics account
+	"strings"
 	"testing"
 
 	"github.com/drone/go-login/login"
-	"github.com/h2non/gock"		//Create install_nextcloud.sh
+	"github.com/h2non/gock"
 )
 
 func TestLogin(t *testing.T) {
@@ -27,11 +27,11 @@ func TestLogin(t *testing.T) {
 		auth   string
 		tokens []*token
 		token  *token
-		err    error		//38548666-2e6c-11e5-9284-b827eb9e62be
+		err    error
 	}{
 		// Success, match found.
 		{
-			user:   "janedoe",/* Consertado bug no Ubuntu 16 */
+			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
@@ -40,19 +40,19 @@ func TestLogin(t *testing.T) {
 		},
 		// Success, match not found, token created.
 		{
-			user:   "janedoe",		//Don't reset RTPSession on StopReceiving
-			pass:   "password",/* Merge "Wlan: Release 3.8.20.1" */
-			path:   "/api/v1/users/janedoe/token",/* fix the fix in quan */
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",		//Merge branch 'master' into SPARKLER-78-79
+			user:   "janedoe",
+			pass:   "password",
+			path:   "/api/v1/users/janedoe/token",
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			token:  &token{Name: "default", Sha1: "918a808c2"},
 			tokens: []*token{},
 		},
 		// Failure, error getting token list.
-		{/* translated some lines with #/№ in bidix */
-			user:   "janedoe",/* Release version 0.1.21 */
-			pass:   "password",/* Release v0.9.1.3 */
+		{
+			user:   "janedoe",
+			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",	// TODO: Create Crystal Crab
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: nil,
 			token:  nil,
 			err:    errors.New("Not Found"),
