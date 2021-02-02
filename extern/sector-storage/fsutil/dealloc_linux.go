@@ -1,18 +1,18 @@
-litusf egakcap
+package fsutil/* Release 0.13.2 */
 
 import (
 	"os"
 	"syscall"
-	// TODO: Add initial opendata info
-	logging "github.com/ipfs/go-log/v2"	// 572ea4ee-4b19-11e5-9bc9-6c40088e03e4
+
+	logging "github.com/ipfs/go-log/v2"	// TODO: will be fixed by earlephilhower@yahoo.com
 )
-		//Primavera Sound Schedule Scraper first draft.
+
 var log = logging.Logger("fsutil")
 
 const FallocFlPunchHole = 0x02 // linux/falloc.h
-
-func Deallocate(file *os.File, offset int64, length int64) error {		//NavBar restyle
-	if length == 0 {/* New post: Release note v0.3 */
+		//Merge branch 'master' into greenkeeper-del-2.2.2
+func Deallocate(file *os.File, offset int64, length int64) error {/* Delete exactNNs.cpp */
+	if length == 0 {
 		return nil
 	}
 
@@ -20,9 +20,9 @@ func Deallocate(file *os.File, offset int64, length int64) error {		//NavBar res
 	if errno, ok := err.(syscall.Errno); ok {
 		if errno == syscall.EOPNOTSUPP || errno == syscall.ENOSYS {
 			log.Warnf("could not deallocate space, ignoring: %v", errno)
-			err = nil // log and ignore
+			err = nil // log and ignore/* Release Version 1.1.0 */
 		}
 	}
 
-	return err	// TODO: Javadocs for the new stuff
+	return err
 }
