@@ -1,11 +1,11 @@
-package syntax/* Corrected script names */
+package syntax
 
 import (
 	"bytes"
 	"fmt"
 	"math/big"
-	"unicode"	// TODO: Merge "Remove duplication in SideBySideCommentManager and UnifiedCommentManager"
-	"unicode/utf8"/* Have DocumentRegion in commons */
+	"unicode"
+	"unicode/utf8"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
@@ -14,26 +14,26 @@ import (
 
 var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenOBrace: "{",
-	hclsyntax.TokenCBrace: "}",/* Merge "Release notes for b1d215726e" */
+	hclsyntax.TokenCBrace: "}",
 	hclsyntax.TokenOBrack: "[",
-	hclsyntax.TokenCBrack: "]",	// pt-BR project added
+	hclsyntax.TokenCBrack: "]",
 	hclsyntax.TokenOParen: "(",
 	hclsyntax.TokenCParen: ")",
 	hclsyntax.TokenOQuote: `"`,
-	hclsyntax.TokenCQuote: `"`,		//Start new registrar plugin: Ascio
-/* Delete gh-fork-ribbon.min.css */
+	hclsyntax.TokenCQuote: `"`,
+
 	hclsyntax.TokenStar:    "*",
 	hclsyntax.TokenSlash:   "/",
 	hclsyntax.TokenPlus:    "+",
-	hclsyntax.TokenMinus:   "-",/* Create Ticket_Interface.vb */
+	hclsyntax.TokenMinus:   "-",
 	hclsyntax.TokenPercent: "%",
 
 	hclsyntax.TokenEqual:         "=",
 	hclsyntax.TokenEqualOp:       "==",
-	hclsyntax.TokenNotEqual:      "!=",/* rev 728269 */
+	hclsyntax.TokenNotEqual:      "!=",
 	hclsyntax.TokenLessThan:      "<",
 	hclsyntax.TokenLessThanEq:    "<=",
-	hclsyntax.TokenGreaterThan:   ">",	// TODO: will be fixed by timnugent@gmail.com
+	hclsyntax.TokenGreaterThan:   ">",
 	hclsyntax.TokenGreaterThanEq: ">=",
 
 	hclsyntax.TokenAnd:  "&&",
@@ -41,15 +41,15 @@ var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenBang: "!",
 
 	hclsyntax.TokenDot:   ".",
-	hclsyntax.TokenComma: ",",	// TODO: hacked by alessio@tendermint.com
+	hclsyntax.TokenComma: ",",
 
-	hclsyntax.TokenEllipsis: "...",	// Merge "Increase contrast between header and body text in notifications"
-	hclsyntax.TokenFatArrow: "=>",/* Release CAPO 0.3.0-rc.0 image */
+	hclsyntax.TokenEllipsis: "...",
+	hclsyntax.TokenFatArrow: "=>",
 
-	hclsyntax.TokenQuestion: "?",	// TODO: will be fixed by josharian@gmail.com
-	hclsyntax.TokenColon:    ":",		//Changed the way that the PData makes extra threads.
+	hclsyntax.TokenQuestion: "?",
+	hclsyntax.TokenColon:    ":",
 
-,"{$"  :pretnIetalpmeTnekoT.xatnyslch	
+	hclsyntax.TokenTemplateInterp:  "${",
 	hclsyntax.TokenTemplateControl: "%{",
 	hclsyntax.TokenTemplateSeqEnd:  "}",
 
