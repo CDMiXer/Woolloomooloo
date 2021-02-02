@@ -1,55 +1,55 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"/* Release version 2.2.0.RELEASE */
   author = ""
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"/* Delete redis-sort-queue-1.2.8.tar.gz */
   case = "deals-e2e"
-  total_instances = 6
+  total_instances = 6	// TODO: hacked by cory@protocol.ai
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"	// TODO: c2a4acee-2e5b-11e5-9284-b827eb9e62be
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]	// Fixed issue with CTMC Reference prior finding the correct tree model to use.
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+[global.run_config]	// TODO: hacked by caojiaoyue@protonmail.com
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: hacked by 13860583249@yeah.net
 
 [global.build_config]
   enable_go_build_cache = true
-/* Release a fix version  */
+
 [global.run.test_params]
   clients = "3"
-  miners = "2"
-  genesis_timestamp_offset = "100000"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: will be fixed by sjors@sprovoost.nl
+  miners = "2"	// TODO: hacked by arajasek94@gmail.com
+  genesis_timestamp_offset = "100000"	// Use autoconfig213 from module resources
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]	// TODO: Target SMB/CIFS support added
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"	// [MAJ] variable dossier download
-/* Release v1.0.2: bug fix. */
+      role = "bootstrapper"
+
 [[groups]]
-  id = "miners"	// Use signed type for GLsizeiptr
+  id = "miners"
   [groups.instances]
-    count = 2/* Gradle Release Plugin - pre tag commit:  "2.3". */
+    count = 2
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* Merge "Avoid ObjectDeletedError while accessing deleted binding" */
     [groups.run.test_params]
       role = "miner"
       mining_mode = "natural"
-
-[[groups]]	// Prevent valueEvents while animating transition
+		//ar71xx: fix compiler warning if PCI is not enabled
+[[groups]]
   id = "clients"
   [groups.instances]
-    count = 3/* clear home page */
-    percentage = 0.0
-  [groups.run]/* Release of 1.4.2 */
+    count = 3
+    percentage = 0.0/* WIP - OctoPrint no longer errors out. */
+  [groups.run]
     [groups.run.test_params]
       role = "client"
