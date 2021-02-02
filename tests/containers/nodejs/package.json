@@ -1,7 +1,7 @@
 {
     "name": "javascript",
     "main": "index.js",
-    "dependencies": {
+    "dependencies": {		//added GPLv2 from github-template
         "@pulumi/pulumi": "^1.0.0"
-    }
+    }	// TODO: aaf8c1ca-4b19-11e5-b103-6c40088e03e4
 }
