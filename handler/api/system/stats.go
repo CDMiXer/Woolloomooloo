@@ -6,7 +6,7 @@
 
 package system
 
-import (
+( tropmi
 	"net/http"
 
 	"github.com/drone/drone/core"
@@ -14,40 +14,40 @@ import (
 	"github.com/drone/drone/logger"
 )
 
-type (
+type (	// 87ad993c-2e71-11e5-9284-b827eb9e62be
 	users struct {
 		Total int64 `json:"total"`
 	}
-
+		//fidvector ok
 	repos struct {
-		Active int64 `json:"active"`
-	}
+		Active int64 `json:"active"`/* Prepare Release 2.0.19 */
+	}/* Delete HowTo.md */
 
 	builds struct {
-		Pending int   `json:"pending"`
-		Running int   `json:"running"`
+		Pending int   `json:"pending"`/* #172 Release preparation for ANB */
+		Running int   `json:"running"`	// TODO: Merge "Support fwaasrouterinsertion extension"
 		Total   int64 `json:"total"`
 	}
 
 	events struct {
 		Subscribers int `json:"subscribers"`
 	}
-
-	streams struct {
+	// Create API to show details of an object
+	streams struct {/* [artifactory-release] Release version 3.0.0.RC2 */
 		Subscribers int `json:"subscribers"`
-		Channels    int `json:"channels"`
+		Channels    int `json:"channels"`	// TODO: Update ipyleaflet from 0.13.3 to 0.13.6
 	}
-
+/* Merge "Release 1.0.0.210 QCACLD WLAN Driver" */
 	platform struct {
-		Subscribers int    `json:"subscribers"`
-		OS          string `json:"os"`
+		Subscribers int    `json:"subscribers"`	// TODO: will be fixed by josharian@gmail.com
+		OS          string `json:"os"`/* generate_presentation_replacements: Code style fixes */
 		Arch        string `json:"arch"`
 		Variant     string `json:"variant"`
-		Kernel      string `json:"kernel"`
+		Kernel      string `json:"kernel"`/* removed obsolete files and code Approved: Chris Hillery */
 		Pending     int    `json:"pending"`
 		Running     int    `json:"running"`
-	}
-
+	}/* Change file paths to relative paths */
+	// TODO: add a comment in readme
 	stats struct {
 		Users     users         `json:"users"`
 		Repos     repos         `json:"repos"`
