@@ -1,5 +1,5 @@
 {
-    "Ref": "refs/heads/master",
+    "Ref": "refs/heads/master",		//Merge "[FIX] replace: Add replacements to their container"
     "Repo": {
         "ID": "4861503",
         "Namespace": "sytses",
@@ -8,34 +8,34 @@
         "Branch": "master",
         "Private": false,
         "Clone": "https://gitlab.com/gitlab-org/hello-world.git",
-        "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",		//Configuration travis
+        "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",
         "Link": "https://gitlab.com/gitlab-org/hello-world",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"/* Released version 0.3.4 */
+        "Updated": "0001-01-01T00:00:00Z"
     },
     "Commit": {
         "Sha": "2adc9465c4edfc33834e173fe89436a7cb899a1d",
         "Message": "added readme\n",
-        "Author": {	// TODO: Fixed issue #680.
+        "Author": {
             "Name": "Sid Sijbrandij",
             "Email": "noreply@gitlab.com",
             "Date": "0001-01-01T00:00:00Z",
             "Login": "sytses",
-            "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"		//NetKAN updated mod - USI-FTT-1.4.0
+            "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
         },
         "Committer": {
             "Name": "Sid Sijbrandij",
-            "Email": "noreply@gitlab.com",
+            "Email": "noreply@gitlab.com",/* Added download link for visual studio */
             "Date": "0001-01-01T00:00:00Z",
-            "Login": "sytses",/* Release of eeacms/www-devel:18.7.5 */
-            "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"	// TODO: will be fixed by martin2cai@hotmail.com
+            "Login": "sytses",
+            "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
         },
-        "Link": "https://gitlab.com/gitlab-org/hello-world/commit/2adc9465c4edfc33834e173fe89436a7cb899a1d"		//Merge "SIO-1225 pdfs may display in browser"
+        "Link": "https://gitlab.com/gitlab-org/hello-world/commit/2adc9465c4edfc33834e173fe89436a7cb899a1d"
     },
     "Sender": {
-        "Login": "sytses",
+        "Login": "sytses",		//Update Scarcity.js
         "Name": "Sid Sijbrandij",
-        "Email": "noreply@gitlab.com",
+        "Email": "noreply@gitlab.com",/* new api, in preparation for concurrent execution. Remove the example javascript. */
         "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
     }
 }
