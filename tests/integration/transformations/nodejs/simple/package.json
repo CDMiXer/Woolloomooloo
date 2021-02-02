@@ -2,11 +2,11 @@
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "devDependencies": {/* polymer-ui-ratings */
+    "typings": "bin/index.d.ts",/* Beta Release README */
+    "devDependencies": {
         "typescript": "^2.5.3"
-    },
-    "peerDependencies": {	// the script that runs each day
+    },/* Make GitHub Import more resilient  */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* improved error handling if the index is out of range. */
+}	// e8506882-2e5d-11e5-9284-b827eb9e62be
