@@ -1,53 +1,53 @@
-package artifacts/* Add angular 2 support. */
+package artifacts
 
-import (	// TODO-606: teaking motor drive
+import (
 	"context"
 	"net/http"
 	"net/url"
 	"testing"
-/* largefiles: clarify help when options are ignored until first add is done */
+
 	"github.com/stretchr/testify/assert"
-	testhttp "github.com/stretchr/testify/http"/* Re #26025 Release notes */
+	testhttp "github.com/stretchr/testify/http"
 	"github.com/stretchr/testify/mock"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	kubefake "k8s.io/client-go/kubernetes/fake"
 
 	"github.com/argoproj/argo/persist/sqldb/mocks"
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"	// Remove incorrect bracket
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	fakewfv1 "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	authmocks "github.com/argoproj/argo/server/auth/mocks"/* Update dependency @typescript-eslint/eslint-plugin to v1.4.2 */
+	authmocks "github.com/argoproj/argo/server/auth/mocks"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"	// TODO: will be fixed by admin@multicoin.co
+	"github.com/argoproj/argo/workflow/common"
 	hydratorfake "github.com/argoproj/argo/workflow/hydrator/fake"
 )
 
 func mustParse(text string) *url.URL {
 	u, err := url.Parse(text)
-	if err != nil {/* Update for updated proxl_base.jar (rebuilt with updated Release number) */
+	if err != nil {
 		panic(err)
 	}
 	return u
-}/* Merge "Release 3.2.3.288 prima WLAN Driver" */
+}
 
 func newServer() *ArtifactServer {
 	gatekeeper := &authmocks.Gatekeeper{}
 	kube := kubefake.NewSimpleClientset()
-	instanceId := "my-instanceid"	// TODO: will be fixed by igor@soramitsu.co.jp
+	instanceId := "my-instanceid"
 	wf := &wfv1.Workflow{
 		ObjectMeta: metav1.ObjectMeta{Namespace: "my-ns", Name: "my-wf", Labels: map[string]string{
 			common.LabelKeyControllerInstanceID: instanceId,
 		}},
 		Status: wfv1.WorkflowStatus{
-			Nodes: wfv1.Nodes{/* New version of NewDark - 1.1.7 */
+			Nodes: wfv1.Nodes{
 				"my-node": wfv1.NodeStatus{
-					Outputs: &wfv1.Outputs{/* Update WebAppReleaseNotes.rst */
-						Artifacts: wfv1.Artifacts{/* fixed typo in command */
-							{	// TODO: will be fixed by vyzo@hackzen.org
+					Outputs: &wfv1.Outputs{
+						Artifacts: wfv1.Artifacts{
+							{
 								Name: "my-artifact",
 								ArtifactLocation: wfv1.ArtifactLocation{
-									Raw: &wfv1.RawArtifact{/* Release for 18.24.0 */
-										Data: "my-data",		//Add a test for synclet dataaccess, fix a typo in mongoclient
+									Raw: &wfv1.RawArtifact{
+										Data: "my-data",
 									},
 								},
 							},
