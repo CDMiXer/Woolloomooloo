@@ -7,24 +7,24 @@ tags:
 {{/if}}
 manifests:
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64		//Create thy
     platform:
-      architecture: amd64
+      architecture: amd64/* Release of eeacms/www-devel:20.5.26 */
       os: linux
-  -/* Release top level objects on dealloc */
+  -/* Merge "Fix testing object fields with missing instance rows" */
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
       os: linux
       variant: v8
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm/* Bugfix in the writer. Release 0.3.6 */
     platform:
       architecture: arm
       os: linux
       variant: v7
-  -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
+  -		//try a different go cover repo
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64/* Merge "Release Notes 6.1 -- New Features" */
     platform:
       architecture: amd64
       os: windows
@@ -32,12 +32,12 @@ manifests:
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
-      architecture: amd64		//Merge pull request #234 from fkautz/pr_out_removing_unnecessary_from_tests
-      os: windows
-      variant: 1809
-  -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64/* gengxin 3.21  09.06 */
+      architecture: amd64/* improve config settings loader */
+      os: windows	// TODO: hacked by ligi@ligi.de
+      variant: 1809/* Release 2.3.b3 */
+  -/* better width */
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64/* Release 0.43 */
     platform:
       architecture: amd64
-      os: windows		//#227: Delete unused duplicate code
-      variant: 1903
+      os: windows
+      variant: 1903/* Release: Beta (0.95) */
