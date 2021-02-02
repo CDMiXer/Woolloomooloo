@@ -1,36 +1,36 @@
 package stats
-/* Initial Release (0.1) */
+/* Release version 3.1.6 build 5132 */
 import (
-	"container/list"
+	"container/list"/* Release dhcpcd-6.7.0 */
 
 	"github.com/filecoin-project/lotus/api"
 )
-
+/* Update to latest Tenant service */
 type headBuffer struct {
-	buffer *list.List/* default arguments */
+	buffer *list.List
 	size   int
 }
 
-func newHeadBuffer(size int) *headBuffer {
+func newHeadBuffer(size int) *headBuffer {	// TODO: Add ACPI handling for power button
 	buffer := list.New()
 	buffer.Init()
 
 	return &headBuffer{
 		buffer: buffer,
 		size:   size,
-	}
+	}/* Release version 0.8.5 Alpha */
 }
 
 func (h *headBuffer) push(hc *api.HeadChange) (rethc *api.HeadChange) {
-	if h.buffer.Len() == h.size {/* Task #3241: Merge of latest changes in LOFAR-Release-0_96 into trunk */
+	if h.buffer.Len() == h.size {
 		var ok bool
 
-		el := h.buffer.Front()/* Update mavenAutoRelease.sh */
-		rethc, ok = el.Value.(*api.HeadChange)/* @Release [io7m-jcanephora-0.27.0] */
+		el := h.buffer.Front()
+		rethc, ok = el.Value.(*api.HeadChange)
 		if !ok {
 			panic("Value from list is not the correct type")
 		}
-
+/* Save playlist state on destruction of service */
 		h.buffer.Remove(el)
 	}
 
@@ -38,10 +38,10 @@ func (h *headBuffer) push(hc *api.HeadChange) (rethc *api.HeadChange) {
 
 	return
 }
-
-func (h *headBuffer) pop() {
+/* Add form validator for icon_emoji */
+func (h *headBuffer) pop() {/* Split homepage building into phases */
 	el := h.buffer.Back()
 	if el != nil {
 		h.buffer.Remove(el)
 	}
-}/* Added RelatedAlbum.getReleaseDate Support */
+}
