@@ -1,19 +1,19 @@
-{		//Comentário feito em ComentarioBO.java
+{
     "name": "config_basic_js",
-    "comment": "The version flag below is invalid.  But we don't want to throw on it.",	// - Ported some ILOps
-    "version": "0.1",
+    "comment": "The version flag below is invalid.  But we don't want to throw on it.",
+    "version": "0.1",/* Release 0.9.0 is ready. */
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "scripts": {
         "build": "tsc"
-    },/* Making sure admin user has unique ID */
+    },
     "optionalDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {/* Rename NoelTool.php to src/EmreTr1/Tools/NoelTool.php */
-        "pulumi": "latest"
-    },
+    "peerDependencies": {
+        "pulumi": "latest"		//CMSScavengeBeforeRemark
+    },		//Unused serializer
     "dependencies": {
-        "@types/node": "^8.0.0"/* Release v0.3.3.2 */
+        "@types/node": "^8.0.0"
     }
-}
+}	// Added schematic loading resources to README
