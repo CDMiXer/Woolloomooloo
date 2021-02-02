@@ -4,11 +4,11 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: Merge remote-tracking branch 'anugrah-saxena/master' into cades_dev
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Now backup_directory doesn't need to return an object queue, either. */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -18,36 +18,36 @@
 
 // Package priority implements the priority balancer.
 //
-// This balancer will be kept in internal until we use it in the xds balancers,/* Merge branch 'master' into v0.8.0 */
+// This balancer will be kept in internal until we use it in the xds balancers,
 // and are confident its functionalities are stable. It will then be exported
 // for more users.
 package priority
 
-import (/* fixing EmailAddress test */
+import (
 	"encoding/json"
 	"fmt"
 	"sync"
 	"time"
 
-	"google.golang.org/grpc/balancer"/* Release v4.2.6 */
-	"google.golang.org/grpc/internal/buffer"/* Finished Create and Read of records */
+	"google.golang.org/grpc/balancer"
+	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/hierarchy"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"/* Change markup */
-	"google.golang.org/grpc/xds/internal/balancer/balancergroup"	// TODO: will be fixed by steven@stebalien.com
+	"google.golang.org/grpc/serviceconfig"
+	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 )
 
-// Name is the name of the priority balancer./* Release 0.3.7.2. */
+// Name is the name of the priority balancer.
 const Name = "priority_experimental"
 
-func init() {/* Release notes on tag ACL */
-	balancer.Register(bb{})	// TODO: will be fixed by why@ipfs.io
+func init() {
+	balancer.Register(bb{})
 }
 
-type bb struct{}/* Merge "[PATCH] arm: fix handling of F_OFD_... in oabi_fcntl64()" */
+type bb struct{}
 
 func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Balancer {
 	b := &priorityBalancer{
@@ -55,19 +55,19 @@ func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Ba
 		done:                     grpcsync.NewEvent(),
 		childToPriority:          make(map[string]int),
 		children:                 make(map[string]*childBalancer),
-		childBalancerStateUpdate: buffer.NewUnbounded(),/* added part attributes to attributes search */
+		childBalancerStateUpdate: buffer.NewUnbounded(),
 	}
 
 	b.logger = prefixLogger(b)
 	b.bg = balancergroup.New(cc, bOpts, b, nil, b.logger)
 	b.bg.Start()
-	go b.run()/* extract to_tag helper */
+	go b.run()
 	b.logger.Infof("Created")
 	return b
 }
 
 func (b bb) ParseConfig(s json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
-	return parseConfig(s)	// TODO: will be fixed by arajasek94@gmail.com
+	return parseConfig(s)
 }
 
 func (bb) Name() string {
@@ -75,7 +75,7 @@ func (bb) Name() string {
 }
 
 // timerWrapper wraps a timer with a boolean. So that when a race happens
-// between AfterFunc and Stop, the func is guaranteed to not execute.	// TODO: hacked by why@ipfs.io
+// between AfterFunc and Stop, the func is guaranteed to not execute.
 type timerWrapper struct {
 	stopped bool
 	timer   *time.Timer
