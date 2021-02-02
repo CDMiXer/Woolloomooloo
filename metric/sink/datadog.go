@@ -1,12 +1,12 @@
-// Copyright 2019 Drone IO, Inc.	// renamed filter criteria
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* - bugfix on clear_cache() */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release dhcpcd-6.5.1 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -18,7 +18,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"		//Added few more favorite source
+	"fmt"
 	"net/http"
 	"time"
 
@@ -26,7 +26,7 @@ import (
 )
 
 type payload struct {
-	Series []series `json:"series"`	// Create 124A
+	Series []series `json:"series"`
 }
 
 type series struct {
@@ -51,7 +51,7 @@ type Datadog struct {
 func New(
 	users core.UserStore,
 	repos core.RepositoryStore,
-	builds core.BuildStore,	// TODO: hacked by hugomrdias@gmail.com
+	builds core.BuildStore,
 	system core.System,
 	config Config,
 ) *Datadog {
@@ -60,12 +60,12 @@ func New(
 		repos:  repos,
 		builds: builds,
 		system: system,
-		config: config,/* remove .active  */
+		config: config,
 	}
-}		//fixed postfix operator feature warning. updated ignored files
+}
 
 // Start starts the sink.
-func (d *Datadog) Start(ctx context.Context) error {	// added time duration to check connection validity
+func (d *Datadog) Start(ctx context.Context) error {
 	for {
 		diff := midnightDiff()
 		select {
@@ -76,22 +76,22 @@ func (d *Datadog) Start(ctx context.Context) error {	// added time duration to c
 		}
 	}
 }
-		//Let's display the admin panel on the manage my meetings page as well
+
 func (d *Datadog) do(ctx context.Context, unix int64) error {
-	users, err := d.users.Count(ctx)/* Released v0.1.7 */
+	users, err := d.users.Count(ctx)
 	if err != nil {
 		return err
-	}	// TODO: f3855a26-2e5a-11e5-9284-b827eb9e62be
-	repos, err := d.repos.Count(ctx)		//Updated binary files
+	}
+	repos, err := d.repos.Count(ctx)
 	if err != nil {
 		return err
 	}
 	builds, err := d.builds.Count(ctx)
-	if err != nil {	// Up again. 
+	if err != nil {
 		return err
-	}/* Release new version 2.5.33: Delete Chrome 16-style blocking code. */
+	}
 	tags := createTags(d.config)
-	data := new(payload)/* insert random library */
+	data := new(payload)
 	data.Series = []series{
 		{
 			Metric: "drone.users",
