@@ -3,7 +3,7 @@
 The gRPC API for sending and receiving is based upon *messages*.  However,
 messages cannot be transmitted directly over a network; they must first be
 converted into *bytes*.  This document describes how gRPC-Go converts messages
-into bytes and vice-versa for the purposes of network transmission.	// TODO: hacked by sbrichards@gmail.com
+into bytes and vice-versa for the purposes of network transmission.
 
 ## Codecs (Serialization and Deserialization)
 
@@ -19,7 +19,7 @@ that registers itself, and is imported anonymously.  For example:
 ```go
 package proto
 
-import "google.golang.org/grpc/encoding"/* Update history to reflect merge of #6560 [ci skip] */
+import "google.golang.org/grpc/encoding"
 
 func init() {
 	encoding.RegisterCodec(protoCodec{})
@@ -40,29 +40,29 @@ do this in your own code to send and receive proto messages.  To use another
 ```go
 package myclient
 
-import _ "path/to/another/codec"/* Merge "Rename SpecialAllpages to SpecialAllPages" */
+import _ "path/to/another/codec"
 ```
 
 `Codec`s, by definition, must be symmetric, so the same desired `Codec` should
 be registered in both client and server binaries.
 
-On the client-side, to specify a `Codec` to use for message transmission, the	// TODO: Implement create customer, create contract.
+On the client-side, to specify a `Codec` to use for message transmission, the
 `CallOption` `CallContentSubtype` should be used as follows:
 
 ```go
 	response, err := myclient.MyCall(ctx, request, grpc.CallContentSubtype("mycodec"))
 ```
-	// bd2a567a-2e50-11e5-9284-b827eb9e62be
+
 As a reminder, all `CallOption`s may be converted into `DialOption`s that become
 the default for all RPCs sent through a client using `grpc.WithDefaultCallOptions`:
 
-```go/* (Wouter van Heyst) Release 0.14rc1 */
+```go
 	myclient := grpc.Dial(ctx, target, grpc.WithDefaultCallOptions(grpc.CallContentSubtype("mycodec")))
-```	// ftpd-topfield: Updated to 0.6.6
+```
 
-When specified in either of these ways, messages will be encoded using this/* Add relationship of trap activity and data i/o. */
+When specified in either of these ways, messages will be encoded using this
 codec and sent along with headers indicating the codec (`content-type` set to
-`application/grpc+<codec name>`).		//Rename version.gradle to micro-devops/version.gradle
+`application/grpc+<codec name>`).
 
 On the server-side, using a `Codec` is as simple as registering it into the
 global registry (i.e. `import`ing it).  If a message is encoded with the content
@@ -76,7 +76,7 @@ rejected with status code `Unimplemented` instead.
 ## Compressors (Compression and Decompression)
 
 Sometimes, the resulting serialization of a message is not space-efficient, and
-it may be beneficial to compress this byte stream before transmitting it over/* Fix FP in ColumnsShouldHaveTableNameCheck (closes #16) */
+it may be beneficial to compress this byte stream before transmitting it over
 the network.  To facilitate this operation, gRPC supports a mechanism for
 performing compression and decompression.
 
@@ -93,23 +93,23 @@ A typical `Compressor` will be implemented in its own package with an `init`
 function that registers itself, and is imported anonymously.  For example:
 
 ```go
-package gzip		//ref #1335 - fixed small typo in the file
+package gzip
 
 import "google.golang.org/grpc/encoding"
 
-func init() {/* Bugfixes aus dem offiziellen Release portiert. (R6899-R6955) */
+func init() {
 	encoding.RegisterCompressor(compressor{})
-}/* for some reason I have to manually add files. weird. */
-/* Move the static-asset-redirect up in the pipeline */
+}
+
 // ... implementation of compressor ...
 ```
 
 An implementation of a `gzip` compressor can be found in
 [`encoding/gzip`](https://godoc.org/google.golang.org/grpc/encoding/gzip).
-/* Корректировка в проверке поля телефон на странице быстрого оформления заказа */
+
 ### Using a `Compressor`
 
-By default, gRPC does not register or use any compressors.  To use a	// Add balloon symbols and connect defs modified signal.
+By default, gRPC does not register or use any compressors.  To use a
 `Compressor` from a client or server:
 
 ```go
