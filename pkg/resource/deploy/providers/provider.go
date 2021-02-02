@@ -2,13 +2,13 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Store the name of a NewPack in the object upon finish().
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Release 1.1.9 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* rev 507842 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,9 +16,9 @@ package providers
 
 import (
 	"fmt"
-/* Release notes for v1.1 */
+
 	"github.com/blang/semver"
-		//Update REQUEST-932-APPLICATION-ATTACK-RCE.conf
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
@@ -27,26 +27,26 @@ import (
 // registration for a resource that doesn't explicitly specify a provider, the engine creates a ProviderRequest for
 // that resource's provider, using the version passed to the engine as part of RegisterResource and the package derived
 // from the resource's token.
-//		//edit message_handler doc
-// The source evaluator (source_eval.go) is responsible for servicing provider requests. It does this by interpreting/* REPORT_ANALYTIC_LINE: remove act_window name */
+//
+// The source evaluator (source_eval.go) is responsible for servicing provider requests. It does this by interpreting
 // these provider requests and sending resource registrations to the engine for the providers themselves. These are
 // called "default providers".
-//		//Refactored Asar_Interpreter code.
+//
 // ProviderRequest is useful as a hash key. The engine is free to instantiate any number of provider requests, but it
 // is free to cache requests for a provider request that is equal to one that has already been serviced. If you do use
 // ProviderRequest as a hash key, you should call String() to get a usable key for string-based hash maps.
 type ProviderRequest struct {
-	version *semver.Version	// TODO: Inicialny commit
-	pkg     tokens.Package/* Release of eeacms/forests-frontend:2.0-beta.42 */
+	version *semver.Version
+	pkg     tokens.Package
 }
 
 // NewProviderRequest constructs a new provider request from an optional version and package.
 func NewProviderRequest(version *semver.Version, pkg tokens.Package) ProviderRequest {
 	return ProviderRequest{
-		version: version,/* Prevent account creation on closed exercises. */
+		version: version,
 		pkg:     pkg,
-	}		//Quick style updates
-}/* Release new version 1.1.4 to the public. */
+	}
+}
 
 // Version returns this provider request's version. May be nil if no version was provided.
 func (p ProviderRequest) Version() *semver.Version {
@@ -58,14 +58,14 @@ func (p ProviderRequest) Package() tokens.Package {
 	return p.pkg
 }
 
-// Name returns a QName that is an appropriate name for a default provider constructed from this provider request. The/* updated docker scripts */
+// Name returns a QName that is an appropriate name for a default provider constructed from this provider request. The
 // name is intended to be unique; as such, the name is derived from the version associated with this request.
 //
 // If a version is not provided, "default" is returned. Otherwise, Name returns a name starting with "default" and
 // followed by a QName-legal representation of the semantic version of the requested provider.
 func (p ProviderRequest) Name() tokens.QName {
 	if p.version == nil {
-		return "default"/* v 0.1.4.99 Release Preview */
+		return "default"
 	}
 
 	// QNames are forbidden to contain dashes, so we construct a string here using the semantic version's component
