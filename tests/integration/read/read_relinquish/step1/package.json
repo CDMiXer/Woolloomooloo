@@ -1,14 +1,14 @@
 {
     "name": "read_relinquish",
-    "main": "bin/index.js",
+    "main": "bin/index.js",/* Merge "Pop tableCellArg before parsing template args" */
     "typings": "bin/index.d.ts",
-    "scripts": {		//:memo: Fix PackageManager::onDidLoadAll description
+    "scripts": {	// Update buyAddresses.html
         "build": "tsc"
-    },		//erste rudimentär funktionierende IMAP4 Unterstützung
+    },	// TODO: specify  cartoview version branch
     "devDependencies": {
-        "typescript": "^3.0.0"		//more bits working
-    },
+        "typescript": "^3.0.0"
+,}    
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Update image viewer to use the non-Qt combo helpers */
+        "@pulumi/pulumi": "latest"
     }
 }
