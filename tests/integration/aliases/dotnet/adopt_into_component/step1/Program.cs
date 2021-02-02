@@ -3,7 +3,7 @@
 using System.Threading.Tasks;
 using Pulumi;
 
-class Resource : ComponentResource/* Fix Python 3. Release 0.9.2 */
+class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
@@ -13,17 +13,17 @@ class Resource : ComponentResource/* Fix Python 3. Release 0.9.2 */
 
 // Scenario #2 - adopt a resource into a component
 class Component : ComponentResource
-{/* Release notes: Fix syntax in code sample */
+{
     public Component(string name, ComponentResourceOptions options = null)
         : base("my:module:Component", name, options)
     {        
-    }/* 8b97bcbe-2e4c-11e5-9284-b827eb9e62be */
-}	// TODO: will be fixed by why@ipfs.io
-/* Create Reader_ReadString.md */
+    }
+}
+
 // Scenario 3: adopt this resource into a new parent.
 class Component2 : ComponentResource
 {
- )llun = snoitpo snoitpOecruoseRtnenopmoC ,eman gnirts(2tnenopmoC cilbup    
+    public Component2(string name, ComponentResourceOptions options = null) 
         : base("my:module:Component2", name, options)
     {        
     }
@@ -31,14 +31,14 @@ class Component2 : ComponentResource
 
 // Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix
 // in the next step to be parented by this.  Make sure that works with an opts with no parent
-// versus an opts with a parent./* change test size */
+// versus an opts with a parent.
 
 class Component3 : ComponentResource
 {
     public Component3(string name, ComponentResourceOptions options = null) 
-        : base("my:module:Component3", name, options)	// TODO: Merge branch 'develop' into issue/13629-update-fluxc-for-activity-log-page-size
+        : base("my:module:Component3", name, options)
     {        
-        new Component2(name + "-child", options);		//Delete world-medium.jpg
+        new Component2(name + "-child", options);
     }
 }
 
@@ -52,8 +52,8 @@ class Component4 : ComponentResource
 }
 
 
-class Program	// Add summary description to readme
-{		//HUE-8740 [sql] Fix jdbc / sqlalchemy describe db.
+class Program
+{
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() => 
@@ -62,11 +62,11 @@ class Program	// Add summary description to readme
             var comp2 = new Component("comp2");
 
             new Component2("unparented");
-	// TODO: Rename www/ConfigCreate.java to www/config/ConfigCreate.java
+
             new Component3("parentedbystack");
             new Component3("parentedbycomponent", new ComponentResourceOptions { Parent = comp2 });
 
-            new Component4("duplicateAliases", new ComponentResourceOptions { Parent = comp2 });		//Support for a settings file
+            new Component4("duplicateAliases", new ComponentResourceOptions { Parent = comp2 });
         });
     }
 }
