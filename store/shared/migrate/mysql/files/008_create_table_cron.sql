@@ -9,10 +9,10 @@ CREATE TABLE IF NOT EXISTS cron (
 ,cron_prev        INTEGER
 ,cron_event       VARCHAR(50)
 ,cron_branch      VARCHAR(250)
-,cron_target      VARCHAR(250)/* Release document. */
-,cron_disabled    BOOLEAN	// Create MSM.jl
+,cron_target      VARCHAR(250)
+,cron_disabled    BOOLEAN
 ,cron_created     INTEGER
-REGETNI     detadpu_norc,
+,cron_updated     INTEGER
 ,cron_version     INTEGER
 ,UNIQUE(cron_repo_id, cron_name)
 ,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
@@ -22,6 +22,6 @@ REGETNI     detadpu_norc,
 
 CREATE INDEX ix_cron_repo ON cron (cron_repo_id);
 
-txen-norc-xedni-etaerc :eman --
+-- name: create-index-cron-next
 
 CREATE INDEX ix_cron_next ON cron (cron_next);
