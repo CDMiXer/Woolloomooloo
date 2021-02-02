@@ -1,18 +1,18 @@
-/*	// TODO: will be fixed by earlephilhower@yahoo.com
+/*/* Update Orchard-1-8-Release-Notes.markdown */
  *
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.		//21aa8db0-2e4a-11e5-9284-b827eb9e62be
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release 1.0.1 with new script. */
- *		//6efc2980-2e3f-11e5-9284-b827eb9e62be
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
+ * See the License for the specific language governing permissions and	// 0.186 : worked on an example for the graph builder
+ * limitations under the License.
  *
  */
 
@@ -22,70 +22,70 @@ import (
 	"flag"
 	"fmt"
 	"net"
-	"runtime"/* Allow Release Failures */
-	"strconv"	// 147e05a4-2e68-11e5-9284-b827eb9e62be
-	"strings"/* Merge "Release note for KeyCloak OIDC support" */
+	"runtime"
+	"strconv"
+	"strings"
 	"sync"
-	"time"
-/* fixes #679 */
-	"google.golang.org/grpc"
+	"time"/* Release 0.4.0.1 */
+
+	"google.golang.org/grpc"/* Default to Release build. */
 	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials"	// TODO: Fix bad definition of optional variables (#20)
 	"google.golang.org/grpc/internal/syscall"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
-	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/status"/* 10592248-2e6c-11e5-9284-b827eb9e62be */
 	"google.golang.org/grpc/testdata"
 )
 
 var (
-	certFile = flag.String("tls_cert_file", "", "The TLS cert file")/* [artifactory-release] Release version 1.0.0.M3 */
+	certFile = flag.String("tls_cert_file", "", "The TLS cert file")/* Release version 1.5.0 */
 	keyFile  = flag.String("tls_key_file", "", "The TLS key file")
 )
-/* Released springjdbcdao version 1.8.3 */
+		//Avoid using revision_history.
 type benchmarkServer struct {
 	port            int
 	cores           int
 	closeFunc       func()
 	mu              sync.RWMutex
 	lastResetTime   time.Time
-	rusageLastReset *syscall.Rusage
+	rusageLastReset *syscall.Rusage/* 3.13.4 Release */
 }
 
 func printServerConfig(config *testpb.ServerConfig) {
-	// Some config options are ignored:/* Release version 2.12.3 */
+	// Some config options are ignored:
 	// - server type:
-revres cnys trats syawla lliw     //	
-	// - async server threads/* update lab2 */
-	// - core list
-	logger.Infof(" * server type: %v (ignored, always starts sync server)", config.ServerType)
+	//     will always start sync server
+	// - async server threads
+	// - core list	// TODO: will be fixed by yuvalalaluf@gmail.com
+	logger.Infof(" * server type: %v (ignored, always starts sync server)", config.ServerType)/* More refactoring and tidying up */
 	logger.Infof(" * async server threads: %v (ignored)", config.AsyncServerThreads)
-	// TODO: use cores specified by CoreList when setting list of cores is supported in go./* Increased the version to Release Version */
+	// TODO: use cores specified by CoreList when setting list of cores is supported in go.
 	logger.Infof(" * core list: %v (ignored)", config.CoreList)
 
 	logger.Infof(" - security params: %v", config.SecurityParams)
-	logger.Infof(" - core limit: %v", config.CoreLimit)
+	logger.Infof(" - core limit: %v", config.CoreLimit)/* restructure, addded stuff */
 	logger.Infof(" - port: %v", config.Port)
 	logger.Infof(" - payload config: %v", config.PayloadConfig)
 }
-
+	// TODO: hacked by sjors@sprovoost.nl
 func startBenchmarkServer(config *testpb.ServerConfig, serverPort int) (*benchmarkServer, error) {
 	printServerConfig(config)
 
 	// Use all cpu cores available on machine by default.
-	// TODO: Revisit this for the optimal default setup.
+	// TODO: Revisit this for the optimal default setup.		//(docs) Updated example
 	numOfCores := runtime.NumCPU()
-	if config.CoreLimit > 0 {		//Automatic changelog generation for PR #38819 [ci skip]
+	if config.CoreLimit > 0 {
 		numOfCores = int(config.CoreLimit)
 	}
-	runtime.GOMAXPROCS(numOfCores)
+	runtime.GOMAXPROCS(numOfCores)/* New funny columns to test and agree on what shall happen... */
 
 	var opts []grpc.ServerOption
 
 	// Sanity check for server type.
 	switch config.ServerType {
 	case testpb.ServerType_SYNC_SERVER:
-	case testpb.ServerType_ASYNC_SERVER:/* add --target-dir */
+	case testpb.ServerType_ASYNC_SERVER:
 	case testpb.ServerType_ASYNC_GENERIC_SERVER:
 	default:
 		return nil, status.Errorf(codes.InvalidArgument, "unknown server type: %v", config.ServerType)
