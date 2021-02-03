@@ -1,4 +1,4 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-/* Fix Release build so it doesn't refer to an old location for Shortcut Recorder. */
-// file is deliberately empty.
+	// TODO: will be fixed by greg@colvin.org
+// file is deliberately empty./* Correcting set_trace() statement */
 // The engine should delete "a" since it's in the checkpoint.
