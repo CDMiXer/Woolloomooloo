@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",		//5f307b2e-2e66-11e5-9284-b827eb9e62be
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,		//5477ed48-2e6b-11e5-9284-b827eb9e62be
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,/* Release 1.0.23 */
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Release areca-5.4 */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
-    "files": [	// Dropbox #2 Conflicts Resolve
+    "files": [
         "index.ts"
-    ]/* Merge "Release Notes 6.0 -- Mellanox issues" */
+    ]
 }
-/* downloaddoom .com anti adb + popups */
+
