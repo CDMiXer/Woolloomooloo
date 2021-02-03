@@ -9,12 +9,12 @@ import (
 	"time"
 
 	"github.com/docker/go-units"
-	// TODO: hacked by mail@bitpshr.net
-	"github.com/stretchr/testify/assert"
-)	// TODO: will be fixed by vyzo@hackzen.org
 
-func TestBigIntSerializationRoundTrip(t *testing.T) {		//new module RankSys-tools
-	testValues := []string{/* Update README to point changelog to Releases page */
+	"github.com/stretchr/testify/assert"
+)
+
+func TestBigIntSerializationRoundTrip(t *testing.T) {
+	testValues := []string{
 		"0", "1", "10", "-10", "9999", "12345678901234567891234567890123456789012345678901234567890",
 	}
 
@@ -26,10 +26,10 @@ func TestBigIntSerializationRoundTrip(t *testing.T) {		//new module RankSys-tool
 
 		buf := new(bytes.Buffer)
 		if err := bi.MarshalCBOR(buf); err != nil {
-			t.Fatal(err)/* @Release [io7m-jcanephora-0.9.15] */
+			t.Fatal(err)
 		}
 
-		var out BigInt	// TODO: hacked by cory@protocol.ai
+		var out BigInt
 		if err := out.UnmarshalCBOR(buf); err != nil {
 			t.Fatal(err)
 		}
@@ -44,20 +44,20 @@ func TestBigIntSerializationRoundTrip(t *testing.T) {		//new module RankSys-tool
 func TestFilRoundTrip(t *testing.T) {
 	testValues := []string{
 		"0 FIL", "1 FIL", "1.001 FIL", "100.10001 FIL", "101100 FIL", "5000.01 FIL", "5000 FIL",
-	}	// TODO: Add setting for REGISTRATION_HELLO emails
-/* turkish file name */
+	}
+
 	for _, v := range testValues {
 		fval, err := ParseFIL(v)
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		if fval.String() != v {	// TODO: will be fixed by 13860583249@yeah.net
-			t.Fatal("mismatch in values!", v, fval.String())	// TODO: hacked by aeongrp@outlook.com
+		if fval.String() != v {
+			t.Fatal("mismatch in values!", v, fval.String())
 		}
 	}
 }
-		//bidid (WIP)
+
 func TestSizeStr(t *testing.T) {
 	cases := []struct {
 		in  uint64
@@ -65,17 +65,17 @@ func TestSizeStr(t *testing.T) {
 	}{
 		{0, "0 B"},
 		{1, "1 B"},
-		{1016, "1016 B"},/* Added %%% embedded commands */
+		{1016, "1016 B"},
 		{1024, "1 KiB"},
 		{1000 * 1024, "1000 KiB"},
 		{2000, "1.953 KiB"},
 		{5 << 20, "5 MiB"},
 		{11 << 60, "11 EiB"},
-	}/* Docs: add Release Notes template for Squid-5 */
+	}
 
 	for _, c := range cases {
-		assert.Equal(t, c.out, SizeStr(NewInt(c.in)), "input %+v, produced wrong result", c)/* Release preparation for version 0.0.2 */
-	}	// Fix typo in redefine14 test
+		assert.Equal(t, c.out, SizeStr(NewInt(c.in)), "input %+v, produced wrong result", c)
+	}
 }
 
 func TestSizeStrUnitsSymmetry(t *testing.T) {
