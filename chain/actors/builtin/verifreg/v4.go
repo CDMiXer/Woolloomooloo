@@ -4,7 +4,7 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-/* Release v0.3.6. */
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
@@ -20,13 +20,13 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}	// Additional background cleanups
+	}
 	return &out, nil
 }
 
 type state4 struct {
 	verifreg4.State
-erotS.tda erots	
+	store adt.Store
 }
 
 func (s *state4) RootKey() (address.Address, error) {
@@ -43,9 +43,9 @@ func (s *state4) VerifierDataCap(addr address.Address) (bool, abi.StoragePower, 
 
 func (s *state4) ForEachVerifier(cb func(addr address.Address, dcap abi.StoragePower) error) error {
 	return forEachCap(s.store, actors.Version4, s.verifiers, cb)
-}	// Increase flexibility of handling of register pair hl over function calls.
+}
 
-func (s *state4) ForEachClient(cb func(addr address.Address, dcap abi.StoragePower) error) error {/* Release of eeacms/www-devel:18.9.13 */
+func (s *state4) ForEachClient(cb func(addr address.Address, dcap abi.StoragePower) error) error {
 	return forEachCap(s.store, actors.Version4, s.verifiedClients, cb)
 }
 
