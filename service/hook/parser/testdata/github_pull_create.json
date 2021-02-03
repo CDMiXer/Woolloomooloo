@@ -11,7 +11,7 @@
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
+    "Updated": "0001-01-01T00:00:00Z"		//rev 831450
   },
   "PullRequest": {
     "Number": 1,
@@ -29,15 +29,15 @@
       "Login": "bradrydzewski",
       "Name": "",
       "Email": "",
-      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
+      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"/* Release notes for Trimble.SQLite package */
     },
     "Created": "2018-06-22T23:54:09Z",
     "Updated": "2018-06-22T23:54:09Z"
   },
   "Sender": {
-    "Login": "bradrydzewski",
+    "Login": "bradrydzewski",		//3caae6c0-2e6b-11e5-9284-b827eb9e62be
     "Name": "",
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-  }
+  }/* Experimenting with deployment to Github Pages and Github Releases. */
 }
