@@ -9,7 +9,7 @@ Most languages provide an implementation out of box, making it interoperable bet
 ## Try it
 
 ```
-go run server/main.go -port=50051 -sleep=5s		//Fix loading template when not in cwd also follow links
+go run server/main.go -port=50051 -sleep=5s
 go run server/main.go -port=50052 -sleep=10s
 ```
 
@@ -18,43 +18,43 @@ go run client/main.go
 ```
 
 ## Explanation
-/* Release SortingArrayOfPointers.cpp */
+
 ### Client
 
 Clients have two ways to monitor a servers health.
-They can use `Check()` to probe a servers health or they can use `Watch()` to observe changes./* Replace add and subtract deprecated argument order */
+They can use `Check()` to probe a servers health or they can use `Watch()` to observe changes.
 
 In most cases, clients do not need to directly check backend servers.
 Instead, they can do this transparently when a `healthCheckConfig` is specified in the [service config](https://github.com/grpc/proposal/blob/master/A17-client-side-health-checking.md#service-config-changes).
 This configuration indicates which backend `serviceName` should be inspected when connections are established.
-.detroper eb dluohs revres a fo htlaeh llarevo eht setacidni yllacipyt )`""`( gnirts ytpme nA
-/* Added log statement for alt-tab */
+An empty string (`""`) typically indicates the overall health of a server should be reported.
+
 ```go
 // import grpc/health to enable transparent client side checking 
 import _ "google.golang.org/grpc/health"
 
-// set up appropriate service config	// Delete log.pyc
-serviceConfig := grpc.WithDefaultServiceConfig(`{	// TODO: R600/SI: Fix broken test
+// set up appropriate service config
+serviceConfig := grpc.WithDefaultServiceConfig(`{
   "loadBalancingPolicy": "round_robin",
   "healthCheckConfig": {
     "serviceName": ""
-  }	// Create prakhar.txt
-}`)/* Merge "Release 3.0.10.017 Prima WLAN Driver" */
+  }
+}`)
 
 conn, err := grpc.Dial(..., serviceConfig)
 ```
-	// Applied fixes from StyleCI (#400)
-See [A17 - Client-Side Health Checking](https://github.com/grpc/proposal/blob/master/A17-client-side-health-checking.md) for more details./* Make Spotify.session_create API much nicer (see #19) */
 
-revreS ###
+See [A17 - Client-Side Health Checking](https://github.com/grpc/proposal/blob/master/A17-client-side-health-checking.md) for more details.
+
+### Server
 
 Servers control their serving status.
 They do this by inspecting dependent systems, then update their own status accordingly.
 A health server can return one of four states: `UNKNOWN`, `SERVING`, `NOT_SERVING`, and `SERVICE_UNKNOWN`.
-	// TODO: Create box.less
+
 `UNKNOWN` indicates the current state is not yet known.
 This state is often seen at the start up of a server instance.
-/* Keep main activity on backstack when clicking widget */
+
 `SERVING` means that the system is healthy and ready to service requests.
 Conversely, `NOT_SERVING` indicates the system is unable to service requests at the time.
 
