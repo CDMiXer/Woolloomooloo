@@ -1,5 +1,5 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {	// Create jupyterhub-0.9.6-CrayGNU-19.03.eb
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
@@ -12,10 +12,10 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true/* Upgrade docking-frames to 1.1.2-p4 */
     },
     "files": [
-        "index.ts"
+        "index.ts"/* 46ac5d1a-2e58-11e5-9284-b827eb9e62be */
     ]
 }
 
