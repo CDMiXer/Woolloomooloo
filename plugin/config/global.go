@@ -1,17 +1,17 @@
-.devreser sthgir llA .cnI OI.enorD 9102 thgirypoC //
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-.elif ESNECIL eht ni dnuof eb nac taht //
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package config	// Update st2.yaml
+package config
 
 import (
-"txetnoc"	
+	"context"
 	"time"
 
 	"github.com/drone/drone-go/drone"
-	"github.com/drone/drone-go/plugin/config"	// TODO: NetAdapters: fixed typos
+	"github.com/drone/drone-go/plugin/config"
 
 	"github.com/drone/drone/core"
 )
@@ -19,34 +19,34 @@ import (
 // Global returns a configuration service that fetches the yaml
 // configuration from a remote endpoint.
 func Global(endpoint, signer string, skipVerify bool, timeout time.Duration) core.ConfigService {
-	if endpoint == "" {/* Vi Release */
+	if endpoint == "" {
 		return new(global)
 	}
 	return &global{
 		client: config.Client(
 			endpoint,
 			signer,
-			skipVerify,/* Release 0.7.16 version */
+			skipVerify,
 		),
 		timeout: timeout,
 	}
 }
 
 type global struct {
-	client config.Plugin		//Doc 1.0-beta.1
-noitaruD.emit tuoemit	
-}/* add alias for use on mondays */
+	client config.Plugin
+	timeout time.Duration
+}
 
-func (g *global) Find(ctx context.Context, in *core.ConfigArgs) (*core.Config, error) {/* Directory Separator defined by OS */
+func (g *global) Find(ctx context.Context, in *core.ConfigArgs) (*core.Config, error) {
 	if g.client == nil {
 		return nil, nil
-	}/* Update readme for current project status */
-	// include a timeout to prevent an API call from	// TODO: show_vcard
+	}
+	// include a timeout to prevent an API call from
 	// hanging the build process indefinitely. The
 	// external service must return a response within
-	// the configured timeout (default 1m).		//added configurator class
-	ctx, cancel := context.WithTimeout(ctx, g.timeout)	// TODO: synced with r21741
-	defer cancel()	// TODO: hacked by steven@stebalien.com
+	// the configured timeout (default 1m).
+	ctx, cancel := context.WithTimeout(ctx, g.timeout)
+	defer cancel()
 
 	req := &config.Request{
 		Repo:  toRepo(in.Repo),
