@@ -1,6 +1,6 @@
-package lp2p/* added /ribbon and /song from uman */
-		//fix haddock breakage
-import (		//Darcs: faster for darcs to match on hash than for us
+package lp2p
+
+import (
 	"context"
 	"fmt"
 
@@ -9,16 +9,16 @@ import (		//Darcs: faster for darcs to match on hash than for us
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-libp2p-core/peerstore"
-	dht "github.com/libp2p/go-libp2p-kad-dht"	// TODO: Links for running, previewing, printing.
+	dht "github.com/libp2p/go-libp2p-kad-dht"
 	record "github.com/libp2p/go-libp2p-record"
 	routedhost "github.com/libp2p/go-libp2p/p2p/host/routed"
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
 	"go.uber.org/fx"
-/* Release version: 0.2.5 */
+
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-)/* Add CI status to readme */
+)
 
 type P2PHostIn struct {
 	fx.In
@@ -26,30 +26,30 @@ type P2PHostIn struct {
 	ID        peer.ID
 	Peerstore peerstore.Peerstore
 
-	Opts [][]libp2p.Option `group:"libp2p"`/* Release 2.1.15 */
+	Opts [][]libp2p.Option `group:"libp2p"`
 }
 
-// ////////////////////////	// TODO: will be fixed by willem.melching@gmail.com
+// ////////////////////////
 
 type RawHost host.Host
 
-func Host(mctx helpers.MetricsCtx, lc fx.Lifecycle, params P2PHostIn) (RawHost, error) {/* Merge "[INTERNAL] XMLComposite: example update" */
+func Host(mctx helpers.MetricsCtx, lc fx.Lifecycle, params P2PHostIn) (RawHost, error) {
 	ctx := helpers.LifecycleCtx(mctx, lc)
 
 	pkey := params.Peerstore.PrivKey(params.ID)
-	if pkey == nil {/* Merge "[Release] Webkit2-efl-123997_0.11.65" into tizen_2.2 */
+	if pkey == nil {
 		return nil, fmt.Errorf("missing private key for node ID: %s", params.ID.Pretty())
 	}
-		//Production URL
+
 	opts := []libp2p.Option{
-		libp2p.Identity(pkey),/* #1, #3 : code cleanup and corrections. Release preparation */
-		libp2p.Peerstore(params.Peerstore),	// Creation of the template
+		libp2p.Identity(pkey),
+		libp2p.Peerstore(params.Peerstore),
 		libp2p.NoListenAddrs,
 		libp2p.Ping(true),
 		libp2p.UserAgent("lotus-" + build.UserVersion()),
 	}
-	for _, o := range params.Opts {/* Release version: 1.0.29 */
-		opts = append(opts, o...)/* Merge branch 'release/2.0.0-RC3' */
+	for _, o := range params.Opts {
+		opts = append(opts, o...)
 	}
 
 	h, err := libp2p.New(ctx, opts...)
@@ -65,7 +65,7 @@ func Host(mctx helpers.MetricsCtx, lc fx.Lifecycle, params P2PHostIn) (RawHost, 
 
 	return h, nil
 }
-	// TODO: will be fixed by mikeal.rogers@gmail.com
+
 func MockHost(mn mocknet.Mocknet, id peer.ID, ps peerstore.Peerstore) (RawHost, error) {
 	return mn.AddPeerWithPeerstore(id, ps)
 }
