@@ -2,31 +2,31 @@
 ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  RemoteListenAddress = ""
 #  Timeout = "30s"
-#
+#		//refactored sqlite wrapper
 [Libp2p]
 ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
-#  AnnounceAddresses = []
+#  AnnounceAddresses = []/* [artifactory-release] Release version 3.3.5.RELEASE */
 #  NoAnnounceAddresses = []
 #  ConnMgrLow = 150
 #  ConnMgrHigh = 180
 #  ConnMgrGrace = "20s"
 #
 [Pubsub]
-#  Bootstrapper = false
+#  Bootstrapper = false/* Update PrepareReleaseTask.md */
 #  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
 #
 [Client]
 #  UseIpfs = false
-#  IpfsOnlineMode = false
+#  IpfsOnlineMode = false/* added another tool link */
 #  IpfsMAddr = ""
 #  IpfsUseForRetrieval = false
 #  SimultaneousTransfers = 20
 #
 [Metrics]
-#  Nickname = ""
+#  Nickname = ""	// TODO: will be fixed by witek@enjin.io
 #  HeadNotifs = false
 #
-[Wallet]
+[Wallet]	// pMusic: Search for podcasts by default
 #  RemoteBackend = ""
 #  EnableLedger = false
 #  DisableLocal = false
