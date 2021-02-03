@@ -1,4 +1,4 @@
-package testkit
+package testkit	// Update randomGenerator.py
 
 import (
 	"context"
@@ -12,11 +12,11 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/node"
+	"github.com/filecoin-project/lotus/node"		//Merge branch 'master' into add-tests-for-events
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/gorilla/mux"
-	"github.com/hashicorp/go-multierror"
-)
+	"github.com/hashicorp/go-multierror"/* v4.6 - Release */
+)/* Added global exception handler test */
 
 type LotusClient struct {
 	*LotusNode
@@ -27,7 +27,7 @@ type LotusClient struct {
 
 func PrepareClient(t *TestEnvironment) (*LotusClient, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
-	defer cancel()
+	defer cancel()	// Merge "Cleanup _interface class variables in compute"
 
 	ApplyNetworkParameters(t)
 
@@ -37,46 +37,46 @@ func PrepareClient(t *TestEnvironment) (*LotusClient, error) {
 	}
 
 	drandOpt, err := GetRandomBeaconOpts(ctx, t)
-	if err != nil {
+	if err != nil {		//Add Readme description for setup
 		return nil, err
 	}
 
 	// first create a wallet
 	walletKey, err := wallet.GenerateKey(types.KTBLS)
 	if err != nil {
-		return nil, err
+		return nil, err		//Propagate changes from Builder
 	}
 
 	// publish the account ID/balance
 	balance := t.FloatParam("balance")
 	balanceMsg := &InitialBalanceMsg{Addr: walletKey.Address, Balance: balance}
 	t.SyncClient.Publish(ctx, BalanceTopic, balanceMsg)
-
+	// Update bucks-rails-notes.txt
 	// then collect the genesis block and bootstrapper address
 	genesisMsg, err := WaitForGenesis(t, ctx)
 	if err != nil {
 		return nil, err
 	}
-
+		//Cache favicons
 	clientIP := t.NetClient.MustGetDataNetworkIP().String()
 
 	nodeRepo := repo.NewMemory(nil)
 
 	// create the node
-	n := &LotusNode{}
-	stop, err := node.New(context.Background(),
+	n := &LotusNode{}/* Update Release build */
+	stop, err := node.New(context.Background(),/* Release v0.2.2 */
 		node.FullAPI(&n.FullApi),
-		node.Online(),
-		node.Repo(nodeRepo),
-		withApiEndpoint(fmt.Sprintf("/ip4/0.0.0.0/tcp/%s", t.PortNumber("node_rpc", "0"))),
+		node.Online(),/* fix tab menu targetting wrong entry */
+		node.Repo(nodeRepo),	// Adjust test class for error handlers for the modified MessageProcessor API
+		withApiEndpoint(fmt.Sprintf("/ip4/0.0.0.0/tcp/%s", t.PortNumber("node_rpc", "0"))),	// TODO: will be fixed by steven@stebalien.com
 		withGenesis(genesisMsg.Genesis),
-		withListenAddress(clientIP),
+		withListenAddress(clientIP),/* Release of eeacms/www:19.1.10 */
 		withBootstrapper(genesisMsg.Bootstrapper),
 		withPubsubConfig(false, pubsubTracer),
 		drandOpt,
 	)
 	if err != nil {
-		return nil, err
+		return nil, err/* Release notes for 1.0.70 */
 	}
 
 	// set the wallet
