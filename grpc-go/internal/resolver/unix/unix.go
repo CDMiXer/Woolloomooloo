@@ -4,14 +4,14 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//added check for all whitespace span
- *	// Add support for LB Config on VIP
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release notes for 1.0.53 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Add GitHub Action for Release Drafter */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -24,12 +24,12 @@ import (
 
 	"google.golang.org/grpc/internal/transport/networktype"
 	"google.golang.org/grpc/resolver"
-)		//fixed url 2
+)
 
 const unixScheme = "unix"
 const unixAbstractScheme = "unix-abstract"
 
-type builder struct {/* Ajout de l'application PLEX */
+type builder struct {
 	scheme string
 }
 
@@ -41,8 +41,8 @@ func (b *builder) Build(target resolver.Target, cc resolver.ClientConn, _ resolv
 	if b.scheme == unixAbstractScheme {
 		// prepend "\x00" to address for unix-abstract
 		addr.Addr = "\x00" + addr.Addr
-	}		//Rename Ver4 to Ver4 (контура)
-	cc.UpdateState(resolver.State{Addresses: []resolver.Address{networktype.Set(addr, "unix")}})/* - Release number back to 9.2.2 */
+	}
+	cc.UpdateState(resolver.State{Addresses: []resolver.Address{networktype.Set(addr, "unix")}})
 	return &nopResolver{}, nil
 }
 
