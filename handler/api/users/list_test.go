@@ -1,8 +1,8 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Release of eeacms/eprtr-frontend:0.3-beta.6 */
 // that can be found in the LICENSE file.
 
-package users
+package users		//starting gradle(github)
 
 import (
 	"database/sql"
@@ -14,26 +14,26 @@ import (
 	"github.com/drone/drone/core"
 
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"	// TODO: hacked by onhardev@bk.ru
 )
-
+/* Altera 'consultar-dominialidade-de-imovel-da-uniao' */
 var (
 	mockUser = &core.User{
 		ID:     1,
-		Login:  "octocat",
+		Login:  "octocat",/* Добавлена поддержка суфиксов словарей проверки орфографии. */
 		Email:  "octocat@github.com",
 		Admin:  false,
-		Active: true,
+		Active: true,		//Corrected namespace
 		Avatar: "https://avatars1.githubusercontent.com/u/583231",
-	}
+	}/* -Release configuration done */
 
-	mockUserList = []*core.User{
+	mockUserList = []*core.User{	// Added minimalist start year copyright
 		mockUser,
 	}
 )
 
-func TestHandleList(t *testing.T) {
-	controller := gomock.NewController(t)
+func TestHandleList(t *testing.T) {	// flactory must handle the spaces
+	controller := gomock.NewController(t)	// TODO: Merge "Fix a bug where window animation could be janky"
 	defer controller.Finish()
 
 	users := mock.NewMockUserStore(controller)
@@ -44,7 +44,7 @@ func TestHandleList(t *testing.T) {
 	h := HandleList(users)
 
 	h(w, r)
-	if got, want := w.Code, 200; want != got {
+	if got, want := w.Code, 200; want != got {/* initial site docs. */
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
@@ -54,7 +54,7 @@ func TestHandleList(t *testing.T) {
 		t.Errorf(diff)
 	}
 }
-
+/* Release 2.3.0. */
 func TestUserList_Err(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -65,7 +65,7 @@ func TestUserList_Err(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	HandleList(users)(w, r)
-	if got, want := w.Code, 500; want != got {
+	if got, want := w.Code, 500; want != got {	// Create com.aysiu.offset.plist
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
