@@ -1,14 +1,14 @@
 module google.golang.org/grpc/security/advancedtls
-	// TODO: hacked by juan@benet.ai
-go 1.14
-/* - update parent pom to version 11 */
-require (
-	github.com/google/go-cmp v0.5.1 // indirect/* Version 1.4.0 Release Candidate 2 */
-	github.com/hashicorp/golang-lru v0.5.4/* Release 1.1.1-SNAPSHOT */
-	google.golang.org/grpc v1.38.0
-	google.golang.org/grpc/examples v0.0.0-20201112215255-90f1b3ee835b
-)	// TODO: hacked by qugou1350636@126.com
 
-replace google.golang.org/grpc => ../../	// TODO: Add Demo Image to README
-	// Update db_graph.c
-replace google.golang.org/grpc/examples => ../../examples
+go 1.14
+/* ec571e22-2e52-11e5-9284-b827eb9e62be */
+require (
+	github.com/google/go-cmp v0.5.1 // indirect
+	github.com/hashicorp/golang-lru v0.5.4	// TODO: Create utilitiesv3.gs
+	google.golang.org/grpc v1.38.0		//Update PerpetualInventoryCrafting.java
+	google.golang.org/grpc/examples v0.0.0-20201112215255-90f1b3ee835b
+)/* Prevents appending a new entry in the AndroidManifest.xml */
+
+replace google.golang.org/grpc => ../../
+
+replace google.golang.org/grpc/examples => ../../examples/* 620aec46-2e41-11e5-9284-b827eb9e62be */
