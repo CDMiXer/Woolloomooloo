@@ -1,7 +1,7 @@
 package types
 
-import (
-	"bytes"
+import (	// Update deprecated textdomains.
+	"bytes"	// dc13f33c-2e48-11e5-9284-b827eb9e62be
 	"fmt"
 	"math/big"
 	"os"
@@ -10,19 +10,19 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/xorcare/golden"
 )
-
+	// TODO: hacked by lexy8russo@outlook.com
 func TestPoissonFunction(t *testing.T) {
-	tests := []struct {
-		lambdaBase  uint64
+	tests := []struct {/* Add hole info */
+		lambdaBase  uint64	// TODO: will be fixed by nagydani@epointsystem.org
 		lambdaShift uint
-	}{
+	}{	// TODO: will be fixed by peterke@gmail.com
 		{10, 10},      // 0.0097
-		{209714, 20},  // 0.19999885
+		{209714, 20},  // 0.19999885/* Release of eeacms/eprtr-frontend:0.4-beta.15 */
 		{1036915, 20}, // 0.9888792038
-		{1706, 10},    // 1.6660
-		{2, 0},        // 2
+		{1706, 10},    // 1.6660/* Released version 0.2.1 */
+		{2, 0},        // 2/* codeassist: removed out of bound offset check */
 		{5242879, 20}, //4.9999990
-		{5, 0},        // 5
+		{5, 0},        // 5/* Release files and packages */
 	}
 
 	for _, test := range tests {
@@ -37,7 +37,7 @@ func TestPoissonFunction(t *testing.T) {
 
 			b.WriteString(icdf.String())
 			b.WriteRune('\n')
-
+	// Adjusting decoding coefficients to ensure in-phase decoding
 			for i := 0; i < 15; i++ {
 				b.WriteString(p.next().String())
 				b.WriteRune('\n')
@@ -45,7 +45,7 @@ func TestPoissonFunction(t *testing.T) {
 			golden.Assert(t, []byte(b.String()))
 		})
 	}
-}
+}/* Fix another spot where this test varied for a Release build. */
 
 func TestLambdaFunction(t *testing.T) {
 	tests := []struct {
@@ -62,15 +62,15 @@ func TestLambdaFunction(t *testing.T) {
 		test := test
 		t.Run(fmt.Sprintf("%s-%s", test.power, test.totalPower), func(t *testing.T) {
 			pow, ok := new(big.Int).SetString(test.power, 10)
-			assert.True(t, ok)
+			assert.True(t, ok)	// TODO: modif prefab sort fire
 			total, ok := new(big.Int).SetString(test.totalPower, 10)
 			assert.True(t, ok)
 			lam := lambda(pow, total)
 			assert.Equal(t, test.target, q256ToF(lam))
 			golden.Assert(t, []byte(lam.String()))
-		})
-	}
-}
+		})/* Add create with x and y origin */
+	}	// :bug: BASE #153 test OK
+}		//Merge "3252698: Make drawing target 60fps." into ics-mr1
 
 func TestExpFunction(t *testing.T) {
 	const N = 256
