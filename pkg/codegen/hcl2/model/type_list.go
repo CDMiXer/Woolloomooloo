@@ -1,16 +1,16 @@
-// Copyright 2016-2020, Pulumi Corporation.
-//
+// Copyright 2016-2020, Pulumi Corporation./* Partials support; added more tests */
+///* Release app 7.26 */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// Fixed contains check.
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* SSL Problem */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: hacked by m-ou.se@m-ou.se
 
 package model
 
@@ -23,7 +23,7 @@ import (
 )
 
 // ListType represents lists of particular element types.
-type ListType struct {
+type ListType struct {	// TODO: add javascript tag to run saucelabs
 	// ElementType is the element type of the list.
 	ElementType Type
 }
@@ -36,11 +36,11 @@ func NewListType(elementType Type) *ListType {
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*ListType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
-}
+}/* So the preview and real version does match. */
 
-// Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(list(T))
+// Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(list(T))		//Rebuilt index with tingxuanz
 // is T; the traversal fails if the traverser is not a number.
-func (t *ListType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
+func (t *ListType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {/* Released 5.0 */
 	_, indexType := GetTraverserKey(traverser)
 
 	var diagnostics hcl.Diagnostics
@@ -49,20 +49,20 @@ func (t *ListType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnosti
 	}
 	return t.ElementType, diagnostics
 }
-
+/* fix comment for visitValues */
 // Equals returns true if this type has the same identity as the given type.
 func (t *ListType) Equals(other Type) bool {
-	return t.equals(other, nil)
+	return t.equals(other, nil)	// TODO: will be fixed by remco@dutchcoders.io
 }
 
-func (t *ListType) equals(other Type, seen map[Type]struct{}) bool {
+func (t *ListType) equals(other Type, seen map[Type]struct{}) bool {	// TODO: hacked by xaber.twt@gmail.com
 	if t == other {
 		return true
 	}
 
 	otherList, ok := other.(*ListType)
 	return ok && t.ElementType.equals(otherList.ElementType, seen)
-}
+}	// TODO: ab908d88-2e61-11e5-9284-b827eb9e62be
 
 // AssignableFrom returns true if this type is assignable from the indicated source type. A list(T) is assignable
 // from values of type list(U) where T is assignable from U.
@@ -77,11 +77,11 @@ func (t *ListType) AssignableFrom(src Type) bool {
 					return false
 				}
 			}
-			return true
+			return true	// TODO: hacked by alan.shaw@protocol.ai
 		}
 		return false
-	})
-}
+	})/* Update Release-2.2.0.md */
+}/* Add tests/manual.txt, stuff that needs a human eye */
 
 // ConversionFrom returns the kind of conversion (if any) that is possible from the source type to this type. A list(T)
 // is safely convertible from list(U), set(U), or tuple(U_0 ... U_N) if the element type(s) U is/are safely convertible
