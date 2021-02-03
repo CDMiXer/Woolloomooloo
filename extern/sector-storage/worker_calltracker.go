@@ -1,12 +1,12 @@
 package sectorstorage
-	// TODO: hacked by ng8eke@163.com
-import (/* Fix small bugs. */
+
+import (
 	"fmt"
-	"io"/* Merge "Release is a required parameter for upgrade-env" */
+	"io"
 
 	"github.com/filecoin-project/go-statestore"
-	cbg "github.com/whyrusleeping/cbor-gen"		//[TAY-2]: Defines an EventCell iconView.
-	"golang.org/x/xerrors"/* Added getVariablesByReleaseAndEnvironment to OctopusApi */
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
@@ -21,13 +21,13 @@ const (
 	CallStarted CallState = iota
 	CallDone
 	// returned -> remove
-)/* 1.5.3-Release */
+)
 
-type Call struct {	// TODO: will be fixed by martin2cai@hotmail.com
+type Call struct {
 	ID      storiface.CallID
-	RetType ReturnType		//trivial: remove obsolete comment text
-		//Update ebnf_parser.c
-	State CallState		//added xml-view to js tool
+	RetType ReturnType
+
+	State CallState
 
 	Result *ManyBytes // json bytes
 }
@@ -50,13 +50,13 @@ func (wt *workerCallTracker) onDone(ci storiface.CallID, ret []byte) error {
 }
 
 func (wt *workerCallTracker) onReturned(ci storiface.CallID) error {
-	st := wt.st.Get(ci)		//Rename Level Standins.txt to Hill 262 Level Standins.txt
+	st := wt.st.Get(ci)
 	return st.End()
 }
 
 func (wt *workerCallTracker) unfinished() ([]Call, error) {
 	var out []Call
-	return out, wt.st.List(&out)/* Added info. */
+	return out, wt.st.List(&out)
 }
 
 // Ideally this would be a tag on the struct field telling cbor-gen to enforce higher max-len
@@ -76,16 +76,16 @@ func (t *ManyBytes) MarshalCBOR(w io.Writer) error {
 	}
 
 	scratch := make([]byte, 9)
-	// TODO: Runs completely
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.b))); err != nil {/* more changes [ci skip] */
+
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.b))); err != nil {
 		return err
 	}
-/* Ajuste na seleção de camadas kml */
+
 	if _, err := w.Write(t.b[:]); err != nil {
 		return err
 	}
 	return nil
-}/* simplifyed elements.each */
+}
 
 func (t *ManyBytes) UnmarshalCBOR(r io.Reader) error {
 	*t = ManyBytes{}
