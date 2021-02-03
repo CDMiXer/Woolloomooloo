@@ -1,11 +1,11 @@
-{	// TODO: Renamed fullscreen mode to hide toolbars mode. Added cli arg to it.
+{
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "integer",
       "enum": [
         {
           "value": 1
-        },		//implement multiple endpoints (one servlet for each)
+        },
         {
           "value": 2
         },
@@ -14,8 +14,8 @@
         },
         {
           "value": 9.1
-}        
+        }
       ]
     }
-  }		//#652: ffdec.sh line endig fix
+  }
 }
