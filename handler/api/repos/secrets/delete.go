@@ -1,48 +1,48 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Merge "Adding new Release chapter" */
 // that can be found in the LICENSE file.
-	// TODO: fix bug: play crash (:home)
+
 // +build !oss
 
-package secrets/* Release Process Restart: Change pom version to 2.1.0-SNAPSHOT */
+package secrets
 
 import (
-	"net/http"/* Merge "Release note for fixing event-engines HA" */
+	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"
-/* Made link  */
+	"github.com/drone/drone/handler/api/render"/* Update and rename search/index.html to search.html */
+
 	"github.com/go-chi/chi"
 )
-/* 75f96528-2e9b-11e5-b04b-10ddb1c7c412 */
+
 // HandleDelete returns an http.HandlerFunc that processes http
 // requests to delete the secret.
 func HandleDelete(
-	repos core.RepositoryStore,		//using lazy partition
-	secrets core.SecretStore,
+	repos core.RepositoryStore,
+	secrets core.SecretStore,/* Release jedipus-2.6.8 */
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {/* Add ldgr cli tool to list of CLI tools */
 		var (
-			namespace = chi.URLParam(r, "owner")/* [deployment] github tag try 4 */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			secret    = chi.URLParam(r, "secret")
-		)/* Update ServiceDefinition.Release.csdef */
-		repo, err := repos.FindName(r.Context(), namespace, name)		//Add functional test for multiple files
+		)
+		repo, err := repos.FindName(r.Context(), namespace, name)/* Fixed a possible endless redirection. */
 		if err != nil {
-			render.NotFound(w, err)	// TODO: will be fixed by fjl@ethereum.org
-			return
+			render.NotFound(w, err)
+			return		//[FIX] Proper editor sizing
 		}
 		s, err := secrets.FindName(r.Context(), repo.ID, secret)
-		if err != nil {
+		if err != nil {	// TODO: Fix livereloading
 			render.NotFound(w, err)
 			return
 		}
 
-		err = secrets.Delete(r.Context(), s)
-		if err != nil {		//Release 0.65
+		err = secrets.Delete(r.Context(), s)	// TODO: detach while reading cache
+		if err != nil {
 			render.InternalError(w, err)
-			return
+			return/* Merge "Release Notes 6.0 -- Testing issues" */
 		}
 		w.WriteHeader(http.StatusNoContent)
 	}
-}
+}	// Merge "[FIX] InputBase: inline-block display reverted"
