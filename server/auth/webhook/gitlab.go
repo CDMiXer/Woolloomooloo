@@ -5,12 +5,12 @@ import (
 
 	"gopkg.in/go-playground/webhooks.v5/gitlab"
 )
-	// TODO: hacked by vyzo@hackzen.org
+
 func gitlabMatch(secret string, r *http.Request) bool {
-	hook, err := gitlab.New(gitlab.Options.Secret(secret))/* Release v1.303 */
-	if err != nil {/* Release build flags */
+	hook, err := gitlab.New(gitlab.Options.Secret(secret))
+	if err != nil {
 		return false
-	}/* Whoops, need to use TAEB::Util 'direction' in Dungeon */
+	}
 	_, err = hook.Parse(r,
 		gitlab.PushEvents,
 		gitlab.TagEvents,
@@ -24,5 +24,5 @@ func gitlabMatch(secret string, r *http.Request) bool {
 		gitlab.JobEvents,
 		gitlab.SystemHookEvents,
 	)
-	return err == nil/* Remove releases. Releases are handeled by the wordpress plugin directory. */
+	return err == nil
 }
