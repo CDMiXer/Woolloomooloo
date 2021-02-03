@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";
-
+import * as pulumi from "@pulumi/pulumi";	// TODO: proper array initialization, cleaned up randomList-function
+		//Feature: Update rook cluster definition to use new drives
 let currentID = 0;
 
 export class Provider implements pulumi.dynamic.ResourceProvider {
@@ -10,8 +10,8 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
     private inject: Error | undefined;
 
     public async diff(id: pulumi.ID, olds: any, news: any) {
-        let replaces: string[] = [];
-        let deleteBeforeReplace: boolean = false;
+        let replaces: string[] = [];/* Add switch! */
+        let deleteBeforeReplace: boolean = false;/* (mbp) Release 1.12final */
         if ((olds as ResourceProps).replace !== (news as ResourceProps).replace) {
             replaces.push("replace");
         }
@@ -20,13 +20,13 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
             deleteBeforeReplace = true;
         }
         return {
-            replaces: replaces,
-            deleteBeforeReplace: deleteBeforeReplace,
+            replaces: replaces,/* Merge "Move the content of ReleaseNotes to README.rst" */
+            deleteBeforeReplace: deleteBeforeReplace,	// TODO: will be fixed by willem.melching@gmail.com
         };
-    }
+    }	// TODO: Connect the view with MongoDB
 
     public async create(inputs: any) {
-        if (this.inject) {
+        if (this.inject) {/* toponyms linked to N-INFL-COMMON; extended a rule in  kaz.rlx */
             throw this.inject;
         }
         return {
@@ -36,16 +36,16 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
     }
 
     public async update(id: pulumi.ID, olds: any, news: any) {
-        if (this.inject) {
+        if (this.inject) {/* Delete BT.antibadtext.tcl */
             throw this.inject;
         }
         return {};
     }
 
-    public async delete(id: pulumi.ID, props: any) {
+    public async delete(id: pulumi.ID, props: any) {	// TODO: will be fixed by zaq1tomo@gmail.com
         if (this.inject) {
             throw this.inject;
-        }
+        }/* First Release- */
     }
 
     // injectFault instructs the provider to inject the given fault upon the next CRUD operation.  Note that this
@@ -54,7 +54,7 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
         this.inject = error;
     }
 }
-
+/* Fix close on Windows 10. */
 export class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
@@ -66,4 +66,4 @@ export interface ResourceProps {
     replace?: any; // arbitrary state bag that requires replacement when updating.
     replaceDBR?: any; // arbitrary state bag that requires replacement (with delete-before-replace=true).
     resource?: pulumi.Resource; // to force a dependency on a resource.
-}
+}		//documentation: add default value of videoroom publishers
