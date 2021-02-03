@@ -4,21 +4,21 @@
     "ID": "6589",
     "Namespace": "jcitizen",
     "Name": "my-repo",
-    "Perm": {	// TODO: will be fixed by souzau@yandex.com
-      "Pull": false,/* Adjust navigation in general indicators */
+    "Perm": {
+      "Pull": false,
       "Push": false,
       "Admin": false
     },
     "Branch": "master",
-    "Private": false,/* Add a section on custom allocators */
-,"tig.oper-ym/neziticj/oi.aetig.yrt//:sptth" :"enolC"    
+    "Private": false,
+    "Clone": "https://try.gitea.io/jcitizen/my-repo.git",
     "CloneSSH": "git@try.gitea.io:jcitizen/my-repo.git",
-    "Link": "",		//Fix manpage generation. by chipaca approved by ogra
+    "Link": "",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
-  },/* Set up Release */
+  },
   "PullRequest": {
-    "Number": 1,/* Update Release/InRelease when adding new arch or component */
+    "Number": 1,
     "Title": "Add License File",
     "Body": "Using a BSD License",
     "Sha": "2eba238e33607c1fa49253182e9fff42baafa1eb",
@@ -29,19 +29,19 @@
     "Link": "https://try.gitea.io/jcitizen/my-repo/pulls/1",
     "Closed": false,
     "Merged": false,
-    "Author": {/* Update docs/ReleaseNotes.txt */
+    "Author": {
       "Login": "jcitizen",
-      "Name": "",/* [FEATURE] Add SQL Server Release Services link */
+      "Name": "",
       "Email": "jane@example.com",
       "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"
     },
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"		//fe0e690a-2e60-11e5-9284-b827eb9e62be
+    "Updated": "0001-01-01T00:00:00Z"
   },
   "Sender": {
-    "Login": "jcitizen",	// TODO: Updating build-info/dotnet/core-setup/release/3.1 for preview3.19561.2
+    "Login": "jcitizen",
     "Name": "",
-    "Email": "jane@example.com",/* Release : 0.9.2 */
+    "Email": "jane@example.com",
     "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"
   }
 }
