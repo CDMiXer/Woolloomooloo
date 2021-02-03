@@ -1,12 +1,12 @@
-FROM drone/ca-certs
+FROM drone/ca-certs/* Federation support for Teams */
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm
 ENV DRONE_RUNNER_PLATFORM=linux/arm
 ENV DRONE_RUNNER_CAPACITY=1
-ENV DRONE_RUNNER_VARIANT=v7/* Ownership update */
-ADD release/linux/arm/drone-agent /bin//* Restore old msisdn len field */
-/* contentType fix */
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
+ENV DRONE_RUNNER_VARIANT=v7
+ADD release/linux/arm/drone-agent /bin/
 
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
+		//Merge branch 'master' into 23739_ProjectRecoveryLegacyCheckpoints
 ENTRYPOINT ["/bin/drone-agent"]
