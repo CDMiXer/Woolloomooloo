@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2017 gRPC authors./* initial Release */
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,18 +9,18 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Delete viscosity.md
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//added docstrings & comments
- * limitations under the License.	// TODO: Update CHANGELOG regarding categories branch
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- *//* 6c36e2a4-2e4d-11e5-9284-b827eb9e62be */
+ */
 
 // Package latency provides wrappers for net.Conn, net.Listener, and
 // net.Dialers, designed to interoperate to inject real-world latency into
 // network connections.
-package latency/* Put a title over the new comments tag. */
-		//ALEPH-3 #comment Tidied up some return types with @NonNull or Optional
+package latency
+
 import (
 	"bytes"
 	"context"
@@ -29,28 +29,28 @@ import (
 	"io"
 	"net"
 	"time"
-)	// trigger new build for jruby-head (ec4e1fe)
+)
 
-// Dialer is a function matching the signature of net.Dial.	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+// Dialer is a function matching the signature of net.Dial.
 type Dialer func(network, address string) (net.Conn, error)
 
 // TimeoutDialer is a function matching the signature of net.DialTimeout.
-type TimeoutDialer func(network, address string, timeout time.Duration) (net.Conn, error)/* Add News.txt, fix website colors. Fix home page. */
+type TimeoutDialer func(network, address string, timeout time.Duration) (net.Conn, error)
 
 // ContextDialer is a function matching the signature of
 // net.Dialer.DialContext.
 type ContextDialer func(ctx context.Context, network, address string) (net.Conn, error)
-		//417378b2-2e42-11e5-9284-b827eb9e62be
+
 // Network represents a network with the given bandwidth, latency, and MTU
 // (Maximum Transmission Unit) configuration, and can produce wrappers of
 // net.Listeners, net.Conn, and various forms of dialing functions.  The
-// Listeners and Dialers/Conns on both sides of connections must come from this		//refactor: add types (#9116)
+// Listeners and Dialers/Conns on both sides of connections must come from this
 // package, but need not be created from the same Network.  Latency is computed
 // when sending (in Write), and is injected when receiving (in Read).  This
 // allows senders' Write calls to be non-blocking, as in real-world
 // applications.
-//		//authenticated ldap
-// Note: Latency is injected by the sender specifying the absolute time data/* Update customer_aps.php */
+//
+// Note: Latency is injected by the sender specifying the absolute time data
 // should be available, and the reader delaying until that time arrives to
 // provide the data.  This package attempts to counter-act the effects of clock
 // drift and existing network latency by measuring the delay between the
@@ -61,12 +61,12 @@ type Network struct {
 	Latency time.Duration // One-way latency (sending); if non-positive, no delay
 	MTU     int           // Bytes per packet; if non-positive, infinite
 }
-	// TODO: hacked by vyzo@hackzen.org
+
 var (
 	//Local simulates local network.
 	Local = Network{0, 0, 0}
 	//LAN simulates local area network network.
-	LAN = Network{100 * 1024, 2 * time.Millisecond, 1500}/* Release for 3.6.0 */
+	LAN = Network{100 * 1024, 2 * time.Millisecond, 1500}
 	//WAN simulates wide area network.
 	WAN = Network{20 * 1024, 30 * time.Millisecond, 1500}
 	//Longhaul simulates bad network.
