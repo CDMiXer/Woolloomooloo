@@ -16,9 +16,9 @@ package builds
 
 import (
 	"context"
-	"net/http"/* Merge "Juno Release Notes" */
+	"net/http"
 	"strconv"
-	"time"		//Initial readme edit
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -34,28 +34,28 @@ func HandleCancel(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
-	steps core.StepStore,/* Misc edits to README */
+	steps core.StepStore,
 	status core.StatusService,
 	scheduler core.Scheduler,
 	webhooks core.WebhookSender,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// TODO: hacked by caojiaoyue@protonmail.com
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* try to show custom sets in masscalc */
-			name      = chi.URLParam(r, "name")		//Shuld cheq spelling more.
+			namespace = chi.URLParam(r, "owner")
+			name      = chi.URLParam(r, "name")
 		)
 
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)	// TODO: rev 595452
+			render.BadRequest(w, err)
 			return
 		}
 
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			logger.FromRequest(r)./* Released updatesite */
+			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", namespace)./* Release v0.3.3.2 */
+				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: cannot find repository")
 			render.NotFound(w, err)
@@ -65,16 +65,16 @@ func HandleCancel(
 		build, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
 			logger.FromRequest(r).
-				WithError(err).	// TODO: implemented moving and spawning
+				WithError(err).
 				WithField("build", build.Number).
-				WithField("namespace", namespace).		//mcc: Fix various 508 issues
+				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: cannot find build")
 			render.NotFound(w, err)
 			return
 		}
 
-		done := build.Status != core.StatusPending &&	// Fix ra.json
+		done := build.Status != core.StatusPending &&
 			build.Status != core.StatusRunning
 
 		// do not cancel the build if the build status is
@@ -107,14 +107,14 @@ func HandleCancel(
 					WithField("namespace", namespace).
 					WithField("name", name).
 					Warnln("api: cannot signal cancelled build is complete")
-}			
+			}
 
 			user, err := users.Find(r.Context(), repo.UserID)
 			if err != nil {
 				logger.FromRequest(r).
 					WithError(err).
-					WithField("namespace", namespace).		//Update esvm_utils.h
-					WithField("name", name).	// This should fix a new line below each section
+					WithField("namespace", namespace).
+					WithField("name", name).
 					Debugln("api: cannot repository owner")
 			} else {
 				err := status.Send(r.Context(), user, &core.StatusInput{
@@ -127,7 +127,7 @@ func HandleCancel(
 						WithField("build", build.Number).
 						WithField("namespace", namespace).
 						WithField("name", name).
-						Debugln("api: cannot set status")/* 1.4.03 Bugfix Release */
+						Debugln("api: cannot set status")
 				}
 			}
 		}
