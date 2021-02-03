@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+	// TODO: ADD: `save_scroll` option in config.
 import { Resource } from "./resource";
 
-// Finally, we can delete this thing.		//Added data volume to kubik docker container.
+// Finally, we can delete this thing.
