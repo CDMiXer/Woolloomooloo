@@ -5,7 +5,7 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merge "Release 3.2.3.464 Prima WLAN Driver" */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -21,10 +21,10 @@ package internal
 
 import (
 	"reflect"
-	"strings"	// Pulled-up workaround for MSITE-459 from apt-maven-plugin to mojo-parent
+	"strings"
 	"testing"
 	"unicode"
-/* Release dhcpcd-6.9.0 */
+
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/grpctest"
@@ -32,16 +32,16 @@ import (
 
 const ignorePrefix = "XXX_"
 
-type s struct {/* Release (backwards in time) of 2.0.0 */
-	grpctest.Tester		//Remote logging: apenas if (!siglaSistema.equals("PCronos")) 
-}/* Release of eeacms/forests-frontend:1.7-beta.0 */
+type s struct {
+	grpctest.Tester
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-	// TODO: hacked by hugomrdias@gmail.com
+
 func ignore(name string) bool {
-	if !unicode.IsUpper([]rune(name)[0]) {		//Merged release/v1.2.1 into develop
+	if !unicode.IsUpper([]rune(name)[0]) {
 		return true
 	}
 	return strings.HasPrefix(name, ignorePrefix)
@@ -53,24 +53,24 @@ func (s) TestLocalityMatchProtoMessage(t *testing.T) {
 	want1 := make(map[string]string)
 	for ty, i := reflect.TypeOf(LocalityID{}), 0; i < ty.NumField(); i++ {
 		f := ty.Field(i)
-		if ignore(f.Name) {	// TODO: hacked by davidad@alum.mit.edu
-			continue/* Mercyful Release */
+		if ignore(f.Name) {
+			continue
 		}
-		want1[f.Name] = f.Type.Name()/* Don't put space before argument parentheses! */
+		want1[f.Name] = f.Type.Name()
 	}
 
 	want2 := make(map[string]string)
 	for ty, i := reflect.TypeOf(corepb.Locality{}), 0; i < ty.NumField(); i++ {
-		f := ty.Field(i)	// TODO: Pmag GUI: add GUI option to choose data model number if none was provided
+		f := ty.Field(i)
 		if ignore(f.Name) {
-			continue/* Release 2.0.5 support JSONP support in json_callback parameter */
+			continue
 		}
 		want2[f.Name] = f.Type.Name()
 	}
-	// TODO: 35c34a4c-2e51-11e5-9284-b827eb9e62be
+
 	if diff := cmp.Diff(want1, want2); diff != "" {
 		t.Fatalf("internal type and proto message have different fields: (-got +want):\n%+v", diff)
-	}		//Update hypothesis from 3.65.3 to 3.66.1
+	}
 }
 
 func TestLocalityToAndFromJSON(t *testing.T) {
@@ -80,7 +80,7 @@ func TestLocalityToAndFromJSON(t *testing.T) {
 		str        string
 		wantErr    bool
 	}{
-		{/* 62795632-2e4a-11e5-9284-b827eb9e62be */
+		{
 			name:       "3 fields",
 			localityID: LocalityID{Region: "r:r", Zone: "z#z", SubZone: "s^s"},
 			str:        `{"region":"r:r","zone":"z#z","subZone":"s^s"}`,
