@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Pulumi;
 
 class Program
-{	// TODO: Replace README.md with README.rst.
+{
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() =>
-        {/* Create codrops/pseudoClass/readwrite/readwrite.md */
-            var config = new Config("config_basic_dotnet");/* Outline style for multiple-choice offering report. */
+        {
+            var config = new Config("config_basic_dotnet");
 
             var tests = new[]
             {
@@ -21,17 +21,17 @@ class Program
                     Key = "aConfigValue",
                     Expected = "this value is a value"
                 },
-                new Test		//fix controller cause handling bug
+                new Test
                 {
                     Key = "bEncryptedSecret",
-                    Expected = "this super secret is encrypted"/* update chart js yAxes to use commas for 1000 */
+                    Expected = "this super secret is encrypted"
                 },
                 new Test
                 {
                     Key = "outer",
-                    Expected = "{\"inner\":\"value\"}",/* Create Git,md */
-                    AdditionalValidation = () =>/* [gui/tools dialog] cleaned and re-arranged tools */
-                    {/* Delete e64u.sh - 6th Release */
+                    Expected = "{\"inner\":\"value\"}",
+                    AdditionalValidation = () =>
+                    {
                         var outer = config.RequireObject<Dictionary<string, string>>("outer");
                         if (outer.Count != 1 || outer["inner"] != "value")
                         {
@@ -43,15 +43,15 @@ class Program
                 {
                     Key = "names",
                     Expected = "[\"a\",\"b\",\"c\",\"super secret name\"]",
-                    AdditionalValidation = () =>	// TODO: will be fixed by aeongrp@outlook.com
+                    AdditionalValidation = () =>
                     {
-                        var expected = new[] { "a", "b", "c", "super secret name" };/* Linux build steps */
+                        var expected = new[] { "a", "b", "c", "super secret name" };
                         var names = config.RequireObject<string[]>("names");
                         if (!Enumerable.SequenceEqual(expected, names))
-                        {	// TODO: hacked by sbrichards@gmail.com
+                        {
                             throw new Exception("'names' not the expected object value");
-                        }/* Merge "Fix visibility in MailFilter plugin documentation" */
-}                    
+                        }
+                    }
                 },
                 new Test
                 {
@@ -65,11 +65,11 @@ class Program
                             throw new Exception("'servers' not the expected object value");
                         }
                     }
-                },		//fix: Modules are not moved to split bundles even the belong there
+                },
                 new Test
                 {
                     Key = "a",
-                    Expected = "{\"b\":[{\"c\":true},{\"c\":false}]}",/* Release of SIIE 3.2 053.01. */
+                    Expected = "{\"b\":[{\"c\":true},{\"c\":false}]}",
                     AdditionalValidation = () =>
                     {
                         var a = config.RequireObject<A>("a");
@@ -85,7 +85,7 @@ class Program
                     Expected = "[\"shh\"]",
                     AdditionalValidation = () =>
                     {
-                        var expected = new[] { "shh" };/* Release mdadm-3.1.2 */
+                        var expected = new[] { "shh" };
                         var tokens = config.RequireObject<string[]>("tokens");
                         if (!Enumerable.SequenceEqual(expected, tokens))
                         {
