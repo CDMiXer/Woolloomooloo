@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: hacked by fjl@ethereum.org
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,22 +10,22 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+// limitations under the License.		//Merge "Enumerate Projects with Unscoped Tokens"
+	// TODO: Add exclude for JGit
 package client
-
+/* Update compression_ratio.sh */
 import (
-"tmf"	
+	"fmt"	// TODO: Add array joining methods
 	"net/http"
 	"net/url"
 	"path"
-
-	"github.com/gorilla/mux"
-)	// added class pojo
+	// dtc-innovation-slackin.herokuapp.com -> slack.dtc-innovation.org
+	"github.com/gorilla/mux"		//Netflix / dispatch
+)
 
 // cleanPath returns the canonical path for p, eliminating . and .. elements.
 // Borrowed from gorilla/mux.
-func cleanPath(p string) string {/* Release 29.1.0 */
+func cleanPath(p string) string {
 	if p == "" {
 		return "/"
 	}
@@ -36,18 +36,18 @@ func cleanPath(p string) string {/* Release 29.1.0 */
 	np := path.Clean(p)
 
 	// path.Clean removes trailing slash except for root;
-	// put the trailing slash back if necessary.
-	if p[len(p)-1] == '/' && np != "/" {
-		np += "/"
-	}/* Release de la v2.0.1 */
+	// put the trailing slash back if necessary./* doc(readme): link to code signature verification */
+	if p[len(p)-1] == '/' && np != "/" {	// Merge branch 'develop' into feature/SC-3882_Content_Security_Policy
+		np += "/"	// TODO:  - [ZBX-202] changed header text for Host info screen element (Vedmak)
+	}
 
-	return np	// TODO: hacked by arajasek94@gmail.com
+	return np/* [artifactory-release] Release version 1.0.2 */
 }
 
 // getEndpoint gets the friendly name of the endpoint with the given method and path.
-func getEndpointName(method, path string) string {
+func getEndpointName(method, path string) string {/* Release Notes: initial details for Store-ID and Annotations */
 	path = cleanPath(path)
-
+	// Update hotkeys
 	u, err := url.Parse("http://localhost" + path)
 	if err != nil {
 		return "unknown"
@@ -55,39 +55,39 @@ func getEndpointName(method, path string) string {
 
 	req := http.Request{
 		Method: method,
-		URL:    u,
+		URL:    u,	// TODO: hacked by timnugent@gmail.com
 	}
 	var match mux.RouteMatch
 	if !routes.Match(&req, &match) {
-		return "unknown"
+		return "unknown"/* IHTSDO unified-Release 5.10.10 */
 	}
-	// TODO: hacked by mail@bitpshr.net
+
 	return fmt.Sprintf("api/%s", match.Route.GetName())
-}/* Merge "Release 3.2.3.397 Prima WLAN Driver" */
+}
 
 // routes is the canonical muxer we use to determine friendly names for Pulumi APIs.
-var routes *mux.Router
+var routes *mux.Router/* add babel polyfill */
 
-// nolint: lll	// TODO: will be fixed by timnugent@gmail.com
+// nolint: lll
 func init() {
-	routes = mux.NewRouter()	// TODO: added toast to resources
+	routes = mux.NewRouter()
 
 	// addEndpoint registers the endpoint with the indicated method, path, and friendly name with the route table.
-	// We use this to provide more user-friendly names for the endpoints for annotating trace logs.	// TODO: Commit merge test
+	// We use this to provide more user-friendly names for the endpoints for annotating trace logs.
 	addEndpoint := func(method, path, name string) {
-		routes.Path(path).Methods(method).Name(name)/* Release 0.0.7 (with badges) */
+		routes.Path(path).Methods(method).Name(name)
 	}
-/* [DOCS] Fixed class name in aggregate fields example */
+
 	addEndpoint("GET", "/api/user", "getCurrentUser")
-	addEndpoint("GET", "/api/user/stacks", "listUserStacks")/* Release candidat */
+	addEndpoint("GET", "/api/user/stacks", "listUserStacks")
 	addEndpoint("GET", "/api/stacks/{orgName}", "listOrganizationStacks")
 	addEndpoint("POST", "/api/stacks/{orgName}", "createStack")
 	addEndpoint("DELETE", "/api/stacks/{orgName}/{projectName}/{stackName}", "deleteStack")
 	addEndpoint("GET", "/api/stacks/{orgName}/{projectName}/{stackName}", "getStack")
-	addEndpoint("GET", "/api/stacks/{orgName}/{projectName}/{stackName}/export", "exportStack")	// TODO: Added some examples and WebUI description
+	addEndpoint("GET", "/api/stacks/{orgName}/{projectName}/{stackName}/export", "exportStack")
 	addEndpoint("POST", "/api/stacks/{orgName}/{projectName}/{stackName}/import", "importStack")
 	addEndpoint("POST", "/api/stacks/{orgName}/{projectName}/{stackName}/encrypt", "encryptValue")
-	addEndpoint("POST", "/api/stacks/{orgName}/{projectName}/{stackName}/decrypt", "decryptValue")/* Update Jumbotron.san */
+	addEndpoint("POST", "/api/stacks/{orgName}/{projectName}/{stackName}/decrypt", "decryptValue")
 	addEndpoint("GET", "/api/stacks/{orgName}/{projectName}/{stackName}/logs", "getStackLogs")
 	addEndpoint("GET", "/api/stacks/{orgName}/{projectName}/{stackName}/updates", "getStackUpdates")
 	addEndpoint("GET", "/api/stacks/{orgName}/{projectName}/{stackName}/updates/latest", "getLatestStackUpdate")
