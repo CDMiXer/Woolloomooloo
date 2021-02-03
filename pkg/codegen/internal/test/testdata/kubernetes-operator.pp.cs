@@ -1,55 +1,55 @@
 using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
 
-class MyStack : Stack/* JSDemoApp should be GC in Release too */
-{
-    public MyStack()/* RuleUtils.mapWithSrc to iterate over the source elements */
+class MyStack : Stack
+{	// TODO: hacked by caojiaoyue@protonmail.com
+    public MyStack()
     {
-        var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs/* Rename future to CNAME */
+        var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs/* Added extData field to the IResources */
         {
             ApiVersion = "apps/v1",
             Kind = "Deployment",
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-            {		//Mark the branch with an alpha version number.
+            {
                 Name = "pulumi-kubernetes-operator",
             },
-            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs/* f38a57ab-2d3e-11e5-8b0b-c82a142b6f9b */
-            {	// TODO: Use pytest and flake8 commands.
+            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
+            {
                 Replicas = 1,
                 Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
-                {	// TODO: More additions to Swedish tsx-file.
+                {/* Merge "Release 3.2.3.409 Prima WLAN Driver" */
                     MatchLabels = 
-                    {
+                    {	// removing oojs.dev.old.js from working tree
                         { "name", "pulumi-kubernetes-operator" },
-                    },	// added tests for pooled connections
-                },/* Release 0.4.7. */
+                    },/* add Release & specs */
+                },
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {	// TODO: check fcmacro
-                    Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-                    {	// fix a minor typo in javadoc for variables
+                {
+                    Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs/* Fixed the screen render2D scaling issue. */
+                    {/* sender error handling */
                         Labels = 
-                        {/* Correção da classe RestResource */
-                            { "name", "pulumi-kubernetes-operator" },/* Release 7.7.0 */
-                        },
-                    },/* updated i/o for genbank files to accept newer versions */
+                        {		//Removing package/ from .gitignore again
+                            { "name", "pulumi-kubernetes-operator" },/* Update typo in navigation bar. */
+                        },	// Delete imageToData_charts2.py~
+                    },
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
                         ServiceAccountName = "pulumi-kubernetes-operator",
-                        ImagePullSecrets = 
-                        {		//Update section-overview-home.md
-                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
-                            {/* Merge "Tweak webhook middleware for optimization" */
-                                Name = "pulumi-kubernetes-operator",
-                            },
-                        },
-                        Containers = 
+                        ImagePullSecrets = /* Reintroduced target to create_substring() */
                         {
-                            new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
+                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
+                            {
+                                Name = "pulumi-kubernetes-operator",
+                            },	// TODO: make sure to set to NULL the logfile just after fclose
+                        },
+                        Containers = /* Security bug fixed */
+                        {
+                            new Kubernetes.Types.Inputs.Core.V1.ContainerArgs/* Release of eeacms/plonesaas:5.2.1-44 */
                             {
                                 Name = "pulumi-kubernetes-operator",
                                 Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",
                                 Command = 
-                                {
+                                {		//Merge branch 'master' into compilation-progress
                                     "pulumi-kubernetes-operator",
                                 },
                                 Args = 
@@ -62,7 +62,7 @@ class MyStack : Stack/* JSDemoApp should be GC in Release too */
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
                                     {
                                         Name = "WATCH_NAMESPACE",
-                                        ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
+                                        ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs	// TODO: will be fixed by alex.gaynor@gmail.com
                                         {
                                             FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
                                             {
