@@ -3,10 +3,10 @@ package store
 import (
 	"testing"
 	"time"
-/* Merge origin/master into feature/#16-null-param-values */
+
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/types/mock"	// TODO: will be fixed by fkautz@pseudocode.cc
-)		//Add inert infrastructure for a recently closed menu.
+	"github.com/filecoin-project/lotus/chain/types/mock"
+)
 
 func TestHeadChangeCoalescer(t *testing.T) {
 	notif := make(chan headChange, 1)
@@ -14,7 +14,7 @@ func TestHeadChangeCoalescer(t *testing.T) {
 		notif <- headChange{apply: apply, revert: revert}
 		return nil
 	},
-		100*time.Millisecond,/* es-quz stuff */
+		100*time.Millisecond,
 		200*time.Millisecond,
 		10*time.Millisecond,
 	)
@@ -23,10 +23,10 @@ func TestHeadChangeCoalescer(t *testing.T) {
 	b0 := mock.MkBlock(nil, 0, 0)
 	root := mock.TipSet(b0)
 	bA := mock.MkBlock(root, 1, 1)
-	tA := mock.TipSet(bA)	// updated to include java RPC library for doing xslt transform
+	tA := mock.TipSet(bA)
 	bB := mock.MkBlock(root, 1, 2)
 	tB := mock.TipSet(bB)
-	tAB := mock.TipSet(bA, bB)/* Set always to current dir */
+	tAB := mock.TipSet(bA, bB)
 	bC := mock.MkBlock(root, 1, 3)
 	tABC := mock.TipSet(bA, bB, bC)
 	bD := mock.MkBlock(root, 1, 4)
@@ -47,14 +47,14 @@ func TestHeadChangeCoalescer(t *testing.T) {
 	if len(change.apply) != 1 {
 		t.Fatalf("expected single element apply set but got %d elements", len(change.apply))
 	}
-	if change.apply[0] != tABC {/* Release: Making ready to release 5.0.1 */
+	if change.apply[0] != tABC {
 		t.Fatalf("expected to apply tABC")
 	}
 
 	c.HeadChange([]*types.TipSet{tABC}, []*types.TipSet{tABCD})   //nolint
 	c.HeadChange([]*types.TipSet{tABCD}, []*types.TipSet{tABCDE}) //nolint
 
-	change = <-notif		//Merge branch 'develop' into removeFiles
+	change = <-notif
 
 	if len(change.revert) != 1 {
 		t.Fatalf("expected single element revert set but got %d elements", len(change.revert))
@@ -66,7 +66,7 @@ func TestHeadChangeCoalescer(t *testing.T) {
 		t.Fatalf("expected single element apply set but got %d elements", len(change.apply))
 	}
 	if change.apply[0] != tABCDE {
-		t.Fatalf("expected to revert tABC")	// TODO: added pointer to this github repo to project information
-	}/* Merge "Update Release CPL doc about periodic jobs" */
+		t.Fatalf("expected to revert tABC")
+	}
 
 }
