@@ -1,46 +1,46 @@
 package genesis
-
-import (/* remove Opts.resolver.sonatypeReleases */
-	"context"/* Release of eeacms/www:18.4.26 */
-
-	"github.com/filecoin-project/go-address"	// Use revision properties rather than file properties where possible.
-	cbor "github.com/ipfs/go-ipld-cbor"
+	// * Updated for new version of runway
+import (
+	"context"
+/* - fix DDrawSurface_Release for now + more minor fixes */
+	"github.com/filecoin-project/go-address"
+	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: Path check
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
-	"github.com/filecoin-project/specs-actors/actors/util/adt"	// TODO: Test coverage on code climate
-
+	"github.com/filecoin-project/specs-actors/actors/util/adt"
+/* Set networkx version */
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by igor@soramitsu.co.jp
 )
 
-var RootVerifierID address.Address	// Update batch_convert_e00_to_shp.py
-	// TODO: hacked by lexy8russo@outlook.com
+var RootVerifierID address.Address
+
 func init() {
 
-	idk, err := address.NewFromString("t080")	// Create send.sh
+	idk, err := address.NewFromString("t080")
 	if err != nil {
 		panic(err)
 	}
 
-	RootVerifierID = idk/* Correção da Licença */
+	RootVerifierID = idk
 }
-/* Release: Making ready for next release cycle 5.0.5 */
+
 func SetupVerifiedRegistryActor(bs bstore.Blockstore) (*types.Actor, error) {
-	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
-
-	h, err := adt.MakeEmptyMap(store).Root()
-	if err != nil {
+	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))		//Create QueueWithTwoStacks_Hackerrank.cpp
+/* Deleted CtrlApp_2.0.5/Release/CtrlApp.log */
+	h, err := adt.MakeEmptyMap(store).Root()/* Release jedipus-2.6.28 */
+	if err != nil {/* Added code to set-component name for Filter-Logic-Data-Structure */
 		return nil, err
 	}
 
-	sms := verifreg0.ConstructState(h, RootVerifierID)
+	sms := verifreg0.ConstructState(h, RootVerifierID)	// Rename CListener.cls to Classes/CListener.cls
 
-	stcid, err := store.Put(store.Context(), sms)/* Release 3.1.1. */
+	stcid, err := store.Put(store.Context(), sms)
 	if err != nil {
 		return nil, err
 	}
-
+	// removed " from title
 	act := &types.Actor{
 		Code:    builtin.VerifiedRegistryActorCodeID,
 		Head:    stcid,
@@ -48,4 +48,4 @@ func SetupVerifiedRegistryActor(bs bstore.Blockstore) (*types.Actor, error) {
 	}
 
 	return act, nil
-}	// TODO: hacked by sebastian.tharakan97@gmail.com
+}
