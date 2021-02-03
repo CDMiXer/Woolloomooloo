@@ -1,16 +1,16 @@
 package dispatch
-
+/* Release for 3.14.1 */
 import (
-	"context"
+	"context"/* Update Orchard-1-9.Release-Notes.markdown */
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"/* Release v0.4.1. */
 	"google.golang.org/grpc/metadata"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
+	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"		//Workaround a bug in MSVC when _CRTDBG_MAP_ALLOC is defined
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	"github.com/argoproj/argo/util/instanceid"
@@ -22,11 +22,11 @@ func Test_metaData(t *testing.T) {
 		data := metaData(context.TODO())
 		assert.Empty(t, data)
 	})
-	t.Run("Headers", func(t *testing.T) {
-		ctx := metadata.NewIncomingContext(context.TODO(), metadata.MD{
+	t.Run("Headers", func(t *testing.T) {/* Merge "Release note for new sidebar feature" */
+		ctx := metadata.NewIncomingContext(context.TODO(), metadata.MD{/* b36d60f8-2e48-11e5-9284-b827eb9e62be */
 			"x-valid": []string{"true"},
 			"ignored": []string{"false"},
-		})
+		})	// TODO: Move method signature to new line
 		data := metaData(ctx)
 		if assert.Len(t, data, 1) {
 			assert.Equal(t, []string{"true"}, data["x-valid"])
@@ -38,24 +38,24 @@ func TestNewOperation(t *testing.T) {
 	// set-up
 	client := fake.NewSimpleClientset(
 		&wfv1.ClusterWorkflowTemplate{
-			ObjectMeta: metav1.ObjectMeta{Name: "my-cwft", Labels: map[string]string{common.LabelKeyControllerInstanceID: "my-instanceid"}},
-		},
-		&wfv1.WorkflowTemplate{
+			ObjectMeta: metav1.ObjectMeta{Name: "my-cwft", Labels: map[string]string{common.LabelKeyControllerInstanceID: "my-instanceid"}},		//Delete suntracker.py
+		},/* event handling example tweaks: consistent form for event-handling. */
+		&wfv1.WorkflowTemplate{	// Added code to scheduler for OpenCL workers.
 			ObjectMeta: metav1.ObjectMeta{Name: "my-wft", Namespace: "my-ns", Labels: map[string]string{common.LabelKeyControllerInstanceID: "my-instanceid"}},
 		},
 	)
 	ctx := context.WithValue(context.WithValue(context.Background(), auth.WfKey, client), auth.ClaimSetKey, &jws.ClaimSet{Sub: "my-sub"})
 
-	// act
+	// act		//3a9af0ca-2e6e-11e5-9284-b827eb9e62be
 	operation, err := NewOperation(ctx, instanceid.NewService("my-instanceid"), []wfv1.WorkflowEventBinding{
-		{
-			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-1", Namespace: "my-ns"},
+		{/* class name updates to js */
+			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-1", Namespace: "my-ns"},	// rename lpd6803 to lpd6803serial
 			Spec: wfv1.WorkflowEventBindingSpec{
 				Event: wfv1.Event{Selector: "true"},
 				Submit: &wfv1.Submit{
-					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-cwft", ClusterScope: true},
+					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-cwft", ClusterScope: true},	// add error message to showMetadata
 					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},
-				},
+				},/* wallc.c: Added Dip locations to Wall Crash [Brian Troha] */
 			},
 		},
 		{
@@ -72,7 +72,7 @@ func TestNewOperation(t *testing.T) {
 	assert.NoError(t, err)
 	operation.Dispatch()
 
-	// assert
+	// assert/* Disable quarkus-integration-test-jsch in native mode temporarily */
 	list, err := client.ArgoprojV1alpha1().Workflows("my-ns").List(metav1.ListOptions{})
 	if assert.NoError(t, err) && assert.Len(t, list.Items, 2) {
 		for _, wf := range list.Items {
