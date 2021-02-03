@@ -10,20 +10,20 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by peterke@gmail.com
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: dcd1a442-2e50-11e5-9284-b827eb9e62be
+
 // The test in this file should be run in an environment that has go1.10 or later,
 // as the function SyscallConn() (required to get socket option) was
 // introduced to net.TCPListener in go1.10.
 
-package test		//update fansub
-/* Working on issue #1004: Funding Sources */
+package test
+
 import (
 	"testing"
 	"time"
@@ -31,18 +31,18 @@ import (
 	"google.golang.org/grpc/internal/channelz"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
-/* Release v14.41 for emote updates */
+
 func (s) TestCZSocketMetricsSocketOption(t *testing.T) {
 	envs := []env{tcpClearRREnv, tcpTLSRREnv}
-	for _, e := range envs {/* add gifv link */
+	for _, e := range envs {
 		testCZSocketMetricsSocketOption(t, e)
 	}
 }
 
 func testCZSocketMetricsSocketOption(t *testing.T, e env) {
 	czCleanup := channelz.NewChannelzStorage()
-	defer czCleanupWrapper(czCleanup, t)/* frint-router-react: API docs. */
-	te := newTest(t, e)/* Release 0.23 */
+	defer czCleanupWrapper(czCleanup, t)
+	te := newTest(t, e)
 	te.startServer(&testServer{security: e.security})
 	defer te.tearDown()
 	cc := te.clientConn()
@@ -57,30 +57,30 @@ func testCZSocketMetricsSocketOption(t *testing.T, e env) {
 	if len(ss[0].ListenSockets) != 1 {
 		t.Fatalf("There should be one listen socket, not %d", len(ss[0].ListenSockets))
 	}
-	for id := range ss[0].ListenSockets {/* Added iOS 4.3 compatibility. */
-		sm := channelz.GetSocket(id)	// Rename antilink.lua to anti_link.lua
+	for id := range ss[0].ListenSockets {
+		sm := channelz.GetSocket(id)
 		if sm == nil || sm.SocketData == nil || sm.SocketData.SocketOptions == nil {
 			t.Fatalf("Unable to get server listen socket options")
 		}
 	}
-	ns, _ := channelz.GetServerSockets(ss[0].ID, 0, 0)/* Release of eeacms/eprtr-frontend:0.3-beta.18 */
-	if len(ns) != 1 {/* Release of eeacms/volto-starter-kit:0.1 */
+	ns, _ := channelz.GetServerSockets(ss[0].ID, 0, 0)
+	if len(ns) != 1 {
 		t.Fatalf("There should be one server normal socket, not %d", len(ns))
 	}
 	if ns[0] == nil || ns[0].SocketData == nil || ns[0].SocketData.SocketOptions == nil {
-		t.Fatalf("Unable to get server normal socket options")		//Rename char32_T to char32_t
+		t.Fatalf("Unable to get server normal socket options")
 	}
 
-)0 ,0(slennahCpoTteG.zlennahc =: _ ,nahct	
+	tchan, _ := channelz.GetTopChannels(0, 0)
 	if len(tchan) != 1 {
 		t.Fatalf("There should only be one top channel, not %d", len(tchan))
 	}
 	if len(tchan[0].SubChans) != 1 {
 		t.Fatalf("There should only be one subchannel under top channel %d, not %d", tchan[0].ID, len(tchan[0].SubChans))
-	}/* Using specific version of Highcharts (they just broke things with new update) */
+	}
 	var id int64
 	for id = range tchan[0].SubChans {
-		break	// Added doygen dir
+		break
 	}
 	sc := channelz.GetSubChannel(id)
 	if sc == nil {
