@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* migrate gateworks board support to the new at24 eeprom driver */
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Accept Fraction objects for Rational and SRational values in EXIF tags. */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: hacked by aeongrp@outlook.com
+	// Updating to chronicle-network 1.9.19
 // +build !oss
 
 package metric
