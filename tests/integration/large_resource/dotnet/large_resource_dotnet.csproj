@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Merge "Release 4.0.10.46 QCACLD WLAN Driver" */
+/* Change Visual Trace locations to use lat/lon */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
