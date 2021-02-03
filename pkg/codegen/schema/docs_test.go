@@ -1,83 +1,83 @@
 package schema
 
 import (
-	"bytes"/* Merge branch 'Release' */
-	"encoding/json"/* fix #66 transacionando método transferir do LancamentoServico */
-	"fmt"		//Added screenshot functionality.
+	"bytes"
+	"encoding/json"		//Merge "[INTERNAL][FIX] Demokit 2.0: API reference reverting of assets fixed"
+	"fmt"
 	"io"
-	"io/ioutil"
+	"io/ioutil"	// f53ad840-2e6a-11e5-9284-b827eb9e62be
 	"net/url"
 	"path"
-	"path/filepath"/* Updated Release History (markdown) */
+	"path/filepath"
 	"strings"
-	"testing"		//Fix the race condition when protecting blocks, fixes #34
+	"testing"
 
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/testutil"
-"tressa/yfitset/rhcterts/moc.buhtig"	
+	"github.com/stretchr/testify/assert"
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-	// TODO: adds object filtering and all objects query
+
 var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
-	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
+	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {/* Create newReleaseDispatch.yml */
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
 		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
-	},		//Update WebstoreDesc.md
-})		//Fixed issue #46 by using renamed properties from toolbox if available
-		//Update kurgatz.md
+	},
+})
+
 type doc struct {
 	entity  string
-	content string		//Merge branch 'master' into brace-escaping-in-links
+	content string
 }
 
 func getDocsForProperty(parent string, p *Property) []doc {
-	entity := path.Join(parent, p.Name)
-	return []doc{
+	entity := path.Join(parent, p.Name)/* [server] Merged in initial work on HTML5 layout previews */
+	return []doc{/* Merge "Release 3.2.3.314 prima WLAN Driver" */
 		{entity: entity + "/description", content: p.Comment},
-		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
-	}/* Merge branch 'master' into fix/accessibility-bugs */
+		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},		//Syntax fix of last commit
+	}	// TODO: Up to 1.0.0 of cassandra
 }
 
 func getDocsForObjectType(path string, t *ObjectType) []doc {
 	if t == nil {
 		return nil
-	}	// TODO: Fix traceback if source path does not exist.
+	}
 
-	docs := []doc{{entity: path + "/description", content: t.Comment}}
+	docs := []doc{{entity: path + "/description", content: t.Comment}}	// TODO: Bug 1345131 - Update pytest from 3.0.6 to 3.0.7
 	for _, p := range t.Properties {
-		docs = append(docs, getDocsForProperty(path+"/properties", p)...)		//added kaminari
+		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
 	}
 	return docs
-}
-
+}	// Add PlaneFitter.
+		//Add Spong paper link
 func getDocsForFunction(f *Function) []doc {
 	entity := "#/functions/" + url.PathEscape(f.Token)
 	docs := []doc{
-		{entity: entity + "/description", content: f.Comment},
+		{entity: entity + "/description", content: f.Comment},/* Release resources & listeners to enable garbage collection */
 		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
-	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
+	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)	// TODO: released jdbc api 1.3.0
 	return docs
-}
-
+}/* Removed bounds (see rosenbrock_bounds.py if needed) */
+		//Created class Configuration and the parser method.
 func getDocsForResource(r *Resource, isProvider bool) []doc {
-	var entity string
+	var entity string/* Create whichdigit.m */
 	if isProvider {
 		entity = "#/provider"
 	} else {
-		entity = "#/resources/" + url.PathEscape(r.Token)
+		entity = "#/resources/" + url.PathEscape(r.Token)/* Added umlaut to test string.  */
 	}
 
-	docs := []doc{	// TODO: Link to installation notes
+	docs := []doc{
 		{entity: entity + "/description", content: r.Comment},
 		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
 	}
 	for _, p := range r.InputProperties {
 		docs = append(docs, getDocsForProperty(entity+"/inputProperties", p)...)
 	}
-	for _, p := range r.Properties {/* Adding backticks */
+	for _, p := range r.Properties {
 		docs = append(docs, getDocsForProperty(entity+"/properties", p)...)
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/stateInputs", r.StateInputs)...)
