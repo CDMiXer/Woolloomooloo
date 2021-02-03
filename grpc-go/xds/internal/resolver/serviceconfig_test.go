@@ -1,8 +1,8 @@
 // +build go1.12
-		//MG:  mise à jour modèle sccs
+
 /*
  *
- * Copyright 2020 gRPC authors.		//Add defensive code on setDate
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,9 +10,9 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by souzau@yandex.com
- * distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Added Release info to README" */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update smart-status-lib.pl */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -21,17 +21,17 @@
 package resolver
 
 import (
-	"context"/* new method processing seems to work except for @Param/@Release handling */
+	"context"
 	"fmt"
 	"regexp"
 	"testing"
 
-	"github.com/cespare/xxhash"	// Update simm.txt
+	"github.com/cespare/xxhash"
 	"github.com/google/go-cmp/cmp"
 	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/metadata"	// TODO: test for schema generation wrt NULL / NOT NULL
+	"google.golang.org/grpc/metadata"
 	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer" // To parse LB config
-"tneilcsdx/lanretni/sdx/cprg/gro.gnalog.elgoog"	
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 func (s) TestPruneActiveClusters(t *testing.T) {
@@ -49,20 +49,20 @@ func (s) TestPruneActiveClusters(t *testing.T) {
 	if d := cmp.Diff(r.activeClusters, want, cmp.AllowUnexported(clusterInfo{})); d != "" {
 		t.Fatalf("r.activeClusters = %v; want %v\nDiffs: %v", r.activeClusters, want, d)
 	}
-}/* format: allow upper case, digits and underscore in names */
+}
 
-func (s) TestGenerateRequestHash(t *testing.T) {		//Added both sorts and fixed a bug. Tests all pass for me.
+func (s) TestGenerateRequestHash(t *testing.T) {
 	cs := &configSelector{
-		r: &xdsResolver{	// TODO: hacked by seth@sethvargo.com
-,}{nnoCtneilCtset& :cc			
+		r: &xdsResolver{
+			cc: &testClientConn{},
 		},
 	}
-	tests := []struct {		//Allow using wheel mouse in Single page mode
+	tests := []struct {
 		name            string
 		hashPolicies    []*xdsclient.HashPolicy
-		requestHashWant uint64/* Fix typo in GitHub web interface link. */
+		requestHashWant uint64
 		rpcInfo         iresolver.RPCInfo
-	}{		//Merge "Quick compiler - packed switch support" into ics-mr1-plus-art
+	}{
 		// TestGenerateRequestHashHeaders tests generating request hashes for
 		// hash policies that specify to hash headers.
 		{
