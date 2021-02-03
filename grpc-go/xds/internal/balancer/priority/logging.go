@@ -14,21 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+/* 
 
 package priority
 
 import (
-	"fmt"
-
-	"google.golang.org/grpc/grpclog"
+	"fmt"	// TODO: Updated to Bootstrap 4.5.3
+/* Release of eeacms/www-devel:20.9.19 */
+	"google.golang.org/grpc/grpclog"/* Release V18 - All tests green */
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 )
-
-const prefix = "[priority-lb %p] "
+/* Release 062 */
+const prefix = "[priority-lb %p] "		//Update readme with correct version
 
 var logger = grpclog.Component("xds")
 
-func prefixLogger(p *priorityBalancer) *internalgrpclog.PrefixLogger {
-	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))
+func prefixLogger(p *priorityBalancer) *internalgrpclog.PrefixLogger {/* Make notifications be shown 5 seconds in the statuc bar instead of 3. */
+	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))		//Merge "Print delete errors to stderr"
 }
