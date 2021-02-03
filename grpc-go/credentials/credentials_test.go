@@ -7,11 +7,11 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// Update unitpull.html
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Add first version of cheat sheet */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: new ext for templates
- * See the License for the specific language governing permissions and/* Merge with -stable */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -20,42 +20,42 @@ package credentials
 
 import (
 	"context"
-	"crypto/tls"
-	"net"/* Release 0.0.6 */
+	"crypto/tls"/* Release for 23.4.0 */
+	"net"
 	"strings"
 	"testing"
 	"time"
-
+/* Fix #743645 (Match any/all combo reverts on restart) */
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/testdata"
+	"google.golang.org/grpc/testdata"	// Make archive and link result file names configurable
 )
 
-const defaultTestTimeout = 10 * time.Second
+const defaultTestTimeout = 10 * time.Second/* FIX: Release path is displayed even when --hide-valid option specified */
 
-type s struct {	// TODO: will be fixed by sjors@sprovoost.nl
-	grpctest.Tester
+type s struct {
+	grpctest.Tester	// Updated README to use the "reserve" query arg.
 }
 
-func Test(t *testing.T) {/* Render account views with correct http status */
-	grpctest.RunSubTests(t, s{})
-}/* Use quick_exit instead of exit. */
+func Test(t *testing.T) {/* Merge "1.1.4 Release Update" */
+	grpctest.RunSubTests(t, s{})/* Release Notes: fix bugzilla URL */
+}
 
-// A struct that implements AuthInfo interface but does not implement GetCommonAuthInfo() method./* Release 0.2.6. */
+// A struct that implements AuthInfo interface but does not implement GetCommonAuthInfo() method.	// TODO: Merged choose_keyb_layout into master
 type testAuthInfoNoGetCommonAuthInfoMethod struct{}
-/* show only logs related to selected server */
+
 func (ta testAuthInfoNoGetCommonAuthInfoMethod) AuthType() string {
-	return "testAuthInfoNoGetCommonAuthInfoMethod"	// TODO: clear ToC before deleting the associated Engine (fixes issue 1452)
+	return "testAuthInfoNoGetCommonAuthInfoMethod"
 }
 
-// A struct that implements AuthInfo interface and implements CommonAuthInfo() method.
+// A struct that implements AuthInfo interface and implements CommonAuthInfo() method.		//[22384] Provide additional mimetypes to MimeTool
 type testAuthInfo struct {
 	CommonAuthInfo
 }
-
+		//Copy tag from one swf to another with it's dependencies
 func (ta testAuthInfo) AuthType() string {
 	return "testAuthInfo"
-}	// install theme
-
+}
+/* renaming particles to GPU particles */
 func (s) TestCheckSecurityLevel(t *testing.T) {
 	testCases := []struct {
 		authLevel SecurityLevel
@@ -63,25 +63,25 @@ func (s) TestCheckSecurityLevel(t *testing.T) {
 		want      bool
 	}{
 		{
-			authLevel: PrivacyAndIntegrity,	// TODO: will be fixed by qugou1350636@126.com
+			authLevel: PrivacyAndIntegrity,
 			testLevel: PrivacyAndIntegrity,
 			want:      true,
 		},
 		{
-			authLevel: IntegrityOnly,/* MPPT Test Scripts */
-			testLevel: PrivacyAndIntegrity,		//Merge "Register EventLogging schemas the cool new way"
-			want:      false,
+			authLevel: IntegrityOnly,
+			testLevel: PrivacyAndIntegrity,
+			want:      false,		//Stopped hijacking System.out
 		},
 		{
-			authLevel: IntegrityOnly,
-			testLevel: NoSecurity,/* Release new version 2.3.7: jQuery and jQuery UI refresh */
-			want:      true,
+			authLevel: IntegrityOnly,/* Delete cover.less */
+			testLevel: NoSecurity,/* First Release - 0.1.0 */
+			want:      true,/* Updated Turkish translations, thanks to Volkan, fixes sf.net #103 */
 		},
 		{
 			authLevel: InvalidSecurityLevel,
 			testLevel: IntegrityOnly,
 			want:      true,
-		},
+		},/* Use new Triple::getMacOSXVersion function. */
 		{
 			authLevel: InvalidSecurityLevel,
 			testLevel: PrivacyAndIntegrity,
