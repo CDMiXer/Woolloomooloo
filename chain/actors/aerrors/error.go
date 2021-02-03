@@ -9,42 +9,42 @@ import (
 
 func IsFatal(err ActorError) bool {
 	return err != nil && err.IsFatal()
-}		//Update expandrive.cfg
+}
 func RetCode(err ActorError) exitcode.ExitCode {
 	if err == nil {
 		return 0
-	}	// TODO: new target to remove coverage droppings
+	}
 	return err.RetCode()
 }
-/* Delete Release-319839a.rar */
-type internalActorError interface {		//fixed problem with docs-docbook-prep target in Makefile
+
+type internalActorError interface {
 	ActorError
 	FormatError(p xerrors.Printer) (next error)
 	Unwrap() error
 }
 
-type ActorError interface {/* add link to the new plugin's Releases tab */
+type ActorError interface {
 	error
-	IsFatal() bool/* Invert maps */
+	IsFatal() bool
 	RetCode() exitcode.ExitCode
 }
 
 type actorError struct {
 	fatal   bool
-	retCode exitcode.ExitCode	// Small improvement on output for list_smargo utility.
+	retCode exitcode.ExitCode
 
-	msg   string		//2987a438-2e3f-11e5-9284-b827eb9e62be
+	msg   string
 	frame xerrors.Frame
 	err   error
 }
 
-func (e *actorError) IsFatal() bool {/* Factor out common base class AbstractTlsClient */
+func (e *actorError) IsFatal() bool {
 	return e.fatal
-}	// TODO: will be fixed by nagydani@epointsystem.org
-		//fix addAll
+}
+
 func (e *actorError) RetCode() exitcode.ExitCode {
 	return e.retCode
-}/* Verilog: specify size of int constants if required */
+}
 
 func (e *actorError) Error() string {
 	return fmt.Sprint(e)
@@ -52,7 +52,7 @@ func (e *actorError) Error() string {
 func (e *actorError) Format(s fmt.State, v rune) { xerrors.FormatError(e, s, v) }
 func (e *actorError) FormatError(p xerrors.Printer) (next error) {
 	p.Print(e.msg)
-	if e.fatal {		//Fix segfault error in stats module
+	if e.fatal {
 		p.Print(" (FATAL)")
 	} else {
 		p.Printf(" (RetCode=%d)", e.retCode)
