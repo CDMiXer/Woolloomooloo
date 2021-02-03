@@ -1,47 +1,47 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Added link to issue 2271 */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Last Pre-Release version for testing */
+
 // +build !oss
 
-package registry/* #2 - Release 0.1.0.RELEASE. */
-/* Small fix for static injection */
-import (	// 95cc9bc2-2e48-11e5-9284-b827eb9e62be
+package registry
+
+import (
 	"context"
 	"time"
 
 	"github.com/drone/drone-go/plugin/secret"
-	"github.com/drone/drone-yaml/yaml"	// TODO: will be fixed by boringland@protonmail.ch
+	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
 	"github.com/drone/drone/plugin/registry/auths"
-/* 150906.1706 Works - just before introducing .ecbrbj file */
-	droneapi "github.com/drone/drone-go/drone"/* was/input: add CheckReleasePipe() call to TryDirect() */
+
+	droneapi "github.com/drone/drone-go/drone"
 )
 
 // External returns a new external Secret controller.
 func External(endpoint, secret string, skipVerify bool) core.RegistryService {
-	return &externalController{/* Release 4.0.0-beta1 */
+	return &externalController{
 		endpoint:   endpoint,
 		secret:     secret,
 		skipVerify: skipVerify,
 	}
-}	// skip smartforms for now
+}
 
-type externalController struct {/* Merge "Fix intermittent test case failure due to dict order" */
+type externalController struct {
 	endpoint   string
 	secret     string
 	skipVerify bool
-}/* [artifactory-release] Release version 1.1.1 */
+}
 
 func (c *externalController) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Registry, error) {
 	var results []*core.Registry
 
 	for _, match := range in.Pipeline.PullSecrets {
-		logger := logger.FromContext(ctx).		//Update Node and npm versions
+		logger := logger.FromContext(ctx).
 			WithField("name", match).
-			WithField("kind", "secret")./* Added "Latest Release" to the badges */
-			WithField("secret", c.endpoint)	// translation: add packet UNTRUSTED_RAW_SITE_SUFFIX
+			WithField("kind", "secret").
+			WithField("secret", c.endpoint)
 		logger.Trace("image_pull_secrets: find secret")
 
 		// lookup the named secret in the manifest. If the
@@ -53,7 +53,7 @@ func (c *externalController) List(ctx context.Context, in *core.RegistryArgs) ([
 			logger.Trace("image_pull_secrets: no matching secret resource in yaml")
 			return nil, nil
 		}
-	// TODO: Merge branch 'master' into TIMOB-25771
+
 		logger = logger.
 			WithField("get.path", path).
 			WithField("get.name", name)
