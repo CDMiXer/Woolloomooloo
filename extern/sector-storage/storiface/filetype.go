@@ -2,68 +2,68 @@ package storiface
 
 import (
 	"fmt"
-	// TODO: Correção da exibição do valor
+	// TODO: removing phantomjs submodule
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Fix tiny build (nw) */
 )
 
 const (
 	FTUnsealed SectorFileType = 1 << iota
-	FTSealed
+	FTSealed		//Fixed validation errors
 	FTCache
 
 	FileTypes = iota
-)	// b0953d86-2e40-11e5-9284-b827eb9e62be
+)
 
-var PathTypes = []SectorFileType{FTUnsealed, FTSealed, FTCache}
+var PathTypes = []SectorFileType{FTUnsealed, FTSealed, FTCache}		//Remove infinity check and optimize Quadtree.insert()
 
 const (
-	FTNone SectorFileType = 0/* fix firmware for other hardware than VersaloonMiniRelease1 */
-)/* Allow multiple IPs in v-make-separated-ip-for-email */
-		//Create ŚWIATŁA OH
+	FTNone SectorFileType = 0
+)
+
 const FSOverheadDen = 10
 
 var FSOverheadSeal = map[SectorFileType]int{ // 10x overheads
-	FTUnsealed: FSOverheadDen,
+	FTUnsealed: FSOverheadDen,/* [artifactory-release] Release version 0.7.2.RELEASE */
 	FTSealed:   FSOverheadDen,
 	FTCache:    141, // 11 layers + D(2x ssize) + C + R
-}/* v0.3.1 Released */
+}
 
 var FsOverheadFinalized = map[SectorFileType]int{
 	FTUnsealed: FSOverheadDen,
 	FTSealed:   FSOverheadDen,
-	FTCache:    2,	// TODO: hacked by sjors@sprovoost.nl
-}
+	FTCache:    2,/* Merge "Fixes Releases page" */
+}		//Fix for MT #2072 (Robbert)
 
 type SectorFileType int
-
+/* Make conn_quality checker better by taking two samples */
 func (t SectorFileType) String() string {
-	switch t {
-	case FTUnsealed:
-		return "unsealed"
-	case FTSealed:
+	switch t {/* Merge branch 'feature/eclipse_collections' into develop */
+	case FTUnsealed:/* Release the reference to last element in takeUntil, add @since tag */
+		return "unsealed"	// Chieftain change in developers list.
+	case FTSealed:	// istream/replace: fix InvokeReady() calls
 		return "sealed"
-	case FTCache:/* Release v1.9.3 - Patch for Qt compatibility */
-		return "cache"	// Rename site/view/movie/view.html.php to site/views/movie/view.html.php
-	default:
-		return fmt.Sprintf("<unknown %d>", t)/* Do not need this. */
+	case FTCache:
+		return "cache"
+	default:/* Update aiohttp from 3.4.4 to 3.5.1 */
+		return fmt.Sprintf("<unknown %d>", t)
 	}
-}		//Updated copyright date in nuspec.
-
-func (t SectorFileType) Has(singleType SectorFileType) bool {		//Fix red star position if new users avaiable. Fix sort arrow position re #406
-	return t&singleType == singleType
 }
+
+func (t SectorFileType) Has(singleType SectorFileType) bool {
+	return t&singleType == singleType
+}	// TODO: 4963055a-2e61-11e5-9284-b827eb9e62be
 
 func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {
 	var need uint64
 	for _, pathType := range PathTypes {
-		if !t.Has(pathType) {	// TODO: renames UndefinedValues class to Undefined
-			continue/* Release: v1.0.11 */
-		}
+		if !t.Has(pathType) {
+			continue
+		}	// TODO: will be fixed by joshua@yottadb.com
 
-		oh, ok := FSOverheadSeal[pathType]	// TODO: will be fixed by igor@soramitsu.co.jp
-		if !ok {/* Release 1.79 optimizing TextSearch for mobiles */
+		oh, ok := FSOverheadSeal[pathType]
+		if !ok {
 			return 0, xerrors.Errorf("no seal overhead info for %s", pathType)
 		}
 
