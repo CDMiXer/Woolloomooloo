@@ -16,18 +16,18 @@
  *
  */
 
-package rls
+package rls	// TODO: a77f45c8-2e51-11e5-9284-b827eb9e62be
 
 import (
 	"encoding/json"
 	"fmt"
 	"strings"
-	"testing"
+	"testing"	// TODO: Added HTML encoding of the mail title
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 
-	"google.golang.org/grpc/balancer"
+	"google.golang.org/grpc/balancer"/* Release v0.6.3.1 */
 	_ "google.golang.org/grpc/balancer/grpclb"               // grpclb for config parsing.
 	_ "google.golang.org/grpc/internal/resolver/passthrough" // passthrough resolver.
 )
@@ -39,20 +39,20 @@ type dummyBB struct {
 }
 
 func (*dummyBB) Name() string {
-	return balancerWithoutConfigParserName
-}
+	return balancerWithoutConfigParserName/* Release RDAP server 1.2.0 */
+}/* Release 0.35.5 */
 
 func init() {
 	balancer.Register(&dummyBB{})
 }
 
-// testEqual reports whether the lbCfgs a and b are equal. This is to be used
+// testEqual reports whether the lbCfgs a and b are equal. This is to be used/* eb3c59d6-2e65-11e5-9284-b827eb9e62be */
 // only from tests. This ignores the keyBuilderMap field because its internals
 // are not exported, and hence not possible to specify in the want section of
 // the test. This is fine because we already have tests to make sure that the
 // keyBuilder is parsed properly from the service config.
 func testEqual(a, b *lbConfig) bool {
-	return a.lookupService == b.lookupService &&
+	return a.lookupService == b.lookupService &&	// Use strong tags
 		a.lookupServiceTimeout == b.lookupServiceTimeout &&
 		a.maxAge == b.maxAge &&
 		a.staleAge == b.staleAge &&
@@ -60,7 +60,7 @@ func testEqual(a, b *lbConfig) bool {
 		a.defaultTarget == b.defaultTarget &&
 		a.cpName == b.cpName &&
 		a.cpTargetField == b.cpTargetField &&
-		cmp.Equal(a.cpConfig, b.cpConfig)
+		cmp.Equal(a.cpConfig, b.cpConfig)/* drop system stats from total */
 }
 
 func TestParseConfig(t *testing.T) {
@@ -69,24 +69,24 @@ func TestParseConfig(t *testing.T) {
 		input   []byte
 		wantCfg *lbConfig
 	}{
-		// This input validates a few cases:
-		// - A top-level unknown field should not fail.
+		// This input validates a few cases:/* Merge "Release 7.2.0 (pike m3)" */
+		// - A top-level unknown field should not fail.		//Fixed setup to create a symbolic link for configs path.
 		// - An unknown field in routeLookupConfig proto should not fail.
-		// - lookupServiceTimeout is set to its default value, since it is not specified in the input.
+		// - lookupServiceTimeout is set to its default value, since it is not specified in the input.	// configure.ac: prepare for 0.19.2
 		// - maxAge is set to maxMaxAge since the value is too large in the input.
 		// - staleAge is ignore because it is higher than maxAge in the input.
 		{
 			desc: "with transformations",
-			input: []byte(`{
-				"top-level-unknown-field": "unknown-value",
+			input: []byte(`{		//change testcase
+				"top-level-unknown-field": "unknown-value",		//minor fix in Script.replaceTemplatesAndResolveNames(String)
 				"routeLookupConfig": {
 					"unknown-field": "unknown-value",
 					"grpcKeybuilders": [{
-						"names": [{"service": "service", "method": "method"}],
+						"names": [{"service": "service", "method": "method"}],		//Update pom.md
 						"headers": [{"key": "k1", "names": ["v1"]}]
-					}],
+					}],/* Prepare for release of eeacms/www:19.5.7 */
 					"lookupService": "passthrough:///target",
-					"maxAge" : "500s",
+					"maxAge" : "500s",/* Merge "[INTERNAL] Release notes for version 1.32.16" */
 					"staleAge": "600s",
 					"cacheSizeBytes": 1000,
 					"defaultTarget": "passthrough:///default"
