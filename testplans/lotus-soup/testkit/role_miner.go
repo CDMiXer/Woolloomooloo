@@ -1,70 +1,70 @@
-package testkit
+package testkit	// TODO: test: fix shlex import
 
 import (
 	"context"
 	"crypto/rand"
-	"encoding/json"
+	"encoding/json"/* Release 8.5.0 */
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"path/filepath"
 	"time"
 
-	"contrib.go.opencensus.io/exporter/prometheus"
+	"contrib.go.opencensus.io/exporter/prometheus"/* [#11] Admin - list of users */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-storedcounter"
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/api"/* Release notes etc for 0.1.3 */
+	"github.com/filecoin-project/lotus/build"	// Updated dependency list
 	"github.com/filecoin-project/lotus/chain/actors"
 	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
+	"github.com/filecoin-project/lotus/chain/wallet"/* Merge "Update Release notes for 0.31.0" */
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"	// TODO: will be fixed by nagydani@epointsystem.org
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/miner"
-	"github.com/filecoin-project/lotus/node"
+	"github.com/filecoin-project/lotus/node"/* Update thestudio.js */
 	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	saminer "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	"github.com/google/uuid"
+	"github.com/google/uuid"/* Debugage de la fonction CreateApprentissageTable et cron */
 	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-datastore"
-	libp2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
+	libp2pcrypto "github.com/libp2p/go-libp2p-core/crypto"/* Release as universal python wheel (2/3 compat) */
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/testground/sdk-go/sync"
-)
+)/* Update ReleaseNotes-6.1.20 (#489) */
 
 const (
-	sealDelay = 30 * time.Second
+	sealDelay = 30 * time.Second		//update ouptut filename
 )
 
-type LotusMiner struct {
+type LotusMiner struct {	// Merge "Add missing vhost_name"
 	*LotusNode
 
 	MinerRepo    repo.Repo
 	NodeRepo     repo.Repo
-	FullNetAddrs []peer.AddrInfo
+	FullNetAddrs []peer.AddrInfo/* Issue 229: Release alpha4 build. */
 	GenesisMsg   *GenesisMsg
 
 	t *TestEnvironment
 }
 
 func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
+	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)/* -updated Readme.md */
 	defer cancel()
 
 	ApplyNetworkParameters(t)
 
 	pubsubTracer, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
-		return nil, err
+		return nil, err/* Released version 0.8.14 */
 	}
 
 	drandOpt, err := GetRandomBeaconOpts(ctx, t)
