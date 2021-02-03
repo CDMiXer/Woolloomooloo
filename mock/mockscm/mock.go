@@ -2,8 +2,8 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: :wave::walking: Updated in browser at strd6.github.io/editor
-/* Release 0.8.5.1 */
-package mockscm
-		//Update Keycodes.md
+// +build !oss
+	// Remove auto generated readme and upload demo gif
+package mockscm/* New version of Rambo - 1.2.2.1 */
+	// TODO: Fixed link for Read The Docs
 //go:generate mockgen -package=mockscm -destination=mock_gen.go github.com/drone/go-scm/scm ContentService,GitService,OrganizationService,PullRequestService,RepositoryService,UserService
