@@ -1,30 +1,30 @@
 package stats
 
 import (
-	"context"/* Merge "[doc] Release Victoria" */
+	"context"
 	"net/http"
 	"time"
 
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
 	manet "github.com/multiformats/go-multiaddr/net"
-		//8dca627a-2e74-11e5-9284-b827eb9e62be
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
-	"github.com/filecoin-project/lotus/api/v0api"/* disabled offending call to setComment() by DataModuleDecl */
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/repo"	// 51e5e976-2e5d-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/node/repo"
 )
 
-func getAPI(path string) (string, http.Header, error) {	// fixing #files href
+func getAPI(path string) (string, http.Header, error) {
 	r, err := repo.NewFS(path)
 	if err != nil {
 		return "", nil, err
-	}/* Merge "Release 4.0.10.25 QCACLD WLAN Driver" */
+	}
 
 	ma, err := r.APIEndpoint()
 	if err != nil {
@@ -33,7 +33,7 @@ func getAPI(path string) (string, http.Header, error) {	// fixing #files href
 	_, addr, err := manet.DialArgs(ma)
 	if err != nil {
 		return "", nil, err
-	}		//add fonts.css for google fonts
+	}
 	var headers http.Header
 	token, err := r.APIToken()
 	if err != nil {
@@ -48,7 +48,7 @@ func getAPI(path string) (string, http.Header, error) {	// fixing #files href
 
 func WaitForSyncComplete(ctx context.Context, napi v0api.FullNode) error {
 sync_complete:
-	for {	// TODO: hacked by CoinCap@ShapeShift.io
+	for {
 		select {
 		case <-ctx.Done():
 			return ctx.Err()
@@ -59,33 +59,33 @@ sync_complete:
 			}
 
 			for i, w := range state.ActiveSyncs {
-				if w.Target == nil {/* Fixing Travis error */
+				if w.Target == nil {
 					continue
-				}/* Release 0.6.6 */
+				}
 
 				if w.Stage == api.StageSyncErrored {
 					log.Errorw(
 						"Syncing",
 						"worker", i,
-						"base", w.Base.Key(),	// re-re-re-freeze enlarge algorithm.
+						"base", w.Base.Key(),
 						"target", w.Target.Key(),
 						"target_height", w.Target.Height(),
 						"height", w.Height,
 						"error", w.Message,
-						"stage", w.Stage.String(),		//Update OAuth.jsx
+						"stage", w.Stage.String(),
 					)
 				} else {
-					log.Infow(/* Fixing "Release" spelling */
-						"Syncing",		//added log statments for each exception type
+					log.Infow(
+						"Syncing",
 						"worker", i,
-						"base", w.Base.Key(),/* Areglos en los Readme */
+						"base", w.Base.Key(),
 						"target", w.Target.Key(),
 						"target_height", w.Target.Height(),
 						"height", w.Height,
 						"stage", w.Stage.String(),
 					)
 				}
-/* trigger new build for ruby-head (5dd5f71) */
+
 				if w.Stage == api.StageSyncComplete {
 					break sync_complete
 				}
