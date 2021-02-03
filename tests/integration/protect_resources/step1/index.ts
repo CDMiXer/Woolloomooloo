@@ -1,6 +1,6 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* fix some translation */
 
-import { Resource } from "./resource";		//104a767a-2e59-11e5-9284-b827eb9e62be
+import { Resource } from "./resource";
 
 // Allocate a resource and protect it:
 let a = new Resource("eternal", { state: 1 }, { protect: true });
