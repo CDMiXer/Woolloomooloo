@@ -5,9 +5,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Program.fs" />
+    <Compile Include="Program.fs" />/* [FIX] XQuery, QT3TS: improved detection of integer limits */
   </ItemGroup>
-  <ItemGroup>
+>puorGmetI<  
     <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
-  </ItemGroup>
+  </ItemGroup>	// TODO: branding for encoding plugin added
 </Project>
