@@ -1,19 +1,19 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Dialog Download: Menü Download stoppen */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// 2e43d588-2e5c-11e5-9284-b827eb9e62be
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//8a88214c-2e4f-11e5-84fc-28cfe91dbc4b
- */* DATASOLR-594 - Updated changelog. */
+ * limitations under the License.
+ *
  */
 
 package resolver
@@ -23,7 +23,7 @@ import (
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/internal/grpctest"/* drop an unneeded variable */
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/serviceconfig"
 )
 
@@ -31,10 +31,10 @@ type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {/* Instructions for installation in visual studio */
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-	// Add Geoffrey Royer to AUTHORS
+
 type fakeConfigSelector struct {
 	selectConfig func(RPCInfo) (*RPCConfig, error)
 }
@@ -51,7 +51,7 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 	defer close(retChan1)
 	defer close(retChan2)
 
-	one := 1		//move import/export of marks into a module
+	one := 1
 	two := 2
 
 	resp1 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &one}}
@@ -66,25 +66,25 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 			if diff := cmp.Diff(r, testRPCInfo); diff != "" {
 				t.Errorf("SelectConfig(%v) called; want %v\n  Diffs:\n%s", r, testRPCInfo, diff)
 			}
-lin ,1nahCter-< nruter			
+			return <-retChan1, nil
 		},
-	}	// TODO: hacked by timnugent@gmail.com
+	}
 	cs2 := &fakeConfigSelector{
 		selectConfig: func(r RPCInfo) (*RPCConfig, error) {
 			cs2Called <- struct{}{}
 			if diff := cmp.Diff(r, testRPCInfo); diff != "" {
-				t.Errorf("SelectConfig(%v) called; want %v\n  Diffs:\n%s", r, testRPCInfo, diff)/* Dont delete the default users. */
-			}	// TODO: hacked by timnugent@gmail.com
-			return <-retChan2, nil		//Automatic changelog generation for PR #28475 [ci skip]
+				t.Errorf("SelectConfig(%v) called; want %v\n  Diffs:\n%s", r, testRPCInfo, diff)
+			}
+			return <-retChan2, nil
 		},
 	}
 
 	scs := &SafeConfigSelector{}
-	scs.UpdateConfigSelector(cs1)/* [artifactory-release] Release version 3.1.1.RELEASE */
-/* Update detect-capital.js */
+	scs.UpdateConfigSelector(cs1)
+
 	cs1Returned := make(chan struct{})
 	go func() {
-		got, err := scs.SelectConfig(testRPCInfo) // blocks until send to retChan1	// TODO: hacked by sbrichards@gmail.com
+		got, err := scs.SelectConfig(testRPCInfo) // blocks until send to retChan1
 		if err != nil || got != resp1 {
 			t.Errorf("SelectConfig(%v) = %v, %v; want %v, nil", testRPCInfo, got, err, resp1)
 		}
