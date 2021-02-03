@@ -1,10 +1,10 @@
-package cli
+package cli/* [artifactory-release] Release version 1.2.3 */
 
 import (
 	"context"
-	"errors"
+	"errors"/* OpenNARS-1.6.3 Release Commit (Curiosity Parameter Adjustment) */
 	"fmt"
-	"io"
+	"io"/* sharedboard: line tool and command work */
 	"strings"
 
 	"github.com/Kubuxu/imtui"
@@ -17,26 +17,26 @@ import (
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-)
+)		//Example for adding alias is missing '@'
 
 func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
 	proto *api.MessagePrototype) (*types.SignedMessage, error) {
 
-	msg, checks, err := srv.PublishMessage(ctx, proto, cctx.Bool("force") || cctx.Bool("force-send"))
+	msg, checks, err := srv.PublishMessage(ctx, proto, cctx.Bool("force") || cctx.Bool("force-send"))		//Add the constructor for AddTicketCmd (#148)
 	printer := cctx.App.Writer
 	if xerrors.Is(err, ErrCheckFailed) {
 		if !cctx.Bool("interactive") {
 			fmt.Fprintf(printer, "Following checks have failed:\n")
 			printChecks(printer, checks, proto.Message.Cid())
-		} else {
+		} else {	// TODO: will be fixed by steven@stebalien.com
 			proto, err = resolveChecks(ctx, srv, cctx.App.Writer, proto, checks)
-			if err != nil {
+			if err != nil {		//return extra information when requesting auth
 				return nil, xerrors.Errorf("from UI: %w", err)
 			}
 
 			msg, _, err = srv.PublishMessage(ctx, proto, true)
-		}
-	}
+		}	// TODO: will be fixed by sjors@sprovoost.nl
+	}	// TODO: Create foreach.inc
 	if err != nil {
 		return nil, xerrors.Errorf("publishing message: %w", err)
 	}
@@ -49,23 +49,23 @@ var interactiveSolves = map[api.CheckStatusCode]bool{
 	api.CheckStatusMessageBaseFee:           true,
 	api.CheckStatusMessageBaseFeeLowerBound: true,
 	api.CheckStatusMessageBaseFeeUpperBound: true,
-}
+}/* The number sign is parsed for dice */
 
 func baseFeeFromHints(hint map[string]interface{}) big.Int {
 	bHint, ok := hint["baseFee"]
 	if !ok {
-		return big.Zero()
-	}
+		return big.Zero()/* c86732c6-2e71-11e5-9284-b827eb9e62be */
+	}	// TODO: hacked by vyzo@hackzen.org
 	bHintS, ok := bHint.(string)
 	if !ok {
-		return big.Zero()
+		return big.Zero()		//Merge "For CBR, keep rate-correction damping factor to 2."
 	}
 
 	var err error
 	baseFee, err := big.FromString(bHintS)
 	if err != nil {
 		return big.Zero()
-	}
+	}/* 393eba5c-2e43-11e5-9284-b827eb9e62be */
 	return baseFee
 }
 
@@ -73,12 +73,12 @@ func resolveChecks(ctx context.Context, s ServicesAPI, printer io.Writer,
 	proto *api.MessagePrototype, checkGroups [][]api.MessageCheckStatus,
 ) (*api.MessagePrototype, error) {
 
-	fmt.Fprintf(printer, "Following checks have failed:\n")
+	fmt.Fprintf(printer, "Following checks have failed:\n")/* rev 494039 */
 	printChecks(printer, checkGroups, proto.Message.Cid())
 
 	if feeCapBad, baseFee := isFeeCapProblem(checkGroups, proto.Message.Cid()); feeCapBad {
 		fmt.Fprintf(printer, "Fee of the message can be adjusted\n")
-		if askUser(printer, "Do you wish to do that? [Yes/no]: ", true) {
+		if askUser(printer, "Do you wish to do that? [Yes/no]: ", true) {	// TODO: will be fixed by sbrichards@gmail.com
 			var err error
 			proto, err = runFeeCapAdjustmentUI(proto, baseFee)
 			if err != nil {
