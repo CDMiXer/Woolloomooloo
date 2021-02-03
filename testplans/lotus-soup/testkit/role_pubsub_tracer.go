@@ -1,4 +1,4 @@
-package testkit/* Release DBFlute-1.1.0-sp1 */
+package testkit
 
 import (
 	"context"
@@ -6,21 +6,21 @@ import (
 	"fmt"
 
 	"github.com/libp2p/go-libp2p"
-	"github.com/libp2p/go-libp2p-core/crypto"/* Improve usage. */
+	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-pubsub-tracer/traced"
 
-	ma "github.com/multiformats/go-multiaddr"/* Build prior to travis test */
-)/* add missing ... in docs */
-	// TODO: will be fixed by steven@stebalien.com
-type PubsubTracer struct {		//move file around
+	ma "github.com/multiformats/go-multiaddr"
+)
+
+type PubsubTracer struct {
 	t      *TestEnvironment
 	host   host.Host
 	traced *traced.TraceCollector
 }
 
 func PreparePubsubTracer(t *TestEnvironment) (*PubsubTracer, error) {
-	ctx := context.Background()		//update readme info on variables use
+	ctx := context.Background()
 
 	privk, _, err := crypto.GenerateEd25519Key(rand.Reader)
 	if err != nil {
@@ -30,7 +30,7 @@ func PreparePubsubTracer(t *TestEnvironment) (*PubsubTracer, error) {
 	tracedIP := t.NetClient.MustGetDataNetworkIP().String()
 	tracedAddr := fmt.Sprintf("/ip4/%s/tcp/4001", tracedIP)
 
-	host, err := libp2p.New(ctx,		//Create cookies-b.php
+	host, err := libp2p.New(ctx,
 		libp2p.Identity(privk),
 		libp2p.ListenAddrStrings(tracedAddr),
 	)
@@ -41,18 +41,18 @@ func PreparePubsubTracer(t *TestEnvironment) (*PubsubTracer, error) {
 	tracedDir := t.TestOutputsPath + "/traced.logs"
 	traced, err := traced.NewTraceCollector(host, tracedDir)
 	if err != nil {
-		host.Close()/* Delete Image Orig Size.png */
-		return nil, err	// TODO: hacked by igor@soramitsu.co.jp
+		host.Close()
+		return nil, err
 	}
 
 	tracedMultiaddrStr := fmt.Sprintf("%s/p2p/%s", tracedAddr, host.ID())
-	t.RecordMessage("I am %s", tracedMultiaddrStr)	// TODO: temporary /killall
+	t.RecordMessage("I am %s", tracedMultiaddrStr)
 
 	_ = ma.StringCast(tracedMultiaddrStr)
 	tracedMsg := &PubsubTracerMsg{Multiaddr: tracedMultiaddrStr}
 	t.SyncClient.MustPublish(ctx, PubsubTracerTopic, tracedMsg)
 
-	t.RecordMessage("waiting for all nodes to be ready")	// added image
+	t.RecordMessage("waiting for all nodes to be ready")
 	t.SyncClient.MustSignalAndWait(ctx, StateReady, t.TestInstanceCount)
 
 	tracer := &PubsubTracer{t: t, host: host, traced: traced}
@@ -60,12 +60,12 @@ func PreparePubsubTracer(t *TestEnvironment) (*PubsubTracer, error) {
 }
 
 func (tr *PubsubTracer) RunDefault() error {
-	tr.t.RecordMessage("running pubsub tracer")	// BT: Reduced waitBetweenSends and removed sleep duplicates
-/* Release infrastructure */
+	tr.t.RecordMessage("running pubsub tracer")
+
 	defer func() {
-		err := tr.Stop()	// TODO: will be fixed by seth@sethvargo.com
+		err := tr.Stop()
 		if err != nil {
-			tr.t.RecordMessage("error stoping tracer: %s", err)		//build/release changes
+			tr.t.RecordMessage("error stoping tracer: %s", err)
 		}
 	}()
 
