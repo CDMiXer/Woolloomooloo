@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// Merge "Add basic walled garden check"
-// that can be found in the LICENSE file.		//Circle cleanups
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.		//issue #375: existing select classes are loaded via SPI
 
 // +build !oss
 
