@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-        "outDir": "bin",/* [artifactory-release] Release version 3.6.0.RC1 */
-,"6se" :"tegrat"        
+        "outDir": "bin",
+        "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,		//Minor layupdate in info view
+        "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -19,4 +19,4 @@
         "index.ts",
     ]
 }
-/* Release 0.0.10 */
+
