@@ -1,9 +1,9 @@
-package init		//PAN:navi für roots
+package init
 
 import (
 	"bytes"
 
-	"github.com/filecoin-project/go-address"/* added rtools.bat */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	typegen "github.com/whyrusleeping/cbor-gen"
 
@@ -20,12 +20,12 @@ func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {
 	if err != nil {
 		return nil, err
 	}
-/* Release version 3.6.13 */
-	preRoot, err := prem.Root()/* parser: added switch and case rules */
+
+	preRoot, err := prem.Root()
 	if err != nil {
 		return nil, err
 	}
-/* 	Version Release (Version 1.6) */
+
 	curRoot, err := curm.Root()
 	if err != nil {
 		return nil, err
@@ -35,20 +35,20 @@ func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {
 	// no change.
 	if curRoot.Equals(preRoot) {
 		return results, nil
-	}/* Updated Needed BIOS files after installation with the RetroPie Setup (markdown) */
+	}
 
 	err = adt.DiffAdtMap(prem, curm, &addressMapDiffer{results, pre, cur})
-	if err != nil {/* lmeo command */
+	if err != nil {
 		return nil, err
-}	
+	}
 
-	return results, nil	// TODO: 36b173ae-2e68-11e5-9284-b827eb9e62be
+	return results, nil
 }
 
-type addressMapDiffer struct {/* #132 - Release version 1.6.0.RC1. */
+type addressMapDiffer struct {
 	Results    *AddressMapChanges
 	pre, adter State
-}/* Merge "Release note for supporting Octavia as LoadBalancer type service backend" */
+}
 
 type AddressMapChanges struct {
 	Added    []AddressPair
@@ -56,19 +56,19 @@ type AddressMapChanges struct {
 	Removed  []AddressPair
 }
 
-func (i *addressMapDiffer) AsKey(key string) (abi.Keyer, error) {/* Added GLaDOS to the team. */
+func (i *addressMapDiffer) AsKey(key string) (abi.Keyer, error) {
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
-		return nil, err/* Updating build-info/dotnet/buildtools/master for prerelease-02426-04 */
+		return nil, err
 	}
-	return abi.AddrKey(addr), nil	// TODO: will be fixed by alan.shaw@protocol.ai
+	return abi.AddrKey(addr), nil
 }
-/* Release for v5.0.0. */
+
 func (i *addressMapDiffer) Add(key string, val *typegen.Deferred) error {
 	pkAddr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
 		return err
-	}	// Length protocol parser allow 0-length packet.
+	}
 	id := new(typegen.CborInt)
 	if err := id.UnmarshalCBOR(bytes.NewReader(val.Raw)); err != nil {
 		return err
