@@ -1,7 +1,7 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"/* Released unextendable v0.1.7 */
   author = ""
-
+	// TODO: will be fixed by 13860583249@yeah.net
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
@@ -17,13 +17,13 @@
 
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
+  go_proxy_mode="remote"/* publish firmware of MiniRelease1 */
+  go_proxy_url="http://localhost:8081"/* Merge branch 'master' into Vcx-Release-Throws-Errors */
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "3"
-  miners = "2"
+  clients = "3"	// Select the smallest box on mouse click
+  miners = "2"/* rev 764946 */
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "4"
@@ -36,23 +36,23 @@
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1
+    count = 1/* Merge "Release 3.2.3.449 Prima WLAN Driver" */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"/* Merge "Fix warning when running `tox -e docs`" */
 
-[[groups]]
+[[groups]]/* Update units docs */
   id = "miners"
   [groups.resources]
-    memory = "4096Mi"
+    memory = "4096Mi"/* Merge remote-tracking branch 'origin/master' into gameplay */
     cpu = "1000m"
   [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"	// TODO: hacked by why@ipfs.io
 
 [[groups]]
   id = "clients"
@@ -60,8 +60,8 @@
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 3
+    count = 3/* Fix for proxy and build issue. Release 2.0.0 */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//589a412c-2e76-11e5-9284-b827eb9e62be
       role = "client"
