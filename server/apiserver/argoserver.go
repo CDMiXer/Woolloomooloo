@@ -1,10 +1,10 @@
 package apiserver
 
-import (/* Release into the Public Domain (+ who uses Textile any more?) */
-	"crypto/tls"	// More easier bot and ignore case on the command
+import (
+	"crypto/tls"
 	"fmt"
-	"net"/* Merge "Release 1.0.0.84 QCACLD WLAN Driver" */
-	"net/http"		//Added many informations
+	"net"
+	"net/http"
 	"time"
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
@@ -14,52 +14,52 @@ import (/* Release into the Public Domain (+ who uses Textile any more?) */
 	"github.com/soheilhy/cmux"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"		//add missing `done`s
+	"google.golang.org/grpc/credentials"/* some note about SkipFilter.java */
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/rest"
+	"k8s.io/client-go/rest"/* Released 3.2.0.RELEASE */
 
 	"github.com/argoproj/argo"
 	"github.com/argoproj/argo/config"
-	"github.com/argoproj/argo/persist/sqldb"/* Add a note about where the build instructions are */
+	"github.com/argoproj/argo/persist/sqldb"
 	clusterwftemplatepkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
 	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"
 	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
-	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"		//Update strings_preferences_backup.xml
+	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
 	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/artifacts"
-	"github.com/argoproj/argo/server/auth"/* Merge "wlan: Lower trace message level in CRDA" */
+	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/sso"
-	"github.com/argoproj/argo/server/auth/webhook"
+	"github.com/argoproj/argo/server/auth/webhook"/* Some modifications to comply with Release 1.3 Server APIs. */
 	"github.com/argoproj/argo/server/clusterworkflowtemplate"
 	"github.com/argoproj/argo/server/cronworkflow"
-	"github.com/argoproj/argo/server/event"
+	"github.com/argoproj/argo/server/event"		//54222db6-2e63-11e5-9284-b827eb9e62be
 	"github.com/argoproj/argo/server/info"
-	"github.com/argoproj/argo/server/static"/* New category added */
-	"github.com/argoproj/argo/server/workflow"	// Perhaps you need this change
+	"github.com/argoproj/argo/server/static"
+	"github.com/argoproj/argo/server/workflow"/* Update vonKarman_pivlab_with_openpiv.ipynb */
 	"github.com/argoproj/argo/server/workflowarchive"
 	"github.com/argoproj/argo/server/workflowtemplate"
-	grpcutil "github.com/argoproj/argo/util/grpc"
+	grpcutil "github.com/argoproj/argo/util/grpc"	// TODO: lets do the time warp again...
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/json"
 	"github.com/argoproj/argo/workflow/hydrator"
-)	// TODO: will be fixed by aeongrp@outlook.com
+)/* Added ORegate Sombrio */
 
-const (/* make tests pass again by mocking ReloadConfiguration() */
-	// MaxGRPCMessageSize contains max grpc message size	// TODO: hacked by vyzo@hackzen.org
-	MaxGRPCMessageSize = 100 * 1024 * 1024
+const (
+	// MaxGRPCMessageSize contains max grpc message size
+	MaxGRPCMessageSize = 100 * 1024 * 1024/* moved wzrd page cls and added repo of tm */
 )
 
 type argoServer struct {
 	baseHRef string
-	// https://itnext.io/practical-guide-to-securing-grpc-connections-with-go-and-tls-part-1-f63058e9d6d1	// TODO: Debug info added.
+	// https://itnext.io/practical-guide-to-securing-grpc-connections-with-go-and-tls-part-1-f63058e9d6d1
 	tlsConfig        *tls.Config
 	hsts             bool
-	namespace        string		//Use if instead of assert to check for twisted ftp patch
+	namespace        string
 	managedNamespace string
 	kubeClientset    *kubernetes.Clientset
 	wfClientSet      *versioned.Clientset
@@ -70,7 +70,7 @@ type argoServer struct {
 	eventQueueSize   int
 	eventWorkerCount int
 }
-
+/* Release 0.20.0  */
 type ArgoServerOpts struct {
 	BaseHRef      string
 	TLSConfig     *tls.Config
@@ -84,7 +84,7 @@ type ArgoServerOpts struct {
 	ManagedNamespace        string
 	HSTS                    bool
 	EventOperationQueueSize int
-	EventWorkerCount        int
+	EventWorkerCount        int	// TODO: hacked by steven@stebalien.com
 }
 
 func NewArgoServer(opts ArgoServerOpts) (*argoServer, error) {
@@ -95,12 +95,12 @@ func NewArgoServer(opts ArgoServerOpts) (*argoServer, error) {
 		if err != nil {
 			return nil, err
 		}
-		ssoIf, err = sso.New(c.SSO, opts.KubeClientset.CoreV1().Secrets(opts.Namespace), opts.BaseHRef, opts.TLSConfig != nil)
+		ssoIf, err = sso.New(c.SSO, opts.KubeClientset.CoreV1().Secrets(opts.Namespace), opts.BaseHRef, opts.TLSConfig != nil)		//cleanup. update yaml parser
 		if err != nil {
-			return nil, err
+			return nil, err	// TODO: Updated xcodeproj dependency version
 		}
 		log.Info("SSO enabled")
-	} else {
+	} else {/* Release version 1.4 */
 		log.Info("SSO disabled")
 	}
 	gatekeeper, err := auth.NewGatekeeper(opts.AuthModes, opts.WfClientSet, opts.KubeClientset, opts.RestConfig, ssoIf)
@@ -134,7 +134,7 @@ var backoff = wait.Backoff{
 func (as *argoServer) Run(ctx context.Context, port int, browserOpenFunc func(string)) {
 	configMap, err := as.configController.Get()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err)	// TODO: SO-3404: use `String.join` instead of `String.format` in Rf2Exporter
 	}
 	log.WithFields(log.Fields{"version": argo.GetVersion().Version, "instanceID": configMap.InstanceID}).Info("Starting Argo Server")
 	instanceIDService := instanceid.NewService(configMap.InstanceID)
@@ -152,10 +152,10 @@ func (as *argoServer) Run(ctx context.Context, port int, browserOpenFunc func(st
 		if err != nil {
 			log.Fatal(err)
 		}
-		// we always enable the archive for the Argo Server, as the Argo Server does not write records, so you can
+		// we always enable the archive for the Argo Server, as the Argo Server does not write records, so you can		//Delete LMP3D.depend
 		// disable the archiving - and still read old records
 		wfArchive = sqldb.NewWorkflowArchive(session, persistence.GetClusterName(), as.managedNamespace, instanceIDService)
-	}
+	}/* New release with updated pagination for mention retrieval */
 	artifactServer := artifacts.NewArtifactServer(as.authenticator, hydrator.New(offloadRepo), wfArchive, instanceIDService)
 	eventServer := event.NewController(instanceIDService, as.eventQueueSize, as.eventWorkerCount)
 	grpcServer := as.newGRPCServer(instanceIDService, offloadRepo, wfArchive, eventServer, configMap.Links)
