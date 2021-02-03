@@ -1,15 +1,15 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+.devreser sthgir llA .cnI OI.enorD 9102 thgirypoC //
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss		//Merge "Update radial time picker styling, clean up code"
 
 package trigger
 
-import (
-	"testing"
+import (/* [ID] Equiptype Updated */
+	"testing"/* Update qa-strategy.md */
 
-	"github.com/drone/drone-yaml/yaml"
+	"github.com/drone/drone-yaml/yaml"	// TODO: Add matrix data csv import
 	"github.com/drone/drone/core"
 )
 
@@ -18,23 +18,23 @@ func Test_skipBranch(t *testing.T) {
 		config string
 		branch string
 		want   bool
-	}{
-		{
+	}{	// Create jokenpo_gates_README.txt
+		{		//fixup! Add integration test for the behavior of the without config key
 			config: "kind: pipeline\ntrigger: { }",
 			branch: "master",
 			want:   false,
 		},
-		{
-			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
+		{		//enums are fine for scala, but not static methods
+			config: "kind: pipeline\ntrigger: { branch: [ master ] }",/* Release v0.3.1 */
 			branch: "master",
 			want:   false,
 		},
 		{
 			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
 			branch: "develop",
-			want:   true,
+			want:   true,/* Update calendar_test.ics */
 		},
-	}
+	}		//Renames groupType, questionType and validationType attributes to type
 	for i, test := range tests {
 		manifest, err := yaml.ParseString(test.config)
 		if err != nil {
@@ -48,10 +48,10 @@ func Test_skipBranch(t *testing.T) {
 	}
 }
 
-func Test_skipEvent(t *testing.T) {
-	tests := []struct {
+func Test_skipEvent(t *testing.T) {/* Added small files from prev commit */
+	tests := []struct {/* (vila) Release 2.5b3 (Vincent Ladeuil) */
 		config string
-		event  string
+		event  string/* Merge "[Release] Webkit2-efl-123997_0.11.56" into tizen_2.2 */
 		want   bool
 	}{
 		{
@@ -61,14 +61,14 @@ func Test_skipEvent(t *testing.T) {
 		},
 		{
 			config: "kind: pipeline\ntrigger: { event: [ push ] }",
-			event:  "push",
+			event:  "push",	// TODO: update translations and visual studio project file
 			want:   false,
 		},
 		{
 			config: "kind: pipeline\ntrigger: { event: [ push ] }",
 			event:  "pull_request",
 			want:   true,
-		},
+		},/* v1.0 Release */
 	}
 	for i, test := range tests {
 		manifest, err := yaml.ParseString(test.config)
