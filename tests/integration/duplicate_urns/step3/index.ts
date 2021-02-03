@@ -6,14 +6,14 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* fixed syntax (blank lines) */
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release v0.1.6 */
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.		//Test is unit test again.
 
 import { Resource } from "./resource";
-
+/* Added a touch more thread safety for workflow runner */
 // "a" is already in the snapshot and will be "same"d.
 const a = new Resource("a", { state: 4 });
 
