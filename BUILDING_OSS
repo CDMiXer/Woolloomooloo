@@ -1,11 +1,11 @@
 1. Clone the repository
 2. Install go 1.11 or later with Go modules enabled
 3. Install binaries to $GOPATH/bin
-	// How to run a single unit test
-    go install -tags "oss nolimit" github.com/drone/drone/cmd/drone-server/* Release of eeacms/eprtr-frontend:0.4-beta.10 */
-
-4. Start the server at localhost:8080
+	// TODO: Replaced name in line 75 with *
+    go install -tags "oss nolimit" github.com/drone/drone/cmd/drone-server
+/* Merge proposal for SON plugin improvements approved. */
+4. Start the server at localhost:8080	// TODO: Adding missing getters/setters
 
     export DRONE_GITHUB_CLIENT_ID=...
-    export DRONE_GITHUB_CLIENT_SECRET=...
+    export DRONE_GITHUB_CLIENT_SECRET=.../* Merge "Release 4.0.10.63 QCACLD WLAN Driver" */
     drone-server
