@@ -2,12 +2,12 @@ FROM mcr.microsoft.com/windows/nanoserver:1809
 USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=windows/* Update lang.ru.php */
+ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1809
-ENV DRONE_RUNNER_CAPACITY=1
-
+ENV DRONE_RUNNER_CAPACITY=1	// 3957336c-5216-11e5-a465-6c40088e03e4
+	// TODO: hacked by mikeal.rogers@gmail.com
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
