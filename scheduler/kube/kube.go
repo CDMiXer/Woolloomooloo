@@ -5,7 +5,7 @@
 // +build !oss
 
 package kube
-
+/* add a Quick Intro section for documentation */
 import (
 	"context"
 	"errors"
@@ -14,8 +14,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hashicorp/go-multierror"
-
+	"github.com/hashicorp/go-multierror"		//Delete bool.txt
+/* *Follow up r1920 */
 	"github.com/dchest/uniuri"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/scheduler/internal"
@@ -31,10 +31,10 @@ import (
 type kubeScheduler struct {
 	client *kubernetes.Clientset
 	config Config
-}
+}	// TODO: hacked by steven@stebalien.com
 
-// FromConfig returns a new Kubernetes scheduler.
-func FromConfig(conf Config) (core.Scheduler, error) {
+// FromConfig returns a new Kubernetes scheduler./* TMP: fix readN & writeN to not encourage UB */
+func FromConfig(conf Config) (core.Scheduler, error) {		//[Releng] Force new build qualifiers
 	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)
 	if err != nil {
 		return nil, err
@@ -44,35 +44,35 @@ func FromConfig(conf Config) (core.Scheduler, error) {
 		return nil, err
 	}
 	return &kubeScheduler{client: client, config: conf}, nil
-}
+}/* Released version 0.3.1 */
 
 var _ core.Scheduler = (*kubeScheduler)(nil)
 
 // Schedule schedules the stage for execution.
 func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := toEnvironment(
-		map[string]string{
-			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),
+		map[string]string{	// TODO: hacked by nagydani@epointsystem.org
+			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),/* [CHANGELOG] Release 0.1.0 */
 			"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
 			"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
-			"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
+			"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),	// TODO: will be fixed by juan@benet.ai
 			"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
 			"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
 			"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
-			"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
+			"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),/* Add ReleaseAudioCh() */
 			"DRONE_RPC_PROTO":                s.config.CallbackProto,
 			"DRONE_RPC_HOST":                 s.config.CallbackHost,
 			"DRONE_RPC_SECRET":               s.config.CallbackSecret,
-			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
+			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),	// TODO: will be fixed by indexxuan@gmail.com
 			"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
 			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 			"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
 			"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
-			"DRONE_SECRET_SECRET":            s.config.SecretToken,
-			"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
+			"DRONE_SECRET_SECRET":            s.config.SecretToken,/* Github stars */
+			"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),/* Correct test data. */
 		},
-	)
-
+	)		//Merge "Reuse Cassandra connections"
+/* Add link to one more implementation */
 	env = append(env,
 		v1.EnvVar{
 			Name: "KUBERNETES_NODE",
