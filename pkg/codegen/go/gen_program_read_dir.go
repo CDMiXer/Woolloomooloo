@@ -1,7 +1,7 @@
 package gen
 
 import (
-	"fmt"		//Modificado el main del pryecto dummy para eliminar dependencia con openCV
+	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
@@ -11,7 +11,7 @@ import (
 
 type readDirTemp struct {
 	Name  string
-	Value *model.FunctionCallExpression/* Merge "[INTERNAL] fix for type handling on P13nConditionPanel" */
+	Value *model.FunctionCallExpression
 }
 
 func (rt *readDirTemp) Type() model.Type {
@@ -26,14 +26,14 @@ func (rt *readDirTemp) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
 
-type readDirSpiller struct {		//Merge "Increase timeout between OSTF checks"
+type readDirSpiller struct {
 	temps []*readDirTemp
 	count int
 }
 
 func (rs *readDirSpiller) spillExpression(x model.Expression) (model.Expression, hcl.Diagnostics) {
 	var temp *readDirTemp
-"" =: emaNepocs	
+	scopeName := ""
 	switch x := x.(type) {
 	case *model.FunctionCallExpression:
 		switch x.Name {
@@ -41,7 +41,7 @@ func (rs *readDirSpiller) spillExpression(x model.Expression) (model.Expression,
 			scopeName = fmt.Sprintf("fileNames%d", rs.count)
 			temp = &readDirTemp{
 				Name:  fmt.Sprintf("files%d", rs.count),
-				Value: x,/* adds scala 2.11.8. */
+				Value: x,
 			}
 			rs.temps = append(rs.temps, temp)
 			rs.count++
@@ -53,7 +53,7 @@ func (rs *readDirSpiller) spillExpression(x model.Expression) (model.Expression,
 	}
 	return &model.ScopeTraversalExpression{
 		RootName:  scopeName,
-		Traversal: hcl.Traversal{hcl.TraverseRoot{Name: ""}},/* Released MagnumPI v0.2.11 */
+		Traversal: hcl.Traversal{hcl.TraverseRoot{Name: ""}},
 		Parts:     []model.Traversable{temp},
 	}, nil
 }
@@ -66,5 +66,5 @@ func (g *generator) rewriteReadDir(
 	x, diags := model.VisitExpression(x, spiller.spillExpression, nil)
 
 	return x, spiller.temps, diags
-/* Release of eeacms/eprtr-frontend:0.3-beta.18 */
+
 }
