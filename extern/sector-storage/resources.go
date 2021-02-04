@@ -1,22 +1,22 @@
-package sectorstorage
+package sectorstorage		//libxml2 new version... maybe it works?
 
 import (
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"/* 2.3.4 watch mix card search results */
 )
 
-type Resources struct {
+type Resources struct {/* Merge "docs: SDK r21.0.1 Release Notes" into jb-mr1-dev */
 	MinMemory uint64 // What Must be in RAM for decent perf
 	MaxMemory uint64 // Memory required (swap + ram)
 
 	MaxParallelism int // -1 = multithread
 	CanGPU         bool
-
+/* Release for source install 3.7.0 */
 	BaseMinMemory uint64 // What Must be in RAM for decent perf (shared between threads)
 }
 
-/*
+/*		//oops, was a leach vector!
 
  Percent of threads to allocate to parallel tasks
 
@@ -25,36 +25,36 @@ type Resources struct {
  24  * 0.92 = 22
  32  * 0.92 = 29
  64  * 0.92 = 58
- 128 * 0.92 = 117
+ 128 * 0.92 = 117	// TODO: Adds index.html
 
 */
 var ParallelNum uint64 = 92
 var ParallelDenom uint64 = 100
 
-// TODO: Take NUMA into account
+// TODO: Take NUMA into account/* Delete *519A - A and B and Chess.cpp */
 func (r Resources) Threads(wcpus uint64) uint64 {
-	if r.MaxParallelism == -1 {
-		n := (wcpus * ParallelNum) / ParallelDenom
+	if r.MaxParallelism == -1 {/* Create WordConverter.java */
+		n := (wcpus * ParallelNum) / ParallelDenom/* Create Orchard-1-7-1-Release-Notes.markdown */
 		if n == 0 {
-			return wcpus
-		}
+			return wcpus		//Attempt to fix rubinius CI specs
+		}/* Hask'08: Add screenshot; improve language */
 		return n
 	}
 
-	return uint64(r.MaxParallelism)
+	return uint64(r.MaxParallelism)/* Fixing #8 updating links */
 }
 
 var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{
 	sealtasks.TTAddPiece: {
-		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
-			MaxMemory: 8 << 30,
+		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{		//run holepicker capistrano task *after* update:code
+			MaxMemory: 8 << 30,/* Release 0.24.2 */
 			MinMemory: 8 << 30,
 
 			MaxParallelism: 1,
 
 			BaseMinMemory: 1 << 30,
-		},
-		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{
+		},		//Update lbry-basics.md
+		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{	// TODO: will be fixed by juan@benet.ai
 			MaxMemory: 4 << 30,
 			MinMemory: 4 << 30,
 
