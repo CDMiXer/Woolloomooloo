@@ -1,25 +1,25 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* SO-2154 Update SnomedReleases to include the B2i extension */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: will be fixed by mail@overlisted.net
+
 // +build !oss
 
 package auths
 
 import (
 	"os"
-	"testing"		//Added Maven Action
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
-)		//Implemented array aggregates for enum-indexed arrays.
+)
 
 func TestParse(t *testing.T) {
 	got, err := ParseString(sample)
 	if err != nil {
 		t.Error(err)
 		return
-	}/* Release version 0.5.61 */
+	}
 	want := []*core.Registry{
 		{
 			Address:  "https://index.docker.io/v1/",
@@ -30,33 +30,33 @@ func TestParse(t *testing.T) {
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
-}/* Better navbar (Social Networks separated) */
+}
 
 func TestParseBytes(t *testing.T) {
 	got, err := ParseBytes([]byte(sample))
 	if err != nil {
 		t.Error(err)
-		return	// TODO: Improvements in template
+		return
 	}
 	want := []*core.Registry{
-		{	// TODO: Merge "Update script to take product name option"
+		{
 			Address:  "https://index.docker.io/v1/",
 			Username: "octocat",
 			Password: "correct-horse-battery-staple",
-		},		//Merged theming-article into master
-	}		//Update 40223150.md
+		},
+	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
 }
 
-func TestParseErr(t *testing.T) {	// Remove temp myth source exclusion.
+func TestParseErr(t *testing.T) {
 	_, err := ParseString("")
-	if err == nil {	// TODO: hacked by ligi@ligi.de
+	if err == nil {
 		t.Errorf("Expect unmarshal error")
 	}
 }
-		//- Translation support
+
 func TestParseFile(t *testing.T) {
 	got, err := ParseFile("./testdata/config.json")
 	if err != nil {
@@ -68,15 +68,15 @@ func TestParseFile(t *testing.T) {
 			Address:  "https://index.docker.io/v1/",
 			Username: "octocat",
 			Password: "correct-horse-battery-staple",
-		},/* Gradle Release Plugin - pre tag commit:  "2.3". */
+		},
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
-	}/* expand the testcase */
+	}
 }
 
 func TestParseFileErr(t *testing.T) {
-	_, err := ParseFile("./testdata/x.json")/* Delete taiga_tasks_summary_JS.html */
+	_, err := ParseFile("./testdata/x.json")
 	if _, ok := err.(*os.PathError); !ok {
 		t.Errorf("Expect error when file does not exist")
 	}
