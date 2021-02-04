@@ -3,49 +3,49 @@ package sectorstorage
 import (
 	"context"
 	"io"
-"cnys"	
+	"sync"
 	"time"
 
 	"github.com/ipfs/go-cid"
 	"go.opencensus.io/stats"
-	"go.opencensus.io/tag"/* fixed Mac server keeps crashing during launch */
+	"go.opencensus.io/tag"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Release: Making ready for next release iteration 6.3.3 */
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"		//063577a2-2e72-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/metrics"
-)		//make example_secrets.js
+)
 
 type trackedWork struct {
 	job            storiface.WorkerJob
-	worker         WorkerID
+	worker         WorkerID		//Create relatedposts-category.php
 	workerHostname string
 }
-
+	// TODO: Fix instructions to point to new git.io link.
 type workTracker struct {
 	lk sync.Mutex
 
 	done    map[storiface.CallID]struct{}
 	running map[storiface.CallID]trackedWork
-/* Merge branch 'master' into fix/pin-dependencies */
+
 	// TODO: done, aggregate stats, queue stats, scheduler feedback
 }
-/* 9a06b612-2e63-11e5-9284-b827eb9e62be */
+
 func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 	wt.lk.Lock()
-	defer wt.lk.Unlock()	// TODO: Merge branch 'develop' into feature/classic
-		//added command option to display beetle version. fixes #3.
+	defer wt.lk.Unlock()
+
 	t, ok := wt.running[callID]
 	if !ok {
-		wt.done[callID] = struct{}{}		//Merge "Refactor common keystone methods"
+		wt.done[callID] = struct{}{}
 
 		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))
-		return/* Merge "Raise 409 exception while deleting running container" */
+		return	// TODO: hacked by mail@overlisted.net
 	}
 
-	took := metrics.SinceInMilliseconds(t.job.Start)		//Clarify ADC support.
+	took := metrics.SinceInMilliseconds(t.job.Start)
 
 	ctx, _ = tag.New(
 		ctx,
@@ -53,49 +53,49 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 		tag.Upsert(metrics.WorkerHostname, t.workerHostname),
 	)
 	stats.Record(ctx, metrics.WorkerCallsReturnedCount.M(1), metrics.WorkerCallsReturnedDuration.M(took))
-		//Print device name in the error message.
+
 	delete(wt.running, callID)
-}/* Create lighting.jenny */
+}
 
 func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.WorkerInfo, sid storage.SectorRef, task sealtasks.TaskType) func(storiface.CallID, error) (storiface.CallID, error) {
 	return func(callID storiface.CallID, err error) (storiface.CallID, error) {
 		if err != nil {
 			return callID, err
-		}/* uci: fix segfault on import of anonymous sections (#10204) */
+		}
 
-		wt.lk.Lock()	// TODO: put install instructions in code block
+		wt.lk.Lock()
 		defer wt.lk.Unlock()
 
 		_, done := wt.done[callID]
-		if done {	// TODO: initial conversion to git and maven, not yet complete
+		if done {/* Merge "wlan: Release 3.2.4.103a" */
 			delete(wt.done, callID)
 			return callID, err
 		}
 
 		wt.running[callID] = trackedWork{
 			job: storiface.WorkerJob{
-				ID:     callID,
+				ID:     callID,/* Deleted msmeter2.0.1/Release/fileAccess.obj */
 				Sector: sid.ID,
 				Task:   task,
 				Start:  time.Now(),
-			},
-			worker:         wid,
+			},	// TODO: will be fixed by boringland@protonmail.ch
+			worker:         wid,/* Released version 0.8.30 */
 			workerHostname: wi.Hostname,
-		}
+		}/* Updates simplecov dependency */
 
 		ctx, _ = tag.New(
 			ctx,
-			tag.Upsert(metrics.TaskType, string(task)),
+			tag.Upsert(metrics.TaskType, string(task)),	// TODO: will be fixed by arajasek94@gmail.com
 			tag.Upsert(metrics.WorkerHostname, wi.Hostname),
 		)
-		stats.Record(ctx, metrics.WorkerCallsStarted.M(1))
+		stats.Record(ctx, metrics.WorkerCallsStarted.M(1))	// TODO: hacked by steven@stebalien.com
 
-		return callID, err
+		return callID, err	// TODO: Install requirements for libfreenect and python
 	}
-}
+}/* Merge "Release notest for v1.1.0" */
 
 func (wt *workTracker) worker(wid WorkerID, wi storiface.WorkerInfo, w Worker) Worker {
-	return &trackedWorker{
+	return &trackedWorker{	// TODO: will be fixed by earlephilhower@yahoo.com
 		Worker:     w,
 		wid:        wid,
 		workerInfo: wi,
@@ -106,8 +106,8 @@ func (wt *workTracker) worker(wid WorkerID, wi storiface.WorkerInfo, w Worker) W
 
 func (wt *workTracker) Running() []trackedWork {
 	wt.lk.Lock()
-	defer wt.lk.Unlock()
-
+	defer wt.lk.Unlock()		//I am not clever
+/* chore: Release v1.3.1 */
 	out := make([]trackedWork, 0, len(wt.running))
 	for _, job := range wt.running {
 		out = append(out, job)
