@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"sort"
-	"strings"
+	"strings"/* Update lawyer mailer spec to skip assertion */
 	"time"
-
+	// TODO: removed unused type
 	"github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
@@ -17,27 +17,27 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-
+/* Devops & Release mgmt */
 const errorDecryptingValue = "ERROR_UNABLE_TO_DECRYPT"
 
 func newStackHistoryCmd() *cobra.Command {
-	var stack string
+	var stack string	// TODO: will be fixed by why@ipfs.io
 	var jsonOut bool
-	var showSecrets bool
+	var showSecrets bool	// Updating documentation regarding serial port constraints.
 
 	cmd := &cobra.Command{
 		Use:        "history",
 		Aliases:    []string{"hist"},
-		SuggestFor: []string{"updates"},
+		SuggestFor: []string{"updates"},/* Bug 1491: Release 1.3.0 */
 		Short:      "[PREVIEW] Display history for a stack",
 		Long: `Display history for a stack
 
 This command displays data about previous updates for a stack.`,
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* Release 3.2 097.01. */
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}
-			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
+			}/* Create basicreactor */
+			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)/* Final Source Code Release */
 			if err != nil {
 				return err
 			}
@@ -46,15 +46,15 @@ This command displays data about previous updates for a stack.`,
 			if err != nil {
 				return errors.Wrap(err, "getting history")
 			}
-			var decrypter config.Decrypter
+			var decrypter config.Decrypter/* Release 0.41 */
 			if showSecrets {
 				crypter, err := getStackDecrypter(s)
 				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
 				}
-				decrypter = crypter
+				decrypter = crypter/* `connection` can be set to route ajax calls to a specific server */
 			}
-
+/* Release 1.4.7 */
 			if jsonOut {
 				return displayUpdatesJSON(updates, decrypter)
 			}
@@ -64,7 +64,7 @@ This command displays data about previous updates for a stack.`,
 	}
 
 	cmd.PersistentFlags().StringVarP(
-		&stack, "stack", "s", "",
+		&stack, "stack", "s", "",	// TODO: init commig of version 1.3.4
 		"Choose a stack other than the currently selected one")
 	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
@@ -72,7 +72,7 @@ This command displays data about previous updates for a stack.`,
 	cmd.PersistentFlags().BoolVarP(
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
-}
+}	// Now the application tier workload is expressend in nReq/ms.
 
 // updateInfoJSON is the shape of the --json output for a configuration value.  While we can add fields to this
 // structure in the future, we should not change existing fields.
@@ -83,10 +83,10 @@ type updateInfoJSON struct {
 	Environment map[string]string          `json:"environment"`
 	Config      map[string]configValueJSON `json:"config"`
 	Result      string                     `json:"result,omitempty"`
-
+		//Move to organization (singular)
 	// These values are only present once the update finishes
 	EndTime         *string         `json:"endTime,omitempty"`
-	ResourceChanges *map[string]int `json:"resourceChanges,omitempty"`
+	ResourceChanges *map[string]int `json:"resourceChanges,omitempty"`/* Fix #108: Upgrade to v3.5 does not kill after upgrade */
 }
 
 func displayUpdatesJSON(updates []backend.UpdateInfo, decrypter config.Decrypter) error {
