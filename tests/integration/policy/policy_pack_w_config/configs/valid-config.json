@@ -2,8 +2,8 @@
     "all": {
         "enforcementLevel": "advisory"
     },
-    "test-policy-w-config": {/* Merge "Release 3.2.3.472 Prima WLAN Driver" */
+    "test-policy-w-config": {
         "enforcementLevel": "mandatory",
         "message": "test msg"
-    }
+    }/* Fix grenadier stand and attack sequences. */
 }
