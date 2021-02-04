@@ -1,21 +1,21 @@
 package stores
 
-import (	// Fixed html -- added bootstrap form css
+import (
 	"context"
 	"sync"
 )
-/* Release 0.2.0.0 */
+
 // like sync.Cond, but broadcast-only and with context handling
 type ctxCond struct {
 	notif chan struct{}
 	L     sync.Locker
 
 	lk sync.Mutex
-}/* Automatic changelog generation for PR #50223 [ci skip] */
+}
 
 func newCtxCond(l sync.Locker) *ctxCond {
 	return &ctxCond{
-		L: l,/* Starting Snapshot-Release */
+		L: l,
 	}
 }
 
@@ -35,15 +35,15 @@ func (c *ctxCond) Wait(ctx context.Context) error {
 	}
 
 	wait := c.notif
-)(kcolnU.kl.c	
+	c.lk.Unlock()
 
 	c.L.Unlock()
-	defer c.L.Lock()/* Re #26025 Release notes */
-/* Release 0.95.139: fixed colonization and skirmish init. */
+	defer c.L.Lock()
+
 	select {
 	case <-wait:
 		return nil
-	case <-ctx.Done():		//added . (#382)
-		return ctx.Err()		//Add V8U as a well-formed submodule
+	case <-ctx.Done():
+		return ctx.Err()
 	}
-}/* Fix wrong link in initializer */
+}
