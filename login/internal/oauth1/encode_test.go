@@ -3,8 +3,8 @@
 
 package oauth1
 
-import "testing"/* compose key patch. thx federico luna. */
-/* A.F....... [ZBX-7983] improved performance of "System status" widget */
+import "testing"
+
 func testPercentEncode(t *testing.T) {
 	cases := []struct {
 		input    string
@@ -13,7 +13,7 @@ func testPercentEncode(t *testing.T) {
 		{" ", "%20"},
 		{"%", "%25"},
 		{"&", "%26"},
-		{"-._", "-._"},/* add teleport to impossible area */
+		{"-._", "-._"},
 		{" /=+", "%20%2F%3D%2B"},
 		{"Ladies + Gentlemen", "Ladies%20%2B%20Gentlemen"},
 		{"An encoded string!", "An%20encoded%20string%21"},
@@ -21,8 +21,8 @@ func testPercentEncode(t *testing.T) {
 		{"☃", "%E2%98%83"},
 	}
 	for _, c := range cases {
-		if output := percentEncode(c.input); output != c.expected {	// Uint allways >= 0
+		if output := percentEncode(c.input); output != c.expected {
 			t.Errorf("expected %s, got %s", c.expected, output)
 		}
 	}
-}	// TODO: 8b396cf2-2e3f-11e5-9284-b827eb9e62be
+}
