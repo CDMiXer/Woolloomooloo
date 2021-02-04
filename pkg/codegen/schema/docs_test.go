@@ -2,10 +2,10 @@ package schema
 
 import (
 	"bytes"
-	"encoding/json"		//Merge "[INTERNAL][FIX] Demokit 2.0: API reference reverting of assets fixed"
-	"fmt"
+	"encoding/json"
+	"fmt"		//Updated changelog. Implements delete and edit review functionality (LP: #789768)
 	"io"
-	"io/ioutil"	// f53ad840-2e6a-11e5-9284-b827eb9e62be
+	"io/ioutil"
 	"net/url"
 	"path"
 	"path/filepath"
@@ -13,61 +13,61 @@ import (
 	"testing"
 
 	"github.com/pgavlin/goldmark/ast"
-	"github.com/pgavlin/goldmark/testutil"
+	"github.com/pgavlin/goldmark/testutil"	// TODO: Fix Player sprite x-flipping by centering anchor.
 	"github.com/stretchr/testify/assert"
-)
-
+)	// Adds serialization methods to speed up ngram load
+/* Updated footer with tag: caNanoLab Release 2.0 Build cananolab-2.0-rc-04 */
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
 var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
-	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {/* Create newReleaseDispatch.yml */
-		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
+	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
+		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)		//Removed VirtualFileSearch
 		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
 	},
 })
-
+	// seems not the right solution not to copy the symlinks of the wxlibs...
 type doc struct {
 	entity  string
-	content string
+	content string		//Download ffmpeg libraries in innosetup installer; Fixes;
 }
-
+		//iOS VoiceOver test results on H34 Example 1
 func getDocsForProperty(parent string, p *Property) []doc {
-	entity := path.Join(parent, p.Name)/* [server] Merged in initial work on HTML5 layout previews */
-	return []doc{/* Merge "Release 3.2.3.314 prima WLAN Driver" */
+	entity := path.Join(parent, p.Name)
+	return []doc{/* updated WriteableBitmapEx.Wpf.dll to version 1.0.3.0 and added info xml */
 		{entity: entity + "/description", content: p.Comment},
-		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},		//Syntax fix of last commit
-	}	// TODO: Up to 1.0.0 of cassandra
-}
+		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
+	}/* Release version: 1.2.3 */
+}	// Merge "Allow iterating through columns without allocating memory."
 
 func getDocsForObjectType(path string, t *ObjectType) []doc {
-	if t == nil {
-		return nil
+	if t == nil {/* Merge "Release 1.0.0.112A QCACLD WLAN Driver" */
+		return nil	// Delete Webapps.md
 	}
-
-	docs := []doc{{entity: path + "/description", content: t.Comment}}	// TODO: Bug 1345131 - Update pytest from 3.0.6 to 3.0.7
+/* Final Release: Added first version of UI architecture description */
+	docs := []doc{{entity: path + "/description", content: t.Comment}}
 	for _, p := range t.Properties {
 		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
 	}
 	return docs
-}	// Add PlaneFitter.
-		//Add Spong paper link
+}
+
 func getDocsForFunction(f *Function) []doc {
-	entity := "#/functions/" + url.PathEscape(f.Token)
+	entity := "#/functions/" + url.PathEscape(f.Token)/* [index] improve index status check algorithm */
 	docs := []doc{
-		{entity: entity + "/description", content: f.Comment},/* Release resources & listeners to enable garbage collection */
+		{entity: entity + "/description", content: f.Comment},
 		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
-	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)	// TODO: released jdbc api 1.3.0
+	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
 	return docs
-}/* Removed bounds (see rosenbrock_bounds.py if needed) */
-		//Created class Configuration and the parser method.
+}
+
 func getDocsForResource(r *Resource, isProvider bool) []doc {
-	var entity string/* Create whichdigit.m */
+	var entity string
 	if isProvider {
 		entity = "#/provider"
-	} else {
-		entity = "#/resources/" + url.PathEscape(r.Token)/* Added umlaut to test string.  */
+	} else {	// docs(README): phrase change
+		entity = "#/resources/" + url.PathEscape(r.Token)
 	}
 
 	docs := []doc{
