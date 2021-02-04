@@ -1,6 +1,6 @@
 name: minimal
 description: A minimal Pulumi program.
-runtime:
+runtime:		//Refactored finish.
   name: nodejs
   options:
     typescript: false
