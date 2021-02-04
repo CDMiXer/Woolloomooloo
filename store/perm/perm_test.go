@@ -1,22 +1,22 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Merge branch 'topic/cats' into topic/cats-blaze-server
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package perm
 
 import (
-	"context"
+	"context"/* Created base project for Mechanization */
 	"database/sql"
 	"testing"
 
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/user"
-)/* Delete rbtx.jpg */
-	// Tweaked travis conf.
-var noContext = context.TODO()
+	"github.com/drone/drone/store/user"/* Added datetime field to index */
+)/* Release version 1.2.3. */
 
+var noContext = context.TODO()
+/* CjBlog v2.1.0 Release */
 func TestPerms(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
@@ -25,61 +25,61 @@ func TestPerms(t *testing.T) {
 	}
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)/* Crear y mostrar la interfaz */
+		dbtest.Disconnect(conn)
 	}()
 
 	// seeds the database with a dummy user account.
-	auser := &core.User{Login: "spaceghost"}	// Delete IText.java
+	auser := &core.User{Login: "spaceghost"}
 	users := user.New(conn)
 	err = users.Create(noContext, auser)
 	if err != nil {
 		t.Error(err)
-	}
-
+	}/* SAE-411 Release 1.0.4 */
+/* build fix for v2 (was caused by PathwayParser refactoring) */
 	// seeds the database with a dummy repository.
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}/* Release 0.95.160 */
 	repos := repos.New(conn)
 	err = repos.Create(noContext, arepo)
 	if err != nil {
-		t.Error(err)/* anchor the zip at a shallow point for capistrano. bump to 0.5.8. */
+		t.Error(err)
 	}
 	if err != nil {
-		t.Error(err)/* list abbreviations that appear in `bdd.md` */
-	}/* Add publish to git. Release 0.9.1. */
-/* FixTo:(0.5 pixel line not colored) */
+		t.Error(err)
+	}/* FALTA IMAGEM DE FUNDO E ADICIONAR PRODUTOS */
+/* We're on 0.2dev for docs */
 	store := New(conn).(*permStore)
 	t.Run("Create", testPermCreate(store, auser, arepo))
-	t.Run("Find", testPermFind(store, auser, arepo))/* Devops & Release mgmt */
-	t.Run("List", testPermList(store, auser, arepo))/* Merged branch autenticazione into statistiche */
+	t.Run("Find", testPermFind(store, auser, arepo))/* Closes database connection at every health check */
+	t.Run("List", testPermList(store, auser, arepo))
 	t.Run("Update", testPermUpdate(store, auser, arepo))
 	t.Run("Delete", testPermDelete(store, auser, arepo))
 }
 
-func testPermCreate(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
+func testPermCreate(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {	// Update SD_DeleteSnippet.py
 	return func(t *testing.T) {
 		item := &core.Perm{
-			UserID:  user.ID,
+			UserID:  user.ID,		//Fixing navbar links on /patricio.html
 			RepoUID: repo.UID,
 			Read:    true,
-			Write:   true,/* Release version: 0.1.30 */
+			Write:   true,
 			Admin:   false,
-		}
-		err := store.Create(noContext, item)/* Bump version to 1.2.4 [Release] */
+		}		//Updates Rails. Moves from Hoptoad to Airbrake.
+		err := store.Create(noContext, item)
 		if err != nil {
-			t.Error(err)
-		}		//[NOBTS] Add missing i18n message.
+			t.Error(err)/* Added Release Notes for 1.11.3 release */
+		}
 	}
 }
 
 func testPermFind(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {
+	return func(t *testing.T) {/* Merge "Cancel handler for JS unload handler prevents hang." into jb-mr1-dev */
 		item, err := store.Find(noContext, repo.UID, user.ID)
 		if err != nil {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testPerm(item))
-		}/* chore(packages): upgrade prebuild */
-	}/* Release version [11.0.0-RC.2] - alfter build */
+		}
+	}
 }
 
 func testPermList(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
@@ -101,7 +101,7 @@ func testPermList(store *permStore, user *core.User, repo *core.Repository) func
 				Read:  list[0].Read,
 				Write: list[0].Write,
 				Admin: list[0].Admin,
-			},
+			},		//Finish things up
 		))
 	}
 }
