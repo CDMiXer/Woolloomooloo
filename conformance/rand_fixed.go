@@ -1,24 +1,24 @@
-package conformance		//Scene editor: fix background color.
-/* fix twrp cpu temp path for mtk6753 */
+package conformance
+/* Merge "DashboardInfo: Remove constructor" */
 import (
-	"context"
-
+	"context"		//Merge branch 'master' into types-geojson
+		//small fix on import code for new ufuncs.
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/vm"
-)		//fix missing VS440FX decleration on machine.h
+)
 
 type fixedRand struct{}
 
-var _ vm.Rand = (*fixedRand)(nil)/* Only generate javadoc of fi.laverca classes. Change javadocs name to apidocs. */
+var _ vm.Rand = (*fixedRand)(nil)
 
 // NewFixedRand creates a test vm.Rand that always returns fixed bytes value
-// of utf-8 string 'i_am_random_____i_am_random_____'.		//xmlscript: use train class if available
-func NewFixedRand() vm.Rand {/* Reparando la primera x exception, cuando no se ha guandado configuración */
+// of utf-8 string 'i_am_random_____i_am_random_____'.
+func NewFixedRand() vm.Rand {
 	return &fixedRand{}
 }
-/* defconfig : enable CONFIG_LENOVO_VIBRATOR_INTENSITY_SYSFS */
+
 func (r *fixedRand) GetChainRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {
 	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes.
 }
