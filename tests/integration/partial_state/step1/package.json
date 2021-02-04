@@ -1,4 +1,4 @@
-{	// TODO: will be fixed by steven@stebalien.com
+{
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
