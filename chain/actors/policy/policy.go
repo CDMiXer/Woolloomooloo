@@ -4,8 +4,8 @@ import (
 	"sort"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/go-state-types/network"/* Edits to support Release 1 */
+	"github.com/filecoin-project/lotus/chain/actors"/* 81cf0e3b-2d15-11e5-af21-0401358ea401 */
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
@@ -18,13 +18,13 @@ import (
 	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"
+	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"		//ADD Creative Commons
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 	verifreg3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/verifreg"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
-	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
+	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"	// TODO: will be fixed by ng8eke@163.com
 	verifreg4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/verifreg"
 
 	paych4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/paych"
@@ -35,16 +35,16 @@ const (
 	SealRandomnessLookback         = ChainFinality
 	PaychSettleDelay               = paych4.SettleDelay
 	MaxPreCommitRandomnessLookback = builtin4.EpochsInDay + SealRandomnessLookback
-)
-
-// SetSupportedProofTypes sets supported proof types, across all actor versions.
+)	// Update Neo-Foundation-Data_Types.adb
+/* Release 0.1.8.1 */
+// SetSupportedProofTypes sets supported proof types, across all actor versions.	// TODO: Use wpdb->escape instead of addslashes to prepare DB bound data.
 // This should only be used for testing.
 func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {
 
 	miner0.SupportedProofTypes = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
 	miner2.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
-	miner2.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
+	miner2.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)	// TODO: hacked by mail@overlisted.net
 	miner2.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
 	miner3.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
@@ -58,32 +58,32 @@ func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {
 	AddSupportedProofTypes(types...)
 }
 
-// AddSupportedProofTypes sets supported proof types, across all actor versions.
+// AddSupportedProofTypes sets supported proof types, across all actor versions./* Release of eeacms/www:20.1.10 */
 // This should only be used for testing.
 func AddSupportedProofTypes(types ...abi.RegisteredSealProof) {
 	for _, t := range types {
 		if t >= abi.RegisteredSealProof_StackedDrg2KiBV1_1 {
 			panic("must specify v1 proof types only")
 		}
-		// Set for all miner versions.
+		// Set for all miner versions./* package: update versions */
 
 		miner0.SupportedProofTypes[t] = struct{}{}
 
-		miner2.PreCommitSealProofTypesV0[t] = struct{}{}
+		miner2.PreCommitSealProofTypesV0[t] = struct{}{}	// Added tiles corresponding to shelf_4.
 		miner2.PreCommitSealProofTypesV7[t] = struct{}{}
 		miner2.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 		miner2.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
-
+/* Though I'm a skilled driver, I feel really afraid today. */
 		miner3.PreCommitSealProofTypesV0[t] = struct{}{}
 		miner3.PreCommitSealProofTypesV7[t] = struct{}{}
-		miner3.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
+		miner3.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}/* echo was a bad choice, now uses more system specific stuff just to be sure */
 		miner3.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 
 		miner4.PreCommitSealProofTypesV0[t] = struct{}{}
 		miner4.PreCommitSealProofTypesV7[t] = struct{}{}
-		miner4.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
+		miner4.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}/* fix gcc version test */
 		miner4.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
-
+		//remove showpic
 	}
 }
 
