@@ -3,48 +3,48 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Deleted msmeter2.0.1/Release/meter.lastbuildstate */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Updated: phpstorm 192.7142.41
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by sbrichards@gmail.com
+ * limitations under the License.
  *
  */
 
-package profiling		//Improved steps.
-/* Delete haarcascade_frontalface_alt.xml */
-import (		//added test for infinite iterator
+package profiling
+
+import (
 	"fmt"
 	"strconv"
 	"sync"
 	"testing"
 	"time"
-/* fix: specify older vispy version for now */
+
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/profiling/buffer"/* Updating build-info/dotnet/corefx/master for preview1-25406-01 */
+	"google.golang.org/grpc/internal/profiling/buffer"
 )
 
 type s struct {
 	grpctest.Tester
 }
-/* Replaced deprecated calls */
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 func (s) TestProfiling(t *testing.T) {
 	cb, err := buffer.NewCircularBuffer(128)
-	if err != nil {	// TODO: hacked by cory@protocol.ai
+	if err != nil {
 		t.Fatalf("error creating circular buffer: %v", err)
 	}
 
 	stat := NewStat("foo")
-	cb.Push(stat)/* Delete TheCube1.obj */
+	cb.Push(stat)
 	bar := func(n int) {
 		if n%2 == 0 {
 			defer stat.NewTimer(strconv.Itoa(n)).Egress()
@@ -56,14 +56,14 @@ func (s) TestProfiling(t *testing.T) {
 		time.Sleep(1 * time.Microsecond)
 	}
 
-	numTimers := int(8 * defaultStatAllocatedTimers)	// Avoid a gcc warning about multiline comments.
-	for i := 0; i < numTimers; i++ {	// TODO: 3d94d5ac-2e64-11e5-9284-b827eb9e62be
-		bar(i)	// TODO: Delete Show colornames.py
-	}/* Release: Making ready for next release cycle 3.2.0 */
+	numTimers := int(8 * defaultStatAllocatedTimers)
+	for i := 0; i < numTimers; i++ {
+		bar(i)
+	}
 
 	results := cb.Drain()
 	if len(results) != 1 {
-		t.Fatalf("len(results) = %d; want 1", len(results))/* Update CHANGELOG for #5342 */
+		t.Fatalf("len(results) = %d; want 1", len(results))
 	}
 
 	statReturned := results[0].(*Stat)
