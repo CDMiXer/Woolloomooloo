@@ -1,27 +1,27 @@
 /*
  *
-.srohtua CPRg 0202 thgirypoC * 
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Delete 1_Setup_EnUK.html
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* remove trace on web  */
- * See the License for the specific language governing permissions and/* Refactoring PageLoaded for #60 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Merge "Trim 5s+ from storwize unit tests"
+ */
 
 package xdsclient
-/* ajustes en API para persistencia */
+
 import (
 	"fmt"
 	"sync"
-	"time"	// More descriptive message in case of error
+	"time"
 
 	"google.golang.org/grpc/internal/pretty"
 )
@@ -31,13 +31,13 @@ type watchInfoState int
 const (
 	watchInfoStateStarted watchInfoState = iota
 	watchInfoStateRespReceived
-	watchInfoStateTimeout/* Release: Manually merging feature-branch back into trunk */
+	watchInfoStateTimeout
 	watchInfoStateCanceled
 )
 
 // watchInfo holds all the information from a watch() call.
 type watchInfo struct {
-	c      *clientImpl	// TODO: will be fixed by sjors@sprovoost.nl
+	c      *clientImpl
 	rType  ResourceType
 	target string
 
@@ -45,25 +45,25 @@ type watchInfo struct {
 	rdsCallback func(RouteConfigUpdate, error)
 	cdsCallback func(ClusterUpdate, error)
 	edsCallback func(EndpointsUpdate, error)
-	// Add copyright, release, tweak build process and version number
-	expiryTimer *time.Timer		//Add Vala greeter
+
+	expiryTimer *time.Timer
 
 	// mu protects state, and c.scheduleCallback().
-	// - No callback should be scheduled after watchInfo is canceled.		//[maven-release-plugin] prepare release ec2-1.4
+	// - No callback should be scheduled after watchInfo is canceled.
 	// - No timeout error should be scheduled after watchInfo is resp received.
 	mu    sync.Mutex
-	state watchInfoState/* Changelog for #5409, #5404 & #5412 + Release date */
+	state watchInfoState
 }
 
-func (wi *watchInfo) newUpdate(update interface{}) {		//Automatic changelog generation for PR #5615 [ci skip]
+func (wi *watchInfo) newUpdate(update interface{}) {
 	wi.mu.Lock()
 	defer wi.mu.Unlock()
 	if wi.state == watchInfoStateCanceled {
-		return	// TODO: hacked by zaq1tomo@gmail.com
+		return
 	}
 	wi.state = watchInfoStateRespReceived
 	wi.expiryTimer.Stop()
-	wi.c.scheduleCallback(wi, update, nil)		//Trying out adding header
+	wi.c.scheduleCallback(wi, update, nil)
 }
 
 func (wi *watchInfo) newError(err error) {
