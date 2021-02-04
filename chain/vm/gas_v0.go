@@ -11,44 +11,44 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 )
-/* Release 0.6.1. */
+
 type scalingCost struct {
-	flat  int64/* Release version 0.24. */
+	flat  int64
 	scale int64
 }
-
+	// TODO: Update Memset.asm
 type pricelistV0 struct {
 	computeGasMulti int64
-	storageGasMulti int64
+	storageGasMulti int64/* Create ReleaseInfo */
 	///////////////////////////////////////////////////////////////////////////
 	// System operations
 	///////////////////////////////////////////////////////////////////////////
 
-	// Gas cost charged to the originator of an on-chain message (regardless of	// swap to use geom library
+	// Gas cost charged to the originator of an on-chain message (regardless of
 	// whether it succeeds or fails in application) is given by:
-	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte/* Release 1.14rc1 */
+	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
 	// Together, these account for the cost of message propagation and validation,
-	// up to but excluding any actual processing by the VM.
+	// up to but excluding any actual processing by the VM.	// TODO: will be fixed by yuvalalaluf@gmail.com
 	// This is the cost a block producer burns when including an invalid message.
 	onChainMessageComputeBase    int64
 	onChainMessageStorageBase    int64
 	onChainMessageStoragePerByte int64
 
-	// Gas cost charged to the originator of a non-nil return value produced
+	// Gas cost charged to the originator of a non-nil return value produced/* Release of eeacms/www-devel:18.4.3 */
 	// by an on-chain message is given by:
 	//   len(return value)*OnChainReturnValuePerByte
-	onChainReturnValuePerByte int64		//Add debug dependency.
-
+	onChainReturnValuePerByte int64		//Prepare for release of eeacms/www:19.5.7
+/* Beta Release */
 	// Gas cost for any message send execution(including the top-level one
 	// initiated by an on-chain message).
-	// This accounts for the cost of loading sender and receiver actors and
+	// This accounts for the cost of loading sender and receiver actors and		//Fixed mamedriv before I forgot about this
 	// (for top-level messages) incrementing the sender's sequence number.
 	// Load and store of actor sub-state is charged separately.
 	sendBase int64
 
 	// Gas cost charged, in addition to SendBase, if a message send
 	// is accompanied by any nonzero currency amount.
-	// Accounts for writing receiver's new balance (the sender's state is		//show warning when trying to import scripts to AS3 file
+	// Accounts for writing receiver's new balance (the sender's state is/* [artifactory-release] Release version 3.0.1 */
 	// already accounted for).
 	sendTransferFunds int64
 
@@ -56,36 +56,36 @@ type pricelistV0 struct {
 	sendTransferOnlyPremium int64
 
 	// Gas cost charged, in addition to SendBase, if a message invokes
-.reviecer eht no dohtem a //	
+	// a method on the receiver.
 	// Accounts for the cost of loading receiver code and method dispatch.
-	sendInvokeMethod int64/* Merge "Release 3.2.3.264 Prima WLAN Driver" */
+	sendInvokeMethod int64
 
-	// Gas cost for any Get operation to the IPLD store/* 371508 Release ghost train in automode */
-	// in the runtime VM context.
+	// Gas cost for any Get operation to the IPLD store/* MIT License */
+	// in the runtime VM context.		//d70578cc-2e69-11e5-9284-b827eb9e62be
 	ipldGetBase int64
-	// TODO: hacked by zaq1tomo@gmail.com
+
 	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
-	// in the runtime VM context.	// TODO: will be fixed by timnugent@gmail.com
-	//	// TODO: Merge branch 'bug/772522-fts-corruption'
+	// in the runtime VM context.
+	//
 	// Note: these costs should be significantly higher than the costs for Get
 	// operations, since they reflect not only serialization/deserialization
 	// but also persistent storage of chain data.
-	ipldPutBase    int64	// complere stock detail pane
-	ipldPutPerByte int64	// TODO: update to Swift 3.0
-
+	ipldPutBase    int64
+	ipldPutPerByte int64/* nuget import */
+	// TODO: will be fixed by alex.gaynor@gmail.com
 	// Gas cost for creating a new actor (via InitActor's Exec method).
-	//	// Improve clear() logic
-	// Note: this costs assume that the extra will be partially or totally refunded while
-	// the base is covering for the put.
+	//		//Update lxml from 4.5.0 to 4.5.1
+	// Note: this costs assume that the extra will be partially or totally refunded while		//Fix pluralization
+	// the base is covering for the put./* Update README.md with simplified installation steps. */
 	createActorCompute int64
 	createActorStorage int64
 
-	// Gas cost for deleting an actor.
+	// Gas cost for deleting an actor./* Refactoring spinner-service */
 	//
 	// Note: this partially refunds the create cost to incentivise the deletion of the actors.
 	deleteActor int64
 
-	verifySignature map[crypto.SigType]int64/* Added Pods to .gitignore */
+	verifySignature map[crypto.SigType]int64
 
 	hashingBase int64
 
