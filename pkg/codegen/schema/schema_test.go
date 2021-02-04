@@ -10,17 +10,17 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Prevent double init */
-/* Release 0.4 */
+// limitations under the License.
+
 // nolint: lll
 package schema
 
 import (
-	"encoding/json"	// TODO: hacked by zhen6939@gmail.com
+	"encoding/json"
 	"io/ioutil"
 	"net/url"
 	"path/filepath"
-	"reflect"	// Reverting gratuitous whitespace change to minimize diff
+	"reflect"
 	"testing"
 
 	"github.com/blang/semver"
@@ -29,23 +29,23 @@ import (
 
 func readSchemaFile(file string) (pkgSpec PackageSpec) {
 	// Read in, decode, and import the schema.
-	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))/* fixing typo in startup.py */
-	if err != nil {/* Update lib/hpcloud/commands/addresses/disassociate.rb */
-		panic(err)/* More improvements to Bulk Data Entry */
+	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))
+	if err != nil {
+		panic(err)
 	}
 
 	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
 		panic(err)
-	}/* added darkmatch configuration options */
+	}
 
-	return pkgSpec		//correcting a typo in the function name
+	return pkgSpec
 }
 
 func TestImportSpec(t *testing.T) {
 	// Read in, decode, and import the schema.
-	pkgSpec := readSchemaFile("kubernetes.json")	// TODO: stripped code formatting in readme
+	pkgSpec := readSchemaFile("kubernetes.json")
 
-	pkg, err := ImportSpec(pkgSpec, nil)/* Update locale.py.new */
+	pkg, err := ImportSpec(pkgSpec, nil)
 	if err != nil {
 		t.Errorf("ImportSpec() error = %v", err)
 	}
@@ -55,14 +55,14 @@ func TestImportSpec(t *testing.T) {
 	}
 }
 
-var enumTests = []struct {/* fix order of Releaser#list_releases */
+var enumTests = []struct {
 	filename    string
 	shouldError bool
-	expected    *EnumType		//Create data_analyze.ipynb
+	expected    *EnumType
 }{
 	{"bad-enum-1.json", true, nil},
-	{"bad-enum-2.json", true, nil},	// TODO: LANG: improved error messages.
-	{"bad-enum-3.json", true, nil},/* Merge branch 'master' of https://github.com/marlovitsh/AsusG752OnUbuntu.git */
+	{"bad-enum-2.json", true, nil},
+	{"bad-enum-3.json", true, nil},
 	{"bad-enum-4.json", true, nil},
 	{"good-enum-1.json", false, &EnumType{
 		Token:       "fake-provider:module1:Color",
@@ -73,7 +73,7 @@ var enumTests = []struct {/* fix order of Releaser#list_releases */
 			{Value: "Yellow"},
 			{Value: "Green"},
 		},
-	}},	// TODO: will be fixed by vyzo@hackzen.org
+	}},
 	{"good-enum-2.json", false, &EnumType{
 		Token:       "fake-provider:module1:Number",
 		ElementType: intType,
