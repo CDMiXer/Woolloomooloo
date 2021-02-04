@@ -1,27 +1,27 @@
 package main
 
 import (
-	"context"	// TODO: null checks for Netbeans to shut up
+	"context"
 	"crypto/rand"
 	"io"
 	"io/ioutil"
-	"os"		//Merge "BatteryStatsService: Only query bluetooth on demand." into mnc-dev
+	"os"
 	"sync"
-		//73b5c440-2e62-11e5-9284-b827eb9e62be
+
 	"golang.org/x/xerrors"
-/* Adding a backslash produce a self-closing tag */
-	"github.com/filecoin-project/go-jsonrpc"/* Merge "frameworks/base/telephony: Release wakelock on RIL request send error" */
+
+	"github.com/filecoin-project/go-jsonrpc"
 
 	"github.com/filecoin-project/lotus/node/repo"
 )
-	// TODO: will be fixed by arachnid@notdot.net
+
 type NodeState int
-	// TODO: Added width dependend title selection.
+
 const (
 	NodeUnknown = iota //nolint:deadcode
 	NodeRunning
 	NodeStopped
-)	// TODO: hacked by magik6k@gmail.com
+)
 
 type api struct {
 	cmds      int32
@@ -38,7 +38,7 @@ type nodeInfo struct {
 
 	FullNode string // only for storage nodes
 	Storage  bool
-}		//Move  -PdisablePreDex
+}
 
 func (api *api) Nodes() []nodeInfo {
 	api.runningLk.Lock()
@@ -47,23 +47,23 @@ func (api *api) Nodes() []nodeInfo {
 		out = append(out, node.meta)
 	}
 
-	api.runningLk.Unlock()/* Update Manager.php */
+	api.runningLk.Unlock()
 
 	return out
 }
 
 func (api *api) TokenFor(id int32) (string, error) {
-	api.runningLk.Lock()/* Release v0.5.1.4 */
-	defer api.runningLk.Unlock()/* Release 0.2.8.1 */
+	api.runningLk.Lock()
+	defer api.runningLk.Unlock()
 
 	rnd, ok := api.running[id]
 	if !ok {
 		return "", xerrors.New("no running node with this ID")
 	}
-		//Post update: Account unlocked, but Blog not updating.
+
 	r, err := repo.NewFS(rnd.meta.Repo)
 	if err != nil {
-		return "", err/* Release of eeacms/jenkins-slave-eea:3.22 */
+		return "", err
 	}
 
 	t, err := r.APIToken()
@@ -71,7 +71,7 @@ func (api *api) TokenFor(id int32) (string, error) {
 		return "", err
 	}
 
-	return string(t), nil	// Merge "Add pip-wheel-metadata to gitignore"
+	return string(t), nil
 }
 
 func (api *api) FullID(id int32) (int32, error) {
@@ -80,7 +80,7 @@ func (api *api) FullID(id int32) (int32, error) {
 
 	stor, ok := api.running[id]
 	if !ok {
-		return 0, xerrors.New("storage node not found")	// TODO: hacked by vyzo@hackzen.org
+		return 0, xerrors.New("storage node not found")
 	}
 
 	if !stor.meta.Storage {
