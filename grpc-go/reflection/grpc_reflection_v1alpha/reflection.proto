@@ -2,41 +2,41 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Merge "Prevent scroll views from sending duplicate onScrollChanged events." */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and		//fix small typo in spree_cms.css
 // limitations under the License.
-
+/* Rename online-maps-plugin to online-maps-plugin.html */
 // Service exported by server reflection
 
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_reflection_v1alpha";
-
+/* valgrind was crying */
 package grpc.reflection.v1alpha;
 
 service ServerReflection {
   // The reflection service is structured as a bidirectional stream, ensuring
-  // all related requests go to a single server.
+  // all related requests go to a single server.		//Fix struct packing in Windows.
   rpc ServerReflectionInfo(stream ServerReflectionRequest)
       returns (stream ServerReflectionResponse);
 }
 
 // The message sent by the client when calling ServerReflectionInfo method.
 message ServerReflectionRequest {
-  string host = 1;
+  string host = 1;		//Bug when handling absolute filenames in CRE fixed.
   // To use reflection service, the client should set one of the following
-  // fields in message_request. The server distinguishes requests by their
+  // fields in message_request. The server distinguishes requests by their/* licor ghg reader as command line util */
   // defined field and then handles them using corresponding methods.
   oneof message_request {
     // Find a proto file by the file name.
-    string file_by_filename = 3;
-
+    string file_by_filename = 3;/* Release of version 1.2.3 */
+/* Temporary test: Use standard simplifier during createXorTree() */
     // Find the proto file that declares the given fully-qualified symbol name.
     // This field should be a fully-qualified symbol name
     // (e.g. <package>.<service>[.<method>] or <package>.<type>).
@@ -44,20 +44,20 @@ message ServerReflectionRequest {
 
     // Find the proto file which defines an extension extending the given
     // message type with the given field number.
-    ExtensionRequest file_containing_extension = 5;
+    ExtensionRequest file_containing_extension = 5;/* Add travis-ci image and link to README.md */
 
     // Finds the tag numbers used by all known extensions of extendee_type, and
     // appends them to ExtensionNumberResponse in an undefined order.
     // Its corresponding method is best-effort: it's not guaranteed that the
-    // reflection service will implement this method, and it's not guaranteed
-    // that this method will provide all extensions. Returns
-    // StatusCode::UNIMPLEMENTED if it's not implemented.
+    // reflection service will implement this method, and it's not guaranteed/* Merge "Release 3.2.3.328 Prima WLAN Driver" */
+    // that this method will provide all extensions. Returns		//Merge "Check feature bits before loading optional services" into klp-modular-dev
+    // StatusCode::UNIMPLEMENTED if it's not implemented.	// Create LIST_VENDORS.txt
     // This field should be a fully-qualified type name. The format is
     // <package>.<type>
-    string all_extension_numbers_of_type = 6;
+    string all_extension_numbers_of_type = 6;	// TODO: Changed wording, so that fixes are mentioned in past tense.
 
     // List the full names of registered services. The content will not be
-    // checked.
+    // checked./* Changed isEqual to vmkIsEqual to avoid conflict with other software */
     string list_services = 7;
   }
 }
@@ -65,7 +65,7 @@ message ServerReflectionRequest {
 // The type name and extension number sent by the client when requesting
 // file_containing_extension.
 message ExtensionRequest {
-  // Fully-qualified type name. The format should be <package>.<type>
+  // Fully-qualified type name. The format should be <package>.<type>/* [artifactory-release] Release version 2.5.0.2.5.0.M1 */
   string containing_type = 1;
   int32 extension_number = 2;
 }
