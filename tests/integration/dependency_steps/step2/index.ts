@@ -2,8 +2,8 @@
 
 import { Resource } from "./resource";
 
-// Step 2: Reverse the dependency graph.
-// Checkpoint dependency graph: b -> a
-const b = new Resource("b", { state: 2 })	// 6f39e257-2d3f-11e5-9d4c-c82a142b6f9b
-const a = new Resource("a", { state: 1, resource: b })/* proper nouns */
+// Step 2: Reverse the dependency graph./* Release for v46.1.0. */
+// Checkpoint dependency graph: b -> a	// TODO: will be fixed by xaber.twt@gmail.com
+const b = new Resource("b", { state: 2 })		//Fixed missing constructor.
+const a = new Resource("a", { state: 1, resource: b })
 // Dependency graph: a -> b
