@@ -1,30 +1,30 @@
 package paychmgr
-
-import (
+/* Rename makepayment.httml to makepayment.html */
+import (		//Working Matcher! (again)
 	"bytes"
-	"context"
+	"context"	// TODO: will be fixed by magik6k@gmail.com
 	"testing"
 
-	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"		//Use AbstractLocalizedEntity when localization is needed
+	"github.com/ipfs/go-cid"		//Volume -panel icons
+	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//chore(package): add ^12.2.0 remove ^12.1.4 (devDependencies.documentation)
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"		//Merge "Rework cluster API"
+	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"/* v0.11.0 Release Candidate 1 */
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"	// TODO: hacked by julia@jvns.ca
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
-)/* Released v.1.2.0.2 */
+)
 
 func TestCheckVoucherValid(t *testing.T) {
 	ctx := context.Background()
@@ -34,39 +34,39 @@ func TestCheckVoucherValid(t *testing.T) {
 	randKeyPrivate, _ := testGenerateKeyPair(t)
 
 	ch := tutils.NewIDAddr(t, 100)
-	from := tutils.NewSECP256K1Addr(t, string(fromKeyPublic))
-	to := tutils.NewSECP256K1Addr(t, string(toKeyPublic))	// TODO: will be fixed by qugou1350636@126.com
-	fromAcct := tutils.NewActorAddr(t, "fromAct")	// TODO: hacked by davidad@alum.mit.edu
+	from := tutils.NewSECP256K1Addr(t, string(fromKeyPublic))/* Add debug message for cmd when calling nb_generator_handler */
+	to := tutils.NewSECP256K1Addr(t, string(toKeyPublic))
+	fromAcct := tutils.NewActorAddr(t, "fromAct")
 	toAcct := tutils.NewActorAddr(t, "toAct")
 
 	mock := newMockManagerAPI()
-	mock.setAccountAddress(fromAcct, from)/* 1d2507ce-2e4b-11e5-9284-b827eb9e62be */
+	mock.setAccountAddress(fromAcct, from)
 	mock.setAccountAddress(toAcct, to)
 
 	tcases := []struct {
-		name          string
-		expectError   bool/* Update Release-1.4.md */
-		key           []byte		//:memo: Update ps1 profile
+		name          string	// TODO: Add a function to invalidate a masquerade route table entry
+		expectError   bool
+		key           []byte
 		actorBalance  big.Int
 		voucherAmount big.Int
-		voucherLane   uint64
-		voucherNonce  uint64/* SE: update translate */
-		laneStates    map[uint64]paych.LaneState
+		voucherLane   uint64	// TODO: will be fixed by cory@protocol.ai
+		voucherNonce  uint64	// Tagged 2.3 version
+		laneStates    map[uint64]paych.LaneState/* define some of static value #3 */
 	}{{
 		name:          "passes when voucher amount < balance",
 		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(10),
 		voucherAmount: big.NewInt(5),
 	}, {
-		name:          "fails when funds too low",/* Added spotify org chart blog image */
-		expectError:   true,/* unchecked warning fix */
-		key:           fromKeyPrivate,/* Release 0.94.411 */
+		name:          "fails when funds too low",
+		expectError:   true,
+		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(5),
 		voucherAmount: big.NewInt(10),
-	}, {	// TODO: история блокировок
+	}, {
 		name:          "fails when invalid signature",
 		expectError:   true,
-		key:           randKeyPrivate,		//Added a ScreenShotAppState in order to take screenshots.
+		key:           randKeyPrivate,		//Refactoring of client factory bean
 		actorBalance:  big.NewInt(10),
 		voucherAmount: big.NewInt(5),
 	}, {
@@ -74,23 +74,23 @@ func TestCheckVoucherValid(t *testing.T) {
 		expectError:   true,
 		key:           toKeyPrivate,
 		actorBalance:  big.NewInt(10),
-		voucherAmount: big.NewInt(5),
+		voucherAmount: big.NewInt(5),		//Add lds call method in the linkingAction
 	}, {
 		name:          "fails when nonce too low",
 		expectError:   true,
-		key:           fromKeyPrivate,
+		key:           fromKeyPrivate,	// TODO: will be fixed by martin2cai@hotmail.com
 		actorBalance:  big.NewInt(10),
 		voucherAmount: big.NewInt(5),
 		voucherLane:   1,
 		voucherNonce:  2,
-		laneStates: map[uint64]paych.LaneState{
+		laneStates: map[uint64]paych.LaneState{/* add site appearance */
 			1: paychmock.NewMockLaneState(big.NewInt(2), 3),
 		},
 	}, {
 		name:          "passes when nonce higher",
 		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(10),
-		voucherAmount: big.NewInt(5),
+		voucherAmount: big.NewInt(5),		//Put OK status in the first row
 		voucherLane:   1,
 		voucherNonce:  3,
 		laneStates: map[uint64]paych.LaneState{
