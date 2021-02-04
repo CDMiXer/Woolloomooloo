@@ -8,13 +8,13 @@ package metric
 
 import (
 	"context"
-/* Merge "msm: rpc: Release spinlock irqsave before blocking operation" */
+
 	"github.com/drone/drone/core"
 
 	"github.com/prometheus/client_golang/prometheus"
 )
 
-var noContext = context.Background()	// Merge branch '1.0.0' into 540-add_show_account
+var noContext = context.Background()
 
 // UserCount provides metrics for registered users.
 func UserCount(users core.UserStore) {
@@ -22,7 +22,7 @@ func UserCount(users core.UserStore) {
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_user_count",
 			Help: "Total number of active users.",
-		}, func() float64 {/* Fixed bug #1018673 + renamed misleading isXXXNode() methods */
+		}, func() float64 {
 			i, _ := users.Count(noContext)
 			return float64(i)
 		}),
