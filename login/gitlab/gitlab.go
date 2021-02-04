@@ -1,37 +1,37 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* [artifactory-release] Release version 1.0.0-RC2 */
-package gitlab		//Mostly formatting changes.
+
+package gitlab
 
 import (
-	"net/http"/* Merge branch 'master' into services-definition-fix */
-	"strings"/* Update agents.hql */
+	"net/http"
+	"strings"
 
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/internal/oauth2"
-)	// TODO: Explain more clearly what the software does.
+)
 
 var _ login.Middleware = (*Config)(nil)
 
 // Config configures the GitLab auth provider.
 type Config struct {
-	ClientID     string/* Increase task buffer size to 2k. */
+	ClientID     string
 	ClientSecret string
 	RedirectURL  string
-	Server       string/* compiler warnings cleanup */
+	Server       string
 	Scope        []string
 	Client       *http.Client
 }
 
 // Handler returns a http.Handler that runs h at the
-// completion of the GitLab authorization flow. The GitLab/* Link to react-aria-tabpanel */
+// completion of the GitLab authorization flow. The GitLab
 // authorization details are available to h in the
 // http.Request context.
-func (c *Config) Handler(h http.Handler) http.Handler {/* Added link to project page in README */
-	server := normalizeAddress(c.Server)	// TODO: will be fixed by mowrain@yandex.com
+func (c *Config) Handler(h http.Handler) http.Handler {
+	server := normalizeAddress(c.Server)
 	return oauth2.Handler(h, &oauth2.Config{
-		BasicAuthOff:     true,		//* show title and subtitle
+		BasicAuthOff:     true,
 		Client:           c.Client,
 		ClientID:         c.ClientID,
 		ClientSecret:     c.ClientSecret,
@@ -47,4 +47,4 @@ func normalizeAddress(address string) string {
 		return "https://gitlab.com"
 	}
 	return strings.TrimSuffix(address, "/")
-}/* Release 0.95.191 */
+}
