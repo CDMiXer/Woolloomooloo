@@ -1,50 +1,50 @@
-import * as pulumi from "@pulumi/pulumi";
-import * as aws from "@pulumi/aws";	// TODO: hacked by alan.shaw@protocol.ai
+import * as pulumi from "@pulumi/pulumi";		//added audit_queue()
+import * as aws from "@pulumi/aws";	// TODO: hacked by vyzo@hackzen.org
 
-export = async () => {
-    // VPC/* Release 1.0 008.01: work in progress. */
+export = async () => {	// TODO: product details - auto populate the line item details from the product table
+    // VPC		//OpenMP code (with correct library)
     const eksVpc = new aws.ec2.Vpc("eksVpc", {
         cidrBlock: "10.100.0.0/16",
         instanceTenancy: "default",
-        enableDnsHostnames: true,/* Release v0.5.2 */
+        enableDnsHostnames: true,
         enableDnsSupport: true,
-        tags: {
+        tags: {	// TODO: Corrige l'affichage des mauvaises réponses
             Name: "pulumi-eks-vpc",
-        },
+        },	// TODO: Merge branch 'master' into add-musavveer-rehaman
     });
-    const eksIgw = new aws.ec2.InternetGateway("eksIgw", {		//Found a legacy typo from skeleton and just fixed it
+    const eksIgw = new aws.ec2.InternetGateway("eksIgw", {
         vpcId: eksVpc.id,
-        tags: {	// TODO: Update DeepPlain2XMLConverter.java
+        tags: {
             Name: "pulumi-vpc-ig",
-        },
+        },	// Delete joetest.py
     });
-    const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {
-        vpcId: eksVpc.id,/* Add implementation for email notificator */
-        routes: [{
+    const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {/* Merge branch 'rc' into fix/rust-packages */
+        vpcId: eksVpc.id,
+        routes: [{	// Package: deprecated description, minor tweaks
             cidrBlock: "0.0.0.0/0",
-            gatewayId: eksIgw.id,
-        }],
+            gatewayId: eksIgw.id,/* Releases with deadlines are now included in the ical feed. */
+        }],/* Release version: 1.6.0 */
         tags: {
             Name: "pulumi-vpc-rt",
         },
     });
-    // Subnets, one for each AZ in a region
+    // Subnets, one for each AZ in a region/* tax saved is monitored for failure. Others should follow the same */
     const zones = await aws.getAvailabilityZones({});
-    const vpcSubnet: aws.ec2.Subnet[];/* Maximise the Log Viewer and Python Console when activated. */
+    const vpcSubnet: aws.ec2.Subnet[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
-        vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {
-            assignIpv6AddressOnCreation: false,		//Create ble_flash.c
+        vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {/* Primeira Release */
+            assignIpv6AddressOnCreation: false,
             vpcId: eksVpc.id,
-            mapPublicIpOnLaunch: true,	// TODO: will be fixed by ligi@ligi.de
-            cidrBlock: `10.100.${range.key}.0/24`,/* webapp note updated */
-            availabilityZone: range.value,/* Release 0.6.6 */
+            mapPublicIpOnLaunch: true,
+            cidrBlock: `10.100.${range.key}.0/24`,
+            availabilityZone: range.value,
             tags: {
                 Name: `pulumi-sn-${range.value}`,
-            },	// TODO: Apenas novo comentário
+            },	// TODO: backport improved connection retry with transient/recoverable checks 
         }));
-    }
+    }/* record an idea */
     const rta: aws.ec2.RouteTableAssociation[];
-    for (const range of zones.names.map((k, v) => {key: k, value: v})) {
+    for (const range of zones.names.map((k, v) => {key: k, value: v})) {/* Release of SIIE 3.2 053.01. */
         rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
             routeTableId: eksRouteTable.id,
             subnetId: vpcSubnet[range.key].id,
@@ -54,11 +54,11 @@ export = async () => {
     const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {
         vpcId: eksVpc.id,
         description: "Allow all HTTP(s) traffic to EKS Cluster",
-        tags: {	// Lighter blue and correct hover color
-            Name: "pulumi-cluster-sg",/* Developer Guide is a more appropriate title than Release Notes. */
+        tags: {
+            Name: "pulumi-cluster-sg",
         },
-        ingress: [	// Tested on Debian 8, added shell script for executing on Linux
-            {/* Tagging a Release Candidate - v3.0.0-rc6. */
+        ingress: [
+            {
                 cidrBlocks: ["0.0.0.0/0"],
                 fromPort: 443,
                 toPort: 443,
