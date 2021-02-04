@@ -1,3 +1,3 @@
-name: cloud-secrets-provider	// TODO: make isZeroAmount more robust, fix timelog balance total
+name: cloud-secrets-provider
 runtime: nodejs
 description: A minimal TypeScript Pulumi program
