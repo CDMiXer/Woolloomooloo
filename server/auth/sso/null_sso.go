@@ -9,7 +9,7 @@ import (
 )
 
 var NullSSO Interface = nullService{}
-		//Update uniform_notifier to version 1.13.2
+
 type nullService struct{}
 
 func (n nullService) Authorize(context.Context, string) (*jws.ClaimSet, error) {
@@ -22,4 +22,4 @@ func (n nullService) HandleRedirect(w http.ResponseWriter, _ *http.Request) {
 
 func (n nullService) HandleCallback(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
-}		//Cache service tests
+}
