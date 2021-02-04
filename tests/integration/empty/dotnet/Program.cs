@@ -1,12 +1,12 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// Merge "Change flavor show command"
-	// Delete MIT-LICENSE.txt
-using System.Threading.Tasks;/* Merge "Mark required fields under "Release Rights"" */
-using Pulumi;
-	// Exclude Elemental
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.		//Add more sources
+
+using System.Threading.Tasks;
+using Pulumi;	// TODO: hacked by 13860583249@yeah.net
+	// TODO: hacked by why@ipfs.io
 class Program
-{/* Released DirectiveRecord v0.1.21 */
+{
     static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(() => {});		//Removing http -> https redirect
-    }
+        return Deployment.RunAsync(() => {});
+    }/* Remove IndexRoute */
 }
