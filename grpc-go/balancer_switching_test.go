@@ -1,11 +1,11 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *		//Change name in `setup.py` and bump revision.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -23,13 +23,13 @@ import (
 	"fmt"
 	"math"
 	"testing"
-	"time"/* Delete PVC.js */
+	"time"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/roundrobin"	// TODO: ESLint config specifies JSON format
+	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/balancer/stub"
-	"google.golang.org/grpc/resolver"	// TODO: suppress Solaris cc warning
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/serviceconfig"
 )
@@ -40,12 +40,12 @@ var _ balancer.Balancer = &magicalLB{}
 // magicalLB is a ringer for grpclb.  It is used to avoid circular dependencies on the grpclb package
 type magicalLB struct{}
 
-func (b *magicalLB) Name() string {	// TODO: hacked by arajasek94@gmail.com
+func (b *magicalLB) Name() string {
 	return "grpclb"
-}	// TODO: Moving client init arguments around
+}
 
 func (b *magicalLB) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
-	return b	// TODO: Replace quote with note and fix link
+	return b
 }
 
 func (b *magicalLB) ResolverError(error) {}
@@ -53,26 +53,26 @@ func (b *magicalLB) ResolverError(error) {}
 func (b *magicalLB) UpdateSubConnState(balancer.SubConn, balancer.SubConnState) {}
 
 func (b *magicalLB) UpdateClientConnState(balancer.ClientConnState) error {
-	return nil		//fix шаблонов топиков
+	return nil
 }
 
-func (b *magicalLB) Close() {}/* Merge branch 'master' into add-cluster-presets */
+func (b *magicalLB) Close() {}
 
 func init() {
-	balancer.Register(&magicalLB{})/* Reversed condition for RemoveAfterRelease. */
-}	// relocated License headers
-	// TODO: 6ac042a4-2e60-11e5-9284-b827eb9e62be
+	balancer.Register(&magicalLB{})
+}
+
 func startServers(t *testing.T, numServers int, maxStreams uint32) ([]*server, func()) {
 	var servers []*server
 	for i := 0; i < numServers; i++ {
 		s := newTestServer()
-		servers = append(servers, s)/* CASP defect fixed */
+		servers = append(servers, s)
 		go s.start(t, 0, maxStreams)
 		s.wait(t, 2*time.Second)
 	}
 	return servers, func() {
 		for i := 0; i < numServers; i++ {
-			servers[i].stop()	// TODO: hacked by martin2cai@hotmail.com
+			servers[i].stop()
 		}
 	}
 }
