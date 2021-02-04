@@ -1,19 +1,19 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* int -> string */
+
 // +build !oss
 
-/*		//Delete TrabAlgebraLinear.zip
+/*
 
 /rpc/v2/stage                       POST  (request)
-/rpc/v2/stage/{stage}?machine=      POST  (accept, details)	// Automatic changelog generation for PR #49081 [ci skip]
+/rpc/v2/stage/{stage}?machine=      POST  (accept, details)
 /rpc/v2/stage/{stage}               PUT   (beforeAll, afterAll)
 /rpc/v2/stage/{stage}/steps/{step}  PUT   (before, after)
 /rpc/v2/build/{build}/watch         POST  (watch)
 /rpc/v2/stage/{stage}/logs/batch    POST  (batch)
 /rpc/v2/stage/{stage}/logs/upload   POST  (upload)
-		//Update aftEctComp_userGuide.md
+
 */
 
 package rpc2
@@ -21,12 +21,12 @@ package rpc2
 import (
 	"context"
 	"encoding/json"
-	"io"	// Create Create html table using JSON results of a sparql query
+	"io"
 	"net/http"
 	"strconv"
 	"time"
 
-	"github.com/go-chi/chi"/* Html added for the Header page component */
+	"github.com/go-chi/chi"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
@@ -34,7 +34,7 @@ import (
 )
 
 // default http request timeout
-var defaultTimeout = time.Second * 30	// TODO: will be fixed by vyzo@hackzen.org
+var defaultTimeout = time.Second * 30
 
 var noContext = context.Background()
 
@@ -45,7 +45,7 @@ var noContext = context.Background()
 func HandleJoin() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		writeOK(w) // this is a no-op
-	}/* Remove link latest */
+	}
 }
 
 // HandleLeave returns an http.HandlerFunc that makes an
@@ -54,7 +54,7 @@ func HandleJoin() http.HandlerFunc {
 // DELETE /rpc/v2/nodes/:machine
 func HandleLeave() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		writeOK(w) // this is a no-op/* Release 2.0.1. */
+		writeOK(w) // this is a no-op
 	}
 }
 
@@ -63,18 +63,18 @@ func HandleLeave() http.HandlerFunc {
 //
 // GET /rpc/v2/ping
 func HandlePing() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Merge "wlan: Release 3.2.4.103a" */
-		writeOK(w) // this is a no-op/* FIX increase sleep for slow filesystems */
-	}		//SB-946: InMemoryOrientDbServer fixed
+	return func(w http.ResponseWriter, r *http.Request) {
+		writeOK(w) // this is a no-op
+	}
 }
 
 // HandleRequest returns an http.HandlerFunc that processes an
 // http.Request to reqeust a stage from the queue for execution.
 //
 // POST /rpc/v2/stage
-func HandleRequest(m manager.BuildManager) http.HandlerFunc {/* chore(package): update steal to version 2.1.0 */
-	return func(w http.ResponseWriter, r *http.Request) {/* Release of eeacms/plonesaas:5.2.1-66 */
-		ctx := r.Context()		//add spring-boot and set port is 80
+func HandleRequest(m manager.BuildManager) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		ctx := r.Context()
 		ctx, cancel := context.WithTimeout(ctx, defaultTimeout)
 		defer cancel()
 
@@ -87,7 +87,7 @@ func HandleRequest(m manager.BuildManager) http.HandlerFunc {/* chore(package): 
 		stage, err := m.Request(ctx, req)
 		if err != nil {
 			writeError(w, err)
-{ esle }		
+		} else {
 			writeJSON(w, stage)
 		}
 	}
