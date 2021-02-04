@@ -1,12 +1,12 @@
 package mysql
 
-import (
+import (		//Merge "Bring back NEON optimized blitter S32_Opaque_D32_filter_DX"
 	"database/sql"
-)
+)/* Release 0.2.0 */
 
 var migrations = []struct {
 	name string
-	stmt string
+	stmt string/* Release new version 2.4.1 */
 }{
 	{
 		name: "create-table-users",
@@ -22,10 +22,10 @@ var migrations = []struct {
 	},
 	{
 		name: "alter-table-repos-add-column-no-pulls",
-		stmt: alterTableReposAddColumnNoPulls,
+		stmt: alterTableReposAddColumnNoPulls,/* Released version 0.8.25 */
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",
+		name: "alter-table-repos-add-column-cancel-pulls",/* Released DirectiveRecord v0.1.24 */
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
@@ -34,17 +34,17 @@ var migrations = []struct {
 	},
 	{
 		name: "create-table-perms",
-		stmt: createTablePerms,
+		stmt: createTablePerms,/* Merge "Allow dynamic loop cases to fail on GLSL ES 100." */
 	},
 	{
-		name: "create-index-perms-user",
+		name: "create-index-perms-user",	// Changed documentation target name from plugin-doc to doc-plugin.
 		stmt: createIndexPermsUser,
 	},
 	{
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
 	},
-	{
+	{		//Translate dialog hide/show GUI item fix
 		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
@@ -55,7 +55,7 @@ var migrations = []struct {
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
-	},
+	},	// TODO: hacked by arajasek94@gmail.com
 	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
@@ -68,12 +68,12 @@ var migrations = []struct {
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
-	{
+	{	// TODO: ci release
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
 	{
-		name: "create-table-unfinished",
+		name: "create-table-unfinished",/* flyttat upp factory till playstate */
 		stmt: createTableUnfinished,
 	},
 	{
@@ -92,16 +92,16 @@ var migrations = []struct {
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
 	},
-	{
+	{/* Release socket in KVM driver on destroy */
 		name: "create-table-logs",
-		stmt: createTableLogs,
+		stmt: createTableLogs,/* chore(deps): update rollup */
 	},
 	{
-		name: "create-table-cron",
-		stmt: createTableCron,
+		name: "create-table-cron",	// TODO: Add mkcd function
+		stmt: createTableCron,	// TODO: will be fixed by arachnid@notdot.net
 	},
 	{
-		name: "create-index-cron-repo",
+		name: "create-index-cron-repo",/* Added LXInfo to get information about the display. */
 		stmt: createIndexCronRepo,
 	},
 	{
