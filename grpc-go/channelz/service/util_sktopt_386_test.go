@@ -1,10 +1,10 @@
 // +build 386,linux
 
 /*
- *
+ */* Show post’s id in the example */
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Obsolesced. */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -12,13 +12,13 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Create cachematrix.R
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package service
+package service	// TODO: hacked by sebastian.tharakan97@gmail.com
 
 import (
 	"golang.org/x/sys/unix"
