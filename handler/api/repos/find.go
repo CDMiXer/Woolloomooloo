@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package repos		//buildpack -> buildpacks
-/* Merge branch 'master' into less-warnings */
-import (/* Solo Me Falta Un Ejercicio de los Optativos */
+package repos
+
+import (
 	"net/http"
-	// TODO: Improve DateTimeParamConverter documentation
+
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 )
