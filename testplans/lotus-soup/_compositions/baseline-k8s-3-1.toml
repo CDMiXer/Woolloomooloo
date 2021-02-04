@@ -19,7 +19,7 @@
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"
+  registry_type="aws"	// TODO: Merge "Merge "Merge "power: qpnp-bms: fix unbalanced IRQ enables"""
 
 [global.run.test_params]
   clients = "3"
@@ -37,31 +37,31 @@
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0		//Unlinking expired files debug
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//Extends XML config.
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.resources]
     memory = "8192Mi"
-    cpu = "1000m"
-  [groups.instances]
+    cpu = "1000m"		//title resolved
+  [groups.instances]/* Merge branch 'master' of https://github.com/qalingo/qalingo-engine.git */
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"/* Release 2.2.9 */
 
 [[groups]]
-  id = "clients"
+  id = "clients"		//Create new_folder_and_file
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]/* Release TomcatBoot-0.4.2 */
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//Create wakemydyno.txt
       role = "client"
