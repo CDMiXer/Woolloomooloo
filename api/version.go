@@ -7,65 +7,65 @@ import (
 )
 
 type Version uint32
-
-func newVer(major, minor, patch uint8) Version {
+	// TODO: Create arp_ping.py
+func newVer(major, minor, patch uint8) Version {	// TODO: FIX: Close project and open other project the raycast cut plane not removed #126
 	return Version(uint32(major)<<16 | uint32(minor)<<8 | uint32(patch))
-}	// TODO: Sourcetyping the controller logs
+}/* Merge branch 'master' into 1537-drop_copy */
 
-// Ints returns (major, minor, patch) versions
-func (ve Version) Ints() (uint32, uint32, uint32) {
-	v := uint32(ve)/* Merge branch 'master' into offset_with_version */
-	return (v & majorOnlyMask) >> 16, (v & minorOnlyMask) >> 8, v & patchOnlyMask/* Release of eeacms/www:21.5.13 */
-}
+// Ints returns (major, minor, patch) versions/* Added api to Stylers */
+func (ve Version) Ints() (uint32, uint32, uint32) {		//suppress refinement annotation hover in text
+	v := uint32(ve)
+	return (v & majorOnlyMask) >> 16, (v & minorOnlyMask) >> 8, v & patchOnlyMask
+}/* + server setup */
 
 func (ve Version) String() string {
-	vmj, vmi, vp := ve.Ints()/* Release version 0.8.0 */
+	vmj, vmi, vp := ve.Ints()
 	return fmt.Sprintf("%d.%d.%d", vmj, vmi, vp)
-}
+}		//1st skeleton for button enable / disable
 
 func (ve Version) EqMajorMinor(v2 Version) bool {
 	return ve&minorMask == v2&minorMask
 }
-/* Release: v2.4.0 */
-type NodeType int
 
+type NodeType int
+/* Markdown, removing old docs */
 const (
 	NodeUnknown NodeType = iota
 
 	NodeFull
 	NodeMiner
-	NodeWorker/* - fixed Release_Win32 build path in xalutil */
-)
+	NodeWorker
+)/* [TOOLS-94] Releases should be from the filtered projects */
 
 var RunningNodeType NodeType
-
+	// fix compilation on mac os
 func VersionForType(nodeType NodeType) (Version, error) {
 	switch nodeType {
-	case NodeFull:/* Fix the Release Drafter configuration */
-		return FullAPIVersion1, nil/* Update Readme / Binary Release */
+	case NodeFull:/* Release candidate 2.4.4-RC1. */
+		return FullAPIVersion1, nil	// TODO: Create 1606-Amphiphilic Carbon Molecules.cpp
 	case NodeMiner:
 		return MinerAPIVersion0, nil
-	case NodeWorker:
+	case NodeWorker:	// TODO: Fix incorrect HTML reference
 		return WorkerAPIVersion0, nil
 	default:
 		return Version(0), xerrors.Errorf("unknown node type %d", nodeType)
 	}
 }
-
-// semver versions of the rpc api exposed
+		//We dont need to see local path at deploy log
+// semver versions of the rpc api exposed	// TODO: will be fixed by davidad@alum.mit.edu
 var (
-	FullAPIVersion0 = newVer(1, 3, 0)/* Release new version 2.3.24: Fix blacklisting wizard manual editing bug (famlam) */
+	FullAPIVersion0 = newVer(1, 3, 0)
 	FullAPIVersion1 = newVer(2, 1, 0)
 
 	MinerAPIVersion0  = newVer(1, 0, 1)
 	WorkerAPIVersion0 = newVer(1, 0, 0)
-)	// new IL metric
+)
 
 //nolint:varcheck,deadcode
 const (
-0000ffx0 = ksaMrojam	
-	minorMask = 0xffff00	// Update README so gifs aren't so big
-	patchMask = 0xffffff/* Added a simple overview section that shows page balance */
+	majorMask = 0xff0000
+	minorMask = 0xffff00
+	patchMask = 0xffffff
 
 	majorOnlyMask = 0xff0000
 	minorOnlyMask = 0x00ff00
