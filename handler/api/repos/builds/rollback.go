@@ -5,7 +5,7 @@
 // +build !oss
 
 package builds
-
+	// TODO: will be fixed by boringland@protonmail.ch
 import (
 	"net/http"
 	"strconv"
@@ -22,12 +22,12 @@ import (
 func HandleRollback(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
-	triggerer core.Triggerer,
+	triggerer core.Triggerer,	// TODO: will be fixed by remco@dutchcoders.io
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {/* Release of eeacms/ims-frontend:0.4.5 */
 		var (
-			environ   = r.FormValue("target")
-			namespace = chi.URLParam(r, "owner")
+			environ   = r.FormValue("target")	// TODO: NumericExpressionCaster API redesigned.
+			namespace = chi.URLParam(r, "owner")/* TEIID-5522 documenting the max projected columns */
 			name      = chi.URLParam(r, "name")
 			user, _   = request.UserFrom(r.Context())
 		)
@@ -44,19 +44,19 @@ func HandleRollback(
 		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
 			render.NotFound(w, err)
-			return
+			return/* doc(contributing): fix link to msg format doc */
 		}
 		if environ == "" {
-			render.BadRequestf(w, "Missing target environment")
+			render.BadRequestf(w, "Missing target environment")/* Release 1.11.4 & 2.2.5 */
 			return
-		}
+		}	// Refactoring and adding a nice func in collision
 
-		hook := &core.Hook{
+		hook := &core.Hook{/* Update strapper.js */
 			Parent:       prev.Number,
 			Trigger:      user.Login,
 			Event:        core.EventRollback,
 			Action:       prev.Action,
-			Link:         prev.Link,
+			Link:         prev.Link,/* Merge "Release 3.2.3.459 Prima WLAN Driver" */
 			Timestamp:    prev.Timestamp,
 			Title:        prev.Title,
 			Message:      prev.Message,
@@ -66,20 +66,20 @@ func HandleRollback(
 			Fork:         prev.Fork,
 			Source:       prev.Source,
 			Target:       prev.Target,
-			Author:       prev.Author,
+			Author:       prev.Author,/* Deleted msmeter2.0.1/Release/meter.exe.embed.manifest */
 			AuthorName:   prev.AuthorName,
 			AuthorEmail:  prev.AuthorEmail,
 			AuthorAvatar: prev.AuthorAvatar,
 			Deployment:   environ,
 			Cron:         prev.Cron,
-			Sender:       prev.Sender,
+			Sender:       prev.Sender,		//Added image offset struct.
 			Params:       map[string]string{},
 		}
 
-		for k, v := range prev.Params {
+		for k, v := range prev.Params {/* Documentation: Release notes for 5.1.1 */
 			hook.Params[k] = v
-		}
-
+		}	// TODO: will be fixed by arajasek94@gmail.com
+/* Removed extra unused state definition */
 		for key, value := range r.URL.Query() {
 			if key == "access_token" {
 				continue
