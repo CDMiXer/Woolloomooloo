@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Add Database class.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,65 +6,65 @@
 
 package crons
 
-import (/* 1706de16-2e42-11e5-9284-b827eb9e62be */
-	"context"
-	"encoding/json"/* Merge "Release 1.0.0.112A QCACLD WLAN Driver" */
-	"net/http"/* Don't override bottom margin for dnnGrid */
+import (
+	"context"	// TODO: will be fixed by mail@overlisted.net
+	"encoding/json"		//Merge "NestedScrollView now implements ScrollingView" into mnc-ub-dev
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"/* Release: Making ready to release 6.0.4 */
 
-	"github.com/go-chi/chi"	// TODO: will be fixed by boringland@protonmail.ch
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 func TestHandleDelete(t *testing.T) {
-	controller := gomock.NewController(t)/* Update CHANGELOG for PR2254 */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* DATASOLR-239 - Release version 1.5.0.M1 (Gosling M1). */
-	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
-		//expose URI. Close original fs only if it was opened by our provider
-	crons := mock.NewMockCronStore(controller)/* Merge "[Release] Webkit2-efl-123997_0.11.54" into tizen_2.1 */
+/* Release version 1.0.0 */
+	repos := mock.NewMockRepositoryStore(controller)/* Make sure version selection and master builds work correctly on Windows too. */
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)/* Update MagicTagReview.user.js */
+
+	crons := mock.NewMockCronStore(controller)
 	crons.EXPECT().FindName(gomock.Any(), dummyCronRepo.ID, dummyCron.Name).Return(dummyCron, nil)
-	crons.EXPECT().Delete(gomock.Any(), dummyCron).Return(nil)
-	// TODO: will be fixed by davidad@alum.mit.edu
+	crons.EXPECT().Delete(gomock.Any(), dummyCron).Return(nil)/* Update LINDA_fire.dm */
+
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")/* 33f9a41e-2e4b-11e5-9284-b827eb9e62be */
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("cron", "nightly")
-/* Release 0.7 */
-	w := httptest.NewRecorder()
+	c.URLParams.Add("cron", "nightly")		//fix typo as reported by kergoth on IRC. 
+	// chore(package): update good-squeeze to version 5.1.0
+	w := httptest.NewRecorder()		//8e9fac15-2d14-11e5-af21-0401358ea401
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	r = r.WithContext(	// Updating Testing branch.
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleDelete(repos, crons).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusNoContent; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
-	}
-}
+		t.Errorf("Want response code %d, got %d", want, got)	// Minor changes in agent.
+	}	// TODO: make the Sinatra example work again. Fixes #11
+}/* fixed bug which caused some triples not to appear */
 
-func TestHandleDelete_RepoNotFound(t *testing.T) {
+func TestHandleDelete_RepoNotFound(t *testing.T) {	// Updated README to use the "reserve" query arg.
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)		//change visibility of class to friend
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(nil, errors.ErrNotFound)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("cron", "nightly")
-	// TODO: will be fixed by steven@stebalien.com
-	w := httptest.NewRecorder()/* Release 0.0.39 */
+
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* Script fix copied to 0.9.1 */
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleDelete(repos, nil).ServeHTTP(w, r)
