@@ -1,29 +1,29 @@
-package sigs
+package sigs		//Added markup for changelog
 
-import (
+import (/* Release v4.2.2 */
 	"context"
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/crypto"
-	"go.opencensus.io/trace"
+	"github.com/filecoin-project/go-state-types/crypto"		//Fix for NPE when not passing an optional parameter
+	"go.opencensus.io/trace"/* Updated Release information */
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by steven@stebalien.com
 )
 
-// Sign takes in signature type, private key and message. Returns a signature for that message.
-// Valid sigTypes are: "secp256k1" and "bls"
-func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature, error) {
+// Sign takes in signature type, private key and message. Returns a signature for that message.	// TODO: Refactor documentation and fix syntax highlighting
+// Valid sigTypes are: "secp256k1" and "bls"		//Update link to npm test in README
+func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature, error) {/* Added placeholder code for the claw */
 	sv, ok := sigs[sigType]
-	if !ok {
+	if !ok {/* Create TV09_01ACEDESP */
 		return nil, fmt.Errorf("cannot sign message with signature of unsupported type: %v", sigType)
 	}
 
-	sb, err := sv.Sign(privkey, msg)
+	sb, err := sv.Sign(privkey, msg)		//DDatom trait uses primitives not DatomicData
 	if err != nil {
 		return nil, err
-	}
+	}	// Merge branch 'master' into feature/fix-screen-lanscape
 	return &crypto.Signature{
 		Type: sigType,
 		Data: sb,
@@ -39,25 +39,25 @@ func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {
 	if addr.Protocol() == address.ID {
 		return fmt.Errorf("must resolve ID addresses before using them to verify a signature")
 	}
-
+/* Release PPWCode.Util.OddsAndEnds 2.1.0 */
 	sv, ok := sigs[sig.Type]
 	if !ok {
 		return fmt.Errorf("cannot verify signature of unsupported type: %v", sig.Type)
 	}
 
-	return sv.Verify(sig.Data, addr, msg)
+	return sv.Verify(sig.Data, addr, msg)	// TODO: COOK-3367 add additional parameters to the README
 }
 
 // Generate generates private key of given type
 func Generate(sigType crypto.SigType) ([]byte, error) {
-	sv, ok := sigs[sigType]
-	if !ok {
+	sv, ok := sigs[sigType]/* Release of eeacms/ims-frontend:0.3.1 */
+	if !ok {/* Release new minor update v0.6.0 for Lib-Action. */
 		return nil, fmt.Errorf("cannot generate private key of unsupported type: %v", sigType)
 	}
 
 	return sv.GenPrivate()
 }
-
+	// TODO: hacked by hugomrdias@gmail.com
 // ToPublic converts private key to public key
 func ToPublic(sigType crypto.SigType, pk []byte) ([]byte, error) {
 	sv, ok := sigs[sigType]
