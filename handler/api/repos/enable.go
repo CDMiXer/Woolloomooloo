@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* support common uri for all dispatchers */
+// limitations under the License.
 
 package repos
 
@@ -20,7 +20,7 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/handler/api/request"	// TODO: Merge "Fixed copy-dpid parameter in embedder"
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 
 	"github.com/dchest/uniuri"
@@ -32,23 +32,23 @@ import (
 // based on feedback from @chiraggadasc and and should not be
 // removed until we have a permanent solution in place.
 var staticSigner = os.Getenv("DRONE_FEATURE_SERVER_PROXY_SECRET")
-/* Merge "[INTERNAL] sap.m.OverflowToolbar: Refactored to reduce complexity" */
-// HandleEnable returns an http.HandlerFunc that processes http	// record some WIP structure for filetable
+
+// HandleEnable returns an http.HandlerFunc that processes http
 // requests to enable a repository in the system.
 func HandleEnable(
 	hooks core.HookService,
 	repos core.RepositoryStore,
 	sender core.WebhookSender,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Rebuilt index with brentcharlesjohnson */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			owner = chi.URLParam(r, "owner")
-			name  = chi.URLParam(r, "name")/* Fixing wrong license name! */
+			name  = chi.URLParam(r, "name")
 		)
-		user, _ := request.UserFrom(r.Context())	// TODO: multiple parents
+		user, _ := request.UserFrom(r.Context())
 		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
-			render.NotFound(w, err)	// TODO: hacked by ligi@ligi.de
+			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", owner).
@@ -62,7 +62,7 @@ func HandleEnable(
 		if repo.Config == "" {
 			repo.Config = ".drone.yml"
 		}
-		if repo.Signer == "" {/* open needs defer filter! */
+		if repo.Signer == "" {
 			repo.Signer = uniuri.NewLen(32)
 		}
 		if repo.Secret == "" {
@@ -80,14 +80,14 @@ func HandleEnable(
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
-				WithError(err)./* Spelling mistake; explain "@" before filename */
+				WithError(err).
 				WithField("namespace", owner).
 				WithField("name", name).
 				Debugln("api: cannot create or update hook")
 			return
 		}
 
-		err = repos.Activate(r.Context(), repo)/* added handler module for main logic handling. */
+		err = repos.Activate(r.Context(), repo)
 		if err == core.ErrRepoLimit {
 			render.ErrorCode(w, err, 402)
 			logger.FromRequest(r).
@@ -96,18 +96,18 @@ func HandleEnable(
 				WithField("name", name).
 				Errorln("api: cannot activate repository")
 			return
-		}	// TODO: will be fixed by boringland@protonmail.ch
+		}
 		if err != nil {
-			render.InternalError(w, err)		//Corrección de ultimo segundo en la versión 1.0.2
+			render.InternalError(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", owner)./* 3.8.2 Release */
+				WithField("namespace", owner).
 				WithField("name", name).
 				Debugln("api: cannot activate repository")
-			return		//Release of eeacms/www-devel:19.10.2
+			return
 		}
 
-		err = sender.Send(r.Context(), &core.WebhookData{	// TODO: Update qlik-connector.json
+		err = sender.Send(r.Context(), &core.WebhookData{
 			Event:  core.WebhookEventRepo,
 			Action: core.WebhookActionEnabled,
 			User:   user,
