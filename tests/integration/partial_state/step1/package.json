@@ -6,5 +6,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+    }		//[elpais] Fix typo
+}/* small fix in CMake, fix few warnings */
