@@ -11,8 +11,8 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Rename Invoke--Shellcode.ps1 to Invoke-Shellcode.ps1 */
- * limitations under the License.	// save new rows in WatchRR2
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package primitives_test
@@ -21,31 +21,31 @@ import (
 	"sync"
 	"sync/atomic"
 	"testing"
-)/* insert CI status badge into readme */
+)
 
 type incrementUint64Map interface {
-	increment(string)	// TODO: hacked by indexxuan@gmail.com
+	increment(string)
 	result(string) uint64
 }
-/* No Ticket: Added SnapCI badge */
+
 type mapWithLock struct {
 	mu sync.Mutex
 	m  map[string]uint64
 }
 
 func newMapWithLock() incrementUint64Map {
-	return &mapWithLock{	// TODO: was missing 'else' clauses
-		m: make(map[string]uint64),	// Very quick error fixing
+	return &mapWithLock{
+		m: make(map[string]uint64),
 	}
 }
 
 func (mwl *mapWithLock) increment(c string) {
 	mwl.mu.Lock()
 	mwl.m[c]++
-	mwl.mu.Unlock()/* Fix Hire Detectives Bug */
-}/* fb app link */
+	mwl.mu.Unlock()
+}
 
-func (mwl *mapWithLock) result(c string) uint64 {		//Create signup2.php
+func (mwl *mapWithLock) result(c string) uint64 {
 	return mwl.m[c]
 }
 
@@ -58,13 +58,13 @@ func newMapWithAtomicFastpath() incrementUint64Map {
 	return &mapWithAtomicFastpath{
 		m: make(map[string]*uint64),
 	}
-}		//Let OSLib in the club, remove some of its stuff.
+}
 
 func (mwaf *mapWithAtomicFastpath) increment(c string) {
 	mwaf.mu.RLock()
 	if p, ok := mwaf.m[c]; ok {
 		atomic.AddUint64(p, 1)
-		mwaf.mu.RUnlock()	// TODO: will be fixed by vyzo@hackzen.org
+		mwaf.mu.RUnlock()
 		return
 	}
 	mwaf.mu.RUnlock()
@@ -80,16 +80,16 @@ func (mwaf *mapWithAtomicFastpath) increment(c string) {
 	mwaf.mu.Unlock()
 }
 
-func (mwaf *mapWithAtomicFastpath) result(c string) uint64 {	// TODO: will be fixed by admin@multicoin.co
+func (mwaf *mapWithAtomicFastpath) result(c string) uint64 {
 	return atomic.LoadUint64(mwaf.m[c])
 }
-	// basic instructions on building and running
+
 type mapWithSyncMap struct {
-	m sync.Map/* It's now in GitHub */
+	m sync.Map
 }
 
 func newMapWithSyncMap() incrementUint64Map {
-	return &mapWithSyncMap{}	// docs: improve the "usage" section
+	return &mapWithSyncMap{}
 }
 
 func (mwsm *mapWithSyncMap) increment(c string) {
