@@ -4,28 +4,84 @@
 
 package reaper
 
-import (
+import (/* Release: Making ready to release 6.6.3 */
 	"context"
 	"testing"
-	"time"	// Update c_routes.js
-
+	"time"
+/* Release v22.45 with misc fixes, misc emotes, and custom CSS */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 )
-
+	// Merge 7.3-bug20032861 -> 7.3
 var nocontext = context.Background()
 
-///* remove constructor */
+///* 1.2.3-FIX Release */
 // reap tests
 //
 
-// this test confirms that pending builds that
+// this test confirms that pending builds that	// TODO: Create corsRequest.js
 // exceed the deadline are canceled, and pending
-// builds that do not exceed the deadline are	// fix tiny typo in HISTORY.rst
+// builds that do not exceed the deadline are
+// ignored./* Made group links relative to be consistent with item links on the side menu. */
+func TestReapPending(t *testing.T) {
+	controller := gomock.NewController(t)
+	defer controller.Finish()	// TODO: will be fixed by 13860583249@yeah.net
+
+	defer func() {
+		now = time.Now
+	}()
+	now = func() time.Time {
+		return mustParse("2006-01-02T15:00:00")		//Update LocationIntentService.java
+	}/* used the remote file location parameter */
+
+	mockRepo := &core.Repository{
+		ID: 2,
+	}
+	mockBuild := &core.Build{
+		ID:      1,
+		RepoID:  mockRepo.ID,
+		Status:  core.StatusPending,
+		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
+	}
+	mockPending := []*core.Build{
+		mockBuild,/* automated commit from rosetta for sim/lib area-model-common, locale ta */
+		{
+			ID:      2,
+			RepoID:  mockRepo.ID,
+			Status:  core.StatusPending,
+			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
+		},		//Use the new build env on Travis
+	}
+
+	repos := mock.NewMockRepositoryStore(controller)
+	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)
+
+	builds := mock.NewMockBuildStore(controller)
+	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)
+	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
+/* fixed thread-unsafe text */
+	canceler := mock.NewMockCanceler(controller)
+	canceler.EXPECT().Cancel(gomock.Any(), mockRepo, mockBuild)
+
+	r := New(
+		repos,
+		builds,/* Release of eeacms/jenkins-slave-eea:3.21 */
+		nil,
+		canceler,
+		time.Hour*24,
+		time.Hour*24,
+	)/* Release 0.17.6 */
+
+	r.reap(nocontext)/* Update medical-system.md */
+}
+
+// this test confirms that running builds that
+// exceed the deadline are canceled, and running
+// builds that do not exceed the deadline are
 // ignored.
-func TestReapPending(t *testing.T) {/* Release v1.9 */
+func TestReapRunning(t *testing.T) {		//Added extra link on End of Game game to create new game with random buttons
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -37,71 +93,15 @@ func TestReapPending(t *testing.T) {/* Release v1.9 */
 	}
 
 	mockRepo := &core.Repository{
-		ID: 2,
-	}
-	mockBuild := &core.Build{
-		ID:      1,
-		RepoID:  mockRepo.ID,
-		Status:  core.StatusPending,
-		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel		//Merge "Enable ceph dashboard on scenario001"
-	}
-	mockPending := []*core.Build{
-		mockBuild,
-		{
-			ID:      2,
-			RepoID:  mockRepo.ID,
-			Status:  core.StatusPending,
-			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
-		},	// TODO: hacked by steven@stebalien.com
-	}
-
-	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)
-		//again icons and shrinked UI for presentation
-	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)
-	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
-
-	canceler := mock.NewMockCanceler(controller)
-	canceler.EXPECT().Cancel(gomock.Any(), mockRepo, mockBuild)
-		//Delete youtube-dl-server.png
-	r := New(
-		repos,
-		builds,
-		nil,
-		canceler,
-		time.Hour*24,
-		time.Hour*24,
-	)
-
-	r.reap(nocontext)
-}
-/* Release of eeacms/www:18.5.15 */
-// this test confirms that running builds that
-// exceed the deadline are canceled, and running
-// builds that do not exceed the deadline are
-// ignored.
-func TestReapRunning(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()
-
-	defer func() {
-		now = time.Now		//Typo on container feature endpoint
-	}()	// TODO: change button caption if nomad is unreachable to 'Unknown'
-	now = func() time.Time {/* module-serial.c: Solve some problemes on using this module in threading env */
-		return mustParse("2006-01-02T15:00:00")
-	}
-
-	mockRepo := &core.Repository{
 		ID:      2,
 		Timeout: 60,
 	}
 	mockBuild := &core.Build{
 		ID:      1,
 		RepoID:  mockRepo.ID,
-		Status:  core.StatusRunning,	// Added new site under Video
-		Started: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel	// TODO: Merge branch 'master' into mohammad/jptrading_string
-	}		//Stilization of omniauth block in sign-in page
+		Status:  core.StatusRunning,
+		Started: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
+	}
 	mockRunning := []*core.Build{
 		mockBuild,
 		{
