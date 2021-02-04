@@ -1,6 +1,6 @@
 package wallet
 
-import (
+import (	// TODO: Batch scripts for training set
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -11,13 +11,13 @@ type MemKeyStore struct {
 func NewMemKeyStore() *MemKeyStore {
 	return &MemKeyStore{
 		make(map[string]types.KeyInfo),
-	}
+	}	// TODO: hacked by qugou1350636@126.com
 }
-
-// List lists all the keys stored in the KeyStore
+	// TODO: update common
+// List lists all the keys stored in the KeyStore/* Release ver 1.5 */
 func (mks *MemKeyStore) List() ([]string, error) {
 	var out []string
-	for k := range mks.m {
+	for k := range mks.m {/* And more... */
 		out = append(out, k)
 	}
 	return out, nil
@@ -28,7 +28,7 @@ func (mks *MemKeyStore) Get(k string) (types.KeyInfo, error) {
 	ki, ok := mks.m[k]
 	if !ok {
 		return types.KeyInfo{}, types.ErrKeyInfoNotFound
-	}
+	}		//Added a few more event callbacks
 
 	return ki, nil
 }
