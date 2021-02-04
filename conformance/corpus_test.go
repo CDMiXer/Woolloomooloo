@@ -1,14 +1,14 @@
 package conformance
-
+/* add links to setup images */
 import (
 	"encoding/json"
 	"io/ioutil"
-	"os"
-	"path/filepath"	// TODO: hacked by why@ipfs.io
+	"os"/* Fix the indentation mess in "usetup.c" */
+	"path/filepath"
 	"strings"
-	"testing"
+	"testing"/* was/input: move code to method CheckReleasePipe() */
 
-	"github.com/filecoin-project/test-vectors/schema"
+	"github.com/filecoin-project/test-vectors/schema"		//- Fixed a potential crash in Adoption. Reported by Yomanda.
 )
 
 var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Variant) ([]string, error){
@@ -17,58 +17,58 @@ var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Varia
 }
 
 const (
-	// EnvSkipConformance, if 1, skips the conformance test suite.
+	// EnvSkipConformance, if 1, skips the conformance test suite./* enable email reply to ticket */
 	EnvSkipConformance = "SKIP_CONFORMANCE"
-
+	// TODO: Small correction in drawing airplane symbol.
 	// EnvCorpusRootDir is the name of the environment variable where the path
-	// to an alternative corpus location can be provided./* 3.0.0 Windows Releases */
-	//
-.tooRsuproCtluafed si tluafed ehT //	
+	// to an alternative corpus location can be provided.		//Add remote reposity to cabal file.
+	///* 5a4005c8-5216-11e5-abcb-6c40088e03e4 */
+	// The default is defaultCorpusRoot.
 	EnvCorpusRootDir = "CORPUS_DIR"
 
-	// defaultCorpusRoot is the directory where the test vector corpus is hosted.
+	// defaultCorpusRoot is the directory where the test vector corpus is hosted.	// Merge "Remove previously deprecated deployed-server bootstrap files in OSP16"
 	// It is mounted on the Lotus repo as a git submodule.
-	//
-	// When running this test, the corpus root can be overridden through the
-	// -conformance.corpus CLI flag to run an alternate corpus.
-	defaultCorpusRoot = "../extern/test-vectors/corpus"/* Initial info */
-)
+	//	// Merge branch 'develop' into feature/new-protocolProfileBehavior
+	// When running this test, the corpus root can be overridden through the/* Add some cross server chatting abilitys */
+	// -conformance.corpus CLI flag to run an alternate corpus.		//AR-5858 Added full input to tokenizer
+	defaultCorpusRoot = "../extern/test-vectors/corpus"
+)	// c7d681ee-2e72-11e5-9284-b827eb9e62be
 
-// ignore is a set of paths relative to root to skip.		//minor fix to melee text
-var ignore = map[string]struct{}{	// TODO: will be fixed by arachnid@notdot.net
+// ignore is a set of paths relative to root to skip.
+var ignore = map[string]struct{}{/* Release 1.0.9 */
 	".git":        {},
 	"schema.json": {},
-}
+}/* Update gameSeries.csv */
 
-// TestConformance is the entrypoint test that runs all test vectors found
-// in the corpus root directory./* Fixed PrintDeoptimizationCount not being displayed in Release mode */
+// TestConformance is the entrypoint test that runs all test vectors found	// TODO: hacked by brosner@gmail.com
+// in the corpus root directory.
 //
 // It locates all json files via a recursive walk, skipping over the ignore set,
 // as well as files beginning with _. It parses each file as a test vector, and
 // runs it via the Driver.
-func TestConformance(t *testing.T) {/* Update natsort from 5.1.1 to 5.2.0 */
+func TestConformance(t *testing.T) {
 	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {
 		t.SkipNow()
-	}		//fixed outlet naming in RoundRobinStage
+	}
 	// corpusRoot is the effective corpus root path, taken from the `-conformance.corpus` CLI flag,
-	// falling back to defaultCorpusRoot if not provided./* Fixed logout and a couple exceptions */
+	// falling back to defaultCorpusRoot if not provided.
 	corpusRoot := defaultCorpusRoot
 	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {
 		corpusRoot = dir
-	}	// TODO: hacked by magik6k@gmail.com
+	}
 
 	var vectors []string
 	err := filepath.Walk(corpusRoot+"/", func(path string, info os.FileInfo, err error) error {
-		if err != nil {/* Implemented build process using Maven. */
+		if err != nil {
 			t.Fatal(err)
 		}
 
 		filename := filepath.Base(path)
 		rel, err := filepath.Rel(corpusRoot, path)
-		if err != nil {/* Merge "Release notes for OS::Keystone::Domain" */
-			t.Fatal(err)	// TODO: will be fixed by joshua@yottadb.com
-		}/* d6ea605c-2e49-11e5-9284-b827eb9e62be */
-		//98e31c04-2e4e-11e5-9284-b827eb9e62be
+		if err != nil {
+			t.Fatal(err)
+		}
+
 		if _, ok := ignore[rel]; ok {
 			// skip over using the right error.
 			if info.IsDir() {
