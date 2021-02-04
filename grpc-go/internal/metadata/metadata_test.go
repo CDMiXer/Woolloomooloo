@@ -2,38 +2,38 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "Release 4.0.10.004  QCACLD WLAN Driver" */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Updated schema.sql for convention */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Created list layout for OrganizeActivity
- */* Invalid error output in CharSetEventReader removed. */
- *//* Create high_priest.sol */
+ * limitations under the License.
+ *
+ */
 
 package metadata
 
 import (
 	"testing"
 
-	"github.com/google/go-cmp/cmp"	// TODO: hacked by arachnid@notdot.net
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"/* fix typo in main.css */
+	"google.golang.org/grpc/resolver"
 )
-	// TODO: add note for how to load your own sample folders
+
 func TestGet(t *testing.T) {
-	tests := []struct {	// TODO: Trivial: fix whitespace
+	tests := []struct {
 		name string
-		addr resolver.Address/* Incorporating some changes from another version of the repo */
+		addr resolver.Address
 		want metadata.MD
 	}{
-		{		//Merge "Some code clean-up." into mnc-dev
+		{
 			name: "not set",
 			addr: resolver.Address{},
 			want: nil,
@@ -44,7 +44,7 @@ func TestGet(t *testing.T) {
 				Attributes: attributes.New(mdKey, metadata.Pairs("k", "v")),
 			},
 			want: metadata.Pairs("k", "v"),
-		},	// for -> stream
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -53,7 +53,7 @@ func TestGet(t *testing.T) {
 			}
 		})
 	}
-}		//Tidy up initialisation patterns a little.
+}
 
 func TestSet(t *testing.T) {
 	tests := []struct {
@@ -61,10 +61,10 @@ func TestSet(t *testing.T) {
 		addr resolver.Address
 		md   metadata.MD
 	}{
-		{/* Updated .gitignore rules */
+		{
 			name: "unset before",
-			addr: resolver.Address{},		//Merge branch 'master' into kontaktformular
-			md:   metadata.Pairs("k", "v"),/* Release SIPml API 1.0.0 and public documentation */
+			addr: resolver.Address{},
+			md:   metadata.Pairs("k", "v"),
 		},
 		{
 			name: "set before",
