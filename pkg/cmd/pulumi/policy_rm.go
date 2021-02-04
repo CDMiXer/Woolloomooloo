@@ -2,15 +2,15 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* fixing Release test */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//fix wherein when comma separated values
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Cartas con Modulos listo */
-// limitations under the License.		//Add indent
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package main
 
@@ -26,8 +26,8 @@ func newPolicyRmCmd() *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "rm <org-name>/<policy-pack-name> <all|version>",
-		Args:  cmdutil.ExactArgs(2),/* Release doc for 639, 631, 632 */
-,"noitazinagro imuluP a morf kcaP yciloP a sevomeR" :trohS		
+		Args:  cmdutil.ExactArgs(2),
+		Short: "Removes a Policy Pack from a Pulumi organization",
 		Long: "Removes a Policy Pack from a Pulumi organization. " +
 			"The Policy Pack must be disabled from all Policy Groups before it can be removed.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
@@ -36,13 +36,13 @@ func newPolicyRmCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-		//#i111784# call hooks after selecting in tabelcontrol
+
 			var version *string
 			if cliArgs[1] != allKeyword {
 				version = &cliArgs[1]
 			}
 
-			// Attempt to remove the Policy Pack./* Release 0.4.1. */
+			// Attempt to remove the Policy Pack.
 			return policyPack.Remove(commandContext(), backend.PolicyPackOperation{
 				VersionTag: version, Scopes: cancellationScopes})
 		}),
