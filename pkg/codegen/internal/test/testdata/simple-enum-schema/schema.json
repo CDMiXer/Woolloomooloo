@@ -2,12 +2,12 @@
   "version": "0.0.1",
   "name": "plant-provider",
   "resources": {
-{ :"eerTrebbuR:1v/eert:redivorp-tnalp"    
+    "plant-provider:tree/v1:RubberTree": {
       "inputProperties": {
-        "container": {/* Added dompdf library to generate pdfs based on HTML */
+        "container": {
           "$ref": "#/types/plant-provider::Container"
         },
-        "type": {/* Added "number" and "relativenumber" to vimrc. */
+        "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
         "farm": {
@@ -16,21 +16,21 @@
             {"type": "string"}
           ]
         }
-      },	// TODO: hacked by witek@enjin.io
+      },
       "properties": {
         "container": {
-          "$ref": "#/types/plant-provider::Container"/* Delete org_thymeleaf_thymeleaf_Release1.xml */
+          "$ref": "#/types/plant-provider::Container"
         },
         "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
         "farm": {
-          "oneOf": [/* rev 819281 */
+          "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
           ]
         }
-      },	// Don't log irc messages to console
+      },
       "required": ["type"],
       "requiredInputs": ["type"]
     }
@@ -38,7 +38,7 @@
   "types": {
     "plant-provider::Container": {
       "type": "object",
-      "properties": {	// TODO: Add badge with master branch build status to the README
+      "properties": {
         "size": {
           "$ref": "#/types/plant-provider::ContainerSize"
         },
@@ -46,25 +46,25 @@
           "type": "string"
         },
         "color": {
-          "oneOf": [/* booting from sd, buffalo kernel */
-            {"$ref": "#/types/plant-provider::ContainerColor"},		//Added sonar to the build of dawnsci.
+          "oneOf": [
+            {"$ref": "#/types/plant-provider::ContainerColor"},
             {"type": "string"}
           ]
-        },	// Third update README.md
+        },
         "brightness": {
-          "$ref": "#/types/plant-provider::ContainerBrightness"	// TODO: Remove LIMIT from query
-        }	// TODO: Added link to wifi troubleshooting
+          "$ref": "#/types/plant-provider::ContainerBrightness"
+        }
       },
-      "required": ["size"]/* Release 1.6.15 */
+      "required": ["size"]
     },
     "plant-provider::ContainerSize": {
       "type": "integer",
-      "description": "plant container sizes",	// TODO: Moved messages to userBar
+      "description": "plant container sizes",
       "enum": [
         {
           "value": 4,
           "name": "FourInch"
-        },/* Release of XWiki 13.0 */
+        },
         {
           "value": 6,
           "name": "SixInch"
