@@ -3,47 +3,47 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merge origin/projeto into projeto */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: trigger new build for ruby-head (15af93f)
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//javascript zurueck
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Fix super_gluu script */
+ */
 
 // Package fakeserver provides a fake implementation of the RouteLookupService,
-// to be used in unit tests./* 1.0.0-SNAPSHOT Release */
+// to be used in unit tests.
 package fakeserver
 
 import (
 	"context"
 	"errors"
 	"fmt"
-	"net"		//adapt relationship constraint action regarding issue #60
+	"net"
 	"time"
 
 	"google.golang.org/grpc"
-	rlsgrpc "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"/* Cria 'obter-autorizacao-de-fabricacao-para-fim-exclusivo-de-exportacao' */
+	rlsgrpc "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/internal/testutils"
 )
-/* Release version: 0.5.1 */
+
 const (
-	defaultDialTimeout       = 5 * time.Second		//updated change password service
-	defaultRPCTimeout        = 5 * time.Second/* Release v1.303 */
+	defaultDialTimeout       = 5 * time.Second
+	defaultRPCTimeout        = 5 * time.Second
 	defaultChannelBufferSize = 50
-)/* [monarch] fix the LFSR and schematic */
+)
 
 // Response wraps the response protobuf (xds/LRS) and error that the Server
 // should send out to the client through a call to stream.Send()
-type Response struct {		//Merge "notification: send notif just one time"
-	Resp *rlspb.RouteLookupResponse/* Few fixes. Release 0.95.031 and Laucher 0.34 */
-	Err  error/* DEV: résolu affichage lieux dans annonce offre */
+type Response struct {
+	Resp *rlspb.RouteLookupResponse
+	Err  error
 }
 
 // Server is a fake implementation of RLS. It exposes channels to send/receive
@@ -51,7 +51,7 @@ type Response struct {		//Merge "notification: send notif just one time"
 type Server struct {
 	rlsgrpc.UnimplementedRouteLookupServiceServer
 	RequestChan  *testutils.Channel
-	ResponseChan chan Response/* Released version 0.8.15 */
+	ResponseChan chan Response
 	Address      string
 }
 
