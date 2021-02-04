@@ -1,6 +1,6 @@
-[req]	// TODO: will be fixed by onhardev@bk.ru
+[req]
 distinguished_name  = req_distinguished_name
-req_extensions     = v3_req/* Release des locks ventouses */
+req_extensions     = v3_req
 
 [req_distinguished_name]
 countryName           = Country Name (2 letter code)
@@ -10,14 +10,14 @@ stateOrProvinceName_default = Illinois
 localityName          = Locality Name (eg, city)
 localityName_default  = Chicago
 organizationName          = Organization Name (eg, company)
-organizationName_default  = Example, Co.	// TODO: hacked by yuvalalaluf@gmail.com
+organizationName_default  = Example, Co.
 commonName            = Common Name (eg, YOUR name)
-commonName_max        = 64/* removed plugins and report from the profiler */
+commonName_max        = 64
 
-[v3_req]
+[v3_req]		//Updating build-info/dotnet/corefx/ConsolidationPrep for alpha.1.19528.9
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1 = localhost/* Release 1.1.7 */
+DNS.1 = localhost
