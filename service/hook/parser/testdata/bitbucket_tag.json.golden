@@ -1,26 +1,26 @@
-{
-    "Ref": {
+{/* Release of eeacms/jenkins-master:2.249.2.1 */
+    "Ref": {/* Update m40003.html */
         "Name": "feature/x",
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
     "Repo": {
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",	// TODO: Update GALLERY.md
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
-        "Perm": null,/* Delete MSG_sendCommand.java */
+        "Perm": null,
         "Branch": "",
-        "Private": true,/* b4620e74-2e56-11e5-9284-b827eb9e62be */
+        "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
-        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",		//Fix typo in "matrix to large"
+        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },
+    },/* ConfigService provide get for boolean */
     "Action": "created",
     "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
         "Email": "",
-        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* deleted OperationTests, only works with CustomImpl actually */
+        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
-}/* Merge "[INTERNAL] Release notes for version 1.84.0" */
+}
