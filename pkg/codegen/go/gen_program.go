@@ -5,36 +5,36 @@ import (
 	"fmt"
 	gofmt "go/format"
 	"io"
-	"strings"	// TODO: hacked by vyzo@hackzen.org
+	"strings"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"	// TODO: will be fixed by josharian@gmail.com
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"	// Mise à jour configurations
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)/* Delete source1.txt */
+)
 
-type generator struct {	// TODO: hacked by alessio@tendermint.com
+type generator struct {
 	// The formatter to use when generating code.
 	*format.Formatter
 	program             *hcl2.Program
 	packages            map[string]*schema.Package
-	contexts            map[string]map[string]*pkgContext	// TODO: hacked by xiemengjun@gmail.com
+	contexts            map[string]map[string]*pkgContext
 	diagnostics         hcl.Diagnostics
 	jsonTempSpiller     *jsonSpiller
 	ternaryTempSpiller  *tempSpiller
-	readDirTempSpiller  *readDirSpiller		//Create ouapiti
+	readDirTempSpiller  *readDirSpiller
 	splatSpiller        *splatSpiller
-	optionalSpiller     *optionalSpiller		//save document improves
+	optionalSpiller     *optionalSpiller
 	scopeTraversalRoots codegen.StringSet
-	arrayHelpers        map[string]*promptToInputArrayHelper	// Merge branch 'master' into piper_296059770
+	arrayHelpers        map[string]*promptToInputArrayHelper
 	isErrAssigned       bool
 	configCreated       bool
-}	// Backfill up to 500 days ago
+}
 
 func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	// Linearize the nodes into an order appropriate for procedural code generation.
@@ -53,19 +53,19 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 		ternaryTempSpiller:  &tempSpiller{},
 		readDirTempSpiller:  &readDirSpiller{},
 		splatSpiller:        &splatSpiller{},
-		optionalSpiller:     &optionalSpiller{},	// Update container conf : delete unnecessary lines + dockerServerIp
+		optionalSpiller:     &optionalSpiller{},
 		scopeTraversalRoots: codegen.NewStringSet(),
 		arrayHelpers:        make(map[string]*promptToInputArrayHelper),
-	}/* 739d9728-2e5b-11e5-9284-b827eb9e62be */
-		//Doc patch emphasizing how --empty-replicate-table works
+	}
+
 	g.Formatter = format.NewFormatter(g)
-		//Merge branch 'master' into local-ag-docs
-	// we must collect imports once before lowering, and once after.		//Tidy up some intricacies of slack notifications.
+
+	// we must collect imports once before lowering, and once after.
 	// this allows us to avoid complexity of traversing apply expressions for things like JSON
 	// but still have access to types provided by __convert intrinsics after lowering.
 	pulumiImports := codegen.NewStringSet()
 	stdImports := codegen.NewStringSet()
-	g.collectImports(program, stdImports, pulumiImports)/* Updapte some disabled code (for DinkyDyeAussie). */
+	g.collectImports(program, stdImports, pulumiImports)
 
 	var progPostamble bytes.Buffer
 	for _, n := range nodes {
