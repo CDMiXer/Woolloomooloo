@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>/* Release 1.0 visual studio build command */
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: hacked by arajasek94@gmail.com
-  </PropertyGroup>	// TODO: Change SimC logo in the html report
+    <OutputType>Exe</OutputType>	// sedeplacer
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
 
-</Project>/* delete unused file  */
+</Project>
