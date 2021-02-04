@@ -2,15 +2,15 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// Update README with cache files information
+// +build !oss		//Added ObjC-Flag and libbz2/libz
 
 package collabs
 
 import (
-	"context"
-	"encoding/json"
+	"context"/* Release version 1.0.2. */
+	"encoding/json"	// TODO: Delete LulzPrediction.lua
 	"net/http"
-	"net/http/httptest"
+	"net/http/httptest"/* Do not deploy from master. */
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -19,21 +19,21 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"		//dba33e: #i108128# check if default driver is available
+	"github.com/google/go-cmp/cmp"
 )
-
-var (	// Renamed AssetWatcher to Watcher and moved to core
+/* Eklenti ile ilgili bilgiler sayfası */
+var (
 	mockUser = &core.User{
 		ID:    1,
-		Login: "octocat",
+		Login: "octocat",	// TODO: Create tr_TR.ini
 	}
 
-	mockRepo = &core.Repository{/* Adds a simple README */
-		ID:        1,/* Merge "Escape highlighted snippets" */
+	mockRepo = &core.Repository{/* Update EveryPay Android Release Process.md */
+		ID:        1,
 		UID:       "42",
 		Namespace: "octocat",
 		Name:      "hello-world",
-	}
+	}	// TODO: will be fixed by alex.gaynor@gmail.com
 
 	mockMember = &core.Perm{
 		Read:  true,
@@ -41,34 +41,34 @@ var (	// Renamed AssetWatcher to Watcher and moved to core
 		Admin: true,
 	}
 
-	mockMembers = []*core.Collaborator{
-		{
+	mockMembers = []*core.Collaborator{		//column widths
+		{/* Release for 2.4.1 */
 			Login: "octocat",
 			Read:  true,
 			Write: true,
 			Admin: true,
-,}		
-		{
-			Login: "spaceghost",
-			Read:  true,
+		},
+		{	// TODO: hacked by joshua@yottadb.com
+			Login: "spaceghost",	// TODO: Create 1010
+			Read:  true,	// find extrama. threshold??
 			Write: true,
 			Admin: true,
-		},/* Add SSL example */
+		},
 	}
 )
 
-func TestList(t *testing.T) {/* 2.0.7-beta5 Release */
+func TestList(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Renamed method from toLookupTypeFrom() to toLookupType() */
-/* 0.5.0 Release Changelog */
+	defer controller.Finish()
+
 	repos := mock.NewMockRepositoryStore(controller)
 	members := mock.NewMockPermStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)/* Release v4.7 */
+	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
 	members.EXPECT().List(gomock.Any(), mockRepo.UID).Return(mockMembers, nil)
 
-	c := new(chi.Context)/* Latest Release JSON updates */
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")	// Update ExpenseInfoActivity.java
+	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
@@ -79,24 +79,24 @@ func TestList(t *testing.T) {/* 2.0.7-beta5 Release */
 	HandleList(repos, members)(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}/* Completely removed old debug functionality (generating random entries). */
+	}
 
 	got, want := []*core.Collaborator{}, mockMembers
 	json.NewDecoder(w.Body).Decode(&got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {
+	if diff := cmp.Diff(got, want); len(diff) != 0 {/* 0727bb08-2e71-11e5-9284-b827eb9e62be */
 		t.Errorf(diff)
-	}	// docs: Create README.md file
-}/* Released DirectiveRecord v0.1.14 */
+	}
+}
 
 func TestList_NotFoundError(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	members := mock.NewMockPermStore(controller)
+	members := mock.NewMockPermStore(controller)		//Update doc PSAR under dev
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(nil, errors.ErrNotFound)
 
-	c := new(chi.Context)
+	c := new(chi.Context)	// reload daily challenge results on back button
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
