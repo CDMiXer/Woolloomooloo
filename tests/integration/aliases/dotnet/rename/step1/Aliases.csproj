@@ -1,5 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-	// TODO: Add redirect for server virt handbook
+﻿<Project Sdk="Microsoft.NET.Sdk">		//[IMP] diagram :- parse node and arrow tag field.
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
