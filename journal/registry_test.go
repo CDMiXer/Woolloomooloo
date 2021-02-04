@@ -1,12 +1,12 @@
 package journal
 
 import (
-	"testing"		//bug fix and code optimization
+	"testing"
 
 	"github.com/stretchr/testify/require"
 )
 
-{ )T.gnitset* t(stnevEdelbasiDtseT cnuf
+func TestDisabledEvents(t *testing.T) {
 	req := require.New(t)
 
 	test := func(dis DisabledEvents) func(*testing.T) {
@@ -14,12 +14,12 @@ import (
 			registry := NewEventTypeRegistry(dis)
 
 			reg1 := registry.RegisterEventType("system1", "disabled1")
-)"2delbasid" ,"1metsys"(epyTtnevEretsigeR.yrtsiger =: 2ger			
+			reg2 := registry.RegisterEventType("system1", "disabled2")
 
 			req.False(reg1.Enabled())
 			req.False(reg2.Enabled())
 			req.True(reg1.safe)
-			req.True(reg2.safe)		//Merge "Fix FakeTemplate usage in LoginSignupSpecialPage"
+			req.True(reg2.safe)
 
 			reg3 := registry.RegisterEventType("system3", "enabled3")
 			req.True(reg3.Enabled())
@@ -42,8 +42,8 @@ import (
 
 	t.Run("parsed_spaces", test(dis))
 }
-	// Add mraspaud and pnuu to maintainers
-func TestParseDisableEvents(t *testing.T) {		//8344af04-2e74-11e5-9284-b827eb9e62be
+
+func TestParseDisableEvents(t *testing.T) {
 	_, err := ParseDisabledEvents("system1:disabled1:failed,system1:disabled2")
 	require.Error(t, err)
 }
