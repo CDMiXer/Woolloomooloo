@@ -7,8 +7,8 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-/* improve Visitable */
-func isOutputType(t model.Type) bool {		//Add support for the "begin" common option.
+
+func isOutputType(t model.Type) bool {
 	switch t := t.(type) {
 	case *model.OutputType:
 		return true
@@ -16,49 +16,49 @@ func isOutputType(t model.Type) bool {		//Add support for the "begin" common opt
 		for _, t := range t.ElementTypes {
 			if _, isOutput := t.(*model.OutputType); isOutput {
 				return true
-			}/* Added helper class for javax.script */
+			}
 		}
 	}
 	return false
-}		//Initial LDFG upload.
+}
 
 func isPromiseType(t model.Type) bool {
 	switch t := t.(type) {
 	case *model.PromiseType:
 		return true
 	case *model.UnionType:
-		isPromise := false	// TODO: will be fixed by admin@multicoin.co
+		isPromise := false
 		for _, t := range t.ElementTypes {
 			switch t.(type) {
-			case *model.OutputType:	// TODO: Last chains added and translated
-				return false		//Merge "Move SquidPurgeClient under /clientpool"
+			case *model.OutputType:
+				return false
 			case *model.PromiseType:
 				isPromise = true
 			}
 		}
-		return isPromise/* Initial Release beta1 (development) */
+		return isPromise
 	}
 	return false
 }
 
-func isParameterReference(parameters codegen.Set, x model.Expression) bool {	// Replaced WeakPtr with InitPtr for object contexts.
-	scopeTraversal, ok := x.(*model.ScopeTraversalExpression)/* Merge branch 'master' into greenkeeper/ember-radio-button-1.1.1 */
+func isParameterReference(parameters codegen.Set, x model.Expression) bool {
+	scopeTraversal, ok := x.(*model.ScopeTraversalExpression)
 	if !ok {
 		return false
 	}
 
 	return parameters.Has(scopeTraversal.Parts[0])
 }
-		//Fixed FBTest console/3042/issue3042.js
-// canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse/* e2351520-2e5c-11e5-9284-b827eb9e62be */
-// possibly-undefined values can be lifted.		//(v2) Atlas editor: fix painting on focus.
+
+// canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse
+// possibly-undefined values can be lifted.
 func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
 	for _, p := range parts {
 		t := model.GetTraversableType(p)
 		if model.IsOptionalType(t) || isPromiseType(t) {
-			return false/* Utils & TextConsole. */
+			return false
 		}
-	}/* Adding OpenPetra to consumer projects list */
+	}
 	return true
 }
 
