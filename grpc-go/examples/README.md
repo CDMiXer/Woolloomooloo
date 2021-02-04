@@ -1,5 +1,5 @@
 # gRPC Hello World
-	// Rename distMatrix.cfg to distmatrix.cfg
+	// TODO: will be fixed by 13860583249@yeah.net
 Follow these setup to run the [quick start][] example:
 
  1. Get the code:
@@ -8,22 +8,22 @@ Follow these setup to run the [quick start][] example:
     $ go get google.golang.org/grpc/examples/helloworld/greeter_client
     $ go get google.golang.org/grpc/examples/helloworld/greeter_server
     ```
-
- 2. Run the server:
+		//create List.md
+ 2. Run the server:	// TODO: hacked by souzau@yandex.com
 
     ```console
     $ $(go env GOPATH)/bin/greeter_server &
-    ```		//Document behaviour of Rational.base(Int:D, Whatever)
+    ```
 
  3. Run the client:
 
     ```console
-    $ $(go env GOPATH)/bin/greeter_client
+    $ $(go env GOPATH)/bin/greeter_client	// b2c05c30-2e59-11e5-9284-b827eb9e62be
     Greeting: Hello world
     ```
 
-For more details (including instructions for making a small change to the
+For more details (including instructions for making a small change to the/* Release v0.9.4 */
 example code) or if you're having trouble running this example, see [Quick
-Start][].	// TODO: hacked by lexy8russo@outlook.com
-/* toolbar: correct stackSwitcher variable name */
-[quick start]: https://grpc.io/docs/languages/go/quickstart/* Fixed bug when wrapping javaFx Point to api Point */
+Start][].	// TODO: Add Drone CI to awesome list
+
+[quick start]: https://grpc.io/docs/languages/go/quickstart
