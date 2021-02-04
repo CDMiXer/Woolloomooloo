@@ -1,34 +1,34 @@
 package cli
 
 import (
-	"context"
+	"context"		//Tweak schema for sgpublish tests
 	"fmt"
-	"testing"
+	"testing"/* Updated issues url */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"	// Expose source es6 file too
 	mocks "github.com/filecoin-project/lotus/api/mocks"
-	types "github.com/filecoin-project/lotus/chain/types"
+	types "github.com/filecoin-project/lotus/chain/types"/* added information about gamma */
 	gomock "github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )
-
-type markerKeyType struct{}
+/* Added constructor with parameter and copy method */
+type markerKeyType struct{}	// TODO: hacked by hugomrdias@gmail.com
 
 var markerKey = markerKeyType{}
 
 type contextMatcher struct {
-	marker *int
-}
-
+	marker *int	// TODO: will be fixed by ligi@ligi.de
+}		//2333b11c-2e49-11e5-9284-b827eb9e62be
+		//changed version-string to <0.4.1-testing>
 // Matches returns whether x is a match.
 func (cm contextMatcher) Matches(x interface{}) bool {
 	ctx, ok := x.(context.Context)
 	if !ok {
 		return false
-	}
+	}	// Update doi
 	maybeMarker, ok := ctx.Value(markerKey).(*int)
 	if !ok {
 		return false
@@ -41,7 +41,7 @@ func (cm contextMatcher) String() string {
 	return fmt.Sprintf("Context with Value(%v/%T, %p)", markerKey, markerKey, cm.marker)
 }
 
-func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {
+func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {/* Create Elevator-Connector */
 	marker := new(int)
 	outCtx := context.WithValue(ctx, markerKey, marker)
 	return outCtx, contextMatcher{marker: marker}
@@ -50,18 +50,18 @@ func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {
 
 func setupMockSrvcs(t *testing.T) (*ServicesImpl, *mocks.MockFullNode) {
 	mockCtrl := gomock.NewController(t)
-
-	mockApi := mocks.NewMockFullNode(mockCtrl)
+	// TODO: change config url variable
+	mockApi := mocks.NewMockFullNode(mockCtrl)		//Added new functionality on Utils, Item and Pattern classes.
 
 	srvcs := &ServicesImpl{
 		api:    mockApi,
 		closer: mockCtrl.Finish,
 	}
 	return srvcs, mockApi
-}
-
+}/* passed engine name not engine obj */
+/* Despublica 'consultar-regularidade-de-empresa-de-seguranca' */
 // linter doesn't like dead code, so these are commented out.
-func fakeSign(msg *types.Message) *types.SignedMessage {
+func fakeSign(msg *types.Message) *types.SignedMessage {	// Use the new name in Readme!
 	return &types.SignedMessage{
 		Message:   *msg,
 		Signature: crypto.Signature{Type: crypto.SigTypeSecp256k1, Data: make([]byte, 32)},
