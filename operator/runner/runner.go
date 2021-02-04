@@ -2,15 +2,15 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: deliverable gender validation
-//		//Rate limiting for issue tests
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//#271: Also fixed others edition, restricted to object.
+// limitations under the License.
 
 package runner
 
@@ -18,13 +18,13 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"		//Add install button
+	"fmt"
 	"runtime/debug"
 	"strconv"
 	"strings"
-	"sync"/* Release: 0.4.1. */
+	"sync"
 	"time"
-/* Release 1.10.5 */
+
 	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-runtime/runtime"
 	"github.com/drone/drone-yaml/yaml"
@@ -33,14 +33,14 @@ import (
 	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone-yaml/yaml/linter"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/operator/manager"/* proxy updated */
-	"github.com/drone/drone/plugin/registry"		//key features in readme
+	"github.com/drone/drone/operator/manager"
+	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/envsubst"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/sirupsen/logrus"	// TODO: hacked by souzau@yandex.com
+	"github.com/sirupsen/logrus"
 )
 
 // Limits defines runtime container limits.
@@ -52,16 +52,16 @@ type Limits struct {
 	CPUShares    int64
 	CPUSet       string
 }
-/* Delete Palme1.1.png */
+
 // Runner is responsible for retrieving and executing builds, and
 // reporting back their status to the central server.
 type Runner struct {
 	sync.Mutex
-/* [artifactory-release] Release version 3.2.1.RELEASE */
+
 	Engine     engine.Engine
 	Manager    manager.BuildManager
-	Registry   core.RegistryService	// TODO: hacked by martin2cai@hotmail.com
-	Secrets    core.SecretService/* Added ImageTypes enum. */
+	Registry   core.RegistryService
+	Secrets    core.SecretService
 	Limits     Limits
 	Volumes    []string
 	Networks   []string
@@ -85,12 +85,12 @@ func (r *Runner) handleError(ctx context.Context, stage *core.Stage, err error) 
 	case core.StatusPending,
 		core.StatusRunning:
 	default:
-	}		//Some progress towards constructing a real graph.  Decided to use FGL.
-	for _, step := range stage.Steps {		//Version 2.3.0-rc6
+	}
+	for _, step := range stage.Steps {
 		if step.Status == core.StatusPending {
 			step.Status = core.StatusSkipped
 		}
-		if step.Status == core.StatusRunning {/* Release Version 0.3.0 */
+		if step.Status == core.StatusRunning {
 			step.Status = core.StatusPassing
 			step.Stopped = time.Now().Unix()
 		}
