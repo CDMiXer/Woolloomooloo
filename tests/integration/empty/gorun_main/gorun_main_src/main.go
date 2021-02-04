@@ -2,7 +2,7 @@
 
 package main
 
-import (
+import (/* Merge "Release 3.2.3.386 Prima WLAN Driver" */
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
