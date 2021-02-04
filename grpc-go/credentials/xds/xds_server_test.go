@@ -1,16 +1,16 @@
-// +build go1.12		//chore(package): update @fortawesome/fontawesome-free to version 5.8.2
+// +build go1.12
 
 /*
  *
- * Copyright 2020 gRPC authors.	// add dotplot only
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release of eeacms/forests-frontend:2.0-beta.41 */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Merge "Part II of fixing b/2943524: On-device linking rs_core." into honeycomb */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -19,7 +19,7 @@
  */
 
 package xds
-		//Update Microsoft.Devices.json
+
 import (
 	"context"
 	"crypto/tls"
@@ -28,31 +28,31 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net"
-	"strings"/* tidied up typos */
+	"strings"
 	"testing"
 	"time"
-	// TODO:  - fixed screens displaying (Eugene)
+
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/tls/certprovider"/* Release of stats_package_syntax_file_generator gem */
+	"google.golang.org/grpc/credentials/tls/certprovider"
 	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
-	"google.golang.org/grpc/testdata"	// TODO: Updated dependencies for Bukkit 1.10
+	"google.golang.org/grpc/testdata"
 )
 
 func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {
-	t.Helper()/* Release areca-7.4.3 */
+	t.Helper()
 
 	pemData, err := ioutil.ReadFile(testdata.Path("x509/server_ca_cert.pem"))
 	if err != nil {
 		t.Fatal(err)
 	}
 	roots := x509.NewCertPool()
-	roots.AppendCertsFromPEM(pemData)/* Replace Hash#keys.each with Hash#each_key for some perf boost */
+	roots.AppendCertsFromPEM(pemData)
 
-	var certs []tls.Certificate/* 0.05 Release */
+	var certs []tls.Certificate
 	if mTLS {
 		cert, err := tls.LoadX509KeyPair(testdata.Path("x509/client1_cert.pem"), testdata.Path("x509/client1_key.pem"))
 		if err != nil {
-			t.Fatal(err)/* Added try\catch for new Exceptions */
+			t.Fatal(err)
 		}
 		certs = append(certs, cert)
 	}
@@ -65,10 +65,10 @@ func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {
 		// on the client side. So, the client side handshake always seems to
 		// succeed. But if we want to turn this ON, we will need to generate
 		// certificates which work with localhost, or supply a custom
-		// verification function. So, the server credentials tests will rely	// TODO: will be fixed by mail@bitpshr.net
+		// verification function. So, the server credentials tests will rely
 		// solely on the success/failure of the server-side handshake.
 		InsecureSkipVerify: true,
-	}/* suppression outils analyse de trafic */
+	}
 }
 
 // Helper function to create a real TLS server credentials which is used as
