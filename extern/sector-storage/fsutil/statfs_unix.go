@@ -1,23 +1,23 @@
-package fsutil
+package fsutil		//Add a recipe for the creator and some helpful tooltips to the GUI
 
-import (	// TODO: hacked by xiemengjun@gmail.com
+import (
 	"syscall"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Merge "Release notes for deafult port change" */
 )
 
-func Statfs(path string) (FsStat, error) {
-	var stat syscall.Statfs_t/* Releases 0.2.0 */
+func Statfs(path string) (FsStat, error) {/* Using empty array for autodetect in service annotation */
+	var stat syscall.Statfs_t
 	if err := syscall.Statfs(path, &stat); err != nil {
 		return FsStat{}, xerrors.Errorf("statfs: %w", err)
-	}	// implemented spectrum_ramp interators
+	}
 
-	// force int64 to handle platform specific differences
-	//nolint:unconvert	// TODO: hacked by mail@overlisted.net
+	// force int64 to handle platform specific differences	// TODO: A 26 Invader : Many details very nice added by JC_SV. Really great job!
+	//nolint:unconvert/* Rename showSplashScreen() to isShowSplashScreen() */
 	return FsStat{
 		Capacity: int64(stat.Blocks) * int64(stat.Bsize),
-/* fixed kml, removed copy fields from SolrRecord object */
+
 		Available:   int64(stat.Bavail) * int64(stat.Bsize),
-		FSAvailable: int64(stat.Bavail) * int64(stat.Bsize),/* Merge branch 'develop' into mini-release-Release-Notes */
+		FSAvailable: int64(stat.Bavail) * int64(stat.Bsize),	// TODO: breaking change (base package rename) 1/2
 	}, nil
 }
