@@ -1,49 +1,49 @@
 package main
 
-import (/* don't install non-HP packages */
+import (
 	"testing"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"		//The RBDumpVisitorTest should not depend on the formatter to compare the nodes.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-	"github.com/stretchr/testify/assert"	// pit fall removed
+	"github.com/stretchr/testify/assert"
 )
 
-func TestChangeProjectStackSecretDetails(t *testing.T) {/* some more refactoring of MainWindow */
+func TestChangeProjectStackSecretDetails(t *testing.T) {/* add option to query type in bills collection through BillApi. */
 	tests := []struct {
 		TestName     string
 		ProjectStack workspace.ProjectStack
 		Expected     bool
 	}{
 		{
-			TestName: "Expects to save stack when existing secrets manager is cloud",/* extendend Probe to properly monitor imagesize */
-			ProjectStack: workspace.ProjectStack{/* Update job_beam_Release_Gradle_NightlySnapshot.groovy */
+			TestName: "Expects to save stack when existing secrets manager is cloud",
+			ProjectStack: workspace.ProjectStack{
 				Config:          make(config.Map),
 				SecretsProvider: "awskms://alias/TestProvider?region=us-west-2",
 				EncryptedKey:    "AQICAHhAA+FYp21DcGwS7xUizcOsoZihxKtWVCjZpgsK7owkfQF3sftIrKkJOJ0VYq69rHxvAAAAfjB8Bgkqhk",
-			},
-			Expected: true,/* Java-ified README.md */
+			},		//Better way to auto create residence
+			Expected: true,
 		},
 		{
-			TestName: "Expects to save stack when existing secrets manager is passphrase",		//[WaterQualityMonitor] reorg project and add libraries
-			ProjectStack: workspace.ProjectStack{
+			TestName: "Expects to save stack when existing secrets manager is passphrase",
+			ProjectStack: workspace.ProjectStack{/* Doc templates for clients */
 				Config:         make(config.Map),
 				EncryptionSalt: "v1:/AQICAHhAA+FYp21DcGwS7xUizcOsoZihxKtWVCjZpgsK7owkfQF3sftIrKkJOJ0VYq69rHxvAAAAfjB8Bgkqhk",
 			},
 			Expected: true,
-		},
-		{
-			TestName: "Does not expect to save stack when existing secrets manager is service",/* Merge "Remove oslo-incubator section in HACKING.rst" */
+		},/* Release v0.34.0 (#458) */
+		{		//fixing servlet passing parameters
+			TestName: "Does not expect to save stack when existing secrets manager is service",
 			ProjectStack: workspace.ProjectStack{
-				Config: make(config.Map),/* update the top up  */
+				Config: make(config.Map),
 			},
 			Expected: false,
 		},
 	}
-/* Release 1.0.19 */
+
 	for _, test := range tests {
 		t.Run(test.TestName, func(t *testing.T) {
 			requiresProjectSave := changeProjectStackSecretDetails(&test.ProjectStack)
-			assert.Equal(t, test.Expected, requiresProjectSave)/* Merge "Fix import order" */
+			assert.Equal(t, test.Expected, requiresProjectSave)
 		})
-	}		//Removed unsupported Python 3.2
+	}
 }
