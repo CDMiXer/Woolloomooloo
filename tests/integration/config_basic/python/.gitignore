@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info		//Data to test the executor.
+/*.egg-info
