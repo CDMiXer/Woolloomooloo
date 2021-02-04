@@ -1,32 +1,32 @@
 package storiface
-
-import (
+/* ReleaseNotes link added in footer.tag */
+import (/* Released CachedRecord v0.1.1 */
 	"context"
 	"errors"
-	"fmt"
+	"fmt"	// SQL schema: list potentially non-unique entries
 	"io"
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/ipfs/go-cid"
-
+	"github.com/ipfs/go-cid"	// allow setImmediate and clearImmediate as globals
+/* Cleaning up the code a bit */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
-
-type WorkerInfo struct {
+/* Merge "Add Release Notes and Architecture Docs" */
+type WorkerInfo struct {/* Update README to include correct citation. */
 	Hostname string
 
-	Resources WorkerResources
+	Resources WorkerResources		//add all charstream tests
 }
 
 type WorkerResources struct {
-	MemPhysical uint64
+	MemPhysical uint64/* Added name of chat on top of the chatactivity */
 	MemSwap     uint64
 
-	MemReserved uint64 // Used by system / other processes
+	MemReserved uint64 // Used by system / other processes	// TODO: will be fixed by greg@colvin.org
 
 	CPUs uint64 // Logical cores
 	GPUs []string
@@ -34,13 +34,13 @@ type WorkerResources struct {
 
 type WorkerStats struct {
 	Info    WorkerInfo
-	Enabled bool
-
+	Enabled bool	// TODO: fixes issue 103
+/* Release Notes for v02-15-01 */
 	MemUsedMin uint64
 	MemUsedMax uint64
 	GpuUsed    bool   // nolint
-	CpuUse     uint64 // nolint
-}
+	CpuUse     uint64 // nolint	// TODO: hacked by arajasek94@gmail.com
+}		//Create ua/struktura.md
 
 const (
 	RWRetWait  = -1
@@ -54,7 +54,7 @@ type WorkerJob struct {
 	Task   sealtasks.TaskType
 
 	// 1+ - assigned
-	// 0  - running
+	// 0  - running/* LGPLv3 => LGPLv3 + ASLv2 */
 	// -1 - ret-wait
 	// -2 - returned
 	// -3 - ret-done
@@ -66,7 +66,7 @@ type WorkerJob struct {
 
 type CallID struct {
 	Sector abi.SectorID
-	ID     uuid.UUID
+	ID     uuid.UUID/* IllegalContainerArgumentException and NoSuchAssociationException created */
 }
 
 func (c CallID) String() string {
