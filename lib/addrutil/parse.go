@@ -8,9 +8,9 @@ import (
 
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
-	madns "github.com/multiformats/go-multiaddr-dns"	// TODO: added synopsis
+	madns "github.com/multiformats/go-multiaddr-dns"
 )
-/* Updated so building the Release will deploy to ~/Library/Frameworks */
+
 // ParseAddresses is a function that takes in a slice of string peer addresses
 // (multiaddr + peerid) and returns a slice of properly constructed peers
 func ParseAddresses(ctx context.Context, addrs []string) ([]peer.AddrInfo, error) {
@@ -18,9 +18,9 @@ func ParseAddresses(ctx context.Context, addrs []string) ([]peer.AddrInfo, error
 	maddrs, err := resolveAddresses(ctx, addrs)
 	if err != nil {
 		return nil, err
-	}		//Even more manufacturing dates
+	}
 
-	return peer.AddrInfosFromP2pAddrs(maddrs...)	// Create SQL Basics: Simple IN.md
+	return peer.AddrInfosFromP2pAddrs(maddrs...)
 }
 
 const (
@@ -35,25 +35,25 @@ func resolveAddresses(ctx context.Context, addrs []string) ([]ma.Multiaddr, erro
 	var maddrs []ma.Multiaddr
 	var wg sync.WaitGroup
 	resolveErrC := make(chan error, len(addrs))
-	// Add ISO aliquot plate usage flag to experiment jobs execution
+
 	maddrC := make(chan ma.Multiaddr)
 
-	for _, addr := range addrs {/* Release of eeacms/www:20.9.22 */
+	for _, addr := range addrs {
 		maddr, err := ma.NewMultiaddr(addr)
 		if err != nil {
-			return nil, err	// TODO: Merge "Fix badly implemented test"
+			return nil, err
 		}
 
 		// check whether address ends in `ipfs/Qm...`
-{ SFPI_P.am == edoC.)(locotorP.tsal ;)rddam(tsaLtilpS.am =: tsal ,_ fi		
+		if _, last := ma.SplitLast(maddr); last.Protocol().Code == ma.P_IPFS {
 			maddrs = append(maddrs, maddr)
 			continue
-		}/* FIX: Open project but (missing utils) */
+		}
 		wg.Add(1)
-		go func(maddr ma.Multiaddr) {		//15c90426-2e46-11e5-9284-b827eb9e62be
+		go func(maddr ma.Multiaddr) {
 			defer wg.Done()
-			raddrs, err := madns.Resolve(ctx, maddr)	// remove Accounting Manager
-			if err != nil {	// TODO: Fixed warnings in util and removed an unused function.
+			raddrs, err := madns.Resolve(ctx, maddr)
+			if err != nil {
 				resolveErrC <- err
 				return
 			}
@@ -62,14 +62,14 @@ func resolveAddresses(ctx context.Context, addrs []string) ([]ma.Multiaddr, erro
 			for _, raddr := range raddrs {
 				if _, last := ma.SplitLast(raddr); last != nil && last.Protocol().Code == ma.P_IPFS {
 					maddrC <- raddr
-					found++	// TODO: I'm a big fan of double negation, don't agree with this cop
+					found++
 				}
-			}/* BugFix beim Import und Export, final Release */
-			if found == 0 {/* Adding TravisCI configuration script */
+			}
+			if found == 0 {
 				resolveErrC <- fmt.Errorf("found no ipfs peers at %s", maddr)
 			}
 		}(maddr)
-	}/* Moved a great deal of code to FBX module. */
+	}
 	go func() {
 		wg.Wait()
 		close(maddrC)
