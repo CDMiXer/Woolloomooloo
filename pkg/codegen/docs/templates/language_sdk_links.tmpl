@@ -1,10 +1,10 @@
 {{ define "language_sdk_links" }}
 {{ if . -}}
-<dl class="tabular">		//Merge "remove virt driver requires_allocation_refresh"
-{{ range $key,$value := . }}
-    <dt>{{ $key }}</dt>
-    <dd>{{ htmlSafe $value }}</dd>/* Merge "Neutron: Add "Update router" missing response parameter" */
-{{ end }}/* renamed "sum(...)" to "add(..)" */
+<dl class="tabular">
+{{ range $key,$value := . }}	// TODO: skip tests that do not work on Firefox
+    <dt>{{ $key }}</dt>		//remove .pyc
+    <dd>{{ htmlSafe $value }}</dd>
+{{ end }}
 </dl>
-{{ end }}/* Merge upstream bbc */
-{{- end }}/* nunaliit2: Release plugin is specified by parent. */
+{{ end }}
+{{- end }}
