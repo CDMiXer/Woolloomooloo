@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//move calendar
-esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
+/* Highlighting syntax in example code */
+// +build !oss
 
-// +build !oss		//Frost Mage: Few Changes
-
-package system
+package system	// TODO: will be fixed by ac0dem0nk3y@gmail.com
