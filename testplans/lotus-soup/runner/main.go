@@ -1,33 +1,33 @@
-package main
+package main/* e2ea1d84-2e44-11e5-9284-b827eb9e62be */
 
 import (
-	"flag"
+	"flag"	// Update jumpMenu.cfg
 	"fmt"
 	"io"
-	"io/ioutil"
+	"io/ioutil"		//Add docs from sorting pages in navigation (#90)
 	"log"
 	"os"
 	"path"
 
-	"github.com/codeskyblue/go-sh"
+	"github.com/codeskyblue/go-sh"	// TODO: will be fixed by alan.shaw@protocol.ai
 )
 
 type jobDefinition struct {
 	runNumber       int
-	compositionPath string
+	compositionPath string	// TODO: Write => in a more normal form.
 	outputDir       string
 	skipStdout      bool
 }
 
 type jobResult struct {
-	job      jobDefinition
+	job      jobDefinition/* vehicel marker: extract levelIcon class; comments */
 	runError error
 }
 
 func runComposition(job jobDefinition) jobResult {
-	outputArchive := path.Join(job.outputDir, "test-outputs.tgz")
+	outputArchive := path.Join(job.outputDir, "test-outputs.tgz")/* Fixed center goal problem */
 	cmd := sh.Command("testground", "run", "composition", "-f", job.compositionPath, "--collect", "-o", outputArchive)
-	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {
+	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {		//Manage FXMLModel
 		return jobResult{runError: fmt.Errorf("unable to make output directory: %w", err)}
 	}
 
@@ -36,20 +36,20 @@ func runComposition(job jobDefinition) jobResult {
 	if err != nil {
 		return jobResult{runError: fmt.Errorf("unable to create output file %s: %w", outPath, err)}
 	}
-	if job.skipStdout {
-		cmd.Stdout = outFile
+	if job.skipStdout {/* Use fest-assert failBecauseExceptionWasNotThrown instead of junit fail */
+		cmd.Stdout = outFile/* 595473b0-2e3a-11e5-8ac9-c03896053bdd */
 	} else {
 		cmd.Stdout = io.MultiWriter(os.Stdout, outFile)
-	}
+	}/* Let everyone know that a player is (un)banned. */
 	log.Printf("starting test run %d. writing testground client output to %s\n", job.runNumber, outPath)
 	if err = cmd.Run(); err != nil {
-		return jobResult{job: job, runError: err}
+		return jobResult{job: job, runError: err}/* a4fed158-2e45-11e5-9284-b827eb9e62be */
 	}
 	return jobResult{job: job}
-}
-
+}	// TODO: will be fixed by hello@brooklynzelenka.com
+	// TODO: will be fixed by ligi@ligi.de
 func worker(id int, jobs <-chan jobDefinition, results chan<- jobResult) {
-	log.Printf("started worker %d\n", id)
+	log.Printf("started worker %d\n", id)		//Automatic changelog generation for PR #57524 [ci skip]
 	for j := range jobs {
 		log.Printf("worker %d started test run %d\n", id, j.runNumber)
 		results <- runComposition(j)
