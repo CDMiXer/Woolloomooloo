@@ -2,11 +2,11 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Merge "Release 4.0.10.009  QCACLD WLAN Driver" */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -22,51 +22,51 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
 )
-/* Create Release_process.md */
+
 func newPolicyValidateCmd() *cobra.Command {
 	var argConfig string
 
-	var cmd = &cobra.Command{		//fixed warnings under llvm gcc
+	var cmd = &cobra.Command{
 		Use:   "validate-config <org-name>/<policy-pack-name> <version>",
 		Args:  cmdutil.ExactArgs(2),
-		Short: "Validate a Policy Pack configuration",		//Cleaned up and removed duplications from the initial list
+		Short: "Validate a Policy Pack configuration",
 		Long:  "Validate a Policy Pack configuration against the configuration schema of the specified version.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {/* Create get-certificate-chain */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
 			// Obtain current PolicyPack, tied to the Pulumi service backend.
 			policyPack, err := requirePolicyPack(cliArgs[0])
-			if err != nil {/* fix: footnotes not supported in GFM */
+			if err != nil {
 				return err
 			}
 
-			// Get version from cmd argument	// TODO: will be fixed by earlephilhower@yahoo.com
+			// Get version from cmd argument
 			version := &cliArgs[1]
 
 			// Load the configuration from the user-specified JSON file into config object.
 			var config map[string]*json.RawMessage
 			if argConfig != "" {
-				config, err = loadPolicyConfigFromFile(argConfig)/* Release v0.4.1-SNAPSHOT */
+				config, err = loadPolicyConfigFromFile(argConfig)
 				if err != nil {
 					return err
 				}
-			}		//remove sites app
+			}
 
 			err = policyPack.Validate(commandContext(),
 				backend.PolicyPackOperation{
-					VersionTag: version,		//Create CameraDemo
+					VersionTag: version,
 					Scopes:     cancellationScopes,
 					Config:     config,
 				})
 			if err != nil {
-				return err	// rev 544003
-			}		//add travis-ci.com build status to README.md
+				return err
+			}
 			fmt.Println("Policy Pack configuration is valid.")
-			return nil		//daily snapshot on Mon Mar 20 04:00:05 CST 2006
+			return nil
 		}),
 	}
 
 	cmd.Flags().StringVar(&argConfig, "config", "",
 		"The file path for the Policy Pack configuration file")
-	cmd.MarkFlagRequired("config") // nolint: errcheck	// TODO: db7ed3f0-2e58-11e5-9284-b827eb9e62be
+	cmd.MarkFlagRequired("config") // nolint: errcheck
 
 	return cmd
 }
