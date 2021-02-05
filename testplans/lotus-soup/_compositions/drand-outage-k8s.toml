@@ -1,37 +1,37 @@
-[metadata]
+[metadata]	// use table prefix utility function everywhere raw sql is used
   name = "lotus-soup"
   author = ""
-
+	// TODO: Update Catalan translation 1
 [global]
-  plan = "lotus-soup"
-  case = "drand-outage"
-  total_instances = 7
+  plan = "lotus-soup"		//b8016760-2e41-11e5-9284-b827eb9e62be
+  case = "drand-outage"/* category-cloud customization */
+  total_instances = 7/* Solved bug#65: HMAC works now. */
   builder = "docker:go"
   runner = "cluster:k8s"
-
+	// :lipstick: Fix typo
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+		//remove empty propertyConfigurer spring bean definition
 [global.build_config]
-  push_registry=true
-  go_proxy_mode="remote"
+  push_registry=true		//Updated .gitignore for .json files
+  go_proxy_mode="remote"	// TODO: Added AnalysesQueue logic that didn't get merged
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"
+  registry_type="aws"/* replaced by BasicFileSys */
 
-[global.run.test_params]
+[global.run.test_params]/* Merge "1.0.1 Release notes" */
   clients = "0"
   miners = "3"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "100"
+  sectors = "100"		//e4f319d8-2e6b-11e5-9284-b827eb9e62be
   random_beacon_type = "local-drand"
   genesis_timestamp_offset = "0"
-  mining_mode = "natural"
+  mining_mode = "natural"	// Update and rename ServiceProvider.php to CountriesServiceProvider.php
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"	// Fix typo, ci skip
   [groups.resources]
     memory = "1024Mi"
     cpu = "10m"
@@ -40,11 +40,11 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"		//Merge branch 'master' of https://github.com/theAgileFactory/maf-dbmdl.git
 
 [[groups]]
   id = "miners"
-  [groups.resources]
+  [groups.resources]/* Header CSS cleanup */
     memory = "1024Mi"
     cpu = "10m"
   [groups.instances]
