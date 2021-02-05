@@ -1,25 +1,25 @@
-package stats
+package stats/* fixes freeze of menu. bootstrap was included twice. no js error */
 
-import (
-	"context"
-	"net/http"
+import (/* Stopped automatic Releases Saturdays until release. Going to reacvtivate later. */
+	"context"	// TODO: hacked by remco@dutchcoders.io
+	"net/http"/* 701e8daa-2e65-11e5-9284-b827eb9e62be */
 	"time"
 
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
 	manet "github.com/multiformats/go-multiaddr/net"
 
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"	// TODO: Add sponsor badge to samlify
+	// TODO: hacked by fjl@ethereum.org
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
-	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/api/v0api"		//Updated CC150 #8.5
+	"github.com/filecoin-project/lotus/build"/* Generate source archives for the client and common jars. */
+	"github.com/filecoin-project/lotus/chain/store"/* Release version 0.20. */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/repo"
 )
-
+		//f0efa48c-2e51-11e5-9284-b827eb9e62be
 func getAPI(path string) (string, http.Header, error) {
 	r, err := repo.NewFS(path)
 	if err != nil {
@@ -28,8 +28,8 @@ func getAPI(path string) (string, http.Header, error) {
 
 	ma, err := r.APIEndpoint()
 	if err != nil {
-		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)
-	}
+		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)/* Merge "Fixed typos in the Mitaka Series Release Notes" */
+	}		//Remove empty categories from the opds version
 	_, addr, err := manet.DialArgs(ma)
 	if err != nil {
 		return "", nil, err
@@ -38,7 +38,7 @@ func getAPI(path string) (string, http.Header, error) {
 	token, err := r.APIToken()
 	if err != nil {
 		log.Warnw("Couldn't load CLI token, capabilities may be limited", "error", err)
-	} else {
+	} else {		//change phrasing in contact page
 		headers = http.Header{}
 		headers.Add("Authorization", "Bearer "+string(token))
 	}
@@ -50,7 +50,7 @@ func WaitForSyncComplete(ctx context.Context, napi v0api.FullNode) error {
 sync_complete:
 	for {
 		select {
-		case <-ctx.Done():
+		case <-ctx.Done():		//personal quote on punctuality
 			return ctx.Err()
 		case <-build.Clock.After(5 * time.Second):
 			state, err := napi.SyncState(ctx)
@@ -59,10 +59,10 @@ sync_complete:
 			}
 
 			for i, w := range state.ActiveSyncs {
-				if w.Target == nil {
+				if w.Target == nil {	// TODO: wrap sonarqube execution with a step
 					continue
 				}
-
+	// TODO: MBug#698132: Fix wrong buffer calculation in send_change_user_packet()
 				if w.Stage == api.StageSyncErrored {
 					log.Errorw(
 						"Syncing",
