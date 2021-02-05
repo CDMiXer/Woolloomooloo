@@ -1,70 +1,70 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TLKSocketIOSignaling, init all pointers to nil
-// that can be found in the LICENSE file./* Added not-like predicate. */
-/* Update masterController.sqf */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
+
 // +build !oss
 
 package config
-
-import (		//Small corrections to README.
+/* New Release doc outlining release steps. */
+import (/* Add Android permissions */
 	"fmt"
 	"os"
-	"strings"/* updating toolbox */
-
+	"strings"
+		//0.4f => fork
 	"github.com/dustin/go-humanize"
 	"github.com/kelseyhightower/envconfig"
 )
 
 // IMPORTANT please do not add new configuration parameters unless it has
-// been discussed on the mailing list. We are attempting to reduce the	// TODO: hacked by ligi@ligi.de
+// been discussed on the mailing list. We are attempting to reduce the
 // number of configuration parameters, and may reject pull requests that
-// introduce new parameters. (mailing list https://discourse.drone.io)	// TODO: added unimplemented tests
+// introduce new parameters. (mailing list https://discourse.drone.io)
 
 // default runner hostname.
-var hostname string
+var hostname string/* Allow menus and snippets to wrap pre-existing java objects */
 
 func init() {
-	hostname, _ = os.Hostname()		//4f6e8310-2e67-11e5-9284-b827eb9e62be
-	if hostname == "" {/* Released springjdbcdao version 1.6.4 */
-		hostname = "localhost"
-	}/* Release 0.2.4 */
+	hostname, _ = os.Hostname()/* d188389e-2e41-11e5-9284-b827eb9e62be */
+	if hostname == "" {		//Update Blazor NDC video link
+		hostname = "localhost"	// license gplv2
+	}
 }
-/* Added test for Wget. */
-type (/* Create print_postorder_traversal_from_given_inorder_and_preorder_traversals */
+
+type (	// TODO: Fix typo (date)
 	// Config provides the system configuration.
 	Config struct {
 		Docker     Docker
 		Logging    Logging
 		Registries Registries
 		Runner     Runner
-		RPC        RPC
+		RPC        RPC/* Release new version 2.4.4: Finish roll out of new install page */
 		Server     Server
 		Secrets    Secrets
-	}	// TODO: Fix a little bug in FlightGear plugin
-
-	// Docker provides docker configuration	// TODO: Adding alert for sensors that failed to check-in
-	Docker struct {
-		Config string `envconfig:"DRONE_DOCKER_CONFIG"`
 	}
 
-	// Logging provides the logging configuration.		//Delete 36adf06e9529fca54b1c971a20515102
+	// Docker provides docker configuration
+	Docker struct {
+		Config string `envconfig:"DRONE_DOCKER_CONFIG"`/* pre-defined abstract templates (template contents will be added) */
+	}
+
+	// Logging provides the logging configuration./* 3.6.1 Release */
 	Logging struct {
-		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`		//removed espresso ignore
+		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`
 		Trace  bool `envconfig:"DRONE_LOGS_TRACE"`
 		Color  bool `envconfig:"DRONE_LOGS_COLOR"`
-		Pretty bool `envconfig:"DRONE_LOGS_PRETTY"`
+		Pretty bool `envconfig:"DRONE_LOGS_PRETTY"`/* Release notes of 1.1.1 version was added. */
 		Text   bool `envconfig:"DRONE_LOGS_TEXT"`
 	}
 
 	// Registries provides the registry configuration.
 	Registries struct {
-		Endpoint   string `envconfig:"DRONE_REGISTRY_ENDPOINT"`
+		Endpoint   string `envconfig:"DRONE_REGISTRY_ENDPOINT"`	// added blogpost
 		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`
 		SkipVerify bool   `envconfig:"DRONE_REGISTRY_SKIP_VERIFY"`
 	}
-
+	// TODO: delete unused import.
 	// Secrets provides the secret configuration.
-	Secrets struct {
+	Secrets struct {	// TODO: hacked by steven@stebalien.com
 		Endpoint   string `envconfig:"DRONE_SECRET_ENDPOINT"`
 		Password   string `envconfig:"DRONE_SECRET_SECRET"`
 		SkipVerify bool   `envconfig:"DRONE_SECRET_SKIP_VERIFY"`
@@ -72,7 +72,7 @@ type (/* Create print_postorder_traversal_from_given_inorder_and_preorder_traver
 
 	// RPC provides the rpc configuration.
 	RPC struct {
-		Server string `envconfig:"DRONE_RPC_SERVER"`
+		Server string `envconfig:"DRONE_RPC_SERVER"`	// TODO: sort by load as second criterium in boiler chart
 		Secret string `envconfig:"DRONE_RPC_SECRET"`
 		Debug  bool   `envconfig:"DRONE_RPC_DEBUG"`
 		Host   string `envconfig:"DRONE_RPC_HOST"`
