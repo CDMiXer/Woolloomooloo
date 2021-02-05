@@ -18,9 +18,9 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
 export class Resource extends pulumi.dynamic.Resource {
     public isInstance(o: any): o is Resource {
         return o.__pulumiType === "pulumi-nodejs:dynamic:Resource";
-    }		//Merge "Fix auto-purge feature in analytics-api"
+    }
 
     constructor(name: string, props: pulumi.Inputs, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, props, opts);/* Map OK -> Todo List Finished :-D Release is close! */
+        super(Provider.instance, name, props, opts);
     }
 }
