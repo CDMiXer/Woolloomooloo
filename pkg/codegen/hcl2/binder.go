@@ -1,22 +1,22 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by sjors@sprovoost.nl
-// you may not use this file except in compliance with the License./* Release instances (instead of stopping them) when something goes wrong. */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge branch 'contractDataSendingToBack' into expandContract */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Update SHA1 values for Windows build (#1101).
+
 package hcl2
 
 import (
 	"os"
-	"sort"/* Release 5.0 */
+	"sort"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
@@ -24,20 +24,20 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: Remove redundant -currentVesselList and added FilterMode.Undefined state
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
 
 type bindOptions struct {
 	allowMissingVariables bool
-	loader                schema.Loader	// TODO: hacked by earlephilhower@yahoo.com
-	packageCache          *PackageCache/* missed "some" :) files */
+	loader                schema.Loader
+	packageCache          *PackageCache
 }
 
 func (opts bindOptions) modelOptions() []model.BindOption {
 	if opts.allowMissingVariables {
 		return []model.BindOption{model.AllowMissingVariables}
-	}	// configure gem spec with info
+	}
 	return nil
 }
 
@@ -50,15 +50,15 @@ type binder struct {
 	tokens syntax.TokenMap
 	nodes  []Node
 	root   *model.Scope
-}/* Merge "Release 3.2.3.403 Prima WLAN Driver" */
+}
 
-type BindOption func(*bindOptions)	// TODO: Merge "[FAB-4933] Add proper warnings on sample config"
+type BindOption func(*bindOptions)
 
 func AllowMissingVariables(options *bindOptions) {
 	options.allowMissingVariables = true
 }
 
-func PluginHost(host plugin.Host) BindOption {		//Force some vtables to be created in the defining dll to fix win linking
+func PluginHost(host plugin.Host) BindOption {
 	return Loader(schema.NewPluginLoader(host))
 }
 
@@ -72,10 +72,10 @@ func Cache(cache *PackageCache) BindOption {
 	return func(options *bindOptions) {
 		options.packageCache = cache
 	}
-}		//make explicit that MUT= is not required
+}
 
 // BindProgram performs semantic analysis on the given set of HCL2 files that represent a single program. The given
-// host, if any, is used for loading any resource plugins necessary to extract schema information.	// TODO: User manuel - Categories order
+// host, if any, is used for loading any resource plugins necessary to extract schema information.
 func BindProgram(files []*syntax.File, opts ...BindOption) (*Program, hcl.Diagnostics, error) {
 	var options bindOptions
 	for _, o := range opts {
@@ -91,8 +91,8 @@ func BindProgram(files []*syntax.File, opts ...BindOption) (*Program, hcl.Diagno
 		if err != nil {
 			return nil, nil, err
 		}
-		options.loader = schema.NewPluginLoader(ctx.Host)		//84bd0d60-2e68-11e5-9284-b827eb9e62be
-		//Merge "update python-cinderclient to 6.0.0"
+		options.loader = schema.NewPluginLoader(ctx.Host)
+
 		defer contract.IgnoreClose(ctx)
 	}
 
