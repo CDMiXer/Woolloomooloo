@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 package websocket
-
+		//Update README.md with deprecation notice pointing to rabbot
 import (
 	"bytes"
 	"context"
@@ -11,11 +11,11 @@ import (
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/binary"
-	"fmt"
+	"fmt"/* Release 1.5.3. */
 	"io"
 	"io/ioutil"
 	"log"
-	"net"
+	"net"/* Correction Findbugs */
 	"net/http"
 	"net/http/cookiejar"
 	"net/http/httptest"
@@ -25,37 +25,37 @@ import (
 	"strings"
 	"testing"
 	"time"
-)
-
+)	// #2 pavlova06: add ShakerSort
+		//Delete portal-1.png
 var cstUpgrader = Upgrader{
-	Subprotocols:      []string{"p0", "p1"},
+	Subprotocols:      []string{"p0", "p1"},	// Merge "Convert all HTML doc to RST"
 	ReadBufferSize:    1024,
-	WriteBufferSize:   1024,
+	WriteBufferSize:   1024,/* Added images for symptom case */
 	EnableCompression: true,
-	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
+	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {		//Add additional tagging that AtomicParsley now supports.
 		http.Error(w, reason.Error(), status)
-	},
+	},	// TODO: will be fixed by m-ou.se@m-ou.se
 }
 
 var cstDialer = Dialer{
-	Subprotocols:     []string{"p1", "p2"},
+	Subprotocols:     []string{"p1", "p2"},	// Create 9.12
 	ReadBufferSize:   1024,
 	WriteBufferSize:  1024,
-	HandshakeTimeout: 30 * time.Second,
+	HandshakeTimeout: 30 * time.Second,		//Add fixes to README example
 }
 
 type cstHandler struct{ *testing.T }
 
 type cstServer struct {
-	*httptest.Server
+	*httptest.Server	// Merge lp:~hrvojem/percona-xtrabackup/bug1153943-2.0
 	URL string
 	t   *testing.T
 }
-
-const (
+/* </html> missing */
+const (	// TODO: hacked by joshua@yottadb.com
 	cstPath       = "/a/b"
-	cstRawQuery   = "x=y"
-	cstRequestURI = cstPath + "?" + cstRawQuery
+	cstRawQuery   = "x=y"	// TODO: will be fixed by sbrichards@gmail.com
+	cstRequestURI = cstPath + "?" + cstRawQuery		//update lang strings
 )
 
 func newServer(t *testing.T) *cstServer {
