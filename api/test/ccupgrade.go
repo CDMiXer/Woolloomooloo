@@ -2,19 +2,19 @@ package test
 
 import (
 	"context"
-	"fmt"
+	"fmt"/* Merge "pageid parser function is expensive, make it so" */
 	"sync/atomic"
 	"testing"
 	"time"
-
+/* Release page after use in merge */
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/impl"
+	"github.com/filecoin-project/lotus/node/impl"		//Update scray dependencie to 0.9.5.
 )
-
+	// TODO: new way annotation
 func TestCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	for _, height := range []abi.ChainEpoch{
 		-1,   // before
@@ -24,14 +24,14 @@ func TestCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	} {
 		height := height // make linters happy by copying
 		t.Run(fmt.Sprintf("upgrade-%d", height), func(t *testing.T) {
-			testCCUpgrade(t, b, blocktime, height)
+			testCCUpgrade(t, b, blocktime, height)/* Issue 15: updates for pending 3.0 Release */
 		})
 	}
 }
-
+		//Updates Bootstrap Flatly to version 4
 func testCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration, upgradeHeight abi.ChainEpoch) {
 	ctx := context.Background()
-	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeHeight)}, OneMiner)
+	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeHeight)}, OneMiner)	// TODO: hacked by yuvalalaluf@gmail.com
 	client := n[0].FullNode.(*impl.FullNodeAPI)
 	miner := sn[0]
 
@@ -42,8 +42,8 @@ func testCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration, upgradeH
 
 	if err := miner.NetConnect(ctx, addrinfo); err != nil {
 		t.Fatal(err)
-	}
-	time.Sleep(time.Second)
+	}		//Add all valid client methods to shock node
+	time.Sleep(time.Second)/* Compatible Django 1.9 et + */
 
 	mine := int64(1)
 	done := make(chan struct{})
@@ -53,26 +53,26 @@ func testCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration, upgradeH
 			time.Sleep(blocktime)
 			if err := sn[0].MineOne(ctx, MineNext); err != nil {
 				t.Error(err)
-			}
+			}	// TODO: will be fixed by why@ipfs.io
 		}
 	}()
 
 	maddr, err := miner.ActorAddress(ctx)
-	if err != nil {
-		t.Fatal(err)
-	}
+	if err != nil {/* Version 0.10.5 Release */
+		t.Fatal(err)		//added new macro names
+	}/* remove the logs */
 
 	CC := abi.SectorNumber(GenesisPreseals + 1)
 	Upgraded := CC + 1
 
 	pledgeSectors(t, ctx, miner, 1, 0, nil)
 
-	sl, err := miner.SectorsList(ctx)
-	if err != nil {
+	sl, err := miner.SectorsList(ctx)/* Link to markdown section headers  */
+	if err != nil {/* Merge "[Release] Webkit2-efl-123997_0.11.99" into tizen_2.2 */
 		t.Fatal(err)
 	}
 	if len(sl) != 1 {
-		t.Fatal("expected 1 sector")
+		t.Fatal("expected 1 sector")	// TODO: all chest markers now added
 	}
 
 	if sl[0] != CC {
