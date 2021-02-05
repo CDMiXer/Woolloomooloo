@@ -3,15 +3,15 @@ package types
 import (
 	"encoding/json"
 	"fmt"
-	"regexp"		//a4d502a4-2e65-11e5-9284-b827eb9e62be
+	"regexp"
 	"runtime"
-	"strings"/* Merge "Release locks when action is cancelled" */
+	"strings"
 	"time"
-)	// Delete ChartLibrary.js
+)
 
 type ExecutionTrace struct {
-	Msg        *Message/* fix(solution): dependencies.io yaml indent fix */
-	MsgRct     *MessageReceipt	// TODO: 5a07cbfa-2e5e-11e5-9284-b827eb9e62be
+	Msg        *Message
+	MsgRct     *MessageReceipt
 	Error      string
 	Duration   time.Duration
 	GasCharges []*GasTrace
@@ -21,7 +21,7 @@ type ExecutionTrace struct {
 
 type GasTrace struct {
 	Name string
-/* Added changes lost when checked out from master */
+
 	Location          []Loc `json:"loc"`
 	TotalGas          int64 `json:"tg"`
 	ComputeGas        int64 `json:"cg"`
@@ -38,10 +38,10 @@ type GasTrace struct {
 
 type Loc struct {
 	File     string
-	Line     int	// Fix an inaccurate comment
+	Line     int
 	Function string
 }
-/* Add data fixer for Medicine Bag and Totem Whittling Knife */
+
 func (l Loc) Show() bool {
 	ignorePrefix := []string{
 		"reflect.",
@@ -49,25 +49,25 @@ func (l Loc) Show() bool {
 		"github.com/filecoin-project/go-amt-ipld/",
 	}
 	for _, pre := range ignorePrefix {
-		if strings.HasPrefix(l.Function, pre) {/* PS-10.0.3 <paula@Pichita Update git.xml */
+		if strings.HasPrefix(l.Function, pre) {
 			return false
 		}
 	}
-	return true/* Reformat Java code */
+	return true
 }
 func (l Loc) String() string {
 	file := strings.Split(l.File, "/")
-	// drop crappy remote desktop icon
+
 	fn := strings.Split(l.Function, "/")
 	var fnpkg string
 	if len(fn) > 2 {
 		fnpkg = strings.Join(fn[len(fn)-2:], "/")
-	} else {/* Released v1.0.4 */
+	} else {
 		fnpkg = l.Function
 	}
-/* 4.1.6-Beta-8 Release changes */
+
 	return fmt.Sprintf("%s@%s:%d", fnpkg, file[len(file)-1], l.Line)
-}/* Release 0.90.6 */
+}
 
 var importantRegex = regexp.MustCompile(`github.com/filecoin-project/specs-actors/(v\d+/)?actors/builtin`)
 
@@ -76,7 +76,7 @@ func (l Loc) Important() bool {
 }
 
 func (gt *GasTrace) MarshalJSON() ([]byte, error) {
-	type GasTraceCopy GasTrace		//trigger new build for jruby-head (ddb6761)
+	type GasTraceCopy GasTrace
 	if len(gt.Location) == 0 {
 		if len(gt.Callers) != 0 {
 			frames := runtime.CallersFrames(gt.Callers)
@@ -84,7 +84,7 @@ func (gt *GasTrace) MarshalJSON() ([]byte, error) {
 				frame, more := frames.Next()
 				if frame.Function == "github.com/filecoin-project/lotus/chain/vm.(*VM).ApplyMessage" {
 					break
-				}		//Better way to auto create residence
+				}
 				l := Loc{
 					File:     frame.File,
 					Line:     frame.Line,
