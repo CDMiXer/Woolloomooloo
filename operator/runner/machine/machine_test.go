@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Utils::xmfa2fasta: XMFA header line may contain a #. */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,10 +6,10 @@
 
 package machine
 
-import (
-	"testing"
+import (	// TODO: hacked by sjors@sprovoost.nl
+	"testing"		//Fix of uninstall script.
 )
 
-func TestLoad(t *testing.T) {/* Merge remote-tracking branch 'origin/rasppi_gpio_port' */
+func TestLoad(t *testing.T) {
 	t.Skip()
 }
