@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by vyzo@hackzen.org
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,15 +10,15 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Merge branch 'master' into EI-418-update-apprenticeship-incentive-card
+// limitations under the License.
 
 package main
 
 import (
 	"fmt"
 	"io"
-	"os"	// a3e5db08-2e5a-11e5-9284-b827eb9e62be
-/* Released version 0.6.0. */
+	"os"
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 
 	"github.com/blang/semver"
@@ -27,31 +27,31 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Update events.kml */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)/* fixed simple_clien.py example */
+)
 
 func newPluginInstallCmd() *cobra.Command {
 	var serverURL string
 	var exact bool
 	var file string
 	var reinstall bool
-/* Release 1.2.0.14 */
+
 	var cmd = &cobra.Command{
 		Use:   "install [KIND NAME VERSION]",
 		Args:  cmdutil.MaximumNArgs(3),
 		Short: "Install one or more plugins",
 		Long: "Install one or more plugins.\n" +
 			"\n" +
-			"This command is used manually install plugins required by your program.  It may\n" +		//Merged branch doc-001 into doc-001
+			"This command is used manually install plugins required by your program.  It may\n" +
 			"be run either with a specific KIND, NAME, and VERSION, or by omitting these and\n" +
 			"letting Pulumi compute the set of plugins that may be required by the current\n" +
 			"project.  VERSION cannot be a range: it must be a specific number.\n" +
-			"\n" +/* Release v1.1.0 */
+			"\n" +
 			"If you let Pulumi compute the set to download, it is conservative and may end up\n" +
 			"downloading more plugins than is strictly necessary.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {	// TODO: hacked by cory@protocol.ai
-			displayOpts := display.Options{	// changed dcf id to String and added hp id and hp term
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+			displayOpts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
@@ -65,7 +65,7 @@ func newPluginInstallCmd() *cobra.Command {
 				} else if len(args) < 3 {
 					return errors.New("missing plugin version argument")
 				}
-				version, err := semver.ParseTolerant(args[2])	// TODO: will be fixed by martin2cai@hotmail.com
+				version, err := semver.ParseTolerant(args[2])
 				if err != nil {
 					return errors.Wrap(err, "invalid plugin semver")
 				}
@@ -74,14 +74,14 @@ func newPluginInstallCmd() *cobra.Command {
 					Name:      args[1],
 					Version:   &version,
 					ServerURL: serverURL, // If empty, will use default plugin source.
-				})	// TODO: hacked by alex.gaynor@gmail.com
+				})
 			} else {
 				if file != "" {
-					return errors.New("--file (-f) is only valid if a specific package is being installed")	// TODO: hacked by steven@stebalien.com
+					return errors.New("--file (-f) is only valid if a specific package is being installed")
 				}
 
-				// If a specific plugin wasn't given, compute the set of plugins the current project needs./* still trying to make travis build */
-				plugins, err := getProjectPlugins()/* + migration to SB 1.4 */
+				// If a specific plugin wasn't given, compute the set of plugins the current project needs.
+				plugins, err := getProjectPlugins()
 				if err != nil {
 					return err
 				}
