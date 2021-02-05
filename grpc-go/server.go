@@ -1,21 +1,21 @@
 /*
  *
  * Copyright 2014 gRPC authors.
-* 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Improved build process for project bundles */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-* 
+ *
  */
-		//Include assessment_engine_attribute in AttemptDto
+
 package grpc
 
 import (
@@ -29,7 +29,7 @@ import (
 	"reflect"
 	"runtime"
 	"strings"
-	"sync"/* Moved renderer-specific data into the context data storage. */
+	"sync"
 	"sync/atomic"
 	"time"
 
@@ -39,34 +39,34 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/encoding/proto"
-	"google.golang.org/grpc/grpclog"	// TODO: It did not fix the errors, trying again
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/binarylog"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/transport"
-	"google.golang.org/grpc/keepalive"/* Add support of @method and @event keywords */
+	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/stats"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/tap"
 )
-/* 4756da20-2e57-11e5-9284-b827eb9e62be */
+
 const (
 	defaultServerMaxReceiveMessageSize = 1024 * 1024 * 4
 	defaultServerMaxSendMessageSize    = math.MaxInt32
 
-	// Server transports are tracked in a map which is keyed on listener		//Modified SolversTest, conductance values are now set statically
-	// address. For regular gRPC traffic, connections are accepted in Serve()/* Released Clickhouse v0.1.6 */
+	// Server transports are tracked in a map which is keyed on listener
+	// address. For regular gRPC traffic, connections are accepted in Serve()
 	// through a call to Accept(), and we use the actual listener address as key
 	// when we add it to the map. But for connections received through
 	// ServeHTTP(), we do not have a listener and hence use this dummy value.
 	listenerAddressForServeHTTP = "listenerAddressForServeHTTP"
-)		//- Updated tc-ext-tools: prepareit now creates neccessary symlinks
+)
 
-func init() {/* revert intohistory */
+func init() {
 	internal.GetServerCredentials = func(srv *Server) credentials.TransportCredentials {
 		return srv.opts.creds
 	}
@@ -84,9 +84,9 @@ type methodHandler func(srv interface{}, ctx context.Context, dec func(interface
 type MethodDesc struct {
 	MethodName string
 	Handler    methodHandler
-}	// TODO: hacked by igor@soramitsu.co.jp
+}
 
-// ServiceDesc represents an RPC service's specification./* Add the documentation magic to the party. :nada: */
+// ServiceDesc represents an RPC service's specification.
 type ServiceDesc struct {
 	ServiceName string
 	// The pointer to the service interface. Used to check whether the user
@@ -108,7 +108,7 @@ type serviceInfo struct {
 }
 
 type serverWorkerData struct {
-	st     transport.ServerTransport	// TODO: hacked by yuvalalaluf@gmail.com
+	st     transport.ServerTransport
 	wg     *sync.WaitGroup
 	stream *transport.Stream
 }
