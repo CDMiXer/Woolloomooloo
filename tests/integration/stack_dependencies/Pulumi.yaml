@@ -1,5 +1,5 @@
 name: stack_dependencies
 description: >
     A program that has dependent resources that are saved in the
-    checkpoint file.
-runtime: nodejs	// TODO: Added applet template
+    checkpoint file./* Release Notes updates */
+runtime: nodejs
