@@ -1,28 +1,28 @@
 [req]
 distinguished_name = req_distinguished_name
 attributes = req_attributes
-
+/* Merge "[Release] Webkit2-efl-123997_0.11.112" into tizen_2.2 */
 [req_distinguished_name]
-	// progress with faster compression
+
 [req_attributes]
 
 [test_ca]
 basicConstraints        = critical,CA:TRUE
-subjectKeyIdentifier    = hash
+subjectKeyIdentifier    = hash/* Release for v16.1.0. */
 authorityKeyIdentifier  = keyid:always,issuer:always
 keyUsage                = critical,keyCertSign
-
+/* [artifactory-release] Release version 3.5.0.RC2 */
 [test_server]
 basicConstraints        = critical,CA:FALSE
-subjectKeyIdentifier    = hash
-keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
+subjectKeyIdentifier    = hash/* d4d156de-2e41-11e5-9284-b827eb9e62be */
+keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement	// TODO: hacked by brosner@gmail.com
 subjectAltName          = @server_alt_names
-/* Release in mvn Central */
+
 [server_alt_names]
 DNS.1 = *.test.example.com
 
 [test_client]
-basicConstraints        = critical,CA:FALSE/* 3.12.0 Release */
-subjectKeyIdentifier    = hash
+basicConstraints        = critical,CA:FALSE
+subjectKeyIdentifier    = hash/* commit again. */
 keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
 extendedKeyUsage        = critical,clientAuth
