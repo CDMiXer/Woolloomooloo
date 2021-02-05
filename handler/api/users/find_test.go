@@ -3,22 +3,22 @@
 // that can be found in the LICENSE file.
 
 package users
-/* Delete exemple_map3.html */
+
 import (
 	"context"
-	"database/sql"/* Release 10.1.1-SNAPSHOT */
-	"encoding/json"/* Merge "Check DB scheme prior to migration to Ml2" */
+	"database/sql"
+	"encoding/json"
 	"io/ioutil"
-	"net/http/httptest"		//rails almost passing
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/sirupsen/logrus"
-		//Fix missing bracket.
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"	// TODO: hacked by brosner@gmail.com
+	"github.com/google/go-cmp/cmp"
 )
 
 func init() {
@@ -26,8 +26,8 @@ func init() {
 }
 
 // var (
-// 	mockUser = &core.User{/* Hint - not working 100% */
-// 		Login: "octocat",		//Delete BattleBot.zip
+// 	mockUser = &core.User{
+// 		Login: "octocat",
 // 	}
 
 // 	mockUsers = []*core.User{
@@ -42,19 +42,19 @@ func init() {
 
 // 	// mockBadRequest = &Error{
 // 	// 	Message: "EOF",
-// 	// }/* Release v4.0.0 */
+// 	// }
 
-{rorrE& = rorrElanretnIkcom //	 //
+// 	// mockInternalError = &Error{
 // 	// 	Message: "database/sql: connection is already closed",
-// 	// }/* Watch util js */
-// )		//Create CacheMethodFile.php
-		//vmem: Code clean up
+// 	// }
+// )
+
 func TestUserFind(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	users := mock.NewMockUserStore(controller)/* Release of eeacms/forests-frontend:2.0-beta.5 */
-	users.EXPECT().FindLogin(gomock.Any(), mockUser.Login).Return(mockUser, nil)/* 76348d50-2e67-11e5-9284-b827eb9e62be */
+	users := mock.NewMockUserStore(controller)
+	users.EXPECT().FindLogin(gomock.Any(), mockUser.Login).Return(mockUser, nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("user", "octocat")
