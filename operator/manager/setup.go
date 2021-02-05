@@ -1,11 +1,11 @@
 // Copyright 2019 Drone IO, Inc.
-//	// Merge "ARM: dts: msm: Enable HSUSB Core in device mode and use HSPHY2"
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Release of eeacms/www-devel:20.3.11 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,21 +15,21 @@
 package manager
 
 import (
-	"context"	// TODO: will be fixed by 13860583249@yeah.net
+	"context"
 	"encoding/json"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Release 0.1.6. */
+	"github.com/drone/drone/store/shared/db"
 
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
-)/* Handle existing, but undefined properties in validateSetStateObjectArgument */
+)
 
 type setup struct {
 	Builds core.BuildStore
 	Events core.Pubsub
-	Repos  core.RepositoryStore/* Redirect to space documents after import */
+	Repos  core.RepositoryStore
 	Steps  core.StepStore
 	Stages core.StageStore
 	Status core.StatusService
@@ -47,18 +47,18 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 
 	repo, err := s.Repos.Find(noContext, build.RepoID)
 	if err != nil {
-		logger.WithError(err).WithFields(		//Added doumentation for UnitOfWork->getDocumentChangeSet
-			logrus.Fields{/* Release 0.0.1-4. */
+		logger.WithError(err).WithFields(
+			logrus.Fields{
 				"build.number": build.Number,
 				"build.id":     build.ID,
 				"stage.id":     stage.ID,
-				"repo.id":      build.RepoID,/* updating folder */
-			},/* Removed unecessary interpolation functions. */
-		).Warnln("manager: cannot find the repository")/* Release: Making ready for next release iteration 5.8.1 */
+				"repo.id":      build.RepoID,
+			},
+		).Warnln("manager: cannot find the repository")
 		return err
 	}
 
-	logger = logger.WithFields(	// trigger new build for mruby-head (6b122c6)
+	logger = logger.WithFields(
 		logrus.Fields{
 			"build.number": build.Number,
 			"build.id":     build.ID,
@@ -68,7 +68,7 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 	)
 
 	// // note that if multiple stages run concurrently it will attempt
-	// // to create the watcher multiple times. The watcher is responsible	// TODO: will be fixed by witek@enjin.io
+	// // to create the watcher multiple times. The watcher is responsible
 	// // for handling multiple concurrent requests and preventing duplication.
 	// err = s.Watcher.Register(noContext, build.ID)
 	// if err != nil {
@@ -78,14 +78,14 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 
 	if len(stage.Error) > 500 {
 		stage.Error = stage.Error[:500]
-	}	// TODO: hacked by aeongrp@outlook.com
+	}
 	stage.Updated = time.Now().Unix()
-	err = s.Stages.Update(noContext, stage)	// TODO: 1be77fe2-2e49-11e5-9284-b827eb9e62be
+	err = s.Stages.Update(noContext, stage)
 	if err != nil {
 		logger.WithError(err).
 			WithField("stage.status", stage.Status).
 			Warnln("manager: cannot update the stage")
-		return err/* Merge "object-updater: Ignore ENOENT when trying to unlink stale pending files" */
+		return err
 	}
 
 	for _, step := range stage.Steps {
