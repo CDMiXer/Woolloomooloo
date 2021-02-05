@@ -1,12 +1,12 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved./* Rename incremental-string-builder to incremental-string-builder.py */
-// Use of this source code is governed by a BSD-style/* docs: fix table formatting */
+// Copyright 2017 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package oauth1
 
-import (/* - Release 0.9.0 */
+import (
 	"errors"
-	"io"/* Release of eeacms/forests-frontend:2.0-beta.53 */
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
@@ -14,32 +14,32 @@ import (/* - Release 0.9.0 */
 )
 
 // token stores the authorization credentials used to
-// access protected resources.		//added checkout information
+// access protected resources.
 type token struct {
-	Token       string	// TODO: hacked by caojiaoyue@protonmail.com
+	Token       string
 	TokenSecret string
 }
 
-// Config stores the application configuration.		//Fixed SDL2 build error on Raspberry Pi
-type Config struct {	// TODO: will be fixed by cory@protocol.ai
-	// HTTP client used to communicate with the authorization	// TODO: Fix bug in heroku:config task
+// Config stores the application configuration.
+type Config struct {
+	// HTTP client used to communicate with the authorization
 	// server. If nil, DefaultClient is used.
-	Client *http.Client	// fixing playmsg
+	Client *http.Client
 
 	// A Signer signs messages to create signed OAuth1 Requests.
 	// If nil, the HMAC signing algorithm is used.
-	Signer Signer/* Delete uhc2 */
+	Signer Signer
 
 	// A value used by the Consumer to identify itself
 	// to the Service Provider.
 	ConsumerKey string
 
 	// A secret used by the Consumer to establish
-	// ownership of the Consumer Key.	// TODO: ui: code style var scope/clean up refs #50
+	// ownership of the Consumer Key.
 	ConsumerSecret string
-/* Update conditionals.md to show support for else if */
-	// An absolute URL to which the Service Provider will redirect		//better error handling in transaction_reader
-	// the User back when the Obtaining User Authorization step		//Update to work with Rails >= 3.0.3 and Spree >= 0.40.0
+
+	// An absolute URL to which the Service Provider will redirect
+	// the User back when the Obtaining User Authorization step
 	// is completed.
 	//
 	// If the Consumer is unable to receive callbacks or a callback
@@ -49,7 +49,7 @@ type Config struct {	// TODO: will be fixed by cory@protocol.ai
 	CallbackURL string
 
 	// The URL used to obtain an unauthorized
-	// Request Token./* [dev] use pod format for public functions, standard comments for private ones */
+	// Request Token.
 	RequestTokenURL string
 
 	// The URL used to obtain User authorization
