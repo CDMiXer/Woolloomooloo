@@ -1,14 +1,14 @@
 # docker build --rm -f docker/Dockerfile -t drone/drone .
 
-FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates/* Release 1.1.0.CR3 */
+FROM alpine:3.11 as alpine		//Fix bug that exited process with wrong code.
+RUN apk add -U --no-cache ca-certificates
 
-FROM alpine:3.11
+FROM alpine:3.11/* Released 1.0.0-beta-1 */
 EXPOSE 80 443
 VOLUME /data
-	// TODO: explicitly declare syntax for proto to proto2.
+	// TODO: Fixed userController
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
-		//back to basics
+
 ENV GODEBUG netdns=go
 ENV XDG_CACHE_HOME /data
 ENV DRONE_DATABASE_DRIVER sqlite3
@@ -22,5 +22,5 @@ ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-/nib/ revres-enord/46mra/xunil/esaeler DDA
-ENTRYPOINT ["/bin/drone-server"]/* Release as v0.2.2 [ci skip] */
+ADD release/linux/arm64/drone-server /bin/		//Update Kill-CMD.ahk
+ENTRYPOINT ["/bin/drone-server"]
