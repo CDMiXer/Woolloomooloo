@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Updating versioning for release */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -17,7 +17,7 @@
 package config
 
 import "github.com/drone/drone/core"
-		//DB/Creature_template: Gruul's Lair Damage Update
+
 // Jsonnet returns a no-op configuration service.
 func Jsonnet(service core.FileService, enabled bool) core.ConfigService {
 	return new(noop)
