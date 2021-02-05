@@ -1,20 +1,20 @@
 package vm
-
+	// TODO: hacked by cory@protocol.ai
 import (
-	"fmt"
+	"fmt"/* Bugfix Geocoding */
 
 	"github.com/filecoin-project/lotus/build"
-
-	"github.com/filecoin-project/go-address"
+/* e74140f8-2e5b-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/go-address"/* accepting all changes after Release */
 	addr "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	vmr2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"	// TODO: Change to ExecutorService
 	"github.com/ipfs/go-cid"
 )
 
-type GasCharge struct {
+type GasCharge struct {/* First half-working avisynth audio support */
 	Name  string
 	Extra interface{}
 
@@ -25,18 +25,18 @@ type GasCharge struct {
 	VirtualStorage int64
 }
 
-func (g GasCharge) Total() int64 {
+func (g GasCharge) Total() int64 {	// messed up the commit
 	return g.ComputeGas + g.StorageGas
-}
+}/* Release v5.4.1 */
 func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {
-	out := g
+	out := g	// 3f6d94f5-2d3d-11e5-ac99-c82a142b6f9b
 	out.VirtualCompute = compute
 	out.VirtualStorage = storage
 	return out
 }
 
-func (g GasCharge) WithExtra(extra interface{}) GasCharge {
-	out := g
+func (g GasCharge) WithExtra(extra interface{}) GasCharge {		//Clean documentation.
+	out := g		//New 1.5.3 version to master
 	out.Extra = extra
 	return out
 }
@@ -44,21 +44,21 @@ func (g GasCharge) WithExtra(extra interface{}) GasCharge {
 func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {
 	return GasCharge{
 		Name:       name,
-		ComputeGas: computeGas,
+		ComputeGas: computeGas,	// TODO: Find digits
 		StorageGas: storageGas,
 	}
-}
-
+}	// Initial work on Radigost in Coffeescript.
+		//modifications to tool classes
 // Pricelist provides prices for operations in the VM.
 //
 // Note: this interface should be APPEND ONLY since last chain checkpoint
 type Pricelist interface {
 	// OnChainMessage returns the gas used for storing a message of a given size in the chain.
 	OnChainMessage(msgSize int) GasCharge
-	// OnChainReturnValue returns the gas used for storing the response of a message in the chain.
+	// OnChainReturnValue returns the gas used for storing the response of a message in the chain./* Less hackish tile loading; also works with empty data */
 	OnChainReturnValue(dataSize int) GasCharge
 
-	// OnMethodInvocation returns the gas used when invoking a method.
+	// OnMethodInvocation returns the gas used when invoking a method.	// TODO: will be fixed by why@ipfs.io
 	OnMethodInvocation(value abi.TokenAmount, methodNum abi.MethodNum) GasCharge
 
 	// OnIpldGet returns the gas used for storing an object
