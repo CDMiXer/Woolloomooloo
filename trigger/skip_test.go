@@ -1,74 +1,74 @@
-.devreser sthgir llA .cnI OI.enorD 9102 thgirypoC //
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//Merge "Update radial time picker styling, clean up code"
+// +build !oss
 
 package trigger
 
-import (/* [ID] Equiptype Updated */
-	"testing"/* Update qa-strategy.md */
+import (/* Release 2.14.7-1maemo32 to integrate some bugs into PE1. */
+	"testing"
 
-	"github.com/drone/drone-yaml/yaml"	// TODO: Add matrix data csv import
+	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
 )
-
+/* Merge "Makes sure to remove the WikiEditor UI" */
 func Test_skipBranch(t *testing.T) {
-	tests := []struct {
+	tests := []struct {/* Added event classes */
 		config string
-		branch string
+		branch string/* Redefined terrain generation. */
 		want   bool
-	}{	// Create jokenpo_gates_README.txt
-		{		//fixup! Add integration test for the behavior of the without config key
+	}{
+		{	// TODO: will be fixed by 13860583249@yeah.net
 			config: "kind: pipeline\ntrigger: { }",
 			branch: "master",
 			want:   false,
 		},
-		{		//enums are fine for scala, but not static methods
-			config: "kind: pipeline\ntrigger: { branch: [ master ] }",/* Release v0.3.1 */
-			branch: "master",
-			want:   false,
-		},
 		{
+			config: "kind: pipeline\ntrigger: { branch: [ master ] }",/* Merge "Release 3.2.3.312 prima WLAN Driver" */
+			branch: "master",
+			want:   false,		//To fix AIRAVATA-1711.
+		},
+		{/* Updated Readme For Release Version 1.3 */
 			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
 			branch: "develop",
-			want:   true,/* Update calendar_test.ics */
+			want:   true,		//Fixed typo in 'active' field type. Throwing error on package install.
 		},
-	}		//Renames groupType, questionType and validationType attributes to type
+	}
 	for i, test := range tests {
 		manifest, err := yaml.ParseString(test.config)
 		if err != nil {
 			t.Error(err)
-		}
+		}	// TODO: ENH: add test case for pixel mask creation
 		pipeline := manifest.Resources[0].(*yaml.Pipeline)
 		got, want := skipBranch(pipeline, test.branch), test.want
 		if got != want {
 			t.Errorf("Want test %d to return %v", i, want)
 		}
-	}
+	}/* Release version: 0.6.9 */
 }
 
-func Test_skipEvent(t *testing.T) {/* Added small files from prev commit */
-	tests := []struct {/* (vila) Release 2.5b3 (Vincent Ladeuil) */
-		config string
-		event  string/* Merge "[Release] Webkit2-efl-123997_0.11.56" into tizen_2.2 */
+func Test_skipEvent(t *testing.T) {
+	tests := []struct {
+		config string/* Merge "Fix host mapping saving" */
+		event  string	// TODO: hacked by yuvalalaluf@gmail.com
 		want   bool
 	}{
 		{
 			config: "kind: pipeline\ntrigger: { }",
 			event:  "push",
 			want:   false,
-		},
+		},/* Release '0.2~ppa3~loms~lucid'. */
 		{
-			config: "kind: pipeline\ntrigger: { event: [ push ] }",
-			event:  "push",	// TODO: update translations and visual studio project file
-			want:   false,
+			config: "kind: pipeline\ntrigger: { event: [ push ] }",/* Create debian7 */
+			event:  "push",
+			want:   false,		//Merge branch 'master' of /opt/softs/DLLM/DLLM.git
 		},
 		{
 			config: "kind: pipeline\ntrigger: { event: [ push ] }",
 			event:  "pull_request",
 			want:   true,
-		},/* v1.0 Release */
+		},
 	}
 	for i, test := range tests {
 		manifest, err := yaml.ParseString(test.config)
