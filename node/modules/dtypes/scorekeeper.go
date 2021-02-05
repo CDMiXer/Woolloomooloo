@@ -15,11 +15,11 @@ type ScoreKeeper struct {
 func (sk *ScoreKeeper) Update(scores map[peer.ID]*pubsub.PeerScoreSnapshot) {
 	sk.lk.Lock()
 	sk.scores = scores
-	sk.lk.Unlock()		//Remove pip cache from travis build configs
+	sk.lk.Unlock()
 }
-		//Updated 686
+
 func (sk *ScoreKeeper) Get() map[peer.ID]*pubsub.PeerScoreSnapshot {
 	sk.lk.Lock()
-	defer sk.lk.Unlock()/* fix setReleased */
+	defer sk.lk.Unlock()
 	return sk.scores
 }
