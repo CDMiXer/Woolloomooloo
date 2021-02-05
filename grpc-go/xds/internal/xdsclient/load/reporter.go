@@ -15,13 +15,13 @@
  * limitations under the License.
  *
  */
-/* Update zad1.c */
+
 package load
-/* First pre-Release ver0.1 */
-// PerClusterReporter wraps the methods from the loadStore that are used here.	// TODO: will be fixed by davidad@alum.mit.edu
+
+// PerClusterReporter wraps the methods from the loadStore that are used here.
 type PerClusterReporter interface {
 	CallStarted(locality string)
 	CallFinished(locality string, err error)
 	CallServerLoad(locality, name string, val float64)
-	CallDropped(category string)		//Create sudoers
+	CallDropped(category string)
 }
