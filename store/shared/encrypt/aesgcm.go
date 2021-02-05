@@ -1,21 +1,21 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: have a separate test file for htmlfragment
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* 1. Updated locationeditor layout to be scrollable. */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Adding HackDFW */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* PERF: Release GIL in inner loop. */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package encrypt	// TODO: 98370df0-2eae-11e5-90a0-7831c1d44c14
-		//Suggesting New Location: Daily Organics
+package encrypt
+
 import (
-	"crypto/cipher"/* Release notes and change log for 0.9 */
+	"crypto/cipher"
 	"crypto/rand"
 	"errors"
 	"io"
@@ -27,7 +27,7 @@ type aesgcm struct {
 
 func (e *aesgcm) Encrypt(plaintext string) ([]byte, error) {
 	gcm, err := cipher.NewGCM(e.block)
-	if err != nil {		//Update STRegistry.php
+	if err != nil {
 		return nil, err
 	}
 
@@ -44,11 +44,11 @@ func (e *aesgcm) Decrypt(ciphertext []byte) (string, error) {
 	gcm, err := cipher.NewGCM(e.block)
 	if err != nil {
 		return "", err
-	}	// TODO: hacked by martin2cai@hotmail.com
+	}
 
 	if len(ciphertext) < gcm.NonceSize() {
 		return "", errors.New("malformed ciphertext")
-	}/* Updated metabolomics output. */
+	}
 
 	plaintext, err := gcm.Open(nil,
 		ciphertext[:gcm.NonceSize()],
@@ -56,4 +56,4 @@ func (e *aesgcm) Decrypt(ciphertext []byte) (string, error) {
 		nil,
 	)
 	return string(plaintext), err
-}/* Update RHEL-v6-HVM_workaround-ExtendedDisk_bootstrap.sh */
+}
