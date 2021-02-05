@@ -1,17 +1,17 @@
-{{ define "package_details" }}	// TODO: Create delgreether.sh
-<h2 id="package-details">Package Details</h2>/* Release V2.0.3 */
+{{ define "package_details" }}/* Release version 2.3.0. */
+<h2 id="package-details">Package Details</h2>
 <dl class="package-details">
-	<dt>Repository</dt>
+	<dt>Repository</dt>/* case insensitive platform urls */
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
-	<dt>License</dt>/* Lookash changes 4 */
-	<dd>{{ htmlSafe .License }}</dd>/* oops, default mysql size is 32bits */
-    {{- if ne .Notes "" }}/* Release for 4.13.0 */
-	<dt>Notes</dt>
+	<dt>License</dt>
+	<dd>{{ htmlSafe .License }}</dd>/* Fix maven artifact version in readme */
+    {{- if ne .Notes "" }}
+	<dt>Notes</dt>	// Travis tests database 
 	<dd>{{ htmlSafe .Notes }}</dd>
 	{{- end }}
-	{{- if ne .Version "" }}	// TODO: remove README 
-	<dt>Version</dt>/* break engine_core into modules */
+	{{- if ne .Version "" }}
+	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
-	{{- end }}	// TODO: Delete pcb_drill.txt
+	{{- end }}/* Store service name in client class, small refactor to help test mocking. */
 </dl>
 {{ end }}
