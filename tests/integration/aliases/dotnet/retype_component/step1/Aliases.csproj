@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Updated New Release Checklist (markdown) */
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
