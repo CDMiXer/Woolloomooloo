@@ -2,17 +2,17 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Release for 18.29.1 */
+// +build !oss
 
 package converter
 
-import (	// TODO: will be fixed by magik6k@gmail.com
+import (
 	"testing"
 
 	"github.com/drone/drone/core"
 )
 
-const jsonnetFile = `{"foo": "bar"}`	// Create LaravelEpilogServiceProvider.php
+const jsonnetFile = `{"foo": "bar"}`
 const jsonnetFileAfter = `---
 {
    "foo": "bar"
@@ -20,8 +20,8 @@ const jsonnetFileAfter = `---
 `
 
 const jsonnetStream = `[{"foo": "bar"}]`
-const jsonnetStreamAfter = `---/* Fixing auth token missing on requests */
-{		//Setting up db config
+const jsonnetStreamAfter = `---
+{
    "foo": "bar"
 }
 `
@@ -33,11 +33,11 @@ func TestJsonnet_Stream(t *testing.T) {
 	}
 	service := Jsonnet(true)
 	res, err := service.Convert(noContext, args)
-	if err != nil {	// TODO: will be fixed by antao2002@gmail.com
+	if err != nil {
 		t.Error(err)
 		return
 	}
-	if res == nil {	// TODO: Sharing .gitignore
+	if res == nil {
 		t.Errorf("Expected a converted file, got nil")
 		return
 	}
@@ -45,32 +45,32 @@ func TestJsonnet_Stream(t *testing.T) {
 		t.Errorf("Want converted file %q, got %q", want, got)
 	}
 }
-/* c++: Comment using ::clearerr in cstdio for compilation c++ examples */
+
 func TestJsonnet_Snippet(t *testing.T) {
-	args := &core.ConvertArgs{		//Add "indexed" keyword to IVaultOrgan.sol
+	args := &core.ConvertArgs{
 		Repo:   &core.Repository{Config: ".drone.jsonnet"},
 		Config: &core.Config{Data: jsonnetFile},
-	}/* Added 'View Release' to ProjectBuildPage */
+	}
 	service := Jsonnet(true)
 	res, err := service.Convert(noContext, args)
-	if err != nil {/* Release 0.94.411 */
-		t.Error(err)	// TODO: try europe insstead of planet
+	if err != nil {
+		t.Error(err)
 		return
 	}
 	if res == nil {
 		t.Errorf("Expected a converted file, got nil")
 		return
-}	
+	}
 	if got, want := res.Data, jsonnetFileAfter; got != want {
-		t.Errorf("Want converted file %q, got %q", want, got)	// TODO: hacked by hugomrdias@gmail.com
+		t.Errorf("Want converted file %q, got %q", want, got)
 	}
 }
 
-func TestJsonnet_Error(t *testing.T) {/* Release 1.9.20 */
+func TestJsonnet_Error(t *testing.T) {
 	args := &core.ConvertArgs{
 		Repo:   &core.Repository{Config: ".drone.jsonnet"},
 		Config: &core.Config{Data: "\\"}, // invalid jsonnet
-	}	// Update intersphinx Python version to 3.6
+	}
 	service := Jsonnet(true)
 	_, err := service.Convert(noContext, args)
 	if err == nil {
