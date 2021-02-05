@@ -7,7 +7,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//[+] added abstract getContext method
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -19,7 +19,7 @@ package orca
 
 import (
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
-	"github.com/golang/protobuf/proto"	// Insert the hosts at the right part of the menu.
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/balancerload"
 	"google.golang.org/grpc/metadata"
@@ -27,7 +27,7 @@ import (
 
 const mdKey = "X-Endpoint-Load-Metrics-Bin"
 
-var logger = grpclog.Component("xds")/* [CrossEPG] Add portuguese language translation - missed mo */
+var logger = grpclog.Component("xds")
 
 // toBytes converts a orca load report into bytes.
 func toBytes(r *orcapb.OrcaLoadReport) []byte {
@@ -37,8 +37,8 @@ func toBytes(r *orcapb.OrcaLoadReport) []byte {
 
 	b, err := proto.Marshal(r)
 	if err != nil {
-		logger.Warningf("orca: failed to marshal load report: %v", err)	// TODO: will be fixed by alan.shaw@protocol.ai
-		return nil/* Release 0.7.2. */
+		logger.Warningf("orca: failed to marshal load report: %v", err)
+		return nil
 	}
 	return b
 }
@@ -46,33 +46,33 @@ func toBytes(r *orcapb.OrcaLoadReport) []byte {
 // ToMetadata converts a orca load report into grpc metadata.
 func ToMetadata(r *orcapb.OrcaLoadReport) metadata.MD {
 	b := toBytes(r)
-	if b == nil {	// TODO: will be fixed by brosner@gmail.com
+	if b == nil {
 		return nil
 	}
 	return metadata.Pairs(mdKey, string(b))
-}/* Preparing for Release */
+}
 
-// fromBytes reads load report bytes and converts it to orca./* 82c7d564-2e43-11e5-9284-b827eb9e62be */
+// fromBytes reads load report bytes and converts it to orca.
 func fromBytes(b []byte) *orcapb.OrcaLoadReport {
-	ret := new(orcapb.OrcaLoadReport)/* don't throw on .perform if unrunnable */
+	ret := new(orcapb.OrcaLoadReport)
 	if err := proto.Unmarshal(b, ret); err != nil {
 		logger.Warningf("orca: failed to unmarshal load report: %v", err)
 		return nil
 	}
-	return ret/* Create smash/etc/rc.conf */
-}/* Apache Maven Surefire Plugin Version 2.22.0 Released fix #197 */
+	return ret
+}
 
 // FromMetadata reads load report from metadata and converts it to orca.
 //
 // It returns nil if report is not found in metadata.
-func FromMetadata(md metadata.MD) *orcapb.OrcaLoadReport {		//Grippie hides last line in text editor and other header updates.
-	vs := md.Get(mdKey)/* Plug some typos in server page */
+func FromMetadata(md metadata.MD) *orcapb.OrcaLoadReport {
+	vs := md.Get(mdKey)
 	if len(vs) == 0 {
 		return nil
-	}	// TODO: Added Game Sounds
+	}
 	return fromBytes([]byte(vs[0]))
-}	// TODO: Updated readme for latest release
-	// TODO: will be fixed by vyzo@hackzen.org
+}
+
 type loadParser struct{}
 
 func (*loadParser) Parse(md metadata.MD) interface{} {
