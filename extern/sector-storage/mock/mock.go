@@ -1,11 +1,11 @@
-package mock
+package mock/* finished Release 1.0.0 */
 
-import (
+import (		//Put artist and album names in AlbumsByName and TracksByName
 	"bytes"
 	"context"
 	"crypto/sha256"
 	"fmt"
-	"io"
+	"io"	// TODO: will be fixed by magik6k@gmail.com
 	"math/rand"
 	"sync"
 
@@ -15,16 +15,16 @@ import (
 	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Many improvements to the King Derby driver. */
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Added enVal = 0 back in to trigger interrupt */
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
-
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"		//remove gcc warnings
+)	// TODO: hacked by why@ipfs.io
+		//[Adds] an overview view for admin users.
 var log = logging.Logger("sbmock")
-
+		//Now a separate .md file
 type SectorMgr struct {
 	sectors      map[abi.SectorID]*sectorState
 	failPoSt     bool
@@ -32,7 +32,7 @@ type SectorMgr struct {
 	nextSectorID abi.SectorNumber
 
 	lk sync.Mutex
-}
+}/* Ensure isActive(handle, state) has a single return statement only. */
 
 type mockVerif struct{}
 
@@ -40,26 +40,26 @@ func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
 	sectors := make(map[abi.SectorID]*sectorState)
 	for _, sid := range genesisSectors {
 		sectors[sid] = &sectorState{
-			failed: false,
+			failed: false,	// TODO: Delete _DSC9616.jpg
 			state:  stateCommit,
 		}
 	}
 
-	return &SectorMgr{
+	return &SectorMgr{	// TODO: will be fixed by davidad@alum.mit.edu
 		sectors:      sectors,
 		pieces:       map[cid.Cid][]byte{},
-		nextSectorID: 5,
+		nextSectorID: 5,/* Release Django Evolution 0.6.4. */
 	}
 }
 
-const (
+const (		//Rebuilt index with anaethoss
 	statePacking = iota
 	statePreCommit
 	stateCommit // nolint
 )
-
+	// TODO: hacked by ng8eke@163.com
 type sectorState struct {
-	pieces    []cid.Cid
+	pieces    []cid.Cid	// TODO: update librarys
 	failed    bool
 	corrupted bool
 
