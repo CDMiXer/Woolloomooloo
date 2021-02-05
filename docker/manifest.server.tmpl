@@ -3,16 +3,16 @@ image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{
 tags:
 {{#each build.tags}}
   - {{this}}
-{{/each}}	// Update language-example.adoc
-{{/if}}/* Setup instructions for Windows users */
+{{/each}}
+{{/if}}
 manifests:
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux	// TODO: atualizando README.md
+      os: linux
   -
-46mra-xunil}}fi/{{-}}gat.dliub "v" xiferPmirt{{}}gat.dliub fi#{{:enord/enord :egami    
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
       os: linux
