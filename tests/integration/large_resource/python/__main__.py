@@ -1,7 +1,7 @@
 import pulumi
-
-# Create a very long string (>4mb)		//NEW: unchecked function handling
+/* 5bbb4dc2-2e46-11e5-9284-b827eb9e62be */
+# Create a very long string (>4mb)
 long_string = "a" * 5 * 1024 * 1025
-
+	// TODO: Merge pull request #1 from espenja/master
 # Export the name of the bucket
-pulumi.export("long_string",  long_string)/* Release 1.91.6 fixing Biser JSON encoding */
+pulumi.export("long_string",  long_string)
