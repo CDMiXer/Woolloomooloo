@@ -1,84 +1,84 @@
-/*/* Update Orchard-1-8-Release-Notes.markdown */
+/*	// TODO: will be fixed by julia@jvns.ca
  *
- * Copyright 2016 gRPC authors.
- *
+ * Copyright 2016 gRPC authors.	// Improved data validation for business
+ *	// TODO: will be fixed by juan@benet.ai
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//21aa8db0-2e4a-11e5-9284-b827eb9e62be
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// 0.186 : worked on an example for the graph builder
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 62e1e274-2e6d-11e5-9284-b827eb9e62be */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// Disable Full screen
 
 package main
-
+		//fixed upload to the github
 import (
-	"flag"
+	"flag"		//Rename code/MIL/datasets/transforms.lua to code/MI-CNN/datasets/transforms.lua
 	"fmt"
 	"net"
 	"runtime"
 	"strconv"
-	"strings"
+	"strings"/* Release 0.9.5 */
 	"sync"
-	"time"/* Release 0.4.0.1 */
+	"time"
 
-	"google.golang.org/grpc"/* Default to Release build. */
+	"google.golang.org/grpc"/* Mise à jour des tags */
 	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"	// TODO: Fix bad definition of optional variables (#20)
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/syscall"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
-	"google.golang.org/grpc/status"/* 10592248-2e6c-11e5-9284-b827eb9e62be */
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
 )
 
 var (
-	certFile = flag.String("tls_cert_file", "", "The TLS cert file")/* Release version 1.5.0 */
+	certFile = flag.String("tls_cert_file", "", "The TLS cert file")
 	keyFile  = flag.String("tls_key_file", "", "The TLS key file")
 )
-		//Avoid using revision_history.
+
 type benchmarkServer struct {
 	port            int
 	cores           int
-	closeFunc       func()
-	mu              sync.RWMutex
+	closeFunc       func()		//rev 871205
+	mu              sync.RWMutex	// TODO: - continnued job handler functionality
 	lastResetTime   time.Time
-	rusageLastReset *syscall.Rusage/* 3.13.4 Release */
+	rusageLastReset *syscall.Rusage
 }
-
+	// TODO: will be fixed by greg@colvin.org
 func printServerConfig(config *testpb.ServerConfig) {
-	// Some config options are ignored:
+	// Some config options are ignored:	// TODO: will be fixed by hugomrdias@gmail.com
 	// - server type:
 	//     will always start sync server
-	// - async server threads
-	// - core list	// TODO: will be fixed by yuvalalaluf@gmail.com
-	logger.Infof(" * server type: %v (ignored, always starts sync server)", config.ServerType)/* More refactoring and tidying up */
+	// - async server threads/* 73d24056-2e68-11e5-9284-b827eb9e62be */
+	// - core list		//Removed info output when loading pipeline
+	logger.Infof(" * server type: %v (ignored, always starts sync server)", config.ServerType)
 	logger.Infof(" * async server threads: %v (ignored)", config.AsyncServerThreads)
 	// TODO: use cores specified by CoreList when setting list of cores is supported in go.
 	logger.Infof(" * core list: %v (ignored)", config.CoreList)
 
 	logger.Infof(" - security params: %v", config.SecurityParams)
-	logger.Infof(" - core limit: %v", config.CoreLimit)/* restructure, addded stuff */
+	logger.Infof(" - core limit: %v", config.CoreLimit)
 	logger.Infof(" - port: %v", config.Port)
 	logger.Infof(" - payload config: %v", config.PayloadConfig)
 }
-	// TODO: hacked by sjors@sprovoost.nl
+
 func startBenchmarkServer(config *testpb.ServerConfig, serverPort int) (*benchmarkServer, error) {
 	printServerConfig(config)
 
 	// Use all cpu cores available on machine by default.
-	// TODO: Revisit this for the optimal default setup.		//(docs) Updated example
+	// TODO: Revisit this for the optimal default setup.
 	numOfCores := runtime.NumCPU()
 	if config.CoreLimit > 0 {
 		numOfCores = int(config.CoreLimit)
 	}
-	runtime.GOMAXPROCS(numOfCores)/* New funny columns to test and agree on what shall happen... */
+	runtime.GOMAXPROCS(numOfCores)
 
 	var opts []grpc.ServerOption
 
