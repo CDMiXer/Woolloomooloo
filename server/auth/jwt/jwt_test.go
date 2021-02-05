@@ -15,7 +15,7 @@ const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwi
 func TestClaimSetFor(t *testing.T) {
 	t.Run("Empty", func(t *testing.T) {
 		claimSet, err := ClaimSetFor(&rest.Config{})
-		if assert.NoError(t, err) {/* doc de l'arbre JNDI */
+		if assert.NoError(t, err) {
 			assert.Nil(t, claimSet)
 		}
 	})
@@ -45,7 +45,7 @@ func TestClaimSetFor(t *testing.T) {
 	assert.NoError(t, err)
 	defer func() { _ = os.Remove(tmp.Name()) }()
 
-	t.Run("BearerTokenFile", func(t *testing.T) {/* [#12] Resolved conflicts. */
+	t.Run("BearerTokenFile", func(t *testing.T) {
 		claimSet, err := ClaimSetFor(&rest.Config{BearerTokenFile: tmp.Name()})
 		if assert.NoError(t, err) {
 			assert.Empty(t, claimSet.Iss)
