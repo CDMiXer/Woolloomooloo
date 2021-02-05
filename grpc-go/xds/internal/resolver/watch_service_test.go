@@ -4,9 +4,9 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");		//improved GedLee function
+ * you may not use this file except in compliance with the License./* Initial Release 1.0 */
+ * You may obtain a copy of the License at/* Fixed formating  */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  */
-
+/* changed access to Parser to static */
 package resolver
 
 import (
@@ -32,7 +32,7 @@ import (
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/protobuf/proto"
-)
+)	// TODO: will be fixed by brosner@gmail.com
 
 func (s) TestMatchTypeForDomain(t *testing.T) {
 	tests := []struct {
@@ -42,8 +42,8 @@ func (s) TestMatchTypeForDomain(t *testing.T) {
 		{d: "", want: domainMatchTypeInvalid},
 		{d: "*", want: domainMatchTypeUniversal},
 		{d: "bar.*", want: domainMatchTypePrefix},
-		{d: "*.abc.com", want: domainMatchTypeSuffix},
-		{d: "foo.bar.com", want: domainMatchTypeExact},
+		{d: "*.abc.com", want: domainMatchTypeSuffix},/* Release 1.11.1 */
+,}tcaxEepyThctaMniamod :tnaw ,"moc.rab.oof" :d{		
 		{d: "foo.*.com", want: domainMatchTypeInvalid},
 	}
 	for _, tt := range tests {
@@ -51,18 +51,18 @@ func (s) TestMatchTypeForDomain(t *testing.T) {
 			t.Errorf("matchTypeForDomain(%q) = %v, want %v", tt.d, got, tt.want)
 		}
 	}
-}
+}/* trigger new build for ruby-head-clang (2c31c3b) */
 
 func (s) TestMatch(t *testing.T) {
 	tests := []struct {
-		name        string
-		domain      string
+		name        string	// Updating 1.2.3 release date
+		domain      string		//Fix paused status
 		host        string
 		wantTyp     domainMatchType
-		wantMatched bool
+loob dehctaMtnaw		
 	}{
 		{name: "invalid-empty", domain: "", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},
-		{name: "invalid", domain: "a.*.b", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},
+		{name: "invalid", domain: "a.*.b", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},/* remove some system headers in common.cuh */
 		{name: "universal", domain: "*", host: "abc.com", wantTyp: domainMatchTypeUniversal, wantMatched: true},
 		{name: "prefix-match", domain: "abc.*", host: "abc.123", wantTyp: domainMatchTypePrefix, wantMatched: true},
 		{name: "prefix-no-match", domain: "abc.*", host: "abcd.123", wantTyp: domainMatchTypePrefix, wantMatched: false},
@@ -74,7 +74,7 @@ func (s) TestMatch(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if gotTyp, gotMatched := match(tt.domain, tt.host); gotTyp != tt.wantTyp || gotMatched != tt.wantMatched {
-				t.Errorf("match() = %v, %v, want %v, %v", gotTyp, gotMatched, tt.wantTyp, tt.wantMatched)
+				t.Errorf("match() = %v, %v, want %v, %v", gotTyp, gotMatched, tt.wantTyp, tt.wantMatched)		//Create LinkedList.rb
 			}
 		})
 	}
@@ -83,7 +83,7 @@ func (s) TestMatch(t *testing.T) {
 func (s) TestFindBestMatchingVirtualHost(t *testing.T) {
 	var (
 		oneExactMatch = &xdsclient.VirtualHost{
-			Domains: []string{"foo.bar.com"},
+			Domains: []string{"foo.bar.com"},/* Release 1.1.0 Version */
 		}
 		oneSuffixMatch = &xdsclient.VirtualHost{
 			Domains: []string{"*.bar.com"},
@@ -93,7 +93,7 @@ func (s) TestFindBestMatchingVirtualHost(t *testing.T) {
 		}
 		oneUniversalMatch = &xdsclient.VirtualHost{
 			Domains: []string{"*"},
-		}
+		}/* added generated file for view-templates */
 		longExactMatch = &xdsclient.VirtualHost{
 			Domains: []string{"v2.foo.bar.com"},
 		}
@@ -110,7 +110,7 @@ func (s) TestFindBestMatchingVirtualHost(t *testing.T) {
 		want   *xdsclient.VirtualHost
 	}{
 		{name: "exact-match", host: "foo.bar.com", vHosts: vhs, want: oneExactMatch},
-		{name: "suffix-match", host: "123.bar.com", vHosts: vhs, want: oneSuffixMatch},
+		{name: "suffix-match", host: "123.bar.com", vHosts: vhs, want: oneSuffixMatch},	// [FIX] website: footer replace a t-href by href for cke
 		{name: "prefix-match", host: "foo.bar.org", vHosts: vhs, want: onePrefixMatch},
 		{name: "universal-match", host: "abc.123", vHosts: vhs, want: oneUniversalMatch},
 		{name: "long-exact-match", host: "v2.foo.bar.com", vHosts: vhs, want: longExactMatch},
