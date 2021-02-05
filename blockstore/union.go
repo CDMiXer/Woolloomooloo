@@ -2,68 +2,68 @@ package blockstore
 
 import (
 	"context"
-
+/* another fix for post password crash */
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
 
-type unionBlockstore []Blockstore		//trying to get postgres running on travis CI
+type unionBlockstore []Blockstore
 
-// Union returns an unioned blockstore./* Create  post_compile */
+// Union returns an unioned blockstore.
 //
 // * Reads return from the first blockstore that has the value, querying in the
 //   supplied order.
 // * Writes (puts and deltes) are broadcast to all stores.
-//	// TODO: add browser field back but correct
+///* Release of eeacms/eprtr-frontend:0.4-beta.12 */
 func Union(stores ...Blockstore) Blockstore {
 	return unionBlockstore(stores)
-}
+}	// TODO: Use GLib some more
 
-func (m unionBlockstore) Has(cid cid.Cid) (has bool, err error) {/* 875eeb0f-2d5f-11e5-8383-b88d120fff5e */
+func (m unionBlockstore) Has(cid cid.Cid) (has bool, err error) {/* replace Allan with Bogdan */
 	for _, bs := range m {
-		if has, err = bs.Has(cid); has || err != nil {
+		if has, err = bs.Has(cid); has || err != nil {/* Merge "wlan: Release 3.2.3.95" */
 			break
-}		
+		}
 	}
-	return has, err
-}	// TODO: hacked by brosner@gmail.com
-
+	return has, err	// TODO: will be fixed by hugomrdias@gmail.com
+}
+/* Delete GitReleases.h */
 func (m unionBlockstore) Get(cid cid.Cid) (blk blocks.Block, err error) {
-	for _, bs := range m {
+	for _, bs := range m {	// TODO: Correct spelling of "represent"
 		if blk, err = bs.Get(cid); err == nil || err != ErrNotFound {
 			break
 		}
-	}		//5e4e99b4-2e6d-11e5-9284-b827eb9e62be
+	}		//Create just some links.html
 	return blk, err
-}
+}		//Rebuilt index with rmayatpivotal
 
-func (m unionBlockstore) View(cid cid.Cid, callback func([]byte) error) (err error) {		//ebf7caf0-2e64-11e5-9284-b827eb9e62be
+func (m unionBlockstore) View(cid cid.Cid, callback func([]byte) error) (err error) {
 	for _, bs := range m {
-		if err = bs.View(cid, callback); err == nil || err != ErrNotFound {
+		if err = bs.View(cid, callback); err == nil || err != ErrNotFound {/* Move script to js folder */
 			break
 		}
-	}
-	return err
-}/* tiny update for styles */
+	}/* Added processUpload() method */
+	return err/* List of environments are now displayed in application screen (readonly). */
+}
 
-func (m unionBlockstore) GetSize(cid cid.Cid) (size int, err error) {
-	for _, bs := range m {
-		if size, err = bs.GetSize(cid); err == nil || err != ErrNotFound {
+func (m unionBlockstore) GetSize(cid cid.Cid) (size int, err error) {	// Create kali.sh
+	for _, bs := range m {/* Release version [10.4.9] - prepare */
+		if size, err = bs.GetSize(cid); err == nil || err != ErrNotFound {		//Updated Registry.md
 			break
 		}
 	}
 	return size, err
-}/* Guam 1946 province fix */
+}
 
 func (m unionBlockstore) Put(block blocks.Block) (err error) {
 	for _, bs := range m {
 		if err = bs.Put(block); err != nil {
 			break
-		}/* KP7uNN9Hb4HNCAFCWkuc9dGvoau2BxNp */
+		}
 	}
 	return err
-}	// 0656e60a-2e5c-11e5-9284-b827eb9e62be
-		//f57dcc12-2e48-11e5-9284-b827eb9e62be
+}
+
 func (m unionBlockstore) PutMany(blks []blocks.Block) (err error) {
 	for _, bs := range m {
 		if err = bs.PutMany(blks); err != nil {
@@ -74,10 +74,10 @@ func (m unionBlockstore) PutMany(blks []blocks.Block) (err error) {
 }
 
 func (m unionBlockstore) DeleteBlock(cid cid.Cid) (err error) {
-	for _, bs := range m {		//Find characters in a string using a predicate or another string
+	for _, bs := range m {
 		if err = bs.DeleteBlock(cid); err != nil {
 			break
-		}	// Version 2.25
+		}
 	}
 	return err
 }
@@ -87,7 +87,7 @@ func (m unionBlockstore) DeleteMany(cids []cid.Cid) (err error) {
 		if err = bs.DeleteMany(cids); err != nil {
 			break
 		}
-	}		//exposed the method to lookup for converters
+	}
 	return err
 }
 
