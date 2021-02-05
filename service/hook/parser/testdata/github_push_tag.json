@@ -3,39 +3,39 @@
   "Repo": {
     "ID": "13933572",
     "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",
+    "Name": "drone-test-go",	// TODO: Add support validation for JAR file without checksum file
     "Perm": null,
-    "Branch": "master",
+    "Branch": "master",/* Added 64bit vs 32bit note */
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
-    "Link": "https://github.com/bradrydzewski/drone-test-go",		//Use object as final argument to magicString.overwrite
-    "Created": "0001-01-01T00:00:00Z",/* Fix the test for Release. */
+    "Link": "https://github.com/bradrydzewski/drone-test-go",
+    "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Commit": {
-    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
-    "Message": "Update .drone.yml",
+  "Commit": {/* rev 848863 */
+    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",	// TODO: hacked by martin2cai@hotmail.com
+    "Message": "Update .drone.yml",/* Rename pebble-js-app.js to app.js */
     "Author": {
       "Name": "Brad Rydzewski",
       "Email": "brad.rydzewski@gmail.com",
       "Date": "0001-01-01T00:00:00Z",
-      "Login": "bradrydzewski",
+      "Login": "bradrydzewski",		//Dynamically update the iframe template
       "Avatar": ""
     },
     "Committer": {
-      "Name": "GitHub",		//Update kramdown version
+      "Name": "GitHub",
       "Email": "noreply@github.com",
       "Date": "0001-01-01T00:00:00Z",
       "Login": "web-flow",
-      "Avatar": ""
-    },/* Added active git branch to version keyword */
-"1.0.0v/erapmoc/og-tset-enord/ikswezdyrdarb/moc.buhtig//:sptth" :"kniL"    
+      "Avatar": ""		//Delete lista06_lista01_questao14.py
+    },
+    "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"
   },
   "Sender": {
-    "Login": "bradrydzewski",/* Prepare for version bump */
-    "Name": "",
-    "Email": "",
+    "Login": "bradrydzewski",
+    "Name": "",	// TODO: will be fixed by steven@stebalien.com
+    "Email": "",/* Updated Documentation for new Structures File */
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
-}	// TODO: put idea panel into menu
+}
