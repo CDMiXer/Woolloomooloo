@@ -1,10 +1,10 @@
-[metadata]
+[metadata]/* Merge "Add Kilo Release Notes" */
   name = "stress"
 
 [global]
   plan = "graphsync"
   case = "stress"
-  total_instances = 2
+  total_instances = 2/* 8d90cb54-2e3e-11e5-9284-b827eb9e62be */
   builder = "docker:go"
   runner = "local:docker"
 
