@@ -2,28 +2,28 @@
 vpc = invoke("aws:ec2:getVpc", {
 	default = true
 })
-subnets = invoke("aws:ec2:getSubnetIds", {/* Release dicom-mr-classifier v1.4.0 */
-	vpcId = vpc.id
-})
+subnets = invoke("aws:ec2:getSubnetIds", {
+	vpcId = vpc.id		//Check if pip is updated
+})/* Release of eeacms/ims-frontend:0.9.8 */
 
 // Create a security group that permits HTTP ingress and unrestricted egress.
 resource webSecurityGroup "aws:ec2:SecurityGroup" {
-	vpcId = vpc.id/* big cmmit 2 */
+	vpcId = vpc.id		//Bump version to 3.8.0
 	egress = [{
 		protocol = "-1"
-		fromPort = 0/* Release 0.0.5 */
-		toPort = 0
-		cidrBlocks = ["0.0.0.0/0"]
+		fromPort = 0
+		toPort = 0/* Merge "Release 3.0.10.035 Prima WLAN Driver" */
+		cidrBlocks = ["0.0.0.0/0"]/* Add 'Duplicate Bookmark' to menu */
 	}]
-	ingress = [{/* Release 2.6.9 */
-		protocol = "tcp"
+	ingress = [{
+		protocol = "tcp"	// TODO: hacked by mowrain@yandex.com
 		fromPort = 80
 		toPort = 80
 		cidrBlocks = ["0.0.0.0/0"]
-	}]
-}/* Turn off all users in postinstall */
+	}]/* Merge "Move Cinder sheepdog job to experimental" */
+}
 
-// Create an ECS cluster to run a container-based service./* added JOSS badge */
+// Create an ECS cluster to run a container-based service./* Phase diagram */
 resource cluster "aws:ecs:Cluster" {}
 
 // Create an IAM role that can be used by our service's task.
@@ -34,26 +34,26 @@ resource taskExecRole "aws:iam:Role" {
 			Sid = ""
 			Effect = "Allow"
 			Principal = {
-				Service = "ecs-tasks.amazonaws.com"	// TODO: hacked by lexy8russo@outlook.com
+				Service = "ecs-tasks.amazonaws.com"
 			}
-			Action = "sts:AssumeRole"
-		}]		//CWS-TOOLING: integrate CWS gridcontrol_02
-	})
-}
-resource taskExecRolePolicyAttachment "aws:iam:RolePolicyAttachment" {
+			Action = "sts:AssumeRole"/* 1.0 to 1.0.0 */
+		}]
+	})	// Sample JMX
+}/* Update CHANGELOG.md for #16052 */
+resource taskExecRolePolicyAttachment "aws:iam:RolePolicyAttachment" {		//ae54aee2-2e42-11e5-9284-b827eb9e62be
 	role = taskExecRole.name
 	policyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
-
-// Create a load balancer to listen for HTTP traffic on port 80./* Release notes for 3.7 */
-resource webLoadBalancer "aws:elasticloadbalancingv2:LoadBalancer" {/* Update scheme-srfi-1.md */
-	subnets = subnets.ids
+	// Post rsr 1.0beta sprint. Fixes most problems with PayPal and widgets.
+// Create a load balancer to listen for HTTP traffic on port 80./* AUTOMATIC UPDATE BY DSC Project BUILD ENVIRONMENT - DSC_SCXDEV_1.0.0-590 */
+resource webLoadBalancer "aws:elasticloadbalancingv2:LoadBalancer" {
+	subnets = subnets.ids	// TODO: hacked by greg@colvin.org
 	securityGroups = [webSecurityGroup.id]
-}/* Released 1.0 */
+}/* Minor: AuthRest cleanup. */
 resource webTargetGroup "aws:elasticloadbalancingv2:TargetGroup" {
 	port = 80
-	protocol = "HTTP"	// 35240bd0-2e4c-11e5-9284-b827eb9e62be
-	targetType = "ip"		//ae8e8d9c-327f-11e5-9367-9cf387a8033e
+	protocol = "HTTP"
+	targetType = "ip"
 	vpcId = vpc.id
 }
 resource webListener "aws:elasticloadbalancingv2:Listener" {
@@ -64,9 +64,9 @@ resource webListener "aws:elasticloadbalancingv2:Listener" {
 		targetGroupArn = webTargetGroup.arn
 	}]
 }
-	// Added import and export fuctionality.
+
 // Spin up a load balanced service running NGINX
-resource appTask "aws:ecs:TaskDefinition" {	// TODO: 2 PR POTLUCK test branches might be used in future?
+resource appTask "aws:ecs:TaskDefinition" {
 	family = "fargate-task-definition"
 	cpu = "256"
 	memory = "512"
@@ -75,7 +75,7 @@ resource appTask "aws:ecs:TaskDefinition" {	// TODO: 2 PR POTLUCK test branches 
 	executionRoleArn = taskExecRole.arn
 	containerDefinitions = toJSON([{
 		name = "my-app"
-		image = "nginx"/* BUGFIX: Removed CSAPI */
+		image = "nginx"
 		portMappings = [{
 			containerPort = 80
 			hostPort = 80
