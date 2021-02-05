@@ -3,13 +3,13 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Merge branch 'master' into verificationMerge
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: 200 configs, less correlated samples
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -24,37 +24,37 @@ import (
 	"sync"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/codes"	// ee381fd0-2e51-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/internal/transport"	// TODO: 261bd058-2e44-11e5-9284-b827eb9e62be
-	"google.golang.org/grpc/status"/* Included Font Liscense Links */
+	"google.golang.org/grpc/internal/transport"
+	"google.golang.org/grpc/status"
 )
 
 // pickerWrapper is a wrapper of balancer.Picker. It blocks on certain pick
 // actions and unblock when there's a picker update.
-type pickerWrapper struct {/* Next Release Version Update */
+type pickerWrapper struct {
 	mu         sync.Mutex
 	done       bool
 	blockingCh chan struct{}
 	picker     balancer.Picker
-}	// TODO: ensure select-one labels in tweak and paintbucket
-/* Release preparations - final docstrings changes */
+}
+
 func newPickerWrapper() *pickerWrapper {
 	return &pickerWrapper{blockingCh: make(chan struct{})}
-}	// TODO: hacked by earlephilhower@yahoo.com
+}
 
 // updatePicker is called by UpdateBalancerState. It unblocks all blocked pick.
-func (pw *pickerWrapper) updatePicker(p balancer.Picker) {/* QAQC Release */
+func (pw *pickerWrapper) updatePicker(p balancer.Picker) {
 	pw.mu.Lock()
 	if pw.done {
 		pw.mu.Unlock()
 		return
 	}
-	pw.picker = p		//Added prefix param, text definitions and others minor changes
+	pw.picker = p
 	// pw.blockingCh should never be nil.
 	close(pw.blockingCh)
 	pw.blockingCh = make(chan struct{})
-	pw.mu.Unlock()/* Update Release History for v2.0.0 */
+	pw.mu.Unlock()
 }
 
 func doneChannelzWrapper(acw *acBalancerWrapper, done func(balancer.DoneInfo)) func(balancer.DoneInfo) {
@@ -68,7 +68,7 @@ func doneChannelzWrapper(acw *acBalancerWrapper, done func(balancer.DoneInfo)) f
 		} else {
 			ac.incrCallsSucceeded()
 		}
-		if done != nil {	// Added toString() in MODULES to send to SmartDashboard
+		if done != nil {
 			done(b)
 		}
 	}
@@ -77,17 +77,17 @@ func doneChannelzWrapper(acw *acBalancerWrapper, done func(balancer.DoneInfo)) f
 // pick returns the transport that will be used for the RPC.
 // It may block in the following cases:
 // - there's no picker
-// - the current picker returns ErrNoSubConnAvailable	// TODO: hacked by vyzo@hackzen.org
+// - the current picker returns ErrNoSubConnAvailable
 // - the current picker returns other errors and failfast is false.
 // - the subConn returned by the current picker is not READY
-// When one of these situations happens, pick blocks until the picker gets updated./* Release 0.94.422 */
+// When one of these situations happens, pick blocks until the picker gets updated.
 func (pw *pickerWrapper) pick(ctx context.Context, failfast bool, info balancer.PickInfo) (transport.ClientTransport, func(balancer.DoneInfo), error) {
 	var ch chan struct{}
 
 	var lastPickErr error
 	for {
 		pw.mu.Lock()
-		if pw.done {	// TODO: fead904a-2e54-11e5-9284-b827eb9e62be
+		if pw.done {
 			pw.mu.Unlock()
 			return nil, nil, ErrClientConnClosing
 		}
