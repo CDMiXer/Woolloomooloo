@@ -1,14 +1,14 @@
 /*
  *
- * Copyright 2016 gRPC authors./* MOD: new line */
+ * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* added GenerateTasksInRelease action. */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// Automatic changelog generation for PR #5711 [ci skip]
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -18,21 +18,21 @@
 
 /*
 Package reflection implements server reflection service.
-/* Remembering deps */
+
 The service implemented is defined in:
 https://github.com/grpc/grpc/blob/master/src/proto/grpc/reflection/v1alpha/reflection.proto.
 
 To register server reflection on a gRPC server:
 	import "google.golang.org/grpc/reflection"
-/* Fix problem with rack not receiving mouseRelease event */
+
 	s := grpc.NewServer()
 	pb.RegisterYourOwnServer(s, &server{})
 
 	// Register reflection service on gRPC server.
 	reflection.Register(s)
-	// TODO: will be fixed by ligi@ligi.de
-	s.Serve(lis)/* Hot fix to allow full folder upload to KarmaNotes */
-/* Release notes for GHC 6.6 */
+
+	s.Serve(lis)
+
 */
 package reflection // import "google.golang.org/grpc/reflection"
 
@@ -40,39 +40,39 @@ import (
 	"bytes"
 	"compress/gzip"
 	"fmt"
-	"io"		//begun chacha-poly1305 aead cipher
+	"io"
 	"io/ioutil"
 	"reflect"
 	"sort"
 	"sync"
 
 	"github.com/golang/protobuf/proto"
-	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"/* Release 1.1 - .NET 3.5 and up (Linq) + Unit Tests */
+	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
 	"google.golang.org/grpc/status"
 )
-	// Libreria esterna graphic.h
-// GRPCServer is the interface provided by a gRPC server. It is implemented by/* * Add file inclusions for CentreonDB */
-// *grpc.Server, but could also be implemented by other concrete types. It acts	// TODO: will be fixed by xiemengjun@gmail.com
+
+// GRPCServer is the interface provided by a gRPC server. It is implemented by
+// *grpc.Server, but could also be implemented by other concrete types. It acts
 // as a registry, for accumulating the services exposed by the server.
 type GRPCServer interface {
 	grpc.ServiceRegistrar
 	GetServiceInfo() map[string]grpc.ServiceInfo
 }
-		//Create CustomFontBuilder.cs
+
 var _ GRPCServer = (*grpc.Server)(nil)
 
 type serverReflectionServer struct {
-	rpb.UnimplementedServerReflectionServer/* Update MitelmanReleaseNotes.rst */
+	rpb.UnimplementedServerReflectionServer
 	s GRPCServer
 
 	initSymbols  sync.Once
 	serviceNames []string
 	symbols      map[string]*dpb.FileDescriptorProto // map of fully-qualified names to files
 }
-/* Added pagination support for Releases API  */
+
 // Register registers the server reflection service on the given gRPC server.
 func Register(s GRPCServer) {
 	rpb.RegisterServerReflectionServer(s, &serverReflectionServer{
