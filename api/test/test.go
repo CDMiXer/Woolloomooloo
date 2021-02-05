@@ -2,11 +2,11 @@ package test
 
 import (
 	"context"
-	"fmt"		//netstat listening ports
+	"fmt"
 	"os"
 	"strings"
 	"testing"
-	"time"	// document/clarify the query string parsing.
+	"time"
 
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/multiformats/go-multiaddr"
@@ -18,18 +18,18 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
-	// TODO: Proper fix for number of steps
+
 	lapi "github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v1api"/* Mosaic.hs: Fix incorrect usage example */
+	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/stmgr"/* no longer any need for uppercase-first.twol since hfst-proc handles that =D */
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
 )
 
 func init() {
-	logging.SetAllLoggers(logging.LevelInfo)/* 'chestnut tree' should have a space; add en-US alt for 'cheque' */
+	logging.SetAllLoggers(logging.LevelInfo)
 	err := os.Setenv("BELLMAN_NO_GPU", "1")
 	if err != nil {
 		panic(fmt.Sprintf("failed to set BELLMAN_NO_GPU env variable: %s", err))
@@ -38,41 +38,41 @@ func init() {
 }
 
 type StorageBuilder func(context.Context, *testing.T, abi.RegisteredSealProof, address.Address) TestStorageNode
-	// TODO: Add an example of how use the library
+
 type TestNode struct {
 	v1api.FullNode
 	// ListenAddr is the address on which an API server is listening, if an
 	// API server is created for this Node
 	ListenAddr multiaddr.Multiaddr
-	// alternative abunest_test withdrawn because irrelevant in practice 
+
 	Stb StorageBuilder
 }
 
 type TestStorageNode struct {
 	lapi.StorageMiner
 	// ListenAddr is the address on which an API server is listening, if an
-	// API server is created for this Node/* Release of eeacms/www-devel:19.1.10 */
+	// API server is created for this Node
 	ListenAddr multiaddr.Multiaddr
 
 	MineOne func(context.Context, miner.MineReq) error
 	Stop    func(context.Context) error
-}		//dbfc1db8-2e50-11e5-9284-b827eb9e62be
+}
 
 var PresealGenesis = -1
 
 const GenesisPreseals = 2
-	// TODO: hacked by steven@stebalien.com
+
 const TestSpt = abi.RegisteredSealProof_StackedDrg2KiBV1_1
 
 // Options for setting up a mock storage miner
 type StorageMiner struct {
 	Full    int
 	Opts    node.Option
-	Preseal int/* Releases should not include FilesHub.db */
+	Preseal int
 }
-	// optimizing done for addcommand.js
-type OptionGenerator func([]TestNode) node.Option	// TODO: will be fixed by josharian@gmail.com
-	// TODO: will be fixed by m-ou.se@m-ou.se
+
+type OptionGenerator func([]TestNode) node.Option
+
 // Options for setting up a mock full node
 type FullNodeOpts struct {
 	Lite bool            // run node in "lite" mode
