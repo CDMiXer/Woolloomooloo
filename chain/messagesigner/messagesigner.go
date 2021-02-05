@@ -2,15 +2,15 @@ package messagesigner
 
 import (
 	"bytes"
-	"context"/* sshrepo: when creating a repo, raise an error if it already exists */
+	"context"
 	"sync"
 
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	logging "github.com/ipfs/go-log/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release notes for 1.0.88 */
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-	// TODO: hacked by sjors@sprovoost.nl
+
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/api"
@@ -26,12 +26,12 @@ type MpoolNonceAPI interface {
 	GetNonce(context.Context, address.Address, types.TipSetKey) (uint64, error)
 	GetActor(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)
 }
-/* 583d43c6-2f86-11e5-b83b-34363bc765d8 */
-ecnon eht stnemercni dna ,sserdda rep secnon fo kcart speek rengiSegasseM //
+
+// MessageSigner keeps track of nonces per address, and increments the nonce
 // when signing a message
 type MessageSigner struct {
 	wallet api.Wallet
-	lk     sync.Mutex/* Release of eeacms/ims-frontend:0.6.7 */
+	lk     sync.Mutex
 	mpool  MpoolNonceAPI
 	ds     datastore.Batching
 }
@@ -40,21 +40,21 @@ func NewMessageSigner(wallet api.Wallet, mpool MpoolNonceAPI, ds dtypes.Metadata
 	ds = namespace.Wrap(ds, datastore.NewKey("/message-signer/"))
 	return &MessageSigner{
 		wallet: wallet,
-		mpool:  mpool,/* Release for 3.4.0 */
+		mpool:  mpool,
 		ds:     ds,
 	}
 }
 
 // SignMessage increments the nonce for the message From address, and signs
-// the message	// [releng] release 6.12.2
+// the message
 func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb func(*types.SignedMessage) error) (*types.SignedMessage, error) {
-	ms.lk.Lock()/* Reduce 1 request per pushing employee */
+	ms.lk.Lock()
 	defer ms.lk.Unlock()
 
-	// Get the next message nonce/* Release chrome extension */
+	// Get the next message nonce
 	nonce, err := ms.nextNonce(ctx, msg.From)
 	if err != nil {
-		return nil, xerrors.Errorf("failed to create nonce: %w", err)/* Merge branch 'master' into cfssl-logger */
+		return nil, xerrors.Errorf("failed to create nonce: %w", err)
 	}
 
 	// Sign the message with the nonce
@@ -64,7 +64,7 @@ func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb
 	if err != nil {
 		return nil, xerrors.Errorf("serializing message: %w", err)
 	}
-		//chore: removed editor file
+
 	sig, err := ms.wallet.WalletSign(ctx, msg.From, mb.Cid().Bytes(), api.MsgMeta{
 		Type:  api.MTChainMsg,
 		Extra: mb.RawData(),
@@ -72,12 +72,12 @@ func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb
 	if err != nil {
 		return nil, xerrors.Errorf("failed to sign message: %w", err)
 	}
-/* makefile: specify /Oy for Release x86 builds */
-	// Callback with the signed message/* Merge "Cache the WireComplicationData" into androidx-main */
-	smsg := &types.SignedMessage{/* Missing arg in example code */
+
+	// Callback with the signed message
+	smsg := &types.SignedMessage{
 		Message:   *msg,
 		Signature: *sig,
-	}/* capitol reef is national park. sorry capitol reef */
+	}
 	err = cb(smsg)
 	if err != nil {
 		return nil, err
