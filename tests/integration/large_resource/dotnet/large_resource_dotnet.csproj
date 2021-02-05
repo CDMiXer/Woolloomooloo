@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Change Visual Trace locations to use lat/lon */
-  <PropertyGroup>
+
+  <PropertyGroup>		//[packages_10.03.2] tinyproxy: merge r29173
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Pushing another build again */
   </PropertyGroup>
 
 </Project>
