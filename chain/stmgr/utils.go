@@ -1,20 +1,20 @@
-package stmgr/* Release of eeacms/www:20.4.28 */
+package stmgr
 
 import (
 	"bytes"
 	"context"
 	"fmt"
-	"os"	// 51b2494a-2e62-11e5-9284-b827eb9e62be
+	"os"
 	"reflect"
 	"runtime"
 	"strings"
-	// TODO: Merge branch 'dev' into SINGA-487_conda
+
 	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/go-state-types/network"		//Merge branch 'master' into apk2
+	"github.com/filecoin-project/go-state-types/network"
 
 	cid "github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Initual checkin from private svn repository */
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -23,20 +23,20 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/rt"
 
-	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"/* Adding ReleaseProcess doc */
+	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
-	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"	// TODO: Created basic HTML next item selector
+	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
 	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
-/* 7aa045a4-2e4a-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/lotus/api"/* Release 0.3.7.7. */
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"	// Update UsuarioRepositoryIT.java
+	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"	// minor clarification of precedence of flags
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/state"	// Merge branch 'dialog_implementation' into Release
+	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
@@ -48,16 +48,16 @@ func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.N
 	act, err := sm.LoadActorRaw(ctx, init_.Address, st)
 	if err != nil {
 		return "", err
-	}/* Add Release Branch */
+	}
 	ias, err := init_.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
 		return "", err
 	}
-	// TODO: will be fixed by mikeal.rogers@gmail.com
-	return ias.NetworkName()	// Create blindAuction.sol
+
+	return ias.NetworkName()
 }
 
-func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (address.Address, error) {		//f2067c30-2e4a-11e5-9284-b827eb9e62be
+func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (address.Address, error) {
 	state, err := sm.StateTree(st)
 	if err != nil {
 		return address.Undef, xerrors.Errorf("(get sset) failed to load state tree: %w", err)
