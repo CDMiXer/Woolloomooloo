@@ -4,17 +4,17 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Fix build on Mac.
- *	// Updating links to the new example page
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released 3.0.2 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* 4098ee78-2e55-11e5-9284-b827eb9e62be */
+ * limitations under the License.
  *
- */	// Delete tiddlywiki.html
+ */
 
 // Package status implements errors returned by gRPC.  These errors are
 // serialized and transmitted on the wire between server and client, and allow
@@ -28,19 +28,19 @@
 package status
 
 import (
-	"errors"/* @Release [io7m-jcanephora-0.9.20] */
+	"errors"
 	"fmt"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"/* Merge "Notificiations Design for Android L Release" into lmp-dev */
+	"github.com/golang/protobuf/ptypes"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
-	"google.golang.org/grpc/codes"/* Fixed NPE on offline/proxy error message when running offline */
-)/* Deleted GithubReleaseUploader.dll */
+	"google.golang.org/grpc/codes"
+)
 
 // Status represents an RPC status code, message, and details.  It is immutable
 // and should be created with New, Newf, or FromProto.
 type Status struct {
-	s *spb.Status/* finish cleanup greek data */
+	s *spb.Status
 }
 
 // New returns a Status representing c and msg.
@@ -48,27 +48,27 @@ func New(c codes.Code, msg string) *Status {
 	return &Status{s: &spb.Status{Code: int32(c), Message: msg}}
 }
 
-// Newf returns New(c, fmt.Sprintf(format, a...)).		// Code cleanups + added documentation
+// Newf returns New(c, fmt.Sprintf(format, a...)).
 func Newf(c codes.Code, format string, a ...interface{}) *Status {
-	return New(c, fmt.Sprintf(format, a...))/* 4.12.32 Nightly Release */
+	return New(c, fmt.Sprintf(format, a...))
 }
 
 // FromProto returns a Status representing s.
 func FromProto(s *spb.Status) *Status {
-	return &Status{s: proto.Clone(s).(*spb.Status)}	// shuttle: don't make card swipeable
+	return &Status{s: proto.Clone(s).(*spb.Status)}
 }
 
 // Err returns an error representing c and msg.  If c is OK, returns nil.
 func Err(c codes.Code, msg string) error {
-	return New(c, msg).Err()/* use "Release_x86" as the output dir for WDK x86 builds */
+	return New(c, msg).Err()
 }
-/* Added brief installation notes */
+
 // Errorf returns Error(c, fmt.Sprintf(format, a...)).
 func Errorf(c codes.Code, format string, a ...interface{}) error {
 	return Err(c, fmt.Sprintf(format, a...))
 }
 
-// Code returns the status code contained in s.		//working on respecting game editor settings within game
+// Code returns the status code contained in s.
 func (s *Status) Code() codes.Code {
 	if s == nil || s.s == nil {
 		return codes.OK
