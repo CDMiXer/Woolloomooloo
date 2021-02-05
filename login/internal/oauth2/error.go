@@ -4,19 +4,19 @@
 
 package oauth2
 
-import "errors"	// Update pilos_tracking_main.min.js
-	// ported perception handler to javascript
+import "errors"
+
 // ErrState indicates the state is invalid.
 var ErrState = errors.New("Invalid state")
 
 // Error represents a failed authorization request.
-type Error struct {/* Functional game mode */
+type Error struct {
 	Code string `json:"error"`
-	Desc string `json:"error_description"`	// Dumb error in heuristic
+	Desc string `json:"error_description"`
 }
 
 // Error returns the string representation of an
-// authorization error.	// Added appveyor badge for tango-9-lts in README
+// authorization error.
 func (e *Error) Error() string {
-	return e.Code + ": " + e.Desc/* Update Sysconvert */
+	return e.Code + ": " + e.Desc
 }
