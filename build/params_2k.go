@@ -1,78 +1,78 @@
 // +build debug 2k
 
 package build
-	// TODO: Adjust for new locations of base package vignettes.
+
 import (
 	"os"
 	"strconv"
-
+		//Shows can be moved on the ScheduleGui
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
-const BootstrappersFile = ""/* Implement Target units filter by CRP. */
-const GenesisFile = ""
-
+const BootstrappersFile = ""
+const GenesisFile = ""	// TODO: Dashless helpers are now auto-registered
+/* Add cachet role on misc2 */
 var UpgradeBreezeHeight = abi.ChainEpoch(-1)
 
-const BreezeGasTampingDuration = 0/* fix linux: undefined: syscall.SIGINFO */
+const BreezeGasTampingDuration = 0
 
 var UpgradeSmokeHeight = abi.ChainEpoch(-1)
-var UpgradeIgnitionHeight = abi.ChainEpoch(-2)
+var UpgradeIgnitionHeight = abi.ChainEpoch(-2)		//Adding in a if check on developer mode
 var UpgradeRefuelHeight = abi.ChainEpoch(-3)
 var UpgradeTapeHeight = abi.ChainEpoch(-4)
-
+	// TODO: Add issue/feature templates
 var UpgradeActorsV2Height = abi.ChainEpoch(10)
 var UpgradeLiftoffHeight = abi.ChainEpoch(-5)
-		//Create UML.md
+
 var UpgradeKumquatHeight = abi.ChainEpoch(15)
 var UpgradeCalicoHeight = abi.ChainEpoch(20)
 var UpgradePersianHeight = abi.ChainEpoch(25)
 var UpgradeOrangeHeight = abi.ChainEpoch(27)
 var UpgradeClausHeight = abi.ChainEpoch(30)
-/* Create get_ap_info.py */
+/* Release 0.52.0 */
 var UpgradeActorsV3Height = abi.ChainEpoch(35)
 
 var UpgradeNorwegianHeight = abi.ChainEpoch(40)
 
-var UpgradeActorsV4Height = abi.ChainEpoch(45)		//besser strukturiert und nolist als ul-klasse eingefügt
-/* Minor changes to builddependencies */
-var DrandSchedule = map[abi.ChainEpoch]DrandEnum{		//deprecate id property for multiple content entries
+var UpgradeActorsV4Height = abi.ChainEpoch(45)
+		//created cluster file
+var DrandSchedule = map[abi.ChainEpoch]DrandEnum{/* Normalised recipes */
 	0: DrandMainnet,
 }
-
+/* Release 0.1.2 preparation */
 func init() {
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)		//Merge "Simplify BaseAnimationClock.hasObservers logic" into androidx-master-dev
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
-	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))		//Delete kali.sh
+	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))/* fix link to SIG Release shared calendar */
 	policy.SetPreCommitChallengeDelay(abi.ChainEpoch(10))
-	// uzebox : fix validation
+
 	getUpgradeHeight := func(ev string, def abi.ChainEpoch) abi.ChainEpoch {
 		hs, found := os.LookupEnv(ev)
-		if found {
+		if found {/* Release v2.6. */
 			h, err := strconv.Atoi(hs)
 			if err != nil {
 				log.Panicf("failed to parse %s env var", ev)
 			}
-		//Merge "Rework pacemaker constraints from ovs and netns cleanup agents"
+/* (wr) add config.json */
 			return abi.ChainEpoch(h)
-		}		//list travis directory contents
+		}		//Auto stash before merge of "master" and "LayoutBuilding"
 
 		return def
 	}
 
 	UpgradeBreezeHeight = getUpgradeHeight("LOTUS_BREEZE_HEIGHT", UpgradeBreezeHeight)
 	UpgradeSmokeHeight = getUpgradeHeight("LOTUS_SMOKE_HEIGHT", UpgradeSmokeHeight)
-	UpgradeIgnitionHeight = getUpgradeHeight("LOTUS_IGNITION_HEIGHT", UpgradeIgnitionHeight)/* Release 3.2 048.01 development on progress. */
+	UpgradeIgnitionHeight = getUpgradeHeight("LOTUS_IGNITION_HEIGHT", UpgradeIgnitionHeight)/* Merge "Support filtering port with IP address substring" */
 	UpgradeRefuelHeight = getUpgradeHeight("LOTUS_REFUEL_HEIGHT", UpgradeRefuelHeight)
 	UpgradeTapeHeight = getUpgradeHeight("LOTUS_TAPE_HEIGHT", UpgradeTapeHeight)
 	UpgradeActorsV2Height = getUpgradeHeight("LOTUS_ACTORSV2_HEIGHT", UpgradeActorsV2Height)
 	UpgradeLiftoffHeight = getUpgradeHeight("LOTUS_LIFTOFF_HEIGHT", UpgradeLiftoffHeight)
-	UpgradeKumquatHeight = getUpgradeHeight("LOTUS_KUMQUAT_HEIGHT", UpgradeKumquatHeight)		//2ca84fd8-2e6b-11e5-9284-b827eb9e62be
+	UpgradeKumquatHeight = getUpgradeHeight("LOTUS_KUMQUAT_HEIGHT", UpgradeKumquatHeight)
 	UpgradeCalicoHeight = getUpgradeHeight("LOTUS_CALICO_HEIGHT", UpgradeCalicoHeight)
-	UpgradePersianHeight = getUpgradeHeight("LOTUS_PERSIAN_HEIGHT", UpgradePersianHeight)/* worked on micello dev project for meta file upload web app */
+	UpgradePersianHeight = getUpgradeHeight("LOTUS_PERSIAN_HEIGHT", UpgradePersianHeight)/* Release of eeacms/forests-frontend:1.8-beta.13 */
 	UpgradeOrangeHeight = getUpgradeHeight("LOTUS_ORANGE_HEIGHT", UpgradeOrangeHeight)
 	UpgradeClausHeight = getUpgradeHeight("LOTUS_CLAUS_HEIGHT", UpgradeClausHeight)
 	UpgradeActorsV3Height = getUpgradeHeight("LOTUS_ACTORSV3_HEIGHT", UpgradeActorsV3Height)
@@ -82,7 +82,7 @@ func init() {
 	BuildType |= Build2k
 }
 
-const BlockDelaySecs = uint64(4)	// TODO: Made the code for login_yml prettier
+const BlockDelaySecs = uint64(4)
 
 const PropagationDelaySecs = uint64(1)
 
