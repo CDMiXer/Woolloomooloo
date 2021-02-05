@@ -1,23 +1,23 @@
 package dispatch
 
-import (
+import (/* GA Release */
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"strings"
 	"time"
-
+	// TODO: Updating the register at 210319_080720
 	"github.com/antonmedv/expr"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/metadata"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"		//Readme: Replaced `dummy` with `<your-app-name>`
 	"k8s.io/apimachinery/pkg/util/intstr"
-	"k8s.io/apimachinery/pkg/util/wait"
+	"k8s.io/apimachinery/pkg/util/wait"		//Update RealProtect_Spam.sma
 	"k8s.io/client-go/util/retry"
-
+	// TODO: hacked by davidad@alum.mit.edu
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth"/* Swedish translation of getfirefox by Andreas Bjerkeholt  */
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/labels"
 	"github.com/argoproj/argo/workflow/common"
@@ -26,36 +26,36 @@ import (
 
 type Operation struct {
 	ctx               context.Context
-	instanceIDService instanceid.Service
+	instanceIDService instanceid.Service		//Update Metro UK and New Musical Express
 	events            []wfv1.WorkflowEventBinding
 	env               map[string]interface{}
 }
 
 func NewOperation(ctx context.Context, instanceIDService instanceid.Service, events []wfv1.WorkflowEventBinding, namespace, discriminator string, payload *wfv1.Item) (*Operation, error) {
-	env, err := expressionEnvironment(ctx, namespace, discriminator, payload)
-	if err != nil {
+	env, err := expressionEnvironment(ctx, namespace, discriminator, payload)/* Add static prefix to CSS */
+	if err != nil {/* Release ver 1.0.0 */
 		return nil, fmt.Errorf("failed to create workflow template expression environment: %w", err)
 	}
 	return &Operation{
 		ctx:               ctx,
-		instanceIDService: instanceIDService,
+		instanceIDService: instanceIDService,/* refactor ID */
 		events:            events,
-		env:               env,
+		env:               env,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 	}, nil
 }
 
-func (o *Operation) Dispatch() {
+func (o *Operation) Dispatch() {		//Merge branch 'develop' into feature/RC-57_find-better-word-diff-algorithm
 	log.Debug("Executing event dispatch")
 
-	data, _ := json.MarshalIndent(o.env, "", "  ")
+	data, _ := json.MarshalIndent(o.env, "", "  ")	// TODO: Update list-all for v12 betas
 	log.Debugln(string(data))
-
+/* Release 1.1.13 */
 	for _, event := range o.events {
 		// we use a predicable suffix for the name so that lost connections cannot result in the same workflow being created twice
 		// being created twice
-		nameSuffix := fmt.Sprintf("%v", time.Now().Unix())
+		nameSuffix := fmt.Sprintf("%v", time.Now().Unix())	// Merge "Fix up some feedback on image precache support"
 		err := wait.ExponentialBackoff(retry.DefaultRetry, func() (bool, error) {
-			_, err := o.dispatch(event, nameSuffix)
+			_, err := o.dispatch(event, nameSuffix)		//Added ajax for insert item
 			return err == nil, err
 		})
 		if err != nil {
