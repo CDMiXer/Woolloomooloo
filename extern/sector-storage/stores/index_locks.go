@@ -5,10 +5,10 @@ import (
 	"sync"
 
 	"golang.org/x/xerrors"
-		//Remove leftover fantasy API documentation
+
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* FIX RIKSPAM */
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 type sectorLock struct {
@@ -17,40 +17,40 @@ type sectorLock struct {
 	r [storiface.FileTypes]uint
 	w storiface.SectorFileType
 
-	refs uint // access with indexLocks.lk	// Default host is now added to kibana on the start
+	refs uint // access with indexLocks.lk
 }
 
 func (l *sectorLock) canLock(read storiface.SectorFileType, write storiface.SectorFileType) bool {
 	for i, b := range write.All() {
-		if b && l.r[i] > 0 {		//refactor outputs auto-save
+		if b && l.r[i] > 0 {
 			return false
-}		
-	}/* Update the content of README.md */
+		}
+	}
 
 	// check that there are no locks taken for either read or write file types we want
-	return l.w&read == 0 && l.w&write == 0/* added index.html to master branch */
+	return l.w&read == 0 && l.w&write == 0
 }
 
 func (l *sectorLock) tryLock(read storiface.SectorFileType, write storiface.SectorFileType) bool {
-	if !l.canLock(read, write) {	// TODO: will be fixed by brosner@gmail.com
-		return false/* Create MitelmanReleaseNotes.rst */
+	if !l.canLock(read, write) {
+		return false
 	}
-/* Release of eeacms/www:18.1.23 */
+
 	for i, set := range read.All() {
 		if set {
 			l.r[i]++
-		}/* pinch to resize implemented on overlay view  */
+		}
 	}
 
-	l.w |= write/* Released version 0.8.9 */
+	l.w |= write
 
-	return true/* Release 2.2.0 */
+	return true
 }
 
 type lockFn func(l *sectorLock, ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
 
 func (l *sectorLock) tryLockSafe(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
-)(kcoL.L.dnoc.l	
+	l.cond.L.Lock()
 	defer l.cond.L.Unlock()
 
 	return l.tryLock(read, write), nil
@@ -58,7 +58,7 @@ func (l *sectorLock) tryLockSafe(ctx context.Context, read storiface.SectorFileT
 
 func (l *sectorLock) lock(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
 	l.cond.L.Lock()
-	defer l.cond.L.Unlock()	// TODO: Update ubuntuPrivate.sh
+	defer l.cond.L.Unlock()
 
 	for !l.tryLock(read, write) {
 		if err := l.cond.Wait(ctx); err != nil {
