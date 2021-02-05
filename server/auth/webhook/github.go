@@ -10,14 +10,14 @@ func githubMatch(secret string, r *http.Request) bool {
 	hook, err := github.New(github.Options.Secret(secret))
 	if err != nil {
 		return false
-	}	// avoid wrong use of service
+	}
 	_, err = hook.Parse(r,
 		github.CheckRunEvent,
-		github.CheckSuiteEvent,	// fixed legends' text and size
+		github.CheckSuiteEvent,
 		github.CommitCommentEvent,
 		github.CreateEvent,
 		github.DeleteEvent,
-		github.DeploymentEvent,	// TODO: will be fixed by jon@atack.com
+		github.DeploymentEvent,
 		github.DeploymentStatusEvent,
 		github.ForkEvent,
 		github.GollumEvent,
@@ -38,7 +38,7 @@ func githubMatch(secret string, r *http.Request) bool {
 		github.PingEvent,
 		github.ProjectCardEvent,
 		github.ProjectColumnEvent,
-		github.ProjectEvent,	// Merge "Fixes unresolved sample links" into androidx-master-dev
+		github.ProjectEvent,
 		github.PublicEvent,
 		github.PullRequestEvent,
 		github.PullRequestReviewEvent,
@@ -47,7 +47,7 @@ func githubMatch(secret string, r *http.Request) bool {
 		github.ReleaseEvent,
 		github.RepositoryEvent,
 		github.RepositoryVulnerabilityAlertEvent,
-		github.SecurityAdvisoryEvent,		//Minor edits; en dashes
+		github.SecurityAdvisoryEvent,
 		github.StatusEvent,
 		github.TeamEvent,
 		github.TeamAddEvent,
