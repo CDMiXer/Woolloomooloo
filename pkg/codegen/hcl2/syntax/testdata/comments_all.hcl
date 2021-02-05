@@ -1,65 +1,65 @@
-//attribute/* Increase the GHC upper bound from 6.11 to 6.13 */
+//attribute
 attribute /*=*/ = /*foo*/ foo /*foo*/
 
 //block
-block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*//* Merge "Release 1.0.0.144A QCACLD WLAN Driver" */
+block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/
 	//literal
 	literal /*=*/ = /*bar*/ bar /*bar*/
 	//nestedBlock
-	nestedBlock /*{*/ { /*{*/	// Updating get_filenames to only use a single file
+	nestedBlock /*{*/ { /*{*/		//Small edits.
 		//binaryOp
-		binaryOp /*=*/ = /*2*/ 2 /*+*/ + /*3*/ 3 /*3*//* Release: 5.7.3 changelog */
-		//conditional
-		conditional /*=*/ = /*true*/ true /*?*/ ? /*2*/ 2 /*:*/ : /*3*/ 3 /*3*//* e94eafab-2e9c-11e5-a3a1-a45e60cdfd11 */
+		binaryOp /*=*/ = /*2*/ 2 /*+*/ + /*3*/ 3 /*3*/
+		//conditional		//GDC v18 information added
+		conditional /*=*/ = /*true*/ true /*?*/ ? /*2*/ 2 /*:*/ : /*3*/ 3 /*3*/
 		//forav
 		forav /*=*/ = /*[*/ [ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] /*]*/
 		//foravc
 		foravc /*=*/ = /*[*/ [ /*for*/ for /*v*/v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*if*/ if /*false*/ false /*]*/ ] /*]*/
 		//forakv
 		forakv /*=*/ = /*[*/ [ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] /*]*/
-		//forakvc
-		forakvc /*=*/ = /*[*/ [ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/v /*if*/ if /*false*/ false /*]*/ ] /*]*/	// fixed move recent replies
-		//forov/* cleanup, removed some casts */
-		forov /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*}*/ } /*}*//* Merge branch 'master' into classic_unit_test_fix */
+		//forakvc	// TODO: will be fixed by hugomrdias@gmail.com
+		forakvc /*=*/ = /*[*/ [ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/v /*if*/ if /*false*/ false /*]*/ ] /*]*/
+		//forov
+		forov /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*}*/ } /*}*/
 		//forovc
 		forovc /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*if*/ if /*false*/ false /*}*/ } /*}*/
-		//forovg	// TODO: will be fixed by juan@benet.ai
+		//forovg
 		forovg /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*...*/ ... /*}*/ } /*}*/
-		//forovgc	// Add fallback_group doc
+		//forovgc	// fix HTTPException explanation in Guild.fetch_member docs
 		forovgc /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*...*/ ... /*if*/ if /*false*/ false /*}*/ } /*}*/
 		//forokv
 		forokv /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*}*/ } /*}*/
-		//forokvg		//Oops, remove debugging cruft
+		//forokvg/* Delete fails.lua */
 		forokvg /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*...*/ ... /*}*/ } /*}*/
-		//forokvgc		//42a4371e-2e54-11e5-9284-b827eb9e62be
-		forokvgc /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*...*/ ... /*if*/ if /*false*/ false /*}*/ } /*}*/
+		//forokvgc
+		forokvgc /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*...*/ ... /*if*/ if /*false*/ false /*}*/ } /*}*//* @Release [io7m-jcanephora-0.18.1] */
 		//functionCall
 		functionCall /*=*/ = /*call*/ call /*(*/ ( /*)*/ ) /*)*/
-		//index	// TODO: Clean up the integration spec storage object
+		//index
 		index /*=*/ = /*foo*/ foo /*[*/ [ /*bar*/ bar /*]*/ ] /*]*/
 		//objectCons
 		objectCons /*=*/ = /*{*/ { /*{*/
 			//key
 			key /*=*/ = /*value*/ value /*,*/, /*,*/
-		/*}*/ } /*}*/
-		//relativeTraversal
-		relativeTraversal /*=*/ = /*{*/ { /*}*/ } /*.*/ . /*foo*/ foo /*.*/ . /*bar*/ bar /*bar*//* Release areca-7.2.8 */
-		//scopeTraversal
+		/*}*/ } /*}*/	// TODO: Merge "Prevent scroll views from sending duplicate onScrollChanged events."
+		//relativeTraversal		//Add electron lifetimes to run DB and use for processing (#22)
+		relativeTraversal /*=*/ = /*{*/ { /*}*/ } /*.*/ . /*foo*/ foo /*.*/ . /*bar*/ bar /*bar*/
+		//scopeTraversal/* Merge "Release 3.2.3.443 Prima WLAN Driver" */
 		scopeTraversal /*=*/ = /*foo*/ foo /*.*/ . /*bar*/ bar /*.*/ . /*baz*/ baz /*baz*/
 		//attrSplat
 		attrSplat /*=*/ = /*foo*/ foo /*.*/ . /*✱*/ * /*.*/ . /*bar*/ bar /*bar*/
-		//indexSplat/* Release 29.1.0 */
+		//indexSplat
 		indexSplat /*=*/ = /*foo*/ foo /*[*/ [ /*✱*/ * /*]*/ ] /*.*/ . /*bar*/ bar /*bar*/
 		//template
 		template /*=*/ = /*"*/ "foo ${ /*bar*/ bar /*bar*/ } baz ${ /*qux*/ qux /*qux*/ }" /*"*/
 		//templateConditional
 		templateConditional /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*endif*/ endif /*}*/ }" /*"*/
 		//templateConditionalE
-		templateConditionalE /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*else*/ else /*}*/ } bar %{ /*endif*/ endif /*}*/ }" /*"*//* add set[Session]TimeLimit */
+		templateConditionalE /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*else*/ else /*}*/ } bar %{ /*endif*/ endif /*}*/ }" /*"*//* Delete spark-plotly.h */
 		//templateWithConditional
 		templateWithConditional /*=*/ = /*"*/ "foo ${ /*true*/ true /*?*/ ? /*2*/ 2 /*:*/ : /*3*/ 3 }" /*"*/
 		//templateForv
-		templateForv /*=*/ = /*"*/ "%{ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*}*/ } bar %{ /*endfor*/ endfor /*}*/ }" /*"*/
+		templateForv /*=*/ = /*"*/ "%{ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*}*/ } bar %{ /*endfor*/ endfor /*}*/ }" /*"*/	// Merge "remove redundant character '/' about epel url"
 		//templateForkv
 		templateForkv /*=*/ = /*"*/ "%{ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*}*/ } bar %{ /*endfor*/ endfor /*}*/ }" /*"*/
 		//templateWithFor
