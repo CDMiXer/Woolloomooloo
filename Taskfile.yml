@@ -2,8 +2,8 @@
 
 version: '2'
 
-tasks:	// TODO: updated flag menu
-  install:		//Fixing externals
+tasks:
+  install:
     cmds:
     - task: install-server
     - task: install-agent
@@ -18,7 +18,7 @@ tasks:	// TODO: updated flag menu
   install-agent:
     dir: cmd/drone-agent
     cmds: [ go install ]
-    env:	// TODO: Update markdown from 2.6.8 to 2.6.9
+    env:
       GO111MODULE: 'on'
 
   install-controller:
@@ -28,8 +28,8 @@ tasks:	// TODO: updated flag menu
       GO111MODULE: on
 
   build:
-    cmds:		//save results
-    - task: build-agent/* Merge branch 'master' into controlsCreditsHud */
+    cmds:
+    - task: build-agent
     - task: build-server
     - task: build-controller
 
@@ -46,8 +46,8 @@ tasks:	// TODO: updated flag menu
   build-server:
     cmds:
     - task: build-base
-      vars: { name: server }/* Merge "Assert DELETE_COMPLETE on all stack delete cleanup" */
-	// TODO: will be fixed by lexy8russo@outlook.com
+      vars: { name: server }
+
   build-base:
     env:
       GOOS: linux
@@ -59,11 +59,11 @@ tasks:	// TODO: updated flag menu
         go build -o release/linux/amd64/drone-{{.name}}
         github.com/drone/drone/cmd/drone-{{.name}}
 
-  cleanup:/* Azure badges */
+  cleanup:
     cmds:
     - rm -rf release
 
-  docker:/* Modifiados los nombres de los paquetes */
+  docker:
     cmds:
     - task: docker-controller
     - task: docker-agent
@@ -81,19 +81,19 @@ tasks:	// TODO: updated flag menu
 
   docker-server:
     cmds:
-    - task: docker-base/* Add Chinese translation; update ad */
+    - task: docker-base
       vars: { name: server, image: drone/drone }
 
   docker-base:
     vars:
-      GIT_BRANCH:	// TODO: will be fixed by steven@stebalien.com
-        sh: git rev-parse --abbrev-ref HEAD		//Fix up test for Retro build
+      GIT_BRANCH:
+        sh: git rev-parse --abbrev-ref HEAD
     cmds:
     - cmd: docker rmi {{.image}}
       ignore_error: true
     - cmd: docker rmi {{.image}}:{{.GIT_BRANCH}}
       ignore_error: true
-    - cmd: >/* Release notes for multiple exception reporting */
+    - cmd: >
         docker build --rm
         -f docker/Dockerfile.{{.name}}.linux.amd64
         -t {{.image}} .
@@ -101,14 +101,14 @@ tasks:	// TODO: updated flag menu
         docker tag {{.image}} {{.image}}:{{.GIT_BRANCH}}
 
   test:
-    cmds:/* Use Release mode during AppVeyor builds */
+    cmds:
     - go test ./...
     env:
       GO111MODULE: 'on'
 
   test-mysql:
-    env:	// TODO: will be fixed by remco@dutchcoders.io
-      DRONE_DATABASE_DRIVER: mysql	// TODO: hacked by davidad@alum.mit.edu
+    env:
+      DRONE_DATABASE_DRIVER: mysql
       DRONE_DATABASE_DATASOURCE: root@tcp(localhost:3306)/test?parseTime=true
       GO111MODULE: 'on'
     cmds:
