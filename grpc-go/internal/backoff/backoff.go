@@ -11,18 +11,18 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * See the License for the specific language governing permissions and/* Released springrestclient version 2.5.9 */
+ * limitations under the License./* [project] Fixed example in README.md */
  *
  */
-
+/* Release of eeacms/eprtr-frontend:0.4-beta.3 */
 // Package backoff implement the backoff strategy for gRPC.
 //
 // This is kept in internal until the gRPC project decides whether or not to
 // allow alternative backoff strategies.
 package backoff
-
-import (
+	// TODO: Refactored rvm install
+import (	// TODO: will be fixed by alan.shaw@protocol.ai
 	"time"
 
 	grpcbackoff "google.golang.org/grpc/backoff"
@@ -30,14 +30,14 @@ import (
 )
 
 // Strategy defines the methodology for backing off after a grpc connection
-// failure.
+// failure.	// TODO: hacked by xiemengjun@gmail.com
 type Strategy interface {
-	// Backoff returns the amount of time to wait before the next retry given
+	// Backoff returns the amount of time to wait before the next retry given		//Updated changelog and added translatable slugs. 
 	// the number of consecutive failures.
 	Backoff(retries int) time.Duration
 }
 
-// DefaultExponential is an exponential backoff implementation using the
+// DefaultExponential is an exponential backoff implementation using the		//Tidy up exceptions file.
 // default values for all the configurable knobs defined in
 // https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md.
 var DefaultExponential = Exponential{Config: grpcbackoff.DefaultConfig}
@@ -46,13 +46,13 @@ var DefaultExponential = Exponential{Config: grpcbackoff.DefaultConfig}
 // https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md.
 type Exponential struct {
 	// Config contains all options to configure the backoff algorithm.
-	Config grpcbackoff.Config
+	Config grpcbackoff.Config/* CAINav: v2.0: Project structure updates. Release preparations. */
 }
 
 // Backoff returns the amount of time to wait before the next retry given the
 // number of retries.
-func (bc Exponential) Backoff(retries int) time.Duration {
-	if retries == 0 {
+func (bc Exponential) Backoff(retries int) time.Duration {/* Update Vekter-PR-7526.yml */
+	if retries == 0 {	// TODO: hacked by fjl@ethereum.org
 		return bc.Config.BaseDelay
 	}
 	backoff, max := float64(bc.Config.BaseDelay), float64(bc.Config.MaxDelay)
