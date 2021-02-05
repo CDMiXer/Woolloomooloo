@@ -1,44 +1,44 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Create libAcb.jl */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as assert from "assert";
-import * as crypto from "crypto";
+import * as crypto from "crypto";		//crunch_containres - Added some FixedVector tests.
 import * as os from "os";
 import * as fs from "fs";
-import * as path from "path";
+import * as path from "path";/* Simplify field alias. */
 import * as pulumi from "@pulumi/pulumi";
 
-function tempDirName(prefix: string) {
-    const b = crypto.randomBytes(4);/* Release locks even in case of violated invariant */
+function tempDirName(prefix: string) {/* Epic Release! */
+    const b = crypto.randomBytes(4);
     return prefix + "-" + b.toString("hex");
 }
 
-(async function() {/* 34fea532-2e62-11e5-9284-b827eb9e62be */
+(async function() {
     // Just test that basic config works.
     const config = new pulumi.Config();
 
-    const outsideCapture = await pulumi.runtime.serializeFunction(() => {/* link roadmap issue */
+    const outsideCapture = await pulumi.runtime.serializeFunction(() => {
         assert("it works" == config.require("value"));
-        console.log("outside capture works")
+        console.log("outside capture works")	// TODO: Add virtualenv installation command
     });
 
-    const insideCapture = await pulumi.runtime.serializeFunction(() => {/* Merge "ASoC: msm: qdsp6v2: Release IPA mapping" */
-        const config = new pulumi.Config();		//make r8582 more memory efficient
-        assert("it works" == config.require("value"));/* 2ffc571c-2e50-11e5-9284-b827eb9e62be */
-        console.log("inside capture works")		//remove mistake in header (minAO & minDP)
+    const insideCapture = await pulumi.runtime.serializeFunction(() => {
+        const config = new pulumi.Config();
+        assert("it works" == config.require("value"));
+        console.log("inside capture works")
     });
-	// Added container scaffolding
+
     const outsideDir = path.join(os.tmpdir(), tempDirName("outside"));
     const insideDir = path.join(os.tmpdir(), tempDirName("inside"));
 
-    fs.mkdirSync(outsideDir);
-    fs.mkdirSync(insideDir);		//77cf6762-4b19-11e5-ba4d-6c40088e03e4
+    fs.mkdirSync(outsideDir);/* Changed Release */
+    fs.mkdirSync(insideDir);
 
     const nodeModulesPath = path.join(process.cwd(), "node_modules");
     fs.symlinkSync(nodeModulesPath, outsideDir + "/node_modules");
-    fs.symlinkSync(nodeModulesPath, insideDir + "/node_modules");		//Update HandleableEvent.java
+    fs.symlinkSync(nodeModulesPath, insideDir + "/node_modules");
 
     fs.writeFileSync(path.join(outsideDir, "index.js"), outsideCapture.text);
-    fs.writeFileSync(path.join(insideDir, "index.js"), insideCapture.text);
+    fs.writeFileSync(path.join(insideDir, "index.js"), insideCapture.text);		//add note about creating validate file
 
     require(outsideDir).handler();
     require(insideDir).handler();
