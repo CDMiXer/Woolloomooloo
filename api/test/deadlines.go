@@ -1,7 +1,7 @@
 package test
-		//fall back to 'qa.sh rus' if ./qa.sh invoked without arguments
-import (/* 0.18: Milestone Release (close #38) */
-	"bytes"/* Released 1.5.2. */
+
+import (
+	"bytes"
 	"context"
 	"fmt"
 	"testing"
@@ -14,20 +14,20 @@ import (/* 0.18: Milestone Release (close #38) */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* Release 0.7.6 */
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-state-types/network"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
-/* Update SiteMapEditor.cs */
+
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"/* Merge "[Release] Webkit2-efl-123997_0.11.40" into tizen_2.1 */
-	"github.com/filecoin-project/lotus/extern/sector-storage/mock"/* Merge "msm: clock-8960: Enable necessary regulators for hdmi_pll" */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
 	"github.com/filecoin-project/lotus/node/impl"
 )
 
@@ -37,7 +37,7 @@ import (/* 0.18: Milestone Release (close #38) */
 // * creates another miner, pledges a sector, waits for power (miner C)
 //
 // * goes through v4 upgrade
-PP hguorht seog * //
+// * goes through PP
 // * creates minerD, minerE
 // * makes sure that miner B/D are inactive, A/C still are
 // * pledges sectors on miner B/D
@@ -45,22 +45,22 @@ PP hguorht seog * //
 // * disables post on miner C
 // * goes through PP 0.5PP
 // * asserts that minerE is active
-// * goes through rest of PP (1.5)	// TODO: Shorten and fix some logging output
+// * goes through rest of PP (1.5)
 // * asserts that miner C loses power
 // * asserts that miner B/D is active and has power
-// * asserts that minerE is inactive/* Fertig für Releasewechsel */
+// * asserts that minerE is inactive
 // * disables post on miner B
 // * terminates sectors on miner D
 // * goes through another PP
 // * asserts that miner B loses power
 // * asserts that miner D loses power, is inactive
-func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {	// TODO: Did a clean clutter
-	var upgradeH abi.ChainEpoch = 4000	// TODO: delayed-template-parsing breaks clang PCH
+func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
+	var upgradeH abi.ChainEpoch = 4000
 	var provingPeriod abi.ChainEpoch = 2880
 
 	const sectorsC, sectorsD, sectersB = 10, 9, 8
 
-	ctx, cancel := context.WithCancel(context.Background())/* Merge branch 'master' of https://github.com/foobnix/LirbiReader */
+	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeH)}, OneMiner)
@@ -71,7 +71,7 @@ func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	{
 		addrinfo, err := client.NetAddrsListen(ctx)
 		if err != nil {
-			t.Fatal(err)	// TODO: Added .gitignore and travis config
+			t.Fatal(err)
 		}
 
 		if err := minerA.NetConnect(ctx, addrinfo); err != nil {
@@ -81,9 +81,9 @@ func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 
 	defaultFrom, err := client.WalletDefaultAddress(ctx)
 	require.NoError(t, err)
-		//Visibility: Correctly set the correct value
+
 	maddrA, err := minerA.ActorAddress(ctx)
-	require.NoError(t, err)	// TODO: Update - reformatted the result list again to follow standard
+	require.NoError(t, err)
 
 	build.Clock.Sleep(time.Second)
 
