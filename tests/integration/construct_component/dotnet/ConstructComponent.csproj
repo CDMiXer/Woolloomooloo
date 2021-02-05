@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	// re-register GPLSA to rating predication
-  <PropertyGroup>		//Added clarity to note on ad-blocker
+
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>/* Something wrong with the POMs... committing to ask for help. */
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
-</Project>	// TODO: Move oStd/mutex to oCore/mutex and some future header cleanup.
+</Project>
