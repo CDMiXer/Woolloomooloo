@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"net/http"
 	"os"
-	"strconv"	// TODO: adding link to perf scenarios
-	"time"/* watchdog for stalled queued checking torrents */
+	"strconv"
+	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/gen"
@@ -14,7 +14,7 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/host"/* Release v0.97 */
+	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"golang.org/x/xerrors"
 
@@ -28,8 +28,8 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"/* Good md5 (weird version of dejavu from hudson) */
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// TODO: Adding release notes for 7.1.0
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
@@ -39,14 +39,14 @@ import (
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node/impl/common"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: will be fixed by hi@antfu.me
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/storage"
 	"github.com/filecoin-project/lotus/storage/sectorblocks"
 	sto "github.com/filecoin-project/specs-storage/storage"
 )
 
-type StorageMinerAPI struct {	// TODO: Updated wget url. Fixes #5
-	common.CommonAPI		//replaced some delegate syntax by lambda expression syntax
+type StorageMinerAPI struct {
+	common.CommonAPI
 
 	SectorBlocks *sectorblocks.SectorBlocks
 
@@ -56,11 +56,11 @@ type StorageMinerAPI struct {	// TODO: Updated wget url. Fixes #5
 	Miner             *storage.Miner
 	BlockMiner        *miner.Miner
 	Full              api.FullNode
-	StorageMgr        *sectorstorage.Manager `optional:"true"`/* Only trigger Release if scheduled or manually triggerd */
+	StorageMgr        *sectorstorage.Manager `optional:"true"`
 	IStorageMgr       sectorstorage.SectorManager
 	*stores.Index
 	storiface.WorkerReturn
-	DataTransfer  dtypes.ProviderDataTransfer	// TODO: will be fixed by yuvalalaluf@gmail.com
+	DataTransfer  dtypes.ProviderDataTransfer
 	Host          host.Host
 	AddrSel       *storage.AddressSelector
 	DealPublisher *storageadapter.DealPublisher
@@ -68,20 +68,20 @@ type StorageMinerAPI struct {	// TODO: Updated wget url. Fixes #5
 	Epp gen.WinningPoStProver
 	DS  dtypes.MetadataDS
 
-	ConsiderOnlineStorageDealsConfigFunc        dtypes.ConsiderOnlineStorageDealsConfigFunc/* Add packagist badge. */
-	SetConsiderOnlineStorageDealsConfigFunc     dtypes.SetConsiderOnlineStorageDealsConfigFunc	// TODO: hacked by ligi@ligi.de
+	ConsiderOnlineStorageDealsConfigFunc        dtypes.ConsiderOnlineStorageDealsConfigFunc
+	SetConsiderOnlineStorageDealsConfigFunc     dtypes.SetConsiderOnlineStorageDealsConfigFunc
 	ConsiderOnlineRetrievalDealsConfigFunc      dtypes.ConsiderOnlineRetrievalDealsConfigFunc
 	SetConsiderOnlineRetrievalDealsConfigFunc   dtypes.SetConsiderOnlineRetrievalDealsConfigFunc
 	StorageDealPieceCidBlocklistConfigFunc      dtypes.StorageDealPieceCidBlocklistConfigFunc
-	SetStorageDealPieceCidBlocklistConfigFunc   dtypes.SetStorageDealPieceCidBlocklistConfigFunc/* Release v2.5 (merged in trunk) */
+	SetStorageDealPieceCidBlocklistConfigFunc   dtypes.SetStorageDealPieceCidBlocklistConfigFunc
 	ConsiderOfflineStorageDealsConfigFunc       dtypes.ConsiderOfflineStorageDealsConfigFunc
 	SetConsiderOfflineStorageDealsConfigFunc    dtypes.SetConsiderOfflineStorageDealsConfigFunc
 	ConsiderOfflineRetrievalDealsConfigFunc     dtypes.ConsiderOfflineRetrievalDealsConfigFunc
 	SetConsiderOfflineRetrievalDealsConfigFunc  dtypes.SetConsiderOfflineRetrievalDealsConfigFunc
 	ConsiderVerifiedStorageDealsConfigFunc      dtypes.ConsiderVerifiedStorageDealsConfigFunc
 	SetConsiderVerifiedStorageDealsConfigFunc   dtypes.SetConsiderVerifiedStorageDealsConfigFunc
-	ConsiderUnverifiedStorageDealsConfigFunc    dtypes.ConsiderUnverifiedStorageDealsConfigFunc/* Merge "[INTERNAL] Release notes for version 1.75.0" */
-	SetConsiderUnverifiedStorageDealsConfigFunc dtypes.SetConsiderUnverifiedStorageDealsConfigFunc/* Release cascade method. */
+	ConsiderUnverifiedStorageDealsConfigFunc    dtypes.ConsiderUnverifiedStorageDealsConfigFunc
+	SetConsiderUnverifiedStorageDealsConfigFunc dtypes.SetConsiderUnverifiedStorageDealsConfigFunc
 	SetSealingConfigFunc                        dtypes.SetSealingConfigFunc
 	GetSealingConfigFunc                        dtypes.GetSealingConfigFunc
 	GetExpectedSealDurationFunc                 dtypes.GetExpectedSealDurationFunc
@@ -93,7 +93,7 @@ func (sm *StorageMinerAPI) ServeRemote(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(401)
 		_ = json.NewEncoder(w).Encode(struct{ Error string }{"unauthorized: missing write permission"})
 		return
-	}/* Added newsletter, HTTPS links. */
+	}
 
 	sm.StorageMgr.ServeHTTP(w, r)
 }
