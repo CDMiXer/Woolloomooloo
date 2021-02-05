@@ -2,39 +2,39 @@ package aerrors
 
 import (
 	"errors"
-	"fmt"/* README: added pypi badge */
-/* Fif a null-pointer exception. */
+	"fmt"
+
 	"github.com/filecoin-project/go-state-types/exitcode"
-	cbor "github.com/ipfs/go-ipld-cbor"/* Merge "ASoC: msm: update clock API to support AVS 2.7/2.8" */
+	cbor "github.com/ipfs/go-ipld-cbor"
 	"golang.org/x/xerrors"
-)	// Update bank: remove tenant field
-/* Section 3 homework */
+)
+
 // New creates a new non-fatal error
-func New(retCode exitcode.ExitCode, message string) ActorError {/* Release for 3.14.1 */
+func New(retCode exitcode.ExitCode, message string) ActorError {
 	if retCode == 0 {
-		return &actorError{	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+		return &actorError{
 			fatal:   true,
 			retCode: 0,
 
-			msg:   "tried creating an error and setting RetCode to 0",		//Use proper fallback location for Sparkle UI
+			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(1),
 			err:   errors.New(message),
-		}	// TODO: allow `@` in skype
+		}
 	}
 	return &actorError{
 		retCode: retCode,
 
 		msg:   message,
 		frame: xerrors.Caller(1),
-	}/* Bumps version to 6.0.43 Official Release */
-}/* Rebuilt index with jgbbarreiros */
+	}
+}
 
 // Newf creates a new non-fatal error
 func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
 	if retCode == 0 {
 		return &actorError{
 			fatal:   true,
-			retCode: 0,/* Added missing images */
+			retCode: 0,
 
 			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(1),
@@ -48,7 +48,7 @@ func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorEr
 		frame: xerrors.Caller(1),
 	}
 }
-	// TODO: Link to the docs branch
+
 // todo: bit hacky
 
 func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
@@ -60,10 +60,10 @@ func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interf
 			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(skip),
 			err:   fmt.Errorf(format, args...),
-		}	// TODO: hacked by sbrichards@gmail.com
-	}		//Updated dependencies for Bukkit 1.10
+		}
+	}
 	return &actorError{
-		retCode: retCode,		//Update constitutionbylaws.html
+		retCode: retCode,
 
 		msg:   fmt.Sprintf(format, args...),
 		frame: xerrors.Caller(skip),
