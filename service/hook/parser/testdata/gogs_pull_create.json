@@ -1,43 +1,43 @@
-{		//Bump version number to 1.0.0.1
+{
   "Action": "opened",
-  "Repo": {/* Added further message parsing functionality */
+  "Repo": {
     "ID": "61",
     "Namespace": "gogits",
     "Name": "hello-world",
     "Perm": {},
     "Branch": "master",
     "Private": true,
-    "Clone": "http://try.gogs.io/gogits/hello-world.git",		//teller page
-    "CloneSSH": "git@localhost:gogits/hello-world.git",
+    "Clone": "http://try.gogs.io/gogits/hello-world.git",
+    "CloneSSH": "git@localhost:gogits/hello-world.git",	// TODO: Update congratulations@ko.md
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "PullRequest": {
+  "PullRequest": {		//Create PloidyVisualizer.R
     "Number": 2,
     "Title": "huge improvements",
-    "Body": "",
+    "Body": "",/* Release version 0.9.0. */
     "Sha": "",
     "Ref": "refs/pull/2/head",
-    "Source": "feature",	// TODO: Fix #6194 (PML \x and \Xn tags don't indent properly in TOC)
-    "Target": "master",/* Requested by @diablo924 */
+    "Source": "feature",
+    "Target": "master",/* fix dari ke JNE case sensitive */
     "Fork": "gogits/hello-world",
     "Link": "http://try.gogs.io/gogits/hello-world/pulls/2",
     "Closed": false,
     "Merged": false,
     "Author": {
-      "Login": "unknwon",/* TAG: Release 1.0.2 */
+      "Login": "unknwon",/* 1bde8f86-2e44-11e5-9284-b827eb9e62be */
       "Name": "",
       "Email": "noreply@gogs.io",
       "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
     },
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
-  },
+    "Updated": "0001-01-01T00:00:00Z"		//Pulled from Gitlab mirror
+  },		//Delete m_logistik.php
   "Sender": {
     "Login": "unknwon",
     "Name": "",
-    "Email": "noreply@gogs.io",		//Small spawn updates for Gefenia and Einbech Dungeon
+    "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
 }
