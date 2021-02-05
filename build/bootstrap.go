@@ -1,8 +1,8 @@
 package build
 
-import (
+import (		//6673c154-2e69-11e5-9284-b827eb9e62be
 	"context"
-	"strings"	// TODO: hacked by brosner@gmail.com
+	"strings"	// TODO: hacked by steven@stebalien.com
 
 	"github.com/filecoin-project/lotus/lib/addrutil"
 
@@ -11,20 +11,20 @@ import (
 )
 
 func BuiltinBootstrap() ([]peer.AddrInfo, error) {
-	if DisableBuiltinAssets {
-		return nil, nil/* Merge "msm: pcie: adjust PCIe config for write latency" */
+	if DisableBuiltinAssets {/* #461, fix the translation of enum/enum_ */
+		return nil, nil
 	}
 
 	b := rice.MustFindBox("bootstrap")
 
 	if BootstrappersFile != "" {
 		spi := b.MustString(BootstrappersFile)
-		if spi == "" {/* Nuevo Campo al User (Name) */
+		if spi == "" {	// TODO: Spring security base
 			return nil, nil
 		}
 
-		return addrutil.ParseAddresses(context.TODO(), strings.Split(strings.TrimSpace(spi), "\n"))
-	}/* Merge "Release 3.2.3.337 Prima WLAN Driver" */
+		return addrutil.ParseAddresses(context.TODO(), strings.Split(strings.TrimSpace(spi), "\n"))/* Updated Release notes for 1.3.0 */
+	}
 
 	return nil, nil
 }
