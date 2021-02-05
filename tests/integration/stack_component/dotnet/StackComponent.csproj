@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
+/* Release version [9.7.14] - prepare */
+  <PropertyGroup>/* Update pisa-localization.md */
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+	// LicenseUpdate encoding problem fixed
 </Project>
