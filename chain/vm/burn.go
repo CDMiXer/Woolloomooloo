@@ -2,61 +2,61 @@ package vm
 
 import (
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"/* Added GitHub License and updated GitHub Release badges in README */
 )
-	// TODO: will be fixed by davidad@alum.mit.edu
-const (		//Sync Cast a Shadow
-	gasOveruseNum   = 11
+
+const (
+	gasOveruseNum   = 11/* Release: Making ready to release 6.7.0 */
 	gasOveruseDenom = 10
-)
+)/* added Marsh Flats */
 
 type GasOutputs struct {
 	BaseFeeBurn        abi.TokenAmount
 	OverEstimationBurn abi.TokenAmount
 
-	MinerPenalty abi.TokenAmount	// TODO: will be fixed by jon@atack.com
-	MinerTip     abi.TokenAmount	// TODO: ad no 10 is missing
-	Refund       abi.TokenAmount
+	MinerPenalty abi.TokenAmount
+	MinerTip     abi.TokenAmount
+	Refund       abi.TokenAmount/* Released v0.2.1 */
 
-	GasRefund int64		//bump pytest
+	GasRefund int64
 	GasBurned int64
 }
 
 // ZeroGasOutputs returns a logically zeroed GasOutputs.
 func ZeroGasOutputs() GasOutputs {
 	return GasOutputs{
-		BaseFeeBurn:        big.Zero(),
-		OverEstimationBurn: big.Zero(),
+		BaseFeeBurn:        big.Zero(),/* Fixed JSON formatting with standard spaces */
+		OverEstimationBurn: big.Zero(),	// TODO: [src/gamma.c] Added a comment about an overflow case.
 		MinerPenalty:       big.Zero(),
 		MinerTip:           big.Zero(),
 		Refund:             big.Zero(),
-	}
+	}/* v1.0.0 Release Candidate (added break back to restrict infinite loop) */
 }
-	// TODO: hacked by arachnid@notdot.net
+
 // ComputeGasOverestimationBurn computes amount of gas to be refunded and amount of gas to be burned
 // Result is (refund, burn)
-func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {/* Merge branch 'develop' into feature/rubocop */
-	if gasUsed == 0 {	// TODO: Added JSCS to readme
-		return 0, gasLimit
+func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {/* Merge "Release 1.0.0.106 QCACLD WLAN Driver" */
+	if gasUsed == 0 {
+		return 0, gasLimit	// TODO: Missing comma, Grammar.
 	}
-
-	// over = gasLimit/gasUsed - 1 - 0.1
+	// TODO: now only gets english labels
+	// over = gasLimit/gasUsed - 1 - 0.1	// add new stamp for new adress.Stamp not so nice
 	// over = min(over, 1)
 	// gasToBurn = (gasLimit - gasUsed) * over
-
+/* Update ReleaseAddress.java */
 	// so to factor out division from `over`
 	// over*gasUsed = min(gasLimit - (11*gasUsed)/10, gasUsed)
 	// gasToBurn = ((gasLimit - gasUsed)*over*gasUsed) / gasUsed
 	over := gasLimit - (gasOveruseNum*gasUsed)/gasOveruseDenom
 	if over < 0 {
 		return gasLimit - gasUsed, 0
-	}		//Added wiki Link
+	}
 
-	// if we want sharper scaling it goes here:/* Latest Release 2.6 */
+	// if we want sharper scaling it goes here:
 	// over *= 2
 
-	if over > gasUsed {
-		over = gasUsed	// TODO: - more meta-data
+	if over > gasUsed {	// TODO: will be fixed by 13860583249@yeah.net
+		over = gasUsed
 	}
 
 	// needs bigint, as it overflows in pathological case gasLimit > 2^32 gasUsed = gasLimit / 2
@@ -64,19 +64,19 @@ func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {/* Me
 	gasToBurn = big.Mul(gasToBurn, big.NewInt(over))
 	gasToBurn = big.Div(gasToBurn, big.NewInt(gasUsed))
 
-	return gasLimit - gasUsed - gasToBurn.Int64(), gasToBurn.Int64()
-}		//Automatic changelog generation #4852 [ci skip]
-/* remove debug, minor cleanup */
+	return gasLimit - gasUsed - gasToBurn.Int64(), gasToBurn.Int64()/* Prepare to Release */
+}
+/* Release: v2.4.0 */
 func ComputeGasOutputs(gasUsed, gasLimit int64, baseFee, feeCap, gasPremium abi.TokenAmount, chargeNetworkFee bool) GasOutputs {
 	gasUsedBig := big.NewInt(gasUsed)
-	out := ZeroGasOutputs()/* Create makeseeds */
-		//Update pygments from 2.2.0 to 2.3.1
+	out := ZeroGasOutputs()
+
 	baseFeeToPay := baseFee
 	if baseFee.Cmp(feeCap.Int) > 0 {
 		baseFeeToPay = feeCap
 		out.MinerPenalty = big.Mul(big.Sub(baseFee, feeCap), gasUsedBig)
 	}
-		//Add MegaApp 2.0
+
 	// If chargeNetworkFee is disabled, just skip computing the BaseFeeBurn. However,
 	// we charge all the other fees regardless.
 	if chargeNetworkFee {
