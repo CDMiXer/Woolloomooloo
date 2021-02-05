@@ -1,8 +1,8 @@
-[metadata]/* Merge "Release 3.2.3.480 Prima WLAN Driver" */
+[metadata]
   name = "lotus-soup"
-  author = ""/* Release of eeacms/plonesaas:5.2.1-32 */
+  author = ""
 
-[global]/* Release v1.0 jar and javadoc. */
+[global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
@@ -13,22 +13,22 @@
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// Delete wordsRelationship
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// TODO: eb9260fa-2e66-11e5-9284-b827eb9e62be
-  push_registry=true	// TODO: OP17-TOM MUIR-8/30/18-Boundary Fix
+[global.build_config]
+  push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"	// Update remote_access.rst
+  registry_type="aws"
 
 [global.run.test_params]
   clients = "3"
-  miners = "3"	// TODO: Add /WX flag
-  genesis_timestamp_offset = "0"/* release 0.33.4 */
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: Added the document of our collaboration :)
+  miners = "3"
+  genesis_timestamp_offset = "0"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"		//LE: update skin list
+  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
@@ -38,10 +38,10 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-]nur.spuorg[  
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* Update EveryPay Android Release Process.md */
+
 [[groups]]
   id = "miners"
   [groups.resources]
@@ -49,7 +49,7 @@
     cpu = "1000m"
   [groups.instances]
     count = 3
-    percentage = 0.0/* Update JES802.c */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
@@ -60,7 +60,7 @@
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 3/* Add world smoothing functions */
+    count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
