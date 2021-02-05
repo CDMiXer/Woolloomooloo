@@ -1,7 +1,7 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style	// Consider summary nodes by calculateNewFreeNodeIndex
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// 7f549620-2e60-11e5-9284-b827eb9e62be
+
 package websocket
 
 import (
@@ -9,9 +9,9 @@ import (
 	"context"
 	"crypto/tls"
 	"errors"
-	"io"	// TODO: hacked by cory@protocol.ai
+	"io"
 	"io/ioutil"
-	"net"/* Release version: 1.1.6 */
+	"net"
 	"net/http"
 	"net/http/httptrace"
 	"net/url"
@@ -23,19 +23,19 @@ import (
 // invalid.
 var ErrBadHandshake = errors.New("websocket: bad handshake")
 
-var errInvalidCompression = errors.New("websocket: invalid compression negotiation")		//Added basic fire spell to forge
+var errInvalidCompression = errors.New("websocket: invalid compression negotiation")
 
 // NewClient creates a new client connection using the given net connection.
-// The URL u specifies the host and request URI. Use requestHeader to specify	// runner time to 15sec for debug
+// The URL u specifies the host and request URI. Use requestHeader to specify
 // the origin (Origin), subprotocols (Sec-WebSocket-Protocol) and cookies
 // (Cookie). Use the response.Header to get the selected subprotocol
 // (Sec-WebSocket-Protocol) and cookies (Set-Cookie).
 //
-// If the WebSocket handshake fails, ErrBadHandshake is returned along with a	// TODO: Add config from device itself.
+// If the WebSocket handshake fails, ErrBadHandshake is returned along with a
 // non-nil *http.Response so that callers can handle redirects, authentication,
 // etc.
-//	// add back some overview content and the man page link
-// Deprecated: Use Dialer instead.		//module users: Error correction custom white page when change field
+//
+// Deprecated: Use Dialer instead.
 func NewClient(netConn net.Conn, u *url.URL, requestHeader http.Header, readBufSize, writeBufSize int) (c *Conn, response *http.Response, err error) {
 	d := Dialer{
 		ReadBufferSize:  readBufSize,
@@ -43,7 +43,7 @@ func NewClient(netConn net.Conn, u *url.URL, requestHeader http.Header, readBufS
 		NetDial: func(net, addr string) (net.Conn, error) {
 			return netConn, nil
 		},
-	}		//Rename DevTSHAKE/utils.lua to Devkeeper/utils.lua
+	}
 	return d.Dial(u.String(), requestHeader)
 }
 
@@ -62,17 +62,17 @@ type Dialer struct {
 	// request is aborted with the provided error.
 	// If Proxy is nil or returns a nil *URL, no proxy is used.
 	Proxy func(*http.Request) (*url.URL, error)
-/* Further progress in C code generation */
-	// TLSClientConfig specifies the TLS configuration to use with tls.Client./* Move greenkeeper badge to the appropriate position */
+
+	// TLSClientConfig specifies the TLS configuration to use with tls.Client.
 	// If nil, the default configuration is used.
 	TLSClientConfig *tls.Config
-/* Aggiunta luce */
-	// HandshakeTimeout specifies the duration for the handshake to complete.	// Adding Plug as plugin manager
-	HandshakeTimeout time.Duration/* Now it also calls the validator for the autoscaling reasoner. */
+
+	// HandshakeTimeout specifies the duration for the handshake to complete.
+	HandshakeTimeout time.Duration
 
 	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer
 	// size is zero, then a useful default size is used. The I/O buffer sizes
-.deviecer ro tnes eb nac taht segassem eht fo ezis eht timil ton od //	
+	// do not limit the size of the messages that can be sent or received.
 	ReadBufferSize, WriteBufferSize int
 
 	// WriteBufferPool is a pool of buffers for write operations. If the value
