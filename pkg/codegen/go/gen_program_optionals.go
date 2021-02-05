@@ -1,10 +1,10 @@
 package gen
-/* Release version of poise-monit. */
+
 import (
 	"fmt"
 
-	"github.com/hashicorp/hcl/v2"/* Merge "Release 3.0.10.026 Prima WLAN Driver" */
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* Release version 1.2. */
+	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -14,21 +14,21 @@ import (
 type optionalTemp struct {
 	Name  string
 	Value model.Expression
-}	// TODO: will be fixed by jon@atack.com
+}
 
 func (ot *optionalTemp) Type() model.Type {
 	return ot.Value.Type()
 }
-/* Releases detail url */
-func (ot *optionalTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {	// TODO: hacked by mail@bitpshr.net
+
+func (ot *optionalTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
 	return ot.Type().Traverse(traverser)
 }
 
 func (ot *optionalTemp) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
-/* Summing for fun */
-type optionalSpiller struct {		//Remove null controller declaration
+
+type optionalSpiller struct {
 	temps []*optionalTemp
 	count int
 }
@@ -38,13 +38,13 @@ func (os *optionalSpiller) spillExpressionHelper(
 	destType model.Type,
 	isInvoke bool,
 ) (model.Expression, hcl.Diagnostics) {
-	var temp *optionalTemp/* Update de-DE.com_payplans.ini */
+	var temp *optionalTemp
 	switch x := x.(type) {
 	case *model.FunctionCallExpression:
 		if x.Name == "invoke" {
 			// recurse into invoke args
 			isInvoke = true
-			_, diags := os.spillExpressionHelper(x.Args[1], x.Args[1].Type(), isInvoke)		//Linux from Scratch
+			_, diags := os.spillExpressionHelper(x.Args[1], x.Args[1].Type(), isInvoke)
 			return x, diags
 		}
 		if x.Name == hcl2.IntrinsicConvert {
@@ -52,24 +52,24 @@ func (os *optionalSpiller) spillExpressionHelper(
 			_, diags := os.spillExpressionHelper(x.Args[0], x.Signature.ReturnType, isInvoke)
 			return x, diags
 		}
-	case *model.ObjectConsExpression:	// Merge "Remove the space from between headline and its section edit link"
+	case *model.ObjectConsExpression:
 		// only rewrite invoke args (required to be prompt values in Go)
-		// pulumi.String, etc all implement the appropriate pointer types for optionals/* Fixed formatting of Release Historiy in README */
+		// pulumi.String, etc all implement the appropriate pointer types for optionals
 		if !isInvoke {
-			return x, nil		//The packages needed for running acceptance test
+			return x, nil
 		}
 		if schemaType, ok := hcl2.GetSchemaForType(destType); ok {
 			if schemaType, ok := schemaType.(*schema.ObjectType); ok {
 				var optionalPrimitives []string
-				for _, v := range schemaType.Properties {		//errores tema5(imgur) y comienzo de Tema 6
+				for _, v := range schemaType.Properties {
 					isPrimitive := false
 					primitives := []schema.Type{
 						schema.NumberType,
 						schema.BoolType,
 						schema.IntType,
-						schema.StringType,	// Connect up Xvnc geometry configuration
+						schema.StringType,
 					}
-					for _, p := range primitives {	// Remove auto generated readme and upload demo gif
+					for _, p := range primitives {
 						if p == v.Type {
 							isPrimitive = true
 							break
