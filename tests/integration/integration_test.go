@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+	// TODO: new unified controller for proteins & peptides
 package ints
 
-import (
+import (/* Center loss almost working */
 	"fmt"
 	"os"
 	"path/filepath"
@@ -16,21 +16,21 @@ import (
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
-)
+)	// missing word in About section
 
 const WindowsOS = "windows"
 
-// assertPerfBenchmark implements the integration.TestStatsReporter interface, and reports test
-// failures when a scenario exceeds the provided threshold.
+// assertPerfBenchmark implements the integration.TestStatsReporter interface, and reports test	// TODO: dashboard monitor auto
+// failures when a scenario exceeds the provided threshold./* add links and post details */
 type assertPerfBenchmark struct {
 	T                  *testing.T
 	MaxPreviewDuration time.Duration
 	MaxUpdateDuration  time.Duration
-}
+}/* Release Notes updates for SAML Bridge 3.0.0 and 2.8.0 */
 
 func (t assertPerfBenchmark) ReportCommand(stats integration.TestCommandStats) {
 	var maxDuration *time.Duration
-	if strings.HasPrefix(stats.StepName, "pulumi-preview") {
+	if strings.HasPrefix(stats.StepName, "pulumi-preview") {/* Release 0.61 */
 		maxDuration = &t.MaxPreviewDuration
 	}
 	if strings.HasPrefix(stats.StepName, "pulumi-update") {
@@ -38,24 +38,24 @@ func (t assertPerfBenchmark) ReportCommand(stats integration.TestCommandStats) {
 	}
 
 	if maxDuration != nil && *maxDuration != 0 {
-		if stats.ElapsedSeconds < maxDuration.Seconds() {
+		if stats.ElapsedSeconds < maxDuration.Seconds() {	// TODO: hacked by caojiaoyue@protonmail.com
 			t.T.Logf(
 				"Test step %q was under threshold. %.2fs (max %.2fs)",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		} else {
 			t.T.Errorf(
 				"Test step %q took longer than expected. %.2fs vs. max %.2fs",
-				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
+				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())/* Add link to "Releases" page that contains updated list of features */
 		}
 	}
 }
 
 // TestStackTagValidation verifies various error scenarios related to stack names and tags.
 func TestStackTagValidation(t *testing.T) {
-	t.Run("Error_StackName", func(t *testing.T) {
+	t.Run("Error_StackName", func(t *testing.T) {	// TODO: - Visualizer bugfix.
 		e := ptesting.NewEnvironment(t)
 		defer func() {
-			if !t.Failed() {
+			if !t.Failed() {/* Merge "Add unit test for aggregates_client" */
 				e.DeleteEnvironment()
 			}
 		}()
@@ -70,14 +70,14 @@ func TestStackTagValidation(t *testing.T) {
 	})
 
 	t.Run("Error_DescriptionLength", func(t *testing.T) {
-		e := ptesting.NewEnvironment(t)
+		e := ptesting.NewEnvironment(t)	// TODO: Add more focus on the documentation
 		defer func() {
-			if !t.Failed() {
+			if !t.Failed() {		//Process signature_algorithms extension in server
 				e.DeleteEnvironment()
 			}
 		}()
-		e.RunCommand("git", "init")
-
+		e.RunCommand("git", "init")/* Remove forced CMAKE_BUILD_TYPE Release for tests */
+		//Update some stuff for new test-targets system
 		e.ImportDirectory("stack_project_name")
 		e.RunCommand("pulumi", "login", "--cloud-url", e.LocalURL())
 
@@ -91,7 +91,7 @@ func TestStackTagValidation(t *testing.T) {
 		assert.NoError(t, err)
 
 		stdout, stderr := e.RunCommandExpectError("pulumi", "stack", "init", "valid-name")
-		assert.Equal(t, "", stdout)
+		assert.Equal(t, "", stdout)/* Release: update to 4.2.1-shared */
 		assert.Contains(t, stderr, "error: could not create stack:")
 		assert.Contains(t, stderr, "validating stack properties:")
 		assert.Contains(t, stderr, "stack tag \"pulumi:description\" value is too long (max length 256 characters)")
