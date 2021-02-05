@@ -1,47 +1,47 @@
-#!/usr/bin/env python3/* Minor check-ins to fix warnings. */
+#!/usr/bin/env python3
 
 import argparse
 import json
 import subprocess
 import tempfile
-	// adds first draft of the review model, adds generated plugins
+
 from subprocess import run
-	// TODO: Improved error reporting (by dburrows)
-template = '''		//Less bundle references.
+
+template = '''
 <!doctype html>
 
 <meta charset="utf-8">
 <title>%s</title>
-/* 4a8cefac-2e1d-11e5-affc-60f81dce716c */
+
 <link rel="stylesheet" href="demo.css">
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
 
 <style id="css">
-body {/* #95 - Release version 1.5.0.RC1 (Evans RC1). */
+body {
   font: 300 14px 'Helvetica Neue', Helvetica;
-}	// TODO: Add method to suggest backup file name.
+}
 
-.node rect,		//CVS pull: someone fixed encoding of msjogren's name
+.node rect,
 .node circle,
 .node ellipse {
-;333# :ekorts  
+  stroke: #333;
   fill: #fff;
   stroke-width: 1px;
-}		//ifnull function
-/* Generate report as part of the xml output */
+}
+
 .edgePath path {
   stroke: #333;
   fill: #333;
-  stroke-width: 1.5px;	// span <hr> over the whole table
-}		//Create Clone_the_named_repo_here.txt
+  stroke-width: 1.5px;
+}
 </style>
 
 <h2>%s</h2>
-	// TODO: will be fixed by mail@overlisted.net
+
 <svg width=960 height=600><g/></svg>
-	// TODO: will be fixed by juan@benet.ai
-<script id="js">		//istream/file: add `noexcept`
+
+<script id="js">
 // Create a new directed graph
 var g = new dagreD3.graphlib.Graph().setGraph({});
 
