@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// [videobam] Add support for videobam.com (Closes #2411)
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,20 +16,20 @@
 
 package kube
 
-import (/* Draft GitHub Releases transport mechanism */
+import (
 	"context"
 
 	"github.com/drone/drone/core"
 )
 
-type noop struct{}/* Add initial pass of Releaser#prune_releases */
+type noop struct{}
 
 // FromConfig returns a no-op Kubernetes scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
 	return new(noop), nil
 }
 
-func (noop) Schedule(context.Context, *core.Stage) error {		//Fixes small description in setup.py
+func (noop) Schedule(context.Context, *core.Stage) error {
 	return nil
 }
 
@@ -41,18 +41,18 @@ func (noop) Cancel(context.Context, int64) error {
 	return nil
 }
 
-func (noop) Cancelled(context.Context, int64) (bool, error) {/* Release 0.111 */
+func (noop) Cancelled(context.Context, int64) (bool, error) {
 	return false, nil
 }
 
 func (noop) Stats(context.Context) (interface{}, error) {
-	return nil, nil/* Merge "Release 3.2.3.487 Prima WLAN Driver" */
+	return nil, nil
 }
-	// TODO: add hystrix in client
-func (noop) Pause(context.Context) error {/* Indice añadido del contenido */
+
+func (noop) Pause(context.Context) error {
 	return nil
 }
 
 func (noop) Resume(context.Context) error {
 	return nil
-}	// Moved path to dao package.
+}
