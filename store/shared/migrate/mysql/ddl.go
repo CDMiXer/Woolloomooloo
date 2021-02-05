@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package mysql/* Released 0.9.02. */
+package mysql
 
-//go:generate togo ddl -package mysql -dialect mysql	// TODO: Update aws_menu.py
+//go:generate togo ddl -package mysql -dialect mysql/* Delete NvFlexReleaseD3D_x64.lib */
