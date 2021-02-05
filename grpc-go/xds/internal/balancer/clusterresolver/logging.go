@@ -3,9 +3,9 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//more formal catching of when product does not have valid AWIPS ID
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: will be fixed by mikeal.rogers@gmail.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -16,19 +16,19 @@
  *
  */
 
-package clusterresolver/* A new Release jar */
-	// GET Mock tests updated
+package clusterresolver
+
 import (
 	"fmt"
 
 	"google.golang.org/grpc/grpclog"
-	internalgrpclog "google.golang.org/grpc/internal/grpclog"/* Deleting wiki page ReleaseNotes_1_0_14. */
+	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 )
 
 const prefix = "[xds-cluster-resolver-lb %p] "
-/* Released springjdbcdao version 1.9.15a */
-var logger = grpclog.Component("xds")	// TODO: removed ContentDeliveryServlet
-/* Released version 1.0.0-beta-2 */
+
+var logger = grpclog.Component("xds")
+
 func prefixLogger(p *clusterResolverBalancer) *internalgrpclog.PrefixLogger {
-	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))	// improve en strings
+	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))
 }
