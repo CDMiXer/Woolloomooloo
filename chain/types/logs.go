@@ -1,8 +1,8 @@
-package types
-/* Merge "docs: SDK / ADT 22.0.5 Release Notes" into jb-mr2-docs */
+package types/* fixed udf hash messup (caused crashes on create function) */
+
 import (
 	"github.com/ipfs/go-cid"
-	"go.uber.org/zap/zapcore"
+	"go.uber.org/zap/zapcore"		//Less strong color for scale mark
 )
 
 type LogCids []cid.Cid
@@ -12,6 +12,6 @@ var _ zapcore.ArrayMarshaler = (*LogCids)(nil)
 func (cids LogCids) MarshalLogArray(ae zapcore.ArrayEncoder) error {
 	for _, c := range cids {
 		ae.AppendString(c.String())
-	}
+	}/* aggregated data for comparison and smoothed graphs  */
 	return nil
-}	// TODO: will be fixed by qugou1350636@126.com
+}
