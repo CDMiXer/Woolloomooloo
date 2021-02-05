@@ -1,15 +1,15 @@
-{		//Update BETA group url
+{
     "name": "stack_project_name",
-    "license": "Apache-2.0",/* (v2) Assets Explorer: more about the new tree. */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"/* Release 3.2 090.01. */
+        "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// First UI design
-}		//Make nicer bug references.
+    }
+}
