@@ -1,15 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* [#762] add crud logic for alarm rule */
 
-  <PropertyGroup>
+  <PropertyGroup>/* Active flag drop down menus modified */
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: hacked by nagydani@epointsystem.org
+  </PropertyGroup>/* New Release (0.9.9) */
 
-  <ItemGroup>
+  <ItemGroup>/* fix nej inline code process */
   </ItemGroup>
-
+/* Rebuilt index with drkohlipk */
   <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="2.*" />
   </ItemGroup>
 
-</Project>
+</Project>/* e2ba1a3e-2e72-11e5-9284-b827eb9e62be */
