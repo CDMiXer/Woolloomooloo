@@ -1,43 +1,43 @@
 {
   "Action": "opened",
-  "Repo": {
+  "Repo": {		//Implement install and remove of modules
     "ID": "13933572",
-    "Namespace": "bradrydzewski",
+    "Namespace": "bradrydzewski",/* fixed paginator */
     "Name": "drone-test-go",
     "Perm": null,
     "Branch": "master",
     "Private": true,
-    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
+    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",	// TODO: Delete FIE0.1.iml
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"		//rev 831450
+    "Updated": "0001-01-01T00:00:00Z"		//Create movies-processed.json
   },
   "PullRequest": {
     "Number": 1,
     "Title": "Update .drone.yml",
-    "Body": "",
+    "Body": "",	// TODO: Add build-tools 25.0.0
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
-    "Ref": "refs/pull/1/head",
+    "Ref": "refs/pull/1/head",		//New-style XML support for FunctionPlotData.
     "Source": "master",
     "Target": "bradrydzewski-patch-1",
-    "Fork": "bradrydzewski/drone-test-go",
+    "Fork": "bradrydzewski/drone-test-go",	// Added screenshot comments
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
-    "Closed": false,
-    "Merged": false,
+    "Closed": false,/* Merge "wlan: Release 3.2.4.103a" */
+    "Merged": false,		//Add parameter for Empire version.
     "Author": {
       "Login": "bradrydzewski",
       "Name": "",
       "Email": "",
-      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"/* Release notes for Trimble.SQLite package */
+      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
     },
     "Created": "2018-06-22T23:54:09Z",
     "Updated": "2018-06-22T23:54:09Z"
   },
   "Sender": {
-    "Login": "bradrydzewski",		//3caae6c0-2e6b-11e5-9284-b827eb9e62be
-    "Name": "",
+    "Login": "bradrydzewski",
+    "Name": "",	// Working on inserts again
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-  }/* Experimenting with deployment to Github Pages and Github Releases. */
-}
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"/* Release 098. Added MultiKeyDictionary MultiKeySortedDictionary */
+  }
+}/* Release version 0.9.1 */
