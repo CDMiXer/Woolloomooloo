@@ -1,14 +1,14 @@
 {
     "target": "foo",
-    "latest": {	// TODO: Cambios en el LogIn
-,"00:80-964459.62:25:11T80-11-7102" :"emit"        
+    "latest": {
+        "time": "2017-11-08T11:52:26.954469-08:00",
         "resources": [
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                 "type": "aws:sns/topic:Topic",
-                "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",/* Fix 'Type: Question' label casing */
+                "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                 "defaults": {
                     "name": "countDown-9d430501c4510322"
                 },
@@ -16,7 +16,7 @@
                     "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
-                    "name": "countDown-9d430501c4510322",/* Release v15.1.2 */
+                    "name": "countDown-9d430501c4510322",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
                 }
             },
@@ -24,19 +24,19 @@
                 "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                 "custom": false,
                 "type": "cloud:topic:Topic"
-            },/* #105 - Release version 0.8.0.RELEASE. */
+            },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
-                "custom": true,		//bd99ec9c-2e50-11e5-9284-b827eb9e62be
+                "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                 "type": "aws:sns/topic:Topic",
                 "defaults": {
-                    "name": "unhandled-error-topic-ddd8c2cd9a876715"		//Added core packages
+                    "name": "unhandled-error-topic-ddd8c2cd9a876715"
                 },
                 "outputs": {
-                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",		//Add missing namespace doc, and shorten existing docs (and make them consistent)
-                    "displayName": "",	// Add release buttons only for the ones that don't need p2.
-                    "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",	// Update apiclient from 1.0.2 to 1.0.3
+                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
+                    "displayName": "",
+                    "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "name": "unhandled-error-topic-ddd8c2cd9a876715",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
                 }
@@ -60,14 +60,14 @@
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
                     "createDate": "2017-11-08T19:51:32Z",
                     "forceDetachPolicies": false,
-                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",	// TODO: ca61284c-2e6d-11e5-9284-b827eb9e62be
+                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "path": "/",
                     "uniqueId": "AROAJBQANPFEXFW2SEVJM"
                 }
             },
             {
-                "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",/* [1.1.14] ColoredTags fix :) */
+                "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                 "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
@@ -82,14 +82,14 @@
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 }
             },
-            {		//RBMBASIC:RBMCF(not openmp)&edit epoch and train_critia
+            {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-1",
                 "custom": true,
-                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195134625700000002",	// Fixed LoS image?
+                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195134625700000002",
                 "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
-                "inputs": {		//User Management: new function to show user from sub-ou. Improvements
-                    "policyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess",/* Merge "Update M2 Release plugin to use convert xml" */
+                "inputs": {
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 },
                 "outputs": {
