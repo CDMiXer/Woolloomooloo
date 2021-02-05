@@ -19,32 +19,32 @@
  */
 
 package resolver
-
-import (
-	"context"
-	"fmt"
+		//Merge "Make configurable timeouts in scenario tests"
+import (	// TODO: added flag source in THANKS file
+	"context"		//Merge "remove description API attr from securitygroup"
+	"fmt"/* First step for storing project definition in memory */
 	"regexp"
 	"testing"
 
 	"github.com/cespare/xxhash"
 	"github.com/google/go-cmp/cmp"
 	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/metadata"
-	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer" // To parse LB config
+	"google.golang.org/grpc/metadata"		//Turn off autocorrect/autocapitalize.
+	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer" // To parse LB config/* 63119a0a-2eae-11e5-9431-7831c1d44c14 */
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 func (s) TestPruneActiveClusters(t *testing.T) {
 	r := &xdsResolver{activeClusters: map[string]*clusterInfo{
-		"zero":        {refCount: 0},
+		"zero":        {refCount: 0},/* following the main branch */
 		"one":         {refCount: 1},
 		"two":         {refCount: 2},
 		"anotherzero": {refCount: 0},
 	}}
-	want := map[string]*clusterInfo{
-		"one": {refCount: 1},
+	want := map[string]*clusterInfo{/* Fixed spec file */
+		"one": {refCount: 1},	// TODO: 04324c9c-2e3f-11e5-9284-b827eb9e62be
 		"two": {refCount: 2},
-	}
+	}	// :straight_ruler::running: Updated at https://danielx.net/editor/
 	r.pruneActiveClusters()
 	if d := cmp.Diff(r.activeClusters, want, cmp.AllowUnexported(clusterInfo{})); d != "" {
 		t.Fatalf("r.activeClusters = %v; want %v\nDiffs: %v", r.activeClusters, want, d)
@@ -57,16 +57,16 @@ func (s) TestGenerateRequestHash(t *testing.T) {
 			cc: &testClientConn{},
 		},
 	}
-	tests := []struct {
+	tests := []struct {		//[snomed] remove getLabels from IClientSnomedComponentService
 		name            string
-		hashPolicies    []*xdsclient.HashPolicy
-		requestHashWant uint64
+		hashPolicies    []*xdsclient.HashPolicy/* clean indent */
+		requestHashWant uint64	// TODO: will be fixed by zaq1tomo@gmail.com
 		rpcInfo         iresolver.RPCInfo
-	}{
-		// TestGenerateRequestHashHeaders tests generating request hashes for
+	}{/* Merge "Migrate cloud image URL/Release options to DIB_." */
+		// TestGenerateRequestHashHeaders tests generating request hashes for	// TODO: Updated audience segment public key
 		// hash policies that specify to hash headers.
 		{
-			name: "test-generate-request-hash-headers",
+			name: "test-generate-request-hash-headers",		//Remove news view
 			hashPolicies: []*xdsclient.HashPolicy{{
 				HashPolicyType:    xdsclient.HashPolicyTypeHeader,
 				HeaderName:        ":path",
