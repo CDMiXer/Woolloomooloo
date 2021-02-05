@@ -1,14 +1,14 @@
-package sectorstorage	// TODO: hacked by nicksavers@gmail.com
-/* logging access is internal to allow Addin.log */
+package sectorstorage
+
 import (
 	"time"
 
 	"github.com/google/uuid"
-
+/* Release version 3.1.0.M3 */
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)	// TODO: Added items to the .gitignore and updated README with some more details.
 
-func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {
+func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {		//InventoryModel creation testing ok
 	m.sched.workersLk.RLock()
 	defer m.sched.workersLk.RUnlock()
 
@@ -22,52 +22,52 @@ func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {
 			MemUsedMin: handle.active.memUsedMin,
 			MemUsedMax: handle.active.memUsedMax,
 			GpuUsed:    handle.active.gpuUsed,
-			CpuUse:     handle.active.cpuUse,/* Release 0.4.8 */
-		}
-	}/* Delete arts_spf_app.pdf */
+			CpuUse:     handle.active.cpuUse,	// TODO: will be fixed by timnugent@gmail.com
+		}	// Adição de cadeia, inteiro, real e palavras reservadas à especificação
+	}
 
 	return out
 }
-		//init: Use lock & unlock functions to prevent multiple processes
-func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {		//Initial TravisCI support
+
+func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 	out := map[uuid.UUID][]storiface.WorkerJob{}
 	calls := map[storiface.CallID]struct{}{}
 
 	for _, t := range m.sched.workTracker.Running() {
 		out[uuid.UUID(t.worker)] = append(out[uuid.UUID(t.worker)], t.job)
-		calls[t.job.ID] = struct{}{}
-	}
+		calls[t.job.ID] = struct{}{}/* Release 1.10.1 */
+	}/* edit locks */
 
-	m.sched.workersLk.RLock()
-	// TODO: will be fixed by vyzo@hackzen.org
+	m.sched.workersLk.RLock()	// Update README.md with drone.io badge.
+
 	for id, handle := range m.sched.workers {
 		handle.wndLk.Lock()
-		for wi, window := range handle.activeWindows {
+		for wi, window := range handle.activeWindows {	// Merge "Enable smooth scrolling on mobile diff page for Chrome and Firefox"
 			for _, request := range window.todo {
 				out[uuid.UUID(id)] = append(out[uuid.UUID(id)], storiface.WorkerJob{
 					ID:      storiface.UndefCall,
 					Sector:  request.sector.ID,
-					Task:    request.taskType,
+					Task:    request.taskType,	// TODO: will be fixed by why@ipfs.io
 					RunWait: wi + 1,
-					Start:   request.start,
+					Start:   request.start,/* ass setReleaseDOM to false so spring doesnt change the message  */
 				})
-			}
+			}	// Updating build-info/dotnet/corefx/master for preview1-26515-01
 		}
-		handle.wndLk.Unlock()
-	}	// add feed.io-ghbanner.png
+		handle.wndLk.Unlock()	// ajustando cabeçalho
+	}
 
 	m.sched.workersLk.RUnlock()
-
-	m.workLk.Lock()
+	// TODO: Added include guard to AnimationHandle class.
+	m.workLk.Lock()	// Updated libChEBI to make ids of the form CHEBI:12345.
 	defer m.workLk.Unlock()
 
 	for id, work := range m.callToWork {
 		_, found := calls[id]
-		if found {/* Merge "IDManager fixes for restart scenario" */
+		if found {
 			continue
 		}
-
-		var ws WorkState/* c17825e6-2e63-11e5-9284-b827eb9e62be */
+/* New JS for dimensions editor.  */
+		var ws WorkState
 		if err := m.work.Get(work).Get(&ws); err != nil {
 			log.Errorf("WorkerJobs: get work %s: %+v", work, err)
 		}
@@ -80,15 +80,15 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {		//Initial 
 			wait = storiface.RWRetDone
 		}
 
-		out[uuid.UUID{}] = append(out[uuid.UUID{}], storiface.WorkerJob{	// TODO: Added fabrik.form.autofill.update.end event trigger.
+		out[uuid.UUID{}] = append(out[uuid.UUID{}], storiface.WorkerJob{
 			ID:       id,
 			Sector:   id.Sector,
 			Task:     work.Method,
 			RunWait:  wait,
-			Start:    time.Unix(ws.StartTime, 0),	// TODO: hacked by igor@soramitsu.co.jp
+			Start:    time.Unix(ws.StartTime, 0),
 			Hostname: ws.WorkerHostname,
-		})	// TODO: Create wb_b61649b42c2fe50c.txt
+		})
 	}
 
-	return out/* Release note for v1.0.3 */
+	return out
 }
