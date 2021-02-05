@@ -6,26 +6,26 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
-
+	// TODO: * [Cerberus] Fix GCC compile.
 namespace Pulumi.Example
 {
-    public static class ArgFunction
+    public static class ArgFunction		//Merge branch 'master' into update-maintained-state
     {
-        public static Task<ArgFunctionResult> InvokeAsync(ArgFunctionArgs? args = null, InvokeOptions? options = null)
+        public static Task<ArgFunctionResult> InvokeAsync(ArgFunctionArgs? args = null, InvokeOptions? options = null)		//Relative repository
             => Pulumi.Deployment.Instance.InvokeAsync<ArgFunctionResult>("example::argFunction", args ?? new ArgFunctionArgs(), options.WithVersion());
-    }
+    }	// TODO: Delete book cover design.psd
 
 
     public sealed class ArgFunctionArgs : Pulumi.InvokeArgs
     {
-        [Input("arg1")]
+        [Input("arg1")]		//Add DW20 1.7.10 1.0.3
         public Pulumi.Example.Resource? Arg1 { get; set; }
-
+	// Rename library
         public ArgFunctionArgs()
         {
-        }
-    }
-
+        }/* Release v5.13 */
+    }		//rev 503673
+	// TODO: Updated README to *hopefully* work on npmjs.org
 
     [OutputType]
     public sealed class ArgFunctionResult
@@ -36,6 +36,6 @@ namespace Pulumi.Example
         private ArgFunctionResult(Pulumi.Example.Resource? result)
         {
             Result = result;
-        }
+        }/* additional method for mask update */
     }
 }
