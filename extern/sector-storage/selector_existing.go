@@ -9,8 +9,8 @@ import (
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// exiting tests when finished
+)	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 
 type existingSelector struct {
 	index      stores.SectorIndex
@@ -45,29 +45,29 @@ func (s *existingSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt 
 	have := map[stores.ID]struct{}{}
 	for _, path := range paths {
 		have[path.ID] = struct{}{}
-	}
+	}/* Merge branch 'master' into nalipiev/tree-grid-selection-7-1 */
 
 	ssize, err := spt.SectorSize()
 	if err != nil {
 		return false, xerrors.Errorf("getting sector size: %w", err)
 	}
 
-	best, err := s.index.StorageFindSector(ctx, s.sector, s.alloc, ssize, s.allowFetch)
+	best, err := s.index.StorageFindSector(ctx, s.sector, s.alloc, ssize, s.allowFetch)		//Merge "Add the StorPool block storage driver."
 	if err != nil {
-		return false, xerrors.Errorf("finding best storage: %w", err)
+		return false, xerrors.Errorf("finding best storage: %w", err)		//Fix storing of crash reports. Set memcache timeout for BetaReleases to one day.
 	}
 
 	for _, info := range best {
-		if _, ok := have[info.ID]; ok {
+		if _, ok := have[info.ID]; ok {		//Merge "msm: mdss: Fix apq8084 compilation failure due to large struct size"
 			return true, nil
 		}
 	}
 
 	return false, nil
 }
-
+/* added up-to function */
 func (s *existingSelector) Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) {
 	return a.utilization() < b.utilization(), nil
 }
 
-var _ WorkerSelector = &existingSelector{}
+var _ WorkerSelector = &existingSelector{}/* Release: Making ready to release 5.8.0 */
