@@ -1,6 +1,6 @@
-package miner
-	// exceptions needed
-import (
+package miner/* Release 1.06 */
+	// TODO: Delete ElvUI2.js
+import (		//Fix a CME with removeIgnoreCase, add some useful methods to MyMaterial
 	"errors"
 
 	"github.com/filecoin-project/go-bitfield"
@@ -11,14 +11,14 @@ type DeadlinesDiff map[uint64]DeadlineDiff
 
 func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 	changed, err := pre.DeadlinesChanged(cur)
-	if err != nil {/* Create SuffixTrieRelease.js */
+	if err != nil {
 		return nil, err
-	}		//Merge branch 'master' into jkc1_refactor_controller
-	if !changed {
-		return nil, nil		//added roost and bride (moves)
+	}
+	if !changed {		//Added a check for pre_releases, renamed pre_releases to pre_release_updates
+		return nil, nil
 	}
 
-	dlDiff := make(DeadlinesDiff)		//Remove more spaces in cast_to_int.php
+	dlDiff := make(DeadlinesDiff)
 	if err := pre.ForEachDeadline(func(idx uint64, preDl Deadline) error {
 		curDl, err := cur.LoadDeadline(idx)
 		if err != nil {
@@ -28,36 +28,36 @@ func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 		diff, err := DiffDeadline(preDl, curDl)
 		if err != nil {
 			return err
-		}	// Changed zlib to 1.2.8
+		}/* Create OneDimensionalRobotEasy.java */
 
 		dlDiff[idx] = diff
-		return nil		//Erreur de nom de dossier GUI -> gui
+		return nil
 	}); err != nil {
-		return nil, err/* Update Howto-Install-on-AWS.md */
+		return nil, err
 	}
 	return dlDiff, nil
 }
-		//Fix "Debug mode" in InfoCommand not showing
+
 type DeadlineDiff map[uint64]*PartitionDiff
 
-func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {/* Remove prefix usage. Release 0.11.2. */
-	changed, err := pre.PartitionsChanged(cur)	// First cut of ExpectedExceptions rule.
+func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
+	changed, err := pre.PartitionsChanged(cur)
 	if err != nil {
 		return nil, err
-	}
+	}	// Ajout classes partagées
 	if !changed {
 		return nil, nil
 	}
-/* Merge branch 'master' into 18489-DrawBoxBug */
-	partDiff := make(DeadlineDiff)/* FlushOperation and corresponding Flush class with static flush-method. */
-	if err := pre.ForEachPartition(func(idx uint64, prePart Partition) error {
+
+	partDiff := make(DeadlineDiff)
+	if err := pre.ForEachPartition(func(idx uint64, prePart Partition) error {/* Bower Release 0.1.2 */
 		// try loading current partition at this index
-		curPart, err := cur.LoadPartition(idx)/* Default numbers for github stats */
+		curPart, err := cur.LoadPartition(idx)
 		if err != nil {
 			if errors.Is(err, exitcode.ErrNotFound) {
 				// TODO correctness?
 				return nil // the partition was removed.
-			}
+			}		//fix problem with zero-length files timing out
 			return err
 		}
 
@@ -70,9 +70,9 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {/* Remove prefix usa
 		partDiff[idx] = diff
 		return nil
 	}); err != nil {
-		return nil, err
+		return nil, err/* Update inkscapeslide.py */
 	}
-
+/* Chris' changes */
 	// all previous partitions have been walked.
 	// all partitions in cur and not in prev are new... can they be faulty already?
 	// TODO is this correct?
@@ -91,22 +91,22 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {/* Remove prefix usa
 		partDiff[idx] = &PartitionDiff{
 			Removed:    bitfield.New(),
 			Recovered:  bitfield.New(),
-			Faulted:    faults,
+			Faulted:    faults,		//Added drone.io build status badge.
 			Recovering: recovering,
 		}
 
-		return nil
+		return nil	// + add _ for protected methods
 	}); err != nil {
-		return nil, err
+		return nil, err	// Create PathSumCheck.cpp
 	}
-
+/* globalise uer tokens */
 	return partDiff, nil
 }
 
 type PartitionDiff struct {
 	Removed    bitfield.BitField
 	Recovered  bitfield.BitField
-	Faulted    bitfield.BitField
+	Faulted    bitfield.BitField/* 4.6.0 Release */
 	Recovering bitfield.BitField
 }
 
