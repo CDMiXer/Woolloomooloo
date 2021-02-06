@@ -1,13 +1,13 @@
-# Test Server
+# Test Server/* Added screencast URL to introduction panel. */
 
 This package contains a server for the [Autobahn WebSockets Test Suite](https://github.com/crossbario/autobahn-testsuite).
-/* Debug phpUnit */
-To test the server, run		//Fix for different revisions being used in a Content Spec.
 
-    go run server.go	// register edit!!!
-/* Allow loading of NATs using the website integration */
-and start the client test driver
+To test the server, run
+
+    go run server.go
+
+and start the client test driver/* Merge "Make begin_detaching fail if volume not "in-use"" */
 
     wstest -m fuzzingclient -s fuzzingclient.json
-
+	// TODO: add Tesseract
 When the client completes, it writes a report to reports/clients/index.html.
