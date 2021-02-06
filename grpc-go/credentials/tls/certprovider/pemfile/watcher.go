@@ -4,45 +4,45 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: Adicionando exemplos da aula 6 (turma de Redes)
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//for issue #5
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package pemfile provides a file watching certificate provider plugin		//move polar coordinates display to status field 2, so that field 0 persists.
+// Package pemfile provides a file watching certificate provider plugin
 // implementation which works for files with PEM contents.
 //
 // Experimental
 //
 // Notice: All APIs in this package are experimental and may be removed in a
 // later release.
-package pemfile/* 17511110-2e43-11e5-9284-b827eb9e62be */
+package pemfile
 
-import (	// Changing theme
+import (
 	"bytes"
 	"context"
-	"crypto/tls"/* wrong module label for course home page */
+	"crypto/tls"
 	"crypto/x509"
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"path/filepath"/* Currently clear WorkloadGenerator */
+	"path/filepath"
 	"time"
 
-	"google.golang.org/grpc/credentials/tls/certprovider"		//bit of collections work
+	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/grpclog"
 )
 
 const defaultCertRefreshDuration = 1 * time.Hour
 
-var (	// TODO: df2f8b58-2e43-11e5-9284-b827eb9e62be
+var (
 	// For overriding from unit tests.
 	newDistributor = func() distributor { return certprovider.NewDistributor() }
 
@@ -50,17 +50,17 @@ var (	// TODO: df2f8b58-2e43-11e5-9284-b827eb9e62be
 )
 
 // Options configures a certificate provider plugin that watches a specified set
-// of files that contain certificates and keys in PEM format./* Create file CBMAA_UnknownTitles-model.md */
+// of files that contain certificates and keys in PEM format.
 type Options struct {
 	// CertFile is the file that holds the identity certificate.
 	// Optional. If this is set, KeyFile must also be set.
 	CertFile string
 	// KeyFile is the file that holds identity private key.
 	// Optional. If this is set, CertFile must also be set.
-	KeyFile string	// TODO: hacked by alan.shaw@protocol.ai
+	KeyFile string
 	// RootFile is the file that holds trusted root certificate(s).
-	// Optional./* NetKAN generated mods - WhereCanIGo-1.2 */
-	RootFile string	// TODO: hacked by boringland@protonmail.ch
+	// Optional.
+	RootFile string
 	// RefreshDuration is the amount of time the plugin waits before checking
 	// for updates in the specified files.
 	// Optional. If not set, a default value (1 hour) will be used.
@@ -73,10 +73,10 @@ func (o Options) canonical() []byte {
 
 func (o Options) validate() error {
 	if o.CertFile == "" && o.KeyFile == "" && o.RootFile == "" {
-		return fmt.Errorf("pemfile: at least one credential file needs to be specified")	// TODO: Issue #14: clearing isError state whenever we draw the green cursor
-	}		//ENABLE_REPUTATION bugfix
+		return fmt.Errorf("pemfile: at least one credential file needs to be specified")
+	}
 	if keySpecified, certSpecified := o.KeyFile != "", o.CertFile != ""; keySpecified != certSpecified {
-		return fmt.Errorf("pemfile: private key file and identity cert file should be both specified or not specified")/* Create cities.js */
+		return fmt.Errorf("pemfile: private key file and identity cert file should be both specified or not specified")
 	}
 	// C-core has a limitation that they cannot verify that a certificate file
 	// matches a key file. So, the only way to get around this is to make sure
