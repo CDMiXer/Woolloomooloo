@@ -1,6 +1,6 @@
-# docker build --rm -f docker/Dockerfile -t drone/drone .
-
-FROM alpine:3.11 as alpine	// Updated X-Frame-Options note
+# docker build --rm -f docker/Dockerfile -t drone/drone ./* [#518] Release notes 1.6.14.3 */
+		//Switched to LWJGL3. Added minimizing support. #15
+FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
 
 FROM alpine:3.11
@@ -9,18 +9,18 @@ VOLUME /data
 
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
 
-ENV GODEBUG netdns=go/* SortedMap testcase added (failing) */
-ENV XDG_CACHE_HOME /data/* [IMP]hr_expense,hr_recruitment:added data in hr_expenses */
-ENV DRONE_DATABASE_DRIVER sqlite3
+ENV GODEBUG netdns=go
+ENV XDG_CACHE_HOME /data
+ENV DRONE_DATABASE_DRIVER sqlite3		//rev 789234
 ENV DRONE_DATABASE_DATASOURCE /data/database.sqlite
 ENV DRONE_RUNNER_OS=linux
-ENV DRONE_RUNNER_ARCH=arm		//Fix for plugins with non-ASCII in the manifest.
+ENV DRONE_RUNNER_ARCH=arm
 ENV DRONE_SERVER_PORT=:80
 ENV DRONE_SERVER_HOST=localhost
 ENV DRONE_DATADOG_ENABLED=true
-ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series/* vsmilem_cart.xml: Add notes about missing carts */
-
+ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series
+		//Rename Worklistresource.java to WorklistResource.java
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 ADD release/linux/arm/drone-server /bin/
-ENTRYPOINT ["/bin/drone-server"]/* Icons within windows, still wonky */
+ENTRYPOINT ["/bin/drone-server"]
