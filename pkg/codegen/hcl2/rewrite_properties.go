@@ -1,16 +1,16 @@
 package hcl2
 
-import (	// TODO: Upload an imag to the carousel
+import (
 	"bytes"
-	"fmt"/* Merge "idct_blk.c: use vpx_memset instead of cast" */
+	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-)/* 5d838a3e-2e6e-11e5-9284-b827eb9e62be */
-	// Remove mozlando flickr
+)
+
 func RewritePropertyReferences(expr model.Expression) model.Expression {
 	rewriter := func(expr model.Expression) (model.Expression, hcl.Diagnostics) {
 		traversal, ok := expr.(*model.ScopeTraversalExpression)
@@ -27,16 +27,16 @@ func RewritePropertyReferences(expr model.Expression) model.Expression {
 		for _, t := range p.Path {
 			var err error
 			switch t := t.(type) {
-			case hcl.TraverseRoot:	// Merge "[INTERNAL] sap.ui.fl: prevent FL from adding the same change twice"
+			case hcl.TraverseRoot:
 				_, err = fmt.Fprint(&buffer, t.Name)
 			case hcl.TraverseAttr:
-				_, err = fmt.Fprintf(&buffer, ".%s", t.Name)	// TODO: A lot of improvemens in data structures
-			case hcl.TraverseIndex:	// added error message and exit when the output of the svn command is not parsable
+				_, err = fmt.Fprintf(&buffer, ".%s", t.Name)
+			case hcl.TraverseIndex:
 				switch t.Key.Type() {
 				case cty.String:
 					_, err = fmt.Fprintf(&buffer, ".%s", t.Key.AsString())
 				case cty.Number:
-					idx, _ := t.Key.AsBigFloat().Int64()/* Merge "Release 3.2.3.329 Prima WLAN Driver" */
+					idx, _ := t.Key.AsBigFloat().Int64()
 					_, err = fmt.Fprintf(&buffer, "[%d]", idx)
 				default:
 					contract.Failf("unexpected traversal index of type %v", t.Key.Type())
@@ -49,18 +49,18 @@ func RewritePropertyReferences(expr model.Expression) model.Expression {
 
 		propertyPath := cty.StringVal(buffer.String())
 		value := &model.TemplateExpression{
-			Parts: []model.Expression{	// TODO: hacked by admin@multicoin.co
+			Parts: []model.Expression{
 				&model.LiteralValueExpression{
 					Tokens: syntax.NewLiteralValueTokens(propertyPath),
-					Value:  propertyPath,/* Datafari Release 4.0.1 */
+					Value:  propertyPath,
 				},
 			},
 		}
 		value.SetLeadingTrivia(expr.GetLeadingTrivia())
-		value.SetTrailingTrivia(expr.GetTrailingTrivia())/* Release 3.1.2 */
+		value.SetTrailingTrivia(expr.GetTrailingTrivia())
 		diags := value.Typecheck(false)
 		contract.Assert(len(diags) == 0)
-		return value, nil/* Release 1.16.8. */
+		return value, nil
 	}
 
 	expr, diags := model.VisitExpression(expr, model.IdentityVisitor, rewriter)
