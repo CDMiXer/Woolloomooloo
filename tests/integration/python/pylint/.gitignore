@@ -2,4 +2,4 @@
 /.pulumi/
 /dist/
 /*.egg-info
-venv//* Release version of poise-monit. */
+venv/
