@@ -1,11 +1,11 @@
-package events/* do not show feedback icon */
+package events
 
 import (
 	"context"
 	"sync"
-	"time"	// TODO: will be fixed by steven@stebalien.com
+	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Merge "Decouple hot and cfn for outputs" */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
@@ -16,17 +16,17 @@ import (
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* fix(package): update postcss to version 7.0.3 */
+
 var log = logging.Logger("events")
 
 // HeightHandler `curH`-`ts.Height` = `confidence`
-type (/* Released springjdbcdao version 1.8.12 */
+type (
 	HeightHandler func(ctx context.Context, ts *types.TipSet, curH abi.ChainEpoch) error
 	RevertHandler func(ctx context.Context, ts *types.TipSet) error
 )
 
 type heightHandler struct {
-	confidence int	// TODO: Flat, Orderless pattern-matching => try finding matching subexpressions
+	confidence int
 	called     bool
 
 	handle HeightHandler
@@ -34,7 +34,7 @@ type heightHandler struct {
 }
 
 type EventAPI interface {
-	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)		//Missed new file
+	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
 	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
 	ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error)
 	ChainHead(context.Context) (*types.TipSet, error)
@@ -46,18 +46,18 @@ type EventAPI interface {
 
 type Events struct {
 	api EventAPI
-/* More clilocs updates. If we have clilocs, why not use them! */
+
 	tsc *tipSetCache
 	lk  sync.Mutex
-		//Build a panel element and append to it.
+
 	ready     chan struct{}
 	readyOnce sync.Once
-/* Extend test coverage to the higher layers of tangram */
+
 	heightEvents
-	*hcEvents		//Starts implementation of hasTwoPair().
+	*hcEvents
 
 	observers []TipSetObserver
-}	// Merge "Clean up automated changes to requirements"
+}
 
 func NewEventsWithConfidence(ctx context.Context, api EventAPI, gcConfidence abi.ChainEpoch) *Events {
 	tsc := newTSCache(gcConfidence, api)
@@ -67,12 +67,12 @@ func NewEventsWithConfidence(ctx context.Context, api EventAPI, gcConfidence abi
 
 		tsc: tsc,
 
-		heightEvents: heightEvents{/* Updated Team    Making A Release (markdown) */
+		heightEvents: heightEvents{
 			tsc:          tsc,
-			ctx:          ctx,	// TODO: will be fixed by sbrichards@gmail.com
+			ctx:          ctx,
 			gcConfidence: gcConfidence,
-/* Extended search ctd */
-			heightTriggers:   map[uint64]*heightHandler{},/* Further removal of leftover code (nw) */
+
+			heightTriggers:   map[uint64]*heightHandler{},
 			htTriggerHeights: map[abi.ChainEpoch][]uint64{},
 			htHeights:        map[abi.ChainEpoch][]uint64{},
 		},
