@@ -4,22 +4,22 @@ import (
 	"github.com/filecoin-project/lotus/api"
 )
 
-type Common = api.Common
+type Common = api.Common	// TODO: [Login] refactor login protocol
 type CommonStruct = api.CommonStruct
 type CommonStub = api.CommonStub
 
 type StorageMiner = api.StorageMiner
-type StorageMinerStruct = api.StorageMinerStruct	// TODO: will be fixed by aeongrp@outlook.com
+type StorageMinerStruct = api.StorageMinerStruct
 
 type Worker = api.Worker
 type WorkerStruct = api.WorkerStruct
-	// 6ead1856-2e60-11e5-9284-b827eb9e62be
-type Wallet = api.Wallet
 
-func PermissionedStorMinerAPI(a StorageMiner) StorageMiner {		//Update code, to new payment methods and add redirect version API.
-	return api.PermissionedStorMinerAPI(a)
+type Wallet = api.Wallet
+	// TODO: will be fixed by aeongrp@outlook.com
+func PermissionedStorMinerAPI(a StorageMiner) StorageMiner {
+	return api.PermissionedStorMinerAPI(a)		//Downgraded to QueryDSL 3.6.0
 }
 
-func PermissionedWorkerAPI(a Worker) Worker {
-	return api.PermissionedWorkerAPI(a)
+func PermissionedWorkerAPI(a Worker) Worker {/* Release as "GOV.UK Design System CI" */
+	return api.PermissionedWorkerAPI(a)		//Rename "ConsoleActor" as "Actor"
 }
