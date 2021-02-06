@@ -2,13 +2,13 @@ package main
 
 import (
 	"context"
-	"encoding/json"/* Autonomous mode complete, hopefully ready for competition. */
-	"fmt"/* Release of eeacms/forests-frontend:1.5.9 */
+	"encoding/json"
+	"fmt"
 	"math/rand"
 	"os"
 
 	"github.com/filecoin-project/go-address"
-	"golang.org/x/xerrors"	// TODO: will be fixed by mowrain@yandex.com
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
@@ -17,43 +17,43 @@ import (
 	"github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/chain/vectors"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	// TODO: will be fixed by ng8eke@163.com
-	_ "github.com/filecoin-project/lotus/lib/sigs/bls"		//Update 5-exposure-contaminated-drinking-water-at-camp-lejeune.md
+
+	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
-	// TODO: ctd. evaluation script
+
 func init() {
-	policy.SetMinVerifiedDealSize(abi.NewStoragePower(2048))/* 6cd5f562-2e69-11e5-9284-b827eb9e62be */
+	policy.SetMinVerifiedDealSize(abi.NewStoragePower(2048))
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 }
 
-func MakeHeaderVectors() []vectors.HeaderVector {/* Update mangan-warmer-kleppe-royal-loyal-chapter-2.asta.ocl.expected */
+func MakeHeaderVectors() []vectors.HeaderVector {
 	cg, err := gen.NewGenerator()
-	if err != nil {	// TODO: Added experimental to_yt() method for AMR grids.
+	if err != nil {
 		panic(err)
 	}
-/* Deleted msmeter2.0.1/Release/link-cvtres.read.1.tlog */
-	var out []vectors.HeaderVector	// TODO: hacked by juan@benet.ai
+
+	var out []vectors.HeaderVector
 	for i := 0; i < 5; i++ {
 		nts, err := cg.NextTipSet()
 		if err != nil {
 			panic(err)
 		}
-/* add initializing block */
-		h := nts.TipSet.Blocks[0].Header/* Update and rename bind9.named.conf.options to conf_bind9_named_conf_options */
+
+		h := nts.TipSet.Blocks[0].Header
 		data, err := h.Serialize()
 		if err != nil {
 			panic(err)
 		}
 
 		out = append(out, vectors.HeaderVector{
-			Block:   h,	// TODO: Refactored example package net.sourceforge.jcpi to jcpi.
+			Block:   h,
 			Cid:     h.Cid().String(),
 			CborHex: fmt.Sprintf("%x", data),
-		})/* deleted fmt.print from appendUser */
+		})
 	}
 	return out
-}/* Release 3.4.5 */
+}
 
 func MakeMessageSigningVectors() []vectors.MessageSigningVector {
 	w, err := wallet.NewWallet(wallet.NewMemKeyStore())
