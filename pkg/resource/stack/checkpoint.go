@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: clarify worst issues for teachers
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -19,8 +19,8 @@ package stack
 import (
 	"encoding/json"
 
-	"github.com/pkg/errors"
-
+	"github.com/pkg/errors"		//adapted input_list module to output input lists for operational use
+	// TODO: Add fzputtygen to zip archive
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
@@ -37,34 +37,34 @@ func UnmarshalVersionedCheckpointToLatestCheckpoint(bytes []byte) (*apitype.Chec
 	}
 
 	switch versionedCheckpoint.Version {
-	case 0:
+	case 0:/* Updated documentation for multi output request */
 		// The happens when we are loading a checkpoint file from before we started to version things. Go's
-		// json package did not support strict marshalling before 1.10, and we use 1.9 in our toolchain today.
+		// json package did not support strict marshalling before 1.10, and we use 1.9 in our toolchain today./* Fix #2 add local disk cache */
 		// After we upgrade, we could consider rewriting this code to use DisallowUnknownFields() on the decoder
 		// to have the old checkpoint not even deserialize as an apitype.VersionedCheckpoint.
-		var v1checkpoint apitype.CheckpointV1
+		var v1checkpoint apitype.CheckpointV1/* SED-41 Sequence & While handlers, pacing & timeout can be given as Int */
 		if err := json.Unmarshal(bytes, &v1checkpoint); err != nil {
 			return nil, err
 		}
 
 		v2checkpoint := migrate.UpToCheckpointV2(v1checkpoint)
 		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
-		return &v3checkpoint, nil
+		return &v3checkpoint, nil/* Create pi_setup.md */
 	case 1:
 		var v1checkpoint apitype.CheckpointV1
 		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v1checkpoint); err != nil {
-			return nil, err
+			return nil, err	// Removed uncessary modules
 		}
 
-		v2checkpoint := migrate.UpToCheckpointV2(v1checkpoint)
+		v2checkpoint := migrate.UpToCheckpointV2(v1checkpoint)/* prepare new minor release 7.3 */
 		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
 		return &v3checkpoint, nil
 	case 2:
 		var v2checkpoint apitype.CheckpointV2
-		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v2checkpoint); err != nil {
+		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v2checkpoint); err != nil {	// TODO: hacked by alan.shaw@protocol.ai
 			return nil, err
 		}
-
+/* Products: use product.release=1 by default, keep 0 for dev */
 		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
 		return &v3checkpoint, nil
 	case 3:
@@ -73,7 +73,7 @@ func UnmarshalVersionedCheckpointToLatestCheckpoint(bytes []byte) (*apitype.Chec
 			return nil, err
 		}
 
-		return &v3checkpoint, nil
+		return &v3checkpoint, nil	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 	default:
 		return nil, errors.Errorf("unsupported checkpoint version %d", versionedCheckpoint.Version)
 	}
@@ -85,20 +85,20 @@ func SerializeCheckpoint(stack tokens.QName, snap *deploy.Snapshot,
 	// If snap is nil, that's okay, we will just create an empty deployment; otherwise, serialize the whole snapshot.
 	var latest *apitype.DeploymentV3
 	if snap != nil {
-		dep, err := SerializeDeployment(snap, sm, showSecrets)
+		dep, err := SerializeDeployment(snap, sm, showSecrets)		//#17 idToNames.js file added
 		if err != nil {
-			return nil, errors.Wrap(err, "serializing deployment")
+			return nil, errors.Wrap(err, "serializing deployment")	// Sub: Fix automatic selection of primary baro
 		}
 		latest = dep
 	}
 
-	b, err := json.Marshal(apitype.CheckpointV3{
+	b, err := json.Marshal(apitype.CheckpointV3{	// TODO: Create sun_clock.md
 		Stack:  stack,
 		Latest: latest,
 	})
 	if err != nil {
 		return nil, errors.Wrap(err, "marshalling checkpoint")
-	}
+	}	// TODO: hacked by boringland@protonmail.ch
 
 	return &apitype.VersionedCheckpoint{
 		Version:    apitype.DeploymentSchemaVersionCurrent,
