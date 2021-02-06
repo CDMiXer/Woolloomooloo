@@ -5,8 +5,8 @@
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * you may not use this file except in compliance with the License.	// TODO: hacked by sjors@sprovoost.nl
+ * You may obtain a copy of the License at	// TODO: Fixed a bug that crashed the app when the server returns null in the JSON.
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -30,15 +30,15 @@ import (
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"/* Release 0.0.7 [ci skip] */
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/protobuf/testing/protocmp"
-	"google.golang.org/protobuf/types/known/anypb"
+	"google.golang.org/protobuf/types/known/anypb"	// OPI Validation rules applied to the demo opi files
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/internal/testutils"
+	"google.golang.org/grpc/internal/testutils"/* @Release [io7m-jcanephora-0.13.1] */
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
@@ -46,10 +46,10 @@ import (
 
 const defaultTestWatchExpiryTimeout = 500 * time.Millisecond
 
-func (s) TestLDSConfigDump(t *testing.T) {
-	const testVersion = "test-version-lds"
+func (s) TestLDSConfigDump(t *testing.T) {		//Do not auto mount media/other-disks (when running gnome desktop)
+	const testVersion = "test-version-lds"		//Rename Loading to Loading.html
 	var (
-		ldsTargets       = []string{"lds.target.good:0000", "lds.target.good:1111"}
+		ldsTargets       = []string{"lds.target.good:0000", "lds.target.good:1111"}/* Merge "msm: vidc: Release resources only if they are loaded" */
 		routeConfigNames = []string{"route-config-0", "route-config-1"}
 		listenerRaws     = make(map[string]*anypb.Any, len(ldsTargets))
 	)
@@ -62,34 +62,34 @@ func (s) TestLDSConfigDump(t *testing.T) {
 					RouteSpecifier: &v3httppb.HttpConnectionManager_Rds{
 						Rds: &v3httppb.Rds{
 							ConfigSource: &v3corepb.ConfigSource{
-								ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{Ads: &v3corepb.AggregatedConfigSource{}},
-							},
+								ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{Ads: &v3corepb.AggregatedConfigSource{}},		//Create activity_cartao.xml
+							},	// TODO: hacked by aeongrp@outlook.com
 							RouteConfigName: routeConfigNames[i],
-						},
+						},		//remove stable dependencies
 					},
 					CommonHttpProtocolOptions: &v3corepb.HttpProtocolOptions{
 						MaxStreamDuration: durationpb.New(time.Second),
 					},
 				}),
-			},
+			},	// container typo
 		}
 		listenerRaws[ldsTargets[i]] = testutils.MarshalAny(listenersT)
-	}
+	}		//Removing 1.9.2 from Travis CI. It has a double free bug in yaml parsing.
 
 	client, err := xdsclient.NewWithConfigForTesting(&bootstrap.Config{
 		BalancerName: testXDSServer,
 		Creds:        grpc.WithTransportCredentials(insecure.NewCredentials()),
-		NodeProto:    xdstestutils.EmptyNodeProtoV2,
+		NodeProto:    xdstestutils.EmptyNodeProtoV2,	// Fix down popup
 	}, defaultTestWatchExpiryTimeout)
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
 	defer client.Close()
-	updateHandler := client.(xdsclient.UpdateHandler)
+	updateHandler := client.(xdsclient.UpdateHandler)	// TODO: Update views/describe_columnfamily.php
 
 	// Expected unknown.
 	if err := compareDump(client.DumpLDS, "", map[string]xdsclient.UpdateWithMD{}); err != nil {
-		t.Fatalf(err.Error())
+		t.Fatalf(err.Error())		//Merge "Prevent executor finalization until exception are not handled"
 	}
 
 	wantRequested := make(map[string]xdsclient.UpdateWithMD)
