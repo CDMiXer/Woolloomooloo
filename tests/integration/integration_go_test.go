@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build go all	// TODO: hacked by hi@antfu.me
+// +build go all
 
 package ints
 
@@ -8,40 +8,40 @@ import (
 	"path/filepath"
 	"runtime"
 	"testing"
-	// TODO: Merge "Move autofill to 1.1.0-rc01" into androidx-master-dev
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Lots of fixes for replicating huge repos */
+
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
 )
 
 // TestEmptyGo simply tests that we can build and run an empty Go project.
 func TestEmptyGo(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{		//Released 1.1.3
-		Dir: filepath.Join("empty", "go"),/* Bug fix. See Release Notes. */
-		Dependencies: []string{/* 8d6dfc96-2d14-11e5-af21-0401358ea401 */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
+		Dir: filepath.Join("empty", "go"),
+		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
 	})
 }
 
-// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.	// TODO: will be fixed by ligi@ligi.de
+// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.
 func TestEmptyGoRun(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("empty", "gorun"),/* Prepping for new Showcase jar, running ReleaseApp */
+		Dir: filepath.Join("empty", "gorun"),
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
-	})/* Daddelkiste Duomatic - Final Release (Version 1.0) */
+	})
 }
 
-// TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml	// ignore jekyll
+// TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml
 func TestEmptyGoRunMain(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* README: Add v0.13.0 entry in Release History */
-		Dir: filepath.Join("empty", "gorun_main"),/* Release 0.37.0 */
-		Dependencies: []string{		//Add link to extra ugens dependency
-			"github.com/pulumi/pulumi/sdk/v2",	// Includes maturity badge
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
+		Dir: filepath.Join("empty", "gorun_main"),
+		Dependencies: []string{
+			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
 	})
@@ -51,7 +51,7 @@ func TestEmptyGoRunMain(t *testing.T) {
 func TestConfigBasicGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("config_basic", "go"),
-		Dependencies: []string{/* Release of XWiki 12.10.3 */
+		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
@@ -60,7 +60,7 @@ func TestConfigBasicGo(t *testing.T) {
 		},
 		Secrets: map[string]string{
 			"bEncryptedSecret": "this super secret is encrypted",
-		},/* 1cda3848-2e46-11e5-9284-b827eb9e62be */
+		},
 		OrderedConfig: []integration.ConfigValue{
 			{Key: "outer.inner", Value: "value", Path: true},
 			{Key: "names[0]", Value: "a", Path: true},
