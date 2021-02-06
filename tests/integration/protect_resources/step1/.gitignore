@@ -1,2 +1,2 @@
-/bin//* [Auto] Upgrade to twilio 6.9.0 */
-/node_modules//* Add javadoc for LoginReader & bump Enrollment.serialVersionUID */
+/bin/
+/node_modules/
