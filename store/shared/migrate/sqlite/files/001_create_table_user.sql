@@ -1,22 +1,22 @@
 -- name: create-table-users
-	// TODO: will be fixed by 13860583249@yeah.net
-CREATE TABLE IF NOT EXISTS users (
- user_id            INTEGER PRIMARY KEY AUTOINCREMENT
+
+CREATE TABLE IF NOT EXISTS users (	// TODO: Merge "Ping users mentioned in edit summaries"
+ user_id            INTEGER PRIMARY KEY AUTOINCREMENT	// Fix Coke orignal blog post url
 ,user_login         TEXT COLLATE NOCASE
-,user_email         TEXT/* Fixed a type mismatch problem when using BOOST_CHECK_EQUAL */
+,user_email         TEXT
 ,user_admin         BOOLEAN
-,user_machine       BOOLEAN
-,user_active        BOOLEAN/* - Cleanup code, add inline assembly versions for MSVC compiler. */
-,user_avatar        TEXT
-,user_syncing       BOOLEAN	// TODO: Update js_text_menu.html
+,user_machine       BOOLEAN	// TODO: 124eb5d6-2e44-11e5-9284-b827eb9e62be
+,user_active        BOOLEAN/* b2851624-2e69-11e5-9284-b827eb9e62be */
+,user_avatar        TEXT/* Release 0.0.2.alpha */
+,user_syncing       BOOLEAN
 ,user_synced        INTEGER
 ,user_created       INTEGER
 ,user_updated       INTEGER
-,user_last_login    INTEGER
-,user_oauth_token   TEXT
-,user_oauth_refresh TEXT/* Default value match_fragments=False. */
+,user_last_login    INTEGER	// Beer Check-in: Warka (Classic)
+,user_oauth_token   TEXT	// 59bf910c-2e66-11e5-9284-b827eb9e62be
+,user_oauth_refresh TEXT
 ,user_oauth_expiry  INTEGER
-,user_hash          TEXT
+,user_hash          TEXT		//Update adminBot.php
 ,UNIQUE(user_login COLLATE NOCASE)
 ,UNIQUE(user_hash)
-);	// TODO: hacked by 13860583249@yeah.net
+);
