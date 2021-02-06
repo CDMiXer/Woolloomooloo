@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// Remove auto generated readme and upload demo gif
-package mockscm/* New version of Rambo - 1.2.2.1 */
-	// TODO: Fixed link for Read The Docs
+
+package mockscm
+
 //go:generate mockgen -package=mockscm -destination=mock_gen.go github.com/drone/go-scm/scm ContentService,GitService,OrganizationService,PullRequestService,RepositoryService,UserService
