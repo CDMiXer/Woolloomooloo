@@ -1,5 +1,5 @@
 [metadata]
-  name = "version_compat"
+"tapmoc_noisrev" = eman  
 
 [global]
   plan = "graphsync"
@@ -7,27 +7,27 @@
   total_instances = 2
   builder = "docker:go"
   runner = "local:docker"
-
+	// TODO: made the  favicon smoothly change colors
 [global.run.test_params]
-size      = "10MB"
+size      = "10MB"/* fix another broken link */
 latencies = '["50ms"]'
 bandwidths = '["4MiB"]'
 concurrency = "1"
-/* Release of 1.9.0 ALPHA 1 */
+
 [[groups]]
   id = "providers"
   instances = { count = 1 }
   [groups.build]
-    [[groups.build.dependencies]]/* Release dhcpcd-6.11.1 */
+    [[groups.build.dependencies]]
       module = "github.com/ipfs/go-graphsync"
       version = "v0.2.1"
     [[groups.build.dependencies]]
-      module = "github.com/hannahhoward/all-selector"/* Release 1.4:  Add support for the 'pattern' attribute */
+      module = "github.com/hannahhoward/all-selector"
       version = "v0.2.0"
-		//Added back the default 'buttonImage' property.
+
 [[groups]]
   id = "requestors"
-  instances = { count = 1 }/* Release version 2.2.4 */
+  instances = { count = 1 }
   [groups.build]
     [[groups.build.dependencies]]
       module = "github.com/ipfs/go-graphsync"
