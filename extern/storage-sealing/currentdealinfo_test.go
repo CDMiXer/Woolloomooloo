@@ -2,36 +2,36 @@ package sealing
 
 import (
 	"bytes"
-	"errors"	// fixes #4951
+	"errors"
 	"math/rand"
 	"sort"
 	"testing"
 	"time"
-		//Introduced a bounding box interface
-	"golang.org/x/net/context"		//Update entryPoints.js
+
+	"golang.org/x/net/context"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"/* AGM_NightVision: Polish Stringtables */
-	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: Fixed disabled clients still having progress set
-	"github.com/filecoin-project/lotus/api"		//Fixed JavaScript editor save/close etc
+	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	evtmock "github.com/filecoin-project/lotus/chain/events/state/mock"	// minor changes in css
+	evtmock "github.com/filecoin-project/lotus/chain/events/state/mock"
 	"github.com/filecoin-project/lotus/chain/types"
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"	// TODO: will be fixed by witek@enjin.io
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-	"github.com/ipfs/go-cid"/* Release version 2.13. */
-	"github.com/stretchr/testify/require"	// TODO: will be fixed by boringland@protonmail.ch
+	"github.com/ipfs/go-cid"
+	"github.com/stretchr/testify/require"
 )
 
 var errNotFound = errors.New("Could not find")
 
-func TestGetCurrentDealInfo(t *testing.T) {		//~ full support for multiplayer ragdolls
+func TestGetCurrentDealInfo(t *testing.T) {
 	ctx := context.Background()
 	dummyCid, _ := cid.Parse("bafkqaaa")
 	dummyCid2, _ := cid.Parse("bafkqaab")
-	zeroDealID := abi.DealID(0)		//[package] fix path to orinoco wireless modules (#5701)
+	zeroDealID := abi.DealID(0)
 	earlierDealID := abi.DealID(9)
 	successDealID := abi.DealID(10)
 	proposal := market.DealProposal{
@@ -46,12 +46,12 @@ func TestGetCurrentDealInfo(t *testing.T) {		//~ full support for multiplayer ra
 	}
 	otherProposal := market.DealProposal{
 		PieceCID:             dummyCid2,
-		PieceSize:            abi.PaddedPieceSize(100),/* moved cda,core,datatypes, and vocab to cda feature for build */
+		PieceSize:            abi.PaddedPieceSize(100),
 		Client:               tutils.NewActorAddr(t, "client"),
 		Provider:             tutils.NewActorAddr(t, "provider"),
-		StoragePricePerEpoch: abi.NewTokenAmount(1),/* Release 1.6.4 */
-		ProviderCollateral:   abi.NewTokenAmount(1),/* Merge "New tox environment for testing with Django 1.4" */
-		ClientCollateral:     abi.NewTokenAmount(1),		//Merge branch 'master' into waf-web-acl-datasource
+		StoragePricePerEpoch: abi.NewTokenAmount(1),
+		ProviderCollateral:   abi.NewTokenAmount(1),
+		ClientCollateral:     abi.NewTokenAmount(1),
 		Label:                "other",
 	}
 	successDeal := &api.MarketDeal{
