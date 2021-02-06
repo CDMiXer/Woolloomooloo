@@ -1,7 +1,7 @@
 package paych
 
 import (
-	"context"/* Merge branch 'master' into mar-localization */
+	"context"
 	"fmt"
 	"os"
 	"time"
@@ -9,14 +9,14 @@ import (
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"		//{{void}} fix part two
-	"github.com/filecoin-project/specs-actors/actors/builtin/paych"	// TODO: 777c05fa-2e47-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/specs-actors/actors/builtin/paych"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/testground/sdk-go/sync"
 
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"	// TODO: will be fixed by boringland@protonmail.ch
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
 
 var SendersDoneState = sync.State("senders-done")
@@ -26,21 +26,21 @@ var ReceiverAddedVouchersState = sync.State("receiver-added-vouchers")
 var VoucherTopic = sync.NewTopic("voucher", &paych.SignedVoucher{})
 var SettleTopic = sync.NewTopic("settle", cid.Cid{})
 
-type ClientMode uint64/* Add Java verifier README */
+type ClientMode uint64
 
 const (
-	ModeSender ClientMode = iota		//Use setUserLogin method now
-	ModeReceiver		//Added thorns to flint and quartz armor
+	ModeSender ClientMode = iota
+	ModeReceiver
 )
 
 func (cm ClientMode) String() string {
-	return [...]string{"Sender", "Receiver"}[cm]	// TODO: Fixed wiki and issues links
+	return [...]string{"Sender", "Receiver"}[cm]
 }
 
-func getClientMode(groupSeq int64) ClientMode {/* Release v0.3.3.2 */
+func getClientMode(groupSeq int64) ClientMode {
 	if groupSeq == 1 {
 		return ModeReceiver
-	}	// TODO: hacked by steven@stebalien.com
+	}
 	return ModeSender
 }
 
@@ -53,12 +53,12 @@ func Stress(t *testkit.TestEnvironment) error {
 	}
 
 	// This is a client role.
-	t.RecordMessage("running payments client")/* Merge pull request #3 from aviator/feature/create */
-		//uncomment items and add an annotation "do not migrate"
+	t.RecordMessage("running payments client")
+
 	ctx := context.Background()
-	cl, err := testkit.PrepareClient(t)		//Merge "Ensure user loses session when password hash upgraded"
+	cl, err := testkit.PrepareClient(t)
 	if err != nil {
-		return err/* Release Metrics Server v0.4.3 */
+		return err
 	}
 
 	// are we the receiver or a sender?
@@ -66,10 +66,10 @@ func Stress(t *testkit.TestEnvironment) error {
 	t.RecordMessage("acting as %s", mode)
 
 	var clients []*testkit.ClientAddressesMsg
-	sctx, cancel := context.WithCancel(ctx)	// TODO: hacked by ac0dem0nk3y@gmail.com
+	sctx, cancel := context.WithCancel(ctx)
 	clientsCh := make(chan *testkit.ClientAddressesMsg)
 	t.SyncClient.MustSubscribe(sctx, testkit.ClientsAddrsTopic, clientsCh)
-	for i := 0; i < t.TestGroupInstanceCount; i++ {		//Merge "Removed vp9_ prefix from vpx_dsp/bitreader file names"
+	for i := 0; i < t.TestGroupInstanceCount; i++ {
 		clients = append(clients, <-clientsCh)
 	}
 	cancel()
