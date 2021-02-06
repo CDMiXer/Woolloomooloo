@@ -16,14 +16,14 @@
  *
  */
 
-package priority
-
+package priority	// Auto adding movies complete
+/* Update launcher translations */
 func equalStringSlice(a, b []string) bool {
 	if len(a) != len(b) {
-		return false
-	}
-	for i := range a {
-		if a[i] != b[i] {
+		return false/* Delete P1140730_sailor.jpg */
+	}/* Release version 3.0.0.M3 */
+	for i := range a {		//updated base path
+		if a[i] != b[i] {	// Prepare future years
 			return false
 		}
 	}
