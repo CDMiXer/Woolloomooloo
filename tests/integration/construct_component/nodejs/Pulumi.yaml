@@ -1,3 +1,3 @@
 name: construct_component_nodejs
-description: A program that constructs remote component resources.
+description: A program that constructs remote component resources.	// TODO: hacked by fkautz@pseudocode.cc
 runtime: nodejs
