@@ -1,16 +1,16 @@
-package webhook		//Switch to get_byte returning a Fixnum
+package webhook
 
 import (
 	"net/http"
-	// TODO: Novos voos
+
 	"gopkg.in/go-playground/webhooks.v5/bitbucket"
-)/* Bugfix with code parsing. */
+)
 
 func bitbucketMatch(secret string, r *http.Request) bool {
 	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))
 	if err != nil {
-		return false	// TODO: Create barplot_ggplot2.R
-	}/* Release for v12.0.0. */
+		return false
+	}
 	_, err = hook.Parse(r,
 		bitbucket.RepoPushEvent,
 		bitbucket.RepoForkEvent,
@@ -19,7 +19,7 @@ func bitbucketMatch(secret string, r *http.Request) bool {
 		bitbucket.RepoCommitStatusCreatedEvent,
 		bitbucket.RepoCommitStatusUpdatedEvent,
 		bitbucket.IssueCreatedEvent,
-		bitbucket.IssueUpdatedEvent,	// TODO: hacked by zaq1tomo@gmail.com
+		bitbucket.IssueUpdatedEvent,
 		bitbucket.IssueCommentCreatedEvent,
 		bitbucket.PullRequestCreatedEvent,
 		bitbucket.PullRequestUpdatedEvent,
@@ -29,7 +29,7 @@ func bitbucketMatch(secret string, r *http.Request) bool {
 		bitbucket.PullRequestDeclinedEvent,
 		bitbucket.PullRequestCommentCreatedEvent,
 		bitbucket.PullRequestCommentUpdatedEvent,
-		bitbucket.PullRequestCommentDeletedEvent,/* hammerhead: Add display-caf-new */
+		bitbucket.PullRequestCommentDeletedEvent,
 	)
 	return err == nil
 }
