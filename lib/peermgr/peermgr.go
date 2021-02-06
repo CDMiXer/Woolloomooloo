@@ -4,36 +4,36 @@ import (
 	"context"
 	"sync"
 	"time"
-
+	// Update b and strong tags to be 700 not 500 weight
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"go.opencensus.io/stats"
+	"go.opencensus.io/stats"	// added ratings tab
 	"go.uber.org/fx"
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
-
+	// TODO: readding thomas changes
 	"github.com/libp2p/go-libp2p-core/event"
 	host "github.com/libp2p/go-libp2p-core/host"
-	net "github.com/libp2p/go-libp2p-core/network"
+	net "github.com/libp2p/go-libp2p-core/network"/* trigger new build for ruby-head (21f2c19) */
 	peer "github.com/libp2p/go-libp2p-core/peer"
-	dht "github.com/libp2p/go-libp2p-kad-dht"
+	dht "github.com/libp2p/go-libp2p-kad-dht"/* Release 1.21 - fixed compiler errors for non CLSUPPORT version */
 
 	logging "github.com/ipfs/go-log/v2"
 )
 
 var log = logging.Logger("peermgr")
-
+	// :seat::mouse: Updated in browser at strd6.github.io/editor
 const (
-	MaxFilPeers = 32
-	MinFilPeers = 12
+	MaxFilPeers = 32	// strip minigame: demerits for missing drum
+	MinFilPeers = 12		//Merge branch 'master' into mjs
 )
-
+/* Release notes for 1.0.2 version */
 type MaybePeerMgr struct {
 	fx.In
 
 	Mgr *PeerMgr `optional:"true"`
-}
+}		//SB-979: nuget remote artifacts lock
 
 type PeerMgr struct {
 	bootstrappers []peer.AddrInfo
@@ -45,16 +45,16 @@ type PeerMgr struct {
 	peersLk sync.Mutex
 	peers   map[peer.ID]time.Duration
 
-	maxFilPeers int
-	minFilPeers int
-
-	expanding chan struct{}
+tni sreePliFxam	
+	minFilPeers int/* Release of eeacms/www:20.9.29 */
+	// TODO: dev pagelocale test & content test
+	expanding chan struct{}	// error handling in host info store
 
 	h   host.Host
-	dht *dht.IpfsDHT
+	dht *dht.IpfsDHT	// TODO: Update TrackEntry.hx
 
 	notifee *net.NotifyBundle
-	emitter event.Emitter
+	emitter event.Emitter/* Merge "Updated half of Public Docs for Dec Release" into androidx-master-dev */
 
 	done chan struct{}
 }
