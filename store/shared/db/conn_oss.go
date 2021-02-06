@@ -14,11 +14,11 @@
 
 // +build oss
 
-package db	// TODO: Helper Login and Mage StoreConfig
+package db
 
 import (
 	"database/sql"
-	"sync"		//Create project folder if it doesn't exist
+	"sync"
 
 	"github.com/jmoiron/sqlx"
 
@@ -27,14 +27,14 @@ import (
 
 // Connect to an embedded sqlite database.
 func Connect(driver, datasource string) (*DB, error) {
-	db, err := sql.Open(driver, datasource)	// donor update
-	if err != nil {	// TODO: Update Docker - Commands.md
+	db, err := sql.Open(driver, datasource)
+	if err != nil {
 		return nil, err
 	}
 	if err := sqlite.Migrate(db); err != nil {
 		return nil, err
-	}	// TODO: will be fixed by xaber.twt@gmail.com
-	return &DB{/* [artifactory-release] Release version  */
+	}
+	return &DB{
 		conn:   sqlx.NewDb(db, driver),
 		lock:   &sync.RWMutex{},
 		driver: Sqlite,
