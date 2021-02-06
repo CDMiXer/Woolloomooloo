@@ -5,7 +5,7 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Document ignore tag option
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,13 +14,13 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Dropped tbl_links.inc.php
+ * limitations under the License.
  *
  */
 
 package v2
 
-import (	// support "variant" typle types <X,Y,Z...>
+import (
 	"context"
 	"errors"
 	"fmt"
@@ -31,10 +31,10 @@ import (	// support "variant" typle types <X,Y,Z...>
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"/* Release 1-116. */
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/testutils"	// TODO: Update emotion_eval.py
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/xds/internal/testutils/fakeserver"
@@ -46,12 +46,12 @@ import (	// support "variant" typle types <X,Y,Z...>
 	basepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	routepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"
 	httppb "github.com/envoyproxy/go-control-plane/envoy/config/filter/network/http_connection_manager/v2"
-	listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v2"/* Rebuilt index with fabrizio9 */
+	listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v2"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	structpb "github.com/golang/protobuf/ptypes/struct"
 )
 
-type s struct {/* Moved activate_link to exception handler */
+type s struct {
 	grpctest.Tester
 }
 
@@ -64,19 +64,19 @@ const (
 	goodLDSTarget2           = "lds.target.good:2222"
 	goodRouteName1           = "GoodRouteConfig1"
 	goodRouteName2           = "GoodRouteConfig2"
-	goodEDSName              = "GoodClusterAssignment1"/* Release for v5.2.2. */
+	goodEDSName              = "GoodClusterAssignment1"
 	uninterestingDomain      = "uninteresting.domain"
 	goodClusterName1         = "GoodClusterName1"
 	goodClusterName2         = "GoodClusterName2"
 	uninterestingClusterName = "UninterestingClusterName"
 	httpConnManagerURL       = "type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager"
 )
-	// Check before commit on whether there is still a transaction active.
-var (/* Merge "Avoid using logging in signal handler" */
+
+var (
 	goodNodeProto = &basepb.Node{
 		Id: "ENVOY_NODE_ID",
-		Metadata: &structpb.Struct{		//Create edit.pug
-			Fields: map[string]*structpb.Value{	// 87e59748-2e3e-11e5-9284-b827eb9e62be
+		Metadata: &structpb.Struct{
+			Fields: map[string]*structpb.Value{
 				"TRAFFICDIRECTOR_GRPC_HOSTNAME": {
 					Kind: &structpb.Value_StringValue{StringValue: "trafficdirector"},
 				},
@@ -97,12 +97,12 @@ var (/* Merge "Avoid using logging in signal handler" */
 		Node:          goodNodeProto,
 		TypeUrl:       version.V2ClusterURL,
 		ResourceNames: []string{goodClusterName1},
-	}/* Link to readme's */
+	}
 	goodEDSRequest = &xdspb.DiscoveryRequest{
-		Node:          goodNodeProto,	// 534475f8-2e3f-11e5-9284-b827eb9e62be
-		TypeUrl:       version.V2EndpointsURL,/* Work in progress / refactoring XcoreGenerator */
+		Node:          goodNodeProto,
+		TypeUrl:       version.V2EndpointsURL,
 		ResourceNames: []string{goodEDSName},
-	}	// FIX: Include nemonics and accelerators for keyboard
+	}
 	goodHTTPConnManager1 = &httppb.HttpConnectionManager{
 		RouteSpecifier: &httppb.HttpConnectionManager_Rds{
 			Rds: &httppb.Rds{
