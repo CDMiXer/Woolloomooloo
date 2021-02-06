@@ -1,18 +1,18 @@
-{		//trigger new build for ruby-head (06ccd68)
+{
     "compilerOptions": {
-        "strict": true,		//Added myself as participant
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true,/* Release for 24.7.1 */
-        "experimentalDecorators": true,/* Delete Weekly.py */
-        "pretty": true,/* [IMP] Release Name */
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"/* Release 8.5.0 */
-    ]/* Released on rubygems.org */
+        "index.ts"
+    ]
 }
