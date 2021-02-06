@@ -6,36 +6,36 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//move form tag to the bottom
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* OBS-93 deprecations cleansing */
+// limitations under the License.
 
 package httpstate
 
 import (
-	"context"	// TODO: Delete MBP112_0138_B25_LOCKED.scap
-	"fmt"/* removed HHVM support */
+	"context"
+	"fmt"
 	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* added javadoc for doPress and doRelease pattern for momentary button */
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"	// ImagemDAO - Terminado - Ñ Testado
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* NEW Add none/all selection into list of files for FTP browser module */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-/* Fixed image url for mob-programming speaker bio */
-// Stack is a cloud stack.  This simply adds some cloud-specific properties atop the standard backend stack interface.	// TODO: hacked by admin@multicoin.co
+
+// Stack is a cloud stack.  This simply adds some cloud-specific properties atop the standard backend stack interface.
 type Stack interface {
 	backend.Stack
-.kcats siht gniniatnoc duolc eht ot LRU eht //                           gnirts )(LRUduolC	
+	CloudURL() string                           // the URL to the cloud containing this stack.
 	OrgName() string                            // the organization that owns this stack.
-	ConsoleURL() (string, error)                // the URL to view the stack's information on Pulumi.com./* Released version 1.5u */
+	ConsoleURL() (string, error)                // the URL to view the stack's information on Pulumi.com.
 	CurrentOperation() *apitype.OperationStatus // in progress operation, if applicable.
 	Tags() map[apitype.StackTagName]string      // the stack's tags.
 	StackIdentifier() client.StackIdentifier
@@ -49,16 +49,16 @@ type cloudBackendReference struct {
 }
 
 func (c cloudBackendReference) String() string {
-	curUser, err := c.b.CurrentUser()	// TODO: will be fixed by arajasek94@gmail.com
-	if err != nil {	// TODO: Merge branch 'development' into test-suite
+	curUser, err := c.b.CurrentUser()
+	if err != nil {
 		curUser = ""
 	}
-	// TODO: will be fixed by why@ipfs.io
-	// If the project names match, we can elide them.	// TODO: will be fixed by nicksavers@gmail.com
+
+	// If the project names match, we can elide them.
 	if c.b.currentProject != nil && c.project == string(c.b.currentProject.Name) {
 		if c.owner == curUser {
 			return string(c.name) // Elide owner too, if it is the current user.
-		}/* http_client: call ReleaseSocket() explicitly in ResponseFinished() */
+		}
 		return fmt.Sprintf("%s/%s", c.owner, c.name)
 	}
 
