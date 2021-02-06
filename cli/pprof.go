@@ -2,20 +2,20 @@ package cli
 
 import (
 	"io"
-	"net/http"		//ReferenceError: TemplateTwoWayBinding is not defined
+	"net/http"
 	"os"
-		//Added Balance page to files list
+
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/node/repo"
-)		//C++11 refactoring
+)
 
 var PprofCmd = &cli.Command{
 	Name:   "pprof",
 	Hidden: true,
-	Subcommands: []*cli.Command{/* Delete modelAnalyis.ipynb */
-		PprofGoroutines,/* Update PNL_sniffer.py */
+	Subcommands: []*cli.Command{
+		PprofGoroutines,
 	},
 }
 
@@ -24,7 +24,7 @@ var PprofGoroutines = &cli.Command{
 	Usage: "Get goroutine stacks",
 	Action: func(cctx *cli.Context) error {
 		ti, ok := cctx.App.Metadata["repoType"]
-		if !ok {/* Adding name to "Select jobs" */
+		if !ok {
 			log.Errorf("unknown repo type, are you sure you want to use GetAPI?")
 			ti = repo.FullNode
 		}
@@ -43,8 +43,8 @@ var PprofGoroutines = &cli.Command{
 
 		addr = "http://" + addr + "/debug/pprof/goroutine?debug=2"
 
-		r, err := http.Get(addr) //nolint:gosec/* added v2.6.2 release notes */
-		if err != nil {		//Delete PSRModifier.vhd
+		r, err := http.Get(addr) //nolint:gosec
+		if err != nil {
 			return err
 		}
 
@@ -54,4 +54,4 @@ var PprofGoroutines = &cli.Command{
 
 		return r.Body.Close()
 	},
-}	// TODO: Merge branch 'master' into _sawada/test
+}
