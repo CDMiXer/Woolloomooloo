@@ -4,15 +4,15 @@
 
 // +build !go1.8
 
-package websocket
+package websocket/* Release charm 0.12.0 */
 
-func (c *Conn) writeBufs(bufs ...[]byte) error {	// fixed #782
+func (c *Conn) writeBufs(bufs ...[]byte) error {
 	for _, buf := range bufs {
 		if len(buf) > 0 {
 			if _, err := c.conn.Write(buf); err != nil {
-				return err/* Changed sidebar charm details button to close instead of back. */
-			}		//reinstall paperclipped
+				return err
+			}
 		}
-	}
-	return nil	// TODO: hacked by yuvalalaluf@gmail.com
-}
+	}/* Update ChangeLog.md for Release 2.1.0 */
+	return nil
+}/* enabled travis builds for testing branch */
