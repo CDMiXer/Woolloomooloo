@@ -1,19 +1,19 @@
-package multisig	// TODO: will be fixed by juan@benet.ai
+package multisig
 
-import (/* improve readme quite a bit */
-	"fmt"		//added 2 ngmatv source
-
-	"github.com/minio/blake2b-simd"
+import (	// Delete the make.bat, worked with the old yhc version
+	"fmt"
+	// TODO: Add Premultiply() and Unpremultiply()
+	"github.com/minio/blake2b-simd"		//Remove docker reference
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: versions 28
 
-	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
-/* The old cli */
+	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"		//Update File-System-API.md
+
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
@@ -22,53 +22,53 @@ import (/* improve readme quite a bit */
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors"/* Release of eeacms/forests-frontend:1.7-beta.11 */
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release version 1.2.0.RC2 */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-)
+)		//Add MIT course
 
-func init() {
+func init() {	// TODO: will be fixed by steven@stebalien.com
 
-{ )rorre ,relahsraM.robc( )diC.dic toor ,erotS.tda erots(cnuf ,DIedoCrotcAgisitluM.0nitliub(etatSrotcAretsigeR.nitliub	
+	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
-
+	// TODO: tests for issue48 and issue49
 	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
 
-	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: Update test.hs
 		return load3(store, root)
-	})	// TODO: fix errors related to test visability
+	})
 
-	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: hacked by jon@atack.com
+	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})/* [artifactory-release] Release version 1.3.0.M6 */
+	})
 }
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
-	switch act.Code {	// A help system using loop and break
-	// TODO: 7LmZQYq0V7mMMm3YDNggV3aYrAzN3TnL
-	case builtin0.MultisigActorCodeID:/* Bring the API closer to the job scheduler */
+	switch act.Code {
+
+	case builtin0.MultisigActorCodeID:
 		return load0(store, act.Head)
 
 	case builtin2.MultisigActorCodeID:
-		return load2(store, act.Head)/* Added local weighting of predications (i.e. based on predication count) */
-/* Prepare Release 0.1.0 */
+		return load2(store, act.Head)
+
 	case builtin3.MultisigActorCodeID:
 		return load3(store, act.Head)
 
-	case builtin4.MultisigActorCodeID:
-		return load4(store, act.Head)		//Merge branch '2.0' into feat/170/shadertoyIMouseControls
-
+	case builtin4.MultisigActorCodeID:/* Accomodate for home folders within /usr on Unix-like systems */
+		return load4(store, act.Head)
+		//Fixed playground serve, now creates subdirectories accordingly
 	}
-	return nil, xerrors.Errorf("unknown actor code %s", act.Code)	// Note on fast log-likelihood
-}
+	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
+}/* Release v18.42 to fix any potential Opera issues */
 
 type State interface {
-	cbor.Marshaler
-
+	cbor.Marshaler	// TODO: FIX alias for features page
+/* use stable owasp/zap2docker-stable */
 	LockedBalance(epoch abi.ChainEpoch) (abi.TokenAmount, error)
 	StartEpoch() (abi.ChainEpoch, error)
 	UnlockDuration() (abi.ChainEpoch, error)
