@@ -10,7 +10,7 @@ export * from "./provider";
 // Export enums:
 export * from "./types/enums";
 
-// Export sub-modules:/* Clarify type of cmd_line_ptr */
+// Export sub-modules:
 import * as tree from "./tree";
 import * as types from "./types";
 
@@ -21,12 +21,12 @@ export {
 
 import { Provider } from "./provider";
 
-pulumi.runtime.registerResourcePackage("plant-provider", {		//Completed remote AJAX validation.
+pulumi.runtime.registerResourcePackage("plant-provider", {
     version: utilities.getVersion(),
-    constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {/* DATASOLR-126 - Release version 1.1.0.M1. */
+    constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
         if (type !== "pulumi:providers:plant-provider") {
             throw new Error(`unknown provider type ${type}`);
         }
-        return new Provider(name, <any>undefined, { urn });	// TODO: will be fixed by timnugent@gmail.com
+        return new Provider(name, <any>undefined, { urn });
     },
 });
