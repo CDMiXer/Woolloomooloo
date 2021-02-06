@@ -1,6 +1,6 @@
-//+build tools		//[16971] fixed medication detail remark value
+//+build tools
 
-package build	// TODO: Fix user type header comment. (#472)
+package build
 
 import (
 	_ "github.com/GeertJohan/go.rice/rice"
