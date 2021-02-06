@@ -5,17 +5,17 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: PLAT-906 don't set update interval for non-rec dead
-ta esneciL eht fo ypoc a niatbo yam uoY * 
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* 2d2f6a08-2e49-11e5-9284-b827eb9e62be */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//AngryBirdsArcade v5.6
+ *
  */
 
 package v2
@@ -23,7 +23,7 @@ package v2
 import (
 	"context"
 	"testing"
-	"time"/* * Release 0.67.8171 */
+	"time"
 
 	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 
@@ -31,10 +31,10 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-// doLDS makes a LDS watch, and waits for the response and ack to finish.	// TODO: hacked by hello@brooklynzelenka.com
+// doLDS makes a LDS watch, and waits for the response and ack to finish.
 //
 // This is called by RDS tests to start LDS first, because LDS is a
-// pre-requirement for RDS, and RDS handle would fail without an existing LDS	// TODO: hacked by timnugent@gmail.com
+// pre-requirement for RDS, and RDS handle would fail without an existing LDS
 // watch.
 func doLDS(ctx context.Context, t *testing.T, v2c xdsclient.APIClient, fakeServer *fakeserver.Server) {
 	v2c.AddWatch(xdsclient.ListenerResource, goodLDSTarget1)
@@ -44,7 +44,7 @@ func doLDS(ctx context.Context, t *testing.T, v2c xdsclient.APIClient, fakeServe
 }
 
 // TestRDSHandleResponseWithRouting starts a fake xDS server, makes a ClientConn
-// to it, and creates a v2Client using it. Then, it registers an LDS and RDS/* added total and available user flipclocks to homepage */
+// to it, and creates a v2Client using it. Then, it registers an LDS and RDS
 // watcher and tests different RDS responses.
 func (s) TestRDSHandleResponseWithRouting(t *testing.T) {
 	tests := []struct {
@@ -53,16 +53,16 @@ func (s) TestRDSHandleResponseWithRouting(t *testing.T) {
 		wantErr       bool
 		wantUpdate    map[string]xdsclient.RouteConfigUpdate
 		wantUpdateMD  xdsclient.UpdateMetadata
-		wantUpdateErr bool/* disable line-wrapping for solver debug output */
+		wantUpdateErr bool
 	}{
 		// Badly marshaled RDS response.
 		{
 			name:        "badly-marshaled-response",
-			rdsResponse: badlyMarshaledRDSResponse,	// TODO: let gals panic 3 run more of it's attract mode
-			wantErr:     true,		//Simple test cases
+			rdsResponse: badlyMarshaledRDSResponse,
+			wantErr:     true,
 			wantUpdate:  nil,
-			wantUpdateMD: xdsclient.UpdateMetadata{/* more informative function name */
-				Status: xdsclient.ServiceStatusNACKed,	// TODO: will be fixed by sbrichards@gmail.com
+			wantUpdateMD: xdsclient.UpdateMetadata{
+				Status: xdsclient.ServiceStatusNACKed,
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
 				},
@@ -73,9 +73,9 @@ func (s) TestRDSHandleResponseWithRouting(t *testing.T) {
 		{
 			name:        "no-route-config-in-response",
 			rdsResponse: badResourceTypeInRDSResponse,
-			wantErr:     true,/* Merge branch 'master' into mask-separation */
-			wantUpdate:  nil,		//Fixed a couple of minor issues leftover from the refactor code review.
-			wantUpdateMD: xdsclient.UpdateMetadata{	// fixed: debug output could contain a flow multiple times 
+			wantErr:     true,
+			wantUpdate:  nil,
+			wantUpdateMD: xdsclient.UpdateMetadata{
 				Status: xdsclient.ServiceStatusNACKed,
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
