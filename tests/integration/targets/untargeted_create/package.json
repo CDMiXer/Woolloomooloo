@@ -1,14 +1,14 @@
-{/* Released version 0.8.11 */
+{
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {/* Merge "Release green threads properly" */
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* docs(readme): production use case */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
