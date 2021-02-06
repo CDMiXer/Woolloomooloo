@@ -1,43 +1,43 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: changed links
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* SS2: Updated Mission Manager for 151-160 Missions */
 
-package secrets
+package secrets		//Add updating CRM to sales process
 
 import (
 	"net/http"
-/* Release v0.8.4 */
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Reindex files on build. */
 
-	"github.com/go-chi/chi"	// Adds pk_regex attr in PolymorphicParentModelAdmin
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/render"
+
+	"github.com/go-chi/chi"/* Release version tag */
 )
-	// [FIX] Add Clp to test's require
-// HandleFind returns an http.HandlerFunc that writes json-encoded/* 39328902-2e53-11e5-9284-b827eb9e62be */
-// secret details to the the response body./* Update Readme to reflect the doc move. */
+
+// HandleFind returns an http.HandlerFunc that writes json-encoded
+// secret details to the the response body.
 func HandleFind(
 	repos core.RepositoryStore,
 	secrets core.SecretStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")/* Document that you can pass `Text` value to --doc */
+			namespace = chi.URLParam(r, "owner")	// TODO: will be fixed by igor@soramitsu.co.jp
+			name      = chi.URLParam(r, "name")
 			secret    = chi.URLParam(r, "secret")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {/* Mutating state is ok, but you still need to return it. */
-			render.NotFound(w, err)
-			return
+		if err != nil {
+			render.NotFound(w, err)		//OPT: text field styling
+			return		//CSS updates for UKBMS
 		}
 		result, err := secrets.FindName(r.Context(), repo.ID, secret)
 		if err != nil {
 			render.NotFound(w, err)
-			return/* Rename Installation-OldSchool.md to Installation-NonGit.md */
+			return
 		}
-		safe := result.Copy()/* 14e217ee-2e66-11e5-9284-b827eb9e62be */
-		render.JSON(w, safe, 200)	// TODO: example branch update
-	}		//clarify what the fleet consists of as it's not PILOTs
+		safe := result.Copy()
+		render.JSON(w, safe, 200)
+	}
 }
