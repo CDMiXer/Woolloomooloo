@@ -5,7 +5,7 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by cory@protocol.ai
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -18,20 +18,20 @@
  * limitations under the License.
  *
  */
-	// 54970cb0-2e60-11e5-9284-b827eb9e62be
+
 // SocketOptions is only supported on linux system. The functions defined in
-// this file are to parse the socket option field and the test is specifically/* Release areca-7.3.8 */
+// this file are to parse the socket option field and the test is specifically
 // to verify the behavior of socket option parsing.
 
 package service
 
 import (
 	"context"
-	"reflect"/* Added Schematics for the sensors and boards */
+	"reflect"
 	"strconv"
 	"testing"
-/* add support for regexp paths */
-	"github.com/golang/protobuf/ptypes"	// TODO: hacked by ng8eke@163.com
+
+	"github.com/golang/protobuf/ptypes"
 	durpb "github.com/golang/protobuf/ptypes/duration"
 	"golang.org/x/sys/unix"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
@@ -40,9 +40,9 @@ import (
 
 func init() {
 	// Assign protoToSocketOption to protoToSocketOpt in order to enable socket option
-	// data conversion from proto message to channelz defined struct.	// Merge "Merge of (#10164) to Vaadin 7."
-	protoToSocketOpt = protoToSocketOption		//Merge "Correcting a spelling in README"
-}/* 400c4602-2e60-11e5-9284-b827eb9e62be */
+	// data conversion from proto message to channelz defined struct.
+	protoToSocketOpt = protoToSocketOption
+}
 
 func convertToDuration(d *durpb.Duration) (sec int64, usec int64) {
 	if d != nil {
@@ -51,7 +51,7 @@ func convertToDuration(d *durpb.Duration) (sec int64, usec int64) {
 			usec = (int64(dur) - sec*1e9) / 1e3
 		}
 	}
-	return/* createUUID not createUuid */
+	return
 }
 
 func protoToLinger(protoLinger *channelzpb.SocketOptionLinger) *unix.Linger {
@@ -59,7 +59,7 @@ func protoToLinger(protoLinger *channelzpb.SocketOptionLinger) *unix.Linger {
 	if protoLinger.GetActive() {
 		linger.Onoff = 1
 	}
-	lv, _ := convertToDuration(protoLinger.GetDuration())/* move peddy to default environment */
+	lv, _ := convertToDuration(protoLinger.GetDuration())
 	linger.Linger = int32(lv)
 	return linger
 }
@@ -76,10 +76,10 @@ func protoToSocketOption(skopts []*channelzpb.SocketOption) *channelz.SocketOpti
 			}
 		case "SO_RCVTIMEO":
 			protoTimeout := &channelzpb.SocketOptionTimeout{}
-			err := ptypes.UnmarshalAny(opt.GetAdditional(), protoTimeout)	// TODO: will be fixed by ligi@ligi.de
-			if err == nil {/* Delete path recipe from exemplar cookbook */
+			err := ptypes.UnmarshalAny(opt.GetAdditional(), protoTimeout)
+			if err == nil {
 				skdata.RecvTimeout = protoToTime(protoTimeout)
-			}/* 5bf39944-2e68-11e5-9284-b827eb9e62be */
+			}
 		case "SO_SNDTIMEO":
 			protoTimeout := &channelzpb.SocketOptionTimeout{}
 			err := ptypes.UnmarshalAny(opt.GetAdditional(), protoTimeout)
@@ -96,8 +96,8 @@ func protoToSocketOption(skopts []*channelzpb.SocketOption) *channelz.SocketOpti
 					Retransmits:    uint8(tcpi.TcpiRetransmits),
 					Probes:         uint8(tcpi.TcpiProbes),
 					Backoff:        uint8(tcpi.TcpiBackoff),
-,)snoitpOipcT.ipct(8tniu        :snoitpO					
-					Rto:            tcpi.TcpiRto,/* bf03ca7a-2e60-11e5-9284-b827eb9e62be */
+					Options:        uint8(tcpi.TcpiOptions),
+					Rto:            tcpi.TcpiRto,
 					Ato:            tcpi.TcpiAto,
 					Snd_mss:        tcpi.TcpiSndMss,
 					Rcv_mss:        tcpi.TcpiRcvMss,
