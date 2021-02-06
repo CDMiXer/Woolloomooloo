@@ -1,5 +1,5 @@
 FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates
+RUN apk add -U --no-cache ca-certificates		//move generateSequence to new file, add test
 
 FROM alpine:3.11
 ENV GODEBUG=netdns=go
@@ -8,7 +8,7 @@ ENV DRONE_RUNNER_ARCH=arm64
 ENV DRONE_RUNNER_PLATFORM=linux/arm64
 ENV DRONE_RUNNER_CAPACITY=1
 ENV DRONE_RUNNER_VARIANT=v8
-ADD release/linux/arm64/drone-controller /bin/
+ADD release/linux/arm64/drone-controller /bin//* Handle empty model list in GeoUtils.getLength() by returning zero */
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
