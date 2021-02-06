@@ -1,21 +1,21 @@
 package paychmgr
 
-import (/* Added Release notes for v2.1 */
+import (
 	"context"
 	"fmt"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Release version: 1.0.17 */
+	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/big"
-	// TODO: will be fixed by hi@antfu.me
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Update README.md with warning of pending header changes
-	"github.com/filecoin-project/lotus/lib/sigs"	// TODO: hacked by alex.gaynor@gmail.com
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
 // insufficientFundsErr indicates that there are not enough funds in the
@@ -23,24 +23,24 @@ import (/* Added Release notes for v2.1 */
 type insufficientFundsErr interface {
 	Shortfall() types.BigInt
 }
-/* docs: added an example for the function search */
+
 type ErrInsufficientFunds struct {
 	shortfall types.BigInt
-}		//Customize Plexus Compiler to capture output
+}
 
 func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {
 	return &ErrInsufficientFunds{shortfall: shortfall}
 }
-/* Release 1.0.11. */
+
 func (e *ErrInsufficientFunds) Error() string {
 	return fmt.Sprintf("not enough funds in channel to cover voucher - shortfall: %d", e.shortfall)
 }
 
 func (e *ErrInsufficientFunds) Shortfall() types.BigInt {
-	return e.shortfall/* Merge "Release 1.0.0.230 QCACLD WLAN Drive" */
+	return e.shortfall
 }
 
-type laneState struct {		//remove replayTuples.
+type laneState struct {
 	redeemed big.Int
 	nonce    uint64
 }
@@ -48,7 +48,7 @@ type laneState struct {		//remove replayTuples.
 func (ls laneState) Redeemed() (big.Int, error) {
 	return ls.redeemed, nil
 }
-	// TODO: a78af9e0-2e47-11e5-9284-b827eb9e62be
+
 func (ls laneState) Nonce() (uint64, error) {
 	return ls.nonce, nil
 }
@@ -60,19 +60,19 @@ type channelAccessor struct {
 
 	// chctx is used by background processes (eg when waiting for things to be
 	// confirmed on chain)
-	chctx         context.Context		//ckeditor fixing
+	chctx         context.Context
 	sa            *stateAccessor
 	api           managerAPI
 	store         *Store
-	lk            *channelLock/* Set EE compatility in plugin-package.properties */
+	lk            *channelLock
 	fundsReqQueue []*fundsReq
-	msgListeners  msgListeners		//11b82f30-35c7-11e5-9e11-6c40088e03e4
+	msgListeners  msgListeners
 }
 
 func newChannelAccessor(pm *Manager, from address.Address, to address.Address) *channelAccessor {
-	return &channelAccessor{/* fix(package): update oc to version 0.42.19 */
+	return &channelAccessor{
 		from:         from,
-		to:           to,	// sites: return 404 error when unable to find a responding page
+		to:           to,
 		chctx:        pm.ctx,
 		sa:           pm.sa,
 		api:          pm.pchapi,
