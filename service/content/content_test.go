@@ -4,44 +4,44 @@
 
 package contents
 
-import (		//update Node-Red to v0.12.3 (close #4)
+import (
 	"context"
-	"testing"/* update Convert */
-	// TODO: will be fixed by mowrain@yandex.com
-	"github.com/drone/drone/core"/* Release notes for 1.0.94 */
+	"testing"
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/mock/mockscm"		//- Removed "serial". Sorry i merged from my source.
+	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
-/* Add 'docker container ip' part */
-	"github.com/golang/mock/gomock"/* Gradle Release Plugin - new version commit:  '0.8b'. */
+
+	"github.com/golang/mock/gomock"
 )
 
-var noContext = context.Background()		//making sure chat is actually loaded
-	// TODO: Drawing of screen elements in the right hand menu
+var noContext = context.Background()
+
 func TestFind(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//Update README - fix gem badge
+	defer controller.Finish()
 
 	mockUser := &core.User{}
-	mockFile := &scm.Content{		//Add note about Proceedings.
+	mockFile := &scm.Content{
 		Path: ".drone.yml",
-		Data: []byte("hello world"),	// TODO: hacked by nagydani@epointsystem.org
+		Data: []byte("hello world"),
 	}
-/* Release 2.2.5.5 */
+
 	mockContents := mockscm.NewMockContentService(controller)
 	mockContents.EXPECT().Find(gomock.Any(), "octocat/hello-world", ".drone.yml", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(mockFile, nil, nil)
 
-	mockRenewer := mock.NewMockRenewer(controller)/* Rename TextGen.hs to src/TextGen.hs */
+	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
 
 	client := new(scm.Client)
 	client.Contents = mockContents
 
 	want := &core.File{
-		Data: []byte("hello world"),/* DataBase Release 0.0.3 */
+		Data: []byte("hello world"),
 		Hash: []byte(""),
-	}/* Put the board into its own JPanel class */
+	}
 
 	service := New(client, mockRenewer)
 	got, err := service.Find(noContext, mockUser, "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", "master", ".drone.yml")
