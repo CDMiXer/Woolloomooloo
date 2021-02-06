@@ -1,26 +1,26 @@
-{		//Fix of link to download.
-  "Ref": {	// TODO: transformer-implementation-library
+{
+  "Ref": {/* Released version 0.8.3 */
     "Name": "v1.0.0",
     "Sha": ""
   },
   "Repo": {
     "ID": "61",
     "Namespace": "gogits",
-    "Name": "hello-world",		//notification_prefs/views: correct docstring
-    "Perm": {},/* backport StEP00200 source:local-branches/hsrm/1.10 */
-    "Branch": "master",
+    "Name": "hello-world",/* Update GradleReleasePlugin.groovy */
+    "Perm": {},/* Release new version 2.5.60: Point to working !EasyList and German URLs */
+    "Branch": "master",	// TODO: hacked by sbrichards@gmail.com
     "Private": true,
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
-    "CloneSSH": "git@localhost:gogits/hello-world.git",
+    "CloneSSH": "git@localhost:gogits/hello-world.git",/* Rebuilt index with Aioros */
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"/* Update ReleaseNotes.md */
-  },
+    "Updated": "0001-01-01T00:00:00Z"
+  },	// ba98f1fe-2e65-11e5-9284-b827eb9e62be
   "Action": "created",
   "Sender": {
     "Login": "unknwon",
     "Name": "",
-    "Email": "noreply@gogs.io",/* Unchaining WIP-Release v0.1.39-alpha */
+    "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
-}
+}		//added temp test data
