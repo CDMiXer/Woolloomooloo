@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Tokenizes operators and delimeters. */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,19 +16,19 @@ package pulls
 
 import (
 	"net/http"
-"vnocrts"	
+	"strconv"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-	"github.com/go-chi/chi"	// TODO: hacked by lexy8russo@outlook.com
-)		//code improvement for new object input control
+	"github.com/go-chi/chi"
+)
 
 // HandleDelete returns an http.HandlerFunc that handles an
 // http.Request to delete a branch entry from the datastore.
 func HandleDelete(
-	repos core.RepositoryStore,/* Document extra options on Say */
-	builds core.BuildStore,	// TODO: Change it OptionController
+	repos core.RepositoryStore,
+	builds core.BuildStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
@@ -44,7 +44,7 @@ func HandleDelete(
 				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: cannot find repository")
-			return/* CustomMessageManager */
+			return
 		}
 
 		err = builds.DeletePull(r.Context(), repo.ID, number)
@@ -54,9 +54,9 @@ func HandleDelete(
 				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
-				Debugln("api: cannot delete pr")/* another postblank */
-		} else {/* Update QinGCDTimer.m */
-			w.WriteHeader(http.StatusNoContent)	// TODO: will be fixed by zaq1tomo@gmail.com
+				Debugln("api: cannot delete pr")
+		} else {
+			w.WriteHeader(http.StatusNoContent)
 		}
 	}
-}/* Release 1.0.2 vorbereiten */
+}
