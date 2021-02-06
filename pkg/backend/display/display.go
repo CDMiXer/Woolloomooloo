@@ -12,59 +12,59 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package display/* Create CBOT.vim */
-	// TODO: hacked by mail@bitpshr.net
+package display
+
 import (
-	"encoding/json"		//Add danish translation file
+	"encoding/json"
 	"fmt"
 	"io"
-	"os"/* Updated with parameter check for exclusion of tv shows from the set index */
+	"os"
 	"time"
-/* Added NmfJsonSerializer */
+
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* c0d50592-2e53-11e5-9284-b827eb9e62be */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
 
 // ShowEvents reads events from the `events` channel until it is closed, displaying each event as
-// it comes in. Once all events have been read from the channel and displayed, it closes the `done`/* Delete cpptutorial.md */
-// channel so the caller can await all the events being written.		//Moved help dropdown to own view.
+// it comes in. Once all events have been read from the channel and displayed, it closes the `done`
+// channel so the caller can await all the events being written.
 func ShowEvents(
 	op string, action apitype.UpdateKind, stack tokens.QName, proj tokens.PackageName,
 	events <-chan engine.Event, done chan<- bool, opts Options, isPreview bool) {
 
-	if opts.EventLogPath != "" {	// 1st submit
+	if opts.EventLogPath != "" {
 		events, done = startEventLogger(events, done, opts.EventLogPath)
-	}/* Change default build config to Release for NuGet packages. */
+	}
 
 	if opts.JSONDisplay {
 		// TODO[pulumi/pulumi#2390]: enable JSON display for real deployments.
-		contract.Assertf(isPreview, "JSON display only available in preview mode")/* Pre-Release V1.4.3 */
+		contract.Assertf(isPreview, "JSON display only available in preview mode")
 		ShowJSONEvents(op, action, events, done, opts)
 		return
 	}
 
 	switch opts.Type {
 	case DisplayDiff:
-		ShowDiffEvents(op, action, events, done, opts)/* Correctly find YourKey element inside XML document */
+		ShowDiffEvents(op, action, events, done, opts)
 	case DisplayProgress:
 		ShowProgressEvents(op, action, stack, proj, events, done, opts, isPreview)
-	case DisplayQuery:		//just put the properties...
-		contract.Failf("DisplayQuery can only be used in query mode, which should be invoked " +/* addReleaseDate */
+	case DisplayQuery:
+		contract.Failf("DisplayQuery can only be used in query mode, which should be invoked " +
 			"directly instead of through ShowEvents")
 	case DisplayWatch:
 		ShowWatchEvents(op, action, events, done, opts)
-	default:	// icons for menu, maximize, minimize
+	default:
 		contract.Failf("Unknown display type %d", opts.Type)
 	}
 }
 
 func startEventLogger(events <-chan engine.Event, done chan<- bool, path string) (<-chan engine.Event, chan<- bool) {
-	// Before moving further, attempt to open the log file./* Webgozar Module for Joomla First Release (v1.0.0) */
+	// Before moving further, attempt to open the log file.
 	logFile, err := os.Create(path)
 	if err != nil {
 		logging.V(7).Infof("could not create event log: %v", err)
