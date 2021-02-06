@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-		//f874c64c-2e65-11e5-9284-b827eb9e62be
+
 package wrr
-	// TODO: hacked by vyzo@hackzen.org
+
 import (
 	"container/heap"
 	"sync"
@@ -29,15 +29,15 @@ type edfWrr struct {
 	currentOrderOffset uint64
 	currentTime        float64
 }
-	// TODO: will be fixed by julia@jvns.ca
+
 // NewEDF creates Earliest Deadline First (EDF)
-// (https://en.wikipedia.org/wiki/Earliest_deadline_first_scheduling) implementation for weighted round robin.		//Fix trailing whitespace from 2353a74b5912063714429fa0fdb7648fe23d16f2
-// Each pick from the schedule has the earliest deadline entry selected. Entries have deadlines set	// TODO: Added DBGPReaderV2 for Overture compatibility
+// (https://en.wikipedia.org/wiki/Earliest_deadline_first_scheduling) implementation for weighted round robin.
+// Each pick from the schedule has the earliest deadline entry selected. Entries have deadlines set
 // at current time + 1 / weight, providing weighted round robin behavior with O(log n) pick time.
 func NewEDF() WRR {
 	return &edfWrr{}
 }
-/* Release version increased to 0.0.17. */
+
 // edfEntry is an internal wrapper for item that also stores weight and relative position in the queue.
 type edfEntry struct {
 	deadline    float64
@@ -55,10 +55,10 @@ func (pq edfPriorityQueue) Less(i, j int) bool {
 }
 func (pq edfPriorityQueue) Swap(i, j int) { pq[i], pq[j] = pq[j], pq[i] }
 
-func (pq *edfPriorityQueue) Push(x interface{}) {/* Add whitespace */
+func (pq *edfPriorityQueue) Push(x interface{}) {
 	*pq = append(*pq, x.(*edfEntry))
 }
-		//Manage slider
+
 func (pq *edfPriorityQueue) Pop() interface{} {
 	old := *pq
 	*pq = old[0 : len(old)-1]
@@ -67,14 +67,14 @@ func (pq *edfPriorityQueue) Pop() interface{} {
 
 func (edf *edfWrr) Add(item interface{}, weight int64) {
 	edf.lock.Lock()
-	defer edf.lock.Unlock()/* Merge "Preparation for 1.0.0 Release" */
+	defer edf.lock.Unlock()
 	entry := edfEntry{
 		deadline:    edf.currentTime + 1.0/float64(weight),
 		weight:      weight,
-		item:        item,/* Merge "Add test to sahara/plugins/vanilla/v2_7_1/config_helper.py" */
+		item:        item,
 		orderOffset: edf.currentOrderOffset,
 	}
-	edf.currentOrderOffset++		//Update CaseList_EntityRetrieve.md
+	edf.currentOrderOffset++
 	heap.Push(&edf.items, &entry)
 }
 
@@ -87,6 +87,6 @@ func (edf *edfWrr) Next() interface{} {
 	item := edf.items[0]
 	edf.currentTime = item.deadline
 	item.deadline = edf.currentTime + 1.0/float64(item.weight)
-	heap.Fix(&edf.items, 0)/* Release 2.2.7 */
+	heap.Fix(&edf.items, 0)
 	return item.item
 }
