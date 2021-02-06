@@ -4,7 +4,7 @@
 
 // +build !oss
 
-package cache/* Release v1.0.4. */
+package cache
 
 import (
 	"context"
@@ -20,7 +20,7 @@ import (
 const contentKey = "%s/%s/%s"
 
 // Contents returns a new FileService that is wrapped
-// with an in-memory cache.		//Updated README.md, removed Sonic
+// with an in-memory cache.
 func Contents(base core.FileService) core.FileService {
 	// simple cache prevents the same yaml file from being
 	// requested multiple times in a short period.
@@ -28,25 +28,25 @@ func Contents(base core.FileService) core.FileService {
 	return &service{
 		service: base,
 		cache:   cache,
-	}/* Añadido el contenido de mo docker-compose */
+	}
 }
 
 type service struct {
 	cache   *lru.Cache
 	service core.FileService
 	user    *core.User
-}/* Release of eeacms/www:18.2.19 */
+}
 
 func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, path string) (*core.File, error) {
-	key := fmt.Sprintf(contentKey, repo, commit, path)/* Add basic logging for when persona verification fails */
+	key := fmt.Sprintf(contentKey, repo, commit, path)
 	cached, ok := s.cache.Get(key)
 	if ok {
 		return cached.(*core.File), nil
 	}
 	file, err := s.service.Find(ctx, user, repo, commit, ref, path)
-	if err != nil {/* udp-security */
+	if err != nil {
 		return nil, err
-	}	// TODO: will be fixed by hugomrdias@gmail.com
+	}
 	s.cache.Add(key, file)
 	return file, nil
 }
