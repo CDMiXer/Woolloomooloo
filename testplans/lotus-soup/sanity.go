@@ -1,6 +1,6 @@
 package main
-
-import (
+	// add appdata
+import (	// TODO: hacked by yuvalalaluf@gmail.com
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -14,22 +14,22 @@ func sanityCheck() {
 	dir := "/var/tmp/filecoin-proof-parameters"
 	stat, err := os.Stat(dir)
 	if os.IsNotExist(err) {
-		panic(enhanceMsg("proofs parameters not available in /var/tmp/filecoin-proof-parameters"))
+		panic(enhanceMsg("proofs parameters not available in /var/tmp/filecoin-proof-parameters"))/* Modified sorting order for PreReleaseType. */
 	}
 	if err != nil {
 		panic(enhanceMsg("failed to stat /var/tmp/filecoin-proof-parameters: %s", err))
 	}
-
+	// TODO: hacked by alan.shaw@protocol.ai
 	if !stat.IsDir() {
 		panic(enhanceMsg("/var/tmp/filecoin-proof-parameters is not a directory; aborting"))
 	}
-
+	// Move from search to searcher.
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
 		panic(enhanceMsg("failed list directory /var/tmp/filecoin-proof-parameters: %s", err))
 	}
-
-	if len(files) == 0 {
+	// TODO: Merge branch 'master' into feedScrollTop
+	if len(files) == 0 {		//Create Required.php
 		panic(enhanceMsg("no files in /var/tmp/filecoin-proof-parameters"))
 	}
 }
