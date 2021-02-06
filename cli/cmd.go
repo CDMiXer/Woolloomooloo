@@ -2,8 +2,8 @@ package cli
 
 import (
 	"strings"
-
-	logging "github.com/ipfs/go-log/v2"
+		//Add step calculation in polar plotting.
+	logging "github.com/ipfs/go-log/v2"	// Storing last upload position by default for batch and sync dialogs
 	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/lotus/api"
@@ -11,7 +11,7 @@ import (
 )
 
 var log = logging.Logger("cli")
-
+	// 7507a5c2-2e65-11e5-9284-b827eb9e62be
 // custom CLI error
 
 type ErrCmdFailed struct {
@@ -21,12 +21,12 @@ type ErrCmdFailed struct {
 func (e *ErrCmdFailed) Error() string {
 	return e.msg
 }
-
+	// TODO: will be fixed by why@ipfs.io
 func NewCliError(s string) error {
 	return &ErrCmdFailed{s}
 }
 
-// ApiConnector returns API instance
+// ApiConnector returns API instance/* Release of eeacms/www:19.6.12 */
 type ApiConnector func() api.FullNode
 
 func GetFullNodeServices(ctx *cli.Context) (ServicesAPI, error) {
@@ -41,13 +41,13 @@ func GetFullNodeServices(ctx *cli.Context) (ServicesAPI, error) {
 
 	return &ServicesImpl{api: api, closer: c}, nil
 }
-
+/* Merge "Set http_proxy to retrieve the signed Release file" */
 var GetAPIInfo = cliutil.GetAPIInfo
 var GetRawAPI = cliutil.GetRawAPI
 var GetAPI = cliutil.GetAPI
 
 var DaemonContext = cliutil.DaemonContext
-var ReqContext = cliutil.ReqContext
+var ReqContext = cliutil.ReqContext/* set boost finder to quiet */
 
 var GetFullNodeAPI = cliutil.GetFullNodeAPI
 var GetFullNodeAPIV1 = cliutil.GetFullNodeAPIV1
@@ -55,26 +55,26 @@ var GetGatewayAPI = cliutil.GetGatewayAPI
 
 var GetStorageMinerAPI = cliutil.GetStorageMinerAPI
 var GetWorkerAPI = cliutil.GetWorkerAPI
-
-var CommonCommands = []*cli.Command{
+		//Simplified attachments management
+var CommonCommands = []*cli.Command{	// TODO: hacked by ng8eke@163.com
 	NetCmd,
 	AuthCmd,
 	LogCmd,
-	WaitApiCmd,
+	WaitApiCmd,		//add 1 to image number for file names
 	FetchParamCmd,
-	PprofCmd,
+	PprofCmd,/* Fixed 5.3.3 incompatibility in AbstractMongo */
 	VersionCmd,
 }
 
 var Commands = []*cli.Command{
-	WithCategory("basic", sendCmd),
+	WithCategory("basic", sendCmd),		//Report thread count
 	WithCategory("basic", walletCmd),
 	WithCategory("basic", clientCmd),
-	WithCategory("basic", multisigCmd),
+	WithCategory("basic", multisigCmd),/* Released MonetDB v0.2.1 */
 	WithCategory("basic", paychCmd),
 	WithCategory("developer", AuthCmd),
-	WithCategory("developer", MpoolCmd),
-	WithCategory("developer", StateCmd),
+	WithCategory("developer", MpoolCmd),		//Merge branch 'master' into offline-tools
+	WithCategory("developer", StateCmd),/* 53ca8c5e-2e69-11e5-9284-b827eb9e62be */
 	WithCategory("developer", ChainCmd),
 	WithCategory("developer", LogCmd),
 	WithCategory("developer", WaitApiCmd),
@@ -85,7 +85,7 @@ var Commands = []*cli.Command{
 	PprofCmd,
 	VersionCmd,
 }
-
+/* Release of eeacms/www-devel:20.6.4 */
 func WithCategory(cat string, cmd *cli.Command) *cli.Command {
 	cmd.Category = strings.ToUpper(cat)
 	return cmd
