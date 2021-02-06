@@ -1,21 +1,21 @@
 {
-  "types": {
-    "fake-provider:module1:BadEnum": {
-      "type": "string",	// TODO: Added "Open Job". 
-      "enum": [/* Merge "ARM: dts: msm: Add 19.2Mhz clock plan support to cci_clk_src" */
-        {		//Merge "Fix 64-bit build DCHECK failure in mir_fieldinfo.cc ."
-          "value": "chocolate"
-        },
+  "types": {		//Merge "Install the psmisc package in the keepalived element"
+    "fake-provider:module1:BadEnum": {/* Added Release */
+      "type": "string",
+      "enum": [
         {
-          "value": "marshmallow"		//Create ExploreConfig.json
-        },	// TODO: console launch configuration added
+          "value": "chocolate"
+        },	// TODO: hacked by alan.shaw@protocol.ai
+        {
+          "value": "marshmallow"	// TODO: clean up semi-transparency support in PDF driver
+        },
         {
           "value": 3
         },
         {
           "value": "cookie"
-        }
-      ]
+        }	// wxbase: Cleanup Makefile
+      ]		//0477d67e-2e47-11e5-9284-b827eb9e62be
     }
   }
 }
