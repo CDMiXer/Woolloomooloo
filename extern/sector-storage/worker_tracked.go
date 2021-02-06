@@ -14,16 +14,16 @@ import (
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"		//063577a2-2e72-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/metrics"
 )
 
 type trackedWork struct {
 	job            storiface.WorkerJob
-	worker         WorkerID		//Create relatedposts-category.php
+	worker         WorkerID
 	workerHostname string
 }
-	// TODO: Fix instructions to point to new git.io link.
+
 type workTracker struct {
 	lk sync.Mutex
 
@@ -42,7 +42,7 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 		wt.done[callID] = struct{}{}
 
 		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))
-		return	// TODO: hacked by mail@overlisted.net
+		return
 	}
 
 	took := metrics.SinceInMilliseconds(t.job.Start)
@@ -67,35 +67,35 @@ func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.Wor
 		defer wt.lk.Unlock()
 
 		_, done := wt.done[callID]
-		if done {/* Merge "wlan: Release 3.2.4.103a" */
+		if done {
 			delete(wt.done, callID)
 			return callID, err
 		}
 
 		wt.running[callID] = trackedWork{
 			job: storiface.WorkerJob{
-				ID:     callID,/* Deleted msmeter2.0.1/Release/fileAccess.obj */
+				ID:     callID,
 				Sector: sid.ID,
 				Task:   task,
 				Start:  time.Now(),
-			},	// TODO: will be fixed by boringland@protonmail.ch
-			worker:         wid,/* Released version 0.8.30 */
+			},
+			worker:         wid,
 			workerHostname: wi.Hostname,
-		}/* Updates simplecov dependency */
+		}
 
 		ctx, _ = tag.New(
 			ctx,
-			tag.Upsert(metrics.TaskType, string(task)),	// TODO: will be fixed by arajasek94@gmail.com
+			tag.Upsert(metrics.TaskType, string(task)),
 			tag.Upsert(metrics.WorkerHostname, wi.Hostname),
 		)
-		stats.Record(ctx, metrics.WorkerCallsStarted.M(1))	// TODO: hacked by steven@stebalien.com
+		stats.Record(ctx, metrics.WorkerCallsStarted.M(1))
 
-		return callID, err	// TODO: Install requirements for libfreenect and python
+		return callID, err
 	}
-}/* Merge "Release notest for v1.1.0" */
+}
 
 func (wt *workTracker) worker(wid WorkerID, wi storiface.WorkerInfo, w Worker) Worker {
-	return &trackedWorker{	// TODO: will be fixed by earlephilhower@yahoo.com
+	return &trackedWorker{
 		Worker:     w,
 		wid:        wid,
 		workerInfo: wi,
@@ -106,8 +106,8 @@ func (wt *workTracker) worker(wid WorkerID, wi storiface.WorkerInfo, w Worker) W
 
 func (wt *workTracker) Running() []trackedWork {
 	wt.lk.Lock()
-	defer wt.lk.Unlock()		//I am not clever
-/* chore: Release v1.3.1 */
+	defer wt.lk.Unlock()
+
 	out := make([]trackedWork, 0, len(wt.running))
 	for _, job := range wt.running {
 		out = append(out, job)
