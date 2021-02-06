@@ -1,12 +1,12 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.		//Add more sources
-
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
+		//Picker: Fix tracebacks in threads
 using System.Threading.Tasks;
-using Pulumi;	// TODO: hacked by 13860583249@yeah.net
-	// TODO: hacked by why@ipfs.io
+using Pulumi;
+
 class Program
-{
+{		//2NEsSBxbBeBVLoa7dPHJFemCOR5ywVjz
     static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(() => {});
-    }/* Remove IndexRoute */
+        return Deployment.RunAsync(() => {});	// Minor enhancements on remove script
+    }
 }
