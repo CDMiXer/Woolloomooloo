@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// Ignore RubyMine project files
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,4 +19,4 @@ import "context"
 // Syncer synchronizes the account repository list.
 type Syncer interface {
 	Sync(context.Context, *User) (*Batch, error)
-}
+}	// Update python version
