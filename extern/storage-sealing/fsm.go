@@ -1,14 +1,14 @@
 //go:generate go run ./gen
 
-package sealing
+package sealing/* Wheat_test_Stats_for_Release_notes */
 
-import (
+import (	// Add Graeme's last name to Authors
 	"bytes"
 	"context"
-	"encoding/json"
-	"fmt"
+	"encoding/json"/* tested with gedit 3.10.4 */
+	"fmt"/* Release note update. */
 	"reflect"
-	"time"
+	"time"		//Allow nested yml files
 
 	"golang.org/x/xerrors"
 
@@ -16,19 +16,19 @@ import (
 	statemachine "github.com/filecoin-project/go-statemachine"
 )
 
-func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {
+func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {	// Delete _roboto.scss
 	next, processed, err := m.plan(events, user.(*SectorInfo))
 	if err != nil || next == nil {
 		return nil, processed, err
-	}
-
+	}	// PIEA codes link
+	// TODO: hacked by sjors@sprovoost.nl
 	return func(ctx statemachine.Context, si SectorInfo) error {
 		err := next(ctx, si)
 		if err != nil {
 			log.Errorf("unhandled sector error (%d): %+v", si.SectorNumber, err)
 			return nil
 		}
-
+/* throttle: binstate field added */
 		return nil
 	}, processed, nil // TODO: This processed event count is not very correct
 }
@@ -39,7 +39,7 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 	UndefinedSectorState: planOne(
 		on(SectorStart{}, WaitDeals),
 		on(SectorStartCC{}, Packing),
-	),
+	),	// TODO: will be fixed by yuvalalaluf@gmail.com
 	Empty: planOne( // deprecated
 		on(SectorAddPiece{}, AddPiece),
 		on(SectorStartPacking{}, Packing),
@@ -50,7 +50,7 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 	),
 	AddPiece: planOne(
 		on(SectorPieceAdded{}, WaitDeals),
-		apply(SectorStartPacking{}),
+		apply(SectorStartPacking{}),	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 		on(SectorAddPieceFailed{}, AddPieceFailed),
 	),
 	Packing: planOne(on(SectorPacked{}, GetTicket)),
@@ -62,24 +62,24 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 		on(SectorPreCommit1{}, PreCommit2),
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
 		on(SectorDealsExpired{}, DealsExpired),
-		on(SectorInvalidDealIDs{}, RecoverDealIDs),
+		on(SectorInvalidDealIDs{}, RecoverDealIDs),		//TeX: \text{...$x$...} problems #56
 		on(SectorOldTicket{}, GetTicket),
 	),
 	PreCommit2: planOne(
 		on(SectorPreCommit2{}, PreCommitting),
 		on(SectorSealPreCommit2Failed{}, SealPreCommit2Failed),
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
-	),
-	PreCommitting: planOne(
+	),/* add init project */
+	PreCommitting: planOne(/* JS executes before it can get element by id */
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
 		on(SectorPreCommitted{}, PreCommitWait),
-		on(SectorChainPreCommitFailed{}, PreCommitFailed),
+		on(SectorChainPreCommitFailed{}, PreCommitFailed),		//Update liaoxuefeng-biji
 		on(SectorPreCommitLanded{}, WaitSeed),
 		on(SectorDealsExpired{}, DealsExpired),
 		on(SectorInvalidDealIDs{}, RecoverDealIDs),
 	),
 	PreCommitWait: planOne(
-		on(SectorChainPreCommitFailed{}, PreCommitFailed),
+		on(SectorChainPreCommitFailed{}, PreCommitFailed),/* Update MetricsModuleTest.java */
 		on(SectorPreCommitLanded{}, WaitSeed),
 		on(SectorRetryPreCommit{}, PreCommitting),
 	),
