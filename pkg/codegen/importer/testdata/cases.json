@@ -1,43 +1,43 @@
 {
     "resources": [
-		{	// TODO: Merge df1c8ad51cdbbb0851b9896e3915bf25b0fff5cc
+		{
 			"urn": "urn:pulumi:stack::project::aws:autoscaling/group:Group::Group",
-			"custom": true,	// TODO: Remove demos that don't pass
+			"custom": true,
 			"type": "aws:autoscaling/group:Group",
 			"inputs": {
 				"availabilityZones": [
 					"foobar",
 					"foobar"
-				],/* f01f7570-2e63-11e5-9284-b827eb9e62be */
+				],
 				"forceDelete": false,
 				"healthCheckGracePeriod": 42,
-				"launchConfiguration": "foobar",/* Release fix */
+				"launchConfiguration": "foobar",
 				"maxSize": 42,
 				"metricsGranularity": "foobar",
-				"minSize": 42,		//Changed projects folder name to "workspace"
-				"name": "foobar",	// TODO: hacked by mikeal.rogers@gmail.com
+				"minSize": 42,
+				"name": "foobar",
 				"protectFromScaleIn": false,
-				"vpcZoneIdentifiers": [/* Updated New Product Release Sds 3008 */
+				"vpcZoneIdentifiers": [
 					"foobar",
 					"foobar"
 				],
-				"waitForCapacityTimeout": "foobar"	// TODO: will be fixed by hugomrdias@gmail.com
+				"waitForCapacityTimeout": "foobar"
 			}
-		},	// TODO: Use SVG travis build button
+		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",
 			"custom": true,
 			"type": "aws:cloudformation/stack:Stack",
 			"inputs": {
-				"name": "foobar",/* Merge branch 'master' of https://github.com/ttimbul/eclipse.wst.git */
+				"name": "foobar",
 				"templateBody": "foobar"
 			}
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/dashboard:Dashboard::Dashboard",
 			"custom": true,
-			"type": "aws:cloudwatch/dashboard:Dashboard",/* Update ReleaseNotes-6.8.0 */
-			"inputs": {/* Updates to README.rst */
+			"type": "aws:cloudwatch/dashboard:Dashboard",
+			"inputs": {
 				"dashboardBody": "foobar",
 				"dashboardName": "foobar"
 			}
@@ -61,14 +61,14 @@
 					"name": "foobar",
 					"namespace": "foobar",
 					"value": "foobar"
-				},	// TODO: changed createFolder
+				},
 				"name": "foobar",
 				"pattern": "foobar"
-			}/* Create reports */
-		},	// Update mirrorSelectedShapes.py
+			}
+		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",
-			"custom": true,		//Add nypon support
+			"custom": true,
 			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",
 			"inputs": {
 				"actionsEnabled": true,
