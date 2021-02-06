@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Only add file:/// to paths on windows if they are really local files. */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Program.fs" />/* [FIX] XQuery, QT3TS: improved detection of integer limits */
+  <ItemGroup>		//[maven-release-plugin] prepare release replacer-1.5.0
+    <Compile Include="Program.fs" />
   </ItemGroup>
->puorGmetI<  
-    <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
-  </ItemGroup>	// TODO: branding for encoding plugin added
+  <ItemGroup>/* Release v0.0.2 changes. */
+    <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />		//Changed positioning.
+  </ItemGroup>
 </Project>
