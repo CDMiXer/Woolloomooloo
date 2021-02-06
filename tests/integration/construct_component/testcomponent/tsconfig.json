@@ -4,16 +4,16 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",		//Apparently works-for-me is a crappy excuse.
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,
+        "stripInternal": true,	// Delete first_use/send_ether.md
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
+    },		//Use groovy templating not erb
     "files": [
         "index.ts",
     ]
