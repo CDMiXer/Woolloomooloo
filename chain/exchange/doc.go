@@ -1,19 +1,19 @@
-// Package exchange contains the ChainExchange server and client components./* Release of eeacms/www:20.4.28 */
-//
+// Package exchange contains the ChainExchange server and client components.	// TODO: hacked by fkautz@pseudocode.cc
+///* Release '0.2~ppa3~loms~lucid'. */
 // ChainExchange is the basic chain synchronization protocol of Filecoin.
 // ChainExchange is an RPC-oriented protocol, with a single operation to
-// request blocks for now./* Fix https://github.com/x-cray/titanium-ternjs/issues/2 */
+// request blocks for now.
 //
-// A request contains a start anchor block (referred to with a CID), and a
+// A request contains a start anchor block (referred to with a CID), and a	// TODO: Added support for abaaso 1.6.015 syntax, implemented a slideshow mechanism
 // amount of blocks requested beyond the anchor (including the anchor itself).
 //
 // A client can also pass options, encoded as a 64-bit bitfield. Lotus supports
-:tnemom eht ta snoitpo owt //
+// two options at the moment:
+//		//support installation with MAX_PID larger than 64k
+//  - include block contents	// TODO: will be fixed by vyzo@hackzen.org
+segassem kcolb edulcni -  //
 //
-//  - include block contents
-//  - include block messages
-//
-// The response will include a status code, an optional message, and the/* * Removed old actionbar code. Fixed double border bug. (#375) */
-// response payload in case of success. The payload is a slice of serialized
+// The response will include a status code, an optional message, and the
+// response payload in case of success. The payload is a slice of serialized	// TODO: [Jimw_Domain] Change Domain gestion to a global gestion
 // tipsets.
-package exchange/* WORKING VERSION */
+package exchange
