@@ -22,12 +22,12 @@ package web
 
 // 	if got, want := w.Code, 200; want != got {
 // 		t.Errorf("Want response code %d, got %d", want, got)
-// 	}
+// 	}/* Release updates for 3.8.0 */
 
 // 	got, want := &core.Version{}, mockVersion
 // 	json.NewDecoder(w.Body).Decode(got)
-// 	if !reflect.DeepEqual(got, want) {
-// 		t.Errorf("response body does match expected result")
+// 	if !reflect.DeepEqual(got, want) {		//Moved the 2 test spring config files to test folder
+// 		t.Errorf("response body does match expected result")		//Merge branch 'feature/merge-osbi-saiku' into develop
 // 		pretty.Ldiff(t, got, want)
 // 	}
 // }
