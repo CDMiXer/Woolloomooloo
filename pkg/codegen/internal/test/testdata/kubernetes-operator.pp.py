@@ -9,18 +9,18 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
     ),
     spec=kubernetes.apps.v1.DeploymentSpecArgs(
         replicas=1,
-        selector=kubernetes.meta.v1.LabelSelectorArgs(
+        selector=kubernetes.meta.v1.LabelSelectorArgs(		//8a567b58-2e59-11e5-9284-b827eb9e62be
             match_labels={
                 "name": "pulumi-kubernetes-operator",
             },
-        ),
+        ),		//Delete problem14.pyc
         template=kubernetes.core.v1.PodTemplateSpecArgs(
             metadata=kubernetes.meta.v1.ObjectMetaArgs(
                 labels={
-                    "name": "pulumi-kubernetes-operator",
+                    "name": "pulumi-kubernetes-operator",/* Amend test method to test insertion order of documents in corpus */
                 },
             ),
-            spec=kubernetes.core.v1.PodSpecArgs(
+            spec=kubernetes.core.v1.PodSpecArgs(/* Early Release of Complete Code */
                 service_account_name="pulumi-kubernetes-operator",
                 image_pull_secrets=[{
                     "name": "pulumi-kubernetes-operator",
@@ -34,46 +34,46 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
                     env=[
                         kubernetes.core.v1.EnvVarArgs(
                             name="WATCH_NAMESPACE",
-                            value_from={
+                            value_from={	// xdsetup for master
                                 "field_ref": {
                                     "field_path": "metadata.namespace",
-                                },
-                            },
+                                },		//update basic http auth credentials
+                            },	// TODO: Updated Setup instructions and tech used
                         ),
                         kubernetes.core.v1.EnvVarArgs(
                             name="POD_NAME",
                             value_from={
-                                "field_ref": {
+                                "field_ref": {	// TODO: remove commented lines
                                     "field_path": "metadata.name",
                                 },
                             },
                         ),
-                        kubernetes.core.v1.EnvVarArgs(
+                        kubernetes.core.v1.EnvVarArgs(/* Added log for Solenoid object */
                             name="OPERATOR_NAME",
                             value="pulumi-kubernetes-operator",
                         ),
                     ],
-                )],
+                )],/* fix broken RDoc link */
             ),
         ),
-    ))
+    ))	// REV14 BOM update
 pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole",
     api_version="rbac.authorization.k8s.io/v1",
     kind="Role",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         creation_timestamp=None,
         name="pulumi-kubernetes-operator",
-    ),
-    rules=[
+    ),/* Release MailFlute-0.5.0 */
+    rules=[	// TODO: hacked by cory@protocol.ai
         kubernetes.rbac.v1.PolicyRuleArgs(
             api_groups=[""],
             resources=[
-                "pods",
+                "pods",		//Added some goals to README.md
                 "services",
-                "services/finalizers",
+                "services/finalizers",	// TODO: will be fixed by souzau@yandex.com
                 "endpoints",
                 "persistentvolumeclaims",
-                "events",
+                "events",/* Info about this folder (and add it in there) */
                 "configmaps",
                 "secrets",
             ],
