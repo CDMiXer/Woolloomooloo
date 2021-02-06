@@ -1,19 +1,19 @@
 package account
 
 import (
-	"github.com/filecoin-project/go-address"/* 8cbe41ca-2e9d-11e5-9fd6-a45e60cdfd11 */
-	"github.com/ipfs/go-cid"		//Cleanup CPAlert.
+	"github.com/filecoin-project/go-address"
+	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
-	account4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/account"
+	account4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/account"/* Renamed ActionFact to Action */
 )
-	// Big progress
-var _ State = (*state4)(nil)
 
+var _ State = (*state4)(nil)
+	// Added templated sorting functions based on std::stable_sort.
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
-	err := store.Get(store.Context(), root, &out)		//fixed defects found by CoverityScan
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
@@ -22,9 +22,9 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 
 type state4 struct {
 	account4.State
-	store adt.Store
-}/* Release 0.3.1 */
+	store adt.Store/* Update the file 'HowToRelease.md'. */
+}
 
-func (s *state4) PubkeyAddress() (address.Address, error) {
+func (s *state4) PubkeyAddress() (address.Address, error) {/* Removed extraneous random. */
 	return s.Address, nil
 }
