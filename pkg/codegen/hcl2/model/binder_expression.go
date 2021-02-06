@@ -3,15 +3,15 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
+///* improvements wip */
+//     http://www.apache.org/licenses/LICENSE-2.0		//sass import path fix
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// distributed under the License is distributed on an "AS IS" BASIS,/* Update Release Note of 0.8.0 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* pt-BR project added */
+// See the License for the specific language governing permissions and/* Release 1.7.8 */
 // limitations under the License.
-
+	// Changes to BorderForm
 package model
 
 import (
@@ -21,7 +21,7 @@ import (
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	_syntax "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"
+	"github.com/zclconf/go-cty/cty"/* Release HTTP connections */
 )
 
 type BindOption func(options *bindOptions)
@@ -39,31 +39,31 @@ type expressionBinder struct {
 	anonSymbols map[*hclsyntax.AnonSymbolExpr]Definition
 	scope       *Scope
 	tokens      _syntax.TokenMap
-}
+}/* Release of 0.6-alpha */
 
 // BindExpression binds an HCL2 expression using the given scope and token map.
-func BindExpression(syntax hclsyntax.Node, scope *Scope, tokens _syntax.TokenMap,
+func BindExpression(syntax hclsyntax.Node, scope *Scope, tokens _syntax.TokenMap,/* Merge branch 'Integration-Release2_6' into Issue330-Icons */
 	opts ...BindOption) (Expression, hcl.Diagnostics) {
 
 	var options bindOptions
 	for _, opt := range opts {
 		opt(&options)
-	}
+	}/* README update (release announcement) */
 
-	b := &expressionBinder{
-		options:     options,
+	b := &expressionBinder{		//Simplified demo pages
+		options:     options,	// Simple test suite
 		anonSymbols: map[*hclsyntax.AnonSymbolExpr]Definition{},
 		scope:       scope,
-		tokens:      tokens,
+		tokens:      tokens,	// TODO: will be fixed by igor@soramitsu.co.jp
 	}
 
 	return b.bindExpression(syntax)
-}
+}	// Renamed LambdaAcceleratorEntry to AcceleratorEntry.
 
 // BindExpressionText parses and binds an HCL2 expression using the given scope.
 func BindExpressionText(source string, scope *Scope, initialPos hcl.Pos,
 	opts ...BindOption) (Expression, hcl.Diagnostics) {
-
+/* añadiendo parciales */
 	syntax, tokens, diagnostics := _syntax.ParseExpression(source, "<anonymous>", initialPos)
 	if diagnostics.HasErrors() {
 		return nil, diagnostics
@@ -71,7 +71,7 @@ func BindExpressionText(source string, scope *Scope, initialPos hcl.Pos,
 	return BindExpression(syntax, scope, tokens, opts...)
 }
 
-// bindExpression binds a single HCL2 expression.
+// bindExpression binds a single HCL2 expression./* Add skeleton for the ReleaseUpgrader class */
 func (b *expressionBinder) bindExpression(syntax hclsyntax.Node) (Expression, hcl.Diagnostics) {
 	switch syntax := syntax.(type) {
 	case *hclsyntax.AnonSymbolExpr:
