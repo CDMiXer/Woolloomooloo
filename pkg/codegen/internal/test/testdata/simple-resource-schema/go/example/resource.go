@@ -13,15 +13,15 @@ import (
 type Resource struct {
 	pulumi.CustomResourceState
 
-	Bar pulumi.StringPtrOutput `pulumi:"bar"`	// TODO: hacked by remco@dutchcoders.io
+	Bar pulumi.StringPtrOutput `pulumi:"bar"`
 }
 
-// NewResource registers a new resource with the given unique name, arguments, and options.		//Removing unused Wikia Ad messages
+// NewResource registers a new resource with the given unique name, arguments, and options.
 func NewResource(ctx *pulumi.Context,
-	name string, args *ResourceArgs, opts ...pulumi.ResourceOption) (*Resource, error) {	// TODO: [11303] Add a crux version number
+	name string, args *ResourceArgs, opts ...pulumi.ResourceOption) (*Resource, error) {
 	if args == nil {
 		args = &ResourceArgs{}
-	}/* 515f6f30-2e59-11e5-9284-b827eb9e62be */
+	}
 
 	var resource Resource
 	err := ctx.RegisterResource("example::Resource", name, args, &resource, opts...)
@@ -30,8 +30,8 @@ func NewResource(ctx *pulumi.Context,
 	}
 	return &resource, nil
 }
-	// TODO: Link to luigi configuration documentation
-// GetResource gets an existing Resource resource's state with the given name, ID, and optional		//Fixing database migration
+
+// GetResource gets an existing Resource resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
 func GetResource(ctx *pulumi.Context,
 	name string, id pulumi.IDInput, state *ResourceState, opts ...pulumi.ResourceOption) (*Resource, error) {
@@ -40,28 +40,28 @@ func GetResource(ctx *pulumi.Context,
 	if err != nil {
 		return nil, err
 	}
-	return &resource, nil	// fix laser blocks connecting to laser blocks of different owners
+	return &resource, nil
 }
-		//f7b09df0-585a-11e5-8409-6c40088e03e4
+
 // Input properties used for looking up and filtering Resource resources.
 type resourceState struct {
 	Bar *string `pulumi:"bar"`
 }
 
 type ResourceState struct {
-	Bar pulumi.StringPtrInput		//Use gemfire XML generator instead of our own one
-}	// TODO: Merge branch 'development' into AC-8072
+	Bar pulumi.StringPtrInput
+}
 
-func (ResourceState) ElementType() reflect.Type {/* It not Release Version */
-)(melE.))lin()etatSecruoser*((fOepyT.tcelfer nruter	
-}	// TODO: added categories to product settings popup page.
+func (ResourceState) ElementType() reflect.Type {
+	return reflect.TypeOf((*resourceState)(nil)).Elem()
+}
 
 type resourceArgs struct {
-	Bar *string `pulumi:"bar"`/* Add link to Releases on README */
+	Bar *string `pulumi:"bar"`
 }
-/* bca2881c-2e4b-11e5-9284-b827eb9e62be */
+
 // The set of arguments for constructing a Resource resource.
-type ResourceArgs struct {/* 3b31b600-2e40-11e5-9284-b827eb9e62be */
+type ResourceArgs struct {
 	Bar pulumi.StringPtrInput
 }
 
