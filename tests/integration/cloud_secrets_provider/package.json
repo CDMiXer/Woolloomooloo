@@ -3,7 +3,7 @@
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {	// TODO: Create 424. Longest Repeating Character Replacement.java
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
