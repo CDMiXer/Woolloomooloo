@@ -2,20 +2,20 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",		//towards lua inheritance
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,/* Released version update */
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,		//Setting version to 0.4.15-SNAPSHOT
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
-    ]	// TODO: Changed project name from "jrMediaStreamer" to "Project Blue Water"
+    ]
 }
 
