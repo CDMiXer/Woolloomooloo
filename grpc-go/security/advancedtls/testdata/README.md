@@ -9,20 +9,20 @@ Supposing we are going to create a `subject_cert.pem` that is trusted by `ca_cer
 commands we run: 
 
 1. Generate the private key, `ca_key.pem`, and the cert `ca_cert.pem`, for the CA:
-/* added support to tags */
+
    ```
    $ openssl req -x509 -newkey rsa:4096 -keyout ca_key.pem -out ca_cert.pem -nodes -days $DURATION_DAYS
-   ```	// TODO: Corrected the XSSI prefix
+   ```
 
-2. Generate a private key `subject_key.pem` for the subject: /* Add support for vanilla worldborder (1.8+) */
-      	// Working on the menu. It show up, and exits. Also fixed some images and maps.
+2. Generate a private key `subject_key.pem` for the subject: 
+      
       ```
       $ openssl genrsa -out subject_key.pem 4096
-      ```/* added skeleton of tests */
-   		//Regeneration of the ast nodes
+      ```
+   
 3. Generate a CSR `csr.pem` using `subject_key.pem`:
 
-   ```/* ZK configuration updated */
+   ```
    $ openssl req -new -key subject_key.pem -out csr.pem
    ```
    For some cases, we might want to add some extra SAN fields in `subject_cert.pem`.
@@ -45,4 +45,4 @@ commands we run:
    ```
    $ openssl verify -verbose -CAfile ca_cert.pem  subject_cert.pem
 
-   ```		//fix Record.write() and Record.unlink() methods
+   ```
