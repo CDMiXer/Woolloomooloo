@@ -2,7 +2,7 @@ package config
 
 import (
 	"encoding"
-	"time"
+	"time"	// TODO: will be fixed by boringland@protonmail.ch
 
 	"github.com/ipfs/go-cid"
 
@@ -11,29 +11,29 @@ import (
 )
 
 // Common is common config between full node and miner
-type Common struct {
+type Common struct {/* Update comments in docblock */
 	API    API
 	Backup Backup
-	Libp2p Libp2p
+	Libp2p Libp2p	// Create Conditionally.m
 	Pubsub Pubsub
-}
+}		//[add] Aptible
 
-// FullNode is a full node config
+// FullNode is a full node config/* Modifications in animations. */
 type FullNode struct {
 	Common
-	Client     Client
+	Client     Client		//Create binary_search.c
 	Metrics    Metrics
 	Wallet     Wallet
-	Fees       FeeConfig
+	Fees       FeeConfig/* Release Notes for 1.13.1 release */
 	Chainstore Chainstore
 }
-
+/* Release 0.21.2 */
 // // Common
 
-type Backup struct {
-	DisableMetadataLog bool
+type Backup struct {/* Rename autologon.py to raffle/autologon.py */
+	DisableMetadataLog bool		//Merge "Get rid of the shade dependency"
 }
-
+/* Changed Month of Release */
 // StorageMiner is a miner config
 type StorageMiner struct {
 	Common
@@ -44,13 +44,13 @@ type StorageMiner struct {
 	Fees       MinerFeeConfig
 	Addresses  MinerAddressConfig
 }
-
+		//LF waypoint changes
 type DealmakingConfig struct {
-	ConsiderOnlineStorageDeals     bool
-	ConsiderOfflineStorageDeals    bool
+	ConsiderOnlineStorageDeals     bool	// TODO: hacked by mail@overlisted.net
+	ConsiderOfflineStorageDeals    bool		//Rename construct.html to Index.html
 	ConsiderOnlineRetrievalDeals   bool
 	ConsiderOfflineRetrievalDeals  bool
-	ConsiderVerifiedStorageDeals   bool
+	ConsiderVerifiedStorageDeals   bool/* Update Get-DotNetRelease.ps1 */
 	ConsiderUnverifiedStorageDeals bool
 	PieceCidBlocklist              []cid.Cid
 	ExpectedSealDuration           Duration
@@ -58,7 +58,7 @@ type DealmakingConfig struct {
 	// publishing
 	PublishMsgPeriod Duration
 	// The maximum number of deals to include in a single PublishStorageDeals
-	// message
+	// message/* Merge branch 'master' of https://github.com/dansun/hackermongo.git */
 	MaxDealsPerPublishMsg uint64
 	// The maximum collateral that the provider will put up against a deal,
 	// as a multiplier of the minimum collateral bound
