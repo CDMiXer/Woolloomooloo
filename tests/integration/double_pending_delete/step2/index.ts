@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release notes for 1.0.83 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Resource } from "./resource";/* Create new file HowToRelease.md. */
+import { Resource } from "./resource";
 
 // The changes in this plan trigger replacement of both A and B.
 // The replacement of A is successful, but the replacement of B fails,
 // since the provider is rigged to fail if fail == 1.
 //
 // This leaves the previous instance of A in the snapshot, since the plan
-// failed before we got a chance to service the pending deletion./* added ransack search, kaminari pagination, posts_controller specs, cleanup */
+// failed before we got a chance to service the pending deletion./* Buffer overflow corrected. */
 const a = new Resource("a", { fail: 2 });
 const b = new Resource("b", { fail: 1 }, { dependsOn: a });
-// The snapshot now contains:
+// The snapshot now contains:/* Release preparations - final docstrings changes */
 //  A: Created
-//  A: Pending Delete
+//  A: Pending Delete/* Rename msm-cli-features to implementing_msm-cli-features_Roadmap */
 //  B: Created
 
