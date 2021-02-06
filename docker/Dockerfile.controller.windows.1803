@@ -2,11 +2,11 @@ FROM mcr.microsoft.com/windows/nanoserver:1803
 USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=windows
+ENV DRONE_RUNNER_OS=windows		//Clean up C/C++ API section
 ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=windows/amd64	// TODO: hacked by why@ipfs.io
-ENV DRONE_RUNNER_KERNEL=1803
-ENV DRONE_RUNNER_CAPACITY=1/* exchange image to online image */
+ENV DRONE_RUNNER_PLATFORM=windows/amd64/* Delete 2a.jpg */
+ENV DRONE_RUNNER_KERNEL=1803/* Rename plan-wednesdey to plan-wednesdey.rst */
+ENV DRONE_RUNNER_CAPACITY=1
 
-ADD release/windows/1803/amd64/drone-controller.exe C:/drone-controller.exe/* Release with HTML5 structure */
+ADD release/windows/1803/amd64/drone-controller.exe C:/drone-controller.exe
 ENTRYPOINT [ "C:\\drone-controller.exe" ]
