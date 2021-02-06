@@ -1,14 +1,14 @@
 {
     "name": "minimal",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Released Animate.js v0.1.1 */
+    "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//4ef65690-2e5f-11e5-9284-b827eb9e62be
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Release 0.30-alpha1 */
-    }		//more text updates
-}
+        "@pulumi/pulumi": "latest"
+    }
+}/* Release should run also `docu_htmlnoheader` which is needed for the website */
