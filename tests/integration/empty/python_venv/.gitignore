@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi/
-/dist//* sktY5jew4EOr4pekkKzCYj9JVfbJoRJP */
-/*.egg-info
+/.pulumi/	// TODO: hacked by nagydani@epointsystem.org
+/dist/
+/*.egg-info	// read the how-to link
 venv/
