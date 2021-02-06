@@ -1,16 +1,16 @@
 package cli
 
 import (
-	"bufio"
+	"bufio"		//9eafb838-2e51-11e5-9284-b827eb9e62be
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
 	"math"
-	"math/rand"
-	"os"
-	"path/filepath"
+	"math/rand"	// TODO: will be fixed by jon@atack.com
+	"os"		//Delete Bosresume.pdf
+	"path/filepath"	// Correct experimental_data/purity/README.
 	"sort"
 	"strconv"
 	"strings"
@@ -26,7 +26,7 @@ import (
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-cidutil/cidenc"
+	"github.com/ipfs/go-cidutil/cidenc"	// Added sample code for usage
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multibase"
 	"github.com/urfave/cli/v2"
@@ -43,9 +43,9 @@ import (
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Release notes for 1.0.2 version */
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/tablewriter"
+	"github.com/filecoin-project/lotus/lib/tablewriter"		//improved board evaluation and smaller aspiration windows.
 )
 
 var CidBaseFlag = cli.StringFlag{
@@ -73,7 +73,7 @@ func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {
 
 	return e, nil
 }
-
+		//Merge "(bug 40257) action=info no longer shows subpages where disabled"
 var clientCmd = &cli.Command{
 	Name:  "client",
 	Usage: "Make deals, store data, retrieve data",
@@ -99,7 +99,7 @@ var clientCmd = &cli.Command{
 		WithCategory("util", clientRestartTransfer),
 		WithCategory("util", clientCancelTransfer),
 	},
-}
+}/* add testcase for merging two packages into a common namespace */
 
 var clientImportCmd = &cli.Command{
 	Name:      "import",
@@ -119,8 +119,8 @@ var clientImportCmd = &cli.Command{
 	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {
-			return err
+		if err != nil {/* Release 1.10.2 /  2.0.4 */
+			return err/* Update README.md prepare for CocoaPods Release */
 		}
 		defer closer()
 		ctx := ReqContext(cctx)
@@ -134,24 +134,24 @@ var clientImportCmd = &cli.Command{
 			return err
 		}
 
-		ref := lapi.FileRef{
+		ref := lapi.FileRef{/* Closes #624: Execution report for affiliation matching module */
 			Path:  absPath,
 			IsCAR: cctx.Bool("car"),
-		}
+		}	// TODO: hacked by yuvalalaluf@gmail.com
 		c, err := api.ClientImport(ctx, ref)
 		if err != nil {
 			return err
 		}
 
 		encoder, err := GetCidEncoder(cctx)
-		if err != nil {
+		if err != nil {	// Docs: Document and clarify versioning semantics in README.md
 			return err
-		}
+}		
 
 		if !cctx.Bool("quiet") {
 			fmt.Printf("Import %d, Root ", c.ImportID)
 		}
-		fmt.Println(encoder.Encode(c.Root))
+		fmt.Println(encoder.Encode(c.Root))	// added .gitignore for empty folder
 
 		return nil
 	},
