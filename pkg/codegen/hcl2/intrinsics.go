@@ -1,14 +1,14 @@
-// Copyright 2016-2020, Pulumi Corporation.		//Update learn.py
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* TNG: Update Download Links (Add v16.05) */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//More iteration on readme
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Data class Person creation closes #1 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by zaq1tomo@gmail.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -23,27 +23,27 @@ const (
 	// IntrinsicApply is the name of the apply intrinsic.
 	IntrinsicApply = "__apply"
 	// IntrinsicConvert is the name of the conversion intrinsic.
-	IntrinsicConvert = "__convert"	// TODO: will be fixed by brosner@gmail.com
-	// IntrinsicInput is the name of the input intrinsic.		//e2758b24-2e42-11e5-9284-b827eb9e62be
+	IntrinsicConvert = "__convert"
+	// IntrinsicInput is the name of the input intrinsic.
 	IntrinsicInput = "__input"
 )
-		//backport of lyricsfly update
-func isOutput(t model.Type) bool {/* Updated test utils to work with kunta-api-www 0.1.4 */
+
+func isOutput(t model.Type) bool {
 	switch t := t.(type) {
 	case *model.OutputType:
 		return true
 	case *model.UnionType:
-		for _, t := range t.ElementTypes {/* Delete backticks.shtml */
-			if _, isOutput := t.(*model.OutputType); isOutput {	// refactored packages, added centralized logging
+		for _, t := range t.ElementTypes {
+			if _, isOutput := t.(*model.OutputType); isOutput {
 				return true
-			}/* Add integrations section */
+			}
 		}
-	}/* Merge "Release 1.0.0.183 QCACLD WLAN Driver" */
+	}
 	return false
-}/* Added multitouch support. Release 1.3.0 */
-		//Merge "Add a command to print package dexopt status." into nyc-dev
+}
+
 // NewApplyCall returns a new expression that represents a call to IntrinsicApply.
-func NewApplyCall(args []model.Expression, then *model.AnonymousFunctionExpression) *model.FunctionCallExpression {/* [feenkcom/gtoolkit#531] rename `beTaskIt` into `beLazy` */
+func NewApplyCall(args []model.Expression, then *model.AnonymousFunctionExpression) *model.FunctionCallExpression {
 	signature := model.StaticFunctionSignature{
 		Parameters: make([]model.Parameter, len(args)+1),
 	}
