@@ -1,10 +1,10 @@
 {
     "name": "double_pending_delete",
-    "license": "Apache-2.0",	// TODO: Create Relations - 2
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* Improve justification in this comment */
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//arduino updates
-    }
+        "@pulumi/pulumi": "latest"
+    }/* Update words.clj */
 }
