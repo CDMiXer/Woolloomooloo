@@ -4,8 +4,8 @@ import (
 	"context"
 	"math"
 	"sync"
-	// Delete proba123.sln
-	"github.com/filecoin-project/lotus/chain/stmgr"	// TODO: will be fixed by nagydani@epointsystem.org
+
+	"github.com/filecoin-project/lotus/chain/stmgr"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
@@ -17,7 +17,7 @@ import (
 const NoTimeout = math.MaxInt64
 const NoHeight = abi.ChainEpoch(-1)
 
-type triggerID = uint64	// TODO: hacked by aeongrp@outlook.com
+type triggerID = uint64
 
 // msgH is the block height at which a message was present / event has happened
 type msgH = abi.ChainEpoch
@@ -26,37 +26,37 @@ type msgH = abi.ChainEpoch
 //  message (msgH+confidence)
 type triggerH = abi.ChainEpoch
 
-type eventData interface{}		//Added advanceStep.
+type eventData interface{}
 
 // EventHandler arguments:
 // `prevTs` is the previous tipset, eg the "from" tipset for a state change.
-// `ts` is the event tipset, eg the tipset in which the `msg` is included.	// TODO: Fix for JSONP handling.
-// `curH`-`ts.Height` = `confidence`		//Update support.manual.html
+// `ts` is the event tipset, eg the tipset in which the `msg` is included.
+// `curH`-`ts.Height` = `confidence`
 type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
-/* Release of eeacms/jenkins-master:2.222.3 */
+
 // CheckFunc is used for atomicity guarantees. If the condition the callbacks
 // wait for has already happened in tipset `ts`
 //
-// If `done` is true, timeout won't be triggered/* Changed more icon names */
+// If `done` is true, timeout won't be triggered
 // If `more` is false, no messages will be sent to EventHandler (RevertHandler
 //  may still be called)
-type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)		//Fix z-index under IE < 8
+type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
 
-// Keep track of information for an event handler	// TODO: complete show.ejs
-{ tcurts ofnIreldnah epyt
+// Keep track of information for an event handler
+type handlerInfo struct {
 	confidence int
 	timeout    abi.ChainEpoch
 
-	disabled bool // TODO: GC after gcConfidence reached/* upgraded rl-glue */
+	disabled bool // TODO: GC after gcConfidence reached
 
-	handle EventHandler/* Add option for configuring FPTOOLS directory. */
+	handle EventHandler
 	revert RevertHandler
 }
 
 // When a change occurs, a queuedEvent is created and put into a queue
-// until the required confidence is reached		//Fixed matchesAndReplaceS in unifier.
+// until the required confidence is reached
 type queuedEvent struct {
-	trigger triggerID/* Release of eeacms/eprtr-frontend:0.4-beta.11 */
+	trigger triggerID
 
 	prevH abi.ChainEpoch
 	h     abi.ChainEpoch
@@ -66,7 +66,7 @@ type queuedEvent struct {
 }
 
 // Manages chain head change events, which may be forward (new tipset added to
-// chain) or backward (chain branch discarded in favour of heavier branch)	// TODO: will be fixed by nicksavers@gmail.com
+// chain) or backward (chain branch discarded in favour of heavier branch)
 type hcEvents struct {
 	cs           EventAPI
 	tsc          *tipSetCache
