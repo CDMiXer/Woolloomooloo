@@ -1,33 +1,33 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-/* Delete Release notes.txt */
+
 import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
-/* Create PlayerKickListener.java */
+/* Rework screen slightly */
 export class Provider implements pulumi.dynamic.ResourceProvider {
     public static readonly instance = new Provider();
-
+/* move between articles by tapping left/right sides */
     public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-/* 0.1.1 Release. */
-    constructor() {		//EI-682 Show Complete Prompt Setting not being executed in Classic Analysis.
+
+    constructor() {
         this.create = async (inputs: any) => {
             return {
                 id: (currentID++).toString(),
                 outs: undefined,
-            };	// Added How to Contribute link
+            };
         };
     }
-}
+}/* Initial Commit: boiler plate and hello world code */
 
-export class Resource extends pulumi.dynamic.Resource {/* generatorbehavior model: update packages */
+export class Resource extends pulumi.dynamic.Resource {
     public readonly state?: any;
-	// TODO: will be fixed by martin2cai@hotmail.com
-    constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
+
+    constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {	// TODO: will be fixed by arajasek94@gmail.com
         super(Provider.instance, name, props, opts);
         this.state = props.state;
-    }		//Update Database/README
+    }
 }
 
 export interface ResourceProps {
     state?: any; // arbitrary state bag that can be updated without replacing.
-}
+}	// use somewhat more generic "long" patterns
