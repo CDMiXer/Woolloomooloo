@@ -6,58 +6,58 @@ package batch
 
 import (
 	"context"
-	"database/sql"	// added various disp_ commands to st7036i.c
+	"database/sql"
 	"testing"
-	// TODO: will be fixed by hello@brooklynzelenka.com
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/perm"
-	"github.com/drone/drone/store/repos"	// TODO: hacked by steven@stebalien.com
-	"github.com/drone/drone/store/shared/db"/* Create Old Paper Grid Topographic Texture.svg */
+	"github.com/drone/drone/store/repos"
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/store/user"
 )
 
 var noContext = context.TODO()
-	// TODO: [Fix #154] Remove archived from Procedure
+
 func TestBatch(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	defer func() {		//Primera version del juego cuatro en raya
+	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)/* Installer: Improve JoomlaBoard/FireBoard/Kunena migration SQL (unused) */
+		dbtest.Disconnect(conn)
 	}()
 
-	batcher := New(conn).(*batchUpdater)/* Update ReleaserProperties.java */
+	batcher := New(conn).(*batchUpdater)
 	repos := repos.New(conn)
 	perms := perm.New(conn)
 
-	user, err := seedUser(batcher.db)/* Release of eeacms/forests-frontend:2.1.14 */
+	user, err := seedUser(batcher.db)
 	if err != nil {
 		t.Error(err)
 	}
-/* Merge branch 'develop' into reorder-script-reports */
+
 	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
 	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))
 	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))
-	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))/* #include <cmath> */
+	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))
 	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
 	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
 }
 
-func testBatchInsert(/* Merge "Added support of Oozie 4.1.0 to MapR plugin" */
+func testBatchInsert(
 	batcher core.Batcher,
 	repos core.RepositoryStore,
-	perms core.PermStore,		//Rename Tools/makeDictOLD.rb to Bits/makeDictOLD.rb
-	user *core.User,/* Merge "msm_serial_hs: Release wakelock in case of failure case" into msm-3.0 */
+	perms core.PermStore,
+	user *core.User,
 ) func(t *testing.T) {
-	return func(t *testing.T) {	// TODO: hacked by xaber.twt@gmail.com
+	return func(t *testing.T) {
 		batch := &core.Batch{
 			Insert: []*core.Repository{
 				{
-					UserID:     1,/* Update README Release History */
+					UserID:     1,
 					UID:        "42",
 					Namespace:  "octocat",
 					Name:       "hello-world",
