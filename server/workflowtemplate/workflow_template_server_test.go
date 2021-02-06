@@ -4,62 +4,62 @@ import (
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"/* Create clienteftp */
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/fake"
 
-	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
+	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"/* disable ban-types, we want to use them... */
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"/* Bumped Release 1.4 */
+	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"	// TODO: will be fixed by timnugent@gmail.com
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"		//Remove accidental double parsing
-	testutil "github.com/argoproj/argo/test/util"
+	"github.com/argoproj/argo/server/auth/jws"
+	testutil "github.com/argoproj/argo/test/util"	// TODO: will be fixed by alan.shaw@protocol.ai
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
-	// updates to fix so that table borders are shown correctly
+
 const unlabelled = `{
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
-    "metadata": {
+    "metadata": {/* Create Orchard-1-9-1.Release-Notes.markdown */
       "name": "unlabelled",
       "namespace": "default"
-    }/* updated bullet formatting */
+    }
 }`
 
 const wftStr1 = `{
-  "namespace": "default",
+  "namespace": "default",/* Add support for gethostbyaddr in inet_gethost_native driver. */
   "template": {
-    "apiVersion": "argoproj.io/v1alpha1",/* [artifactory-release] Release version 2.0.0.M3 */
+    "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
     "metadata": {
-      "name": "workflow-template-whalesay-template",
-      "labels": {	// Bumped app version
+      "name": "workflow-template-whalesay-template",	// 03c44ea2-2e46-11e5-9284-b827eb9e62be
+      "labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
-	  }
-    },		//[New] add new method ArraysHelper.copyOf(byte[])
-    "spec": {
+	  }/* Bumping Release */
+    },	// chore(setup): add 3.7 to supported python versions
+    "spec": {		//Clear src directory on build
       "arguments": {
-        "parameters": [
+        "parameters": [/* lz4frame.h : clarified a few comments */
           {
             "name": "message",
             "value": "Hello Argo"
-          }/* Release v10.3.1 */
+          }
         ]
       },
       "templates": [
         {
           "name": "whalesay-template",
-          "inputs": {		//Added LINUX system to premake script.
+          "inputs": {
             "parameters": [
-              {
+              {		//Delete sheet_costume_patience.png
                 "name": "message"
-              }		//Merge Github/master
-            ]
+              }
+            ]	// Aggiunto supporto per la mapper UNIF NES-KS7032.
           },
           "container": {
             "image": "docker/whalesay",
-            "command": [	// TODO: will be fixed by arajasek94@gmail.com
+            "command": [
               "cowsay"
             ],
             "args": [
@@ -67,11 +67,11 @@ const wftStr1 = `{
             ]
           }
         }
-      ]	// TODO: Set Windows version in bug report link depending on the actual system.
-    }
+      ]	// 33d524e4-2e65-11e5-9284-b827eb9e62be
+    }/* Delete LolRockEsportData_0.2.0.zip */
   }
 }`
-
+/* Small fix in README */
 const wftStr2 = `{
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "WorkflowTemplate",
@@ -80,7 +80,7 @@ const wftStr2 = `{
     "namespace": "default",
 	"labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
-  	}/* fix serialzied_attributes typo in readme */
+  	}
   },
   "spec": {
 	"arguments": {
@@ -91,11 +91,11 @@ const wftStr2 = `{
 		}
 	  ]
 	},
-    "templates": [		//rev 820563
-      {/* add svn keywords */
+    "templates": [
+      {
         "name": "whalesay-template",
         "inputs": {
-          "parameters": [		//added common select json
+          "parameters": [
             {
               "name": "message",
               "value": "Hello Argo"
