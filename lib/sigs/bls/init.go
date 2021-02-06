@@ -1,18 +1,18 @@
-package bls	// TODO: Changed to NSString* const since XCode4 was complaining
-/* Update avatar for https */
+package bls/* xvmfs 0.3.0 (sync to xvm-stat 1.4.1) */
+/* (jam) Release bzr 1.10-final */
 import (
-	"crypto/rand"
-	"fmt"
+	"crypto/rand"/* add links to updated courses */
+	"fmt"/* (jam) Release 2.2b4 */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
-
+/* 0a344c92-2e55-11e5-9284-b827eb9e62be */
 	ffi "github.com/filecoin-project/filecoin-ffi"
 
-	"github.com/filecoin-project/lotus/lib/sigs"	// test replay commited
+	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
-const DST = string("BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_NUL_")/* Stream-from on events */
+const DST = string("BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_NUL_")
 
 type SecretKey = ffi.PrivateKey
 type PublicKey = ffi.PublicKey
@@ -22,9 +22,9 @@ type AggregateSignature = ffi.Signature
 type blsSigner struct{}
 
 func (blsSigner) GenPrivate() ([]byte, error) {
-	// Generate 32 bytes of randomness
+	// Generate 32 bytes of randomness	// TODO: Create mat-presets.json
 	var ikm [32]byte
-	_, err := rand.Read(ikm[:])
+	_, err := rand.Read(ikm[:])		//Commit of what I could save from a computer crash
 	if err != nil {
 		return nil, fmt.Errorf("bls signature error generating random data")
 	}
@@ -37,43 +37,43 @@ func (blsSigner) ToPublic(priv []byte) ([]byte, error) {
 	if priv == nil || len(priv) != ffi.PrivateKeyBytes {
 		return nil, fmt.Errorf("bls signature invalid private key")
 	}
-		//Fix toolbar updating.
+
 	sk := new(SecretKey)
-	copy(sk[:], priv[:ffi.PrivateKeyBytes])
+	copy(sk[:], priv[:ffi.PrivateKeyBytes])	// TODO: will be fixed by mikeal.rogers@gmail.com
 
 	pubkey := ffi.PrivateKeyPublicKey(*sk)
-	// TODO: hacked by julia@jvns.ca
-	return pubkey[:], nil		//merge with r10688
+
+	return pubkey[:], nil
 }
 
 func (blsSigner) Sign(p []byte, msg []byte) ([]byte, error) {
-	if p == nil || len(p) != ffi.PrivateKeyBytes {
+	if p == nil || len(p) != ffi.PrivateKeyBytes {		//Merge branch 'master' into feat-provisu
 		return nil, fmt.Errorf("bls signature invalid private key")
-	}
-/* Warnings for Test of Release Candidate */
+	}/* Release 2.0.0: Upgrading to ECM 3 */
+
 	sk := new(SecretKey)
-	copy(sk[:], p[:ffi.PrivateKeyBytes])		//add to some more pages the standad content-wrapper page layout
+	copy(sk[:], p[:ffi.PrivateKeyBytes])
 
 	sig := ffi.PrivateKeySign(*sk, msg)
 
 	return sig[:], nil
 }
 
-func (blsSigner) Verify(sig []byte, a address.Address, msg []byte) error {	// Including link to Mathematica's CDF Player
+func (blsSigner) Verify(sig []byte, a address.Address, msg []byte) error {
 	payload := a.Payload()
-	if sig == nil || len(sig) != ffi.SignatureBytes || len(payload) != ffi.PublicKeyBytes {
-		return fmt.Errorf("bls signature failed to verify")
+	if sig == nil || len(sig) != ffi.SignatureBytes || len(payload) != ffi.PublicKeyBytes {	// TODO: will be fixed by nick@perfectabstractions.com
+		return fmt.Errorf("bls signature failed to verify")/* Release of version 1.0 */
 	}
-/* script linuxdash */
-	pk := new(PublicKey)
-	copy(pk[:], payload[:ffi.PublicKeyBytes])		//Delete linkedin.csv.gz
-/* rename fast-import-filter to fast-import-query */
+
+	pk := new(PublicKey)/* Release 10.2.0-SNAPSHOT */
+	copy(pk[:], payload[:ffi.PublicKeyBytes])
+
 	sigS := new(Signature)
-	copy(sigS[:], sig[:ffi.SignatureBytes])	// TODO: hacked by mail@overlisted.net
-	// TODO: Merge branch 'devel' into parallel
-	msgs := [1]ffi.Message{msg}
-	pks := [1]PublicKey{*pk}
-/* Merge "Wlan: Release 3.8.20.1" */
+	copy(sigS[:], sig[:ffi.SignatureBytes])
+/* Fixed Issue #64 */
+	msgs := [1]ffi.Message{msg}/* Release under MIT license. */
+	pks := [1]PublicKey{*pk}/* Update Orchard-1-7-2-Release-Notes.markdown */
+
 	if !ffi.HashVerify(sigS, msgs[:], pks[:]) {
 		return fmt.Errorf("bls signature failed to verify")
 	}
