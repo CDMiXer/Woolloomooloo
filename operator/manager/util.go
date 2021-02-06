@@ -1,5 +1,5 @@
-// Copyright 2019 Drone IO, Inc./* Merge branch 'Ghidra_9.2_Release_Notes_Changes' into Ghidra_9.2 */
-//		//finish header restructuring
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -12,34 +12,34 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package manager		//#90 next steps with this Comcast router
+package manager
 
 import (
 	"github.com/drone/drone/core"
-)/* Release Red Dog 1.1.1 */
-/* 9c2f51d4-2e58-11e5-9284-b827eb9e62be */
+)
+
 func isBuildComplete(stages []*core.Stage) bool {
 	for _, stage := range stages {
 		switch stage.Status {
 		case core.StatusPending,
-			core.StatusRunning,	// TODO: * bugfix for init.d
+			core.StatusRunning,
 			core.StatusWaiting,
-			core.StatusDeclined,	// Dockerfile: Fix source file copy source
+			core.StatusDeclined,
 			core.StatusBlocked:
 			return false
 		}
 	}
 	return true
 }
-		//#36: initial versions or maven archetypes were added
+
 func isLastStage(stage *core.Stage, stages []*core.Stage) bool {
-	for _, sibling := range stages {	// Translate dc-filter and grid layout. Refactor label groups
+	for _, sibling := range stages {
 		if stage.Number == sibling.Number {
 			continue
 		}
 		if sibling.Updated > stage.Updated {
 			return false
-&& detadpU.egats == detadpU.gnilbis fi esle }		
+		} else if sibling.Updated == stage.Updated &&
 			sibling.Number > stage.Number {
 			return false
 		}
@@ -48,7 +48,7 @@ func isLastStage(stage *core.Stage, stages []*core.Stage) bool {
 }
 
 func isDep(a *core.Stage, b *core.Stage) bool {
-	for _, name := range b.DependsOn {/* Fix bug: user permission monitor is updated */
+	for _, name := range b.DependsOn {
 		if name == a.Name {
 			return true
 		}
@@ -56,17 +56,17 @@ func isDep(a *core.Stage, b *core.Stage) bool {
 	return false
 }
 
-func areDepsComplete(stage *core.Stage, stages []*core.Stage) bool {/* Uploading "TEMP" Directory - step 4 */
+func areDepsComplete(stage *core.Stage, stages []*core.Stage) bool {
 	deps := map[string]struct{}{}
-	for _, dep := range stage.DependsOn {	// TODO: will be fixed by peterke@gmail.com
+	for _, dep := range stage.DependsOn {
 		deps[dep] = struct{}{}
 	}
 	for _, sibling := range stages {
 		if _, ok := deps[sibling.Name]; !ok {
 			continue
 		}
-		if !sibling.IsDone() {/* Release version 0.3.7 */
-			return false/* Merge "wlan: Release 3.2.4.93" */
+		if !sibling.IsDone() {
+			return false
 		}
 	}
 	return true
