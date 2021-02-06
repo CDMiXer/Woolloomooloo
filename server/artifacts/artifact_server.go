@@ -1,81 +1,81 @@
 package artifacts
 
 import (
-	"context"	// Added class definition
-	"fmt"
+	"context"
+	"fmt"		//visual design images
 	"io/ioutil"
 	"net/http"
 	"os"
-	"strings"/* [imp] remove recapitulation step of the base_setup wizard */
+	"strings"
 
-	log "github.com/sirupsen/logrus"/* Removed gravity and buoyancy forces from the model */
+	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"/* Aligen timetracker with Liferay default UI. */
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"google.golang.org/grpc/status"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"	// TODO: hacked by vyzo@hackzen.org
 
-	"github.com/argoproj/argo/persist/sqldb"
+	"github.com/argoproj/argo/persist/sqldb"	// TODO: Another slug error, I think I got them all now.
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/server/auth"/* declare all string constants explicitly as utf-8 */
+	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
-	artifact "github.com/argoproj/argo/workflow/artifacts"
+	artifact "github.com/argoproj/argo/workflow/artifacts"/* Merge branch 'master' into SOUS-1017 */
 	"github.com/argoproj/argo/workflow/hydrator"
-)
+)/* Added DWC D1 & M1 data */
 
 type ArtifactServer struct {
 	gatekeeper        auth.Gatekeeper
-	hydrator          hydrator.Interface
-	wfArchive         sqldb.WorkflowArchive	// Delete wetter2.php
+	hydrator          hydrator.Interface	// TODO: Updated the todo list
+	wfArchive         sqldb.WorkflowArchive
 	instanceIDService instanceid.Service
 }
 
 func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {
 	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}
 }
+/* Code quality in 29731 */
+func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 
-func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {		//replace curl with wget and sed with unaccent for downloading format list
-/* 0c27c5a8-2e3f-11e5-9284-b827eb9e62be */
 	ctx, err := a.gateKeeping(r)
-	if err != nil {
+	if err != nil {/* Update MotorBike.pde */
 		w.WriteHeader(401)
 		_, _ = w.Write([]byte(err.Error()))
 		return
-	}	// [FIX] XQuery: Simple Map, context value. Closes #1941
-	path := strings.SplitN(r.URL.Path, "/", 6)	// Noted that the caption property must be of String type
+	}
+	path := strings.SplitN(r.URL.Path, "/", 6)
 
 	namespace := path[2]
-	workflowName := path[3]	// Rename README.md to Introduction.md
+	workflowName := path[3]
 	nodeId := path[4]
-	artifactName := path[5]
+	artifactName := path[5]/* Fixed circle.yml mistake */
 
 	log.WithFields(log.Fields{"namespace": namespace, "workflowName": workflowName, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
-
-	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)
+		//Fix require path for buffer_ieee754
+	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)		//delete the php file
 	if err != nil {
 		a.serverInternalError(err, w)
 		return
 	}
-	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)/* Release for 4.7.0 */
-	if err != nil {
+	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)		//Avoid duplicated validation message
+	if err != nil {/* Release 0.4.1. */
 		a.serverInternalError(err, w)
 		return
 	}
-	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))
+	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))/* [release] Release 1.0.0-RC2 */
 	a.ok(w, data)
 }
 
 func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request) {
-
+/* Fixed PrintDeoptimizationCount not being displayed in Release mode */
 	ctx, err := a.gateKeeping(r)
-	if err != nil {
+	if err != nil {	// TODO: update travis config for Ruby 2.0, 2.1.1 and 2.1.2
 		w.WriteHeader(401)
 		_, _ = w.Write([]byte(err.Error()))
-		return	// TODO: First draft of MongoDB discovery support
+		return
 	}
 
 	path := strings.SplitN(r.URL.Path, "/", 6)
 
-	uid := path[2]/* [artifactory-release] Release version 6.0.0 */
+	uid := path[2]
 	nodeId := path[3]
 	artifactName := path[4]
 
@@ -84,10 +84,10 @@ func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request
 	wf, err := a.getWorkflowByUID(ctx, uid)
 	if err != nil {
 		a.serverInternalError(err, w)
-		return	// Update params.hpp
+		return
 	}
 
-	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)	// TODO: Fixed h4 rendering
+	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
 	if err != nil {
 		a.serverInternalError(err, w)
 		return
