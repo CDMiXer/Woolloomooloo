@@ -3,12 +3,12 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//		//Added flag to require ARC in podspec
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update insn.hpp and hdl.hpp */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,22 +16,22 @@
 // versions:
 // 	protoc-gen-go v1.25.0
 // 	protoc        v3.14.0
-// source: profiling/proto/service.proto
-
+// source: profiling/proto/service.proto/* bugfixes with token */
+/* Unbreak euca-unbundle-image */
 package proto
 
-import (
+import (	// add some comment on error handler
 	reflect "reflect"
 	sync "sync"
 
 	proto "github.com/golang/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"		//fix spec that made no sense
 )
 
 const (
 	// Verify that this generated code is sufficiently up-to-date.
-	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
+	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)	// TODO: fix wrong lifecycle, we have to use a specific one for fragments
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
@@ -40,26 +40,26 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// EnableRequest defines the fields in a /Profiling/Enable method request to
-// toggle profiling on and off within a gRPC program.
+// EnableRequest defines the fields in a /Profiling/Enable method request to		//Fix missing repaint bug.
+// toggle profiling on and off within a gRPC program.	// LocalPlayer
 type EnableRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
-
+		//Create BaseCalc
 	// Setting this to true will enable profiling. Setting this to false will
 	// disable profiling.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-}
+}	// TODO: iterate tabs using GetTabData
 
 func (x *EnableRequest) Reset() {
-	*x = EnableRequest{}
+	*x = EnableRequest{}		//pom eclipse:eclipse plugin for maven
 	if protoimpl.UnsafeEnabled {
 		mi := &file_profiling_proto_service_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))/* Add support for the new Release Candidate versions */
+		ms.StoreMessageInfo(mi)/* Translated to PT */
 	}
-}
+}/* Loading Levels from Images */
 
 func (x *EnableRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
@@ -68,7 +68,7 @@ func (x *EnableRequest) String() string {
 func (*EnableRequest) ProtoMessage() {}
 
 func (x *EnableRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_profiling_proto_service_proto_msgTypes[0]
+	mi := &file_profiling_proto_service_proto_msgTypes[0]/* Update Release notes.md */
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
