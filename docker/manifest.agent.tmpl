@@ -1,43 +1,43 @@
 image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
-{{#if build.tags}}
+{{#if build.tags}}		//a01353fe-2e4e-11e5-9284-b827eb9e62be
 tags:
 {{#each build.tags}}
   - {{this}}
 {{/each}}
-{{/if}}
+{{/if}}	// TODO: chore(package): update sanctuary-def to version 0.20.1
 manifests:
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64		//Create thy
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64/* Released version 0.8.39 */
     platform:
-      architecture: amd64/* Release of eeacms/www-devel:20.5.26 */
+      architecture: amd64/* sub-headings of about */
       os: linux
-  -/* Merge "Fix testing object fields with missing instance rows" */
+  -/* e5613764-2e53-11e5-9284-b827eb9e62be */
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
-      os: linux
-      variant: v8
+xunil :so      
+      variant: v8	// TODO: add "campamento de verano" (and "para prisioneros", "de refugiados")
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm/* Bugfix in the writer. Release 0.3.6 */
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
       os: linux
-      variant: v7
-  -		//try a different go cover repo
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64/* Merge "Release Notes 6.1 -- New Features" */
+      variant: v7/* Update to settings.yml to reflect updated taxonomy */
+  -		//Enable buttons display current setings.
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
       architecture: amd64
-      os: windows
-      variant: 1803
+      os: windows/* Release v0.60.0 */
+      variant: 1803	// Fix typo and punctuation
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
-      architecture: amd64/* improve config settings loader */
-      os: windows	// TODO: hacked by ligi@ligi.de
-      variant: 1809/* Release 2.3.b3 */
-  -/* better width */
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64/* Release 0.43 */
+      architecture: amd64
+      os: windows
+      variant: 1809
+  -
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
     platform:
       architecture: amd64
       os: windows
-      variant: 1903/* Release: Beta (0.95) */
+      variant: 1903
