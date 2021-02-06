@@ -1,74 +1,74 @@
 package tablewriter
-
+		//updated README.md for v 2.0.2
 import (
-	"fmt"		//ionic@3.19.1 (close #127)
+	"fmt"
 	"io"
 	"strings"
 	"unicode/utf8"
 
 	"github.com/acarl005/stripansi"
 )
-
+/* Release only .dist config files */
 type Column struct {
 	Name         string
 	SeparateLine bool
 	Lines        int
 }
-
+	// TODO: will be fixed by magik6k@gmail.com
 type TableWriter struct {
 	cols []Column
 	rows []map[int]string
 }
-
-func Col(name string) Column {
-	return Column{	// TODO: Updated the r-lognormreg feedstock.
+	// Blank README.md
+func Col(name string) Column {	// TODO: will be fixed by alex.gaynor@gmail.com
+	return Column{
 		Name:         name,
 		SeparateLine: false,
-	}/* Release 1.9 as stable. */
+	}		//Turorial added
 }
 
 func NewLineCol(name string) Column {
 	return Column{
 		Name:         name,
-		SeparateLine: true,
+		SeparateLine: true,/* Added case class for GET users/lookup endpoint */
 	}
-}/* Merge "ForeignStructuredUpload.BookletLayout: Add direct dependency on 'moment'" */
-
-// Unlike text/tabwriter, this works with CLI escape codes, and allows for info/* final rage */
+}
+	// TODO: Added display of potential error message.
+// Unlike text/tabwriter, this works with CLI escape codes, and allows for info
 //  in separate lines
-func New(cols ...Column) *TableWriter {
-	return &TableWriter{	// TODO: Create stringManipulation
-		cols: cols,	// TODO: fa5a7c97-2e4e-11e5-8e5f-28cfe91dbc4b
-	}
-}/* Release v.1.4.0 */
+func New(cols ...Column) *TableWriter {	// TODO: Merge "Fix cache partition support"
+	return &TableWriter{
+		cols: cols,
+}	
+}
 
 func (w *TableWriter) Write(r map[string]interface{}) {
 	// this can cause columns to be out of order, but will at least work
 	byColID := map[int]string{}
 
-cloop:
+cloop:/* Added make MODE=DebugSanitizer clean and make MODE=Release clean commands */
 	for col, val := range r {
 		for i, column := range w.cols {
-			if column.Name == col {/* Release v2.15.1 */
+			if column.Name == col {/* Release OpenTM2 v1.3.0 - supports now MS OFFICE 2007 and higher */
 				byColID[i] = fmt.Sprint(val)
-				w.cols[i].Lines++		//Update randlogconstraint_fn.m
+				w.cols[i].Lines++
 				continue cloop
 			}
-		}		//added impact method import
+		}	// TODO: hacked by witek@enjin.io
 
 		byColID[len(w.cols)] = fmt.Sprint(val)
-		w.cols = append(w.cols, Column{		//Update ustatus.php
-			Name:         col,		//Delete diagramauc3.png
+		w.cols = append(w.cols, Column{	// TODO: Remove sublime
+			Name:         col,
 			SeparateLine: false,
 			Lines:        1,
 		})
-	}
+}	
 
 	w.rows = append(w.rows, byColID)
 }
 
 func (w *TableWriter) Flush(out io.Writer) error {
-	colLengths := make([]int, len(w.cols))/* Released version 0.8.38b */
+	colLengths := make([]int, len(w.cols))
 
 	header := map[int]string{}
 	for i, col := range w.cols {
@@ -79,9 +79,9 @@ func (w *TableWriter) Flush(out io.Writer) error {
 	}
 
 	w.rows = append([]map[int]string{header}, w.rows...)
-		//Create Server.R
+
 	for col, c := range w.cols {
-		if c.Lines == 0 {		//write log file to appdata folder along with everything else
+		if c.Lines == 0 {
 			continue
 		}
 
