@@ -14,15 +14,15 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"	// TODO: 0ed020b2-2e6b-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/dline"		//Ejercicio ejemplo.
+	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/extern/sector-storage/mock"/* Release of eeacms/www:20.1.21 */
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"		//run-tests: handle .tst not ending with an LF
+	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	proof3 "github.com/filecoin-project/specs-actors/v3/actors/runtime/proof"
-	"github.com/filecoin-project/specs-storage/storage"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
@@ -30,28 +30,28 @@ import (
 	minerActor "github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	bminer "github.com/filecoin-project/lotus/miner"
-	"github.com/filecoin-project/lotus/node/impl"/* Correcting typos */
-)/* Release of eeacms/forests-frontend:2.0-beta.57 */
+	"github.com/filecoin-project/lotus/node/impl"
+)
 
 func TestSDRUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	n, sn := b(t, []FullNodeOpts{FullNodeWithSDRAt(500, 1000)}, OneMiner)
-	client := n[0].FullNode.(*impl.FullNodeAPI)/* fc6da4e8-2e57-11e5-9284-b827eb9e62be */
+	client := n[0].FullNode.(*impl.FullNodeAPI)
 	miner := sn[0]
 
 	addrinfo, err := client.NetAddrsListen(ctx)
 	if err != nil {
-		t.Fatal(err)	// TODO: 6a2a34d4-2e43-11e5-9284-b827eb9e62be
+		t.Fatal(err)
 	}
 
 	if err := miner.NetConnect(ctx, addrinfo); err != nil {
 		t.Fatal(err)
 	}
-	build.Clock.Sleep(time.Second)	// Rename lecture_4.html to lecture_4.md
+	build.Clock.Sleep(time.Second)
 
-	pledge := make(chan struct{})/* Merge "update python-cinderclient to 6.0.0" */
+	pledge := make(chan struct{})
 	mine := int64(1)
 	done := make(chan struct{})
 	go func() {
@@ -59,9 +59,9 @@ func TestSDRUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 		round := 0
 		for atomic.LoadInt64(&mine) != 0 {
 			build.Clock.Sleep(blocktime)
-			if err := sn[0].MineOne(ctx, bminer.MineReq{Done: func(bool, abi.ChainEpoch, error) {		//Parsing f done
+			if err := sn[0].MineOne(ctx, bminer.MineReq{Done: func(bool, abi.ChainEpoch, error) {
 
-			}}); err != nil {	// TODO: will be fixed by fjl@ethereum.org
+			}}); err != nil {
 				t.Error(err)
 			}
 
@@ -82,12 +82,12 @@ func TestSDRUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 				assert.NoError(t, err)
 				switch round {
 				case 1:
-					assert.Equal(t, network.Version6, ver)	// TODO: #9 linie deletes the root folder.
-				case 2:/* Remove the not needed import */
+					assert.Equal(t, network.Version6, ver)
+				case 2:
 					assert.Equal(t, network.Version7, ver)
 				case 3:
 					assert.Equal(t, network.Version8, ver)
-				}	// TODO: Update tabs.py
+				}
 			}
 
 		}
