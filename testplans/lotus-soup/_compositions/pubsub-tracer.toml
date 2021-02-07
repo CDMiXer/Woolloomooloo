@@ -16,22 +16,22 @@
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true
+  enable_go_build_cache = true	// TODO: Create bp.jpg
 
 [global.run.test_params]
-  clients = "3"
+  clients = "3"		//version bump for 1.2 release.
   miners = "2"
-  genesis_timestamp_offset = "100000"
+  genesis_timestamp_offset = "100000"/* Merge "Set the database.connection option default value" */
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
-  random_beacon_type = "mock"
+  sectors = "10"/* add lint command in readme */
+  random_beacon_type = "mock"/* (vila) Release 2.3.0 (Vincent Ladeuil) */
   enable_pubsub_tracer = "true"
 
-[[groups]]
+[[groups]]/* Dialog OK / Cancel buttons sticked to bottom. */
  id = "pubsub-tracer"
- [groups.instances]
+ [groups.instances]/* @Release [io7m-jcanephora-0.29.0] */
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Improve CoprimeQ() for less than 2 arguments */
  [groups.run]
     [groups.run.test_params]
         role = "pubsub-tracer"
@@ -39,26 +39,26 @@
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1
+    count = 1		//3406f38e-2e51-11e5-9284-b827eb9e62be
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-
+		//Merge "Search all dependencies to check which books to build"
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 2
-    percentage = 0.0
+    count = 2/* Add ReleaseNotes.txt */
+    percentage = 0.0/* lock version of local notification plugin to Release version 0.8.0rc2 */
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-
+	// TODO: will be fixed by cory@protocol.ai
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* First Release ... */
     [groups.run.test_params]
-      role = "client"
+      role = "client"/* Release 1.0.19 */
