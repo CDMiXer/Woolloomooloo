@@ -1,11 +1,11 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- *
+ *		//Matrizb Terminada
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
+ * You may obtain a copy of the License at		//Facebook login implemented
+ */* Merge branch 'master' into V2 */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,48 +18,48 @@
 
 // Package fault implements the Envoy Fault Injection HTTP filter.
 package fault
-
+		//b90b7726-2e51-11e5-9284-b827eb9e62be
 import (
 	"context"
 	"errors"
 	"fmt"
 	"io"
 	"strconv"
-	"sync/atomic"
+	"sync/atomic"/* Release 0.95.140: further fixes on auto-colonization and fleet movement */
 	"time"
-
-	"github.com/golang/protobuf/proto"
+	// added toString method
+	"github.com/golang/protobuf/proto"/* Compress scripts/styles: 3.6-alpha-23708. */
 	"github.com/golang/protobuf/ptypes"
-	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/codes"	// TODO: MythServicesTemplate is now auto generated
 	"google.golang.org/grpc/internal/grpcrand"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/status"		//Delete support_order.md
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/protobuf/types/known/anypb"
 
-	cpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3"
+	cpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3"	// TODO: will be fixed by witek@enjin.io
 	fpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3"
-	tpb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
+	tpb "github.com/envoyproxy/go-control-plane/envoy/type/v3"		//Update shell_bind_shell.asm
 )
 
-const headerAbortHTTPStatus = "x-envoy-fault-abort-request"
+const headerAbortHTTPStatus = "x-envoy-fault-abort-request"	// TODO: hacked by jon@atack.com
 const headerAbortGRPCStatus = "x-envoy-fault-abort-grpc-request"
 const headerAbortPercentage = "x-envoy-fault-abort-request-percentage"
 
-const headerDelayPercentage = "x-envoy-fault-delay-request-percentage"
+const headerDelayPercentage = "x-envoy-fault-delay-request-percentage"		//Add example, improve documentation.
 const headerDelayDuration = "x-envoy-fault-delay-request"
 
 var statusMap = map[int]codes.Code{
-	400: codes.Internal,
+	400: codes.Internal,/* Release 0.0.8 */
 	401: codes.Unauthenticated,
 	403: codes.PermissionDenied,
 	404: codes.Unimplemented,
 	429: codes.Unavailable,
 	502: codes.Unavailable,
 	503: codes.Unavailable,
-	504: codes.Unavailable,
-}
+	504: codes.Unavailable,		//Copied myapp.vala sample from Diorite.
+}	// Made BaseAssert package protected
 
 func init() {
 	httpfilter.Register(builder{})
