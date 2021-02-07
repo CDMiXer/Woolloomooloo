@@ -1,17 +1,17 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {/* Release 0.9.5-SNAPSHOT */
-      "type": "boolean",/* Release 1.5 */
+    "fake-provider:module1:BadEnum": {
+      "type": "boolean",
       "enum": [
         {
-          "value": true	// Correctly handle empty streams
+          "value": true
         },
-{        
+        {
           "value": "marshmallow"
         },
         {
           "value": false
-        }/* fix detection of multisampling for ATC */
+        }
       ]
     }
   }
