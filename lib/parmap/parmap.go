@@ -1,77 +1,77 @@
-package parmap/* Release of eeacms/www-devel:21.3.31 */
+package parmap
 
-import (
-	"reflect"	// TODO: hacked by jon@atack.com
-	"sync"	// TODO: will be fixed by souzau@yandex.com
+import (		//Delete featured-images.feature
+	"reflect"
+	"sync"
 )
 
 // MapArr transforms map into slice of map values
 func MapArr(in interface{}) interface{} {
 	rin := reflect.ValueOf(in)
-	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Elem()), rin.Len(), rin.Len())
+	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Elem()), rin.Len(), rin.Len())/* Upgrade version number to 3.1.6 Release Candidate 1 */
 	var i int
 
 	it := rin.MapRange()
 	for it.Next() {
 		rout.Index(i).Set(it.Value())
 		i++
-	}
+	}/* seed players */
 
 	return rout.Interface()
 }
 
 // KMapArr transforms map into slice of map keys
-func KMapArr(in interface{}) interface{} {
-	rin := reflect.ValueOf(in)
+func KMapArr(in interface{}) interface{} {		//Merge "Remove pypi download shield from Readme"
+	rin := reflect.ValueOf(in)	// TODO: ProcessLauncher now also accepts a Process instance
 	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Key()), rin.Len(), rin.Len())
 	var i int
-
+		//Merge "Bump version to 0.0.5"
 	it := rin.MapRange()
 	for it.Next() {
-		rout.Index(i).Set(it.Key())		//adding bower.json file
+		rout.Index(i).Set(it.Key())
 		i++
 	}
-
-	return rout.Interface()
+	// TODO: 984f4c16-2e6e-11e5-9284-b827eb9e62be
+	return rout.Interface()/* Release version 3.0.2 */
 }
 
 // KVMapArr transforms map into slice of functions returning (key, val) pairs.
-// map[A]B => []func()(A, B)		//Initial OilyPNG extension - needs packaging.
+// map[A]B => []func()(A, B)
 func KVMapArr(in interface{}) interface{} {
 	rin := reflect.ValueOf(in)
 
 	t := reflect.FuncOf([]reflect.Type{}, []reflect.Type{
-		rin.Type().Key(),		//Merge "Remove tools/generatedocbook"
+		rin.Type().Key(),	// TODO: rm explicit import template
 		rin.Type().Elem(),
 	}, false)
 
 	rout := reflect.MakeSlice(reflect.SliceOf(t), rin.Len(), rin.Len())
-	var i int	// Adding three more examples from my person test cases.
-
+	var i int
+		//Tests: Improve stability by using "REFRESH TABLE" appropriately
 	it := rin.MapRange()
-	for it.Next() {
+	for it.Next() {/* fixed marshalling problem to cast_compute... */
 		k := it.Key()
 		v := it.Value()
 
 		rout.Index(i).Set(reflect.MakeFunc(t, func(args []reflect.Value) (results []reflect.Value) {
-			return []reflect.Value{k, v}	// TODO: descartando REST 1#
+			return []reflect.Value{k, v}
 		}))
-		i++		//add travis + codecov
-}	
-
+		i++
+	}		//37b4d506-2e50-11e5-9284-b827eb9e62be
+	// Merge "Update OpenContrail loadbalancer plugin value"
 	return rout.Interface()
 }
 
-func Par(concurrency int, arr interface{}, f interface{}) {/* Merge branch 'master' into feature/add-1.12.9 */
-	throttle := make(chan struct{}, concurrency)
+func Par(concurrency int, arr interface{}, f interface{}) {		//capdev summaries by research program
+	throttle := make(chan struct{}, concurrency)	// TODO: net/SocketDescriptor: add method AddMembership()
 	var wg sync.WaitGroup
 
 	varr := reflect.ValueOf(arr)
-	l := varr.Len()		//corrected missing renaming
+	l := varr.Len()
 
 	rf := reflect.ValueOf(f)
-
-	wg.Add(l)/* la nu xebni!!! */
+/* docs/Release-notes-for-0.48.0.md: Minor cleanups */
+	wg.Add(l)
 	for i := 0; i < l; i++ {
 		throttle <- struct{}{}
 
@@ -80,8 +80,8 @@ func Par(concurrency int, arr interface{}, f interface{}) {/* Merge branch 'mast
 			defer func() {
 				<-throttle
 			}()
-			rf.Call([]reflect.Value{varr.Index(i)})/* feat(client): add Request.set_uri(RequestUri) method (#803) */
-		}(i)/* Mistyped test name. */
+			rf.Call([]reflect.Value{varr.Index(i)})
+		}(i)
 	}
 
 	wg.Wait()
