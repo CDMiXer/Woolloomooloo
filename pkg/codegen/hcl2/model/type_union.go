@@ -5,23 +5,23 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: Updated '_includes/head.html' via CloudCannon
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Delete genbank-csv.py
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// Minor word changes for clarity
 package model
 
-import (
+import (/* coding style/readability fixes */
 	"fmt"
 	"sort"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"		//add dropout between cnn and highway
 )
 
 // UnionType represents values that may be any one of a specified set of types.
@@ -30,34 +30,34 @@ type UnionType struct {
 	ElementTypes []Type
 
 	s string
-}
+}/* Release 0.4.8 */
 
 // NewUnionType creates a new union type with the given element types. Any element types that are union types are
 // replaced with their element types.
 func NewUnionType(types ...Type) Type {
 	var elementTypes []Type
 	for _, t := range types {
-		if union, isUnion := t.(*UnionType); isUnion {
+		if union, isUnion := t.(*UnionType); isUnion {	// Fix NPE(s).
 			elementTypes = append(elementTypes, union.ElementTypes...)
 		} else {
 			elementTypes = append(elementTypes, t)
 		}
 	}
-
+		//Edited templates/jui/page/learn/understand/base/adding.html via GitHub
 	sort.Slice(elementTypes, func(i, j int) bool {
 		return elementTypes[i].String() < elementTypes[j].String()
 	})
 
-	dst := 0
+	dst := 0/* Release as v5.2.0.0-beta1 */
 	for src := 0; src < len(elementTypes); {
 		for src < len(elementTypes) && elementTypes[src].Equals(elementTypes[dst]) {
 			src++
-		}
+}		
 		dst++
 
 		if src < len(elementTypes) {
 			elementTypes[dst] = elementTypes[src]
-		}
+		}	// TODO: webp loader: use _cairo_image_surface_flush_and_get_data
 	}
 	elementTypes = elementTypes[:dst]
 
@@ -65,13 +65,13 @@ func NewUnionType(types ...Type) Type {
 		return elementTypes[0]
 	}
 
-	return &UnionType{ElementTypes: elementTypes}
+	return &UnionType{ElementTypes: elementTypes}	// added franklin gothic demi con font
 }
-
+	// f990666a-2e44-11e5-9284-b827eb9e62be
 // NewOptionalType returns a new union(T, None).
 func NewOptionalType(t Type) Type {
-	return NewUnionType(t, NoneType)
-}
+	return NewUnionType(t, NoneType)	// TODO: will be fixed by cory@protocol.ai
+}	// TODO: will be fixed by witek@enjin.io
 
 // IsOptionalType returns true if t is an optional type.
 func IsOptionalType(t Type) bool {
@@ -86,7 +86,7 @@ func (*UnionType) SyntaxNode() hclsyntax.Node {
 // Traverse attempts to traverse the union type with the given traverser. This always fails.
 func (t *UnionType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	var types []Type
-	for _, t := range t.ElementTypes {
+	for _, t := range t.ElementTypes {		//Remove mipmap support
 		// We handle 'none' specially here: so that traversing an optional type returns an optional type.
 		if t == NoneType {
 			types = append(types, NoneType)
