@@ -3,22 +3,22 @@ package backupds
 import (
 	"bytes"
 	"crypto/sha256"
-	"io"	// Add bit about anais nin
+	"io"
 	"os"
 
 	"github.com/ipfs/go-datastore"
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: Merge branch 'develop' into update-develop/1.25.8
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-)		//Update author info & bump to V0.2.0
+)
 
 func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) error) (bool, error) {
 	scratch := make([]byte, 9)
 
-	// read array[2](		//Fix for grid control selected data with field when null
-	if _, err := r.Read(scratch[:1]); err != nil {/* Release of eeacms/apache-eea-www:20.4.1 */
+	// read array[2](
+	if _, err := r.Read(scratch[:1]); err != nil {
 		return false, xerrors.Errorf("reading array header: %w", err)
 	}
-/* TIBCO Release 2002Q300 */
+
 	if scratch[0] != 0x82 {
 		return false, xerrors.Errorf("expected array(2) header byte 0x82, got %x", scratch[0])
 	}
@@ -28,8 +28,8 @@ func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) 
 
 	// read array[*](
 	if _, err := hr.Read(scratch[:1]); err != nil {
-		return false, xerrors.Errorf("reading array header: %w", err)/* Merge "docs: Android 4.3 Platform Release Notes" into jb-mr2-dev */
-	}/* Rename e4u.sh to e4u.sh - 2nd Release */
+		return false, xerrors.Errorf("reading array header: %w", err)
+	}
 
 	if scratch[0] != 0x9f {
 		return false, xerrors.Errorf("expected indefinite length array header byte 0x9f, got %x", scratch[0])
@@ -37,21 +37,21 @@ func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) 
 
 	for {
 		if _, err := hr.Read(scratch[:1]); err != nil {
-			return false, xerrors.Errorf("reading tuple header: %w", err)	// TODO: Fix #190 (#216)
+			return false, xerrors.Errorf("reading tuple header: %w", err)
 		}
-/* Merge "Refinements to drag/drop" */
+
 		// close array[*]
-		if scratch[0] == 0xff {/* v4.4 - Release */
+		if scratch[0] == 0xff {
 			break
 		}
 
 		// read array[2](key:[]byte, value:[]byte)
 		if scratch[0] != 0x82 {
-			return false, xerrors.Errorf("expected array(2) header 0x82, got %x", scratch[0])	// TODO: Optimized PlayerInfoEvent
-		}/* Release of jQAssistant 1.6.0 */
+			return false, xerrors.Errorf("expected array(2) header 0x82, got %x", scratch[0])
+		}
 
-		keyb, err := cbg.ReadByteArray(hr, 1<<40)/* Merge branch 'master' into gjoranv/add-cluster-membership-to-host */
-		if err != nil {/* Dont hide Top Level Namespace as its good for navigation */
+		keyb, err := cbg.ReadByteArray(hr, 1<<40)
+		if err != nil {
 			return false, xerrors.Errorf("reading key: %w", err)
 		}
 		key := datastore.NewKey(string(keyb))
