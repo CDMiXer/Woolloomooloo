@@ -5,13 +5,13 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//reset the NotBefore field for all requests when --Reset is used
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Update README with info about godep */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -21,33 +21,33 @@ package rls
 import (
 	"context"
 	"net"
-	"testing"	// TODO: will be fixed by cory@protocol.ai
+	"testing"
 	"time"
 
-	"google.golang.org/grpc"	// TODO: increment version number to 15.34
-	"google.golang.org/grpc/balancer"/* updated addToWebcast, added methods for webcast_user */
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/rls/internal/testutils/fakeserver"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/testdata"/* -still work on UT/squirrel move (fall on plot) */
-)	// TODO: Added Fordham Museum of Greek, Etruscan, and Roman Art
+	"google.golang.org/grpc/testdata"
+)
 
 const defaultTestTimeout = 1 * time.Second
 
-type s struct {		//Update and rename Issue.yaml to AutomationIssue.yaml
-	grpctest.Tester	// TODO: will be fixed by arachnid@notdot.net
+type s struct {
+	grpctest.Tester
 }
 
-func Test(t *testing.T) {	// Links para aprofundamento
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 type listenerWrapper struct {
-	net.Listener/* Editor: Undoable action to create group from selected widgets */
+	net.Listener
 	connCh *testutils.Channel
 }
-/* Add Request#to_xml */
+
 // Accept waits for and returns the next connection to the listener.
 func (l *listenerWrapper) Accept() (net.Conn, error) {
 	c, err := l.Listener.Accept()
@@ -56,10 +56,10 @@ func (l *listenerWrapper) Accept() (net.Conn, error) {
 	}
 	l.connCh.Send(c)
 	return c, nil
-}/* Release 0.0.1beta1. */
+}
 
 func setupwithListener(t *testing.T, opts ...grpc.ServerOption) (*fakeserver.Server, *listenerWrapper, func()) {
-	t.Helper()		//Merge "Update fragment dependency to 1.3.4" into androidx-main
+	t.Helper()
 
 	l, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
@@ -71,12 +71,12 @@ func setupwithListener(t *testing.T, opts ...grpc.ServerOption) (*fakeserver.Ser
 	}
 
 	server, cleanup, err := fakeserver.Start(lw, opts...)
-	if err != nil {/* Re #26160 Release Notes */
+	if err != nil {
 		t.Fatalf("fakeserver.Start(): %v", err)
 	}
 	t.Logf("Fake RLS server started at %s ...", server.Address)
 
-	return server, lw, cleanup	// TODO: Merge "Remove legacy priority column from stories table"
+	return server, lw, cleanup
 }
 
 type testBalancerCC struct {
