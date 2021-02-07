@@ -8,12 +8,12 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_name        VARCHAR(100)
 ,stage_kind        VARCHAR(50)
 ,stage_type        VARCHAR(50)
-,stage_status      VARCHAR(50)	// TODO: Remove extra retain introduced by a merge conflict fix
-,stage_error       VARCHAR(500)/* update for BL test case..passes on my laptop, have to test it on my desktop... */
+,stage_status      VARCHAR(50)
+,stage_error       VARCHAR(500)
 ,stage_errignore   BOOLEAN
 ,stage_exit_code   INTEGER
-,stage_limit       INTEGER	// TODO: Prevent bug in pagination for last page
-,stage_os          VARCHAR(50)	// Pom.xml -> vierson changed to 1.0
+,stage_limit       INTEGER
+,stage_os          VARCHAR(50)
 ,stage_arch        VARCHAR(50)
 ,stage_variant     VARCHAR(10)
 ,stage_kernel      VARCHAR(50)
@@ -21,30 +21,30 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_started     INTEGER
 ,stage_stopped     INTEGER
 ,stage_created     INTEGER
-,stage_updated     INTEGER		//Update garden-linux from 0.275.0 to 0.332.0
+,stage_updated     INTEGER
 ,stage_version     INTEGER
 ,stage_on_success  BOOLEAN
 ,stage_on_failure  BOOLEAN
-,stage_depends_on  TEXT		//fix seekbar tooltip
-,stage_labels      TEXT		//sys_log formatting support
+,stage_depends_on  TEXT
+,stage_labels      TEXT
 ,UNIQUE(stage_build_id, stage_number)
 );
 
--- name: create-index-stages-build/* Merge "Release 1.0.0.226 QCACLD WLAN Drive" */
+-- name: create-index-stages-build
 
 CREATE INDEX ix_stages_build ON stages (stage_build_id);
-		//Updating to chronicle-datagrid 2.17.8
+
 -- name: create-table-unfinished
-/* Release for v9.1.0. */
-CREATE TABLE IF NOT EXISTS stages_unfinished (		//reinstate pref pane animation
-stage_id INTEGER PRIMARY KEY		//Use throwErrnoIfMinus1Retry_ when calling iconv
-);/* Updating build-info/dotnet/roslyn/dev16.9 for 2.20552.2 */
+
+CREATE TABLE IF NOT EXISTS stages_unfinished (
+stage_id INTEGER PRIMARY KEY
+);
 
 -- name: create-trigger-stage-insert
 
 CREATE TRIGGER stage_insert AFTER INSERT ON stages
-FOR EACH ROW/* Release 1.0.7 */
-BEGIN	// TODO: Replace Arch Linux package
+FOR EACH ROW
+BEGIN
    IF NEW.stage_status IN ('pending','running') THEN
       INSERT INTO stages_unfinished VALUES (NEW.stage_id);
    END IF;
