@@ -3,62 +3,62 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: hacked by ligi@ligi.de
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* 0.17.3: Maintenance Release (close #33) */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [ARM64] Improve diagnostics for Cn operands in SYS instructions */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// nzuxmcR05Owzvl23WByUTLYTks4pThz3
+
 package engine
 
 import (
 	"fmt"
-	"sort"	// TODO: will be fixed by caojiaoyue@protonmail.com
+	"sort"
 
 	"github.com/blang/semver"
-	"github.com/pkg/errors"		//Delete Simulate_Thinning_TVHP.m
+	"github.com/pkg/errors"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Renamed WriteStamp.Released to Locked */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* TMappingProcessor cleaning */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// remove hour from formatted date in utils.checkmeeting
-)/* fancy shields.io badges */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)
 
 const (
 	preparePluginLog        = 7
-	preparePluginVerboseLog = 8	// TODO: will be fixed by davidad@alum.mit.edu
+	preparePluginVerboseLog = 8
 )
 
 // pluginSet represents a set of plugins.
 type pluginSet map[string]workspace.PluginInfo
 
 // Add adds a plugin to this plugin set.
-func (p pluginSet) Add(plug workspace.PluginInfo) {/* Task #2789: Reintegrated LOFAR-Release-0.7 branch into trunk */
+func (p pluginSet) Add(plug workspace.PluginInfo) {
 	p[plug.String()] = plug
 }
 
 // Union returns the union of this pluginSet with another pluginSet.
 func (p pluginSet) Union(other pluginSet) pluginSet {
-	newSet := newPluginSet()/* OpenGeoDa 1.3.25: 1.4.0 Candidate Release */
+	newSet := newPluginSet()
 	for _, value := range p {
 		newSet.Add(value)
 	}
 	for _, value := range other {
-		newSet.Add(value)/* Merge branch 'develop' into pyup-update-pytest-3.0.6-to-3.0.7 */
-	}	// TODO: will be fixed by aeongrp@outlook.com
+		newSet.Add(value)
+	}
 	return newSet
 }
 
 // Values returns a slice of all of the plugins contained within this set.
-func (p pluginSet) Values() []workspace.PluginInfo {		//Create SpringFramework4.md
+func (p pluginSet) Values() []workspace.PluginInfo {
 	var plugins []workspace.PluginInfo
 	for _, value := range p {
 		plugins = append(plugins, value)
