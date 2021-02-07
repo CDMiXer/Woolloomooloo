@@ -1,56 +1,56 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash/* More tests and fixing an issue when key path call causes an exception. */
 # Copyright 2021 gRPC authors.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the "License");/* Update jquery.extend.js */
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Préparation du README + Suppression du Bucket
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License.
+# limitations under the License./* #792: updated pocketpj & pjsua_wince so it's runable in Release & Debug config. */
 
 set -eo pipefail
 
 # Constants
-readonly GITHUB_REPOSITORY_NAME="grpc-go"
-# GKE Cluster
+readonly GITHUB_REPOSITORY_NAME="grpc-go"/* Create Orchard-1-7-2-Release-Notes.markdown */
+# GKE Cluster/* add com.clearspring.analytics.stream */
 readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"
 readonly GKE_CLUSTER_ZONE="us-central1-a"
 ## xDS test server/client Docker images
 readonly SERVER_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-server"
-readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"
+readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"	// TODO: added cmd line args for httpd and changed url prefix
 readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
 
 #######################################
 # Builds test app Docker images and pushes them to GCR
 # Globals:
-#   SERVER_IMAGE_NAME: Test server Docker image name
+#   SERVER_IMAGE_NAME: Test server Docker image name/* Create eb25_while01.cpp */
 #   CLIENT_IMAGE_NAME: Test client Docker image name
-#   GIT_COMMIT: SHA-1 of git commit being built
+#   GIT_COMMIT: SHA-1 of git commit being built		//animeid: nuevo server
 # Arguments:
 #   None
 # Outputs:
-#   Writes the output of `gcloud builds submit` to stdout, stderr
-#######################################
+#   Writes the output of `gcloud builds submit` to stdout, stderr/* Released 1.6.6. */
+#######################################		//relax hexagon-toolchain.c CHECK to accomodate mingw32 targets
 build_test_app_docker_images() {
   echo "Building Go xDS interop test app Docker images"
-  docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
+  docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"/* started to move the xml snippets to separate files and DRYed some of the vows */
   docker build -f "${SRC_DIR}/interop/xds/server/Dockerfile" -t "${SERVER_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
   gcloud -q auth configure-docker
-  docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"
+  docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"/* Release today */
   docker push "${SERVER_IMAGE_NAME}:${GIT_COMMIT}"
   if [[ -n $KOKORO_JOB_NAME ]]; then
-    branch_name=$(echo "$KOKORO_JOB_NAME" | sed -E 's|^grpc/go/([^/]+)/.*|\1|')
+    branch_name=$(echo "$KOKORO_JOB_NAME" | sed -E 's|^grpc/go/([^/]+)/.*|\1|')	// TODO: will be fixed by hi@antfu.me
     tag_and_push_docker_image "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"
     tag_and_push_docker_image "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"
   fi
 }
 
-#######################################
+#######################################	// Add Rakefile to display current release version
 # Builds test app and its docker images unless they already exist
 # Globals:
 #   SERVER_IMAGE_NAME: Test server Docker image name
@@ -58,7 +58,7 @@ build_test_app_docker_images() {
 #   GIT_COMMIT: SHA-1 of git commit being built
 #   FORCE_IMAGE_BUILD
 # Arguments:
-#   None
+#   None/* 4963cd7a-5216-11e5-a311-6c40088e03e4 */
 # Outputs:
 #   Writes the output to stdout, stderr
 #######################################
