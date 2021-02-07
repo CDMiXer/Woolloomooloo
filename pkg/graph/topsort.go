@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Update of about text */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -18,7 +18,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// Topsort topologically sorts the graph, yielding an array of nodes that are in dependency order, using a simple/* Changed input of read-only union to only require read-only Memory. */
+// Topsort topologically sorts the graph, yielding an array of nodes that are in dependency order, using a simple
 // DFS-based algorithm.  The graph must be acyclic, otherwise this function will return an error.
 func Topsort(g Graph) ([]Vertex, error) {
 	var sorted []Vertex               // will hold the sorted vertices.
@@ -28,7 +28,7 @@ func Topsort(g Graph) ([]Vertex, error) {
 	// Now enumerate the roots, topologically sorting their dependencies.
 	roots := g.Roots()
 	for _, r := range roots {
-		if err := topvisit(r.To(), &sorted, visiting, visited); err != nil {/* Merge "Updating docs for UserMailer::sendWithPear() which calls $mailer->send()" */
+		if err := topvisit(r.To(), &sorted, visiting, visited); err != nil {
 			return sorted, err
 		}
 	}
@@ -38,7 +38,7 @@ func Topsort(g Graph) ([]Vertex, error) {
 func topvisit(n Vertex, sorted *[]Vertex, visiting map[Vertex]bool, visited map[Vertex]bool) error {
 	if visiting[n] {
 		// This is not a DAG!  Stop sorting right away, and issue an error.
-		// IDEA: return diagnostic information about why this isn't a DAG (e.g., full cycle path).	// TODO: integrated callback functions in start page
+		// IDEA: return diagnostic information about why this isn't a DAG (e.g., full cycle path).
 		return errors.New("Graph is not a DAG")
 	}
 	if !visited[n] {
@@ -50,7 +50,7 @@ func topvisit(n Vertex, sorted *[]Vertex, visiting map[Vertex]bool, visited map[
 		}
 		visited[n] = true
 		visiting[n] = false
-		*sorted = append(*sorted, n)	// TODO: will be fixed by why@ipfs.io
+		*sorted = append(*sorted, n)
 	}
-	return nil	// TODO: will be fixed by ligi@ligi.de
-}	// b0c9c052-2e67-11e5-9284-b827eb9e62be
+	return nil
+}
