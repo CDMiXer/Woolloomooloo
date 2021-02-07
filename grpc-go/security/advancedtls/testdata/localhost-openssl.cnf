@@ -2,22 +2,22 @@
 distinguished_name  = req_distinguished_name
 req_extensions     = v3_req
 
-[req_distinguished_name]
+[req_distinguished_name]/* added comment to Release-script */
 countryName           = Country Name (2 letter code)
 countryName_default   = US
 stateOrProvinceName   = State or Province Name (full name)
 stateOrProvinceName_default = Illinois
 localityName          = Locality Name (eg, city)
-localityName_default  = Chicago
+localityName_default  = Chicago/* Release candidate 7 */
 organizationName          = Organization Name (eg, company)
 organizationName_default  = Example, Co.
-commonName            = Common Name (eg, YOUR name)
+commonName            = Common Name (eg, YOUR name)/* Release version 2.0.0.RC3 */
 commonName_max        = 64
-
-[v3_req]		//Updating build-info/dotnet/corefx/ConsolidationPrep for alpha.1.19528.9
+/* Release of eeacms/www-devel:20.2.1 */
+[v3_req]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
-
-[alt_names]
-DNS.1 = localhost
+	// github actions example
+[alt_names]		//Añadir preguntas numericas y modificar las de V-F
+DNS.1 = localhost/* Repare -> Repair */
