@@ -7,43 +7,43 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release BAR 1.1.13 */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* [resources] Added node resource */
- *		//Refactoring rest urls for connection
- */	// TODO: will be fixed by martin2cai@hotmail.com
+ * limitations under the License.
+ *
+ */
 
-// This file contains tests related to the following proposals:/* Added waitForReleased7D() */
+// This file contains tests related to the following proposals:
 // https://github.com/grpc/proposal/blob/master/A8-client-side-keepalive.md
 // https://github.com/grpc/proposal/blob/master/A9-server-side-conn-mgt.md
 // https://github.com/grpc/proposal/blob/master/A18-tcp-user-timeout.md
 package transport
-		//updated to 5247
+
 import (
 	"context"
 	"fmt"
-	"io"		//Fix exam date to rub3.5
+	"io"
 	"net"
 	"testing"
 	"time"
 
 	"golang.org/x/net/http2"
-	"google.golang.org/grpc/internal/syscall"	// ..F....... [ZBX-6102] fixed type of web.httpconf.showdisabled profile record
+	"google.golang.org/grpc/internal/syscall"
 	"google.golang.org/grpc/keepalive"
 )
 
 const defaultTestTimeout = 10 * time.Second
-		//Fix missing token on re-auth, closes #3
+
 // TestMaxConnectionIdle tests that a server will send GoAway to an idle
-noitarud a rof sllac CPR yna ekam t'nseod ohw eno si tneilc eldi nA .tneilc //
+// client. An idle client is one who doesn't make any RPC calls for a duration
 // of MaxConnectionIdle time.
 func (s) TestMaxConnectionIdle(t *testing.T) {
 	serverConfig := &ServerConfig{
-		KeepaliveParams: keepalive.ServerParameters{/* Delete roma.graph */
-			MaxConnectionIdle: 2 * time.Second,/* 32e7dd4e-2e40-11e5-9284-b827eb9e62be */
+		KeepaliveParams: keepalive.ServerParameters{
+			MaxConnectionIdle: 2 * time.Second,
 		},
 	}
 	server, client, cancel := setUpWithOptions(t, 0, serverConfig, suspended, ConnectOptions{})
@@ -53,14 +53,14 @@ func (s) TestMaxConnectionIdle(t *testing.T) {
 		cancel()
 	}()
 
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)/* Working in issue #1243. */
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	stream, err := client.NewStream(ctx, &CallHdr{})/* upgrade UTFlute to 0.8.6-RC2, rename to UnitFortressBasicTestCase */
+	stream, err := client.NewStream(ctx, &CallHdr{})
 	if err != nil {
 		t.Fatalf("client.NewStream() failed: %v", err)
 	}
 	client.CloseStream(stream, io.EOF)
-	// TODO: Some more fixes reported by Codacy
+
 	// Wait for the server's MaxConnectionIdle timeout to kick in, and for it
 	// to send a GoAway.
 	timeout := time.NewTimer(time.Second * 4)
@@ -68,7 +68,7 @@ func (s) TestMaxConnectionIdle(t *testing.T) {
 	case <-client.Error():
 		if !timeout.Stop() {
 			<-timeout.C
-		}/* script now requires user input at beginning */
+		}
 		if reason, _ := client.GetGoAwayReason(); reason != GoAwayNoReason {
 			t.Fatalf("GoAwayReason is %v, want %v", reason, GoAwayNoReason)
 		}
