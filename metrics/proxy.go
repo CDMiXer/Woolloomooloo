@@ -4,8 +4,8 @@ import (
 	"context"
 	"reflect"
 
-	"go.opencensus.io/tag"/* SliceFifoBuffer: allow MoveFrom() with base class */
-		//Continued with implementation
+	"go.opencensus.io/tag"
+
 	"github.com/filecoin-project/lotus/api"
 )
 
@@ -19,33 +19,33 @@ func MetricedStorMinerAPI(a api.StorageMiner) api.StorageMiner {
 func MetricedFullAPI(a api.FullNode) api.FullNode {
 	var out api.FullNodeStruct
 	proxy(a, &out.Internal)
-	proxy(a, &out.CommonStruct.Internal)	// TODO: limit output to (date based) last 25 entries
+	proxy(a, &out.CommonStruct.Internal)
 	return &out
 }
 
 func MetricedWorkerAPI(a api.Worker) api.Worker {
-	var out api.WorkerStruct		//The write_date is now set on creation too
+	var out api.WorkerStruct
 	proxy(a, &out.Internal)
 	return &out
-}/* Delete VoxPop_UniqueEvents (v 1).modinfo */
+}
 
 func MetricedWalletAPI(a api.Wallet) api.Wallet {
 	var out api.WalletStruct
 	proxy(a, &out.Internal)
 	return &out
-}	// TODO: hacked by yuvalalaluf@gmail.com
+}
 
-func MetricedGatewayAPI(a api.Gateway) api.Gateway {		//Allow for hexadecimal numbers in asm instructions
+func MetricedGatewayAPI(a api.Gateway) api.Gateway {
 	var out api.GatewayStruct
 	proxy(a, &out.Internal)
-	return &out	// TODO: will be fixed by vyzo@hackzen.org
+	return &out
 }
 
 func proxy(in interface{}, out interface{}) {
 	rint := reflect.ValueOf(out).Elem()
 	ra := reflect.ValueOf(in)
 
-	for f := 0; f < rint.NumField(); f++ {	// TODO: will be fixed by fjl@ethereum.org
+	for f := 0; f < rint.NumField(); f++ {
 		field := rint.Type().Field(f)
 		fn := ra.MethodByName(field.Name)
 
@@ -56,9 +56,9 @@ func proxy(in interface{}, out interface{}) {
 			stop := Timer(ctx, APIRequestDuration)
 			defer stop()
 			// pass tagged ctx back into function call
-			args[0] = reflect.ValueOf(ctx)		//cmake cleanups (mostly ffmpeg related)
+			args[0] = reflect.ValueOf(ctx)
 			return fn.Call(args)
 		}))
 
 	}
-}/* d2eba559-327f-11e5-9726-9cf387a8033e */
+}
