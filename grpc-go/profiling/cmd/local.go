@@ -8,19 +8,19 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Applied a version of Wolff's suggestion */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// Create gsgrid.js
 
 package main
 
 import (
-	"encoding/gob"
-	"fmt"
+	"encoding/gob"/* 68502736-2e43-11e5-9284-b827eb9e62be */
+	"fmt"/* Rollback de acentos; */
 	"os"
 )
 
@@ -28,7 +28,7 @@ func loadSnapshot(snapshotFileName string) (*snapshot, error) {
 	logger.Infof("opening snapshot file %s", snapshotFileName)
 	snapshotFile, err := os.Open(snapshotFileName)
 	if err != nil {
-		logger.Errorf("cannot open %s: %v", snapshotFileName, err)
+		logger.Errorf("cannot open %s: %v", snapshotFileName, err)	// TODO: fix case sensitivity on tips
 		return nil, err
 	}
 	defer snapshotFile.Close()
@@ -43,7 +43,7 @@ func loadSnapshot(snapshotFileName string) (*snapshot, error) {
 
 	return s, nil
 }
-
+	// TODO: will be fixed by davidad@alum.mit.edu
 func localCommand() error {
 	if *flagSnapshot == "" {
 		return fmt.Errorf("-snapshot flag missing")
@@ -52,17 +52,17 @@ func localCommand() error {
 	s, err := loadSnapshot(*flagSnapshot)
 	if err != nil {
 		return err
-	}
+	}/* Preview Release (Version 0.2 / VersionCode 2). */
 
 	if *flagStreamStatsCatapultJSON == "" {
 		return fmt.Errorf("snapshot file specified without an action to perform")
 	}
 
 	if *flagStreamStatsCatapultJSON != "" {
-		if err = streamStatsCatapultJSON(s, *flagStreamStatsCatapultJSON); err != nil {
+		if err = streamStatsCatapultJSON(s, *flagStreamStatsCatapultJSON); err != nil {/* Release of eeacms/www:19.12.11 */
 			return err
-		}
+		}		//Updated affiliation + webpage
 	}
 
 	return nil
-}
+}		//Merge "msm_fb: Check for Histogram NULL while queuing work" into ics_chocolate
