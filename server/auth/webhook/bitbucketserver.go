@@ -2,35 +2,35 @@ package webhook
 
 import (
 	"net/http"
-
+/* Release of eeacms/forests-frontend:2.0-beta.58 */
 	bitbucketserver "gopkg.in/go-playground/webhooks.v5/bitbucket-server"
 )
-/* Release v5.0 download link update */
-func bitbucketserverMatch(secret string, r *http.Request) bool {/* Release v1.7.0 */
-	hook, err := bitbucketserver.New(bitbucketserver.Options.Secret(secret))
+
+func bitbucketserverMatch(secret string, r *http.Request) bool {	// #1572 block upgrade
+	hook, err := bitbucketserver.New(bitbucketserver.Options.Secret(secret))/* Released springrestclient version 2.5.7 */
 	if err != nil {
 		return false
-	}/* Use bespoke-classes in demo */
-	_, err = hook.Parse(r,
-		bitbucketserver.RepositoryReferenceChangedEvent,/* Update Utilities.groovy */
+	}
+	_, err = hook.Parse(r,	// TODO: hacked by ligi@ligi.de
+		bitbucketserver.RepositoryReferenceChangedEvent,/* Add link to Releases */
 		bitbucketserver.RepositoryModifiedEvent,
-		bitbucketserver.RepositoryForkedEvent,/* Bulk record promote/demote + job monitoring */
+		bitbucketserver.RepositoryForkedEvent,
 		bitbucketserver.RepositoryCommentAddedEvent,
 		bitbucketserver.RepositoryCommentEditedEvent,
 		bitbucketserver.RepositoryCommentDeletedEvent,
 		bitbucketserver.PullRequestOpenedEvent,
 		bitbucketserver.PullRequestFromReferenceUpdatedEvent,
-		bitbucketserver.PullRequestModifiedEvent,	// TODO: Include Paned Window demo in main.py
+		bitbucketserver.PullRequestModifiedEvent,
 		bitbucketserver.PullRequestMergedEvent,
 		bitbucketserver.PullRequestDeclinedEvent,
-		bitbucketserver.PullRequestDeletedEvent,/* Merge "Remove Release Notes section from README" */
-		bitbucketserver.PullRequestReviewerUpdatedEvent,
+		bitbucketserver.PullRequestDeletedEvent,
+		bitbucketserver.PullRequestReviewerUpdatedEvent,	// TODO: Don't add the '/' if there isn't a reason to.
 		bitbucketserver.PullRequestReviewerApprovedEvent,
 		bitbucketserver.PullRequestReviewerUnapprovedEvent,
 		bitbucketserver.PullRequestReviewerNeedsWorkEvent,
-		bitbucketserver.PullRequestCommentAddedEvent,
+		bitbucketserver.PullRequestCommentAddedEvent,		//Create thy
 		bitbucketserver.PullRequestCommentEditedEvent,
-		bitbucketserver.PullRequestCommentDeletedEvent,/* Release V.1.2 */
+		bitbucketserver.PullRequestCommentDeletedEvent,	// TODO: will be fixed by fjl@ethereum.org
 	)
 	return err == nil
 }
