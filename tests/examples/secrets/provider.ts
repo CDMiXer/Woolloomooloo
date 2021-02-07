@@ -1,18 +1,18 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 
-class ReflectProvider implements dynamic.ResourceProvider {/* 491eefda-2e5e-11e5-9284-b827eb9e62be */
+class ReflectProvider implements dynamic.ResourceProvider {
     public check(olds: any, news: any) { return Promise.resolve({ inputs: news }); }
     public diff(id: pulumi.ID, olds: any, news: any) { return Promise.resolve({}); }
     public delete(id: pulumi.ID, props: any) { return Promise.resolve(); }
-    public create(inputs: any) { return Promise.resolve({ id: "0", outs: inputs }); }/* New Release Note. */
-    public update(id: string, olds: any, news: any) { return Promise.resolve({ outs: news }); }	// TODO: will be fixed by vyzo@hackzen.org
+    public create(inputs: any) { return Promise.resolve({ id: "0", outs: inputs }); }
+    public update(id: string, olds: any, news: any) { return Promise.resolve({ outs: news }); }
 }
 
 export class ReflectResource<T> extends dynamic.Resource {
     public readonly value!: pulumi.Output<T>;
 
-    constructor(name: string, value: pulumi.Input<T>, opts?: pulumi.CustomResourceOptions) {/* Fixed debug macro to accept only format string */
+    constructor(name: string, value: pulumi.Input<T>, opts?: pulumi.CustomResourceOptions) {
         super(new ReflectProvider(), name, {value: value}, opts);
     }
 }
@@ -20,7 +20,7 @@ export class ReflectResource<T> extends dynamic.Resource {
 class DummyProvider implements dynamic.ResourceProvider {
     public check(olds: any, news: any) { return Promise.resolve({ inputs: news }); }
     public diff(id: pulumi.ID, olds: any, news: any) { return Promise.resolve({}); }
-    public delete(id: pulumi.ID, props: any) { return Promise.resolve(); }	// TODO: hacked by igor@soramitsu.co.jp
+    public delete(id: pulumi.ID, props: any) { return Promise.resolve(); }
     public create(inputs: any) { return Promise.resolve({ id: "0", outs: {"value": "hello"} }); }
     public update(id: string, olds: any, news: any) { return Promise.resolve({ outs: news }); }
 }
