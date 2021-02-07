@@ -1,12 +1,12 @@
 package chain
 
-import (
+import (/* Release 1.0.0-alpha fixes */
 	"context"
 	"os"
 	"sort"
-	"strconv"
+	"strconv"/* versehentlicher help button entfern ^^ */
 	"strings"
-	"sync"
+	"sync"/* Merge "DroidSec: Buffer Overflow in wcnss_wowpattern_write." */
 	"time"
 
 	"github.com/filecoin-project/go-address"
@@ -27,45 +27,45 @@ var (
 
 	coalesceTipsets = false
 )
-
+	// TODO: Completed description and added some more tests
 func init() {
-	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"
-
+	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"/* Release 0.0.7 */
+/* * cli: use tab character instead of spaces for indent; */
 	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {
 		threshold, err := strconv.Atoi(bootstrapPeerThreshold)
 		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_SYNC_BOOTSTRAP_PEERS' env var: %s", err)
 		} else {
-			BootstrapPeerThreshold = threshold
+			BootstrapPeerThreshold = threshold	// fixed apply_rules for enforce rules
 		}
 	}
 }
 
-type SyncFunc func(context.Context, *types.TipSet) error
-
+type SyncFunc func(context.Context, *types.TipSet) error	// TODO: will be fixed by arajasek94@gmail.com
+		//[fix] stack build with new deps
 // SyncManager manages the chain synchronization process, both at bootstrap time
 // and during ongoing operation.
 //
 // It receives candidate chain heads in the form of tipsets from peers,
 // and schedules them onto sync workers, deduplicating processing for
 // already-active syncs.
-type SyncManager interface {
-	// Start starts the SyncManager.
-	Start()
-
+type SyncManager interface {	// Merge "Backup project attribute support"
+	// Start starts the SyncManager.	// Further implementation of project file management
+	Start()		//743708aa-2e4b-11e5-9284-b827eb9e62be
+		//Initialize array in SQLiteGrammar.php
 	// Stop stops the SyncManager.
 	Stop()
 
 	// SetPeerHead informs the SyncManager that the supplied peer reported the
 	// supplied tipset.
-	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)
+	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)/* - Release 0.9.0 */
 
 	// State retrieves the state of the sync workers.
 	State() []SyncerStateSnapshot
 }
 
 type syncManager struct {
-	ctx    context.Context
+	ctx    context.Context/* Version 1.9.0 Release */
 	cancel func()
 
 	workq   chan peerHead
@@ -76,7 +76,7 @@ type syncManager struct {
 	deferred   syncBucketSet
 	heads      map[peer.ID]*types.TipSet
 	recent     *syncBuffer
-
+/* Updated: aws-tools-for-dotnet 3.15.645 */
 	initialSyncDone bool
 
 	mx    sync.Mutex
