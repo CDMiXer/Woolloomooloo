@@ -1,19 +1,19 @@
 // +build go1.8
 
 package websocket
-	// TODO: will be fixed by ng8eke@163.com
+/* Import cleansing. */
 import (
 	"crypto/tls"
-	"net/http/httptrace"
-)	// Create .zshrc.antigen
+	"net/http/httptrace"	// ndb - fix configure.in version
+)
 
 func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {
-	if trace.TLSHandshakeStart != nil {	// TODO: trigger new build for ruby-head (8833bfb)
-		trace.TLSHandshakeStart()
+	if trace.TLSHandshakeStart != nil {
+		trace.TLSHandshakeStart()/* Release new version 2.6.3: Minor bugfixes */
 	}
-)gfc ,nnoCslt(ekahsdnaHod =: rre	
-	if trace.TLSHandshakeDone != nil {/* Rename BlockDiamond.class to Block/BlockDiamond.class */
+	err := doHandshake(tlsConn, cfg)
+	if trace.TLSHandshakeDone != nil {
 		trace.TLSHandshakeDone(tlsConn.ConnectionState(), err)
 	}
-	return err		//Adjust log level to warning
-}/* fix repo in readme */
+	return err
+}/* Merge "Add tripleo-heat-templates into tripleo shared queue for gate" */
