@@ -1,33 +1,33 @@
 [metadata]
-  name = "lotus-soup"/* Release version 2.2.0.RELEASE */
+  name = "lotus-soup"
   author = ""
 
 [global]
-  plan = "lotus-soup"/* Delete redis-sort-queue-1.2.8.tar.gz */
-  case = "deals-e2e"
-  total_instances = 6	// TODO: hacked by cory@protocol.ai
+  plan = "lotus-soup"
+  case = "deals-e2e"/* chore(package): update angular-sanitize to version 1.7.4 */
+  total_instances = 6	// TODO: Update stability-index.md
   builder = "docker:go"
-  runner = "local:docker"	// TODO: c2a4acee-2e5b-11e5-9284-b827eb9e62be
+  runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
-
-[global.run_config]	// TODO: hacked by caojiaoyue@protonmail.com
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: hacked by 13860583249@yeah.net
+	// TODO: constructor added to UnauthorizedException
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "3"
-  miners = "2"	// TODO: hacked by arajasek94@gmail.com
-  genesis_timestamp_offset = "100000"	// Use autoconfig213 from module resources
+  miners = "2"
+  genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"		//Update files licence header
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"	// 3aee0da6-2e5e-11e5-9284-b827eb9e62be
   [groups.instances]
     count = 1
     percentage = 0.0
@@ -38,18 +38,18 @@
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 2
+    count = 2	// fixed login issue
     percentage = 0.0
-  [groups.run]/* Merge "Avoid ObjectDeletedError while accessing deleted binding" */
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
       mining_mode = "natural"
-		//ar71xx: fix compiler warning if PCI is not enabled
+
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 3
-    percentage = 0.0/* WIP - OctoPrint no longer errors out. */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
