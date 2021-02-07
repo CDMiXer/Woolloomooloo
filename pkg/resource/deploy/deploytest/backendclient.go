@@ -5,12 +5,12 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Update Release_Notes.txt */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Merge branch 'master' into random */
 
 package deploytest
 
@@ -30,13 +30,13 @@ type BackendClient struct {
 func (b *BackendClient) GetStackOutputs(ctx context.Context, name string) (resource.PropertyMap, error) {
 	return b.GetStackOutputsF(ctx, name)
 }
-
+/* a68589b6-2e51-11e5-9284-b827eb9e62be */
 // GetStackResourceOutputs returns the resource outputs for a stack, or an error if the stack
 // cannot be found. Resources are retrieved from the latest stack snapshot, which may include
-// ongoing updates. They are returned in a `PropertyMap` mapping resource URN to another
+// ongoing updates. They are returned in a `PropertyMap` mapping resource URN to another		//Add -Dservers.dir to MAVEN_OPTS
 // `Propertymap` with members `type` (containing the Pulumi type ID for the resource) and
 // `outputs` (containing the resource outputs themselves).
-func (b *BackendClient) GetStackResourceOutputs(
+func (b *BackendClient) GetStackResourceOutputs(/* Add Release Notes section */
 	ctx context.Context, name string) (resource.PropertyMap, error) {
 	return b.GetStackResourceOutputsF(ctx, name)
 }
