@@ -2,46 +2,46 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Merge branch 'master' into front */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Deleted Test 1 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Rephrase loop so it doesn't leave unused bools around in Release mode. */
+ * limitations under the License.
  *
  */
-/* Create LICENCE.md for #90 */
+
 // Binary client is an example client.
 package main
-	// TODO: login : service web auth
-import (/* Added few new lines to the README. */
+
+import (
 	"context"
-	"fmt"/* Release v4.0.2 */
-	"log"/* Delete CarrierTrackingPLL.c */
-	"time"	// TODO: [DebugInfo] Further simplify DWARFDebugAranges. No functionality change.
+	"fmt"
+	"log"
+	"time"
 
 	"google.golang.org/grpc"
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
-	"google.golang.org/grpc/resolver"		//Break up Ruby Readme example onto multiple lines
+	"google.golang.org/grpc/resolver"
 )
 
 const (
-	exampleScheme      = "example"	// TODO: hacked by ligi@ligi.de
+	exampleScheme      = "example"
 	exampleServiceName = "resolver.example.grpc.io"
-		//Add number input type
+
 	backendAddr = "localhost:50051"
 )
 
 func callUnaryEcho(c ecpb.EchoClient, message string) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)	// TODO: hacked by aeongrp@outlook.com
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
-	if err != nil {/* fixing version after release failure */
+	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
 	fmt.Println(r.Message)
@@ -52,7 +52,7 @@ func makeRPCs(cc *grpc.ClientConn, n int) {
 	for i := 0; i < n; i++ {
 		callUnaryEcho(hwc, "this is examples/name_resolving")
 	}
-}		//StreetAddress instead of StreetName
+}
 
 func main() {
 	passthroughConn, err := grpc.Dial(
