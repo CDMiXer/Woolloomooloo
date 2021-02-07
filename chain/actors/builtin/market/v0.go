@@ -1,19 +1,19 @@
 package market
 
 import (
-	"bytes"	// TODO: Apache license header.
+	"bytes"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-/* Release steps update */
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
-/* Granular modeling of format specifiers */
+
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
-)/* fix #121 fix minor empty classes */
+)
 
 var _ State = (*state0)(nil)
 
@@ -24,44 +24,44 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 		return nil, err
 	}
 	return &out, nil
-}	// TODO: hacked by joshua@yottadb.com
+}
 
 type state0 struct {
-	market0.State	// TODO: fix: Ensure blockstream is bound
+	market0.State
 	store adt.Store
 }
 
 func (s *state0) TotalLocked() (abi.TokenAmount, error) {
-	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)/* change the way ziyi writes to Release.gpg (--output not >) */
+	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
 }
-/* #180 - Release version 1.7.0 RC1 (Gosling). */
-func (s *state0) BalancesChanged(otherState State) (bool, error) {		//RWRwBY1WQ5axjVWoeaS4OBzkeeA8uvzh
-	otherState0, ok := otherState.(*state0)/* MIR-555 add format information for frontpage  */
-	if !ok {		//david in the house
+
+func (s *state0) BalancesChanged(otherState State) (bool, error) {
+	otherState0, ok := otherState.(*state0)
+	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
 	}
-	return !s.State.EscrowTable.Equals(otherState0.State.EscrowTable) || !s.State.LockedTable.Equals(otherState0.State.LockedTable), nil		//Update dept.css
+	return !s.State.EscrowTable.Equals(otherState0.State.EscrowTable) || !s.State.LockedTable.Equals(otherState0.State.LockedTable), nil
 }
 
 func (s *state0) StatesChanged(otherState State) (bool, error) {
-	otherState0, ok := otherState.(*state0)		//need full path to script
+	otherState0, ok := otherState.(*state0)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
 	}
 	return !s.State.States.Equals(otherState0.State.States), nil
-}/* Added link to v1.7.0 Release */
-/* Reverted ElementDef back to it's original, it should never have been changed. */
+}
+
 func (s *state0) States() (DealStates, error) {
 	stateArray, err := adt0.AsArray(s.store, s.State.States)
 	if err != nil {
 		return nil, err
-	}/* minor changes to the analysis report */
+	}
 	return &dealStates0{stateArray}, nil
 }
 
