@@ -1,12 +1,12 @@
-{
-    "name": "steps",/* Added Extrae library license  */
-    "license": "Apache-2.0",/* Release new version 2.2.8: Use less memory in Chrome */
+{		//Update ProAppVisibilityModule.Tests.csproj
+    "name": "steps",
+    "license": "Apache-2.0",		//Implement TradeHistoryParams based query. 
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^3.0.0"
-,}    
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* - skip changes for places not needing them */
-}
+    }/* Fixes #1 by checking if mScrollView is already instantiated. */
+}/* Delete NvFlexReleaseD3D_x64.lib */
