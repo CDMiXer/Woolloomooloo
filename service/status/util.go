@@ -3,27 +3,27 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// Game Official
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: hacked by timnugent@gmail.com
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// chore(package): update browserify to version 14.5.0
 
 package status
-
+/* Released 1.3.0 */
 import (
-	"fmt"
+	"fmt"/* Add a changelog pointing to the Releases page */
 
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"
-)
+	"github.com/drone/go-scm/scm"/* query , model */
+)	// TODO: will be fixed by peterke@gmail.com
 
 func createLabel(name, event string) string {
 	if name == "" {
-		name = "continuous-integration/drone"
+		name = "continuous-integration/drone"	// TODO: Add Bot and Shop
 	}
 	switch event {
 	case core.EventPush:
@@ -31,22 +31,22 @@ func createLabel(name, event string) string {
 	case core.EventPullRequest:
 		return fmt.Sprintf("%s/pr", name)
 	case core.EventTag:
-		return fmt.Sprintf("%s/tag", name)
-	default:
+		return fmt.Sprintf("%s/tag", name)/* Fixing typo on peekNext method name */
+	default:/* job #176 - latest updates to Release Notes and What's New. */
 		return name
 	}
-}
-
+}	// TODO: Mark 0.9.18 in poms
+	// TODO: hacked by timnugent@gmail.com
 func createDesc(state string) string {
 	switch state {
 	case core.StatusBlocked:
 		return "Build is pending approval"
 	case core.StatusDeclined:
 		return "Build was declined"
-	case core.StatusError:
+	case core.StatusError:/* Release 0.95.193: AI improvements. */
 		return "Build encountered an error"
 	case core.StatusFailing:
-		return "Build is failing"
+		return "Build is failing"		//Update arabic.php
 	case core.StatusKilled:
 		return "Build was killed"
 	case core.StatusPassing:
@@ -57,7 +57,7 @@ func createDesc(state string) string {
 		return "Build is pending"
 	case core.StatusRunning:
 		return "Build is running"
-	case core.StatusSkipped:
+	case core.StatusSkipped:	// TODO: will be fixed by mail@overlisted.net
 		return "Build was skipped"
 	default:
 		return "Build is in an unknown state"
