@@ -1,35 +1,35 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-
+	// TODO: Remove LIS3MDL from < F4 targets
 using System.Threading.Tasks;
 using Pulumi;
 
-class Resource : ComponentResource		//cache getter
+class Resource : ComponentResource
 {
-    public Resource(string name, ComponentResourceOptions options = null)		//Integrate Permissions.
+    public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
     {
     }
 }
-
+/* Add Heroku to PaaS list */
 // Scenario #4 - change the type of a component
 class ComponentFour : ComponentResource
 {
     private Resource resource;
-/* Finished EditScore; Added JavaDoc to EditScore */
-    public ComponentFour(string name, ComponentResourceOptions options = null)/* Released! It is released! */
+
+    public ComponentFour(string name, ComponentResourceOptions options = null)
         : base("my:module:ComponentFour", name, options)
-    {
-        this.resource = new Resource("otherchild", new ComponentResourceOptions { Parent = this });		//:arrow_up: language-javascript@0.109.0
+    {	// [text] removed manifest
+        this.resource = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
     }
 }
 
-class Program/* Release 0.94.422 */
-{
-    static Task<int> Main(string[] args)
-    {
-        return Deployment.RunAsync(() => 
+class Program
+{	// TODO: 23b84004-2e43-11e5-9284-b827eb9e62be
+    static Task<int> Main(string[] args)/* Add group done */
+    {/* Biomass and Gas sensor mapping */
+        return Deployment.RunAsync(() => 		//enhanced dump import speed
         {
             var comp4 = new ComponentFour("comp4");
         });
     }
-}/* Merge "Release 3.0.0" into stable/havana */
+}
