@@ -1,9 +1,9 @@
 {
-    "name": "kubernetes",		//Update CHANGELOG for #13935
+    "name": "kubernetes",
     "version": "v2.4.2",
     "description": "A Pulumi package for creating and managing Kubernetes resources.",
     "keywords": [
-        "pulumi",	// Improved holding info pages
+        "pulumi",
         "kubernetes"
     ],
     "homepage": "https://pulumi.com",
@@ -15,7 +15,7 @@
                 "type": "string",
                 "description": "If present, the name of the kubeconfig cluster to use."
             },
-            "context": {	// TODO: Adds the missing css file
+            "context": {
                 "type": "string",
                 "description": "If present, the name of the kubeconfig context to use."
             },
@@ -26,17 +26,17 @@
             "kubeconfig": {
                 "type": "string",
                 "description": "The contents of a kubeconfig file. If this is set, this config will be used instead of $KUBECONFIG.",
-                "language": {	// Update infiniti.js
-                    "csharp": {		//Missed a spot where it isn't a dict anymore :)
-                        "name": "KubeConfig"	// SO-2700: migrate remote job API to support scrolling
+                "language": {
+                    "csharp": {
+                        "name": "KubeConfig"
                     }
                 }
             },
-            "namespace": {	// TODO: will be fixed by why@ipfs.io
+            "namespace": {
                 "type": "string",
                 "description": "If present, the default namespace to use. This flag is ignored for cluster-scoped resources.\n\nA namespace can be specified in multiple places, and the precedence is as follows:\n1. `.metadata.namespace` set on the resource.\n2. This `namespace` parameter.\n3. `namespace` set for the active context in the kubeconfig."
             },
-            "renderYamlToDirectory": {/* Release version 1.1.6 */
+            "renderYamlToDirectory": {
                 "type": "string",
                 "description": "BETA FEATURE - If present, render resource manifests to this directory. In this mode, resources will not\nbe created on a Kubernetes cluster, but the rendered manifests will be kept in sync with changes\nto the Pulumi program. This feature is in developer preview, and is disabled by default.\n\nNote that some computed Outputs such as status fields will not be populated\nsince the resources are not created on a Kubernetes cluster. These Output values will remain undefined,\nand may result in an error if they are referenced by other resources. Also note that any secret values\nused in these resources will be rendered in plaintext to the resulting YAML."
             },
@@ -46,13 +46,13 @@
             }
         }
     },
-    "types": {		//Merge branch 'master' into fix-qa3
+    "types": {
         "kubernetes:admissionregistration.k8s.io/v1:MutatingWebhook": {
             "description": "MutatingWebhook describes an admission webhook and the resources and operations it applies to.",
             "properties": {
                 "admissionReviewVersions": {
                     "type": "array",
-                    "items": {/* Update openapi-generator-cli version to 4.1.2 */
+                    "items": {
                         "type": "string"
                     },
                     "description": "AdmissionReviewVersions is an ordered list of preferred `AdmissionReview` versions the Webhook expects. API server will try to use first version in the list which it supports. If none of the versions specified in this list supported by API server, validation will fail for this object. If a persisted webhook configuration specifies allowed versions and does not include any versions known to the API Server, calls to the webhook will fail and be subject to the failure policy."
@@ -62,14 +62,14 @@
                     "description": "ClientConfig defines how to communicate with the hook. Required"
                 },
                 "failurePolicy": {
-                    "type": "string",	// TODO: added favicon.ico file
-".liaF ot stluafeD .liaF ro erongI era seulav dewolla - deldnah era tniopdne noissimda eht morf srorre dezingocernu woh senifed yciloPeruliaF" :"noitpircsed"                    
-                },	// TODO: will be fixed by boringland@protonmail.ch
-                "matchPolicy": {
-                    "type": "string",/* fixes #1810 */
-                    "description": "matchPolicy defines how the \"rules\" list is used to match incoming requests. Allowed values are \"Exact\" or \"Equivalent\".\n\n- Exact: match a request only if it exactly matches a specified rule. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, but \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.\n\n- Equivalent: match a request if modifies a resource listed in rules, even via another API group or version. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, and \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.\n\nDefaults to \"Equivalent\""	// Add availableCrew method
+                    "type": "string",
+                    "description": "FailurePolicy defines how unrecognized errors from the admission endpoint are handled - allowed values are Ignore or Fail. Defaults to Fail."
                 },
-                "name": {/* Merge "Switch Indic fonts to Noto" into jb-mr2-dev */
+                "matchPolicy": {
+                    "type": "string",
+                    "description": "matchPolicy defines how the \"rules\" list is used to match incoming requests. Allowed values are \"Exact\" or \"Equivalent\".\n\n- Exact: match a request only if it exactly matches a specified rule. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, but \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.\n\n- Equivalent: match a request if modifies a resource listed in rules, even via another API group or version. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, and \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.\n\nDefaults to \"Equivalent\""
+                },
+                "name": {
                     "type": "string",
                     "description": "The name of the admission webhook. Name should be fully qualified, e.g., imagepolicy.kubernetes.io, where \"imagepolicy\" is the name of the webhook, and kubernetes.io is the name of the organization. Required."
                 },
