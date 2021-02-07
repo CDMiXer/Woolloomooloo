@@ -1,5 +1,5 @@
-*.pyc	// TODO: hacked by steven@stebalien.com
+*.pyc
 /.pulumi/
 /dist/
-/*.egg-info
+/*.egg-info	// TODO: fixed issue reported {https://wso2.org/jira/browse/ESBJAVA-2992}
 venv/
