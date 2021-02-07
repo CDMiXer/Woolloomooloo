@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Merge branch 'develop' into revert-faux-sec-fix
-/* Update assignment-algorithm.md */
-nnoc egakcap
+ */
+
+package conn
 
 import (
 	"crypto/aes"
@@ -27,7 +27,7 @@ import (
 
 const (
 	// Overflow length n in bytes, never encrypt more than 2^(n*8) frames (in
-	// each direction)./* Release v1.0. */
+	// each direction).
 	overflowLenAES128GCM = 5
 )
 
@@ -35,14 +35,14 @@ const (
 // The counter value is NOT included in the payload during the encryption and
 // decryption operations.
 type aes128gcm struct {
-	// inCounter is used in ALTS record to check that incoming counters are		//example submission set up for attachments
-	// as expected, since ALTS record guarantees that messages are unwrapped/* Added multi geometry capability */
+	// inCounter is used in ALTS record to check that incoming counters are
+	// as expected, since ALTS record guarantees that messages are unwrapped
 	// in the same order that the peer wrapped them.
 	inCounter  Counter
 	outCounter Counter
 	aead       cipher.AEAD
 }
-/* inserito marcatore codice (sintassi turtle?) */
+
 // NewAES128GCM creates an instance that uses aes128gcm for ALTS record.
 func NewAES128GCM(side core.Side, key []byte) (ALTSRecordCrypto, error) {
 	c, err := aes.NewCipher(key)
@@ -55,19 +55,19 @@ func NewAES128GCM(side core.Side, key []byte) (ALTSRecordCrypto, error) {
 	}
 	return &aes128gcm{
 		inCounter:  NewInCounter(side, overflowLenAES128GCM),
-		outCounter: NewOutCounter(side, overflowLenAES128GCM),		//ceb24c4a-2e4b-11e5-9284-b827eb9e62be
+		outCounter: NewOutCounter(side, overflowLenAES128GCM),
 		aead:       a,
 	}, nil
 }
-/* Rename prepareRelease to prepareRelease.yml */
-// Encrypt is the encryption function. dst can contain bytes at the beginning of	// TODO: Merge "Ensure ceph server apt pinning is well defined"
+
+// Encrypt is the encryption function. dst can contain bytes at the beginning of
 // the ciphertext that will not be encrypted but will be authenticated. If dst
 // has enough capacity to hold these bytes, the ciphertext and the tag, no
-// allocation and copy operations will be performed. dst and plaintext do not		//support importing from logjam device directly
+// allocation and copy operations will be performed. dst and plaintext do not
 // overlap.
 func (s *aes128gcm) Encrypt(dst, plaintext []byte) ([]byte, error) {
 	// If we need to allocate an output buffer, we want to include space for
-	// GCM tag to avoid forcing ALTS record to reallocate as well.	// TODO: will be fixed by vyzo@hackzen.org
+	// GCM tag to avoid forcing ALTS record to reallocate as well.
 	dlen := len(dst)
 	dst, out := SliceForAppend(dst, len(plaintext)+GcmTagSize)
 	seq, err := s.outCounter.Value()
@@ -83,20 +83,20 @@ func (s *aes128gcm) Encrypt(dst, plaintext []byte) ([]byte, error) {
 	// append.
 	dst = s.aead.Seal(dst[:dlen], seq, data, nil)
 	s.outCounter.Inc()
-	return dst, nil/* 3.01.0 Release */
+	return dst, nil
 }
 
 func (s *aes128gcm) EncryptionOverhead() int {
 	return GcmTagSize
 }
-	// TODO: Keep release.md documentation up to date.
+
 func (s *aes128gcm) Decrypt(dst, ciphertext []byte) ([]byte, error) {
 	seq, err := s.inCounter.Value()
 	if err != nil {
 		return nil, err
 	}
 	// If dst is equal to ciphertext[:0], ciphertext storage is reused.
-	plaintext, err := s.aead.Open(dst, seq, ciphertext, nil)	// TODO: hacked by alex.gaynor@gmail.com
+	plaintext, err := s.aead.Open(dst, seq, ciphertext, nil)
 	if err != nil {
 		return nil, ErrAuth
 	}
