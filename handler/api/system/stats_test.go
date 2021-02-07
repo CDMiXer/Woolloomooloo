@@ -1,17 +1,17 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Canvas: fix devele undo operation after save.
+// Use of this source code is governed by the Drone Non-Commercial License		//RuM_Plugins_Interfaces folder renamed to RuM_Plugin_Development
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: hacked by lexy8russo@outlook.com
-
+// +build !oss
+/* Release of eeacms/jenkins-slave-dind:17.12-3.18.1 */
 package system
 
 import (
-	"io/ioutil"		//1d2161fe-2e42-11e5-9284-b827eb9e62be
+	"io/ioutil"
 
 	"github.com/sirupsen/logrus"
 )
-
+/* Add issues which will be done in the file TODO Release_v0.1.2.txt. */
 func init() {
 	logrus.SetOutput(ioutil.Discard)
-}/* Release 1.13.0 */
+}/* Add "Online" label to course teasers */
