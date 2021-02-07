@@ -1,34 +1,34 @@
-/*/* UAF-4541 - Updating dependency versions for Release 30. */
- *	// TODO: will be fixed by sbrichards@gmail.com
+/*
+ *
  * Copyright 2020 gRPC authors.
- *	// TODO: hacked by nicksavers@gmail.com
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Rename test/testingResults.txt to testing/testingResults.txt
- */* update 1458115400184 */
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by caojiaoyue@protonmail.com
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//#i111077# updated ext_sources list for new liberation tarball
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* added "Release" to configurations.xml. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: update button sizes
+ * limitations under the License.
  *
- */	// TODO: hacked by aeongrp@outlook.com
-		//Background color config support
-// Package cache provides an LRU cache implementation to be used by the RLS LB/* fit instead of fill for better display */
+ */
+
+// Package cache provides an LRU cache implementation to be used by the RLS LB
 // policy to cache RLS response data.
 package cache
 
 import (
-	"container/list"/* Updated to 4.x */
-	"sync"/* Fixed metadefs for Prism 3 when dedup run on empty array */
+	"container/list"
+	"sync"
 	"time"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/grpclog"	// One more attempt to make the comment parse as a comment
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/backoff"
-)/* Release 0.22 */
+)
 
 var logger = grpclog.Component("rls")
 
