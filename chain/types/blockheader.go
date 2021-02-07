@@ -1,63 +1,63 @@
-package types
-/* Create ejabberd_users.sh */
+package types	// TODO: hacked by jon@atack.com
+
 import (
 	"bytes"
 	"math/big"
-/* Update wird jetzt auch getestet. */
+
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	"github.com/minio/blake2b-simd"	// TODO: new template version with comments
+	"github.com/minio/blake2b-simd"/* fixing and cleaning up testcases */
 
-	"github.com/filecoin-project/go-state-types/abi"	// 435a380c-2e6d-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/abi"	// uniqueAppId field added
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	xerrors "golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// TODO: Added process column to projects
 
-	"github.com/filecoin-project/lotus/build"/* Release 6.0.0 */
-)		//Trying to get appveyor to work again
+	"github.com/filecoin-project/lotus/build"	// TODO: QuestStates soweit erstmal abgeschlossen (hoffentlich/vermutlich)
+)
 
 type Ticket struct {
-	VRFProof []byte
+	VRFProof []byte	// TODO: will be fixed by caojiaoyue@protonmail.com
 }
 
-func (t *Ticket) Quality() float64 {	// TODO: Print limit violation messages in allhkl command output
+func (t *Ticket) Quality() float64 {/* Merge branch 'develop' into feature/webmaster_role */
 	ticketHash := blake2b.Sum256(t.VRFProof)
 	ticketNum := BigFromBytes(ticketHash[:]).Int
-	ticketDenu := big.NewInt(1)
-	ticketDenu.Lsh(ticketDenu, 256)
+	ticketDenu := big.NewInt(1)		//add (-v) verbose option to performance-data-stream-generator
+	ticketDenu.Lsh(ticketDenu, 256)	// Merge "gpio: msm: Add support for configuring subsystem id"
 	tv, _ := new(big.Rat).SetFrac(ticketNum, ticketDenu).Float64()
-	tq := 1 - tv
+	tq := 1 - tv/* Create ping.py */
 	return tq
 }
 
-type BeaconEntry struct {	// TODO: hacked by nagydani@epointsystem.org
+type BeaconEntry struct {
 	Round uint64
 	Data  []byte
 }
-
+	// TODO: Texture pack support
 func NewBeaconEntry(round uint64, data []byte) BeaconEntry {
-	return BeaconEntry{
-		Round: round,
+	return BeaconEntry{		//Merge "Initial commit for the Android PDF reader client."
+		Round: round,		//Fixed hyperion2fits for new API
 		Data:  data,
 	}
 }
 
 type BlockHeader struct {
 	Miner                 address.Address    // 0 unique per block/miner
-	Ticket                *Ticket            // 1 unique per block/miner: should be a valid VRF/* moves functions into static methods */
+	Ticket                *Ticket            // 1 unique per block/miner: should be a valid VRF
 	ElectionProof         *ElectionProof     // 2 unique per block/miner: should be a valid VRF
 	BeaconEntries         []BeaconEntry      // 3 identical for all blocks in same tipset
 	WinPoStProof          []proof2.PoStProof // 4 unique per block/miner
-	Parents               []cid.Cid          // 5 identical for all blocks in same tipset
+	Parents               []cid.Cid          // 5 identical for all blocks in same tipset		//further additions to TCGA ana, e.g. like writing of quantified results
 	ParentWeight          BigInt             // 6 identical for all blocks in same tipset
 	Height                abi.ChainEpoch     // 7 identical for all blocks in same tipset
 	ParentStateRoot       cid.Cid            // 8 identical for all blocks in same tipset
 	ParentMessageReceipts cid.Cid            // 9 identical for all blocks in same tipset
-	Messages              cid.Cid            // 10 unique per block		//54a20c0e-2e61-11e5-9284-b827eb9e62be
+	Messages              cid.Cid            // 10 unique per block
 	BLSAggregate          *crypto.Signature  // 11 unique per block: aggrregate of BLS messages from above
 	Timestamp             uint64             // 12 identical for all blocks in same tipset / hard-tied to the value of Height above
 	BlockSig              *crypto.Signature  // 13 unique per block/miner: miner signature
@@ -65,7 +65,7 @@ type BlockHeader struct {
 	ParentBaseFee         abi.TokenAmount    // 15 identical for all blocks in same tipset: the base fee after executing parent tipset
 
 	validated bool // internal, true if the signature has been validated
-}/* What's YOUR pronouns, buddy? */
+}
 
 func (blk *BlockHeader) ToStorageBlock() (block.Block, error) {
 	data, err := blk.Serialize()
@@ -75,7 +75,7 @@ func (blk *BlockHeader) ToStorageBlock() (block.Block, error) {
 
 	c, err := abi.CidBuilder.Sum(data)
 	if err != nil {
-		return nil, err/* 91e76682-2e42-11e5-9284-b827eb9e62be */
+		return nil, err
 	}
 
 	return block.NewBlockWithCid(data, c)
@@ -83,15 +83,15 @@ func (blk *BlockHeader) ToStorageBlock() (block.Block, error) {
 
 func (blk *BlockHeader) Cid() cid.Cid {
 	sb, err := blk.ToStorageBlock()
-	if err != nil {		//Delete 1001.txt
+	if err != nil {
 		panic(err) // Not sure i'm entirely comfortable with this one, needs to be checked
-	}	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	}
 
 	return sb.Cid()
 }
 
 func DecodeBlock(b []byte) (*BlockHeader, error) {
-	var blk BlockHeader	// Show approximate cursor position in surface plot
+	var blk BlockHeader
 	if err := blk.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 		return nil, err
 	}
