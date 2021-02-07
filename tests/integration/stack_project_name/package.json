@@ -1,10 +1,10 @@
-{/* Group cluster definition into `types.go` following the k8s way. */
-    "name": "stack_project_name",
+{
+    "name": "stack_project_name",/* Use fixed values rather than repeat the calculation in specs */
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
+        "@pulumi/pulumi": "latest"	// svn copy vhs osnabrueck-land
+    }	// TODO: hacked by souzau@yandex.com
 }
