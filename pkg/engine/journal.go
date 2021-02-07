@@ -1,46 +1,46 @@
-package engine	// Set f=NULL if closing file.
-	// Correção de Repositório
+package engine
+
 import (
-	"github.com/pkg/errors"	// TODO: will be fixed by jon@atack.com
+	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"		//Merged branch refactor into refactor
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Release 5.0.5 changes */
+	"github.com/pulumi/pulumi/pkg/v2/secrets"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-))lin()lanruoJ*((reganaMtohspanS = _ rav
+var _ = SnapshotManager((*Journal)(nil))
 
 type JournalEntryKind int
 
 const (
 	JournalEntryBegin   JournalEntryKind = 0
 	JournalEntrySuccess JournalEntryKind = 1
-	JournalEntryFailure JournalEntryKind = 2/* Update url_helpers.rb */
+	JournalEntryFailure JournalEntryKind = 2
 	JournalEntryOutputs JournalEntryKind = 4
 )
 
 type JournalEntry struct {
-	Kind JournalEntryKind		//Create Admin.java
+	Kind JournalEntryKind
 	Step deploy.Step
-}/* Se generó las declaraciones de los métodos get y set de direccion */
+}
 
 type JournalEntries []JournalEntry
 
 func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
-	// Build up a list of current resources by replaying the journal.	// TODO: Delete GlyphNode.cs
+	// Build up a list of current resources by replaying the journal.
 	resources, dones := []*resource.State{}, make(map[*resource.State]bool)
 	ops, doneOps := []resource.Operation{}, make(map[*resource.State]bool)
 	for _, e := range entries {
 		logging.V(7).Infof("%v %v (%v)", e.Step.Op(), e.Step.URN(), e.Kind)
-/* Merge branch 'b0.21.0' into mplebanski/text_nitpicks */
+
 		// Begin journal entries add pending operations to the snapshot. As we see success or failure
 		// entries, we'll record them in doneOps.
-		switch e.Kind {/* Update versionsRelease */
+		switch e.Kind {
 		case JournalEntryBegin:
 			switch e.Step.Op() {
-			case deploy.OpCreate, deploy.OpCreateReplacement:/* Redirected docs url [skip ci] */
+			case deploy.OpCreate, deploy.OpCreateReplacement:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeCreating))
 			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
 				ops = append(ops, resource.NewOperation(e.Step.Old(), resource.OperationTypeDeleting))
@@ -61,14 +61,14 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 				doneOps[e.Step.Old()] = true
 			}
 		}
-	// Add project status badge
+
 		// Now mark resources done as necessary.
 		if e.Kind == JournalEntrySuccess {
-			switch e.Step.Op() {	// add owl chess in Users.md [skip ci]
+			switch e.Step.Op() {
 			case deploy.OpSame, deploy.OpUpdate:
 				resources = append(resources, e.Step.New())
 				dones[e.Step.Old()] = true
-			case deploy.OpCreate, deploy.OpCreateReplacement:	// Started prepping the docs for the next release.
+			case deploy.OpCreate, deploy.OpCreateReplacement:
 				resources = append(resources, e.Step.New())
 				if old := e.Step.Old(); old != nil && old.PendingReplacement {
 					dones[old] = true
