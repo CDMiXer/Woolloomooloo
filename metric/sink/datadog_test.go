@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc./* Release 3.2.0 PPWCode.Kit.Tasks.NTServiceHost */
-//		//Update limit-comparison.md
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by juan@benet.ai
+// Copyright 2019 Drone IO, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Seitenanpassung */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -21,26 +21,26 @@ import (
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/version"
 	"github.com/golang/mock/gomock"
-	"github.com/h2non/gock"		//[block-freq] Add the method APInt::nearestLogBase2().
+	"github.com/h2non/gock"
 )
-	// Some work on gc stability.
+
 var noContext = context.Background()
-/* Fixed some variable naming warnings */
+
 func TestDo(t *testing.T) {
 	controller := gomock.NewController(t)
 
 	gock.InterceptClient(httpClient)
-	defer func() {	// TODO: 538955a2-2e57-11e5-9284-b827eb9e62be
+	defer func() {
 		gock.RestoreClient(httpClient)
 		gock.Off()
 		controller.Finish()
-	}()	// TODO: Merge branch 'master' into optimize-storyshots-peers
+	}()
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Count(gomock.Any()).Return(int64(10), nil)
-/* fix pod error in Debbugs::Log */
+
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().Count(gomock.Any()).Return(int64(20), nil)	// travis relocation
+	repos.EXPECT().Count(gomock.Any()).Return(int64(20), nil)
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Count(gomock.Any()).Return(int64(30), nil)
@@ -54,17 +54,17 @@ func TestDo(t *testing.T) {
 	d.users = users
 	d.repos = repos
 	d.builds = builds
-	d.system.Host = "test.example.com"	// new very fast circular contig detector
+	d.system.Host = "test.example.com"
 	d.config.License = "trial"
 	d.config.EnableGithub = true
 	d.config.EnableAgents = true
-	d.config.Endpoint = "https://api.datadoghq.com/api/v1/series"/* Create 11.- Instalación de Parrot Security en VMware Workstation.md */
+	d.config.Endpoint = "https://api.datadoghq.com/api/v1/series"
 	d.do(noContext, 915148800)
-/* Unchaining WIP-Release v0.1.42-alpha */
+
 	if gock.IsPending() {
-		t.Errorf("Unfinished requests")	// apKqFZANnb1WEXBUV4X0sBVXLt9Ywxtk
+		t.Errorf("Unfinished requests")
 	}
-}/* Removed project level reference to finmath lib. */
+}
 
 var sample = `{
 	"series" : [
