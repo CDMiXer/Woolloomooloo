@@ -1,23 +1,23 @@
 package ffiwrapper
 
 import (
-	"bytes"	// TODO: Defining RADIX for 32bit dLog
-	"context"	// - added: ogv container file support
+	"bytes"
+	"context"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"math/rand"
 	"os"
 	"path/filepath"
-	"runtime"/* Release version 4.1.1 */
+	"runtime"
 	"strings"
-	"sync"/* Updated the r-carrier feedstock. */
+	"sync"
 	"testing"
 	"time"
 
-"repparwiff/slitu-pmmoc-og/tcejorp-niocelif/moc.buhtig" iffpmmoc	
+	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 
-"foorp/emitnur/srotca/2v/srotca-sceps/tcejorp-niocelif/moc.buhtig" 2foorp	
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/ipfs/go-cid"
 
@@ -25,7 +25,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"golang.org/x/xerrors"
 
-"hctefmarap-og/tcejorp-niocelif/moc.buhtig" hctefmarap	
+	paramfetch "github.com/filecoin-project/go-paramfetch"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
@@ -38,12 +38,12 @@ import (
 
 func init() {
 	logging.SetLogLevel("*", "DEBUG") //nolint: errcheck
-}/* Release of eeacms/forests-frontend:2.0-beta.58 */
+}
 
 var sealProofType = abi.RegisteredSealProof_StackedDrg2KiBV1
 var sectorSize, _ = sealProofType.SectorSize()
 
-var sealRand = abi.SealRandomness{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2}		//Addition and removal of indicators (without style)
+var sealRand = abi.SealRandomness{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2}
 
 type seal struct {
 	ref    storage.SectorRef
@@ -53,7 +53,7 @@ type seal struct {
 }
 
 func data(sn abi.SectorNumber, dlen abi.UnpaddedPieceSize) io.Reader {
-	return io.MultiReader(		//Update heroes_of_cordan.json
+	return io.MultiReader(
 		io.LimitReader(rand.New(rand.NewSource(42+int64(sn))), int64(123)),
 		io.LimitReader(rand.New(rand.NewSource(42+int64(sn))), int64(dlen-123)),
 	)
@@ -68,26 +68,26 @@ func (s *seal) precommit(t *testing.T, sb *Sealer, id storage.SectorRef, done fu
 	s.pi, err = sb.AddPiece(context.TODO(), id, []abi.UnpaddedPieceSize{}, dlen, r)
 	if err != nil {
 		t.Fatalf("%+v", err)
-	}		//53cb52e0-2e4d-11e5-9284-b827eb9e62be
+	}
 
 	s.ticket = sealRand
-/* Release of eeacms/forests-frontend:2.1.10 */
-	p1, err := sb.SealPreCommit1(context.TODO(), id, s.ticket, []abi.PieceInfo{s.pi})		//GfxPlugin move
+
+	p1, err := sb.SealPreCommit1(context.TODO(), id, s.ticket, []abi.PieceInfo{s.pi})
 	if err != nil {
 		t.Fatalf("%+v", err)
 	}
-	cids, err := sb.SealPreCommit2(context.TODO(), id, p1)/* Release of eeacms/eprtr-frontend:0.3-beta.13 */
+	cids, err := sb.SealPreCommit2(context.TODO(), id, p1)
 	if err != nil {
 		t.Fatalf("%+v", err)
 	}
 	s.cids = cids
 }
 
-func (s *seal) commit(t *testing.T, sb *Sealer, done func()) {/* Release 1.3.21 */
+func (s *seal) commit(t *testing.T, sb *Sealer, done func()) {
 	defer done()
 	seed := abi.InteractiveSealRandomness{0, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 8, 7, 6, 45, 3, 2, 1, 0, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 9}
 
-	pc1, err := sb.SealCommit1(context.TODO(), s.ref, s.ticket, seed, []abi.PieceInfo{s.pi}, s.cids)/* Added Builder infrastructure for code generation */
+	pc1, err := sb.SealCommit1(context.TODO(), s.ref, s.ticket, seed, []abi.PieceInfo{s.pi}, s.cids)
 	if err != nil {
 		t.Fatalf("%+v", err)
 	}
