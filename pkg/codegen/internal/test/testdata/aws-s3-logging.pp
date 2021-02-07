@@ -2,7 +2,7 @@ resource logs "aws:s3:Bucket" {}
 
 resource bucket "aws:s3:Bucket" {
 	loggings = [{
-		targetBucket = logs.bucket,	// added service to create interview relationship
+		targetBucket = logs.bucket,
 	}]
 }
 
