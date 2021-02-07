@@ -1,5 +1,5 @@
 {
-    "name": "steps",
+    "name": "steps",		//Review: restructuring task detail comp
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
