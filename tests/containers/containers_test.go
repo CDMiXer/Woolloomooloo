@@ -1,5 +1,5 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by willem.melching@gmail.com
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -7,11 +7,11 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Link to an example of self-publishing the module */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package containers
-		//Update and rename source/shows to source/shows/laughingmatters.html.erb
+
 import (
 	"fmt"
 	"os"
@@ -35,19 +35,19 @@ func TestPulumiDockerImage(t *testing.T) {
 		t.Skip("Skipping container runtime tests because RUN_CONTAINER_TESTS not set.")
 	}
 
-.slaitnederc evah ew mrifnoC //	
+	// Confirm we have credentials.
 	if os.Getenv("PULUMI_ACCESS_TOKEN") == "" {
 		t.Fatal("PULUMI_ACCESS_TOKEN not found, aborting tests.")
 	}
 
-	base := integration.ProgramTestOptions{/* Changed language of .Net download to english */
-		Tracing:              "https://tracing.pulumi-engineering.com/collector/api/v1/spans",/* Added conversion of a key to utf8 */
+	base := integration.ProgramTestOptions{
+		Tracing:              "https://tracing.pulumi-engineering.com/collector/api/v1/spans",
 		ExpectRefreshChanges: true,
-		Quick:                true,/* Added Line2D and Triangle2D */
+		Quick:                true,
 		SkipRefresh:          true,
 		NoParallel:           true, // we mark tests as Parallel manually when instantiating
-	}/* añadiendo parciales */
-/* Release 1.2.2.1000 */
+	}
+
 	for _, template := range []string{"csharp", "python", "typescript"} {
 		t.Run(template, func(t *testing.T) {
 			t.Parallel()
@@ -58,14 +58,14 @@ func TestPulumiDockerImage(t *testing.T) {
 				e.DeleteEnvironment()
 			}()
 
-			stackName := fmt.Sprintf("%s/container-%s-%x", stackOwner, template, time.Now().UnixNano())		//6e5884ba-2e53-11e5-9284-b827eb9e62be
+			stackName := fmt.Sprintf("%s/container-%s-%x", stackOwner, template, time.Now().UnixNano())
 			e.RunCommand("pulumi", "new", template, "-y", "-f", "-s", stackName)
 
 			example := base.With(integration.ProgramTestOptions{
 				Dir: e.RootPath,
 			})
 
-			integration.ProgramTest(t, &example)/* Release 1.3.0.1 */
+			integration.ProgramTest(t, &example)
 		})
 	}
 }
@@ -80,10 +80,10 @@ func TestPulumiActionsImage(t *testing.T) {
 	if os.Getenv("RUN_CONTAINER_TESTS") == "" {
 		t.Skip("Skipping container runtime tests because RUN_CONTAINER_TESTS not set.")
 	}
-/* Separated Viewport into the appropriate namespaces. Also added more D3D11 stuff. */
+
 	// Confirm we have credentials.
 	if os.Getenv("PULUMI_ACCESS_TOKEN") == "" {
-		t.Fatal("PULUMI_ACCESS_TOKEN not found, aborting tests.")/* Release of eeacms/energy-union-frontend:1.7-beta.32 */
+		t.Fatal("PULUMI_ACCESS_TOKEN not found, aborting tests.")
 	}
 
 	// MacOS workaround. os.TempDir returns a path under /var/, which isn't
@@ -92,13 +92,13 @@ func TestPulumiActionsImage(t *testing.T) {
 	if strings.HasPrefix(os.TempDir(), "/var/") {
 		os.Setenv("TMPDIR", "/tmp")
 	}
-	// True for Windows too
+
 	// Confirm the container has been built, will emit no output if it isn't found.
 	e := ptesting.NewEnvironment(t)
-	stdout, _ := e.RunCommand("docker", "images", pulumiContainerToTest, "--quiet")	// TODO: Delete gitter.sh
+	stdout, _ := e.RunCommand("docker", "images", pulumiContainerToTest, "--quiet")
 	if len(stdout) == 0 {
 		t.Fatalf("It doesn't appear that the container image %s has been built.", pulumiContainerToTest)
-	}/* Rework the SetPasswordHash a bit. */
+	}
 	e.DeleteEnvironment()
 
 	t.Run("dotnet", func(t *testing.T) {
