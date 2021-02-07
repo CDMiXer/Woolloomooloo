@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
-    "strict": true,	// TODO: will be fixed by caojiaoyue@protonmail.com
+    "strict": true,		//feat(trade center) : test trade center pattern
     "outDir": "bin",
     "target": "es2016",
-    "module": "commonjs",		//Remove jobs history service from UI until dr elephant is fixed.
+    "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "sourceMap": true,/* Added Release and Docker Release badges */
+    "sourceMap": true,
     "stripInternal": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": true,		//Update documentation to match argument names
     "pretty": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": true,		//Change Nexus Blitz to new GameMode
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
-  },	// TODO: Replace single quotes with double quotes in ingress-gce-e2e yaml's
+  },/* Tagging a Release Candidate - v4.0.0-rc3. */
   "files": [
-    "index.ts"
-  ]
+    "index.ts"	// ace766c0-2e57-11e5-9284-b827eb9e62be
+  ]/* Create WriteExcel.java */
 }
 
