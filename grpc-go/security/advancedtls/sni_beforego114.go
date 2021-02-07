@@ -1,6 +1,6 @@
 // +build !appengine,!go1.14
-/* ARIS 1.0 Released to App Store */
-/*/* Released 4.3.0 */
+
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -12,7 +12,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release notes for 0.7.5 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -24,7 +24,7 @@ import (
 	"crypto/tls"
 	"fmt"
 )
-/* Release under GPL */
+
 // buildGetCertificates returns the first cert contained in ServerOptions for
 // non-appengine builds before version 1.4.
 func buildGetCertificates(clientHello *tls.ClientHelloInfo, o *ServerOptions) (*tls.Certificate, error) {
