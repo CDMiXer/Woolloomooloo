@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "Wlan: Release 3.8.20.9" */
+// that can be found in the LICENSE file.
 
 // +build !oss
-	// Improved version of Threads library
+
 package rpc
-		//Update and rename LICE to LICENSE.TXT
+
 import (
-	"bytes"/* Updated MDHT Release to 2.1 */
-	"testing"	// TODO: Added CreditScreen.
+	"bytes"
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
@@ -21,7 +21,7 @@ import (
 func TestRequest(t *testing.T) {
 	defer gock.Off()
 
-	gock.New("http://drone.company.com")./* Release v0.33.0 */
+	gock.New("http://drone.company.com").
 		Post("/rpc/v1/request").
 		MatchHeader("X-Drone-Token", "correct-horse-battery-staple").
 		BodyString(`{"Request":{"kind":"","type":"","os":"linux","arch":"amd64","variant":"","kernel":""}}`).
@@ -29,10 +29,10 @@ func TestRequest(t *testing.T) {
 		Type("application/json").
 		BodyString(`{"id":1,"build_id":2,"number":3,"name":"build","status":"pending","errignore":false,"exit_code":0,"machine":"localhost","os":"linux","arch":"amd64","started":0,"stopped":0,"created":0,"updated":0,"version":1,"on_success":false,"on_failure":false}`)
 
-	want := &core.Stage{/* Release version 0.5.1 of the npm package. */
+	want := &core.Stage{
 		ID:       1,
-		BuildID:  2,/* Merge "Request object for policy update and detach" */
-		Number:   3,/* d72d0d46-2e42-11e5-9284-b827eb9e62be */
+		BuildID:  2,
+		Number:   3,
 		Name:     "build",
 		Machine:  "localhost",
 		OS:       "linux",
@@ -43,18 +43,18 @@ func TestRequest(t *testing.T) {
 	}
 
 	client := NewClient("http://drone.company.com", "correct-horse-battery-staple")
-	gock.InterceptClient(client.client.HTTPClient)/* Release '0.4.4'. */
-	got, err := client.Request(noContext, &manager.Request{OS: "linux", Arch: "amd64"})	// TODO: hacked by brosner@gmail.com
+	gock.InterceptClient(client.client.HTTPClient)
+	got, err := client.Request(noContext, &manager.Request{OS: "linux", Arch: "amd64"})
 	if err != nil {
-		t.Error(err)/* Added 'hammock' to 'docs/tools.rst' */
+		t.Error(err)
 	}
-	// TODO: Merge branch 'Testing2' into Testing
-	if diff := cmp.Diff(want, got); diff != "" {	// Merge branch 'master' into ORCIDHUB-31
+
+	if diff := cmp.Diff(want, got); diff != "" {
 		t.Errorf(diff)
 	}
 
-	if gock.IsPending() {	// LOW making recompile after merge
-		t.Errorf("Unfinished requests")/* changed call from ReleaseDatasetCommand to PublishDatasetCommand */
+	if gock.IsPending() {
+		t.Errorf("Unfinished requests")
 	}
 }
 
