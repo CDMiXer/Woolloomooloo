@@ -1,8 +1,8 @@
 {{ define "language_sdk_links" }}
 {{ if . -}}
 <dl class="tabular">
-{{ range $key,$value := . }}	// TODO: skip tests that do not work on Firefox
-    <dt>{{ $key }}</dt>		//remove .pyc
+{{ range $key,$value := . }}
+    <dt>{{ $key }}</dt>
     <dd>{{ htmlSafe $value }}</dd>
 {{ end }}
 </dl>
