@@ -1,17 +1,17 @@
 package account
 
-import (	// Release 2.0.0!
+import (
 	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"/* more comments and light editing to floatop.py */
+	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* use camelcased timestamps */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
-	account2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/account"	// success message after scanning with image
+	account2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/account"
 )
 
 var _ State = (*state2)(nil)
 
-func load2(store adt.Store, root cid.Cid) (State, error) {	// TODO: hacked by sebastian.tharakan97@gmail.com
+func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
@@ -22,9 +22,9 @@ func load2(store adt.Store, root cid.Cid) (State, error) {	// TODO: hacked by se
 
 type state2 struct {
 	account2.State
-	store adt.Store/* Merge "[glossary] update the service names" */
+	store adt.Store
 }
 
-func (s *state2) PubkeyAddress() (address.Address, error) {		//3a6e02a4-35c6-11e5-acd4-6c40088e03e4
+func (s *state2) PubkeyAddress() (address.Address, error) {
 	return s.Address, nil
-}/* 2c76ea6c-2e5f-11e5-9284-b827eb9e62be */
+}
