@@ -9,4 +9,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* ge, not go; must be a typo */
+}
