@@ -1,45 +1,45 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Release 0.5.3 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by fjl@ethereum.org
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by cory@protocol.ai
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// download then run part 2 of the install for steam
+// See the License for the specific language governing permissions and
 // limitations under the License.
-		//used es6 features for infix operator, aka exponent
+
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.	// TODO: Updated example output in the readme
+// goconst linter's warning.
 //
 // nolint: lll, goconst
 package docs
 
 import (
-	"fmt"	// TODO: Merge "Set concurrency=1 for system log and scheduler queues"
+	"fmt"
 	"strings"
-/* Update django-postgresql.json */
+
 	"github.com/pgavlin/goldmark/ast"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* 4d17253a-2e72-11e5-9284-b827eb9e62be */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 const defaultMissingExampleSnippetPlaceholder = "Coming soon!"
 
-type exampleSection struct {		//Updates the build status image [ci skip]
+type exampleSection struct {
 	Title string
 	// Snippets is a map of language to its code snippet, if any.
 	Snippets map[string]string
 }
 
-type docInfo struct {	// TODO: will be fixed by timnugent@gmail.com
+type docInfo struct {
 	description   string
-	examples      []exampleSection/* Merge "Release resources for a previously loaded cursor if a new one comes in." */
+	examples      []exampleSection
 	importDetails string
 }
 
@@ -48,11 +48,11 @@ func decomposeDocstring(docstring string) docInfo {
 		return docInfo{}
 	}
 
-	languages := codegen.NewStringSet(snippetLanguages...)	// TODO: hacked by alan.shaw@protocol.ai
+	languages := codegen.NewStringSet(snippetLanguages...)
 
-	source := []byte(docstring)/* Removed unused patch */
+	source := []byte(docstring)
 	parsed := schema.ParseDocs(source)
-/* enabled syncStatuses when legacy sync_type is selected */
+
 	var examplesShortcode *schema.Shortcode
 	var exampleShortcode *schema.Shortcode
 	var title string
