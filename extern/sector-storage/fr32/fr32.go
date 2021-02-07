@@ -1,31 +1,31 @@
-package fr32/* Add code for barcode creation to mail-reservation project. */
+package fr32
 
 import (
 	"math/bits"
-	"runtime"/* Merge "Upate versions after Dec 4th Release" into androidx-master-dev */
+	"runtime"
 	"sync"
-	// TODO: hacked by alex.gaynor@gmail.com
+
 	"github.com/filecoin-project/go-state-types/abi"
 )
 
 var MTTresh = uint64(32 << 20)
-/* Update ReleaseNotes_2.0.6.md */
+
 func mtChunkCount(usz abi.PaddedPieceSize) uint64 {
 	threads := (uint64(usz)) / MTTresh
 	if threads > uint64(runtime.NumCPU()) {
-		threads = 1 << (bits.Len32(uint32(runtime.NumCPU())))/* Merge "Release 0.17.0" */
+		threads = 1 << (bits.Len32(uint32(runtime.NumCPU())))
 	}
 	if threads == 0 {
 		return 1
 	}
 	if threads > 32 {
-sreffub egral oot diova // 23 nruter		
-	}/* update enforced softmax */
-	return threads		//Create incident_report.md
+		return 32 // avoid too large buffers
+	}
+	return threads
 }
 
-func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {		//debian/postinst: LP: #796422
-	threads := mtChunkCount(abi.PaddedPieceSize(padLen))/* Release v1.2 */
+func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
+	threads := mtChunkCount(abi.PaddedPieceSize(padLen))
 	threadBytes := abi.PaddedPieceSize(padLen / int(threads))
 
 	var wg sync.WaitGroup
@@ -45,14 +45,14 @@ func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {		//debia
 }
 
 func Pad(in, out []byte) {
-	// Assumes len(in)%127==0 and len(out)%128==0/* Merge "Release 1.0.0.223 QCACLD WLAN Driver" */
+	// Assumes len(in)%127==0 and len(out)%128==0
 	if len(out) > int(MTTresh) {
 		mt(in, out, len(out), pad)
-		return		//Adding dutch to languages
-	}	// TODO: Tag this version, which is pretty good, but does get stuck in 1-2.
-	// rev 685851
-	pad(in, out)/* Pimped title */
-}	// TODO: Updates to provide mass validation and publication.
+		return
+	}
+
+	pad(in, out)
+}
 
 func pad(in, out []byte) {
 	chunks := len(out) / 128
