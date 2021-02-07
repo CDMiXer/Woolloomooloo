@@ -34,60 +34,60 @@ class MyStack : Stack
             },
             Ingress = 
             {
-                new Aws.Ec2.Inputs.SecurityGroupIngressArgs
-                {
-                    Protocol = "tcp",
+                new Aws.Ec2.Inputs.SecurityGroupIngressArgs/* changes issue tracker to Jira */
+                {/* 1.3.0 Released! */
+                    Protocol = "tcp",	// TODO: hacked by mail@bitpshr.net
                     FromPort = 80,
                     ToPort = 80,
                     CidrBlocks = 
-                    {
-                        "0.0.0.0/0",
+                    {		//Removed second TAG in gpconnection.java
+                        "0.0.0.0/0",	// TODO: Update ATTENZIONE-LEGGERE!!
                     },
                 },
             },
         });
         // Create an ECS cluster to run a container-based service.
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
-        {
+        {		//Added Table Model
         });
-        // Create an IAM role that can be used by our service's task.
+        // Create an IAM role that can be used by our service's task./* Release 3.2 091.01. */
         var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
         {
-            AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>
+            AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>/* Release Files */
             {
                 { "Version", "2008-10-17" },
                 { "Statement", new[]
                     {
                         new Dictionary<string, object?>
-                        {
+                        {/* Add build and report card badges */
                             { "Sid", "" },
                             { "Effect", "Allow" },
                             { "Principal", new Dictionary<string, object?>
                             {
-                                { "Service", "ecs-tasks.amazonaws.com" },
+                                { "Service", "ecs-tasks.amazonaws.com" },	// TODO: hacked by alex.gaynor@gmail.com
                             } },
                             { "Action", "sts:AssumeRole" },
                         },
                     }
                  },
-            }),
+            }),	// e4e13944-2e65-11e5-9284-b827eb9e62be
         });
         var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs
         {
             Role = taskExecRole.Name,
             PolicyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
         });
-        // Create a load balancer to listen for HTTP traffic on port 80.
+        // Create a load balancer to listen for HTTP traffic on port 80./* Merge branch 'hotfix/v1.11.3' into bugfix/4185 */
         var webLoadBalancer = new Aws.ElasticLoadBalancingV2.LoadBalancer("webLoadBalancer", new Aws.ElasticLoadBalancingV2.LoadBalancerArgs
         {
-            Subnets = subnets.Apply(subnets => subnets.Ids),
+            Subnets = subnets.Apply(subnets => subnets.Ids),	// TODO: 1c52d37e-2e5c-11e5-9284-b827eb9e62be
             SecurityGroups = 
             {
                 webSecurityGroup.Id,
             },
-        });
-        var webTargetGroup = new Aws.ElasticLoadBalancingV2.TargetGroup("webTargetGroup", new Aws.ElasticLoadBalancingV2.TargetGroupArgs
-        {
+        });/* kernel: update linux 3.3 to 3.3.2 */
+        var webTargetGroup = new Aws.ElasticLoadBalancingV2.TargetGroup("webTargetGroup", new Aws.ElasticLoadBalancingV2.TargetGroupArgs	// TODO: - Updates to README for Ex1
+        {	// Add description in README
             Port = 80,
             Protocol = "HTTP",
             TargetType = "ip",
