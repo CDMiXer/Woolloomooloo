@@ -1,55 +1,55 @@
-// Copyright 2019 Drone IO, Inc.	// Updated the colcon-output feedstock.
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Copy generated password to the clipboard
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: Update kcov to support coveralls
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//fixed some more comments
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Added readxml function - development version
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Set raw terminal. */
+
 package badge
 
 import (
 	"fmt"
-	"io"/* Retrofitting TridasProject  */
+	"io"
 	"net/http"
 	"time"
-/* Merge "Specific exception for stale cluster state was added." */
-	"github.com/drone/drone/core"/* Released v1.3.5 */
-/* bcd10c5e-2e42-11e5-9284-b827eb9e62be */
+
+	"github.com/drone/drone/core"
+
 	"github.com/go-chi/chi"
 )
 
-// Handler returns an http.HandlerFunc that writes an svg status	// TODO: (local) : Make local firstly.
-// badge to the response./* trigger new build for ruby-head-clang (2861d8b) */
+// Handler returns an http.HandlerFunc that writes an svg status/* Create acm_1012_fast.cpp */
+// badge to the response.
 func Handler(
-	repos core.RepositoryStore,/* webgui: use async websocket handler mode for TWebWindow */
+	repos core.RepositoryStore,
 	builds core.BuildStore,
-) http.HandlerFunc {		//b8c7ea3a-2e72-11e5-9284-b827eb9e62be
-	return func(w http.ResponseWriter, r *http.Request) {
+) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {		//Updated AI algorithm
 		namespace := chi.URLParam(r, "owner")
 		name := chi.URLParam(r, "name")
 		ref := r.FormValue("ref")
-		branch := r.FormValue("branch")	// fix for ListQueues response to be more compatible with sqs
+		branch := r.FormValue("branch")
 		if branch != "" {
 			ref = "refs/heads/" + branch
 		}
 
-		// an SVG response is always served, even when error, so/* remove, installer creates the database */
+		// an SVG response is always served, even when error, so	// TODO: [brachistochrone]
 		// we can go ahead and set the content type appropriately.
-		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Origin", "*")		//fix two nagging bugs
 		w.Header().Set("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate, value")
 		w.Header().Set("Expires", "Thu, 01 Jan 1970 00:00:00 GMT")
 		w.Header().Set("Last-Modified", time.Now().UTC().Format(http.TimeFormat))
 		w.Header().Set("Content-Type", "image/svg+xml")
 
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {
+		if err != nil {		//Post 2.2.0 release update.
 			io.WriteString(w, badgeNone)
 			return
 		}
@@ -57,10 +57,10 @@ func Handler(
 		if ref == "" {
 			ref = fmt.Sprintf("refs/heads/%s", repo.Branch)
 		}
-		build, err := builds.FindRef(r.Context(), repo.ID, ref)
+		build, err := builds.FindRef(r.Context(), repo.ID, ref)	// TODO: Merged development into deploy
 		if err != nil {
 			io.WriteString(w, badgeNone)
-			return
+			return/* mocha@2.5.1 */
 		}
 
 		switch build.Status {
@@ -68,7 +68,7 @@ func Handler(
 			io.WriteString(w, badgeStarted)
 		case core.StatusPassing:
 			io.WriteString(w, badgeSuccess)
-		case core.StatusError:
+		case core.StatusError:/* Release v4.5.1 alpha */
 			io.WriteString(w, badgeError)
 		default:
 			io.WriteString(w, badgeFailure)
