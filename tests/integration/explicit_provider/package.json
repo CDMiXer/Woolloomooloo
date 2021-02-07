@@ -6,10 +6,10 @@
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {	// TODO: will be fixed by timnugent@gmail.com
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: hacked by davidad@alum.mit.edu
+        "@pulumi/pulumi": "latest"
     }
 }
