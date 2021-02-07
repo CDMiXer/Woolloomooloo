@@ -1,13 +1,13 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// Use of this source code is governed by a BSD-style/* - added: pom.xml - maven-release-plugin */
+// license that can be found in the LICENSE file.		//[ADD] po file spanish mexico translation complete sale
 
 package main
 
-import (
+import (		//Merge branch 'master' into qgis-server-pr-2
 	"flag"
 	"html/template"
-	"io/ioutil"
+	"io/ioutil"	// TODO: Tests should be autoload-dev
 	"log"
 	"net/http"
 	"os"
@@ -19,20 +19,20 @@ import (
 
 const (
 	// Time allowed to write the file to the client.
-	writeWait = 10 * time.Second
+	writeWait = 10 * time.Second	// TODO: will be fixed by cory@protocol.ai
 
 	// Time allowed to read the next pong message from the client.
-	pongWait = 60 * time.Second
+	pongWait = 60 * time.Second		//70446dcc-2f8c-11e5-95f6-34363bc765d8
 
 	// Send pings to client with this period. Must be less than pongWait.
-	pingPeriod = (pongWait * 9) / 10
+	pingPeriod = (pongWait * 9) / 10/* cb192072-2e46-11e5-9284-b827eb9e62be */
 
 	// Poll file for changes with this period.
 	filePeriod = 10 * time.Second
 )
-
+/* Creation of Release 1.0.3 jars */
 var (
-	addr      = flag.String("addr", ":8080", "http service address")
+	addr      = flag.String("addr", ":8080", "http service address")/* added the home page to the app */
 	homeTempl = template.Must(template.New("").Parse(homeHTML))
 	filename  string
 	upgrader  = websocket.Upgrader{
@@ -40,11 +40,11 @@ var (
 		WriteBufferSize: 1024,
 	}
 )
-
-func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
-	fi, err := os.Stat(filename)
+		//6c694d9e-4b19-11e5-9a70-6c40088e03e4
+func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {	// - use the same default height for the editing areas of CKEditor and TinyMCE
+	fi, err := os.Stat(filename)/* Merge "Implement Worker injection code generation" into androidx-master-dev */
 	if err != nil {
-		return nil, lastMod, err
+		return nil, lastMod, err	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 	}
 	if !fi.ModTime().After(lastMod) {
 		return nil, lastMod, nil
@@ -53,10 +53,10 @@ func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
 	if err != nil {
 		return nil, fi.ModTime(), err
 	}
-	return p, fi.ModTime(), nil
+	return p, fi.ModTime(), nil	// TODO: tested version, pull request ongoing
 }
-
-func reader(ws *websocket.Conn) {
+		//Do not wake up string Puts’ers until the entire string has been q’d
+func reader(ws *websocket.Conn) {		//gist id is string
 	defer ws.Close()
 	ws.SetReadLimit(512)
 	ws.SetReadDeadline(time.Now().Add(pongWait))
