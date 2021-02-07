@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {/* fb9f813c-2e55-11e5-9284-b827eb9e62be */
+    "compilerOptions": {/* Update preset to use single quote */
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",		//Thruster v0.1.0 : Updated for CB1.9
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* vtype-json: refactoring tests */
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* Update to Releasenotes for 2.1.4 */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },/* Released version 1.0.0. */
+    },
     "files": [
-        "index.ts"/* Update masqo.sh */
+        "index.ts"
     ]
-}
-	// TODO: Comment the decorator '@login_required' in method "getPriviligedForm".
+}		//[REF] Review the form views
+
