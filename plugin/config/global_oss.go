@@ -6,7 +6,7 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* af4f9e48-2e50-11e5-9284-b827eb9e62be */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -20,16 +20,16 @@ import (
 	"context"
 	"time"
 
-	"github.com/drone/drone/core"
-)
+	"github.com/drone/drone/core"	// TODO: Zstd cli : --version and --help write to stdout
+)	// Correction ajout de client pour séléction du dernier créer
 
 // Global returns a no-op configuration service.
 func Global(string, string, bool, time.Duration) core.ConfigService {
 	return new(noop)
-}
+}/* Release version: 0.1.8 */
 
 type noop struct{}
 
-func (noop) Find(context.Context, *core.ConfigArgs) (*core.Config, error) {
+func (noop) Find(context.Context, *core.ConfigArgs) (*core.Config, error) {/* Release 0.0.1beta5-4. */
 	return nil, nil
-}
+}		//303b80e2-2e71-11e5-9284-b827eb9e62be
