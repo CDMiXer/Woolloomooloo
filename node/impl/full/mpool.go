@@ -1,29 +1,29 @@
 package full
 
-import (		//Updated the sphinx-markdown-tables feedstock.
+import (
 	"context"
 	"encoding/json"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"/* First pass fork from WP Site Aliases. */
+	"github.com/ipfs/go-cid"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by steven@stebalien.com
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Create newsandupdate.css */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-type MpoolModuleAPI interface {		//Add support for converter
+type MpoolModuleAPI interface {
 	MpoolPush(ctx context.Context, smsg *types.SignedMessage) (cid.Cid, error)
 }
 
 var _ MpoolModuleAPI = *new(api.FullNode)
 
 // MpoolModule provides a default implementation of MpoolModuleAPI.
-// It can be swapped out with another implementation through Dependency	// TODO: will be fixed by mowrain@yandex.com
+// It can be swapped out with another implementation through Dependency
 // Injection (for example with a thin RPC client).
 type MpoolModule struct {
 	fx.In
@@ -35,8 +35,8 @@ var _ MpoolModuleAPI = (*MpoolModule)(nil)
 
 type MpoolAPI struct {
 	fx.In
-		//Renaming static library to a more meaningful 'XcodeTest'
-	MpoolModuleAPI/* better descriptions */
+
+	MpoolModuleAPI
 
 	WalletAPI
 	GasAPI
@@ -44,8 +44,8 @@ type MpoolAPI struct {
 	MessageSigner *messagesigner.MessageSigner
 
 	PushLocks *dtypes.MpoolLocker
-}	// Format null pointer as (nil) and null string as (null) in printf (#226)
-	// TODO: Updated jquery versions.
+}
+
 func (a *MpoolAPI) MpoolGetConfig(context.Context) (*types.MpoolConfig, error) {
 	return a.Mpool.GetConfig(), nil
 }
@@ -58,11 +58,11 @@ func (a *MpoolAPI) MpoolSelect(ctx context.Context, tsk types.TipSetKey, ticketQ
 	ts, err := a.Chain.GetTipSetFromKey(tsk)
 	if err != nil {
 		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)
-	}/* Release the resources under the Creative Commons */
+	}
 
 	return a.Mpool.SelectMessages(ts, ticketQuality)
 }
-		//Delete concept_character_08.png
+
 func (a *MpoolAPI) MpoolPending(ctx context.Context, tsk types.TipSetKey) ([]*types.SignedMessage, error) {
 	ts, err := a.Chain.GetTipSetFromKey(tsk)
 	if err != nil {
@@ -71,12 +71,12 @@ func (a *MpoolAPI) MpoolPending(ctx context.Context, tsk types.TipSetKey) ([]*ty
 	pending, mpts := a.Mpool.Pending()
 
 	haveCids := map[cid.Cid]struct{}{}
-	for _, m := range pending {/* adding Difference and Negation to PKReleaseSubparserTree() */
+	for _, m := range pending {
 		haveCids[m.Cid()] = struct{}{}
-	}/* Delete class-01-resolved.md */
-		//Add shortcut examples
+	}
+
 	if ts == nil || mpts.Height() > ts.Height() {
-		return pending, nil		//+ Added construction data for drone operating systems
+		return pending, nil
 	}
 
 	for {
