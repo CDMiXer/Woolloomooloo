@@ -1,21 +1,21 @@
-{
-    "compilerOptions": {	// Create jupyterhub-0.9.6-CrayGNU-19.03.eb
+{	// TODO: Delete sort
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "declaration": true,
+        "module": "commonjs",/* Added option to display badges inline (i.e. horizontally) */
+        "moduleResolution": "node",/* Release 2.5b2 */
+        "declaration": true,		//Tweaked output from call noise segment classifier creation script.
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Upgrade docking-frames to 1.1.2-p4 */
+        "noImplicitReturns": true,/* Create 671. Second Minimum Node In a Binary Tree */
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"/* 46ac5d1a-2e58-11e5-9284-b827eb9e62be */
+        "index.ts"/* Update ABAP2XLSX.Operator.ps1 */
     ]
 }
 
