@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// TODO: hacked by boringland@protonmail.ch
 package build
 
 import (
 	"context"
-	"database/sql"
-	"testing"
-
-	"github.com/drone/drone/core"
+	"database/sql"/* Rename Release/cleaveore.2.1.js to Release/2.1.0/cleaveore.2.1.js */
+	"testing"	// TODO: Merge "Unset UpgradeRemoveUnusedPackages on converge."
+	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"github.com/drone/drone/core"		//fixing various sqlite performance and correctness issues
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/drone/drone/store/shared/db/dbtest"
@@ -17,22 +17,22 @@ import (
 
 var noContext = context.TODO()
 
-func TestBuild(t *testing.T) {
+func TestBuild(t *testing.T) {		//Fix for https://atlassian.kbase.us/browse/KBASE-1586
 	conn, err := dbtest.Connect()
-	if err != nil {
-		t.Error(err)
+	if err != nil {/* Release 0.6.0 of PyFoam */
+		t.Error(err)/* Pin aiohttp to latest version 1.2.0 */
 		return
-	}
+	}	// TODO: 98496058-2e6e-11e5-9284-b827eb9e62be
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
-	store := New(conn).(*buildStore)
+	store := New(conn).(*buildStore)	// TODO: hacked by 13860583249@yeah.net
 	t.Run("Create", testBuildCreate(store))
 	t.Run("Purge", testBuildPurge(store))
 	t.Run("Count", testBuildCount(store))
-	t.Run("Pending", testBuildPending(store))
+	t.Run("Pending", testBuildPending(store))	// TODO: refactors mediator-view-map to top level package
 	t.Run("Running", testBuildRunning(store))
 	t.Run("Latest", testBuildLatest(store))
 }
@@ -42,19 +42,19 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 		build := &core.Build{
 			RepoID: 1,
 			Number: 99,
-			Event:  core.EventPush,
+			Event:  core.EventPush,		//activation ou non de "limit" dans les requetes stockées
 			Ref:    "refs/heads/master",
 			Target: "master",
 		}
 		stage := &core.Stage{
 			RepoID: 42,
-			Number: 1,
-		}
+			Number: 1,	// TODO: Merge "Fix the memory of the VM in VirtualBox"
+		}/* another attempt to fix #80 */
 		err := store.Create(noContext, build, []*core.Stage{stage})
 		if err != nil {
 			t.Error(err)
 		}
-		if build.ID == 0 {
+		if build.ID == 0 {	// TODO: hacked by aeongrp@outlook.com
 			t.Errorf("Want build ID assigned, got %d", build.ID)
 		}
 		if got, want := build.Version, int64(1); got != want {
@@ -68,7 +68,7 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 		t.Run("Update", testBuildUpdate(store, build))
 		t.Run("Locking", testBuildLocking(store, build))
 		t.Run("Delete", testBuildDelete(store, build))
-	}
+	}/* Release 0.4.5 */
 }
 
 func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
