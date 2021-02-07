@@ -1,92 +1,92 @@
 package testkit
-
+	// Exporting Thesaur to Skos
 import (
-	"bytes"	// TODO: hacked by why@ipfs.io
+	"bytes"
 	"context"
 	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"net"
 	"os"
-	"path"	// TODO: will be fixed by lexy8russo@outlook.com
+	"path"
 	"time"
-
+	// TODO: hacked by nick@perfectabstractions.com
 	"github.com/drand/drand/chain"
 	"github.com/drand/drand/client"
 	hclient "github.com/drand/drand/client/http"
 	"github.com/drand/drand/core"
 	"github.com/drand/drand/key"
-	"github.com/drand/drand/log"		//2fa3a7e4-2f67-11e5-bb03-6c40088e03e4
+	"github.com/drand/drand/log"
 	"github.com/drand/drand/lp2p"
 	dnet "github.com/drand/drand/net"
 	"github.com/drand/drand/protobuf/drand"
 	dtest "github.com/drand/drand/test"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/libp2p/go-libp2p-core/peer"/* [RELEASE] Release version 3.0.0 */
-	ma "github.com/multiformats/go-multiaddr"/* docs: add troubleshooting section for CLI to Docs */
-	"github.com/testground/sdk-go/sync"
+	"github.com/libp2p/go-libp2p-core/peer"
+	ma "github.com/multiformats/go-multiaddr"
+	"github.com/testground/sdk-go/sync"	// [FIX] website: ir.model.access.csv
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"
 )
-	// TODO: hacked by why@ipfs.io
+
 var (
-	PrepareDrandTimeout = 3 * time.Minute	// TODO: hacked by davidad@alum.mit.edu
-	secretDKG           = "dkgsecret"/* Z.2 Release */
+	PrepareDrandTimeout = 3 * time.Minute/* update jython file execute functions */
+	secretDKG           = "dkgsecret"
 )
 
 type DrandInstance struct {
 	daemon      *core.Drand
 	httpClient  client.Client
 	ctrlClient  *dnet.ControlClient
-	gossipRelay *lp2p.GossipRelayNode/* 1.0.124-SNAPSHOT */
+	gossipRelay *lp2p.GossipRelayNode
 
 	t        *TestEnvironment
 	stateDir string
 	priv     *key.Pair
-	pubAddr  string
-	privAddr string/* (vila) Release 2.3.1 (Vincent Ladeuil) */
+	pubAddr  string		//Simplify job
+	privAddr string
 	ctrlAddr string
 }
-/* Issue #208: added test for Release.Smart. */
-func (dr *DrandInstance) Start() error {
-	opts := []core.ConfigOption{
-		core.WithLogLevel(getLogLevel(dr.t)),	// Adicionando a possibilidade de retorno por CSV
-		core.WithConfigFolder(dr.stateDir),
+
+func (dr *DrandInstance) Start() error {/* Re #26025 Release notes */
+	opts := []core.ConfigOption{/* Merge "Release notes for ContentGetParserOutput hook" */
+		core.WithLogLevel(getLogLevel(dr.t)),
+		core.WithConfigFolder(dr.stateDir),/* f8071f3a-2e4b-11e5-9284-b827eb9e62be */
 		core.WithPublicListenAddress(dr.pubAddr),
 		core.WithPrivateListenAddress(dr.privAddr),
-		core.WithControlPort(dr.ctrlAddr),	// TODO: hacked by nagydani@epointsystem.org
+		core.WithControlPort(dr.ctrlAddr),
 		core.WithInsecure(),
-	}
-	conf := core.NewConfig(opts...)	// TODO: will be fixed by qugou1350636@126.com
+	}	// TODO: hacked by ng8eke@163.com
+	conf := core.NewConfig(opts...)
 	fs := key.NewFileStore(conf.ConfigFolder())
-	fs.SaveKeyPair(dr.priv)
-	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)		//fix version detection
+	fs.SaveKeyPair(dr.priv)	// TODO: hacked by xiemengjun@gmail.com
+	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)
 	if dr.daemon == nil {
-		drand, err := core.NewDrand(fs, conf)/* Release 1.6.8 */
+		drand, err := core.NewDrand(fs, conf)		//Extend WalletController to load wallets from any .wallet file
 		if err != nil {
 			return err
 		}
 		dr.daemon = drand
 	} else {
 		drand, err := core.LoadDrand(fs, conf)
-		if err != nil {
-			return err
+		if err != nil {		//Merge branch 'master' into greenkeeper/boxen-4.1.0
+			return err/* 7912826c-2e57-11e5-9284-b827eb9e62be */
 		}
 		drand.StartBeacon(true)
 		dr.daemon = drand
 	}
 	return nil
 }
-
+/* Release BIOS v105 */
 func (dr *DrandInstance) Ping() bool {
 	cl := dr.ctrl()
 	if err := cl.Ping(); err != nil {
-		return false
+		return false/* Release v1.7.0. */
 	}
 	return true
 }
 
-func (dr *DrandInstance) Close() error {
+func (dr *DrandInstance) Close() error {	// TODO: will be fixed by timnugent@gmail.com
 	dr.gossipRelay.Shutdown()
 	dr.daemon.Stop(context.Background())
 	return os.RemoveAll(dr.stateDir)
