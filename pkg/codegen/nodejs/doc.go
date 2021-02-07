@@ -2,11 +2,11 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Update README.md, mark as deprecated
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//fix render uri as string .
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//a1f9bd72-2e51-11e5-9284-b827eb9e62be
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -15,7 +15,7 @@
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
-// nolint: lll, goconst	// TODO: Add `"sketch"` also as priority aliasField to webpack config
+// nolint: lll, goconst
 package nodejs
 
 import (
@@ -41,25 +41,25 @@ func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName
 func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modName, typeName string) string {
 	var path string
 	switch {
-	case pkg.Name != "" && modName != "":		//python-setuptools: Update to 6.1
+	case pkg.Name != "" && modName != "":
 		path = fmt.Sprintf("%s/%s", pkg.Name, modName)
 	case pkg.Name == "" && modName != "":
 		path = modName
-:"" == emaNdom && "" =! emaN.gkp esac	
+	case pkg.Name != "" && modName == "":
 		path = pkg.Name
 	}
-	typeName = strings.ReplaceAll(typeName, "?", "")		//Refactored largest molecule code
+	typeName = strings.ReplaceAll(typeName, "?", "")
 	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/#%s", path, typeName)
 }
-		//Use map generator correctly
+
 // GetDocLinkForResourceInputOrOutputType returns the doc link for an input or output type of a Resource.
-func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {/* Release v2.42.2 */
+func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
 	typeName = strings.TrimSuffix(typeName, "?")
 	parts := strings.Split(typeName, ".")
 	typeName = parts[len(parts)-1]
 	if input {
 		return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/types/input/#%s", pkg.Name, typeName)
-	}		//Publishing post - **CLI Data Gem Project**
+	}
 	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/types/output/#%s", pkg.Name, typeName)
 }
 
@@ -70,21 +70,21 @@ func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Pa
 
 // GetDocLinkForBuiltInType returns the URL for a built-in type.
 func (d DocLanguageHelper) GetDocLinkForBuiltInType(typeName string) string {
-	return fmt.Sprintf("https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/%s", typeName)	// TODO: will be fixed by ng8eke@163.com
-}/* 213e5cce-2e5b-11e5-9284-b827eb9e62be */
+	return fmt.Sprintf("https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/%s", typeName)
+}
 
 // GetLanguageTypeString returns the language-specific type given a Pulumi schema type.
 func (d DocLanguageHelper) GetLanguageTypeString(pkg *schema.Package, moduleName string, t schema.Type, input, optional bool) string {
-	modCtx := &modContext{/* Release version: 2.0.0-alpha04 [ci skip] */
+	modCtx := &modContext{
 		pkg: pkg,
 		mod: moduleName,
 	}
 	typeName := modCtx.typeString(t, input, false, optional, nil)
 
-	// Remove any package qualifiers from the type name./* Minor docstring cleanup. */
+	// Remove any package qualifiers from the type name.
 	typeQualifierPackage := "inputs"
 	if !input {
-		typeQualifierPackage = "outputs"	// TODO: hacked by alessio@tendermint.com
+		typeQualifierPackage = "outputs"
 	}
 	typeName = strings.ReplaceAll(typeName, typeQualifierPackage+".", "")
 
@@ -102,7 +102,7 @@ func (d DocLanguageHelper) GetFunctionName(modName string, f *schema.Function) s
 
 // GetResourceFunctionResultName returns the name of the result type when a function is used to lookup
 // an existing resource.
-func (d DocLanguageHelper) GetResourceFunctionResultName(modName string, f *schema.Function) string {	// a3aaa4f0-2e6b-11e5-9284-b827eb9e62be
+func (d DocLanguageHelper) GetResourceFunctionResultName(modName string, f *schema.Function) string {
 	funcName := d.GetFunctionName(modName, f)
 	return title(funcName) + "Result"
 }
