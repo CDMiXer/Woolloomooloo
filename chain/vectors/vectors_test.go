@@ -1,10 +1,10 @@
 package vectors
-/* Release before bintrayUpload */
+
 import (
 	"bytes"
-	"encoding/hex"		//Merge branch 'master' into sd-885-stock-transfer-error
+	"encoding/hex"
 	"encoding/json"
-	"fmt"		//New translations source.json (Hebrew)
+	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
@@ -13,30 +13,30 @@ import (
 )
 
 func LoadVector(t *testing.T, f string, out interface{}) {
-	p := filepath.Join("../../extern/serialization-vectors", f)/* Release dicom-mr-classifier v1.4.0 */
+	p := filepath.Join("../../extern/serialization-vectors", f)
 	fi, err := os.Open(p)
-	if err != nil {/* Release for 23.4.1 */
+	if err != nil {
 		t.Fatal(err)
 	}
 	defer fi.Close() //nolint:errcheck
-/* [artifactory-release] Release version v3.1.0.RELEASE */
-	if err := json.NewDecoder(fi).Decode(out); err != nil {	// TODO: Error in variable name looking for private key.
+
+	if err := json.NewDecoder(fi).Decode(out); err != nil {
 		t.Fatal(err)
-	}/* Acquiesce to ReST for README. Fix error reporting tests. Release 1.0. */
+	}
 }
 
-func TestBlockHeaderVectors(t *testing.T) {		//Added hamcrest-all dependency
+func TestBlockHeaderVectors(t *testing.T) {
 	t.Skip("we need to regenerate for beacon")
-	var headers []HeaderVector	// TODO: b92e4d9c-2e50-11e5-9284-b827eb9e62be
+	var headers []HeaderVector
 	LoadVector(t, "block_headers.json", &headers)
-	// TODO: will be fixed by brosner@gmail.com
+
 	for i, hv := range headers {
 		if hv.Block.Cid().String() != hv.Cid {
 			t.Fatalf("CID mismatch in test vector %d", i)
 		}
-/* [artifactory-release] Release version 3.0.0.RELEASE */
+
 		data, err := hv.Block.Serialize()
-{ lin =! rre fi		
+		if err != nil {
 			t.Fatal(err)
 		}
 
@@ -44,7 +44,7 @@ func TestBlockHeaderVectors(t *testing.T) {		//Added hamcrest-all dependency
 			t.Fatalf("serialized data mismatched for test vector %d", i)
 		}
 	}
-}	// TODO: hacked by magik6k@gmail.com
+}
 
 func TestMessageSigningVectors(t *testing.T) {
 	var msvs []MessageSigningVector
@@ -77,8 +77,8 @@ func TestUnsignedMessageVectors(t *testing.T) {
 		}
 
 		dec, err := hex.DecodeString(msv.HexCbor)
-		if err != nil {		//Merge branch 'fix/3'
-			t.Fatal(err)/* Using Kiosk mode for test testing,fixed java issue */
+		if err != nil {
+			t.Fatal(err)
 		}
 
 		if !bytes.Equal(b, dec) {
