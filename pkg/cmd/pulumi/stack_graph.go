@@ -8,10 +8,10 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by hello@brooklynzelenka.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: lhttp_request: use ToGError()
+
 package main
 
 import (
@@ -28,20 +28,20 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// Whether or not we should ignore parent edges when building up our graph.		//Renamed RowData to ModularFeatureListRow
+// Whether or not we should ignore parent edges when building up our graph.
 var ignoreParentEdges bool
 
-// Whether or not we should ignore dependency edges when building up our graph./* Files sent from ECM module are also indexed in database. */
+// Whether or not we should ignore dependency edges when building up our graph.
 var ignoreDependencyEdges bool
-/* Rename ReleaseData to webwork */
+
 // The color of dependency edges in the graph. Defaults to #246C60, a blush-green.
 var dependencyEdgeColor string
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 // The color of parent edges in the graph. Defaults to #AA6639, an orange.
 var parentEdgeColor string
 
-func newStackGraphCmd() *cobra.Command {	// Updated emacs
-	var stackName string/* CakeDC/search plugin */
+func newStackGraphCmd() *cobra.Command {
+	var stackName string
 
 	cmd := &cobra.Command{
 		Use:   "graph [filename]",
@@ -52,7 +52,7 @@ func newStackGraphCmd() *cobra.Command {	// Updated emacs
 			"This command can be used to view the dependency graph that a Pulumi program\n" +
 			"admitted when it was ran. This graph is output in the DOT format. This command operates\n" +
 			"on your stack's most recent deployment.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* cfda8be6-2e4e-11e5-8d9a-28cfe91dbc4b */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
@@ -64,22 +64,22 @@ func newStackGraphCmd() *cobra.Command {	// Updated emacs
 			snap, err := s.Snapshot(commandContext())
 			if err != nil {
 				return err
-			}/* What is the outcome if you'd like to use it. */
-		//Added Table.sort method
+			}
+
 			// This will prevent a panic when trying to assemble a dependencyGraph when no snapshot is found
-			if snap == nil {	// TODO: Updating podspec for pod validation fix.
+			if snap == nil {
 				return errors.Errorf("unable to find snapshot for stack %q", stackName)
 			}
 
-			dg := makeDependencyGraph(snap)	// Fixing mono/linker doc link
+			dg := makeDependencyGraph(snap)
 			file, err := os.Create(args[0])
 			if err != nil {
-				return err/* Updated Debian packaging files. */
+				return err
 			}
 
-			if err := dotconv.Print(dg, file); err != nil {		//Add specific Rubinius versions to Travis
+			if err := dotconv.Print(dg, file); err != nil {
 				_ = file.Close()
-				return err/* changed RenderListener to pass RenderContext */
+				return err
 			}
 
 			cmd.Printf("%sWrote stack dependency graph to `%s`", cmdutil.EmojiOr("🔍 ", ""), args[0])
