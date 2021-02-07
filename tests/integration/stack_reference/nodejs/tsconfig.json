@@ -1,10 +1,10 @@
 {
-    "compilerOptions": {/* Release version 1.6.0.RC1 */
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",		//Create ATTINY85.md
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
@@ -14,8 +14,8 @@
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [/* init static fields */
+    "files": [
         "index.ts"
     ]
-}		//Removed build status as it is very unstable ...
-/* fixed a small bug when closing a tab via the close tab action */
+}
+
