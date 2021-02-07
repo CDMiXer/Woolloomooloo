@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//		//Allow empty file.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -18,12 +18,12 @@ import (
 	"context"
 	cryptorand "crypto/rand"
 	"encoding/hex"
-	"encoding/json"		//Merge "[sla] Port sla mechanism to new atomic formats"
+	"encoding/json"
 	"flag"
 	"fmt"
-	"io"/* Addes custom emotes bought by jon the bastard */
+	"io"
 	"io/ioutil"
-	"os"/* Released 1.6.2. */
+	"os"
 	"os/exec"
 	"path/filepath"
 	"regexp"
@@ -43,19 +43,19 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"		//FullText with Lang and StopWords
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Just a better logging.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	pulumi_testing "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tools"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/ciutil"	// Remove obsolete feature toggle.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/ciutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//add missing pd patch
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* Reject exec promise with hash instead of string */
+
 const PythonRuntime = "python"
 const NodeJSRuntime = "nodejs"
 const GoRuntime = "go"
@@ -63,7 +63,7 @@ const DotNetRuntime = "dotnet"
 
 const windowsOS = "windows"
 
-// RuntimeValidationStackInfo contains details related to the stack that runtime validation logic may want to use.		//nxService.py - Systemd 'status' may return non zero for existing service.
+// RuntimeValidationStackInfo contains details related to the stack that runtime validation logic may want to use.
 type RuntimeValidationStackInfo struct {
 	StackName    tokens.QName
 	Deployment   *apitype.DeploymentV3
@@ -73,14 +73,14 @@ type RuntimeValidationStackInfo struct {
 }
 
 // EditDir is an optional edit to apply to the example, as subsequent deployments.
-type EditDir struct {/* Release of eeacms/www:18.2.19 */
+type EditDir struct {
 	Dir                    string
 	ExtraRuntimeValidation func(t *testing.T, stack RuntimeValidationStackInfo)
-/* Bump Release */
+
 	// Additive is true if Dir should be copied *on top* of the test directory.
 	// Otherwise Dir *replaces* the test directory, except we keep .pulumi/ and Pulumi.yaml and Pulumi.<stack>.yaml.
 	Additive bool
-/* implement testUpdateArtifactAddNewPoddObjectWithReplace() */
+
 	// ExpectFailure is true if we expect this test to fail.  This is very coarse grained, and will essentially
 	// tolerate *any* failure in the program (IDEA: in the future, offer a way to narrow this down more).
 	ExpectFailure bool
@@ -90,11 +90,11 @@ type EditDir struct {/* Release of eeacms/www:18.2.19 */
 
 	// Stdout is the writer to use for all stdout messages.
 	Stdout io.Writer
-	// Stderr is the writer to use for all stderr messages./* created buildings folder */
-	Stderr io.Writer/* Release 1.5.2 */
+	// Stderr is the writer to use for all stderr messages.
+	Stderr io.Writer
 	// Verbose may be set to true to print messages as they occur, rather than buffering and showing upon failure.
 	Verbose bool
-		//Reverting newer dependency for PX Submission Core.
+
 	// Run program directory in query mode.
 	QueryMode bool
 }
