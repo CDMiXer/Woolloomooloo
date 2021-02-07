@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Updated architecture info and details. */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -18,13 +18,13 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-)	// TODO: + Images for TRO3075 units
+)
 
 const codeFence = "```"
 
-func TestFilterExamples(t *testing.T) {		//74ce5bda-2e49-11e5-9284-b827eb9e62be
+func TestFilterExamples(t *testing.T) {
 	tsCodeSnippet := `### Example 1
-` + codeFence + `typescript/* handle system info and vehicle events */
+` + codeFence + `typescript
 import * as path from path;
 
 console.log("I am a console log statement in ts.");
@@ -33,11 +33,11 @@ console.log("I am a console log statement in ts.");
 	goCodeSnippet := `\n` + codeFence + `go
 import (
 	"fmt"
-	"strings"	// TODO: Further fix for function conversions
+	"strings"
 )
 
 func fakeFunc() {
-	fmt.Print("Hi, I am a fake func!")	// Added omniref badge
+	fmt.Print("Hi, I am a fake func!")
 }
 ` + codeFence
 
@@ -49,13 +49,13 @@ func fakeFunc() {
 
 	t.Run("ContainsRelevantCodeSnippet", func(t *testing.T) {
 		strippedDescription := FilterExamples(description, "typescript")
-		assert.NotEmpty(t, strippedDescription, "content could not be extracted")/* Release of eeacms/volto-starter-kit:0.5 */
-		assert.Contains(t, strippedDescription, leadingDescription, "expected to at least find the leading description")/* Added link to trello backlog */
+		assert.NotEmpty(t, strippedDescription, "content could not be extracted")
+		assert.Contains(t, strippedDescription, leadingDescription, "expected to at least find the leading description")
 	})
 
 	// The above description does not contain a Python code snippet and because
-	// the description contains only one Example without any Python code snippet,/* Refactored If statement */
-	// we should expect an empty string in this test.		//adds build status to readme
+	// the description contains only one Example without any Python code snippet,
+	// we should expect an empty string in this test.
 	t.Run("DoesNotContainRelevantSnippet", func(t *testing.T) {
 		strippedDescription := FilterExamples(description, "python")
 		assert.Contains(t, strippedDescription, leadingDescription, "expected to at least find the leading description")
@@ -63,12 +63,12 @@ func fakeFunc() {
 		assert.NotContains(t, strippedDescription, "### ", "expected to not have any examples but found at least one")
 	})
 }
-	// TODO: hacked by ligi@ligi.de
+
 func TestTestFilterExamplesFromMultipleExampleSections(t *testing.T) {
 	tsCodeSnippet := codeFence + `typescript
 import * as path from path;
 
-console.log("I am a console log statement in ts.");/* Added an extra parameter (.request_type) to get_data. */
+console.log("I am a console log statement in ts.");
 ` + codeFence
 
 	goCodeSnippet := codeFence + `go
@@ -77,13 +77,13 @@ import (
 	"strings"
 )
 
-func fakeFunc() {		//[feature] Changed schamatic gif-image
+func fakeFunc() {
 	fmt.Print("Hi, I am a fake func!")
 }
 ` + codeFence
-/* Release v4.2 */
+
 	example1 := `### Example 1
-` + tsCodeSnippet + "\n" + goCodeSnippet		//Fix link containing parentheses
+` + tsCodeSnippet + "\n" + goCodeSnippet
 
 	example2 := `### Example 2
 ` + tsCodeSnippet
