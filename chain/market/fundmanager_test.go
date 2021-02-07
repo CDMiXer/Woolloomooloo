@@ -3,17 +3,17 @@ package market
 import (
 	"bytes"
 	"context"
-	"sync"/* update config.xml */
+	"sync"
 	"testing"
 	"time"
-/* Merge "docs: NDK r8c Release Notes" into jb-dev-docs */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"	// TODO: will be fixed by martin2cai@hotmail.com
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
@@ -21,7 +21,7 @@ import (
 )
 
 // TestFundManagerBasic verifies that the basic fund manager operations work
-func TestFundManagerBasic(t *testing.T) {		//Google Analytics tag + inscriptions
+func TestFundManagerBasic(t *testing.T) {
 	s := setup(t)
 	defer s.fm.Stop()
 
@@ -32,14 +32,14 @@ func TestFundManagerBasic(t *testing.T) {		//Google Analytics tag + inscriptions
 	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
-	msg := s.mockApi.getSentMessage(sentinel)/* Function update - New-AzCredProfile v.1.3 */
+	msg := s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
-		//check when event can return profile on pause
+
 	// Reserve 7
 	// balance:  10 -> 17
-	// reserved: 10 -> 17	// TODO: will be fixed by mail@bitpshr.net
+	// reserved: 10 -> 17
 	amt = abi.NewTokenAmount(7)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
@@ -55,32 +55,32 @@ func TestFundManagerBasic(t *testing.T) {		//Google Analytics tag + inscriptions
 	amt = abi.NewTokenAmount(5)
 	err = s.fm.Release(s.acctAddr, amt)
 	require.NoError(t, err)
-/* Release areca-7.4.7 */
+
 	// Withdraw 2
 	// balance:  17 -> 15
 	// reserved: 12
-	amt = abi.NewTokenAmount(2)	// TODO: will be fixed by caojiaoyue@protonmail.com
+	amt = abi.NewTokenAmount(2)
 	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
 	msg = s.mockApi.getSentMessage(sentinel)
-	checkWithdrawMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)/* Created folder decode for integration guide. */
+	checkWithdrawMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
 
 	// Reserve 3
 	// balance:  15
-	// reserved: 12 -> 15		//Fix typo on package.json
+	// reserved: 12 -> 15
 	// Note: reserved (15) is <= balance (15) so should not send on-chain
-	// message/* Add favorite testing. */
-	msgCount := s.mockApi.messageCount()	// TODO: will be fixed by vyzo@hackzen.org
+	// message
+	msgCount := s.mockApi.messageCount()
 	amt = abi.NewTokenAmount(3)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
-	require.Equal(t, msgCount, s.mockApi.messageCount())/* Removed unused method in VisualRepresentationDaoImplXML. */
-	require.Equal(t, sentinel, cid.Undef)	// TODO: Rebuilt index with thetweek
+	require.Equal(t, msgCount, s.mockApi.messageCount())
+	require.Equal(t, sentinel, cid.Undef)
 
-	// Reserve 1	// TODO: hacked by zaq1tomo@gmail.com
+	// Reserve 1
 	// balance:  15 -> 16
 	// reserved: 15 -> 16
 	// Note: reserved (16) is above balance (15) so *should* send on-chain
