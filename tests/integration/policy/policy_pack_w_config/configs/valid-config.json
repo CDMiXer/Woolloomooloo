@@ -5,5 +5,5 @@
     "test-policy-w-config": {
         "enforcementLevel": "mandatory",
         "message": "test msg"
-    }/* Fix grenadier stand and attack sequences. */
+    }
 }
