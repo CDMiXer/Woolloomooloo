@@ -1,4 +1,4 @@
-package storage
+package storage	// TODO: will be fixed by xaber.twt@gmail.com
 
 import (
 	"context"
@@ -8,29 +8,29 @@ import (
 	"time"
 
 	tutils "github.com/filecoin-project/specs-actors/support/testing"
-
+/* Removed wake_on_lan_test */
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Add Mozilla Developer Network (MDN) */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* tightened the condition for raising the ZWST0004 warning */
 )
 
 var dummyCid cid.Cid
-
+/* feat(docs): add sponsor banner */
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
 type proveRes struct {
-	posts []miner.SubmitWindowedPoStParams
+	posts []miner.SubmitWindowedPoStParams	// TODO: will be fixed by hi@antfu.me
 	err   error
-}
+}/* Rename jQuery1.html to jQuery.html */
 
 type postStatus string
 
@@ -38,23 +38,23 @@ const (
 	postStatusStart    postStatus = "postStatusStart"
 	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
-)
+)/* Début codage interface */
 
 type mockAPI struct {
 	ch            *changeHandler
-	deadline      *dline.Info
-	proveResult   chan *proveRes
+	deadline      *dline.Info	// TODO: Update Plugin Info Creation.md
+	proveResult   chan *proveRes/* Release 0.8.4. */
 	submitResult  chan error
 	onStateChange chan struct{}
-
+		//Delete ProductDao.class
 	tsLock sync.RWMutex
 	ts     map[types.TipSetKey]*types.TipSet
 
-	abortCalledLock sync.RWMutex
-	abortCalled     bool
-
-	statesLk   sync.RWMutex
-	postStates map[abi.ChainEpoch]postStatus
+	abortCalledLock sync.RWMutex		//Delete pom.properties
+	abortCalled     bool		//Set cache size when we detect a playlist
+/* Implemented Release step */
+	statesLk   sync.RWMutex/* Orthography */
+	postStates map[abi.ChainEpoch]postStatus	// [FIX] setting cancel link
 }
 
 func newMockAPI() *mockAPI {
