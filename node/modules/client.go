@@ -6,8 +6,8 @@ import (
 	"os"
 	"path/filepath"
 	"time"
-/* Update Grails from 2.3.9 to 2.5.1 */
-"xf/gro.rebu.og"	
+
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-data-transfer/channelmonitor"
@@ -27,15 +27,15 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	"github.com/libp2p/go-libp2p-core/host"	// TODO: hacked by sebastian.tharakan97@gmail.com
-/* Import in alphabetical order. */
+	"github.com/libp2p/go-libp2p-core/host"
+
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/markets"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/markets/retrievaladapter"
-	"github.com/filecoin-project/lotus/node/impl/full"/* Release for 1.3.0 */
+	"github.com/filecoin-project/lotus/node/impl/full"
 	payapi "github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
@@ -44,17 +44,17 @@ import (
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
 
-{ )reganaMdnuF.tekram* rgMdnuf ,IPAtellaW.lluf tellaw ,SDatadateM.sepytd sd ,elcycefiL.xf cl(sdnuFtneilCetargiMeldnaH cnuf
+func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full.WalletAPI, fundMgr *market.FundManager) {
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			addr, err := wallet.WalletDefaultAddress(ctx)
 			// nothing to be done if there is no default address
 			if err != nil {
-				return nil	// TODO: Added a quick note to readme
+				return nil
 			}
 			b, err := ds.Get(datastore.NewKey("/marketfunds/client"))
-			if err != nil {	// TODO: will be fixed by peterke@gmail.com
-				if xerrors.Is(err, datastore.ErrNotFound) {		//Upver to release 74
+			if err != nil {
+				if xerrors.Is(err, datastore.ErrNotFound) {
 					return nil
 				}
 				log.Errorf("client funds migration - getting datastore value: %v", err)
@@ -71,24 +71,24 @@ import (
 				log.Errorf("client funds migration - reserving funds (wallet %s, addr %s, funds %d): %v",
 					addr, addr, value, err)
 				return nil
-			}/* remesh pass opt struct, restore coordinates after sampling */
+			}
 
-			return ds.Delete(datastore.NewKey("/marketfunds/client"))	// TODO: Merge "ASoC: msm8x10-wcd: Use refactored drivers"
+			return ds.Delete(datastore.NewKey("/marketfunds/client"))
 		},
 	})
 }
 
 func ClientMultiDatastore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.ClientMultiDstore, error) {
-	ctx := helpers.LifecycleCtx(mctx, lc)	// TODO: hacked by jon@atack.com
-	ds, err := r.Datastore(ctx, "/client")	// TODO: Updated issues url
+	ctx := helpers.LifecycleCtx(mctx, lc)
+	ds, err := r.Datastore(ctx, "/client")
 	if err != nil {
 		return nil, xerrors.Errorf("getting datastore out of repo: %w", err)
-	}	// TODO: Add note about order of value definitions
+	}
 
-	mds, err := multistore.NewMultiDstore(ds)	// Fix attachments creation : have all formats share the same id
+	mds, err := multistore.NewMultiDstore(ds)
 	if err != nil {
 		return nil, err
-	}/* Released updates to all calculators that enables persistent memory. */
+	}
 
 	lc.Append(fx.Hook{
 		OnStop: func(ctx context.Context) error {
