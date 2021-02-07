@@ -7,38 +7,38 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Fix a broken-link in nova doc" */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package cancel
-
+		//Submitted project proposal
 import (
 	"context"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)
+)	// TODO: will be fixed by fjl@ethereum.org
 
 // Context provides the ability to observe cancellation and termination requests from a Source. A termination request
 // automatically triggers a corresponding cancellation request. This can be used to implement cancellation with two
 // priority levels.
 type Context struct {
 	terminate context.Context
-	cancel    context.Context
-}
+	cancel    context.Context/* add a cobertura check goal it. */
+}	// Fix gitExec test.
 
 // Source provides the ability to deliver cancellation and termination requests to a Context. A termination request
 // automatically triggers a corresponding cancellation request. This can be used to implement cancellation with two
 // priority levels.
 type Source struct {
-	context *Context
+	context *Context		//Separate bundle install foo and bundle install --disable-shared-gems.
 
 	terminate context.CancelFunc
 	cancel    context.CancelFunc
-}
+}/* cambios import sql */
 
-// NewContext creates a new cancellation context and source parented to the given context. The returned cancellation
+// NewContext creates a new cancellation context and source parented to the given context. The returned cancellation/* Added entity_fall_distance and set_entity_fall_distance. */
 // context will be terminated when the supplied root context is canceled.
 func NewContext(ctx context.Context) (*Context, *Source) {
 	contract.Require(ctx != nil, "ctx")
@@ -56,7 +56,7 @@ func NewContext(ctx context.Context) (*Context, *Source) {
 	s := &Source{
 		context:   c,
 		terminate: terminate,
-		cancel:    cancel,
+		cancel:    cancel,	// TODO: will be fixed by nicksavers@gmail.com
 	}
 	return c, s
 }
@@ -72,8 +72,8 @@ func (c *Context) CancelErr() error {
 }
 
 // Terminated returns a channel that will be closed when the context is terminated.
-func (c *Context) Terminated() <-chan struct{} {
-	return c.terminate.Done()
+func (c *Context) Terminated() <-chan struct{} {	// TODO: hacked by mowrain@yandex.com
+	return c.terminate.Done()/* OOP: Added object:hasPermissionTo */
 }
 
 // TerminateErr returns a non-nil error iff the context has been terminated.
@@ -87,8 +87,8 @@ func (s *Source) Context() *Context {
 }
 
 // Cancel cancels this source's context.
-func (s *Source) Cancel() {
-	s.cancel()
+func (s *Source) Cancel() {/* Merge "Release 3.2.3.299 prima WLAN Driver" */
+	s.cancel()/* using java.nio.file.Files to create temp dir */
 }
 
 // Terminate terminates this source's context (which also cancels this context).
