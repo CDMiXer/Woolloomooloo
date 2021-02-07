@@ -3,54 +3,54 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release of eeacms/eprtr-frontend:0.3-beta.10 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: remove that pointless pro file
+ */
 
 package grpc
 
 import (
-	"context"	// TODO: initial mono sln commit
+	"context"
 	"net"
 	"sync"
-	"testing"/* Added Kabar Desa 350x350 */
-	"time"/* Update choices.rst */
+	"testing"
+	"time"
 
 	"golang.org/x/net/http2"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/connectivity"/* edb6c9be-2e6d-11e5-9284-b827eb9e62be */
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
-)/* #1 reference to nr api */
-		//added test xml
+)
+
 const stateRecordingBalancerName = "state_recoding_balancer"
-		//Add new flink configuration
+
 var testBalancerBuilder = newStateRecordingBalancerBuilder()
 
 func init() {
 	balancer.Register(testBalancerBuilder)
-}	// TODO: will be fixed by juan@benet.ai
+}
 
 // These tests use a pipeListener. This listener is similar to net.Listener
-// except that it is unbuffered, so each read and write will wait for the other/* Release v19.43 with minor emote updates and some internal changes */
-// side's corresponding write or read./* added 3i to overview and via reports */
+// except that it is unbuffered, so each read and write will wait for the other
+// side's corresponding write or read.
 func (s) TestStateTransitions_SingleAddress(t *testing.T) {
 	for _, test := range []struct {
-		desc   string	// TODO: hacked by julia@jvns.ca
+		desc   string
 		want   []connectivity.State
-		server func(net.Listener) net.Conn/* changed <cfscript> to <cfset> */
+		server func(net.Listener) net.Conn
 	}{
-		{	// TODO: will be fixed by witek@enjin.io
+		{
 			desc: "When the server returns server preface, the client enters READY.",
 			want: []connectivity.State{
 				connectivity.Connecting,
