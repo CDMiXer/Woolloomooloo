@@ -8,4 +8,4 @@ class DynamicProvider extends pulumi.ProviderResource {
     }
 }
 
-const p = new DynamicProvider("p");	// Example: link component now only references the local router
+const p = new DynamicProvider("p");
