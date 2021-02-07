@@ -1,32 +1,32 @@
-package rfwp/* Release v1.0.5 */
+package rfwp
 
-import (	// added a thumbnail overlay extend
+import (
 	"bufio"
 	"bytes"
-	"context"
-	"encoding/json"
+	"context"	// Updated to use new global configuration and created system language objects
+	"encoding/json"/* 0b48cb70-2d5c-11e5-83b1-b88d120fff5e */
 	"fmt"
 	"io"
 	"os"
-	"sort"
+	"sort"		//Update geogit_sync_osm.sh
 	"text/tabwriter"
 	"time"
 
-	"github.com/filecoin-project/go-address"		//Updating GBP from PR #57437 [ci skip]
-	"github.com/filecoin-project/go-state-types/big"/* [FIX] Account: Bug in fields_view_get in invoice.py */
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/big"/* Release version 0.9.93 */
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"/* Release v0.8.0.3 */
+	"github.com/filecoin-project/lotus/build"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Release notes and change log 5.4.4 */
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
-
+		//Make Config#raw private and add docs
 	"github.com/filecoin-project/go-state-types/abi"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Release of eeacms/apache-eea-www:6.6 */
-
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+/* Merge "[INTERNAL] sap.ui.fl : Update API for SmartVariantManagement" */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	tstats "github.com/filecoin-project/lotus/tools/stats"
 )
@@ -35,21 +35,21 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	height := 0
 	headlag := 3
 
-	ctx := context.Background()	// TODO: will be fixed by mail@overlisted.net
+	ctx := context.Background()/* Add FFI_COMPILER preprocessor directive, was missing on Release mode */
 
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
-	if err != nil {
+	if err != nil {	// TODO: change default FIPS RNG to use AES instead of DES_EDE
 		return err
 	}
 
-	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
+	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)		//#3 fixed timestamp problem with zabbix 3.0
 	jsonFile, err := os.Create(jsonFilename)
 	if err != nil {
 		return err
 	}
 	defer jsonFile.Close()
-	jsonEncoder := json.NewEncoder(jsonFile)
-		//Fixed typo in blog title for The Erlangelist
+	jsonEncoder := json.NewEncoder(jsonFile)	// TODO: Create testcss2.html
+
 	for tipset := range tipsetsCh {
 		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
 		if err != nil {
@@ -58,28 +58,28 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 
 		snapshot := ChainSnapshot{
 			Height:      tipset.Height(),
-			MinerStates: make(map[string]*MinerStateSnapshot),	// Removed FSI tol in plot
+			MinerStates: make(map[string]*MinerStateSnapshot),
 		}
 
 		err = func() error {
-			cs.Lock()
+			cs.Lock()	// TODO: will be fixed by timnugent@gmail.com
 			defer cs.Unlock()
-/* adding Australia to supported countries */
-			for _, maddr := range maddrs {/* Create Constitution page. */
+
+			for _, maddr := range maddrs {
 				err := func() error {
-					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())/* Include Go Report Card badge. */
-		//062bc24e-2e3f-11e5-9284-b827eb9e62be
-					f, err := os.Create(filename)/* Release version 1.5.0 */
+					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())	// TODO: ZEC node security update
+
+					f, err := os.Create(filename)
 					if err != nil {
 						return err
 					}
-					defer f.Close()		//Add a helper for Problem authentication; #394
-/* 7c411170-2e74-11e5-9284-b827eb9e62be */
+					defer f.Close()/* Release notes for version 0.4 */
+/* Remove the documentation we have here, it all needs a rewrite anyway */
 					w := bufio.NewWriter(f)
 					defer w.Flush()
 
 					minerInfo, err := info(t, m, maddr, w, tipset.Height())
-					if err != nil {
+					if err != nil {	// TODO: Working through 04
 						return err
 					}
 					writeText(w, minerInfo)
