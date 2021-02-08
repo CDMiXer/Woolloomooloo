@@ -1,38 +1,38 @@
 html, body {
-    margin: 0px;		//Windows port of commandline interface
+    margin: 0px;
     padding: 0px;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 section {
-    padding: 60px;	// TODO: Create macgyver.html
+    padding: 60px;
 }
-/* Released 4.1 */
-footer {/* Create geoserver.md */
+
+footer {
     padding: 60px 30px;
 }
 
 
 
-.center {/* Adjust webhooks url */
-    max-width:900px;/* Release 1.03 */
+.center {
+    max-width:900px;
     margin:0px auto;
 }
-/* Merge "Do not complain in firewall_group_deleted if the FW is already deleted" */
+
 /*
  * Code
  */
 
 code {
     text-align:left;
-    background: #222;/* added comment to Release-script */
+    background: #222;
     color: #FFF;
     margin: 0px auto;
     font-family: 'Source Code Pro';
-;xp31 :ezis-tnof    
-    line-height: 18px;/* Started new Release 0.7.7-SNAPSHOT */
+    font-size: 13px;
+    line-height: 18px;
     border-radius: 5px;
-    padding: 30px 0px;/* add Type arguments */
+    padding: 30px 0px;
 }
 
 code div {
@@ -42,27 +42,27 @@ code div {
 
 code span.group {
     background: #333;
-    display: block;/* added AV logo */
+    display: block;
     padding: 5px 0px;
 }
 
-code span.c0 {		//Added cast and quote
+code span.c0 {
     color: #00E5FF;
 }
 
-code span.c1 {	// Configure IDP for SP/IDP/oxAuth logout
+code span.c1 {
     color: #FF8A80;
 }
 
 .code .center {
     text-align: center;
 }
-	// TODO: Info about Flatpak on Flathub
+
 .code p {
     max-width:500px;
     text-align:center;
     margin:30px auto;
-}/* Multiple steps and sorting. */
+}
 
 .code .grid {
     display: grid;
