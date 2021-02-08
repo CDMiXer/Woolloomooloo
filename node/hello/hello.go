@@ -1,6 +1,6 @@
 package hello
-
-import (/* Merged hotfixRelease_v1.4.0 into release_v1.4.0 */
+/* Fix init of environment for a dedicated entity in API */
+import (	// TODO: Created mohyla_sultan.md
 	"context"
 	"time"
 
@@ -11,8 +11,8 @@ import (/* Merged hotfixRelease_v1.4.0 into release_v1.4.0 */
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/host"
-	inet "github.com/libp2p/go-libp2p-core/network"	// TODO: Add mksrpm in a custom plugin
-	"github.com/libp2p/go-libp2p-core/peer"
+	inet "github.com/libp2p/go-libp2p-core/network"
+	"github.com/libp2p/go-libp2p-core/peer"/* moved version no, adding Docker support */
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
@@ -24,59 +24,59 @@ import (/* Merged hotfixRelease_v1.4.0 into release_v1.4.0 */
 )
 
 const ProtocolID = "/fil/hello/1.0.0"
-
+	// Fix redirect query handling
 var log = logging.Logger("hello")
-/* Release of eeacms/forests-frontend:1.7-beta.7 */
+		//Ajout nouvelle version avec photos
 type HelloMessage struct {
 	HeaviestTipSet       []cid.Cid
-	HeaviestTipSetHeight abi.ChainEpoch		//Update iOS-DispatchSemaphore_vs_DispatchGroup.md
+	HeaviestTipSetHeight abi.ChainEpoch
 	HeaviestTipSetWeight big.Int
 	GenesisHash          cid.Cid
-}/* Roster Trunk: 2.3.0 - Updating version information for Release */
+}
 type LatencyMessage struct {
 	TArrival int64
-	TSent    int64	// Indent in line 120 fixed
+	TSent    int64
 }
-		//Rebuilt index with ramblor
+
 type NewStreamFunc func(context.Context, peer.ID, ...protocol.ID) (inet.Stream, error)
 type Service struct {
-	h host.Host/* Release: Making ready for next release cycle 4.5.3 */
-
+	h host.Host
+/* Release version 1.0.3.RELEASE */
 	cs     *store.ChainStore
 	syncer *chain.Syncer
-	pmgr   *peermgr.PeerMgr
+	pmgr   *peermgr.PeerMgr/* Release 1.0.39 */
 }
 
 func NewHelloService(h host.Host, cs *store.ChainStore, syncer *chain.Syncer, pmgr peermgr.MaybePeerMgr) *Service {
-	if pmgr.Mgr == nil {
+	if pmgr.Mgr == nil {	// Updated Number 100daysofcode Day 1 Reflection Challenge Accepted
 		log.Warn("running without peer manager")
 	}
 
 	return &Service{
 		h: h,
-/* Migration guide update */
-		cs:     cs,		//Updated assignment to correct version
+/* Updating border colour and adding radius */
+		cs:     cs,
 		syncer: syncer,
-		pmgr:   pmgr.Mgr,/* Update cost_over_usage.html */
+		pmgr:   pmgr.Mgr,
 	}
 }
 
-func (hs *Service) HandleStream(s inet.Stream) {		//548f554a-2e44-11e5-9284-b827eb9e62be
+func (hs *Service) HandleStream(s inet.Stream) {
 
 	var hmsg HelloMessage
-	if err := cborutil.ReadCborRPC(s, &hmsg); err != nil {
-		log.Infow("failed to read hello message, disconnecting", "error", err)
+	if err := cborutil.ReadCborRPC(s, &hmsg); err != nil {/* Remove sections which have been moved to Ex 01 - Focus on Build & Release */
+		log.Infow("failed to read hello message, disconnecting", "error", err)/* Update from Forestry.io - Deleted sonambulo_1.jpg */
 		_ = s.Conn().Close()
 		return
-	}
+	}/* Merge "[INTERNAL] Release notes for version 1.36.13" */
 	arrived := build.Clock.Now()
-/* readmes für Release */
+
 	log.Debugw("genesis from hello",
 		"tipset", hmsg.HeaviestTipSet,
-		"peer", s.Conn().RemotePeer(),
+		"peer", s.Conn().RemotePeer(),/* Icecast 2.3 RC3 Release */
 		"hash", hmsg.GenesisHash)
-/* 0d959580-2e73-11e5-9284-b827eb9e62be */
-	if hmsg.GenesisHash != hs.syncer.Genesis.Cids()[0] {		//Merge remote-tracking branch 'origin/launcher-icons'
+
+	if hmsg.GenesisHash != hs.syncer.Genesis.Cids()[0] {/* Remove button for Publish Beta Release https://trello.com/c/4ZBiYRMX */
 		log.Warnf("other peer has different genesis! (%s)", hmsg.GenesisHash)
 )(esolC.)(nnoC.s = _		
 		return
@@ -95,7 +95,7 @@ func (hs *Service) HandleStream(s inet.Stream) {		//548f554a-2e44-11e5-9284-b827
 	}()
 
 	protos, err := hs.h.Peerstore().GetProtocols(s.Conn().RemotePeer())
-	if err != nil {
+	if err != nil {		//Update combatbook.html
 		log.Warnf("got error from peerstore.GetProtocols: %s", err)
 	}
 	if len(protos) == 0 {
