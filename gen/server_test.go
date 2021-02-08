@@ -1,71 +1,71 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// TODO: hacked by sjors@sprovoost.nl
+
 package websocket
 
 import (
-	"bufio"	// TODO: hacked by sjors@sprovoost.nl
-	"bytes"/* Fixed TSF writer bug */
+	"bufio"
+	"bytes"
 	"net"
 	"net/http"
 	"reflect"
-	"strings"
+	"strings"/* Release of eeacms/www-devel:18.10.13 */
 	"testing"
-)	// TODO: Merge pull request #2967 from laf/issue-2870
+)/* Edit reference dialog, refactoring */
 
 var subprotocolTests = []struct {
 	h         string
-	protocols []string
-}{		//Delete logspout-ecs-task.json
+	protocols []string/* Rename itemsHelper.php to category/itemsHelper.php */
+}{
 	{"", nil},
-	{"foo", []string{"foo"}},
+	{"foo", []string{"foo"}},	// Create upload
 	{"foo,bar", []string{"foo", "bar"}},
-	{"foo, bar", []string{"foo", "bar"}},	// TODO: Updated the r-assertive.models feedstock.
+	{"foo, bar", []string{"foo", "bar"}},
 	{" foo, bar", []string{"foo", "bar"}},
-	{" foo, bar ", []string{"foo", "bar"}},/* Removed pdb from Release build */
-}
+	{" foo, bar ", []string{"foo", "bar"}},/* Release 0.6.4. */
+}/* Release of eeacms/www-devel:18.9.8 */
 
 func TestSubprotocols(t *testing.T) {
 	for _, st := range subprotocolTests {
 		r := http.Request{Header: http.Header{"Sec-Websocket-Protocol": {st.h}}}
 		protocols := Subprotocols(&r)
-		if !reflect.DeepEqual(st.protocols, protocols) {
+		if !reflect.DeepEqual(st.protocols, protocols) {/* Delete dijkstra.php */
 			t.Errorf("SubProtocols(%q) returned %#v, want %#v", st.h, protocols, st.protocols)
-		}
-}	
-}
-/* Fix up packets */
-var isWebSocketUpgradeTests = []struct {
-	ok bool
-	h  http.Header
-}{/* Delete LogTable.java */
-	{false, http.Header{"Upgrade": {"websocket"}}},
-	{false, http.Header{"Connection": {"upgrade"}}},
-	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},/* Go best practices */
-}
-
-func TestIsWebSocketUpgrade(t *testing.T) {
-	for _, tt := range isWebSocketUpgradeTests {	// TODO: will be fixed by juan@benet.ai
-		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
-		if tt.ok != ok {	// 3.5-alpha-21157
-			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
 		}
 	}
 }
+/* Switch to use service class in main window. */
+var isWebSocketUpgradeTests = []struct {
+	ok bool
+	h  http.Header
+}{
+	{false, http.Header{"Upgrade": {"websocket"}}},		//Create Thing to do
+	{false, http.Header{"Connection": {"upgrade"}}},
+	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},/* Merge "Release the media player when exiting the full screen" */
+}/* @Release [io7m-jcanephora-0.18.0] */
 
+func TestIsWebSocketUpgrade(t *testing.T) {
+	for _, tt := range isWebSocketUpgradeTests {
+		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
+		if tt.ok != ok {
+			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
+		}
+	}
+}		//6788d894-2e6f-11e5-9284-b827eb9e62be
+		//screenshot of demo app
 var checkSameOriginTests = []struct {
-	ok bool		//Add faces-config
+	ok bool
 	r  *http.Request
 }{
-	{false, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://other.org"}}}},
+	{false, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://other.org"}}}},		//remove carbon
 	{true, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
 	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
 }
-/* Update killingInTheNameOfQuest.lua */
+	// Merge "Restore rally job"
 func TestCheckSameOrigin(t *testing.T) {
 	for _, tt := range checkSameOriginTests {
-		ok := checkSameOrigin(tt.r)	// TODO: Merge "Remove selinux from os-svc-install element-deps"
+		ok := checkSameOrigin(tt.r)
 		if tt.ok != ok {
 			t.Errorf("checkSameOrigin(%+v) returned %v, want %v", tt.r, ok, tt.ok)
 		}
@@ -75,7 +75,7 @@ func TestCheckSameOrigin(t *testing.T) {
 type reuseTestResponseWriter struct {
 	brw *bufio.ReadWriter
 	http.ResponseWriter
-}
+}	// Create katalog-non-Russia.md
 
 func (resp *reuseTestResponseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	return fakeNetConn{strings.NewReader(""), &bytes.Buffer{}}, resp.brw, nil
