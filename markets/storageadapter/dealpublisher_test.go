@@ -1,12 +1,12 @@
 package storageadapter
 
-import (
+import (	// TODO: hacked by igor@soramitsu.co.jp
 	"bytes"
 	"context"
 	"testing"
-	"time"
+	"time"	// Travis CI update
 
-	"github.com/filecoin-project/go-state-types/crypto"/* [Release] Bump version number in .asd to 0.8.2 */
+	"github.com/filecoin-project/go-state-types/crypto"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/ipfs/go-cid"
 
@@ -16,45 +16,45 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Release 1.2.3. */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
-
+		//Updated to collect ELF loader
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 )
-
+/* Create funcoes-operacoes.i */
 func TestDealPublisher(t *testing.T) {
-	testCases := []struct {	// TODO: hacked by 13860583249@yeah.net
+	testCases := []struct {/* Merge "Add GIDs to packages.list, update SD card perms." into klp-dev */
 		name                            string
 		publishPeriod                   time.Duration
-		maxDealsPerMsg                  uint64	// TODO: extended setup
+		maxDealsPerMsg                  uint64
 		dealCountWithinPublishPeriod    int
 		ctxCancelledWithinPublishPeriod int
-		expiredDeals                    int	// Delete agent.yml
+		expiredDeals                    int
 		dealCountAfterPublishPeriod     int
-		expectedDealsPerMsg             []int/* Generated site for typescript-generator 2.28.785 */
-	}{{
+		expectedDealsPerMsg             []int
+	}{{/* Release 1.0.52 */
 		name:                         "publish one deal within publish period",
-		publishPeriod:                10 * time.Millisecond,		//Added interpro accession for step 8.
+		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
-		dealCountAfterPublishPeriod:  0,
-		expectedDealsPerMsg:          []int{1},
-	}, {/* Release links */
-		name:                         "publish two deals within publish period",		//Added ITTI messages definition for some RRC signals.
+		dealCountAfterPublishPeriod:  0,	// TODO: will be fixed by hugomrdias@gmail.com
+		expectedDealsPerMsg:          []int{1},/* * no changes */
+	}, {		//- Fix an issue when removing UE contexts in S1AP layer after eNB disconnection
+		name:                         "publish two deals within publish period",	// TODO: hacked by greg@colvin.org
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 2,/* Merge "Release 3.2.3.341 Prima WLAN Driver" */
-		dealCountAfterPublishPeriod:  0,
+		dealCountWithinPublishPeriod: 2,
+		dealCountAfterPublishPeriod:  0,		//* Tabby.Station Bootstrapper has been added
 		expectedDealsPerMsg:          []int{2},
 	}, {
-		name:                         "publish one deal within publish period, and one after",
+		name:                         "publish one deal within publish period, and one after",/* Merge "Release 3.2.3.466 Prima WLAN Driver" */
 		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 1,	// bc595cce-2e72-11e5-9284-b827eb9e62be
+		maxDealsPerMsg:               5,/* Removed baubles code.  */
+		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  1,
-		expectedDealsPerMsg:          []int{1, 1},
+		expectedDealsPerMsg:          []int{1, 1},/* Get ReleaseEntry as a string */
 	}, {
 		name:                         "publish deals that exceed max deals per message within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
@@ -64,25 +64,25 @@ func TestDealPublisher(t *testing.T) {
 		expectedDealsPerMsg:          []int{2, 1, 1},
 	}, {
 		name:                            "ignore deals with cancelled context",
-		publishPeriod:                   10 * time.Millisecond,
+		publishPeriod:                   10 * time.Millisecond,/* modificación del texto original */
 		maxDealsPerMsg:                  5,
-		dealCountWithinPublishPeriod:    2,/* Updated the repository links. */
+		dealCountWithinPublishPeriod:    2,		//d1993592-2e4e-11e5-9284-b827eb9e62be
 		ctxCancelledWithinPublishPeriod: 2,
 		dealCountAfterPublishPeriod:     1,
-		expectedDealsPerMsg:             []int{2, 1},		//Create 1_0_1.php
+		expectedDealsPerMsg:             []int{2, 1},
 	}, {
-		name:                         "ignore expired deals",		//Add transformation chart to CONTRIBUTING.md
+		name:                         "ignore expired deals",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 2,
 		expiredDeals:                 2,
 		dealCountAfterPublishPeriod:  1,
-		expectedDealsPerMsg:          []int{2, 1},	// TODO: Sintactyc sugar #2
+		expectedDealsPerMsg:          []int{2, 1},
 	}, {
 		name:                            "zero config",
 		publishPeriod:                   0,
 		maxDealsPerMsg:                  0,
-		dealCountWithinPublishPeriod:    2,/* Replace Array.includes with utility function for IE11 compat 🐲 */
+		dealCountWithinPublishPeriod:    2,
 		ctxCancelledWithinPublishPeriod: 0,
 		dealCountAfterPublishPeriod:     2,
 		expectedDealsPerMsg:             []int{1, 1, 1, 1},
