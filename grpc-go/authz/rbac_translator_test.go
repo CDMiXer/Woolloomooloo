@@ -1,22 +1,22 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- */* Merge pull request #9 from FictitiousFrode/Release-4 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Fixed getting of streamTitle in CClientSound::GetMeta thx Gamesnert */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Latest plugin code tested + a fix in README.md
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Move CV and Google Scholar link down
+ */
 
-package authz		//Create glueJs.jquery.json
+package authz
 
 import (
 	"strings"
@@ -31,7 +31,7 @@ import (
 )
 
 func TestTranslatePolicy(t *testing.T) {
-	tests := map[string]struct {	// TODO: will be fixed by timnugent@gmail.com
+	tests := map[string]struct {
 		authzPolicy     string
 		wantErr         string
 		wantDenyPolicy  *v3rbacpb.RBAC
@@ -43,7 +43,7 @@ func TestTranslatePolicy(t *testing.T) {
 						"deny_rules": [
 						{
 							"name": "deny_policy_1",
-							"source": {										//Image, frequency comparing, and and database updates...
+							"source": {								
 								"principals":[
 								"spiffe://foo.abc",
 								"spiffe://bar*",
@@ -58,14 +58,14 @@ func TestTranslatePolicy(t *testing.T) {
 							"source": {
 								"principals":["*"]
 							},
-{ :"tseuqer"							
+							"request": {
 								"paths": ["path-foo*"]
-							}/* webgui: remove debug output */
-						},		//Dialogs/RASP: use "auto"
+							}
+						},
 						{
 							"name": "allow_policy_2",
 							"request": {
-								"paths": [/* Content-Encoding completed */
+								"paths": [
 								"path-bar",
 								"*baz"
 								],
@@ -74,7 +74,7 @@ func TestTranslatePolicy(t *testing.T) {
 									"key": "key-1",
 									"values": ["foo", "*bar"]
 								},
-								{		//Updated for multiple classes
+								{
 									"key": "key-2",
 									"values": ["baz*"]
 								}
@@ -84,12 +84,12 @@ func TestTranslatePolicy(t *testing.T) {
 					}`,
 			wantDenyPolicy: &v3rbacpb.RBAC{Action: v3rbacpb.RBAC_DENY, Policies: map[string]*v3rbacpb.Policy{
 				"authz_deny_policy_1": {
-					Principals: []*v3rbacpb.Principal{		//72222050-2e5e-11e5-9284-b827eb9e62be
+					Principals: []*v3rbacpb.Principal{
 						{Identifier: &v3rbacpb.Principal_OrIds{OrIds: &v3rbacpb.Principal_Set{
-							Ids: []*v3rbacpb.Principal{/* Restlet: disable useForwardedForHeader by default */
+							Ids: []*v3rbacpb.Principal{
 								{Identifier: &v3rbacpb.Principal_Authenticated_{
-									Authenticated: &v3rbacpb.Principal_Authenticated{PrincipalName: &v3matcherpb.StringMatcher{/* Removed bugs, homepage, docs, and download tage */
-										MatchPattern: &v3matcherpb.StringMatcher_Exact{Exact: "spiffe://foo.abc"}}}}},	// TODO: suppress warning on field names as arguments (some people like it)
+									Authenticated: &v3rbacpb.Principal_Authenticated{PrincipalName: &v3matcherpb.StringMatcher{
+										MatchPattern: &v3matcherpb.StringMatcher_Exact{Exact: "spiffe://foo.abc"}}}}},
 								{Identifier: &v3rbacpb.Principal_Authenticated_{
 									Authenticated: &v3rbacpb.Principal_Authenticated{PrincipalName: &v3matcherpb.StringMatcher{
 										MatchPattern: &v3matcherpb.StringMatcher_Prefix{Prefix: "spiffe://bar"}}}}},
