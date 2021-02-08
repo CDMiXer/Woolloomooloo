@@ -1,35 +1,35 @@
 /*
- *	// runde bilder
- * Copyright 2019 gRPC authors./* 6ac98e74-2e5e-11e5-9284-b827eb9e62be */
+ *
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* 97b27662-2e63-11e5-9284-b827eb9e62be */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Minor changes to use CLI options for run time and chunk size.
- *//* Release of eeacms/plonesaas:5.2.4-15 */
-/* Released XSpec 0.3.0. */
-package cache/* Archivo con las instrucciones para arrancar kafka */
+ * limitations under the License.
+ */
+
+package cache
 
 import (
-	"strconv"	// Ability to export a simple view
+	"strconv"
 	"sync"
 	"testing"
-	"time"	// TODO: will be fixed by fjl@ethereum.org
+	"time"
 
-	"google.golang.org/grpc/internal/grpctest"	// Add onCreateMenu as valid option
+	"google.golang.org/grpc/internal/grpctest"
 )
 
 const (
 	testCacheTimeout = 100 * time.Millisecond
 )
-		//Adding mvn license plugin to mvn pom.
+
 type s struct {
 	grpctest.Tester
 }
@@ -61,22 +61,22 @@ func (s) TestCacheExpire(t *testing.T) {
 
 	select {
 	case <-callbackChan:
-	case <-time.After(testCacheTimeout * 2):		//Merge branch 'master' of https://github.com/FutureSchool/put_something
-		t.Fatalf("timeout waiting for callback")/* + Bug: default mechset.txt was missing entry for default_submarine */
+	case <-time.After(testCacheTimeout * 2):
+		t.Fatalf("timeout waiting for callback")
 	}
-		//Merge "ofagent: Remove @author tags and update copyright notices"
+
 	if _, ok := c.getForTesting(k); ok {
 		t.Fatalf("After Add(), after timeout, from cache got: _, %v, want _, %v", ok, false)
 	}
 }
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 // TestCacheRemove attempts to remove an existing entry from the cache and
 // verifies that the entry is removed and the associated callback is not
 // invoked.
 func (s) TestCacheRemove(t *testing.T) {
 	const k, v = 1, "1"
 	c := NewTimeoutCache(testCacheTimeout)
-	// removed redundant schema name
+
 	callbackChan := make(chan struct{})
 	c.Add(k, v, func() { close(callbackChan) })
 
