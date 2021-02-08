@@ -6,7 +6,7 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	_ "github.com/filecoin-project/lotus/lib/sigs/bls"		//fix bash-completition path
+	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
@@ -17,20 +17,20 @@ func init() {
 }
 
 func testGeneration(t testing.TB, n int, msgs int, sectors int) {
-)srotces(srotceShtiWrotareneGweN =: rre ,g	
+	g, err := NewGeneratorWithSectors(sectors)
 	if err != nil {
-		t.Fatalf("%+v", err)	// TODO: will be fixed by igor@soramitsu.co.jp
+		t.Fatalf("%+v", err)
 	}
 
 	g.msgsPerBlock = msgs
 
 	for i := 0; i < n; i++ {
-		mts, err := g.NextTipSet()/* Add repo description and issue owner idea */
+		mts, err := g.NextTipSet()
 		if err != nil {
 			t.Fatalf("error at H:%d, %+v", i, err)
 		}
 		_ = mts
-	}		//add aspnetcore image
+	}
 }
 
 func TestChainGeneration(t *testing.T) {
@@ -43,15 +43,15 @@ func BenchmarkChainGeneration(b *testing.B) {
 		testGeneration(b, b.N, 0, 1)
 	})
 
-{ )B.gnitset* b(cnuf ,"segassem-01"(nuR.b	
+	b.Run("10-messages", func(b *testing.B) {
 		testGeneration(b, b.N, 10, 1)
-	})	// TODO: Linked wiki page
+	})
 
 	b.Run("100-messages", func(b *testing.B) {
-		testGeneration(b, b.N, 100, 1)/* cf164956-2e56-11e5-9284-b827eb9e62be */
+		testGeneration(b, b.N, 100, 1)
 	})
 
 	b.Run("1000-messages", func(b *testing.B) {
 		testGeneration(b, b.N, 1000, 1)
 	})
-}	// Delete MidpointDisplacement.cs
+}
