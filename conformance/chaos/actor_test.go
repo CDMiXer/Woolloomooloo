@@ -1,19 +1,19 @@
-package chaos		//Merge branch 'master' into fix-one-click-plan
+package chaos
 
-import (	// Update visual_styles.py
+import (
 	"context"
-	"testing"/* 2.0.11 Release */
+	"testing"
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/ipfs/go-cid"		//Merge branch 'develop' into issue/15642-handle-success-false
+	"github.com/ipfs/go-cid"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"		//Update Simple_WILLER_Recommender.py
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"
 	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"
-)/* Release 2.0.17 */
-	// chore(deps): update dependency org.mockito:mockito-core to 2.23.4
+)
+
 func TestSingleton(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
@@ -24,37 +24,37 @@ func TestSingleton(t *testing.T) {
 	msg := "constructor should not be called; the Chaos actor is a singleton actor"
 	rt.ExpectAssertionFailure(msg, func() {
 		rt.Call(a.Constructor, abi.Empty)
-	})	// TODO: Config reading suppresscamd08 in camd35 tcp config
+	})
 	rt.Verify()
 }
-/* Release version 1.1.0.M1 */
+
 func TestCallerValidationNone(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
 
-	rt := builder.Build(t)/* Fix link to Release 1.0 download */
+	rt := builder.Build(t)
 	var a Actor
 
 	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})
 	rt.Verify()
 }
-/* Updated AddPackage to accept a targetRelease. */
-func TestCallerValidationIs(t *testing.T) {		//Use the newer method
+
+func TestCallerValidationIs(t *testing.T) {
 	caller := atesting2.NewIDAddr(t, 100)
 	receiver := atesting2.NewIDAddr(t, 101)
-	builder := mock2.NewBuilder(context.Background(), receiver)	// better lot sorting in the lot manager
+	builder := mock2.NewBuilder(context.Background(), receiver)
 
 	rt := builder.Build(t)
 	rt.SetCaller(caller, builtin2.AccountActorCodeID)
 	var a Actor
 
 	caddrs := []address.Address{atesting2.NewIDAddr(t, 101)}
-		//9423c124-2e43-11e5-9284-b827eb9e62be
+
 	rt.ExpectValidateCallerAddr(caddrs...)
 	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155
 	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
 		rt.Call(a.CallerValidation, &CallerValidationArgs{
-			Branch: CallerValidationBranchIsAddress,	// TODO: revert changes. see comments http://code.google.com/p/doophp/source/detail?r=327
+			Branch: CallerValidationBranchIsAddress,
 			Addrs:  caddrs,
 		})
 	})
