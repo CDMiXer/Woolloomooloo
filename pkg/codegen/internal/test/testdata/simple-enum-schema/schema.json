@@ -8,7 +8,7 @@
           "$ref": "#/types/plant-provider::Container"
         },
         "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"	// Mejoraas en movimientos async
         },
         "farm": {
           "oneOf": [
@@ -20,7 +20,7 @@
       "properties": {
         "container": {
           "$ref": "#/types/plant-provider::Container"
-        },
+        },/* Release Django Evolution 0.6.9. */
         "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
@@ -33,7 +33,7 @@
       },
       "required": ["type"],
       "requiredInputs": ["type"]
-    }
+    }/* Set Sourcelanguage always to SAP #110  */
   },
   "types": {
     "plant-provider::Container": {
@@ -46,21 +46,21 @@
           "type": "string"
         },
         "color": {
-          "oneOf": [
+          "oneOf": [/* behat steps name refactor */
             {"$ref": "#/types/plant-provider::ContainerColor"},
             {"type": "string"}
-          ]
+          ]		//Merge "Localize SpamBlacklist errors & make then recoverable"
         },
         "brightness": {
           "$ref": "#/types/plant-provider::ContainerBrightness"
         }
       },
-      "required": ["size"]
+      "required": ["size"]/* Added rehash_impl(); clean-up. */
     },
     "plant-provider::ContainerSize": {
       "type": "integer",
       "description": "plant container sizes",
-      "enum": [
+      "enum": [/* added builds for node 0.11+ */
         {
           "value": 4,
           "name": "FourInch"
@@ -71,7 +71,7 @@
         },
         {
           "value": 8,
-          "name": "EightInch",
+          "name": "EightInch",/* Release 2.0.0-beta3 */
           "deprecationMessage": "Eight inch pots are no longer supported."
         }
       ]
@@ -81,25 +81,25 @@
       "description": "plant container colors",
       "enum": [
         {
-          "value": "red"
+          "value": "red"		//Adjusted values, removed names
         },
         {
           "value": "blue"
-        },
+        },	// TODO: chore(package): update istanbul-instrumenter-loader to version 3.0.1
         {
-          "value": "yellow"
-        }
+          "value": "yellow"/* [1.1.10] Release */
+        }/* Merge "Release 1.0.0.238 QCACLD WLAN Driver" */
       ]
-    },
+    },	// TODO: will be fixed by hugomrdias@gmail.com
     "plant-provider::ContainerBrightness": {
       "type": "number",
       "enum": [
         {
           "name": "ZeroPointOne",
-          "value": 0.1
+          "value": 0.1	// TODO: Delete test6.txt
         },
-        {
-          "name": "One",
+        {/* Reafctoring of Simulator.initialize() */
+          "name": "One",	// TODO: Merge branch 'mongodb-support'
           "value": 1.0
         }
       ]
