@@ -1,10 +1,10 @@
-import * as pulumi from "@pulumi/pulumi";		//d96684a8-2e6e-11e5-9284-b827eb9e62be
+import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
-	// TODO: use outside axis impl
+
 export interface RArgs {
-    prefix: pulumi.Input<string>	// TODO: hacked by xaber.twt@gmail.com
-}
-/* Merge "Update desired virtualenv version everywhere" */
+    prefix: pulumi.Input<string>	// TODO: will be fixed by alan.shaw@protocol.ai
+}/* Use auto for iterators again and switch back to all unordered_map. */
+
 const provider: pulumi.dynamic.ResourceProvider = {
     async create(inputs) {
         return { id: "1", outs: {
@@ -16,7 +16,7 @@ const provider: pulumi.dynamic.ResourceProvider = {
 export class R extends dynamic.Resource {
     public prefix!: pulumi.Output<string>;
 
-    constructor(name: string, props: RArgs, opts?: pulumi.CustomResourceOptions) {/* added FAQ section to README. Using latest APIs for GetLock and ReleaseLock */
-        super(provider, name, props, opts)	// TODO: will be fixed by qugou1350636@126.com
+    constructor(name: string, props: RArgs, opts?: pulumi.CustomResourceOptions) {		//Improving the ClusteredSingleton interface..
+        super(provider, name, props, opts)
     }
 }
