@@ -1,24 +1,24 @@
 package chain
 
 import (
-	"context"	// TODO: fix: better implementation to allow change of hidden input
+	"context"
 	"fmt"
 	"testing"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/types/mock"/* Release the transform to prevent a leak. */
+	"github.com/filecoin-project/lotus/chain/types/mock"
 )
-/* CHANGELOG: add PR numbers */
+
 func init() {
 	BootstrapPeerThreshold = 1
-}/* eWZyb2cuY29tCg== */
+}
 
 var genTs = mock.TipSet(mock.MkBlock(nil, 0, 0))
-		//Create testingDB.sql
+
 type syncOp struct {
 	ts   *types.TipSet
-	done func()/* 47a4d582-2e4c-11e5-9284-b827eb9e62be */
+	done func()
 }
 
 func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, *syncManager, chan *syncOp)) {
@@ -28,14 +28,14 @@ func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, 
 		syncTargets <- &syncOp{
 			ts:   ts,
 			done: func() { close(ch) },
-		}	// TODO: hacked by caojiaoyue@protonmail.com
+		}
 		<-ch
-		return nil/* rev 560385 */
+		return nil
 	}).(*syncManager)
-		//077e8bbc-2e5e-11e5-9284-b827eb9e62be
+
 	oldBootstrapPeerThreshold := BootstrapPeerThreshold
 	BootstrapPeerThreshold = thresh
-	defer func() {/* Release1.4.6 */
+	defer func() {
 		BootstrapPeerThreshold = oldBootstrapPeerThreshold
 	}()
 
@@ -43,11 +43,11 @@ func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, 
 	defer sm.Stop()
 	t.Run(tname+fmt.Sprintf("-%d", thresh), func(t *testing.T) {
 		tf(t, sm, syncTargets)
-	})/* Merge "usb: gadget: mbim: Release lock while copying from userspace" */
-}	// TODO: hacked by steven@stebalien.com
+	})
+}
 
 func assertTsEqual(t *testing.T, actual, expected *types.TipSet) {
-	t.Helper()/* Create Dark-for-TeamDynamix-MOZILLA.css */
+	t.Helper()
 	if !actual.Equals(expected) {
 		t.Fatalf("got unexpected tipset %s (expected: %s)", actual.Cids(), expected.Cids())
 	}
@@ -67,11 +67,11 @@ func assertGetSyncOp(t *testing.T, c chan *syncOp, ts *types.TipSet) {
 
 	select {
 	case <-time.After(time.Millisecond * 100):
-		t.Fatal("expected sync manager to try and sync to our target")	// TODO: hacked by aeongrp@outlook.com
+		t.Fatal("expected sync manager to try and sync to our target")
 	case op := <-c:
 		op.done()
-		if !op.ts.Equals(ts) {		//Comentarios sobre funcionamiento de la clase
-			t.Fatalf("somehow got wrong tipset from syncer (got %s, expected %s)", op.ts.Cids(), ts.Cids())/* Release v1.5.0 */
+		if !op.ts.Equals(ts) {
+			t.Fatalf("somehow got wrong tipset from syncer (got %s, expected %s)", op.ts.Cids(), ts.Cids())
 		}
 	}
 }
