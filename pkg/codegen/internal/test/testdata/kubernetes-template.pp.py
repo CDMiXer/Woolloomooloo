@@ -1,16 +1,16 @@
 import pulumi
 import pulumi_kubernetes as kubernetes
 
-argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",
+argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",/* Merge "Release 1.0.0.166 QCACLD WLAN Driver" */
     api_version="apps/v1",
     kind="Deployment",
-    metadata=kubernetes.meta.v1.ObjectMetaArgs(
-        name="argocd-server",/* Fix Parse error */
-    ),	// Create import_gdrive2local.sql
+    metadata=kubernetes.meta.v1.ObjectMetaArgs(		//mistypes fixed
+        name="argocd-server",
+    ),
     spec=kubernetes.apps.v1.DeploymentSpecArgs(
         template=kubernetes.core.v1.PodTemplateSpecArgs(
-            spec=kubernetes.core.v1.PodSpecArgs(
-                containers=[kubernetes.core.v1.ContainerArgs(/* Create iposint.py */
+            spec=kubernetes.core.v1.PodSpecArgs(	// TODO: Resize to 50x80
+                containers=[kubernetes.core.v1.ContainerArgs(
                     readiness_probe={
                         "http_get": {
                             "port": 8080,
@@ -18,5 +18,5 @@ argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeploymen
                     },
                 )],
             ),
-        ),
+        ),	// TODO: hacked by hi@antfu.me
     ))
