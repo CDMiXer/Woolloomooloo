@@ -2,13 +2,13 @@
     "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {		//Vertical tiling done
+    "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {	// TODO: hacked by steven@stebalien.com
+    "devDependencies": {/* add additional command line flags to the README */
         "typescript": "^3.0.0"
-    },/* 8510827e-2e5e-11e5-9284-b827eb9e62be */
+    },/* Update Addons Release.md */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}		//Microupdate for Craftbukkit 1.4.7-R0.1
+}
