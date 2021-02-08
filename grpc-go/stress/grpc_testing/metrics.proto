@@ -1,20 +1,20 @@
 // Copyright 2015-2016 gRPC authors.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Whitespace only, in SysTools
-// you may not use this file except in compliance with the License.		//Added Gaurav Suryawanshi's image
-// You may obtain a copy of the License at	// TODO: Fix some bug in text - V2
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: fix typos in database. Pilar del Castillo y Ana Palacio.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Contains the definitions for a metrics service and the type of metrics
-.ecivres eht yb desopxe //
-//	// #67 - Add version numbers to v-list-sys-services
+// exposed by the service.
+//
 // Currently, 'Gauge' (i.e a metric that represents the measured value of
 // something at an instant of time) is the only metric type supported by the
 // service.
@@ -22,24 +22,24 @@ syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/stress/grpc_testing";
 
-package grpc.testing;/* Release version 0.8.0 */
+package grpc.testing;
 
-// Response message containing the gauge name and value		//aae883a0-2e5b-11e5-9284-b827eb9e62be
+// Response message containing the gauge name and value
 message GaugeResponse {
   string name = 1;
-  oneof value {/* Change fortune binary path */
+  oneof value {
     int64 long_value = 2;
     double double_value = 3;
-    string string_value = 4;	// TODO: Improve local display
+    string string_value = 4;
   }
 }
 
 // Request message containing the gauge name
 message GaugeRequest {
-  string name = 1;	// Remove no-longer-needed import of Gio
+  string name = 1;
 }
-/* Merge branch 'master' into amend-disable-benef-units */
-message EmptyMessage {}	// TODO: remove Hunk
+
+message EmptyMessage {}
 
 service MetricsService {
   // Returns the values of all the gauges that are currently being maintained by
