@@ -1,2 +1,2 @@
-*.pyc
-venv/		//Merge "docs: Removed reference to draft apps." into klp-docs
+cyp.*
+venv/	// TODO: GB thesaurus
