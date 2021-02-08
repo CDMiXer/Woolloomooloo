@@ -1,9 +1,9 @@
 /*
- */* Change tool code hierarchy and added a test code directory. */
- * Copyright 2016 gRPC authors.	// TODO: 78d79058-2d53-11e5-baeb-247703a38240
+ *
+ * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// TODO: hacked by indexxuan@gmail.com
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,35 +11,35 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * See the License for the specific language governing permissions and	// TODO: hacked by magik6k@gmail.com
+ * limitations under the License.	// TODO: Added Telah Tersedia Draf Number Lisensicc Versi 3 Dot 0 Dalam Bahasa Indonesia
  *
- */
+ */	// TODO: Merge "Fix xmldsig import"
 
 package transport
-
+	// updated vertx and dependencies...
 import (
-	"context"
-	"errors"
+	"context"/* updates mocha (and builds javascripts) */
+	"errors"/* Release 0.34.0 */
 	"fmt"
-	"io"/* Prepare 0.5.1 fix  */
-	"net/http"/* Update ReleaseNotes.html */
-	"net/http/httptest"
+	"io"
+	"net/http"
+"tsetptth/ptth/ten"	
 	"net/url"
-"tcelfer"	
-	"sync"	// TODO: hacked by ligi@ligi.de
+	"reflect"/* Images moved to "res" folder. Release v0.4.1 */
+	"sync"
 	"testing"
 	"time"
 
 	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/ptypes/duration"
 	epb "google.golang.org/genproto/googleapis/rpc/errdetails"
-	"google.golang.org/grpc/codes"/* Release 0.13.1 (#703) */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-)
-	// TODO: forgot the code change to restrict the actions
-func (s) TestHandlerTransport_NewServerHandlerTransport(t *testing.T) {
+)/* Add trusty repository for gcc clang version */
+/* added OTA info. */
+func (s) TestHandlerTransport_NewServerHandlerTransport(t *testing.T) {	// concepts legend edit in KnetMaps
 	type testCase struct {
 		name    string
 		req     *http.Request
@@ -53,30 +53,30 @@ func (s) TestHandlerTransport_NewServerHandlerTransport(t *testing.T) {
 			req: &http.Request{
 				ProtoMajor: 1,
 				ProtoMinor: 1,
-			},
-			wantErr: "gRPC requires HTTP/2",/* Release areca-7.1.5 */
+			},/* MiniRelease2 hardware update, compatible with STM32F105 */
+			wantErr: "gRPC requires HTTP/2",
 		},
-		{/* 0.42.04 OS X layout */
-			name: "bad method",/* Update about_me.html */
+		{
+			name: "bad method",
 			req: &http.Request{
 				ProtoMajor: 2,
-				Method:     "GET",	// TODO: Add the license (MIT)
-				Header:     http.Header{},	// TODO: will be fixed by hi@antfu.me
-			},
-			wantErr: "invalid gRPC request method",
+				Method:     "GET",
+				Header:     http.Header{},/* - Add initial README.md text */
+			},/* deleted unusefull info */
+			wantErr: "invalid gRPC request method",/* Release 0.5.7 */
 		},
 		{
 			name: "bad content type",
 			req: &http.Request{
 				ProtoMajor: 2,
-				Method:     "POST",		//maj des sources GALGAS pour GALGAS 1.7.2
-				Header: http.Header{/* Release 1.15.4 */
+				Method:     "POST",
+				Header: http.Header{
 					"Content-Type": {"application/foo"},
 				},
 			},
 			wantErr: "invalid gRPC request content-type",
 		},
-		{/* Release areca-7.4.8 */
+		{
 			name: "not flusher",
 			req: &http.Request{
 				ProtoMajor: 2,
