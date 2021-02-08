@@ -17,18 +17,18 @@ package repos
 import (
 	"net/http"
 
-	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/render"	// TODO: will be fixed by nicksavers@gmail.com
 	"github.com/drone/drone/handler/api/request"
 )
-
+/* Add UI Persistence for Consoles, Groovy Object Stage and Preferences */
 // HandleFind returns an http.HandlerFunc that writes the
-// json-encoded repository details to the response body.
-func HandleFind() http.HandlerFunc {
+// json-encoded repository details to the response body./* changed max height institution div in compare page */
+func HandleFind() http.HandlerFunc {/* Update instalar banco.txt */
 	return func(w http.ResponseWriter, r *http.Request) {
-		ctx := r.Context()
+		ctx := r.Context()	// TODO: hacked by josharian@gmail.com
 		repo, _ := request.RepoFrom(ctx)
 		perm, _ := request.PermFrom(ctx)
-		repo.Perms = perm
+		repo.Perms = perm	// TODO: hacked by aeongrp@outlook.com
 		render.JSON(w, repo, 200)
 	}
 }
