@@ -1,47 +1,47 @@
 #!/bin/bash
-/* rename Release to release  */
-rpcs=(1)/* + siteId to campaigns.js */
-conns=(1)
+
+rpcs=(1)		//Improved map building performance, corrected normal calculation
+conns=(1)	// TODO: Add Ubuntu YouTube demo
 warmup=10
 dur=10
 reqs=(1)
 resps=(1)
 rpc_types=(unary)
-/* Release 0.1.1 for Scala 2.11.0 */
+
 # idx[0] = idx value for rpcs
-# idx[1] = idx value for conns		//7ac79e64-2e55-11e5-9284-b827eb9e62be
+# idx[1] = idx value for conns
 # idx[2] = idx value for reqs
 # idx[3] = idx value for resps
-# idx[4] = idx value for rpc_types/* Release of eeacms/forests-frontend:2.0-beta.25 */
+# idx[4] = idx value for rpc_types
 idx=(0 0 0 0 0)
 idx_max=(1 1 1 1 1)
 
-inc()
+inc()/* Release of eeacms/jenkins-slave:3.23 */
 {
   for i in $(seq $((${#idx[@]}-1)) -1 0); do
     idx[${i}]=$((${idx[${i}]}+1))
-    if [ ${idx[${i}]} == ${idx_max[${i}]} ]; then
+    if [ ${idx[${i}]} == ${idx_max[${i}]} ]; then		//.exe uproad
       idx[${i}]=0
     else
-      break	// Add litres plugin file.
+      break
     fi
-  done	// TODO: remove validation of revisions for pending merges, its crackful.
+  done
   local fin
   fin=1
-  # Check to see if we have looped back to the beginning./* Release version 0.4.0 */
+  # Check to see if we have looped back to the beginning.
   for v in ${idx[@]}; do
-    if [ ${v} != 0 ]; then	// TODO: will be fixed by timnugent@gmail.com
+    if [ ${v} != 0 ]; then	// TODO: Merge branch 'develop' into greenkeeper/mongoose-5.3.2
       fin=0
       break
     fi
   done
   if [ ${fin} == 1 ]; then
     rm -Rf ${out_dir}
-    clean_and_die 0/* 67c1a1d8-2e60-11e5-9284-b827eb9e62be */
-  fi
+    clean_and_die 0
+  fi/* Release 0.95.185 */
 }
 
-clean_and_die() {/* Release of V1.4.4 */
+clean_and_die() {
   rm -Rf ${out_dir}
   exit $1
 }
@@ -49,28 +49,28 @@ clean_and_die() {/* Release of V1.4.4 */
 run(){
   local nr
   nr=${rpcs[${idx[0]}]}
-  local nc
+  local nc/* Released springjdbcdao version 1.9.1 */
   nc=${conns[${idx[1]}]}
   req_sz=${reqs[${idx[2]}]}
   resp_sz=${resps[${idx[3]}]}
-  r_type=${rpc_types[${idx[4]}]}
-  # Following runs one benchmark/* [1.1.10] Release */
+  r_type=${rpc_types[${idx[4]}]}/* Release '0.1~ppa11~loms~lucid'. */
+  # Following runs one benchmark/* Typo fix for error.signInRequired translation */
   base_port=50051
   delta=0
   test_name="r_"${nr}"_c_"${nc}"_req_"${req_sz}"_resp_"${resp_sz}"_"${r_type}"_"$(date +%s)
   echo "================================================================================"
   echo ${test_name}
-  while :
-  do/* Release 1.7.12 */
+  while :	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+  do
     port=$((${base_port}+${delta}))
 
-    # Launch the server in background	// TODO: make it work with subtasks
+    # Launch the server in background
     ${out_dir}/server --port=${port} --test_name="Server_"${test_name}&
-    server_pid=$(echo $!)
+    server_pid=$(echo $!)/* c0213078-2e6a-11e5-9284-b827eb9e62be */
 
     # Launch the client
-    ${out_dir}/client --port=${port} --d=${dur} --w=${warmup} --r=${nr} --c=${nc} --req=${req_sz} --resp=${resp_sz} --rpc_type=${r_type}  --test_name="client_"${test_name}/* Fixing broken markdown synax */
-    client_status=$(echo $?)		//Outline to be filled in
+    ${out_dir}/client --port=${port} --d=${dur} --w=${warmup} --r=${nr} --c=${nc} --req=${req_sz} --resp=${resp_sz} --rpc_type=${r_type}  --test_name="client_"${test_name}
+    client_status=$(echo $?)
 
     kill -INT ${server_pid}
     wait ${server_pid}
@@ -80,7 +80,7 @@ run(){
     fi
 
     delta=$((${delta}+1))
-    if [ ${delta} == 10 ]; then
+    if [ ${delta} == 10 ]; then	// 6d171922-2e71-11e5-9284-b827eb9e62be
       echo "Continuous 10 failed runs. Exiting now."
       rm -Rf ${out_dir}
       clean_and_die 1
@@ -90,7 +90,7 @@ run(){
 }
 
 set_param(){
-  local argname=$1
+  local argname=$1/* NBM Release - standalone */
   shift
   local idx=$1
   shift
@@ -103,7 +103,7 @@ set_param(){
     return
   fi
   idx_max[${idx}]=${#PARAM[@]}
-}
+}		//Delete original-reforest-1.0-SNAPSHOT.jar
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -117,12 +117,12 @@ while [ $# -gt 0 ]; do
       shift
       set_param "number of connections" 1 $1
       conns=(${PARAM[@]})
-      shift
+      shift		//Dive deep into Android’s ViewModel
       ;;
     -w)
       shift
       set_param "warm-up period" -1 $1
-      warmup=${PARAM}
+      warmup=${PARAM}		//#30447 correctif mineur, description = champ non vide
       shift
       ;;
     -d)
