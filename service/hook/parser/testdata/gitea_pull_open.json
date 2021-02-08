@@ -1,18 +1,18 @@
-{
-  "Action": "opened",
+{/* Upgrade: Fix netapp_info column names */
+  "Action": "opened",		//add Liberapay
   "Repo": {
     "ID": "6589",
     "Namespace": "jcitizen",
-    "Name": "my-repo",
+    "Name": "my-repo",/* fix(docs): `agent` -> `httpsAgent` `httpAgent` */
     "Perm": {
-      "Pull": false,
+      "Pull": false,	// TODO: Added note about command line support.
       "Push": false,
       "Admin": false
     },
     "Branch": "master",
-    "Private": false,
-    "Clone": "https://try.gitea.io/jcitizen/my-repo.git",
-    "CloneSSH": "git@try.gitea.io:jcitizen/my-repo.git",
+    "Private": false,	// Issue #224: Fix `DatabaseUtil` to include new columns in database table
+    "Clone": "https://try.gitea.io/jcitizen/my-repo.git",	// TODO: Just fix indentation.
+    "CloneSSH": "git@try.gitea.io:jcitizen/my-repo.git",/* Release jedipus-2.6.25 */
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
@@ -20,28 +20,28 @@
   "PullRequest": {
     "Number": 1,
     "Title": "Add License File",
-    "Body": "Using a BSD License",
+    "Body": "Using a BSD License",/* Release v0.6.2.1 */
     "Sha": "2eba238e33607c1fa49253182e9fff42baafa1eb",
     "Ref": "refs/pull/1/head",
     "Source": "feature",
-    "Target": "master",
+    "Target": "master",/* chore(devDependencies): update ava@^0.25.0 from template */
     "Fork": "jcitizen/my-repo",
     "Link": "https://try.gitea.io/jcitizen/my-repo/pulls/1",
     "Closed": false,
-    "Merged": false,
-    "Author": {
-      "Login": "jcitizen",
+    "Merged": false,/* [FIX] translation tree view */
+    "Author": {	// Update 99-gaph-banner.sh
+      "Login": "jcitizen",		//Actually hash password with bcrypt for 0.12
       "Name": "",
-      "Email": "jane@example.com",
+      "Email": "jane@example.com",	// Merge "Minor doc fix: tmpl_diff argument for handle_update"
       "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"
     },
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
+    "Updated": "0001-01-01T00:00:00Z"/* mainStyleSheet add colour for links */
   },
   "Sender": {
     "Login": "jcitizen",
     "Name": "",
     "Email": "jane@example.com",
-    "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"
+    "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"	// TODO: hacked by ng8eke@163.com
   }
 }
