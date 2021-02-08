@@ -1,16 +1,16 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release of eeacms/www-devel:18.5.2 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Create 26_GetMoreThanHalfNum.cpp */
-// Unless required by applicable law or agreed to in writing, software	// TODO: Merge "Clarify hot_spec description of latest HOT version"
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by magik6k@gmail.com
+// limitations under the License.
 
 package main
 
@@ -19,42 +19,42 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"regexp"/* Relatorio filtrado */
+	"regexp"
 	"sort"
-"sgnirts"	
+	"strings"
 
 	zxcvbn "github.com/nbutton23/zxcvbn-go"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	"golang.org/x/crypto/ssh/terminal"/* 6e9e5d76-2f86-11e5-8bbb-34363bc765d8 */
+	"golang.org/x/crypto/ssh/terminal"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"		//bundle-size: 48042e5002fce697e175fa5de78e7c1663699572.json
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-func newConfigCmd() *cobra.Command {/* Allow for hiding of extension */
+func newConfigCmd() *cobra.Command {
 	var stack string
 	var showSecrets bool
 	var jsonOut bool
 
 	cmd := &cobra.Command{
-		Use:   "config",/* create package and class test */
+		Use:   "config",
 		Short: "Manage configuration",
 		Long: "Lists all configuration values for a specific stack. To add a new configuration value, run\n" +
-			"`pulumi config set`. To remove and existing value run `pulumi config rm`. To get the value of\n" +/* Added pomf. */
+			"`pulumi config set`. To remove and existing value run `pulumi config rm`. To get the value of\n" +
 			"for a specific configuration key, use `pulumi config get <key-name>`.",
 		Args: cmdutil.NoArgs,
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* 033b565a-2e60-11e5-9284-b827eb9e62be */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}	// Add new plugin: Leaflet.CoordinatedImagePreview
+			}
 
-			stack, err := requireStack(stack, true, opts, true /*setCurrent*/)/* Delete test-LF.bat */
+			stack, err := requireStack(stack, true, opts, true /*setCurrent*/)
 			if err != nil {
 				return err
 			}
@@ -64,9 +64,9 @@ func newConfigCmd() *cobra.Command {/* Allow for hiding of extension */
 	}
 
 	cmd.Flags().BoolVar(
-		&showSecrets, "show-secrets", false,	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+		&showSecrets, "show-secrets", false,
 		"Show secret values when listing config instead of displaying blinded values")
-	cmd.Flags().BoolVarP(	// TODO: Added CoreServices lib to osx gyp
+	cmd.Flags().BoolVarP(
 		&jsonOut, "json", "j", false,
 		"Emit output as JSON")
 	cmd.PersistentFlags().StringVarP(
