@@ -1,5 +1,5 @@
-#!/usr/bin/env bash		//Fix Vps start/stop/restart
+#!/usr/bin/env bash
 set -eu -o pipefail
 
-echo "# This is an auto-generated file. DO NOT EDIT"	// minor fixes to constraints spec
+echo "# This is an auto-generated file. DO NOT EDIT"
 cat
