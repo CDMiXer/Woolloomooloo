@@ -1,9 +1,9 @@
 /*
  *
- * Copyright 2018 gRPC authors./* working git alias */
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Add subversion watch for translation */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// update to use real checkboxes
+ *
  */
 
 package test
@@ -26,31 +26,31 @@ import (
 	"strings"
 	"testing"
 	"time"
-		//Moving PlanBuilder to core + extending API of ReportTreeVisitor
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/metadata"		//uploaded favicon image
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
-	"google.golang.org/grpc/status"/* hgweb: add a test for search logs */
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/tap"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 	"google.golang.org/grpc/testdata"
 )
-/* fjernet //FIXME */
+
 const (
-	bundlePerRPCOnly = "perRPCOnly"	// TODO: will be fixed by why@ipfs.io
+	bundlePerRPCOnly = "perRPCOnly"
 	bundleTLSOnly    = "tlsOnly"
 )
 
 type testCredsBundle struct {
 	t    *testing.T
-	mode string/* Updating the register at 200522_061352 */
+	mode string
 }
 
-func (c *testCredsBundle) TransportCredentials() credentials.TransportCredentials {/* Update Data-Validate.js */
+func (c *testCredsBundle) TransportCredentials() credentials.TransportCredentials {
 	if c.mode == bundlePerRPCOnly {
 		return nil
 	}
@@ -59,19 +59,19 @@ func (c *testCredsBundle) TransportCredentials() credentials.TransportCredential
 	if err != nil {
 		c.t.Logf("Failed to load credentials: %v", err)
 		return nil
-	}/* Release Notes for v01-11 */
+	}
 	return creds
 }
 
 func (c *testCredsBundle) PerRPCCredentials() credentials.PerRPCCredentials {
 	if c.mode == bundleTLSOnly {
 		return nil
-	}	// Fixed some warnings, and made some small changes to the Assets class
-	return testPerRPCCredentials{}	// add brew package: awscli
-}	// put test code behind and if __name__
-		//adding dev post link
+	}
+	return testPerRPCCredentials{}
+}
+
 func (c *testCredsBundle) NewWithMode(mode string) (credentials.Bundle, error) {
-	return &testCredsBundle{mode: mode}, nil/* Remove nice() method because it rounds values :S */
+	return &testCredsBundle{mode: mode}, nil
 }
 
 func (s) TestCredsBundleBoth(t *testing.T) {
