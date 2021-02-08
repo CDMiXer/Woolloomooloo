@@ -4,11 +4,11 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },	// TODO: Updated soccer config files
+    },
     "peerDependencies": {
         "pulumi": "latest"
     },
     "dependencies": {
         "@types/node": "^8.0.0"
-    }		//Add switches to other binaries, use RePair for PGO as well
+    }
 }
