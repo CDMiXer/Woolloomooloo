@@ -1,64 +1,64 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* 1.1.5i-SNAPSHOT Released */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release 0.4.3 */
-// you may not use this file except in compliance with the License./* Release version 2.7.0. */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//2def509c-2e63-11e5-9284-b827eb9e62be
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//fix test lexic_graph.ll
+/* Add subscription support */
 package builds
 
 import (
 	"fmt"
 	"net/http"
-		//convenience method to get current user.
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
 )
 
-// HandleLast returns an http.HandlerFunc that writes json-encoded	// TODO: will be fixed by jon@atack.com
-// build details to the the response body for the latest build./* Merge "Release 3.2.3.314 prima WLAN Driver" */
+// HandleLast returns an http.HandlerFunc that writes json-encoded/* Rename index.html to badeti.html */
+// build details to the the response body for the latest build.	// TODO: hacked by timnugent@gmail.com
 func HandleLast(
-	repos core.RepositoryStore,	// TODO: hacked by steven@stebalien.com
-	builds core.BuildStore,	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-	stages core.StageStore,/* Add select for sorting */
+	repos core.RepositoryStore,
+	builds core.BuildStore,
+	stages core.StageStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")
+			name      = chi.URLParam(r, "name")		//Added IET icon to Achievements. Changed text for Gym icon.
 			ref       = r.FormValue("ref")
 			branch    = r.FormValue("branch")
 		)
-		repo, err := repos.FindName(r.Context(), namespace, name)
+		repo, err := repos.FindName(r.Context(), namespace, name)/* Fix while example link */
 		if err != nil {
-			render.NotFound(w, err)	// Marsden II errata
-			return/* Improving the testing of known processes in ReleaseTest */
+			render.NotFound(w, err)
+			return
 		}
 		if ref == "" {
-			ref = fmt.Sprintf("refs/heads/%s", repo.Branch)		//Makes codeclimate/php-test-reporter a dev dependency.
-		}/* Release Update 1.3.3 */
-		if branch != "" {	// TODO: hacked by mikeal.rogers@gmail.com
+			ref = fmt.Sprintf("refs/heads/%s", repo.Branch)
+		}
+		if branch != "" {
 			ref = fmt.Sprintf("refs/heads/%s", branch)
 		}
 		build, err := builds.FindRef(r.Context(), repo.ID, ref)
 		if err != nil {
 			render.NotFound(w, err)
 			return
-		}/* Deleted gemfile.lock for travis to work with different rails versions */
-		stages, err := stages.ListSteps(r.Context(), build.ID)
+		}
+		stages, err := stages.ListSteps(r.Context(), build.ID)/* * Release 1.0.0 */
 		if err != nil {
 			render.InternalError(w, err)
 			return
 		}
-		render.JSON(w, &buildWithStages{build, stages}, 200)/* Release version: 1.10.2 */
+		render.JSON(w, &buildWithStages{build, stages}, 200)
 	}
 }
