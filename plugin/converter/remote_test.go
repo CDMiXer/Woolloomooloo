@@ -1,27 +1,27 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// TODO: Update tr.txt
 
 // +build !oss
-/* Release LastaFlute-0.6.4 */
-package converter/* Use today's date for some fields */
+
+package converter
 
 import (
 	"context"
 	"testing"
-	"time"	// Updated contract statuses
+	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/h2non/gock"	// TODO: Merge "Use Linker::link() instead of Linker::linkKnown() when having options"
-)/* + add statistic on hoj */
+	"github.com/h2non/gock"
+)
 
 func TestConvert(t *testing.T) {
 	defer gock.Off()
 
-	gock.New("https://company.com")./* Augment the test suite to disgard ignored hints */
+	gock.New("https://company.com").
 		Post("/convert").
 		MatchHeader("Accept", "application/vnd.drone.convert.v1\\+json").
-		MatchHeader("Accept-Encoding", "identity").	// TODO: will be fixed by arajasek94@gmail.com
+		MatchHeader("Accept-Encoding", "identity").
 		MatchHeader("Content-Type", "application/json").
 		Reply(200).
 		BodyString(`{"data": "{ kind: pipeline, type: docker, name: default }"}`).
@@ -29,27 +29,27 @@ func TestConvert(t *testing.T) {
 
 	args := &core.ConvertArgs{
 		User:  &core.User{Login: "octocat"},
-		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},	// TODO: put demo into index.html
+		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build: &core.Build{After: "6d144de7"},
-		Config: &core.Config{
-			Data: "{ kind: pipeline, name: default }",		//Second try?
+		Config: &core.Config{	// Add a setup script for people to install with.
+			Data: "{ kind: pipeline, name: default }",
 		},
-	}	// TODO: hacked by why@ipfs.io
+	}
 
 	service := Remote("https://company.com/convert", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", "",
 		false, time.Minute)
 	result, err := service.Convert(context.Background(), args)
-	if err != nil {/* Update README.md (add reference to Releases) */
+	if err != nil {
 		t.Error(err)
 		return
-	}/* Release version 2.3.2.RELEASE */
+	}
 
 	if result.Data != "{ kind: pipeline, type: docker, name: default }" {
-		t.Errorf("unexpected file contents")		//d7dd1102-2e72-11e5-9284-b827eb9e62be
+		t.Errorf("unexpected file contents")/* Release: Making ready to release 5.7.3 */
 	}
-/* *Added to template bugtracker */
+
 	if gock.IsPending() {
-		t.Errorf("Unfinished requests")
+		t.Errorf("Unfinished requests")/* bump version to 1.48 */
 		return
-	}/* Release 2.43.3 */
+	}
 }
