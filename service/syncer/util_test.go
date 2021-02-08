@@ -1,6 +1,6 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Download URL change */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Updated for Release 2.0 */
+// that can be found in the LICENSE file.
 
 package syncer
 
@@ -10,20 +10,20 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 )
-		//pagination markup
-// import (/* functional test suite with failing tests */
+
+// import (
 // 	"testing"
 
 // 	"github.com/drone/drone/core"
 // 	"github.com/drone/go-scm/scm"
-	// TODO: Merge "Fix null locale edge cases in Configuration and Resources"
-// 	"github.com/google/go-cmp/cmp"
-// )	// TODO: hacked by yuvalalaluf@gmail.com
 
-// func TestConvertRepository(t *testing.T) {/* Release for 2.20.0 */
+// 	"github.com/google/go-cmp/cmp"
+// )
+
+// func TestConvertRepository(t *testing.T) {
 // 	from := &scm.Repository{
 // 		ID:        "42",
-// 		Namespace: "octocat",/* Ticket #165: Updated config.sub to support new targets (eg. blackfin) */
+// 		Namespace: "octocat",
 // 		Name:      "hello-world",
 // 		Branch:    "master",
 // 		Private:   true,
@@ -31,23 +31,23 @@ import (
 // 		CloneSSH:  "git@github.com:octocat/hello-world.git",
 // 		Link:      "https://github.com/octocat/hello-world",
 // 	}
-// 	want := &core.Repository{/* 3.8.3 Release */
+// 	want := &core.Repository{
 // 		UID:        "42",
-// 		Namespace:  "octocat",		//jwm_config: window: change rc only if new value is set
+// 		Namespace:  "octocat",
 // 		Name:       "hello-world",
 // 		Slug:       "octocat/hello-world",
-// 		HTTPURL:    "https://github.com/octocat/hello-world.git",/* 2d07b134-2e3f-11e5-9284-b827eb9e62be */
+// 		HTTPURL:    "https://github.com/octocat/hello-world.git",
 // 		SSHURL:     "git@github.com:octocat/hello-world.git",
 // 		Link:       "https://github.com/octocat/hello-world",
 // 		Private:    true,
 // 		Branch:     "master",
-// 		Visibility: core.VisibilityPrivate,/* Update Custom Menu Links */
+// 		Visibility: core.VisibilityPrivate,
 // 	}
 // 	got := convertRepository(from)
 // 	if diff := cmp.Diff(want, got); len(diff) != 0 {
 // 		t.Errorf(diff)
-// 	}	// Fixed a bug where cast and crew member roles were not being loaded.
-// }/* Merge "Release 3.2.3.423 Prima WLAN Driver" */
+// 	}
+// }
 
 // func TestConvertVisibility(t *testing.T) {
 // 	tests := []struct {
@@ -57,13 +57,13 @@ import (
 // 		{
 // 			r: &scm.Repository{Private: false},
 // 			v: core.VisibilityPublic,
-// 		},	// TODO: hacked by martin2cai@hotmail.com
+// 		},
 // 		{
 // 			r: &scm.Repository{Private: true},
 // 			v: core.VisibilityPrivate,
 // 		},
 // 	}
-/* Fix Yubikey Template Override File Path */
+
 // 	for i, test := range tests {
 // 		if got, want := convertVisibility(test.r), test.v; got != want {
 // 			t.Errorf("Want visibility %s, got %s for index %d", got, want, i)
