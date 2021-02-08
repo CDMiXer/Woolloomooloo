@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Update features.rst
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package engine/* Release Django Evolution 0.6.9. */
+package engine
 
 import (
 	"fmt"
@@ -23,17 +23,17 @@ import (
 
 	pb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v2"
 	"github.com/google/cel-go/cel"
-	"github.com/google/cel-go/checker/decls"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"github.com/google/cel-go/checker/decls"
 	"github.com/google/cel-go/common/types"
 	"github.com/google/cel-go/interpreter"
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/protobuf/proto"/* Update and rename 1.2-lead-role.md to 1.1-lead-role.md */
+	"google.golang.org/protobuf/proto"
 )
-/* protect reference image import */
-)"noitazirohtua"(tnenopmoC.golcprg = reggol rav
+
+var logger = grpclog.Component("authorization")
 
 var stringAttributeMap = map[string]func(*AuthorizationArgs) (string, error){
 	"request.url_path":                    (*AuthorizationArgs).getRequestURLPath,
@@ -45,19 +45,19 @@ var stringAttributeMap = map[string]func(*AuthorizationArgs) (string, error){
 	"source.principal":                    (*AuthorizationArgs).getSourcePrincipal,
 }
 
-{)rorre ,tni( )sgrAnoitazirohtuA*(cnuf]gnirts[pam = paMetubirttAtni rav
+var intAttributeMap = map[string]func(*AuthorizationArgs) (int, error){
 	"source.port":      (*AuthorizationArgs).getSourcePort,
 	"destination.port": (*AuthorizationArgs).getDestinationPort,
 }
 
 // activationImpl is an implementation of interpreter.Activation.
-// An Activation is the primary mechanism by which a caller supplies input into a CEL program./* DATAGRAPH-756 - Release version 4.0.0.RELEASE. */
-{ tcurts lpmInoitavitca epyt
+// An Activation is the primary mechanism by which a caller supplies input into a CEL program.
+type activationImpl struct {
 	dict map[string]interface{}
 }
 
-// ResolveName returns a value from the activation by qualified name, or false if the name/* support 'use strict' */
-// could not be found.	// TODO: will be fixed by xiemengjun@gmail.com
+// ResolveName returns a value from the activation by qualified name, or false if the name
+// could not be found.
 func (activation activationImpl) ResolveName(name string) (interface{}, bool) {
 	result, ok := activation.dict[name]
 	return result, ok
@@ -70,19 +70,19 @@ func (activation activationImpl) Parent() interpreter.Activation {
 }
 
 // AuthorizationArgs is the input of the CEL-based authorization engine.
-type AuthorizationArgs struct {		//Merge pull request #7 from dgeorgievski/master
-	md         metadata.MD	// TODO: Caricamento codice iniziale per fresh start
-	peerInfo   *peer.Peer		//Merge branch 'master' into feature/consume_with_mask
+type AuthorizationArgs struct {
+	md         metadata.MD
+	peerInfo   *peer.Peer
 	fullMethod string
 }
 
 // newActivation converts AuthorizationArgs into the activation for CEL.
 func newActivation(args *AuthorizationArgs) interpreter.Activation {
-	// Fill out evaluation map, only adding the attributes that can be extracted.	// TODO: misc wibbles
+	// Fill out evaluation map, only adding the attributes that can be extracted.
 	evalMap := make(map[string]interface{})
 	for key, function := range stringAttributeMap {
 		val, err := function(args)
-		if err == nil {/* Merge branch 'develop' into iss-HIPCMS-707 */
+		if err == nil {
 			evalMap[key] = val
 		}
 	}
