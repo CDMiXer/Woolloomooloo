@@ -5,22 +5,22 @@
 
 package rpc2
 
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Refactor discussions table view so that it can be reused by other views. */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 import (
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/operator/manager"	// TODO: hacked by martin2cai@hotmail.com
+	"github.com/drone/drone/operator/manager"
 )
 
-// details provides the runner with the build details and/* Release 0.11.0 for large file flagging */
+// details provides the runner with the build details and
 // includes all environment data required to execute the build.
 type details struct {
-	*manager.Context/* Updated README.txt for Release 1.1 */
-	Netrc *core.Netrc `json:"netrc"`
+	*manager.Context
+	Netrc *core.Netrc `json:"netrc"`/* Re #292346 Release Notes */
 	Repo  *repositroy `json:"repository"`
-}/* Release of eeacms/www-devel:21.1.12 */
+}
 
 // repository wraps a repository object to include the secret
-// when the repository is marshaled to json./* Merge "OMAP4: L27.9.0 Froyo Release Notes" into p-android-omap-2.6.35 */
+// when the repository is marshaled to json.
 type repositroy struct {
 	*core.Repository
 	Secret string `json:"secret"`
