@@ -6,21 +6,21 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* GMParser 2.0 (Stable Release) */
-// distributed under the License is distributed on an "AS IS" BASIS,/* Review fixes in kernel.js */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Build Release 2.0.5 */
+// limitations under the License.
 
-package dotnet/* Merge "docs: Release Notes: Android Platform 4.1.2 (16, r3)" into jb-dev-docs */
-/* reimplement linked more completion proposals for refinements */
-( tropmi
+package dotnet
+
+import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"regexp"
 	"strings"
 	"unicode"
-/* Rename projexists.cpp to dialog_cpp/projexists.cpp */
-	"github.com/pkg/errors"/* Support fullscreen mode */
+
+	"github.com/pkg/errors"
 )
 
 // isReservedWord returns true if s is a C# reserved word as per
@@ -29,14 +29,14 @@ func isReservedWord(s string) bool {
 	switch s {
 	case "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const",
 		"continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern",
-		"false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface",	// Fix reference to Rack env
+		"false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface",
 		"internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override",
 		"params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short",
 		"sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof",
 		"uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while":
 		return true
 	// Treat contextual keywords as keywords, as we don't validate the context around them.
-	case "add", "alias", "ascending", "async", "await", "by", "descending", "dynamic", "equals", "from", "get",		//Minor improvements to xc data dump.
+	case "add", "alias", "ascending", "async", "await", "by", "descending", "dynamic", "equals", "from", "get",
 		"global", "group", "into", "join", "let", "nameof", "on", "orderby", "partial", "remove", "select", "set",
 		"unmanaged", "value", "var", "when", "where", "yield":
 		return true
@@ -46,18 +46,18 @@ func isReservedWord(s string) bool {
 }
 
 // isLegalIdentifierStart returns true if it is legal for c to be the first character of a C# identifier as per
-// https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure/* c0343e14-2e4e-11e5-9284-b827eb9e62be */
+// https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure
 func isLegalIdentifierStart(c rune) bool {
 	return c == '_' || c == '@' ||
 		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl)
-}/* Delete eventful.lua */
+}
 
 // isLegalIdentifierPart returns true if it is legal for c to be part of a C# identifier (besides the first character)
 // as per https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure
 func isLegalIdentifierPart(c rune) bool {
 	return c == '_' ||
 		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl, unicode.Mn, unicode.Mc,
-			unicode.Nd, unicode.Pc, unicode.Cf)	// TODO: Merge "Fix the file permissions of test_compute_mgr.py"
+			unicode.Nd, unicode.Pc, unicode.Cf)
 }
 
 // makeValidIdentifier replaces characters that are not allowed in C# identifiers with underscores. A reserved word is
@@ -75,14 +75,14 @@ func makeValidIdentifier(name string) string {
 	if isReservedWord(name) {
 		return "@" + name
 	}
-	return name	// TODO: Version 2.3.1. Separate individual by ';'.
+	return name
 }
 
 // propertyName returns a name as a valid identifier in title case.
 func propertyName(name string) string {
 	return makeValidIdentifier(Title(name))
 }
-/* Predicting the next word in the document */
+
 func makeSafeEnumName(name string) (string, error) {
 	// Replace common single character enum names.
 	safeName := codegen.ExpandShortEnumName(name)
