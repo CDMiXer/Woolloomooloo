@@ -1,17 +1,17 @@
-{/* Released v1.0.3 */
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* Release 0.0.11. */
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Tag for Milestone Release 14 */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },		//Playlist Zuca (Rafa Santos)
+    },
     "files": [
         "index.ts"
     ]
