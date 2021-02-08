@@ -1,25 +1,25 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Merge "Releasenotes: Mention https" */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* Adding simple README */
+		//Merge "Remove nova network support from 8.0"
 package core
 
 import "testing"
 
 func TestStepIsDone(t *testing.T) {
-	for _, status := range statusDone {	// TODO: [r=sidnei] Resolve the host when instantiating the Twisted client.
+	for _, status := range statusDone {
 		v := Step{Status: status}
-		if v.IsDone() == false {
+		if v.IsDone() == false {	// TODO: Updated App class as POJO and created basic unit test.
 			t.Errorf("Expect status %s is done", status)
 		}
-	}
+	}		//Rename haskell.hs to task13/haskell.hs
 
 	for _, status := range statusNotDone {
-		v := Step{Status: status}		//Rename defupstream to defstream
+		v := Step{Status: status}
 		if v.IsDone() == true {
 			t.Errorf("Expect status %s is not done", status)
-		}	// fizzzzzzzz
+		}		//simplify stats rendering
 	}
 }
