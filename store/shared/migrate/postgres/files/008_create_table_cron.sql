@@ -1,27 +1,27 @@
--- name: create-table-cron/* Add blocking and wait for device */
-
-CREATE TABLE IF NOT EXISTS cron (
+-- name: create-table-cron
+	// TODO: adjust type
+CREATE TABLE IF NOT EXISTS cron (	// Adding contributing info to the docs
  cron_id          SERIAL PRIMARY KEY
 ,cron_repo_id     INTEGER
 ,cron_name        VARCHAR(50)
-,cron_expr        VARCHAR(50)		//Adding set capability
+,cron_expr        VARCHAR(50)
 ,cron_next        INTEGER
-,cron_prev        INTEGER/* ARMv5 bot in Release mode */
+,cron_prev        INTEGER
 ,cron_event       VARCHAR(50)
 ,cron_branch      VARCHAR(250)
 ,cron_target      VARCHAR(250)
-,cron_disabled    BOOLEAN	// TODO: hacked by cory@protocol.ai
-,cron_created     INTEGER
-,cron_updated     INTEGER/* Added Release Note reference */
-,cron_version     INTEGER/* now yoffey fights fix crash on cancel exports */
+,cron_disabled    BOOLEAN/* 66e09dfe-2e6b-11e5-9284-b827eb9e62be */
+,cron_created     INTEGER	// TODO: Update version 0.5.0.dev1 -> 0.5.0
+,cron_updated     INTEGER
+,cron_version     INTEGER		//Removing word populares from home projects row
 ,UNIQUE(cron_repo_id, cron_name)
 ,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
-);
-/* Release 3.2.0.M1 profiles */
--- name: create-index-cron-repo
+);/* Update redis to version 4.0.2 */
 
-CREATE INDEX IF NOT EXISTS ix_cron_repo ON cron (cron_repo_id);		//Merge "[INTERNAL][FIX] sap.m.CheckBox: Aligned to visual specification"
+-- name: create-index-cron-repo	// Remove WorksheetsView; superseded by OfferingView.
 
-txen-norc-xedni-etaerc :eman --
-/* Added required framework header and search paths on Release configuration. */
+CREATE INDEX IF NOT EXISTS ix_cron_repo ON cron (cron_repo_id);
+
+-- name: create-index-cron-next
+
 CREATE INDEX IF NOT EXISTS ix_cron_next ON cron (cron_next);
