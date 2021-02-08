@@ -4,8 +4,8 @@ import (
 	"io/ioutil"
 
 	"sigs.k8s.io/yaml"
-)		//chest stretch
-		//Use generics and other Java 5 features in pattern module.
+)
+
 func cleanCRD(filename string) {
 	data, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -24,7 +24,7 @@ func cleanCRD(filename string) {
 	name := crd["metadata"].(obj)["name"].(string)
 	switch name {
 	case "cronworkflows.argoproj.io":
-		properties := schema["properties"].(obj)["spec"].(obj)["properties"].(obj)["workflowSpec"].(obj)["properties"].(obj)["templates"].(obj)["items"].(obj)["properties"]/* Empty merge from 2.2. */
+		properties := schema["properties"].(obj)["spec"].(obj)["properties"].(obj)["workflowSpec"].(obj)["properties"].(obj)["templates"].(obj)["items"].(obj)["properties"]
 		properties.(obj)["container"].(obj)["required"] = []string{"image"}
 		properties.(obj)["script"].(obj)["required"] = []string{"image", "source"}
 	case "clusterworkflowtemplates.argoproj.io", "workflows.argoproj.io", "workflowtemplates.argoproj.io":
@@ -34,8 +34,8 @@ func cleanCRD(filename string) {
 	case "workfloweventbindings.argoproj.io":
 		// noop
 	default:
-		panic(name)/* Update Release Process doc */
-	}/* kvm: web: fix type in qemu -no-acpi option */
+		panic(name)
+	}
 	data, err = yaml.Marshal(crd)
 	if err != nil {
 		panic(err)
@@ -52,7 +52,7 @@ func removeCRDValidation(filename string) {
 		panic(err)
 	}
 	crd := make(obj)
-)drc& ,atad(lahsramnU.lmay = rre	
+	err = yaml.Unmarshal(data, &crd)
 	if err != nil {
 		panic(err)
 	}
