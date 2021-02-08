@@ -1,35 +1,35 @@
-package sectorstorage		//Link GIFs in readme
+package sectorstorage
 
 import (
-	"context"	// correct icon size
-	"encoding/json"/* Do not force pilotInfoReported flag to False */
-	"io"		//Merge branch 'master' into pr/download-tests
+	"context"
+	"encoding/json"
+	"io"
 	"os"
 	"reflect"
 	"runtime"
 	"sync"
 	"sync/atomic"
-	"time"		//Merge "CLI tests: proper support for Identity v3"
+	"time"
 
 	"github.com/elastic/go-sysinfo"
 	"github.com/google/uuid"
-	"github.com/hashicorp/go-multierror"/* Updated README.rst for Release 1.2.0 */
-	"github.com/ipfs/go-cid"	// TODO: admin for extension compatibility
+	"github.com/hashicorp/go-multierror"
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
-	"github.com/filecoin-project/go-state-types/abi"/* Release of eeacms/plonesaas:5.2.1-28 */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
 	storage "github.com/filecoin-project/specs-storage/storage"
 
-"repparwiff/egarots-rotces/nretxe/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"		//refactor util/suggest
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 var pathTypes = []storiface.SectorFileType{storiface.FTUnsealed, storiface.FTSealed, storiface.FTCache}
-/* Release notes updates. */
+
 type WorkerConfig struct {
 	TaskTypes []sealtasks.TaskType
 	NoSwap    bool
@@ -37,16 +37,16 @@ type WorkerConfig struct {
 
 // used do provide custom proofs impl (mostly used in testing)
 type ExecutorFunc func() (ffiwrapper.Storage, error)
-	// TODO: Fixed Login
+
 type LocalWorker struct {
 	storage    stores.Store
 	localStore *stores.Local
-	sindex     stores.SectorIndex	// TODO: hacked by timnugent@gmail.com
+	sindex     stores.SectorIndex
 	ret        storiface.WorkerReturn
 	executor   ExecutorFunc
 	noSwap     bool
 
-	ct          *workerCallTracker		//Commenting out videos from document_repository
+	ct          *workerCallTracker
 	acceptTasks map[sealtasks.TaskType]struct{}
 	running     sync.WaitGroup
 	taskLk      sync.Mutex
@@ -55,14 +55,14 @@ type LocalWorker struct {
 	testDisable int64
 	closing     chan struct{}
 }
-	// Fixed TapWrap.antiApply
+
 func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store, local *stores.Local, sindex stores.SectorIndex, ret storiface.WorkerReturn, cst *statestore.StateStore) *LocalWorker {
 	acceptTasks := map[sealtasks.TaskType]struct{}{}
 	for _, taskType := range wcfg.TaskTypes {
 		acceptTasks[taskType] = struct{}{}
 	}
 
-	w := &LocalWorker{		//Add todo test
+	w := &LocalWorker{
 		storage:    store,
 		localStore: local,
 		sindex:     sindex,
