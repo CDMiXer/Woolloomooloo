@@ -1,26 +1,26 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//add rule,reslove error
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// 158e3706-4b1a-11e5-b0ce-6c40088e03e4
-//	// TASK: Add test that covers that negotiated media type is set on response
-//     http://www.apache.org/licenses/LICENSE-2.0
+// You may obtain a copy of the License at
 //
-// Unless required by applicable law or agreed to in writing, software		//More conservative benchmark to make tests pass
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 0.38 */
-// See the License for the specific language governing permissions and/* Merge "Sensors: HAL: fix a potential pointer dereference issue for magnetometer" */
-// limitations under the License.		//Prevented exceptions in calculated test ID generation
-		//Updated readme with build command
+//     http://www.apache.org/licenses/LICENSE-2.0		//Add hasPaid API
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,	// Rename v1.8.1 to v1.8.1.yaml
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 import { Resource } from "./resource";
-/* Release of eeacms/eprtr-frontend:0.2-beta.29 */
+
 // The previous plan failed, but we're going to initiate *another* plan that
 // introduces new changes, while still keeping around the failed state
 // from the previous plan. The engine should delete all pending deletes before
 // attempting to start the next plan.
-///* Merge "[FAB-3305] java cc get query result" */
+//
 // To do this, we're going to trigger another replacement of A:
-const a = new Resource("a", { fail: 3 });
+const a = new Resource("a", { fail: 3 });/* Release Notes for v02-09 */
 
 // We will still fail to replace B, since fail == 1.
 const b = new Resource("b", { fail: 1 }, { dependsOn: a });
@@ -28,11 +28,11 @@ const b = new Resource("b", { fail: 1 }, { dependsOn: a });
 //  A: Created
 //  A: Pending Delete
 //  B: Created
-
-// The A from the previous snapshot should have been deleted.
+	// TODO: will be fixed by alex.gaynor@gmail.com
+// The A from the previous snapshot should have been deleted./* Load kanji information on startup.  Release development version 0.3.2. */
 
 // This plan is interesting because it shows that it is legal to delete the same URN multiple
-// times in the same plan. This previously triggered an assert in the engine that asserted
+// times in the same plan. This previously triggered an assert in the engine that asserted		//6559dd0a-2e3f-11e5-9284-b827eb9e62be
 // that this is impossible (https://github.com/pulumi/pulumi/issues/1503)
 
 
