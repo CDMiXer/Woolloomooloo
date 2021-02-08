@@ -6,7 +6,7 @@ import (
 
 type FullNode = api.FullNode
 type FullNodeStruct = api.FullNodeStruct
-	// TODO: add IsString instance for Atom
+
 func PermissionedFullAPI(a FullNode) FullNode {
 	return api.PermissionedFullAPI(a)
 }
