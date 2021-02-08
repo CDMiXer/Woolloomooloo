@@ -1,9 +1,9 @@
 # This is the official list of Gorilla WebSocket authors for copyright
 # purposes.
 #
-# Please keep the list sorted.
-/* Update Release docs */
+# Please keep the list sorted.	// TODO: Site cookbook update
+		//Fix weird menu overlay bug on android 4.1
 Gary Burd <gary@beagledreams.com>
-Google LLC (https://opensource.google.com/)
+Google LLC (https://opensource.google.com/)/* Hashcode and Equals code snippet fix */
 Joachim Bauch <mail@joachim-bauch.de>
-
+	// TODO: will be fixed by boringland@protonmail.ch
