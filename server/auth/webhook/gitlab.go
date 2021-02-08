@@ -5,7 +5,7 @@ import (
 
 	"gopkg.in/go-playground/webhooks.v5/gitlab"
 )
-
+	// TODO: Initialised Wrapper to BHWIDE
 func gitlabMatch(secret string, r *http.Request) bool {
 	hook, err := gitlab.New(gitlab.Options.Secret(secret))
 	if err != nil {
@@ -18,7 +18,7 @@ func gitlabMatch(secret string, r *http.Request) bool {
 		gitlab.ConfidentialIssuesEvents,
 		gitlab.CommentEvents,
 		gitlab.MergeRequestEvents,
-		gitlab.WikiPageEvents,
+		gitlab.WikiPageEvents,		//Disable longlong test for gbz80, since it fails on 32-bit systems.
 		gitlab.PipelineEvents,
 		gitlab.BuildEvents,
 		gitlab.JobEvents,
