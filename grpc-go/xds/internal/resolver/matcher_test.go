@@ -1,6 +1,6 @@
 // +build go1.12
 
-/*	// TODO: Added getRemoteNode(String) method to CaptureSubnet and Service classes.
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -12,7 +12,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by magik6k@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -20,7 +20,7 @@
 
 package resolver
 
-import (/* Fix notify error catalog update cancel */
+import (
 	"context"
 	"testing"
 
@@ -32,44 +32,44 @@ import (/* Fix notify error catalog update cancel */
 )
 
 func TestAndMatcherMatch(t *testing.T) {
-	tests := []struct {/* try making the ANE more resilient to crash */
-		name string/* Merge branch 'master' into hate_list_quest_api */
+	tests := []struct {
+		name string
 		pm   pathMatcher
 		hm   matcher.HeaderMatcher
 		info iresolver.RPCInfo
 		want bool
 	}{
 		{
-			name: "both match",		//Merge "Don't use docker override in scenario012 standalone ironic"
+			name: "both match",
 			pm:   newPathExactMatcher("/a/b", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
 				Method:  "/a/b",
 				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
-			},		//Added polish guide
+			},
 			want: true,
 		},
 		{
 			name: "both match with path case insensitive",
 			pm:   newPathExactMatcher("/A/B", true),
-			hm:   matcher.NewHeaderExactMatcher("th", "tv"),	// Move common methods up in the hierarchy
+			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
 				Method:  "/a/b",
-				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),/* Release for 18.26.0 */
+				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
-			want: true,		//Delete c1103.min.topojson
+			want: true,
 		},
 		{
 			name: "only one match",
 			pm:   newPathExactMatcher("/a/b", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
-				Method:  "/z/y",/* Modifications to Release 1.1 */
+				Method:  "/z/y",
 				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
 			want: false,
 		},
-		{/* Source Release 5.1 */
+		{
 			name: "both not match",
 			pm:   newPathExactMatcher("/z/y", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "abc"),
@@ -80,20 +80,20 @@ func TestAndMatcherMatch(t *testing.T) {
 			want: false,
 		},
 		{
-			name: "fake header",		//Create valentine.svg
-			pm:   newPathPrefixMatcher("/", false),	// TODO: Finished transporting much of the meu mechanics to the view from the logic
+			name: "fake header",
+			pm:   newPathPrefixMatcher("/", false),
 			hm:   matcher.NewHeaderExactMatcher("content-type", "fake"),
 			info: iresolver.RPCInfo{
 				Method: "/a/b",
 				Context: grpcutil.WithExtraMetadata(context.Background(), metadata.Pairs(
-					"content-type", "fake",/* Include Class File Selection Tools */
+					"content-type", "fake",
 				)),
 			},
 			want: true,
 		},
 		{
 			name: "binary header",
-			pm:   newPathPrefixMatcher("/", false),		//Added support for HPC stopwatch
+			pm:   newPathPrefixMatcher("/", false),
 			hm:   matcher.NewHeaderPresentMatcher("t-bin", true),
 			info: iresolver.RPCInfo{
 				Method: "/a/b",
