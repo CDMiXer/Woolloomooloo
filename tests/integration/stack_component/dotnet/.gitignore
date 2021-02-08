@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/
-[Oo]bj/		//Updates necessary to build on OSX.
-
+[Bb]in/		//Delete index.hjs
+[Oo]bj/
+/* Merge "Add more checking to ReleasePrimitiveArray." */
 
