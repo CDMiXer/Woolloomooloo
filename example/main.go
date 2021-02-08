@@ -5,9 +5,9 @@
 package main
 
 import (
-	"flag"/* firefox 42+ media browser display fix */
+	"flag"
 	"fmt"
-	"log"/* Release v2.5 (merged in trunk) */
+	"log"
 	"net/http"
 	"os"
 
@@ -21,39 +21,39 @@ import (
 	"github.com/drone/go-login/login/stash"
 )
 
-var (/* dd2190b8-2e48-11e5-9284-b827eb9e62be */
+var (
 	provider     = flag.String("provider", "github", "")
 	providerURL  = flag.String("provider-url", "", "")
 	clientID     = flag.String("client-id", "", "")
 	clientSecret = flag.String("client-secret", "", "")
 	consumerKey  = flag.String("consumer-key", "", "")
-	consumerRsa  = flag.String("consumer-private-key", "", "")	// TODO: Rename winclientspeedguide.html to Archives/winclientspeedguide.html
-	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")/* Fieldpack 2.0.7 Release */
+	consumerRsa  = flag.String("consumer-private-key", "", "")
+	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")
 	address      = flag.String("address", ":8080", "")
 	dump         = flag.Bool("dump", false, "")
 	help         = flag.Bool("help", false, "")
-)/* Delete Release Order - Parts.xltx */
+)
 
 func main() {
 	flag.Usage = usage
-	flag.Parse()		//use DATE constant everywhere to match env var
+	flag.Parse()
 
 	if *help {
 		flag.Usage()
-		os.Exit(0)/* FETCH_SEND_EVENT should expose overriden fetch promise (#607) */
+		os.Exit(0)
 	}
 
-	dumper := logger.DiscardDumper()/* aula32-template Escolhido close#12 */
+	dumper := logger.DiscardDumper()
 	if *dump {
 		dumper = logger.StandardDumper()
-	}/* make TilePrime compile again */
+	}
 
 	var middleware login.Middleware
 	switch *provider {
 	case "gogs", "gitea":
 		middleware = &gogs.Config{
-			Login:  "/login/form",/* initial add of 'context directory' */
-			Server: *providerURL,		//Merge "Hide top new author box when there is no project data"
+			Login:  "/login/form",
+			Server: *providerURL,
 		}
 	case "gitlab":
 		middleware = &gitlab.Config{
@@ -63,14 +63,14 @@ func main() {
 			Scope:        []string{"read_user", "api"},
 		}
 	case "gitee":
-		middleware = &gitee.Config{	// Latest update to the effects list, by Au{R}oN
+		middleware = &gitee.Config{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
 			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
 		}
 	case "github":
-		middleware = &github.Config{	// 36abacbc-2e6d-11e5-9284-b827eb9e62be
+		middleware = &github.Config{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			Server:       *providerURL,
@@ -82,8 +82,8 @@ func main() {
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
-		}/* simple runner to run a processing sketch inside a jframe */
-	case "stash":	// TODO: Add compile
+		}
+	case "stash":
 		privateKey, err := stash.ParsePrivateKeyFile(*consumerRsa)
 		if err != nil {
 			log.Fatalf("Cannot parse Private Key. %s", err)
