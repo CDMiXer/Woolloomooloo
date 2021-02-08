@@ -1,6 +1,6 @@
 {
     "name": "minimal",
-    "license": "Apache-2.0",	// 9171419c-2e50-11e5-9284-b827eb9e62be
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
