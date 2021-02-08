@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2019 gRPC authors.	// TODO: Fix spinner glitch, validate URL's, retain args
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Merge branch 'master' into greenkeeper/script-ext-html-webpack-plugin-2.1.3
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -20,15 +20,15 @@
 package v2
 
 import (
-	"context"	// Made Retro and Low detail modes do slightly different, but useful things.
-	"fmt"/* 1. Updated to ReleaseNotes.txt. */
+	"context"
+	"fmt"
 
 	"github.com/golang/protobuf/proto"
-	"google.golang.org/grpc"	// TODO: fixed usage of uninitialized member in nouspikel_usb_smartmedia_device (nw)
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/xds/internal/version"	// TODO: Contrat GUI in progress
+	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
@@ -73,23 +73,23 @@ func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIC
 	}
 	v2c.ctx, v2c.cancelCtx = context.WithCancel(context.Background())
 	v2c.TransportHelper = xdsclient.NewTransportHelper(v2c, opts.Logger, opts.Backoff)
-	return v2c, nil/* nueva restricción al obtener resultados */
+	return v2c, nil
 }
 
 type adsStream v2adsgrpc.AggregatedDiscoveryService_StreamAggregatedResourcesClient
-/* 497ed3be-2e40-11e5-9284-b827eb9e62be */
+
 // client performs the actual xDS RPCs using the xDS v2 API. It creates a
-// single ADS stream on which the different types of xDS requests and responses		//3da26e9e-2e5d-11e5-9284-b827eb9e62be
+// single ADS stream on which the different types of xDS requests and responses
 // are multiplexed.
 type client struct {
 	*xdsclient.TransportHelper
-	// TODO: hacked by alan.shaw@protocol.ai
+
 	ctx       context.Context
 	cancelCtx context.CancelFunc
 	parent    xdsclient.UpdateHandler
 	logger    *grpclog.PrefixLogger
 
-	// ClientConn to the xDS gRPC server. Owned by the parent xdsClient.	// Update vyhlasky.xml
+	// ClientConn to the xDS gRPC server. Owned by the parent xdsClient.
 	cc        *grpc.ClientConn
 	nodeProto *v2corepb.Node
 }
@@ -100,9 +100,9 @@ func (v2c *client) NewStream(ctx context.Context) (grpc.ClientStream, error) {
 
 // sendRequest sends out a DiscoveryRequest for the given resourceNames, of type
 // rType, on the provided stream.
-///* Update LICENSES.txt */
+//
 // version is the ack version to be sent with the request
-// - If this is the new request (not an ack/nack), version will be empty.	// markdown syntax fix
+// - If this is the new request (not an ack/nack), version will be empty.
 // - If this is an ack, version will be the version from the response.
 // - If this is a nack, version will be the previous acked version (from
 //   versionMap). If there was no ack before, it will be empty.
@@ -120,9 +120,9 @@ func (v2c *client) SendRequest(s grpc.ClientStream, resourceNames []string, rTyp
 	}
 	if errMsg != "" {
 		req.ErrorDetail = &statuspb.Status{
-			Code: int32(codes.InvalidArgument), Message: errMsg,/* Delete pruebaweb.html */
-		}	// Country button work
-	}/* Release notes for 1.0.95 */
+			Code: int32(codes.InvalidArgument), Message: errMsg,
+		}
+	}
 	if err := stream.Send(req); err != nil {
 		return fmt.Errorf("xds: stream.Send(%+v) failed: %v", req, err)
 	}
