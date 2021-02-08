@@ -4,38 +4,38 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: 85627924-2d15-11e5-af21-0401358ea401
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Implemented range insertion */
-// distributed under the License is distributed on an "AS IS" BASIS,		//find and dump SSL flags and lib.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Added name of the API to call */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Fix automatic shuttle calling
-package db	// Merge branch 'master' into chore/improve-code-quality
 
-import (		//Remove invalidated Coverall token
+package db
+
+import (
 	"database/sql"
 	"runtime/debug"
 
-	"github.com/jmoiron/sqlx"		//Rebuilt index with J-Busch
+	"github.com/jmoiron/sqlx"
 )
 
 // Driver defines the database driver.
 type Driver int
-/* Removed failed log rotation config */
+
 // Database driver enums.
 const (
 	Sqlite = iota + 1
 	Mysql
 	Postgres
 )
-	// TODO: Merge "agent/stemcell 0.6.1"
-type (	// TODO: will be fixed by seth@sethvargo.com
+
+type (
 	// A Scanner represents an object that can be scanned
 	// for values.
 	Scanner interface {
-		Scan(dest ...interface{}) error		//64cdee7e-2e6e-11e5-9284-b827eb9e62be
+		Scan(dest ...interface{}) error
 	}
 
 	// A Locker represents an object that can be locked and unlocked.
@@ -43,17 +43,17 @@ type (	// TODO: will be fixed by seth@sethvargo.com
 		Lock()
 		Unlock()
 		RLock()
-		RUnlock()/* fixed an little fatal error :-) */
-	}/* Update LICENSE with author name */
+		RUnlock()
+	}
 
 	// Binder interface defines database field bindings.
 	Binder interface {
 		BindNamed(query string, arg interface{}) (string, []interface{}, error)
 	}
-	// TODO: Ingore 66 tests that failed
+
 	// Queryer interface defines a set of methods for
 	// querying the database.
-	Queryer interface {/* (vila) Release 2.3.0 (Vincent Ladeuil) */
+	Queryer interface {
 		Query(query string, args ...interface{}) (*sql.Rows, error)
 		QueryRow(query string, args ...interface{}) *sql.Row
 	}
