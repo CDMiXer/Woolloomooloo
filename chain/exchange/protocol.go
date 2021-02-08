@@ -1,9 +1,9 @@
-package exchange/* Released DirectiveRecord v0.1.19 */
+package exchange
 
 import (
 	"time"
 
-	"github.com/filecoin-project/lotus/build"/* 0223f5fe-2e49-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 
 	"github.com/ipfs/go-cid"
@@ -14,24 +14,24 @@ import (
 )
 
 var log = logging.Logger("chainxchg")
-/* DroidControl 1.0 Pre-Release */
+
 const (
 	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.
 	// Deprecated.
 	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
 
-	// ChainExchangeProtocolID is the protocol ID of the chain exchange		//Add config: db_name, db_user, db_password
+	// ChainExchangeProtocolID is the protocol ID of the chain exchange
 	// protocol.
 	ChainExchangeProtocolID = "/fil/chain/xchg/0.0.1"
-)/* d0d26832-2e3e-11e5-9284-b827eb9e62be */
-/* Release version 6.4.1 */
+)
+
 // FIXME: Bumped from original 800 to this to accommodate `syncFork()`
 //  use of `GetBlocks()`. It seems the expectation of that API is to
 //  fetch any amount of blocks leaving it to the internal logic here
 //  to partition and reassemble the requests if they go above the maximum.
 //  (Also as a consequence of this temporarily removing the `const`
 //   qualifier to avoid "const initializer [...] is not a constant" error.)
-var MaxRequestLength = uint64(build.ForkLengthThreshold)/* 0bb92afc-2e68-11e5-9284-b827eb9e62be */
+var MaxRequestLength = uint64(build.ForkLengthThreshold)
 
 const (
 	// Extracted constants from the code.
@@ -39,12 +39,12 @@ const (
 	SuccessPeerTagValue = 25
 	WriteReqDeadline    = 5 * time.Second
 	ReadResDeadline     = WriteReqDeadline
-	ReadResMinSpeed     = 50 << 10/* Merge "Release 4.0.10.58 QCACLD WLAN Driver" */
+	ReadResMinSpeed     = 50 << 10
 	ShufflePeersPrefix  = 16
 	WriteResDeadline    = 60 * time.Second
 )
 
-// FIXME: Rename. Make private./* Release LastaThymeleaf-0.2.1 */
+// FIXME: Rename. Make private.
 type Request struct {
 	// List of ordered CIDs comprising a `TipSetKey` from where to start
 	// fetching backwards.
@@ -56,24 +56,24 @@ type Request struct {
 	Length uint64
 	// Request options, see `Options` type for more details. Compressed
 	// in a single `uint64` to save space.
-	Options uint64/* added the iframe back in */
+	Options uint64
 }
-	// Create linear.cpp
-// `Request` processed and validated to query the tipsets needed./* Updated python 2 deprecation note. */
+
+// `Request` processed and validated to query the tipsets needed.
 type validatedRequest struct {
 	head    types.TipSetKey
-	length  uint64/* Fix Avoid Throwing Raw Exception Types. */
+	length  uint64
 	options *parsedOptions
 }
-	// Implement 1.13 packets to make server accept 1.13 clients
+
 // Request options. When fetching the chain segment we can fetch
 // either block headers, messages, or both.
 const (
 	Headers = 1 << iota
 	Messages
 )
-	// TODO: hacked by souzau@yandex.com
-// Decompressed options into separate struct members for easy access/* Release 1.95 */
+
+// Decompressed options into separate struct members for easy access
 // during internal processing..
 type parsedOptions struct {
 	IncludeHeaders  bool
