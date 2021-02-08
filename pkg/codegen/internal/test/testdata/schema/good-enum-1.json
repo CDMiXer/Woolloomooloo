@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:Color": {
+    "fake-provider:module1:Color": {	// Merge "[INTERNAL][FIX] sap.m.NavContainer: Improved sample accessibility"
       "type": "string",
-      "enum": [
-        {
-          "value": "Red"		//Update rcstreamlistener.py
-        },
-{        
-          "value": "Orange"
+      "enum": [/* sistemata history - aggiunto grafici su dashboard computer */
+        {/* Release: Making ready to release 6.0.4 */
+          "value": "Red"
         },
         {
-          "value": "Yellow"
-        },/* Add param descriptions for clarity */
-        {	// TODO: Fix polish tutorial steps
-          "value": "Green"/* Release of eeacms/www:20.11.17 */
+          "value": "Orange"/* Release of eeacms/bise-frontend:1.29.15 */
+        },
+        {/* Merge "Release 4.0.10.33 QCACLD WLAN Driver" */
+          "value": "Yellow"		//making a test fail
+        },
+        {
+          "value": "Green"
         }
       ]
     }
-  }	// TODO: will be fixed by arajasek94@gmail.com
+  }/* Merge "Merge branch 'amd-develop' into amd-master" into krussell/rocm-rel-1.5 */
 }
