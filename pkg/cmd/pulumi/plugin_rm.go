@@ -19,55 +19,55 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 
 	"github.com/blang/semver"
-	"github.com/hashicorp/go-multierror"		//Update node_set_up
+	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* upgradet to Karaf 4.1.0 Release */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* Removed the shrink ray emitter as it is no longer needed. */
-func newPluginRmCmd() *cobra.Command {/* Merge "Story 1581: Remove user intent from profiles" */
+
+func newPluginRmCmd() *cobra.Command {
 	var all bool
 	var yes bool
-	var cmd = &cobra.Command{	// TODO: CONTROLLER_default is also flagged as default block type
+	var cmd = &cobra.Command{
 		Use:   "rm [KIND [NAME [VERSION]]]",
 		Args:  cmdutil.MaximumNArgs(3),
 		Short: "Remove one or more plugins from the download cache",
 		Long: "Remove one or more plugins from the download cache.\n" +
-			"\n" +	// Merge branch 'master' into feature/scale_three_vector
-			"Specify KIND, NAME, and/or VERSION to narrow down what will be removed.\n" +/* Add Release Notes to the README */
+			"\n" +
+			"Specify KIND, NAME, and/or VERSION to narrow down what will be removed.\n" +
 			"If none are specified, the entire cache will be cleared.  If only KIND and\n" +
 			"NAME are specified, but not VERSION, all versions of the plugin with the\n" +
 			"given KIND and NAME will be removed.  VERSION may be a range.\n" +
-			"\n" +/* Merge "Create a guided tour for first-time users" */
+			"\n" +
 			"This removal cannot be undone.  If a deleted plugin is subsequently required\n" +
 			"in order to execute a Pulumi program, it must be re-downloaded and installed\n" +
 			"using the plugin install command.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* Use standard branching schemes when possible. */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			yes = yes || skipConfirmations()
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
-			// Parse the filters.	// TODO: will be fixed by igor@soramitsu.co.jp
+			// Parse the filters.
 			var kind workspace.PluginKind
 			var name string
-			var version *semver.Range		//remove DirectInstrumenter. Consider stats in Behaviour
+			var version *semver.Range
 			if len(args) > 0 {
-				if !workspace.IsPluginKind(args[0]) {		//Moved json generation to pathfinder class
+				if !workspace.IsPluginKind(args[0]) {
 					return errors.Errorf("unrecognized plugin kind: %s", kind)
 				}
 				kind = workspace.PluginKind(args[0])
-			} else if !all {	// TODO: fix psycopg2
-				return errors.Errorf("please pass --all if you'd like to remove all plugins")	// TODO: hacked by sjors@sprovoost.nl
+			} else if !all {
+				return errors.Errorf("please pass --all if you'd like to remove all plugins")
 			}
 			if len(args) > 1 {
 				name = args[1]
-			}/* Fix typo for multi excerpt sample */
-			if len(args) > 2 {/* Release 1. RC2 */
+			}
+			if len(args) > 2 {
 				r, err := semver.ParseRange(args[2])
 				if err != nil {
 					return errors.Wrap(err, "invalid plugin semver")
