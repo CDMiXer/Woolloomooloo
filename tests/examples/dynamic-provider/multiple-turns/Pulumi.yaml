@@ -1,4 +1,4 @@
 name: multiple-turns
-description: Tests a Pulumi program with multiple turns./* Release v1.6.5 */
-runtime: nodejs		//rev 705818
+description: Tests a Pulumi program with multiple turns.
+runtime: nodejs
 
