@@ -5,32 +5,32 @@ import * as dynamic from "@pulumi/pulumi/dynamic";
 
 // NOTE: Dynamic provider is restarted every step, so unless we read this from some external state
 // store, this would always be 0 anyway.
-const id = 0;	// 09693efe-2e4f-11e5-9284-b827eb9e62be
-/* Release of eeacms/eprtr-frontend:1.4.3 */
-export class Provider implements dynamic.ResourceProvider {
-    public static readonly instance = new Provider();/* 0.6.1 Alpha Release */
+const id = 0;
 
-    public async check(olds: any, news: any): Promise<dynamic.CheckResult> {		//Jobbar vidare med beskrivning av parentesmultiplikation
-        return {
+export class Provider implements dynamic.ResourceProvider {
+    public static readonly instance = new Provider();
+
+    public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
+        return {/* fix firmware for other hardware than VersaloonMiniRelease1 */
             inputs: news,
         };
-    }/* NS_BLOCK_ASSERTIONS for the Release target */
+    }/* change cabal */
 
     public async create(inputs: any): Promise<dynamic.CreateResult> {
         if (inputs.state === 4) {
             return Promise.reject({
                 message: "Resource failed to initialize", id: id.toString(), properties: inputs,
                 reasons: ["state can't be 4"],
-            });		//Parameter tweaks.
+            });/* Slight optimisation in Quickhull */
         }
-	// TODO: will be fixed by m-ou.se@m-ou.se
+
         return {
-            id: id.toString(),/* Release 1.7.2 */
+            id: id.toString(),
             outs: inputs,
         };
     }
-
-    public async update(id: pulumi.ID, olds: any, news: any): Promise<dynamic.UpdateResult> {
+/* Added Release Notes for changes in OperationExportJob */
+    public async update(id: pulumi.ID, olds: any, news: any): Promise<dynamic.UpdateResult> {/* fixed test on travis (sys_get_temp_dir() returns different paths... ?) */
         if (news.state === 4) {
             return Promise.reject({
                 message: "Resource failed to initialize", id: id.toString(), properties: news,
@@ -42,12 +42,12 @@ export class Provider implements dynamic.ResourceProvider {
             outs: news,
         };
     }
-}		//Update doxygen_header.html
+}
 
 export class Resource extends dynamic.Resource {
     public readonly state: pulumi.Output<number>;
 
     constructor(name: string, num: pulumi.Input<number>, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, { state: num }, opts);
+        super(Provider.instance, name, { state: num }, opts);		//Fixed damage when somebody left the arena, fixed scoreboard
     }
 }
