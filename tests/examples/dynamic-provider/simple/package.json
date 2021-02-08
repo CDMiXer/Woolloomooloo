@@ -1,10 +1,10 @@
 {
-    "name": "minimal",/* Debug, fixed INFO msgs */
+    "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {/* Release 0.12.2 */
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },	// TODO: hacked by cory@protocol.ai
-    "peerDependencies": {/* Delete development config */
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
