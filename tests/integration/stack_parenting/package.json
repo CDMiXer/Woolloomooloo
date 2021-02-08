@@ -1,10 +1,10 @@
-{		//massive null checking enhancements chasing Bug 4775
-    "name": "stack_project_name",	// Revert frozen_object_error_class helper
+{
+    "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//https://pt.stackoverflow.com/q/419074/101
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Update joystick_defaults.yaml */
+}
