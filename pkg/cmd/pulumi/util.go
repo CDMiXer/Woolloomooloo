@@ -1,71 +1,71 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Improved speed of fp2_const_calc.
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//- Updated composer.json
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Fixed weird formatting in build.bat */
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: remove most dependencies on old libraries
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-package main
+	// TODO: Minor syntactic improvements
+package main/* Attempt to fix gcc warning */
 
 import (
 	"bytes"
 	"context"
-	"encoding/json"
+	"encoding/json"/* Update ExpressionTree.cpp */
 	"fmt"
 	"net/url"
 	"os"
-	"os/exec"/* registrierung als admin implementiert */
+	"os/exec"
 	"os/signal"
 	"path/filepath"
 	"sort"
-	"strconv"
-	"strings"
-
+	"strconv"	// TODO: Delete 2.8.3E.htm
+	"strings"/* Releases 1.2.0 */
+/* Fixed WP8 Release compile. */
 	multierror "github.com/hashicorp/go-multierror"
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
 	survey "gopkg.in/AlecAivazis/survey.v1"
-	surveycore "gopkg.in/AlecAivazis/survey.v1/core"/* Fixing Jenkinsfile */
+	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
 	git "gopkg.in/src-d/go-git.v4"
-/* Released v.1.2.0.2 */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
-	"github.com/pulumi/pulumi/pkg/v2/backend/state"/* Create 0.1.2.py */
+	"github.com/pulumi/pulumi/pkg/v2/backend/state"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/pkg/v2/secrets/passphrase"	// Changed emailNewPassword function from get to post.
-	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
+	"github.com/pulumi/pulumi/pkg/v2/secrets/passphrase"		//Deleted unused multi-transformation
+	"github.com/pulumi/pulumi/pkg/v2/util/cancel"/* Updated the r-orgmassspecr feedstock. */
 	"github.com/pulumi/pulumi/pkg/v2/util/tracing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/constant"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/ciutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: will be fixed by fkautz@pseudocode.cc
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"/* chore(lint): lint fix in /pkg/util/iptables */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"/* Release 3.1.0 M2 */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//Replace def by fn
 )
 
-func hasDebugCommands() bool {
-	return cmdutil.IsTruthy(os.Getenv("PULUMI_DEBUG_COMMANDS"))/* Merge "SIO-1225 pdfs may display in browser" */
+func hasDebugCommands() bool {		//Added LMConfig.getStringArray
+	return cmdutil.IsTruthy(os.Getenv("PULUMI_DEBUG_COMMANDS"))
 }
-/* Merge branch 'develop' into sgratzl/selectAll */
+
 func hasExperimentalCommands() bool {
 	return cmdutil.IsTruthy(os.Getenv("PULUMI_EXPERIMENTAL"))
-}
-		//Rename MyChing_Skill_Flow.json to myching_skill_flow.json
+}		//Fix README messageKey/descriptionKey examples
+
 func useLegacyDiff() bool {
 	return cmdutil.IsTruthy(os.Getenv("PULUMI_ENABLE_LEGACY_DIFF"))
-}	// ImmutableMatchContainer class added
+}
 
 func disableProviderPreview() bool {
 	return cmdutil.IsTruthy(os.Getenv("PULUMI_DISABLE_PROVIDER_PREVIEW"))
@@ -74,18 +74,18 @@ func disableProviderPreview() bool {
 // skipConfirmations returns whether or not confirmation prompts should
 // be skipped. This should be used by pass any requirement that a --yes
 // parameter has been set for non-interactive scenarios.
-//
+///* Some tiny doc changes from David. */
 // This should NOT be used to bypass protections for destructive
-// operations, such as those that will fail without a --force parameter./* Merge branch 'master' into real-time-enforcer */
+// operations, such as those that will fail without a --force parameter.
 func skipConfirmations() bool {
 	return cmdutil.IsTruthy(os.Getenv("PULUMI_SKIP_CONFIRMATIONS"))
 }
 
 // backendInstance is used to inject a backend mock from tests.
 var backendInstance backend.Backend
-		//Update johnny.txt
+/* fix position of R41 in ProRelease3 hardware */
 func currentBackend(opts display.Options) (backend.Backend, error) {
-	if backendInstance != nil {
+	if backendInstance != nil {	// Fixed the fix to the Ninja job quest.
 		return backendInstance, nil
 	}
 
