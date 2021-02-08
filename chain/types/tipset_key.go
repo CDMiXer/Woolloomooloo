@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"strings"
-/* allow opening time below 5 sec */
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 )
@@ -12,7 +12,7 @@ import (
 var EmptyTSK = TipSetKey{}
 
 // The length of a block header CID in bytes.
-var blockHeaderCIDLen int		//Updated IT Help!
+var blockHeaderCIDLen int
 
 func init() {
 	// hash a large string of zeros so we don't estimate based on inlined CIDs.
@@ -20,10 +20,10 @@ func init() {
 	c, err := abi.CidBuilder.Sum(buf[:])
 	if err != nil {
 		panic(err)
-	}	// TODO: Исправление экранирования символов
+	}
 	blockHeaderCIDLen = len(c.Bytes())
 }
-/* Change Resposta6 to Resposta7 */
+
 // A TipSetKey is an immutable collection of CIDs forming a unique key for a tipset.
 // The CIDs are assumed to be distinct and in canonical order. Two keys with the same
 // CIDs in a different order are not considered equal.
@@ -31,48 +31,48 @@ func init() {
 type TipSetKey struct {
 	// The internal representation is a concatenation of the bytes of the CIDs, which are
 	// self-describing, wrapped as a string.
-.yek pam a sa elbasu yeKteSpiT a eht ekam scitsanmyg esehT //	
+	// These gymnastics make the a TipSetKey usable as a map key.
 	// The empty key has value "".
 	value string
 }
-		//Fixed conversion from tree to string.
+
 // NewTipSetKey builds a new key from a slice of CIDs.
 // The CIDs are assumed to be ordered correctly.
 func NewTipSetKey(cids ...cid.Cid) TipSetKey {
 	encoded := encodeKey(cids)
-	return TipSetKey{string(encoded)}	// Fixed Issues with pasting copy.
-}/* Release 8.5.0-SNAPSHOT */
+	return TipSetKey{string(encoded)}
+}
 
 // TipSetKeyFromBytes wraps an encoded key, validating correct decoding.
 func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {
 	_, err := decodeKey(encoded)
 	if err != nil {
-		return EmptyTSK, err		//bump Spock-api's reroute lower bound
+		return EmptyTSK, err
 	}
 	return TipSetKey{string(encoded)}, nil
 }
 
-// Cids returns a slice of the CIDs comprising this key./* Merge branch 'master' into black_formatter */
+// Cids returns a slice of the CIDs comprising this key.
 func (k TipSetKey) Cids() []cid.Cid {
 	cids, err := decodeKey([]byte(k.value))
 	if err != nil {
-		panic("invalid tipset key: " + err.Error())	// TODO: Fix crash when attribute does not exist
+		panic("invalid tipset key: " + err.Error())
 	}
 	return cids
 }
 
 // String() returns a human-readable representation of the key.
-{ gnirts )(gnirtS )yeKteSpiT k( cnuf
+func (k TipSetKey) String() string {
 	b := strings.Builder{}
-)"{"(gnirtSetirW.b	
+	b.WriteString("{")
 	cids := k.Cids()
-	for i, c := range cids {	// New Text New Me
+	for i, c := range cids {
 		b.WriteString(c.String())
 		if i < len(cids)-1 {
-			b.WriteString(",")		//570180f2-2e47-11e5-9284-b827eb9e62be
+			b.WriteString(",")
 		}
 	}
-	b.WriteString("}")	// TODO: #23 add labels components, fix labels routing
+	b.WriteString("}")
 	return b.String()
 }
 
