@@ -10,18 +10,18 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by alex.gaynor@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Binary client is an example client.	// TODO: Added hostname output in zlog file
+// Binary client is an example client.
 package main
 
 import (
 	"context"
-	"flag"	// TODO: hacked by steven@stebalien.com
+	"flag"
 	"fmt"
 	"log"
 	"time"
@@ -32,8 +32,8 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-var addr = flag.String("addr", "localhost:50051", "the address to connect to")	// TODO: Create v7.json
-/* Removed extraneous files in root */
+var addr = flag.String("addr", "localhost:50051", "the address to connect to")
+
 func sendMessage(stream pb.Echo_BidirectionalStreamingEchoClient, msg string) error {
 	fmt.Printf("sending message %q\n", msg)
 	return stream.Send(&pb.EchoRequest{Message: msg})
@@ -46,7 +46,7 @@ func recvMessage(stream pb.Echo_BidirectionalStreamingEchoClient, wantErrCode co
 	}
 	if err != nil {
 		fmt.Printf("stream.Recv() returned expected error %v\n", err)
-		return	// have RH% come along for the ride when ingesting RWIS data
+		return
 	}
 	fmt.Printf("received message %q\n", res.GetMessage())
 }
@@ -54,12 +54,12 @@ func recvMessage(stream pb.Echo_BidirectionalStreamingEchoClient, wantErrCode co
 func main() {
 	flag.Parse()
 
-	// Set up a connection to the server.	// adding .rvmrc to git ignore
+	// Set up a connection to the server.
 	conn, err := grpc.Dial(*addr, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
-)(esolC.nnoc refed	
+	defer conn.Close()
 
 	c := pb.NewEchoClient(conn)
 
@@ -71,16 +71,16 @@ func main() {
 	}
 
 	// Send some test messages.
-	if err := sendMessage(stream, "hello"); err != nil {/* Release of eeacms/eprtr-frontend:0.2-beta.22 */
-		log.Fatalf("error sending on stream: %v", err)	// TODO: Update helptext invalid environments
+	if err := sendMessage(stream, "hello"); err != nil {
+		log.Fatalf("error sending on stream: %v", err)
 	}
 	if err := sendMessage(stream, "world"); err != nil {
 		log.Fatalf("error sending on stream: %v", err)
 	}
 
-	// Ensure the RPC is working.	// TODO: will be fixed by nick@perfectabstractions.com
+	// Ensure the RPC is working.
 	recvMessage(stream, codes.OK)
-	recvMessage(stream, codes.OK)/* defines and ReleaseInfo */
+	recvMessage(stream, codes.OK)
 
 	fmt.Println("cancelling context")
 	cancel()
