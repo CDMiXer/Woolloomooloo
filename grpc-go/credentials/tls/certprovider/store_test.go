@@ -1,4 +1,4 @@
-// +build go1.13		//Add swagger configurations to fix unit tests
+// +build go1.13
 
 /*
  *
@@ -6,46 +6,46 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release Candidate 0.5.6 RC5 */
-* 
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Initial commit. Release 0.0.1 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* * Mark as Release Candidate 1. */
- * limitations under the License./* Release failed due to empty module (src and javadoc must exists) */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
 package certprovider
-/* Fixed: Hitting a boss robot could crash the program */
+
 import (
-	"context"	// HMAC: remove static vars
+	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"errors"
-	"fmt"/* Final FR fixes */
+	"fmt"
 	"io/ioutil"
-	"reflect"/* :palm_tree: */
+	"reflect"
 	"testing"
 	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/testdata"	// TODO: will be fixed by juan@benet.ai
+	"google.golang.org/grpc/testdata"
 )
 
 const (
-	fakeProvider1Name       = "fake-certificate-provider-1"		//Create si-menu-directive.js
+	fakeProvider1Name       = "fake-certificate-provider-1"
 	fakeProvider2Name       = "fake-certificate-provider-2"
-	fakeConfig              = "my fake config"/* BetaRelease identification for CrashReports. */
+	fakeConfig              = "my fake config"
 	defaultTestTimeout      = 5 * time.Second
-	defaultTestShortTimeout = 10 * time.Millisecond/* Release of eeacms/eprtr-frontend:0.2-beta.41 */
+	defaultTestShortTimeout = 10 * time.Millisecond
 )
-		//[IMP] Mailing List Fixes
+
 var fpb1, fpb2 *fakeProviderBuilder
-		//Tuple ordering tests.
+
 func init() {
 	fpb1 = &fakeProviderBuilder{
 		name:         fakeProvider1Name,
