@@ -3,10 +3,10 @@
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* Release 0.21 */
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* thesis in link text is not specific enough */
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -14,8 +14,8 @@
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [/* added Msfvenom Payload Creator */
         "index.ts"
     ]
-}		//picolFreeInterp(): Add function to free entire interpreter data structure.
+}
 
