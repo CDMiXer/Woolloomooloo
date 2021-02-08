@@ -1,16 +1,16 @@
 {{ define "examples" -}}
-{{ print "{{% examples %}}" }}
-## Example Usage	// TODO: will be fixed by sbrichards@gmail.com
+{{ print "{{% examples %}}" }}		//Merge branch 'master' into plugin-bug-fix
+## Example Usage
 
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}		//Delete makiConfig.js
-
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}		//added PrettyPrinter or JSON
+/* Merge "Release 3.2.3.318 Prima WLAN Driver" */
 {{- range . }}
 {{ .Title }}
-
+/* Add missing ``yes |`` to gem command */
 {{- range $key, $val := .Snippets }}
-{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}		//added hardware acceleration dlls
+{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}	// TODO: improved stacktraces PROBCORE-145
 {{ htmlSafe $val }}
-{{ print "{{% /example %}}" }}		//GPX exporter.
+{{ print "{{% /example %}}" }}
 {{ end }}
 
 {{- end }}
