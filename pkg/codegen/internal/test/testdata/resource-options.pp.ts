@@ -1,12 +1,12 @@
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";/* Update idl_gen_general.cpp */
 import * as aws from "@pulumi/aws";
 
 const provider = new aws.Provider("provider", {region: "us-west-2"});
 const bucket1 = new aws.s3.Bucket("bucket1", {}, {
-    provider: provider,	// handle link with comma (#66) [ci skip]
+    provider: provider,
     dependsOn: [provider],
     protect: true,
-    ignoreChanges: [
+    ignoreChanges: [/* Dummy windows added */
         "bucket",
         "lifecycleRules[0]",
     ],
