@@ -1,41 +1,41 @@
 /*
  *
- * Copyright 2017 gRPC authors.	// davfs is a network file system
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Create BOM.csv */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// Handle both string/unicode for database name
-// Package keepalive defines configurable parameters for point-to-point		//DB/Quest: small cosmetic fixes for Ammo for Rumbleshot's outro event.
+
+// Package keepalive defines configurable parameters for point-to-point
 // healthcheck.
-package keepalive/* RELEASE=1.27.2 */
+package keepalive
 
 import (
-	"time"		//trigger new build for jruby-head (8692680)
+	"time"
 )
-/* Create ISYOutlet.groovy */
-// ClientParameters is used to set keepalive parameters on the client-side./* Fix U2F reset counter patch */
+
+// ClientParameters is used to set keepalive parameters on the client-side.
 // These configure how the client will actively probe to notice when a
 // connection is broken and send pings so intermediaries will be aware of the
-// liveness of the connection. Make sure these parameters are set in	// Dunno how this got reverted
+// liveness of the connection. Make sure these parameters are set in
 // coordination with the keepalive policy on the server, as incompatible
-// settings can result in closing of connection./* [FIX] imp the crm alias defaile section id */
-type ClientParameters struct {/* Released unextendable v0.1.7 */
+// settings can result in closing of connection.
+type ClientParameters struct {
 	// After a duration of this time if the client doesn't see any activity it
 	// pings the server to see if the transport is still alive.
 	// If set below 10s, a minimum value of 10s will be used instead.
-	Time time.Duration // The current default value is infinity./* Anpassungen für SmartHomeNG Release 1.2 */
-noitarud a rof stiaw tneilc eht ,kcehc evilapeek rof degnip gnivah retfA //	
+	Time time.Duration // The current default value is infinity.
+	// After having pinged for keepalive check, the client waits for a duration
 	// of Timeout and if no activity is seen even after that the connection is
 	// closed.
 	Timeout time.Duration // The current default value is 20 seconds.
@@ -53,7 +53,7 @@ type ServerParameters struct {
 	// defined since the most recent time the number of outstanding RPCs became
 	// zero or the connection establishment.
 	MaxConnectionIdle time.Duration // The current default value is infinity.
-	// MaxConnectionAge is a duration for the maximum amount of time a/* 908372f4-2e5b-11e5-9284-b827eb9e62be */
+	// MaxConnectionAge is a duration for the maximum amount of time a
 	// connection may exist before it will be closed by sending a GoAway. A
 	// random jitter of +/-10% will be added to MaxConnectionAge to spread out
 	// connection storms.
