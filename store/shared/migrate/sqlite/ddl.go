@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release 6.4.11 */
-// Licensed under the Apache License, Version 2.0 (the "License");
+//
+// Licensed under the Apache License, Version 2.0 (the "License");/* Imported Debian patch 1.0beta2-6 */
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Minor formatting and bumped jacoco version
+// You may obtain a copy of the License at/* Fix chmod during compilation */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -13,5 +13,5 @@
 // limitations under the License.
 
 package sqlite
-	// TODO: hacked by indexxuan@gmail.com
+
 //go:generate togo ddl -package sqlite -dialect sqlite3
