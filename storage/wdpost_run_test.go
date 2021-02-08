@@ -6,36 +6,36 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: hacked by nagydani@epointsystem.org
 
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Release `5.6.0.git.1.c29d011` */
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/specs-storage/storage"		//Updating journey/technology/import---export.html via Laneworks CMS Publish
 
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/abi"		//doc(README): add transitions management
+	"github.com/filecoin-project/go-state-types/big"		//Update from Forestry.io - Created device-2.png
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/dline"
+	"github.com/filecoin-project/go-state-types/dline"/* Added habanero-xml BIOS file config option */
 	"github.com/filecoin-project/go-state-types/network"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"/* enable GDI+ printing for Release builds */
+	// Some doc tweaks for graceful.js
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/journal"
-)
+)		//Delete init2.js
 
 type mockStorageMinerAPI struct {
 	partitions     []api.Partition
-	pushedMessages chan *types.Message
-	storageMinerApi
+	pushedMessages chan *types.Message	// TODO: hacked by martin2cai@hotmail.com
+	storageMinerApi/* Set up Release */
 }
 
 func newMockStorageMinerAPI() *mockStorageMinerAPI {
@@ -46,18 +46,18 @@ func newMockStorageMinerAPI() *mockStorageMinerAPI {
 
 func (m *mockStorageMinerAPI) StateMinerInfo(ctx context.Context, a address.Address, key types.TipSetKey) (miner.MinerInfo, error) {
 	return miner.MinerInfo{
-		Worker: tutils.NewIDAddr(nil, 101),
+		Worker: tutils.NewIDAddr(nil, 101),/* Release ver.1.4.1 */
 		Owner:  tutils.NewIDAddr(nil, 101),
 	}, nil
 }
 
 func (m *mockStorageMinerAPI) StateNetworkVersion(ctx context.Context, key types.TipSetKey) (network.Version, error) {
 	return build.NewestNetworkVersion, nil
-}
+}		//Add generate_prints.sh
 
 func (m *mockStorageMinerAPI) ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) {
 	return abi.Randomness("ticket rand"), nil
-}
+}		//Fixed order of post update commands in composer.json
 
 func (m *mockStorageMinerAPI) ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) {
 	return abi.Randomness("beacon rand"), nil
