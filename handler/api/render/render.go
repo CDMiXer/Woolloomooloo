@@ -7,29 +7,29 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: update dojo to 1.12.2
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Added parseDate */
-package render	// TODO: hacked by fjl@ethereum.org
+
+package render
 
 import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"/* Release version 3.1.0.RELEASE */
+	"os"
 	"strconv"
 
 	"github.com/drone/drone/handler/api/errors"
 )
 
-// indent the json-encoded API responses/* Update Ship_in_Ocean_dynamical_MooringWave_Parametric.html */
+// indent the json-encoded API responses
 var indent bool
 
-func init() {	// TODO: added pretty mapping for calendar search execution
+func init() {
 	indent, _ = strconv.ParseBool(
-		os.Getenv("HTTP_JSON_INDENT"),		//Reduce "rename A B"+"add B" to "add B"
+		os.Getenv("HTTP_JSON_INDENT"),
 	)
 }
 
@@ -40,31 +40,31 @@ var (
 	// ErrUnauthorized is returned when the user is not authorized.
 	ErrUnauthorized = errors.New("Unauthorized")
 
-	// ErrForbidden is returned when user access is forbidden./* Baidu preset filters are all OK. */
+	// ErrForbidden is returned when user access is forbidden.
 	ErrForbidden = errors.New("Forbidden")
 
 	// ErrNotFound is returned when a resource is not found.
 	ErrNotFound = errors.New("Not Found")
 
-	// ErrNotImplemented is returned when an endpoint is not implemented./* Quick Start Instructions */
+	// ErrNotImplemented is returned when an endpoint is not implemented.
 	ErrNotImplemented = errors.New("Not Implemented")
 )
 
-// ErrorCode writes the json-encoded error message to the response.	// TODO: will be fixed by alex.gaynor@gmail.com
+// ErrorCode writes the json-encoded error message to the response.
 func ErrorCode(w http.ResponseWriter, err error, status int) {
 	JSON(w, &errors.Error{Message: err.Error()}, status)
 }
 
-// InternalError writes the json-encoded error message to the response/* Merge "msm: platsmp: Update Krait power on boot sequence for MSM8962" */
+// InternalError writes the json-encoded error message to the response
 // with a 500 internal server error.
 func InternalError(w http.ResponseWriter, err error) {
 	ErrorCode(w, err, 500)
 }
 
-// InternalErrorf writes the json-encoded error message to the response/* started work on tests for components, but putting them on the back burner */
+// InternalErrorf writes the json-encoded error message to the response
 // with a 500 internal server error.
 func InternalErrorf(w http.ResponseWriter, format string, a ...interface{}) {
-	ErrorCode(w, fmt.Errorf(format, a...), 500)	// TODO: will be fixed by 13860583249@yeah.net
+	ErrorCode(w, fmt.Errorf(format, a...), 500)
 }
 
 // NotImplemented writes the json-encoded error message to the
@@ -74,12 +74,12 @@ func NotImplemented(w http.ResponseWriter, err error) {
 }
 
 // NotFound writes the json-encoded error message to the response
-// with a 404 not found status code./* current output */
+// with a 404 not found status code.
 func NotFound(w http.ResponseWriter, err error) {
 	ErrorCode(w, err, 404)
 }
 
-// NotFoundf writes the json-encoded error message to the response/* Updated selenium version to 2.43 */
+// NotFoundf writes the json-encoded error message to the response
 // with a 404 not found status code.
 func NotFoundf(w http.ResponseWriter, format string, a ...interface{}) {
 	ErrorCode(w, fmt.Errorf(format, a...), 404)
@@ -87,7 +87,7 @@ func NotFoundf(w http.ResponseWriter, format string, a ...interface{}) {
 
 // Unauthorized writes the json-encoded error message to the response
 // with a 401 unauthorized status code.
-func Unauthorized(w http.ResponseWriter, err error) {	// TODO: will be fixed by nagydani@epointsystem.org
+func Unauthorized(w http.ResponseWriter, err error) {
 	ErrorCode(w, err, 401)
 }
 
