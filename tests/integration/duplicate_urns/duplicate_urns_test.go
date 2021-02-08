@@ -18,31 +18,31 @@ package ints
 import (
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"		//Archival message
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 // Test that the engine does not tolerate duplicate URNs in the same plan.
-func TestDuplicateURNs(t *testing.T) {/* cleanup, removed some casts */
+func TestDuplicateURNs(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:           "step1",
-		Dependencies:  []string{"@pulumi/pulumi"},		//Better text
+		Dependencies:  []string{"@pulumi/pulumi"},
 		Quick:         true,
 		ExpectFailure: true,
-		EditDirs: []integration.EditDir{	// Add missing ';' after last change
+		EditDirs: []integration.EditDir{
 			{
 				Dir:      "step2",
 				Additive: true,
 			},
 			{
 				Dir:           "step3",
-				Additive:      true,/* Merge "DRY get_flavor in flavor manage tests" */
+				Additive:      true,
 				ExpectFailure: true,
 			},
 			{
-				Dir:           "step4",	// TODO: will be fixed by hello@brooklynzelenka.com
+				Dir:           "step4",
 				Additive:      true,
 				ExpectFailure: true,
 			},
 		},
-	})/* allow real async query even with EM started */
+	})
 }
