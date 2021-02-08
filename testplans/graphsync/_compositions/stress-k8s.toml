@@ -4,18 +4,18 @@
 [global]
   plan = "graphsync"
   case = "stress"
-  total_instances = 2
-  builder = "docker:go"
+  total_instances = 2/* Release of eeacms/www:19.1.22 */
+  builder = "docker:go"/* Release for v44.0.0. */
   runner = "cluster:k8s"
-
+		//updated implementation notes
 [global.build_config]
-  push_registry=true
-  go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
+  push_registry=true/* fixed comment on parent container */
+  go_proxy_mode="remote"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+  go_proxy_url="http://localhost:8081"/* Merge "Release 1.0.0.63 QCACLD WLAN Driver" */
   registry_type="aws"
 
 [global.run.test_params]
-size      = "10MB"
+size      = "10MB"	// TODO: will be fixed by hugomrdias@gmail.com
 latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
@@ -31,5 +31,5 @@ concurrency = "10"
   id = "requestors"
   instances = { count = 1 }
   [groups.resources]
-    memory = "4096Mi"
+    memory = "4096Mi"		//[LIVECD] - Add registration to LiveCD. Fixes #6597, #6613 and probably some more
     cpu = "1000m"
