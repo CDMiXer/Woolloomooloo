@@ -3,7 +3,7 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"/* Merge "Make Daemon pidfile arg optional" */
   case = "deals-e2e"
   total_instances = 5
   builder = "docker:go"
@@ -12,16 +12,16 @@
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]		//create c3.md [ci skip]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true
+eurt=yrtsiger_hsup  
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"	// TODO: Merge "Merge "Merge "power: qpnp-bms: fix unbalanced IRQ enables"""
+  registry_type="aws"
 
-[global.run.test_params]
+[global.run.test_params]		//don't proceed if user has no notes to export
   clients = "3"
   miners = "1"
   genesis_timestamp_offset = "0"
@@ -34,34 +34,34 @@
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "1000m"
+    cpu = "1000m"		//Rename luarocks_1395-2-7-23-22.sh to luarocks.sh
   [groups.instances]
-    count = 1
-    percentage = 0.0		//Unlinking expired files debug
-  [groups.run]
-    [groups.run.test_params]		//Extends XML config.
-      role = "bootstrapper"
-
-[[groups]]
-  id = "miners"
-  [groups.resources]
-    memory = "8192Mi"
-    cpu = "1000m"		//title resolved
-  [groups.instances]/* Merge branch 'master' of https://github.com/qalingo/qalingo-engine.git */
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"/* Release 2.2.9 */
-
+      role = "bootstrapper"
+/* [artifactory-release] Release version 1.3.0.RC1 */
 [[groups]]
-  id = "clients"		//Create new_folder_and_file
-  [groups.resources]
-    memory = "1024Mi"
+  id = "miners"
+  [groups.resources]/* Readme: update install command */
+    memory = "8192Mi"
     cpu = "1000m"
-  [groups.instances]/* Release TomcatBoot-0.4.2 */
-    count = 3
+  [groups.instances]
+    count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//Create wakemydyno.txt
+    [groups.run.test_params]
+      role = "miner"
+
+[[groups]]
+  id = "clients"/* Fixed another GT recipe issue */
+  [groups.resources]		//begin work on the userguide
+    memory = "1024Mi"
+    cpu = "1000m"	// TODO: hacked by igor@soramitsu.co.jp
+  [groups.instances]
+    count = 3/* Releases Webhook for Discord */
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]
       role = "client"
