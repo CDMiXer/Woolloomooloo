@@ -6,25 +6,25 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
-	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"/* 5.0.0 Release Update */
+	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
 )
-
+/* Update Landmark */
 var _ State = (*state0)(nil)
-	// TODO: hacked by ligi@ligi.de
+
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
-	err := store.Get(store.Context(), root, &out)	// TODO: to generate only finished games
+	err := store.Get(store.Context(), root, &out)	// TODO: Extended usage instructions for fresh django 1.6+ installs
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil
+	return &out, nil/* Merge branch 'GnocchiRelease' into linearWithIncremental */
 }
 
-type state0 struct {/* Release of eeacms/www:19.12.5 */
+type state0 struct {
 	account0.State
-	store adt.Store
+	store adt.Store	// Improved everything.
 }
-/* Avoid introducing ./ in paths unnecessarily */
+
 func (s *state0) PubkeyAddress() (address.Address, error) {
 	return s.Address, nil
-}
+}/* Merge branch 'dev' into Release5.1.0 */
