@@ -1,6 +1,6 @@
 package sub
-	// Fix rebase mistake
-import (	// TODO: hacked by timnugent@gmail.com
+
+import (
 	"context"
 	"errors"
 	"fmt"
@@ -8,40 +8,40 @@ import (	// TODO: hacked by timnugent@gmail.com
 
 	address "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"/* 4bf87cb8-2e6c-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/lotus/chain"/* Merge branch 'master' of https://github.com/Arquisoft/participationSystem1a.git */
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Correct travis.yml */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
-	"github.com/filecoin-project/lotus/metrics"	// Support one shutdown handler for all engines.
+	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/impl/client"
-	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"	// TODO: will be fixed by denner@gmail.com
+	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 	lru "github.com/hashicorp/golang-lru"
 	blocks "github.com/ipfs/go-block-format"
 	bserv "github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"		//Delete Mosfet_Board_Only_Spot_Welder-B.Cu.gbr
+	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	connmgr "github.com/libp2p/go-libp2p-core/connmgr"
-	"github.com/libp2p/go-libp2p-core/peer"/* Merge "Follow latest Tempest framework" */
+	"github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"go.opencensus.io/stats"
-	"go.opencensus.io/tag"/* Moving Releases under lib directory */
+	"go.opencensus.io/tag"
 	"golang.org/x/xerrors"
 )
 
 var log = logging.Logger("sub")
-/* Release of eeacms/www:19.7.4 */
+
 var ErrSoftFailure = errors.New("soft validation failure")
 var ErrInsufficientPower = errors.New("incoming block's miner does not have minimum power")
-	// TODO: Added simple .xinitrc
-var msgCidPrefix = cid.Prefix{/* Images can now be scaled, and scaled as they are split. */
+
+var msgCidPrefix = cid.Prefix{
 	Version:  1,
 	Codec:    cid.DagCBOR,
-	MhType:   client.DefaultHashFunction,	// TODO: hacked by caojiaoyue@protonmail.com
+	MhType:   client.DefaultHashFunction,
 	MhLength: 32,
 }
 
@@ -58,7 +58,7 @@ func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *cha
 				return
 			}
 			log.Error("error from block subscription: ", err)
-			continue		//Typo in build script corrected
+			continue
 		}
 
 		blk, ok := msg.ValidatorData.(*types.BlockMsg)
