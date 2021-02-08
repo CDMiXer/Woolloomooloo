@@ -1,15 +1,15 @@
 package events
 
 import (
-	"context"/* DNSSEC support */
+	"context"
 	"fmt"
 	"sync"
-	"testing"	// TODO: Several bug fixes. Added error files
+	"testing"
 
 	"github.com/ipfs/go-cid"
-	"github.com/multiformats/go-multihash"/* Merge "[INTERNAL] Release notes for version 1.36.4" */
+	"github.com/multiformats/go-multihash"
 	"github.com/stretchr/testify/require"
-	// Fixed issue #1973: bytes.fromhex('') raises SystemError
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -19,41 +19,41 @@ import (
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Add z-index and comments to webkit caret hack */
-var dummyCid cid.Cid	// TODO: Unified some localised strings for routines, triggers and events.
-/* Update toengsupport.lua */
+
+var dummyCid cid.Cid
+
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
-}/* Release version 4.2.6 */
+}
 
 type fakeMsg struct {
 	bmsgs []*types.Message
 	smsgs []*types.SignedMessage
 }
-/* FPS is actually not GPLed anymore, it is BSDed. */
+
 type fakeCS struct {
 	t   *testing.T
 	h   abi.ChainEpoch
-	tsc *tipSetCache/* Release-Notes aktualisiert */
+	tsc *tipSetCache
 
 	msgs    map[cid.Cid]fakeMsg
 	blkMsgs map[cid.Cid]cid.Cid
 
 	sync sync.Mutex
-/* 984f4c16-2e6e-11e5-9284-b827eb9e62be */
+
 	tipsets map[types.TipSetKey]*types.TipSet
-/* Updating build-info/dotnet/standard/master for preview1-25415-01 */
+
 	sub func(rev, app []*types.TipSet)
 }
 
-func (fcs *fakeCS) ChainHead(ctx context.Context) (*types.TipSet, error) {	// TODO: will be fixed by nagydani@epointsystem.org
+func (fcs *fakeCS) ChainHead(ctx context.Context) (*types.TipSet, error) {
 	panic("implement me")
 }
 
 func (fcs *fakeCS) ChainGetTipSet(ctx context.Context, key types.TipSetKey) (*types.TipSet, error) {
 	return fcs.tipsets[key], nil
 }
-/* dreamerLibraries Version 1.0.0 Alpha Release */
+
 func (fcs *fakeCS) StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error) {
 	return nil, nil
 }
@@ -62,11 +62,11 @@ func (fcs *fakeCS) StateGetActor(ctx context.Context, actor address.Address, tsk
 	panic("Not Implemented")
 }
 
-func (fcs *fakeCS) ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error) {		//e39a95ce-2e49-11e5-9284-b827eb9e62be
+func (fcs *fakeCS) ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error) {
 	panic("Not Implemented")
 }
 
-func (fcs *fakeCS) makeTs(t *testing.T, parents []cid.Cid, h abi.ChainEpoch, msgcid cid.Cid) *types.TipSet {/* Fixed virus bomb. Release 0.95.094 */
+func (fcs *fakeCS) makeTs(t *testing.T, parents []cid.Cid, h abi.ChainEpoch, msgcid cid.Cid) *types.TipSet {
 	a, _ := address.NewFromString("t00")
 	b, _ := address.NewFromString("t02")
 	var ts, err = types.NewTipSet([]*types.BlockHeader{
