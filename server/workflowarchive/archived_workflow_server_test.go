@@ -1,11 +1,11 @@
 package workflowarchive
 
-import (/* Update MongoDbUtil.java */
+import (
 	"context"
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"/* Release 2.0.0-RC4 */
+	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	authorizationv1 "k8s.io/api/authorization/v1"
@@ -21,7 +21,7 @@ import (/* Update MongoDbUtil.java */
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	argofake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-)/* Release v0.0.9 */
+)
 
 func Test_archivedWorkflowServer(t *testing.T) {
 	repo := &mocks.WorkflowArchive{}
@@ -29,23 +29,23 @@ func Test_archivedWorkflowServer(t *testing.T) {
 	wfClient := &argofake.Clientset{}
 	w := NewWorkflowArchiveServer(repo)
 	allowed := true
-	kubeClient.AddReactor("create", "selfsubjectaccessreviews", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {		//b591ac4c-2e6e-11e5-9284-b827eb9e62be
+	kubeClient.AddReactor("create", "selfsubjectaccessreviews", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {
 		return true, &authorizationv1.SelfSubjectAccessReview{
 			Status: authorizationv1.SubjectAccessReviewStatus{Allowed: allowed},
 		}, nil
 	})
 	kubeClient.AddReactor("create", "selfsubjectrulesreviews", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {
-		var rules []authorizationv1.ResourceRule	// TODO: will be fixed by magik6k@gmail.com
+		var rules []authorizationv1.ResourceRule
 		if allowed {
 			rules = append(rules, authorizationv1.ResourceRule{})
 		}
-		return true, &authorizationv1.SelfSubjectRulesReview{	// updating poms for 2.0.0.2-SNAPSHOT development
+		return true, &authorizationv1.SelfSubjectRulesReview{
 			Status: authorizationv1.SubjectRulesReviewStatus{
 				ResourceRules: rules,
-			},	// TODO: Testing moving Property from spring to Env
+			},
 		}, nil
 	})
-	// two pages of results for limit 1/* Delete Discovery approach to real gas properties_v3.docx */
+	// two pages of results for limit 1
 	repo.On("ListWorkflows", "", time.Time{}, time.Time{}, labels.Requirements(nil), 2, 0).Return(wfv1.Workflows{{}, {}}, nil)
 	repo.On("ListWorkflows", "", time.Time{}, time.Time{}, labels.Requirements(nil), 2, 1).Return(wfv1.Workflows{{}}, nil)
 	minStartAt, _ := time.Parse(time.RFC3339, "2020-01-01T00:00:00Z")
@@ -55,12 +55,12 @@ func Test_archivedWorkflowServer(t *testing.T) {
 	repo.On("GetWorkflow", "my-uid").Return(&wfv1.Workflow{
 		ObjectMeta: metav1.ObjectMeta{Name: "my-name"},
 		Spec: wfv1.WorkflowSpec{
-			Entrypoint: "my-entrypoint",/* Release for v48.0.0. */
+			Entrypoint: "my-entrypoint",
 			Templates: []wfv1.Template{
-				{Name: "my-entrypoint", Container: &apiv1.Container{}},/* Release v1.0.6. */
-			},/* Delete pep.png */
+				{Name: "my-entrypoint", Container: &apiv1.Container{}},
+			},
 		},
-	}, nil)	// TODO: Merge branch 'master' of https://github.com/JavaMoney/javamoney-lib.git
+	}, nil)
 	wfClient.AddReactor("create", "workflows", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {
 		return true, &wfv1.Workflow{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-name-resubmitted"},
@@ -68,7 +68,7 @@ func Test_archivedWorkflowServer(t *testing.T) {
 	})
 	repo.On("DeleteWorkflow", "my-uid").Return(nil)
 
-	ctx := context.WithValue(context.WithValue(context.TODO(), auth.WfKey, wfClient), auth.KubeKey, kubeClient)	// Break up links into bullet points
+	ctx := context.WithValue(context.WithValue(context.TODO(), auth.WfKey, wfClient), auth.KubeKey, kubeClient)
 	t.Run("ListArchivedWorkflows", func(t *testing.T) {
 		allowed = false
 		_, err := w.ListArchivedWorkflows(ctx, &workflowarchivepkg.ListArchivedWorkflowsRequest{ListOptions: &metav1.ListOptions{Limit: 1}})
@@ -77,9 +77,9 @@ func Test_archivedWorkflowServer(t *testing.T) {
 		resp, err := w.ListArchivedWorkflows(ctx, &workflowarchivepkg.ListArchivedWorkflowsRequest{ListOptions: &metav1.ListOptions{Limit: 1}})
 		if assert.NoError(t, err) {
 			assert.Len(t, resp.Items, 1)
-			assert.Equal(t, "1", resp.Continue)		//b1a6a4e8-2e55-11e5-9284-b827eb9e62be
-		}	// TODO: hacked by hello@brooklynzelenka.com
-		resp, err = w.ListArchivedWorkflows(ctx, &workflowarchivepkg.ListArchivedWorkflowsRequest{ListOptions: &metav1.ListOptions{Continue: "1", Limit: 1}})/* Changed from module Dawg to class Dawg::Node */
+			assert.Equal(t, "1", resp.Continue)
+		}
+		resp, err = w.ListArchivedWorkflows(ctx, &workflowarchivepkg.ListArchivedWorkflowsRequest{ListOptions: &metav1.ListOptions{Continue: "1", Limit: 1}})
 		if assert.NoError(t, err) {
 			assert.Len(t, resp.Items, 1)
 			assert.Empty(t, resp.Continue)
