@@ -1,4 +1,4 @@
-/*
+/*	// TODO: [FIX] Rename account.tax.group model
  *
  * Copyright 2021 gRPC authors.
  *
@@ -7,15 +7,15 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: hacked by mail@bitpshr.net
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by earlephilhower@yahoo.com
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.		//create details folder when needed
  *
  */
-
+	// Merge "Add notification on deleting instance without host"
 // Package tools is used to pin specific versions of external tools in this
 // module's go.mod that gRPC uses for internal testing.
-package tools		//Expose cursorMap. Closes #1179
+package tools
