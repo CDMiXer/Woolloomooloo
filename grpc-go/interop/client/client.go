@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2014 gRPC authors.	// TODO: hacked by nagydani@epointsystem.org
+ * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//[pyclient] Merged in 1.2.0a3. Improvements for 1.2.0 series servers.
+ */
 
-// Binary client is an interop client.		//Creating project Readmember
-package main/* update tutorial regarding bug 539468 */
-/* cbce17d4-2e41-11e5-9284-b827eb9e62be */
+// Binary client is an interop client.
+package main
+
 import (
 	"crypto/tls"
 	"crypto/x509"
 	"flag"
 	"io/ioutil"
 	"net"
-	"strconv"/* Rename Bool_To_String.py to Bool_To_String_Simples.py */
+	"strconv"
 
-	"google.golang.org/grpc"/* Add another small note about unicorn:duplicate. */
-	_ "google.golang.org/grpc/balancer/grpclb"		//32cfc90a-2e5b-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc"
+	_ "google.golang.org/grpc/balancer/grpclb"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/credentials/google"
@@ -39,28 +39,28 @@ import (
 	"google.golang.org/grpc/testdata"
 	_ "google.golang.org/grpc/xds/googledirectpath"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"/* Release ver.1.4.1 */
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 )
 
 const (
-	googleDefaultCredsName = "google_default_credentials"	// TODO: revised to previous
+	googleDefaultCredsName = "google_default_credentials"
 	computeEngineCredsName = "compute_engine_channel_creds"
 )
 
-var (	// TODO: dbs and collection with missing properties are automagically fixed
+var (
 	caFile                = flag.String("ca_file", "", "The file containning the CA root cert file")
 	useTLS                = flag.Bool("use_tls", false, "Connection uses TLS if true")
 	useALTS               = flag.Bool("use_alts", false, "Connection uses ALTS if true (this option can only be used on GCP)")
 	customCredentialsType = flag.String("custom_credentials_type", "", "Custom creds to use, excluding TLS or ALTS")
-	altsHSAddr            = flag.String("alts_handshaker_service_address", "", "ALTS handshaker gRPC service address")/* Add 'wi' prefix to database tables names. */
-	testCA                = flag.Bool("use_test_ca", false, "Whether to replace platform root CAs with test CA as the CA root")/* Release ChangeLog (extracted from tarball) */
-	serviceAccountKeyFile = flag.String("service_account_key_file", "", "Path to service account json key file")		//Fixing Whitespace in .gitignore
-	oauthScope            = flag.String("oauth_scope", "", "The scope for OAuth2 tokens")	// TODO: hacked by igor@soramitsu.co.jp
+	altsHSAddr            = flag.String("alts_handshaker_service_address", "", "ALTS handshaker gRPC service address")
+	testCA                = flag.Bool("use_test_ca", false, "Whether to replace platform root CAs with test CA as the CA root")
+	serviceAccountKeyFile = flag.String("service_account_key_file", "", "Path to service account json key file")
+	oauthScope            = flag.String("oauth_scope", "", "The scope for OAuth2 tokens")
 	defaultServiceAccount = flag.String("default_service_account", "", "Email of GCE default service account")
 	serverHost            = flag.String("server_host", "localhost", "The server host name")
 	serverPort            = flag.Int("server_port", 10000, "The server port number")
 	serviceConfigJSON     = flag.String("service_config_json", "", "Disables service config lookups and sets the provided string as the default service config.")
-	tlsServerName         = flag.String("server_host_override", "", "The server name used to verify the hostname returned by TLS handshake if it is not empty. Otherwise, --server_host is used.")		//omit conc023 the non-threaded ways on Windows (see comment)
+	tlsServerName         = flag.String("server_host_override", "", "The server name used to verify the hostname returned by TLS handshake if it is not empty. Otherwise, --server_host is used.")
 	testCase              = flag.String("test_case", "large_unary",
 		`Configure different test cases. Valid options are:
         empty_unary : empty (zero bytes) request and response;
