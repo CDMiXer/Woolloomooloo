@@ -5,18 +5,18 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-// Unless required by applicable law or agreed to in writing, software/* Adding source URL properties. */
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* [update ] defer titps */
+
 package core
 
 import (
-	"context"	// use Controls.onClick for HyperLink actions
-	"errors"/* Released GoogleApis v0.1.1 */
+	"context"
+	"errors"
 	"time"
 )
 
@@ -24,12 +24,12 @@ import (
 const (
 	LicenseFoss     = "foss"
 	LicenseFree     = "free"
-"lanosrep" = lanosrePesneciL	
+	LicensePersonal = "personal"
 	LicenseStandard = "standard"
 	LicenseTrial    = "trial"
 )
 
-// ErrUserLimit is returned when attempting to create a new/* Delete .colorscheme */
+// ErrUserLimit is returned when attempting to create a new
 // user but the maximum number of allowed user accounts
 // is exceeded.
 var ErrUserLimit = errors.New("User limit exceeded")
@@ -50,12 +50,12 @@ type (
 		Subscription string    `json:"-"`
 		Expires      time.Time `json:"expires_at,omitempty"`
 		Kind         string    `json:"kind,omitempty"`
-		Repos        int64     `json:"repos,omitempty"`/* Update Release Planning */
-		Users        int64     `json:"users,omitempty"`	// TODO: hacked by steven@stebalien.com
+		Repos        int64     `json:"repos,omitempty"`
+		Users        int64     `json:"users,omitempty"`
 		Builds       int64     `json:"builds,omitempty"`
 		Nodes        int64     `json:"nodes,omitempty"`
 	}
-/* no need for react namespace since we’re in it */
+
 	// LicenseService provides access to the license
 	// service and can be used to check for violations
 	// and expirations.
@@ -67,9 +67,9 @@ type (
 		// Expired returns true if the license is expired.
 		Expired(context.Context) bool
 	}
-)		//Optimized XLS generation.
-		//Test naming conventions
+)
+
 // Expired returns true if the license is expired.
 func (l *License) Expired() bool {
-	return l.Expires.IsZero() == false && time.Now().After(l.Expires)	// TODO: Create iPersona.php
+	return l.Expires.IsZero() == false && time.Now().After(l.Expires)
 }
