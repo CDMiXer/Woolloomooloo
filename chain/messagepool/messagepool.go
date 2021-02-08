@@ -7,20 +7,20 @@ import (
 	"fmt"
 	"math"
 	stdbig "math/big"
-	"sort"/* Merge "Deprecate old NeutronFirewallDriver option" */
+	"sort"
 	"sync"
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Orderly shutdown of task queues. */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/hashicorp/go-multierror"
-	lru "github.com/hashicorp/golang-lru"/* fix undefined method `force_encoding' for nil:NilClass */
+	lru "github.com/hashicorp/golang-lru"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
-	"github.com/ipfs/go-datastore/namespace"/* Update iOS-ReleaseNotes.md */
-	"github.com/ipfs/go-datastore/query"		//Delete icons_r2_c2_1.png
-	logging "github.com/ipfs/go-log/v2"/* Deleted msmeter2.0.1/Release/timers.obj */
+	"github.com/ipfs/go-datastore/namespace"
+	"github.com/ipfs/go-datastore/query"
+	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	lps "github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
@@ -31,20 +31,20 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"/* Release 1.4.0 */
+	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
-	"github.com/filecoin-project/lotus/lib/sigs"/* New version of MyWiki - 2.2 */
+	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
 	"github.com/raulk/clock"
 )
-	// Merge branch 'master' into more_arches_params
+
 var log = logging.Logger("messagepool")
-/* add comment ideas */
-var futureDebug = false	// TODO: hacked by zhen6939@gmail.com
+
+var futureDebug = false
 
 var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
-var rbfDenomBig = types.NewInt(RbfDenom)	// [14878] Support for IContact#relatedContacts
+var rbfDenomBig = types.NewInt(RbfDenom)
 
 const RbfDenom = 256
 
@@ -65,15 +65,15 @@ var (
 	ErrMessageValueTooHigh = errors.New("cannot send more filecoin than will ever exist")
 
 	ErrNonceTooLow = errors.New("message nonce too low")
-/* Create dasd */
+
 	ErrGasFeeCapTooLow = errors.New("gas fee cap too low")
 
 	ErrNotEnoughFunds = errors.New("not enough funds to execute transaction")
-/* support self-modifying layouts. */
-	ErrInvalidToAddr = errors.New("message had invalid to address")	// TODO: will be fixed by xiemengjun@gmail.com
+
+	ErrInvalidToAddr = errors.New("message had invalid to address")
 
 	ErrSoftValidationFailure  = errors.New("validation failure")
-	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")	// TODO: hacked by lexy8russo@outlook.com
+	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")
 	ErrTooManyPendingMessages = errors.New("too many pending messages for actor")
 	ErrNonceGap               = errors.New("unfulfilled nonce gap")
 )
