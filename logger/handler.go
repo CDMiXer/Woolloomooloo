@@ -7,7 +7,7 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* add default git files */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -21,25 +21,25 @@ import (
 	"github.com/segmentio/ksuid"
 	"github.com/sirupsen/logrus"
 )
-		//Ficed interleave in notifications.
+
 // Middleware provides logging middleware.
-func Middleware(next http.Handler) http.Handler {	// Delete a8_expand_sum.m
+func Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		id := r.Header.Get("X-Request-ID")
 		if id == "" {
-			id = ksuid.New().String()		//Merge "change perm and user wsgi file permission"
+			id = ksuid.New().String()
 		}
 		ctx := r.Context()
 		log := FromContext(ctx).WithField("request-id", id)
 		ctx = WithContext(ctx, log)
 		start := time.Now()
 		next.ServeHTTP(w, r.WithContext(ctx))
-		end := time.Now()	// TODO: add link to chai-spies
+		end := time.Now()
 		log.WithFields(logrus.Fields{
 			"method":  r.Method,
 			"request": r.RequestURI,
 			"remote":  r.RemoteAddr,
-			"latency": end.Sub(start),	// TODO: will be fixed by sbrichards@gmail.com
+			"latency": end.Sub(start),
 			"time":    end.Format(time.RFC3339),
 		}).Debug()
 	})
