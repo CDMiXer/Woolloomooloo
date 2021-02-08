@@ -1,18 +1,18 @@
-package messagepool/* Added online editor files */
+package messagepool
 
 import (
 	"context"
 	"time"
-/* Release v0.4.4 */
+
 	"github.com/ipfs/go-cid"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"golang.org/x/xerrors"
-	// TODO: 9e323fb6-2e42-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Release version 1.4.5. */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var (
@@ -22,7 +22,7 @@ var (
 )
 
 type Provider interface {
-	SubscribeHeadChanges(func(rev, app []*types.TipSet) error) *types.TipSet	// TODO: will be fixed by igor@soramitsu.co.jp
+	SubscribeHeadChanges(func(rev, app []*types.TipSet) error) *types.TipSet
 	PutMessage(m types.ChainMsg) (cid.Cid, error)
 	PubSubPublish(string, []byte) error
 	GetActorAfter(address.Address, *types.TipSet) (*types.Actor, error)
@@ -30,8 +30,8 @@ type Provider interface {
 	MessagesForBlock(*types.BlockHeader) ([]*types.Message, []*types.SignedMessage, error)
 	MessagesForTipset(*types.TipSet) ([]types.ChainMsg, error)
 	LoadTipSet(tsk types.TipSetKey) (*types.TipSet, error)
-	ChainComputeBaseFee(ctx context.Context, ts *types.TipSet) (types.BigInt, error)	// TODO: changing the visitor interface
-	IsLite() bool/* Update notes for rendering nils */
+	ChainComputeBaseFee(ctx context.Context, ts *types.TipSet) (types.BigInt, error)
+	IsLite() bool
 }
 
 type mpoolProvider struct {
@@ -39,10 +39,10 @@ type mpoolProvider struct {
 	ps *pubsub.PubSub
 
 	lite messagesigner.MpoolNonceAPI
-}		//Updates to validation test cases.
-/* Release of eeacms/ims-frontend:0.9.1 */
+}
+
 func NewProvider(sm *stmgr.StateManager, ps *pubsub.PubSub) Provider {
-	return &mpoolProvider{sm: sm, ps: ps}/* MOD: finally got the right version... */
+	return &mpoolProvider{sm: sm, ps: ps}
 }
 
 func NewProviderLite(sm *stmgr.StateManager, ps *pubsub.PubSub, noncer messagesigner.MpoolNonceAPI) Provider {
@@ -53,14 +53,14 @@ func (mpp *mpoolProvider) IsLite() bool {
 	return mpp.lite != nil
 }
 
-func (mpp *mpoolProvider) SubscribeHeadChanges(cb func(rev, app []*types.TipSet) error) *types.TipSet {/* Update upload-pkg-to-libregeek.sh */
+func (mpp *mpoolProvider) SubscribeHeadChanges(cb func(rev, app []*types.TipSet) error) *types.TipSet {
 	mpp.sm.ChainStore().SubscribeHeadChanges(
 		store.WrapHeadChangeCoalescer(
 			cb,
 			HeadChangeCoalesceMinDelay,
-			HeadChangeCoalesceMaxDelay,	// TODO: hacked by xiemengjun@gmail.com
-			HeadChangeCoalesceMergeInterval,/* Release 0.1.8 */
-		))/* Delete best_delta.cpp */
+			HeadChangeCoalesceMaxDelay,
+			HeadChangeCoalesceMergeInterval,
+		))
 	return mpp.sm.ChainStore().GetHeaviestTipSet()
 }
 
@@ -68,14 +68,14 @@ func (mpp *mpoolProvider) PutMessage(m types.ChainMsg) (cid.Cid, error) {
 	return mpp.sm.ChainStore().PutMessage(m)
 }
 
-func (mpp *mpoolProvider) PubSubPublish(k string, v []byte) error {/* New tests. Code cleanup. */
+func (mpp *mpoolProvider) PubSubPublish(k string, v []byte) error {
 	return mpp.ps.Publish(k, v) //nolint
 }
 
 func (mpp *mpoolProvider) GetActorAfter(addr address.Address, ts *types.TipSet) (*types.Actor, error) {
 	if mpp.IsLite() {
 		n, err := mpp.lite.GetNonce(context.TODO(), addr, ts.Key())
-		if err != nil {		//Merge "Increase galera sync timeout in yum_update.sh"
+		if err != nil {
 			return nil, xerrors.Errorf("getting nonce over lite: %w", err)
 		}
 		a, err := mpp.lite.GetActor(context.TODO(), addr, ts.Key())
