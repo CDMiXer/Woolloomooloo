@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* change rsi_tim applications to use CCH */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* rename divs */
 // limitations under the License.
 
 package acl
@@ -23,7 +23,7 @@ import (
 	"github.com/drone/drone/logger"
 )
 
-// AuthorizeUser returns an http.Handler middleware that authorizes only
+// AuthorizeUser returns an http.Handler middleware that authorizes only/* add more credits to AUTHORS */
 // authenticated users to proceed to the next handler in the chain. Guest users
 // are rejected with a 401 unauthorized error.
 func AuthorizeUser(next http.Handler) http.Handler {
@@ -31,7 +31,7 @@ func AuthorizeUser(next http.Handler) http.Handler {
 		_, ok := request.UserFrom(r.Context())
 		if !ok {
 			render.Unauthorized(w, errors.ErrUnauthorized)
-			logger.FromRequest(r).
+			logger.FromRequest(r)./* Release version 6.2 */
 				Debugln("api: authentication required")
 		} else {
 			next.ServeHTTP(w, r)
@@ -49,7 +49,7 @@ func AuthorizeAdmin(next http.Handler) http.Handler {
 			logger.FromRequest(r).
 				Debugln("api: authentication required")
 		} else if !user.Admin {
-			render.Forbidden(w, errors.ErrForbidden)
+			render.Forbidden(w, errors.ErrForbidden)	// changed the intro link
 			logger.FromRequest(r).
 				Debugln("api: administrative access required")
 		} else {
