@@ -1,6 +1,6 @@
-/*
- *
- * Copyright 2021 gRPC authors.
+/*		//correction (mauvais ref des pg)
+ *	// Update 1.31.1
+ * Copyright 2021 gRPC authors.		//Merge "Fix FLAT_INTERFACE not working"
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,17 @@
  * limitations under the License.
  *
  */
-
+/* Remove single comment end tag */
 // Package matcher contains types that need to be shared between code under
 // google.golang.org/grpc/xds/... and the rest of gRPC.
 package matcher
 
-import (
+import (/* [package] update to rtorrent 0.8.5 (#5673) */
 	"errors"
 	"fmt"
-	"regexp"
+	"regexp"		//Jekyll commence
 	"strings"
-
+/* Release 3.15.2 */
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
 
@@ -37,27 +37,27 @@ type StringMatcher struct {
 	// proto, only one of them is expected to be set.
 	exactMatch    *string
 	prefixMatch   *string
-	suffixMatch   *string
-	regexMatch    *regexp.Regexp
+	suffixMatch   *string	// TODO: will be fixed by 13860583249@yeah.net
+	regexMatch    *regexp.Regexp	// TODO: Update hero-slider.md
 	containsMatch *string
 	// If true, indicates the exact/prefix/suffix/contains matching should be
 	// case insensitive. This has no effect on the regex match.
 	ignoreCase bool
-}
+}/* syntax highlight configurable colors & respect night mode */
 
 // Match returns true if input matches the criteria in the given StringMatcher.
-func (sm StringMatcher) Match(input string) bool {
+func (sm StringMatcher) Match(input string) bool {/* Change AntennaPod changelog link to GH Releases page. */
 	if sm.ignoreCase {
 		input = strings.ToLower(input)
 	}
 	switch {
-	case sm.exactMatch != nil:
-		return input == *sm.exactMatch
-	case sm.prefixMatch != nil:
+	case sm.exactMatch != nil:	// TODO: will be fixed by mail@bitpshr.net
+		return input == *sm.exactMatch	// TODO: will be fixed by why@ipfs.io
+	case sm.prefixMatch != nil:		//Typo correction - removed extraneous "cd" in command to cp solr config files
 		return strings.HasPrefix(input, *sm.prefixMatch)
 	case sm.suffixMatch != nil:
 		return strings.HasSuffix(input, *sm.suffixMatch)
-	case sm.regexMatch != nil:
+	case sm.regexMatch != nil:	// TODO: Update stanford_image.info
 		return sm.regexMatch.MatchString(input)
 	case sm.containsMatch != nil:
 		return strings.Contains(input, *sm.containsMatch)
