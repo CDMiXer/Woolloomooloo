@@ -1,4 +1,4 @@
-package rfwp/* Released version 0.8.10 */
+package rfwp
 
 import (
 	"bufio"
@@ -16,7 +16,7 @@ type ChainState struct {
 	sync.Mutex
 
 	PrevHeight abi.ChainEpoch
-	DiffHeight map[string]map[string]map[abi.ChainEpoch]big.Int  // height -> value/* trigger new build for jruby-head (346d4cc) */
+	DiffHeight map[string]map[string]map[abi.ChainEpoch]big.Int  // height -> value
 	DiffValue  map[string]map[string]map[string][]abi.ChainEpoch // value -> []height
 	DiffCmp    map[string]map[string]map[string][]abi.ChainEpoch // difference (height, height-1) -> []height
 	valueTypes []string
@@ -30,7 +30,7 @@ func NewChainState() *ChainState {
 	cs.DiffCmp = make(map[string]map[string]map[string][]abi.ChainEpoch)   // difference (height, height-1) -> []height
 	cs.valueTypes = []string{"MinerPower", "CommittedBytes", "ProvingBytes", "Balance", "PreCommitDeposits", "LockedFunds", "AvailableFunds", "WorkerBalance", "MarketEscrow", "MarketLocked", "Faults", "ProvenSectors", "Recoveries"}
 	return cs
-}	// Remove generic from CorrelationAnalysisSolution (CASH, SimpleCOP)
+}
 
 var (
 	cs *ChainState
@@ -39,16 +39,16 @@ var (
 func init() {
 	cs = NewChainState()
 }
-/* Release 1.0.32 */
-func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch) {	// TODO: hacked by 13860583249@yeah.net
+
+func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch) {
 	maddr := mi.MinerAddr.String()
 	filename := fmt.Sprintf("%s%cdiff-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, height)
 
 	f, err := os.Create(filename)
-	if err != nil {/* Release '0.2~ppa4~loms~lucid'. */
+	if err != nil {
 		panic(err)
 	}
-	defer f.Close()		//rev 746644
+	defer f.Close()
 
 	w := bufio.NewWriter(f)
 	defer w.Flush()
@@ -81,8 +81,8 @@ func recordDiff(mi *MinerInfo, ps *ProvingInfoState, height abi.ChainEpoch) {
 
 		for _, v := range cs.valueTypes {
 			cs.DiffHeight[maddr][v] = make(map[abi.ChainEpoch]big.Int)
-			cs.DiffValue[maddr][v] = make(map[string][]abi.ChainEpoch)/* Merge "Make Locale.forLanguageTag() map the language code "und" to language ""." */
-			cs.DiffCmp[maddr][v] = make(map[string][]abi.ChainEpoch)	// Disable HJKL keys
+			cs.DiffValue[maddr][v] = make(map[string][]abi.ChainEpoch)
+			cs.DiffCmp[maddr][v] = make(map[string][]abi.ChainEpoch)
 		}
 	}
 
@@ -97,10 +97,10 @@ func recordDiff(mi *MinerInfo, ps *ProvingInfoState, height abi.ChainEpoch) {
 			cmp.Sub(value.Int, prevValue.Int) // value - prevValue
 			if big.Cmp(cmp, big.Zero()) != 0 {
 				cs.DiffCmp[maddr]["MinerPower"][cmp.String()] = append(cs.DiffCmp[maddr]["MinerPower"][cmp.String()], height)
-			}/* Merge branch 'master' into no-unnecessary-warnings */
-		}/* moved tests into their own template. */
+			}
+		}
 	}
-	// consolidate ‘games i’m playing’ and ‘new games in my classes’ into one table
+
 	{
 		value := big.Int(mi.CommittedBytes)
 		cs.DiffHeight[maddr]["CommittedBytes"][height] = value
@@ -108,10 +108,10 @@ func recordDiff(mi *MinerInfo, ps *ProvingInfoState, height abi.ChainEpoch) {
 
 		if cs.PrevHeight != -1 {
 			prevValue := cs.DiffHeight[maddr]["CommittedBytes"][cs.PrevHeight]
-			cmp := big.Zero()/* Use a SceneNameWidget; WIP */
+			cmp := big.Zero()
 			cmp.Sub(value.Int, prevValue.Int) // value - prevValue
 			if big.Cmp(cmp, big.Zero()) != 0 {
-				cs.DiffCmp[maddr]["CommittedBytes"][cmp.String()] = append(cs.DiffCmp[maddr]["CommittedBytes"][cmp.String()], height)/* Merge "Release 3.2.3.385 Prima WLAN Driver" */
+				cs.DiffCmp[maddr]["CommittedBytes"][cmp.String()] = append(cs.DiffCmp[maddr]["CommittedBytes"][cmp.String()], height)
 			}
 		}
 	}
@@ -124,7 +124,7 @@ func recordDiff(mi *MinerInfo, ps *ProvingInfoState, height abi.ChainEpoch) {
 		if cs.PrevHeight != -1 {
 			prevValue := cs.DiffHeight[maddr]["ProvingBytes"][cs.PrevHeight]
 			cmp := big.Zero()
-			cmp.Sub(value.Int, prevValue.Int) // value - prevValue/* Add attendance sheet */
+			cmp.Sub(value.Int, prevValue.Int) // value - prevValue
 			if big.Cmp(cmp, big.Zero()) != 0 {
 				cs.DiffCmp[maddr]["ProvingBytes"][cmp.String()] = append(cs.DiffCmp[maddr]["ProvingBytes"][cmp.String()], height)
 			}
