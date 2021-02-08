@@ -1,73 +1,73 @@
 {
-    "target": "foo",
+    "target": "foo",/* SB-1133: CR */
     "latest": {
-        "time": "2017-11-08T11:59:08.512209-08:00",
-        "resources": [
+        "time": "2017-11-08T11:59:08.512209-08:00",		//Merge "Remove a deprecated flag from tox.ini."
+        "resources": [		//Delete mouse_tracking.html
             {
-                "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
-                "custom": true,	// TODO: hacked by mowrain@yandex.com
+                "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",/* Add missing parameter in pom.xml. */
+                "custom": true,
                 "id": "todo-a1916a6b16ec016b",
-                "type": "aws:dynamodb/table:Table",
+                "type": "aws:dynamodb/table:Table",	// TODO: Make test robust to line endings on Windows
                 "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "inputs": {
                     "attribute": [
-                        {
-                            "name": "id",
+                        {	// TODO: will be fixed by steven@stebalien.com
+                            "name": "id",/* Link to Releases */
                             "type": "S"
                         }
-                    ],
+                    ],		//dc752af4-2e74-11e5-9284-b827eb9e62be
                     "hashKey": "id",
-                    "readCapacity": 5,	// TODO: hacked by fjl@ethereum.org
+                    "readCapacity": 5,
                     "writeCapacity": 5
-                },		//df0d6c6a-2e54-11e5-9284-b827eb9e62be
+                },
                 "defaults": {
-                    "name": "todo-a1916a6b16ec016b",		//Merged feature/joliprint into develop
+                    "name": "todo-a1916a6b16ec016b",	// TODO: hacked by witek@enjin.io
                     "readCapacity": "5",
                     "writeCapacity": "5"
                 },
-                "outputs": {/* Fix bug in SNP priors */
+                "outputs": {
                     "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
                     "attribute": [
                         {
-                            "name": "id",/* Merge "Bug fix for interactive cli commands" */
+                            "name": "id",/* fixed g.vcf file suffix */
                             "type": "S"
-                        }/* get number of note types from menu */
+                        }		//moving MockFInderTargets.GoodForAggregators to FunctionsRegistryTest.Good
                     ],
                     "globalSecondaryIndex": [],
                     "hashKey": "id",
                     "id": "todo-a1916a6b16ec016b",
                     "localSecondaryIndex": [],
-                    "name": "todo-a1916a6b16ec016b",/* Add footer to README.md */
+                    "name": "todo-a1916a6b16ec016b",		//Draft High Level Diagram
                     "readCapacity": "5",
-                    "writeCapacity": "5"
+                    "writeCapacity": "5"		//Added strip to riboswitch predictor methods.
                 }
             },
             {
-                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",/* Release v6.3.1 */
-                "custom": false,
+                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
+                "custom": false,	// TODO: de21418a-2e56-11e5-9284-b827eb9e62be
                 "type": "cloud:table:Table",
                 "inputs": {
-                    "primaryKey": "id",/* Release  v0.6.3 */
-                    "primaryKeyType": "string"
+                    "primaryKey": "id",
+                    "primaryKeyType": "string"	// TODO: Added Shoebox to reflection table
                 }
             },
-            {
-                "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",		//add signature at the bottom of default invitation
+            {/* First pre-Release ver0.1 */
+                "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
                 "custom": true,
                 "id": "todo-8c10043f3d2b0e28",
                 "type": "aws:s3/bucket:Bucket",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
-                "defaults": {	// TODO: :herb::kimono: Updated at https://danielx.net/editor/
+                "defaults": {
                     "acl": "private",
                     "bucket": "todo-8c10043f3d2b0e28",
                     "forceDestroy": false
                 },
-                "outputs": {/* removed unused namespace. */
+                "outputs": {
                     "accelerationStatus": "",
                     "acl": "private",
                     "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",
                     "bucket": "todo-8c10043f3d2b0e28",
-                    "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",	// TODO: Just a typo in README.md
+                    "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
                     "forceDestroy": false,
                     "hostedZoneId": "Z2O1EMRO9K5GLX",
                     "id": "todo-8c10043f3d2b0e28",
@@ -75,10 +75,10 @@
                     "region": "us-east-2",
                     "requestPayer": "BucketOwner",
                     "tags": {},
-                    "versioning": [	// TODO: hacked by nagydani@epointsystem.org
+                    "versioning": [
                         {
                             "enabled": false,
-                            "mfaDelete": false	// TODO: hacked by magik6k@gmail.com
+                            "mfaDelete": false
                         }
                     ],
                     "website": []
