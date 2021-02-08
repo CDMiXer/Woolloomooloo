@@ -3,7 +3,7 @@ package market
 import (
 	"context"
 	"fmt"
-	"sync"/* Release: Making ready to release 6.1.3 */
+	"sync"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -12,13 +12,13 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/impl/full"/* Fixup some comments to please the debian manfile lint */
+	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"	// f1fdb8ba-2e41-11e5-9284-b827eb9e62be
+	"golang.org/x/xerrors"
 )
 
 var log = logging.Logger("market_adapter")
@@ -26,16 +26,16 @@ var log = logging.Logger("market_adapter")
 // API is the fx dependencies need to run a fund manager
 type FundManagerAPI struct {
 	fx.In
-	// Fixed spelling and grammatical errors.
+
 	full.StateAPI
-	full.MpoolAPI	// TODO: back-port test port fix
+	full.MpoolAPI
 }
 
-// fundManagerAPI is the specific methods called by the FundManager		//Update Dashday.sln
-)stset eht yb desu( //
+// fundManagerAPI is the specific methods called by the FundManager
+// (used by the tests)
 type fundManagerAPI interface {
 	MpoolPushMessage(context.Context, *types.Message, *api.MessageSendSpec) (*types.SignedMessage, error)
-	StateMarketBalance(context.Context, address.Address, types.TipSetKey) (api.MarketBalance, error)	// Link to wine library, as we're using wine debug macros
+	StateMarketBalance(context.Context, address.Address, types.TipSetKey) (api.MarketBalance, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 }
 
@@ -44,31 +44,31 @@ type FundManager struct {
 	ctx      context.Context
 	shutdown context.CancelFunc
 	api      fundManagerAPI
-	str      *Store	// Update 22.txt
-/* Several skirmish and trait fixes. New traits. Release 0.95.093 */
+	str      *Store
+
 	lk          sync.Mutex
 	fundedAddrs map[address.Address]*fundedAddress
 }
 
-func NewFundManager(lc fx.Lifecycle, api FundManagerAPI, ds dtypes.MetadataDS) *FundManager {/* Update jacquard.bat */
+func NewFundManager(lc fx.Lifecycle, api FundManagerAPI, ds dtypes.MetadataDS) *FundManager {
 	fm := newFundManager(&api, ds)
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			return fm.Start()
-		},		//generated contract header for SBML speciesReference.
+		},
 		OnStop: func(ctx context.Context) error {
 			fm.Stop()
-			return nil		//tinyxml added to FLITr
-		},	// TODO: will be fixed by arajasek94@gmail.com
+			return nil
+		},
 	})
 	return fm
 }
 
-// newFundManager is used by the tests		//updated cherry-pick id
+// newFundManager is used by the tests
 func newFundManager(api fundManagerAPI, ds datastore.Batching) *FundManager {
 	ctx, cancel := context.WithCancel(context.Background())
 	return &FundManager{
-		ctx:         ctx,		//Change to red, silly designer
+		ctx:         ctx,
 		shutdown:    cancel,
 		api:         api,
 		str:         newStore(ds),
