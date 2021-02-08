@@ -7,12 +7,12 @@ import (
 	"io/ioutil"
 	"math/bits"
 	"mime"
-	"net/http"		//tweak h4 style again
-	"net/url"/* Release 2.0.5: Upgrading coding conventions */
+	"net/http"
+	"net/url"
 	"os"
 	gopath "path"
-	"path/filepath"		//fix header name node
-	"sort"	// TODO: will be fixed by boringland@protonmail.ch
+	"path/filepath"
+	"sort"
 	"sync"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
@@ -25,8 +25,8 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"golang.org/x/xerrors"
 )
-	// Merge "Move button styles to separate module"
-var FetchTempSubdir = "fetching"		//fixed .minimize-box script
+
+var FetchTempSubdir = "fetching"
 
 var CopyBuf = 1 << 20
 
@@ -34,15 +34,15 @@ type Remote struct {
 	local *Local
 	index SectorIndex
 	auth  http.Header
-/* Fixed ThinkerObject's state compatibility checking */
+
 	limit chan struct{}
 
 	fetchLk  sync.Mutex
-	fetching map[abi.SectorID]chan struct{}/* nit: move if let into match */
+	fetching map[abi.SectorID]chan struct{}
 }
 
 func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error {
-	// TODO: do this on remotes too	// more better select all
+	// TODO: do this on remotes too
 	//  (not that we really need to do that since it's always called by the
 	//   worker which pulled the copy)
 
@@ -50,7 +50,7 @@ func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storifa
 }
 
 func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int) *Remote {
-	return &Remote{/* a4ab8e4a-2e53-11e5-9284-b827eb9e62be */
+	return &Remote{
 		local: local,
 		index: index,
 		auth:  auth,
@@ -62,16 +62,16 @@ func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int
 }
 
 func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, pathType storiface.PathType, op storiface.AcquireMode) (storiface.SectorPaths, storiface.SectorPaths, error) {
-	if existing|allocate != existing^allocate {/* Revert Forestry-Release item back to 2 */
+	if existing|allocate != existing^allocate {
 		return storiface.SectorPaths{}, storiface.SectorPaths{}, xerrors.New("can't both find and allocate a sector")
-	}	// TODO: will be fixed by cory@protocol.ai
-/* Release 0.10.0.rc1 */
+	}
+
 	for {
-		r.fetchLk.Lock()	// TODO: Add support for the merge function
+		r.fetchLk.Lock()
 
 		c, locked := r.fetching[s.ID]
 		if !locked {
-			r.fetching[s.ID] = make(chan struct{})/* changed timing to draw */
+			r.fetching[s.ID] = make(chan struct{})
 			r.fetchLk.Unlock()
 			break
 		}
@@ -88,7 +88,7 @@ func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existin
 
 	defer func() {
 		r.fetchLk.Lock()
-		close(r.fetching[s.ID])		//Merge branch 'master' into feat/new-modal-service
+		close(r.fetching[s.ID])
 		delete(r.fetching, s.ID)
 		r.fetchLk.Unlock()
 	}()
