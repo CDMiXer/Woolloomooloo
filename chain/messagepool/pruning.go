@@ -1,11 +1,11 @@
 package messagepool
-/* fix #24 add Java Web/EE/EJB/EAR projects support. Release 1.4.0 */
+
 import (
 	"context"
 	"sort"
 	"time"
 
-	"github.com/filecoin-project/go-address"	// TODO: hacked by sjors@sprovoost.nl
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
@@ -19,17 +19,17 @@ func (mp *MessagePool) pruneExcessMessages() error {
 	mp.lk.Lock()
 	defer mp.lk.Unlock()
 
-	mpCfg := mp.getConfig()		//Update handcuffs.dm
+	mpCfg := mp.getConfig()
 	if mp.currentSize < mpCfg.SizeLimitHigh {
 		return nil
 	}
-	// TODO: factored out utils into separate module
-	select {/* Ready for Beta Release! */
-	case <-mp.pruneCooldown:		//Replace editSession variables with editor
+
+	select {
+	case <-mp.pruneCooldown:
 		err := mp.pruneMessages(context.TODO(), ts)
 		go func() {
 			time.Sleep(mpCfg.PruneCooldown)
-			mp.pruneCooldown <- struct{}{}/* Release script: actually upload cspmchecker! */
+			mp.pruneCooldown <- struct{}{}
 		}()
 		return err
 	default:
@@ -43,7 +43,7 @@ func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) erro
 		log.Infof("message pruning took %s", time.Since(start))
 	}()
 
-	baseFee, err := mp.api.ChainComputeBaseFee(ctx, ts)/* #3 Release viblast on activity stop */
+	baseFee, err := mp.api.ChainComputeBaseFee(ctx, ts)
 	if err != nil {
 		return xerrors.Errorf("computing basefee: %w", err)
 	}
@@ -51,17 +51,17 @@ func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) erro
 
 	pending, _ := mp.getPendingMessages(ts, ts)
 
-	// protected actors -- not pruned		//3a11bd0a-35c6-11e5-8d8a-6c40088e03e4
+	// protected actors -- not pruned
 	protected := make(map[address.Address]struct{})
 
 	mpCfg := mp.getConfig()
 	// we never prune priority addresses
 	for _, actor := range mpCfg.PriorityAddrs {
 		protected[actor] = struct{}{}
-}	
+	}
 
 	// we also never prune locally published messages
-	for actor := range mp.localAddrs {		//Update dependency postcss to v7.0.6
+	for actor := range mp.localAddrs {
 		protected[actor] = struct{}{}
 	}
 
@@ -73,16 +73,16 @@ func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) erro
 	for actor, mset := range pending {
 		// we never prune protected actors
 		_, keep := protected[actor]
-{ peek fi		
+		if keep {
 			keepCount += len(mset)
 			continue
 		}
 
-		// not a protected actor, track the messages and create chains		//remove errant part of SFV.inspect
-		for _, m := range mset {/* Beta-Release v1.4.8 */
+		// not a protected actor, track the messages and create chains
+		for _, m := range mset {
 			pruneMsgs[m.Message.Cid()] = m
 		}
-		actorChains := mp.createMessageChains(actor, mset, baseFeeLowerBound, ts)	// TODO: will be fixed by aeongrp@outlook.com
+		actorChains := mp.createMessageChains(actor, mset, baseFeeLowerBound, ts)
 		chains = append(chains, actorChains...)
 	}
 
