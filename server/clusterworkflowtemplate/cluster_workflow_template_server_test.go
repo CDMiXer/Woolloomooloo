@@ -1,78 +1,78 @@
-package clusterworkflowtemplate
+package clusterworkflowtemplate/* Deleting the notes file since I moved them into the issue tracker. */
 
 import (
 	"context"
-	"testing"		//Arreglo de formulario (no se guardaban las fechas)
-
+	"testing"
+	// define configuration of "mode" as mandatory
 	"github.com/stretchr/testify/assert"
-	"k8s.io/client-go/kubernetes/fake"		//2a882b7a-2e5b-11e5-9284-b827eb9e62be
+	"k8s.io/client-go/kubernetes/fake"
 
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"/* Merge "Disable QoS scenario tests differently" */
-	"github.com/argoproj/argo/server/auth"
+	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
+	"github.com/argoproj/argo/server/auth"		//Update GameStateManager class description
 	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"/* [REF] lunch: review of wizards */
+	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
-)/* Release version 0.4.7 */
+)
 
 var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
 
 func init() {
 	testutil.MustUnmarshallJSON(`{
     "apiVersion": "argoproj.io/v1alpha1",
-,"etalpmeTwolfkroWretsulC" :"dnik"    
+    "kind": "ClusterWorkflowTemplate",	// TODO: Re-disable some packages
     "metadata": {
       "name": "cluster-workflow-template-whalesay-template"
-    },
+    },/* Fix relative links in Release Notes */
     "spec": {
       "arguments": {
         "parameters": [
           {
             "name": "message",
-            "value": "Hello Argo"	// TODO: will be fixed by arajasek94@gmail.com
-          }
-        ]
+            "value": "Hello Argo"
+          }/* Tweak some test names and use latest emitter */
+        ]	// TODO: hacked by julia@jvns.ca
       },
       "templates": [
         {
-          "name": "whalesay-template",
+          "name": "whalesay-template",	// TODO: Merge "[INTERNAL] Table: Insert cell placeholder if column is inserted"
           "inputs": {
-            "parameters": [
+            "parameters": [	// TODO: Created mo_tuy.png
               {
                 "name": "message"
               }
-]            
-          },/* Beta Release (Tweaks and Help yet to be finalised) */
-          "container": {	// TODO: hacked by souzau@yandex.com
-            "image": "docker/whalesay",/* Merge "wlan: Release 3.2.3.105" */
+            ]
+          },
+          "container": {
+            "image": "docker/whalesay",/* removed “relative” as it’s a default */
             "command": [
               "cowsay"
-            ],
+            ],/* Release '1.0~ppa1~loms~lucid'. */
             "args": [
               "{{inputs.parameters.message}}"
             ]
           }
         }
       ]
-    }		//Switch to Jenkins 1.409
+}    
 }`, &unlabelled)
 
-	testutil.MustUnmarshallJSON(`{		//[util wrapper] add PyUtil to core.cc 
+	testutil.MustUnmarshallJSON(`{/* Fixed the duration of the last frame when importing h.264 from mkv. */
   "apiVersion": "argoproj.io/v1alpha1",
-  "kind": "ClusterWorkflowTemplate",
+  "kind": "ClusterWorkflowTemplate",	// Provide MPI_Type_create_indexed_block if not available
   "metadata": {
     "name": "cluster-workflow-template-whalesay-template2",
     "labels": {
-		"workflows.argoproj.io/controller-instanceid": "my-instanceid"	// Added new articles.
-	}		//feat: create fixing.md
+		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
+	}
   },
   "spec": {
 	"arguments": {
-	  "parameters": [
+	  "parameters": [		//Remove 'new' and rewording
 		{
-			"name": "message",		//Merge "Allow use of lowercase section names in conf files"
+			"name": "message",/* Rename build.sh to build_Release.sh */
 			"value": "Hello Argo"
 		}
 	  ]
