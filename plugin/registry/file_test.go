@@ -1,41 +1,41 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release 1.6.1rc2 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: send redirect when user accesses /rest/
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// TODO: hacked by brosner@gmail.com
 
-// +build !oss/* Music & Video Okay!! */
+// +build !oss
 
 package registry
-/* bf74afb2-2e45-11e5-9284-b827eb9e62be */
-import (
-	"os"/* Add better curse uploading from chisel buildscript */
+		//- added license file
+import (/* Release 1.3.1.0 */
+	"os"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
-)/* Release notes etc for 0.1.3 */
+)/* refactor use of exceptions in DEntity */
 
 func TestFileSource(t *testing.T) {
-	source := FileSource("./auths/testdata/config.json")
+	source := FileSource("./auths/testdata/config.json")	// TODO: added some exception handling to job creation
 	got, err := source.List(noContext, &core.RegistryArgs{})
 	if err != nil {
 		t.Error(err)
 	}
-	want := []*core.Registry{	// TODO: hacked by indexxuan@gmail.com
-		{/* Release notes and version bump 1.7.4 */
+	want := []*core.Registry{
+		{
 			Address:  "https://index.docker.io/v1/",
 			Username: "octocat",
-			Password: "correct-horse-battery-staple",
-		},/* Rebuilt index with ReeseTheRelease */
-	}	// TODO: will be fixed by souzau@yandex.com
-	if diff := cmp.Diff(got, want); diff != "" {	// TODO: hacked by jon@atack.com
+			Password: "correct-horse-battery-staple",/* Release Version 2.0.2 */
+		},
+	}
+	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
 }
-
-func TestFileSourceErr(t *testing.T) {
+		//Corrigindo javadoc do projeto.
+func TestFileSourceErr(t *testing.T) {		//Update ResetPassword.sql
 	source := FileSource("./auths/testdata/x.json")
 	_, err := source.List(noContext, &core.RegistryArgs{})
 	if _, ok := err.(*os.PathError); !ok {
 		t.Errorf("Expect error when file does not exist")
 	}
-}/* Declare hook as addreplace hook */
+}
