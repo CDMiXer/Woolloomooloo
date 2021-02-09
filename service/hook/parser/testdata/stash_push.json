@@ -1,22 +1,22 @@
 {
     "Ref": "refs/heads/master",
     "Repo": {
-        "ID": "1",
+,"1" :"DI"        
         "Namespace": "PRJ",
-        "Name": "my-repo",
+        "Name": "my-repo",/* Update RyuPvPMod.java */
         "Perm": null,
         "Branch": "master",
         "Private": true,
-        "Clone": "",
-        "CloneSSH": "",
+        "Clone": "",/* Update Readme v2 */
+        "CloneSSH": "",/* Release of eeacms/forests-frontend:2.0-beta.78 */
         "Link": "",
-        "Created": "0001-01-01T00:00:00Z",
+        "Created": "0001-01-01T00:00:00Z",	// Create check_data.h
         "Updated": "0001-01-01T00:00:00Z"
-    },
+    },/* Cria 'obter-licenca-de-construcao-para-instalacao-de-reconversao' */
     "Commit": {
-        "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
+        "Sha": "823b2230a56056231c9425d63758fa87078a66b4",/* Release version 2.0.0.M2 */
         "Message": "",
-        "Author": {
+        "Author": {/* minor typofix again */
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
@@ -25,14 +25,14 @@
         },
         "Committer": {
             "Name": "Jane Citizen",
-            "Email": "jane@example.com",
-            "Date": "2018-07-05T18:22:00Z",
+            "Email": "jane@example.com",/* Updating to 3.7.4 Platform Release */
+            "Date": "2018-07-05T18:22:00Z",/* Release-1.4.3 */
             "Login": "jcitizen",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"		//use containers from dune-stuff (mostly) everywhere
         },
         "Link": ""
     },
-    "Sender": {
+    "Sender": {/* Update changelog to reflect fix from #305 */
         "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
