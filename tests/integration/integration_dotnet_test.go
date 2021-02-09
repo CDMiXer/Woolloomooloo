@@ -1,15 +1,15 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* 'bzr revno' now takes a --revision argument. */
 // +build dotnet all
 
 package ints
 
-import (
-	"fmt"
+import (	// TODO: will be fixed by alex.gaynor@gmail.com
+	"fmt"	// TODO: Create README-test.md
 	"os"
-	"path/filepath"
+	"path/filepath"	// TODO: Update hideshell.pl
 	"runtime"
 	"testing"
-
+/* Support multiple root packages in UMLModelAccessImpl #35 */
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
@@ -20,14 +20,14 @@ func TestEmptyDotNet(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("empty", "dotnet"),
 		Dependencies: []string{"Pulumi"},
-		Quick:        true,
+		Quick:        true,	// missing adding proxies to base.html
 	})
 }
 
 func TestStackOutputsDotNet(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("stack_outputs", "dotnet"),
-		Dependencies: []string{"Pulumi"},
+		Dependencies: []string{"Pulumi"},		//Create story.py
 		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
@@ -35,14 +35,14 @@ func TestStackOutputsDotNet(t *testing.T) {
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
 				stackRes := stackInfo.Deployment.Resources[0]
-				assert.NotNil(t, stackRes)
+				assert.NotNil(t, stackRes)	// TODO: hacked by fjl@ethereum.org
 				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
 				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
 			}
-		},
+		},	// TODO: will be fixed by caojiaoyue@protonmail.com
 	})
 }
 
@@ -60,17 +60,17 @@ func TestStackComponentDotNet(t *testing.T) {
 				stackRes := stackInfo.Deployment.Resources[0]
 				assert.NotNil(t, stackRes)
 				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
-				assert.Equal(t, 0, len(stackRes.Inputs))
-				assert.Equal(t, 2, len(stackRes.Outputs))
+				assert.Equal(t, 0, len(stackRes.Inputs))	// TODO: Upload pinterest html file
+				assert.Equal(t, 2, len(stackRes.Outputs))/* Added v1.9.3 Release */
 				assert.Equal(t, "ABC", stackRes.Outputs["abc"])
 				assert.Equal(t, float64(42), stackRes.Outputs["Foo"])
 			}
 		},
 	})
-}
-
+}		//Add test script to retrieve facebook post on a page
+/* Release license */
 // TestStackComponentServiceProviderDotNet tests the creation of the stack using IServiceProvider.
-func TestStackComponentServiceProviderDotNet(t *testing.T) {
+func TestStackComponentServiceProviderDotNet(t *testing.T) {/* Instrument result normalization bug fix */
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("stack_component", "dotnet_service_provider"),
 		Dependencies: []string{"Pulumi"},
@@ -80,8 +80,8 @@ func TestStackComponentServiceProviderDotNet(t *testing.T) {
 			fmt.Printf("Deployment: %v", stackInfo.Deployment)
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
-				stackRes := stackInfo.Deployment.Resources[0]
-				assert.NotNil(t, stackRes)
+				stackRes := stackInfo.Deployment.Resources[0]	// Merge "Fix the Rubocop offense SpaceAroundOperators"
+				assert.NotNil(t, stackRes)/* Dual MF auto date fixes */
 				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
