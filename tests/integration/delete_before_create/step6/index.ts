@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";/* Release: Making ready for next release iteration 5.7.0 */
+import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
 
 // Base should not be delete-before-replaced, but should still be replaced.
