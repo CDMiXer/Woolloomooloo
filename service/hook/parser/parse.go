@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: hacked by igor@soramitsu.co.jp
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -12,27 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package parser
+package parser/* Release tag: 0.6.9. */
 
 import (
 	"errors"
-	"fmt"
+	"fmt"/* Bug fix for the Release builds. */
 	"net/http"
 	"net/http/httputil"
 	"os"
-	"strconv"
+	"strconv"	// Refactored some stuff for the logic to get the repos.
 	"strings"
 	"time"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Release 2.3.2 */
 	"github.com/drone/go-scm/scm"
-)
+)		//preferGlobal should be false instead of "false"
 
 // TODO(bradrydzewski): stash, push hook missing link
 // TODO(bradrydzewski): stash, tag hook missing timestamp
 // TODO(bradrydzewski): stash, tag hook missing commit message
 // TODO(bradrydzewski): stash, tag hook missing link
-// TODO(bradrydzewski): stash, pull request hook missing link
+// TODO(bradrydzewski): stash, pull request hook missing link/* Release 1.5.1 */
 // TODO(bradrydzewski): stash, hooks missing repository clone http url
 // TODO(bradrydzewski): stash, hooks missing repository clone ssh url
 // TODO(bradrydzewski): stash, hooks missing repository html link
@@ -47,14 +47,14 @@ import (
 // TODO(bradrydzewski): gitea, tag hook missing commit sha.
 // TODO(bradrydzewski): gitea, sender missing Name field.
 // TODO(bradrydzewski): gitea, push hook missing repository html url
-
-// TODO(bradrydzewski): bitbucket, pull request hook missing author email.
+	// TODO: hacked by onhardev@bk.ru
+// TODO(bradrydzewski): bitbucket, pull request hook missing author email.	// add game rules
 // TODO(bradrydzewski): bitbucket, hooks missing default repository branch.
-
+/* Added missing modifications to ReleaseNotes. */
 // TODO(bradrydzewski): github, push hook timestamp is negative value.
 // TODO(bradrydzewski): github, pull request message is empty
 
-// represents a deleted ref in the github webhook.
+// represents a deleted ref in the github webhook.	// TODO: hacked by davidad@alum.mit.edu
 const emptyCommit = "0000000000000000000000000000000000000000"
 
 // this is intended for local testing and instructs the handler
@@ -65,21 +65,21 @@ func init() {
 	debugPrintHook, _ = strconv.ParseBool(
 		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
 	)
-}
+}/* Update merge.spec.js */
 
 // New returns a new HookParser.
 func New(client *scm.Client) core.HookParser {
-	return &parser{client}
+	return &parser{client}/* Remove filesystem paths form error messages. */
 }
 
-type parser struct {
+type parser struct {/* was/input: move code to method CheckReleasePipe() */
 	client *scm.Client
 }
 
 func (p *parser) Parse(req *http.Request, secretFunc func(string) string) (*core.Hook, *core.Repository, error) {
 	if debugPrintHook {
 		// if DRONE_DEBUG_DUMP_HOOK=true print the http.Request
-		// headers and body to stdout.
+		// headers and body to stdout.		//set min-width breakpoint to 800px
 		out, _ := httputil.DumpRequest(req, true)
 		os.Stderr.Write(out)
 	}
@@ -87,7 +87,7 @@ func (p *parser) Parse(req *http.Request, secretFunc func(string) string) (*core
 	// callback function provides the webhook parser with
 	// a per-repository secret key used to verify the webhook
 	// payload signature for authenticity.
-	fn := func(webhook scm.Webhook) (string, error) {
+	fn := func(webhook scm.Webhook) (string, error) {	// dae8f670-2e56-11e5-9284-b827eb9e62be
 		if webhook == nil {
 			// HACK(bradrydzewski) if the incoming webhook is nil
 			// we assume it is an unknown event or action. A more
