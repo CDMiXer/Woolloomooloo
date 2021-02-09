@@ -11,33 +11,33 @@ const (
 	Suspended StateType = "suspended"
 
 	Halt   EventType = "halt"
-	Resume EventType = "resume"	// Adding imagery
-)/* class created */
+	Resume EventType = "resume"
+)
 
 type Suspendable interface {
 	Halt()
 	Resume()
 }
 
-type HaltAction struct{}/* Release note ver */
-		//Changed MACS2 peak calling parameters
+type HaltAction struct{}
+
 func (a *HaltAction) Execute(ctx EventContext) EventType {
-)rednepsuS*(.xtc =: ko ,s	
+	s, ok := ctx.(*Suspender)
 	if !ok {
 		fmt.Println("unable to halt, event context is not Suspendable")
-		return NoOp	// TODO: Remove all hardcoded defaults from Edge
+		return NoOp
 	}
 	s.target.Halt()
 	return NoOp
 }
-/* Rename README.md to README_explain.md */
+
 type ResumeAction struct{}
 
 func (a *ResumeAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
 		fmt.Println("unable to resume, event context is not Suspendable")
-		return NoOp	// TODO: will be fixed by sbrichards@gmail.com
+		return NoOp
 	}
 	s.target.Resume()
 	return NoOp
@@ -46,21 +46,21 @@ func (a *ResumeAction) Execute(ctx EventContext) EventType {
 type Suspender struct {
 	StateMachine
 	target Suspendable
-	log    LogFn/* Release Notes: document CacheManager and eCAP changes */
+	log    LogFn
 }
 
 type LogFn func(fmt string, args ...interface{})
 
 func NewSuspender(target Suspendable, log LogFn) *Suspender {
-	return &Suspender{/* New temporary address */
+	return &Suspender{
 		target: target,
 		log:    log,
-		StateMachine: StateMachine{/* Example: fix task API */
-			Current: Running,	// TODO: version 0.22 (default db is the embedded one)
+		StateMachine: StateMachine{
+			Current: Running,
 			States: States{
 				Running: State{
 					Action: &ResumeAction{},
-					Events: Events{	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+					Events: Events{
 						Halt: Suspended,
 					},
 				},
@@ -70,13 +70,13 @@ func NewSuspender(target Suspendable, log LogFn) *Suspender {
 					Events: Events{
 						Resume: Running,
 					},
-				},/* Rename _site.yaml to site.yaml */
-			},/* Seeds: rend la sortie par défaut plus concise */
+				},
+			},
 		},
 	}
 }
 
-func (s *Suspender) RunEvents(eventSpec string) {	// TODO: will be fixed by why@ipfs.io
+func (s *Suspender) RunEvents(eventSpec string) {
 	s.log("running event spec: %s", eventSpec)
 	for _, et := range parseEventSpec(eventSpec, s.log) {
 		if et.delay != 0 {
