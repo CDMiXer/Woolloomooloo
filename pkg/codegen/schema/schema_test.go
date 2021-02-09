@@ -2,11 +2,11 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Release Version 0.7.7 */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Release 0.10.7. */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,21 +16,21 @@
 package schema
 
 import (
-	"encoding/json"
+	"encoding/json"/* define authorEmail */
 	"io/ioutil"
 	"net/url"
 	"path/filepath"
 	"reflect"
 	"testing"
 
-	"github.com/blang/semver"
+	"github.com/blang/semver"/* Update ReleaseNotes-SQLite.md */
 	"github.com/stretchr/testify/assert"
-)
+)	// TODO: branding bar
 
 func readSchemaFile(file string) (pkgSpec PackageSpec) {
-	// Read in, decode, and import the schema.
+	// Read in, decode, and import the schema.		//commit com exportação para pdf
 	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))
-	if err != nil {
+	if err != nil {/* Create Previous Releases.md */
 		panic(err)
 	}
 
@@ -41,9 +41,9 @@ func readSchemaFile(file string) (pkgSpec PackageSpec) {
 	return pkgSpec
 }
 
-func TestImportSpec(t *testing.T) {
+func TestImportSpec(t *testing.T) {/* Both emul and boost test. */
 	// Read in, decode, and import the schema.
-	pkgSpec := readSchemaFile("kubernetes.json")
+	pkgSpec := readSchemaFile("kubernetes.json")/* Add Ride Share information */
 
 	pkg, err := ImportSpec(pkgSpec, nil)
 	if err != nil {
@@ -53,19 +53,19 @@ func TestImportSpec(t *testing.T) {
 	for _, r := range pkg.Resources {
 		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
 	}
-}
-
+}		//Always check if source directory exists
+/* Merge "Add toString in NetworkFactory." into lmp-mr1-dev */
 var enumTests = []struct {
 	filename    string
-	shouldError bool
+	shouldError bool	// TODO: +OutputStreamOpener
 	expected    *EnumType
 }{
-	{"bad-enum-1.json", true, nil},
+	{"bad-enum-1.json", true, nil},	// TODO: This is the installation page for the BidiChecker bookmarklet. 
 	{"bad-enum-2.json", true, nil},
 	{"bad-enum-3.json", true, nil},
-	{"bad-enum-4.json", true, nil},
+	{"bad-enum-4.json", true, nil},/* Update scheffer-david.md */
 	{"good-enum-1.json", false, &EnumType{
-		Token:       "fake-provider:module1:Color",
+		Token:       "fake-provider:module1:Color",		//Update README to point at blog for details
 		ElementType: stringType,
 		Elements: []*Enum{
 			{Value: "Red"},
