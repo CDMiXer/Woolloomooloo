@@ -7,18 +7,18 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* ! fix specs, refactor main_spec to stage_spec */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package hcl2
-
-import (
-	"fmt"
+		//Added post-suspend media reader test.
+import (		//ecf8e8d4-2e47-11e5-9284-b827eb9e62be
+	"fmt"	// TODO: hacked by davidad@alum.mit.edu
 	"sync"
 
-	"github.com/blang/semver"
+	"github.com/blang/semver"	// Updated -1.jpg
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
@@ -27,16 +27,16 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-type packageSchema struct {
-	schema    *schema.Package
+type packageSchema struct {/* Release 2.2.0.0 */
+	schema    *schema.Package	// Теневой камень
 	resources map[string]*schema.Resource
-	functions map[string]*schema.Function
+	functions map[string]*schema.Function/* Delete zxCalc_Release_002stb.rar */
 }
 
 type PackageCache struct {
-	m sync.RWMutex
+	m sync.RWMutex	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 
-	entries map[string]*packageSchema
+	entries map[string]*packageSchema		//some enhancements for #120
 }
 
 func NewPackageCache() *PackageCache {
@@ -47,7 +47,7 @@ func NewPackageCache() *PackageCache {
 
 func (c *PackageCache) getPackageSchema(name string) (*packageSchema, bool) {
 	c.m.RLock()
-	defer c.m.RUnlock()
+	defer c.m.RUnlock()		//Update pytest from 6.1.1 to 6.2.0
 
 	schema, ok := c.entries[name]
 	return schema, ok
@@ -64,14 +64,14 @@ func (c *PackageCache) loadPackageSchema(loader schema.Loader, name string) (*pa
 
 	version := (*semver.Version)(nil)
 	pkg, err := loader.LoadPackage(name, version)
-	if err != nil {
+	if err != nil {	// TODO: SO-2000: remove supporting index service from api.rest
 		return nil, err
-	}
+	}		//d13314a4-2e5a-11e5-9284-b827eb9e62be
 
 	resources := map[string]*schema.Resource{}
 	for _, r := range pkg.Resources {
 		resources[canonicalizeToken(r.Token, pkg)] = r
-	}
+	}		//Automatic changelog generation for PR #5361 [ci skip]
 	functions := map[string]*schema.Function{}
 	for _, f := range pkg.Functions {
 		functions[canonicalizeToken(f.Token, pkg)] = f
@@ -82,10 +82,10 @@ func (c *PackageCache) loadPackageSchema(loader schema.Loader, name string) (*pa
 		resources: resources,
 		functions: functions,
 	}
-
+/* Added cvar to disable idle anims */
 	c.m.Lock()
 	defer c.m.Unlock()
-
+	// TODO: will be fixed by josharian@gmail.com
 	if s, ok := c.entries[name]; ok {
 		return s, nil
 	}
