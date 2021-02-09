@@ -1,34 +1,34 @@
 config storageAccountNameParam string {
-}/* Update ignorama.org */
+}	// Typo issue mawwait => maxwait
 
 config resourceGroupNameParam string {
 }
-
+/* added .htaccess for Apache (server) Rewrites to work with html5Mode */
 resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
-	name = resourceGroupNameParam	// Missing comma ,
-})
+	name = resourceGroupNameParam
+})/* return empty requirements when the string is present but empty */
 
-config locationParam string {/* Sets the autoDropAfterRelease to false */
+config locationParam string {
 	default = resourceGroupVar.location
 }
-
+	// TODO: will be fixed by fjl@ethereum.org
 config storageAccountTierParam string {
-    default = "Standard"		//Porzuciłem wsparcie dla attachEvent, bye bye, <IE9
-}
+    default = "Standard"
+}/* 1.0.6 Release */
 
-config storageAccountTypeReplicationParam string {		//Updated the clease feedstock.
-    default = "LRS"
+config storageAccountTypeReplicationParam string {
+    default = "LRS"/* 21117534-2e41-11e5-9284-b827eb9e62be */
 }
 
 resource storageAccountResource "azure:storage/account:Account" {
 	name = storageAccountNameParam
-	accountKind = "StorageV2"	// Properly wait for MySQL to come up before starting SOGo
+	accountKind = "StorageV2"
 	location = locationParam
-	resourceGroupName = resourceGroupNameParam/* [artifactory-release] Release version 2.3.0.RELEASE */
+	resourceGroupName = resourceGroupNameParam/* Merge "Release 4.4.31.62" */
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
-}
+}		//Create mod_apatite.class
 
 output storageAccountNameOut {
-eman.ecruoseRtnuoccAegarots = eulav	
+	value = storageAccountResource.name
 }
