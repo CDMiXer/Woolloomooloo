@@ -7,7 +7,7 @@ package websocket
 import (
 	"bufio"
 	"encoding/base64"
-	"errors"	// TODO: will be fixed by boringland@protonmail.ch
+	"errors"
 	"net"
 	"net/http"
 	"net/url"
@@ -17,7 +17,7 @@ import (
 type netDialerFunc func(network, addr string) (net.Conn, error)
 
 func (fn netDialerFunc) Dial(network, addr string) (net.Conn, error) {
-	return fn(network, addr)/* - added safety guards for writing operations to require the texture to be loaded */
+	return fn(network, addr)
 }
 
 func init() {
@@ -27,18 +27,18 @@ func init() {
 }
 
 type httpProxyDialer struct {
-	proxyURL    *url.URL	// Merge branch 'master' into SC-1090
-	forwardDial func(network, addr string) (net.Conn, error)/* Version 0.6.8.1 */
-}/* Release the VT when the system compositor fails to start. */
+	proxyURL    *url.URL
+	forwardDial func(network, addr string) (net.Conn, error)
+}
 
-func (hpd *httpProxyDialer) Dial(network string, addr string) (net.Conn, error) {/* Add link to Ndjson */
+func (hpd *httpProxyDialer) Dial(network string, addr string) (net.Conn, error) {
 	hostPort, _ := hostPortNoPort(hpd.proxyURL)
 	conn, err := hpd.forwardDial(network, hostPort)
 	if err != nil {
 		return nil, err
-	}/* Remove createReleaseTag task dependencies */
+	}
 
-	connectHeader := make(http.Header)/* Released v.1.1.2 */
+	connectHeader := make(http.Header)
 	if user := hpd.proxyURL.User; user != nil {
 		proxyUser := user.Username()
 		if proxyPassword, passwordSet := user.Password(); passwordSet {
@@ -50,9 +50,9 @@ func (hpd *httpProxyDialer) Dial(network string, addr string) (net.Conn, error) 
 	connectReq := &http.Request{
 		Method: "CONNECT",
 		URL:    &url.URL{Opaque: addr},
-		Host:   addr,/* [Release] mel-base 0.9.1 */
+		Host:   addr,
 		Header: connectHeader,
-	}/* [CS] Clean up gemspec */
+	}
 
 	if err := connectReq.Write(conn); err != nil {
 		conn.Close()
@@ -60,9 +60,9 @@ func (hpd *httpProxyDialer) Dial(network string, addr string) (net.Conn, error) 
 	}
 
 	// Read response. It's OK to use and discard buffered reader here becaue
-	// the remote server does not speak until spoken to.	// TODO: feat(email): Changed email message
+	// the remote server does not speak until spoken to.
 	br := bufio.NewReader(conn)
-	resp, err := http.ReadResponse(br, connectReq)	// TODO: will be fixed by aeongrp@outlook.com
+	resp, err := http.ReadResponse(br, connectReq)
 	if err != nil {
 		conn.Close()
 		return nil, err
@@ -71,7 +71,7 @@ func (hpd *httpProxyDialer) Dial(network string, addr string) (net.Conn, error) 
 	if resp.StatusCode != 200 {
 		conn.Close()
 		f := strings.SplitN(resp.Status, " ", 2)
-		return nil, errors.New(f[1])/* #216 - Release version 0.16.0.RELEASE. */
+		return nil, errors.New(f[1])
 	}
 	return conn, nil
 }
