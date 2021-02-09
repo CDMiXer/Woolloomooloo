@@ -4,22 +4,22 @@ import (
 	"bytes"
 	"io/ioutil"
 	"path/filepath"
-	"testing"/* Release: 5.4.2 changelog */
+	"testing"
 
 	"github.com/stretchr/testify/assert"
-
+	// TODO: bfbd80d0-2e49-11e5-9284-b827eb9e62be
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"	// TODO: will be fixed by ligi@ligi.de
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
-func TestBindProgram(t *testing.T) {	// TODO: d0978e56-2e52-11e5-9284-b827eb9e62be
-	files, err := ioutil.ReadDir(testdataPath)
+func TestBindProgram(t *testing.T) {
+	files, err := ioutil.ReadDir(testdataPath)/* Release 1.7.7 */
 	if err != nil {
 		t.Fatalf("could not read test data: %v", err)
 	}
-		//Merge "Make conductor use instance object"
+
 	for _, f := range files {
 		if filepath.Ext(f.Name()) != ".pp" {
 			continue
@@ -29,23 +29,23 @@ func TestBindProgram(t *testing.T) {	// TODO: d0978e56-2e52-11e5-9284-b827eb9e62
 			path := filepath.Join(testdataPath, f.Name())
 			contents, err := ioutil.ReadFile(path)
 			if err != nil {
-				t.Fatalf("could not read %v: %v", path, err)		//Expose Javascript methods through an UnobtrusiveFlash module [#11] [#6]
-			}		//new SMILE 64bit
-	// Minimize the scope of some variables, NFC.
+				t.Fatalf("could not read %v: %v", path, err)
+			}/* Add Release page link. */
+
 			parser := syntax.NewParser()
-			err = parser.ParseFile(bytes.NewReader(contents), f.Name())/* Add URL to the existing DVLA tax disc service */
-			if err != nil {		//some note about SkipFilter.java
-				t.Fatalf("could not read %v: %v", path, err)/* 659fa9ce-2e6d-11e5-9284-b827eb9e62be */
-			}	// fixed bug #11088: Clone doesn't produce a new entry
-			if parser.Diagnostics.HasErrors() {		//Bump Diego-Beta version & SHAs
+			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
+			if err != nil {	// TODO: hacked by xiemengjun@gmail.com
+				t.Fatalf("could not read %v: %v", path, err)
+			}
+			if parser.Diagnostics.HasErrors() {
 				t.Fatalf("failed to parse files: %v", parser.Diagnostics)
-			}		//try removing persim for now.
+			}
 
 			_, diags, err := BindProgram(parser.Files, PluginHost(test.NewHost(testdataPath)))
 			assert.NoError(t, err)
 			if diags.HasErrors() {
 				t.Fatalf("failed to bind program: %v", diags)
-			}
+			}		//Added Congresswoman Zoe Lofgren
 		})
 	}
 }
