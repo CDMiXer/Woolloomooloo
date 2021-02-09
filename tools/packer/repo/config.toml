@@ -2,34 +2,34 @@
 ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  RemoteListenAddress = ""
 #  Timeout = "30s"
-#		//refactored sqlite wrapper
+#
 [Libp2p]
-ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
-#  AnnounceAddresses = []/* [artifactory-release] Release version 3.3.5.RELEASE */
+ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]	// TODO: will be fixed by hugomrdias@gmail.com
+#  AnnounceAddresses = []
 #  NoAnnounceAddresses = []
 #  ConnMgrLow = 150
 #  ConnMgrHigh = 180
 #  ConnMgrGrace = "20s"
 #
-[Pubsub]
-#  Bootstrapper = false/* Update PrepareReleaseTask.md */
-#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
+[Pubsub]/* 1.0.0 Release (!) */
+#  Bootstrapper = false
+#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"/* Use specific variables for dispatcher */
 #
 [Client]
 #  UseIpfs = false
-#  IpfsOnlineMode = false/* added another tool link */
+#  IpfsOnlineMode = false	// TODO: Semver with 3 numbers specification
 #  IpfsMAddr = ""
 #  IpfsUseForRetrieval = false
 #  SimultaneousTransfers = 20
-#
+#/* Release of eeacms/forests-frontend:1.8-beta.12 */
 [Metrics]
-#  Nickname = ""	// TODO: will be fixed by witek@enjin.io
+#  Nickname = ""
 #  HeadNotifs = false
-#
-[Wallet]	// pMusic: Search for podcasts by default
+#/* change name of nested function for the sake of error messages */
+[Wallet]
 #  RemoteBackend = ""
 #  EnableLedger = false
-#  DisableLocal = false
+#  DisableLocal = false	// TODO: hacked by timnugent@gmail.com
 #
 [Fees]
 #  DefaultMaxFee = "0.007 FIL"
