@@ -6,37 +6,37 @@
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
-  builder = "docker:go"	// TODO: [IMP]: caldav: Added description field in calendar
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]/* Update Release Notes.md */
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
-/* Merge "Camera: codegen doc update (dynamic black level)" into nyc-dev */
+
 [global.run.test_params]
-  clients = "5"	// TODO: da38bafc-2e61-11e5-9284-b827eb9e62be
+  clients = "5"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "5"/* Automatic changelog generation for PR #29662 [ci skip] */
+  sectors = "5"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]	// TODO: hacked by igor@soramitsu.co.jp
+  [groups.instances]
     count = 1
     percentage = 0.0
-]nur.spuorg[  
-    [groups.run.test_params]/* Updated to Post Release Version Number 1.31 */
+  [groups.run]
+    [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]		//Added note about this project not being maintained
+[[groups]]
   id = "miners"
   [groups.instances]
     count = 1
@@ -45,10 +45,10 @@
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]		//correct namespace
+[[groups]]
   id = "clients"
   [groups.instances]
-    count = 5	// Edit pix test and config to work with the old Mohawk pix manager
+    count = 5
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
