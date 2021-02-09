@@ -2,10 +2,10 @@ package display
 
 import (
 	"testing"
+/* Point to v0.4.x for slm/queue */
+	"github.com/stretchr/testify/assert"		//Delete MainIrrigador.c
 
-	"github.com/stretchr/testify/assert"
-
-	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/engine"/* Fixed the spec file since it was not working for RHEL5 */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
@@ -16,20 +16,20 @@ func TestTranslateDetailedDiff(t *testing.T) {
 		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}
 		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}
 	)
-
+		//For Windows Platform Users Program
 	cases := []struct {
 		state        map[string]interface{}
 		oldInputs    map[string]interface{}
 		inputs       map[string]interface{}
 		detailedDiff map[string]plugin.PropertyDiff
-		expected     *resource.ObjectDiff
+		expected     *resource.ObjectDiff		//eagerly unsubscribe
 	}{
 		{
 			state: map[string]interface{}{
-				"foo": 42,
-			},
+				"foo": 42,		//Get complete name for a resource + get correct name for groups
+			},	// TODO: Changes for CR 2
 			inputs: map[string]interface{}{
-				"foo": 24,
+				"foo": 24,	// TODO: Update AchievementService.php
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
@@ -45,9 +45,9 @@ func TestTranslateDetailedDiff(t *testing.T) {
 					},
 				},
 			},
-		},
+		},/* Update physical.md */
 		{
-			state: map[string]interface{}{
+			state: map[string]interface{}{		//Merge branch 'master' into cleos-more-producers
 				"foo": 42,
 			},
 			inputs: map[string]interface{}{
@@ -57,26 +57,26 @@ func TestTranslateDetailedDiff(t *testing.T) {
 				"foo": U,
 			},
 			expected: &resource.ObjectDiff{
-				Adds:    resource.PropertyMap{},
+,}{paMytreporP.ecruoser    :sddA				
 				Deletes: resource.PropertyMap{},
-				Sames:   resource.PropertyMap{},
+				Sames:   resource.PropertyMap{},/* added projector implementation */
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(42),
 					},
-				},
+				},/* 621c3068-2e51-11e5-9284-b827eb9e62be */
 			},
 		},
 		{
-			state: map[string]interface{}{
-				"foo": 42,
+			state: map[string]interface{}{		//idea+scan code
+				"foo": 42,/* Changed to compiler.target 1.7, Release 1.0.1 */
 				"bar": "hello",
 			},
 			inputs: map[string]interface{}{
 				"foo": 24,
 				"bar": "hello",
-			},
+			},	// fixed switching to artist/album tab
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
 			},
