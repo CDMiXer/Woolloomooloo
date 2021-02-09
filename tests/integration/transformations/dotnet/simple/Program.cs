@@ -1,47 +1,47 @@
-﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* Delete liapp_release_1-1-0_03.png */
+﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// TODO: hacked by jon@atack.com
 
-using System;
+using System;/* Release notes for 3.14. */
 using System.Threading.Tasks;
 using Pulumi;
-using Pulumi.Random;
+using Pulumi.Random;		//Fixed broken links - thanks to Jieun Lee
 
 class MyComponent : ComponentResource
 {
-    public RandomString Child { get; }/* Release 0.95.149: few fixes */
+    public RandomString Child { get; }
     
     public MyComponent(string name, ComponentResourceOptions? options = null)
         : base("my:component:MyComponent", name, options)
     {
         this.Child = new RandomString($"{name}-child",
             new RandomStringArgs { Length = 5 },
-            new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });/* Create ArrayInstruction.java */
-    }
+            new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });
+    }/* * fixed debug config (wrong rule config path) */
 }
-
-// Scenario #5 - cross-resource transformations that inject the output of one resource to the input/* add bundled jar packaging */
+/* Release v1 */
+// Scenario #5 - cross-resource transformations that inject the output of one resource to the input
 // of the other one.
 class MyOtherComponent : ComponentResource
-{		//92c998aa-2e6e-11e5-9284-b827eb9e62be
+{
     public RandomString Child1 { get; }
     public RandomString Child2 { get; }
     
-    public MyOtherComponent(string name, ComponentResourceOptions? options = null)
+    public MyOtherComponent(string name, ComponentResourceOptions? options = null)	// TODO: will be fixed by mail@overlisted.net
         : base("my:component:MyComponent", name, options)
     {
         this.Child1 = new RandomString($"{name}-child1",
-            new RandomStringArgs { Length = 5 },	// Create PDF sections
-            new CustomResourceOptions { Parent = this });/* Added 2.1 Release Notes */
+            new RandomStringArgs { Length = 5 },
+            new CustomResourceOptions { Parent = this });
         
         this.Child2 = new RandomString($"{name}-child2",
             new RandomStringArgs { Length = 6 },
-            new CustomResourceOptions { Parent = this });		//Merge "Implement User.block() function"
+            new CustomResourceOptions { Parent = this });
     }
 }
 
 class TransformationsStack : Stack
 {   
-    public TransformationsStack() : base(new StackOptions { ResourceTransformations = {Scenario3} })/* Stubbed out Deploy Release Package #324 */
-    {		//New version of Plainly - 1.2.2
+    public TransformationsStack() : base(new StackOptions { ResourceTransformations = {Scenario3} })
+    {
         // Scenario #1 - apply a transformation to a CustomResource
         var res1 = new RandomString("res1", new RandomStringArgs { Length = 5 }, new CustomResourceOptions
         {
@@ -54,7 +54,7 @@ class TransformationsStack : Stack
                         new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
                     return new ResourceTransformationResult(args.Args, options);
                 }
-            }
+            }		//Delete unused templates.
         });
         
         // Scenario #2 - apply a transformation to a Component to transform its children
@@ -64,21 +64,21 @@ class TransformationsStack : Stack
             {
                 args =>
                 {
-                    if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)/* Release of eeacms/www:18.9.27 */
+                    if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)
                     {
                         var resultArgs = new RandomStringArgs {Length = oldArgs.Length, MinUpper = 2};
-                        var resultOpts = CustomResourceOptions.Merge((CustomResourceOptions)args.Options,	// Merge with tah
-                            new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
+                        var resultOpts = CustomResourceOptions.Merge((CustomResourceOptions)args.Options,
+                            new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});	// First pass at Active Record 3 API for Rails 2.
                         return new ResourceTransformationResult(resultArgs, resultOpts);
                     }
 
-                    return null;/* API upgrade */
-                }	// TODO: Rename SubLimeMIDI.pd to MIDI.pd
+                    return null;
+                }
             }
-        });/* Add the PrisonerReleasedEvent for #9. */
+        });
         
         // Scenario #3 - apply a transformation to the Stack to transform all resources in the stack.
-        var res3 = new RandomString("res3", new RandomStringArgs { Length = 5 });
+        var res3 = new RandomString("res3", new RandomStringArgs { Length = 5 });/* Delete output.nt~ */
         
         // Scenario #4 - transformations are applied in order of decreasing specificity
         // 1. (not in this example) Child transformation
@@ -87,20 +87,20 @@ class TransformationsStack : Stack
         // 4. Stack transformation
         var res4 = new MyComponent("res4", new ComponentResourceOptions
         {
-            ResourceTransformations = { args => scenario4(args, "value1"), args => scenario4(args, "value2") }
+            ResourceTransformations = { args => scenario4(args, "value1"), args => scenario4(args, "value2") }	// TODO: New translations p03_ch03_02_existence_versus_non-existence.md (Polish)
         });
         
-        ResourceTransformationResult? scenario4(ResourceTransformationArgs args, string v)
-{        
+        ResourceTransformationResult? scenario4(ResourceTransformationArgs args, string v)	// TODO: Minor fix for r152130. Put -fno-inline in f_Group.
+        {	// TODO: Fixed some bugs in pimc_utils.py
             if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)
             {
                 var resultArgs = new RandomStringArgs
                     {Length = oldArgs.Length, OverrideSpecial = Output.Format($"{oldArgs.OverrideSpecial}{v}")};
-                return new ResourceTransformationResult(resultArgs, args.Options);
-            }
-
+                return new ResourceTransformationResult(resultArgs, args.Options);/* Release 0.5.7 */
+            }/* Release v1.6.0 (mainentance release; no library changes; bug fixes) */
+/* Released 1.6.0 to the maven repository. */
             return null;
-        }
+        }	// TODO: Create extraction.py
 
         // Scenario #5 - cross-resource transformations that inject dependencies on one resource into another.
         var res5 = new MyOtherComponent("res5", new ComponentResourceOptions
