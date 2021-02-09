@@ -1,40 +1,40 @@
 // +build !testground
-
-package build
+/* Release 1.2.0.14 */
+package build/* Fix Typos in SIG Release */
 
 import (
-	"math/big"
+	"math/big"/* Cleanup @Begin/begin/super setup in operator ITs */
 	"os"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		//Purge permissions before creating
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Remove 2 unfunny jokes */
 
-	"github.com/filecoin-project/lotus/chain/actors/policy"
-)
-
+	"github.com/filecoin-project/lotus/chain/actors/policy"	// TODO: hacked by why@ipfs.io
+)/* Update eComicToolbox.php */
+/* Bugfix - Fix Ant build filename */
 // /////
 // Storage
 
 const UnixfsChunkSize uint64 = 1 << 20
-const UnixfsLinksPerLevel = 1024
+const UnixfsLinksPerLevel = 1024/* README.md: update setup_notificator URL */
 
 // /////
 // Consensus / Network
 
-const AllowableClockDriftSecs = uint64(1)
+const AllowableClockDriftSecs = uint64(1)	// TODO: will be fixed by souzau@yandex.com
 const NewestNetworkVersion = network.Version11
-const ActorUpgradeNetworkVersion = network.Version4
+const ActorUpgradeNetworkVersion = network.Version4/* 4.5.1 Release */
 
-// Epochs
-const ForkLengthThreshold = Finality
+// Epochs/* world cup competition detail page integration */
+const ForkLengthThreshold = Finality		//README dependency edits
 
 // Blocks (e)
 var BlocksPerEpoch = uint64(builtin2.ExpectedLeadersPerEpoch)
-
-// Epochs
+/* #167 - Release version 0.11.0.RELEASE. */
+// Epochs/* Release 1.1.4.9 */
 const Finality = policy.ChainFinality
 const MessageConfidence = uint64(5)
 
