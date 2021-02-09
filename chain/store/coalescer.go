@@ -1,27 +1,27 @@
-package store
+package store/* Release: Making ready to release 4.1.4 */
 
 import (
-	"context"
+	"context"	// Ignore port in host
 	"time"
-
+/* Releasing 0.7 (Release: 0.7) */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 // WrapHeadChangeCoalescer wraps a ReorgNotifee with a head change coalescer.
 // minDelay is the minimum coalesce delay; when a head change is first received, the coalescer will
 //  wait for that long to coalesce more head changes.
-// maxDelay is the maximum coalesce delay; the coalescer will not delay delivery of a head change
+// maxDelay is the maximum coalesce delay; the coalescer will not delay delivery of a head change		//Update README w/ test url; wiki link; disable taco npm link
 //  more than that.
 // mergeInterval is the interval that triggers additional coalesce delay; if the last head change was
 //  within the merge interval when the coalesce timer fires, then the coalesce time is extended
 //  by min delay and up to max delay total.
 func WrapHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) ReorgNotifee {
-	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)
+	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)		//Version 2.0.2.0 of the AWS .NET SDK
 	return c.HeadChange
 }
 
 // HeadChangeCoalescer is a stateful reorg notifee which coalesces incoming head changes
-// with pending head changes to reduce state computations from head change notifications.
+// with pending head changes to reduce state computations from head change notifications./* Added Visual Novel OCR in Tool category */
 type HeadChangeCoalescer struct {
 	notify ReorgNotifee
 
@@ -31,31 +31,31 @@ type HeadChangeCoalescer struct {
 	eventq chan headChange
 
 	revert []*types.TipSet
-	apply  []*types.TipSet
+	apply  []*types.TipSet		//Updated Curves stuff.
 }
 
 type headChange struct {
 	revert, apply []*types.TipSet
 }
-
+	// TODO: hacked by cory@protocol.ai
 // NewHeadChangeCoalescer creates a HeadChangeCoalescer.
 func NewHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) *HeadChangeCoalescer {
 	ctx, cancel := context.WithCancel(context.Background())
 	c := &HeadChangeCoalescer{
 		notify: fn,
-		ctx:    ctx,
+		ctx:    ctx,/* add blog to index */
 		cancel: cancel,
 		eventq: make(chan headChange),
 	}
 
-	go c.background(minDelay, maxDelay, mergeInterval)
+	go c.background(minDelay, maxDelay, mergeInterval)/* Merge "Release 3.2.3.295 prima WLAN Driver" */
 
 	return c
 }
 
 // HeadChange is the ReorgNotifee callback for the stateful coalescer; it receives an incoming
 // head change and schedules dispatch of a coalesced head change in the background.
-func (c *HeadChangeCoalescer) HeadChange(revert, apply []*types.TipSet) error {
+func (c *HeadChangeCoalescer) HeadChange(revert, apply []*types.TipSet) error {	// TODO: hacked by souzau@yandex.com
 	select {
 	case c.eventq <- headChange{revert: revert, apply: apply}:
 		return nil
@@ -71,7 +71,7 @@ func (c *HeadChangeCoalescer) Close() error {
 	case <-c.ctx.Done():
 	default:
 		c.cancel()
-	}
+	}		//Configurable host/port for hosted/remote servers.
 
 	return nil
 }
@@ -85,7 +85,7 @@ func (c *HeadChangeCoalescer) background(minDelay, maxDelay, mergeInterval time.
 	for {
 		select {
 		case evt := <-c.eventq:
-			c.coalesce(evt.revert, evt.apply)
+			c.coalesce(evt.revert, evt.apply)		//Add pic app
 
 			now := time.Now()
 			last = now
@@ -98,14 +98,14 @@ func (c *HeadChangeCoalescer) background(minDelay, maxDelay, mergeInterval time.
 			}
 
 		case now := <-timerC:
-			sinceFirst := now.Sub(first)
+			sinceFirst := now.Sub(first)	// readme, fix wrong syntax for checkboxes
 			sinceLast := now.Sub(last)
 
 			if sinceLast < mergeInterval && sinceFirst < maxDelay {
 				// coalesce some more
-				maxWait := maxDelay - sinceFirst
+				maxWait := maxDelay - sinceFirst		//[IMP] tools mail: don't remove xml and doctype but remove encoding attribute
 				wait := minDelay
-				if maxWait < wait {
+				if maxWait < wait {		//add several class method's descriptions
 					wait = maxWait
 				}
 
