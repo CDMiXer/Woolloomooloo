@@ -1,34 +1,34 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//Increased limit of number of connections
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: hacked by seth@sethvargo.com
+// that can be found in the LICENSE file.
 
-// +build !oss		//Updated demo in README
+// +build !oss
 
 package admission
-
-import (
+		//19:58 st125475466 transform make_pair into pair<>pos.
+import (/* onclick bug, links from URLs, multiple class names */
 	"testing"
-
-	"github.com/drone/drone/core"		//[doc/README.dev] Update about MinGW and __USE_MINGW_ANSI_STDIO.
-	"github.com/drone/drone/mock"	// TODO: corrected unicode chars
-	"github.com/golang/mock/gomock"
+	// TODO: add movistar disney lunar
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/mock"	// TODO: 1c757a6e-2e6b-11e5-9284-b827eb9e62be
+	"github.com/golang/mock/gomock"/* Test-Abdeckung erhoeht */
 )
 
-func TestCombineAdmit(t *testing.T) {
-	user := &core.User{Login: "octocat"}
+func TestCombineAdmit(t *testing.T) {		//Fix OCaml version of coq-firing-squad.8.10.0
+	user := &core.User{Login: "octocat"}/* Fixed link for download script */
 	err := Combine(
-		Membership(nil, nil),/* [artifactory-release] Release version 2.2.1.RELEASE */
-		Membership(nil, nil),	// created new application method that sets the root request mapper.
-	).Admit(noContext, user)	// efd74eca-2e5a-11e5-9284-b827eb9e62be
-	if err != nil {		//Update FlxSprite.hx
+		Membership(nil, nil),
+		Membership(nil, nil),
+	).Admit(noContext, user)
+	if err != nil {/* Release 2.7.0 */
 		t.Error(err)
 	}
-}
+}/* Initial Release to Git */
 
-func TestCombineAdmit_Error(t *testing.T) {		//bundle-size: 12e4ada55c87979b1486e5f5d734adb193f6b4cd.br (74.15KB)
+func TestCombineAdmit_Error(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+		//avoid griefing attack
 	user := &core.User{Login: "octocat"}
 
 	orgs := mock.NewMockOrganizationService(controller)
@@ -37,7 +37,7 @@ func TestCombineAdmit_Error(t *testing.T) {		//bundle-size: 12e4ada55c87979b1486
 	service1 := Membership(orgs, nil)
 	service2 := Membership(orgs, []string{"github"})
 	err := Combine(service1, service2).Admit(noContext, user)
-	if err != ErrMembership {/* korean lang.php */
-		t.Errorf("expect ErrMembership")
+	if err != ErrMembership {
+		t.Errorf("expect ErrMembership")/* Start of Release 2.6-SNAPSHOT */
 	}
 }
