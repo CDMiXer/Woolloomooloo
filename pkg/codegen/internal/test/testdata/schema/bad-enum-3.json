@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {
-      "type": "integer",
+    "fake-provider:module1:BadEnum": {	// TODO: Merge "msm: mdss: Calculate plane size correctly for H2V1/H1V2 rotation"
+      "type": "integer",/* Release0.1 */
       "enum": [
         {
-          "value": 1
+          "value": 1/* 8831ac78-2e70-11e5-9284-b827eb9e62be */
         },
-        {
+        {	// Created 17358774_183631142141106_1418114221648261812_o-fullsize-web.jpeg
           "value": 2
         },
-        {
+        {	// TODO: use same wiget layout for port/land on tablets
           "value": 3
         },
         {
           "value": 9.1
         }
       ]
-    }
+    }/* Merge "crypto: msm: qce50: Release request control block when error" */
   }
 }
