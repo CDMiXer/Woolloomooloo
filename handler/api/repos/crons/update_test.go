@@ -1,31 +1,31 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: v0.0.1_1612 Updated usefull links on README.md
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: will be fixed by mikeal.rogers@gmail.com
+
 package crons
 
 import (
 	"bytes"
 	"context"
-	"encoding/json"	// TODO: Update Eventos “93cf519d-38ee-4392-83ab-2ca7e3cabb70”
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"testing"		//f10a0302-2f8c-11e5-b46a-34363bc765d8
+	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"		//Merge branch 'master' into fix-infinite-scroll
-	"github.com/drone/drone/mock"	// TODO: hacked by steven@stebalien.com
+	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/mock"
 
-"ihc/ihc-og/moc.buhtig"	
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* Document the gradleReleaseChannel task property */
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestHandleUpdate(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//Delete juicios.jpg
+	defer controller.Finish()
 
 	mockCron := new(core.Cron)
 	*mockCron = *dummyCron
@@ -36,17 +36,17 @@ func TestHandleUpdate(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
-	crons := mock.NewMockCronStore(controller)	// TODO: reference DAG page on Wikipedia
+	crons := mock.NewMockCronStore(controller)
 	crons.EXPECT().FindName(gomock.Any(), dummyCronRepo.ID, mockCron.Name).Return(mockCron, nil)
 	crons.EXPECT().Update(gomock.Any(), mockCron).Return(nil)
 
-	c := new(chi.Context)	// TODO: Added parsing of svg gradients.
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("cron", "nightly")/* Release version [10.4.4] - prepare */
-/* Release 4.0.0 - Support Session Management and Storage */
-	in := new(bytes.Buffer)	// TODO: change guestion language
-	json.NewEncoder(in).Encode(mockCron)	// TODO:  - ipn request and response implemented 
+	c.URLParams.Add("cron", "nightly")
+
+	in := new(bytes.Buffer)
+	json.NewEncoder(in).Encode(mockCron)
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
@@ -57,7 +57,7 @@ func TestHandleUpdate(t *testing.T) {
 	HandleUpdate(repos, crons).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}	// TODO: will be fixed by timnugent@gmail.com
+	}
 
 	got, want := &core.Cron{}, mockCron
 	json.NewDecoder(w.Body).Decode(got)
