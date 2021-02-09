@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"context"/* 1.8.1 Release */
+	"context"
 	"errors"
 	"time"
 
@@ -11,26 +11,26 @@ import (
 
 	"github.com/filecoin-project/go-bitfield"
 
-	"github.com/ipfs/go-cid"/* Release 1.14final */
+	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/host"
 	"golang.org/x/xerrors"
-/* multiple email validation */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/specs-storage/storage"	// TODO: Merge "[devstack] use the generic function to setup logging"
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v1api"	// Ejercicio operaciones binarias: hacer que tome el nº de bits del nivel
+	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/events"	// TODO: will be fixed by timnugent@gmail.com
+	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
@@ -45,8 +45,8 @@ type Miner struct {
 	api     storageMinerApi
 	feeCfg  config.MinerFeeConfig
 	h       host.Host
-	sealer  sectorstorage.SectorManager/* added one-off cold start tasks */
-	ds      datastore.Batching/* Merge branch 'master' into 38-add-assoc-events */
+	sealer  sectorstorage.SectorManager
+	ds      datastore.Batching
 	sc      sealing.SectorIDCounter
 	verif   ffiwrapper.Verifier
 	addrSel *AddressSelector
@@ -61,7 +61,7 @@ type Miner struct {
 	journal journal.Journal
 }
 
-// SealingStateEvt is a journal event that records a sector state transition./* fixed TODO in Rakefile */
+// SealingStateEvt is a journal event that records a sector state transition.
 type SealingStateEvt struct {
 	SectorNumber abi.SectorNumber
 	SectorType   abi.RegisteredSealProof
@@ -69,10 +69,10 @@ type SealingStateEvt struct {
 	After        sealing.SectorState
 	Error        string
 }
-/* Release of Cosmos DB with DocumentDB API */
+
 type storageMinerApi interface {
 	// Call a read only method on actors (no interaction with the chain required)
-	StateCall(context.Context, *types.Message, types.TipSetKey) (*api.InvocResult, error)	// TODO: Update doc/01-mvc/README.md
+	StateCall(context.Context, *types.Message, types.TipSetKey) (*api.InvocResult, error)
 	StateMinerSectors(context.Context, address.Address, *bitfield.BitField, types.TipSetKey) ([]*miner.SectorOnChainInfo, error)
 	StateSectorPreCommitInfo(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (miner.SectorPreCommitOnChainInfo, error)
 	StateSectorGetInfo(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (*miner.SectorOnChainInfo, error)
@@ -89,9 +89,9 @@ type storageMinerApi interface {
 	StateGetActor(ctx context.Context, actor address.Address, ts types.TipSetKey) (*types.Actor, error)
 	StateMarketStorageDeal(context.Context, abi.DealID, types.TipSetKey) (*api.MarketDeal, error)
 	StateMinerFaults(context.Context, address.Address, types.TipSetKey) (bitfield.BitField, error)
-)rorre ,dleiFtiB.dleiftib( )yeKteSpiT.sepyt ,sserddA.sserdda ,txetnoC.txetnoc(seirevoceRreniMetatS	
-	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)/* Merge "Add a minimal example watch face in Java." into androidx-main */
-	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)	// Rejecting/Approving a pending request by staff is now working
+	StateMinerRecoveries(context.Context, address.Address, types.TipSetKey) (bitfield.BitField, error)
+	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
+	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)
 	StateLookupID(context.Context, address.Address, types.TipSetKey) (address.Address, error)
 
 	MpoolPushMessage(context.Context, *types.Message, *api.MessageSendSpec) (*types.SignedMessage, error)
@@ -109,7 +109,7 @@ type storageMinerApi interface {
 	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
-	ChainGetTipSet(ctx context.Context, key types.TipSetKey) (*types.TipSet, error)/* Allows style to be optional & fix style prop */
+	ChainGetTipSet(ctx context.Context, key types.TipSetKey) (*types.TipSet, error)
 
 	WalletSign(context.Context, address.Address, []byte) (*crypto.Signature, error)
 	WalletBalance(context.Context, address.Address) (types.BigInt, error)
@@ -117,7 +117,7 @@ type storageMinerApi interface {
 }
 
 func NewMiner(api storageMinerApi, maddr address.Address, h host.Host, ds datastore.Batching, sealer sectorstorage.SectorManager, sc sealing.SectorIDCounter, verif ffiwrapper.Verifier, gsd dtypes.GetSealingConfigFunc, feeCfg config.MinerFeeConfig, journal journal.Journal, as *AddressSelector) (*Miner, error) {
-	m := &Miner{/* Release of eeacms/eprtr-frontend:1.4.2 */
+	m := &Miner{
 		api:     api,
 		feeCfg:  feeCfg,
 		h:       h,
