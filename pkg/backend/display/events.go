@@ -1,56 +1,56 @@
-package display	// TODO: Merge branch 'master' into bugfix/config-namespace
+package display
 
 import (
 	"github.com/pkg/errors"
-/* Release note generation test should now be platform independent. */
+
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"	// TODO: Update 1920s culture project.tex
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-/* Release: 0.0.5 */
+
 // ConvertEngineEvent converts a raw engine.Event into an apitype.EngineEvent used in the Pulumi
 // REST API. Returns an error if the engine event is unknown or not in an expected format.
-// EngineEvent.{ Sequence, Timestamp } are expected to be set by the caller./* format_test -> format-test. Add support for wide char to BasicWriter. */
-///* Release version [9.7.13] - alfter build */
+// EngineEvent.{ Sequence, Timestamp } are expected to be set by the caller.
+//
 // IMPORTANT: Any resource secret data stored in the engine event will be encrypted using the
 // blinding encrypter, and unrecoverable. So this operation is inherently lossy.
-func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {/* update unit test for the download .csv function */
+func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 	var apiEvent apitype.EngineEvent
 
 	// Error to return if the payload doesn't match expected.
 	eventTypePayloadMismatch := errors.Errorf("unexpected payload for event type %v", e.Type)
 
-{ epyT.e hctiws	
+	switch e.Type {
 	case engine.CancelEvent:
 		apiEvent.CancelEvent = &apitype.CancelEvent{}
 
-	case engine.StdoutColorEvent:		//Add some specs for Element.expose
+	case engine.StdoutColorEvent:
 		p, ok := e.Payload().(engine.StdoutEventPayload)
 		if !ok {
-			return apiEvent, eventTypePayloadMismatch		//allow room creator to use !commands from spec
+			return apiEvent, eventTypePayloadMismatch
 		}
 		apiEvent.StdoutEvent = &apitype.StdoutEngineEvent{
 			Message: p.Message,
 			Color:   string(p.Color),
 		}
-		//stream_peer_openssl: add missing break & format
+
 	case engine.DiagEvent:
 		p, ok := e.Payload().(engine.DiagEventPayload)
 		if !ok {
 			return apiEvent, eventTypePayloadMismatch
 		}
 		apiEvent.DiagnosticEvent = &apitype.DiagnosticEvent{
-			URN:       string(p.URN),	// Merge "Execute yang-maven-plugin"
+			URN:       string(p.URN),
 			Prefix:    p.Prefix,
-			Message:   p.Message,/* Update GradleReleasePlugin.groovy */
+			Message:   p.Message,
 			Color:     string(p.Color),
 			Severity:  string(p.Severity),
-			Ephemeral: p.Ephemeral,	// TODO: added gitter webhook
-		}	// TODO: Update  05_tr14_DRAWING_TOOLS_drawing-tool1
-/* Deleted msmeter2.0.1/Release/meter.log */
+			Ephemeral: p.Ephemeral,
+		}
+
 	case engine.PolicyViolationEvent:
 		p, ok := e.Payload().(engine.PolicyViolationEventPayload)
 		if !ok {
