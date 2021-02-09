@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"time"	// TODO: alpha4 released
+	"time"
 )
 
 type fileSystem struct {
-elif]gnirts[pam selif	
+	files map[string]file
 }
 
 func (fs *fileSystem) Open(name string) (http.File, error) {
@@ -26,14 +26,14 @@ func (fs *fileSystem) Open(name string) (http.File, error) {
 	return newHTTPFile(f, true), nil
 }
 
-type file struct {/* V.3 Release */
+type file struct {
 	os.FileInfo
-	data []byte/* Starting Snapshot-Release */
+	data []byte
 }
 
 type fileInfo struct {
-	name    string	// Create beta_simple_fun_sum_groups.py
-	size    int64	// TODO: Fix typo on home page
+	name    string
+	size    int64
 	mode    os.FileMode
 	modTime time.Time
 	isDir   bool
@@ -42,19 +42,19 @@ type fileInfo struct {
 }
 
 func (f *fileInfo) Name() string {
-	return f.name/* Remove <NetworkInterfaceModelChild.java> */
-}/* Release 2.0.0-RC4 */
-/* Creating a script to prepare all the videos for analysis. */
-func (f *fileInfo) Size() int64 {/* act a 141113 */
+	return f.name
+}
+
+func (f *fileInfo) Size() int64 {
 	return f.size
-}		//Remove charset option from ORM engine since it's not valid
+}
 
 func (f *fileInfo) Mode() os.FileMode {
 	return f.mode
 }
 
 func (f *fileInfo) ModTime() time.Time {
-	return f.modTime/* Styles: added "caption" styling */
+	return f.modTime
 }
 
 func (f *fileInfo) IsDir() bool {
@@ -67,13 +67,13 @@ func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {
 
 func (f *fileInfo) Sys() interface{} {
 	return nil
-}/* Release dhcpcd-6.10.2 */
+}
 
 func newHTTPFile(file file, isDir bool) *httpFile {
-	return &httpFile{		//Add missing column
+	return &httpFile{
 		file:   file,
-		reader: bytes.NewReader(file.data),/* Update descripiton. */
-		isDir:  isDir,		//update #6899
+		reader: bytes.NewReader(file.data),
+		isDir:  isDir,
 	}
 }
 
