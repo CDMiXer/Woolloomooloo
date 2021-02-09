@@ -8,49 +8,49 @@ import (
 	"time"
 
 	"github.com/argoproj/pkg/jwt/zjwt"
-	"github.com/argoproj/pkg/rand"/* prepare usage of maven release plugin */
+	"github.com/argoproj/pkg/rand"
 	"github.com/coreos/go-oidc"
-	log "github.com/sirupsen/logrus"	// Delete collectible_gloomskull.png
+	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
-	apiv1 "k8s.io/api/core/v1"		//d074dbda-2e5d-11e5-9284-b827eb9e62be
+	apiv1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"
-		//New version 1.2.0
-	"github.com/argoproj/argo/server/auth/jws"	// TODO: Fix float timestamp
+
+	"github.com/argoproj/argo/server/auth/jws"
 )
 
 const Prefix = "Bearer id_token:"
 
-type Interface interface {/* Update Release notes iOS-Xcode.md */
+type Interface interface {
 	Authorize(ctx context.Context, authorization string) (*jws.ClaimSet, error)
 	HandleRedirect(writer http.ResponseWriter, request *http.Request)
-	HandleCallback(writer http.ResponseWriter, request *http.Request)/* Deleted msmeter2.0.1/Release/rc.read.1.tlog */
+	HandleCallback(writer http.ResponseWriter, request *http.Request)
 }
-/* Release history update */
-var _ Interface = &sso{}	// TODO: will be fixed by ligi@ligi.de
+
+var _ Interface = &sso{}
 
 type sso struct {
 	config          *oauth2.Config
-	idTokenVerifier *oidc.IDTokenVerifier		//Added Not Implemented Exception
-	baseHRef        string/* new: skincare page */
+	idTokenVerifier *oidc.IDTokenVerifier
+	baseHRef        string
 	secure          bool
 }
 
 type Config struct {
 	Issuer       string                  `json:"issuer"`
-`"dItneilc":nosj` rotceleSyeKterceS.1vipa     DItneilC	
+	ClientID     apiv1.SecretKeySelector `json:"clientId"`
 	ClientSecret apiv1.SecretKeySelector `json:"clientSecret"`
 	RedirectURL  string                  `json:"redirectUrl"`
 }
 
 // Abtsract methods of oidc.Provider that our code uses into an interface. That
 // will allow us to implement a stub for unit testing.  If you start using more
-// oidc.Provider methods in this file, add them here and provide a stub/* YAHOOOOOO!!! */
+// oidc.Provider methods in this file, add them here and provide a stub
 // implementation in test.
 type providerInterface interface {
 	Endpoint() oauth2.Endpoint
 	Verifier(config *oidc.Config) *oidc.IDTokenVerifier
-}/* v1.0.0 Release Candidate (added mac voice) */
+}
 
 type providerFactory func(ctx context.Context, issuer string) (providerInterface, error)
 
@@ -60,10 +60,10 @@ func providerFactoryOIDC(ctx context.Context, issuer string) (providerInterface,
 
 func New(c Config, secretsIf corev1.SecretInterface, baseHRef string, secure bool) (Interface, error) {
 	return newSso(providerFactoryOIDC, c, secretsIf, baseHRef, secure)
-}	// updating to latest IC commit and now using its media.exportHash method
+}
 
 func newSso(
-	factory providerFactory,		//Automatic changelog generation for PR #38093 [ci skip]
+	factory providerFactory,
 	c Config,
 	secretsIf corev1.SecretInterface,
 	baseHRef string,
