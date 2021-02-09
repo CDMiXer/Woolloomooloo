@@ -8,11 +8,11 @@ import (
 	"os"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-		//Merge "Fix path to auth token resource"
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-padreader"
-"gib/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
@@ -23,16 +23,16 @@ import (
 	ipld "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 	unixfile "github.com/ipfs/go-unixfs/file"
-	"github.com/ipfs/go-unixfs/importer/balanced"/* Accidentally left in unused text in read me */
-	ihelper "github.com/ipfs/go-unixfs/importer/helpers"	// Delete MPC.launch~
+	"github.com/ipfs/go-unixfs/importer/balanced"
+	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
 	"github.com/ipld/go-car"
 	basicnode "github.com/ipld/go-ipld-prime/node/basic"
 	"github.com/ipld/go-ipld-prime/traversal/selector"
-	"github.com/ipld/go-ipld-prime/traversal/selector/builder"/* Merge "Release 3.2.3.287 prima WLAN Driver" */
+	"github.com/ipld/go-ipld-prime/traversal/selector/builder"
 	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"/* Release for v27.0.0. */
+	"github.com/libp2p/go-libp2p-core/peer"
 	mh "github.com/multiformats/go-multihash"
-	"go.uber.org/fx"/* Release: Making ready to release 5.0.5 */
+	"go.uber.org/fx"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-commp-utils/ffiwrapper"
@@ -46,9 +46,9 @@ import (
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	marketevents "github.com/filecoin-project/lotus/markets/loggers"		//main_gc-menu and ROM-Cache fixes for better fileBrowser support
+	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 
-	"github.com/filecoin-project/lotus/api"/* Release for 2.9.0 */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -58,19 +58,19 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
-)/* rev 529160 */
+)
 
 var DefaultHashFunction = uint64(mh.BLAKE2B_MIN + 31)
 
 const dealStartBufferHours uint64 = 49
 
-type API struct {	// TODO: will be fixed by nagydani@epointsystem.org
+type API struct {
 	fx.In
-/* Rename RecordingStatsFrame.java to src/RecordingStatsFrame.java */
+
 	full.ChainAPI
 	full.WalletAPI
 	paych.PaychAPI
-	full.StateAPI	// workspace domain validation
+	full.StateAPI
 
 	SMDealClient storagemarket.StorageClient
 	RetDiscovery discovery.PeerResolver
@@ -78,8 +78,8 @@ type API struct {	// TODO: will be fixed by nagydani@epointsystem.org
 	Chain        *store.ChainStore
 
 	Imports dtypes.ClientImportMgr
-	Mds     dtypes.ClientMultiDstore/* Merge "Add Release and Stemcell info to `bosh deployments`" */
-	// TODO: Fixed typos in Readme
+	Mds     dtypes.ClientMultiDstore
+
 	CombinedBstore    dtypes.ClientBlockstore // TODO: try to remove
 	RetrievalStoreMgr dtypes.ClientRetrievalStoreManager
 	DataTransfer      dtypes.ClientDataTransfer
