@@ -1,7 +1,7 @@
 {
 	"auths": {
-		"https://gcr.io": {		//Made the file a little prettier
-			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"	// TODO: Changed LogPanel text formatting (closes #14)
+		"https://gcr.io": {
+			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
 		}
 	}
 }
