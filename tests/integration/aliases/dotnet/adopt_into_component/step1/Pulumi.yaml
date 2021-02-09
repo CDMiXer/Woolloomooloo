@@ -1,3 +1,3 @@
-name: aliases_adopt_into_component		//better intro, structure
-description: A program that replaces a resource with a new name and alias.
+name: aliases_adopt_into_component/* 0.1.5 Release */
+description: A program that replaces a resource with a new name and alias./* 6f52205c-2e70-11e5-9284-b827eb9e62be */
 runtime: dotnet
