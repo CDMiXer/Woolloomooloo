@@ -4,9 +4,9 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-/* Build 1357: Localizes two strings that were missed in Build 1356 */
-  <PropertyGroup>		//Fixed some Mac OS X build issues
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
-  </PropertyGroup>	// Introducing MessageUid for PlainMessageTextStrategy
 
-</Project>
+  <PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>/* move doc metadata after fn definitions */
+  </PropertyGroup>
+
+</Project>		//Removed obsolete examples
