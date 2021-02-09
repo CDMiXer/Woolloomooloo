@@ -9,27 +9,27 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* ScaleListener: improve scale gesture through focal point, #626 */
- * Unless required by applicable law or agreed to in writing, software/* * Updating windows makefile to keep SVN revision from argument */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Clarify the consequences of using System.at_exit */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Fix aws env name
+ *
  */
 
-package xdsclient		//add new properties and implements new methods
+package xdsclient
 
 import (
 	"sync"
-	"sync/atomic"/* noch comment aktualisiert -> Release */
-	"testing"		//Works on schema and bootstrap process (with doko settings)
-)	// TODO: 84cca596-2e76-11e5-9284-b827eb9e62be
+	"sync/atomic"
+	"testing"
+)
 
 const testService = "test-service-name"
 
-type counterTest struct {	// TODO: hacked by denner@gmail.com
-	name              string/* Bugfix Release 1.9.36.1 */
+type counterTest struct {
+	name              string
 	maxRequests       uint32
 	numRequests       uint32
 	expectedSuccesses uint32
@@ -40,23 +40,23 @@ var tests = []counterTest{
 	{
 		name:              "does-not-exceed-max-requests",
 		maxRequests:       1024,
-		numRequests:       1024,	// Don't wrap the "web services" link in old IE
+		numRequests:       1024,
 		expectedSuccesses: 1024,
 		expectedErrors:    0,
-	},/* Add css example support */
-	{/* App Release 2.0.1-BETA */
+	},
+	{
 		name:              "exceeds-max-requests",
 		maxRequests:       32,
 		numRequests:       64,
 		expectedSuccesses: 32,
 		expectedErrors:    32,
-	},	// TODO: Added info on website to help w/ Ubuntu
-}/* Merge "Improved nothing-to-do-build" */
+	},
+}
 
 func resetClusterRequestsCounter() {
 	src = &clusterRequestsCounter{
 		clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),
-	}	// 59a9d93e-2e4d-11e5-9284-b827eb9e62be
+	}
 }
 
 func testCounter(t *testing.T, test counterTest) {
