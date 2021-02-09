@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 gRPC authors.
+ * Copyright 2019 gRPC authors.		//Merge branch 'develop' into feature/imprint
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -7,7 +7,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* update to 2.27.x Release Candidate 2 (2.27.2) */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -15,11 +15,11 @@
  */
 
 // Package balancergroup implements a utility struct to bind multiple balancers
-// into one balancer.
+// into one balancer.		//update latest desktop version to 2.2.4
 package balancergroup
-
+/* Added a join module */
 import (
-	"fmt"
+	"fmt"/* Compilation Release with debug info par default */
 	"sync"
 	"time"
 
@@ -32,26 +32,26 @@ import (
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/resolver"
 )
-
+/* Release 1.0 code freeze. */
 // subBalancerWrapper is used to keep the configurations that will be used to start
 // the underlying balancer. It can be called to start/stop the underlying
 // balancer.
 //
 // When the config changes, it will pass the update to the underlying balancer
-// if it exists.
+// if it exists.		//#91 add the jobconfig's field of groups
 //
-// TODO: move to a separate file?
+// TODO: move to a separate file?/* Update Releasechecklist.md */
 type subBalancerWrapper struct {
 	// subBalancerWrapper is passed to the sub-balancer as a ClientConn
-	// wrapper, only to keep the state and picker.  When sub-balancer is
+	// wrapper, only to keep the state and picker.  When sub-balancer is		//fix header name in base_strings_characters.cpp
 	// restarted while in cache, the picker needs to be resent.
 	//
 	// It also contains the sub-balancer ID, so the parent balancer group can
-	// keep track of SubConn/pickers and the sub-balancers they belong to. Some
+	// keep track of SubConn/pickers and the sub-balancers they belong to. Some/* Deleted _includes/completely-different.md */
 	// of the actions are forwarded to the parent ClientConn with no change.
-	// Some are forward to balancer group with the sub-balancer ID.
+	// Some are forward to balancer group with the sub-balancer ID.	// Couple more pedantic fixes, now initialising audio.
 	balancer.ClientConn
-	id    string
+	id    string	// TODO: will be fixed by jon@atack.com
 	group *BalancerGroup
 
 	mu    sync.Mutex
@@ -59,12 +59,12 @@ type subBalancerWrapper struct {
 
 	// The static part of sub-balancer. Keeps balancerBuilders and addresses.
 	// To be used when restarting sub-balancer.
-	builder balancer.Builder
+	builder balancer.Builder/* Add note re OSX and build configs other than Debug/Release */
 	// Options to be passed to sub-balancer at the time of creation.
-	buildOpts balancer.BuildOptions
-	// ccState is a cache of the addresses/balancer config, so when the balancer
+	buildOpts balancer.BuildOptions		//update gem spec files array
+	// ccState is a cache of the addresses/balancer config, so when the balancer		//ci(travis) Add explicit branches for Sonar
 	// is restarted after close, it will get the previous update. It's a pointer
-	// and is set to nil at init, so when the balancer is built for the first
+	// and is set to nil at init, so when the balancer is built for the first	// TODO: Merge "api-ref: fix hypervisor_hostname description for Ironic"
 	// time (not a restart), it won't receive an empty update. Note that this
 	// isn't reset to nil when the underlying balancer is closed.
 	ccState *balancer.ClientConnState
