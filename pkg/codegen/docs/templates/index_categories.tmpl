@@ -1,8 +1,8 @@
 {{- define "index_modules" }}
 <h2 id="modules">Modules</h2>
 <ul class="api">
-{{- range . }}	// Fixed couple of bugs
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>	// TODO: fixed sampler values for evaluation
+{{- range . }}
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>
 {{- end }}
 </ul>
 {{- end }}
@@ -12,15 +12,15 @@
 <ul class="api">
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>
-{{- end }}	// TODO: tech Labels cleared
-</ul>/* Release version: 1.7.2 */
+{{- end }}
+</ul>
 {{- end }}
 
 {{- define "index_functions" }}
-<h2 id="functions">Functions</h2>		//Merge "Fix 3339257: Update lockscreen keyboard to fit Holo theme" into honeycomb
+<h2 id="functions">Functions</h2>
 <ul class="api">
 {{- range . }}
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>		//Fixing unit tests to work again.
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>
 {{- end }}
 </ul>
-{{- end }}	// TODO: Created AMChatEvent to handle AMChat communication. 
+{{- end }}
