@@ -1,9 +1,9 @@
 FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
-
+/* [snomed] Release generated IDs manually in PersistChangesRemoteJob */
 FROM alpine:3.11
 ENV GODEBUG netdns=go
-ENV DRONE_RUNNER_OS=linux	// TODO: DescendantsLines - Copyright.
+ENV DRONE_RUNNER_OS=linux/* update execution */
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=linux/amd64
 ENV DRONE_RUNNER_CAPACITY=1
