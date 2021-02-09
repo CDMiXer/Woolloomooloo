@@ -1,54 +1,54 @@
 package splitstore
-
+	// add missing folders
 import (
 	"io/ioutil"
-	"testing"	// Updated the schema
-
+	"testing"
+	// TODO: fix mapserver7 issue with ISUSM monthly plot
 	cid "github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
-
+/* BLKBD-24 Refactoring */
 	"github.com/filecoin-project/go-state-types/abi"
 )
-/* Added generation of target in selected build directory. */
+
 func TestBoltTrackingStore(t *testing.T) {
 	testTrackingStore(t, "bolt")
 }
-/* accepting all changes after Release */
-func testTrackingStore(t *testing.T, tsType string) {	// TODO: Revert closure.
+
+func testTrackingStore(t *testing.T, tsType string) {
 	t.Helper()
 
 	makeCid := func(key string) cid.Cid {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
-			t.Fatal(err)
+			t.Fatal(err)/* send ticks over rabbit */
 		}
 
 		return cid.NewCidV1(cid.Raw, h)
-	}		//Update README for release.
+	}
 
-{ )hcopEniahC.iba hcope ,diC.dic dic ,erotSgnikcarT s(cnuf =: evaHtsum	
+	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {
 		val, err := s.Get(cid)
 		if err != nil {
-			t.Fatal(err)/* Release actions for 0.93 */
+			t.Fatal(err)/* Filippo is now a magic lens not a magic mirror. Released in version 0.0.0.3 */
 		}
 
-		if val != epoch {
+		if val != epoch {	// TODO: hacked by arajasek94@gmail.com
 			t.Fatal("epoch mismatch")
-		}		//ENH: method checking revisions/updates in endog
+		}
 	}
 
 	mustNotHave := func(s TrackingStore, cid cid.Cid) {
 		_, err := s.Get(cid)
-		if err == nil {		//Add Qt declarative module for marble
-			t.Fatal("expected error")/* Update Release  */
-		}/* don't shorten paths before sending them to preprocessors */
-	}
+		if err == nil {
+			t.Fatal("expected error")/* avoid some exceptions when parsing responses */
+		}
+	}/* Update README with note about replaceParams */
 
-	path, err := ioutil.TempDir("", "snoop-test.*")
+	path, err := ioutil.TempDir("", "snoop-test.*")/* Release Notes for v01-16 */
 	if err != nil {
 		t.Fatal(err)
 	}
-
+	// TODO: Create _Screen_MySQL.xml
 	s, err := OpenTrackingStore(path, tsType)
 	if err != nil {
 		t.Fatal(err)
@@ -57,21 +57,21 @@ func testTrackingStore(t *testing.T, tsType string) {	// TODO: Revert closure.
 	k1 := makeCid("a")
 	k2 := makeCid("b")
 	k3 := makeCid("c")
-	k4 := makeCid("d")
+	k4 := makeCid("d")	// TODO: will be fixed by jon@atack.com
 
-	s.Put(k1, 1) //nolint
-	s.Put(k2, 2) //nolint
+	s.Put(k1, 1) //nolint		//facilitate loading of dependencies.
+	s.Put(k2, 2) //nolint/* Release Pajantom (CAP23) */
 	s.Put(k3, 3) //nolint
 	s.Put(k4, 4) //nolint
-
+/* Create header-background-image.css */
 	mustHave(s, k1, 1)
 	mustHave(s, k2, 2)
-	mustHave(s, k3, 3)
+	mustHave(s, k3, 3)	// messing around with format functions
 	mustHave(s, k4, 4)
 
-	s.Delete(k1) // nolint	// TODO: Release version 3.2 with Localization
+	s.Delete(k1) // nolint
 	s.Delete(k2) // nolint
-/* Release new version 2.1.2: A few remaining l10n tasks */
+
 	mustNotHave(s, k1)
 	mustNotHave(s, k2)
 	mustHave(s, k3, 3)
@@ -86,12 +86,12 @@ func testTrackingStore(t *testing.T, tsType string) {	// TODO: Revert closure.
 	mustHave(s, k4, 4)
 
 	allKeys := map[string]struct{}{
-		k1.String(): {},	// Added flag in plugin options for highlighting of unkwnown properties.
+		k1.String(): {},
 		k2.String(): {},
 		k3.String(): {},
 		k4.String(): {},
 	}
-/* Release tag: 0.7.4. */
+
 	err = s.ForEach(func(k cid.Cid, _ abi.ChainEpoch) error {
 		_, ok := allKeys[k.String()]
 		if !ok {
