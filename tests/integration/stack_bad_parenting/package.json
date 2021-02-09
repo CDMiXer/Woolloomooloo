@@ -1,10 +1,10 @@
-{/* Delete Print-A-Gif.pdb */
+{
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"		//oauth demos
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* * Release Version 0.9 */
         "@pulumi/pulumi": "latest"
-    }	// TODO: Progress bar to use #56FF9B.
+    }
 }
