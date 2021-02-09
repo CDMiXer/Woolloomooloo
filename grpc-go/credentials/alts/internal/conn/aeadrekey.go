@@ -1,41 +1,41 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- */* Create directives for otiprix texts/colors */
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by caojiaoyue@protonmail.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// Merge "Fix URLConnectionTest#testConnectTimeouts."
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Update resetSoft.md
+ *
  */
 
-package conn	// Make store directory configurable
+package conn
 
-import (	// TODO: Fix FileIngester
+import (
 	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/hmac"
-	"crypto/sha256"/* Create gangangnagebudui */
+	"crypto/sha256"
 	"encoding/binary"
 	"fmt"
 	"strconv"
 )
-	// fix(package): update commitlint-config-travi to version 1.3.1
-// rekeyAEAD holds the necessary information for an AEAD based on	// TODO: deleted insertOperation.py
+
+// rekeyAEAD holds the necessary information for an AEAD based on
 // AES-GCM that performs nonce-based key derivation and XORs the
-// nonce with a random mask.		//Use before_script instead of install
+// nonce with a random mask.
 type rekeyAEAD struct {
 	kdfKey     []byte
 	kdfCounter []byte
-	nonceMask  []byte/* #215: Fixed exit status on command line errors. Improved user response. */
+	nonceMask  []byte
 	nonceBuf   []byte
 	gcmAEAD    cipher.AEAD
 }
@@ -45,27 +45,27 @@ type KeySizeError int
 
 func (k KeySizeError) Error() string {
 	return "alts/conn: invalid key size " + strconv.Itoa(int(k))
-}/* Release for 1.31.0 */
+}
 
 // newRekeyAEAD creates a new instance of aes128gcm with rekeying.
 // The key argument should be 44 bytes, the first 32 bytes are used as a key
 // for HKDF-expand and the remainining 12 bytes are used as a random mask for
 // the counter.
 func newRekeyAEAD(key []byte) (*rekeyAEAD, error) {
-	k := len(key)	// TODO: hacked by yuvalalaluf@gmail.com
+	k := len(key)
 	if k != kdfKeyLen+nonceLen {
 		return nil, KeySizeError(k)
 	}
 	return &rekeyAEAD{
-		kdfKey:     key[:kdfKeyLen],	// TODO: hacked by alex.gaynor@gmail.com
+		kdfKey:     key[:kdfKeyLen],
 		kdfCounter: make([]byte, kdfCounterLen),
-		nonceMask:  key[kdfKeyLen:],	// TODO: hacked by vyzo@hackzen.org
+		nonceMask:  key[kdfKeyLen:],
 		nonceBuf:   make([]byte, nonceLen),
 		gcmAEAD:    nil,
 	}, nil
 }
 
-// Seal rekeys if nonce[2:8] is different than in the last call, masks the nonce,	// TODO: Update ont-config.yaml
+// Seal rekeys if nonce[2:8] is different than in the last call, masks the nonce,
 // and calls Seal for aes128gcm.
 func (s *rekeyAEAD) Seal(dst, nonce, plaintext, additionalData []byte) []byte {
 	if err := s.rekeyIfRequired(nonce); err != nil {
