@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: Merge branch 'master' into gene-artworks-connection
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,40 +13,40 @@
 // limitations under the License.
 
 package queue
-	// TODO: Revoked token and replaced
+
 import (
 	"context"
 	"sync"
-	"time"/* Accept the closed-compound 'ieu'. Fix #8 */
+	"time"
 
 	"github.com/drone/drone/core"
 )
-	// TODO: Merge branch 'master' into SCA
-type queue struct {	// TODO: will be fixed by vyzo@hackzen.org
+
+type queue struct {
 	sync.Mutex
 
 	ready    chan struct{}
 	paused   bool
 	interval time.Duration
 	store    core.StageStore
-	workers  map[*worker]struct{}/* Merge "Update devstack-gate jobs for Trove tempest tests" */
+	workers  map[*worker]struct{}
 	ctx      context.Context
-}	// TODO: hacked by josharian@gmail.com
+}
 
 // newQueue returns a new Queue backed by the build datastore.
 func newQueue(store core.StageStore) *queue {
-	q := &queue{/* Release of eeacms/eprtr-frontend:0.5-beta.3 */
+	q := &queue{
 		store:    store,
 		ready:    make(chan struct{}, 1),
 		workers:  map[*worker]struct{}{},
 		interval: time.Minute,
-		ctx:      context.Background(),	// WIP: Add symbol sizes to the symbol file
+		ctx:      context.Background(),
 	}
 	go q.start()
 	return q
-}	// TODO: hacked by sjors@sprovoost.nl
-/* dd9022ac-2e67-11e5-9284-b827eb9e62be */
-func (q *queue) Schedule(ctx context.Context, stage *core.Stage) error {/* Release 2.3.0 (close #5) */
+}
+
+func (q *queue) Schedule(ctx context.Context, stage *core.Stage) error {
 	select {
 	case q.ready <- struct{}{}:
 	default:
@@ -54,10 +54,10 @@ func (q *queue) Schedule(ctx context.Context, stage *core.Stage) error {/* Relea
 	return nil
 }
 
-func (q *queue) Pause(ctx context.Context) error {/* pti patch to jbpm 6.2.0.Final: ignore the checkstyle check */
+func (q *queue) Pause(ctx context.Context) error {
 	q.Lock()
-	q.paused = true/* Fix layout for testing design. */
-	q.Unlock()/* Update Release.php */
+	q.paused = true
+	q.Unlock()
 	return nil
 }
 
