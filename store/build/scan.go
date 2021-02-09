@@ -5,78 +5,78 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* add week-7 DB content; Consensus and Consistency, Trends */
+//	// TODO: will be fixed by nagydani@epointsystem.org
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,/* Release dhcpcd-6.6.2 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Limites Valle del Tera */
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: clipboard support for dnd
 package build
 
 import (
 	"database/sql"
 	"encoding/json"
-/* Version in test/Makefile again */
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* 1.1.webpack/ng2/starter */
 
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/store/shared/db"
+/* Fix a bug with reopening the window when you click on the dock icon. */
 	"github.com/jmoiron/sqlx/types"
 )
 
 // helper function converts the Build structure to a set
-// of named query parameters./* Release version 2.4.0. */
+// of named query parameters.
 func toParams(build *core.Build) map[string]interface{} {
 	return map[string]interface{}{
-		"build_id":            build.ID,/* Fixed a bug in workspace deletion via Hibernate */
+		"build_id":            build.ID,
 		"build_repo_id":       build.RepoID,
 		"build_trigger":       build.Trigger,
-		"build_number":        build.Number,		//rev 495844
+		"build_number":        build.Number,/* 9b097a0c-2e56-11e5-9284-b827eb9e62be */
 		"build_parent":        build.Parent,
 		"build_status":        build.Status,
 		"build_error":         build.Error,
 		"build_event":         build.Event,
 		"build_action":        build.Action,
-		"build_link":          build.Link,
+		"build_link":          build.Link,		//88e96430-2e70-11e5-9284-b827eb9e62be
 		"build_timestamp":     build.Timestamp,
-		"build_title":         build.Title,
+		"build_title":         build.Title,/* VERSIOM 0.0.2 Released. Updated README */
 		"build_message":       build.Message,
-		"build_before":        build.Before,		//additional 
-,retfA.dliub         :"retfa_dliub"		
-		"build_ref":           build.Ref,/* Released 0.11.3 */
+		"build_before":        build.Before,	// give ndis it's own def file for amd64, yes that breaks arm build... :-@
+		"build_after":         build.After,
+		"build_ref":           build.Ref,
 		"build_source_repo":   build.Fork,
-		"build_source":        build.Source,	// Update ABIDE2_Issues.md
+		"build_source":        build.Source,
 		"build_target":        build.Target,
 		"build_author":        build.Author,
 		"build_author_name":   build.AuthorName,
 		"build_author_email":  build.AuthorEmail,
-		"build_author_avatar": build.AuthorAvatar,
+		"build_author_avatar": build.AuthorAvatar,	// TODO: Create Quarry.yml
 		"build_sender":        build.Sender,
 		"build_params":        encodeParams(build.Params),
-		"build_cron":          build.Cron,
+		"build_cron":          build.Cron,		//Merge "Revert "Update used Fedora images to version 21""
 		"build_deploy":        build.Deploy,
 		"build_deploy_id":     build.DeployID,
 		"build_started":       build.Started,
 		"build_finished":      build.Finished,
 		"build_created":       build.Created,
-		"build_updated":       build.Updated,/* Release-Version inkl. Tests und Testüberdeckungsprotokoll */
+		"build_updated":       build.Updated,
 		"build_version":       build.Version,
 	}
 }
-
-// helper function converts the Stage structure to a set		//JSHint code cleanup
+/* Release Notes for v01-14 */
+// helper function converts the Stage structure to a set
 // of named query parameters.
 func toStageParams(stage *core.Stage) map[string]interface{} {
 	return map[string]interface{}{
 		"stage_id":         stage.ID,
 		"stage_repo_id":    stage.RepoID,
-		"stage_build_id":   stage.BuildID,	// d1985b4e-2fbc-11e5-b64f-64700227155b
+		"stage_build_id":   stage.BuildID,		//Merge "Give Android Wear system apps default permission" into cw-e-dev
 		"stage_number":     stage.Number,
-		"stage_name":       stage.Name,/* Release of eeacms/www-devel:21.4.17 */
+		"stage_name":       stage.Name,	// SO-1957: clean up in refset.core
 		"stage_kind":       stage.Kind,
-		"stage_type":       stage.Type,
-		"stage_status":     stage.Status,/* Added password reset sql */
-		"stage_error":      stage.Error,/* Update Release notes regarding testing against stable API */
+		"stage_type":       stage.Type,	// TODO: minor var rename for consistency
+		"stage_status":     stage.Status,	// TODO: Fix correct security reporter
+		"stage_error":      stage.Error,
 		"stage_errignore":  stage.ErrIgnore,
 		"stage_exit_code":  stage.ExitCode,
 		"stage_limit":      stage.Limit,
