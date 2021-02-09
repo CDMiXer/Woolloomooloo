@@ -3,19 +3,19 @@
     "strict": true,
     "outDir": "bin",
     "target": "es2016",
-    "module": "commonjs",
+    "module": "commonjs",/* Fix Readme.md missing return */
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
-    "stripInternal": true,
+    "stripInternal": true,	// TODO: will be fixed by davidad@alum.mit.edu
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,	// TODO: will be fixed by mail@bitpshr.net
+    "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
-  },
+  },/* Changed download location to GitHub's Releases page */
   "files": [
     "index.ts"
-  ]/* Rails 3 scoping */
-}/* pop-invitar_participantes corregido */
+  ]
+}/* RDT Citation */
 
