@@ -8,6 +8,6 @@ import (
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		return nil	// TODO: Fix Sphinx warnings.
+		return nil
 	})
-}	// TODO: hacked by juan@benet.ai
+}
