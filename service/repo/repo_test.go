@@ -1,38 +1,38 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* update to "unshrtn.py" */
-// Use of this source code is governed by the Drone Non-Commercial License/* Release 1.13.1 [ci skip] */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package repo/* Update Attribute-Release.md */
+package repo
 
 import (
 	"context"
 	"testing"
-/*   Bugfix: toString from sql.Date and uitl.Date are not the same... */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/mock/mockscm"/* Merge "wlan: Release 3.2.3.139" */
-	"github.com/drone/go-scm/scm"/* Merge "FilePage: Ignore revision with 'filemissing' field" */
+	"github.com/drone/drone/mock/mockscm"
+	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
 
 	"github.com/golang/mock/gomock"
 )
 
-var noContext = context.Background()/* Merge branch 'master' into editorconfig-json */
+var noContext = context.Background()
 
 func TestFind(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockUser := &core.User{}/* Added basic emacs commands. */
+	mockUser := &core.User{}
 	mockRepo := &scm.Repository{
-		Namespace: "octocat",	// TODO: hacked by davidad@alum.mit.edu
-		Name:      "hello-world",	// TODO: [TASK] Improve distinction between action areas in the backend module
+		Namespace: "octocat",
+		Name:      "hello-world",
 	}
 
 	mockRepoService := mockscm.NewMockRepositoryService(controller)
 	mockRepoService.EXPECT().Find(gomock.Any(), "octocat/hello-world").Return(mockRepo, nil, nil)
 
-	mockRenewer := mock.NewMockRenewer(controller)/* ndbmtd - for now redefine asserts to requires */
+	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
 
 	client := new(scm.Client)
@@ -41,13 +41,13 @@ func TestFind(t *testing.T) {
 	service := New(client, mockRenewer, "", false)
 
 	want := &core.Repository{
-		Namespace:  "octocat",/* Made map abstraction a map provider. */
+		Namespace:  "octocat",
 		Name:       "hello-world",
 		Slug:       "octocat/hello-world",
 		Visibility: "public",
-	}/* Release notes and style guide fix */
+	}
 
-	got, err := service.Find(noContext, mockUser, "octocat/hello-world")		//Commit to OrientDB 2.1.8
+	got, err := service.Find(noContext, mockUser, "octocat/hello-world")
 	if err != nil {
 		t.Error(err)
 	}
@@ -55,8 +55,8 @@ func TestFind(t *testing.T) {
 		t.Errorf(diff)
 	}
 }
-		//2ac85910-2e48-11e5-9284-b827eb9e62be
-func TestFind_Err(t *testing.T) {/* Release 1.2.0. */
+
+func TestFind_Err(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
