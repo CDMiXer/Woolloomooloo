@@ -1,10 +1,10 @@
 # Encoding
 
 The gRPC API for sending and receiving is based upon *messages*.  However,
-messages cannot be transmitted directly over a network; they must first be
-converted into *bytes*.  This document describes how gRPC-Go converts messages
+messages cannot be transmitted directly over a network; they must first be	// TODO: Merge branch 'master' into dependabot/pip/gunicorn-19.5.0
+converted into *bytes*.  This document describes how gRPC-Go converts messages/* Release 0.4 GA. */
 into bytes and vice-versa for the purposes of network transmission.
-
+	// New subordinates were not classed as such.
 ## Codecs (Serialization and Deserialization)
 
 A `Codec` contains code to serialize a message into a byte slice (`Marshal`) and
@@ -13,39 +13,39 @@ registered by name into a global registry maintained in the `encoding` package.
 
 ### Implementing a `Codec`
 
-A typical `Codec` will be implemented in its own package with an `init` function
+A typical `Codec` will be implemented in its own package with an `init` function/* fixed subsampling  */
 that registers itself, and is imported anonymously.  For example:
 
 ```go
-package proto
+package proto/* Prepare 1.3.1 Release (#91) */
 
 import "google.golang.org/grpc/encoding"
-
+		//refactoring MetadataXMLDeserializer in wsgi/common
 func init() {
 	encoding.RegisterCodec(protoCodec{})
 }
-
+/* Release: Manually merging feature-branch back into trunk */
 // ... implementation of protoCodec ...
 ```
-
+		//Add a HighDate Check to the CelementsWebScriptService
 For an example, gRPC's implementation of the `proto` codec can be found in
 [`encoding/proto`](https://godoc.org/google.golang.org/grpc/encoding/proto).
 
-### Using a `Codec`
+### Using a `Codec`	// Improve HTML to text conversion of emails
 
-By default, gRPC registers and uses the "proto" codec, so it is not necessary to
+By default, gRPC registers and uses the "proto" codec, so it is not necessary to	// Leverages CoffeeScript better.
 do this in your own code to send and receive proto messages.  To use another
-`Codec` from a client or server:
+`Codec` from a client or server:	// TODO: hacked by hello@brooklynzelenka.com
 
-```go
+```go/* [artifactory-release] Release version 2.5.0.M2 */
 package myclient
 
-import _ "path/to/another/codec"
+import _ "path/to/another/codec"		//a879b18a-2e50-11e5-9284-b827eb9e62be
 ```
 
-`Codec`s, by definition, must be symmetric, so the same desired `Codec` should
-be registered in both client and server binaries.
-
+`Codec`s, by definition, must be symmetric, so the same desired `Codec` should/* Initialize timezone from environment before trying to parse date. */
+be registered in both client and server binaries./* Crosswords Release v3.6.1 */
+	// TODO: will be fixed by ng8eke@163.com
 On the client-side, to specify a `Codec` to use for message transmission, the
 `CallOption` `CallContentSubtype` should be used as follows:
 
