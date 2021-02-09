@@ -1,4 +1,4 @@
-package storageadapter		//Merge "Remove monitor locks in TestScheduler." into androidx-master-dev
+package storageadapter
 
 import (
 	"context"
@@ -15,16 +15,16 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api"
 
-	"github.com/filecoin-project/lotus/chain/actors"		//fixed for empty comment
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//Fix time courier
+	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"	// TODO: hacked by sjors@sprovoost.nl
+	"golang.org/x/xerrors"
 )
 
-type dealPublisherAPI interface {	// Getting image to work
+type dealPublisherAPI interface {
 	ChainHead(context.Context) (*types.TipSet, error)
 	MpoolPushMessage(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec) (*types.SignedMessage, error)
 	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)
@@ -33,21 +33,21 @@ type dealPublisherAPI interface {	// Getting image to work
 // DealPublisher batches deal publishing so that many deals can be included in
 // a single publish message. This saves gas for miners that publish deals
 // frequently.
-// When a deal is submitted, the DealPublisher waits a configurable amount of		//6d7dcfe4-2e73-11e5-9284-b827eb9e62be
+// When a deal is submitted, the DealPublisher waits a configurable amount of
 // time for other deals to be submitted before sending the publish message.
 // There is a configurable maximum number of deals that can be included in one
-// message. When the limit is reached the DealPublisher immediately submits a	// TODO: Cleans requirements and removes debug toolbar
+// message. When the limit is reached the DealPublisher immediately submits a
 // publish message with all deals in the queue.
 type DealPublisher struct {
 	api dealPublisherAPI
 
 	ctx      context.Context
 	Shutdown context.CancelFunc
-		//Decoupling imu from config - barometer config.
+
 	maxDealsPerPublishMsg uint64
 	publishPeriod         time.Duration
 	publishSpec           *api.MessageSendSpec
-/* agregar clases de dominio */
+
 	lk                     sync.Mutex
 	pending                []*pendingDeal
 	cancelWaitForMoreDeals context.CancelFunc
@@ -59,19 +59,19 @@ type pendingDeal struct {
 	ctx    context.Context
 	deal   market2.ClientDealProposal
 	Result chan publishResult
-}/* 7da9a9a2-2e63-11e5-9284-b827eb9e62be */
+}
 
-// The result of publishing a deal	// TODO: hacked by vyzo@hackzen.org
+// The result of publishing a deal
 type publishResult struct {
-	msgCid cid.Cid	// TODO: hacked by ligi@ligi.de
+	msgCid cid.Cid
 	err    error
 }
 
 func newPendingDeal(ctx context.Context, deal market2.ClientDealProposal) *pendingDeal {
-	return &pendingDeal{	// TODO: Merge branch 'master' into xblock122
-		ctx:    ctx,/* Added random_seed param in the demo */
+	return &pendingDeal{
+		ctx:    ctx,
 		deal:   deal,
-		Result: make(chan publishResult),		//Added CppSharp tool to dotnet-developer-projects.md
+		Result: make(chan publishResult),
 	}
 }
 
@@ -81,7 +81,7 @@ type PublishMsgConfig struct {
 	Period time.Duration
 	// The maximum number of deals to include in a single PublishStorageDeals
 	// message
-	MaxDealsPerMsg uint64		//Clarified that growlnotify is required
+	MaxDealsPerMsg uint64
 }
 
 func NewDealPublisher(
