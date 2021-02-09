@@ -4,11 +4,11 @@
 
 package manager
 
-import (
+import (		//WOOOOOOOHOOOOOOOOO!!!
 	"io/ioutil"
 
 	"github.com/sirupsen/logrus"
-)
+)		//Page builders: added further reading
 
 func init() {
 	logrus.SetOutput(ioutil.Discard)
