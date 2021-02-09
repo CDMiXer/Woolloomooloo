@@ -1,12 +1,12 @@
-{
+{	// TODO: a578dbb6-2e53-11e5-9284-b827eb9e62be
     "name": "test-policy-w-config",
     "version": "0.0.1",
-    "dependencies": {
-        "@pulumi/policy": "^1.1.0"/* ccf75dcc-2e6f-11e5-9284-b827eb9e62be */
+    "dependencies": {/* Create ourjourney */
+        "@pulumi/policy": "^1.1.0"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.42",	// Um, don't show the password.
-        "@types/node": "^10.12.7",		//added Convolute
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^10.12.7",
         "tslint": "^5.11.0"
     }
-}/* Release 0.1, changed POM */
+}
