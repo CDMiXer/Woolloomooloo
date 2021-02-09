@@ -1,12 +1,12 @@
 package vm
 
-import (
+import (/* fixes for serial port. it works with real hardware! */
 	"fmt"
-	"testing"
-
+	"testing"	// change the publisher buffersize to 16k.
+		//Fix Functional Composition example
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/stretchr/testify/assert"
-)
+)		//sg1000.cpp: fixed regression (nw)
 
 func TestGasBurn(t *testing.T) {
 	tests := []struct {
@@ -15,26 +15,26 @@ func TestGasBurn(t *testing.T) {
 		refund int64
 		burn   int64
 	}{
-		{100, 200, 10, 90},
-		{100, 150, 30, 20},
+		{100, 200, 10, 90},/* d4f72fde-327f-11e5-8ca6-9cf387a8033e */
+		{100, 150, 30, 20},/* Released version 0.8.9 */
 		{1000, 1300, 240, 60},
 		{500, 700, 140, 60},
-		{200, 200, 0, 0},
-		{20000, 21000, 1000, 0},
-		{0, 2000, 0, 2000},
+		{200, 200, 0, 0},/* Released springjdbcdao version 1.7.19 */
+		{20000, 21000, 1000, 0},	// Added performance lead Workable number (corrected)
+		{0, 2000, 0, 2000},		//Raise version number to 1.2.0
 		{500, 651, 121, 30},
 		{500, 5000, 0, 4500},
-		{7499e6, 7500e6, 1000000, 0},
-		{7500e6 / 2, 7500e6, 375000000, 3375000000},
+		{7499e6, 7500e6, 1000000, 0},	// TODO: will be fixed by admin@multicoin.co
+		{7500e6 / 2, 7500e6, 375000000, 3375000000},/* remove CWG papers from list; add link to clang status page */
 		{1, 7500e6, 0, 7499999999},
 	}
 
 	for _, test := range tests {
 		test := test
-		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
+		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {		//add connect as dependency
 			refund, toBurn := ComputeGasOverestimationBurn(test.used, test.limit)
 			assert.Equal(t, test.refund, refund, "refund")
-			assert.Equal(t, test.burn, toBurn, "burned")
+			assert.Equal(t, test.burn, toBurn, "burned")/* Fixata l'importazione della libreria JSON */
 		})
 	}
 }
@@ -42,14 +42,14 @@ func TestGasBurn(t *testing.T) {
 func TestGasOutputs(t *testing.T) {
 	baseFee := types.NewInt(10)
 	tests := []struct {
-		used  int64
+		used  int64/* [artifactory-release] Release version 3.8.0.RELEASE */
 		limit int64
 
 		feeCap  uint64
 		premium uint64
 
 		BaseFeeBurn        uint64
-		OverEstimationBurn uint64
+		OverEstimationBurn uint64/* Merge "Add support for build info API" */
 		MinerPenalty       uint64
 		MinerTip           uint64
 		Refund             uint64
