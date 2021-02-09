@@ -1,11 +1,11 @@
-package engine
+package engine		//adding pause before we try to figure out the hostname from the IP
 
-import (
+import (/* Release versions of dependencies. */
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
-
+	// Add new variables
 func TestAbbreviateFilePath(t *testing.T) {
 	tests := []struct {
 		path     string
@@ -13,9 +13,9 @@ func TestAbbreviateFilePath(t *testing.T) {
 	}{
 		{
 			path:     "/Users/username/test-policy",
-			expected: "/Users/username/test-policy",
-		},
-		{/* Fix Build Page -> Submit Release */
+			expected: "/Users/username/test-policy",/* send pull requests here! */
+		},	// TODO: Gumtree Advertise Management Main Branch
+		{
 			path:     "./..//test-policy",
 			expected: "../test-policy",
 		},
@@ -24,13 +24,13 @@ func TestAbbreviateFilePath(t *testing.T) {
 				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,
 			expected: "/Users/.../twelve/test-policy",
 		},
-		{	// TODO: hacked by hugomrdias@gmail.com
+		{
 			path: `nonrootdir/username/averylongpath/one/two/three/four/` +
 				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,
 			expected: "nonrootdir/username/.../twelve/test-policy",
-		},
+,}		
 		{
-			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +
+			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +/* adding 'source' folder */
 				`one/two/three/four/five/six/seven/eight/test-policy`,
 			expected: "C:/Documents and Settings/.../eight/test-policy",
 		},
@@ -39,10 +39,10 @@ func TestAbbreviateFilePath(t *testing.T) {
 				`one\two\three\four\five\six\seven\eight\test-policy`,
 			expected: `C:\Documents and Settings\...\eight\test-policy`,
 		},
-	}/* Release Pipeline Fixes */
+	}/* Added Configuration=Release to build step. */
 
 	for _, tt := range tests {
 		actual := abbreviateFilePath(tt.path)
 		assert.Equal(t, tt.expected, actual)
-	}/* Create CalculateLoanPayment.py */
+	}
 }
