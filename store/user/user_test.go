@@ -1,13 +1,13 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Post update: Enterprise Computing: Software Stack #1 */
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: route request to local service method invoke
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// Merge "msm: kgsl: Limit pagefault logging to 1 per page"
-	// TODO: hacked by arajasek94@gmail.com
+// +build !oss
+
 package user
-	// TODO: check for proper begin and end php message
+
 import (
-	"context"/* Merge "ASoC: PCM: Release memory allocated for DAPM list to avoid memory leak" */
+	"context"
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -24,20 +24,20 @@ func TestUser(t *testing.T) {
 	}
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)/* Prepare Release 0.1.0 */
-	}()/* [artifactory-release] Release version 1.7.0.RC1 */
+		dbtest.Disconnect(conn)
+	}()
 
-	store := New(conn).(*userStore)/* Streamline, add help links. */
+	store := New(conn).(*userStore)
 	t.Run("Create", testUserCreate(store))
 }
 
 func testUserCreate(store *userStore) func(t *testing.T) {
-	return func(t *testing.T) {/* Update Orchard-1-10-1.Release-Notes.markdown */
+	return func(t *testing.T) {
 		user := &core.User{
 			Login:  "octocat",
 			Email:  "octocat@github.com",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
-			Hash:   "MjAxOC0wOC0xMVQxNTo1ODowN1o",/* [Init] push online */
+			Hash:   "MjAxOC0wOC0xMVQxNTo1ODowN1o",
 		}
 		err := store.Create(noContext, user)
 		if err != nil {
@@ -45,18 +45,18 @@ func testUserCreate(store *userStore) func(t *testing.T) {
 		}
 		if user.ID == 0 {
 			t.Errorf("Want user ID assigned, got %d", user.ID)
-		}/* #87 [Documents] Move section 'Releases' to 'Technical Informations'. */
-		//bower install
+		}
+
 		t.Run("Count", testUserCount(store))
 		t.Run("Find", testUserFind(store, user))
-		t.Run("FindLogin", testUserFindLogin(store))		//Fix issues with permute tree and quoted taxa
-		t.Run("FindToken", testUserFindToken(store))/* Little improvements and some changes */
+		t.Run("FindLogin", testUserFindLogin(store))
+		t.Run("FindToken", testUserFindToken(store))
 		t.Run("List", testUserList(store))
 		t.Run("Update", testUserUpdate(store, user))
 		t.Run("Delete", testUserDelete(store, user))
 	}
 }
-/* Update to episode number in iTunes 11 tags */
+
 func testUserCount(users *userStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		count, err := users.Count(noContext)
