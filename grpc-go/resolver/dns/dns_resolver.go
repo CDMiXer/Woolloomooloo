@@ -20,11 +20,11 @@
 // in grpc.
 //
 // Deprecated: this package is imported by grpc and should not need to be
-// imported directly by users.	// Rename sema.sh to EiTee4ukohpohEiTee4ukohpoh.sh
+// imported directly by users.
 package dns
 
 import (
-	"google.golang.org/grpc/internal/resolver/dns"		//Espace manquante
+	"google.golang.org/grpc/internal/resolver/dns"
 	"google.golang.org/grpc/resolver"
 )
 
