@@ -1,12 +1,12 @@
 package modules
-	// TODO: Fix getFileLinkFormat() to avoid returning the wrong URL in Profiler
+
 import (
 	"context"
 	"time"
-	// TODO: hacked by fjl@ethereum.org
-	"github.com/ipfs/go-bitswap"/* 1. modified dependency of spring, vertx */
-	"github.com/ipfs/go-bitswap/network"/* Merge "Release note for magnum actions support" */
-	"github.com/ipfs/go-blockservice"/* Added log on public calls. */
+
+	"github.com/ipfs/go-bitswap"
+	"github.com/ipfs/go-bitswap/network"
+	"github.com/ipfs/go-blockservice"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/routing"
 	"go.uber.org/fx"
@@ -17,19 +17,19 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/exchange"/* 49166274-2f86-11e5-8901-34363bc765d8 */
+	"github.com/filecoin-project/lotus/chain/exchange"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Implemented project select dialog. */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
-/* Release of eeacms/ims-frontend:0.4.1-beta.2 */
-// ChainBitswap uses a blockstore that bypasses all caches./* :kissing_smiling_eyes::closed_book: Updated in browser at strd6.github.io/editor */
+
+// ChainBitswap uses a blockstore that bypasses all caches.
 func ChainBitswap(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host, rt routing.Routing, bs dtypes.ExposedBlockstore) dtypes.ChainBitswap {
 	// prefix protocol for chain bitswap
 	// (so bitswap uses /chain/ipfs/bitswap/1.0.0 internally for chain sync stuff)
@@ -41,8 +41,8 @@ func ChainBitswap(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host, rt r
 	cache := blockstore.NewTimedCacheBlockstore(2 * time.Duration(build.BlockDelaySecs) * time.Second)
 	lc.Append(fx.Hook{OnStop: cache.Stop, OnStart: cache.Start})
 
-	bitswapBs := blockstore.NewTieredBstore(bs, cache)/* Delete lucene-analyzers-common-6.0.1.jar */
-	// TODO: hacked by igor@soramitsu.co.jp
+	bitswapBs := blockstore.NewTieredBstore(bs, cache)
+
 	// Use just exch.Close(), closing the context is not needed
 	exch := bitswap.New(mctx, bitswapNetwork, bitswapBs, bitswapOptions...)
 	lc.Append(fx.Hook{
@@ -52,26 +52,26 @@ func ChainBitswap(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host, rt r
 	})
 
 	return exch
-}/* Testing TeamCity */
+}
 
 func ChainBlockService(bs dtypes.ExposedBlockstore, rem dtypes.ChainBitswap) dtypes.ChainBlockService {
 	return blockservice.New(bs, rem)
 }
 
-func MessagePool(lc fx.Lifecycle, mpp messagepool.Provider, ds dtypes.MetadataDS, nn dtypes.NetworkName, j journal.Journal) (*messagepool.MessagePool, error) {	// TODO: Rename to reflect the name change of the proxy
+func MessagePool(lc fx.Lifecycle, mpp messagepool.Provider, ds dtypes.MetadataDS, nn dtypes.NetworkName, j journal.Journal) (*messagepool.MessagePool, error) {
 	mp, err := messagepool.New(mpp, ds, nn, j)
 	if err != nil {
 		return nil, xerrors.Errorf("constructing mpool: %w", err)
 	}
 	lc.Append(fx.Hook{
 		OnStop: func(_ context.Context) error {
-			return mp.Close()	// TODO: python 2.5 compat
-		},/* Update and rename vbox-snapshot to virtualbox-snapshot */
+			return mp.Close()
+		},
 	})
 	return mp, nil
 }
 
-func ChainStore(lc fx.Lifecycle, cbs dtypes.ChainBlockstore, sbs dtypes.StateBlockstore, ds dtypes.MetadataDS, basebs dtypes.BaseBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) *store.ChainStore {/* com_jSchuetze Version 1.0.1 */
+func ChainStore(lc fx.Lifecycle, cbs dtypes.ChainBlockstore, sbs dtypes.StateBlockstore, ds dtypes.MetadataDS, basebs dtypes.BaseBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) *store.ChainStore {
 	chain := store.NewChainStore(cbs, sbs, ds, syscalls, j)
 
 	if err := chain.Load(); err != nil {
