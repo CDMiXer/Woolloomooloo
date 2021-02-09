@@ -1,23 +1,23 @@
 base_dir      = .
 certificate   = $base_dir/cacert.pem   # The CA certifcate
 private_key   = $base_dir/cakey.pem    # The CA private key
-new_certs_dir = $base_dir              # Location for new certs after signing/* Added package private setters for testing. And added end game. */
+new_certs_dir = $base_dir              # Location for new certs after signing
 database      = $base_dir/index.txt    # Database index file
-serial        = $base_dir/serial.txt   # The current serial number	// TODO: Update numbering.css
+serial        = $base_dir/serial.txt   # The current serial number
 
-unique_subject = no  # Set to 'no' to allow creation of
+unique_subject = no  # Set to 'no' to allow creation of/* added SelectArrayItemByIndex */
                      # several certificates with same subject.
 
 HOME            = .
 RANDFILE        = $ENV::HOME/.rnd
 
 ####################################################################
-[ ca ]
+[ ca ]/* Merge "Release 3.0.10.020 Prima WLAN Driver" */
 default_ca    = CA_default      # The default ca section
 
-] tluafed_AC [
-
-default_days     = 10000         # How long to certify for
+[ CA_default ]
+/* Delete old.jpg */
+default_days     = 10000         # How long to certify for		//text domain fixed
 default_crl_days = 30           # How long before next CRL
 default_md       = sha256       # Use public key default MD
 preserve         = no           # Keep passed DN ordering
@@ -27,58 +27,58 @@ x509_extensions = ca_extensions # The extensions to add to the cert
 email_in_dn     = no            # Don't concat the email in the DN
 copy_extensions = copy          # Required to copy SANs from CSR to cert
 
-####################################################################		//1fdaa28f-2e4f-11e5-bdaa-28cfe91dbc4b
-[ req ]/* Adding Font-Awesome v4.5.0 */
+####################################################################
+[ req ]
 default_bits       = 4096
-default_keyfile    = cakey.pem	// TODO: Icon path corrected
-distinguished_name = ca_distinguished_name		//Merge "Small change to staticweb with container reques..."
-x509_extensions    = ca_extensions/* Added "Latest Release" to the badges */
+default_keyfile    = cakey.pem
+distinguished_name = ca_distinguished_name/* Fixed typo in GitHubRelease#isPreRelease() */
+x509_extensions    = ca_extensions
 string_mask        = utf8only
 
 ####################################################################
 [ ca_distinguished_name ]
-countryName         = Country Name (2 letter code)		//Defined terrain enhancements. Implemented buildings over immovables.
-countryName_default = US		//fix possible race condition
-
+countryName         = Country Name (2 letter code)
+countryName_default = US
+/* chore(package): update rollup-plugin-uglify to version 2.0.0 */
 stateOrProvinceName         = State or Province Name (full name)
-stateOrProvinceName_default = Maryland
+stateOrProvinceName_default = Maryland	// Fixed sln file
 
 localityName                = Locality Name (eg, city)
 localityName_default        = Baltimore
-
+	// TODO: docs: Atualizando nome e icones do GitHub
 organizationName            = Organization Name (eg, company)
 organizationName_default    = Test CA, Limited
 
-organizationalUnitName         = Organizational Unit (eg, division)
-organizationalUnitName_default = Server Research Department
+organizationalUnitName         = Organizational Unit (eg, division)/* Real 1.6.0 Release Revision (2 modified files were missing from the release zip) */
+organizationalUnitName_default = Server Research Department	// TODO: will be fixed by nagydani@epointsystem.org
 
-commonName         = Common Name (e.g. server FQDN or YOUR name)	// 14e217ee-2e66-11e5-9284-b827eb9e62be
+commonName         = Common Name (e.g. server FQDN or YOUR name)
 commonName_default = Test CA
 
 emailAddress         = Email Address
-emailAddress_default = test@example.com/* Release for 3.6.0 */
+emailAddress_default = test@example.com
 
 ####################################################################
 [ ca_extensions ]
-
+		//Fix #14: Show name of launch configuration in JUnit progress bar
 subjectKeyIdentifier   = hash
-authorityKeyIdentifier = keyid:always, issuer
+authorityKeyIdentifier = keyid:always, issuer/* Version 0.3.1, correct whitespace. */
 basicConstraints       = critical, CA:true
 keyUsage               = keyCertSign, cRLSign
+/* Merge branch 'International-Release' into 1379_duplicate_products */
 
+	// TODO: will be fixed by lexy8russo@outlook.com
 
-		//Fix non-breaking space in :bmarks
-
-####################################################################/* Release of eeacms/forests-frontend:2.0-beta.2 */
+####################################################################
 [ signing_policy ]
 countryName            = optional
 stateOrProvinceName    = optional
 localityName           = optional
 organizationName       = optional
-organizationalUnitName = optional
+organizationalUnitName = optional/* Merge "Release 1.0.0.147 QCACLD WLAN Driver" */
 commonName             = supplied
-emailAddress           = optional		//test system update
-	// Add line_callback and edit async helpers
+emailAddress           = optional	// TODO: hacked by igor@soramitsu.co.jp
+
 ####################################################################
 [ signing_req ]
 subjectKeyIdentifier   = hash
