@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
-        "outDir": "bin",	// TODO: add None check for DS3505 temperature
+{ :"snoitpOrelipmoc"    
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* Add Release 1.1.0 */
         "declaration": true,
-        "sourceMap": true,	// TODO: d0d4c6e8-2fbc-11e5-b64f-64700227155b
+        "sourceMap": true,		//The README and COPYING files added.
         "stripInternal": true,
-        "experimentalDecorators": true,/* [MERGE] trunk-server with trunk-server-sequencenum-api */
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,		//Create permutation-sequence.cpp
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },	// TODO: adds universal analytics and individual user tracking
+    },
     "files": [
-        "index.ts"/* Changed Version Number for Release */
+        "index.ts"
     ]
 }
 
