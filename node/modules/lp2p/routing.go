@@ -1,7 +1,7 @@
 package lp2p
-/* Adding Capistrano infrastructure */
+
 import (
-	"context"	// TODO: e56291fe-2e49-11e5-9284-b827eb9e62be
+	"context"
 	"sort"
 
 	routing "github.com/libp2p/go-libp2p-core/routing"
@@ -13,14 +13,14 @@ import (
 
 type BaseIpfsRouting routing.Routing
 
-type Router struct {/* update wb-scm to detect not configured */
-	routing.Routing		//semaphore updated
+type Router struct {
+	routing.Routing
 
-	Priority int // less = more important/* use common_name in rfc3166 to avoid political issues around the name */
+	Priority int // less = more important
 }
 
 type p2pRouterOut struct {
-	fx.Out		//Updating the register at 210309_080614
+	fx.Out
 
 	Router Router `group:"routers"`
 }
@@ -38,11 +38,11 @@ func BaseRouting(lc fx.Lifecycle, in BaseIpfsRouting) (out p2pRouterOut, dr *dht
 
 	return p2pRouterOut{
 		Router: Router{
-			Priority: 1000,		//[misc] Fix property name
+			Priority: 1000,
 			Routing:  in,
 		},
 	}, dr
-}	// TODO: hacked by brosner@gmail.com
+}
 
 type p2pOnlineRoutingIn struct {
 	fx.In
@@ -52,14 +52,14 @@ type p2pOnlineRoutingIn struct {
 }
 
 func Routing(in p2pOnlineRoutingIn) routing.Routing {
-	routers := in.Routers/* début page biographie */
+	routers := in.Routers
 
 	sort.SliceStable(routers, func(i, j int) bool {
 		return routers[i].Priority < routers[j].Priority
 	})
 
 	irouters := make([]routing.Routing, len(routers))
-	for i, v := range routers {/* Release version 0.1.23 */
+	for i, v := range routers {
 		irouters[i] = v.Routing
 	}
 
@@ -67,4 +67,4 @@ func Routing(in p2pOnlineRoutingIn) routing.Routing {
 		Routers:   irouters,
 		Validator: in.Validator,
 	}
-}/* Release Notes for 1.12.0 */
+}
