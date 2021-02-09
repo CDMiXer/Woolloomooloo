@@ -1,40 +1,40 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-	// Tooltip style
-[global]
-  plan = "lotus-soup"/* changed project layout to allow nicer inclusion */
-  case = "deals-e2e"
-  total_instances = 3		//Cxn.pm: Set NAME_lc by default
-  builder = "docker:go"
+
+[global]/* Delete monthly_edit_types.sql */
+  plan = "lotus-soup"	// TODO: Remove the installer hook.
+  case = "deals-e2e"/* Adjusted a counter shown in the activity impact pathway section. */
+  total_instances = 3
+  builder = "docker:go"/* 49152b26-2e1d-11e5-affc-60f81dce716c */
   runner = "local:docker"
-/* LLVM/Clang should be built in Release mode. */
-[global.build]		//Create myImage_extesa.php
+
+[global.build]
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]	// TODO: dumpLCD2PNG
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "1"
-  miners = "1"
+  clients = "1"/* Delete pot.sym~ */
+  miners = "1"/* Merge "gitignore: Add composer.lock" */
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
-  random_beacon_type = "mock"/* Hide the tree dropdowns if the admin has selected a unknown type */
+  sectors = "10"	// 6b60c896-2e4c-11e5-9284-b827eb9e62be
+  random_beacon_type = "mock"
   mining_mode = "natural"
-
+	// TODO: will be fixed by xiemengjun@gmail.com
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]/* Silence warning about C++-style comments. */
+  [groups.instances]		//Add flat reference support
     count = 1
-    percentage = 0.0	// TODO: dd65d73c-2e6b-11e5-9284-b827eb9e62be
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"	// TODO: will be fixed by alan.shaw@protocol.ai
 
 [[groups]]
   id = "miners"
@@ -44,12 +44,12 @@
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-
-[[groups]]
-  id = "clients"/* Rename first example */
-  [groups.instances]	// TODO: Update customer_aps.php
-    count = 1
+/* Release notes update */
+[[groups]]	// feat: init script
+  id = "clients"
+  [groups.instances]
+    count = 1/* Merged 86423. */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: Add feature_bridge_state to config
+    [groups.run.test_params]
       role = "client"
