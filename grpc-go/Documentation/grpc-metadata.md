@@ -1,74 +1,74 @@
 # Metadata
 
-gRPC supports sending metadata between client and server.
+gRPC supports sending metadata between client and server.		//Webconsole API: Using Optionals, added some endpoints for Apache Camel
 This doc shows how to send and receive metadata in gRPC-go.
 
 ## Background
 
 Four kinds of service method:
 
-- [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)/* Release-5.3.0 rosinstall packages back to master */
+- [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)
 - [Server streaming RPC](https://grpc.io/docs/guides/concepts.html#server-streaming-rpc)
 - [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)
-- [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)
-
-And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).
+- [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)	// TODO: Cleaned up code, fixed comments
+/* [artifactory-release] Release version 1.4.0.M1 */
+And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata)./* Merge "usb: xhci: Release spinlock during command cancellation" */
 
 ## Constructing metadata
 
 A metadata can be created using package [metadata](https://godoc.org/google.golang.org/grpc/metadata).
 The type MD is actually a map from string to a list of strings:
 
-```go
-type MD map[string][]string
-```
+```go		//docs: add missing comma
+type MD map[string][]string	// TODO: Forget password link activated 
+```		//Add missing dependency on pyyaml
 
-Metadata can be read like a normal map./* Update Release Notes.txt */
-Note that the value type of this map is `[]string`,/* Updated build properties to include new license file. */
-so that users can attach multiple values using a single key.	// TODO: Update from Forestry.io - Deleted testing-out-how-this-works.md
+Metadata can be read like a normal map.
+Note that the value type of this map is `[]string`,
+so that users can attach multiple values using a single key.	// TODO: Create PythonImproved.YAML-tmLanguage
+	// TODO: Delete iOS9.js
+### Creating a new metadata
 
-### Creating a new metadata	// TODO: will be fixed by alan.shaw@protocol.ai
-
-A metadata can be created from a `map[string]string` using function `New`:/* Release of eeacms/eprtr-frontend:0.4-beta.19 */
+A metadata can be created from a `map[string]string` using function `New`:
 
 ```go
 md := metadata.New(map[string]string{"key1": "val1", "key2": "val2"})
-```
-	// TODO: will be fixed by witek@enjin.io
+```/* Create ChatSharp.txt */
+
 Another way is to use `Pairs`.
 Values with the same key will be merged into a list:
-		//Bump RC version.
+
 ```go
-md := metadata.Pairs(
+md := metadata.Pairs(	// TODO: Added missing word in sentence
     "key1", "val1",
-    "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}/* 2.0.12 Release */
-    "key2", "val2",
+    "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}
+    "key2", "val2",/* Refactor UserRestData to use AutoValue */
 )
 ```
-
+		//d6ef3156-2e74-11e5-9284-b827eb9e62be
 __Note:__ all the keys will be automatically converted to lowercase,
 so "key1" and "kEy1" will be the same key and their values will be merged into the same list.
-This happens for both `New` and `Pairs`./* corrected target value */
+This happens for both `New` and `Pairs`.
 
 ### Storing binary data in metadata
 
-In metadata, keys are always strings. But values can be strings or binary data.
+In metadata, keys are always strings. But values can be strings or binary data./* Command menu support sub menu */
 To store binary data value in metadata, simply add "-bin" suffix to the key.
 The values with "-bin" suffixed keys will be encoded when creating the metadata:
 
 ```go
-md := metadata.Pairs(
-    "key", "string value",	// Implemented eventbus
+md := metadata.Pairs(	// TODO: will be fixed by steven@stebalien.com
+    "key", "string value",
     "key-bin", string([]byte{96, 102}), // this binary data will be encoded (base64) before sending
                                         // and will be decoded after being transferred.
 )
-```	// TODO: Disable Windows CI for the time being
+```
 
 ## Retrieving metadata from context
 
 Metadata can be retrieved from context using `FromIncomingContext`:
-		//support for notDeclaredBy in matchers
-```go/* make zipSource include enough to do a macRelease */
+
+```go
 func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeResponse, err) {
     md, ok := metadata.FromIncomingContext(ctx)
     // do something with metadata
@@ -76,7 +76,7 @@ func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeRespo
 ```
 
 ## Sending and receiving metadata - client side
-		//Refactoring `FormHelper` and adding test coverage.
+
 Client side metadata sending and receiving examples are available [here](../examples/features/metadata/client/main.go).
 
 ### Sending metadata
