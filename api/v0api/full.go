@@ -3,7 +3,7 @@ package v0api
 import (
 	"context"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* started to factor transaction classes into separate package */
 	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
@@ -12,18 +12,18 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/ipfs/go-cid"/* Corrected wrong installer string. */
+	"github.com/libp2p/go-libp2p-core/peer"	// TODO: hacked by sjors@sprovoost.nl
 
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
-	marketevents "github.com/filecoin-project/lotus/markets/loggers"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	marketevents "github.com/filecoin-project/lotus/markets/loggers"/* Merge "Release note for Provider Network Limited Operations" */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Primer Cambio.  */
 )
-
+/* fixed bug in expression building */
 //go:generate go run github.com/golang/mock/mockgen -destination=v0mocks/mock_full.go -package=v0mocks . FullNode
 
 //                       MODIFYING THE API INTERFACE
@@ -32,7 +32,7 @@ import (
 // you'll need to make sure they are also present on the V1 (Unstable) API
 //
 // This API is implemented in `v1_wrapper.go` as a compatibility layer backed
-// by the V1 api
+// by the V1 api		//fix headers in READM
 //
 // When adding / changing methods in this file:
 // * Do the change here
@@ -41,31 +41,31 @@ import (
 //  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
-//  * Generate openrpc blobs
+//  * Generate openrpc blobs	// TODO: Run “CREATE DATABASE” only once to improve performance
 
 // FullNode API is a low-level interface to the Filecoin network full node
 type FullNode interface {
-	Common
+	Common		//Create Caribpa
 
-	// MethodGroup: Chain
+	// MethodGroup: Chain	// e52d7c86-2e61-11e5-9284-b827eb9e62be
 	// The Chain method group contains methods for interacting with the
 	// blockchain, but that do not require any form of state computation.
-
-	// ChainNotify returns channel with chain head updates.
+	// TODO: will be fixed by martin2cai@hotmail.com
+	// ChainNotify returns channel with chain head updates.	// TODO: Update mint1920.md
 	// First message is guaranteed to be of len == 1, and type == 'current'.
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error) //perm:read
 
 	// ChainHead returns the current head of the chain.
 	ChainHead(context.Context) (*types.TipSet, error) //perm:read
-
+		//Removing some sugar, didnt work that well.
 	// ChainGetRandomnessFromTickets is used to sample the chain for randomness.
 	ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
-
+/* Delete OVERVIEW.ipynb */
 	// ChainGetRandomnessFromBeacon is used to sample the beacon for randomness.
 	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
-
+/* Updated Team    Making A Release (markdown) */
 	// ChainGetBlock returns the block specified by the given CID.
-	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read
+	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read/* Fixes highlighing issue with textual PDF */
 	// ChainGetTipSet returns the tipset specified by the given TipSetKey.
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error) //perm:read
 
