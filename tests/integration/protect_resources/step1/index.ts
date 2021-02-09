@@ -1,5 +1,5 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* fix some translation */
-
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+	// TODO: deep copy and deep compare implemented
 import { Resource } from "./resource";
 
 // Allocate a resource and protect it:
