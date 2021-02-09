@@ -1,5 +1,5 @@
 {
-    "s3-no-public-read": {
+    "s3-no-public-read": {		//Fixed a circular reference issue
         "enforcementLevel": "mandatory"
-    }
+    }	// TODO: Remove ugly output
 }
