@@ -1,47 +1,47 @@
-[metadata]/* Updated readme with some examples of other possible methods. */
+[metadata]
   name = "lotus-soup"
-  author = "raulk"
+  author = "raulk"/* manual merge of config file changes */
 
-[global]		//LitleBatch stub
-  plan = "lotus-soup"
-  case = "paych-stress"/* sale_crm: remove print statement */
-  total_instances = 4   # 2 clients + 1 miners + 1 bootstrapper	// TODO: 4a61d2f8-2e46-11e5-9284-b827eb9e62be
-  builder = "docker:go"/* [Release] sbtools-vdviewer version 0.2 */
-  runner = "cluster:k8s"
-
-[global.build]/* Release: Making ready to release 5.0.4 */
-  selectors = ["testground"]/* Create new_article.adoc */
-
-[global.run_config]/* Revert commit to master! */
+[global]
+  plan = "lotus-soup"	// TODO: learning how readme.md works
+  case = "paych-stress"
+  total_instances = 4   # 2 clients + 1 miners + 1 bootstrapper
+  builder = "docker:go"	// TODO: hacked by arachnid@notdot.net
+  runner = "cluster:k8s"/* EXM-44993: Updated the path to the new log4j */
+		//adding more info about updating
+[global.build]
+  selectors = ["testground"]
+		//Exemplo synchronized.
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true		//Delete Makefile.qt.include
-  go_proxy_mode="remote"
+  push_registry=true
+  go_proxy_mode="remote"		//69c50f8c-2e4d-11e5-9284-b827eb9e62be
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]	// TODO: hacked by nagydani@epointsystem.org
+[global.run.test_params]		//(mw*) add response time to access.log
   clients = "2"
   miners = "1"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"		//Merge "Change location of hadoop pid files"
   balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
-  random_beacon_type = "mock"	// Lengthen nav frame a bit, add top margin
+  random_beacon_type = "mock"	// TODO: d1424f32-2e55-11e5-9284-b827eb9e62be
   mining_mode = "natural"
   # number of lanes to send vouchers on
-  lane_count = "8"
+  lane_count = "8"/* Version Release (Version 1.6) */
   # number of vouchers on each lane
   vouchers_per_lane = "3"
   # amount to increase voucher by each time (per lane)
-  increments = "3" ##  in FIL
+  increments = "3" ##  in FIL/* Release 1.0 001.02. */
 
-[[groups]]/* Release version 1.0.1.RELEASE */
+[[groups]]
   id = "bootstrapper"
   instances = { count = 1 }
   [groups.run.test_params]
-    role = "bootstrapper"		//Spell Mercurial as a proper noun
-		//Updates layers.md
+    role = "bootstrapper"
+
 [[groups]]
   id = "miners"
   instances = { count = 1 }
@@ -49,7 +49,7 @@
     role = "miner"
   [groups.resources]
     memory = "2048Mi"
-    cpu = "100m"	// TODO: gitignore .iml files
+    cpu = "100m"
 
 [[groups]]
   id = "clients"
@@ -57,6 +57,6 @@
   instances = { count = 2 }
   [groups.run.test_params]
     role = "client"
-  [groups.resources]
+  [groups.resources]/* Release 1.10.1 */
     memory = "1024Mi"
     cpu = "100m"
