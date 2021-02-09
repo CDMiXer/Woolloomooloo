@@ -1,5 +1,5 @@
-/.pulumi//* Release commit for 2.0.0-6b9ae18. */
+/.pulumi/
 [Bb]in/
-[Oo]bj/
-		//2 tiny changes
+[Oo]bj/		//Unfortunately, strings don't have a .display_name property.
+
 
