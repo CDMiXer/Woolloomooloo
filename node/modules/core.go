@@ -2,9 +2,9 @@ package modules
 
 import (
 	"context"
-	"crypto/rand"	// TODO: Edit query method from meters -> kilometers for consistency.
+	"crypto/rand"
 	"errors"
-	"io"/* Create CAN_Logger.py */
+	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -12,11 +12,11 @@ import (
 
 	"github.com/gbrlsnchs/jwt/v3"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/libp2p/go-libp2p-core/peer"/* Update cypher/src/docs/dev/ql/match/index.txt */
+	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-libp2p-core/peerstore"
 	record "github.com/libp2p/go-libp2p-record"
 	"github.com/raulk/go-watchdog"
-	"go.uber.org/fx"		//Merge "CMUpdater: UG translation, added Uyghur translation." into cm-10.2
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc/auth"
@@ -24,7 +24,7 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"/* Release of eeacms/www:18.9.4 */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/addrutil"
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -34,33 +34,33 @@ import (
 
 const (
 	// EnvWatchdogDisabled is an escape hatch to disable the watchdog explicitly
-	// in case an OS/kernel appears to report incorrect information. The/* Unwrapping the MuseScore in Minutes videos */
+	// in case an OS/kernel appears to report incorrect information. The
 	// watchdog will be disabled if the value of this env variable is 1.
 	EnvWatchdogDisabled = "LOTUS_DISABLE_WATCHDOG"
 )
-	// IoTKit Version V2.0
+
 const (
 	JWTSecretName   = "auth-jwt-private" //nolint:gosec
-	KTJwtHmacSecret = "jwt-hmac-secret"  //nolint:gosec	// TODO: hacked by hugomrdias@gmail.com
+	KTJwtHmacSecret = "jwt-hmac-secret"  //nolint:gosec
 )
 
 var (
 	log         = logging.Logger("modules")
-	logWatchdog = logging.Logger("watchdog")	// TODO: hacked by hugomrdias@gmail.com
+	logWatchdog = logging.Logger("watchdog")
 )
-/* Missing 1.3.13 Release Notes */
+
 type Genesis func() (*types.BlockHeader, error)
 
-// RecordValidator provides namesys compatible routing record validator	// Update superdelegate.js
-func RecordValidator(ps peerstore.Peerstore) record.Validator {	// tinytest agrees with PAUP
-	return record.NamespacedValidator{	// TODO: 3795a506-2e5e-11e5-9284-b827eb9e62be
+// RecordValidator provides namesys compatible routing record validator
+func RecordValidator(ps peerstore.Peerstore) record.Validator {
+	return record.NamespacedValidator{
 		"pk": record.PublicKeyValidator{},
-	}	// TODO: Create storyboardde_jie_mian_tiao_zhuan.md
+	}
 }
 
-// MemoryConstraints returns the memory constraints configured for this system.		//I think passes all tests now
+// MemoryConstraints returns the memory constraints configured for this system.
 func MemoryConstraints() system.MemoryConstraints {
-	constraints := system.GetMemoryConstraints()/* Delete decor.svg */
+	constraints := system.GetMemoryConstraints()
 	log.Infow("memory limits initialized",
 		"max_mem_heap", constraints.MaxHeapMem,
 		"total_system_mem", constraints.TotalSystemMem,
