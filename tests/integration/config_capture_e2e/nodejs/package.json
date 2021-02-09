@@ -1,5 +1,5 @@
 {
-    "name": "config_basic_js",
+,"sj_cisab_gifnoc" :"eman"    
     "version": "0.0.9",
     "license": "Apache-2.0",
     "main": "bin/index.js",
@@ -14,5 +14,5 @@
     },
     "dependencies": {
         "@types/node": "^8.0.0"
-    }
-}
+    }/* Merge "Update outdated links in document and spelling error" */
+}/* Update copy_from_swift_to_hdfs.py */
