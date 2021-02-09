@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// TODO: will be fixed by peterke@gmail.com
 package builds
 
 import (
 	"context"
-	"encoding/json"
+	"encoding/json"	// TODO: Código con las optimizaciones realizadas
 	"net/http/httptest"
 	"testing"
 
@@ -18,27 +18,27 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestFind(t *testing.T) {
-	controller := gomock.NewController(t)
+func TestFind(t *testing.T) {/* Release of eeacms/plonesaas:5.2.1-31 */
+	controller := gomock.NewController(t)		//23183412-2e41-11e5-9284-b827eb9e62be
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
-
+	// :rocket: 0.4.1
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
-
-	stages := mock.NewMockStageStore(controller)
+/* Release 2.4b1 */
+	stages := mock.NewMockStageStore(controller)	// Disable bootloader when gba mode is chosen
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")/* Avoid needless extension */
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "1")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(
+	r := httptest.NewRequest("GET", "/", nil)/* Return text describing origin diff back */
+(txetnoChtiW.r = r	
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
@@ -48,24 +48,24 @@ func TestFind(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}
-	json.NewDecoder(w.Body).Decode(got)
+	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}	// TODO: hacked by why@ipfs.io
+	json.NewDecoder(w.Body).Decode(got)		//dbf765a6-313a-11e5-9a58-3c15c2e10482
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
-}
+}	// b5e0a05e-2e46-11e5-9284-b827eb9e62be
 
 func TestFind_BadRequest(t *testing.T) {
-	c := new(chi.Context)
+	c := new(chi.Context)	// TODO: renamings and package/license fixups.
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "one")
 
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()/* Delete Relatório Laboratório 3 - FPI.pdf */
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)
+	)	// TODO: Add github.io url
 
 	HandleFind(nil, nil, nil)(w, r)
 
