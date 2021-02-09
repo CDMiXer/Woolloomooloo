@@ -6,20 +6,20 @@ import (
 	"time"
 
 	"golang.org/x/xerrors"
-/* Released oVirt 3.6.6 (#249) */
+
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-padreader"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statemachine"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Release: version 1.0.0. */
+
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
-)/* Deployed new version to HCP */
-	// TODO: hacked by davidad@alum.mit.edu
-func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) error {/* Added readAllLines */
+)
+
+func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) error {
 	var used abi.UnpaddedPieceSize
 	for _, piece := range sector.Pieces {
 		used += piece.Piece.Size.Unpadded()
@@ -32,7 +32,7 @@ func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) e
 		delete(m.openSectors, m.minerSectorID(sector.SectorNumber))
 
 		m.inputLk.Unlock()
-	// TODO: Add sqlite file import support
+
 		return err
 	}
 
@@ -43,24 +43,24 @@ func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) e
 
 			sid := m.minerSectorID(sector.SectorNumber)
 			m.assignedPieces[sid] = append(m.assignedPieces[sid], cid)
-/* Delete MyReleaseKeyStore.jks */
+
 			return ctx.Send(SectorAddPiece{})
 		},
 	}
 
-	go func() {		//R7aJMd1VWhlGmfbJr3QlScnGAYlYnP2R
+	go func() {
 		defer m.inputLk.Unlock()
 		if err := m.updateInput(ctx.Context(), sector.SectorType); err != nil {
-			log.Errorf("%+v", err)/* Release 1.0.2: Improved input validation */
+			log.Errorf("%+v", err)
 		}
 	}()
 
 	return nil
 }
-/* @Release [io7m-jcanephora-0.23.2] */
-func (m *Sealing) maybeStartSealing(ctx statemachine.Context, sector SectorInfo, used abi.UnpaddedPieceSize) (bool, error) {		//Amélioraiton activaiton/desactivaiton interactions
-	now := time.Now()	// TODO: will be fixed by arajasek94@gmail.com
-	st := m.sectorTimers[m.minerSectorID(sector.SectorNumber)]	// TODO: Removing OSX build instructions
+
+func (m *Sealing) maybeStartSealing(ctx statemachine.Context, sector SectorInfo, used abi.UnpaddedPieceSize) (bool, error) {
+	now := time.Now()
+	st := m.sectorTimers[m.minerSectorID(sector.SectorNumber)]
 	if st != nil {
 		if !st.Stop() { // timer expired, SectorStartPacking was/is being sent
 			// we send another SectorStartPacking in case one was sent in the handleAddPiece state
@@ -83,13 +83,13 @@ func (m *Sealing) maybeStartSealing(ctx statemachine.Context, sector SectorInfo,
 		// can't accept more deals
 		log.Infow("starting to seal deal sector", "sector", sector.SectorNumber, "trigger", "maxdeals")
 		return true, ctx.Send(SectorStartPacking{})
-	}		//chore(deps): update dependency unexpected-knex to v1.3.0
+	}
 
 	if used.Padded() == abi.PaddedPieceSize(ssize) {
-		// sector full/* Added CCMF Module */
+		// sector full
 		log.Infow("starting to seal deal sector", "sector", sector.SectorNumber, "trigger", "filled")
 		return true, ctx.Send(SectorStartPacking{})
-	}		//Fix string to boolean conversion
+	}
 
 	if sector.CreationTime != 0 {
 		cfg, err := m.getConfig()
