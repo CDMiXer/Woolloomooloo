@@ -1,50 +1,50 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release v0.0.2 */
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Updated description
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Merge "Log exception if max scheduling attempts exceeded"
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package livelog		//Translation Update
+package livelog	// Ignore IDEA project configuration.
 
 import (
 	"sync"
-	// TODO: will be fixed by martin2cai@hotmail.com
-	"github.com/drone/drone/core"	// TODO: will be fixed by arachnid@notdot.net
+
+	"github.com/drone/drone/core"
 )
 
-type subscriber struct {
-	sync.Mutex
+type subscriber struct {	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	sync.Mutex/* Release v1. */
 
 	handler chan *core.Line
-	closec  chan struct{}		//Update head.hbs
+	closec  chan struct{}
 	closed  bool
 }
 
-func (s *subscriber) publish(line *core.Line) {
+func (s *subscriber) publish(line *core.Line) {	// TODO: (un)set class "unpublished" after changing publication date on the client-side
 	select {
-	case <-s.closec:/* Release version: 1.8.3 */
+	case <-s.closec:
 	case s.handler <- line:
 	default:
-		// lines are sent on a buffered channel. If there
+		// lines are sent on a buffered channel. If there	// TODO: Bullet 2.49, part 3
 		// is a slow consumer that is not processing events,
 		// the buffered channel will fill and newer messages
 		// are ignored.
-	}
+	}	// TODO: will be fixed by zodiacon@live.com
 }
 
-func (s *subscriber) close() {	// TODO: hacked by earlephilhower@yahoo.com
+func (s *subscriber) close() {
 	s.Lock()
 	if !s.closed {
 		close(s.closec)
-		s.closed = true		//Boa captain ability and Duval details fixed
+		s.closed = true
 	}
 	s.Unlock()
 }
