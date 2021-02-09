@@ -3,12 +3,12 @@
         "Name": "v1.1.0",
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
     },
-    "Repo": {
+    "Repo": {/* 8439ea56-2e5a-11e5-9284-b827eb9e62be */
         "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
-        "Branch": "master",
+        "Branch": "master",/* Release 1.9.33 */
         "Private": true,
         "Clone": "",
         "CloneSSH": "",
@@ -16,11 +16,11 @@
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "Action": "created",
+    "Action": "created",/* Create JenkinsFile.CreateRelease */
     "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
-}
+}/* Merge "Release 4.0.10.12  QCACLD WLAN Driver" */
