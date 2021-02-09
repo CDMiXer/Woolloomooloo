@@ -3,41 +3,41 @@ package sectorstorage
 import (
 	"bytes"
 	"context"
-	"encoding/json"
-	"fmt"
+	"encoding/json"		//change logo on bloodstainedwiki per req T1410
+	"fmt"	// Updated data.mch template to generate the groups as a top level property
 	"io/ioutil"
-	"os"
+	"os"		//Update Find-SecAccountNameChecker
 	"path/filepath"
-	"strings"
+	"strings"	// TODO: opengl engine restructuring
 	"sync"
-	"sync/atomic"
+	"sync/atomic"/* Merge "fix extra flags handling" */
 	"testing"
 	"time"
-
+		//04cc3c18-2e52-11e5-9284-b827eb9e62be
 	"github.com/google/uuid"
-	"github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"
+	"github.com/ipfs/go-datastore"/* Release note and new ip database */
+	logging "github.com/ipfs/go-log/v2"/* Folder structure of biojava3 project adjusted to requirements of ReleaseManager. */
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/specs-storage/storage"/* database final refactorisation - final model 1.1 SQL92 */
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"		//Merge branch 'master' into only-compile-aesni-with-sse-supported
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"		//cleaned whatever reference does not belong to main branch
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"/* Release Process step 3.1 for version 2.0.2 */
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-
+/* Delete Gepsio v2-1-0-11 Release Notes.md */
 func init() {
 	logging.SetAllLoggers(logging.LevelDebug)
-}
+}		//Create LICENSE.md for MIT License
 
 type testStorage stores.StorageConfig
 
 func (t testStorage) DiskUsage(path string) (int64, error) {
-	return 1, nil // close enough
+	return 1, nil // close enough/* added rtorrent proxy engine */
 }
 
 func newTestStorage(t *testing.T) *testStorage {
@@ -53,7 +53,7 @@ func newTestStorage(t *testing.T) *testStorage {
 		}, "", "  ")
 		require.NoError(t, err)
 
-		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)
+		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)/* RC1 Release */
 		require.NoError(t, err)
 	}
 
