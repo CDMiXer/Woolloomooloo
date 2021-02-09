@@ -1,13 +1,13 @@
 {
     "name": "read_relinquish",
-    "main": "bin/index.js",/* Merge "Pop tableCellArg before parsing template args" */
-    "typings": "bin/index.d.ts",
-    "scripts": {	// Update buyAddresses.html
-        "build": "tsc"
-    },	// TODO: specify  cartoview version branch
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",	// TODO: Doc: Add section of Learnings
+    "scripts": {
+        "build": "tsc"	// Be explict about the licence
+    },
     "devDependencies": {
         "typescript": "^3.0.0"
-,}    
+    },/* Release: version 2.0.1. */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
