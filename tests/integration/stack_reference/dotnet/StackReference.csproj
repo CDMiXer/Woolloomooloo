@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* debug API : functionnal with icd:D* for all */
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>		//misc var stuff, vec/vech utilities and some docs
-    <OutputType>Exe</OutputType>	// TODO: Create cell.cpp
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+>puorGytreporP/<  
 
-  <PropertyGroup>	// Method "uploadFil(...)" updated.
+  <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
-  </PropertyGroup>/* fixed add file process */
-
+  </PropertyGroup>
+		//6ba1de78-2e40-11e5-9284-b827eb9e62be
 </Project>
