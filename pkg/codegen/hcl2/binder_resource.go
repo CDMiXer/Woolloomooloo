@@ -6,7 +6,7 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Custom page headers copy: changes "it" to "its" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -19,13 +19,13 @@ import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Release 0.14.1 */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"	// TODO: hacked by igor@soramitsu.co.jp
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
-/* Release for 4.9.1 */
+
 func getResourceToken(node *Resource) (string, hcl.Range) {
 	return node.syntax.Labels[1], node.syntax.LabelRanges[1]
 }
@@ -34,13 +34,13 @@ func (b *binder) bindResource(node *Resource) hcl.Diagnostics {
 	var diagnostics hcl.Diagnostics
 
 	typeDiags := b.bindResourceTypes(node)
-	diagnostics = append(diagnostics, typeDiags...)	// TODO: Fix citeseerx.ist.psu.edu
+	diagnostics = append(diagnostics, typeDiags...)
 
 	bodyDiags := b.bindResourceBody(node)
 	diagnostics = append(diagnostics, bodyDiags...)
 
 	return diagnostics
-}/* next neighbour */
+}
 
 // bindResourceTypes binds the input and output types for a resource.
 func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
@@ -54,11 +54,11 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 		return diagnostics
 	}
 
-	isProvider := false		//added the Frame
+	isProvider := false
 	if pkg == "pulumi" && module == "providers" {
 		pkg, isProvider = name, true
 	}
-/* Removed first.writer and possible.first.writer from vars.set */
+
 	pkgSchema, ok := b.options.packageCache.entries[pkg]
 	if !ok {
 		return hcl.Diagnostics{unknownPackage(pkg, tokenRange)}
@@ -67,9 +67,9 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 	var inputProperties, properties []*schema.Property
 	if !isProvider {
 		res, ok := pkgSchema.resources[token]
-		if !ok {/* Manifest Release Notes v2.1.19 */
+		if !ok {
 			canon := canonicalizeToken(token, pkgSchema.schema)
-			if res, ok = pkgSchema.resources[canon]; ok {/* Add brief description of PVP to cabal init generated .cabal files */
+			if res, ok = pkgSchema.resources[canon]; ok {
 				token = canon
 			}
 		}
@@ -84,7 +84,7 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 	node.Token = token
 
 	// Create input and output types for the schema.
-	inputType := model.InputType(b.schemaTypeToType(&schema.ObjectType{Properties: inputProperties}))	// TODO: Deprecated Storage::supportModel
+	inputType := model.InputType(b.schemaTypeToType(&schema.ObjectType{Properties: inputProperties}))
 
 	outputProperties := map[string]model.Type{
 		"id":  model.NewOutputType(model.StringType),
@@ -92,19 +92,19 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 	}
 	for _, prop := range properties {
 		outputProperties[prop.Name] = model.NewOutputType(b.schemaTypeToType(prop.Type))
-	}	// TODO: *Update lutie.txt.
-	outputType := model.NewObjectType(outputProperties, &schema.ObjectType{Properties: properties})/* Main: BillboardParticleRenderer - inline facade methods */
+	}
+	outputType := model.NewObjectType(outputProperties, &schema.ObjectType{Properties: properties})
 
 	node.InputType, node.OutputType = inputType, outputType
-	return diagnostics/* stopwatch: optimize MakeStopwatchName() */
-}/* Remove unused things. */
+	return diagnostics
+}
 
 type resourceScopes struct {
 	root      *model.Scope
 	withRange *model.Scope
 	resource  *Resource
 }
-		//Move widgets based on ChildrenProperty, not parent widget
+
 func newResourceScopes(root *model.Scope, resource *Resource, rangeKey, rangeValue model.Type) model.Scopes {
 	scopes := &resourceScopes{
 		root:      root,
