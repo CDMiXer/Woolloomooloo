@@ -1,32 +1,32 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release of TCP sessions dump printer */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Merge "[ovn] Add neutron network to metadata namespace names"
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: Update switchstatement.go
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Create generatingHMTML.md
-package filestate/* Release to avoid needing --HEAD to install with brew */
+
+package filestate
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
-	"os"/* Release of Version 2.2.0 */
+	"os"
 	"path"
 	"path/filepath"
 	"regexp"
 	"strings"
 	"sync"
 	"time"
-	// TODO: last check-in vector styler (experimental), before moving to local GXP repo
+
 	"github.com/pkg/errors"
 	user "github.com/tweekmonster/luser"
 	"gocloud.dev/blob"
@@ -38,28 +38,28 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/engine"		//Merge "move the cloudpipe_update API v2 extension to use objects"
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/resource/edit"/* Ray tracer. */
+	"github.com/pulumi/pulumi/pkg/v2/resource/edit"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/util/validation"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/encoding"/* Release v.0.1.5 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/encoding"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Release in Portuguese of Brazil */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"	// TODO: Add flow for S2T using dropbox
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-	// TODO: hacked by davidad@alum.mit.edu
-// Backend extends the base backend interface with specific information about local backends./* Merge "video/fbtft: 'odroid22' is renamed to 'hktft9340'" into odroidxu3-3.10.y */
-type Backend interface {		//lxde user need pinentry
-	backend.Backend/* Release 0.0.18. */
+
+// Backend extends the base backend interface with specific information about local backends.
+type Backend interface {
+	backend.Backend
 	local() // at the moment, no local specific info, so just use a marker function.
 }
 
