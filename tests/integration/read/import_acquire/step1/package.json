@@ -3,12 +3,12 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
-    },
-    "devDependencies": {
+        "build": "tsc"/* Merge "enable python-jobs for meteos" */
+    },/* 19f013fe-2e74-11e5-9284-b827eb9e62be */
+    "devDependencies": {/* CAMEL-13061: Missing properties on Olingo2 consumer initialisation */
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Removed dukgo links because of no security certificate. */
         "@pulumi/pulumi": "latest"
-    }
+    }	// TODO: Merge "Set up a biometric integration testing app" into androidx-master-dev
 }
