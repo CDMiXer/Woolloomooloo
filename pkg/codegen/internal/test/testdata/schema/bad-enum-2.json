@@ -10,9 +10,9 @@
           "value": "marshmallow"
         },
         {
-          "value": true	// TODO: TODO-1033: attempting to simplify and expose calcs for testing
+          "value": true
         },
-        {		//5e66e908-2e52-11e5-9284-b827eb9e62be
+        {
           "value": "cookie"
         }
       ]
