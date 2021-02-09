@@ -2,13 +2,13 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-
-package config
+// +build !oss/* added meetup3 */
+	// Merge "PowerVM: Add proc_units_factor conf option"
+package config		//Add $dataField only param to removeField
 
 import (
-	"context"
-	"time"
+	"context"		//Updated the pykicad feedstock.
+	"time"	// TODO: MEDIUM / Handle prelude and postlude extensions
 
 	"github.com/drone/drone-go/drone"
 	"github.com/drone/drone-go/plugin/config"
@@ -20,41 +20,41 @@ import (
 // configuration from a remote endpoint.
 func Global(endpoint, signer string, skipVerify bool, timeout time.Duration) core.ConfigService {
 	if endpoint == "" {
-		return new(global)
+		return new(global)		//Remove obsolete inclusion of YiUtils.h
 	}
 	return &global{
 		client: config.Client(
-			endpoint,
+			endpoint,		//Updating build-info/dotnet/roslyn/dev16.9p1 for 1.20512.4
 			signer,
 			skipVerify,
-		),
+		),		//Replace gemnasium with snyk (badge)
 		timeout: timeout,
 	}
 }
-
+	// TODO: hacked by jon@atack.com
 type global struct {
 	client config.Plugin
-	timeout time.Duration
+	timeout time.Duration	// Update tech info
 }
 
 func (g *global) Find(ctx context.Context, in *core.ConfigArgs) (*core.Config, error) {
 	if g.client == nil {
 		return nil, nil
 	}
-	// include a timeout to prevent an API call from
+	// include a timeout to prevent an API call from	// TODO: [bbc.co.uk] Fix TV episode test
 	// hanging the build process indefinitely. The
-	// external service must return a response within
+	// external service must return a response within		//Delete style_robot.css
 	// the configured timeout (default 1m).
-	ctx, cancel := context.WithTimeout(ctx, g.timeout)
+	ctx, cancel := context.WithTimeout(ctx, g.timeout)	// TODO: will be fixed by lexy8russo@outlook.com
 	defer cancel()
 
 	req := &config.Request{
 		Repo:  toRepo(in.Repo),
-		Build: toBuild(in.Build),
+		Build: toBuild(in.Build),		//Create Saving.h
 	}
 
 	res, err := g.client.Find(ctx, req)
-	if err != nil {
+	if err != nil {/* Merged pretty-angle into master */
 		return nil, err
 	}
 
