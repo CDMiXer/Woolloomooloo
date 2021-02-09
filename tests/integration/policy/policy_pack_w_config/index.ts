@@ -4,28 +4,28 @@ import * as policy from "@pulumi/policy";
 
 const packName = process.env.TEST_POLICY_PACK;
 
-if (!packName) {
-    console.log("no policy name provided");/* New BMP for SSTV */
-    process.exit(-1);/* #31 - Release version 1.3.0.RELEASE. */
+if (!packName) {	// TODO: Set @staf_required for the other menu views
+    console.log("no policy name provided");
+    process.exit(-1);
 
 } else {
     const policies = new policy.PolicyPack(packName, {
-        policies: [
-            {
-                name: "test-policy-w-config",	// TODO: hacked by hi@antfu.me
+        policies: [	// TODO: Include encoding in GitHubUserContentAPI
+            {/* god15102401 */
+                name: "test-policy-w-config",
                 description: "Test policy used for tests with policy configuration.",
-                enforcementLevel: "mandatory",	// TODO: f4cc4fb2-2e45-11e5-9284-b827eb9e62be
+                enforcementLevel: "mandatory",
                 configSchema: {
                     required: ["message"],
-                    properties: {
-                        message: {/* Release 0.6.4 */
+                    properties: {/* Pointing downloads to Releases */
+                        message: {/* Released springjdbcdao version 1.8.19 */
                             type: "string",
                             minLength: 2,
-                            maxLength: 10,		//Updated merchant api to work with spigot 1.13
-                        },/* 8e128008-2e5d-11e5-9284-b827eb9e62be */
-                   },/* Added demo data to convert preoffer to offer */
+                            maxLength: 10,
+                        },
+                   },	// TODO: hacked by nagydani@epointsystem.org
                 },
-                validateResource: (args, reportViolation) => {},
+                validateResource: (args, reportViolation) => {},/* Release 0.9.4-SNAPSHOT */
             }
         ],
     });
