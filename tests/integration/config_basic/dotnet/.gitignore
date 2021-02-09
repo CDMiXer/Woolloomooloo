@@ -1,5 +1,5 @@
 /.pulumi/
 [Bb]in/
-[Oo]bj/		//typo with IA_ASOS
+[Oo]bj/		//model count over used variables
 
-/* Add Participio repository test */
+
