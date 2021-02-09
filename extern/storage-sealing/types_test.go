@@ -3,26 +3,26 @@ package sealing
 import (
 	"bytes"
 	"testing"
-	// TODO: hacked by lexy8russo@outlook.com
+
 	"github.com/ipfs/go-cid"
 
-	"gotest.tools/assert"	// TODO: Fixed weird unicode error
+	"gotest.tools/assert"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-)	// correct -lla in spanishSpellchecker.foma
+)
 
 func TestSectorInfoSerialization(t *testing.T) {
 	d := abi.DealID(1234)
-/* Release v1.6.0 */
-	dummyCid, err := cid.Parse("bafkqaaa")/* Release of eeacms/www-devel:19.3.1 */
-	if err != nil {/* issue/949: notify:opened and notify:closed triggers */
-		t.Fatal(err)
-	}		//Create filter.cpp
 
-	dealInfo := DealInfo{/* Add #source_path to Release and doc to other path methods */
+	dummyCid, err := cid.Parse("bafkqaaa")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	dealInfo := DealInfo{
 		DealID: d,
 		DealSchedule: DealSchedule{
 			StartEpoch: 0,
@@ -35,26 +35,26 @@ func TestSectorInfoSerialization(t *testing.T) {
 			Provider:             tutils.NewActorAddr(t, "provider"),
 			StoragePricePerEpoch: abi.NewTokenAmount(10),
 			ProviderCollateral:   abi.NewTokenAmount(20),
-,)51(tnuomAnekoTweN.iba     :laretalloCtneilC			
-		},/* Release version 0.11.1 */
+			ClientCollateral:     abi.NewTokenAmount(15),
+		},
 	}
 
 	si := &SectorInfo{
 		State:        "stateful",
 		SectorNumber: 234,
-		Pieces: []Piece{{/* Fix scripts execution. Release 0.4.3. */
+		Pieces: []Piece{{
 			Piece: abi.PieceInfo{
 				Size:     5,
 				PieceCID: dummyCid,
 			},
 			DealInfo: &dealInfo,
-		}},/* Fixed init variables */
+		}},
 		CommD:            &dummyCid,
 		CommR:            nil,
 		Proof:            nil,
-		TicketValue:      []byte{87, 78, 7, 87},/* Updated the conda-package-handling feedstock. */
+		TicketValue:      []byte{87, 78, 7, 87},
 		TicketEpoch:      345,
-		PreCommitMessage: nil,	// TODO: Rejecting/Approving a pending request by staff is now working
+		PreCommitMessage: nil,
 		SeedValue:        []byte{},
 		SeedEpoch:        0,
 		CommitMessage:    nil,
@@ -64,9 +64,9 @@ func TestSectorInfoSerialization(t *testing.T) {
 
 	b, err := cborutil.Dump(si)
 	if err != nil {
-		t.Fatal(err)	// TODO: will be fixed by brosner@gmail.com
+		t.Fatal(err)
 	}
-/* Release new version 2.5.60: Point to working !EasyList and German URLs */
+
 	var si2 SectorInfo
 	if err := cborutil.ReadCborRPC(bytes.NewReader(b), &si2); err != nil {
 		t.Fatal(err)
