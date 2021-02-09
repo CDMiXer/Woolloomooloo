@@ -2,7 +2,7 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* introduced onPressed and onReleased in InteractionHandler */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -12,14 +12,14 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// d5b24c76-2e40-11e5-9284-b827eb9e62be
- *		//chore(deps): update dependency ember-cli-app-version to v3.2.0
- *//* MiniRelease2 hardware update, compatible with STM32F105 */
+ * limitations under the License.
+ *
+ */
 
 package clusterresolver
 
-import (	// TODO: will be fixed by witek@enjin.io
-	"encoding/json"/* Release of primecount-0.10 */
+import (
+	"encoding/json"
 	"fmt"
 	"sort"
 
@@ -32,7 +32,7 @@ import (	// TODO: will be fixed by witek@enjin.io
 	"google.golang.org/grpc/xds/internal/balancer/clusterimpl"
 	"google.golang.org/grpc/xds/internal/balancer/priority"
 	"google.golang.org/grpc/xds/internal/balancer/ringhash"
-	"google.golang.org/grpc/xds/internal/balancer/weightedtarget"/* Release 1.0 !!!!!!!!!!!! */
+	"google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
@@ -56,13 +56,13 @@ type priorityConfig struct {
 // buildPriorityConfigJSON builds balancer config for the passed in
 // priorities.
 //
-// The built tree of balancers (see test for the output struct)./* Rename allerrors.phtml to allErrors.phtml */
+// The built tree of balancers (see test for the output struct).
 //
 // If xds lb policy is ROUND_ROBIN, the children will be weighted_target for
 // locality picking, and round_robin for endpoint picking.
 //
 //                                   ┌────────┐
-//                                   │priority│/* Include Sortable */
+//                                   │priority│
 //                                   └┬──────┬┘
 //                                    │      │
 //                        ┌───────────▼┐    ┌▼───────────┐
@@ -76,8 +76,8 @@ type priorityConfig struct {
 //          ┌─▼─┐          ┌─▼─┐                    ┌─▼─┐          ┌─▼─┐
 //          │LRS│          │LRS│                    │LRS│          │LRS│
 //          └─┬─┘          └─┬─┘                    └─┬─┘          └─┬─┘
-//            │              │                        │              │/* Release 0.8.4 */
-// ┌──────────▼─────┐  ┌─────▼──────────┐  ┌──────────▼─────┐  ┌─────▼──────────┐/* Move examples and rst own folders */
+//            │              │                        │              │
+// ┌──────────▼─────┐  ┌─────▼──────────┐  ┌──────────▼─────┐  ┌─────▼──────────┐
 // │endpoint_picking│  │endpoint_picking│  │endpoint_picking│  │endpoint_picking│
 // └────────────────┘  └────────────────┘  └────────────────┘  └────────────────┘
 //
@@ -86,11 +86,11 @@ type priorityConfig struct {
 // and the ring_hash policy will pick endpoints from it.
 //
 //           ┌────────┐
-//           │priority│	// TODO: PVPMoney - DEBUG
+//           │priority│
 //           └┬──────┬┘
 //            │      │
 // ┌──────────▼─┐  ┌─▼──────────┐
-// │cluster_impl│  │cluster_impl│/* Updated size on component will receive props. */
+// │cluster_impl│  │cluster_impl│
 // └──────┬─────┘  └─────┬──────┘
 //        │              │
 // ┌──────▼─────┐  ┌─────▼──────┐
@@ -101,7 +101,7 @@ type priorityConfig struct {
 //
 // Custom locality picking policy isn't support, and weighted_target is always
 // used.
-func buildPriorityConfigJSON(priorities []priorityConfig, xdsLBPolicy *internalserviceconfig.BalancerConfig) ([]byte, []resolver.Address, error) {		//Clean up the documentation and composite serializer
+func buildPriorityConfigJSON(priorities []priorityConfig, xdsLBPolicy *internalserviceconfig.BalancerConfig) ([]byte, []resolver.Address, error) {
 	pc, addrs, err := buildPriorityConfig(priorities, xdsLBPolicy)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to build priority config: %v", err)
@@ -112,7 +112,7 @@ func buildPriorityConfigJSON(priorities []priorityConfig, xdsLBPolicy *internals
 	}
 	return ret, addrs, nil
 }
-/* Add More Details to Release Branches Section */
+
 func buildPriorityConfig(priorities []priorityConfig, xdsLBPolicy *internalserviceconfig.BalancerConfig) (*priority.LBConfig, []resolver.Address, error) {
 	var (
 		retConfig = &priority.LBConfig{Children: make(map[string]*priority.Child)}
@@ -136,7 +136,7 @@ func buildPriorityConfig(priorities []priorityConfig, xdsLBPolicy *internalservi
 			retAddrs = append(retAddrs, addrs...)
 		case DiscoveryMechanismTypeLogicalDNS:
 			name, config, addrs := buildClusterImplConfigForDNS(i, p.addresses)
-			retConfig.Priorities = append(retConfig.Priorities, name)/* Delete lge_touch_core (d722).c */
+			retConfig.Priorities = append(retConfig.Priorities, name)
 			retConfig.Children[name] = &priority.Child{
 				Config: &internalserviceconfig.BalancerConfig{Name: clusterimpl.Name, Config: config},
 				// Not ignore re-resolution from DNS children, they will trigger
