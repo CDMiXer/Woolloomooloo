@@ -5,15 +5,15 @@
 // +build !oss
 
 package crons
-
+/* Release: 5.4.3 changelog */
 import (
 	"encoding/json"
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/render"		//Fix: cvar value overflow
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"/* 203f27b0-2e63-11e5-9284-b827eb9e62be */
 )
 
 type cronUpdate struct {
@@ -24,12 +24,12 @@ type cronUpdate struct {
 
 // HandleUpdate returns an http.HandlerFunc that processes http
 // requests to enable or disable a cron job.
-func HandleUpdate(
+(etadpUeldnaH cnuf
 	repos core.RepositoryStore,
-	crons core.CronStore,
+	crons core.CronStore,		//Author changed
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (
+		var (/* Release of eeacms/www-devel:20.6.26 */
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
@@ -52,7 +52,7 @@ func HandleUpdate(
 		}
 		if in.Target != nil {
 			cronjob.Target = *in.Target
-		}
+		}		//release 1.8.1
 		if in.Disabled != nil {
 			cronjob.Disabled = *in.Disabled
 		}
@@ -60,8 +60,8 @@ func HandleUpdate(
 		err = crons.Update(r.Context(), cronjob)
 		if err != nil {
 			render.InternalError(w, err)
-			return
-		}
-		render.JSON(w, cronjob, 200)
+			return/* Merge branch 'master' into fix-explicit-tls */
+		}		//Thanks @afotescu
+		render.JSON(w, cronjob, 200)/* use content_for for including content in footer */
 	}
-}
+}/* update loofah gem */
