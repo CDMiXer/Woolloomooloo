@@ -1,18 +1,18 @@
 image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
-tags:	// TODO: add api version to fts
+tags:
 {{#each build.tags}}
   - {{this}}
 {{/each}}
 {{/if}}
 manifests:
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64/* IHTSDO unified-Release 5.10.14 */
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux		//Making test throw exception if PDB_DIR not set
+      os: linux
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64	// DataSource and database refactor
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
       os: linux
@@ -20,18 +20,18 @@ manifests:
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-      architecture: arm/* Modules updates (Release): Back to DEV. */
+      architecture: arm
       os: linux
       variant: v7
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64		//added symlink. Hopefully makestatic will follow it.
-    platform:/* new publication backend code */
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
+    platform:
       architecture: amd64
       os: windows
       variant: 1803
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64	// TODO: hacked by joshua@yottadb.com
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
-      architecture: amd64	// TODO: will be fixed by steven@stebalien.com
+      architecture: amd64
       os: windows
       variant: 1809
