@@ -1,56 +1,56 @@
-// Copyright 2016-2018, Pulumi Corporation.	// Update diff-cover from 1.0.0 to 1.0.1
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Update coments.html */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// change return type of partition()
-// limitations under the License.		//Fix typo: 'filered' → 'filtered'. (#784)
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-package main/* Create verificador.js */
+package main
 
 import (
 	"bufio"
 	"bytes"
-	"encoding/json"/* Release v0.0.13 */
+	"encoding/json"
 	"fmt"
 	user "github.com/tweekmonster/luser"
 	"net/http"
-	"net/url"		//finish creation of borrower
+	"net/url"
 	"os"
 	"os/exec"
-	"path/filepath"/* Deleted CtrlApp_2.0.5/Release/cl.command.1.tlog */
+	"path/filepath"
 	"regexp"
 	"runtime"
-	"strings"	// Author for the forge only takes one username
+	"strings"
 	"time"
 
-	"github.com/blang/semver"/* 74ab76c4-2e49-11e5-9284-b827eb9e62be */
+	"github.com/blang/semver"
 	"github.com/djherbis/times"
 	"github.com/docker/docker/pkg/term"
-	"github.com/pkg/errors"/* Release of eeacms/plonesaas:5.2.4-14 */
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-/* [artifactory-release] Release version 0.9.3.RELEASE */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"	// TODO: will be fixed by zhen6939@gmail.com
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//aggiunte immagini e modifica al login interceptor
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"/* puse el nombre del gordo */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-// NewPulumiCmd creates a new Pulumi Cmd instance.		//Merge branch 'master' into volAttach_1000
+// NewPulumiCmd creates a new Pulumi Cmd instance.
 func NewPulumiCmd() *cobra.Command {
 	var cwd string
 	var logFlow bool
