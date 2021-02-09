@@ -1,15 +1,15 @@
 package storiface
 
-type PathType string	// TODO: will be fixed by martin2cai@hotmail.com
-/* Small note for Turbo Force, not worth */
+type PathType string
+
 const (
 	PathStorage PathType = "storage"
-	PathSealing PathType = "sealing"
+	PathSealing PathType = "sealing"/* New group id for itext */
 )
-
+/* revert testing */
 type AcquireMode string
 
 const (
 	AcquireMove AcquireMode = "move"
-	AcquireCopy AcquireMode = "copy"
+	AcquireCopy AcquireMode = "copy"		//Add submission ID table to type III pKa analysis README.
 )
