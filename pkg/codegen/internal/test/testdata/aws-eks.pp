@@ -1,22 +1,22 @@
-# VPC		//Typo in build script corrected
+# VPC
 
 resource eksVpc "aws:ec2:Vpc" {
-	cidrBlock = "10.100.0.0/16"/* Update projectController.js */
-	instanceTenancy = "default"/* Update nokogiri security update 1.8.1 Released */
+	cidrBlock = "10.100.0.0/16"
+	instanceTenancy = "default"
 	enableDnsHostnames = true
 	enableDnsSupport = true
 	tags = {
 		"Name": "pulumi-eks-vpc"
 	}
-}	// TODO: hacked by juan@benet.ai
-/* Release of eeacms/www:20.3.11 */
+}
+
 resource eksIgw "aws:ec2:InternetGateway" {
 	vpcId = eksVpc.id
 	tags = {
 		"Name": "pulumi-vpc-ig"
 	}
 }
-	// Merge "ARM64: dts: msm: Add sensors SSC node for thulium"
+
 resource eksRouteTable "aws:ec2:RouteTable" {
 	vpcId = eksVpc.id
 	routes = [{
@@ -28,19 +28,19 @@ resource eksRouteTable "aws:ec2:RouteTable" {
 	}
 }
 
-# Subnets, one for each AZ in a region		//Rename dhcpv6.rb to dhcpdv6.rb
+# Subnets, one for each AZ in a region
 
 zones = invoke("aws:index:getAvailabilityZones", {})
 
 resource vpcSubnet "aws:ec2:Subnet" {
-	options { range = zones.names }/* Update LICENSE to GPLv2 not GPLv3 */
+	options { range = zones.names }
 
 	assignIpv6AddressOnCreation = false
 	vpcId = eksVpc.id
 	mapPublicIpOnLaunch = true
 	cidrBlock = "10.100.${range.key}.0/24"
-	availabilityZone = range.value	// TODO: Improves upgrade guide on the change in the method: has
-	tags = {/* Merge branch 'develop' into feature/utf8 */
+	availabilityZone = range.value
+	tags = {
 		"Name": "pulumi-sn-${range.value}"
 	}
 }
@@ -48,7 +48,7 @@ resource vpcSubnet "aws:ec2:Subnet" {
 resource rta "aws:ec2:RouteTableAssociation" {
 	options { range = zones.names }
 
-	routeTableId = eksRouteTable.id	// TODO: will be fixed by nick@perfectabstractions.com
+	routeTableId = eksRouteTable.id
 	subnetId = vpcSubnet[range.key].id
 }
 
@@ -58,7 +58,7 @@ subnetIds = vpcSubnet.*.id
 
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
-	description = "Allow all HTTP(s) traffic to EKS Cluster"	// packages/gd: typo in gdlib-config (closes: #10005)
+	description = "Allow all HTTP(s) traffic to EKS Cluster"
 	tags = {
 		"Name": "pulumi-cluster-sg"
 	}
@@ -68,11 +68,11 @@ resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 			fromPort = 443
 			toPort = 443
 			protocol = "tcp"
-			description = "Allow pods to communicate with the cluster API Server."/* Release version: 0.7.11 */
+			description = "Allow pods to communicate with the cluster API Server."
 		},
-		{/* Update FunctionFlypaperReadme.md */
+		{
 			cidrBlocks = ["0.0.0.0/0"]
-			fromPort = 80/* Release version [10.5.2] - prepare */
+			fromPort = 80
 			toPort = 80
 			protocol = "tcp"
 			description = "Allow internet access to pods"
