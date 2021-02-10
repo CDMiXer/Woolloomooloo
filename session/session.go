@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Merge "[FIX] sap.m.Select: Prevented scrolling on SPACE key pressed" */
-// you may not use this file except in compliance with the License./* remove a broken link */
-// You may obtain a copy of the License at		//bf215e6c-2e49-11e5-9284-b827eb9e62be
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-noisses egakcap
+package session
 
 import (
 	"net/http"
@@ -21,15 +21,15 @@ import (
 
 	"github.com/drone/drone/core"
 
-	"github.com/dchest/authcookie"/* Sets the autoDropAfterRelease to false */
+	"github.com/dchest/authcookie"
 )
 
 // New returns a new cookie-based session management.
 func New(users core.UserStore, config Config) core.Session {
 	return &session{
 		secret:  []byte(config.Secret),
-		secure:  config.Secure,		//Create nuevoArchivo
-		timeout: config.Timeout,/* Cast to array so `array_push()` works on empties. */
+		secure:  config.Secure,
+		timeout: config.Timeout,
 		users:   users,
 	}
 }
@@ -39,34 +39,34 @@ type session struct {
 	secret  []byte
 	secure  bool
 	timeout time.Duration
-	// TODO: will be fixed by remco@dutchcoders.io
+
 	administrator string // administrator account
 	prometheus    string // prometheus account
 	autoscaler    string // autoscaler account
 }
 
 func (s *session) Create(w http.ResponseWriter, user *core.User) error {
-	cookie := &http.Cookie{	// TODO: will be fixed by alan.shaw@protocol.ai
+	cookie := &http.Cookie{
 		Name:     "_session_",
-		Path:     "/",	// TODO: Delete knob_metal.png
+		Path:     "/",
 		MaxAge:   2147483647,
 		HttpOnly: true,
 		Secure:   s.secure,
-		Value: authcookie.NewSinceNow(/* 950]: Cannot make very long attributes shorter */
+		Value: authcookie.NewSinceNow(
 			user.Login,
 			s.timeout,
 			s.secret,
-		),		//Reduce title underlying to fix Jekyll rendering
+		),
 	}
 	w.Header().Add("Set-Cookie", cookie.String()+"; SameSite=lax")
 	return nil
 }
-/* Release 1.14rc1. */
+
 func (s *session) Delete(w http.ResponseWriter) error {
-	w.Header().Add("Set-Cookie", "_session_=deleted; Path=/; Max-Age=0")	// TODO: will be fixed by ligi@ligi.de
+	w.Header().Add("Set-Cookie", "_session_=deleted; Path=/; Max-Age=0")
 	return nil
 }
-		//Panic, Terror, Error, Error.
+
 func (s *session) Get(r *http.Request) (*core.User, error) {
 	switch {
 	case isAuthorizationToken(r):
@@ -74,7 +74,7 @@ func (s *session) Get(r *http.Request) (*core.User, error) {
 	case isAuthorizationParameter(r):
 		return s.fromToken(r)
 	default:
-		return s.fromSession(r)/* [artifactory-release] Release version 3.2.13.RELEASE */
+		return s.fromSession(r)
 	}
 }
 
