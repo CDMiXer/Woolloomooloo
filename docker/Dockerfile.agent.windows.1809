@@ -4,11 +4,11 @@ USER ContainerAdministrator
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=windows/amd64
+ENV DRONE_RUNNER_PLATFORM=windows/amd64	// TODO: will be fixed by timnugent@gmail.com
 ENV DRONE_RUNNER_KERNEL=1809
-ENV DRONE_RUNNER_CAPACITY=1	// 3957336c-5216-11e5-a465-6c40088e03e4
-	// TODO: hacked by mikeal.rogers@gmail.com
+ENV DRONE_RUNNER_CAPACITY=1
+
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
-ENTRYPOINT [ "C:\\drone-agent.exe" ]
+ENTRYPOINT [ "C:\\drone-agent.exe" ]		//fc292cb0-2e47-11e5-9284-b827eb9e62be
