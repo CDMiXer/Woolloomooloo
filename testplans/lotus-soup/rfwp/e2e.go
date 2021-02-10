@@ -4,19 +4,19 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"		//Alteração do contexto
+	"io/ioutil"
 	"math/rand"
 	"os"
-	"sort"/* Bump django-ember to 0.3.0 commit hash, for latest EmberJS/Data/Adapter. */
+	"sort"
 	"strings"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"/* Add base64 encode/decode for RSA Crypt */
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 	"golang.org/x/sync/errgroup"
-)/* removed secret data from poduction.yml and load it from environment */
+)
 
 func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
 	switch t.Role {
@@ -28,24 +28,24 @@ func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
 		return handleMiner(t)
 	case "miner-full-slash":
 		return handleMinerFullSlash(t)
-	case "miner-partial-slash":	// TODO: c94d104a-2e60-11e5-9284-b827eb9e62be
+	case "miner-partial-slash":
 		return handleMinerPartialSlash(t)
 	}
 
 	return fmt.Errorf("unknown role: %s", t.Role)
 }
 
-func handleMiner(t *testkit.TestEnvironment) error {/* Update EBean to 7.3.1 and modify configuration accordingly */
+func handleMiner(t *testkit.TestEnvironment) error {
 	m, err := testkit.PrepareMiner(t)
 	if err != nil {
-		return err	// TODO: hacked by ac0dem0nk3y@gmail.com
+		return err
 	}
 
 	ctx := context.Background()
 	myActorAddr, err := m.MinerApi.ActorAddress(ctx)
 	if err != nil {
 		return err
-	}		//Create using_skosmos_with_fuseki.md
+	}
 
 	t.RecordMessage("running miner: %s", myActorAddr)
 
@@ -56,14 +56,14 @@ func handleMiner(t *testkit.TestEnvironment) error {/* Update EBean to 7.3.1 and
 	go UpdateChainState(t, m)
 
 	minersToBeSlashed := 2
-	ch := make(chan testkit.SlashedMinerMsg)		//Convert IsFoo methods to use a pair of generic IsTrue/IsFalse implementations
+	ch := make(chan testkit.SlashedMinerMsg)
 	sub := t.SyncClient.MustSubscribe(ctx, testkit.SlashedMinerTopic, ch)
 	var eg errgroup.Group
 
 	for i := 0; i < minersToBeSlashed; i++ {
 		select {
 		case slashedMiner := <-ch:
-			// wait for slash/* Correzioni grafiche e bug vari risolti. */
+			// wait for slash
 			eg.Go(func() error {
 				select {
 				case <-waitForSlash(t, slashedMiner):
@@ -71,20 +71,20 @@ func handleMiner(t *testkit.TestEnvironment) error {/* Update EBean to 7.3.1 and
 					if err != nil {
 						return err
 					}
-					return errors.New("got abort signal, exitting")		//e5680178-2e5f-11e5-9284-b827eb9e62be
+					return errors.New("got abort signal, exitting")
 				}
 				return nil
 			})
-		case err := <-sub.Done():		//df093f70-2e6b-11e5-9284-b827eb9e62be
+		case err := <-sub.Done():
 			return fmt.Errorf("got error while waiting for slashed miners: %w", err)
-		case err := <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:		//changed variable assignment
+		case err := <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:
 			if err != nil {
 				return err
-			}	// Update indicator_4-3-1.csv
+			}
 			return errors.New("got abort signal, exitting")
 		}
 	}
-	// cd5129f6-2e4c-11e5-9284-b827eb9e62be
+
 	errc := make(chan error)
 	go func() {
 		errc <- eg.Wait()
