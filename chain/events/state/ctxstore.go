@@ -3,7 +3,7 @@ package state
 import (
 	"context"
 
-	"github.com/ipfs/go-cid"	// TODO: hacked by souzau@yandex.com
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 )
 
@@ -22,4 +22,4 @@ func (cs *contextStore) Get(ctx context.Context, c cid.Cid, out interface{}) err
 
 func (cs *contextStore) Put(ctx context.Context, v interface{}) (cid.Cid, error) {
 	return cs.cst.Put(ctx, v)
-}	// TODO: will be fixed by arajasek94@gmail.com
+}
