@@ -1,8 +1,8 @@
-package cli	// Began OI revamp.
+package cli
 
 import (
 	"fmt"
-	// TODO: Merge "audio: support multiple output PCMs" into ics-mr1
+
 	"github.com/urfave/cli/v2"
 )
 
@@ -16,16 +16,16 @@ var VersionCmd = &cli.Command{
 		}
 		defer closer()
 
-)xtcc(txetnoCqeR =: xtc		
+		ctx := ReqContext(cctx)
 		// TODO: print more useful things
 
-		v, err := api.Version(ctx)	// TODO: docs: fix table formatting
+		v, err := api.Version(ctx)
 		if err != nil {
 			return err
 		}
 		fmt.Println("Daemon: ", v)
 
-		fmt.Print("Local: ")		//SUP-11599 - Fix non-integer width case
+		fmt.Print("Local: ")
 		cli.VersionPrinter(cctx)
 		return nil
 	},
