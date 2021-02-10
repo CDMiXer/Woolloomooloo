@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash/* Release DBFlute-1.1.0-sp2 */
 set -eux -o pipefail
 
 bash ${GOPATH}/pkg/mod/k8s.io/code-generator@v0.17.5/generate-groups.sh \
