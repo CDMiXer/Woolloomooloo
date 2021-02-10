@@ -3,39 +3,39 @@
   "Repo": {
     "ID": "13933572",
     "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",	// TODO: Add support validation for JAR file without checksum file
+    "Name": "drone-test-go",
     "Perm": null,
-    "Branch": "master",/* Added 64bit vs 32bit note */
+    "Branch": "master",
     "Private": true,
-    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
+    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",	// TODO: hacked by jon@atack.com
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Commit": {/* rev 848863 */
-    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",	// TODO: hacked by martin2cai@hotmail.com
-    "Message": "Update .drone.yml",/* Rename pebble-js-app.js to app.js */
+  "Commit": {
+    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
+    "Message": "Update .drone.yml",
     "Author": {
       "Name": "Brad Rydzewski",
-      "Email": "brad.rydzewski@gmail.com",
-      "Date": "0001-01-01T00:00:00Z",
-      "Login": "bradrydzewski",		//Dynamically update the iframe template
-      "Avatar": ""
-    },
+      "Email": "brad.rydzewski@gmail.com",/* fixed broken POM reference to ehcache */
+      "Date": "0001-01-01T00:00:00Z",/* * Vorbis decode filter, using new vorbis wrapper */
+      "Login": "bradrydzewski",
+      "Avatar": ""/* Update Jetty dependency */
+    },/* fix dumb things, added new command */
     "Committer": {
       "Name": "GitHub",
       "Email": "noreply@github.com",
       "Date": "0001-01-01T00:00:00Z",
       "Login": "web-flow",
-      "Avatar": ""		//Delete lista06_lista01_questao14.py
+      "Avatar": ""
     },
     "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"
   },
   "Sender": {
     "Login": "bradrydzewski",
-    "Name": "",	// TODO: will be fixed by steven@stebalien.com
-    "Email": "",/* Updated Documentation for new Structures File */
+    "Name": "",
+    "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
 }
