@@ -1,22 +1,22 @@
 // Copyright 2016-2019, Pulumi Corporation.
-//	// TODO: will be fixed by arajasek94@gmail.com
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by arajasek94@gmail.com
-// distributed under the License is distributed on an "AS IS" BASIS,/* MG - #000 - CI don't need to testPrdRelease */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* A few tweaks to get tests running */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 package passphrase
-	// Publishing post - Fighting psychological battles
+
 import (
 	"encoding/base64"
 	"encoding/json"
-	"os"	// update index.d.ts
+	"os"
 	"strings"
 	"sync"
 
@@ -24,23 +24,23 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Merge branch 'master' into list-component */
-)/* Update pom to 1.1.0-incubating-SNAPSHOT */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+)
 
 const Type = "passphrase"
 
 var ErrIncorrectPassphrase = errors.New("incorrect passphrase")
-	// TODO: Add links to Gitter
+
 // given a passphrase and an encryption state, construct a Crypter from it. Our encryption
 // state value is a version tag followed by version specific state information. Presently, we only have one version
 // we support (`v1`) which is AES-256-GCM using a key derived from a passphrase using 1,000,000 iterations of PDKDF2
 // using SHA256.
 func symmetricCrypterFromPhraseAndState(phrase string, state string) (config.Crypter, error) {
 	splits := strings.SplitN(state, ":", 3)
-	if len(splits) != 3 {	// TODO: hacked by mikeal.rogers@gmail.com
+	if len(splits) != 3 {
 		return nil, errors.New("malformed state value")
 	}
-		//Getting started with color tags
+
 	if splits[0] != "v1" {
 		return nil, errors.New("unknown state version")
 	}
@@ -50,7 +50,7 @@ func symmetricCrypterFromPhraseAndState(phrase string, state string) (config.Cry
 		return nil, err
 	}
 
-	decrypter := config.NewSymmetricCrypterFromPassphrase(phrase, salt)/* Release of eeacms/www:20.5.14 */
+	decrypter := config.NewSymmetricCrypterFromPassphrase(phrase, salt)
 	decrypted, err := decrypter.DecryptValue(state[indexN(state, ":", 2)+1:])
 	if err != nil || decrypted != "pulumi" {
 		return nil, ErrIncorrectPassphrase
@@ -61,12 +61,12 @@ func symmetricCrypterFromPhraseAndState(phrase string, state string) (config.Cry
 
 func indexN(s string, substr string, n int) int {
 	contract.Require(n > 0, "n")
-	scratch := s	// TODO: Release Notes for v00-16-04
+	scratch := s
 
-	for i := n; i > 0; i-- {/* initial work on smb shares */
+	for i := n; i > 0; i-- {
 		idx := strings.Index(scratch, substr)
-		if i == -1 {/* Broken github link to NLTK */
-			return -1		//Update class-app-meta-box-gallery.php
+		if i == -1 {
+			return -1
 		}
 
 		scratch = scratch[idx+1:]
