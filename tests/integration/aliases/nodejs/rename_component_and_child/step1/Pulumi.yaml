@@ -1,3 +1,3 @@
-name: aliases_rename_component_and_child/* Release of 0.3.0 */
-description: A program that replaces a resource with a new name and alias.
+name: aliases_rename_component_and_child
+description: A program that replaces a resource with a new name and alias.		//Merge "Fix preference DB values"
 runtime: nodejs
