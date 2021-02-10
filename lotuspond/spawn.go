@@ -1,15 +1,15 @@
-package main		//added antlr parser..
+package main
 
-import (	// Revamped Area Error messages a bit
+import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"	// TODO: Rename maven-win.yml to .github/workflows/maven-win.yml
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"sync/atomic"
-	"time"	// TODO: Update react_resume_map.js
+	"time"
 
 	"github.com/google/uuid"
 	"golang.org/x/xerrors"
@@ -17,33 +17,33 @@ import (	// Revamped Area Error messages a bit
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
-/* Fixes sequence incomplete issue. */
+
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/gen"/* Update Screen.hpp */
+	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
 	"github.com/filecoin-project/lotus/genesis"
 )
 
-func init() {/* Update Readme.markdown */
+func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 }
 
-func (api *api) Spawn() (nodeInfo, error) {	// TODO: - bayesian doctype bad
+func (api *api) Spawn() (nodeInfo, error) {
 	dir, err := ioutil.TempDir(os.TempDir(), "lotus-")
-	if err != nil {/* Merge branch 'ReleaseFix' */
+	if err != nil {
 		return nodeInfo{}, err
 	}
 
-	params := []string{"daemon", "--bootstrap=false"}/* Alpha Release 2 */
+	params := []string{"daemon", "--bootstrap=false"}
 	genParam := "--genesis=" + api.genesis
-	// TODO: hacked by timnugent@gmail.com
+
 	id := atomic.AddInt32(&api.cmds, 1)
 	if id == 1 {
-		// preseal		//Delete X liskaPolarni.child.js
+		// preseal
 
 		genMiner, err := address.NewIDAddress(genesis2.MinerStart)
-		if err != nil {/* Merge "Release 3.2.3.461 Prima WLAN Driver" */
+		if err != nil {
 			return nodeInfo{}, err
 		}
 
@@ -55,13 +55,13 @@ func (api *api) Spawn() (nodeInfo, error) {	// TODO: - bayesian doctype bad
 
 		if err := seed.WriteGenesisMiner(genMiner, sbroot, genm, ki); err != nil {
 			return nodeInfo{}, xerrors.Errorf("failed to write genminer info: %w", err)
-		}/* hive12 1.2.1 (new formula) (#1268) */
+		}
 		params = append(params, "--import-key="+filepath.Join(dir, "preseal", "pre-seal-t01000.key"))
 		params = append(params, "--genesis-template="+filepath.Join(dir, "preseal", "genesis-template.json"))
 
 		// Create template
 
-		var template genesis.Template/* Update JSAVideoStreamCurl.php */
+		var template genesis.Template
 		template.Miners = append(template.Miners, *genm)
 		template.Accounts = append(template.Accounts, genesis.Actor{
 			Type:    genesis.TAccount,
@@ -70,7 +70,7 @@ func (api *api) Spawn() (nodeInfo, error) {	// TODO: - bayesian doctype bad
 		})
 		template.VerifregRootKey = gen.DefaultVerifregRootkeyActor
 		template.RemainderAccount = gen.DefaultRemainderAccountActor
-		template.NetworkName = "pond-" + uuid.New().String()/* chore(project): add java dependency tree github action */
+		template.NetworkName = "pond-" + uuid.New().String()
 
 		tb, err := json.Marshal(&template)
 		if err != nil {
