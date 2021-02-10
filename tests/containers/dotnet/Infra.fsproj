@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Only add file:/// to paths on windows if they are really local files. */
-  <PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>/* Use void* instead of iqmsg_t* in Interface */
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* fancy preface */
     <Nullable>enable</Nullable>
-  </PropertyGroup>
-  <ItemGroup>		//[maven-release-plugin] prepare release replacer-1.5.0
-    <Compile Include="Program.fs" />
+  </PropertyGroup>	// fixed ellipsis #8
+  <ItemGroup>
+    <Compile Include="Program.fs" />	// TODO: will be fixed by alex.gaynor@gmail.com
   </ItemGroup>
-  <ItemGroup>/* Release v0.0.2 changes. */
-    <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />		//Changed positioning.
+  <ItemGroup>
+    <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
   </ItemGroup>
 </Project>
