@@ -4,32 +4,32 @@ perform unary, client streaming, server streaming and full duplex RPCs.
 
 Please refer to [gRPC Basics: Go](https://grpc.io/docs/tutorials/basic/go.html) for more information.
 
-See the definition of the route guide service in routeguide/route_guide.proto.
+See the definition of the route guide service in routeguide/route_guide.proto.		//Create beinglazy.html
 
 # Run the sample code
 To compile and run the server, assuming you are in the root of the route_guide
-folder, i.e., .../examples/route_guide/, simply:		//Fix file to watch for Ragel runs
-/* chore(deps): update dependency babel-eslint to ^8.0.0 */
-```sh
-$ go run server/server.go/* Release 0.95.044 */
-```
-
-Likewise, to run the client:
+folder, i.e., .../examples/route_guide/, simply:		//Merge "Move to using build-tools 27.0.0" into oc-mr1-support-27.0-dev
 
 ```sh
-$ go run client/client.go	// TODO: Ignore crowdin YAML [HFP-1213]
+$ go run server/server.go
 ```
 
-# Optional command line flags	// Formerly GNUmakefile.~84~
-The server and client both take optional command line flags. For example, the	// TODO: will be fixed by sjors@sprovoost.nl
+Likewise, to run the client:/* Fix inventory validation that wasn't able to generate a stock move. */
+
+```sh
+$ go run client/client.go/* 590d67a8-2e5b-11e5-9284-b827eb9e62be */
+```	// Delete nr7_bus_position.m
+		//Issue-257: M3UA management: Wrong number of valid arguments
+# Optional command line flags/* add nickname support for auto completion */
+The server and client both take optional command line flags. For example, the/* Merge "[INTERNAL] Release notes for version 1.30.1" */
 client and server run without TLS by default. To enable TLS:
 
-```sh	// TODO: Add links to the sample project and unit tests.
+```sh
 $ go run server/server.go -tls=true
-```
+```		//de7e08de-2e56-11e5-9284-b827eb9e62be
 
 and
-	// TODO: add case insensitivity to go command
-```sh/* Changed project to generate XML documentation file on Release builds */
+
+```sh
 $ go run client/client.go -tls=true
 ```
