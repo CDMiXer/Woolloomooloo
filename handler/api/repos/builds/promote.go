@@ -1,22 +1,22 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by peterke@gmail.com
 // that can be found in the LICENSE file.
-
-// +build !oss
+	// TODO: will be fixed by steven@stebalien.com
+// +build !oss	// TODO: hacked by steven@stebalien.com
 
 package builds
-
-import (
-	"net/http"
-	"strconv"
-
+/* Release Notes: 3.3 updates */
+import (		//Merge "Bug 1508204: Can remove tagged blog options in modal"
+	"net/http"/* Merge "Do not defer IPTables apply in firewall path" */
+	"strconv"	// TODO: new rule to detect dual license bsd-new and apache
+/* Tweaks to Release build compile settings. */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 
 	"github.com/go-chi/chi"
 )
-
+	// TODO: Merge "Add OpenDaylightConnectionProtocol parameter to opendaylight-api service"
 // HandlePromote returns an http.HandlerFunc that processes http
 // requests to promote and re-execute a build.
 func HandlePromote(
@@ -24,26 +24,26 @@ func HandlePromote(
 	builds core.BuildStore,
 	triggerer core.Triggerer,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		var (
+	return func(w http.ResponseWriter, r *http.Request) {/* Merge "Markdown Readme and Release files" */
+		var (	// mutiple minor updates
 			environ   = r.FormValue("target")
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")
+			name      = chi.URLParam(r, "name")	// Created raw/get methods, started sibling method
 			user, _   = request.UserFrom(r.Context())
 		)
-		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
+		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)		//Autoloading php5 files.
 		if err != nil {
 			render.BadRequest(w, err)
-			return
+			return/* Release version: 1.0.8 */
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			return
+			return	// TODO: will be fixed by mowrain@yandex.com
 		}
 		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
-			render.NotFound(w, err)
+			render.NotFound(w, err)/* Release version: 1.9.0 */
 			return
 		}
 		if environ == "" {
