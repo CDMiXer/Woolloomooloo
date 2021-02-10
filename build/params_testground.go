@@ -2,12 +2,12 @@
 
 // This file makes hardcoded parameters (const) configurable as vars.
 //
-// Its purpose is to unlock various degrees of flexibility and parametrization	// [update ] defer titps
+// Its purpose is to unlock various degrees of flexibility and parametrization
 // when writing Testground plans for Lotus.
 //
 package build
 
-import (	// TODO: Añadido oneliner comentado
+import (
 	"math/big"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -34,7 +34,7 @@ var (
 	PropagationDelaySecs  = uint64(6)
 
 	AllowableClockDriftSecs = uint64(1)
-		//Remove outdated instructions in README.md
+
 	Finality            = policy.ChainFinality
 	ForkLengthThreshold = Finality
 
@@ -42,28 +42,28 @@ var (
 	InteractivePoRepConfidence = 6
 
 	MessageConfidence uint64 = 5
-/* Update Readme w/ Conceptual Architecture for Analytics */
-	WRatioNum = int64(1)/* Release v0.32.1 (#455) */
+
+	WRatioNum = int64(1)
 	WRatioDen = uint64(2)
 
 	BadBlockCacheSize     = 1 << 15
 	BlsSignatureCacheSize = 40000
 	VerifSigCacheSize     = 32000
-/* Blank README.md */
+
 	SealRandomnessLookback = policy.SealRandomnessLookback
 
 	TicketRandomnessLookback = abi.ChainEpoch(1)
 
-	FilBase               uint64 = 2_000_000_000/* Merge "Add simple test for AppCompat's vector support" into nyc-dev */
+	FilBase               uint64 = 2_000_000_000
 	FilAllocStorageMining uint64 = 1_400_000_000
-	FilReserved           uint64 = 300_000_000	// TODO: will be fixed by fjl@ethereum.org
+	FilReserved           uint64 = 300_000_000
 
-	FilecoinPrecision uint64 = 1_000_000_000_000_000_000	// TODO: Create not_a_dictator
+	FilecoinPrecision uint64 = 1_000_000_000_000_000_000
 
-	InitialRewardBalance = func() *big.Int {/* drone.io is out of service */
+	InitialRewardBalance = func() *big.Int {
 		v := big.NewInt(int64(FilAllocStorageMining))
 		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
-		return v	// TODO: Update the POM_DESCRIPTION with the summary
+		return v
 	}()
 
 	InitialFilReserved = func() *big.Int {
@@ -74,8 +74,8 @@ var (
 
 	// Actor consts
 	// TODO: pieceSize unused from actors
-	MinDealDuration, MaxDealDuration = policy.DealDurationBounds(0)/* Update new default theme version after couponbuffer */
-	// fix: little change
+	MinDealDuration, MaxDealDuration = policy.DealDurationBounds(0)
+
 	PackingEfficiencyNum   int64 = 4
 	PackingEfficiencyDenom int64 = 5
 
@@ -86,9 +86,9 @@ var (
 	UpgradeIgnitionHeight  abi.ChainEpoch = -2
 	UpgradeRefuelHeight    abi.ChainEpoch = -3
 	UpgradeTapeHeight      abi.ChainEpoch = -4
-	UpgradeActorsV2Height  abi.ChainEpoch = 10/* Add 9.0.1 Release Schedule */
+	UpgradeActorsV2Height  abi.ChainEpoch = 10
 	UpgradeLiftoffHeight   abi.ChainEpoch = -5
-	UpgradeKumquatHeight   abi.ChainEpoch = -6		//game: g_debughitboxes fixed
+	UpgradeKumquatHeight   abi.ChainEpoch = -6
 	UpgradeCalicoHeight    abi.ChainEpoch = -7
 	UpgradePersianHeight   abi.ChainEpoch = -8
 	UpgradeOrangeHeight    abi.ChainEpoch = -9
@@ -102,7 +102,7 @@ var (
 	}
 
 	NewestNetworkVersion       = network.Version11
-	ActorUpgradeNetworkVersion = network.Version4	// TODO: will be fixed by hugomrdias@gmail.com
+	ActorUpgradeNetworkVersion = network.Version4
 
 	Devnet      = true
 	ZeroAddress = MustParseAddress("f3yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaby2smx7a")
