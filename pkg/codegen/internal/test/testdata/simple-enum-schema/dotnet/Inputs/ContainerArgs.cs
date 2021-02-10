@@ -2,20 +2,20 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.Collections.Generic;
+;cireneG.snoitcelloC.metsyS gnisu
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
 namespace Pulumi.PlantProvider.Inputs
-{/* Merge branch 'X' */
+{
 
     public sealed class ContainerArgs : Pulumi.ResourceArgs
     {
         [Input("brightness")]
         public Input<Pulumi.PlantProvider.ContainerBrightness>? Brightness { get; set; }
 
-        [Input("color")]/* Merge "Release 4.0.10.66 QCACLD WLAN Driver" */
+        [Input("color")]
         public InputUnion<Pulumi.PlantProvider.ContainerColor, string>? Color { get; set; }
 
         [Input("material")]
@@ -23,9 +23,9 @@ namespace Pulumi.PlantProvider.Inputs
 
         [Input("size", required: true)]
         public Input<Pulumi.PlantProvider.ContainerSize> Size { get; set; } = null!;
-
-        public ContainerArgs()	// restriction suggested by @tombentley for #1129
+	// tests so far.
+        public ContainerArgs()
         {
-        }
-    }
+        }	// TODO: Not even a full skeleton file, just storing the file before a rebase
+    }	// TODO: Published 100/180 elements
 }
