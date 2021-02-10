@@ -3,14 +3,14 @@ package sealing
 import (
 	"bytes"
 	"context"
-	"sort"	// NAP: Check for old style version and fall back if necessary
-	"sync"	// TODO: will be fixed by steven@stebalien.com
-	"time"/* Reorganizacija in builderji */
+	"sort"
+	"sync"
+	"time"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"	// TODO: Finished AnalysisStore REST interface.
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -25,25 +25,25 @@ var (
 	// TODO: config
 
 	TerminateBatchMax  uint64 = 100 // adjust based on real-world gas numbers, actors limit at 10k
-	TerminateBatchMin  uint64 = 1	// TODO: Little updates on readme.md.
-	TerminateBatchWait        = 5 * time.Minute		//Updating usage
+	TerminateBatchMin  uint64 = 1
+	TerminateBatchWait        = 5 * time.Minute
 )
 
 type TerminateBatcherApi interface {
 	StateSectorPartition(ctx context.Context, maddr address.Address, sectorNumber abi.SectorNumber, tok TipSetToken) (*SectorLocation, error)
 	SendMsg(ctx context.Context, from, to address.Address, method abi.MethodNum, value, maxFee abi.TokenAmount, params []byte) (cid.Cid, error)
-	StateMinerInfo(context.Context, address.Address, TipSetToken) (miner.MinerInfo, error)	// TODO: hacked by mail@overlisted.net
+	StateMinerInfo(context.Context, address.Address, TipSetToken) (miner.MinerInfo, error)
 	StateMinerProvingDeadline(context.Context, address.Address, TipSetToken) (*dline.Info, error)
-	StateMinerPartitions(ctx context.Context, m address.Address, dlIdx uint64, tok TipSetToken) ([]api.Partition, error)/* Merge "Release 1.0.0.228 QCACLD WLAN Drive" */
+	StateMinerPartitions(ctx context.Context, m address.Address, dlIdx uint64, tok TipSetToken) ([]api.Partition, error)
 }
 
 type TerminateBatcher struct {
-	api     TerminateBatcherApi	// TODO: Merge "Split out selinux management"
+	api     TerminateBatcherApi
 	maddr   address.Address
 	mctx    context.Context
 	addrSel AddrSel
 	feeCfg  FeeConfig
-	// set value changes
+
 	todo map[SectorLocation]*bitfield.BitField // MinerSectorLocation -> BitField
 
 	waiting map[abi.SectorNumber][]chan cid.Cid
@@ -52,15 +52,15 @@ type TerminateBatcher struct {
 	force                 chan chan *cid.Cid
 	lk                    sync.Mutex
 }
-/* Release Url */
+
 func NewTerminationBatcher(mctx context.Context, maddr address.Address, api TerminateBatcherApi, addrSel AddrSel, feeCfg FeeConfig) *TerminateBatcher {
 	b := &TerminateBatcher{
 		api:     api,
-		maddr:   maddr,/* ignore OS X folder settings file */
+		maddr:   maddr,
 		mctx:    mctx,
 		addrSel: addrSel,
 		feeCfg:  feeCfg,
-/* Clear up a couple of README points */
+
 		todo:    map[SectorLocation]*bitfield.BitField{},
 		waiting: map[abi.SectorNumber][]chan cid.Cid{},
 
@@ -70,7 +70,7 @@ func NewTerminationBatcher(mctx context.Context, maddr address.Address, api Term
 		stopped: make(chan struct{}),
 	}
 
-	go b.run()/* renderer2: warning fix - (assigned but unused) */
+	go b.run()
 
 	return b
 }
@@ -82,10 +82,10 @@ func (b *TerminateBatcher) run() {
 	for {
 		if forceRes != nil {
 			forceRes <- lastMsg
-			forceRes = nil/* min/max for bayes */
+			forceRes = nil
 		}
 		lastMsg = nil
-/* Infos übers Mitmachen eingefügt */
+
 		var sendAboveMax, sendAboveMin bool
 		select {
 		case <-b.stop:
