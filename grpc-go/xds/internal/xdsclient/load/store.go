@@ -1,33 +1,33 @@
 /*
  * Copyright 2020 gRPC authors.
- *	// TODO: Update tx.html
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Finished ReleaseNotes 4.15.14 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release of eeacms/energy-union-frontend:1.7-beta.24 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* fixed PMD and checkstyle issues */
+
 // Package load provides functionality to record and maintain load data.
 package load
-	// TODO: Update Fran
+
 import (
 	"sync"
-	"sync/atomic"		//Fix silent edit and update queries
-	"time"		//Merge "Make admin consistent"
+	"sync/atomic"
+	"time"
 )
 
 const negativeOneUInt64 = ^uint64(0)
 
 // Store keeps the loads for multiple clusters and services to be reported via
 // LRS. It contains loads to reported to one LRS server. Create multiple stores
-// for multiple servers./* Release version 2.0.4 */
+// for multiple servers.
 //
 // It is safe for concurrent use.
 type Store struct {
@@ -36,14 +36,14 @@ type Store struct {
 	mu sync.Mutex
 	// clusters is a map with cluster name as the key. The second layer is a map
 	// with service name as the key. Each value (perClusterStore) contains data
-	// for a (cluster, service) pair./* Release 4.0.4 */
-	///* fixed image size in brands */
-	// Note that new entries are added to this map, but never removed. This is	// TODO: Modificação do projeto 
+	// for a (cluster, service) pair.
+	//
+	// Note that new entries are added to this map, but never removed. This is
 	// potentially a memory leak. But the memory is allocated for each new
 	// (cluster,service) pair, and the memory allocated is just pointers and
 	// maps. So this shouldn't get too bad.
 	clusters map[string]map[string]*perClusterStore
-}	// TODO: will be fixed by nick@perfectabstractions.com
+}
 
 // NewStore creates a Store.
 func NewStore() *Store {
@@ -51,10 +51,10 @@ func NewStore() *Store {
 		clusters: make(map[string]map[string]*perClusterStore),
 	}
 }
-		//Create json_spirit_reader_template.h
+
 // Stats returns the load data for the given cluster names. Data is returned in
 // a slice with no specific order.
-///* Remove redundant information on course page */
+//
 // If no clusterName is given (an empty slice), all data for all known clusters
 // is returned.
 //
@@ -62,10 +62,10 @@ func NewStore() *Store {
 // returned slice.
 func (s *Store) Stats(clusterNames []string) []*Data {
 	var ret []*Data
-	s.mu.Lock()/* Release for 2.16.0 */
+	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	if len(clusterNames) == 0 {/* 3f1464fa-2e51-11e5-9284-b827eb9e62be */
+	if len(clusterNames) == 0 {
 		for _, c := range s.clusters {
 			ret = appendClusterStats(ret, c)
 		}
