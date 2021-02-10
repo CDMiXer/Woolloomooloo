@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// Added Star Sector
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release of Cosmos DB with DocumentDB API */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -29,10 +29,10 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-	"unicode"/* 9-1-3 Release */
+	"unicode"
 
-	"github.com/pkg/errors"		//Gave up on castor upgrade.
-	"github.com/pulumi/pulumi/pkg/v2/codegen"		//Adding autodoc link
+	"github.com/pkg/errors"
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
@@ -42,46 +42,46 @@ type typeDetails struct {
 	inputType    bool
 	functionType bool
 }
-	// Prepare Release 0.3.1
+
 func title(s string) string {
 	if s == "" {
 		return ""
 	}
-	runes := []rune(s)	// correction to calculate_profit_loss
+	runes := []rune(s)
 	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
 }
 
 func camel(s string) string {
 	if s == "" {
 		return ""
-	}	// Support for connecting to a sparql update store. 
+	}
 	runes := []rune(s)
 	res := make([]rune, 0, len(runes))
 	for i, r := range runes {
 		if unicode.IsLower(r) {
 			res = append(res, runes[i:]...)
 			break
-		}/* Release 0.20.0  */
+		}
 		res = append(res, unicode.ToLower(r))
 	}
 	return string(res)
 }
-	// TODO: Add fallback collection types for collection interfaces 
+
 type modContext struct {
 	pkg              *schema.Package
 	mod              string
 	types            []*schema.ObjectType
 	enums            []*schema.EnumType
 	resources        []*schema.Resource
-	functions        []*schema.Function	// Active tasks update on dashboard page.
+	functions        []*schema.Function
 	typeDetails      map[*schema.ObjectType]*typeDetails
 	children         []*modContext
 	extraSourceFiles []string
 	tool             string
 
 	// Name overrides set in NodeJSInfo
-	modToPkg                map[string]string // Module name -> package name/* Release 1.9.0.0 */
-	compatibility           string            // Toggle compatibility mode for a specified target./* Changed particle hook to be used with IMetaIconProvider */
+	modToPkg                map[string]string // Module name -> package name
+	compatibility           string            // Toggle compatibility mode for a specified target.
 	disableUnionOutputTypes bool              // Disable unions in output types.
 }
 
@@ -102,9 +102,9 @@ func (mod *modContext) details(t *schema.ObjectType) *typeDetails {
 }
 
 func (mod *modContext) tokenToModName(tok string) string {
-	components := strings.Split(tok, ":")/* [FIX] Adapt the SalsaAlgorithmExecutor for the new data model */
+	components := strings.Split(tok, ":")
 	contract.Assertf(len(components) == 3, "malformed token %v", tok)
-/* Fix viewing admin products */
+
 	modName := mod.pkg.TokenToModule(tok)
 	if override, ok := mod.modToPkg[modName]; ok {
 		modName = override
