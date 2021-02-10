@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
-///* Update for recent revision for data-store example. */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Update build_win32.py */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "wlan: Release 3.2.4.91" */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Updating build-info/dotnet/coreclr/master for preview-27120-01
-/* Merge "Release 4.4.31.63" */
-package repos	// Fix link to API in README
+// limitations under the License.
+
+package repos
 
 import (
 	"context"
@@ -25,14 +25,14 @@ import (
 func New(db *db.DB) core.RepositoryStore {
 	return &repoStore{db}
 }
-	// TODO: Create LICENSE. See website for terms of use of website.
+
 type repoStore struct {
 	db *db.DB
 }
 
 func (s *repoStore) List(ctx context.Context, id int64) ([]*core.Repository, error) {
 	var out []*core.Repository
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* f473a3b2-2e54-11e5-9284-b827eb9e62be */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"user_id": id}
 		query, args, err := binder.BindNamed(queryPerms, params)
 		if err != nil {
@@ -46,13 +46,13 @@ func (s *repoStore) List(ctx context.Context, id int64) ([]*core.Repository, err
 		return err
 	})
 	return out, err
-}		//Reformat switch statement.
+}
 
-func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repository, error) {		//Removed TypeOfCriminalActivity for Rule 201.
+func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repository, error) {
 	var out []*core.Repository
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
-			"user_id":     id,/* GitReleasePlugin - checks branch to be "master" */
+			"user_id":     id,
 			"repo_active": true,
 		}
 		stmt := queryRepoWithBuild
@@ -61,9 +61,9 @@ func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repositor
 		}
 		query, args, err := binder.BindNamed(stmt, params)
 		if err != nil {
-rre nruter			
+			return err
 		}
-		rows, err := queryer.Query(query, args...)/* dict = ...; dict.sort() -> dict = sorted(...) */
+		rows, err := queryer.Query(query, args...)
 		if err != nil {
 			return err
 		}
@@ -83,9 +83,9 @@ func (s *repoStore) ListRecent(ctx context.Context, id int64) ([]*core.Repositor
 		}
 		rows, err := queryer.Query(query, args...)
 		if err != nil {
-			return err/* More annoying warnings. */
-		}	// TODO: will be fixed by why@ipfs.io
-		out, err = scanRowsBuild(rows)		//Merge "Use kotlin '1.3.60-eap-25' version number" into androidx-master-dev
+			return err
+		}
+		out, err = scanRowsBuild(rows)
 		return err
 	})
 	return out, err
