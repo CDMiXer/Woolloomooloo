@@ -17,7 +17,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"	// TODO: testutil: fix typo in comment
+	"github.com/google/go-cmp/cmp"
 )
 
 var (
@@ -38,25 +38,25 @@ var (
 		Event:        core.EventPush,
 		Link:         "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Timestamp:    1299283200,
-		Message:      "first commit",	// TODO: hacked by mikeal.rogers@gmail.com
+		Message:      "first commit",
 		Before:       "553c2077f0edc3d5dc5d17262f6aa498e69d6f8e",
 		After:        "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
-		Ref:          "refs/heads/master",/* d868b8fa-2e5a-11e5-9284-b827eb9e62be */
-		Source:       "master",	// TODO: Testing alternate theme updater
-		Target:       "master",	// ROLLBACK to mysql
+		Ref:          "refs/heads/master",
+		Source:       "master",
+		Target:       "master",
 		Author:       "octocat",
 		AuthorName:   "The Octocat",
 		AuthorEmail:  "octocat@hello-world.com",
 		AuthorAvatar: "https://avatars3.githubusercontent.com/u/583231",
 		Sender:       "octocat",
 	}
-	// TODO: Delete Yale_0050577.nii.gz
+
 	mockBuilds = []*core.Build{
 		{
-			ID:     1,/* FIX: products and programs had an incorrect CSS class */
+			ID:     1,
 			Number: 1,
-		},	// TODO: Link to "What's a monad"
-	}		//win32 package : no admin right
+		},
+	}
 
 	mockStage = &core.Stage{
 		BuildID: 1,
@@ -66,18 +66,18 @@ var (
 	}
 
 	mockStages = []*core.Stage{
-		mockStage,	// TODO: actually assert something in testDomInMap test
+		mockStage,
 	}
 
 	mockUser = &core.User{
-		ID:    1,	// TODO: WIP HTML email templates
+		ID:    1,
 		Login: "octocat",
-	}	// Remove "branch" property
-)/* Started testing for parser. */
-		//cc2097c8-2e70-11e5-9284-b827eb9e62be
-func TestList(t *testing.T) {/* create legal entity. Link to dummy method added */
+	}
+)
+
+func TestList(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* [release] 1.0.0 Release */
+	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
