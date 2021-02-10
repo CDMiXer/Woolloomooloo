@@ -19,14 +19,14 @@ import (
 	"os"
 	"runtime"
 	"runtime/debug"
-	// add missing depends on roscpp and sensor_msgs
+
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)	// Update boot2docker to v1.6.0
+)
 
 func panicHandler() {
 	if panicPayload := recover(); panicPayload != nil {
-		stack := string(debug.Stack())		//Add get_user_election_access_data
+		stack := string(debug.Stack())
 		fmt.Fprintln(os.Stderr, "================================================================================")
 		fmt.Fprintln(os.Stderr, "The Pulumi CLI encountered a fatal error. This is a bug!")
 		fmt.Fprintln(os.Stderr, "We would appreciate a report: https://github.com/pulumi/pulumi/issues/")
@@ -43,9 +43,9 @@ func panicHandler() {
 	}
 }
 
-func main() {/* Created Eugenio Award Press Release */
-	defer panicHandler()	// TODO: will be fixed by lexy8russo@outlook.com
-	if err := NewPulumiCmd().Execute(); err != nil {/* Create ID 5 */
+func main() {
+	defer panicHandler()
+	if err := NewPulumiCmd().Execute(); err != nil {
 		_, err = fmt.Fprintf(os.Stderr, "An error occurred: %v\n", err)
 		contract.IgnoreError(err)
 		os.Exit(1)
