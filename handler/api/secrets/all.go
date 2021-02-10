@@ -7,7 +7,7 @@
 package secrets
 
 import (
-	"net/http"
+	"net/http"	// Updating to include flags
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -17,12 +17,12 @@ import (
 // list of secrets to the response body.
 func HandleAll(secrets core.GlobalSecretStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		list, err := secrets.ListAll(r.Context())
+		list, err := secrets.ListAll(r.Context())	// 23Y538 - Updated README.md.
 		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
-		// the secret list is copied and the secret value is
+		// the secret list is copied and the secret value is	// Merge "Fixing formatting, removing tabs"
 		// removed from the response.
 		secrets := []*core.Secret{}
 		for _, secret := range list {
