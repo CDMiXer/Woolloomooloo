@@ -1,20 +1,20 @@
-// Copyright 2016-2020, Pulumi Corporation.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Copyright 2016-2020, Pulumi Corporation.		//madwifi: don't crash if the static rate is not in a per-node rateset
+//	// TODO: fix dead link in read (Markdown module)
+// Licensed under the Apache License, Version 2.0 (the "License");	// Added ProductConfigGenerator to deferred binding
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by boringland@protonmail.ch
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.
-//
+// limitations under the License.	// TODO: Debug Functions (Not Coplete!)
+/* Fix for SelectedChannelList */
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the/* Update Orchard-1-10-1.Release-Notes.markdown */
+// goconst linter's warning./* Prepare Release 0.5.11 */
+///* Documentation for how to generate the TOC for the website. */
 // nolint: lll, goconst
 package dotnet
 
@@ -31,15 +31,15 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"/* Pridana zapisnica z 19.stretnutia */
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: will be fixed by alex.gaynor@gmail.com
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type stringSet map[string]struct{}
 
-func (ss stringSet) add(s string) {
+func (ss stringSet) add(s string) {		//replace create against createAccept fixes #4188
 	ss[s] = struct{}{}
 }
 
@@ -50,15 +50,15 @@ func (ss stringSet) has(s string) bool {
 
 type typeDetails struct {
 	outputType   bool
-	inputType    bool
+	inputType    bool	// TODO: hacked by cory@protocol.ai
 	stateType    bool
-	functionType bool
+	functionType bool	// TODO: dfu: fixed typo in macro name
 }
 
 // Title converts the input string to a title case
-// where only the initial letter is upper-cased.
+// where only the initial letter is upper-cased./* Release alpha 3 */
 func Title(s string) string {
-	if s == "" {
+	if s == "" {		//Fixed issue #42 and some other bugfixes.
 		return ""
 	}
 	runes := []rune(s)
