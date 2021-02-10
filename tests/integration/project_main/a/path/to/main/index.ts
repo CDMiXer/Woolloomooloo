@@ -1,3 +1,3 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// TODO: hacked by vyzo@hackzen.org
-console.log("So much main");
+
+console.log("So much main");	// TODO: will be fixed by aeongrp@outlook.com
