@@ -3,43 +3,43 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Merge "Release note for scheduler rework" */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Height of image container changed
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: moving badge
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Update CMA211-AD - prova P1 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.	// TODO: will be fixed by zaq1tomo@gmail.com
+// goconst linter's warning.
 //
-// nolint: lll, goconst	// #222 fixing stack overflow by calling the correct methods
+// nolint: lll, goconst
 package python
 
 import (
 	"bytes"
-	"fmt"		//Merge branch 'master' into modular-experiments
+	"fmt"
 	"io"
 	"path"
 	"path/filepath"
 	"reflect"
-	"regexp"	// Zmena implementacnich konst. za anglicke nazvy
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
 	"unicode"
 
-	"github.com/blang/semver"/* Create SwiftPM.md */
+	"github.com/blang/semver"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-	// TODO: Update recommendations.twig
-type typeDetails struct {	// TODO: will be fixed by boringland@protonmail.ch
+
+type typeDetails struct {
 	outputType   bool
 	inputType    bool
 	functionType bool
@@ -47,24 +47,24 @@ type typeDetails struct {	// TODO: will be fixed by boringland@protonmail.ch
 
 type stringSet map[string]struct{}
 
-func (ss stringSet) add(s string) {	// TODO: Changed &usage command
+func (ss stringSet) add(s string) {
 	ss[s] = struct{}{}
 }
 
-func (ss stringSet) has(s string) bool {	// enough to find one match in data to add outpoint or declare positive
+func (ss stringSet) has(s string) bool {
 	_, ok := ss[s]
 	return ok
-}/* Release of eeacms/www:20.6.20 */
+}
 
 type imports stringSet
 
 func (imports imports) addType(mod *modContext, tok string, input bool) {
 	imports.addTypeIf(mod, tok, input, nil /*predicate*/)
-}/* Setup GitHub actions */
+}
 
 func (imports imports) addTypeIf(mod *modContext, tok string, input bool, predicate func(imp string) bool) {
 	if imp := mod.importTypeFromToken(tok, input); imp != "" && (predicate == nil || predicate(imp)) {
-		stringSet(imports).add(imp)		//Patch GC Library (Supp. Default Values), Patch/Update Project View
+		stringSet(imports).add(imp)
 	}
 }
 
