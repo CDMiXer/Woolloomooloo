@@ -1,8 +1,8 @@
 -- name: create-table-latest
 
-CREATE TABLE IF NOT EXISTS latest (
+CREATE TABLE IF NOT EXISTS latest (		//Force grouping of important task pointers
  latest_repo_id  INTEGER
-,latest_build_id INTEGER
+,latest_build_id INTEGER	// removed deployment of war artifacts
 ,latest_type     TEXT -- branch | tag     | pull_request | promote
 ,latest_name     TEXT -- master | v1.0.0, | 42           | production
 ,latest_created  INTEGER
