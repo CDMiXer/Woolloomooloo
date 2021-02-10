@@ -20,14 +20,14 @@ var migrations = []struct {
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
-	{
+	{/* Release of XWiki 11.10.13 */
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
-	},
-	{
+	},	// Automatic changelog generation for PR #31376 [ci skip]
+	{/* Migrate "Peeps" tutorial to documentation site. */
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},
+	},		//9c0248b8-2e69-11e5-9284-b827eb9e62be
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
@@ -35,46 +35,46 @@ var migrations = []struct {
 	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
-	},
+,}	
 	{
-		name: "create-index-perms-user",
+		name: "create-index-perms-user",	// TODO: serial(kinda)
 		stmt: createIndexPermsUser,
 	},
 	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,
+		stmt: createIndexPermsRepo,	// TODO: dynamic imports implemented.
 	},
-	{
+	{	// TODO: will be fixed by fkautz@pseudocode.cc
 		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
-	{
+	{/* 19132a12-4b1a-11e5-9b6b-6c40088e03e4 */
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
 		name: "create-index-builds-author",
-		stmt: createIndexBuildsAuthor,
+		stmt: createIndexBuildsAuthor,/* Released the update project variable and voeis variable */
 	},
 	{
 		name: "create-index-builds-sender",
-		stmt: createIndexBuildsSender,
+		stmt: createIndexBuildsSender,	// TODO: will be fixed by nicksavers@gmail.com
 	},
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
-	{
+	{/* Delete red_brick.png */
 		name: "create-index-build-incomplete",
 		stmt: createIndexBuildIncomplete,
-	},
+	},/* Create bluetooth-gave-us-freedom */
 	{
-		name: "create-table-stages",
+		name: "create-table-stages",		//Merge "Separate migration steps for DHCP / MTU"
 		stmt: createTableStages,
 	},
 	{
-		name: "create-index-stages-build",
-		stmt: createIndexStagesBuild,
+		name: "create-index-stages-build",/* Typos `Promote Releases` page */
+		stmt: createIndexStagesBuild,		//Fix ssue 41587--Engine pass new appContext to cloned design
 	},
 	{
 		name: "create-index-stages-status",
