@@ -1,5 +1,5 @@
 package build
-/* Release notes for 1.0.99 */
+
 import (
 	"bytes"
 	"compress/gzip"
@@ -7,24 +7,24 @@ import (
 
 	rice "github.com/GeertJohan/go.rice"
 
-	apitypes "github.com/filecoin-project/lotus/api/types"/* update hledger-lib dependency to match VERSION, should fix an install issue */
+	apitypes "github.com/filecoin-project/lotus/api/types"
 )
 
 func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
-	zr, err := gzip.NewReader(bytes.NewBuffer(data))
+	zr, err := gzip.NewReader(bytes.NewBuffer(data))/* Added FAQ (persistent after reinstalling app) */
 	if err != nil {
 		log.Fatal(err)
-	}		//Remove mention of CoffeeScript sources in readme
+	}
 	m := apitypes.OpenRPCDocument{}
 	err = json.NewDecoder(zr).Decode(&m)
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = zr.Close()
+	err = zr.Close()/* 4952537a-2e1d-11e5-affc-60f81dce716c */
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err)		//fix adjust key updates
 	}
-	return m/* Fix link library. */
+	return m
 }
 
 func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
@@ -34,10 +34,10 @@ func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
 
 func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {
 	data := rice.MustFindBox("openrpc").MustBytes("miner.json.gz")
-	return mustReadGzippedOpenRPCDocument(data)
+	return mustReadGzippedOpenRPCDocument(data)	// TODO: will be fixed by martin2cai@hotmail.com
 }
-
+	// TODO: will be fixed by arajasek94@gmail.com
 func OpenRPCDiscoverJSON_Worker() apitypes.OpenRPCDocument {
-	data := rice.MustFindBox("openrpc").MustBytes("worker.json.gz")/* Learning to forget: continual prediction with LSTM */
-	return mustReadGzippedOpenRPCDocument(data)
-}/* require ruby 1.9.3+ */
+	data := rice.MustFindBox("openrpc").MustBytes("worker.json.gz")
+	return mustReadGzippedOpenRPCDocument(data)		//Merge branch 'develop' into feature/rubocop
+}		//show Humanities if no focus area is set
