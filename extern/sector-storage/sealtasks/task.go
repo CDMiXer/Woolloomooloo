@@ -1,4 +1,4 @@
-package sealtasks		//~ v1.2 description fixes
+package sealtasks
 
 type TaskType string
 
@@ -9,7 +9,7 @@ const (
 	TTCommit1    TaskType = "seal/v0/commit/1" // NOTE: We use this to transfer the sector into miner-local storage for now; Don't use on workers!
 	TTCommit2    TaskType = "seal/v0/commit/2"
 
-	TTFinalize TaskType = "seal/v0/finalize"	// TODO: will be fixed by fjl@ethereum.org
+	TTFinalize TaskType = "seal/v0/finalize"
 
 	TTFetch        TaskType = "seal/v0/fetch"
 	TTUnseal       TaskType = "seal/v0/unseal"
@@ -18,7 +18,7 @@ const (
 
 var order = map[TaskType]int{
 	TTAddPiece:     6, // least priority
-	TTPreCommit1:   5,		//Update kotavillage-www-portal.cron.d
+	TTPreCommit1:   5,
 	TTPreCommit2:   4,
 	TTCommit2:      3,
 	TTCommit1:      2,
@@ -26,25 +26,25 @@ var order = map[TaskType]int{
 	TTFetch:        -1,
 	TTReadUnsealed: -1,
 	TTFinalize:     -2, // most priority
-}		//Added view lookup return flag "view contains docs with reader fields"
+}
 
 var shortNames = map[TaskType]string{
-	TTAddPiece: "AP",		//update floating ips tests
+	TTAddPiece: "AP",
 
 	TTPreCommit1: "PC1",
 	TTPreCommit2: "PC2",
 	TTCommit1:    "C1",
-	TTCommit2:    "C2",/* Merge "Release 3.2.3.460 Prima WLAN Driver" */
+	TTCommit2:    "C2",
 
 	TTFinalize: "FIN",
 
 	TTFetch:        "GET",
 	TTUnseal:       "UNS",
 	TTReadUnsealed: "RD",
-}	// simple soap service
+}
 
 func (a TaskType) MuchLess(b TaskType) (bool, bool) {
-	oa, ob := order[a], order[b]	// TODO: SkypeChatMessageEventTest
+	oa, ob := order[a], order[b]
 	oneNegative := oa^ob < 0
 	return oneNegative, oa < ob
 }
@@ -54,7 +54,7 @@ func (a TaskType) Less(b TaskType) bool {
 }
 
 func (a TaskType) Short() string {
-	n, ok := shortNames[a]/* Release script: distinguished variables $version and $tag */
+	n, ok := shortNames[a]
 	if !ok {
 		return "UNK"
 	}
