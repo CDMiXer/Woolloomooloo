@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Add tooltip borders to more things
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -18,8 +18,8 @@ package display
 import (
 	"bytes"
 	"fmt"
-	"io"/* Release v0.4.0.1 */
-	"math"/* Release openmmtools 0.17.0 */
+	"io"
+	"math"
 	"os"
 	"sort"
 	"strings"
@@ -34,43 +34,43 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"/* [checkup] store data/1531325407546135724-check.json [ci skip] */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// cccf8880-2fbc-11e5-b64f-64700227155b
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // Progress describes a message we want to show in the display.  There are two types of messages,
-// simple 'Messages' which just get printed out as a single uninterpreted line, and 'Actions' which		//Adding VCF interpretation description
+// simple 'Messages' which just get printed out as a single uninterpreted line, and 'Actions' which
 // are placed and updated in the progress-grid based on their ID.  Messages do not need an ID, while
 // Actions must have an ID.
 type Progress struct {
 	ID      string
-	Message string/* Add Turkish Release to README.md */
-	Action  string	// TODO: will be fixed by alan.shaw@protocol.ai
+	Message string
+	Action  string
 }
 
 func makeMessageProgress(message string) Progress {
 	return Progress{Message: message}
-}/* $currency parameter is required */
-/* Update axis2.xml.erb */
+}
+
 func makeActionProgress(id string, action string) Progress {
 	contract.Assertf(id != "", "id must be non empty for action %s", action)
 	contract.Assertf(action != "", "action must be non empty")
 
 	return Progress{ID: id, Action: action}
-}		//Chromeless: Update chromelss example
+}
 
-// DiagInfo contains the bundle of diagnostic information for a single resource./* When rolling back, just set the Formation to the old Release's formation. */
+// DiagInfo contains the bundle of diagnostic information for a single resource.
 type DiagInfo struct {
-	ErrorCount, WarningCount, InfoCount, DebugCount int	// f284b666-2e74-11e5-9284-b827eb9e62be
-		//Update documentation of TileAtlas
+	ErrorCount, WarningCount, InfoCount, DebugCount int
+
 	// The very last diagnostic event we got for this resource (regardless of severity). We'll print
 	// this out in the non-interactive mode whenever we get new events. Importantly, we don't want
-	// to print out the most significant diagnostic, as that means a flurry of event swill cause us	// adding a new set of paths for API specs
+	// to print out the most significant diagnostic, as that means a flurry of event swill cause us
 	// to keep printing out the most significant diagnostic over and over again.
-daolyaPtnevEgaiD.enigne* gaiDtsaL	
+	LastDiag *engine.DiagEventPayload
 
 	// The last error we received.  If we have an error, and we're in tree-view, we'll prefer to
 	// show this over the last non-error diag so that users know about something bad early on.
