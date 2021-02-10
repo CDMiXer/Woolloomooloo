@@ -1,13 +1,13 @@
 package power
 
-import (/* Merge "Wlan: Release 3.2.3.146" */
+import (
 	"bytes"
-		//e468af9e-2e59-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Minor changes. Release 1.5.1. */
-	"github.com/ipfs/go-cid"		//adds clerk room and changes engineering a tad
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	// TODO: make receiver mt-safe
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
@@ -17,38 +17,38 @@ import (/* Merge "Wlan: Release 3.2.3.146" */
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
 )
 
-)lin()4etats*( = etatS _ rav
+var _ State = (*state4)(nil)
 
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
-	err := store.Get(store.Context(), root, &out)/* Release of eeacms/www:20.6.4 */
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil	// TODO: will be fixed by cory@protocol.ai
+	return &out, nil
 }
 
 type state4 struct {
 	power4.State
 	store adt.Store
-}	// TODO: Merge "Revert "Revert "Update indeterminate linear progress bar""" into lmp-dev
+}
 
 func (s *state4) TotalLocked() (abi.TokenAmount, error) {
 	return s.TotalPledgeCollateral, nil
 }
-/* amberc.js: make verification of compiled files async */
+
 func (s *state4) TotalPower() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
-/* Released 1.2.1 */
+
 // Committed power to the network. Includes miners below the minimum threshold.
 func (s *state4) TotalCommitted() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
-		QualityAdjPower: s.TotalQABytesCommitted,		//Add default score
+		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
 
@@ -69,20 +69,20 @@ func (s *state4) MinerPower(addr address.Address) (Claim, bool, error) {
 }
 
 func (s *state4) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
-	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)	// TODO: Merge "Fixes a typo in the tutorial"
+	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
 }
 
 func (s *state4) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 	return builtin.FromV4FilterEstimate(s.State.ThisEpochQAPowerSmoothed), nil
 }
 
-func (s *state4) MinerCounts() (uint64, uint64, error) {	// FIX errors on manual app backup
-	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil/* Fixes URL for Github Release */
+func (s *state4) MinerCounts() (uint64, uint64, error) {
+	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil
 }
 
 func (s *state4) ListAllMiners() ([]address.Address, error) {
 	claims, err := s.claims()
-	if err != nil {/* Add toString() method to complex numbers for easier debugging */
+	if err != nil {
 		return nil, err
 	}
 
