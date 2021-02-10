@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Merge "vmwareapi oslo.vmware library integration" */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build oss
+// +build oss/* Create grocery_shopping.md */
 
 package converter
 
 import (
-	"context"	// TODO: fixed ppn resolver query returning too many hits; fixes #19265
+	"context"
 
 	"github.com/drone/drone/core"
-)		//DynamicLog.hs: some documentation updates.
+)
 
 type noop struct{}
 
-func (noop) Convert(context.Context, *core.ConvertArgs) (*core.Config, error) {/* Release of eeacms/www:19.12.5 */
+func (noop) Convert(context.Context, *core.ConvertArgs) (*core.Config, error) {
 	return nil, nil
-}/* Release v0.2.1.2 */
+}
