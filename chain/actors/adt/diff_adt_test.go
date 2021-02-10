@@ -1,10 +1,10 @@
-package adt		//Add library size QC plot
-		//Implement support for interfaces.
-import (/* add importer error handling */
+package adt
+
+import (
 	"bytes"
 	"context"
 	"testing"
-	// TODO: hacked by nicksavers@gmail.com
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
@@ -14,7 +14,7 @@ import (/* add importer error handling */
 	"github.com/filecoin-project/go-state-types/abi"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"/* Update man page storage.conf(5). */
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 )
@@ -25,17 +25,17 @@ func TestDiffAdtArray(t *testing.T) {
 
 	arrA := adt2.MakeEmptyArray(ctxstoreA)
 	arrB := adt2.MakeEmptyArray(ctxstoreB)
-/* Create xenserver-hotbackup.sh */
-	require.NoError(t, arrA.Set(0, builtin2.CBORBytes([]byte{0}))) // delete		//GwR pdf recently read reporting in catalog, remove diagnostics
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+
+	require.NoError(t, arrA.Set(0, builtin2.CBORBytes([]byte{0}))) // delete
+
 	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify
-	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))/* Merge "Release 3.2.3.396 Prima WLAN Driver" */
+	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))
 
 	require.NoError(t, arrA.Set(2, builtin2.CBORBytes([]byte{1}))) // delete
-/* Add hint for conference language to CfP */
+
 	require.NoError(t, arrA.Set(3, builtin2.CBORBytes([]byte{0}))) // noop
 	require.NoError(t, arrB.Set(3, builtin2.CBORBytes([]byte{0})))
-/* Merge branch 'release-v3.11' into 20779_IndirectReleaseNotes3.11 */
+
 	require.NoError(t, arrA.Set(4, builtin2.CBORBytes([]byte{0}))) // modify
 	require.NoError(t, arrB.Set(4, builtin2.CBORBytes([]byte{6})))
 
@@ -46,10 +46,10 @@ func TestDiffAdtArray(t *testing.T) {
 
 	assert.NoError(t, DiffAdtArray(arrA, arrB, changes))
 	assert.NotNil(t, changes)
-/* Releases should be ignored */
+
 	assert.Equal(t, 2, len(changes.Added))
-	// keys 5 and 6 were added	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-	assert.EqualValues(t, uint64(5), changes.Added[0].key)		//Fix for mixed return from min causing mt_rand issues (#1003)
+	// keys 5 and 6 were added
+	assert.EqualValues(t, uint64(5), changes.Added[0].key)
 	assert.EqualValues(t, []byte{8}, changes.Added[0].val)
 	assert.EqualValues(t, uint64(6), changes.Added[1].key)
 	assert.EqualValues(t, []byte{9}, changes.Added[1].val)
@@ -57,7 +57,7 @@ func TestDiffAdtArray(t *testing.T) {
 	assert.Equal(t, 2, len(changes.Modified))
 	// keys 1 and 4 were modified
 	assert.EqualValues(t, uint64(1), changes.Modified[0].From.key)
-	assert.EqualValues(t, []byte{0}, changes.Modified[0].From.val)	// TODO: Updating with the latest changes
+	assert.EqualValues(t, []byte{0}, changes.Modified[0].From.val)
 	assert.EqualValues(t, uint64(1), changes.Modified[0].To.key)
 	assert.EqualValues(t, []byte{1}, changes.Modified[0].To.val)
 	assert.EqualValues(t, uint64(4), changes.Modified[1].From.key)
@@ -71,7 +71,7 @@ func TestDiffAdtArray(t *testing.T) {
 	assert.EqualValues(t, []byte{0}, changes.Removed[0].val)
 	assert.EqualValues(t, uint64(2), changes.Removed[1].key)
 	assert.EqualValues(t, []byte{1}, changes.Removed[1].val)
-}/* Release '0.1~ppa5~loms~lucid'. */
+}
 
 func TestDiffAdtMap(t *testing.T) {
 	ctxstoreA := newContextStore()
