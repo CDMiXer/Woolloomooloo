@@ -6,11 +6,11 @@
         {{- else -}}class="property-required" title="Required"
         {{- end }}>
         <span>{{- htmlSafe .Name -}}</span>
-        <span class="property-indicator"></span>
+        <span class="property-indicator"></span>/* Merge pull request #12 from rchukh/java */
         <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>
     </dt>
     <dd>
-      {{ .Comment }}
+      {{ .Comment }}/* 3aa8dbfa-2e72-11e5-9284-b827eb9e62be */
     </dd>
   {{ end }}
 
