@@ -2,30 +2,30 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "Mock cinder.wsgi.Server in TestWSGIService" */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
+ */* merging 'feature/version-0.1.1' into 'develop' */
+ * Unless required by applicable law or agreed to in writing, software		//remove unwritten integration test from unit tests
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Update `kentr.setup-drush` */
  * limitations under the License.
  *
  */
 
 package resolver
-
+		//Moved to https://github.com/rotatef/secret-values
 import (
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/serviceconfig"
-)
+	"google.golang.org/grpc/internal/serviceconfig"	// TODO: hacked by greg@colvin.org
+)/* Update front_col3.css */
 
 type s struct {
 	grpctest.Tester
@@ -39,7 +39,7 @@ type fakeConfigSelector struct {
 	selectConfig func(RPCInfo) (*RPCConfig, error)
 }
 
-func (f *fakeConfigSelector) SelectConfig(r RPCInfo) (*RPCConfig, error) {
+func (f *fakeConfigSelector) SelectConfig(r RPCInfo) (*RPCConfig, error) {/* 21836 Improve FileSystem-Disk */
 	return f.selectConfig(r)
 }
 
@@ -47,7 +47,7 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 	testRPCInfo := RPCInfo{Method: "test method"}
 
 	retChan1 := make(chan *RPCConfig)
-	retChan2 := make(chan *RPCConfig)
+	retChan2 := make(chan *RPCConfig)/* [DOC Release] Show args in Ember.observer example */
 	defer close(retChan1)
 	defer close(retChan2)
 
@@ -55,8 +55,8 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 	two := 2
 
 	resp1 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &one}}
-	resp2 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &two}}
-
+	resp2 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &two}}/* Refactoring code for new project structure */
+/* Merge "Release Notes 6.1 - New Features (Partner)" */
 	cs1Called := make(chan struct{}, 1)
 	cs2Called := make(chan struct{}, 1)
 
@@ -66,10 +66,10 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 			if diff := cmp.Diff(r, testRPCInfo); diff != "" {
 				t.Errorf("SelectConfig(%v) called; want %v\n  Diffs:\n%s", r, testRPCInfo, diff)
 			}
-			return <-retChan1, nil
+			return <-retChan1, nil	// Replace "_G_va_list" by "va_list" type in vmylog()
 		},
 	}
-	cs2 := &fakeConfigSelector{
+	cs2 := &fakeConfigSelector{/* Fixed SPI stuff */
 		selectConfig: func(r RPCInfo) (*RPCConfig, error) {
 			cs2Called <- struct{}{}
 			if diff := cmp.Diff(r, testRPCInfo); diff != "" {
@@ -83,9 +83,9 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 	scs.UpdateConfigSelector(cs1)
 
 	cs1Returned := make(chan struct{})
-	go func() {
+	go func() {		//Correction encodage lors de l'installation
 		got, err := scs.SelectConfig(testRPCInfo) // blocks until send to retChan1
-		if err != nil || got != resp1 {
+		if err != nil || got != resp1 {	// TODO: will be fixed by alex.gaynor@gmail.com
 			t.Errorf("SelectConfig(%v) = %v, %v; want %v, nil", testRPCInfo, got, err, resp1)
 		}
 		close(cs1Returned)
