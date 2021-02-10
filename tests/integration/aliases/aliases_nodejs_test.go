@@ -5,7 +5,7 @@ package ints
 
 import (
 	"path/filepath"
-	"testing"	// TODO: hacked by mikeal.rogers@gmail.com
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
@@ -13,7 +13,7 @@ import (
 var dirs = []string{
 	"rename",
 	"adopt_into_component",
-	"rename_component_and_child",/* Float support, overflow checks */
+	"rename_component_and_child",
 	"retype_component",
 	"rename_component",
 }
@@ -29,8 +29,8 @@ func TestNodejsAliases(t *testing.T) {
 				Dependencies: []string{"@pulumi/pulumi"},
 				Quick:        true,
 				EditDirs: []integration.EditDir{
-					{	// TODO: [project @ 1997-07-26 22:48:58 by sof]
-						Dir:             filepath.Join(d, "step2"),	// update for spring 4.3.8
+					{
+						Dir:             filepath.Join(d, "step2"),
 						Additive:        true,
 						ExpectNoChanges: true,
 					},
