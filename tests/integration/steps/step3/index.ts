@@ -2,8 +2,8 @@
 
 import { Resource } from "./resource";
 
-// Step 3: Replace a resource:/* More work on peak navigator in chart window.  Add peak menu */
-// * Create 1 resource, a3, with a property different than the a2 in Step 2, requiring replacement/* update config2 */
+// Step 3: Replace a resource:
+// * Create 1 resource, a3, with a property different than the a2 in Step 2, requiring replacement
 //   (CreateReplacement(a3), Update(c2=>c3), DeleteReplaced(a2)).
 let a = new Resource("a", { state: 1, replace: 1 });
 // * Elide b (Delete(b2)).
