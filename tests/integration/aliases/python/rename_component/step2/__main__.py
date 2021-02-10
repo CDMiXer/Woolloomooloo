@@ -5,11 +5,11 @@ from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, 
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
-		//Spark java v2
+
 # Scenario #3 - rename a component (and all it's children)
 # No change to the component...
 class ComponentThree(ComponentResource):
-    def __init__(self, name, opts=None):	// Added download link for visual studio
+    def __init__(self, name, opts=None):
         super().__init__("my:module:ComponentThree", name, None, opts)
         # Note that both un-prefixed and parent-name-prefixed child names are supported. For the
         # later, the implicit alias inherited from the parent alias will include replacing the name
