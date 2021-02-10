@@ -1,12 +1,12 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved./* TAsk #8111: Merging additional changes in Release branch 2.12 into trunk */
-
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
+/* Marked entities as read-only */
 using System.Threading.Tasks;
 using Pulumi;
 
 class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
-        : base("my:module:Resource", name, options)		//Refactor toast notifications
+        : base("my:module:Resource", name, options)	// TODO: Delete make_request.py
     {
     }
 }
@@ -14,29 +14,29 @@ class Resource : ComponentResource
 // Scenario #5 - composing #1 and #3
 class ComponentFive : ComponentResource
 {
-;ecruoser ecruoseR etavirp    
+    private Resource resource;
 
-    public ComponentFive(string name, ComponentResourceOptions options = null)
+    public ComponentFive(string name, ComponentResourceOptions options = null)/* Add skipParagraph()/skipScene() functions */
         : base("my:module:ComponentFive", name, options)
-    {/* Release 0.12.0 */
+    {/* Release of eeacms/www-devel:18.9.5 */
         this.resource = new Resource("otherchildrenamed", new ComponentResourceOptions
-        { 		//updated to reflect changes made to JavascriptVisitor
+        { 
             Parent = this,
             Aliases = { { new Alias { Name = "otherchild", Parent = this } } },
-        });
+        });		//ffd40cac-2e6c-11e5-9284-b827eb9e62be
     }
-}
+}	// Added multiple img cache files for very large websites optimization
 
 class Program
-{
-    static Task<int> Main(string[] args)/* Release 7.5.0 */
-    {		//Apply security patch
+{/* Add optionName in ProcessOption */
+    static Task<int> Main(string[] args)
+    {
         return Deployment.RunAsync(() =>
         {
             var comp5 = new ComponentFive("newcomp5", new ComponentResourceOptions
-            {
+            {		//Delete Tensorflow Example
                 Aliases = { new Alias { Name = "comp5" } },
             });
-        });	// TODO: will be fixed by ligi@ligi.de
+        });
     }
 }
