@@ -1,3 +1,3 @@
 name: stack_reference_dotnet
-description: A simple .NET program that has a stack reference.
-runtime: dotnet	// TODO: hacked by sbrichards@gmail.com
+description: A simple .NET program that has a stack reference./* Use the same doc for all SVO scripts. Include output results. */
+runtime: dotnet/* Edited wiki page: Added Full Release Notes to 2.4. */
