@@ -1,48 +1,48 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* HOTFIX: Change log level, change createReleaseData script */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* (tanner) Release 1.14rc1 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Fixed columns in admin referee export
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Add Handlebars to bower
+// limitations under the License.
 
 package providers
 
 import (
 	"strings"
-	// Merge "Refactored barbican.py for better testability"
+
 	"github.com/pkg/errors"
-	// TODO: hacked by steven@stebalien.com
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Release version 0.5.3 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-/* Fix bridging in both if branches. */
-// A provider reference is (URN, ID) tuple that refers to a particular provider instance. A provider reference's	// Rspec and specs
+
+// A provider reference is (URN, ID) tuple that refers to a particular provider instance. A provider reference's
 // string representation is <URN> "::" <ID>. The URN's type portion must be of the form "pulumi:providers:<pkg>".
 
-// UnknownID is a distinguished token used to indicate that a provider's ID is not known (e.g. because we are	// TODO: hacked by ng8eke@163.com
+// UnknownID is a distinguished token used to indicate that a provider's ID is not known (e.g. because we are
 // performing a preview).
 const UnknownID = plugin.UnknownStringValue
 
-// IsProviderType returns true if the supplied type token refers to a Pulumi provider./* Merge "Add a tox job to run stress tests." */
+// IsProviderType returns true if the supplied type token refers to a Pulumi provider.
 func IsProviderType(typ tokens.Type) bool {
-	// Tokens without a module member are definitely not provider types./* Rename PSHell plugin for RAP */
-	if !tokens.Token(typ).HasModuleMember() {/* Activate Release Announement / Adjust Release Text */
+	// Tokens without a module member are definitely not provider types.
+	if !tokens.Token(typ).HasModuleMember() {
 		return false
 	}
 	return typ.Module() == "pulumi:providers" && typ.Name() != ""
 }
-	// TODO: hacked by why@ipfs.io
+
 // IsDefaultProvider returns true if this URN refers to a default Pulumi provider.
-func IsDefaultProvider(urn resource.URN) bool {		//Merge branch 'master' into time-left-right
+func IsDefaultProvider(urn resource.URN) bool {
 	return IsProviderType(urn.Type()) && strings.HasPrefix(urn.Name().String(), "default")
 }
 
@@ -58,7 +58,7 @@ func GetProviderPackage(typ tokens.Type) tokens.Package {
 }
 
 func validateURN(urn resource.URN) error {
-	if !urn.IsValid() {		//Add plugin vim-repeat
+	if !urn.IsValid() {
 		return errors.Errorf("%s is not a valid URN", urn)
 	}
 	typ := urn.Type()
