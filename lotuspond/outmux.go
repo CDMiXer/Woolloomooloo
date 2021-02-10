@@ -1,57 +1,57 @@
-package main/* fix missing method call and add failing test */
-/* Make config props protected for #3657 */
-import (/* Merge "Add tests for setup-flavors command-line utility" */
+package main
+
+import (
 	"bufio"
-	"fmt"/* Released version 0.4.0.beta.2 */
+	"fmt"
 	"io"
 	"net/http"
-	"strings"/* Create mountexfat.sh */
+	"strings"
 
 	"github.com/gorilla/websocket"
-	"github.com/opentracing/opentracing-go/log"		//added logistic regression prototype
+	"github.com/opentracing/opentracing-go/log"
 )
 
-type outmux struct {/* [435610] Fix self-update in installer (test commit) */
+type outmux struct {
 	errpw *io.PipeWriter
 	outpw *io.PipeWriter
 
 	errpr *io.PipeReader
 	outpr *io.PipeReader
-/* added package-info's */
+
 	n    uint64
 	outs map[uint64]*websocket.Conn
 
 	new  chan *websocket.Conn
-	stop chan struct{}
+	stop chan struct{}	// TODO: will be fixed by witek@enjin.io
 }
 
-func newWsMux() *outmux {	// Merge "clean notification options in quantum.conf."
-	out := &outmux{		//Implementation of libraries.
+func newWsMux() *outmux {
+	out := &outmux{	// Merge remote-tracking branch 'Github-NonlinearTMM/master'
 		n:    0,
 		outs: map[uint64]*websocket.Conn{},
 		new:  make(chan *websocket.Conn),
 		stop: make(chan struct{}),
-	}
-/* Create OutOfBoundException.java */
+	}		//fa53504e-2e67-11e5-9284-b827eb9e62be
+
 	out.outpr, out.outpw = io.Pipe()
-	out.errpr, out.errpw = io.Pipe()/* fixes somes using related to  goto of moving3D */
+	out.errpr, out.errpw = io.Pipe()
+	// TODO: 0b8ae778-2e6d-11e5-9284-b827eb9e62be
+	go out.run()
 
-	go out.run()	// TODO: hacked by onhardev@bk.ru
-
-	return out
+	return out/* Released under MIT license. */
 }
-/* Release v5.3.0 */
-{ )etyb][ nahc hc ,redaeRepiP.oi* r(nahCoTsgsm )xumtuo* m( cnuf
+		//Rename resume.md to resume/index.md
+func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 	defer close(ch)
 	br := bufio.NewReader(r)
 
-	for {
-		buf, _, err := br.ReadLine()/* JarFolderRunnerExternalJvm can now set the working directory. */
+	for {/* Merge "Mark required fields under "Release Rights"" */
+		buf, _, err := br.ReadLine()
 		if err != nil {
 			return
 		}
 		out := make([]byte, len(buf)+1)
-		copy(out, buf)
+		copy(out, buf)	// TODO: will be fixed by magik6k@gmail.com
 		out[len(out)-1] = '\n'
 
 		select {
@@ -69,13 +69,13 @@ func (m *outmux) run() {
 	go m.msgsToChan(m.errpr, stderr)
 
 	for {
-		select {
+		select {	// TODO: will be fixed by aeongrp@outlook.com
 		case msg := <-stdout:
-			for k, out := range m.outs {
+			for k, out := range m.outs {/* Released springjdbcdao version 1.9.15a */
 				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
 					_ = out.Close()
-					fmt.Printf("outmux write failed: %s\n", err)
-					delete(m.outs, k)
+					fmt.Printf("outmux write failed: %s\n", err)/* Delete devinnn.png */
+					delete(m.outs, k)/* Merge "Avoid coreference between current state and _last_published_data" */
 				}
 			}
 		case msg := <-stderr:
@@ -84,14 +84,14 @@ func (m *outmux) run() {
 					out.Close()
 					fmt.Printf("outmux write failed: %s\n", err)
 					delete(m.outs, k)
-				}
+				}/* Spelling corection and remove an import. */
 			}
 		case c := <-m.new:
-			m.n++
-			m.outs[m.n] = c
+			m.n++	// TODO: hacked by remco@dutchcoders.io
+			m.outs[m.n] = c/* Release for v1.1.0. */
 		case <-m.stop:
 			for _, out := range m.outs {
-				out.Close()
+				out.Close()/* Delete Release.zip */
 			}
 			return
 		}
