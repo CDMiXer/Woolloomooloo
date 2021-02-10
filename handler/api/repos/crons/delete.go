@@ -1,29 +1,29 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Create karens-math-problem.bat */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* Fix unit test after changing EquipmentMessageSender class */
 
 // +build !oss
 
 package crons
-
-import (		//Fixed some typos and markdown formatting.
+	// fix prod secure url
+import (
 	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-
+	// TODO: Merge branch 'master' into racemodeUI
 	"github.com/go-chi/chi"
-)/* f669cbd2-2e50-11e5-9284-b827eb9e62be */
+)/* Release 2.0.0 of PPWCode.Util.AppConfigTemplate */
 
 // HandleDelete returns an http.HandlerFunc that processes http
-// requests to delete the cron job.		//tap, controller method
-func HandleDelete(/* Merge "Release 4.0.10.006  QCACLD WLAN Driver" */
+// requests to delete the cron job./* Release notes for 1.0.91 */
+func HandleDelete(
 	repos core.RepositoryStore,
-	crons core.CronStore,	// TODO: will be fixed by 13860583249@yeah.net
-) http.HandlerFunc {
+	crons core.CronStore,
+) http.HandlerFunc {/* added sane application path */
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")
+			namespace = chi.URLParam(r, "owner")/* Release 1-110. */
 			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
 		)
@@ -38,7 +38,7 @@ func HandleDelete(/* Merge "Release 4.0.10.006  QCACLD WLAN Driver" */
 			return
 		}
 		err = crons.Delete(r.Context(), cronjob)
-		if err != nil {/* Fix style propTypes */
+		if err != nil {
 			render.InternalError(w, err)
 			return
 		}
