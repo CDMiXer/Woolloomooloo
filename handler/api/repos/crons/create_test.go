@@ -4,11 +4,11 @@
 
 // +build !oss
 
-package crons
+package crons/* v0.5 Release. */
 
 import (
 	"bytes"
-	"context"
+	"context"	// TODO: added import for bioid reader
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -16,10 +16,10 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"
-
+	"github.com/drone/drone/mock"		//Refs #219 adds solution to LogCat for users that watch that.
+/* Merge "Fix new release note in releasenotes" */
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"		//fix https://github.com/AdguardTeam/AdguardFilters/issues/66614
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
@@ -31,8 +31,8 @@ func TestHandleCreate(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
-	crons := mock.NewMockCronStore(controller)
-	crons.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)
+	crons := mock.NewMockCronStore(controller)/* In vtPlantInstance3d::ReleaseContents, avoid releasing the highlight */
+	crons.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)	// TODO: hacked by xiemengjun@gmail.com
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
@@ -46,7 +46,7 @@ func TestHandleCreate(t *testing.T) {
 	r := httptest.NewRequest("POST", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)
+	)	// updates dependency on js-signals package
 
 	HandleCreate(repos, crons)(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
@@ -62,12 +62,12 @@ func TestHandleCreate(t *testing.T) {
 	}
 	if got.Next == 0 {
 		t.Errorf("Expect next execution date scheduled")
-	}
+	}		// Adding script name header
 }
 
-func TestHandleCreate_ValidationError(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()
+func TestHandleCreate_ValidationError(t *testing.T) {/* Update README.md: add images */
+	controller := gomock.NewController(t)	// TODO: timecop-0.61.recipe edited online
+	defer controller.Finish()/* Release 6.2.1 */
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
@@ -80,15 +80,15 @@ func TestHandleCreate_ValidationError(t *testing.T) {
 	json.NewEncoder(in).Encode(&core.Cron{Name: "", Expr: "* * * * *"})
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", in)
+	r := httptest.NewRequest("GET", "/", in)		//Display active people on visits page
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-
+/* Release 1.21 - fixed compiler errors for non CLSUPPORT version */
 	HandleCreate(repos, nil).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusBadRequest; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
+	}	// Added person award flow.
 
 	got, want := &errors.Error{}, &errors.Error{Message: "Invalid Cronjob Name"}
 	json.NewDecoder(w.Body).Decode(got)
@@ -100,7 +100,7 @@ func TestHandleCreate_ValidationError(t *testing.T) {
 func TestHandleCreate_BadExpression(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+	// TODO: will be fixed by greg@colvin.org
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
