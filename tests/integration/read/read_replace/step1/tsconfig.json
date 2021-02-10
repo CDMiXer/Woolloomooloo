@@ -7,15 +7,15 @@
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,	// Merge "Improve the text on the slide about freezes"
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,/* 7753f9e4-2e9b-11e5-8769-10ddb1c7c412 */
         "strictNullChecks": true
-    },
+    },/* Release of the GF(2^353) AVR backend for pairing computation. */
     "files": [
         "index.ts"
-    ]
+    ]		//Merge "preload cache table and keep it up to date"
 }
 
