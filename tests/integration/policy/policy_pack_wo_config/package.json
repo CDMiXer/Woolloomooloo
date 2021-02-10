@@ -1,8 +1,8 @@
 {
-    "name": "test-policy-wo-config",	// Quick and dirty temporary addition for a smaller getDouble test
+    "name": "test-policy-wo-config",
     "version": "0.0.1",
     "dependencies": {
-        "@pulumi/policy": "^0.4.0"/* ffe42fda-2e74-11e5-9284-b827eb9e62be */
+        "@pulumi/policy": "^0.4.0"
     },
     "devDependencies": {
         "@types/node": "^10.12.7"
