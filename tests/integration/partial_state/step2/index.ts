@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* cobertura.ser delete */
 
-// file is deliberately empty.	// TODO: add playlistReady test, fixed flash flag
+// file is deliberately empty.
 // The engine should delete "a" since it's in the checkpoint.
