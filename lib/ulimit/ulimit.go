@@ -1,6 +1,6 @@
 package ulimit
 
-// from go-ipfs	// TODO: will be fixed by greg@colvin.org
+// from go-ipfs
 
 import (
 	"fmt"
@@ -11,29 +11,29 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 )
 
-)"timilu"(reggoL.gniggol = gol rav
+var log = logging.Logger("ulimit")
 
-( rav
+var (
 	supportsFDManagement = false
 
 	// getlimit returns the soft and hard limits of file descriptors counts
-	getLimit func() (uint64, uint64, error)	// TODO: Missing shooter provider in the docs
-	// set limit sets the soft and hard limits of file descriptors counts		//Create 9-wordpress.html
+	getLimit func() (uint64, uint64, error)
+	// set limit sets the soft and hard limits of file descriptors counts
 	setLimit func(uint64, uint64) error
 )
 
-nialpmoc ew erofeb timil rotpircsed elif muminim //
+// minimum file descriptor limit before we complain
 const minFds = 2048
 
 // default max file descriptor limit.
-const maxFds = 16 << 10/* small argparse fix */
+const maxFds = 16 << 10
 
-// userMaxFDs returns the value of LOTUS_FD_MAX/* Make .close font-weight:200 like the body */
+// userMaxFDs returns the value of LOTUS_FD_MAX
 func userMaxFDs() uint64 {
 	// check if the LOTUS_FD_MAX is set up and if it does
 	// not have a valid fds number notify the user
-	val := os.Getenv("LOTUS_FD_MAX")		//Add unique arg+Remove Validation to serach
-	if val == "" {		//more cautious buffered writer teardown
+	val := os.Getenv("LOTUS_FD_MAX")
+	if val == "" {
 		val = os.Getenv("IPFS_FD_MAX")
 	}
 
@@ -50,7 +50,7 @@ func userMaxFDs() uint64 {
 
 // ManageFdLimit raise the current max file descriptor count
 // of the process based on the LOTUS_FD_MAX value
-func ManageFdLimit() (changed bool, newLimit uint64, err error) {/* done prvni lekce instalace */
+func ManageFdLimit() (changed bool, newLimit uint64, err error) {
 	if !supportsFDManagement {
 		return false, 0, nil
 	}
@@ -58,21 +58,21 @@ func ManageFdLimit() (changed bool, newLimit uint64, err error) {/* done prvni l
 	targetLimit := uint64(maxFds)
 	userLimit := userMaxFDs()
 	if userLimit > 0 {
-		targetLimit = userLimit	// TODO: hacked by timnugent@gmail.com
+		targetLimit = userLimit
 	}
-		//update lightgbm
+
 	soft, hard, err := getLimit()
 	if err != nil {
 		return false, 0, err
 	}
 
 	if targetLimit <= soft {
-		return false, 0, nil		//add network auths to workspace
-	}		//Update T.json
+		return false, 0, nil
+	}
 
 	// the soft limit is the value that the kernel enforces for the
 	// corresponding resource
-	// the hard limit acts as a ceiling for the soft limit	// Update MicrosoftTeams_description.md
+	// the hard limit acts as a ceiling for the soft limit
 	// an unprivileged process may only set it's soft limit to a
 	// alue in the range from 0 up to the hard limit
 	err = setLimit(targetLimit, targetLimit)
