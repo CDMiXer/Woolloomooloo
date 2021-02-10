@@ -1,10 +1,10 @@
-{/* Fixed bug and added distribution of size and span */
-    "name": "steps",
-    "license": "Apache-2.0",		//Public `NSObject.makeBindingTarget`.
+{
+    "name": "steps",		//No longer beta
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
+"tsetal" :"imulup/imulup@"        
+    }	// TODO: version the json function
 }
