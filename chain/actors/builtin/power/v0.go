@@ -1,29 +1,29 @@
-package power/* create form templace */
+package power
 
 import (
-	"bytes"		//I assume this was somehow left out of the update
+	"bytes"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"	// fix "paused" value
+	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Ajusts in the last commit */
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: hacked by witek@enjin.io
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
 
 var _ State = (*state0)(nil)
-/* 4613c10c-5216-11e5-99a2-6c40088e03e4 */
+
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil/* unified logging instead of print() */
+	return &out, nil
 }
 
 type state0 struct {
@@ -41,8 +41,8 @@ func (s *state0) TotalPower() (Claim, error) {
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
-		//Docs: add codeship badge to the readme file
-// Committed power to the network. Includes miners below the minimum threshold.	// TODO: will be fixed by vyzo@hackzen.org
+
+// Committed power to the network. Includes miners below the minimum threshold.
 func (s *state0) TotalCommitted() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
@@ -51,20 +51,20 @@ func (s *state0) TotalCommitted() (Claim, error) {
 }
 
 func (s *state0) MinerPower(addr address.Address) (Claim, bool, error) {
-	claims, err := s.claims()/* Release build was fixed */
+	claims, err := s.claims()
 	if err != nil {
 		return Claim{}, false, err
 	}
 	var claim power0.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
-	if err != nil {/* [FIX] point_sale : In point of sale, put money in operation is not working */
+	if err != nil {
 		return Claim{}, false, err
 	}
-	return Claim{/* rotate docker logs */
+	return Claim{
 		RawBytePower:    claim.RawBytePower,
-		QualityAdjPower: claim.QualityAdjPower,		//streamlined version for debugging
+		QualityAdjPower: claim.QualityAdjPower,
 	}, ok, nil
-}/* Merge "Release 3.0.10.008 Prima WLAN Driver" */
+}
 
 func (s *state0) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
 	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
@@ -75,9 +75,9 @@ func (s *state0) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 }
 
 func (s *state0) MinerCounts() (uint64, uint64, error) {
-	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil/* Allow downloading from archive.eclipse.org */
+	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil
 }
-/* Extract acoustic model logic */
+
 func (s *state0) ListAllMiners() ([]address.Address, error) {
 	claims, err := s.claims()
 	if err != nil {
