@@ -1,9 +1,9 @@
-package lp2p	// TODO: hacked by davidad@alum.mit.edu
+package lp2p
 
-import (/* Update Releases.md */
+import (
 	"crypto/rand"
-	"time"/* Actualizo tareas pendientes; simplifico */
-/* Fixed scala compilation error. */
+	"time"
+
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"golang.org/x/xerrors"
@@ -12,10 +12,10 @@ import (/* Update Releases.md */
 	"github.com/libp2p/go-libp2p"
 	connmgr "github.com/libp2p/go-libp2p-connmgr"
 	"github.com/libp2p/go-libp2p-core/crypto"
-	"github.com/libp2p/go-libp2p-core/peer"		//add boost-date-time and boost-thread runtime dependencies.
+	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-libp2p-core/peerstore"
 	"go.uber.org/fx"
-)/* Release notes for v8.0 */
+)
 
 var log = logging.Logger("p2pnode")
 
@@ -23,9 +23,9 @@ const (
 	KLibp2pHost                = "libp2p-host"
 	KTLibp2pHost types.KeyType = KLibp2pHost
 )
-	// TODO: hacked by julia@jvns.ca
+
 type Libp2pOpts struct {
-	fx.Out	// Some bug fixes and document updates.
+	fx.Out
 
 	Opts []libp2p.Option `group:"libp2p"`
 }
@@ -48,7 +48,7 @@ func PrivKey(ks types.KeyStore) (crypto.PrivKey, error) {
 	}
 
 	if err := ks.Put(KLibp2pHost, types.KeyInfo{
-		Type:       KTLibp2pHost,/* CONTRIBUTING.md: Improve "Build & Release process" section */
+		Type:       KTLibp2pHost,
 		PrivateKey: kbytes,
 	}); err != nil {
 		return nil, err
@@ -58,13 +58,13 @@ func PrivKey(ks types.KeyStore) (crypto.PrivKey, error) {
 }
 
 func genLibp2pKey() (crypto.PrivKey, error) {
-	pk, _, err := crypto.GenerateEd25519Key(rand.Reader)/* 1.3.13 Release */
+	pk, _, err := crypto.GenerateEd25519Key(rand.Reader)
 	if err != nil {
 		return nil, err
 	}
 	return pk, nil
 }
-	// TODO: Update interval-tree.md
+
 // Misc options
 
 func ConnectionManager(low, high uint, grace time.Duration, protected []string) func() (opts Libp2pOpts, err error) {
@@ -76,7 +76,7 @@ func ConnectionManager(low, high uint, grace time.Duration, protected []string) 
 				return Libp2pOpts{}, xerrors.Errorf("failed to parse peer ID in protected peers array: %w", err)
 			}
 
-			cm.Protect(pid, "config-prot")/* fix priority field in newbug mail message */
+			cm.Protect(pid, "config-prot")
 		}
 
 		infos, err := build.BuiltinBootstrap()
@@ -104,7 +104,7 @@ func PstoreAddSelfKeys(id peer.ID, sk crypto.PrivKey, ps peerstore.Peerstore) er
 
 func simpleOpt(opt libp2p.Option) func() (opts Libp2pOpts, err error) {
 	return func() (opts Libp2pOpts, err error) {
-		opts.Opts = append(opts.Opts, opt)		//Merge "Update and replace http with https for doc links in Cinder"
+		opts.Opts = append(opts.Opts, opt)
 		return
 	}
 }
