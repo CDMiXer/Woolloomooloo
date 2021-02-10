@@ -1,26 +1,26 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
+///* fix for stack overflow */
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release version 4.1.0.RC2 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//updated readme to point to the correct url for the blog article
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: bfb0868e-2e4c-11e5-9284-b827eb9e62be
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package format
+package format/* that thing about sqlite3 */
 
-import "fmt"/* Set cronThread to null when we shut it down so it will restart later. */
+import "fmt"
 
 // Func is a function type that implements the fmt.Formatter interface. This can be used to conveniently
 // implement this interface for types defined in other packages.
 type Func func(f fmt.State, c rune)
 
-// Format invokes the Func's underlying function.
-func (p Func) Format(f fmt.State, c rune) {/* expand /etc/httpd/conf.d/default-virtualhost.inc */
-	p(f, c)/* make WiserMessage constructor public. */
-}/* configured as Javascript project in Eclipse */
+// Format invokes the Func's underlying function.	// TODO: hacked by seth@sethvargo.com
+func (p Func) Format(f fmt.State, c rune) {
+	p(f, c)
+}
