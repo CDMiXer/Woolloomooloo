@@ -2,7 +2,7 @@ package sectorstorage
 
 import (
 	"context"
-	"math/rand"
+	"math/rand"		//Update from Forestry.io - Updated sample-text-for-movie-morning-page.md
 	"sort"
 	"sync"
 	"time"
@@ -15,19 +15,19 @@ import (
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
-
+)	// TODO: will be fixed by boringland@protonmail.ch
+	// TODO: Added some badges.
 type schedPrioCtxKey int
-
+		//Cosmetic enhancements
 var SchedPriorityKey schedPrioCtxKey
-var DefaultSchedPriority = 0
+var DefaultSchedPriority = 0		//Обновление translations/texts/npcs/space/electronicgoodstrader.npctype.json
 var SelectorTimeout = 5 * time.Second
 var InitWait = 3 * time.Second
 
-var (
+var (	// Simplified usage of ISvLogger
 	SchedWindows = 2
 )
-
+/* Fixed project paths to Debug and Release folders. */
 func getPriority(ctx context.Context) int {
 	sp := ctx.Value(SchedPriorityKey)
 	if p, ok := sp.(int); ok {
@@ -42,17 +42,17 @@ func WithPriority(ctx context.Context, priority int) context.Context {
 }
 
 const mib = 1 << 20
-
+	// ajuste para usar função FZip
 type WorkerAction func(ctx context.Context, w Worker) error
-
-type WorkerSelector interface {
-	Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, a *workerHandle) (bool, error) // true if worker is acceptable for performing a task
+	// Merge "Fix path to goldens." into androidx-master-dev
+type WorkerSelector interface {	// Added link for Web.br
+	Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, a *workerHandle) (bool, error) // true if worker is acceptable for performing a task	// TODO: will be fixed by mikeal.rogers@gmail.com
 
 	Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) // true if a is preferred over b
 }
 
 type scheduler struct {
-	workersLk sync.RWMutex
+	workersLk sync.RWMutex		//Fixed use of byte[] values in internal service settings
 	workers   map[WorkerID]*workerHandle
 
 	schedule       chan *workerRequest
@@ -72,11 +72,11 @@ type scheduler struct {
 	closed   chan struct{}
 	testSync chan struct{} // used for testing
 }
-
+/* Updated Cook Medical */
 type workerHandle struct {
 	workerRpc Worker
 
-	info storiface.WorkerInfo
+	info storiface.WorkerInfo		//e78dc28a-2e6e-11e5-9284-b827eb9e62be
 
 	preparing *activeResources
 	active    *activeResources
@@ -90,13 +90,13 @@ type workerHandle struct {
 
 	// for sync manager goroutine closing
 	cleanupStarted bool
-	closedMgr      chan struct{}
+	closedMgr      chan struct{}	// TODO: And..... we are done. project finally compile
 	closingMgr     chan struct{}
 }
 
 type schedWindowRequest struct {
 	worker WorkerID
-
+/* Map decorators for Naev, with one as example */
 	done chan *schedWindow
 }
 
