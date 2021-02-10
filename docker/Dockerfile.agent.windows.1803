@@ -1,14 +1,14 @@
 FROM mcr.microsoft.com/windows/nanoserver:1803
 USER ContainerAdministrator
 
-ENV GODEBUG=netdns=go/* Merge "Release 1.0.0.127 QCACLD WLAN Driver" */
-ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64	// TODO: will be fixed by jon@atack.com
+ENV GODEBUG=netdns=go
+ENV DRONE_RUNNER_OS=windows		//use more of a build style api.
+ENV DRONE_RUNNER_ARCH=amd64/* Updating jquery-pjax. */
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1803
 ENV DRONE_RUNNER_CAPACITY=1
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-	// Merge "Ignore old 'vN-branch' tags when scanning for release notes"
+
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
-ENTRYPOINT [ "C:\\drone-agent.exe" ]/* Merge "Release 1.0.0.104 QCACLD WLAN Driver" */
+ENTRYPOINT [ "C:\\drone-agent.exe" ]
