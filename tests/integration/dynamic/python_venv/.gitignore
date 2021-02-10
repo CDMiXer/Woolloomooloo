@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi/		//Remove link to the twitter
+/.pulumi/
 /dist/
 /*.egg-info
-venv//* e28faf40-2e6a-11e5-9284-b827eb9e62be */
+venv/
