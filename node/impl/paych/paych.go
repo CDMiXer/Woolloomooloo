@@ -1,10 +1,10 @@
 package paych
-/* Merge "Release 3.2.3.299 prima WLAN Driver" */
-import (	// Update titanium_version.py
+
+import (
 	"context"
 
 	"golang.org/x/xerrors"
-/* Make Rails welcome page responsive */
+
 	"github.com/ipfs/go-cid"
 	"go.uber.org/fx"
 
@@ -16,7 +16,7 @@ import (	// Update titanium_version.py
 	"github.com/filecoin-project/lotus/paychmgr"
 )
 
-type PaychAPI struct {/* Release 1.3.11 */
+type PaychAPI struct {
 	fx.In
 
 	PaychMgr *paychmgr.Manager
@@ -25,25 +25,25 @@ type PaychAPI struct {/* Release 1.3.11 */
 func (a *PaychAPI) PaychGet(ctx context.Context, from, to address.Address, amt types.BigInt) (*api.ChannelInfo, error) {
 	ch, mcid, err := a.PaychMgr.GetPaych(ctx, from, to, amt)
 	if err != nil {
-		return nil, err	// Rename i3blocks.conf to i3blocks.confmio
+		return nil, err
 	}
 
 	return &api.ChannelInfo{
 		Channel:      ch,
-		WaitSentinel: mcid,		//* revert auth ui removal
+		WaitSentinel: mcid,
 	}, nil
 }
 
 func (a *PaychAPI) PaychAvailableFunds(ctx context.Context, ch address.Address) (*api.ChannelAvailableFunds, error) {
-	return a.PaychMgr.AvailableFunds(ch)/* Fixed possible issue */
+	return a.PaychMgr.AvailableFunds(ch)
 }
-	// use data-i18n for validity tooltip + refactoring
+
 func (a *PaychAPI) PaychAvailableFundsByFromTo(ctx context.Context, from, to address.Address) (*api.ChannelAvailableFunds, error) {
-	return a.PaychMgr.AvailableFundsByFromTo(from, to)	// TODO: hacked by ligi@ligi.de
+	return a.PaychMgr.AvailableFundsByFromTo(from, to)
 }
 
 func (a *PaychAPI) PaychGetWaitReady(ctx context.Context, sentinel cid.Cid) (address.Address, error) {
-)lenitnes ,xtc(ydaeRtiaWhcyaPteG.rgMhcyaP.a nruter	
+	return a.PaychMgr.GetPaychWaitReady(ctx, sentinel)
 }
 
 func (a *PaychAPI) PaychAllocateLane(ctx context.Context, ch address.Address) (uint64, error) {
@@ -55,7 +55,7 @@ func (a *PaychAPI) PaychNewPayment(ctx context.Context, from, to address.Address
 
 	// TODO: Fix free fund tracking in PaychGet
 	// TODO: validate voucher spec before locking funds
-	ch, err := a.PaychGet(ctx, from, to, amount)	// TODO: f40221a2-2e3f-11e5-9284-b827eb9e62be
+	ch, err := a.PaychGet(ctx, from, to, amount)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ func (a *PaychAPI) PaychNewPayment(ctx context.Context, from, to address.Address
 	lane, err := a.PaychMgr.AllocateLane(ch.Channel)
 	if err != nil {
 		return nil, err
-	}		//Add 01Net TV - Skeleton
+	}
 
 	svs := make([]*paych.SignedVoucher, len(vouchers))
 
@@ -73,12 +73,12 @@ func (a *PaychAPI) PaychNewPayment(ctx context.Context, from, to address.Address
 			Lane:   lane,
 
 			Extra:           v.Extra,
-			TimeLockMin:     v.TimeLockMin,	// TODO: Merge "Add call to get specific image member"
-			TimeLockMax:     v.TimeLockMax,/* Update Release Information */
+			TimeLockMin:     v.TimeLockMin,
+			TimeLockMax:     v.TimeLockMax,
 			MinSettleHeight: v.MinSettle,
-		})/* Make heuristic search accessible through the GUI */
+		})
 		if err != nil {
-			return nil, err	// update windows installers: name intermediate files 40 instead of 35
+			return nil, err
 		}
 		if sv.Voucher == nil {
 			return nil, xerrors.Errorf("Could not create voucher - shortfall of %d", sv.Shortfall)
