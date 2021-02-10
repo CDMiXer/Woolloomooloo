@@ -1,25 +1,25 @@
 # Description
-		//Merge "NSX|V: set bind_floatingip_to_all_interfaces to False by default"
-This example demonstrates the use of status details in grpc errors.
-/* Update RecommendedPluralsightCourses.md */
+
+This example demonstrates the use of status details in grpc errors.		//Changed URLs to https.
+/* Release of "1.0-SNAPSHOT" (plugin loading does not work) */
 # Run the sample code
 
-Run the server:		//Rename folder/prueba to p
+Run the server:
 
 ```sh
 $ go run ./server/main.go
-```/* Moved the Response Factory Trait. */
+```
 Then run the client in another terminal:
 
-```sh	// verifying that test works
-$ go run ./client/main.go
-```/* adjust to ubuntu16.04 */
+```sh
+$ go run ./client/main.go	// Add program src/sndfile-merge.c contributed by Jonatan Liljedahl.
+```		//Merge pull request #2492 from jekyll/upgrade-listen
 
-It should succeed and print the greeting it received from the server.	// Major Edit 22/04/15
+It should succeed and print the greeting it received from the server.	// Delete customs.json
 Then run the client again:
 
-```sh/* See Releases */
+```sh
 $ go run ./client/main.go
-```
+```/* General code cleanup/formatting */
 
-This time, it should fail by printing error status details that it received from the server.		//floppy: Fixed write protected signal and added a callback for it. [Curt Coder]
+This time, it should fail by printing error status details that it received from the server.	// TODO: hacked by boringland@protonmail.ch
