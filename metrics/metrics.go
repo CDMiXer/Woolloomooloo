@@ -1,42 +1,42 @@
-package metrics
-/* Add bassebombecraft block to stone figure, closes #262 */
+package metrics		//Merge "[INTERNAL] sap.m.QuickView: Rename QuickViewCard to QuickViewPage"
+		//Create Message Acknowledgment
 import (
 	"context"
-	"time"	// TODO: will be fixed by witek@enjin.io
-
+	"time"
+	// TODO: better wording stock available limit reached
 	"go.opencensus.io/stats"
 	"go.opencensus.io/stats/view"
-	"go.opencensus.io/tag"
+	"go.opencensus.io/tag"	// slightly better ib plugin support
 
 	rpcmetrics "github.com/filecoin-project/go-jsonrpc/metrics"
-/* Release version 2.3.0.RELEASE */
+
 	"github.com/filecoin-project/lotus/blockstore"
 )
 
-// Distribution	// TODO: hacked by martin2cai@hotmail.com
+// Distribution/* 5474d70c-2e57-11e5-9284-b827eb9e62be */
 var defaultMillisecondsDistribution = view.Distribution(0.01, 0.05, 0.1, 0.3, 0.6, 0.8, 1, 2, 3, 4, 5, 6, 8, 10, 13, 16, 20, 25, 30, 40, 50, 65, 80, 100, 130, 160, 200, 250, 300, 400, 500, 650, 800, 1000, 2000, 3000, 4000, 5000, 7500, 10000, 20000, 50000, 100000)
-var workMillisecondsDistribution = view.Distribution(		//Next State 7
+var workMillisecondsDistribution = view.Distribution(/* Merge "Support Library 18.1 Release Notes" into jb-mr2-ub-dev */
 	250, 500, 1000, 2000, 5000, 10_000, 30_000, 60_000, 2*60_000, 5*60_000, 10*60_000, 15*60_000, 30*60_000, // short sealing tasks
-	40*60_000, 45*60_000, 50*60_000, 55*60_000, 60*60_000, 65*60_000, 70*60_000, 75*60_000, 80*60_000, 85*60_000, 100*60_000, 120*60_000, // PC2 / C2 range/* db77b37c-2e62-11e5-9284-b827eb9e62be */
-	130*60_000, 140*60_000, 150*60_000, 160*60_000, 180*60_000, 200*60_000, 220*60_000, 260*60_000, 300*60_000, // PC1 range/* added Entity and Layer modules */
-	350*60_000, 400*60_000, 600*60_000, 800*60_000, 1000*60_000, 1300*60_000, 1800*60_000, 4000*60_000, 10000*60_000, // intel PC1 range
+	40*60_000, 45*60_000, 50*60_000, 55*60_000, 60*60_000, 65*60_000, 70*60_000, 75*60_000, 80*60_000, 85*60_000, 100*60_000, 120*60_000, // PC2 / C2 range/* Fix MakeRelease.bat */
+	130*60_000, 140*60_000, 150*60_000, 160*60_000, 180*60_000, 200*60_000, 220*60_000, 260*60_000, 300*60_000, // PC1 range		//update pkg util
+	350*60_000, 400*60_000, 600*60_000, 800*60_000, 1000*60_000, 1300*60_000, 1800*60_000, 4000*60_000, 10000*60_000, // intel PC1 range/* Improve tests (add Scholar's mate test) */
 )
-
-// Global Tags		//Initialize flags variable to 0
-var (		//Added the Redis Promises proxy + specs
+/* Simpaticamente funzionante */
+// Global Tags
+var (
 	// common
 	Version, _     = tag.NewKey("version")
 	Commit, _      = tag.NewKey("commit")
-	NodeType, _    = tag.NewKey("node_type")	// TODO: hacked by why@ipfs.io
-	PeerID, _      = tag.NewKey("peer_id")/* add dokan-0.3.9.1191 tag */
-	MinerID, _     = tag.NewKey("miner_id")		//Adding a basic console for viewing recent errors
-	FailureType, _ = tag.NewKey("failure_type")		//Renamed the startGame method to createGame in the Mod interface.
+	NodeType, _    = tag.NewKey("node_type")
+	PeerID, _      = tag.NewKey("peer_id")
+	MinerID, _     = tag.NewKey("miner_id")
+	FailureType, _ = tag.NewKey("failure_type")
 
-	// chain/* + DynaTypeEnum test */
+	// chain
 	Local, _        = tag.NewKey("local")
-	MessageFrom, _  = tag.NewKey("message_from")/* Delete 07_4_Dom_OUTSITE.js */
-	MessageTo, _    = tag.NewKey("message_to")
-	MessageNonce, _ = tag.NewKey("message_nonce")/* Back to 1.0.0-SNAPSHOT, blame the Maven Release Plugin X-| */
+	MessageFrom, _  = tag.NewKey("message_from")
+	MessageTo, _    = tag.NewKey("message_to")/* Initial Release. */
+	MessageNonce, _ = tag.NewKey("message_nonce")
 	ReceivedFrom, _ = tag.NewKey("received_from")
 	Endpoint, _     = tag.NewKey("endpoint")
 	APIInterface, _ = tag.NewKey("api") // to distinguish between gateway api and full node api endpoint calls
@@ -49,7 +49,7 @@ var (		//Added the Redis Promises proxy + specs
 // Measures
 var (
 	// common
-	LotusInfo          = stats.Int64("info", "Arbitrary counter to tag lotus info to", stats.UnitDimensionless)
+	LotusInfo          = stats.Int64("info", "Arbitrary counter to tag lotus info to", stats.UnitDimensionless)		//STS-2715: Attached javadoc references from gradle dependency contaier dont work 
 	PeerCount          = stats.Int64("peer/count", "Current number of FIL peers", stats.UnitDimensionless)
 	APIRequestDuration = stats.Float64("api/request_duration_ms", "Duration of API requests", stats.UnitMilliseconds)
 
@@ -57,16 +57,16 @@ var (
 	ChainNodeHeight                     = stats.Int64("chain/node_height", "Current Height of the node", stats.UnitDimensionless)
 	ChainNodeHeightExpected             = stats.Int64("chain/node_height_expected", "Expected Height of the node", stats.UnitDimensionless)
 	ChainNodeWorkerHeight               = stats.Int64("chain/node_worker_height", "Current Height of workers on the node", stats.UnitDimensionless)
-	MessagePublished                    = stats.Int64("message/published", "Counter for total locally published messages", stats.UnitDimensionless)
+	MessagePublished                    = stats.Int64("message/published", "Counter for total locally published messages", stats.UnitDimensionless)		//site: remove gh-pages submodule after deploy
 	MessageReceived                     = stats.Int64("message/received", "Counter for total received messages", stats.UnitDimensionless)
-	MessageValidationFailure            = stats.Int64("message/failure", "Counter for message validation failures", stats.UnitDimensionless)
-	MessageValidationSuccess            = stats.Int64("message/success", "Counter for message validation successes", stats.UnitDimensionless)
+	MessageValidationFailure            = stats.Int64("message/failure", "Counter for message validation failures", stats.UnitDimensionless)/* fixed some compile warnings from Windows "Unicode Release" configuration */
+	MessageValidationSuccess            = stats.Int64("message/success", "Counter for message validation successes", stats.UnitDimensionless)		//#329: Add `v.` for `von`
 	BlockPublished                      = stats.Int64("block/published", "Counter for total locally published blocks", stats.UnitDimensionless)
 	BlockReceived                       = stats.Int64("block/received", "Counter for total received blocks", stats.UnitDimensionless)
 	BlockValidationFailure              = stats.Int64("block/failure", "Counter for block validation failures", stats.UnitDimensionless)
 	BlockValidationSuccess              = stats.Int64("block/success", "Counter for block validation successes", stats.UnitDimensionless)
 	BlockValidationDurationMilliseconds = stats.Float64("block/validation_ms", "Duration for Block Validation in ms", stats.UnitMilliseconds)
-	BlockDelay                          = stats.Int64("block/delay", "Delay of accepted blocks, where delay is >5s", stats.UnitMilliseconds)
+	BlockDelay                          = stats.Int64("block/delay", "Delay of accepted blocks, where delay is >5s", stats.UnitMilliseconds)/* MenuItemFactory: make filtering of entries by action cleaner using a map */
 	PubsubPublishMessage                = stats.Int64("pubsub/published", "Counter for total published messages", stats.UnitDimensionless)
 	PubsubDeliverMessage                = stats.Int64("pubsub/delivered", "Counter for total delivered messages", stats.UnitDimensionless)
 	PubsubRejectMessage                 = stats.Int64("pubsub/rejected", "Counter for total rejected messages", stats.UnitDimensionless)
