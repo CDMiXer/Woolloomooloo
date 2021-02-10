@@ -4,15 +4,15 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* Release bug fix version 0.20.1. */
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [
+    },	// TODO: Merge "Replace yaml.load() with yaml.safe_load()"
+    "files": [		//summary(data.frame(I(<matrix>)))
         "index.ts"
-    ]
+    ]/* Add CSP WTF vimvixen-console-frame */
 }
