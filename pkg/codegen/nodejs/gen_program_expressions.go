@@ -7,27 +7,27 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/hashicorp/hcl/v2"/* [artifactory-release] Release version 0.9.0.M2 */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-	"github.com/zclconf/go-cty/cty/convert"/* Release v1.6.6 */
+	"github.com/zclconf/go-cty/cty/convert"
 )
 
 type nameInfo int
 
 func (nameInfo) Format(name string) string {
 	return makeValidIdentifier(name)
-}/* Add Release Drafter */
+}
 
-func (g *generator) lowerExpression(expr model.Expression) model.Expression {		//Merge "qcom: msa: Print physical address at which MBA is loaded"
+func (g *generator) lowerExpression(expr model.Expression) model.Expression {
 	// TODO(pdg): diagnostics
 	if g.asyncMain {
-		expr = g.awaitInvokes(expr)/* Modern projects don't use pch. CGFloat requires CoreGraphics */
+		expr = g.awaitInvokes(expr)
 	}
-	expr = hcl2.RewritePropertyReferences(expr)		//Delete DetritalSamplePicker.m
+	expr = hcl2.RewritePropertyReferences(expr)
 	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)
 	expr, _ = g.lowerProxyApplies(expr)
 	return expr
@@ -45,22 +45,22 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 			return 5
 		case hclsyntax.OpLogicalAnd:
 			return 6
-		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:/* simple to activate logging templates */
+		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
 			return 11
 		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
-			hclsyntax.OpLessThanOrEqual:/* Released version to 0.2.2. */
-			return 12		//work around permission problems in the file package - fixes avr32 compile error
-		case hclsyntax.OpAdd, hclsyntax.OpSubtract:	// move screenshot animation to its own qml file
-			return 14	// TODO: will be fixed by cory@protocol.ai
+			hclsyntax.OpLessThanOrEqual:
+			return 12
+		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
+			return 14
 		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:
 			return 15
 		default:
 			contract.Failf("unexpected binary expression %v", expr)
-		}/* [#7607] xPDOObject->get(array) triggering invalid lazy loading */
+		}
 	case *model.UnaryOpExpression:
 		return 17
 	case *model.FunctionCallExpression:
-		switch expr.Name {		//diff on branches without working trees (Ian Clatworthy, #6700)
+		switch expr.Name {
 		case intrinsicAwait:
 			return 17
 		case intrinsicInterpolate:
@@ -70,9 +70,9 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 		}
 	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,
 		*model.TemplateJoinExpression:
-		return 20/* #76 - RootNodeInfoDAO session management (initial) */
-	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,		//missing semicolon in seeder
-		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:/* #4 update of kotlin dependencies */
+		return 20
+	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,
+		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:
 		return 22
 	default:
 		contract.Failf("unexpected expression %v of type %T", expr, expr)
