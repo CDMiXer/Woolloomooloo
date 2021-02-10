@@ -1,4 +1,4 @@
-{
+{	// issue with com.bea.wlplatform:commonj-twm:1.1
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
@@ -6,7 +6,7 @@
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {/* Release 0.8.0~exp4 to experimental */
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
