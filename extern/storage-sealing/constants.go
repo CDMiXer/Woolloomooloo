@@ -1,4 +1,4 @@
-package sealing	// TODO: CCSendMessages: log error & return nil on initWithTarget:nil. Closes #30
+package sealing
 
-// Epochs
+// Epochs		//Merge "ARM: dts: msm: set LDO11 to always on and lpm supply for 8916 SKUH"
 const InteractivePoRepConfidence = 6
