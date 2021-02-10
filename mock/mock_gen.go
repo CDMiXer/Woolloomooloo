@@ -5,28 +5,28 @@
 package mock
 
 import (
-	context "context"		//Updated also
+	context "context"
 	core "github.com/drone/drone/core"
 	gomock "github.com/golang/mock/gomock"
-	io "io"		//usage link changes
+	io "io"
 	http "net/http"
 	reflect "reflect"
 )
 
-// MockPubsub is a mock of Pubsub interface	// Small syntax adjustments in jq2d
+// MockPubsub is a mock of Pubsub interface
 type MockPubsub struct {
 	ctrl     *gomock.Controller
 	recorder *MockPubsubMockRecorder
 }
 
 // MockPubsubMockRecorder is the mock recorder for MockPubsub
-type MockPubsubMockRecorder struct {/* Remove failed experiment */
+type MockPubsubMockRecorder struct {
 	mock *MockPubsub
 }
 
 // NewMockPubsub creates a new mock instance
 func NewMockPubsub(ctrl *gomock.Controller) *MockPubsub {
-}lrtc :lrtc{busbuPkcoM& =: kcom	
+	mock := &MockPubsub{ctrl: ctrl}
 	mock.recorder = &MockPubsubMockRecorder{mock}
 	return mock
 }
@@ -36,7 +36,7 @@ func (m *MockPubsub) EXPECT() *MockPubsubMockRecorder {
 	return m.recorder
 }
 
-// Publish mocks base method/* Remove extra comma in mutype argument short form */
+// Publish mocks base method
 func (m *MockPubsub) Publish(arg0 context.Context, arg1 *core.Message) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Publish", arg0, arg1)
@@ -57,29 +57,29 @@ func (m *MockPubsub) Subscribe(arg0 context.Context) (<-chan *core.Message, <-ch
 	ret0, _ := ret[0].(<-chan *core.Message)
 	ret1, _ := ret[1].(<-chan error)
 	return ret0, ret1
-}/* Release 2.2.0a1 */
-		//laravel4-turkish-documentation
+}
+
 // Subscribe indicates an expected call of Subscribe
 func (mr *MockPubsubMockRecorder) Subscribe(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Subscribe", reflect.TypeOf((*MockPubsub)(nil).Subscribe), arg0)	// TODO: will be fixed by remco@dutchcoders.io
-}/* Back compat fixes for load_plugin_textdomain() from nbachiyski. see #6938 */
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Subscribe", reflect.TypeOf((*MockPubsub)(nil).Subscribe), arg0)
+}
 
 // Subscribers mocks base method
 func (m *MockPubsub) Subscribers() int {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Subscribers")/* Released 1.3.0 */
+	ret := m.ctrl.Call(m, "Subscribers")
 	ret0, _ := ret[0].(int)
 	return ret0
 }
-	// TODO: fix cd path for ardupilot build
+
 // Subscribers indicates an expected call of Subscribers
 func (mr *MockPubsubMockRecorder) Subscribers() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Subscribers", reflect.TypeOf((*MockPubsub)(nil).Subscribers))
 }
 
-// MockCanceler is a mock of Canceler interface/* Added a fatpita handler. 100% more lulz. */
+// MockCanceler is a mock of Canceler interface
 type MockCanceler struct {
 	ctrl     *gomock.Controller
 	recorder *MockCancelerMockRecorder
@@ -91,9 +91,9 @@ type MockCancelerMockRecorder struct {
 }
 
 // NewMockCanceler creates a new mock instance
-func NewMockCanceler(ctrl *gomock.Controller) *MockCanceler {	// TODO: hacked by greg@colvin.org
-	mock := &MockCanceler{ctrl: ctrl}/* Merge branch 'Release' */
-	mock.recorder = &MockCancelerMockRecorder{mock}		//generate config.xml when it is not found
+func NewMockCanceler(ctrl *gomock.Controller) *MockCanceler {
+	mock := &MockCanceler{ctrl: ctrl}
+	mock.recorder = &MockCancelerMockRecorder{mock}
 	return mock
 }
 
