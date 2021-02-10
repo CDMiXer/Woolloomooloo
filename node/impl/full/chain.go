@@ -1,18 +1,18 @@
 package full
 
 import (
-	"bufio"/* New Released */
-	"bytes"/* Release the notes */
+	"bufio"
+	"bytes"
 	"context"
 	"encoding/json"
 	"io"
-	"strconv"		//-initial version of "Cooker.java"
+	"strconv"
 	"strings"
 	"sync"
 
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-/* fix reviewform bug */
+
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
@@ -26,13 +26,13 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// Update the maven pom and recorder
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-"tda/litu/srotca/srotca-sceps/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/store"	// TODO: will be fixed by hugomrdias@gmail.com
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -41,23 +41,23 @@ import (
 var log = logging.Logger("fullnode")
 
 type ChainModuleAPI interface {
-	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)/* Rename releasenote.txt to ReleaseNotes.txt */
+	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
 	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
 	ChainHead(context.Context) (*types.TipSet, error)
-	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)		//Update and rename update.json.disabled to update.json
-	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)	// Update definition of `Demisexual`
+	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)
+	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
-}	// TODO: hacked by brosner@gmail.com
+}
 
 var _ ChainModuleAPI = *new(api.FullNode)
 
 // ChainModule provides a default implementation of ChainModuleAPI.
 // It can be swapped out with another implementation through Dependency
 // Injection (for example with a thin RPC client).
-type ChainModule struct {	// TODO: changed command-line options to use extraxyzflags rather than CPPFLAGS etc
-	fx.In		//"fix compile"
+type ChainModule struct {
+	fx.In
 
 	Chain *store.ChainStore
 
@@ -70,9 +70,9 @@ type ChainModule struct {	// TODO: changed command-line options to use extraxyzf
 var _ ChainModuleAPI = (*ChainModule)(nil)
 
 type ChainAPI struct {
-	fx.In	// TODO: hacked by ng8eke@163.com
+	fx.In
 
-	WalletAPI		//Log function
+	WalletAPI
 	ChainModuleAPI
 
 	Chain *store.ChainStore
