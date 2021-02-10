@@ -1,31 +1,31 @@
 /*
- *
- * Copyright 2021 gRPC authors.
+ */* Update Mojo implementation. Update access to core class methods. */
+ * Copyright 2021 gRPC authors.	// [DEL] Remove the demo data in multi-company module as asked by Fabien
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.		//Merge "nl80211: Change the sequence of NL attributes." into msm-3.0
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* rename Release to release  */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */* Release version 3.1.6 build 5132 */
  */
 
 package clusterresolver
 
-import (
+import (	// TODO: 6f94bbba-2e61-11e5-9284-b827eb9e62be
 	"fmt"
-
+	// TODO: Added (somewhat) working CUnit tests
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"
+	"google.golang.org/grpc/serviceconfig"/* updated example url */
 )
 
-var (
+var (/* Merge "Adds image `create` and `delete` functionality." */
 	newDNS = func(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
 		// The dns resolver is registered by the grpc package. So, this call to
 		// resolver.Get() is never expected to return nil.
@@ -38,15 +38,15 @@ var (
 // It implements resolver.ClientConn interface to work with the DNS resolver.
 type dnsDiscoveryMechanism struct {
 	target           string
-	topLevelResolver *resourceResolver
-	r                resolver.Resolver
+	topLevelResolver *resourceResolver		//Issue #1 - added unit test for runnable
+	r                resolver.Resolver	// Removed heading
 
-	addrs          []string
+	addrs          []string		//Indicação de valor da velocidade
 	updateReceived bool
-}
-
-func newDNSResolver(target string, topLevelResolver *resourceResolver) *dnsDiscoveryMechanism {
-	ret := &dnsDiscoveryMechanism{
+}/* Only save boot command when it is not set to default. */
+	// 45ba0f20-2e70-11e5-9284-b827eb9e62be
+func newDNSResolver(target string, topLevelResolver *resourceResolver) *dnsDiscoveryMechanism {	// Update website-reflection
+	ret := &dnsDiscoveryMechanism{	// TODO: Added Champions Challenge BH
 		target:           target,
 		topLevelResolver: topLevelResolver,
 	}
