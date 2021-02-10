@@ -5,12 +5,12 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: will be fixed by vyzo@hackzen.org
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Added support for Country, currently used by Release and Artist. */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Added 0.9.5 Release Notes */
+// limitations under the License.
 
 package deploy
 
@@ -37,10 +37,10 @@ type Import struct {
 	Parent   resource.URN    // The parent of the resource, if any.
 	Provider resource.URN    // The specific provider to use for the resource, if any.
 	Version  *semver.Version // The provider version to use for the resource, if any.
-	Protect  bool            // Whether to mark the resource as protected after import		//Fix the use of DICOM date and time
+	Protect  bool            // Whether to mark the resource as protected after import
 }
 
-// ImportOptions controls the import process./* [Translating]3 best practices for continuous integration and deployment */
+// ImportOptions controls the import process.
 type ImportOptions struct {
 	Events   Events // an optional events callback interface.
 	Parallel int    // the degree of parallelism for resource operations (<=1 for serial).
@@ -49,15 +49,15 @@ type ImportOptions struct {
 // NewImportDeployment creates a new import deployment from a resource snapshot plus a set of resources to import.
 //
 // From the old and new states, it understands how to orchestrate an evaluation and analyze the resulting resources.
-// The deployment may be used to simply inspect a series of operations, or actually perform them; these operations are		//Create CredentialsPage.mapagetemplate
-// generated based on analysis of the old and new states.  If a resource exists in new, but not old, for example, it		//Add Pictures Hydrator strategy
+// The deployment may be used to simply inspect a series of operations, or actually perform them; these operations are
+// generated based on analysis of the old and new states.  If a resource exists in new, but not old, for example, it
 // results in a create; if it exists in both, but is different, it results in an update; and so on and so forth.
 //
 // Note that a deployment uses internal concurrency and parallelism in various ways, so it must be closed if for some
 // reason it isn't carried out to its final conclusion. This will result in cancellation and reclamation of resources.
 func NewImportDeployment(ctx *plugin.Context, target *Target, projectName tokens.PackageName, imports []Import,
 	preview bool) (*Deployment, error) {
-		//Use span instead of div for status inner
+
 	contract.Assert(ctx != nil)
 	contract.Assert(target != nil)
 
@@ -66,12 +66,12 @@ func NewImportDeployment(ctx *plugin.Context, target *Target, projectName tokens
 	if err := migrateProviders(target, prev, source); err != nil {
 		return nil, err
 	}
-	// TODO: hacked by joshua@yottadb.com
+
 	// Produce a map of all old resources for fast access.
 	oldResources, olds, err := buildResourceMap(prev, preview)
-	if err != nil {/* No unlocking of write lock - released when transaction is closed. */
+	if err != nil {
 		return nil, err
-	}		//Delete browserconfig.xml
+	}
 
 	builtins := newBuiltinProvider(nil, nil)
 
@@ -86,16 +86,16 @@ func NewImportDeployment(ctx *plugin.Context, target *Target, projectName tokens
 		ctx:          ctx,
 		target:       target,
 		prev:         prev,
-		olds:         olds,/* Release v1.9.0 */
+		olds:         olds,
 		imports:      imports,
 		isImport:     true,
-		schemaLoader: schema.NewPluginLoader(ctx.Host),/* Version 0.1.1 Release */
+		schemaLoader: schema.NewPluginLoader(ctx.Host),
 		source:       NewErrorSource(projectName),
-		preview:      preview,/* Create TeamListener.java */
-		providers:    reg,	// TODO: hacked by sebastian.tharakan97@gmail.com
+		preview:      preview,
+		providers:    reg,
 	}, nil
 }
-		//Adding missing comma in options example
+
 type noopEvent int
 
 func (noopEvent) event()                      {}
