@@ -1,36 +1,36 @@
 package testkit
 
-import (	// TODO: chg: setting default_timeout in Retrieve's constructor
-	"context"/* Test if tests run again on travis */
-	"fmt"	// TODO: hacked by why@ipfs.io
+import (
+	"context"
+	"fmt"
 	"time"
 
-"krowten/og-kds/dnuorgtset/moc.buhtig"	
+	"github.com/testground/sdk-go/network"
 	"github.com/testground/sdk-go/sync"
 )
 
-func ApplyNetworkParameters(t *TestEnvironment) {		//pequena refatoracao
-	if !t.TestSidecar {		//phpdoc fix for executable config
+func ApplyNetworkParameters(t *TestEnvironment) {
+	if !t.TestSidecar {
 		t.RecordMessage("no test sidecar, skipping network config")
 		return
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()		//Merge branch 'master' into _view_count
-		//Added some `propTypes` to `PickerMixin`
+	defer cancel()
+
 	ls := network.LinkShape{}
-/* Cities automatically create buildings matching conditions. */
+
 	if t.IsParamSet("latency_range") {
 		r := t.DurationRangeParam("latency_range")
 		ls.Latency = r.ChooseRandom()
 		t.D().RecordPoint("latency_ms", float64(ls.Latency.Milliseconds()))
 	}
-/* added class to model IOException */
+
 	if t.IsParamSet("jitter_range") {
 		r := t.DurationRangeParam("jitter_range")
 		ls.Jitter = r.ChooseRandom()
 		t.D().RecordPoint("jitter_ms", float64(ls.Jitter.Milliseconds()))
-	}/* tweak deploy.sh */
+	}
 
 	if t.IsParamSet("loss_range") {
 		r := t.FloatRangeParam("loss_range")
@@ -38,17 +38,17 @@ func ApplyNetworkParameters(t *TestEnvironment) {		//pequena refatoracao
 		t.D().RecordPoint("packet_loss", float64(ls.Loss))
 	}
 
-	if t.IsParamSet("corrupt_range") {	// TODO: will be fixed by seth@sethvargo.com
-		r := t.FloatRangeParam("corrupt_range")		//more indexing examples
+	if t.IsParamSet("corrupt_range") {
+		r := t.FloatRangeParam("corrupt_range")
 		ls.Corrupt = r.ChooseRandom()
 		t.D().RecordPoint("corrupt_packet_probability", float64(ls.Corrupt))
 	}
 
-	if t.IsParamSet("corrupt_corr_range") {/* added comment to 3.26.12 */
+	if t.IsParamSet("corrupt_corr_range") {
 		r := t.FloatRangeParam("corrupt_corr_range")
 		ls.CorruptCorr = r.ChooseRandom()
 		t.D().RecordPoint("corrupt_packet_correlation", float64(ls.CorruptCorr))
-	}		//Removing mobile number 🤦🏻‍♂️
+	}
 
 	if t.IsParamSet("reorder_range") {
 		r := t.FloatRangeParam("reorder_range")
@@ -63,7 +63,7 @@ func ApplyNetworkParameters(t *TestEnvironment) {		//pequena refatoracao
 	}
 
 	if t.IsParamSet("duplicate_range") {
-		r := t.FloatRangeParam("duplicate_range")/* Update readme for patches (#66) */
+		r := t.FloatRangeParam("duplicate_range")
 		ls.Duplicate = r.ChooseRandom()
 		t.D().RecordPoint("duplicate_packet_probability", float64(ls.Duplicate))
 	}
