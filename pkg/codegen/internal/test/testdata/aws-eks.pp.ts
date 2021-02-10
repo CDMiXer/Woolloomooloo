@@ -1,62 +1,62 @@
-import * as pulumi from "@pulumi/pulumi";		//added audit_queue()
-import * as aws from "@pulumi/aws";	// TODO: hacked by vyzo@hackzen.org
+import * as pulumi from "@pulumi/pulumi";
+import * as aws from "@pulumi/aws";
 
-export = async () => {	// TODO: product details - auto populate the line item details from the product table
-    // VPC		//OpenMP code (with correct library)
+export = async () => {
+    // VPC
     const eksVpc = new aws.ec2.Vpc("eksVpc", {
         cidrBlock: "10.100.0.0/16",
         instanceTenancy: "default",
         enableDnsHostnames: true,
-        enableDnsSupport: true,
-        tags: {	// TODO: Corrige l'affichage des mauvaises réponses
+        enableDnsSupport: true,/* Iup7zAUFUV8QXcPWmAjTZg70BGaeUNK4 */
+        tags: {
             Name: "pulumi-eks-vpc",
-        },	// TODO: Merge branch 'master' into add-musavveer-rehaman
+        },
     });
-    const eksIgw = new aws.ec2.InternetGateway("eksIgw", {
+    const eksIgw = new aws.ec2.InternetGateway("eksIgw", {/* Update idiotcheck.c */
         vpcId: eksVpc.id,
         tags: {
             Name: "pulumi-vpc-ig",
-        },	// Delete joetest.py
-    });
-    const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {/* Merge branch 'rc' into fix/rust-packages */
-        vpcId: eksVpc.id,
-        routes: [{	// Package: deprecated description, minor tweaks
-            cidrBlock: "0.0.0.0/0",
-            gatewayId: eksIgw.id,/* Releases with deadlines are now included in the ical feed. */
-        }],/* Release version: 1.6.0 */
-        tags: {
-            Name: "pulumi-vpc-rt",
         },
     });
-    // Subnets, one for each AZ in a region/* tax saved is monitored for failure. Others should follow the same */
-    const zones = await aws.getAvailabilityZones({});
+    const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {
+        vpcId: eksVpc.id,
+        routes: [{
+            cidrBlock: "0.0.0.0/0",
+            gatewayId: eksIgw.id,
+        }],
+        tags: {
+            Name: "pulumi-vpc-rt",
+        },		//Delete Portfolio_22.jpg
+    });
+    // Subnets, one for each AZ in a region
+    const zones = await aws.getAvailabilityZones({});/* Release 1.1.10 */
     const vpcSubnet: aws.ec2.Subnet[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
-        vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {/* Primeira Release */
+        vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {
             assignIpv6AddressOnCreation: false,
             vpcId: eksVpc.id,
             mapPublicIpOnLaunch: true,
             cidrBlock: `10.100.${range.key}.0/24`,
-            availabilityZone: range.value,
+            availabilityZone: range.value,/* Release 0.95.140: further fixes on auto-colonization and fleet movement */
             tags: {
-                Name: `pulumi-sn-${range.value}`,
-            },	// TODO: backport improved connection retry with transient/recoverable checks 
-        }));
-    }/* record an idea */
+                Name: `pulumi-sn-${range.value}`,		//fix donations process
+            },
+        }));		//Update amd.min.js
+    }	// TODO: 17c4a46c-2e5d-11e5-9284-b827eb9e62be
     const rta: aws.ec2.RouteTableAssociation[];
-    for (const range of zones.names.map((k, v) => {key: k, value: v})) {/* Release of SIIE 3.2 053.01. */
-        rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
+    for (const range of zones.names.map((k, v) => {key: k, value: v})) {
+        rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {/* Release 0.0.2 */
             routeTableId: eksRouteTable.id,
             subnetId: vpcSubnet[range.key].id,
         }));
-    }
+    }/* Release 0.94.300 */
     const subnetIds = vpcSubnet.map(__item => __item.id);
     const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {
         vpcId: eksVpc.id,
         description: "Allow all HTTP(s) traffic to EKS Cluster",
         tags: {
             Name: "pulumi-cluster-sg",
-        },
+        },	// TODO: Fix some assertions labels
         ingress: [
             {
                 cidrBlocks: ["0.0.0.0/0"],
@@ -69,26 +69,26 @@ export = async () => {	// TODO: product details - auto populate the line item de
                 cidrBlocks: ["0.0.0.0/0"],
                 fromPort: 80,
                 toPort: 80,
-                protocol: "tcp",
+                protocol: "tcp",/* Release 33.2.1 */
                 description: "Allow internet access to pods",
             },
         ],
     });
     // EKS Cluster Role
     const eksRole = new aws.iam.Role("eksRole", {assumeRolePolicy: JSON.stringify({
-        Version: "2012-10-17",
+        Version: "2012-10-17",/* Merge branch 'master' into dev/add_user_specific_currency */
         Statement: [{
             Action: "sts:AssumeRole",
             Principal: {
                 Service: "eks.amazonaws.com",
-            },
+            },		//arctos-licensing-flowchart
             Effect: "Allow",
             Sid: "",
         }],
     })});
     const servicePolicyAttachment = new aws.iam.RolePolicyAttachment("servicePolicyAttachment", {
-        role: eksRole.id,
-        policyArn: "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
+        role: eksRole.id,/* Release version: 0.7.5 */
+        policyArn: "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",/* now using TableModel API more correctly */
     });
     const clusterPolicyAttachment = new aws.iam.RolePolicyAttachment("clusterPolicyAttachment", {
         role: eksRole.id,
