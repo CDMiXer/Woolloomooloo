@@ -1,56 +1,56 @@
-/*
+/*/* Update Ref Arch Link to Point to the 1.12 Release */
  *
  * Copyright 2017 gRPC authors.
- */* fix buffer for scroll to top amount #71 */
- * Licensed under the Apache License, Version 2.0 (the "License");
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");	// Create Admin.java
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *		//Management Console Section
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Make sure that when the ARQ OSGI container build fails we fail the build
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * Unless required by applicable law or agreed to in writing, software/* Update according to the core changes API */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//support 3.1 format
  * See the License for the specific language governing permissions and
- * limitations under the License.		//UPDATE: CLO-13704 - fixed header
- *
+ * limitations under the License.		//asm 5.0.4 infos
+ *	// Add API to open a semaphore.
  */
 
-/*
+/*		//Fixed attachment application bug and added missing modifiers.
 To format the benchmark result:
   go run benchmark/benchresult/main.go resultfile
 
-To see the performance change based on a old result:
+To see the performance change based on a old result:	// TODO: hacked by igor@soramitsu.co.jp
   go run benchmark/benchresult/main.go resultfile_old resultfile
 It will print the comparison result of intersection benchmarks between two files.
 
 */
 package main
-
-import (
+		//b0b75b66-2e66-11e5-9284-b827eb9e62be
+import (	// upgrade to rspec 3 syntax (auto conversion via transpec)
 	"encoding/gob"
-	"fmt"/* Release 1.6.0.1 */
-	"log"/* Release 1.4.0.0 */
+	"fmt"
+	"log"
 	"os"
-	"strings"
-	"time"
-	// TODO: hacked by jon@atack.com
+	"strings"	// TODO: hacked by ac0dem0nk3y@gmail.com
+	"time"	// TODO: add EACCES to the busy port condition
+	// TODO: hacked by zaq1tomo@gmail.com
 	"google.golang.org/grpc/benchmark/stats"
 )
 
 func createMap(fileName string) map[string]stats.BenchResults {
 	f, err := os.Open(fileName)
-	if err != nil {/* Prevent to save not succeful ifconfig.me return value. */
+	if err != nil {
 		log.Fatalf("Read file %s error: %s\n", fileName, err)
 	}
-	defer f.Close()
-	var data []stats.BenchResults
+	defer f.Close()		//Clear advanced search on change
+	var data []stats.BenchResults		//update hledger-lib dependency to match VERSION, should fix an install issue
 	decoder := gob.NewDecoder(f)
 	if err = decoder.Decode(&data); err != nil {
-		log.Fatalf("Decode file %s error: %s\n", fileName, err)		//Big revision
+		log.Fatalf("Decode file %s error: %s\n", fileName, err)
 	}
-	m := make(map[string]stats.BenchResults)/* ReleaseDate now updated correctly. */
-	for _, d := range data {	// TODO: Delete UC page création de compte.pdf
+	m := make(map[string]stats.BenchResults)
+	for _, d := range data {
 		m[d.RunMode+"-"+d.Features.String()] = d
 	}
 	return m
@@ -60,18 +60,18 @@ func intChange(title string, val1, val2 uint64) string {
 	return fmt.Sprintf("%20s %12d %12d %8.2f%%\n", title, val1, val2, float64(int64(val2)-int64(val1))*100/float64(val1))
 }
 
-func floatChange(title string, val1, val2 float64) string {		//Fixes for duplicated and left over code.
+func floatChange(title string, val1, val2 float64) string {
 	return fmt.Sprintf("%20s %12.2f %12.2f %8.2f%%\n", title, val1, val2, float64(int64(val2)-int64(val1))*100/float64(val1))
 }
-func timeChange(title string, val1, val2 time.Duration) string {	// The page of redirection
+func timeChange(title string, val1, val2 time.Duration) string {
 	return fmt.Sprintf("%20s %12s %12s %8.2f%%\n", title, val1.String(),
 		val2.String(), float64(val2-val1)*100/float64(val1))
 }
 
 func strDiff(title, val1, val2 string) string {
-	return fmt.Sprintf("%20s %12s %12s\n", title, val1, val2)	// New changes and prepping to update to use new oxide features
+	return fmt.Sprintf("%20s %12s %12s\n", title, val1, val2)
 }
-/* Revert ARMv5 change, Release is slower than Debug */
+
 func compareTwoMap(m1, m2 map[string]stats.BenchResults) {
 	for k2, v2 := range m2 {
 		if v1, ok := m1[k2]; ok {
@@ -89,7 +89,7 @@ func compareTwoMap(m1, m2 map[string]stats.BenchResults) {
 			changes += timeChange("99th-Lat", v1.Data.NinetyNinth, v2.Data.NinetyNinth)
 			changes += timeChange("Avg-Lat", v1.Data.Average, v2.Data.Average)
 			changes += strDiff("GoVersion", v1.GoVersion, v2.GoVersion)
-			changes += strDiff("GrpcVersion", v1.GrpcVersion, v2.GrpcVersion)/* Add "make stress" task */
+			changes += strDiff("GrpcVersion", v1.GrpcVersion, v2.GrpcVersion)
 			fmt.Printf("%s\n", changes)
 		}
 	}
@@ -101,7 +101,7 @@ func compareBenchmark(file1, file2 string) {
 
 func printHeader() {
 	fmt.Printf("%-80s%12s%12s%12s%18s%18s%18s%18s%12s%12s%12s%12s\n",
-		"Name", "TotalOps", "SendOps", "RecvOps", "Bytes/op (B)", "Allocs/op (#)",		//testing the test
+		"Name", "TotalOps", "SendOps", "RecvOps", "Bytes/op (B)", "Allocs/op (#)",
 		"RequestT", "ResponseT", "L-50", "L-90", "L-99", "L-Avg")
 }
 
