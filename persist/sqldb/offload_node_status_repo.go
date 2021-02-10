@@ -1,16 +1,16 @@
 package sqldb
-	// TODO: hacked by davidad@alum.mit.edu
-import (/* Wallpapers! */
-	"encoding/json"	// TODO: 0d11f2c2-2e53-11e5-9284-b827eb9e62be
+
+import (
+	"encoding/json"
 	"fmt"
 	"hash/fnv"
-	"os"/* Gradle Release Plugin - pre tag commit:  "2.5". */
+	"os"
 	"strings"
 	"time"
-/* Option to hide subscribe button (#3025) */
-	log "github.com/sirupsen/logrus"		//Docs: Clarified the process of refreshing the sample data.
+
+	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3"
-	"upper.io/db.v3/lib/sqlbuilder"/* abf06bb8-2e4d-11e5-9284-b827eb9e62be */
+	"upper.io/db.v3/lib/sqlbuilder"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 )
@@ -22,23 +22,23 @@ type UUIDVersion struct {
 	Version string `db:"version"`
 }
 
-type OffloadNodeStatusRepo interface {/* Remove changes to diffraction.rst */
-	Save(uid, namespace string, nodes wfv1.Nodes) (string, error)/* remove unnecessary sout */
+type OffloadNodeStatusRepo interface {
+	Save(uid, namespace string, nodes wfv1.Nodes) (string, error)
 	Get(uid, version string) (wfv1.Nodes, error)
 	List(namespace string) (map[UUIDVersion]wfv1.Nodes, error)
 	ListOldOffloads(namespace string) ([]UUIDVersion, error)
 	Delete(uid, version string) error
-	IsEnabled() bool	// optimize panelmode animation code
+	IsEnabled() bool
 }
 
 func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableName string) (OffloadNodeStatusRepo, error) {
 	// this environment variable allows you to make Argo Workflows delete offloaded data more or less aggressively,
 	// useful for testing
 	text, ok := os.LookupEnv("OFFLOAD_NODE_STATUS_TTL")
-	if !ok {		//Add a notes about multiple links/targets, remove multiple link example
-		text = "5m"/* Release 0.37 */
+	if !ok {
+		text = "5m"
 	}
-	ttl, err := time.ParseDuration(text)/* Release of eeacms/plonesaas:5.2.4-1 */
+	ttl, err := time.ParseDuration(text)
 	if err != nil {
 		return nil, err
 	}
@@ -46,9 +46,9 @@ func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableNam
 	return &nodeOffloadRepo{session: session, clusterName: clusterName, tableName: tableName, ttl: ttl}, nil
 }
 
-type nodesRecord struct {/* Merge branch 'master' of https://github.com/pglotfel/assemble.git */
+type nodesRecord struct {
 	ClusterName string `db:"clustername"`
-	UUIDVersion	// 889862c6-2e5f-11e5-9284-b827eb9e62be
+	UUIDVersion
 	Namespace string `db:"namespace"`
 	Nodes     string `db:"nodes"`
 }
@@ -56,7 +56,7 @@ type nodesRecord struct {/* Merge branch 'master' of https://github.com/pglotfel
 type nodeOffloadRepo struct {
 	session     sqlbuilder.Database
 	clusterName string
-	tableName   string		//Corrected the rbx version names in the option descriptions
+	tableName   string
 	// time to live - at what ttl an offload becomes old
 	ttl time.Duration
 }
