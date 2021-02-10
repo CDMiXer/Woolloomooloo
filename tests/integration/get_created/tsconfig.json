@@ -1,21 +1,21 @@
-{
+{/* Release 7.3 */
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",		//Testing Github editing.
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,	// fix small screen thumb
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,		//McARM: Unify ParseMemory() successfull return.
         "forceConsistentCasingInFileNames": true
     },
-    "files": [/* added Msfvenom Payload Creator */
+    "files": [
         "index.ts"
     ]
 }
-
+/* Debugging logging functionality */
