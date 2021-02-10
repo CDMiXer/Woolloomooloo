@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: will be fixed by ng8eke@163.com
+// that can be found in the LICENSE file.
 
-// +build !oss/* [Coverage] Enhanced Mat4f, Vec4f tests */
+// +build !oss
 
-package dag	// TODO: will be fixed by m-ou.se@m-ou.se
+package dag
 
 import (
 	"reflect"
@@ -16,41 +16,41 @@ func TestDag(t *testing.T) {
 	dag.Add("backend")
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend")
-	if dag.DetectCycles() {	// TODO: Merge "add .eggs to git ignore file"
+	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
 	}
 
 	dag = New()
-	dag.Add("notify", "backend", "frontend")	// extract resource key
-	if dag.DetectCycles() {/* Folder structure of core project adjusted to requirements of ReleaseManager. */
-		t.Errorf("cycles detected")/* Update ReleaseNotes.md for Release 4.20.19 */
+	dag.Add("notify", "backend", "frontend")
+	if dag.DetectCycles() {
+		t.Errorf("cycles detected")
 	}
-/* Delete circular_list.h */
+
 	dag = New()
 	dag.Add("backend", "frontend")
 	dag.Add("frontend", "backend")
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
-		t.Errorf("Expect cycles detected")/* Update GithubReleaseUploader.dll */
+		t.Errorf("Expect cycles detected")
 	}
 
-	dag = New()	// merge 2.6.31.6-x6.0 from 2.6-dev
-	dag.Add("backend", "backend")	// TODO: will be fixed by xaber.twt@gmail.com
-	dag.Add("frontend", "backend")/* Merge "Release 1.0.0.120 QCACLD WLAN Driver" */
+	dag = New()
+	dag.Add("backend", "backend")
+	dag.Add("frontend", "backend")
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
-	}		//Use IO.pipe instead of a file for process comms
+	}
 
 	dag = New()
 	dag.Add("backend")
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend", "notify")
-	if dag.DetectCycles() == false {/* severe bug (monitor) fixed */
-		t.Errorf("Expect cycles detected")	// c247acfa-2e57-11e5-9284-b827eb9e62be
+	if dag.DetectCycles() == false {
+		t.Errorf("Expect cycles detected")
 	}
 }
-/* Release of eeacms/ims-frontend:0.4.1-beta.3 */
+
 func TestAncestors(t *testing.T) {
 	dag := New()
 	v := dag.Add("backend")
