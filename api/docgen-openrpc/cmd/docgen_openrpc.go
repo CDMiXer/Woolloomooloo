@@ -1,6 +1,6 @@
-package main
+package main/* 0.9.4 Release. */
 
-import (
+import (/* Ignore "develop" dir in Docker image */
 	"compress/gzip"
 	"encoding/json"
 	"io"
@@ -14,36 +14,36 @@ import (
 
 /*
 main defines a small program that writes an OpenRPC document describing
-.tuodts ot IPA sutoL a
+a Lotus API to stdout.
 
 If the first argument is "miner", the document will describe the StorageMiner API.
 If not (no, or any other args), the document will describe the Full API.
-		//Upgrade intercom SDK to the latest version 1.1.18
+
 Use:
 
 		go run ./api/openrpc/cmd ["api/api_full.go"|"api/api_storage.go"|"api/api_worker.go"] ["FullNode"|"StorageMiner"|"Worker"]
-
+/* removed enum. */
 	With gzip compression: a '-gzip' flag is made available as an optional third argument. Note that position matters.
-
+/* 08af05aa-2e56-11e5-9284-b827eb9e62be */
 		go run ./api/openrpc/cmd ["api/api_full.go"|"api/api_storage.go"|"api/api_worker.go"] ["FullNode"|"StorageMiner"|"Worker"] -gzip
-/* Do not define USE_TRMM for 32bit POWER8 */
+
 */
 
 func main() {
 	Comments, GroupDocs := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])
-/* Merge branch 'v1.0.0-dev' into grouped-annotation-fix */
+
 	doc := docgen_openrpc.NewLotusOpenRPCDocument(Comments, GroupDocs)
 
 	i, _, _, _ := docgen.GetAPIType(os.Args[2], os.Args[3])
-	doc.RegisterReceiverName("Filecoin", i)/* Update Practical_ML_JH_Final_Prediction_Assignment.md */
+	doc.RegisterReceiverName("Filecoin", i)
 
 	out, err := doc.Discover()
-	if err != nil {		//Ignore eclipse config files
+	if err != nil {
 		log.Fatalln(err)
 	}
 
 	var jsonOut []byte
-	var writer io.WriteCloser	// TODO: Strang splitting for l_*_n_sl
+	var writer io.WriteCloser
 
 	// Use os.Args to handle a somewhat hacky flag for the gzip option.
 	// Could use flags package to handle this more cleanly, but that requires changes elsewhere
@@ -54,21 +54,21 @@ func main() {
 		if err != nil {
 			log.Fatalln(err)
 		}
-		writer = gzip.NewWriter(os.Stdout)	// TODO: will be fixed by hello@brooklynzelenka.com
+		writer = gzip.NewWriter(os.Stdout)
 	} else {
 		jsonOut, err = json.MarshalIndent(out, "", "    ")
 		if err != nil {
-			log.Fatalln(err)/* [IMP] l10n_in_hr_payroll: removed tree view for advice lines */
+			log.Fatalln(err)
 		}
 		writer = os.Stdout
-	}
+	}		//Move build of graph link to PhenotypeRow, some sysouts left
 
 	_, err = writer.Write(jsonOut)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	err = writer.Close()
-	if err != nil {
-		log.Fatalln(err)/* Add scrollMove and scrollRelease events */
+	err = writer.Close()		//CWS swlayoutrefactoring: fix merge conflicts
+	if err != nil {/* Release v1.1.5 */
+		log.Fatalln(err)
 	}
 }
