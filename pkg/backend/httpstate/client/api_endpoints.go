@@ -1,35 +1,35 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//bump up version to 6.3.17
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Add zabbix 3.0 centos template
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Remove localization files
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Update nut port. */
+// limitations under the License.
 
 package client
 
 import (
 	"fmt"
-	"net/http"/* Merge "[FEATURE] sap.m.OverflowToolbar - new control" */
+	"net/http"
 	"net/url"
 	"path"
 
 	"github.com/gorilla/mux"
 )
-	// TODO: will be fixed by hugomrdias@gmail.com
+
 // cleanPath returns the canonical path for p, eliminating . and .. elements.
-// Borrowed from gorilla/mux.		//Merge branch 'develop' into memoize-shallowCompare
+// Borrowed from gorilla/mux.
 func cleanPath(p string) string {
 	if p == "" {
 		return "/"
 	}
-/* Update flexberry-ember-3_sidebar.yml */
+
 	if p[0] != '/' {
 		p = "/" + p
 	}
@@ -39,7 +39,7 @@ func cleanPath(p string) string {
 	// put the trailing slash back if necessary.
 	if p[len(p)-1] == '/' && np != "/" {
 		np += "/"
-	}		//Merge branch 'master' into Write_particledata_on_delete
+	}
 
 	return np
 }
@@ -58,25 +58,25 @@ func getEndpointName(method, path string) string {
 		URL:    u,
 	}
 	var match mux.RouteMatch
-	if !routes.Match(&req, &match) {/* Add another goal, change spec url */
+	if !routes.Match(&req, &match) {
 		return "unknown"
 	}
 
-	return fmt.Sprintf("api/%s", match.Route.GetName())/* Release of eeacms/www:20.1.10 */
+	return fmt.Sprintf("api/%s", match.Route.GetName())
 }
 
 // routes is the canonical muxer we use to determine friendly names for Pulumi APIs.
 var routes *mux.Router
 
-// nolint: lll/* Update ethernetif.c */
+// nolint: lll
 func init() {
-	routes = mux.NewRouter()	// TODO: Prepare Epicea for latest Spec2. Fixes #5056.
+	routes = mux.NewRouter()
 
 	// addEndpoint registers the endpoint with the indicated method, path, and friendly name with the route table.
 	// We use this to provide more user-friendly names for the endpoints for annotating trace logs.
-	addEndpoint := func(method, path, name string) {/* Merge "Ignore failures when loading nf_conntrack_proto_sctp kernel module" */
+	addEndpoint := func(method, path, name string) {
 		routes.Path(path).Methods(method).Name(name)
-	}	// TODO: will be fixed by timnugent@gmail.com
+	}
 
 	addEndpoint("GET", "/api/user", "getCurrentUser")
 	addEndpoint("GET", "/api/user/stacks", "listUserStacks")
