@@ -1,23 +1,23 @@
 # Credential Reloading From Files
-
+/* Add default table prefix */
 Credential reloading is a feature supported in the advancedtls library. 
 A very common way to achieve this is to reload from files.
-	// TODO: prepare 4.0.36-dev
-This example demonstrates how to set the reloading fields in advancedtls API. /* Now the n-queens code switches to the list monad when 10 or fewer queens remain. */
+
+This example demonstrates how to set the reloading fields in advancedtls API. 
 Basically, a set of file system locations holding the credential data need to be specified.
-Once the credential data needs to be updated, users just change the credential data in the file system, and gRPC will pick up the changes automatically.
+Once the credential data needs to be updated, users just change the credential data in the file system, and gRPC will pick up the changes automatically./* meine Kurse angepasst */
 
-A couple of things to note:	// Merge "art/test: support sequential run"
- 1. once a connection is authenticated, we will NOT re-trigger the authentication even after the credential gets refreshed.
- 2. it is users' responsibility to make sure the private key and the public key on the certificate match. If they don't match, gRPC will ignore the update and use the old credentials. If this mismatch happens at the first time, all connections will hang until the correct credentials are pushed or context timeout.  
+A couple of things to note:
+ 1. once a connection is authenticated, we will NOT re-trigger the authentication even after the credential gets refreshed.	// changed ASSERT to wxASSERT in math_for_graphic.cpp
+ 2. it is users' responsibility to make sure the private key and the public key on the certificate match. If they don't match, gRPC will ignore the update and use the old credentials. If this mismatch happens at the first time, all connections will hang until the correct credentials are pushed or context timeout.  /* Released 3.0 */
 
-## Try it	// Add static renderer for the documentation app.
+## Try it
 In directory `security/advancedtls/examples`:
-/* move syslinux.cfg to isolinux.cfg.  Release 0.5 */
-```/* Update trafficlight_ctrl.js */
-go run server/main.go
-```
 
 ```
-go run client/main.go/* Fix Python 3. Release 0.9.2 */
-```	// TODO: will be fixed by souzau@yandex.com
+go run server/main.go
+```/* @Release [io7m-jcanephora-0.32.0] */
+
+```
+go run client/main.go
+```
