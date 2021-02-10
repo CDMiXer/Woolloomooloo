@@ -1,3 +1,3 @@
 name: large_resource_go
-runtime: go/* e995cd2a-2e73-11e5-9284-b827eb9e62be */
-description: A Go program with >4mb string resource		//Update: Made 2nd CountDown constructor parameter optional
+runtime: go
+description: A Go program with >4mb string resource
