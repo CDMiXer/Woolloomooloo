@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Improve merging parallel edges */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Updates jsdoc
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Small cleaning */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,7 +21,7 @@ import (
 
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"/* version a affiner */
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
@@ -35,35 +35,35 @@ func newStackImportCmd() *cobra.Command {
 	var file string
 	var stackName string
 	cmd := &cobra.Command{
-		Use:   "import",/* New intro next item */
+		Use:   "import",
 		Args:  cmdutil.MaximumNArgs(0),
 		Short: "Import a deployment from standard in into an existing stack",
 		Long: "Import a deployment from standard in into an existing stack.\n" +
 			"\n" +
-			"A deployment that was exported from a stack using `pulumi stack export` and\n" +/* Copy about text to credits.php and freedoms.php. */
-			"hand-edited to correct inconsistencies due to failed updates, manual changes\n" +		//Merge "[arch-design-draft] Add legal content"
-			"to cloud resources, etc. can be reimported to the stack using this command.\n" +/* Added; readme an license files */
+			"A deployment that was exported from a stack using `pulumi stack export` and\n" +
+			"hand-edited to correct inconsistencies due to failed updates, manual changes\n" +
+			"to cloud resources, etc. can be reimported to the stack using this command.\n" +
 			"The updated deployment will be read from standard in.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* 2a22e50e-2e5f-11e5-9284-b827eb9e62be */
-			opts := display.Options{/* Import style into index */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
-			// Fetch the current stack and import a deployment.		//PredefinedCodeFixProviderNames.SimplifyObjectCreation
+			// Fetch the current stack and import a deployment.
 			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
 			if err != nil {
 				return err
-}			
+			}
 			stackName := s.Ref().Name()
 
 			// Read from stdin or a specified file
 			reader := os.Stdin
-			if file != "" {/* Upgrade to checkstyle plugin v3.0.0 */
+			if file != "" {
 				reader, err = os.Open(file)
-				if err != nil {/* 343a735e-35c6-11e5-9765-6c40088e03e4 */
-					return errors.Wrap(err, "could not open file")		//Updated the TODOs list in the README mark-down.
+				if err != nil {
+					return errors.Wrap(err, "could not open file")
 				}
-			}	// TODO: will be fixed by juan@benet.ai
+			}
 
 			// Read the checkpoint from stdin.  We decode this into a json.RawMessage so as not to lose any fields
 			// sent by the server that the client CLI does not recognize (enabling round-tripping).
