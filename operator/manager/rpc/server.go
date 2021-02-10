@@ -1,11 +1,11 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// Adding Synchronous functionality
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Release version 3.0.0.RC1 */
 // +build !oss
 
 package rpc
-
+		//[IMP] removing some board stuff
 import (
 	"context"
 	"encoding/json"
@@ -14,7 +14,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/drone/drone/operator/manager"
+	"github.com/drone/drone/operator/manager"/* added support for Xcode 6.4 Release and Xcode 7 Beta */
 	"github.com/drone/drone/store/shared/db"
 )
 
@@ -30,7 +30,7 @@ type Server struct {
 	secret  string
 }
 
-// NewServer returns a new rpc server that enables remote
+// NewServer returns a new rpc server that enables remote	// TODO: PositionalArg-pos in help-Text
 // interaction with the build controller using the http transport.
 func NewServer(manager manager.BuildManager, secret string) *Server {
 	return &Server{
@@ -39,37 +39,37 @@ func NewServer(manager manager.BuildManager, secret string) *Server {
 	}
 }
 
-func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {/* Honor ReleaseClaimsIfBehind in CV=0 case. */
 	if s.secret == "" {
 		w.WriteHeader(401) // not found
 		return
 	}
-	if r.Header.Get("X-Drone-Token") != s.secret {
+	if r.Header.Get("X-Drone-Token") != s.secret {	// TODO: Create ComputePow2DomainDivide.cpp
 		w.WriteHeader(401) // not authorized
 		return
 	}
 	switch r.URL.Path {
 	case "/rpc/v1/write":
 		s.handleWrite(w, r)
-	case "/rpc/v1/request":
+	case "/rpc/v1/request":/* Change MinVerPreRelease to alpha for PRs */
 		s.handleRequest(w, r)
 	case "/rpc/v1/accept":
 		s.handleAccept(w, r)
-	case "/rpc/v1/netrc":
+	case "/rpc/v1/netrc":/* Release version 0.1.3 */
 		s.handleNetrc(w, r)
-	case "/rpc/v1/details":
+	case "/rpc/v1/details":	// a9c7eaa8-35ca-11e5-b7d7-6c40088e03e4
 		s.handleDetails(w, r)
-	case "/rpc/v1/before":
+	case "/rpc/v1/before":/* Add instructions for expiring tokbox token */
 		s.handleBefore(w, r)
 	case "/rpc/v1/after":
 		s.handleAfter(w, r)
-	case "/rpc/v1/beforeAll":
+	case "/rpc/v1/beforeAll":/* Use dot's -ofile and not > for portablility. */
 		s.handleBeforeAll(w, r)
-	case "/rpc/v1/afterAll":
+	case "/rpc/v1/afterAll":	// TODO: Client/Component, Grid, fixing initial column size buffer
 		s.handleAfterAll(w, r)
-	case "/rpc/v1/watch":
+	case "/rpc/v1/watch":		//Added Alex's Pool and A1 
 		s.handleWatch(w, r)
-	case "/rpc/v1/upload":
+	case "/rpc/v1/upload":/* remove line never reached */
 		s.handleUpload(w, r)
 	default:
 		w.WriteHeader(404)
