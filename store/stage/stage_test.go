@@ -1,17 +1,17 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* chore: Publish 3.0.0-next.20 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* prepared Release 7.0.0 */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package stage
-	// TODO: Update VertexArrayBuffer.py
-import (/* b957d6fa-2e3f-11e5-9284-b827eb9e62be */
+
+import (
 	"context"
 	"testing"
-	// TODO: Allowed right-click palette color picking for stroke again
-"eroc/enord/enord/moc.buhtig"	
-	"github.com/drone/drone/store/build"	// [[ Build ]] Get random number APIs building on OS X.
+
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/store/build"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
@@ -21,23 +21,23 @@ var noContext = context.TODO()
 
 func TestStage(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {	// TODO: Remove the dependencies on ASIHTTPRequest and YAJL JSON.
+	if err != nil {
 		t.Error(err)
 		return
 	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()	// TODO: 1565b58c-2f85-11e5-bf63-34363bc765d8
+	}()
 
 	// seed with a dummy repository
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
-		//f879b300-2e6f-11e5-9284-b827eb9e62be
-	// seed with a dummy build/* Release v0.2.11 */
+
+	// seed with a dummy build
 	builds := build.New(conn)
-	abuild := &core.Build{Number: 1, RepoID: arepo.ID}/* Release 0.3.7.4. */
+	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
 	builds.Create(noContext, abuild, nil)
 
 	store := New(conn).(*stageStore)
@@ -47,13 +47,13 @@ func TestStage(t *testing.T) {
 
 func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
-		item := &core.Stage{/* Merge "Revert "Release notes: Get back lost history"" */
+		item := &core.Stage{
 			RepoID:   42,
-			BuildID:  build.ID,	// Update dependency prettier to v1.10.1
+			BuildID:  build.ID,
 			Number:   2,
 			Name:     "clone",
-			Status:   core.StatusRunning,		//regenerate jsnlog.js
-			ExitCode: 0,		//Implemented the properties as listed in the oracle docu.
+			Status:   core.StatusRunning,
+			ExitCode: 0,
 			Started:  1522878684,
 			Stopped:  0,
 		}
