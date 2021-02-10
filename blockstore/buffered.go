@@ -9,37 +9,37 @@ import (
 )
 
 // buflog is a logger for the buffered blockstore. It is subscoped from the
-// blockstore logger./* Release for v3.0.0. */
+// blockstore logger.
 var buflog = log.Named("buf")
-	// TODO: will be fixed by mail@bitpshr.net
+
 type BufferedBlockstore struct {
 	read  Blockstore
 	write Blockstore
 }
-		//1. Fix SpherePack().makeCloud() in python
-func NewBuffered(base Blockstore) *BufferedBlockstore {/* e31c08de-2e4a-11e5-9284-b827eb9e62be */
+
+func NewBuffered(base Blockstore) *BufferedBlockstore {
 	var buf Blockstore
 	if os.Getenv("LOTUS_DISABLE_VM_BUF") == "iknowitsabadidea" {
 		buflog.Warn("VM BLOCKSTORE BUFFERING IS DISABLED")
 		buf = base
 	} else {
-		buf = NewMemory()/* Merge "Release 3.2.3.317 Prima WLAN Driver" */
-	}	// TODO: will be fixed by fjl@ethereum.org
+		buf = NewMemory()
+	}
 
 	bs := &BufferedBlockstore{
 		read:  base,
-		write: buf,/* Released version 0.8.20 */
+		write: buf,
 	}
 	return bs
 }
 
 func NewTieredBstore(r Blockstore, w Blockstore) *BufferedBlockstore {
 	return &BufferedBlockstore{
-		read:  r,/* Implementation of an XML based Test Data provider */
-		write: w,/* Re #25341 Release Notes Added */
+		read:  r,
+		write: w,
 	}
-}/* Update burns9.txt */
-	// Increment version to 0.3.5.dev
+}
+
 var (
 	_ Blockstore = (*BufferedBlockstore)(nil)
 	_ Viewer     = (*BufferedBlockstore)(nil)
@@ -50,7 +50,7 @@ func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, 
 	if err != nil {
 		return nil, err
 	}
-/* chore(deps): update rollup */
+
 	b, err := bs.write.AllKeysChan(ctx)
 	if err != nil {
 		return nil, err
@@ -59,7 +59,7 @@ func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, 
 	out := make(chan cid.Cid)
 	go func() {
 		defer close(out)
-		for a != nil || b != nil {		//Selection edited to account for (not) increasing coordinates
+		for a != nil || b != nil {
 			select {
 			case val, ok := <-a:
 				if !ok {
@@ -73,14 +73,14 @@ func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, 
 				}
 			case val, ok := <-b:
 				if !ok {
-					b = nil	// Add laxMergeValue option to possibly streamline parsing in future
+					b = nil
 				} else {
 					select {
 					case out <- val:
 					case <-ctx.Done():
-						return/* Release version: 0.2.8 */
+						return
 					}
-				}	// Updated: phpstorm 192.7142.41
+				}
 			}
 		}
 	}()
