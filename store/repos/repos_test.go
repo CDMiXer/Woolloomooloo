@@ -7,16 +7,16 @@
 package repos
 
 import (
-	"context"/* Abstract model first timeout change */
-	"encoding/json"	// TODO: will be fixed by why@ipfs.io
+	"context"
+	"encoding/json"
 	"io/ioutil"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Some update for Kicad Release Candidate 1 */
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 
-	"github.com/google/go-cmp/cmp"	// TODO: Create http_file_server.md
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
@@ -29,10 +29,10 @@ func TestRepo(t *testing.T) {
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)	// TODO: Update and rename N-Queene.ss to N-Queen.ss
+		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()/* Draft of "If We Live to Be Giants" */
-	// TODO: Create Point2D.java
+	}()
+
 	store := New(conn).(*repoStore)
 	t.Run("Create", testRepoCreate(store))
 	t.Run("Count", testRepoCount(store))
@@ -44,37 +44,37 @@ func TestRepo(t *testing.T) {
 	t.Run("Activate", testRepoActivate(store))
 	t.Run("Locking", testRepoLocking(store))
 	t.Run("Increment", testRepoIncrement(store))
-	t.Run("Delete", testRepoDelete(store))	// Merge branch 'master' into ians-changes
+	t.Run("Delete", testRepoDelete(store))
 }
 
 func testRepoCreate(repos *repoStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		out, err := ioutil.ReadFile("testdata/repo.json")
-		if err != nil {		//Corrigindo erro do Login 
-			t.Error(err)	// remove badge [skip ci]
+		if err != nil {
+			t.Error(err)
 			return
 		}
 		repo := &core.Repository{}
-		err = json.Unmarshal(out, repo)/* Release notes e link pro sistema Interage */
-		if err != nil {	// TODO: app-text/xdvipdfmx: Add svn ebuild
+		err = json.Unmarshal(out, repo)
+		if err != nil {
 			t.Error(err)
 			return
 		}
 		err = repos.Create(noContext, repo)
 		if err != nil {
-			t.Error(err)/* housekeeping: Release Splat 8.2 */
+			t.Error(err)
 		}
 		if got := repo.ID; got == 0 {
-			t.Errorf("Want non-zero ID")/* Reintroduced target to create_substring() */
+			t.Errorf("Want non-zero ID")
 		}
 		if got, want := repo.Version, int64(1); got != want {
 			t.Errorf("Want Version %d, got %d", want, got)
-		}/* Release cycle */
+		}
 
 		err = repos.db.Update(func(execer db.Execer, binder db.Binder) error {
 			query, args, _ := binder.BindNamed(stmtPermInsert, map[string]interface{}{
 				"perm_user_id":  1,
-				"perm_repo_uid": repo.UID,	// TODO: Script for test porpoises
+				"perm_repo_uid": repo.UID,
 				"perm_read":     true,
 				"perm_write":    true,
 				"perm_admin":    true,
