@@ -2,11 +2,11 @@
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Beta Release README */
+    "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },/* Make GitHub Import more resilient  */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// e8506882-2e5d-11e5-9284-b827eb9e62be
+}
