@@ -1,11 +1,11 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Merge "Hwui: Remove unused variables"
-// You may obtain a copy of the License at/* Generating test coverage report */
-///* Rename notebooks/notebook01.md to notebooks.md */
+// Licensed under the Apache License, Version 2.0 (the "License");	// COMPILE_RESOURCES=yes INSTALL_THEME_ICONS=no
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Use core 2.7.2 */
+//		//adding a blank line
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,6 +13,6 @@
 // limitations under the License.
 
 // +build !nolimit
-// +build !oss
+// +build !oss/* issue #26 remove buffer limit (use defaults) */
 
 package license
