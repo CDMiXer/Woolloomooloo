@@ -3,13 +3,13 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
+//	// TODO: will be fixed by magik6k@gmail.com
+//     http://www.apache.org/licenses/LICENSE-2.0/* Fix links to demo */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: will be fixed by sbrichards@gmail.com
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
@@ -22,13 +22,13 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+	"github.com/pulumi/pulumi/pkg/v2/codegen"/* Release v0.0.2 'allow for inline styles, fix duration bug' */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Added log when capped flag is enabled for a new collection */
 )
 
 // DocLanguageHelper is the NodeJS-specific implementation of the DocLanguageHelper.
 type DocLanguageHelper struct{}
-
+	// TODO: Fixed Misspelling
 var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 
 // GetDocLinkForPulumiType returns the NodeJS API doc link for a Pulumi type.
@@ -37,27 +37,27 @@ func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName
 	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/pulumi/#%s", typeName)
 }
 
-// GetDocLinkForResourceType returns the NodeJS API doc for a type belonging to a resource provider.
+// GetDocLinkForResourceType returns the NodeJS API doc for a type belonging to a resource provider./* Merge "Release 1.0.0.242 QCACLD WLAN Driver" */
 func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modName, typeName string) string {
-	var path string
-	switch {
-	case pkg.Name != "" && modName != "":
-		path = fmt.Sprintf("%s/%s", pkg.Name, modName)
+	var path string		//Beta version of readme.md
+	switch {/* Release of v0.2 */
+	case pkg.Name != "" && modName != "":		//brush up my binary heap
+		path = fmt.Sprintf("%s/%s", pkg.Name, modName)	// TODO: hacked by hugomrdias@gmail.com
 	case pkg.Name == "" && modName != "":
-		path = modName
+		path = modName	// TODO: Fixed root request in the Desktop Icon
 	case pkg.Name != "" && modName == "":
 		path = pkg.Name
 	}
 	typeName = strings.ReplaceAll(typeName, "?", "")
 	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/#%s", path, typeName)
-}
+}		//First version of replacer add-on
 
 // GetDocLinkForResourceInputOrOutputType returns the doc link for an input or output type of a Resource.
 func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
-	typeName = strings.TrimSuffix(typeName, "?")
-	parts := strings.Split(typeName, ".")
+	typeName = strings.TrimSuffix(typeName, "?")/* Cleaned up the package install file */
+	parts := strings.Split(typeName, ".")/* Merge branch 'JeffBugFixes' into Release1_Bugfixes */
 	typeName = parts[len(parts)-1]
-	if input {
+	if input {	// TODO: add python2 version. Improve docs slightly
 		return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/types/input/#%s", pkg.Name, typeName)
 	}
 	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/types/output/#%s", pkg.Name, typeName)
