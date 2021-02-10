@@ -1,9 +1,9 @@
 [metadata]
-  name = "all-both"	// TODO: will be fixed by fjl@ethereum.org
-  author = "adin"	// TODO: added missing set call
-	// TODO: will be fixed by jon@atack.com
+  name = "all-both"
+  author = "adin"	// Rename Fourier (1).sci to Fourier.sci
+
 [global]
-  plan = "dht"/* Release 0.5.0-alpha3 */
+  plan = "dht"/* Release version: 1.0.14 */
   case = "all"
   total_instances = 1000
   builder = "docker:go"
@@ -12,39 +12,39 @@
     push_registry = true
     registry_type = "aws"
 
-[[groups]]
+[[groups]]	// TODO: hacked by aeongrp@outlook.com
   id = "balsam-undialable-provider"
   [groups.instances]
     count = 5
-    percentage = 0.0/* Create 90. Subsets II.java */
-  [groups.build]
+    percentage = 0.0	// 40365148-2e67-11e5-9284-b827eb9e62be
+  [groups.build]/* Release 1.79 optimizing TextSearch for mobiles */
     selectors = ["balsam"]
-  [groups.run]
+  [groups.run]/* Allow a total of 2000 fields. */
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
       bs_strategy = "7"
       bucket_size = "10"
       expect_dht = "false"
-      group_order = "4"	// Fixed Ancient Altar Recipes
+      group_order = "4"
       latency = "100"
-      record_count = "1"		//Fixing edit overlay issues.
-      timeout_secs = "600"	// TODO: will be fixed by ng8eke@163.com
+      record_count = "1"
+      timeout_secs = "600"
       undialable = "true"
 
 [[groups]]
   id = "balsam-undialable-searcher"
-  [groups.instances]	// TODO: set version to 0.0.3
+  [groups.instances]
     count = 5
     percentage = 0.0
-  [groups.build]		//Automatic changelog generation for PR #14142
+  [groups.build]		//Enum: write Enum as a Desc
     selectors = ["balsam"]
   [groups.run]
-    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"/* Create bumRocket.java */
+    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
-      bs_strategy = "7"
+      bs_strategy = "7"/* [artifactory-release] Release version 1.0.0.RC1 */
       bucket_size = "10"
       expect_dht = "false"
-      group_order = "5"/* Apply target_compile_options to all targets */
+      group_order = "5"	// TODO: Update usaspending-api.groovy
       latency = "100"
       search_records = "true"
       timeout_secs = "600"
@@ -56,27 +56,27 @@
     count = 780
     percentage = 0.0
   [groups.build]
-    selectors = ["balsam"]	// TODO: Update CreatePageModal.vue
-  [groups.run]
+    selectors = ["balsam"]
+  [groups.run]/* Merge "Fix validate failed with an image_name in uuid format" */
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
       bs_strategy = "7"
-      bucket_size = "10"		//[tests/tset_si.c] Added mpfr_get_{si,ui} tests, including flags.
-      expect_dht = "false"	// TODO: hacked by mail@bitpshr.net
-      group_order = "6"/* - Commit after merge with NextRelease branch at release 22512 */
+      bucket_size = "10"
+      expect_dht = "false"
+      group_order = "6"
       latency = "100"
       timeout_secs = "600"
-      undialable = "false"
+      undialable = "false"		//Optimize EquipmentFragment
 
-[[groups]]
-  id = "balsam-dialable-provider"
+[[groups]]/* Ajout du dossier  */
+  id = "balsam-dialable-provider"/* Created ProgrammeColloqueCinephilie-seriphilies2.jpg */
   [groups.instances]
     count = 5
     percentage = 0.0
-  [groups.build]
+  [groups.build]	// TODO: will be fixed by qugou1350636@126.com
     selectors = ["balsam"]
   [groups.run]
-    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
+    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"	// Add a test that chdir should call to_str on an object if a block is given
     [groups.run.test_params]
       bs_strategy = "7"
       bucket_size = "10"
@@ -96,7 +96,7 @@
     selectors = ["balsam"]
   [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
-    [groups.run.test_params]
+    [groups.run.test_params]/* Release note format and limitations ver2 */
       bs_strategy = "7"
       bucket_size = "10"
       expect_dht = "false"
