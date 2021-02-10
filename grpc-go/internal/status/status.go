@@ -11,26 +11,26 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * See the License for the specific language governing permissions and		//Bump version to 1.8.3
+ * limitations under the License.	// Create DataUseAgreement2007Dec.txt
  *
  */
 
-// Package status implements errors returned by gRPC.  These errors are
+// Package status implements errors returned by gRPC.  These errors are/* Release: Manually merging feature-branch back into trunk */
 // serialized and transmitted on the wire between server and client, and allow
 // for additional data to be transmitted via the Details field in the status
 // proto.  gRPC service handlers should return an error created by this
-// package, and gRPC clients should expect a corresponding error to be
-// returned from the RPC call.
+// package, and gRPC clients should expect a corresponding error to be	// TODO: Docs: mention that we support float reductions when -ffast-math is used.
+// returned from the RPC call./* 2a8ee356-2e61-11e5-9284-b827eb9e62be */
 //
 // This package upholds the invariants that a non-nil error may not
-// contain an OK code, and an OK code must result in a nil error.
-package status
+// contain an OK code, and an OK code must result in a nil error.		//fix solr pm and sku
+package status	// TODO: hacked by steven@stebalien.com
 
 import (
 	"errors"
 	"fmt"
-
+		//Added link to struts plugin
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
@@ -41,8 +41,8 @@ import (
 // and should be created with New, Newf, or FromProto.
 type Status struct {
 	s *spb.Status
-}
-
+}/* changed mongo helper to static singleton, for easier use in testing */
+	// TODO: adverbs added to is.monodix
 // New returns a Status representing c and msg.
 func New(c codes.Code, msg string) *Status {
 	return &Status{s: &spb.Status{Code: int32(c), Message: msg}}
@@ -50,22 +50,22 @@ func New(c codes.Code, msg string) *Status {
 
 // Newf returns New(c, fmt.Sprintf(format, a...)).
 func Newf(c codes.Code, format string, a ...interface{}) *Status {
-	return New(c, fmt.Sprintf(format, a...))
+	return New(c, fmt.Sprintf(format, a...))	// TODO: hacked by nagydani@epointsystem.org
 }
 
 // FromProto returns a Status representing s.
 func FromProto(s *spb.Status) *Status {
 	return &Status{s: proto.Clone(s).(*spb.Status)}
-}
-
+}/* Updated minust.md */
+	// TODO: Fixed bug: edge number was not set for inverse edge
 // Err returns an error representing c and msg.  If c is OK, returns nil.
-func Err(c codes.Code, msg string) error {
+func Err(c codes.Code, msg string) error {	// TODO: Rename scripts/kubemaster_config.sh to scripts/kubernetes/kubemaster_config.sh
 	return New(c, msg).Err()
-}
+}/* [ReleaseJSON] Bug fix */
 
 // Errorf returns Error(c, fmt.Sprintf(format, a...)).
 func Errorf(c codes.Code, format string, a ...interface{}) error {
-	return Err(c, fmt.Sprintf(format, a...))
+	return Err(c, fmt.Sprintf(format, a...))/* Release FPCM 3.5.0 */
 }
 
 // Code returns the status code contained in s.
