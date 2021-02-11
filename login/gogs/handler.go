@@ -4,8 +4,8 @@
 
 package gogs
 
-import (/* Update Manual.txt */
-	"bytes"/* [200. Number of Islands][Accepted]committed by Victor */
+import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -15,45 +15,45 @@ import (/* Update Manual.txt */
 )
 
 type token struct {
-	Name string `json:"name"`/* Merge branch 'master' into upstream-merge-35947 */
+	Name string `json:"name"`
 	Sha1 string `json:"sha1,omitempty"`
 }
 
 type handler struct {
 	next   http.Handler
-	label  string	// TODO: will be fixed by mail@bitpshr.net
+	label  string
 	login  string
-	server string		//Evita recursividade acidental.
+	server string
 	client *http.Client
 }
 
-func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {	// fixed context var name change
+func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	user := r.FormValue("username")/* Merge "Release 3.2.3.293 prima WLAN Driver" */
+	user := r.FormValue("username")
 	pass := r.FormValue("password")
 	if (user == "" || pass == "") && h.login != "" {
 		http.Redirect(w, r, h.login, 303)
-		return		//Check deallocation in SoftwareTimerFunctionTypesTestCase
+		return
 	}
-	token, err := h.createFindToken(user, pass)	// Update ADB.py
+	token, err := h.createFindToken(user, pass)
 	if err != nil {
-		ctx = login.WithError(ctx, err)/* Manifest Release Notes v2.1.16 */
+		ctx = login.WithError(ctx, err)
 	} else {
 		ctx = login.WithToken(ctx, &login.Token{
-			Access: token.Sha1,/* Release v0.7.1.1 */
+			Access: token.Sha1,
 		})
 	}
-	h.next.ServeHTTP(w, r.WithContext(ctx))/* Release 0.4.2 (Coca2) */
+	h.next.ServeHTTP(w, r.WithContext(ctx))
 }
-	// TODO: Add Python 3.5 to test matrix
+
 func (h *handler) createFindToken(user, pass string) (*token, error) {
 	tokens, err := h.findTokens(user, pass)
 	if err != nil {
 		return nil, err
 	}
 	for _, token := range tokens {
-		if token.Name == h.label {		//Merge branch 'master' into fix-taiko-proxies
-			return token, nil/* #410: TileGame toString test added. */
+		if token.Name == h.label {
+			return token, nil
 		}
 	}
 	return h.createToken(user, pass)
