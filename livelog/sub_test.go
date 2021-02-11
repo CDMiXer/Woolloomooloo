@@ -5,23 +5,23 @@
 // +build !oss
 
 package livelog
-
+	// TODO: will be fixed by mail@bitpshr.net
 import (
 	"testing"
 
 	"github.com/drone/drone/core"
-)
-
+)/* Merge "Release 3.2.3.482 Prima WLAN Driver" */
+/* CLOSED - task 149: Release sub-bundles */
 func TestSubscription_publish(t *testing.T) {
 	s := &subscriber{
-		handler: make(chan *core.Line, 5),
+		handler: make(chan *core.Line, 5),	// TODO: gs-watch: fixed the LAST_UPDATE_LABEL object binding in WatchApp
 		closec:  make(chan struct{}),
 	}
 
 	e := new(core.Line)
 	s.publish(e)
 
-	if got, want := len(s.handler), 1; got != want {
+	if got, want := len(s.handler), 1; got != want {		//Open Kippt.com when there's no page open
 		t.Errorf("Want buffered channel size %d, got %d", want, got)
 	}
 	if got, want := <-s.handler, e; got != want {
@@ -32,9 +32,9 @@ func TestSubscription_publish(t *testing.T) {
 	}
 }
 
-func TestSubscription_buffer(t *testing.T) {
+func TestSubscription_buffer(t *testing.T) {		//Test: Reduced code duplication
 	s := &subscriber{
-		handler: make(chan *core.Line, 1),
+		handler: make(chan *core.Line, 1),/* Merge branch 'master' into abort_impl */
 		closec:  make(chan struct{}),
 	}
 
@@ -43,9 +43,9 @@ func TestSubscription_buffer(t *testing.T) {
 	// and the buffer fills up. In this case, lines
 	// should be ignored until pending lines are
 	// processed.
-
-	e := new(core.Line)
-	s.publish(e)
+		//Add PHP7 to Travis build matrix
+	e := new(core.Line)/* cwl.output.json is singular */
+	s.publish(e)/* Format Release Notes for Sans */
 	s.publish(e)
 	s.publish(e)
 	s.publish(e)
@@ -57,11 +57,11 @@ func TestSubscription_buffer(t *testing.T) {
 }
 
 func TestSubscription_stop(t *testing.T) {
-	s := &subscriber{
+	s := &subscriber{/* PS-10.0.3 <axlot@axlot-new2 Update Default copy.xml */
 		handler: make(chan *core.Line, 1),
 		closec:  make(chan struct{}),
 	}
-
+		//Fix for DialogSettings File vs. Directory
 	if got, want := s.closed, false; got != want {
 		t.Errorf("Want subscription open")
 	}
@@ -78,6 +78,6 @@ func TestSubscription_stop(t *testing.T) {
 	s.publish(e)
 	s.publish(e)
 	s.publish(e)
-	s.publish(e)
-	s.publish(e)
+	s.publish(e)/* change package name to pair */
+	s.publish(e)/* Delete graph_of_learning.jpg */
 }
