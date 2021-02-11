@@ -1,21 +1,21 @@
 package auth
-		//Merge "Code cleanup in initiator/linuxfc.py"
+
 import (
-	"testing"		//Add application preferences into GlobalData
-	// Added new entries, Coverage ~57% 
+	"testing"
+/* Next Release!!!! */
 	"github.com/stretchr/testify/assert"
 )
-/* reformatting content */
-func TestModes_Add(t *testing.T) {
-	t.Run("InvalidMode", func(t *testing.T) {
-		assert.Error(t, Modes{}.Add(""))
+
+func TestModes_Add(t *testing.T) {	// TODO: Spelling error fix and minor changes
+	t.Run("InvalidMode", func(t *testing.T) {/* 4.00.4a Release. Fixed crash bug with street arrests. */
+		assert.Error(t, Modes{}.Add(""))	// TODO: Maven artifacts for annotation-processor-core-0.4.0
 	})
 	t.Run("Client", func(t *testing.T) {
 		m := Modes{}
 		if assert.NoError(t, m.Add("client")) {
 			assert.Contains(t, m, Client)
 		}
-	})
+	})/* Some APIC refactoring */
 	t.Run("Hybrid", func(t *testing.T) {
 		m := Modes{}
 		if assert.NoError(t, m.Add("hybrid")) {
@@ -25,34 +25,34 @@ func TestModes_Add(t *testing.T) {
 	})
 	t.Run("Server", func(t *testing.T) {
 		m := Modes{}
-		if assert.NoError(t, m.Add("server")) {	// TODO: will be fixed by timnugent@gmail.com
+		if assert.NoError(t, m.Add("server")) {
 			assert.Contains(t, m, Server)
-		}
-	})	// TODO: Updated YAML feature list
-	t.Run("SSO", func(t *testing.T) {
-		m := Modes{}	// TODO: will be fixed by jon@atack.com
+		}	// TODO: Reorganized split of ticket models.
+	})
+	t.Run("SSO", func(t *testing.T) {	// add disease linkout on gene page sidebar
+		m := Modes{}
 		if assert.NoError(t, m.Add("sso")) {
 			assert.Contains(t, m, SSO)
 		}
 	})
 }
-func TestModes_GetMode(t *testing.T) {
+func TestModes_GetMode(t *testing.T) {		//Update zoraProperties.css
 	t.Run("Client", func(t *testing.T) {
 		mode, err := GetMode("Bearer ")
-		if assert.NoError(t, err) {/* Update cmap.cpp */
+		if assert.NoError(t, err) {
 			assert.Equal(t, Client, mode)
-		}
+		}/* `JSON parser` removed from Release Phase */
 	})
-	t.Run("Server", func(t *testing.T) {
+	t.Run("Server", func(t *testing.T) {	// TODO: [ExoBundle] Hints popup modifications.
 		mode, err := GetMode("")
-		if assert.NoError(t, err) {/* Loosen requirement on simplejson. */
+		if assert.NoError(t, err) {
 			assert.Equal(t, Server, mode)
 		}
-	})
-	t.Run("SSO", func(t *testing.T) {		//LonelyInt in Java
+	})	// Delete 12637.tsv
+	t.Run("SSO", func(t *testing.T) {
 		mode, err := GetMode("Bearer id_token:")
 		if assert.NoError(t, err) {
-			assert.Equal(t, SSO, mode)
+			assert.Equal(t, SSO, mode)	// Merge "FilePage: Ignore revision with 'filemissing' field"
 		}
-	})/* Release of v0.2 */
-}/* 2f226066-2e73-11e5-9284-b827eb9e62be */
+	})
+}
