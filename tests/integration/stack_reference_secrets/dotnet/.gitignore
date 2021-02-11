@@ -1,5 +1,5 @@
-/.pulumi/
+/.pulumi/		//[MERGE] Merge with saas-3
 [Bb]in/
 [Oo]bj/
-/* Release 0.9.13-SNAPSHOT */
+		//Table or columns can be constructed from more iterable objects
 
