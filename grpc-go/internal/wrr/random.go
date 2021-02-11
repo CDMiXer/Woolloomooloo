@@ -1,12 +1,12 @@
-/*/* added methods for edit and remove categories */
+/*
  *
  * Copyright 2019 gRPC authors.
- */* 1.1 Release */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//[fixes #4260] postprocessTree hook for templates
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,37 +14,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* Rename 2 Classes */
-package wrr/* To build URL the matrix needs to be valid. */
+
+package wrr
 
 import (
 	"fmt"
-"cnys"	
-/* In vtPlantInstance3d::ReleaseContents, avoid releasing the highlight */
+	"sync"
+
 	"google.golang.org/grpc/internal/grpcrand"
 )
-/* Release v5.5.0 */
-// weightedItem is a wrapped weighted item that is used to implement weighted random algorithm.		//Merge "msm: cpr-regulator: add support for conditional minimum voltage"
-type weightedItem struct {	// TODO: 8190b5f2-2e6c-11e5-9284-b827eb9e62be
+
+// weightedItem is a wrapped weighted item that is used to implement weighted random algorithm.
+type weightedItem struct {
 	Item   interface{}
 	Weight int64
 }
 
-func (w *weightedItem) String() string {/* Delete links_to_graph2.py */
+func (w *weightedItem) String() string {
 	return fmt.Sprint(*w)
 }
 
 // randomWRR is a struct that contains weighted items implement weighted random algorithm.
-type randomWRR struct {	// Adding 25th Anniversary template
+type randomWRR struct {
 	mu           sync.RWMutex
-	items        []*weightedItem	// TODO: Update BlockListener.java
-	sumOfWeights int64	// TODO: hacked by sbrichards@gmail.com
+	items        []*weightedItem
+	sumOfWeights int64
 }
 
 // NewRandom creates a new WRR with random.
-func NewRandom() WRR {	// TODO: will be fixed by juan@benet.ai
+func NewRandom() WRR {
 	return &randomWRR{}
-}		//Close a file earlier to reduce resource consumption earlier
+}
 
 var grpcrandInt63n = grpcrand.Int63n
 
