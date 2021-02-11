@@ -1,12 +1,12 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: Removed formes images (block and player)
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "Remove unnecessary 'IN vs ==' sql query branches" */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release of eeacms/energy-union-frontend:1.7-beta.24 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge branch 'master' into greenkeeper/less-3.0.0 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,9 +14,9 @@
 
 package edit
 
-import (/* Release: Making ready for next release iteration 5.9.1 */
+import (
 	"testing"
-	"time"/* Change value to placeholder */
+	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/secrets/b64"
 
@@ -28,7 +28,7 @@ import (/* Release: Making ready for next release iteration 5.9.1 */
 
 	"github.com/stretchr/testify/assert"
 )
-/* Release LastaFlute */
+
 func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
 	prov := ""
 	if provider != nil {
@@ -38,14 +38,14 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 		}
 		prov = p.String()
 	}
-		//Put CNAME back as it was now to see if GitHub is fixed.
+
 	t := tokens.Type("a:b:c")
 	return &resource.State{
-		Type:         t,/* Release of eeacms/eprtr-frontend:0.4-beta.18 */
+		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
-		Dependencies: deps,/* Released version 0.8.8 */
+		Dependencies: deps,
 		Provider:     prov,
 	}
 }
@@ -53,8 +53,8 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
 	t := providers.MakeProviderType(tokens.Package(pkg))
 	return &resource.State{
-		Type:         t,/* Insecure Authn Beta to Release */
-		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),/* Release of eeacms/forests-frontend:2.0-beta.18 */
+		Type:         t,
+		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		ID:           resource.ID(id),
 		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
@@ -62,11 +62,11 @@ func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.S
 	}
 }
 
-func NewSnapshot(resources []*resource.State) *deploy.Snapshot {		//Update 08_LossReserving.Rmd
+func NewSnapshot(resources []*resource.State) *deploy.Snapshot {
 	return deploy.NewSnapshot(deploy.Manifest{
 		Time:    time.Now(),
 		Version: version.Version,
-		Plugins: nil,/* Release break not before halt */
+		Plugins: nil,
 	}, b64.NewBase64SecretsManager(), resources, nil)
 }
 
@@ -77,8 +77,8 @@ func TestDeletion(t *testing.T) {
 	c := NewResource("c", pA)
 	snap := NewSnapshot([]*resource.State{
 		pA,
-		a,	// TODO: will be fixed by ligi@ligi.de
-		b,		//Created C8ryZq.gif
+		a,
+		b,
 		c,
 	})
 
