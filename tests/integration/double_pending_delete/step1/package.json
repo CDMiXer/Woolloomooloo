@@ -1,10 +1,10 @@
 {
-    "name": "double_pending_delete",
+    "name": "double_pending_delete",		//Delete k3m.png
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Improve justification in this comment */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Update words.clj */
+    }
 }
