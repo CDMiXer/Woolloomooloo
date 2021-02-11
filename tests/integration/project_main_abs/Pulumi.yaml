@@ -1,5 +1,5 @@
 name: project_main_abs
-description: A program with an absolute entry point (should fail)	// TODO: hacked by witek@enjin.io
+description: A program with an absolute entry point (should fail)
 runtime: nodejs
-main: /user/bin	// d2a81ac2-2e5b-11e5-9284-b827eb9e62be
+main: /user/bin
 
