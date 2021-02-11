@@ -1,11 +1,11 @@
 {
-{ :"snoitpOrelipmoc"    
+    "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* Add Release 1.1.0 */
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,		//The README and COPYING files added.
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
