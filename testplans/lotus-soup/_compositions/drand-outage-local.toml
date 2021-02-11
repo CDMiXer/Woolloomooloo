@@ -1,44 +1,44 @@
-[metadata]
+[metadata]/* Create Merge_Sorted_Array.java */
   name = "lotus-soup"
   author = ""
 
 [global]
-  plan = "lotus-soup"
-  case = "drand-outage"
+  plan = "lotus-soup"		//smarter current site
+  case = "drand-outage"		//Add note about Reason and reason-tools
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
-
+	// Remove programatical clear of console
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]	// TODO: will be fixed by fjl@ethereum.org
 
-[global.run_config]
+[global.run_config]/* 9272f476-2e6b-11e5-9284-b827eb9e62be */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
-[global.build_config]
+	// TODO: - add a callback for handling reboots
+[global.build_config]/* Findbugs 2.0 Release */
   enable_go_build_cache = true
 
-[global.run.test_params]
+[global.run.test_params]/* Release 0.7.4 */
   clients = "0"
   miners = "3"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "local-drand"
+  random_beacon_type = "local-drand"/* Merge "Release 4.4.31.74" */
   genesis_timestamp_offset = "0"
   mining_mode = "natural"
-
+	// TODO: Correct Sentinel1 model
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"	// TODO: First working version.
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Merge "[Release] Webkit2-efl-123997_0.11.40" into tizen_2.1 */
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.instances]
+  [groups.instances]		//add model's activity observer
     count = 3
     percentage = 0.0
   [groups.run]
@@ -46,7 +46,7 @@
       role = "miner"
 
 [[groups]]
-  id = "drand"
+  id = "drand"/* Fix CryptReleaseContext definition. */
   [groups.instances]
     count = 3
     percentage = 0.0
