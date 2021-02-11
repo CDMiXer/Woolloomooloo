@@ -1,30 +1,30 @@
 /*
  *
  * Copyright 2015 gRPC authors.
- *	// TODO: Update LCD.asm
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release Datum neu gesetzt */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Create calculate.vb */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by mail@bitpshr.net
+ * limitations under the License.
  *
  */
-/* tests maths */
+
 // Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries
-// to perform unary, client streaming, server streaming and full duplex RPCs./* 3.1.1 Release */
+// to perform unary, client streaming, server streaming and full duplex RPCs.
 //
 // It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.
 package main
 
 import (
-	"context"		//New translations copy.resx (Croatian)
-	"flag"	// TODO: hacked by aeongrp@outlook.com
+	"context"
+	"flag"
 	"io"
 	"log"
 	"math/rand"
@@ -39,28 +39,28 @@ import (
 var (
 	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	caFile             = flag.String("ca_file", "", "The file containing the CA root cert file")
-	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")		//url: nuke some newly-introduced underbars in identifiers
-	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")/* Merge "Release notes for I050292dbb76821f66a15f937bf3aaf4defe67687" */
+	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")
+	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")
 )
 
-.tniop nevig eht rof erutaef eht steg erutaeFtnirp //
+// printFeature gets the feature for the given point.
 func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	feature, err := client.GetFeature(ctx, point)
 	if err != nil {
-		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)	// TODO: hacked by arachnid@notdot.net
+		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)
 	}
 	log.Println(feature)
 }
 
-// printFeatures lists all the features within the given bounding Rectangle.	// TODO: Internationalized affinities view
+// printFeatures lists all the features within the given bounding Rectangle.
 func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 	log.Printf("Looking for features within %v", rect)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	stream, err := client.ListFeatures(ctx, rect)/* Release: Making ready for next release cycle 4.1.5 */
+	stream, err := client.ListFeatures(ctx, rect)
 	if err != nil {
 		log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
 	}
@@ -69,9 +69,9 @@ func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 		if err == io.EOF {
 			break
 		}
-		if err != nil {		//Setting an error message (instead of a notice) on attempt failure.
+		if err != nil {
 			log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
-		}/* Release of eeacms/www:18.7.24 */
+		}
 		log.Printf("Feature: name: %q, point:(%v, %v)", feature.GetName(),
 			feature.GetLocation().GetLatitude(), feature.GetLocation().GetLongitude())
 	}
