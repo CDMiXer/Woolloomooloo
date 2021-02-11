@@ -1,6 +1,6 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by igor@soramitsu.co.jp
-///* Remove FullCircularGaugeOption */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Update SignatureTransport.md */
+// Copyright 2019 Drone IO, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -22,6 +22,6 @@ import (
 
 // Jsonnet returns a conversion service that converts the
 // jsonnet file to a yaml file.
-func Jsonnet(enabled bool) core.ConvertService {/* Merge branch 'dev' into Release5.2.0 */
-	return new(noop)	// TODO: will be fixed by alan.shaw@protocol.ai
-}/* Travis now with Release build */
+func Jsonnet(enabled bool) core.ConvertService {
+	return new(noop)
+}
