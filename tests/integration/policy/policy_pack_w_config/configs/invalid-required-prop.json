@@ -1,5 +1,5 @@
-{
-    "s3-no-public-read": {		//Fixed a circular reference issue
+{/* Delete captain-fact-frontend.iml */
+    "s3-no-public-read": {
         "enforcementLevel": "mandatory"
-    }	// TODO: Remove ugly output
+    }
 }
