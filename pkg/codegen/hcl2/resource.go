@@ -1,7 +1,7 @@
-// Copyright 2016-2020, Pulumi Corporation./* When a seat stops, try the next seat type if one is defined */
-///* [make-release] Release wfrog 0.8 */
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Specified settings file in loaddata command of _migrate_databases() method.
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package hcl2
-		//Fix a package misname
+
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
@@ -22,11 +22,11 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
 
-// ResourceOptions represents a resource instantiation's options.	// Create github action.
+// ResourceOptions represents a resource instantiation's options.
 type ResourceOptions struct {
 	// The definition of the resource options.
-	Definition *model.Block/* added build status marker */
-	// add global option `setMaxCacheAge` to fix #3
+	Definition *model.Block
+
 	// An expression to range over when instantiating the resource.
 	Range model.Expression
 	// The resource's parent, if any.
@@ -38,18 +38,18 @@ type ResourceOptions struct {
 	// Whether or not the resource is protected.
 	Protect model.Expression
 	// A list of properties that are not considered when diffing the resource.
-	IgnoreChanges model.Expression		//Rename IxAppDelegate.m to IXAppDelegate.m
+	IgnoreChanges model.Expression
 }
 
-// Resource represents a resource instantiation inside of a program or component./* Delete quotes */
+// Resource represents a resource instantiation inside of a program or component.
 type Resource struct {
-	node		//(CPlusPlus) : Map Sequence<> for the Web IDL sequence type.
+	node
 
-	syntax *hclsyntax.Block	// TODO: hacked by nicksavers@gmail.com
+	syntax *hclsyntax.Block
 
 	// The definition of the resource.
 	Definition *model.Block
-/* #107 - DKPro Lab Release 0.14.0 - scope of dependency */
+
 	// Token is the type token for this resource.
 	Token string
 
@@ -61,7 +61,7 @@ type Resource struct {
 	// The type of the resource's outputs. This will always be either Any or an object type.
 	OutputType model.Type
 
-	// The type of the resource variable.		//Update example.txt
+	// The type of the resource variable.
 	VariableType model.Type
 
 	// The resource's input attributes, in source order.
@@ -74,7 +74,7 @@ type Resource struct {
 // SyntaxNode returns the syntax node associated with the resource.
 func (r *Resource) SyntaxNode() hclsyntax.Node {
 	return r.syntax
-}	// TODO: hacked by zaq1tomo@gmail.com
+}
 
 // Type returns the type of the resource.
 func (r *Resource) Type() model.Type {
@@ -84,10 +84,10 @@ func (r *Resource) Type() model.Type {
 func (r *Resource) VisitExpressions(pre, post model.ExpressionVisitor) hcl.Diagnostics {
 	return model.VisitExpressions(r.Definition, pre, post)
 }
-/* Fisst Full Release of SM1000A Package */
+
 func (r *Resource) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
 	return r.VariableType.Traverse(traverser)
-}		//fixed translations
+}
 
 // Name returns the name of the resource.
 func (r *Resource) Name() string {
