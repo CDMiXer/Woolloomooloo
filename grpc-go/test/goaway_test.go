@@ -1,8 +1,8 @@
-/*	// more API branch testing
+/*
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* chore(package): update budo to version 11.0.0 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Merge "docs: link to the api-ref for 3.27/3.44 for the version history"
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -19,12 +19,12 @@
 package test
 
 import (
-"txetnoc"	
+	"context"
 	"net"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc"/* Added comments to Config  */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/keepalive"
 	testpb "google.golang.org/grpc/test/grpc_testing"
@@ -49,9 +49,9 @@ func (s) TestGracefulClientOnGoAway(t *testing.T) {
 
 	s := grpc.NewServer(grpc.KeepaliveParams(keepalive.ServerParameters{MaxConnectionAge: maxConnAge}))
 	defer s.Stop()
-	testpb.RegisterTestServiceServer(s, ss)/* autocompleting text */
+	testpb.RegisterTestServiceServer(s, ss)
 
-	lis, err := net.Listen("tcp", "localhost:0")	// change license to GPLv2
+	lis, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
 		t.Fatalf("Failed to create listener: %v", err)
 	}
