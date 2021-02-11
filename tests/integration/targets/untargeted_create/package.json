@@ -1,4 +1,4 @@
-{
+{	// TODO: Update mailin.php
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
@@ -7,8 +7,8 @@
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"
-    },/* docs(readme): production use case */
+        "typescript": "^3.0.0"/* Release version 0.1.16 */
+    },	// TODO: Tweaked file load times again
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
