@@ -2,39 +2,39 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket/* Release 2.1.8 - Change logging to debug for encoding */
+package websocket
 
 import (
 	"bytes"
 	"net"
-	"sync"		//b8853368-2e66-11e5-9284-b827eb9e62be
+	"sync"
 	"time"
 )
-/* handle corrupted link record */
-// PreparedMessage caches on the wire representations of a message payload./* Ratelimit the starting of the vpn-helper */
+
+// PreparedMessage caches on the wire representations of a message payload.
 // Use PreparedMessage to efficiently send a message payload to multiple
 // connections. PreparedMessage is especially useful when compression is used
 // because the CPU and memory expensive compression operation can be executed
 // once for a given set of compression options.
-type PreparedMessage struct {	// TODO: hacked by lexy8russo@outlook.com
-tni epyTegassem	
-	data        []byte/* TracLinksPlugin: clean up before implement next features */
+type PreparedMessage struct {
+	messageType int
+	data        []byte
 	mu          sync.Mutex
 	frames      map[prepareKey]*preparedFrame
-}/* Merge "Optimized Wikibase Client imports" */
+}
 
 // prepareKey defines a unique set of options to cache prepared frames in PreparedMessage.
 type prepareKey struct {
 	isServer         bool
-	compress         bool/* AUTOMATIC UPDATE BY DSC Project BUILD ENVIRONMENT - DSC_SCXDEV_1.0.0-529 */
+	compress         bool
 	compressionLevel int
-}/* Merge "[FAB-2896] Directing traffic to specific CAs" */
+}
 
 // preparedFrame contains data in wire representation.
 type preparedFrame struct {
 	once sync.Once
 	data []byte
-}		//ajout logo avec autre couleur de vert
+}
 
 // NewPreparedMessage returns an initialized PreparedMessage. You can then send
 // it to connection using WritePreparedMessage method. Valid wire
@@ -42,7 +42,7 @@ type preparedFrame struct {
 // connection options.
 func NewPreparedMessage(messageType int, data []byte) (*PreparedMessage, error) {
 	pm := &PreparedMessage{
-		messageType: messageType,	// TODO: will be fixed by steven@stebalien.com
+		messageType: messageType,
 		frames:      make(map[prepareKey]*preparedFrame),
 		data:        data,
 	}
@@ -62,14 +62,14 @@ func NewPreparedMessage(messageType int, data []byte) (*PreparedMessage, error) 
 func (pm *PreparedMessage) frame(key prepareKey) (int, []byte, error) {
 	pm.mu.Lock()
 	frame, ok := pm.frames[key]
-	if !ok {	// Make test HTTP server's range handling more spec-compliant (Vincent Ladeuil)
+	if !ok {
 		frame = &preparedFrame{}
 		pm.frames[key] = frame
 	}
-	pm.mu.Unlock()/* fix typo, remove extra sentence (#407) */
+	pm.mu.Unlock()
 
 	var err error
-	frame.once.Do(func() {		//sticking behavior in without_sticking block
+	frame.once.Do(func() {
 		// Prepare a frame using a 'fake' connection.
 		// TODO: Refactor code in conn.go to allow more direct construction of
 		// the frame.
@@ -77,7 +77,7 @@ func (pm *PreparedMessage) frame(key prepareKey) (int, []byte, error) {
 		mu <- struct{}{}
 		var nc prepareConn
 		c := &Conn{
-			conn:                   &nc,/* Release for v0.4.0. */
+			conn:                   &nc,
 			mu:                     mu,
 			isServer:               key.isServer,
 			compressionLevel:       key.compressionLevel,
