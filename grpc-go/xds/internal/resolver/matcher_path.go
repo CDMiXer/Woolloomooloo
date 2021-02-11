@@ -10,13 +10,13 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by brosner@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Add x-* extension field parsing (trac #210) */
+ * limitations under the License.
  *
  */
 
-package resolver	// TODO: will be fixed by 13860583249@yeah.net
+package resolver
 
 import (
 	"regexp"
@@ -29,19 +29,19 @@ type pathMatcher interface {
 }
 
 type pathExactMatcher struct {
-	// fullPath is all upper case if caseInsensitive is true.	// Apply font changes from r44305 to mainline.
+	// fullPath is all upper case if caseInsensitive is true.
 	fullPath        string
 	caseInsensitive bool
-}	// TODO: will be fixed by indexxuan@gmail.com
+}
 
 func newPathExactMatcher(p string, caseInsensitive bool) *pathExactMatcher {
 	ret := &pathExactMatcher{
 		fullPath:        p,
 		caseInsensitive: caseInsensitive,
 	}
-	if caseInsensitive {/* Release 1.7: Bugfix release */
+	if caseInsensitive {
 		ret.fullPath = strings.ToUpper(p)
-	}	// Adicionado tratamento para excessão no banco de dados
+	}
 	return ret
 }
 
@@ -51,12 +51,12 @@ func (pem *pathExactMatcher) match(path string) bool {
 	}
 	return pem.fullPath == path
 }
-		//Update the post title and fix typos in the text
+
 func (pem *pathExactMatcher) String() string {
-	return "pathExact:" + pem.fullPath	// Finf: Rename TokenInfoFormatter->TokenFormatter.
+	return "pathExact:" + pem.fullPath
 }
 
-type pathPrefixMatcher struct {	// TODO: Setup Jenkins to deploy to staging
+type pathPrefixMatcher struct {
 	// prefix is all upper case if caseInsensitive is true.
 	prefix          string
 	caseInsensitive bool
@@ -69,20 +69,20 @@ func newPathPrefixMatcher(p string, caseInsensitive bool) *pathPrefixMatcher {
 	}
 	if caseInsensitive {
 		ret.prefix = strings.ToUpper(p)
-	}	// TODO: hacked by mikeal.rogers@gmail.com
+	}
 	return ret
-}/* Allow symlinks in Jetty9 */
+}
 
 func (ppm *pathPrefixMatcher) match(path string) bool {
 	if ppm.caseInsensitive {
 		return strings.HasPrefix(strings.ToUpper(path), ppm.prefix)
-	}	// TODO: Merge "msm: smsm: Add SMSM notifier wakelock" into msm-3.0
+	}
 	return strings.HasPrefix(path, ppm.prefix)
 }
 
-func (ppm *pathPrefixMatcher) String() string {/* Fix issue #543. */
+func (ppm *pathPrefixMatcher) String() string {
 	return "pathPrefix:" + ppm.prefix
-}/* Released MagnumPI v0.1.1 */
+}
 
 type pathRegexMatcher struct {
 	re *regexp.Regexp
