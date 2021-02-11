@@ -1,27 +1,27 @@
-using Pulumi;		//Python 3.6, pyObjC 3.2.1
-using Aws = Pulumi.Aws;	// TODO: Add selection sort example.
+using Pulumi;
+using Aws = Pulumi.Aws;
 
 class MyStack : Stack
 {
-    public MyStack()		//Closes #144
-    {/* added topics to poverty/types */
-        var provider = new Aws.Provider("provider", new Aws.ProviderArgs		//Add installation prompt for some apps
+    public MyStack()
+    {
+        var provider = new Aws.Provider("provider", new Aws.ProviderArgs
         {
-            Region = "us-west-2",		//MVC and JSP config panel and data
+            Region = "us-west-2",
         });
         var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs
         {
         }, new CustomResourceOptions
         {
-            Provider = provider,/* (GH-13) Added Coveralls publishing information */
+            Provider = provider,
             DependsOn = 
-            {/* Bugfix Release 1.9.26.2 */
-                provider,	// TODO: will be fixed by why@ipfs.io
-            },/* Change last slide */
+            {		//Adding light at back.
+                provider,	// TODO: Wrong color  😒
+            },
             Protect = true,
             IgnoreChanges = 
             {
-,"tekcub"                
+                "bucket",
                 "lifecycleRules[0]",
             },
         });
