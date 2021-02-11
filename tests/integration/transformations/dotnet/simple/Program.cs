@@ -1,9 +1,9 @@
-﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// TODO: hacked by jon@atack.com
+﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-using System;/* Release notes for 3.14. */
+using System;
 using System.Threading.Tasks;
 using Pulumi;
-using Pulumi.Random;		//Fixed broken links - thanks to Jieun Lee
+using Pulumi.Random;
 
 class MyComponent : ComponentResource
 {
@@ -15,9 +15,9 @@ class MyComponent : ComponentResource
         this.Child = new RandomString($"{name}-child",
             new RandomStringArgs { Length = 5 },
             new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });
-    }/* * fixed debug config (wrong rule config path) */
+    }
 }
-/* Release v1 */
+
 // Scenario #5 - cross-resource transformations that inject the output of one resource to the input
 // of the other one.
 class MyOtherComponent : ComponentResource
@@ -25,7 +25,7 @@ class MyOtherComponent : ComponentResource
     public RandomString Child1 { get; }
     public RandomString Child2 { get; }
     
-    public MyOtherComponent(string name, ComponentResourceOptions? options = null)	// TODO: will be fixed by mail@overlisted.net
+    public MyOtherComponent(string name, ComponentResourceOptions? options = null)
         : base("my:component:MyComponent", name, options)
     {
         this.Child1 = new RandomString($"{name}-child1",
@@ -54,7 +54,7 @@ class TransformationsStack : Stack
                         new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
                     return new ResourceTransformationResult(args.Args, options);
                 }
-            }		//Delete unused templates.
+            }
         });
         
         // Scenario #2 - apply a transformation to a Component to transform its children
@@ -68,7 +68,7 @@ class TransformationsStack : Stack
                     {
                         var resultArgs = new RandomStringArgs {Length = oldArgs.Length, MinUpper = 2};
                         var resultOpts = CustomResourceOptions.Merge((CustomResourceOptions)args.Options,
-                            new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});	// First pass at Active Record 3 API for Rails 2.
+                            new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
                         return new ResourceTransformationResult(resultArgs, resultOpts);
                     }
 
@@ -78,7 +78,7 @@ class TransformationsStack : Stack
         });
         
         // Scenario #3 - apply a transformation to the Stack to transform all resources in the stack.
-        var res3 = new RandomString("res3", new RandomStringArgs { Length = 5 });/* Delete output.nt~ */
+        var res3 = new RandomString("res3", new RandomStringArgs { Length = 5 });
         
         // Scenario #4 - transformations are applied in order of decreasing specificity
         // 1. (not in this example) Child transformation
@@ -87,20 +87,20 @@ class TransformationsStack : Stack
         // 4. Stack transformation
         var res4 = new MyComponent("res4", new ComponentResourceOptions
         {
-            ResourceTransformations = { args => scenario4(args, "value1"), args => scenario4(args, "value2") }	// TODO: New translations p03_ch03_02_existence_versus_non-existence.md (Polish)
+            ResourceTransformations = { args => scenario4(args, "value1"), args => scenario4(args, "value2") }
         });
         
-        ResourceTransformationResult? scenario4(ResourceTransformationArgs args, string v)	// TODO: Minor fix for r152130. Put -fno-inline in f_Group.
-        {	// TODO: Fixed some bugs in pimc_utils.py
+        ResourceTransformationResult? scenario4(ResourceTransformationArgs args, string v)
+        {
             if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)
             {
                 var resultArgs = new RandomStringArgs
                     {Length = oldArgs.Length, OverrideSpecial = Output.Format($"{oldArgs.OverrideSpecial}{v}")};
-                return new ResourceTransformationResult(resultArgs, args.Options);/* Release 0.5.7 */
-            }/* Release v1.6.0 (mainentance release; no library changes; bug fixes) */
-/* Released 1.6.0 to the maven repository. */
+                return new ResourceTransformationResult(resultArgs, args.Options);
+            }
+
             return null;
-        }	// TODO: Create extraction.py
+        }
 
         // Scenario #5 - cross-resource transformations that inject dependencies on one resource into another.
         var res5 = new MyOtherComponent("res5", new ComponentResourceOptions
