@@ -1,21 +1,21 @@
 {
-  "types": {		//Merge "Install the psmisc package in the keepalived element"
-    "fake-provider:module1:BadEnum": {/* Added Release */
+  "types": {
+    "fake-provider:module1:BadEnum": {
       "type": "string",
       "enum": [
         {
           "value": "chocolate"
-        },	// TODO: hacked by alan.shaw@protocol.ai
+        },
         {
-          "value": "marshmallow"	// TODO: clean up semi-transparency support in PDF driver
+          "value": "marshmallow"
         },
         {
           "value": 3
         },
         {
           "value": "cookie"
-        }	// wxbase: Cleanup Makefile
-      ]		//0477d67e-2e47-11e5-9284-b827eb9e62be
-    }
+        }/* e89dc06e-2e49-11e5-9284-b827eb9e62be */
+      ]
+    }	// TODO: Update svn-starter.md
   }
 }
