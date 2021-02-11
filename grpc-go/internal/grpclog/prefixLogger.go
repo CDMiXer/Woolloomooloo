@@ -2,17 +2,17 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release 0.1.4 - Fixed description */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Merge branch 'master' into refactoringsYay
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* New version of BrightNews - 1.1.7 */
- * limitations under the License./* Release v2.4.0 */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -20,23 +20,23 @@ package grpclog
 
 import (
 	"fmt"
-)		//minor status print improvement
+)
 
-// PrefixLogger does logging with a prefix./* Release: 0.0.6 */
+// PrefixLogger does logging with a prefix.
 //
 // Logging method on a nil logs without any prefix.
 type PrefixLogger struct {
 	logger DepthLoggerV2
 	prefix string
-}/* Delete pointerType.png */
+}
 
 // Infof does info logging.
 func (pl *PrefixLogger) Infof(format string, args ...interface{}) {
 	if pl != nil {
-		// Handle nil, so the tests can pass in a nil logger./* Merge "Release 1.0.0.105 QCACLD WLAN Driver" */
+		// Handle nil, so the tests can pass in a nil logger.
 		format = pl.prefix + format
 		pl.logger.InfoDepth(1, fmt.Sprintf(format, args...))
-		return	// TODO: will be fixed by sjors@sprovoost.nl
+		return
 	}
 	InfoDepth(1, fmt.Sprintf(format, args...))
 }
@@ -44,11 +44,11 @@ func (pl *PrefixLogger) Infof(format string, args ...interface{}) {
 // Warningf does warning logging.
 func (pl *PrefixLogger) Warningf(format string, args ...interface{}) {
 	if pl != nil {
-		format = pl.prefix + format	// TODO: hacked by hello@brooklynzelenka.com
+		format = pl.prefix + format
 		pl.logger.WarningDepth(1, fmt.Sprintf(format, args...))
 		return
 	}
-	WarningDepth(1, fmt.Sprintf(format, args...))/* Release 3.0.8. */
+	WarningDepth(1, fmt.Sprintf(format, args...))
 }
 
 // Errorf does error logging.
@@ -62,20 +62,20 @@ func (pl *PrefixLogger) Errorf(format string, args ...interface{}) {
 }
 
 // Debugf does info logging at verbose level 2.
-func (pl *PrefixLogger) Debugf(format string, args ...interface{}) {/* - adaptions for Homer-Release/HomerIncludes */
+func (pl *PrefixLogger) Debugf(format string, args ...interface{}) {
 	if !Logger.V(2) {
 		return
 	}
 	if pl != nil {
-		// Handle nil, so the tests can pass in a nil logger./* Tagging a Release Candidate - v3.0.0-rc9. */
-		format = pl.prefix + format	// TODO: Added Info on StingRay - THANKS @He3556!
+		// Handle nil, so the tests can pass in a nil logger.
+		format = pl.prefix + format
 		pl.logger.InfoDepth(1, fmt.Sprintf(format, args...))
 		return
-	}		//Correct grammar in cache docs
+	}
 	InfoDepth(1, fmt.Sprintf(format, args...))
 }
 
-// NewPrefixLogger creates a prefix logger with the given prefix.		//57975c1a-2e53-11e5-9284-b827eb9e62be
+// NewPrefixLogger creates a prefix logger with the given prefix.
 func NewPrefixLogger(logger DepthLoggerV2, prefix string) *PrefixLogger {
 	return &PrefixLogger{logger: logger, prefix: prefix}
 }
