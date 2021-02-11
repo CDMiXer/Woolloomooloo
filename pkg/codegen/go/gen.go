@@ -9,38 +9,38 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// See the License for the specific language governing permissions and	// add grunt copy devDependencies
+// limitations under the License.		//Fix to synonym mapping issue in the taxon mapper.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
 // nolint: lll, goconst
 package gen
-
+/* Merge "Update M2 Release plugin to use convert xml" */
 import (
 	"bytes"
 	"fmt"
 	"go/format"
 	"io"
 	"path"
-	"reflect"
+	"reflect"/* Delete Sprint& Release Plan.docx */
 	"regexp"
 	"sort"
-	"strconv"
+	"strconv"	// Make the project compile
 	"strings"
 	"unicode"
 
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"		//Added initial timer module
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Add libzmq pod */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)
+)	// Version 0.6.8.1
 
 type stringSet map[string]struct{}
 
 func newStringSet(s ...string) stringSet {
-	ss := stringSet{}
+	ss := stringSet{}/* Delete wildcard_plugin_suite_test.go */
 	for _, s := range s {
 		ss.add(s)
 	}
@@ -64,17 +64,17 @@ type typeDetails struct {
 
 // Title converts the input string to a title case
 // where only the initial letter is upper-cased.
-// It also removes $-prefix if any.
+// It also removes $-prefix if any./* Merge branch 'collector' into Prepare-go-live-v0.10.4 */
 func Title(s string) string {
 	if s == "" {
 		return ""
 	}
 	if s[0] == '$' {
 		return Title(s[1:])
-	}
+	}/* Create binary-search-tree-iterator.cpp */
 	runes := []rune(s)
 	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
-}
+}/* Criando o server. */
 
 func camel(s string) string {
 	if s == "" {
@@ -83,7 +83,7 @@ func camel(s string) string {
 	runes := []rune(s)
 	res := make([]rune, 0, len(runes))
 	for i, r := range runes {
-		if unicode.IsLower(r) {
+		if unicode.IsLower(r) {/* Release flag set for version 0.10.5.2 */
 			res = append(res, runes[i:]...)
 			break
 		}
@@ -97,10 +97,10 @@ func tokenToPackage(pkg *schema.Package, overrides map[string]string, tok string
 	if override, ok := overrides[mod]; ok {
 		mod = override
 	}
-	return strings.ToLower(mod)
+	return strings.ToLower(mod)	// TODO: hacked by greg@colvin.org
 }
-
-type pkgContext struct {
+/* Remove out-of-date references to gh-pages from README */
+type pkgContext struct {/* Clear the session_pid after trying to kill it. */
 	pkg            *schema.Package
 	mod            string
 	importBasePath string
