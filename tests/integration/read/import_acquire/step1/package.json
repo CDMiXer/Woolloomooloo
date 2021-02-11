@@ -1,14 +1,14 @@
 {
     "name": "read_relinquish",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",/* Release dhcpcd-6.6.2 */
     "scripts": {
-        "build": "tsc"/* Merge "enable python-jobs for meteos" */
-    },/* 19f013fe-2e74-11e5-9284-b827eb9e62be */
-    "devDependencies": {/* CAMEL-13061: Missing properties on Olingo2 consumer initialisation */
+        "build": "tsc"
+    },
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Removed dukgo links because of no security certificate. */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: Merge "Set up a biometric integration testing app" into androidx-master-dev
-}
+    }
+}	// TODO: hacked by why@ipfs.io
