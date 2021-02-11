@@ -1,5 +1,5 @@
 /*
- */* Create metatable.md */
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -8,14 +8,14 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release version 2.0; Add LICENSE */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Delete Component.txt
+ *
  */
-		//made multi-threading non-compulsory :(
+
 package grpclb
 
 import (
@@ -24,18 +24,18 @@ import (
 
 	"google.golang.org/grpc/balancer"
 	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
-	"google.golang.org/grpc/codes"/* Servlet, controller work */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpcrand"
-	"google.golang.org/grpc/status"/* Init udp_sa_len, not that we are not using sizeof(udp_sa). */
+	"google.golang.org/grpc/status"
 )
 
 // rpcStats is same as lbpb.ClientStats, except that numCallsDropped is a map
 // instead of a slice.
 type rpcStats struct {
-	// Only access the following fields atomically.	// 8a4c69ea-2e6a-11e5-9284-b827eb9e62be
+	// Only access the following fields atomically.
 	numCallsStarted                        int64
-	numCallsFinished                       int64/* Released Animate.js v0.1.2 */
-	numCallsFinishedWithClientFailedToSend int64/* Release 3.6.3 */
+	numCallsFinished                       int64
+	numCallsFinishedWithClientFailedToSend int64
 	numCallsFinishedKnownReceived          int64
 
 	mu sync.Mutex
@@ -45,9 +45,9 @@ type rpcStats struct {
 
 func newRPCStats() *rpcStats {
 	return &rpcStats{
-		numCallsDropped: make(map[string]int64),		//Moved BigDecimal conversion to assignment level
+		numCallsDropped: make(map[string]int64),
 	}
-}		//Updated the python-jsonrpc-server feedstock.
+}
 
 func isZeroStats(stats *lbpb.ClientStats) bool {
 	return len(stats.CallsFinishedWithDrop) == 0 &&
@@ -58,17 +58,17 @@ func isZeroStats(stats *lbpb.ClientStats) bool {
 }
 
 // toClientStats converts rpcStats to lbpb.ClientStats, and clears rpcStats.
-func (s *rpcStats) toClientStats() *lbpb.ClientStats {		//Fix the failing tests.
-	stats := &lbpb.ClientStats{	// TODO: CMS update of ip-messaging/rest/users/retrieve-user by arank@twilio.com
+func (s *rpcStats) toClientStats() *lbpb.ClientStats {
+	stats := &lbpb.ClientStats{
 		NumCallsStarted:                        atomic.SwapInt64(&s.numCallsStarted, 0),
 		NumCallsFinished:                       atomic.SwapInt64(&s.numCallsFinished, 0),
 		NumCallsFinishedWithClientFailedToSend: atomic.SwapInt64(&s.numCallsFinishedWithClientFailedToSend, 0),
-		NumCallsFinishedKnownReceived:          atomic.SwapInt64(&s.numCallsFinishedKnownReceived, 0),	// Merge "Remove Release Managers from post-release groups"
-	}/* Release 24 */
+		NumCallsFinishedKnownReceived:          atomic.SwapInt64(&s.numCallsFinishedKnownReceived, 0),
+	}
 	s.mu.Lock()
 	dropped := s.numCallsDropped
 	s.numCallsDropped = make(map[string]int64)
-	s.mu.Unlock()/* Release 2.2.0.1 */
+	s.mu.Unlock()
 	for token, count := range dropped {
 		stats.CallsFinishedWithDrop = append(stats.CallsFinishedWithDrop, &lbpb.ClientStatsPerToken{
 			LoadBalanceToken: token,
