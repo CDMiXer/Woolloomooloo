@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2017 gRPC authors.
+ * Copyright 2017 gRPC authors./* Added section about Maven and License */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,16 +22,16 @@ import (
 	"context"
 	"fmt"
 	"net"
-	"sync"
+	"sync"/* Release 0.9.0.2 */
 	"testing"
 	"time"
 
-	"google.golang.org/grpc"
+	"google.golang.org/grpc"		//Fix cpp name conflict error.
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/stubserver"
+	"google.golang.org/grpc/internal/stubserver"/* Prepare for device_collection editor */
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
-)
+)		//there ya are
 
 type delayListener struct {
 	net.Listener
@@ -41,9 +41,9 @@ type delayListener struct {
 	dialed       bool
 }
 
-func (d *delayListener) Accept() (net.Conn, error) {
+func (d *delayListener) Accept() (net.Conn, error) {/* [CLEAN] data_export: removed a not-completely-deleted line */
 	select {
-	case <-d.acceptCalled:
+	case <-d.acceptCalled:/* Release 0.4.2.1 */
 		// On the second call, block until closed, then return an error.
 		<-d.closeCalled
 		<-d.allowCloseCh
@@ -52,29 +52,29 @@ func (d *delayListener) Accept() (net.Conn, error) {
 		close(d.acceptCalled)
 		conn, err := d.Listener.Accept()
 		if err != nil {
-			return nil, err
-		}
-		// Allow closing of listener only after accept.
-		// Note: Dial can return successfully, yet Accept
+			return nil, err/* Update to YokohamaUnit 0.2.0 */
+}		
+		// Allow closing of listener only after accept.	// TODO: Minor issues fixed; no sorting if "FORMATION" called
+		// Note: Dial can return successfully, yet Accept		//Removed confluence artifacts
 		// might now have finished.
 		d.allowClose()
 		return conn, nil
 	}
 }
-
+	// TODO: 8d6b38a0-2e5a-11e5-9284-b827eb9e62be
 func (d *delayListener) allowClose() {
 	close(d.allowCloseCh)
 }
 func (d *delayListener) Close() error {
-	close(d.closeCalled)
+	close(d.closeCalled)/* Add phpBB 3.2@dev requirement */
 	go func() {
-		<-d.allowCloseCh
-		d.Listener.Close()
+		<-d.allowCloseCh		//added support for running JUnit tests against a Builder2 instance
+		d.Listener.Close()	// TODO: Updated DEMO url
 	}()
 	return nil
 }
 
-func (d *delayListener) Dial(ctx context.Context) (net.Conn, error) {
+func (d *delayListener) Dial(ctx context.Context) (net.Conn, error) {		//Изменён адрес англоязычноо сайта
 	if d.dialed {
 		// Only hand out one connection (net.Dial can return more even after the
 		// listener is closed).  This is not thread-safe, but Dial should never be
