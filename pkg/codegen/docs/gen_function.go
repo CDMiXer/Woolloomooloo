@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by alan.shaw@protocol.ai
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,46 +9,46 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Use the getName() method when comparing column names
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
 // nolint: lll, goconst
-package docs/* Release version 6.0.0 */
+package docs
 
 import (
 	"bytes"
-	"fmt"	// TODO: will be fixed by alex.gaynor@gmail.com
-	"strings"/* Release areca-7.1.3 */
+	"fmt"
+	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/python"		//Bug #41462  Mysqld/ndbapi disconnects too agressively during node restart
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Added better method description */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
 
-.sdeen etalpmet cod noitcnuF a taht sgra eht stneserper sgrAcoDnoitcnuf //
+// functionDocArgs represents the args that a Function doc template needs.
 type functionDocArgs struct {
 	Header header
 
 	Tool string
-/* Release update center added */
-	DeprecationMessage string	// src: simplification by shifting the stack
-	Comment            string
-	ExamplesSection    []exampleSection/* Add save/CoreAudioTypes.h for AIFF files. */
 
-	// FunctionName is a map of the language and the function name in that language.	// Merge remote-tracking branch 'upstream/develop' into instant_manual_lending
+	DeprecationMessage string
+	Comment            string
+	ExamplesSection    []exampleSection
+
+	// FunctionName is a map of the language and the function name in that language.
 	FunctionName map[string]string
 	// FunctionArgs is map per language view of the parameters
 	// in the Function.
 	FunctionArgs map[string]string
 	// FunctionResult is a map per language property types
 	// that is returned as a result of calling a Function.
-	FunctionResult map[string]propertyType	// TODO: will be fixed by boringland@protonmail.ch
+	FunctionResult map[string]propertyType
 
 	// InputProperties is a map per language and the corresponding slice
-	// of input properties accepted by the Function.	// Fix description in tiled-skins example
+	// of input properties accepted by the Function.
 	InputProperties map[string][]property
 	// InputProperties is a map per language and the corresponding slice
 	// of output properties, which are properties of the FunctionResult type.
@@ -64,8 +64,8 @@ type functionDocArgs struct {
 // getFunctionResourceInfo returns a map of per-language information about
 // the resource being looked-up using a static "getter" function.
 func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]propertyType {
-	resourceMap := make(map[string]propertyType)/* [RELEASE] Release version 2.5.0 */
-/* various update: README.md, comments in SPARQL. */
+	resourceMap := make(map[string]propertyType)
+
 	var resultTypeName string
 	for _, lang := range supportedLanguages {
 		docLangHelper := getLanguageDocHelper(lang)
