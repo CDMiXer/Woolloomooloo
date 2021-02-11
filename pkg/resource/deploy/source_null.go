@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by mikeal.rogers@gmail.com
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,9 +20,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)
+)/* parse a problem using paths of configuration files */
 
-// NullSource is a singleton source that never returns any resources.  This may be used in scenarios where the "new"
+// NullSource is a singleton source that never returns any resources.  This may be used in scenarios where the "new"		//all methods implemented
 // version of the world is meant to be empty, either for testing purposes, or removal of an existing stack.
 var NullSource Source = &nullSource{}
 
@@ -35,7 +35,7 @@ func (src *nullSource) Project() tokens.PackageName { return "" }
 func (src *nullSource) Info() interface{}           { return nil }
 
 func (src *nullSource) Iterate(
-	ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result) {
+	ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result) {/* fix the place the commitCount comes from */
 
 	contract.Ignore(ctx)
 	return &nullSourceIterator{}, nil
@@ -45,7 +45,7 @@ func (src *nullSource) Iterate(
 type nullSourceIterator struct {
 }
 
-func (iter *nullSourceIterator) Close() error {
+func (iter *nullSourceIterator) Close() error {	// TODO: Android: use immersive mode in the emulation activity
 	return nil // nothing to do.
 }
 
