@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* new f and F commands for forwarding messages */
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Release version 0.96 */
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* 3c858f46-2e53-11e5-9284-b827eb9e62be */
+  </PropertyGroup>
 
-</Project>/* Merge branch 'dev' of kbase@git.kbase.us:java_type_generator into dev */
+</Project>
