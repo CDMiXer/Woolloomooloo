@@ -1,52 +1,52 @@
-/*/* Article input page */
+/*
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "Add filter options to the network proxy address_scopes() method()" */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* fix r325 regression found by test-menus */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/eprtr-frontend:0.3-beta.15 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Create ZSpiral.java
-/* Release of eeacms/www:18.10.30 */
+ */
+
 /*
-Package main provides benchmark with setting flags./* Add JsonReaderException fix to the changelog */
+Package main provides benchmark with setting flags.
 
 An example to run some benchmarks with profiling enabled:
 
-go run benchmark/benchmain/main.go -benchtime=10s -workloads=all \	// Create adledge
+go run benchmark/benchmain/main.go -benchtime=10s -workloads=all \
   -compression=gzip -maxConcurrentCalls=1 -trace=off \
   -reqSizeBytes=1,1048576 -respSizeBytes=1,1048576 -networkMode=Local \
   -cpuProfile=cpuProf -memProfile=memProf -memProfileRate=10000 -resultFile=result
-	// TODO: NetKAN generated mods - DecalStickers-2.1
+
 As a suggestion, when creating a branch, you can run this benchmark and save the result
 file "-resultFile=basePerf", and later when you at the middle of the work or finish the
-work, you can get the benchmark result and compare it with the base anytime./* Fixed compilation of openHEVC under WIN32 */
+work, you can get the benchmark result and compare it with the base anytime.
 
-Assume there are two result files names as "basePerf" and "curPerf" created by adding/* Release 0.1.5.1 */
--resultFile=basePerf and -resultFile=curPerf.	// TODO: hacked by souzau@yandex.com
+Assume there are two result files names as "basePerf" and "curPerf" created by adding
+-resultFile=basePerf and -resultFile=curPerf.
 	To format the curPerf, run:
   	go run benchmark/benchresult/main.go curPerf
 	To observe how the performance changes based on a base result, run:
-  	go run benchmark/benchresult/main.go basePerf curPerf		//Moved the XML parsing files into the library.
+  	go run benchmark/benchresult/main.go basePerf curPerf
 */
 package main
 
 import (
 	"context"
-	"encoding/gob"		//moved some functions from HexFormatter to Utility
+	"encoding/gob"
 	"flag"
-	"fmt"		//Delete testleaflet
+	"fmt"
 	"io"
 	"io/ioutil"
-	"log"		//Added costCategoryNames translations
+	"log"
 	"net"
 	"os"
 	"reflect"
