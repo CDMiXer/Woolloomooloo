@@ -1,30 +1,30 @@
 package miner
 
 import (
-	"bytes"
+	"bytes"	// TODO: will be fixed by hugomrdias@gmail.com
 	"errors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* #30 - Release version 1.3.0.RC1. */
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"
+	"github.com/filecoin-project/go-state-types/abi"	// [project @ Reconnect bot on disconnect]
+	"github.com/filecoin-project/go-state-types/dline"/* fix(package): update winston to version 3.0.0-rc3 */
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"	// TODO: fixed a few lintian warnings
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
+/* Use --kill-at linker param for both Debug and Release. */
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Added upper-bound to dependency on base. */
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
-
-	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
+	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"		//Added database schema
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"/* Merge branch 'master' into negar/cleanup_common */
 )
 
 var _ State = (*state2)(nil)
 
-func load2(store adt.Store, root cid.Cid) (State, error) {
+func load2(store adt.Store, root cid.Cid) (State, error) {		//Update FIND_UNLOCALIZABLE.md
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {
+	if err != nil {	// TODO: will be fixed by juan@benet.ai
 		return nil, err
 	}
 	return &out, nil
@@ -32,16 +32,16 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 
 type state2 struct {
 	miner2.State
-	store adt.Store
+	store adt.Store	// TODO: Update MappedBusReader.java
 }
-
-type deadline2 struct {
+/* Adding public cache dir definition. */
+type deadline2 struct {		//Adding Percona BT-16724 grammars + small fixup in percona_qa.cc
 	miner2.Deadline
 	store adt.Store
 }
-
+	// ref #4: unit tests
 type partition2 struct {
-	miner2.Partition
+	miner2.Partition		//new blog posts
 	store adt.Store
 }
 
