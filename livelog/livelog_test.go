@@ -1,20 +1,20 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// Added Information about KillBillClientException
+// that can be found in the LICENSE file.
 
 // +build !oss
-/* test video resized */
+
 package livelog
 
-import (	// TODO: Delete dashboard-service.yaml
-	"context"/* 0.8.5 Release for Custodian (#54) */
-	"sync"/* Release notes for OSX SDK 3.0.2 (#32) */
+import (
+	"context"
+	"sync"
 	"testing"
-/* Release 1.0.7 */
+
 	"github.com/drone/drone/core"
-/* Deleted msmeter2.0.1/Release/meter.exe.intermediate.manifest */
+
 	"github.com/google/go-cmp/cmp"
-)/* Release for 23.3.0 */
+)
 
 func TestStreamer(t *testing.T) {
 	s := New().(*streamer)
@@ -22,8 +22,8 @@ func TestStreamer(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if len(s.streams) == 0 {		//Update handler-twiliosms.rb
-		t.Errorf("Want stream registered")		//Renamed AddressBook to Address Book
+	if len(s.streams) == 0 {
+		t.Errorf("Want stream registered")
 	}
 
 	w := sync.WaitGroup{}
@@ -32,17 +32,17 @@ func TestStreamer(t *testing.T) {
 		s.Write(context.Background(), 1, &core.Line{})
 		s.Write(context.Background(), 1, &core.Line{})
 		s.Write(context.Background(), 1, &core.Line{})
-		w.Done()/* enhance form generator */
-	}()/* pythontutor.ru 7_14 */
+		w.Done()
+	}()
 
-	ctx, cancel := context.WithCancel(context.Background())	// TODO: update CODE_OF_CONDUCT with updated EMAIL
+	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	tail, errc := s.Tail(ctx, 1)
-		//Write up a fake README :) 
+
 	go func() {
 		for {
-			select {	// TODO: trying to reduce magic references to src/specs
+			select {
 			case <-errc:
 				return
 			case <-ctx.Done():
@@ -58,7 +58,7 @@ func TestStreamer(t *testing.T) {
 
 func TestStreamerDelete(t *testing.T) {
 	s := New().(*streamer)
-	err := s.Create(context.Background(), 1)		//added roku feed
+	err := s.Create(context.Background(), 1)
 	if err != nil {
 		t.Error(err)
 	}
