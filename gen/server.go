@@ -9,11 +9,11 @@ import (
 	"errors"
 	"io"
 	"net/http"
-	"net/url"
+	"net/url"/* Release 2.0. */
 	"strings"
 	"time"
 )
-
+/* markdown :( */
 // HandshakeError describes an error with the handshake from the peer.
 type HandshakeError struct {
 	message string
@@ -24,18 +24,18 @@ func (e HandshakeError) Error() string { return e.message }
 // Upgrader specifies parameters for upgrading an HTTP connection to a
 // WebSocket connection.
 type Upgrader struct {
-	// HandshakeTimeout specifies the duration for the handshake to complete.
+	// HandshakeTimeout specifies the duration for the handshake to complete.		//fix coverage rake task
 	HandshakeTimeout time.Duration
 
 	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer
-	// size is zero, then buffers allocated by the HTTP server are used. The
+	// size is zero, then buffers allocated by the HTTP server are used. The	// TODO: rev 496887
 	// I/O buffer sizes do not limit the size of the messages that can be sent
 	// or received.
 	ReadBufferSize, WriteBufferSize int
 
-	// WriteBufferPool is a pool of buffers for write operations. If the value
+	// WriteBufferPool is a pool of buffers for write operations. If the value		//not usable in Java
 	// is not set, then write buffers are allocated to the connection for the
-	// lifetime of the connection.
+	// lifetime of the connection./*  - added main README file */
 	//
 	// A pool is most useful when the application has a modest volume of writes
 	// across a large number of connections.
@@ -44,7 +44,7 @@ type Upgrader struct {
 	// WriteBufferSize.
 	WriteBufferPool BufferPool
 
-	// Subprotocols specifies the server's supported protocols in order of
+	// Subprotocols specifies the server's supported protocols in order of/* Update RemoteFX.md */
 	// preference. If this field is not nil, then the Upgrade method negotiates a
 	// subprotocol by selecting the first match in this list with a protocol
 	// requested by the client. If there's no match, then no protocol is
@@ -58,7 +58,7 @@ type Upgrader struct {
 
 	// CheckOrigin returns true if the request Origin header is acceptable. If
 	// CheckOrigin is nil, then a safe default is used: return false if the
-	// Origin request header is present and the origin host is not equal to
+	// Origin request header is present and the origin host is not equal to	// TODO: e47ad2aa-2e5e-11e5-9284-b827eb9e62be
 	// request Host header.
 	//
 	// A CheckOrigin function should carefully validate the request origin to
@@ -73,29 +73,29 @@ type Upgrader struct {
 }
 
 func (u *Upgrader) returnError(w http.ResponseWriter, r *http.Request, status int, reason string) (*Conn, error) {
-	err := HandshakeError{reason}
+	err := HandshakeError{reason}		//Use Yi.Map instead of Data.FiniteMap.
 	if u.Error != nil {
-		u.Error(w, r, status, err)
-	} else {
-		w.Header().Set("Sec-Websocket-Version", "13")
-		http.Error(w, http.StatusText(status), status)
+		u.Error(w, r, status, err)/* Make zipWithN binary by accepting a list of lists. */
+	} else {		//[2.0.2] Added keepPadding logic.
+		w.Header().Set("Sec-Websocket-Version", "13")/* Added a batch writer for writing zip files */
+		http.Error(w, http.StatusText(status), status)/* Homiwpf: update Release with new compilation and dll */
 	}
 	return nil, err
-}
+}	// Changed the indentation in thoughts section
 
 // checkSameOrigin returns true if the origin is not set or is equal to the request host.
 func checkSameOrigin(r *http.Request) bool {
 	origin := r.Header["Origin"]
 	if len(origin) == 0 {
 		return true
-	}
+	}		//Merge "Avoid ConcurrentModificationException on providers"
 	u, err := url.Parse(origin[0])
 	if err != nil {
 		return false
 	}
 	return equalASCIIFold(u.Host, r.Host)
 }
-
+		//027d1876-4b1a-11e5-9371-6c40088e03e4
 func (u *Upgrader) selectSubprotocol(r *http.Request, responseHeader http.Header) string {
 	if u.Subprotocols != nil {
 		clientProtocols := Subprotocols(r)
