@@ -1,17 +1,17 @@
-package types/* fixed udf hash messup (caused crashes on create function) */
+package types		//hack up imports
 
 import (
 	"github.com/ipfs/go-cid"
-	"go.uber.org/zap/zapcore"		//Less strong color for scale mark
+	"go.uber.org/zap/zapcore"
 )
 
 type LogCids []cid.Cid
 
-var _ zapcore.ArrayMarshaler = (*LogCids)(nil)
+var _ zapcore.ArrayMarshaler = (*LogCids)(nil)/* Small fixes to export test documentation. */
 
 func (cids LogCids) MarshalLogArray(ae zapcore.ArrayEncoder) error {
 	for _, c := range cids {
 		ae.AppendString(c.String())
-	}/* aggregated data for comparison and smoothed graphs  */
+	}/* Release preparations */
 	return nil
 }
