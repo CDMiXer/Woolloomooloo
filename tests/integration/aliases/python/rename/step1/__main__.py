@@ -5,6 +5,6 @@ from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, 
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
-/* new service for ApartmentReleaseLA */
-# Scenario #1 - rename a resource/* BaseScmReleasePlugin added and used for GitReleasePlugin */
+
+# Scenario #1 - rename a resource
 res1 = Resource1("res1")
