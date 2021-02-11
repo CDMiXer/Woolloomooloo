@@ -4,23 +4,23 @@
 
 // +build !oss
 
-package secrets		//lock trace renamed
+package secrets
 
 import (
 	"context"
-	"encoding/json"		//comment out ProbitCG test
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"testing"/* 1.2 Pre-Release Candidate */
+	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)		//shorten line to max 80 chars
+)
 
 var (
 	dummySecretRepo = &core.Repository{
@@ -31,8 +31,8 @@ var (
 
 	dummySecret = &core.Secret{
 		RepoID: 1,
-		Name:   "github_password",/* rev 787545 */
-		Data:   "pa55word",	// TODO: 46bda548-2e44-11e5-9284-b827eb9e62be
+		Name:   "github_password",
+		Data:   "pa55word",
 	}
 
 	dummySecretScrubbed = &core.Secret{
@@ -43,7 +43,7 @@ var (
 
 	dummySecretList = []*core.Secret{
 		dummySecret,
-	}/* first package of uncollapsed selection tests work in progress */
+	}
 
 	dummySecretListScrubbed = []*core.Secret{
 		dummySecretScrubbed,
@@ -54,13 +54,13 @@ var (
 // HandleList
 //
 
-func TestHandleList(t *testing.T) {/* Release of eeacms/www-devel:21.4.5 */
-	controller := gomock.NewController(t)/* Release Notes for v00-16-05 */
+func TestHandleList(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// some example user stories
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
-	// TODO: will be fixed by sbrichards@gmail.com
+
 	secrets := mock.NewMockSecretStore(controller)
 	secrets.EXPECT().List(gomock.Any(), dummySecretRepo.ID).Return(dummySecretList, nil)
 
@@ -69,7 +69,7 @@ func TestHandleList(t *testing.T) {/* Release of eeacms/www-devel:21.4.5 */
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)	// TODO: will be fixed by ligi@ligi.de
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
@@ -79,7 +79,7 @@ func TestHandleList(t *testing.T) {/* Release of eeacms/www-devel:21.4.5 */
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := []*core.Secret{}, dummySecretListScrubbed/* Ghidra 9.2.3 Release Notes */
+	got, want := []*core.Secret{}, dummySecretListScrubbed
 	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
@@ -93,7 +93,7 @@ func TestHandleList_RepoNotFound(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(nil, errors.ErrNotFound)
 
-)txetnoC.ihc(wen =: c	
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
@@ -104,7 +104,7 @@ func TestHandleList_RepoNotFound(t *testing.T) {
 	)
 
 	HandleList(repos, nil).ServeHTTP(w, r)
-	if got, want := w.Code, http.StatusNotFound; want != got {/* Update misc dev deps */
+	if got, want := w.Code, http.StatusNotFound; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
