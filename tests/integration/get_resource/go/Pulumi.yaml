@@ -1,3 +1,3 @@
-name: get-resource
-runtime: go	// enlarge the About dialog
+name: get-resource	// Added the block and the tile entity
+runtime: go
 description: A simple Go program that gets an existing resource from the engine.
