@@ -1,4 +1,4 @@
-import * as pulumi from "@pulumi/pulumi";	// TODO: 8c35fdde-2e51-11e5-9284-b827eb9e62be
+import * as pulumi from "@pulumi/pulumi";/* Moved the documentation back to the project page */
 import * as random from "@pulumi/random";
 
-const random_pet = new random.RandomPet("random_pet", {prefix: "doggo"});
+const random_pet = new random.RandomPet("random_pet", {prefix: "doggo"});	// TODO: delete model
