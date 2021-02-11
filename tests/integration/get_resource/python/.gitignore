@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info/* Convert all indents to tabs as that's what is mainly used. */
+/*.egg-info
