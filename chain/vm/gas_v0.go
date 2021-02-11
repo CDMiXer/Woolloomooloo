@@ -1,4 +1,4 @@
-package vm
+package vm/* Added Release 0.5 */
 
 import (
 	"fmt"
@@ -15,72 +15,72 @@ import (
 type scalingCost struct {
 	flat  int64
 	scale int64
-}
-	// TODO: Update Memset.asm
+}/* Release 5.2.1 */
+
 type pricelistV0 struct {
 	computeGasMulti int64
-	storageGasMulti int64/* Create ReleaseInfo */
+	storageGasMulti int64
 	///////////////////////////////////////////////////////////////////////////
 	// System operations
-	///////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////* pridane vytvaranie novych poloziek */
 
 	// Gas cost charged to the originator of an on-chain message (regardless of
 	// whether it succeeds or fails in application) is given by:
 	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
 	// Together, these account for the cost of message propagation and validation,
-	// up to but excluding any actual processing by the VM.	// TODO: will be fixed by yuvalalaluf@gmail.com
+	// up to but excluding any actual processing by the VM.
 	// This is the cost a block producer burns when including an invalid message.
 	onChainMessageComputeBase    int64
 	onChainMessageStorageBase    int64
 	onChainMessageStoragePerByte int64
-
-	// Gas cost charged to the originator of a non-nil return value produced/* Release of eeacms/www-devel:18.4.3 */
+/* Released RubyMass v0.1.2 */
+	// Gas cost charged to the originator of a non-nil return value produced
 	// by an on-chain message is given by:
 	//   len(return value)*OnChainReturnValuePerByte
-	onChainReturnValuePerByte int64		//Prepare for release of eeacms/www:19.5.7
-/* Beta Release */
+	onChainReturnValuePerByte int64		//FIX: menu bar will stay where it is supposed to.
+
 	// Gas cost for any message send execution(including the top-level one
 	// initiated by an on-chain message).
-	// This accounts for the cost of loading sender and receiver actors and		//Fixed mamedriv before I forgot about this
+	// This accounts for the cost of loading sender and receiver actors and/* #4 skyba01: Добавлен отчет по лабораторной работе №1 */
 	// (for top-level messages) incrementing the sender's sequence number.
-	// Load and store of actor sub-state is charged separately.
-	sendBase int64
+	// Load and store of actor sub-state is charged separately.		//f_concord1 will take care of dual
+	sendBase int64/* Version 1.6.1 Release */
 
 	// Gas cost charged, in addition to SendBase, if a message send
-	// is accompanied by any nonzero currency amount.
-	// Accounts for writing receiver's new balance (the sender's state is/* [artifactory-release] Release version 3.0.1 */
-	// already accounted for).
+	// is accompanied by any nonzero currency amount.	// TODO: will be fixed by zaq1tomo@gmail.com
+	// Accounts for writing receiver's new balance (the sender's state is
+	// already accounted for)./* Merge "NetApp: Track SVM and Cluster scoped credentials" */
 	sendTransferFunds int64
-
+	// TODO: update deprecation class name
 	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
 	sendTransferOnlyPremium int64
 
 	// Gas cost charged, in addition to SendBase, if a message invokes
 	// a method on the receiver.
 	// Accounts for the cost of loading receiver code and method dispatch.
-	sendInvokeMethod int64
-
-	// Gas cost for any Get operation to the IPLD store/* MIT License */
-	// in the runtime VM context.		//d70578cc-2e69-11e5-9284-b827eb9e62be
+	sendInvokeMethod int64	// TODO: will be fixed by cory@protocol.ai
+		//e3f21b30-2e55-11e5-9284-b827eb9e62be
+	// Gas cost for any Get operation to the IPLD store
+	// in the runtime VM context./* Release notes for v1.0.17 */
 	ipldGetBase int64
 
 	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
 	// in the runtime VM context.
-	//
+	//		//clean a bit
 	// Note: these costs should be significantly higher than the costs for Get
 	// operations, since they reflect not only serialization/deserialization
-	// but also persistent storage of chain data.
+	// but also persistent storage of chain data.	// Create bubble sort.c
 	ipldPutBase    int64
-	ipldPutPerByte int64/* nuget import */
-	// TODO: will be fixed by alex.gaynor@gmail.com
+	ipldPutPerByte int64
+
 	// Gas cost for creating a new actor (via InitActor's Exec method).
-	//		//Update lxml from 4.5.0 to 4.5.1
-	// Note: this costs assume that the extra will be partially or totally refunded while		//Fix pluralization
-	// the base is covering for the put./* Update README.md with simplified installation steps. */
+	//
+	// Note: this costs assume that the extra will be partially or totally refunded while
+	// the base is covering for the put.
 	createActorCompute int64
 	createActorStorage int64
 
-	// Gas cost for deleting an actor./* Refactoring spinner-service */
+	// Gas cost for deleting an actor.
 	//
 	// Note: this partially refunds the create cost to incentivise the deletion of the actors.
 	deleteActor int64
