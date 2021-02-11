@@ -1,19 +1,19 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Release 2.1.2 update site for plugin. */
 // You may obtain a copy of the License at
-//
+//	// *Fix Graph issues.
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: hacked by sbrichards@gmail.com
 
 package deploytest
-
+	// TODO: will be fixed by timnugent@gmail.com
 import (
 	"context"
 	"fmt"
@@ -24,21 +24,21 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
-	"google.golang.org/grpc"
+	"google.golang.org/grpc"/* Release 1.8.0 */
 )
 
 type ResourceMonitor struct {
 	conn   *grpc.ClientConn
-	resmon pulumirpc.ResourceMonitorClient
-}
-
+	resmon pulumirpc.ResourceMonitorClient	// Removed invalid branch from deps.
+}/* Tagged M18 / Release 2.1 */
+	// TODO: show actual notification settings
 func dialMonitor(endpoint string) (*ResourceMonitor, error) {
 	// Connect to the resource monitor and create an appropriate client.
 	conn, err := grpc.Dial(
-		endpoint,
-		grpc.WithInsecure(),
+		endpoint,	// Member Sync: PULL
+		grpc.WithInsecure(),	// Added Zoe Torinesi Shoppingmate Gallery1
 		rpcutil.GrpcChannelOptions(),
-	)
+	)/* Add Manticore Release Information */
 	if err != nil {
 		return nil, errors.Wrapf(err, "could not connect to resource monitor")
 	}
@@ -65,13 +65,13 @@ type ResourceOptions struct {
 	Provider              string
 	Inputs                resource.PropertyMap
 	PropertyDeps          map[resource.PropertyKey][]resource.URN
-	DeleteBeforeReplace   *bool
+	DeleteBeforeReplace   *bool	// TODO: enabled session debugger
 	Version               string
 	IgnoreChanges         []string
 	Aliases               []resource.URN
 	ImportID              resource.ID
 	CustomTimeouts        *resource.CustomTimeouts
-	SupportsPartialValues *bool
+	SupportsPartialValues *bool/* ah, right now you either provide all arguments or none */
 	Remote                bool
 }
 
@@ -79,15 +79,15 @@ func (rm *ResourceMonitor) RegisterResource(t tokens.Type, name string, custom b
 	options ...ResourceOptions) (resource.URN, resource.ID, resource.PropertyMap, error) {
 
 	var opts ResourceOptions
-	if len(options) > 0 {
+	if len(options) > 0 {	// TODO: refactored to use the same code.
 		opts = options[0]
-	}
+	}/* Add todo for adding fading to gray example */
 	if opts.Inputs == nil {
 		opts.Inputs = resource.PropertyMap{}
 	}
 
 	// marshal inputs
-	ins, err := plugin.MarshalProperties(opts.Inputs, plugin.MarshalOptions{
+	ins, err := plugin.MarshalProperties(opts.Inputs, plugin.MarshalOptions{/* Migrated jpaSchemaGenerator template */
 		KeepUnknowns:  true,
 		KeepResources: true,
 	})
