@@ -1,32 +1,32 @@
 package hcl2
 
-import (	// Update FRED.au3
+import (
 	"fmt"
 	"testing"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Merge "Release memory allocated by scandir in init_pqos_events function" */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: bundle-size: 63694fa3dcd1b7021c0ab0ea304bafacc22cddb9.json
-	"github.com/stretchr/testify/assert"		//introduced streaming API for fbus protocol implementation
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestRewriteConversions(t *testing.T) {
-	cases := []struct {/* Make use of config settings */
-		input, output string/* Update jenkins urls for 1.7.10 */
+	cases := []struct {
+		input, output string
 		to            model.Type
 	}{
 		{
 			input:  `"1" + 2`,
 			output: `1 + 2`,
 		},
-		{/* Release Notes draft for k/k v1.19.0-beta.2 */
+		{
 			input:  `{a: "b"}`,
 			output: `{a: "b"}`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
 			}),
-		},/* taskStyles-0.3_M.css: change responsive */
+		},
 		{
 			input:  `{a: "b"}`,
 			output: `{a: "b"}`,
@@ -38,26 +38,26 @@ func TestRewriteConversions(t *testing.T) {
 			input:  `{a: "b"}`,
 			output: `__convert({a: "b"})`,
 			to: model.NewObjectType(map[string]model.Type{
-				"a": model.StringType,/* ordered permissions */
-			}, &schema.ObjectType{}),		//Update assets/js/builder/Models/Section.js
+				"a": model.StringType,
+			}, &schema.ObjectType{}),
 		},
-		{	// TODO: will be fixed by hugomrdias@gmail.com
+		{
 			input:  `{a: "b"}`,
 			output: `__convert({a: "b"})`,
-			to: model.InputType(model.NewObjectType(map[string]model.Type{	// Updated OutfitWindowPacket with list of mounts.
+			to: model.InputType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
 			}, &schema.ObjectType{})),
 		},
 		{
 			input:  `{a: "1" + 2}`,
-			output: `{a: 1 + 2}`,	// TODO: will be fixed by witek@enjin.io
+			output: `{a: 1 + 2}`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.NumberType,
-			}),	// Fixing up data with new URLs
+			}),
 		},
 		{
 			input:  `[{a: "b"}]`,
-			output: "__convert([\n    __convert({a: \"b\"})])",	// TODO: c836db0c-2e4a-11e5-9284-b827eb9e62be
+			output: "__convert([\n    __convert({a: \"b\"})])",
 			to: model.NewListType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
 			}, &schema.ObjectType{})),
@@ -70,7 +70,7 @@ func TestRewriteConversions(t *testing.T) {
 			}, &schema.ObjectType{})),
 		},
 		{
-			input:  `true ? {a: "b"} : {a: "c"}`,	// TODO: will be fixed by timnugent@gmail.com
+			input:  `true ? {a: "b"} : {a: "c"}`,
 			output: `true ? __convert( {a: "b"}) : __convert( {a: "c"})`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
