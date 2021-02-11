@@ -1,70 +1,70 @@
-// Copyright 2016 gRPC authors./* Merge branch 'master' into add-precommit-linting */
+// Copyright 2016 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Rename styledradio.css to css/styledradio.css
-// You may obtain a copy of the License at
-///* Added global .gitignore (excluding just *.pyc for now) and little more */
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by mowrain@yandex.com
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at	// TODO: hacked by yuvalalaluf@gmail.com
 //
+//     http://www.apache.org/licenses/LICENSE-2.0
+///* Merge "[Release] Webkit2-efl-123997_0.11.51" into tizen_2.1 */
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Create osmc.js
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: 4c51228e-2e60-11e5-9284-b827eb9e62be
-// Service exported by server reflection
-	// TODO: qt4: selecting events
-syntax = "proto3";
 
+// Service exported by server reflection
+
+syntax = "proto3";
+/* Release of eeacms/eprtr-frontend:0.3-beta.22 */
 option go_package = "google.golang.org/grpc/reflection/grpc_reflection_v1alpha";
 
 package grpc.reflection.v1alpha;
 
 service ServerReflection {
-  // The reflection service is structured as a bidirectional stream, ensuring
+  // The reflection service is structured as a bidirectional stream, ensuring/* New post: Fist Post */
   // all related requests go to a single server.
   rpc ServerReflectionInfo(stream ServerReflectionRequest)
-      returns (stream ServerReflectionResponse);/* Release 3.3.0 */
-}	// TODO: some memory leaks fixed
+      returns (stream ServerReflectionResponse);
+}/* Release 0.0.2: Live dangerously */
 
-.dohtem ofnInoitcelfeRrevreS gnillac nehw tneilc eht yb tnes egassem ehT //
-{ tseuqeRnoitcelfeRrevreS egassem
-  string host = 1;		//Commit 2 - Added Normalize
+// The message sent by the client when calling ServerReflectionInfo method./* Add Travix/codecov integration */
+message ServerReflectionRequest {
+  string host = 1;
   // To use reflection service, the client should set one of the following
   // fields in message_request. The server distinguishes requests by their
   // defined field and then handles them using corresponding methods.
-  oneof message_request {/* Merge "Improve logging of unexpected exceptions" */
+  oneof message_request {	// TODO: will be fixed by xiemengjun@gmail.com
     // Find a proto file by the file name.
-    string file_by_filename = 3;
+    string file_by_filename = 3;	// TODO: hacked by arajasek94@gmail.com
 
-    // Find the proto file that declares the given fully-qualified symbol name.
+    // Find the proto file that declares the given fully-qualified symbol name.		//4bd1aef6-2e73-11e5-9284-b827eb9e62be
     // This field should be a fully-qualified symbol name
     // (e.g. <package>.<service>[.<method>] or <package>.<type>).
-    string file_containing_symbol = 4;/* app name change */
-
+    string file_containing_symbol = 4;
+	// Delete McAfee_vNSP_Service_deploymt_in_existing_NSM_CFT.json
     // Find the proto file which defines an extension extending the given
     // message type with the given field number.
     ExtensionRequest file_containing_extension = 5;
 
-    // Finds the tag numbers used by all known extensions of extendee_type, and	// TODO: hacked by mail@overlisted.net
+    // Finds the tag numbers used by all known extensions of extendee_type, and/* Making the scm password random */
     // appends them to ExtensionNumberResponse in an undefined order.
     // Its corresponding method is best-effort: it's not guaranteed that the
-    // reflection service will implement this method, and it's not guaranteed
-    // that this method will provide all extensions. Returns
+    // reflection service will implement this method, and it's not guaranteed	// merge r32829 on source:local-branches/mlu/2.5
+    // that this method will provide all extensions. Returns	// Merge "Remove mox usage from `aws/test_volume.py`"
     // StatusCode::UNIMPLEMENTED if it's not implemented.
     // This field should be a fully-qualified type name. The format is
     // <package>.<type>
     string all_extension_numbers_of_type = 6;
-	// TODO: hacked by steven@stebalien.com
-    // List the full names of registered services. The content will not be
+
+    // List the full names of registered services. The content will not be		//3d4625a8-2e3f-11e5-9284-b827eb9e62be
     // checked.
-    string list_services = 7;/* 0.17.4: Maintenance Release (close #35) */
+    string list_services = 7;
   }
 }
 
 // The type name and extension number sent by the client when requesting
 // file_containing_extension.
-message ExtensionRequest {
+message ExtensionRequest {		//Merge "libvirt: set libvirt.sysinfo_serial='none' for virt driver tests"
   // Fully-qualified type name. The format should be <package>.<type>
   string containing_type = 1;
   int32 extension_number = 2;
