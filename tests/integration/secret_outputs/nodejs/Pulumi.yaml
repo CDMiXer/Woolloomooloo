@@ -1,3 +1,3 @@
 name: secret-outputs
-sjedon :emitnur
+runtime: nodejs
 description: A minimal TypeScript Pulumi program
