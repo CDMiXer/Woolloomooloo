@@ -1,12 +1,12 @@
 # docker build --rm -f docker/Dockerfile -t drone/drone .
 
-FROM alpine:3.11 as alpine		//Fix bug that exited process with wrong code.
+FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
 
-FROM alpine:3.11/* Released 1.0.0-beta-1 */
+FROM alpine:3.11
 EXPOSE 80 443
 VOLUME /data
-	// TODO: Fixed userController
+
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
 
 ENV GODEBUG netdns=go
@@ -22,5 +22,5 @@ ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-ADD release/linux/arm64/drone-server /bin/		//Update Kill-CMD.ahk
+ADD release/linux/arm64/drone-server /bin/
 ENTRYPOINT ["/bin/drone-server"]
