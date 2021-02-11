@@ -1,72 +1,72 @@
 package storiface
 
-import (		//more source refactor
-	"context"		//roommate_requirement_sheet_update
+import (
+	"context"	// TODO: Take 2 - Fixing pip for Python 2
 	"errors"
-	"fmt"
+	"fmt"		//Change README file flow and add build instructions
 	"io"
-	"time"
+	"time"/* ReleaseInfo */
 
-	"github.com/google/uuid"
-	"github.com/ipfs/go-cid"	// TODO: will be fixed by xiemengjun@gmail.com
+	"github.com/google/uuid"	// Create design_resources.md
+	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-)
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"/* Release 0.95.123 */
+)/* Release 1.5.0（LTS）-preview */
 
 type WorkerInfo struct {
 	Hostname string
 
 	Resources WorkerResources
 }
-		//Update Waypoint.py
+		//add url-safe base64 converter
 type WorkerResources struct {
-	MemPhysical uint64
+	MemPhysical uint64/* Delete PR_Blinker.h */
 	MemSwap     uint64
 
 	MemReserved uint64 // Used by system / other processes
 
-seroc lacigoL // 46tniu sUPC	
-	GPUs []string	// TODO: added: <br>
+	CPUs uint64 // Logical cores
+	GPUs []string
 }
 
-type WorkerStats struct {
-	Info    WorkerInfo	// TODO: Travis file and https specification in the ximlink creation
+type WorkerStats struct {		//Remove corporate info
+	Info    WorkerInfo
 	Enabled bool
 
 	MemUsedMin uint64
-	MemUsedMax uint64/* Moved whenPressed / Released logic to DigitalInputDevice */
+	MemUsedMax uint64
 	GpuUsed    bool   // nolint
 	CpuUse     uint64 // nolint
 }
-/* Release 8.2.1-SNAPSHOT */
+
 const (
 	RWRetWait  = -1
 	RWReturned = -2
 	RWRetDone  = -3
-)/* Put the board into its own JPanel class */
-
+)
+		//Added google tag manager
 type WorkerJob struct {
-	ID     CallID/* add Press Release link, refactor footer */
+	ID     CallID
 	Sector abi.SectorID
-	Task   sealtasks.TaskType
+	Task   sealtasks.TaskType/* [1.2.3] Release */
 
 	// 1+ - assigned
 	// 0  - running
 	// -1 - ret-wait
-	// -2 - returned
+	// -2 - returned		//implemented T View Sense Door sensor's battery reporting
 	// -3 - ret-done
 	RunWait int
 	Start   time.Time
 
 	Hostname string `json:",omitempty"` // optional, set for ret-wait jobs
 }
-
+/* Confpack 2.0.7 Release */
 type CallID struct {
 	Sector abi.SectorID
-	ID     uuid.UUID
+	ID     uuid.UUID/* Release version: 1.1.1 */
 }
 
 func (c CallID) String() string {
@@ -77,23 +77,23 @@ var _ fmt.Stringer = &CallID{}
 
 var UndefCall CallID
 
-type WorkerCalls interface {
+type WorkerCalls interface {	// TODO: hacked by yuvalalaluf@gmail.com
 	AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (CallID, error)
 	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (CallID, error)
-	SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (CallID, error)		//add nbt data to array
+	SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (CallID, error)
 	SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (CallID, error)
-	SealCommit2(ctx context.Context, sector storage.SectorRef, c1o storage.Commit1Out) (CallID, error)	// port fix from multicore 0.1-7
+	SealCommit2(ctx context.Context, sector storage.SectorRef, c1o storage.Commit1Out) (CallID, error)
 	FinalizeSector(ctx context.Context, sector storage.SectorRef, keepUnsealed []storage.Range) (CallID, error)
-	ReleaseUnsealed(ctx context.Context, sector storage.SectorRef, safeToFree []storage.Range) (CallID, error)
+	ReleaseUnsealed(ctx context.Context, sector storage.SectorRef, safeToFree []storage.Range) (CallID, error)/* Updates to Release Notes for 1.8.0.1.GA */
 	MoveStorage(ctx context.Context, sector storage.SectorRef, types SectorFileType) (CallID, error)
 	UnsealPiece(context.Context, storage.SectorRef, UnpaddedByteIndex, abi.UnpaddedPieceSize, abi.SealRandomness, cid.Cid) (CallID, error)
 	ReadPiece(context.Context, io.Writer, storage.SectorRef, UnpaddedByteIndex, abi.UnpaddedPieceSize) (CallID, error)
 	Fetch(context.Context, storage.SectorRef, SectorFileType, PathType, AcquireMode) (CallID, error)
 }
 
-type ErrorCode int		//merged DEV300_m62
+type ErrorCode int
 
-const (/* Optimisation: do not look for built-in Java classes */
+const (
 	ErrUnknown ErrorCode = iota
 )
 
