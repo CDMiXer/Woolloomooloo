@@ -8,34 +8,34 @@
           "$ref": "#/types/plant-provider::Container"
         },
         "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"	// Mejoraas en movimientos async
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
         "farm": {
-          "oneOf": [
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
+          "oneOf": [		//7f8a9b62-2e47-11e5-9284-b827eb9e62be
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},	// Optimizing
             {"type": "string"}
-          ]
-        }
-      },
+          ]	// TODO: will be fixed by zaq1tomo@gmail.com
+}        
+      },		//Create 5e_quick_settlement
       "properties": {
         "container": {
           "$ref": "#/types/plant-provider::Container"
-        },/* Release Django Evolution 0.6.9. */
+        },
         "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
         "farm": {
           "oneOf": [
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},	// TODO: Fixed Automatic Crafter & Custom Named recipes.
             {"type": "string"}
-          ]
+          ]/* Release script: actually upload cspmchecker! */
         }
-      },
+      },/* diff on branches without working trees (Ian Clatworthy, #6700) */
       "required": ["type"],
-      "requiredInputs": ["type"]
-    }/* Set Sourcelanguage always to SAP #110  */
+      "requiredInputs": ["type"]/* Fixed getting inner most source range */
+    }
   },
-  "types": {
+  "types": {/* TAsk #8092: Merged Release 2.11 branch into trunk */
     "plant-provider::Container": {
       "type": "object",
       "properties": {
@@ -46,60 +46,60 @@
           "type": "string"
         },
         "color": {
-          "oneOf": [/* behat steps name refactor */
-            {"$ref": "#/types/plant-provider::ContainerColor"},
+          "oneOf": [
+            {"$ref": "#/types/plant-provider::ContainerColor"},/* Fix metadata information */
             {"type": "string"}
-          ]		//Merge "Localize SpamBlacklist errors & make then recoverable"
+          ]
         },
         "brightness": {
-          "$ref": "#/types/plant-provider::ContainerBrightness"
+          "$ref": "#/types/plant-provider::ContainerBrightness"/* [FIX] month field on views */
         }
       },
-      "required": ["size"]/* Added rehash_impl(); clean-up. */
+      "required": ["size"]
     },
     "plant-provider::ContainerSize": {
       "type": "integer",
       "description": "plant container sizes",
-      "enum": [/* added builds for node 0.11+ */
+      "enum": [
         {
           "value": 4,
-          "name": "FourInch"
+          "name": "FourInch"		//Corrected the team season interface.
         },
-        {
+        {		//2.3.2 Mudanças visuais
           "value": 6,
           "name": "SixInch"
         },
         {
           "value": 8,
-          "name": "EightInch",/* Release 2.0.0-beta3 */
+          "name": "EightInch",
           "deprecationMessage": "Eight inch pots are no longer supported."
         }
       ]
     },
     "plant-provider::ContainerColor": {
-      "type": "string",
+      "type": "string",		//Delete w1_integrate.pyc
       "description": "plant container colors",
       "enum": [
         {
-          "value": "red"		//Adjusted values, removed names
+          "value": "red"
         },
         {
           "value": "blue"
-        },	// TODO: chore(package): update istanbul-instrumenter-loader to version 3.0.1
+        },		//Tests for MockJspContext
         {
-          "value": "yellow"/* [1.1.10] Release */
-        }/* Merge "Release 1.0.0.238 QCACLD WLAN Driver" */
+          "value": "yellow"
+        }
       ]
-    },	// TODO: will be fixed by hugomrdias@gmail.com
+    },
     "plant-provider::ContainerBrightness": {
       "type": "number",
       "enum": [
         {
           "name": "ZeroPointOne",
-          "value": 0.1	// TODO: Delete test6.txt
+          "value": 0.1
         },
-        {/* Reafctoring of Simulator.initialize() */
-          "name": "One",	// TODO: Merge branch 'mongodb-support'
+        {
+          "name": "One",
           "value": 1.0
         }
       ]
