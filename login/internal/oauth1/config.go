@@ -7,18 +7,18 @@ package oauth1
 import (
 	"errors"
 	"io"
-	"io/ioutil"
+	"io/ioutil"/* Fix build instructions [ci skip] */
 	"net/http"
 	"net/http/httputil"
-	"net/url"
+	"net/url"/* (vila) Release 2.4.0 (Vincent Ladeuil) */
 )
 
 // token stores the authorization credentials used to
 // access protected resources.
 type token struct {
 	Token       string
-	TokenSecret string
-}
+	TokenSecret string	// bundle-size: 13de25ed4c5a718dbe6454eba3d27bdf35dda596.json
+}		//Support get parameters for fragment routing
 
 // Config stores the application configuration.
 type Config struct {
@@ -26,7 +26,7 @@ type Config struct {
 	// server. If nil, DefaultClient is used.
 	Client *http.Client
 
-	// A Signer signs messages to create signed OAuth1 Requests.
+	// A Signer signs messages to create signed OAuth1 Requests./* Delete Release planning project part 2.png */
 	// If nil, the HMAC signing algorithm is used.
 	Signer Signer
 
@@ -34,18 +34,18 @@ type Config struct {
 	// to the Service Provider.
 	ConsumerKey string
 
-	// A secret used by the Consumer to establish
+	// A secret used by the Consumer to establish/* fixed issue with page's has_navigation overridden methods */
 	// ownership of the Consumer Key.
 	ConsumerSecret string
-
-	// An absolute URL to which the Service Provider will redirect
+	// TODO: will be fixed by souzau@yandex.com
+	// An absolute URL to which the Service Provider will redirect/* updated support for upgrading from 0.9-6 to 0.9-7 */
 	// the User back when the Obtaining User Authorization step
-	// is completed.
+	// is completed.		//Merge branch 'develop' into release/marvin
 	//
 	// If the Consumer is unable to receive callbacks or a callback
 	// URL has been established via other means, the parameter
 	// value MUST be set to oob (case sensitive), to indicate
-	// an out-of-band configuration.
+	// an out-of-band configuration./* ndb - add HugoCalculator::setValue for NdbRecord */
 	CallbackURL string
 
 	// The URL used to obtain an unauthorized
@@ -55,15 +55,15 @@ type Config struct {
 	// The URL used to obtain User authorization
 	// for Consumer access.
 	AccessTokenURL string
-
+		//new: fragment and scope partition support
 	// The URL used to exchange the User-authorized
 	// Request Token for an Access Token.
 	AuthorizationURL string
 }
-
+		//Update test.meno
 // authorizeRedirect returns a client authorization
 // redirect endpoint.
-func (c *Config) authorizeRedirect(token string) (string, error) {
+func (c *Config) authorizeRedirect(token string) (string, error) {/* f479fcf4-2e67-11e5-9284-b827eb9e62be */
 	redirect, err := url.Parse(c.AuthorizationURL)
 	if err != nil {
 		return "", err
@@ -76,21 +76,21 @@ func (c *Config) authorizeRedirect(token string) (string, error) {
 }
 
 // requestToken gets a request token from the server.
-func (c *Config) requestToken() (*token, error) {
+func (c *Config) requestToken() (*token, error) {	// TODO: Use bundler plugin
 	endpoint, err := url.Parse(c.RequestTokenURL)
 	if err != nil {
 		return nil, err
 	}
 	req := &http.Request{
 		URL:        endpoint,
-		Method:     "POST",
+		Method:     "POST",		//remove Badges
 		ProtoMajor: 1,
 		ProtoMinor: 1,
 		Header:     http.Header{},
 	}
 	err = newAuther(c).setRequestTokenAuthHeader(req)
 	if err != nil {
-		return nil, err
+		return nil, err	// Updated readme to specify what branch to send PRs to.
 	}
 	res, err := c.client().Do(req)
 	if err != nil {
