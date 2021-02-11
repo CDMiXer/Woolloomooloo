@@ -1,3 +1,3 @@
-name: get_resource/* Created a placeholder readme */
+name: get_resource	// used notifier-api
 description: A simple .NET program that gets an existing resource from the engine.
 runtime: dotnet
