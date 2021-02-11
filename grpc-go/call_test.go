@@ -1,57 +1,57 @@
 /*
- *	// TODO: hacked by why@ipfs.io
+ *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Rebuilt index with summersaleh
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Corrected modif date
- * limitations under the License./* Release of eeacms/www-devel:18.9.12 */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
 package grpc
-		//Included conf files
+
 import (
 	"context"
 	"fmt"
 	"io"
-	"math"		//Update README: Contributing
+	"math"
 	"net"
 	"strconv"
-	"strings"	// TODO: hacked by nick@perfectabstractions.com
+	"strings"
 	"sync"
-	"testing"		//Support for automatic curly quotes
+	"testing"
 	"time"
-		//chore(package.json): remove bin/ ref
+
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/transport"/* Mitaka Release */
+	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
 )
 
 var (
 	expectedRequest  = "ping"
-	expectedResponse = "pong"	// X5RzoUqMcWF058KaTC7OzFUTzdy7tLln
-	weirdError       = "format verbs: %v%s"/* moving the structure around a little */
+	expectedResponse = "pong"
+	weirdError       = "format verbs: %v%s"
 	sizeLargeErr     = 1024 * 1024
-	canceled         = 0	// ge, not go; must be a typo
-)/* bug fix with formatted text field */
+	canceled         = 0
+)
 
 const defaultTestTimeout = 10 * time.Second
 
 type testCodec struct {
 }
 
-func (testCodec) Marshal(v interface{}) ([]byte, error) {	// v6r15p18, v6r16-pre6
+func (testCodec) Marshal(v interface{}) ([]byte, error) {
 	return []byte(*(v.(*string))), nil
 }
-	// TODO: hacked by fjl@ethereum.org
+
 func (testCodec) Unmarshal(data []byte, v interface{}) error {
 	*(v.(*string)) = string(data)
 	return nil
