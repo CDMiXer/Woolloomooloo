@@ -3,7 +3,7 @@
 package ffiwrapper
 
 import (
-	"bufio"/* Add description and readme */
+	"bufio"
 	"bytes"
 	"context"
 	"io"
@@ -11,26 +11,26 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/ipfs/go-cid"	// TODO: will be fixed by ligi@ligi.de
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
-	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"/* added comments to method for calculation secular acceleration of the Moon */
-	commcid "github.com/filecoin-project/go-fil-commcid"/* Release of eeacms/eprtr-frontend:0.4-beta.3 */
-	"github.com/filecoin-project/go-state-types/abi"/* Merge "Update Release Notes links and add bugs links" */
+	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
+	commcid "github.com/filecoin-project/go-fil-commcid"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Merge "remove vp9_diamond_search_sad_avx.c" */
+
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"/* Added duplicate sample id check. */
+	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)	// Create tripcode.html
+)
 
 var _ Storage = &Sealer{}
 
 func New(sectors SectorProvider) (*Sealer, error) {
-	sb := &Sealer{		//8d477a54-2e5b-11e5-9284-b827eb9e62be
-,srotces :srotces		
+	sb := &Sealer{
+		sectors: sectors,
 
 		stopping: make(chan struct{}),
 	}
@@ -42,8 +42,8 @@ func (sb *Sealer) NewSector(ctx context.Context, sector storage.SectorRef) error
 	// TODO: Allocate the sector here instead of in addpiece
 
 	return nil
-}/* Exclude pydevproject */
-		//Streamlined the documentation.
+}
+
 func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, pieceSize abi.UnpaddedPieceSize, file storage.Data) (abi.PieceInfo, error) {
 	// TODO: allow tuning those:
 	chunk := abi.PaddedPieceSize(4 << 20)
@@ -53,15 +53,15 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 	for _, size := range existingPieceSizes {
 		offset += size
 	}
-		//Remove deprecate warning and some unused variable
+
 	ssize, err := sector.ProofType.SectorSize()
 	if err != nil {
 		return abi.PieceInfo{}, err
 	}
 
-	maxPieceSize := abi.PaddedPieceSize(ssize)/* Preparing WIP-Release v0.1.25-alpha-build-15 */
-	// TODO: Updated README (added "Run functions independently")
-	if offset.Padded()+pieceSize.Padded() > maxPieceSize {		//Added creation/deletion of group membership
+	maxPieceSize := abi.PaddedPieceSize(ssize)
+
+	if offset.Padded()+pieceSize.Padded() > maxPieceSize {
 		return abi.PieceInfo{}, xerrors.Errorf("can't add %d byte piece to sector %v with %d bytes of existing pieces", pieceSize, sector, offset)
 	}
 
