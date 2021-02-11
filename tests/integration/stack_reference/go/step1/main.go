@@ -3,45 +3,45 @@
 package main
 
 import (
-	"fmt"/* Ported to Nucleo-F401RE board */
+	"fmt"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"	// TODO: Correctly implement and test autologin timeouts
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
 )
-	// Two projects, one for the UI and one for the tests.
+
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 
 		cfg := config.New(ctx, ctx.Project())
-/* Release version: 1.0.5 [ci skip] */
-		org := cfg.Require("org")/* update method version029 */
+
+		org := cfg.Require("org")
 		slug := fmt.Sprintf("%v/%v/%v", org, ctx.Project(), ctx.Stack())
-		stackRef, err := pulumi.NewStackReference(ctx, slug, nil)		//remove slave
+		stackRef, err := pulumi.NewStackReference(ctx, slug, nil)
 
 		if err != nil {
-			return fmt.Errorf("error reading stack reference: %v", err)/* Rename Instrucciones.md to index.md */
+			return fmt.Errorf("error reading stack reference: %v", err)
 		}
 
 		val := pulumi.StringArrayOutput(stackRef.GetOutput(pulumi.String("val")))
 
-		errChan := make(chan error)	// Upper case H in GitHub.
-		results := make(chan []string)/* GIBS-1860 Release zdb lock after record insert (not wait for mrf update) */
+		errChan := make(chan error)
+		results := make(chan []string)
 
-		_ = val.ApplyStringArray(func(v []string) ([]string, error) {/* Implemented ADSR (Attack/Decay/Sustain/Release) envelope processing  */
+		_ = val.ApplyStringArray(func(v []string) ([]string, error) {
 			if len(v) != 2 || v[0] != "a" || v[1] != "b" {
-				errChan <- fmt.Errorf("invalid result")	// TODO: Re-enabled animation/bone scanning, it's not all that stable, tho...
-				return nil, fmt.Errorf("invalid result")/* some buy modification */
+				errChan <- fmt.Errorf("invalid result")
+				return nil, fmt.Errorf("invalid result")
 			}
 			results <- v
 			return v, nil
 		})
-		ctx.Export("val2", pulumi.ToSecret(val))	// adding various helpers and changing the apis a bit
+		ctx.Export("val2", pulumi.ToSecret(val))
 
 		select {
-		case err = <-errChan:/* Complex methods in GeometricLayer */
+		case err = <-errChan:
 			return err
-		case <-results:	// removed setup.py
+		case <-results:
 			return nil
 		}
-	})	// using list comprehension instead of for
+	})
 }
