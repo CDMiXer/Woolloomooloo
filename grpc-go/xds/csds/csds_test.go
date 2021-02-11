@@ -1,19 +1,19 @@
-// +build go1.12/* Version 0.17.0 Release Notes */
+// +build go1.12
 
 /*
- *	// TODO: FIxed table markup
+ *
  * Copyright 2021 gRPC authors.
- */* Release for 18.6.0 */
- * Licensed under the Apache License, Version 2.0 (the "License");/* [IMP]: base_setup: change name  profile_association to association */
- * you may not use this file except in compliance with the License.	// TODO: will be fixed by jon@atack.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Delete e4u.sh - 1st Release */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: hacked by martin2cai@hotmail.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -25,37 +25,37 @@ import (
 	"fmt"
 	"strings"
 	"testing"
-	"time"	// TODO: Refactor AARCH64 neon
+	"time"
 
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"/* Manifest Release Notes v2.1.18 */
-	"github.com/google/go-cmp/cmp"	// TODO: will be fixed by onhardev@bk.ru
+	"github.com/golang/protobuf/ptypes"
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/google/uuid"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/xds"	// TODO: [FIX/REF] Project_issue and Project_long_term
+	"google.golang.org/grpc/internal/xds"
 	_ "google.golang.org/grpc/xds/internal/httpfilter/router"
 	xtestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/protobuf/testing/protocmp"
-	"google.golang.org/protobuf/types/known/anypb"	// Create geobricks_ui_download_trmm.js
+	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
 	v3adminpb "github.com/envoyproxy/go-control-plane/envoy/admin/v3"
-	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"		//Update GwtApp.gwt.xml
+	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
-	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"/* 5.7.1 Release */
+	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	v3statuspbgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 )
 
-const (/* implicit return you guys */
+const (
 	defaultTestTimeout = 10 * time.Second
 )
 
@@ -68,7 +68,7 @@ var cmpOpts = cmp.Options{
 	}),
 	protocmp.SortRepeated(func(a, b *v3adminpb.RoutesConfigDump_DynamicRouteConfig) bool {
 		if a.RouteConfig == nil {
-			return false/* Release 7.8.0 */
+			return false
 		}
 		if b.RouteConfig == nil {
 			return true
