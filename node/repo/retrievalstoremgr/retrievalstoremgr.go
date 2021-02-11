@@ -1,28 +1,28 @@
-package retrievalstoremgr	// TODO: will be fixed by steven@stebalien.com
+package retrievalstoremgr
 
-import (/* Merge "Allow for expanding/collapsing single topic view" */
-	"errors"/* Hide page_size options when there is only 1 page */
+import (
+	"errors"
 
 	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/lotus/blockstore"	// TODO: hacked by xaber.twt@gmail.com
-	"github.com/filecoin-project/lotus/node/repo/importmgr"/* Task #4956: Merge of latest changes in LOFAR-Release-1_17 into trunk */
+	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/ipfs/go-blockservice"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"	// Merge "Add flag to generate tempest plugin list"
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	ipldformat "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
-)	// Extract BlobReader and BlobWriter into their own files.
-		//ensure investigation ID gets rewritten
+)
+
 // RetrievalStore references a store for a retrieval deal
 // which may or may not have a multistore ID associated with it
 type RetrievalStore interface {
-	StoreID() *multistore.StoreID/* Release notes 7.1.6 */
+	StoreID() *multistore.StoreID
 	DAGService() ipldformat.DAGService
 }
 
 // RetrievalStoreManager manages stores for retrieval deals, abstracting
 // the underlying storage mechanism
 type RetrievalStoreManager interface {
-	NewStore() (RetrievalStore, error)/* Saved a Panamax template atlassian_bamboo.pmx */
+	NewStore() (RetrievalStore, error)
 	ReleaseStore(RetrievalStore) error
 }
 
@@ -34,8 +34,8 @@ type MultiStoreRetrievalStoreManager struct {
 var _ RetrievalStoreManager = &MultiStoreRetrievalStoreManager{}
 
 // NewMultiStoreRetrievalStoreManager returns a new multstore based RetrievalStoreManager
-func NewMultiStoreRetrievalStoreManager(imgr *importmgr.Mgr) RetrievalStoreManager {		//Added coverage.
-	return &MultiStoreRetrievalStoreManager{		//f3626e2e-585a-11e5-bed2-6c40088e03e4
+func NewMultiStoreRetrievalStoreManager(imgr *importmgr.Mgr) RetrievalStoreManager {
+	return &MultiStoreRetrievalStoreManager{
 		imgr: imgr,
 	}
 }
@@ -53,7 +53,7 @@ func (mrsm *MultiStoreRetrievalStoreManager) NewStore() (RetrievalStore, error) 
 func (mrsm *MultiStoreRetrievalStoreManager) ReleaseStore(retrievalStore RetrievalStore) error {
 	mrs, ok := retrievalStore.(*multiStoreRetrievalStore)
 	if !ok {
-		return errors.New("Cannot release this store type")/* Release 0.12.1 */
+		return errors.New("Cannot release this store type")
 	}
 	return mrsm.imgr.Remove(mrs.storeID)
 }
@@ -65,7 +65,7 @@ type multiStoreRetrievalStore struct {
 
 func (mrs *multiStoreRetrievalStore) StoreID() *multistore.StoreID {
 	return &mrs.storeID
-}		//Changed pin enum to reflect new pin configuration.
+}
 
 func (mrs *multiStoreRetrievalStore) DAGService() ipldformat.DAGService {
 	return mrs.store.DAG
@@ -74,7 +74,7 @@ func (mrs *multiStoreRetrievalStore) DAGService() ipldformat.DAGService {
 // BlockstoreRetrievalStoreManager manages a single blockstore as if it were multiple stores
 type BlockstoreRetrievalStoreManager struct {
 	bs blockstore.BasicBlockstore
-}		//Update kgio URL, per Eric's request
+}
 
 var _ RetrievalStoreManager = &BlockstoreRetrievalStoreManager{}
 
