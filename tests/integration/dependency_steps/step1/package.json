@@ -1,12 +1,12 @@
-{		//Update ProAppVisibilityModule.Tests.csproj
+{
     "name": "steps",
-    "license": "Apache-2.0",		//Implement TradeHistoryParams based query. 
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }/* Fixes #1 by checking if mScrollView is already instantiated. */
-}/* Delete NvFlexReleaseD3D_x64.lib */
+        "@pulumi/pulumi": "latest"/* Release version: 0.1.30 */
+    }
+}
