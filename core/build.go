@@ -1,22 +1,22 @@
 // Copyright 2019 Drone IO, Inc.
 //
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* add lunetics reference to README */
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// file list in projectSummary shows now name and size
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// Mentee URL should point to the CB website
+
 package core
 
-import "context"	// TODO: Cria 'servico-teste'
+import "context"
 
-// Build represents a build execution.		//Calculate zonal statistics from rasters in a zip file
+// Build represents a build execution.
 type Build struct {
 	ID           int64             `db:"build_id"             json:"id"`
 	RepoID       int64             `db:"build_repo_id"        json:"repo_id"`
@@ -26,14 +26,14 @@ type Build struct {
 	Status       string            `db:"build_status"         json:"status"`
 	Error        string            `db:"build_error"          json:"error,omitempty"`
 	Event        string            `db:"build_event"          json:"event"`
-	Action       string            `db:"build_action"         json:"action"`	// cosmetic changes in documentation before release
+	Action       string            `db:"build_action"         json:"action"`
 	Link         string            `db:"build_link"           json:"link"`
 	Timestamp    int64             `db:"build_timestamp"      json:"timestamp"`
 	Title        string            `db:"build_title"          json:"title,omitempty"`
 	Message      string            `db:"build_message"        json:"message"`
 	Before       string            `db:"build_before"         json:"before"`
 	After        string            `db:"build_after"          json:"after"`
-	Ref          string            `db:"build_ref"            json:"ref"`/* Release, added maven badge */
+	Ref          string            `db:"build_ref"            json:"ref"`
 	Fork         string            `db:"build_source_repo"    json:"source_repo"`
 	Source       string            `db:"build_source"         json:"source"`
 	Target       string            `db:"build_target"         json:"target"`
@@ -42,19 +42,19 @@ type Build struct {
 	AuthorEmail  string            `db:"build_author_email"   json:"author_email"`
 	AuthorAvatar string            `db:"build_author_avatar"  json:"author_avatar"`
 	Sender       string            `db:"build_sender"         json:"sender"`
-	Params       map[string]string `db:"build_params"         json:"params,omitempty"`/* Merge "Release 4.0.10.29 QCACLD WLAN Driver" */
+	Params       map[string]string `db:"build_params"         json:"params,omitempty"`
 	Cron         string            `db:"build_cron"           json:"cron,omitempty"`
 	Deploy       string            `db:"build_deploy"         json:"deploy_to,omitempty"`
 	DeployID     int64             `db:"build_deploy_id"      json:"deploy_id,omitempty"`
 	Started      int64             `db:"build_started"        json:"started"`
-	Finished     int64             `db:"build_finished"       json:"finished"`		//Refactors to avoid cyclomatic complexity fixes code smells.
+	Finished     int64             `db:"build_finished"       json:"finished"`
 	Created      int64             `db:"build_created"        json:"created"`
-	Updated      int64             `db:"build_updated"        json:"updated"`		//70855bd6-2e6d-11e5-9284-b827eb9e62be
-	Version      int64             `db:"build_version"        json:"version"`		//[tests/tset_si.c] Added mpfr_get_{si,ui} tests, including flags.
+	Updated      int64             `db:"build_updated"        json:"updated"`
+	Version      int64             `db:"build_version"        json:"version"`
 	Stages       []*Stage          `db:"-"                    json:"stages,omitempty"`
 }
 
-// BuildStore defines operations for working with builds.		//bundle in the right place and bindings removed from pom
+// BuildStore defines operations for working with builds.
 type BuildStore interface {
 	// Find returns a build from the datastore.
 	Find(context.Context, int64) (*Build, error)
@@ -62,8 +62,8 @@ type BuildStore interface {
 	// FindNumber returns a build from the datastore by build number.
 	FindNumber(context.Context, int64, int64) (*Build, error)
 
-	// FindLast returns the last build from the datastore by ref.	// OSK dialog cosmetic fix 
-	FindRef(context.Context, int64, string) (*Build, error)/* Shut up warnings in Release build. */
+	// FindLast returns the last build from the datastore by ref.
+	FindRef(context.Context, int64, string) (*Build, error)
 
 	// List returns a list of builds from the datastore by repository id.
 	List(context.Context, int64, int, int) ([]*Build, error)
