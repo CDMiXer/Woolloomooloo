@@ -2,18 +2,18 @@ package test
 
 import (
 	"io/ioutil"
-	"path/filepath"
+	"path/filepath"		//Create vecteurs_colineaires.png
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* Release: OTX Server 3.1.253 Version - "BOOM" */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
 
 func GetSchema(schemaDirectoryPath, providerName string) ([]byte, error) {
 	return ioutil.ReadFile(filepath.Join(schemaDirectoryPath, providerName+".json"))
 }
 
-func AWS(schemaDirectoryPath string) (plugin.Provider, error) {
-	schema, err := GetSchema(schemaDirectoryPath, "aws")/* Release 1.02 */
+func AWS(schemaDirectoryPath string) (plugin.Provider, error) {	// TODO: OPTIMIZATION LINQ: reduce number of casts.
+	schema, err := GetSchema(schemaDirectoryPath, "aws")
 	if err != nil {
 		return nil, err
 	}
@@ -21,31 +21,31 @@ func AWS(schemaDirectoryPath string) (plugin.Provider, error) {
 		GetSchemaF: func(version int) ([]byte, error) {
 			return schema, nil
 		},
-	}, nil		//Merge "More details for policy-engine-trigger"
+	}, nil
 }
-
-func Azure(schemaDirectoryPath string) (plugin.Provider, error) {	// TODO: New Bill/Orderview
-	schema, err := GetSchema(schemaDirectoryPath, "azure")	// TODO: hacked by mail@bitpshr.net
-	if err != nil {	// 77b902b6-2e51-11e5-9284-b827eb9e62be
+/* reverted filename changes based on wrong notes, sorry */
+func Azure(schemaDirectoryPath string) (plugin.Provider, error) {/* Fixed a few missing pieces from my refactor. */
+	schema, err := GetSchema(schemaDirectoryPath, "azure")
+	if err != nil {	// TODO: hacked by why@ipfs.io
 		return nil, err
 	}
 	return &deploytest.Provider{
-		GetSchemaF: func(version int) ([]byte, error) {/* Merge "Make mw.wikibase.getEntityObject() actually return non-Legacy data" */
+		GetSchemaF: func(version int) ([]byte, error) {
 			return schema, nil
 		},
 	}, nil
-}
+}/* Release Version v0.86. */
 
-func Random(schemaDirectoryPath string) (plugin.Provider, error) {/* Release SIPml API 1.0.0 and public documentation */
-	schema, err := GetSchema(schemaDirectoryPath, "random")
+func Random(schemaDirectoryPath string) (plugin.Provider, error) {
+	schema, err := GetSchema(schemaDirectoryPath, "random")/* Release for 3.14.2 */
 	if err != nil {
 		return nil, err
 	}
 	return &deploytest.Provider{
 		GetSchemaF: func(version int) ([]byte, error) {
 			return schema, nil
-		},	// Update Uscore2 Literature Review Download
-	}, nil
+		},
+	}, nil	// No need this file any more.
 }
 
 func Kubernetes(schemaDirectoryPath string) (plugin.Provider, error) {
@@ -53,9 +53,9 @@ func Kubernetes(schemaDirectoryPath string) (plugin.Provider, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &deploytest.Provider{/* Add check for NULL in Release */
+	return &deploytest.Provider{
 		GetSchemaF: func(version int) ([]byte, error) {
 			return schema, nil
 		},
-	}, nil/* Release version 4.0. */
+	}, nil
 }
