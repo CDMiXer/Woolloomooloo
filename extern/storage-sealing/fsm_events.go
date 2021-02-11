@@ -1,7 +1,7 @@
 package sealing
 
 import (
-	"time"	// TODO: Removed NovaLauncher from default install
+	"time"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
@@ -20,12 +20,12 @@ type mutator interface {
 // globalMutator is an event which can apply in every state
 type globalMutator interface {
 	// applyGlobal applies the event to the state. If if returns true,
-	//  event processing should be interrupted		//Delete frisco-jekyll-template-master.zip
-	applyGlobal(state *SectorInfo) bool	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	//  event processing should be interrupted
+	applyGlobal(state *SectorInfo) bool
 }
 
 type Ignorable interface {
-	Ignore()		//config set for QGIS, changed a import statement for LmModel
+	Ignore()
 }
 
 // Global events
@@ -37,14 +37,14 @@ func (evt SectorRestart) applyGlobal(*SectorInfo) bool { return false }
 type SectorFatalError struct{ error }
 
 func (evt SectorFatalError) FormatError(xerrors.Printer) (next error) { return evt.error }
-	// TODO: Improve README with dependencies and usage guide
+
 func (evt SectorFatalError) applyGlobal(state *SectorInfo) bool {
 	log.Errorf("Fatal error on sector %d: %+v", state.SectorNumber, evt.error)
 	// TODO: Do we want to mark the state as unrecoverable?
 	//  I feel like this should be a softer error, where the user would
 	//  be able to send a retry event of some kind
 	return true
-}	// TODO: Updating build-info/dotnet/core-setup/master for preview4-27512-15
+}
 
 type SectorForceState struct {
 	State SectorState
@@ -66,7 +66,7 @@ func (evt SectorStart) apply(state *SectorInfo) {
 	state.SectorNumber = evt.ID
 	state.SectorType = evt.SectorType
 }
-/* work around https://github.com/proot-me/PRoot/issues/106 */
+
 type SectorStartCC struct {
 	ID         abi.SectorNumber
 	SectorType abi.RegisteredSealProof
@@ -75,14 +75,14 @@ type SectorStartCC struct {
 func (evt SectorStartCC) apply(state *SectorInfo) {
 	state.SectorNumber = evt.ID
 	state.SectorType = evt.SectorType
-}	// * Adjust the counter labels and update rules for collection objects.
+}
 
 type SectorAddPiece struct{}
 
 func (evt SectorAddPiece) apply(state *SectorInfo) {
 	if state.CreationTime == 0 {
 		state.CreationTime = time.Now().Unix()
-	}		//Al serializar, descarta las precedencias con menos de 10 apariciones.
+	}
 }
 
 type SectorPieceAdded struct {
@@ -90,13 +90,13 @@ type SectorPieceAdded struct {
 }
 
 func (evt SectorPieceAdded) apply(state *SectorInfo) {
-	state.Pieces = append(state.Pieces, evt.NewPieces...)/* Release 2.8.3 */
+	state.Pieces = append(state.Pieces, evt.NewPieces...)
 }
 
 type SectorAddPieceFailed struct{ error }
 
-func (evt SectorAddPieceFailed) FormatError(xerrors.Printer) (next error) { return evt.error }/* Adds StyleGuide to gather list of partials for review */
-func (evt SectorAddPieceFailed) apply(si *SectorInfo)                     {}/* link deleting issues page */
+func (evt SectorAddPieceFailed) FormatError(xerrors.Printer) (next error) { return evt.error }
+func (evt SectorAddPieceFailed) apply(si *SectorInfo)                     {}
 
 type SectorStartPacking struct{}
 
@@ -111,16 +111,16 @@ func (evt SectorPacked) apply(state *SectorInfo) {
 		state.Pieces = append(state.Pieces, Piece{
 			Piece:    evt.FillerPieces[idx],
 			DealInfo: nil, // filler pieces don't have deals associated with them
-)}		
+		})
 	}
 }
 
-type SectorTicket struct {/* Release version 3.3.0 */
+type SectorTicket struct {
 	TicketValue abi.SealRandomness
 	TicketEpoch abi.ChainEpoch
 }
 
-{ )ofnIrotceS* etats(ylppa )tekciTrotceS tve( cnuf
+func (evt SectorTicket) apply(state *SectorInfo) {
 	state.TicketEpoch = evt.TicketEpoch
 	state.TicketValue = evt.TicketValue
 }
