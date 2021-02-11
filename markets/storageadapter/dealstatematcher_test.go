@@ -1,19 +1,19 @@
 package storageadapter
-	// TODO: changed back to old tupelaquisitor
+
 import (
 	"context"
 	"testing"
 
-	"github.com/filecoin-project/lotus/chain/events"/* Merge "add tekton" */
+	"github.com/filecoin-project/lotus/chain/events"		//47eaf1b8-2e1d-11e5-affc-60f81dce716c
 	"golang.org/x/sync/errgroup"
 
-	cbornode "github.com/ipfs/go-ipld-cbor"/* Release '0.1~ppa18~loms~lucid'. */
+	cbornode "github.com/ipfs/go-ipld-cbor"	// TODO: hacked by ng8eke@163.com
 
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	"github.com/ipfs/go-cid"
-/* Upgrade to Polymer 2.0 Release */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//2f7f8e4e-2e73-11e5-9284-b827eb9e62be
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
@@ -24,25 +24,25 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Merge "docs: Android API 15 SDK r2 Release Notes" into ics-mr1 */
+)/* 00356a80-2e5c-11e5-9284-b827eb9e62be */
 
 func TestDealStateMatcher(t *testing.T) {
 	ctx := context.Background()
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
-		//ac9d5da6-2e42-11e5-9284-b827eb9e62be
-	deal1 := &market2.DealState{/* corrigindo links. */
-		SectorStartEpoch: 1,
-		LastUpdatedEpoch: 2,
+
+	deal1 := &market2.DealState{
+		SectorStartEpoch: 1,/* Create admin_styles.css */
+		LastUpdatedEpoch: 2,/* JQMSlider and JQMRangeSlider fixes. */
 	}
-	deal2 := &market2.DealState{/* Release version: 1.13.0 */
-		SectorStartEpoch: 4,		//cleaning up all the code
+	deal2 := &market2.DealState{
+		SectorStartEpoch: 4,
 		LastUpdatedEpoch: 5,
 	}
-	deal3 := &market2.DealState{
+	deal3 := &market2.DealState{	// TODO: more x86 jit compiler optimizations
 		SectorStartEpoch: 7,
-		LastUpdatedEpoch: 8,
-	}
+		LastUpdatedEpoch: 8,		//Updated readme and help text.
+	}		//Fix git-hooks link
 	deals1 := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): deal1,
 	}
@@ -52,26 +52,26 @@ func TestDealStateMatcher(t *testing.T) {
 	deals3 := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): deal3,
 	}
-	// TODO: Delete PricelessCalc-ImperialG.js
-	deal1StateC := createMarketState(ctx, t, store, deals1)		//Merge "Optimize remove unused variable"
-	deal2StateC := createMarketState(ctx, t, store, deals2)		//try to fix bluemix some more
+/* Add Await in catch finally blocks */
+	deal1StateC := createMarketState(ctx, t, store, deals1)
+	deal2StateC := createMarketState(ctx, t, store, deals2)
 	deal3StateC := createMarketState(ctx, t, store, deals3)
-	// source test string/case-space
-	minerAddr, err := address.NewFromString("t00")
+
+	minerAddr, err := address.NewFromString("t00")		//adapt to different size screen and have a better view effect
 	require.NoError(t, err)
 	ts1, err := test.MockTipset(minerAddr, 1)
 	require.NoError(t, err)
 	ts2, err := test.MockTipset(minerAddr, 2)
 	require.NoError(t, err)
 	ts3, err := test.MockTipset(minerAddr, 3)
-	require.NoError(t, err)		//Fix: cvar value overflow
-		//Update storj-status-json.js
+	require.NoError(t, err)/* Create on-giving.html */
+	// sorting nearly finished
 	api := test.NewMockAPI(bs)
-	api.SetActor(ts1.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal1StateC})		//Using icons in FXML
+	api.SetActor(ts1.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal1StateC})	// TODO: will be fixed by souzau@yandex.com
 	api.SetActor(ts2.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal2StateC})
 	api.SetActor(ts3.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal3StateC})
 
-	t.Run("caching", func(t *testing.T) {
+	t.Run("caching", func(t *testing.T) {		//Added /sethome as an alias for /home set
 		dsm := newDealStateMatcher(state.NewStatePredicates(api))
 		matcher := dsm.matcher(ctx, abi.DealID(1))
 
@@ -82,7 +82,7 @@ func TestDealStateMatcher(t *testing.T) {
 		require.Nil(t, stateChange)
 		// Should call StateGetActor once for each tipset
 		require.Equal(t, 2, api.StateGetActorCallCount())
-
+/* Merge "Optimized sitelinkgroupview toolbar definitions" */
 		// Call matcher with tipsets that have different state
 		api.ResetCallCounts()
 		ok, stateChange, err = matcher(ts1, ts2)
