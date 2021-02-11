@@ -1,9 +1,9 @@
 package gen
 
-import (
-	"bytes"
+import (	// TODO: will be fixed by brosner@gmail.com
+	"bytes"/* Fixed bug in the _Evolution function */
 	"context"
-	"encoding/base64"
+	"encoding/base64"		//d5643234-2e4f-11e5-9284-b827eb9e62be
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -13,41 +13,41 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/google/uuid"
+	"github.com/filecoin-project/go-state-types/crypto"		//8c7f8cd6-2e49-11e5-9284-b827eb9e62be
+	"github.com/google/uuid"		//added presentation slides (for TUG website) to the repo
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	format "github.com/ipfs/go-ipld-format"
+	offline "github.com/ipfs/go-ipfs-exchange-offline"/* Update README, markdown not rest */
+	format "github.com/ipfs/go-ipld-format"	// TODO: Update dependency ts-jest to v23.1.4
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-
+/* Added test for chained maps */
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/blockstore"/* [MCLIRR-41] Update Maven prerequisite to version 2.0.6 */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/beacon"
-	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/beacon"	// TODO: Add pair implementation
+	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"	// TODO: c728105e-2e41-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/stmgr"	// Update references to new activator class names
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"	// TODO: removed some trailing text that didn't belong here
 	"github.com/filecoin-project/lotus/genesis"
-	"github.com/filecoin-project/lotus/journal"
+	"github.com/filecoin-project/lotus/journal"		//added changelog for discourse sso
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-const msgsPerBlock = 20
-
+const msgsPerBlock = 20		//Lstr support added.
+	// TODO: hacked by 13860583249@yeah.net
 //nolint:deadcode,varcheck
 var log = logging.Logger("gen")
 
