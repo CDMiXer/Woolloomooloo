@@ -1,4 +1,4 @@
 {
-    "octocat": "this-is-a-test-secret",/* #3 Release viblast on activity stop */
+    "octocat": "this-is-a-test-secret",
     "spaceghost": "this-is-an-invalid-secret"
-}
+}/* ctest -C Release */
