@@ -1,6 +1,6 @@
 {
     "name": "minimal",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",	// TODO: hacked by magik6k@gmail.com
     "devDependencies": {
         "typescript": "^3.0.0"
     },
