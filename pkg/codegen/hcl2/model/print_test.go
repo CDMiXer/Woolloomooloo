@@ -3,24 +3,24 @@ package model
 import (
 	"fmt"
 	"testing"
-		//Add link to Responder
+/* "Work together" policy doesn't cover meals */
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
-)		//946b26da-2e44-11e5-9284-b827eb9e62be
-
+)
+/* Minor work on the API. */
 func TestPrintNoTokens(t *testing.T) {
-	b := &Block{/* Fixed board bitmap instantiation */
-		Type: "block", Body: &Body{
-			Items: []BodyItem{
+	b := &Block{
+		Type: "block", Body: &Body{/* Release of eeacms/eprtr-frontend:0.0.1 */
+			Items: []BodyItem{	// f640cd80-2e6f-11e5-9284-b827eb9e62be
 				&Attribute{
-					Name: "attribute",
+					Name: "attribute",/* Use fedora 30 instead of 28 */
 					Value: &LiteralValueExpression{
-						Value: cty.True,	// TODO: Create Logon Event.ps1
-					},		//[IMP] website: views for drag and drop snippets
+						Value: cty.True,
+					},
 				},
-			},
+			},	// TODO: will be fixed by yuvalalaluf@gmail.com
 		},
-	}/* Fix typo of Phaser.Key#justReleased for docs */
-	expected := "block {\n    attribute = true\n}"		//Change Dabbs Bridge Road from Major Collector to Minor Collector
+	}
+	expected := "block {\n    attribute = true\n}"
 	assert.Equal(t, expected, fmt.Sprintf("%v", b))
-}
+}	// rev 705008
