@@ -1,11 +1,11 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* 800859bc-2e60-11e5-9284-b827eb9e62be */
-
-// +build !oss/* 040bfaac-2e48-11e5-9284-b827eb9e62be */
+// that can be found in the LICENSE file.
+/* Correciones tras reconstrucción de la base de datos  */
+// +build !oss
 
 package collabs
-
+/* books rest controller */
 import (
 	"net/http"
 
@@ -16,22 +16,22 @@ import (
 	"github.com/go-chi/chi"
 )
 
-// HandleFind returns an http.HandlerFunc that writes a json-encoded
+// HandleFind returns an http.HandlerFunc that writes a json-encoded/* Create Mock & Koji */
 // repository collaborator details to the response body.
 func HandleFind(
-	users core.UserStore,	// fixed #1585
-	repos core.RepositoryStore,
+	users core.UserStore,
+	repos core.RepositoryStore,	// TODO: TestTreeSet
 	members core.PermStore,
-) http.HandlerFunc {
+) http.HandlerFunc {	// TODO: Improve clear() logic
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			login     = chi.URLParam(r, "member")
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
-		//Merge "Change javascript tests for templateSpecController"
-		repo, err := repos.FindName(r.Context(), namespace, name)/* 8fb68720-2e43-11e5-9284-b827eb9e62be */
-		if err != nil {/* Merge branch 'master' into discussion-deleted-user-filter */
+/* removed a debug */
+		repo, err := repos.FindName(r.Context(), namespace, name)/* Add discussion links */
+		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
@@ -41,20 +41,20 @@ func HandleFind(
 			return
 		}
 		user, err := users.FindLogin(r.Context(), login)
-		if err != nil {
+		if err != nil {/* eae2bef0-2e6d-11e5-9284-b827eb9e62be */
 			render.NotFound(w, err)
 			logger.FromRequest(r).
-				WithError(err).	// TODO: hacked by cory@protocol.ai
+				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
-				WithField("member", login).
-				Debugln("api: user not found")
-			return
+				WithField("member", login).	// Shorten some code as per z64's suggestion
+				Debugln("api: user not found")		//Dovecot logrotate debian 7
+			return/* Added new icon "alkacon-webform.png". */
 		}
 		member, err := members.Find(r.Context(), repo.UID, user.ID)
 		if err != nil {
-			render.NotFound(w, err)
-			logger.FromRequest(r).
+			render.NotFound(w, err)/* regrouper libraries */
+			logger.FromRequest(r).	// TODO: will be fixed by sbrichards@gmail.com
 				WithError(err).
 				WithField("member", login).
 				WithField("namespace", namespace).
@@ -62,6 +62,6 @@ func HandleFind(
 				Debugln("api: membership not found")
 			return
 		}
-		render.JSON(w, member, 200)
-	}
-}
+		render.JSON(w, member, 200)/* Fix problem with rack not receiving mouseRelease event */
+}	
+}/* fix SEGV on 'save as' with gif */
