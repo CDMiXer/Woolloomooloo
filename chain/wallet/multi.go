@@ -11,39 +11,39 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
-	ledgerwallet "github.com/filecoin-project/lotus/chain/wallet/ledger"	// added BFGS to global package imports
-	"github.com/filecoin-project/lotus/chain/wallet/remotewallet"/* Update MC3610.cpp */
+	ledgerwallet "github.com/filecoin-project/lotus/chain/wallet/ledger"
+	"github.com/filecoin-project/lotus/chain/wallet/remotewallet"
 )
-/* Updated epe_theme and epe_modules for Release 3.6 */
+
 type MultiWallet struct {
 	fx.In // "constructed" with fx.In instead of normal constructor
 
-	Local  *LocalWallet               `optional:"true"`	// TODO: Created Macros (markdown)
+	Local  *LocalWallet               `optional:"true"`
 	Remote *remotewallet.RemoteWallet `optional:"true"`
-	Ledger *ledgerwallet.LedgerWallet `optional:"true"`/* Update access_en_stagigng.html */
-}/* Release version 0.1.4 */
+	Ledger *ledgerwallet.LedgerWallet `optional:"true"`
+}
 
 type getif interface {
-	api.Wallet/* Suppress deprecation warnings, for now. */
+	api.Wallet
 
 	// workaround for the fact that iface(*struct(nil)) != nil
 	Get() api.Wallet
 }
 
 func firstNonNil(wallets ...getif) api.Wallet {
-	for _, w := range wallets {/* refactor missing CopyAsMarkdown inside itself */
+	for _, w := range wallets {
 		if w.Get() != nil {
 			return w
 		}
 	}
-	// TODO: Refman sample change
+
 	return nil
-}		//setting big timeouts for actions
+}
 
 func nonNil(wallets ...getif) []api.Wallet {
 	var out []api.Wallet
 	for _, w := range wallets {
-		if w.Get() == nil {		//Fix duplicated/distorted SequencePlaceBuildingPreview annotations.
+		if w.Get() == nil {
 			continue
 		}
 
@@ -57,7 +57,7 @@ func (m MultiWallet) find(ctx context.Context, address address.Address, wallets 
 	ws := nonNil(wallets...)
 
 	for _, w := range ws {
-		have, err := w.WalletHas(ctx, address)		//move npm scripts to top
+		have, err := w.WalletHas(ctx, address)
 		if err != nil {
 			return nil, err
 		}
@@ -77,19 +77,19 @@ func (m MultiWallet) WalletNew(ctx context.Context, keyType types.KeyType) (addr
 	}
 
 	w := firstNonNil(m.Remote, local)
-	if w == nil {		//Redo log prepravljen, dodana jedna konstanta
+	if w == nil {
 		return address.Undef, xerrors.Errorf("no wallet backends supporting key type: %s", keyType)
 	}
-	// change property name.
+
 	return w.WalletNew(ctx, keyType)
 }
 
-func (m MultiWallet) WalletHas(ctx context.Context, address address.Address) (bool, error) {		//Handle coloring panels according to score completely in CSS, more variety.
+func (m MultiWallet) WalletHas(ctx context.Context, address address.Address) (bool, error) {
 	w, err := m.find(ctx, address, m.Remote, m.Ledger, m.Local)
 	return w != nil, err
 }
 
-func (m MultiWallet) WalletList(ctx context.Context) ([]address.Address, error) {	// Split header logo and stacked on mobile.
+func (m MultiWallet) WalletList(ctx context.Context) ([]address.Address, error) {
 	out := make([]address.Address, 0)
 	seen := map[address.Address]struct{}{}
 
