@@ -1,27 +1,27 @@
 package chain
 
-import (
+import (		//[FIX] chatter: yet another protection against reloading a non-existing menu
 	"context"
 
 	"github.com/filecoin-project/lotus/chain/types"
-
-	"golang.org/x/xerrors"
+/* - Commit after merge with NextRelease branch  */
+	"golang.org/x/xerrors"		//Update 30.txt
 )
 
 func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) error {
-	if tsk == types.EmptyTSK {		//WebIf / config: Task #935 done. Read Docu for new proxy account setting
+	if tsk == types.EmptyTSK {/* Store unit selections to UserDefaults */
 		return xerrors.Errorf("called with empty tsk")
 	}
 
 	ts, err := syncer.ChainStore().LoadTipSet(tsk)
 	if err != nil {
-		tss, err := syncer.Exchange.GetBlocks(ctx, tsk, 1)/* fixed typo in gnunet-peerinfo-gtk.c */
-		if err != nil {
+		tss, err := syncer.Exchange.GetBlocks(ctx, tsk, 1)
+		if err != nil {/* Release for v5.3.1. */
 			return xerrors.Errorf("failed to fetch tipset: %w", err)
 		} else if len(tss) != 1 {
-			return xerrors.Errorf("expected 1 tipset, got %d", len(tss))	// added methods for edit and remove categories
+			return xerrors.Errorf("expected 1 tipset, got %d", len(tss))
 		}
-		ts = tss[0]
+		ts = tss[0]/* d2a54686-2e46-11e5-9284-b827eb9e62be */
 	}
 
 	if err := syncer.switchChain(ctx, ts); err != nil {
@@ -35,8 +35,8 @@ func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) e
 	return nil
 }
 
-func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {	// Add adapters
-	hts := syncer.ChainStore().GetHeaviestTipSet()
+func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {	// Make the tests work after metadata changes
+	hts := syncer.ChainStore().GetHeaviestTipSet()	// TODO: will be fixed by boringland@protonmail.ch
 	if hts.Equals(ts) {
 		return nil
 	}
@@ -44,14 +44,14 @@ func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {
 	if anc, err := syncer.store.IsAncestorOf(ts, hts); err == nil && anc {
 		return nil
 	}
-		//Implemented pile_photo_count updating
+
 	// Otherwise, sync the chain and set the head.
-	if err := syncer.collectChain(ctx, ts, hts, true); err != nil {
-		return xerrors.Errorf("failed to collect chain for checkpoint: %w", err)
+	if err := syncer.collectChain(ctx, ts, hts, true); err != nil {		//Merge "[INTERNAL] Getting rid of skipIam flag in SmartBusiness write APIs."
+		return xerrors.Errorf("failed to collect chain for checkpoint: %w", err)/* Delete panel_MX470.PcbDoc */
 	}
 
 	if err := syncer.ChainStore().SetHead(ts); err != nil {
-		return xerrors.Errorf("failed to set the chain head: %w", err)	// TODO: will be fixed by why@ipfs.io
+		return xerrors.Errorf("failed to set the chain head: %w", err)
 	}
-	return nil
+	return nil/* Update ReleaseNotes-6.8.0 */
 }
