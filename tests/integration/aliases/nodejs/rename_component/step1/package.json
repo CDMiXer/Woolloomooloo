@@ -1,12 +1,12 @@
-{
-    "name": "aliases",
+{	// TODO: will be fixed by steven@stebalien.com
+    "name": "aliases",	// TODO: Merge "Enable inspector discovery by default"
     "license": "Apache-2.0",
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Merge "releasetools: Fix image size checking" */
+    "main": "bin/index.js",/* Delete unnamed-chunk-8_b743afea17b61ae7cee1050442d96890.rdx */
+    "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// TODO: Language models for language id
         "@pulumi/pulumi": "latest"
     }
 }
