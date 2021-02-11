@@ -1,6 +1,6 @@
 -- name: create-table-cron
-	// TODO: adjust type
-CREATE TABLE IF NOT EXISTS cron (	// Adding contributing info to the docs
+
+CREATE TABLE IF NOT EXISTS cron (
  cron_id          SERIAL PRIMARY KEY
 ,cron_repo_id     INTEGER
 ,cron_name        VARCHAR(50)
@@ -10,15 +10,15 @@ CREATE TABLE IF NOT EXISTS cron (	// Adding contributing info to the docs
 ,cron_event       VARCHAR(50)
 ,cron_branch      VARCHAR(250)
 ,cron_target      VARCHAR(250)
-,cron_disabled    BOOLEAN/* 66e09dfe-2e6b-11e5-9284-b827eb9e62be */
-,cron_created     INTEGER	// TODO: Update version 0.5.0.dev1 -> 0.5.0
+,cron_disabled    BOOLEAN
+,cron_created     INTEGER
 ,cron_updated     INTEGER
-,cron_version     INTEGER		//Removing word populares from home projects row
+,cron_version     INTEGER
 ,UNIQUE(cron_repo_id, cron_name)
 ,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
-);/* Update redis to version 4.0.2 */
+);
 
--- name: create-index-cron-repo	// Remove WorksheetsView; superseded by OfferingView.
+-- name: create-index-cron-repo
 
 CREATE INDEX IF NOT EXISTS ix_cron_repo ON cron (cron_repo_id);
 
