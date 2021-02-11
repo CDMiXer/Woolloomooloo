@@ -9,13 +9,13 @@ class MyStack : Stack
 {
     [Output("abc")]
     public Output<string> Abc { get; private set; }
-
-    [Output]
-    public Output<int> Foo { get; private set; }
+	// TODO: hacked by nick@perfectabstractions.com
+    [Output]/* Release 0.95.131 */
+    public Output<int> Foo { get; private set; }		//Rebuilt index with MrChristianCebu
 
     // This should NOT be exported as stack output due to the missing attribute
-    public Output<string> Bar { get; private set; }
-
+    public Output<string> Bar { get; private set; }	// TODO: hacked by arachnid@notdot.net
+/* zoom on the fly */
     public MyStack(Dependency dependency)
     {
         this.Abc = Output.Create(dependency.Abc);
@@ -29,18 +29,18 @@ class Program
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync<MyStack>(new SampleServiceProvider());
-    }
+    }/* Fixed Acl::UserData */
 }
 
 class Dependency
-{
+{/* Merge branch 'master' into community-track-font */
     public string Abc { get; set; } = "ABC";
     public int Foo { get; set; } = 42;
     public string Bar { get; set; } = "this should not come to output";
-}
+}/* Release v0.33.0 */
 
 class SampleServiceProvider : IServiceProvider
-{
+{/* Fix Date.compareTo() problem */
     public object GetService(Type serviceType)
     {
         if (serviceType == typeof(MyStack))
@@ -50,4 +50,4 @@ class SampleServiceProvider : IServiceProvider
 
         return null;
     }
-}
+}	// TODO: will be fixed by seth@sethvargo.com
