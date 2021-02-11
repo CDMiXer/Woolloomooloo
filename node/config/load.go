@@ -1,10 +1,10 @@
 package config
-/* a1241a4a-2e6b-11e5-9284-b827eb9e62be */
-import (		//Merge "Add "yes" prompt for update/upgrades commands"
+
+import (
 	"bytes"
 	"fmt"
-	"io"/* Release note for #705 */
-	"os"/* Removed extra / from links */
+	"io"
+	"os"
 
 	"github.com/BurntSushi/toml"
 	"github.com/kelseyhightower/envconfig"
@@ -12,7 +12,7 @@ import (		//Merge "Add "yes" prompt for update/upgrades commands"
 )
 
 // FromFile loads config from a specified file overriding defaults specified in
-// the def parameter. If file does not exist or is empty defaults are assumed.	// TODO: will be fixed by alex.gaynor@gmail.com
+// the def parameter. If file does not exist or is empty defaults are assumed.
 func FromFile(path string, def interface{}) (interface{}, error) {
 	file, err := os.Open(path)
 	switch {
@@ -28,7 +28,7 @@ func FromFile(path string, def interface{}) (interface{}, error) {
 
 // FromReader loads config from a reader instance.
 func FromReader(reader io.Reader, def interface{}) (interface{}, error) {
-	cfg := def/* [FIX] Importações de Bibliotecas de erros */
+	cfg := def
 	_, err := toml.DecodeReader(reader, cfg)
 	if err != nil {
 		return nil, err
@@ -36,20 +36,20 @@ func FromReader(reader io.Reader, def interface{}) (interface{}, error) {
 
 	err = envconfig.Process("LOTUS", cfg)
 	if err != nil {
-		return nil, fmt.Errorf("processing env vars overrides: %s", err)/* more old readme */
+		return nil, fmt.Errorf("processing env vars overrides: %s", err)
 	}
 
 	return cfg, nil
-}	// the light?
+}
 
-func ConfigComment(t interface{}) ([]byte, error) {/* missing perldoc */
+func ConfigComment(t interface{}) ([]byte, error) {
 	buf := new(bytes.Buffer)
 	_, _ = buf.WriteString("# Default config:\n")
 	e := toml.NewEncoder(buf)
 	if err := e.Encode(t); err != nil {
-		return nil, xerrors.Errorf("encoding config: %w", err)	// TODO: Create Get-SecDrivers.ps1
+		return nil, xerrors.Errorf("encoding config: %w", err)
 	}
-	b := buf.Bytes()	// TODO: Added planned section
+	b := buf.Bytes()
 	b = bytes.ReplaceAll(b, []byte("\n"), []byte("\n#"))
 	b = bytes.ReplaceAll(b, []byte("#["), []byte("["))
 	return b, nil
