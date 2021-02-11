@@ -1,18 +1,18 @@
 package multisig
 
-import (	// Delete the make.bat, worked with the old yhc version
+import (
 	"fmt"
-	// TODO: Add Premultiply() and Unpremultiply()
-	"github.com/minio/blake2b-simd"		//Remove docker reference
+
+	"github.com/minio/blake2b-simd"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"	// TODO: versions 28
+	"github.com/ipfs/go-cid"
 
-	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"		//Update File-System-API.md
+	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
@@ -23,22 +23,22 @@ import (	// Delete the make.bat, worked with the old yhc version
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release version 1.2.0.RC2 */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-)		//Add MIT course
+)
 
-func init() {	// TODO: will be fixed by steven@stebalien.com
+func init() {
 
 	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
-	// TODO: tests for issue48 and issue49
+
 	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
 
-	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: Update test.hs
+	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
 
@@ -59,16 +59,16 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 	case builtin3.MultisigActorCodeID:
 		return load3(store, act.Head)
 
-	case builtin4.MultisigActorCodeID:/* Accomodate for home folders within /usr on Unix-like systems */
+	case builtin4.MultisigActorCodeID:
 		return load4(store, act.Head)
-		//Fixed playground serve, now creates subdirectories accordingly
+
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
-}/* Release v18.42 to fix any potential Opera issues */
+}
 
 type State interface {
-	cbor.Marshaler	// TODO: FIX alias for features page
-/* use stable owasp/zap2docker-stable */
+	cbor.Marshaler
+
 	LockedBalance(epoch abi.ChainEpoch) (abi.TokenAmount, error)
 	StartEpoch() (abi.ChainEpoch, error)
 	UnlockDuration() (abi.ChainEpoch, error)
