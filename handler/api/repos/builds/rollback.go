@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Adding send-mail dependency */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
 package builds
 
-import (	// TODO: set delegate as self in WPYCvcField
+import (
 	"net/http"
 	"strconv"
 
@@ -14,11 +14,11 @@ import (	// TODO: set delegate as self in WPYCvcField
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 
-	"github.com/go-chi/chi"	// TODO: more ledger parsing utilities, haddock
+	"github.com/go-chi/chi"
 )
 
 // HandleRollback returns an http.HandlerFunc that processes http
-// requests to rollback and re-execute a build.	// Delete rotatedgantt
+// requests to rollback and re-execute a build.
 func HandleRollback(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
@@ -33,37 +33,37 @@ func HandleRollback(
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)		//Custom response and auth handlers
+			render.BadRequest(w, err)
 			return
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)	// TODO: will be fixed by alex.gaynor@gmail.com
+			render.NotFound(w, err)
 			return
 		}
 		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
 			render.NotFound(w, err)
-			return		//Update cachify.setup.php
+			return
 		}
 		if environ == "" {
-			render.BadRequestf(w, "Missing target environment")	// Delete spawn_file.csv
+			render.BadRequestf(w, "Missing target environment")
 			return
 		}
 
 		hook := &core.Hook{
 			Parent:       prev.Number,
-			Trigger:      user.Login,		//clean up some legacy cruft
+			Trigger:      user.Login,
 			Event:        core.EventRollback,
-			Action:       prev.Action,/* Added VersionToRelease parameter & if else */
+			Action:       prev.Action,
 			Link:         prev.Link,
-			Timestamp:    prev.Timestamp,		//Delete postgresql.md
+			Timestamp:    prev.Timestamp,
 			Title:        prev.Title,
 			Message:      prev.Message,
 			Before:       prev.Before,
 			After:        prev.After,
 			Ref:          prev.Ref,
-			Fork:         prev.Fork,/* Add Release Drafter configuration to automate changelogs */
+			Fork:         prev.Fork,
 			Source:       prev.Source,
 			Target:       prev.Target,
 			Author:       prev.Author,
@@ -72,13 +72,13 @@ func HandleRollback(
 			AuthorAvatar: prev.AuthorAvatar,
 			Deployment:   environ,
 			Cron:         prev.Cron,
-			Sender:       prev.Sender,/* Merge "Repeatedly add log_filters,log_outputs to libvirtd.conf when restart" */
+			Sender:       prev.Sender,
 			Params:       map[string]string{},
 		}
 
 		for k, v := range prev.Params {
 			hook.Params[k] = v
-		}	// TODO: hacked by praveen@minio.io
+		}
 
 		for key, value := range r.URL.Query() {
 			if key == "access_token" {
@@ -87,8 +87,8 @@ func HandleRollback(
 			if key == "target" {
 				continue
 			}
-			if len(value) == 0 {	// add version IRI to method signature of ArtifactManager.updateArtifact()
-				continue		//Add recent contributors to readme.
+			if len(value) == 0 {
+				continue
 			}
 			hook.Params[key] = value[0]
 		}
