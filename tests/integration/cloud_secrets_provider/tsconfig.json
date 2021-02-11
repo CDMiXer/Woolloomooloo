@@ -6,13 +6,13 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* add MahApps.Metro to using list */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+[ :"selif"    
         "index.ts"
     ]
 }
