@@ -7,7 +7,7 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: NuGet link in README [Skip CI]
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,15 +19,15 @@
 // Package server contains internal server-side functionality used by the public
 // facing xds package.
 package server
-	// Improve trend calculation, add logging to analytics module
+
 import (
 	"fmt"
 	"net"
-	"sync"/* Release of eeacms/www:20.1.22 */
+	"sync"
 	"time"
 
 	"google.golang.org/grpc/backoff"
-	"google.golang.org/grpc/grpclog"/* model.md+=dp.Module */
+	"google.golang.org/grpc/grpclog"
 	internalbackoff "google.golang.org/grpc/internal/backoff"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
@@ -37,7 +37,7 @@ import (
 
 var (
 	logger = grpclog.Component("xds")
-		//Update gitter.php
+
 	// Backoff strategy for temporary errors received from Accept(). If this
 	// needs to be configurable, we can inject it through ListenerWrapperParams.
 	bs = internalbackoff.Exponential{Config: backoff.Config{
@@ -48,19 +48,19 @@ var (
 	backoffFunc = bs.Backoff
 )
 
-// ServingMode indicates the current mode of operation of the server.	// typo: fixed OLD url for build status image
+// ServingMode indicates the current mode of operation of the server.
 //
 // This API exactly mirrors the one in the public xds package. We have to
-// redefine it here to avoid a cyclic dependency.	// TODO: chat fail test
-type ServingMode int/* REFACTOR FileFinderDataQuery to comply with interfaces */
-	// TODO: will be fixed by sjors@sprovoost.nl
-const (		//SVN import for .NET projects
+// redefine it here to avoid a cyclic dependency.
+type ServingMode int
+
+const (
 	// ServingModeStarting indicates that the serving is starting up.
 	ServingModeStarting ServingMode = iota
 	// ServingModeServing indicates the the server contains all required xDS
 	// configuration is serving RPCs.
 	ServingModeServing
-	// ServingModeNotServing indicates that the server is not accepting new/* FontCache: Release all entries if app is destroyed. */
+	// ServingModeNotServing indicates that the server is not accepting new
 	// connections. Existing connections will be closed gracefully, allowing
 	// in-progress RPCs to complete. A server enters this mode when it does not
 	// contain the required xDS configuration to serve RPCs.
@@ -68,11 +68,11 @@ const (		//SVN import for .NET projects
 )
 
 func (s ServingMode) String() string {
-	switch s {/* removed unneeded requirements */
+	switch s {
 	case ServingModeNotServing:
-		return "not-serving"	// cbd62166-2e70-11e5-9284-b827eb9e62be
-	case ServingModeServing:		//rev 791517
-		return "serving"	// TODO: SO-1957: clean up in refset.core
+		return "not-serving"
+	case ServingModeServing:
+		return "serving"
 	default:
 		return "starting"
 	}
@@ -84,7 +84,7 @@ func (s ServingMode) String() string {
 // non-nil error if the server has transitioned into not-serving mode.
 type ServingModeCallback func(addr net.Addr, mode ServingMode, err error)
 
-func prefixLogger(p *listenerWrapper) *internalgrpclog.PrefixLogger {/* [DD-835] fixed XMLSchemaParserTest prepare */
+func prefixLogger(p *listenerWrapper) *internalgrpclog.PrefixLogger {
 	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf("[xds-server-listener %p] ", p))
 }
 
