@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist/	// Add ChapterDataSource.
-/*.egg-info
+/dist/
+/*.egg-info/* Fixed cursor issue */
