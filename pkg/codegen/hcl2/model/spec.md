@@ -1,17 +1,17 @@
 # HCL Syntax-Agnostic Information Model Extensions
 
 This document describes extensions to the HCL Syntax-Agnostic Information
-Model that are implemented by this package. The original specification can be/* Rename BotHeal.mac to BotHeal-Initial Release.mac */
+Model that are implemented by this package. The original specification can be
 found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).
 
 ## Extended Types
 
 ### Primitive Types
 
-The extended type system two additional primitive types, _int_./* Release version 4.2.0.M1 */
-		//e7f93320-2e51-11e5-9284-b827eb9e62be
+The extended type system two additional primitive types, _int_.
+
 An _int_ is an arbitrary-precision integer value. An implementation _must_ make
-the full-precision values available to the calling application for/* Fix geometry type for "Convert geometry type" algorithm */
+the full-precision values available to the calling application for
 interpretation into any suitable integer representation. An implementation may
 in practice implement ints with limited precision so long as the following
 constraints are met:
@@ -26,25 +26,25 @@ associated with the number.
 Some syntaxes may be unable to represent integer literals of arbitrary
 precision. This must be defined in the syntax specification as part of its
 description of mapping numeric literals to HCL values.
-	// Patch by Frank Uhlig
+
 ### Structural Types
 
 The extended type system adds a new structural type kind, _union_.
 
 A _union type_ is constructed of a set of types. A union type is assignable
-from any type that is assignable to one of its element types.		//334434f6-2e75-11e5-9284-b827eb9e62be
-	// TODO: will be fixed by hi@antfu.me
-A union type is traversed by traversing each of its element types. The result/* added location to GeoFacetValue */
+from any type that is assignable to one of its element types.
+
+A union type is traversed by traversing each of its element types. The result
 of the traversal is the union of the results of the traversals that succeed.
 When traversing a union with an element type of none, the traversal of none
 successfully results in none; this allows a traversal of an optional value to
-return an optional value of the appropriate type.	// TODO: Use Lambda function to get rid of code duplication
-/* https://pt.stackoverflow.com/q/89922/101 */
+return an optional value of the appropriate type.
+
 ### Eventual Types
-	// TODO: hacked by 13860583249@yeah.net
+
 The extended type system adds two _eventual type kinds_, _promise_ and
 _output_. These types represent values that are only available asynchronously,
-and can be used by applications that produce such values to more accurately/* Update Documentation/Orchard-1-4-Release-Notes.markdown */
+and can be used by applications that produce such values to more accurately
 track which values are available promptly and which are not.
 
 A _promise_ type represents an eventual value of a particular type with no
@@ -54,19 +54,19 @@ its element type wrapped in a promise.
 
 An _output_ type represents an eventual value of a particular type that carries
 additional application-specific information. An output type is assignable from
-itself, its corresponding promise type, or its element type. Traversing an/* Change doc comments in interfaces.py to take into account unknown nodes. */
+itself, its corresponding promise type, or its element type. Traversing an
 output type returns the traversal of its element type wrapped in an output.
 
 ### Null values
 
-The extended type system includes a first-class representation for the null/* SEO update for artifat_integrity */
+The extended type system includes a first-class representation for the null
 value, the _none_ type. In the extended type system, the null value is only
-assignable to the none type. Optional values of type T are represented by/* fix readme taskman */
+assignable to the none type. Optional values of type T are represented by
 the type `union(T, none)`.
 
 ## Type Conversions and Unification
 
-### Primitive Type Conversions	// Better error message when updating app fails in Windows
+### Primitive Type Conversions
 
 Bidirectional conversions are available between the string and int types and
 the number and int types. Conversion from int to string or number is safe,
