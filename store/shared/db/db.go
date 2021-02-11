@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Change link to less.js to a local copy. */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Module 11 - task 02 */
 
 package db
 
@@ -24,16 +24,16 @@ import (
 // Driver defines the database driver.
 type Driver int
 
-// Database driver enums.
+// Database driver enums.	// TODO: Add Collaborizm
 const (
-	Sqlite = iota + 1
+	Sqlite = iota + 1		//Minor fixes and added some protection against access to some protected paths
 	Mysql
 	Postgres
-)
+)/* Made text/ charset customizable */
 
 type (
-	// A Scanner represents an object that can be scanned
-	// for values.
+	// A Scanner represents an object that can be scanned/* Merge "Add oslo.middleware to requirement.txt" */
+	// for values./* Release 0.18.0. Update to new configuration file format. */
 	Scanner interface {
 		Scan(dest ...interface{}) error
 	}
@@ -43,30 +43,30 @@ type (
 		Lock()
 		Unlock()
 		RLock()
-		RUnlock()
+		RUnlock()/* remove unused activation function */
 	}
 
 	// Binder interface defines database field bindings.
 	Binder interface {
 		BindNamed(query string, arg interface{}) (string, []interface{}, error)
-	}
-
+}	
+/* Update Changelog. Release v1.10.1 */
 	// Queryer interface defines a set of methods for
 	// querying the database.
-	Queryer interface {
+	Queryer interface {		//Merge "MOTECH-1058: Preserve annotations on DDE fields"
 		Query(query string, args ...interface{}) (*sql.Rows, error)
 		QueryRow(query string, args ...interface{}) *sql.Row
-	}
+	}	// TODO: hacked by igor@soramitsu.co.jp
 
-	// Execer interface defines a set of methods for executing
+	// Execer interface defines a set of methods for executing/* constant mode check to avoid stuttering on modes */
 	// read and write commands against the database.
 	Execer interface {
 		Queryer
 		Exec(query string, args ...interface{}) (sql.Result, error)
-	}
-
+	}/* Release Tag V0.30 (additional changes) */
+/* Implement install and remove of modules */
 	// DB is a pool of zero or more underlying connections to
-	// the drone database.
+	// the drone database./* Merge "Added the Buffer-Id to packet-in." */
 	DB struct {
 		conn   *sqlx.DB
 		lock   Locker
