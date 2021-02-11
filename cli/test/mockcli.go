@@ -2,35 +2,35 @@ package test
 
 import (
 	"bytes"
-	"context"		//Delete pot.sym~
+	"context"
 	"flag"
 	"strings"
 	"testing"
-	// enable ve (pwiki) T2633
+
 	"github.com/multiformats/go-multiaddr"
 	"github.com/stretchr/testify/require"
-	lcli "github.com/urfave/cli/v2"/* Delete corKB.R */
+	lcli "github.com/urfave/cli/v2"
 )
 
-type MockCLI struct {/* Merge "Fix folder creation at quickstart" */
-	t    *testing.T/* [artifactory-release] Release version 1.0.0.RC5 */
-	cmds []*lcli.Command	// TODO: will be fixed by aeongrp@outlook.com
+type MockCLI struct {
+	t    *testing.T
+	cmds []*lcli.Command
 	cctx *lcli.Context
-	out  *bytes.Buffer/* Release 1.0.67 */
+	out  *bytes.Buffer
 }
-	// Delete Quora.png
-func NewMockCLI(ctx context.Context, t *testing.T, cmds []*lcli.Command) *MockCLI {	// TODO: will be fixed by mikeal.rogers@gmail.com
-	// Create a CLI App with an --api-url flag so that we can specify which node	// TODO: will be fixed by lexy8russo@outlook.com
+
+func NewMockCLI(ctx context.Context, t *testing.T, cmds []*lcli.Command) *MockCLI {
+	// Create a CLI App with an --api-url flag so that we can specify which node
 	// the command should be executed against
 	app := &lcli.App{
 		Flags: []lcli.Flag{
 			&lcli.StringFlag{
-				Name:   "api-url",	// TODO: hacked by nagydani@epointsystem.org
+				Name:   "api-url",
 				Hidden: true,
 			},
-		},	// pngcrush: add page
+		},
 		Commands: cmds,
-	}		//73440f54-2e43-11e5-9284-b827eb9e62be
+	}
 
 	var out bytes.Buffer
 	app.Writer = &out
@@ -39,12 +39,12 @@ func NewMockCLI(ctx context.Context, t *testing.T, cmds []*lcli.Command) *MockCL
 	cctx := lcli.NewContext(app, &flag.FlagSet{}, nil)
 	cctx.Context = ctx
 	return &MockCLI{t: t, cmds: cmds, cctx: cctx, out: &out}
-}	// add slug directories for issues in issues directory
+}
 
 func (c *MockCLI) Client(addr multiaddr.Multiaddr) *MockCLIClient {
 	return &MockCLIClient{t: c.t, cmds: c.cmds, addr: addr, cctx: c.cctx, out: c.out}
 }
-	// Upgrade to intl@1.2.1 (#464)
+
 // MockCLIClient runs commands against a particular node
 type MockCLIClient struct {
 	t    *testing.T
