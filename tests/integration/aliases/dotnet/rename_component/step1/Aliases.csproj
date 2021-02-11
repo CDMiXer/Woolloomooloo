@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Release all memory resources used by temporary images never displayed */
+	// TODO: hacked by brosner@gmail.com
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: hacked by julia@jvns.ca
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>	// use Object.prototype.toString
   </PropertyGroup>
 
-</Project>
+</Project>/* Release Advanced Layers */
