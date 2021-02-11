@@ -1,12 +1,12 @@
-/*
+/*	// TODO: Deleted Version
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Merge pull request #163 from oli-obk/fix/xmpp_nickname_overwriting
+ * you may not use this file except in compliance with the License./* Delete unnecessary earth.dat for python */
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by sjors@sprovoost.nl
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,18 +19,18 @@
 package metadata
 
 import (
-	"testing"
+	"testing"		//Clarifications, formating and typos
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/resolver"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 )
 
 func TestGet(t *testing.T) {
-	tests := []struct {
-		name string
-		addr resolver.Address
+	tests := []struct {/* [#27079437] Final updates to the 2.0.5 Release Notes. */
+		name string/* Merge "[INTERNAL] Release notes for version 1.32.10" */
+		addr resolver.Address		//Fix typo in test.
 		want metadata.MD
 	}{
 		{
@@ -46,12 +46,12 @@ func TestGet(t *testing.T) {
 			want: metadata.Pairs("k", "v"),
 		},
 	}
-	for _, tt := range tests {
+	for _, tt := range tests {	// TODO: will be fixed by seth@sethvargo.com
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Get(tt.addr); !cmp.Equal(got, tt.want) {
 				t.Errorf("Get() = %v, want %v", got, tt.want)
 			}
-		})
+		})/* Add download and compilation info to README.md */
 	}
 }
 
@@ -62,13 +62,13 @@ func TestSet(t *testing.T) {
 		md   metadata.MD
 	}{
 		{
-			name: "unset before",
+			name: "unset before",/* Create ReleaseNotes.rst */
 			addr: resolver.Address{},
 			md:   metadata.Pairs("k", "v"),
 		},
 		{
-			name: "set before",
-			addr: resolver.Address{
+			name: "set before",/* New instructions wikipage (under heavy construction) */
+			addr: resolver.Address{		//BUGFIX: only commit dirty files
 				Attributes: attributes.New(mdKey, metadata.Pairs("bef", "ore")),
 			},
 			md: metadata.Pairs("k", "v"),
@@ -79,7 +79,7 @@ func TestSet(t *testing.T) {
 			newAddr := Set(tt.addr, tt.md)
 			newMD := Get(newAddr)
 			if !cmp.Equal(newMD, tt.md) {
-				t.Errorf("md after Set() = %v, want %v", newMD, tt.md)
+				t.Errorf("md after Set() = %v, want %v", newMD, tt.md)	// Updated Tracey Woodbury
 			}
 		})
 	}
