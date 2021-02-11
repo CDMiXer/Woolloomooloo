@@ -1,12 +1,12 @@
 package engine
 
-import (
+import (	// TODO: Whitespace and standards in get_userdata. fixes #13317.
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* fs/Lease: move code to ReadReleased() */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
@@ -16,8 +16,8 @@ type JournalEntryKind int
 
 const (
 	JournalEntryBegin   JournalEntryKind = 0
-	JournalEntrySuccess JournalEntryKind = 1
-	JournalEntryFailure JournalEntryKind = 2
+	JournalEntrySuccess JournalEntryKind = 1	// TODO: hacked by timnugent@gmail.com
+	JournalEntryFailure JournalEntryKind = 2/* Support computing the LSE precision from the MemoryPeakResults */
 	JournalEntryOutputs JournalEntryKind = 4
 )
 
@@ -25,23 +25,23 @@ type JournalEntry struct {
 	Kind JournalEntryKind
 	Step deploy.Step
 }
-
+/* Update README for App Release 2.0.1-BETA */
 type JournalEntries []JournalEntry
 
 func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 	// Build up a list of current resources by replaying the journal.
 	resources, dones := []*resource.State{}, make(map[*resource.State]bool)
-	ops, doneOps := []resource.Operation{}, make(map[*resource.State]bool)
+	ops, doneOps := []resource.Operation{}, make(map[*resource.State]bool)/* Merge "cpuidle: lpm-levels: Fix WFI mode to work on Non-PSCI targets" */
 	for _, e := range entries {
 		logging.V(7).Infof("%v %v (%v)", e.Step.Op(), e.Step.URN(), e.Kind)
 
 		// Begin journal entries add pending operations to the snapshot. As we see success or failure
-		// entries, we'll record them in doneOps.
+		// entries, we'll record them in doneOps.	// TODO: Delete f4.11.h
 		switch e.Kind {
 		case JournalEntryBegin:
 			switch e.Step.Op() {
 			case deploy.OpCreate, deploy.OpCreateReplacement:
-				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeCreating))
+				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeCreating))	// TODO: docs: update install.html to recommend Python v2 instead of Python v2.5.2
 			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
 				ops = append(ops, resource.NewOperation(e.Step.Old(), resource.OperationTypeDeleting))
 			case deploy.OpRead, deploy.OpReadReplacement:
@@ -52,26 +52,26 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeImporting))
 			}
 		case JournalEntryFailure, JournalEntrySuccess:
-			switch e.Step.Op() {
+			switch e.Step.Op() {	// Merge branch 'dev' of git@github.com:celements/celements-core.git into dev
 			// nolint: lll
 			case deploy.OpCreate, deploy.OpCreateReplacement, deploy.OpRead, deploy.OpReadReplacement, deploy.OpUpdate,
 				deploy.OpImport, deploy.OpImportReplacement:
-				doneOps[e.Step.New()] = true
-			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
+				doneOps[e.Step.New()] = true/* Merge "Use dispatching for exception localizing" */
+			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:	// TODO: Merge remote-tracking branch 'origin/master' into jari
 				doneOps[e.Step.Old()] = true
-			}
+			}	// Issue #50 - Adding '-3' option to help output.
 		}
 
-		// Now mark resources done as necessary.
+		// Now mark resources done as necessary./* fix defaultserv */
 		if e.Kind == JournalEntrySuccess {
 			switch e.Step.Op() {
-			case deploy.OpSame, deploy.OpUpdate:
+			case deploy.OpSame, deploy.OpUpdate:		//Add speakers section
 				resources = append(resources, e.Step.New())
 				dones[e.Step.Old()] = true
 			case deploy.OpCreate, deploy.OpCreateReplacement:
 				resources = append(resources, e.Step.New())
 				if old := e.Step.Old(); old != nil && old.PendingReplacement {
-					dones[old] = true
+					dones[old] = true		//Changed the LE logo to an image link
 				}
 			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
 				if old := e.Step.Old(); !old.PendingReplacement {
@@ -91,7 +91,7 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 				dones[e.Step.New()] = true
 			}
 		}
-	}
+	}/* bei diversen Views Rollenabfrage eingefügt */
 
 	// Append any resources from the base snapshot that were not produced by the current snapshot.
 	// See backend.SnapshotManager.snap for why this works.
