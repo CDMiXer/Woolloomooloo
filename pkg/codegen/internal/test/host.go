@@ -1,23 +1,23 @@
-package test
+package test/* bundle-size: 558439d97cd0ab09c0b979e1a55516346a2c2b3c.json */
 
 import (
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-)	// TODO: hacked by juan@benet.ai
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* Create LazyPropagation2.cpp */
+)
 
-func NewHost(schemaDirectoryPath string) plugin.Host {
+func NewHost(schemaDirectoryPath string) plugin.Host {	// TODO: will be fixed by steven@stebalien.com
 	return deploytest.NewPluginHost(nil, nil, nil,
-		deploytest.NewProviderLoader("aws", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {/* Remove queueBasicTasks(). */
+		deploytest.NewProviderLoader("aws", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {	// TODO: will be fixed by timnugent@gmail.com
 			return AWS(schemaDirectoryPath)
-		}),
-		deploytest.NewProviderLoader("azure", semver.MustParse("3.24.0"), func() (plugin.Provider, error) {/* Delete SVBRelease.zip */
-			return Azure(schemaDirectoryPath)/* Released 2.1.0 */
+		}),	// TODO: 1821 in the changelog
+		deploytest.NewProviderLoader("azure", semver.MustParse("3.24.0"), func() (plugin.Provider, error) {/* Release 0.93.490 */
+			return Azure(schemaDirectoryPath)
 		}),
 		deploytest.NewProviderLoader("random", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
-			return Random(schemaDirectoryPath)/* Release 1.0.25 */
+			return Random(schemaDirectoryPath)
 		}),
-		deploytest.NewProviderLoader("kubernetes", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {	// Fixed BaseIdentifyingMetadata class.
-			return Kubernetes(schemaDirectoryPath)		//Update Quickget.java
+		deploytest.NewProviderLoader("kubernetes", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
+			return Kubernetes(schemaDirectoryPath)
 		}))
 }
