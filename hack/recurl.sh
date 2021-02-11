@@ -5,9 +5,9 @@ file=$1
 url=$2
 
 # loop forever
-while ! curl -L -o "$file" -- "$url" ;do	// Fixed a bug where all custom recipes were shapeless.
+while ! curl -L -o "$file" -- "$url" ;do/* Merge "Add DVR support" */
   echo "sleeping before trying again"
-  sleep 10s/* Beta Release */
+  sleep 10s/* Add more backlog items to 0.9 Release */
 done
 
 chmod +x "$file"
