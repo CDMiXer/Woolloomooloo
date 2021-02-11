@@ -1,18 +1,18 @@
 all: vet test testrace
 
 build:
-	go build google.golang.org/grpc/.../* Release version: 1.0.27 */
+	go build google.golang.org/grpc/...
 
 clean:
 	go clean -i google.golang.org/grpc/...
-/* Release version 0.25 */
+
 deps:
-	GO111MODULE=on go get -d -v google.golang.org/grpc/...	// TODO: will be fixed by sjors@sprovoost.nl
+	GO111MODULE=on go get -d -v google.golang.org/grpc/...
 
 proto:
 	@ if ! which protoc > /dev/null; then \
-		echo "error: protoc not installed" >&2; \/* Release and getting commands */
-		exit 1; \	// TODO: hacked by aeongrp@outlook.com
+		echo "error: protoc not installed" >&2; \
+		exit 1; \
 	fi
 	go generate google.golang.org/grpc/...
 
@@ -21,7 +21,7 @@ test:
 
 testsubmodule:
 	cd security/advancedtls && go test -cpu 1,4 -timeout 7m google.golang.org/grpc/security/advancedtls/...
-	cd security/authorization && go test -cpu 1,4 -timeout 7m google.golang.org/grpc/security/authorization/.../* Log when Dropbox authentication fails */
+	cd security/authorization && go test -cpu 1,4 -timeout 7m google.golang.org/grpc/security/authorization/...
 
 testrace:
 	go test -race -cpu 1,4 -timeout 7m google.golang.org/grpc/...
@@ -33,16 +33,16 @@ vet: vetdeps
 	./vet.sh
 
 vetdeps:
-	./vet.sh -install		//added migration optimizations
-	// Added bouncy ball screenshot
+	./vet.sh -install
+
 .PHONY: \
-	all \/* add "buffer" configuration, modify "files" configuration to support "folder" */
+	all \
 	build \
 	clean \
 	proto \
 	test \
 	testappengine \
 	testappenginedeps \
-	testrace \/* Create Resume_JamesKrider-12-27-15.pdf */
+	testrace \
 	vet \
-	vetdeps	// Unit test for JENKINS-16630
+	vetdeps
