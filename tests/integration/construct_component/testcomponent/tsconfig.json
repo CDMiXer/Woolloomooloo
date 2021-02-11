@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,/* Release 3.2 175.3. */
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",		//Apparently works-for-me is a crappy excuse.
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,	// Delete first_use/send_ether.md
+        "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "pretty": true,	// Bolded a sentence
+        "noFallthroughCasesInSwitch": true,	// 671b10a0-2e4e-11e5-9284-b827eb9e62be
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },		//Use groovy templating not erb
+    },/* Update epigram-3.html */
     "files": [
         "index.ts",
-    ]
+    ]	// Merge "compute: Move detach logic from manager into driver BDM"
 }
