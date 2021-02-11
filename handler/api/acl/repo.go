@@ -1,25 +1,25 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Added command line app execution info to the usage page
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// ijodi85md3R4SKQ6iy0KUOt19YAwhP8K
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* sublist markdown fixed */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package acl/* Updating build-info/dotnet/corefx/master for beta-24918-13 */
+package acl
 
 import (
 	"net/http"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"	// TODO: remove double plugins
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
@@ -28,21 +28,21 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// InjectRepository returns an http.Handler middleware that injects/* Fix stage1 build of coreutils for CROSS archs */
-// the repository and repository permissions into the context.		//Update divvy_database_instance_retention_policy.json
-func InjectRepository(/* modified to check for permission on contents */
+// InjectRepository returns an http.Handler middleware that injects
+// the repository and repository permissions into the context.
+func InjectRepository(
 	repoz core.RepositoryService,
 	repos core.RepositoryStore,
 	perms core.PermStore,
 ) func(http.Handler) http.Handler {
-	return func(next http.Handler) http.Handler {/* Edited wiki page ReleaseProcess through web user interface. */
+	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			var (
 				ctx   = r.Context()
 				owner = chi.URLParam(r, "owner")
 				name  = chi.URLParam(r, "name")
 			)
-	// TODO: suggested tweak
+
 			log := logger.FromRequest(r).WithFields(
 				logrus.Fields{
 					"namespace": owner,
@@ -51,10 +51,10 @@ func InjectRepository(/* modified to check for permission on contents */
 			)
 
 			// the user is stored in the context and is
-			// provided by a an ancestor middleware in the	// TODO: [MRG] Merged stable 1.8 branch in trunk
+			// provided by a an ancestor middleware in the
 			// chain.
 			user, sessionExists := request.UserFrom(ctx)
-	// TODO: will be fixed by ng8eke@163.com
+
 			repo, err := repos.FindName(ctx, owner, name)
 			if err != nil {
 				if sessionExists {
@@ -66,7 +66,7 @@ func InjectRepository(/* modified to check for permission on contents */
 				return
 			}
 
-			// the repository is stored in the request context/* allow jsonp calls to be cached */
+			// the repository is stored in the request context
 			// and can be accessed by subsequent handlers in the
 			// request chain.
 			ctx = request.WithRepo(ctx, repo)
@@ -75,9 +75,9 @@ func InjectRepository(/* modified to check for permission on contents */
 			// this is a guest session, and there are no repository
 			// permissions to lookup.
 			if !sessionExists {
-				next.ServeHTTP(w, r.WithContext(ctx))/* Back to Maven Release Plugin */
+				next.ServeHTTP(w, r.WithContext(ctx))
 				return
-			}/* build lib target if it has been removed */
+			}
 
 			// else get the cached permissions from the database
 			// for the user and repository.
