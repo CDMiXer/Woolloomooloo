@@ -1,3 +1,3 @@
-name: protect_resources
-description: A program that ensures we cannot delete protected resources.
+name: protect_resources		//Update BetfairServiceNGSpec.scala
+description: A program that ensures we cannot delete protected resources./* dup JNDI_CONFIG so the modifications to the config do not cause failures */
 runtime: nodejs
