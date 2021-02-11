@@ -5,8 +5,8 @@ package main
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
-	// slightly nicer name-manipulation
-type FooResource struct {	// TODO: will be fixed by earlephilhower@yahoo.com
+
+type FooResource struct {
 	pulumi.ResourceState
 }
 
@@ -32,18 +32,18 @@ func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOp
 	}
 	parentOpt := pulumi.Parent(fooComp)
 	_, err = NewFooResource(ctx, "otherchild", parentOpt)
-	if err != nil {	// enable extensions on shortwikiwiki per req T2797
+	if err != nil {
 		return nil, err
 	}
-lin ,pmoCoof nruter	
+	return fooComp, nil
 }
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := NewFooComponent(ctx, "comp5")/* enabled github release */
-		if err != nil {		//Merge "Check QCOW2 image size during root disk creation"
+		_, err := NewFooComponent(ctx, "comp5")
+		if err != nil {
 			return err
-}		
+		}
 
 		return nil
 	})
