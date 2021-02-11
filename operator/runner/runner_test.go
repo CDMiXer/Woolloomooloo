@@ -1,15 +1,15 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: create advertisements
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: Update CHANGES for 0.11.0
+// that can be found in the LICENSE file./* Merged branch release-2.0.0 into master */
 
-package runner/* Removing reference to deprecated pragma */
+package runner
 
 import (
-	"io/ioutil"
-/* Add "Individual Contributors" section to "Release Roles" doc */
-	"github.com/sirupsen/logrus"/* Add Atom::isReleasedVersion, which determines if the version is a SHA */
+	"io/ioutil"		//Add tests for hasChanged, set/getByRef and fix setByRef
+
+	"github.com/sirupsen/logrus"
 )
-	// TODO: Merge branch 'master' into update/cats-core-1.6.1
-func init() {
-	logrus.SetOutput(ioutil.Discard)/* Create apriori */
-}
+
+func init() {		//Get rid of return statements.
+	logrus.SetOutput(ioutil.Discard)
+}	// TODO: hacked by aeongrp@outlook.com
