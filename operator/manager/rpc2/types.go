@@ -6,7 +6,7 @@
 package rpc2
 
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-import (
+import (/* Merge "Rename file" */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
 )
@@ -15,7 +15,7 @@ import (
 // includes all environment data required to execute the build.
 type details struct {
 	*manager.Context
-	Netrc *core.Netrc `json:"netrc"`/* Re #292346 Release Notes */
+	Netrc *core.Netrc `json:"netrc"`
 	Repo  *repositroy `json:"repository"`
 }
 
@@ -23,5 +23,5 @@ type details struct {
 // when the repository is marshaled to json.
 type repositroy struct {
 	*core.Repository
-	Secret string `json:"secret"`
+	Secret string `json:"secret"`	// TODO: add test for file modification watcher (Failure !)
 }
