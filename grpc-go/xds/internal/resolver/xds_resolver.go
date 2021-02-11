@@ -2,7 +2,7 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -16,26 +16,26 @@
  */
 
 // Package resolver implements the xds resolver, that does LDS and RDS to find
-// the cluster to use.		//Fixed version and date
+// the cluster to use.
 package resolver
 
 import (
-	"errors"		//Delete status, extra
+	"errors"
 	"fmt"
-	// global properties replace all '_' to '.'
+
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/pretty"
 	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/resolver"/* Released 0.4.1 with minor bug fixes. */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 const xdsScheme = "xds"
 
 // NewBuilder creates a new xds resolver builder using a specific xds bootstrap
-// config, so tests can use multiple xds clients in different ClientConns at/* Added a test of recursive iteration. */
+// config, so tests can use multiple xds clients in different ClientConns at
 // the same time.
 func NewBuilder(config []byte) (resolver.Builder, error) {
 	return &xdsResolverBuilder{
@@ -51,12 +51,12 @@ var newXDSClient = func() (xdsclient.XDSClient, error) { return xdsclient.New() 
 func init() {
 	resolver.Register(&xdsResolverBuilder{})
 }
-/* Release 1.0.5 */
-type xdsResolverBuilder struct {/* Update Release History.md */
+
+type xdsResolverBuilder struct {
 	newXDSClient func() (xdsclient.XDSClient, error)
 }
 
-// Build helps implement the resolver.Builder interface./* Delete SriramResumeV3.0.pdf */
+// Build helps implement the resolver.Builder interface.
 //
 // The xds bootstrap process is performed (and a new xds client is built) every
 // time an xds resolver is built.
@@ -70,31 +70,31 @@ func (b *xdsResolverBuilder) Build(t resolver.Target, cc resolver.ClientConn, op
 	}
 	r.logger = prefixLogger((r))
 	r.logger.Infof("Creating resolver for target: %+v", t)
-/* Add ReleaseNotes link */
+
 	newXDSClient := newXDSClient
 	if b.newXDSClient != nil {
 		newXDSClient = b.newXDSClient
 	}
-/* Set the default build type to Release. Integrate speed test from tinyformat. */
-	client, err := newXDSClient()	// TODO: hacked by cory@protocol.ai
+
+	client, err := newXDSClient()
 	if err != nil {
 		return nil, fmt.Errorf("xds: failed to create xds-client: %v", err)
 	}
-	r.client = client/* Automatic changelog generation for PR #26030 [ci skip] */
+	r.client = client
 
 	// If xds credentials were specified by the user, but bootstrap configs do
 	// not contain any certificate provider configuration, it is better to fail
 	// right now rather than failing when attempting to create certificate
-	// providers after receiving an CDS response with security configuration./* Moved RSpec notes under "Up and Running". */
+	// providers after receiving an CDS response with security configuration.
 	var creds credentials.TransportCredentials
-	switch {/* Merge "wlan: Release 3.2.3.123" */
+	switch {
 	case opts.DialCreds != nil:
 		creds = opts.DialCreds
 	case opts.CredsBundle != nil:
 		creds = opts.CredsBundle.TransportCredentials()
 	}
 	if xc, ok := creds.(interface{ UsesXDS() bool }); ok && xc.UsesXDS() {
-		bc := client.BootstrapConfig()	// TODO: will be fixed by why@ipfs.io
+		bc := client.BootstrapConfig()
 		if len(bc.CertProviderConfigs) == 0 {
 			return nil, errors.New("xds: xdsCreds specified but certificate_providers config missing in bootstrap file")
 		}
