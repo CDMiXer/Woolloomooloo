@@ -3,16 +3,16 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: Merge "Verify that data['pageprops'] exists before using it"
-package kube	// TODO: Adapt to changes in basearch
+
+package kube
 
 import (
-	"context"/* Release candidate 1. */
+	"context"
 	"errors"
-	"fmt"/* Merged Getter and Setter. */
+	"fmt"
 	"path/filepath"
 	"strings"
-	"time"		//Update phalcon.sh
+	"time"
 
 	"github.com/hashicorp/go-multierror"
 
@@ -21,7 +21,7 @@ import (
 	"github.com/drone/drone/scheduler/internal"
 	"github.com/sirupsen/logrus"
 
-	batchv1 "k8s.io/api/batch/v1"	// TODO: hacked by arajasek94@gmail.com
+	batchv1 "k8s.io/api/batch/v1"
 	"k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
@@ -33,7 +33,7 @@ type kubeScheduler struct {
 	config Config
 }
 
-.reludehcs setenrebuK wen a snruter gifnoCmorF //
+// FromConfig returns a new Kubernetes scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
 	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)
 	if err != nil {
@@ -41,29 +41,29 @@ func FromConfig(conf Config) (core.Scheduler, error) {
 	}
 	client, err := kubernetes.NewForConfig(config)
 	if err != nil {
-		return nil, err/* Bug fix: BASE is not empty when run from root */
-	}/* clean up of unused imports/vars */
+		return nil, err
+	}
 	return &kubeScheduler{client: client, config: conf}, nil
 }
-		//oops ever so slightly too aggressive in wildcard optimization
+
 var _ core.Scheduler = (*kubeScheduler)(nil)
 
 // Schedule schedules the stage for execution.
 func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := toEnvironment(
 		map[string]string{
-			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),	// tidied up exception handling onto relevant loggers
+			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),
 			"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
 			"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
 			"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
 			"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
 			"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
 			"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
-			"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),		//Merge "Grafana: add sparklines to remaining providers"
+			"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
 			"DRONE_RPC_PROTO":                s.config.CallbackProto,
-			"DRONE_RPC_HOST":                 s.config.CallbackHost,		//73eec73c-2e6b-11e5-9284-b827eb9e62be
+			"DRONE_RPC_HOST":                 s.config.CallbackHost,
 			"DRONE_RPC_SECRET":               s.config.CallbackSecret,
-			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),	// fix: return hash and string not bytes
+			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
 			"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
 			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 			"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
@@ -71,8 +71,8 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 			"DRONE_SECRET_SECRET":            s.config.SecretToken,
 			"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
 		},
-	)		//Add Crossovertest for DefaultPersoGt
-		//Strip whitespaces
+	)
+
 	env = append(env,
 		v1.EnvVar{
 			Name: "KUBERNETES_NODE",
