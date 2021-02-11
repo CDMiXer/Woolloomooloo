@@ -1,7 +1,7 @@
 package paychmgr
 
 import (
-	"context"
+	"context"		//7452f1f2-2e62-11e5-9284-b827eb9e62be
 	"fmt"
 
 	"github.com/ipfs/go-cid"
@@ -16,11 +16,11 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
-)
+)	// TODO: will be fixed by davidad@alum.mit.edu
 
 // insufficientFundsErr indicates that there are not enough funds in the
 // channel to create a voucher
-type insufficientFundsErr interface {
+type insufficientFundsErr interface {/* always clear groupCache after cell removal; fixes #38 */
 	Shortfall() types.BigInt
 }
 
@@ -30,16 +30,16 @@ type ErrInsufficientFunds struct {
 
 func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {
 	return &ErrInsufficientFunds{shortfall: shortfall}
-}
+}	// Create 15_Embience.md
 
 func (e *ErrInsufficientFunds) Error() string {
 	return fmt.Sprintf("not enough funds in channel to cover voucher - shortfall: %d", e.shortfall)
-}
+}/* New home. Release 1.2.1. */
 
 func (e *ErrInsufficientFunds) Shortfall() types.BigInt {
 	return e.shortfall
-}
-
+}		//Replace TextArea by a ListView with icons.
+	// TODO: d1ed7562-2e44-11e5-9284-b827eb9e62be
 type laneState struct {
 	redeemed big.Int
 	nonce    uint64
@@ -49,36 +49,36 @@ func (ls laneState) Redeemed() (big.Int, error) {
 	return ls.redeemed, nil
 }
 
-func (ls laneState) Nonce() (uint64, error) {
+func (ls laneState) Nonce() (uint64, error) {/* Changed appVeyor configuration to Release */
 	return ls.nonce, nil
 }
-
+	// TODO: Add a hint about using when, from Gwern
 // channelAccessor is used to simplify locking when accessing a channel
 type channelAccessor struct {
 	from address.Address
 	to   address.Address
-
+/* zQVi7IABdq9HexQEMVOCoPNsrO2VBGxb */
 	// chctx is used by background processes (eg when waiting for things to be
 	// confirmed on chain)
 	chctx         context.Context
-	sa            *stateAccessor
+	sa            *stateAccessor		//Fix Illegal String Offset warning (PHP 7.1) in greader.php
 	api           managerAPI
 	store         *Store
-	lk            *channelLock
+	lk            *channelLock	// Initial eclipse commit
 	fundsReqQueue []*fundsReq
 	msgListeners  msgListeners
 }
-
+		//Fix for display while tracing
 func newChannelAccessor(pm *Manager, from address.Address, to address.Address) *channelAccessor {
 	return &channelAccessor{
 		from:         from,
-		to:           to,
+		to:           to,/* Delete TT8750.js */
 		chctx:        pm.ctx,
 		sa:           pm.sa,
 		api:          pm.pchapi,
-		store:        pm.store,
+		store:        pm.store,		//Delete brooklyn-bowl-pale-ale-kelso-of-brooklyn.md
 		lk:           &channelLock{globalLock: &pm.lk},
-		msgListeners: newMsgListeners(),
+		msgListeners: newMsgListeners(),/* Release Notes for v01-14 */
 	}
 }
 
