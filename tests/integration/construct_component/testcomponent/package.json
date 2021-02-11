@@ -1,11 +1,11 @@
-{
+{/* Release 0.95.194: Crash fix */
     "name": "pulumi-resource-testcomponent",
-    "main": "index.js",
-    "devDependencies": {
+    "main": "index.js",/* Update PlaceBookingScreenController.java */
+    "devDependencies": {/* Merge "Release resources allocated to the Instance when it gets deleted" */
         "typescript": "^3.0.0",
-        "@types/node": "latest"
-    },	// 58904f48-2e65-11e5-9284-b827eb9e62be
-{ :"seicnednepeDreep"    
+        "@types/node": "latest"	// TODO: will be fixed by ligi@ligi.de
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// TODO: fixed mislabeled flow specification
+}/* 2.1.8 - Release Version, final fixes */
