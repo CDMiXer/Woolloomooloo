@@ -6,12 +6,12 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: IU-15.0.4 <luqiannan@luqiannan-PC Update ui.lnf.xml, mavenVersion.xml
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Merge "Implemented automatic updates plugin" */
+
 package core
 
 import "context"
@@ -19,6 +19,6 @@ import "context"
 // Renewer renews the user account authorization. If
 // successful, the user token and token expiry attributes
 // are updated, and persisted to the datastore.
-type Renewer interface {	// TODO: will be fixed by alex.gaynor@gmail.com
+type Renewer interface {
 	Renew(ctx context.Context, user *User, force bool) error
 }
