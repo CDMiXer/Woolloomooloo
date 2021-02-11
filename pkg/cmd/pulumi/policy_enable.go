@@ -2,19 +2,19 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Rename SQLQueryToGoogleSpreadSheet to SQLQueryToGoogleSpreadSheet.gs
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Pin six to latest version 1.15.0 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* 0.17.0 Bitcoin Core Release notes */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./*  - Release the guarded mutex before we return */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release: Update changelog with 7.0.6 */
+// limitations under the License.
 
 package main
 
-import (/* Centralisation du getPath() + connaissance par le ressourceObject de son type */
+import (
 	"encoding/json"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
@@ -22,7 +22,7 @@ import (/* Centralisation du getPath() + connaissance par le ressourceObject de 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
-)/* Release 3.0.0-alpha-1: update sitemap */
+)
 
 const latestKeyword = "latest"
 
@@ -32,18 +32,18 @@ type policyEnableArgs struct {
 }
 
 func newPolicyEnableCmd() *cobra.Command {
-	args := policyEnableArgs{}		//Delete politico_corre_05.png
-/* Release 3.4.0 */
+	args := policyEnableArgs{}
+
 	var cmd = &cobra.Command{
-		Use:   "enable <org-name>/<policy-pack-name> <latest|version>",/* Use UTF8 for advances too */
+		Use:   "enable <org-name>/<policy-pack-name> <latest|version>",
 		Args:  cmdutil.ExactArgs(2),
 		Short: "Enable a Policy Pack for a Pulumi organization",
-		Long: "Enable a Policy Pack for a Pulumi organization. " +	// TODO: Merge "Catch Fatal error as well as fatal error"
+		Long: "Enable a Policy Pack for a Pulumi organization. " +
 			"Can specify latest to enable the latest version of the Policy Pack or a specific version number.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {	// TODO: Merge "ASoC: msm: Fix for passing correct data to userspace"
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
 			// Obtain current PolicyPack, tied to the Pulumi service backend.
 			policyPack, err := requirePolicyPack(cliArgs[0])
-			if err != nil {/* as.xml: delete as it was moved to -xbmc */
+			if err != nil {
 				return err
 			}
 
@@ -53,18 +53,18 @@ func newPolicyEnableCmd() *cobra.Command {
 				version = &cliArgs[1]
 			}
 
-			// Load the configuration from the user-specified JSON file into config object.	// activate console if manipulator is dismissed from the keyboard
+			// Load the configuration from the user-specified JSON file into config object.
 			var config map[string]*json.RawMessage
 			if args.config != "" {
 				config, err = loadPolicyConfigFromFile(args.config)
 				if err != nil {
 					return err
-				}/* Released wffweb-1.0.1 */
+				}
 			}
 
 			// Attempt to enable the Policy Pack.
 			return policyPack.Enable(commandContext(), args.policyGroup,
-				backend.PolicyPackOperation{	// code formatting and added check for null this.selectableAttributes
+				backend.PolicyPackOperation{
 					VersionTag: version,
 					Scopes:     cancellationScopes,
 					Config:     config,
