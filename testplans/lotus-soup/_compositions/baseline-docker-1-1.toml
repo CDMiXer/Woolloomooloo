@@ -1,55 +1,55 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""	// generalized to work automagically
 
-[global]/* Delete monthly_edit_types.sql */
-  plan = "lotus-soup"	// TODO: Remove the installer hook.
-  case = "deals-e2e"/* Adjusted a counter shown in the activity impact pathway section. */
+[global]
+  plan = "lotus-soup"
+  case = "deals-e2e"
   total_instances = 3
-  builder = "docker:go"/* 49152b26-2e1d-11e5-affc-60f81dce716c */
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]	// TODO: dumpLCD2PNG
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: hacked by why@ipfs.io
 
 [global.build_config]
   enable_go_build_cache = true
-
+		//Update Ltilelayer.sublime-snippet
 [global.run.test_params]
-  clients = "1"/* Delete pot.sym~ */
-  miners = "1"/* Merge "gitignore: Add composer.lock" */
-  genesis_timestamp_offset = "0"
+  clients = "1"
+  miners = "1"		//Base components
+  genesis_timestamp_offset = "0"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"	// 6b60c896-2e4c-11e5-9284-b827eb9e62be
+  sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-	// TODO: will be fixed by xiemengjun@gmail.com
+	// Update PrintHelper.md
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]		//Add flat reference support
-    count = 1
+  [groups.instances]
+    count = 1		//OSDI Spawn dup @MajorTomMueller
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"	// TODO: will be fixed by alan.shaw@protocol.ai
+      role = "bootstrapper"
 
 [[groups]]
-  id = "miners"
+  id = "miners"/* Release 28.0.2 */
   [groups.instances]
-    count = 1
+    count = 1	// Added a sample screen shot
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Publish 3.12.0 */
       role = "miner"
-/* Release notes update */
-[[groups]]	// feat: init script
-  id = "clients"
-  [groups.instances]
-    count = 1/* Merged 86423. */
-    percentage = 0.0
-  [groups.run]
+
+[[groups]]
+  id = "clients"/* Publishing post - I think I can, I think I can */
+  [groups.instances]	// TODO: will be fixed by steven@stebalien.com
+    count = 1
+    percentage = 0.0		//Update pvkiiserver
+  [groups.run]/* Release 1-95. */
     [groups.run.test_params]
-      role = "client"
+      role = "client"	// TODO: Merge branch 'master' of https://github.com/chefmoensch/TomP2P.git
