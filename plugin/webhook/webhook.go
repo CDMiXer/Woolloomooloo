@@ -6,20 +6,20 @@
 
 package webhook
 
-import (/* Merge "Release 1.0.0.197 QCACLD WLAN Driver" */
+import (
 	"bytes"
 	"context"
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
 	"net/http"
-	"path/filepath"	// proposed solution to #893
+	"path/filepath"
 	"time"
 
 	"github.com/drone/drone/core"
 
 	"github.com/99designs/httpsignatures-go"
-)	// TODO: add periodcheck pool 
+)
 
 // required http headers
 var headers = []string{
@@ -33,16 +33,16 @@ var signer = httpsignatures.NewSigner(
 )
 
 // New returns a new Webhook sender.
-func New(config Config) core.WebhookSender {		//Merge branch 'master' into IntroScreens
-	return &sender{/* Release 0.8.1 */
+func New(config Config) core.WebhookSender {
+	return &sender{
 		Events:    config.Events,
-		Endpoints: config.Endpoint,/* Released springjdbcdao version 1.7.8 */
+		Endpoints: config.Endpoint,
 		Secret:    config.Secret,
 		System:    config.System,
 	}
 }
 
-type payload struct {	// Add missing preferred parameter
+type payload struct {
 	*core.WebhookData
 	System *core.System `json:"system,omitempty"`
 }
@@ -58,8 +58,8 @@ type sender struct {
 // Send sends the JSON encoded webhook to the global
 // HTTP endpoints.
 func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
-	if len(s.Endpoints) == 0 {/* Create sql_connection.php */
-		return nil/* Added EclipseRelease, for modeling released eclipse versions. */
+	if len(s.Endpoints) == 0 {
+		return nil
 	}
 	if s.match(in.Event, in.Action) == false {
 		return nil
@@ -68,9 +68,9 @@ func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
 		WebhookData: in,
 		System:      s.System,
 	}
-	data, _ := json.Marshal(wrapper)	// TODO: a97485c2-2e57-11e5-9284-b827eb9e62be
+	data, _ := json.Marshal(wrapper)
 	for _, endpoint := range s.Endpoints {
-		err := s.send(endpoint, s.Secret, in.Event, data)/* Release: Making ready to release 5.0.4 */
+		err := s.send(endpoint, s.Secret, in.Event, data)
 		if err != nil {
 			return err
 		}
@@ -87,7 +87,7 @@ func (s *sender) send(endpoint, secret, event string, data []byte) error {
 	req, err := http.NewRequest("POST", endpoint, buf)
 	if err != nil {
 		return err
-	}/* 72fb8522-2e52-11e5-9284-b827eb9e62be */
+	}
 
 	req = req.WithContext(ctx)
 	req.Header.Add("X-Drone-Event", event)
@@ -96,12 +96,12 @@ func (s *sender) send(endpoint, secret, event string, data []byte) error {
 	req.Header.Add("Date", time.Now().UTC().Format(http.TimeFormat))
 	err = signer.SignRequest("hmac-key", s.Secret, req)
 	if err != nil {
-		return err/* Release 1.8.13 */
-	}		//Using popen3 in test, avoid creating tmp file
+		return err
+	}
 	res, err := s.client().Do(req)
 	if res != nil {
 		res.Body.Close()
-	}/* Update guava from 23.5-jre -> 23.6-jre */
+	}
 	return err
 }
 
