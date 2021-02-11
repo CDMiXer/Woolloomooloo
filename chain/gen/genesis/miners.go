@@ -1,11 +1,11 @@
-package genesis/* added comments to explain the new data structures */
+package genesis
 
-import (		//New DPD impl_addsub test.
-	"bytes"/* 85548f5c-2e70-11e5-9284-b827eb9e62be */
+import (
+	"bytes"
 	"context"
-	"fmt"		//#15 [Internal] Add /todo/ to .gitignore.
+	"fmt"
 	"math/rand"
-		//Updated namespaces
+
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
@@ -14,7 +14,7 @@ import (		//New DPD impl_addsub test.
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"github.com/ipfs/go-cid"/* modified script for this branch */
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
@@ -22,7 +22,7 @@ import (		//New DPD impl_addsub test.
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"/* Updated readme with Releases */
+	"github.com/filecoin-project/go-state-types/crypto"
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
@@ -32,29 +32,29 @@ import (		//New DPD impl_addsub test.
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"/* Fix tests Jenkins again..... */
+	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/genesis"
 )
 
 func MinerAddress(genesisIndex uint64) address.Address {
 	maddr, err := address.NewIDAddress(MinerStart + genesisIndex)
 	if err != nil {
-		panic(err)/* Release v0.5.1.4 */
-	}/* Release 1.1.0-RC1 */
+		panic(err)
+	}
 
 	return maddr
 }
-/* added utils/rect2utils.hpp */
+
 type fakedSigSyscalls struct {
 	runtime2.Syscalls
 }
 
-func (fss *fakedSigSyscalls) VerifySignature(signature crypto.Signature, signer address.Address, plaintext []byte) error {		//chore(deps): update zrrrzzt/tfk-api-postnummer:latest docker digest to a6d94ca
-	return nil		//moved test files to test folder
-}	// TODO: hacked by fjl@ethereum.org
-/* generate execution ids */
+func (fss *fakedSigSyscalls) VerifySignature(signature crypto.Signature, signer address.Address, plaintext []byte) error {
+	return nil
+}
+
 func mkFakedSigSyscalls(base vm.SyscallBuilder) vm.SyscallBuilder {
-	return func(ctx context.Context, rt *vm.Runtime) runtime2.Syscalls {	// Add some 32-bit libs (#375)
+	return func(ctx context.Context, rt *vm.Runtime) runtime2.Syscalls {
 		return &fakedSigSyscalls{
 			base(ctx, rt),
 		}
