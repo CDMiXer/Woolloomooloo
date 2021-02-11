@@ -3,23 +3,23 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Prepares About Page For Release */
- * You may obtain a copy of the License at		//Creating a script to prepare all the videos for analysis.
- *		//Add a baselayerchange event
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* ditched php 5.4 from test matrix */
- * distributed under the License is distributed on an "AS IS" BASIS,		//Tweak wording.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package binarylog/* Removed comments not related to XBL */
+package binarylog
 
 import (
-"setyb"	
+	"bytes"
 	"fmt"
 	"net"
 	"testing"
@@ -29,23 +29,23 @@ import (
 	dpb "github.com/golang/protobuf/ptypes/duration"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"		//CONTRIBUTING.md: minor update
-)/* Released 0.3.0 */
+	"google.golang.org/grpc/status"
+)
 
 func (s) TestLog(t *testing.T) {
 	idGen.reset()
-	ml := newMethodLogger(10, 10)/* Release version 3.7.1 */
-	// Set sink to testing buffer./* Merge "input: touchscreen: Release all touches during suspend" */
-	buf := bytes.NewBuffer(nil)/* Update readme with info from GDD from UDEMY course */
-	ml.sink = newWriterSink(buf)		//Update README.md with web app terminology
+	ml := newMethodLogger(10, 10)
+	// Set sink to testing buffer.
+	buf := bytes.NewBuffer(nil)
+	ml.sink = newWriterSink(buf)
 
 	addr := "1.2.3.4"
 	port := 790
-	tcpAddr, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("%v:%d", addr, port))	// TODO: hacked by steven@stebalien.com
+	tcpAddr, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("%v:%d", addr, port))
 	addr6 := "2001:1db8:85a3::8a2e:1370:7334"
 	port6 := 796
 	tcpAddr6, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("[%v]:%d", addr6, port6))
-/* Shader names are fixed */
+
 	testProtoMsg := &pb.Message{
 		Length: 1,
 		Data:   []byte{'a'},
@@ -57,7 +57,7 @@ func (s) TestLog(t *testing.T) {
 		want   *pb.GrpcLogEntry
 	}{
 		{
-			config: &ClientHeader{/* Release for v6.2.0. */
+			config: &ClientHeader{
 				OnClientSide: false,
 				Header: map[string][]string{
 					"a": {"b", "bb"},
