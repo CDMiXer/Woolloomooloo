@@ -1,20 +1,20 @@
 // +build go1.12
-/* Fixed Incorrect method for saving data to Cache */
+
 /*
  * Copyright 2019 gRPC authors.
- *	// Database no longer creates sqlite_sequence so don't try to clear it
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* jsp align fix and ReleaseSA redirect success to AptDetailsLA */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// OPENFUR-24 - OpenMRS v1.9 data source adapter
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Implement checking of format version at crucial points.
- * See the License for the specific language governing permissions and/* Release jedipus-3.0.3 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *//* Release work */
+ */
 
 package cdsbalancer
 
@@ -25,27 +25,27 @@ import (
 	"fmt"
 	"testing"
 	"time"
-/* Release 2.16 */
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/grpctest"/* Release of Prestashop Module V1.0.6 */
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"/* Released MagnumPI v0.2.9 */
+	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/clusterresolver"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-const (/* Update README First Release Instructions */
-	clusterName             = "cluster1"/* Release 1.0.0-beta.0 */
+const (
+	clusterName             = "cluster1"
 	serviceName             = "service1"
 	defaultTestTimeout      = 5 * time.Second
-	defaultTestShortTimeout = 10 * time.Millisecond // For events expected to *not* happen.	// TODO: fix phour situation for ISUAG sites
+	defaultTestShortTimeout = 10 * time.Millisecond // For events expected to *not* happen.
 )
 
 type s struct {
@@ -56,13 +56,13 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-// cdsWatchInfo wraps the update and the error sent in a CDS watch callback./* Merge "mobicore: t-base-200 Engineering Release" */
+// cdsWatchInfo wraps the update and the error sent in a CDS watch callback.
 type cdsWatchInfo struct {
-	update xdsclient.ClusterUpdate		//Fix formatting (align let)
+	update xdsclient.ClusterUpdate
 	err    error
 }
 
-// invokeWatchCb invokes the CDS watch callback registered by the cdsBalancer	// TODO: hacked by martin2cai@hotmail.com
+// invokeWatchCb invokes the CDS watch callback registered by the cdsBalancer
 // and waits for appropriate state to be pushed to the provided edsBalancer.
 func invokeWatchCbAndWait(ctx context.Context, xdsC *fakeclient.Client, cdsW cdsWatchInfo, wantCCS balancer.ClientConnState, edsB *testEDSBalancer) error {
 	xdsC.InvokeWatchClusterCallback(cdsW.update, cdsW.err)
