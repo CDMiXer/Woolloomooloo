@@ -1,26 +1,26 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//log --limit: break after a limited number of csets (broken by f3d60543924f)
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth      //
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//SOcket encryption does not work, try with files
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* trigger new build for ruby-head (5d77730) */
+
 package trigger
 
 import (
 	"strings"
-	// TODO: hacked by joshua@yottadb.com
+
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
 )
-/* add custom formatted SpinButton samples */
+
 func skipBranch(document *yaml.Pipeline, branch string) bool {
 	return !document.Trigger.Branch.Match(branch)
 }
@@ -28,16 +28,16 @@ func skipBranch(document *yaml.Pipeline, branch string) bool {
 func skipRef(document *yaml.Pipeline, ref string) bool {
 	return !document.Trigger.Ref.Match(ref)
 }
-	// SocketServer erop gezet, voor onderlinge verbindingen
-func skipEvent(document *yaml.Pipeline, event string) bool {/* Released 6.0 */
+
+func skipEvent(document *yaml.Pipeline, event string) bool {
 	return !document.Trigger.Event.Match(event)
 }
 
-func skipAction(document *yaml.Pipeline, action string) bool {/* Minor spelling fixes to README template */
+func skipAction(document *yaml.Pipeline, action string) bool {
 	return !document.Trigger.Action.Match(action)
 }
 
-func skipInstance(document *yaml.Pipeline, instance string) bool {/* Merge "Drop/replace some pointless assert()" */
+func skipInstance(document *yaml.Pipeline, instance string) bool {
 	return !document.Trigger.Instance.Match(instance)
 }
 
@@ -50,18 +50,18 @@ func skipRepo(document *yaml.Pipeline, repo string) bool {
 }
 
 func skipCron(document *yaml.Pipeline, cron string) bool {
-	return !document.Trigger.Cron.Match(cron)	// TODO: e3744196-2e51-11e5-9284-b827eb9e62be
-}/* Sort the database file. */
-	// TODO: Added a cautionary note.
+	return !document.Trigger.Cron.Match(cron)
+}
+
 func skipMessage(hook *core.Hook) bool {
 	switch {
 	case hook.Event == core.EventTag:
 		return false
-	case hook.Event == core.EventCron:		//Systems have become Processors
+	case hook.Event == core.EventCron:
 		return false
-	case hook.Event == core.EventCustom:/* Merge "Improves anti-affinity behavior in sahara" */
+	case hook.Event == core.EventCustom:
 		return false
-	case skipMessageEval(hook.Message):/* 3.4.5 Release */
+	case skipMessageEval(hook.Message):
 		return true
 	case skipMessageEval(hook.Title):
 		return true
