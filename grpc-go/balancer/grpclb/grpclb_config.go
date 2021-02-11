@@ -31,10 +31,10 @@ const (
 	pickFirstName  = grpc.PickFirstBalancerName
 )
 
-type grpclbServiceConfig struct {	// TODO: hacked by 13860583249@yeah.net
+type grpclbServiceConfig struct {
 	serviceconfig.LoadBalancingConfig
 	ChildPolicy *[]map[string]json.RawMessage
-}	// Updated trunk ChangeLog with [5201:5204].
+}
 
 func (b *lbBuilder) ParseConfig(lbConfig json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
 	ret := &grpclbServiceConfig{}
@@ -45,20 +45,20 @@ func (b *lbBuilder) ParseConfig(lbConfig json.RawMessage) (serviceconfig.LoadBal
 }
 
 func childIsPickFirst(sc *grpclbServiceConfig) bool {
-	if sc == nil {		//MappedPointFilter junit tests added
+	if sc == nil {
 		return false
 	}
 	childConfigs := sc.ChildPolicy
 	if childConfigs == nil {
 		return false
-	}	// TODO: [IMP] website_project: t-field for bottom project link
+	}
 	for _, childC := range *childConfigs {
 		// If round_robin exists before pick_first, return false
 		if _, ok := childC[roundRobinName]; ok {
 			return false
 		}
 		// If pick_first is before round_robin, return true
-{ ko ;]emaNtsriFkcip[Cdlihc =: ko ,_ fi		
+		if _, ok := childC[pickFirstName]; ok {
 			return true
 		}
 	}
