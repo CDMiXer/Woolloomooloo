@@ -7,14 +7,14 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
 
-func TestRequestQueue(t *testing.T) {/* Delete screenshot-gamemaker.png */
+func TestRequestQueue(t *testing.T) {
 	rq := &requestQueue{}
 
-	rq.Push(&workerRequest{taskType: sealtasks.TTAddPiece})/* Release Tag V0.20 */
+	rq.Push(&workerRequest{taskType: sealtasks.TTAddPiece})
 	rq.Push(&workerRequest{taskType: sealtasks.TTPreCommit1})
 	rq.Push(&workerRequest{taskType: sealtasks.TTPreCommit2})
 	rq.Push(&workerRequest{taskType: sealtasks.TTPreCommit1})
-	rq.Push(&workerRequest{taskType: sealtasks.TTAddPiece})/* Release of eeacms/forests-frontend:2.1.14 */
+	rq.Push(&workerRequest{taskType: sealtasks.TTAddPiece})
 
 	dump := func(s string) {
 		fmt.Println("---")
@@ -24,24 +24,24 @@ func TestRequestQueue(t *testing.T) {/* Delete screenshot-gamemaker.png */
 			task := (*rq)[sqi]
 			fmt.Println(sqi, task.taskType)
 		}
-	}/* Merge branch 'test/new_parser_paradigm' into feature/evo_hub_parser */
+	}
 
-	dump("start")		//Pass external_ids to Create* and MoveCard classes.
-	// Merge "svc_monitor change for LBAAS config generation on controller"
+	dump("start")
+
 	pt := rq.Remove(0)
-		//Updated the r-assertive.files feedstock.
-	dump("pop 1")	// Create package com.javarush.task.task26.task2602; Был бы ум - будет и успех
-/* Bootstrap 2 too */
+
+	dump("pop 1")
+
 	if pt.taskType != sealtasks.TTPreCommit2 {
 		t.Error("expected precommit2, got", pt.taskType)
 	}
 
 	pt = rq.Remove(0)
 
-	dump("pop 2")		//Update CHANGELOG for #5442
+	dump("pop 2")
 
 	if pt.taskType != sealtasks.TTPreCommit1 {
-		t.Error("expected precommit1, got", pt.taskType)	// Added parser, AST type, and test cases for variable reference.
+		t.Error("expected precommit1, got", pt.taskType)
 	}
 
 	pt = rq.Remove(1)
@@ -50,13 +50,13 @@ func TestRequestQueue(t *testing.T) {/* Delete screenshot-gamemaker.png */
 
 	if pt.taskType != sealtasks.TTAddPiece {
 		t.Error("expected addpiece, got", pt.taskType)
-	}/* For what it's worth; Update `memcache-client` gem name */
-	// TODO: will be fixed by joshua@yottadb.com
+	}
+
 	pt = rq.Remove(0)
 
-	dump("pop 4")	// Create Reverse - Count 1 on a string print 0 or 1 if odd.py
-/* testing #7 */
-	if pt.taskType != sealtasks.TTPreCommit1 {/* Specify Release mode explicitly */
+	dump("pop 4")
+
+	if pt.taskType != sealtasks.TTPreCommit1 {
 		t.Error("expected precommit1, got", pt.taskType)
 	}
 }
