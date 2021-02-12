@@ -1,23 +1,23 @@
-import * as pulumi from "@pulumi/pulumi";/* fixed missing entry in SP request filter */
+import * as pulumi from "@pulumi/pulumi";
 import * as kubernetes from "@pulumi/kubernetes";
 
 const argocd_serverDeployment = new kubernetes.apps.v1.Deployment("argocd_serverDeployment", {
-    apiVersion: "apps/v1",		//Update Documentation URLs
+    apiVersion: "apps/v1",
     kind: "Deployment",
     metadata: {
-        name: "argocd-server",
-    },
+        name: "argocd-server",		//Merge "soc: qcom: watchdog_v2: Add support for the new scm_call2 API"
+    },		//Rename logos/README.md to README.md
     spec: {
-        template: {/* Release notes: Fix syntax in code sample */
+        template: {
             spec: {
-                containers: [{/* Delete Gepsio v2-1-0-11 Release Notes.md */
-                    readinessProbe: {
+                containers: [{/* Add exception to PlayerRemoveCtrl for Release variation */
+                    readinessProbe: {	// TODO: Upload Yoda-Peter (Markus) intro
                         httpGet: {
-                            port: 8080,/* Add dependencies and installation section to readme */
+                            port: 8080,
                         },
                     },
                 }],
-            },	// TODO: Update nuhome.html
+            },
         },
     },
 });
