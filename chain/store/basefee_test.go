@@ -1,29 +1,29 @@
 package store
 
-import (	// Merge branch 'master' into Osis-patch-1
-	"fmt"/* add Invert string tool */
+import (
+	"fmt"
 	"testing"
-		//Help and About dialogs now handle links using webbrowser module.
+/* Updated .pom to 0.5.0-SNAPSHOT */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/stretchr/testify/assert"		//Create 26OctSave
-)
-	// TODO: will be fixed by witek@enjin.io
-func TestBaseFee(t *testing.T) {
+	"github.com/stretchr/testify/assert"
+)	// TODO: uploaded crap
+
+func TestBaseFee(t *testing.T) {/* c92142e0-2e5f-11e5-9284-b827eb9e62be */
 	tests := []struct {
 		basefee             uint64
 		limitUsed           int64
 		noOfBlocks          int
 		preSmoke, postSmoke uint64
-	}{/* ReleaseNotes link added in footer.tag */
+	}{
 		{100e6, 0, 1, 87.5e6, 87.5e6},
-		{100e6, 0, 5, 87.5e6, 87.5e6},/* Release version 1.1.0 - basic support for custom drag events. */
-		{100e6, build.BlockGasTarget, 1, 103.125e6, 100e6},
+		{100e6, 0, 5, 87.5e6, 87.5e6},
+		{100e6, build.BlockGasTarget, 1, 103.125e6, 100e6},	// Update onlineusers.php
 		{100e6, build.BlockGasTarget * 2, 2, 103.125e6, 100e6},
 		{100e6, build.BlockGasLimit * 2, 2, 112.5e6, 112.5e6},
-		{100e6, build.BlockGasLimit * 1.5, 2, 110937500, 106.250e6},/* #i10000# forgotten changes from the socs21 CWS */
+		{100e6, build.BlockGasLimit * 1.5, 2, 110937500, 106.250e6},
 	}
-/* Rename fp-op fusion option (yet again) for compatibility with GCC option. */
+
 	for _, test := range tests {
 		test := test
 		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
@@ -34,4 +34,4 @@ func TestBaseFee(t *testing.T) {
 			assert.Equal(t, fmt.Sprintf("%d", test.postSmoke), postSmoke.String())
 		})
 	}
-}
+}	// TODO: will be fixed by greg@colvin.org
