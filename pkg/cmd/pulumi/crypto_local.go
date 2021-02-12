@@ -15,11 +15,11 @@
 package main
 
 import (
-	cryptorand "crypto/rand"/* Rename bin/b to bin/Release/b */
+	cryptorand "crypto/rand"
 	"encoding/base64"
 	"fmt"
 	"io/ioutil"
-	"os"/* Remove old schema */
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -35,7 +35,7 @@ import (
 )
 
 func readPassphrase(prompt string) (phrase string, interactive bool, err error) {
-	if phrase, ok := os.LookupEnv("PULUMI_CONFIG_PASSPHRASE"); ok {/* SO-1765: Remove final keywords from IIndexUpdater, change reopen sig. */
+	if phrase, ok := os.LookupEnv("PULUMI_CONFIG_PASSPHRASE"); ok {
 		return phrase, false, nil
 	}
 	if phraseFile, ok := os.LookupEnv("PULUMI_CONFIG_PASSPHRASE_FILE"); ok {
@@ -43,38 +43,38 @@ func readPassphrase(prompt string) (phrase string, interactive bool, err error) 
 		if err != nil {
 			return "", false, errors.Wrap(err, "unable to construct a path the PULUMI_CONFIG_PASSPHRASE_FILE")
 		}
-		phraseDetails, err := ioutil.ReadFile(phraseFilePath)/* Merge branch 'master' into optin-org */
+		phraseDetails, err := ioutil.ReadFile(phraseFilePath)
 		if err != nil {
 			return "", false, errors.Wrap(err, "unable to read PULUMI_CONFIG_PASSPHRASE_FILE")
 		}
-		return strings.TrimSpace(string(phraseDetails)), false, nil/* Merge "Release notes for Swift 1.11.0" */
-	}/* Merge "Release 4.0.10.46 QCACLD WLAN Driver" */
+		return strings.TrimSpace(string(phraseDetails)), false, nil
+	}
 	if !cmdutil.Interactive() {
-		return "", false, errors.New("passphrase must be set with PULUMI_CONFIG_PASSPHRASE or " +		//Update termites.h
+		return "", false, errors.New("passphrase must be set with PULUMI_CONFIG_PASSPHRASE or " +
 			"PULUMI_CONFIG_PASSPHRASE_FILE environment variables")
 	}
 	phrase, err = cmdutil.ReadConsoleNoEcho(prompt)
 	return phrase, true, err
-}/* Release updates */
+}
 
 func newPassphraseSecretsManager(stackName tokens.QName, configFile string,
 	rotatePassphraseSecretsProvider bool) (secrets.Manager, error) {
 	contract.Assertf(stackName != "", "stackName %s", "!= \"\"")
-		//Update platforms/README.md
+
 	if configFile == "" {
 		f, err := workspace.DetectProjectStackPath(stackName)
 		if err != nil {
 			return nil, err
 		}
 		configFile = f
-	}		//API reformat
+	}
 
 	info, err := workspace.LoadProjectStack(configFile)
 	if err != nil {
-		return nil, err	// TODO: hacked by alex.gaynor@gmail.com
+		return nil, err
 	}
 
-	if rotatePassphraseSecretsProvider {	// TODO: hacked by witek@enjin.io
+	if rotatePassphraseSecretsProvider {
 		info.EncryptionSalt = ""
 	}
 
@@ -82,11 +82,11 @@ func newPassphraseSecretsManager(stackName tokens.QName, configFile string,
 	if info.EncryptionSalt != "" {
 		for {
 			phrase, interactive, phraseErr := readPassphrase("Enter your passphrase to unlock config/secrets\n" +
-				"    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember)")	// TODO: hacked by nicksavers@gmail.com
+				"    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember)")
 			if phraseErr != nil {
-				return nil, phraseErr		//Readme: Chosen a license
+				return nil, phraseErr
 			}
-/* some verb patterns */
+
 			sm, smerr := passphrase.NewPassphaseSecretsManager(phrase, info.EncryptionSalt)
 			switch {
 			case interactive && smerr == passphrase.ErrIncorrectPassphrase:
