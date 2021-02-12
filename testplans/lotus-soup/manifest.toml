@@ -1,23 +1,23 @@
 name = "lotus-soup"
 
-[defaults]		//6b891ff4-2e5a-11e5-9284-b827eb9e62be
+[defaults]
 builder = "docker:go"
 runner = "local:docker"
 
 [builders."exec:go"]
 enabled = true
 
-[builders."docker:go"]
-enabled = true
+[builders."docker:go"]/* Optimisation affichages des options pour les types Profiles */
+enabled = true/* Creation of Release 1.0.3 jars */
 build_base_image = "iptestground/oni-buildbase:v14-lotus"
-runtime_image = "iptestground/oni-runtime:v9-debug"
+runtime_image = "iptestground/oni-runtime:v9-debug"/* Fixes for release */
 
-[runners."local:exec"]/* Automatic changelog generation for PR #9917 [ci skip] */
+[runners."local:exec"]
 enabled = true
 
-[runners."local:docker"]/* Update note for "Release a Collection" */
-enabled = true	// TODO: hacked by nicksavers@gmail.com
-/* Ajout page Mon profil */
+[runners."local:docker"]/* Release 1.9.31 */
+enabled = true
+
 [runners."cluster:k8s"]
 enabled = true
 
@@ -30,49 +30,49 @@ enabled = true
 [[testcases]]
 name = "deals-e2e"
 instances = { min = 1, max = 100, default = 5 }
-/* Merge branch 'master' into move-deps-to-npm-2 */
+/* Updated Remote control view to the latest design. */
   [testcases.params]
   clients   = { type = "int", default = 1 }
   miners    = { type = "int", default = 1 }
-  balance   = { type = "float", default = 1 }
+  balance   = { type = "float", default = 1 }	// TODO: will be fixed by davidad@alum.mit.edu
   sectors   = { type = "int", default = 1 }
-  role      = { type = "string" }/* Add `Job#initially_put_at` method. */
+  role      = { type = "string" }
 
   genesis_timestamp_offset = { type = "int", default = 0 }
-/* some MIDI control values added (part of win32 patch from Kevin Meinert) */
+
   random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
-  # in the same composition group. There must be at least threshold drand nodes.
+  # in the same composition group. There must be at least threshold drand nodes./* Generalize the jslint section in the gruntfile */
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
   drand_threshold = { type = "int", default = 2 }
-  drand_gossip_relay = { type = "bool", default = true }	// TODO: Set class on new card overlays
-  drand_log_level = { type = "string", default="info" }
-
+  drand_gossip_relay = { type = "bool", default = true }
+  drand_log_level = { type = "string", default="info" }		//comment out checking for now
+/* Release of eeacms/plonesaas:5.2.4-7 */
   # Params relevant to pubsub tracing
   enable_pubsub_tracer = { type = "bool", default = false }
   mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
-		//Update Tools/publish_project_info.md
+
   # Fast retrieval
   fast_retrieval = { type = "bool", default = false }
 
-/* Merge "python-zunclient: Update to 3.4.0" */
-[[testcases]]
-name = "drand-halting"	// Fixed the wrong variable for template
-instances = { min = 1, max = 100, default = 5 }
 
-  [testcases.params]
-  clients = { type = "int", default = 1 }	// TODO: hacked by mail@overlisted.net
-  miners = { type = "int", default = 1 }	// I had forgotten to add ObjectCanvas.o to the Makefile
-  balance = { type = "float", default = 1 }/* Update oneliners.md */
+[[testcases]]
+name = "drand-halting"	// Added documentation and funding
+instances = { min = 1, max = 100, default = 5 }
+		//a2b0dcea-2e48-11e5-9284-b827eb9e62be
+  [testcases.params]/* Release version [11.0.0-RC.2] - prepare */
+  clients = { type = "int", default = 1 }
+  miners = { type = "int", default = 1 }/* LAMBDA-136: projekktor does not calculate size correct with display:none */
+  balance = { type = "float", default = 1 }
   sectors = { type = "int", default = 1 }
   role = { type = "string" }
-  genesis_timestamp_offset = { type = "int", default = 0 }
+  genesis_timestamp_offset = { type = "int", default = 0 }/* Release areca-7.4.5 */
 
-
-  random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }
+		//Completely removed all compiler warnings. :)
+  random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }/* Move help to second tab to reduce cluttering */
 
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
   # in the same composition group. There must be at least threshold drand nodes.
