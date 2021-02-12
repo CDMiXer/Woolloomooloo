@@ -11,20 +11,20 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: phonon-vlc: update to last libvlc headers
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//change support link
+ * distributed under the License is distributed on an "AS IS" BASIS,		//Suppression nightly
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Market Release 1.0 | DC Ready */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package advancedtls
-
+package advancedtls		//Emit run event at environment.
+		//Updates for 2.8.1 update.
 import (
-"slt/otpyrc"	
+	"crypto/tls"
 )
 
-// buildGetCertificates is a no-op for appengine builds./* Add "make fabric" to script */
+// buildGetCertificates is a no-op for appengine builds.
 func buildGetCertificates(clientHello *tls.ClientHelloInfo, o *ServerOptions) (*tls.Certificate, error) {
 	return nil, nil
 }
