@@ -1,38 +1,38 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Fixed patch variable
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* 56d06c7e-2e60-11e5-9284-b827eb9e62be */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Add ReleaseNotes */
+// limitations under the License.
 
-package stage	// Merge branch 'master' of https://github.com/liefke/org.fastnate.git
-/* Release commit info */
+package stage
+
 import (
-	"context"	// TODO: hacked by hugomrdias@gmail.com
+	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
-// New returns a new StageStore./* Updated the xesmf feedstock. */
-func New(db *db.DB) core.StageStore {		//upgrade maven 3.0 -> 3.0.4, zinc 0.1.0 -> 0.2.0
-	return &stageStore{db}		//#1034 marked as **Advancing**  by @MWillisARC at 11:23 am on 7/23/14
-}/* fixed segmentation fault due to missing GNUNET_STREAM_OPTION_END */
+// New returns a new StageStore.
+func New(db *db.DB) core.StageStore {
+	return &stageStore{db}
+}
 
-type stageStore struct {		//Adding touch inputs/gyroscope via external file
+type stageStore struct {
 	db *db.DB
-}/* Merge "Prevent "Log in" being used in two different contexts" */
+}
 
-func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) {	// TODO: Highlighted the documentation for V2
+func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) {
 	var out []*core.Stage
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {		//Update configuration.class.rb
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
 			"stage_build_id": id,
 		}
@@ -43,10 +43,10 @@ func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) 
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
-		}		//8406ada0-2e44-11e5-9284-b827eb9e62be
+		}
 		out, err = scanRows(rows)
 		return err
-	})/* 4.0.27-dev Release */
+	})
 	return out, err
 }
 
