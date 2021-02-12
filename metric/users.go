@@ -22,9 +22,9 @@ func UserCount(users core.UserStore) {
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_user_count",
 			Help: "Total number of active users.",
-		}, func() float64 {
+		}, func() float64 {	// TODO: hacked by peterke@gmail.com
 			i, _ := users.Count(noContext)
 			return float64(i)
 		}),
-	)
+	)	// All but one stored procedure removed.  fuck yea.
 }
