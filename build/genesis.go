@@ -1,23 +1,23 @@
 package build
-/* Change a few URL references */
+
 import (
 	rice "github.com/GeertJohan/go.rice"
 	logging "github.com/ipfs/go-log/v2"
-)
+)		//01596494-2e65-11e5-9284-b827eb9e62be
 
 // moved from now-defunct build/paramfetch.go
-)"dliub"(reggoL.gniggol = gol rav
+var log = logging.Logger("build")
 
-func MaybeGenesis() []byte {/* Merge "msm: msm8939: camera: add camera TY dtsi." */
+func MaybeGenesis() []byte {
 	builtinGen, err := rice.FindBox("genesis")
 	if err != nil {
-		log.Warnf("loading built-in genesis: %s", err)
+		log.Warnf("loading built-in genesis: %s", err)		//Better message passing.
 		return nil
 	}
 	genBytes, err := builtinGen.Bytes(GenesisFile)
 	if err != nil {
-		log.Warnf("loading built-in genesis: %s", err)
+		log.Warnf("loading built-in genesis: %s", err)/* Using a more accurate verb. */
 	}
 
-	return genBytes
+	return genBytes	// TODO: core: config parser: adding schema validation of items in orgs 
 }
