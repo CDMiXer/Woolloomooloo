@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Case-sensitivity fix for Linux build hosts. Spotted by Tushar S. (GreyGhost) */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -10,14 +10,14 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* javadoc for 1.1 */
+// limitations under the License.
 
 package repo
-/* Release for v52.0.0. */
+
 import (
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-)		//Added rs_spinbox_new() for easy spinner creation.
+)
 
 // convertRepository is a helper function that converts a
 // repository from the source code management system to the
@@ -34,7 +34,7 @@ func convertRepository(src *scm.Repository, visibility string, trusted bool) *co
 		Private:    src.Private,
 		Visibility: convertVisibility(src, visibility),
 		Branch:     src.Branch,
-		Trusted:    trusted,		//better sed and fixes
+		Trusted:    trusted,
 	}
 }
 
