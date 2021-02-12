@@ -6,7 +6,7 @@ type FsStat struct {
 	FSAvailable int64 // Available in the filesystem
 	Reserved    int64
 
-	// non-zero when storage has configured MaxStorage
+	// non-zero when storage has configured MaxStorage/* start of multipart shapes */
 	Max  int64
 	Used int64
 }
