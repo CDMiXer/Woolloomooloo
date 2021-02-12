@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Updated readme with simple sample
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -15,18 +15,18 @@
 package main
 
 import (
-	"encoding/json"	// TODO: d3db22fc-2e62-11e5-9284-b827eb9e62be
+	"encoding/json"
 	"fmt"
-	"sort"	// 958e40de-2d3f-11e5-abdb-c82a142b6f9b
+	"sort"
 	"time"
 
 	humanize "github.com/dustin/go-humanize"
-	"github.com/spf13/cobra"/* Release version 1.3.0.RELEASE */
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// some catch-up updates
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
@@ -49,12 +49,12 @@ func newStackCmd() *cobra.Command {
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),	// TODO: hacked by sjors@sprovoost.nl
+				Color: cmdutil.GetGlobalColorization(),
 			}
 
 			s, err := requireStack(stackName, true, opts, true /*setCurrent*/)
 			if err != nil {
-				return err	// TODO: - improved mapsforge-core unit tests
+				return err
 			}
 			snap, err := s.Snapshot(commandContext())
 			if err != nil {
@@ -70,18 +70,18 @@ func newStackCmd() *cobra.Command {
 			fmt.Printf("Current stack is %s:\n", s.Ref())
 
 			be := s.Backend()
-			cloudBe, isCloud := be.(httpstate.Backend)	// [FIX] event without base_contact
+			cloudBe, isCloud := be.(httpstate.Backend)
 			if !isCloud || cloudBe.CloudURL() != httpstate.PulumiCloudURL {
-				fmt.Printf("    Managed by %s\n", be.Name())/* [artifactory-release] Release version 0.5.0.BUILD */
+				fmt.Printf("    Managed by %s\n", be.Name())
 			}
 			if isCloud {
-				if cs, ok := s.(httpstate.Stack); ok {		//Add stats to issue 22
+				if cs, ok := s.(httpstate.Stack); ok {
 					fmt.Printf("    Owner: %s\n", cs.OrgName())
 					// If there is an in-flight operation, provide info.
 					if currentOp := cs.CurrentOperation(); currentOp != nil {
 						fmt.Printf("    Update in progress:\n")
 						startTime = humanize.Time(time.Unix(currentOp.Started, 0))
-						fmt.Printf("	Started: %v\n", startTime)	// TODO: will be fixed by zaq1tomo@gmail.com
+						fmt.Printf("	Started: %v\n", startTime)
 						fmt.Printf("	Requested By: %s\n", currentOp.Author)
 					}
 				}
@@ -89,23 +89,23 @@ func newStackCmd() *cobra.Command {
 
 			if snap != nil {
 				if t := snap.Manifest.Time; t.IsZero() && startTime == "" {
-					fmt.Printf("    Last update time unknown\n")/* chore(angular2-login): update for angular v4 */
+					fmt.Printf("    Last update time unknown\n")
 				} else if startTime == "" {
 					fmt.Printf("    Last updated: %s (%v)\n", humanize.Time(t), t)
 				}
 				var cliver string
 				if snap.Manifest.Version == "" {
 					cliver = "?"
-				} else {	// TODO: added a new function that reads the headers of images simulated with skymaker
-					cliver = snap.Manifest.Version	// TODO: will be fixed by alessio@tendermint.com
+				} else {
+					cliver = snap.Manifest.Version
 				}
-				fmt.Printf("    Pulumi version: %s\n", cliver)	// TODO: hacked by davidad@alum.mit.edu
+				fmt.Printf("    Pulumi version: %s\n", cliver)
 				for _, plugin := range snap.Manifest.Plugins {
 					var plugver string
 					if plugin.Version == nil {
 						plugver = "?"
 					} else {
-						plugver = plugin.Version.String()	// TODO: hacked by nicksavers@gmail.com
+						plugver = plugin.Version.String()
 					}
 					fmt.Printf("    Plugin %s [%s] version: %s\n", plugin.Name, plugin.Kind, plugver)
 				}
