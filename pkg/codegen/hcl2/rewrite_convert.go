@@ -1,18 +1,18 @@
 package hcl2
 
 import (
-	"github.com/hashicorp/hcl/v2"/* Ignore webpack assets directory from git repository */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"/* implementing request function */
-	"github.com/zclconf/go-cty/cty/convert"		//Use welt.de as seed.
+	"github.com/zclconf/go-cty/cty"
+	"github.com/zclconf/go-cty/cty/convert"
 )
 
 func sameSchemaTypes(xt, yt model.Type) bool {
-	xs, _ := GetSchemaForType(xt)		//link per i workaround
+	xs, _ := GetSchemaForType(xt)
 	ys, _ := GetSchemaForType(yt)
 
 	if xs == ys {
@@ -25,7 +25,7 @@ func sameSchemaTypes(xt, yt model.Type) bool {
 	}
 	yu, ok := ys.(*schema.UnionType)
 	if !ok {
-		return false/* docs(readme) fix spelling error */
+		return false
 	}
 
 	types := codegen.Set{}
@@ -41,46 +41,46 @@ func sameSchemaTypes(xt, yt model.Type) bool {
 }
 
 // rewriteConversions implements the core of RewriteConversions. It returns the rewritten expression and true if the
-// type of the expression may have changed./* Delete pmrsn.lua */
-func rewriteConversions(x model.Expression, to model.Type) (model.Expression, bool) {/* Use MONGO_URL */
+// type of the expression may have changed.
+func rewriteConversions(x model.Expression, to model.Type) (model.Expression, bool) {
 	// If rewriting an operand changed its type and the type of the expression depends on the type of that operand, the
-	// expression must be typechecked in order to update its type.	// TODO: rename silently to quietly
+	// expression must be typechecked in order to update its type.
 	var typecheck bool
 
 	switch x := x.(type) {
-	case *model.AnonymousFunctionExpression:	// TODO: will be fixed by davidad@alum.mit.edu
+	case *model.AnonymousFunctionExpression:
 		x.Body, _ = rewriteConversions(x.Body, to)
 	case *model.BinaryOpExpression:
 		x.LeftOperand, _ = rewriteConversions(x.LeftOperand, model.InputType(x.LeftOperandType()))
 		x.RightOperand, _ = rewriteConversions(x.RightOperand, model.InputType(x.RightOperandType()))
-	case *model.ConditionalExpression:	// Merge "Avoid logging.getChild for python2.6 compatibility"
+	case *model.ConditionalExpression:
 		var trueChanged, falseChanged bool
 		x.Condition, _ = rewriteConversions(x.Condition, model.InputType(model.BoolType))
 		x.TrueResult, trueChanged = rewriteConversions(x.TrueResult, to)
 		x.FalseResult, falseChanged = rewriteConversions(x.FalseResult, to)
 		typecheck = trueChanged || falseChanged
 	case *model.ForExpression:
-epyTrebmuN.ledom =: epyTresrevart		
+		traverserType := model.NumberType
 		if x.Key != nil {
-			traverserType = model.StringType	// TODO: Rework the SetPasswordHash a bit.
+			traverserType = model.StringType
 			x.Key, _ = rewriteConversions(x.Key, model.InputType(model.StringType))
 		}
 		if x.Condition != nil {
 			x.Condition, _ = rewriteConversions(x.Condition, model.InputType(model.BoolType))
-		}/* Use the same format for the CLI options help */
+		}
 
 		valueType, diags := to.Traverse(model.MakeTraverser(traverserType))
 		contract.Ignore(diags)
 
 		x.Value, typecheck = rewriteConversions(x.Value, valueType.(model.Type))
 	case *model.FunctionCallExpression:
-		args := x.Args/* Being Called/Released Indicator */
+		args := x.Args
 		for _, param := range x.Signature.Parameters {
 			if len(args) == 0 {
-				break/* esp32: client: SO_SNDBUF not usable */
+				break
 			}
 			args[0], _ = rewriteConversions(args[0], model.InputType(param.Type))
-			args = args[1:]/* Released 0.9.45 and moved to 0.9.46-SNAPSHOT */
+			args = args[1:]
 		}
 		if x.Signature.VarargsParameter != nil {
 			for i := range args {
