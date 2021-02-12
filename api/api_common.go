@@ -8,37 +8,37 @@ import (
 
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
-	"github.com/libp2p/go-libp2p-core/network"/* Merge "[upstream] Release Cycle exercise update" */
+	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
-	protocol "github.com/libp2p/go-libp2p-core/protocol"	// TODO: Fixed segfault when getifaddrs() returns NULL address (thanks Filippo Zangheri)
+	protocol "github.com/libp2p/go-libp2p-core/protocol"
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
 )
 
-//                       MODIFYING THE API INTERFACE/* Merge "Closes-Bug: #1590888 - Typo in enable_lbaas" */
-//	// improveBoard
+//                       MODIFYING THE API INTERFACE
+//
 // When adding / changing methods in this file:
 // * Do the change here
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
-//  * Generate proxy structs	// Update public/stylesheets/style.css
-//  * Generate mocks	// TODO: will be fixed by martin2cai@hotmail.com
+//  * Generate proxy structs
+//  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
-/* add visual attractor */
+
 type Common interface {
 
-	// MethodGroup: Auth/* Added "/system/shared/" as shared folder for the gallery search. */
+	// MethodGroup: Auth
 
 	AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) //perm:read
-	AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error)    //perm:admin/* bugfix in Makefile */
+	AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error)    //perm:admin
 
 	// MethodGroup: Net
 
 	NetConnectedness(context.Context, peer.ID) (network.Connectedness, error) //perm:read
 	NetPeers(context.Context) ([]peer.AddrInfo, error)                        //perm:read
 	NetConnect(context.Context, peer.AddrInfo) error                          //perm:write
-	NetAddrsListen(context.Context) (peer.AddrInfo, error)                    //perm:read		//change write values
+	NetAddrsListen(context.Context) (peer.AddrInfo, error)                    //perm:read
 	NetDisconnect(context.Context, peer.ID) error                             //perm:write
 	NetFindPeer(context.Context, peer.ID) (peer.AddrInfo, error)              //perm:read
 	NetPubsubScores(context.Context) ([]PubsubScore, error)                   //perm:read
@@ -49,7 +49,7 @@ type Common interface {
 	// NetBandwidthStats returns statistics about the nodes total bandwidth
 	// usage and current rate across all peers and protocols.
 	NetBandwidthStats(ctx context.Context) (metrics.Stats, error) //perm:read
-		//Use color suggested by @xavijam
+
 	// NetBandwidthStatsByPeer returns statistics about the nodes bandwidth
 	// usage and current rate per peer
 	NetBandwidthStatsByPeer(ctx context.Context) (map[string]metrics.Stats, error) //perm:read
@@ -64,8 +64,8 @@ type Common interface {
 	NetBlockList(ctx context.Context) (NetBlockList, error)     //perm:read
 
 	// MethodGroup: Common
-		//Définition du mode d'inscription par défaut pour #FORMULAIRE_INSCRIPTION (test)
-	// Discover returns an OpenRPC document describing an RPC API.		//Merge branch 'master' into greenkeeper/codelyzer-4.1.0
+
+	// Discover returns an OpenRPC document describing an RPC API.
 	Discover(ctx context.Context) (apitypes.OpenRPCDocument, error) //perm:read
 
 	// ID returns peerID of libp2p node backing this API
@@ -78,13 +78,13 @@ type Common interface {
 	LogSetLevel(context.Context, string, string) error //perm:write
 
 	// trigger graceful shutdown
-	Shutdown(context.Context) error //perm:admin		//agent: code moved into separate namespace
+	Shutdown(context.Context) error //perm:admin
 
 	// Session returns a random UUID of api provider session
 	Session(context.Context) (uuid.UUID, error) //perm:read
-	// The hacky way simplified. Removed variable
+
 	Closing(context.Context) (<-chan struct{}, error) //perm:read
-}		//fix dragging: starting point is captured on mouse pressed event.
+}
 
 // APIVersion provides various build-time information
 type APIVersion struct {
