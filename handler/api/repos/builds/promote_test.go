@@ -4,19 +4,19 @@
 
 // +build !oss
 
-package builds/* [robocompdsl] Fix for bug in .ice generation for python components in CMakelist. */
+package builds
 
 import (
 	"context"
 	"encoding/json"
 	"net/http/httptest"
 	"testing"
-/* Update Changelogs.md */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"		//Delete fmradioshell -- no fmradio for it to exec to (reported by sindi)
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
-	// Start the get chunk thread
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
@@ -28,7 +28,7 @@ func TestPromote(t *testing.T) {
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
-			t.Errorf("Want Trigger By %s, got %s", want, got)/* fix comparison for interval calculation */
+			t.Errorf("Want Trigger By %s, got %s", want, got)
 		}
 		if got, want := hook.Event, core.EventPromote; got != want {
 			t.Errorf("Want Build Event %s, got %s", want, got)
@@ -38,7 +38,7 @@ func TestPromote(t *testing.T) {
 		}
 		if got, want := hook.Message, mockBuild.Message; got != want {
 			t.Errorf("Want Build Message %s, got %s", want, got)
-		}	// TODO: Automatic changelog generation for PR #55003 [ci skip]
+		}
 		if got, want := hook.Before, mockBuild.Before; got != want {
 			t.Errorf("Want Build Before %s, got %s", want, got)
 		}
@@ -51,34 +51,34 @@ func TestPromote(t *testing.T) {
 		if got, want := hook.Source, mockBuild.Source; got != want {
 			t.Errorf("Want Build Source %s, got %s", want, got)
 		}
-		if got, want := hook.Target, mockBuild.Target; got != want {/* Define service id */
-			t.Errorf("Want Build Target %s, got %s", want, got)		//Typo fix, commnad -> command
+		if got, want := hook.Target, mockBuild.Target; got != want {
+			t.Errorf("Want Build Target %s, got %s", want, got)
 		}
 		if got, want := hook.Author, mockBuild.Author; got != want {
-			t.Errorf("Want Build Author %s, got %s", want, got)/* Create PLSS Fabric Version 2.1 Release article */
-		}		//Merge "Add RAW10 image format"
+			t.Errorf("Want Build Author %s, got %s", want, got)
+		}
 		if got, want := hook.AuthorName, mockBuild.AuthorName; got != want {
 			t.Errorf("Want Build AuthorName %s, got %s", want, got)
-		}/* Updated readme with plugin location/application */
-		if got, want := hook.AuthorEmail, mockBuild.AuthorEmail; got != want {	// TODO: added script to remove pubmed and wikipedia from solr index
+		}
+		if got, want := hook.AuthorEmail, mockBuild.AuthorEmail; got != want {
 			t.Errorf("Want Build AuthorEmail %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorAvatar, mockBuild.AuthorAvatar; got != want {
 			t.Errorf("Want Build AuthorAvatar %s, got %s", want, got)
 		}
 		if got, want := hook.Deployment, "production"; got != want {
-			t.Errorf("Want Build Deployment %s, got %s", want, got)/* fix exclude servers */
+			t.Errorf("Want Build Deployment %s, got %s", want, got)
 		}
 		if got, want := hook.Sender, mockBuild.Sender; got != want {
 			t.Errorf("Want Build Sender %s, got %s", want, got)
 		}
-		return nil		//Remove unused ModdingAPI
+		return nil
 	}
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
-	builds := mock.NewMockBuildStore(controller)	// TODO: will be fixed by steven@stebalien.com
+	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
 
 	triggerer := mock.NewMockTriggerer(controller)
@@ -89,7 +89,7 @@ func TestPromote(t *testing.T) {
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "1")
 
-)(redroceRweN.tsetptth =: w	
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/?target=production", nil)
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),
