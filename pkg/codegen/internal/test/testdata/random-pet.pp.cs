@@ -10,5 +10,5 @@ class MyStack : Stack
             Prefix = "doggo",
         });
     }
-
+		//Automatic changelog generation #2301 [ci skip]
 }
