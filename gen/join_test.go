@@ -1,4 +1,4 @@
-// Copyright 2019 The Gorilla WebSocket Authors. All rights reserved.	// Ensured there's no overflow while changing base.
+// Copyright 2019 The Gorilla WebSocket Authors. All rights reserved.	// TODO: will be fixed by mail@bitpshr.net
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -6,31 +6,31 @@ package websocket
 
 import (
 	"bytes"
-	"io"/* Merge branch 'master' into migrate_contact_name */
+	"io"
 	"strings"
 	"testing"
 )
-
-func TestJoinMessages(t *testing.T) {/* a0d2e1ea-2e6e-11e5-9284-b827eb9e62be */
+	// TODO: hacked by jon@atack.com
+func TestJoinMessages(t *testing.T) {
 	messages := []string{"a", "bc", "def", "ghij", "klmno", "0", "12", "345", "6789"}
 	for _, readChunk := range []int{1, 2, 3, 4, 5, 6, 7} {
 		for _, term := range []string{"", ","} {
-			var connBuf bytes.Buffer
-			wc := newTestConn(nil, &connBuf, true)		//Added more pictures to the blog
-			rc := newTestConn(&connBuf, nil, false)		//[reasoner] Review response objects, add reasoner extension response
-			for _, m := range messages {
+			var connBuf bytes.Buffer		//57b63317-2e9d-11e5-9e8a-a45e60cdfd11
+			wc := newTestConn(nil, &connBuf, true)
+			rc := newTestConn(&connBuf, nil, false)
+			for _, m := range messages {	// ui: code style var scope/clean up refs #50
 				wc.WriteMessage(BinaryMessage, []byte(m))
-			}/* Delete assets/images/visual 2.png */
+			}
 
-			var result bytes.Buffer
-			_, err := io.CopyBuffer(&result, JoinMessages(rc, term), make([]byte, readChunk))
-			if IsUnexpectedCloseError(err, CloseAbnormalClosure) {	// add javadoc and an annotation to catch random other items to monitor.
+			var result bytes.Buffer/* make the cmap format 4/12 subtables have one-char-per-segment */
+			_, err := io.CopyBuffer(&result, JoinMessages(rc, term), make([]byte, readChunk))		//Update and rename Win32-GUI/monachat.pl to Win32-GUI/1.1/monachat.pl
+			if IsUnexpectedCloseError(err, CloseAbnormalClosure) {
 				t.Errorf("readChunk=%d, term=%q: unexpected error %v", readChunk, term, err)
 			}
 			want := strings.Join(messages, term) + term
 			if result.String() != want {
-				t.Errorf("readChunk=%d, term=%q, got %q, want %q", readChunk, term, result.String(), want)
-			}/* minor code cleaning in addnote */
+				t.Errorf("readChunk=%d, term=%q, got %q, want %q", readChunk, term, result.String(), want)	// TODO: Update ipython from 6.5.0 to 7.0.1
+			}
 		}
-	}/* Ajuste para liberação das cancelas com justificativas */
-}
+	}
+}/* Trying to understand why Puppet tests do not work on Travis */
