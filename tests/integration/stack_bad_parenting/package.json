@@ -2,9 +2,9 @@
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"	// TODO: Update README with GIF
     },
-    "peerDependencies": {/* * Release Version 0.9 */
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"/* 0c13e62e-2e70-11e5-9284-b827eb9e62be */
     }
 }
