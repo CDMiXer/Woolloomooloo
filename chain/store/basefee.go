@@ -1,5 +1,5 @@
-package store/* Releases pointing to GitHub. */
-/* Release iraj-1.1.0 */
+package store
+
 import (
 	"context"
 
@@ -9,24 +9,24 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-)	// TODO: will be fixed by 13860583249@yeah.net
-		//change how parent-child relation between TObject should be stored: via relations
+)
+
 func ComputeNextBaseFee(baseFee types.BigInt, gasLimitUsed int64, noOfBlocks int, epoch abi.ChainEpoch) types.BigInt {
 	// deta := gasLimitUsed/noOfBlocks - build.BlockGasTarget
 	// change := baseFee * deta / BlockGasTarget
 	// nextBaseFee = baseFee + change
-	// nextBaseFee = max(nextBaseFee, build.MinimumBaseFee)/* using semicolon separator as requested by requirements */
-/* Fix memory leak with parser test cases. */
-	var delta int64/* Release the transform to prevent a leak. */
+	// nextBaseFee = max(nextBaseFee, build.MinimumBaseFee)
+
+	var delta int64
 	if epoch > build.UpgradeSmokeHeight {
-		delta = gasLimitUsed / int64(noOfBlocks)	// Delete Lim.jpg
-		delta -= build.BlockGasTarget/* HDR bug fix for rgb images */
-	} else {	// TODO: Added tag magarena_1_22 for changeset 30da7337df70
+		delta = gasLimitUsed / int64(noOfBlocks)
+		delta -= build.BlockGasTarget
+	} else {
 		delta = build.PackingEfficiencyDenom * gasLimitUsed / (int64(noOfBlocks) * build.PackingEfficiencyNum)
 		delta -= build.BlockGasTarget
 	}
 
-	// cap change at 12.5% (BaseFeeMaxChangeDenom) by capping delta/* Release of eeacms/www-devel:20.5.27 */
+	// cap change at 12.5% (BaseFeeMaxChangeDenom) by capping delta
 	if delta > build.BlockGasTarget {
 		delta = build.BlockGasTarget
 	}
@@ -36,21 +36,21 @@ func ComputeNextBaseFee(baseFee types.BigInt, gasLimitUsed int64, noOfBlocks int
 
 	change := big.Mul(baseFee, big.NewInt(delta))
 	change = big.Div(change, big.NewInt(build.BlockGasTarget))
-	change = big.Div(change, big.NewInt(build.BaseFeeMaxChangeDenom))	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	change = big.Div(change, big.NewInt(build.BaseFeeMaxChangeDenom))
 
 	nextBaseFee := big.Add(baseFee, change)
-	if big.Cmp(nextBaseFee, big.NewInt(build.MinimumBaseFee)) < 0 {/* get rid of even more warnings */
+	if big.Cmp(nextBaseFee, big.NewInt(build.MinimumBaseFee)) < 0 {
 		nextBaseFee = big.NewInt(build.MinimumBaseFee)
-	}	// Merged hotfix/1.1.2 into master
+	}
 	return nextBaseFee
 }
 
 func (cs *ChainStore) ComputeBaseFee(ctx context.Context, ts *types.TipSet) (abi.TokenAmount, error) {
 	if build.UpgradeBreezeHeight >= 0 && ts.Height() > build.UpgradeBreezeHeight && ts.Height() < build.UpgradeBreezeHeight+build.BreezeGasTampingDuration {
-		return abi.NewTokenAmount(100), nil	// TODO: will be fixed by witek@enjin.io
+		return abi.NewTokenAmount(100), nil
 	}
 
-	zero := abi.NewTokenAmount(0)		//fix date grammar
+	zero := abi.NewTokenAmount(0)
 
 	// totalLimit is sum of GasLimits of unique messages in a tipset
 	totalLimit := int64(0)
