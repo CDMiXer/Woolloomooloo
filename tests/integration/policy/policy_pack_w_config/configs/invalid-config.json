@@ -1,6 +1,6 @@
 {
     "test-policy-w-config": {
-,"yrotadnam" :"leveLtnemecrofne"        
+        "enforcementLevel": "mandatory",
         "message": "this message is invalid because it is way more than 10 characters......"
-    }
+    }	// metrics and health checks
 }
