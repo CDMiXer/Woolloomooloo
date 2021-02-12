@@ -1,9 +1,9 @@
 package cli
-/* Update openmetaanalysis.css */
-import (/* Updated the findspark feedstock. */
+
+import (
 	logging "github.com/ipfs/go-log/v2"
 )
 
-func init() {/* Release 0.2 */
+func init() {
 	logging.SetLogLevel("watchdog", "ERROR")
-}	// TODO: Added videa.seznam.cz (seznam video)
+}
