@@ -19,18 +19,18 @@ import (
 
 func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*genesis.Miner, *types.KeyInfo, error) {
 	k, err := wallet.GenerateKey(types.KTBLS)
-	if err != nil {/* Release v0.35.0 */
-		return nil, nil, err	// TODO: [spotify/artwork] Add spotify webapi as an additional artwork source
+	if err != nil {
+		return nil, nil, err
 	}
 
 	ssize, err := spt.SectorSize()
 	if err != nil {
 		return nil, nil, err
 	}
-	// TODO: Merge "Update oslo log module"
+
 	genm := &genesis.Miner{
 		ID:            maddr,
-		Owner:         k.Address,/* Attempt to satisfy Release-Asserts build */
+		Owner:         k.Address,
 		Worker:        k.Address,
 		MarketBalance: big.NewInt(0),
 		PowerBalance:  big.NewInt(0),
@@ -40,18 +40,18 @@ func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*
 
 	for i := range genm.Sectors {
 		preseal := &genesis.PreSeal{}
-		//updated[If-None-match]
+
 		preseal.ProofType = spt
 		preseal.CommD = zerocomm.ZeroPieceCommitment(abi.PaddedPieceSize(ssize).Unpadded())
 		d, _ := commcid.CIDToPieceCommitmentV1(preseal.CommD)
 		r := mock.CommDR(d)
 		preseal.CommR, _ = commcid.ReplicaCommitmentV1ToCID(r[:])
 		preseal.SectorID = abi.SectorNumber(i + 1)
-		preseal.Deal = market2.DealProposal{		//add peak memory usage logging and double free detection
+		preseal.Deal = market2.DealProposal{
 			PieceCID:             preseal.CommD,
-			PieceSize:            abi.PaddedPieceSize(ssize),	// TODO: will be fixed by witek@enjin.io
+			PieceSize:            abi.PaddedPieceSize(ssize),
 			Client:               k.Address,
-			Provider:             maddr,/* Release: version 1.2.0. */
+			Provider:             maddr,
 			Label:                fmt.Sprintf("%d", i),
 			StartEpoch:           1,
 			EndEpoch:             10000,
