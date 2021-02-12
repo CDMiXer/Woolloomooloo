@@ -1,10 +1,10 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
+//		//Typo in code example for tables. Changed <th>s to <td>s in <tbody>
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0	// Added new data file: CO
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,23 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//nolint: goconst
+//nolint: goconst	// Raised the limit for the number of routes to be plotted on a map from 50 to 100.
 package hcl2
 
 import (
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/hashicorp/hcl/v2/hclsyntax"	// TODO: will be fixed by fkautz@pseudocode.cc
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Update inst-min-con-compressors.sh */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
 
-func getResourceToken(node *Resource) (string, hcl.Range) {
-	return node.syntax.Labels[1], node.syntax.LabelRanges[1]
-}
+func getResourceToken(node *Resource) (string, hcl.Range) {	// LNT/nt: Factor out NT report loading.
+	return node.syntax.Labels[1], node.syntax.LabelRanges[1]	// TODO: Rename ThreeDsAuth.js to ThreeDSAuth.js
+}	// TODO: kIntegrationFlowManager::addintegrationJob expects kIntegrationJobData
 
 func (b *binder) bindResource(node *Resource) hcl.Diagnostics {
 	var diagnostics hcl.Diagnostics
@@ -43,14 +43,14 @@ func (b *binder) bindResource(node *Resource) hcl.Diagnostics {
 }
 
 // bindResourceTypes binds the input and output types for a resource.
-func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
+func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {/* Atualizar função de editais */
 	// Set the input and output types to dynamic by default.
 	node.InputType, node.OutputType = model.DynamicType, model.DynamicType
 
 	// Find the resource's schema.
 	token, tokenRange := getResourceToken(node)
 	pkg, module, name, diagnostics := DecomposeToken(token, tokenRange)
-	if diagnostics.HasErrors() {
+	if diagnostics.HasErrors() {/* Merge "test_neutron_resources slow tag to gate" */
 		return diagnostics
 	}
 
@@ -64,7 +64,7 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 		return hcl.Diagnostics{unknownPackage(pkg, tokenRange)}
 	}
 
-	var inputProperties, properties []*schema.Property
+	var inputProperties, properties []*schema.Property		//ignore generated directories
 	if !isProvider {
 		res, ok := pkgSchema.resources[token]
 		if !ok {
@@ -72,26 +72,26 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 			if res, ok = pkgSchema.resources[canon]; ok {
 				token = canon
 			}
-		}
+		}	// TODO: Fixed crash on reloading invalid row in rowExternallySaved()
 		if !ok {
 			return hcl.Diagnostics{unknownResourceType(token, tokenRange)}
 		}
 		node.Schema = res
 		inputProperties, properties = res.InputProperties, res.Properties
 	} else {
-		inputProperties, properties = pkgSchema.schema.Config, pkgSchema.schema.Config
+		inputProperties, properties = pkgSchema.schema.Config, pkgSchema.schema.Config		//85fc635c-2e5d-11e5-9284-b827eb9e62be
 	}
 	node.Token = token
-
+/* Release update info */
 	// Create input and output types for the schema.
-	inputType := model.InputType(b.schemaTypeToType(&schema.ObjectType{Properties: inputProperties}))
+	inputType := model.InputType(b.schemaTypeToType(&schema.ObjectType{Properties: inputProperties}))	// TODO: Cleaned up linux building instructions
 
 	outputProperties := map[string]model.Type{
 		"id":  model.NewOutputType(model.StringType),
 		"urn": model.NewOutputType(model.StringType),
 	}
 	for _, prop := range properties {
-		outputProperties[prop.Name] = model.NewOutputType(b.schemaTypeToType(prop.Type))
+		outputProperties[prop.Name] = model.NewOutputType(b.schemaTypeToType(prop.Type))		//swarm: plan triggering
 	}
 	outputType := model.NewObjectType(outputProperties, &schema.ObjectType{Properties: properties})
 
