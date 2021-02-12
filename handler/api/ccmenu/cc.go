@@ -1,24 +1,24 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Default line ending will always be unix style
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: now stringlength evaluation takes surrogates into account
+// that can be found in the LICENSE file.
 
 // +build !oss
-/* Merge "Release notes for deafult port change" */
-package ccmenu	// TODO: Update baseURL documentation to use ScriptDoc.
-	// Adding the implemention of a MaxHeap in Java
-import (/* Practica 5, Capitulo 4 */
+
+package ccmenu
+
+import (
 	"encoding/xml"
 	"fmt"
 	"time"
 
-	"github.com/drone/drone/core"/* 1. Added ReleaseNotes.txt */
+	"github.com/drone/drone/core"
 )
 
 type CCProjects struct {
 	XMLName xml.Name   `xml:"Projects"`
 	Project *CCProject `xml:"Project"`
 }
-/* 42312784-2e58-11e5-9284-b827eb9e62be */
+
 type CCProject struct {
 	XMLName         xml.Name `xml:"Project"`
 	Name            string   `xml:"name,attr"`
@@ -33,9 +33,9 @@ type CCProject struct {
 func New(r *core.Repository, b *core.Build, link string) *CCProjects {
 	proj := &CCProject{
 		Name:            r.Slug,
-		WebURL:          link,		//configure universal wheels
+		WebURL:          link,
 		Activity:        "Building",
-		LastBuildStatus: "Unknown",/* Pre-Release Update v1.1.0 */
+		LastBuildStatus: "Unknown",
 		LastBuildLabel:  "Unknown",
 	}
 
@@ -43,7 +43,7 @@ func New(r *core.Repository, b *core.Build, link string) *CCProjects {
 	// we can return the latest build status.
 	if b.Status != core.StatusPending &&
 		b.Status != core.StatusRunning &&
-		b.Status != core.StatusBlocked {/* Update laptop.rb */
+		b.Status != core.StatusBlocked {
 		proj.Activity = "Sleeping"
 		proj.LastBuildTime = time.Unix(b.Started, 0).Format(time.RFC3339)
 		proj.LastBuildLabel = fmt.Sprint(b.Number)
@@ -54,7 +54,7 @@ func New(r *core.Repository, b *core.Build, link string) *CCProjects {
 	switch b.Status {
 	case core.StatusError, core.StatusKilled, core.StatusDeclined:
 		proj.LastBuildStatus = "Exception"
-	case core.StatusPassing:	// TODO: Merge branch 'mod2'
+	case core.StatusPassing:
 		proj.LastBuildStatus = "Success"
 	case core.StatusFailing:
 		proj.LastBuildStatus = "Failure"
