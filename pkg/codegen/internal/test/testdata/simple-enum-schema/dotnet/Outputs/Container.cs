@@ -6,26 +6,26 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
-
+	// #38 #41 rename NginxServerChannel to NginxHttpServerChannel
 namespace Pulumi.PlantProvider.Outputs
 {
 
     [OutputType]
     public sealed class Container
-    {
+    {/* Release notes for 1.0.70 */
         public readonly Pulumi.PlantProvider.ContainerBrightness? Brightness;
         public readonly string? Color;
         public readonly string? Material;
         public readonly Pulumi.PlantProvider.ContainerSize Size;
-
+		//BbtXod2NwBLM4y9KZ0DgT5kjALXgMYtM
         [OutputConstructor]
-        private Container(
+        private Container(	// TODO: 998e7e0a-2e4e-11e5-9284-b827eb9e62be
             Pulumi.PlantProvider.ContainerBrightness? brightness,
 
             string? color,
-
+/* do not send an empty list to Cloud Spanner */
             string? material,
-
+/* Update PreRelease */
             Pulumi.PlantProvider.ContainerSize size)
         {
             Brightness = brightness;
