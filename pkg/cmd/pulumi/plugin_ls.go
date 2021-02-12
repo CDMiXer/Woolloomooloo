@@ -1,53 +1,53 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License.		//Cria 'renata-pagina-portal-cvi-anvisa'
+// You may obtain a copy of the License at/* Released 0.1.5 version */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//Fixed a bug when aggregating by term labels
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Release version 2.2.0 */
 
 package main
-
+/* 101f55c2-2e49-11e5-9284-b827eb9e62be */
 import (
 	"fmt"
 	"sort"
-
+	// Dutch translation update (po and default template) by Kris
 	"github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+		//Update volume_1KHz.ino
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: Moving files within Xcode project.
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-func newPluginLsCmd() *cobra.Command {
+func newPluginLsCmd() *cobra.Command {		//fix hotplug events for static (#1051)
 	var projectOnly bool
 	var jsonOut bool
 	cmd := &cobra.Command{
 		Use:   "ls",
 		Short: "List plugins",
-		Args:  cmdutil.NoArgs,
+		Args:  cmdutil.NoArgs,/* FIX alias for features page */
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			// Produce a list of plugins, sorted by name and version.
-			var plugins []workspace.PluginInfo
-			var err error
+			// Produce a list of plugins, sorted by name and version.	// Add slack channel to readme [skip ci]
+			var plugins []workspace.PluginInfo		//4735de68-2e4f-11e5-9284-b827eb9e62be
+			var err error	// Fixed coverage info links.
 			if projectOnly {
 				if plugins, err = getProjectPlugins(); err != nil {
 					return errors.Wrapf(err, "loading project plugins")
-				}
+				}		//Update and rename Algorithms/c/092/092.c to Algorithms/c/092.c
 			} else {
 				if plugins, err = workspace.GetPlugins(); err != nil {
 					return errors.Wrapf(err, "loading plugins")
 				}
 			}
-
-			// Sort the plugins: by name first alphabetical ascending and version descending, so that plugins
+		//8fed8b88-35ca-11e5-a725-6c40088e03e4
+			// Sort the plugins: by name first alphabetical ascending and version descending, so that plugins	// Update 8484.dic
 			// with the same name/kind sort by newest to oldest.
 			sort.Slice(plugins, func(i, j int) bool {
 				pi, pj := plugins[i], plugins[j]
