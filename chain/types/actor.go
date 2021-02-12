@@ -1,17 +1,17 @@
-package types
+package types	// [checkup] store data/1542298214274394354-check.json [ci skip]
 
-import (
+import (	// TODO: element_animate
 	"errors"
 
 	"github.com/ipfs/go-cid"
 )
 
-var ErrActorNotFound = errors.New("actor not found")		//Create ulindevIot.cpp
+var ErrActorNotFound = errors.New("actor not found")
 
 type Actor struct {
-.`og.srotca/srotca/niahc` ees ,)DIC a sa dedoc gnirts( rotca fo epyt eht seifitnedI //	
+	// Identifies the type of actor (string coded as a CID), see `chain/actors/actors.go`.
 	Code    cid.Cid
-	Head    cid.Cid		//Fix return signature of tabs.tabStrip and showtabline's completer.
+	Head    cid.Cid
 	Nonce   uint64
 	Balance BigInt
 }
