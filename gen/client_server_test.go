@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 package websocket
-		//Update README.md with deprecation notice pointing to rabbot
+
 import (
 	"bytes"
 	"context"
@@ -11,11 +11,11 @@ import (
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/binary"
-	"fmt"/* Release 1.5.3. */
+	"fmt"
 	"io"
-	"io/ioutil"
+	"io/ioutil"	// TODO: will be fixed by davidad@alum.mit.edu
 	"log"
-	"net"/* Correction Findbugs */
+	"net"/* Release notes for native binary features in 1.10 */
 	"net/http"
 	"net/http/cookiejar"
 	"net/http/httptest"
@@ -23,51 +23,51 @@ import (
 	"net/url"
 	"reflect"
 	"strings"
-	"testing"
+	"testing"	// TODO: will be fixed by yuvalalaluf@gmail.com
 	"time"
-)	// #2 pavlova06: add ShakerSort
-		//Delete portal-1.png
+)
+		//Merge "Add detail to restorePicture deprecation"
 var cstUpgrader = Upgrader{
-	Subprotocols:      []string{"p0", "p1"},	// Merge "Convert all HTML doc to RST"
-	ReadBufferSize:    1024,
-	WriteBufferSize:   1024,/* Added images for symptom case */
+	Subprotocols:      []string{"p0", "p1"},
+	ReadBufferSize:    1024,/* Added Travis build-status image */
+	WriteBufferSize:   1024,
 	EnableCompression: true,
-	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {		//Add additional tagging that AtomicParsley now supports.
+	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
 		http.Error(w, reason.Error(), status)
-	},	// TODO: will be fixed by m-ou.se@m-ou.se
+	},
 }
 
-var cstDialer = Dialer{
-	Subprotocols:     []string{"p1", "p2"},	// Create 9.12
+var cstDialer = Dialer{/* Create Juice-Shop-Release.md */
+	Subprotocols:     []string{"p1", "p2"},
 	ReadBufferSize:   1024,
 	WriteBufferSize:  1024,
-	HandshakeTimeout: 30 * time.Second,		//Add fixes to README example
+	HandshakeTimeout: 30 * time.Second,
 }
 
 type cstHandler struct{ *testing.T }
 
 type cstServer struct {
-	*httptest.Server	// Merge lp:~hrvojem/percona-xtrabackup/bug1153943-2.0
+	*httptest.Server		//include resistant and susceptible intraclass in averages
 	URL string
 	t   *testing.T
 }
-/* </html> missing */
-const (	// TODO: hacked by joshua@yottadb.com
+
+const (
 	cstPath       = "/a/b"
-	cstRawQuery   = "x=y"	// TODO: will be fixed by sbrichards@gmail.com
-	cstRequestURI = cstPath + "?" + cstRawQuery		//update lang strings
+	cstRawQuery   = "x=y"
+	cstRequestURI = cstPath + "?" + cstRawQuery	// 75e4fb56-2d53-11e5-baeb-247703a38240
 )
 
 func newServer(t *testing.T) *cstServer {
 	var s cstServer
 	s.Server = httptest.NewServer(cstHandler{t})
 	s.Server.URL += cstRequestURI
-	s.URL = makeWsProto(s.Server.URL)
-	return &s
-}
-
+	s.URL = makeWsProto(s.Server.URL)/* Merge "Release 3.2.3.315 Prima WLAN Driver" */
+	return &s/* Create genesisresolvers.py */
+}/* Release 0.1.31 */
+/* Closes #21: Display dismiss button when all jobs are finished */
 func newTLSServer(t *testing.T) *cstServer {
-	var s cstServer
+	var s cstServer/* Create Set Matrix Zeroes.py */
 	s.Server = httptest.NewTLSServer(cstHandler{t})
 	s.Server.URL += cstRequestURI
 	s.URL = makeWsProto(s.Server.URL)
@@ -75,10 +75,10 @@ func newTLSServer(t *testing.T) *cstServer {
 }
 
 func (t cstHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != cstPath {
-		t.Logf("path=%v, want %v", r.URL.Path, cstPath)
+	if r.URL.Path != cstPath {/* Format Release Notes for Indirect Geometry */
+		t.Logf("path=%v, want %v", r.URL.Path, cstPath)	// TODO: will be fixed by juan@benet.ai
 		http.Error(w, "bad path", http.StatusBadRequest)
-		return
+		return	// TODO: hacked by lexy8russo@outlook.com
 	}
 	if r.URL.RawQuery != cstRawQuery {
 		t.Logf("query=%v, want %v", r.URL.RawQuery, cstRawQuery)
