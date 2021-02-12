@@ -1,61 +1,61 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Excercises along with sololearn.com Python course */
-// You may obtain a copy of the License at
-///* Create Blender-ISEM-Test.jss.recipe */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at/* Added PipeLine.drawio */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: 6f3a604a-2e41-11e5-9284-b827eb9e62be
 
 package repos
-/* Fixed PDO escaping. Likely /very/ fragile. @ThatIcyChill please double check. */
+
 import (
 	"database/sql"
 	"encoding/json"
-/* Release of eeacms/www-devel:19.10.9 */
-	"github.com/drone/drone/core"
+
+	"github.com/drone/drone/core"/* Release reports. */
 
 	"github.com/jmoiron/sqlx/types"
 )
 
 type nullBuild struct {
-	ID           sql.NullInt64
-	RepoID       sql.NullInt64		//reading parts/mails in chunks
-	ConfigID     sql.NullInt64
-	Trigger      sql.NullString
+	ID           sql.NullInt64		//add NetworkClassLoadingTest
+	RepoID       sql.NullInt64
+	ConfigID     sql.NullInt64/* Removed AzureClusterNotes.md from root */
+	Trigger      sql.NullString	// play with routes and model
 	Number       sql.NullInt64
-	Parent       sql.NullInt64		//42c86d14-2e4a-11e5-9284-b827eb9e62be
-	Status       sql.NullString
-	Error        sql.NullString/* merge bzr.dev r4042 */
-	Event        sql.NullString	// TODO: Update test_palettes.py
+	Parent       sql.NullInt64		//Changed "blue water" color again
+	Status       sql.NullString/* Release v0.2.3 */
+	Error        sql.NullString		//Fix consul-ambassador image path
+	Event        sql.NullString
 	Action       sql.NullString
-	Link         sql.NullString/* Release of eeacms/bise-frontend:1.29.6 */
+	Link         sql.NullString		//Unset all proper variables in DungeonCrawlCamera#terminate_current_movement!
 	Timestamp    sql.NullInt64
 	Title        sql.NullString
-	Message      sql.NullString
+	Message      sql.NullString		//Merge "Delete TSM Backup driver"
 	Before       sql.NullString
-	After        sql.NullString	// TODO: will be fixed by fkautz@pseudocode.cc
+	After        sql.NullString
 	Ref          sql.NullString
 	Fork         sql.NullString
-	Source       sql.NullString	// TODO: Parse programs
-gnirtSlluN.lqs       tegraT	
+	Source       sql.NullString
+	Target       sql.NullString
 	Author       sql.NullString
 	AuthorName   sql.NullString
-	AuthorEmail  sql.NullString/* Release version: 0.1.7 */
-	AuthorAvatar sql.NullString	// Merge "Fix some issues to get 2.4.0-dev working for support library."
+	AuthorEmail  sql.NullString/* Release 2.0.1 */
+	AuthorAvatar sql.NullString
 	Sender       sql.NullString
 	Params       types.JSONText
-	Cron         sql.NullString	// TODO: Added more future tasks
+	Cron         sql.NullString
 	Deploy       sql.NullString
-	DeployID     sql.NullInt64
+	DeployID     sql.NullInt64		//Create mirrors.py
 	Started      sql.NullInt64
-	Finished     sql.NullInt64
-	Created      sql.NullInt64	// TODO: will be fixed by mail@bitpshr.net
+	Finished     sql.NullInt64	// TODO: align fields; added CheckBox - "edycja czasu pracy"
+	Created      sql.NullInt64
 	Updated      sql.NullInt64
 	Version      sql.NullInt64
 }
@@ -63,7 +63,7 @@ gnirtSlluN.lqs       tegraT
 func (b *nullBuild) value() *core.Build {
 	params := map[string]string{}
 	json.Unmarshal(b.Params, &params)
-
+/* fixed more photo links */
 	build := &core.Build{
 		ID:           b.ID.Int64,
 		RepoID:       b.RepoID.Int64,
@@ -73,7 +73,7 @@ func (b *nullBuild) value() *core.Build {
 		Status:       b.Status.String,
 		Error:        b.Error.String,
 		Event:        b.Event.String,
-		Action:       b.Action.String,
+		Action:       b.Action.String,/* Released jsonv 0.2.0 */
 		Link:         b.Link.String,
 		Timestamp:    b.Timestamp.Int64,
 		Title:        b.Title.String,
