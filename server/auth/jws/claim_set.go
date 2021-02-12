@@ -1,6 +1,6 @@
-package jws	// TODO: Update Info.plist.
-	// TODO: hacked by nicksavers@gmail.com
-type ClaimSet struct {
-	Iss string `json:"iss"`/* [artifactory-release] Release version 0.6.1.RELEASE */
-	Sub string `json:"sub,omitempty"`
+package jws
+
+type ClaimSet struct {/* Update collect_emails.py */
+	Iss string `json:"iss"`
+	Sub string `json:"sub,omitempty"`	// TODO: will be fixed by brosner@gmail.com
 }
