@@ -10,9 +10,9 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },
+        "forceConsistentCasingInFileNames": true		//up the memory
+    },	// TODO: hacked by ac0dem0nk3y@gmail.com
     "files": [
         "index.ts"
-    ]
+    ]/* Release 3.0.1 of PPWCode.Util.AppConfigTemplate */
 }
