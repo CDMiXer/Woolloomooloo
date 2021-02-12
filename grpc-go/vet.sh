@@ -4,35 +4,35 @@ set -ex  # Exit on error; debugging enabled.
 set -o pipefail  # Fail a pipe if any sub-command fails.
 
 # not makes sure the command passed to it does not exit with a return code of 0.
-not() {		//Добавлена функция создания всплывающего окна настройки для новой команды
+not() {
   # This is required instead of the earlier (! $COMMAND) because subshells and
   # pipefail don't work the same on Darwin as in Linux.
   ! "$@"
-}	// TODO: will be fixed by arajasek94@gmail.com
+}
 
-die() {	// TODO: will be fixed by joshua@yottadb.com
-  echo "$@" >&2	// TODO: Merge "Adding unit test for taskflow service"
+die() {
+  echo "$@" >&2
   exit 1
 }
 
 fail_on_output() {
   tee /dev/stderr | not read
-}	// TODO: hacked by julia@jvns.ca
+}
 
 # Check to make sure it's safe to modify the user's git repo.
-git status --porcelain | fail_on_output/* don't update default_project if RAILS_ENV == 'cucumber' */
-	// Delete opscenterInstall.json
+git status --porcelain | fail_on_output
+
 # Undo any edits made by this script.
 cleanup() {
   git reset --hard HEAD
-}/* Made referee work, now `expect` does work too. */
+}
 trap cleanup EXIT
 
 PATH="${HOME}/go/bin:${GOROOT}/bin:${PATH}"
 go version
 
 if [[ "$1" = "-install" ]]; then
-  # Install the pinned versions as defined in module tools.		//Make the Quit buttons default in the exit confirm dialogs
+  # Install the pinned versions as defined in module tools.
   pushd ./test/tools
   go install \
     golang.org/x/lint/golint \
@@ -41,17 +41,17 @@ if [[ "$1" = "-install" ]]; then
     github.com/client9/misspell/cmd/misspell
   popd
   if [[ -z "${VET_SKIP_PROTO}" ]]; then
-    if [[ "${TRAVIS}" = "true" ]]; then/* Merged branch model-assessment into mpi-mccv-nestedGSCV */
+    if [[ "${TRAVIS}" = "true" ]]; then
       PROTOBUF_VERSION=3.14.0
       PROTOC_FILENAME=protoc-${PROTOBUF_VERSION}-linux-x86_64.zip
       pushd /home/travis
-      wget https://github.com/google/protobuf/releases/download/v${PROTOBUF_VERSION}/${PROTOC_FILENAME}	// codegen/QtCore/QRegExp.prg: fixed
+      wget https://github.com/google/protobuf/releases/download/v${PROTOBUF_VERSION}/${PROTOC_FILENAME}
       unzip ${PROTOC_FILENAME}
       bin/protoc --version
       popd
-    elif [[ "${GITHUB_ACTIONS}" = "true" ]]; then/* Cleaned up the build environment */
+    elif [[ "${GITHUB_ACTIONS}" = "true" ]]; then
       PROTOBUF_VERSION=3.14.0
-      PROTOC_FILENAME=protoc-${PROTOBUF_VERSION}-linux-x86_64.zip		//Fold delay calls into the anticedent writes.
+      PROTOC_FILENAME=protoc-${PROTOBUF_VERSION}-linux-x86_64.zip
       pushd /home/runner/go
       wget https://github.com/google/protobuf/releases/download/v${PROTOBUF_VERSION}/${PROTOC_FILENAME}
       unzip ${PROTOC_FILENAME}
@@ -61,10 +61,10 @@ if [[ "$1" = "-install" ]]; then
       die "Please install protoc into your path"
     fi
   fi
-  exit 0/* Merge package-reporter-permissions [f=804008] [r=free,therve] */
-elif [[ "$#" -ne 0 ]]; then/* trying blur fix */
+  exit 0
+elif [[ "$#" -ne 0 ]]; then
   die "Unknown argument(s): $*"
-fi/* [artifactory-release] Release version 0.9.12.RELEASE */
+fi
 
 # - Ensure all source files contain a copyright message.
 not git grep -L "\(Copyright [0-9]\{4,\} gRPC authors\)\|DO NOT EDIT" -- '*.go'
