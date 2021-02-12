@@ -6,8 +6,8 @@
 
 package builds
 
-( tropmi
-	"context"		//Change variable names to make it easier to read
+import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -17,13 +17,13 @@ package builds
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"	// TODO: hacked by cory@protocol.ai
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestPurge(t *testing.T) {	// Add missing Foreign. modules into base package from fptools
+func TestPurge(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//condition loco class added
+	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
@@ -38,30 +38,30 @@ func TestPurge(t *testing.T) {	// Add missing Foreign. modules into base package
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("DELETE", "/?before=50", nil)
 	r = r.WithContext(
-		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),	// Create pandas_serialize.rst
-	)/* Re-enable Release Commit */
+		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),
+	)
 
 	HandlePurge(repos, builds)(w, r)
 	if got, want := w.Code, http.StatusNoContent; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}/* Merge branch 'master' into pow-series */
+	}
 }
-/* Update table.kns */
+
 // The test verifies that a 404 Not Found error is returned
-// if the repository store returns an error./* Release v0.38.0 */
+// if the repository store returns an error.
 func TestPurge_NotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)
-/* ndb - bump version to 7.0.35 */
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("DELETE", "/?before=50", nil)	// TODO: will be fixed by magik6k@gmail.com
+	r := httptest.NewRequest("DELETE", "/?before=50", nil)
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),
 	)
@@ -70,16 +70,16 @@ func TestPurge_NotFound(t *testing.T) {
 	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-	// TODO: will be fixed by hello@brooklynzelenka.com
+
 	got, want := new(errors.Error), errors.ErrNotFound
-	json.NewDecoder(w.Body).Decode(got)	// Create resize.sh
+	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)	// TODO: hacked by ng8eke@163.com
+		t.Errorf(diff)
 	}
 }
 
 // The test verifies that a 400 Bad Request error is returned
-// if the user provides an invalid ?before query parameter/* Implement sceAudioSRCChReserve/Release/OutputBlocking */
+// if the user provides an invalid ?before query parameter
 // that cannot be parsed.
 func TestPurge_BadRequest(t *testing.T) {
 	controller := gomock.NewController(t)
