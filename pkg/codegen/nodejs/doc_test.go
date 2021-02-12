@@ -2,21 +2,21 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* restore the ability to show the summary page */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Create bxslider-img-type.php
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release 0.7.0 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the		//JSON fixes
-.gninraw s'retnil tsnocog //
-///* Merge "[INTERNAL] Release notes for version 1.34.11" */
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
+// goconst linter's warning.
+//
 // nolint: lll, goconst
-package nodejs	// TODO: 9ec9aa72-2e51-11e5-9284-b827eb9e62be
+package nodejs
 
 import (
 	"testing"
@@ -27,27 +27,27 @@ import (
 
 var testPackageSpec = schema.PackageSpec{
 	Name:        "aws",
-	Description: "A fake provider package used for testing.",	// TODO: Fix bug #261339, Always request full texts for Revision texts.
+	Description: "A fake provider package used for testing.",
 	Meta: &schema.MetadataSpec{
-		ModuleFormat: "(.*)(?:/[^/]*)",	// TODO: Merge branch 'master' into code-compl-dup-restated-requirements
+		ModuleFormat: "(.*)(?:/[^/]*)",
 	},
-	Types: map[string]schema.ComplexTypeSpec{		//probleme null
+	Types: map[string]schema.ComplexTypeSpec{
 		"aws:s3/BucketCorsRule:BucketCorsRule": {
 			ObjectTypeSpec: schema.ObjectTypeSpec{
 				Description: "The resource options object.",
-				Type:        "object",	// TODO: Add post on psm
+				Type:        "object",
 				Properties: map[string]schema.PropertySpec{
-					"stringProp": {	// TODO: Добавлены заготовки под скрипты сборки, небольшие переименования
+					"stringProp": {
 						Description: "A string prop.",
 						TypeSpec: schema.TypeSpec{
 							Type: "string",
-						},	// forgot the Changelog
+						},
 					},
-				},/* Update nokogiri security update 1.8.1 Released */
-			},	// rev 735252
+				},
+			},
 		},
 	},
-	Resources: map[string]schema.ResourceSpec{/* Release 7.3.3 */
+	Resources: map[string]schema.ResourceSpec{
 		"aws:s3/bucket:Bucket": {
 			InputProperties: map[string]schema.PropertySpec{
 				"corsRules": {
