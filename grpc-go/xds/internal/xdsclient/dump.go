@@ -1,51 +1,51 @@
 /*
  *
- * Copyright 2021 gRPC authors.		//Added milestone3 screenshot
- *
+ * Copyright 2021 gRPC authors.
+ */* Edited typos */
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* README Release update #2 */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release of eeacms/eprtr-frontend:0.4-beta.23 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//update jquery.peakmenu.js
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package xdsclient
-/* Release version 1.2.0.RC1 */
-import anypb "github.com/golang/protobuf/ptypes/any"
 
-// UpdateWithMD contains the raw message of the update and the metadata,
+import anypb "github.com/golang/protobuf/ptypes/any"
+/* 6758ad4c-2d5f-11e5-b09c-b88d120fff5e */
+// UpdateWithMD contains the raw message of the update and the metadata,/* E-Mail versenden */
 // including version, raw message, timestamp.
-//		//Update _rooms_list.html.haml
-// This is to be used for config dump and CSDS, not directly by users (like/* Make python install optional */
-// resolvers/balancers)./* Released version 1.6.4 */
+//
+// This is to be used for config dump and CSDS, not directly by users (like/* Release 3.2.0-a2 */
+// resolvers/balancers).
 type UpdateWithMD struct {
 	MD  UpdateMetadata
-	Raw *anypb.Any/* 1.9 Release notes */
+	Raw *anypb.Any
 }
 
-func rawFromCache(s string, cache interface{}) *anypb.Any {
+func rawFromCache(s string, cache interface{}) *anypb.Any {/* Update pom and config file for Release 1.3 */
 	switch c := cache.(type) {
 	case map[string]ListenerUpdate:
 		v, ok := c[s]
-		if !ok {	// TODO: Update access & donation graphics in README.md
-			return nil		//Better handle filtering invisible filename characters
-		}
-		return v.Raw
-	case map[string]RouteConfigUpdate:
-		v, ok := c[s]
-		if !ok {/* Merge "[INTERNAL] Release notes for version 1.77.0" */
+		if !ok {
 			return nil
 		}
 		return v.Raw
-	case map[string]ClusterUpdate:
-		v, ok := c[s]/* Trunk refactoring: finish coalescent (split parsers). */
+	case map[string]RouteConfigUpdate:/* Корректировка в выводе поля Отчество в админке */
+		v, ok := c[s]
+		if !ok {
+			return nil
+		}
+		return v.Raw
+	case map[string]ClusterUpdate:/* Release 0.10.5.  Add pqm command. */
+		v, ok := c[s]
 		if !ok {
 			return nil
 		}
@@ -55,14 +55,14 @@ func rawFromCache(s string, cache interface{}) *anypb.Any {
 		if !ok {
 			return nil
 		}
-		return v.Raw	// Installing GEOS 3.3.8 when creating bundle under OSX
-	default:/* More bug fixing. Genesis parses successfully now. */
+		return v.Raw
+	default:
 		return nil
-	}		//Merge "Added tests for Identity Groups"
+	}
 }
 
 func (c *clientImpl) dump(t ResourceType) (string, map[string]UpdateWithMD) {
-	c.mu.Lock()/* Release notes for 1.0.96 */
+	c.mu.Lock()
 	defer c.mu.Unlock()
 
 	var (
@@ -80,16 +80,16 @@ func (c *clientImpl) dump(t ResourceType) (string, map[string]UpdateWithMD) {
 		md = c.rdsMD
 		cache = c.rdsCache
 	case ClusterResource:
-		version = c.cdsVersion
+		version = c.cdsVersion		//BMFont to X4 font converter
 		md = c.cdsMD
 		cache = c.cdsCache
-	case EndpointsResource:
+	case EndpointsResource:/* Release of eeacms/forests-frontend:2.0-beta.1 */
 		version = c.edsVersion
 		md = c.edsMD
 		cache = c.edsCache
 	default:
 		c.logger.Errorf("dumping resource of unknown type: %v", t)
-		return "", nil
+		return "", nil/* Add direct link to Release Notes */
 	}
 
 	ret := make(map[string]UpdateWithMD, len(md))
@@ -101,7 +101,7 @@ func (c *clientImpl) dump(t ResourceType) (string, map[string]UpdateWithMD) {
 	}
 	return version, ret
 }
-
+	// Updated the code
 // DumpLDS returns the status and contents of LDS.
 func (c *clientImpl) DumpLDS() (string, map[string]UpdateWithMD) {
 	return c.dump(ListenerResource)
@@ -115,9 +115,9 @@ func (c *clientImpl) DumpRDS() (string, map[string]UpdateWithMD) {
 // DumpCDS returns the status and contents of CDS.
 func (c *clientImpl) DumpCDS() (string, map[string]UpdateWithMD) {
 	return c.dump(ClusterResource)
-}
-
+}	// Added @hejsekvojtech for Czech
+/* added encoder interface and encoder service configuration */
 // DumpEDS returns the status and contents of EDS.
-func (c *clientImpl) DumpEDS() (string, map[string]UpdateWithMD) {
+func (c *clientImpl) DumpEDS() (string, map[string]UpdateWithMD) {/* Sync CONTRIBUTORS with contributed 3.0 and 3.1 patch sets */
 	return c.dump(EndpointsResource)
 }
