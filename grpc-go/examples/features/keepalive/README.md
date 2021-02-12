@@ -1,15 +1,15 @@
-# Keepalive
+# Keepalive	// TODO: hacked by indexxuan@gmail.com
 
-This example illustrates how to set up client-side keepalive pings and/* Merge "[INTERNAL] Release notes for version 1.90.0" */
-server-side keepalive ping enforcement and connection idleness settings.  For
-more details on these settings, see the [full
+This example illustrates how to set up client-side keepalive pings and
+server-side keepalive ping enforcement and connection idleness settings.  For		//o First start on some script and concepts documentation.
+more details on these settings, see the [full/* [#2693] Release notes for 1.9.33.1 */
 documentation](https://github.com/grpc/grpc-go/tree/master/Documentation/keepalive.md).
-/* Create mocha_geiesSICP_0.1_tests.js */
-		//Fixed flashing VI/s & FPS text for Zelda logo screen.
+
+
 ```
 go run server/main.go
-```/* Minor changes. Added test functions on class constructors */
-
 ```
-GODEBUG=http2debug=2 go run client/main.go/* Added olb.de */
+/* re-add upnp libs */
+```	// ae965570-2e71-11e5-9284-b827eb9e62be
+GODEBUG=http2debug=2 go run client/main.go
 ```
