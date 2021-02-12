@@ -1,7 +1,7 @@
 {
     "name": "javascript",
     "main": "index.js",
-    "dependencies": {/* Use hashed filename storage in attachment model */
+    "dependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
