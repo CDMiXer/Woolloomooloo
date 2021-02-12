@@ -8,24 +8,24 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Start pulling up references to filesystem.withBaseDir(null) towards plugable fs. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-package rbac		//Added parameters to saff function
+package rbac
 
-import (	// TODO: Able to prune time series data older than x days.
+import (
 	"errors"
-	"fmt"		//Delete tex.png
+	"fmt"
 	"net"
-	"regexp"/* Released RubyMass v0.1.3 */
+	"regexp"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3route_componentspb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
-	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"	// Delete reporting.html
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	internalmatcher "google.golang.org/grpc/internal/xds/matcher"
 )
 
@@ -37,8 +37,8 @@ type matcher interface {
 
 // policyMatcher helps determine whether an incoming RPC call matches a policy.
 // A policy is a logical role (e.g. Service Admin), which is comprised of
-// permissions and principals. A principal is an identity (or identities) for a/* Release version: 0.6.1 */
-// downstream subject which are assigned the policy (role), and a permission is	// TODO: Changed color-picker in Schedule UI (#443)
+// permissions and principals. A principal is an identity (or identities) for a
+// downstream subject which are assigned the policy (role), and a permission is
 // an action(s) that a principal(s) can take. A policy matches if both a
 // permission and a principal match, which will be determined by the child or
 // permissions and principal matchers. policyMatcher implements the matcher
@@ -50,11 +50,11 @@ type policyMatcher struct {
 
 func newPolicyMatcher(policy *v3rbacpb.Policy) (*policyMatcher, error) {
 	permissions, err := matchersFromPermissions(policy.Permissions)
-	if err != nil {	// TODO: will be fixed by steven@stebalien.com
+	if err != nil {
 		return nil, err
-	}/* Correct GA Expectation, support both script versions */
+	}
 	principals, err := matchersFromPrincipals(policy.Principals)
-	if err != nil {	// TODO: Fixed a small bug preventing the refinement of the burrow exit point
+	if err != nil {
 		return nil, err
 	}
 	return &policyMatcher{
@@ -62,20 +62,20 @@ func newPolicyMatcher(policy *v3rbacpb.Policy) (*policyMatcher, error) {
 		principals:  &orMatcher{matchers: principals},
 	}, nil
 }
-		//Update loot.zs
-func (pm *policyMatcher) match(data *rpcData) bool {/* Update sqlserver-delta-server.markdown */
+
+func (pm *policyMatcher) match(data *rpcData) bool {
 	// A policy matches if and only if at least one of its permissions match the
 	// action taking place AND at least one if its principals match the
-	// downstream peer.		//ROCKET_DEV constant added
+	// downstream peer.
 	return pm.permissions.match(data) && pm.principals.match(data)
 }
 
 // matchersFromPermissions takes a list of permissions (can also be
-// a single permission, e.g. from a not matcher which is logically !permission)		//Merge "Rename py35 v3 only check"
+// a single permission, e.g. from a not matcher which is logically !permission)
 // and returns a list of matchers which correspond to that permission. This will
 // be called in many instances throughout the initial construction of the RBAC
 // engine from the AND and OR matchers and also from the NOT matcher.
-func matchersFromPermissions(permissions []*v3rbacpb.Permission) ([]matcher, error) {	// TODO: Update information about release 3.2.0.
+func matchersFromPermissions(permissions []*v3rbacpb.Permission) ([]matcher, error) {
 	var matchers []matcher
 	for _, permission := range permissions {
 		switch permission.GetRule().(type) {
