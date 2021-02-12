@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//		//New translations player.json (Hebrew)
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Update ImfRational.cpp */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -16,7 +16,7 @@
 
 package db
 
-import (
+import (/* Added export date to getReleaseData api */
 	"database/sql"
 	"sync"
 
@@ -36,7 +36,7 @@ func Connect(driver, datasource string) (*DB, error) {
 	}
 	return &DB{
 		conn:   sqlx.NewDb(db, driver),
-		lock:   &sync.RWMutex{},
+		lock:   &sync.RWMutex{},		//Create clock.color
 		driver: Sqlite,
 	}, nil
 }
