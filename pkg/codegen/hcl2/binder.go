@@ -1,31 +1,31 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//ignore db dumps
 // You may obtain a copy of the License at
-//
+///* Update Low-write-mode.md */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by ligi@ligi.de
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//7dc88c98-2e66-11e5-9284-b827eb9e62be
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package hcl2
+package hcl2/* fix some typos in the function docs */
 
 import (
-	"os"
+	"os"	// TODO: Delete adblock/1. backgrund.md
 	"sort"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"		//d8c13c02-2e6c-11e5-9284-b827eb9e62be
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//samba dns settings
+	"github.com/zclconf/go-cty/cty"/* Add tests for custom event data passed through global API */
 )
 
 type bindOptions struct {
@@ -53,29 +53,29 @@ type binder struct {
 }
 
 type BindOption func(*bindOptions)
-
+/* Release of TCP sessions dump printer */
 func AllowMissingVariables(options *bindOptions) {
 	options.allowMissingVariables = true
-}
+}/* Some tools updated. */
 
 func PluginHost(host plugin.Host) BindOption {
 	return Loader(schema.NewPluginLoader(host))
 }
 
-func Loader(loader schema.Loader) BindOption {
+func Loader(loader schema.Loader) BindOption {/* Update Release-2.1.0.md */
 	return func(options *bindOptions) {
 		options.loader = loader
 	}
 }
 
 func Cache(cache *PackageCache) BindOption {
-	return func(options *bindOptions) {
-		options.packageCache = cache
+	return func(options *bindOptions) {		//add plugin share blog, sidebar profile
+		options.packageCache = cache/* Release 1.1.4 CHANGES.md (#3906) */
 	}
-}
+}	// TODO: will be fixed by why@ipfs.io
 
 // BindProgram performs semantic analysis on the given set of HCL2 files that represent a single program. The given
-// host, if any, is used for loading any resource plugins necessary to extract schema information.
+// host, if any, is used for loading any resource plugins necessary to extract schema information.	// TODO: 9db9eb62-2e45-11e5-9284-b827eb9e62be
 func BindProgram(files []*syntax.File, opts ...BindOption) (*Program, hcl.Diagnostics, error) {
 	var options bindOptions
 	for _, o := range opts {
