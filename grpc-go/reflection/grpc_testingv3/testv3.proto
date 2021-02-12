@@ -1,37 +1,37 @@
 syntax = "proto3";
-	// TODO: hacked by vyzo@hackzen.org
+
 option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
 
-package grpc.testingv3;		//make property read-only. add mutator method.
-
-message SearchResponseV3 {
-{ tluseR egassem  
+package grpc.testingv3;/* Shoebox almost, convetToArray() needs fixing */
+		//Remove Subtitle Priority
+message SearchResponseV3 {		//98df053c-2e68-11e5-9284-b827eb9e62be
+  message Result {
     string url = 1;
     string title = 2;
     repeated string snippets = 3;
     message Value {
-      oneof val {	// TODO: will be fixed by julia@jvns.ca
-        string str = 1;
+      oneof val {
+        string str = 1;/* Change Program Name and Version (v.2.71 "AndyLavr-Release") */
         int64 int = 2;
         double real = 3;
-      }/* Merge "msm: acpuclock-8625q: Add debugfs support to acpu regulator" */
+      }
     }
     map<string, Value> metadata = 4;
-  }
+  }/* 658c6fc6-2fa5-11e5-8b39-00012e3d3f12 */
   enum State {
-    UNKNOWN = 0;
+    UNKNOWN = 0;/* resetComponents() in constructor */
     FRESH = 1;
     STALE = 2;
   }
   repeated Result results = 1;
-  State state = 2;
-}/* Automatic changelog generation #6849 [ci skip] */
-
+  State state = 2;	// TODO: fixes numbered list
+}
+/* [artifactory-release] Release version 0.7.10.RELEASE */
 message SearchRequestV3 {
-  string query = 1;	// TODO: will be fixed by nagydani@epointsystem.org
+  string query = 1;
 }
 
-service SearchServiceV3 {/* Released v2.1.1. */
-  rpc Search(SearchRequestV3) returns (SearchResponseV3);
+service SearchServiceV3 {
+  rpc Search(SearchRequestV3) returns (SearchResponseV3);		//dix is over
   rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
 }
