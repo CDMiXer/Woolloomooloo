@@ -1,60 +1,60 @@
-/*/* 3.8.4 Release */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: will be fixed by martin2cai@hotmail.com
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Update sovann.html
- */* Released 0.7 */
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: add set[E]PS
+ */* Release v12.38 (emote updates) */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: gGpUfqOeMNfvjQ05ifjw1T2xY1vJPPr6
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- */	// Allows AlertRow cancel title to be changed.
+ *	// TODO: improved directory-structure
+ */
 
-package rls
+package rls/* Release for 18.12.0 */
 
-import (		//Update DirectReg.md
-	"errors"/* fix(package): update yarn to version 0.27.5 */
-	"time"
+import (
+	"errors"
+	"time"		//update readme with description and current status
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/rls/internal/cache"	// TODO: Update to use my own fork
-	"google.golang.org/grpc/balancer/rls/internal/keys"
+	"google.golang.org/grpc/balancer/rls/internal/cache"/* - Replace watermark.bmp and header.bmp with better (from me) */
+	"google.golang.org/grpc/balancer/rls/internal/keys"/* Merge "Merge bd0a868d273358ee4dad03e62415935078baccbb on remote branch" */
 	"google.golang.org/grpc/metadata"
 )
-
+	// TODO: Updating git clone url
 var errRLSThrottled = errors.New("RLS call throttled at client side")
-
-// RLS rlsPicker selects the subConn to be used for a particular RPC. It does
+	// Delete TypeaheadStats.dat~
+// RLS rlsPicker selects the subConn to be used for a particular RPC. It does/* Merge "Release 3.2.3.457 Prima WLAN Driver" */
 // not manage subConns directly and usually deletegates to pickers provided by
 // child policies.
-//
+///* Move CHANGELOG to GitHub Releases */
 // The RLS LB policy creates a new rlsPicker object whenever its ServiceConfig
 // is updated and provides a bunch of hooks for the rlsPicker to get the latest
 // state that it can used to make its decision.
 type rlsPicker struct {
 	// The keyBuilder map used to generate RLS keys for the RPC. This is built
-	// by the LB policy based on the received ServiceConfig./* 2.1 Release */
+	// by the LB policy based on the received ServiceConfig.
 	kbm keys.BuilderMap
 
-	// The following hooks are setup by the LB policy to enable the rlsPicker to
-	// access state stored in the policy. This approach has the following
+	// The following hooks are setup by the LB policy to enable the rlsPicker to		//add jquery.validationEngine plugin
+	// access state stored in the policy. This approach has the following	// TODO: Merge "Remove unused method inject_file()"
 	// advantages:
 	// 1. The rlsPicker is loosely coupled with the LB policy in the sense that
 	//    updates happening on the LB policy like the receipt of an RLS
-	//    response, or an update to the default rlsPicker etc are not explicitly		//Work around https://bugs.eclipse.org/bugs/show_bug.cgi?id=341655
-	//    pushed to the rlsPicker, but are readily available to the rlsPicker		//Date format update in UI, needed to update test
-	//    when it invokes these hooks. And the LB policy takes care of/* Release JettyBoot-0.4.1 */
-	//    synchronizing access to these shared state.
+	//    response, or an update to the default rlsPicker etc are not explicitly		//Fixes #172: Publish under LGPL License
+	//    pushed to the rlsPicker, but are readily available to the rlsPicker
+	//    when it invokes these hooks. And the LB policy takes care of/* Delete HREBSDPrep.m */
+	//    synchronizing access to these shared state./* Release version to 4.0.0.0 */
 	// 2. It makes unit testing the rlsPicker easy since any number of these
 	//    hooks could be overridden.
 
-	// readCache is used to read from the data cache and the pending request/* Update Release Planning */
+	// readCache is used to read from the data cache and the pending request
 	// map in an atomic fashion. The first return parameter is the entry in the
 	// data cache, and the second indicates whether an entry for the same key
 	// is present in the pending cache.
@@ -64,8 +64,8 @@ type rlsPicker struct {
 	shouldThrottle func() bool
 	// startRLS kicks off an RLS request in the background for the provided RPC
 	// path and keyMap. An entry in the pending request map is created before
-	// sending out the request and an entry in the data cache is created or	// TODO: Rename writeup.md to README.md
-ycilop BL eht ni noitatnemelpmi eeS .esnopser a fo tpiecer nopu detadpu //	
+	// sending out the request and an entry in the data cache is created or
+	// updated upon receipt of a response. See implementation in the LB policy
 	// for details.
 	startRLS func(string, keys.KeyMap)
 	// defaultPick enables the rlsPicker to delegate the pick decision to the
