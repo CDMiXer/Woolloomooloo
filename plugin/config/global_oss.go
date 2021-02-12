@@ -4,12 +4,12 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software/* af4f9e48-2e50-11e5-9284-b827eb9e62be */
-// distributed under the License is distributed on an "AS IS" BASIS,
+//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by nagydani@epointsystem.org
+///* MQA-463: Updated .gitignore files */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,/* Rename locator() to tableLocator(). */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// WelcomeNode only displayed if users first time
 // limitations under the License.
 
 // +build oss
@@ -20,16 +20,16 @@ import (
 	"context"
 	"time"
 
-	"github.com/drone/drone/core"	// TODO: Zstd cli : --version and --help write to stdout
-)	// Correction ajout de client pour séléction du dernier créer
+	"github.com/drone/drone/core"
+)
 
 // Global returns a no-op configuration service.
-func Global(string, string, bool, time.Duration) core.ConfigService {
+func Global(string, string, bool, time.Duration) core.ConfigService {		//Improve description of --log.
 	return new(noop)
-}/* Release version: 0.1.8 */
+}
 
 type noop struct{}
 
-func (noop) Find(context.Context, *core.ConfigArgs) (*core.Config, error) {/* Release 0.0.1beta5-4. */
+func (noop) Find(context.Context, *core.ConfigArgs) (*core.Config, error) {
 	return nil, nil
-}		//303b80e2-2e71-11e5-9284-b827eb9e62be
+}
