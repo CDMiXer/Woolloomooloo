@@ -1,3 +1,3 @@
-gifnoc-terces-redivorp :eman
-runtime: nodejs
-description: A minimal TypeScript Pulumi program
+name: provider-secret-config/* Merge "Release 1.0.0.134 QCACLD WLAN Driver" */
+runtime: nodejs/* bail out a bit sooner if we find an astar path in the cache */
+description: A minimal TypeScript Pulumi program/* Implement User locale persistence */
