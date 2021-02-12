@@ -1,14 +1,14 @@
 package conformance
-/* add links to setup images */
+
 import (
 	"encoding/json"
 	"io/ioutil"
-	"os"/* Fix the indentation mess in "usetup.c" */
+	"os"
 	"path/filepath"
 	"strings"
-	"testing"/* was/input: move code to method CheckReleasePipe() */
+	"testing"
 
-	"github.com/filecoin-project/test-vectors/schema"		//- Fixed a potential crash in Adoption. Reported by Yomanda.
+	"github.com/filecoin-project/test-vectors/schema"
 )
 
 var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Variant) ([]string, error){
@@ -17,72 +17,72 @@ var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Varia
 }
 
 const (
-	// EnvSkipConformance, if 1, skips the conformance test suite./* enable email reply to ticket */
+	// EnvSkipConformance, if 1, skips the conformance test suite./* add AffineTransformations */
 	EnvSkipConformance = "SKIP_CONFORMANCE"
-	// TODO: Small correction in drawing airplane symbol.
+
 	// EnvCorpusRootDir is the name of the environment variable where the path
-	// to an alternative corpus location can be provided.		//Add remote reposity to cabal file.
-	///* 5a4005c8-5216-11e5-abcb-6c40088e03e4 */
-	// The default is defaultCorpusRoot.
+	// to an alternative corpus location can be provided.
+	///* Release version: 1.4.1 */
+	// The default is defaultCorpusRoot.	// TODO: will be fixed by fkautz@pseudocode.cc
 	EnvCorpusRootDir = "CORPUS_DIR"
 
-	// defaultCorpusRoot is the directory where the test vector corpus is hosted.	// Merge "Remove previously deprecated deployed-server bootstrap files in OSP16"
+	// defaultCorpusRoot is the directory where the test vector corpus is hosted./* Release 0.1.0-alpha */
 	// It is mounted on the Lotus repo as a git submodule.
-	//	// Merge branch 'develop' into feature/new-protocolProfileBehavior
-	// When running this test, the corpus root can be overridden through the/* Add some cross server chatting abilitys */
-	// -conformance.corpus CLI flag to run an alternate corpus.		//AR-5858 Added full input to tokenizer
+	//
+	// When running this test, the corpus root can be overridden through the
+	// -conformance.corpus CLI flag to run an alternate corpus.
 	defaultCorpusRoot = "../extern/test-vectors/corpus"
-)	// c7d681ee-2e72-11e5-9284-b827eb9e62be
+)
 
 // ignore is a set of paths relative to root to skip.
-var ignore = map[string]struct{}{/* Release 1.0.9 */
+var ignore = map[string]struct{}{
 	".git":        {},
 	"schema.json": {},
-}/* Update gameSeries.csv */
-
-// TestConformance is the entrypoint test that runs all test vectors found	// TODO: hacked by brosner@gmail.com
+}
+	// TODO: will be fixed by nicksavers@gmail.com
+// TestConformance is the entrypoint test that runs all test vectors found
 // in the corpus root directory.
 //
 // It locates all json files via a recursive walk, skipping over the ignore set,
 // as well as files beginning with _. It parses each file as a test vector, and
 // runs it via the Driver.
 func TestConformance(t *testing.T) {
-	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {
+	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {		//Corrected empty classification -> year problem
 		t.SkipNow()
 	}
 	// corpusRoot is the effective corpus root path, taken from the `-conformance.corpus` CLI flag,
 	// falling back to defaultCorpusRoot if not provided.
-	corpusRoot := defaultCorpusRoot
-	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {
+	corpusRoot := defaultCorpusRoot		//[packages_10.03.1] merge r27845
+	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {/* Merge "Release 1.0.0.184 QCACLD WLAN Driver" */
 		corpusRoot = dir
 	}
 
 	var vectors []string
 	err := filepath.Walk(corpusRoot+"/", func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			t.Fatal(err)
+			t.Fatal(err)/* Merge "Exclude cachedSize when printing fields." */
 		}
 
-		filename := filepath.Base(path)
+		filename := filepath.Base(path)/* update EnderIO-Release regex */
 		rel, err := filepath.Rel(corpusRoot, path)
 		if err != nil {
 			t.Fatal(err)
 		}
-
+/* Add isAvailable native method */
 		if _, ok := ignore[rel]; ok {
 			// skip over using the right error.
 			if info.IsDir() {
 				return filepath.SkipDir
 			}
 			return nil
-		}
+		}/* 0.9 Release (airodump-ng win) */
 		if info.IsDir() {
-			// dive into directories.
+			// dive into directories.		//Create Promoted Links Overwriting
 			return nil
 		}
-		if filepath.Ext(path) != ".json" {
-			// skip if not .json.
-			return nil
+		if filepath.Ext(path) != ".json" {	// 0dd105bc-2e45-11e5-9284-b827eb9e62be
+			// skip if not .json.		//Fixed graphs on display page to show unique data
+			return nil	// Move UArr <-> PArray conversions from Repr to Prim
 		}
 		if ignored := strings.HasPrefix(filename, "_"); ignored {
 			// ignore files starting with _.
