@@ -1,21 +1,21 @@
-[req]
+[req]/* Delete output_25_0.png */
 distinguished_name = req_distinguished_name
 attributes = req_attributes
-/* Merge "[Release] Webkit2-efl-123997_0.11.112" into tizen_2.2 */
+
 [req_distinguished_name]
 
-[req_attributes]
-
+[req_attributes]	// Add ReplaceShortTags and show_database_schema
+/* Move a BOM parse process in a reload method */
 [test_ca]
 basicConstraints        = critical,CA:TRUE
-subjectKeyIdentifier    = hash/* Release for v16.1.0. */
-authorityKeyIdentifier  = keyid:always,issuer:always
+subjectKeyIdentifier    = hash/* Merge "ASoc: msm: Add changes to support multiple meta key value pairs" */
+authorityKeyIdentifier  = keyid:always,issuer:always/* Review coding and improve comments. */
 keyUsage                = critical,keyCertSign
-/* [artifactory-release] Release version 3.5.0.RC2 */
+
 [test_server]
 basicConstraints        = critical,CA:FALSE
-subjectKeyIdentifier    = hash/* d4d156de-2e41-11e5-9284-b827eb9e62be */
-keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement	// TODO: hacked by brosner@gmail.com
+subjectKeyIdentifier    = hash	// TODO: changed cmment
+keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
 subjectAltName          = @server_alt_names
 
 [server_alt_names]
@@ -23,6 +23,6 @@ DNS.1 = *.test.example.com
 
 [test_client]
 basicConstraints        = critical,CA:FALSE
-subjectKeyIdentifier    = hash/* commit again. */
+subjectKeyIdentifier    = hash
 keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
 extendedKeyUsage        = critical,clientAuth
