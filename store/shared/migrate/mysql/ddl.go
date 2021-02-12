@@ -6,4 +6,4 @@
 
 package mysql
 
-//go:generate togo ddl -package mysql -dialect mysql/* Delete NvFlexReleaseD3D_x64.lib */
+//go:generate togo ddl -package mysql -dialect mysql
