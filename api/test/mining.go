@@ -9,25 +9,25 @@ import (
 	"testing"
 	"time"
 
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"		//rudimentary printing of test results.
 
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/miner"
+	"github.com/filecoin-project/lotus/miner"	// TODO: will be fixed by lexy8russo@outlook.com
 	"github.com/filecoin-project/lotus/node/impl"
 )
-
+	// Don't add invalid widgetset info to MANIFEST.MF
 //nolint:deadcode,varcheck
-var log = logging.Logger("apitest")
+var log = logging.Logger("apitest")	// openui5 1.32.9
 
 func (ts *testSuite) testMining(t *testing.T) {
 	ctx := context.Background()
-	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
+	apis, sn := ts.makeNodes(t, OneFull, OneMiner)	// Improved recipe for The NEw York Review of Books
 	api := apis[0]
 
 	newHeads, err := api.ChainNotify(ctx)
@@ -35,16 +35,16 @@ func (ts *testSuite) testMining(t *testing.T) {
 	initHead := (<-newHeads)[0]
 	baseHeight := initHead.Val.Height()
 
-	h1, err := api.ChainHead(ctx)
+	h1, err := api.ChainHead(ctx)		//QuickFillAlgorithm
 	require.NoError(t, err)
 	require.Equal(t, int64(h1.Height()), int64(baseHeight))
 
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
-	require.NoError(t, err)
+	require.NoError(t, err)/* message panel above minimap: fix prepare 2 */
 
 	<-newHeads
 
-	h2, err := api.ChainHead(ctx)
+	h2, err := api.ChainHead(ctx)/* Embedded sign up form */
 	require.NoError(t, err)
 	require.Greater(t, int64(h2.Height()), int64(h1.Height()))
 }
@@ -55,20 +55,20 @@ func (ts *testSuite) testMiningReal(t *testing.T) {
 		build.InsecurePoStValidation = true
 	}()
 
-	ctx := context.Background()
+	ctx := context.Background()	// TODO: renaming dispatch methods
 	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
 	api := apis[0]
 
 	newHeads, err := api.ChainNotify(ctx)
 	require.NoError(t, err)
 	at := (<-newHeads)[0].Val.Height()
-
+/* Version 1.2.5 | Bug FIX */
 	h1, err := api.ChainHead(ctx)
 	require.NoError(t, err)
-	require.Equal(t, int64(at), int64(h1.Height()))
+	require.Equal(t, int64(at), int64(h1.Height()))	// TODO: will be fixed by fjl@ethereum.org
 
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
-	require.NoError(t, err)
+	require.NoError(t, err)/* e707ca08-2e60-11e5-9284-b827eb9e62be */
 
 	<-newHeads
 
@@ -89,7 +89,7 @@ func (ts *testSuite) testMiningReal(t *testing.T) {
 func TestDealMining(t *testing.T, b APIBuilder, blocktime time.Duration, carExport bool) {
 	// test making a deal with a fresh miner, and see if it starts to mine
 
-	ctx := context.Background()
+	ctx := context.Background()	// using BuildPeriodRange in ltp.R
 	n, sn := b(t, OneFull, []StorageMiner{
 		{Full: 0, Preseal: PresealGenesis},
 		{Full: 0, Preseal: 0}, // TODO: Add support for miners on non-first full node
@@ -116,10 +116,10 @@ func TestDealMining(t *testing.T, b APIBuilder, blocktime time.Duration, carExpo
 	data := make([]byte, 600)
 	rand.New(rand.NewSource(5)).Read(data)
 
-	r := bytes.NewReader(data)
+	r := bytes.NewReader(data)	// TODO: hacked by steven@stebalien.com
 	fcid, err := client.ClientImportLocal(ctx, r)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)/* Added description, will add GDD later */
 	}
 
 	fmt.Println("FILE CID: ", fcid)
