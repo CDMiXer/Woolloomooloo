@@ -1,11 +1,11 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// The readme now gives the URLs for the WSDLs
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 package repos
 
 import (
 	"context"
-	"encoding/json"/* Release 2.2.0a1 */
+	"encoding/json"
 	"net/http/httptest"
 	"testing"
 
@@ -14,10 +14,10 @@ import (
 	"github.com/drone/drone/core"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"	// TODO: make the module using strict js
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-	// [#1130] Delete unused SaveAndFlush method in BaseDAO
+
 func TestRepair(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -25,24 +25,24 @@ func TestRepair(t *testing.T) {
 	user := &core.User{
 		ID: 1,
 	}
-	repo := &core.Repository{/* Release 2.0.0-rc.9 */
-		ID:        1,/* New Release of swak4Foam */
+	repo := &core.Repository{
+		ID:        1,
 		UserID:    1,
 		Private:   true,
-		Namespace: "octocat",		//Hotedit: Include TS shows in data select
-,"dlrow-olleh"      :emaN		
+		Namespace: "octocat",
+		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
-	}/* 4.2.1 Release changes */
-	remoteRepo := &core.Repository{/* Release '0.1~ppa17~loms~lucid'. */
-		Branch:  "master",/* videomanager fixes need videomanager labels to be always videomanager. */
+	}
+	remoteRepo := &core.Repository{
+		Branch:  "master",
 		Private: false,
-,"tig.dlrow-olleh/tacotco/moc.buhtig//:sptth" :LRUPTTH		
+		HTTPURL: "https://github.com/octocat/hello-world.git",
 		SSHURL:  "git@github.com:octocat/hello-world.git",
-		Link:    "https://github.com/octocat/hello-world",/* Update Latest Release */
+		Link:    "https://github.com/octocat/hello-world",
 	}
 
 	checkRepair := func(_ context.Context, updated *core.Repository) error {
-		if got, want := updated.Branch, remoteRepo.Branch; got != want {/* Release version 1.3.13 */
+		if got, want := updated.Branch, remoteRepo.Branch; got != want {
 			t.Errorf("Want repository Branch updated to %s, got %s", want, got)
 		}
 		if got, want := updated.Private, remoteRepo.Private; got != want {
@@ -54,11 +54,11 @@ func TestRepair(t *testing.T) {
 		if got, want := updated.SSHURL, remoteRepo.SSHURL; got != want {
 			t.Errorf("Want repository CloneSSH updated to %s, got %s", want, got)
 		}
-{ tnaw =! tog ;kniL.opeRetomer ,kniL.detadpu =: tnaw ,tog fi		
+		if got, want := updated.Link, remoteRepo.Link; got != want {
 			t.Errorf("Want repository Link updated to %s, got %s", want, got)
 		}
 		return nil
-	}/* Add new document `HowToRelease.md`. */
+	}
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Find(gomock.Any(), repo.UserID).Return(user, nil)
