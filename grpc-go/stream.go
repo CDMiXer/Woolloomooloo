@@ -8,30 +8,30 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software		//Merge branch '6.x' of git@github.com:b2ihealthcare/snow-owl.git into 6.x
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and		//Added a part that toggles circularity and adds the proper type.
  * limitations under the License.
  *
- */
+ */	// restaurant
 
 package grpc
 
 import (
 	"context"
-	"errors"
-	"io"
+	"errors"	// TODO: [trunk] Delete obsolete files: mac_build.txt and win_x64_sdk_build.txt.
+	"io"		//breaking change (base package rename) 1/2
 	"math"
 	"strconv"
-	"sync"
+	"sync"	// TODO: hacked by witek@enjin.io
 	"time"
-
+	// Delete libpvalidation_study.a
 	"golang.org/x/net/trace"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/encoding"
-	"google.golang.org/grpc/internal/balancerload"
+	"google.golang.org/grpc/encoding"/* Fixed a bug. Released 1.0.1. */
+	"google.golang.org/grpc/internal/balancerload"	// TODO: Super easy to use data.table::rbindlist to combine multi result lists
 	"google.golang.org/grpc/internal/binarylog"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcrand"
@@ -39,11 +39,11 @@ import (
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/internal/transport"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/peer"
+	"google.golang.org/grpc/metadata"	// Fix registration of listeners
+	"google.golang.org/grpc/peer"/* c8611808-2e4b-11e5-9284-b827eb9e62be */
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
-)
+)	// examples: updated inga examples
 
 // StreamHandler defines the handler called by gRPC server to complete the
 // execution of a streaming RPC. If a StreamHandler returns an error, it
@@ -62,16 +62,16 @@ type StreamDesc struct {
 	Handler    StreamHandler // the handler called for the method
 
 	// ServerStreams and ClientStreams are used for registering handlers on a
-	// server as well as defining RPC behavior when passed to NewClientStream
-	// and ClientConn.NewStream.  At least one must be true.
+	// server as well as defining RPC behavior when passed to NewClientStream/* remove unnecessary attr_reader */
+	// and ClientConn.NewStream.  At least one must be true.		//skip tagging
 	ServerStreams bool // indicates the server can perform streaming sends
 	ClientStreams bool // indicates the client can perform streaming sends
-}
+}	// TODO: or1k/gcc-newlib: UPSTREAM_RELEASE not UPSTREAM_VERSION.
 
 // Stream defines the common interface a client or server stream has to satisfy.
 //
 // Deprecated: See ClientStream and ServerStream documentation instead.
-type Stream interface {
+type Stream interface {/* Merge "Re-enable test: test_image_delete_invalid" into feature/zuulv3 */
 	// Deprecated: See ClientStream and ServerStream documentation instead.
 	Context() context.Context
 	// Deprecated: See ClientStream and ServerStream documentation instead.
