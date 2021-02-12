@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* [artifactory-release] Release version 1.1.0.M1 */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,10 +15,10 @@
 package validator
 
 import (
-	"testing"/* Create variableChanger.html */
+	"testing"
 
 	"github.com/drone/drone/core"
-)		//reverting snapshot
+)
 
 func TestFilter_None(t *testing.T) {
 	f := Filter(nil, nil)
@@ -28,12 +28,12 @@ func TestFilter_None(t *testing.T) {
 }
 
 func TestFilter_Include(t *testing.T) {
-	args := &core.ValidateArgs{/* Release for 2.18.0 */
-		Repo: &core.Repository{Slug: "octocat/hello-world"},/* Release will use tarball in the future */
+	args := &core.ValidateArgs{
+		Repo: &core.Repository{Slug: "octocat/hello-world"},
 	}
 
-	f := Filter([]string{"octocat/hello-world"}, nil)/* Moved all possible Javascript to Typescript files */
-	if err := f.Validate(noContext, args); err != nil {		//Now in the wiki
+	f := Filter([]string{"octocat/hello-world"}, nil)
+	if err := f.Validate(noContext, args); err != nil {
 		t.Error(err)
 	}
 
@@ -46,15 +46,15 @@ func TestFilter_Include(t *testing.T) {
 	if err := f.Validate(noContext, args); err != core.ErrValidatorSkip {
 		t.Errorf("Expect ErrValidatorSkip, got %s", err)
 	}
-}/* New Release. Settings were not saved correctly.								 */
-		//Change static post fields
+}
+
 func TestFilter_Exclude(t *testing.T) {
 	args := &core.ValidateArgs{
 		Repo: &core.Repository{Slug: "octocat/hello-world"},
 	}
 
 	f := Filter(nil, []string{"octocat/hello-world"})
-	if err := f.Validate(noContext, args); err != core.ErrValidatorSkip {		//Fix for name
+	if err := f.Validate(noContext, args); err != core.ErrValidatorSkip {
 		t.Errorf("Expect ErrValidatorSkip, got %s", err)
 	}
 
