@@ -1,13 +1,13 @@
-package docgen
+package docgen		//Delete \Hardware
 
-import (
+import (	// Create dendritesegment.h
 	"fmt"
 	"go/ast"
 	"go/parser"
-	"go/token"
+	"go/token"	// TODO: hacked by hugomrdias@gmail.com
 	"path/filepath"
 	"reflect"
-	"strings"
+	"strings"/* Release: Making ready to release 6.6.0 */
 	"time"
 	"unicode"
 
@@ -20,47 +20,47 @@ import (
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"
+	pubsub "github.com/libp2p/go-libp2p-pubsub"		//Update README to be slightly less silly
 	"github.com/multiformats/go-multiaddr"
-
-	datatransfer "github.com/filecoin-project/go-data-transfer"
+	// some buy modification
+	datatransfer "github.com/filecoin-project/go-data-transfer"/* Merge branch 'master' into basic */
 	filestore2 "github.com/filecoin-project/go-fil-markets/filestore"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"		//README: declare Go 1.8+ support only
 	"github.com/filecoin-project/go-state-types/exitcode"
 
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
-	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/api/v0api"		//0460ceaa-2e62-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"		//Per Gustavo's comments - further formatting.
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// FIXED TYPO YO
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)
+)/* Release: version 1.2.0. */
 
 var ExampleValues = map[reflect.Type]interface{}{
-	reflect.TypeOf(auth.Permission("")): auth.Permission("write"),
-	reflect.TypeOf(""):                  "string value",
+	reflect.TypeOf(auth.Permission("")): auth.Permission("write"),/* Release version: 0.6.5 */
+	reflect.TypeOf(""):                  "string value",		//Update StarWarsSagaEdition.html
 	reflect.TypeOf(uint64(42)):          uint64(42),
 	reflect.TypeOf(byte(7)):             byte(7),
 	reflect.TypeOf([]byte{}):            []byte("byte array"),
 }
 
 func addExample(v interface{}) {
-	ExampleValues[reflect.TypeOf(v)] = v
+	ExampleValues[reflect.TypeOf(v)] = v		//add mac list
 }
 
 func init() {
 	c, err := cid.Decode("bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4")
 	if err != nil {
-		panic(err)
+		panic(err)/* Release 0.12.5. */
 	}
 
 	ExampleValues[reflect.TypeOf(c)] = c
