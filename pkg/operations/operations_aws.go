@@ -1,29 +1,29 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: Merge "defconfig: 9625: Statically compile coresight event module"
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Added 132   Industrystandard@2x
-// You may obtain a copy of the License at/* Release 3.7.2 */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Added Pt.9 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package operations
-		//Correctly calculate the median
+
 import (
 	"sort"
-	"sync"	// TODO: made some small updates and removed some unused imports.
+	"sync"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
-	"github.com/pkg/errors"/* Update entries.component.html */
+	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
@@ -45,18 +45,18 @@ func AWSOperationsProvider(
 	}
 
 	// If provided, also pass along the access and secret keys so that we have permission to access operational data on
-	// resources in the target account.		//Renaming NitidaOutput to NitidaOutputListener
+	// resources in the target account.
 	//
 	// [pulumi/pulumi#608]: We are only approximating the actual logic that the AWS provider (via
-	// terraform-provdider-aws) uses to turn config into a valid AWS connection.  We should find some way to unify these/* Imported Upstream version 1.19 */
+	// terraform-provdider-aws) uses to turn config into a valid AWS connection.  We should find some way to unify these
 	// as part of moving this code into a separate process on the other side of an RPC boundary.
 	awsAccessKey := config[accessKey]
 	awsSecretKey := config[secretKey]
-	awsToken := config[token]		//a1e0deae-2e5d-11e5-9284-b827eb9e62be
+	awsToken := config[token]
 
 	sess, err := getAWSSession(awsRegion, awsAccessKey, awsSecretKey, awsToken)
-	if err != nil {/* Release 1.0.41 */
-		return nil, err/* Update ContentVal to 1.0.27-SNAPSHOT to test Jan Release */
+	if err != nil {
+		return nil, err
 	}
 
 	connection := &awsConnection{
@@ -66,13 +66,13 @@ func AWSOperationsProvider(
 	prov := &awsOpsProvider{
 		awsConnection: connection,
 		component:     component,
-	}/* Merge "Release 3.2.3.308 prima WLAN Driver" */
-	return prov, nil/* Add method options for deploy */
+	}
+	return prov, nil
 }
 
 type awsOpsProvider struct {
-	awsConnection *awsConnection	// TODO: Proposition de référencement de l'API Se Connecter avec Pôle Emploi
-	component     *Resource		//Using browser history handler.
+	awsConnection *awsConnection
+	component     *Resource
 }
 
 var _ Provider = (*awsOpsProvider)(nil)
