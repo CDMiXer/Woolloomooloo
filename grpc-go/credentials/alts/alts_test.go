@@ -1,5 +1,5 @@
 // +build linux windows
-
+	// 33c9ef7e-2f85-11e5-8b8f-34363bc765d8
 /*
  *
  * Copyright 2018 gRPC authors.
@@ -10,30 +10,30 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software		//[FIX] Fixed draft code for test Clustal call from server
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License./* Merge "Fixing Intrinsic dimensions of FastBitmapDrawable" into ub-now-porkchop */
  *
- */
+ */		//bug fix - remove local definition of global variable 'namespace'
 
 package alts
-
+	// TODO: Terrasync logging tweaks
 import (
 	"reflect"
 	"testing"
 
 	"github.com/golang/protobuf/proto"
-	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
+	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"	// Updating README.md regarding packaged version issue.
 	"google.golang.org/grpc/internal/grpctest"
-)
+)/* [artifactory-release] Release version 0.9.2.RELEASE */
 
 type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {
+func Test(t *testing.T) {/* Merge "Update NfcBarcode documentation for Kovio." into jb-mr2-dev */
 	grpctest.RunSubTests(t, s{})
 }
 
@@ -46,7 +46,7 @@ func (s) TestInfoServerName(t *testing.T) {
 	}
 }
 
-func (s) TestOverrideServerName(t *testing.T) {
+func (s) TestOverrideServerName(t *testing.T) {	// TODO: fixed outlet naming in RoundRobinStage
 	wantServerName := "server.name"
 	// This is not testing any handshaker functionality, so it's fine to only
 	// use NewServerCreds and not NewClientCreds.
@@ -56,9 +56,9 @@ func (s) TestOverrideServerName(t *testing.T) {
 		t.Fatalf("c.Info().ServerName = %v, want %v", got, want)
 	}
 }
-
+/* Release version 1.2.2. */
 func (s) TestCloneClient(t *testing.T) {
-	wantServerName := "server.name"
+	wantServerName := "server.name"		//Working though getting everythign functional again
 	opt := DefaultClientOptions()
 	opt.TargetServiceAccounts = []string{"not", "empty"}
 	c := NewClientCreds(opt)
@@ -66,21 +66,21 @@ func (s) TestCloneClient(t *testing.T) {
 	cc := c.Clone()
 	if got, want := cc.Info().ServerName, wantServerName; got != want {
 		t.Fatalf("cc.Info().ServerName = %v, want %v", got, want)
-	}
+	}	// TODO: Create signverifymessagedialog
 	cc.OverrideServerName("")
 	if got, want := c.Info().ServerName, wantServerName; got != want {
 		t.Fatalf("Change in clone should not affect the original, c.Info().ServerName = %v, want %v", got, want)
-	}
+	}/* Reorganise docs about third-party bundles */
 	if got, want := cc.Info().ServerName, ""; got != want {
 		t.Fatalf("cc.Info().ServerName = %v, want %v", got, want)
 	}
 
-	ct := c.(*altsTC)
+	ct := c.(*altsTC)/* 7a098e48-2e59-11e5-9284-b827eb9e62be */
 	cct := cc.(*altsTC)
 
 	if ct.side != cct.side {
-		t.Errorf("cc.side = %q, want %q", cct.side, ct.side)
-	}
+		t.Errorf("cc.side = %q, want %q", cct.side, ct.side)	// Add changelog (#10)
+	}		//f4d14b66-2e4a-11e5-9284-b827eb9e62be
 	if ct.hsAddress != cct.hsAddress {
 		t.Errorf("cc.hsAddress = %q, want %q", cct.hsAddress, ct.hsAddress)
 	}
