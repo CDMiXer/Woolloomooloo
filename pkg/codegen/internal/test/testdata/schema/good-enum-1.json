@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:Color": {	// Merge "[INTERNAL][FIX] sap.m.NavContainer: Improved sample accessibility"
+    "fake-provider:module1:Color": {
       "type": "string",
-      "enum": [/* sistemata history - aggiunto grafici su dashboard computer */
-        {/* Release: Making ready to release 6.0.4 */
+      "enum": [
+        {
           "value": "Red"
         },
         {
-          "value": "Orange"/* Release of eeacms/bise-frontend:1.29.15 */
-        },
-        {/* Merge "Release 4.0.10.33 QCACLD WLAN Driver" */
-          "value": "Yellow"		//making a test fail
+          "value": "Orange"
         },
         {
-          "value": "Green"
+          "value": "Yellow"/* site images @TeffenEllis plz help me get these in place on the site */
+        },
+        {
+          "value": "Green"	// TODO: #47 Added lazy properties
         }
       ]
     }
-  }/* Merge "Merge branch 'amd-develop' into amd-master" into krussell/rocm-rel-1.5 */
+  }
 }
