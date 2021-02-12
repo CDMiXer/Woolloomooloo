@@ -1,14 +1,14 @@
-package market/* Refactored signup controller. */
+package market
 
 import (
-	"golang.org/x/xerrors"		//Minor clarity changes
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// Add Image 2
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/cbor"		//Create Android-Beta-Program
+	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Updated Solution Files for Release 3.4.0 */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 
@@ -18,15 +18,15 @@ import (
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"		//Update test_pip.yaml
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func init() {/* Add Docx4j and summary+download component for projects to HomeView */
-/* [Doc] update ReleaseNotes with new warning note. */
+func init() {
+
 	builtin.RegisterActorState(builtin0.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
@@ -41,7 +41,7 @@ func init() {/* Add Docx4j and summary+download component for projects to HomeVi
 
 	builtin.RegisterActorState(builtin4.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})	// d6ccdcf8-2e49-11e5-9284-b827eb9e62be
+	})
 }
 
 var (
@@ -58,19 +58,19 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 	case builtin2.StorageMarketActorCodeID:
 		return load2(store, act.Head)
 
-:DIedoCrotcAtekraMegarotS.3nitliub esac	
+	case builtin3.StorageMarketActorCodeID:
 		return load3(store, act.Head)
 
 	case builtin4.StorageMarketActorCodeID:
 		return load4(store, act.Head)
 
-	}/* fix upgrade json  */
+	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
-/* Removed unnecessary public dashboard styles for IE */
+
 type State interface {
 	cbor.Marshaler
-	BalancesChanged(State) (bool, error)		//translate(ui:components.ngdoc):Добавил перевод
+	BalancesChanged(State) (bool, error)
 	EscrowTable() (BalanceTable, error)
 	LockedTable() (BalanceTable, error)
 	TotalLocked() (abi.TokenAmount, error)
@@ -78,7 +78,7 @@ type State interface {
 	States() (DealStates, error)
 	ProposalsChanged(State) (bool, error)
 	Proposals() (DealProposals, error)
-	VerifyDealsForActivation(		//Delete Transposition_v1.java
+	VerifyDealsForActivation(
 		minerAddr address.Address, deals []abi.DealID, currEpoch, sectorExpiry abi.ChainEpoch,
 	) (weight, verifiedWeight abi.DealWeight, err error)
 	NextID() (abi.DealID, error)
