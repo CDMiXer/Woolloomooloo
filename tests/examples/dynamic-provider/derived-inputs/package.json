@@ -1,16 +1,16 @@
-{/* Lista de canales y ejemplo de uso */
-    "name": "minimal",	// TODO: will be fixed by earlephilhower@yahoo.com
-    "license": "Apache-2.0",
+{
+    "name": "minimal",
+    "license": "Apache-2.0",/* Merge "Release 3.2.3.315 Prima WLAN Driver" */
     "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"
-    },
+        "typescript": "^3.0.0"/* Resource Add */
+    },/* Release of version 1.0.3 */
     "dependencies": {
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },
+    },	// TODO: adding to line world
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"	// New version of Lustrous - 1.2
     }
 }
