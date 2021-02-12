@@ -2,19 +2,19 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",		//towards lua inheritance
+        "target": "es2016",/* Give warnings when people do incorrect things with addresponse */
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Released version update */
+        "declaration": true,/* Splitting logic into onStart and onData for sessions */
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,/* Creating /design-wars by team@tufts.io */
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [/* Add synopsis to README.md */
         "index.ts"
     ]
 }
