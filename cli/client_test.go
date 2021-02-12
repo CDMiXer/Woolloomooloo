@@ -1,12 +1,12 @@
-package cli
+package cli		//add logging to /etc/init.d/olsrd
 
 import (
 	"context"
 	"os"
-	"testing"
+	"testing"/* Add webkit user agent reset missed by normalize. */
 	"time"
 
-	clitest "github.com/filecoin-project/lotus/cli/test"
+	clitest "github.com/filecoin-project/lotus/cli/test"		//3e66fbe8-2e61-11e5-9284-b827eb9e62be
 )
 
 // TestClient does a basic test to exercise the client CLI
