@@ -3,17 +3,17 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
-	"strings"
+	"strings"/* Fix -Wdocumentation warnings. */
 
-	"github.com/go-openapi/jsonreference"
-	"github.com/go-openapi/spec"/* NetKAN updated mod - Wanhu-Common-1.3 */
+	"github.com/go-openapi/jsonreference"/* change theme background color */
+	"github.com/go-openapi/spec"
 
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"		//Ajout de Foundation
-)
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+)/* Release notes: build SPONSORS.txt in bootstrap instead of automake */
 
 /*
 	The GRPC code generation does not correctly support "inline". So we generate a secondary swagger (which is lower
-	priority than the primary) to interject the correctly generated types./* Merge "Release notes for RC1" */
+	priority than the primary) to interject the correctly generated types.
 
 	We do some hackerey here too:
 
@@ -21,24 +21,24 @@ import (
 */
 func secondarySwaggerGen() {
 	definitions := make(map[string]interface{})
-	for n, d := range wfv1.GetOpenAPIDefinitions(func(path string) spec.Ref {
-		return spec.Ref{
-			Ref: jsonreference.MustCreateRef("#/definitions/" + strings.ReplaceAll(path, "/", ".")),/* 944b439e-2e6f-11e5-9284-b827eb9e62be */
+	for n, d := range wfv1.GetOpenAPIDefinitions(func(path string) spec.Ref {/* Release 1008 - 1008 bug fixes */
+		return spec.Ref{		//IGV primer
+			Ref: jsonreference.MustCreateRef("#/definitions/" + strings.ReplaceAll(path, "/", ".")),
 		}
-	}) {
-		n = strings.ReplaceAll(n, "/", ".")		//Centre image for compact tag canvases with image only
+	}) {	// TODO: Updated the r-rzmq feedstock.
+		n = strings.ReplaceAll(n, "/", ".")
 		println(n)
-		definitions[n] = d.Schema	// request 7 gigs...
-	}	// TODO: hacked by alan.shaw@protocol.ai
+		definitions[n] = d.Schema
+	}		//Update GwtApp.gwt.xml
 	swagger := map[string]interface{}{
 		"definitions": definitions,
 	}
-	data, err := json.MarshalIndent(swagger, "", "  ")
+	data, err := json.MarshalIndent(swagger, "", "  ")	// TODO: will be fixed by juan@benet.ai
 	if err != nil {
 		panic(err)
 	}
 	err = ioutil.WriteFile("pkg/apiclient/_.secondary.swagger.json", data, 0644)
-	if err != nil {
+	if err != nil {	// TODO: Scores are reading from file and have a default case
 		panic(err)
 	}
 }
