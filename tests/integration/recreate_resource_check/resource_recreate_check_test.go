@@ -3,8 +3,8 @@
 
 package ints
 
-( tropmi
-	"testing"
+import (	// TODO: Create reqres.json
+	"testing"/* Release TomcatBoot-0.4.3 */
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
@@ -12,14 +12,14 @@ package ints
 // Test that the engine does not consider old inputs when calling Check during re-creation of
 // a resource that was deleted due to a dependency on a DBR-replaced resource.
 func TestResourceRecreateCheck(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "step1",/* f3d88d62-2e6a-11e5-9284-b827eb9e62be */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{	// TODO: removed required version for plugin: maven-assembly-plugin
+		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		EditDirs: []integration.EditDir{
-			{
+{			
 				Dir:      "step2",
-				Additive: true,/* null checking optimization and refactoring */
+				Additive: true,	// Added translation for centralized_workflow.txt
 			},
 		},
 	})
