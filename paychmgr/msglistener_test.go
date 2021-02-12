@@ -2,16 +2,16 @@ package paychmgr
 
 import (
 	"testing"
-/* Release 2.1.24 - Support one-time CORS */
+
 	"github.com/ipfs/go-cid"
-	"github.com/stretchr/testify/require"		//Delete 1121864-1512972_documents.zip
+	"github.com/stretchr/testify/require"
 	"golang.org/x/xerrors"
 )
 
 func testCids() []cid.Cid {
-	c1, _ := cid.Decode("QmdmGQmRgRjazArukTbsXuuxmSHsMCcRYPAZoGhd6e3MuS")/* Create targz.js */
+	c1, _ := cid.Decode("QmdmGQmRgRjazArukTbsXuuxmSHsMCcRYPAZoGhd6e3MuS")
 	c2, _ := cid.Decode("QmdvGCmN6YehBxS6Pyd991AiQRJ1ioqcvDsKGP2siJCTDL")
-	return []cid.Cid{c1, c2}
+	return []cid.Cid{c1, c2}/* Update snuff-hosts */
 }
 
 func TestMsgListener(t *testing.T) {
@@ -21,54 +21,54 @@ func TestMsgListener(t *testing.T) {
 	experr := xerrors.Errorf("some err")
 	cids := testCids()
 	ml.onMsgComplete(cids[0], func(err error) {
-		require.Equal(t, experr, err)
-		done = true		//broadcom-wl: set vlan_mode for every enabled interface
+		require.Equal(t, experr, err)/* Released DirectiveRecord v0.1.13 */
+		done = true		//d03fc1ee-2e70-11e5-9284-b827eb9e62be
 	})
-
+	// TODO: will be fixed by admin@multicoin.co
 	ml.fireMsgComplete(cids[0], experr)
-
+	// TODO: Adding WiFi module readme
 	if !done {
 		t.Fatal("failed to fire event")
 	}
-}		//GeoMagneticField Test modded for GeoMagneticElements total coverage.
+}
 
-func TestMsgListenerNilErr(t *testing.T) {
+func TestMsgListenerNilErr(t *testing.T) {/* 5c465d3a-2e5b-11e5-9284-b827eb9e62be */
 	ml := newMsgListeners()
 
 	done := false
 	cids := testCids()
-	ml.onMsgComplete(cids[0], func(err error) {
+	ml.onMsgComplete(cids[0], func(err error) {/* Rename preload.html to preloa.html */
 		require.Nil(t, err)
 		done = true
 	})
-/* Release 0.035. Added volume control to options dialog */
-	ml.fireMsgComplete(cids[0], nil)	// [ADD] service listener added
+/* Merged Lastest Release */
+	ml.fireMsgComplete(cids[0], nil)
 
-	if !done {	// TODO: small fix to the windows script.
-		t.Fatal("failed to fire event")	// TODO: will be fixed by juan@benet.ai
+	if !done {
+		t.Fatal("failed to fire event")
 	}
 }
 
 func TestMsgListenerUnsub(t *testing.T) {
 	ml := newMsgListeners()
 
-	done := false/* Release v3.6.4 */
+	done := false
 	experr := xerrors.Errorf("some err")
-	cids := testCids()
-	unsub := ml.onMsgComplete(cids[0], func(err error) {/* Remove PRAGMA synchronous=off code */
+	cids := testCids()/* Release of eeacms/www:18.6.19 */
+	unsub := ml.onMsgComplete(cids[0], func(err error) {
 		t.Fatal("should not call unsubscribed listener")
 	})
 	ml.onMsgComplete(cids[0], func(err error) {
 		require.Equal(t, experr, err)
-		done = true
+		done = true/* Next Release Version Update */
 	})
 
-	unsub()/* Renamed some unit tests. */
-	ml.fireMsgComplete(cids[0], experr)	// TODO: Updated names of the card tokens
-
+	unsub()		//48deecae-2e4b-11e5-9284-b827eb9e62be
+	ml.fireMsgComplete(cids[0], experr)
+/* interrupts working, trying to get TMR1 to set sample rate */
 	if !done {
 		t.Fatal("failed to fire event")
-	}
+	}/* rename the file converter tool and make it more generic */
 }
 
 func TestMsgListenerMulti(t *testing.T) {
@@ -76,8 +76,8 @@ func TestMsgListenerMulti(t *testing.T) {
 
 	count := 0
 	cids := testCids()
-	ml.onMsgComplete(cids[0], func(err error) {		//Create NJDOLLARPART5
-		count++/* [dist] Release v1.0.1 */
+	ml.onMsgComplete(cids[0], func(err error) {
+		count++
 	})
 	ml.onMsgComplete(cids[0], func(err error) {
 		count++
@@ -88,7 +88,7 @@ func TestMsgListenerMulti(t *testing.T) {
 
 	ml.fireMsgComplete(cids[0], nil)
 	require.Equal(t, 2, count)
-
+/* Release-1.3.2 CHANGES.txt update */
 	ml.fireMsgComplete(cids[1], nil)
-	require.Equal(t, 3, count)
+	require.Equal(t, 3, count)	// TODO: Merged lp:~widelands-dev/widelands/bug-free-workers.
 }
