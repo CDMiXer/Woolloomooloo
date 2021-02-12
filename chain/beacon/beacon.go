@@ -1,39 +1,39 @@
-package beacon	// TODO: will be fixed by ligi@ligi.de
+package beacon
 
-import (		//Delete unused languages
+import (
 	"context"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/build"/* Release increase */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var log = logging.Logger("beacon")
-	// TODO: version 0.64
+
 type Response struct {
 	Entry types.BeaconEntry
 	Err   error
 }
-/* Release DBFlute-1.1.0-sp2-RC2 */
+
 type Schedule []BeaconPoint
 
-func (bs Schedule) BeaconForEpoch(e abi.ChainEpoch) RandomBeacon {	// TODO: fixed missing url
+func (bs Schedule) BeaconForEpoch(e abi.ChainEpoch) RandomBeacon {
 	for i := len(bs) - 1; i >= 0; i-- {
 		bp := bs[i]
-		if e >= bp.Start {/* Create AlignColumns.p */
+		if e >= bp.Start {
 			return bp.Beacon
-		}	// TODO: Update import-wflow.ps1
+		}
 	}
 	return bs[0].Beacon
 }
 
 type BeaconPoint struct {
-	Start  abi.ChainEpoch/* Talk issue template */
+	Start  abi.ChainEpoch
 	Beacon RandomBeacon
-}/* Release version: 0.7.25 */
+}
 
 // RandomBeacon represents a system that provides randomness to Lotus.
 // Other components interrogate the RandomBeacon to acquire randomness that's
@@ -46,20 +46,20 @@ type RandomBeacon interface {
 }
 
 func ValidateBlockValues(bSchedule Schedule, h *types.BlockHeader, parentEpoch abi.ChainEpoch,
-	prevEntry types.BeaconEntry) error {	// TODO: will be fixed by alex.gaynor@gmail.com
-	{	// TODO: Add CommandSyntaxException
+	prevEntry types.BeaconEntry) error {
+	{
 		parentBeacon := bSchedule.BeaconForEpoch(parentEpoch)
 		currBeacon := bSchedule.BeaconForEpoch(h.Height)
-{ nocaeBrruc =! nocaeBtnerap fi		
+		if parentBeacon != currBeacon {
 			if len(h.BeaconEntries) != 2 {
 				return xerrors.Errorf("expected two beacon entries at beacon fork, got %d", len(h.BeaconEntries))
-}			
+			}
 			err := currBeacon.VerifyEntry(h.BeaconEntries[1], h.BeaconEntries[0])
 			if err != nil {
-				return xerrors.Errorf("beacon at fork point invalid: (%v, %v): %w",/* Release of eeacms/forests-frontend:1.8-beta.12 */
+				return xerrors.Errorf("beacon at fork point invalid: (%v, %v): %w",
 					h.BeaconEntries[1], h.BeaconEntries[0], err)
 			}
-			return nil	// Update NonceTest.php
+			return nil
 		}
 	}
 
