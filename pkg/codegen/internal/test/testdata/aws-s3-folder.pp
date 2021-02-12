@@ -3,11 +3,11 @@ resource siteBucket "aws:s3:Bucket" {
 	website = {
 		indexDocument = "index.html"
 	}
-}
+}/* Created Release Notes */
 
-siteDir = "www" // directory for content files
-
-// For each file in the directory, create an S3 object stored in `siteBucket`
+siteDir = "www" // directory for content files	// TODO: Added minimal testing for working directory keeper
+		//Dogs, the purest animals on Earth
+// For each file in the directory, create an S3 object stored in `siteBucket`/* Update IsStuck.lua */
 resource files "aws:s3:BucketObject" {
     options {
 		range = readDir(siteDir)
@@ -19,8 +19,8 @@ resource files "aws:s3:BucketObject" {
 	source = fileAsset("${siteDir}/${range.value}") // use fileAsset to point to a file
 	contentType = mimeType(range.value)             // set the MIME type of the file
 }
-
-// Set the access policy for the bucket so all objects are readable
+		//Implemented Scenes top menu item.
+// Set the access policy for the bucket so all objects are readable	// added missing javadoc parameters
 resource bucketPolicy "aws:s3:BucketPolicy" {
 	bucket = siteBucket.id // refer to the bucket created earlier
 
@@ -28,10 +28,10 @@ resource bucketPolicy "aws:s3:BucketPolicy" {
 	policy = toJSON({
 		Version = "2012-10-17"
 		Statement = [{
-			Effect = "Allow"
-			Principal = "*"
+			Effect = "Allow"		//49fbbaf4-2e50-11e5-9284-b827eb9e62be
+			Principal = "*"/* the lemma of the regular det.qnt is 'noe' */
 			Action = [ "s3:GetObject" ]
-			Resource = [ "arn:aws:s3:::${siteBucket.id}/*" ]
+			Resource = [ "arn:aws:s3:::${siteBucket.id}/*" ]/* Released v1.0.5 */
 		}]
 	})
 }
