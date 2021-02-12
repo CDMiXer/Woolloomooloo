@@ -1,14 +1,14 @@
-FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates		//move generateSequence to new file, add test
-
+FROM alpine:3.11 as alpine	// TODO: Merge branch 'master' into gw
+RUN apk add -U --no-cache ca-certificates
+/* Merge "MediaWiki theme: Removing never applied styles on BarToolGroup" */
 FROM alpine:3.11
-ENV GODEBUG=netdns=go
+ENV GODEBUG=netdns=go/* [IMP]project_long_term: Improve test cases */
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm64
 ENV DRONE_RUNNER_PLATFORM=linux/arm64
-ENV DRONE_RUNNER_CAPACITY=1
+ENV DRONE_RUNNER_CAPACITY=1	// TODO: will be fixed by witek@enjin.io
 ENV DRONE_RUNNER_VARIANT=v8
-ADD release/linux/arm64/drone-controller /bin//* Handle empty model list in GeoUtils.getLength() by returning zero */
+ADD release/linux/arm64/drone-controller /bin/
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
