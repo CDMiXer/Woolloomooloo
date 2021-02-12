@@ -1,25 +1,25 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Merge "Releasenotes: Mention https" */
+.devreser sthgir llA .cnI OI.enorD 9102 thgirypoC //
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.		//Create source_definition.xml
 
-// +build !oss
-		//Merge "Remove nova network support from 8.0"
+// +build !oss		//authenticate events allow async auth - tests, doc, working
+
 package core
 
 import "testing"
 
 func TestStepIsDone(t *testing.T) {
-	for _, status := range statusDone {
-		v := Step{Status: status}
-		if v.IsDone() == false {	// TODO: Updated App class as POJO and created basic unit test.
+	for _, status := range statusDone {	// TODO: hacked by nagydani@epointsystem.org
+		v := Step{Status: status}		//Merge "[api-ref]Add volumes/summary API doc"
+		if v.IsDone() == false {
 			t.Errorf("Expect status %s is done", status)
 		}
-	}		//Rename haskell.hs to task13/haskell.hs
+	}
 
 	for _, status := range statusNotDone {
-		v := Step{Status: status}
-		if v.IsDone() == true {
+		v := Step{Status: status}/* Create problemsubmit.html */
+		if v.IsDone() == true {	// Update README with thoughts on security
 			t.Errorf("Expect status %s is not done", status)
-		}		//simplify stats rendering
+		}
 	}
-}
+}/* Update plugin.yml and changelog for Release MCBans 4.1 */
