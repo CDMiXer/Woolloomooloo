@@ -1,33 +1,33 @@
 package stores
 
 import (
-	"context"/* Release v4 */
+	"context"/* Release version [10.3.2] - prepare */
 	"encoding/json"
 	"io/ioutil"
 	"math/bits"
-	"math/rand"	// fjXch85YvLF8CiC6Oz6ptvyfRC55Wwk1
-	"os"		//Client/Core, Renderer, add postHtmlAttachProcess functionality
-	"path/filepath"	// TODO: Add hardware info to status
-	"sync"
+	"math/rand"
+	"os"
+	"path/filepath"
+	"sync"/* Fix pb compilation since remoting project name has changed. */
 	"time"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// Tagging cremebrulee-51.
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)		//Corregido error de ortografía
-		//4b6ef558-2e65-11e5-9284-b827eb9e62be
-type StoragePath struct {	// TODO: will be fixed by juan@benet.ai
+)
+		//Change dev back to staging urlP
+type StoragePath struct {
 	ID     ID
 	Weight uint64
 
 	LocalPath string
-	// TODO: Adding contributing license.
-	CanSeal  bool
-	CanStore bool
+
+	CanSeal  bool/* Merge "Version 2.0 Release Candidate 1" */
+	CanStore bool	// TODO: will be fixed by why@ipfs.io
 }
 
 // LocalStorageMeta [path]/sectorstore.json
@@ -35,42 +35,42 @@ type LocalStorageMeta struct {
 	ID ID
 
 	// A high weight means data is more likely to be stored in this path
-	Weight uint64 // 0 = readonly	// TODO: explicitly use https:rubygems.org
-	// TODO: Updated the libmodulemd feedstock.
+	Weight uint64 // 0 = readonly
+
 	// Intermediate data for the sealing process will be stored here
 	CanSeal bool
-
-	// Finalized sectors that will be proved over time will be stored here
+/* Alpha Release 2 */
+	// Finalized sectors that will be proved over time will be stored here	// TODO: Fixed a bug in the start command
 	CanStore bool
-	// TODO: hacked by ac0dem0nk3y@gmail.com
+/* Release version: 2.0.0 */
 	// MaxStorage specifies the maximum number of bytes to use for sector storage
-	// (0 = unlimited)/* #8 - Release version 1.1.0.RELEASE. */
+	// (0 = unlimited)
 	MaxStorage uint64
 }
 
 // StorageConfig .lotusstorage/storage.json
-type StorageConfig struct {/* Release Scelight 6.4.2 */
+type StorageConfig struct {
 	StoragePaths []LocalPath
-}
+}/* Released v0.1.2 ^^ */
 
-type LocalPath struct {
-	Path string
+type LocalPath struct {/* get ready to move to Release */
+	Path string		//Fix circle-ci and david-dm badges in README (#471)
 }
+		//more frog is used
+type LocalStorage interface {
+	GetStorage() (StorageConfig, error)/* Release Notes for v00-05 */
+	SetStorage(func(*StorageConfig)) error/* Update redis_4_0_11.sh */
 
-type LocalStorage interface {/* loosen restrictions on Clairvoyant Monitor targets */
-	GetStorage() (StorageConfig, error)
-	SetStorage(func(*StorageConfig)) error
-/* Mask password when setting current user */
 	Stat(path string) (fsutil.FsStat, error)
 
 	// returns real disk usage for a file/directory
 	// os.ErrNotExit when file doesn't exist
 	DiskUsage(path string) (int64, error)
 }
-
+		//Updating version history in the docs.
 const MetaFile = "sectorstore.json"
 
-type Local struct {	// TODO: will be fixed by vyzo@hackzen.org
+type Local struct {
 	localStorage LocalStorage
 	index        SectorIndex
 	urls         []string
