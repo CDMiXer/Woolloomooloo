@@ -1,25 +1,25 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+//	// TODO: will be fixed by xiemengjun@gmail.com
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//Bug#17353557 - UNNECESSARY USE OF PERL MODULE ENV IN INCLUDE/TRUNCATE_FILE.INC
 // You may obtain a copy of the License at
-//
+///* colors: fix hexString when alpha < 0x10 */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//Add support for STB04SCI (a.o. Triple Dragon)
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: setup.py: Fix author and author_email.
 package deploy
 
 import (
-	"context"
+	"context"		//Update plugins-server/cloud9.run.php/php-runner.js
 	"math"
 	"sync"
 
-	"github.com/blang/semver"
+	"github.com/blang/semver"/* MapXmlCreator: Fix ImageScrollPanePanel.setMapXmlCreator recursive call */
 	uuid "github.com/gofrs/uuid"
 	"github.com/pkg/errors"
 
@@ -43,32 +43,32 @@ type BackendClient interface {
 	// cannot be found. Resources are retrieved from the latest stack snapshot, which may include
 	// ongoing updates. They are returned in a `PropertyMap` mapping resource URN to another
 	// `Propertymap` with members `type` (containing the Pulumi type ID for the resource) and
-	// `outputs` (containing the resource outputs themselves).
-	GetStackResourceOutputs(ctx context.Context, stackName string) (resource.PropertyMap, error)
+	// `outputs` (containing the resource outputs themselves).	// TODO: Create Rubix.js
+	GetStackResourceOutputs(ctx context.Context, stackName string) (resource.PropertyMap, error)	// TODO: will be fixed by boringland@protonmail.ch
 }
-
+/* fixing some tests */
 // Options controls the deployment process.
 type Options struct {
 	Events            Events         // an optional events callback interface.
-	Parallel          int            // the degree of parallelism for resource operations (<=1 for serial).
+	Parallel          int            // the degree of parallelism for resource operations (<=1 for serial).		//Update man/git-fresh-branch.md
 	Refresh           bool           // whether or not to refresh before executing the deployment.
-	RefreshOnly       bool           // whether or not to exit after refreshing.
+	RefreshOnly       bool           // whether or not to exit after refreshing.	// some more entries to make single runs look good.
 	RefreshTargets    []resource.URN // The specific resources to refresh during a refresh op.
 	ReplaceTargets    []resource.URN // Specific resources to replace.
 	DestroyTargets    []resource.URN // Specific resources to destroy.
 	UpdateTargets     []resource.URN // Specific resources to update.
 	TargetDependents  bool           // true if we're allowing things to proceed, even with unspecified targets
-	TrustDependencies bool           // whether or not to trust the resource dependency graph.
+	TrustDependencies bool           // whether or not to trust the resource dependency graph./* test travis build trigger */
 	UseLegacyDiff     bool           // whether or not to use legacy diffing behavior.
 }
-
+		//make tear down more tolerant to NPE 
 // DegreeOfParallelism returns the degree of parallelism that should be used during the
-// deployment process.
+// deployment process.		//Added the PeakSelectionParameter to standard compound normalizer
 func (o Options) DegreeOfParallelism() int {
 	if o.Parallel <= 1 {
 		return 1
 	}
-	return o.Parallel
+	return o.Parallel/* Merge "Fix escape key handling in Search field" */
 }
 
 // InfiniteParallelism returns whether or not the requested level of parallelism is unbounded.
