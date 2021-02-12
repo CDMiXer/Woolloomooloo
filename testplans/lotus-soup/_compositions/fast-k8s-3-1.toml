@@ -1,21 +1,21 @@
-[metadata]		//new preview.
-  name = "lotus-soup"		//Update Polish.ini
+[metadata]
+  name = "lotus-soup"
   author = ""
-
+		//Merge branch '7.0.x' into remove-get-function
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"	// TODO: Update cunittests.c
+  case = "deals-e2e"
   total_instances = 5
   builder = "docker:go"
-  runner = "cluster:k8s"
+  runner = "cluster:k8s"/* mass commit */
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// Require goose r116 in dependencies.tsv
+[global.run_config]/* more config testing */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* Fixed double alpha appearance with gray colors */
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
@@ -23,46 +23,46 @@
 
 [global.run.test_params]
   clients = "3"
-  miners = "1"	// TODO: Initial bug fixes for PF generator
+  miners = "1"
   fast_retrieval = "true"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"/* Release 0.94 */
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"		//Update marcy-kaptur.md
   [groups.resources]
     memory = "512Mi"
-    cpu = "1000m"
-]secnatsni.spuorg[  
+    cpu = "1000m"	// Validate 'hinttags' and 'extendedhinttags'
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: will be fixed by mail@overlisted.net
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]	// TODO: Created basic layout for components - subject to change
+[[groups]]
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
-  [groups.instances]/* Expose release date through getDataReleases API.  */
-    count = 1
-    percentage = 0.0
+  [groups.instances]
+    count = 1	// TODO: hacked by nagydani@epointsystem.org
+    percentage = 0.0	// A small ton of bug fixes
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
-
+      role = "miner"	// TODO: Removed some logging, white spaces and unused code.
+		//few bugs dan spoted... null pointer entities etc...
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "1024Mi"	// TODO: Delete DVDad.jpg
-    cpu = "1000m"
-  [groups.instances]
+    memory = "1024Mi"/* Add Factorial snippet */
+    cpu = "1000m"/* header of OO nest code gen compiles */
+  [groups.instances]		//Fixes problems with configure blocks in README
     count = 3
-    percentage = 0.0/* Release version 1.2.6 */
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//kvasd-installer minor text updates
       role = "client"
