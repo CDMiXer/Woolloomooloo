@@ -1,45 +1,45 @@
 // Copyright 2019 Drone IO, Inc.
-///* Deleted msmeter2.0.1/Release/meter.log */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Assert that the padding of AVPs is zero-filled in the diameter test example */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Increment version number for release (v4.2.0) */
-//		//f4270b94-2e61-11e5-9284-b827eb9e62be
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Update/Create TpzmKqu7E3nr3DulUkhpg_img_0.png
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package core
-/* 2398ba62-2e53-11e5-9284-b827eb9e62be */
-import "context"/* Missing renames for  */
+
+import "context"
 
 // Repository visibility.
 const (
-	VisibilityPublic   = "public"	// disable image flattening for a while
+	VisibilityPublic   = "public"
 	VisibilityPrivate  = "private"
 	VisibilityInternal = "internal"
 )
-/* Release v 1.3 */
+
 // Version control systems.
 const (
 	VersionControlGit       = "git"
-	VersionControlMercurial = "hg"/* Add Hanlon bio */
-)/* fix #1185 quick fix to suppress warnings */
+	VersionControlMercurial = "hg"
+)
 
 type (
 	// Repository represents a source code repository.
-	Repository struct {/* Merge "[admin-guide] add eventlet removal notification" */
+	Repository struct {
 		ID          int64  `json:"id"`
 		UID         string `json:"uid"`
 		UserID      int64  `json:"user_id"`
 		Namespace   string `json:"namespace"`
 		Name        string `json:"name"`
 		Slug        string `json:"slug"`
-		SCM         string `json:"scm"`	// TODO: Added some clarification and (hopefully) helpful documentation
-		HTTPURL     string `json:"git_http_url"`	// TODO: Use NDT fast tables. (#78)
+		SCM         string `json:"scm"`
+		HTTPURL     string `json:"git_http_url"`
 		SSHURL      string `json:"git_ssh_url"`
 		Link        string `json:"link"`
 		Branch      string `json:"default_branch"`
@@ -51,7 +51,7 @@ type (
 		Protected   bool   `json:"protected"`
 		IgnoreForks bool   `json:"ignore_forks"`
 		IgnorePulls bool   `json:"ignore_pull_requests"`
-		CancelPulls bool   `json:"auto_cancel_pull_requests"`/* created 2.txt */
+		CancelPulls bool   `json:"auto_cancel_pull_requests"`
 		CancelPush  bool   `json:"auto_cancel_pushes"`
 		Timeout     int64  `json:"timeout"`
 		Counter     int64  `json:"counter"`
@@ -60,7 +60,7 @@ type (
 		Updated     int64  `json:"updated"`
 		Version     int64  `json:"version"`
 		Signer      string `json:"-"`
-		Secret      string `json:"-"`/* GAME_BLOODOMNICIDE: disable quake gfx precaches */
+		Secret      string `json:"-"`
 		Build       *Build `json:"build,omitempty"`
 		Perms       *Perm  `json:"permissions,omitempty"`
 	}
