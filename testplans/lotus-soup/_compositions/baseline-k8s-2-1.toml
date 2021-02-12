@@ -1,65 +1,65 @@
 [metadata]
-  name = "lotus-soup"		//auth. picture modifications
+  name = "lotus-soup"/* 4.11.0 Release */
   author = ""
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"	// TODO: will be fixed by lexy8russo@outlook.com
   case = "deals-e2e"
   total_instances = 4
   builder = "docker:go"
-  runner = "cluster:k8s"
+  runner = "cluster:k8s"		//replaced with new icon
+	// 7075bcf8-2e4f-11e5-9284-b827eb9e62be
+[global.build]/* Release Notes for v00-13-01 */
+  selectors = ["testground"]
 
-[global.build]/* Merge "[Release] Webkit2-efl-123997_0.11.95" into tizen_2.2 */
-  selectors = ["testground"]/* Fix set current position slice change check... */
+[global.run_config]/* Merge "Release 4.0.10.59 QCACLD WLAN Driver" */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: will be fixed by nicksavers@gmail.com
 
-[global.run_config]		//Update default fonts to Open Sans using Google font.
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-	// Run more trials in benchmark that opens a 9k line file
-[global.build_config]
-  push_registry=true		//That API is unused
+[global.build_config]/* Merge "Release 3.0.10.019 Prima WLAN Driver" */
+  push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-/* New release v0.3.10 */
-[global.run.test_params]
+
+[global.run.test_params]/* Add link to builtin_expect in Release Notes. */
   clients = "2"
   miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// Fixed #5140 Recipe from Migrations didn't work
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"/* [artifactory-release] Release version 2.2.0.M1 */
+  random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]	// TODO: Fix dashboard text
+  [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]	// added airstuck toggle
       role = "bootstrapper"
-
+		//merged and fixed config
 [[groups]]
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1
-    percentage = 0.0
-  [groups.run]/* Release lock, even if xml writer should somehow not initialize. */
-    [groups.run.test_params]
-      role = "miner"/* Merge branch 'develop' into pyup-update-yapf-0.16.3-to-0.18.0 */
-
+    count = 1	// TODO: Created ProgrammeColloqueCinephilie-seriphilies2.jpg
+    percentage = 0.0/* Release for v4.0.0. */
+  [groups.run]
+    [groups.run.test_params]/* Merge "Release 3.2.3.260 Prima WLAN Driver" */
+      role = "miner"
+		//Merge "[INTERNAL] sap.ui.core: fix JSDoc errors as reported by nightly build"
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
-  [groups.instances]/* Fixes zum Releasewechsel */
+  [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
