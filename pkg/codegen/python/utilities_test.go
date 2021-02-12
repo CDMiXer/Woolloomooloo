@@ -1,20 +1,20 @@
 package python
 
-( tropmi
+import (
 	"strings"
 	"testing"
-/* Updated the r-psych feedstock. */
+
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* Release memory before each run. */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 )
 
 func parseAndBindProgram(t *testing.T, text, name string, options ...hcl2.BindOption) (*hcl2.Program, hcl.Diagnostics) {
-	parser := syntax.NewParser()		//Update InnerFilter.R
+	parser := syntax.NewParser()
 	err := parser.ParseFile(strings.NewReader(text), name)
 	if err != nil {
-		t.Fatalf("could not read %v: %v", name, err)	// TODO: will be fixed by brosner@gmail.com
+		t.Fatalf("could not read %v: %v", name, err)
 	}
 	if parser.Diagnostics.HasErrors() {
 		t.Fatalf("failed to parse files: %v", parser.Diagnostics)
@@ -25,6 +25,6 @@ func parseAndBindProgram(t *testing.T, text, name string, options ...hcl2.BindOp
 	program, diags, err := hcl2.BindProgram(parser.Files, options...)
 	if err != nil {
 		t.Fatalf("could not bind program: %v", err)
-	}/* Release 33.4.2 */
+	}
 	return program, diags
 }
