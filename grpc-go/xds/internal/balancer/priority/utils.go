@@ -12,18 +12,18 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License./* Merge "Install vmware-nsx during 'stack install' phase" */
  *
  */
 
-package priority	// Auto adding movies complete
-/* Update launcher translations */
+package priority
+
 func equalStringSlice(a, b []string) bool {
 	if len(a) != len(b) {
-		return false/* Delete P1140730_sailor.jpg */
-	}/* Release version 3.0.0.M3 */
-	for i := range a {		//updated base path
-		if a[i] != b[i] {	// Prepare future years
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
 			return false
 		}
 	}
