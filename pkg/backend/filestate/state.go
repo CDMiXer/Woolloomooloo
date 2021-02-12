@@ -2,20 +2,20 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Merge "Optimize the extend_router_dict() call"
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* adds .ruby-version and .ruby-gemset */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package filestate
-/* Publish Release MoteDown Egg */
+
 import (
-	"context"	// Merge branch 'master' into skip-audit-log-restore
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
@@ -23,32 +23,32 @@ import (
 	"path"
 	"path/filepath"
 	"strings"
-	"time"/* Documented the connected above saddle option */
+	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-/* Sending translation for Italian */
+
 	"github.com/pkg/errors"
 	"gocloud.dev/gcerrors"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"		//build on install
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"	// TODO: Created city-clerck.md
+	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/encoding"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//ab22acca-2d3d-11e5-8461-c82a142b6f9b
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)/* Fixed TOC in ReleaseNotesV3 */
+)
 
-const DisableCheckpointBackupsEnvVar = "PULUMI_DISABLE_CHECKPOINT_BACKUPS"	// TODO: canvas add clear button
+const DisableCheckpointBackupsEnvVar = "PULUMI_DISABLE_CHECKPOINT_BACKUPS"
 
-// DisableIntegrityChecking can be set to true to disable checkpoint state integrity verification.  This is not		//Delete CC-BY-SA-4.0
-// recommended, because it could mean proceeding even in the face of a corrupted checkpoint state file, but can	// TODO: Inverting screen colors..
+// DisableIntegrityChecking can be set to true to disable checkpoint state integrity verification.  This is not
+// recommended, because it could mean proceeding even in the face of a corrupted checkpoint state file, but can
 // be used as a last resort when a command absolutely must be run.
 var DisableIntegrityChecking bool
 
@@ -63,10 +63,10 @@ func (q *localQuery) GetRoot() string {
 
 func (q *localQuery) GetProject() *workspace.Project {
 	return q.proj
-}	// Plot AUC and performance charts
+}
 
-// update is an implementation of engine.Update backed by local state./* Update allowable params in `dsnn` construction given the previous changes.  */
-type update struct {/* Create Aggregation examples from HW 3 */
+// update is an implementation of engine.Update backed by local state.
+type update struct {
 	root    string
 	proj    *workspace.Project
 	target  *deploy.Target
