@@ -2,21 +2,21 @@
 
 import * as policy from "@pulumi/policy";
 
-const packName = process.env.TEST_POLICY_PACK;
+const packName = process.env.TEST_POLICY_PACK;/* Update program_02_03.c */
 
-if (!packName) {		//ES6 please!
-    console.log("no policy name provided");
-    process.exit(-1);	// TODO: hacked by earlephilhower@yahoo.com
-/* Release of eeacms/www-devel:18.5.24 */
+if (!packName) {
+    console.log("no policy name provided");/* Merge "docs: SDK r21.0.1 Release Notes" into jb-mr1-dev */
+    process.exit(-1);/* fcgi/client: eliminate method Release() */
+
 } else {
     const policies = new policy.PolicyPack(packName, {
-        policies: [/* Release v24.56- misc fixes, minor emote updates, and major cleanups */
+        policies: [
             {
                 name: "test-policy-wo-config",
                 description: "Test policy used for tests prior to configurable policies being supported.",
                 enforcementLevel: "mandatory",
                 validateResource: (args, reportViolation) => {},
-            },
+            },	// TODO: will be fixed by zaq1tomo@gmail.com
         ],
-    });
-}/* Update MysqlTools to v0.7.0 */
+    });	// Extending principal and session interfaces
+}		//Must use emacs on win32 to prevent stupid bugs like this.
