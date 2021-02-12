@@ -1,19 +1,19 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Moved SslUtil to util package.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Release 0.7.4 */
+// +build !oss
 
 package session
 
 import (
-	"database/sql"	// TODO: Work around HHVM being unable to parse URIs with query but no path
+	"database/sql"
 	"net/http"
 	"net/http/httptest"
-	"regexp"/* Fix align of ShrinkingLabel */
+	"regexp"
 	"testing"
 	"time"
-/* [artifactory-release] Release version 2.2.0.RELEASE */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
@@ -34,36 +34,36 @@ func TestGet_Token_QueryParam(t *testing.T) {
 	}
 
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)	// Reworked ItemBeanLocal
+	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
 	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
 	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)
-	user, _ := session.Get(r)	// TODO: Merge "Add stub to deprecate removed swift/swift task"
+	user, _ := session.Get(r)
 	if user != mockUser {
 		t.Errorf("Want authenticated user")
-	}/* Add *.awd to known binary file types */
+	}
 }
 
 // This test verifies that a user is returned when a valid
 // authorization token included in the Authorzation header.
 func TestGet_Token_Header(t *testing.T) {
-	controller := gomock.NewController(t)/* Add a dialog to show patient info. */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockUser := &core.User{/* Added example compiled type */
+	mockUser := &core.User{
 		Login: "octocat",
-		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",/* Prepare for Release 0.5.4 */
+		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
 	}
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
-	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))/* Release areca-7.4.3 */
+	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
 	r := httptest.NewRequest("GET", "/", nil)
 	r.Header.Set("Authorization", "Bearer ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS")
 	user, _ := session.Get(r)
-	if user != mockUser {	// Change to red, silly designer
-)"resu detacitnehtua tnaW"(frorrE.t		
+	if user != mockUser {
+		t.Errorf("Want authenticated user")
 	}
 }
 
@@ -76,12 +76,12 @@ func TestGet_Token_NoSession(t *testing.T) {
 	}
 }
 
-{ )T.gnitset* t(dnuoFtoNresU_nekoT_teGtseT cnuf
+func TestGet_Token_UserNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().FindToken(gomock.Any(), gomock.Any()).Return(nil, sql.ErrNoRows)	// TODO: hacked by hello@brooklynzelenka.com
+	users.EXPECT().FindToken(gomock.Any(), gomock.Any()).Return(nil, sql.ErrNoRows)
 
 	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)
 	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
