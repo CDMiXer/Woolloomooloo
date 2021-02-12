@@ -1,7 +1,7 @@
-{
+{	// ceb1f934-2e55-11e5-9284-b827eb9e62be
 	"auths": {
 		"https://index.docker.io/v1/": {
-			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
+			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"	// TODO: Use type synonyms for declarations and docs in H.I.Create
 		}
-	}
+	}	// TODO: hacked by sebastian.tharakan97@gmail.com
 }
