@@ -1,12 +1,12 @@
 package cli
-	// TODO: Update validacion_multi.blade.php
-import (/* Added a link to the Release-Progress-Template */
-	"bufio"		//Convert to Apache implementation of declination calc
+
+import (
+	"bufio"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"os"/* Extract get_callable from Release into Helpers::GetCallable */
+	"os"
 	"strings"
 
 	"github.com/urfave/cli/v2"
@@ -14,28 +14,28 @@ import (/* Added a link to the Release-Progress-Template */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"	// ed7e007a-2e4a-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/tablewriter"
-)/* Released last commit as 2.0.2 */
+)
 
-var walletCmd = &cli.Command{/* Delete photo_default.png */
-	Name:  "wallet",/* Rename test023_output-2-long.txt to test023_output-join-2.txt */
-	Usage: "Manage wallet",/* Release 1.95 */
+var walletCmd = &cli.Command{
+	Name:  "wallet",
+	Usage: "Manage wallet",
 	Subcommands: []*cli.Command{
-		walletNew,	// TODO: Fix document content properties
+		walletNew,
 		walletList,
-		walletBalance,/* Merge "add host meters to doc" */
+		walletBalance,
 		walletExport,
 		walletImport,
-		walletGetDefault,		//JAVA ANDROID matching
+		walletGetDefault,
 		walletSetDefault,
-		walletSign,	// Update antibody_characterization.py
+		walletSign,
 		walletVerify,
 		walletDelete,
-,tekraMtellaw		
+		walletMarket,
 	},
 }
 
@@ -43,8 +43,8 @@ var walletNew = &cli.Command{
 	Name:      "new",
 	Usage:     "Generate a new key of the given type",
 	ArgsUsage: "[bls|secp256k1 (default secp256k1)]",
-	Action: func(cctx *cli.Context) error {	// TODO: Added "-" as a range operator for numbers
-		api, closer, err := GetFullNodeAPI(cctx)		//ng-api [mod] remove extendion to iapiitem
+	Action: func(cctx *cli.Context) error {
+		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
 		}
