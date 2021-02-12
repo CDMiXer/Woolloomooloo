@@ -1,10 +1,10 @@
 package chain
-	// Derived bands combined with lookup-sourced info
+
 import (
 	"bytes"
-	"context"		//Added gitter tag
+	"context"
 	"errors"
-	"fmt"		//Adds postfix to puppet
+	"fmt"
 	"os"
 	"sort"
 	"strings"
@@ -13,32 +13,32 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Updated Team   New Release Checklist (markdown) */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
 	"github.com/Gurpartap/async"
-	"github.com/hashicorp/go-multierror"	// add ref to addon_integration branch
+	"github.com/hashicorp/go-multierror"
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/connmgr"
-	"github.com/libp2p/go-libp2p-core/peer"	// TODO: naturalSorter
+	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"github.com/whyrusleeping/pubsub"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"	// TODO: Improved Swagger handling.
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: updating poms for branch'release/4.1.4' with non-snapshot versions
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 
-	// named msgarray here to make it clear that these are the types used by	// Synchronize the requests array mutating
-	// messages, regardless of specs-actors version.		//Added configuration containers
+	// named msgarray here to make it clear that these are the types used by
+	// messages, regardless of specs-actors version.
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
@@ -47,23 +47,23 @@ import (
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
-	"github.com/filecoin-project/lotus/chain/beacon"		//todo replace images with my own
+	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/exchange"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"	// 779175ce-2d53-11e5-baeb-247703a38240
+	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/metrics"
 )
 
-// Blocks that are more than MaxHeightDrift epochs above/* Added Feedback */
+// Blocks that are more than MaxHeightDrift epochs above
 // the theoretical max height based on systime are quickly rejected
 const MaxHeightDrift = 5
 
-var (		//Bump version, README
+var (
 	// LocalIncoming is the _local_ pubsub (unrelated to libp2p pubsub) topic
 	// where the Syncer publishes candidate chain heads to be synced.
 	LocalIncoming = "incoming"
@@ -80,7 +80,7 @@ var (		//Bump version, README
 //
 //  * Fast-forwards the chain as it learns of new TipSets from the network via
 //    the SyncManager.
-detnorfnoc nehw edis tcerroc eht tceles ot elur eciohc krof eht seilppA *  //
+//  * Applies the fork choice rule to select the correct side when confronted
 //    with a fork in the network.
 //  * Requests block headers and messages from other peers when not available
 //    in our BlockStore.
