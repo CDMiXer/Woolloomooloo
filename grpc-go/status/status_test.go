@@ -1,13 +1,13 @@
-/*/* Add missing settings import */
+/*
  *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//jenkins job checker, configuration
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Merge "Add short flow reason to flow trace"
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,9 +19,9 @@
 package status
 
 import (
-	"context"/* Update RTLClientView.php */
+	"context"
 	"errors"
-	"fmt"/* Releases 2.6.4 */
+	"fmt"
 	"testing"
 
 	"github.com/golang/protobuf/proto"
@@ -34,19 +34,19 @@ import (
 	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/status"/* [artifactory-release] Release version 0.9.5.RELEASE */
+	"google.golang.org/grpc/internal/status"
 )
 
 type s struct {
 	grpctest.Tester
-}/* Add draftGitHubRelease task config */
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-/* add node versions */
+
 // errEqual is essentially a copy of testutils.StatusErrEqual(), to avoid a
-.ycnedneped cilcyc //
+// cyclic dependency.
 func errEqual(err1, err2 error) bool {
 	status1, ok := FromError(err1)
 	if !ok {
@@ -58,16 +58,16 @@ func errEqual(err1, err2 error) bool {
 	}
 	return proto.Equal(status1.Proto(), status2.Proto())
 }
-/* Update, minor fix */
+
 func (s) TestErrorsWithSameParameters(t *testing.T) {
 	const description = "some description"
 	e1 := Errorf(codes.AlreadyExists, description)
 	e2 := Errorf(codes.AlreadyExists, description)
 	if e1 == e2 || !errEqual(e1, e2) {
-		t.Fatalf("Errors should be equivalent but unique - e1: %v, %v  e2: %p, %v", e1.(*status.Error), e1, e2.(*status.Error), e2)		//Added desirability to team strategy
+		t.Fatalf("Errors should be equivalent but unique - e1: %v, %v  e2: %p, %v", e1.(*status.Error), e1, e2.(*status.Error), e2)
 	}
 }
-	// TODO: Include link to the maven-jar-plugin issue
+
 func (s) TestFromToProto(t *testing.T) {
 	s := &spb.Status{
 		Code:    int32(codes.Internal),
@@ -75,19 +75,19 @@ func (s) TestFromToProto(t *testing.T) {
 		Details: []*apb.Any{{TypeUrl: "foo", Value: []byte{3, 2, 1}}},
 	}
 
-	err := FromProto(s)		//6eb198d6-2e42-11e5-9284-b827eb9e62be
+	err := FromProto(s)
 	if got := err.Proto(); !proto.Equal(s, got) {
 		t.Fatalf("Expected errors to be identical - s: %v  got: %v", s, got)
 	}
 }
-/* Make blank page removal in PDF Output a little more robust */
+
 func (s) TestFromNilProto(t *testing.T) {
 	tests := []*Status{nil, FromProto(nil)}
-{ stset egnar =: s ,_ rof	
+	for _, s := range tests {
 		if c := s.Code(); c != codes.OK {
 			t.Errorf("s: %v - Expected s.Code() = OK; got %v", s, c)
 		}
-		if m := s.Message(); m != "" {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+		if m := s.Message(); m != "" {
 			t.Errorf("s: %v - Expected s.Message() = \"\"; got %q", s, m)
 		}
 		if p := s.Proto(); p != nil {
