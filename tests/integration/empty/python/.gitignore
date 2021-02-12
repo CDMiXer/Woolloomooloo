@@ -1,4 +1,4 @@
-*.pyc
+*.pyc/* Updated forge version to 11.15.1.1764 #Release */
 /.pulumi/
 /dist/
 /*.egg-info
