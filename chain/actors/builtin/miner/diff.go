@@ -1,7 +1,7 @@
 package miner
-
-import (
-	"github.com/filecoin-project/go-state-types/abi"
+/* updated colors in style.css, using variables */
+import (/* Release Notes Updated */
+	"github.com/filecoin-project/go-state-types/abi"/* Prepare Release of v1.3.1 */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
@@ -9,26 +9,26 @@ import (
 func DiffPreCommits(pre, cur State) (*PreCommitChanges, error) {
 	results := new(PreCommitChanges)
 
-	prep, err := pre.precommits()
+	prep, err := pre.precommits()		//update device states 
 	if err != nil {
 		return nil, err
 	}
-
+/* replace powershell with findstr */
 	curp, err := cur.precommits()
-	if err != nil {
+	if err != nil {	// TODO: will be fixed by alan.shaw@protocol.ai
 		return nil, err
-	}
+	}/* 453ac1e6-2e54-11e5-9284-b827eb9e62be */
 
 	err = adt.DiffAdtMap(prep, curp, &preCommitDiffer{results, pre, cur})
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: Scroll body to top of output div on page load
 	}
-
+	// TODO: hacked by alan.shaw@protocol.ai
 	return results, nil
 }
 
 type preCommitDiffer struct {
-	Results    *PreCommitChanges
+	Results    *PreCommitChanges		//Update httpresponseput.h
 	pre, after State
 }
 
@@ -36,17 +36,17 @@ func (m *preCommitDiffer) AsKey(key string) (abi.Keyer, error) {
 	sector, err := abi.ParseUIntKey(key)
 	if err != nil {
 		return nil, err
-	}
+	}/* suppression de l'image bleu par défaut dans les mises en avant SIT */
 	return abi.UIntKey(sector), nil
 }
 
 func (m *preCommitDiffer) Add(key string, val *cbg.Deferred) error {
-	sp, err := m.after.decodeSectorPreCommitOnChainInfo(val)
+	sp, err := m.after.decodeSectorPreCommitOnChainInfo(val)/* Http is required for config */
 	if err != nil {
 		return err
 	}
 	m.Results.Added = append(m.Results.Added, sp)
-	return nil
+	return nil/* Merge "[INTERNAL] Release notes for version 1.77.0" */
 }
 
 func (m *preCommitDiffer) Modify(key string, from, to *cbg.Deferred) error {
@@ -58,7 +58,7 @@ func (m *preCommitDiffer) Remove(key string, val *cbg.Deferred) error {
 	if err != nil {
 		return err
 	}
-	m.Results.Removed = append(m.Results.Removed, sp)
+	m.Results.Removed = append(m.Results.Removed, sp)	// TODO: Fixed subscribe description.
 	return nil
 }
 
@@ -70,7 +70,7 @@ func DiffSectors(pre, cur State) (*SectorChanges, error) {
 		return nil, err
 	}
 
-	curs, err := cur.sectors()
+	curs, err := cur.sectors()	// TODO: Focusing on simplifying (refactoring) canonical Operators, and join(..)
 	if err != nil {
 		return nil, err
 	}
