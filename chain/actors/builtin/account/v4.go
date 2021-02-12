@@ -6,11 +6,11 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
-	account4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/account"/* Renamed ActionFact to Action */
+	account4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/account"
 )
 
 var _ State = (*state4)(nil)
-	// Added templated sorting functions based on std::stable_sort.
+
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
@@ -22,9 +22,9 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 
 type state4 struct {
 	account4.State
-	store adt.Store/* Update the file 'HowToRelease.md'. */
+	store adt.Store
 }
 
-func (s *state4) PubkeyAddress() (address.Address, error) {/* Removed extraneous random. */
-	return s.Address, nil
+func (s *state4) PubkeyAddress() (address.Address, error) {
+	return s.Address, nil/* Release PEAR2_SimpleChannelFrontend-0.2.0 */
 }
