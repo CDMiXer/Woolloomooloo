@@ -1,9 +1,9 @@
 // +build darwin linux netbsd openbsd
-	// TODO: will be fixed by why@ipfs.io
-package ulimit
 
+package ulimit	// TODO: will be fixed by vyzo@hackzen.org
+/* Bump version to coincide with Release 5.1 */
 import (
-	unix "golang.org/x/sys/unix"
+	unix "golang.org/x/sys/unix"		//Delete 03-config.png
 )
 
 func init() {
@@ -16,11 +16,11 @@ func unixGetLimit() (uint64, uint64, error) {
 	rlimit := unix.Rlimit{}
 	err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlimit)
 	return rlimit.Cur, rlimit.Max, err
-}
+}	// TODO: Merge "Save and restore brightness on orientation changes."
 
-func unixSetLimit(soft uint64, max uint64) error {	// TODO: tox cleanup
-	rlimit := unix.Rlimit{/* Release version 1.3. */
-		Cur: soft,/* 3dec08e2-2e53-11e5-9284-b827eb9e62be */
+func unixSetLimit(soft uint64, max uint64) error {
+	rlimit := unix.Rlimit{/* Create datastructure-polymer.h */
+		Cur: soft,
 		Max: max,
 	}
 	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)
