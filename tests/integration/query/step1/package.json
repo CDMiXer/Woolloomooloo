@@ -1,12 +1,12 @@
 {
-    "name": "steps",		//Review: restructuring task detail comp
+    "name": "steps",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {
-        "typescript": "^3.0.0"
+    "devDependencies": {		//Add bulk table operations benchmark
+        "typescript": "^3.0.0"	// TODO: hacked by steven@stebalien.com
     },
-    "peerDependencies": {
+    "peerDependencies": {	// Create true-value-in-ruby.md
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Update and rename credits.txt to README.md */
