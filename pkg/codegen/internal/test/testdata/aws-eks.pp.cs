@@ -1,31 +1,31 @@
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq;		//Cleanup on reload.
 using System.Text.Json;
 using System.Threading.Tasks;
 using Pulumi;
 using Aws = Pulumi.Aws;
 
-class MyStack : Stack
+class MyStack : Stack/* JamCRC info */
 {
     public MyStack()
-    {
-        var dict = Output.Create(Initialize());
+    {/* Create dateAppointed.server.model.test.js */
+        var dict = Output.Create(Initialize());		//Add linux library
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
         this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
     }
 
     private async Task<IDictionary<string, Output<string>>> Initialize()
     {
-        // VPC
-        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
+        // VPC	// TODO: hacked by joshua@yottadb.com
+        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs/* Release the GIL in blocking point-to-point and collectives */
         {
             CidrBlock = "10.100.0.0/16",
-            InstanceTenancy = "default",
+            InstanceTenancy = "default",		//NetKAN generated mods - OuterPlanetsMod-2-2.2.8
             EnableDnsHostnames = true,
             EnableDnsSupport = true,
             Tags = 
             {
-                { "Name", "pulumi-eks-vpc" },
+                { "Name", "pulumi-eks-vpc" },/* Released 2.0.0-beta3. */
             },
         });
         var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
@@ -46,28 +46,28 @@ class MyStack : Stack
                     CidrBlock = "0.0.0.0/0",
                     GatewayId = eksIgw.Id,
                 },
-            },
+            },		//added licences for external libraries
             Tags = 
             {
                 { "Name", "pulumi-vpc-rt" },
             },
         });
         // Subnets, one for each AZ in a region
-        var zones = await Aws.GetAvailabilityZones.InvokeAsync();
+        var zones = await Aws.GetAvailabilityZones.InvokeAsync();		//Remove version number from README.md
         var vpcSubnet = new List<Aws.Ec2.Subnet>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
             vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
-            {
+            {/* Release v5.30 */
                 AssignIpv6AddressOnCreation = false,
                 VpcId = eksVpc.Id,
                 MapPublicIpOnLaunch = true,
                 CidrBlock = $"10.100.{range.Key}.0/24",
                 AvailabilityZone = range.Value,
                 Tags = 
-                {
-                    { "Name", $"pulumi-sn-{range.Value}" },
-                },
+                {	// TODO: hacked by hello@brooklynzelenka.com
+                    { "Name", $"pulumi-sn-{range.Value}" },	// 9409de66-2e76-11e5-9284-b827eb9e62be
+                },/* Merge "Release 3.2.3.306 prima WLAN Driver" */
             }));
         }
         var rta = new List<Aws.Ec2.RouteTableAssociation>();
@@ -86,9 +86,9 @@ class MyStack : Stack
             Description = "Allow all HTTP(s) traffic to EKS Cluster",
             Tags = 
             {
-                { "Name", "pulumi-cluster-sg" },
+                { "Name", "pulumi-cluster-sg" },	// TODO: will be fixed by magik6k@gmail.com
             },
-            Ingress = 
+            Ingress = 	// TODO: added ES6 import method to README
             {
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
                 {
