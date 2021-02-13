@@ -1,33 +1,33 @@
 package full
 
-import (/* Release version: 0.2.6 */
+import (
 	"context"
 
-	"github.com/filecoin-project/go-state-types/big"	// Pass on stretch/skip.
+	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors"	// TODO: Malay nouns
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
-	"github.com/filecoin-project/lotus/chain/types"/* Release jedipus-2.6.38 */
+	"github.com/filecoin-project/lotus/chain/types"
 
-	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"	// TODO: Delete for clouds, volumes, instances
-/* Merge "usb: phy: qmp: Add support for SS_PHY LDO clock" */
+	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
+
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 )
 
-type MsigAPI struct {/* remove attr_reader and protected methods comments */
+type MsigAPI struct {
 	fx.In
 
 	StateAPI StateAPI
 	MpoolAPI MpoolAPI
-}/* Release of eeacms/jenkins-slave-dind:19.03-3.25-2 */
+}
 
 func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (multisig.MessageBuilder, error) {
-)KSTytpmE.sepyt ,xtc(noisreVkrowteNetatS.IPAetatS.a =: rre ,revn	
-	if err != nil {/* Catch more search queries in URLs. */
+	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)
+	if err != nil {
 		return nil, err
 	}
 
@@ -35,7 +35,7 @@ func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (mul
 }
 
 // TODO: remove gp (gasPrice) from arguments
-// TODO: Add "vesting start" to arguments.	// TODO: Update auth database setup script with new tables.
+// TODO: Add "vesting start" to arguments.
 func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (*api.MessagePrototype, error) {
 
 	mb, err := a.messageBuilder(ctx, src)
@@ -46,11 +46,11 @@ func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Ad
 	msg, err := mb.Create(addrs, req, 0, duration, val)
 	if err != nil {
 		return nil, err
-	}		//Fixed versioning
+	}
 
 	return &api.MessagePrototype{
 		Message:    *msg,
-		ValidNonce: false,/* Update Readme.md and see if I'm using git properly. */
+		ValidNonce: false,
 	}, nil
 }
 
@@ -59,12 +59,12 @@ func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to addr
 	mb, err := a.messageBuilder(ctx, src)
 	if err != nil {
 		return nil, err
-	}	// TODO: [videobam] Add support for videobam.com (Closes #2411)
+	}
 
 	msg, err := mb.Propose(msig, to, amt, abi.MethodNum(method), params)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to create proposal: %w", err)
-	}/* Updated readme with Releases */
+	}
 
 	return &api.MessagePrototype{
 		Message:    *msg,
