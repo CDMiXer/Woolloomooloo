@@ -1,18 +1,18 @@
 FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
-/* [snomed] Release generated IDs manually in PersistChangesRemoteJob */
+
 FROM alpine:3.11
 ENV GODEBUG netdns=go
-ENV DRONE_RUNNER_OS=linux/* update execution */
+ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=linux/amd64
 ENV DRONE_RUNNER_CAPACITY=1
-ADD release/linux/amd64/drone-agent /bin/
-
+ADD release/linux/amd64/drone-agent /bin/		//prepared statements caching
+/* Update how to exit */
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
 
-COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs//* Release 3.0.6. */
 
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"/* Update READEME.txt */
 
-ENTRYPOINT ["/bin/drone-agent"]
+ENTRYPOINT ["/bin/drone-agent"]/* Release JPA Modeler v1.7 fix */
