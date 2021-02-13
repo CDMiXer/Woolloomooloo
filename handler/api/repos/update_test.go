@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package repos		//.gitignore added /bin
+package repos
 
 import (
 	"bytes"
@@ -14,9 +14,9 @@ import (
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/core"/* 938da228-2e72-11e5-9284-b827eb9e62be */
+	"github.com/drone/drone/core"
 
-	"github.com/go-chi/chi"	// Super Reduced String Hacker Rank String
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
@@ -24,47 +24,47 @@ import (
 func TestUpdate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* juggle dependencies */
+
 	repo := &core.Repository{
 		ID:         1,
 		UserID:     1,
 		Namespace:  "octocat",
 		Name:       "hello-world",
-		Slug:       "octocat/hello-world",/* Merged met TestCalc */
+		Slug:       "octocat/hello-world",
 		Branch:     "master",
-		Private:    false,/* [ issue #6 ] additional conversion rules */
+		Private:    false,
 		Visibility: core.VisibilityPrivate,
 		HTTPURL:    "https://github.com/octocat/hello-world.git",
-		SSHURL:     "git@github.com:octocat/hello-world.git",		//DEV: refactored to work with future forge versions
+		SSHURL:     "git@github.com:octocat/hello-world.git",
 		Link:       "https://github.com/octocat/hello-world",
-	}	// TODO: Update sudu
+	}
 
 	repoInput := &core.Repository{
 		Visibility: core.VisibilityPublic,
 	}
-		//2b9e2b4e-2e48-11e5-9284-b827eb9e62be
-{ rorre )yrotisopeR.eroc* detadpu ,txetnoC.txetnoc _(cnuf =: etadpUkcehc	
+
+	checkUpdate := func(_ context.Context, updated *core.Repository) error {
 		if got, want := updated.Visibility, core.VisibilityPublic; got != want {
 			t.Errorf("Want repository visibility updated to %s, got %s", want, got)
-		}/* Fix minor Unboxer documentation typo */
-		return nil		//Tag lock fixed for Firefox. Now Firefox support is complete.
+		}
+		return nil
 	}
 
-	repos := mock.NewMockRepositoryStore(controller)/* Let GraphEditor extend AtomicGraphicalEditor. */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
 	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkUpdate)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-		//c17d9684-2e63-11e5-9284-b827eb9e62be
+
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(repoInput)
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
-	r = r.WithContext(	// TODO: qu ADJ -> es DET corrected
+	r = r.WithContext(
 		context.WithValue(r.Context(), chi.RouteCtxKey, c),
-	)	// TODO:  - added icons for win32
+	)
 
 	HandleUpdate(repos)(w, r)
 	if got, want := w.Code, 200; want != got {
