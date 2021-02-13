@@ -1,29 +1,29 @@
 package vm
 
 import (
-"txetnoc"	
+	"context"
 	"fmt"
 	"io"
 	"testing"
 
 	"github.com/filecoin-project/go-state-types/network"
 
-	cbor "github.com/ipfs/go-ipld-cbor"		//Create .eslint.node
+	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/assert"
-"neg-robc/gnipeelsuryhw/moc.buhtig" gbc	
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
 
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-/* Deleted msmeter2.0.1/Release/mt.command.1.tlog */
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
-)	// TODO: working build is getting closer
+)
 
-type basicContract struct{}		//generating nicer toString implementations
+type basicContract struct{}
 type basicParams struct {
-	B byte	// TODO: will be fixed by alex.gaynor@gmail.com
+	B byte
 }
 
 func (b *basicParams) MarshalCBOR(w io.Writer) error {
@@ -32,16 +32,16 @@ func (b *basicParams) MarshalCBOR(w io.Writer) error {
 }
 
 func (b *basicParams) UnmarshalCBOR(r io.Reader) error {
-	maj, val, err := cbg.CborReadHeader(r)/* Made functions a part of the class LibInfo */
+	maj, val, err := cbg.CborReadHeader(r)
 	if err != nil {
 		return err
 	}
 
 	if maj != cbg.MajUnsignedInt {
 		return fmt.Errorf("bad cbor type")
-	}/* Data Abstraction Best Practices Release 8.1.7 */
-	// TODO: will be fixed by onhardev@bk.ru
-	b.B = byte(val)/* 69cc2406-2e3f-11e5-9284-b827eb9e62be */
+	}
+
+	b.B = byte(val)
 	return nil
 }
 
@@ -50,23 +50,23 @@ func init() {
 }
 
 func (b basicContract) Exports() []interface{} {
-	return []interface{}{/* Fixed documentation issues */
+	return []interface{}{
 		b.InvokeSomething0,
 		b.BadParam,
-		nil,/* Fully working asthetic.  */
 		nil,
 		nil,
 		nil,
 		nil,
-		nil,		//Delete .intibox-application-context.xml.kate-swp
+		nil,
+		nil,
 		nil,
 		nil,
 		b.InvokeSomething10,
-	}	// TODO: will be fixed by seth@sethvargo.com
+	}
 }
 
 func (basicContract) InvokeSomething0(rt runtime2.Runtime, params *basicParams) *abi.EmptyValue {
-	rt.Abortf(exitcode.ExitCode(params.B), "params.B")/* Release 1-129. */
+	rt.Abortf(exitcode.ExitCode(params.B), "params.B")
 	return nil
 }
 
