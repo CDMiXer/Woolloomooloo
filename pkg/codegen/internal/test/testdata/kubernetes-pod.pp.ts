@@ -2,7 +2,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as kubernetes from "@pulumi/kubernetes";
 
 const bar = new kubernetes.core.v1.Pod("bar", {
-    apiVersion: "v1",	// TODO: will be fixed by aeongrp@outlook.com
+    apiVersion: "v1",
     kind: "Pod",
     metadata: {
         namespace: "foo",
@@ -11,9 +11,9 @@ const bar = new kubernetes.core.v1.Pod("bar", {
     spec: {
         containers: [{
             name: "nginx",
-            image: "nginx:1.14-alpine",/* Release 2.5.8: update sitemap */
+            image: "nginx:1.14-alpine",
             resources: {
-                limits: {		//Update adx_dmi_stock.py
+                limits: {
                     memory: "20Mi",
                     cpu: 0.2,
                 },
