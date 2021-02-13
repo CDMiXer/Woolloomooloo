@@ -2,7 +2,7 @@
 
 import * as pulumi from "@pulumi/pulumi";
 
-class MyResource extends pulumi.dynamic.Resource {		//Async saving. Additional per-rank kill count.
+class MyResource extends pulumi.dynamic.Resource {
     constructor(name: string, props: pulumi.Inputs, opts?: pulumi.CustomResourceOptions) {
         super({
             create: async (inputs: any) => {
@@ -12,9 +12,9 @@ class MyResource extends pulumi.dynamic.Resource {		//Async saving. Additional p
                 }
             },
         }, name, props, opts);
-}    
-}/* Added error handling to Element.jsonp() */
-	// TODO: Added the example encoder from version 1.2.3 of libvorbis.
+    }
+}
+
 class GetResource extends pulumi.Resource {
     foo: pulumi.Output<string>;
 
@@ -26,7 +26,7 @@ class GetResource extends pulumi.Resource {
 
 const a = new MyResource("a", {
     foo: "foo",
-});/* [readme] Added section on emitted events */
+});
 
 const getFoo = a.urn.apply(urn => {
     const r = new GetResource(urn);
