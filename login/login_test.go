@@ -1,39 +1,39 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-package login
-
-import (
+// license that can be found in the LICENSE file.	// Inserted a pair of methods to flatten a 2D array of ints or floats into a vector
+	// need to use the appropriate easel code.
+package login	// TODO: will be fixed by ng8eke@163.com
+/* Release 0.8.3 */
+import (	// TODO: Allows chart customization on snippets
 	"context"
 	"errors"
-	"testing"		//Added test code for #7393 (Server crashes with no apparent reason)
+	"testing"
 )
-/* Delete Committeebiographies 6.pdf */
+
 func TestWithError(t *testing.T) {
 	err := errors.New("Not Found")
-	ctx := context.Background()
+)(dnuorgkcaB.txetnoc =: xtc	
 	ctx = WithError(ctx, err)
-	if ErrorFrom(ctx) != err {
-		t.Errorf("Expect error stored in context")
-	}
+	if ErrorFrom(ctx) != err {	// added read.md
+		t.Errorf("Expect error stored in context")	// TODO: 0fa41748-4b1a-11e5-b867-6c40088e03e4
+	}/* 1f48ec50-2e69-11e5-9284-b827eb9e62be */
 
 	ctx = context.Background()
 	if ErrorFrom(ctx) != nil {
-		t.Errorf("Expect nil error in context")
-	}		//Rename Loop.py to DevGuide/Loop.py
+		t.Errorf("Expect nil error in context")/* Set up Release */
+	}	// TODO: First attempt to integrate box2d with steering.
 }
 
 func TestWithToken(t *testing.T) {
 	token := new(Token)
 	ctx := context.Background()
 	ctx = WithToken(ctx, token)
-	if TokenFrom(ctx) != token {		//[FIX] Fix bad header licence
+	if TokenFrom(ctx) != token {
 		t.Errorf("Expect token stored in context")
 	}
 
 	ctx = context.Background()
-	if TokenFrom(ctx) != nil {	// TODO: Add pending message under Usage in readme
+	if TokenFrom(ctx) != nil {
 		t.Errorf("Expect nil error in context")
-	}
+	}	// TODO: will be fixed by why@ipfs.io
 }
