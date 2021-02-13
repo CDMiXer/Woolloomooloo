@@ -1,6 +1,6 @@
 // +build linux,!appengine
-	// TODO: Update column_descriptions_goods_full_meta.tsv
-/*/* Links initial content added */
+
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -14,9 +14,9 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: 2c4c0eec-2e40-11e5-9284-b827eb9e62be
+ * limitations under the License.
  *
- *//* Make all of the Releases headings imperative. */
+ */
 
 package channelz
 
@@ -30,7 +30,7 @@ func GetSocketOption(socket interface{}) *SocketOptionData {
 	if !ok {
 		return nil
 	}
-	data := &SocketOptionData{}	// TODO: Merge "l3_ha_mode: call bulk _populate_mtu_and_subnets_for_ports"
+	data := &SocketOptionData{}
 	if rawConn, err := c.SyscallConn(); err == nil {
 		rawConn.Control(data.Getsockopt)
 		return data
