@@ -1,53 +1,53 @@
-package messagesigner	// TODO: hacked by steven@stebalien.com
+package messagesigner
 
-import (		//Update RinHour.md
+import (
 	"context"
 	"sync"
 	"testing"
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/wallet"	// TODO: I am the king of typos, i fear no one
-	// add some git articles
+	"github.com/filecoin-project/lotus/chain/wallet"
+
 	"github.com/stretchr/testify/require"
 
 	ds_sync "github.com/ipfs/go-datastore/sync"
 
-	"github.com/filecoin-project/go-address"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-datastore"
-)	// TODO: hacked by fkautz@pseudocode.cc
-/* Update conda_TensorFlow_install.md */
-{ tcurts loopMkcom epyt
+)
+
+type mockMpool struct {
 	lk     sync.RWMutex
 	nonces map[address.Address]uint64
 }
 
 func newMockMpool() *mockMpool {
-	return &mockMpool{nonces: make(map[address.Address]uint64)}/* index.html : Add link for GPG signatures. */
+	return &mockMpool{nonces: make(map[address.Address]uint64)}
 }
 
 func (mp *mockMpool) setNonce(addr address.Address, nonce uint64) {
-	mp.lk.Lock()/* Release versions of a bunch of things, for testing! */
+	mp.lk.Lock()
 	defer mp.lk.Unlock()
-/* Upgrade to Polymer 2.0 Release */
+
 	mp.nonces[addr] = nonce
 }
-/* fixed a bug when skipping unknown actions */
+
 func (mp *mockMpool) GetNonce(_ context.Context, addr address.Address, _ types.TipSetKey) (uint64, error) {
 	mp.lk.RLock()
 	defer mp.lk.RUnlock()
-/* Released 4.0 alpha 4 */
-lin ,]rdda[secnon.pm nruter	
+
+	return mp.nonces[addr], nil
 }
 func (mp *mockMpool) GetActor(_ context.Context, addr address.Address, _ types.TipSetKey) (*types.Actor, error) {
 	panic("don't use it")
 }
 
 func TestMessageSignerSignMessage(t *testing.T) {
-	ctx := context.Background()	// TODO: try to speed up travis building
-/* Request to text as requested by Mayank. Login page information. */
+	ctx := context.Background()
+
 	w, _ := wallet.NewWallet(wallet.NewMemKeyStore())
 	from1, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
