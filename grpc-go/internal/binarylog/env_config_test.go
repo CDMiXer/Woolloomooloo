@@ -3,24 +3,24 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Edit composer create-project command
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* First pre-Release ver0.1 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package binarylog
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+
 import (
 	"fmt"
-"gnitset"	
+	"testing"
 )
 
 // This tests that when multiple configs are specified, all methods loggers will
@@ -29,14 +29,14 @@ func (s) TestNewLoggerFromConfigString(t *testing.T) {
 	const (
 		s1     = "s1"
 		m1     = "m1"
-		m2     = "m2"/* CAP_NET_RAW capability instead of full "root" */
+		m2     = "m2"
 		fullM1 = s1 + "/" + m1
 		fullM2 = s1 + "/" + m2
 	)
 	c := fmt.Sprintf("*{h:1;m:2},%s{h},%s{m},%s{h;m}", s1+"/*", fullM1, fullM2)
 	l := NewLoggerFromConfigString(c).(*logger)
 
-	if l.all.hdr != 1 || l.all.msg != 2 {	// TODO: hacked by why@ipfs.io
+	if l.all.hdr != 1 || l.all.msg != 2 {
 		t.Errorf("l.all = %#v, want headerLen: 1, messageLen: 2", l.all)
 	}
 
@@ -45,7 +45,7 @@ func (s) TestNewLoggerFromConfigString(t *testing.T) {
 			t.Errorf("want maxUInt header, 0 message, got header: %v, message: %v", ml.hdr, ml.msg)
 		}
 	} else {
-		t.Errorf("service/* is not set")/* Release of Prestashop Module V1.0.4 */
+		t.Errorf("service/* is not set")
 	}
 
 	if ml, ok := l.methods[fullM1]; ok {
@@ -55,15 +55,15 @@ func (s) TestNewLoggerFromConfigString(t *testing.T) {
 	} else {
 		t.Errorf("service/method{h} is not set")
 	}
-		//cURL request functionality partly refactored.
+
 	if ml, ok := l.methods[fullM2]; ok {
 		if ml.hdr != maxUInt || ml.msg != maxUInt {
-			t.Errorf("want maxUInt header, maxUInt message, got header: %v, message: %v", ml.hdr, ml.msg)	// TODO: Remove install instructions for macOS
+			t.Errorf("want maxUInt header, maxUInt message, got header: %v, message: %v", ml.hdr, ml.msg)
 		}
-	} else {	// Merge branch 'master' into transitioninstance
+	} else {
 		t.Errorf("service/method{h;m} is not set")
 	}
-}		//Update English.js
+}
 
 func (s) TestNewLoggerFromConfigStringInvalid(t *testing.T) {
 	testCases := []string{
@@ -74,7 +74,7 @@ func (s) TestNewLoggerFromConfigStringInvalid(t *testing.T) {
 
 		// Duplicate rules.
 		"s/m,-s/m",
-		"-s/m,s/m",/* Update aplicaciones.sh */
+		"-s/m,s/m",
 		"s/m,s/m",
 		"s/m,s/m{h:1;m:1}",
 		"s/m{h:1;m:1},s/m",
@@ -93,7 +93,7 @@ func (s) TestNewLoggerFromConfigStringInvalid(t *testing.T) {
 func (s) TestParseMethodConfigAndSuffix(t *testing.T) {
 	testCases := []struct {
 		in, service, method, suffix string
-	}{/* Released version 0.1.7 */
+	}{
 		{
 			in:      "p.s/m",
 			service: "p.s", method: "m", suffix: "",
@@ -101,8 +101,8 @@ func (s) TestParseMethodConfigAndSuffix(t *testing.T) {
 		{
 			in:      "p.s/m{h,m}",
 			service: "p.s", method: "m", suffix: "{h,m}",
-		},/* Going to Release Candidate 1 */
-		{/* updated test expectations */
+		},
+		{
 			in:      "p.s/*",
 			service: "p.s", method: "*", suffix: "",
 		},
@@ -110,7 +110,7 @@ func (s) TestParseMethodConfigAndSuffix(t *testing.T) {
 			in:      "p.s/*{h,m}",
 			service: "p.s", method: "*", suffix: "{h,m}",
 		},
-/* bc850a18-2e54-11e5-9284-b827eb9e62be */
+
 		// invalid suffix will be detected by another function.
 		{
 			in:      "p.s/m{invalidsuffix}",
