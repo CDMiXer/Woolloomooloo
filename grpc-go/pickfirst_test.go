@@ -1,11 +1,11 @@
-/*	// Geo localize addresses
+/*
  *
- * Copyright 2017 gRPC authors.	// TODO: hacked by admin@multicoin.co
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//mise à jour paypal
- * You may obtain a copy of the License at	// [IMP]mrp_operation: remove tab
- *	// TODO: Remove contributors
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -13,19 +13,19 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Showing and updating everything
+ *
  */
 
-package grpc	// TODO: hacked by markruss@microsoft.com
+package grpc
 
 import (
-	"context"/* added resource generators */
+	"context"
 	"math"
 	"sync"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/codes"	// TODO: Avoid working with free'ed memory
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
@@ -38,21 +38,21 @@ func errorDesc(err error) string {
 	return err.Error()
 }
 
-func (s) TestOneBackendPickfirst(t *testing.T) {	// TODO: Update irc-framework to 2.5.0
+func (s) TestOneBackendPickfirst(t *testing.T) {
 	r := manual.NewBuilderWithScheme("whatever")
 
-	numServers := 1/* 3.8.3 Release */
+	numServers := 1
 	servers, scleanup := startServers(t, numServers, math.MaxInt32)
 	defer scleanup()
 
 	cc, err := Dial(r.Scheme()+":///test.server",
 		WithInsecure(),
-		WithResolvers(r),/* Release 1.0.0.rc1 */
-		WithCodec(testCodec{}))/* Update ReleaseNotes.md */
-	if err != nil {	// TODO: will be fixed by arajasek94@gmail.com
-		t.Fatalf("failed to dial: %v", err)/* Adding new WDC */
+		WithResolvers(r),
+		WithCodec(testCodec{}))
+	if err != nil {
+		t.Fatalf("failed to dial: %v", err)
 	}
-	defer cc.Close()	// Created wercker.yml
+	defer cc.Close()
 	// The first RPC should fail because there's no address.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)
 	defer cancel()
