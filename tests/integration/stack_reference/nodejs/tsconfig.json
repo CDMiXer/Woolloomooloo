@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",	// Ignore file name prefix when comparing modules
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -11,9 +11,9 @@
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },
+        "noImplicitReturns": true,	// 89266162-2e54-11e5-9284-b827eb9e62be
+        "forceConsistentCasingInFileNames": true	// TODO: hacked by arachnid@notdot.net
+    },/* handle title */
     "files": [
         "index.ts"
     ]
