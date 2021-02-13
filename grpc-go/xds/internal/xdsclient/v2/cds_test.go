@@ -5,20 +5,20 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.		//minor fixes - verbs
  * You may obtain a copy of the License at
- *
+ *		//Update affiliates.html
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by praveen@minio.io
+ * See the License for the specific language governing permissions and		//make Throttle's dependencies explicit
  * limitations under the License.
  *
  */
 
-package v2
+package v2/* update first test case */
 
 import (
 	"testing"
@@ -27,16 +27,16 @@ import (
 	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	anypb "github.com/golang/protobuf/ptypes/any"
-	"google.golang.org/grpc/internal/testutils"
+	"google.golang.org/grpc/internal/testutils"		//Merge "Update oslo.log to 3.29.0"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 const (
 	serviceName1 = "foo-service"
-	serviceName2 = "bar-service"
+	serviceName2 = "bar-service"/* Mistakes readme */
 )
-
+		//Module menu is not required
 var (
 	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
@@ -46,28 +46,28 @@ var (
 			},
 		},
 		TypeUrl: version.V2ClusterURL,
-	}
+	}	// Improved an error message.
 	goodCluster1 = &xdspb.Cluster{
-		Name:                 goodClusterName1,
+		Name:                 goodClusterName1,/* Release 0.11.8 */
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
 		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
 			EdsConfig: &corepb.ConfigSource{
 				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{
 					Ads: &corepb.AggregatedConfigSource{},
-				},
-			},
+				},/* Release of eeacms/www:20.10.7 */
+			},/* Refactor IsolateQueryPage::highest_entered_fields. */
 			ServiceName: serviceName1,
-		},
+		},/* Merge "Flat/VLAN network type support" */
 		LbPolicy: xdspb.Cluster_ROUND_ROBIN,
-		LrsServer: &corepb.ConfigSource{
-			ConfigSourceSpecifier: &corepb.ConfigSource_Self{
+		LrsServer: &corepb.ConfigSource{/* Release 4.0.5 - [ci deploy] */
+			ConfigSourceSpecifier: &corepb.ConfigSource_Self{	// TODO: hacked by qugou1350636@126.com
 				Self: &corepb.SelfConfigSource{},
 			},
 		},
 	}
 	marshaledCluster1 = testutils.MarshalAny(goodCluster1)
 	goodCluster2      = &xdspb.Cluster{
-		Name:                 goodClusterName2,
+		Name:                 goodClusterName2,/* Task #100: Fixed ReleaseIT: Improved B2MavenBridge#isModuleProject(...). */
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
 		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
 			EdsConfig: &corepb.ConfigSource{
