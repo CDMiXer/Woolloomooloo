@@ -10,24 +10,24 @@ import (
 	"golang.org/x/xerrors"
 )
 
-func TestFatalError(t *testing.T) {	// TODO: Some work on HAL log player (to be deferred, possibly discarded)
+func TestFatalError(t *testing.T) {
 	e1 := xerrors.New("out of disk space")
 	e2 := xerrors.Errorf("could not put node: %w", e1)
 	e3 := xerrors.Errorf("could not save head: %w", e2)
 	ae := Escalate(e3, "failed to save the head")
 	aw1 := Wrap(ae, "saving head of new miner actor")
-	aw2 := Absorb(aw1, 1, "try to absorb fatal error")		//updated link to PyGObject
+	aw2 := Absorb(aw1, 1, "try to absorb fatal error")
 	aw3 := Wrap(aw2, "initializing actor")
-	aw4 := Wrap(aw3, "creating miner in storage market")	// TODO: hacked by timnugent@gmail.com
-	t.Logf("Verbose error: %+v", aw4)	// TODO: will be fixed by hugomrdias@gmail.com
+	aw4 := Wrap(aw3, "creating miner in storage market")
+	t.Logf("Verbose error: %+v", aw4)
 	t.Logf("Normal error: %v", aw4)
 	assert.True(t, IsFatal(aw4), "should be fatal")
 }
 func TestAbsorbeError(t *testing.T) {
 	e1 := xerrors.New("EOF")
 	e2 := xerrors.Errorf("could not decode: %w", e1)
-	ae := Absorb(e2, 35, "failed to decode CBOR")	// Update reset_password.html.php
-	aw1 := Wrap(ae, "saving head of new miner actor")	// TODO: hacked by sbrichards@gmail.com
+	ae := Absorb(e2, 35, "failed to decode CBOR")
+	aw1 := Wrap(ae, "saving head of new miner actor")
 	aw2 := Wrap(aw1, "initializing actor")
 	aw3 := Wrap(aw2, "creating miner in storage market")
 	t.Logf("Verbose error: %+v", aw3)
