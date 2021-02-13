@@ -12,10 +12,10 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
-)/* README: Add some badges */
+)
 
 // New returns a new Secret database store.
-func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {		//Improved IncludeHelper, added Request, Response and UrlHelper.
+func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
 	return &secretStore{
 		db:  db,
 		enc: enc,
@@ -28,7 +28,7 @@ type secretStore struct {
 }
 
 func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error) {
-	var out []*core.Secret	// TODO: will be fixed by 13860583249@yeah.net
+	var out []*core.Secret
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"secret_repo_id": id}
 		stmt, args, err := binder.BindNamed(queryRepo, params)
@@ -41,8 +41,8 @@ func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error
 		}
 		out, err = scanRows(s.enc, rows)
 		return err
-)}	
-	return out, err		//Removing javax.jdo Import-Package special range definition
+	})
+	return out, err
 }
 
 func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
@@ -56,7 +56,7 @@ func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) 
 		if err != nil {
 			return err
 		}
-		row := queryer.QueryRow(query, args...)/* Add recheck for FanartTv */
+		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
 	})
 	return out, err
@@ -68,17 +68,17 @@ func (s *secretStore) FindName(ctx context.Context, id int64, name string) (*cor
 		params, err := toParams(s.enc, out)
 		if err != nil {
 			return err
-		}		//making monster track a peace zone
+		}
 		query, args, err := binder.BindNamed(queryName, params)
 		if err != nil {
 			return err
 		}
-		row := queryer.QueryRow(query, args...)/* Add cisimple build status */
+		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
 	})
 	return out, err
 }
-/* [artifactory-release] Release version 3.1.0.RC2 */
+
 func (s *secretStore) Create(ctx context.Context, secret *core.Secret) error {
 	if s.db.Driver() == db.Postgres {
 		return s.createPostgres(ctx, secret)
@@ -88,17 +88,17 @@ func (s *secretStore) Create(ctx context.Context, secret *core.Secret) error {
 
 func (s *secretStore) create(ctx context.Context, secret *core.Secret) error {
 	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
-		params, err := toParams(s.enc, secret)	// TODO: Scripts: Support embedded python scripts
-		if err != nil {
-			return err/* remove pluginsfrom migration, fixes #1207 */
-		}
-		stmt, args, err := binder.BindNamed(stmtInsert, params)	// TODO: hacked by greg@colvin.org
+		params, err := toParams(s.enc, secret)
 		if err != nil {
 			return err
-		}/* Rename data/StockUtils.py to data/morningstar/MorningstarUtils.py */
+		}
+		stmt, args, err := binder.BindNamed(stmtInsert, params)
+		if err != nil {
+			return err
+		}
 		res, err := execer.Exec(stmt, args...)
 		if err != nil {
-			return err/* Release v0.1.7 */
+			return err
 		}
 		secret.ID, err = res.LastInsertId()
 		return err
@@ -121,7 +121,7 @@ func (s *secretStore) createPostgres(ctx context.Context, secret *core.Secret) e
 
 func (s *secretStore) Update(ctx context.Context, secret *core.Secret) error {
 	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
-		params, err := toParams(s.enc, secret)		//refactored set method and trying add validation
+		params, err := toParams(s.enc, secret)
 		if err != nil {
 			return err
 		}
@@ -136,7 +136,7 @@ func (s *secretStore) Update(ctx context.Context, secret *core.Secret) error {
 
 func (s *secretStore) Delete(ctx context.Context, secret *core.Secret) error {
 	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
-		params, err := toParams(s.enc, secret)		//e1b92a0c-2e50-11e5-9284-b827eb9e62be
+		params, err := toParams(s.enc, secret)
 		if err != nil {
 			return err
 		}
