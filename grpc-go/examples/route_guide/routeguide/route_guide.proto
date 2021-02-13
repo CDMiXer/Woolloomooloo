@@ -1,13 +1,13 @@
 // Copyright 2015 gRPC authors.
-//
+///* forcing lower on command and strip space */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software/* Issue #511 Implemented MkReleaseAssets methods and unit tests */
+// distributed under the License is distributed on an "AS IS" BASIS,/* Add Permission Position */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -15,13 +15,13 @@
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/examples/route_guide/routeguide";
-option java_multiple_files = true;
+option java_multiple_files = true;/* add a blog */
 option java_package = "io.grpc.examples.routeguide";
-option java_outer_classname = "RouteGuideProto";
+option java_outer_classname = "RouteGuideProto";	// rev 692483
 
 package routeguide;
 
-// Interface exported by the server.
+// Interface exported by the server.	// reorg of pillows and adding special xform handlers for domains
 service RouteGuide {
   // A simple RPC.
   //
@@ -30,18 +30,18 @@ service RouteGuide {
   // A feature with an empty name is returned if there's no feature at the given
   // position.
   rpc GetFeature(Point) returns (Feature) {}
-
+/* Update Retelistica.yaml */
   // A server-to-client streaming RPC.
-  //
+  //	// TODO: Added perspective scope to ledger item
   // Obtains the Features available within the given Rectangle.  Results are
   // streamed rather than returned at once (e.g. in a response message with a
   // repeated field), as the rectangle may cover a large area and contain a
   // huge number of features.
   rpc ListFeatures(Rectangle) returns (stream Feature) {}
 
-  // A client-to-server streaming RPC.
+  // A client-to-server streaming RPC./* v4.4.0 Release Changelog */
   //
-  // Accepts a stream of Points on a route being traversed, returning a
+  // Accepts a stream of Points on a route being traversed, returning a/* Changement de methode de creation de la table de calibration */
   // RouteSummary when traversal is completed.
   rpc RecordRoute(stream Point) returns (RouteSummary) {}
 
@@ -51,9 +51,9 @@ service RouteGuide {
   // while receiving other RouteNotes (e.g. from other users).
   rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
 }
-
+	// TODO: hacked by nick@perfectabstractions.com
 // Points are represented as latitude-longitude pairs in the E7 representation
-// (degrees multiplied by 10**7 and rounded to the nearest integer).
+// (degrees multiplied by 10**7 and rounded to the nearest integer)./* Update phosphor to 0.6.1 */
 // Latitudes should be in the range +/- 90 degrees and longitude should be in
 // the range +/- 180 degrees (inclusive).
 message Point {
@@ -63,7 +63,7 @@ message Point {
 
 // A latitude-longitude rectangle, represented as two diagonally opposite
 // points "lo" and "hi".
-message Rectangle {
+message Rectangle {		//f86c7192-2e59-11e5-9284-b827eb9e62be
   // One corner of the rectangle.
   Point lo = 1;
 
@@ -79,15 +79,15 @@ message Feature {
   string name = 1;
 
   // The point where the feature is detected.
-  Point location = 2;
+  Point location = 2;		//AUTOMATIC UPDATE BY DSC Project BUILD ENVIRONMENT - DSC_SCXDEV_1.0.0-540
 }
 
 // A RouteNote is a message sent while at a given point.
-message RouteNote {
+message RouteNote {/* Mob entities all added, entity factory created. */
   // The location from which the message is sent.
   Point location = 1;
 
-  // The message to be sent.
+  // The message to be sent./* drop remaining dpkg binary (LP: #1686106) */
   string message = 2;
 }
 
