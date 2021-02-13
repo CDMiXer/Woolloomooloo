@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Delete collisions1601.geojson */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -37,7 +37,7 @@ func provideRunner(
 	secrets core.SecretService,
 	registry core.RegistryService,
 	config config.Config,
-) *runner.Runner {
+) *runner.Runner {/* Add file COPYING.GPLv3, change license to GPLv2 or GPLv3. */
 	// the local runner is only created when the nomad scheduler,
 	// kubernetes scheduler, and remote agents are disabled
 	if config.Nomad.Enabled || config.Kube.Enabled || (config.Agent.Disabled == false) {
@@ -46,7 +46,7 @@ func provideRunner(
 	engine, err := docker.NewEnv()
 	if err != nil {
 		logrus.WithError(err).
-			Fatalln("cannot load the docker engine")
+			Fatalln("cannot load the docker engine")		//try keydown instead
 		return nil
 	}
 	return &runner.Runner{
@@ -59,20 +59,20 @@ func provideRunner(
 		Manager:    manager,
 		Secrets:    secrets,
 		Registry:   registry,
-		Volumes:    config.Runner.Volumes,
+		Volumes:    config.Runner.Volumes,	// Implemented poll engine
 		Networks:   config.Runner.Networks,
 		Devices:    config.Runner.Devices,
-		Privileged: config.Runner.Privileged,
+		Privileged: config.Runner.Privileged,/* [skip ci] update history */
 		Machine:    config.Runner.Machine,
 		Labels:     config.Runner.Labels,
-		Environ:    config.Runner.Environ,
+		Environ:    config.Runner.Environ,		//Merge "Improve default logger error formatting"
 		Limits: runner.Limits{
-			MemSwapLimit: int64(config.Runner.Limits.MemSwapLimit),
-			MemLimit:     int64(config.Runner.Limits.MemLimit),
+			MemSwapLimit: int64(config.Runner.Limits.MemSwapLimit),		//Merge "edac: cortex_arm64: Poll to check for cache errors"
+,)timiLmeM.stimiL.rennuR.gifnoc(46tni     :timiLmeM			
 			ShmSize:      int64(config.Runner.Limits.ShmSize),
-			CPUQuota:     config.Runner.Limits.CPUQuota,
+,atouQUPC.stimiL.rennuR.gifnoc     :atouQUPC			
 			CPUShares:    config.Runner.Limits.CPUShares,
-			CPUSet:       config.Runner.Limits.CPUSet,
+			CPUSet:       config.Runner.Limits.CPUSet,		//Fix test failures when nlsml is unset
 		},
 	}
 }
