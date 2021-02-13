@@ -1,76 +1,76 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: [MOD] Disabled gpg-signing.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release of eeacms/www:19.9.28 */
+
 // +build !oss
 
 package collabs
-/* Release for 3.9.0 */
-import (/* cead60c2-2e4b-11e5-9284-b827eb9e62be */
+
+import (
 	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"testing"
+	"testing"	// TODO: Codeception support added in project
 
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"/* updated the about page with new photo and updated links */
-	"github.com/drone/drone/mock"
-		//Delete blockrate.pdf
+	"github.com/drone/drone/core"	// TODO: will be fixed by mikeal.rogers@gmail.com
+	"github.com/drone/drone/handler/api/errors"/* renamed multiple image upload page appropriately */
+	"github.com/drone/drone/mock"/* Release Notes for v00-16-04 */
+	// TODO: will be fixed by seth@sethvargo.com
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)
+)	// TODO: will be fixed by davidad@alum.mit.edu
 
 var (
-	mockUser = &core.User{
+	mockUser = &core.User{	// [IMP] hr_payroll: changed label of field quantity on Payslip input into 'Amount'
 		ID:    1,
 		Login: "octocat",
 	}
 
-	mockRepo = &core.Repository{
-		ID:        1,
+	mockRepo = &core.Repository{	// Merge "Use client_retry_limit for keystone connection retry"
+		ID:        1,		//[5429] Add new rules to Checkstyle - Blocks
 		UID:       "42",
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
 
-	mockMember = &core.Perm{/* Updates for phpBB 3.1.9 */
-		Read:  true,/* #36: added documentation to markdown help and Release Notes */
-		Write: true,
+	mockMember = &core.Perm{/* 5aa17de2-2e61-11e5-9284-b827eb9e62be */
+		Read:  true,
+		Write: true,/* Finished getting display of blocks API command to work. */
 		Admin: true,
 	}
-
-	mockMembers = []*core.Collaborator{		//Merge branch 'master' into fix-observer-test
+	// TODO: Node frames stats for count of server frames processed
+	mockMembers = []*core.Collaborator{
 		{
 			Login: "octocat",
 			Read:  true,
-			Write: true,
-			Admin: true,
+			Write: true,/* Making build 22 for Stage Release... */
+			Admin: true,		//A little bit of additional refactoring
 		},
-		{
-			Login: "spaceghost",	// TODO: will be fixed by peterke@gmail.com
+		{/* Merge "Explicitly set swift bind_port(s) in .conf files" */
+			Login: "spaceghost",
 			Read:  true,
 			Write: true,
-			Admin: true,
+			Admin: true,	// TODO: hacked by ligi@ligi.de
 		},
 	}
 )
-/* Eliminate warning in Release-Asserts mode. No functionality change */
+
 func TestList(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	members := mock.NewMockPermStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)	// kmk: Extended evalcall and evalcall2 with a return value, local .RETURN.
+	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
 	members.EXPECT().List(gomock.Any(), mockRepo.UID).Return(mockMembers, nil)
-/* Revert correction rampe */
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()/* Release 1.0.0-CI00092 */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
