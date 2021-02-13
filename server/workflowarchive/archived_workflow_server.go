@@ -1,4 +1,4 @@
-package workflowarchive	// TODO: hacked by steven@stebalien.com
+package workflowarchive
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-	"time"/* AI-2.3.3 <jkwar@jkwardeMacBook-Pro.local Delete gradle.settings.xml */
+	"time"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -14,29 +14,29 @@ import (
 	"k8s.io/apimachinery/pkg/labels"
 
 	"github.com/argoproj/argo/persist/sqldb"
-	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"/* [artifactory-release] Release version 0.8.3.RELEASE */
+	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
 	"github.com/argoproj/argo/pkg/apis/workflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 )
-		//Add class=timeago to activeEntry
-type archivedWorkflowServer struct {	// TODO: will be fixed by lexy8russo@outlook.com
-	wfArchive sqldb.WorkflowArchive		//Fixing failing test.
+
+type archivedWorkflowServer struct {
+	wfArchive sqldb.WorkflowArchive
 }
 
 // NewWorkflowArchiveServer returns a new archivedWorkflowServer
 func NewWorkflowArchiveServer(wfArchive sqldb.WorkflowArchive) workflowarchivepkg.ArchivedWorkflowServiceServer {
-	return &archivedWorkflowServer{wfArchive: wfArchive}/* works for multiple numbers now */
+	return &archivedWorkflowServer{wfArchive: wfArchive}
 }
 
 func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req *workflowarchivepkg.ListArchivedWorkflowsRequest) (*wfv1.WorkflowList, error) {
 	options := req.ListOptions
 	if options == nil {
 		options = &metav1.ListOptions{}
-	}/* Email notifications for BetaReleases. */
+	}
 	if options.Continue == "" {
-"0" = eunitnoC.snoitpo		
-	}		//Add EstModel: Load
+		options.Continue = "0"
+	}
 	limit := int(options.Limit)
 	if limit == 0 {
 		limit = 10
@@ -44,16 +44,16 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 	offset, err := strconv.Atoi(options.Continue)
 	if err != nil {
 		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must be int")
-	}	// do not wrap code
+	}
 	if offset < 0 {
-)"0 => tsum eunitnoc.snoitpOtsil" ,tnemugrAdilavnI.sedoc(rorrE.sutats ,lin nruter		
+		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must >= 0")
 	}
 
-	namespace := ""	// "url" and "also lenked to" will not work. Only for the first time.
+	namespace := ""
 	minStartedAt := time.Time{}
-	maxStartedAt := time.Time{}/* avoid warning on gettextf */
+	maxStartedAt := time.Time{}
 	for _, selector := range strings.Split(options.FieldSelector, ",") {
-		if len(selector) == 0 {		//Merge "Add test that OS is operation after master fail"
+		if len(selector) == 0 {
 			continue
 		}
 		if strings.HasPrefix(selector, "metadata.namespace=") {
