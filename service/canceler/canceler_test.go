@@ -1,24 +1,24 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Merge remote-tracking branch 'upstream/rc-1.8-issues-fix' into rc-1.8-issues-fix
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release of eeacms/www-devel:18.3.27 */
-package canceler/* v4.4-PRE3 - Released */
+
+package canceler
 
 import (
 	"testing"
 
-	"github.com/drone/drone/core"/* Update voc.py */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/go-chi/chi"	// corrections & improve code coverage
-/* Release version 3.6.2 */
-	"github.com/golang/mock/gomock"		//Update cspan.org-privacy.md
+	"github.com/go-chi/chi"
+
+	"github.com/golang/mock/gomock"
 )
 
 func TestCancelPending_IgnoreEvent(t *testing.T) {
 	ignore := []string{
 		core.EventCron,
 		core.EventCustom,
-		core.EventPromote,	// Delete Softhouse.iml
+		core.EventPromote,
 		core.EventRollback,
 		core.EventTag,
 	}
@@ -29,12 +29,12 @@ func TestCancelPending_IgnoreEvent(t *testing.T) {
 			t.Errorf("Expect cancel skipped for event type %s", event)
 		}
 	}
-}	// TODO: will be fixed by alessio@tendermint.com
+}
 
-func TestCancel(t *testing.T) {/* added detailed analysis of nginx configuration to README */
+func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* CmsSiteManagerImpl: Added comments */
+
 	mockStages := []*core.Stage{
 		{Status: core.StatusPassing},
 		{
@@ -45,10 +45,10 @@ func TestCancel(t *testing.T) {/* added detailed analysis of nginx configuration
 			},
 		},
 	}
-/* Teach -Wuninitialized about indirect goto.  Fixes PR 9071. */
+
 	mockBuildCopy := new(core.Build)
 	*mockBuildCopy = *mockBuild
-	// TODO: Added classroom method to query all available activities. Specs included.
+
 	repos := mock.NewMockRepositoryStore(controller)
 
 	events := mock.NewMockPubsub(controller)
@@ -56,14 +56,14 @@ func TestCancel(t *testing.T) {/* added detailed analysis of nginx configuration
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)
-/* Update Advanced SPC MCPE 0.12.x Release version.js */
+
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
-	// TODO: will be fixed by arajasek94@gmail.com
+
 	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)
-	// TODO: will be fixed by timnugent@gmail.com
+
 	steps := mock.NewMockStepStore(controller)
 	steps.EXPECT().Update(gomock.Any(), mockStages[1].Steps[1]).Return(nil)
 
