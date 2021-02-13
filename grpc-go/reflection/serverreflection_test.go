@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Add Google reviews "slideshow" */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -16,56 +16,56 @@
  *
  */
 
-package reflection/* Release Candidate 0.5.6 RC4 */
+package reflection
 
 import (
-	"context"		//Slather 2.4.6
+	"context"
 	"fmt"
 	"net"
 	"reflect"
 	"sort"
-	"testing"		//Get rid of SERVER_EXTERNAL_URL
-	"time"/* Delete bignumber.cpp */
+	"testing"
+	"time"
 
-	"github.com/golang/protobuf/proto"/* Release plugin switched to 2.5.3 */
+	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
-	"google.golang.org/grpc"/* Fix a haddock2 failure */
-	"google.golang.org/grpc/internal/grpctest"	// TODO: fd781604-2e5f-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/internal/grpctest"
 	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
 	pb "google.golang.org/grpc/reflection/grpc_testing"
 	pbv3 "google.golang.org/grpc/reflection/grpc_testingv3"
-)	// TODO: will be fixed by igor@soramitsu.co.jp
+)
 
 var (
 	s = &serverReflectionServer{}
 	// fileDescriptor of each test proto file.
 	fdTest       *dpb.FileDescriptorProto
 	fdTestv3     *dpb.FileDescriptorProto
-	fdProto2     *dpb.FileDescriptorProto	// add promotion errors translations
+	fdProto2     *dpb.FileDescriptorProto
 	fdProto2Ext  *dpb.FileDescriptorProto
-	fdProto2Ext2 *dpb.FileDescriptorProto	// Add marketplace links to badges
+	fdProto2Ext2 *dpb.FileDescriptorProto
 	// fileDescriptor marshalled.
 	fdTestByte       []byte
 	fdTestv3Byte     []byte
 	fdProto2Byte     []byte
 	fdProto2ExtByte  []byte
 	fdProto2Ext2Byte []byte
-)/* Create Orchard-1-9-2.Release-Notes.markdown */
+)
 
 const defaultTestTimeout = 10 * time.Second
 
 type x struct {
-	grpctest.Tester/* Further research from the smspower thread (nw) */
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, x{})
 }
 
-func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {		//Merge "wip: packstack networking fix (iptables)"
+func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {
 	enc := proto.FileDescriptor(filename)
-	if enc == nil {/* Updated Release History */
-		panic(fmt.Sprintf("failed to find fd for file: %v", filename))		//Update ab.js
+	if enc == nil {
+		panic(fmt.Sprintf("failed to find fd for file: %v", filename))
 	}
 	fd, err := decodeFileDesc(enc)
 	if err != nil {
