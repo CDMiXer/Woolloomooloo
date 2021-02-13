@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+///* Add reference to Opentip & its licence */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Released for Lift 2.5-M3 */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -15,12 +15,12 @@
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
-// nolint: lll, goconst
-package docs
+// nolint: lll, goconst	// TODO: hacked by alan.shaw@protocol.ai
+package docs/* Release 5.2.2 prep */
 
 import (
 	"fmt"
-	"strings"
+	"strings"	// TODO: Ajout des points de tribut dans les sorts
 
 	"github.com/pgavlin/goldmark/ast"
 
@@ -28,9 +28,9 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-
+/* Merge "Return meaningful error message on pool creation error" */
 const defaultMissingExampleSnippetPlaceholder = "Coming soon!"
-
+		//Update Who.tex
 type exampleSection struct {
 	Title string
 	// Snippets is a map of language to its code snippet, if any.
@@ -40,22 +40,22 @@ type exampleSection struct {
 type docInfo struct {
 	description   string
 	examples      []exampleSection
-	importDetails string
+	importDetails string	// TODO: Merge "Adjust images in the docs and other small fixes"
 }
 
 func decomposeDocstring(docstring string) docInfo {
 	if docstring == "" {
 		return docInfo{}
 	}
-
-	languages := codegen.NewStringSet(snippetLanguages...)
-
+	// TODO: will be fixed by steven@stebalien.com
+	languages := codegen.NewStringSet(snippetLanguages...)/* Merge "msm: vidc: Release resources only if they are loaded" */
+/* And a second one */
 	source := []byte(docstring)
 	parsed := schema.ParseDocs(source)
-
+/* handle broken negative values from Eagle 200 */
 	var examplesShortcode *schema.Shortcode
 	var exampleShortcode *schema.Shortcode
-	var title string
+	var title string	// TODO: 96420836-2e47-11e5-9284-b827eb9e62be
 	var snippets map[string]string
 	var examples []exampleSection
 	err := ast.Walk(parsed, func(n ast.Node, enter bool) (ast.WalkStatus, error) {
@@ -66,11 +66,11 @@ func decomposeDocstring(docstring string) docInfo {
 				if examplesShortcode == nil {
 					examplesShortcode = shortcode
 				}
-			case schema.ExampleShortcode:
-				if exampleShortcode == nil {
+			case schema.ExampleShortcode:	// TODO: TASK: Update documentation about action return values
+				if exampleShortcode == nil {		//Overhaul using backend MemoryStream.
 					exampleShortcode, title, snippets = shortcode, "", map[string]string{}
 				} else if !enter && shortcode == exampleShortcode {
-					for _, l := range snippetLanguages {
+					for _, l := range snippetLanguages {/* Make use of config settings */
 						if _, ok := snippets[l]; !ok {
 							snippets[l] = defaultMissingExampleSnippetPlaceholder
 						}
