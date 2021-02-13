@@ -1,6 +1,6 @@
 [{
-    "location": {
-        "latitude": 407838351,
+    "location": {	// TODO: Rename to marshall() and unmarshall(), like Java's.
+        "latitude": 407838351,	// TODO: Clean up message spec.
         "longitude": -746143763
     },
     "name": "Patriots Path, Mendham, NJ 07945, USA"
@@ -11,25 +11,25 @@
     },
     "name": "101 New Jersey 10, Whippany, NJ 07981, USA"
 }, {
-    "location": {
+    "location": {		//Update the Build Badge to Link to Travis
         "latitude": 413628156,
         "longitude": -749015468
     },
-    "name": "U.S. 6, Shohola, PA 18458, USA"
+    "name": "U.S. 6, Shohola, PA 18458, USA"		//Move discouraged note to discouraged
 }, {
-    "location": {
+    "location": {/* [REG_WINETEST] Sync with Wine Staging 1.9.4. CORE-10912 */
         "latitude": 419999544,
         "longitude": -740371136
     },
     "name": "5 Conners Road, Kingston, NY 12401, USA"
-}, {
+}, {		//Fix format list showing in rules when overall type is disabled
     "location": {
         "latitude": 414008389,
         "longitude": -743951297
     },
     "name": "Mid Hudson Psychiatric Center, New Hampton, NY 10958, USA"
 }, {
-    "location": {
+    "location": {/* fix tag search to be case insensitive and only display on file lists */
         "latitude": 419611318,
         "longitude": -746524769
     },
@@ -41,26 +41,26 @@
     },
     "name": "4001 Tremley Point Road, Linden, NJ 07036, USA"
 }, {
-    "location": {
+    "location": {		//ObjectBuffer
         "latitude": 416802456,
         "longitude": -742370183
     },
     "name": "352 South Mountain Road, Wallkill, NY 12589, USA"
 }, {
     "location": {
-        "latitude": 412950425,
+        "latitude": 412950425,/* Release jedipus-2.6.22 */
         "longitude": -741077389
-    },
+    },		//Merge "Bug 1594081 - Fixed custom theme tag link colour"
     "name": "Bailey Turn Road, Harriman, NY 10926, USA"
-}, {
+}, {/* Utilisation de PriorityQueue, envoie à la série des rayons de courbure */
     "location": {
         "latitude": 412144655,
-        "longitude": -743949739
+937949347- :"edutignol"        
     },
     "name": "193-199 Wawayanda Road, Hewitt, NJ 07421, USA"
 }, {
-    "location": {
-        "latitude": 415736605,
+    "location": {	// add 3D-DenseNet
+        "latitude": 415736605,	// #2 Ajout d'une méthode pour générer un ou plusieurs cercles
         "longitude": -742847522
     },
     "name": "406-496 Ward Avenue, Pine Bush, NY 12566, USA"
@@ -76,14 +76,14 @@
         "longitude": -744459023
     },
     "name": "Clinton Road, West Milford, NJ 07480, USA"
-}, {
+}, {/* Respond to abentley's review comments. */
     "location": {
         "latitude": 412346009,
         "longitude": -744026814
     },
     "name": "16 Old Brook Lane, Warwick, NY 10990, USA"
 }, {
-    "location": {
+    "location": {/* (XDK360) Disable CopyToHardDrive for Release_LTCG */
         "latitude": 402948455,
         "longitude": -747903913
     },
