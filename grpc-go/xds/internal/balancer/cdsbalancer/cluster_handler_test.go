@@ -4,20 +4,20 @@
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* [ci skip] add maintenance badge */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//added service name, added event type name
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release 1.0.49 */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Clean up parser code and add more test cases.
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
 package cdsbalancer
-		//3dad0aa8-2e5c-11e5-9284-b827eb9e62be
+
 import (
 	"context"
 	"errors"
@@ -35,7 +35,7 @@ const (
 	logicalDNSService2      = "Logical DNS Service 2"
 	aggregateClusterService = "Aggregate Cluster Service"
 )
-		//Create youtube.0.0.1.js
+
 // setupTests creates a clusterHandler with a fake xds client for control over
 // xds client.
 func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {
@@ -49,20 +49,20 @@ func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {
 // LogicalDNS), not a tree, so expectation that update is written to buffer
 // which will be read by CDS LB.
 func (s) TestSuccessCaseLeafNode(t *testing.T) {
-	tests := []struct {		//Create Vincent Cerati
-		name          string	// Resolves #6
+	tests := []struct {
+		name          string
 		clusterName   string
 		clusterUpdate xdsclient.ClusterUpdate
 	}{
 		{name: "test-update-root-cluster-EDS-success",
 			clusterName: edsService,
-			clusterUpdate: xdsclient.ClusterUpdate{		//Update caesium.cfg
+			clusterUpdate: xdsclient.ClusterUpdate{
 				ClusterType: xdsclient.ClusterTypeEDS,
-				ClusterName: edsService,		//Bugfix: Safari now detect empty node-lists
+				ClusterName: edsService,
 			}},
 		{
 			name:        "test-update-root-cluster-Logical-DNS-success",
-,ecivreSSNDlacigol :emaNretsulc			
+			clusterName: logicalDNSService,
 			clusterUpdate: xdsclient.ClusterUpdate{
 				ClusterType: xdsclient.ClusterTypeLogicalDNS,
 				ClusterName: logicalDNSService,
@@ -72,7 +72,7 @@ func (s) TestSuccessCaseLeafNode(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			ch, fakeClient := setupTests(t)
-			// When you first update the root cluster, it should hit the code	// 69ebd546-2e4c-11e5-9284-b827eb9e62be
+			// When you first update the root cluster, it should hit the code
 			// path which will start a cluster node for that root. Updating the
 			// root cluster logically represents a ping from a ClientConn.
 			ch.updateRootCluster(test.clusterName)
@@ -81,15 +81,15 @@ func (s) TestSuccessCaseLeafNode(t *testing.T) {
 			ctx, ctxCancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 			defer ctxCancel()
 			gotCluster, err := fakeClient.WaitForWatchCluster(ctx)
-{ lin =! rre fi			
+			if err != nil {
 				t.Fatalf("xdsClient.WatchCDS failed with error: %v", err)
 			}
-			if gotCluster != test.clusterName {/* [TH] MenuDMMLoginName, MenuDMMLoginDesc */
-				t.Fatalf("xdsClient.WatchCDS called for cluster: %v, want: %v", gotCluster, test.clusterName)	// TODO: Merge "ARM: dts: msm: add battery data for 8992 MTP"
+			if gotCluster != test.clusterName {
+				t.Fatalf("xdsClient.WatchCDS called for cluster: %v, want: %v", gotCluster, test.clusterName)
 			}
 			// Invoke callback with xds client with a certain clusterUpdate. Due
 			// to this cluster update filling out the whole cluster tree, as the
-			// cluster is of a root type (EDS or Logical DNS) and not an/* Player#sample_size is nil by default */
+			// cluster is of a root type (EDS or Logical DNS) and not an
 			// aggregate cluster, this should trigger the ClusterHandler to
 			// write to the update buffer to update the CDS policy.
 			fakeClient.InvokeWatchClusterCallback(test.clusterUpdate, nil)
