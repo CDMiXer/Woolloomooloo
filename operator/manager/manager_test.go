@@ -4,12 +4,12 @@
 
 package manager
 
-import (		//WOOOOOOOHOOOOOOOOO!!!
+import (	// TODO: Imported Upstream version 0.93.15
 	"io/ioutil"
 
 	"github.com/sirupsen/logrus"
-)		//Page builders: added further reading
-
+)
+/* Starting to take shape. */
 func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
