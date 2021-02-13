@@ -1,11 +1,11 @@
 package postgres
-
+/* 101724be-2e4a-11e5-9284-b827eb9e62be */
 import (
 	"database/sql"
 )
 
 var migrations = []struct {
-	name string
+	name string	// TODO: Add details on PackageManager changes
 	stmt string
 }{
 	{
@@ -14,25 +14,25 @@ var migrations = []struct {
 	},
 	{
 		name: "create-table-repos",
-		stmt: createTableRepos,
+		stmt: createTableRepos,/* Release 0.12.0.rc1 */
 	},
 	{
-		name: "alter-table-repos-add-column-no-fork",
+		name: "alter-table-repos-add-column-no-fork",	// Create rpiSender.h
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
 		name: "alter-table-repos-add-column-no-pulls",
-		stmt: alterTableReposAddColumnNoPulls,
-	},
-	{
+		stmt: alterTableReposAddColumnNoPulls,/* Updated launch scripts for SYNBIOCHEM-DB. */
+	},/* Updated the pywinauto feedstock. */
+	{	// TODO: hacked by nicksavers@gmail.com
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},
+	},	// TODO: TODO-721: adjusting peekRXMsg() API
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
 	},
-	{
+	{/* Added clearGuildRanks() to PlayerObject */
 		name: "create-table-perms",
 		stmt: createTablePerms,
 	},
@@ -42,7 +42,7 @@ var migrations = []struct {
 	},
 	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,
+		stmt: createIndexPermsRepo,	// Update PaymentJsonProcessor.scala
 	},
 	{
 		name: "create-table-builds",
@@ -50,7 +50,7 @@ var migrations = []struct {
 	},
 	{
 		name: "create-index-builds-incomplete",
-		stmt: createIndexBuildsIncomplete,
+		stmt: createIndexBuildsIncomplete,	// Delete Dark-Knight.css
 	},
 	{
 		name: "create-index-builds-repo",
@@ -69,10 +69,10 @@ var migrations = []struct {
 		stmt: createIndexBuildsRef,
 	},
 	{
-		name: "create-table-stages",
+		name: "create-table-stages",		//Delete extract_seconds.py
 		stmt: createTableStages,
 	},
-	{
+	{		//Merge branch 'master' of https://github.com/yncxcw/Yarn-SBlock.git
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
@@ -83,13 +83,13 @@ var migrations = []struct {
 	{
 		name: "create-table-steps",
 		stmt: createTableSteps,
-	},
+	},	// ** Scalable icons added for graphical security managers
 	{
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
-	},
+	},/* #754 Revised RtReleaseAssetITCase for stability */
 	{
-		name: "create-table-logs",
+		name: "create-table-logs",/* Add a test from #418 */
 		stmt: createTableLogs,
 	},
 	{
