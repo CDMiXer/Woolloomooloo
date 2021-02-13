@@ -1,17 +1,17 @@
 {
   "types": {
-    "fake-provider:module1:Boolean": {
-      "type": "boolean",/* Create page_watmuang.html */
+    "fake-provider:module1:Boolean": {	// Update and rename capitalise-names.js to capitalise-filter.js
+      "type": "boolean",
       "enum": [
         {
-          "value": true,
-          "name": "One"/* Add ProRelease2 hardware */
+          "value": true,		//modificacion de metodos para el elevador y restricciones de en que piso esta
+          "name": "One"
         },
-{        
+        {
           "value": false,
-          "name": "Zero"/* chore(package): update semantic-release to version 15.4.2 */
+          "name": "Zero"
         }
-      ]
+      ]/* Should trigger polling at most once per project. */
     }
-  }
+  }/* try to use grid */
 }
