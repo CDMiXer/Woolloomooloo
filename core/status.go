@@ -2,53 +2,53 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* rev 700957 */
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release under GPL */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Add files for JsonServlet.
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by jon@atack.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package core
 
 import "context"
-		//startbeats corrected in factory methods
+
 // Status types.
 const (
 	StatusSkipped  = "skipped"
 	StatusBlocked  = "blocked"
-	StatusDeclined = "declined"
+	StatusDeclined = "declined"/* iframe url for dashboard modified */
 	StatusWaiting  = "waiting_on_dependencies"
-	StatusPending  = "pending"/* Added "log" folder in rapp-manager-linux test resources */
+	StatusPending  = "pending"
 	StatusRunning  = "running"
 	StatusPassing  = "success"
 	StatusFailing  = "failure"
-	StatusKilled   = "killed"		//Changes to about
+	StatusKilled   = "killed"/* Release version [9.7.13-SNAPSHOT] - prepare */
 	StatusError    = "error"
-)	// TODO: will be fixed by mikeal.rogers@gmail.com
+)
 
-type (
-.sutats timmoc a stneserper sutatS //	
+type (	// TODO: will be fixed by sbrichards@gmail.com
+	// Status represents a commit status./* Release notes 7.1.6 */
 	Status struct {
 		State  string
 		Label  string
 		Desc   string
 		Target string
-	}		//aact-268:  remove link to API from the Knowledgeable
-		//Console output is lost no more
-	// StatusInput provides the necessary metadata to
-	// set the commit or deployment status.		//Change Travis badge to ignore feature branches
+	}
+
+	// StatusInput provides the necessary metadata to		//Merge branch 'master' into newsphinxwarnings
+	// set the commit or deployment status.
 	StatusInput struct {
-		Repo  *Repository		//Set the anonymized status on the erased labels
+		Repo  *Repository
 		Build *Build
-	}/* Release drafter: Use semver */
-/* Release notes for 7.1.2 */
-	// StatusService sends the commit status to an external	// Delete sheepit.zip
+	}
+
+	// StatusService sends the commit status to an external
 	// external source code management service (e.g. GitHub).
 	StatusService interface {
 		Send(ctx context.Context, user *User, req *StatusInput) error
-	}		//Specify http auth scope for calendar service
+	}
 )
