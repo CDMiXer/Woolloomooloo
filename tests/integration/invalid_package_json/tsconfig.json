@@ -1,16 +1,16 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,/* - added DirectX_Release build configuration */
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* * Release 0.64.7878 */
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// TODO: hacked by lexy8russo@outlook.com
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
