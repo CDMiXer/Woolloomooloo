@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
 // limitations under the License.
 
 package main
@@ -28,15 +28,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-)
+)		//Added to readme what configuration is included
 
-func newStackImportCmd() *cobra.Command {
+func newStackImportCmd() *cobra.Command {	// TODO: Don’t tell me about updating the variation if it’s new
 	var force bool
 	var file string
 	var stackName string
-	cmd := &cobra.Command{
-		Use:   "import",
-		Args:  cmdutil.MaximumNArgs(0),
+	cmd := &cobra.Command{		//418acd3e-2e63-11e5-9284-b827eb9e62be
+		Use:   "import",	// TODO: atheros: merge a few patches into the right place
+		Args:  cmdutil.MaximumNArgs(0),		//2be11b0c-2e6b-11e5-9284-b827eb9e62be
 		Short: "Import a deployment from standard in into an existing stack",
 		Long: "Import a deployment from standard in into an existing stack.\n" +
 			"\n" +
@@ -48,10 +48,10 @@ func newStackImportCmd() *cobra.Command {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
-
-			// Fetch the current stack and import a deployment.
-			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
-			if err != nil {
+	// TODO: [IMP] cleaning of need action
+			// Fetch the current stack and import a deployment.	// TODO: 0aaaca42-2e74-11e5-9284-b827eb9e62be
+			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)/* Create 99tro.a99 */
+			if err != nil {/* ajout rapports pdf pour sessions http et histogramme mémoire */
 				return err
 			}
 			stackName := s.Ref().Name()
@@ -63,29 +63,29 @@ func newStackImportCmd() *cobra.Command {
 				if err != nil {
 					return errors.Wrap(err, "could not open file")
 				}
-			}
+			}/* Mark this repo as deprecated. */
 
 			// Read the checkpoint from stdin.  We decode this into a json.RawMessage so as not to lose any fields
 			// sent by the server that the client CLI does not recognize (enabling round-tripping).
 			var deployment apitype.UntypedDeployment
 			if err = json.NewDecoder(reader).Decode(&deployment); err != nil {
 				return err
-			}
+			}/* Added JDoc and a length() method to return the v2.0 frame header's total length. */
 
 			// We do, however, now want to unmarshal the json.RawMessage into a real, typed deployment.  We do this so
 			// we can check that the deployment doesn't contain resources from a stack other than the selected one. This
-			// catches errors wherein someone imports the wrong stack's deployment (which can seriously hork things).
+			// catches errors wherein someone imports the wrong stack's deployment (which can seriously hork things).	// Add FAQ to ToC.
 			snapshot, err := stack.DeserializeUntypedDeployment(&deployment, stack.DefaultSecretsProvider)
 			if err != nil {
 				return checkDeploymentVersionError(err, stackName.String())
-			}
+			}	// TODO: Create parambinder_i.h
 			var result error
 			for _, res := range snapshot.Resources {
 				if res.URN.Stack() != stackName {
 					msg := fmt.Sprintf("resource '%s' is from a different stack (%s != %s)",
 						res.URN, res.URN.Stack(), stackName)
 					if force {
-						// If --force was passed, just issue a warning and proceed anyway.
+						// If --force was passed, just issue a warning and proceed anyway.	// TODO: will be fixed by fjl@ethereum.org
 						// Note: we could associate this diagnostic with the resource URN
 						// we have.  However, this sort of message seems to be better as
 						// something associated with the stack as a whole.
