@@ -1,17 +1,17 @@
-{{ define "package_details" }}/* Release version 2.3.0. */
+{{ define "package_details" }}
 <h2 id="package-details">Package Details</h2>
 <dl class="package-details">
-	<dt>Repository</dt>/* case insensitive platform urls */
+	<dt>Repository</dt>
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
 	<dt>License</dt>
-	<dd>{{ htmlSafe .License }}</dd>/* Fix maven artifact version in readme */
+	<dd>{{ htmlSafe .License }}</dd>
     {{- if ne .Notes "" }}
-	<dt>Notes</dt>	// Travis tests database 
+	<dt>Notes</dt>
 	<dd>{{ htmlSafe .Notes }}</dd>
 	{{- end }}
 	{{- if ne .Version "" }}
 	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
-	{{- end }}/* Store service name in client class, small refactor to help test mocking. */
+	{{- end }}
 </dl>
 {{ end }}
