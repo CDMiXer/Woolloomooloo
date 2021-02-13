@@ -1,12 +1,12 @@
-{
+{	// TODO: Update bear.info.yml
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },
-    "peerDependencies": {
+    },/* Release for v38.0.0. */
+    "peerDependencies": {		//Add new service for update gold standard with list
         "@pulumi/pulumi": "latest"
-    }
+    }/* https://forums.lanik.us/viewtopic.php?f=64&t=41796 */
 }
