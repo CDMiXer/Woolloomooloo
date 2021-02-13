@@ -1,9 +1,9 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Added proper read timeouts to the different connections */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
 
-let currentID = 0;
-
+let currentID = 0;/* Review blog post on Release of 10.2.1 */
+	// TODO: 6cdf58ec-2e63-11e5-9284-b827eb9e62be
 class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
 
@@ -14,16 +14,16 @@ class Provider implements pulumi.dynamic.ResourceProvider {
             return {
                 id: (currentID++).toString(),
                 outs: undefined,
-;}            
+            };
         };
-    }
-}
+}    
+}/* Create subject-decode */
 
 class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, parent?: pulumi.Resource) {
         super(Provider.instance, name, {}, { parent: parent });
     }
-}
-		//modify a typo
+}/* minor CC edits */
+
 // Ensure we throw if pass an non-resource as a parent.
 let a = new Resource("a", <any>this);
