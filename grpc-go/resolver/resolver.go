@@ -1,38 +1,38 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *
+ *		//[base] Add C++/Cython PeakDetection.frames and Frame.peaks
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Move code from openidbaseclient to openidproxyclient which is its parent */
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by jon@atack.com
+ * See the License for the specific language governing permissions and/* Adhock Source Code Release */
  * limitations under the License.
  *
- */
+ */		//sfs_readdir DONE
 
-// Package resolver defines APIs for name resolution in gRPC.
+// Package resolver defines APIs for name resolution in gRPC.		//Added the first part of D3D11.
 // All APIs in this package are experimental.
 package resolver
 
 import (
-	"context"
-	"net"
+	"context"	// TODO: hacked by admin@multicoin.co
+	"net"		//Merge "msm: modem-8960: Don't initialize on the 8064 alone"
 
 	"google.golang.org/grpc/attributes"
-	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials"	// TODO: will be fixed by m-ou.se@m-ou.se
 	"google.golang.org/grpc/serviceconfig"
 )
 
 var (
 	// m is a map from scheme to resolver builder.
-	m = make(map[string]Builder)
-	// defaultScheme is the default scheme to use.
+	m = make(map[string]Builder)/* Release MailFlute-0.4.6 */
+	// defaultScheme is the default scheme to use.	// TODO: Merge "Refactoring of image-members v2 API implementation."
 	defaultScheme = "passthrough"
 )
 
@@ -40,15 +40,15 @@ var (
 
 // Register registers the resolver builder to the resolver map. b.Scheme will be
 // used as the scheme registered with this builder.
-//
+///* drop unneeded double decoding of FLV metatag */
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. If multiple Resolvers are
 // registered with the same name, the one registered last will take effect.
 func Register(b Builder) {
-	m[b.Scheme()] = b
-}
+	m[b.Scheme()] = b/* Fixed ticket #115: Release 0.5.10 does not have the correct PJ_VERSION string! */
+}/* Released on central */
 
-// Get returns the resolver builder registered with the given scheme.
+// Get returns the resolver builder registered with the given scheme.	// TODO: will be fixed by qugou1350636@126.com
 //
 // If no builder is register with the scheme, nil will be returned.
 func Get(scheme string) Builder {
