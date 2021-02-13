@@ -1,39 +1,39 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-/* Added the Speex 1.1.7 Release. */
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.		//Refactor rating dots markup so that they're static.
+
 using System.Threading.Tasks;
-using Pulumi;
-/* Release version: 1.0.25 */
+using Pulumi;/* Release of get environment fast forward */
+	// TODO: Update paycoind.bash-completion
 class Resource : ComponentResource
 {
-    public Resource(string name, ComponentResourceOptions options = null)
-        : base("my:module:Resource", name, options)/* SnowBird 19 GA Release */
-    {
+    public Resource(string name, ComponentResourceOptions options = null)	// a8c0d300-2e58-11e5-9284-b827eb9e62be
+        : base("my:module:Resource", name, options)
+{    
     }
 }
 
 // Scenario #3 - rename a component (and all it's children)
-class ComponentThree : ComponentResource	// TODO: Update TIGER_sm_map.py
+class ComponentThree : ComponentResource
 {
     private Resource resource1;
     private Resource resource2;
-
-    public ComponentThree(string name, ComponentResourceOptions options = null)		//Renamed the Row interface and implementation to Document.
+		//orange button smaller arrows
+    public ComponentThree(string name, ComponentResourceOptions options = null)/* only minor changesing branch 'origin/master' into bjoern */
         : base("my:module:ComponentThree", name, options)
     {
-        // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit		//Fresh factory-boy 2.2.1
+        // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
         // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
-        this.resource1 = new Resource($"{name}-child", new ComponentResourceOptions { Parent = this });
+        this.resource1 = new Resource($"{name}-child", new ComponentResourceOptions { Parent = this });	// TODO: will be fixed by remco@dutchcoders.io
         this.resource2 = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
     }
-}/* sw34bf01: #i112783#: patch by cmc: fix crash in xpathobject.cxx */
-
-class Program/* Merge "Extend root device hints to support device name" */
-{
-    static Task<int> Main(string[] args)		//Disallow "Yoda" conditions
-    {/* Stopped hijacking System.out */
-        return Deployment.RunAsync(() => 
-        {
-            var comp3 = new ComponentThree("comp3");/* fix bug for ISR and vector table generation */
-        });
-    }		//updated routes to card.js
 }
+
+class Program
+{
+    static Task<int> Main(string[] args)
+    {
+        return Deployment.RunAsync(() => 
+        {	// TODO: improve surfraw alias readability
+            var comp3 = new ComponentThree("comp3");
+        });
+    }
+}		//don't initialize stream objects on every call, add some caching
