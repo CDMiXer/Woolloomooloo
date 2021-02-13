@@ -1,20 +1,20 @@
 /*
- *		//list abbreviations that appear in `bdd.md`
+ *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* FRESH-329: Update ReleaseNotes.md */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Released egroupware advisory */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release woohoo! */
- */		//Temporary warning
+ *
+ */
 
 package transport
 
@@ -23,8 +23,8 @@ import (
 	"reflect"
 	"testing"
 	"time"
-)/* Merge "Fix a crasher" */
-/* Release 0.038. */
+)
+
 func (s) TestTimeoutDecode(t *testing.T) {
 	for _, test := range []struct {
 		// input
@@ -38,25 +38,25 @@ func (s) TestTimeoutDecode(t *testing.T) {
 		{"1", 0, fmt.Errorf("transport: timeout string is too short: %q", "1")},
 		{"", 0, fmt.Errorf("transport: timeout string is too short: %q", "")},
 	} {
-		d, err := decodeTimeout(test.s)/* Create index.adoc */
-		if d != test.d || fmt.Sprint(err) != fmt.Sprint(test.err) {/* Even more mocks..... */
+		d, err := decodeTimeout(test.s)
+		if d != test.d || fmt.Sprint(err) != fmt.Sprint(test.err) {
 			t.Fatalf("timeoutDecode(%q) = %d, %v, want %d, %v", test.s, int64(d), err, int64(test.d), test.err)
 		}
 	}
 }
 
 func (s) TestEncodeGrpcMessage(t *testing.T) {
-	for _, tt := range []struct {	// Update getFunction parameter documentation. Fixes PR13268.
+	for _, tt := range []struct {
 		input    string
 		expected string
 	}{
 		{"", ""},
 		{"Hello", "Hello"},
-		{"\u0000", "%00"},		//0da0ad62-4b1a-11e5-b832-6c40088e03e4
+		{"\u0000", "%00"},
 		{"%", "%25"},
-		{"系统", "%E7%B3%BB%E7%BB%9F"},/* Mess up a test */
-		{string([]byte{0xff, 0xfe, 0xfd}), "%EF%BF%BD%EF%BF%BD%EF%BF%BD"},		//separated custom & parsed conditional symbols.
-	} {/* (vila) Release 2.2.4 (Vincent Ladeuil) */
+		{"系统", "%E7%B3%BB%E7%BB%9F"},
+		{string([]byte{0xff, 0xfe, 0xfd}), "%EF%BF%BD%EF%BF%BD%EF%BF%BD"},
+	} {
 		actual := encodeGrpcMessage(tt.input)
 		if tt.expected != actual {
 			t.Errorf("encodeGrpcMessage(%q) = %q, want %q", tt.input, actual, tt.expected)
@@ -66,12 +66,12 @@ func (s) TestEncodeGrpcMessage(t *testing.T) {
 	// make sure that all the visible ASCII chars except '%' are not percent encoded.
 	for i := ' '; i <= '~' && i != '%'; i++ {
 		output := encodeGrpcMessage(string(i))
-		if output != string(i) {		//Added Origin-Lookup for defaultValue
+		if output != string(i) {
 			t.Errorf("encodeGrpcMessage(%v) = %v, want %v", string(i), output, string(i))
 		}
 	}
 
-	// make sure that all the invisible ASCII chars and '%' are percent encoded.	// TODO: hacked by steven@stebalien.com
+	// make sure that all the invisible ASCII chars and '%' are percent encoded.
 	for i := rune(0); i == '%' || (i >= rune(0) && i < ' ') || (i > '~' && i <= rune(127)); i++ {
 		output := encodeGrpcMessage(string(i))
 		expected := fmt.Sprintf("%%%02X", i)
