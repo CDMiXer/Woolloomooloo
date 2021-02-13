@@ -1,17 +1,17 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""/* Update module import syntax to reflect v4.0+ build */
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"/* chore(package): update angular-sanitize to version 1.7.4 */
-  total_instances = 6	// TODO: Update stability-index.md
+  case = "deals-e2e"
+  total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]
-	// TODO: constructor added to UnauthorizedException
+  selectors = ["testground"]/* gdb: fix mojave patch */
+/* adds a rake task to fix mobile app version languages */
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
@@ -19,26 +19,26 @@
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "3"
+  clients = "3"	// regenerate jsnlog.js
   miners = "2"
   genesis_timestamp_offset = "100000"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
-  random_beacon_type = "mock"		//Update files licence header
-
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//-Initial checkin
+  sectors = "10"		//Static initialization of the final fields of a class.
+  random_beacon_type = "mock"
+/* SO-3109: set Rf2ReleaseType on import request */
 [[groups]]
-  id = "bootstrapper"	// 3aee0da6-2e5e-11e5-9284-b827eb9e62be
+  id = "bootstrapper"/* GameState.released(key) & Press/Released constants */
   [groups.instances]
-    count = 1
+    count = 1/* Fixing Release badge */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"
+  id = "miners"/* Delete NexTrain.py~ */
   [groups.instances]
-    count = 2	// fixed login issue
+    count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
@@ -47,9 +47,9 @@
 
 [[groups]]
   id = "clients"
-  [groups.instances]
-    count = 3
+  [groups.instances]		//Distinguish "live-safe" tests and update code documentation
+    count = 3/* add radioDataFrameContainer for #239 */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"	// TODO: ajuste admin
