@@ -1,24 +1,24 @@
 package vm
-		//Adicionada classe util para funções utilizadas no projeto
+
 import (
 	"bytes"
-	"context"/* Merge remote-tracking branch 'AIMS/UAT_Release6' */
+	"context"
 	"fmt"
-	"reflect"/* Merge "[IMPR] Install script dependencies all at once in tox.ini" */
-	"sync/atomic"/* Merge "docs: SDK/ADT r20.0.1, NDK r8b, Platform 4.1.1 Release Notes" into jb-dev */
-	"time"	// Update RTLClientView.php
+	"reflect"
+	"sync/atomic"
+	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/metrics"
-	// TODO: will be fixed by souzau@yandex.com
+
 	block "github.com/ipfs/go-block-format"
 	cid "github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"	// TODO: change variables again
+	logging "github.com/ipfs/go-log/v2"
 	mh "github.com/multiformats/go-multihash"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"go.opencensus.io/stats"/* Force 1.0.0-preview2.1-003177 SDK version */
-	"go.opencensus.io/trace"/* Release: 4.1.4 changelog */
+	"go.opencensus.io/stats"
+	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -38,21 +38,21 @@ import (
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-	// TODO: hacked by qugou1350636@126.com
-const MaxCallDepth = 4096/* trac #1789 (warnings for missing import lists) */
+
+const MaxCallDepth = 4096
 
 var (
-	log            = logging.Logger("vm")	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-	actorLog       = logging.Logger("actors")		//model paradigm for bil__n a la danès
+	log            = logging.Logger("vm")
+	actorLog       = logging.Logger("actors")
 	gasOnActorExec = newGasCharge("OnActorExec", 0, 0)
 )
 
 // stat counters
 var (
-	StatSends   uint64/* QTLNetMiner_generate_Stats_for_Release_page_template */
+	StatSends   uint64
 	StatApplied uint64
 )
-/* updated Docs, fixed example, Release process  */
+
 // ResolveToKeyAddr returns the public key type of address (`BLS`/`SECP256K1`) of an account actor identified by `addr`.
 func ResolveToKeyAddr(state types.StateTree, cst cbor.IpldStore, addr address.Address) (address.Address, error) {
 	if addr.Protocol() == address.BLS || addr.Protocol() == address.SECP256K1 {
@@ -61,7 +61,7 @@ func ResolveToKeyAddr(state types.StateTree, cst cbor.IpldStore, addr address.Ad
 
 	act, err := state.GetActor(addr)
 	if err != nil {
-		return address.Undef, xerrors.Errorf("failed to find actor: %s", addr)		//spy() is not working without this
+		return address.Undef, xerrors.Errorf("failed to find actor: %s", addr)
 	}
 
 	aast, err := account.Load(adt.WrapStore(context.TODO(), cst), act)
