@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Pulumi;
-
+using Pulumi;	// Add bot definition
+/* Start on 0.9.13 */
 class Program
-{
-    static Task<int> Main() => Deployment.RunAsync<MyStack>();	// TODO: hacked by magik6k@gmail.com
+{/* Release for 2.1.0 */
+    static Task<int> Main() => Deployment.RunAsync<MyStack>();
 }
