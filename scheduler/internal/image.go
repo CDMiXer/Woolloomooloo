@@ -1,18 +1,18 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//move deviceinfo into wiki - readme.md updated
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
+/* 4b88f63a-2e1d-11e5-affc-60f81dce716c */
+// +build !oss
 
-// +build !oss		//game: start of geoip merge refs #211
-
-package internal
+package internal		//5c2f9bee-2e48-11e5-9284-b827eb9e62be
 
 var defaultImage = "drone/controller:1"
 
 // DefaultImage returns the default dispatch image if none
 // is specified.
-func DefaultImage(image string) string {/* Release 1.9.2.0 */
-	if image == "" {/* [feenkcom/gtoolkit#1319]  add expanded and collapsed events */
+func DefaultImage(image string) string {
+	if image == "" {
 		return defaultImage
-	}/* Release notes for 2.8. */
+	}
 	return image
 }
