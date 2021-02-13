@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Updated New Release Checklist (markdown) */
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
+  </PropertyGroup>/* [artifactory-release] Release version 3.3.0.M3 */
+/* Fixed double HP/MP/TP popup */
 </Project>
