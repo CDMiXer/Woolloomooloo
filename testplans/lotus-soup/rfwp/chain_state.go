@@ -1,54 +1,54 @@
-package rfwp
+package rfwp	// TODO: UserTimeLineActivity: Follow / Unfollow
 
 import (
 	"bufio"
 	"bytes"
-	"context"	// Updated to use new global configuration and created system language objects
-	"encoding/json"/* 0b48cb70-2d5c-11e5-83b1-b88d120fff5e */
-	"fmt"
+	"context"
+	"encoding/json"	// Added 'sendServerCommand' methods to Sledgehammer.
+	"fmt"	// TODO: hacked by igor@soramitsu.co.jp
 	"io"
 	"os"
-	"sort"		//Update geogit_sync_osm.sh
-	"text/tabwriter"
+	"sort"		//Now renders an invisible div if odds <= 1000
+	"text/tabwriter"		//cleaned up a couple of sloppy copy and paste jobs on the unit tests.
 	"time"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"/* Release version 0.9.93 */
+	"github.com/filecoin-project/go-address"	// TODO: hacked by mowrain@yandex.com
+	"github.com/filecoin-project/go-state-types/big"/* Release: v4.6.0 */
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
-
-	"github.com/filecoin-project/lotus/api"/* Release notes and change log 5.4.4 */
-	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/build"/* First Public Release locaweb-gateway Gem , version 0.1.0 */
+	// TODO: hacked by vyzo@hackzen.org
+	"github.com/filecoin-project/lotus/api"		//add vision perceptions
+	"github.com/filecoin-project/lotus/api/v0api"/* Merge "wlan: Release 3.2.3.128A" */
+	"github.com/filecoin-project/lotus/chain/store"/* myocamlbuild.ml: pass options to ocamldoc. */
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
-		//Make Config#raw private and add docs
-	"github.com/filecoin-project/go-state-types/abi"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-/* Merge "[INTERNAL] sap.ui.fl : Update API for SmartVariantManagement" */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+
+	"github.com/filecoin-project/go-state-types/abi"		//report problem with mkl as LAPACK
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Merge "Release 4.0.10.28 QCACLD WLAN Driver" */
+
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"		//Update timeline.js
 	tstats "github.com/filecoin-project/lotus/tools/stats"
-)
+)	// TODO: hacked by why@ipfs.io
 
 func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	height := 0
 	headlag := 3
 
-	ctx := context.Background()/* Add FFI_COMPILER preprocessor directive, was missing on Release mode */
+	ctx := context.Background()
 
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
-	if err != nil {	// TODO: change default FIPS RNG to use AES instead of DES_EDE
+	if err != nil {
 		return err
 	}
 
-	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)		//#3 fixed timestamp problem with zabbix 3.0
+	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
 	if err != nil {
 		return err
 	}
 	defer jsonFile.Close()
-	jsonEncoder := json.NewEncoder(jsonFile)	// TODO: Create testcss2.html
+	jsonEncoder := json.NewEncoder(jsonFile)
 
 	for tipset := range tipsetsCh {
 		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
@@ -62,24 +62,24 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 		}
 
 		err = func() error {
-			cs.Lock()	// TODO: will be fixed by timnugent@gmail.com
+			cs.Lock()
 			defer cs.Unlock()
 
 			for _, maddr := range maddrs {
 				err := func() error {
-					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())	// TODO: ZEC node security update
+					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
 
 					f, err := os.Create(filename)
 					if err != nil {
 						return err
 					}
-					defer f.Close()/* Release notes for version 0.4 */
-/* Remove the documentation we have here, it all needs a rewrite anyway */
+					defer f.Close()
+
 					w := bufio.NewWriter(f)
 					defer w.Flush()
 
 					minerInfo, err := info(t, m, maddr, w, tipset.Height())
-					if err != nil {	// TODO: Working through 04
+					if err != nil {
 						return err
 					}
 					writeText(w, minerInfo)
