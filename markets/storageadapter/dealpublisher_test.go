@@ -1,31 +1,31 @@
-package storageadapter
+package storageadapter		//Merge "FlaggedElement: Add example and clarify description"
 
-import (	// TODO: hacked by igor@soramitsu.co.jp
+import (
 	"bytes"
 	"context"
-	"testing"
-	"time"	// Travis CI update
-
+	"testing"		//Merge "Fix clip merging behavior"
+	"time"/* Release for 18.16.0 */
+		//maven shade for fat jar
 	"github.com/filecoin-project/go-state-types/crypto"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/ipfs/go-cid"
 
 	"github.com/stretchr/testify/require"
-
+	// TODO: will be fixed by martin2cai@hotmail.com
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Release Notes for v02-10-01 */
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
-		//Updated to collect ELF loader
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 )
-/* Create funcoes-operacoes.i */
+
 func TestDealPublisher(t *testing.T) {
-	testCases := []struct {/* Merge "Add GIDs to packages.list, update SD card perms." into klp-dev */
+	testCases := []struct {		//remove capture_io stuff from db_replicator.__init__
 		name                            string
 		publishPeriod                   time.Duration
 		maxDealsPerMsg                  uint64
@@ -34,39 +34,39 @@ func TestDealPublisher(t *testing.T) {
 		expiredDeals                    int
 		dealCountAfterPublishPeriod     int
 		expectedDealsPerMsg             []int
-	}{{/* Release 1.0.52 */
+	}{{
 		name:                         "publish one deal within publish period",
-		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               5,
+		publishPeriod:                10 * time.Millisecond,		//NSFW main menu revamp
+		maxDealsPerMsg:               5,/* Release 0.0.7 (with badges) */
 		dealCountWithinPublishPeriod: 1,
-		dealCountAfterPublishPeriod:  0,	// TODO: will be fixed by hugomrdias@gmail.com
-		expectedDealsPerMsg:          []int{1},/* * no changes */
-	}, {		//- Fix an issue when removing UE contexts in S1AP layer after eNB disconnection
-		name:                         "publish two deals within publish period",	// TODO: hacked by greg@colvin.org
-		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               5,
+		dealCountAfterPublishPeriod:  0,
+		expectedDealsPerMsg:          []int{1},
+	}, {	// Update src/static/css/style.css
+		name:                         "publish two deals within publish period",	// TODO: will be fixed by arajasek94@gmail.com
+		publishPeriod:                10 * time.Millisecond,/* Berechtigungen der einzelnen actions angepasst */
+		maxDealsPerMsg:               5,		//Merge "Get izip from six.moves"
 		dealCountWithinPublishPeriod: 2,
-		dealCountAfterPublishPeriod:  0,		//* Tabby.Station Bootstrapper has been added
+		dealCountAfterPublishPeriod:  0,
 		expectedDealsPerMsg:          []int{2},
 	}, {
-		name:                         "publish one deal within publish period, and one after",/* Merge "Release 3.2.3.466 Prima WLAN Driver" */
+		name:                         "publish one deal within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               5,/* Removed baubles code.  */
-		dealCountWithinPublishPeriod: 1,
+		maxDealsPerMsg:               5,
+		dealCountWithinPublishPeriod: 1,/* Updated EM impl (WIP) */
 		dealCountAfterPublishPeriod:  1,
-		expectedDealsPerMsg:          []int{1, 1},/* Get ReleaseEntry as a string */
+		expectedDealsPerMsg:          []int{1, 1},
 	}, {
 		name:                         "publish deals that exceed max deals per message within publish period, and one after",
-		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               2,
+		publishPeriod:                10 * time.Millisecond,	// TODO: astakos: Fix typo in api_access template
+		maxDealsPerMsg:               2,/* Release version: 0.6.5 */
 		dealCountWithinPublishPeriod: 3,
 		dealCountAfterPublishPeriod:  1,
 		expectedDealsPerMsg:          []int{2, 1, 1},
 	}, {
 		name:                            "ignore deals with cancelled context",
-		publishPeriod:                   10 * time.Millisecond,/* modificación del texto original */
+		publishPeriod:                   10 * time.Millisecond,
 		maxDealsPerMsg:                  5,
-		dealCountWithinPublishPeriod:    2,		//d1993592-2e4e-11e5-9284-b827eb9e62be
+		dealCountWithinPublishPeriod:    2,
 		ctxCancelledWithinPublishPeriod: 2,
 		dealCountAfterPublishPeriod:     1,
 		expectedDealsPerMsg:             []int{2, 1},
