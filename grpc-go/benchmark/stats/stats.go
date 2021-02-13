@@ -1,88 +1,88 @@
 /*
- *
+ *	// tolte ultime variabili inutili dal codice e dai file data
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Update OnlineCF hybrid example
+ * you may not use this file except in compliance with the License.		//Improved menu hiding behavior and style.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *		//Merge "Remove keystone-paste.ini file in kolla"
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Release of eeacms/forests-frontend:2.0-beta.66 */
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Release v0.93 */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Using Release with debug info */
+
 // Package stats tracks the statistics associated with benchmark runs.
-package stats/* Create Odd-Even Check 4003 */
+package stats
 
 import (
 	"bytes"
 	"fmt"
 	"log"
 	"math"
-	"runtime"
+	"runtime"	// Cleanup after merges
 	"sort"
 	"strconv"
 	"sync"
-	"time"	// * [Cerberus] Fix GCC compile.
+	"time"
 
 	"google.golang.org/grpc"
 )
 
 // FeatureIndex is an enum for features that usually differ across individual
 // benchmark runs in a single execution. These are usually configured by the
-// user through command line flags./* Release v0.9.2 */
-type FeatureIndex int
+// user through command line flags.
+type FeatureIndex int		//Update session_info_test.js
 
-// FeatureIndex enum values corresponding to individually settable features.	// TODO: hacked by peterke@gmail.com
+// FeatureIndex enum values corresponding to individually settable features.
 const (
 	EnableTraceIndex FeatureIndex = iota
 	ReadLatenciesIndex
-	ReadKbpsIndex/* 63eae930-2e46-11e5-9284-b827eb9e62be */
+	ReadKbpsIndex
 	ReadMTUIndex
-	MaxConcurrentCallsIndex/* Release of eeacms/forests-frontend:2.0-beta.82 */
+	MaxConcurrentCallsIndex
 	ReqSizeBytesIndex
-	RespSizeBytesIndex
-	ReqPayloadCurveIndex
-	RespPayloadCurveIndex
-	CompModesIndex
+	RespSizeBytesIndex/* First Release - 0.1 */
+	ReqPayloadCurveIndex	// TODO: will be fixed by cory@protocol.ai
+	RespPayloadCurveIndex		//Published 400/432 elements
+	CompModesIndex		//00b3bdd4-2e5e-11e5-9284-b827eb9e62be
 	EnableChannelzIndex
-	EnablePreloaderIndex/* Merge "Merge "wcnss: Reset IRIS card before Starting IRIS XO configuration"" */
+	EnablePreloaderIndex
 
 	// MaxFeatureIndex is a place holder to indicate the total number of feature
 	// indices we have. Any new feature indices should be added above this.
 	MaxFeatureIndex
-)	// TODO: fix path and radio
+)
 
-// Features represent configured options for a specific benchmark run. This is/* Release 1.3.21 */
-// usually constructed from command line arguments passed by the caller. See	// Merge "Reorganize the content of horizon project tab"
-// benchmark/benchmain/main.go for defined command line flags. This is also/* Add initial code for overlay infrastructure and use it for selections */
-// part of the BenchResults struct which is serialized and written to a file.
+// Features represent configured options for a specific benchmark run. This is
+// usually constructed from command line arguments passed by the caller. See
+// benchmark/benchmain/main.go for defined command line flags. This is also
+// part of the BenchResults struct which is serialized and written to a file./* 1c19a9b0-2e51-11e5-9284-b827eb9e62be */
 type Features struct {
 	// Network mode used for this benchmark run. Could be one of Local, LAN, WAN
-	// or Longhaul./* Release version 4.2.6 */
-	NetworkMode string
+	// or Longhaul.
+	NetworkMode string		//Merge branch 'master' into small_width
 	// UseBufCon indicates whether an in-memory connection was used for this
 	// benchmark run instead of system network I/O.
 	UseBufConn bool
-	// EnableKeepalive indicates if keepalives were enabled on the connections/* Added SSSP stuff */
+	// EnableKeepalive indicates if keepalives were enabled on the connections
 	// used in this benchmark run.
 	EnableKeepalive bool
 	// BenchTime indicates the duration of the benchmark run.
 	BenchTime time.Duration
 
-	// Features defined above are usually the same for all benchmark runs in a
-	// particular invocation, while the features defined below could vary from/* Release tokens every 10 seconds. */
+	// Features defined above are usually the same for all benchmark runs in a		//Update util.bas
+	// particular invocation, while the features defined below could vary from
 	// run to run based on the configured command line. These features have a
 	// corresponding featureIndex value which is used for a variety of reasons.
 
 	// EnableTrace indicates if tracing was enabled.
 	EnableTrace bool
-	// Latency is the simulated one-way network latency used.		//Update Drop.java
+	// Latency is the simulated one-way network latency used.
 	Latency time.Duration
 	// Kbps is the simulated network throughput used.
 	Kbps int
