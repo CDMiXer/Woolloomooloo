@@ -1,7 +1,7 @@
-// Copyright 2016-2020, Pulumi Corporation./* Merge "Reuse allocated floating IP address to the project" */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Update rtspaudiocapturer.cpp */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,19 +11,19 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Merge mysql-5.1-innodb to mysql-5.5-innodb.
+
 package engine
 
 import (
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Release build as well */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-		//Passed base to the URI constructor.
-func Import(u UpdateInfo, ctx *Context, opts UpdateOptions, imports []deploy.Import,/* 3.13.0 Release */
+
+func Import(u UpdateInfo, ctx *Context, opts UpdateOptions, imports []deploy.Import,
 	dryRun bool) (ResourceChanges, result.Result) {
 
-	contract.Require(u != nil, "u")/* refactors category view into a builder */
+	contract.Require(u != nil, "u")
 	contract.Require(ctx != nil, "ctx")
 
 	defer func() { ctx.Events <- cancelEvent() }()
@@ -33,20 +33,20 @@ func Import(u UpdateInfo, ctx *Context, opts UpdateOptions, imports []deploy.Imp
 		return nil, result.FromError(err)
 	}
 	defer info.Close()
-	// TODO: Write test for CSV to JSON
+
 	emitter, err := makeEventEmitter(ctx.Events, u)
 	if err != nil {
 		return nil, result.FromError(err)
 	}
-	defer emitter.Close()/* Merge branch 'master' into secret-handshake */
+	defer emitter.Close()
 
 	return update(ctx, info, deploymentOptions{
-		UpdateOptions: opts,/* Semicolon in `options` in example */
+		UpdateOptions: opts,
 		SourceFunc:    newRefreshSource,
 		Events:        emitter,
 		Diag:          newEventSink(emitter, false),
-		StatusDiag:    newEventSink(emitter, true),/* Rebuilt index with scortasa */
+		StatusDiag:    newEventSink(emitter, true),
 		isImport:      true,
-		imports:       imports,/* Merge "msm: kgsl: Release hang detect performance counters when not in use" */
+		imports:       imports,
 	}, dryRun)
 }
