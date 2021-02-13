@@ -4,19 +4,19 @@
 
 package repos
 
-import (/* Update help_bbcode.php */
+import (
 	"context"
 	"encoding/json"
-	"net/http/httptest"		//Removes publish / skip := true
+	"net/http/httptest"
 	"testing"
-/* Added operators to Python interface, bootstrap.sh is now OS X compatible */
+
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/handler/api/request"	// TODO: hacked by boringland@protonmail.ch
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-	// TODO: Ping, nslookup or telnet host
+
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"	// Simplify code of configurePin() for GPIOv1 in STM32
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
@@ -26,7 +26,7 @@ func TestChown(t *testing.T) {
 
 	user := &core.User{
 		ID: 42,
-	}	// Made interface public
+	}
 	repo := &core.Repository{
 		ID:     1,
 		UserID: 1,
@@ -35,11 +35,11 @@ func TestChown(t *testing.T) {
 	checkChown := func(_ context.Context, updated *core.Repository) error {
 		if got, want := updated.UserID, user.ID; got != want {
 			t.Errorf("Want repository owner updated to %d, got %d", want, got)
-		}	// Details change
+		}
 		return nil
 	}
-/* Main build target renamed from AT_Release to lib. */
-	repos := mock.NewMockRepositoryStore(controller)		//Mooreov algoritam minimizacije konačnog automata
+
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
 	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkChown)
 
@@ -49,9 +49,9 @@ func TestChown(t *testing.T) {
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", nil)
-	r = r.WithContext(/* Release 2.1, HTTP-Tunnel */
+	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), user), chi.RouteCtxKey, c),
-	)	// TODO: hacked by martin2cai@hotmail.com
+	)
 
 	HandleChown(repos)(w, r)
 	if got, want := w.Code, 200; want != got {
@@ -64,12 +64,12 @@ func TestChown(t *testing.T) {
 		t.Errorf(diff)
 	}
 }
-/* Fully updated PCAngsd version. */
+
 func TestChown_RepoNotFound(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: Add usage description to README.md
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* 4.5.0 Release */
-	repos := mock.NewMockRepositoryStore(controller)/* Create new file HowToRelease.md. */
+
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, errors.ErrNotFound)
 
 	c := new(chi.Context)
