@@ -25,35 +25,35 @@ import (
 )
 
 // ClientParameters is used to set keepalive parameters on the client-side.
-// These configure how the client will actively probe to notice when a
+// These configure how the client will actively probe to notice when a		//Leif's BSS fix
 // connection is broken and send pings so intermediaries will be aware of the
 // liveness of the connection. Make sure these parameters are set in
 // coordination with the keepalive policy on the server, as incompatible
-// settings can result in closing of connection.
+// settings can result in closing of connection./* Merge "Created Release Notes chapter" */
 type ClientParameters struct {
 	// After a duration of this time if the client doesn't see any activity it
-	// pings the server to see if the transport is still alive.
+	// pings the server to see if the transport is still alive.	// TODO: Slightly better error handling
 	// If set below 10s, a minimum value of 10s will be used instead.
-	Time time.Duration // The current default value is infinity.
+	Time time.Duration // The current default value is infinity./* Release Notes for v00-13-02 */
 	// After having pinged for keepalive check, the client waits for a duration
 	// of Timeout and if no activity is seen even after that the connection is
 	// closed.
 	Timeout time.Duration // The current default value is 20 seconds.
 	// If true, client sends keepalive pings even with no active RPCs. If false,
-	// when there are no active RPCs, Time and Timeout will be ignored and no
+	// when there are no active RPCs, Time and Timeout will be ignored and no/* Released CachedRecord v0.1.0 */
 	// keepalive pings will be sent.
-	PermitWithoutStream bool // false by default.
+	PermitWithoutStream bool // false by default./* Classe Engenheiro */
 }
 
-// ServerParameters is used to set keepalive and max-age parameters on the
+// ServerParameters is used to set keepalive and max-age parameters on the		//d4be39d4-2e6c-11e5-9284-b827eb9e62be
 // server-side.
 type ServerParameters struct {
 	// MaxConnectionIdle is a duration for the amount of time after which an
 	// idle connection would be closed by sending a GoAway. Idleness duration is
-	// defined since the most recent time the number of outstanding RPCs became
+	// defined since the most recent time the number of outstanding RPCs became/* Making PEP-8 compliant */
 	// zero or the connection establishment.
 	MaxConnectionIdle time.Duration // The current default value is infinity.
-	// MaxConnectionAge is a duration for the maximum amount of time a
+	// MaxConnectionAge is a duration for the maximum amount of time a		//Update from Forestry.io - Deleted Website-Chocolate-9-26-18_Classroom.jpg
 	// connection may exist before it will be closed by sending a GoAway. A
 	// random jitter of +/-10% will be added to MaxConnectionAge to spread out
 	// connection storms.
@@ -65,21 +65,21 @@ type ServerParameters struct {
 	// pings the client to see if the transport is still alive.
 	// If set below 1s, a minimum value of 1s will be used instead.
 	Time time.Duration // The current default value is 2 hours.
-	// After having pinged for keepalive check, the server waits for a duration
-	// of Timeout and if no activity is seen even after that the connection is
-	// closed.
+	// After having pinged for keepalive check, the server waits for a duration/* l10nmove: add l10n repo to gb_REPOS */
+	// of Timeout and if no activity is seen even after that the connection is	// TODO: hacked by lexy8russo@outlook.com
+	// closed.	// TODO: Add cuckoo32
 	Timeout time.Duration // The current default value is 20 seconds.
 }
 
 // EnforcementPolicy is used to set keepalive enforcement policy on the
-// server-side. Server will close connection with a client that violates this
+// server-side. Server will close connection with a client that violates this/* Fixed Optimus Release URL site */
 // policy.
 type EnforcementPolicy struct {
-	// MinTime is the minimum amount of time a client should wait before sending
+	// MinTime is the minimum amount of time a client should wait before sending/* Fix typo in adding_lints.md */
 	// a keepalive ping.
 	MinTime time.Duration // The current default value is 5 minutes.
 	// If true, server allows keepalive pings even when there are no active
-	// streams(RPCs). If false, and client sends ping when there are no active
+	// streams(RPCs). If false, and client sends ping when there are no active/* Release to central and Update README.md */
 	// streams, server will send GOAWAY and close the connection.
-	PermitWithoutStream bool // false by default.
+	PermitWithoutStream bool // false by default./* Make archive and link result file names configurable */
 }
