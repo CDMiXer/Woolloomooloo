@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Exe</OutputType>/* @Release [io7m-jcanephora-0.9.15] */
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
-  </PropertyGroup>
+  </PropertyGroup>/* Added logic to skip tags */
 
   <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
-  </ItemGroup>
-
+  </ItemGroup>		//fix performance issue. add unit test. jira TANGOCORE-77
+		//Add #copyWithAnnouncer (pair-programmed with Milton)
 </Project>
