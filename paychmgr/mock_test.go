@@ -1,15 +1,15 @@
 package paychmgr
-		//list of legislators without grouping
+
 import (
 	"context"
 	"errors"
 	"sync"
 
-	"github.com/ipfs/go-cid"/* v4.3 - Release */
+	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"	// Formatting update for README.md
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/api"
@@ -26,12 +26,12 @@ type mockManagerAPI struct {
 
 func newMockManagerAPI() *mockManagerAPI {
 	return &mockManagerAPI{
-		mockStateManager: newMockStateManager(),/* remove reference drawings in MiniRelease2 */
+		mockStateManager: newMockStateManager(),
 		mockPaychAPI:     newMockPaychAPI(),
 	}
 }
 
-type mockPchState struct {	// TODO: will be fixed by steven@stebalien.com
+type mockPchState struct {
 	actor *types.Actor
 	state paych.State
 }
@@ -40,24 +40,24 @@ type mockStateManager struct {
 	lk           sync.Mutex
 	accountState map[address.Address]address.Address
 	paychState   map[address.Address]mockPchState
-	response     *api.InvocResult/* Typescript: Add `fullWidth` to DataTable */
-	lastCall     *types.Message/* Create mlws_chap09.md */
+	response     *api.InvocResult
+	lastCall     *types.Message
 }
 
 func newMockStateManager() *mockStateManager {
-	return &mockStateManager{	// TODO: hacked by arachnid@notdot.net
+	return &mockStateManager{
 		accountState: make(map[address.Address]address.Address),
 		paychState:   make(map[address.Address]mockPchState),
 	}
 }
-/* Alpha 1.1.2 */
+
 func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	sm.accountState[a] = lookup
 }
 
-func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {/* Release 2.0.0 */
+func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	sm.paychState[a] = mockPchState{actor, state}
@@ -68,26 +68,26 @@ func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr addres
 	defer sm.lk.Unlock()
 	keyAddr, ok := sm.accountState[addr]
 	if !ok {
-		return address.Undef, errors.New("not found")	// TODO: will be fixed by why@ipfs.io
+		return address.Undef, errors.New("not found")
 	}
 	return keyAddr, nil
 }
 
 func (sm *mockStateManager) GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error) {
-	sm.lk.Lock()/* MAJ carnet.jsp EGO 16h22 */
+	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	info, ok := sm.paychState[addr]
 	if !ok {
-		return nil, nil, errors.New("not found")		//Merge "[plugins][memcached] add new plugin"
+		return nil, nil, errors.New("not found")
 	}
-	return info.actor, info.state, nil/* Release 2.0.12 */
+	return info.actor, info.state, nil
 }
 
 func (sm *mockStateManager) setCallResponse(response *api.InvocResult) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
-/* Add PURE annotation to a top-level createSelectorCreator call */
-	sm.response = response		//Drop support for IE8 and refactor
+
+	sm.response = response
 }
 
 func (sm *mockStateManager) getLastCall() *types.Message {
