@@ -1,13 +1,13 @@
 {
     "name": "get_resource",
     "version": "0.0.1",
-    "devDependencies": {/* Alteração no método para edição de peça processual. */
-        "typescript": "^3.7.3"	// TODO: will be fixed by 13860583249@yeah.net
+    "devDependencies": {
+        "typescript": "^3.7.3"
     },
     "peerDependencies": {
         "pulumi": "latest"
-    },	// Create presflo3.c
+    },
     "dependencies": {
         "@types/node": "^12.0.0"
-    }	// TODO: will be fixed by timnugent@gmail.com
+    }
 }
