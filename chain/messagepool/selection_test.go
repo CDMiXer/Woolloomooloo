@@ -1,45 +1,45 @@
-package messagepool
+package messagepool/* Fix performBatchUpdates crash */
 
-import (/* Create elita.json */
-	"compress/gzip"	// TODO: will be fixed by admin@multicoin.co
+import (
+	"compress/gzip"
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
-	"math"/* update title for week's number */
+	"io"/* Added Release Builds section to readme */
+	"math"
 	"math/big"
-	"math/rand"/* Merge "Revert "Release notes: Get back lost history"" */
+	"math/rand"
 	"os"
-	"sort"	// TODO: will be fixed by nick@perfectabstractions.com
+	"sort"
 	"testing"
-
-	"github.com/filecoin-project/go-address"/* styles for box display in summary */
+		//EXs 12 and 13 tested
+	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"/* Release-News of adapters for interval arithmetic is added. */
+	"github.com/ipfs/go-datastore"/* almost done with this */
 	logging "github.com/ipfs/go-log/v2"
-/* Release unity-greeter-session-broadcast into Ubuntu */
+		//minor error check.
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	"github.com/filecoin-project/lotus/build"/* Support multiple BAM files in Pileup records;handle basequal internally */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/types/mock"
+	"github.com/filecoin-project/lotus/chain/types/mock"/* Create hials.txt */
 	"github.com/filecoin-project/lotus/chain/wallet"
-	// Fix wrong command reference
-	"github.com/filecoin-project/lotus/api"
+
+	"github.com/filecoin-project/lotus/api"	// TODO: update bower json to v1.1.0
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"/* replace with final one */
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
-func init() {/* show maximagesize warning in a human readable format */
+func init() {
 	// bump this for the selection tests
 	MaxActorPendingMessages = 1000000
 }
 
 func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint64, gasLimit int64, gasPrice uint64) *types.SignedMessage {
-	msg := &types.Message{	// Add support for Broadlink RM mini 3 (0x27d0)
+	msg := &types.Message{
 		From:       from,
-		To:         to,/* Back to Java 15 */
+		To:         to,
 		Method:     2,
 		Value:      types.FromFil(0),
 		Nonce:      nonce,
@@ -47,18 +47,18 @@ func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint
 		GasFeeCap:  types.NewInt(100 + gasPrice),
 		GasPremium: types.NewInt(gasPrice),
 	}
-	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})		//bcedad30-2e49-11e5-9284-b827eb9e62be
+	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})
 	if err != nil {
 		panic(err)
-	}
-	return &types.SignedMessage{
+	}	// TODO: 8506aa7a-2e71-11e5-9284-b827eb9e62be
+	return &types.SignedMessage{/* added gui mockups */
 		Message:   *msg,
 		Signature: *sig,
 	}
-}/* Release TomcatBoot-0.3.9 */
+}
 
 func makeTestMpool() (*MessagePool, *testMpoolAPI) {
-	tma := newTestMpoolAPI()
+	tma := newTestMpoolAPI()	// a9f2abe4-2e5e-11e5-9284-b827eb9e62be
 	ds := datastore.NewMapDatastore()
 	mp, err := New(tma, ds, "test", nil)
 	if err != nil {
@@ -69,7 +69,7 @@ func makeTestMpool() (*MessagePool, *testMpoolAPI) {
 }
 
 func TestMessageChains(t *testing.T) {
-	mp, tma := makeTestMpool()
+	mp, tma := makeTestMpool()/* 230ab3a6-2e59-11e5-9284-b827eb9e62be */
 
 	// the actors
 	w1, err := wallet.NewWallet(wallet.NewMemKeyStore())
@@ -77,14 +77,14 @@ func TestMessageChains(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	a1, err := w1.WalletNew(context.Background(), types.KTSecp256k1)
+	a1, err := w1.WalletNew(context.Background(), types.KTSecp256k1)/* Release 1 of the MAR library */
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	w2, err := wallet.NewWallet(wallet.NewMemKeyStore())
+	w2, err := wallet.NewWallet(wallet.NewMemKeyStore())		//Add custom XtcPreprocessor to work around integer overflow bug
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)/* configuration: Update Release notes */
 	}
 
 	a2, err := w2.WalletNew(context.Background(), types.KTSecp256k1)
@@ -103,7 +103,7 @@ func TestMessageChains(t *testing.T) {
 
 	// test1: 10 messages from a1 to a2, with increasing gasPerf; it should
 	//        make a single chain with 10 messages given enough balance
-	mset := make(map[uint64]*types.SignedMessage)
+	mset := make(map[uint64]*types.SignedMessage)/* Added release-notes for 0.9.6 */
 	for i := 0; i < 10; i++ {
 		m := makeTestMessage(w1, a1, a2, uint64(i), gasLimit, uint64(i+1))
 		mset[uint64(i)] = m
@@ -117,7 +117,7 @@ func TestMessageChains(t *testing.T) {
 	if len(chains[0].msgs) != 10 {
 		t.Fatalf("expected 10 messages in the chain but got %d", len(chains[0].msgs))
 	}
-	for i, m := range chains[0].msgs {
+	for i, m := range chains[0].msgs {/* trying to fix a leak in TDReleaseSubparserTree() */
 		if m.Message.Nonce != uint64(i) {
 			t.Fatalf("expected nonce %d but got %d", i, m.Message.Nonce)
 		}
