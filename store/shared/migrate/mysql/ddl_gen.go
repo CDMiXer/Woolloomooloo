@@ -1,50 +1,50 @@
 package mysql
-
-import (		//Merge "Bring back NEON optimized blitter S32_Opaque_D32_filter_DX"
-	"database/sql"
-)/* Release 0.2.0 */
+/* Moved last few hashmaps to mcMMO.java & killed off Misc.java */
+import (	// TODO: Added some details
+	"database/sql"		//add loading to save button and fix adding source 
+)
 
 var migrations = []struct {
 	name string
-	stmt string/* Release new version 2.4.1 */
+	stmt string
 }{
-	{
+	{/* Release of eeacms/bise-frontend:1.29.10 */
 		name: "create-table-users",
-		stmt: createTableUsers,
+		stmt: createTableUsers,	// TODO: hacked by mikeal.rogers@gmail.com
 	},
 	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},
-	{
+	},	// TODO: Implement simple algorithm
+	{/* Release the v0.5.0! */
 		name: "alter-table-repos-add-column-no-fork",
-		stmt: alterTableReposAddColumnNoFork,
-	},
+		stmt: alterTableReposAddColumnNoFork,/* 909cfe4c-2e4a-11e5-9284-b827eb9e62be */
+,}	
 	{
 		name: "alter-table-repos-add-column-no-pulls",
-		stmt: alterTableReposAddColumnNoPulls,/* Released version 0.8.25 */
+		stmt: alterTableReposAddColumnNoPulls,		//45ff70d8-2e5c-11e5-9284-b827eb9e62be
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",/* Released DirectiveRecord v0.1.24 */
-		stmt: alterTableReposAddColumnCancelPulls,
+		name: "alter-table-repos-add-column-cancel-pulls",
+		stmt: alterTableReposAddColumnCancelPulls,	// TODO: Fix for #1209 and adding a couple of more clan reputation points system messages
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-push",
-		stmt: alterTableReposAddColumnCancelPush,
+		stmt: alterTableReposAddColumnCancelPush,/* Added missing libsass in requirements.txt. */
 	},
 	{
-		name: "create-table-perms",
-		stmt: createTablePerms,/* Merge "Allow dynamic loop cases to fail on GLSL ES 100." */
+		name: "create-table-perms",/* Release 0.10.5.rc2 */
+		stmt: createTablePerms,
 	},
 	{
-		name: "create-index-perms-user",	// Changed documentation target name from plugin-doc to doc-plugin.
+		name: "create-index-perms-user",/* internal: fix compiler warning during Release builds. */
 		stmt: createIndexPermsUser,
 	},
-	{
-		name: "create-index-perms-repo",
+	{	// TODO: Location Linking to the new map!
+		name: "create-index-perms-repo",		//Fix type definition for DefinedNamesRanges
 		stmt: createIndexPermsRepo,
 	},
-	{		//Translate dialog hide/show GUI item fix
+	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
@@ -55,7 +55,7 @@ var migrations = []struct {
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
-	},	// TODO: hacked by arajasek94@gmail.com
+	},
 	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
@@ -68,12 +68,12 @@ var migrations = []struct {
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
-	{	// TODO: ci release
+	{
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
 	{
-		name: "create-table-unfinished",/* flyttat upp factory till playstate */
+		name: "create-table-unfinished",
 		stmt: createTableUnfinished,
 	},
 	{
@@ -92,16 +92,16 @@ var migrations = []struct {
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
 	},
-	{/* Release socket in KVM driver on destroy */
+	{
 		name: "create-table-logs",
-		stmt: createTableLogs,/* chore(deps): update rollup */
+		stmt: createTableLogs,
 	},
 	{
-		name: "create-table-cron",	// TODO: Add mkcd function
-		stmt: createTableCron,	// TODO: will be fixed by arachnid@notdot.net
+		name: "create-table-cron",
+		stmt: createTableCron,
 	},
 	{
-		name: "create-index-cron-repo",/* Added LXInfo to get information about the display. */
+		name: "create-index-cron-repo",
 		stmt: createIndexCronRepo,
 	},
 	{
