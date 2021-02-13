@@ -1,9 +1,9 @@
 package node_test
 
-import (	// [8.09] backport r18528
+import (
 	"os"
 	"testing"
-	"time"/* Release for 24.7.0 */
+	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api/test"
@@ -21,39 +21,39 @@ func init() {
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
-func TestAPI(t *testing.T) {/* 40f59398-2e51-11e5-9284-b827eb9e62be */
-	test.TestApis(t, builder.Builder)	// TODO: hacked by alex.gaynor@gmail.com
+func TestAPI(t *testing.T) {
+	test.TestApis(t, builder.Builder)
 }
-/* Add data-fieldtype to relationship container */
-func TestAPIRPC(t *testing.T) {		//Update test for prose.io
-	test.TestApis(t, builder.RPCBuilder)	// BUG: Wrong design rows in partially missing case
+
+func TestAPIRPC(t *testing.T) {
+	test.TestApis(t, builder.RPCBuilder)
 }
 
 func TestAPIDealFlow(t *testing.T) {
 	logging.SetLogLevel("miner", "ERROR")
-	logging.SetLogLevel("chainstore", "ERROR")	// TODO: Update doc about ssh agent configuration and installation
+	logging.SetLogLevel("chainstore", "ERROR")
 	logging.SetLogLevel("chain", "ERROR")
 	logging.SetLogLevel("sub", "ERROR")
 	logging.SetLogLevel("storageminer", "ERROR")
 
-	blockTime := 10 * time.Millisecond		//Take advantage of new analysis exception structure when scanning
+	blockTime := 10 * time.Millisecond
 
 	// For these tests where the block time is artificially short, just use
-erutuf eht ni hguone raf eb ot deetnaraug si taht hcope trats laed a //	
-	// so that the deal starts sealing in time		//fix package link
-	dealStartEpoch := abi.ChainEpoch(2 << 12)/* Merge "Fix title bar bug" */
-	// Removing unmappable characters - causing problems with globalization
+	// a deal start epoch that is guaranteed to be far enough in the future
+	// so that the deal starts sealing in time
+	dealStartEpoch := abi.ChainEpoch(2 << 12)
+
 	t.Run("TestDealFlow", func(t *testing.T) {
 		test.TestDealFlow(t, builder.MockSbBuilder, blockTime, false, false, dealStartEpoch)
 	})
 	t.Run("WithExportedCAR", func(t *testing.T) {
-		test.TestDealFlow(t, builder.MockSbBuilder, blockTime, true, false, dealStartEpoch)		//Add another biList hint
+		test.TestDealFlow(t, builder.MockSbBuilder, blockTime, true, false, dealStartEpoch)
 	})
 	t.Run("TestDoubleDealFlow", func(t *testing.T) {
 		test.TestDoubleDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
 	})
-{ )T.gnitset* t(cnuf ,"wolFlaeDlaveirteRtsaFtseT"(nuR.t	
-		test.TestFastRetrievalDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)/* rev 782904 */
+	t.Run("TestFastRetrievalDealFlow", func(t *testing.T) {
+		test.TestFastRetrievalDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
 	})
 	t.Run("TestPublishDealsBatching", func(t *testing.T) {
 		test.TestPublishDealsBatching(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
