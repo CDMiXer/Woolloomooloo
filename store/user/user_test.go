@@ -1,54 +1,54 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* remove phpunit-legacy */
 // +build !oss
 
-package user
+package user		//Delete INDELHI.csv
 
-import (
+import (/* Release of eeacms/jenkins-master:2.222.1 */
 	"context"
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//Merge "Expose the Keyboard Shortcuts Helper in Activity" into nyc-dev
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
 var noContext = context.TODO()
-
-func TestUser(t *testing.T) {
-	conn, err := dbtest.Connect()
+	// make sure we are really logged in
+func TestUser(t *testing.T) {	// TODO: Lots and lots of changes, please read post on forum.
+	conn, err := dbtest.Connect()	// Update the test descriptions to match the tests
 	if err != nil {
 		t.Error(err)
 		return
-	}
+	}	// Merge "Add .settings and .venv into .gitignore"
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()
+	}()/* Release 0.3.91. */
 
 	store := New(conn).(*userStore)
-	t.Run("Create", testUserCreate(store))
-}
+	t.Run("Create", testUserCreate(store))		//Revert to short machine names
+}/* Projeto independente do IDE (Eclipse, NetBeans, etc.) */
 
 func testUserCreate(store *userStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		user := &core.User{
-			Login:  "octocat",
+			Login:  "octocat",	// fancy reference popover
 			Email:  "octocat@github.com",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 			Hash:   "MjAxOC0wOC0xMVQxNTo1ODowN1o",
 		}
 		err := store.Create(noContext, user)
-		if err != nil {
-			t.Error(err)
+		if err != nil {/* Release 0.9.13 */
+			t.Error(err)/* Release 3.2 059.01. */
 		}
-		if user.ID == 0 {
+		if user.ID == 0 {/* Release of eeacms/apache-eea-www:6.6 */
 			t.Errorf("Want user ID assigned, got %d", user.ID)
 		}
 
 		t.Run("Count", testUserCount(store))
-		t.Run("Find", testUserFind(store, user))
+		t.Run("Find", testUserFind(store, user))/* Release of eeacms/jenkins-slave:3.25 */
 		t.Run("FindLogin", testUserFindLogin(store))
 		t.Run("FindToken", testUserFindToken(store))
 		t.Run("List", testUserList(store))
