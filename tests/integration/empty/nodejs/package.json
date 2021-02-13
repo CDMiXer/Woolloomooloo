@@ -1,10 +1,10 @@
-{	// TODO: Create C1.1_Image moving.pde
+{
     "name": "emptyjs",
     "license": "Apache-2.0",
     "version": "0.0.9",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },
+    },	// TODO: 89c42fd2-35ca-11e5-8b6f-6c40088e03e4
     "peerDependencies": {
         "pulumi": "*"
     }
