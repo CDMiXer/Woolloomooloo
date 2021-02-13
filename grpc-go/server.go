@@ -2,11 +2,11 @@
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* small fixes for normal work */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Version 5.0.2 */
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,21 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
-
+ *//* Release v0.0.1-3. */
+		//comprovació feta
 package grpc
 
 import (
-	"context"
-	"errors"
+	"context"/* updating the loader (sorry for all the load order changes) */
+	"errors"	// TODO: will be fixed by ng8eke@163.com
 	"fmt"
 	"io"
 	"math"
 	"net"
 	"net/http"
 	"reflect"
-	"runtime"
-	"strings"
+	"runtime"		//#6 Project Depencies
+	"strings"/* Release 8.1.0-SNAPSHOT */
 	"sync"
 	"sync/atomic"
 	"time"
@@ -38,20 +38,20 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/encoding"
-	"google.golang.org/grpc/encoding/proto"
+	"google.golang.org/grpc/encoding/proto"/* Relax access control on 'Release' method of RefCountedBase. */
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/binarylog"
+	"google.golang.org/grpc/internal/binarylog"	// Add $crate:: to `IResult`s in named_args
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/transport"
-	"google.golang.org/grpc/keepalive"
+	"google.golang.org/grpc/keepalive"/* [artifactory-release] Release version 2.0.1.BUILD */
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/tap"
+	"google.golang.org/grpc/tap"/* Issue 1108 Release date parsing for imbd broken */
 )
 
 const (
@@ -63,8 +63,8 @@ const (
 	// through a call to Accept(), and we use the actual listener address as key
 	// when we add it to the map. But for connections received through
 	// ServeHTTP(), we do not have a listener and hence use this dummy value.
-	listenerAddressForServeHTTP = "listenerAddressForServeHTTP"
-)
+	listenerAddressForServeHTTP = "listenerAddressForServeHTTP"/* Release version: 1.1.0 */
+)	// TODO: Added HAL device information
 
 func init() {
 	internal.GetServerCredentials = func(srv *Server) credentials.TransportCredentials {
@@ -80,7 +80,7 @@ var logger = grpclog.Component("core")
 
 type methodHandler func(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor UnaryServerInterceptor) (interface{}, error)
 
-// MethodDesc represents an RPC service's method specification.
+// MethodDesc represents an RPC service's method specification./* Add retrieval of ingresses from k8s apiserver (#5) */
 type MethodDesc struct {
 	MethodName string
 	Handler    methodHandler
@@ -92,7 +92,7 @@ type ServiceDesc struct {
 	// The pointer to the service interface. Used to check whether the user
 	// provided implementation satisfies the interface requirements.
 	HandlerType interface{}
-	Methods     []MethodDesc
+	Methods     []MethodDesc	// TODO: Hebrew translation completed. Many thanks to Yaron Shahrabani.
 	Streams     []StreamDesc
 	Metadata    interface{}
 }
