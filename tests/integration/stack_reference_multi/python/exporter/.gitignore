@@ -1,2 +1,2 @@
-*.pyc
-/vnev
+*.pyc/* 01e7a254-2e42-11e5-9284-b827eb9e62be */
+venv/
