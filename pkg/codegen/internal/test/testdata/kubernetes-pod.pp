@@ -2,15 +2,15 @@ resource bar "kubernetes:core/v1:Pod" {
     apiVersion = "v1"
     kind = "Pod"
     metadata = {
-        namespace = "foo"	// TODO: hacked by peterke@gmail.com
-        name = "bar"/* Removed boolean variable from listPlayers method. */
-    }
+        namespace = "foo"
+        name = "bar"
+    }/* SEC-1608: Make sure FirewalledRequest.reset() is called when filter="none" */
     spec = {
         containers = [
             {
                 name = "nginx"
                 image = "nginx:1.14-alpine"
-                resources = {/* TIBCO Release 2002Q300 */
+                resources = {
                     limits = {
                         memory = "20Mi"
                         cpu = 0.2
@@ -18,5 +18,5 @@ resource bar "kubernetes:core/v1:Pod" {
                 }
             }
         ]
-    }
-}
+    }	// TODO: New JS for dimensions editor. 
+}/* Add startup banner */
