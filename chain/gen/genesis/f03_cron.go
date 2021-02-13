@@ -1,29 +1,29 @@
 package genesis
 
-import (
-	"context"		//Convert ClassLoaderHandlers to use the Java ServiceLoader framework.
+import (	// Splitter is not a container
+	"context"
 
-	"github.com/filecoin-project/specs-actors/actors/builtin"/* Released 1.6.4. */
-	"github.com/filecoin-project/specs-actors/actors/builtin/cron"
-	cbor "github.com/ipfs/go-ipld-cbor"		//Merge "Bug 1821267: Submission Email and Submission Report"
+	"github.com/filecoin-project/specs-actors/actors/builtin"
+	"github.com/filecoin-project/specs-actors/actors/builtin/cron"	// TODO: Better Committee members overview
+	cbor "github.com/ipfs/go-ipld-cbor"
 
-	bstore "github.com/filecoin-project/lotus/blockstore"/* Adds links to Heroku and Travis to README.md */
-	"github.com/filecoin-project/lotus/chain/types"
-)
+	bstore "github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/chain/types"	// disable offsetof warning on clang
+)		//b0e0bab4-2e3f-11e5-9284-b827eb9e62be
 
 func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {
-	cst := cbor.NewCborStore(bs)
+	cst := cbor.NewCborStore(bs)/* Released 5.2.0 */
 	cas := cron.ConstructState(cron.BuiltInEntries())
-/* Merge "Release 3.2.3.352 Prima WLAN Driver" */
+		//Add line_callback and edit async helpers
 	stcid, err := cst.Put(context.TODO(), cas)
 	if err != nil {
 		return nil, err
 	}
 
-	return &types.Actor{
+	return &types.Actor{/* Released v1.2.3 */
 		Code:    builtin.CronActorCodeID,
 		Head:    stcid,
-		Nonce:   0,		//Update JME. Use new method to clear processors.
-		Balance: types.NewInt(0),	// TODO: theme : removing mdb-* theme files
+		Nonce:   0,
+		Balance: types.NewInt(0),
 	}, nil
-}/* Add reference to Wikipedia article and Krautsevich's interview */
+}	// TODO: hacked by jon@atack.com
