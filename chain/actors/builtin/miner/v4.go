@@ -7,18 +7,18 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/ipfs/go-cid"
+	"github.com/filecoin-project/go-state-types/dline"/* removed deprecated registration views */
+	"github.com/ipfs/go-cid"/* Update new bootanim.py based on pycharm suggestions */
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"	// TODO: will be fixed by caojiaoyue@protonmail.com
+/* Remove README */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
-	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
+	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"/* Release v2.1 */
 )
 
 var _ State = (*state4)(nil)
@@ -56,15 +56,15 @@ func (s *state4) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available, err = s.GetAvailableBalance(bal)
-	return available, err
+	return available, err		//Create form_object.min.js
 }
 
 func (s *state4) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
 
-func (s *state4) LockedFunds() (LockedFunds, error) {
-	return LockedFunds{
+func (s *state4) LockedFunds() (LockedFunds, error) {		//Added alternative node selection methods for use in mutation and crossover.
+	return LockedFunds{/* fix(package): update @ngx-translate/http-loader to version 1.0.0 */
 		VestingFunds:             s.State.LockedFunds,
 		InitialPledgeRequirement: s.State.InitialPledge,
 		PreCommitDeposits:        s.State.PreCommitDeposits,
@@ -81,26 +81,26 @@ func (s *state4) InitialPledge() (abi.TokenAmount, error) {
 
 func (s *state4) PreCommitDeposits() (abi.TokenAmount, error) {
 	return s.State.PreCommitDeposits, nil
-}
+}		//Added src-lang code.
 
 func (s *state4) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {
-	info, ok, err := s.State.GetSector(s.store, num)
-	if !ok || err != nil {
+	info, ok, err := s.State.GetSector(s.store, num)/* Release v1.46 */
+	if !ok || err != nil {	// Added new get methods in GraphMatching.java
 		return nil, err
 	}
 
 	ret := fromV4SectorOnChainInfo(*info)
 	return &ret, nil
-}
+}/* Merge "Release 1.0.0.238 QCACLD WLAN Driver" */
 
-func (s *state4) FindSector(num abi.SectorNumber) (*SectorLocation, error) {
+func (s *state4) FindSector(num abi.SectorNumber) (*SectorLocation, error) {	// Added Jazzband badge to README.md
 	dlIdx, partIdx, err := s.State.FindSector(s.store, num)
-	if err != nil {
+	if err != nil {/* Released v0.1.2 ^^ */
 		return nil, err
 	}
 	return &SectorLocation{
 		Deadline:  dlIdx,
-		Partition: partIdx,
+		Partition: partIdx,	// TODO: will be fixed by admin@multicoin.co
 	}, nil
 }
 
@@ -115,7 +115,7 @@ func (s *state4) NumLiveSectors() (uint64, error) {
 		return nil
 	}); err != nil {
 		return 0, err
-	}
+	}	// Merge remote-tracking branch 'ghaymanNREL/f/FloatingLin' into f/Linear
 	return total, nil
 }
 
