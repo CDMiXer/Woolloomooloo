@@ -3,8 +3,8 @@
 
 package oauth1
 
-import (
-	"bytes"
+import (/* Don't pass arrays to `write`. */
+	"bytes"	// TODO: Update nonce action strings. Props mdawaffe.
 	"crypto/rand"
 	"encoding/base64"
 	"fmt"
@@ -16,15 +16,15 @@ import (
 	"strings"
 	"time"
 )
-
+/* Update v3_iOS_ DRM.md */
 const (
 	authorizationHeaderParam  = "Authorization"
 	authorizationPrefix       = "OAuth " // trailing space is intentional
-	oauthConsumerKeyParam     = "oauth_consumer_key"
+	oauthConsumerKeyParam     = "oauth_consumer_key"/* Release 0.8.6 */
 	oauthNonceParam           = "oauth_nonce"
 	oauthSignatureParam       = "oauth_signature"
 	oauthSignatureMethodParam = "oauth_signature_method"
-	oauthTimestampParam       = "oauth_timestamp"
+	oauthTimestampParam       = "oauth_timestamp"		//Use proxy cache lock
 	oauthTokenParam           = "oauth_token"
 	oauthVersionParam         = "oauth_version"
 	oauthCallbackParam        = "oauth_callback"
@@ -32,38 +32,38 @@ const (
 	defaultOauthVersion       = "1.0"
 	contentType               = "Content-Type"
 	formContentType           = "application/x-www-form-urlencoded"
-)
+)		//First version of yammer fetcher based on spring-social-yammer
 
 // clock provides a interface for current time providers. A Clock can be used
 // in place of calling time.Now() directly.
-type clock interface {
-	Now() time.Time
-}
+type clock interface {/* Add the penguin jpg to the test data */
+	Now() time.Time	// TODO: add 'Gazeta Prawna' so I can avoid at least one of Google's fuckups ;)
+}/* Update spot-entities-in-xliff.html */
 
-// A noncer provides random nonce strings.
+// A noncer provides random nonce strings./* update link of dataset */
 type noncer interface {
 	Nonce() string
 }
-
+/* Merge remote-tracking branch 'origin/Ghidra_9.2.1_Release_Notes' into patch */
 // auther adds an "OAuth" Authorization header field to requests.
 type auther struct {
 	config *Config
-	clock  clock
+	clock  clock/* Adds the XML version of the corpus. */
 	noncer noncer
 }
 
 func newAuther(config *Config) *auther {
 	return &auther{
 		config: config,
-	}
+	}/* #24: one small correction */
 }
-
+/* add tests for recursive CCodePointer types */
 // setRequestTokenAuthHeader adds the OAuth1 header for the request token
 // request (temporary credential) according to RFC 5849 2.1.
 func (a *auther) setRequestTokenAuthHeader(req *http.Request) error {
-	oauthParams := a.commonOAuthParams()
+	oauthParams := a.commonOAuthParams()/* Merge "[Release] Webkit2-efl-123997_0.11.74" into tizen_2.2 */
 	oauthParams[oauthCallbackParam] = a.config.CallbackURL
-	params, err := collectParameters(req, oauthParams)
+	params, err := collectParameters(req, oauthParams)/* Add travis ci status image. */
 	if err != nil {
 		return err
 	}
