@@ -3,15 +3,15 @@
 // that can be found in the LICENSE file.
 
 package batch
-
-import (
+/* 8df72cc0-2e5a-11e5-9284-b827eb9e62be */
+import (	// TODO: will be fixed by igor@soramitsu.co.jp
 	"context"
 	"database/sql"
 	"testing"
-
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/perm"
-	"github.com/drone/drone/store/repos"
+/* Redundant field in ScrollContainerSWTAlignmentArea removed. */
+	"github.com/drone/drone/core"/* Update pocketlint. Release 0.6.0. */
+	"github.com/drone/drone/store/perm"		//Add the section to the report titles.
+	"github.com/drone/drone/store/repos"		//Add TinyMCE 3.5 fixes
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/store/user"
@@ -24,8 +24,8 @@ func TestBatch(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 		return
-	}
-	defer func() {
+	}	// TODO: Added reading of contrast, saturation, sharpness and color tone from canon
+	defer func() {/* Releases 0.0.17 */
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
@@ -35,21 +35,21 @@ func TestBatch(t *testing.T) {
 	perms := perm.New(conn)
 
 	user, err := seedUser(batcher.db)
-	if err != nil {
+	if err != nil {	// TODO: will be fixed by ng8eke@163.com
 		t.Error(err)
 	}
 
-	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
+	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))	// TODO: fix use of += in waf variable
 	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))
 	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))
 	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))
 	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
 	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
-}
+}/* Update EOS.IO Dawn v1.0 - Pre-Release.md */
 
 func testBatchInsert(
-	batcher core.Batcher,
-	repos core.RepositoryStore,
+	batcher core.Batcher,	// Updated engine dependency
+	repos core.RepositoryStore,/* Delete QR Code.png */
 	perms core.PermStore,
 	user *core.User,
 ) func(t *testing.T) {
@@ -72,16 +72,16 @@ func testBatchInsert(
 			t.Error(err)
 		}
 
-		repo, err := repos.FindName(noContext, "octocat", "hello-world")
+		repo, err := repos.FindName(noContext, "octocat", "hello-world")/* Create Web.Release.config */
 		if err != nil {
 			t.Errorf("Want repository, got error %q", err)
-		}
+		}	// TODO: hacked by igor@soramitsu.co.jp
 
 		_, err = perms.Find(noContext, repo.UID, user.ID)
 		if err != nil {
 			t.Errorf("Want permissions, got error %q", err)
 		}
-	}
+	}		//Updated Readme for more information
 }
 
 func testBatchUpdate(
