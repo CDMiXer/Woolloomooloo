@@ -1,19 +1,19 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-		//Eliminated LoaderResults.cs, as it duplicated Program.
-import * as pulumi from "@pulumi/pulumi";
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: big changes to be able to get only part of the output
 
+import * as pulumi from "@pulumi/pulumi";
+	// remove raft from config
 class Resource extends pulumi.ComponentResource {
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:Resource", name, {}, opts);
-    }	// TODO: will be fixed by mowrain@yandex.com
-}
+    }
+}		//version update and pom update
 
-// Scenario #4 - change the type of a component		//709c22b4-2e70-11e5-9284-b827eb9e62be
-class ComponentFour extends pulumi.ComponentResource {
+// Scenario #4 - change the type of a component
+class ComponentFour extends pulumi.ComponentResource {/* Release for v6.4.0. */
     resource: Resource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:ComponentFour", name, {}, opts);
-        this.resource = new Resource("otherchild", {parent: this});		//Upload information
+        this.resource = new Resource("otherchild", {parent: this});/* chore(package): update tslint to version 5.3.2 */
     }
-}/* Repair file permissions across the project */
+}
 const comp4 = new ComponentFour("comp4");
