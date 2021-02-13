@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Started MC chat (#8)
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -14,23 +14,23 @@
 
 package deploys
 
-import (/* d43bcce2-2e67-11e5-9284-b827eb9e62be */
+import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"		//Use pure component in app container
-	"github.com/drone/drone/logger"/* Use time template in the file TODO_Release_v0.1.2.txt */
-	// feat(docs) Update docs w/proposed API changes
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/logger"
+
 	"github.com/go-chi/chi"
 )
 
 // HandleList returns an http.HandlerFunc that writes a json-encoded
-// list of build history to the response body.	// TODO: will be fixed by greg@colvin.org
+// list of build history to the response body.
 func HandleList(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Fixed PointLight prototype code (thx  rectalogic) */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
@@ -46,7 +46,7 @@ func HandleList(
 			return
 		}
 
-		results, err := builds.LatestDeploys(r.Context(), repo.ID)/* Initial page work */
+		results, err := builds.LatestDeploys(r.Context(), repo.ID)
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
@@ -56,6 +56,6 @@ func HandleList(
 				Debugln("api: cannot list builds")
 		} else {
 			render.JSON(w, results, 200)
-}		
+		}
 	}
 }
