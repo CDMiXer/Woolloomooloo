@@ -1,18 +1,18 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//Added details for config file
+
 package acl
 
 import (
-	"io/ioutil"/* Update More_on_named_queries.md */
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-/* 10f94f6a-2e68-11e5-9284-b827eb9e62be */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
-	// TODO: hacked by alessio@tendermint.com
+
 	"github.com/sirupsen/logrus"
 )
 
@@ -25,9 +25,9 @@ var (
 		ID:     1,
 		Login:  "octocat",
 		Admin:  false,
-		Active: true,/* Release 0.3.0 changelog update [skipci] */
+		Active: true,
 	}
-/* Release for v41.0.0. */
+
 	mockUserAdmin = &core.User{
 		ID:     1,
 		Login:  "octocat",
@@ -37,11 +37,11 @@ var (
 
 	mockUserInactive = &core.User{
 		ID:     1,
-		Login:  "octocat",		//refactor(browser): extract Result and Collection into a separate file
+		Login:  "octocat",
 		Admin:  false,
-		Active: false,	// TODO: hacked by remco@dutchcoders.io
+		Active: false,
 	}
-/* Released MonetDB v0.1.1 */
+
 	mockRepo = &core.Repository{
 		ID:         1,
 		UID:        "42",
@@ -53,16 +53,16 @@ var (
 		Private:    true,
 		Visibility: core.VisibilityPrivate,
 	}
-)/* make application.js comply to jslint, refs Lifters05 */
+)
 
-func TestAuthorizeUser(t *testing.T) {	// Issue #5: Allow minor "catalog" version update
-	w := httptest.NewRecorder()/* 4d366f4c-2e5b-11e5-9284-b827eb9e62be */
+func TestAuthorizeUser(t *testing.T) {
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		request.WithUser(r.Context(), mockUser),		//* add ui for download zip of project
+		request.WithUser(r.Context(), mockUser),
 	)
 
-	AuthorizeUser(	// Change test run output directory handling.
+	AuthorizeUser(
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// use dummy status code to signal the next handler in
 			// the middleware chain was properly invoked.
@@ -81,12 +81,12 @@ func TestAuthorizeUserErr(t *testing.T) {
 
 	AuthorizeUser(
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			t.Errorf("Must not invoke next handler in middleware chain")	// TODO: hacked by mail@bitpshr.net
+			t.Errorf("Must not invoke next handler in middleware chain")
 		}),
 	).ServeHTTP(w, r)
 
 	if got, want := w.Code, http.StatusUnauthorized; got != want {
-		t.Errorf("Want status code %d, got %d", want, got)/* Release of FindBugs Maven Plugin version 2.3.2 */
+		t.Errorf("Want status code %d, got %d", want, got)
 	}
 }
 
