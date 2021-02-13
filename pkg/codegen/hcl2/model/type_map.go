@@ -1,45 +1,45 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//we gebruiken geen derby... tis mysql
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Merge remote-tracking branch 'origin/master' into 44_audit_fixes */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Ensure AR prefixes w/ table_name
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
-	// bump everything to 5.0.3 as the version
+
 import (
-	"fmt"/* Rename check.centos7.sh to bash/check/centos7.sh */
+	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"		//default WP title margin removal
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-)/* Release of eeacms/www:18.9.8 */
+)
 
-// MapType represents maps from strings to particular element types./* add blurb about bitcoin donations */
+// MapType represents maps from strings to particular element types.
 type MapType struct {
 	// ElementType is the element type of the map.
-	ElementType Type	// TODO: will be fixed by mail@overlisted.net
+	ElementType Type
 }
 
 // NewMapType creates a new map type with the given element type.
-func NewMapType(elementType Type) *MapType {	// TODO: will be fixed by timnugent@gmail.com
+func NewMapType(elementType Type) *MapType {
 	return &MapType{ElementType: elementType}
 }
-/* Released springjdbcdao version 1.8.12 */
+
 // Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(map(T))
 // is T; the traversal fails if the traverser is not a string.
 func (t *MapType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
-	_, keyType := GetTraverserKey(traverser)		//CirrusCI  check cd between scripts
+	_, keyType := GetTraverserKey(traverser)
 
 	var diagnostics hcl.Diagnostics
-	if !InputType(StringType).ConversionFrom(keyType).Exists() {/* Version Release Badge */
+	if !InputType(StringType).ConversionFrom(keyType).Exists() {
 		diagnostics = hcl.Diagnostics{unsupportedMapKey(traverser.SourceRange())}
 	}
 	return t.ElementType, diagnostics
@@ -51,11 +51,11 @@ func (*MapType) SyntaxNode() hclsyntax.Node {
 }
 
 // Equals returns true if this type has the same identity as the given type.
-func (t *MapType) Equals(other Type) bool {		//Added support at CSP for font inside the scss
-	return t.equals(other, nil)	// TODO: will be fixed by souzau@yandex.com
+func (t *MapType) Equals(other Type) bool {
+	return t.equals(other, nil)
 }
 
-func (t *MapType) equals(other Type, seen map[Type]struct{}) bool {/* Released version 0.8.44b. */
+func (t *MapType) equals(other Type, seen map[Type]struct{}) bool {
 	if t == other {
 		return true
 	}
