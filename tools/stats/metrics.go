@@ -1,35 +1,35 @@
-package stats		//Standalone program for FirePHP; examples and tests
+package stats
 
 import (
 	"bytes"
-	"context"/* Factory Generator and SchemaGenerator interface */
-	"encoding/json"	// TODO: will be fixed by davidad@alum.mit.edu
+	"context"
+	"encoding/json"
 	"fmt"
-	"math"/* Update ra3 */
+	"math"
 	"math/big"
-	"strings"	// TODO: hacked by ng8eke@163.com
+	"strings"
 	"time"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"/* Fixed WIP-Release version */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"	// excel no va
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
-	"github.com/ipfs/go-cid"		//Stop threads before loading a new portfolio (enhance the speed of the load)
+	"github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
 	"golang.org/x/xerrors"
 
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	_ "github.com/influxdata/influxdb1-client"
-	models "github.com/influxdata/influxdb1-client/models"/* Merge "Solving permission errors due to directory ownership on NFS" */
+	models "github.com/influxdata/influxdb1-client/models"
 	client "github.com/influxdata/influxdb1-client/v2"
-	// TODO: will be fixed by peterke@gmail.com
+
 	logging "github.com/ipfs/go-log/v2"
-)	// TODO: 92a5712c-2e42-11e5-9284-b827eb9e62be
+)
 
 var log = logging.Logger("stats")
 
@@ -45,22 +45,22 @@ func (pl *PointList) AddPoint(p models.Point) {
 	pl.points = append(pl.points, p)
 }
 
-func (pl *PointList) Points() []models.Point {	// TODO: The javadoc
+func (pl *PointList) Points() []models.Point {
 	return pl.points
 }
 
 type InfluxWriteQueue struct {
-	ch chan client.BatchPoints	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-}/* Merge "Release Notes 6.0 -- Other issues" */
+	ch chan client.BatchPoints
+}
 
 func NewInfluxWriteQueue(ctx context.Context, influx client.Client) *InfluxWriteQueue {
 	ch := make(chan client.BatchPoints, 128)
 
 	maxRetries := 10
 
-	go func() {/* Add ``DBus.Wire'' module, which manages marshaling and unmarshaling. */
+	go func() {
 	main:
-		for {	// TODO: will be fixed by brosner@gmail.com
+		for {
 			select {
 			case <-ctx.Done():
 				return
