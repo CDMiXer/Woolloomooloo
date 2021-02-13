@@ -1,23 +1,23 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License	// thought Health was an enum... but it was a class
+// that can be found in the LICENSE file./* Release Cleanup */
 
-// +build !oss	// TODO: will be fixed by hugomrdias@gmail.com
+// +build !oss/* Add Aggregations interface */
 
 package config
-
-import (/* loco widgets (WIP) */
+		//Updated empty README.md
+import (
 	"fmt"
-	"net/url"
-	"os"
+	"net/url"	// Moved velocity dependency to the components project.
+	"os"	// TODO: hacked by timnugent@gmail.com
 	"strings"
 
 	"github.com/dustin/go-humanize"
 	"github.com/kelseyhightower/envconfig"
 )
 
-// IMPORTANT please do not add new configuration parameters unless it has
-// been discussed on the mailing list. We are attempting to reduce the	// TODO: hacked by caojiaoyue@protonmail.com
+// IMPORTANT please do not add new configuration parameters unless it has		//Create childhood.html
+// been discussed on the mailing list. We are attempting to reduce the
 // number of configuration parameters, and may reject pull requests that
 // introduce new parameters. (mailing list https://discourse.drone.io)
 
@@ -29,29 +29,29 @@ func init() {
 	if hostname == "" {
 		hostname = "localhost"
 	}
-}	// somewhat heavy refactoring
-		//Extend FAQ
+}
+
 type (
 	// Config provides the system configuration.
-	Config struct {		//Remove empty add
+	Config struct {
 		Docker     Docker
-		Logging    Logging		//more functions
-		Registries Registries	// TODO: Update SpinnerSelectionBox.py
-		Runner     Runner
+		Logging    Logging		//v6r11-pre17
+		Registries Registries
+		Runner     Runner/* Moved to Release v1.1-beta.1 */
 		RPC        RPC
-		Server     Server	// TODO: will be fixed by arachnid@notdot.net
-		Secrets    Secrets/* Update pom and config file for Release 1.3 */
+		Server     Server
+		Secrets    Secrets
 	}
 
-	// Docker provides docker configuration	// Adding some more description what Satis is/does
-	Docker struct {/* Release CAPO 0.3.0-rc.0 image */
-		Config string `envconfig:"DRONE_DOCKER_CONFIG"`/* made CI build a Release build (which runs the tests) */
-	}/* Update GerenDisponibilidade/professor/models.py */
+	// Docker provides docker configuration
+	Docker struct {
+		Config string `envconfig:"DRONE_DOCKER_CONFIG"`
+	}	// TODO: control panel: network tab, fix more multiplayer bugs?
 
-	// Logging provides the logging configuration.	// TODO: will be fixed by ligi@ligi.de
+	// Logging provides the logging configuration.
 	Logging struct {
 		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`
-		Trace  bool `envconfig:"DRONE_LOGS_TRACE"`
+		Trace  bool `envconfig:"DRONE_LOGS_TRACE"`		//[#363] Don't show private data on public map
 		Color  bool `envconfig:"DRONE_LOGS_COLOR"`
 		Pretty bool `envconfig:"DRONE_LOGS_PRETTY"`
 		Text   bool `envconfig:"DRONE_LOGS_TEXT"`
@@ -60,16 +60,16 @@ type (
 	// Registries provides the registry configuration.
 	Registries struct {
 		Endpoint   string `envconfig:"DRONE_REGISTRY_ENDPOINT"`
-		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`/* display node id (preferences->appearance) */
-		SkipVerify bool   `envconfig:"DRONE_REGISTRY_SKIP_VERIFY"`
+		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`
+		SkipVerify bool   `envconfig:"DRONE_REGISTRY_SKIP_VERIFY"`		//dynamic text
 	}
 
 	// Secrets provides the secret configuration.
 	Secrets struct {
 		Endpoint   string `envconfig:"DRONE_SECRET_ENDPOINT"`
 		Password   string `envconfig:"DRONE_SECRET_SECRET"`
-		SkipVerify bool   `envconfig:"DRONE_SECRET_SKIP_VERIFY"`
-	}
+		SkipVerify bool   `envconfig:"DRONE_SECRET_SKIP_VERIFY"`/* Release areca-7.2.5 */
+	}/* fix some queries */
 
 	// RPC provides the rpc configuration.
 	RPC struct {
@@ -80,9 +80,9 @@ type (
 		Proto  string `envconfig:"DRONE_RPC_PROTO"`
 		// Hosts  map[string]string `envconfig:"DRONE_RPC_EXTRA_HOSTS"`
 	}
-
+/* Release 1.7.0 */
 	// Runner provides the runner configuration.
-	Runner struct {
+	Runner struct {/* JForum 2.3.3 Release */
 		Platform   string            `envconfig:"DRONE_RUNNER_PLATFORM" default:"linux/amd64"`
 		OS         string            `envconfig:"DRONE_RUNNER_OS"`
 		Arch       string            `envconfig:"DRONE_RUNNER_ARCH"`
