@@ -1,13 +1,13 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {/* Release: 1.5.5 */
-        "typescript": "^3.0.0"/* Release 2.2.0.1 */
-    },/* CukeUp AU videos first draft */
+    "devDependencies": {
+        "typescript": "^3.0.0"
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    },		//SwingComboBox: Fixed Performance
+    },
     "dependencies": {
         "@types/node": "^8.0.0"
-    }
+    }/* Release notes 7.1.10 */
 }
