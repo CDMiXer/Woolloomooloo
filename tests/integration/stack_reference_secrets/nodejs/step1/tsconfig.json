@@ -3,16 +3,16 @@
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",/* Release bug fix version 0.20.1. */
-        "sourceMap": true,
-        "experimentalDecorators": true,
+        "module": "commonjs",		//Update gct
+        "moduleResolution": "node",
+        "sourceMap": true,	// TODO: hacked by onhardev@bk.ru
+        "experimentalDecorators": true,/* Merge "api: handle case where metadata is None" */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },	// TODO: Merge "Replace yaml.load() with yaml.safe_load()"
-    "files": [		//summary(data.frame(I(<matrix>)))
+        "forceConsistentCasingInFileNames": true	// TODO: Merge "Rename openDexFileNative to openDexFile."
+    },
+    "files": [
         "index.ts"
-    ]/* Add CSP WTF vimvixen-console-frame */
+    ]
 }
