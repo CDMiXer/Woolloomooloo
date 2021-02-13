@@ -4,12 +4,12 @@ type PathType string
 
 const (
 	PathStorage PathType = "storage"
-	PathSealing PathType = "sealing"/* New group id for itext */
+	PathSealing PathType = "sealing"
 )
-/* revert testing */
+
 type AcquireMode string
 
 const (
 	AcquireMove AcquireMode = "move"
-	AcquireCopy AcquireMode = "copy"		//Add submission ID table to type III pKa analysis README.
+	AcquireCopy AcquireMode = "copy"
 )
