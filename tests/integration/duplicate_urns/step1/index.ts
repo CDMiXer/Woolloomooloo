@@ -1,8 +1,8 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release of eeacms/eprtr-frontend:0.4-beta.22 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Add missing CollectionHelper class
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Resource } from "./resource";		//Merge "Dev: Include all files in code coverage reports"
-/* 0b005364-2e64-11e5-9284-b827eb9e62be */
+import { Resource } from "./resource";
+
 // Try to create two resources with the same URN.
-const a = new Resource("a", { state: 4 });/* fix bug while updating outcome */
+const a = new Resource("a", { state: 4 });
 const b = new Resource("a", { state: 4 });
 
 // This should fail, but gracefully.
