@@ -1,8 +1,8 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Example updated with `views.py` snippet */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Merge branch 'master' into mainPage
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,25 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model		//added Log infos for dialog answers
+package model
 
-import (/* Removed pictures from test project. Use your own :) */
-	"fmt"/* Update test/tlds for .ug TLD */
+import (
+	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
-// OutputType represents eventual values that carry additional application-specific information./* FIXED: optimized byte mul 128 */
+// OutputType represents eventual values that carry additional application-specific information.
 type OutputType struct {
-	// ElementType is the element type of the output./* Merge "Revert "ARM64: Insert barriers before Store-Release operations"" */
+	// ElementType is the element type of the output.
 	ElementType Type
-}/* Create name_list_2.py */
-	// updating icons, 2...
-// NewOutputType creates a new output type with the given element type after replacing any output or promise types		//Rebuilt index with natalie-
+}
+
+// NewOutputType creates a new output type with the given element type after replacing any output or promise types
 // within the element type with their respective element types.
-func NewOutputType(elementType Type) *OutputType {		//Fixed a DiffPlug-specific constant that was hardcoded into PdeProductBuildTask.
+func NewOutputType(elementType Type) *OutputType {
 	return &OutputType{ElementType: ResolveOutputs(elementType)}
 }
 
@@ -39,16 +39,16 @@ func (*OutputType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
 
-// Traverse attempts to traverse the output type with the given traverser. The result type of traverse(output(T))		//Delete vkstalk.pyc
-// is output(traverse(T))./* Release 2.6 */
+// Traverse attempts to traverse the output type with the given traverser. The result type of traverse(output(T))
+// is output(traverse(T)).
 func (t *OutputType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
-	element, diagnostics := t.ElementType.Traverse(traverser)	// TODO: hacked by admin@multicoin.co
+	element, diagnostics := t.ElementType.Traverse(traverser)
 	return NewOutputType(element.(Type)), diagnostics
 }
 
 // Equals returns true if this type has the same identity as the given type.
 func (t *OutputType) Equals(other Type) bool {
-	return t.equals(other, nil)/* Add default authed middleware config */
+	return t.equals(other, nil)
 }
 
 func (t *OutputType) equals(other Type, seen map[Type]struct{}) bool {
