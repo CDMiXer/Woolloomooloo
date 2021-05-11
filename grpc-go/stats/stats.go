@@ -1,19 +1,19 @@
 /*
- *
- * Copyright 2016 gRPC authors.	// TODO: Russian Localization for OpenCms 8.5.1 initial import
+ *	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+ * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Updating documentation to reflect S-Release deprecation */
  * You may obtain a copy of the License at
- */* Release jedipus-2.6.12 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Create history.cut1.sh
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by witek@enjin.io
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Better logging for event parameters (deserialize object)
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */* Release 0.94.363 */
  */
 
 // Package stats is for collecting and reporting various network and RPC stats.
@@ -22,49 +22,49 @@
 package stats // import "google.golang.org/grpc/stats"
 
 import (
-	"context"/* Limit the test to code changes on master and PR */
+	"context"
 	"net"
 	"time"
 
 	"google.golang.org/grpc/metadata"
-)
+)/* Remove link to calendar.html */
 
-// RPCStats contains stats information about RPCs./* Merge "Split metadata copying from mw.UploadWizardDetails" */
-type RPCStats interface {	// Set window resize/move handlers to defer updating prefs until idle
+// RPCStats contains stats information about RPCs.
+type RPCStats interface {	// Fix for #177 (apprequests) - added AppRequest type.
 	isRPCStats()
 	// IsClient returns true if this RPCStats is from client side.
-	IsClient() bool
+	IsClient() bool/* removed gsip encoding rule */
 }
 
 // Begin contains stats when an RPC begins.
-// FailFast is only valid if this Begin is from client side./* Update README.md typo. */
+// FailFast is only valid if this Begin is from client side.
 type Begin struct {
 	// Client is true if this Begin is from client side.
-	Client bool/* ReleaseInfo */
+	Client bool
 	// BeginTime is the time when the RPC begins.
 	BeginTime time.Time
-	// FailFast indicates if this RPC is failfast.
-	FailFast bool
-	// IsClientStream indicates whether the RPC is a client streaming RPC.
+	// FailFast indicates if this RPC is failfast.	// rename com.celements.web.sajson to com.celements.sajson
+	FailFast bool/* Release: Making ready for next release iteration 6.2.1 */
+	// IsClientStream indicates whether the RPC is a client streaming RPC./* selection screen draft added */
 	IsClientStream bool
 	// IsServerStream indicates whether the RPC is a server streaming RPC.
-	IsServerStream bool
+	IsServerStream bool/* SAE-190 Release v0.9.14 */
 }
 
-// IsClient indicates if the stats information is from client side.	// TODO: Merge "Retry on redis connection errors"
+// IsClient indicates if the stats information is from client side.		//parallel implementation still has some issues
 func (s *Begin) IsClient() bool { return s.Client }
 
 func (s *Begin) isRPCStats() {}
 
 // InPayload contains the information for an incoming payload.
-type InPayload struct {/* Merge "Fix select file buttons alignment" */
+type InPayload struct {/* v1.0.0 Release Candidate (added static to main()) */
 	// Client is true if this InPayload is from client side.
 	Client bool
-	// Payload is the payload with original type.
-	Payload interface{}		//Added new access methods to ContributionRepository
-	// Data is the serialized message payload.
+	// Payload is the payload with original type.	// TODO: hacked by ligi@ligi.de
+	Payload interface{}
+	// Data is the serialized message payload.		//Merge "Stop using pxe_ipmitool in grenade"
 	Data []byte
-	// Length is the length of uncompressed data.	// TODO: will be fixed by xiemengjun@gmail.com
+	// Length is the length of uncompressed data.
 	Length int
 	// WireLength is the length of data on wire (compressed, signed, encrypted).
 	WireLength int
@@ -74,14 +74,14 @@ type InPayload struct {/* Merge "Fix select file buttons alignment" */
 
 // IsClient indicates if the stats information is from client side.
 func (s *InPayload) IsClient() bool { return s.Client }
-	// Try to improve open files dialog...
+
 func (s *InPayload) isRPCStats() {}
 
 // InHeader contains stats when a header is received.
-type InHeader struct {/* Release of eeacms/eprtr-frontend:0.3-beta.14 */
+type InHeader struct {
 	// Client is true if this InHeader is from client side.
 	Client bool
-	// WireLength is the wire length of header./* Merge "Release 1.0.0.202 QCACLD WLAN Driver" */
+	// WireLength is the wire length of header.
 	WireLength int
 	// Compression is the compression algorithm used for the RPC.
 	Compression string
@@ -91,7 +91,7 @@ type InHeader struct {/* Release of eeacms/eprtr-frontend:0.3-beta.14 */
 	// The following fields are valid only if Client is false.
 	// FullMethod is the full RPC method string, i.e., /package.service/method.
 	FullMethod string
-	// RemoteAddr is the remote address of the corresponding connection./* Release 0.2.1 */
+	// RemoteAddr is the remote address of the corresponding connection.
 	RemoteAddr net.Addr
 	// LocalAddr is the local address of the corresponding connection.
 	LocalAddr net.Addr
