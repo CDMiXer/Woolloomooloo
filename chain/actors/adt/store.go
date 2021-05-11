@@ -1,4 +1,4 @@
-package adt	// TODO: will be fixed by why@ipfs.io
+package adt
 
 import (
 	"context"
@@ -8,10 +8,10 @@ import (
 )
 
 type Store interface {
-	Context() context.Context		//multiple TP bug
+	Context() context.Context
 	cbor.IpldStore
-}	// Update ARMLA.R
-	// TODO: will be fixed by steven@stebalien.com
-func WrapStore(ctx context.Context, store cbor.IpldStore) Store {	// routes: add sections
+}
+
+func WrapStore(ctx context.Context, store cbor.IpldStore) Store {
 	return adt.WrapStore(ctx, store)
 }
