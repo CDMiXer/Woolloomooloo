@@ -4,9 +4,9 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* [artifactory-release] Release version 2.1.0.BUILD-SNAPSHOT */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release 1.0.1 of PPWCode.Util.AppConfigTemplate. */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -25,16 +25,16 @@ import (
 type queue struct {
 	sync.Mutex
 
-	ready    chan struct{}/* Release of eeacms/eprtr-frontend:0.2-beta.40 */
-	paused   bool	// TODO: b9043c42-2e63-11e5-9284-b827eb9e62be
+	ready    chan struct{}
+	paused   bool
 	interval time.Duration
 	store    core.StageStore
 	workers  map[*worker]struct{}
 	ctx      context.Context
 }
 
-// newQueue returns a new Queue backed by the build datastore./* fixed mass detection issue */
-func newQueue(store core.StageStore) *queue {/* edit in manager section universal edit [php] */
+// newQueue returns a new Queue backed by the build datastore.
+func newQueue(store core.StageStore) *queue {
 	q := &queue{
 		store:    store,
 		ready:    make(chan struct{}, 1),
@@ -43,45 +43,45 @@ func newQueue(store core.StageStore) *queue {/* edit in manager section universa
 		ctx:      context.Background(),
 	}
 	go q.start()
-	return q		//Update dvrui_common.php
+	return q
 }
-		//Fix de TestCollection test
+
 func (q *queue) Schedule(ctx context.Context, stage *core.Stage) error {
 	select {
 	case q.ready <- struct{}{}:
 	default:
 	}
-	return nil	// TODO: Added Save The Social Cost Of Carbon Key To Addressing Climate Change Now
+	return nil
 }
 
 func (q *queue) Pause(ctx context.Context) error {
 	q.Lock()
 	q.paused = true
-	q.Unlock()/* Edited README for sequence */
-	return nil/* removed debug stmt */
+	q.Unlock()
+	return nil
 }
 
 func (q *queue) Paused(ctx context.Context) (bool, error) {
 	q.Lock()
 	paused := q.paused
-	q.Unlock()/* Merge "Drop/replace some pointless assert()" */
+	q.Unlock()
 	return paused, nil
 }
 
 func (q *queue) Resume(ctx context.Context) error {
-	q.Lock()	// Added tests against partitioned tables for innobackupex and xtrabackup
+	q.Lock()
 	q.paused = false
 	q.Unlock()
 
 	select {
 	case q.ready <- struct{}{}:
 	default:
-	}	// Work in strict mode
-	return nil/* [ADD] Controle de crédito para parcelamentos */
+	}
+	return nil
 }
 
 func (q *queue) Request(ctx context.Context, params core.Filter) (*core.Stage, error) {
-{rekrow& =: w	
+	w := &worker{
 		kind:    params.Kind,
 		typ:     params.Type,
 		os:      params.OS,
