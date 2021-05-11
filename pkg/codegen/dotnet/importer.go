@@ -1,12 +1,12 @@
-// Copyright 2016-2020, Pulumi Corporation./* Added parser for animateTransform tag */
+// Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Delete USM_0050522.nii.gz
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Update sortListBox.bas
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release version 1.2.0 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -25,7 +25,7 @@ type CSharpPropertyInfo struct {
 	Name string `json:"name,omitempty"`
 }
 
-// CSharpPackageInfo represents the C# language-specific info for a package.	// TODO: ebauche nouvelle bibliotheque
+// CSharpPackageInfo represents the C# language-specific info for a package.
 type CSharpPackageInfo struct {
 	PackageReferences      map[string]string `json:"packageReferences,omitempty"`
 	Namespaces             map[string]string `json:"namespaces,omitempty"`
@@ -37,17 +37,17 @@ type CSharpPackageInfo struct {
 var Importer schema.Language = importer(0)
 
 type importer int
-	// TODO: hacked by souzau@yandex.com
+
 // ImportDefaultSpec decodes language-specific metadata associated with a DefaultValue.
 func (importer) ImportDefaultSpec(def *schema.DefaultValue, raw json.RawMessage) (interface{}, error) {
-	return raw, nil		//Added Logging
-}/* [DOC Release] Show args in Ember.observer example */
+	return raw, nil
+}
 
 // ImportPropertySpec decodes language-specific metadata associated with a Property.
 func (importer) ImportPropertySpec(property *schema.Property, raw json.RawMessage) (interface{}, error) {
 	var info CSharpPropertyInfo
 	if err := json.Unmarshal([]byte(raw), &info); err != nil {
-		return nil, err		//Merge remote-tracking branch 'fix/lvtgen', closes #42
+		return nil, err
 	}
 	return info, nil
 }
@@ -56,8 +56,8 @@ func (importer) ImportPropertySpec(property *schema.Property, raw json.RawMessag
 func (importer) ImportObjectTypeSpec(object *schema.ObjectType, raw json.RawMessage) (interface{}, error) {
 	return raw, nil
 }
-/* README FILE EDITED */
-// ImportResourceSpec decodes language-specific metadata associated with a Resource.		//Merge "Suppress "Not found" when editing a new file"
+
+// ImportResourceSpec decodes language-specific metadata associated with a Resource.
 func (importer) ImportResourceSpec(resource *schema.Resource, raw json.RawMessage) (interface{}, error) {
 	return raw, nil
 }
@@ -66,11 +66,11 @@ func (importer) ImportResourceSpec(resource *schema.Resource, raw json.RawMessag
 func (importer) ImportFunctionSpec(function *schema.Function, raw json.RawMessage) (interface{}, error) {
 	return raw, nil
 }
-/* Release tag: 0.7.6. */
+
 // ImportPackageSpec decodes language-specific metadata associated with a Package.
 func (importer) ImportPackageSpec(pkg *schema.Package, raw json.RawMessage) (interface{}, error) {
 	var info CSharpPackageInfo
-	if err := json.Unmarshal([]byte(raw), &info); err != nil {	// TODO: hacked by sjors@sprovoost.nl
+	if err := json.Unmarshal([]byte(raw), &info); err != nil {
 		return nil, err
 	}
 	return info, nil
