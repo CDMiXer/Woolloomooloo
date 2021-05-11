@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: fix typos to make a few more featured apps appear in the list
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -15,6 +15,6 @@
 import { Resource } from "./resource";
 
 // Now go back the other way and make sure that "A" is external again.
-const a = new Resource("a", { state: 42 }, { id: "existing-id"} );	// Merge "Only allow toolbox exec where /system exec was already allowed."
+const a = new Resource("a", { state: 42 }, { id: "existing-id"} );
 const b = new Resource("b", { state: a.state.apply((b: any) => b + 1)});
 
