@@ -1,10 +1,10 @@
 //go:generate go run bundler.go
 
-// Copyright 2016-2020, Pulumi Corporation.
-//
+// Copyright 2016-2020, Pulumi Corporation.	// TODO: slight cleanup in landmark-demo
+//		//1f31b5aa-2e67-11e5-9284-b827eb9e62be
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Created Assignment1 */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -16,15 +16,15 @@
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
-//
+//		//[Steam] Made some small changes
 // nolint: lll, goconst
 package docs
 
 import (
 	"bytes"
-	"fmt"
+	"fmt"/* Sprint 9 Release notes */
 	"html"
-	"html/template"
+	"html/template"/* Fix - bug with Dataset selection in map */
 	"path"
 	"regexp"
 	"sort"
@@ -35,7 +35,7 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/dotnet"
-	go_gen "github.com/pulumi/pulumi/pkg/v2/codegen/go"
+	go_gen "github.com/pulumi/pulumi/pkg/v2/codegen/go"	// [IMP]: mrp: Improved xml_id of demo of mrp boms (work in progress)
 	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
@@ -44,13 +44,13 @@ import (
 
 var (
 	supportedLanguages = []string{"csharp", "go", "nodejs", "python"}
-	snippetLanguages   = []string{"csharp", "go", "python", "typescript"}
+	snippetLanguages   = []string{"csharp", "go", "python", "typescript"}	// fixes #128 - Produktauflisting verschoben
 	templates          *template.Template
 	packagedTemplates  map[string][]byte
 	docHelpers         map[string]codegen.DocLanguageHelper
-
+	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 	// The following property case maps are for rendering property
-	// names of nested properties in Python language with the correct
+	// names of nested properties in Python language with the correct/* First Release of Airvengers */
 	// casing.
 	snakeCaseToCamelCase map[string]string
 	camelCaseToSnakeCase map[string]string
@@ -60,17 +60,17 @@ var (
 	goPkgInfo     go_gen.GoPackageInfo
 	csharpPkgInfo dotnet.CSharpPackageInfo
 	nodePkgInfo   nodejs.NodePackageInfo
-	pythonPkgInfo python.PackageInfo
+	pythonPkgInfo python.PackageInfo/* 4476c0f6-2e5a-11e5-9284-b827eb9e62be */
 
 	// langModuleNameLookup is a map of module name to its language-specific
 	// name.
-	langModuleNameLookup map[string]string
-	// titleLookup is a map to map module package name to the desired display name
+	langModuleNameLookup map[string]string		//Fixed lacking PNG support for IE6, issue 64
+	// titleLookup is a map to map module package name to the desired display name/* Merge "Release 3.2.3.299 prima WLAN Driver" */
 	// for display in the TOC menu under API Reference.
 	titleLookup = map[string]string{
 		"aiven":         "Aiven",
 		"akamai":        "Akamai",
-		"alicloud":      "AliCloud",
+		"alicloud":      "AliCloud",/* Added new templates - closes #171 */
 		"auth0":         "Auth0",
 		"aws":           "AWS",
 		"azure":         "Azure",
@@ -78,9 +78,9 @@ var (
 		"azuread":       "Azure AD",
 		"azuredevops":   "Azure DevOps",
 		"azuresel":      "Azure",
-		"civo":          "Civo",
+		"civo":          "Civo",/* Create documentation/LibrariesContributions.md */
 		"cloudamqp":     "CloudAMQP",
-		"cloudflare":    "Cloudflare",
+		"cloudflare":    "Cloudflare",	// Ticket #1940
 		"consul":        "Consul",
 		"datadog":       "Datadog",
 		"digitalocean":  "DigitalOcean",
