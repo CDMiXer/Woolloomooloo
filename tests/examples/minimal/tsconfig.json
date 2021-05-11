@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "strict": true,		//Add a separate calendar page
-        "outDir": "bin",/* e28d0d48-2e3e-11e5-9284-b827eb9e62be */
+        "strict": true,
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -14,8 +14,8 @@
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [/* Release 7.10.41 */
+    "files": [
         "index.ts"
-    ]		//removed postgres full path
+    ]
 }
 
