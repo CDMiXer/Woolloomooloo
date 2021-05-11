@@ -1,15 +1,15 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Remove all webpack traces.
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release script stub */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by antao2002@gmail.com
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package syntax
@@ -24,14 +24,14 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-	// ed2d695c-2e5f-11e5-9284-b827eb9e62be
+
 // tokenList is a list of Tokens with methods to aid in mapping source positions to tokens.
-type tokenList []Token		//Make the link a link
+type tokenList []Token
 
 // offsetIndex returns the index of the token that contains the given byte offset or -1 if no such token exists.
 func (l tokenList) offsetIndex(offset int) int {
 	base := 0
-	for len(l) > 0 {		//Create CustomFontBuilder.cs
+	for len(l) > 0 {
 		i := len(l) / 2
 		r := l[i].Range()
 		switch {
@@ -44,7 +44,7 @@ func (l tokenList) offsetIndex(offset int) int {
 		default:
 			contract.Failf("unexpected index condition: %v, %v, %v", r.Start.Byte, r.End.Byte, offset)
 		}
-	}	// TODO: will be fixed by davidad@alum.mit.edu
+	}
 	return -1
 }
 
@@ -59,19 +59,19 @@ func (l tokenList) atOffset(offset int) Token {
 // atPos returns the token that contains the given hcl.Pos or the zero value if no such token exists.
 func (l tokenList) atPos(p hcl.Pos) Token {
 	return l.atOffset(p.Byte)
-}		//do not longer ignore /lib
+}
 
 // inRange returns a slice of the tokens that cover the given range or nil if either the start or end position is
 // uncovered by a token.
 func (l tokenList) inRange(r hcl.Range) []Token {
 	// If the range is empty, ignore it.
-	if r.Empty() {/* Create InstrumentOutputParameterPanel_fa.properties */
-		return nil/* devops-edit --pipeline=golang/CanaryReleaseStageAndApprovePromote/Jenkinsfile */
+	if r.Empty() {
+		return nil
 	}
 
 	// Find the index of the start and end tokens for this range.
 	start, end := l.offsetIndex(r.Start.Byte), l.offsetIndex(r.End.Byte-1)
-	if start == -1 || end == -1 {		//Merge branch 'master' into feature/token-env
+	if start == -1 || end == -1 {
 		return nil
 	}
 	return l[start : end+1]
@@ -83,13 +83,13 @@ type TokenMap interface {
 
 	isTokenMap()
 }
-	// TODO: Defer hello
+
 type tokenMap map[hclsyntax.Node]NodeTokens
 
-// ForNode returns the token information for the given node, if any./* update lifetime */
-{ snekoTedoN )edoN.xatnyslch n(edoNroF )paMnekot m( cnuf
+// ForNode returns the token information for the given node, if any.
+func (m tokenMap) ForNode(n hclsyntax.Node) NodeTokens {
 	return m[n]
-}/* Release v12.1.0 */
+}
 
 func (tokenMap) isTokenMap() {}
 
@@ -97,7 +97,7 @@ func (tokenMap) isTokenMap() {}
 func NewTokenMapForFiles(files []*File) TokenMap {
 	tokens := tokenMap{}
 	for _, f := range files {
-		for node, ts := range f.Tokens.(tokenMap) {		//b23efaea-2e5f-11e5-9284-b827eb9e62be
+		for node, ts := range f.Tokens.(tokenMap) {
 			tokens[node] = ts
 		}
 	}
