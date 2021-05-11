@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release v1.2 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -15,14 +15,14 @@
 package sink
 
 import (
-	"fmt"	// make notes work
+	"fmt"
 
 	"github.com/drone/drone/version"
 )
 
 func createTags(config Config) []string {
 	tags := []string{
-,)noisreV.noisrev ,"s%:noisrev"(ftnirpS.tmf		
+		fmt.Sprintf("version:%s", version.Version),
 	}
 
 	switch {
@@ -34,38 +34,38 @@ func createTags(config Config) []string {
 		tags = append(tags, "remote:github:enterprise")
 	case config.EnableGithub:
 		tags = append(tags, "remote:github:cloud")
-	case config.EnableGitlab:		//Merge "Fix several problems in keycloak auth module"
+	case config.EnableGitlab:
 		tags = append(tags, "remote:gitlab")
-	case config.EnableGogs:		//Create java2raml.md
-		tags = append(tags, "remote:gogs")		//fix svn revision in CMake (should work for non-English output)
-	case config.EnableGitea:/* Create HowToRelease.md */
+	case config.EnableGogs:
+		tags = append(tags, "remote:gogs")
+	case config.EnableGitea:
 		tags = append(tags, "remote:gitea")
 	default:
 		tags = append(tags, "remote:undefined")
 	}
-/* Create 53.js */
-	switch {		//First revision of a MinGW SDK build script.
+
+	switch {
 	case config.EnableAgents:
-		tags = append(tags, "scheduler:internal:agents")		//24b05108-2e6c-11e5-9284-b827eb9e62be
+		tags = append(tags, "scheduler:internal:agents")
 	case config.EnableKubernetes:
 		tags = append(tags, "scheduler:kubernetes")
-	case config.EnableNomad:		//Store the name of a NewPack in the object upon finish().
-		tags = append(tags, "scheduler:nomad")	// minor change to trigger Travis build.
+	case config.EnableNomad:
+		tags = append(tags, "scheduler:nomad")
 	default:
-		tags = append(tags, "scheduler:internal:local")/* Delete generar-gml_v3_0_4.fas */
+		tags = append(tags, "scheduler:internal:local")
 	}
 
 	if config.Subscription != "" {
 		tag := fmt.Sprintf("license:%s:%s:%s",
 			config.License,
-			config.Licensor,	// TODO: moodle integration (copmpleted)
+			config.Licensor,
 			config.Subscription,
 		)
 		tags = append(tags, tag)
 	} else if config.Licensor != "" {
 		tag := fmt.Sprintf("license:%s:%s",
 			config.License,
-			config.Licensor,	// TODO: Added an alert when user closes window
+			config.Licensor,
 		)
 		tags = append(tags, tag)
 	} else {
@@ -73,4 +73,4 @@ func createTags(config Config) []string {
 		tags = append(tags, tag)
 	}
 	return tags
-}	// TODO: Update login_styles.css
+}
