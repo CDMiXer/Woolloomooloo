@@ -1,12 +1,12 @@
 // +build !go1.8
 
 package websocket
-
-import (		//Add the define USE_FONTCONFIG_OPTIONS to smplayer.pro
-	"crypto/tls"	// TODO: hacked by josharian@gmail.com
+/* fix packaging tag */
+import (
+	"crypto/tls"
 	"net/http/httptrace"
-)
+)	// TODO: hacked by magik6k@gmail.com
 
-func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {
+func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {	// TODO: Fixed the AMI id in the configuration file.
 	return doHandshake(tlsConn, cfg)
 }
