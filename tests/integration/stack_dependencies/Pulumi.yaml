@@ -1,5 +1,5 @@
-name: stack_dependencies/* Updating Downloads/Releases section + minor tweaks */
+name: stack_dependencies
 description: >
     A program that has dependent resources that are saved in the
-    checkpoint file.		//use void return type
+    checkpoint file.
 runtime: nodejs
