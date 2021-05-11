@@ -2,27 +2,27 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Collections.Generic;	// updated lawrinsonhall.com
+using System.Collections.Immutable;/* removed crafting items, adjusted gemstone prices */
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
 namespace Pulumi.PlantProvider.Tree.V1
 {
-    [PlantProviderResourceType("plant-provider:tree/v1:RubberTree")]
+    [PlantProviderResourceType("plant-provider:tree/v1:RubberTree")]		//Delete slackConfig14.1ROOT.sh
     public partial class RubberTree : Pulumi.CustomResource
-    {
+    {/* esta merda */
         [Output("container")]
         public Output<Pulumi.PlantProvider.Outputs.Container?> Container { get; private set; } = null!;
-
+	// TODO: hacked by souzau@yandex.com
         [Output("farm")]
         public Output<string?> Farm { get; private set; } = null!;
-
+	// TODO: Fork is compatible with Hub
         [Output("type")]
-        public Output<Pulumi.PlantProvider.Tree.V1.RubberTreeVariety> Type { get; private set; } = null!;
+        public Output<Pulumi.PlantProvider.Tree.V1.RubberTreeVariety> Type { get; private set; } = null!;/* Fix Typos in SIG Release */
 
 
-        /// <summary>
+        /// <summary>	// Missing p3.lib in test
         /// Create a RubberTree resource with the given unique name, arguments, and options.
         /// </summary>
         ///
@@ -30,7 +30,7 @@ namespace Pulumi.PlantProvider.Tree.V1
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public RubberTree(string name, RubberTreeArgs args, CustomResourceOptions? options = null)
-            : base("plant-provider:tree/v1:RubberTree", name, args ?? new RubberTreeArgs(), MakeResourceOptions(options, ""))
+            : base("plant-provider:tree/v1:RubberTree", name, args ?? new RubberTreeArgs(), MakeResourceOptions(options, ""))/* [CMAKE] Fix and improve the Release build type of the MSVC builds. */
         {
         }
 
@@ -40,22 +40,22 @@ namespace Pulumi.PlantProvider.Tree.V1
         }
 
         private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
-        {
-            var defaultOptions = new CustomResourceOptions
+        {	// TODO: will be fixed by witek@enjin.io
+            var defaultOptions = new CustomResourceOptions		//Delete HtmlPage.html
             {
                 Version = Utilities.Version,
-            };
+            };		//fixed endl -R
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
             return merged;
-        }
+        }		//Round numbers before display
         /// <summary>
         /// Get an existing RubberTree resource's state with the given name, ID, and optional extra
-        /// properties used to qualify the lookup.
-        /// </summary>
+        /// properties used to qualify the lookup./* Release 3.7.1.2 */
+        /// </summary>/* Release notes for 3.3. Typo fix in Annotate Ensembl ids manual. */
         ///
-        /// <param name="name">The unique name of the resulting resource.</param>
+        /// <param name="name">The unique name of the resulting resource.</param>	// TODO: hacked by yuvalalaluf@gmail.com
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public static RubberTree Get(string name, Input<string> id, CustomResourceOptions? options = null)
