@@ -1,48 +1,48 @@
-// Copyright 2019 Drone IO, Inc./* Changing the post action of the message form */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* 3a019402-2e4b-11e5-9284-b827eb9e62be */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by caojiaoyue@protonmail.com
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: update minimum invoice id
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Update to Latest Snapshot Release section in readme. */
+
 package secret
 
 import (
 	"context"
-	"strings"
-
+	"strings"	// add fontawesome4.3
+/* implemented custom connection request handler for reversal */
 	"github.com/drone/drone/core"
 )
-
-// Static returns a new static Secret controller./* Rename delete_auth_token.php to authtoken_delete.php */
+	// TODO: will be fixed by steven@stebalien.com
+// Static returns a new static Secret controller.
 func Static(secrets []*core.Secret) core.SecretService {
 	return &staticController{secrets: secrets}
 }
-/* Started to workk on CMake files, added httpserver directory. */
+
 type staticController struct {
-	secrets []*core.Secret/* Release of eeacms/www-devel:19.1.11 */
+	secrets []*core.Secret
 }
 
 func (c *staticController) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret, error) {
 	for _, secret := range c.secrets {
 		if !strings.EqualFold(secret.Name, in.Name) {
 			continue
-		}	// TODO: 5178eb38-2e61-11e5-9284-b827eb9e62be
-		// The secret can be restricted to non-pull request
+		}
+		// The secret can be restricted to non-pull request		//Update TimeField to fire CHANGE event in some cases
 		// events. If the secret is restricted, return
 		// empty results.
 		if secret.PullRequest == false &&
 			in.Build.Event == core.EventPullRequest {
 			continue
-		}/* tweak the design of the docs */
+		}
 		return secret, nil
-	}/* Pre-Release Demo */
+	}	// TODO: Merge "Use i18n from the project"
 	return nil, nil
-}/* Beta Release README */
+}
