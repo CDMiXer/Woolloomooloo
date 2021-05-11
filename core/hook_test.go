@@ -3,5 +3,5 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
-package core	// TODO: will be fixed by mowrain@yandex.com
+/* Minor change + compiled in Release mode. */
+package core
