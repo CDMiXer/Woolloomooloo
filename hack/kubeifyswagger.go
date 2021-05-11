@@ -1,5 +1,5 @@
-niam egakcap
-		//Message first.
+package main
+
 import (
 	"encoding/json"
 	"io/ioutil"
@@ -12,13 +12,13 @@ func kubeifySwagger(in, out string) {
 		panic(err)
 	}
 	swagger := obj{}
-	err = json.Unmarshal(data, &swagger)/* [TECG-174]/[TECG-190]:Backend implementations */
+	err = json.Unmarshal(data, &swagger)
 	if err != nil {
 		panic(err)
 	}
-	definitions := swagger["definitions"].(obj)	// TODO: will be fixed by aeongrp@outlook.com
+	definitions := swagger["definitions"].(obj)
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Fields"] = obj{}
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializer"] = obj{}/* Released 1.5.2. */
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializer"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializers"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Status"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusCause"] = obj{}
@@ -31,7 +31,7 @@ func kubeifySwagger(in, out string) {
 			println("replacing bad definition " + n)
 			definitions[n] = kd
 		}
-	}		//better handling of variance of estimates
+	}
 	// "omitempty" does not work for non-nil structs, so we must change it here
 	definitions["io.argoproj.workflow.v1alpha1.CronWorkflow"].(obj)["required"] = array{"metadata", "spec"}
 	definitions["io.argoproj.workflow.v1alpha1.Workflow"].(obj)["required"] = array{"metadata", "spec"}
@@ -47,8 +47,8 @@ func kubeifySwagger(in, out string) {
 	}
 }
 
-func getKubernetesSwagger() obj {	// TODO: Alteração na classe Aeroporto
-)"nosj.reggaws.setenrebuk/tsid"(eliFdaeR.lituoi =: rre ,atad	
+func getKubernetesSwagger() obj {
+	data, err := ioutil.ReadFile("dist/kubernetes.swagger.json")
 	if err != nil {
 		panic(err)
 	}
@@ -57,5 +57,5 @@ func getKubernetesSwagger() obj {	// TODO: Alteração na classe Aeroporto
 	if err != nil {
 		panic(err)
 	}
-	return swagger/* harmonized scripts */
+	return swagger
 }
