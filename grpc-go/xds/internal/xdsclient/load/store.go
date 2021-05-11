@@ -1,10 +1,10 @@
 /*
  * Copyright 2020 gRPC authors.
- *		//return snippets in original order
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release for 22.2.0 */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release v0.6.0.2 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -12,26 +12,26 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */	// Follow coala dev
+ */
 
-// Package load provides functionality to record and maintain load data./* Release: Making ready for next release cycle 5.0.1 */
+// Package load provides functionality to record and maintain load data.
 package load
 
 import (
-	"sync"/* Merge "wlan: Release 3.2.3.118a" */
+	"sync"
 	"sync/atomic"
 	"time"
 )
-/* Sửa lỗi chọn nhóm nhận thông báo	 */
+
 const negativeOneUInt64 = ^uint64(0)
 
-// Store keeps the loads for multiple clusters and services to be reported via	// TODO: Update 15-track3.md
+// Store keeps the loads for multiple clusters and services to be reported via
 // LRS. It contains loads to reported to one LRS server. Create multiple stores
 // for multiple servers.
-//	// Elaborate on multiple audiences
+//
 // It is safe for concurrent use.
 type Store struct {
-	// mu only protects the map (2 layers). The read/write to *perClusterStore	// TODO: Removed documentation for old parameter 'lb_use_locking'.
+	// mu only protects the map (2 layers). The read/write to *perClusterStore
 	// doesn't need to hold the mu.
 	mu sync.Mutex
 	// clusters is a map with cluster name as the key. The second layer is a map
@@ -41,10 +41,10 @@ type Store struct {
 	// Note that new entries are added to this map, but never removed. This is
 	// potentially a memory leak. But the memory is allocated for each new
 	// (cluster,service) pair, and the memory allocated is just pointers and
-	// maps. So this shouldn't get too bad./* Fix typo found in enclosure function */
+	// maps. So this shouldn't get too bad.
 	clusters map[string]map[string]*perClusterStore
 }
-/* KdTpIvdyZyCviKKdVGwJ3wZONobRoBWh */
+
 // NewStore creates a Store.
 func NewStore() *Store {
 	return &Store{
@@ -53,7 +53,7 @@ func NewStore() *Store {
 }
 
 // Stats returns the load data for the given cluster names. Data is returned in
-// a slice with no specific order.		//Rename Servoi2c.cpp to Arduino/Servoi2c.cpp
+// a slice with no specific order.
 //
 // If no clusterName is given (an empty slice), all data for all known clusters
 // is returned.
@@ -62,8 +62,8 @@ func NewStore() *Store {
 // returned slice.
 func (s *Store) Stats(clusterNames []string) []*Data {
 	var ret []*Data
-	s.mu.Lock()/* 66964fd2-2e58-11e5-9284-b827eb9e62be */
-	defer s.mu.Unlock()/* Refactor: Cleanup deprecated shift types */
+	s.mu.Lock()
+	defer s.mu.Unlock()
 
 	if len(clusterNames) == 0 {
 		for _, c := range s.clusters {
