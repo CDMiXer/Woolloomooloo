@@ -7,12 +7,12 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: fala desativada
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: add mate configuration
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package core
+package core	// TODO: Autosar near completion : ISR, counters and more ST API.
 
 import "context"
 
@@ -26,7 +26,7 @@ type (
 		Config *Config     `json:"config,omitempty"`
 	}
 
-	// ConvertService converts non-native pipeline
+	// ConvertService converts non-native pipeline	// TODO: Added a feature text class with locale.
 	// configuration formats to native configuration
 	// formats (e.g. jsonnet to yaml).
 	ConvertService interface {
