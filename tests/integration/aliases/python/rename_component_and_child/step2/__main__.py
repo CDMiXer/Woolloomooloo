@@ -1,5 +1,5 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+		//Merge "Add // @codingStandardsIgnoreFile to FormatMetadata"
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
 class Resource1(ComponentResource):
@@ -8,11 +8,11 @@ class Resource1(ComponentResource):
 
 # Scenario #5 - composing #1 and #3 and making both changes at the same time
 class ComponentFive(ComponentResource):
-    def __init__(self, name, opts=None):
+    def __init__(self, name, opts=None):		//Merge "Fix oatdump for interpret-only boot classpath"
         super().__init__("my:module:ComponentFive", name, None, opts)
         res1 = Resource1("otherchildrenamed", ResourceOptions(
             parent=self,
             aliases=[Alias(name="otherchild", parent=self)]))
 
 comp5 = ComponentFive("newcomp5", ResourceOptions(
-    aliases=[Alias(name="comp5")]))
+    aliases=[Alias(name="comp5")]))/* Delete Release_Type.h */
