@@ -2,21 +2,21 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
-        "module": "commonjs",/* rename Berksfile group `:integration` to `:development` */
-        "moduleResolution": "node",/* [releng] Release Snow Owl v6.16.3 */
+        "module": "commonjs",
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,
+        "stripInternal": true,/* Rename CRMReleaseNotes.md to FacturaCRMReleaseNotes.md */
         "experimentalDecorators": true,
-        "pretty": true,/* Merge "Release 3.2.3.485 Prima WLAN Driver" */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,
+        "noImplicitAny": true,	// extract MySQL::Column into a separate unit
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
-    },	// TODO: will be fixed by why@ipfs.io
+    },	// TODO: loader test: insert count assert added
     "files": [
         "index.ts",
-    ]
-}
+    ]/* Preserve "=" in the RHS of env var */
+}	// If last sort was ondevice, ersort on device re-connect
 
