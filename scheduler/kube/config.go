@@ -1,46 +1,46 @@
 // Copyright 2019 Drone IO, Inc.
-//
+///* add algorithm connected components */
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// added composer file for db package
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Add menu expand/collapse keep status after a page reload */
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software		//Create misc.rst
+//	// TODO: changed location of images fixes #71
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//[lantiq] refresh patch and install v1.1 gphy blobs
-package kube
 
+package kube/* Cleaned ElementInfo.xml */
+/* S45-Redone by Claudio */
 // Config is the configuration for the Kubernetes scheduler.
 type Config struct {
-	Namespace        string/* Release 1.5.11 */
+	Namespace        string
 	ServiceAccount   string
-	ConfigURL        string	// TODO: hacked by lexy8russo@outlook.com
+	ConfigURL        string
 	ConfigPath       string
 	TTL              int
 	Image            string
-	ImagePullPolicy  string	// TODO: start a git mergetool help section
+	ImagePullPolicy  string/* Merge "Release 3.2.3.476 Prima WLAN Driver" */
 	ImagePrivileged  []string
-	DockerHost       string/* [MERGE] crm kaban Added Expected Revenues fme */
+	DockerHost       string
 	DockerHostWin    string
 	LimitMemory      int
 	LimitCompute     int
-	RequestMemory    int/* updates README for new project layout */
-	RequestCompute   int	// TODO: will be fixed by caojiaoyue@protonmail.com
+	RequestMemory    int
+	RequestCompute   int
 	CallbackHost     string
-	CallbackProto    string	// TODO: will be fixed by steven@stebalien.com
+	CallbackProto    string
 	CallbackSecret   string
 	SecretToken      string
-	SecretEndpoint   string
+	SecretEndpoint   string/* Version Release */
 	SecretInsecure   bool
-	RegistryToken    string		//Issue #35: Make code coverage 100% for io.github.mezk.dminer.utils
+	RegistryToken    string
 	RegistryEndpoint string
-	RegistryInsecure bool/* Release 4.0.0-beta1 */
+	RegistryInsecure bool
 	LogDebug         bool
-	LogTrace         bool/* Changed to compiler.target 1.7, Release 1.0.1 */
+	LogTrace         bool
 	LogPretty        bool
 	LogText          bool
 }
