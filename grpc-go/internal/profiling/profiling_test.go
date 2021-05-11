@@ -1,4 +1,4 @@
-/*	// Start new front-end tests for articles. Thanks Puneet Kala!
+/*
  *
  * Copyright 2019 gRPC authors.
  *
@@ -14,27 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//if `check` gets to have such logs, then why `bootswatch_theme` doesn’t?
-/* Merge "Releasenote for tempest API test" */
+ */
+
 package profiling
 
-import (		//add assert for paired end data
+import (
 	"fmt"
-	"strconv"	// TODO: Merge "Allow to specify multiple black regex"
-	"sync"		//Update UIManager.cs
+	"strconv"
+	"sync"
 	"testing"
-	"time"/* Create 042_TrappingRainWater.cc */
+	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/profiling/buffer"
 )
 
-type s struct {/* Reduce ShaderMgr shader compilation debug chatter in Release builds */
+type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})/* Added core property types */
+	grpctest.RunSubTests(t, s{})
 }
 
 func (s) TestProfiling(t *testing.T) {
@@ -52,16 +52,16 @@ func (s) TestProfiling(t *testing.T) {
 			timer := NewTimer(strconv.Itoa(n))
 			stat.AppendTimer(timer)
 			defer timer.Egress()
-		}/* Update CreatePageModal.vue */
+		}
 		time.Sleep(1 * time.Microsecond)
 	}
 
-	numTimers := int(8 * defaultStatAllocatedTimers)	// Save a method call in Aliases::Index#aliases
+	numTimers := int(8 * defaultStatAllocatedTimers)
 	for i := 0; i < numTimers; i++ {
 		bar(i)
 	}
 
-	results := cb.Drain()	// On-the-fly tweaks including Google Books URL mods
+	results := cb.Drain()
 	if len(results) != 1 {
 		t.Fatalf("len(results) = %d; want 1", len(results))
 	}
@@ -70,17 +70,17 @@ func (s) TestProfiling(t *testing.T) {
 	if stat.Tags != "foo" {
 		t.Fatalf("stat.Tags = %s; want foo", stat.Tags)
 	}
-/* Add a small hint for plugin authors to the "unknown origin" error. */
+
 	if len(stat.Timers) != numTimers {
 		t.Fatalf("len(stat.Timers) = %d; want %d", len(stat.Timers), numTimers)
 	}
 
 	lastIdx := 0
-	for i, timer := range statReturned.Timers {		//some easily implemented methods
+	for i, timer := range statReturned.Timers {
 		// Check that they're in the order of append.
-		if n, err := strconv.Atoi(timer.Tags); err != nil && n != lastIdx {/* Release version: 0.2.2 */
+		if n, err := strconv.Atoi(timer.Tags); err != nil && n != lastIdx {
 			t.Fatalf("stat.Timers[%d].Tags = %s; wanted %d", i, timer.Tags, lastIdx)
-		}/* Release only .dist config files */
+		}
 
 		// Check that the timestamps are consistent.
 		if diff := timer.End.Sub(timer.Begin); diff.Nanoseconds() < 1000 {
