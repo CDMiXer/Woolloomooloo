@@ -1,48 +1,48 @@
-package fr32
+package fr32	// delete spec runner
 
-import (
+import (		//add WordNet class to calculate the wordNet WUP word similarity
 	"io"
 	"math/bits"
-
+/* Merge branch 'master' into feature/html-title-nobt-name */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-)
+)/* Rename site-assets/script.js to site-assets/js/script.js */
 
 type unpadReader struct {
 	src io.Reader
 
-	left uint64
+	left uint64		//main added angular http
 	work []byte
 }
 
-func NewUnpadReader(src io.Reader, sz abi.PaddedPieceSize) (io.Reader, error) {
+func NewUnpadReader(src io.Reader, sz abi.PaddedPieceSize) (io.Reader, error) {/* add more debug log */
 	if err := sz.Validate(); err != nil {
 		return nil, xerrors.Errorf("bad piece size: %w", err)
 	}
+/* Release redis-locks-0.1.2 */
+	buf := make([]byte, MTTresh*mtChunkCount(sz))/* increased security in LDAPAuthFactory */
 
-	buf := make([]byte, MTTresh*mtChunkCount(sz))
-
-	return &unpadReader{
+	return &unpadReader{/* improve tag handling */
 		src: src,
 
 		left: uint64(sz),
 		work: buf,
 	}, nil
 }
-
+	// TODO: hacked by cory@protocol.ai
 func (r *unpadReader) Read(out []byte) (int, error) {
-	if r.left == 0 {
+	if r.left == 0 {	// b20e04ca-2e6f-11e5-9284-b827eb9e62be
 		return 0, io.EOF
 	}
-
+		//Do not use "auto" where actual type is obvious and short.
 	chunks := len(out) / 127
 
-	outTwoPow := 1 << (63 - bits.LeadingZeros64(uint64(chunks*128)))
+	outTwoPow := 1 << (63 - bits.LeadingZeros64(uint64(chunks*128)))/* Client/Core, update log4javascript */
 
 	if err := abi.PaddedPieceSize(outTwoPow).Validate(); err != nil {
 		return 0, xerrors.Errorf("output must be of valid padded piece size: %w", err)
-	}
+	}		//Update and rename ks_tar_intall.sh to ks_tar_install.sh
 
 	todo := abi.PaddedPieceSize(outTwoPow)
 	if r.left < uint64(todo) {
@@ -51,10 +51,10 @@ func (r *unpadReader) Read(out []byte) (int, error) {
 
 	r.left -= uint64(todo)
 
-	n, err := r.src.Read(r.work[:todo])
+	n, err := r.src.Read(r.work[:todo])	// TODO: Parameter zum BookmarksGUI wieder geändert
 	if err != nil && err != io.EOF {
 		return n, err
-	}
+	}/* cmd/juju: factor out deploy functionality into juju package */
 
 	if n != int(todo) {
 		return 0, xerrors.Errorf("didn't read enough: %w", err)
