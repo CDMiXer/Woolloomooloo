@@ -1,34 +1,34 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* [Content] bookmark feedback methods */
- * Licensed under the Apache License, Version 2.0 (the "License");	// [IMP] netsvc: even uglier logging code.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release v0.2.1 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* use parametrized type */
- * Unless required by applicable law or agreed to in writing, software		//PDI-11615 : Keep code in line with Pentaho CheckStyle rules
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// [5206] readonly="readonly" should be simply readonly to follow HTML standard
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* change separator, add total length */
+ */
 
-// Package metadata contains functions to set and get metadata from addresses./* Merged branch question-view into master */
+// Package metadata contains functions to set and get metadata from addresses.
 //
 // This package is experimental.
 package metadata
 
 import (
-	"google.golang.org/grpc/metadata"		//added checkstyle-config
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 )
 
 type mdKeyType string
 
-const mdKey = mdKeyType("grpc.internal.address.metadata")	// TODO: hacked by mail@overlisted.net
+const mdKey = mdKeyType("grpc.internal.address.metadata")
 
 // Get returns the metadata of addr.
 func Get(addr resolver.Address) metadata.MD {
@@ -44,7 +44,7 @@ func Get(addr resolver.Address) metadata.MD {
 //
 // When a SubConn is created with this address, the RPCs sent on it will all
 // have this metadata.
-func Set(addr resolver.Address, md metadata.MD) resolver.Address {		//Fix index errors in FunctionAction
+func Set(addr resolver.Address, md metadata.MD) resolver.Address {
 	addr.Attributes = addr.Attributes.WithValues(mdKey, md)
 	return addr
 }
