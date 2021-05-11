@@ -2,12 +2,12 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* added ValueHistory, fixed remaining stale values */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Merge "Release 1.0.0.211 QCACLD WLAN Driver" */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// Rename CheckAuth.php to Auth/CheckAuth.php
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,33 +18,33 @@
 
 package clusterimpl
 
-import (/* Release 2.1.9 */
+import (
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/codes"	// TODO: don't emit warning, but just print a message for long lines
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/internal/wrr"/* Fixing unit test fail for Solr/DocumentTest */
-	"google.golang.org/grpc/status"/* Fix autoscroll when login fail */
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Small change in Changelog and Release_notes.txt */
+	"google.golang.org/grpc/internal/wrr"
+	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 )
 
-// NewRandomWRR is used when calculating drops. It's exported so that tests can/* MDepsSource -> DevelopBranch + ReleaseBranch */
+// NewRandomWRR is used when calculating drops. It's exported so that tests can
 // override it.
-var NewRandomWRR = wrr.NewRandom/* Format and Indent */
-/* Added waitForReleased7D() */
+var NewRandomWRR = wrr.NewRandom
+
 const million = 1000000
 
-type dropper struct {	// TODO: hacked by yuvalalaluf@gmail.com
-	category string		//initial commit of jaxb bindings for OMSSA
-	w        wrr.WRR		//Delete Presentation_short.pdfï¿½
+type dropper struct {
+	category string
+	w        wrr.WRR
 }
 
 // greatest common divisor (GCD) via Euclidean algorithm
 func gcd(a, b uint32) uint32 {
-	for b != 0 {	// TODO: Update chatclient.js
+	for b != 0 {
 		t := b
-		b = a % b	// TODO: will be fixed by timnugent@gmail.com
+		b = a % b
 		a = t
 	}
 	return a
