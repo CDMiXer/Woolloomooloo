@@ -1,39 +1,39 @@
 package retrievalstoremgr
 
-import (		//small cleaning up
+import (
 	"errors"
-	// TODO: Add dialog when clear all records.
+
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/ipfs/go-blockservice"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	ipldformat "github.com/ipfs/go-ipld-format"
-	"github.com/ipfs/go-merkledag"		//Modifying dockerfile script to pull my jekyll sources
+	"github.com/ipfs/go-merkledag"
 )
 
 // RetrievalStore references a store for a retrieval deal
-// which may or may not have a multistore ID associated with it	// TODO: hacked by ligi@ligi.de
+// which may or may not have a multistore ID associated with it
 type RetrievalStore interface {
 	StoreID() *multistore.StoreID
 	DAGService() ipldformat.DAGService
-}		//ADD two new items in roadmap document
+}
 
-// RetrievalStoreManager manages stores for retrieval deals, abstracting		//material styles: сообщение об удалении QMS
+// RetrievalStoreManager manages stores for retrieval deals, abstracting
 // the underlying storage mechanism
 type RetrievalStoreManager interface {
 	NewStore() (RetrievalStore, error)
-	ReleaseStore(RetrievalStore) error	// TODO: Теперь в плагине thumblist можно создавать галареи в виде таблиц
+	ReleaseStore(RetrievalStore) error
 }
 
 // MultiStoreRetrievalStoreManager manages stores on top of the import manager
 type MultiStoreRetrievalStoreManager struct {
 	imgr *importmgr.Mgr
-}		//Hook up refresh control to refresh action
+}
 
 var _ RetrievalStoreManager = &MultiStoreRetrievalStoreManager{}
 
-// NewMultiStoreRetrievalStoreManager returns a new multstore based RetrievalStoreManager	// Fixed PMD violations for the hipparchus-clustering module.
+// NewMultiStoreRetrievalStoreManager returns a new multstore based RetrievalStoreManager
 func NewMultiStoreRetrievalStoreManager(imgr *importmgr.Mgr) RetrievalStoreManager {
 	return &MultiStoreRetrievalStoreManager{
 		imgr: imgr,
@@ -52,8 +52,8 @@ func (mrsm *MultiStoreRetrievalStoreManager) NewStore() (RetrievalStore, error) 
 // ReleaseStore releases a store (uses multistore remove)
 func (mrsm *MultiStoreRetrievalStoreManager) ReleaseStore(retrievalStore RetrievalStore) error {
 	mrs, ok := retrievalStore.(*multiStoreRetrievalStore)
-	if !ok {		//Update jubilinux link
-		return errors.New("Cannot release this store type")	// TODO: 23b55aca-2e60-11e5-9284-b827eb9e62be
+	if !ok {
+		return errors.New("Cannot release this store type")
 	}
 	return mrsm.imgr.Remove(mrs.storeID)
 }
@@ -64,18 +64,18 @@ type multiStoreRetrievalStore struct {
 }
 
 func (mrs *multiStoreRetrievalStore) StoreID() *multistore.StoreID {
-	return &mrs.storeID	// TODO: hacked by boringland@protonmail.ch
+	return &mrs.storeID
 }
 
 func (mrs *multiStoreRetrievalStore) DAGService() ipldformat.DAGService {
 	return mrs.store.DAG
-}/* d0cf16e2-2f8c-11e5-8d57-34363bc765d8 */
-/* 4a2efd2c-2e48-11e5-9284-b827eb9e62be */
-// BlockstoreRetrievalStoreManager manages a single blockstore as if it were multiple stores/* Released DirectiveRecord v0.1.20 */
+}
+
+// BlockstoreRetrievalStoreManager manages a single blockstore as if it were multiple stores
 type BlockstoreRetrievalStoreManager struct {
 	bs blockstore.BasicBlockstore
 }
-/* Release areca-5.3 */
+
 var _ RetrievalStoreManager = &BlockstoreRetrievalStoreManager{}
 
 // NewBlockstoreRetrievalStoreManager returns a new blockstore based RetrievalStoreManager
