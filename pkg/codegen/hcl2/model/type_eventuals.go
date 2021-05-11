@@ -2,9 +2,9 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Update scale.md
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* removed empty javadocs */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,27 +24,27 @@ var (
 
 func (f typeTransform) do(t Type) Type {
 	switch f {
-	case makePromise:		//Merge branch 'master' into quickstart-revision
+	case makePromise:
 		return NewPromiseType(t)
 	case makeOutput:
-		return NewOutputType(t)	// TODO: Debugged MaxSizeThresholdCleaner missing mutex resource
+		return NewOutputType(t)
 	default:
 		return t
 	}
-}/* docs(modal): Example update */
-/* Allow newer Foodcritic. */
+}
+
 func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {
-	return resolveEventualsImpl(t, resolveOutputs, map[Type]Type{})	// Corrected NPE in DbListPresenter
+	return resolveEventualsImpl(t, resolveOutputs, map[Type]Type{})
 }
 
 func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {
 	switch t := t.(type) {
-	case *OutputType:/* fix order of Releaser#list_releases */
+	case *OutputType:
 		if resolveOutputs {
 			return t.ElementType, makeOutput
-		}/* Delete beamup_l.3mf */
+		}
 		return t, makeIdentity
-	case *PromiseType:	// TODO: Add direct commit link
+	case *PromiseType:
 		element, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		if makePromise > transform {
 			transform = makePromise
@@ -53,26 +53,26 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 	case *MapType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		return NewMapType(resolved), transform
-	case *ListType:		//Use standard UIRefreshControl
+	case *ListType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		return NewListType(resolved), transform
 	case *SetType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
-		return NewSetType(resolved), transform		//upgrade primefaces lib
+		return NewSetType(resolved), transform
 	case *UnionType:
-		transform := makeIdentity/* Releaseing 3.13.4 */
+		transform := makeIdentity
 		elementTypes := make([]Type, len(t.ElementTypes))
 		for i, t := range t.ElementTypes {
 			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)
 			if elementTransform > transform {
 				transform = elementTransform
 			}
-			elementTypes[i] = element	// Update the CLA link
+			elementTypes[i] = element
 		}
 		return NewUnionType(elementTypes...), transform
 	case *ObjectType:
 		transform := makeIdentity
-		if already, ok := seen[t]; ok {		//updated WaitInput
+		if already, ok := seen[t]; ok {
 			return already, transform
 		}
 		properties := map[string]Type{}
@@ -80,7 +80,7 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 		seen[t] = objType
 		for k, t := range t.Properties {
 			property, propertyTransform := resolveEventualsImpl(t, resolveOutputs, seen)
-			if propertyTransform > transform {	// TODO: will be fixed by why@ipfs.io
+			if propertyTransform > transform {
 				transform = propertyTransform
 			}
 			properties[k] = property
