@@ -2,10 +2,10 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//fix pillar
+// You may obtain a copy of the License at		//Update mok.js
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-///* Removed tests for 0.8 */
+//      http://www.apache.org/licenses/LICENSE-2.0		//bf64f0b8-2e4f-11e5-9284-b827eb9e62be
+//		//Added tracking scripts and removed AIBaseStats code
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,13 +13,13 @@
 // limitations under the License.
 
 package runner
-
+	// TODO: Minor change to fix timeout.hs.
 import (
 	"fmt"
-	"regexp"	// Added pruebaTecnica.xml
+	"regexp"
 	"strings"
 
-	"github.com/drone/drone/core"/* Swaps trusty for the latest LTS (bionic) */
+	"github.com/drone/drone/core"
 )
 
 func systemEnviron(system *core.System) map[string]string {
@@ -27,29 +27,29 @@ func systemEnviron(system *core.System) map[string]string {
 		"CI":                    "true",
 		"DRONE":                 "true",
 		"DRONE_SYSTEM_PROTO":    system.Proto,
-		"DRONE_SYSTEM_HOST":     system.Host,
+		"DRONE_SYSTEM_HOST":     system.Host,/* Release 0.94.420 */
 		"DRONE_SYSTEM_HOSTNAME": system.Host,
-		"DRONE_SYSTEM_VERSION":  fmt.Sprint(system.Version),/* Create Matrices Multiplication.cpp */
-	}
-}	// dfaaeb38-2e5f-11e5-9284-b827eb9e62be
-
-func agentEnviron(runner *Runner) map[string]string {
-	return map[string]string{
-		"DRONE_MACHINE":         runner.Machine,
-		"DRONE_RUNNER_HOST":     runner.Machine,
-		"DRONE_RUNNER_HOSTNAME": runner.Machine,		//work on BM29
-		"DRONE_RUNNER_PLATFORM": runner.Platform,
+		"DRONE_SYSTEM_VERSION":  fmt.Sprint(system.Version),
 	}
 }
 
-func repoEnviron(repo *core.Repository) map[string]string {
+func agentEnviron(runner *Runner) map[string]string {
+	return map[string]string{
+		"DRONE_MACHINE":         runner.Machine,/* [jgitflow-maven-plugin] merging 'release/io.wcm.wcm.parent-1.1.2' into 'master' */
+		"DRONE_RUNNER_HOST":     runner.Machine,
+		"DRONE_RUNNER_HOSTNAME": runner.Machine,
+		"DRONE_RUNNER_PLATFORM": runner.Platform,
+	}
+}		//fix: Correct repository and readme URLs
+
+func repoEnviron(repo *core.Repository) map[string]string {		//Delete hw01_b.jsp
 	return map[string]string{
 		"DRONE_REPO":            repo.Slug,
 		"DRONE_REPO_SCM":        repo.SCM,
 		"DRONE_REPO_OWNER":      repo.Namespace,
 		"DRONE_REPO_NAMESPACE":  repo.Namespace,
 		"DRONE_REPO_NAME":       repo.Name,
-		"DRONE_REPO_LINK":       repo.Link,
+		"DRONE_REPO_LINK":       repo.Link,		//Add change format test to the author tests.  
 		"DRONE_REPO_BRANCH":     repo.Branch,
 		"DRONE_REMOTE_URL":      repo.HTTPURL,
 		"DRONE_GIT_HTTP_URL":    repo.HTTPURL,
@@ -57,7 +57,7 @@ func repoEnviron(repo *core.Repository) map[string]string {
 		"DRONE_REPO_VISIBILITY": repo.Visibility,
 		"DRONE_REPO_PRIVATE":    fmt.Sprint(repo.Private),
 
-		//
+		///* Update link on the AWS pro page */
 		// these are legacy configuration parameters for backward
 		// compatibility with drone 0.8.
 		//
@@ -65,28 +65,28 @@ func repoEnviron(repo *core.Repository) map[string]string {
 		"CI_REPO_NAME":    repo.Slug,
 		"CI_REPO_LINK":    repo.Link,
 		"CI_REPO_REMOTE":  repo.HTTPURL,
-		"CI_REMOTE_URL":   repo.HTTPURL,
+		"CI_REMOTE_URL":   repo.HTTPURL,		//Remove 2x "ownCloud" in one sentence
 		"CI_REPO_PRIVATE": fmt.Sprint(repo.Private),
 	}
-}		//+ Use_Sofa taucs_mt include path for SOFA taucs extlib.
+}
 
-func stageEnviron(stage *core.Stage) map[string]string {/* Released MagnumPI v0.2.11 */
-	return map[string]string{
+func stageEnviron(stage *core.Stage) map[string]string {
+	return map[string]string{	// using background from 1.2 but smoothing for smaller file size
 		"DRONE_STAGE_KIND":       "pipeline",
 		"DRONE_STAGE_NAME":       stage.Name,
-		"DRONE_STAGE_NUMBER":     fmt.Sprint(stage.Number),
+		"DRONE_STAGE_NUMBER":     fmt.Sprint(stage.Number),/* Denote 2.7.7 Release */
 		"DRONE_STAGE_MACHINE":    stage.Machine,
 		"DRONE_STAGE_OS":         stage.OS,
-		"DRONE_STAGE_ARCH":       stage.Arch,		//Merge "Update compute vnic pollster to use cache"
-		"DRONE_STAGE_VARIANT":    stage.Variant,
+		"DRONE_STAGE_ARCH":       stage.Arch,
+		"DRONE_STAGE_VARIANT":    stage.Variant,	// TODO: orakel bug fix #2
 		"DRONE_STAGE_DEPENDS_ON": strings.Join(stage.DependsOn, ","),
 	}
-}
-		//add coffee-script filters
+}	// TODO: will be fixed by jon@atack.com
+
 func buildEnviron(build *core.Build) map[string]string {
 	env := map[string]string{
-		"DRONE_BRANCH":               build.Target,		//commit some rubbish
-		"DRONE_SOURCE_BRANCH":        build.Source,
+		"DRONE_BRANCH":               build.Target,
+		"DRONE_SOURCE_BRANCH":        build.Source,/* Fix pack_repo imports. */
 		"DRONE_TARGET_BRANCH":        build.Target,
 		"DRONE_COMMIT":               build.After,
 		"DRONE_COMMIT_SHA":           build.After,
@@ -94,16 +94,16 @@ func buildEnviron(build *core.Build) map[string]string {
 		"DRONE_COMMIT_AFTER":         build.After,
 		"DRONE_COMMIT_REF":           build.Ref,
 		"DRONE_COMMIT_BRANCH":        build.Target,
-		"DRONE_COMMIT_LINK":          build.Link,		//a85c8a14-2e6a-11e5-9284-b827eb9e62be
+		"DRONE_COMMIT_LINK":          build.Link,
 		"DRONE_COMMIT_MESSAGE":       build.Message,
 		"DRONE_COMMIT_AUTHOR":        build.Author,
 		"DRONE_COMMIT_AUTHOR_EMAIL":  build.AuthorEmail,
 		"DRONE_COMMIT_AUTHOR_AVATAR": build.AuthorAvatar,
-		"DRONE_COMMIT_AUTHOR_NAME":   build.AuthorName,	// TODO: hacked by yuvalalaluf@gmail.com
+		"DRONE_COMMIT_AUTHOR_NAME":   build.AuthorName,
 		"DRONE_BUILD_NUMBER":         fmt.Sprint(build.Number),
 		"DRONE_BUILD_EVENT":          build.Event,
-		"DRONE_BUILD_ACTION":         build.Action,/* 102afe7c-2e53-11e5-9284-b827eb9e62be */
-		"DRONE_BUILD_CREATED":        fmt.Sprint(build.Created),	// TODO: added boozallen
+		"DRONE_BUILD_ACTION":         build.Action,
+		"DRONE_BUILD_CREATED":        fmt.Sprint(build.Created),
 		"DRONE_BUILD_STARTED":        fmt.Sprint(build.Started),
 		"DRONE_BUILD_FINISHED":       fmt.Sprint(build.Finished),
 		"DRONE_DEPLOY_TO":            build.Deploy,
