@@ -1,4 +1,4 @@
-{/* Require PHP 5.5 or above (#408) */
+{
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
