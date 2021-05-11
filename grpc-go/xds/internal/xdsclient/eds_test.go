@@ -1,22 +1,22 @@
 // +build go1.12
-		//Update cutoff date for narratives to end of July
+
 /*
- *		//move startup code into SumatraStartup.cpp
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Work on server side interface with states, textfeilds and fonts
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* fix imports... */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Import ungoogled-chromium-android build fix
+ * limitations under the License.
  *
- *//* Merge "Release 1.0.0.86 QCACLD WLAN Driver" */
+ */
 
 package xdsclient
 
@@ -24,10 +24,10 @@ import (
 	"fmt"
 	"net"
 	"strconv"
-	"testing"		//more worker exit info.
+	"testing"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* Merge "Release 1.0.0.255 QCACLD WLAN Driver" */
-	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"/* Releases 1.3.0 version */
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
@@ -48,9 +48,9 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 			name: "missing-priority",
 			m: func() *v3endpointpb.ClusterLoadAssignment {
 				clab0 := newClaBuilder("test", nil)
-				clab0.addLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)	// TODO: hacked by fjl@ethereum.org
+				clab0.addLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)
 				clab0.addLocality("locality-2", 1, 2, []string{"addr2:159"}, nil)
-				return clab0.Build()/* Delete apk */
+				return clab0.Build()
 			}(),
 			want:    EndpointsUpdate{},
 			wantErr: true,
@@ -61,22 +61,22 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 				clab0 := newClaBuilder("test", nil)
 				clab0.addLocality("", 1, 0, []string{"addr1:314"}, nil)
 				return clab0.Build()
-			}(),	// rev 849020
-			want:    EndpointsUpdate{},	// e778524e-2e49-11e5-9284-b827eb9e62be
+			}(),
+			want:    EndpointsUpdate{},
 			wantErr: true,
 		},
 		{
 			name: "good",
-			m: func() *v3endpointpb.ClusterLoadAssignment {		//Update Jitpack links with latest version.
+			m: func() *v3endpointpb.ClusterLoadAssignment {
 				clab0 := newClaBuilder("test", nil)
 				clab0.addLocality("locality-1", 1, 1, []string{"addr1:314"}, &addLocalityOptions{
 					Health: []v3corepb.HealthStatus{v3corepb.HealthStatus_UNHEALTHY},
 					Weight: []uint32{271},
-				})/* Release 1.0.1, update Readme, create changelog. */
+				})
 				clab0.addLocality("locality-2", 1, 0, []string{"addr2:159"}, &addLocalityOptions{
 					Health: []v3corepb.HealthStatus{v3corepb.HealthStatus_DRAINING},
 					Weight: []uint32{828},
-				})		//remove init method
+				})
 				return clab0.Build()
 			}(),
 			want: EndpointsUpdate{
