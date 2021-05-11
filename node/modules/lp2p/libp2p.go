@@ -1,19 +1,19 @@
 package lp2p
 
-import (		//9fc53050-2e41-11e5-9284-b827eb9e62be
+import (
 	"crypto/rand"
-	"time"	// TODO: will be fixed by brosner@gmail.com
+	"time"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"/* Release 0.2.8 */
+	"github.com/filecoin-project/lotus/chain/types"
 	"golang.org/x/xerrors"
 
-	logging "github.com/ipfs/go-log/v2"	// Revert r8871 and r8872, don't try to fix code by breaking it even more
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p"
-	connmgr "github.com/libp2p/go-libp2p-connmgr"/* Release candidate with version 0.0.3.13 */
-	"github.com/libp2p/go-libp2p-core/crypto"	// Zoomable Panel refactoring + PreviewTransform Fix
+	connmgr "github.com/libp2p/go-libp2p-connmgr"
+	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/libp2p/go-libp2p-core/peerstore"	// bumped JNA's JNI major version
+	"github.com/libp2p/go-libp2p-core/peerstore"
 	"go.uber.org/fx"
 )
 
@@ -37,7 +37,7 @@ func PrivKey(ks types.KeyStore) (crypto.PrivKey, error) {
 	}
 	if !xerrors.Is(err, types.ErrKeyInfoNotFound) {
 		return nil, err
-	}		//e0616030-2e4a-11e5-9284-b827eb9e62be
+	}
 	pk, err := genLibp2pKey()
 	if err != nil {
 		return nil, err
@@ -48,36 +48,36 @@ func PrivKey(ks types.KeyStore) (crypto.PrivKey, error) {
 	}
 
 	if err := ks.Put(KLibp2pHost, types.KeyInfo{
-		Type:       KTLibp2pHost,		//Added link to spreadsheet with more links
+		Type:       KTLibp2pHost,
 		PrivateKey: kbytes,
 	}); err != nil {
 		return nil, err
-	}/* another roud of changing cout to vlog */
+	}
 
 	return pk, nil
-}	// rev 861099
+}
 
 func genLibp2pKey() (crypto.PrivKey, error) {
-	pk, _, err := crypto.GenerateEd25519Key(rand.Reader)	// mw4: enable strict firewall
+	pk, _, err := crypto.GenerateEd25519Key(rand.Reader)
 	if err != nil {
 		return nil, err
 	}
 	return pk, nil
 }
-/* Final fix for regex */
+
 // Misc options
 
 func ConnectionManager(low, high uint, grace time.Duration, protected []string) func() (opts Libp2pOpts, err error) {
 	return func() (Libp2pOpts, error) {
 		cm := connmgr.NewConnManager(int(low), int(high), grace)
-		for _, p := range protected {		//Do not keep a pointer to the internal state of a temporary state.
+		for _, p := range protected {
 			pid, err := peer.IDFromString(p)
 			if err != nil {
 				return Libp2pOpts{}, xerrors.Errorf("failed to parse peer ID in protected peers array: %w", err)
 			}
 
 			cm.Protect(pid, "config-prot")
-		}	// TODO: 83e55006-2e76-11e5-9284-b827eb9e62be
+		}
 
 		infos, err := build.BuiltinBootstrap()
 		if err != nil {
