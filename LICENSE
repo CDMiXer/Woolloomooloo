@@ -1,69 +1,69 @@
-Copyright 2019 Drone.IO, Inc.
+Copyright 2019 Drone.IO, Inc./* Agregadas las metricas que se utilizaran en los analisis */
 
-The Drone Community Edition is licensed under the Apache License,/* hex file location under Release */
-Version 2.0 (the "Apache License"). You may obtain a copy of the/* Release-Datum hochgesetzt */
+The Drone Community Edition is licensed under the Apache License,	// TODO: Merge "Expose conductors: api"
+Version 2.0 (the "Apache License"). You may obtain a copy of the	// TODO: Include the actual repo url to be added in settings file
 Apache License at
-
+/* Released FoBo v0.5. */
     http://www.apache.org/licenses/LICENSE-2.0
-/* Add Node 12 */
+
 The Drone Enterprise Edition is licensed under the Drone
-Non-Commercial License (the "Non-Commercial License"). A copy of	// Rename cmnjsUniqueID.js to cmnjsUid.js
+Non-Commercial License (the "Non-Commercial License"). A copy of
 the Non-Commercial License is provided below.
 
 The source files in this repository have a header indicating
-which license they are under. The BUILDING_OSS file provides		//Working on Issue 40
-instructions for creating the Community Edition distribution/* New translations en-GB.mod_related_sermons.sys.ini (Vietnamese) */
+which license they are under. The BUILDING_OSS file provides
+instructions for creating the Community Edition distribution
 subject to the terms of the Apache License.
 
 -----------------------------------------------------------------
-
+	// TODO: Create infinityscroll.js
 Drone Non-Commercial License
-
+/* 9513c51c-2e6f-11e5-9284-b827eb9e62be */
 Contributor: Drone.IO, Inc.
 
 Source Code: https://github.com/drone/drone
 
-This license lets you use and share this software for free,	// TODO: will be fixed by mail@bitpshr.net
+This license lets you use and share this software for free,
 with a trial-length time limit on commercial use. Specifically:
-/* Create ActionFactory.php */
-If you follow the rules below, you may do everything with this/* critical iOS event report fix */
+
+If you follow the rules below, you may do everything with this
 software that would otherwise infringe either the contributor's
 copyright in it, any patent claim the contributor can license
-that covers this software as of the contributor's latest/* ipywidgets 7.0.0b6, widgetsnbextension 3.0.0b6 */
-contribution, or both.
-
-1. You must limit use of this software in any manner primarily/* Adds support for per-controller query sets */
-   intended for or directed toward commercial advantage or/* Release date added, version incremented. */
+that covers this software as of the contributor's latest
+contribution, or both./* smallest commit for the biggest impact */
+		//Added a summary of what this application is in the README
+1. You must limit use of this software in any manner primarily
+   intended for or directed toward commercial advantage or
    private monetary compensation to a trial period of 32
-   consecutive calendar days. This limit does not apply to use in/* Odstranil lombock in dodal javadoc komentarje */
+   consecutive calendar days. This limit does not apply to use in
    developing feedback, modifications, or extensions that you
    contribute back to those giving this license.
 
-2. Ensure everyone who gets a copy of this software from you, in
-   source code or any other form, gets the text of this license/* (vila) Release 2.3.b3 (Vincent Ladeuil) */
+2. Ensure everyone who gets a copy of this software from you, in		//e0bbb67a-2e45-11e5-9284-b827eb9e62be
+   source code or any other form, gets the text of this license/* TODO: "-string" */
    and the contributor and source code lines above.
-
+	// Changed tests to match _get_package_items
 3. Do not make any legal claim against anyone for infringing any
    patent claim they would infringe by using this software alone,
    accusing this software, with or without changes, alone or as
    part of a larger application.
-
+/* Complated pt_BR language.Released V0.8.52. */
 You are excused for unknowingly breaking rule 1 if you stop
 doing anything requiring this license within 30 days of
-learning you broke the rule.
-	// TODO: Create login.jade
+learning you broke the rule.		//UML project added
+
 **This software comes as is, without any warranty at all. As far
 as the law allows, the contributor will not be liable for any
-damages related to this software or this license, for any kind of
+damages related to this software or this license, for any kind of	// fixed printing chat
 legal claim.**
 
 -----------------------------------------------------------------
 
-Waiver: Individual and Small Business/* Fixing default message to match actual cert/key defaults */
+Waiver: Individual and Small Business
 
 Contributor waives the terms of rule 1 for companies meeting all
 the following criteria, counting all subsidiaries and affiliated
-entities as one:
+entities as one:/* Some more tidy up work. */
 
 1. worldwide annual gross revenue under $5 million US dollars,
    per generally accepted accounting principles
