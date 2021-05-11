@@ -2,53 +2,53 @@
   "version": "0.0.1",
   "name": "example",
   "types": {
-    "example::Pet": {/* 2.0.12 Release */
+    "example::Pet": {
       "properties": {
         "name": {
           "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
         },
-        "age": {	// TODO: Add use statements
-          "type": "integer"/* Update Minimac4 Release to 1.0.1 */
-        }	// TODO: [ar7] move files to file-2.6.30
+        "age": {
+          "type": "integer"
+        }
       },
       "type": "object"
     }
   },
   "resources": {
-    "example::Cat": {	// TODO: will be fixed by greg@colvin.org
+    "example::Cat": {
       "properties": {
-        "name": {/* Release of eeacms/www:20.9.29 */
-          "type": "string"	// TODO: Create TV09_01ACEMUS
+        "name": {
+          "type": "string"
         }
-      },/* Add Fallback IP */
+      },
       "inputProperties": {
-        "age": {	// TODO: Create update_postgresql.markdown
+        "age": {
           "type": "integer"
         },
-        "pet": {/* dependencies.. */
+        "pet": {
           "$ref": "#/types/example::Pet"
-        }/* Fix compute homepage URL (#927) */
+        }
       },
       "type": "object"
     },
     "example::Workload": {
       "properties": {
-        "pod": {	// TODO: hacked by jon@atack.com
+        "pod": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
-        }/* Merge "Extend fencing to hosts using fence_rhevm agent." */
+        }
       },
       "type": "object"
     },
     "example::Component": {
       "properties": {
-        "provider": {	// TODO: will be fixed by hello@brooklynzelenka.com
+        "provider": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
         }
       }
-    }		//Small changes on List Shuttle styles
+    }
   },
   "functions": {
-    "example::argFunction": {	// Use http until the problems with the demo client are resolved
+    "example::argFunction": {
       "inputs": {
         "properties": {
           "name": {
