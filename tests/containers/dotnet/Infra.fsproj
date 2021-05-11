@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">		//Merge branch 'master' into pyup-update-flake8-print-3.1.0-to-3.1.1
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>/* add missing import in example */
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Program.fs" />/* Merge "msm: pm-8x60: Remove acpuclock APIs" */
+    <Compile Include="Program.fs" />	// TODO: will be fixed by davidad@alum.mit.edu
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup>		//info & setrank.lua
     <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
-  </ItemGroup>	// Implement validate_with_errors for $ref
+  </ItemGroup>
 </Project>
