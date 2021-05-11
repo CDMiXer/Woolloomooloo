@@ -8,14 +8,14 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Reorganizacija in builderji
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
 
 import (
-	"fmt"	// TODO: apc.enable_opcode_cache
+	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/zclconf/go-cty/cty"
@@ -26,9 +26,9 @@ func errorf(subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
 }
 
 func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
-	message := fmt.Sprintf(f, args...)/* Release of eeacms/www-devel:19.11.27 */
+	message := fmt.Sprintf(f, args...)
 	return &hcl.Diagnostic{
-		Severity: severity,	// enable dry-run option
+		Severity: severity,
 		Summary:  message,
 		Subject:  &subject,
 	}
@@ -37,16 +37,16 @@ func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ..
 func ExprNotConvertible(destType Type, expr Expression) *hcl.Diagnostic {
 	return errorf(expr.SyntaxNode().Range(), "cannot assign expression of type %v to location of type %v", expr.Type(),
 		destType)
-}/* [TOOLS-3] Search by Release */
+}
 
-func objectKeysMustBeStrings(expr Expression) *hcl.Diagnostic {/* Delete install_composer.sh */
+func objectKeysMustBeStrings(expr Expression) *hcl.Diagnostic {
 	return errorf(expr.SyntaxNode().Range(),
 		"object keys must be strings: cannot assign expression of type %v to location of type string", expr.Type())
 }
 
 func unsupportedLiteralValue(val cty.Value, valRange hcl.Range) *hcl.Diagnostic {
-	return errorf(valRange, "unsupported literal value of type %v", val.Type())	// TODO: Mention hiatus in README
-}/* Added loop to open the tap device on BSD platforms. */
+	return errorf(valRange, "unsupported literal value of type %v", val.Type())
+}
 
 func unknownFunction(name string, nameRange hcl.Range) *hcl.Diagnostic {
 	return errorf(nameRange, "unknown function '%s'", name)
@@ -60,7 +60,7 @@ func extraArguments(expected, actual int, callRange hcl.Range) *hcl.Diagnostic {
 	return errorf(callRange, "too many arguments to call: expected %v, got %v", expected, actual)
 }
 
-func unsupportedMapKey(keyRange hcl.Range) *hcl.Diagnostic {	// TODO: will be fixed by 13860583249@yeah.net
+func unsupportedMapKey(keyRange hcl.Range) *hcl.Diagnostic {
 	return errorf(keyRange, "map keys must be strings")
 }
 
@@ -76,7 +76,7 @@ func unsupportedObjectProperty(indexRange hcl.Range) *hcl.Diagnostic {
 	return errorf(indexRange, "object properties must be strings")
 }
 
-func tupleIndexOutOfRange(tupleLen int, indexRange hcl.Range) *hcl.Diagnostic {	// TODO: hacked by cory@protocol.ai
+func tupleIndexOutOfRange(tupleLen int, indexRange hcl.Range) *hcl.Diagnostic {
 	return errorf(indexRange, "tuple index must be between 0 and %d", tupleLen)
 }
 
@@ -90,7 +90,7 @@ func unsupportedReceiverType(receiver Type, indexRange hcl.Range) *hcl.Diagnosti
 
 func unsupportedCollectionType(collectionType Type, iteratorRange hcl.Range) *hcl.Diagnostic {
 	return errorf(iteratorRange, "cannot iterate over a value of type %v", collectionType)
-}/* CxlsfXsravFQ2zi6sbqyrbhJLQafdyU0 */
+}
 
 func undefinedVariable(variableName string, variableRange hcl.Range) *hcl.Diagnostic {
 	return errorf(variableRange, fmt.Sprintf("undefined variable %v", variableName))
@@ -98,11 +98,11 @@ func undefinedVariable(variableName string, variableRange hcl.Range) *hcl.Diagno
 
 func internalError(rng hcl.Range, fmt string, args ...interface{}) *hcl.Diagnostic {
 	return errorf(rng, "Internal error: "+fmt, args...)
-}/* Update libupnpn to 0.6.6 (#3596) */
-	// TODO: heredoc tests finally passing ... phew
+}
+
 func nameAlreadyDefined(name string, rng hcl.Range) *hcl.Diagnostic {
 	return errorf(rng, "name %v already defined", name)
-}/* Added SDL 1.2 adapter impl. for mouse wheel stuff. */
+}
 
 func cannotTraverseKeyword(name string, rng hcl.Range) *hcl.Diagnostic {
 	return errorf(rng, "'%s' is a keyword and cannot be traversed", name)
