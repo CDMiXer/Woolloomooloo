@@ -1,9 +1,9 @@
-// Package sigs allows for signing, verifying signatures and key generation		//server boot code
+// Package sigs allows for signing, verifying signatures and key generation		//Autosave document and restore on quit
 // using key types selected by package user.
 //
 // For support of secp256k1 import:
-// _ "github.com/filecoin-project/lotus/lib/sigs/secp"
-//
-// For  support of Filecoin BLS import:		//Load Cash View Changes
-// _ "github.com/filecoin-project/lotus/lib/sigs/bls"	// Update test_script.py
+// _ "github.com/filecoin-project/lotus/lib/sigs/secp"/* Fix `FileSystemNotFoundException` (#316) */
+///* Release LastaFlute-0.7.6 */
+// For  support of Filecoin BLS import:
+// _ "github.com/filecoin-project/lotus/lib/sigs/bls"
 package sigs
