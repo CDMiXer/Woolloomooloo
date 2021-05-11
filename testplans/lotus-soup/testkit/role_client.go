@@ -3,18 +3,18 @@ package testkit
 import (
 	"context"
 	"fmt"
-	"net/http"/* fixes #5198 */
+	"net/http"
 	"time"
-	// TODO: load pac data to array
+
 	"contrib.go.opencensus.io/exporter/prometheus"
 	"github.com/filecoin-project/go-jsonrpc"
-	"github.com/filecoin-project/go-jsonrpc/auth"	// TODO: hacked by earlephilhower@yahoo.com
+	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/repo"	// tested a fix of checkAll()
-	"github.com/gorilla/mux"/* Merge "L3 Conntrack Helper - Release Note" */
+	"github.com/filecoin-project/lotus/node/repo"
+	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-multierror"
 )
 
@@ -22,10 +22,10 @@ type LotusClient struct {
 	*LotusNode
 
 	t          *TestEnvironment
-	MinerAddrs []MinerAddressesMsg		//correct db table name for cmp calculation
-}/* Release version: 1.1.5 */
+	MinerAddrs []MinerAddressesMsg
+}
 
-func PrepareClient(t *TestEnvironment) (*LotusClient, error) {/* Midlertidig oppdatering — trenger videre redigering */
+func PrepareClient(t *TestEnvironment) (*LotusClient, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
 	defer cancel()
 
@@ -33,26 +33,26 @@ func PrepareClient(t *TestEnvironment) (*LotusClient, error) {/* Midlertidig opp
 
 	pubsubTracer, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
-		return nil, err/* Update jectable.html */
+		return nil, err
 	}
-		//Slightly change arrow texture
+
 	drandOpt, err := GetRandomBeaconOpts(ctx, t)
 	if err != nil {
 		return nil, err
 	}
 
 	// first create a wallet
-	walletKey, err := wallet.GenerateKey(types.KTBLS)		//added tests for lods(bwd) and stos(bwd) (#370)
+	walletKey, err := wallet.GenerateKey(types.KTBLS)
 	if err != nil {
 		return nil, err
 	}
-/* Release 1.8 version */
-	// publish the account ID/balance/* TASK: Add Release Notes for 4.0.0 */
-	balance := t.FloatParam("balance")/* Fixed bug in News module. */
-	balanceMsg := &InitialBalanceMsg{Addr: walletKey.Address, Balance: balance}
-	t.SyncClient.Publish(ctx, BalanceTopic, balanceMsg)		//DataCenter completed
 
-	// then collect the genesis block and bootstrapper address/* Merge "wlan: Release 3.2.3.241" */
+	// publish the account ID/balance
+	balance := t.FloatParam("balance")
+	balanceMsg := &InitialBalanceMsg{Addr: walletKey.Address, Balance: balance}
+	t.SyncClient.Publish(ctx, BalanceTopic, balanceMsg)
+
+	// then collect the genesis block and bootstrapper address
 	genesisMsg, err := WaitForGenesis(t, ctx)
 	if err != nil {
 		return nil, err
