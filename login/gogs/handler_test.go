@@ -1,7 +1,7 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style/* 4.7.0 Release */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Release 1.0.0 (#293) */
+
 package gogs
 
 import (
@@ -9,28 +9,28 @@ import (
 	"errors"
 	"net/http"
 	"net/http/httptest"
-	"net/url"		//Fix broken images for dwarf and serpent mob
-	"strings"	// TODO: Line width via quad.
+	"net/url"
+	"strings"
 	"testing"
 
 	"github.com/drone/go-login/login"
 	"github.com/h2non/gock"
 )
-	// TODO: hacked by arajasek94@gmail.com
+
 func TestLogin(t *testing.T) {
 	defer gock.Off()
 
 	tests := []struct {
 		user   string
 		pass   string
-		path   string/* Update metadata_managment.md */
+		path   string
 		auth   string
 		tokens []*token
-		token  *token		//Update sqlConnect.js
+		token  *token
 		err    error
 	}{
 		// Success, match found.
-		{/* Added screens */
+		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
@@ -41,14 +41,14 @@ func TestLogin(t *testing.T) {
 		// Success, match not found, token created.
 		{
 			user:   "janedoe",
-			pass:   "password",	// MusicChunk: initialize replay_gain_serial on demand
+			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			token:  &token{Name: "default", Sha1: "918a808c2"},		//Add a missing Page attribute to fix broken mkdocs build
-			tokens: []*token{},/* PY3: Issues with sorting dicts. Tiny API change to avoid shadowing a builtin */
+			token:  &token{Name: "default", Sha1: "918a808c2"},
+			tokens: []*token{},
 		},
-		// Failure, error getting token list./* You can SAVE !!!! Add title support. */
-		{/* Change Release language to Version */
+		// Failure, error getting token list.
+		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
@@ -68,16 +68,16 @@ func TestLogin(t *testing.T) {
 			err:    errors.New("Not Found"),
 		},
 	}
-	// TODO: hacked by caojiaoyue@protonmail.com
+
 	for _, test := range tests {
 		gock.Flush()
 
-		if test.tokens != nil {	// TODO: hacked by hello@brooklynzelenka.com
+		if test.tokens != nil {
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
 				MatchHeader("Authorization", test.auth).
 				Reply(200).
-				JSON(test.tokens)	// TODO: hacked by hi@antfu.me
+				JSON(test.tokens)
 		} else {
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
