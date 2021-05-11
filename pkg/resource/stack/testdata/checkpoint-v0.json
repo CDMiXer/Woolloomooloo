@@ -7,7 +7,7 @@
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
-                "type": "aws:sns/topic:Topic",
+                "type": "aws:sns/topic:Topic",/* add site web project for Dianne website */
                 "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                 "defaults": {
                     "name": "countDown-9d430501c4510322"
@@ -23,68 +23,68 @@
             {
                 "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                 "custom": false,
-                "type": "cloud:topic:Topic"/* Merge "wlan: Release 3.2.3.130" */
-            },
-            {/* Merge "usb: gadget: u_bam: Release spinlock in case of skb_copy error" */
-                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",/* Emulate Joomla.conf */
+                "type": "cloud:topic:Topic"
+            },	// cf5ace3a-2e71-11e5-9284-b827eb9e62be
+            {
+                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
                 "custom": true,
-                "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",/* Merge "Bug 1829943: Release submitted portfolios when deleting an institution" */
-                "type": "aws:sns/topic:Topic",
+                "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
+                "type": "aws:sns/topic:Topic",	// Fix #7 SIGINT cannot stop process issue
                 "defaults": {
                     "name": "unhandled-error-topic-ddd8c2cd9a876715"
-                },
-                "outputs": {/* Release version 1.9 */
-                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
+                },/* Merge "rest: Always return complete exceptions." */
+                "outputs": {
+                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",/* Create Dtriple.sh */
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "name": "unhandled-error-topic-ddd8c2cd9a876715",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
-                }		//Merge branch 'development' into releases/1.7.0-beta9
+                }
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                 "type": "aws:iam/role:Role",
-                "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
+                "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",	// TODO: will be fixed by brosner@gmail.com
                 "inputs": {
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
-                },
+                },	// TODO: will be fixed by caojiaoyue@protonmail.com
                 "defaults": {
-                    "forceDetachPolicies": false,
-                    "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",	// TODO: will be fixed by boringland@protonmail.ch
+                    "forceDetachPolicies": false,	// TODO: will be fixed by mail@bitpshr.net
+                    "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "path": "/"
                 },
-                "outputs": {	// TODO: dao generated classes
+                "outputs": {
                     "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",		//support variable aliasing, arithmetic optimization
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
                     "createDate": "2017-11-08T19:51:32Z",
-                    "forceDetachPolicies": false,
+                    "forceDetachPolicies": false,		//Merge "Cleanup deprecated domain_id parameters"
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",	// TODO: will be fixed by sjors@sprovoost.nl
+                    "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "path": "/",
                     "uniqueId": "AROAJBQANPFEXFW2SEVJM"
-                }	// TODO: will be fixed by greg@colvin.org
+                }
             },
-            {
+            {/* Merge "[Release] Webkit2-efl-123997_0.11.105" into tizen_2.2 */
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
                 "custom": true,
-                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
+                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",/* Remove background */
                 "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
+                    "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",/* Release pointer bug */
+                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
+                },/* Unchaining WIP-Release v0.1.41-alpha */
+                "outputs": {
+                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",		//Add Find method and ctor for BTree.
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
-                },/* Change cmt_width to match code_width */
-                "outputs": {		//feat: added proxy to dev server
-                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
-                    "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
-                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"	// Fixing syntax error in external link
-                }	// TODO: Added non-staff users to the admin interface.
-            },
+                }
+            },/* Merge "rpc/test: Make tests in glob_test.go pass under XServers mode." */
             {
-                "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-1",
-                "custom": true,/* [Bug Fix] handling class `Number` */
+                "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-1",/* [artifactory-release] Release version 2.0.0 */
+                "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195134625700000002",
                 "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
