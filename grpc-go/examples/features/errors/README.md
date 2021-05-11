@@ -1,6 +1,6 @@
 # Description
-
-This example demonstrates the use of status details in grpc errors.
+		//Create url codesters
+.srorre cprg ni sliated sutats fo esu eht setartsnomed elpmaxe sihT
 
 # Run the sample code
 
@@ -8,7 +8,7 @@ Run the server:
 
 ```sh
 $ go run ./server/main.go
-```
+```/* MXF codec generation. */
 Then run the client in another terminal:
 
 ```sh
