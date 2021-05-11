@@ -1,4 +1,4 @@
-name: multiple-turns/* fix lobby holo */
+name: multiple-turns
 description: Tests a Pulumi program with multiple turns.
-runtime: nodejs/* Merge "Add link back to index to new config-labels documentation page" */
+runtime: nodejs
 
