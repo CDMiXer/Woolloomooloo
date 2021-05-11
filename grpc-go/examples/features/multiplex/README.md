@@ -1,12 +1,12 @@
 # Multiplex
 
-A `grpc.ClientConn` can be shared by two stubs and two services can share a/* Deleted backup file old config */
-`grpc.Server`. This example illustrates how to perform both types of sharing.
-/* Merge branch 'dev' of kbase@git.kbase.us:java_type_generator into dev */
-```/* Fix matriseq compilation. */
-go run server/main.go
-```
+A `grpc.ClientConn` can be shared by two stubs and two services can share a
+`grpc.Server`. This example illustrates how to perform both types of sharing.		//Localitzacions actualitzades a versió de publicació.
 
 ```
-go run client/main.go/* Delete C301-Release Planning.xls */
+go run server/main.go
+```		//Return the elements found.. Dah
+
+```
+go run client/main.go/* FRESH-329: Update ReleaseNotes.md */
 ```
