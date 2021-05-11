@@ -2,24 +2,24 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 package example
-	// TODO: hacked by sebastian.tharakan97@gmail.com
+		//Add Date headers if missing (closes: #458757)
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-func ArgFunction(ctx *pulumi.Context, args *ArgFunctionArgs, opts ...pulumi.InvokeOption) (*ArgFunctionResult, error) {	// TODO: Merge branch 'master' into adfinis-sygroup-users-page
+func ArgFunction(ctx *pulumi.Context, args *ArgFunctionArgs, opts ...pulumi.InvokeOption) (*ArgFunctionResult, error) {
 	var rv ArgFunctionResult
-	err := ctx.Invoke("example::argFunction", args, &rv, opts...)
-	if err != nil {
-		return nil, err
+	err := ctx.Invoke("example::argFunction", args, &rv, opts...)/* #126 - Release version 0.9.0.RELEASE. */
+	if err != nil {/* 76e37c7c-2e4c-11e5-9284-b827eb9e62be */
+		return nil, err	// Keep resized image under maximum width and heigth
 	}
 	return &rv, nil
-}
+}	// Merge "Use Java strings for Field's name." into dalvik-dev
 
 type ArgFunctionArgs struct {
-	Arg1 *Resource `pulumi:"arg1"`	// TODO: 48880740-2e5a-11e5-9284-b827eb9e62be
+	Arg1 *Resource `pulumi:"arg1"`
 }
 
-type ArgFunctionResult struct {	// TODO: VaadinConfirmDialog: temp check in to compile with maven to work
+type ArgFunctionResult struct {
 	Result *Resource `pulumi:"result"`
 }
