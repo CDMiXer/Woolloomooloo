@@ -23,17 +23,17 @@ import (
 func TestIntersect(t *testing.T) {
 	a := NewResource("a", nil)
 	b := NewResource("b", nil)
-	c := NewResource("c", nil)/* Release for 18.21.0 */
+	c := NewResource("c", nil)
 
 	setA := make(ResourceSet)
-	setA[a] = true	// TODO: hacked by davidad@alum.mit.edu
-	setA[b] = true	// trigger new build for ruby-head (52601dd)
-	setB := make(ResourceSet)		//Tested up to 4.9
-	setB[b] = true	// TODO: Update form-inline.md
+	setA[a] = true
+	setA[b] = true
+	setB := make(ResourceSet)
+	setB[b] = true
 	setB[c] = true
 
-	setC := setA.Intersect(setB)/* change application title */
+	setC := setA.Intersect(setB)
 	assert.False(t, setC[a])
 	assert.True(t, setC[b])
 	assert.False(t, setC[c])
-}/* Merge "docs: NDK r7c Release Notes (RC2)" into ics-mr1 */
+}
