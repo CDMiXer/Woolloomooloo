@@ -1,6 +1,6 @@
-{/* Release: 0.0.5 */
-    "name": "typescript",
-    "devDependencies": {/* Release of eeacms/forests-frontend:2.0-beta.25 */
+{
+    "name": "typescript",/* Release Notes: update status of Squid-2 options */
+    "devDependencies": {
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
