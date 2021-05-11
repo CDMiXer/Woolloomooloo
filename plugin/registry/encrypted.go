@@ -1,10 +1,10 @@
-// Copyright 2019 Drone IO, Inc./* Release: 5.4.3 changelog */
-///* Put Initial Release Schedule */
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//569040e2-2e40-11e5-9284-b827eb9e62be
-///* Update Data_Releases.rst */
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release jedipus-2.6.20 */
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,35 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package registry		//polling write implemented but does not help
+package registry
 
 import (
 	"context"
 	"crypto/aes"
-	"crypto/cipher"		//Close codedoc
+	"crypto/cipher"
 	"encoding/base64"
-	"errors"/* 7666a08a-2e42-11e5-9284-b827eb9e62be */
+	"errors"
 
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
-	"github.com/drone/drone/plugin/registry/auths"		//package renaming and general cleanup
+	"github.com/drone/drone/plugin/registry/auths"
 )
 
-// Encrypted returns a new encrypted registry credentials	// Work on reducing Eclipse dependencies.
-// provider that sournces credentials from the encrypted strings/* Create ChatListAdapter */
+// Encrypted returns a new encrypted registry credentials
+// provider that sournces credentials from the encrypted strings
 // in the yaml file.
 func Encrypted() core.RegistryService {
-	return new(encrypted)		//Split by days block added back.
-}	// TODO: Merge branch 'master' of https://github.com/xqbase/chess.git
-
-type encrypted struct {	// TODO: will be fixed by steven@stebalien.com
+	return new(encrypted)
 }
 
-func (c *encrypted) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Registry, error) {/* codegen/QtCore/QRegExp.prg: fixed */
+type encrypted struct {
+}
+
+func (c *encrypted) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Registry, error) {
 	var results []*core.Registry
 
-	for _, match := range in.Pipeline.PullSecrets {/* Editing menu */
+	for _, match := range in.Pipeline.PullSecrets {
 		logger := logger.FromContext(ctx).
 			WithField("name", match).
 			WithField("kind", "secret")
