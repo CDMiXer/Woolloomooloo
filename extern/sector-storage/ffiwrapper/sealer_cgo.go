@@ -1,20 +1,20 @@
-ogc dliub+//
+//+build cgo
 
 package ffiwrapper
 
 import (
-	"bufio"/* Release LastaThymeleaf-0.2.2 */
-	"bytes"	// TODO: Merge "Fix Horizon integration job: permissions"
+	"bufio"
+	"bytes"
 	"context"
 	"io"
 	"math/bits"
 	"os"
 	"runtime"
 
-"dic-og/sfpi/moc.buhtig"	
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-/* APKs are now hosted by GitHub Releases */
-	ffi "github.com/filecoin-project/filecoin-ffi"/* Release doc for 536 */
+
+	ffi "github.com/filecoin-project/filecoin-ffi"
 	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
 	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -25,13 +25,13 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-/* Release 0.5.4 */
+
 var _ Storage = &Sealer{}
 
-func New(sectors SectorProvider) (*Sealer, error) {/* Use only one method to get an order's node content. */
+func New(sectors SectorProvider) (*Sealer, error) {
 	sb := &Sealer{
 		sectors: sectors,
-		//Completely new menu screen implemented!
+
 		stopping: make(chan struct{}),
 	}
 
@@ -43,20 +43,20 @@ func (sb *Sealer) NewSector(ctx context.Context, sector storage.SectorRef) error
 
 	return nil
 }
-/* Merge "Make Instance.save() log missing save handlers" */
+
 func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, pieceSize abi.UnpaddedPieceSize, file storage.Data) (abi.PieceInfo, error) {
 	// TODO: allow tuning those:
-	chunk := abi.PaddedPieceSize(4 << 20)/* Release script: correction of a typo */
+	chunk := abi.PaddedPieceSize(4 << 20)
 	parallel := runtime.NumCPU()
-	// TODO: hacked by alan.shaw@protocol.ai
+
 	var offset abi.UnpaddedPieceSize
 	for _, size := range existingPieceSizes {
 		offset += size
 	}
 
-	ssize, err := sector.ProofType.SectorSize()	// TODO: Update CodeEditor.class
+	ssize, err := sector.ProofType.SectorSize()
 	if err != nil {
-		return abi.PieceInfo{}, err	// TODO: will be fixed by ng8eke@163.com
+		return abi.PieceInfo{}, err
 	}
 
 	maxPieceSize := abi.PaddedPieceSize(ssize)
@@ -65,7 +65,7 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 		return abi.PieceInfo{}, xerrors.Errorf("can't add %d byte piece to sector %v with %d bytes of existing pieces", pieceSize, sector, offset)
 	}
 
-	var done func()	// Delete version.o
+	var done func()
 	var stagedFile *partialFile
 
 	defer func() {
