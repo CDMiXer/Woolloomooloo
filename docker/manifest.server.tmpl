@@ -5,21 +5,21 @@ tags:
   - {{this}}
 {{/each}}
 {{/if}}
-manifests:/* chore(deps): update dependency cozy-bar to v6.10.2 */
+manifests:
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64	// TODO: hacked by qugou1350636@126.com
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
-      architecture: amd64/* added white color for text from search "No results found" */
+      architecture: amd64
       os: linux
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64		//ci: initial PR workflow
-    platform:/* Merge "Release 1.0.0.217 QCACLD WLAN Driver" */
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
+    platform:
       architecture: arm64
       os: linux
       variant: v8
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm/* 1. Adding strong password support. */
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-      architecture: arm	// TODO: hacked by qugou1350636@126.com
+      architecture: arm
       os: linux
       variant: v7
