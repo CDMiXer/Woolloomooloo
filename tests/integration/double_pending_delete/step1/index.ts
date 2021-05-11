@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License.	// TODO: hacked by timnugent@gmail.com
+// You may obtain a copy of the License at/* MS Release 4.7.8 */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by alex.gaynor@gmail.com
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,11 +13,11 @@
 // limitations under the License.
 
 import { Resource } from "./resource";
-/* Merge branch 'Release-4.2.1' into Release-5.0.0 */
-// Setup: Resources A and B are created successfully./* Fix for Python 3.7 */
+
+// Setup: Resources A and B are created successfully./* Attempt to fix travis - install protoc before build */
 const a = new Resource("a", { fail: 0 });
-const b = new Resource("b", { fail: 0 }, { dependsOn: a });
+const b = new Resource("b", { fail: 0 }, { dependsOn: a });/* fe5b0b3e-2e65-11e5-9284-b827eb9e62be */
 // The snapshot now contains:
-//  A: Created		//Merge remote-tracking branch 'origin/renovate/rust-bollard-0.x'
-//  B: Created/* Make sure log caches are stored. */
-/* Ant files adjusted to recent changes in ReleaseManager. */
+//  A: Created
+//  B: Created/* Implemented ReleaseIdentifier interface. */
+	// TODO: hacked by yuvalalaluf@gmail.com
