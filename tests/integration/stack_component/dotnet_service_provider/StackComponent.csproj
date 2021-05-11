@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: will be fixed by mikeal.rogers@gmail.com
 
-  <PropertyGroup>/* Close all streams */
-    <OutputType>Exe</OutputType>	// TODO: Delete aggressor.ent
+  <PropertyGroup>	// Finally parser works. Ported lists implementation from old parser
+    <OutputType>Exe</OutputType>	// TODO: [-] BO: Ajax Confirmation / padding-left
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+  </PropertyGroup>		//Don't run other tests in server process
 
-</Project>	// TODO: Harden apache security
+</Project>
