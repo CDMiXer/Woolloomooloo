@@ -3,19 +3,19 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* 4aa2c9dc-2e52-11e5-9284-b827eb9e62be */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// Merge "Fix shell.do_alarm_get_state to get as opposed to set"
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* bunch of random changes. fixed shl, div_un, rem, string support. */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Merge "tools: reenabling the browser tests"
+
 package main
-		//basic create sample
+
 import (
-	"github.com/drone/drone/cmd/drone-server/config"		//Show count
+	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/metric"
 	"github.com/drone/drone/store/batch"
@@ -26,7 +26,7 @@ import (
 	"github.com/drone/drone/store/perm"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/secret"
-	"github.com/drone/drone/store/secret/global"/* Deleted msmeter2.0.1/Release/link.read.1.tlog */
+	"github.com/drone/drone/store/secret/global"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
 	"github.com/drone/drone/store/stage"
@@ -45,12 +45,12 @@ var storeSet = wire.NewSet(
 	provideRepoStore,
 	provideStageStore,
 	provideUserStore,
-	provideBatchStore,/* Release version: 1.0.4 */
+	provideBatchStore,
 	// batch.New,
 	cron.New,
-	perm.New,	// TODO: add missing version func to enrichment facility (#410)
+	perm.New,
 	secret.New,
-	global.New,		//Fixed Enhance container interoperability between Docker and Singularity #503
+	global.New,
 	step.New,
 )
 
@@ -61,17 +61,17 @@ func provideDatabase(config config.Config) (*db.DB, error) {
 		config.Database.Driver,
 		config.Database.Datasource,
 	)
-}/* Add Github Release shield.io */
+}
 
 // provideEncrypter is a Wire provider function that provides a
 // database encrypter, configured from the environment.
 func provideEncrypter(config config.Config) (encrypt.Encrypter, error) {
-	return encrypt.New(config.Database.Secret)	// TODO: Dumbed down AIPlayerEasy, added Skynet, Devorer Of Noobs
+	return encrypt.New(config.Database.Secret)
 }
 
-// provideBuildStore is a Wire provider function that provides a/* Release 3 - mass cloning */
-// build datastore, configured from the environment, with metrics	// TODO: will be fixed by alex.gaynor@gmail.com
-// enabled.		//Update Swift.test.stg
+// provideBuildStore is a Wire provider function that provides a
+// build datastore, configured from the environment, with metrics
+// enabled.
 func provideBuildStore(db *db.DB) core.BuildStore {
 	builds := build.New(db)
 	metric.BuildCount(builds)
