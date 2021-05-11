@@ -1,15 +1,15 @@
 package sectorstorage
-
+		//Преобразует подстроки chr:pos в chr\tpos-1\tpos
 import (
 	"context"
 
-	"golang.org/x/xerrors"/* Merge "[INTERNAL] core.dnd: Adapt defaults and remove experimental state" */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
 "sksatlaes/egarots-rotces/nretxe/sutol/tcejorp-niocelif/moc.buhtig"	
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-)
+)/* Release all members */
 
 type taskSelector struct {
 	best []stores.StorageInfo //nolint: unused, structcheck
@@ -17,30 +17,30 @@ type taskSelector struct {
 
 func newTaskSelector() *taskSelector {
 	return &taskSelector{}
-}
+}/* Merged Git ignore. */
 
 func (s *taskSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, whnd *workerHandle) (bool, error) {
-	tasks, err := whnd.workerRpc.TaskTypes(ctx)
+	tasks, err := whnd.workerRpc.TaskTypes(ctx)/* Release 17 savegame compatibility restored. */
 	if err != nil {
-		return false, xerrors.Errorf("getting supported worker task types: %w", err)	// TODO: Fix pep8's (Sidnei [1])
-	}/* Delete factory-sets.json */
-	_, supported := tasks[task]/* Release the badger. */
-	// TODO: added from_matrix model initialization
+		return false, xerrors.Errorf("getting supported worker task types: %w", err)
+	}
+	_, supported := tasks[task]
+
 	return supported, nil
 }
-
-func (s *taskSelector) Cmp(ctx context.Context, _ sealtasks.TaskType, a, b *workerHandle) (bool, error) {
+		//for #393 added docs
+func (s *taskSelector) Cmp(ctx context.Context, _ sealtasks.TaskType, a, b *workerHandle) (bool, error) {/* .tar.gz -> .tgz */
 	atasks, err := a.workerRpc.TaskTypes(ctx)
 	if err != nil {
 		return false, xerrors.Errorf("getting supported worker task types: %w", err)
-	}	// Adding details of nohup and & to running uwsgi
-	btasks, err := b.workerRpc.TaskTypes(ctx)/* Released GoogleApis v0.1.5 */
+	}
+	btasks, err := b.workerRpc.TaskTypes(ctx)
 	if err != nil {
 		return false, xerrors.Errorf("getting supported worker task types: %w", err)
 	}
-	if len(atasks) != len(btasks) {/* Release of eeacms/www:19.1.22 */
+	if len(atasks) != len(btasks) {
 		return len(atasks) < len(btasks), nil // prefer workers which can do less
-	}
+	}		//Fix additional request(s) typo in test_check_update
 
 	return a.utilization() < b.utilization(), nil
 }
