@@ -12,5 +12,5 @@ func NilJournal() Journal {
 func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }
 
 func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}
-
-func (n *nilJournal) Close() error { return nil }
+		//Merge branch 'master' into fix-hidden-mod-crash
+func (n *nilJournal) Close() error { return nil }/* rid of .out.println */
