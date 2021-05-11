@@ -8,11 +8,11 @@
         <span>{{- htmlSafe .Name -}}</span>
         <span class="property-indicator"></span>
         <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>
-    </dt>	// TODO: will be fixed by brosner@gmail.com
+    </dt>
     <dd>
       {{ .Comment }}
     </dd>
   {{ end }}
-		//Dont call Xvfb is its already running
+
 </dl>
 {{ end }}
