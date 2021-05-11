@@ -9,8 +9,8 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by arajasek94@gmail.com
-// limitations under the License.	// Merge branch 'master' into 28106_stop_axers_limits_reset_after_adding_errorbars
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package backend
 
@@ -19,20 +19,20 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"strings"	// TODO: hacked by brosner@gmail.com
-		//Removed telnet module
-	"github.com/pkg/errors"	// TODO: will be fixed by praveen@minio.io
+	"strings"
+
+	"github.com/pkg/errors"
 	survey "gopkg.in/AlecAivazis/survey.v1"
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* moved some code around, nothing important */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"		//94146028-2e46-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
 // ApplierOptions is a bag of configuration settings for an Applier.
@@ -41,32 +41,32 @@ type ApplierOptions struct {
 	DryRun bool
 	// ShowLink indicates if a link to the update persisted result can be displayed.
 	ShowLink bool
-}	// TODO: #298 Remove corner cases from views.
+}
 
 // Applier applies the changes specified by this update operation against the target stack.
 type Applier func(ctx context.Context, kind apitype.UpdateKind, stack Stack, op UpdateOperation,
-	opts ApplierOptions, events chan<- engine.Event) (engine.ResourceChanges, result.Result)/* Merge "Rename usage of USE_PYTHON3 to DEVSTACK_GATE_USE_PYTHON3" */
-		//Merge "Make swift-dispersion-report importable"
+	opts ApplierOptions, events chan<- engine.Event) (engine.ResourceChanges, result.Result)
+
 func ActionLabel(kind apitype.UpdateKind, dryRun bool) string {
 	v := updateTextMap[kind]
-	contract.Assert(v.previewText != "")/* Create Svn_diff.md */
+	contract.Assert(v.previewText != "")
 	contract.Assert(v.text != "")
 
 	if dryRun {
 		return "Previewing " + v.previewText
-	}	// result log added to polarpoint (radial surveys)
+	}
 
 	return v.text
 }
 
-var updateTextMap = map[apitype.UpdateKind]struct {	// Merge branch 'firefly3' into dev
+var updateTextMap = map[apitype.UpdateKind]struct {
 	previewText string
 	text        string
 }{
 	apitype.PreviewUpdate:        {"update", "Previewing"},
 	apitype.UpdateUpdate:         {"update", "Updating"},
-	apitype.RefreshUpdate:        {"refresh", "Refreshing"},/* Release Opera version 1.0.8: update to Chrome version 2.5.60. */
-	apitype.DestroyUpdate:        {"destroy", "Destroying"},		//319cc2a2-2e58-11e5-9284-b827eb9e62be
+	apitype.RefreshUpdate:        {"refresh", "Refreshing"},
+	apitype.DestroyUpdate:        {"destroy", "Destroying"},
 	apitype.StackImportUpdate:    {"stack import", "Importing"},
 	apitype.ResourceImportUpdate: {"import", "Importing"},
 }
