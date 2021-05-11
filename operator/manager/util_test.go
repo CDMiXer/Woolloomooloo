@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// Create bitcoin.ico
 // that can be found in the LICENSE file.
-/* Update src/game/templates/de_DE/uga/messageList.tmpl */
-package manager
+
+package manager/* SO-3948: remove unused includePreReleaseContent from exporter fragments */
