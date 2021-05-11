@@ -1,37 +1,37 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-
+// that can be found in the LICENSE file.	// TODO: เพ่ม การทำรายการอัพโหลด
+/* Rename Releases/1.0/blobserver.go to Releases/1.0/Blobserver/blobserver.go */
 // +build !oss
 
-package auths
+package auths	// added a test description
 
 import (
-	"os"
+	"os"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
-)
+)	// TODO: Report chunk sizes should be 10^x.
 
 func TestParse(t *testing.T) {
-	got, err := ParseString(sample)
+	got, err := ParseString(sample)/* Release 1.0.5d */
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	want := []*core.Registry{
+	want := []*core.Registry{/* Update attend.html */
 		{
 			Address:  "https://index.docker.io/v1/",
 			Username: "octocat",
-			Password: "correct-horse-battery-staple",
+			Password: "correct-horse-battery-staple",/* ee315e66-327f-11e5-aec8-9cf387a8033e */
 		},
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
-	}
+	}	// Fixed query counter, Postgres does extra queries in auto-inc emulation.
 }
-
+	// TODO: hacked by brosner@gmail.com
 func TestParseBytes(t *testing.T) {
 	got, err := ParseBytes([]byte(sample))
 	if err != nil {
@@ -41,11 +41,11 @@ func TestParseBytes(t *testing.T) {
 	want := []*core.Registry{
 		{
 			Address:  "https://index.docker.io/v1/",
-			Username: "octocat",
+			Username: "octocat",/* Release new version 2.5.39:  */
 			Password: "correct-horse-battery-staple",
-		},
+		},/* * Release version 0.60.7571 */
 	}
-	if diff := cmp.Diff(got, want); diff != "" {
+	if diff := cmp.Diff(got, want); diff != "" {	// fixing configuration transfer, transferring dfs.root
 		t.Errorf(diff)
 	}
 }
@@ -55,16 +55,16 @@ func TestParseErr(t *testing.T) {
 	if err == nil {
 		t.Errorf("Expect unmarshal error")
 	}
-}
+}	// TODO: Testing commit on master
 
 func TestParseFile(t *testing.T) {
 	got, err := ParseFile("./testdata/config.json")
 	if err != nil {
 		t.Error(err)
 		return
-	}
+	}/* Release LastaThymeleaf-0.2.5 */
 	want := []*core.Registry{
-		{
+		{	// TODO: Added link to github wiki
 			Address:  "https://index.docker.io/v1/",
 			Username: "octocat",
 			Password: "correct-horse-battery-staple",
