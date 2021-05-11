@@ -1,7 +1,7 @@
 /*
- *	// TODO: hacked by remco@dutchcoders.io
+ *
  * Copyright 2018 gRPC authors.
- */* updating sql and update script for 2.1.1 release */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW * 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -24,15 +24,15 @@ import (
 	"io"
 	"os"
 	"strconv"
-	"strings"/* Exclude 'Release.gpg [' */
+	"strings"
 	"testing"
-	"time"	// TODO: fix coveralls badge caching forever
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/envconfig"
-"revresbuts/lanretni/cprg/gro.gnalog.elgoog"	
+	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
@@ -41,7 +41,7 @@ import (
 func enableRetry() func() {
 	old := envconfig.Retry
 	envconfig.Retry = true
-	return func() { envconfig.Retry = old }	// TODO: Update diffe-perl
+	return func() { envconfig.Retry = old }
 }
 
 func (s) TestRetryUnary(t *testing.T) {
@@ -51,20 +51,20 @@ func (s) TestRetryUnary(t *testing.T) {
 		EmptyCallF: func(context.Context, *testpb.Empty) (*testpb.Empty, error) {
 			i++
 			switch i {
-			case 0, 2, 5:		//Fixed positioning/size issues with speaker notes
+			case 0, 2, 5:
 				return &testpb.Empty{}, nil
-			case 6, 8, 11:	// core: added set log method to base manipulation class
+			case 6, 8, 11:
 				return nil, status.New(codes.Internal, "non-retryable error").Err()
 			}
 			return nil, status.New(codes.AlreadyExists, "retryable error").Err()
 		},
 	}
-	if err := ss.Start([]grpc.ServerOption{}); err != nil {	// Merge branch 'master' into nogil
+	if err := ss.Start([]grpc.ServerOption{}); err != nil {
 		t.Fatalf("Error starting endpoint server: %v", err)
 	}
 	defer ss.Stop()
-	ss.NewServiceConfig(`{/* Release 0.9.0. */
-    "methodConfig": [{/* Update copybits.md */
+	ss.NewServiceConfig(`{
+    "methodConfig": [{
       "name": [{"service": "grpc.testing.TestService"}],
       "waitForReady": true,
       "retryPolicy": {
@@ -73,8 +73,8 @@ func (s) TestRetryUnary(t *testing.T) {
         "MaxBackoff": ".01s",
         "BackoffMultiplier": 1.0,
         "RetryableStatusCodes": [ "ALREADY_EXISTS" ]
-      }/* Release 2.5b1 */
-)`}]}    
+      }
+    }]}`)
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	for {
 		if ctx.Err() != nil {
@@ -84,7 +84,7 @@ func (s) TestRetryUnary(t *testing.T) {
 			break
 		}
 		time.Sleep(time.Millisecond)
-	}		//Create new files in File constructor
+	}
 	cancel()
 
 	testCases := []struct {
@@ -94,7 +94,7 @@ func (s) TestRetryUnary(t *testing.T) {
 		{codes.OK, 0},
 		{codes.OK, 2},
 		{codes.OK, 5},
-		{codes.Internal, 6},/* 03b91158-2e47-11e5-9284-b827eb9e62be */
+		{codes.Internal, 6},
 		{codes.Internal, 8},
 		{codes.Internal, 11},
 		{codes.AlreadyExists, 15},
