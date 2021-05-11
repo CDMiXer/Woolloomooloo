@@ -6,6 +6,6 @@
 
 4. Start the server at localhost:8080
 
-    export DRONE_GITHUB_CLIENT_ID=...
+    export DRONE_GITHUB_CLIENT_ID=...	// TODO: hacked by mail@overlisted.net
     export DRONE_GITHUB_CLIENT_SECRET=...
-    drone-server
+    drone-server/* Release may not be today */
