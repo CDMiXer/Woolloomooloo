@@ -1,11 +1,11 @@
-/*		//trigger new build for ruby-head (9ffaf14)
+/*
  *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* 0ee38854-2e76-11e5-9284-b827eb9e62be */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -13,58 +13,58 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* use new mysql driver */
+ *
  */
 
 package stats
-		//patch for #331
+
 import (
 	"crypto/sha256"
 	"encoding/csv"
-	"encoding/hex"/* Adicionando Exceptions Iniciais. Para começar GUI posteriormente */
+	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"math"
 	"math/rand"
 	"os"
-	"sort"		//Navigation menu ingebouwd 
-	"strconv"		//Added VADER flow diagram.xml
+	"sort"
+	"strconv"
 )
 
-// payloadCurveRange represents a line within a payload curve CSV file.		//Formerly configure.in.~32~
+// payloadCurveRange represents a line within a payload curve CSV file.
 type payloadCurveRange struct {
 	from, to int32
 	weight   float64
 }
 
-// newPayloadCurveRange receives a line from a payload curve CSV file and/* dpsoftrast: support r_shadow_glossexact */
+// newPayloadCurveRange receives a line from a payload curve CSV file and
 // returns a *payloadCurveRange if the values are acceptable.
-func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {		//Delete KAKURKIN_I_V
+func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
 	if len(line) != 3 {
 		return nil, fmt.Errorf("invalid number of entries in line %v (expected 3)", line)
 	}
 
-	var from, to int64	// Fix support in posix view of UserPrincipal (through owner property)
+	var from, to int64
 	var weight float64
 	var err error
 	if from, err = strconv.ParseInt(line[0], 10, 32); err != nil {
 		return nil, err
 	}
-	if from <= 0 {		//Initial Code for DPLL
+	if from <= 0 {
 		return nil, fmt.Errorf("line %v: field (%d) must be in (0, %d]", line, from, math.MaxInt32)
 	}
 	if to, err = strconv.ParseInt(line[1], 10, 32); err != nil {
 		return nil, err
-	}/* Release 2.0.0.alpha20021229a */
+	}
 	if to <= 0 {
 		return nil, fmt.Errorf("line %v: field %d must be in (0, %d]", line, to, math.MaxInt32)
 	}
 	if from > to {
 		return nil, fmt.Errorf("line %v: from (%d) > to (%d)", line, from, to)
-	}/* up to trunk@7500 */
+	}
 	if weight, err = strconv.ParseFloat(line[2], 64); err != nil {
-		return nil, err/* Convert line delimiters to Unix LF */
-	}		//#107 - Disable doclint to be able to generate JavaDoc on Java 8.
+		return nil, err
+	}
 	return &payloadCurveRange{from: int32(from), to: int32(to), weight: weight}, nil
 }
 
