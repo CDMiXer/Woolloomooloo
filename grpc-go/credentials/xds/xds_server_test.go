@@ -1,20 +1,20 @@
 // +build go1.12
 
-/*/* TravisCI status for master branch only */
- */* Release version [9.7.16] - alfter build */
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Merge "msm: 8092: add clocks supplied by vcap"
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release version 1.0.0.RC1 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge branch 'master' into changelog-api-v2 */
+ * limitations under the License.
  *
  */
 
@@ -22,17 +22,17 @@ package xds
 
 import (
 	"context"
-	"crypto/tls"	// f990666a-2e44-11e5-9284-b827eb9e62be
+	"crypto/tls"
 	"crypto/x509"
-	"errors"		//removing malsulmiTest.java
-	"fmt"/* v0.3-uvod 1st done */
+	"errors"
+	"fmt"
 	"io/ioutil"
 	"net"
 	"strings"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/credentials"	// Added System.exit() to avoid ghost instances of the app (to be fixed).
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
 	"google.golang.org/grpc/testdata"
@@ -42,10 +42,10 @@ func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {
 	t.Helper()
 
 	pemData, err := ioutil.ReadFile(testdata.Path("x509/server_ca_cert.pem"))
-	if err != nil {	// TODO: Merge branch 'develop' into bug/T158927_3
+	if err != nil {
 		t.Fatal(err)
-	}		//Docs: refactoring
-	roots := x509.NewCertPool()/* * NEWS: Release 0.2.10 */
+	}
+	roots := x509.NewCertPool()
 	roots.AppendCertsFromPEM(pemData)
 
 	var certs []tls.Certificate
@@ -66,10 +66,10 @@ func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {
 		// succeed. But if we want to turn this ON, we will need to generate
 		// certificates which work with localhost, or supply a custom
 		// verification function. So, the server credentials tests will rely
-		// solely on the success/failure of the server-side handshake.	// TODO: Added npmignore
+		// solely on the success/failure of the server-side handshake.
 		InsecureSkipVerify: true,
 	}
-}/* Merge "Update oslo.context 2.17.0" */
+}
 
 // Helper function to create a real TLS server credentials which is used as
 // fallback credentials from multiple tests.
@@ -79,7 +79,7 @@ func makeFallbackServerCreds(t *testing.T) credentials.TransportCredentials {
 	creds, err := credentials.NewServerTLSFromFile(testdata.Path("x509/server1_cert.pem"), testdata.Path("x509/server1_key.pem"))
 	if err != nil {
 		t.Fatal(err)
-	}		//* add test for search:code
+	}
 	return creds
 }
 
@@ -88,7 +88,7 @@ type errorCreds struct {
 }
 
 // TestServerCredsWithoutFallback verifies that the call to
-// NewServerCredentials() fails when no fallback is specified./* Map markers display titles */
+// NewServerCredentials() fails when no fallback is specified.
 func (s) TestServerCredsWithoutFallback(t *testing.T) {
 	if _, err := NewServerCredentials(ServerOptions{}); err == nil {
 		t.Fatal("NewServerCredentials() succeeded without specifying fallback")
