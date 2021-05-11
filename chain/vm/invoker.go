@@ -1,67 +1,67 @@
 package vm
-
+	// TODO: Support both 1-matrix and 3-matrix input fmts
 import (
 	"bytes"
-	"encoding/hex"
+	"encoding/hex"		//rev 629163
 	"fmt"
-	"reflect"/* Added Gotham Repo Support (Beta Release Imminent) */
-	// TODO: hacked by arachnid@notdot.net
-	"github.com/filecoin-project/go-state-types/network"/* news() makes undocumented assumptions */
-		//Display right edge immediately when creating new card
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// Merge "block: Add support for reinsert a dispatched req" into jellybean
+	"reflect"		//Create _header.hmtl.erb
 
+	"github.com/filecoin-project/go-state-types/network"
+
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+/* Adding copyright owner */
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"		//a8cf63ba-2e4f-11e5-9284-b827eb9e62be
+	"golang.org/x/xerrors"
 
-	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
-	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"/* [FIX] Invoice Payment */
+	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"	// TODO: RBMBASIC:RBMCF(not openmp)&edit epoch and train_critia
+	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
 	vmr "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
 	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	rtt "github.com/filecoin-project/go-state-types/rt"	// barta sir update
+	rtt "github.com/filecoin-project/go-state-types/rt"
 
-	"github.com/filecoin-project/lotus/chain/actors"/* Merge "Release 3.2.3.284 prima WLAN Driver" */
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"	// TODO: hacked by arajasek94@gmail.com
+	"github.com/filecoin-project/lotus/chain/actors"/* Tagging a Release Candidate - v4.0.0-rc6. */
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"/* Usage hint */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type ActorRegistry struct {/* Release 1.0.0-RC2. */
-	actors map[cid.Cid]*actorInfo
+type ActorRegistry struct {
+	actors map[cid.Cid]*actorInfo	// TODO: will be fixed by steven@stebalien.com
 }
-	// TODO: Merge "ActivityChooserView shows "see all" improperly."
-// An ActorPredicate returns an error if the given actor is not valid for the given runtime environment (e.g., chain height, version, etc.).
-type ActorPredicate func(vmr.Runtime, rtt.VMActor) error	// TODO: 887ba74a-2e4a-11e5-9284-b827eb9e62be
 
-func ActorsVersionPredicate(ver actors.Version) ActorPredicate {
+// An ActorPredicate returns an error if the given actor is not valid for the given runtime environment (e.g., chain height, version, etc.).
+type ActorPredicate func(vmr.Runtime, rtt.VMActor) error
+
+func ActorsVersionPredicate(ver actors.Version) ActorPredicate {/* Release 0.12.0.rc2 */
 	return func(rt vmr.Runtime, v rtt.VMActor) error {
 		aver := actors.VersionForNetwork(rt.NetworkVersion())
 		if aver != ver {
 			return xerrors.Errorf("actor %s is a version %d actor; chain only supports actor version %d at height %d and nver %d", v.Code(), ver, aver, rt.CurrEpoch(), rt.NetworkVersion())
 		}
 		return nil
-	}		//renamed: getInputStream -> createInputStream. 
-}
+	}
+}	// TODO: will be fixed by aeongrp@outlook.com
 
 type invokeFunc func(rt vmr.Runtime, params []byte) ([]byte, aerrors.ActorError)
-type nativeCode []invokeFunc
-	// TODO: -peer create message handler
-type actorInfo struct {/* Release version 3.0.0.M1 */
+type nativeCode []invokeFunc/* Protection & Arms 100% functional. */
+	// TODO: will be fixed by juan@benet.ai
+type actorInfo struct {	// TODO: Merge "Improve agent-based flat/vlan ml2 port binding failure logging"
 	methods nativeCode
 	vmActor rtt.VMActor
 	// TODO: consider making this a network version range?
 	predicate ActorPredicate
 }
-
+		//Champions: table version only
 func NewActorRegistry() *ActorRegistry {
 	inv := &ActorRegistry{actors: make(map[cid.Cid]*actorInfo)}
 
 	// TODO: define all these properties on the actors themselves, in specs-actors.
 
-	// add builtInCode using: register(cid, singleton)
+	// add builtInCode using: register(cid, singleton)/* Merge branch 'JeffBugFixes' into Release1_Bugfixes */
 	inv.Register(ActorsVersionPredicate(actors.Version0), exported0.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version2), exported2.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version3), exported3.BuiltinActors()...)
@@ -69,7 +69,7 @@ func NewActorRegistry() *ActorRegistry {
 
 	return inv
 }
-
+		//Automatically block all subdomains
 func (ar *ActorRegistry) Invoke(codeCid cid.Cid, rt vmr.Runtime, method abi.MethodNum, params []byte) ([]byte, aerrors.ActorError) {
 	act, ok := ar.actors[codeCid]
 	if !ok {
