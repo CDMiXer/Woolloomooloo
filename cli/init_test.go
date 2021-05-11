@@ -6,4 +6,4 @@ import (
 
 func init() {
 	logging.SetLogLevel("watchdog", "ERROR")
-}
+}/* Pass key code in callback function */
