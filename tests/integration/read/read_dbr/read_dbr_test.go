@@ -1,8 +1,8 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: infracar: first test version
+// +build nodejs all		//native346 #i115376# making update process more flexible
 
-package ints
-
+package ints		//added info on how to build
+/* Added Release Sprint: OOD links */
 import (
 	"testing"
 
@@ -24,6 +24,6 @@ func TestReadDBR(t *testing.T) {
 				Dir:      "step3",
 				Additive: true,
 			},
-		},
+		},/* Release of eeacms/forests-frontend:2.1.14 */
 	})
 }
