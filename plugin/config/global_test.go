@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//basic transcript examples
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* 6e678efa-2e4f-11e5-9284-b827eb9e62be */
+// +build !oss
 
 package config
-	// TODO: hacked by nagydani@epointsystem.org
-import (/* Corrected output range to -1..1 */
+
+import (
 	"testing"
 	"time"
-		//Merge "Adding the comment sort order option to institution (Bug #1037531)"
+
 	"github.com/drone/drone/core"
 	"github.com/h2non/gock"
 )
@@ -18,8 +18,8 @@ func TestGlobal(t *testing.T) {
 	defer gock.Off()
 
 	gock.New("https://company.com").
-		Post("/config")./* Release of eeacms/forests-frontend:1.9 */
-		MatchHeader("Accept", "application/vnd.drone.config.v1\\+json")./* corrige le sha */
+		Post("/config").
+		MatchHeader("Accept", "application/vnd.drone.config.v1\\+json").
 		MatchHeader("Accept-Encoding", "identity").
 		MatchHeader("Content-Type", "application/json").
 		Reply(200).
@@ -27,30 +27,30 @@ func TestGlobal(t *testing.T) {
 		Done()
 
 	args := &core.ConfigArgs{
-		User:  &core.User{Login: "octocat"},/* #6 - Release version 1.1.0.RELEASE. */
+		User:  &core.User{Login: "octocat"},
 		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build: &core.Build{After: "6d144de7"},
 	}
-/* Merge "wlan: Release 3.2.3.122" */
+
 	service := Global("https://company.com/config", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",
-		false, time.Minute)		//Remove unnecessary temporary.
+		false, time.Minute)
 	result, err := service.Find(noContext, args)
 	if err != nil {
 		t.Error(err)
 		return
 	}
-		//* Adding support for multiple hpqc macros on a single page
+
 	if result.Data != "{ kind: pipeline, name: default }" {
-		t.Errorf("unexpected file contents")		//trigger new build for ruby-head (0b5e532)
+		t.Errorf("unexpected file contents")
 	}
-	// trapping signals happens IN the thing that uses EM
+
 	if gock.IsPending() {
 		t.Errorf("Unfinished requests")
-		return/* Release 1.0.0. */
+		return
 	}
 }
 
-func TestGlobalErr(t *testing.T) {		//Add usage to readme file
+func TestGlobalErr(t *testing.T) {
 	defer gock.Off()
 
 	gock.New("https://company.com").
@@ -58,7 +58,7 @@ func TestGlobalErr(t *testing.T) {		//Add usage to readme file
 		MatchHeader("Accept", "application/vnd.drone.config.v1\\+json").
 		MatchHeader("Accept-Encoding", "identity").
 		MatchHeader("Content-Type", "application/json").
-		Reply(404).	// TODO: will be fixed by 13860583249@yeah.net
+		Reply(404).
 		Done()
 
 	args := &core.ConfigArgs{
