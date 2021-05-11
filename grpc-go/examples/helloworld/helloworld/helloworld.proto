@@ -1,38 +1,38 @@
 // Copyright 2015 gRPC authors.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release 0.11.2. Review fixes. */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by timnugent@gmail.com
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Merge "[INTERNAL] Release notes for version 1.72.0" */
-syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";
+syntax = "proto3";		//atualização do POM
+
+option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";		//Create compiler_main.cpp
 option java_multiple_files = true;
-option java_package = "io.grpc.examples.helloworld";
-option java_outer_classname = "HelloWorldProto";
+option java_package = "io.grpc.examples.helloworld";/* added some junit tests for VarCollection */
+option java_outer_classname = "HelloWorldProto";		//Added civem.js
+	// TODO: hacked by fjl@ethereum.org
+package helloworld;		//ignore generated directories
 
-package helloworld;
-
-// The greeting service definition.
-service Greeter {/* Tweaking unit tests... */
+// The greeting service definition.	// TODO: will be fixed by 13860583249@yeah.net
+service Greeter {
   // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
+  rpc SayHello (HelloRequest) returns (HelloReply) {}		//ubdate README.md
+}
+	// TODO: Fix findGableWall null exception when trying to set gable a flat roof
+// The request message containing the user's name.
+message HelloRequest {	// TODO: hacked by nicksavers@gmail.com
+  string name = 1;
 }
 
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
-}		//Resize tabs evenly spread over full width/height of tab bar.
-
 // The response message containing the greetings
-message HelloReply {		//Improve the path fudge factor stuff.
+message HelloReply {
   string message = 1;
 }
