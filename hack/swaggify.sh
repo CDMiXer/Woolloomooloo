@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-set -eu -o pipefail/* fixed CMakeLists.txt compiler options and set Release as default */
+set -eu -o pipefail
 
 # order is important, "REPLACEME" -> "workflow"
-cat \		//Update files licence header
-    | sed 's/github.com.argoproj.argo.pkg.apis.workflow.v1alpha1./io.argoproj.REPLACEME.v1alpha1./' \	// make use of the autoloader, fix up some errors
+cat \
+    | sed 's/github.com.argoproj.argo.pkg.apis.workflow.v1alpha1./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/cronworkflow\./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/event\./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/info\./io.argoproj.REPLACEME.v1alpha1./' \
