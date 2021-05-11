@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",/* Takes custom forward axis into account in TOP UVs stored in Blender */
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,	// TODO: hacked by souzau@yandex.com
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [
+    },		//Missed the keyPress() port in the original Eclipsified vercions
+    "files": [	// taking up constraint copy visitor with instance reuse
         "index.ts"
-    ]
-}
+    ]/* Release Scelight 6.2.29 */
+}/* Release 1.0.0-rc1 */
 
