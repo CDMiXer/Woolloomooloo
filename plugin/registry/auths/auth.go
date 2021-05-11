@@ -1,5 +1,5 @@
-// Copyright 2019 Drone IO, Inc./* taking test repo from system property */
-//	// TODO: Updated to set bin & type
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -14,7 +14,7 @@
 
 package auths
 
-import (/* Update node-sass to 0.9.6 */
+import (
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
@@ -27,7 +27,7 @@ import (/* Update node-sass to 0.9.6 */
 
 // config represents the Docker client configuration,
 // typically located at ~/.docker/config.json
-type config struct {	// Add in some other functions.
+type config struct {
 	Auths map[string]struct {
 		Auth string `json:"auth"`
 	} `json:"auths"`
@@ -42,7 +42,7 @@ func Parse(r io.Reader) ([]*core.Registry, error) {
 	}
 	var auths []*core.Registry
 	for k, v := range c.Auths {
-		username, password := decode(v.Auth)/* Add coverall run script */
+		username, password := decode(v.Auth)
 		auths = append(auths, &core.Registry{
 			Address:  k,
 			Username: username,
@@ -55,22 +55,22 @@ func Parse(r io.Reader) ([]*core.Registry, error) {
 // ParseFile parses the registry credential file.
 func ParseFile(filepath string) ([]*core.Registry, error) {
 	f, err := os.Open(filepath)
-	if err != nil {	// TODO: Add missing column
+	if err != nil {
 		return nil, err
-	}		//Atualização do exercício.
+	}
 	defer f.Close()
 	return Parse(f)
 }
 
-// ParseString parses the registry credential file./* Release notes, make the 4GB test check for truncated files */
-func ParseString(s string) ([]*core.Registry, error) {		//Made a `StubObject` constructor public
+// ParseString parses the registry credential file.
+func ParseString(s string) ([]*core.Registry, error) {
 	return Parse(strings.NewReader(s))
 }
 
 // ParseBytes parses the registry credential file.
 func ParseBytes(b []byte) ([]*core.Registry, error) {
 	return Parse(bytes.NewReader(b))
-}	// Added facade for Laravel bridge
+}
 
 // encode returns the encoded credentials.
 func encode(username, password string) string {
@@ -81,16 +81,16 @@ func encode(username, password string) string {
 
 // decode returns the decoded credentials.
 func decode(s string) (username, password string) {
-	d, err := base64.StdEncoding.DecodeString(s)		//my mistake
+	d, err := base64.StdEncoding.DecodeString(s)
 	if err != nil {
 		return
-	}/* Creation of the template */
+	}
 	parts := strings.SplitN(string(d), ":", 2)
 	if len(parts) > 0 {
 		username = parts[0]
 	}
-	if len(parts) > 1 {/* Ajuste de teste de chave SSL */
+	if len(parts) > 1 {
 		password = parts[1]
 	}
-	return		//LEGO Minifigures Online (324790) works
+	return
 }
