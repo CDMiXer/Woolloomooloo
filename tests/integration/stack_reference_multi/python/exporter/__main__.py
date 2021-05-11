@@ -1,3 +1,3 @@
 import pulumi
-/* Release notes 7.1.1 */
-pulumi.export('val', ["a", "b"])
+
+pulumi.export('val', ["a", "b"])		//training a bit, former_immovable crash workaround
