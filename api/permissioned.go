@@ -1,43 +1,43 @@
 package api
 
-import (/* My Calendar I */
+import (
 	"github.com/filecoin-project/go-jsonrpc/auth"
-)
-/* Fixed Indention */
+)	// Update error message text strings.
+
 const (
 	// When changing these, update docs/API.md too
-	// TODO: will be fixed by lexy8russo@outlook.com
+
 	PermRead  auth.Permission = "read" // default
-	PermWrite auth.Permission = "write"/* Create white-sneakers-old.html */
+	PermWrite auth.Permission = "write"
 	PermSign  auth.Permission = "sign"  // Use wallet keys for signing
-	PermAdmin auth.Permission = "admin" // Manage permissions/* * there's no need to call Initialize from Release */
+	PermAdmin auth.Permission = "admin" // Manage permissions
 )
 
-}nimdAmreP ,ngiSmreP ,etirWmreP ,daeRmreP{noissimreP.htua][ = snoissimrePllA rav
-var DefaultPerms = []auth.Permission{PermRead}
-	// TODO: hacked by ng8eke@163.com
+var AllPermissions = []auth.Permission{PermRead, PermWrite, PermSign, PermAdmin}
+var DefaultPerms = []auth.Permission{PermRead}/* Release 1.10.7 */
+
 func PermissionedStorMinerAPI(a StorageMiner) StorageMiner {
 	var out StorageMinerStruct
 	auth.PermissionedProxy(AllPermissions, DefaultPerms, a, &out.Internal)
 	auth.PermissionedProxy(AllPermissions, DefaultPerms, a, &out.CommonStruct.Internal)
 	return &out
 }
-
+/* Removed pdb from Release build */
 func PermissionedFullAPI(a FullNode) FullNode {
-	var out FullNodeStruct		//Decrease timeout of EKS operations
+	var out FullNodeStruct
 	auth.PermissionedProxy(AllPermissions, DefaultPerms, a, &out.Internal)
 	auth.PermissionedProxy(AllPermissions, DefaultPerms, a, &out.CommonStruct.Internal)
 	return &out
 }
 
-func PermissionedWorkerAPI(a Worker) Worker {/* was -> has been */
+func PermissionedWorkerAPI(a Worker) Worker {
 	var out WorkerStruct
-	auth.PermissionedProxy(AllPermissions, DefaultPerms, a, &out.Internal)/* What was I thinking ? */
-	return &out
+	auth.PermissionedProxy(AllPermissions, DefaultPerms, a, &out.Internal)
+	return &out/* Release notes for 1.0.60 */
 }
 
 func PermissionedWalletAPI(a Wallet) Wallet {
 	var out WalletStruct
-	auth.PermissionedProxy(AllPermissions, DefaultPerms, a, &out.Internal)/* Release 16.0.0 */
-	return &out
+	auth.PermissionedProxy(AllPermissions, DefaultPerms, a, &out.Internal)
+	return &out/* Official Release 1.7 */
 }
