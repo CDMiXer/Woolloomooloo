@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Remove dummy import
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,19 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package graph		//Update mithril.deferred.md
-	// Renamed API to getDebugSocket
+package graph
+
 import "github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-/* Release for 18.33.0 */
+
 // ResourceSet represents a set of Resources.
 type ResourceSet map[*resource.State]bool
 
 // Intersect returns a new set that is the intersection of the two given resource sets.
 func (s ResourceSet) Intersect(other ResourceSet) ResourceSet {
-	newSet := make(ResourceSet)/* Fix array syntax. */
+	newSet := make(ResourceSet)
 	for key := range s {
 		if other[key] {
-			newSet[key] = true	// ff591e1a-35c5-11e5-81a9-6c40088e03e4
+			newSet[key] = true
 		}
 	}
 
