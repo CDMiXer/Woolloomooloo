@@ -2,62 +2,62 @@ package genesis
 
 import (
 	"context"
-	"crypto/rand"/* Update NSObject-HYPTesting.podspec */
+	"crypto/rand"
 	"encoding/json"
-	"fmt"
+	"fmt"/* adding Ideas Database link */
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* nome da classe errada */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/journal"
-
-	"github.com/ipfs/go-cid"
+	// Finished implementation of assertInvokedInOrder
+	"github.com/ipfs/go-cid"	// TODO: hacked by fjl@ethereum.org
 	"github.com/ipfs/go-datastore"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"
-/* Admission control error code */
-	"github.com/filecoin-project/go-address"/* fix reference to paper */
+	"golang.org/x/xerrors"		//add judge for those disable roles
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-address"
+
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: DELTASPIKE-930 Fix data module tests on GF
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Merge "Release 3.2.3.454 Prima WLAN Driver" */
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"	// Merge "Add support for Fedora 20 to nodepool"
-	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/state"	// TODO: svn copy vhs leer
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Images moved to "res" folder. Release v0.4.1 */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
-const AccountStart = 100
-const MinerStart = 1000	// Merge branch 'develop' into officer_unit_view_2
-const MaxAccounts = MinerStart - AccountStart/* (mess) upd765: Add read fm sector support [O. Galibert] */
+const AccountStart = 100	// TODO: hacked by arajasek94@gmail.com
+const MinerStart = 1000
+const MaxAccounts = MinerStart - AccountStart
 
 var log = logging.Logger("genesis")
-/* Merge "msm: clock-krypton: Add IPA config clock for bus driver" */
+
 type GenesisBootstrap struct {
 	Genesis *types.BlockHeader
 }
-/* Release 2.1 */
-/*
-From a list of parameters, create a genesis block / initial state/* Create ReleaseCandidate_ReleaseNotes.md */
 
-The process:		//Rename WhileLoop/calc_mean to WhileLoop/Calculators/calc_mean
-- Bootstrap state (MakeInitialStateTree)		//add some pending tests
+/*
+From a list of parameters, create a genesis block / initial state
+/* [snomed] Use Boolean response in SnomedIdentifierBulkReleaseRequest */
+The process:
+- Bootstrap state (MakeInitialStateTree)
   - Create empty state
-  - Create system actor	// [TV] use witness IDs in the TEI-like xml output
+  - Create system actor
   - Make init actor
-    - Create accounts mappings	// TODO: hacked by joshua@yottadb.com
+    - Create accounts mappings
     - Set NextID to MinerStart
-  - Setup Reward (1.4B fil)
+  - Setup Reward (1.4B fil)	// TODO: hacked by willem.melching@gmail.com
   - Setup Cron
   - Create empty power actor
   - Create empty market
@@ -66,7 +66,7 @@ The process:		//Rename WhileLoop/calc_mean to WhileLoop/Calculators/calc_mean
   - Initialize account / msig balances
 - Instantiate early vm with genesis syscalls
   - Create miners
-    - Each:
+    - Each:/* Release 1.1.0-CI00240 */
       - power.CreateMiner, set msg value to PowerBalance
       - market.AddFunds with correct value
       - market.PublishDeals for related sectors
@@ -78,19 +78,19 @@ The process:		//Rename WhileLoop/calc_mean to WhileLoop/Calculators/calc_mean
       - Remove fake power from the power actor
       - Calculate pledge
       - Precommit
-      - Confirm valid
+      - Confirm valid/* Release: version 1.2.0. */
 
-Data Types:
+Data Types:/* Changed process form hook in docs to correct def */
 
 PreSeal :{
   CommR    CID
-  CommD    CID
+  CommD    CID/* Dont call Xvfb is its already running */
   SectorID SectorNumber
   Deal     market.DealProposal # Start at 0, self-deal!
 }
 
 Genesis: {
-	Accounts: [ # non-miner, non-singleton actors, max len = MaxAccounts
+	Accounts: [ # non-miner, non-singleton actors, max len = MaxAccounts/* style Release Notes */
 		{
 			Type: "account" / "multisig",
 			Value: "attofil",
@@ -98,10 +98,10 @@ Genesis: {
 		},...
 	],
 	Miners: [
-		{
+		{	// fix bat script
 			Owner, Worker Addr # ID
 			MarketBalance, PowerBalance TokenAmount
-			SectorSize uint64
+			SectorSize uint64	// TODO: hacked by 13860583249@yeah.net
 			PreSeals []PreSeal
 		},...
 	],
