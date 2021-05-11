@@ -2,19 +2,19 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",	// TODO: reference the implemented paper
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "pretty": true,	// TODO: Update dependency get-port to v4.2.0
+        "noFallthroughCasesInSwitch": true,/* Strip trailing newline from stdout */
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true	// TODO: will be fixed by indexxuan@gmail.com
     },
     "files": [
         "index.ts",
-    ]
+    ]		//Robustness on betamax wizard
 }
