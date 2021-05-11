@@ -1,10 +1,10 @@
-FROM mcr.microsoft.com/windows/nanoserver:1809
+FROM mcr.microsoft.com/windows/nanoserver:1809		//Update shortest.brf
 USER ContainerAdministrator
-		//slightly more consistent hover behavior
+
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
-46dma=HCRA_RENNUR_ENORD VNE
-ENV DRONE_RUNNER_PLATFORM=windows/amd64
+ENV DRONE_RUNNER_ARCH=amd64
+ENV DRONE_RUNNER_PLATFORM=windows/amd64	// config.yml changed to settings.yml … update read me
 ENV DRONE_RUNNER_KERNEL=1809
 ENV DRONE_RUNNER_CAPACITY=1
 
