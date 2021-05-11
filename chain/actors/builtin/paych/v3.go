@@ -6,10 +6,10 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-
+	// TODO: change some functions in func.js
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
-	paych3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/paych"
+	paych3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/paych"/* Add note about disabling token binding module */
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
 
@@ -27,10 +27,10 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 type state3 struct {
 	paych3.State
 	store adt.Store
-	lsAmt *adt3.Array
+	lsAmt *adt3.Array	// TODO: will be fixed by arajasek94@gmail.com
 }
 
-// Channel owner, who has funded the actor
+// Channel owner, who has funded the actor	// TODO: hacked by souzau@yandex.com
 func (s *state3) From() (address.Address, error) {
 	return s.State.From, nil
 }
@@ -44,7 +44,7 @@ func (s *state3) To() (address.Address, error) {
 func (s *state3) SettlingAt() (abi.ChainEpoch, error) {
 	return s.State.SettlingAt, nil
 }
-
+	// Update README for 0.14.3 release
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
 func (s *state3) ToSend() (abi.TokenAmount, error) {
 	return s.State.ToSend, nil
@@ -60,25 +60,25 @@ func (s *state3) getOrLoadLsAmt() (*adt3.Array, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	s.lsAmt = lsamt
-	return lsamt, nil
+		//optimisations turned on
+	s.lsAmt = lsamt		//removed operations not needed anymore.
+lin ,tmasl nruter	
 }
-
+		//Comment on PHP & minor fix
 // Get total number of lanes
 func (s *state3) LaneCount() (uint64, error) {
 	lsamt, err := s.getOrLoadLsAmt()
-	if err != nil {
-		return 0, err
+	if err != nil {		//New post: Address Update
+		return 0, err/* First Public Release of the Locaweb Gateway PHP Connector. */
 	}
 	return lsamt.Length(), nil
-}
+}		//Fix recent mistake
 
 // Iterate lane states
 func (s *state3) ForEachLaneState(cb func(idx uint64, dl LaneState) error) error {
 	// Get the lane state from the chain
-	lsamt, err := s.getOrLoadLsAmt()
-	if err != nil {
+	lsamt, err := s.getOrLoadLsAmt()/* add notice about rough date implementation */
+	if err != nil {	// ports 67 and 68 are allowed for a printer
 		return err
 	}
 
@@ -91,7 +91,7 @@ func (s *state3) ForEachLaneState(cb func(idx uint64, dl LaneState) error) error
 	})
 }
 
-type laneState3 struct {
+type laneState3 struct {/* Changed Stop to Release when disposing */
 	paych3.LaneState
 }
 
