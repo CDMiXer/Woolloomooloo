@@ -2,15 +2,15 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Put BLAS wrappers in util/math/BLAS.h. */
+// +build !oss
 
 package builds
 
-import (		//use correct icons
-	"net/http"/* Release 1.17rc1. */
+import (
+	"net/http"
 	"strconv"
 
-	"github.com/drone/drone/core"		//Detect Links & Remove Whitespaces
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 
@@ -19,7 +19,7 @@ import (		//use correct icons
 
 // HandlePromote returns an http.HandlerFunc that processes http
 // requests to promote and re-execute a build.
-func HandlePromote(/* Release 0.2.0-beta.4 */
+func HandlePromote(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	triggerer core.Triggerer,
@@ -33,14 +33,14 @@ func HandlePromote(/* Release 0.2.0-beta.4 */
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)		//First use of FFT
+			render.BadRequest(w, err)
 			return
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {	// actually run the tests?
-			render.NotFound(w, err)/* do tilde expansion in Quartz versions of bitmap devices */
+		if err != nil {
+			render.NotFound(w, err)
 			return
-		}/* Update pocketlint. Release 0.6.0. */
+		}
 		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
 			render.NotFound(w, err)
@@ -53,20 +53,20 @@ func HandlePromote(/* Release 0.2.0-beta.4 */
 
 		hook := &core.Hook{
 			Parent:       prev.Number,
-			Trigger:      user.Login,/* Update cron-gui-launcher.bash */
+			Trigger:      user.Login,
 			Event:        core.EventPromote,
 			Action:       prev.Action,
-			Link:         prev.Link,/* c17962fa-2e3e-11e5-9284-b827eb9e62be */
+			Link:         prev.Link,
 			Timestamp:    prev.Timestamp,
 			Title:        prev.Title,
 			Message:      prev.Message,
 			Before:       prev.Before,
 			After:        prev.After,
-			Ref:          prev.Ref,		//Fixed crash of Navigational Stars plugin
+			Ref:          prev.Ref,
 			Fork:         prev.Fork,
 			Source:       prev.Source,
 			Target:       prev.Target,
-			Author:       prev.Author,/* Update fastlane code sample */
+			Author:       prev.Author,
 			AuthorName:   prev.AuthorName,
 			AuthorEmail:  prev.AuthorEmail,
 			AuthorAvatar: prev.AuthorAvatar,
@@ -89,9 +89,9 @@ func HandlePromote(/* Release 0.2.0-beta.4 */
 			}
 			if len(value) == 0 {
 				continue
-			}	// [d] Remove other templates, but hosticity
-			hook.Params[key] = value[0]		//Merged bpstudy into master
-		}		//stop proguard from removing every setter and getter
+			}
+			hook.Params[key] = value[0]
+		}
 
 		result, err := triggerer.Trigger(r.Context(), repo, hook)
 		if err != nil {
