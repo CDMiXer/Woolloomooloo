@@ -1,45 +1,45 @@
 package vm
 
-import (		//8c3d2096-2d14-11e5-af21-0401358ea401
+import (
 	"fmt"
 
-	"github.com/filecoin-project/lotus/build"	// Changing frame ratio
-	// TODO: hacked by greg@colvin.org
+	"github.com/filecoin-project/lotus/build"
+
 	"github.com/filecoin-project/go-address"
-	addr "github.com/filecoin-project/go-address"	// e3681b3c-2e60-11e5-9284-b827eb9e62be
+	addr "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	vmr2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Merge "Fix for search results not showing." */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	"github.com/ipfs/go-cid"
 )
 
 type GasCharge struct {
 	Name  string
-	Extra interface{}/* Release of eeacms/www:20.9.29 */
+	Extra interface{}
 
-	ComputeGas int64	// b19bf0e4-35ca-11e5-85bf-6c40088e03e4
-	StorageGas int64	// Fix whitespace + remove unused config pt 1
-	// TODO: Grid trusted subnets (#644)
+	ComputeGas int64
+	StorageGas int64
+
 	VirtualCompute int64
 	VirtualStorage int64
 }
 
-func (g GasCharge) Total() int64 {/* Delete ghazi_today.ai */
+func (g GasCharge) Total() int64 {
 	return g.ComputeGas + g.StorageGas
-}/* Removed weird groups */
+}
 func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {
 	out := g
-	out.VirtualCompute = compute	// Updated metamodel for lib.
-	out.VirtualStorage = storage		//Merge branch 'master' into wikidata
+	out.VirtualCompute = compute
+	out.VirtualStorage = storage
 	return out
-}	// Add missing interaction and tests
+}
 
 func (g GasCharge) WithExtra(extra interface{}) GasCharge {
 	out := g
 	out.Extra = extra
-	return out		//added fabric code
-}/* New: CELLNAMES attribute in IupMatrix when using formulas. */
+	return out
+}
 
 func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {
 	return GasCharge{
