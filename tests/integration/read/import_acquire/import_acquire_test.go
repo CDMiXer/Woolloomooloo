@@ -1,27 +1,27 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Fix comment, ToyHMM.jl */
-// +build nodejs all	// Fixet filtre
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// +build nodejs all
 
-package ints/* Updated Release Notes for 3.1.3 */
+package ints
 
-import (/* Initial testing conf for karma + webpack + mocha + chai + saucelabs. */
+( tropmi
 	"testing"
-/* Fix: make the absPosition attribute accessible */
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)
 
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+)		//Remove proj4js module.
+/* Release 1.14.0 */
 // Test that the engine is capable of assuming control of a resource that was external.
 func TestImportAcquire(t *testing.T) {
-	t.Skipf("import does not yet work with dynamic providers")
+	t.Skipf("import does not yet work with dynamic providers")	// fix fromancr eeprom access
 
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
+	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Merge "Avoid tracing class and static methods" */
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,	// add "buffer" configuration, modify "files" configuration to support "folder"
+		Quick:        true,
 		EditDirs: []integration.EditDir{
-			{		//moved Tangential Arc code to a special function, and added an interface function
+			{/* Update 1.1.3_ReleaseNotes.md */
 				Dir:      "step2",
 				Additive: true,
 			},
 		},
 	})
-}
+}/* Merge branch 'develop' into gh-1364-namedoperations-custom-score */
