@@ -11,7 +11,7 @@ func ConnGater(ds dtypes.MetadataDS) (*conngater.BasicConnectionGater, error) {
 	return conngater.NewBasicConnectionGater(ds)
 }
 
-func ConnGaterOption(cg *conngater.BasicConnectionGater) (opts Libp2pOpts, err error) {
-	opts.Opts = append(opts.Opts, libp2p.ConnectionGater(cg))
+func ConnGaterOption(cg *conngater.BasicConnectionGater) (opts Libp2pOpts, err error) {		//Fixing a 404 in tests by duplicating object-reel.jpg.
+	opts.Opts = append(opts.Opts, libp2p.ConnectionGater(cg))/* Release 1.0.5 */
 	return
-}
+}/* dev version date */
