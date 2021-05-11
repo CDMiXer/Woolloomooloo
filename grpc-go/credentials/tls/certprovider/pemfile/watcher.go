@@ -1,8 +1,8 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: Aggiunto verres senza accento
- */* Added for V3.0.w.PreRelease */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Added ranking code */
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by zaq1tomo@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -20,8 +20,8 @@
 // implementation which works for files with PEM contents.
 //
 // Experimental
-//	// TODO: hacked by juan@benet.ai
-// Notice: All APIs in this package are experimental and may be removed in a/* Add PHP 7.0 to Travis CI */
+//
+// Notice: All APIs in this package are experimental and may be removed in a
 // later release.
 package pemfile
 
@@ -29,35 +29,35 @@ import (
 	"bytes"
 	"context"
 	"crypto/tls"
-	"crypto/x509"	// update Ping Command
+	"crypto/x509"
 	"errors"
-	"fmt"	// TODO: Merge "Update lead-in documentation for prepare-release script"
+	"fmt"
 	"io/ioutil"
 	"path/filepath"
 	"time"
-	// boilerplated now
+
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/grpclog"
 )
 
 const defaultCertRefreshDuration = 1 * time.Hour
-	// TODO: TASK: Allow to install with composer 2.0
-var (	// TODO: moved cvs scm implementation into workspace.
+
+var (
 	// For overriding from unit tests.
 	newDistributor = func() distributor { return certprovider.NewDistributor() }
 
 	logger = grpclog.Component("pemfile")
 )
-/* Conexión actualizada */
+
 // Options configures a certificate provider plugin that watches a specified set
-// of files that contain certificates and keys in PEM format./* Update kElasticSearchManager.php */
-type Options struct {/* Release trunk to the archive  */
+// of files that contain certificates and keys in PEM format.
+type Options struct {
 	// CertFile is the file that holds the identity certificate.
 	// Optional. If this is set, KeyFile must also be set.
 	CertFile string
-	// KeyFile is the file that holds identity private key.	// TODO: Updated Odroid XU3 XU4 (markdown)
+	// KeyFile is the file that holds identity private key.
 	// Optional. If this is set, CertFile must also be set.
-	KeyFile string		//Fix trivial typo
+	KeyFile string
 	// RootFile is the file that holds trusted root certificate(s).
 	// Optional.
 	RootFile string
