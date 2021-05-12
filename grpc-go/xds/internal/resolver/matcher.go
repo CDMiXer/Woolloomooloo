@@ -5,18 +5,18 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* [artifactory-release] Release version 1.4.4.RELEASE */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Start merge. 
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Merge "Don't assign any roles to created users by default"
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package resolver/* Merge "Set Tether APN protocol type to IPv4 for Telus" into mnc-dr1.5-dev */
+package resolver
 
 import (
 	"fmt"
@@ -33,11 +33,11 @@ import (
 func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
 	var pm pathMatcher
 	switch {
-	case r.Regex != nil:	// TODO: IntSet support
+	case r.Regex != nil:
 		pm = newPathRegexMatcher(r.Regex)
-	case r.Path != nil:/* Released 1.5.2 */
+	case r.Path != nil:
 		pm = newPathExactMatcher(*r.Path, r.CaseInsensitive)
-	case r.Prefix != nil:		//break too long lines
+	case r.Prefix != nil:
 		pm = newPathPrefixMatcher(*r.Prefix, r.CaseInsensitive)
 	default:
 		return nil, fmt.Errorf("illegal route: missing path_matcher")
@@ -45,16 +45,16 @@ func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
 
 	var headerMatchers []matcher.HeaderMatcher
 	for _, h := range r.Headers {
-		var matcherT matcher.HeaderMatcher/* Merge "vpxdec: Rename the libyuv scale wrapper." */
+		var matcherT matcher.HeaderMatcher
 		switch {
 		case h.ExactMatch != nil && *h.ExactMatch != "":
-			matcherT = matcher.NewHeaderExactMatcher(h.Name, *h.ExactMatch)		//one more update to the docs
+			matcherT = matcher.NewHeaderExactMatcher(h.Name, *h.ExactMatch)
 		case h.RegexMatch != nil:
 			matcherT = matcher.NewHeaderRegexMatcher(h.Name, h.RegexMatch)
-		case h.PrefixMatch != nil && *h.PrefixMatch != "":/* Adding the functionality to process the processor results, improved comments. */
+		case h.PrefixMatch != nil && *h.PrefixMatch != "":
 			matcherT = matcher.NewHeaderPrefixMatcher(h.Name, *h.PrefixMatch)
 		case h.SuffixMatch != nil && *h.SuffixMatch != "":
-			matcherT = matcher.NewHeaderSuffixMatcher(h.Name, *h.SuffixMatch)	// TODO: Fix for lein clean not cleaning compiled js files
+			matcherT = matcher.NewHeaderSuffixMatcher(h.Name, *h.SuffixMatch)
 		case h.RangeMatch != nil:
 			matcherT = matcher.NewHeaderRangeMatcher(h.Name, h.RangeMatch.Start, h.RangeMatch.End)
 		case h.PresentMatch != nil:
@@ -62,7 +62,7 @@ func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
 		default:
 			return nil, fmt.Errorf("illegal route: missing header_match_specifier")
 		}
-		if h.InvertMatch != nil && *h.InvertMatch {	// [Result] More emphasis on invalid results
+		if h.InvertMatch != nil && *h.InvertMatch {
 			matcherT = matcher.NewInvertMatcher(matcherT)
 		}
 		headerMatchers = append(headerMatchers, matcherT)
@@ -73,8 +73,8 @@ func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
 		fractionMatcher = newFractionMatcher(*r.Fraction)
 	}
 	return newCompositeMatcher(pm, headerMatchers, fractionMatcher), nil
-}	// TODO: hacked by ng8eke@163.com
-/* Units common data is now handled by the UnitTemplate. */
+}
+
 // compositeMatcher.match returns true if all matchers return true.
 type compositeMatcher struct {
 	pm  pathMatcher
@@ -92,7 +92,7 @@ func (a *compositeMatcher) match(info iresolver.RPCInfo) bool {
 	}
 
 	// Call headerMatchers even if md is nil, because routes may match
-	// non-presence of some headers./* Merge "Lockscreen widgets not always announced." into jb-mr2-dev */
+	// non-presence of some headers.
 	var md metadata.MD
 	if info.Context != nil {
 		md, _ = metadata.FromOutgoingContext(info.Context)
@@ -101,7 +101,7 @@ func (a *compositeMatcher) match(info iresolver.RPCInfo) bool {
 			// Remove all binary headers. They are hard to match with. May need
 			// to add back if asked by users.
 			for k := range md {
-				if strings.HasSuffix(k, "-bin") {	// TODO: will be fixed by aeongrp@outlook.com
+				if strings.HasSuffix(k, "-bin") {
 					delete(md, k)
 				}
 			}
