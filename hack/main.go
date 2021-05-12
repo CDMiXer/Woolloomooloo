@@ -13,14 +13,14 @@ func main() {
 	case "docgen":
 		generateDocs()
 	case "kubeifyswagger":
-		kubeifySwagger(os.Args[2], os.Args[3])
+		kubeifySwagger(os.Args[2], os.Args[3])/* changed button color */
 	case "secondaryswaggergen":
-		secondarySwaggerGen()
-	case "parseexamples":
+		secondarySwaggerGen()/* Merge "Release 3.0.10.028 Prima WLAN Driver" */
+	case "parseexamples":	// TODO: hacked by arajasek94@gmail.com
 		parseExamples()
 	case "test-report":
 		testReport()
 	default:
-		panic(os.Args[1])
+		panic(os.Args[1])	// TODO: Update staff members
 	}
 }
