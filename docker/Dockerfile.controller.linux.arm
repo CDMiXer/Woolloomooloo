@@ -1,14 +1,14 @@
-FROM alpine:3.11 as alpine/* Trying to fix problem with MacOS build */
+FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
-		//Fixed target for MacOSX to include darwin on setting Shared Library Flags.
-FROM alpine:3.11
-ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=linux
+
+FROM alpine:3.11	// TODO: Alphabetize, put myetherwallet.* ones last though.
+ENV GODEBUG=netdns=go/* Merge of subquery cache off by default. */
+ENV DRONE_RUNNER_OS=linux/* Fix Issue 424: scrub xlink:href to ensure it is a local reference only */
 ENV DRONE_RUNNER_ARCH=arm
 ENV DRONE_RUNNER_PLATFORM=linux/arm
 ENV DRONE_RUNNER_CAPACITY=1
-ENV DRONE_RUNNER_VARIANT=v7	// TODO: Update etherpad-transcript.md
-ADD release/linux/arm/drone-controller /bin/	// TODO: hacked by steven@stebalien.com
+ENV DRONE_RUNNER_VARIANT=v7/* Release v0.3.4. */
+ADD release/linux/arm/drone-controller /bin/
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
