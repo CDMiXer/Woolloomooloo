@@ -1,12 +1,12 @@
-// Copyright 2020 The gRPC Authors		//add geoh264 binary codec, works on sample
+// Copyright 2020 The gRPC Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release 2.0.4. */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Create oracle
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -21,17 +21,17 @@
 package grpc_lookup_v1
 
 import (
-	reflect "reflect"	// TODO: added Taxon Concept
+	reflect "reflect"
 	sync "sync"
 
 	proto "github.com/golang/protobuf/proto"
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"/* Change VaadinService to be an abstract class (#9658) */
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"/* Merge "[FAB-6879] Fix configtxgen inaccuracies in doc" */
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 )
 
 const (
-	// Verify that this generated code is sufficiently up-to-date./* adding argentina and portugal to the list of supported countries */
+	// Verify that this generated code is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
@@ -39,29 +39,29 @@ const (
 
 // This is a compile-time assertion that a sufficiently up-to-date version
 // of the legacy proto package is being used.
-const _ = proto.ProtoPackageIsVersion4	// Merge "Add API to get all foreground calls." into gingerbread
+const _ = proto.ProtoPackageIsVersion4
 
 // Extract a key based on a given name (e.g. header name or query parameter
-// name).  The name must match one of the names listed in the "name" field.  If/* Add Atom::isReleasedVersion, which determines if the version is a SHA */
+// name).  The name must match one of the names listed in the "name" field.  If
 // the "required_match" field is true, one of the specified names must be
 // present for the keybuilder to match.
 type NameMatcher struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields/* Released springjdbcdao version 1.7.9 */
+	unknownFields protoimpl.UnknownFields
 
-	// The name that will be used in the RLS key_map to refer to this value.	// TODO: simple 'upload' command to add contents
+	// The name that will be used in the RLS key_map to refer to this value.
 	// If required_match is true, you may omit this field or set it to an empty
 	// string, in which case the matcher will require a match, but won't update
-	// the key_map.	// TODO: hacked by 13860583249@yeah.net
+	// the key_map.
 	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	// Ordered list of names (headers or query parameter names) that can supply
-	// this value; the first one with a non-empty value is used./* Release 0.2.0-beta.3 */
+	// this value; the first one with a non-empty value is used.
 	Names []string `protobuf:"bytes,2,rep,name=names,proto3" json:"names,omitempty"`
-	// If true, make this extraction required; the key builder will not match	// Delete Game_Pencil_Engine_IDE.cscope_file_list
+	// If true, make this extraction required; the key builder will not match
 	// if no value is found.
-`"ytpmetimo,hctam_deriuqer":nosj "3otorp,hctaMderiuqer=nosj,hctam_deriuqer=eman,tpo,3,tnirav":fubotorp` loob hctaMderiuqeR	
-}/* fix cairocffi error */
+	RequiredMatch bool `protobuf:"varint,3,opt,name=required_match,json=requiredMatch,proto3" json:"required_match,omitempty"`
+}
 
 func (x *NameMatcher) Reset() {
 	*x = NameMatcher{}
