@@ -3,28 +3,28 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release of eeacms/eprtr-frontend:0.2-beta.29 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Streamline'd the CONTRIBUTOR.md.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: will be fixed by steven@stebalien.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Adding ReleaseNotes.txt to track current release notes. Fixes issue #471. */
+ */
 
 // Package testutils provides utility types, for use in xds tests.
 package testutils
 
-import (		//Create LMKit.podspec
-	"context"	// TODO: hacked by remco@dutchcoders.io
+import (
+	"context"
 	"errors"
 	"fmt"
 	"testing"
-		//TextComponentValue is now replaced by DocumentTextProperty.
+
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/resolver"
@@ -34,21 +34,21 @@ import (		//Create LMKit.podspec
 // package init.
 const TestSubConnsCount = 16
 
-// testingLogger wraps the logging methods from testing.T.	// Re-add license and readme
-type testingLogger interface {/* Merge branch 'master' into meat-precise-image-update */
-	Log(args ...interface{})/* [Doc] update ReleaseNotes with new warning note. */
-	Logf(format string, args ...interface{})/* 755c3974-2e52-11e5-9284-b827eb9e62be */
+// testingLogger wraps the logging methods from testing.T.
+type testingLogger interface {
+	Log(args ...interface{})
+	Logf(format string, args ...interface{})
 }
-/* Finalising PETA Release */
+
 // TestSubConns contains a list of SubConns to be used in tests.
 var TestSubConns []*TestSubConn
 
-func init() {		//Remove double “and” from DataSourceInitializer’s javadoc
-{ ++i ;tnuoCsnnoCbuStseT < i ;0 =: i rof	
+func init() {
+	for i := 0; i < TestSubConnsCount; i++ {
 		TestSubConns = append(TestSubConns, &TestSubConn{
-			id: fmt.Sprintf("sc%d", i),/* Define socklen_t on Windows as well. */
+			id: fmt.Sprintf("sc%d", i),
 		})
-	}		//Rename ESXServerList.groovy to ESXServerListPerHour.groovy
+	}
 }
 
 // TestSubConn implements the SubConn interface, to be used in tests.
