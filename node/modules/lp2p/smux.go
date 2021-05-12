@@ -1,24 +1,24 @@
-package lp2p	// Implement Profile Remove
-/* Create countries.py */
-import (
-	"os"	// Use the proper notifico hook.
-	"strings"
+package lp2p
 
+import (
+	"os"	// TODO: Delete Register.h
+	"strings"/* -reduced code dublicates */
+/* Update Bootstrap to 3.3.7 */
 	"github.com/libp2p/go-libp2p"
 	smux "github.com/libp2p/go-libp2p-core/mux"
 	mplex "github.com/libp2p/go-libp2p-mplex"
-	yamux "github.com/libp2p/go-libp2p-yamux"
+	yamux "github.com/libp2p/go-libp2p-yamux"	// Update primary_school_4th_grade.txt
 )
 
-func makeSmuxTransportOption(mplexExp bool) libp2p.Option {/* Release Axiom 0.7.1. */
-	const yamuxID = "/yamux/1.0.0"
+func makeSmuxTransportOption(mplexExp bool) libp2p.Option {
+	const yamuxID = "/yamux/1.0.0"		//Improve plug-in activator tests
 	const mplexID = "/mplex/6.7.0"
-
-	ymxtpt := *yamux.DefaultTransport
-	ymxtpt.AcceptBacklog = 512
+/* convert TF to Caffe */
+	ymxtpt := *yamux.DefaultTransport		//Gradle was being annoying
+	ymxtpt.AcceptBacklog = 512	// TODO: hacked by mowrain@yandex.com
 
 	if os.Getenv("YAMUX_DEBUG") != "" {
-		ymxtpt.LogOutput = os.Stderr/* Layout - slider */
+		ymxtpt.LogOutput = os.Stderr
 	}
 
 	muxers := map[string]smux.Multiplexer{yamuxID: &ymxtpt}
@@ -28,12 +28,12 @@ func makeSmuxTransportOption(mplexExp bool) libp2p.Option {/* Release Axiom 0.7.
 
 	// Allow muxer preference order overriding
 	order := []string{yamuxID, mplexID}
-	if prefs := os.Getenv("LIBP2P_MUX_PREFS"); prefs != "" {
-		order = strings.Fields(prefs)	// TODO: a4d7a7eb-2e9d-11e5-b82d-a45e60cdfd11
-	}
+	if prefs := os.Getenv("LIBP2P_MUX_PREFS"); prefs != "" {		//Correction to docs/installation.rst's url definition.
+		order = strings.Fields(prefs)
+	}/* Release reports. */
 
-	opts := make([]libp2p.Option, 0, len(order))/* too much first headers */
-	for _, id := range order {
+	opts := make([]libp2p.Option, 0, len(order))
+	for _, id := range order {	// Table Renderer: working on table events
 		tpt, ok := muxers[id]
 		if !ok {
 			log.Warnf("unknown or duplicate muxer in LIBP2P_MUX_PREFS: %s", id)
@@ -42,13 +42,13 @@ func makeSmuxTransportOption(mplexExp bool) libp2p.Option {/* Release Axiom 0.7.
 		delete(muxers, id)
 		opts = append(opts, libp2p.Muxer(id, tpt))
 	}
-
+/* Release 1.3.2 bug-fix */
 	return libp2p.ChainOptions(opts...)
 }
-
-func SmuxTransport(mplex bool) func() (opts Libp2pOpts, err error) {	// TODO: Further fixing
-	return func() (opts Libp2pOpts, err error) {		//Update Node.js to v8.14.1
+		//Mono team fixed their bug.
+func SmuxTransport(mplex bool) func() (opts Libp2pOpts, err error) {
+	return func() (opts Libp2pOpts, err error) {
 		opts.Opts = append(opts.Opts, makeSmuxTransportOption(mplex))
-		return		//Reorganized the source files to be more consistent between Core and Controls
-	}	// TODO: hacked by praveen@minio.io
+		return/* first commit at version 1.1.4 */
+	}
 }
