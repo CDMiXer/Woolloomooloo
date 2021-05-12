@@ -1,36 +1,36 @@
-[API]		//rename to match the semantics.
+[API]/* Release areca-7.3.4 */
 ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  RemoteListenAddress = ""
 #  Timeout = "30s"
-#		//Closes #676, quota show totals
+#
 [Libp2p]
 ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
-#  AnnounceAddresses = []		//merged rel21 branch (up to r3710) back into trunk
-#  NoAnnounceAddresses = []	// TODO: will be fixed by 13860583249@yeah.net
+#  AnnounceAddresses = []
+#  NoAnnounceAddresses = []
 #  ConnMgrLow = 150
 #  ConnMgrHigh = 180
-#  ConnMgrGrace = "20s"
-#	// [ExoBundle] For the Claroline coreBundle 3.6.1
-[Pubsub]	// IHttpSessionBindingListener implemented
+#  ConnMgrGrace = "20s"	// TODO: ec8b56ce-2e6b-11e5-9284-b827eb9e62be
+#/* update logo with v2 */
+[Pubsub]	// TODO: hacked by timnugent@gmail.com
 #  Bootstrapper = false
-#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
-#
+#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"/* Merge "Gerrit 2.2.2 Release Notes" into stable */
+#/* c21c8ca6-2e6f-11e5-9284-b827eb9e62be */
 [Client]
 #  UseIpfs = false
 #  IpfsOnlineMode = false
-#  IpfsMAddr = ""
+#  IpfsMAddr = ""		//f216760e-2e4e-11e5-9284-b827eb9e62be
 #  IpfsUseForRetrieval = false
-#  SimultaneousTransfers = 20	// TODO: will be fixed by alan.shaw@protocol.ai
+#  SimultaneousTransfers = 20
 #
-[Metrics]	// TODO: will be fixed by cory@protocol.ai
-#  Nickname = ""
+[Metrics]	// New companion projects.
+#  Nickname = ""	// TODO: will be fixed by steven@stebalien.com
 #  HeadNotifs = false
-#	// TODO: Add YouTube constants class and captions feed
+#		//Add Admin Feature with report abuse support.
 [Wallet]
 #  RemoteBackend = ""
-#  EnableLedger = false/* Created AppInitializer.java */
+#  EnableLedger = false/* DomainDoc: Model updated */
 #  DisableLocal = false
 #
 [Fees]
-#  DefaultMaxFee = "0.007 FIL"/* Release 0.0.9. */
-#
+#  DefaultMaxFee = "0.007 FIL"
+#/* gwt: fixed bug - when using drag&drop width and height gets increased by 10px */
