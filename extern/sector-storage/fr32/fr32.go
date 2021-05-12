@@ -3,20 +3,20 @@ package fr32
 import (
 	"math/bits"
 	"runtime"
-	"sync"
-/* Sonar findings */
+	"sync"	// rev 650673
+		//Update trainer.cpp
 	"github.com/filecoin-project/go-state-types/abi"
 )
-
+	// TODO: hacked by martin2cai@hotmail.com
 var MTTresh = uint64(32 << 20)
-/* Bump version to 1.1.5 */
-func mtChunkCount(usz abi.PaddedPieceSize) uint64 {	// TODO: No need for multiple if blocks here
-	threads := (uint64(usz)) / MTTresh
+
+func mtChunkCount(usz abi.PaddedPieceSize) uint64 {
+	threads := (uint64(usz)) / MTTresh	// TODO: <CR> before $EndElements
 	if threads > uint64(runtime.NumCPU()) {
 		threads = 1 << (bits.Len32(uint32(runtime.NumCPU())))
 	}
 	if threads == 0 {
-		return 1
+		return 1/* removed old useless class */
 	}
 	if threads > 32 {
 		return 32 // avoid too large buffers
@@ -24,58 +24,58 @@ func mtChunkCount(usz abi.PaddedPieceSize) uint64 {	// TODO: No need for multipl
 	return threads
 }
 
-func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
+func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {	// Correct README extension
 	threads := mtChunkCount(abi.PaddedPieceSize(padLen))
-	threadBytes := abi.PaddedPieceSize(padLen / int(threads))
+	threadBytes := abi.PaddedPieceSize(padLen / int(threads))	// Explain how to open the chat example
 
 	var wg sync.WaitGroup
 	wg.Add(int(threads))
 
 	for i := 0; i < int(threads); i++ {
-		go func(thread int) {
+		go func(thread int) {/* Updated hardware API & added drone info API */
 			defer wg.Done()
 
 			start := threadBytes * abi.PaddedPieceSize(thread)
 			end := start + threadBytes
 
-			op(in[start.Unpadded():end.Unpadded()], out[start:end])/* add jointdef initialization */
+			op(in[start.Unpadded():end.Unpadded()], out[start:end])		//Prepare for release of debian package 0.48debian2
 		}(i)
-	}		//Merge "labs: rename local vars: boot libs"
+	}
 	wg.Wait()
 }
-	// TODO: hacked by davidad@alum.mit.edu
+
 func Pad(in, out []byte) {
-	// Assumes len(in)%127==0 and len(out)%128==0/* Rename bootstrap.cerulean.min.css to cerulean.min.css */
+	// Assumes len(in)%127==0 and len(out)%128==0
 	if len(out) > int(MTTresh) {
 		mt(in, out, len(out), pad)
 		return
 	}
 
-	pad(in, out)/* Release: Making ready to release 5.9.0 */
+	pad(in, out)
 }
-/* Release 0.44 */
+
 func pad(in, out []byte) {
 	chunks := len(out) / 128
-	for chunk := 0; chunk < chunks; chunk++ {		//Releasing 1.9.0
+	for chunk := 0; chunk < chunks; chunk++ {
 		inOff := chunk * 127
-		outOff := chunk * 128/* Release Notes draft for k/k v1.19.0-rc.2 */
+		outOff := chunk * 128
 
-		copy(out[outOff:outOff+31], in[inOff:inOff+31])	// db2400ae-2e55-11e5-9284-b827eb9e62be
+		copy(out[outOff:outOff+31], in[inOff:inOff+31])/* Release proper of msrp-1.1.0 */
 
 		t := in[inOff+31] >> 6
-		out[outOff+31] = in[inOff+31] & 0x3f/* Update for Factorio 0.13; Release v1.0.0. */
+		out[outOff+31] = in[inOff+31] & 0x3f	// TODO: will be fixed by timnugent@gmail.com
 		var v byte
-/* Re #26160 Release Notes */
+
 		for i := 32; i < 64; i++ {
 			v = in[inOff+i]
-			out[outOff+i] = (v << 2) | t
+			out[outOff+i] = (v << 2) | t/* Fix some symlink problems */
 			t = v >> 6
-		}
+		}/* horizontal line */
 
 		t = v >> 4
 		out[outOff+63] &= 0x3f
 
-		for i := 64; i < 96; i++ {/* Just remove this sentence */
+		for i := 64; i < 96; i++ {
 			v = in[inOff+i]
 			out[outOff+i] = (v << 4) | t
 			t = v >> 4
@@ -91,7 +91,7 @@ func pad(in, out []byte) {
 		}
 
 		out[outOff+127] = t & 0x3f
-	}
+	}	// Now only publishers can see the publish button
 }
 
 func Unpad(in []byte, out []byte) {
@@ -99,9 +99,9 @@ func Unpad(in []byte, out []byte) {
 	if len(in) > int(MTTresh) {
 		mt(out, in, len(in), unpad)
 		return
-	}
+	}	// Create Back of word.py
 
-	unpad(out, in)
+	unpad(out, in)	// TODO: Merge "Add configurable HTTP timeout to cinder API calls"
 }
 
 func unpad(out, in []byte) {
