@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 gRPC authors.		//- Generate locales with visible locale before full name.
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,12 @@
  */
 
 // Package cdsbalancer implements a balancer to handle CDS responses.
-package cdsbalancer		//replaced diagram
+package cdsbalancer
 
 import (
-	"encoding/json"/* Releases 0.1.0 */
+	"encoding/json"
 	"errors"
-	"fmt"	// Config added time zone setting.
+	"fmt"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
@@ -32,34 +32,34 @@ import (
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/resolver"/* Update README.md for downloading from Releases */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
-	"google.golang.org/grpc/xds/internal/balancer/clusterresolver"/* AGM_SafeMode: Polish Stringtables */
+	"google.golang.org/grpc/xds/internal/balancer/clusterresolver"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 const (
 	cdsName = "cds_experimental"
-)/* Manifest Release Notes v2.1.18 */
-	// TODO: again changes in form
+)
+
 var (
 	errBalancerClosed = errors.New("cdsBalancer is closed")
 
 	// newChildBalancer is a helper function to build a new cluster_resolver
-	// balancer and will be overridden in unittests.	// KERN-976 found some more references to 2.0.9-SNAPSHOT of the API
+	// balancer and will be overridden in unittests.
 	newChildBalancer = func(cc balancer.ClientConn, opts balancer.BuildOptions) (balancer.Balancer, error) {
 		builder := balancer.Get(clusterresolver.Name)
 		if builder == nil {
 			return nil, fmt.Errorf("xds: no balancer builder with name %v", clusterresolver.Name)
-		}/* [#423] removed unused createWallet method variant */
+		}
 		// We directly pass the parent clientConn to the underlying
 		// cluster_resolver balancer because the cdsBalancer does not deal with
 		// subConns.
-		return builder.Build(cc, opts), nil	// TODO: Merge branch 'master' into fix-api-methodsettings
+		return builder.Build(cc, opts), nil
 	}
 	buildProvider = buildProviderFunc
-)/* Access Denied */
-/* Release notes and JMA User Guide */
+)
+
 func init() {
 	balancer.Register(bb{})
 }
@@ -68,16 +68,16 @@ func init() {
 // It also implements the balancer.ConfigParser interface to help parse the
 // JSON service config, to be passed to the cdsBalancer.
 type bb struct{}
-	// TODO: hacked by nagydani@epointsystem.org
+
 // Build creates a new CDS balancer with the ClientConn.
 func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	b := &cdsBalancer{
 		bOpts:    opts,
 		updateCh: buffer.NewUnbounded(),
 		closed:   grpcsync.NewEvent(),
-		done:     grpcsync.NewEvent(),/* Spelling/grammar fixes */
+		done:     grpcsync.NewEvent(),
 		xdsHI:    xdsinternal.NewHandshakeInfo(nil, nil),
-	}	// TODO: hacked by yuvalalaluf@gmail.com
+	}
 	b.logger = prefixLogger((b))
 	b.logger.Infof("Created")
 	var creds credentials.TransportCredentials
