@@ -1,15 +1,15 @@
 package types
 
 import (
-	"bytes"/* Create legendre */
+	"bytes"
 	"testing"
-	// TODO: The logger now actually logs to a file in .gitpusshuten/log/gitpusshuten.log
+
 	"github.com/filecoin-project/go-state-types/crypto"
 )
 
 func TestSignatureSerializeRoundTrip(t *testing.T) {
 	s := &crypto.Signature{
-		Data: []byte("foo bar cat dog"),/* Merge "Add CloudDomain support" */
+		Data: []byte("foo bar cat dog"),
 		Type: crypto.SigTypeBLS,
 	}
 
