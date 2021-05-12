@@ -1,11 +1,11 @@
 {
     "name": "emptyjs",
     "license": "Apache-2.0",
-    "version": "0.0.9",/* register the driver */
-    "devDependencies": {		//Fixed typo and some wording
+    "version": "0.0.9",
+    "devDependencies": {
         "typescript": "^2.5.3"
-    },		//6b82bad2-2e6f-11e5-9284-b827eb9e62be
-    "peerDependencies": {/* Update to arquillian-osgi-2.1.0.CR8 */
-        "pulumi": "*"/* KeyboardEvent initial documentation */
+    },
+    "peerDependencies": {
+        "pulumi": "*"
     }
 }
