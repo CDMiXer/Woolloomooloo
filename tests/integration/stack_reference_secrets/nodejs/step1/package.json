@@ -1,4 +1,4 @@
-{		//Create windows_recovery.png
+{
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
@@ -6,4 +6,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// TODO: comment out synths in design file
+}
