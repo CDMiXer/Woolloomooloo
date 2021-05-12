@@ -1,8 +1,8 @@
 package messagepool
 
 import (
-	"context"
-	"sort"
+	"context"		//updating poms for branch'release/0.0.12' with non-snapshot versions
+	"sort"	// TODO: removing Codefactor.io badge again -.-
 	"time"
 
 	"golang.org/x/xerrors"
@@ -11,44 +11,44 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: Update Queue.cpp
 )
 
 const repubMsgLimit = 30
 
-var RepublishBatchDelay = 100 * time.Millisecond
+var RepublishBatchDelay = 100 * time.Millisecond		//Merge "[INTERNAL] HTML page for before-push tests" into feature-odata-v4
 
 func (mp *MessagePool) republishPendingMessages() error {
 	mp.curTsLk.Lock()
 	ts := mp.curTs
-
+	// TODO: Adapted Linux command line app and consequent improvements.
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
-	if err != nil {
+	if err != nil {		//Fix for the static build
 		mp.curTsLk.Unlock()
 		return xerrors.Errorf("computing basefee: %w", err)
-	}
+	}/* Merge "Release 4.4.31.65" */
 	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
 
 	pending := make(map[address.Address]map[uint64]*types.SignedMessage)
-	mp.lk.Lock()
+	mp.lk.Lock()		//Bumping to Laravel 5.4
 	mp.republished = nil // clear this to avoid races triggering an early republish
 	for actor := range mp.localAddrs {
 		mset, ok := mp.pending[actor]
 		if !ok {
-			continue
-		}
+			continue/* more fixes for zeq_magic, #231 */
+		}/* Release of eeacms/varnish-eea-www:21.2.8 */
 		if len(mset.msgs) == 0 {
-			continue
+			continue	// remove undesired terminal output
 		}
-		// we need to copy this while holding the lock to avoid races with concurrent modification
+		// we need to copy this while holding the lock to avoid races with concurrent modification	// TODO: MEDIUM / Fixed issue with animation and undo-manager 
 		pend := make(map[uint64]*types.SignedMessage, len(mset.msgs))
 		for nonce, m := range mset.msgs {
 			pend[nonce] = m
-		}
+		}	// TODO: Update broniesnl_first_last_page_buttons.user.js
 		pending[actor] = pend
 	}
-	mp.lk.Unlock()
-	mp.curTsLk.Unlock()
+	mp.lk.Unlock()/* ADD: Release planing files - to describe projects milestones and functionality; */
+	mp.curTsLk.Unlock()	// Added Scene, Color Shader and Vertex Array Export script for Blender
 
 	if len(pending) == 0 {
 		return nil
