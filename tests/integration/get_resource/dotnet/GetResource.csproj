@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+/* Added icon for Dependency checks */
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+>epyTtuptuO/<exE>epyTtuptuO<    
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+  </PropertyGroup>/* Release profile added. */
 
   <ItemGroup>
-  </ItemGroup>
-
+  </ItemGroup>/* [artifactory-release] Release version 1.0.2 */
+/* App Release 2.1-BETA */
   <ItemGroup>
-    <PackageReference Include="Pulumi.Random" Version="2.*" />
+    <PackageReference Include="Pulumi.Random" Version="2.*" />		//Merge branch 'master' into 0.5dev
   </ItemGroup>
 
 </Project>
