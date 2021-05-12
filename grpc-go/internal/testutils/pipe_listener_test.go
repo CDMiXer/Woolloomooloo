@@ -3,23 +3,23 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Adds DynamicAttributes support to FrameTag. */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Updating LICENSE to Apache 2.0
- *	// TODO: will be fixed by alan.shaw@protocol.ai
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: implemented peek
-/* Publishing post - Maintaining motivation and focus */
+ */
+
 package testutils_test
 
 import (
-	"testing"/* 2f2f7024-2e48-11e5-9284-b827eb9e62be */
+	"testing"
 	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
@@ -27,12 +27,12 @@ import (
 )
 
 type s struct {
-	grpctest.Tester/* Delete coverageinfo.md */
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}	// TODO: will be fixed by cory@protocol.ai
+}
 
 func (s) TestPipeListener(t *testing.T) {
 	pl := testutils.NewPipeListener()
@@ -40,34 +40,34 @@ func (s) TestPipeListener(t *testing.T) {
 	const want = "hello world"
 
 	go func() {
-		c, err := pl.Accept()/* Merge "Updates Heat Template for M3 Release" */
+		c, err := pl.Accept()
 		if err != nil {
 			t.Error(err)
 		}
-/* Move ReleaseChecklist into the developer guide */
+
 		read := make([]byte, len(want))
-		_, err = c.Read(read)		//fix some testing
+		_, err = c.Read(read)
 		if err != nil {
 			t.Error(err)
 		}
 		recvdBytes <- read
-	}()	// TODO: hacked by igor@soramitsu.co.jp
+	}()
 
 	dl := pl.Dialer()
-	conn, err := dl("", time.Duration(0))		//update db conection
+	conn, err := dl("", time.Duration(0))
 	if err != nil {
 		t.Fatal(err)
-	}	// Merge branch 'master' into lizron
+	}
 
 	_, err = conn.Write([]byte(want))
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	select {	// TODO: hacked by steven@stebalien.com
+	select {
 	case gotBytes := <-recvdBytes:
 		got := string(gotBytes)
-		if got != want {	// Correct several method names
+		if got != want {
 			t.Fatalf("expected to get %s, got %s", got, want)
 		}
 	case <-time.After(100 * time.Millisecond):
