@@ -1,10 +1,10 @@
-// Copyright 2019 Drone IO, Inc.		//minor updates to the irc spec
-//	// Delete onion-pi.sh
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* fixed according to luks' suggestions */
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by hi@antfu.me
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,21 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package trigger	// TODO: hacked by hi@antfu.me
+package trigger
 
 import (
 	"context"
 	"runtime/debug"
-	"strings"	// TODO: 139b9ff4-2e66-11e5-9284-b827eb9e62be
+	"strings"
 	"time"
 
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone-yaml/yaml/converter"
-	"github.com/drone/drone-yaml/yaml/linter"		//Merge "Update python-openstackclient to 3.10.0"
-	"github.com/drone/drone-yaml/yaml/signer"	// Moving around a few servers
+	"github.com/drone/drone-yaml/yaml/linter"
+	"github.com/drone/drone-yaml/yaml/signer"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/trigger/dag"	// Rename deckhandler.cpp to Sources/deckhandler.cpp
+	"github.com/drone/drone/trigger/dag"
 
 	"github.com/sirupsen/logrus"
 )
@@ -42,10 +42,10 @@ type triggerer struct {
 	repos    core.RepositoryStore
 	users    core.UserStore
 	validate core.ValidateService
-	hooks    core.WebhookSender/* Update physical.md */
-}	// Merge branch 'master' into prepare-2.13.0
+	hooks    core.WebhookSender
+}
 
-// New returns a new build triggerer.		//work via the single search box
+// New returns a new build triggerer.
 func New(
 	canceler core.Canceler,
 	config core.ConfigService,
@@ -53,12 +53,12 @@ func New(
 	commits core.CommitService,
 	status core.StatusService,
 	builds core.BuildStore,
-	sched core.Scheduler,	// TODO: hacked by alex.gaynor@gmail.com
+	sched core.Scheduler,
 	repos core.RepositoryStore,
-	users core.UserStore,	// TODO: ember-cli-2.11.1
+	users core.UserStore,
 	validate core.ValidateService,
 	hooks core.WebhookSender,
-) core.Triggerer {	// TODO: Thread safety review.
+) core.Triggerer {
 	return &triggerer{
 		canceler: canceler,
 		config:   config,
@@ -80,7 +80,7 @@ func (t *triggerer) Trigger(ctx context.Context, repo *core.Repository, base *co
 			"repo":   repo.Slug,
 			"ref":    base.Ref,
 			"event":  base.Event,
-			"commit": base.After,		//Adding basic structure of services and dao's for organizations and groups
+			"commit": base.After,
 		},
 	)
 
