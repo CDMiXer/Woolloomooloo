@@ -1,7 +1,7 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+		//Added explanation of what to download to README.md
 [global]
   plan = "lotus-soup"
   case = "deals-stress"
@@ -19,20 +19,20 @@
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "3"
+  clients = "3"	// TODO: will be fixed by vyzo@hackzen.org
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
   random_beacon_type = "mock"
-
+	// TODO: index und home
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Alpha 0.6.3 Release */
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Release 1.0.24 */
       role = "bootstrapper"
 
 [[groups]]
@@ -41,11 +41,11 @@
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* chore: Release v1.3.1 */
       role = "miner"
       mining_mode = "natural"
 
-[[groups]]
+[[groups]]	// TODO: Test case for r177347.
   id = "clients"
   [groups.instances]
     count = 3
