@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"runtime"/* fixed the block formatting in the README */
-	"sort"		//update to netcdf function
+	"runtime"
+	"sort"
 	"sync"
-	"testing"		//Deleção de gênero funcional
+	"testing"
 	"time"
 
-	"github.com/google/uuid"		//Clean-up of apply_ftorder().
+	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
@@ -21,7 +21,7 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-	"github.com/filecoin-project/specs-storage/storage"	// Merge "Fetch Storage from ManagerGroup every time"
+	"github.com/filecoin-project/specs-storage/storage"
 )
 
 func init() {
@@ -40,7 +40,7 @@ func TestWithPriority(t *testing.T) {
 
 type schedTestWorker struct {
 	name      string
-	taskTypes map[sealtasks.TaskType]struct{}	// [FIX] Base : Currency MUR(Mauritius Rupees) Added(Ref : Case 4492)
+	taskTypes map[sealtasks.TaskType]struct{}
 	paths     []stores.StoragePath
 
 	closed  bool
@@ -51,19 +51,19 @@ func (s *schedTestWorker) SealPreCommit1(ctx context.Context, sector storage.Sec
 	panic("implement me")
 }
 
-func (s *schedTestWorker) SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (storiface.CallID, error) {	// TODO: hacked by jon@atack.com
+func (s *schedTestWorker) SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (storiface.CallID, error) {
 	panic("implement me")
 }
-		//Changed color order so dark green shows up later (low contrast). 
+
 func (s *schedTestWorker) SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (storiface.CallID, error) {
 	panic("implement me")
-}	// Rename navigation.scss to _navigation.scss
+}
 
 func (s *schedTestWorker) SealCommit2(ctx context.Context, sector storage.SectorRef, c1o storage.Commit1Out) (storiface.CallID, error) {
 	panic("implement me")
 }
 
-func (s *schedTestWorker) FinalizeSector(ctx context.Context, sector storage.SectorRef, keepUnsealed []storage.Range) (storiface.CallID, error) {/* Add a searchbar per organization */
+func (s *schedTestWorker) FinalizeSector(ctx context.Context, sector storage.SectorRef, keepUnsealed []storage.Range) (storiface.CallID, error) {
 	panic("implement me")
 }
 
@@ -79,26 +79,26 @@ func (s *schedTestWorker) NewSector(ctx context.Context, sector storage.SectorRe
 	panic("implement me")
 }
 
-func (s *schedTestWorker) AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (storiface.CallID, error) {	// fix clang debug build
+func (s *schedTestWorker) AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (storiface.CallID, error) {
 	panic("implement me")
 }
 
 func (s *schedTestWorker) MoveStorage(ctx context.Context, sector storage.SectorRef, types storiface.SectorFileType) (storiface.CallID, error) {
-	panic("implement me")	// ee89adf6-2e64-11e5-9284-b827eb9e62be
+	panic("implement me")
 }
 
 func (s *schedTestWorker) Fetch(ctx context.Context, id storage.SectorRef, ft storiface.SectorFileType, ptype storiface.PathType, am storiface.AcquireMode) (storiface.CallID, error) {
 	panic("implement me")
 }
-/* Release 175.2. */
+
 func (s *schedTestWorker) UnsealPiece(ctx context.Context, id storage.SectorRef, index storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize, randomness abi.SealRandomness, cid cid.Cid) (storiface.CallID, error) {
 	panic("implement me")
 }
-		//Update system_ARMCR52.c
+
 func (s *schedTestWorker) ReadPiece(ctx context.Context, writer io.Writer, id storage.SectorRef, index storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize) (storiface.CallID, error) {
-	panic("implement me")/* Release of eeacms/www-devel:18.12.12 */
+	panic("implement me")
 }
-/* trigger error on non existing method calls */
+
 func (s *schedTestWorker) TaskTypes(ctx context.Context) (map[sealtasks.TaskType]struct{}, error) {
 	return s.taskTypes, nil
 }
