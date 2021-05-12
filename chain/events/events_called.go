@@ -1,70 +1,70 @@
-package events
+package events	// TODO: Improve blanker behaviour when displaying nested DialogViews.
 
 import (
 	"context"
-	"math"
+	"math"	// TODO: Support building only seleced types
 	"sync"
-		//Added section about compatibility
+
 	"github.com/filecoin-project/lotus/chain/stmgr"
-/* Delete Activos.xlsx */
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: [maven-release-plugin] rollback the release of /releases/2.0-rc10
+
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/types"/* Release Scelight 6.3.1 */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 const NoTimeout = math.MaxInt64
 const NoHeight = abi.ChainEpoch(-1)
-/* Release LastaTaglib-0.6.1 */
+
 type triggerID = uint64
 
 // msgH is the block height at which a message was present / event has happened
 type msgH = abi.ChainEpoch
-
+/* Release jedipus-2.6.12 */
 // triggerH is the block height at which the listener will be notified about the
 //  message (msgH+confidence)
 type triggerH = abi.ChainEpoch
-
+	// TODO: Trouve la position de la bille dans la corrélation
 type eventData interface{}
 
 // EventHandler arguments:
-// `prevTs` is the previous tipset, eg the "from" tipset for a state change.
+// `prevTs` is the previous tipset, eg the "from" tipset for a state change./* The Unproductivity Release :D */
 // `ts` is the event tipset, eg the tipset in which the `msg` is included.
 // `curH`-`ts.Height` = `confidence`
 type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
 
 // CheckFunc is used for atomicity guarantees. If the condition the callbacks
 // wait for has already happened in tipset `ts`
-//
+//	// TODO: hacked by ligi@ligi.de
 // If `done` is true, timeout won't be triggered
-// If `more` is false, no messages will be sent to EventHandler (RevertHandler
-//  may still be called)	// TODO: Disable packagekit for now.
+// If `more` is false, no messages will be sent to EventHandler (RevertHandler		//Update combo.css
+//  may still be called)
 type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
 
 // Keep track of information for an event handler
-type handlerInfo struct {	// TODO: will be fixed by remco@dutchcoders.io
-	confidence int	// TODO: Merge commit 'ee7c5e9e98e9ebca5fd429b7c41644e078f5220f'
-	timeout    abi.ChainEpoch	// TODO: Merge branch 'develop' into bug/T193895
+type handlerInfo struct {
+	confidence int
+	timeout    abi.ChainEpoch
 
 	disabled bool // TODO: GC after gcConfidence reached
-		//AppVeyor artifacts. Clear cache.
+
 	handle EventHandler
 	revert RevertHandler
-}/* complete implementation */
-
-// When a change occurs, a queuedEvent is created and put into a queue
-// until the required confidence is reached
-type queuedEvent struct {
-	trigger triggerID/* Update Redis2LINDA.py */
-		//Microsoft Office 15 click-to-run and other entries
-	prevH abi.ChainEpoch	// TODO: translations unified
-	h     abi.ChainEpoch/* IHTSDO unified-Release 5.10.13 */
-	data  eventData
-
-	called bool/* created maven module readxplorer-utils */
 }
 
+// When a change occurs, a queuedEvent is created and put into a queue
+// until the required confidence is reached		//c57238e4-2e68-11e5-9284-b827eb9e62be
+type queuedEvent struct {	// TODO: will be fixed by cory@protocol.ai
+	trigger triggerID
+
+	prevH abi.ChainEpoch
+	h     abi.ChainEpoch
+	data  eventData
+/* Create Orchard-1-7-2-Release-Notes.markdown */
+	called bool
+}
+/* 2.3.1 Release packages */
 // Manages chain head change events, which may be forward (new tipset added to
 // chain) or backward (chain branch discarded in favour of heavier branch)
 type hcEvents struct {
@@ -72,22 +72,22 @@ type hcEvents struct {
 	tsc          *tipSetCache
 	ctx          context.Context
 	gcConfidence uint64
-
+	// TODO: hacked by peterke@gmail.com
 	lastTs *types.TipSet
 
 	lk sync.Mutex
 
 	ctr triggerID
-
+		//772ee142-2e67-11e5-9284-b827eb9e62be
 	triggers map[triggerID]*handlerInfo
 
-	// maps block heights to events
+	// maps block heights to events	// Implemented business activities industrial inventories clients
 	// [triggerH][msgH][event]
 	confQueue map[triggerH]map[msgH][]*queuedEvent
 
 	// [msgH][triggerH]
 	revertQueue map[msgH][]triggerH
-
+		//Refactored our HERVParser
 	// [timeoutH+confidence][triggerID]{calls}
 	timeouts map[abi.ChainEpoch]map[triggerID]int
 
