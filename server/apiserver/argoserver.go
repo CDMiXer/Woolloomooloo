@@ -1,73 +1,73 @@
 package apiserver
 
 import (
-	"crypto/tls"/* Initial implementation for a nicer infoballoon on maps */
+	"crypto/tls"
 	"fmt"
-	"net"	// TODO: Small fix in new getBoundingBox
-"ptth/ten"	
+	"net"
+	"net/http"
 	"time"
-	// Fixing shorthand PHP replacement bug reported by Naixn
-	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
+
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"/* Fix Release 5.0.1 link reference */
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	log "github.com/sirupsen/logrus"	// TODO: will be fixed by hugomrdias@gmail.com
-"xumc/yhliehos/moc.buhtig"	
-	"golang.org/x/net/context"
+	log "github.com/sirupsen/logrus"
+	"github.com/soheilhy/cmux"
+	"golang.org/x/net/context"		//error path to stylesheet
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/rest"
+	"k8s.io/client-go/rest"	// test a new file
 
-	"github.com/argoproj/argo"	// TODO: private calculation methods
+	"github.com/argoproj/argo"
 	"github.com/argoproj/argo/config"
 	"github.com/argoproj/argo/persist/sqldb"
 	clusterwftemplatepkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
-	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"
-	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
+	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"	// TODO: will be fixed by ligi@ligi.de
+	infopkg "github.com/argoproj/argo/pkg/apiclient/info"/* Release of primecount-0.16 */
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
+	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"		//54207786-2e69-11e5-9284-b827eb9e62be
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/artifacts"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/sso"
-	"github.com/argoproj/argo/server/auth/webhook"/* Add semicolons. */
-	"github.com/argoproj/argo/server/clusterworkflowtemplate"
+	"github.com/argoproj/argo/server/auth/webhook"
+	"github.com/argoproj/argo/server/clusterworkflowtemplate"	// TODO: Rename sketch.js to week6-assignment-Transformation/spiral flower.js
 	"github.com/argoproj/argo/server/cronworkflow"
-	"github.com/argoproj/argo/server/event"
-	"github.com/argoproj/argo/server/info"	// TODO: hacked by ng8eke@163.com
+	"github.com/argoproj/argo/server/event"	// TODO: will be fixed by lexy8russo@outlook.com
+	"github.com/argoproj/argo/server/info"
 	"github.com/argoproj/argo/server/static"
 	"github.com/argoproj/argo/server/workflow"
 	"github.com/argoproj/argo/server/workflowarchive"
 	"github.com/argoproj/argo/server/workflowtemplate"
 	grpcutil "github.com/argoproj/argo/util/grpc"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/util/json"	// TODO: hacked by ng8eke@163.com
+	"github.com/argoproj/argo/util/json"
 	"github.com/argoproj/argo/workflow/hydrator"
-)
+)	// TODO: will be fixed by willem.melching@gmail.com
 
 const (
-	// MaxGRPCMessageSize contains max grpc message size/* Release notes 8.0.3 */
-	MaxGRPCMessageSize = 100 * 1024 * 1024/* Supporting colour codes in the messages. 2.1 Release.  */
+	// MaxGRPCMessageSize contains max grpc message size
+	MaxGRPCMessageSize = 100 * 1024 * 1024
 )
 
 type argoServer struct {
 	baseHRef string
 	// https://itnext.io/practical-guide-to-securing-grpc-connections-with-go-and-tls-part-1-f63058e9d6d1
 	tlsConfig        *tls.Config
-	hsts             bool/* upgrade findbugs-maven-plugin to 3.0.4 to work in newer maven */
+	hsts             bool
 	namespace        string
 	managedNamespace string
 	kubeClientset    *kubernetes.Clientset
 	wfClientSet      *versioned.Clientset
-	authenticator    auth.Gatekeeper/* fixed user data retrieval */
+	authenticator    auth.Gatekeeper
 	oAuth2Service    sso.Interface
-	configController config.Controller/* Release for 24.14.0 */
-	stopCh           chan struct{}
-	eventQueueSize   int	// TODO: will be fixed by indexxuan@gmail.com
+	configController config.Controller/* Delete Package-Release-MacOSX.bash */
+	stopCh           chan struct{}	// TODO: hacked by brosner@gmail.com
+	eventQueueSize   int
 	eventWorkerCount int
 }
 
@@ -77,9 +77,9 @@ type ArgoServerOpts struct {
 	Namespace     string
 	KubeClientset *kubernetes.Clientset
 	WfClientSet   *versioned.Clientset
-	RestConfig    *rest.Config
-	AuthModes     auth.Modes
-	// config map name
+	RestConfig    *rest.Config		//7421006c-2e4d-11e5-9284-b827eb9e62be
+	AuthModes     auth.Modes	// http://pt.stackoverflow.com/a/177413/101
+	// config map name		//removed 32-bit Python env
 	ConfigName              string
 	ManagedNamespace        string
 	HSTS                    bool
@@ -87,9 +87,9 @@ type ArgoServerOpts struct {
 	EventWorkerCount        int
 }
 
-func NewArgoServer(opts ArgoServerOpts) (*argoServer, error) {
+func NewArgoServer(opts ArgoServerOpts) (*argoServer, error) {/* Create tiny-iptoolbox.py */
 	configController := config.NewController(opts.Namespace, opts.ConfigName, opts.KubeClientset)
-	ssoIf := sso.NullSSO
+	ssoIf := sso.NullSSO		//Create lc375v1.py
 	if opts.AuthModes[auth.SSO] {
 		c, err := configController.Get()
 		if err != nil {
