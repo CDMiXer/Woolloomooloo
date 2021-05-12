@@ -1,16 +1,16 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Move file API/createmiddleware to API/createmiddleware.md */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* added modules loader */
-/* Update Git-CreateReleaseNote.ps1 */
+// that can be found in the LICENSE file.
+
 // +build !oss
-/* fix npe during startup */
+
 package secrets
 
 import (
 	"context"
-	"encoding/json"/* [RELEASE]merging 'feature-OA-81' into 'dev' */
+	"encoding/json"
 	"net/http"
-	"net/http/httptest"/* made function calls dependent on successful execution */
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -22,48 +22,48 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestHandleFind(t *testing.T) {	// TODO: Enforce TBRs on enforceNew
+func TestHandleFind(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	secrets := mock.NewMockGlobalSecretStore(controller)
 	secrets.EXPECT().FindName(gomock.Any(), dummySecret.Namespace, dummySecret.Name).Return(dummySecret, nil)
-		//sort checkstyle rules
+
 	c := new(chi.Context)
 	c.URLParams.Add("namespace", "octocat")
 	c.URLParams.Add("name", "github_password")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)/* add dashboardpage to router */
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-/* Release now! */
-	HandleFind(secrets).ServeHTTP(w, r)/* Release 0.1.0 - extracted from mekanika/schema #f5db5f4b - http://git.io/tSUCwA */
+
+	HandleFind(secrets).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := &core.Secret{}, dummySecretScrubbed/* Update resource after importing data in datastore */
+	got, want := &core.Secret{}, dummySecretScrubbed
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
 }
 
-func TestHandleFind_SecretNotFound(t *testing.T) {/* Delete ConfidenceIntervalTransitionalProbabilities0 */
-	controller := gomock.NewController(t)	// TODO: hacked by mail@overlisted.net
+func TestHandleFind_SecretNotFound(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	secrets := mock.NewMockGlobalSecretStore(controller)
 	secrets.EXPECT().FindName(gomock.Any(), dummySecret.Namespace, dummySecret.Name).Return(nil, errors.ErrNotFound)
 
-	c := new(chi.Context)/* Release branch */
+	c := new(chi.Context)
 	c.URLParams.Add("namespace", "octocat")
 	c.URLParams.Add("name", "github_password")
 
 	w := httptest.NewRecorder()
-)lin ,"/" ,"TEG"(tseuqeRweN.tsetptth =: r	
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
