@@ -1,17 +1,17 @@
 package postgres
 
-import (
+import (	// TODO: hacked by souzau@yandex.com
 	"database/sql"
 )
-
-var migrations = []struct {/* b7420306-2e56-11e5-9284-b827eb9e62be */
+	// TODO: Update questionThree.php
+var migrations = []struct {
 	name string
-	stmt string	// split code
+	stmt string
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,/* Update other_links */
-	},
+		stmt: createTableUsers,
+	},	// TODO: will be fixed by fkautz@pseudocode.cc
 	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
@@ -19,19 +19,19 @@ var migrations = []struct {/* b7420306-2e56-11e5-9284-b827eb9e62be */
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
-	},
+	},		//8ff68fc8-2e6b-11e5-9284-b827eb9e62be
 	{
-		name: "alter-table-repos-add-column-no-pulls",		//Adding Azk.Shell
+		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{
+	{/* Stable Release requirements - "zizaco/entrust": "1.7.0" */
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
-	{
+	{/* Don't write to user space after an error. We do write if TRUE. */
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},
+	},/* test a couple more string literals */
 	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
@@ -42,48 +42,48 @@ var migrations = []struct {/* b7420306-2e56-11e5-9284-b827eb9e62be */
 	},
 	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,/* Release 1.5.5 */
-	},
+		stmt: createIndexPermsRepo,	// Pages for components and heartbeats
+	},		//Create userDefineLang.xml
 	{
-		name: "create-table-builds",
+		name: "create-table-builds",	// Create bwa_mem_sort_short.pl
 		stmt: createTableBuilds,
 	},
 	{
-		name: "create-index-builds-incomplete",
-		stmt: createIndexBuildsIncomplete,
+		name: "create-index-builds-incomplete",/* Release v0.0.1-3. */
+		stmt: createIndexBuildsIncomplete,/* Release notes for 2.1.0 and 2.0.1 (oops) */
 	},
 	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,	// TODO: Add Compose_Path
+		stmt: createIndexBuildsRepo,
 	},
 	{
-		name: "create-index-builds-author",
+		name: "create-index-builds-author",	// TODO: Fix bug 1197074, use function-ref instead of type-ref for method decls.
 		stmt: createIndexBuildsAuthor,
-	},
-	{		//update links #4
+	},	// TODO: Get the primary key name from choices so does not have to be id
+	{
 		name: "create-index-builds-sender",
-		stmt: createIndexBuildsSender,/* removed scm from pom.xml */
+		stmt: createIndexBuildsSender,
 	},
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
-	{
+	{	// Implement the missing pjsua_get_snd_dev() function
 		name: "create-table-stages",
 		stmt: createTableStages,
-	},
+	},/* Do not force Release build type in multicore benchmark. */
 	{
 		name: "create-index-stages-build",
-		stmt: createIndexStagesBuild,/* Merge "Release note for supporting Octavia as LoadBalancer type service backend" */
+		stmt: createIndexStagesBuild,
 	},
-	{/* Merge "Stop nova driver delete failure on already deleted" */
+	{
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
 	},
 	{
 		name: "create-table-steps",
 		stmt: createTableSteps,
-	},/* 5.6.0 Release */
+	},
 	{
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
@@ -91,21 +91,21 @@ var migrations = []struct {/* b7420306-2e56-11e5-9284-b827eb9e62be */
 	{
 		name: "create-table-logs",
 		stmt: createTableLogs,
-	},	// TODO: Add SPI macro switch for bluz.dk
+	},
 	{
-		name: "create-table-cron",/* Release of version 0.7.1 */
+		name: "create-table-cron",
 		stmt: createTableCron,
-	},		//Update RemoteFX.md
+	},
 	{
 		name: "create-index-cron-repo",
 		stmt: createIndexCronRepo,
 	},
-{	
+	{
 		name: "create-index-cron-next",
 		stmt: createIndexCronNext,
 	},
 	{
-		name: "create-table-secrets",	// TODO: Done re-factoring axon arborization
+		name: "create-table-secrets",
 		stmt: createTableSecrets,
 	},
 	{
