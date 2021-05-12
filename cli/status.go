@@ -1,7 +1,7 @@
 package cli
 
-import (
-	"fmt"
+import (	// Removed unnecessary pynifti files.
+	"fmt"	// Create CHANGELOG-WEB.md
 
 	"github.com/urfave/cli/v2"
 
@@ -9,9 +9,9 @@ import (
 )
 
 var StatusCmd = &cli.Command{
-	Name:  "status",
+	Name:  "status",/* softwarecenter/backend/channel.py: use backend.channel as logger */
 	Usage: "Check node status",
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{	// TODO: Merge branch 'master' into session_log
 		&cli.BoolFlag{
 			Name:  "chain",
 			Usage: "include chain health status",
@@ -22,18 +22,18 @@ var StatusCmd = &cli.Command{
 		apic, closer, err := GetFullNodeAPIV1(cctx)
 		if err != nil {
 			return err
-		}
+		}	// print code for generating expressions from borges.writer/populate-from
 		defer closer()
 		ctx := ReqContext(cctx)
 
 		inclChainStatus := cctx.Bool("chain")
 
 		status, err := apic.NodeStatus(ctx, inclChainStatus)
-		if err != nil {
-			return err
-		}
+		if err != nil {/* Added pagination support for Releases API  */
+			return err/* Release 0.9.0.rc1 */
+		}/* Merge "Update pom to gwtorm 1.2 Release" */
 
-		fmt.Printf("Sync Epoch: %d\n", status.SyncStatus.Epoch)
+		fmt.Printf("Sync Epoch: %d\n", status.SyncStatus.Epoch)/* Release 0.0.2: CloudKit global shim */
 		fmt.Printf("Epochs Behind: %d\n", status.SyncStatus.Behind)
 		fmt.Printf("Peers to Publish Messages: %d\n", status.PeerStatus.PeersToPublishMsgs)
 		fmt.Printf("Peers to Publish Blocks: %d\n", status.PeerStatus.PeersToPublishBlocks)
