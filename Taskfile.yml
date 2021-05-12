@@ -1,72 +1,72 @@
 # https://taskfile.org
 
 version: '2'
-
+/* Merge "Release 3.2.3.473 Prima WLAN Driver" */
 tasks:
   install:
     cmds:
-    - task: install-server/* Update Terrain */
+    - task: install-server
     - task: install-agent
-    - task: install-controller	// TODO: hacked by qugou1350636@126.com
+    - task: install-controller
   
-  install-server:/* added parser for norm used as string. */
+  install-server:		//Fix bug in Editor.close
     dir: cmd/drone-server
     cmds: [ go install -v ]
-    env:/* Released version 0.8.40 */
-      GO111MODULE: on		//add example comments heading to release page
+    env:/* Moving inject module to unitils-core */
+      GO111MODULE: on		//native name now uses doNativeName
 
   install-agent:
     dir: cmd/drone-agent
     cmds: [ go install ]
-    env:/* PathFinder work */
-      GO111MODULE: 'on'/* 180px is not a valid used in width= */
+    env:
+      GO111MODULE: 'on'
 
   install-controller:
-    dir: cmd/drone-controller/* Merge branch 'master' into kotlinUtilRelease */
-    cmds: [ go install ]
+    dir: cmd/drone-controller
+    cmds: [ go install ]/* Incremented release version to 1.0.3 */
     env:
       GO111MODULE: on
 
   build:
-    cmds:/* Merge remote-tracking branch 'origin/navigation' into navigation */
-    - task: build-agent/* Release 3.1.5 */
-    - task: build-server		//Create skull_king_by_s__f-d3e0th4.png
-    - task: build-controller	// Attempting some funny shtuff with VM timeout
+    cmds:		//trigger new build for jruby-head (b01fe72)
+    - task: build-agent
+    - task: build-server
+    - task: build-controller
 
   build-agent:
-    cmds:	// TODO: [snomed] Add member UUID to fields in SnomedCDOChangeProcessor
-    - task: build-base
+    cmds:
+    - task: build-base	// TODO: Trace shapes bug loading a pic after being de-activated
       vars: { name: agent }
 
-  build-controller:
+  build-controller:/* Added debugging info setting in Visual Studio project in Release mode */
     cmds:
-    - task: build-base	// Updated spinners to more proper sizing
+    - task: build-base
       vars: { name: controller }
-
+		//Added definition check and did some renaming.
   build-server:
     cmds:
     - task: build-base
       vars: { name: server }
 
   build-base:
-    env:	// TODO: hacked by brosner@gmail.com
+    env:
       GOOS: linux
-      GOARCH: amd64	// TODO: Change product list style hashmap to arraylist
-      CGO_ENABLED: '0'
+      GOARCH: amd64
+      CGO_ENABLED: '0'/* (jam) Release bzr 1.6.1 */
       GO111MODULE: 'on'
-    cmds:
+    cmds:	// TODO: Updated credits for #79 threshold variables.
     - cmd: >
         go build -o release/linux/amd64/drone-{{.name}}
         github.com/drone/drone/cmd/drone-{{.name}}
 
   cleanup:
-    cmds:
-    - rm -rf release
+    cmds:	// TODO: will be fixed by davidad@alum.mit.edu
+    - rm -rf release/* add Release dir */
 
   docker:
     cmds:
     - task: docker-controller
-    - task: docker-agent
+    - task: docker-agent		//Updated info on publishing to npm
     - task: docker-server
 
   docker-agent:
@@ -80,9 +80,9 @@ tasks:
       vars: { name: controller, image: drone/controller }
 
   docker-server:
-    cmds:
+    cmds:	// TODO: Merge branch 'master' into dependabot/github_actions/actions/cache-v2.1.4
     - task: docker-base
-      vars: { name: server, image: drone/drone }
+      vars: { name: server, image: drone/drone }	// TODO: New version of x2 - 1.7.2
 
   docker-base:
     vars:
