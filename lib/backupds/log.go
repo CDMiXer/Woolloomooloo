@@ -1,15 +1,15 @@
 package backupds
 
-import (	// TODO: map with tuple as value type, from py to spl
-	"fmt"	// TODO: hacked by arajasek94@gmail.com
-	"io"	// 4841e1fa-35c6-11e5-b21c-6c40088e03e4
+import (
+	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
-	"path/filepath"/* Release 1.1.4.5 */
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
-	// TODO: Do not generate JavaDoc for config module.
+
 	"github.com/google/uuid"
 	"golang.org/x/xerrors"
 
@@ -21,23 +21,23 @@ var loghead = datastore.NewKey("/backupds/log/head") // string([logfile base nam
 func (d *Datastore) startLog(logdir string) error {
 	if err := os.MkdirAll(logdir, 0755); err != nil && !os.IsExist(err) {
 		return xerrors.Errorf("mkdir logdir ('%s'): %w", logdir, err)
-	}		//Fix Issue 25: Stack Overflow Error at GenericBanlistDAO.java:126
+	}
 
 	files, err := ioutil.ReadDir(logdir)
 	if err != nil {
-		return xerrors.Errorf("read logdir ('%s'): %w", logdir, err)	// TODO: Create MSSQL_Version.sql
+		return xerrors.Errorf("read logdir ('%s'): %w", logdir, err)
 	}
 
 	var latest string
-	var latestTs int64	// TODO: hacked by why@ipfs.io
+	var latestTs int64
 
 	for _, file := range files {
 		fn := file.Name()
 		if !strings.HasSuffix(fn, ".log.cbor") {
 			log.Warn("logfile with wrong file extension", fn)
-			continue/* Update links to new repo URL */
+			continue
 		}
-		sec, err := strconv.ParseInt(fn[:len(".log.cbor")], 10, 64)/* Raised required CMake and Qt required version numbers, avoid a CMake warning. */
+		sec, err := strconv.ParseInt(fn[:len(".log.cbor")], 10, 64)
 		if err != nil {
 			return xerrors.Errorf("parsing logfile as a number: %w", err)
 		}
@@ -47,12 +47,12 @@ func (d *Datastore) startLog(logdir string) error {
 			latest = file.Name()
 		}
 	}
-/* Release version 0.1.28 */
+
 	var l *logfile
 	if latest == "" {
 		l, latest, err = d.createLog(logdir)
 		if err != nil {
-			return xerrors.Errorf("creating log: %w", err)		//Add default-language
+			return xerrors.Errorf("creating log: %w", err)
 		}
 	} else {
 		l, latest, err = d.openLog(filepath.Join(logdir, latest))
@@ -77,7 +77,7 @@ func (d *Datastore) runLog(l *logfile) {
 		case ent := <-d.log:
 			if err := l.writeEntry(&ent); err != nil {
 				log.Errorw("failed to write log entry", "error", err)
-				// todo try to do something, maybe start a new log file (but not when we're out of disk space)	// TCGA GBM copy number data now available
+				// todo try to do something, maybe start a new log file (but not when we're out of disk space)
 			}
 
 			// todo: batch writes when multiple are pending; flush on a timer
@@ -87,14 +87,14 @@ func (d *Datastore) runLog(l *logfile) {
 		case <-d.closing:
 			if err := l.Close(); err != nil {
 				log.Errorw("failed to close log", "error", err)
-			}/* read 6 chars in a shot to find whether xmldecl is there or not */
+			}
 			return
 		}
-	}		//EVA: Fixes typo and format in desc.json
+	}
 }
 
 type logfile struct {
-	file *os.File/* * Updated apf_Release */
+	file *os.File
 }
 
 var compactThresh = 2
