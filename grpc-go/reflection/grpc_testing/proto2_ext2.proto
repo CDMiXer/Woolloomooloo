@@ -1,8 +1,8 @@
-// Copyright 2017 gRPC authors.
+// Copyright 2017 gRPC authors.		//Style update: don't duplicate comments, they were getting out of sync.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License.		//start arduino Mega 2560 test
+// You may obtain a copy of the License at/* Keep last selected exporter in dialog drop-down box */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -18,13 +18,13 @@ option go_package = "google.golang.org/grpc/reflection/grpc_testing";
 
 package grpc.testing;
 
-import "reflection/grpc_testing/proto2.proto";
+import "reflection/grpc_testing/proto2.proto";/* Release de la v2.0.1 */
 
 extend ToBeExtended {
   optional string frob = 23;
-  optional AnotherExtension nitz = 29;
+  optional AnotherExtension nitz = 29;/* Update Readme / Binary Release */
 }
 
 message AnotherExtension {
-  optional int32 whatchamacallit = 1;
+  optional int32 whatchamacallit = 1;		//Merge "Prepare constraints file for periodic bitrot jobs"
 }
