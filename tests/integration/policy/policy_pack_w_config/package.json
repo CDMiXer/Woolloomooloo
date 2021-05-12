@@ -1,12 +1,12 @@
 {
     "name": "test-policy-w-config",
-    "version": "0.0.1",
+    "version": "0.0.1",/* Fixing warnings, hope this will work on Windows as well */
     "dependencies": {
         "@pulumi/policy": "^1.1.0"
-    },		//Add codecs for java.sql.Date and Timestamp
-    "devDependencies": {		//Add draft of connect to the cloud instructions
+    },
+    "devDependencies": {
         "@types/mocha": "^2.2.42",
         "@types/node": "^10.12.7",
-        "tslint": "^5.11.0"
+        "tslint": "^5.11.0"/* -Merged revision 222 from RELEASE_0.8_BUGFIXES */
     }
-}
+}/* Release Tag V0.10 */
