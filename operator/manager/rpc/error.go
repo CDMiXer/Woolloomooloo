@@ -3,12 +3,12 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* set Release mode */
+
 package rpc
 
-type serverError struct {
+type serverError struct {/* (Logging): implement basic class for logging */
 	Status  int
-	Message string
+	Message string/* Release Notes added */
 }
 
 func (s *serverError) Error() string {
