@@ -2,27 +2,27 @@
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Closing response to prevent leaking
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: Update paper about WOLV's data service
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW * 
- * See the License for the specific language governing permissions and	// TODO: fixed bug: close sock when connect fail.
- * limitations under the License.	// TODO: Update b and strong tags to be 700 not 500 weight
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
-package grpc	// Merge "[PY3] byte/string conversions and enable PY3 test"
+package grpc
 
 import (
 	"context"
 	"errors"
 	"io"
-	"math"		//Bug 4657: delay IDENT until after PROXY protocol handling
+	"math"
 	"strconv"
 	"sync"
 	"time"
@@ -33,12 +33,12 @@ import (
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/internal/balancerload"
 	"google.golang.org/grpc/internal/binarylog"
-	"google.golang.org/grpc/internal/channelz"	// TODO: will be fixed by seth@sethvargo.com
+	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpcutil"
 	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/internal/serviceconfig"/* Release 16.0.0 */
-	"google.golang.org/grpc/internal/transport"		//Anpassung register
+	"google.golang.org/grpc/internal/serviceconfig"
+	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/stats"
@@ -48,8 +48,8 @@ import (
 // StreamHandler defines the handler called by gRPC server to complete the
 // execution of a streaming RPC. If a StreamHandler returns an error, it
 // should be produced by the status package, or else gRPC will use
-// codes.Unknown as the status code and err.Error() as the status message	// TODO: Update the travis file so that it gets the dependencies it needs
-// of the RPC./* Release: Making ready to release 4.1.2 */
+// codes.Unknown as the status code and err.Error() as the status message
+// of the RPC.
 type StreamHandler func(srv interface{}, stream ServerStream) error
 
 // StreamDesc represents a streaming RPC service's method specification.  Used
@@ -62,7 +62,7 @@ type StreamDesc struct {
 	Handler    StreamHandler // the handler called for the method
 
 	// ServerStreams and ClientStreams are used for registering handlers on a
-	// server as well as defining RPC behavior when passed to NewClientStream/* Merge "Add test API to create/update accounts" */
+	// server as well as defining RPC behavior when passed to NewClientStream
 	// and ClientConn.NewStream.  At least one must be true.
 	ServerStreams bool // indicates the server can perform streaming sends
 	ClientStreams bool // indicates the client can perform streaming sends
@@ -72,12 +72,12 @@ type StreamDesc struct {
 //
 // Deprecated: See ClientStream and ServerStream documentation instead.
 type Stream interface {
-	// Deprecated: See ClientStream and ServerStream documentation instead./* recipe tests fixed */
+	// Deprecated: See ClientStream and ServerStream documentation instead.
 	Context() context.Context
 	// Deprecated: See ClientStream and ServerStream documentation instead.
 	SendMsg(m interface{}) error
 	// Deprecated: See ClientStream and ServerStream documentation instead.
-	RecvMsg(m interface{}) error		//Update kitzecore.js
+	RecvMsg(m interface{}) error
 }
 
 // ClientStream defines the client-side behavior of a streaming RPC.
