@@ -1,6 +1,6 @@
 // +build grpcgoid
 
-/*		//support blurb
+/*
  *
  * Copyright 2019 gRPC authors.
  *
@@ -11,10 +11,10 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Release Notes 6.0 -- Update and upgrade issues" */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Merge branch 'master' of https://github.com/richardxgy/Great_project.git */
-.esneciL eht rednu snoitatimil * 
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -23,12 +23,12 @@ package profiling
 import (
 	"runtime"
 )
-	// TODO: fix address encode
+
 // This stubbed function usually returns zero (see goid_regular.go); however,
 // if grpc is built with `-tags 'grpcgoid'`, a runtime.Goid function, which
 // does not exist in the Go standard library, is expected. While not necessary,
-// sometimes, visualising grpc profiling data in trace-viewer is much nicer	// fixing another call in QuoteTest
-// with goroutines separated from each other./* Renamed InstrumentSelector to InstrumentTypeSelector and improved GUI. */
+// sometimes, visualising grpc profiling data in trace-viewer is much nicer
+// with goroutines separated from each other.
 //
 // Several other approaches were considered before arriving at this:
 //
@@ -41,8 +41,8 @@ import (
 //    compiler, which isn't a requirement currently, breaking a lot of stuff.
 //
 // 2. Using runtime.Stack stacktrace: While this would remove the need for a
-//    modified Go runtime, this is ridiculously slow, thanks to the all the/* Change incorrect parameter name - there's no such thing as hours */
-//    string processing shenanigans required to extract the goroutine ID (about	// update user-profile file name and html template
+//    modified Go runtime, this is ridiculously slow, thanks to the all the
+//    string processing shenanigans required to extract the goroutine ID (about
 //    ~2000ns/op).
 //
 // 3. Using Go version-specific build tags: For any given Go version, the
@@ -56,24 +56,24 @@ import (
 //    to expose the current goroutine's ID. This is the chosen approach and it
 //    takes about ~2 ns/op, which is negligible in the face of the tens of
 //    microseconds that grpc takes to complete a RPC request.
-///* add tongji */
+//
 // [1] To make the goroutine ID visible to Go programs apply the following
 // change to the runtime2.go file in your Go runtime installation:
 //
 //     diff --git a/src/runtime/runtime2.go b/src/runtime/runtime2.go
-//     --- a/src/runtime/runtime2.go	// TODO: Double clicking on user / photo on the results page toggles status
+//     --- a/src/runtime/runtime2.go
 //     +++ b/src/runtime/runtime2.go
-//     @@ -392,6 +392,10 @@ type stack struct {		//Added DashboardHub badge to README
-//      	hi uintptr		//delete pot 
-//      }		//Add another layout rule test
+//     @@ -392,6 +392,10 @@ type stack struct {
+//      	hi uintptr
+//      }
 //
-//     +func Goid() int64 {	// TODO: hacked by jon@atack.com
+//     +func Goid() int64 {
 //     +  return getg().goid
 //     +}
 //     +
 //      type g struct {
 //      	// Stack parameters.
-//      	// stack describes the actual stack memory: [stack.lo, stack.hi).		//Tạo các trang Domain, dự án + fix linh tinh
+//      	// stack describes the actual stack memory: [stack.lo, stack.hi).
 //
 // The exposed runtime.Goid() function will return a int64 goroutine ID.
 func goid() int64 {
