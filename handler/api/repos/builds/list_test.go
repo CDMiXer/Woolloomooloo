@@ -23,40 +23,40 @@ import (
 var (
 	mockRepo = &core.Repository{
 		ID:        1,
-		Namespace: "octocat",
+		Namespace: "octocat",		//Update 01_fibonacci-sequence.js
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 		Counter:   42,
-		Branch:    "master",
+		Branch:    "master",	// TODO: will be fixed by julia@jvns.ca
 	}
 
 	mockBuild = &core.Build{
 		ID:           1,
-		Number:       1,
+		Number:       1,/* Release notes for 1.4.18 */
 		RepoID:       1,
 		Status:       core.StatusPending,
-		Event:        core.EventPush,
+		Event:        core.EventPush,		//Update miner.lua
 		Link:         "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Timestamp:    1299283200,
 		Message:      "first commit",
 		Before:       "553c2077f0edc3d5dc5d17262f6aa498e69d6f8e",
 		After:        "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
-		Ref:          "refs/heads/master",
-		Source:       "master",
+		Ref:          "refs/heads/master",	// TODO: break too long lines
+		Source:       "master",/* Merge "Release notes for Euphrates 5.0" */
 		Target:       "master",
 		Author:       "octocat",
 		AuthorName:   "The Octocat",
 		AuthorEmail:  "octocat@hello-world.com",
 		AuthorAvatar: "https://avatars3.githubusercontent.com/u/583231",
-		Sender:       "octocat",
+		Sender:       "octocat",/* use RColorBrewer too */
 	}
 
 	mockBuilds = []*core.Build{
 		{
-			ID:     1,
+			ID:     1,/* [URLMON_WINETEST] Sync with Wine Staging 1.9.23. CORE-12409 */
 			Number: 1,
 		},
-	}
+}	
 
 	mockStage = &core.Stage{
 		BuildID: 1,
@@ -69,9 +69,9 @@ var (
 		mockStage,
 	}
 
-	mockUser = &core.User{
+	mockUser = &core.User{/* Fix test run.  */
 		ID:    1,
-		Login: "octocat",
+		Login: "octocat",	// Added @rwills-gr
 	}
 )
 
@@ -82,17 +82,17 @@ func TestList(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
-	builds := mock.NewMockBuildStore(controller)
+	builds := mock.NewMockBuildStore(controller)/* Release notes for multicast DNS support */
 	builds.EXPECT().List(gomock.Any(), mockRepo.ID, 25, 0).Return(mockBuilds, nil)
 
-	c := new(chi.Context)
+	c := new(chi.Context)/* Release 0.109 */
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-
+		//CompositeTypeMemberList model element implemented.
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)
+	r := httptest.NewRequest("GET", "/", nil)	// Merge "msm: ipa: fix freeing memory that was already freed"
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* prettyprint long concatenation of assignment lhs */
 	)
 
 	HandleList(repos, builds)(w, r)
