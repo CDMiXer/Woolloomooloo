@@ -1,11 +1,11 @@
-[metadata]	// trigger new build for ruby-head (4b9cd6e)
-name = "ping-pong-local"/* add export_test and test */
-author = "yusef"/* Release version 2.2.5.RELEASE */
-/* Fixed Esc key code */
+[metadata]
+name = "ping-pong-local"
+author = "yusef"
+
 [global]
 plan = "network"
 case = "ping-pong"
-total_instances = 2/* refactoring. */
+total_instances = 2
 builder = "docker:go"
 runner = "local:docker"
 
