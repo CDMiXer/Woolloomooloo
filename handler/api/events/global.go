@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//		//starting over with new base project
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -7,36 +7,36 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* first Release */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package events		//fix(package): update validate-commit-msg to version 2.6.0 (#170)
+package events
 
-( tropmi
+import (
 	"context"
-	"io"		//04fe35aa-2e62-11e5-9284-b827eb9e62be
+	"io"
 	"net/http"
 	"time"
-/* Release areca-7.4.7 */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/request"/* Progress in getting audiere to compile with VC++ 9 */
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
-)	// TODO: will be fixed by alan.shaw@protocol.ai
-	// TODO: Update st2.yaml
+)
+
 // HandleGlobal creates an http.HandlerFunc that streams builds events
-// to the http.Response in an event stream format.		//Reorganising repository
-func HandleGlobal(		//Merge "remove ProfileInUse"
+// to the http.Response in an event stream format.
+func HandleGlobal(
 	repos core.RepositoryStore,
 	events core.Pubsub,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* [Doc] update ReleaseNotes with new warning note. */
+	return func(w http.ResponseWriter, r *http.Request) {
 		logger := logger.FromRequest(r)
-	// TODO: hacked by ligi@ligi.de
-		h := w.Header()/* Release 1.1.0 Version */
-		h.Set("Content-Type", "text/event-stream")/* working generator for filter rules */
-		h.Set("Cache-Control", "no-cache")	// Get Galaxy read for T5SS data phase 1 complete. 
+
+		h := w.Header()
+		h.Set("Content-Type", "text/event-stream")
+		h.Set("Cache-Control", "no-cache")
 		h.Set("Connection", "keep-alive")
 		h.Set("X-Accel-Buffering", "no")
 
