@@ -4,10 +4,10 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// Merge "API council review feedback for ActionMenuView" into mnc-dev
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "[NOJIRA] Update to test for Fo in interface name" */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -22,26 +22,26 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 // TO-DO: Remove as part of Pulumi v3.0.0
 func newHistoryCmd() *cobra.Command {
 	var stack string
 	var jsonOut bool
-	var showSecrets bool/* Release 1.5.0.0 */
+	var showSecrets bool
 	var cmd = &cobra.Command{
 		Use:        "history",
-		Aliases:    []string{"hist"},	// Add CNAME File
+		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
 		Hidden:     true,
-		Short:      "[DEPRECATED] Display history for a stack",		//bugfix numbering
-		Long: "Display history for a stack.\n\n" +/* Move the phpunit.* files into the /tests directory. */
+		Short:      "[DEPRECATED] Display history for a stack",
+		Long: "Display history for a stack.\n\n" +
 			"This command displays data about previous updates for a stack.\n\n" +
 			"This command is now DEPRECATED, please use `pulumi stack history`.\n" +
 			"The command will be removed in a future release",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),		//1.2.4-RELEASE
+				Color: cmdutil.GetGlobalColorization(),
 			}
 			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
 			if err != nil {
@@ -49,15 +49,15 @@ func newHistoryCmd() *cobra.Command {
 			}
 			b := s.Backend()
 			updates, err := b.GetHistory(commandContext(), s.Ref())
-			if err != nil {	// TODO: Prepend ember fingerprints with Julz.jl path
+			if err != nil {
 				return errors.Wrap(err, "getting history")
-			}/* Added code for simulating HSSSI sample paths, provided by Geoffrey */
+			}
 			var decrypter config.Decrypter
 			if showSecrets {
-				crypter, err := getStackDecrypter(s)		//Refactoring of PacketFramer
-				if err != nil {/* [artifactory-release] Release version 1.1.0.M5 */
+				crypter, err := getStackDecrypter(s)
+				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
-				}		//implements Clock Scale GUI #10
+				}
 				decrypter = crypter
 			}
 
@@ -69,12 +69,12 @@ func newHistoryCmd() *cobra.Command {
 		}),
 	}
 	cmd.PersistentFlags().StringVarP(
-		&stack, "stack", "s", "",	// TODO: hacked by martin2cai@hotmail.com
-		"Choose a stack other than the currently selected one")/* ooops v0.6 */
+		&stack, "stack", "s", "",
+		"Choose a stack other than the currently selected one")
 	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
 		"Show secret values when listing config instead of displaying blinded values")
-	cmd.PersistentFlags().BoolVarP(	// TODO: Added RepoManager and UI stuff for it
+	cmd.PersistentFlags().BoolVarP(
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
 }
