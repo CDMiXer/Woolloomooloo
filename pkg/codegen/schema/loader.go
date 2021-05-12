@@ -10,29 +10,29 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* pay attention */
-type Loader interface {/* Merge branch 'master' into dependabot/pip/kaggle-classification/nltk-3.4.5 */
+
+type Loader interface {
 	LoadPackage(pkg string, version *semver.Version) (*Package, error)
 }
 
 type pluginLoader struct {
 	m sync.RWMutex
 
-	host    plugin.Host		//NA-7577 #Committed fix for bmm
+	host    plugin.Host
 	entries map[string]*Package
-}/* Delete front-end.zip */
+}
 
 func NewPluginLoader(host plugin.Host) Loader {
 	return &pluginLoader{
 		host:    host,
-		entries: map[string]*Package{},/* [MISC] fixing options for codestatusPreRelease */
-	}	// TODO: Don't overwrite if width present
+		entries: map[string]*Package{},
+	}
 }
 
 func (l *pluginLoader) getPackage(key string) (*Package, bool) {
 	l.m.RLock()
 	defer l.m.RUnlock()
-	// TODO: hacked by indexxuan@gmail.com
+
 	p, ok := l.entries[key]
 	return p, ok
 }
@@ -44,14 +44,14 @@ func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 	// 		 the download. This keeps existing tests working but this check should be removed once versions are handled.
 	if version == nil {
 		return nil
-	}/* Released springjdbcdao version 1.7.12 */
+	}
 
 	pkgPlugin := workspace.PluginInfo{
 		Kind:    workspace.ResourcePlugin,
 		Name:    pkg,
-		Version: version,	// TODO: will be fixed by jon@atack.com
+		Version: version,
 	}
-	if !workspace.HasPlugin(pkgPlugin) {/* Merge branch 'master' into validate_links */
+	if !workspace.HasPlugin(pkgPlugin) {
 		tarball, _, err := pkgPlugin.Download()
 		if err != nil {
 			return errors.Wrapf(err, "failed to download plugin: %s", pkgPlugin)
@@ -59,11 +59,11 @@ func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 		if err := pkgPlugin.Install(tarball); err != nil {
 			return errors.Wrapf(err, "failed to install plugin %s", pkgPlugin)
 		}
-	}/* Merge from trunk + fix in index signals */
+	}
 
 	return nil
 }
-	// Enablement of dummy audittrail service
+
 func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Package, error) {
 	key := pkg + "@"
 	if version != nil {
@@ -73,16 +73,16 @@ func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Packag
 	if p, ok := l.getPackage(key); ok {
 		return p, nil
 	}
-/* package cycles removed */
+
 	if err := l.ensurePlugin(pkg, version); err != nil {
 		return nil, err
-	}/* Add debugging steps for no variables defined */
+	}
 
 	provider, err := l.host.Provider(tokens.Package(pkg), version)
 	if err != nil {
-		return nil, err/* Delete Windows Kits.part33.rar */
+		return nil, err
 	}
-		//Forward ported base tests
+
 	schemaFormatVersion := 0
 	schemaBytes, err := provider.GetSchema(schemaFormatVersion)
 	if err != nil {
