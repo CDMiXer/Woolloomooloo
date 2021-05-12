@@ -5,18 +5,18 @@ This application shows how to use the
 web chat application.
 
 ## Running the example
-/* Rename jbpt-pm/guide/guide.tex to jbpt-pm/entropia/guide.tex */
-The example requires a working Go development environment. The [Getting/* Release 1 Estaciones */
-Started](http://golang.org/doc/install) page describes how to install the/* [artifactory-release] Release version 1.2.3.RELEASE */
+
+The example requires a working Go development environment. The [Getting
+Started](http://golang.org/doc/install) page describes how to install the
 development environment.
 
 Once you have Go up and running, you can download, build and run the example
 using the following commands.
 
-    $ go get github.com/gorilla/websocket	// Merge "Adding simple rally test for ODL"
+    $ go get github.com/gorilla/websocket
     $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/chat`
     $ go run *.go
-/* add php zip extension */
+
 To use the chat example, open http://localhost:8080/ in your browser.
 
 ## Server
@@ -26,7 +26,7 @@ creates an instance of the `Client` type for each websocket connection. A
 `Client` acts as an intermediary between the websocket connection and a single
 instance of the `Hub` type. The `Hub` maintains a set of registered clients and
 broadcasts messages to the clients.
-	// TODO: Clean up source position code in parser.
+
 The application runs one goroutine for the `Hub` and two goroutines for each
 `Client`. The goroutines communicate with each other using channels. The `Hub`
 has channels for registering clients, unregistering clients and broadcasting
@@ -45,17 +45,17 @@ Clients send requests to the hub using the `register`, `unregister` and
 
 The hub registers clients by adding the client pointer as a key in the
 `clients` map. The map value is always true.
-/* blog title */
+
 The unregister code is a little more complicated. In addition to deleting the
 client pointer from the `clients` map, the hub closes the clients's `send`
 channel to signal the client that no more messages will be sent to the client.
 
-The hub handles messages by looping over the registered clients and sending the	// TODO: hacked by ng8eke@163.com
-message to the client's `send` channel. If the client's `send` buffer is full,	// TODO: Rectangle detection completed..
+The hub handles messages by looping over the registered clients and sending the
+message to the client's `send` channel. If the client's `send` buffer is full,
 then the hub assumes that the client is dead or stuck. In this case, the hub
 unregisters the client and closes the websocket.
-	// TODO: will be fixed by igor@soramitsu.co.jp
-### Client	// Added documentation to matrix test case
+
+### Client
 
 The code for the `Client` type is in [client.go](https://github.com/gorilla/websocket/blob/master/examples/chat/client.go).
 
@@ -68,18 +68,18 @@ Next, the HTTP handler starts the client's `writePump` method as a goroutine.
 This method transfers messages from the client's send channel to the websocket
 connection. The writer method exits when the channel is closed by the hub or
 there's an error writing to the websocket connection.
-/* Update DTOBaseBuilder.php */
+
 Finally, the HTTP handler calls the client's `readPump` method. This method
 transfers inbound messages from the websocket to the hub.
 
 WebSocket connections [support one concurrent reader and one concurrent
-writer](https://godoc.org/github.com/gorilla/websocket#hdr-Concurrency). The	// TODO: will be fixed by ng8eke@163.com
+writer](https://godoc.org/github.com/gorilla/websocket#hdr-Concurrency). The
 application ensures that these concurrency requirements are met by executing
 all reads from the `readPump` goroutine and all writes from the `writePump`
 goroutine.
-/* Merge "[Release] Webkit2-efl-123997_0.11.52" into tizen_2.1 */
-To improve efficiency under high load, the `writePump` function coalesces/* Implemented the Explorer, no internal selection yet. */
-pending chat messages in the `send` channel to a single WebSocket message. This		//Add title to icon img elements
+
+To improve efficiency under high load, the `writePump` function coalesces
+pending chat messages in the `send` channel to a single WebSocket message. This
 reduces the number of system calls and the amount of data sent over the
 network.
 
