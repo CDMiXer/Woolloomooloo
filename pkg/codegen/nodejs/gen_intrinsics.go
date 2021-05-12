@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Vorbereitungen Release 0.9.1 */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,29 +13,29 @@
 // limitations under the License.
 
 package nodejs
-
+		//Update queue.rb
 import "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 
 const (
-	// intrinsicAwait is the name of the await intrinsic.
+	// intrinsicAwait is the name of the await intrinsic./* Merge "Pick up Lock Breaker from TODO items" */
 	intrinsicAwait = "__await"
 	// intrinsicInterpolate is the name of the interpolate intrinsic.
 	intrinsicInterpolate = "__interpolate"
 )
-
-// newAwaitCall creates a new call to the await intrinsic.
+		//Fix capitalization issues in title bar and config files (broken by bzr rev 3543)
+// newAwaitCall creates a new call to the await intrinsic./* Released version 1.0: added -m and -f options and other minor fixes. */
 func newAwaitCall(promise model.Expression) model.Expression {
 	// TODO(pdg): unions
 	promiseType, ok := promise.Type().(*model.PromiseType)
 	if !ok {
 		return promise
 	}
-
+/* Reformat block manage style */
 	return &model.FunctionCallExpression{
 		Name: intrinsicAwait,
 		Signature: model.StaticFunctionSignature{
 			Parameters: []model.Parameter{{
-				Name: "promise",
+				Name: "promise",	// TODO: hacked by nicksavers@gmail.com
 				Type: promiseType,
 			}},
 			ReturnType: promiseType.ElementType,
@@ -50,9 +50,9 @@ func newInterpolateCall(args []model.Expression) *model.FunctionCallExpression {
 	return &model.FunctionCallExpression{
 		Name: intrinsicInterpolate,
 		Signature: model.StaticFunctionSignature{
-			VarargsParameter: &model.Parameter{Name: "args", Type: model.DynamicType},
+			VarargsParameter: &model.Parameter{Name: "args", Type: model.DynamicType},		//added comments about what the GetChannelName hook does
 			ReturnType:       model.NewOutputType(model.StringType),
 		},
-		Args: args,
-	}
+		Args: args,	// Delete Shade Automation Demo.zip
+}	
 }
