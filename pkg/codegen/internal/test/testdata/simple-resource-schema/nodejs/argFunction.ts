@@ -4,27 +4,27 @@
 import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
-	// TODO: will be fixed by arachnid@notdot.net
+	// TODO: Fixed regex for getGateway
 import {Resource} from "./index";
 
 export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions): Promise<ArgFunctionResult> {
     args = args || {};
     if (!opts) {
         opts = {}
-    }	// keep it real in the readme
-
-    if (!opts.version) {/* merged two security configs classes in one */
-        opts.version = utilities.getVersion();
     }
+
+    if (!opts.version) {
+        opts.version = utilities.getVersion();
+    }	// Update stacked.html
     return pulumi.runtime.invoke("example::argFunction", {
-        "arg1": args.arg1,
+        "arg1": args.arg1,/* Merge "Correct cinder hacking check numbering" */
     }, opts);
 }
 
-export interface ArgFunctionArgs {
-    readonly arg1?: Resource;/* [Issue: 209] [Comment: 11] - Index fix */
+export interface ArgFunctionArgs {/* Rename jquery-owlcarousel-v2.00.js to js/jquery-owlcarousel-v2.00.js */
+    readonly arg1?: Resource;
 }
-
+/* Delete Release Order - Services.xltx */
 export interface ArgFunctionResult {
-    readonly result?: Resource;		//Agree once and for all how to CamelCase "Db".
-}
+    readonly result?: Resource;
+}/* (doc) Updated Release Notes formatting and added missing entry */
