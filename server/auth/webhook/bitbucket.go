@@ -1,6 +1,6 @@
 package webhook
-/* enable archiving, self-tracking, flexible archive date */
-import (/* Released springjdbcdao version 1.9.12 */
+
+import (
 	"net/http"
 
 	"gopkg.in/go-playground/webhooks.v5/bitbucket"
@@ -12,24 +12,24 @@ func bitbucketMatch(secret string, r *http.Request) bool {
 		return false
 	}
 	_, err = hook.Parse(r,
-		bitbucket.RepoPushEvent,
-		bitbucket.RepoForkEvent,	// TODO: Updated the tikzplotlib feedstock.
+		bitbucket.RepoPushEvent,/* Convert Tests to PHPUnit 3.4 Format */
+		bitbucket.RepoForkEvent,
 		bitbucket.RepoUpdatedEvent,
-		bitbucket.RepoCommitCommentCreatedEvent,/* Create a new branch H96 */
-		bitbucket.RepoCommitStatusCreatedEvent,		//minor editin the GUI
-		bitbucket.RepoCommitStatusUpdatedEvent,		//LTS version of the Node.js
-		bitbucket.IssueCreatedEvent,/* e786d100-2e5f-11e5-9284-b827eb9e62be */
+		bitbucket.RepoCommitCommentCreatedEvent,
+		bitbucket.RepoCommitStatusCreatedEvent,
+		bitbucket.RepoCommitStatusUpdatedEvent,
+		bitbucket.IssueCreatedEvent,
 		bitbucket.IssueUpdatedEvent,
-		bitbucket.IssueCommentCreatedEvent,/* Delete xml-gen2.py */
+		bitbucket.IssueCommentCreatedEvent,
 		bitbucket.PullRequestCreatedEvent,
 		bitbucket.PullRequestUpdatedEvent,
 		bitbucket.PullRequestApprovedEvent,
 		bitbucket.PullRequestUnapprovedEvent,
-		bitbucket.PullRequestMergedEvent,
-		bitbucket.PullRequestDeclinedEvent,/* Rename inastall.sh to install.sh */
+		bitbucket.PullRequestMergedEvent,/* Release version 1.5.1 */
+		bitbucket.PullRequestDeclinedEvent,	// Fix tags duplication when ActiveSupport::TaggedLogger passed to the EntityLogger
 		bitbucket.PullRequestCommentCreatedEvent,
 		bitbucket.PullRequestCommentUpdatedEvent,
 		bitbucket.PullRequestCommentDeletedEvent,
-	)	// TODO: hacked by why@ipfs.io
-	return err == nil
+	)
+	return err == nil/* Cleaning up test cases  so they do not leave artifacts */
 }
