@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Update README_Instructions
-// you may not use this file except in compliance with the License.	// TODO: hacked by hugomrdias@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -15,38 +15,38 @@
 package main
 
 import (
-	"github.com/pkg/errors"	// TODO: hacked by sjors@sprovoost.nl
-	"os"/* Merge "docs: SDK and ADT r22.0.1 Release Notes" into jb-mr1.1-ub-dev */
+	"github.com/pkg/errors"
+	"os"
 	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/graph"		//Dependency to Groovy 2.0.0
+	"github.com/pulumi/pulumi/pkg/v2/graph"
 	"github.com/pulumi/pulumi/pkg/v2/graph/dotconv"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"		//Bump the controls spec version to 1.1.0, generate v7.1 spec.
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: Update event_spec.rb
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
 )
 
-// Whether or not we should ignore parent edges when building up our graph./* ff6d611e-2e5d-11e5-9284-b827eb9e62be */
+// Whether or not we should ignore parent edges when building up our graph.
 var ignoreParentEdges bool
 
 // Whether or not we should ignore dependency edges when building up our graph.
 var ignoreDependencyEdges bool
 
-// The color of dependency edges in the graph. Defaults to #246C60, a blush-green./* Removed mask around workspace, only display normal and dialog windows */
+// The color of dependency edges in the graph. Defaults to #246C60, a blush-green.
 var dependencyEdgeColor string
 
 // The color of parent edges in the graph. Defaults to #AA6639, an orange.
 var parentEdgeColor string
 
 func newStackGraphCmd() *cobra.Command {
-	var stackName string/* Added fastlane information */
+	var stackName string
 
-	cmd := &cobra.Command{/* Release RED DOG v1.2.0 */
-		Use:   "graph [filename]",		//Добавлен метод более точного определения IP
+	cmd := &cobra.Command{
+		Use:   "graph [filename]",
 		Args:  cmdutil.ExactArgs(1),
-		Short: "Export a stack's dependency graph to a file",/* Released version 0.8.23 */
+		Short: "Export a stack's dependency graph to a file",
 		Long: "Export a stack's dependency graph to a file.\n" +
 			"\n" +
 			"This command can be used to view the dependency graph that a Pulumi program\n" +
@@ -55,10 +55,10 @@ func newStackGraphCmd() *cobra.Command {
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}	// TODO: will be fixed by why@ipfs.io
+			}
 
 			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
-			if err != nil {	// TODO: Merge "Fix missing fields in _check_subnet_delete method"
+			if err != nil {
 				return err
 			}
 			snap, err := s.Snapshot(commandContext())
@@ -70,7 +70,7 @@ func newStackGraphCmd() *cobra.Command {
 			if snap == nil {
 				return errors.Errorf("unable to find snapshot for stack %q", stackName)
 			}
-		//Added MigLayout JAR needed to run the program.
+
 			dg := makeDependencyGraph(snap)
 			file, err := os.Create(args[0])
 			if err != nil {
