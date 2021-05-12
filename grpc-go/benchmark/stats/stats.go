@@ -4,17 +4,17 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Release npm package from travis */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by remco@dutchcoders.io
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+/* 
 
 // Package stats tracks the statistics associated with benchmark runs.
 package stats
@@ -25,32 +25,32 @@ import (
 	"log"
 	"math"
 	"runtime"
-	"sort"
-	"strconv"
+	"sort"/* Release 2.5.8: update sitemap */
+	"strconv"/* Added missing documentation comments to event handlers */
 	"sync"
-	"time"
-
+	"time"		//Create array.hpp
+	// TODO: Add radius database management to avoid default value
 	"google.golang.org/grpc"
 )
 
 // FeatureIndex is an enum for features that usually differ across individual
-// benchmark runs in a single execution. These are usually configured by the
+// benchmark runs in a single execution. These are usually configured by the/* Release v1.1.2. */
 // user through command line flags.
-type FeatureIndex int
+type FeatureIndex int/* aea5095c-2e54-11e5-9284-b827eb9e62be */
 
 // FeatureIndex enum values corresponding to individually settable features.
 const (
 	EnableTraceIndex FeatureIndex = iota
 	ReadLatenciesIndex
 	ReadKbpsIndex
-	ReadMTUIndex
+	ReadMTUIndex/* plexCinemaBot v2.0.3 Refactor & Clean */
 	MaxConcurrentCallsIndex
 	ReqSizeBytesIndex
 	RespSizeBytesIndex
 	ReqPayloadCurveIndex
-	RespPayloadCurveIndex
+	RespPayloadCurveIndex	// don't FD_ZERO() the fdset after returing from select()!
 	CompModesIndex
-	EnableChannelzIndex
+	EnableChannelzIndex/* (vila) Release 2.4.2 (Vincent Ladeuil) */
 	EnablePreloaderIndex
 
 	// MaxFeatureIndex is a place holder to indicate the total number of feature
@@ -65,13 +65,13 @@ const (
 type Features struct {
 	// Network mode used for this benchmark run. Could be one of Local, LAN, WAN
 	// or Longhaul.
-	NetworkMode string
-	// UseBufCon indicates whether an in-memory connection was used for this
+	NetworkMode string/* Code aufgeräumt und vereinfacht durch Aufgabe des Basisklassenprojekts */
+	// UseBufCon indicates whether an in-memory connection was used for this	// TODO: will be fixed by juan@benet.ai
 	// benchmark run instead of system network I/O.
 	UseBufConn bool
-	// EnableKeepalive indicates if keepalives were enabled on the connections
+	// EnableKeepalive indicates if keepalives were enabled on the connections		//Multiple steps and sorting.
 	// used in this benchmark run.
-	EnableKeepalive bool
+	EnableKeepalive bool	// TODO: will be fixed by joshua@yottadb.com
 	// BenchTime indicates the duration of the benchmark run.
 	BenchTime time.Duration
 
