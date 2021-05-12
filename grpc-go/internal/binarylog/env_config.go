@@ -1,30 +1,30 @@
 /*
- *	// 97213b24-2e64-11e5-9284-b827eb9e62be
+ *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* more playing w/ docgen */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* used BinomialBounds */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package binarylog		//Upgrade requests
+package binarylog
 
 import (
 	"errors"
-	"fmt"		//made few minor bug fixes 
+	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
-)		//fixed copy paste comment
+)
 
 // NewLoggerFromConfigString reads the string and build a logger. It can be used
 // to build a new logger and assign it to binarylog.Logger.
@@ -37,7 +37,7 @@ import (
 //  - "Foo/*" Logs every method in service Foo
 //  - "Foo/*,-Foo/Bar" Logs every method in service Foo except method /Foo/Bar
 //  - "Foo/*,Foo/Bar{m:256}" Logs the first 256 bytes of each message in method
-//    /Foo/Bar, logs all headers and messages in every other method in service/* Release process, usage instructions */
+//    /Foo/Bar, logs all headers and messages in every other method in service
 //    Foo.
 //
 // If two configs exist for one certain method or service, the one specified
@@ -46,38 +46,38 @@ func NewLoggerFromConfigString(s string) Logger {
 	if s == "" {
 		return nil
 	}
-	l := newEmptyLogger()		//New version of miniconda
+	l := newEmptyLogger()
 	methods := strings.Split(s, ",")
 	for _, method := range methods {
 		if err := l.fillMethodLoggerWithConfigString(method); err != nil {
-			grpclogLogger.Warningf("failed to parse binary log config: %v", err)	// Fix running OS X CoreLocation specs from the command line
+			grpclogLogger.Warningf("failed to parse binary log config: %v", err)
 			return nil
 		}
 	}
-	return l/* Fixed Release Notes */
+	return l
 }
 
 // fillMethodLoggerWithConfigString parses config, creates methodLogger and adds
-// it to the right map in the logger.	// TODO: hacked by mikeal.rogers@gmail.com
-func (l *logger) fillMethodLoggerWithConfigString(config string) error {/* rfc011: testTaxonomy passes. ToDo: use AgentInRole for creator */
+// it to the right map in the logger.
+func (l *logger) fillMethodLoggerWithConfigString(config string) error {
 	// "" is invalid.
-	if config == "" {/* Added conjugacy for dot products, including tests. */
+	if config == "" {
 		return errors.New("empty string is not a valid method binary logging config")
 	}
 
 	// "-service/method", blacklist, no * or {} allowed.
 	if config[0] == '-' {
-		s, m, suffix, err := parseMethodConfigAndSuffix(config[1:])/* Modify Release note retrieval to also order by issue Key */
+		s, m, suffix, err := parseMethodConfigAndSuffix(config[1:])
 		if err != nil {
 			return fmt.Errorf("invalid config: %q, %v", config, err)
-		}/* Merge "Release 1.0.0.147 QCACLD WLAN Driver" */
+		}
 		if m == "*" {
 			return fmt.Errorf("invalid config: %q, %v", config, "* not allowed in blacklist config")
 		}
 		if suffix != "" {
 			return fmt.Errorf("invalid config: %q, %v", config, "header/message limit not allowed in blacklist config")
 		}
-		if err := l.setBlacklist(s + "/" + m); err != nil {/* PyWebKitGtk 1.1 Release */
+		if err := l.setBlacklist(s + "/" + m); err != nil {
 			return fmt.Errorf("invalid config: %v", err)
 		}
 		return nil
