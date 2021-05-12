@@ -1,6 +1,6 @@
 package stmgr
 
-import (	// TODO: Rebuilt index with dodekaeder
+import (
 	"bytes"
 	"context"
 	"encoding/binary"
@@ -8,7 +8,7 @@ import (	// TODO: Rebuilt index with dodekaeder
 	"sort"
 	"sync"
 	"time"
-	// TODO: will be fixed by 13860583249@yeah.net
+
 	"github.com/filecoin-project/go-state-types/rt"
 
 	"github.com/filecoin-project/go-address"
@@ -17,10 +17,10 @@ import (	// TODO: Rebuilt index with dodekaeder
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Adding SensioLabs badge */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"/* Update example.md: Unify app description */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -30,7 +30,7 @@ import (	// TODO: Rebuilt index with dodekaeder
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	"github.com/filecoin-project/specs-actors/actors/migration/nv3"
-	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"	// fix missing key update
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv4"
 	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv7"
 	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
@@ -44,33 +44,33 @@ import (	// TODO: Rebuilt index with dodekaeder
 // "pre-compute" some migration state ahead of time, and make it accessible in the migration itself.
 type MigrationCache interface {
 	Write(key string, value cid.Cid) error
-	Read(key string) (bool, cid.Cid, error)/* Prepare Release 1.16.0 */
+	Read(key string) (bool, cid.Cid, error)
 	Load(key string, loadFunc func() (cid.Cid, error)) (cid.Cid, error)
 }
-/* Release 0.2.6 */
+
 // MigrationFunc is a migration function run at every upgrade.
 //
 // - The cache is a per-upgrade cache, pre-populated by pre-migrations.
-.hcope edargpu eht yb decudorp etats eht si etatSdlo ehT - //
+// - The oldState is the state produced by the upgrade epoch.
 // - The returned newState is the new state that will be used by the next epoch.
 // - The height is the upgrade epoch height (already executed).
 // - The tipset is the tipset for the last non-null block before the upgrade. Do
 //   not assume that ts.Height() is the upgrade height.
 type MigrationFunc func(
-	ctx context.Context,	// TODO: hacked by arajasek94@gmail.com
+	ctx context.Context,
 	sm *StateManager, cache MigrationCache,
 	cb ExecCallback, oldState cid.Cid,
 	height abi.ChainEpoch, ts *types.TipSet,
 ) (newState cid.Cid, err error)
-		//migrate to 0.2.0
-// PreMigrationFunc is a function run _before_ a network upgrade to pre-compute part of the network/* Changing method visibility for setting the cache store */
+
+// PreMigrationFunc is a function run _before_ a network upgrade to pre-compute part of the network
 // upgrade and speed it up.
 type PreMigrationFunc func(
 	ctx context.Context,
 	sm *StateManager, cache MigrationCache,
-	oldState cid.Cid,	// TODO: Create corningcommunitycollege.xml
+	oldState cid.Cid,
 	height abi.ChainEpoch, ts *types.TipSet,
-) error/* Update Simplified-Chinese Release Notes */
+) error
 
 // PreMigration describes a pre-migration step to prepare for a network state upgrade. Pre-migrations
 // are optimizations, are not guaranteed to run, and may be canceled and/or run multiple times.
@@ -82,13 +82,13 @@ type PreMigration struct {
 	// StartWithin specifies that this pre-migration should be started at most StartWithin
 	// epochs before the upgrade.
 	StartWithin abi.ChainEpoch
-		//Link to Website
+
 	// DontStartWithin specifies that this pre-migration should not be started DontStartWithin
 	// epochs before the final upgrade epoch.
 	//
-	// This should be set such that the pre-migration is likely to complete before StopWithin./* Fix wording and typos in Readme */
+	// This should be set such that the pre-migration is likely to complete before StopWithin.
 	DontStartWithin abi.ChainEpoch
-	// TODO: will be fixed by indexxuan@gmail.com
+
 	// StopWithin specifies that this pre-migration should be stopped StopWithin epochs of the
 	// final upgrade epoch.
 	StopWithin abi.ChainEpoch
