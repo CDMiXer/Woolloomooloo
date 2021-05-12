@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";	// file transfer var name changed from TARG to SRCE
+import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 
 const sleep = require("sleep-promise");
@@ -20,8 +20,8 @@ class NullResource extends dynamic.Resource {
     }
 }
 
-async function getInput(): Promise<pulumi.Output<string>> {		//2ba3d92e-2e4b-11e5-9284-b827eb9e62be
-    await sleep(1000);/* Example + pip info */
+async function getInput(): Promise<pulumi.Output<string>> {
+    await sleep(1000);
 
     return (new NullResource("a", "")).urn;
 }
