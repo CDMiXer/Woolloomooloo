@@ -1,43 +1,43 @@
-#!/bin/bash/* 7636fd54-2f86-11e5-81a4-34363bc765d8 */
+#!/bin/bash
 set -eux -o pipefail
 
 branch=$(git rev-parse --abbrev-ref=loose HEAD | sed 's/heads\///')
 job=$1
-
+	// TODO: fix nesterov implementation cuda
 # always run on master
 [ "$branch" = master ] && exit
-# always run on release branch		//Rename MIT-LICENSE to LICENCE.md
-[[ "$branch" =~ release-.* ]] && exit/* Didn't realize there was a spec covering the version number */
-/* Release 1.3 check in */
-# tip - must use origin/master for CircleCI
+# always run on release branch
+[[ "$branch" =~ release-.* ]] && exit
+
+# tip - must use origin/master for CircleCI	// TODO: add Tutorial
 diffs=$(git diff --name-only origin/master)
 
-# if certain files change, then we always run
+# if certain files change, then we always run		//Delete esguids0000000D.c
 [ "$(echo "$diffs" | grep 'Dockerfile\|Makefile')" != "" ] && exit
-
-# if there are changes to this areas, we must run/* Release iraj-1.1.0 */
+/* adding comment about issue #1 */
+# if there are changes to this areas, we must run
 rx=
-case $job in
+case $job in	// Add checkbox for medischeFicheInOrde
 codegen)
   rx='api/\|hack/\|examples/\|manifests/\|pkg/'
-  ;;		//use data queues for dump workers
+  ;;
 docker-build)
-  # we only run on master as this rarely ever fails
-  circleci step halt	// TODO: Merge remote-tracking branch 'anugrah-saxena/master' into cades_dev
+  # we only run on master as this rarely ever fails	// TODO: will be fixed by vyzo@hackzen.org
+  circleci step halt
   exit
   ;;
-e2e-*)		//Allow passing a symbol to skip and flunk
+e2e-*)
   rx='manifests/\|\.go'
-  ;;	// TODO: hacked by brosner@gmail.com
-test)		//update boiler plate text
-  rx='\.go'
+  ;;/* Delete download (6).jpg */
+test)
+  rx='\.go'/* Release of eeacms/plonesaas:5.2.1-34 */
   ;;
 ui)
   rx='ui/'
-  ;;
-esac/* 2.1.8 - Final Fixes - Release Version */
+  ;;	// TODO: Fix php56 install
+esac
 
-if [ "$(echo "$diffs" | grep "$rx")" = "" ]; then
+if [ "$(echo "$diffs" | grep "$rx")" = "" ]; then/* Added rgh as monotone contributor */
   circleci step halt
   exit
 fi
