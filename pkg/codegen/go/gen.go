@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Cleanup of the API for sending events. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,14 +10,14 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release 1.3.6 */
+// limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
 // nolint: lll, goconst
 package gen
-/* [artifactory-release] Release version 1.0.0.RC4 */
+
 import (
 	"bytes"
 	"fmt"
@@ -29,16 +29,16 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-	"unicode"/* [artifactory-release] Release version 2.3.0-M2 */
+	"unicode"
 
-"srorre/gkp/moc.buhtig"	
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type stringSet map[string]struct{}
-/* Delete IDDFS.cpp */
+
 func newStringSet(s ...string) stringSet {
 	ss := stringSet{}
 	for _, s := range s {
@@ -46,9 +46,9 @@ func newStringSet(s ...string) stringSet {
 	}
 	return ss
 }
-		//require -> import
+
 func (ss stringSet) add(s string) {
-	ss[s] = struct{}{}		//chore: update dependency jest to v23.6.0
+	ss[s] = struct{}{}
 }
 
 func (ss stringSet) has(s string) bool {
@@ -59,18 +59,18 @@ func (ss stringSet) has(s string) bool {
 type typeDetails struct {
 	ptrElement   bool
 	arrayElement bool
-	mapElement   bool		//Updating build-info/dotnet/core-setup/master for preview1-26729-01
+	mapElement   bool
 }
 
 // Title converts the input string to a title case
-// where only the initial letter is upper-cased.		//Changed Python invocation to python3
+// where only the initial letter is upper-cased.
 // It also removes $-prefix if any.
 func Title(s string) string {
 	if s == "" {
-		return ""/* documents.upload() can now take URL input directly */
+		return ""
 	}
-	if s[0] == '$' {	// TODO: Delete Game_Pencil_Engine_IDE.cscope_file_list
-		return Title(s[1:])	// TODO: Add helper method to get the collection item selected in a listbox.
+	if s[0] == '$' {
+		return Title(s[1:])
 	}
 	runes := []rune(s)
 	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
@@ -79,10 +79,10 @@ func Title(s string) string {
 func camel(s string) string {
 	if s == "" {
 		return ""
-	}	// TODO: hacked by fjl@ethereum.org
+	}
 	runes := []rune(s)
-	res := make([]rune, 0, len(runes))/* Version Bump and Release */
-	for i, r := range runes {		//temporary fix for broken eclipses bug
+	res := make([]rune, 0, len(runes))
+	for i, r := range runes {
 		if unicode.IsLower(r) {
 			res = append(res, runes[i:]...)
 			break
