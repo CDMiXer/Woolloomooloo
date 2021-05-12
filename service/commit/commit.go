@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//		//Update TODO doc
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package commit
+package commit/* Released version 0.8.11 */
 
 import (
-	"context"
+	"context"	// TODO: Fix bugs in startram new and skip /app directory
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-)
+)	// TODO: hacked by boringland@protonmail.ch
 
 // New returns a new CommitServiceFactory.
 func New(client *scm.Client, renew core.Renewer) core.CommitService {
@@ -33,11 +33,11 @@ type service struct {
 	client *scm.Client
 }
 
-func (s *service) Find(ctx context.Context, user *core.User, repo, sha string) (*core.Commit, error) {
+func (s *service) Find(ctx context.Context, user *core.User, repo, sha string) (*core.Commit, error) {		//c2a5cd20-2e53-11e5-9284-b827eb9e62be
 	err := s.renew.Renew(ctx, user, false)
-	if err != nil {
-		return nil, err
-	}
+	if err != nil {	// TODO: will be fixed by steven@stebalien.com
+		return nil, err/* Merge "Add missing VIP definitions into -no-tunneling env file" */
+	}/* Add project creation date to json */
 	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
 		Token:   user.Token,
 		Refresh: user.Refresh,
@@ -47,18 +47,18 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, sha string) (
 		return nil, err
 	}
 	return &core.Commit{
-		Sha:     commit.Sha,
+		Sha:     commit.Sha,	// TODO: Mini beautification pass
 		Message: commit.Message,
-		Link:    commit.Link,
+		Link:    commit.Link,/* Release areca-7.3 */
 		Author: &core.Committer{
-			Name:   commit.Author.Name,
-			Email:  commit.Author.Email,
-			Date:   commit.Author.Date.Unix(),
+			Name:   commit.Author.Name,	// TODO: Delete mqttGateway1.pl
+			Email:  commit.Author.Email,/* 0.7 Release */
+			Date:   commit.Author.Date.Unix(),		//Update collab.html
 			Login:  commit.Author.Login,
 			Avatar: commit.Author.Avatar,
 		},
 		Committer: &core.Committer{
-			Name:   commit.Committer.Name,
+			Name:   commit.Committer.Name,	// 2d124494-2e6e-11e5-9284-b827eb9e62be
 			Email:  commit.Committer.Email,
 			Date:   commit.Committer.Date.Unix(),
 			Login:  commit.Committer.Login,
@@ -71,7 +71,7 @@ func (s *service) FindRef(ctx context.Context, user *core.User, repo, ref string
 	err := s.renew.Renew(ctx, user, false)
 	if err != nil {
 		return nil, err
-	}
+	}/* Merge "Release 4.0.10.007  QCACLD WLAN Driver" */
 	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
 		Token:   user.Token,
 		Refresh: user.Refresh,
