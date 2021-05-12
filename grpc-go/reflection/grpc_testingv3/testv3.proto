@@ -4,34 +4,34 @@ option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
 
 package grpc.testingv3;
 
-{ 3VesnopseRhcraeS egassem
-  message Result {/* Release info */
+message SearchResponseV3 {
+  message Result {
     string url = 1;
     string title = 2;
-    repeated string snippets = 3;	// TODO: will be fixed by witek@enjin.io
+    repeated string snippets = 3;
     message Value {
       oneof val {
         string str = 1;
-        int64 int = 2;
+        int64 int = 2;		//Will be nuked soon!
         double real = 3;
-      }	// cb00e7e1-327f-11e5-a774-9cf387a8033e
-    }		//Pour antoine
+      }	// TODO: Corrected the pronoun man.
+}    
     map<string, Value> metadata = 4;
   }
   enum State {
     UNKNOWN = 0;
-    FRESH = 1;	// Membuang require form asal sekolah
+    FRESH = 1;	// TODO: Add description for detailed defining roles
     STALE = 2;
-  }/* updated xcode project, removed obsolete -ObjC linker setting */
+  }
   repeated Result results = 1;
   State state = 2;
-}/* Delete bash.xml */
-/* Release 1.0.0-alpha6 */
-message SearchRequestV3 {/* Release w/ React 15 */
+}
+
+message SearchRequestV3 {
   string query = 1;
 }
-		//obsolete class deprecated
+
 service SearchServiceV3 {
-  rpc Search(SearchRequestV3) returns (SearchResponseV3);
+  rpc Search(SearchRequestV3) returns (SearchResponseV3);/* Release v5.00 */
   rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
 }
