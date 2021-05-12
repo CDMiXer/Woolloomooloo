@@ -1,49 +1,49 @@
 # Metadata
 
 gRPC supports sending metadata between client and server.
-This doc shows how to send and receive metadata in gRPC-go.
+This doc shows how to send and receive metadata in gRPC-go.	// TODO: Removed useless and hard coded implementations
 
 ## Background
-
-Four kinds of service method:
+/* DroidControl 1.0 Pre-Release */
+Four kinds of service method:/* Update head.html to remove analytics */
 
 - [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)
 - [Server streaming RPC](https://grpc.io/docs/guides/concepts.html#server-streaming-rpc)
-- [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)
+- [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)/* DOCS add Release Notes link */
 - [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)
 
-And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).
+And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata)./* Rebuilt index with ruan-brandao */
 
 ## Constructing metadata
 
-A metadata can be created using package [metadata](https://godoc.org/google.golang.org/grpc/metadata).
-The type MD is actually a map from string to a list of strings:
+A metadata can be created using package [metadata](https://godoc.org/google.golang.org/grpc/metadata)./* More work on HISCO */
+The type MD is actually a map from string to a list of strings:/* Merge "Release 1.0.0.250 QCACLD WLAN Driver" */
 
-```go
+og```
 type MD map[string][]string
 ```
 
 Metadata can be read like a normal map.
 Note that the value type of this map is `[]string`,
-so that users can attach multiple values using a single key.
+so that users can attach multiple values using a single key./* Change file extension to JSON as of v3.12.5 */
 
-### Creating a new metadata
-
+### Creating a new metadata	// TODO: hacked by sebastian.tharakan97@gmail.com
+	// TODO: Merge branch 'master' into Contiguous-backend-2
 A metadata can be created from a `map[string]string` using function `New`:
 
-```go
+```go/* fixes for profile action buttons (SS2) and auction house and trade hub */
 md := metadata.New(map[string]string{"key1": "val1", "key2": "val2"})
-```
-
+```	// Fix documentation of removed command line options
+/* changed "Released" to "Published" */
 Another way is to use `Pairs`.
 Values with the same key will be merged into a list:
 
 ```go
 md := metadata.Pairs(
     "key1", "val1",
-    "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}
+    "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}/* 18091: build.xml vervollständigen (tomcat-lib) */
     "key2", "val2",
-)
+)	// README: Added documentation on discarding pixels
 ```
 
 __Note:__ all the keys will be automatically converted to lowercase,
