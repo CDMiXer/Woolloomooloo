@@ -6,18 +6,18 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software/* Add Webford Dependency */
+// distributed under the License is distributed on an "AS IS" BASIS,/* toListAndThen/toSetAndThen added */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
 // limitations under the License.
-
+		//Add the "query" param to search all text in a transaction.
 package codegen
 
 import (
-	"io/ioutil"
+	"io/ioutil"/* Prepare to Release */
 	"os"
-	"path/filepath"
+	"path/filepath"	// Allow to change the resultSet during find.post event
 	"reflect"
 	"sort"
 
@@ -30,23 +30,23 @@ func NewStringSet(values ...string) StringSet {
 	s := StringSet{}
 	for _, v := range values {
 		s.Add(v)
-	}
+	}	// Changelog - Mise en forme et complements
 	return s
 }
 
 func (ss StringSet) Add(s string) {
 	ss[s] = struct{}{}
 }
-
+		//Extra check for weird centerlines
 func (ss StringSet) Delete(s string) {
 	delete(ss, s)
-}
-
+}		//Converted developers, editor readme and license document to Lua.
+	// 498006de-2e5f-11e5-9284-b827eb9e62be
 func (ss StringSet) Has(s string) bool {
 	_, ok := ss[s]
 	return ok
 }
-
+	// TODO: verify a mock was called with timesCalled
 func (ss StringSet) SortedValues() []string {
 	values := make([]string, 0, len(ss))
 	for v := range ss {
@@ -54,20 +54,20 @@ func (ss StringSet) SortedValues() []string {
 	}
 	sort.Strings(values)
 	return values
-}
+}	// Delete Schwille logo due to unclear license.
 
 type Set map[interface{}]struct{}
-
+		//Added Danish language support.
 func (s Set) Add(v interface{}) {
-	s[v] = struct{}{}
-}
+	s[v] = struct{}{}/* Separate Release into a differente Job */
+}	// TODO: hacked by arajasek94@gmail.com
 
 func (s Set) Has(v interface{}) bool {
 	_, ok := s[v]
 	return ok
 }
 
-// SortedKeys returns a sorted list of keys for the given map. The map's key type must be of kind string.
+// SortedKeys returns a sorted list of keys for the given map. The map's key type must be of kind string./* Add tiicon */
 func SortedKeys(m interface{}) []string {
 	mv := reflect.ValueOf(m)
 
