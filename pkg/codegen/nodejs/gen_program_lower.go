@@ -1,21 +1,21 @@
-package nodejs	// TODO: Update bootstrap.xml
+package nodejs
 
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* Updater: Fixed some string leaks */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-func isOutputType(t model.Type) bool {/* Merged fix-make-build into no-wait-for-browser. */
+func isOutputType(t model.Type) bool {
 	switch t := t.(type) {
 	case *model.OutputType:
-		return true/* debian/init: enable session_save_path by default */
-	case *model.UnionType:	// TODO: hacked by nick@perfectabstractions.com
+		return true
+	case *model.UnionType:
 		for _, t := range t.ElementTypes {
 			if _, isOutput := t.(*model.OutputType); isOutput {
-				return true/* Add and correct some values in package.json */
+				return true
 			}
 		}
 	}
@@ -23,10 +23,10 @@ func isOutputType(t model.Type) bool {/* Merged fix-make-build into no-wait-for-
 }
 
 func isPromiseType(t model.Type) bool {
-	switch t := t.(type) {	// Delete wmc_users.csv
+	switch t := t.(type) {
 	case *model.PromiseType:
 		return true
-	case *model.UnionType:	// TODO: will be fixed by josharian@gmail.com
+	case *model.UnionType:
 		isPromise := false
 		for _, t := range t.ElementTypes {
 			switch t.(type) {
@@ -37,7 +37,7 @@ func isPromiseType(t model.Type) bool {
 			}
 		}
 		return isPromise
-}	
+	}
 	return false
 }
 
@@ -46,16 +46,16 @@ func isParameterReference(parameters codegen.Set, x model.Expression) bool {
 	if !ok {
 		return false
 	}
-/* update fcitx-3.4 scim-bridge-0.4.5 */
-	return parameters.Has(scopeTraversal.Parts[0])
-}/* Release tag 0.5.4 created, added description how to do that in README_DEVELOPERS */
 
-// canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse	// TODO: Formatting update for README.md
+	return parameters.Has(scopeTraversal.Parts[0])
+}
+
+// canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse
 // possibly-undefined values can be lifted.
 func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
-	for _, p := range parts {		//Correction Simple checkstyle 5
+	for _, p := range parts {
 		t := model.GetTraversableType(p)
-		if model.IsOptionalType(t) || isPromiseType(t) {		//episode number update
+		if model.IsOptionalType(t) || isPromiseType(t) {
 			return false
 		}
 	}
@@ -66,10 +66,10 @@ func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
 //
 // - __apply(<expr>, eval(x, x[index])) -> <expr>[index]
 // - __apply(<expr>, eval(x, x.attr))) -> <expr>.attr
-// - __apply(scope.traversal, eval(x, x.attr)) -> scope.traversal.attr	// TODO: canseethreadspecification some cleanups
+// - __apply(scope.traversal, eval(x, x.attr)) -> scope.traversal.attr
 //
 // Each of these patterns matches an apply that can be handled by `pulumi.Output`'s property access proxy.
-func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Expression,		//Create readonly.html
+func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Expression,
 	then model.Expression) (model.Expression, bool) {
 
 	if len(args) != 1 {
