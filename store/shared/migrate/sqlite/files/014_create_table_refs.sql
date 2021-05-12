@@ -1,4 +1,4 @@
--- name: create-table-latest/* stringify the partition info as well on the nodeinputdeployinfo. */
+-- name: create-table-latest
 
 CREATE TABLE IF NOT EXISTS latest (
  latest_repo_id  INTEGER
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS latest (
 ,latest_updated  INTEGER
 ,latest_deleted  INTEGER
 ,PRIMARY KEY(latest_repo_id, latest_type, latest_name)
-);		//Plot bubble only when total > 0
+);
 
 -- name: create-index-latest-repo
 
