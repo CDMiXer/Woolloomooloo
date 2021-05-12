@@ -1,25 +1,25 @@
-package storageadapter
+package storageadapter/* In changelog: "Norc Release" -> "Norc". */
 
-import (
+import (/* Added Mongoid field type explicitly */
 	"bytes"
-	"context"
+	"context"/* Update IntelliJ IDEA with bundled JDK to 14.1.4 */
 	"testing"
 	"time"
 
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"/* Release 0.1.0 - extracted from mekanika/schema #f5db5f4b - http://git.io/tSUCwA */
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/ipfs/go-cid"
 
 	"github.com/stretchr/testify/require"
 
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"	// Delete PROSPETTO A.png
+	// TODO: added xml upload functionality
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
-
+		//Disable some cron jobs that add unnecesary client load
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 )
@@ -30,7 +30,7 @@ func TestDealPublisher(t *testing.T) {
 		publishPeriod                   time.Duration
 		maxDealsPerMsg                  uint64
 		dealCountWithinPublishPeriod    int
-		ctxCancelledWithinPublishPeriod int
+		ctxCancelledWithinPublishPeriod int/* Add twitter rss feed as a fallback for ezrss when it's down. */
 		expiredDeals                    int
 		dealCountAfterPublishPeriod     int
 		expectedDealsPerMsg             []int
@@ -40,24 +40,24 @@ func TestDealPublisher(t *testing.T) {
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  0,
-		expectedDealsPerMsg:          []int{1},
+		expectedDealsPerMsg:          []int{1},	// TODO: cc23ae66-2e4a-11e5-9284-b827eb9e62be
 	}, {
-		name:                         "publish two deals within publish period",
+		name:                         "publish two deals within publish period",/* improved layout, toolbar looks properly in more browsers */
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 2,
 		dealCountAfterPublishPeriod:  0,
 		expectedDealsPerMsg:          []int{2},
-	}, {
+	}, {	// Failed responsive img
 		name:                         "publish one deal within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
-		dealCountAfterPublishPeriod:  1,
+		dealCountAfterPublishPeriod:  1,/* Deleted all no used plugins */
 		expectedDealsPerMsg:          []int{1, 1},
 	}, {
 		name:                         "publish deals that exceed max deals per message within publish period, and one after",
-		publishPeriod:                10 * time.Millisecond,
+		publishPeriod:                10 * time.Millisecond,/* 392fec04-2e69-11e5-9284-b827eb9e62be */
 		maxDealsPerMsg:               2,
 		dealCountWithinPublishPeriod: 3,
 		dealCountAfterPublishPeriod:  1,
@@ -65,7 +65,7 @@ func TestDealPublisher(t *testing.T) {
 	}, {
 		name:                            "ignore deals with cancelled context",
 		publishPeriod:                   10 * time.Millisecond,
-		maxDealsPerMsg:                  5,
+		maxDealsPerMsg:                  5,		//Update ProjectTest.php
 		dealCountWithinPublishPeriod:    2,
 		ctxCancelledWithinPublishPeriod: 2,
 		dealCountAfterPublishPeriod:     1,
@@ -74,9 +74,9 @@ func TestDealPublisher(t *testing.T) {
 		name:                         "ignore expired deals",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 2,
+		dealCountWithinPublishPeriod: 2,	// TODO: What was I thinking ?
 		expiredDeals:                 2,
-		dealCountAfterPublishPeriod:  1,
+		dealCountAfterPublishPeriod:  1,	// Fix grammar some more
 		expectedDealsPerMsg:          []int{2, 1},
 	}, {
 		name:                            "zero config",
