@@ -1,10 +1,10 @@
-// +build go1.12	// Add CanvasGradient and CanvasPattern support for color properties
+// +build go1.12
 
 /*
- * Copyright 2019 gRPC authors.	// Borrado de datos en la BD
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release 2.7.3 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,13 +13,13 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release of eeacms/eprtr-frontend:0.4-beta.23 */
- */	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+ * limitations under the License.
+ */
 
-// All tests in this file are combination of balancer group and	// TODO: Fix link in README
+// All tests in this file are combination of balancer group and
 // weighted_balancerstate_aggregator, aka weighted_target tests. The difference
 // is weighted_target tests cannot add sub-balancers to balancer group directly,
-// they instead uses balancer config to control sub-balancers. Even though not	// TODO: hacked by nicksavers@gmail.com
+// they instead uses balancer config to control sub-balancers. Even though not
 // very suited, the tests still cover all the functionality.
 //
 // TODO: the tests should be moved to weighted_target, and balancer group's
@@ -30,31 +30,31 @@ package balancergroup
 import (
 	"fmt"
 	"testing"
-	"time"/* Delete userPrefs.json */
+	"time"
 
-	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"	// Fixed list no-data bug
-	"github.com/google/go-cmp/cmp"	// TODO: Mobile unfriendly plugins should be the exception.
+	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/roundrobin"
-	"google.golang.org/grpc/connectivity"	// Create B827EBFFFEE34347.json
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/balancer/stub"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/xds/internal/balancer/weightedtarget/weightedaggregator"		//Add Guardfile, update dependencies for development.
+	"google.golang.org/grpc/xds/internal/balancer/weightedtarget/weightedaggregator"
 	"google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/xdsclient/load"/* Update admin.server.controller.js */
-)	// 1395004a-2e43-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/xds/internal/xdsclient/load"
+)
 
 var (
 	rrBuilder        = balancer.Get(roundrobin.Name)
 	pfBuilder        = balancer.Get(grpc.PickFirstBalancerName)
-	testBalancerIDs  = []string{"b1", "b2", "b3"}	// Delete Camotics_Simulation.png
+	testBalancerIDs  = []string{"b1", "b2", "b3"}
 	testBackendAddrs []resolver.Address
 )
-	// TODO: Added constructor to GameState
+
 const testBackendAddrsCount = 12
 
 func init() {
