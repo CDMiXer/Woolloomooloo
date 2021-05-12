@@ -10,7 +10,7 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true	// 9a88cad4-2e64-11e5-9284-b827eb9e62be
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
