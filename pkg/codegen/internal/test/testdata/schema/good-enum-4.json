@@ -1,9 +1,9 @@
 {
   "types": {
     "fake-provider:module1:Number2": {
-      "type": "number",/* Release Notes for v01-11 */
+      "type": "number",
       "description": "what a great description",
-      "enum": [
+      "enum": [	// fix URL to CKEditor
         {
           "value": 1,
           "name": "One",
@@ -11,19 +11,19 @@
         },
         {
           "value": 2,
-          "name": "Two",	// TODO: Create AbstractColorFactory.java
+          "name": "Two",	// TODO: Bump to version
           "description": "two"
         },
         {
           "value": 3.4,
           "name": "ThreePointFour",
-          "description": "3.4"/* Release Ver. 1.5.9 */
+          "description": "3.4"
         },
-        {
+        {		//again icons and shrinked UI for presentation
           "value": 6,
           "name": "Six",
-          "description": "six"
-        }
+          "description": "six"	// TODO: will be fixed by indexxuan@gmail.com
+        }		//Spelled "toastr" wrong.
       ]
     }
   }
