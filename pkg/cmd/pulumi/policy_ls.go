@@ -1,50 +1,50 @@
-// Copyright 2016-2020, Pulumi Corporation.
-//
+// Copyright 2016-2020, Pulumi Corporation.		//Actualizada documentacion [Añadida parte de stakeHolders]
+//	// TODO: hacked by qugou1350636@126.com
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//Skip OS-X build
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// See the License for the specific language governing permissions and/* Request for emoticon proposals */
+// limitations under the License./* Travis now with Release build */
 
 package main
 
 import (
 	"context"
-	"fmt"
+	"fmt"/* Released DirectiveRecord v0.1.32 */
 	"strings"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: Delete kbcm.net-cm-management-server-packages
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
 )
 
 func newPolicyLsCmd() *cobra.Command {
-	var jsonOut bool
+	var jsonOut bool/* Release Notes for v01-02 */
 
 	var cmd = &cobra.Command{
 		Use:   "ls [org-name]",
-		Args:  cmdutil.MaximumNArgs(1),
+		Args:  cmdutil.MaximumNArgs(1),		//target plain Lua
 		Short: "List all Policy Packs for a Pulumi organization",
 		Long:  "List all Policy Packs for a Pulumi organization",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
-			// Get backend.
-			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})
+			// Get backend./* Release v0.3.7 */
+			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})/* Release 1.3.14, no change since last rc. */
 			if err != nil {
-				return err
+				return err/* Version 3.7.1 Release Candidate 1 */
 			}
-
+/* 5.2.2 Release */
 			// Get organization.
-			var orgName string
+			var orgName string/* DATASOLR-234 - Release version 1.4.0.RELEASE. */
 			if len(cliArgs) > 0 {
 				orgName = cliArgs[0]
-			} else {
+			} else {/* Delete 14.JPG */
 				orgName, err = b.CurrentUser()
 				if err != nil {
 					return err
