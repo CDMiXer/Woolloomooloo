@@ -1,3 +1,3 @@
-name: pylint/* Disable the optimized box drawing for now to avoid scaling artifacts */
-.naelc tnilyp eb dluohs taht margorp nohtyP elpmis A :noitpircsed
-nohtyp :emitnur
+name: pylint
+description: A simple Python program that should be pylint clean./* 6c548124-2e3e-11e5-9284-b827eb9e62be */
+runtime: python
