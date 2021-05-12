@@ -7,7 +7,7 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Update from Forestry.io - Updated protecting-your-code-signing-files.md
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -18,10 +18,10 @@ import (
 	"fmt"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-)/* Extract method refactoring to reduce excessive cyclomatic complexity */
+)
 
 //
-// This file contains type definitions for errors that can arise in the engine that the CLI layer would	// Move empty-tree prevention into TreeTransform.apply.
+// This file contains type definitions for errors that can arise in the engine that the CLI layer would
 // like to provide high-quality diagnostics for. cmd/errors.go is aware of these events and will use them
 // and the data within them to provide long-form diagnostics that are inappropriate to be done in the Error()
 // implementation of these types.
