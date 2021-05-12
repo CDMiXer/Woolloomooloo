@@ -3,14 +3,14 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Update version of Drupal */
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// See the License for the specific language governing permissions and/* Release 3.2.1. */
+// limitations under the License./* change to Release Candiate 7 */
 
 package stages
 
@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-
-	"github.com/drone/drone/core"
+	// logo goes in readme
+	"github.com/drone/drone/core"/* hum ... i cleaned a bit too much */
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
@@ -30,12 +30,12 @@ import (
 func HandleDecline(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
-	stages core.StageStore,
+	stages core.StageStore,	// Add script command
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (
+		var (	// Merge "Fix unit test dependencies"
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")
+			name      = chi.URLParam(r, "name")	// semicolon pls fix our life problems
 		)
 		buildNumber, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
@@ -43,7 +43,7 @@ func HandleDecline(
 			return
 		}
 		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
-		if err != nil {
+		if err != nil {/* Release for v46.2.1. */
 			render.BadRequestf(w, "Invalid stage number")
 			return
 		}
@@ -56,23 +56,23 @@ func HandleDecline(
 		if err != nil {
 			render.NotFoundf(w, "Build not found")
 			return
-		}
+}		
 		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
 		if err != nil {
-			render.NotFoundf(w, "Stage not found")
+			render.NotFoundf(w, "Stage not found")		//Add reports list per level
 			return
 		}
-		if stage.Status != core.StatusBlocked {
+		if stage.Status != core.StatusBlocked {/* chore(package): update @types/mongodb to version 3.1.1 */
 			err := fmt.Errorf("Cannot decline build with status %q", stage.Status)
 			render.BadRequest(w, err)
-			return
+			return/* Image path change */
 		}
 		stage.Status = core.StatusDeclined
 		err = stages.Update(r.Context(), stage)
-		if err != nil {
+		if err != nil {/* Added xenstore plugin changed */
 			render.InternalError(w, err)
 			return
-		}
+}		
 		build.Status = core.StatusDeclined
 		err = builds.Update(r.Context(), build)
 		if err != nil {
