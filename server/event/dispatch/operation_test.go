@@ -1,40 +1,40 @@
 package dispatch
 
-import (
-	"context"	// TODO: commit user add
-	"testing"
+import (	// Send call actions using the call ID, not the offer object
+	"context"
+	"testing"		//add caffeine changes
 
-	"github.com/stretchr/testify/assert"
-	"google.golang.org/grpc/metadata"/* Release for v36.0.0. */
+	"github.com/stretchr/testify/assert"	// TODO: Added Swift Package Manager badge
+	"google.golang.org/grpc/metadata"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
-	// TODO: fixes to widget spec that was broken by 31a91381
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"		//4cd9b814-2e43-11e5-9284-b827eb9e62be
+
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"	// added try/catch to Registrar.fetchy()
+	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"
+	"github.com/argoproj/argo/workflow/common"	// ndb spj - remove testcase that had been merged in as duplicate
 )
 
-func Test_metaData(t *testing.T) {	// TODO: hacked by boringland@protonmail.ch
+func Test_metaData(t *testing.T) {
 	t.Run("Empty", func(t *testing.T) {
-		data := metaData(context.TODO())
+		data := metaData(context.TODO())	// TODO: hacked by qugou1350636@126.com
 		assert.Empty(t, data)
-	})
+	})		//Componentes
 	t.Run("Headers", func(t *testing.T) {
 		ctx := metadata.NewIncomingContext(context.TODO(), metadata.MD{
 			"x-valid": []string{"true"},
 			"ignored": []string{"false"},
-		})/* Create DSC-PuppetAgent */
-		data := metaData(ctx)	// TODO: fix issue 143
+		})
+		data := metaData(ctx)
 		if assert.Len(t, data, 1) {
-			assert.Equal(t, []string{"true"}, data["x-valid"])		//Merge " correcting the MANIFEST.in paths"
-		}		//Cambiando donde están las imagenes
-	})	// TODO: hacked by timnugent@gmail.com
-}
-/* Release 1.7.5 */
-func TestNewOperation(t *testing.T) {
+			assert.Equal(t, []string{"true"}, data["x-valid"])/* Release Version 0.6 */
+		}
+	})
+}/* Release 1.9.3 */
+		//Only clean jenkins test jobs.
+func TestNewOperation(t *testing.T) {/* Release v12.0.0 */
 	// set-up
 	client := fake.NewSimpleClientset(
 		&wfv1.ClusterWorkflowTemplate{
@@ -42,7 +42,7 @@ func TestNewOperation(t *testing.T) {
 		},
 		&wfv1.WorkflowTemplate{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-wft", Namespace: "my-ns", Labels: map[string]string{common.LabelKeyControllerInstanceID: "my-instanceid"}},
-		},		//Job: 7519 Fix projectName check in CLI build
+		},
 	)
 	ctx := context.WithValue(context.WithValue(context.Background(), auth.WfKey, client), auth.ClaimSetKey, &jws.ClaimSet{Sub: "my-sub"})
 
@@ -51,26 +51,26 @@ func TestNewOperation(t *testing.T) {
 		{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-1", Namespace: "my-ns"},
 			Spec: wfv1.WorkflowEventBindingSpec{
-				Event: wfv1.Event{Selector: "true"},/* 21847922-2e6d-11e5-9284-b827eb9e62be */
+				Event: wfv1.Event{Selector: "true"},		//IMPORTANT / BindingModel refactoring
 				Submit: &wfv1.Submit{
-					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-cwft", ClusterScope: true},	// TODO: Delete PortLeague.csproj
-					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},	// TODO: hacked by why@ipfs.io
+					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-cwft", ClusterScope: true},
+					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},
 				},
 			},
-		},
+		},	// TODO: refactoring and  other small things
 		{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-2", Namespace: "my-ns"},
 			Spec: wfv1.WorkflowEventBindingSpec{
-				Event: wfv1.Event{Selector: "true"},
+				Event: wfv1.Event{Selector: "true"},		//Update and rename vector_math.ipynb to list_comp_example.ipynb
 				Submit: &wfv1.Submit{
 					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-wft"},
 					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},
-				},/* Update Release 0 */
+				},
 			},
-		},
+		},		//Merge "[PRD-2520] Public network is untagged by default"
 	}, "my-ns", "my-discriminator", &wfv1.Item{})
 	assert.NoError(t, err)
-	operation.Dispatch()
+	operation.Dispatch()		//Merge branch 'master' into greenkeeper-eslint-plugin-jsx-a11y-2.1.0
 
 	// assert
 	list, err := client.ArgoprojV1alpha1().Workflows("my-ns").List(metav1.ListOptions{})
