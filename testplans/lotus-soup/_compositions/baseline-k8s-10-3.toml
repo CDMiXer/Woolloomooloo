@@ -1,16 +1,16 @@
-]atadatem[
+[metadata]
   name = "lotus-soup"
-  author = ""/* * made Greta data-aware using Access/CPN */
-
+  author = ""/* Release notes update for EDNS */
+		//Added sort icons to software table (no functionality)
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 14/* Release of eeacms/www-devel:20.8.23 */
+  total_instances = 14
   builder = "docker:go"
   runner = "cluster:k8s"
-	// TODO: hacked by timnugent@gmail.com
+/* Merge "u_hsuart: Fix a bug in opening the SMUX port" */
 [global.build]
-  selectors = ["testground"]/* Merge branch 'BL-6293Bloom4.3ReleaseNotes' into Version4.3 */
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
@@ -21,46 +21,46 @@
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]	// TODO: hacked by souzau@yandex.com
-  clients = "10"/* Update docker file mysql config */
+[global.run.test_params]	// TODO: Merged from 833747.
+  clients = "10"/* 8e6f0acc-2e57-11e5-9284-b827eb9e62be */
   miners = "3"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  random_beacon_type = "mock"/* Created IMG_5932.JPG */
-  mining_mode = "natural"		//1496929862047 automated commit from rosetta for file joist/joist-strings_nl.json
-
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Merge "Release 5.4.0" */
+  random_beacon_type = "mock"
+  mining_mode = "natural"
+	// TODO: [cs] apply code style corrections
 [[groups]]
-  id = "bootstrapper"
-  [groups.resources]/* Release 1.0.30 */
+  id = "bootstrapper"	// TODO: hacked by boringland@protonmail.ch
+  [groups.resources]/* add roles to the appropriate item subclasses */
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]/* Add "Contribute" and "Releases & development" */
     count = 1
+    percentage = 0.0
+  [groups.run]		//Display save error messages.
+    [groups.run.test_params]
+      role = "bootstrapper"
+/* Released magja 1.0.1. */
+[[groups]]	// TODO: will be fixed by nagydani@epointsystem.org
+  id = "miners-weak"
+  [groups.resources]
+    memory = "8192Mi"
+    cpu = "1000m"
+  [groups.instances]
+    count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
-
-[[groups]]
-  id = "miners-weak"
-  [groups.resources]
-    memory = "8192Mi"	// TODO: will be fixed by nick@perfectabstractions.com
-    cpu = "1000m"	// TODO: Updating the JAM Next Steps. There is already a DNA example,
-  [groups.instances]/* Release 8.4.0-SNAPSHOT */
-    count = 2
-    percentage = 0.0/* Release of eeacms/ims-frontend:0.4.8 */
-  [groups.run]/* Update daytonoffice.html */
-    [groups.run.test_params]/* timing ciclico, he quitado el timer 2 para usar solo 1. */
       role = "miner"
-      sectors = "8"
+      sectors = "8"/* Remove unused Autoload */
 
-[[groups]]
+[[groups]]		//Переключение контента между текстом, описанием и ресурсами.
   id = "miners-strong"
   [groups.resources]
     memory = "8192Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1
+    count = 1/* Release 3.7.0 */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
