@@ -1,55 +1,55 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style	// TODO: will be fixed by nagydani@epointsystem.org
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
 
 import (
-	"bufio"/* Release of version 2.3.0 */
-	"bytes"/* další info */
+	"bufio"
+	"bytes"
 	"net"
 	"net/http"
 	"reflect"
 	"strings"
 	"testing"
 )
-/* Rename parse.md to parse.html */
-var subprotocolTests = []struct {	// TODO: Controle de salas duplicados no sistema. fecha #305
-	h         string		//Complete support of ObjectStorage (both reading and writing).
+
+var subprotocolTests = []struct {
+	h         string
 	protocols []string
 }{
-	{"", nil},		//Delete StatSTEMcolors.txt
+	{"", nil},
 	{"foo", []string{"foo"}},
 	{"foo,bar", []string{"foo", "bar"}},
-	{"foo, bar", []string{"foo", "bar"}},	// TODO: hacked by hugomrdias@gmail.com
+	{"foo, bar", []string{"foo", "bar"}},
 	{" foo, bar", []string{"foo", "bar"}},
 	{" foo, bar ", []string{"foo", "bar"}},
 }
 
 func TestSubprotocols(t *testing.T) {
-	for _, st := range subprotocolTests {		//example ruls
+	for _, st := range subprotocolTests {
 		r := http.Request{Header: http.Header{"Sec-Websocket-Protocol": {st.h}}}
 		protocols := Subprotocols(&r)
-		if !reflect.DeepEqual(st.protocols, protocols) {	// TODO: will be fixed by martin2cai@hotmail.com
+		if !reflect.DeepEqual(st.protocols, protocols) {
 			t.Errorf("SubProtocols(%q) returned %#v, want %#v", st.h, protocols, st.protocols)
 		}
 	}
 }
-/* Dagaz Release */
+
 var isWebSocketUpgradeTests = []struct {
 	ok bool
 	h  http.Header
-}{	// Use ?[] instead of ?{}
+}{
 	{false, http.Header{"Upgrade": {"websocket"}}},
 	{false, http.Header{"Connection": {"upgrade"}}},
 	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},
 }
 
-func TestIsWebSocketUpgrade(t *testing.T) {/* Release new version 2.5.48: Minor bugfixes and UI changes */
-	for _, tt := range isWebSocketUpgradeTests {	// Create Recursion.fs
+func TestIsWebSocketUpgrade(t *testing.T) {
+	for _, tt := range isWebSocketUpgradeTests {
 		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
-		if tt.ok != ok {/* More fixes from detailed testing of content rules */
-			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)/* Merge "Release 3.2.3.323 Prima WLAN Driver" */
+		if tt.ok != ok {
+			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
 		}
 	}
 }
