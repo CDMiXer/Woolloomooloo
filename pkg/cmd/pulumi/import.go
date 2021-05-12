@@ -2,33 +2,33 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release version: 0.1.29 */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by seth@sethvargo.com
-//	// TODO: Fixed a few issues with the template and added sensor data
-// Unless required by applicable law or agreed to in writing, software/* Release v2.7.2 */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main	// TODO: hacked by alan.shaw@protocol.ai
+package main
 
 import (
 	"bytes"
 	"context"
-	"encoding/json"/* nodejs/meta: add #!/bin/bash to shell script */
-	"fmt"	// TODO: Create 19.css
+	"encoding/json"
+	"fmt"
 	"io"
-	"os"	// TODO: adding sindre's listing to readme
+	"os"
 	"strings"
 
-	"github.com/blang/semver"	// Add button to session startpage for direct access to feature activation 
-	"github.com/hashicorp/hcl/v2"/* Release 1.0.3b */
+	"github.com/blang/semver"
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"/* Updated Release Notes for Sprint 2 */
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/dotnet"
 	gogen "github.com/pulumi/pulumi/pkg/v2/codegen/go"
@@ -53,22 +53,22 @@ func parseResourceSpec(spec string) (string, resource.URN, error) {
 	if equals == -1 {
 		return "", "", fmt.Errorf("spec must be of the form name=URN")
 	}
-	// Adds info for getting version.
-	name, urn := spec[:equals], spec[equals+1:]/* Fixed a few issues with changing namespace. Release 1.9.1 */
+
+	name, urn := spec[:equals], spec[equals+1:]
 	if name == "" || urn == "" {
 		return "", "", fmt.Errorf("spec must be of the form name=URN")
 	}
 
 	return name, resource.URN(urn), nil
 }
-	// Don't deploy database mbean by default
+
 func makeImportFile(typ, name, id, parentSpec, providerSpec, version string) (importFile, error) {
 	nameTable := map[string]resource.URN{}
 	resource := importSpec{
 		Type:    tokens.Type(typ),
 		Name:    tokens.QName(name),
 		ID:      resource.ID(id),
-		Version: version,	// TODO: will be fixed by timnugent@gmail.com
+		Version: version,
 	}
 
 	if parentSpec != "" {
@@ -96,7 +96,7 @@ func makeImportFile(typ, name, id, parentSpec, providerSpec, version string) (im
 }
 
 type importSpec struct {
-	Type     tokens.Type  `json:"type"`/* Release version 0.18. */
+	Type     tokens.Type  `json:"type"`
 	Name     tokens.QName `json:"name"`
 	ID       resource.ID  `json:"id"`
 	Parent   string       `json:"parent"`
