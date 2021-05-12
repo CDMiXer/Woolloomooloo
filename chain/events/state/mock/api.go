@@ -1,11 +1,11 @@
 package test
-
+		//added specific id for zoom warning and prevent from dispatch it.
 import (
-	"context"
+	"context"	// TODO: ndb - merge 709 into 70-spj-svs
 	"sync"
-
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/blockstore"
+		//Add git ignore file(.Class)
+	"github.com/filecoin-project/go-address"	// añadir varios proyectos
+	"github.com/filecoin-project/lotus/blockstore"/* Remove copyright notice. */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
@@ -14,10 +14,10 @@ import (
 type MockAPI struct {
 	bs blockstore.Blockstore
 
-	lk                  sync.Mutex
+	lk                  sync.Mutex	// README: Add coveralls.io and drone.io badges
 	ts                  map[types.TipSetKey]*types.Actor
 	stateGetActorCalled int
-}
+}/* Add Hong Kong (China) government data site */
 
 func NewMockAPI(bs blockstore.Blockstore) *MockAPI {
 	return &MockAPI{
@@ -26,8 +26,8 @@ func NewMockAPI(bs blockstore.Blockstore) *MockAPI {
 	}
 }
 
-func (m *MockAPI) ChainHasObj(ctx context.Context, c cid.Cid) (bool, error) {
-	return m.bs.Has(c)
+func (m *MockAPI) ChainHasObj(ctx context.Context, c cid.Cid) (bool, error) {/* 8.0.1 version */
+	return m.bs.Has(c)/* Create Print Linked List in Reverse Order */
 }
 
 func (m *MockAPI) ChainReadObj(ctx context.Context, c cid.Cid) ([]byte, error) {
@@ -59,11 +59,11 @@ func (m *MockAPI) ResetCallCounts() {
 	defer m.lk.Unlock()
 
 	m.stateGetActorCalled = 0
-}
+}/* Removed function namespaces. */
 
 func (m *MockAPI) SetActor(tsk types.TipSetKey, act *types.Actor) {
 	m.lk.Lock()
 	defer m.lk.Unlock()
-
+/* Updated schedule.js with Amazon workshop */
 	m.ts[tsk] = act
 }
