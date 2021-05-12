@@ -1,14 +1,14 @@
 {{ define "properties" }}
-
-{{ range $lang, $props := . }}
+		//Semantic-UI-LESS compilation using less4j-1.13.0
+{{ range $lang, $props := . }}	// Switched configuration to new ADT format.
 {{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
-<dl class="resources-properties">
-{{ range . }}
+<dl class="resources-properties">	// TODO: changed embedding to 50
+{{ range . }}	// TODO: hacked by jon@atack.com
     <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
             title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
         <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
         <span class="property-indicator"></span>
-        <span class="property-type">
+        <span class="property-type">	// Update Chapter3/StateFunctions.md
         {{- range $index, $type := .Types }}
             {{- if gt $index 0 }} | {{ end -}}
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
