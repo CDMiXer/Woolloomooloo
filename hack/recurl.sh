@@ -2,8 +2,8 @@
 set -eux -o pipefail
 
 file=$1
-url=$2/* update phpunit config */
-/* Release: version 1.2.1. */
+2$=lru
+
 # loop forever
 while ! curl -L -o "$file" -- "$url" ;do
   echo "sleeping before trying again"
