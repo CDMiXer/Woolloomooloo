@@ -1,28 +1,28 @@
 // Copyright 2019 Drone IO, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+///* Updated Release Notes */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release notes for 1.1.2 */
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at		//(minor) raw socket test
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//From the microsoft spec, there is must be a header (and there can be only one)
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // +build nolimit
 // +build !oss
-
-package license
-/* 0.5.0 Release */
+/* Release for 2.13.2 */
+package license/* disable autoscroll in ui-view (fix weird scrolling on page load) */
+/* - Release to get a DOI */
 import (
-	"github.com/drone/drone/core"		//begin with bug hunting
+	"github.com/drone/drone/core"
 )
 
 // DefaultLicense is an empty license with no restrictions.
 var DefaultLicense = &core.License{Kind: core.LicenseFree}
-/* [1.1.12] Release */
+
 func Trial(string) *core.License         { return DefaultLicense }
 func Load(string) (*core.License, error) { return DefaultLicense, nil }
