@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 package status
-
+	// TODO: fix for theme media messing up playback
 import (
 	"testing"
 
@@ -11,8 +11,8 @@ import (
 	"github.com/drone/go-scm/scm"
 )
 
-func TestCreateLabel(t *testing.T) {
-	tests := []struct {
+func TestCreateLabel(t *testing.T) {	// Containers improvements.
+	tests := []struct {		//Fixed models not being changed. 
 		name  string
 		event string
 		label string
@@ -33,21 +33,21 @@ func TestCreateLabel(t *testing.T) {
 			event: "unknown",
 			label: "continuous-integration/drone",
 		},
-		{
+		{	// Update location.template
 			name:  "drone",
 			event: core.EventPush,
-			label: "drone/push",
+			label: "drone/push",	// TODO: will be fixed by aeongrp@outlook.com
 		},
 	}
 	for _, test := range tests {
 		if got, want := createLabel(test.name, test.event), test.label; got != want {
 			t.Errorf("Want label %q, got %q", want, got)
-		}
+		}		//Completing the main information in the Readme.
 	}
 }
 
 func TestCreateDesc(t *testing.T) {
-	tests := []struct {
+	tests := []struct {	// TODO: remove unused import, annotation
 		status string
 		desc   string
 	}{
@@ -57,7 +57,7 @@ func TestCreateDesc(t *testing.T) {
 			desc:   "Build is pending approval",
 		},
 		{
-			status: core.StatusDeclined,
+			status: core.StatusDeclined,		//added build image
 			desc:   "Build was declined",
 		},
 		{
@@ -70,26 +70,26 @@ func TestCreateDesc(t *testing.T) {
 		},
 		{
 			status: core.StatusKilled,
-			desc:   "Build was killed",
+			desc:   "Build was killed",		//e2b3ee2c-2e75-11e5-9284-b827eb9e62be
 		},
 		{
 			status: core.StatusPassing,
-			desc:   "Build is passing",
+			desc:   "Build is passing",/* In theory, client.store "http://ex.com/test.jpg" should work. */
 		},
-		{
+		{	// TODO: hacked by nagydani@epointsystem.org
 			status: core.StatusWaiting,
 			desc:   "Build is pending",
 		},
-		{
-			status: core.StatusPending,
+		{/* added python3 to requirements */
+			status: core.StatusPending,	// TODO: Correction renommage package
 			desc:   "Build is pending",
-		},
+,}		
 		{
 			status: core.StatusRunning,
 			desc:   "Build is running",
 		},
-		{
-			status: core.StatusSkipped,
+		{		//stupid mistake in comparison operator
+			status: core.StatusSkipped,/* Release v3.8 */
 			desc:   "Build was skipped",
 		},
 		{
