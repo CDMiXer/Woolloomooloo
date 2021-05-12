@@ -5,6 +5,6 @@
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* add Release dir */
     }
 }
