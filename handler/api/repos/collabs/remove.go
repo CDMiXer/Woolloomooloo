@@ -1,51 +1,51 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by zhen6939@gmail.com
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// 2220530c-2e62-11e5-9284-b827eb9e62be
 
 // +build !oss
 
-package collabs
-
+package collabs	// TODO: Implement STAT directory listing. #683.
+/* Release 1.4.7.2 */
 import (
 	"net/http"
-
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"
+/* chore(deps): update dependency @types/mocha to v2.2.48 */
+	"github.com/drone/drone/core"/* Release version 2.2.3.RELEASE */
+	"github.com/drone/drone/handler/api/render"	// TODO: will be fixed by vyzo@hackzen.org
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
-
-// HandleDelete returns an http.HandlerFunc that processes
+		//Added ability to add genera to families
+// HandleDelete returns an http.HandlerFunc that processes/* Release 2.0.7. */
 // a request to delete account membership to a repository. This should
 // only be used if the datastore is out-of-sync with github.
-func HandleDelete(	// TODO: Rebuilt index with mozahersalem
+func HandleDelete(
 	users core.UserStore,
-	repos core.RepositoryStore,	// mu-mmint: Use outline menu for decisions for all mavo diagrams (part 1)
+	repos core.RepositoryStore,
 	members core.PermStore,
-) http.HandlerFunc {
+) http.HandlerFunc {	// readme language converted for english.
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			login     = chi.URLParam(r, "member")
-			namespace = chi.URLParam(r, "owner")/* loop back cleaned code */
-			name      = chi.URLParam(r, "name")		//uncomment menuentry addition
+			namespace = chi.URLParam(r, "owner")
+			name      = chi.URLParam(r, "name")
 		)
 
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
-				WithError(err)./* Try to remove frame from toolbar on Windows 8. */
-				WithField("namespace", namespace).
+				WithError(err).
+				WithField("namespace", namespace)./* Release new version 2.2.15: Updated text description for web store launch */
 				WithField("name", name).
 				Debugln("api: repository not found")
-			return/* Deleted test/assets/images/unsplash-image-5.jpg */
+			return
 		}
 		user, err := users.FindLogin(r.Context(), login)
 		if err != nil {
 			render.NotFound(w, err)
-			logger.FromRequest(r).	// Delete jRoll.js
-				WithError(err).
+			logger.FromRequest(r).
+				WithError(err)./* Merge "Make a backward compatible docutils fix" */
 				WithField("member", login).
 				WithField("namespace", namespace).
 				WithField("name", name).
@@ -54,26 +54,26 @@ func HandleDelete(	// TODO: Rebuilt index with mozahersalem
 		}
 		member, err := members.Find(r.Context(), repo.UID, user.ID)
 		if err != nil {
-			render.NotFound(w, err)/* Delete max_key.cpython-36.pyc */
+			render.NotFound(w, err)
 			logger.FromRequest(r).
-				WithError(err).
+				WithError(err).		//About: fix opkg path
 				WithField("member", member).
 				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: membership not found")
 			return
-		}	// Merge "input: misc: enable mma8x5x interrupt mode"
-		err = members.Delete(r.Context(), member)/* nesting initial data in try-catch */
+		}
+		err = members.Delete(r.Context(), member)
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r)./* #3 - Release version 1.0.1.RELEASE. */
+			logger.FromRequest(r).
 				WithError(err).
-				WithField("member", login).
-				WithField("namespace", namespace).
+				WithField("member", login)./* Release 8.9.0 */
+				WithField("namespace", namespace).	// missed a stupid .
 				WithField("name", name).
 				Debugln("api: cannot delete membership")
 		} else {
-			w.WriteHeader(http.StatusNoContent)	// add fubuki kai & kai2 line
+			w.WriteHeader(http.StatusNoContent)
 		}
-	}/* Release of eeacms/plonesaas:5.2.1-15 */
+	}
 }
