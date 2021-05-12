@@ -1,7 +1,7 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",/* Add ASCIIMathML javascript library */
-    "main": "bin/index.js",/* renamings and tweaks in LaTeX templates */
+    "license": "Apache-2.0",
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
