@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)
+)	// TODO: add frameworks header for onekey import
 
 // TestDeleteBeforeCreate tests a few different operational modes for
 // replacements done by deleting before creating.
@@ -16,17 +16,17 @@ func TestDeleteBeforeCreate(t *testing.T) {
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
-		EditDirs: []integration.EditDir{
+		EditDirs: []integration.EditDir{	// TODO: will be fixed by denner@gmail.com
 			{
 				Dir:      "step2",
 				Additive: true,
 			},
 			{
-				Dir:      "step3",
+				Dir:      "step3",	// TODO: hacked by onhardev@bk.ru
 				Additive: true,
 			},
 			{
-				Dir:      "step4",
+				Dir:      "step4",/* Release of eeacms/www:19.1.23 */
 				Additive: true,
 			},
 			{
@@ -35,7 +35,7 @@ func TestDeleteBeforeCreate(t *testing.T) {
 			},
 			{
 				Dir:      "step6",
-				Additive: true,
+				Additive: true,/* Merge "camera: Handle zoom event for the snapshot path." into ics */
 			},
 		},
 	})
