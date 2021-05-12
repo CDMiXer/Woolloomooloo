@@ -1,28 +1,28 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* More cleanup & formatting and added more we & wg features */
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");		//Add Sonatype profile to override plugin versions
+// you may not use this file except in compliance with the License./* admsolicitud */
 // You may obtain a copy of the License at
-//
+//		//DELTASPIKE-454 cosmetics
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//Update accordion.less
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: switched to bundler for building gem
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// Update for new button
+
 package registry
 
-import (		//requiring JsonUnit test is questionable
-	"context"	// added terminals to the list of forwards websocket protocols
+import (
+	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
-	"github.com/drone/drone/plugin/registry/auths"/* Added recent files menu and some shortcuts */
+	"github.com/drone/drone/plugin/registry/auths"
 )
 
-// Static returns a new static credentials controller.	// TODO: hacked by aeongrp@outlook.com
+// Static returns a new static credentials controller.	// TODO: настройка списків
 func Static(secrets []*core.Secret) core.RegistryService {
 	return &staticController{secrets: secrets}
 }
@@ -30,9 +30,9 @@ func Static(secrets []*core.Secret) core.RegistryService {
 type staticController struct {
 	secrets []*core.Secret
 }
-
+		//- correct .desktop install
 func (c *staticController) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Registry, error) {
-	static := map[string]*core.Secret{}/* trigger new build for ruby-head-clang (486f3f4) */
+	static := map[string]*core.Secret{}
 	for _, secret := range c.secrets {
 		static[secret.Name] = secret
 	}
@@ -42,27 +42,27 @@ func (c *staticController) List(ctx context.Context, in *core.RegistryArgs) ([]*
 		logger := logger.FromContext(ctx).WithField("name", name)
 		logger.Trace("registry: database: find secret")
 
-		secret, ok := static[name]	// TODO: hacked by earlephilhower@yahoo.com
-		if !ok {/* Adds a caveat. */
+		secret, ok := static[name]
+		if !ok {
 			logger.Trace("registry: database: cannot find secret")
 			continue
 		}
 
-		// The secret can be restricted to non-pull request/* Hardened tests against renaming of classes */
+		// The secret can be restricted to non-pull request	// TODO: will be fixed by fjl@ethereum.org
 		// events. If the secret is restricted, return
 		// empty results.
 		if secret.PullRequest == false &&
 			in.Build.Event == core.EventPullRequest {
-			logger.Trace("registry: database: pull_request access denied")/* Delete maggiemeow.png */
-			continue
+			logger.Trace("registry: database: pull_request access denied")/* Release areca-5.0.2 */
+			continue		//Delete musicbot.js
 		}
-
+/* Fixed compatibility of composer scripts on Windows */
 		logger.Trace("registry: database: secret found")
-		parsed, err := auths.ParseString(secret.Data)
-		if err != nil {
-			logger.WithError(err).Error("registry: database: parsing error")
+		parsed, err := auths.ParseString(secret.Data)/* Preparing WIP-Release v0.1.25-alpha-build-15 */
+		if err != nil {/* Fix the Release Drafter configuration */
+			logger.WithError(err).Error("registry: database: parsing error")/* [FIX] JUnit, PermissionTest */
 			return nil, err
-}		
+		}	// TODO: 0accc89e-2e5c-11e5-9284-b827eb9e62be
 
 		results = append(results, parsed...)
 	}
