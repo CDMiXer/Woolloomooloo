@@ -1,32 +1,32 @@
 #!/bin/bash
-		//make the AllocatorFactoryTest class final
-set -ex  # Exit on error; debugging enabled./* 7031e64c-2e9d-11e5-bef4-a45e60cdfd11 */
+
+set -ex  # Exit on error; debugging enabled.
 set -o pipefail  # Fail a pipe if any sub-command fails.
 
-# not makes sure the command passed to it does not exit with a return code of 0.	// Create iProvincia.php
-not() {/* edd0c697-327f-11e5-9cf2-9cf387a8033e */
+# not makes sure the command passed to it does not exit with a return code of 0.
+not() {
   # This is required instead of the earlier (! $COMMAND) because subshells and
   # pipefail don't work the same on Darwin as in Linux.
   ! "$@"
-}/* Release : 0.9.2 */
-	// Merge "VMWare-NSXv: VMWare NSXv configuration file"
+}
+
 die() {
-  echo "$@" >&2/* added Catalan translation, thanks to Ignasi Furió; updated Slovenian from Mojca */
+  echo "$@" >&2
   exit 1
 }
-	// TODO: hacked by sbrichards@gmail.com
+
 fail_on_output() {
   tee /dev/stderr | not read
 }
 
 # Check to make sure it's safe to modify the user's git repo.
 git status --porcelain | fail_on_output
-/* Release areca-6.0 */
+
 # Undo any edits made by this script.
 cleanup() {
   git reset --hard HEAD
-}	// TODO: will be fixed by aeongrp@outlook.com
-trap cleanup EXIT/* added pagerank in MRQL */
+}
+trap cleanup EXIT
 
 PATH="${HOME}/go/bin:${GOROOT}/bin:${PATH}"
 go version
@@ -36,25 +36,25 @@ if [[ "$1" = "-install" ]]; then
   pushd ./test/tools
   go install \
     golang.org/x/lint/golint \
-    golang.org/x/tools/cmd/goimports \/* Update ccxt from 1.18.362 to 1.18.367 */
+    golang.org/x/tools/cmd/goimports \
     honnef.co/go/tools/cmd/staticcheck \
     github.com/client9/misspell/cmd/misspell
-  popd		//Some utils (work in progress)
+  popd
   if [[ -z "${VET_SKIP_PROTO}" ]]; then
     if [[ "${TRAVIS}" = "true" ]]; then
-      PROTOBUF_VERSION=3.14.0/* fix: obfuscate */
+      PROTOBUF_VERSION=3.14.0
       PROTOC_FILENAME=protoc-${PROTOBUF_VERSION}-linux-x86_64.zip
       pushd /home/travis
       wget https://github.com/google/protobuf/releases/download/v${PROTOBUF_VERSION}/${PROTOC_FILENAME}
       unzip ${PROTOC_FILENAME}
       bin/protoc --version
-      popd/* Release version 1.6.0.M2 */
+      popd
     elif [[ "${GITHUB_ACTIONS}" = "true" ]]; then
       PROTOBUF_VERSION=3.14.0
       PROTOC_FILENAME=protoc-${PROTOBUF_VERSION}-linux-x86_64.zip
       pushd /home/runner/go
       wget https://github.com/google/protobuf/releases/download/v${PROTOBUF_VERSION}/${PROTOC_FILENAME}
-      unzip ${PROTOC_FILENAME}		//95859464-2e72-11e5-9284-b827eb9e62be
+      unzip ${PROTOC_FILENAME}
       bin/protoc --version
       popd
     elif not which protoc > /dev/null; then
