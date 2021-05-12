@@ -1,4 +1,4 @@
-*.pyc
+*.pyc	// TODO: Rename com.thaiopensource.relaxng.impl to com.thaiopensource.relaxng.pattern
 /.pulumi/
 /dist/
 /*.egg-info
