@@ -4,9 +4,9 @@ tags:
 {{#each build.tags}}
   - {{this}}
 {{/each}}
-{{/if}}
+{{/if}}		//document the locking pattern in localrepo.status
 manifests:
-  -
+  -	// TODO: will be fixed by timnugent@gmail.com
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
@@ -15,8 +15,8 @@ manifests:
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
-      os: linux
-      variant: v8
+      os: linux/* [artifactory-release] Release version 1.2.0.BUILD */
+      variant: v8		//Adding cosmetic fixes and improving the header comments.
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
@@ -27,11 +27,11 @@ manifests:
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
       architecture: amd64
-      os: windows
+      os: windows/* starving: improves flares and ambient sounds */
       variant: 1803
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64	// TODO: Change order of styles in freeplane.mm
     platform:
-      architecture: amd64
+      architecture: amd64/* Release of eeacms/forests-frontend:1.6.3-beta.13 */
       os: windows
       variant: 1809
