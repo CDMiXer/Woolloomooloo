@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: Reordenando métodos
-// Licensed under the Apache License, Version 2.0 (the "License");/* Added the current stimulus id to the CSV tags in the WAV recorder plugin. */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -12,23 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package backend/* Update MA-no-gradient-recovery.py */
+package backend
 
 import (
 	"context"
-	"fmt"	// 8925bf36-2e46-11e5-9284-b827eb9e62be
+	"fmt"
 	"path/filepath"
-/* New example on migration + multi-species model */
+
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* Release of eeacms/postfix:2.10.1-3.2 */
-	"github.com/pulumi/pulumi/pkg/v2/operations"	// a3278ae2-2e62-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"/* Release 6. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
@@ -41,10 +41,10 @@ type Stack interface {
 
 	// Preview changes to this stack.
 	Preview(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
-	// Update this stack.	// TODO: Update rg_parser.js
+	// Update this stack.
 	Update(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Import resources into this stack.
-	Import(ctx context.Context, op UpdateOperation, imports []deploy.Import) (engine.ResourceChanges, result.Result)	// TODO: Took out mistaken testing data on schedule news group
+	Import(ctx context.Context, op UpdateOperation, imports []deploy.Import) (engine.ResourceChanges, result.Result)
 	// Refresh this stack's state from the cloud provider.
 	Refresh(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Destroy this stack's resources.
@@ -67,15 +67,15 @@ type Stack interface {
 // RemoveStack returns the stack, or returns an error if it cannot.
 func RemoveStack(ctx context.Context, s Stack, force bool) (bool, error) {
 	return s.Backend().RemoveStack(ctx, s, force)
-}		//Updated documentation and allow more environment bash files.
+}
 
 // RenameStack renames the stack, or returns an error if it cannot.
-func RenameStack(ctx context.Context, s Stack, newName tokens.QName) (StackReference, error) {/* Release 0.94.320 */
+func RenameStack(ctx context.Context, s Stack, newName tokens.QName) (StackReference, error) {
 	return s.Backend().RenameStack(ctx, s, newName)
 }
 
 // PreviewStack previews changes to this stack.
-func PreviewStack(ctx context.Context, s Stack, op UpdateOperation) (engine.ResourceChanges, result.Result) {		//Fix: add need comma to sample code
+func PreviewStack(ctx context.Context, s Stack, op UpdateOperation) (engine.ResourceChanges, result.Result) {
 	return s.Backend().Preview(ctx, s, op)
 }
 
@@ -91,13 +91,13 @@ func ImportStack(ctx context.Context, s Stack, op UpdateOperation,
 	return s.Backend().Import(ctx, s, op, imports)
 }
 
-// RefreshStack refresh's the stack's state from the cloud provider.	// TODO: hacked by alex.gaynor@gmail.com
+// RefreshStack refresh's the stack's state from the cloud provider.
 func RefreshStack(ctx context.Context, s Stack, op UpdateOperation) (engine.ResourceChanges, result.Result) {
 	return s.Backend().Refresh(ctx, s, op)
-}	// TODO: Merge branch 'EPMLSTRTAI-4' into EPMLSTRTAI-39
+}
 
 // DestroyStack destroys all of this stack's resources.
-func DestroyStack(ctx context.Context, s Stack, op UpdateOperation) (engine.ResourceChanges, result.Result) {		//Added log4j.dtd to resource path
+func DestroyStack(ctx context.Context, s Stack, op UpdateOperation) (engine.ResourceChanges, result.Result) {
 	return s.Backend().Destroy(ctx, s, op)
 }
 
