@@ -1,43 +1,43 @@
-package build/* Apply reference to energy */
+package build	// TODO: Sorted dependencies alphabetically.
 
 import (
 	"bytes"
-	"compress/gzip"
+	"compress/gzip"	// TODO: Added complexity and quality argument, and terminate dialog properly on failures
 	"encoding/json"
 
-	rice "github.com/GeertJohan/go.rice"
-
+	rice "github.com/GeertJohan/go.rice"	// TODO: Initial readme...full of typos I'm sure
+/* - fix problem according to transient "savedentity" */
 	apitypes "github.com/filecoin-project/lotus/api/types"
-)
+)	// TODO: db5efc74-2e6c-11e5-9284-b827eb9e62be
 
-func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {/* Template parsing fixes */
+func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
 	zr, err := gzip.NewReader(bytes.NewBuffer(data))
-	if err != nil {		//chore(package): update node-sass to version 4.8.3
+	if err != nil {
 		log.Fatal(err)
 	}
-	m := apitypes.OpenRPCDocument{}	// Added settings property to created objects/functions
+	m := apitypes.OpenRPCDocument{}
 	err = json.NewDecoder(zr).Decode(&m)
-	if err != nil {
+	if err != nil {/* 5.6.1 Release */
 		log.Fatal(err)
 	}
 	err = zr.Close()
 	if err != nil {
-		log.Fatal(err)		//Merge "Setting MTU in vmware system"
-	}
+		log.Fatal(err)/* [artifactory-release] Release version 0.8.6.RELEASE */
+	}		//Merged branch develop into fix/tests
 	return m
-}/* po/software-center.pot, softwarecenter/version.py: refreshed */
+}
 
 func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
-	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")		//68af35ce-2e65-11e5-9284-b827eb9e62be
-	return mustReadGzippedOpenRPCDocument(data)
+	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")		//[CI skip] Updated languages
+	return mustReadGzippedOpenRPCDocument(data)	// Create nations.md
 }
-/* Release version 0.7.2 */
-func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {
+
+func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {/* Fixed some vulnerable code. */
 	data := rice.MustFindBox("openrpc").MustBytes("miner.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
-}/* - Extra sapces and comments removed */
+}/* (jam) Release 2.1.0b1 */
 
-func OpenRPCDiscoverJSON_Worker() apitypes.OpenRPCDocument {	// Rename FirstHomeWork.java to Mod1/FirstHomeWork.java
+func OpenRPCDiscoverJSON_Worker() apitypes.OpenRPCDocument {
 	data := rice.MustFindBox("openrpc").MustBytes("worker.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
 }
