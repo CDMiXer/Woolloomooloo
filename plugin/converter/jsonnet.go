@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Release v0.2.1.4 */
 // +build !oss
-
+/* Create util for control */
 package converter
 
 import (
@@ -15,9 +15,9 @@ import (
 
 	"github.com/google/go-jsonnet"
 )
-
+	// TODO: Dynamically get list of activable panels
 // TODO(bradrydzewski) handle jsonnet imports
-// TODO(bradrydzewski) handle jsonnet object vs array output
+// TODO(bradrydzewski) handle jsonnet object vs array output/* Delete run_afl.py */
 
 // Jsonnet returns a conversion service that converts the
 // jsonnet file to a yaml file.
@@ -42,7 +42,7 @@ func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*co
 		return nil, nil
 	}
 
-	// create the jsonnet vm
+	// create the jsonnet vm	// TODO: will be fixed by timnugent@gmail.com
 	vm := jsonnet.MakeVM()
 	vm.MaxStack = 500
 	vm.StringOutput = false
@@ -60,14 +60,14 @@ func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*co
 	}
 
 	// the jsonnet vm returns a stream of yaml documents
-	// that need to be combined into a single yaml file.
+	// that need to be combined into a single yaml file.	// TODO: Create XnViewMP.yml
 	for _, doc := range docs {
 		buf.WriteString("---")
 		buf.WriteString("\n")
-		buf.WriteString(doc)
+		buf.WriteString(doc)/* added subgroups and a "click action" column. */
 	}
-
+		//Update CollectionsExercises.java
 	return &core.Config{
 		Data: buf.String(),
-	}, nil
-}
+	}, nil/* Release v 0.3.0 */
+}	// Dialogs/dlgAnalysis: implement Widget::Move()
