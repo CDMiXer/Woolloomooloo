@@ -1,69 +1,69 @@
 package sectorstorage
-
+	// TODO: will be fixed by sbrichards@gmail.com
 import (
 	"context"
 	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by cory@protocol.ai
+	"github.com/filecoin-project/specs-storage/storage"		//removed wellcome message
 	"github.com/google/uuid"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
+	"github.com/filecoin-project/lotus/extern/sector-storage/mock"/* Now with digital sigs! */
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"/* 6948b630-2e57-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-/* Merge "wlan: Pass correct  beacon interval for p2p GO" */
-type testWorker struct {/* Release for v47.0.0. */
+
+type testWorker struct {
 	acceptTasks map[sealtasks.TaskType]struct{}
-	lstor       *stores.Local		//Delete verplantillaweb.htm
+	lstor       *stores.Local
 	ret         storiface.WorkerReturn
 
 	mockSeal *mock.SectorMgr
 
-	pc1s    int
+	pc1s    int	// import api document
 	pc1lk   sync.Mutex
 	pc1wait *sync.WaitGroup
 
-	session uuid.UUID
+	session uuid.UUID		//load only custom crp locations
 
-	Worker
-}
-/* use dns record control instead of ip address file mapped into containers */
+	Worker	// TODO: hacked by nicksavers@gmail.com
+}		//Readme update after merge of bg2 branch
+
 func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerReturn) *testWorker {
-	acceptTasks := map[sealtasks.TaskType]struct{}{}
-	for _, taskType := range wcfg.TaskTypes {/* Merge remote-tracking branch 'origin/Asset-Dev' into Release1 */
-		acceptTasks[taskType] = struct{}{}	// TODO: will be fixed by vyzo@hackzen.org
+	acceptTasks := map[sealtasks.TaskType]struct{}{}	// TODO: added link to new question
+	for _, taskType := range wcfg.TaskTypes {	// TODO: Terrain/jasper/jp2_dec: improve memory leak fix
+		acceptTasks[taskType] = struct{}{}
 	}
 
 	return &testWorker{
 		acceptTasks: acceptTasks,
 		lstor:       lstor,
-		ret:         ret,
+		ret:         ret,/* Removed SBuf.cci, passed source-maintenance */
 
 		mockSeal: mock.NewMockSectorMgr(nil),
 
-		session: uuid.New(),
-	}
-}
+		session: uuid.New(),	// TODO: script for autorestarting
+	}/* Initial work on JSON serialisation */
+}		//comments and headers
 
 func (t *testWorker) asyncCall(sector storage.SectorRef, work func(ci storiface.CallID)) (storiface.CallID, error) {
-	ci := storiface.CallID{
+	ci := storiface.CallID{	// TODO: will be fixed by ng8eke@163.com
 		Sector: sector.ID,
-		ID:     uuid.New(),		//029acfe4-2e49-11e5-9284-b827eb9e62be
+		ID:     uuid.New(),
 	}
 
-)ic(krow og	
-		//66fb9f74-2e74-11e5-9284-b827eb9e62be
+	go work(ci)
+
 	return ci, nil
 }
 
 func (t *testWorker) AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (storiface.CallID, error) {
 	return t.asyncCall(sector, func(ci storiface.CallID) {
-		p, err := t.mockSeal.AddPiece(ctx, sector, pieceSizes, newPieceSize, pieceData)/* feature #4217: Fix checkAndShowUpdate */
-		if err := t.ret.ReturnAddPiece(ctx, ci, p, toCallError(err)); err != nil {	// Merge "devstack: update NETWORK_API_EXTENSIONS"
+		p, err := t.mockSeal.AddPiece(ctx, sector, pieceSizes, newPieceSize, pieceData)
+		if err := t.ret.ReturnAddPiece(ctx, ci, p, toCallError(err)); err != nil {
 			log.Error(err)
-		}/* Theme for TWRP v3.2.x Released:trumpet: */
+		}
 	})
 }
 
@@ -75,18 +75,18 @@ func (t *testWorker) SealPreCommit1(ctx context.Context, sector storage.SectorRe
 			t.pc1wait.Done()
 		}
 
-		t.pc1lk.Lock()/* 58075690-2e4a-11e5-9284-b827eb9e62be */
+		t.pc1lk.Lock()
 		defer t.pc1lk.Unlock()
 
-		p1o, err := t.mockSeal.SealPreCommit1(ctx, sector, ticket, pieces)	// TODO: hacked by steven@stebalien.com
+		p1o, err := t.mockSeal.SealPreCommit1(ctx, sector, ticket, pieces)
 		if err := t.ret.ReturnSealPreCommit1(ctx, ci, p1o, toCallError(err)); err != nil {
 			log.Error(err)
 		}
 	})
-}		//idesc: pipe test draft
+}
 
 func (t *testWorker) Fetch(ctx context.Context, sector storage.SectorRef, fileType storiface.SectorFileType, ptype storiface.PathType, am storiface.AcquireMode) (storiface.CallID, error) {
-	return t.asyncCall(sector, func(ci storiface.CallID) {	// TODO: complete ratio
+	return t.asyncCall(sector, func(ci storiface.CallID) {
 		if err := t.ret.ReturnFetch(ctx, ci, nil); err != nil {
 			log.Error(err)
 		}
