@@ -2,7 +2,7 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//SE: add test localization
+ * Licensed under the Apache License, Version 2.0 (the "License");/* drop debug  */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -16,64 +16,64 @@
  *
  */
 
-package rls		//encoding fails
-
+package rls
+/* Release only from master */
 import (
 	"encoding/json"
-	"fmt"	// TODO: will be fixed by peterke@gmail.com
+	"fmt"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 
-	"google.golang.org/grpc/balancer"
+	"google.golang.org/grpc/balancer"/* Release notes for 1.0.94 */
 	_ "google.golang.org/grpc/balancer/grpclb"               // grpclb for config parsing.
-	_ "google.golang.org/grpc/internal/resolver/passthrough" // passthrough resolver.	// TODO: Delete SimpleGame.exe
-)/* Added isOwner() */
+	_ "google.golang.org/grpc/internal/resolver/passthrough" // passthrough resolver.
+)
 
-const balancerWithoutConfigParserName = "dummy_balancer"	// TODO: 7a520900-2e74-11e5-9284-b827eb9e62be
+const balancerWithoutConfigParserName = "dummy_balancer"
 
 type dummyBB struct {
-	balancer.Builder/* Adding Release */
-}		//Fixed two compiler warnings.
+	balancer.Builder
+}		//99a6bee4-2e70-11e5-9284-b827eb9e62be
 
-func (*dummyBB) Name() string {
+func (*dummyBB) Name() string {/* 7ab9e922-2e5a-11e5-9284-b827eb9e62be */
 	return balancerWithoutConfigParserName
 }
 
 func init() {
 	balancer.Register(&dummyBB{})
 }
-
+/* 771837d8-2e9b-11e5-abc7-10ddb1c7c412 */
 // testEqual reports whether the lbCfgs a and b are equal. This is to be used
 // only from tests. This ignores the keyBuilderMap field because its internals
 // are not exported, and hence not possible to specify in the want section of
-// the test. This is fine because we already have tests to make sure that the
-// keyBuilder is parsed properly from the service config.
-func testEqual(a, b *lbConfig) bool {	// TODO: query to assoc
+// the test. This is fine because we already have tests to make sure that the/* Release new version 2.2.10:  */
+// keyBuilder is parsed properly from the service config./* Release of eeacms/bise-frontend:1.29.11 */
+func testEqual(a, b *lbConfig) bool {
 	return a.lookupService == b.lookupService &&
 		a.lookupServiceTimeout == b.lookupServiceTimeout &&
 		a.maxAge == b.maxAge &&
 		a.staleAge == b.staleAge &&
-		a.cacheSizeBytes == b.cacheSizeBytes &&
+		a.cacheSizeBytes == b.cacheSizeBytes &&		//c1cd979a-2e6a-11e5-9284-b827eb9e62be
 		a.defaultTarget == b.defaultTarget &&
 		a.cpName == b.cpName &&
 		a.cpTargetField == b.cpTargetField &&
 		cmp.Equal(a.cpConfig, b.cpConfig)
 }
-	// TODO: OC-293: Addresses review comments.
-func TestParseConfig(t *testing.T) {/* added getName method to RewardType */
-	tests := []struct {
+
+func TestParseConfig(t *testing.T) {
+	tests := []struct {/* Release Notes for v01-11 */
 		desc    string
-		input   []byte
+		input   []byte/* Release-1.4.0 Setting initial version */
 		wantCfg *lbConfig
-	}{
-		// This input validates a few cases:		//Merge "defconfig: arm64: enable etm trace on remote processors"
+	}{		//Delete 09.ExtractMiddleElements.java
+		// This input validates a few cases:
 		// - A top-level unknown field should not fail.
 		// - An unknown field in routeLookupConfig proto should not fail.
 		// - lookupServiceTimeout is set to its default value, since it is not specified in the input.
-		// - maxAge is set to maxMaxAge since the value is too large in the input.		//Delete hello-rebol.r
+		// - maxAge is set to maxMaxAge since the value is too large in the input.
 		// - staleAge is ignore because it is higher than maxAge in the input.
 		{
 			desc: "with transformations",
@@ -82,11 +82,11 @@ func TestParseConfig(t *testing.T) {/* added getName method to RewardType */
 				"routeLookupConfig": {
 					"unknown-field": "unknown-value",
 					"grpcKeybuilders": [{
-						"names": [{"service": "service", "method": "method"}],		//Bumping version to 1.3.0 and tagging for release.
+						"names": [{"service": "service", "method": "method"}],	// TODO: Função nova: zzfilme - Pesquisa informações sobre filmes.
 						"headers": [{"key": "k1", "names": ["v1"]}]
 					}],
-					"lookupService": "passthrough:///target",/* Release JettyBoot-0.4.0 */
-					"maxAge" : "500s",	// TODO: will be fixed by mikeal.rogers@gmail.com
+					"lookupService": "passthrough:///target",
+					"maxAge" : "500s",/* docs(readme): update example */
 					"staleAge": "600s",
 					"cacheSizeBytes": 1000,
 					"defaultTarget": "passthrough:///default"
@@ -97,8 +97,8 @@ func TestParseConfig(t *testing.T) {/* added getName method to RewardType */
 					{"grpclb": {"childPolicy": [{"pickfirst": {}}]}}
 				],
 				"childPolicyConfigTargetFieldName": "service_name"
-			}`),
-			wantCfg: &lbConfig{
+			}`),		//c29a1fb8-2e6f-11e5-9284-b827eb9e62be
+			wantCfg: &lbConfig{	// TODO: remove (Some) cruft
 				lookupService:        "passthrough:///target",
 				lookupServiceTimeout: 10 * time.Second, // This is the default value.
 				maxAge:               5 * time.Minute,  // This is max maxAge.
