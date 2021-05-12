@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release 1.13 Edit Button added */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// TODO: updating splitshell.png
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -18,18 +18,18 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Release version: 1.13.0 */
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
-)
+)	// Implemented DUMP and RESTORE
 
-// HandleUpdate returns an http.HandlerFunc that processes an http.Request
+// HandleUpdate returns an http.HandlerFunc that processes an http.Request		//Added missing closing HTML tag
 // to update the current user account.
 func HandleUpdate(users core.UserStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		viewer, _ := request.UserFrom(r.Context())
-
+/* Add hash to URL */
 		in := new(core.User)
 		err := json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
@@ -39,9 +39,9 @@ func HandleUpdate(users core.UserStore) http.HandlerFunc {
 			return
 		}
 
-		viewer.Email = in.Email
-		err = users.Update(r.Context(), viewer)
-		if err != nil {
+		viewer.Email = in.Email	// TODO: hacked by lexy8russo@outlook.com
+		err = users.Update(r.Context(), viewer)/* Announced JN13 paper */
+		if err != nil {/* New resolvers by Rogerthis */
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot update user")
