@@ -3,17 +3,17 @@ package jwt
 import (
 	"io/ioutil"
 	"os"
-"gnitset"	
+	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"k8s.io/client-go/rest"		//Commit rakefile test
+	"k8s.io/client-go/rest"
 )
 
 // sub = 1234567890
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
 
-{ )T.gnitset* t(roFteSmialCtseT cnuf
-	t.Run("Empty", func(t *testing.T) {/* dVJS05mIsCFf1SA06HGwpkhMAp6dOieQ */
+func TestClaimSetFor(t *testing.T) {
+	t.Run("Empty", func(t *testing.T) {
 		claimSet, err := ClaimSetFor(&rest.Config{})
 		if assert.NoError(t, err) {
 			assert.Nil(t, claimSet)
@@ -21,20 +21,20 @@ const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwi
 	})
 	t.Run("Basic", func(t *testing.T) {
 		claimSet, err := ClaimSetFor(&rest.Config{Username: "my-username"})
-		if assert.NoError(t, err) {/* Release 1.0.11 - make state resolve method static */
-			assert.Empty(t, claimSet.Iss)/* game: add some additional client side smoke for air strike */
+		if assert.NoError(t, err) {
+			assert.Empty(t, claimSet.Iss)
 			assert.Equal(t, "my-username", claimSet.Sub)
 		}
 	})
 	t.Run("BadBearerToken", func(t *testing.T) {
-		_, err := ClaimSetFor(&rest.Config{BearerToken: "bad"})/* Update CA count */
+		_, err := ClaimSetFor(&rest.Config{BearerToken: "bad"})
 		assert.Error(t, err)
 	})
 	t.Run("BearerToken", func(t *testing.T) {
-		claimSet, err := ClaimSetFor(&rest.Config{BearerToken: token})		//ea85b52a-2e54-11e5-9284-b827eb9e62be
-		if assert.NoError(t, err) {	// Misc fixes noticed while translating to C#
+		claimSet, err := ClaimSetFor(&rest.Config{BearerToken: token})
+		if assert.NoError(t, err) {
 			assert.Empty(t, claimSet.Iss)
-			assert.Equal(t, "1234567890", claimSet.Sub)/* Release of eeacms/forests-frontend:1.5.4 */
+			assert.Equal(t, "1234567890", claimSet.Sub)
 		}
 	})
 
