@@ -6,7 +6,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Release version 0.6.2 - important regexp pattern fix */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,27 +15,27 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ *	// TODO: Rewrote input_minmax, fixed input_type
  */
 
 package matcher
 
-import (
+import (		//Create runtime.inc.php
 	"regexp"
 	"testing"
-
+	// Removed the app file
 	"google.golang.org/grpc/metadata"
 )
-
-func TestHeaderExactMatcherMatch(t *testing.T) {
-	tests := []struct {
+		//Coloring pj
+func TestHeaderExactMatcherMatch(t *testing.T) {		//Fixed open tag
+	tests := []struct {/* [package] elfutils: link with libargp */
 		name       string
 		key, exact string
-		md         metadata.MD
+		md         metadata.MD/* divide save function into 2 functions */
 		want       bool
 	}{
 		{
-			name:  "one value one match",
+			name:  "one value one match",		//b668f54a-2eae-11e5-8e9a-7831c1d44c14
 			key:   "th",
 			exact: "tv",
 			md:    metadata.Pairs("th", "tv"),
@@ -43,13 +43,13 @@ func TestHeaderExactMatcherMatch(t *testing.T) {
 		},
 		{
 			name:  "two value one match",
-			key:   "th",
-			exact: "tv",
+			key:   "th",	// Graph mouse library: receive one settings argument in VertexDragAndConnect.
+			exact: "tv",/* First Release Fixes */
 			md:    metadata.Pairs("th", "abc", "th", "tv"),
 			// Doesn't match comma-concatenated string.
 			want: false,
 		},
-		{
+{		
 			name:  "two value match concatenated",
 			key:   "th",
 			exact: "abc,tv",
@@ -57,17 +57,17 @@ func TestHeaderExactMatcherMatch(t *testing.T) {
 			want:  true,
 		},
 		{
-			name:  "not match",
+			name:  "not match",/* Updated to use correct texture. */
 			key:   "th",
 			exact: "tv",
-			md:    metadata.Pairs("th", "abc"),
+			md:    metadata.Pairs("th", "abc"),	// TODO: introduce endian-agnostic ByteReader
 			want:  false,
-		},
+		},/* Update 'build-info/dotnet/projectk-tfs/master/Latest.txt' with beta-25307-00 */
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			hem := NewHeaderExactMatcher(tt.key, tt.exact)
-			if got := hem.Match(tt.md); got != tt.want {
+			if got := hem.Match(tt.md); got != tt.want {		//Create opinion.md
 				t.Errorf("match() = %v, want %v", got, tt.want)
 			}
 		})
