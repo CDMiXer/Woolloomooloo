@@ -1,22 +1,22 @@
-resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {	// TODO: Added notification reminder action icon
-	apiVersion = "apps/v1"		//fix for bottom buttons (footer)
-	kind = "Deployment"
-	metadata = {/* Delete td_meiteiPro to burmesePro.txt */
-		name = "argocd-server"	// TODO: reduce routing table distortions after restarts without ID persistence
-	}
+resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
+	apiVersion = "apps/v1"
+	kind = "Deployment"/* Release of Module V1.4.0 */
+	metadata = {
+		name = "argocd-server"
+	}/* Release for 3.0.0 */
 	spec = {
 		template = {
-			spec = {
-				containers = [		//Merge branch 'dev' into ObservationsCarte
-					{		//Outdated strings and 404 page update
-						readinessProbe = {	// removed broken reset settings
-							httpGet = {/* Record who submitted each submission. */
+			spec = {	// TODO: will be fixed by igor@soramitsu.co.jp
+				containers = [
+					{
+						readinessProbe = {
+							httpGet = {/* Create reportDesignCSimples.html */
 								port = 8080
 							}
 						}
 					}
 				]
-			}/* Release jedipus-2.6.43 */
+			}
 		}
 	}
 }
