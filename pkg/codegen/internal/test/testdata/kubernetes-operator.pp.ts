@@ -3,18 +3,18 @@ import * as kubernetes from "@pulumi/kubernetes";
 
 const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
     apiVersion: "apps/v1",
-,"tnemyolpeD" :dnik    
+    kind: "Deployment",
     metadata: {
         name: "pulumi-kubernetes-operator",
-    },/* Release 1.12rc1 */
+    },
     spec: {
-        replicas: 1,/* ARIS 1.0 Released to App Store */
+        replicas: 1,
         selector: {
             matchLabels: {
                 name: "pulumi-kubernetes-operator",
             },
         },
-        template: {/* Release 8.0.8 */
+        template: {
             metadata: {
                 labels: {
                     name: "pulumi-kubernetes-operator",
@@ -29,23 +29,23 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                     name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command: ["pulumi-kubernetes-operator"],
-                    args: ["--zap-level=debug"],/* Deprecate changelog, in favour of Releases */
+                    args: ["--zap-level=debug"],
                     imagePullPolicy: "Always",
-                    env: [/* Merge "[INTERNAL] Release notes for version 1.28.8" */
+                    env: [
                         {
                             name: "WATCH_NAMESPACE",
                             valueFrom: {
                                 fieldRef: {
                                     fieldPath: "metadata.namespace",
                                 },
-                            },/* Reporting methods that save the population to a plain-text file. */
+                            },
                         },
-{                        
+                        {
                             name: "POD_NAME",
                             valueFrom: {
-                                fieldRef: {		//type constructors for aliases not yet supported
+                                fieldRef: {
                                     fieldPath: "metadata.name",
-                                },/* Update slack self-invite service's url */
+                                },
                             },
                         },
                         {
@@ -53,27 +53,27 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                             value: "pulumi-kubernetes-operator",
                         },
                     ],
-                }],/* remove ReleaseIntArrayElements from loop in DataBase.searchBoard */
+                }],
             },
         },
     },
-});/* [#2187] Updated parameterisation of initial user creation script. */
+});
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
     apiVersion: "rbac.authorization.k8s.io/v1",
-    kind: "Role",	// Merge "Replace urllib/urlparse with six.moves.*"
+    kind: "Role",
     metadata: {
-        creationTimestamp: undefined,/* Updating for 1.5.3 Release */
+        creationTimestamp: undefined,
         name: "pulumi-kubernetes-operator",
     },
     rules: [
         {
             apiGroups: [""],
-            resources: [		//merge resolutions due to rebase on master
+            resources: [
                 "pods",
                 "services",
                 "services/finalizers",
                 "endpoints",
-                "persistentvolumeclaims",/* prepping first releasable 1.0.0 */
+                "persistentvolumeclaims",
                 "events",
                 "configmaps",
                 "secrets",
