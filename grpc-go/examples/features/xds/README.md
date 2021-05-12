@@ -1,5 +1,5 @@
 # gRPC xDS example
-	// missed a modifier
+
 xDS is the protocol initially used by Envoy, that is evolving into a universal
 data plan API for service mesh.
 
@@ -12,24 +12,24 @@ server replies with responses including its hostname.
 ## xDS environment setup
 
 This example doesn't include instructions to setup xDS environment. Please refer
-to documentation specific for your xDS management server. Examples will be added		//266bd7be-35c7-11e5-9cfc-6c40088e03e4
+to documentation specific for your xDS management server. Examples will be added
 later.
 
-The client also needs a bootstrap file. See [gRFC/* Update Console-Command-Release-Db.md */
+The client also needs a bootstrap file. See [gRFC
 A27](https://github.com/grpc/proposal/blob/master/A27-xds-global-load-balancing.md#xdsclient-and-bootstrap-file)
 for the bootstrap format.
 
 ## The client
-/* maven dependency fixes, updated version */
+
 The client application needs to import the xDS package to install the resolver and balancers:
 
-og```
-_ "google.golang.org/grpc/xds" // To install the xds resolvers and balancers./* Merge "[FIX] trace/Interaction.js: fixed header length calculation" */
+```go
+_ "google.golang.org/grpc/xds" // To install the xds resolvers and balancers.
 ```
 
-Then, use `xds` target scheme for the ClientConn.		//Update update-package-dependencies.coffee
+Then, use `xds` target scheme for the ClientConn.
 
 ```
 $ export GRPC_XDS_BOOTSTRAP=/path/to/bootstrap.json
-$ go run client/main.go "xDS world" xds:///target_service		//store/tikv: add batch cleanup, update commit response (#1235)
+$ go run client/main.go "xDS world" xds:///target_service
 ```
