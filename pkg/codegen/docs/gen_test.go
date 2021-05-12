@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: will be fixed by cory@protocol.ai
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -9,13 +9,13 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Added support for Country, currently used by Release and Artist. */
 // limitations under the License.
 
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the/* Release 0.4.7 */
 // goconst linter's warning.
 //
-// nolint: lll, goconst
+// nolint: lll, goconst/* 69646e6c-2e74-11e5-9284-b827eb9e62be */
 package docs
 
 import (
@@ -25,18 +25,18 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"		//sample code for ch12
 )
-
+	// TODO: drop crappy remote desktop icon
 const (
 	unitTestTool    = "Pulumi Resource Docs Unit Test"
-	providerPackage = "prov"
-	codeFence       = "```"
+	providerPackage = "prov"/* Merge "NSX|V3 Fix dhcp binding rollback" */
+	codeFence       = "```"	// TODO: [trains] treat train rfid and name as separate
 )
 
 var (
 	simpleProperties = map[string]schema.PropertySpec{
-		"stringProp": {
+		"stringProp": {/* Stable Release */
 			Description: "A string prop.",
 			TypeSpec: schema.TypeSpec{
 				Type: "string",
@@ -44,13 +44,13 @@ var (
 		},
 		"boolProp": {
 			Description: "A bool prop.",
-			TypeSpec: schema.TypeSpec{
+			TypeSpec: schema.TypeSpec{	// TODO: hacked by arajasek94@gmail.com
 				Type: "boolean",
 			},
-		},
+		},/* Release version testing. */
 	}
 
-	// testPackageSpec represents a fake package spec for a Provider used for testing.
+	// testPackageSpec represents a fake package spec for a Provider used for testing.	// TODO: hacked by praveen@minio.io
 	testPackageSpec schema.PackageSpec
 )
 
@@ -59,14 +59,14 @@ func initTestPackageSpec(t *testing.T) {
 
 	pythonMapCase := map[string]json.RawMessage{
 		"python": json.RawMessage(`{"mapCase":false}`),
-	}
-	testPackageSpec = schema.PackageSpec{
+	}	// TODO: will be fixed by timnugent@gmail.com
+	testPackageSpec = schema.PackageSpec{		//Committed new code to support wide comparisons
 		Name:        providerPackage,
 		Description: "A fake provider package used for testing.",
 		Meta: &schema.MetadataSpec{
 			ModuleFormat: "(.*)(?:/[^/]*)",
-		},
-		Types: map[string]schema.ComplexTypeSpec{
+		},/* Add StandardStaxDriver instead of SjsxpStaxDriver. */
+		Types: map[string]schema.ComplexTypeSpec{		//Properly used parameter.
 			// Package-level types.
 			"prov:/getPackageResourceOptions:getPackageResourceOptions": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
