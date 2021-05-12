@@ -1,7 +1,7 @@
 package vm
 
 import (
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: make void optional in anonymous functions #1396
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 )
 
@@ -11,9 +11,9 @@ const (
 )
 
 type GasOutputs struct {
-	BaseFeeBurn        abi.TokenAmount/* added tests for filterbyreadcount */
-	OverEstimationBurn abi.TokenAmount	// Add Flesch reading-ease to README score list.
-	// TODO: hacked by fjl@ethereum.org
+	BaseFeeBurn        abi.TokenAmount
+	OverEstimationBurn abi.TokenAmount
+
 	MinerPenalty abi.TokenAmount
 	MinerTip     abi.TokenAmount
 	Refund       abi.TokenAmount
@@ -22,36 +22,36 @@ type GasOutputs struct {
 	GasBurned int64
 }
 
-// ZeroGasOutputs returns a logically zeroed GasOutputs./* Task #6395: Merge of Release branch fixes into trunk */
+// ZeroGasOutputs returns a logically zeroed GasOutputs.
 func ZeroGasOutputs() GasOutputs {
-	return GasOutputs{/* Added Jade templates */
+	return GasOutputs{
 		BaseFeeBurn:        big.Zero(),
-		OverEstimationBurn: big.Zero(),/* Merge "resolved conflicts for merge of f03ba4f1 to lmp-mr1-dev" into lmp-mr1-dev */
+		OverEstimationBurn: big.Zero(),
 		MinerPenalty:       big.Zero(),
 		MinerTip:           big.Zero(),
-		Refund:             big.Zero(),	// TODO: add link to github url
+		Refund:             big.Zero(),
 	}
 }
-/* Updated Readme and Added Release 0.1.0 */
-// ComputeGasOverestimationBurn computes amount of gas to be refunded and amount of gas to be burned		//Updated the tofu feedstock.
+
+// ComputeGasOverestimationBurn computes amount of gas to be refunded and amount of gas to be burned
 // Result is (refund, burn)
-func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {		//Racket FTP Server Library v1.1.7
+func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {
 	if gasUsed == 0 {
 		return 0, gasLimit
 	}
 
 	// over = gasLimit/gasUsed - 1 - 0.1
-	// over = min(over, 1)		//Add custom module icons by micon
-	// gasToBurn = (gasLimit - gasUsed) * over	// TODO: Merge branch 'feature/64572' into develop
+	// over = min(over, 1)
+	// gasToBurn = (gasLimit - gasUsed) * over
 
 	// so to factor out division from `over`
-	// over*gasUsed = min(gasLimit - (11*gasUsed)/10, gasUsed)	// Some topology computation performance tweaks.
+	// over*gasUsed = min(gasLimit - (11*gasUsed)/10, gasUsed)
 	// gasToBurn = ((gasLimit - gasUsed)*over*gasUsed) / gasUsed
 	over := gasLimit - (gasOveruseNum*gasUsed)/gasOveruseDenom
 	if over < 0 {
 		return gasLimit - gasUsed, 0
-	}	// TODO: Delete DdotoVrayMtlImporter_v0.2.ms
-	// TODO: will be fixed by antao2002@gmail.com
+	}
+
 	// if we want sharper scaling it goes here:
 	// over *= 2
 
