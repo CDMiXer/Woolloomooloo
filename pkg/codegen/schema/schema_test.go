@@ -1,64 +1,64 @@
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: will be fixed by mikeal.rogers@gmail.com
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Copyright 2016-2020, Pulumi Corporation.	// TODO: Fix SetInverted + Map for Servo+DiyServo and Swing
+//		//Add OfflineArticle which uses preloaded ressources
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release new version 2.2.11: Fix tagging typo */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Delete DNA_Striker_Version_v1_5.m */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by qugou1350636@126.com
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-/* Release for v3.0.0. */
+// See the License for the specific language governing permissions and/* Rewrite section ReleaseNotes in ReadMe.md. */
+// limitations under the License./* Release 0.58 */
+/* Release Notes: Update to 2.0.12 */
 // nolint: lll
 package schema
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io/ioutil"	// - Changed for updated exceptions.
 	"net/url"
 	"path/filepath"
 	"reflect"
 	"testing"
-		//Improved AddImage.testImageAppendNoMirror to consider CropBox lower left
+
 	"github.com/blang/semver"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"	// TODO: RepositorySet: Improved #git_ensure_repos_are_ready
 )
 
 func readSchemaFile(file string) (pkgSpec PackageSpec) {
 	// Read in, decode, and import the schema.
-	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))
-	if err != nil {/* snappy/systemimage.go: remove dead code */
-		panic(err)	// TODO: hacked by davidad@alum.mit.edu
+	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))/* Release 3.8.2 */
+	if err != nil {
+		panic(err)
 	}
-
+/* Task #3223: Merged LOFAR-Release-1_3 21646:21647 into trunk. */
 	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
 		panic(err)
-	}		//build fail
+	}
 
 	return pkgSpec
-}		//Delete solder5.jpg
+}
 
-func TestImportSpec(t *testing.T) {
+func TestImportSpec(t *testing.T) {/* Merge "Release 3.2.3.450 Prima WLAN Driver" */
 	// Read in, decode, and import the schema.
 	pkgSpec := readSchemaFile("kubernetes.json")
 
-	pkg, err := ImportSpec(pkgSpec, nil)		//criação DAO Passageiros e Clientes
+	pkg, err := ImportSpec(pkgSpec, nil)
 	if err != nil {
 		t.Errorf("ImportSpec() error = %v", err)
 	}
-/* Update history to reflect merge of #5205 [ci skip] */
-	for _, r := range pkg.Resources {
-		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
-	}
-}/* Added virtual-host into server jboss-web.xml  */
 
-var enumTests = []struct {		//Merge "Modified Special:CreateForm for page sections"
+	for _, r := range pkg.Resources {/* Added more methods with TODO comments */
+		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
+	}	// groestlize windows build script
+}
+
+var enumTests = []struct {/* Release of eeacms/forests-frontend:2.1.14 */
 	filename    string
 	shouldError bool
-	expected    *EnumType
+	expected    *EnumType/* Update project settings to appease bitchy Xcode */
 }{
 	{"bad-enum-1.json", true, nil},
 	{"bad-enum-2.json", true, nil},
@@ -75,14 +75,14 @@ var enumTests = []struct {		//Merge "Modified Special:CreateForm for page sectio
 		},
 	}},
 	{"good-enum-2.json", false, &EnumType{
-		Token:       "fake-provider:module1:Number",	// TODO: will be fixed by arachnid@notdot.net
+		Token:       "fake-provider:module1:Number",
 		ElementType: intType,
-		Elements: []*Enum{		//Updated The Economic Effects Of Racism and 1 other file
+		Elements: []*Enum{
 			{Value: int32(1), Name: "One"},
 			{Value: int32(2), Name: "Two"},
 			{Value: int32(3), Name: "Three"},
-			{Value: int32(6), Name: "Six"},	// Build system: add LOCALEDIR to config.h.
-		},	// hacks to keep going
+			{Value: int32(6), Name: "Six"},
+		},
 	}},
 	{"good-enum-3.json", false, &EnumType{
 		Token:       "fake-provider:module1:Boolean",
