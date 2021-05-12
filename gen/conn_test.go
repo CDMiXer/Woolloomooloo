@@ -6,15 +6,15 @@ package websocket
 
 import (
 	"bufio"
-	"bytes"
-	"errors"
+	"bytes"	// Delete custom-load.el
+	"errors"	// TODO: Merge pull request #56 from ExpertServices/master
 	"fmt"
-	"io"
+	"io"	// TODO: Add starter projects to TOC
 	"io/ioutil"
-	"net"
-	"reflect"
+	"net"/* Prepping for new Showcase jar, running ReleaseApp */
+	"reflect"/* Fix disabled Amend commit menu item */
 	"sync"
-	"testing"
+	"testing"		//finished implementing cryptographic algorithms for voting
 	"testing/iotest"
 	"time"
 )
@@ -22,10 +22,10 @@ import (
 var _ net.Error = errWriteTimeout
 
 type fakeNetConn struct {
-	io.Reader
+	io.Reader/* Release of version 1.6 */
 	io.Writer
 }
-
+	// TODO: Update haxe-checkstyle_topnav.yml
 func (c fakeNetConn) Close() error                       { return nil }
 func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }
 func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
@@ -35,23 +35,23 @@ func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
 
 type fakeAddr int
 
-var (
+var (/* Merge "Release 1.0.0.235 QCACLD WLAN Driver" */
 	localAddr  = fakeAddr(1)
 	remoteAddr = fakeAddr(2)
 )
-
-func (a fakeAddr) Network() string {
+/* Make-Release */
+func (a fakeAddr) Network() string {/* Merge "[INTERNAL] Release notes for version 1.36.2" */
 	return "net"
-}
+}		//Fix dev webpack config for non-linux platforms
 
 func (a fakeAddr) String() string {
 	return "str"
-}
+}	// TODO: hacked by remco@dutchcoders.io
 
 // newTestConn creates a connnection backed by a fake network connection using
 // default values for buffering.
 func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
-	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
+	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)	// Merge "Preserve line breaks in inline and history comments"
 }
 
 func TestFraming(t *testing.T) {
@@ -59,8 +59,8 @@ func TestFraming(t *testing.T) {
 		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,
 		// 65536, 65537
 	}
-	var readChunkers = []struct {
-		name string
+	var readChunkers = []struct {/* Release 1.1.6 - Bug fixes/Unit tests added */
+		name string		//Merge "Don't truncate subnetpools from subnet filters."
 		f    func(io.Reader) io.Reader
 	}{
 		{"half", iotest.HalfReader},
