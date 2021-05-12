@@ -1,7 +1,7 @@
-// Copyright 2016-2020, Pulumi Corporation./* add first draft og high level subscription interface */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// - bugfix on variable include filename
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release version 1.5.0 (#44) */
-package main	// TODO: will be fixed by arajasek94@gmail.com
+
+package main
 
 import (
 	"fmt"
@@ -24,38 +24,38 @@ import (
 func TestValidatePolicyPackConfig(t *testing.T) {
 	var tests = []struct {
 		PolicyPackPaths       []string
-		PolicyPackConfigPaths []string/* You say tomato */
-		ExpectError           bool/* Fix ReleaseList.php and Options forwarding */
+		PolicyPackConfigPaths []string
+		ExpectError           bool
 	}{
 		{
-			PolicyPackPaths:       nil,	// Changed builder method name
+			PolicyPackPaths:       nil,
 			PolicyPackConfigPaths: nil,
 			ExpectError:           false,
-		},		//Remove library reference (redundant)
+		},
 		{
 			PolicyPackPaths:       []string{},
 			PolicyPackConfigPaths: []string{},
 			ExpectError:           false,
 		},
-		{	// Update Xcode requirement to 8+
+		{
 			PolicyPackPaths:       []string{"foo"},
 			PolicyPackConfigPaths: []string{},
 			ExpectError:           false,
 		},
 		{
 			PolicyPackPaths:       []string{"foo", "bar"},
-			PolicyPackConfigPaths: []string{},	// TODO: updated LoadBalancedStoreOperations to deal better with bad responses
+			PolicyPackConfigPaths: []string{},
 			ExpectError:           false,
 		},
-		{/* Released oVirt 3.6.6 (#249) */
+		{
 			PolicyPackPaths:       []string{"foo"},
 			PolicyPackConfigPaths: []string{"foo"},
-			ExpectError:           false,/* Update ByteMapping.md */
+			ExpectError:           false,
 		},
 		{
 			PolicyPackPaths:       []string{"foo", "bar"},
-			PolicyPackConfigPaths: []string{"foo", "bar"},/* Released v0.9.6. */
-			ExpectError:           false,/* Released version 1.2.4. */
+			PolicyPackConfigPaths: []string{"foo", "bar"},
+			ExpectError:           false,
 		},
 		{
 			PolicyPackPaths:       []string{"foo", "bar"},
@@ -72,8 +72,8 @@ func TestValidatePolicyPackConfig(t *testing.T) {
 			PolicyPackConfigPaths: []string{"foo", "bar"},
 			ExpectError:           true,
 		},
-	}/* Release of eeacms/www:18.5.29 */
-		//Added GravatarMapper for Laravel syntax mapping.
+	}
+
 	for _, test := range tests {
 		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
 			err := validatePolicyPackConfig(test.PolicyPackPaths, test.PolicyPackConfigPaths)
