@@ -4,11 +4,11 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "typescript": "^2.5.3"
-  },
+  },	// TODO: Added links to diagram embedded diagram links
   "peerDependencies": {
-    "pulumi": "latest"/* PDB no longer gets generated when compiling OSOM Incident Source Release */
+    "pulumi": "latest"
   },
-  "dependencies": {
+  "dependencies": {	// Towards logical operators.
     "@types/node": "^8.0.0"
   }
-}
+}	// add for tags
