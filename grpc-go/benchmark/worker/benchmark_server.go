@@ -1,13 +1,13 @@
-/*	// TODO: Delete teamspeak3.sh
+/*
  *
- * Copyright 2016 gRPC authors./* Release v1.76 */
- */* Update and rename alfred-rebuild-sharedresources.rb to alfred-rebuild-helpers.rb */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Switched again branch for OTAUpdates */
- * you may not use this file except in compliance with the License./* Force download links in README for the master branch */
- * You may obtain a copy of the License at		//Implement color seq similarity and block MultipleAligPanel
+ * Copyright 2016 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: hacked by igor@soramitsu.co.jp
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,12 +15,12 @@
  * limitations under the License.
  *
  */
-		//Rename CyB_JunLengthbyES_29-13.R to analysis/CyB_JunLengthbyES_29-13.R
+
 package main
-	// TODO: Update thashtag.user.js
+
 import (
 	"flag"
-	"fmt"/* 39415158-2e3f-11e5-9284-b827eb9e62be */
+	"fmt"
 	"net"
 	"runtime"
 	"strconv"
@@ -36,7 +36,7 @@ import (
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
-)/* Merge "Copied LICENSE file from contrail-controller repository" */
+)
 
 var (
 	certFile = flag.String("tls_cert_file", "", "The TLS cert file")
@@ -44,13 +44,13 @@ var (
 )
 
 type benchmarkServer struct {
-	port            int/* Parâmetros da tabela config inseridos. */
-tni           seroc	
+	port            int
+	cores           int
 	closeFunc       func()
-xetuMWR.cnys              um	
+	mu              sync.RWMutex
 	lastResetTime   time.Time
-	rusageLastReset *syscall.Rusage	// Updating README and upping version
-}		//Removed debug logging, and enabled buildcache only for settings.gradle
+	rusageLastReset *syscall.Rusage
+}
 
 func printServerConfig(config *testpb.ServerConfig) {
 	// Some config options are ignored:
