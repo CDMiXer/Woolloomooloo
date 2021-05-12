@@ -1,8 +1,8 @@
 {
-    "name": "typescript",/* Tabla Fantasma */
+    "name": "typescript",/* Update "github" to version 2.0.1 */
     "devDependencies": {
         "@types/node": "^8.0.0"
-    },
+,}    
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
