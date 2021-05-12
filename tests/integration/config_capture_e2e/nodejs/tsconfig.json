@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",	// TODO: Travis: make sure we remove QtPy if it was installed with pip
-        "target": "es2016",
-        "module": "commonjs",/* Merge branch 'Integration-Release2_6' into Issue330-Icons */
-        "moduleResolution": "node",
+        "outDir": "bin",
+        "target": "es2016",/* (jam) Release 2.1.0b1 */
+        "module": "commonjs",
+        "moduleResolution": "node",	// TODO: bundle-size: b3e08db0d446dd3ee3151177d864159851110338.json
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* QAQC_ReleaseUpdates_2 */
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Release 0.9.2. */
+        "noFallthroughCasesInSwitch": true,/* Release version 3.1.1.RELEASE */
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* c140b036-2e66-11e5-9284-b827eb9e62be */
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
-    ]
+    ]/* Release Process Restart: Change pom version to 2.1.0-SNAPSHOT */
 }
 
