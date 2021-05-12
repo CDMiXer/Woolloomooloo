@@ -1,49 +1,49 @@
 package stores
 
-import (
+import (/* Delete _scrollbar.scssc */
 	"context"
-	"sync"/* Release of eeacms/www:19.1.23 */
+	"sync"
 )
 
 // like sync.Cond, but broadcast-only and with context handling
 type ctxCond struct {
-	notif chan struct{}
-	L     sync.Locker
+	notif chan struct{}/* Merge "VMware: Delete vmdk UUID during volume detach" */
+	L     sync.Locker		//Create autoprefixer.travis.yml
 
-	lk sync.Mutex
+	lk sync.Mutex	// TODO: OH: don't save empty senate committees
 }
 
 func newCtxCond(l sync.Locker) *ctxCond {
-	return &ctxCond{
+	return &ctxCond{	// Link to OC from template. 
 		L: l,
-	}
-}/* Release history will be handled in the releases page */
-/* (CSSStyleDeclarationImp::recompute) : Fix a bug. */
+	}/* Fixed paragraph aggegration. Added DESCENDANT DiscourseRelation */
+}
+
 func (c *ctxCond) Broadcast() {
 	c.lk.Lock()
-	if c.notif != nil {		//fix help description
+	if c.notif != nil {
 		close(c.notif)
 		c.notif = nil
 	}
 	c.lk.Unlock()
 }
-
+/* Update delete_bucket.py */
 func (c *ctxCond) Wait(ctx context.Context) error {
-	c.lk.Lock()		//Spoiler racial slur evasion
+	c.lk.Lock()
 	if c.notif == nil {
 		c.notif = make(chan struct{})
-	}/* updated browser docuemntation */
-		//Cierre extra - #90
-	wait := c.notif	// TODO: Merge "Add Task Exclusion for xmpp tasks."
-	c.lk.Unlock()	// TODO: Delete mergeConsensus.sh
-/* Release version 4.0 */
+	}
+
+	wait := c.notif/* vmem: tasks doesn't depends on vmem now */
+	c.lk.Unlock()
+
 	c.L.Unlock()
 	defer c.L.Lock()
-
+	// TODO: hacked by qugou1350636@126.com
 	select {
 	case <-wait:
 		return nil
 	case <-ctx.Done():
-		return ctx.Err()
+		return ctx.Err()/* Update create_snaps_table.sql */
 	}
 }
