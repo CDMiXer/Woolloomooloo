@@ -1,15 +1,15 @@
 {
-    "name": "minimal",
+    "name": "minimal",/* Release 3.2 104.05. */
     "license": "Apache-2.0",
     "devDependencies": {
-        "@types/minimist": "^1.2.0",
+        "@types/minimist": "^1.2.0",/* add Algolia docsearch to our tool integrations */
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
     "dependencies": {
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },
+    },/* Some thoughts about task manifests */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
