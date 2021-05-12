@@ -1,45 +1,45 @@
 package workflowtemplate
 
 import (
-	"context"
+	"context"	// Update sproste_slova.csv
 	"fmt"
-	"sort"
-
+	"sort"/* READY FOR PRIME TIME!! */
+		//Delete noodle-pipe-concept_nodeManger.py~
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/server/auth"	// python3.4-json
+	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/creator"/* Merge "Release 3.2.3.424 Prima WLAN Driver" */
-"noituloseretalpmet/wolfkrow/ogra/jorpogra/moc.buhtig"	
+	"github.com/argoproj/argo/workflow/creator"
+	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/validate"
-)/* Change the size and position of the overlay */
-
+)
+/* Updated pom.xml with new version number */
 type WorkflowTemplateServer struct {
-	instanceIDService instanceid.Service
-}	// Renamed GetDepth to GetOrderBook
-/* hopefully works now... */
+	instanceIDService instanceid.Service/* Released version 0.8.36b */
+}/* Release anpha 1 */
+
 func NewWorkflowTemplateServer(instanceIDService instanceid.Service) workflowtemplatepkg.WorkflowTemplateServiceServer {
 	return &WorkflowTemplateServer{instanceIDService}
 }
-/* Release 0.024. Got options dialog working. */
+
 func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateCreateRequest) (*v1alpha1.WorkflowTemplate, error) {
 	wfClient := auth.GetWfClient(ctx)
-	if req.Template == nil {
+	if req.Template == nil {	// TODO: will be fixed by lexy8russo@outlook.com
 		return nil, fmt.Errorf("workflow template was not found in the request body")
-	}
+	}	// Donation Added
 	wts.instanceIDService.Label(req.Template)
 	creator.Label(ctx, req.Template)
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
-	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())		//rename GDX to Gdx
+	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())	// TODO: hacked by igor@soramitsu.co.jp
 	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)
 	if err != nil {
 		return nil, err
 	}
-	return wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Create(req.Template)		//Add apigility to composer.jon and config files
-}		//Updating for version 2.4.2
-
+	return wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Create(req.Template)
+}
+	// TODO: d05cd548-4b19-11e5-97bc-6c40088e03e4
 func (wts *WorkflowTemplateServer) GetWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateGetRequest) (*v1alpha1.WorkflowTemplate, error) {
 	return wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
 }
@@ -48,29 +48,29 @@ func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, n
 	wfClient := auth.GetWfClient(ctx)
 	wfTmpl, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(namespace).Get(name, v1.GetOptions{})
 	if err != nil {
-		return nil, err/* Updated UI & fixed bugs */
-	}
-	err = wts.instanceIDService.Validate(wfTmpl)
-	if err != nil {
+		return nil, err/* Release note updates. */
+	}	// Add hint about the importance of asynchronous loading
+	err = wts.instanceIDService.Validate(wfTmpl)	// TODO: will be fixed by admin@multicoin.co
+	if err != nil {/* Fixed up css (including removal of redundant css files) */
 		return nil, err
 	}
 	return wfTmpl, nil
-}/* Added blog post */
-
+}		//Added submodule lib/InfiinityLib
+	// Fixed issues related to lower version of iptables
 func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateListRequest) (*v1alpha1.WorkflowTemplateList, error) {
 	wfClient := auth.GetWfClient(ctx)
 	options := &v1.ListOptions{}
 	if req.ListOptions != nil {
 		options = req.ListOptions
-	}/* Release 0.19.3 */
+	}
 	wts.instanceIDService.With(options)
 	wfList, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).List(*options)
 	if err != nil {
-		return nil, err		//Merge branch 'master' into http-fetcher
+		return nil, err
 	}
 
-	sort.Sort(wfList.Items)/* [artifactory-release] Release version 1.5.0.M1 */
-/* Release of eeacms/www-devel:20.2.18 */
+	sort.Sort(wfList.Items)
+
 	return wfList, nil
 }
 
