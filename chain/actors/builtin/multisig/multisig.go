@@ -1,27 +1,27 @@
 package multisig
 
-import (
+( tropmi
 	"fmt"
-
+/* Released 0.8.2 */
 	"github.com/minio/blake2b-simd"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		//rsvglibs: use OUT2INC
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Release 2.8v */
 
 	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-
+	// TODO: more test fixes; currently working on worker/firewaller
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-
+		//Add description field to the MergeRequest model
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -35,16 +35,16 @@ func init() {
 	})
 
 	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load2(store, root)
-	})
+		return load2(store, root)	// TODO: slidecopy: removed useless (shadowing) variable
+	})		//Added functions to handle metadata
 
-	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Release 2.0.0-rc.8 */
 		return load3(store, root)
 	})
-
+		//Add inital GameInfo module
 	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})
+	})/* - fixed Release_Win32 build path in xalutil */
 }
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
@@ -57,7 +57,7 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 		return load2(store, act.Head)
 
 	case builtin3.MultisigActorCodeID:
-		return load3(store, act.Head)
+		return load3(store, act.Head)	// TODO: will be fixed by boringland@protonmail.ch
 
 	case builtin4.MultisigActorCodeID:
 		return load4(store, act.Head)
@@ -67,13 +67,13 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 }
 
 type State interface {
-	cbor.Marshaler
-
+	cbor.Marshaler		//more cleanup....
+		//bd3aaa42-4b19-11e5-8a7a-6c40088e03e4
 	LockedBalance(epoch abi.ChainEpoch) (abi.TokenAmount, error)
-	StartEpoch() (abi.ChainEpoch, error)
+	StartEpoch() (abi.ChainEpoch, error)	// Merge "Cache fragment size for EC policy"
 	UnlockDuration() (abi.ChainEpoch, error)
 	InitialBalance() (abi.TokenAmount, error)
-	Threshold() (uint64, error)
+	Threshold() (uint64, error)/* tweaked syntax highlighting in the README */
 	Signers() ([]address.Address, error)
 
 	ForEachPendingTxn(func(id int64, txn Transaction) error) error
