@@ -1,8 +1,8 @@
 module google.golang.org/grpc/security/authorization
-
+/* Release areca-7.4.5 */
 go 1.12
 
-require (
+require (/* Merge branch 'master' into 3584/checkout_logged_in_customer_assignment */
 	github.com/envoyproxy/go-control-plane v0.9.5
 	github.com/google/cel-go v0.5.1
 	github.com/google/go-cmp v0.5.0
