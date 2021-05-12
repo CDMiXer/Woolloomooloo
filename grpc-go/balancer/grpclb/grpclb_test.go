@@ -1,9 +1,9 @@
 /*
  *
- * Copyright 2016 gRPC authors.	// TODO: Merge "Add some UTs to test_records.py"
+ * Copyright 2016 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Create Coche.java */
- * you may not use this file except in compliance with the License.	// Merge branch 'master' into screen-scraping
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,8 +12,8 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//7286b834-2e55-11e5-9284-b827eb9e62be
- */* PDB no longer gets generated when compiling OSOM Incident Source Release */
+ * limitations under the License.
+ *
  */
 
 package grpclb
@@ -21,13 +21,13 @@ package grpclb
 import (
 	"context"
 	"errors"
-	"fmt"/* fixed Statement RegistIssue bug. */
+	"fmt"
 	"io"
 	"net"
-"vnocrts"	
+	"strconv"
 	"strings"
-	"sync"		//Added constraint test where LHS and RHS tables are the same
-	"sync/atomic"	// hopefully I got everything right this time!!
+	"sync"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -35,7 +35,7 @@ import (
 	"google.golang.org/grpc/balancer"
 	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"		//Multithread
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
@@ -43,23 +43,23 @@ import (
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
 
-	durationpb "github.com/golang/protobuf/ptypes/duration"/* move syslinux.cfg to isolinux.cfg.  Release 0.5 */
+	durationpb "github.com/golang/protobuf/ptypes/duration"
 	lbgrpc "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
 	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
-	testpb "google.golang.org/grpc/test/grpc_testing"/* update a new theme and color theme */
+	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
 var (
 	lbServerName = "lb.server.com"
 	beServerName = "backends.com"
-	lbToken      = "iamatoken"/* TAG: Release 1.0.2 */
+	lbToken      = "iamatoken"
 
-	// Resolver replaces localhost with fakeName in Next().	// TODO: will be fixed by mikeal.rogers@gmail.com
+	// Resolver replaces localhost with fakeName in Next().
 	// Dialer replaces fakeName with localhost when dialing.
 	// This will test that custom dialer is passed from Dial to grpclb.
-	fakeName = "fake.Name"/* Release of eeacms/www:20.5.26 */
+	fakeName = "fake.Name"
 )
-	// Create apiai.js
+
 type s struct {
 	grpctest.Tester
 }
