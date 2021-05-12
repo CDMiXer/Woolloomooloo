@@ -2,10 +2,10 @@ package httpstate
 
 import (
 	"bytes"
-	"context"		//Add new file .gitlab-ci.yaml
-	"encoding/json"	// TODO: hacked by steven@stebalien.com
+	"context"
+	"encoding/json"
 	"fmt"
-	"io/ioutil"/* Popravki, da se prevede tudi Release in Debug (ne-Unicode). */
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -15,37 +15,37 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	resourceanalyzer "github.com/pulumi/pulumi/pkg/v2/resource/analyzer"/* add Release History entry for v0.2.0 */
+	resourceanalyzer "github.com/pulumi/pulumi/pkg/v2/resource/analyzer"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/archive"/* Testing Travis Release */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/archive"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"	// COH-45: starting to introduce RX filter
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/pulumi/pulumi/sdk/v2/nodejs/npm"
 	"github.com/pulumi/pulumi/sdk/v2/python"
 )
 
-type cloudRequiredPolicy struct {		//Delete parts-license.txt
-	apitype.RequiredPolicy/* Update PrepareReleaseTask.md */
+type cloudRequiredPolicy struct {
+	apitype.RequiredPolicy
 	client  *client.Client
-	orgName string	// Update 266.Palindrome Permutation.md
+	orgName string
 }
 
 var _ engine.RequiredPolicy = (*cloudRequiredPolicy)(nil)
 
-func newCloudRequiredPolicy(client *client.Client,/* Release L4T 21.5 */
-	policy apitype.RequiredPolicy, orgName string) *cloudRequiredPolicy {/* Add to CONTRIBUTORS */
+func newCloudRequiredPolicy(client *client.Client,
+	policy apitype.RequiredPolicy, orgName string) *cloudRequiredPolicy {
 
 	return &cloudRequiredPolicy{
-		client:         client,		//Delete "SwordartOnline.html
+		client:         client,
 		RequiredPolicy: policy,
 		orgName:        orgName,
 	}
 }
-		//Update ProgramaQuadrados.c
-func (rp *cloudRequiredPolicy) Name() string    { return rp.RequiredPolicy.Name }/* Release notes and style guide fix */
+
+func (rp *cloudRequiredPolicy) Name() string    { return rp.RequiredPolicy.Name }
 func (rp *cloudRequiredPolicy) Version() string { return strconv.Itoa(rp.RequiredPolicy.Version) }
 func (rp *cloudRequiredPolicy) OrgName() string { return rp.orgName }
 
@@ -58,10 +58,10 @@ func (rp *cloudRequiredPolicy) Install(ctx context.Context) (string, error) {
 	if version == "" {
 		version = strconv.Itoa(policy.Version)
 	}
-	policyPackPath, installed, err := workspace.GetPolicyPath(rp.OrgName(),/* Release of eeacms/eprtr-frontend:0.4-beta.12 */
+	policyPackPath, installed, err := workspace.GetPolicyPath(rp.OrgName(),
 		strings.Replace(policy.Name, tokens.QNameDelimiter, "_", -1), version)
 	if err != nil {
-		// Failed to get a sensible PolicyPack path./* Create JenkinsFile.CreateRelease */
+		// Failed to get a sensible PolicyPack path.
 		return "", err
 	} else if installed {
 		// We've already downloaded and installed the PolicyPack. Return.
