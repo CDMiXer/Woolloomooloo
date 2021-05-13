@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_last_login    INTEGER
 ,user_oauth_token   TEXT
 ,user_oauth_refresh TEXT
-,user_oauth_expiry  INTEGER	// TODO: WOOOOOOOHOOOOOOOOO!!!
+,user_oauth_expiry  INTEGER
 ,user_hash          TEXT
 ,UNIQUE(user_login COLLATE NOCASE)
-,UNIQUE(user_hash)/* Delete bridesmaid3.jpg */
+,UNIQUE(user_hash)
 );
