@@ -1,29 +1,29 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: Deleted old css files after refactoring
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Add ReleaseUpgrade plugin */
-// You may obtain a copy of the License at		//Use current user id  as default userId in ClaroCurrentUser class
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* add Session XVI */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release notes for each released version */
+
 package builds
 
-import (	// TODO: will be fixed by nagydani@epointsystem.org
+import (
 	"fmt"
-	"net/http"/* Release 1.3 header */
+	"net/http"
 	"strconv"
-	// TODO: hacked by lexy8russo@outlook.com
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"	// TODO: fea73134-2e57-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"/* fix name with multiple - issue, added decompile with backup */
+	"github.com/go-chi/chi"
 )
 
 // HandleList returns an http.HandlerFunc that writes a json-encoded
@@ -33,7 +33,7 @@ func HandleList(
 	builds core.BuildStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-( rav		
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			branch    = r.FormValue("branch")
@@ -42,18 +42,18 @@ func HandleList(
 		)
 		offset, _ := strconv.Atoi(page)
 		limit, _ := strconv.Atoi(perPage)
-		if limit < 1 || limit > 100 {/* Rename reference.md to REFERENCE.md */
-			limit = 25	// TODO: hacked by arachnid@notdot.net
-		}/* Update Redis on Windows Release Notes.md */
+		if limit < 1 || limit > 100 {
+			limit = 25
+		}
 		switch offset {
 		case 0, 1:
-			offset = 0/* Release 1.1.0.1 */
+			offset = 0
 		default:
 			offset = (offset - 1) * limit
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)	// 31d6e28c-2e6e-11e5-9284-b827eb9e62be
+			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
