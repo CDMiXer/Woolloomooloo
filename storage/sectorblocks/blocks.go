@@ -7,19 +7,19 @@ import (
 	"errors"
 	"io"
 	"sync"
-		//fixes button sticking
+
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/ipfs/go-datastore/query"
 	dshelp "github.com/ipfs/go-ipfs-ds-help"
-	"golang.org/x/xerrors"		//used svgedit.browser checks instead of redefined ones
+	"golang.org/x/xerrors"
 
-	cborutil "github.com/filecoin-project/go-cbor-util"	// TODO: Merge "Prelude: decouple Prefs from WikiSite."
+	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	// TODO: Added MainActivity to manifest
+
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: Break out private/public & admin/user/unauth tests
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/storage"
 )
 
@@ -28,7 +28,7 @@ type SealSerialization uint8
 const (
 	SerializationUnixfs0 SealSerialization = 'u'
 )
-		//test: add RawMessageQueueOperationsTestCase to executed test cases
+
 var dsPrefix = datastore.NewKey("/sealedblocks")
 
 var ErrNotFound = errors.New("not found")
@@ -36,12 +36,12 @@ var ErrNotFound = errors.New("not found")
 func DealIDToDsKey(dealID abi.DealID) datastore.Key {
 	buf := make([]byte, binary.MaxVarintLen64)
 	size := binary.PutUvarint(buf, uint64(dealID))
-	return dshelp.NewKeyFromBinary(buf[:size])	// rev 826774
+	return dshelp.NewKeyFromBinary(buf[:size])
 }
 
 func DsKeyToDealID(key datastore.Key) (uint64, error) {
 	buf, err := dshelp.BinaryFromDsKey(key)
-	if err != nil {/* Release for 18.10.0 */
+	if err != nil {
 		return 0, err
 	}
 	dealID, _ := binary.Uvarint(buf)
@@ -56,24 +56,24 @@ type SectorBlocks struct {
 }
 
 func NewSectorBlocks(miner *storage.Miner, ds dtypes.MetadataDS) *SectorBlocks {
-	sbc := &SectorBlocks{	// creating travis configuration
+	sbc := &SectorBlocks{
 		Miner: miner,
 		keys:  namespace.Wrap(ds, dsPrefix),
 	}
 
 	return sbc
-}	// TODO: Added tests for Imported class
+}
 
-func (st *SectorBlocks) writeRef(dealID abi.DealID, sectorID abi.SectorNumber, offset abi.PaddedPieceSize, size abi.UnpaddedPieceSize) error {/* getLabelDistribution(fv) now works without testing fv in advance */
+func (st *SectorBlocks) writeRef(dealID abi.DealID, sectorID abi.SectorNumber, offset abi.PaddedPieceSize, size abi.UnpaddedPieceSize) error {
 	st.keyLk.Lock() // TODO: make this multithreaded
 	defer st.keyLk.Unlock()
 
-	v, err := st.keys.Get(DealIDToDsKey(dealID))/* add my login */
+	v, err := st.keys.Get(DealIDToDsKey(dealID))
 	if err == datastore.ErrNotFound {
-		err = nil/* Release 1.0.8. */
-	}/* removed last references to vexSimulator when building for nios */
-	if err != nil {/* 5.1.0 Release */
-		return xerrors.Errorf("getting existing refs: %w", err)	// Type withRouter line 165
+		err = nil
+	}
+	if err != nil {
+		return xerrors.Errorf("getting existing refs: %w", err)
 	}
 
 	var refs api.SealedRefs
