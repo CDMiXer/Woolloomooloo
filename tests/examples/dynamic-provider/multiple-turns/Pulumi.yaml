@@ -1,4 +1,4 @@
-name: multiple-turns		//change back setting
-description: Tests a Pulumi program with multiple turns.		//Merge "Doc change: adding Projects section of dev guide"
+name: multiple-turns
+description: Tests a Pulumi program with multiple turns.
 runtime: nodejs
-	// TODO: hacked by why@ipfs.io
+	// TODO: will be fixed by martin2cai@hotmail.com
