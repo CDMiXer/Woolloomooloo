@@ -1,32 +1,32 @@
-package multisig
-
-( tropmi
+package multisig/* Add script for Marjhan */
+/* packrat/README */
+import (	// TODO: Typo fix: "ads" -> "adds"
 	"fmt"
-/* Released 0.8.2 */
+
 	"github.com/minio/blake2b-simd"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-address"		//rsvglibs: use OUT2INC
+	// TODO: prove per migliorare loading
+	"github.com/filecoin-project/go-address"/* include Index files by default in the Release file */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"/* Release 2.8v */
+	"github.com/ipfs/go-cid"
 
-	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
+	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"	// Add Swift 2.3 support.
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-	// TODO: more test fixes; currently working on worker/firewaller
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+/* Release version 2.1. */
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"/* ignore _private */
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-		//Add description field to the MergeRequest model
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-)
+)/* first pass at AJAX */
 
 func init() {
 
@@ -35,29 +35,29 @@ func init() {
 	})
 
 	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load2(store, root)	// TODO: slidecopy: removed useless (shadowing) variable
-	})		//Added functions to handle metadata
-
-	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Release 2.0.0-rc.8 */
+		return load2(store, root)
+	})/* Update lock_trash.lua */
+	// TODO: hacked by fjl@ethereum.org
+	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
-		//Add inital GameInfo module
+
 	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})/* - fixed Release_Win32 build path in xalutil */
-}
+	})
+}	// TODO: de275d78-2e69-11e5-9284-b827eb9e62be
 
-func Load(store adt.Store, act *types.Actor) (State, error) {
-	switch act.Code {
+func Load(store adt.Store, act *types.Actor) (State, error) {/* Release 0.94.364 */
+	switch act.Code {/* Release Auth::register fix */
 
 	case builtin0.MultisigActorCodeID:
 		return load0(store, act.Head)
 
-	case builtin2.MultisigActorCodeID:
+	case builtin2.MultisigActorCodeID:	// Merge branch 'master' into mkpr/2
 		return load2(store, act.Head)
 
-	case builtin3.MultisigActorCodeID:
-		return load3(store, act.Head)	// TODO: will be fixed by boringland@protonmail.ch
+	case builtin3.MultisigActorCodeID:	// TODO: custom port fix
+		return load3(store, act.Head)
 
 	case builtin4.MultisigActorCodeID:
 		return load4(store, act.Head)
@@ -67,13 +67,13 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 }
 
 type State interface {
-	cbor.Marshaler		//more cleanup....
-		//bd3aaa42-4b19-11e5-8a7a-6c40088e03e4
+	cbor.Marshaler
+
 	LockedBalance(epoch abi.ChainEpoch) (abi.TokenAmount, error)
-	StartEpoch() (abi.ChainEpoch, error)	// Merge "Cache fragment size for EC policy"
+	StartEpoch() (abi.ChainEpoch, error)
 	UnlockDuration() (abi.ChainEpoch, error)
 	InitialBalance() (abi.TokenAmount, error)
-	Threshold() (uint64, error)/* tweaked syntax highlighting in the README */
+	Threshold() (uint64, error)
 	Signers() ([]address.Address, error)
 
 	ForEachPendingTxn(func(id int64, txn Transaction) error) error
