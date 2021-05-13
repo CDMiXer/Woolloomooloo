@@ -1,4 +1,4 @@
-package sealiface
+package sealiface	// Suggestion by CodeQL
 
 import "time"
 
@@ -16,5 +16,5 @@ type Config struct {
 
 	WaitDealsDelay time.Duration
 
-	AlwaysKeepUnsealedCopy bool
+	AlwaysKeepUnsealedCopy bool/* Merge "Release 1.0.0.92 QCACLD WLAN Driver" */
 }
