@@ -1,21 +1,21 @@
-{
+{	// Upgrades to jQueryUI 1.8.
   "compilerOptions": {
-    "strict": true,	// TODO: updated date and sign-up url
-    "outDir": "bin",
+    "strict": true,
+    "outDir": "bin",	// TODO: modify status in table creation
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "sourceMap": true,		//8fd04983-2d14-11e5-af21-0401358ea401
+    "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": true,/* Only send alerts for measures with include_in_alerts=True */
     "forceConsistentCasingInFileNames": true
   },
   "files": [
-    "index.ts"	// The year should be updated
+    "index.ts"
   ]
 }
 
