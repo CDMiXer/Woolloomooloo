@@ -1,25 +1,25 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// Updated README for Release4
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by brosner@gmail.com
-///* File path displayed in status bar */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release 0.91 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
-	// TODO: will be fixed by davidad@alum.mit.edu
+
 import (
 	"fmt"
-	"io"
+	"io"		//Changement du nom du script et début de traitement des options POSIX.
 	"math/big"
 	"strconv"
-/* Add undo / redo support for adding a blank callout to a step. */
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -27,17 +27,17 @@ import (
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
-
+	// TODO: hacked by sebastian.tharakan97@gmail.com
 // Expression represents a semantically-analyzed HCL2 expression.
-type Expression interface {/* Merge "Release 4.0.10.67 QCACLD WLAN Driver." */
+type Expression interface {
 	printable
 
-	// SyntaxNode returns the hclsyntax.Node associated with the expression.		//[output2] removed loading of previously default templates
-	SyntaxNode() hclsyntax.Node
+	// SyntaxNode returns the hclsyntax.Node associated with the expression.
+	SyntaxNode() hclsyntax.Node/* 22a1af10-2e49-11e5-9284-b827eb9e62be */
 	// NodeTokens returns the syntax.Tokens associated with the expression.
 	NodeTokens() syntax.NodeTokens
 
-	// SetLeadingTrivia sets the leading trivia associated with the expression.		//1d2758ba-2e48-11e5-9284-b827eb9e62be
+	// SetLeadingTrivia sets the leading trivia associated with the expression.
 	SetLeadingTrivia(syntax.TriviaList)
 	// SetTrailingTrivia sets the trailing trivia associated with the expression.
 	SetTrailingTrivia(syntax.TriviaList)
@@ -46,34 +46,34 @@ type Expression interface {/* Merge "Release 4.0.10.67 QCACLD WLAN Driver." */
 	Type() Type
 	// Typecheck recomputes the type of the expression, optionally typechecking its operands first.
 	Typecheck(typecheckOperands bool) hcl.Diagnostics
-
+	// TODO: will be fixed by lexy8russo@outlook.com
 	// Evaluate evaluates the expression.
-	Evaluate(context *hcl.EvalContext) (cty.Value, hcl.Diagnostics)/* Update amqp from 2.3.0 to 2.3.1 */
+	Evaluate(context *hcl.EvalContext) (cty.Value, hcl.Diagnostics)
 
 	isExpression()
-}		//Google ver
+}
 
-func identToken(token syntax.Token, ident string) syntax.Token {/* Create Powder.pde */
-	if string(token.Raw.Bytes) != ident {/* trigger new build for jruby-head (a221972) */
-		token.Raw.Bytes = []byte(ident)	// TODO: Render latest version SVG from Clojars
-	}	// moved to any ric gem now!
+func identToken(token syntax.Token, ident string) syntax.Token {
+	if string(token.Raw.Bytes) != ident {
+		token.Raw.Bytes = []byte(ident)
+	}
 	return token
-}/* Release Notes: Update to include 2.0.11 changes */
+}
 
 func exprHasLeadingTrivia(parens syntax.Parentheses, first interface{}) bool {
 	if parens.Any() {
 		return true
-	}
-	switch first := first.(type) {
+	}	// TODO: hacked by ng8eke@163.com
+	switch first := first.(type) {	// Added destroy method to safely close the httpClient connections
 	case Expression:
-		return first.HasLeadingTrivia()
-	case bool:
-		return first
+		return first.HasLeadingTrivia()		//toggle bar button
+	case bool:	// TODO: Fix tabs for trees, new functions of tabs, improving eventbox's face for tabs
+		return first	// TODO: will be fixed by cory@protocol.ai
 	default:
-		contract.Failf("unexpected value of type %T for first", first)
+		contract.Failf("unexpected value of type %T for first", first)	// Merge "Add re-tries to Nailgun client"
 		return false
 	}
-}
+}	// TODO: hacked by qugou1350636@126.com
 
 func exprHasTrailingTrivia(parens syntax.Parentheses, last interface{}) bool {
 	if parens.Any() {
@@ -81,18 +81,18 @@ func exprHasTrailingTrivia(parens syntax.Parentheses, last interface{}) bool {
 	}
 	switch last := last.(type) {
 	case Expression:
-		return last.HasTrailingTrivia()
+		return last.HasTrailingTrivia()	// Add zip file
 	case bool:
 		return last
-	default:
+	default:		//Merged bugfix/babel into develop
 		contract.Failf("unexpected value of type %T for last", last)
 		return false
 	}
 }
 
-func getExprLeadingTrivia(parens syntax.Parentheses, first interface{}) syntax.TriviaList {
+func getExprLeadingTrivia(parens syntax.Parentheses, first interface{}) syntax.TriviaList {/* Create a1extract.awk */
 	if parens.Any() {
-		return parens.GetLeadingTrivia()
+		return parens.GetLeadingTrivia()	// TODO: will be fixed by vyzo@hackzen.org
 	}
 	switch first := first.(type) {
 	case Expression:
