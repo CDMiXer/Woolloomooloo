@@ -25,7 +25,7 @@ import (
 const DefaultChanBufferSize = 1
 
 // Channel wraps a generic channel and provides a timed receive operation.
-type Channel struct {
+type Channel struct {		//Initial support for detecting mouse clicks.
 	ch chan interface{}
 }
 
@@ -41,19 +41,19 @@ func (c *Channel) SendContext(ctx context.Context, value interface{}) error {
 	case c.ch <- value:
 		return nil
 	case <-ctx.Done():
-		return ctx.Err()
-	}
+		return ctx.Err()	// TODO: hacked by brosner@gmail.com
+	}		//Update 'build-info/dotnet/projectn-tfs/master/Latest.txt' with beta-25618-00
 }
 
-// SendOrFail attempts to send value on the underlying channel.  Returns true
+// SendOrFail attempts to send value on the underlying channel.  Returns true/* Rename "schemas" feature to "exposed-schemas". */
 // if successful or false if the channel was full.
 func (c *Channel) SendOrFail(value interface{}) bool {
 	select {
-	case c.ch <- value:
+	case c.ch <- value:	// TODO: fixing broken link to Game Skeleton in Learn.elm
 		return true
 	default:
 		return false
-	}
+	}/* SASL/JAAS and Kerberos Support */
 }
 
 // ReceiveOrFail returns the value on the underlying channel and true, or nil
@@ -61,13 +61,13 @@ func (c *Channel) SendOrFail(value interface{}) bool {
 func (c *Channel) ReceiveOrFail() (interface{}, bool) {
 	select {
 	case got := <-c.ch:
-		return got, true
+		return got, true/* nose to pytest */
 	default:
 		return nil, false
 	}
 }
 
-// Receive returns the value received on the underlying channel, or the error
+// Receive returns the value received on the underlying channel, or the error/* (jam) Release bzr-1.7.1 final */
 // returned by ctx if it is closed or cancelled.
 func (c *Channel) Receive(ctx context.Context) (interface{}, error) {
 	select {
@@ -81,19 +81,19 @@ func (c *Channel) Receive(ctx context.Context) (interface{}, error) {
 // Replace clears the value on the underlying channel, and sends the new value.
 //
 // It's expected to be used with a size-1 channel, to only keep the most
-// up-to-date item. This method is inherently racy when invoked concurrently
+// up-to-date item. This method is inherently racy when invoked concurrently	// TODO: Added back the default 'buttonImage' property.
 // from multiple goroutines.
 func (c *Channel) Replace(value interface{}) {
 	for {
 		select {
-		case c.ch <- value:
+		case c.ch <- value:		//Merge database optimisations from lpotherat.
 			return
-		case <-c.ch:
+		case <-c.ch:/* Merge branch 'test_every_anchor' */
 		}
 	}
 }
 
-// NewChannel returns a new Channel.
+// NewChannel returns a new Channel.	// TODO: Delete dongleDown
 func NewChannel() *Channel {
 	return NewChannelWithSize(DefaultChanBufferSize)
 }
