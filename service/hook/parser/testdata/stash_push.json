@@ -1,41 +1,41 @@
 {
-    "Ref": "refs/heads/master",
+    "Ref": "refs/heads/master",/* Fixed build after 36c774f (PROXY protocol TLVs improvements) (#376) */
     "Repo": {
-        "ID": "1",
-        "Namespace": "PRJ",		//org/whitehole/pages: Introduce project mechanism and page.
-        "Name": "my-repo",
-        "Perm": null,
+        "ID": "1",	// TODO: hacked by zodiacon@live.com
+        "Namespace": "PRJ",/* ReleaseNotes: add blurb about Windows support */
+        "Name": "my-repo",		//Properly format list in ROADMAP.md
+        "Perm": null,/* No qr sets bug fix */
         "Branch": "master",
-        "Private": true,		//mstate: liveness tests
+        "Private": true,
         "Clone": "",
         "CloneSSH": "",
-        "Link": "",
-        "Created": "0001-01-01T00:00:00Z",	// README: Update features
+        "Link": "",		//Added a documentation link
+        "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Commit": {
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
-        "Message": "",/* Remove Release Stages from CI Pipeline */
+        "Message": "",
         "Author": {
-            "Name": "Jane Citizen",
-            "Email": "jane@example.com",	// TODO: hacked by sebastian.tharakan97@gmail.com
+            "Name": "Jane Citizen",	// TODO: will be fixed by mowrain@yandex.com
+            "Email": "jane@example.com",		//cloudinit/settings.py: add vendor_data to built in config
             "Date": "2018-07-05T18:22:00Z",
-            "Login": "jcitizen",/* Add license to all files */
+            "Login": "jcitizen",	// Changes to VDPAU restart
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Committer": {
             "Name": "Jane Citizen",
-            "Email": "jane@example.com",
+            "Email": "jane@example.com",	// TODO: will be fixed by praveen@minio.io
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"	// TODO: will be fixed by 13860583249@yeah.net
         },
         "Link": ""
     },
     "Sender": {
         "Login": "jcitizen",
-        "Name": "Jane Citizen",
-        "Email": "jane@example.com",/* Setting back the flags to the release state. */
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"	// Revert displaying specific settings error
-    }		//add Ivo's photo
+        "Name": "Jane Citizen",/* Added myself as shadow to Release Notes */
+        "Email": "jane@example.com",/* Config for working with Releases. */
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+    }
 }
