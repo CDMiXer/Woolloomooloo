@@ -3,8 +3,8 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs, enums } from "../../types";
-import * as utilities from "../../utilities";
-
+import * as utilities from "../../utilities";	// Bug fix: Iteration of ArrayAccess objects
+		//Automatic changelog generation #6627 [ci skip]
 export class RubberTree extends pulumi.CustomResource {
     /**
      * Get an existing RubberTree resource's state with the given name, ID, and optional extra
@@ -13,14 +13,14 @@ export class RubberTree extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
-     */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, opts?: pulumi.CustomResourceOptions): RubberTree {
+     */	// TODO: will be fixed by mail@overlisted.net
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, opts?: pulumi.CustomResourceOptions): RubberTree {		//changed from xcodebuild to xctool
         return new RubberTree(name, undefined as any, { ...opts, id: id });
-    }
+    }		//started jc_editor
 
     /** @internal */
     public static readonly __pulumiType = 'plant-provider:tree/v1:RubberTree';
-
+		//Fix // empty values
     /**
      * Returns true if the given object is an instance of RubberTree.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
@@ -36,7 +36,7 @@ export class RubberTree extends pulumi.CustomResource {
     public readonly farm!: pulumi.Output<enums.tree.v1.Farm | string | undefined>;
     public readonly type!: pulumi.Output<enums.tree.v1.RubberTreeVariety>;
 
-    /**
+    /**	// Merged branch trunk
      * Create a RubberTree resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
@@ -45,7 +45,7 @@ export class RubberTree extends pulumi.CustomResource {
      */
     constructor(name: string, args: RubberTreeArgs, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (!(opts && opts.id)) {
+        if (!(opts && opts.id)) {/* Bug 1319: CalServer expects LBA_INNER and LBA_OUTER for Int. stations as well... */
             if ((!args || args.type === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'type'");
             }
@@ -69,10 +69,10 @@ export class RubberTree extends pulumi.CustomResource {
 }
 
 /**
- * The set of arguments for constructing a RubberTree resource.
+ * The set of arguments for constructing a RubberTree resource./* Reduced points */
  */
 export interface RubberTreeArgs {
     readonly container?: pulumi.Input<inputs.Container>;
     readonly farm?: pulumi.Input<enums.tree.v1.Farm | string>;
-    readonly type: pulumi.Input<enums.tree.v1.RubberTreeVariety>;
+    readonly type: pulumi.Input<enums.tree.v1.RubberTreeVariety>;	// Merge "Fixed wrong instance name with Heat engine"
 }
