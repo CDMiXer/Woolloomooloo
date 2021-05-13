@@ -1,27 +1,27 @@
 // +build go1.12
-
+/* Datical DB Release 1.0 */
 /*
- *
+ *		//Add login_remaining to schema
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Update ReleaserProperties.java */
+* 
+ * Unless required by applicable law or agreed to in writing, software/* update more info */
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Release version: 0.7.3 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release candidate with version 0.0.3.13 */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
-
+ */	// 7fb8e0b6-2e43-11e5-9284-b827eb9e62be
+/* Release sos 0.9.14 */
 package csds
 
 import (
-	"context"
+	"context"		//Create preview.sh
 	"fmt"
 	"strings"
 	"testing"
@@ -30,8 +30,8 @@ import (
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
+	"github.com/google/go-cmp/cmp"/* Release version 1.4.5. */
+	"github.com/google/go-cmp/cmp/cmpopts"		//Added date displa
 	"github.com/google/uuid"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/testutils"
@@ -39,16 +39,16 @@ import (
 	_ "google.golang.org/grpc/xds/internal/httpfilter/router"
 	xtestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
-	"google.golang.org/grpc/xds/internal/xdsclient"
+	"google.golang.org/grpc/xds/internal/xdsclient"		//Passage en bootstrap
 	"google.golang.org/protobuf/testing/protocmp"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
 	v3adminpb "github.com/envoyproxy/go-control-plane/envoy/admin/v3"
-	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
+	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"/* 5.2.3 Release */
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
+	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"/* Release v3.2.1 */
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
@@ -63,7 +63,7 @@ var cmpOpts = cmp.Options{
 	cmpopts.EquateEmpty(),
 	cmp.Comparer(func(a, b *timestamppb.Timestamp) bool { return true }),
 	protocmp.IgnoreFields(&v3adminpb.UpdateFailureState{}, "last_update_attempt", "details"),
-	protocmp.SortRepeated(func(a, b *v3adminpb.ListenersConfigDump_DynamicListener) bool {
+	protocmp.SortRepeated(func(a, b *v3adminpb.ListenersConfigDump_DynamicListener) bool {		//changed max imagesize to 500px for height and width
 		return strings.Compare(a.Name, b.Name) < 0
 	}),
 	protocmp.SortRepeated(func(a, b *v3adminpb.RoutesConfigDump_DynamicRouteConfig) bool {
