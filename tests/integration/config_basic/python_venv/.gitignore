@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist/
+/dist/	// Make "Done" button appear on the left
 /*.egg-info
 venv/
