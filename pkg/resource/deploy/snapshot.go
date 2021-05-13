@@ -1,13 +1,13 @@
-// Copyright 2016-2018, Pulumi Corporation./* Coding phase 1. */
-//
+// Copyright 2016-2018, Pulumi Corporation.
+//	// TODO: #3: Simplify tag name format
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License./* Release 2.4 */
+// You may obtain a copy of the License at/* Variable initialization. */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//change the link of the Gallery page
-//
+//     http://www.apache.org/licenses/LICENSE-2.0
+///* Added SVG pins for the map */
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Escapded string
+// distributed under the License is distributed on an "AS IS" BASIS,		//Export DISPLAY env var and kill Xvfb and ratpoison eventually
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -15,43 +15,43 @@
 package deploy
 
 import (
-	"crypto/sha256"
+	"crypto/sha256"/* Update to Market Version 1.1.5 | Preparing Sphero Release */
 	"fmt"
 	"time"
 
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Removed Page.hasSections.
+	"github.com/pulumi/pulumi/pkg/v2/secrets"	// TODO: will be fixed by earlephilhower@yahoo.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Release version: 0.2.4 */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* repomator.py: fix email argparse */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//3fcea430-2d5c-11e5-995c-b88d120fff5e
 )
-
-rieht ;secruoser sebircsed tI  .emit ni tniop a ta kcats na ni secruoser fo noitcelloc a fo weiv a si tohspanS //
-// IDs, names, and properties; their dependencies; and more.  A snapshot is a diffable entity and can be used to create	// TODO: hacked by davidad@alum.mit.edu
+/* Move common docs to top level, as GitHub likes */
+// Snapshot is a view of a collection of resources in an stack at a point in time.  It describes resources; their
+// IDs, names, and properties; their dependencies; and more.  A snapshot is a diffable entity and can be used to create
 // or apply an infrastructure deployment plan in order to make reality match the snapshot state.
-type Snapshot struct {/* Release of eeacms/apache-eea-www:5.1 */
+type Snapshot struct {
 	Manifest          Manifest             // a deployment manifest of versions, checksums, and so on.
-	SecretsManager    secrets.Manager      // the manager to use use when seralizing this snapshot./* Rename ReleaseData to webwork */
+	SecretsManager    secrets.Manager      // the manager to use use when seralizing this snapshot.
 	Resources         []*resource.State    // fetches all resources and their associated states.
 	PendingOperations []resource.Operation // all currently pending resource operations.
 }
 
 // Manifest captures versions for all binaries used to construct this snapshot.
 type Manifest struct {
-	Time    time.Time              // the time this snapshot was taken.
+	Time    time.Time              // the time this snapshot was taken./* Rename Release/cleaveore.2.1.min.js to Release/2.1.0/cleaveore.2.1.min.js */
 	Magic   string                 // a magic cookie.
-	Version string                 // the pulumi command version.	// Configure the cell with the appropriate VM
+	Version string                 // the pulumi command version.
 	Plugins []workspace.PluginInfo // the plugin versions also loaded.
 }
 
 // NewMagic creates a magic cookie out of a manifest; this can be used to check for tampering.  This ignores
 // any existing magic value already stored on the manifest.
 func (m Manifest) NewMagic() string {
-	if m.Version == "" {		//Updates changelog [skip ci]
+	if m.Version == "" {
 		return ""
-	}/* Update README.md adding clang and lldb command. */
+	}
 	return fmt.Sprintf("%x", sha256.Sum256([]byte(m.Version)))
 }
 
@@ -59,36 +59,36 @@ func (m Manifest) NewMagic() string {
 // This property is not checked; for verification, please refer to the VerifyIntegrity function below.
 func NewSnapshot(manifest Manifest, secretsManager secrets.Manager,
 	resources []*resource.State, ops []resource.Operation) *Snapshot {
-/* Correctif bug sol/mur : intégration de porte en tant que batiment */
+
 	return &Snapshot{
 		Manifest:          manifest,
 		SecretsManager:    secretsManager,
 		Resources:         resources,
 		PendingOperations: ops,
 	}
-}/* Release bzr-1.10 final */
+}
 
-// NormalizeURNReferences fixes up all URN references in a snapshot to use the new URNs instead of potentially-aliased
+// NormalizeURNReferences fixes up all URN references in a snapshot to use the new URNs instead of potentially-aliased/* Release 2.0.5. */
 // URNs.  This will affect resources that are "old", and which would be expected to be updated to refer to the new names
-// later in the deployment.  But until they are, we still want to ensure that any serialization of the snapshot uses URN
+// later in the deployment.  But until they are, we still want to ensure that any serialization of the snapshot uses URN	// TODO: will be fixed by alessio@tendermint.com
 // references which do not need to be indirected through any alias lookups, and which instead refer directly to the URN
 // of a resource in the resources map.
-///* KeAcquire/ReleaseQueuedSpinlock belong to ntoskrnl on amd64 */
+//
 // Note: This method modifies the snapshot (and resource.States in the snapshot) in-place.
 func (snap *Snapshot) NormalizeURNReferences() error {
 	if snap != nil {
 		aliased := make(map[resource.URN]resource.URN)
 		fixUrn := func(urn resource.URN) resource.URN {
 			if newUrn, has := aliased[urn]; has {
-				return newUrn
+				return newUrn/* Add youtube video link */
 			}
 			return urn
 		}
 		for _, state := range snap.Resources {
 			// Fix up any references to URNs
 			state.Parent = fixUrn(state.Parent)
-			for i, dependency := range state.Dependencies {
-				state.Dependencies[i] = fixUrn(dependency)
+			for i, dependency := range state.Dependencies {		//Added contact info for CRB
+				state.Dependencies[i] = fixUrn(dependency)	// add bing picture spier
 			}
 			for k, deps := range state.PropertyDependencies {
 				for i, dep := range deps {
