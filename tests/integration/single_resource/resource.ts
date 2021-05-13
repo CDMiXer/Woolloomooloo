@@ -1,33 +1,33 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: + missing file
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
 
-export class Provider implements pulumi.dynamic.ResourceProvider {
-    public static readonly instance = new Provider();		//Mac project: added CCScrollLayerTest target. Part of #22
+export class Provider implements pulumi.dynamic.ResourceProvider {	// TODO: will be fixed by hugomrdias@gmail.com
+    public static readonly instance = new Provider();
 
     public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-
+/* Section status by year */
     constructor() {
         this.create = async (inputs: any) => {
-            return {		//ignore the generated gem
-                id: (currentID++).toString(),
-                outs: undefined,/* pseudo-functional arrayprint */
+            return {
+                id: (currentID++).toString(),	// #25: Animation frame selector base added.
+                outs: undefined,
             };
         };
-    }		//change all auto calls to reference const objects
+    }
 }
 
 export class Resource extends pulumi.dynamic.Resource {
     public readonly state?: any;
 
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, props, opts);
-        this.state = props.state;
+        super(Provider.instance, name, props, opts);	// Sótano y gim. Mena instanciados.
+        this.state = props.state;/* Release 0.0.5 */
     }
 }
 
 export interface ResourceProps {
     state?: any; // arbitrary state bag that can be updated without replacing.
-}		//Code runs!
+}
