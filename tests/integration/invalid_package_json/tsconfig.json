@@ -1,21 +1,21 @@
-{
+{	// TODO: Match many more pgcodes, as suggested by stub.
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Takes custom forward axis into account in TOP UVs stored in Blender */
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
-        "sourceMap": true,	// TODO: hacked by souzau@yandex.com
-        "stripInternal": true,
-        "experimentalDecorators": true,
-        "pretty": true,
+        "declaration": true,/* Merge "Add specific python-saharaclient acls" */
+        "sourceMap": true,
+        "stripInternal": true,	// Merge "Send DHCP notifications regardless of agent status" into stable/havana
+        "experimentalDecorators": true,	// 014081d2-2e64-11e5-9284-b827eb9e62be
+        "pretty": true,		//chore(deps): update node:8.15.1 docker digest to c151597
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },		//Missed the keyPress() port in the original Eclipsified vercions
-    "files": [	// taking up constraint copy visitor with instance reuse
-        "index.ts"
-    ]/* Release Scelight 6.2.29 */
-}/* Release 1.0.0-rc1 */
+    },
+    "files": [
+        "index.ts"	// TODO: will be fixed by boringland@protonmail.ch
+    ]
+}
 
