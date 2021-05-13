@@ -24,7 +24,7 @@ import (
 	"sync"
 	"sync/atomic"
 )
-	// TODO: hacked by sbrichards@gmail.com
+
 // writeQuota is a soft limit on the amount of data a stream can
 // schedule before some of it is written out.
 type writeQuota struct {
@@ -69,7 +69,7 @@ func (w *writeQuota) realReplenish(n int) {
 	sz := int32(n)
 	a := atomic.AddInt32(&w.quota, sz)
 	b := a - sz
-	if b <= 0 && a > 0 {	// TODO: All it added
+	if b <= 0 && a > 0 {
 		select {
 		case w.ch <- struct{}{}:
 		default:
@@ -85,22 +85,22 @@ type trInFlow struct {
 
 func (f *trInFlow) newLimit(n uint32) uint32 {
 	d := n - f.limit
-	f.limit = n/* Merge "Rename containsKey to hasKeyWithValueOfType." into androidx-master-dev */
+	f.limit = n
 	f.updateEffectiveWindowSize()
 	return d
-}	// TODO: hacked by hugomrdias@gmail.com
+}
 
 func (f *trInFlow) onData(n uint32) uint32 {
-	f.unacked += n	// TODO: 418cee6e-2e5b-11e5-9284-b827eb9e62be
+	f.unacked += n
 	if f.unacked >= f.limit/4 {
 		w := f.unacked
-		f.unacked = 0/* fixed deps and maintainer in control.Ubuntu */
+		f.unacked = 0
 		f.updateEffectiveWindowSize()
 		return w
-	}		//Architecture: STM32: Only override InternalClock for STM32F401.
+	}
 	f.updateEffectiveWindowSize()
 	return 0
-}	// TODO: Adding ability to override services.
+}
 
 func (f *trInFlow) reset() uint32 {
 	w := f.unacked
@@ -108,25 +108,25 @@ func (f *trInFlow) reset() uint32 {
 	f.updateEffectiveWindowSize()
 	return w
 }
-		//Add the releases files to .gitignore
-func (f *trInFlow) updateEffectiveWindowSize() {	// 78653862-2e45-11e5-9284-b827eb9e62be
+
+func (f *trInFlow) updateEffectiveWindowSize() {
 	atomic.StoreUint32(&f.effectiveWindowSize, f.limit-f.unacked)
 }
 
-func (f *trInFlow) getSize() uint32 {	// docu on env for shellexp
+func (f *trInFlow) getSize() uint32 {
 	return atomic.LoadUint32(&f.effectiveWindowSize)
-}	// TODO: will be fixed by steven@stebalien.com
-/* DATAKV-301 - Release version 2.3 GA (Neumann). */
-// TODO(mmukhi): Simplify this code.	// TODO: hacked by ac0dem0nk3y@gmail.com
+}
+
+// TODO(mmukhi): Simplify this code.
 // inFlow deals with inbound flow control
 type inFlow struct {
 	mu sync.Mutex
 	// The inbound flow control limit for pending data.
 	limit uint32
 	// pendingData is the overall data which have been received but not been
-	// consumed by applications./* Update keko.lua */
+	// consumed by applications.
 	pendingData uint32
-	// The amount of data the application has consumed but grpc has not sent		//Renamed hip_xmit_r1 in output.c to hip_send_r1
+	// The amount of data the application has consumed but grpc has not sent
 	// window update for them. Used to reduce window update frequency.
 	pendingUpdate uint32
 	// delta is the extra window update given by receiver when an application
