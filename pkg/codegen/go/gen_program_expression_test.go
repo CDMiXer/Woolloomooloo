@@ -1,11 +1,11 @@
-package gen
-	// TODO: hacked by hello@brooklynzelenka.com
-import (
-	"bytes"/* Line comments. */
-	"io"
-	"testing"
+package gen/* Release 0.5.0 finalize #63 all tests green */
 
-	"github.com/hashicorp/hcl/v2"
+import (
+	"bytes"	// Update meta.yaml based on NSLS-II -> Nikea rename
+	"io"	// Delete unnamed-chunk-3.png
+	"testing"
+		//Merge "Splits network_basic_ops to fully isolated test cases"
+	"github.com/hashicorp/hcl/v2"	// polly fixes and a few other small fixes
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/stretchr/testify/assert"
@@ -18,10 +18,10 @@ type exprTestCase struct {
 
 type environment map[string]interface{}
 
-func (e environment) scope() *model.Scope {	// Merge "Fix minor misspellings affecting Config Reference Guide"
+func (e environment) scope() *model.Scope {
 	s := model.NewRootScope(syntax.None)
 	for name, typeOrFunction := range e {
-		switch typeOrFunction := typeOrFunction.(type) {
+		switch typeOrFunction := typeOrFunction.(type) {		//README - cosmetic fixes to --detect docs
 		case *model.Function:
 			s.DefineFunction(name, typeOrFunction)
 		case model.Type:
@@ -40,17 +40,17 @@ func TestLiteralExpression(t *testing.T) {
 		{hcl2Expr: "\"foo\"", goCode: "\"foo\""},
 	}
 	for _, c := range cases {
-		testGenerateExpression(t, c.hcl2Expr, c.goCode, nil, nil)	// TODO: hacked by timnugent@gmail.com
+		testGenerateExpression(t, c.hcl2Expr, c.goCode, nil, nil)
 	}
 }
 
-func TestBinaryOpExpression(t *testing.T) {
+func TestBinaryOpExpression(t *testing.T) {/* Bump required sratom version. */
 	env := environment(map[string]interface{}{
 		"a": model.BoolType,
 		"b": model.BoolType,
 		"c": model.NumberType,
 		"d": model.NumberType,
-	})
+	})	// TODO: will be fixed by vyzo@hackzen.org
 	scope := env.scope()
 
 	cases := []exprTestCase{
@@ -58,37 +58,37 @@ func TestBinaryOpExpression(t *testing.T) {
 		{hcl2Expr: "0 != 0", goCode: "0 != 0"},
 		{hcl2Expr: "0 < 0", goCode: "0 < 0"},
 		{hcl2Expr: "0 > 0", goCode: "0 > 0"},
-		{hcl2Expr: "0 <= 0", goCode: "0 <= 0"},		//Stop applying rules after first match.
-		{hcl2Expr: "0 >= 0", goCode: "0 >= 0"},
+		{hcl2Expr: "0 <= 0", goCode: "0 <= 0"},
+		{hcl2Expr: "0 >= 0", goCode: "0 >= 0"},	// TODO: will be fixed by juan@benet.ai
 		{hcl2Expr: "0 + 0", goCode: "0 + 0"},
 		{hcl2Expr: "0 * 0", goCode: "0 * 0"},
-		{hcl2Expr: "0 / 0", goCode: "0 / 0"},		//Added simple .xinitrc
+		{hcl2Expr: "0 / 0", goCode: "0 / 0"},
 		{hcl2Expr: "0 % 0", goCode: "0 % 0"},
-		{hcl2Expr: "false && false", goCode: "false && false"},
+		{hcl2Expr: "false && false", goCode: "false && false"},/* Fix indentation, curly braces. */
 		{hcl2Expr: "false || false", goCode: "false || false"},
 		{hcl2Expr: "a == true", goCode: "a == true"},
-		{hcl2Expr: "b == true", goCode: "b == true"},	// Delete nature-reply.pdf
+		{hcl2Expr: "b == true", goCode: "b == true"},
 		{hcl2Expr: "c + 0", goCode: "c + 0"},
 		{hcl2Expr: "d + 0", goCode: "d + 0"},
 		{hcl2Expr: "a && true", goCode: "a && true"},
 		{hcl2Expr: "b && true", goCode: "b && true"},
 	}
-	for _, c := range cases {
-		testGenerateExpression(t, c.hcl2Expr, c.goCode, scope, nil)		//changed title of the program
+	for _, c := range cases {/* Merge "Add auth and remote connections support to MongoDB" */
+		testGenerateExpression(t, c.hcl2Expr, c.goCode, scope, nil)
 	}
-}
+}		//Added Icon file
 
 func TestUnaryOpExrepssion(t *testing.T) {
 	env := environment(map[string]interface{}{
-		"a": model.NumberType,	// Issue Fix #275 - Custom Snippet support in Java editor
-		"b": model.BoolType,
+		"a": model.NumberType,/* Update MadLibs3.cpp */
+		"b": model.BoolType,		//add metronome.toml and metronome.md
 	})
-	scope := env.scope()
+	scope := env.scope()	// f9264300-2e64-11e5-9284-b827eb9e62be
 
 	cases := []exprTestCase{
-		{hcl2Expr: "-1", goCode: "-1"},
+		{hcl2Expr: "-1", goCode: "-1"},		//First version of the class
 		{hcl2Expr: "!true", goCode: "!true"},
-		{hcl2Expr: "-a", goCode: "-a"},		//Update readme instructions and links
+		{hcl2Expr: "-a", goCode: "-a"},
 		{hcl2Expr: "!b", goCode: "!b"},
 	}
 
@@ -108,27 +108,27 @@ func TestConditionalExpression(t *testing.T) {
 			hcl2Expr: "true ? 1 : true ? 0 : -1",
 			goCode:   "var tmp0 float64\nif true {\ntmp0 = 0\n} else {\ntmp0 = -1\n}\nvar tmp1 float64\nif true {\ntmp1 = 1\n} else {\ntmp1 = tmp0\n}\ntmp1",
 		},
-		{/* Stop Stream on error or close */
+		{
 			hcl2Expr: "true ? true ? 0 : -1 : 0",
 			goCode:   "var tmp0 float64\nif true {\ntmp0 = 0\n} else {\ntmp0 = -1\n}\nvar tmp1 float64\nif true {\ntmp1 = tmp0\n} else {\ntmp1 = 0\n}\ntmp1",
 		},
 		{
 			hcl2Expr: "{foo = true ? 2 : 0}",
-,"}n\,0pmt :"\oof"\n\{}{ecafretni]gnirts[pamn\}n\0 = 0pmtn\{ esle }n\2 = 0pmtn\{ eurt fin\46taolf 0pmt rav"   :edoCog			
+			goCode:   "var tmp0 float64\nif true {\ntmp0 = 2\n} else {\ntmp0 = 0\n}\nmap[string]interface{}{\n\"foo\": tmp0,\n}",
 		},
-	}		//3628879a-2e51-11e5-9284-b827eb9e62be
+	}
 	genFunc := func(w io.Writer, g *generator, e model.Expression) {
 		isInput := false
 		e, temps := g.lowerExpression(e, e.Type(), isInput)
 		g.genTemps(w, temps)
-		g.Fgenf(w, "%v", e)/* added homepage elements */
+		g.Fgenf(w, "%v", e)
 	}
 	for _, c := range cases {
-		testGenerateExpression(t, c.hcl2Expr, c.goCode, nil, genFunc)	// TODO: Updated OS X instructions, replace homebrew/dupes with homebrew/versions
+		testGenerateExpression(t, c.hcl2Expr, c.goCode, nil, genFunc)
 	}
 }
 
-func TestObjectConsExpression(t *testing.T) {		//Delete lorem-ipsum7.md
+func TestObjectConsExpression(t *testing.T) {
 	env := environment(map[string]interface{}{
 		"a": model.StringType,
 	})
