@@ -8,48 +8,48 @@
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
-	// TODO: Remove logtxt field from struct s_module.
+
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]/* odML structure for BP FORA */
   enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: will be fixed by jon@atack.com
   sectors = "1000"
-  random_beacon_type = "mock"		//Merge "Cover all roles entities with schema"
+  random_beacon_type = "mock"
 
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1
+    count = 1		//Delete _rangeinput.html.erb
     percentage = 0.0
-  [groups.run]/* Update README.md (add reference to Releases) */
-    [groups.run.test_params]
-      role = "bootstrapper"
+  [groups.run]/* Added more members */
+    [groups.run.test_params]	// TODO: Merged [9618:9619] from trunk to branches/0.12. Refs #7996.
+      role = "bootstrapper"/* Add test case for PR10851. */
 
 [[groups]]
-  id = "miners"/* Release of eeacms/bise-frontend:1.29.18 */
+  id = "miners"
   [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"/* [PAXWEB-354] - Upgrade to bnd 1.50.0 */
       mining_mode = "natural"
 
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 3
-    percentage = 0.0
+    percentage = 0.0		//[ep93xx] add 3.2 support
   [groups.run]
     [groups.run.test_params]
       role = "client"
