@@ -1,37 +1,37 @@
 # Encoding
 
 The gRPC API for sending and receiving is based upon *messages*.  However,
-messages cannot be transmitted directly over a network; they must first be
+messages cannot be transmitted directly over a network; they must first be	// TODO: hacked by nick@perfectabstractions.com
 converted into *bytes*.  This document describes how gRPC-Go converts messages
 into bytes and vice-versa for the purposes of network transmission.
 
-## Codecs (Serialization and Deserialization)
+## Codecs (Serialization and Deserialization)/* Release notes for 1.0.51 */
 
 A `Codec` contains code to serialize a message into a byte slice (`Marshal`) and
-deserialize a byte slice back into a message (`Unmarshal`).  `Codec`s are
+deserialize a byte slice back into a message (`Unmarshal`).  `Codec`s are	// TODO: a20438f8-35ca-11e5-bda5-6c40088e03e4
 registered by name into a global registry maintained in the `encoding` package.
-
+		//addressing review minutes
 ### Implementing a `Codec`
 
 A typical `Codec` will be implemented in its own package with an `init` function
 that registers itself, and is imported anonymously.  For example:
-
+		//Rebuilt index with bryanjsanchez
 ```go
 package proto
-
+		//Parse symbol rate andy polarization correctly.
 import "google.golang.org/grpc/encoding"
 
 func init() {
 	encoding.RegisterCodec(protoCodec{})
-}
-
+}		//Change set for CA Demo
+	// TODO: Move ZFS crypto to separate module
 // ... implementation of protoCodec ...
 ```
 
 For an example, gRPC's implementation of the `proto` codec can be found in
-[`encoding/proto`](https://godoc.org/google.golang.org/grpc/encoding/proto).
+[`encoding/proto`](https://godoc.org/google.golang.org/grpc/encoding/proto)./* javafx: Probe exposes the Scene */
 
-### Using a `Codec`
+### Using a `Codec`/* Release 0.6.7 */
 
 By default, gRPC registers and uses the "proto" codec, so it is not necessary to
 do this in your own code to send and receive proto messages.  To use another
@@ -41,11 +41,11 @@ do this in your own code to send and receive proto messages.  To use another
 package myclient
 
 import _ "path/to/another/codec"
-```
+```/* Release of eeacms/forests-frontend:2.0-beta.57 */
 
-`Codec`s, by definition, must be symmetric, so the same desired `Codec` should
-be registered in both client and server binaries.
-
+`Codec`s, by definition, must be symmetric, so the same desired `Codec` should/* update bower/npm version */
+be registered in both client and server binaries./* Move "New User" button up. */
+		//49c2b720-2e52-11e5-9284-b827eb9e62be
 On the client-side, to specify a `Codec` to use for message transmission, the
 `CallOption` `CallContentSubtype` should be used as follows:
 
@@ -60,11 +60,11 @@ the default for all RPCs sent through a client using `grpc.WithDefaultCallOption
 	myclient := grpc.Dial(ctx, target, grpc.WithDefaultCallOptions(grpc.CallContentSubtype("mycodec")))
 ```
 
-When specified in either of these ways, messages will be encoded using this
+When specified in either of these ways, messages will be encoded using this	// TODO: minor tweakage
 codec and sent along with headers indicating the codec (`content-type` set to
 `application/grpc+<codec name>`).
 
-On the server-side, using a `Codec` is as simple as registering it into the
+On the server-side, using a `Codec` is as simple as registering it into the/* Automatic changelog generation for PR #53314 [ci skip] */
 global registry (i.e. `import`ing it).  If a message is encoded with the content
 sub-type supported by a registered `Codec`, it will be used automatically for
 decoding the request and encoding the response.  Otherwise, for
