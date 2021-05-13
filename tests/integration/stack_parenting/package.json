@@ -1,10 +1,10 @@
 {
-    "name": "stack_project_name",
+    "name": "stack_project_name",/* Released v0.0.14  */
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"	// twintweak view
     },
-    "peerDependencies": {	// TODO: will be fixed by cory@protocol.ai
-        "@pulumi/pulumi": "latest"		//Update gems, removes slop dependency, version bump
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
     }
-}
+}	// Tag the previous SVN snapshot of portaudio
