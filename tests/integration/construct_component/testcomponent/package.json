@@ -4,8 +4,8 @@
     "devDependencies": {
         "typescript": "^3.0.0",
         "@types/node": "latest"
-    },	// TODO: fix up the image references
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Delete DNA_Striker_Version_v1_2_Windows.exe */
-}/* Merge "wlan: Release 3.2.3.87" */
+    }
+}
