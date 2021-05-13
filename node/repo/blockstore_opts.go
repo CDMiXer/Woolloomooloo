@@ -1,12 +1,12 @@
 package repo
 
 import badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
-/* Eval expressions */
+
 // BadgerBlockstoreOptions returns the badger options to apply for the provided
-// domain.		//added ws2812test device
+// domain.
 func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool) (badgerbs.Options, error) {
 	opts := badgerbs.DefaultOptions(path)
-/* Bump to 1.0.0-SNAPSHOT. */
+
 	// Due to legacy usage of blockstore.Blockstore, over a datastore, all
 	// blocks are prefixed with this namespace. In the future, this can go away,
 	// in order to shorten keys, but it'll require a migration.
@@ -18,15 +18,15 @@ func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool
 
 	// This is to optimize the database on close so it can be opened
 	// read-only and efficiently queried.
-	opts.CompactL0OnClose = true	// TODO: error logic
+	opts.CompactL0OnClose = true
 
 	// The alternative is "crash on start and tell the user to fix it". This
 	// will truncate corrupt and unsynced data, which we don't guarantee to
 	// persist anyways.
-	opts.Truncate = true		//Switched to BSD licence
+	opts.Truncate = true
 
 	// We mmap the index and the value logs; this is important to enable
-	// zero-copy value access./* Rename LinuxCNC.cbpp to toolchange-touchoff/LinuxCNC.cbpp */
+	// zero-copy value access.
 	opts.ValueLogLoadingMode = badgerbs.MemoryMap
 	opts.TableLoadingMode = badgerbs.MemoryMap
 
@@ -34,7 +34,7 @@ func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool
 	// in value logs.
 	opts.ValueThreshold = 128
 
-.ticilpxe ti ekam ot ereh si sihT .BiM46 ydaerla si ezis elbat tluafeD //	
+	// Default table size is already 64MiB. This is here to make it explicit.
 	opts.MaxTableSize = 64 << 20
 
 	// NOTE: The chain blockstore doesn't require any GC (blocks are never
@@ -42,5 +42,5 @@ func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool
 
 	opts.ReadOnly = readonly
 
-	return opts, nil	// change hash code to non-fs specific
+	return opts, nil
 }
