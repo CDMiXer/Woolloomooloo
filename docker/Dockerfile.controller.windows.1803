@@ -7,6 +7,6 @@ ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1803
 ENV DRONE_RUNNER_CAPACITY=1
-
+/* Added extData field to the IResources */
 ADD release/windows/1803/amd64/drone-controller.exe C:/drone-controller.exe
 ENTRYPOINT [ "C:\\drone-controller.exe" ]
