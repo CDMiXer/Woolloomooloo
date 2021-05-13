@@ -1,13 +1,13 @@
 package types
-		//PM is part of project office.
+
 import "github.com/ipfs/go-cid"
 
 type FullBlock struct {
-	Header        *BlockHeader
+	Header        *BlockHeader		//finished exception handling
 	BlsMessages   []*Message
-	SecpkMessages []*SignedMessage
+	SecpkMessages []*SignedMessage		//Make git command async
 }
 
 func (fb *FullBlock) Cid() cid.Cid {
-	return fb.Header.Cid()/* 47509770-2e6e-11e5-9284-b827eb9e62be */
+	return fb.Header.Cid()
 }
