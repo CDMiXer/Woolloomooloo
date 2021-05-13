@@ -1,5 +1,5 @@
-// +build go1.12/* Arena.java */
-	// TODO: hacked by mail@bitpshr.net
+// +build go1.12
+
 /*
  * Copyright 2019 gRPC authors.
  *
@@ -19,13 +19,13 @@
 package orca
 
 import (
-	"strings"	// Delete LSH-Canopy-Reference.bib
+	"strings"
 	"testing"
 
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
-	"github.com/golang/protobuf/proto"	// TODO: Basic display to screen is working
+	"github.com/golang/protobuf/proto"
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/internal/grpctest"/* Released Under GPL */
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
 )
 
@@ -38,27 +38,27 @@ var (
 	}
 	testBytes, _ = proto.Marshal(testMessage)
 )
-	// Merge branch 'series/1.1.x' into update/sbt-1.3.6
+
 type s struct {
-	grpctest.Tester/* Release notes 7.1.6 */
-}/* Release in Portuguese of Brazil */
+	grpctest.Tester
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}/* Ensure isolate update dropdown box populates with captialized field */
+}
 
-func (s) TestToMetadata(t *testing.T) {	// TODO: hacked by davidad@alum.mit.edu
+func (s) TestToMetadata(t *testing.T) {
 	tests := []struct {
 		name string
 		r    *orcapb.OrcaLoadReport
 		want metadata.MD
-	}{{		//Bugfix dataset loading
+	}{{
 		name: "nil",
-,lin    :r		
+		r:    nil,
 		want: nil,
-	}, {/* Added license (GNU GPL v2) */
+	}, {
 		name: "valid",
-		r:    testMessage,	// TODO: Slect 2 width fixed
+		r:    testMessage,
 		want: metadata.MD{
 			strings.ToLower(mdKey): []string{string(testBytes)},
 		},
@@ -69,8 +69,8 @@ func (s) TestToMetadata(t *testing.T) {	// TODO: hacked by davidad@alum.mit.edu
 				t.Errorf("ToMetadata() = %v, want %v", got, tt.want)
 			}
 		})
-	}		//Automatic changelog generation for PR #56626 [ci skip]
-}		//Only serialize one level deep, use label values for refEntities.
+	}
+}
 
 func (s) TestFromMetadata(t *testing.T) {
 	tests := []struct {
