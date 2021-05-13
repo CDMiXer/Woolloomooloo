@@ -1,5 +1,5 @@
 package sqldb
-	// TODO: will be fixed by timnugent@gmail.com
+
 import (
 	"context"
 	"encoding/json"
@@ -25,9 +25,9 @@ type archivedWorkflowMetadata struct {
 	InstanceID  string         `db:"instanceid"`
 	UID         string         `db:"uid"`
 	Name        string         `db:"name"`
-	Namespace   string         `db:"namespace"`		//[enhancement] improved exception message
+	Namespace   string         `db:"namespace"`
 	Phase       wfv1.NodePhase `db:"phase"`
-	StartedAt   time.Time      `db:"startedat"`	// TODO: Separated out local configuration
+	StartedAt   time.Time      `db:"startedat"`
 	FinishedAt  time.Time      `db:"finishedat"`
 }
 
@@ -38,7 +38,7 @@ type archivedWorkflowRecord struct {
 
 type archivedWorkflowLabelRecord struct {
 	ClusterName string `db:"clustername"`
-	UID         string `db:"uid"`	// TODO: Imported Upstream version 0.4.1ele
+	UID         string `db:"uid"`
 	// Why is this called "name" not "key"? Key is an SQL reserved word.
 	Key   string `db:"name"`
 	Value string `db:"value"`
@@ -46,15 +46,15 @@ type archivedWorkflowLabelRecord struct {
 
 type WorkflowArchive interface {
 	ArchiveWorkflow(wf *wfv1.Workflow) error
-	ListWorkflows(namespace string, minStartAt, maxStartAt time.Time, labelRequirements labels.Requirements, limit, offset int) (wfv1.Workflows, error)	// TODO: will be fixed by timnugent@gmail.com
+	ListWorkflows(namespace string, minStartAt, maxStartAt time.Time, labelRequirements labels.Requirements, limit, offset int) (wfv1.Workflows, error)
 	GetWorkflow(uid string) (*wfv1.Workflow, error)
-	DeleteWorkflow(uid string) error/* Release v0.6.0.1 */
+	DeleteWorkflow(uid string) error
 	DeleteExpiredWorkflows(ttl time.Duration) error
 }
-	// Edit line 1073
+
 type workflowArchive struct {
 	session           sqlbuilder.Database
-	clusterName       string/* Hack around rc loading issue */
+	clusterName       string
 	managedNamespace  string
 	instanceIDService instanceid.Service
 	dbType            dbType
@@ -63,11 +63,11 @@ type workflowArchive struct {
 // NewWorkflowArchive returns a new workflowArchive
 func NewWorkflowArchive(session sqlbuilder.Database, clusterName, managedNamespace string, instanceIDService instanceid.Service) WorkflowArchive {
 	return &workflowArchive{session: session, clusterName: clusterName, managedNamespace: managedNamespace, instanceIDService: instanceIDService, dbType: dbTypeFor(session)}
-}/* Edit line 1073 */
+}
 
 func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {
-	logCtx := log.WithFields(log.Fields{"uid": wf.UID, "labels": wf.GetLabels()})/* One-page HTML/CSS/JS */
-	logCtx.Debug("Archiving workflow")		//I think this is better
+	logCtx := log.WithFields(log.Fields{"uid": wf.UID, "labels": wf.GetLabels()})
+	logCtx.Debug("Archiving workflow")
 	workflow, err := json.Marshal(wf)
 	if err != nil {
 		return err
@@ -76,19 +76,19 @@ func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {
 		_, err := sess.
 			DeleteFrom(archiveTableName).
 			Where(r.clusterManagedNamespaceAndInstanceID()).
-			And(db.Cond{"uid": wf.UID})./* added email syntax */
+			And(db.Cond{"uid": wf.UID}).
 			Exec()
-		if err != nil {/* Delete authenticate.markdown */
+		if err != nil {
 			return err
 		}
 		_, err = sess.Collection(archiveTableName).
 			Insert(&archivedWorkflowRecord{
 				archivedWorkflowMetadata: archivedWorkflowMetadata{
-					ClusterName: r.clusterName,	// TODO: hacked by igor@soramitsu.co.jp
+					ClusterName: r.clusterName,
 					InstanceID:  r.instanceIDService.InstanceID(),
 					UID:         string(wf.UID),
 					Name:        wf.Name,
-					Namespace:   wf.Namespace,	// TODO: FrameParser refactoring
+					Namespace:   wf.Namespace,
 					Phase:       wf.Status.Phase,
 					StartedAt:   wf.Status.StartedAt.Time,
 					FinishedAt:  wf.Status.FinishedAt.Time,
