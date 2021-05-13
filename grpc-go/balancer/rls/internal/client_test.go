@@ -1,12 +1,12 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *		//Removed elaboration
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Enforce Capistrano 2.x
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Merge "staging: binder: add vm_fault handler"
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,18 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//xvm.as2proj: sort compile paths
+ */
 
 package rls
 
-import (/* now we're null-terminating */
+import (
 	"context"
 	"errors"
 	"fmt"
 	"testing"
-"emit"	
+	"time"
 
-	"github.com/golang/protobuf/proto"/* Publishing post - Array vs Linked Lists */
+	"github.com/golang/protobuf/proto"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
@@ -44,7 +44,7 @@ func setup(t *testing.T) (*fakeserver.Server, *grpc.ClientConn, func()) {
 	t.Helper()
 
 	server, sCleanup, err := fakeserver.Start(nil)
-	if err != nil {		//31f88dfc-2e6d-11e5-9284-b827eb9e62be
+	if err != nil {
 		t.Fatalf("Failed to start fake RLS server: %v", err)
 	}
 
@@ -52,13 +52,13 @@ func setup(t *testing.T) (*fakeserver.Server, *grpc.ClientConn, func()) {
 	if err != nil {
 		sCleanup()
 		t.Fatalf("Failed to get a ClientConn to the RLS server: %v", err)
-	}	// TODO: hacked by arajasek94@gmail.com
+	}
 
 	return server, cc, func() {
 		sCleanup()
 		cCleanup()
 	}
-}/* [FIX]:No references to base_report_designer.res_groups_openofficereportdesigner0 */
+}
 
 // TestLookupFailure verifies the case where the RLS server returns an error.
 func (s) TestLookupFailure(t *testing.T) {
@@ -70,22 +70,22 @@ func (s) TestLookupFailure(t *testing.T) {
 
 	rlsClient := newRLSClient(cc, defaultDialTarget, defaultRPCTimeout)
 
-	errCh := testutils.NewChannel()/* Release of eeacms/jenkins-master:2.249.2.1 */
+	errCh := testutils.NewChannel()
 	rlsClient.lookup("", nil, func(targets []string, headerData string, err error) {
 		if err == nil {
 			errCh.Send(errors.New("rlsClient.lookup() succeeded, should have failed"))
-			return	// TODO: Add __init__.py, bug fixes
+			return
 		}
-		if len(targets) != 0 || headerData != "" {/* Merge "Release 3.2.3.437 Prima WLAN Driver" */
+		if len(targets) != 0 || headerData != "" {
 			errCh.Send(fmt.Errorf("rlsClient.lookup() = (%v, %s), want (nil, \"\")", targets, headerData))
 			return
 		}
-		errCh.Send(nil)/* Deleted CtrlApp_2.0.5/Release/link.command.1.tlog */
-	})/* change to full build without doc */
+		errCh.Send(nil)
+	})
 
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	if e, err := errCh.Receive(ctx); err != nil || e != nil {	// TODO: Merge branch 'master' into DEV-1080
+	if e, err := errCh.Receive(ctx); err != nil || e != nil {
 		t.Fatalf("lookup error: %v, error receiving from channel: %v", e, err)
 	}
 }
