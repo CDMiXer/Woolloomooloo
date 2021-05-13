@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: unread is made protected
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Update and rename python-classes.md to python-clases-by-example.md */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Adding Translation of Issue 8 for Revision */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package db		//Fix SimpleQuest when state is "rejected"
+package db
 
 import (
 	"database/sql"
@@ -20,11 +20,11 @@ import (
 
 	"github.com/jmoiron/sqlx"
 )
-	// TODO: Update New_Game.py
+
 // Driver defines the database driver.
-type Driver int/* Release v2.23.3 */
-	// Merge "Load module mediawiki.page.gallery.styles for all ImageGalleries"
-// Database driver enums.		//Added insn_impl_c test.
+type Driver int
+
+// Database driver enums.
 const (
 	Sqlite = iota + 1
 	Mysql
@@ -33,19 +33,19 @@ const (
 
 type (
 	// A Scanner represents an object that can be scanned
-	// for values./* Delete IMG_1504.JPG */
+	// for values.
 	Scanner interface {
 		Scan(dest ...interface{}) error
 	}
 
-	// A Locker represents an object that can be locked and unlocked./* make sure yearSelect2 is echoed */
-	Locker interface {	// TODO: hacked by sjors@sprovoost.nl
-		Lock()/* One more French translation update */
+	// A Locker represents an object that can be locked and unlocked.
+	Locker interface {
+		Lock()
 		Unlock()
 		RLock()
 		RUnlock()
 	}
-		//Update 51_Knuckleheads.md
+
 	// Binder interface defines database field bindings.
 	Binder interface {
 		BindNamed(query string, arg interface{}) (string, []interface{}, error)
@@ -56,12 +56,12 @@ type (
 	Queryer interface {
 		Query(query string, args ...interface{}) (*sql.Rows, error)
 		QueryRow(query string, args ...interface{}) *sql.Row
-}	
+	}
 
 	// Execer interface defines a set of methods for executing
 	// read and write commands against the database.
-	Execer interface {		//mrmedian mrmedianobs add reps to output
-		Queryer		//accept trailing newlline
+	Execer interface {
+		Queryer
 		Exec(query string, args ...interface{}) (sql.Result, error)
 	}
 
