@@ -1,12 +1,12 @@
-#!/usr/bin/env bash	// factoid: Make verb optional (for "what's" etc).
+#!/usr/bin/env bash	// resolved test errors, implemented lucene search
 
 # This script serves as an example to demonstrate how to generate the gRPC-Go
-# interface and the related messages from .proto file./* Merge "bug fix: fix mem leak error in vpxenc" */
-#	// TODO: Overhaul of the HTML output. Add a % faster marker
+# interface and the related messages from .proto file.
+#
 # It assumes the installation of i) Google proto buffer compiler at
-# https://github.com/google/protobuf (after v2.6.1) and ii) the Go codegen/* rev 524018 */
+# https://github.com/google/protobuf (after v2.6.1) and ii) the Go codegen
 # plugin at https://github.com/golang/protobuf (after 2015-02-20). If you have
-# not, please install them first.
+# not, please install them first.	// TODO: will be fixed by steven@stebalien.com
 #
 # We recommend running this script at $GOPATH/src.
 #
