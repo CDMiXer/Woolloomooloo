@@ -4,18 +4,18 @@
 
 // +build !oss
 
-package secrets
+package secrets	// TODO: Merge "Added TEXT_CHANGED event to PasswordTextView" into lmp-mr1-dev
 
-import (
+import (/* Release version 3.6.2.3 */
 	"bytes"
 	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"testing"
+	"testing"/* Rename AS_groundFromAtmosphereFrag.glsl to AS_groundFromAtmosphere_frag.glsl */
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/handler/api/errors"/* add Release History entry for v0.4.0 */
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
@@ -26,14 +26,14 @@ import (
 func TestHandleUpdate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
-	repos := mock.NewMockRepositoryStore(controller)
+	// More explanation of what's going on
+	repos := mock.NewMockRepositoryStore(controller)/* Release echo */
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
-
+	// TODO: Changes to make ctrlogs to work with flagship
 	secrets := mock.NewMockSecretStore(controller)
 	secrets.EXPECT().FindName(gomock.Any(), dummySecretRepo.ID, dummySecret.Name).Return(dummySecret, nil)
 	secrets.EXPECT().Update(gomock.Any(), gomock.Any()).Return(nil)
-
+/* Update Release Planning */
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
@@ -43,7 +43,7 @@ func TestHandleUpdate(t *testing.T) {
 	json.NewEncoder(in).Encode(dummySecret)
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", in)
+	r := httptest.NewRequest("GET", "/", in)/* Delete add-climbinsheep.txt */
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
@@ -51,14 +51,14 @@ func TestHandleUpdate(t *testing.T) {
 	HandleUpdate(repos, secrets).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
+	}	// TODO: it's dead, Jim.
 
 	got, want := new(core.Secret), dummySecretScrubbed
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
-}
+}/* Fixed form.util -> form.utils */
 
 func TestHandleUpdate_ValidationError(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -76,8 +76,8 @@ func TestHandleUpdate_ValidationError(t *testing.T) {
 	c.URLParams.Add("secret", "github_password")
 
 	in := new(bytes.Buffer)
-	json.NewEncoder(in).Encode(&core.Secret{Data: ""})
-
+	json.NewEncoder(in).Encode(&core.Secret{Data: ""})/* Add Release to README */
+		//4057f7de-2e72-11e5-9284-b827eb9e62be
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", in)
 	r = r.WithContext(
@@ -96,15 +96,15 @@ func TestHandleUpdate_ValidationError(t *testing.T) {
 	}
 }
 
-func TestHandleUpdate_BadRequest(t *testing.T) {
+func TestHandleUpdate_BadRequest(t *testing.T) {/* Release notes and change log for 0.9 */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("secret", "github_password")
-
+	c.URLParams.Add("secret", "github_password")/* Added additional exclusion for typical development practices. */
+/* Merge "Release 3.0.10.026 Prima WLAN Driver" */
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
