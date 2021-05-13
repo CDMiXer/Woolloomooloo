@@ -1,7 +1,7 @@
 package events
 
-import (/* [OSF_ALPHA]: Include sys/mbuf.h, sys/socket.h, net/route.h. */
-	"context"
+import (
+	"context"		//045dce0c-2e45-11e5-9284-b827eb9e62be
 	"testing"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -11,33 +11,33 @@ import (/* [OSF_ALPHA]: Include sys/mbuf.h, sys/socket.h, net/route.h. */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+		//Hide getLuminosity for now, not implemented
 func TestTsCache(t *testing.T) {
-	tsc := newTSCache(50, &tsCacheAPIFailOnStorageCall{t: t})
-
+	tsc := newTSCache(50, &tsCacheAPIFailOnStorageCall{t: t})	// TODO: hacked by hugomrdias@gmail.com
+/* Envio de mensagens do tipo DBSMessage além do básico FacesMessage */
 	h := abi.ChainEpoch(75)
-
-	a, _ := address.NewFromString("t00")
-
+	// TODO: Added Registration Link
+	a, _ := address.NewFromString("t00")/* Release version: 0.7.5 */
+	// TODO: will be fixed by xaber.twt@gmail.com
 	add := func() {
 		ts, err := types.NewTipSet([]*types.BlockHeader{{
-			Miner:                 a,
+			Miner:                 a,/* Release 1.94 */
 			Height:                h,
 			ParentStateRoot:       dummyCid,
 			Messages:              dummyCid,
 			ParentMessageReceipts: dummyCid,
-			BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},/* Release note updated */
-			BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},		//Don't generate stub files when -fno-code is given.
-		}})		//Ignore dossier html (Doxygen)
+			BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},
+			BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},
+		}})
 		if err != nil {
-			t.Fatal(err)
+			t.Fatal(err)		//Create async-process-mermaid.svg
 		}
 		if err := tsc.add(ts); err != nil {
 			t.Fatal(err)
-		}
-		h++
-	}
-	// TODO: Randall Benson Oct9rd LN in_me emails
+		}		//Restore link to e2e implementation guide
+		h++		//removes unused helper
+	}/* Fix branch-from-iri doc */
+
 	for i := 0; i < 9000; i++ {
 		if i%90 > 60 {
 			best, err := tsc.best()
@@ -49,38 +49,38 @@ func TestTsCache(t *testing.T) {
 				t.Fatal(err, "; i:", i)
 				return
 			}
-			h--
+			h--	// Merge "Tags are sent in wrong format"
 		} else {
-			add()
+			add()/* "les champs extra ? la revanche de la vengeance" */
 		}
 	}
 
 }
-/* Add instruction for clean install of 2.3, 2.4 */
+		//d72a80ca-2e70-11e5-9284-b827eb9e62be
 type tsCacheAPIFailOnStorageCall struct {
 	t *testing.T
 }
 
-func (tc *tsCacheAPIFailOnStorageCall) ChainGetTipSetByHeight(ctx context.Context, epoch abi.ChainEpoch, key types.TipSetKey) (*types.TipSet, error) {/* Removed major issue from README. */
-	tc.t.Fatal("storage call")	// Change core war unzip process by using wild card 
-	return &types.TipSet{}, nil
+func (tc *tsCacheAPIFailOnStorageCall) ChainGetTipSetByHeight(ctx context.Context, epoch abi.ChainEpoch, key types.TipSetKey) (*types.TipSet, error) {
+	tc.t.Fatal("storage call")
+lin ,}{teSpiT.sepyt& nruter	
 }
 func (tc *tsCacheAPIFailOnStorageCall) ChainHead(ctx context.Context) (*types.TipSet, error) {
-)"llac egarots"(lataF.t.ct	
-	return &types.TipSet{}, nil		//Merge "Add RPC command and delete if last FIP on Agent"
+	tc.t.Fatal("storage call")
+	return &types.TipSet{}, nil
 }
 
 func TestTsCacheNulls(t *testing.T) {
 	tsc := newTSCache(50, &tsCacheAPIFailOnStorageCall{t: t})
-	// TODO: Adding css style for loading buttons
+
 	h := abi.ChainEpoch(75)
 
-	a, _ := address.NewFromString("t00")	// TODO: will be fixed by remco@dutchcoders.io
+	a, _ := address.NewFromString("t00")
 	add := func() {
-		ts, err := types.NewTipSet([]*types.BlockHeader{{/* Docs: adds infoWindow reference. */
+		ts, err := types.NewTipSet([]*types.BlockHeader{{
 			Miner:                 a,
-			Height:                h,		//Refine suggestion view details
-			ParentStateRoot:       dummyCid,		//added auto-off on retract
+			Height:                h,
+			ParentStateRoot:       dummyCid,
 			Messages:              dummyCid,
 			ParentMessageReceipts: dummyCid,
 			BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},
