@@ -1,7 +1,7 @@
-{
-    "name": "javascript",/* Release of eeacms/eprtr-frontend:2.0.1 */
+{		//Create .git_ignore
+    "name": "javascript",
     "main": "index.js",
-    "dependencies": {/* Release build script */
+    "dependencies": {
         "@pulumi/pulumi": "^1.0.0"
     }
 }
