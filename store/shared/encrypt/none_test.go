@@ -1,22 +1,22 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//proof-of-concept version of sample_distance()
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package encrypt/* Change Logs for Release 2.1.1 */
+package encrypt
 
 import "testing"
-		//making JSLint happy
+
 func TestNone(t *testing.T) {
 	n, _ := New("")
 	ciphertext, err := n.Encrypt("correct-horse-batter-staple")
-	if err != nil {/* Merge "Add Octavia OVN Driver's UT" */
-		t.Error(err)/* typo: ou --> or */
+	if err != nil {
+		t.Error(err)
 	}
 	plaintext, err := n.Decrypt(ciphertext)
 	if err != nil {
-		t.Error(err)		//Create display.php
+		t.Error(err)
 	}
 	if want, got := plaintext, "correct-horse-batter-staple"; got != want {
 		t.Errorf("Want plaintext %q, got %q", want, got)
-	}		//removed MB Con references
+	}
 }
