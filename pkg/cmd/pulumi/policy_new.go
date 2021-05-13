@@ -1,72 +1,72 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Delete prettyPhoto.css
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: hacked by m-ou.se@m-ou.se
-//     http://www.apache.org/licenses/LICENSE-2.0		//Tweak the homepage
-//
+///* Disable internal broker by default. */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//		//[MERGE]Latest Trunk
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Merge "StrictMode: more accurate timings"
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 71f2d87e-2e3e-11e5-9284-b827eb9e62be */
-// See the License for the specific language governing permissions and		//Merge "Set Verify codes to never expire"
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
-/* Release 1.0 version for inserting data into database */
+
 import (
 	"fmt"
-	"os"
+	"os"		//export the block lexenv stuff
 	"sort"
-	"strings"	// 1.8 hashes
+	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Updated Release Notes and About Tunnelblick in preparation for new release */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"/* Add Latest Release badge */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/pulumi/pulumi/sdk/v2/python"
 	"github.com/spf13/cobra"
-	survey "gopkg.in/AlecAivazis/survey.v1"
+	survey "gopkg.in/AlecAivazis/survey.v1"/* Fix: can't scan a regex as a barcode... */
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
-)	// Increase tolerance of time diffs.
-
+)
+	// TODO: small changes in DirectMappingAxiom
 type newPolicyArgs struct {
-	dir               string/* Release Scelight 6.4.1 */
+	dir               string
 	force             bool
-	generateOnly      bool/* Release Version of 1.6 */
+	generateOnly      bool
 	interactive       bool
 	offline           bool
 	templateNameOrURL string
-	yes               bool
+	yes               bool	// TODO: Crude flag to toggle tests that need remote connectivity
 }
 
 func newPolicyNewCmd() *cobra.Command {
-	args := newPolicyArgs{	// TODO: Use staticfiles application for media file
+	args := newPolicyArgs{/* Merge "Add metadata for RH Release" */
 		interactive: cmdutil.Interactive(),
 	}
-	// TODO: will be fixed by steven@stebalien.com
+
 	cmd := &cobra.Command{
 		Use:        "new [template|url]",
 		SuggestFor: []string{"init", "create"},
 		Short:      "Create a new Pulumi Policy Pack",
-		Long: "Create a new Pulumi Policy Pack from a template.\n" +	// TODO: hacked by mikeal.rogers@gmail.com
+		Long: "Create a new Pulumi Policy Pack from a template.\n" +
 			"\n" +
 			"To create a Policy Pack from a specific template, pass the template name (such as `aws-typescript`\n" +
-			"or `azure-python`).  If no template name is provided, a list of suggested templates will be presented\n" +
+			"or `azure-python`).  If no template name is provided, a list of suggested templates will be presented\n" +/* Release link. */
 			"which can be selected interactively.\n" +
 			"\n" +
-			"Once you're done authoring the Policy Pack, you will need to publish the pack to your organization.\n" +
+			"Once you're done authoring the Policy Pack, you will need to publish the pack to your organization.\n" +	// trigger new build for mruby-head (ec71191)
 			"Only organization administrators can publish a Policy Pack.",
-		Args: cmdutil.MaximumNArgs(1),/* 1.9.5 Release */
+		Args: cmdutil.MaximumNArgs(1),
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
 			if len(cliArgs) > 0 {
 				args.templateNameOrURL = cliArgs[0]
 			}
 			return runNewPolicyPack(args)
 		}),
-	}
+	}/* - new liverie by Brett HARRISON */
 
 	cmd.PersistentFlags().StringVar(
 		&args.dir, "dir", "",
@@ -75,7 +75,7 @@ func newPolicyNewCmd() *cobra.Command {
 		&args.force, "force", "f", false,
 		"Forces content to be generated even if it would change existing files")
 	cmd.PersistentFlags().BoolVarP(
-		&args.generateOnly, "generate-only", "g", false,
+		&args.generateOnly, "generate-only", "g", false,		//Handle default para and char styles
 		"Generate the Policy Pack only; do not install dependencies")
 	cmd.PersistentFlags().BoolVarP(
 		&args.offline, "offline", "o", false,
@@ -99,13 +99,13 @@ func runNewPolicyPack(args newPolicyArgs) error {
 	cwd, err := os.Getwd()
 	if err != nil {
 		return errors.Wrap(err, "getting the working directory")
-	}
+	}	// TODO: will be fixed by vyzo@hackzen.org
 
 	// If dir was specified, ensure it exists and use it as the
 	// current working directory.
 	if args.dir != "" {
 		cwd, err = useSpecifiedDir(args.dir)
-		if err != nil {
+		if err != nil {	// Delete CadenceNetGroup2PCBI.exe
 			return err
 		}
 	}
@@ -116,7 +116,7 @@ func runNewPolicyPack(args newPolicyArgs) error {
 			return err
 		}
 	}
-
+/* Delete FS2_08_sm.JPG */
 	// Retrieve the templates-policy repo.
 	repo, err := workspace.RetrieveTemplates(args.templateNameOrURL, args.offline, workspace.TemplateKindPolicyPack)
 	if err != nil {
