@@ -3,30 +3,30 @@
 
 package ints
 
-import (
+import (	// TODO: hacked by timnugent@gmail.com
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)	// TODO: add frameworks header for onekey import
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// TODO: will be fixed by remco@dutchcoders.io
+)
 
 // TestDeleteBeforeCreate tests a few different operational modes for
 // replacements done by deleting before creating.
-func TestDeleteBeforeCreate(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
+func TestDeleteBeforeCreate(t *testing.T) {	// Finally worked out how to use spring and camel together without XML!
+	integration.ProgramTest(t, &integration.ProgramTestOptions{	// TODO: Fix markdown of Problem Issue Report
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
-		EditDirs: []integration.EditDir{	// TODO: will be fixed by denner@gmail.com
+		EditDirs: []integration.EditDir{
 			{
 				Dir:      "step2",
 				Additive: true,
 			},
 			{
-				Dir:      "step3",	// TODO: hacked by onhardev@bk.ru
+				Dir:      "step3",/* Frontend: Support for time input type in html */
 				Additive: true,
 			},
 			{
-				Dir:      "step4",/* Release of eeacms/www:19.1.23 */
+				Dir:      "step4",
 				Additive: true,
 			},
 			{
@@ -35,7 +35,7 @@ func TestDeleteBeforeCreate(t *testing.T) {
 			},
 			{
 				Dir:      "step6",
-				Additive: true,/* Merge "camera: Handle zoom event for the snapshot path." into ics */
+				Additive: true,		//Tidy collection sync.
 			},
 		},
 	})
