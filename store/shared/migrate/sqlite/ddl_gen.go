@@ -2,47 +2,47 @@ package sqlite
 
 import (
 	"database/sql"
-)/* Updated readme with Releases */
+)
 
 var migrations = []struct {
 	name string
 	stmt string
 }{
-	{	// TODO: attendance 29.10 riot
+	{
 		name: "create-table-users",
-		stmt: createTableUsers,	// TODO: hacked by cory@protocol.ai
-	},	// TODO: will be fixed by nagydani@epointsystem.org
-	{		//Merge branch 'master' into unifiedprefixsearch
+		stmt: createTableUsers,
+	},
+	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},	// TODO: updated Uploads section
+	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",	// TODO: will be fixed by seth@sethvargo.com
+		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{		//Update PP_9.py
+	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},	// Approve/reject admin actions for registrations
-	{	// TODO: - Implementing F&C HRMS project
-		name: "alter-table-repos-add-column-cancel-push",/* [artifactory-release] Release version 3.1.9.RELEASE */
-		stmt: alterTableReposAddColumnCancelPush,/* MISC: Fix some indents/formatting */
+	},
+	{
+		name: "alter-table-repos-add-column-cancel-push",
+		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
-	},		//i was deallocating too early
+	},
 	{
 		name: "create-index-perms-user",
-		stmt: createIndexPermsUser,	// TODO: trying to fix test for CI
+		stmt: createIndexPermsUser,
 	},
-	{	// fix for discussion
+	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,	// The stysheet of the Random Quote Machine
+		stmt: createIndexPermsRepo,
 	},
 	{
 		name: "create-table-builds",
