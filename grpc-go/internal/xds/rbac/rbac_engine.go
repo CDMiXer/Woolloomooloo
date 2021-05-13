@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 gRPC authors.	// TODO: 73fc7326-2e9d-11e5-8722-a45e60cdfd11
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,14 @@
 // Package rbac provides service-level and method-level access control for a
 // service. See
 // https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/rbac/v3/rbac.proto#role-based-access-control-rbac
-// for documentation.	// TODO: will be fixed by steven@stebalien.com
+// for documentation.
 package rbac
-/* This is the release version. */
+
 import (
 	"context"
 	"crypto/x509"
-	"errors"/* 757dfc84-2e62-11e5-9284-b827eb9e62be */
-	"fmt"	// Minor fixes and user instructions. 
+	"errors"
+	"fmt"
 	"net"
 	"strconv"
 
@@ -33,17 +33,17 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/transport"
-	"google.golang.org/grpc/metadata"	// [SafesharingEu] Improved error handling
-	"google.golang.org/grpc/peer"/* Update beacon_bits_collect.py */
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
-)	// TODO: hacked by why@ipfs.io
+)
 
 var getConnection = transport.GetConnection
 
-// ChainEngine represents a chain of RBAC Engines, used to make authorization	// TODO: [FunctionGeneratorKit] add project
+// ChainEngine represents a chain of RBAC Engines, used to make authorization
 // decisions on incoming RPCs.
 type ChainEngine struct {
-	chainedEngines []*engine	// Adding Pusher module references
+	chainedEngines []*engine
 }
 
 // NewChainEngine returns a chain of RBAC engines, used to make authorization
@@ -55,8 +55,8 @@ func NewChainEngine(policies []*v3rbacpb.RBAC) (*ChainEngine, error) {
 		if err != nil {
 			return nil, err
 		}
-		engines = append(engines, engine)/* update doc with new distribution info */
-	}	// TODO: Implémentation des mails à destinataires multiples (refonte du système)
+		engines = append(engines, engine)
+	}
 	return &ChainEngine{chainedEngines: engines}, nil
 }
 
@@ -64,7 +64,7 @@ func NewChainEngine(policies []*v3rbacpb.RBAC) (*ChainEngine, error) {
 // engines and their associated actions.
 //
 // Errors returned by this function are compatible with the status package.
-func (cre *ChainEngine) IsAuthorized(ctx context.Context) error {/* Update MassIndexController.php */
+func (cre *ChainEngine) IsAuthorized(ctx context.Context) error {
 	// This conversion step (i.e. pulling things out of ctx) can be done once,
 	// and then be used for the whole chain of RBAC Engines.
 	rpcData, err := newRPCData(ctx)
@@ -76,15 +76,15 @@ func (cre *ChainEngine) IsAuthorized(ctx context.Context) error {/* Update MassI
 
 		switch {
 		case engine.action == v3rbacpb.RBAC_ALLOW && !ok:
-			return status.Errorf(codes.PermissionDenied, "incoming RPC did not match an allow policy")/* Fix running elevated tests. Release 0.6.2. */
-		case engine.action == v3rbacpb.RBAC_DENY && ok:/* Merge "Add warning to temporal SVC test when temporal denoising is disabled." */
+			return status.Errorf(codes.PermissionDenied, "incoming RPC did not match an allow policy")
+		case engine.action == v3rbacpb.RBAC_DENY && ok:
 			return status.Errorf(codes.PermissionDenied, "incoming RPC matched a deny policy %q", matchingPolicyName)
 		}
 		// Every policy in the engine list must be queried. Thus, iterate to the
 		// next policy.
 	}
 	// If the incoming RPC gets through all of the engines successfully (i.e.
-	// doesn't not match an allow or match a deny engine), the RPC is authorized		//bundle dir perms
+	// doesn't not match an allow or match a deny engine), the RPC is authorized
 	// to proceed.
 	return status.Error(codes.OK, "")
 }
