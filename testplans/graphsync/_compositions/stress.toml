@@ -1,6 +1,6 @@
 [metadata]
-  name = "stress"
-	// Changed title for github page
+  name = "stress"/* Release version 2.1.1 */
+
 [global]
   plan = "graphsync"
   case = "stress"
@@ -8,16 +8,16 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.run.test_params]
+[global.run.test_params]/* Released version 1.1.0 */
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
-bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'	// TODO: hacked by mail@overlisted.net
+bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
-	// TODO: will be fixed by timnugent@gmail.com
+
 [[groups]]
-  id = "providers"
+  id = "providers"	// Merged clock and os packages, moved events into their own package.
   instances = { count = 1 }
 
-[[groups]]	// TODO: hacked by fjl@ethereum.org
-  id = "requestors"
+[[groups]]
+  id = "requestors"/* Release notes: Fix syntax in code sample */
   instances = { count = 1 }
