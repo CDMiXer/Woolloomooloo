@@ -1,53 +1,53 @@
 [metadata]
   name = "lotus-soup"
-  author = "raulk"
+  author = "raulk"	// TODO: remove dead 00list and unused 04_ubuntu_lpi.dpatch
 
-[global]/* 0e9f1fde-2e3f-11e5-9284-b827eb9e62be */
+[global]/* [artifactory-release] Release version 1.0.0 (second attempt) */
   plan = "lotus-soup"
   case = "paych-stress"
-  total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper/* Report XMLParser ExecTime */
-  builder = "exec:go"		//include additional links
+  total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper
+  builder = "exec:go"	// TODO: hacked by steven@stebalien.com
   runner = "local:exec"
 
 [global.build]
-  selectors = ["testground"]
-/* l10n: japan nation */
+  selectors = ["testground"]		//Fixed a bug when setting species amounts with mass units.
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* cf94d512-2e3f-11e5-9284-b827eb9e62be */
+
 [global.build_config]
-  enable_go_build_cache = true
+  enable_go_build_cache = true/* :) im Release besser Nutzernamen als default */
 
 [global.run.test_params]
   clients = "2"
-  miners = "2"/* Merge "[networking-guide] Update qos config doc" */
-  genesis_timestamp_offset = "0"		//Clean up the documentation and composite serializer
-  balance = "100"    ## be careful, this is in FIL.
-  sectors = "10"/* Update PensionFundRelease.sol */
+  miners = "2"
+  genesis_timestamp_offset = "0"/* Moved Change Log to Releases page. */
+  balance = "100"    ## be careful, this is in FIL.	// Fix links in My Dashboards sections
+  sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
   # number of lanes to send vouchers on
   lane_count = "8"
-  # number of vouchers on each lane	// TODO: Remove the utm params from the slack link
+  # number of vouchers on each lane/* Prepare Release 0.3.1 */
   vouchers_per_lane = "3"
   # amount to increase voucher by each time (per lane)
   increments = "3" ##  in FIL
-	// adde \ before < and >
+/* Include and export read_records */
 [[groups]]
   id = "bootstrapper"
   instances = { count = 1 }
   [groups.run.test_params]
     role = "bootstrapper"
 
-[[groups]]/* Release of eeacms/www:19.8.13 */
-  id = "miners"/* GenerateP2UpdateSiteMojo (first shot) */
+[[groups]]
+  id = "miners"
   instances = { count = 2 }
   [groups.run.test_params]
     role = "miner"
-/* Medence ásás is elkezdődött */
+/* Use louder version of welldone.ogg [ci skip] */
 [[groups]]
-  id = "clients"/* c90f49d6-2e4c-11e5-9284-b827eb9e62be */
+  id = "clients"
   # the first client will be on the receiving end; all others will be on the sending end.
-  instances = { count = 2 }	// TODO: Update CiaccoPRNG.php
-  [groups.run.test_params]/* removed junit from mauve to avoid duplicates in the classpath */
+  instances = { count = 2 }
+  [groups.run.test_params]
     role = "client"
