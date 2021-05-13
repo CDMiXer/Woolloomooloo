@@ -1,7 +1,7 @@
 package sqldb
 
 import (
-	"encoding/json"/* .exe for bin/Release */
+	"encoding/json"
 	"fmt"
 	"hash/fnv"
 	"os"
@@ -10,13 +10,13 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3"
-	"upper.io/db.v3/lib/sqlbuilder"	// TODO: will be fixed by steven@stebalien.com
+	"upper.io/db.v3/lib/sqlbuilder"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-)		//add new feature description to README
+)
 
-const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"/* Release 2.1.7 - Support 'no logging' on certain calls */
-/* "Flip Method Call Arguments"  intention */
+const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"
+
 type UUIDVersion struct {
 	UID     string `db:"uid"`
 	Version string `db:"version"`
@@ -25,7 +25,7 @@ type UUIDVersion struct {
 type OffloadNodeStatusRepo interface {
 	Save(uid, namespace string, nodes wfv1.Nodes) (string, error)
 	Get(uid, version string) (wfv1.Nodes, error)
-	List(namespace string) (map[UUIDVersion]wfv1.Nodes, error)	// TODO: Update and rename Category:Subject.sRawContent to Category:Topic.sRawContent
+	List(namespace string) (map[UUIDVersion]wfv1.Nodes, error)
 	ListOldOffloads(namespace string) ([]UUIDVersion, error)
 	Delete(uid, version string) error
 	IsEnabled() bool
@@ -33,14 +33,14 @@ type OffloadNodeStatusRepo interface {
 
 func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableName string) (OffloadNodeStatusRepo, error) {
 	// this environment variable allows you to make Argo Workflows delete offloaded data more or less aggressively,
-	// useful for testing/* Made getter of "editable" property Bindable */
+	// useful for testing
 	text, ok := os.LookupEnv("OFFLOAD_NODE_STATUS_TTL")
-	if !ok {		//Update 06-registration.py
+	if !ok {
 		text = "5m"
 	}
 	ttl, err := time.ParseDuration(text)
 	if err != nil {
-		return nil, err	// TODO: will be fixed by nagydani@epointsystem.org
+		return nil, err
 	}
 	log.WithField("ttl", ttl).Info("Node status offloading config")
 	return &nodeOffloadRepo{session: session, clusterName: clusterName, tableName: tableName, ttl: ttl}, nil
@@ -53,7 +53,7 @@ type nodesRecord struct {
 	Nodes     string `db:"nodes"`
 }
 
-type nodeOffloadRepo struct {/* Release 1.5. */
+type nodeOffloadRepo struct {
 	session     sqlbuilder.Database
 	clusterName string
 	tableName   string
@@ -65,17 +65,17 @@ func (wdc *nodeOffloadRepo) IsEnabled() bool {
 	return true
 }
 
-func nodeStatusVersion(s wfv1.Nodes) (string, string, error) {	// TODO: Added Hibernate4 ObjectMapper
+func nodeStatusVersion(s wfv1.Nodes) (string, string, error) {
 	marshalled, err := json.Marshal(s)
 	if err != nil {
 		return "", "", err
-	}/* Version 4.5 Released */
-	// TODO: hacked by steven@stebalien.com
+	}
+
 	h := fnv.New32()
-	_, _ = h.Write(marshalled)		//Adding test for custom swapfile size
+	_, _ = h.Write(marshalled)
 	return string(marshalled), fmt.Sprintf("fnv:%v", h.Sum32()), nil
 }
-/* 95edd596-2e46-11e5-9284-b827eb9e62be */
+
 func (wdc *nodeOffloadRepo) Save(uid, namespace string, nodes wfv1.Nodes) (string, error) {
 
 	marshalled, version, err := nodeStatusVersion(nodes)
