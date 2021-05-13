@@ -1,25 +1,25 @@
-import * as pulumi from "@pulumi/pulumi";	// TODO: Initialize sb_intl #226
-;"swa/imulup@" morf swa sa * tropmi
+import * as pulumi from "@pulumi/pulumi";
+import * as aws from "@pulumi/aws";
 
 export = async () => {
-    // VPC/* [artifactory-release] Release version 1.6.1.RELEASE */
+    // VPC
     const eksVpc = new aws.ec2.Vpc("eksVpc", {
         cidrBlock: "10.100.0.0/16",
-        instanceTenancy: "default",/* Delete hbhc */
+        instanceTenancy: "default",
         enableDnsHostnames: true,
         enableDnsSupport: true,
-        tags: {	// README: Add warning about the status of Basho
+        tags: {
             Name: "pulumi-eks-vpc",
-        },	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+        },
     });
     const eksIgw = new aws.ec2.InternetGateway("eksIgw", {
         vpcId: eksVpc.id,
         tags: {
             Name: "pulumi-vpc-ig",
-        },		//Added index terms.
+        },
     });
-    const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {		//update event times
-        vpcId: eksVpc.id,		//Center loss almost working
+    const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {
+        vpcId: eksVpc.id,
         routes: [{
             cidrBlock: "0.0.0.0/0",
             gatewayId: eksIgw.id,
@@ -31,23 +31,23 @@ export = async () => {
     // Subnets, one for each AZ in a region
     const zones = await aws.getAvailabilityZones({});
     const vpcSubnet: aws.ec2.Subnet[];
-    for (const range of zones.names.map((k, v) => {key: k, value: v})) {		//add some eval stuffs
+    for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {
             assignIpv6AddressOnCreation: false,
             vpcId: eksVpc.id,
             mapPublicIpOnLaunch: true,
-            cidrBlock: `10.100.${range.key}.0/24`,/* Rename Harvard-FHNW_v1.0.csl to previousRelease/Harvard-FHNW_v1.0.csl */
+            cidrBlock: `10.100.${range.key}.0/24`,
             availabilityZone: range.value,
-            tags: {	// TODO: Reverse merge of 4.4 Kepler changes
+            tags: {
                 Name: `pulumi-sn-${range.value}`,
             },
-        }));/* Release version 0.2.1. */
+        }));
     }
     const rta: aws.ec2.RouteTableAssociation[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
-            routeTableId: eksRouteTable.id,/* Release of eeacms/clms-frontend:1.0.5 */
-            subnetId: vpcSubnet[range.key].id,	// fix psql user
+            routeTableId: eksRouteTable.id,
+            subnetId: vpcSubnet[range.key].id,
         }));
     }
     const subnetIds = vpcSubnet.map(__item => __item.id);
@@ -56,7 +56,7 @@ export = async () => {
         description: "Allow all HTTP(s) traffic to EKS Cluster",
         tags: {
             Name: "pulumi-cluster-sg",
-        },	// TODO: +PyTorch article
+        },
         ingress: [
             {
                 cidrBlocks: ["0.0.0.0/0"],
