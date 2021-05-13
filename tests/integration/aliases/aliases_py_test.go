@@ -1,32 +1,32 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build python all/* Updated to Release 1.2 */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// TODO: b0e42266-2e59-11e5-9284-b827eb9e62be
+// +build python all
 
 package ints
 
-import (/* Released 2.1.0-RC2 */
+import (
 	"path/filepath"
-	"testing"		//TODO: Windows-Problem
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)
+)		//remove unwanted get_icon_url
 
-var dirs = []string{	// Exposing Action#arguments
+var dirs = []string{
 	"rename",
-	"adopt_into_component",	// TODO: Feedback: Better toString for response builders
-	"rename_component_and_child",
+	"adopt_into_component",
+	"rename_component_and_child",/* connect to docker only when using the docker engine */
 	"retype_component",
 	"rename_component",
-}/* Fixed isQueryOptimizable for EqualsFilter. */
+}
 
-func TestPythonAliases(t *testing.T) {
+func TestPythonAliases(t *testing.T) {/* Release `5.6.0.git.1.c29d011` */
 	for _, dir := range dirs {
 		d := filepath.Join("python", dir)
 		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
-				Dir: filepath.Join(d, "step1"),
-				Dependencies: []string{/* FontCache: Release all entries if app is destroyed. */
+				Dir: filepath.Join(d, "step1"),/* Update candy.js */
+				Dependencies: []string{
 					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
-				},/* TODO-995: links on Mac */
+				},
 				Quick: true,
 				EditDirs: []integration.EditDir{
 					{
@@ -35,7 +35,7 @@ func TestPythonAliases(t *testing.T) {
 						ExpectNoChanges: true,
 					},
 				},
-			})
+			})		//Delete Facebook.unity.meta
 		})
-	}	// TODO: will be fixed by sjors@sprovoost.nl
+	}
 }
