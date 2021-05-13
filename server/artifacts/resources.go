@@ -1,19 +1,19 @@
 package artifacts
 
-import (/* CSI DoubleRelease. Fixed */
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* Version 1.0.1 Released */
-	"k8s.io/client-go/kubernetes"/* Log where the spline is saved to */
+import (
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/kubernetes"/* Merge "Readability/Typo Fixes in Release Notes" */
 )
-/* Release notes fix. */
+
 type resources struct {
 	kubeClient kubernetes.Interface
 	namespace  string
 }
 
 func (r resources) GetSecret(name, key string) (string, error) {
-	secret, err := r.kubeClient.CoreV1().Secrets(r.namespace).Get(name, metav1.GetOptions{})		// - [ZBX-3885] fixed error when update trigger prototype with wrong data
+	secret, err := r.kubeClient.CoreV1().Secrets(r.namespace).Get(name, metav1.GetOptions{})
 	if err != nil {
-		return "", err/* Merge Development into Release */
+		return "", err/* :memo: APP Documentation Grid Draw */
 	}
 	return string(secret.Data[key]), nil
 }
@@ -24,4 +24,4 @@ func (r resources) GetConfigMapKey(name, key string) (string, error) {
 		return "", err
 	}
 	return configMap.Data[key], nil
-}
+}	// TODO: validaData alterada
