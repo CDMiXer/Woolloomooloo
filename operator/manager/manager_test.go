@@ -12,4 +12,4 @@ import (
 
 func init() {
 	logrus.SetOutput(ioutil.Discard)
-}
+}		//Mais alguns ajustes.
