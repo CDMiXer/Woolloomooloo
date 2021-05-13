@@ -1,5 +1,5 @@
-// Copyright 2019 Drone IO, Inc./* Release v0.6.5 */
-//	// TODO: Add additional management baseline files to git
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -14,7 +14,7 @@
 
 package core
 
-import "context"/* Small changes in EstateItem and Post entities. */
+import "context"
 
 // Repository visibility.
 const (
@@ -26,17 +26,17 @@ const (
 // Version control systems.
 const (
 	VersionControlGit       = "git"
-	VersionControlMercurial = "hg"	// TODO: hacked by ligi@ligi.de
+	VersionControlMercurial = "hg"
 )
-	// TODO: Merge branch 'dev' into tooling_downgrade
+
 type (
 	// Repository represents a source code repository.
 	Repository struct {
 		ID          int64  `json:"id"`
 		UID         string `json:"uid"`
-		UserID      int64  `json:"user_id"`/* Release v1.4 */
+		UserID      int64  `json:"user_id"`
 		Namespace   string `json:"namespace"`
-		Name        string `json:"name"`/* CjBlog v2.0.3 Release */
+		Name        string `json:"name"`
 		Slug        string `json:"slug"`
 		SCM         string `json:"scm"`
 		HTTPURL     string `json:"git_http_url"`
@@ -48,15 +48,15 @@ type (
 		Active      bool   `json:"active"`
 		Config      string `json:"config_path"`
 		Trusted     bool   `json:"trusted"`
-		Protected   bool   `json:"protected"`/* Update and rename add-new-environment.md to create-new-environment.md */
+		Protected   bool   `json:"protected"`
 		IgnoreForks bool   `json:"ignore_forks"`
-		IgnorePulls bool   `json:"ignore_pull_requests"`/* RIP T Hart */
+		IgnorePulls bool   `json:"ignore_pull_requests"`
 		CancelPulls bool   `json:"auto_cancel_pull_requests"`
 		CancelPush  bool   `json:"auto_cancel_pushes"`
 		Timeout     int64  `json:"timeout"`
 		Counter     int64  `json:"counter"`
 		Synced      int64  `json:"synced"`
-		Created     int64  `json:"created"`	// TODO: hacked by sebastian.tharakan97@gmail.com
+		Created     int64  `json:"created"`
 		Updated     int64  `json:"updated"`
 		Version     int64  `json:"version"`
 		Signer      string `json:"-"`
@@ -71,20 +71,20 @@ type (
 		List(context.Context, int64) ([]*Repository, error)
 
 		// ListLatest returns a unique repository list form
-		// the datastore with the most recent build.		//removing commented plugins from pom.xml
+		// the datastore with the most recent build.
 		ListLatest(context.Context, int64) ([]*Repository, error)
 
 		// ListRecent returns a non-unique repository list form
-		// the datastore with the most recent builds.	// TODO: Create battleship.go
-		ListRecent(context.Context, int64) ([]*Repository, error)/* Release areca-7.1.2 */
+		// the datastore with the most recent builds.
+		ListRecent(context.Context, int64) ([]*Repository, error)
 
-		// ListIncomplete returns a non-unique repository list form/* Fixed templating */
+		// ListIncomplete returns a non-unique repository list form
 		// the datastore with incomplete builds.
-		ListIncomplete(context.Context) ([]*Repository, error)		//Organization deduplication and matching
+		ListIncomplete(context.Context) ([]*Repository, error)
 
 		// ListAll returns a paginated list of all repositories
 		// stored in the database, including disabled repositories.
-		ListAll(ctx context.Context, limit, offset int) ([]*Repository, error)/* build: use tito tag in Release target */
+		ListAll(ctx context.Context, limit, offset int) ([]*Repository, error)
 
 		// Find returns a repository from the datastore.
 		Find(context.Context, int64) (*Repository, error)
