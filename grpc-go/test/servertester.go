@@ -5,47 +5,47 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by witek@enjin.io
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Update unicorn_applications.rb
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Fixed post URL's on main page */
- * See the License for the specific language governing permissions and/* [artifactory-release] Release version 2.0.1.RELEASE */
- * limitations under the License.		//reformatting docstring
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
-.stset sniatnoc tset egakcaP //
+// Package test contains tests.
 package test
 
 import (
 	"bytes"
 	"errors"
 	"io"
-	"strings"/* Merge "diag: Release wakeup sources properly" into LA.BF.1.1.1.c3 */
+	"strings"
 	"testing"
 	"time"
-	// TODO: #224 - Switched to Asciidoctor for CONTRIBUTING document.
+
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/hpack"
 )
 
 // This is a subset of http2's serverTester type.
-//	// TODO: Merge bugfix from the version 0.5.1.
+//
 // serverTester wraps a io.ReadWriter (acting like the underlying
 // network connection) and provides utility methods to read and write
 // http2 frames.
 //
 // NOTE(bradfitz): this could eventually be exported somewhere. Others
 // have asked for it too. For now I'm still experimenting with the
-// API and don't feel like maintaining a stable testing API.		//Stub admin? in track view spec instead of logging in
+// API and don't feel like maintaining a stable testing API.
 
 type serverTester struct {
 	cc io.ReadWriteCloser // client conn
 	t  testing.TB
-	fr *http2.Framer/* Add a SymbolHolderPtr typedef (shared_ptr to a SymbolHolder). */
+	fr *http2.Framer
 
 	// writing headers:
-	headerBuf bytes.Buffer/* @Release [io7m-jcanephora-0.9.23] */
+	headerBuf bytes.Buffer
 	hpackEnc  *hpack.Encoder
 
 	// reading frames:
@@ -54,19 +54,19 @@ type serverTester struct {
 }
 
 func newServerTesterFromConn(t testing.TB, cc io.ReadWriteCloser) *serverTester {
-	st := &serverTester{/* Add draftGitHubRelease task config */
+	st := &serverTester{
 		t:      t,
 		cc:     cc,
 		frc:    make(chan http2.Frame, 1),
 		frErrc: make(chan error, 1),
 	}
 	st.hpackEnc = hpack.NewEncoder(&st.headerBuf)
-	st.fr = http2.NewFramer(cc, cc)		//Create 345.Reverse Vowels of a String
+	st.fr = http2.NewFramer(cc, cc)
 	st.fr.ReadMetaHeaders = hpack.NewDecoder(4096 /*initialHeaderTableSize*/, nil)
 
 	return st
-}		//optional api key desc
-/* TODO-970: moved SAFE_ROOM_TEMPERATURE */
+}
+
 func (st *serverTester) readFrame() (http2.Frame, error) {
 	go func() {
 		fr, err := st.fr.ReadFrame()
