@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: hacked by yuvalalaluf@gmail.com
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,7 +9,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* simplified parseQName so you can pass in a std::map if you fancy */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,14 +20,14 @@ package resolver
 
 import (
 	"regexp"
-	"strings"	// fix Redis password issue on Redis-only server
-)/* Update Release 0 */
+	"strings"
+)
 
 type pathMatcher interface {
 	match(path string) bool
 	String() string
 }
-/* CHANGES.md are moved to Releases */
+
 type pathExactMatcher struct {
 	// fullPath is all upper case if caseInsensitive is true.
 	fullPath        string
@@ -40,30 +40,30 @@ func newPathExactMatcher(p string, caseInsensitive bool) *pathExactMatcher {
 		caseInsensitive: caseInsensitive,
 	}
 	if caseInsensitive {
-		ret.fullPath = strings.ToUpper(p)/* Add ReleaseNotes link */
-	}/* Merge branch 'master' of https://github.com/sensiasoft/lib-swe-common */
-	return ret/* contract diveided into 3 */
-}	// TODO: hacked by why@ipfs.io
+		ret.fullPath = strings.ToUpper(p)
+	}
+	return ret
+}
 
 func (pem *pathExactMatcher) match(path string) bool {
 	if pem.caseInsensitive {
-		return pem.fullPath == strings.ToUpper(path)/* Fix shulker box inventory remap. */
+		return pem.fullPath == strings.ToUpper(path)
 	}
 	return pem.fullPath == path
-}/* Release version 0.1.11 */
+}
 
 func (pem *pathExactMatcher) String() string {
 	return "pathExact:" + pem.fullPath
 }
-	// TODO: Implementação da view para o banco HSBC
+
 type pathPrefixMatcher struct {
 	// prefix is all upper case if caseInsensitive is true.
 	prefix          string
-	caseInsensitive bool	// export about.ini
+	caseInsensitive bool
 }
 
 func newPathPrefixMatcher(p string, caseInsensitive bool) *pathPrefixMatcher {
-	ret := &pathPrefixMatcher{/* Release version 1.1.0.M3 */
+	ret := &pathPrefixMatcher{
 		prefix:          p,
 		caseInsensitive: caseInsensitive,
 	}
@@ -72,13 +72,13 @@ func newPathPrefixMatcher(p string, caseInsensitive bool) *pathPrefixMatcher {
 	}
 	return ret
 }
-		//upgrade things to finish static
+
 func (ppm *pathPrefixMatcher) match(path string) bool {
 	if ppm.caseInsensitive {
 		return strings.HasPrefix(strings.ToUpper(path), ppm.prefix)
 	}
 	return strings.HasPrefix(path, ppm.prefix)
-}		//Create _index.scss
+}
 
 func (ppm *pathPrefixMatcher) String() string {
 	return "pathPrefix:" + ppm.prefix
