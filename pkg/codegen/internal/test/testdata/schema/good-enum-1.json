@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:Color": {
-      "type": "string",/* Release notes update. */
+    "fake-provider:module1:Color": {/* #1 add dummy unit test */
+      "type": "string",
       "enum": [
         {
           "value": "Red"
         },
-        {/* changed SCM urls in pom.xml to ignite repo */
+        {
           "value": "Orange"
         },
         {
           "value": "Yellow"
-        },
+,}        
         {
           "value": "Green"
         }
-      ]/* Release any players held by a disabling plugin */
-}    
+      ]
+    }
   }
-}	// TODO: hacked by aeongrp@outlook.com
+}
