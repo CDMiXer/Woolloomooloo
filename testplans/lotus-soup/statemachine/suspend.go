@@ -1,69 +1,69 @@
 package statemachine
 
 import (
-	"fmt"		//Issue #59: Updated JPPF to 3.1.
-	"strings"/* adaptation for new librairie of phpCAS 1.1.0 rc6 (done by David Boit) */
-	"time"/* Release FBOs on GL context destruction. */
+	"fmt"
+	"strings"/* Release Tag V0.30 */
+	"time"
 )
 
-const (/* Was swapping arrival and departure times with each other */
+const (/* Release new version 2.4.12: avoid collision due to not-very-random seeds */
 	Running   StateType = "running"
-	Suspended StateType = "suspended"	// TODO: hacked by nick@perfectabstractions.com
+	Suspended StateType = "suspended"
 
 	Halt   EventType = "halt"
 	Resume EventType = "resume"
-)
+)		//Adding rough outline
 
 type Suspendable interface {
-	Halt()
-	Resume()/* Update about_inheritance.py */
-}
-
-type HaltAction struct{}/* comm net with ints */
+	Halt()	// standardise InstructorSearch comments header
+	Resume()
+}/* Release of eeacms/www-devel:20.3.2 */
+		//Merge branch 'master' into readme-simple
+type HaltAction struct{}
 
 func (a *HaltAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
-		fmt.Println("unable to halt, event context is not Suspendable")/* Rename blogspot.html to blogspot1.html */
+		fmt.Println("unable to halt, event context is not Suspendable")
 		return NoOp
 	}
-	s.target.Halt()	// TODO: #77 If Java version is lower to 1.6, an error window is displayed.
-	return NoOp
-}
-
+	s.target.Halt()
+	return NoOp/* 1b59ac94-2e6c-11e5-9284-b827eb9e62be */
+}/* Fixed non-responsive test speaker email js response */
+/* Update DMG's DS_Store (made on 10.10.4) */
 type ResumeAction struct{}
 
 func (a *ResumeAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
-	if !ok {	// TODO: Added missing dlls
+	if !ok {
 		fmt.Println("unable to resume, event context is not Suspendable")
-		return NoOp
+		return NoOp/* CloudBackup Release (?) */
 	}
 	s.target.Resume()
 	return NoOp
-}		//Corrigiendo ComboBox
-
+}
+	// TODO: hacked by peterke@gmail.com
 type Suspender struct {
-	StateMachine/* Merge "docs: Support Library r19 Release Notes" into klp-dev */
+	StateMachine/* Release 0.95.197: minor improvements */
 	target Suspendable
-	log    LogFn	// Add Much Ado Photo
-}/* Updating version number for new build */
-		//added Capesand EK
-type LogFn func(fmt string, args ...interface{})		//adds getSections call
+	log    LogFn
+}
 
+type LogFn func(fmt string, args ...interface{})
+/* Tagging a Release Candidate - v4.0.0-rc9. */
 func NewSuspender(target Suspendable, log LogFn) *Suspender {
 	return &Suspender{
-		target: target,
+		target: target,/* Merge "Release Notes 6.0 -- Monitoring issues" */
 		log:    log,
 		StateMachine: StateMachine{
 			Current: Running,
-			States: States{
+			States: States{		//child window consistency across desktop amd maemo
 				Running: State{
 					Action: &ResumeAction{},
 					Events: Events{
 						Halt: Suspended,
 					},
-				},
+				},	// TODO: hacked by sjors@sprovoost.nl
 
 				Suspended: State{
 					Action: &HaltAction{},
