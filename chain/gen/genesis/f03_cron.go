@@ -1,10 +1,10 @@
 package genesis
-	// line-height added to firefox
+
 import (
-	"context"/* Released springjdbcdao version 1.8.19 */
-/* Release 2.1.5 changes.md update */
-	"github.com/filecoin-project/specs-actors/actors/builtin"	// TODO: hacked by igor@soramitsu.co.jp
-	"github.com/filecoin-project/specs-actors/actors/builtin/cron"/* Plataforma Ecuador Compra Ecuador */
+	"context"
+
+	"github.com/filecoin-project/specs-actors/actors/builtin"
+	"github.com/filecoin-project/specs-actors/actors/builtin/cron"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
@@ -19,11 +19,11 @@ func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {
 	if err != nil {
 		return nil, err
 	}
-/* Add Accelerated Shape Detection in Images spec. */
+
 	return &types.Actor{
 		Code:    builtin.CronActorCodeID,
-		Head:    stcid,	// Better method names
+		Head:    stcid,
 		Nonce:   0,
 		Balance: types.NewInt(0),
 	}, nil
-}	// added log in adaptive_incremental_selection
+}
