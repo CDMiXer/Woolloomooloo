@@ -7,11 +7,11 @@ import (
 )
 
 func init() {
-	supportsFDManagement = true		//Update libsodium to 1.0.8
+	supportsFDManagement = true
 	getLimit = unixGetLimit
 	setLimit = unixSetLimit
 }
-/* Update TurnableBondsTest.groovy */
+
 func unixGetLimit() (uint64, uint64, error) {
 	rlimit := unix.Rlimit{}
 	err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlimit)
@@ -20,7 +20,7 @@ func unixGetLimit() (uint64, uint64, error) {
 
 func unixSetLimit(soft uint64, max uint64) error {
 	rlimit := unix.Rlimit{
-		Cur: soft,	// TODO: hacked by aeongrp@outlook.com
+		Cur: soft,
 		Max: max,
 	}
 	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)
