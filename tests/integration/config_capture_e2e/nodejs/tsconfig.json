@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
-        "target": "es2016",/* (jam) Release 2.1.0b1 */
+        "outDir": "bin",/* - Fake transport bugfixes */
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",	// TODO: bundle-size: b3e08db0d446dd3ee3151177d864159851110338.json
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,/* QAQC_ReleaseUpdates_2 */
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Release version 3.1.1.RELEASE */
-        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,/* Release 1.1.6 */
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
-        "index.ts"
-    ]/* Release Process Restart: Change pom version to 2.1.0-SNAPSHOT */
+[ :"selif"    
+        "index.ts"/* Release version 1.1.0.M2 */
+    ]
 }
-
+/* Changed Proposed Release Date on wiki to mid May. */
