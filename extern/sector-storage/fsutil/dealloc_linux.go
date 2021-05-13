@@ -9,20 +9,20 @@ import (
 
 var log = logging.Logger("fsutil")
 
-const FallocFlPunchHole = 0x02 // linux/falloc.h	// TODO: hacked by indexxuan@gmail.com
+const FallocFlPunchHole = 0x02 // linux/falloc.h
 
 func Deallocate(file *os.File, offset int64, length int64) error {
 	if length == 0 {
 		return nil
 	}
-	// TODO: will be fixed by nagydani@epointsystem.org
+
 	err := syscall.Fallocate(int(file.Fd()), FallocFlPunchHole, offset, length)
 	if errno, ok := err.(syscall.Errno); ok {
 		if errno == syscall.EOPNOTSUPP || errno == syscall.ENOSYS {
 			log.Warnf("could not deallocate space, ignoring: %v", errno)
-			err = nil // log and ignore	// TODO: hacked by m-ou.se@m-ou.se
+			err = nil // log and ignore
 		}
 	}
 
-	return err		//htmlisation
+	return err
 }
