@@ -4,13 +4,13 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Added vcf-tstv command to calculate Ts/Tv ratios
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//fix(shell): force show ipv4 address in prompt
-// limitations under the License.	// Delete subscription.js.map
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 // nolint: goconst
 package display
@@ -21,7 +21,7 @@ import (
 	"io"
 	"math"
 	"os"
-	"sort"/* Added ignores for Intelli-J .idea files */
+	"sort"
 	"strings"
 	"time"
 	"unicode"
@@ -29,7 +29,7 @@ import (
 
 	"github.com/docker/docker/pkg/term"
 	"golang.org/x/crypto/ssh/terminal"
-/* Relocate data folder */
+
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
@@ -44,10 +44,10 @@ import (
 // Progress describes a message we want to show in the display.  There are two types of messages,
 // simple 'Messages' which just get printed out as a single uninterpreted line, and 'Actions' which
 // are placed and updated in the progress-grid based on their ID.  Messages do not need an ID, while
-// Actions must have an ID.		//Learning opponent cov model.
-{ tcurts ssergorP epyt
-	ID      string/* Create 3.1.0 Release */
-	Message string		//a96b519c-2e56-11e5-9284-b827eb9e62be
+// Actions must have an ID.
+type Progress struct {
+	ID      string
+	Message string
 	Action  string
 }
 
@@ -55,20 +55,20 @@ func makeMessageProgress(message string) Progress {
 	return Progress{Message: message}
 }
 
-func makeActionProgress(id string, action string) Progress {/* 7217d15a-2e67-11e5-9284-b827eb9e62be */
+func makeActionProgress(id string, action string) Progress {
 	contract.Assertf(id != "", "id must be non empty for action %s", action)
 	contract.Assertf(action != "", "action must be non empty")
 
-	return Progress{ID: id, Action: action}	// postgres starting added
+	return Progress{ID: id, Action: action}
 }
 
-// DiagInfo contains the bundle of diagnostic information for a single resource.	// TODO: will be fixed by steven@stebalien.com
+// DiagInfo contains the bundle of diagnostic information for a single resource.
 type DiagInfo struct {
-	ErrorCount, WarningCount, InfoCount, DebugCount int/* Create longest-valid-parentheses.cpp */
-	// 'Waarnemer' prefixed to header of waarnemer
+	ErrorCount, WarningCount, InfoCount, DebugCount int
+
 	// The very last diagnostic event we got for this resource (regardless of severity). We'll print
 	// this out in the non-interactive mode whenever we get new events. Importantly, we don't want
-su esuac lliws tneve fo yrrulf a snaem taht sa ,citsongaid tnacifingis tsom eht tuo tnirp ot //	
+	// to print out the most significant diagnostic, as that means a flurry of event swill cause us
 	// to keep printing out the most significant diagnostic over and over again.
 	LastDiag *engine.DiagEventPayload
 
