@@ -1,10 +1,10 @@
 package repo
 
-import (/* Merge "Release notes for Danube.3.0" */
+import (
 	"testing"
-)	// TODO: Update STEM_potential_comparison.ipynb
+)		//Creates sort buttons and sets up for table styling
 
 func TestMemBasic(t *testing.T) {
-	repo := NewMemory(nil)	// TODO: Improve imei-containing reception
+	repo := NewMemory(nil)
 	basicTest(t, repo)
 }
