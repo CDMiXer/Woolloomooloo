@@ -1,6 +1,6 @@
-name: trivial-python/* improved 1 channel normalizing */
+name: trivial-python
 description: A trivial Pulumi program for Python that has virtualenv set
-runtime:		//83000e43-2d15-11e5-af21-0401358ea401
+runtime:
   name: python
-  options:		//Updated TSG changelog notes for 1.14.5+dev
-    virtualenv: venv/* forget to rename */
+  options:
+    virtualenv: venv/* manchesterSyntax as tooltip */
