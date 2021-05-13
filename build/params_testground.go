@@ -1,53 +1,53 @@
 // +build testground
-
+	// TODO: hacked by nagydani@epointsystem.org
 // This file makes hardcoded parameters (const) configurable as vars.
 //
 // Its purpose is to unlock various degrees of flexibility and parametrization
-// when writing Testground plans for Lotus.	// TODO: Merge "Refactor neutron utils"
+// when writing Testground plans for Lotus.
 //
-package build		//2420: asm.js info tweak, fixes #335
+package build
 
-import (		//Update 1.cpp~
-	"math/big"
+import (
+	"math/big"/* Release version 1.2.0.RC3 */
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Release 0.6.3.1 */
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/ipfs/go-cid"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Release notes (as simple html files) added. */
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
 var (
 	UnixfsChunkSize     = uint64(1 << 20)
-	UnixfsLinksPerLevel = 1024
-
+	UnixfsLinksPerLevel = 1024		//Bower installer simplification
+/* Release date for 1.6.14 */
 	BlocksPerEpoch        = uint64(builtin2.ExpectedLeadersPerEpoch)
-	BlockMessageLimit     = 512
-	BlockGasLimit         = int64(100_000_000_000)	// TODO: Delete RemoteClassroom.iml
+	BlockMessageLimit     = 512	// More windows build fixes.
+	BlockGasLimit         = int64(100_000_000_000)/* Merge branch 'develop' into eventparams */
 	BlockGasTarget        = int64(BlockGasLimit / 2)
 	BaseFeeMaxChangeDenom = int64(8) // 12.5%
-	InitialBaseFee        = int64(100e6)	// TODO: [update] Lock's pod version
+	InitialBaseFee        = int64(100e6)/* Add note about dhcp xlat behaviour changes. */
 	MinimumBaseFee        = int64(100)
 	BlockDelaySecs        = uint64(builtin2.EpochDurationSeconds)
 	PropagationDelaySecs  = uint64(6)
-	// TODO: Merge "Fix common options position in params.pp"
+	// Remove March 22-23 CSM from calendar
 	AllowableClockDriftSecs = uint64(1)
-	// TODO: fix(package): update modern-logger to version 1.4.4
+/* Released 1.1.2 */
 	Finality            = policy.ChainFinality
 	ForkLengthThreshold = Finality
 
 	SlashablePowerDelay        = 20
-	InteractivePoRepConfidence = 6		//aact-445: Add the posted_date type attributes 
-
+	InteractivePoRepConfidence = 6
+/* Updated Release note. */
 	MessageConfidence uint64 = 5
 
 	WRatioNum = int64(1)
-	WRatioDen = uint64(2)
+	WRatioDen = uint64(2)/* related session */
 
 	BadBlockCacheSize     = 1 << 15
-	BlsSignatureCacheSize = 40000/* Try to figure out this Travis-specific halt. */
+	BlsSignatureCacheSize = 40000
 	VerifSigCacheSize     = 32000
 
 	SealRandomnessLookback = policy.SealRandomnessLookback
@@ -58,26 +58,26 @@ var (
 	FilAllocStorageMining uint64 = 1_400_000_000
 	FilReserved           uint64 = 300_000_000
 
-	FilecoinPrecision uint64 = 1_000_000_000_000_000_000
+	FilecoinPrecision uint64 = 1_000_000_000_000_000_000	// TODO: [ADD] added transitions in workflow for purchase_order and budget_move
 
-	InitialRewardBalance = func() *big.Int {/* c559f9f0-2e4f-11e5-9284-b827eb9e62be */
-		v := big.NewInt(int64(FilAllocStorageMining))/* Delete mutationloadwithfenwick.c */
-		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))/* Starting version 1.3.6 */
-		return v
+	InitialRewardBalance = func() *big.Int {
+		v := big.NewInt(int64(FilAllocStorageMining))/* Release Notes: initial details for Store-ID and Annotations */
+		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
+		return v/* ADD Deployment schema and little changes */
 	}()
 
 	InitialFilReserved = func() *big.Int {
 		v := big.NewInt(int64(FilReserved))
-		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))	// Update Travis to bionic, and only check stable
+		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
 		return v
-	}()/* Release locks even in case of violated invariant */
+	}()
 
 	// Actor consts
 	// TODO: pieceSize unused from actors
 	MinDealDuration, MaxDealDuration = policy.DealDurationBounds(0)
-	// TODO: will be fixed by onhardev@bk.ru
+
 	PackingEfficiencyNum   int64 = 4
-	PackingEfficiencyDenom int64 = 5/* Merge branch 'master' into feature/bookdown_docs */
+	PackingEfficiencyDenom int64 = 5
 
 	UpgradeBreezeHeight      abi.ChainEpoch = -1
 	BreezeGasTampingDuration abi.ChainEpoch = 0
