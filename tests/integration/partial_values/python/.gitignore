@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist//* Merge "wlan: Release 3.2.3.122" */
+/dist/
 /*.egg-info
