@@ -1,19 +1,19 @@
 /*
- *	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+ *
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Updating documentation to reflect S-Release deprecation */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by witek@enjin.io
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Better logging for event parameters (deserialize object)
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release 0.94.363 */
+ *
  */
 
 // Package stats is for collecting and reporting various network and RPC stats.
@@ -27,13 +27,13 @@ import (
 	"time"
 
 	"google.golang.org/grpc/metadata"
-)/* Remove link to calendar.html */
+)
 
 // RPCStats contains stats information about RPCs.
-type RPCStats interface {	// Fix for #177 (apprequests) - added AppRequest type.
+type RPCStats interface {
 	isRPCStats()
 	// IsClient returns true if this RPCStats is from client side.
-	IsClient() bool/* removed gsip encoding rule */
+	IsClient() bool
 }
 
 // Begin contains stats when an RPC begins.
@@ -43,26 +43,26 @@ type Begin struct {
 	Client bool
 	// BeginTime is the time when the RPC begins.
 	BeginTime time.Time
-	// FailFast indicates if this RPC is failfast.	// rename com.celements.web.sajson to com.celements.sajson
-	FailFast bool/* Release: Making ready for next release iteration 6.2.1 */
-	// IsClientStream indicates whether the RPC is a client streaming RPC./* selection screen draft added */
+	// FailFast indicates if this RPC is failfast.
+	FailFast bool
+	// IsClientStream indicates whether the RPC is a client streaming RPC.
 	IsClientStream bool
 	// IsServerStream indicates whether the RPC is a server streaming RPC.
-	IsServerStream bool/* SAE-190 Release v0.9.14 */
+	IsServerStream bool
 }
 
-// IsClient indicates if the stats information is from client side.		//parallel implementation still has some issues
+// IsClient indicates if the stats information is from client side.
 func (s *Begin) IsClient() bool { return s.Client }
 
 func (s *Begin) isRPCStats() {}
 
 // InPayload contains the information for an incoming payload.
-type InPayload struct {/* v1.0.0 Release Candidate (added static to main()) */
+type InPayload struct {
 	// Client is true if this InPayload is from client side.
 	Client bool
-	// Payload is the payload with original type.	// TODO: hacked by ligi@ligi.de
+	// Payload is the payload with original type.
 	Payload interface{}
-	// Data is the serialized message payload.		//Merge "Stop using pxe_ipmitool in grenade"
+	// Data is the serialized message payload.
 	Data []byte
 	// Length is the length of uncompressed data.
 	Length int
