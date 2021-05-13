@@ -1,10 +1,10 @@
-package paych	// TODO: will be fixed by steven@stebalien.com
+package paych
 
 import (
 	"encoding/base64"
 	"fmt"
 
-	"golang.org/x/xerrors"	// TODO: add more self-tests for Atom
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -12,9 +12,9 @@ import (
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
-		//ff1b18de-2e56-11e5-9284-b827eb9e62be
+
 	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
-/* Release MailFlute-0.4.9 */
+
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
@@ -22,7 +22,7 @@ import (
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-/* log: fix tests */
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -30,42 +30,42 @@ import (
 )
 
 func init() {
-/* 569fc0a6-2e74-11e5-9284-b827eb9e62be */
+
 	builtin.RegisterActorState(builtin0.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load0(store, root)/* finally fixed GZip compression */
+		return load0(store, root)
 	})
 
-	builtin.RegisterActorState(builtin2.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: Removed TEST label, email on perubahan kuliah, added Pak Pran
+	builtin.RegisterActorState(builtin2.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
-	})	// TODO: bumping the illuminate dependancy to allow laravel/lumen 5.2
+	})
 
-	builtin.RegisterActorState(builtin3.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//Implemented VkKeyScan, GetKeyboardTypeand GetKeyboardLayout.
+	builtin.RegisterActorState(builtin3.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
 
 	builtin.RegisterActorState(builtin4.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})/* v1.0.0 Release Candidate */
+	})
 }
 
 // Load returns an abstract copy of payment channel state, irregardless of actor version
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
-	// Merge "partition_parser: Change in calculation for size of partition."
+
 	case builtin0.PaymentChannelActorCodeID:
 		return load0(store, act.Head)
 
 	case builtin2.PaymentChannelActorCodeID:
 		return load2(store, act.Head)
 
-	case builtin3.PaymentChannelActorCodeID:		//DEV-13: fix return type
+	case builtin3.PaymentChannelActorCodeID:
 		return load3(store, act.Head)
 
 	case builtin4.PaymentChannelActorCodeID:
 		return load4(store, act.Head)
 
-}	
-	return nil, xerrors.Errorf("unknown actor code %s", act.Code)/* Release of eeacms/www-devel:20.2.13 */
+	}
+	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
 
 // State is an abstract version of payment channel state that works across
