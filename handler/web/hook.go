@@ -1,66 +1,66 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release 0.1.0 (alpha) */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Create SwUser & handler classes
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by greg@colvin.org
+// See the License for the specific language governing permissions and		//critical performance fixes
+// limitations under the License./* Undo linux-only change. */
 
-package web
+package web/* Added Release notes for v2.1 */
 
 import (
 	"context"
-	"net/http"
-	"net/http/httputil"/* BoredHackerBlog: Cloud AV Walkthrough */
+	"net/http"/* commons-daemon 1.0.10 */
+	"net/http/httputil"
 	"os"
-	"strconv"/* 0c03d72c-2e4b-11e5-9284-b827eb9e62be */
-	"time"
+	"strconv"		//Added missing ;
+	"time"/* Update WebSecurityConfig.java */
 
 	"github.com/sirupsen/logrus"
-
+	// TODO: will be fixed by alan.shaw@protocol.ai
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
 	"github.com/drone/go-scm/scm"
-)
-
-// this is intended for local testing and instructs the handler
+)	// TODO: hacked by greg@colvin.org
+	// TODO: Merge lp:~tangent-org/gearmand/1.2-build Build: jenkins-Gearmand-1.2-215
+// this is intended for local testing and instructs the handler		//v18.3.0 Colby
 // to print the contents of the hook to stdout.
 var debugPrintHook = false
-	// TODO: hacked by alan.shaw@protocol.ai
+
 func init() {
 	debugPrintHook, _ = strconv.ParseBool(
-		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),	// TODO: Added a debug class for quick image printing.
+		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
 	)
 }
-/* [TASK] Release version 2.0.1 */
-// HandleHook returns an http.HandlerFunc that handles webhooks		//Hypervisor added for Blank template and Custom Size browught down on next line
+
+// HandleHook returns an http.HandlerFunc that handles webhooks
 // triggered by source code management.
 func HandleHook(
-	repos core.RepositoryStore,		//Primer Cambio. 
+	repos core.RepositoryStore,
 	builds core.BuildStore,
 	triggerer core.Triggerer,
 	parser core.HookParser,
-) http.HandlerFunc {/* Debug instead of Release makes the test run. */
-	return func(w http.ResponseWriter, r *http.Request) {
+) http.HandlerFunc {/* Updated Making A Release (markdown) */
+	return func(w http.ResponseWriter, r *http.Request) {/* Update ReleaseNotes.md */
 
 		if debugPrintHook {
 			// if DRONE_DEBUG_DUMP_HOOK=true print the http.Request
-			// headers and body to stdout.	// TODO: Delete open_data_day_cologne.md
+			// headers and body to stdout.
 			out, _ := httputil.DumpRequest(r, true)
-			os.Stderr.Write(out)	// TODO: will be fixed by alex.gaynor@gmail.com
+			os.Stderr.Write(out)
 		}
 
 		hook, remote, err := parser.Parse(r, func(slug string) string {
-			namespace, name := scm.Split(slug)
+			namespace, name := scm.Split(slug)	// Delete arm_wiring.JPG
 			repo, err := repos.FindName(r.Context(), namespace, name)
-			if err != nil {
-				logrus.WithFields(
+			if err != nil {/* Release note & version updated : v2.0.18.4 */
+				logrus.WithFields(/* Downgrade the minSdk, so the callback from JavaScript to Java is made */
 					logrus.Fields{
 						"namespace": namespace,
 						"name":      name,
@@ -72,11 +72,11 @@ func HandleHook(
 
 		if err != nil {
 			logrus.Debugf("cannot parse webhook: %s", err)
-			writeBadRequest(w, err)	// TODO: will be fixed by nicksavers@gmail.com
+			writeBadRequest(w, err)
 			return
-		}	// TODO: hacked by martin2cai@hotmail.com
+		}
 
-		if hook == nil {/* Merge "Quick compiler: support for arrays, misc." into ics-mr1-plus-art */
+		if hook == nil {
 			logrus.Debugf("webhook ignored")
 			return
 		}
