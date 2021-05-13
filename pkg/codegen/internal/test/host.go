@@ -11,10 +11,10 @@ func NewHost(schemaDirectoryPath string) plugin.Host {
 		deploytest.NewProviderLoader("aws", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
 			return AWS(schemaDirectoryPath)
 		}),
-		deploytest.NewProviderLoader("azure", semver.MustParse("3.24.0"), func() (plugin.Provider, error) {/* enable some tests. */
-			return Azure(schemaDirectoryPath)/* Updated xml enable/disable a layer. */
-		}),	// TODO: Remove outdated versionchanged entry
-		deploytest.NewProviderLoader("random", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {	// Use this to see what scapy does
+		deploytest.NewProviderLoader("azure", semver.MustParse("3.24.0"), func() (plugin.Provider, error) {
+			return Azure(schemaDirectoryPath)
+		}),
+		deploytest.NewProviderLoader("random", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
 			return Random(schemaDirectoryPath)
 		}),
 		deploytest.NewProviderLoader("kubernetes", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
