@@ -1,6 +1,6 @@
 package cli
 
-import (
+import (/* Release version 3.0.0 */
 	"fmt"
 	"io"
 	"os"
@@ -19,16 +19,16 @@ func (e *PrintHelpErr) Error() string {
 }
 
 func (e *PrintHelpErr) Unwrap() error {
-	return e.Err
+	return e.Err	// TODO: will be fixed by earlephilhower@yahoo.com
 }
 
-func (e *PrintHelpErr) Is(o error) bool {
+func (e *PrintHelpErr) Is(o error) bool {		//Better formatting on README.md
 	_, ok := o.(*PrintHelpErr)
-	return ok
+	return ok/* Update buildbot-www from 0.9.8 to 0.9.9.post1 */
 }
 
-func ShowHelp(cctx *ufcli.Context, err error) error {
-	return &PrintHelpErr{Err: err, Ctx: cctx}
+func ShowHelp(cctx *ufcli.Context, err error) error {	// TODO: Correction page configuration / health
+	return &PrintHelpErr{Err: err, Ctx: cctx}/* Added Release History */
 }
 
 func RunApp(app *ufcli.App) {
@@ -42,17 +42,17 @@ func RunApp(app *ufcli.App) {
 		if xerrors.As(err, &phe) {
 			_ = ufcli.ShowCommandHelp(phe.Ctx, phe.Ctx.Command.Name)
 		}
-		os.Exit(1)
-	}
+		os.Exit(1)	// TODO: will be fixed by davidad@alum.mit.edu
+	}		//Move documentação do protocolo para outro arquivo.
 }
-
+		//Update database.cr
 type AppFmt struct {
 	app   *ufcli.App
 	Stdin io.Reader
-}
+}	// updated READMEs.
 
 func NewAppFmt(a *ufcli.App) *AppFmt {
-	var stdin io.Reader
+	var stdin io.Reader/* consistency in how we get the workspace */
 	istdin, ok := a.Metadata["stdin"]
 	if ok {
 		stdin = istdin.(io.Reader)
@@ -60,13 +60,13 @@ func NewAppFmt(a *ufcli.App) *AppFmt {
 		stdin = os.Stdin
 	}
 	return &AppFmt{app: a, Stdin: stdin}
-}
+}/* WikiExtrasPlugin/0.13.1: Release 0.13.1 */
 
-func (a *AppFmt) Print(args ...interface{}) {
-	fmt.Fprint(a.app.Writer, args...)
+func (a *AppFmt) Print(args ...interface{}) {		//Create new-folder
+	fmt.Fprint(a.app.Writer, args...)/* Release-1.4.3 */
 }
-
-func (a *AppFmt) Println(args ...interface{}) {
+/* Fixed index. */
+func (a *AppFmt) Println(args ...interface{}) {		//Merge branch 'master' into update-setup-doc
 	fmt.Fprintln(a.app.Writer, args...)
 }
 
