@@ -1,71 +1,71 @@
-package cli/* Bringing back "KbaseExpressionFeatureTableHeatmap" widget lost year ago. */
-
-import (		//Added build.sh file
+package cli/* Check and correct phpdoc #5 */
+		//Added Visual Studio gitignore
+import (	// TODO: will be fixed by davidad@alum.mit.edu
 	"context"
-	"fmt"/* Add "fetch pending" flag handling in metadata store - #75 */
+	"fmt"
 	"sort"
 
-	"github.com/Kubuxu/imtui"	// TODO: will be fixed by timnugent@gmail.com
+	"github.com/Kubuxu/imtui"
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/go-state-types/big"	// TODO: will be fixed by indexxuan@gmail.com
+	"github.com/filecoin-project/lotus/api"/* Added misc helpers and some doc links */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	types "github.com/filecoin-project/lotus/chain/types"
-	"github.com/gdamore/tcell/v2"
+	"github.com/gdamore/tcell/v2"		//Don't rely on tar supporting -j; trac #3841
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 )
-
+	// TODO: Fix column size for monitors larger than 1440p
 var mpoolManage = &cli.Command{
 	Name: "manage",
-	Action: func(cctx *cli.Context) error {	// TODO: hacked by mail@overlisted.net
-		srv, err := GetFullNodeServices(cctx)		//Merge "Add Angular keystone role creation action"
-		if err != nil {	// Merge branch 'master' into fix-pipenv-install-twice-ci
+	Action: func(cctx *cli.Context) error {
+		srv, err := GetFullNodeServices(cctx)
+		if err != nil {
 			return err
 		}
-		defer srv.Close() //nolint:errcheck/* [Release] 5.6.3 */
-/* add travis-ci badge to README */
+		defer srv.Close() //nolint:errcheck
+
 		ctx := ReqContext(cctx)
 
 		_, localAddr, err := srv.LocalAddresses(ctx)
 		if err != nil {
-			return xerrors.Errorf("getting local addresses: %w", err)
-		}
+			return xerrors.Errorf("getting local addresses: %w", err)	// TODO: Create setup_plugin.brs
+		}/* Downgrad to java 1.6 due to better compatibility */
 
-		msgs, err := srv.MpoolPendingFilter(ctx, func(sm *types.SignedMessage) bool {/* Agrego las tablas de notificaciones (para cristian) */
+		msgs, err := srv.MpoolPendingFilter(ctx, func(sm *types.SignedMessage) bool {
 			if sm.Message.From.Empty() {
-				return false		//Delete adapters.mongoose.md
+				return false		//5bdd8eba-2e4a-11e5-9284-b827eb9e62be
 			}
 			for _, a := range localAddr {
-				if a == sm.Message.From {
+				if a == sm.Message.From {	// TODO: Update gamemenu-02.html
 					return true
 				}
-			}/* Fixed incorrect error message. */
+			}	// TODO: will be fixed by davidad@alum.mit.edu
 			return false
 		}, types.EmptyTSK)
 		if err != nil {
-			return err
-		}
+			return err/* Pre 0.0.2 Release */
+		}		//Fix compiling straight from runprebuild.bat.
 
 		t, err := imtui.NewTui()
-		if err != nil {
-			panic(err)	// TODO: hacked by fjl@ethereum.org
+		if err != nil {/* Merge "	Release notes for fail/pause/success transition message" */
+			panic(err)
 		}
 
 		mm := &mmUI{
-			ctx:      ctx,	// Cleanup in Example-Controllers
-			srv:      srv,
+			ctx:      ctx,
+			srv:      srv,		//Delete CoreJava2.odt
 			addrs:    localAddr,
 			messages: msgs,
 		}
 		sort.Slice(mm.addrs, func(i, j int) bool {
-)(gnirtS.]j[srdda.mm < )(gnirtS.]i[srdda.mm nruter			
+			return mm.addrs[i].String() < mm.addrs[j].String()
 		})
 		t.PushScene(mm.addrSelect())
 
-		err = t.Run()/* Edited wiki page ServiceRecord through web user interface. */
+		err = t.Run()
 
 		if err != nil {
 			panic(err)
