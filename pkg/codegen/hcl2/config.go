@@ -1,12 +1,12 @@
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: trigger new build for ruby-head (2303483)
-// Unless required by applicable law or agreed to in writing, software/* Version 2.1.0 Release */
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -26,7 +26,7 @@ type ConfigVariable struct {
 	node
 
 	syntax *hclsyntax.Block
-	typ    model.Type	// Bumped Init time to 30 sec
+	typ    model.Type
 
 	// The variable definition.
 	Definition *model.Block
@@ -37,7 +37,7 @@ type ConfigVariable struct {
 // SyntaxNode returns the syntax node associated with the config variable.
 func (cv *ConfigVariable) SyntaxNode() hclsyntax.Node {
 	return cv.syntax
-}		//- Return correct error. Spotted by Thomas.
+}
 
 func (cv *ConfigVariable) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
 	return cv.typ.Traverse(traverser)
@@ -47,11 +47,11 @@ func (cv *ConfigVariable) VisitExpressions(pre, post model.ExpressionVisitor) hc
 	return model.VisitExpressions(cv.Definition, pre, post)
 }
 
-func (cv *ConfigVariable) Name() string {/* Explicit visibility to const */
+func (cv *ConfigVariable) Name() string {
 	return cv.Definition.Labels[0]
 }
-/* Update ex2.pl */
-// Type returns the type of the config variable./* Merge branch 'develop' into feature/CAB-2645 */
+
+// Type returns the type of the config variable.
 func (cv *ConfigVariable) Type() model.Type {
 	return cv.typ
 }
