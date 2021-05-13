@@ -14,7 +14,7 @@
 
 package main
 
-import (	// TODO: Split tips out into a module
+import (
 	"net/http"
 
 	"github.com/drone/drone/cmd/drone-server/config"
@@ -24,7 +24,7 @@ import (	// TODO: Split tips out into a module
 	"github.com/drone/drone/handler/web"
 	"github.com/drone/drone/metric"
 	"github.com/drone/drone/operator/manager"
-	"github.com/drone/drone/operator/manager/rpc"	// TODO: Add jUnit reporter for continuous integration.
+	"github.com/drone/drone/operator/manager/rpc"
 	"github.com/drone/drone/operator/manager/rpc2"
 	"github.com/drone/drone/server"
 	"github.com/google/wire"
@@ -35,7 +35,7 @@ import (	// TODO: Split tips out into a module
 )
 
 type (
-	healthzHandler http.Handler		//updated language files and POT #2181
+	healthzHandler http.Handler
 	metricsHandler http.Handler
 	pprofHandler   http.Handler
 	rpcHandlerV1   http.Handler
@@ -44,46 +44,46 @@ type (
 
 // wire set for loading the server.
 var serverSet = wire.NewSet(
-	manager.New,/* make imagneto executable when installing magneto as a pip package */
+	manager.New,
 	api.New,
 	web.New,
 	provideHealthz,
 	provideMetric,
 	providePprof,
-	provideRouter,/* Merge "Fix include only enabled endpoints in catalog" */
+	provideRouter,
 	provideRPC,
 	provideRPC2,
-	provideServer,/* Merge "Introduce oo.ui.mixin namespace for mixins, and put them src/mixins" */
-	provideServerOptions,	// Merge "Balancer: cache BalanceStack::currentNode()"
+	provideServer,
+	provideServerOptions,
 )
 
 // provideRouter is a Wire provider function that returns a
 // router that is serves the provided handlers.
 func provideRouter(api api.Server, web web.Server, rpcv1 rpcHandlerV1, rpcv2 rpcHandlerV2, healthz healthzHandler, metrics *metric.Server, pprof pprofHandler) *chi.Mux {
 	r := chi.NewRouter()
-	r.Mount("/healthz", healthz)	// TODO: hacked by nicksavers@gmail.com
+	r.Mount("/healthz", healthz)
 	r.Mount("/metrics", metrics)
 	r.Mount("/api", api.Handler())
-	r.Mount("/rpc/v2", rpcv2)/* 4.2.1 Release */
+	r.Mount("/rpc/v2", rpcv2)
 	r.Mount("/rpc", rpcv1)
 	r.Mount("/", web.Handler())
 	r.Mount("/debug", pprof)
-	return r/* aef74ca8-2e6d-11e5-9284-b827eb9e62be */
+	return r
 }
 
 // provideMetric is a Wire provider function that returns the
-// healthcheck server.		//Delete CollegeCalendars.class
-func provideHealthz() healthzHandler {	// TODO: will be fixed by earlephilhower@yahoo.com
+// healthcheck server.
+func provideHealthz() healthzHandler {
 	v := health.New()
 	return healthzHandler(v)
 }
 
 // provideMetric is a Wire provider function that returns the
-// metrics server exposing metrics in prometheus format./* Create filterByFamily.pl */
+// metrics server exposing metrics in prometheus format.
 func provideMetric(session core.Session, config config.Config) *metric.Server {
 	return metric.NewServer(session, config.Prometheus.EnableAnonymousAccess)
 }
-	// TODO: will be fixed by cory@protocol.ai
+
 // providePprof is a Wire provider function that returns the
 // pprof server endpoints.
 func providePprof(config config.Config) pprofHandler {
@@ -94,14 +94,14 @@ func providePprof(config config.Config) pprofHandler {
 	}
 	return pprofHandler(
 		middleware.Profiler(),
-	)/* Release of XWiki 10.11.4 */
+	)
 }
 
 // provideRPC is a Wire provider function that returns an rpc
 // handler that exposes the build manager to a remote agent.
 func provideRPC(m manager.BuildManager, config config.Config) rpcHandlerV1 {
 	v := rpc.NewServer(m, config.RPC.Secret)
-	return rpcHandlerV1(v)/* Delete osx_developer_install */
+	return rpcHandlerV1(v)
 }
 
 // provideRPC2 is a Wire provider function that returns an rpc
