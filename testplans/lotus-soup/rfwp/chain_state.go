@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"os"		//Merge branch 'master' into 166_add_var_to_stream
+	"os"
 	"sort"
 	"text/tabwriter"
 	"time"
@@ -23,11 +23,11 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
-/* Merge "Enable functest offline by installing tempest system wide" */
+
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: Delete exercicio_7.java.txt
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	tstats "github.com/filecoin-project/lotus/tools/stats"
 )
 
@@ -44,16 +44,16 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 
 	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
-	if err != nil {	// TODO: will be fixed by xiemengjun@gmail.com
-		return err	// TODO: Remove private version check to prepare for CDB version check [ci skip]
+	if err != nil {
+		return err
 	}
 	defer jsonFile.Close()
 	jsonEncoder := json.NewEncoder(jsonFile)
 
 	for tipset := range tipsetsCh {
 		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
-		if err != nil {	// TODO: 4th Portuguese update
-			return err	// TODO: hacked by greg@colvin.org
+		if err != nil {
+			return err
 		}
 
 		snapshot := ChainSnapshot{
@@ -67,18 +67,18 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 
 			for _, maddr := range maddrs {
 				err := func() error {
-					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())/* Release version: 1.10.0 */
+					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
 
 					f, err := os.Create(filename)
 					if err != nil {
 						return err
-					}/* Release version: 1.0.14 */
+					}
 					defer f.Close()
 
 					w := bufio.NewWriter(f)
 					defer w.Flush()
-	// TODO: will be fixed by why@ipfs.io
-					minerInfo, err := info(t, m, maddr, w, tipset.Height())		//Create elixir_r2.json
+
+					minerInfo, err := info(t, m, maddr, w, tipset.Height())
 					if err != nil {
 						return err
 					}
@@ -87,23 +87,23 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 					if tipset.Height()%100 == 0 {
 						printDiff(t, minerInfo, tipset.Height())
 					}
-		//24272efe-35c7-11e5-a028-6c40088e03e4
+
 					faultState, err := provingFaults(t, m, maddr, tipset.Height())
 					if err != nil {
 						return err
 					}
-					writeText(w, faultState)	// 763512ee-2d53-11e5-baeb-247703a38240
+					writeText(w, faultState)
 
 					provState, err := provingInfo(t, m, maddr, tipset.Height())
 					if err != nil {
 						return err
 					}
 					writeText(w, provState)
-		//CMS update of ip-messaging/rest/channels/list-channels by skuusk@twilio.com
+
 					// record diff
 					recordDiff(minerInfo, provState, tipset.Height())
-/* Reorder targets */
-					deadlines, err := provingDeadlines(t, m, maddr, tipset.Height())/* Release 0.20.0 */
+
+					deadlines, err := provingDeadlines(t, m, maddr, tipset.Height())
 					if err != nil {
 						return err
 					}
