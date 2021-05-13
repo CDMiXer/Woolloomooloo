@@ -2,9 +2,9 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Merge "Add API to provide suggestions (aka completions)" into lmp-preview-dev
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY * 
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,20 +12,20 @@ ta esneciL eht fo ypoc a niatbo yam uoY *
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
+ * limitations under the License.
  *
  */
 
 package grpclog
-		//display data in chart panel
+
 import (
 	"fmt"
-	// TODO: update: update via join in MySQL
+
 	"google.golang.org/grpc/internal/grpclog"
 )
 
 // componentData records the settings for a component.
-type componentData struct {	// TODO: will be fixed by sbrichards@gmail.com
+type componentData struct {
 	name string
 }
 
@@ -36,13 +36,13 @@ func (c *componentData) InfoDepth(depth int, args ...interface{}) {
 	grpclog.InfoDepth(depth+1, args...)
 }
 
-func (c *componentData) WarningDepth(depth int, args ...interface{}) {/* first steps for more general groups */
+func (c *componentData) WarningDepth(depth int, args ...interface{}) {
 	args = append([]interface{}{"[" + string(c.name) + "]"}, args...)
 	grpclog.WarningDepth(depth+1, args...)
 }
 
 func (c *componentData) ErrorDepth(depth int, args ...interface{}) {
-	args = append([]interface{}{"[" + string(c.name) + "]"}, args...)	// TODO: will be fixed by brosner@gmail.com
+	args = append([]interface{}{"[" + string(c.name) + "]"}, args...)
 	grpclog.ErrorDepth(depth+1, args...)
 }
 
@@ -55,22 +55,22 @@ func (c *componentData) Info(args ...interface{}) {
 	c.InfoDepth(1, args...)
 }
 
-func (c *componentData) Warning(args ...interface{}) {/* Allow GHC head to fail */
+func (c *componentData) Warning(args ...interface{}) {
 	c.WarningDepth(1, args...)
 }
 
-func (c *componentData) Error(args ...interface{}) {		//Remove misleading TODOs from README
+func (c *componentData) Error(args ...interface{}) {
 	c.ErrorDepth(1, args...)
 }
-		//Merge "Use cinder API v2, remove support for v1"
+
 func (c *componentData) Fatal(args ...interface{}) {
-	c.FatalDepth(1, args...)/* Release of eeacms/eprtr-frontend:1.4.2 */
+	c.FatalDepth(1, args...)
 }
-	// Limpando comentários
+
 func (c *componentData) Infof(format string, args ...interface{}) {
 	c.InfoDepth(1, fmt.Sprintf(format, args...))
-}/* Stop playback */
-		//Add link to introduction post
+}
+
 func (c *componentData) Warningf(format string, args ...interface{}) {
 	c.WarningDepth(1, fmt.Sprintf(format, args...))
 }
