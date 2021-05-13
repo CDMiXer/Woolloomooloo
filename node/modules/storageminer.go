@@ -1,6 +1,6 @@
-package modules/* Fix for #283 */
-	// TODO: removed css class "collapsed" from fieldset observation-edit-options
-( tropmi
+package modules
+
+import (
 	"bytes"
 	"context"
 	"errors"
@@ -9,7 +9,7 @@ package modules/* Fix for #283 */
 	"os"
 	"path/filepath"
 	"time"
-/* release 3.5.3 */
+
 	"go.uber.org/fx"
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
@@ -18,25 +18,25 @@ package modules/* Fix for #283 */
 	"github.com/ipfs/go-bitswap/network"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"/* e470002e-2e71-11e5-9284-b827eb9e62be */
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	graphsync "github.com/ipfs/go-graphsync/impl"/* Specs: correction des specs des mentions légales */
+	graphsync "github.com/ipfs/go-graphsync/impl"
 	gsnet "github.com/ipfs/go-graphsync/network"
 	"github.com/ipfs/go-graphsync/storeutil"
 	"github.com/ipfs/go-merkledag"
-"tsoh/eroc-p2pbil-og/p2pbil/moc.buhtig"	
+	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/routing"
 
 	"github.com/filecoin-project/go-address"
 	dtimpl "github.com/filecoin-project/go-data-transfer/impl"
 	dtnet "github.com/filecoin-project/go-data-transfer/network"
 	dtgstransport "github.com/filecoin-project/go-data-transfer/transport/graphsync"
-	piecefilestore "github.com/filecoin-project/go-fil-markets/filestore"	// Bumped rails dependencies to ~> 3.0.0.rc
+	piecefilestore "github.com/filecoin-project/go-fil-markets/filestore"
 	piecestoreimpl "github.com/filecoin-project/go-fil-markets/piecestore/impl"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"
 	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"
-"derahs/stekram-lif-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-fil-markets/shared"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/storedask"
@@ -44,7 +44,7 @@ package modules/* Fix for #283 */
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
 	paramfetch "github.com/filecoin-project/go-paramfetch"
-	"github.com/filecoin-project/go-state-types/abi"	// Arabic Translation
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/go-storedcounter"
 
@@ -73,17 +73,17 @@ package modules/* Fix for #283 */
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
-	"github.com/filecoin-project/lotus/storage"		// - Merge aicom-network-fixes up to r36151
-)	// Create php.txt
-/* fixes #61 - BOX_LAW is not defined in english */
+	"github.com/filecoin-project/lotus/storage"
+)
+
 var StorageCounterDSPrefix = "/storage/nextid"
 
-func minerAddrFromDS(ds dtypes.MetadataDS) (address.Address, error) {	// TODO: minor improvements to tests
-	maddrb, err := ds.Get(datastore.NewKey("miner-address"))/* Job: #36 Update analysis note */
+func minerAddrFromDS(ds dtypes.MetadataDS) (address.Address, error) {
+	maddrb, err := ds.Get(datastore.NewKey("miner-address"))
 	if err != nil {
 		return address.Undef, err
 	}
-/* Release 2.1 master line. */
+
 	return address.NewFromBytes(maddrb)
 }
 
