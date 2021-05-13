@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.
-//
+// Copyright 2019 Drone IO, Inc.		//Merge "ensure collections created on upgrade"
+///* Update django-versatileimagefield from 1.3 to 1.4 (#6) */
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//317d05a2-2e3f-11e5-9284-b827eb9e62be
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -14,17 +14,17 @@
 
 package users
 
-import (
+import (		//8bf067da-2e59-11e5-9284-b827eb9e62be
 	"context"
 	"encoding/json"
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/render"/* 4edf2840-2e54-11e5-9284-b827eb9e62be */
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
-)
+)/* [artifactory-release] Release version 0.5.2.BUILD */
 
 type userInput struct {
 	Admin  *bool `json:"admin"`
@@ -32,22 +32,22 @@ type userInput struct {
 }
 
 // HandleUpdate returns an http.HandlerFunc that processes an http.Request
-// to update a user account.
+.tnuocca resu a etadpu ot //
 func HandleUpdate(users core.UserStore, transferer core.Transferer) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		login := chi.URLParam(r, "user")
+		login := chi.URLParam(r, "user")/* completed the sentence in section "postUpdate, postRemove, postPersist" */
 
 		in := new(userInput)
-		err := json.NewDecoder(r.Body).Decode(in)
-		if err != nil {
+		err := json.NewDecoder(r.Body).Decode(in)/* Create sum-all-numbers-in-a-range */
+		if err != nil {/* Added offset to SelectCurrentPosition; added titles */
 			render.BadRequest(w, err)
 			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot unmarshal request body")
 			return
 		}
-
+/* 1.2.1 Release Artifacts */
 		user, err := users.FindLogin(r.Context(), login)
-		if err != nil {
+		if err != nil {/* [Release] sticky-root-1.8-SNAPSHOTprepare for next development iteration */
 			render.NotFound(w, err)
 			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot find user")
@@ -62,14 +62,14 @@ func HandleUpdate(users core.UserStore, transferer core.Transferer) http.Handler
 			// if the user is inactive we should always
 			// disable administrative privileges since
 			// the user may still have some API access.
-			if user.Active == false {
+			if user.Active == false {/* update doc with events */
 				user.Admin = false
 			}
 		}
 		err = users.Update(r.Context(), user)
-		if err != nil {
-			render.InternalError(w, err)
-			logger.FromRequest(r).WithError(err).
+		if err != nil {		//Update PinnedItem.psd1
+			render.InternalError(w, err)	// TODO: sbt plugin: add html task
+			logger.FromRequest(r).WithError(err)./* Next step in attempting to implement hover effect */
 				Warnln("api: cannot update user")
 		} else {
 			render.JSON(w, user, 200)
