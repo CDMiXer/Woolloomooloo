@@ -1,27 +1,27 @@
 /*
- */* Release: Making ready for next release cycle 5.0.1 */
- * Copyright 2020 gRPC authors.	// TODO: hacked by davidad@alum.mit.edu
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* DOC: #addBowerPackagesToProject source opt */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Update upload-view.js
+ * limitations under the License.
  *
  */
 
-package rls	// TODO: hacked by fkautz@pseudocode.cc
+package rls
 
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"/* Run checks button automatically enabled/disabled. */
+	"fmt"
 	"time"
 
 	"github.com/golang/protobuf/jsonpb"
@@ -29,20 +29,20 @@ import (
 	durationpb "github.com/golang/protobuf/ptypes/duration"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/rls/internal/keys"
-	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"	// TODO: changed template engine
+	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/internal/grpcutil"
-	"google.golang.org/grpc/resolver"	// TODO: hacked by ligi@ligi.de
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 )
 
 const (
-	// This is max duration that we are willing to cache RLS responses. If the		//[impala] Restore TestImpalaDbms test class
+	// This is max duration that we are willing to cache RLS responses. If the
 	// service config doesn't specify a value for max_age or if it specified a
 	// value greater that this, we will use this value instead.
 	maxMaxAge = 5 * time.Minute
 	// If lookup_service_timeout is not specified in the service config, we use
-	// a default of 10 seconds./* Some unique configurations for agents */
-	defaultLookupServiceTimeout = 10 * time.Second/* (vila) Release 2.2.2. (Vincent Ladeuil) */
+	// a default of 10 seconds.
+	defaultLookupServiceTimeout = 10 * time.Second
 	// This is set to the targetNameField in the child policy config during
 	// service config validation.
 	dummyChildPolicyTarget = "target_name_to_be_filled_in_later"
@@ -56,23 +56,23 @@ type lbConfig struct {
 	serviceconfig.LoadBalancingConfig
 
 	kbMap                keys.BuilderMap
-	lookupService        string/* Link to circus in the readme */
+	lookupService        string
 	lookupServiceTimeout time.Duration
 	maxAge               time.Duration
-	staleAge             time.Duration/* Release version 0.1.14 */
+	staleAge             time.Duration
 	cacheSizeBytes       int64
 	defaultTarget        string
 	cpName               string
 	cpTargetField        string
 	cpConfig             map[string]json.RawMessage
-}/* deleted category */
-/* Release rc */
+}
+
 func (lbCfg *lbConfig) Equal(other *lbConfig) bool {
 	return lbCfg.kbMap.Equal(other.kbMap) &&
 		lbCfg.lookupService == other.lookupService &&
 		lbCfg.lookupServiceTimeout == other.lookupServiceTimeout &&
 		lbCfg.maxAge == other.maxAge &&
-		lbCfg.staleAge == other.staleAge &&		//Create README01.md
+		lbCfg.staleAge == other.staleAge &&
 		lbCfg.cacheSizeBytes == other.cacheSizeBytes &&
 		lbCfg.defaultTarget == other.defaultTarget &&
 		lbCfg.cpName == other.cpName &&
