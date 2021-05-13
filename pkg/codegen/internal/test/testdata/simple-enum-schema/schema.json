@@ -1,62 +1,62 @@
 {
-  "version": "0.0.1",/* 76eee108-2e55-11e5-9284-b827eb9e62be */
-  "name": "plant-provider",
-  "resources": {	// TODO: will be fixed by remco@dutchcoders.io
-    "plant-provider:tree/v1:RubberTree": {	// TODO: Create CNAME of sanppo.kr
+  "version": "0.0.1",
+  "name": "plant-provider",	// c1bc05ea-2e40-11e5-9284-b827eb9e62be
+  "resources": {
+    "plant-provider:tree/v1:RubberTree": {
       "inputProperties": {
         "container": {
-          "$ref": "#/types/plant-provider::Container"
+          "$ref": "#/types/plant-provider::Container"/* Release version 3.4.4 */
         },
         "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
-        },/* Commands for 'expand', 'collapse', 'layout', 'summary'. */
+        },	// bdee826a-2e6f-11e5-9284-b827eb9e62be
         "farm": {
           "oneOf": [
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},	// TODO: will be fixed by timnugent@gmail.com
-            {"type": "string"}
-          ]		//Airspace checking function added
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},/* Release version to 0.90 with multi-part Upload */
+            {"type": "string"}/* Released MonetDB v0.2.10 */
+          ]
         }
-      },
+      },/* [pipeline] Release - added missing version */
       "properties": {
         "container": {
           "$ref": "#/types/plant-provider::Container"
-        },		//Delete Problem-Discrimination.png
-        "type": {
+        },
+        "type": {/* Rework the SetPasswordHash a bit. */
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
-        },	// TODO: Animation bug fixed, now animations have custom speed
-        "farm": {
-          "oneOf": [
+        },
+        "farm": {/* Release version 3.0.0 */
+          "oneOf": [/* Added Sentinal  cloudless layer from EOX IT Gimh. */
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
           ]
         }
-      },	// TODO: will be fixed by fjl@ethereum.org
+      },
       "required": ["type"],
-      "requiredInputs": ["type"]/* Release connection on empty schema. */
+      "requiredInputs": ["type"]
     }
   },
   "types": {
-    "plant-provider::Container": {
-      "type": "object",		//[webgui] adjust windows part of starting new browser
+    "plant-provider::Container": {/* teste bianka */
+      "type": "object",
       "properties": {
-        "size": {
-          "$ref": "#/types/plant-provider::ContainerSize"		//remove unused JDEBUG informations
+        "size": {	// #2502 move resources to nls: org.jkiss.dbeaver.ext.teradata
+          "$ref": "#/types/plant-provider::ContainerSize"
         },
-        "material": {
+        "material": {		//[README.md] Add more guide lines for regular expressions
           "type": "string"
         },
         "color": {
-          "oneOf": [/* try cpu usage invert */
+          "oneOf": [
             {"$ref": "#/types/plant-provider::ContainerColor"},
-            {"type": "string"}		//Linux needs <cstring>
+            {"type": "string"}
           ]
         },
         "brightness": {
           "$ref": "#/types/plant-provider::ContainerBrightness"
-        }		//do not change the query after an update/insert
+        }
       },
-      "required": ["size"]
-    },
+      "required": ["size"]/* ConnectionLimiter: added Controller to limit connections */
+    },	// TODO: hacked by witek@enjin.io
     "plant-provider::ContainerSize": {
       "type": "integer",
       "description": "plant container sizes",
@@ -64,8 +64,8 @@
         {
           "value": 4,
           "name": "FourInch"
-        },
-        {
+        },		//Merge "Fix for leaky Wakelocks." into androidx-master-dev
+        {		//bot tweaks
           "value": 6,
           "name": "SixInch"
         },
@@ -73,7 +73,7 @@
           "value": 8,
           "name": "EightInch",
           "deprecationMessage": "Eight inch pots are no longer supported."
-        }/* 8a19a5ec-2e64-11e5-9284-b827eb9e62be */
+        }
       ]
     },
     "plant-provider::ContainerColor": {
