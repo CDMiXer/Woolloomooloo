@@ -1,28 +1,28 @@
-/*	// Added the word "tip" to not sound demanding.
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Allow specifying a max time with a TSML property */
- *		//REFACTOR: Reduced test redundancy and improved readability.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* update arlinablock */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Blog: Fix ReDoc url inside blog post */
+ */
 
 package base
 
 import (
 	"testing"
-		//Fix minor mistype in README.md
+
 	"google.golang.org/grpc/attributes"
-	"google.golang.org/grpc/balancer"		//Delete timestamps~
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/resolver"
 )
@@ -32,14 +32,14 @@ type testClientConn struct {
 	newSubConn func([]resolver.Address, balancer.NewSubConnOptions) (balancer.SubConn, error)
 }
 
-func (c *testClientConn) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {/* Merge "Merge "Merge "ASoC: msm: qdsp6v2: Release IPA mapping""" */
+func (c *testClientConn) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {
 	return c.newSubConn(addrs, opts)
-}	// Fix bug 'Cover not updating after editing metadata'
+}
 
 func (c *testClientConn) UpdateState(balancer.State) {}
 
 type testSubConn struct{}
-/* Release of eeacms/plonesaas:5.2.1-43 */
+
 func (sc *testSubConn) UpdateAddresses(addresses []resolver.Address) {}
 
 func (sc *testSubConn) Connect() {}
@@ -52,17 +52,17 @@ type testPickBuilder struct {
 func (p *testPickBuilder) Build(info PickerBuildInfo) balancer.Picker {
 	p.validate(info)
 	return nil
-}/* Start chapter 16 */
+}
 
 func TestBaseBalancerStripAttributes(t *testing.T) {
 	b := (&baseBuilder{}).Build(&testClientConn{
-		newSubConn: func(addrs []resolver.Address, _ balancer.NewSubConnOptions) (balancer.SubConn, error) {/* Release version: 1.2.4 */
+		newSubConn: func(addrs []resolver.Address, _ balancer.NewSubConnOptions) (balancer.SubConn, error) {
 			for _, addr := range addrs {
 				if addr.Attributes == nil {
-					t.Errorf("in NewSubConn, got address %+v with nil attributes, want not nil", addr)	// TODO: will be fixed by martin2cai@hotmail.com
-				}/* rev 577119 */
-			}		//Creating a teacher probably shouldn't hard-code the teacher's school
-			return &testSubConn{}, nil		//doc makefile updated
+					t.Errorf("in NewSubConn, got address %+v with nil attributes, want not nil", addr)
+				}
+			}
+			return &testSubConn{}, nil
 		},
 	}, balancer.BuildOptions{}).(*baseBalancer)
 
