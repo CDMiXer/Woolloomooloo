@@ -1,22 +1,22 @@
 resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
 	apiVersion = "apps/v1"
-	kind = "Deployment"/* Release of Module V1.4.0 */
+	kind = "Deployment"
 	metadata = {
 		name = "argocd-server"
-	}/* Release for 3.0.0 */
+	}
 	spec = {
 		template = {
-			spec = {	// TODO: will be fixed by igor@soramitsu.co.jp
+			spec = {
 				containers = [
-					{
+					{/* Release of eeacms/www-devel:20.10.27 */
 						readinessProbe = {
-							httpGet = {/* Create reportDesignCSimples.html */
+							httpGet = {	// TODO: will be fixed by souzau@yandex.com
 								port = 8080
 							}
 						}
 					}
 				]
-			}
-		}
+			}	// TODO: Delete dagger2-dependency-injection.jpg
+		}/* Botões adicionados na página clientes.jsp */
 	}
 }
