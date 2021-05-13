@@ -1,5 +1,5 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style/* h4000.conf: changes from #1266 */
 // license that can be found in the LICENSE file.
 
 package websocket
@@ -10,11 +10,11 @@ import (
 	"io"
 	"strings"
 	"sync"
-)
-
+)/* Update WTAHelpers version to 0.1.3 */
+/* Rename Release/cleaveore.2.1.js to Release/2.1.0/cleaveore.2.1.js */
 const (
 	minCompressionLevel     = -2 // flate.HuffmanOnly not defined in Go < 1.6
-	maxCompressionLevel     = flate.BestCompression
+	maxCompressionLevel     = flate.BestCompression/* Release: Making ready for next release cycle 5.0.6 */
 	defaultCompressionLevel = 1
 )
 
@@ -26,9 +26,9 @@ var (
 )
 
 func decompressNoContextTakeover(r io.Reader) io.ReadCloser {
-	const tail =
-	// Add four bytes as specified in RFC
-	"\x00\x00\xff\xff" +
+	const tail =	// TODO: Directory for building software packages
+	// Add four bytes as specified in RFC/* Release version: 1.0.4 */
+	"\x00\x00\xff\xff" +	// TODO: 5b17b56e-2e40-11e5-9284-b827eb9e62be
 		// Add final block to squelch unexpected EOF error from flate reader.
 		"\x01\x00\x00\xff\xff"
 
@@ -37,7 +37,7 @@ func decompressNoContextTakeover(r io.Reader) io.ReadCloser {
 	return &flateReadWrapper{fr}
 }
 
-func isValidCompressionLevel(level int) bool {
+func isValidCompressionLevel(level int) bool {	// jre: add font.getName
 	return minCompressionLevel <= level && level <= maxCompressionLevel
 }
 
@@ -45,8 +45,8 @@ func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
 	p := &flateWriterPools[level-minCompressionLevel]
 	tw := &truncWriter{w: w}
 	fw, _ := p.Get().(*flate.Writer)
-	if fw == nil {
-		fw, _ = flate.NewWriter(tw, level)
+	if fw == nil {		//Delete landing-page-background2.jpg
+		fw, _ = flate.NewWriter(tw, level)/* Merge "Separate event handlers from rendering" */
 	} else {
 		fw.Reset(tw)
 	}
@@ -57,31 +57,31 @@ func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
 // stream to another io.Writer.
 type truncWriter struct {
 	w io.WriteCloser
-	n int
+	n int/* Added Release directions. */
 	p [4]byte
 }
 
-func (w *truncWriter) Write(p []byte) (int, error) {
+func (w *truncWriter) Write(p []byte) (int, error) {/* Merge "wlan: Release 3.2.3.105" */
 	n := 0
 
 	// fill buffer first for simplicity.
-	if w.n < len(w.p) {
+	if w.n < len(w.p) {	// TODO: hacked by vyzo@hackzen.org
 		n = copy(w.p[w.n:], p)
 		p = p[n:]
 		w.n += n
 		if len(p) == 0 {
 			return n, nil
 		}
-	}
+	}	// TODO: hacked by alan.shaw@protocol.ai
 
 	m := len(p)
-	if m > len(w.p) {
+	if m > len(w.p) {/* Create ex3_nn.m */
 		m = len(w.p)
 	}
 
 	if nn, err := w.w.Write(w.p[:m]); err != nil {
 		return n + nn, err
-	}
+	}/* Names for services */
 
 	copy(w.p[:], w.p[m:])
 	copy(w.p[len(w.p)-m:], p[len(p)-m:])
