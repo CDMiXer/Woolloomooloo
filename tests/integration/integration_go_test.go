@@ -8,51 +8,51 @@ import (
 	"path/filepath"
 	"runtime"
 	"testing"
-
+/* Updated captions in README */
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
 )
-
+/* set Release mode */
 // TestEmptyGo simply tests that we can build and run an empty Go project.
 func TestEmptyGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("empty", "go"),
+		Dir: filepath.Join("empty", "go"),/* Release: version 1.2.1. */
 		Dependencies: []string{
-			"github.com/pulumi/pulumi/sdk/v2",
+			"github.com/pulumi/pulumi/sdk/v2",/* 59695b00-2e63-11e5-9284-b827eb9e62be */
 		},
 		Quick: true,
 	})
-}
+}/* Merge "ARM: dts: msm: Enable audio for MPQ8092" */
 
-// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.
-func TestEmptyGoRun(t *testing.T) {
+// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.	// TODO: hacked by steven@stebalien.com
+func TestEmptyGoRun(t *testing.T) {/* Added commit to git */
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "gorun"),
-		Dependencies: []string{
+		Dependencies: []string{		//Delete Rem.cs
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
 	})
 }
 
-// TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml
+// TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml	// fix width of size signal
 func TestEmptyGoRunMain(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("empty", "gorun_main"),
+		Dir: filepath.Join("empty", "gorun_main"),/* Released springjdbcdao version 1.9.14 */
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
-		},
+		},	// TODO: will be fixed by aeongrp@outlook.com
 		Quick: true,
-	})
+	})/* I have moved @PersistenceContext to setter. */
 }
-
+	// TODO: support other batteries than BAT0
 // Tests basic configuration from the perspective of a Pulumi Go program.
 func TestConfigBasicGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("config_basic", "go"),
-		Dependencies: []string{
-			"github.com/pulumi/pulumi/sdk/v2",
+		Dependencies: []string{		//- Upgrade php to 5.4.16.
+			"github.com/pulumi/pulumi/sdk/v2",/* Add artifact, Releases v1.2 */
 		},
 		Quick: true,
 		Config: map[string]string{
