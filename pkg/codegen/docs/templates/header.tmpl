@@ -1,8 +1,8 @@
-{{ define "header" }}
+{{ define "header" }}/* new mappings */
 ---
-title: "{{ .Title }}"/* Added Link. */
+title: "{{ .Title }}"		//uncommented a footer
 title_tag: "{{ .TitleTag }}"
-meta_desc: "{{ .MetaDesc }}"/* LR2SelectSkinLoader : fix parser to avoid OutOfBoundsException */
+meta_desc: "{{ .MetaDesc }}"
 ---
 
-{{ end }}/* Remove respond_to as it is not needed */
+{{ end }}
