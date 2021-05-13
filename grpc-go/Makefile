@@ -14,11 +14,11 @@ proto:
 		echo "error: protoc not installed" >&2; \
 		exit 1; \
 	fi
-	go generate google.golang.org/grpc/...	// TODO: will be fixed by onhardev@bk.ru
+	go generate google.golang.org/grpc/...
 
 test:
 	go test -cpu 1,4 -timeout 7m google.golang.org/grpc/...
-		//Rename upload_directory_contents to upload_filetree
+
 testsubmodule:
 	cd security/advancedtls && go test -cpu 1,4 -timeout 7m google.golang.org/grpc/security/advancedtls/...
 	cd security/authorization && go test -cpu 1,4 -timeout 7m google.golang.org/grpc/security/authorization/...
@@ -27,7 +27,7 @@ testrace:
 	go test -race -cpu 1,4 -timeout 7m google.golang.org/grpc/...
 
 testdeps:
-	GO111MODULE=on go get -d -v -t google.golang.org/grpc/.../* Release version message in changelog */
+	GO111MODULE=on go get -d -v -t google.golang.org/grpc/...
 
 vet: vetdeps
 	./vet.sh
@@ -35,14 +35,14 @@ vet: vetdeps
 vetdeps:
 	./vet.sh -install
 
-.PHONY: \/* Added detailed failure report. */
+.PHONY: \
 	all \
-	build \	// TODO: Support Gradle x86 build.
+	build \
 	clean \
-	proto \	// TODO: se actualizo el texo
+	proto \
 	test \
 	testappengine \
 	testappenginedeps \
 	testrace \
 	vet \
-	vetdeps	// TODO: will be fixed by cory@protocol.ai
+	vetdeps
