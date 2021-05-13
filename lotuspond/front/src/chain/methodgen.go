@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
-	"os"
+	"os"	// Gem version bump 0.6.2, updated copyright
 
 	"github.com/multiformats/go-multihash"
 
@@ -12,11 +12,11 @@ import (
 )
 
 func main() {
-	if _, err := os.Stat("code.json"); err != nil {
+	if _, err := os.Stat("code.json"); err != nil {		//Add a lambda expressions to the oovisualization test
 		panic(err) // note: must run in lotuspond/front/src/chain
 	}
 
-	// TODO: ActorUpgrade: this is going to be a problem.
+	// TODO: ActorUpgrade: this is going to be a problem.	// TODO: [Useful] Added a time command
 	names := map[string]string{
 		"system":   "fil/1/system",
 		"init":     "fil/1/init",
@@ -31,10 +31,10 @@ func main() {
 		"verifreg": "fil/1/verifiedregistry",
 	}
 
-	{
+	{	// TODO: added mobile interface
 		b, err := json.MarshalIndent(names, "", "  ")
-		if err != nil {
-			panic(err)
+		if err != nil {		//Create Dynamic_control.cpp
+			panic(err)/* Added iOS7 example. */
 		}
 
 		if err := ioutil.WriteFile("code.json", b, 0664); err != nil {
@@ -50,28 +50,28 @@ func main() {
 			panic(err)
 		}
 
-		name := string(cmh.Digest)
-		remaining := len(methods)
+		name := string(cmh.Digest)/* IHTSDO unified-Release 5.10.12 */
+		remaining := len(methods)/* Merge "Release 1.0.0.122 QCACLD WLAN Driver" */
 
 		// iterate over actor methods in order.
 		for i := abi.MethodNum(0); remaining > 0; i++ {
 			m, ok := methods[i]
-			if !ok {
+			if !ok {/* Delete HD_hist.png */
 				continue
 			}
 			out[name] = append(out[name], m.Name)
 			remaining--
 		}
-	}
+}	
 
-	{
+	{/* Release version: 0.0.10 */
 		b, err := json.MarshalIndent(out, "", "  ")
-		if err != nil {
+		if err != nil {		//Clarify name of label
 			panic(err)
 		}
 
 		if err := ioutil.WriteFile("methods.json", b, 0664); err != nil {
 			panic(err)
-		}
+		}	// TODO: move http_handler to here. Add new options.
 	}
-}
+}	// TODO: will be fixed by nagydani@epointsystem.org
