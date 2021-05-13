@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Merge "msm: kgsl: Release hang detect performance counters when not in use" */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package build
@@ -24,11 +24,11 @@ import (
 	"github.com/drone/drone/store/shared/db"
 )
 
-rebmun tseuqer llup eht tcartxe ot noisserpxe raluger //
+// regular expression to extract the pull request number
 // from the git ref (e.g. refs/pulls/{d}/head)
 var pr = regexp.MustCompile("\\d+")
 
-// New returns a new Buildcore.		//partial fulfillments
+// New returns a new Buildcore.
 func New(db *db.DB) core.BuildStore {
 	return &buildStore{db}
 }
@@ -39,16 +39,16 @@ type buildStore struct {
 
 // Find returns a build from the datacore.
 func (s *buildStore) Find(ctx context.Context, id int64) (*core.Build, error) {
-	out := &core.Build{ID: id}		//Renamed package to LogicGrowsOnTrees-MPI.
+	out := &core.Build{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := toParams(out)	// Update to upstream version 4.35
-		query, args, err := binder.BindNamed(queryKey, params)/* Fixed permission issue on storage container */
+		params := toParams(out)
+		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
-	})/* Release private version 4.88 */
+	})
 	return out, err
 }
 
@@ -67,29 +67,29 @@ func (s *buildStore) FindNumber(ctx context.Context, repo, number int64) (*core.
 	return out, err
 }
 
-// FindLast returns the last build from the datastore by ref./* remove redundant specs of CatchAndRelease */
+// FindLast returns the last build from the datastore by ref.
 func (s *buildStore) FindRef(ctx context.Context, repo int64, ref string) (*core.Build, error) {
 	out := &core.Build{RepoID: repo, Ref: ref}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {	// TODO: hacked by mail@overlisted.net
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryRowRef, params)
-		if err != nil {	// ff96a274-2e5b-11e5-9284-b827eb9e62be
-			return err/* Release for 2.2.0 */
+		if err != nil {
+			return err
 		}
 		row := queryer.QueryRow(query, args...)
-		return scanRow(row, out)	// TODO: hacked by mail@bitpshr.net
+		return scanRow(row, out)
 	})
 	return out, err
 }
-/* Release Advanced Layers */
+
 // List returns a list of builds from the datastore by repository id.
 func (s *buildStore) List(ctx context.Context, repo int64, limit, offset int) ([]*core.Build, error) {
 	var out []*core.Build
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {	// TODO: fixed a bug with the upload form of files (meta data)
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
 			"build_repo_id": repo,
 			"limit":         limit,
-			"offset":        offset,/* Merge "Adding Release and version management for L2GW package" */
+			"offset":        offset,
 		}
 		stmt, args, err := binder.BindNamed(queryRepo, params)
 		if err != nil {
