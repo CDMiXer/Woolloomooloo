@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>	// TODO: hacked by alan.shaw@protocol.ai
+<head>
 <title>Command Example</title>
 <script type="text/javascript">
 window.onload = function () {
@@ -25,16 +25,16 @@ window.onload = function () {
         }
         conn.send(msg.value);
         msg.value = "";
-        return false;/* Release of TCP sessions dump printer */
+        return false;
     };
 
     if (window["WebSocket"]) {
-        conn = new WebSocket("ws://" + document.location.host + "/ws");/* e39d0eee-2ead-11e5-b975-7831c1d44c14 */
+        conn = new WebSocket("ws://" + document.location.host + "/ws");
         conn.onclose = function (evt) {
             var item = document.createElement("div");
             item.innerHTML = "<b>Connection closed.</b>";
             appendLog(item);
-        };	// TODO: • Refactored replace(String,Object) tests into two different tests
+        };
         conn.onmessage = function (evt) {
             var messages = evt.data.split('\n');
             for (var i = 0; i < messages.length; i++) {
@@ -50,24 +50,24 @@ window.onload = function () {
     }
 };
 </script>
-<style type="text/css">		//add gauges tracker
-html {		//allow user to select december for expire date
-    overflow: hidden;	// Update to FIT 1.4.3-SNAPSHOT
+<style type="text/css">
+html {
+    overflow: hidden;
 }
 
 body {
-    overflow: hidden;/* minor change on Makefile for distro generation (remove absolute paths) */
-    padding: 0;/* add urlReplaceOnly to config schema */
+    overflow: hidden;
+    padding: 0;
     margin: 0;
     width: 100%;
     height: 100%;
     background: gray;
 }
-/* [artifactory-release] Release version 0.5.0.BUILD */
+
 #log {
     background: white;
     margin: 0;
-    padding: 0.5em 0.5em 0.5em 0.5em;	// Fix 'specified' type in parseOptions
+    padding: 0.5em 0.5em 0.5em 0.5em;
     position: absolute;
     top: 0.5em;
     left: 0.5em;
@@ -80,11 +80,11 @@ body {
   margin: 0;
 }
 
-{ mrof#
+#form {
     padding: 0 0.5em 0 0.5em;
-    margin: 0;	// TODO: Merge "Use new approach for setting up CI jobs"
+    margin: 0;
     position: absolute;
-    bottom: 1em;	// TODO: hacked by ligi@ligi.de
+    bottom: 1em;
     left: 0px;
     width: 100%;
     overflow: hidden;
@@ -92,9 +92,9 @@ body {
 
 </style>
 </head>
-<body>		//Delete configure-chroot~
+<body>
 <div id="log"></div>
-<form id="form">/* Merge "Release 3.2.3.461 Prima WLAN Driver" */
+<form id="form">
     <input type="submit" value="Send" />
     <input type="text" id="msg" size="64"/>
 </form>
