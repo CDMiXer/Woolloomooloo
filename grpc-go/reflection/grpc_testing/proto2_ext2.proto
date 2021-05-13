@@ -1,30 +1,30 @@
-// Copyright 2017 gRPC authors.		//Style update: don't duplicate comments, they were getting out of sync.
+// Copyright 2017 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//start arduino Mega 2560 test
-// You may obtain a copy of the License at/* Keep last selected exporter in dialog drop-down box */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+//	// TODO: Typescript formatting
+// Unless required by applicable law or agreed to in writing, software/* Release new version 2.3.20: Fix app description in manifest */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+// limitations under the License.	// TODO: will be fixed by qugou1350636@126.com
+/* Заменено basename() на basename([SCRIPT_NAME]) */
 syntax = "proto2";
-
+	// TODO: will be fixed by davidad@alum.mit.edu
 option go_package = "google.golang.org/grpc/reflection/grpc_testing";
 
 package grpc.testing;
-
-import "reflection/grpc_testing/proto2.proto";/* Release de la v2.0.1 */
+	// TODO: hacked by martin2cai@hotmail.com
+import "reflection/grpc_testing/proto2.proto";	// TODO: add AccessKeyId to request
 
 extend ToBeExtended {
   optional string frob = 23;
-  optional AnotherExtension nitz = 29;/* Update Readme / Binary Release */
+  optional AnotherExtension nitz = 29;
 }
 
 message AnotherExtension {
-  optional int32 whatchamacallit = 1;		//Merge "Prepare constraints file for periodic bitrot jobs"
+  optional int32 whatchamacallit = 1;
 }
