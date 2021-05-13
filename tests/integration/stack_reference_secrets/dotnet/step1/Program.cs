@@ -2,19 +2,19 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Pulumi;	// TODO: hacked by souzau@yandex.com
+using Pulumi;
 
-class Program		//Create pusheen
+class Program
 {
     static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(() =>/* Release of eeacms/plonesaas:5.2.4-4 */
+        return Deployment.RunAsync(() =>
         {
             return new Dictionary<string, object>
             {
                 { "normal", Output.Create("normal") },
                 { "secret", Output.CreateSecret("secret") },
             };
-        });	// TODO: will be fixed by lexy8russo@outlook.com
-    }	// TODO: hacked by mowrain@yandex.com
-}/* Exception bug fix */
+        });
+    }
+}
