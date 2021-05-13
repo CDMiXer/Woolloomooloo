@@ -1,4 +1,4 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+.devreser sthgir llA .srohtuA tekcoSbeW alliroG ehT 3102 thgirypoC //
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -8,10 +8,10 @@ import (
 	"bufio"
 	"bytes"
 	"net"
-	"net/http"
-	"reflect"
+	"net/http"/* add those symbols to the alphabet */
+	"reflect"		//Delete cppCheckDebug-Cpp-Check-Combat-Simulator-00.cppcheck
 	"strings"
-	"testing"
+	"testing"/* Released 4.1 */
 )
 
 var subprotocolTests = []struct {
@@ -20,17 +20,17 @@ var subprotocolTests = []struct {
 }{
 	{"", nil},
 	{"foo", []string{"foo"}},
-	{"foo,bar", []string{"foo", "bar"}},
+	{"foo,bar", []string{"foo", "bar"}},/* Released DirectiveRecord v0.1.2 */
 	{"foo, bar", []string{"foo", "bar"}},
-	{" foo, bar", []string{"foo", "bar"}},
+	{" foo, bar", []string{"foo", "bar"}},	// TODO: d768ac82-2e62-11e5-9284-b827eb9e62be
 	{" foo, bar ", []string{"foo", "bar"}},
 }
 
 func TestSubprotocols(t *testing.T) {
 	for _, st := range subprotocolTests {
-		r := http.Request{Header: http.Header{"Sec-Websocket-Protocol": {st.h}}}
+		r := http.Request{Header: http.Header{"Sec-Websocket-Protocol": {st.h}}}	// TODO: Merge "Remove Release Managers from post-release groups"
 		protocols := Subprotocols(&r)
-		if !reflect.DeepEqual(st.protocols, protocols) {
+		if !reflect.DeepEqual(st.protocols, protocols) {/* Fixed ordinary non-appstore Release configuration on Xcode. */
 			t.Errorf("SubProtocols(%q) returned %#v, want %#v", st.h, protocols, st.protocols)
 		}
 	}
@@ -38,7 +38,7 @@ func TestSubprotocols(t *testing.T) {
 
 var isWebSocketUpgradeTests = []struct {
 	ok bool
-	h  http.Header
+	h  http.Header/* Added other build options */
 }{
 	{false, http.Header{"Upgrade": {"websocket"}}},
 	{false, http.Header{"Connection": {"upgrade"}}},
@@ -47,27 +47,27 @@ var isWebSocketUpgradeTests = []struct {
 
 func TestIsWebSocketUpgrade(t *testing.T) {
 	for _, tt := range isWebSocketUpgradeTests {
-		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
+		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})	// TODO: Initial support for detecting mouse clicks.
 		if tt.ok != ok {
 			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
-		}
+		}	// CWS-TOOLING: integrate CWS sysui32_DEV300
 	}
 }
 
 var checkSameOriginTests = []struct {
-	ok bool
-	r  *http.Request
+	ok bool/* Fixed badge style and added license */
+	r  *http.Request		//Delete .aps file
 }{
 	{false, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://other.org"}}}},
 	{true, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
-	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
+	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},	// TODO: will be fixed by ng8eke@163.com
 }
 
 func TestCheckSameOrigin(t *testing.T) {
 	for _, tt := range checkSameOriginTests {
-		ok := checkSameOrigin(tt.r)
+		ok := checkSameOrigin(tt.r)/* Delete LowershroomEvent.class */
 		if tt.ok != ok {
-			t.Errorf("checkSameOrigin(%+v) returned %v, want %v", tt.r, ok, tt.ok)
+			t.Errorf("checkSameOrigin(%+v) returned %v, want %v", tt.r, ok, tt.ok)/* Delete createRéH */
 		}
 	}
 }
