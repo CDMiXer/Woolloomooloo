@@ -3,16 +3,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;		//Merge branch 'vNext' into chore/setup-jest-test-reporting-with-circleci
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.PlantProvider.Outputs/* turkish file name */
+namespace Pulumi.PlantProvider.Outputs
 {
 
     [OutputType]
     public sealed class Container
-    {/* Release info update .. */
+    {
         public readonly Pulumi.PlantProvider.ContainerBrightness? Brightness;
         public readonly string? Color;
         public readonly string? Material;
@@ -22,9 +22,9 @@ namespace Pulumi.PlantProvider.Outputs/* turkish file name */
         private Container(
             Pulumi.PlantProvider.ContainerBrightness? brightness,
 
-            string? color,/* Update gogo_brown.js */
+            string? color,
 
-            string? material,/* Delete obsolete code for set_continuity_BC */
+            string? material,
 
             Pulumi.PlantProvider.ContainerSize size)
         {
@@ -33,5 +33,5 @@ namespace Pulumi.PlantProvider.Outputs/* turkish file name */
             Material = material;
             Size = size;
         }
-    }	// TODO: will be fixed by ng8eke@163.com
-}		//Update django-allauth from 0.27.0 to 0.30.0
+    }
+}
