@@ -12,18 +12,18 @@
                 "defaults": {
                     "name": "countDown-9d430501c4510322"
                 },
-                "outputs": {		//12e9efaa-2e63-11e5-9284-b827eb9e62be
+                "outputs": {
                     "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
-                    "displayName": "",	// TODO: Merge "Add encryption support for volumes to libvirt"
-                    "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",	// TODO: Rebuilt index with templetonpr
+                    "displayName": "",
+                    "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "name": "countDown-9d430501c4510322",
-                    "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"/* Create revp.py */
-                }/* Merge "Script to fill launcher screens with full folders" */
-            },/* Add support for log capturing. used in ldapstatus module. */
+                    "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
+                }
+            },
             {
                 "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                 "custom": false,
-                "type": "cloud:topic:Topic"		//Automatic changelog generation for PR #45905 [ci skip]
+                "type": "cloud:topic:Topic"
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
@@ -33,7 +33,7 @@
                 "defaults": {
                     "name": "unhandled-error-topic-ddd8c2cd9a876715"
                 },
-                "outputs": {	// 1ebfa112-2e5e-11e5-9284-b827eb9e62be
+                "outputs": {
                     "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
@@ -44,14 +44,14 @@
             {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
                 "custom": true,
-                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",	// TODO: will be fixed by mikeal.rogers@gmail.com
+                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                 "type": "aws:iam/role:Role",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
-                },	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+                },
                 "defaults": {
-                    "forceDetachPolicies": false,/* Fixed slow queueing and made sure torrents don't have the same position */
+                    "forceDetachPolicies": false,
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "path": "/"
                 },
@@ -67,11 +67,11 @@
                 }
             },
             {
-                "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",/* Real 1.6.0 Release Revision (2 modified files were missing from the release zip) */
-                "custom": true,/* Add Mystic: Release (KTERA) */
+                "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
+                "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                 "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
-                "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",	// TODO: Merge "VPX: Add rtcd support for scaling."
+                "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
@@ -90,7 +90,7 @@
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "policyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess",
-                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"/* [ng] account / inbox-pictures */
+                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 },
                 "outputs": {
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195134625700000002",
@@ -100,7 +100,7 @@
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:lambda/function:Function::countDown_watcher",
-                "custom": true,	// TODO: 50667660-2e44-11e5-9284-b827eb9e62be
+                "custom": true,
                 "id": "countDown_watcher-560cf0c8d799e9cd",
                 "type": "aws:lambda/function:Function",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
