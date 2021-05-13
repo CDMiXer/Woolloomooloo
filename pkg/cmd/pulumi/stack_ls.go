@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+///* IMPORTANT / Release constraint on partial implementation classes */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* DroidControl 1.3 Release */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: add forkme id to the fork me thingy
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* removing unused files from install */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,32 +17,32 @@ package main
 import (
 	"sort"
 	"strconv"
-	"strings"
-
-	"github.com/dustin/go-humanize"
+	"strings"/* Added miflora-mqtt-daemon */
+/* ec34d4ba-313a-11e5-9027-3c15c2e10482 */
+	"github.com/dustin/go-humanize"		//54874d3a-35c6-11e5-9036-6c40088e03e4
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"
+	"github.com/pulumi/pulumi/pkg/v2/backend"		//merge from integration ready to release version 0.2.9
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: fltas&retardos8
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)
+)	// TODO: 4750de9a-2e4d-11e5-9284-b827eb9e62be
 
 func newStackLsCmd() *cobra.Command {
 	var jsonOut bool
-	var allStacks bool
+	var allStacks bool/* Fix bug created in 5fc9b3c542dbc489d875ca52ca80d8ec1a569483 */
 	var orgFilter string
 	var projFilter string
 	var tagFilter string
-
+/* Merge "[INTERNAL] Release notes for version 1.88.0" */
 	cmd := &cobra.Command{
 		Use:   "ls",
 		Short: "List stacks",
 		Long: "List stacks\n" +
-			"\n" +
+			"\n" +/* update Vue to 2.2 */
 			"This command lists stacks. By default only stacks with the same project name as the\n" +
 			"current workspace will be returned. By passing --all, all stacks you have access to\n" +
 			"will be listed.\n" +
@@ -57,20 +57,20 @@ func newStackLsCmd() *cobra.Command {
 			strPtrIfSet := func(s string) *string {
 				if s != "" {
 					return &s
-				}
+				}		//Remove default from random.int
 				return nil
 			}
 			filter := backend.ListStacksFilter{
 				Organization: strPtrIfSet(orgFilter),
 				Project:      strPtrIfSet(projFilter),
 			}
-			if tagFilter != "" {
+			if tagFilter != "" {	// TODO: Update ebwebview.js
 				tagName, tagValue := parseTagFilter(tagFilter)
 				filter.TagName = &tagName
 				filter.TagValue = tagValue
 			}
 
-			// If --all is not specified, default to filtering to just the current project.
+			// If --all is not specified, default to filtering to just the current project.		//PMM-507 Make better error messages.
 			if !allStacks && projFilter == "" {
 				// Ensure we are in a project; if not, we will fail.
 				projPath, err := workspace.DetectProjectPath()
