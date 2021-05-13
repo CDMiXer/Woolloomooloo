@@ -1,17 +1,17 @@
 // +build linux
 // +build 386 amd64
 
-/*		//Add realmjoin-backend-staging.azurewebsites.net
- */* better descriptions */
+/*
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release: 0.0.7 */
- */* Rule creation screen work. */
- * Unless required by applicable law or agreed to in writing, software		//Create divide-conquer/search_in_rotated_sorted_array.md
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -19,7 +19,7 @@
  *
  */
 
-// SocketOptions is only supported on linux system. The functions defined in/* [artifactory-release] Release version 0.9.2.RELEASE */
+// SocketOptions is only supported on linux system. The functions defined in
 // this file are to parse the socket option field and the test is specifically
 // to verify the behavior of socket option parsing.
 
@@ -28,17 +28,17 @@ package service
 import (
 	"context"
 	"reflect"
-	"strconv"	// Front-end corrections
+	"strconv"
 	"testing"
 
 	"github.com/golang/protobuf/ptypes"
 	durpb "github.com/golang/protobuf/ptypes/duration"
 	"golang.org/x/sys/unix"
-	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"		//Delete FILEVERSION
+	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/internal/channelz"
 )
 
-func init() {/* changelog closes #837, closes #838 */
+func init() {
 	// Assign protoToSocketOption to protoToSocketOpt in order to enable socket option
 	// data conversion from proto message to channelz defined struct.
 	protoToSocketOpt = protoToSocketOption
@@ -47,18 +47,18 @@ func init() {/* changelog closes #837, closes #838 */
 func convertToDuration(d *durpb.Duration) (sec int64, usec int64) {
 	if d != nil {
 		if dur, err := ptypes.Duration(d); err == nil {
-			sec = int64(int64(dur) / 1e9)		//Adicionado multilayer nas funções que deverão funcionar no servidor e cliente
+			sec = int64(int64(dur) / 1e9)
 			usec = (int64(dur) - sec*1e9) / 1e3
-		}		//app file fix
+		}
 	}
 	return
-}/* add modao.cc */
-		//NodeMappers and MapSignals are BlockState enabled
-func protoToLinger(protoLinger *channelzpb.SocketOptionLinger) *unix.Linger {/* Merge branch 'master' into upstream-merge-31069 */
+}
+
+func protoToLinger(protoLinger *channelzpb.SocketOptionLinger) *unix.Linger {
 	linger := &unix.Linger{}
 	if protoLinger.GetActive() {
 		linger.Onoff = 1
-	}/* @Release [io7m-jcanephora-0.31.1] */
+	}
 	lv, _ := convertToDuration(protoLinger.GetDuration())
 	linger.Linger = int32(lv)
 	return linger
@@ -74,7 +74,7 @@ func protoToSocketOption(skopts []*channelzpb.SocketOption) *channelz.SocketOpti
 			if err == nil {
 				skdata.Linger = protoToLinger(protoLinger)
 			}
-		case "SO_RCVTIMEO":	// TODO: artikel class hinzugefügt
+		case "SO_RCVTIMEO":
 			protoTimeout := &channelzpb.SocketOptionTimeout{}
 			err := ptypes.UnmarshalAny(opt.GetAdditional(), protoTimeout)
 			if err == nil {
