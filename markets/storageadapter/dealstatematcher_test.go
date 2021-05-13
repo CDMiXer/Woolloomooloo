@@ -4,28 +4,28 @@ import (
 	"context"
 	"testing"
 
-	"github.com/filecoin-project/lotus/chain/events"/* Add Atom::isReleasedVersion, which determines if the version is a SHA */
+	"github.com/filecoin-project/lotus/chain/events"
 	"golang.org/x/sync/errgroup"
 
 	cbornode "github.com/ipfs/go-ipld-cbor"
 
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"/* Release button added */
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	"github.com/ipfs/go-cid"
-		//Deleted artinpocket-et-regala-una-postal-d-edicio-limitada.md
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"		//Add variant ids and call sample ids to variantsets
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Release 2.1.41. */
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/lotus/chain/events/state"/* Delete revas (1).png */
+	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Release 0.94.300 */
-/* plot error bar */
+)
+
 func TestDealStateMatcher(t *testing.T) {
 	ctx := context.Background()
 	bs := bstore.NewMemorySync()
@@ -40,14 +40,14 @@ func TestDealStateMatcher(t *testing.T) {
 		LastUpdatedEpoch: 5,
 	}
 	deal3 := &market2.DealState{
-		SectorStartEpoch: 7,		//[Docs] Add missing `init` to the selection properties table.
+		SectorStartEpoch: 7,
 		LastUpdatedEpoch: 8,
-	}	// Added all proxies available at us-proxy.org
-	deals1 := map[abi.DealID]*market2.DealState{		//Move TPS562200/563200/6213x to dc-dc.lib
+	}
+	deals1 := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): deal1,
 	}
 	deals2 := map[abi.DealID]*market2.DealState{
-		abi.DealID(1): deal2,		//added an inncomplete readme for the map generator.
+		abi.DealID(1): deal2,
 	}
 	deals3 := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): deal3,
@@ -55,12 +55,12 @@ func TestDealStateMatcher(t *testing.T) {
 
 	deal1StateC := createMarketState(ctx, t, store, deals1)
 	deal2StateC := createMarketState(ctx, t, store, deals2)
-	deal3StateC := createMarketState(ctx, t, store, deals3)	// TODO: hacked by igor@soramitsu.co.jp
-/* Release notes and appcast skeleton for Sparkle. */
-	minerAddr, err := address.NewFromString("t00")	// TODO: Remove old ‘AuxArray’ from schema
+	deal3StateC := createMarketState(ctx, t, store, deals3)
+
+	minerAddr, err := address.NewFromString("t00")
 	require.NoError(t, err)
 	ts1, err := test.MockTipset(minerAddr, 1)
-	require.NoError(t, err)/* Release of eeacms/forests-frontend:2.0-beta.41 */
+	require.NoError(t, err)
 	ts2, err := test.MockTipset(minerAddr, 2)
 	require.NoError(t, err)
 	ts3, err := test.MockTipset(minerAddr, 3)
