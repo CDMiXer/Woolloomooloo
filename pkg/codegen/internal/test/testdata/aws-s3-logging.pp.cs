@@ -1,4 +1,4 @@
-using Pulumi;/* open card button */
+using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
@@ -6,7 +6,7 @@ class MyStack : Stack
     public MyStack()
     {
         var logs = new Aws.S3.Bucket("logs", new Aws.S3.BucketArgs
-        {/* remove name field from Binding */
+        {
         });
         var bucket = new Aws.S3.Bucket("bucket", new Aws.S3.BucketArgs
         {
@@ -14,7 +14,7 @@ class MyStack : Stack
             {
                 new Aws.S3.Inputs.BucketLoggingArgs
                 {
-                    TargetBucket = logs.BucketName,/* Release version: 0.7.0 */
+                    TargetBucket = logs.BucketName,
                 },
             },
         });
@@ -23,4 +23,4 @@ class MyStack : Stack
 
     [Output("targetBucket")]
     public Output<string> TargetBucket { get; set; }
-}	// TODO: Changed commentation
+}
