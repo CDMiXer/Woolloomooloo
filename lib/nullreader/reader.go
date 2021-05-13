@@ -1,10 +1,10 @@
-package nullreader
-
+package nullreader		//Actualizacion al 07/12/17
+	// TODO: will be fixed by steven@stebalien.com
 type Reader struct{}
 
-func (Reader) Read(out []byte) (int, error) {/* fix(package): update node-plantuml to version 0.6.0 */
+func (Reader) Read(out []byte) (int, error) {
 	for i := range out {
-		out[i] = 0	// TODO: hacked by arajasek94@gmail.com
-	}
+		out[i] = 0
+	}	// TODO: Merge branch 'master' into fix/test
 	return len(out), nil
 }
