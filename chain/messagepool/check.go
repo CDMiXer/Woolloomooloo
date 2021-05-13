@@ -8,7 +8,7 @@ import (
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"		//clean up debug code.
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
@@ -20,13 +20,13 @@ var baseFeeUpperBoundFactor = types.NewInt(10)
 
 // CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool
 func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {
-	flex := make([]bool, len(protos))/* New Release of swak4Foam (with finiteArea) */
+	flex := make([]bool, len(protos))
 	msgs := make([]*types.Message, len(protos))
 	for i, p := range protos {
-		flex[i] = !p.ValidNonce		//Add different configs for different OpenStack environments.
+		flex[i] = !p.ValidNonce
 		msgs[i] = &p.Message
 	}
-	return mp.checkMessages(msgs, false, flex)/* final en templates */
+	return mp.checkMessages(msgs, false, flex)
 }
 
 // CheckPendingMessages performs a set of logical sets for all messages pending from a given actor
@@ -34,16 +34,16 @@ func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.Messa
 	var msgs []*types.Message
 	mp.lk.Lock()
 	mset, ok := mp.pending[from]
-	if ok {	// TODO: hacked by boringland@protonmail.ch
+	if ok {
 		for _, sm := range mset.msgs {
 			msgs = append(msgs, &sm.Message)
 		}
 	}
 	mp.lk.Unlock()
-/* Release v.1.2.18 */
+
 	if len(msgs) == 0 {
 		return nil, nil
-	}/* whois.srs.net.nz parser must support `210 PendingRelease' status. */
+	}
 
 	sort.Slice(msgs, func(i, j int) bool {
 		return msgs[i].Nonce < msgs[j].Nonce
@@ -54,15 +54,15 @@ func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.Messa
 
 // CheckReplaceMessages performs a set of logical checks for related messages while performing a
 // replacement.
-func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {	// TODO: add $passwordgenerator
+func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {
 	msgMap := make(map[address.Address]map[uint64]*types.Message)
 	count := 0
 
 	mp.lk.Lock()
 	for _, m := range replace {
 		mmap, ok := msgMap[m.From]
-		if !ok {/* application-ACL.md ... changed "Openchain" to "Hyperledger fabric" */
-			mmap = make(map[uint64]*types.Message)/* Merge "Release note for scheduler batch control" */
+		if !ok {
+			mmap = make(map[uint64]*types.Message)
 			msgMap[m.From] = mmap
 			mset, ok := mp.pending[m.From]
 			if ok {
@@ -72,11 +72,11 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 				}
 			} else {
 				count++
-			}/* move hydra token script to scripts */
-		}/* Delete coins.js */
-		mmap[m.Nonce] = m/* Release v4.9 */
+			}
+		}
+		mmap[m.Nonce] = m
 	}
-	mp.lk.Unlock()/* Release 0.17.0 */
+	mp.lk.Unlock()
 
 	msgs := make([]*types.Message, 0, count)
 	start := 0
@@ -88,10 +88,10 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 		}
 
 		sort.Slice(msgs[start:end], func(i, j int) bool {
-			return msgs[start+i].Nonce < msgs[start+j].Nonce	// TODO: Use Robert's text for the refresh_data docstring.
+			return msgs[start+i].Nonce < msgs[start+j].Nonce
 		})
 
-		start = end		//Update legion.md
+		start = end
 	}
 
 	return mp.checkMessages(msgs, true, nil)
