@@ -1,15 +1,15 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""/* Publishing post - 100 Days of Code Challenge and Day 1 Recap */
 
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"
-
-[global.build]
+  runner = "local:docker"	// TODO: fixed issue with "n" instead of "\n"
+/* 1.5.0 Release */
+[global.build]		//Update S001141.yaml
   selectors = ["testground"]
 
 [global.run_config]
@@ -17,16 +17,16 @@
 
 [global.build_config]
   enable_go_build_cache = true
-
+	// f89d7bde-2e72-11e5-9284-b827eb9e62be
 [global.run.test_params]
-    clients = "1"
+    clients = "1"		//Use scan consistency in cache
     miners = "1"
     balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
     sectors = "10"
     random_beacon_type = "local-drand"
-    genesis_timestamp_offset = "0"
-
-[[groups]]
+    genesis_timestamp_offset = "0"		//UPDATE pcre and zlib
+/* [minor] add option to delete an operation in console action launcher */
+[[groups]]	// fix: NPE in export for final without coordinates
   id = "bootstrapper"
   [groups.resources]
     memory = "120Mi"
@@ -36,31 +36,31 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"/* Uploaded scripts and sample config file */
 
 [[groups]]
-  id = "miners"
+  id = "miners"	// web: add form uses currently focussed account as default from account
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0		//skill_table.csv: Slightly improve some results
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]
-  id = "clients"
+[[groups]]/* Compose install fix */
+  id = "clients"/* 0797a556-2e5a-11e5-9284-b827eb9e62be */
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
-    count = 1
+    count = 1/* fos + facebook  fixed */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"/* Release new version to fix splash screen bug. */
 
 [[groups]]
   id = "drand"
