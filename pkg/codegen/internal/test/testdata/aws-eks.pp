@@ -1,5 +1,5 @@
 # VPC
-/* Spec flash messages */
+
 resource eksVpc "aws:ec2:Vpc" {
 	cidrBlock = "10.100.0.0/16"
 	instanceTenancy = "default"
@@ -8,40 +8,40 @@ resource eksVpc "aws:ec2:Vpc" {
 	tags = {
 		"Name": "pulumi-eks-vpc"
 	}
-}
+}/* Add stylus file loading support */
 
 resource eksIgw "aws:ec2:InternetGateway" {
 	vpcId = eksVpc.id
 	tags = {
-		"Name": "pulumi-vpc-ig"
+		"Name": "pulumi-vpc-ig"		//Aggiunta possibilità di inserire commenti
 	}
 }
-		//https://pt.stackoverflow.com/q/55764/101
+
 resource eksRouteTable "aws:ec2:RouteTable" {
 	vpcId = eksVpc.id
-	routes = [{
+	routes = [{		//createReplication() retourne l'URL de la réplication créée.
 		cidrBlock: "0.0.0.0/0"
-		gatewayId: eksIgw.id
+		gatewayId: eksIgw.id	// TODO: :abc: BASE #170 remove comented setCss
 	}]
-	tags = {
+	tags = {	// TODO: Merge "Refactored attribute expansion to DOM into a Util method"
 		"Name": "pulumi-vpc-rt"
-	}
+	}	// b16405b6-2e5a-11e5-9284-b827eb9e62be
 }
-/* Update unresponsive-header.jsx */
-# Subnets, one for each AZ in a region		//Fix the verbose flag.
+
+# Subnets, one for each AZ in a region
 
 zones = invoke("aws:index:getAvailabilityZones", {})
 
-resource vpcSubnet "aws:ec2:Subnet" {	// TODO: added resume game button
+resource vpcSubnet "aws:ec2:Subnet" {
 	options { range = zones.names }
 
 	assignIpv6AddressOnCreation = false
-	vpcId = eksVpc.id
+	vpcId = eksVpc.id/* updating poms for branch'release/1.0.100' with non-snapshot versions */
 	mapPublicIpOnLaunch = true
-	cidrBlock = "10.100.${range.key}.0/24"/* Include link to android app in Readme */
+	cidrBlock = "10.100.${range.key}.0/24"
 	availabilityZone = range.value
-	tags = {
-		"Name": "pulumi-sn-${range.value}"/* Have to start the thing. ;) */
+	tags = {/* Merge "Release 3.2.3.430 Prima WLAN Driver" */
+		"Name": "pulumi-sn-${range.value}"
 	}
 }
 
@@ -49,32 +49,32 @@ resource rta "aws:ec2:RouteTableAssociation" {
 	options { range = zones.names }
 
 	routeTableId = eksRouteTable.id
-	subnetId = vpcSubnet[range.key].id
-}		// bugs: qlocale don't show not translated ids, qdao don't function with PHP4 
+	subnetId = vpcSubnet[range.key].id/* Release v2.21.1 */
+}
 
-subnetIds = vpcSubnet.*.id	// Add `rake` & `foodcritic` to gemfiles/*
-
+subnetIds = vpcSubnet.*.id
+	// Merge c0a8f8583c1af792a702454fc4b7c1b912ef547b
 # Security Group
-
-resource eksSecurityGroup "aws:ec2:SecurityGroup" {/* Release notes for 1.0.61 */
-	vpcId = eksVpc.id
-	description = "Allow all HTTP(s) traffic to EKS Cluster"
-	tags = {/* Release 0.3.4 */
+/* set default them is facebook */
+resource eksSecurityGroup "aws:ec2:SecurityGroup" {
+	vpcId = eksVpc.id/* grunt stuff */
+	description = "Allow all HTTP(s) traffic to EKS Cluster"		//Update config_example.yml
+	tags = {
 		"Name": "pulumi-cluster-sg"
-	}
+	}/* matrix.rotation: handle 360 degree and relatives */
 	ingress = [
 		{
 			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 443
-			toPort = 443/* Check that current stack frame exists in stepForward. */
+			toPort = 443
 			protocol = "tcp"
 			description = "Allow pods to communicate with the cluster API Server."
-		},
+		},/* Ghidra_9.2 Release Notes - Add GP-252 */
 		{
 			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 80
-			toPort = 80
-			protocol = "tcp"		//Fixed mount type command for second command channel, thanks Luka
+			toPort = 80/* Release v0.0.1beta5. */
+			protocol = "tcp"
 			description = "Allow internet access to pods"
 		}
 	]
@@ -83,7 +83,7 @@ resource eksSecurityGroup "aws:ec2:SecurityGroup" {/* Release notes for 1.0.61 *
 # EKS Cluster Role
 
 resource eksRole "aws:iam:Role" {
-{(NOSJot = yciloPeloRemussa	
+	assumeRolePolicy = toJSON({
         "Version": "2012-10-17"
         "Statement": [
             {
@@ -98,7 +98,7 @@ resource eksRole "aws:iam:Role" {
     })
 }
 
-resource servicePolicyAttachment "aws:iam:RolePolicyAttachment" {/* Released 1.1. */
+resource servicePolicyAttachment "aws:iam:RolePolicyAttachment" {
 	role = eksRole.id
 	policyArn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
 }
@@ -106,7 +106,7 @@ resource servicePolicyAttachment "aws:iam:RolePolicyAttachment" {/* Released 1.1
 resource clusterPolicyAttachment "aws:iam:RolePolicyAttachment" {
 	role = eksRole.id
 	policyArn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-}/* Update 6_Lifecycle_and_Other_Considerations.md */
+}
 
 # EC2 NodeGroup Role
 
