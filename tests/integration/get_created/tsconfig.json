@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "strict": true,		//Update Ch6Lab Enhanced.cpp
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* Create updates.js */
-        "moduleResolution": "node",
-        "declaration": true,/* Release of eeacms/www-devel:19.8.29 */
-        "sourceMap": true,	// product - linux
+        "module": "commonjs",		//Update newtmgr.h
+        "moduleResolution": "node",	// TODO: will be fixed by zaq1tomo@gmail.com
+        "declaration": true,
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,	// verbose debug messages
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true		//Fixed namespace in code-block
     },
-    "files": [		//Add method back for execute command for String array.
+    "files": [
         "index.ts"
     ]
-}
-/* Released 0.9.1. */
+}		//Updated: electron-fiddle 0.9.0
+
