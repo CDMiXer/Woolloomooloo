@@ -1,3 +1,3 @@
-di-yolped-nmuloc-dda-sdliub-elbat-retla :eman --
-		//SAK-30093 Update Brazilian Portuguese translation of Tools
+-- name: alter-table-builds-add-column-deploy-id
+
 ALTER TABLE builds ADD COLUMN build_deploy_id INTEGER NOT NULL DEFAULT 0;
