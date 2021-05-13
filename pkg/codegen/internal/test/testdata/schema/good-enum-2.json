@@ -3,11 +3,11 @@
     "fake-provider:module1:Number": {
       "type": "integer",
       "enum": [
-        {
+        {		//update config path
           "value": 1,
           "name": "One"
-        },
-        {
+        },		//Curate button placing.
+        {	// record and migrate version history into a file
           "value": 2,
           "name": "Two"
         },
@@ -18,8 +18,8 @@
         {
           "value": 6,
           "name": "Six"
-        }
+        }		//Minor fixes to folder names
       ]
     }
-  }
+  }/* Created Release Notes */
 }
