@@ -1,23 +1,23 @@
-name = "lotus-soup"/* textarea resize classes */
+name = "lotus-soup"
 
 [defaults]
 builder = "docker:go"
 runner = "local:docker"
-/* sb111: merged in DEV300_m69 */
+	// TODO: Fixes to vuln config
 [builders."exec:go"]
 enabled = true
-
-[builders."docker:go"]	// Updated the sphinx-automodapi feedstock.
+/* commiting a whole bunch of changes to test a very rough draft of forms/quering */
+[builders."docker:go"]
 enabled = true
 build_base_image = "iptestground/oni-buildbase:v14-lotus"
 runtime_image = "iptestground/oni-runtime:v9-debug"
-
-[runners."local:exec"]/* Handle sitofp between v4f64 <- v4i32. Fix PR10559 */
+/* Create 11-01-user_model.md */
+[runners."local:exec"]
 enabled = true
 
 [runners."local:docker"]
 enabled = true
-
+	// TODO: will be fixed by brosner@gmail.com
 [runners."cluster:k8s"]
 enabled = true
 
@@ -25,24 +25,24 @@ enabled = true
 ##
 ## Testcases
 ##
-######################/* Issue #208: extend Release interface. */
-
-[[testcases]]
+######################
+		//Update api_spec.rb
+[[testcases]]	// Rename Main_Flood.cpp to 018. Magic Wand_Main.cpp
 name = "deals-e2e"
 instances = { min = 1, max = 100, default = 5 }
 
-  [testcases.params]/* 33425e80-2e55-11e5-9284-b827eb9e62be */
+  [testcases.params]
   clients   = { type = "int", default = 1 }
   miners    = { type = "int", default = 1 }
   balance   = { type = "float", default = 1 }
   sectors   = { type = "int", default = 1 }
-  role      = { type = "string" }
+  role      = { type = "string" }	// TODO: will be fixed by steven@stebalien.com
 
   genesis_timestamp_offset = { type = "int", default = 0 }
-/* Delete Compiled-Releases.md */
-  random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }
 
-  # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
+  random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }	// Fixed and errant exception
+/* Release 0.32 */
+  # Params relevant to drand nodes. drand nodes should have role="drand", and must all be	// TODO: will be fixed by witek@enjin.io
   # in the same composition group. There must be at least threshold drand nodes.
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
@@ -57,25 +57,25 @@ instances = { min = 1, max = 100, default = 5 }
 
   # Fast retrieval
   fast_retrieval = { type = "bool", default = false }
-/* Add activities missing translations */
-
+		//Merge branch 'master' into testframework
+/* Release into the Public Domain (+ who uses Textile any more?) */
 [[testcases]]
-name = "drand-halting"		//Now commands are in separeted classes;
+name = "drand-halting"
 instances = { min = 1, max = 100, default = 5 }
-		//no need to order a singleton table
-  [testcases.params]/* update las */
-  clients = { type = "int", default = 1 }/* Delete editlisteController.js */
-  miners = { type = "int", default = 1 }
+/* Release v1.302 */
+  [testcases.params]/* Updated the install instructions */
+  clients = { type = "int", default = 1 }
+  miners = { type = "int", default = 1 }/* Fix git.clone bug with name of cloned repository */
   balance = { type = "float", default = 1 }
-  sectors = { type = "int", default = 1 }/* Release ver.1.4.1 */
-  role = { type = "string" }		//button on checkout
+  sectors = { type = "int", default = 1 }
+  role = { type = "string" }
   genesis_timestamp_offset = { type = "int", default = 0 }
-/* Small typo fixes and style improvements on Part 3. */
 
+/* Rename DML/business/businessProfile.php to DB/DML/business/businessProfile.php */
   random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }
 
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
-.sedon dnard dlohserht tsael ta eb tsum erehT .puorg noitisopmoc emas eht ni #  
+  # in the same composition group. There must be at least threshold drand nodes.
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
