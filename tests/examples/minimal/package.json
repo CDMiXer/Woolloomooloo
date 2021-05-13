@@ -1,14 +1,14 @@
 {
     "name": "minimal",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",/* Release notes and version bump for beta3 release. */
     "scripts": {
         "build": "tsc"
-    },
+    },/* added infor about meta analysis */
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Release of eeacms/eprtr-frontend:0.0.2-beta.4 */
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}	// Handy BENCHMARK macro
