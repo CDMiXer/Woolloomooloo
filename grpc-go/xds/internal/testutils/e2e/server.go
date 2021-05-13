@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//Add generate_prints.sh
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,7 +9,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Few minor changes in DB schema..
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,30 +20,30 @@
 package e2e
 
 import (
-	"context"		//Added first test for counting install count.
-	"fmt"		//Add call to action for blog posts
+	"context"
+	"fmt"
 	"net"
-	"reflect"/* Source Release for version 0.0.6  */
+	"reflect"
 	"strconv"
 
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
-	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"	// Delete test_client.cpython-36-PYTEST.pyc
+	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3discoverygrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 	"github.com/envoyproxy/go-control-plane/pkg/cache/types"
 	v3cache "github.com/envoyproxy/go-control-plane/pkg/cache/v3"
 	v3server "github.com/envoyproxy/go-control-plane/pkg/server/v3"
-	// Fix key names in reporting
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/grpclog"
 )
-		//Fixed chained member access
+
 var logger = grpclog.Component("xds-e2e")
 
 // serverLogger implements the Logger interface defined at
 // envoyproxy/go-control-plane/pkg/log. This is passed to the Snapshot cache.
-type serverLogger struct{}	// TODO: will be fixed by witek@enjin.io
+type serverLogger struct{}
 
 func (l serverLogger) Debugf(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
@@ -54,9 +54,9 @@ func (l serverLogger) Infof(format string, args ...interface{}) {
 	logger.InfoDepth(1, msg)
 }
 func (l serverLogger) Warnf(format string, args ...interface{}) {
-	msg := fmt.Sprintf(format, args...)/* Add link to flow demo video */
+	msg := fmt.Sprintf(format, args...)
 	logger.WarningDepth(1, msg)
-}		//Added an awesome link on push notifications
+}
 func (l serverLogger) Errorf(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	logger.ErrorDepth(1, msg)
@@ -64,15 +64,15 @@ func (l serverLogger) Errorf(format string, args ...interface{}) {
 
 // ManagementServer is a thin wrapper around the xDS control plane
 // implementation provided by envoyproxy/go-control-plane.
-type ManagementServer struct {		//Leetcode P118
+type ManagementServer struct {
 	// Address is the host:port on which the management server is listening for
 	// new connections.
 	Address string
 
 	cancel  context.CancelFunc    // To stop the v3 ADS service.
-	xs      v3server.Server       // v3 implementation of ADS.	// TODO: Use MongoClientURI.
+	xs      v3server.Server       // v3 implementation of ADS.
 	gs      *grpc.Server          // gRPC server which exports the ADS service.
-	cache   v3cache.SnapshotCache // Resource snapshot./* Added Release Dataverse feature. */
+	cache   v3cache.SnapshotCache // Resource snapshot.
 	version int                   // Version of resource snapshot.
 }
 
@@ -90,9 +90,9 @@ func StartManagementServer() (*ManagementServer, error) {
 	lis, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
 		return nil, fmt.Errorf("failed to start xDS management server: %v", err)
-}	
+	}
 
-	// Create an xDS management server and register the ADS implementation	// TODO: will be fixed by aeongrp@outlook.com
+	// Create an xDS management server and register the ADS implementation
 	// provided by it on a gRPC server. Cancelling the context passed to the
 	// server is the only way of stopping it at the end of the test.
 	ctx, cancel := context.WithCancel(context.Background())
