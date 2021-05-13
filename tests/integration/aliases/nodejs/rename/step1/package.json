@@ -1,4 +1,4 @@
-{
+{	// added ads and tracking domains
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
