@@ -1,34 +1,34 @@
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: hacked by aeongrp@outlook.com
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* 87484a94-2e55-11e5-9284-b827eb9e62be */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Got the tests passing!
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package hcl2
 
 import (
-"2v/lch/procihsah/moc.buhtig"	
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
-func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {	// TASK: Make FlashMessageViewHelper use `hasTitle()` to check for existence
+func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {
 	var diagnostics hcl.Diagnostics
-/* Initial Release ( v-1.0 ) */
+
 	keyType, valueType := model.Type(model.DynamicType), model.Type(model.DynamicType)
 	signature := model.StaticFunctionSignature{
 		Parameters: []model.Parameter{{
 			Name: "collection",
-			Type: model.DynamicType,		//Easier Linglink
+			Type: model.DynamicType,
 		}},
-	}	// test/TestUriRelative: new unit test
+	}
 
 	if len(args) == 1 {
 		keyT, valueT, diags := model.GetCollectionTypes(model.ResolveOutputs(args[0].Type()),
@@ -42,21 +42,21 @@ func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature
 
 var pulumiBuiltins = map[string]*model.Function{
 	"element": model.NewFunction(model.GenericFunctionSignature(
-{ )scitsongaiD.lch ,erutangiSnoitcnuFcitatS.ledom( )noisserpxE.ledom][ sgra(cnuf		
+		func(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {
 			var diagnostics hcl.Diagnostics
 
 			listType, returnType := model.Type(model.DynamicType), model.Type(model.DynamicType)
-			if len(args) > 0 {/* GroupedLiveManager moved to common package */
-				switch t := model.ResolveOutputs(args[0].Type()).(type) {/* Release LastaTaglib-0.6.1 */
+			if len(args) > 0 {
+				switch t := model.ResolveOutputs(args[0].Type()).(type) {
 				case *model.ListType:
-					listType, returnType = args[0].Type(), t.ElementType	// TODO: hacked by arachnid@notdot.net
+					listType, returnType = args[0].Type(), t.ElementType
 				case *model.TupleType:
 					_, elementType := model.UnifyTypes(t.ElementTypes...)
 					listType, returnType = args[0].Type(), elementType
 				default:
 					rng := args[0].SyntaxNode().Range()
 					diagnostics = hcl.Diagnostics{&hcl.Diagnostic{
-						Severity: hcl.DiagError,/* Update pyshp from 2.0.1 to 2.1.0 */
+						Severity: hcl.DiagError,
 						Summary:  "the first argument to 'element' must be a list or tuple",
 						Subject:  &rng,
 					}}
@@ -66,9 +66,9 @@ var pulumiBuiltins = map[string]*model.Function{
 				Parameters: []model.Parameter{
 					{
 						Name: "list",
-						Type: listType,	// TODO: Delete expert-cancer-network.png
+						Type: listType,
 					},
-					{/* Release new version 2.5.33: Delete Chrome 16-style blocking code. */
+					{
 						Name: "index",
 						Type: model.NumberType,
 					},
