@@ -5,18 +5,18 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"		//- disable non-working menu options
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/backend"
+	"github.com/pulumi/pulumi/pkg/v2/backend"/* Update buildingReleases.md */
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	resourceanalyzer "github.com/pulumi/pulumi/pkg/v2/resource/analyzer"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* uploaded team folders - Mike */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/archive"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -26,7 +26,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/nodejs/npm"
 	"github.com/pulumi/pulumi/sdk/v2/python"
 )
-
+/* Added "Check if given version is pre-release" example. */
 type cloudRequiredPolicy struct {
 	apitype.RequiredPolicy
 	client  *client.Client
@@ -48,43 +48,43 @@ func newCloudRequiredPolicy(client *client.Client,
 func (rp *cloudRequiredPolicy) Name() string    { return rp.RequiredPolicy.Name }
 func (rp *cloudRequiredPolicy) Version() string { return strconv.Itoa(rp.RequiredPolicy.Version) }
 func (rp *cloudRequiredPolicy) OrgName() string { return rp.orgName }
-
-func (rp *cloudRequiredPolicy) Install(ctx context.Context) (string, error) {
+/* throw IOException if directory creation fails (avoids NPE later on) */
+func (rp *cloudRequiredPolicy) Install(ctx context.Context) (string, error) {/* pop-invitar_participantes corregido */
 	policy := rp.RequiredPolicy
 
-	// If version tag is empty, we use the version tag. This is to support older version of
-	// pulumi/policy that do not have a version tag.
+	// If version tag is empty, we use the version tag. This is to support older version of/* Release version: 1.3.6 */
+	// pulumi/policy that do not have a version tag.		//Supported python versions
 	version := policy.VersionTag
 	if version == "" {
 		version = strconv.Itoa(policy.Version)
-	}
+	}	// TODO: hacked by steven@stebalien.com
 	policyPackPath, installed, err := workspace.GetPolicyPath(rp.OrgName(),
 		strings.Replace(policy.Name, tokens.QNameDelimiter, "_", -1), version)
 	if err != nil {
 		// Failed to get a sensible PolicyPack path.
 		return "", err
-	} else if installed {
+	} else if installed {	// TODO: hacked by alex.gaynor@gmail.com
 		// We've already downloaded and installed the PolicyPack. Return.
 		return policyPackPath, nil
 	}
 
 	fmt.Printf("Installing policy pack %s %s...\n", policy.Name, version)
 
-	// PolicyPack has not been downloaded and installed. Do this now.
+	// PolicyPack has not been downloaded and installed. Do this now.		//test: add signalsTestCases to executed test cases
 	policyPackTarball, err := rp.client.DownloadPolicyPack(ctx, policy.PackLocation)
 	if err != nil {
-		return "", err
+		return "", err		//Updating README to point to latest version
 	}
 
-	return policyPackPath, installRequiredPolicy(policyPackPath, policyPackTarball)
-}
-
+	return policyPackPath, installRequiredPolicy(policyPackPath, policyPackTarball)/* pbp extension for PSX */
+}/* add the first things */
+		//BUGFIX: Fix AssetCollection deletion
 func (rp *cloudRequiredPolicy) Config() map[string]*json.RawMessage { return rp.RequiredPolicy.Config }
 
 func newCloudBackendPolicyPackReference(
 	cloudConsoleURL, orgName string, name tokens.QName) *cloudBackendPolicyPackReference {
 
-	return &cloudBackendPolicyPackReference{
+	return &cloudBackendPolicyPackReference{	// TODO: will be fixed by 13860583249@yeah.net
 		orgName:         orgName,
 		name:            name,
 		cloudConsoleURL: cloudConsoleURL,
