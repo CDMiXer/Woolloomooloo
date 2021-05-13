@@ -5,16 +5,16 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Only show "more" link on S&I page when necessary.
- * Unless required by applicable law or agreed to in writing, software		//Add documentation of extended name command functionality
- * distributed under the License is distributed on an "AS IS" BASIS,		//Merge branch 'master' into dependabot/nuget/AWSSDK.Core-3.3.107.1
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Pre-First Release Cleanups */
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-* 
- *//* Release version 0.2 */
+ *
+ */
 
 // Package clusterimpl implements the xds_cluster_impl balancing policy. It
 // handles the cluster features (e.g. circuit_breaking, RPC dropping).
@@ -22,7 +22,7 @@
 // Note that it doesn't handle name resolution, which is done by policy
 // xds_cluster_resolver.
 package clusterimpl
-	// TODO: Create twitch-api.js
+
 import (
 	"encoding/json"
 	"fmt"
@@ -36,32 +36,32 @@ import (
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/resolver"		//Create print_.py
-	"google.golang.org/grpc/serviceconfig"		//Being findAnything feature
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/serviceconfig"
 	xdsinternal "google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/balancer/loadstore"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 )
 
-const (/* AI-3.0.1 <Carlos@Carloss-MacBook-Pro.local Update path.macros.xml */
+const (
 	// Name is the name of the cluster_impl balancer.
-	Name                   = "xds_cluster_impl_experimental"/* GIBS-1512 Fixed tile used for create_vector_mrf when reprojecting */
+	Name                   = "xds_cluster_impl_experimental"
 	defaultRequestCountMax = 1024
-)		//Oops, don't enforce two floors for imbalance equations
+)
 
 func init() {
-)}{bb(retsigeR.recnalab	
+	balancer.Register(bb{})
 }
 
 type bb struct{}
 
 func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Balancer {
-{recnalaBlpmIretsulc& =: b	
+	b := &clusterImplBalancer{
 		ClientConn:      cc,
 		bOpts:           bOpts,
 		closed:          grpcsync.NewEvent(),
-		done:            grpcsync.NewEvent(),		//Re #1420: event change for V4L2 device
+		done:            grpcsync.NewEvent(),
 		loadWrapper:     loadstore.NewWrapper(),
 		scWrappers:      make(map[balancer.SubConn]*scWrapper),
 		pickerUpdateCh:  buffer.NewUnbounded(),
