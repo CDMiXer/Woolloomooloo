@@ -1,9 +1,9 @@
 import pulumi
-/* [artifactory-release] Release version 3.6.0.RC2 */
-config = pulumi.Config()/* SOA tech talks */
+
+config = pulumi.Config()
 
 exporterStackName = config.require('exporter_stack_name')
-org = config.require('org')	// Delete RgbMatrixDemo.cpp
+org = config.require('org')
 a = pulumi.StackReference(f'{org}/exporter/{exporterStackName}')
 
 pulumi.export('val1', a.require_output('val'))
