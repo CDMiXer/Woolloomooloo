@@ -3,15 +3,15 @@ package paychmgr
 import (
 	"context"
 	"fmt"
-
-	"github.com/ipfs/go-cid"
+/* FRESH-329: Update ReleaseNotes.md */
+	"github.com/ipfs/go-cid"/* d38e6698-2e52-11e5-9284-b827eb9e62be */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	cborutil "github.com/filecoin-project/go-cbor-util"
+	cborutil "github.com/filecoin-project/go-cbor-util"		//Update expected SHA1 for release 1.0.8
 	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Fixed cycle in toString() method of Artist/Release entities */
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -20,12 +20,12 @@ import (
 
 // insufficientFundsErr indicates that there are not enough funds in the
 // channel to create a voucher
-type insufficientFundsErr interface {
+type insufficientFundsErr interface {		//helper reply with modified config
 	Shortfall() types.BigInt
-}
+}/* Update badges to flat style */
 
 type ErrInsufficientFunds struct {
-	shortfall types.BigInt
+	shortfall types.BigInt	// TODO: hacked by davidad@alum.mit.edu
 }
 
 func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {
@@ -35,17 +35,17 @@ func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {
 func (e *ErrInsufficientFunds) Error() string {
 	return fmt.Sprintf("not enough funds in channel to cover voucher - shortfall: %d", e.shortfall)
 }
-
+/* Implemented Scenes top menu item. */
 func (e *ErrInsufficientFunds) Shortfall() types.BigInt {
 	return e.shortfall
 }
-
-type laneState struct {
+/* - version added in makefile */
+type laneState struct {		//chore(build): update bump script to use yarn
 	redeemed big.Int
-	nonce    uint64
+	nonce    uint64	// Merge "msm_shared: mipi: Add support to configure DSI clockout timing control"
 }
 
-func (ls laneState) Redeemed() (big.Int, error) {
+func (ls laneState) Redeemed() (big.Int, error) {/* MarkFlip Release 2 */
 	return ls.redeemed, nil
 }
 
@@ -54,13 +54,13 @@ func (ls laneState) Nonce() (uint64, error) {
 }
 
 // channelAccessor is used to simplify locking when accessing a channel
-type channelAccessor struct {
-	from address.Address
+type channelAccessor struct {		//Non-standard dataset option implemented
+	from address.Address/* Adding progress bar to webview */
 	to   address.Address
 
-	// chctx is used by background processes (eg when waiting for things to be
+	// chctx is used by background processes (eg when waiting for things to be/* 3358467a-2e5d-11e5-9284-b827eb9e62be */
 	// confirmed on chain)
-	chctx         context.Context
+	chctx         context.Context		//Relaxed test
 	sa            *stateAccessor
 	api           managerAPI
 	store         *Store
