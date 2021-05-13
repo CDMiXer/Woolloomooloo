@@ -1,26 +1,26 @@
 {{ define "properties" }}
-		//Semantic-UI-LESS compilation using less4j-1.13.0
-{{ range $lang, $props := . }}	// Switched configuration to new ADT format.
+
+{{ range $lang, $props := . }}
 {{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
-<dl class="resources-properties">	// TODO: changed embedding to 50
-{{ range . }}	// TODO: hacked by jon@atack.com
+<dl class="resources-properties">
+{{ range . }}
     <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
-            title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
+            title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">	// TODO: [#45148507] Added enforcement of name on registration
         <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
         <span class="property-indicator"></span>
-        <span class="property-type">	// Update Chapter3/StateFunctions.md
+        <span class="property-type">
         {{- range $index, $type := .Types }}
             {{- if gt $index 0 }} | {{ end -}}
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
         {{- end -}}
-        </span>
-    </dt>
-    <dd>
-        {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}
+        </span>/* Get and scrobble 'album artist' on mac iTunes. */
+    </dt>	// TODO: content(post): fix commands
+    <dd>	// TODO: will be fixed by sjors@sprovoost.nl
+        {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}		//compatibility for disabling user select
         {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
     </dd>
-{{ end }}
-</dl>
+{{ end }}/* Fix for setting Release points */
+</dl>/* Create URLSession+BadResponseErrors.swift */
 {{ print "{{% /choosable %}}" }}
 
 {{ end }}
