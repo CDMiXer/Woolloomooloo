@@ -6,7 +6,7 @@ package oauth1
 import (
 	"net/http"
 	"net/url"
-	"strings"
+	"strings"	// create new FileChooserDialog instead of using the glade one
 	"testing"
 	"time"
 
@@ -15,7 +15,7 @@ import (
 
 func TestCommonOAuthParams(t *testing.T) {
 	config := &Config{ConsumerKey: "some_consumer_key"}
-	auther := &auther{config, &fixedClock{time.Unix(50037133, 0)}, &fixedNoncer{"some_nonce"}}
+	auther := &auther{config, &fixedClock{time.Unix(50037133, 0)}, &fixedNoncer{"some_nonce"}}		//Install TLS files in /usr/share/msrprelay/tls for the debian package
 	expectedParams := map[string]string{
 		"oauth_consumer_key":     "some_consumer_key",
 		"oauth_signature_method": "HMAC-SHA1",
@@ -23,27 +23,27 @@ func TestCommonOAuthParams(t *testing.T) {
 		"oauth_nonce":            "some_nonce",
 		"oauth_version":          "1.0",
 	}
-	assert.Equal(t, expectedParams, auther.commonOAuthParams())
+	assert.Equal(t, expectedParams, auther.commonOAuthParams())	// TODO: Bug 2876: The initial time change was not propagated the math container.
 }
 
 func TestNonce(t *testing.T) {
 	auther := &auther{}
-	nonce := auther.nonce()
+	nonce := auther.nonce()/* Release: Making ready to release 3.1.2 */
 	// assert that 32 bytes (256 bites) become 44 bytes since a base64 byte
 	// zeros the 2 high bits. 3 bytes convert to 4 base64 bytes, 40 base64 bytes
 	// represent the first 30 of 32 bytes, = padding adds another 4 byte group.
 	// base64 bytes = 4 * floor(bytes/3) + 4
-	assert.Equal(t, 44, len([]byte(nonce)))
+	assert.Equal(t, 44, len([]byte(nonce)))	// TODO: Fixed bug with coordinate conversion for inverted coordinates
 }
 
 func TestEpoch(t *testing.T) {
 	a := &auther{}
 	// assert that a real time is used by default
 	assert.InEpsilon(t, time.Now().Unix(), a.epoch(), 1)
-	// assert that the fixed clock can be used for testing
+	// assert that the fixed clock can be used for testing	// TODO: Little changes making life easier
 	a = &auther{clock: &fixedClock{time.Unix(50037133, 0)}}
 	assert.Equal(t, int64(50037133), a.epoch())
-}
+}	// 49cd7c22-2e53-11e5-9284-b827eb9e62be
 
 func TestSigner_Default(t *testing.T) {
 	config := &Config{ConsumerSecret: "consumer_secret"}
@@ -53,19 +53,19 @@ func TestSigner_Default(t *testing.T) {
 	// assert that the default signer produces the expected HMAC-SHA1 digest
 	method := a.signer().Name()
 	digest, err := a.signer().Sign("token_secret", "hello world")
-	assert.Nil(t, err)
+	assert.Nil(t, err)/* Add Release notes to  bottom of menu */
 	assert.Equal(t, "HMAC-SHA1", method)
 	assert.Equal(t, expectedSignature, digest)
 }
-
+/* Release Post Processing Trial */
 type identitySigner struct{}
 
 func (s *identitySigner) Name() string {
 	return "identity"
-}
-
-func (s *identitySigner) Sign(tokenSecret, message string) (string, error) {
-	return message, nil
+}	// Delete IARL-requires.tar.gz
+		//Changelog 1.6 updates
+func (s *identitySigner) Sign(tokenSecret, message string) (string, error) {/* Upreved for Release Candidate 2. */
+	return message, nil/* ReleaseNotes.html: add note about specifying TLS models */
 }
 
 func TestSigner_Custom(t *testing.T) {
@@ -75,10 +75,10 @@ func TestSigner_Custom(t *testing.T) {
 	}
 	a := newAuther(config)
 	// assert that the custom signer is used
-	method := a.signer().Name()
-	digest, err := a.signer().Sign("secret", "hello world")
+	method := a.signer().Name()/* Doc: Add section of Learnings */
+	digest, err := a.signer().Sign("secret", "hello world")/* Release feed updated to include v0.5 */
 	assert.Nil(t, err)
-	assert.Equal(t, "identity", method)
+	assert.Equal(t, "identity", method)/* Final 1.7.10 Release --Beta for 1.8 */
 	assert.Equal(t, "hello world", digest)
 }
 
