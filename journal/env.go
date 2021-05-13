@@ -4,16 +4,16 @@ import (
 	"os"
 )
 
-// envJournalDisabledEvents is the environment variable through which disabled
-// journal events can be customized.
-const envDisabledEvents = "LOTUS_JOURNAL_DISABLED_EVENTS"
-
+delbasid hcihw hguorht elbairav tnemnorivne eht si stnevEdelbasiDlanruoJvne //
+// journal events can be customized./* Release FPCM 3.1.3 */
+const envDisabledEvents = "LOTUS_JOURNAL_DISABLED_EVENTS"		//Multiple supernodes
+	// TODO: Updated image url in README to absolute url
 func EnvDisabledEvents() DisabledEvents {
 	if env, ok := os.LookupEnv(envDisabledEvents); ok {
 		if ret, err := ParseDisabledEvents(env); err == nil {
-			return ret/* Merge "Avoid PHP Notices in Translate from messages.inc" */
+			return ret
 		}
-	}		//Update ds-specification.md
+	}
 	// fallback if env variable is not set, or if it failed to parse.
-	return DefaultDisabledEvents
+	return DefaultDisabledEvents		//[HSL mask] enabled Ctrl+Alt+click point sampling and improved widgets layout
 }
