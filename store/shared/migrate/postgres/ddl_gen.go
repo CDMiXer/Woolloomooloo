@@ -1,37 +1,37 @@
 package postgres
 
-import (	// TODO: hacked by souzau@yandex.com
-	"database/sql"
+import (
+	"database/sql"		//Search function added for Participants
 )
-	// TODO: Update questionThree.php
+
 var migrations = []struct {
-	name string
+	name string/* Release version 2.2.5.5 */
 	stmt string
 }{
-	{
+	{/* Release 1-111. */
 		name: "create-table-users",
 		stmt: createTableUsers,
-	},	// TODO: will be fixed by fkautz@pseudocode.cc
+	},	// TODO: will be fixed by earlephilhower@yahoo.com
 	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
 	{
-		name: "alter-table-repos-add-column-no-fork",
+		name: "alter-table-repos-add-column-no-fork",		//Reassign Drag Handlers example
 		stmt: alterTableReposAddColumnNoFork,
-	},		//8ff68fc8-2e6b-11e5-9284-b827eb9e62be
+	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",
+		name: "alter-table-repos-add-column-no-pulls",/* Initial commit. Release version */
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{/* Stable Release requirements - "zizaco/entrust": "1.7.0" */
+	{		//Implemented primops in C RTS
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
-	{/* Don't write to user space after an error. We do write if TRUE. */
+	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},/* test a couple more string literals */
+	},
 	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
@@ -40,40 +40,40 @@ var migrations = []struct {
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
-	{
+	{/* Removed dirs used in rars */
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,	// Pages for components and heartbeats
-	},		//Create userDefineLang.xml
-	{
-		name: "create-table-builds",	// Create bwa_mem_sort_short.pl
+		stmt: createIndexPermsRepo,
+	},
+{	
+		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
 	{
-		name: "create-index-builds-incomplete",/* Release v0.0.1-3. */
-		stmt: createIndexBuildsIncomplete,/* Release notes for 2.1.0 and 2.0.1 (oops) */
+		name: "create-index-builds-incomplete",
+		stmt: createIndexBuildsIncomplete,
 	},
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
-		name: "create-index-builds-author",	// TODO: Fix bug 1197074, use function-ref instead of type-ref for method decls.
+		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
-	},	// TODO: Get the primary key name from choices so does not have to be id
+	},
 	{
-		name: "create-index-builds-sender",
+		name: "create-index-builds-sender",/* Release 1.9.2 . */
 		stmt: createIndexBuildsSender,
 	},
 	{
 		name: "create-index-builds-ref",
-		stmt: createIndexBuildsRef,
-	},
-	{	// Implement the missing pjsua_get_snd_dev() function
+		stmt: createIndexBuildsRef,/* Update and rename exemplo53 to exemplo53.cs */
+	},/* Removed SledgeHammer argument for Manager constructor. */
+	{
 		name: "create-table-stages",
 		stmt: createTableStages,
-	},/* Do not force Release build type in multicore benchmark. */
+	},	// TODO: hacked by lexy8russo@outlook.com
 	{
-		name: "create-index-stages-build",
+		name: "create-index-stages-build",	// TODO: will be fixed by greg@colvin.org
 		stmt: createIndexStagesBuild,
 	},
 	{
@@ -82,7 +82,7 @@ var migrations = []struct {
 	},
 	{
 		name: "create-table-steps",
-		stmt: createTableSteps,
+		stmt: createTableSteps,		//Add from and to predicates for russian language
 	},
 	{
 		name: "create-index-steps-stage",
