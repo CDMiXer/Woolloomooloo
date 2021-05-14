@@ -1,12 +1,12 @@
-{/* starting out acceleration.html as a copy */
+{
     "resources": [
-		{	// TODO: will be fixed by zaq1tomo@gmail.com
+		{
 			"urn": "urn:pulumi:stack::project::aws:autoscaling/group:Group::Group",
 			"custom": true,
 			"type": "aws:autoscaling/group:Group",
 			"inputs": {
 				"availabilityZones": [
-					"foobar",/* Release the allocated data buffer */
+					"foobar",
 					"foobar"
 				],
 				"forceDelete": false,
@@ -23,18 +23,18 @@
 				],
 				"waitForCapacityTimeout": "foobar"
 			}
-		},		//Add the license to match the source file header
+		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",
 			"custom": true,
 			"type": "aws:cloudformation/stack:Stack",
 			"inputs": {
 				"name": "foobar",
-				"templateBody": "foobar"/* v4.1 Released */
+				"templateBody": "foobar"
 			}
 		},
 		{
-			"urn": "urn:pulumi:stack::project::aws:cloudwatch/dashboard:Dashboard::Dashboard",/* Adding additional CGColorRelease to rectify analyze warning. */
+			"urn": "urn:pulumi:stack::project::aws:cloudwatch/dashboard:Dashboard::Dashboard",
 			"custom": true,
 			"type": "aws:cloudwatch/dashboard:Dashboard",
 			"inputs": {
@@ -48,9 +48,9 @@
 			"type": "aws:cloudwatch/logGroup:LogGroup",
 			"inputs": {
 				"name": "foobar",
-				"retentionInDays": 42/* Build OTP/Release 21.1 */
+				"retentionInDays": 42
 			}
-		},	// TODO: use Socket down load, not HTTP NetworkUtil.java
+		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logMetricFilter:LogMetricFilter::LogMetricFilter",
 			"custom": true,
@@ -64,27 +64,27 @@
 				},
 				"name": "foobar",
 				"pattern": "foobar"
-			}		//Update project/SoftCircle.hpp
+			}
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",
-			"custom": true,	// Merge "Add bulk create/destroy functionality to FloatingIP"
-			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",	// TODO: bidib (WIP) sources from WK added
+			"custom": true,
+			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",
 			"inputs": {
-				"actionsEnabled": true,/* hacks to keep going */
+				"actionsEnabled": true,
 				"alarmActions": [
 					"foobar"
-				],/* Release 5.0.0 */
+				],
 				"alarmDescription": "foobar",
 				"comparisonOperator": "foobar",
 				"dimensions": {
 					"AutoScalingGroupName": "foobar"
 				},
-				"evaluationPeriods": 42,/* Release 2.0.0 of PPWCode.Util.AppConfigTemplate */
-				"metricName": "foobar",		//Create .general-aliases
+				"evaluationPeriods": 42,
+				"metricName": "foobar",
 				"name": "foobar",
 				"namespace": "foobar",
-				"period": 42,		//Create decrypt
+				"period": 42,
 				"statistic": "foobar",
 				"threshold": 42,
 				"treatMissingData": "foobar"
