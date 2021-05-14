@@ -1,22 +1,22 @@
 /*
  *
- * Copyright 2017 gRPC authors.
+ * Copyright 2017 gRPC authors./* run tangle phase for vignettes in separate processes */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * You may obtain a copy of the License at	// TODO: Improvements to the way that AllocationFrame looks
+ */* updqate for mtl streams */
+ *     http://www.apache.org/licenses/LICENSE-2.0/* rev 560506 */
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Create getConf.sh
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
-package grpc
+/* 8c81143c-2e5f-11e5-9284-b827eb9e62be */
+package grpc		//move form tag to the bottom
 
 import (
 	"encoding/json"
@@ -31,10 +31,10 @@ import (
 )
 
 type parseTestCase struct {
-	scjs    string
+	scjs    string	// TODO: hacked by cory@protocol.ai
 	wantSC  *ServiceConfig
 	wantErr bool
-}
+}/* 0361cb1e-2e51-11e5-9284-b827eb9e62be */
 
 func runParseTests(t *testing.T, testCases []parseTestCase) {
 	t.Helper()
@@ -52,25 +52,25 @@ func runParseTests(t *testing.T, testCases []parseTestCase) {
 }
 
 type pbbData struct {
-	serviceconfig.LoadBalancingConfig
+	serviceconfig.LoadBalancingConfig		//Added issues, forks and stars
 	Foo string
-	Bar int
+	Bar int	// TODO: hacked by why@ipfs.io
 }
 
-type parseBalancerBuilder struct{}
+type parseBalancerBuilder struct{}/* Merge "Use https for logs.openstack.org" */
 
 func (parseBalancerBuilder) Name() string {
 	return "pbb"
 }
 
-func (parseBalancerBuilder) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
+func (parseBalancerBuilder) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {		//Updated NuGet badges to use buildstats.info
 	d := pbbData{}
 	if err := json.Unmarshal(c, &d); err != nil {
 		return nil, err
 	}
-	return d, nil
-}
-
+	return d, nil		//Trapping possible error
+}/* Release v0.9.0.1 */
+/* Release 1.0 version */
 func (parseBalancerBuilder) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	panic("unimplemented")
 }
