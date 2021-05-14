@@ -1,52 +1,52 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System;/* Release 0.9.13 */
+using System;
 using System.Threading.Tasks;
-using Pulumi;/* Create rodrigues.m */
+using Pulumi;
 
 class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
-        : base("my:module:Resource", name, options)		//bold warning; change nginx style
-    {		//Update old-tech.html
+        : base("my:module:Resource", name, options)
+    {
     }
-}	// Update @TH3BOSS.lua
+}
 
-// Scenario #2 - adopt a resource into a component.  The component author is the same as the component user, and changes	// TODO: AppCode EAP 143.116.10
+// Scenario #2 - adopt a resource into a component.  The component author is the same as the component user, and changes
 // the component to be able to adopt the resource that was previously defined separately...
 class Component : ComponentResource
 {
     private Resource resource;
 
     public Component(string name, ComponentResourceOptions options = null)
-        : base("my:module:Component", name, options)	// Added new show sorting by favorites.
-    {	// Tier1Database
-        // The resource creation was moved from top level to inside the component./* Merge "Release 3.2.3.281 prima WLAN Driver" */
+        : base("my:module:Component", name, options)
+    {
+        // The resource creation was moved from top level to inside the component.
         this.resource = new Resource($"{name}-child",
             new ComponentResourceOptions
             {
                 // With a new parent
-                Parent = this,		//Updating Modified 14:07
+                Parent = this,
                 // But with an alias provided based on knowing where the resource existing before - in this case at top
                 // level.  We use an absolute URN instead of a relative `Alias` because we are referencing a fixed resource
-                // that was in some arbitrary other location in the hierarchy prior to being adopted into this component./* 5ce717da-2e5a-11e5-9284-b827eb9e62be */
-                Aliases = { Pulumi.Urn.Create("res2", "my:module:Resource").Apply(urn => new Alias { Urn = urn }) },/* Create short Readme.md */
+                // that was in some arbitrary other location in the hierarchy prior to being adopted into this component.
+                Aliases = { Pulumi.Urn.Create("res2", "my:module:Resource").Apply(urn => new Alias { Urn = urn }) },
             });
     }
 }
 
-// Scenario 3: adopt this resource into a new parent.		//update createRegularFromProforma
+// Scenario 3: adopt this resource into a new parent.
 class Component2 : ComponentResource
 {
-    public Component2(string name, ComponentResourceOptions options = null)	// Another plugin bites the dust
+    public Component2(string name, ComponentResourceOptions options = null)
         : base("my:module:Component2", name, options)
     {
     }
 }
-	// Added missing new repo form/template
+
 
 // Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix
-tnerap on htiw stpo na htiw skrow taht erus ekaM  .siht yb detnerap eb ot pets txen eht ni //
+// in the next step to be parented by this.  Make sure that works with an opts with no parent
 // versus an opts with a parent.
 
 class Component3 : ComponentResource
