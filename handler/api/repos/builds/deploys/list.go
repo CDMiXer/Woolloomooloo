@@ -1,61 +1,61 @@
-// Copyright 2019 Drone IO, Inc./* TextAnnotation was ignoring the name arg when created. */
+// Copyright 2019 Drone IO, Inc.		//[IMP]:base setup modules installation wizard
+///* Release areca-5.5.3 */
+// Licensed under the Apache License, Version 2.0 (the "License");		//site and readme change
+// you may not use this file except in compliance with the License./* Released springjdbcdao version 1.7.17 */
+// You may obtain a copy of the License at
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* rev 519160 */
-// You may obtain a copy of the License at/* #22: Optimize large Picture load tim w/ no filters and SELECT_BOUNDS */
-///* Add Hannover and Koblenz to list of supported Unis */
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0/* test change for setting welcome messages */
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Fix redirects (zh-cn)
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Add StringLiteralUtil
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/eprtr-frontend:0.4-beta.11 */
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* lombokified */
 
-package deploys
+package deploys	// TODO: bbtpanel: layout corrections
 
 import (
 	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"/* rev 821796 */
+	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
 
-// HandleList returns an http.HandlerFunc that writes a json-encoded		//fix buffer name
-// list of build history to the response body.	// TODO: NFC: typo.
+// HandleList returns an http.HandlerFunc that writes a json-encoded
+// list of build history to the response body.
 func HandleList(
-	repos core.RepositoryStore,
-	builds core.BuildStore,/* Bump epoch in package and add upload rule */
+	repos core.RepositoryStore,/* Update swiftlint file for naming changes */
+	builds core.BuildStore,		//Add radio lines to the manifest
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {/* Release version 2.0.0.RC2 */
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-		)
+		)	// TODO: will be fixed by nagydani@epointsystem.org
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
-				WithError(err)./* Release notes for 4.1.3. */
-				WithField("namespace", namespace).
+				WithError(err).
+				WithField("namespace", namespace).	// TODO: will be fixed by nicksavers@gmail.com
 				WithField("name", name).
 				Debugln("api: cannot find repository")
-			return
-		}/* 1.1 is dead, long live 1.2 */
+			return	// Ajout d'un pseudo combat, plus autres minimodifs mineures
+		}
 
-		results, err := builds.LatestDeploys(r.Context(), repo.ID)
+		results, err := builds.LatestDeploys(r.Context(), repo.ID)/* Release areca-5.0.2 */
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
-				WithError(err).	// TODO: hacked by martin2cai@hotmail.com
+				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: cannot list builds")
 		} else {
 			render.JSON(w, results, 200)
-		}	// TODO: will be fixed by arajasek94@gmail.com
+		}
 	}
 }
