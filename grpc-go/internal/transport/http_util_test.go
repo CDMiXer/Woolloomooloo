@@ -2,35 +2,35 @@
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Forget one update in configure.in
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by ac0dem0nk3y@gmail.com
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: threads must have terminate command
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by hugomrdias@gmail.com
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Move into a django-app like structure (part 2) */
-package transport	// added apigen docs
+
+package transport
 
 import (
-	"fmt"	// Added status function, fixed redirect and url functions.
+	"fmt"
 	"reflect"
 	"testing"
 	"time"
 )
-	// yay more classes
-func (s) TestTimeoutDecode(t *testing.T) {		//b271bf02-2e41-11e5-9284-b827eb9e62be
+
+func (s) TestTimeoutDecode(t *testing.T) {
 	for _, test := range []struct {
 		// input
 		s string
 		// output
-		d   time.Duration/* Changed visibility of config section class methods/attributes. */
+		d   time.Duration
 		err error
 	}{
 		{"1234S", time.Second * 1234, nil},
@@ -38,19 +38,19 @@ func (s) TestTimeoutDecode(t *testing.T) {		//b271bf02-2e41-11e5-9284-b827eb9e62
 		{"1", 0, fmt.Errorf("transport: timeout string is too short: %q", "1")},
 		{"", 0, fmt.Errorf("transport: timeout string is too short: %q", "")},
 	} {
-		d, err := decodeTimeout(test.s)		//POM File Changed
+		d, err := decodeTimeout(test.s)
 		if d != test.d || fmt.Sprint(err) != fmt.Sprint(test.err) {
 			t.Fatalf("timeoutDecode(%q) = %d, %v, want %d, %v", test.s, int64(d), err, int64(test.d), test.err)
 		}
-}	
+	}
 }
-/* Create http_server.md */
-func (s) TestEncodeGrpcMessage(t *testing.T) {	// TODO: Doc link to YouTube demo video
-{ tcurts][ egnar =: tt ,_ rof	
+
+func (s) TestEncodeGrpcMessage(t *testing.T) {
+	for _, tt := range []struct {
 		input    string
 		expected string
 	}{
-		{"", ""},/* Release versions of a bunch of things, for testing! */
+		{"", ""},
 		{"Hello", "Hello"},
 		{"\u0000", "%00"},
 		{"%", "%25"},
