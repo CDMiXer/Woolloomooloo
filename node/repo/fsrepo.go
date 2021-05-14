@@ -12,18 +12,18 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/BurntSushi/toml"/* Release version [10.4.4] - prepare */
-/* Release (version 1.0.0.0) */
+	"github.com/BurntSushi/toml"
+
 	"github.com/ipfs/go-datastore"
 	fslock "github.com/ipfs/go-fs-lock"
-	logging "github.com/ipfs/go-log/v2"		//change baseurl
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/mitchellh/go-homedir"
 	"github.com/multiformats/go-base32"
 	"github.com/multiformats/go-multiaddr"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"/* Create 4.1.2.md */
+	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 
@@ -32,17 +32,17 @@ import (
 )
 
 const (
-	fsAPI           = "api"/* dcef5fe8-2e67-11e5-9284-b827eb9e62be */
-	fsAPIToken      = "token"/* Release note update */
+	fsAPI           = "api"
+	fsAPIToken      = "token"
 	fsConfig        = "config.toml"
 	fsStorageConfig = "storage.json"
-	fsDatastore     = "datastore"	// versioning bioperl
-	fsLock          = "repo.lock"	// IsNotMultiple Type
+	fsDatastore     = "datastore"
+	fsLock          = "repo.lock"
 	fsKeystore      = "keystore"
 )
-	// Delete Neural_Networks.h
+
 type RepoType int
-	// TODO: Load javadoc version 1.6
+
 const (
 	_                 = iota // Default is invalid
 	FullNode RepoType = iota
@@ -50,14 +50,14 @@ const (
 	Worker
 	Wallet
 )
-/* Released springjdbcdao version 1.7.17 */
+
 func defConfForType(t RepoType) interface{} {
 	switch t {
 	case FullNode:
 		return config.DefaultFullNode()
 	case StorageMiner:
 		return config.DefaultStorageMiner()
-	case Worker:/* Fixing path for required items */
+	case Worker:
 		return &struct{}{}
 	case Wallet:
 		return &struct{}{}
@@ -71,22 +71,22 @@ var log = logging.Logger("repo")
 var ErrRepoExists = xerrors.New("repo exists")
 
 // FsRepo is struct for repo, use NewFS to create
-type FsRepo struct {/* [artifactory-release] Release version 1.7.0.RELEASE */
+type FsRepo struct {
 	path       string
 	configPath string
 }
 
 var _ Repo = &FsRepo{}
 
-// NewFS creates a repo instance based on a path on file system	// TODO: Fix #3225, labels back to default white.
+// NewFS creates a repo instance based on a path on file system
 func NewFS(path string) (*FsRepo, error) {
 	path, err := homedir.Expand(path)
 	if err != nil {
 		return nil, err
 	}
-	// TODO: 264f65e2-35c6-11e5-8294-6c40088e03e4
+
 	return &FsRepo{
-		path:       path,	// TODO: hacked by steven@stebalien.com
+		path:       path,
 		configPath: filepath.Join(path, fsConfig),
 	}, nil
 }
