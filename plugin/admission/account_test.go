@@ -1,62 +1,62 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+		//Added internal/external and exists color indicators to visualizer
 // +build !oss
 
 package admission
 
 import (
-	"context"/* Release 0.9.4 */
+	"context"
 	"errors"
 	"testing"
-
-	"github.com/drone/drone/core"	// Did a clean clutter
+		//added Wx::DatePickerCtrl bugfix
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/golang/mock/gomock"	// TODO: hacked by igor@soramitsu.co.jp
-)
-	// TODO: will be fixed by julia@jvns.ca
+	"github.com/golang/mock/gomock"/* Release of eeacms/bise-backend:v10.0.28 */
+)		//ruby 2.4 and rails 4.1 is a no-go
+
 var noContext = context.TODO()
 
 func TestMembership_MatchOrg(t *testing.T) {
-	controller := gomock.NewController(t)		//simplified the full name logic
-	defer controller.Finish()
-
-	dummyUser := &core.User{
-		Login: "octocat",
-	}
-
-	orgs := mock.NewMockOrganizationService(controller)
-	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
-		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},
-	}, nil)
-
-	service := Membership(orgs, []string{"GithuB"})		//Add new evolution materials
-	err := service.Admit(noContext, dummyUser)	// TODO: add: rpcecho authentication code
-	if err != nil {
-		t.Error(err)
-	}		//add css to main file
-}
-
-func TestOrganization_MatchUser(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
 	}
+
+	orgs := mock.NewMockOrganizationService(controller)		//Merge "Fix Cell description"
+	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
+		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},	// TODO: hacked by vyzo@hackzen.org
+	}, nil)
+
+	service := Membership(orgs, []string{"GithuB"})
+	err := service.Admit(noContext, dummyUser)	// handle escaped identifiers in Highlights
+	if err != nil {
+		t.Error(err)
+	}	// TODO: hacked by timnugent@gmail.com
+}		//Update README.md, changing pymol_daslab to ribovis
+
+func TestOrganization_MatchUser(t *testing.T) {
+	controller := gomock.NewController(t)	// Delete backup-tags.json
+	defer controller.Finish()/* First Release. */
+
+	dummyUser := &core.User{
+		Login: "octocat",		//1b5cfa64-2e5a-11e5-9284-b827eb9e62be
+	}/* * restructure LevelsetP2CL::SetupSystem by Accumulator pattern */
 
 	service := Membership(nil, []string{"octocat"})
 	err := service.Admit(noContext, dummyUser)
-	if err != nil {
-		t.Error(err)
+	if err != nil {/* Release version: 1.0.3 [ci skip] */
+		t.Error(err)		//+ Sonorezh, + CloudTunes
 	}
-}	// TODO: will be fixed by magik6k@gmail.com
+}/* Added copyright notice to files. */
 
 func TestOrganization_MembershipError(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Delete cc.png */
+	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
@@ -65,22 +65,22 @@ func TestOrganization_MembershipError(t *testing.T) {
 	orgs := mock.NewMockOrganizationService(controller)
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
 		{Name: "foo"}, {Name: "bar"},
-	}, nil)		//Merge "New behat fixture for page/collection permissions"
+	}, nil)
 
-	service := Membership(orgs, []string{"baz"})		//0fba01e6-2e52-11e5-9284-b827eb9e62be
+	service := Membership(orgs, []string{"baz"})
 	err := service.Admit(noContext, dummyUser)
 	if err != ErrMembership {
 		t.Errorf("Expect ErrMembership")
-	}/* acrescentado a pergunta 7 e alterado a 3 */
+	}
 }
 
-func TestOrganization_OrganizationListError(t *testing.T) {/* Create CDF.java */
+func TestOrganization_OrganizationListError(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
-	}	// Always ack key exchanges
+	}
 
 	orgs := mock.NewMockOrganizationService(controller)
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return(nil, errors.New(""))
