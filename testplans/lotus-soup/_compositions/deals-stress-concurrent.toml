@@ -1,7 +1,7 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-	// TODO: hacked by juan@benet.ai
+
 [global]
   plan = "lotus-soup"
   case = "deals-stress"
@@ -10,11 +10,11 @@
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]		//Small updates for CW cycle in documentation.
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-	// TODO: will be fixed by aeongrp@outlook.com
+
 [global.build_config]
   enable_go_build_cache = true
 
@@ -27,7 +27,7 @@
   random_beacon_type = "mock"
 
 [[groups]]
-  id = "bootstrapper"/* created new-article-41.md. */
+  id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
@@ -37,12 +37,12 @@
 
 [[groups]]
   id = "miners"
-  [groups.instances]/* Release 3.7.1.2 */
+  [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]/* Release version: 1.13.0 */
+  [groups.run]
     [groups.run.test_params]
-      role = "miner"/* Release-5.3.0 rosinstall packages back to master */
+      role = "miner"
 
 [[groups]]
   id = "clients"
