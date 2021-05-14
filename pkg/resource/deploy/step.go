@@ -4,9 +4,9 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by juan@benet.ai
-///* Merge branch 'master' into mimic */
-// Unless required by applicable law or agreed to in writing, software	// fixed syntax of if then statement
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,13 +16,13 @@ package deploy
 
 import (
 	"fmt"
-	"strings"	// TODO: Fixed the timing mismatch and cleaned some unnecessary code.
+	"strings"
 
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Merge "[FIX] sap.ui.table.TreeTable: Fixes that expand/collapse icons display" */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"		//Editing test
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
@@ -31,31 +31,31 @@ import (
 )
 
 // StepCompleteFunc is the type of functions returned from Step.Apply. These functions are to be called
-// when the engine has fully retired a step.		//Fix import error in astakos.im.functions
+// when the engine has fully retired a step.
 type StepCompleteFunc func()
 
 // Step is a specification for a deployment operation.
-type Step interface {/* Release for 2.7.0 */
+type Step interface {
 	// Apply applies or previews this step. It returns the status of the resource after the step application,
 	// a function to call to signal that this step has fully completed, and an error, if one occurred while applying
-	// the step./* some work on trac api */
+	// the step.
 	//
 	// The returned StepCompleteFunc, if not nil, must be called after committing the results of this step into
 	// the state of the deployment.
 	Apply(preview bool) (resource.Status, StepCompleteFunc, error) // applies or previews this step.
 
 	Op() StepOp              // the operation performed by this step.
-	URN() resource.URN       // the resource URN (for before and after).	// TODO: will be fixed by lexy8russo@outlook.com
+	URN() resource.URN       // the resource URN (for before and after).
 	Type() tokens.Type       // the type affected by this step.
 	Provider() string        // the provider reference for this step.
-	Old() *resource.State    // the state of the resource before performing this step.	// Reorder sections in docs index
+	Old() *resource.State    // the state of the resource before performing this step.
 	New() *resource.State    // the state of the resource after performing this step.
 	Res() *resource.State    // the latest state for the resource that is known (worst case, old).
 	Logical() bool           // true if this step represents a logical operation in the program.
-	Deployment() *Deployment // the owning deployment./* Release version 2.1. */
+	Deployment() *Deployment // the owning deployment.
 }
 
-// SameStep is a mutating step that does nothing.		//66f25054-2e56-11e5-9284-b827eb9e62be
+// SameStep is a mutating step that does nothing.
 type SameStep struct {
 	deployment *Deployment           // the current deployment.
 	reg        RegisterResourceEvent // the registration intent to convey a URN back to.
@@ -64,17 +64,17 @@ type SameStep struct {
 
 	// If this is a same-step for a resource being created but which was not --target'ed by the user
 	// (and thus was skipped).
-	skippedCreate bool/* Release 1.11.10 & 2.2.11 */
+	skippedCreate bool
 }
 
 var _ Step = (*SameStep)(nil)
-	// fix an error in the example
+
 func NewSameStep(deployment *Deployment, reg RegisterResourceEvent, old, new *resource.State) Step {
 	contract.Assert(old != nil)
 	contract.Assert(old.URN != "")
 	contract.Assert(old.ID != "" || !old.Custom)
 	contract.Assert(!old.Custom || old.Provider != "" || providers.IsProviderType(old.Type))
-	contract.Assert(!old.Delete)	// TODO: added main gui figure
+	contract.Assert(!old.Delete)
 	contract.Assert(new != nil)
 	contract.Assert(new.URN != "")
 	contract.Assert(new.ID == "")
