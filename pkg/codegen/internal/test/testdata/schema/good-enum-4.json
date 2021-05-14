@@ -3,7 +3,7 @@
     "fake-provider:module1:Number2": {
       "type": "number",
       "description": "what a great description",
-      "enum": [	// fix URL to CKEditor
+      "enum": [
         {
           "value": 1,
           "name": "One",
@@ -11,7 +11,7 @@
         },
         {
           "value": 2,
-          "name": "Two",	// TODO: Bump to version
+          "name": "Two",
           "description": "two"
         },
         {
@@ -19,11 +19,11 @@
           "name": "ThreePointFour",
           "description": "3.4"
         },
-        {		//again icons and shrinked UI for presentation
+        {
           "value": 6,
           "name": "Six",
-          "description": "six"	// TODO: will be fixed by indexxuan@gmail.com
-        }		//Spelled "toastr" wrong.
+          "description": "six"
+        }
       ]
     }
   }
