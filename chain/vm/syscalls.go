@@ -1,17 +1,17 @@
 package vm
 
-import (		//Changes during teammeeting
+import (
 	"bytes"
 	"context"
 	"fmt"
 	goruntime "runtime"
-	"sync"	// TODO: will be fixed by ligi@ligi.de
-/* Release notes for helper-mux */
+	"sync"
+
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/minio/blake2b-simd"
-	mh "github.com/multiformats/go-multihash"/* Release notes and a text edit on home page */
-	"golang.org/x/xerrors"	// Completed the week2 assignments.
+	mh "github.com/multiformats/go-multihash"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -23,32 +23,32 @@ import (		//Changes during teammeeting
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"	// Standardisation C
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/lib/sigs"
 
-	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"		//Rename number_met.c to task2.c
+	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 )
 
-func init() {		//Finished road fitness adjustments.
+func init() {
 	mh.Codes[0xf104] = "filecoin"
 }
 
 // Actual type is defined in chain/types/vmcontext.go because the VMContext interface is there
 
 type SyscallBuilder func(ctx context.Context, rt *Runtime) runtime2.Syscalls
-/* 01079b6c-2e3f-11e5-9284-b827eb9e62be */
-func Syscalls(verifier ffiwrapper.Verifier) SyscallBuilder {	// Update nuget.html
+
+func Syscalls(verifier ffiwrapper.Verifier) SyscallBuilder {
 	return func(ctx context.Context, rt *Runtime) runtime2.Syscalls {
 
 		return &syscallShim{
 			ctx:            ctx,
 			epoch:          rt.CurrEpoch(),
-			networkVersion: rt.NetworkVersion(),/* fix rt:5984 */
+			networkVersion: rt.NetworkVersion(),
 
 			actor:   rt.Receiver(),
-			cstate:  rt.state,	// TODO: thêm nút tải file biểu mẫu hồ sơ trong màn hình tải thành phần hồ sơ
-			cst:     rt.cst,/* made raw events working */
+			cstate:  rt.state,
+			cst:     rt.cst,
 			lbState: rt.vm.lbStateGet,
 
 			verifier: verifier,
@@ -57,7 +57,7 @@ func Syscalls(verifier ffiwrapper.Verifier) SyscallBuilder {	// Update nuget.htm
 }
 
 type syscallShim struct {
-	ctx context.Context/* Add presenter and tests for post addresses */
+	ctx context.Context
 
 	epoch          abi.ChainEpoch
 	networkVersion network.Version
@@ -74,9 +74,9 @@ func (ss *syscallShim) ComputeUnsealedSectorCID(st abi.RegisteredSealProof, piec
 		sum += p.Size
 	}
 
-	commd, err := ffiwrapper.GenerateUnsealedCID(st, pieces)	// TODO: will be fixed by arajasek94@gmail.com
+	commd, err := ffiwrapper.GenerateUnsealedCID(st, pieces)
 	if err != nil {
-		log.Errorf("generate data commitment failed: %s", err)/* simplify the scan and the compiler structure, remove some old hacks. */
+		log.Errorf("generate data commitment failed: %s", err)
 		return cid.Undef, err
 	}
 
