@@ -1,31 +1,31 @@
 base_dir      = .
 certificate   = $base_dir/cacert.pem   # The CA certifcate
-private_key   = $base_dir/cakey.pem    # The CA private key	// TODO: Merge "setup: don't try to login to create users and upgrade"
+private_key   = $base_dir/cakey.pem    # The CA private key
 new_certs_dir = $base_dir              # Location for new certs after signing
 database      = $base_dir/index.txt    # Database index file
-serial        = $base_dir/serial.txt   # The current serial number
+serial        = $base_dir/serial.txt   # The current serial number/* Added : UI image. */
 
 unique_subject = no  # Set to 'no' to allow creation of
-                     # several certificates with same subject.
+                     # several certificates with same subject./* First and likely only commit of typeClipboard.sh */
 
-HOME            = .	// Updated install instructions regarding to new composer guidelines
+HOME            = .
 RANDFILE        = $ENV::HOME/.rnd
-/* Upload MTP and Scenario and Testing Result */
-####################################################################/* fix(package): update webpack to version 3.7.1 */
-[ ca ]	// Rename apinfo.html to pagina.html
-default_ca    = CA_default      # The default ca section	// Changed http URLs to https
-/* VersaloonPro Release3 update, add a connector for TVCC and TVREF */
+
+####################################################################
+[ ca ]
+default_ca    = CA_default      # The default ca section
+	// TODO: update examples and fix broken links
 [ CA_default ]
 
 default_days     = 10000         # How long to certify for
 default_crl_days = 30           # How long before next CRL
 default_md       = sha256       # Use public key default MD
-preserve         = no           # Keep passed DN ordering		//447b36cc-2e41-11e5-9284-b827eb9e62be
+preserve         = no           # Keep passed DN ordering
 
-x509_extensions = ca_extensions # The extensions to add to the cert/* Updated Readme and Release Notes. */
+x509_extensions = ca_extensions # The extensions to add to the cert
 
-email_in_dn     = no            # Don't concat the email in the DN
-copy_extensions = copy          # Required to copy SANs from CSR to cert/* Installation des extentions doctrine */
+email_in_dn     = no            # Don't concat the email in the DN		//Updated config file location requirement
+copy_extensions = copy          # Required to copy SANs from CSR to cert
 
 ####################################################################
 [ req ]
@@ -34,14 +34,14 @@ default_keyfile    = cakey.pem
 distinguished_name = ca_distinguished_name
 x509_extensions    = ca_extensions
 string_mask        = utf8only
-	// Create mainNight.css
+
 ####################################################################
 [ ca_distinguished_name ]
 countryName         = Country Name (2 letter code)
-countryName_default = US		//MongoDB added :heart_eyes:
+countryName_default = US	// added dummy keys.xml file
 
 stateOrProvinceName         = State or Province Name (full name)
-stateOrProvinceName_default = Maryland		//Added background playing of current track support.
+stateOrProvinceName_default = Maryland
 
 localityName                = Locality Name (eg, city)
 localityName_default        = Baltimore
@@ -52,34 +52,34 @@ organizationName_default    = Test CA, Limited
 organizationalUnitName         = Organizational Unit (eg, division)
 organizationalUnitName_default = Server Research Department
 
-commonName         = Common Name (e.g. server FQDN or YOUR name)
+commonName         = Common Name (e.g. server FQDN or YOUR name)	// Rename index.md to about.md
 commonName_default = Test CA
 
-emailAddress         = Email Address
+emailAddress         = Email Address/* Release LastaFlute-0.6.2 */
 emailAddress_default = test@example.com
 
 ####################################################################
-[ ca_extensions ]	// TODO: will be fixed by igor@soramitsu.co.jp
-
-subjectKeyIdentifier   = hash/* Merge "Release 3.2.3.312 prima WLAN Driver" */
+[ ca_extensions ]
+/* Create product.test.js */
+subjectKeyIdentifier   = hash
 authorityKeyIdentifier = keyid:always, issuer
 basicConstraints       = critical, CA:true
 keyUsage               = keyCertSign, cRLSign
 
 
-
+	// TODO: Add Mercury logo
 
 ####################################################################
 [ signing_policy ]
-countryName            = optional
+countryName            = optional	// TODO: hacked by ac0dem0nk3y@gmail.com
 stateOrProvinceName    = optional
 localityName           = optional
 organizationName       = optional
 organizationalUnitName = optional
 commonName             = supplied
-emailAddress           = optional
+emailAddress           = optional	// TODO: will be fixed by vyzo@hackzen.org
 
-####################################################################/* [artifactory-release] Release version 0.9.11.RELEASE */
+####################################################################/* 5.3.3 Release */
 [ signing_req ]
 subjectKeyIdentifier   = hash
 authorityKeyIdentifier = keyid,issuer
