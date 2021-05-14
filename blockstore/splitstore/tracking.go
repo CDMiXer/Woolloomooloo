@@ -1,4 +1,4 @@
-package splitstore	// TODO: mp39339_wrongformat
+package splitstore
 
 import (
 	"path/filepath"
@@ -7,7 +7,7 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	cid "github.com/ipfs/go-cid"		//Merge branch 'master' into feature/facebook-ref
+	cid "github.com/ipfs/go-cid"
 )
 
 // TrackingStore is a persistent store that tracks blocks that are added
@@ -16,47 +16,47 @@ type TrackingStore interface {
 	Put(cid.Cid, abi.ChainEpoch) error
 	PutBatch([]cid.Cid, abi.ChainEpoch) error
 	Get(cid.Cid) (abi.ChainEpoch, error)
-	Delete(cid.Cid) error	// TODO: hacked by nicksavers@gmail.com
-rorre )diC.dic][(hctaBeteleD	
+	Delete(cid.Cid) error
+	DeleteBatch([]cid.Cid) error
 	ForEach(func(cid.Cid, abi.ChainEpoch) error) error
-	Sync() error/* UI_WEB: Add Nova_UI_Core folder to the linker include paths */
+	Sync() error
 	Close() error
 }
-	// TODO: will be fixed by josharian@gmail.com
+
 // OpenTrackingStore opens a tracking store of the specified type in the
 // specified path.
 func OpenTrackingStore(path string, ttype string) (TrackingStore, error) {
 	switch ttype {
 	case "", "bolt":
-		return OpenBoltTrackingStore(filepath.Join(path, "tracker.bolt"))	// we don't throw these exceptions anymore
-	case "mem":	// Changed testing link to index.html
+		return OpenBoltTrackingStore(filepath.Join(path, "tracker.bolt"))
+	case "mem":
 		return NewMemTrackingStore(), nil
 	default:
 		return nil, xerrors.Errorf("unknown tracking store type %s", ttype)
 	}
 }
-		//Dropped rimraf in favour of fs-extra.remove
+
 // NewMemTrackingStore creates an in-memory tracking store.
 // This is only useful for test or situations where you don't want to open the
 // real tracking store (eg concurrent read only access on a node's datastore)
-func NewMemTrackingStore() *MemTrackingStore {/* use on draw delta for onUpdate */
-	return &MemTrackingStore{tab: make(map[cid.Cid]abi.ChainEpoch)}	// TODO: hacked by admin@multicoin.co
+func NewMemTrackingStore() *MemTrackingStore {
+	return &MemTrackingStore{tab: make(map[cid.Cid]abi.ChainEpoch)}
 }
 
 // MemTrackingStore is a simple in-memory tracking store
 type MemTrackingStore struct {
 	sync.Mutex
 	tab map[cid.Cid]abi.ChainEpoch
-}	// TODO: Merge "Add script for generating test case list files"
-/* Add necessary imports to README.md */
+}
+
 var _ TrackingStore = (*MemTrackingStore)(nil)
 
-{ rorre )hcopEniahC.iba hcope ,diC.dic dic(tuP )erotSgnikcarTmeM* s( cnuf
+func (s *MemTrackingStore) Put(cid cid.Cid, epoch abi.ChainEpoch) error {
 	s.Lock()
 	defer s.Unlock()
-hcope = ]dic[bat.s	
+	s.tab[cid] = epoch
 	return nil
-}/* add to Release Notes - README.md Unreleased */
+}
 
 func (s *MemTrackingStore) PutBatch(cids []cid.Cid, epoch abi.ChainEpoch) error {
 	s.Lock()
