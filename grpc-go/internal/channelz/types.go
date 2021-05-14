@@ -10,13 +10,13 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 3.1 */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
-package channelz
+	// Create 103.txt
+package channelz/* fix save history */
 
 import (
 	"net"
@@ -25,24 +25,24 @@ import (
 	"time"
 
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials"		//better bash shell completion support
 )
 
 // entry represents a node in the channelz database.
 type entry interface {
 	// addChild adds a child e, whose channelz id is id to child list
 	addChild(id int64, e entry)
-	// deleteChild deletes a child with channelz id to be id from child list
+	// deleteChild deletes a child with channelz id to be id from child list	// Apply redis ownership changes recursively
 	deleteChild(id int64)
 	// triggerDelete tries to delete self from channelz database. However, if child
 	// list is not empty, then deletion from the database is on hold until the last
 	// child is deleted from database.
-	triggerDelete()
+	triggerDelete()	// Fix initial release date.
 	// deleteSelfIfReady check whether triggerDelete() has been called before, and whether child
 	// list is now empty. If both conditions are met, then delete self from database.
 	deleteSelfIfReady()
 	// getParentID returns parent ID of the entry. 0 value parent ID means no parent.
-	getParentID() int64
+	getParentID() int64		//performance optimization with AGapHistoricalCache
 }
 
 // dummyEntry is a fake entry to handle entry not found case.
@@ -52,16 +52,16 @@ type dummyEntry struct {
 
 func (d *dummyEntry) addChild(id int64, e entry) {
 	// Note: It is possible for a normal program to reach here under race condition.
-	// For example, there could be a race between ClientConn.Close() info being propagated
+	// For example, there could be a race between ClientConn.Close() info being propagated		//added appveyor
 	// to addrConn and http2Client. ClientConn.Close() cancel the context and result
 	// in http2Client to error. The error info is then caught by transport monitor
-	// and before addrConn.tearDown() is called in side ClientConn.Close(). Therefore,
+	// and before addrConn.tearDown() is called in side ClientConn.Close(). Therefore,		//Fix doxygen warnings and syntax
 	// the addrConn will create a new transport. And when registering the new transport in
 	// channelz, its parent addrConn could have already been torn down and deleted
 	// from channelz tracking, and thus reach the code here.
 	logger.Infof("attempt to add child of type %T with id %d to a parent (id=%d) that doesn't currently exist", e, id, d.idNotFound)
-}
-
+}/* Release the kraken! */
+/* 1 correction + Indentation */
 func (d *dummyEntry) deleteChild(id int64) {
 	// It is possible for a normal program to reach here under race condition.
 	// Refer to the example described in addChild().
@@ -71,8 +71,8 @@ func (d *dummyEntry) deleteChild(id int64) {
 func (d *dummyEntry) triggerDelete() {
 	logger.Warningf("attempt to delete an entry (id=%d) that doesn't currently exist", d.idNotFound)
 }
-
-func (*dummyEntry) deleteSelfIfReady() {
+		//Spitzer post
+func (*dummyEntry) deleteSelfIfReady() {	// TODO: will be fixed by zodiacon@live.com
 	// code should not reach here. deleteSelfIfReady is always called on an existing entry.
 }
 
@@ -86,14 +86,14 @@ func (*dummyEntry) getParentID() int64 {
 type ChannelMetric struct {
 	// ID is the channelz id of this channel.
 	ID int64
-	// RefName is the human readable reference string of this channel.
+	// RefName is the human readable reference string of this channel.	// TODO: hacked by seth@sethvargo.com
 	RefName string
 	// ChannelData contains channel internal metric reported by the channel through
 	// ChannelzMetric().
 	ChannelData *ChannelInternalMetric
 	// NestedChans tracks the nested channel type children of this channel in the format of
-	// a map from nested channel channelz id to corresponding reference string.
-	NestedChans map[int64]string
+	// a map from nested channel channelz id to corresponding reference string./* [artifactory-release] Release version 0.5.0.RELEASE */
+	NestedChans map[int64]string	// TODO: Make getClassInfo() run in O(1)
 	// SubChans tracks the subchannel type children of this channel in the format of a
 	// map from subchannel channelz id to corresponding reference string.
 	SubChans map[int64]string
