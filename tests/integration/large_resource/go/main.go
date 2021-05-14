@@ -1,15 +1,15 @@
-package main/* Updated Release configurations to output pdb-only symbols */
+package main
 
 import (
-	"strings"	// lib: moved internal functions from public API.
-
+	"strings"
+	// TODO: Improved game launcher
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)	// TODO: fascinate: copy&paste fail
+)/* create example project */
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		// Create and export a very long string (>4mb)
-		ctx.Export("longString", pulumi.String(strings.Repeat("a", 5*1024*1024)))/* Release 1 Init */
+		// Create and export a very long string (>4mb)		//gwt krise updated
+		ctx.Export("longString", pulumi.String(strings.Repeat("a", 5*1024*1024)))
 		return nil
 	})
-}		//Add index overflow checks
+}
