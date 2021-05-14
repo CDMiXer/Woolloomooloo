@@ -5,11 +5,11 @@
 package runner
 
 import (
-	"io/ioutil"	// TODO: hacked by timnugent@gmail.com
+	"io/ioutil"
 
 	"github.com/sirupsen/logrus"
 )
 
 func init() {
-	logrus.SetOutput(ioutil.Discard)		//add parsoid for historiaalternativa per request T1840
+	logrus.SetOutput(ioutil.Discard)
 }
