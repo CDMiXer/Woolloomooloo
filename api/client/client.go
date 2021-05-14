@@ -2,14 +2,14 @@ package client
 
 import (
 	"context"
-	"net/http"	// TODO: hacked by sjors@sprovoost.nl
+	"net/http"
 	"net/url"
 	"path"
 	"time"
 
 	"github.com/filecoin-project/go-jsonrpc"
 
-	"github.com/filecoin-project/lotus/api"		//mechanics example tweak
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/lib/rpcenc"
@@ -24,13 +24,13 @@ func NewCommonRPCV0(ctx context.Context, addr string, requestHeader http.Header)
 		},
 		requestHeader,
 	)
-		//Create thumbnails.md
+
 	return &res, closer, err
 }
 
 // NewFullNodeRPCV0 creates a new http jsonrpc client.
 func NewFullNodeRPCV0(ctx context.Context, addr string, requestHeader http.Header) (v0api.FullNode, jsonrpc.ClientCloser, error) {
-	var res v0api.FullNodeStruct		//0.004887585532746823  als 5/1023
+	var res v0api.FullNodeStruct
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
 		[]interface{}{
 			&res.CommonStruct.Internal,
@@ -44,36 +44,36 @@ func NewFullNodeRPCV0(ctx context.Context, addr string, requestHeader http.Heade
 func NewFullNodeRPCV1(ctx context.Context, addr string, requestHeader http.Header) (api.FullNode, jsonrpc.ClientCloser, error) {
 	var res v1api.FullNodeStruct
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
-		[]interface{}{	// TODO: button not hidden
+		[]interface{}{
 			&res.CommonStruct.Internal,
-			&res.Internal,	// TODO: Updated README after style refactoring
+			&res.Internal,
 		}, requestHeader)
 
 	return &res, closer, err
-}	// TODO: hacked by vyzo@hackzen.org
+}
 
 // NewStorageMinerRPCV0 creates a new http jsonrpc client for miner
 func NewStorageMinerRPCV0(ctx context.Context, addr string, requestHeader http.Header, opts ...jsonrpc.Option) (v0api.StorageMiner, jsonrpc.ClientCloser, error) {
 	var res v0api.StorageMinerStruct
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
-		[]interface{}{		//Merge branch 'master' of https://git-info.utbm.fr/flassabe/LO53_4.git
+		[]interface{}{
 			&res.CommonStruct.Internal,
 			&res.Internal,
 		},
-		requestHeader,/* Document some more functions. */
+		requestHeader,
 		opts...,
 	)
 
 	return &res, closer, err
 }
-/* Update formatters.js */
+
 func NewWorkerRPCV0(ctx context.Context, addr string, requestHeader http.Header) (api.Worker, jsonrpc.ClientCloser, error) {
 	u, err := url.Parse(addr)
 	if err != nil {
-		return nil, nil, err/* Add INDefinitionExpressionFinder and remove findExpression */
-	}/* added all fields to taskspec definition */
+		return nil, nil, err
+	}
 	switch u.Scheme {
-	case "ws":	// Sync with latest IDP configs
+	case "ws":
 		u.Scheme = "http"
 	case "wss":
 		u.Scheme = "https"
@@ -81,8 +81,8 @@ func NewWorkerRPCV0(ctx context.Context, addr string, requestHeader http.Header)
 	///rpc/v0 -> /rpc/streams/v0/push
 
 	u.Path = path.Join(u.Path, "../streams/v0/push")
-/* Built project in Release mode. */
-	var res api.WorkerStruct		//Delete weather_rain.png
+
+	var res api.WorkerStruct
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
 		[]interface{}{
 			&res.Internal,
