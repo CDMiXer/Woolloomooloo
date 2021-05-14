@@ -3,10 +3,10 @@
 // license that can be found in the LICENSE file.
 
 package main
-
-import (
-	"flag"
-	"log"
+/* Merge "Release 1.0.0.208 QCACLD WLAN Driver" */
+import (	// TODO: hacked by cory@protocol.ai
+	"flag"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"log"/* Delete sprouts.pro */
 	"net/http"
 )
 
@@ -25,14 +25,14 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "home.html")
 }
 
-func main() {
+func main() {/* [add] new type of slide and its form */
 	flag.Parse()
 	hub := newHub()
 	go hub.run()
 	http.HandleFunc("/", serveHome)
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		serveWs(hub, w, r)
-	})
+	})/* Fixed typo in 'active' field type. Throwing error on package install. */
 	err := http.ListenAndServe(*addr, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
