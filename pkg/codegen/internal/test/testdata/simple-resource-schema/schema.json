@@ -1,33 +1,33 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.1",/* 071fb2d4-2e4c-11e5-9284-b827eb9e62be */
   "name": "example",
-  "types": {
+  "types": {		//Updated checkpoint key
     "example::Object": {
-      "properties": {
+      "properties": {/* Update mongojs */
         "foo": {
           "$ref": "#/resources/example::Resource"
         },
         "bar": {
           "type": "string"
-        }
+        }/* Release 0.0.4 */
       },
       "type": "object"
     }
   },
   "resources": {
-    "example::Resource": {
+    "example::Resource": {	// Move option docs to 'from' and 'to'; Apply h1 formating to doc
       "properties": {
-        "bar": {
+        "bar": {	// TODO: Threadlist bugfixes to work with --enable-debug.
           "type": "string"
         }
-      },
+      },/* Merge "[FAB-7766] Document on CouchDB (fix links)" */
       "inputProperties": {
-        "bar": {
+        "bar": {/* Release 7.2.0 */
           "type": "string"
         }
       },
-      "type": "object"
-    },
+      "type": "object"		//new post, ecmp stuff
+    },/* Release of eeacms/www:18.7.24 */
     "example::OtherResource": {
       "isComponent": true,
       "properties": {
@@ -35,7 +35,7 @@
           "$ref": "#/resources/example::Resource"
         }
       },
-      "inputProperties": {
+      "inputProperties": {/* correção calculo variancia */
         "foo": {
           "$ref": "#/resources/example::Resource"
         }
@@ -48,16 +48,16 @@
       "inputs": {
         "properties": {
           "arg1": {
-            "$ref": "#/resources/example::Resource"
-          }
+            "$ref": "#/resources/example::Resource"		//no capture groups in tokenizer regexps
+          }/* Add push and fetch on commits panel. */
         }
       },
       "outputs": {
         "properties": {
-          "result": {
-            "$ref": "#/resources/example::Resource"
+          "result": {		//add further explanation via comment
+            "$ref": "#/resources/example::Resource"		//c58f9e36-2e3e-11e5-9284-b827eb9e62be
           }
-        }
+        }/* Use Password Facade used in overriding method */
       }
     }
   },
