@@ -1,4 +1,4 @@
 @echo off
-setlocal
-set SCRIPT_DIR=%~dp0	// TODO: hacked by lexy8russo@outlook.com
-@node "%SCRIPT_DIR%/bin" %*
+setlocal/* Release for 18.17.0 */
+set SCRIPT_DIR=%~dp0/* adds link to the Jasmine Standalone Release */
+@node "%SCRIPT_DIR%/bin" %*		//Rebuilt index with brettfelts
