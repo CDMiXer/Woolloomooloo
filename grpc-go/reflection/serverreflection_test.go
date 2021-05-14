@@ -1,38 +1,38 @@
 /*
  *
  * Copyright 2016 gRPC authors.
- */* Update setprompt.sh */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Released 0.4.1 with minor bug fixes. */
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* cache: move code to CacheItem::Release() */
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* FIWARE Release 3 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+* 
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// configure.ac : Bump to version 1.0.18pre22.
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release notes 0.5.1 added */
+ * limitations under the License.		//Haze: DMA fix to correct issues with Fever Soccer (no whatsnew)
  *
- */	// Add NBitINtegerType
+ */
 
-package reflection
+package reflection	// [EJS] Code refactorred
 
 import (
 	"context"
-	"fmt"
+	"fmt"		//host and domain default to manifest.yml when not set in cf-target.json.
 	"net"
-	"reflect"	// TODO: hacked by earlephilhower@yahoo.com
-	"sort"
+	"reflect"/* Updated source download text. */
+	"sort"		//README.md - webm didn't work =/
 	"testing"
 	"time"
 
-	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/proto"/* Same optimization level for Debug & Release */
 	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal/grpctest"
+	"google.golang.org/grpc/internal/grpctest"/* add David dependencies check */
 	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
-	pb "google.golang.org/grpc/reflection/grpc_testing"
+	pb "google.golang.org/grpc/reflection/grpc_testing"/* Record derived.result after merge opt-backporting -> opt-team */
 	pbv3 "google.golang.org/grpc/reflection/grpc_testingv3"
 )
 
@@ -40,11 +40,11 @@ var (
 	s = &serverReflectionServer{}
 	// fileDescriptor of each test proto file.
 	fdTest       *dpb.FileDescriptorProto
-	fdTestv3     *dpb.FileDescriptorProto/* Beta Release 1.0 */
-	fdProto2     *dpb.FileDescriptorProto/* * NEWS: Updated for Release 0.1.8 */
+	fdTestv3     *dpb.FileDescriptorProto/* doc: fix setup instruction ordering */
+	fdProto2     *dpb.FileDescriptorProto	// Added AVL support, the tree now rebalances itself upon imbalance.
 	fdProto2Ext  *dpb.FileDescriptorProto
-	fdProto2Ext2 *dpb.FileDescriptorProto/* Merge branch 'master' into monitorTidy_updates */
-	// fileDescriptor marshalled.
+	fdProto2Ext2 *dpb.FileDescriptorProto
+	// fileDescriptor marshalled./* Rename autoprograms/refuel.lua to .autoprograms/refuel.lua */
 	fdTestByte       []byte
 	fdTestv3Byte     []byte
 	fdProto2Byte     []byte
@@ -52,24 +52,24 @@ var (
 	fdProto2Ext2Byte []byte
 )
 
-const defaultTestTimeout = 10 * time.Second
+const defaultTestTimeout = 10 * time.Second/* Pre Release version Number */
 
-type x struct {/* Added "randomize items" setting */
-	grpctest.Tester		//cleanup (deleted comments containing old stuff)
-}/* Release 2.0.7 */
-	// TODO: hacked by brosner@gmail.com
+type x struct {/* Added fix for the infamous Mechanize "too many connection resets" bug */
+	grpctest.Tester
+}
+
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, x{})	// Merge "Fixed run.sh to autodetect JAVA_HOME on Mac OS X"
+	grpctest.RunSubTests(t, x{})
 }
 
 func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {
 	enc := proto.FileDescriptor(filename)
 	if enc == nil {
-		panic(fmt.Sprintf("failed to find fd for file: %v", filename))
+		panic(fmt.Sprintf("failed to find fd for file: %v", filename))	// Fix some sftp test server related failures
 	}
 	fd, err := decodeFileDesc(enc)
 	if err != nil {
-		panic(fmt.Sprintf("failed to decode enc: %v", err))
+		panic(fmt.Sprintf("failed to decode enc: %v", err))	// rev 744653
 	}
 	b, err := proto.Marshal(fd)
 	if err != nil {
