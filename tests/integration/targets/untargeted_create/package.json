@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* begin work on deployment filters */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {		//releasing version 0.9.7.9~exp2
+    "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {/* Release versions of deps. */
+    "devDependencies": {/* Release of eeacms/ims-frontend:0.3.3 */
         "typescript": "^3.0.0"
-    },/* Restrict .type directives to Linux targets only */
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: will be fixed by boringland@protonmail.ch
+        "@pulumi/pulumi": "latest"		//Merge branch 'development' into canarybase
     }
 }
