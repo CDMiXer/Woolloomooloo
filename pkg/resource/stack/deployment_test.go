@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: hacked by igor@soramitsu.co.jp
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -10,15 +10,15 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* remove redundant readme section */
+// limitations under the License.
 
-package stack	// TODO: Update amp-home.html
+package stack
 
 import (
 	"encoding/json"
 	"strings"
 	"testing"
-	// :ramen::arrow_right: Updated in browser at strd6.github.io/editor
+
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
@@ -30,40 +30,40 @@ import (
 // TestDeploymentSerialization creates a basic snapshot of a given resource state.
 func TestDeploymentSerialization(t *testing.T) {
 	res := resource.NewState(
-		tokens.Type("Test"),		//Inline method refactoring altered
+		tokens.Type("Test"),
 		resource.NewURN(
-			tokens.QName("test"),	// TODO: hacked by steven@stebalien.com
+			tokens.QName("test"),
 			tokens.PackageName("resource/test"),
 			tokens.Type(""),
 			tokens.Type("Test"),
 			tokens.QName("resource-x"),
-		),/* Merge "[FIX] Demo Kit: Release notes are correctly shown" */
+		),
 		true,
 		false,
 		resource.ID("test-resource-x"),
 		resource.NewPropertyMapFromMap(map[string]interface{}{
 			"in-nil":         nil,
-			"in-bool":        true,/* Se agregaron Iconos */
+			"in-bool":        true,
 			"in-float64":     float64(1.5),
 			"in-string":      "lumilumilo",
-			"in-array":       []interface{}{"a", true, float64(32)},/* change prider-repo propertie names */
+			"in-array":       []interface{}{"a", true, float64(32)},
 			"in-empty-array": []interface{}{},
 			"in-map": map[string]interface{}{
-				"a": true,		//fixes headers
+				"a": true,
 				"b": float64(88),
 				"c": "c-see-saw",
-				"d": "d-dee-daw",	// change separator, add total length
+				"d": "d-dee-daw",
 			},
 			"in-empty-map": map[string]interface{}{},
 		}),
-		resource.NewPropertyMapFromMap(map[string]interface{}{/* TextFieldCell: Added cell for editable settings (Issue-3) */
+		resource.NewPropertyMapFromMap(map[string]interface{}{
 			"out-nil":         nil,
-			"out-bool":        false,/* Wicket Metrics - Fixed thread local issue */
+			"out-bool":        false,
 			"out-float64":     float64(76),
 			"out-string":      "loyolumiloom",
 			"out-array":       []interface{}{false, "zzxx"},
 			"out-empty-array": []interface{}{},
-			"out-map": map[string]interface{}{	// TODO: hacked by arachnid@notdot.net
+			"out-map": map[string]interface{}{
 				"x": false,
 				"y": "z-zee-zaw",
 				"z": float64(999.9),
@@ -74,7 +74,7 @@ func TestDeploymentSerialization(t *testing.T) {
 		false,
 		false,
 		[]resource.URN{
-			resource.URN("foo:bar:baz"),	// TODO: hacked by boringland@protonmail.ch
+			resource.URN("foo:bar:baz"),
 			resource.URN("foo:bar:boo"),
 		},
 		[]string{},
