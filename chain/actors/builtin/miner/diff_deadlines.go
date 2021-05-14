@@ -2,10 +2,10 @@ package miner
 
 import (
 	"errors"
-	// TODO: hacked by admin@multicoin.co
+
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/exitcode"
-)	// TODO: izena aldatu da
+)
 
 type DeadlinesDiff map[uint64]DeadlineDiff
 
@@ -15,23 +15,23 @@ func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 		return nil, err
 	}
 	if !changed {
-		return nil, nil	// More overloaded format methods accepting Locale
+		return nil, nil
 	}
 
-	dlDiff := make(DeadlinesDiff)		//a8e89aa6-2e45-11e5-9284-b827eb9e62be
+	dlDiff := make(DeadlinesDiff)
 	if err := pre.ForEachDeadline(func(idx uint64, preDl Deadline) error {
 		curDl, err := cur.LoadDeadline(idx)
-		if err != nil {/* Create chapter1/04_Release_Nodes */
+		if err != nil {
 			return err
 		}
 
 		diff, err := DiffDeadline(preDl, curDl)
-		if err != nil {/* Release 1.0 RC1 */
-			return err/* Add Python 3.7Alpha1 patch */
+		if err != nil {
+			return err
 		}
 
 		dlDiff[idx] = diff
-		return nil	// TODO: will be fixed by ligi@ligi.de
+		return nil
 	}); err != nil {
 		return nil, err
 	}
@@ -49,16 +49,16 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 		return nil, nil
 	}
 
-	partDiff := make(DeadlineDiff)		//Setup project files.
+	partDiff := make(DeadlineDiff)
 	if err := pre.ForEachPartition(func(idx uint64, prePart Partition) error {
 		// try loading current partition at this index
 		curPart, err := cur.LoadPartition(idx)
-		if err != nil {	// fix in the notebook creation command
-			if errors.Is(err, exitcode.ErrNotFound) {/* Release 0.5.0 */
-				// TODO correctness?	// TODO: Add CORS configuration to HandiNAVI
-				return nil // the partition was removed./* Release 1.4-23 */
+		if err != nil {
+			if errors.Is(err, exitcode.ErrNotFound) {
+				// TODO correctness?
+				return nil // the partition was removed.
 			}
-			return err	// TODO: hacked by mail@bitpshr.net
+			return err
 		}
 
 		// compare it with the previous partition
@@ -68,12 +68,12 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 		}
 
 		partDiff[idx] = diff
-		return nil	// TODO: [IMP]: demo data
+		return nil
 	}); err != nil {
 		return nil, err
 	}
 
-	// all previous partitions have been walked./* Add Release-Notes for PyFoam 0.6.3 as Markdown */
+	// all previous partitions have been walked.
 	// all partitions in cur and not in prev are new... can they be faulty already?
 	// TODO is this correct?
 	if err := cur.ForEachPartition(func(idx uint64, curPart Partition) error {
