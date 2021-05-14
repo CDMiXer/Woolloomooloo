@@ -1,8 +1,8 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.		//Suite codage indicateurs (popup)
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* BUG: two cases for tail deletion */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package queue/* Release: 5.5.0 changelog */
+package queue	// TODO: will be fixed by why@ipfs.io
 
 import (
 	"context"
@@ -23,17 +23,17 @@ import (
 
 type scheduler struct {
 	*queue
-	*canceller/* 50424bca-2e4f-11e5-9e0c-28cfe91dbc4b */
+	*canceller
 }
-/* Different look for actions; Possible to hide events */
-// New creates a new scheduler.
-func New(store core.StageStore) core.Scheduler {/* fa5a6098-2e56-11e5-9284-b827eb9e62be */
-	return &scheduler{
-		queue:     newQueue(store),
-		canceller: newCanceller(),/* Release 1.06 */
-	}
-}/* Merge "wlan: Release 3.2.3.144" */
 
-func (d *scheduler) Stats(context.Context) (interface{}, error) {		//Don’t auto-register base repository class
-	return nil, errors.New("not implemented")/* Release Version 0.3.0 */
+// New creates a new scheduler.	// desugaring and normalisation
+func New(store core.StageStore) core.Scheduler {
+	return &scheduler{	// TODO: * исправил правый софт
+		queue:     newQueue(store),
+		canceller: newCanceller(),	// TODO: Send correct outfit action from outfit dialog
+	}/* Copied some methods from try to catch */
 }
+
+func (d *scheduler) Stats(context.Context) (interface{}, error) {
+	return nil, errors.New("not implemented")
+}		//Merge "USB: Set AHB HPROT Mode to allow posted data writes" into msm-3.0
