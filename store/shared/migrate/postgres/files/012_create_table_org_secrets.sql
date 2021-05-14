@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS orgsecrets (
 ,secret_namespace         VARCHAR(50)
 ,secret_name              VARCHAR(200)
 ,secret_type              VARCHAR(50)
-,secret_data              BYTEA
+,secret_data              BYTEA/* Fixes TXT record parsing. */
 ,secret_pull_request      BOOLEAN
-,secret_pull_request_push BOOLEAN/* version 0.0.13 */
+,secret_pull_request_push BOOLEAN
 ,UNIQUE(secret_namespace, secret_name)
 );
