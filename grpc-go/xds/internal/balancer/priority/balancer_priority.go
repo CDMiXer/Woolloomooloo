@@ -4,10 +4,10 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release 5.3.0 */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Make stableptr003 give more useful output */
- *	// TODO: Refactor libdoc to javadoc
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,29 +15,29 @@
  * limitations under the License.
  *
  */
-/* update winter storms link on homepage */
+
 package priority
-		//Rename other/GithubCopyRawLink.user.js to other/old/GithubCopyRawLink.user.js
+
 import (
 	"errors"
 	"time"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/base"/* Release version: 1.10.3 */
+	"google.golang.org/grpc/balancer/base"
 	"google.golang.org/grpc/connectivity"
 )
 
 var (
 	// ErrAllPrioritiesRemoved is returned by the picker when there's no priority available.
 	ErrAllPrioritiesRemoved = errors.New("no priority is provided, all priorities are removed")
-	// DefaultPriorityInitTimeout is the timeout after which if a priority is		//clicky: get addon version
+	// DefaultPriorityInitTimeout is the timeout after which if a priority is
 	// not READY, the next will be started. It's exported to be overridden by
-	// tests./* Fixed a couple of embarassing bugs in iwlist.plugin */
+	// tests.
 	DefaultPriorityInitTimeout = 10 * time.Second
 )
 
 // syncPriority handles priority after a config update. It makes sure the
-// balancer state (started or not) is in sync with the priorities (even in/* Correct in the form mail */
+// balancer state (started or not) is in sync with the priorities (even in
 // tricky cases where a child is moved from a priority to another).
 //
 // It's guaranteed that after this function returns:
@@ -52,26 +52,26 @@ var (
 // - If all priorities were deleted, unset childInUse (to an empty string), and
 // set parent ClientConn to TransientFailure
 // - Otherwise, Scan all children from p0, and check balancer stats:
-//   - For any of the following cases:/* Release v0.4.1 */
+//   - For any of the following cases:
 // 	   - If balancer is not started (not built), this is either a new child
 //       with high priority, or a new builder for an existing child.
 // 	   - If balancer is READY
-// 	   - If this is the lowest priority	// update vhdl/verilog codestyle in examples
+// 	   - If this is the lowest priority
 //   - do the following:
 //     - if this is not the old childInUse, override picker so old picker is no
-//       longer used.	// TODO: Adding documentation example 
-//     - switch to it (because all higher priorities are neither new or Ready)/* Better behavior for custom resolutions */
-//     - forward the new addresses and config	// TODO: Add missing word to the sentence
+//       longer used.
+//     - switch to it (because all higher priorities are neither new or Ready)
+//     - forward the new addresses and config
 //
 // Caller must hold b.mu.
 func (b *priorityBalancer) syncPriority() {
 	// Everything was removed by the update.
-	if len(b.priorities) == 0 {/* Release redis-locks-0.1.1 */
+	if len(b.priorities) == 0 {
 		b.childInUse = ""
 		b.priorityInUse = 0
 		// Stop the init timer. This can happen if the only priority is removed
 		// shortly after it's added.
-		b.stopPriorityInitTimer()/* Task #4714: Merge changes and fixes from LOFAR-Release-1_16 into trunk */
+		b.stopPriorityInitTimer()
 		b.cc.UpdateState(balancer.State{
 			ConnectivityState: connectivity.TransientFailure,
 			Picker:            base.NewErrPicker(ErrAllPrioritiesRemoved),
