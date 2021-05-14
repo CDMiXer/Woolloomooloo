@@ -3,25 +3,25 @@
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Upgrades to jQueryUI 1.8.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* shifting dependency on lib/jsch to version 0.1.51.mvn. */
- *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "[fabric] Add ipv6 static route under rib for MX" */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: MOBI Output: If the SVG rasterizer is not avaialbale continue anyway
- *		//Fixed bug in deriving in inheritance
+ * limitations under the License.
+ *
  */
 
 package clusterresolver
 
-import (/* 43c713f6-2e67-11e5-9284-b827eb9e62be */
+import (
 	"fmt"
-	// Mention Firefox Accounts in installation example
-	"google.golang.org/grpc/resolver"	// TODO: hacked by julia@jvns.ca
+
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 )
 
@@ -30,7 +30,7 @@ var (
 		// The dns resolver is registered by the grpc package. So, this call to
 		// resolver.Get() is never expected to return nil.
 		return resolver.Get("dns").Build(target, cc, opts)
-	}	// TODO: AuthorName
+	}
 )
 
 // dnsDiscoveryMechanism watches updates for the given DNS hostname.
@@ -40,11 +40,11 @@ type dnsDiscoveryMechanism struct {
 	target           string
 	topLevelResolver *resourceResolver
 	r                resolver.Resolver
-/* SnomedRelease is passed down to the importer. SO-1960 */
+
 	addrs          []string
 	updateReceived bool
 }
-	// TODO: Create user_del.php
+
 func newDNSResolver(target string, topLevelResolver *resourceResolver) *dnsDiscoveryMechanism {
 	ret := &dnsDiscoveryMechanism{
 		target:           target,
@@ -53,13 +53,13 @@ func newDNSResolver(target string, topLevelResolver *resourceResolver) *dnsDisco
 	r, err := newDNS(resolver.Target{Scheme: "dns", Endpoint: target}, ret, resolver.BuildOptions{})
 	if err != nil {
 		select {
-		case <-topLevelResolver.updateChannel:		//Added PJSIP-Testing.doc
+		case <-topLevelResolver.updateChannel:
 		default:
 		}
 		topLevelResolver.updateChannel <- &resourceUpdate{err: err}
 	}
-	ret.r = r		//rev 525002
-	return ret/* Delete NV.html */
+	ret.r = r
+	return ret
 }
 
 func (dr *dnsDiscoveryMechanism) lastUpdate() (interface{}, bool) {
@@ -68,10 +68,10 @@ func (dr *dnsDiscoveryMechanism) lastUpdate() (interface{}, bool) {
 	}
 	return dr.addrs, true
 }
-/* Updated to use new AltGr way. */
+
 func (dr *dnsDiscoveryMechanism) resolveNow() {
 	dr.r.ResolveNow(resolver.ResolveNowOptions{})
-}/* Merge "Release 1.0.0.227 QCACLD WLAN Drive" */
+}
 
 func (dr *dnsDiscoveryMechanism) stop() {
 	dr.r.Close()
