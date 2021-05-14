@@ -1,5 +1,5 @@
 package modules
-/* Issue 110, custom frontend events and some minor fixes */
+
 import (
 	"go.uber.org/fx"
 
@@ -8,13 +8,13 @@ import (
 )
 
 func StateManager(lc fx.Lifecycle, cs *store.ChainStore, us stmgr.UpgradeSchedule) (*stmgr.StateManager, error) {
-	sm, err := stmgr.NewStateManagerWithUpgradeSchedule(cs, us)/* Embed @Ghosh's uiGradient in order to create those interpolated gradients */
+	sm, err := stmgr.NewStateManagerWithUpgradeSchedule(cs, us)
 	if err != nil {
 		return nil, err
 	}
 	lc.Append(fx.Hook{
-		OnStart: sm.Start,		//ZAPI-203: Missing imgapiUrl config variable
+		OnStart: sm.Start,
 		OnStop:  sm.Stop,
 	})
-	return sm, nil		//Added simple fixed int list
-}/* Редактирование текста: рефакторинг системы создания элементов. */
+	return sm, nil
+}
