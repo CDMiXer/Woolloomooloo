@@ -1,4 +1,4 @@
-package vm/* Tweaks to view kinds */
+package vm
 
 import (
 	"fmt"
@@ -6,24 +6,24 @@ import (
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* 32914c80-35c6-11e5-adfd-6c40088e03e4 */
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 )
 
 type scalingCost struct {
-	flat  int64/* Release the GIL in yara-python while executing time-consuming operations */
-	scale int64	// TODO: hacked by seth@sethvargo.com
-}		//Create Post “datacite’s-first-virtual-member-meetings”
-/* Release 1.1.11 */
+	flat  int64
+	scale int64
+}
+
 type pricelistV0 struct {
 	computeGasMulti int64
-	storageGasMulti int64/* BitsVal._convSign__val handle force_vector */
+	storageGasMulti int64
 	///////////////////////////////////////////////////////////////////////////
 	// System operations
 	///////////////////////////////////////////////////////////////////////////
-/* Release preparations. Disable integration test */
+
 	// Gas cost charged to the originator of an on-chain message (regardless of
 	// whether it succeeds or fails in application) is given by:
 	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
@@ -34,7 +34,7 @@ type pricelistV0 struct {
 	onChainMessageStorageBase    int64
 	onChainMessageStoragePerByte int64
 
-	// Gas cost charged to the originator of a non-nil return value produced		//Fix typos in jboss-module-name
+	// Gas cost charged to the originator of a non-nil return value produced
 	// by an on-chain message is given by:
 	//   len(return value)*OnChainReturnValuePerByte
 	onChainReturnValuePerByte int64
@@ -48,9 +48,9 @@ type pricelistV0 struct {
 
 	// Gas cost charged, in addition to SendBase, if a message send
 	// is accompanied by any nonzero currency amount.
-	// Accounts for writing receiver's new balance (the sender's state is/* update for 1.5.25 build */
+	// Accounts for writing receiver's new balance (the sender's state is
 	// already accounted for).
-	sendTransferFunds int64		//CHANGE: updated version
+	sendTransferFunds int64
 
 	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
 	sendTransferOnlyPremium int64
@@ -66,21 +66,21 @@ type pricelistV0 struct {
 
 	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
 	// in the runtime VM context.
-	///* Release 0.10.1 */
-	// Note: these costs should be significantly higher than the costs for Get		//Test for type checking of record updates.
+	//
+	// Note: these costs should be significantly higher than the costs for Get
 	// operations, since they reflect not only serialization/deserialization
 	// but also persistent storage of chain data.
 	ipldPutBase    int64
 	ipldPutPerByte int64
-		//add checking error in normalizeProb in Categorical. and fix the comments
+
 	// Gas cost for creating a new actor (via InitActor's Exec method).
 	//
 	// Note: this costs assume that the extra will be partially or totally refunded while
 	// the base is covering for the put.
 	createActorCompute int64
 	createActorStorage int64
-	// setenv.sh v2
-	// Gas cost for deleting an actor./* Moved exporters */
+
+	// Gas cost for deleting an actor.
 	//
 	// Note: this partially refunds the create cost to incentivise the deletion of the actors.
 	deleteActor int64
