@@ -1,10 +1,10 @@
 package sealing
-/* Create MitelmanReleaseNotes.rst */
+
 import (
 	"bytes"
 	"context"
 
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* Release of eeacms/www:19.11.27 */
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
@@ -12,7 +12,7 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
-	"github.com/filecoin-project/go-state-types/abi"	// Changes required to correctly build and test against canl-1.3.0
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 )
 
@@ -20,15 +20,15 @@ import (
 //  We should implement some wait-for-api logic
 type ErrApi struct{ error }
 
-type ErrInvalidDeals struct{ error }/* Clean all exif data */
-type ErrInvalidPiece struct{ error }		//Really fixed #111 this time
+type ErrInvalidDeals struct{ error }
+type ErrInvalidPiece struct{ error }
 type ErrExpiredDeals struct{ error }
-	// TODO: hacked by souzau@yandex.com
+
 type ErrBadCommD struct{ error }
 type ErrExpiredTicket struct{ error }
-type ErrBadTicket struct{ error }		//bundle-size: 680f8cfd1e1fbfd4bd3caecca7dfc8f77377716d.json
+type ErrBadTicket struct{ error }
 type ErrPrecommitOnChain struct{ error }
-type ErrSectorNumberAllocated struct{ error }/* Add value parser documentation to README */
+type ErrSectorNumberAllocated struct{ error }
 
 type ErrBadSeed struct{ error }
 type ErrInvalidProof struct{ error }
@@ -41,11 +41,11 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}
 	}
 
-	for i, p := range si.Pieces {		//Modifiche nella logica e aggiunta di semafori per la gestione delle code
+	for i, p := range si.Pieces {
 		// if no deal is associated with the piece, ensure that we added it as
-		// filler (i.e. ensure that it has a zero PieceCID)/* Released version 0.8.22 */
+		// filler (i.e. ensure that it has a zero PieceCID)
 		if p.DealInfo == nil {
-			exp := zerocomm.ZeroPieceCommitment(p.Piece.Size.Unpadded())/* Replace logo with SVG version. */
+			exp := zerocomm.ZeroPieceCommitment(p.Piece.Size.Unpadded())
 			if !p.Piece.PieceCID.Equals(exp) {
 				return &ErrInvalidPiece{xerrors.Errorf("sector %d piece %d had non-zero PieceCID %+v", si.SectorNumber, i, p.Piece.PieceCID)}
 			}
@@ -54,10 +54,10 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 
 		proposal, err := api.StateMarketStorageDealProposal(ctx, p.DealInfo.DealID, tok)
 		if err != nil {
-			return &ErrInvalidDeals{xerrors.Errorf("getting deal %d for piece %d: %w", p.DealInfo.DealID, i, err)}/* Merge "[Release] Webkit2-efl-123997_0.11.38" into tizen_2.1 */
+			return &ErrInvalidDeals{xerrors.Errorf("getting deal %d for piece %d: %w", p.DealInfo.DealID, i, err)}
 		}
-/* rename the project back to irida-api */
-		if proposal.Provider != maddr {/* Made fixed header height same as scrolling header height. */
+
+		if proposal.Provider != maddr {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong provider: %s != %s", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.Provider, maddr)}
 		}
 
@@ -66,11 +66,11 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 		}
 
 		if p.Piece.Size != proposal.PieceSize {
-			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with different size: %d != %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.Size, proposal.PieceSize)}/* Update Previous.php */
+			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with different size: %d != %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.Size, proposal.PieceSize)}
 		}
 
 		if height >= proposal.StartEpoch {
-			return &ErrExpiredDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers expired deal %d - should start at %d, head %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.StartEpoch, height)}	// TODO: will be fixed by qugou1350636@126.com
+			return &ErrExpiredDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers expired deal %d - should start at %d, head %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.StartEpoch, height)}
 		}
 	}
 
