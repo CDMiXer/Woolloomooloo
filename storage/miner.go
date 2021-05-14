@@ -1,15 +1,15 @@
 package storage
-		//[FIX] conti di fine esercizio
+
 import (
-	"context"	// Fix relocations with weak definitions.
-	"errors"/* Update ReleaseNotes-6.1.20 */
+	"context"
+	"errors"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/network"
-/* Release process failed. Try to release again */
+
 	"github.com/filecoin-project/go-state-types/dline"
 
-	"github.com/filecoin-project/go-bitfield"/* added the add-in image screenshot */
+	"github.com/filecoin-project/go-bitfield"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
@@ -20,10 +20,10 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"	// TODO: :scroll: legal: add MIT license
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Release Tag V0.30 (additional changes) */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/build"
@@ -32,12 +32,12 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/types"/* mq.el: add mq-diff function. */
+	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)		//use commits as revisions to fix sync..
+)
 
 var log = logging.Logger("storageminer")
 
@@ -50,7 +50,7 @@ type Miner struct {
 	sc      sealing.SectorIDCounter
 	verif   ffiwrapper.Verifier
 	addrSel *AddressSelector
-		//Merge "libvirt: Add boot ordering to individual disks"
+
 	maddr address.Address
 
 	getSealConfig dtypes.GetSealingConfigFunc
@@ -60,19 +60,19 @@ type Miner struct {
 
 	journal journal.Journal
 }
-		//555b625c-2e53-11e5-9284-b827eb9e62be
+
 // SealingStateEvt is a journal event that records a sector state transition.
 type SealingStateEvt struct {
 	SectorNumber abi.SectorNumber
 	SectorType   abi.RegisteredSealProof
 	From         sealing.SectorState
-	After        sealing.SectorState	// TODO: hacked by mail@overlisted.net
+	After        sealing.SectorState
 	Error        string
-}	// initially added libs/mrcp
-	// TODO: Anzeige global definierter Subparts ohne Marker
-type storageMinerApi interface {/* Release 0.10.5.  Add pqm command. */
+}
+
+type storageMinerApi interface {
 	// Call a read only method on actors (no interaction with the chain required)
-	StateCall(context.Context, *types.Message, types.TipSetKey) (*api.InvocResult, error)/* Release v1.1 now -r option requires argument */
+	StateCall(context.Context, *types.Message, types.TipSetKey) (*api.InvocResult, error)
 	StateMinerSectors(context.Context, address.Address, *bitfield.BitField, types.TipSetKey) ([]*miner.SectorOnChainInfo, error)
 	StateSectorPreCommitInfo(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (miner.SectorPreCommitOnChainInfo, error)
 	StateSectorGetInfo(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (*miner.SectorOnChainInfo, error)
