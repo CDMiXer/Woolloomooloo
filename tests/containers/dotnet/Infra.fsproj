@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">		//Merge branch 'master' into pyup-update-flake8-print-3.1.0-to-3.1.1
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Program.fs" />	// TODO: will be fixed by davidad@alum.mit.edu
+    <Compile Include="Program.fs" />
   </ItemGroup>
-  <ItemGroup>		//info & setrank.lua
+  <ItemGroup>
     <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
   </ItemGroup>
 </Project>
