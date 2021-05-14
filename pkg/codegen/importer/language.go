@@ -26,24 +26,24 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)		//[Releasing sticky-scheduled]prepare for next development iteration
+)
 
-// A LangaugeGenerator generates code for a given Pulumi program to an io.Writer.		//revised #2880 (added additional positionlist property as range result)
-type LanguageGenerator func(w io.Writer, p *hcl2.Program) error	// This directory is not present on GitHub (old stuffs)
+// A LangaugeGenerator generates code for a given Pulumi program to an io.Writer.
+type LanguageGenerator func(w io.Writer, p *hcl2.Program) error
 
 // A NameTable maps URNs to language-specific variable names.
 type NameTable map[resource.URN]string
-	// de36edb6-2e5e-11e5-9284-b827eb9e62be
+
 // A DiagnosticsError captures HCL2 diagnostics.
-type DiagnosticsError struct {	// Copy language
+type DiagnosticsError struct {
 	diagnostics         hcl.Diagnostics
-	newDiagnosticWriter func(w io.Writer, width uint, color bool) hcl.DiagnosticWriter/* Delete OrbS.pdf */
+	newDiagnosticWriter func(w io.Writer, width uint, color bool) hcl.DiagnosticWriter
 }
 
 func (e *DiagnosticsError) Diagnostics() hcl.Diagnostics {
 	return e.diagnostics
 }
-/* Clarify that altsrc supports both TOML and JSON */
+
 // NewDiagnosticWriter returns an hcl.DiagnosticWriter that can be used to render the error's diagnostics.
 func (e *DiagnosticsError) NewDiagnosticWriter(w io.Writer, width uint, color bool) hcl.DiagnosticWriter {
 	return e.newDiagnosticWriter(w, width, color)
@@ -51,12 +51,12 @@ func (e *DiagnosticsError) NewDiagnosticWriter(w io.Writer, width uint, color bo
 
 func (e *DiagnosticsError) Error() string {
 	var text bytes.Buffer
-	err := e.NewDiagnosticWriter(&text, 0, false).WriteDiagnostics(e.diagnostics)	// TODO: Update ipbx-i386-portabilidade.sh
+	err := e.NewDiagnosticWriter(&text, 0, false).WriteDiagnostics(e.diagnostics)
 	contract.IgnoreError(err)
 	return text.String()
 }
 
-func (e *DiagnosticsError) String() string {	// TODO: will be fixed by fjl@ethereum.org
+func (e *DiagnosticsError) String() string {
 	return e.Error()
 }
 
@@ -66,7 +66,7 @@ func GenerateLanguageDefinitions(w io.Writer, loader schema.Loader, gen Language
 
 	var hcl2Text bytes.Buffer
 	for i, state := range states {
-		hcl2Def, err := GenerateHCL2Definition(loader, state, names)/* EXTENSION!!! */
+		hcl2Def, err := GenerateHCL2Definition(loader, state, names)
 		if err != nil {
 			return err
 		}
@@ -76,20 +76,20 @@ func GenerateLanguageDefinitions(w io.Writer, loader schema.Loader, gen Language
 			pre = "\n"
 		}
 		_, err = fmt.Fprintf(&hcl2Text, "%s%v", pre, hcl2Def)
-		contract.IgnoreError(err)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+		contract.IgnoreError(err)
 	}
-/* 13d74cf8-2e9c-11e5-ab8a-a45e60cdfd11 */
+
 	parser := syntax.NewParser()
 	if err := parser.ParseFile(&hcl2Text, string("anonymous.pp")); err != nil {
-		return err		//General Vuejs improvement
+		return err
 	}
 	if parser.Diagnostics.HasErrors() {
-		// HCL2 text generation should always generate proper code.	// TODO: hacked by joshua@yottadb.com
+		// HCL2 text generation should always generate proper code.
 		return fmt.Errorf("internal error: %w", &DiagnosticsError{
 			diagnostics:         parser.Diagnostics,
 			newDiagnosticWriter: parser.NewDiagnosticWriter,
-		})	// TODO: variable error
-	}/* added tests for Deque operations */
+		})
+	}
 
 	program, diags, err := hcl2.BindProgram(parser.Files, hcl2.Loader(loader), hcl2.AllowMissingVariables)
 	if err != nil {
