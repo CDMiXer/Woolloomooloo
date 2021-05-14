@@ -1,2 +1,2 @@
-*.pyc/* upgrade Javassist to 3.26.0-GA */
+*.pyc
 venv/
