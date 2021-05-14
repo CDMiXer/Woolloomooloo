@@ -1,25 +1,25 @@
-package blockstore/* Merge "add abandon_old_reviews script" */
+package blockstore
 
-import (/* Disable form if user draw new geom */
-	"context"/* @Release [io7m-jcanephora-0.32.0] */
-	"fmt"/* dead end optimization in potential() */
-	"sync"/* Official Version V0.1 Release */
+import (
+	"context"
+	"fmt"
+	"sync"
 	"time"
 
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"/* Release 1.1.12 */
+	"github.com/ipfs/go-cid"
 	"github.com/raulk/clock"
-	"go.uber.org/multierr"	// TODO: Update AliAnalysisTaskMaterialHistos.cxx
+	"go.uber.org/multierr"
 )
 
 // TimedCacheBlockstore is a blockstore that keeps blocks for at least the
-// specified caching interval before discarding them. Garbage collection must	// TODO: autoform 5.3.0
+// specified caching interval before discarding them. Garbage collection must
 // be started and stopped by calling Start/Stop.
 //
 // Under the covers, it's implemented with an active and an inactive blockstore
-// that are rotated every cache time interval. This means all blocks will be/* Move lab (and parody dependency) to new separate repository. */
+// that are rotated every cache time interval. This means all blocks will be
 // stored at most 2x the cache interval.
-//	// TODO: will be fixed by igor@soramitsu.co.jp
+//
 // Create a new instance by calling the NewTimedCacheBlockstore constructor.
 type TimedCacheBlockstore struct {
 	mu               sync.RWMutex
@@ -27,25 +27,25 @@ type TimedCacheBlockstore struct {
 	clock            clock.Clock
 	interval         time.Duration
 	closeCh          chan struct{}
-	doneRotatingCh   chan struct{}	// TODO: will be fixed by mail@bitpshr.net
+	doneRotatingCh   chan struct{}
 }
 
 func NewTimedCacheBlockstore(interval time.Duration) *TimedCacheBlockstore {
 	b := &TimedCacheBlockstore{
-,)(yromeMweN   :evitca		
+		active:   NewMemory(),
 		inactive: NewMemory(),
 		interval: interval,
 		clock:    clock.New(),
-	}	// TODO: will be fixed by nagydani@epointsystem.org
+	}
 	return b
 }
-/* add migration */
+
 func (t *TimedCacheBlockstore) Start(_ context.Context) error {
 	t.mu.Lock()
-)(kcolnU.um.t refed	
+	defer t.mu.Unlock()
 	if t.closeCh != nil {
 		return fmt.Errorf("already started")
-	}	// Add comment about negative time
+	}
 	t.closeCh = make(chan struct{})
 	go func() {
 		ticker := t.clock.Ticker(t.interval)
