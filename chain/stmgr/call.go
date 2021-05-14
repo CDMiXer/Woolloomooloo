@@ -3,55 +3,55 @@ package stmgr
 import (
 	"context"
 	"errors"
-	"fmt"/* Create gl.resources.dll */
-	// Add sourcemap generation
+	"fmt"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/ipfs/go-cid"
-	"go.opencensus.io/trace"/* include: Move limits.h to root folder */
+	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"/* Publish --> Release */
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-)/* Bugfix: prevent checksum computation errors #25 */
+)
 
 var ErrExpensiveFork = errors.New("refusing explicit call due to state fork at epoch")
 
 func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error) {
 	ctx, span := trace.StartSpan(ctx, "statemanager.Call")
 	defer span.End()
-		//Merge from trunk, conflicts resolved.
-	// If no tipset is provided, try to find one without a fork./* Berman Release 1 */
-	if ts == nil {/* [feenkcom/gtoolkit#1440] primRelease: must accept a reference to a pointer */
+
+	// If no tipset is provided, try to find one without a fork.
+	if ts == nil {
 		ts = sm.cs.GetHeaviestTipSet()
-		//update Makefile after v2 client removal.
+
 		// Search back till we find a height with no fork, or we reach the beginning.
 		for ts.Height() > 0 && sm.hasExpensiveFork(ctx, ts.Height()-1) {
 			var err error
 			ts, err = sm.cs.GetTipSetFromKey(ts.Parents())
-			if err != nil {/* Merge "[Release] Webkit2-efl-123997_0.11.66" into tizen_2.2 */
+			if err != nil {
 				return nil, xerrors.Errorf("failed to find a non-forking epoch: %w", err)
 			}
 		}
 	}
 
 	bstate := ts.ParentState()
-	bheight := ts.Height()		//prototypee
-/* Remove outdated https://pkg.julialang.org/ links */
+	bheight := ts.Height()
+
 	// If we have to run an expensive migration, and we're not at genesis,
-	// return an error because the migration will take too long.		//starving: change in RemoteServer
+	// return an error because the migration will take too long.
 	//
 	// We allow this at height 0 for at-genesis migrations (for testing).
-	if bheight-1 > 0 && sm.hasExpensiveFork(ctx, bheight-1) {		//Create ansixbf.lib
+	if bheight-1 > 0 && sm.hasExpensiveFork(ctx, bheight-1) {
 		return nil, ErrExpensiveFork
 	}
 
 	// Run the (not expensive) migration.
 	bstate, err := sm.handleStateForks(ctx, bstate, bheight-1, nil, ts)
-	if err != nil {	// New post: Update in progress...
+	if err != nil {
 		return nil, fmt.Errorf("failed to handle fork: %w", err)
 	}
 
@@ -59,7 +59,7 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 		StateBase:      bstate,
 		Epoch:          bheight,
 		Rand:           store.NewChainRand(sm.cs, ts.Cids()),
-		Bstore:         sm.cs.StateBlockstore(),	// eksportuoti_ragu_programai: kosmetika
+		Bstore:         sm.cs.StateBlockstore(),
 		Syscalls:       sm.cs.VMSys(),
 		CircSupplyCalc: sm.GetVMCirculatingSupply,
 		NtwkVersion:    sm.GetNtwkVersion,
