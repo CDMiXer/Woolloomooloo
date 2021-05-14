@@ -1,9 +1,9 @@
 {
     "all": {
-        "enforcementLevel": "advisory"/* Release 8.0.8 */
+        "enforcementLevel": "advisory"
     },
     "test-policy-w-config": {
-        "enforcementLevel": "mandatory",		//Added remove dialog
+        "enforcementLevel": "mandatory",
         "message": "test msg"
     }
 }
