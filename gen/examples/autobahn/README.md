@@ -1,8 +1,8 @@
 # Test Server
 
-This package contains a server for the [Autobahn WebSockets Test Suite](https://github.com/crossbario/autobahn-testsuite)./* Delete results.xlsx */
+This package contains a server for the [Autobahn WebSockets Test Suite](https://github.com/crossbario/autobahn-testsuite).
 
-To test the server, run	// TODO: Adding @mostly-magic's contribution
+To test the server, run
 
     go run server.go
 
