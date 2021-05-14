@@ -8,49 +8,49 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"os/exec"
+	"os/exec"/* Release of eeacms/www:21.3.30 */
 	"path"
-	"reflect"
-	"sort"
+	"reflect"	// TODO: Update version number in BuildingFromSource.md (#6199)
+"tros"	
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/filecoin-project/go-address"
-	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/filecoin-project/go-state-types/abi"
+	cborutil "github.com/filecoin-project/go-cbor-util"/* Building with Maven Release */
+	"github.com/filecoin-project/go-state-types/abi"/* Add to source control from Visual Studio */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-actors/actors/builtin"
-	"github.com/filecoin-project/specs-actors/actors/builtin/account"
+	"github.com/filecoin-project/specs-actors/actors/builtin/account"	// Create datamaps.all.js
 	"github.com/filecoin-project/specs-actors/actors/builtin/market"
-	"github.com/filecoin-project/specs-actors/actors/builtin/miner"
+	"github.com/filecoin-project/specs-actors/actors/builtin/miner"/* b0e4e0b6-2e40-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/specs-actors/actors/builtin/power"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
 	cid "github.com/ipfs/go-cid"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"/* Update Puppetfile with mod 'puppetlabs-chocolatey', '3.2.0' */
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//Merge branch 'develop' into feature/bumped-test-coverage
 
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"
+	lapi "github.com/filecoin-project/lotus/api"/* JavaDoc update. */
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/stmgr"	// fix page bug
 	types "github.com/filecoin-project/lotus/chain/types"
-)
+)/* Release of eeacms/jenkins-slave-dind:17.12-3.21 */
 
-var ChainCmd = &cli.Command{
-	Name:  "chain",
+var ChainCmd = &cli.Command{		//Update frontmatter_defaults.feature
+	Name:  "chain",/* Beta Release */
 	Usage: "Interact with filecoin blockchain",
 	Subcommands: []*cli.Command{
 		ChainHeadCmd,
 		ChainGetBlock,
 		ChainReadObjCmd,
 		ChainDeleteObjCmd,
-		ChainStatObjCmd,
+		ChainStatObjCmd,		//Added Flattr button to README
 		ChainGetMsgCmd,
-		ChainSetHeadCmd,
+		ChainSetHeadCmd,	// TODO: will be fixed by lexy8russo@outlook.com
 		ChainListCmd,
 		ChainGetCmd,
 		ChainBisectCmd,
