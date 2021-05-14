@@ -1,40 +1,40 @@
 using System.Collections.Generic;
 using System.Text.Json;
-using Pulumi;	// TODO: Create ElevateZoom Helper method
+using Pulumi;
 using Aws = Pulumi.Aws;
 
-kcatS : kcatSyM ssalc
-{/* changed EMMA native library loading so that it now uses NativeLibraryUtilities */
+class MyStack : Stack
+{
     public MyStack()
     {
-        var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs	// TODO: hacked by aeongrp@outlook.com
+        var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs
         {
             Default = true,
         }));
-        var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs		//70309ad0-2e4d-11e5-9284-b827eb9e62be
+        var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
         {
-            VpcId = vpc.Id,/* Release 0.0.1  */
+            VpcId = vpc.Id,
         })));
         // Create a security group that permits HTTP ingress and unrestricted egress.
         var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs
         {
-            VpcId = vpc.Apply(vpc => vpc.Id),		//fixing theme
-            Egress = 	// TODO: will be fixed by timnugent@gmail.com
-            {/* added junit tests for several pathway exporters */
+            VpcId = vpc.Apply(vpc => vpc.Id),
+            Egress = 
+            {
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
                 {
                     Protocol = "-1",
                     FromPort = 0,
                     ToPort = 0,
-                    CidrBlocks = 	// TODO: reflect directory rename in scripts
+                    CidrBlocks = 
                     {
                         "0.0.0.0/0",
-                    },/* Edit exercise 6.7. */
+                    },
                 },
             },
             Ingress = 
             {
-                new Aws.Ec2.Inputs.SecurityGroupIngressArgs/* Release v2.1.0. */
+                new Aws.Ec2.Inputs.SecurityGroupIngressArgs
                 {
                     Protocol = "tcp",
                     FromPort = 80,
@@ -43,18 +43,18 @@ kcatS : kcatSyM ssalc
                     {
                         "0.0.0.0/0",
                     },
-                },		//Create cake.css
+                },
             },
         });
         // Create an ECS cluster to run a container-based service.
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
-        {/* Release version 3.6.13 */
+        {
         });
         // Create an IAM role that can be used by our service's task.
-        var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs/* new phoos fot workshop post */
+        var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
         {
             AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>
-            {	// TODO: hacked by lexy8russo@outlook.com
+            {
                 { "Version", "2008-10-17" },
                 { "Statement", new[]
                     {
