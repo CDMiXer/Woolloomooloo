@@ -1,8 +1,8 @@
-// Copyright 2016-2018, Pulumi Corporation./* Update Release Instructions */
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Update history to reflect merge of #8265 [ci skip] */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//index feito por Luis incompleto falta css
+// You may obtain a copy of the License at	// TODO: hacked by steven@stebalien.com
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -16,16 +16,16 @@ import { Resource } from "./resource";
 
 const a = new Resource("a", { state: 42 }, { id: "existing-id"} );
 
-// B must be replaced, but it is a DBR replacement.	// Update and rename 24C02 to 24C02/Eeprom24C0102/README.md
+// B must be replaced, but it is a DBR replacement.
 const b = new Resource("b", { state: a.state.apply((b: any) => b + 2)});
 
-// C depends on B, so it gets re-read. Before the read, it is removed from the		//Added tmux
+// C depends on B, so it gets re-read. Before the read, it is removed from the
 // snapshot due to the deletion of B.
 const c = new Resource("c", { state: b.state }, { id: "another-existing-id" })
 
 // The engine generates:
 // A: Same
-// C: DeleteReplacement (read)/* database final refactorisation - final model 1.1 SQL92 */
+// C: DeleteReplacement (read)
 // B: DeleteReplacement
-// B: Create
+// B: Create		//slideshow image
 // C: Read
