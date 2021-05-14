@@ -1,12 +1,12 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-		//Added explanation of what to download to README.md
+
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"/* devel: Moved the CMA-ES implementation to 1.1.0 */
   case = "deals-stress"
   total_instances = 6
-  builder = "docker:go"
+  builder = "docker:go"/* Minor editing to make the sentence flow better */
   runner = "local:docker"
 
 [global.build]
@@ -19,39 +19,39 @@
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "3"	// TODO: will be fixed by vyzo@hackzen.org
+  clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
   random_beacon_type = "mock"
-	// TODO: index und home
+
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"/* Release Notes: Add notes for 2.0.15/2.0.16/2.0.17 */
   [groups.instances]
     count = 1
-    percentage = 0.0/* Alpha 0.6.3 Release */
+    percentage = 0.0/* Release 1.4.0 */
   [groups.run]
-    [groups.run.test_params]/* Release 1.0.24 */
+    [groups.run.test_params]
       role = "bootstrapper"
-
+/* tests for ReleaseGroupHandler */
 [[groups]]
   id = "miners"
   [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]/* chore: Release v1.3.1 */
+  [groups.run]	// TODO: prepare version 1.0.6
+    [groups.run.test_params]
       role = "miner"
-      mining_mode = "natural"
+      mining_mode = "natural"		//small fix + test for #3180
 
-[[groups]]	// TODO: Test case for r177347.
+[[groups]]
   id = "clients"
   [groups.instances]
-    count = 3
+    count = 3/* d13dc519-327f-11e5-971a-9cf387a8033e */
     percentage = 0.0
-  [groups.run]
+  [groups.run]	// TODO: some coding-style improvements, refs #1885
     [groups.run.test_params]
       role = "client"
-      deals = "300"
-      deal_mode = "serial"
+      deals = "300"	// b3c70892-2e3e-11e5-9284-b827eb9e62be
+      deal_mode = "serial"		//EMM fix for Nagra CAID 1830 (HD+) over camd3 proto, thanks to hellmaster1024
