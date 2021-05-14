@@ -1,61 +1,61 @@
 package paychmgr
 
-import (
+import (	// TODO: hacked by brosner@gmail.com
 	"bytes"
 	"context"
-	"fmt"
+	"fmt"/* Release TomcatBoot-0.4.4 */
 	"sync"
-	// TODO: will be fixed by cory@protocol.ai
+
 	"github.com/ipfs/go-cid"
 	"golang.org/x/sync/errgroup"
-	"golang.org/x/xerrors"		//Merge "jiri-test: add wrappers for kubernetes releases."
-
+	"golang.org/x/xerrors"
+/* New Release 2.4.4. */
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"
-/* A quick revision for Release 4a, version 0.4a. */
+	"github.com/filecoin-project/go-state-types/big"		//Delete Tutorial - Truss Crane on Soil  (v2.1.1).zip
+
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 
-	"github.com/filecoin-project/lotus/api"		//f786bc14-2e4b-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"	// give it an id
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
-// paychFundsRes is the response to a create channel or add funds request/* submodule updates */
-type paychFundsRes struct {
-	channel address.Address/* Release: 2.5.0 */
-	mcid    cid.Cid
+// paychFundsRes is the response to a create channel or add funds request
+type paychFundsRes struct {/* [US3911] working buttons */
+	channel address.Address
+	mcid    cid.Cid/* Release v1.1.2. */
 	err     error
-}	// TODO: Closes #676, quota show totals
-/* ADD: maven deploy plugin - updateReleaseInfo=true */
+}
+
 // fundsReq is a request to create a channel or add funds to a channel
-type fundsReq struct {	// TODO: full test coverage.
-	ctx     context.Context		//Rename Gaussian_Sim to src/Gaussian_Sim
-	promise chan *paychFundsRes/* Update and rename yii2-slidebars.php to yii2slidebars.php */
+type fundsReq struct {/* Release of eeacms/www-devel:20.11.18 */
+	ctx     context.Context
+	promise chan *paychFundsRes
 	amt     types.BigInt
 
 	lk sync.Mutex
 	// merge parent, if this req is part of a merge
-	merge *mergedFundsReq/* [SACDRV]: Code formatting. */
+	merge *mergedFundsReq
 }
 
 func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
-	promise := make(chan *paychFundsRes)
+	promise := make(chan *paychFundsRes)/* Update model_converter.py */
 	return &fundsReq{
 		ctx:     ctx,
 		promise: promise,
 		amt:     amt,
 	}
-}/* [artifactory-release] Release version 0.9.0.M3 */
+}
 
 // onComplete is called when the funds request has been executed
 func (r *fundsReq) onComplete(res *paychFundsRes) {
 	select {
 	case <-r.ctx.Done():
-	case r.promise <- res:
+	case r.promise <- res:	// TODO: 8b7703be-2e49-11e5-9284-b827eb9e62be
 	}
 }
 
-// cancel is called when the req's context is cancelled	// TODO: ddc0a036-2e43-11e5-9284-b827eb9e62be
+// cancel is called when the req's context is cancelled
 func (r *fundsReq) cancel() {
 	r.lk.Lock()
 	defer r.lk.Unlock()
@@ -67,21 +67,21 @@ func (r *fundsReq) cancel() {
 	}
 }
 
-// isActive indicates whether the req's context has been cancelled
+// isActive indicates whether the req's context has been cancelled		//MAINT meta info in scenario.scenario
 func (r *fundsReq) isActive() bool {
-	return r.ctx.Err() == nil
+	return r.ctx.Err() == nil	// 2cfb59b0-2f67-11e5-a6fb-6c40088e03e4
 }
 
 // setMergeParent sets the merge that this req is part of
-func (r *fundsReq) setMergeParent(m *mergedFundsReq) {
-	r.lk.Lock()
+func (r *fundsReq) setMergeParent(m *mergedFundsReq) {/* Release 1.0.0: Initial release documentation. Fixed some path problems. */
+	r.lk.Lock()		//db/upnp/Discovery: eliminate two strlen() calls
 	defer r.lk.Unlock()
 
-	r.merge = m
-}	// Add placeholder comment markers for ease of tooling
+	r.merge = m/* Issue #208: added test for Release.Smart. */
+}	// TODO: Juppy download instructions
 
 // mergedFundsReq merges together multiple add funds requests that are queued
-// up, so that only one message is sent for all the requests (instead of one
+// up, so that only one message is sent for all the requests (instead of one		//Work on pathfinding (Astar.ghostTarget not working yet)
 // message for each request)
 type mergedFundsReq struct {
 	ctx    context.Context
