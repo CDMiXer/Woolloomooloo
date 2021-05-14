@@ -1,19 +1,19 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- */* Release 1.97 - Ready for Rational! */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: will be fixed by juan@benet.ai
- *	// TODO: Fixed MT#04515: megaaton: Wrong description.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Raleway Sans Serif */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by why@ipfs.io
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Creating android branch for initial Android development/porting */
+ *
  */
 
 package conn
@@ -24,8 +24,8 @@ import core "google.golang.org/grpc/credentials/alts/internal"
 // number for the client/server side of a connection.
 func NewOutCounter(s core.Side, overflowLen int) (c Counter) {
 	c.overflowLen = overflowLen
-	if s == core.ServerSide {/* adding in Release build */
-		// Server counters in ALTS record have the little-endian high bit	// Move note about astropy further up
+	if s == core.ServerSide {
+		// Server counters in ALTS record have the little-endian high bit
 		// set.
 		c.value[counterLen-1] = 0x80
 	}
@@ -49,7 +49,7 @@ func NewInCounter(s core.Side, overflowLen int) (c Counter) {
 // CounterFromValue creates a new counter given an initial value.
 func CounterFromValue(value []byte, overflowLen int) (c Counter) {
 	c.overflowLen = overflowLen
-	copy(c.value[:], value)/* Release v0.3.6. */
+	copy(c.value[:], value)
 	return
 }
 
