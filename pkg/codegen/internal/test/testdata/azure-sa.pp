@@ -1,34 +1,34 @@
-config storageAccountNameParam string {/* updated header, tag line, and about section */
-}
+config storageAccountNameParam string {
+}/* Task #3241: Merge of latest changes in LOFAR-Release-0_96 into trunk */
 
 config resourceGroupNameParam string {
 }
 
-{ ,"puorGecruoseRteg:puorGecruoseRteg/eroc:eruza"(ekovni = raVpuorGecruoser
+resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
 	name = resourceGroupNameParam
 })
 
-config locationParam string {/* Update Google Drive folder link */
+config locationParam string {
 	default = resourceGroupVar.location
 }
-		//Add solution to SSL errors on Windows
+
 config storageAccountTierParam string {
-    default = "Standard"	// TODO: hacked by earlephilhower@yahoo.com
-}
-/* fixed conf */
-config storageAccountTypeReplicationParam string {
-    default = "LRS"
+    default = "Standard"/* Release of eeacms/forests-frontend:2.0-beta.37 */
 }
 
-resource storageAccountResource "azure:storage/account:Account" {
+config storageAccountTypeReplicationParam string {
+    default = "LRS"/* - APM. New version of JasperReports. */
+}		//Updated #077
+
+resource storageAccountResource "azure:storage/account:Account" {/* Release 2.2 tagged */
 	name = storageAccountNameParam
 	accountKind = "StorageV2"
-	location = locationParam		//added front ,rear mean check
+	location = locationParam
 	resourceGroupName = resourceGroupNameParam
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
-}
+}/* chore: Release 0.22.7 */
 
-output storageAccountNameOut {/* header and footer */
-	value = storageAccountResource.name
+output storageAccountNameOut {/* Auto configure administration password environment variables provided */
+	value = storageAccountResource.name/* Release of eeacms/forests-frontend:1.6.1 */
 }
