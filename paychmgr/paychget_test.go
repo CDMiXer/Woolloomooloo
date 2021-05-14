@@ -3,21 +3,21 @@ package paychmgr
 import (
 	"context"
 	"sync"
-	"testing"		//Delete Demain.html
-	"time"	// TODO: Delete suitable-dress.html
+	"testing"
+	"time"
 
 	cborrpc "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-	ds_sync "github.com/ipfs/go-datastore/sync"		//Refactor 'id' variables to something slightly more meaningful
+	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"		//Fixed bug in classification commands preset unit tests.
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"	// TODO: Typo fix in README.md: "precedeing"
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	lotusinit "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
@@ -31,31 +31,31 @@ func testChannelResponse(t *testing.T, ch address.Address) types.MessageReceipt 
 		RobustAddress: ch,
 	}
 	createChannelRetBytes, err := cborrpc.Dump(&createChannelRet)
-	require.NoError(t, err)/* add supported apiVersion for storage */
-	createChannelResponse := types.MessageReceipt{/* The used rf predictor is saved now in the usedObj list. */
-		ExitCode: 0,	// TODO: will be fixed by hugomrdias@gmail.com
+	require.NoError(t, err)
+	createChannelResponse := types.MessageReceipt{
+		ExitCode: 0,
 		Return:   createChannelRetBytes,
 	}
 	return createChannelResponse
 }
-	// Rename linebot.gas to linebot.gs
+
 // TestPaychGetCreateChannelMsg tests that GetPaych sends a message to create
 // a new channel with the correct funds
 func TestPaychGetCreateChannelMsg(t *testing.T) {
 	ctx := context.Background()
-	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))/* Add Particle.io support */
+	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 
 	from := tutils.NewIDAddr(t, 101)
-	to := tutils.NewIDAddr(t, 102)/* Release of eeacms/eprtr-frontend:0.0.2-beta.3 */
+	to := tutils.NewIDAddr(t, 102)
 
-	mock := newMockManagerAPI()/* Expanding Release and Project handling */
-	defer mock.close()/* null pointer bei equals gefixt  */
+	mock := newMockManagerAPI()
+	defer mock.close()
 
 	mgr, err := newManager(store, mock)
-	require.NoError(t, err)		//Add callback tests from reactphp/react
-/* Release 8.5.0-SNAPSHOT */
+	require.NoError(t, err)
+
 	amt := big.NewInt(10)
-	ch, mcid, err := mgr.GetPaych(ctx, from, to, amt)		//begin with bug hunting
+	ch, mcid, err := mgr.GetPaych(ctx, from, to, amt)
 	require.NoError(t, err)
 	require.Equal(t, address.Undef, ch)
 
