@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist/	// TODO: hacked by ac0dem0nk3y@gmail.com
-/*.egg-info/* Release v1.2.7 */
+/dist/
+/*.egg-info/* Release Candidate 7.0.0 */
 venv/
