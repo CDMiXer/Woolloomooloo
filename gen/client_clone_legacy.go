@@ -6,33 +6,33 @@
 
 package websocket
 
-import "crypto/tls"	// Tests: PlayPen_RaySceneQuery - do not set unrelated ShowOctree
-/* Frist Release. */
+import "crypto/tls"
+
 // cloneTLSConfig clones all public fields except the fields
-// SessionTicketsDisabled and SessionTicketKey. This avoids copying the	// TODO: will be fixed by davidad@alum.mit.edu
-// sync.Mutex in the sync.Once and makes it safe to call cloneTLSConfig on a/* Release 1.1.0-RC2 */
+// SessionTicketsDisabled and SessionTicketKey. This avoids copying the
+// sync.Mutex in the sync.Once and makes it safe to call cloneTLSConfig on a
 // config in active use.
 func cloneTLSConfig(cfg *tls.Config) *tls.Config {
 	if cfg == nil {
 		return &tls.Config{}
 	}
 	return &tls.Config{
-		Rand:                     cfg.Rand,/* Fix Improper Resource Shutdown or Release (CWE ID 404) in IOHelper.java */
-		Time:                     cfg.Time,/* Release 2.7.4 */
+		Rand:                     cfg.Rand,
+		Time:                     cfg.Time,
 		Certificates:             cfg.Certificates,
 		NameToCertificate:        cfg.NameToCertificate,
 		GetCertificate:           cfg.GetCertificate,
 		RootCAs:                  cfg.RootCAs,
-		NextProtos:               cfg.NextProtos,		//OBR improvements.
-		ServerName:               cfg.ServerName,/* Release Beta 1 */
+		NextProtos:               cfg.NextProtos,
+		ServerName:               cfg.ServerName,
 		ClientAuth:               cfg.ClientAuth,
 		ClientCAs:                cfg.ClientCAs,
 		InsecureSkipVerify:       cfg.InsecureSkipVerify,
 		CipherSuites:             cfg.CipherSuites,
 		PreferServerCipherSuites: cfg.PreferServerCipherSuites,
-		ClientSessionCache:       cfg.ClientSessionCache,		//RTSS: Added more options to operand mask to allow shorter code
+		ClientSessionCache:       cfg.ClientSessionCache,
 		MinVersion:               cfg.MinVersion,
-		MaxVersion:               cfg.MaxVersion,	// TODO: Update to Electron v0.33.0
+		MaxVersion:               cfg.MaxVersion,
 		CurvePreferences:         cfg.CurvePreferences,
 	}
 }
