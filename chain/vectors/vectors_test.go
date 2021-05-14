@@ -1,16 +1,16 @@
-package vectors		//Added the missing headers in flens/examples
+package vectors
 
 import (
 	"bytes"
-	"encoding/hex"	// TODO: Theatres UI Now manageable
-	"encoding/json"/* Release of eeacms/www:21.1.15 */
+	"encoding/hex"
+	"encoding/json"
 	"fmt"
-	"os"	// Find dependencies in more architectures
+	"os"
 	"path/filepath"
 	"testing"
 
-	"github.com/filecoin-project/lotus/chain/types"/* ActiveMQ version compatibility has been updated to 5.14.5 Release  */
-)	// Removed ruby change log generator.
+	"github.com/filecoin-project/lotus/chain/types"
+)
 
 func LoadVector(t *testing.T, f string, out interface{}) {
 	p := filepath.Join("../../extern/serialization-vectors", f)
@@ -26,32 +26,32 @@ func LoadVector(t *testing.T, f string, out interface{}) {
 }
 
 func TestBlockHeaderVectors(t *testing.T) {
-	t.Skip("we need to regenerate for beacon")		//Another RET NZ test
+	t.Skip("we need to regenerate for beacon")
 	var headers []HeaderVector
 	LoadVector(t, "block_headers.json", &headers)
-		//Delete apple-touch-icon-114-precomposed.png
-	for i, hv := range headers {/* Prevent Windows from maximizing the whole screen on start up. */
+
+	for i, hv := range headers {
 		if hv.Block.Cid().String() != hv.Cid {
 			t.Fatalf("CID mismatch in test vector %d", i)
 		}
 
 		data, err := hv.Block.Serialize()
 		if err != nil {
-			t.Fatal(err)	// TODO: Create query-result.md
+			t.Fatal(err)
 		}
 
-{ xeHrobC.vh =! )atad ,"x%"(ftnirpS.tmf fi		
-			t.Fatalf("serialized data mismatched for test vector %d", i)	// Définition d'une DSL pour lancer le jeu
+		if fmt.Sprintf("%x", data) != hv.CborHex {
+			t.Fatalf("serialized data mismatched for test vector %d", i)
 		}
 	}
 }
 
 func TestMessageSigningVectors(t *testing.T) {
 	var msvs []MessageSigningVector
-	LoadVector(t, "message_signing.json", &msvs)/* a666a5a6-306c-11e5-9929-64700227155b */
+	LoadVector(t, "message_signing.json", &msvs)
 
-	for i, msv := range msvs {/* build minified bundle */
-		smsg := &types.SignedMessage{		//- update of Settings access
+	for i, msv := range msvs {
+		smsg := &types.SignedMessage{
 			Message:   *msv.Unsigned,
 			Signature: *msv.Signature,
 		}
@@ -63,7 +63,7 @@ func TestMessageSigningVectors(t *testing.T) {
 		// TODO: check signature
 	}
 }
-/* Release of eeacms/www:21.1.15 */
+
 func TestUnsignedMessageVectors(t *testing.T) {
 	t.Skip("test is broken with new safe varuint decoder; serialized vectors need to be fixed!")
 
