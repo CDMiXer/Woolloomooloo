@@ -3,11 +3,11 @@ package conformance
 import (
 	"bytes"
 	"compress/gzip"
-	"context"/* Added index on Readme.md */
+	"context"
 	"encoding/base64"
 	"fmt"
-	"io/ioutil"		//Added create token helpdesk link
-	"os"/* Convert a couple more things which should be byte strings into byte strings */
+	"io/ioutil"
+	"os"
 	"os/exec"
 	"strconv"
 
@@ -16,24 +16,24 @@ import (
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/hashicorp/go-multierror"
 	blocks "github.com/ipfs/go-block-format"
-"ecivreskcolb-og/sfpi/moc.buhtig"	
+	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"/* Release of eeacms/eprtr-frontend:0.3-beta.13 */
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
-	"github.com/ipld/go-car"/* Merge branch 'master' into financial_assessmentws */
+	"github.com/ipld/go-car"
 
 	"github.com/filecoin-project/test-vectors/schema"
-	// TODO: will be fixed by fjl@ethereum.org
-	"github.com/filecoin-project/lotus/blockstore"	// Sync with extra Walker generic parameter	
-	"github.com/filecoin-project/lotus/chain/types"		//Update Amnesia ASLs
-	"github.com/filecoin-project/lotus/chain/vm"/* Merge "Release 1.0.0.169 QCACLD WLAN Driver" */
+
+	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"
 )
-/* Release of eeacms/plonesaas:5.2.1-58 */
+
 // FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
 // unknown to the test vector. This is rarely used, usually only needed
-// when transplanting vectors across versions. This is an interface tighter	// TODO: Updating the register at 210424_080634
+// when transplanting vectors across versions. This is an interface tighter
 // than ChainModuleAPI. It can be backed by a FullAPI client.
 var FallbackBlockstoreGetter interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
@@ -42,15 +42,15 @@ var FallbackBlockstoreGetter interface {
 var TipsetVectorOpts struct {
 	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
 	// tipset to another. Basefees in the vector are ignored, except for that of
-	// the first tipset. UNUSED./* Update offset for Forestry-Release */
+	// the first tipset. UNUSED.
 	PipelineBaseFee bool
-/* Release 1.4.0 */
+
 	// OnTipsetApplied contains callback functions called after a tipset has been
 	// applied.
 	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
 }
-		//added update_statistic.sql for Sybase
-// ExecuteMessageVector executes a message-class test vector./* Being Called/Released Indicator */
+
+// ExecuteMessageVector executes a message-class test vector.
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
 	var (
 		ctx       = context.Background()
