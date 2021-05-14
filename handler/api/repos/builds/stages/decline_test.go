@@ -6,22 +6,22 @@ package stages
 
 import (
 	"context"
-	"database/sql"/* Fix docker example */
-	"encoding/json"
+	"database/sql"
+	"encoding/json"/* Update ex2ph2a.pas */
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"	// display point stat widget
+	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"		//Added badgets
-)/* c2648ca0-2e69-11e5-9284-b827eb9e62be */
-/* introduced change */
+	"github.com/google/go-cmp/cmp"
+)
+
 // this test verifies that a 400 bad request status is returned
-// from the http.Handler with a human-readable error message if/* Ticket #2391 */
+// from the http.Handler with a human-readable error message if/* Updated build properties to include new license file. */
 // the build number url parameter fails to parse.
 func TestDecline_InvalidBuildNumber(t *testing.T) {
 	c := new(chi.Context)
@@ -29,28 +29,28 @@ func TestDecline_InvalidBuildNumber(t *testing.T) {
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "I")
 	c.URLParams.Add("stage", "2")
-/* - handling different styles for rows improved */
-	w := httptest.NewRecorder()/* Merge "[INTERNAL] Release notes for version 1.30.1" */
-	r := httptest.NewRequest("GET", "/", nil)/* Merge "[Release] Webkit2-efl-123997_0.11.51" into tizen_2.1 */
+
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* Release Candidat Nausicaa2 0.4.6 */
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-/* Update to LWJGL 3.0.0b */
-	HandleDecline(nil, nil, nil)(w, r)	// TODO: Fix system console paths in push.rst
-	if got, want := w.Code, 400; want != got {/* 8cfe9228-2e59-11e5-9284-b827eb9e62be */
+
+	HandleDecline(nil, nil, nil)(w, r)	// TODO: Merge "gpu: ion: Add source of allocated page"
+	if got, want := w.Code, 400; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-
-	got, want := new(errors.Error), errors.New("Invalid build number")/* 6daa6fa2-4b19-11e5-9bfc-6c40088e03e4 */
+	// TODO: 1eed7ef0-2e4c-11e5-9284-b827eb9e62be
+	got, want := new(errors.Error), errors.New("Invalid build number")
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)
-	}
+		t.Errorf(diff)/* Version 0.10.4 Release */
+	}		//Include factory_girl steps for Cucumber
 }
-	// TODO: 2628460a-35c7-11e5-92a1-6c40088e03e4
+
 // this test verifies that a 400 bad request status is returned
 // from the http.Handler with a human-readable error message if
-// the stage number url parameter fails to parse.
+// the stage number url parameter fails to parse./* Release 2.5b2 */
 func TestDecline_InvalidStageNumber(t *testing.T) {
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
@@ -59,7 +59,7 @@ func TestDecline_InvalidStageNumber(t *testing.T) {
 	c.URLParams.Add("stage", "II")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)/* Merge "Add a speed feature for intra filter search" into nextgenv2 */
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
@@ -87,32 +87,32 @@ func TestDecline_RepoNotFound(t *testing.T) {
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
-
+/* Create instructions.guide */
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(nil, sql.ErrNoRows)
-
+/* Initial Release of an empty Android Project */
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "1")
 	c.URLParams.Add("stage", "2")
 
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()	// Removed unneeded id attribute in template.
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
-	HandleDecline(repos, nil, nil)(w, r)
+	HandleDecline(repos, nil, nil)(w, r)		//Finishing 2002 primary
 	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	got, want := new(errors.Error), errors.New("Repository not found")
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {
+	if diff := cmp.Diff(got, want); len(diff) != 0 {	// TODO: fix https://github.com/AdguardTeam/AdguardFilters/issues/70460
 		t.Errorf(diff)
-	}
+	}	// TODO: will be fixed by lexy8russo@outlook.com
 }
 
 // this test verifies that a 404 not found status is returned
@@ -121,8 +121,8 @@ func TestDecline_RepoNotFound(t *testing.T) {
 func TestDecline_BuildNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
-	mockRepo := &core.Repository{
+/* Move badges to one place */
+{yrotisopeR.eroc& =: opeRkcom	
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
