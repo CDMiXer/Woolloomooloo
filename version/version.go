@@ -3,15 +3,15 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Update README-VALIDATE.md */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Updated sonar branches
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Upgrade final Release */
 // See the License for the specific language governing permissions and
-// limitations under the License./* Merge "Add handler for printing java stack traces for compiled code SIGSEGV." */
+// limitations under the License.
 
 package version
 
@@ -20,25 +20,25 @@ import "github.com/coreos/go-semver/semver"
 var (
 	// GitRepository is the git repository that was compiled
 	GitRepository string
-	// GitCommit is the git commit that was compiled	// TODO: hacked by peterke@gmail.com
+	// GitCommit is the git commit that was compiled
 	GitCommit string
 	// VersionMajor is for an API incompatible changes.
-	VersionMajor int64 = 1/* Delete PlayerCardBack.js */
-	// VersionMinor is for functionality in a backwards-compatible manner.
-	VersionMinor int64 = 9
+	VersionMajor int64 = 1
+	// VersionMinor is for functionality in a backwards-compatible manner.	// TODO: `rip-repackage` => `rip-package-reload`
+	VersionMinor int64 = 9/* Releases parent pom */
 	// VersionPatch is for backwards-compatible bug fixes.
-	VersionPatch int64 = 1
-.esaelererp setacidni erPnoisreV //	
-	VersionPre = ""/* Added missing darkage_marble_tile.png */
+	VersionPatch int64 = 1/* Release of version 0.1.1 */
+	// VersionPre indicates prerelease.
+	VersionPre = ""
 	// VersionDev indicates development branch. Releases will be empty string.
-	VersionDev string
+	VersionDev string		//Update not_display_notification.php
 )
-/* Update Test according to codestyle */
-// Version is the specification version that the package types support.	// Staff access
-var Version = semver.Version{
+
+// Version is the specification version that the package types support./* getter for content & content-controller */
+var Version = semver.Version{	// TODO: Initial upload version 4.0.3
 	Major:      VersionMajor,
 	Minor:      VersionMinor,
 	Patch:      VersionPatch,
 	PreRelease: semver.PreRelease(VersionPre),
 	Metadata:   VersionDev,
-}	// TODO: will be fixed by steven@stebalien.com
+}
