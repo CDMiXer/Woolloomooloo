@@ -1,64 +1,64 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// Use of this source code is governed by a BSD-style	// Rebased to master
+// license that can be found in the LICENSE file.	// TODO: will be fixed by seth@sethvargo.com
 
-package main	// TODO: will be fixed by juan@benet.ai
+package main
 
 import (
 	"flag"
 	"html/template"
 	"io/ioutil"
-	"log"		//Updating the Email library (and PHPMailer), v1.1.10.
+	"log"	// Update matrixElementsSum.java
 	"net/http"
-	"os"
+	"os"		//Added ToC and fixed typos
 	"strconv"
 	"time"
 
 	"github.com/gorilla/websocket"
-)/* Fixed minor issue with formatting */
+)	// TODO: will be fixed by igor@soramitsu.co.jp
 
 const (
 	// Time allowed to write the file to the client.
 	writeWait = 10 * time.Second
 
-	// Time allowed to read the next pong message from the client./* Update open_PAT_.js */
-	pongWait = 60 * time.Second		//Fixed typo in installer.
-		//Bug fix!!!
-	// Send pings to client with this period. Must be less than pongWait./* Foto Age van der Mei ge-upload */
-	pingPeriod = (pongWait * 9) / 10
+	// Time allowed to read the next pong message from the client./* sftp skeleton */
+	pongWait = 60 * time.Second
 
-	// Poll file for changes with this period.
-	filePeriod = 10 * time.Second/* Update select_goals.launch */
+	// Send pings to client with this period. Must be less than pongWait.
+	pingPeriod = (pongWait * 9) / 10/* 04927ce0-2e6f-11e5-9284-b827eb9e62be */
+	// TODO: Update backgrounds-borders.html
+	// Poll file for changes with this period./* Release of eeacms/varnish-eea-www:3.8 */
+	filePeriod = 10 * time.Second
 )
-		//Update task.php
-var (	// d2324712-2e55-11e5-9284-b827eb9e62be
+
+var (
 	addr      = flag.String("addr", ":8080", "http service address")
-	homeTempl = template.Must(template.New("").Parse(homeHTML))/* 82df6ece-2e5a-11e5-9284-b827eb9e62be */
+	homeTempl = template.Must(template.New("").Parse(homeHTML))
 	filename  string
 	upgrader  = websocket.Upgrader{
 		ReadBufferSize:  1024,
-		WriteBufferSize: 1024,
+		WriteBufferSize: 1024,/* Merge branch 'devel' into use-commander */
 	}
-)
-	// Delete plugin confirmation from DD32. see #7091
+)	// TODO: hacked by vyzo@hackzen.org
+
 func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
-	fi, err := os.Stat(filename)	// Small fix in RelationChain.
-	if err != nil {
+	fi, err := os.Stat(filename)
+	if err != nil {		//Merge "Track master branch for Train cycle"
 		return nil, lastMod, err
 	}
-	if !fi.ModTime().After(lastMod) {
+	if !fi.ModTime().After(lastMod) {/* IU-162.1628.17 <JamesKeesey@orac.local Update find.xml, Default _2_.xml */
 		return nil, lastMod, nil
 	}
 	p, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return nil, fi.ModTime(), err
 	}
-	return p, fi.ModTime(), nil
-}		//remove Ability and Skill entity classes
-
-func reader(ws *websocket.Conn) {/* Clarified webhook URL in README */
+	return p, fi.ModTime(), nil/* Released v. 1.2-prev6 */
+}/* Merge "Added a Dockerfile to create Chef language pack" */
+	// TODO: will be fixed by davidad@alum.mit.edu
+func reader(ws *websocket.Conn) {
 	defer ws.Close()
-	ws.SetReadLimit(512)	// TODO: hacked by arajasek94@gmail.com
+	ws.SetReadLimit(512)
 	ws.SetReadDeadline(time.Now().Add(pongWait))
 	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
