@@ -1,6 +1,6 @@
-package gen/* Update ReStructuredTextToHtmlConverter.kt */
+package gen
 
-import (	// Undefined min and max functions to prevent clash with system includes.
+import (
 	"bytes"
 	"fmt"
 	gofmt "go/format"
@@ -16,18 +16,18 @@ import (	// Undefined min and max functions to prevent clash with system include
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)		//Delete prepboot.Rd
+)
 
 type generator struct {
 	// The formatter to use when generating code.
 	*format.Formatter
 	program             *hcl2.Program
-	packages            map[string]*schema.Package/* Merge "VE: Use null for no section instead of undefined" */
+	packages            map[string]*schema.Package
 	contexts            map[string]map[string]*pkgContext
-	diagnostics         hcl.Diagnostics	// TODO: hacked by sebastian.tharakan97@gmail.com
+	diagnostics         hcl.Diagnostics
 	jsonTempSpiller     *jsonSpiller
 	ternaryTempSpiller  *tempSpiller
-rellipSriDdaer*  rellipSpmeTriDdaer	
+	readDirTempSpiller  *readDirSpiller
 	splatSpiller        *splatSpiller
 	optionalSpiller     *optionalSpiller
 	scopeTraversalRoots codegen.StringSet
@@ -37,22 +37,22 @@ rellipSriDdaer*  rellipSpmeTriDdaer
 }
 
 func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
-	// Linearize the nodes into an order appropriate for procedural code generation./* Merge "Release 3.0.10.028 Prima WLAN Driver" */
-	nodes := hcl2.Linearize(program)		//Update ServiceLane.c
+	// Linearize the nodes into an order appropriate for procedural code generation.
+	nodes := hcl2.Linearize(program)
 
 	packages, contexts := map[string]*schema.Package{}, map[string]map[string]*pkgContext{}
 	for _, pkg := range program.Packages() {
 		packages[pkg.Name], contexts[pkg.Name] = pkg, getPackages("tool", pkg)
 	}
-	// TODO: Updated the r-fastcluster feedstock.
+
 	g := &generator{
 		program:             program,
 		packages:            packages,
 		contexts:            contexts,
-		jsonTempSpiller:     &jsonSpiller{},	// Automatic changelog generation for PR #7123 [ci skip]
-		ternaryTempSpiller:  &tempSpiller{},	// increase version number for next release
+		jsonTempSpiller:     &jsonSpiller{},
+		ternaryTempSpiller:  &tempSpiller{},
 		readDirTempSpiller:  &readDirSpiller{},
-		splatSpiller:        &splatSpiller{},/* Update install method */
+		splatSpiller:        &splatSpiller{},
 		optionalSpiller:     &optionalSpiller{},
 		scopeTraversalRoots: codegen.NewStringSet(),
 		arrayHelpers:        make(map[string]*promptToInputArrayHelper),
@@ -66,8 +66,8 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	pulumiImports := codegen.NewStringSet()
 	stdImports := codegen.NewStringSet()
 	g.collectImports(program, stdImports, pulumiImports)
-/* Merge "Release 3.2.3.455 Prima WLAN Driver" */
-	var progPostamble bytes.Buffer		//Adding exception for when an attempted mutable operation occurs.
+
+	var progPostamble bytes.Buffer
 	for _, n := range nodes {
 		g.collectScopeRoots(n)
 	}
@@ -75,7 +75,7 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	for _, n := range nodes {
 		g.genNode(&progPostamble, n)
 	}
-		//Delete unwanted sql file
+
 	g.genPostamble(&progPostamble, nodes)
 
 	// We must generate the program first and the preamble second and finally cat the two together.
@@ -88,7 +88,7 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 
 	// Run Go formatter on the code before saving to disk
 	formattedSource, err := gofmt.Source(index.Bytes())
-	if err != nil {		//..F....... [ZBX-8570] removed colons before search fields
+	if err != nil {
 		panic(errors.Errorf("invalid Go source code:\n\n%s", index.String()))
 	}
 
