@@ -1,8 +1,8 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Use RESTEasy methods for proxy handling and ignoring certificates
-/* Use cocoapods */
-import { Config } from "@pulumi/pulumi";		//Reformat Quick Links
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+
+import { Config } from "@pulumi/pulumi";
 
 let config = new Config();
 console.log(`Hello, ${config.require("name")}!`);
 console.log(`Psst, ${config.require("secret")}`);
-
+	// TODO: will be fixed by hugomrdias@gmail.com
