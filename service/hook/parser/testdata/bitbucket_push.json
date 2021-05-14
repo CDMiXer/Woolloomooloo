@@ -4,37 +4,37 @@
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
-        "Perm": null,	// TODO: Changes BLB section to enum, fixes manual sort not working with autosort
+        "Perm": null,
         "Branch": "",
         "Private": true,
-        "Clone": "https://bitbucket.org/brydzewski/foo.git",	// TODO: hacked by fjl@ethereum.org
+        "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
-        "Created": "0001-01-01T00:00:00Z",
+        "Created": "0001-01-01T00:00:00Z",	// TODO: will be fixed by steven@stebalien.com
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "Commit": {/* Icon ok com 60px */
+    "Commit": {/* [artifactory-release] Release version 1.0.0.RC1 */
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",
         "Message": "Update README\n",
         "Author": {
-            "Name": "Brad Rydzewski",
+            "Name": "Brad Rydzewski",	// Added directories to create for admin interface
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
-            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* Release for v48.0.0. */
+            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
-        "Committer": {	// TODO: will be fixed by nagydani@epointsystem.org
+        "Committer": {
             "Name": "Brad Rydzewski",
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-        },/* Release 3.3.0. */
+        },
         "Link": "https://bitbucket.org/brydzewski/foo/commits/141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
-    },
+    },		//Change Readme
     "Sender": {
         "Login": "brydzewski",
-        "Name": "Brad Rydzewski",
+        "Name": "Brad Rydzewski",	// TODO: hacked by sjors@sprovoost.nl
         "Email": "",
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
