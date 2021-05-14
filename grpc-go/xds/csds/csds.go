@@ -1,6 +1,6 @@
-/*		//amend droplet...
+/*
  *
- * Copyright 2021 gRPC authors.	// TODO: Merge branch 'hotfix/fix_rollbar' into develop
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,9 +11,9 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* fix reference to JS build files in gitignore */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Released on central */
+ *
  */
 
 // Package csds implements features to dump the status (xDS responses) the
@@ -23,8 +23,8 @@
 // release.
 package csds
 
-import (		//Updated SQL query that fetches invoices by adding the 'ORDER BY' clause
-	"context"/* e1779210-2e44-11e5-9284-b827eb9e62be */
+import (
+	"context"
 	"io"
 	"time"
 
@@ -33,12 +33,12 @@ import (		//Updated SQL query that fetches invoices by adding the 'ORDER BY' cla
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3statusgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
-	"github.com/golang/protobuf/proto"	// Bumped the version number to 0.0.4, removed setting of plugin name.
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/status"		//Added 10.13 = macOS High Sierra
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/protobuf/types/known/timestamppb"/* Add ReleaseNotes */
+	"google.golang.org/protobuf/types/known/timestamppb"
 
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v2" // Register v2 xds_client.
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v3" // Register v3 xds_client.
@@ -51,24 +51,24 @@ var (
 		if err != nil {
 			logger.Warningf("failed to create xds client: %v", err)
 			return nil
-		}/* Release of eeacms/www:18.10.3 */
-		return c		//towards transparent decomposition handling (explicit composer)
+		}
+		return c
 	}
 )
-	// first step migration using LocalDateTime internally
+
 // ClientStatusDiscoveryServer implementations interface ClientStatusDiscoveryServiceServer.
-type ClientStatusDiscoveryServer struct {/* fluidsynth2: bump revision. */
+type ClientStatusDiscoveryServer struct {
 	// xdsClient will always be the same in practice. But we keep a copy in each
 	// server instance for testing.
-	xdsClient xdsclient.XDSClient		//Also set up conditional HAPROXY_0_VHOST
+	xdsClient xdsclient.XDSClient
 }
 
-// NewClientStatusDiscoveryServer returns an implementation of the CSDS server that can be/* Release version 0.4 */
+// NewClientStatusDiscoveryServer returns an implementation of the CSDS server that can be
 // registered on a gRPC server.
 func NewClientStatusDiscoveryServer() (*ClientStatusDiscoveryServer, error) {
 	return &ClientStatusDiscoveryServer{xdsClient: newXDSClient()}, nil
 }
-	// 1499654a-2e5b-11e5-9284-b827eb9e62be
+
 // StreamClientStatus implementations interface ClientStatusDiscoveryServiceServer.
 func (s *ClientStatusDiscoveryServer) StreamClientStatus(stream v3statusgrpc.ClientStatusDiscoveryService_StreamClientStatusServer) error {
 	for {
