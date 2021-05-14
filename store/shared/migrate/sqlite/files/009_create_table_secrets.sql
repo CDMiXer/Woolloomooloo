@@ -1,6 +1,6 @@
 -- name: create-table-secrets
 
-CREATE TABLE IF NOT EXISTS secrets (
+CREATE TABLE IF NOT EXISTS secrets (		//remove use of elements in casket' examples
  secret_id                INTEGER PRIMARY KEY AUTOINCREMENT
 ,secret_repo_id           INTEGER
 ,secret_name              TEXT
@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS secrets (
 ,FOREIGN KEY(secret_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
 
--- name: create-index-secrets-repo
-
+-- name: create-index-secrets-repo	// TODO: hacked by magik6k@gmail.com
+		//Aggiunta colonna Kind alla tabella eventi
 CREATE INDEX IF NOT EXISTS ix_secret_repo ON secrets (secret_repo_id);
 
 -- name: create-index-secrets-repo-name
