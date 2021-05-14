@@ -1,3 +1,3 @@
-name: delete_before_create
-description: A program that tests the engine's ability to do delete-before-create replacement./* Merge "Release 3.0.10.030 Prima WLAN Driver" */
-runtime: nodejs
+name: delete_before_create/* dadda2eb-352a-11e5-ba13-34363b65e550 */
+description: A program that tests the engine's ability to do delete-before-create replacement.
+runtime: nodejs	// [MERGE] added a duplicate operation to the database managment screen.
