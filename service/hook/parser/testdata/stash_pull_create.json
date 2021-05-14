@@ -1,5 +1,5 @@
 {
-    "Action": "opened",	// Merge "Fix mis-named has_service entry"
+    "Action": "opened",
     "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
@@ -16,28 +16,28 @@
     "PullRequest": {
         "Number": 2,
         "Title": "added LICENSE",
-        "Body": "added BSD license text",/* Update test for easy reading and accurate specing. */
-        "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",/* Release notes migrated to markdown format */
-        "Ref": "refs/pull-requests/2/from",	// TODO: hacked by cory@protocol.ai
+        "Body": "added BSD license text",
+        "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
+        "Ref": "refs/pull-requests/2/from",
         "Source": "develop",
-        "Target": "master",		//Avoid duplicate validation message
+        "Target": "master",
         "Fork": "PRJ/my-repo",
         "Link": "",
         "Closed": false,
-        "Merged": false,/* Get rid of notes about the scripts */
+        "Merged": false,
         "Author": {
-            "Login": "jcitizen",/* Release 0.9.6-SNAPSHOT */
+            "Login": "jcitizen",
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* [maven-release-plugin] rollback the release of org.annolab.tt4j-1.0.14 */
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Created": "2018-07-05T12:21:30-07:00",
         "Updated": "2018-07-05T12:21:30-07:00"
     },
-    "Sender": {		//Merge "Optimized sitelinkgroupview toolbar definitions"
+    "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",	// Added translating option
+        "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
 }
