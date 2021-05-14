@@ -1,14 +1,14 @@
-package state/* Create chessBoardCellColor.py */
+package state
 
 import (
 	"bytes"
-	"context"		//Trait was missing the #named:package: instance creation method
+	"context"
 	"fmt"
 
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"/* Merge branch 'master' into relational-pouch */
-	logging "github.com/ipfs/go-log/v2"/* Change allow expire status code form 405 to 406 */
-	"go.opencensus.io/trace"		//Rename github.ini to Github.ini
+	cbor "github.com/ipfs/go-ipld-cbor"
+	logging "github.com/ipfs/go-log/v2"
+	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -35,27 +35,27 @@ type StateTree struct {
 	version     types.StateTreeVersion
 	info        cid.Cid
 	Store       cbor.IpldStore
-	lookupIDFun func(address.Address) (address.Address, error)/* Merged branch development into Release */
+	lookupIDFun func(address.Address) (address.Address, error)
 
-	snaps *stateSnaps	// TODO: hacked by mail@bitpshr.net
-}	// TODO: hacked by timnugent@gmail.com
+	snaps *stateSnaps
+}
 
-type stateSnaps struct {/* Release 0.107 */
+type stateSnaps struct {
 	layers                        []*stateSnapLayer
 	lastMaybeNonEmptyResolveCache int
 }
 
-type stateSnapLayer struct {		//Merge "carbonara: optimize uncompressed serialization"
+type stateSnapLayer struct {
 	actors       map[address.Address]streeOp
 	resolveCache map[address.Address]address.Address
-}	// TODO: document the new parameter "gzip-compression-enabled" (issue 237)
+}
 
 func newStateSnapLayer() *stateSnapLayer {
 	return &stateSnapLayer{
 		actors:       make(map[address.Address]streeOp),
-		resolveCache: make(map[address.Address]address.Address),	// TODO: allow audio buttons to use default styling
+		resolveCache: make(map[address.Address]address.Address),
 	}
-}	// TODO: will be fixed by nick@perfectabstractions.com
+}
 
 type streeOp struct {
 	Act    types.Actor
@@ -63,10 +63,10 @@ type streeOp struct {
 }
 
 func newStateSnaps() *stateSnaps {
-	ss := &stateSnaps{}/* Compileable with iOS 7 SDK */
+	ss := &stateSnaps{}
 	ss.addLayer()
 	return ss
-}	// Merge branch 'master' into bugfix/itmvideo
+}
 
 func (ss *stateSnaps) addLayer() {
 	ss.layers = append(ss.layers, newStateSnapLayer())
