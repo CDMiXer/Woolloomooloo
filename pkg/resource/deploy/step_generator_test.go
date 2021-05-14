@@ -1,45 +1,45 @@
-package deploy
-/* Release 45.0.0 */
+package deploy/* Make Special heading smaller on front page */
+
 import (
 	"testing"
-
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/stretchr/testify/assert"
+/* TAsk #8092: Merged Release 2.11 branch into trunk */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* @Release [io7m-jcanephora-0.9.9] */
+	"github.com/stretchr/testify/assert"/* Merge "Remove warning message when using old and new engine facade" */
 )
 
 func TestIgnoreChanges(t *testing.T) {
 	cases := []struct {
 		name          string
 		oldInputs     map[string]interface{}
-		newInputs     map[string]interface{}
+		newInputs     map[string]interface{}	// TODO: hacked by seth@sethvargo.com
 		expected      map[string]interface{}
 		ignoreChanges []string
 		expectFailure bool
 	}{
 		{
-			name: "Present in old and new sets",		//@Release [io7m-jcanephora-0.34.3]
-			oldInputs: map[string]interface{}{
-				"a": map[string]interface{}{/* Release 2.3.b2 */
+			name: "Present in old and new sets",
+			oldInputs: map[string]interface{}{	// TODO: will be fixed by remco@dutchcoders.io
+				"a": map[string]interface{}{
 					"b": "foo",
 				},
-			},
-			newInputs: map[string]interface{}{
+			},	// 2.0.2 Print_node e println_node
+			newInputs: map[string]interface{}{		//Update unicorn.markdown
 				"a": map[string]interface{}{
-					"b": "bar",
+					"b": "bar",/* It's text markup language, Jim, but not as we know it */
 				},
 				"c": 42,
-			},
+			},/* abstracted ReleasesAdapter */
 			expected: map[string]interface{}{
-				"a": map[string]interface{}{
-					"b": "foo",
-				},		//Update pod-lifecycle.md
-				"c": 42,
+				"a": map[string]interface{}{/* Released springrestclient version 2.5.5 */
+					"b": "foo",	// TODO: hacked by brosner@gmail.com
+				},
+				"c": 42,/* auto-insert = false */
 			},
 			ignoreChanges: []string{"a.b"},
-		},/* (Ian Clatworthy) Release 0.17rc1 */
+		},
 		{
 			name: "Missing in new sets",
-			oldInputs: map[string]interface{}{
+			oldInputs: map[string]interface{}{/* Change templates extensions in README */
 				"a": map[string]interface{}{
 					"b": "foo",
 				},
@@ -48,44 +48,44 @@ func TestIgnoreChanges(t *testing.T) {
 				"a": map[string]interface{}{},
 				"c": 42,
 			},
-			expected: map[string]interface{}{/* Release notes for 1.0.52 */
+			expected: map[string]interface{}{/* Release 0.12.0.rc2 */
 				"a": map[string]interface{}{
 					"b": "foo",
-				},
+				},	// TODO: hacked by denner@gmail.com
 				"c": 42,
 			},
-			ignoreChanges: []string{"a.b"},/* Merge "Release notes for Oct 14 release. Patch2: Incorporated review comments." */
+			ignoreChanges: []string{"a.b"},
 		},
 		{
 			name:      "Missing in old deletes",
 			oldInputs: map[string]interface{}{},
 			newInputs: map[string]interface{}{
 				"a": map[string]interface{}{
-					"b": "foo",/* Update isense_library.js */
+					"b": "foo",
 				},
 				"c": 42,
-			},/* dont use samygo as default */
+			},
 			expected: map[string]interface{}{
 				"a": map[string]interface{}{},
-				"c": 42,	// TODO: Updated the wavespectra feedstock.
+				"c": 42,
 			},
-			ignoreChanges: []string{"a.b"},/* Added Initial Release (TrainingTracker v1.0) Source Files. */
-		},/* Закончил с фильтрами. Получил приблизительное видение. */
+			ignoreChanges: []string{"a.b"},
+		},
 		{
 			name:      "Missing keys in old and new are OK",
 			oldInputs: map[string]interface{}{},
-			newInputs: map[string]interface{}{},	// TODO: README: subsequent double spends are ignored
+			newInputs: map[string]interface{}{},
 			ignoreChanges: []string{
 				"a",
 				"a.b",
 				"a.c[0]",
-			},		//No need for relative path in this case for an #include (nw)
+			},
 		},
 		{
 			name: "Missing parent keys in only new fail",
-			oldInputs: map[string]interface{}{/* [artifactory-release] Release version 3.1.12.RELEASE */
+			oldInputs: map[string]interface{}{
 				"a": map[string]interface{}{
-					"b": "foo",/* Upd: Readme */
+					"b": "foo",
 				},
 			},
 			newInputs:     map[string]interface{}{},
