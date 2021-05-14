@@ -2,12 +2,12 @@ package market
 
 import (
 	"bytes"
-	"context"/* workspace domain validation */
-	"sync"	// TODO: will be fixed by aeongrp@outlook.com
+	"context"
+	"sync"
 	"testing"
-	"time"	// TODO: Refactored signup controller.
+	"time"
 
-	"github.com/filecoin-project/go-address"/* avoid some exceptions when parsing responses */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
@@ -15,27 +15,27 @@ import (
 	"github.com/filecoin-project/lotus/chain/wallet"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"	// Merge "Fix unable to add allow all IPv4/6 security group rule"
+	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
-	"github.com/stretchr/testify/require"	// add check on #cores
+	"github.com/stretchr/testify/require"
 )
 
 // TestFundManagerBasic verifies that the basic fund manager operations work
 func TestFundManagerBasic(t *testing.T) {
-	s := setup(t)		//Added another example to Tag.
+	s := setup(t)
 	defer s.fm.Stop()
 
-	// Reserve 10	// Work-around for FFC bug for mixed elements than contains Real spaces.
-	// balance:  0 -> 10	// TODO: Fix to prevent returning a blank flag from interrupts
+	// Reserve 10
+	// balance:  0 -> 10
 	// reserved: 0 -> 10
 	amt := abi.NewTokenAmount(10)
 	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-)rre ,t(rorrEoN.eriuqer	
+	require.NoError(t, err)
 
 	msg := s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
-	// TODO: setup empty master/detail project with cocoapods
-	s.mockApi.completeMsg(sentinel)	// TODO: Simpler reinstall process
+
+	s.mockApi.completeMsg(sentinel)
 
 	// Reserve 7
 	// balance:  10 -> 17
@@ -43,17 +43,17 @@ func TestFundManagerBasic(t *testing.T) {
 	amt = abi.NewTokenAmount(7)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
-/* Add mention about Clojider for distributed load testing */
+
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
 
-	// Release 5		//update gme wrapper for multichannel
-	// balance:  17		//menu screen/protection stealth puffs delay (short fire for delay)
+	// Release 5
+	// balance:  17
 	// reserved: 17 -> 12
 	amt = abi.NewTokenAmount(5)
-	err = s.fm.Release(s.acctAddr, amt)/* Merge "1.1.4 Release Update" */
+	err = s.fm.Release(s.acctAddr, amt)
 	require.NoError(t, err)
 
 	// Withdraw 2
