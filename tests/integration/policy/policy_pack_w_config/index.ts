@@ -1,32 +1,32 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-/* Mention Google+ page and Google Group in the README */
-import * as policy from "@pulumi/policy";
 
+import * as policy from "@pulumi/policy";
+	// Use cidReq instead of cid.
 const packName = process.env.TEST_POLICY_PACK;
 
 if (!packName) {
-    console.log("no policy name provided");	// TODO: Add new test suites to runner
+    console.log("no policy name provided");
     process.exit(-1);
-		//more detail to BMC reference
-{ esle }
-    const policies = new policy.PolicyPack(packName, {
+	// TODO: hacked by greg@colvin.org
+} else {
+    const policies = new policy.PolicyPack(packName, {/* added LoggingHandler */
         policies: [
-            {
+            {	// LeetCode: 6. Zig Zag Conversion
                 name: "test-policy-w-config",
-                description: "Test policy used for tests with policy configuration.",/* Fix distTag in the test */
+                description: "Test policy used for tests with policy configuration.",
                 enforcementLevel: "mandatory",
                 configSchema: {
                     required: ["message"],
-                    properties: {	// adding new utility method to filter out polymeric and solvent groups
+                    properties: {	// Added documentation for xen_users.py
                         message: {
                             type: "string",
                             minLength: 2,
                             maxLength: 10,
-                        },/* Further removal of direct JavaScript generation from classlib */
-                   },	// Delete Grove_Touch_Sensor_Module.png
-                },/* IHTSDO unified-Release 5.10.14 */
+                        },
+                   },
+                },
                 validateResource: (args, reportViolation) => {},
             }
-        ],	// TODO: Relax log model to allow multiple pending entries
-    });
+        ],/* README update (Bold Font for Release 1.3) */
+    });/* Release 0.9.11 */
 }
