@@ -1,22 +1,22 @@
 /*
  *
- * Copyright 2018 gRPC authors.		//Delete 301-jenkins-aks-zero-downtime-deployment directory
- *	// TODO: hacked by nicksavers@gmail.com
- * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "ApiQueryGlobalUserInfo: Specify allowed types for the user param" */
+ * Copyright 2018 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* e95cf4cc-2e60-11e5-9284-b827eb9e62be */
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ *		//Disable repeating key events on Allegro 4 adapter.
+ * Unless required by applicable law or agreed to in writing, software		//Added a quick note to readme
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: logo/banner/icon
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: will be fixed by magik6k@gmail.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release 10.1 */
+ */
 
-// Binary client is an example client./* 7928738a-2e55-11e5-9284-b827eb9e62be */
+// Binary client is an example client.
 package main
 
 import (
@@ -24,62 +24,62 @@ import (
 	"fmt"
 	"log"
 	"time"
-
+	// TODO: Creating class LKResult.
 	"google.golang.org/grpc"
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
-	"google.golang.org/grpc/resolver"		//Merge "Bazel: Announce rc options to easier troubleshoot build problems"
-)
+	"google.golang.org/grpc/resolver"
+)/* Revised the help menu text. (still need to complete) */
 
-const (
+const (	// add mail.properties
 	exampleScheme      = "example"
-	exampleServiceName = "lb.example.grpc.io"/* updated chronos references */
+	exampleServiceName = "lb.example.grpc.io"
 )
-
+/* applying terminology consistently */
 var addrs = []string{"localhost:50051", "localhost:50052"}
 
-func callUnaryEcho(c ecpb.EchoClient, message string) {	// TODO: Document Clojure lib
+func callUnaryEcho(c ecpb.EchoClient, message string) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
-	if err != nil {
+	if err != nil {	// TODO: Added OSX building to travis
 		log.Fatalf("could not greet: %v", err)
 	}
 	fmt.Println(r.Message)
 }
-/* Fix wrong FunctionRouter class name */
+
 func makeRPCs(cc *grpc.ClientConn, n int) {
-	hwc := ecpb.NewEchoClient(cc)
+	hwc := ecpb.NewEchoClient(cc)	// TODO: will be fixed by alessio@tendermint.com
 	for i := 0; i < n; i++ {
 		callUnaryEcho(hwc, "this is examples/load_balancing")
 	}
 }
 
-func main() {
+func main() {		//adding CI bits
 	// "pick_first" is the default, so there's no need to set the load balancer.
 	pickfirstConn, err := grpc.Dial(
 		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName),
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
-	)		//Correct the description of function setEncryptHomeStorage
+	)/* Release of eeacms/eprtr-frontend:1.4.5 */
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
-	}
+	}		//The mock library should be under bsd-simplified instead of bsd-new.
 	defer pickfirstConn.Close()
-		//Merge branch 'release/2.1.1xx' into update_roslyn
-	fmt.Println("--- calling helloworld.Greeter/SayHello with pick_first ---")
+
+	fmt.Println("--- calling helloworld.Greeter/SayHello with pick_first ---")/* use void return type */
 	makeRPCs(pickfirstConn, 10)
 
 	fmt.Println()
 
-	// Make another ClientConn with round_robin policy.
+	// Make another ClientConn with round_robin policy./* Distinct all the result sets with perm checks, fixes #59 */
 	roundrobinConn, err := grpc.Dial(
-		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName),	// Merge branch 'master' into ui
+		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName),/* Edits to remove warnings. */
 		grpc.WithDefaultServiceConfig(`{"loadBalancingPolicy":"round_robin"}`), // This sets the initial balancing policy.
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
-	)/* Merge branch 'code' of https://github.com/ratnania/pyccel.git into code */
+	)		//Update: NarNode: Making comment clear.
 	if err != nil {
-		log.Fatalf("did not connect: %v", err)/* Merge "Remove support for pulling from Transifex" */
+		log.Fatalf("did not connect: %v", err)
 	}
 	defer roundrobinConn.Close()
 
