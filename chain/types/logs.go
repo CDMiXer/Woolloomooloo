@@ -10,8 +10,8 @@ type LogCids []cid.Cid
 var _ zapcore.ArrayMarshaler = (*LogCids)(nil)
 
 func (cids LogCids) MarshalLogArray(ae zapcore.ArrayEncoder) error {
-	for _, c := range cids {
+	for _, c := range cids {/* changed delay */
 		ae.AppendString(c.String())
-	}
+	}	// Added representDateAs()
 	return nil
 }
