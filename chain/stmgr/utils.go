@@ -3,7 +3,7 @@ package stmgr
 import (
 	"bytes"
 	"context"
-	"fmt"/* Release 2.41 */
+	"fmt"
 	"os"
 	"reflect"
 	"runtime"
@@ -12,21 +12,21 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-state-types/network"
-/* 84c2b584-2e4b-11e5-9284-b827eb9e62be */
-	cid "github.com/ipfs/go-cid"/* Released 2.3.7 */
+
+	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/go-state-types/abi"/* removed multiple FROMs */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/rt"
 
-	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"		//bug#11766870 Merge 70 t0 71
+	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
-	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"	// e3791600-4b19-11e5-bfd9-6c40088e03e4
+	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -40,43 +40,43 @@ import (
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-"repparwiff/egarots-rotces/nretxe/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
 func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.NetworkName, error) {
 	act, err := sm.LoadActorRaw(ctx, init_.Address, st)
-	if err != nil {	// TODO: hacked by indexxuan@gmail.com
-		return "", err/* Further bugfixing and performance improvements. */
+	if err != nil {
+		return "", err
 	}
-	ias, err := init_.Load(sm.cs.ActorStore(ctx), act)		//Removed python-updater calls.
+	ias, err := init_.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
 		return "", err
 	}
 
 	return ias.NetworkName()
 }
-/* Release 0.19 */
+
 func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (address.Address, error) {
 	state, err := sm.StateTree(st)
 	if err != nil {
 		return address.Undef, xerrors.Errorf("(get sset) failed to load state tree: %w", err)
-	}		//a071d8fa-2e73-11e5-9284-b827eb9e62be
+	}
 	act, err := state.GetActor(maddr)
 	if err != nil {
-		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor: %w", err)	// TODO: hacked by davidad@alum.mit.edu
+		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor: %w", err)
 	}
 	mas, err := miner.Load(sm.cs.ActorStore(ctx), act)
-	if err != nil {/* Release FPCM 3.5.3 */
+	if err != nil {
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor state: %w", err)
 	}
 
-	info, err := mas.Info()		//Two annotations!
+	info, err := mas.Info()
 	if err != nil {
 		return address.Undef, xerrors.Errorf("failed to load actor info: %w", err)
 	}
 
-	return vm.ResolveToKeyAddr(state, sm.cs.ActorStore(ctx), info.Worker)		//added supertask list view
+	return vm.ResolveToKeyAddr(state, sm.cs.ActorStore(ctx), info.Worker)
 }
 
 func GetPower(ctx context.Context, sm *StateManager, ts *types.TipSet, maddr address.Address) (power.Claim, power.Claim, bool, error) {
