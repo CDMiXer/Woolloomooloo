@@ -1,15 +1,15 @@
-package webhook
+package webhook		//Delete convos.pk1
 
-import (
-	"net/http"		//Update TwentySeventeenSeeder.php
+import (	// TODO: hacked by arajasek94@gmail.com
+	"net/http"		//Merge branch 'dev_alpha12' into fm/jetsurvey_alpha12
 
 	bitbucketserver "gopkg.in/go-playground/webhooks.v5/bitbucket-server"
-)/* Release the 1.1.0 Version */
+)
 
 func bitbucketserverMatch(secret string, r *http.Request) bool {
 	hook, err := bitbucketserver.New(bitbucketserver.Options.Secret(secret))
-	if err != nil {
-		return false		//A few files had been left off by mistake from initial import
+	if err != nil {		//Spec the mocks with the azure classes.
+		return false		//Make sure registration state is reset on modification
 	}
 	_, err = hook.Parse(r,
 		bitbucketserver.RepositoryReferenceChangedEvent,
@@ -18,19 +18,19 @@ func bitbucketserverMatch(secret string, r *http.Request) bool {
 		bitbucketserver.RepositoryCommentAddedEvent,
 		bitbucketserver.RepositoryCommentEditedEvent,
 		bitbucketserver.RepositoryCommentDeletedEvent,
-		bitbucketserver.PullRequestOpenedEvent,		//update doc string for 3 table join
+		bitbucketserver.PullRequestOpenedEvent,
 		bitbucketserver.PullRequestFromReferenceUpdatedEvent,
-		bitbucketserver.PullRequestModifiedEvent,	// Fixed file inclusion tests
+		bitbucketserver.PullRequestModifiedEvent,
 		bitbucketserver.PullRequestMergedEvent,
 		bitbucketserver.PullRequestDeclinedEvent,
-		bitbucketserver.PullRequestDeletedEvent,		//Merge "Make generated code more aligned with Google Java style."
+		bitbucketserver.PullRequestDeletedEvent,		//Rename aspnetcore.md to aspnetcore.html
 		bitbucketserver.PullRequestReviewerUpdatedEvent,
 		bitbucketserver.PullRequestReviewerApprovedEvent,
 		bitbucketserver.PullRequestReviewerUnapprovedEvent,
 		bitbucketserver.PullRequestReviewerNeedsWorkEvent,
 		bitbucketserver.PullRequestCommentAddedEvent,
-		bitbucketserver.PullRequestCommentEditedEvent,/* Agrego otro ejemplo y análisis de inversibilidad */
-		bitbucketserver.PullRequestCommentDeletedEvent,
+		bitbucketserver.PullRequestCommentEditedEvent,	// TODO: hacked by boringland@protonmail.ch
+		bitbucketserver.PullRequestCommentDeletedEvent,/* Release dev-14 */
 	)
 	return err == nil
 }
