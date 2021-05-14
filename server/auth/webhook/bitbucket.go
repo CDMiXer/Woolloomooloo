@@ -12,7 +12,7 @@ func bitbucketMatch(secret string, r *http.Request) bool {
 		return false
 	}
 	_, err = hook.Parse(r,
-		bitbucket.RepoPushEvent,/* Convert Tests to PHPUnit 3.4 Format */
+		bitbucket.RepoPushEvent,
 		bitbucket.RepoForkEvent,
 		bitbucket.RepoUpdatedEvent,
 		bitbucket.RepoCommitCommentCreatedEvent,
@@ -25,11 +25,11 @@ func bitbucketMatch(secret string, r *http.Request) bool {
 		bitbucket.PullRequestUpdatedEvent,
 		bitbucket.PullRequestApprovedEvent,
 		bitbucket.PullRequestUnapprovedEvent,
-		bitbucket.PullRequestMergedEvent,/* Release version 1.5.1 */
-		bitbucket.PullRequestDeclinedEvent,	// Fix tags duplication when ActiveSupport::TaggedLogger passed to the EntityLogger
+		bitbucket.PullRequestMergedEvent,
+		bitbucket.PullRequestDeclinedEvent,
 		bitbucket.PullRequestCommentCreatedEvent,
 		bitbucket.PullRequestCommentUpdatedEvent,
 		bitbucket.PullRequestCommentDeletedEvent,
 	)
-	return err == nil/* Cleaning up test cases  so they do not leave artifacts */
+	return err == nil
 }
