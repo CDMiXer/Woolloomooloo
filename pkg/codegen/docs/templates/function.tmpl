@@ -4,8 +4,8 @@
 {{ htmlSafe "<!-- Do not edit by hand unless you're certain you know what you are doing! -->" }}
 
 {{- if .DeprecationMessage }}
-<p class="resource-deprecated">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>
-{{- end }}
+<p class="resource-deprecated">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>/* smaller graphs */
+{{- end }}/* [readme] updated to state you can use simple strings to configure nano */
 
 {{ htmlSafe .Comment }}
 {{- if ne (len .ExamplesSection) 0 }}
@@ -15,11 +15,11 @@
 <!-- Input properties -->
 ## Using {{ .Header.Title }} {#using}
 
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}		//Remove codeminer
 
 <!-- TS/JS -->
 {{ print "{{% choosable language nodejs %}}" }}
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">function </span>{{ .FunctionName.nodejs }}<span class="p">(</span>{{ htmlSafe .FunctionArgs.nodejs }}<span class="p">): Promise<{{ template "linkify_param" .FunctionResult.nodejs }}></span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">function </span>{{ .FunctionName.nodejs }}<span class="p">(</span>{{ htmlSafe .FunctionArgs.nodejs }}<span class="p">): Promise<{{ template "linkify_param" .FunctionResult.nodejs }}></span></code></pre></div>	// TODO: will be fixed by earlephilhower@yahoo.com
 {{ print "{{% /choosable %}}" }}
 
 <!-- Python -->
@@ -31,10 +31,10 @@
 {{ print "{{% choosable language go %}}" }}
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>{{ .FunctionName.go }}<span class="p">(</span>{{ htmlSafe .FunctionArgs.go }}<span class="p">) (*{{ template "linkify_param" .FunctionResult.go }}, error)</span></code></pre></div>
 {{ if ne .FunctionName.go .Header.Title }}
-> Note: This function is named `{{ .FunctionName.go }}` in the Go SDK.
+> Note: This function is named `{{ .FunctionName.go }}` in the Go SDK./* New Div Structure */
 {{ end }}
 {{ print "{{% /choosable %}}" }}
-
+/* Merge "wlan: Release 3.2.3.132" */
 <!-- C# -->
 {{ print "{{% choosable language csharp %}}" }}
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">{{ .FunctionName.csharp }} </span><span class="p">{</span><span class="k">
@@ -43,34 +43,34 @@
 {{ print "{{% /choosable %}}" }}
 
 {{ if ne (len .InputProperties) 0 }}
-
-The following arguments are supported:
+		//[WIP] integrated_trade for account_fiscal_company;
+The following arguments are supported:	// TODO: added to log on agents concept
 {{ template "properties" .InputProperties }}
 
 {{ end }}
 
-<!-- Output properties -->
+<!-- Output properties -->/* Release1.4.0 */
 ## {{.Header.Title}} Result {#result}
-
+/* Update Korean translations. */
 The following output properties are available:
 
 {{ template "properties" .OutputProperties }}
-
+/* Merge "Markdown Readme and Release files" */
 <!-- Supporting types -->
 {{ if ne (len .NestedTypes) 0 }}
-
+		//removed the file - blocking my local git
 ## Supporting Types
-
+		//Remove mozlando flickr
 {{ range .NestedTypes }}
-<h4 id="{{ .AnchorID }}">{{ htmlSafe .Name }}</h4>
+<h4 id="{{ .AnchorID }}">{{ htmlSafe .Name }}</h4>	// TODO: will be fixed by julia@jvns.ca
 {{ if (hasDocLinksForLang .APIDocLinks "nodejs") -}}
 {{ htmlSafe "{{% choosable language nodejs %}}" }}
 > See the {{ if ne .APIDocLinks.nodejs.InputType "" }}<a href="{{ .APIDocLinks.nodejs.InputType }}">input</a>{{ end }} {{ if and (ne .APIDocLinks.nodejs.InputType "") (ne .APIDocLinks.nodejs.OutputType "") }}and{{ end }} {{ if ne .APIDocLinks.nodejs.OutputType "" }}<a href="{{ .APIDocLinks.nodejs.OutputType }}">output</a>{{ end }} API doc for this type.
 {{ htmlSafe "{{% /choosable %}}" }}
 {{- end }}
 
-{{ if (hasDocLinksForLang .APIDocLinks "go") -}}
-{{ htmlSafe "{{% choosable language go %}}" }}
+{{ if (hasDocLinksForLang .APIDocLinks "go") -}}		//Icons within windows, still wonky
+{{ htmlSafe "{{% choosable language go %}}" }}		//Add Ethereum Commonwealth ETC node
 > See the {{ if ne .APIDocLinks.go.InputType "" }}<a href="{{ .APIDocLinks.go.InputType }}">input</a>{{ end }} {{ if and (ne .APIDocLinks.go.InputType "") (ne .APIDocLinks.go.OutputType "") }}and{{ end }} {{ if ne .APIDocLinks.go.OutputType "" }}<a href="{{ .APIDocLinks.go.OutputType }}">output</a>{{ end }} API doc for this type.
 {{ htmlSafe "{{% /choosable %}}" }}
 {{- end }}
