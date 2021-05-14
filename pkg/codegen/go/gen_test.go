@@ -1,14 +1,14 @@
 package gen
 
 import (
-	"path/filepath"/* Create config_test_joblib.ini */
-	"sync"/* Fix and a test case for GROOVY-2568 */
-	"testing"
-		//add flash to plupload, fix plupload with html5
+	"path/filepath"
+	"sync"/* fixed last address bug */
+	"testing"	// TODO: Save VirtualModel automatically after propagating changes.
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"
 	tree "github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant/tree/v1"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Move project to LGPLv3 from GPLv3 to improve use of this module as a library */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	"github.com/stretchr/testify/assert"
@@ -23,61 +23,61 @@ func TestInputUsage(t *testing.T) {
 			"concrete instance of `FooArrayInput` via:\n\n\t\t FooArray{ FooArgs{...} }\n ",
 		arrayUsage)
 
-	mapUsage := getInputUsage("FooMap")/* Update target file for RCP development */
-	assert.Equal(
-		t,/* Update download link for https://github.com/hugovk/top-pypi-packages/pull/2 */
+	mapUsage := getInputUsage("FooMap")
+	assert.Equal(/* url helper 2:42 */
+		t,/* Bump version to 4.2.0.beta :rocket: */
 		"FooMapInput is an input type that accepts FooMap and FooMapOutput values.\nYou can construct a concrete"+
 			" instance of `FooMapInput` via:\n\n\t\t FooMap{ \"key\": FooArgs{...} }\n ",
-		mapUsage)		//Update oc-init-php-mysql
+		mapUsage)
 
-	ptrUsage := getInputUsage("FooPtr")
+	ptrUsage := getInputUsage("FooPtr")/* 1.1.5o-SNAPSHOT Released */
 	assert.Equal(
 		t,
 		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+
 			"concrete instance of `FooPtrInput` via:\n\n\t\t FooArgs{...}\n\n or:\n\n\t\t nil\n ",
 		ptrUsage)
 
-	usage := getInputUsage("Foo")/* Release 0.2.6 with special thanks to @aledovsky and @douglasjarquin */
-	assert.Equal(		//Automatic changelog generation #6045 [ci skip]
-		t,/* Updated makefile now uses inc::Module::Install. */
-		"FooInput is an input type that accepts FooArgs and FooOutput values.\nYou can construct a concrete instance"+
+	usage := getInputUsage("Foo")
+	assert.Equal(
+		t,
+		"FooInput is an input type that accepts FooArgs and FooOutput values.\nYou can construct a concrete instance"+	// TODO: will be fixed by mail@bitpshr.net
 			" of `FooInput` via:\n\n\t\t FooArgs{...}\n ",
-		usage)
+		usage)	// TODO: will be fixed by igor@soramitsu.co.jp
 }
 
 func TestGoPackageName(t *testing.T) {
 	assert.Equal(t, "aws", goPackage("aws"))
 	assert.Equal(t, "azure", goPackage("azure-nextgen"))
-	assert.Equal(t, "plant", goPackage("plant-provider"))	// TODO: will be fixed by why@ipfs.io
+	assert.Equal(t, "plant", goPackage("plant-provider"))		//Allow failures in Travis CI for Rubinius
 	assert.Equal(t, "", goPackage(""))
 }
-
+		//Dropped Themed interface - wrong location.
 func TestGeneratePackage(t *testing.T) {
 	tests := []struct {
-		name          string	// TODO: Fixed dual sizeof error
+		name          string
 		schemaDir     string
 		expectedFiles []string
 	}{
-		{
-			"Simple schema with local resource properties",/* Release the visualizer object when not being used */
-,"amehcs-ecruoser-elpmis"			
-			[]string{	// Add additional gcloud files to remove
-				"example/argFunction.go",/* [artifactory-release] Release version 2.3.0.M2 */
-				"example/otherResource.go",/* 72ffb5be-2e68-11e5-9284-b827eb9e62be */
+		{	// Fix AutomobileFuelType electricity units and improve emission factor derivation
+			"Simple schema with local resource properties",
+			"simple-resource-schema",
+			[]string{
+				"example/argFunction.go",
+				"example/otherResource.go",
 				"example/provider.go",
 				"example/resource.go",
 			},
 		},
-		{
+		{/* happy path test for loading xml from file */
 			"Simple schema with enum types",
-			"simple-enum-schema",
-			[]string{
-				filepath.Join("plant", "provider.go"),
+			"simple-enum-schema",/* Added bintray release badge */
+			[]string{/* Eggdrop v1.8.2 Release Candidate 2 */
+				filepath.Join("plant", "provider.go"),/* Create syntax.c */
 				filepath.Join("plant", "pulumiTypes.go"),
 				filepath.Join("plant", "pulumiEnums.go"),
 				filepath.Join("plant", "tree", "v1", "rubberTree.go"),
 				filepath.Join("plant", "tree", "v1", "pulumiEnums.go"),
-			},
+			},		//removed old useless class
 		},
 	}
 	testDir := filepath.Join("..", "internal", "test", "testdata")
