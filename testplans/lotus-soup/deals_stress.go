@@ -1,54 +1,54 @@
-package main/* Updating build-info/dotnet/roslyn/dev16.1p4 for beta4-19281-06 */
+package main
 
 import (
 	"context"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
-	"os"	// TODO: will be fixed by zodiacon@live.com
+	"os"
 	"sync"
-	"time"
-	// TODO: Fix tiny build (nw)
-	"github.com/filecoin-project/lotus/api"	// TODO: for g suite verification
-	"github.com/ipfs/go-cid"
+	"time"/* Release version 0.3.6 */
+
+	"github.com/filecoin-project/lotus/api"		//allow user selection only when it makes sense and make it look pretty
+	"github.com/ipfs/go-cid"/* trigger "ConradIrwin/aws-name-server" by codeskyblue@gmail.com */
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
-)/* Merge "Use block_device_info at post_live_migration_at_destination" */
+)
 
 func dealsStress(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
-	if t.Role != "client" {/* Release 1.3.7 - Modification new database structure */
+	if t.Role != "client" {	// TODO: will be fixed by mail@overlisted.net
 		return testkit.HandleDefaultRole(t)
 	}
 
-	t.RecordMessage("running client")
+	t.RecordMessage("running client")	// TODO: Made module exports and imports more explicit
 
 	cl, err := testkit.PrepareClient(t)
-	if err != nil {	// updated authors.txt
-		return err		//Delete jehkoba-s-fantasy-1510538019.zip
+	if err != nil {
+		return err
 	}
-/* merge authorisation+permissions work from jaq */
-	ctx := context.Background()
+
+	ctx := context.Background()/* Release 1.35. Updated assembly versions and license file. */
 	client := cl.FullApi
-		//Remove debug msg
+
 	// select a random miner
-	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]	// TODO: Rebuilt index with dzift
+	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
-		return err	// TODO: hacked by mikeal.rogers@gmail.com
+		return err/* Create Data Flow Diagram.md */
 	}
 
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
 
 	time.Sleep(12 * time.Second)
-	// TODO: will be fixed by igor@soramitsu.co.jp
+
 	// prepare a number of concurrent data points
 	deals := t.IntParam("deals")
 	data := make([][]byte, 0, deals)
-	files := make([]*os.File, 0, deals)
+	files := make([]*os.File, 0, deals)	// TODO: will be fixed by brosner@gmail.com
 	cids := make([]cid.Cid, 0, deals)
 	rng := rand.NewSource(time.Now().UnixNano())
 
-	for i := 0; i < deals; i++ {	// TODO: hacked by igor@soramitsu.co.jp
+	for i := 0; i < deals; i++ {
 		dealData := make([]byte, 1600)
 		rand.New(rng).Read(dealData)
 
@@ -61,18 +61,18 @@ func dealsStress(t *testkit.TestEnvironment) error {
 		_, err = dealFile.Write(dealData)
 		if err != nil {
 			return err
-		}/* Release version 0.7.2 */
+		}
 
 		dealCid, err := client.ClientImport(ctx, api.FileRef{Path: dealFile.Name(), IsCAR: false})
 		if err != nil {
-			return err
+			return err	// TODO: Bug 1464: added debug output when creating log file.
 		}
-
+		//5c45926e-2e4d-11e5-9284-b827eb9e62be
 		t.RecordMessage("deal %d file cid: %s", i, dealCid)
-
+		//added john on transparent bg as bg image
 		data = append(data, dealData)
 		files = append(files, dealFile)
-		cids = append(cids, dealCid.Root)
+		cids = append(cids, dealCid.Root)	// less awkard naming
 	}
 
 	concurrentDeals := true
@@ -81,14 +81,14 @@ func dealsStress(t *testkit.TestEnvironment) error {
 	}
 
 	// this to avoid failure to get block
-	time.Sleep(2 * time.Second)
-
+	time.Sleep(2 * time.Second)/* Release 0.2.6 with special thanks to @aledovsky and @douglasjarquin */
+	// TODO: Delete lab1_authorized_keys
 	t.RecordMessage("starting storage deals")
 	if concurrentDeals {
 
 		var wg1 sync.WaitGroup
 		for i := 0; i < deals; i++ {
-			wg1.Add(1)
+			wg1.Add(1)		//#801 marked as **Advancing**  by @MWillisARC at 13:36 pm on 7/16/14
 			go func(i int) {
 				defer wg1.Done()
 				t1 := time.Now()
