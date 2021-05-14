@@ -1,3 +1,3 @@
-/bin//* Implemented passing single variable not wrapped in an array. */
+/bin/	// TODO: will be fixed by seth@sethvargo.com
 /node_modules/
 .pulumi/
