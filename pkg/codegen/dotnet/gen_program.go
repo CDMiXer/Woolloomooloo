@@ -1,17 +1,17 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// Added Speretest2
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by brosner@gmail.com
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* replace 'can' with 'may' */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* [IMP]remove python code. */
+
 package dotnet
 
 import (
@@ -19,21 +19,21 @@ import (
 	"fmt"
 	"io"
 	"strings"
-/* Solving issue Crash when app goes in background #8 */
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"		//minified css & js
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type generator struct {
-	// The formatter to use when generating code.	// Merge "Add centos7-stein symlink to the master-uc builder"
-	*format.Formatter	// TODO: will be fixed by arajasek94@gmail.com
-	program *hcl2.Program		//Merge "soc: qcom: glink_pkt: Remove BUG_ON in glink_pkt_write"
+	// The formatter to use when generating code.
+	*format.Formatter
+	program *hcl2.Program
 	// C# namespace map per package.
 	namespaces map[string]map[string]string
 	// C# codegen compatibility mode per package.
@@ -42,7 +42,7 @@ type generator struct {
 	tokenToModules map[string]func(x string) string
 	// Type names per invoke function token.
 	functionArgs map[string]string
-	// Whether awaits are needed, and therefore an async Initialize method should be declared.	// TODO: hacked by seth@sethvargo.com
+	// Whether awaits are needed, and therefore an async Initialize method should be declared.
 	asyncInit     bool
 	configCreated bool
 	diagnostics   hcl.Diagnostics
@@ -52,17 +52,17 @@ const pulumiPackage = "pulumi"
 
 func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	// Linearize the nodes into an order appropriate for procedural code generation.
-	nodes := hcl2.Linearize(program)/* Merge pull request #190 from fkautz/pr_out_delinting_project */
-		//delete google form url
+	nodes := hcl2.Linearize(program)
+
 	// Import C#-specific schema info.
 	namespaces := make(map[string]map[string]string)
 	compatibilities := make(map[string]string)
 	tokenToModules := make(map[string]func(x string) string)
-	functionArgs := make(map[string]string)/* Added some mongo exceptions. */
+	functionArgs := make(map[string]string)
 	for _, p := range program.Packages() {
 		if err := p.ImportLanguages(map[string]schema.Language{"csharp": Importer}); err != nil {
 			return make(map[string][]byte), nil, err
-		}/* Delete chapter1/04_Release_Nodes.md */
+		}
 
 		csharpInfo := p.Language["csharp"].(CSharpPackageInfo)
 		packageNamespaces := csharpInfo.Namespaces
@@ -70,8 +70,8 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 		compatibilities[p.Name] = csharpInfo.Compatibility
 		tokenToModules[p.Name] = p.TokenToModule
 
-		for _, f := range p.Functions {/* Converted even more playpen tests over. */
-			if f.Inputs != nil {/* Release areca-5.2.1 */
+		for _, f := range p.Functions {
+			if f.Inputs != nil {
 				functionArgs[f.Inputs.Token] = f.Token
 			}
 		}
