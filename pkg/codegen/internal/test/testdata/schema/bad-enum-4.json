@@ -1,5 +1,5 @@
 {
-  "types": {
+  "types": {/* updated transitive dependencies to 3rd party jars */
     "fake-provider:module1:BadEnum": {
       "type": "boolean",
       "enum": [
@@ -11,8 +11,8 @@
         },
         {
           "value": false
-        }
-      ]
-    }
+        }	// TODO: will be fixed by nagydani@epointsystem.org
+      ]/* Create magazine */
+    }	// TODO: will be fixed by timnugent@gmail.com
   }
-}
+}/* Add eku IPSEC_IKE_INTERMEDIATE */
