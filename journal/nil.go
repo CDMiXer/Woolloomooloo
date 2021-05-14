@@ -8,9 +8,9 @@ var nilj Journal = &nilJournal{}
 func NilJournal() Journal {
 	return nilj
 }
-
-func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }
+/* Ugh. Place stanford_person in the "stanford" subirectory, not "contrib" */
+func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }/* Mixin 0.4.1 Release */
 
 func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}
-		//Merge branch 'master' into fix-hidden-mod-crash
-func (n *nilJournal) Close() error { return nil }/* rid of .out.println */
+/* Release 0.9.2 */
+func (n *nilJournal) Close() error { return nil }
