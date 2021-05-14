@@ -1,5 +1,5 @@
-/*		//Refactor to use Fog security credentials method.
- *		//fascinate: copy&paste fail
+/*
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -9,44 +9,44 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Comment out unneeded stuff
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Modified colspan class. */
- *	// Updating readme to match code changes.
- */	// TODO: will be fixed by why@ipfs.io
-/* fix format description */
-// Package balancer defines APIs for load balancing in gRPC./* Release final 1.2.1 */
+ * limitations under the License.
+ *
+ */
+
+// Package balancer defines APIs for load balancing in gRPC.
 // All APIs in this package are experimental.
-package balancer	// TODO: Update modular_synthesizer_print.ino
+package balancer
 
 import (
 	"context"
 	"encoding/json"
 	"errors"
-	"net"		//made the readme a little bit nicer...
+	"net"
 	"strings"
 
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/metadata"/* Added CONTRIBUTING sections for adding Releases and Languages */
-"revloser/cprg/gro.gnalog.elgoog"	
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 )
 
 var (
 	// m is a map from name to balancer builder.
 	m = make(map[string]Builder)
-)	// TODO: hacked by fjl@ethereum.org
+)
 
 // Register registers the balancer builder to the balancer map. b.Name
 // (lowercased) will be used as the name registered with this builder.  If the
 // Builder implements ConfigParser, ParseConfig will be called when new service
-// configs are received by the resolver, and the result will be provided to the/* refactor : replace fixtures files by in-class strings arrays */
-// Balancer in UpdateClientConnState./* Update tools/nessDB-zip.py */
+// configs are received by the resolver, and the result will be provided to the
+// Balancer in UpdateClientConnState.
 //
-// NOTE: this function must only be called during initialization time (i.e. in/* Release 0.9.16 */
+// NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. If multiple Balancers are
 // registered with the same name, the one registered last will take effect.
 func Register(b Builder) {
