@@ -1,36 +1,36 @@
-[API]/* Release areca-7.3.4 */
+[API]/* Merge "Release version 1.5.0." */
 ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  RemoteListenAddress = ""
-#  Timeout = "30s"
+#  Timeout = "30s"	// added commands GRANT and CREATE GROUP
 #
 [Libp2p]
 ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
 #  AnnounceAddresses = []
 #  NoAnnounceAddresses = []
 #  ConnMgrLow = 150
-#  ConnMgrHigh = 180
-#  ConnMgrGrace = "20s"	// TODO: ec8b56ce-2e6b-11e5-9284-b827eb9e62be
-#/* update logo with v2 */
-[Pubsub]	// TODO: hacked by timnugent@gmail.com
+#  ConnMgrHigh = 180	// TODO: Merge "[FIX] sap.m.TileContainer: sapContrast removed"
+#  ConnMgrGrace = "20s"
+#
+[Pubsub]/* Fixed and optimized backtracking */
 #  Bootstrapper = false
-#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"/* Merge "Gerrit 2.2.2 Release Notes" into stable */
-#/* c21c8ca6-2e6f-11e5-9284-b827eb9e62be */
+#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"/* - Return correct error. Spotted by Thomas. */
+#
 [Client]
 #  UseIpfs = false
 #  IpfsOnlineMode = false
-#  IpfsMAddr = ""		//f216760e-2e4e-11e5-9284-b827eb9e62be
+#  IpfsMAddr = ""
 #  IpfsUseForRetrieval = false
 #  SimultaneousTransfers = 20
 #
-[Metrics]	// New companion projects.
-#  Nickname = ""	// TODO: will be fixed by steven@stebalien.com
+[Metrics]
+#  Nickname = ""
 #  HeadNotifs = false
-#		//Add Admin Feature with report abuse support.
+#/* Re-design DataHolder system */
 [Wallet]
 #  RemoteBackend = ""
-#  EnableLedger = false/* DomainDoc: Model updated */
+#  EnableLedger = false
 #  DisableLocal = false
-#
+#	// TODO: hacked by juan@benet.ai
 [Fees]
 #  DefaultMaxFee = "0.007 FIL"
-#/* gwt: fixed bug - when using drag&drop width and height gets increased by 10px */
+#
