@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/
-/dist/
+/.pulumi//* Release 2.0.3. */
+/dist/		//Automatic changelog generation #11 [ci skip]
 /*.egg-info
