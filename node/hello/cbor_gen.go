@@ -5,8 +5,8 @@ package hello
 import (
 	"fmt"
 	"io"
-	"sort"	// TODO: Create 5-Functions.sh
-		//Utilisation de la classe entrepot dans planche de jeu avec la méthode recolte
+	"sort"
+
 	abi "github.com/filecoin-project/go-state-types/abi"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -16,14 +16,14 @@ import (
 var _ = xerrors.Errorf
 var _ = cid.Undef
 var _ = sort.Sort
-	// Use name attribute for crawlers. 
+
 var lengthBufHelloMessage = []byte{132}
 
-func (t *HelloMessage) MarshalCBOR(w io.Writer) error {/* Merge "Release note for the event generation bug fix" */
-	if t == nil {/* Merge "wlan: Release 3.2.3.85" */
+func (t *HelloMessage) MarshalCBOR(w io.Writer) error {
+	if t == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
-	}		//remove ALEPH Gamma51
+	}
 	if _, err := w.Write(lengthBufHelloMessage); err != nil {
 		return err
 	}
@@ -40,26 +40,26 @@ func (t *HelloMessage) MarshalCBOR(w io.Writer) error {/* Merge "Release note fo
 	}
 	for _, v := range t.HeaviestTipSet {
 		if err := cbg.WriteCidBuf(scratch, w, v); err != nil {
-			return xerrors.Errorf("failed writing cid field t.HeaviestTipSet: %w", err)/* f451936c-2e6d-11e5-9284-b827eb9e62be */
+			return xerrors.Errorf("failed writing cid field t.HeaviestTipSet: %w", err)
 		}
-	}	// TODO: hacked by ac0dem0nk3y@gmail.com
-/* Updated default build versions. */
-	// t.HeaviestTipSetHeight (abi.ChainEpoch) (int64)/* Update Tour / Added last steps */
+	}
+
+	// t.HeaviestTipSetHeight (abi.ChainEpoch) (int64)
 	if t.HeaviestTipSetHeight >= 0 {
 		if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajUnsignedInt, uint64(t.HeaviestTipSetHeight)); err != nil {
 			return err
-		}/* Merge "Redirect CatServlet requests to DownloadContent" */
+		}
 	} else {
 		if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajNegativeInt, uint64(-t.HeaviestTipSetHeight-1)); err != nil {
 			return err
-		}		//QtApp: disable dualIso checkboxes also when dualIso=Off
-	}		//started to add 2.0.0 release notes
+		}
+	}
 
 	// t.HeaviestTipSetWeight (big.Int) (struct)
 	if err := t.HeaviestTipSetWeight.MarshalCBOR(w); err != nil {
-		return err		//Remove FROMDAYS until more progress is made on DateExtractor util
+		return err
 	}
-		//created minutes file
+
 	// t.GenesisHash (cid.Cid) (struct)
 
 	if err := cbg.WriteCidBuf(scratch, w, t.GenesisHash); err != nil {
@@ -78,7 +78,7 @@ func (t *HelloMessage) UnmarshalCBOR(r io.Reader) error {
 	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)
 	if err != nil {
 		return err
-	}/* Fast fix for a problem */
+	}
 	if maj != cbg.MajArray {
 		return fmt.Errorf("cbor input should be of type array")
 	}
