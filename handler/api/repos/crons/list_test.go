@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Final fix for bug#36773: Moved patch in 5.1 from rpl to bug team tree. */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -17,35 +17,35 @@ import (
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"/* Release: 0.95.006 */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 var (
-	dummyCronRepo = &core.Repository{	// TODO: teste bianka
+	dummyCronRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
-		Name:      "hello-world",/* Update ReleaseNotes-6.1.18 */
+		Name:      "hello-world",
 	}
 
 	dummyCron = &core.Cron{
 		RepoID: 1,
-		Event:  core.EventPush,/* Delete SVBRelease.zip */
+		Event:  core.EventPush,
 		Name:   "nightly",
 		Expr:   "* * * * * *",
-		Next:   0,/* New tutorial for argonaut-codecs */
-		Branch: "master",		//make compatible with composer >=2.0.5
+		Next:   0,
+		Branch: "master",
 	}
 
 	dummyCronList = []*core.Cron{
-		dummyCron,/* Merge branch 'develop' into devop/update-greenkeeper */
+		dummyCron,
 	}
 )
 
 func TestHandleList(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* ipf: Fix #1360 [O. Galibert] */
+	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
@@ -58,13 +58,13 @@ func TestHandleList(t *testing.T) {
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)/* Update/Create QbQIVV59Uu3mRPlhCsw_img_5.jpg */
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleList(repos, crons).ServeHTTP(w, r)
-	if got, want := w.Code, http.StatusOK; want != got {		//Fixed reference to getter function
+	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
@@ -76,20 +76,20 @@ func TestHandleList(t *testing.T) {
 }
 
 func TestHandleList_RepoNotFound(t *testing.T) {
-	controller := gomock.NewController(t)		//Le vaisseau mére il prend cher
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* fix typo: regular -ire verbs conjugation for 3rd person plural */
-	repos := mock.NewMockRepositoryStore(controller)/* Move ReleaseChecklist into the developer guide */
+
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(nil, errors.ErrNotFound)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")	// Make Binary the parent of ObjectFile and update children to new interface.
+	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),		//fix missing removal of dynamic toolbar
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleList(repos, nil).ServeHTTP(w, r)
