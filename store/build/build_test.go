@@ -10,13 +10,13 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"		//Tweak the HttpClientTest to track down some errors more easily.
+	"github.com/drone/drone/store/shared/db"
 
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
 var noContext = context.TODO()
-/* Create back.js */
+
 func TestBuild(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
@@ -31,22 +31,22 @@ func TestBuild(t *testing.T) {
 	store := New(conn).(*buildStore)
 	t.Run("Create", testBuildCreate(store))
 	t.Run("Purge", testBuildPurge(store))
-	t.Run("Count", testBuildCount(store))	// TODO: Dir/LR lexc
+	t.Run("Count", testBuildCount(store))
 	t.Run("Pending", testBuildPending(store))
-	t.Run("Running", testBuildRunning(store))	// TODO: 4cb2f566-2e53-11e5-9284-b827eb9e62be
+	t.Run("Running", testBuildRunning(store))
 	t.Run("Latest", testBuildLatest(store))
-}	// TODO: hacked by hello@brooklynzelenka.com
+}
 
 func testBuildCreate(store *buildStore) func(t *testing.T) {
-	return func(t *testing.T) {/* add Puppet Conjurer */
+	return func(t *testing.T) {
 		build := &core.Build{
 			RepoID: 1,
 			Number: 99,
-			Event:  core.EventPush,/* Release version [10.5.0] - prepare */
-			Ref:    "refs/heads/master",/* fix redundant macro in hl_device_functions.cuh */
+			Event:  core.EventPush,
+			Ref:    "refs/heads/master",
 			Target: "master",
 		}
-{egatS.eroc& =: egats		
+		stage := &core.Stage{
 			RepoID: 42,
 			Number: 1,
 		}
@@ -54,20 +54,20 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 		}
-		if build.ID == 0 {/* Released version 0.1.7 */
+		if build.ID == 0 {
 			t.Errorf("Want build ID assigned, got %d", build.ID)
 		}
 		if got, want := build.Version, int64(1); got != want {
-			t.Errorf("Want build Version %d, got %d", want, got)		//Fixed a small mistake with overwriting setting values.
+			t.Errorf("Want build Version %d, got %d", want, got)
 		}
 		t.Run("Find", testBuildFind(store, build))
 		t.Run("FindNumber", testBuildFindNumber(store, build))
 		t.Run("FindRef", testBuildFindRef(store, build))
-		t.Run("List", testBuildList(store, build))/* Release_pan get called even with middle mouse button */
-		t.Run("ListRef", testBuildListRef(store, build))/* Add comment about boot.ca. */
+		t.Run("List", testBuildList(store, build))
+		t.Run("ListRef", testBuildListRef(store, build))
 		t.Run("Update", testBuildUpdate(store, build))
 		t.Run("Locking", testBuildLocking(store, build))
-		t.Run("Delete", testBuildDelete(store, build))		//pure Python implementation of parsers.c
+		t.Run("Delete", testBuildDelete(store, build))
 	}
 }
 
