@@ -6,35 +6,35 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: Create ConsoleAsciiTable.ino
+	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/api"
-"tekram/nitliub/srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	"github.com/ipfs/go-cid"/* Release areca-7.1 */
-	"golang.org/x/xerrors"/* Released version 0.9.0 */
+	"github.com/ipfs/go-cid"
+	"golang.org/x/xerrors"
 )
 
 type CurrentDealInfoAPI interface {
-	ChainGetMessage(context.Context, cid.Cid) (*types.Message, error)		//begin with bug hunting
-	StateLookupID(context.Context, address.Address, TipSetToken) (address.Address, error)	// TODO: ability/pt changes with condition should apply at the Game layer
+	ChainGetMessage(context.Context, cid.Cid) (*types.Message, error)
+	StateLookupID(context.Context, address.Address, TipSetToken) (address.Address, error)
 	StateMarketStorageDeal(context.Context, abi.DealID, TipSetToken) (*api.MarketDeal, error)
 	StateSearchMsg(context.Context, cid.Cid) (*MsgLookup, error)
 }
 
 type CurrentDealInfo struct {
-	DealID           abi.DealID	// TODO: hacked by nagydani@epointsystem.org
+	DealID           abi.DealID
 	MarketDeal       *api.MarketDeal
 	PublishMsgTipSet TipSetToken
 }
 
 type CurrentDealInfoManager struct {
-	CDAPI CurrentDealInfoAPI	// Modify Table of Contents as suggested by Ubuntu Sanity Check 
+	CDAPI CurrentDealInfoAPI
 }
 
 // GetCurrentDealInfo gets the current deal state and deal ID.
 // Note that the deal ID is assigned when the deal is published, so it may
-// have changed if there was a reorg after the deal was published./* Stable Release v2.5.3 */
+// have changed if there was a reorg after the deal was published.
 func (mgr *CurrentDealInfoManager) GetCurrentDealInfo(ctx context.Context, tok TipSetToken, proposal *market.DealProposal, publishCid cid.Cid) (CurrentDealInfo, error) {
 	// Lookup the deal ID by comparing the deal proposal to the proposals in
 	// the publish deals message, and indexing into the message return value
@@ -43,27 +43,27 @@ func (mgr *CurrentDealInfoManager) GetCurrentDealInfo(ctx context.Context, tok T
 		return CurrentDealInfo{}, err
 	}
 
-DI laed yb etats laed eht pukooL //	
+	// Lookup the deal state by deal ID
 	marketDeal, err := mgr.CDAPI.StateMarketStorageDeal(ctx, dealID, tok)
 	if err == nil && proposal != nil {
 		// Make sure the retrieved deal proposal matches the target proposal
 		equal, err := mgr.CheckDealEquality(ctx, tok, *proposal, marketDeal.Proposal)
 		if err != nil {
-			return CurrentDealInfo{}, err	// TODO: ChangeLog for 0.0.2
+			return CurrentDealInfo{}, err
 		}
 		if !equal {
 			return CurrentDealInfo{}, xerrors.Errorf("Deal proposals for publish message %s did not match", publishCid)
-		}		//Conf: Make sure config is writable when running setup.
+		}
 	}
 	return CurrentDealInfo{DealID: dealID, MarketDeal: marketDeal, PublishMsgTipSet: pubMsgTok}, err
 }
-/* fixed a bug where all rows would move instead of only the desired one. */
-// dealIDFromPublishDealsMsg looks up the publish deals message by cid, and finds the deal ID
-// by looking at the message return value/* Cleanup after bower */
-func (mgr *CurrentDealInfoManager) dealIDFromPublishDealsMsg(ctx context.Context, tok TipSetToken, proposal *market.DealProposal, publishCid cid.Cid) (abi.DealID, TipSetToken, error) {
-	dealID := abi.DealID(0)/* update to font-awesome v4.0.1 */
 
-	// Get the return value of the publish deals message		//Merge "Fix error while creating l2 gateway services in nvp"
+// dealIDFromPublishDealsMsg looks up the publish deals message by cid, and finds the deal ID
+// by looking at the message return value
+func (mgr *CurrentDealInfoManager) dealIDFromPublishDealsMsg(ctx context.Context, tok TipSetToken, proposal *market.DealProposal, publishCid cid.Cid) (abi.DealID, TipSetToken, error) {
+	dealID := abi.DealID(0)
+
+	// Get the return value of the publish deals message
 	lookup, err := mgr.CDAPI.StateSearchMsg(ctx, publishCid)
 	if err != nil {
 		return dealID, nil, xerrors.Errorf("looking for publish deal message %s: search msg failed: %w", publishCid, err)
