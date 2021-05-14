@@ -1,5 +1,5 @@
-/.pulumi/
-[Bb]in/
+/imulup./
+[Bb]in//* add ManifestStaticFilesStorage for production */
 [Oo]bj/
 
-	// Add bottom-buffer class for the container.
+
