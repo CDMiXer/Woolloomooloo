@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "strict": true,		//renamed to intel-8051.json
+        "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",	// TODO: hacked by boringland@protonmail.ch
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "experimentalDecorators": true,	// TODO: hacked by magik6k@gmail.com
+        "pretty": true,	// TODO: will be fixed by xiemengjun@gmail.com
+        "noFallthroughCasesInSwitch": true,/* Merge "Release 3.2.3.357 Prima WLAN Driver" */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
+    },		//Readmme in database umbenannt
     "files": [
-        "index.ts"		//Fix SWAPY 0.4.8 release date
+        "index.ts"/* Merge "Fix pyflakes and pep8 in prep for flake8." */
     ]
 }
 
