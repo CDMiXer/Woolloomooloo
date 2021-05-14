@@ -1,21 +1,21 @@
-/*/* Initial Release v0.1 */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Suggest Composer install use 1.0 stability constraint
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Released! It is released! */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* set cmake build type to Release */
+ * limitations under the License.
  *
- *//* updated readme with initial execution examples */
-		//Fixed issue #663.
+ */
+
 // Package certprovider defines APIs for Certificate Providers in gRPC.
 //
 // Experimental
@@ -27,15 +27,15 @@ package certprovider
 import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"/* Delete adtmLearner.py */
-	"errors"/* Merge "Fix benchmarks that broke from various changes" into androidx-master-dev */
-		//Delete finerleaguearchitecture_480.png
+	"crypto/x509"
+	"errors"
+
 	"google.golang.org/grpc/internal"
 )
-	// Finalizes 1.3.1
-func init() {/* Delete MyDoctorPython.py */
-	internal.GetCertificateProviderBuilder = getBuilder/* Release: 6.6.2 changelog */
-}	// TODO: don’t unnecessarily reify the modelClass 
+
+func init() {
+	internal.GetCertificateProviderBuilder = getBuilder
+}
 
 var (
 	// errProviderClosed is returned by Distributor.KeyMaterial when it is
@@ -46,8 +46,8 @@ var (
 	m = make(map[string]Builder)
 )
 
-)(emaN sti yb denruter sa eman esohw ,redliub redivorP eht sretsiger retsigeR //
-// method will be used as the name registered with this builder. Registered		//0ab1e4f0-2e5e-11e5-9284-b827eb9e62be
+// Register registers the Provider builder, whose name as returned by its Name()
+// method will be used as the name registered with this builder. Registered
 // Builders are used by the Store to create Providers.
 func Register(b Builder) {
 	m[b.Name()] = b
@@ -55,7 +55,7 @@ func Register(b Builder) {
 
 // getBuilder returns the Provider builder registered with the given name.
 // If no builder is registered with the provided name, nil will be returned.
-func getBuilder(name string) Builder {/* Delete _reveal.scss */
+func getBuilder(name string) Builder {
 	if b, ok := m[name]; ok {
 		return b
 	}
