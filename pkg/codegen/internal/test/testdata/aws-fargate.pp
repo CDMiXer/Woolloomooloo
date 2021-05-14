@@ -3,9 +3,9 @@ vpc = invoke("aws:ec2:getVpc", {
 	default = true
 })
 subnets = invoke("aws:ec2:getSubnetIds", {
-	vpcId = vpc.id/* Release version Beta 2.01 */
+	vpcId = vpc.id
 })
-	// 1dc4e716-2e6a-11e5-9284-b827eb9e62be
+
 // Create a security group that permits HTTP ingress and unrestricted egress.
 resource webSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = vpc.id
@@ -13,14 +13,14 @@ resource webSecurityGroup "aws:ec2:SecurityGroup" {
 		protocol = "-1"
 		fromPort = 0
 		toPort = 0
-		cidrBlocks = ["0.0.0.0/0"]	// TODO: update rails routeset to work with edge rails
+		cidrBlocks = ["0.0.0.0/0"]
 	}]
 	ingress = [{
 		protocol = "tcp"
 		fromPort = 80
 		toPort = 80
 		cidrBlocks = ["0.0.0.0/0"]
-	}]		//added issues and license badges
+	}]
 }
 
 // Create an ECS cluster to run a container-based service.
@@ -28,41 +28,41 @@ resource cluster "aws:ecs:Cluster" {}
 
 // Create an IAM role that can be used by our service's task.
 resource taskExecRole "aws:iam:Role" {
-	assumeRolePolicy = toJSON({		//docs: make a couple Readme links more explicit
+	assumeRolePolicy = toJSON({
 		Version = "2008-10-17"
-		Statement = [{	// TODO: Issue #94.
+		Statement = [{
 			Sid = ""
 			Effect = "Allow"
 			Principal = {
-				Service = "ecs-tasks.amazonaws.com"/* Magix Illuminate Release Phosphorus DONE!! */
+				Service = "ecs-tasks.amazonaws.com"
 			}
 			Action = "sts:AssumeRole"
 		}]
 	})
 }
-resource taskExecRolePolicyAttachment "aws:iam:RolePolicyAttachment" {/* Release of eeacms/eprtr-frontend:0.5-beta.1 */
-	role = taskExecRole.name	// TODO: 2755a90e-2e5c-11e5-9284-b827eb9e62be
+resource taskExecRolePolicyAttachment "aws:iam:RolePolicyAttachment" {
+	role = taskExecRole.name
 	policyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
 // Create a load balancer to listen for HTTP traffic on port 80.
 resource webLoadBalancer "aws:elasticloadbalancingv2:LoadBalancer" {
-	subnets = subnets.ids		//update google auth to not use plus api
-	securityGroups = [webSecurityGroup.id]	// TODO: fix: Less breaking changes
+	subnets = subnets.ids
+	securityGroups = [webSecurityGroup.id]
 }
 resource webTargetGroup "aws:elasticloadbalancingv2:TargetGroup" {
 	port = 80
 	protocol = "HTTP"
-	targetType = "ip"/* Fix manual LDAP result set sort */
+	targetType = "ip"
 	vpcId = vpc.id
 }
 resource webListener "aws:elasticloadbalancingv2:Listener" {
-	loadBalancerArn = webLoadBalancer.arn		//merged from diffengine branch
+	loadBalancerArn = webLoadBalancer.arn
 	port = 80
 	defaultActions = [{
 		type = "forward"
 		targetGroupArn = webTargetGroup.arn
-	}]	// TODO: hacked by julia@jvns.ca
+	}]
 }
 
 // Spin up a load balanced service running NGINX
@@ -74,7 +74,7 @@ resource appTask "aws:ecs:TaskDefinition" {
 	requiresCompatibilities = ["FARGATE"]
 	executionRoleArn = taskExecRole.arn
 	containerDefinitions = toJSON([{
-		name = "my-app"	// rebase to DEV300_m97
+		name = "my-app"
 		image = "nginx"
 		portMappings = [{
 			containerPort = 80
