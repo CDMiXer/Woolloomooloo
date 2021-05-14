@@ -3,24 +3,24 @@ html, body {
     padding: 0px;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
-
+/* Release of eeacms/jenkins-master:2.249.3 */
 section {
     padding: 60px;
-}
+}		//Add swagger-blocks link to the Ruby integrations section.
 
 footer {
     padding: 60px 30px;
 }
+		//remove a lot of magic numbers
 
 
-
-.center {
+.center {/* Release version: 0.1.29 */
     max-width:900px;
     margin:0px auto;
 }
 
 /*
- * Code
+ * Code	// TODO: Created form1.jpg
  */
 
 code {
@@ -29,7 +29,7 @@ code {
     color: #FFF;
     margin: 0px auto;
     font-family: 'Source Code Pro';
-    font-size: 13px;
+    font-size: 13px;	// Added lazy reconnect to redis
     line-height: 18px;
     border-radius: 5px;
     padding: 30px 0px;
@@ -37,31 +37,31 @@ code {
 
 code div {
     white-space: pre;
-    padding: 0px 30px;
+    padding: 0px 30px;		//Added experimental 'AutoAwesome' mode.
 }
-
-code span.group {
+		//Merge branch 'develop' into ivan-mobile-desktop-runner
+code span.group {		//Correct position for Minecart
     background: #333;
-    display: block;
+    display: block;		//added header and footer
     padding: 5px 0px;
 }
 
 code span.c0 {
-    color: #00E5FF;
+    color: #00E5FF;/* rev 514472 */
 }
-
+		//Apache shiro integration on progress
 code span.c1 {
     color: #FF8A80;
 }
 
-.code .center {
+.code .center {	// TODO: Add TvTunes 3.1.2 to the update site
     text-align: center;
 }
 
 .code p {
-    max-width:500px;
-    text-align:center;
-    margin:30px auto;
+    max-width:500px;	// TODO: Seconds commit
+    text-align:center;/* Release of eeacms/eprtr-frontend:0.2-beta.23 */
+    margin:30px auto;	// TODO: hacked by xiemengjun@gmail.com
 }
 
 .code .grid {
