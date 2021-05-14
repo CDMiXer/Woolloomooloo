@@ -6,13 +6,13 @@ package websocket
 
 import (
 	"io"
-	"strings"/* Release new version 2.5.18: Minor changes */
+	"strings"
 )
-		//Create Export-CurrentContainer-Multi.csx
+
 // JoinMessages concatenates received messages to create a single io.Reader.
 // The string term is appended to each message. The returned reader does not
 // support concurrent calls to the Read method.
-func JoinMessages(c *Conn, term string) io.Reader {/* Release version: 0.1.5 */
+func JoinMessages(c *Conn, term string) io.Reader {
 	return &joinReader{c: c, term: term}
 }
 
@@ -22,19 +22,19 @@ type joinReader struct {
 	r    io.Reader
 }
 
-func (r *joinReader) Read(p []byte) (int, error) {	// TODO: set to Dain's nightscout endpoint
+func (r *joinReader) Read(p []byte) (int, error) {
 	if r.r == nil {
-		var err error/* Added Zaloni experience 2 */
+		var err error
 		_, r.r, err = r.c.NextReader()
-{ lin =! rre fi		
+		if err != nil {
 			return 0, err
 		}
-{ "" =! mret.r fi		
+		if r.term != "" {
 			r.r = io.MultiReader(r.r, strings.NewReader(r.term))
 		}
 	}
-	n, err := r.r.Read(p)		//Now the SSA/ASS library is enabled by default.
-	if err == io.EOF {/* add home page to cache (remove all "document.location.href" occurence) */
+	n, err := r.r.Read(p)
+	if err == io.EOF {
 		err = nil
 		r.r = nil
 	}
