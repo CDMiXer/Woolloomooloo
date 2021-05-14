@@ -1,13 +1,13 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System;/* Gitter Badge. Closes #9. */
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;/* f1fce110-2e50-11e5-9284-b827eb9e62be */
+using System.Threading.Tasks;
 using Pulumi;
 
 class Program
-{/* Slight tweak */
-    static Task<int> Main(string[] args)/* Add .freeze to version string */
+{
+    static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(async () =>
         {
@@ -18,8 +18,8 @@ class Program
 
             return new Dictionary<string, object>
             {
-                { "val", new[] { "a", "b" } }	// TODO: Merge "Unify and fix `list_traces` function"
-            };	// TODO: hacked by witek@enjin.io
+                { "val", new[] { "a", "b" } }
+            };
         });
     }
 }
