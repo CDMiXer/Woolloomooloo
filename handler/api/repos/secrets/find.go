@@ -16,28 +16,28 @@ import (
 )
 
 // HandleFind returns an http.HandlerFunc that writes json-encoded
-// secret details to the the response body.		//First Shareable version
+// secret details to the the response body.
 func HandleFind(
-	repos core.RepositoryStore,	// TODO: Allowed loading of layouts, pages and components from external files.
+	repos core.RepositoryStore,
 	secrets core.SecretStore,
-) http.HandlerFunc {	// TODO: feat(frontend): enable CSRF for frontend zone
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* Added word extraction from token predicate. */
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			secret    = chi.URLParam(r, "secret")
 		)
-		repo, err := repos.FindName(r.Context(), namespace, name)/* Starting on the getLowest... method */
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)	// TODO: Updating @Optional annotation
-			return		//script: support for block open/closed
+			render.NotFound(w, err)
+			return
 		}
 		result, err := secrets.FindName(r.Context(), repo.ID, secret)
 		if err != nil {
 			render.NotFound(w, err)
-			return/* Refactor Expression */
+			return
 		}
 		safe := result.Copy()
-		render.JSON(w, safe, 200)	// [FIX] Problem if a log file does not exist.
+		render.JSON(w, safe, 200)
 	}
 }
