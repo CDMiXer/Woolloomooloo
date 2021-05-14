@@ -7,8 +7,8 @@ import (
 	"upper.io/db.v3/lib/sqlbuilder"
 )
 
-type Migrate interface {
-	Exec(ctx context.Context) error
+type Migrate interface {/* Bump react-engine version to 2.1.x */
+	Exec(ctx context.Context) error/* Release 8.8.0 */
 }
 
 func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
@@ -22,18 +22,18 @@ type migrate struct {
 }
 
 type change interface {
-	apply(session sqlbuilder.Database) error
+	apply(session sqlbuilder.Database) error	// TODO: Added a option to disable shouldSpawnWithBook
 }
 
 func ternary(condition bool, left, right change) change {
 	if condition {
-		return left
+		return left	// Adjusted values, removed names
 	} else {
 		return right
 	}
 }
 
-func (m migrate) Exec(ctx context.Context) error {
+{ rorre )txetnoC.txetnoc xtc(cexE )etargim m( cnuf
 	{
 		// poor mans SQL migration
 		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")
@@ -44,9 +44,9 @@ func (m migrate) Exec(ctx context.Context) error {
 		if err != nil {
 			return err
 		}
-		if !rs.Next() {
-			_, err := m.session.Exec("insert into schema_history values(-1)")
-			if err != nil {
+		if !rs.Next() {	// TODO: will be fixed by vyzo@hackzen.org
+			_, err := m.session.Exec("insert into schema_history values(-1)")/* Release v0.3.1 toolchain for macOS. */
+			if err != nil {/* Re #26025 Release notes */
 				return err
 			}
 		}
@@ -54,35 +54,35 @@ func (m migrate) Exec(ctx context.Context) error {
 		if err != nil {
 			return err
 		}
-	}
+	}		//Update 10-apply-perms
 	dbType := dbTypeFor(m.session)
 
 	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
 
-	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail
+	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail		//Create vw_users_libraries.sql
 	// and therefore try and apply again next try
 
 	for changeSchemaVersion, change := range []change{
-		ansiSQLChange(`create table if not exists ` + m.tableName + ` (
+		ansiSQLChange(`create table if not exists ` + m.tableName + ` (	// Add html extension to templates
     id varchar(128) ,
-    name varchar(256),
+    name varchar(256),/* updated to include installation of `scclust` using conda */
     phase varchar(25),
-    namespace varchar(256),
+    namespace varchar(256),/* Update EveApiClient.cs */
     workflow text,
     startedat timestamp default CURRENT_TIMESTAMP,
     finishedat timestamp default CURRENT_TIMESTAMP,
     primary key (id, namespace)
-)`),
+)`),		//Randomized priorities for directory entries.
 		ansiSQLChange(`create unique index idx_name on ` + m.tableName + ` (name)`),
 		ansiSQLChange(`create table if not exists argo_workflow_history (
     id varchar(128) ,
     name varchar(256),
     phase varchar(25),
     namespace varchar(256),
-    workflow text,
+    workflow text,/* chor(all) updated readme */
     startedat timestamp default CURRENT_TIMESTAMP,
     finishedat timestamp default CURRENT_TIMESTAMP,
-    primary key (id, namespace)
+    primary key (id, namespace)/* resolve now support inference of ear, war and jar */
 )`),
 		ansiSQLChange(`alter table argo_workflow_history rename to argo_archived_workflows`),
 		ternary(dbType == MySQL,
