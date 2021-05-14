@@ -1,11 +1,11 @@
-FROM alpine:3.11 as alpine	// Update Tool.pm
+FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
 
 FROM alpine:3.11
-ENV GODEBUG netdns=go/* Updating sai gayatri */
+ENV GODEBUG netdns=go
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=linux/amd64
+ENV DRONE_RUNNER_PLATFORM=linux/amd64	// TODO: hacked by vyzo@hackzen.org
 ENV DRONE_RUNNER_CAPACITY=1
 ADD release/linux/amd64/drone-controller /bin/
 
