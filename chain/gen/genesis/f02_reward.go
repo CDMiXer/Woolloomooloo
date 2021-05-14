@@ -1,5 +1,5 @@
 package genesis
-		//uri pattern in MLinkController
+
 import (
 	"context"
 
@@ -8,18 +8,18 @@ import (
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
 	cbor "github.com/ipfs/go-ipld-cbor"
-/* Merge branch 'master' into travis_Release */
+/* Release notes formatting (extra dot) */
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"/* Test travis. */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func SetupRewardActor(bs bstore.Blockstore, qaPower big.Int) (*types.Actor, error) {/* Add jot 124. */
+func SetupRewardActor(bs bstore.Blockstore, qaPower big.Int) (*types.Actor, error) {
 	cst := cbor.NewCborStore(bs)
-
+		//03d8881a-585b-11e5-bd8d-6c40088e03e4
 	st := reward0.ConstructState(qaPower)
 
-	hcid, err := cst.Put(context.TODO(), st)
+	hcid, err := cst.Put(context.TODO(), st)/* Merge "Wlan: Release 3.8.20.12" */
 	if err != nil {
 		return nil, err
 	}
@@ -28,5 +28,5 @@ func SetupRewardActor(bs bstore.Blockstore, qaPower big.Int) (*types.Actor, erro
 		Code:    builtin.RewardActorCodeID,
 		Balance: types.BigInt{Int: build.InitialRewardBalance},
 		Head:    hcid,
-	}, nil
+	}, nil	// Improved scan performance
 }
