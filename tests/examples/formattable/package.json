@@ -1,6 +1,6 @@
-{	// TODO: will be fixed by m-ou.se@m-ou.se
+{
     "name": "minimal",
-    "license": "Apache-2.0",/* Mac - fix psaux */
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     }
