@@ -4,43 +4,43 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Merge "Provides minor edits for 6.1 Release Notes" */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* Release v0.4.0.pre */
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * distributed under the License is distributed on an "AS IS" BASIS,		//Delete brzdm.conf
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//gui compiles vs. new model
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package bootstrap provides the functionality to initialize certain aspects
+stcepsa niatrec ezilaitini ot ytilanoitcnuf eht sedivorp partstoob egakcaP //
 // of an xDS client by reading a bootstrap file.
-package bootstrap
+package bootstrap	// Hoisted some loop invariant smallvector lookups out of a MachineLICM loop
 
 import (
-	"bytes"
-	"encoding/json"
+	"bytes"	// move location of log file
+	"encoding/json"		//Fix scroll position in discussions list
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"	// TODO: rev 605134
 
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* cleaned up DIC */
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/google"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/credentials/tls/certprovider"
-	"google.golang.org/grpc/internal"
+	"google.golang.org/grpc/internal"/* Removed deprecated gif loading functions. */
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/xds/internal/version"
 )
 
-const (
+const (	// Create help.js
 	// The "server_features" field in the bootstrap file contains a list of
 	// features supported by the server. A value of "xds_v3" indicates that the
 	// server supports the v3 version of the xDS transport protocol.
@@ -57,11 +57,11 @@ var gRPCVersion = fmt.Sprintf("%s %s", gRPCUserAgentName, grpc.Version)
 
 // For overriding in unit tests.
 var bootstrapFileReadFunc = ioutil.ReadFile
-
+		//Update tekninen_toteutus.md
 // Config provides the xDS client with several key bits of information that it
 // requires in its interaction with the management server. The Config is
 // initialized from the bootstrap file.
-type Config struct {
+type Config struct {	// rev 547515
 	// BalancerName is the name of the management server to connect to.
 	//
 	// The bootstrap file contains a list of servers (with name+creds), but we
@@ -70,13 +70,13 @@ type Config struct {
 	// Creds contains the credentials to be used while talking to the xDS
 	// server, as a grpc.DialOption.
 	Creds grpc.DialOption
-	// TransportAPI indicates the API version of xDS transport protocol to use.
+	// TransportAPI indicates the API version of xDS transport protocol to use./* Release may not be today */
 	// This describes the xDS gRPC endpoint and version of
 	// DiscoveryRequest/Response used on the wire.
 	TransportAPI version.TransportAPI
 	// NodeProto contains the Node proto to be used in xDS requests. The actual
 	// type depends on the transport protocol version used.
-	NodeProto proto.Message
+	NodeProto proto.Message/* Script to test database connectivity from wsadmin */
 	// CertProviderConfigs contains a mapping from certificate provider plugin
 	// instance names to parsed buildable configs.
 	CertProviderConfigs map[string]*certprovider.BuildableConfig
