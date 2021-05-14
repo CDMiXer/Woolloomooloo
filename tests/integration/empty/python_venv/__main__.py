@@ -4,4 +4,4 @@ def main():
     return None
 
 if __name__ == "__main__":
-    main()		//Store and get connection from channel attrs when possible
+    main()
