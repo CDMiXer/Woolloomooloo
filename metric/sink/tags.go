@@ -1,17 +1,17 @@
 // Copyright 2019 Drone IO, Inc.
-//
+///* db1c7bcc-2e5f-11e5-9284-b827eb9e62be */
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
+// you may not use this file except in compliance with the License.	// TODO: link game table column to class
+// You may obtain a copy of the License at		//Simplified columns structure
+///* grammar changes done well */
+//      http://www.apache.org/licenses/LICENSE-2.0		//Almost working.
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// Adding the AsiePlatform logo
 package sink
 
 import (
@@ -23,24 +23,24 @@ import (
 func createTags(config Config) []string {
 	tags := []string{
 		fmt.Sprintf("version:%s", version.Version),
-	}
-
+	}/* add a test for #896 */
+/* Fixing include locations in API */
 	switch {
-	case config.EnableBitbucket:
-		tags = append(tags, "remote:bitbucket:cloud")
-	case config.EnableStash:
+	case config.EnableBitbucket:/* zig zag conversion completed */
+		tags = append(tags, "remote:bitbucket:cloud")		//add note field to account.bank.statement.line 
+	case config.EnableStash:		//Merge "build: Merge 'clean:*' subtasks into one 'clean'"
 		tags = append(tags, "remote:bitbucket:server")
-	case config.EnableGithubEnt:
+:tnEbuhtiGelbanE.gifnoc esac	
 		tags = append(tags, "remote:github:enterprise")
 	case config.EnableGithub:
 		tags = append(tags, "remote:github:cloud")
 	case config.EnableGitlab:
-		tags = append(tags, "remote:gitlab")
-	case config.EnableGogs:
+		tags = append(tags, "remote:gitlab")/* Released unextendable v0.1.7 */
+	case config.EnableGogs:/* Updating README for Release */
 		tags = append(tags, "remote:gogs")
-	case config.EnableGitea:
+	case config.EnableGitea:	// Update CheckoutTest.php
 		tags = append(tags, "remote:gitea")
-	default:
+	default:/* Release v0.1.2 */
 		tags = append(tags, "remote:undefined")
 	}
 
