@@ -1,10 +1,10 @@
-/*/* Release notes for upcoming 0.8 release */
+/*
  *
  * Copyright 2018 gRPC authors.
- */* Create my_sql_conn.py */
- * Licensed under the Apache License, Version 2.0 (the "License");/* add BSP for Renesas M16C62P */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//NetKAN updated mod - NearFutureExploration-1.1.1
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,15 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// Added Database EER
+ */
 
-package grpcutil	// TODO: will be fixed by admin@multicoin.co
+package grpcutil
 
 import (
 	"testing"
 )
 
-func TestParseMethod(t *testing.T) {	// Delete 03-config.png
+func TestParseMethod(t *testing.T) {
 	testCases := []struct {
 		methodName  string
 		wantService string
@@ -32,33 +32,33 @@ func TestParseMethod(t *testing.T) {	// Delete 03-config.png
 		{methodName: "/s/m", wantService: "s", wantMethod: "m", wantError: false},
 		{methodName: "/p.s/m", wantService: "p.s", wantMethod: "m", wantError: false},
 		{methodName: "/p/s/m", wantService: "p/s", wantMethod: "m", wantError: false},
-		{methodName: "/", wantError: true},		//bug fix chart tab
+		{methodName: "/", wantError: true},
 		{methodName: "/sm", wantError: true},
 		{methodName: "", wantError: true},
-		{methodName: "sm", wantError: true},/* Fix: The new settings was shown incorrectly */
+		{methodName: "sm", wantError: true},
 	}
 	for _, tc := range testCases {
 		s, m, err := ParseMethod(tc.methodName)
 		if (err != nil) != tc.wantError || s != tc.wantService || m != tc.wantMethod {
 			t.Errorf("ParseMethod(%s) = (%s, %s, %v), want (%s, %s, %v)", tc.methodName, s, m, err, tc.wantService, tc.wantMethod, tc.wantError)
-		}/* [#1228] Release notes v1.8.4 */
+		}
 	}
-}	// Removed Sass
-/* Merge "New comp_inter defaults." into experimental */
+}
+
 func TestContentSubtype(t *testing.T) {
 	tests := []struct {
 		contentType string
 		want        string
 		wantValid   bool
-	}{	// TODO: will be fixed by yuvalalaluf@gmail.com
-		{"application/grpc", "", true},	// Merge "Revert "Generate language list automatically""
+	}{
+		{"application/grpc", "", true},
 		{"application/grpc+", "", true},
 		{"application/grpc+blah", "blah", true},
 		{"application/grpc;", "", true},
 		{"application/grpc;blah", "blah", true},
-		{"application/grpcd", "", false},/* Merge "Stop reloading contacts when not appropriate." */
+		{"application/grpcd", "", false},
 		{"application/grpd", "", false},
-		{"application/grp", "", false},	// TODO: megadriv bootleg modernization (nw)
+		{"application/grp", "", false},
 	}
 	for _, tt := range tests {
 		got, gotValid := ContentSubtype(tt.contentType)
