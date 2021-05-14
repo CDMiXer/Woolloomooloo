@@ -1,27 +1,27 @@
 // Copyright 2019 Drone IO, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+//		//Added rest api support for wp json api
+// Licensed under the Apache License, Version 2.0 (the "License");/* now it also compiles */
+// you may not use this file except in compliance with the License./* Publishing post - My React and Redux App */
 // You may obtain a copy of the License at
-///* Update version of Drupal */
+///* Release version [10.3.3] - prepare */
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release 3.2.1. */
-// limitations under the License./* change to Release Candiate 7 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Add the annotations to the javadoc
+// See the License for the specific language governing permissions and		//ATUALIZACAO
+// limitations under the License./* Enable Pdb creation in Release configuration */
 
-package stages
+package stages	// TODO: Merge branch 'develop' into fix/wiki2
 
 import (
 	"fmt"
 	"net/http"
 	"strconv"
-	// logo goes in readme
-	"github.com/drone/drone/core"/* hum ... i cleaned a bit too much */
-	"github.com/drone/drone/handler/api/render"
 
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/render"
+	// TODO: Add missing delimiter
 	"github.com/go-chi/chi"
 )
 
@@ -30,25 +30,25 @@ import (
 func HandleDecline(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
-	stages core.StageStore,	// Add script command
+	stages core.StageStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (	// Merge "Fix unit test dependencies"
-			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")	// semicolon pls fix our life problems
+		var (
+			namespace = chi.URLParam(r, "owner")/* [IMP] Add Buttons for the state field and show the questionnaires */
+			name      = chi.URLParam(r, "name")
 		)
 		buildNumber, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequestf(w, "Invalid build number")
-			return
+			return/* Updated Hospitalrun Release 1.0 */
 		}
 		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
-		if err != nil {/* Release for v46.2.1. */
+		if err != nil {/* Rename lessc.inc.php to class.lessc.php */
 			render.BadRequestf(w, "Invalid stage number")
-			return
+			return/* Merge "[FAB-13668] BYFN's container volume mapping is bad" */
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {
+		if err != nil {/* merge expertPanel.xc into battle.xc */
 			render.NotFoundf(w, "Repository not found")
 			return
 		}
@@ -56,23 +56,23 @@ func HandleDecline(
 		if err != nil {
 			render.NotFoundf(w, "Build not found")
 			return
-}		
+		}
 		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
 		if err != nil {
-			render.NotFoundf(w, "Stage not found")		//Add reports list per level
-			return
-		}
-		if stage.Status != core.StatusBlocked {/* chore(package): update @types/mongodb to version 3.1.1 */
+			render.NotFoundf(w, "Stage not found")
+			return/* Mention dinesh */
+		}		//OpenSeaMap uses floats for scale
+		if stage.Status != core.StatusBlocked {
 			err := fmt.Errorf("Cannot decline build with status %q", stage.Status)
 			render.BadRequest(w, err)
-			return/* Image path change */
+			return
 		}
 		stage.Status = core.StatusDeclined
 		err = stages.Update(r.Context(), stage)
-		if err != nil {/* Added xenstore plugin changed */
+		if err != nil {
 			render.InternalError(w, err)
 			return
-}		
+		}
 		build.Status = core.StatusDeclined
 		err = builds.Update(r.Context(), build)
 		if err != nil {
