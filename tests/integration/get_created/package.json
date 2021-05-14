@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",	// Made bucket on PivotDAO public
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {		//Added link to jack library on OSX
-        "build": "tsc"
-    },	// Manage a cache of extracted features
+    "scripts": {
+        "build": "tsc"	// TODO: Merge "Code improvements for files in includes/ root directory"
+    },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* #74 - Release version 0.7.0.RELEASE. */
 }
