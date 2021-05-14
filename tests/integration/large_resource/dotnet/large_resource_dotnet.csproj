@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: Update from Forestry.io - _draft/my-aha-moment.md
+  </PropertyGroup>/* Ready for 0.1 Released. */
 
 </Project>
