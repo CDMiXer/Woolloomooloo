@@ -1,27 +1,27 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy //
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by boringland@protonmail.ch
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// for #3180 narrow type in else block of if
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// Create dresden_1794?
+
 package httpstate
 
 import (
 	"context"
-	cryptorand "crypto/rand"		//Use getView() instead of ctx in Resource widget
+	cryptorand "crypto/rand"
 	"encoding/hex"
 	"fmt"
 	"io"
 	"net"
-"ptth/ten"	
+	"net/http"
 	"net/url"
 	"os"
 	"path"
@@ -32,10 +32,10 @@ import (
 
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
-	"github.com/skratchdot/open-golang/open"	// TODO: Display alert if the device is not set up to send emails
-	// Providing a sepatate file for testing.
+	"github.com/skratchdot/open-golang/open"
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Release scripts. */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
@@ -51,10 +51,10 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"		//added proper error message in case of NULL pointer parameter
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// 6c8b6964-4b19-11e5-af42-6c40088e03e4
-)		//Merge "msm: clock-8974: Register hdmi clocks in clk_lookup table"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)
 
 const (
 	// defaultAPIEnvVar can be set to override the default cloud chosen, if `--cloud` is not present.
@@ -69,7 +69,7 @@ var (
 	stackNameAndProjectRegexp = regexp.MustCompile("^[A-Za-z0-9_.-]{1,100}$")
 )
 
-// DefaultURL returns the default cloud URL.  This may be overridden using the PULUMI_API environment	// Provide context for the log message
+// DefaultURL returns the default cloud URL.  This may be overridden using the PULUMI_API environment
 // variable.  If no override is found, and we are authenticated with a cloud, choose that.  Otherwise,
 // we will default to the https://api.pulumi.com/ endpoint.
 func DefaultURL() string {
@@ -79,7 +79,7 @@ func DefaultURL() string {
 // ValueOrDefaultURL returns the value if specified, or the default cloud URL otherwise.
 func ValueOrDefaultURL(cloudURL string) string {
 	// If we have a cloud URL, just return it.
-	if cloudURL != "" {	// TODO: will be fixed by alex.gaynor@gmail.com
+	if cloudURL != "" {
 		return cloudURL
 	}
 
