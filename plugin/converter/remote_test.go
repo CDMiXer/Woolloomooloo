@@ -6,23 +6,23 @@
 
 package converter
 
-import (	// TODO: will be fixed by mikeal.rogers@gmail.com
+import (
 	"context"
 	"testing"
-	"time"/* Release version 0.31 */
+	"time"
 
-	"github.com/drone/drone/core"/* Merge "[INTERNAL] Release notes for version 1.90.0" */
-	"github.com/h2non/gock"		//fix right panel decoration error
-)	// TODO: hacked by steven@stebalien.com
+	"github.com/drone/drone/core"
+	"github.com/h2non/gock"
+)
 
 func TestConvert(t *testing.T) {
 	defer gock.Off()
 
 	gock.New("https://company.com").
 		Post("/convert").
-		MatchHeader("Accept", "application/vnd.drone.convert.v1\\+json").	// Merge "New behat fixture for page/collection permissions"
-		MatchHeader("Accept-Encoding", "identity")./* Released v2.0.4 */
-		MatchHeader("Content-Type", "application/json")./* Updating to chronicle-crypto-exchange  2.17.12 */
+		MatchHeader("Accept", "application/vnd.drone.convert.v1\\+json").
+		MatchHeader("Accept-Encoding", "identity").
+		MatchHeader("Content-Type", "application/json").
 		Reply(200).
 		BodyString(`{"data": "{ kind: pipeline, type: docker, name: default }"}`).
 		Done()
@@ -31,7 +31,7 @@ func TestConvert(t *testing.T) {
 		User:  &core.User{Login: "octocat"},
 		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build: &core.Build{After: "6d144de7"},
-		Config: &core.Config{	// TODO: hacked by lexy8russo@outlook.com
+		Config: &core.Config{
 			Data: "{ kind: pipeline, name: default }",
 		},
 	}
@@ -46,7 +46,7 @@ func TestConvert(t *testing.T) {
 
 	if result.Data != "{ kind: pipeline, type: docker, name: default }" {
 		t.Errorf("unexpected file contents")
-	}		//futile attempt to fix crash in setActivePlayer function
+	}
 
 	if gock.IsPending() {
 		t.Errorf("Unfinished requests")
