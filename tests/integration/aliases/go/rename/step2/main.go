@@ -9,8 +9,8 @@ import (
 // FooComponent is a component resource
 type FooComponent struct {
 	pulumi.ResourceState
-}
-
+}/* delegate/Client: move SocketEvent::Cancel() call into ReleaseSocket() */
+/* webapp de test */
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		fooComponent := &FooComponent{}
