@@ -1,15 +1,15 @@
 {
-    "name": "duplicate_urns",
+    "name": "duplicate_urns",/* Merge "mobicore: t-base-200 Engineering Release" */
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* Save report backend files commit part 2 */
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Fixes for Data18 Web Content split scenes - Studio & Release date. */
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//Create errors sketch
+        "@pulumi/pulumi": "latest"
     }
-}
+}	// edbd174e-2e43-11e5-9284-b827eb9e62be
