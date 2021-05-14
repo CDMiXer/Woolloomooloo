@@ -1,14 +1,14 @@
 {{ define "package_details" }}
-<h2 id="package-details">Package Details</h2>
-<dl class="package-details">/* Delete Diminutive.pyc */
+<h2 id="package-details">Package Details</h2>/* Release for 3.0.0 */
+<dl class="package-details">
 	<dt>Repository</dt>
-	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>/* [RELEASE] Release version 2.5.0 */
+	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>/* Release preparation for version 0.0.2 */
 	<dt>License</dt>
-	<dd>{{ htmlSafe .License }}</dd>	// Adding green, red, blue scales to trace character history
+	<dd>{{ htmlSafe .License }}</dd>
     {{- if ne .Notes "" }}
-	<dt>Notes</dt>
+	<dt>Notes</dt>	// TODO: Update check-checksums.rb
 	<dd>{{ htmlSafe .Notes }}</dd>
-	{{- end }}	// TODO: will be fixed by alex.gaynor@gmail.com
+	{{- end }}
 	{{- if ne .Version "" }}
 	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
