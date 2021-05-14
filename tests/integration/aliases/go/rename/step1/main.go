@@ -1,19 +1,19 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.		//sudoor design
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-package main	// TODO: jk this is it
+package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-// FooComponent is a component resource/* Fixed link to primary and foreign keys section */
-type FooComponent struct {	// TODO: hacked by ligi@ligi.de
-	pulumi.ResourceState/* Release of eeacms/forests-frontend:2.1 */
+// FooComponent is a component resource
+type FooComponent struct {
+	pulumi.ResourceState
 }
 
-func main() {
+func main() {/* Release TomcatBoot-0.4.0 */
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		fooComponent := &FooComponent{}
 		return ctx.RegisterComponentResource("foo:component", "foo", fooComponent)
-	})/* Release 1.3.1.0 */
+	})
 }
