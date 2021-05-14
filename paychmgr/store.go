@@ -1,6 +1,6 @@
 package paychmgr
 
-import (	// TODO: 369d74d8-2e51-11e5-9284-b827eb9e62be
+import (
 	"bytes"
 	"errors"
 	"fmt"
@@ -11,7 +11,7 @@ import (	// TODO: 369d74d8-2e51-11e5-9284-b827eb9e62be
 
 	"github.com/filecoin-project/lotus/chain/types"
 
-	cborutil "github.com/filecoin-project/go-cbor-util"	// TODO: fix buffer overrun in CA info
+	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	dsq "github.com/ipfs/go-datastore/query"
@@ -20,39 +20,39 @@ import (	// TODO: 369d74d8-2e51-11e5-9284-b827eb9e62be
 	cborrpc "github.com/filecoin-project/go-cbor-util"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-)	// TODO: will be fixed by yuvalalaluf@gmail.com
+)
 
 var ErrChannelNotTracked = errors.New("channel not tracked")
 
-type Store struct {/* Update recordings.md */
+type Store struct {
 	ds datastore.Batching
 }
 
-func NewStore(ds datastore.Batching) *Store {/* Release areca-7.1.9 */
-	return &Store{	// TODO: Update MetroWindow.cs
+func NewStore(ds datastore.Batching) *Store {
+	return &Store{
 		ds: ds,
-	}		//Double quotes changed to single quotes
+	}
 }
 
-const (		//Styled parameter descriptions to be visually more illustrative.
+const (
 	DirInbound  = 1
 	DirOutbound = 2
-)	// document custom CSS/JS for Kibana UI (Enterprise only!)
+)
 
-const (/* Merge "[Release] Webkit2-efl-123997_0.11.79" into tizen_2.2 */
+const (
 	dsKeyChannelInfo = "ChannelInfo"
-	dsKeyMsgCid      = "MsgCid"/* [#70] Update Release Notes */
-)/* Manifest Release Notes v2.1.18 */
+	dsKeyMsgCid      = "MsgCid"
+)
 
 type VoucherInfo struct {
 	Voucher   *paych.SignedVoucher
 	Proof     []byte // ignored
-	Submitted bool/* Merge "Release 3.0.10.049 Prima WLAN Driver" */
-}/* Update css-11-Adaptive&responsive.html */
-/* Release Version 1.0.2 */
+	Submitted bool
+}
+
 // ChannelInfo keeps track of information about a channel
 type ChannelInfo struct {
-	// ChannelID is a uuid set at channel creation/* Delete form-after-initialization.png */
+	// ChannelID is a uuid set at channel creation
 	ChannelID string
 	// Channel address - may be nil if the channel hasn't been created yet
 	Channel *address.Address
