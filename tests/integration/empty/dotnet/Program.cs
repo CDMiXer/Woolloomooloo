@@ -1,12 +1,12 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System.Threading.Tasks;
-using Pulumi;/* Merge "Wlan: Release 3.8.20.22" */
-/* fixed ans1 parent */
+using Pulumi;
+/* changing config & sca location/alis into a single line */
 class Program
 {
-    static Task<int> Main(string[] args)/* Released Swagger version 2.0.1 */
-    {		//made stricter fmt6 output
+    static Task<int> Main(string[] args)	// TODO: will be fixed by why@ipfs.io
+    {		//Need to call setter
         return Deployment.RunAsync(() => {});
     }
 }
