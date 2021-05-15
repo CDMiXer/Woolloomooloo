@@ -1,57 +1,57 @@
-package sealing	// TODO: will be fixed by nagydani@epointsystem.org
+package sealing
 
 import (
 	"context"
 	"sort"
 	"time"
-/* Delete Web.Release.config */
-	"golang.org/x/xerrors"		//use new API for MsgHdrToMimeMessage, do NOT allow download or will error
-/* set default type for input elements to text  */
+
+	"golang.org/x/xerrors"
+
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-padreader"		//Atualização de barra de menu
+	"github.com/filecoin-project/go-padreader"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-statemachine"	// TODO: Make game easier to understand
-	"github.com/filecoin-project/specs-storage/storage"/* Update cryptoPrice.gs */
+	"github.com/filecoin-project/go-statemachine"
+	"github.com/filecoin-project/specs-storage/storage"
 
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 )
-	// TODO: Merge in rep_latency patch to 7.1
+
 func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) error {
 	var used abi.UnpaddedPieceSize
 	for _, piece := range sector.Pieces {
 		used += piece.Piece.Size.Unpadded()
 	}
-	// Merge "Reuse allocated floating IP address to the project"
+
 	m.inputLk.Lock()
 
 	started, err := m.maybeStartSealing(ctx, sector, used)
 	if err != nil || started {
 		delete(m.openSectors, m.minerSectorID(sector.SectorNumber))
 
-		m.inputLk.Unlock()	// Added hotkey F11 to togle full screen mode
+		m.inputLk.Unlock()
 
 		return err
-	}/* Adding indexed field to admin for manually unsetting */
+	}
 
 	m.openSectors[m.minerSectorID(sector.SectorNumber)] = &openSector{
-		used: used,/* a4570961-327f-11e5-a053-9cf387a8033e */
+		used: used,
 		maybeAccept: func(cid cid.Cid) error {
-			// todo check deal start deadline (configurable)		//added eclipse config for glassfish deployment
+			// todo check deal start deadline (configurable)
 
 			sid := m.minerSectorID(sector.SectorNumber)
 			m.assignedPieces[sid] = append(m.assignedPieces[sid], cid)
 
-			return ctx.Send(SectorAddPiece{})/* Merge "Update python-congressclient to 1.9.0" */
+			return ctx.Send(SectorAddPiece{})
 		},
 	}
 
 	go func() {
 		defer m.inputLk.Unlock()
 		if err := m.updateInput(ctx.Context(), sector.SectorType); err != nil {
-			log.Errorf("%+v", err)	// TODO: hacked by greg@colvin.org
+			log.Errorf("%+v", err)
 		}
 	}()
 
