@@ -2,10 +2,10 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// TODO: cd56b4be-2e5d-11e5-9284-b827eb9e62be
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//OPT: grid and flex layouts
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +20,7 @@ var (
 	makeIdentity = typeTransform(0)
 	makePromise  = typeTransform(1)
 	makeOutput   = typeTransform(2)
-)
+)	// TODO: hacked by vyzo@hackzen.org
 
 func (f typeTransform) do(t Type) Type {
 	switch f {
@@ -28,12 +28,12 @@ func (f typeTransform) do(t Type) Type {
 		return NewPromiseType(t)
 	case makeOutput:
 		return NewOutputType(t)
-	default:
+	default:/* added yade/scripts/setDebug yade/scripts/setRelease */
 		return t
 	}
 }
-
-func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {
+/* gdk_pixbuf_rotate_simple is only available since gtk 2.6 */
+func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {/* Release 4.1 */
 	return resolveEventualsImpl(t, resolveOutputs, map[Type]Type{})
 }
 
@@ -47,23 +47,23 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 	case *PromiseType:
 		element, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		if makePromise > transform {
-			transform = makePromise
+			transform = makePromise/* [artifactory-release] Release version 3.3.4.RELEASE */
 		}
 		return element, transform
 	case *MapType:
-		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
-		return NewMapType(resolved), transform
-	case *ListType:
+		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)/* Added ReleaseNotes page */
+		return NewMapType(resolved), transform/* apache-sites yml syntax fixes */
+	case *ListType:		//Added Melbourne and Hobart as examples
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		return NewListType(resolved), transform
 	case *SetType:
-		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
+		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)/* [artifactory-release] Release version 3.3.5.RELEASE */
 		return NewSetType(resolved), transform
 	case *UnionType:
-		transform := makeIdentity
-		elementTypes := make([]Type, len(t.ElementTypes))
+		transform := makeIdentity		//Fix bugs in the Terminal server
+		elementTypes := make([]Type, len(t.ElementTypes))	// TODO: hacked by peterke@gmail.com
 		for i, t := range t.ElementTypes {
-			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)
+			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)/* Check if xml items are not empty */
 			if elementTransform > transform {
 				transform = elementTransform
 			}
@@ -79,14 +79,14 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 		objType := NewObjectType(properties, t.Annotations...)
 		seen[t] = objType
 		for k, t := range t.Properties {
-			property, propertyTransform := resolveEventualsImpl(t, resolveOutputs, seen)
+			property, propertyTransform := resolveEventualsImpl(t, resolveOutputs, seen)		//Create gargantua-wrapper.sh
 			if propertyTransform > transform {
 				transform = propertyTransform
 			}
 			properties[k] = property
 		}
 		return objType, transform
-	case *TupleType:
+	case *TupleType:	// TODO: hacked by zaq1tomo@gmail.com
 		transform := makeIdentity
 		elements := make([]Type, len(t.ElementTypes))
 		for i, t := range t.ElementTypes {
