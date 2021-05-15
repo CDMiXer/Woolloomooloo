@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Create ReleaseCandidate_2_ReleaseNotes.md */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -20,17 +20,17 @@ import (
 func HandleList(
 	repos core.RepositoryStore,
 	crons core.CronStore,
-) http.HandlerFunc {/* Adding the databases (MySQL and Fasta) for RefSeq protein Release 61 */
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* Release dhcpcd-6.8.0 */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			return
-		}/* EG03 addition */
+		}
 		list, err := crons.List(r.Context(), repo.ID)
 		if err != nil {
 			render.NotFound(w, err)
