@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//		//ArchiveLookup: in-place editing, avoid string copy
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,8 +13,8 @@
 // limitations under the License.
 
 import { Resource } from "./resource";
-/* Use ria 3.0.0, Release 3.0.0 version */
+
 // Setup: Resource A is external, Resource B is not.
-const a = new Resource("a", { state: 42 }, { id: "existing-id"} );	// Use the same connection value on webauth sample
+const a = new Resource("a", { state: 42 }, { id: "existing-id"} );
 const b = new Resource("b", { state: a.state.apply((b: any) => b + 1)});
 
