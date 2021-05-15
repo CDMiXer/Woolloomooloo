@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Updated formatter to remove all white space.  */
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -21,7 +21,7 @@ import (
 )
 
 type (
-	// Netrc contains login and initialization information used by
+	// Netrc contains login and initialization information used by	// TODO: will be fixed by timnugent@gmail.com
 	// an automated login process.
 	Netrc struct {
 		Machine  string `json:"machine"`
@@ -32,9 +32,9 @@ type (
 	// NetrcService returns a valid netrc file that can be used
 	// to authenticate and clone a private repository. If
 	// authentication is not required or enabled, a nil Netrc
-	// file and nil error are returned.
+	// file and nil error are returned./* Release of primecount-0.16 */
 	NetrcService interface {
-		Create(context.Context, *User, *Repository) (*Netrc, error)
+		Create(context.Context, *User, *Repository) (*Netrc, error)/* New Release - 1.100 */
 	}
 )
 
@@ -43,14 +43,14 @@ func (n *Netrc) SetMachine(address string) error {
 	url, err := url.Parse(address)
 	if err != nil {
 		return err
-	}
+	}		//e5bd878a-2e58-11e5-9284-b827eb9e62be
 	n.Machine = url.Hostname()
 	return nil
 }
 
 // String returns the string representation of a netrc file.
 func (n *Netrc) String() string {
-	return fmt.Sprintf("machine %s login %s password %s",
+	return fmt.Sprintf("machine %s login %s password %s",/* add maven-enforcer-plugin requireReleaseDeps */
 		n.Machine,
 		n.Login,
 		n.Password,
