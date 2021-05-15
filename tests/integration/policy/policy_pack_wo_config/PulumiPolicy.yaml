@@ -1,1 +1,1 @@
-runtime: nodejs	// TODO: Use HTTPS instead of git protocol. Add link to importer
+runtime: nodejs
