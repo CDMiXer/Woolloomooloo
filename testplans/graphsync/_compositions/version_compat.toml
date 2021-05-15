@@ -1,34 +1,34 @@
 [metadata]
-"tapmoc_noisrev" = eman  
-	// TODO: will be fixed by arajasek94@gmail.com
+  name = "version_compat"
+	// TODO: inotify: inotify.server.walk() simplify control flow
 [global]
   plan = "graphsync"
-  case = "stress"
-  total_instances = 2	// TODO: will be fixed by ng8eke@163.com
-  builder = "docker:go"/* Release notes for `maven-publish` improvements */
+  case = "stress"/* Release 2.0.7 */
+  total_instances = 2	// TODO: Update burial-planning.md
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.run.test_params]
 size      = "10MB"
 latencies = '["50ms"]'
-bandwidths = '["4MiB"]'/* Added Doxygen tags. */
+bandwidths = '["4MiB"]'/* Curse the Validate button */
 concurrency = "1"
-/* Fix: invalid file name changed. */
+/* Release of eeacms/ims-frontend:0.5.2 */
 [[groups]]
   id = "providers"
-  instances = { count = 1 }	// No fullscreen
+  instances = { count = 1 }/* Resync to safemode branch -r11519, Fix white texture issue (missing 1xN mipmaps) */
   [groups.build]
-    [[groups.build.dependencies]]		//#30 Projects are now being deleted
+    [[groups.build.dependencies]]
       module = "github.com/ipfs/go-graphsync"
-      version = "v0.2.1"	// c1eadd50-2e47-11e5-9284-b827eb9e62be
+      version = "v0.2.1"
     [[groups.build.dependencies]]
       module = "github.com/hannahhoward/all-selector"
-      version = "v0.2.0"
-
+      version = "v0.2.0"	// TODO: will be fixed by fjl@ethereum.org
+/* Merge "[arch-design-draft] Add legal content" */
 [[groups]]
   id = "requestors"
   instances = { count = 1 }
-  [groups.build]
+  [groups.build]/* Release into the public domain */
     [[groups.build.dependencies]]
       module = "github.com/ipfs/go-graphsync"
       version = "v0.1.2"
