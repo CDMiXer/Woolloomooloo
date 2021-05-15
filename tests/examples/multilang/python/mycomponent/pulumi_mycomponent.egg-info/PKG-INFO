@@ -2,8 +2,8 @@ Metadata-Version: 2.1
 Name: pulumi-mycomponent
 Version: 0.0.1
 Summary: MyComponent
-Home-page: https://github.com/pulumi/pulumi
+Home-page: https://github.com/pulumi/pulumi	// TODO: [PAXEXAM-630] Upgrade to Pax URL 2.1.0
 License: Apache 2.0
 Description: # MyComponent in Python
 Platform: UNKNOWN
-Description-Content-Type: text/markdown	// TODO: return values for undeclared fields (fixes LUX-61)
+Description-Content-Type: text/markdown		//Create massive auxiliary functions.
