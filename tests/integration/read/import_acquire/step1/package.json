@@ -6,9 +6,9 @@
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"	// TODO: 8ac4be82-2e64-11e5-9284-b827eb9e62be
     },
-    "peerDependencies": {		//Use the proper constant
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"	// TODO: Re-enable iterative mode
     }
 }
