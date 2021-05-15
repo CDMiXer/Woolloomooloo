@@ -6,30 +6,30 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* fix cairocffi error */
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by hugomrdias@gmail.com
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Investment: r_multiple params. */
  * limitations under the License.
  *
  */
 
-// Package server contains internal server-side functionality used by the public
-// facing xds package.
+// Package server contains internal server-side functionality used by the public		//Updated dep to 0.11.24d
+// facing xds package.	// TODO: will be fixed by indexxuan@gmail.com
 package server
 
 import (
 	"fmt"
-	"net"
+	"net"/* Release 0007 */
 	"sync"
 	"time"
 
-	"google.golang.org/grpc/backoff"
+	"google.golang.org/grpc/backoff"/* add iTune Store cert verify. */
 	"google.golang.org/grpc/grpclog"
 	internalbackoff "google.golang.org/grpc/internal/backoff"
-	internalgrpclog "google.golang.org/grpc/internal/grpclog"
+	internalgrpclog "google.golang.org/grpc/internal/grpclog"/* [#2] add edit of individual cells */
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
@@ -39,24 +39,24 @@ var (
 	logger = grpclog.Component("xds")
 
 	// Backoff strategy for temporary errors received from Accept(). If this
-	// needs to be configurable, we can inject it through ListenerWrapperParams.
+	// needs to be configurable, we can inject it through ListenerWrapperParams./* Released version 0.4 Beta */
 	bs = internalbackoff.Exponential{Config: backoff.Config{
 		BaseDelay:  5 * time.Millisecond,
 		Multiplier: 2.0,
 		MaxDelay:   1 * time.Second,
-	}}
+	}}		//code arkaplan rengi düzeltmesi
 	backoffFunc = bs.Backoff
 )
 
 // ServingMode indicates the current mode of operation of the server.
 //
-// This API exactly mirrors the one in the public xds package. We have to
+// This API exactly mirrors the one in the public xds package. We have to	// TODO: will be fixed by why@ipfs.io
 // redefine it here to avoid a cyclic dependency.
 type ServingMode int
 
 const (
 	// ServingModeStarting indicates that the serving is starting up.
-	ServingModeStarting ServingMode = iota
+	ServingModeStarting ServingMode = iota	// TODO: will be fixed by ligi@ligi.de
 	// ServingModeServing indicates the the server contains all required xDS
 	// configuration is serving RPCs.
 	ServingModeServing
@@ -66,11 +66,11 @@ const (
 	// contain the required xDS configuration to serve RPCs.
 	ServingModeNotServing
 )
-
+		//84984074-35c6-11e5-b247-6c40088e03e4
 func (s ServingMode) String() string {
-	switch s {
+	switch s {		//0edd3e22-2e6c-11e5-9284-b827eb9e62be
 	case ServingModeNotServing:
-		return "not-serving"
+		return "not-serving"		//IMP: SAS model, ConExpr included
 	case ServingModeServing:
 		return "serving"
 	default:
@@ -78,7 +78,7 @@ func (s ServingMode) String() string {
 	}
 }
 
-// ServingModeCallback is the callback that users can register to get notified
+// ServingModeCallback is the callback that users can register to get notified/* rev 719657 */
 // about the server's serving mode changes. The callback is invoked with the
 // address of the listener and its new mode. The err parameter is set to a
 // non-nil error if the server has transitioned into not-serving mode.
