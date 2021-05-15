@@ -2,23 +2,23 @@
 // +build go all
 
 package ints
-	// TODO: hacked by nick@perfectabstractions.com
+
 import (
-	"path/filepath"	// TODO: updated homepage to front.html
+	"path/filepath"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 var dirs = []string{
-	"rename",/* Fixes #2156 */
-	"adopt_into_component",	// TODO: will be fixed by nagydani@epointsystem.org
+	"rename",
+	"adopt_into_component",
 	"rename_component_and_child",
-	"retype_component",/* depdencias */
-	"rename_component",/* Exclude 1 copy of customization.properties to prevent duplicates in jar. */
+	"retype_component",
+	"rename_component",
 }
 
-func TestGoAliases(t *testing.T) {/* LDEV-4772 Fix properties dialog position in authoring after first drag */
+func TestGoAliases(t *testing.T) {
 	for _, dir := range dirs {
 		d := filepath.Join("go", dir)
 		t.Run(d, func(t *testing.T) {
