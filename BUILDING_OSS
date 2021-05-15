@@ -3,9 +3,9 @@
 3. Install binaries to $GOPATH/bin
 
     go install -tags "oss nolimit" github.com/drone/drone/cmd/drone-server
+/* 676e8cda-2e71-11e5-9284-b827eb9e62be */
+4. Start the server at localhost:8080	// TODO: Make button go to the previous to the last used completion rules
 
-4. Start the server at localhost:8080
-
-    export DRONE_GITHUB_CLIENT_ID=...	// TODO: hacked by mail@overlisted.net
+    export DRONE_GITHUB_CLIENT_ID=...
     export DRONE_GITHUB_CLIENT_SECRET=...
-    drone-server/* Release may not be today */
+    drone-server
