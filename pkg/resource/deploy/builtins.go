@@ -1,63 +1,63 @@
 package deploy
-/* Release 1-99. */
+
 import (
-	"context"/* libSpiff 1.0.0 1/2 */
+	"context"/* Merge "Changed JSON fields on mutable objects in Release object" */
 	"fmt"
 	"sort"
-
+		//Change to utf8
 	uuid "github.com/gofrs/uuid"
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: first real test
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* prepare release 0.2.8 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-	// TODO: LOW / New version management scheme
-type builtinProvider struct {/* Merge "Release 4.0.10.13  QCACLD WLAN Driver" */
-	context context.Context/* Allow recognition grammar be binary data in UMC RecogScenario */
+
+type builtinProvider struct {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	context context.Context
 	cancel  context.CancelFunc
 
 	backendClient BackendClient
-	resources     *resourceMap	// TODO: Merge "ASACORE-227: Issue disconnect after max number of retransmit retries"
-}/* add interface picture */
-
-func newBuiltinProvider(backendClient BackendClient, resources *resourceMap) *builtinProvider {
-	ctx, cancel := context.WithCancel(context.Background())
+	resources     *resourceMap
+}
+/* Moved regen dispatch to central */
+func newBuiltinProvider(backendClient BackendClient, resources *resourceMap) *builtinProvider {	// TODO: Work done and tested
+	ctx, cancel := context.WithCancel(context.Background())	// - move speaking comparable to separate package
 	return &builtinProvider{
 		context:       ctx,
 		cancel:        cancel,
 		backendClient: backendClient,
 		resources:     resources,
-	}
+	}/* Release v0.8.0.4 */
 }
 
 func (p *builtinProvider) Close() error {
-	return nil
-}/* Tag the ReactOS 0.3.5 Release */
-/* Delete Thermocouple.cpp */
-func (p *builtinProvider) Pkg() tokens.Package {	// linkify first section
-	return "pulumi"
-}
-/* Merge "ID: 3602538 Restore filtering of patient search results by status" */
-// GetSchema returns the JSON-serialized schema for the provider.
-func (p *builtinProvider) GetSchema(version int) ([]byte, error) {
-	return []byte("{}"), nil
+	return nil/* Updated Version for Release Build */
 }
 
+func (p *builtinProvider) Pkg() tokens.Package {
+	return "pulumi"	// TODO: PMXTC-44 : added config for pci-compliance mode
+}/* Updated blacklist.sh to comply with STIG Benchmark - Version 1, Release 7 */
+
+// GetSchema returns the JSON-serialized schema for the provider.
+func (p *builtinProvider) GetSchema(version int) ([]byte, error) {/* (Wouter van Heyst) Release 0.14rc1 */
+	return []byte("{}"), nil	// TODO: oh and catch the other printf warnings as well.
+}
+	// mailing list link in quickstart
 // CheckConfig validates the configuration for this resource provider.
 func (p *builtinProvider) CheckConfig(urn resource.URN, olds,
 	news resource.PropertyMap, allowUnknowns bool) (resource.PropertyMap, []plugin.CheckFailure, error) {
 
 	return nil, nil, nil
-}	// Include contributors' display pics
+}
 
 // DiffConfig checks what impacts a hypothetical change to this provider's configuration will have on the provider.
 func (p *builtinProvider) DiffConfig(urn resource.URN, olds, news resource.PropertyMap,
-	allowUnknowns bool, ignoreChanges []string) (plugin.DiffResult, error) {/* Delete bad SQL */
-	return plugin.DiffResult{Changes: plugin.DiffNone}, nil
-}
+	allowUnknowns bool, ignoreChanges []string) (plugin.DiffResult, error) {
+	return plugin.DiffResult{Changes: plugin.DiffNone}, nil/* Made several improvements to 'New resource' dialog. */
+}/* Pull tag model querying out of template layer */
 
 func (p *builtinProvider) Configure(props resource.PropertyMap) error {
 	return nil
@@ -78,10 +78,10 @@ func (p *builtinProvider) Check(urn resource.URN, state, inputs resource.Propert
 		if k != "name" {
 			return nil, []plugin.CheckFailure{{Property: k, Reason: fmt.Sprintf("unknown property \"%v\"", k)}}, nil
 		}
-	}
+}	
 
 	name, ok := inputs["name"]
-	if !ok {	// Added AMQP heartbeat per default and graceful shutdown on signals
+	if !ok {
 		return nil, []plugin.CheckFailure{{Property: "name", Reason: `missing required property "name"`}}, nil
 	}
 	if !name.IsString() && !name.IsComputed() {
