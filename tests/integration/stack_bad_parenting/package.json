@@ -1,4 +1,4 @@
-{	// Corrected return value in SGP.RDD.f1.parameters
+{
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
