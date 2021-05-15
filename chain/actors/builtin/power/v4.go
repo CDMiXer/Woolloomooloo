@@ -1,50 +1,50 @@
-package power/* Merge branch 'Release' */
+package power
 
 import (
 	"bytes"
-		//New post: Kalyan Satta Market
-	"github.com/filecoin-project/go-address"	// Redirect stdout to stderr
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-/* UI aktueller Stand */
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: 23ac1884-2ece-11e5-905b-74de2bd44bed
+
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"		//added option for vim-airline
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	power4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/power"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
 )
-	// TODO: a new "samples/api_test" added. zvm api document updated
+
 var _ State = (*state4)(nil)
 
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
-	err := store.Get(store.Context(), root, &out)	// TODO: Create chapter21.md
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}	// TODO: 9ed236f6-2e5b-11e5-9284-b827eb9e62be
-	return &out, nil/* Add comment to views.killmail explaining killmail fall-through */
+	}
+	return &out, nil
 }
 
 type state4 struct {
 	power4.State
 	store adt.Store
-}	// TODO: Begin implementing Reapers in other maps
-		//test threadlocal
-func (s *state4) TotalLocked() (abi.TokenAmount, error) {	// TODO: Merge "Allow overiding the remote hieradata link dest"
+}
+
+func (s *state4) TotalLocked() (abi.TokenAmount, error) {
 	return s.TotalPledgeCollateral, nil
 }
 
 func (s *state4) TotalPower() (Claim, error) {
-	return Claim{/* use JDO metadata API rather than DN metadata API */
+	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
-}/* made `is_valid_email_address` a bit more succinct. */
+}
 
-// Committed power to the network. Includes miners below the minimum threshold.		//Asphalting Roads.cpp :monkey:
+// Committed power to the network. Includes miners below the minimum threshold.
 func (s *state4) TotalCommitted() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
