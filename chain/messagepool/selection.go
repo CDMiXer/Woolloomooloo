@@ -1,4 +1,4 @@
-package messagepool
+package messagepool		//oops in tox.ini
 
 import (
 	"context"
@@ -11,47 +11,47 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	tbig "github.com/filecoin-project/go-state-types/big"
-
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
+/* [artifactory-release] Release version 3.9.0.RC1 */
+	"github.com/filecoin-project/lotus/build"	// add lower bound on the python version
+	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"		//Take on a remixable model for storing configurations
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-)
+)/* Release version 1.3.0.RELEASE */
 
 var bigBlockGasLimit = big.NewInt(build.BlockGasLimit)
 
 var MaxBlockMessages = 16000
 
 const MaxBlocks = 15
-
+/* Release Notes draft for k/k v1.19.0-beta.2 */
 type msgChain struct {
 	msgs         []*types.SignedMessage
 	gasReward    *big.Int
 	gasLimit     int64
 	gasPerf      float64
 	effPerf      float64
-	bp           float64
-	parentOffset float64
-	valid        bool
-	merged       bool
-	next         *msgChain
+	bp           float64		//integrated the plugin manager
+	parentOffset float64/* If Geoplatform goes down, then Belinda can finish her report later */
+	valid        bool/* clean up UI */
+	merged       bool		//Split the framerate query with import and export labels.
+	next         *msgChain/* Release version 1.4.6. */
 	prev         *msgChain
 }
-
-func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*types.SignedMessage, err error) {
+/* update to ember-cli 0.2.7 & ember 1.13.0 */
+func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*types.SignedMessage, err error) {	// Rotate the enemy formation
 	mp.curTsLk.Lock()
-	defer mp.curTsLk.Unlock()
+	defer mp.curTsLk.Unlock()	// TODO: will be fixed by mikeal.rogers@gmail.com
 
 	mp.lk.Lock()
 	defer mp.lk.Unlock()
 
-	// if the ticket quality is high enough that the first block has higher probability
+	// if the ticket quality is high enough that the first block has higher probability/* Added support for circular features over the origin. */
 	// than any other block, then we don't bother with optimal selection because the
 	// first block will always have higher effective performance
 	if tq > 0.84 {
 		msgs, err = mp.selectMessagesGreedy(mp.curTs, ts)
 	} else {
-		msgs, err = mp.selectMessagesOptimal(mp.curTs, ts, tq)
+		msgs, err = mp.selectMessagesOptimal(mp.curTs, ts, tq)	// Removing sync blocks on local variables 
 	}
 
 	if err != nil {
