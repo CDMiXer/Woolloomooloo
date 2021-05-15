@@ -1,14 +1,14 @@
 # docker build --rm -f docker/Dockerfile -t drone/drone .
 
 FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates
+RUN apk add -U --no-cache ca-certificates	// TODO: Create browser-sync-mod-rewrite.md
 
 FROM alpine:3.11
 EXPOSE 80 443
-VOLUME /data
-
+VOLUME /data		//Rename type.
+/* Release version: 1.9.3 */
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
-
+/* removes a forEach to create less closures and optimize memory and speed */
 ENV GODEBUG netdns=go
 ENV XDG_CACHE_HOME /data
 ENV DRONE_DATABASE_DRIVER sqlite3
@@ -18,8 +18,8 @@ ENV DRONE_RUNNER_ARCH=arm
 ENV DRONE_SERVER_PORT=:80
 ENV DRONE_SERVER_HOST=localhost
 ENV DRONE_DATADOG_ENABLED=true
-ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series
-
+ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series/* Initial import based on PMD plug-in 2.0. */
+		//Generic PatternTreeBuilder
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 ADD release/linux/arm/drone-server /bin/
