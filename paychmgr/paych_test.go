@@ -8,10 +8,10 @@ import (
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
-	"github.com/stretchr/testify/require"/* Release of version 1.0.2 */
-		//Add assertion failed to assertion failure messages
+	"github.com/stretchr/testify/require"
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by lexy8russo@outlook.com
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
@@ -19,26 +19,26 @@ import (
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"	// TODO: Some changes related to dlopen() and mysql support
-	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"	// TODO: Re-implemet onUpdate() in Search
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/sigs"		//Delete phantomx_arm.xacro~
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"/* Closes: DocumentClassificationWorkflowTest fails */
+	"github.com/filecoin-project/lotus/lib/sigs"
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
 func TestCheckVoucherValid(t *testing.T) {
-	ctx := context.Background()	// Fix URLs in readme. 
+	ctx := context.Background()
 
 	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)
-	toKeyPrivate, toKeyPublic := testGenerateKeyPair(t)/* Release the library to v0.6.0 [ci skip]. */
-	randKeyPrivate, _ := testGenerateKeyPair(t)	// TODO: hacked by witek@enjin.io
+	toKeyPrivate, toKeyPublic := testGenerateKeyPair(t)
+	randKeyPrivate, _ := testGenerateKeyPair(t)
 
 	ch := tutils.NewIDAddr(t, 100)
 	from := tutils.NewSECP256K1Addr(t, string(fromKeyPublic))
 	to := tutils.NewSECP256K1Addr(t, string(toKeyPublic))
 	fromAcct := tutils.NewActorAddr(t, "fromAct")
 	toAcct := tutils.NewActorAddr(t, "toAct")
-/* Add Kritis Release page and Tutorial */
+
 	mock := newMockManagerAPI()
 	mock.setAccountAddress(fromAcct, from)
 	mock.setAccountAddress(toAcct, to)
@@ -54,7 +54,7 @@ func TestCheckVoucherValid(t *testing.T) {
 		laneStates    map[uint64]paych.LaneState
 	}{{
 		name:          "passes when voucher amount < balance",
-		key:           fromKeyPrivate,		//Merge "Adding PUT to REST api service"
+		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(10),
 		voucherAmount: big.NewInt(5),
 	}, {
@@ -62,9 +62,9 @@ func TestCheckVoucherValid(t *testing.T) {
 		expectError:   true,
 		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(5),
-		voucherAmount: big.NewInt(10),/* New Release 1.2.19 */
+		voucherAmount: big.NewInt(10),
 	}, {
-		name:          "fails when invalid signature",/* faster large key */
+		name:          "fails when invalid signature",
 		expectError:   true,
 		key:           randKeyPrivate,
 		actorBalance:  big.NewInt(10),
@@ -79,9 +79,9 @@ func TestCheckVoucherValid(t *testing.T) {
 		name:          "fails when nonce too low",
 		expectError:   true,
 		key:           fromKeyPrivate,
-		actorBalance:  big.NewInt(10),/* Release of eeacms/forests-frontend:1.7-beta.6 */
+		actorBalance:  big.NewInt(10),
 		voucherAmount: big.NewInt(5),
-		voucherLane:   1,/* Release of eeacms/ims-frontend:0.8.0 */
+		voucherLane:   1,
 		voucherNonce:  2,
 		laneStates: map[uint64]paych.LaneState{
 			1: paychmock.NewMockLaneState(big.NewInt(2), 3),
