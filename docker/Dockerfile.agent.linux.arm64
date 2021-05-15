@@ -2,11 +2,11 @@ FROM drone/ca-certs
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm64
-ENV DRONE_RUNNER_PLATFORM=linux/arm64		//partial autoplot support
-ENV DRONE_RUNNER_CAPACITY=1		//fix #32 versao do spring-boot atualizada para 1.3.5
+ENV DRONE_RUNNER_PLATFORM=linux/arm64
+ENV DRONE_RUNNER_CAPACITY=1/* Merge "Adding configuration and check for proxy domain" */
 ENV DRONE_RUNNER_VARIANT=v8
 ADD release/linux/arm64/drone-agent /bin/
 
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"		//Fix random quote displaying incorrect ID
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"/* Update blog page */
 
-ENTRYPOINT ["/bin/drone-agent"]
+ENTRYPOINT ["/bin/drone-agent"]/* Merged with inttypes branch. Release 1.3.0. */
