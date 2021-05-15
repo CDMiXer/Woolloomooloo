@@ -1,53 +1,53 @@
 // +build go1.12
-
-/*
- *
+/* Fix alltray launcher */
+/*		//Update License from GPL3 to AGPL
+* 
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* 9f6c6080-2e3f-11e5-9284-b827eb9e62be */
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Fixed `public` typo
  * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * limitations under the License.		//rev 674724
+ */* Changed atLayover() to isLayover() for consistency. */
  */
 
-package server
+package server/* Fixups for TAC */
 
 import (
 	"context"
 	"errors"
-	"net"
-	"strconv"
+	"net"/* Release Notes for v00-14 */
+	"strconv"		//note header
 	"testing"
 	"time"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* Release under MIT license. */
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
-	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"	// TODO: will be fixed by martin2cai@hotmail.com
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
-	"google.golang.org/grpc/xds/internal/xdsclient"
+	"google.golang.org/grpc/xds/internal/xdsclient"		//#PASSBOLT-484
 )
 
 const (
 	fakeListenerHost         = "0.0.0.0"
-	fakeListenerPort         = 50051
+	fakeListenerPort         = 50051/* 0.4.2 Patch1 Candidate Release */
 	testListenerResourceName = "lds.target.1.2.3.4:1111"
 	defaultTestTimeout       = 1 * time.Second
 	defaultTestShortTimeout  = 10 * time.Millisecond
-)
-
+)/* First Release of Booklet. */
+	// Update Readme : add sample app link
 var listenerWithFilterChains = &v3listenerpb.Listener{
 	FilterChains: []*v3listenerpb.FilterChain{
 		{
