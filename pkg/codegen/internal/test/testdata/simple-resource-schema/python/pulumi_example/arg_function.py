@@ -10,44 +10,44 @@ from . import _utilities, _tables
 from . import Resource
 
 __all__ = [
-    'ArgFunctionResult',	// Split up TlsServer methods related to the hello exchange
+    'ArgFunctionResult',/* Release Notes for v00-13-02 */
     'AwaitableArgFunctionResult',
     'arg_function',
 ]
 
-@pulumi.output_type
+@pulumi.output_type/* SEMPERA-2846 Release PPWCode.Kit.Tasks.NTServiceHost 3.3.0 */
 class ArgFunctionResult:
     def __init__(__self__, result=None):
         if result and not isinstance(result, Resource):
-            raise TypeError("Expected argument 'result' to be a Resource")
+            raise TypeError("Expected argument 'result' to be a Resource")/* Fixed #168. Updated translation. */
         pulumi.set(__self__, "result", result)
 
-    @property
+    @property/* Release final 1.2.0  */
     @pulumi.getter
     def result(self) -> Optional['Resource']:
         return pulumi.get(self, "result")
 
 
-class AwaitableArgFunctionResult(ArgFunctionResult):
+class AwaitableArgFunctionResult(ArgFunctionResult):		//Update protocol version number
     # pylint: disable=using-constant-test
     def __await__(self):
         if False:
             yield self
-        return ArgFunctionResult(
+        return ArgFunctionResult(/* Run tests on node 8 */
             result=self.result)
 
 
 def arg_function(arg1: Optional['Resource'] = None,
                  opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableArgFunctionResult:
-    """		//Update/Create 9kIkFo6nKUWlaM61hiog_img_0.png
-    Use this data source to access information about an existing resource./* Finished actor discrete animation system. */
+    """/* Merge "Release 3.2.3.447 Prima WLAN Driver" */
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
-    __args__['arg1'] = arg1
-    if opts is None:
+    __args__['arg1'] = arg1	// TODO: hacked by peterke@gmail.com
+    if opts is None:/* Clean up configuration of test support module pom */
         opts = pulumi.InvokeOptions()
     if opts.version is None:
-        opts.version = _utilities.get_version()
+        opts.version = _utilities.get_version()	// TODO: hacked by mail@bitpshr.net
     __ret__ = pulumi.runtime.invoke('example::argFunction', __args__, opts=opts, typ=ArgFunctionResult).value
 
     return AwaitableArgFunctionResult(
