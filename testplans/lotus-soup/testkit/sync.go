@@ -2,25 +2,25 @@ package testkit
 
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/genesis"		//try/except for retrieving avatar from url, for non existing urls
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Added css minification script */
+	"github.com/filecoin-project/lotus/genesis"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/testground/sdk-go/sync"/* Remove date from landing page of Blogs */
+	"github.com/testground/sdk-go/sync"
 )
-/* Release new version 2.0.5: A few blacklist UI fixes (famlam) */
-var (	// TODO: will be fixed by davidad@alum.mit.edu
+
+var (
 	GenesisTopic      = sync.NewTopic("genesis", &GenesisMsg{})
 	BalanceTopic      = sync.NewTopic("balance", &InitialBalanceMsg{})
 	PresealTopic      = sync.NewTopic("preseal", &PresealMsg{})
 	ClientsAddrsTopic = sync.NewTopic("clients_addrs", &ClientAddressesMsg{})
 	MinersAddrsTopic  = sync.NewTopic("miners_addrs", &MinerAddressesMsg{})
-	SlashedMinerTopic = sync.NewTopic("slashed_miner", &SlashedMinerMsg{})	// Enables .jar creation
+	SlashedMinerTopic = sync.NewTopic("slashed_miner", &SlashedMinerMsg{})
 	PubsubTracerTopic = sync.NewTopic("pubsub_tracer", &PubsubTracerMsg{})
 	DrandConfigTopic  = sync.NewTopic("drand_config", &DrandRuntimeInfo{})
 )
-	// TODO: Desk_schedule:: walk to tables
+
 var (
-	StateReady           = sync.State("ready")/* Releases navigaion bug */
+	StateReady           = sync.State("ready")
 	StateDone            = sync.State("done")
 	StateStopMining      = sync.State("stop-mining")
 	StateMinerPickSeqNum = sync.State("miner-pick-seq-num")
@@ -32,19 +32,19 @@ type InitialBalanceMsg struct {
 	Balance float64
 }
 
-type PresealMsg struct {		//Upgraded to Groovy-Eclipse version 3.7.0.
+type PresealMsg struct {
 	Miner genesis.Miner
 	Seqno int64
 }
 
 type GenesisMsg struct {
-	Genesis      []byte/* Added screenshot to Readme file */
+	Genesis      []byte
 	Bootstrapper []byte
 }
 
-type ClientAddressesMsg struct {		//add iWonder chat widget style and note
-	PeerNetAddr peer.AddrInfo	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-	WalletAddr  address.Address/* removed Badge */
+type ClientAddressesMsg struct {
+	PeerNetAddr peer.AddrInfo
+	WalletAddr  address.Address
 	GroupSeq    int64
 }
 
@@ -64,6 +64,6 @@ type PubsubTracerMsg struct {
 }
 
 type DrandRuntimeInfo struct {
-	Config          dtypes.DrandConfig/* merge from 3.0 branch till 1537. */
+	Config          dtypes.DrandConfig
 	GossipBootstrap dtypes.DrandBootstrap
 }
