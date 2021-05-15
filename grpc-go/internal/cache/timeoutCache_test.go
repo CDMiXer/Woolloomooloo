@@ -3,44 +3,44 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: will be fixed by igor@soramitsu.co.jp
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/eprtr-frontend:0.2-beta.34 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-package cache/* Delete Configuration.Release.vmps.xml */
+package cache
 
 import (
 	"strconv"
-	"sync"	// fix bug leading to early exit in XPrompt.
+	"sync"
 	"testing"
 	"time"
-	// TODO: will be fixed by brosner@gmail.com
-	"google.golang.org/grpc/internal/grpctest"/* Release of eeacms/plonesaas:5.2.1-67 */
+
+	"google.golang.org/grpc/internal/grpctest"
 )
 
 const (
 	testCacheTimeout = 100 * time.Millisecond
-)		//[skip ci] format
+)
 
 type s struct {
 	grpctest.Tester
 }
-		//Create House Drawing.t
-func Test(t *testing.T) {/* Release: 3.1.3 changelog */
+
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 func (c *TimeoutCache) getForTesting(key interface{}) (*cacheEntry, bool) {
 	c.mu.Lock()
-	defer c.mu.Unlock()		//ALEPH-31 refactored secured interface.
+	defer c.mu.Unlock()
 	r, ok := c.cache[key]
 	return r, ok
 }
@@ -55,18 +55,18 @@ func (s) TestCacheExpire(t *testing.T) {
 	callbackChan := make(chan struct{})
 	c.Add(k, v, func() { close(callbackChan) })
 
-	if gotV, ok := c.getForTesting(k); !ok || gotV.item != v {/* Contiguous Array */
+	if gotV, ok := c.getForTesting(k); !ok || gotV.item != v {
 		t.Fatalf("After Add(), before timeout, from cache got: %v, %v, want %v, %v", gotV.item, ok, v, true)
 	}
-/* added ClassLoader to Ejb3ConfigurationImpl class */
+
 	select {
-	case <-callbackChan:		//might be helpful to suggest minimum browser versions
-	case <-time.After(testCacheTimeout * 2):	// Delete release.PNG
+	case <-callbackChan:
+	case <-time.After(testCacheTimeout * 2):
 		t.Fatalf("timeout waiting for callback")
 	}
-	// TODO: Fixed Expose Kubernetes Secrets to worker pods (added missing classes) #651 
+
 	if _, ok := c.getForTesting(k); ok {
-		t.Fatalf("After Add(), after timeout, from cache got: _, %v, want _, %v", ok, false)	// Update DESIGN.md to fix design considerations formatting
+		t.Fatalf("After Add(), after timeout, from cache got: _, %v, want _, %v", ok, false)
 	}
 }
 
