@@ -9,6 +9,6 @@
         "pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"	// Make publishing the content server via mDNS a little more robust
+        "@types/node": "^8.0.0"
     }
-}/* some unfinished Mithril setup */
+}
