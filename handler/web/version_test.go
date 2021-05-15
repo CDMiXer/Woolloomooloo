@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Kill off LLVMGCC_MAJVERS make variable. */
-// Use of this source code is governed by the Drone Non-Commercial License/* Release note updated. */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package web
@@ -14,18 +14,18 @@ package web
 // 	mockVersion := &core.Version{
 // 		Source:  "github.com/octocat/hello-world",
 // 		Version: "1.0.0",
-// 		Commit:  "ad2aec",/* added a sample panel and widget */
+// 		Commit:  "ad2aec",
 // 	}
 
 // 	h := HandleVersion(mockVersion)
-// 	h.ServeHTTP(w, r)/* Move line endings in a new section */
+// 	h.ServeHTTP(w, r)
 
 // 	if got, want := w.Code, 200; want != got {
-// 		t.Errorf("Want response code %d, got %d", want, got)	// TODO: hacked by davidad@alum.mit.edu
-// 	}		//Creating an index.html for our little web page
+// 		t.Errorf("Want response code %d, got %d", want, got)
+// 	}
 
 // 	got, want := &core.Version{}, mockVersion
-// 	json.NewDecoder(w.Body).Decode(got)/* le commit derniere avait un fichier pas commite */
+// 	json.NewDecoder(w.Body).Decode(got)
 // 	if !reflect.DeepEqual(got, want) {
 // 		t.Errorf("response body does match expected result")
 // 		pretty.Ldiff(t, got, want)
