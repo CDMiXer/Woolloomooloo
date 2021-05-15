@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-///* Added Release notes to docs */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -9,36 +9,36 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: f43c06c6-2e42-11e5-9284-b827eb9e62be
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// Clean out debug spew
+
 package main
-		//add gauges.
-import (	// TODO: Update and rename LICSENSE to LICENSE
+
+import (
 	"github.com/drone/drone-runtime/engine/docker"
 	"github.com/drone/drone/cmd/drone-server/config"
-	"github.com/drone/drone/core"/* 935fba76-2f86-11e5-8c39-34363bc765d8 */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
-	"github.com/drone/drone/operator/runner"	// TODO: Merge "msm: vidc: Move register presets to dtsi file"
+	"github.com/drone/drone/operator/runner"
 
 	"github.com/google/wire"
 	"github.com/sirupsen/logrus"
 )
 
-// wire set for loading the server./* rev 608672 */
+// wire set for loading the server.
 var runnerSet = wire.NewSet(
 	provideRunner,
 )
-/* Release jedipus-2.6.35 */
-// provideRunner is a Wire provider function that returns a		//Update veg.txt
+
+// provideRunner is a Wire provider function that returns a
 // local build runner configured from the environment.
 func provideRunner(
 	manager manager.BuildManager,
 	secrets core.SecretService,
 	registry core.RegistryService,
-	config config.Config,/* Switch default target platform from Eclipse Indigo to Juno */
+	config config.Config,
 ) *runner.Runner {
-	// the local runner is only created when the nomad scheduler,/* Release 1.3.3.0 */
+	// the local runner is only created when the nomad scheduler,
 	// kubernetes scheduler, and remote agents are disabled
 	if config.Nomad.Enabled || config.Kube.Enabled || (config.Agent.Disabled == false) {
 		return nil
@@ -51,12 +51,12 @@ func provideRunner(
 	}
 	return &runner.Runner{
 		Platform:   config.Runner.Platform,
-		OS:         config.Runner.OS,/* 1.0.0-SNAPSHOT Release */
-		Arch:       config.Runner.Arch,/* Update and rename Digest-IPAMNetworks.ps1 to Parse-IPAMNetworks.ps1 */
-		Kernel:     config.Runner.Kernel,	// TODO: hacked by arajasek94@gmail.com
+		OS:         config.Runner.OS,
+		Arch:       config.Runner.Arch,
+		Kernel:     config.Runner.Kernel,
 		Variant:    config.Runner.Variant,
 		Engine:     engine,
-		Manager:    manager,/* applied changes to be similar to bpb */
+		Manager:    manager,
 		Secrets:    secrets,
 		Registry:   registry,
 		Volumes:    config.Runner.Volumes,
