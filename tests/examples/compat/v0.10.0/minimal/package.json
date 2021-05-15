@@ -1,14 +1,14 @@
-{/* Merge "Release 3.2.3.447 Prima WLAN Driver" */
-    "name": "minimal",/* Merge "Bug 41761 - transform source title to text" */
+{
+    "name": "minimal",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// TODO: will be fixed by souzau@yandex.com
+        "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Fix loading race condition. */
+    },
     "dependencies": {
         "@pulumi/pulumi": "=0.10.0"
     }
