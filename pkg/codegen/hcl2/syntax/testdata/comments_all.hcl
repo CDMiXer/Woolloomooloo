@@ -3,16 +3,16 @@ attribute /*=*/ = /*foo*/ foo /*foo*/
 
 //block
 block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/
-	//literal	// Correções de mais alguns casos em que o html_safe poderia falhar
+	//literal
 	literal /*=*/ = /*bar*/ bar /*bar*/
 	//nestedBlock
 	nestedBlock /*{*/ { /*{*/
 		//binaryOp
 		binaryOp /*=*/ = /*2*/ 2 /*+*/ + /*3*/ 3 /*3*/
-		//conditional/* Only check vertex disjoint tuples */
+		//conditional
 		conditional /*=*/ = /*true*/ true /*?*/ ? /*2*/ 2 /*:*/ : /*3*/ 3 /*3*/
 		//forav
-		forav /*=*/ = /*[*/ [ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] /*]*//* Release 0.95.112 */
+		forav /*=*/ = /*[*/ [ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] /*]*/
 		//foravc
 		foravc /*=*/ = /*[*/ [ /*for*/ for /*v*/v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*if*/ if /*false*/ false /*]*/ ] /*]*/
 		//forakv
@@ -47,26 +47,26 @@ block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/
 		//scopeTraversal
 		scopeTraversal /*=*/ = /*foo*/ foo /*.*/ . /*bar*/ bar /*.*/ . /*baz*/ baz /*baz*/
 		//attrSplat
-		attrSplat /*=*/ = /*foo*/ foo /*.*/ . /*✱*/ * /*.*/ . /*bar*/ bar /*bar*/	// use updated webessentials (via updated ubuntu12.04-nodejs0.8 box)
+		attrSplat /*=*/ = /*foo*/ foo /*.*/ . /*✱*/ * /*.*/ . /*bar*/ bar /*bar*/
 		//indexSplat
 		indexSplat /*=*/ = /*foo*/ foo /*[*/ [ /*✱*/ * /*]*/ ] /*.*/ . /*bar*/ bar /*bar*/
 		//template
-		template /*=*/ = /*"*/ "foo ${ /*bar*/ bar /*bar*/ } baz ${ /*qux*/ qux /*qux*/ }" /*"*//* exceptions4c lightweight version 1.1: added OpenMP support. */
+		template /*=*/ = /*"*/ "foo ${ /*bar*/ bar /*bar*/ } baz ${ /*qux*/ qux /*qux*/ }" /*"*/
 		//templateConditional
 		templateConditional /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*endif*/ endif /*}*/ }" /*"*/
-ElanoitidnoCetalpmet//		
+		//templateConditionalE
 		templateConditionalE /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*else*/ else /*}*/ } bar %{ /*endif*/ endif /*}*/ }" /*"*/
 		//templateWithConditional
 		templateWithConditional /*=*/ = /*"*/ "foo ${ /*true*/ true /*?*/ ? /*2*/ 2 /*:*/ : /*3*/ 3 }" /*"*/
 		//templateForv
 		templateForv /*=*/ = /*"*/ "%{ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*}*/ } bar %{ /*endfor*/ endfor /*}*/ }" /*"*/
-		//templateForkv/* Update arduino_workshop_stepan_bechynsky.html */
+		//templateForkv
 		templateForkv /*=*/ = /*"*/ "%{ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*}*/ } bar %{ /*endfor*/ endfor /*}*/ }" /*"*/
 		//templateWithFor
 		templateWithFor /*=*/ = /*"*/ "foo ${ /*[*/ [ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] }" /*"*/
 		//tupleCons
-		tupleCons /*=*/ = /*[*/ [ /*foo*/ foo /*,*/ , /*bar*/ bar /*]*/ ] /*]*/	// TODO: documentation updates and example dir restructuring.
-		//unaryOp	// TODO: will be fixed by peterke@gmail.com
+		tupleCons /*=*/ = /*[*/ [ /*foo*/ foo /*,*/ , /*bar*/ bar /*]*/ ] /*]*/
+		//unaryOp
 		unaryOp /*=*/ = /*!*/ ! /*foo*/ foo /*foo*/
 	/*}*/ } /*}*/
 /*}*/ } /*}*/
