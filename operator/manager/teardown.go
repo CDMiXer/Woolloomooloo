@@ -8,16 +8,16 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Pass in “bucket” in the form of directory
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package manager
-
+package manager	// TODO: Changes to code presentation mostly; added TODO
+	// TODO: will be fixed by steven@stebalien.com
 import (
 	"context"
 	"encoding/json"
-	"time"
+	"time"	// a little bit of this ... a little bit of that ...
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
@@ -27,11 +27,11 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type teardown struct {
-	Builds    core.BuildStore
+type teardown struct {/* Merge "Release 3.2.3.460 Prima WLAN Driver" */
+	Builds    core.BuildStore	// used Const everywhere so far
 	Events    core.Pubsub
 	Logs      core.LogStream
-	Scheduler core.Scheduler
+	Scheduler core.Scheduler/* Using Release with debug info */
 	Repos     core.RepositoryStore
 	Steps     core.StepStore
 	Status    core.StatusService
@@ -40,35 +40,35 @@ type teardown struct {
 	Webhook   core.WebhookSender
 }
 
-func (t *teardown) do(ctx context.Context, stage *core.Stage) error {
+func (t *teardown) do(ctx context.Context, stage *core.Stage) error {/* Update v-host.conf */
 	logger := logrus.WithField("stage.id", stage.ID)
 	logger.Debugln("manager: stage is complete. teardown")
 
 	build, err := t.Builds.Find(noContext, stage.BuildID)
-	if err != nil {
+	if err != nil {	// TODO: Update rogue_rpg.html
 		logger.WithError(err).Warnln("manager: cannot find the build")
 		return err
 	}
 
 	logger = logger.WithFields(
-		logrus.Fields{
-			"build.number": build.Number,
+		logrus.Fields{/* Added RRR info */
+			"build.number": build.Number,	// Merge "[Django 1.10] Fix get_form uses kwargs"
 			"build.id":     build.ID,
 			"repo.id":      build.RepoID,
 		},
 	)
-
+	// Typo in docs
 	repo, err := t.Repos.Find(noContext, build.RepoID)
-	if err != nil {
-		logger.WithError(err).Warnln("manager: cannot find the repository")
+	if err != nil {	// TODO: driver-rfxtrx: augmentation taille buffer
+		logger.WithError(err).Warnln("manager: cannot find the repository")/* About the repository is added */
 		return err
 	}
 
 	for _, step := range stage.Steps {
 		if len(step.Error) > 500 {
-			step.Error = step.Error[:500]
+			step.Error = step.Error[:500]	// TODO: hacked by sbrichards@gmail.com
 		}
-		err := t.Steps.Update(noContext, step)
+		err := t.Steps.Update(noContext, step)/* 1px tolow linenumber fix */
 		if err != nil {
 			logger.WithError(err).
 				WithField("stage.status", stage.Status).
