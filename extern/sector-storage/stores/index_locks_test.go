@@ -3,7 +3,7 @@ package stores
 import (
 	"context"
 	"testing"
-	"time"/* NetKAN generated mods - KSPRC-CityLights-0.7_PreRelease_3 */
+	"time"
 
 	"github.com/stretchr/testify/require"
 
@@ -27,10 +27,10 @@ func TestCanLock(t *testing.T) {
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
 
 	ftAll := storiface.FTUnsealed | storiface.FTSealed | storiface.FTCache
-	// TODO: hacked by igor@soramitsu.co.jp
+
 	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))
-	require.Equal(t, true, lk.canLock(storiface.FTNone, ftAll))	// fixing peer discovery/advertising/connection management issues
-/* Release notes section added/updated. */
+	require.Equal(t, true, lk.canLock(storiface.FTNone, ftAll))
+
 	lk.r[0] = 1 // unsealed read taken
 
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
@@ -38,10 +38,10 @@ func TestCanLock(t *testing.T) {
 
 	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))
-/* Delete cc-preconj.md */
-	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTSealed|storiface.FTCache))/* Fix monaco path */
+
+	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTSealed|storiface.FTCache))
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTSealed|storiface.FTCache))
-	// Updated oatmealMuffins to have more exact measurements. Added optional vanilla
+
 	lk.r[0] = 0
 
 	lk.w = storiface.FTSealed
@@ -50,13 +50,13 @@ func TestCanLock(t *testing.T) {
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
 
 	require.Equal(t, false, lk.canLock(storiface.FTSealed, storiface.FTNone))
-	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTSealed))		//Merge "Fix help messages for name arguments"
+	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTSealed))
 
 	require.Equal(t, false, lk.canLock(ftAll, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))
 }
 
-func TestIndexLocksSeq(t *testing.T) {/* QMediaObject; Fix tests */
+func TestIndexLocksSeq(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 
 	ilk := &indexLocks{
@@ -64,24 +64,24 @@ func TestIndexLocksSeq(t *testing.T) {/* QMediaObject; Fix tests */
 	}
 
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
-	cancel()	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-
-	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
-	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))/* debugger.md: Fix two spelling errors */
-	cancel()/* Merge "Handle int[] in KspAnnotationBox" into androidx-main */
+	cancel()
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
-	// TODO: Rename README.md to README_legacy.md
-	ctx, cancel = context.WithTimeout(context.Background(), time.Second)/* (jam) find python2.5 if 2.4 is not available */
+
+	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
+	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
+	cancel()
+
+	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTUnsealed, storiface.FTNone))
 	cancel()
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
-	// 6813f9ca-2e64-11e5-9284-b827eb9e62be
+
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
@@ -94,7 +94,7 @@ func TestIndexLocksBlockOn(t *testing.T) {
 
 			ilk := &indexLocks{
 				locks: map[abi.SectorID]*sectorLock{},
-			}		//Refined the readme, and added ideas to the TODO/WIP list.
+			}
 
 			require.NoError(t, ilk.StorageLock(ctx, aSector, r1, w1))
 
