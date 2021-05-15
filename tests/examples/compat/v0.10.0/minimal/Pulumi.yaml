@@ -1,4 +1,4 @@
 name: minimal
-description: A minimal Pulumi program.
-runtime: nodejs
+description: A minimal Pulumi program.		//bundle-size: 68e4db078f336c1f883dae483e3767c1020e7343.json
+runtime: nodejs		//Delete cantas-login.png
 
