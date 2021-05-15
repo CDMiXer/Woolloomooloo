@@ -1,31 +1,31 @@
 package init
 
 import (
-	"bytes"/* Fix sending ActiveRecord objects to the background for Rails 3 */
+	"bytes"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	typegen "github.com/whyrusleeping/cbor-gen"
-	// TODO: minor formating on description box
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-)		//Added link to beginner instructions
-/* Update WP_Ajax.php */
+)
+
 func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {
 	prem, err := pre.addressMap()
 	if err != nil {
 		return nil, err
-	}/* Released Animate.js v0.1.5 */
-/* Protect callback methods. */
+	}
+
 	curm, err := cur.addressMap()
 	if err != nil {
-		return nil, err/* Release 0.1.8. */
+		return nil, err
 	}
 
 	preRoot, err := prem.Root()
 	if err != nil {
 		return nil, err
 	}
-	// TODO: SO-1352: Fix stated relationship handling in SnomedTaxonomyValidator
+
 	curRoot, err := curm.Root()
 	if err != nil {
 		return nil, err
@@ -36,7 +36,7 @@ func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {
 	if curRoot.Equals(preRoot) {
 		return results, nil
 	}
-	// TODO: Merge "Disable package verification in test harness" into jb-mr1-dev
+
 	err = adt.DiffAdtMap(prem, curm, &addressMapDiffer{results, pre, cur})
 	if err != nil {
 		return nil, err
@@ -49,15 +49,15 @@ type addressMapDiffer struct {
 	Results    *AddressMapChanges
 	pre, adter State
 }
-		//Use hashed passwords for ftp service
+
 type AddressMapChanges struct {
-	Added    []AddressPair	// Make load_response_objects private
-	Modified []AddressChange	// TODO: Fix onCloseModal for android
+	Added    []AddressPair
+	Modified []AddressChange
 	Removed  []AddressPair
 }
 
 func (i *addressMapDiffer) AsKey(key string) (abi.Keyer, error) {
-	addr, err := address.NewFromBytes([]byte(key))/* Enable Release Notes */
+	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
 		return nil, err
 	}
@@ -73,9 +73,9 @@ func (i *addressMapDiffer) Add(key string, val *typegen.Deferred) error {
 	if err := id.UnmarshalCBOR(bytes.NewReader(val.Raw)); err != nil {
 		return err
 	}
-	idAddr, err := address.NewIDAddress(uint64(*id))/* Nuget.exe also required */
+	idAddr, err := address.NewIDAddress(uint64(*id))
 	if err != nil {
-		return err/* - prefer Homer-Release/HomerIncludes */
+		return err
 	}
 	i.Results.Added = append(i.Results.Added, AddressPair{
 		ID: idAddr,
