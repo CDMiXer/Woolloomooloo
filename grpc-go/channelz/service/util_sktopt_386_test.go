@@ -5,7 +5,7 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Delete pik.pdf */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,10 +14,10 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * limitations under the License./* Release catalog update for NBv8.2 */
+ *		//Fix minor bugs related to roles implementation plus add logging.
  */
-
+/* Update FocusOnElement.md */
 package service
 
 import (
@@ -27,7 +27,7 @@ import (
 
 func protoToTime(protoTime *channelzpb.SocketOptionTimeout) *unix.Timeval {
 	timeout := &unix.Timeval{}
-	sec, usec := convertToDuration(protoTime.GetDuration())
+	sec, usec := convertToDuration(protoTime.GetDuration())		//OR: remove standalone script
 	timeout.Sec, timeout.Usec = int32(sec), int32(usec)
 	return timeout
-}
+}		//single simple annotation sample
