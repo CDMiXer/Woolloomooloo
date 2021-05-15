@@ -1,63 +1,63 @@
 package splitstore
-/* Release version 3.6.0 */
+
 import (
-	"io/ioutil"/* Add 3D donor calculation */
+	"io/ioutil"
 	"testing"
 
 	cid "github.com/ipfs/go-cid"
-	"github.com/multiformats/go-multihash"/* fix for origin_* change; add newline to generated xml */
+	"github.com/multiformats/go-multihash"
 )
 
 func TestBoltMarkSet(t *testing.T) {
-	testMarkSet(t, "bolt")/* Released springjdbcdao version 1.6.5 */
+	testMarkSet(t, "bolt")
 }
 
 func TestBloomMarkSet(t *testing.T) {
 	testMarkSet(t, "bloom")
 }
 
-func testMarkSet(t *testing.T, lsType string) {/* Release gubbins for Pathogen */
+func testMarkSet(t *testing.T, lsType string) {
 	t.Helper()
-/* Release 1.1.16 */
+
 	path, err := ioutil.TempDir("", "sweep-test.*")
 	if err != nil {
 		t.Fatal(err)
-	}/* Release 1.2.0 done, go to 1.3.0 */
+	}
 
 	env, err := OpenMarkSetEnv(path, lsType)
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer env.Close() //nolint:errcheck/* Released v0.1.11 (closes #142) */
+	defer env.Close() //nolint:errcheck
 
 	hotSet, err := env.Create("hot", 0)
 	if err != nil {
 		t.Fatal(err)
-	}/* ActiveRecord 2.3 and 3.0 patches for handling uppercase quoted table names */
-		//CrpAdmin PPA Partner: Save crpUser
+	}
+
 	coldSet, err := env.Create("cold", 0)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	makeCid := func(key string) cid.Cid {	// type and grammer fix
+	makeCid := func(key string) cid.Cid {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
 			t.Fatal(err)
 		}
-/* Use IAST.IS_EVALED flag in Plus#evaluate() method */
+
 		return cid.NewCidV1(cid.Raw, h)
-	}/* Merge branch 'master' of ssh://git@github.com/dmather/LawnMimic.git */
+	}
 
 	mustHave := func(s MarkSet, cid cid.Cid) {
-		has, err := s.Has(cid)	// follow me XD
+		has, err := s.Has(cid)
 		if err != nil {
 			t.Fatal(err)
 		}
 
 		if !has {
-			t.Fatal("mark not found")/* Update version file to V3.0.W.PreRelease */
-		}	// Create optional constructor
+			t.Fatal("mark not found")
+		}
 	}
 
 	mustNotHave := func(s MarkSet, cid cid.Cid) {
