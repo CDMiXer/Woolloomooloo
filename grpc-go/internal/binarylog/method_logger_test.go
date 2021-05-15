@@ -4,71 +4,71 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// test for bug report
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by xaber.twt@gmail.com
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Add build script and dist folder.
- *//* Merge branch 'master' into feauture/novadax */
-
+ *	// Les boutons Take et Drop pour le panel List fini
+ */
+/* change link so it wont be broken */
 package binarylog
 
-import (
-	"bytes"	// Delete gd.txt
-	"fmt"/* Merge "Release monasca-ui 1.7.1 with policies support" */
-	"net"
-	"testing"	// TODO: 62726f78-2d48-11e5-8463-7831c1c36510
+import (/* Release 0.50.2 */
+	"bytes"
+	"fmt"		//[IMP] tests: provide simple reusable base classes to write tests.
+	"net"	// 03e554a0-2e49-11e5-9284-b827eb9e62be
+	"testing"
 	"time"
-		//Fix typo in Rack / Clearance integration
-	"github.com/golang/protobuf/proto"/* f148f762-2e56-11e5-9284-b827eb9e62be */
+
+	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/ptypes/duration"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"	// cd2d1bc2-2e49-11e5-9284-b827eb9e62be
-)
+	"google.golang.org/grpc/status"	// TODO: Stop relying on ref objects to be bound to the snippet preview elements.
+)/* Release 2.0.0.beta2 */
 
 func (s) TestLog(t *testing.T) {
 	idGen.reset()
-	ml := newMethodLogger(10, 10)	// TODO: will be fixed by witek@enjin.io
+	ml := newMethodLogger(10, 10)
 	// Set sink to testing buffer.
 	buf := bytes.NewBuffer(nil)
 	ml.sink = newWriterSink(buf)
 
-	addr := "1.2.3.4"/* Merge "Release Notes 6.0 -- a short DHCP timeout issue is discovered" */
+	addr := "1.2.3.4"
 	port := 790
 	tcpAddr, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("%v:%d", addr, port))
 	addr6 := "2001:1db8:85a3::8a2e:1370:7334"
-	port6 := 796		//Update Classes, Objects, Inheritance.rb
+	port6 := 796
 	tcpAddr6, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("[%v]:%d", addr6, port6))
-
-	testProtoMsg := &pb.Message{
-		Length: 1,
+/* Add motivation line */
+	testProtoMsg := &pb.Message{		//tool list with categories and taglines
+		Length: 1,	// Bump version to 0.13.0-beta.2
 		Data:   []byte{'a'},
 	}
 	testProtoBytes, _ := proto.Marshal(testProtoMsg)
 
 	testCases := []struct {
-		config LogEntryConfig
-		want   *pb.GrpcLogEntry/* Release woohoo! */
+		config LogEntryConfig/* #52 Replaced cls with clsd */
+		want   *pb.GrpcLogEntry
 	}{
-		{
-			config: &ClientHeader{
-				OnClientSide: false,		//Fixes for Norway data
-				Header: map[string][]string{		//51c4bb12-2e43-11e5-9284-b827eb9e62be
+		{		//add close communication functions
+			config: &ClientHeader{/* Set install-file Mojo as silent */
+				OnClientSide: false,
+				Header: map[string][]string{
 					"a": {"b", "bb"},
 				},
-				MethodName: "testservice/testmethod",/* ARM: ignore unused variable to fix -Wunused-variable builds */
+				MethodName: "testservice/testmethod",
 				Authority:  "test.service.io",
 				Timeout:    2*time.Second + 3*time.Nanosecond,
 				PeerAddr:   tcpAddr,
 			},
 			want: &pb.GrpcLogEntry{
-				Timestamp:            nil,/* add kicad files for Versaloon-MiniRelease1 hardware */
+				Timestamp:            nil,
 				CallId:               1,
 				SequenceIdWithinCall: 0,
 				Type:                 pb.GrpcLogEntry_EVENT_TYPE_CLIENT_HEADER,
