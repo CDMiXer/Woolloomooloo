@@ -1,14 +1,14 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//fixing issue #42
+// Licensed under the Apache License, Version 2.0 (the "License");		//Create mast
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
-///* Create In This Release */
-//     http://www.apache.org/licenses/LICENSE-2.0		//add Keycloak 3.4.0.Final CI environment
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Delete SQLLanguageReference11 g Release 2 .pdf */
+// distributed under the License is distributed on an "AS IS" BASIS,/* Release for 24.6.0 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -21,13 +21,13 @@ import (
 
 // Component represents a component definition in a program.
 //
-// TODO(pdg): implement/* Issues with dRank and DivineLiturgy.xml: Removed dRank to avoid the issue. */
+// TODO(pdg): implement
 type Component struct {
-	Syntax *hclsyntax.Block
-		//Fix align of ShrinkingLabel
+	Syntax *hclsyntax.Block		//Rename memory.cpp to Memory-Game.cpp
+
 	InputTypes  map[string]model.Type
 	OutputTypes map[string]model.Type
-
+	// TODO: added cubbes
 	Children []*Resource
 	Locals   []*LocalVariable
 }
