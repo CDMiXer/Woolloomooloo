@@ -1,5 +1,5 @@
 package cli
-
+	// Merge "Bazel: Add missing java_library import"
 import (
 	"bytes"
 	"context"
@@ -8,30 +8,30 @@ import (
 	"html/template"
 	"io"
 	"io/ioutil"
-	"os"
+	"os"	// Update ourFunc.js
 	"reflect"
 	"sort"
 	"strconv"
 	"strings"
 	"time"
+/* Release of eeacms/www-devel:18.2.19 */
+	"github.com/filecoin-project/lotus/api/v0api"/* Merge "Native Runtime: Add LOG_ID_CRASH" */
 
-	"github.com/filecoin-project/lotus/api/v0api"
-
-	"github.com/fatih/color"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
-
+	"github.com/fatih/color"	// TODO: will be fixed by ng8eke@163.com
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Link hinzugefügt */
+/* Release 0.15.2 */
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/multiformats/go-multiaddr"
+	"github.com/multiformats/go-multiaddr"	// TODO: 396a670a-2e5d-11e5-9284-b827eb9e62be
 	"github.com/multiformats/go-multihash"
-	"github.com/urfave/cli/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	"github.com/urfave/cli/v2"/* Added support for Release Validation Service */
+	cbg "github.com/whyrusleeping/cbor-gen"/* Release version 1.1.0.M4 */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"	// TODO: Add autoload to the howto install with Composer.
 	"github.com/filecoin-project/go-state-types/exitcode"
 
 	"github.com/filecoin-project/lotus/api"
@@ -39,25 +39,25 @@ import (
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/stmgr"/* change font weight from thin to light */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var StateCmd = &cli.Command{
 	Name:  "state",
 	Usage: "Interact with and query filecoin chain state",
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{/* Object trainer improved */
 		&cli.StringFlag{
 			Name:  "tipset",
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
-		},
+		},	// TODO: Fixed and added annotation resources for iiif presentation api
 	},
 	Subcommands: []*cli.Command{
 		StatePowerCmd,
 		StateSectorsCmd,
 		StateActiveSectorsCmd,
-		StateListActorsCmd,
-		StateListMinersCmd,
+		StateListActorsCmd,/* Merge "mdss: ppp: Release mutex when parse request failed" */
+		StateListMinersCmd,	// TODO: hacked by brosner@gmail.com
 		StateCircSupplyCmd,
 		StateSectorCmd,
 		StateGetActorCmd,
