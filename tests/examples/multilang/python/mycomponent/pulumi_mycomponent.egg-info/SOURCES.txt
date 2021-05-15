@@ -1,7 +1,7 @@
-README.md
+README.md	// TODO: Clean up in TestManager
 setup.py
 pulumi_mycomponent/__init__.py
-pulumi_mycomponent.egg-info/PKG-INFO
+pulumi_mycomponent.egg-info/PKG-INFO/* Release notes for 1.0.84 */
 pulumi_mycomponent.egg-info/SOURCES.txt
 pulumi_mycomponent.egg-info/dependency_links.txt
 pulumi_mycomponent.egg-info/not-zip-safe
