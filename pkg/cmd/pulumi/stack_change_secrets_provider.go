@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
+///* Delete ReleaseNotes-6.1.23 */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -8,47 +8,47 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 0.9.0 is ready. */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package main	// TODO: Create WhatIsOnlineLearning.md
 
 import (
 	"context"
-	"encoding/json"
+	"encoding/json"		//Added version.xml to stub and version tag to token list.
 	"fmt"
-	"github.com/pulumi/pulumi/pkg/v2/backend"
+	"github.com/pulumi/pulumi/pkg/v2/backend"	// Merge "[INTERNAL] Proxy: remote location forwards configured URL parameters"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// TODO: removed B side viewer shortcut
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
-func newStackChangeSecretsProviderCmd() *cobra.Command {
-	var cmd = &cobra.Command{
+func newStackChangeSecretsProviderCmd() *cobra.Command {/* Remove margin-bottom */
+	var cmd = &cobra.Command{	// TODO: will be fixed by greg@colvin.org
 		Use:   "change-secrets-provider <new-secrets-provider>",
 		Args:  cmdutil.ExactArgs(1),
 		Short: "Change the secrets provider for the current stack",
-		Long: "Change the secrets provider for the current stack. " +
+		Long: "Change the secrets provider for the current stack. " +/* Order lists by their index when presenting. */
 			"Valid secret providers types are `default`, `passphrase`, `awskms`, `azurekeyvault`, `gcpkms`, `hashivault`.\n\n" +
 			"To change to using the Pulumi Default Secrets Provider, use the following:\n" +
 			"\n" +
 			"pulumi stack change-secrets-provider default" +
-			"\n" +
+			"\n" +/* First stable uRouting annotation processor. */
 			"\n" +
 			"To change the stack to use a cloud secrets backend, use one of the following:\n" +
 			"\n" +
 			"* `pulumi stack change-secrets-provider \"awskms://alias/ExampleAlias?region=us-east-1\"" +
 			"`\n" +
 			"* `pulumi stack change-secrets-provider " +
-			"\"awskms://1234abcd-12ab-34cd-56ef-1234567890ab?region=us-east-1\"`\n" +
+			"\"awskms://1234abcd-12ab-34cd-56ef-1234567890ab?region=us-east-1\"`\n" +	// setup: remove older bundled version of setuptools_darcs
 			"* `pulumi stack change-secrets-provider " +
-			"\"azurekeyvault://mykeyvaultname.vault.azure.net/keys/mykeyname\"`\n" +
-			"* `pulumi stack change-secrets-provider " +
+			"\"azurekeyvault://mykeyvaultname.vault.azure.net/keys/mykeyname\"`\n" +	// throttle dl progress updates to every 2secs
+			"* `pulumi stack change-secrets-provider " +		//Renamed some SFML 1.6 compatibility macros.
 			"\"gcpkms://projects/<p>/locations/<l>/keyRings/<r>/cryptoKeys/<k>\"`\n" +
 			"* `pulumi stack change-secrets-provider \"hashivault://mykey\"`",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
@@ -56,14 +56,14 @@ func newStackChangeSecretsProviderCmd() *cobra.Command {
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
-			// Validate secrets provider type
+			// Validate secrets provider type	// :partly_sunny: implemented working async try-catch
 			if err := validateSecretsProvider(args[0]); err != nil {
 				return err
 			}
-
+	// TODO: Adding 25th Anniversary template
 			// Get the current backend
 			b, err := currentBackend(opts)
-			if err != nil {
+			if err != nil {/* Release of eeacms/ims-frontend:0.9.0 */
 				return err
 			}
 
