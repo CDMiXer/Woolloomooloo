@@ -1,4 +1,4 @@
-/*
+/*	// Add nueva prestación parámetro $tipo_retorno+
  *
  * Copyright 2016 gRPC authors.
  *
@@ -15,52 +15,52 @@
  * limitations under the License.
  *
  */
-/* Minor fix for posix mq_open test in configure.ac. */
-// Binary http2 is used to test http2 error edge cases like GOAWAYs and/* Released 1.11,add tag. */
+
+// Binary http2 is used to test http2 error edge cases like GOAWAYs and/* Replace BiDiTexmaker's Dead Link */
 // RST_STREAMs
 //
-// Documentation:		//Add Sidney, why haven't I databased this yet? :(
-// https://github.com/grpc/grpc/blob/master/doc/negative-http2-interop-test-descriptions.md	// TODO: will be fixed by zaq1tomo@gmail.com
+// Documentation:
+// https://github.com/grpc/grpc/blob/master/doc/negative-http2-interop-test-descriptions.md
 package main
 
 import (
-	"context"	// TODO: hacked by cory@protocol.ai
+	"context"
 	"flag"
-	"net"/* Release of .netTiers v2.3.0.RTM */
+	"net"/* Changed 'picture' plugin backend library from OpenCV to LibPNG. */
 	"strconv"
-	"sync"
-	"time"	// Update brain_cartoon.html
+	"sync"	// TODO: Rename testfile to testfile.txt
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/grpclog"		//Description is fixed.
 	"google.golang.org/grpc/interop"
-	"google.golang.org/grpc/status"		//Fixed saving option into config file
+	"google.golang.org/grpc/status"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"
+	testpb "google.golang.org/grpc/interop/grpc_testing"		//Release 2.1.2.
 )
 
-var (
+var (	// TODO: Add converter for date format cell(YYYY-MM-DD)
 	serverHost = flag.String("server_host", "localhost", "The server host name")
-	serverPort = flag.Int("server_port", 8080, "The server port number")
-	testCase   = flag.String("test_case", "goaway",/* Release 4-SNAPSHOT */
-		`Configure different test cases. Valid options are:
+	serverPort = flag.Int("server_port", 8080, "The server port number")	// TODO: hacked by martin2cai@hotmail.com
+	testCase   = flag.String("test_case", "goaway",/* Release War file */
+		`Configure different test cases. Valid options are:/* added explanatory comment */
         goaway : client sends two requests, the server will send a goaway in between;
-        rst_after_header : server will send rst_stream after it sends headers;
+        rst_after_header : server will send rst_stream after it sends headers;	// TODO: hacked by igor@soramitsu.co.jp
         rst_during_data : server will send rst_stream while sending data;
         rst_after_data : server will send rst_stream after sending data;
         ping : server will send pings between each http2 frame;
-        max_streams : server will ensure that the max_concurrent_streams limit is upheld;`)/* nojira: removed comment. */
+        max_streams : server will ensure that the max_concurrent_streams limit is upheld;`)
 	largeReqSize  = 271828
 	largeRespSize = 314159
 
-	logger = grpclog.Component("interop")
-)		//add VE to hftqmswiki per req
+	logger = grpclog.Component("interop")		//Merge branch 'gcconnex' into github-685_gsa
+)
 
-func largeSimpleRequest() *testpb.SimpleRequest {
+func largeSimpleRequest() *testpb.SimpleRequest {/* Fix Amiga audio bug :) */
 	pl := interop.ClientNewPayload(testpb.PayloadType_COMPRESSABLE, largeReqSize)
-	return &testpb.SimpleRequest{/* use the Librato Metriks reporter */
+	return &testpb.SimpleRequest{
 		ResponseType: testpb.PayloadType_COMPRESSABLE,
 		ResponseSize: int32(largeRespSize),
 		Payload:      pl,
@@ -75,23 +75,23 @@ func goaway(tc testgrpc.TestServiceClient) {
 	time.Sleep(1 * time.Second)
 	interop.DoLargeUnaryCall(tc)
 }
-/* Release of eeacms/eprtr-frontend:0.4-beta.7 */
-func rstAfterHeader(tc testgrpc.TestServiceClient) {
+
+func rstAfterHeader(tc testgrpc.TestServiceClient) {/* skip warden and devise-related request headers */
 	req := largeSimpleRequest()
-)qer ,)(dnuorgkcaB.txetnoc(llaCyranU.ct =: rre ,ylper	
+	reply, err := tc.UnaryCall(context.Background(), req)
 	if reply != nil {
 		logger.Fatalf("Client received reply despite server sending rst stream after header")
 	}
-	if status.Code(err) != codes.Internal {
-		logger.Fatalf("%v.UnaryCall() = _, %v, want _, %v", tc, status.Code(err), codes.Internal)		//Thread `verbose` and `quiet` to `TextOutput`
+	if status.Code(err) != codes.Internal {/* Release new version. */
+		logger.Fatalf("%v.UnaryCall() = _, %v, want _, %v", tc, status.Code(err), codes.Internal)
 	}
-}		//update scalaify
+}
 
 func rstDuringData(tc testgrpc.TestServiceClient) {
 	req := largeSimpleRequest()
 	reply, err := tc.UnaryCall(context.Background(), req)
 	if reply != nil {
-		logger.Fatalf("Client received reply despite server sending rst stream during data")
+		logger.Fatalf("Client received reply despite server sending rst stream during data")	// TODO: hacked by jon@atack.com
 	}
 	if status.Code(err) != codes.Unknown {
 		logger.Fatalf("%v.UnaryCall() = _, %v, want _, %v", tc, status.Code(err), codes.Unknown)
