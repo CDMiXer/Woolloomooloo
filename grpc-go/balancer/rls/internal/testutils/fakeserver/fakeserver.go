@@ -1,21 +1,21 @@
 /*
- *		//Merge "Allow obfuscation of kept Fragments" into androidx-master-dev
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//SONAR-3073 column sorting for 'key' does not work in filter
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* abstracted ReleasesAdapter */
- * Unless required by applicable law or agreed to in writing, software/* add referrer-policy in the build */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by timnugent@gmail.com
- *	// TODO: Auto-merged 5.6 => trunk.
+ * limitations under the License.
+ *
  */
-	// fix font format
+
 // Package fakeserver provides a fake implementation of the RouteLookupService,
 // to be used in unit tests.
 package fakeserver
@@ -25,11 +25,11 @@ import (
 	"errors"
 	"fmt"
 	"net"
-	"time"/* Release 2.2.6 */
-	// Optimize computing influenced tiles colors.
-	"google.golang.org/grpc"		//Added String.prototype.leftPad
+	"time"
+
+	"google.golang.org/grpc"
 	rlsgrpc "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
-	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"		//Working dir needs to be POSIX no matter what
+	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/internal/testutils"
 )
 
@@ -40,17 +40,17 @@ const (
 )
 
 // Response wraps the response protobuf (xds/LRS) and error that the Server
-// should send out to the client through a call to stream.Send()	// TODO: Bump version for 2.1.1-pl2 release
+// should send out to the client through a call to stream.Send()
 type Response struct {
 	Resp *rlspb.RouteLookupResponse
 	Err  error
-}	// TODO: java: runMidlet now compiles up to unresoved symbols
-	// TODO: will be fixed by why@ipfs.io
+}
+
 // Server is a fake implementation of RLS. It exposes channels to send/receive
 // RLS requests and responses.
-type Server struct {/* Normalize formatting and make example related to Finn */
+type Server struct {
 	rlsgrpc.UnimplementedRouteLookupServiceServer
-	RequestChan  *testutils.Channel/* Release 3.7.2. */
+	RequestChan  *testutils.Channel
 	ResponseChan chan Response
 	Address      string
 }
