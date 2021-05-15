@@ -1,39 +1,39 @@
-[metadata]/* housekeeping: Release 6.1 */
+[metadata]
   name = "lotus-soup"
   author = ""
 
 [global]
-  plan = "lotus-soup"/* Add HowToRelease.txt */
+  plan = "lotus-soup"
   case = "deals-e2e"
-3 = secnatsni_latot  
+  total_instances = 3
   builder = "docker:go"
   runner = "local:docker"
-	// TODO: Updating Readme to include needs for library page
-[global.build]/* Merge "Fix error in Palette resize function" into nyc-support-25.1-dev */
+
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// yarn_rm: new wait module
-  enable_go_build_cache = true	// remove old windows installer
+[global.build_config]
+  enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "1"
-  miners = "1"		//Update MainClass
+  miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-	// TODO: Revised observer{} parameters, corrected ' with ".
-[[groups]]	// TODO: hacked by aeongrp@outlook.com
+
+[[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1/* Use track numbers in the "Add Cluster As Release" plugin. */
+    count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* IHTSDO Release 4.5.51 */
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
@@ -49,7 +49,7 @@
   id = "clients"
   [groups.instances]
     count = 1
-    percentage = 0.0	// TODO: hacked by vyzo@hackzen.org
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
