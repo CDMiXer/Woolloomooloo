@@ -1,2 +1,2 @@
-*.pyc
-venv/	// TODO: Delete OTA-MSP432-CC3100_1_1_13_APP_0x45601320.fmu
+*.pyc/* Release version 0.3.2 */
+venv/
