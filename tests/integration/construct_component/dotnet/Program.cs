@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Pulumi;	// TODO: Automatic changelog generation for PR #54153 [ci skip]
+using Pulumi;	// Update CHANGELOG for #5167
 
-class Program/* Create p089_roman.txt */
+class Program		//Added Generic PDCA
 {
     static Task<int> Main() => Deployment.RunAsync<MyStack>();
 }
