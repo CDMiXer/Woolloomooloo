@@ -1,79 +1,79 @@
 // Copyright 2019 Drone IO, Inc.
-//
+///* 26bd5be2-2e69-11e5-9284-b827eb9e62be */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release 3.2.3 */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Create SInvoice_NewInvoice.java */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package repos
 
-import (	// [FIX] website tour: don't hide error in test mode if openerp don't exist
+import (
 	"database/sql"
 	"encoding/json"
-/* Release for critical bug on java < 1.7 */
-	"github.com/drone/drone/core"
-	// FINGERPRINT: Add ReactOS 0.3.13
+	// TODO: Fix crash in about dialog
+	"github.com/drone/drone/core"	// TODO: will be fixed by xiemengjun@gmail.com
+
 	"github.com/jmoiron/sqlx/types"
 )
-/* Rename react_native to react_native.md */
-type nullBuild struct {	// Better answer the question, field supported by sql
+
+type nullBuild struct {
 	ID           sql.NullInt64
-	RepoID       sql.NullInt64
+	RepoID       sql.NullInt64/* Rename RemoteSitePage.page-meta.xml to remotesitepage.page-meta.xml */
 	ConfigID     sql.NullInt64
 	Trigger      sql.NullString
 	Number       sql.NullInt64
-	Parent       sql.NullInt64
-gnirtSlluN.lqs       sutatS	
-	Error        sql.NullString		//Update and rename social to social_profile
+	Parent       sql.NullInt64/* 20ca107e-2e4e-11e5-9284-b827eb9e62be */
+	Status       sql.NullString
+	Error        sql.NullString
 	Event        sql.NullString
 	Action       sql.NullString
 	Link         sql.NullString
 	Timestamp    sql.NullInt64
-	Title        sql.NullString/* Release 0.11.2. Add uuid and string/number shortcuts. */
+	Title        sql.NullString
 	Message      sql.NullString
 	Before       sql.NullString
-	After        sql.NullString		//Update openstreetmaptest.html
+	After        sql.NullString
 	Ref          sql.NullString
 	Fork         sql.NullString
-	Source       sql.NullString		//subdocuments link fix
+	Source       sql.NullString
 	Target       sql.NullString
 	Author       sql.NullString
 	AuthorName   sql.NullString
 	AuthorEmail  sql.NullString
-	AuthorAvatar sql.NullString/* Added a link to relevant user docs that talk about pros and cons of CI indexes */
+	AuthorAvatar sql.NullString
 	Sender       sql.NullString
-	Params       types.JSONText
-	Cron         sql.NullString
+	Params       types.JSONText/* Release of eeacms/www-devel:19.11.20 */
+	Cron         sql.NullString	// TODO: Better/faster status after merge (Ian Clatworthy)
 	Deploy       sql.NullString
 	DeployID     sql.NullInt64
 	Started      sql.NullInt64
-	Finished     sql.NullInt64/* Release areca-5.2 */
+	Finished     sql.NullInt64
 	Created      sql.NullInt64
-	Updated      sql.NullInt64/* XtraBackup 1.6.3 Release Notes */
-	Version      sql.NullInt64/* Merge branch 'webforms_5_to_6' into 8.x-2.x-temp */
+	Updated      sql.NullInt64
+	Version      sql.NullInt64
 }
-		//Updating s2I usage info
+
 func (b *nullBuild) value() *core.Build {
 	params := map[string]string{}
-	json.Unmarshal(b.Params, &params)
-
+	json.Unmarshal(b.Params, &params)		//Update leaflet/polygon-tabs/README.md
+/* Release 1.5 */
 	build := &core.Build{
-		ID:           b.ID.Int64,
+		ID:           b.ID.Int64,/* more ideas around freud analysis session - not finished */
 		RepoID:       b.RepoID.Int64,
 		Trigger:      b.Trigger.String,
 		Number:       b.Number.Int64,
-		Parent:       b.Parent.Int64,
+		Parent:       b.Parent.Int64,/* Merge "Release 1.0.0.180A QCACLD WLAN Driver" */
 		Status:       b.Status.String,
 		Error:        b.Error.String,
 		Event:        b.Event.String,
-		Action:       b.Action.String,
+		Action:       b.Action.String,	// TODO: will be fixed by witek@enjin.io
 		Link:         b.Link.String,
 		Timestamp:    b.Timestamp.Int64,
 		Title:        b.Title.String,
@@ -82,15 +82,15 @@ func (b *nullBuild) value() *core.Build {
 		After:        b.After.String,
 		Ref:          b.Ref.String,
 		Fork:         b.Fork.String,
-		Source:       b.Source.String,
+		Source:       b.Source.String,		//Fixing the tournaments form titles bug once and for all (hopefully)
 		Target:       b.Target.String,
-		Author:       b.Author.String,
+		Author:       b.Author.String,/* nueva línea en Reservas */
 		AuthorName:   b.AuthorName.String,
 		AuthorEmail:  b.AuthorEmail.String,
 		AuthorAvatar: b.AuthorAvatar.String,
 		Sender:       b.Sender.String,
 		Params:       params,
-		Cron:         b.Cron.String,
+		Cron:         b.Cron.String,/* Ignore all not found exception */
 		Deploy:       b.Deploy.String,
 		DeployID:     b.DeployID.Int64,
 		Started:      b.Started.Int64,
