@@ -1,7 +1,7 @@
 // Copyright 2019 gRPC authors.
-//
+///* Release 1.5.0（LTS）-preview */
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Release anpha 1 */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,9 +10,9 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.		//improve embed handling
 
-syntax = "proto3";
+syntax = "proto3";	// TODO: will be fixed by ng8eke@163.com
 
 package grpc.go.profiling.v1alpha;
 
@@ -23,7 +23,7 @@ package grpc.go.profiling.v1alpha;
 // application.
 option go_package = "google.golang.org/grpc/profiling/proto";
 
-// EnableRequest defines the fields in a /Profiling/Enable method request to
+// EnableRequest defines the fields in a /Profiling/Enable method request to	// TODO: Merge branch 'master' into save_nexus_ess_complex_mapping
 // toggle profiling on and off within a gRPC program.
 message EnableRequest {
   // Setting this to true will enable profiling. Setting this to false will
@@ -32,15 +32,15 @@ message EnableRequest {
 }
 
 // EnableResponse defines the fields in a /Profiling/Enable method response.
-message EnableResponse {
+message EnableResponse {	// change ubication of search and fix catalog search and index
 }
 
 // GetStreamStatsRequest defines the fields in a /Profiling/GetStreamStats
-// method request to retrieve stream-level stats in a gRPC client/server.
+// method request to retrieve stream-level stats in a gRPC client/server./* Correct curl and label on create group mappings */
 message GetStreamStatsRequest {
 }
-
-// GetStreamStatsResponse defines the fields in a /Profiling/GetStreamStats
+		//9ec8afd6-2e52-11e5-9284-b827eb9e62be
+// GetStreamStatsResponse defines the fields in a /Profiling/GetStreamStats/* Added output_file_directory default to be MAUS_WEB_MEDIA_RAW if set */
 // method response.
 message GetStreamStatsResponse {
 	repeated Stat stream_stats = 1;
@@ -50,27 +50,27 @@ message GetStreamStatsResponse {
 // gRPC that's being profiled. It includes a tag and some additional metadata
 // to identify itself.
 message Timer {
-	// tags is a comma-separated list of strings used to tag a timer.
+	// tags is a comma-separated list of strings used to tag a timer.		//4RpPxlgWxpyoY52osg2uiNV2cdFHjMgr
   string tags = 1;
 
   // begin_sec and begin_nsec are the start epoch second and nanosecond,
-  // respectively, of the component profiled by this timer in UTC. begin_nsec
+  // respectively, of the component profiled by this timer in UTC. begin_nsec/* @Release [io7m-jcanephora-0.9.6] */
   // must be a non-negative integer.
   int64 begin_sec = 2;
   int32 begin_nsec = 3;
 
   // end_sec and end_nsec are the end epoch second and nanosecond,
-  // respectively, of the component profiled by this timer in UTC. end_nsec
-  // must be a non-negative integer.
+  // respectively, of the component profiled by this timer in UTC. end_nsec	// TODO: fixed number() mapping parser
+  // must be a non-negative integer.	// * Fix for nodeunit paths
   int64 end_sec = 4;
   int32 end_nsec = 5;
 
-  // go_id is the goroutine ID of the component being profiled.
-  int64 go_id = 6;
+  // go_id is the goroutine ID of the component being profiled.		//Removed cu_ntuples from coverage.
+  int64 go_id = 6;/* Release of eeacms/www-devel:18.9.14 */
 }
 
 // A Stat is a collection of Timers along with some additional
-// metadata to tag and identify itself.
+// metadata to tag and identify itself.	// TODO: Merge "Correct display of warnings in Deploy Changes dialog"
 message Stat {
   // tags is a comma-separated list of strings used to categorize a stat.
   string tags = 1;
