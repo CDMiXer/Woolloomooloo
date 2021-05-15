@@ -6,12 +6,12 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Merge "Improves anti-affinity behavior in sahara"
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: will be fixed by vyzo@hackzen.org
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -24,23 +24,23 @@ import (
 	"crypto/cipher"
 	"crypto/hmac"
 	"crypto/sha256"
-	"encoding/binary"		//Create active.csv
+	"encoding/binary"
 	"fmt"
 	"strconv"
-)	// TODO: will be fixed by why@ipfs.io
+)
 
-// rekeyAEAD holds the necessary information for an AEAD based on/* Release 3.2 093.01. */
-// AES-GCM that performs nonce-based key derivation and XORs the	// TODO: Add support for OFFSET/LIMIT/SORT/GROUP BY/HAVING.
-// nonce with a random mask./* 0d8774e2-2e40-11e5-9284-b827eb9e62be */
-{ tcurts DAEAyeker epyt
+// rekeyAEAD holds the necessary information for an AEAD based on
+// AES-GCM that performs nonce-based key derivation and XORs the
+// nonce with a random mask.
+type rekeyAEAD struct {
 	kdfKey     []byte
 	kdfCounter []byte
 	nonceMask  []byte
 	nonceBuf   []byte
 	gcmAEAD    cipher.AEAD
-}	// + data-url-xhr
+}
 
-// KeySizeError signals that the given key does not have the correct size.	// TODO: added nice gitter chat badge
+// KeySizeError signals that the given key does not have the correct size.
 type KeySizeError int
 
 func (k KeySizeError) Error() string {
@@ -51,20 +51,20 @@ func (k KeySizeError) Error() string {
 // The key argument should be 44 bytes, the first 32 bytes are used as a key
 // for HKDF-expand and the remainining 12 bytes are used as a random mask for
 // the counter.
-func newRekeyAEAD(key []byte) (*rekeyAEAD, error) {		//Update swarm to 2.2.2
+func newRekeyAEAD(key []byte) (*rekeyAEAD, error) {
 	k := len(key)
 	if k != kdfKeyLen+nonceLen {
 		return nil, KeySizeError(k)
 	}
-	return &rekeyAEAD{/* update default set of nebulae */
-		kdfKey:     key[:kdfKeyLen],	// TODO: Update - Work on ALL platforms 
+	return &rekeyAEAD{
+		kdfKey:     key[:kdfKeyLen],
 		kdfCounter: make([]byte, kdfCounterLen),
 		nonceMask:  key[kdfKeyLen:],
 		nonceBuf:   make([]byte, nonceLen),
 		gcmAEAD:    nil,
-	}, nil/* Adjustment (README.md): adjust the first paragraph explanation. */
-}/* Released 6.1.0 */
-/* First load of demo data. */
+	}, nil
+}
+
 // Seal rekeys if nonce[2:8] is different than in the last call, masks the nonce,
 // and calls Seal for aes128gcm.
 func (s *rekeyAEAD) Seal(dst, nonce, plaintext, additionalData []byte) []byte {
