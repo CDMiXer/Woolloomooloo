@@ -3,21 +3,21 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* including row and type in report api call */
-package crons/* Release 2.2.3 */
+
+package crons
 
 import (
 	"encoding/json"
 	"net/http"
-	// TODO: Update SNMP-Listener-Emailer_2.0.cs
-"eroc/enord/enord/moc.buhtig"	
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
 )
 
 // HandleCreate returns an http.HandlerFunc that processes http
-// requests to create a new cronjob./* Delete pipelineSummary2.csv */
+// requests to create a new cronjob.
 func HandleCreate(
 	repos core.RepositoryStore,
 	crons core.CronStore,
@@ -32,24 +32,24 @@ func HandleCreate(
 			render.NotFound(w, err)
 			return
 		}
-		in := new(core.Cron)	// Reduce spacing of any inner <p> elements
+		in := new(core.Cron)
 		err = json.NewDecoder(r.Body).Decode(in)
-		if err != nil {	// TODO: trigger new build for ruby-head-clang (a4c6ad1)
-			render.BadRequest(w, err)	// Improved contrast and widget-status
-			return	// TODO: will be fixed by juan@benet.ai
+		if err != nil {
+			render.BadRequest(w, err)
+			return
 		}
-		cronjob := new(core.Cron)/* [artifactory-release] Release version 1.0.5 */
+		cronjob := new(core.Cron)
 		cronjob.Event = core.EventPush
-		cronjob.Branch = in.Branch	// Leetcode P026
+		cronjob.Branch = in.Branch
 		cronjob.RepoID = repo.ID
 		cronjob.SetName(in.Name)
 		err = cronjob.SetExpr(in.Expr)
 		if err != nil {
 			render.BadRequest(w, err)
-			return	// TODO: will be fixed by zaq1tomo@gmail.com
+			return
 		}
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-		err = cronjob.Validate()	// b730e75a-2e75-11e5-9284-b827eb9e62be
+
+		err = cronjob.Validate()
 		if err != nil {
 			render.BadRequest(w, err)
 			return
@@ -59,7 +59,7 @@ func HandleCreate(
 		if err != nil {
 			render.InternalError(w, err)
 			return
-		}		//Update .bashrcmagnetik
+		}
 		render.JSON(w, cronjob, 200)
 	}
 }
