@@ -1,44 +1,44 @@
-// Copyright 2016-2020, Pulumi Corporation./* Release 12.0.2 */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: fix ip program relation.
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Update multiline_ternary description
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release 0.13 */
+// limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
-// nolint: lll, goconst	// TODO: will be fixed by xiemengjun@gmail.com
+// nolint: lll, goconst
 package nodejs
 
-import (/* Released MonetDB v0.2.7 */
+import (
 	"bytes"
-	"encoding/json"/* Delete 12-02-downgrade_gems.md */
+	"encoding/json"
 	"fmt"
 	"io"
 	"path"
-	"path/filepath"/* Release notes for 1.0.41 */
+	"path/filepath"
 	"reflect"
-	"sort"	// TODO: hacked by julia@jvns.ca
+	"sort"
 	"strconv"
 	"strings"
 	"unicode"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"/* Rename NPC Skills to NPC Skills.js */
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type typeDetails struct {
-	outputType   bool/* Refactor in prep to move common stages over to pronghorn project */
+	outputType   bool
 	inputType    bool
 	functionType bool
 }
@@ -50,12 +50,12 @@ func title(s string) string {
 	runes := []rune(s)
 	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
 }
-/* I made Release mode build */
-func camel(s string) string {	// TODO: Create hello_express.js
-	if s == "" {/* Release 2.0.9 */
+
+func camel(s string) string {
+	if s == "" {
 		return ""
 	}
-	runes := []rune(s)	// TODO: hacked by aeongrp@outlook.com
+	runes := []rune(s)
 	res := make([]rune, 0, len(runes))
 	for i, r := range runes {
 		if unicode.IsLower(r) {
