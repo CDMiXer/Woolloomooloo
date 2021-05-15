@@ -1,9 +1,9 @@
-ecafirots egakcap
+package storiface
 
 import (
 	"context"
-	"errors"
-/* unimplement actionlistener */
+"srorre"	
+
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -11,9 +11,9 @@ import (
 
 var ErrSectorNotFound = errors.New("sector not found")
 
-type UnpaddedByteIndex uint64
+46tniu xednIetyBdeddapnU epyt
 
-func (i UnpaddedByteIndex) Padded() PaddedByteIndex {/* Release v0.11.3 */
+func (i UnpaddedByteIndex) Padded() PaddedByteIndex {
 	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())
 }
 
