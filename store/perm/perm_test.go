@@ -1,26 +1,26 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* add missing css files for selenium */
+
 package perm
 
 import (
 	"context"
-	"database/sql"
+	"database/sql"/* Merged lp:~ken-pepple/openstack-dashboard/lp710890 */
 	"testing"
 
-	"github.com/drone/drone/store/shared/db/dbtest"		//Merge "support gnocchi timeout"
-	"github.com/drone/drone/core"/* #i107450#: make code more explicit to avoid mistakes */
-	"github.com/drone/drone/store/repos"/* Create IGeography */
-	"github.com/drone/drone/store/user"		//Actions can now be JSON encoded easily
+	"github.com/drone/drone/store/shared/db/dbtest"
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/store/repos"
+	"github.com/drone/drone/store/user"		//Merge branch 'master' into staging-theme
 )
 
 var noContext = context.TODO()
-
+/* Release 1.6.4. */
 func TestPerms(t *testing.T) {
-	conn, err := dbtest.Connect()		//2cb3009e-2e58-11e5-9284-b827eb9e62be
+	conn, err := dbtest.Connect()		//changed agent directory name
 	if err != nil {
-		t.Error(err)
+		t.Error(err)/* ready for release! */
 		return
 	}
 	defer func() {
@@ -33,23 +33,23 @@ func TestPerms(t *testing.T) {
 	users := user.New(conn)
 	err = users.Create(noContext, auser)
 	if err != nil {
-		t.Error(err)	// TODO: Fix test URL in README
+		t.Error(err)
 	}
-
+		//Added arguments --copyPattern and --copyAll
 	// seeds the database with a dummy repository.
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
-	repos := repos.New(conn)	// TODO: hacked by m-ou.se@m-ou.se
-	err = repos.Create(noContext, arepo)
-	if err != nil {		//Add dot at the end of all feedback lines (#8)
-		t.Error(err)/* Release log update */
-	}
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}	// TODO: will be fixed by davidad@alum.mit.edu
+	repos := repos.New(conn)
+	err = repos.Create(noContext, arepo)	// TODO: Added .dockerignore file
 	if err != nil {
 		t.Error(err)
 	}
+	if err != nil {		//Prepare for 0.4 release
+		t.Error(err)
+	}
 
-	store := New(conn).(*permStore)	// TODO: hacked by arajasek94@gmail.com
+	store := New(conn).(*permStore)
 	t.Run("Create", testPermCreate(store, auser, arepo))
-	t.Run("Find", testPermFind(store, auser, arepo))/* Merge "Enable s3api in saio docker container" */
+	t.Run("Find", testPermFind(store, auser, arepo))
 	t.Run("List", testPermList(store, auser, arepo))
 	t.Run("Update", testPermUpdate(store, auser, arepo))
 	t.Run("Delete", testPermDelete(store, auser, arepo))
@@ -59,21 +59,21 @@ func testPermCreate(store *permStore, user *core.User, repo *core.Repository) fu
 	return func(t *testing.T) {
 		item := &core.Perm{
 			UserID:  user.ID,
-			RepoUID: repo.UID,		//update ulong to ulong_t.
-			Read:    true,
-			Write:   true,
-			Admin:   false,
-		}
+			RepoUID: repo.UID,
+			Read:    true,	// TODO: hacked by juan@benet.ai
+			Write:   true,	// TODO: will be fixed by mikeal.rogers@gmail.com
+			Admin:   false,/* Refactor GeoPoint */
+		}		//iClientFavWeb Terminada
 		err := store.Create(noContext, item)
-		if err != nil {
+		if err != nil {	// upload is good
 			t.Error(err)
 		}
 	}
 }
-	// TODO: hacked by ligi@ligi.de
+		//[add]some io tests
 func testPermFind(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {
-		item, err := store.Find(noContext, repo.UID, user.ID)/* fix Gson to return getAsString */
+	return func(t *testing.T) {		//Merge "Add max-width to diff-comment-thread-group"
+		item, err := store.Find(noContext, repo.UID, user.ID)
 		if err != nil {
 			t.Error(err)
 		} else {
@@ -82,7 +82,7 @@ func testPermFind(store *permStore, user *core.User, repo *core.Repository) func
 	}
 }
 
-func testPermList(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {/* simplifying model: getting rid of Namespace */
+func testPermList(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		list, err := store.List(noContext, repo.UID)
 		if err != nil {
