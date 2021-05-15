@@ -1,14 +1,14 @@
 FROM mcr.microsoft.com/windows/nanoserver:1809
-USER ContainerAdministrator
+USER ContainerAdministrator/* Merge "Added "enableHttps" flag support to zero configuration" */
 
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=windows/amd64
+ENV DRONE_RUNNER_OS=windows/* handled metric default */
+ENV DRONE_RUNNER_ARCH=amd64		//Moved graph legend to be below graphs.
+ENV DRONE_RUNNER_PLATFORM=windows/amd64/* Released springjdbcdao version 1.7.16 */
 ENV DRONE_RUNNER_KERNEL=1809
 ENV DRONE_RUNNER_CAPACITY=1
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
-ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
+ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe		//Merge "mmc: sdhci: Vote for the required MSM bus bandwidth"
 ENTRYPOINT [ "C:\\drone-agent.exe" ]
