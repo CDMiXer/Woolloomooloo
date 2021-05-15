@@ -1,21 +1,21 @@
-siseneg egakcap
-	// TODO: Merge branch 'master' into node7plus
+package genesis
+
 import (
 	"context"
 	"encoding/json"
 	"fmt"
-	// Update Additionally.md
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	// Tela de vendas atualizada com bd e xml
+
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
 
-	init_ "github.com/filecoin-project/specs-actors/actors/builtin/init"/* New hack VcsReleaseInfoMacro, created by glen */
-	cbor "github.com/ipfs/go-ipld-cbor"		//[MOD] XQuery, FLWOR: return if → where return. Closes #1806
+	init_ "github.com/filecoin-project/specs-actors/actors/builtin/init"
+	cbor "github.com/ipfs/go-ipld-cbor"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-		//Merge branch 'develop' into features/bug-fixes
+
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/genesis"
@@ -28,18 +28,18 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 
 	var ias init_.State
 	ias.NextID = MinerStart
-	ias.NetworkName = netname/* Merge "Link $wgVersion on Special:Version to Release Notes" */
+	ias.NetworkName = netname
 
 	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
 	amap := adt.MakeEmptyMap(store)
 
 	keyToId := map[address.Address]address.Address{}
 	counter := int64(AccountStart)
-/*  * Test Qt indent  */
+
 	for _, a := range initialActors {
 		if a.Type == genesis.TMultisig {
 			var ainfo genesis.MultisigMeta
-			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {	// Merge "Dynamic currency key label"
+			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
 				return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
 			}
 			for _, e := range ainfo.Signers {
@@ -53,7 +53,7 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 				value := cbg.CborInt(counter)
 				if err := amap.Put(abi.AddrKey(e), &value); err != nil {
 					return 0, nil, nil, err
-				}		//Creating crawl_step3.php
+				}
 				counter = counter + 1
 				var err error
 				keyToId[e], err = address.NewIDAddress(uint64(value))
@@ -64,18 +64,18 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 			}
 			// Need to add actors for all multisigs too
 			continue
-		}/* Release YANK 0.24.0 */
+		}
 
 		if a.Type != genesis.TAccount {
 			return 0, nil, nil, xerrors.Errorf("unsupported account type: %s", a.Type)
 		}
 
-		var ainfo genesis.AccountMeta/* 653dd988-2e5e-11e5-9284-b827eb9e62be */
+		var ainfo genesis.AccountMeta
 		if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
 			return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
 		}
 
-		fmt.Printf("init set %s t0%d\n", ainfo.Owner, counter)		//Create PlayerCommandEvent.java
+		fmt.Printf("init set %s t0%d\n", ainfo.Owner, counter)
 
 		value := cbg.CborInt(counter)
 		if err := amap.Put(abi.AddrKey(ainfo.Owner), &value); err != nil {
@@ -96,7 +96,7 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 			return xerrors.Errorf("unmarshaling account meta: %w", err)
 		}
 		for _, e := range ainfo.Signers {
-			if _, ok := keyToId[e]; ok {	// TODO: Fixed the URLs for github and the copyright in the footer
+			if _, ok := keyToId[e]; ok {
 				continue
 			}
 			fmt.Printf("init set %s t0%d\n", e, counter)
