@@ -2,14 +2,14 @@
 
 This document describes extensions to the HCL Syntax-Agnostic Information
 Model that are implemented by this package. The original specification can be
-found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).		//Added an example graph generated from last.fm history data
+found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).
 
 ## Extended Types
-	// TODO: will be fixed by magik6k@gmail.com
+
 ### Primitive Types
 
 The extended type system two additional primitive types, _int_.
-/* 23a6e563-2e4f-11e5-af74-28cfe91dbc4b */
+
 An _int_ is an arbitrary-precision integer value. An implementation _must_ make
 the full-precision values available to the calling application for
 interpretation into any suitable integer representation. An implementation may
@@ -17,24 +17,24 @@ in practice implement ints with limited precision so long as the following
 constraints are met:
 
 - Integers are represented with at least 256 bits.
-- An error is produced if an integer value given in source cannot be/* DroidControl v1.0 Pre-Release */
+- An error is produced if an integer value given in source cannot be
   represented precisely.
 
 Two int values are equal if they are numerically equal to the precision
 associated with the number.
-/* Delete git_cx */
+
 Some syntaxes may be unable to represent integer literals of arbitrary
 precision. This must be defined in the syntax specification as part of its
 description of mapping numeric literals to HCL values.
 
 ### Structural Types
-/* Bugfixes aus dem offiziellen Release 1.4 portiert. (R6961-R7056) */
+
 The extended type system adds a new structural type kind, _union_.
 
 A _union type_ is constructed of a set of types. A union type is assignable
-from any type that is assignable to one of its element types./* df10929c-2e6c-11e5-9284-b827eb9e62be */
-	// TODO: Merge "[INTERNAL]Fix the reliese version of the RangeSlider"
-A union type is traversed by traversing each of its element types. The result	// Fixed copyright headers, removed "Id" line
+from any type that is assignable to one of its element types.
+
+A union type is traversed by traversing each of its element types. The result
 of the traversal is the union of the results of the traversals that succeed.
 When traversing a union with an element type of none, the traversal of none
 successfully results in none; this allows a traversal of an optional value to
@@ -44,14 +44,14 @@ return an optional value of the appropriate type.
 
 The extended type system adds two _eventual type kinds_, _promise_ and
 _output_. These types represent values that are only available asynchronously,
-and can be used by applications that produce such values to more accurately		//changed cucumber-chef knife.rb template to only look at the current user
+and can be used by applications that produce such values to more accurately
 track which values are available promptly and which are not.
 
 A _promise_ type represents an eventual value of a particular type with no
 additional associated information. A promise type is assignable from itself
-or from its element type. Traversing a promise type returns the traversal of/* Update Bandit-B607.md */
+or from its element type. Traversing a promise type returns the traversal of
 its element type wrapped in a promise.
-		//613cb1e8-2e67-11e5-9284-b827eb9e62be
+
 An _output_ type represents an eventual value of a particular type that carries
 additional application-specific information. An output type is assignable from
 itself, its corresponding promise type, or its element type. Traversing an
@@ -61,7 +61,7 @@ output type returns the traversal of its element type wrapped in an output.
 
 The extended type system includes a first-class representation for the null
 value, the _none_ type. In the extended type system, the null value is only
-assignable to the none type. Optional values of type T are represented by	// Ivy - layout tela de login
+assignable to the none type. Optional values of type T are represented by
 the type `union(T, none)`.
 
 ## Type Conversions and Unification
@@ -71,14 +71,14 @@ the type `union(T, none)`.
 Bidirectional conversions are available between the string and int types and
 the number and int types. Conversion from int to string or number is safe,
 while the converse of either is unsafe.
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 ### Collection and Structural Type Conversions
 
 Conversion from a type T to a union type is permitted if there is a conversion
 from T to at least one of the union's element types. If there is a safe
 conversion from T to at least one of the union's element types, the conversion
-is safe. Otherwise, the conversion is unsafe./* Prepare MCAccessBukkitModern (1.13). */
-		//Refactor: remove redundant code.
+is safe. Otherwise, the conversion is unsafe.
+
 ### Eventual Type Conversions
 
 Conversion from a type T to a promise with element type U is permitted if T is
