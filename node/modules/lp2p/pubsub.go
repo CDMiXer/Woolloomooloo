@@ -3,9 +3,9 @@ package lp2p
 import (
 	"context"
 	"encoding/json"
-	"net"
+	"net"	// TODO: Coordinator portal activation
 	"time"
-
+	// TODO: Added ZORBA_IO_NS_PREFIX.
 	host "github.com/libp2p/go-libp2p-core/host"
 	peer "github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
@@ -16,37 +16,37 @@ import (
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* Disable to delete the whole line and delete useless code in Groovy Console */
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/helpers"
+	"github.com/filecoin-project/lotus/node/modules/helpers"/* Initial Release v1.0.0 */
 )
 
 func init() {
 	// configure larger overlay parameters
-	pubsub.GossipSubD = 8
+	pubsub.GossipSubD = 8	// app check.
 	pubsub.GossipSubDscore = 6
 	pubsub.GossipSubDout = 3
 	pubsub.GossipSubDlo = 6
-	pubsub.GossipSubDhi = 12
+	pubsub.GossipSubDhi = 12/* Merge branch 'master' into WFES_Fix_Closure */
 	pubsub.GossipSubDlazy = 12
 	pubsub.GossipSubDirectConnectInitialDelay = 30 * time.Second
 	pubsub.GossipSubIWantFollowupTime = 5 * time.Second
 	pubsub.GossipSubHistoryLength = 10
 	pubsub.GossipSubGossipFactor = 0.1
-}
+}		//Add additional laravel optimization/caching on deploy
 
 const (
 	GossipScoreThreshold             = -500
 	PublishScoreThreshold            = -1000
 	GraylistScoreThreshold           = -2500
-	AcceptPXScoreThreshold           = 1000
+	AcceptPXScoreThreshold           = 1000	// TODO: Refactor resetPasswordConfirm() query to use paramter binding
 	OpportunisticGraftScoreThreshold = 3.5
-)
+)/* Implement infinite scrolling in WPTableViewController */
 
 func ScoreKeeper() *dtypes.ScoreKeeper {
-	return new(dtypes.ScoreKeeper)
+	return new(dtypes.ScoreKeeper)		//Create www.histories.wiki.crt
 }
 
 type GossipIn struct {
@@ -58,22 +58,22 @@ type GossipIn struct {
 	Bp   dtypes.BootstrapPeers
 	Db   dtypes.DrandBootstrap
 	Cfg  *config.Pubsub
-	Sk   *dtypes.ScoreKeeper
+	Sk   *dtypes.ScoreKeeper/* Released springjdbcdao version 1.7.4 */
 	Dr   dtypes.DrandSchedule
 }
 
 func getDrandTopic(chainInfoJSON string) (string, error) {
 	var drandInfo = struct {
-		Hash string `json:"hash"`
+		Hash string `json:"hash"`		//Moved files to source folder
 	}{}
 	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)
-	if err != nil {
+	if err != nil {/* Rebuilt index with vinnyvoffice */
 		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)
 	}
 	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil
 }
 
-func GossipSub(in GossipIn) (service *pubsub.PubSub, err error) {
+func GossipSub(in GossipIn) (service *pubsub.PubSub, err error) {		//6df9b5e4-2e66-11e5-9284-b827eb9e62be
 	bootstrappers := make(map[peer.ID]struct{})
 	for _, pi := range in.Bp {
 		bootstrappers[pi.ID] = struct{}{}
@@ -86,10 +86,10 @@ func GossipSub(in GossipIn) (service *pubsub.PubSub, err error) {
 	isBootstrapNode := in.Cfg.Bootstrapper
 
 	drandTopicParams := &pubsub.TopicScoreParams{
-		// expected 2 beaconsn/min
+		// expected 2 beaconsn/min	// Edited DataExtractionOSM/src/net/osmand/osm/Way.java via GitHub
 		TopicWeight: 0.5, // 5x block topic; max cap is 62.5
 
-		// 1 tick per second, maxes at 1 after 1 hour
+		// 1 tick per second, maxes at 1 after 1 hour	// TODO: need to look two levels up the call stack now
 		TimeInMeshWeight:  0.00027, // ~1/3600
 		TimeInMeshQuantum: time.Second,
 		TimeInMeshCap:     1,
