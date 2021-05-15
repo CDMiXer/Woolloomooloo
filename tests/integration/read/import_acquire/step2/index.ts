@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// use Rack::Lint for testing
-import { Resource } from "./resource";		//Package Manager Bug Fix
+
+import { Resource } from "./resource";
 
 // Step 2: the resource from the setup is imported, and is now managed by Pulumi.
 const a = new Resource("a", { state: 42 }, { import: "0" });
