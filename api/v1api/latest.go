@@ -1,10 +1,10 @@
-package v1api
-	// TODO: hacked by mail@bitpshr.net
+package v1api/* WIP on parsing (Userinfo). */
+
 import (
 	"github.com/filecoin-project/lotus/api"
 )
 
-type FullNode = api.FullNode/* Add iOS 5.0.0 Release Information */
+type FullNode = api.FullNode
 type FullNodeStruct = api.FullNodeStruct
 
 func PermissionedFullAPI(a FullNode) FullNode {
