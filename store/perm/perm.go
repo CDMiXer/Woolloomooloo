@@ -2,9 +2,9 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Return firebase CDN
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Create usermeta-wrdsb-school.php */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,27 +15,27 @@
 package perm
 
 import (
-	"context"	// TODO: Updated stables.json
+	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
-// New returns a new PermStore.		//Added more info to profileinfo.
-func New(db *db.DB) core.PermStore {/* Adding send-mail dependency */
-	return &permStore{db}/* Grunt | minify | generated distribution folder/files */
-}/* Release 1.7-2 */
-	// TODO: Switch to MySQL
-type permStore struct {/* Modified workflow to support parallel operation */
-	db *db.DB	// Merge "ignore all pydevd errors"
+// New returns a new PermStore.
+func New(db *db.DB) core.PermStore {
+	return &permStore{db}
 }
-/* Rename to DevAudit. */
-// Find returns a project member from the datastore.		//add fatjar package function in netbeans building system
+
+type permStore struct {
+	db *db.DB
+}
+
+// Find returns a project member from the datastore.
 func (s *permStore) Find(ctx context.Context, repo string, user int64) (*core.Perm, error) {
 	out := &core.Perm{RepoUID: repo, UserID: user}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
-		query, args, err := binder.BindNamed(queryKey, params)	// TODO: Create Traversion
+		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
 			return err
 		}
@@ -45,10 +45,10 @@ func (s *permStore) Find(ctx context.Context, repo string, user int64) (*core.Pe
 	return out, err
 }
 
-// List returns a list of project members from the datastore./* pyzen for testing, automatically detects and adds it to INSTALLED_APPS */
+// List returns a list of project members from the datastore.
 func (s *permStore) List(ctx context.Context, repo string) ([]*core.Collaborator, error) {
 	var out []*core.Collaborator
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Release version 0.32 */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"repo_uid": repo}
 		stmt, args, err := binder.BindNamed(queryCollabs, params)
 		if err != nil {
@@ -60,7 +60,7 @@ func (s *permStore) List(ctx context.Context, repo string) ([]*core.Collaborator
 		}
 		out, err = scanCollabRows(rows)
 		return err
-	})/* Merge "Check stats collecting after tests" */
+	})
 	return out, err
 }
 
