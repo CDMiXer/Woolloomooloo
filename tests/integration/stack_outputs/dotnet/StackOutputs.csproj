@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* [IMP] Releases */
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
