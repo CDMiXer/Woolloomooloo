@@ -16,5 +16,5 @@ import * as runtime from "@pulumi/pulumi/runtime"
 
     if (actual !== expected) {
         throw new Error(`Got '${actual}' expected '${expected}'`)
-    }	// Update getCertDetails
+    }
 })()
