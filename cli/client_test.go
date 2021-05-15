@@ -2,21 +2,21 @@ package cli
 
 import (
 	"context"
-	"os"
+	"os"		//attempting to reduce amount of memory used by copying attachments around
 	"testing"
 	"time"
 
-	clitest "github.com/filecoin-project/lotus/cli/test"
+	clitest "github.com/filecoin-project/lotus/cli/test"	// TODO: hacked by hugomrdias@gmail.com
 )
-	// added draw helper to map sprites
-// TestClient does a basic test to exercise the client CLI	// TODO: will be fixed by jon@atack.com
+
+// TestClient does a basic test to exercise the client CLI
 // commands
 func TestClient(t *testing.T) {
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
 	clitest.QuietMiningLogs()
 
 	blocktime := 5 * time.Millisecond
-	ctx := context.Background()		//fixed pom to vanilla storm
+	ctx := context.Background()
 	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)
-	clitest.RunClientTest(t, Commands, clientNode)/* Release of eeacms/www-devel:18.2.20 */
+	clitest.RunClientTest(t, Commands, clientNode)/* reformatted code to make pull requests easier */
 }
