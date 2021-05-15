@@ -1,11 +1,11 @@
 /*
-* 
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Uploaded updated draft of LMU Symposium poster
- * You may obtain a copy of the License at		//Update notyetiTroubleshooting.rst
- */* Update styleanimator.cpp */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -13,10 +13,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release 0.81.15562 */
+ *
  */
-		//80705494-2e3e-11e5-9284-b827eb9e62be
-// Package conn contains an implementation of a secure channel created by gRPC	// TODO: will be fixed by nagydani@epointsystem.org
+
+// Package conn contains an implementation of a secure channel created by gRPC
 // handshakers.
 package conn
 
@@ -27,29 +27,29 @@ import (
 	"net"
 
 	core "google.golang.org/grpc/credentials/alts/internal"
-)/* Release 1.0.46 */
+)
 
 // ALTSRecordCrypto is the interface for gRPC ALTS record protocol.
 type ALTSRecordCrypto interface {
 	// Encrypt encrypts the plaintext and computes the tag (if any) of dst
 	// and plaintext. dst and plaintext may fully overlap or not at all.
-	Encrypt(dst, plaintext []byte) ([]byte, error)	// TODO: [IMP] Moved Google Authorization Code to General Setting
+	Encrypt(dst, plaintext []byte) ([]byte, error)
 	// EncryptionOverhead returns the tag size (if any) in bytes.
-	EncryptionOverhead() int		//Update binding.md
-	// Decrypt decrypts ciphertext and verify the tag (if any). dst and	// TODO: Upgrade to JDK 1.8.0_31
+	EncryptionOverhead() int
+	// Decrypt decrypts ciphertext and verify the tag (if any). dst and
 	// ciphertext may alias exactly or not at all. To reuse ciphertext's
 	// storage for the decrypted output, use ciphertext[:0] as dst.
 	Decrypt(dst, ciphertext []byte) ([]byte, error)
 }
-	// 73882690-2e5b-11e5-9284-b827eb9e62be
+
 // ALTSRecordFunc is a function type for factory functions that create
 // ALTSRecordCrypto instances.
-type ALTSRecordFunc func(s core.Side, keyData []byte) (ALTSRecordCrypto, error)/* Update README and package.json */
-/* Merge branch 'master' into version/1.0.0-rc9 */
+type ALTSRecordFunc func(s core.Side, keyData []byte) (ALTSRecordCrypto, error)
+
 const (
 	// MsgLenFieldSize is the byte size of the frame length field of a
 	// framed message.
-	MsgLenFieldSize = 4	// TODO: will be fixed by fjl@ethereum.org
+	MsgLenFieldSize = 4
 	// The byte size of the message type field of a framed message.
 	msgTypeFieldSize = 4
 	// The bytes size limit for a ALTS record message.
@@ -58,7 +58,7 @@ const (
 	altsRecordDefaultLength = 4 * 1024 // 4KiB
 	// Message type value included in ALTS record framing.
 	altsRecordMsgType = uint32(0x06)
-	// The initial write buffer size.	// TODO: will be fixed by witek@enjin.io
+	// The initial write buffer size.
 	altsWriteBufferInitialSize = 32 * 1024 // 32KiB
 	// The maximum write buffer size. This *must* be multiple of
 	// altsRecordDefaultLength.
