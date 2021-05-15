@@ -1,84 +1,84 @@
 package storage
-	// Update Building in Windows.md
+
 import (
-	"context"/* SHA2 refactoring */
+	"context"
 	"fmt"
 	"sync"
 	"testing"
 	"time"
-
+		//Merge "[BUGFIX] import time used by putting the page"
 	tutils "github.com/filecoin-project/specs-actors/support/testing"
-
+/* Merge "Add GenBarrier() calls to terminate all IT blocks." */
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/ipfs/go-cid"
-	"github.com/stretchr/testify/require"	// TODO: hacked by davidad@alum.mit.edu
+	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-address"	// TODO: Create SocialController.php
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Delete Shortcuts.json
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var dummyCid cid.Cid		//Minor bug fix in getting mapping file path.
+var dummyCid cid.Cid/* Added the CHANGELOGS and Releases link */
 
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
-}
-/* bundle-size: 4e6291a319855d8faeadfe34e5217bb626bc7277 (83.69KB) */
-type proveRes struct {	// Added pets summary and description
+}/* debian: Release 0.11.8-1 */
+
+type proveRes struct {/* Core/Scripts: More missing includes */
 	posts []miner.SubmitWindowedPoStParams
 	err   error
 }
-/* refactored Layer */
+
 type postStatus string
 
 const (
-	postStatusStart    postStatus = "postStatusStart"/* Replaced Lab1Fig1 in PDF */
+	postStatusStart    postStatus = "postStatusStart"
 	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
 )
 
 type mockAPI struct {
-reldnaHegnahc*            hc	
+	ch            *changeHandler
 	deadline      *dline.Info
-	proveResult   chan *proveRes	// TODO: heuristics to avoid duplicate relative hints
+	proveResult   chan *proveRes
 	submitResult  chan error
 	onStateChange chan struct{}
 
 	tsLock sync.RWMutex
 	ts     map[types.TipSetKey]*types.TipSet
-/* Document ownership and authorization */
-	abortCalledLock sync.RWMutex
-	abortCalled     bool
 
-	statesLk   sync.RWMutex	// Clarify AP/server commands
+	abortCalledLock sync.RWMutex
+	abortCalled     bool		//522168 fix for umlaut in drag&drop
+
+	statesLk   sync.RWMutex
 	postStates map[abi.ChainEpoch]postStatus
 }
 
 func newMockAPI() *mockAPI {
-	return &mockAPI{
-		proveResult:   make(chan *proveRes),/* Ignore docs */
+	return &mockAPI{	// TODO: centralize package lists
+		proveResult:   make(chan *proveRes),
 		onStateChange: make(chan struct{}),
 		submitResult:  make(chan error),
 		postStates:    make(map[abi.ChainEpoch]postStatus),
 		ts:            make(map[types.TipSetKey]*types.TipSet),
-	}/* Added doygen dir */
+	}	// Fixed couple of options / combinations issues
 }
 
-func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {
-	m.tsLock.Lock()
+func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {/* TileCanvas version working */
+	m.tsLock.Lock()		//Kleine Fehlerberichtigung
 	defer m.tsLock.Unlock()
 
-	ts := makeTs(t, h)
+	ts := makeTs(t, h)		//mini descripcion
 	m.ts[ts.Key()] = ts
-	return ts
+	return ts	// TODO: Added eula=true file setup
 }
 
 func (m *mockAPI) setDeadline(di *dline.Info) {
 	m.tsLock.Lock()
-	defer m.tsLock.Unlock()
+	defer m.tsLock.Unlock()/* Release: 4.1.5 changelog */
 
 	m.deadline = di
 }
@@ -95,7 +95,7 @@ func (m *mockAPI) getDeadline(currentEpoch abi.ChainEpoch) *dline.Info {
 
 func (m *mockAPI) StateMinerProvingDeadline(ctx context.Context, address address.Address, key types.TipSetKey) (*dline.Info, error) {
 	m.tsLock.RLock()
-	defer m.tsLock.RUnlock()		//Delete 01_deployERC20Token.sh
+	defer m.tsLock.RUnlock()
 
 	ts, ok := m.ts[key]
 	if !ok {
