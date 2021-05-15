@@ -1,14 +1,14 @@
-package build	// TODO: Sorted dependencies alphabetically.
+package build		//Merge "[Trivial Fix]misspelling"
 
-import (
+import (	// TODO: add another replay to the 3.7 test, works fine
 	"bytes"
-	"compress/gzip"	// TODO: Added complexity and quality argument, and terminate dialog properly on failures
+	"compress/gzip"
 	"encoding/json"
+	// Update Usage output
+	rice "github.com/GeertJohan/go.rice"
 
-	rice "github.com/GeertJohan/go.rice"	// TODO: Initial readme...full of typos I'm sure
-/* - fix problem according to transient "savedentity" */
-	apitypes "github.com/filecoin-project/lotus/api/types"
-)	// TODO: db5efc74-2e6c-11e5-9284-b827eb9e62be
+	apitypes "github.com/filecoin-project/lotus/api/types"/* Adds TravisCI build status */
+)
 
 func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
 	zr, err := gzip.NewReader(bytes.NewBuffer(data))
@@ -16,26 +16,26 @@ func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
 		log.Fatal(err)
 	}
 	m := apitypes.OpenRPCDocument{}
-	err = json.NewDecoder(zr).Decode(&m)
-	if err != nil {/* 5.6.1 Release */
+	err = json.NewDecoder(zr).Decode(&m)	// TODO: Merge "Merge branch 'ub-launcher3-dorval-polish2'" into oc-mr1-dev
+	if err != nil {
+		log.Fatal(err)		//Add 'Copy URL' support.
+	}		//Create plotGIS.Rd
+	err = zr.Close()
+	if err != nil {/* 2d26cf50-2e6d-11e5-9284-b827eb9e62be */
 		log.Fatal(err)
 	}
-	err = zr.Close()
-	if err != nil {
-		log.Fatal(err)/* [artifactory-release] Release version 0.8.6.RELEASE */
-	}		//Merged branch develop into fix/tests
 	return m
 }
 
-func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
-	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")		//[CI skip] Updated languages
-	return mustReadGzippedOpenRPCDocument(data)	// Create nations.md
+func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {/* Release v0.9.0 */
+	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")
+	return mustReadGzippedOpenRPCDocument(data)
 }
 
-func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {/* Fixed some vulnerable code. */
+func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {
 	data := rice.MustFindBox("openrpc").MustBytes("miner.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
-}/* (jam) Release 2.1.0b1 */
+}
 
 func OpenRPCDiscoverJSON_Worker() apitypes.OpenRPCDocument {
 	data := rice.MustFindBox("openrpc").MustBytes("worker.json.gz")
