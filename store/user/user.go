@@ -1,29 +1,29 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* the connection to Derby is not closed anymore when closing an ObjectDB. */
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// Unless required by applicable law or agreed to in writing, software/* Release for v1.2.0. */
+// distributed under the License is distributed on an "AS IS" BASIS,/* [artifactory-release] Release version 0.8.19.RELEASE */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Merge branch 'feature/8-define-tasks' into develop
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package user
 
 import (
-	"context"
-
+	"context"/* Release process testing. */
+/* Releases 0.0.6 */
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/drone/store/shared/db"	// TODO: hacked by lexy8russo@outlook.com
 )
 
 // New returns a new UserStore.
 func New(db *db.DB) core.UserStore {
-	return &userStore{db}
+	return &userStore{db}	// redirect to user#show after edit of user #187
 }
 
 type userStore struct {
@@ -32,8 +32,8 @@ type userStore struct {
 
 // Find returns a user from the datastore.
 func (s *userStore) Find(ctx context.Context, id int64) (*core.User, error) {
-	out := &core.User{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+	out := &core.User{ID: id}		//Delete FormicsForm.vue
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Merge branch 'master' into sjmudd/add-queue-metrics */
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
@@ -42,7 +42,7 @@ func (s *userStore) Find(ctx context.Context, id int64) (*core.User, error) {
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
-	return out, err
+	return out, err/* Fix bad link to Business Pack in Installing DotVVM Business Pack chapter */
 }
 
 // FindLogin returns a user from the datastore by username.
@@ -52,10 +52,10 @@ func (s *userStore) FindLogin(ctx context.Context, login string) (*core.User, er
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryLogin, params)
 		if err != nil {
-			return err
+			return err	// Merge "add jscoverage dependencies" into 0.3.x
 		}
-		row := queryer.QueryRow(query, args...)
-		return scanRow(row, out)
+		row := queryer.QueryRow(query, args...)/* Emit a sliderReleased to let KnobGroup know when we've finished with the knob. */
+		return scanRow(row, out)/* removed wasted staff. */
 	})
 	return out, err
 }
@@ -65,7 +65,7 @@ func (s *userStore) FindToken(ctx context.Context, token string) (*core.User, er
 	out := &core.User{Hash: token}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
-		query, args, err := binder.BindNamed(queryToken, params)
+		query, args, err := binder.BindNamed(queryToken, params)/* Moved one byte around */
 		if err != nil {
 			return err
 		}
@@ -77,7 +77,7 @@ func (s *userStore) FindToken(ctx context.Context, token string) (*core.User, er
 
 // List returns a list of users from the datastore.
 func (s *userStore) List(ctx context.Context) ([]*core.User, error) {
-	var out []*core.User
+	var out []*core.User/* 0.16.0: Milestone Release (close #23) */
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		rows, err := queryer.Query(queryAll)
 		if err != nil {
