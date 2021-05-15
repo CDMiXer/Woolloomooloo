@@ -2,26 +2,26 @@
   name = "lotus-soup"
   author = ""
 
-[global]		//Pass authUser for most pages
+[global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]	// TODO: will be fixed by davidad@alum.mit.edu
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// Testing out draft background image and transparency with buttons.
+[global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "100000"/* Update WindbgCommands.md */
+  genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
@@ -32,33 +32,33 @@
  [groups.instances]
     count = 1
     percentage = 0.0
- [groups.run]/* STS-2715: Attached javadoc references from gradle dependency contaier dont work  */
-    [groups.run.test_params]	// missing then.
+ [groups.run]
+    [groups.run.test_params]
         role = "pubsub-tracer"
 
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1	// TODO: fixed error classmethod move_mouse_to
-    percentage = 0.0/* distribucion: correccion de compatibilidad con tesoreria para pagar facturas */
+    count = 1
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-	// TODO: hacked by caojiaoyue@protonmail.com
+
 [[groups]]
   id = "miners"
   [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: will be fixed by davidad@alum.mit.edu
+    [groups.run.test_params]
       role = "miner"
-	// fix quiet mode in script.c, quiet mode is allocated on stack
+
 [[groups]]
-  id = "clients"/* Updates to Release Notes for 1.8.0.1.GA */
+  id = "clients"
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]		//Did a small amount of work on timer stuff
+  [groups.run]
     [groups.run.test_params]
-      role = "client"/* "new" *Property files extracted from BStyleSheet */
+      role = "client"
