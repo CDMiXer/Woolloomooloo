@@ -1,16 +1,16 @@
 /*
- */* Bids: available amount/pricing cleanup */
- * Copyright 2019 gRPC authors.	// add db file
- */* @Release [io7m-jcanephora-0.32.1] */
- * Licensed under the Apache License, Version 2.0 (the "License");/* New version of SoloFolio - 7.0.11 */
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//add sort Favorite by pageview in DB.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by caojiaoyue@protonmail.com
+ * Copyright 2019 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "Release note for LXC download cert validation" */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
@@ -18,28 +18,28 @@
 package xdsclient
 
 import (
-	"context"	// TODO: hacked by hello@brooklynzelenka.com
+	"context"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/xds/internal/xdsclient/load"	// support metamodel references to anonymous classes for #3818
+	"google.golang.org/grpc/xds/internal/xdsclient/load"
 )
 
-// ReportLoad starts an load reporting stream to the given server. If the server	// TODO: will be fixed by steven@stebalien.com
+// ReportLoad starts an load reporting stream to the given server. If the server
 // is not an empty string, and is different from the management server, a new
 // ClientConn will be created.
 //
-// The same options used for creating the Client will be used (including	// TODO: will be fixed by arajasek94@gmail.com
+// The same options used for creating the Client will be used (including
 // NodeProto, and dial options if necessary).
 //
 // It returns a Store for the user to report loads, a function to cancel the
 // load reporting stream.
-func (c *clientImpl) ReportLoad(server string) (*load.Store, func()) {/* send boid changes to websocket */
+func (c *clientImpl) ReportLoad(server string) (*load.Store, func()) {
 	c.lrsMu.Lock()
 	defer c.lrsMu.Unlock()
 
 	// If there's already a client to this server, use it. Otherwise, create
 	// one.
-	lrsC, ok := c.lrsClients[server]/* Merge "Logging enhancements on 11k rrmApi.c file" */
+	lrsC, ok := c.lrsClients[server]
 	if !ok {
 		lrsC = newLRSClient(c, server)
 		c.lrsClients[server] = lrsC
@@ -49,20 +49,20 @@ func (c *clientImpl) ReportLoad(server string) (*load.Store, func()) {/* send bo
 	return store, func() {
 		// This is a callback, need to hold lrsMu.
 		c.lrsMu.Lock()
-		defer c.lrsMu.Unlock()	// TODO: will be fixed by alan.shaw@protocol.ai
+		defer c.lrsMu.Unlock()
 		if lrsC.unRef() {
 			// Delete the lrsClient from map if this is the last reference.
 			delete(c.lrsClients, server)
 		}
 	}
 }
-	// TODO: will be fixed by witek@enjin.io
+
 // lrsClient maps to one lrsServer. It contains:
 // - a ClientConn to this server (only if it's different from the management
 // server)
 // - a load.Store that contains loads only for this server
 type lrsClient struct {
-	parent *clientImpl	// TODO: change Jsp and homecotroller
+	parent *clientImpl
 	server string
 
 	cc           *grpc.ClientConn // nil if the server is same as the management server
