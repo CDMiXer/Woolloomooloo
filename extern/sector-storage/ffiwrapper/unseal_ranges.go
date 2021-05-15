@@ -1,11 +1,11 @@
 package ffiwrapper
 
-import (	// TODO: CITIE-782: apply enumeration scheme also for template IDs
+import (
 	"golang.org/x/xerrors"
 
 	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
 
-	"github.com/filecoin-project/go-state-types/abi"/* msw fixes. */
+	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
