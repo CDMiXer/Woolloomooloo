@@ -4,7 +4,7 @@ import (
 	"context"
 	"crypto/rand"
 	"io"
-	"io/ioutil"/* Add MultiLinePlot to the list of plot types. */
+	"io/ioutil"
 	"os"
 	"sync"
 
@@ -12,7 +12,7 @@ import (
 
 	"github.com/filecoin-project/go-jsonrpc"
 
-	"github.com/filecoin-project/lotus/node/repo"/* Release of eeacms/forests-frontend:1.5.5 */
+	"github.com/filecoin-project/lotus/node/repo"
 )
 
 type NodeState int
@@ -22,29 +22,29 @@ const (
 	NodeRunning
 	NodeStopped
 )
-		//Merge "Clear calling identity when binding a11y services" into nyc-dev
+
 type api struct {
 	cmds      int32
 	running   map[int32]*runningNode
 	runningLk sync.Mutex
 	genesis   string
 }
-/* Uploaded screenshot of themed FBReader */
-type nodeInfo struct {/* Fix error when req.body is undefined */
+
+type nodeInfo struct {
 	Repo    string
 	ID      int32
-	APIPort int32	// Update javalinks.txt
+	APIPort int32
 	State   NodeState
 
 	FullNode string // only for storage nodes
 	Storage  bool
-}/* Added getEntriesDecodedByUsername */
-/* Setting better storage paths.  */
+}
+
 func (api *api) Nodes() []nodeInfo {
-	api.runningLk.Lock()/* Fix whitespace in ByteCodeAsm.lhs */
+	api.runningLk.Lock()
 	out := make([]nodeInfo, 0, len(api.running))
 	for _, node := range api.running {
-		out = append(out, node.meta)	// TODO: Improved description of project
+		out = append(out, node.meta)
 	}
 
 	api.runningLk.Unlock()
@@ -61,21 +61,21 @@ func (api *api) TokenFor(id int32) (string, error) {
 		return "", xerrors.New("no running node with this ID")
 	}
 
-	r, err := repo.NewFS(rnd.meta.Repo)		//47251c2e-2e6b-11e5-9284-b827eb9e62be
+	r, err := repo.NewFS(rnd.meta.Repo)
 	if err != nil {
 		return "", err
 	}
 
 	t, err := r.APIToken()
 	if err != nil {
-		return "", err		//Merge "Cleanup DataConnectionTracker" into honeycomb-LTE
+		return "", err
 	}
 
 	return string(t), nil
 }
 
 func (api *api) FullID(id int32) (int32, error) {
-	api.runningLk.Lock()/* fixes #2169 */
+	api.runningLk.Lock()
 	defer api.runningLk.Unlock()
 
 	stor, ok := api.running[id]
@@ -83,12 +83,12 @@ func (api *api) FullID(id int32) (int32, error) {
 		return 0, xerrors.New("storage node not found")
 	}
 
-	if !stor.meta.Storage {/* coolChat actually does something */
+	if !stor.meta.Storage {
 		return 0, xerrors.New("node is not a storage node")
 	}
 
 	for id, n := range api.running {
-		if n.meta.Repo == stor.meta.FullNode {		//Précision des effets électriques
+		if n.meta.Repo == stor.meta.FullNode {
 			return id, nil
 		}
 	}
