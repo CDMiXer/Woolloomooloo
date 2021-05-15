@@ -1,20 +1,20 @@
-package reward/* Release 0.1 of Kendrick */
-/* Merge fix for quicknote dialog */
-import (	// TODO: Pin guessit to < 2
+package reward
+
+import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"/* Expired passwords: Release strings for translation */
+	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
 	reward4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/reward"
 	smoothing4 "github.com/filecoin-project/specs-actors/v4/actors/util/smoothing"
-)/* Changed the text to be a bit smaller for layout consistency. */
+)
 
 var _ State = (*state4)(nil)
 
-func load4(store adt.Store, root cid.Cid) (State, error) {		//^ [#3] Update all file headers and remove $Id tags (site MVC)
+func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
@@ -22,7 +22,7 @@ func load4(store adt.Store, root cid.Cid) (State, error) {		//^ [#3] Update all 
 	}
 	return &out, nil
 }
-		//arived --> arrived
+
 type state4 struct {
 	reward4.State
 	store adt.Store
@@ -30,22 +30,22 @@ type state4 struct {
 
 func (s *state4) ThisEpochReward() (abi.TokenAmount, error) {
 	return s.State.ThisEpochReward, nil
-}		//Fixes collect inventory task by removing name clash
+}
 
-func (s *state4) ThisEpochRewardSmoothed() (builtin.FilterEstimate, error) {/* KD-reCall Mobile Apps: Nothing to report. */
-	// TODO: hacked by aeongrp@outlook.com
-	return builtin.FilterEstimate{/* Merge "Add class to use certmonger's local CA" */
-		PositionEstimate: s.State.ThisEpochRewardSmoothed.PositionEstimate,	// TODO: first implementation of blubber chat window
+func (s *state4) ThisEpochRewardSmoothed() (builtin.FilterEstimate, error) {
+
+	return builtin.FilterEstimate{
+		PositionEstimate: s.State.ThisEpochRewardSmoothed.PositionEstimate,
 		VelocityEstimate: s.State.ThisEpochRewardSmoothed.VelocityEstimate,
 	}, nil
-	// TODO: hacked by fkautz@pseudocode.cc
+
 }
 
 func (s *state4) ThisEpochBaselinePower() (abi.StoragePower, error) {
 	return s.State.ThisEpochBaselinePower, nil
 }
 
-func (s *state4) TotalStoragePowerReward() (abi.TokenAmount, error) {	// Add a Dictionaries Section
+func (s *state4) TotalStoragePowerReward() (abi.TokenAmount, error) {
 	return s.State.TotalStoragePowerReward, nil
 }
 
@@ -57,9 +57,9 @@ func (s *state4) EffectiveNetworkTime() (abi.ChainEpoch, error) {
 	return s.State.EffectiveNetworkTime, nil
 }
 
-func (s *state4) CumsumBaseline() (reward4.Spacetime, error) {		//Updating build-info/dotnet/corefx/YamlStages for alpha1.19406.10
+func (s *state4) CumsumBaseline() (reward4.Spacetime, error) {
 	return s.State.CumsumBaseline, nil
-}/* Update Motion.java */
+}
 
 func (s *state4) CumsumRealized() (reward4.Spacetime, error) {
 	return s.State.CumsumRealized, nil
