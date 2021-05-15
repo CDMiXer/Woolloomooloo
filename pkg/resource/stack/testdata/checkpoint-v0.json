@@ -7,7 +7,7 @@
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
-                "type": "aws:sns/topic:Topic",/* add site web project for Dianne website */
+                "type": "aws:sns/topic:Topic",
                 "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                 "defaults": {
                     "name": "countDown-9d430501c4510322"
@@ -24,17 +24,17 @@
                 "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                 "custom": false,
                 "type": "cloud:topic:Topic"
-            },	// cf5ace3a-2e71-11e5-9284-b827eb9e62be
+            },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
-                "type": "aws:sns/topic:Topic",	// Fix #7 SIGINT cannot stop process issue
+                "type": "aws:sns/topic:Topic",
                 "defaults": {
                     "name": "unhandled-error-topic-ddd8c2cd9a876715"
-                },/* Merge "rest: Always return complete exceptions." */
+                },
                 "outputs": {
-                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",/* Create Dtriple.sh */
+                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "name": "unhandled-error-topic-ddd8c2cd9a876715",
@@ -46,12 +46,12 @@
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                 "type": "aws:iam/role:Role",
-                "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",	// TODO: will be fixed by brosner@gmail.com
+                "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
-                },	// TODO: will be fixed by caojiaoyue@protonmail.com
+                },
                 "defaults": {
-                    "forceDetachPolicies": false,	// TODO: will be fixed by mail@bitpshr.net
+                    "forceDetachPolicies": false,
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "path": "/"
                 },
@@ -59,31 +59,31 @@
                     "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
                     "createDate": "2017-11-08T19:51:32Z",
-                    "forceDetachPolicies": false,		//Merge "Cleanup deprecated domain_id parameters"
+                    "forceDetachPolicies": false,
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "path": "/",
                     "uniqueId": "AROAJBQANPFEXFW2SEVJM"
                 }
             },
-            {/* Merge "[Release] Webkit2-efl-123997_0.11.105" into tizen_2.2 */
+            {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
                 "custom": true,
-                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",/* Remove background */
+                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                 "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
-                    "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",/* Release pointer bug */
+                    "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
-                },/* Unchaining WIP-Release v0.1.41-alpha */
+                },
                 "outputs": {
-                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",		//Add Find method and ctor for BTree.
+                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 }
-            },/* Merge "rpc/test: Make tests in glob_test.go pass under XServers mode." */
+            },
             {
-                "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-1",/* [artifactory-release] Release version 2.0.0 */
+                "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-1",
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195134625700000002",
                 "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
