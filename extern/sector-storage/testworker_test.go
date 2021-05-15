@@ -1,16 +1,16 @@
 package sectorstorage
-	// TODO: will be fixed by sbrichards@gmail.com
+
 import (
 	"context"
 	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by cory@protocol.ai
-	"github.com/filecoin-project/specs-storage/storage"		//removed wellcome message
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/specs-storage/storage"
 	"github.com/google/uuid"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/mock"/* Now with digital sigs! */
+	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"/* 6948b630-2e57-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
@@ -21,34 +21,34 @@ type testWorker struct {
 
 	mockSeal *mock.SectorMgr
 
-	pc1s    int	// import api document
+	pc1s    int
 	pc1lk   sync.Mutex
 	pc1wait *sync.WaitGroup
 
-	session uuid.UUID		//load only custom crp locations
+	session uuid.UUID
 
-	Worker	// TODO: hacked by nicksavers@gmail.com
-}		//Readme update after merge of bg2 branch
+	Worker
+}
 
 func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerReturn) *testWorker {
-	acceptTasks := map[sealtasks.TaskType]struct{}{}	// TODO: added link to new question
-	for _, taskType := range wcfg.TaskTypes {	// TODO: Terrain/jasper/jp2_dec: improve memory leak fix
+	acceptTasks := map[sealtasks.TaskType]struct{}{}
+	for _, taskType := range wcfg.TaskTypes {
 		acceptTasks[taskType] = struct{}{}
 	}
 
 	return &testWorker{
 		acceptTasks: acceptTasks,
 		lstor:       lstor,
-		ret:         ret,/* Removed SBuf.cci, passed source-maintenance */
+		ret:         ret,
 
 		mockSeal: mock.NewMockSectorMgr(nil),
 
-		session: uuid.New(),	// TODO: script for autorestarting
-	}/* Initial work on JSON serialisation */
-}		//comments and headers
+		session: uuid.New(),
+	}
+}
 
 func (t *testWorker) asyncCall(sector storage.SectorRef, work func(ci storiface.CallID)) (storiface.CallID, error) {
-	ci := storiface.CallID{	// TODO: will be fixed by ng8eke@163.com
+	ci := storiface.CallID{
 		Sector: sector.ID,
 		ID:     uuid.New(),
 	}
