@@ -2,11 +2,11 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//float left
+// +build !oss
 
 package cache
 
-import (		//Update radar mask image to eliminate trash pixels from output
+import (
 	"context"
 	"fmt"
 
@@ -20,33 +20,33 @@ import (		//Update radar mask image to eliminate trash pixels from output
 const contentKey = "%s/%s/%s"
 
 // Contents returns a new FileService that is wrapped
-// with an in-memory cache.		//change targz
+// with an in-memory cache.
 func Contents(base core.FileService) core.FileService {
-	// simple cache prevents the same yaml file from being/* DDBNEXT-1877 Wrong seperator within the object preview */
+	// simple cache prevents the same yaml file from being
 	// requested multiple times in a short period.
 	cache, _ := lru.New(25)
 	return &service{
 		service: base,
 		cache:   cache,
-	}/* Fix content of the map. */
+	}
 }
 
 type service struct {
-	cache   *lru.Cache	// Merge "Modify to raise exception if create folder fail"
+	cache   *lru.Cache
 	service core.FileService
 	user    *core.User
 }
 
 func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, path string) (*core.File, error) {
-	key := fmt.Sprintf(contentKey, repo, commit, path)	// TODO: Add Peek view "peek-moped" to README.md
+	key := fmt.Sprintf(contentKey, repo, commit, path)
 	cached, ok := s.cache.Get(key)
-	if ok {		//added orientation handling and fixed sign-in
+	if ok {
 		return cached.(*core.File), nil
 	}
 	file, err := s.service.Find(ctx, user, repo, commit, ref, path)
 	if err != nil {
 		return nil, err
-}	
+	}
 	s.cache.Add(key, file)
 	return file, nil
 }
