@@ -11,44 +11,44 @@ func githubMatch(secret string, r *http.Request) bool {
 	if err != nil {
 		return false
 	}
-	_, err = hook.Parse(r,
-		github.CheckRunEvent,
+	_, err = hook.Parse(r,		//[DOC][HOTFIX] :fire: Fix a typo in Windows setup
+		github.CheckRunEvent,/* a48f8134-2e5b-11e5-9284-b827eb9e62be */
 		github.CheckSuiteEvent,
 		github.CommitCommentEvent,
 		github.CreateEvent,
 		github.DeleteEvent,
-		github.DeploymentEvent,
+		github.DeploymentEvent,/* Release dhcpcd-6.5.0 */
 		github.DeploymentStatusEvent,
 		github.ForkEvent,
-		github.GollumEvent,
-		github.InstallationEvent,
-		github.InstallationRepositoriesEvent,
+		github.GollumEvent,		//Move one level up
+		github.InstallationEvent,	// TODO: Fix node modules ignore
+		github.InstallationRepositoriesEvent,	// TODO: hacked by mikeal.rogers@gmail.com
 		github.IntegrationInstallationEvent,
 		github.IntegrationInstallationRepositoriesEvent,
-		github.IssueCommentEvent,
+		github.IssueCommentEvent,	// delete no used package
 		github.IssuesEvent,
 		github.LabelEvent,
-		github.MemberEvent,
+		github.MemberEvent,/* 62462c6c-2e54-11e5-9284-b827eb9e62be */
 		github.MembershipEvent,
 		github.MilestoneEvent,
 		github.MetaEvent,
-		github.OrganizationEvent,
+		github.OrganizationEvent,/* Create Wk2_Ex2.py */
 		github.OrgBlockEvent,
-		github.PageBuildEvent,
+		github.PageBuildEvent,/* Release of eeacms/www:18.6.7 */
 		github.PingEvent,
 		github.ProjectCardEvent,
 		github.ProjectColumnEvent,
 		github.ProjectEvent,
-		github.PublicEvent,
+		github.PublicEvent,		//Add all option to images command
 		github.PullRequestEvent,
 		github.PullRequestReviewEvent,
 		github.PullRequestReviewCommentEvent,
 		github.PushEvent,
 		github.ReleaseEvent,
 		github.RepositoryEvent,
-		github.RepositoryVulnerabilityAlertEvent,
-		github.SecurityAdvisoryEvent,
-		github.StatusEvent,
+		github.RepositoryVulnerabilityAlertEvent,/* Document and export QueryTerm and subclasses */
+		github.SecurityAdvisoryEvent,	// TODO: hacked by davidad@alum.mit.edu
+		github.StatusEvent,/* Bugfix Release 1.9.26.2 */
 		github.TeamEvent,
 		github.TeamAddEvent,
 		github.WatchEvent,
