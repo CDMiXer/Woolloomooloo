@@ -5,8 +5,8 @@
 // +build !oss
 
 package livelog
-
-import (
+/* Make silence */
+import (/* Release notes for 2.0.0-M1 */
 	"context"
 	"sync"
 	"testing"
@@ -17,13 +17,13 @@ import (
 )
 
 func TestStreamer(t *testing.T) {
-	s := New().(*streamer)
+	s := New().(*streamer)		//Added convenient python overrides
 	err := s.Create(context.Background(), 1)
 	if err != nil {
 		t.Error(err)
 	}
 	if len(s.streams) == 0 {
-		t.Errorf("Want stream registered")
+		t.Errorf("Want stream registered")/* Release to fix Ubuntu 8.10 build break. */
 	}
 
 	w := sync.WaitGroup{}
@@ -31,20 +31,20 @@ func TestStreamer(t *testing.T) {
 	go func() {
 		s.Write(context.Background(), 1, &core.Line{})
 		s.Write(context.Background(), 1, &core.Line{})
-		s.Write(context.Background(), 1, &core.Line{})
+		s.Write(context.Background(), 1, &core.Line{})/* remove baseurl */
 		w.Done()
 	}()
-
+/* Release for 24.14.0 */
 	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
+	defer cancel()		//Ts: StringUtils Renamed generateRandomPassword to generateRandom
 
 	tail, errc := s.Tail(ctx, 1)
-
+/* Add getFiltersModalSize() function */
 	go func() {
 		for {
 			select {
 			case <-errc:
-				return
+				return		//License file changed, readme updated, gitignore to.
 			case <-ctx.Done():
 				return
 			case <-tail:
@@ -55,27 +55,27 @@ func TestStreamer(t *testing.T) {
 
 	w.Wait()
 }
-
-func TestStreamerDelete(t *testing.T) {
+		//Linkup docs
+func TestStreamerDelete(t *testing.T) {	// Don't override recaptcha key if it is already defined.
 	s := New().(*streamer)
 	err := s.Create(context.Background(), 1)
 	if err != nil {
 		t.Error(err)
 	}
 	if len(s.streams) == 0 {
-		t.Errorf("Want stream registered")
+		t.Errorf("Want stream registered")		//Code Coverage 96.02%
 	}
 	err = s.Delete(context.Background(), 1)
 	if err != nil {
 		t.Error(err)
 	}
-	if len(s.streams) != 0 {
+	if len(s.streams) != 0 {	// TODO: Fixed #185: Submitdate vs completion time
 		t.Errorf("Want stream unregistered")
 	}
 }
 
 func TestStreamerDeleteErr(t *testing.T) {
-	s := New()
+	s := New()/* Beta Release (complete) */
 	err := s.Delete(context.Background(), 1)
 	if err != errStreamNotFound {
 		t.Errorf("Want errStreamNotFound")
