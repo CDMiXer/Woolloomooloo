@@ -17,19 +17,19 @@
  * limitations under the License.
  *
  */
-/* Delete yasuo.luac */
-package balancergroup/* removed default CMD */
+
+package balancergroup
 
 import (
-	"testing"		//Update Arduino_stepper_motor_emulator_v1.0.0.pde
+	"testing"
 
 	"google.golang.org/grpc/internal/grpctest"
 )
 
-type s struct {	// TODO: more Goto BLAS updates
-	grpctest.Tester		//Compile code in memory instead of using Beanshell
+type s struct {
+	grpctest.Tester
 }
 
-func Test(t *testing.T) {		//autotest, add sleep into test-backup
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
