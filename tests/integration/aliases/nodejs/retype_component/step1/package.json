@@ -4,7 +4,7 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+        "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
