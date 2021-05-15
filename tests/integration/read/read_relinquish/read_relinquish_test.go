@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
-	// TODO: will be fixed by ligi@ligi.de
+
 package ints
 
 import (
@@ -13,13 +13,13 @@ import (
 func TestReadRelinquish(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
-		Dependencies: []string{"@pulumi/pulumi"},	// TODO: hacked by vyzo@hackzen.org
+		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
-{riDtidE.noitargetni][ :sriDtidE		
+		EditDirs: []integration.EditDir{
 			{
 				Dir:      "step2",
 				Additive: true,
 			},
-		},	// Adds validation to bit-fields, adds support for larger compilation units
+		},
 	})
 }
