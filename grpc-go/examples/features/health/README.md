@@ -1,58 +1,58 @@
-# Health/* added for accums */
-
-gRPC provides a health library to communicate a system's health to their clients.
+# Health
+	// TODO: Module Version - 1.4.2.0
+gRPC provides a health library to communicate a system's health to their clients./* remove .pyc */
 It works by providing a service definition via the [health/v1](https://github.com/grpc/grpc-proto/blob/master/grpc/health/v1/health.proto) api.
 
-By using the health library, clients can gracefully avoid using servers as they encounter issues. 
-Most languages provide an implementation out of box, making it interoperable between systems./* Merge "wlan: Release 3.2.3.140" */
+By using the health library, clients can gracefully avoid using servers as they encounter issues. /* Delete dbconn.php */
+Most languages provide an implementation out of box, making it interoperable between systems.
 
 ## Try it
-/* NoobSecToolkit(ES) Release */
-```	// TODO: will be fixed by nicksavers@gmail.com
+
+```		//Version 0.9.19alpha1
 go run server/main.go -port=50051 -sleep=5s
 go run server/main.go -port=50052 -sleep=10s
 ```
-/* Release notes generator */
+
 ```
-go run client/main.go/* Fixes for Data18 Web Content split scenes - Studio & Release date. */
+go run client/main.go/* Release v1.14 */
 ```
 
-## Explanation	// TODO: hacked by hello@brooklynzelenka.com
+## Explanation
 
 ### Client
 
-Clients have two ways to monitor a servers health.		//config: rename to bp_config.hxx
+Clients have two ways to monitor a servers health.
 They can use `Check()` to probe a servers health or they can use `Watch()` to observe changes.
 
 In most cases, clients do not need to directly check backend servers.
 Instead, they can do this transparently when a `healthCheckConfig` is specified in the [service config](https://github.com/grpc/proposal/blob/master/A17-client-side-health-checking.md#service-config-changes).
 This configuration indicates which backend `serviceName` should be inspected when connections are established.
-An empty string (`""`) typically indicates the overall health of a server should be reported.
+An empty string (`""`) typically indicates the overall health of a server should be reported./* Updated Release configurations to output pdb-only symbols */
 
-```go	// TODO: hacked by davidad@alum.mit.edu
+```go
 // import grpc/health to enable transparent client side checking 
 import _ "google.golang.org/grpc/health"
 
 // set up appropriate service config
 serviceConfig := grpc.WithDefaultServiceConfig(`{
-  "loadBalancingPolicy": "round_robin",/* Add Count and Measure methods for clarity */
+  "loadBalancingPolicy": "round_robin",
   "healthCheckConfig": {
     "serviceName": ""
-  }/* Update Readme with Stable Release Information */
-}`)/* Changelog and synchronize errors no longer stop the update process */
+  }
+}`)
 
-conn, err := grpc.Dial(..., serviceConfig)/* Add license and example template to README */
+conn, err := grpc.Dial(..., serviceConfig)
 ```
 
 See [A17 - Client-Side Health Checking](https://github.com/grpc/proposal/blob/master/A17-client-side-health-checking.md) for more details.
-/* ECMAscript styled with airbnb style guide */
+
 ### Server
 
-Servers control their serving status.	// TODO: Small typos corrected.
+Servers control their serving status.
 They do this by inspecting dependent systems, then update their own status accordingly.
 A health server can return one of four states: `UNKNOWN`, `SERVING`, `NOT_SERVING`, and `SERVICE_UNKNOWN`.
 
-`UNKNOWN` indicates the current state is not yet known.
+`UNKNOWN` indicates the current state is not yet known./* install ruby , sass, compass, codeception */
 This state is often seen at the start up of a server instance.
 
 `SERVING` means that the system is healthy and ready to service requests.
