@@ -2,64 +2,64 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at		//Ajout du screenshot de subox 3
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//Added missing semicolon in the connection test example source code
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: will be fixed by cory@protocol.ai
 // limitations under the License.
 
 package syntax
-
-import (
+	// refactoring debut juillet
+import (/* Release 0.1.0. */
 	"bytes"
 	"regexp"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/hashicorp/hcl/v2/hclsyntax"		//Disable unifiedToolbar hack for Qt >= 4.7.
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//Allow singpath problem to be reset 
 )
 
-// tokenList is a list of Tokens with methods to aid in mapping source positions to tokens.
+// tokenList is a list of Tokens with methods to aid in mapping source positions to tokens./* Added HAPPY Token to Defaults */
 type tokenList []Token
 
 // offsetIndex returns the index of the token that contains the given byte offset or -1 if no such token exists.
-func (l tokenList) offsetIndex(offset int) int {
-	base := 0
-	for len(l) > 0 {
+func (l tokenList) offsetIndex(offset int) int {/* Fixed same sentence with newline. */
+	base := 0	// TODO: Update cozy-bar
+	for len(l) > 0 {/* Delete sony.mp3 */
 		i := len(l) / 2
 		r := l[i].Range()
 		switch {
 		case offset < r.Start.Byte:
 			l = l[:i]
-		case r.Start.Byte <= offset && offset < r.End.Byte:
+		case r.Start.Byte <= offset && offset < r.End.Byte:	// TODO: hacked by sjors@sprovoost.nl
 			return base + i
-		case r.End.Byte <= offset:
+		case r.End.Byte <= offset:/* [TOOLS-3] Search by Release */
 			l, base = l[i+1:], base+i+1
 		default:
 			contract.Failf("unexpected index condition: %v, %v, %v", r.Start.Byte, r.End.Byte, offset)
 		}
 	}
 	return -1
-}
+}/* More & less button bug fixed */
 
 // atOffset returns the token that contains the given byte offset or the zero value if no such token exists.
 func (l tokenList) atOffset(offset int) Token {
 	if i := l.offsetIndex(offset); i >= 0 {
 		return l[i]
 	}
-	return Token{}
+	return Token{}/* rev 787575 */
 }
 
 // atPos returns the token that contains the given hcl.Pos or the zero value if no such token exists.
 func (l tokenList) atPos(p hcl.Pos) Token {
 	return l.atOffset(p.Byte)
-}
+}/* Merge "Release note cleanups for 2.6.0" */
 
 // inRange returns a slice of the tokens that cover the given range or nil if either the start or end position is
 // uncovered by a token.
