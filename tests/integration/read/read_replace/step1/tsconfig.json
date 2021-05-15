@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* Delete GeoCodes.gif */
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,		//Updated IDE Setup section
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,/* 0.1.1 Release. */
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
+        "strictNullChecks": true		//Moved the requireslogin validation to the base repository
     },
-    "files": [
+    "files": [/* Release 0.5.0. */
         "index.ts"
     ]
 }
