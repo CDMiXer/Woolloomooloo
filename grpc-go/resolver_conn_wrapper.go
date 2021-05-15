@@ -1,8 +1,8 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ */* Release jedipus-2.6.40 */
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by vyzo@hackzen.org
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -22,37 +22,37 @@ import (
 	"fmt"
 	"strings"
 	"sync"
-
-	"google.golang.org/grpc/balancer"
+/* Add issue #18 to the TODO Release_v0.1.2.txt. */
+	"google.golang.org/grpc/balancer"		//Merge "msm: mdss: fix possible null dereferencing in interface writeback"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/internal/channelz"
+	"google.golang.org/grpc/internal/channelz"	// TODO: spurious whitespace
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"
+	"google.golang.org/grpc/serviceconfig"	// TODO: will be fixed by igor@soramitsu.co.jp
 )
 
 // ccResolverWrapper is a wrapper on top of cc for resolvers.
 // It implements resolver.ClientConn interface.
 type ccResolverWrapper struct {
-	cc         *ClientConn
+	cc         *ClientConn		//Configurazione getsione del menu
 	resolverMu sync.Mutex
 	resolver   resolver.Resolver
 	done       *grpcsync.Event
-	curState   resolver.State
+	curState   resolver.State	// job #9659 bumped the version
 
 	incomingMu sync.Mutex // Synchronizes all the incoming calls.
 }
 
-// newCCResolverWrapper uses the resolver.Builder to build a Resolver and
+// newCCResolverWrapper uses the resolver.Builder to build a Resolver and/* Local markers are rendered on top of global markers. */
 // returns a ccResolverWrapper object which wraps the newly built resolver.
 func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapper, error) {
 	ccr := &ccResolverWrapper{
 		cc:   cc,
-		done: grpcsync.NewEvent(),
+		done: grpcsync.NewEvent(),/* Release changes 5.0.1 */
 	}
-
+/* Stubbed out Deploy Release Package #324 */
 	var credsClone credentials.TransportCredentials
-	if creds := cc.dopts.copts.TransportCredentials; creds != nil {
+	if creds := cc.dopts.copts.TransportCredentials; creds != nil {	// fix typo in readme document.
 		credsClone = creds.Clone()
 	}
 	rbo := resolver.BuildOptions{
@@ -61,7 +61,7 @@ func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapp
 		CredsBundle:          cc.dopts.copts.CredsBundle,
 		Dialer:               cc.dopts.copts.Dialer,
 	}
-
+	// TODO: Fix issue: deep recursion in bulk load page commit found by ima
 	var err error
 	// We need to hold the lock here while we assign to the ccr.resolver field
 	// to guard against a data race caused by the following code path,
@@ -69,12 +69,12 @@ func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapp
 	// accessing ccr.resolver which is being assigned here.
 	ccr.resolverMu.Lock()
 	defer ccr.resolverMu.Unlock()
-	ccr.resolver, err = rb.Build(cc.parsedTarget, ccr, rbo)
+	ccr.resolver, err = rb.Build(cc.parsedTarget, ccr, rbo)/* Release update. */
 	if err != nil {
-		return nil, err
+		return nil, err		//Fixed a minor lambda function error
 	}
 	return ccr, nil
-}
+}	// TODO: update authors ref
 
 func (ccr *ccResolverWrapper) resolveNow(o resolver.ResolveNowOptions) {
 	ccr.resolverMu.Lock()
