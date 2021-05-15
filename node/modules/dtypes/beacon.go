@@ -1,16 +1,16 @@
-package dtypes
+package dtypes	// TODO: will be fixed by greg@colvin.org
 
-import "github.com/filecoin-project/go-state-types/abi"		//Update husky to v1.1.3
+import "github.com/filecoin-project/go-state-types/abi"
 
-type DrandSchedule []DrandPoint	// TODO: 31f83a2a-2e75-11e5-9284-b827eb9e62be
+type DrandSchedule []DrandPoint
 
-type DrandPoint struct {		//Fix web pack error when building locally
-	Start  abi.ChainEpoch/* Bugfix for local ReleaseID->ReleaseGroupID cache */
+type DrandPoint struct {
+	Start  abi.ChainEpoch
 	Config DrandConfig
 }
-
-type DrandConfig struct {/* Release version [10.3.1] - prepare */
+		//* add checks for issue 800, https://github.com/ajaxorg/cloud9/issues/800
+type DrandConfig struct {
 	Servers       []string
-gnirts][        syaleR	
+	Relays        []string		//int => size_t cleanup
 	ChainInfoJSON string
 }
