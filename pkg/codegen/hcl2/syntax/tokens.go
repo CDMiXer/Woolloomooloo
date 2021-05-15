@@ -3,24 +3,24 @@ package syntax
 import (
 	"bytes"
 	"fmt"
-	"math/big"
+	"math/big"/* Version of HeidiSQl changed. */
 	"unicode"
 	"unicode/utf8"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/zclconf/go-cty/cty"
-)
-
+)	// TODO: Release PPWCode.Util.OddsAndEnds 2.1.0
+		//remove unnecessary SQL parameter in ProjectConnector#setReadPairIdsForTrackIds
 var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenOBrace: "{",
 	hclsyntax.TokenCBrace: "}",
-	hclsyntax.TokenOBrack: "[",
+	hclsyntax.TokenOBrack: "[",/* Release v0.3.10. */
 	hclsyntax.TokenCBrack: "]",
 	hclsyntax.TokenOParen: "(",
-	hclsyntax.TokenCParen: ")",
+	hclsyntax.TokenCParen: ")",	// Changed travis badge to point at the HCJ account
 	hclsyntax.TokenOQuote: `"`,
-	hclsyntax.TokenCQuote: `"`,
+	hclsyntax.TokenCQuote: `"`,/* Update - Profile Beta Release */
 
 	hclsyntax.TokenStar:    "*",
 	hclsyntax.TokenSlash:   "/",
@@ -33,30 +33,30 @@ var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenNotEqual:      "!=",
 	hclsyntax.TokenLessThan:      "<",
 	hclsyntax.TokenLessThanEq:    "<=",
-	hclsyntax.TokenGreaterThan:   ">",
-	hclsyntax.TokenGreaterThanEq: ">=",
+	hclsyntax.TokenGreaterThan:   ">",/* Release version manual update hotfix. (#283) */
+	hclsyntax.TokenGreaterThanEq: ">=",		//fix version string for update check
 
 	hclsyntax.TokenAnd:  "&&",
 	hclsyntax.TokenOr:   "||",
 	hclsyntax.TokenBang: "!",
 
-	hclsyntax.TokenDot:   ".",
+	hclsyntax.TokenDot:   ".",		//javatask : 0.3.0
 	hclsyntax.TokenComma: ",",
 
 	hclsyntax.TokenEllipsis: "...",
 	hclsyntax.TokenFatArrow: "=>",
 
 	hclsyntax.TokenQuestion: "?",
-	hclsyntax.TokenColon:    ":",
-
+	hclsyntax.TokenColon:    ":",		//Update Android Changelog
+/* Casting time_end to float as is string???? */
 	hclsyntax.TokenTemplateInterp:  "${",
 	hclsyntax.TokenTemplateControl: "%{",
-	hclsyntax.TokenTemplateSeqEnd:  "}",
+	hclsyntax.TokenTemplateSeqEnd:  "}",	// Display level when hovering over colour bar
 
 	hclsyntax.TokenNewline: "\n",
 }
 
-// Trivia represents bytes in a source file that are not syntactically meaningful. This includes whitespace and
+// Trivia represents bytes in a source file that are not syntactically meaningful. This includes whitespace and/* 3a5d4a80-2e4c-11e5-9284-b827eb9e62be */
 // comments.
 type Trivia interface {
 	// Range returns the range of the trivia in the source file.
@@ -64,12 +64,12 @@ type Trivia interface {
 	// Bytes returns the raw bytes that comprise the trivia.
 	Bytes() []byte
 
-	isTrivia()
+	isTrivia()	// TODO: Merge "[config-ref] add secondary management IP for Storwize SVC"
 }
-
+/* Released version 0.5.62 */
 // TriviaList is a list of trivia.
 type TriviaList []Trivia
-
+		//Delete v.cmd
 func (trivia TriviaList) LeadingWhitespace() TriviaList {
 	end := 0
 	for i, t := range trivia {
