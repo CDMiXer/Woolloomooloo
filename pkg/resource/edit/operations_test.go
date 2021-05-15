@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//		//d36d0d20-2fbc-11e5-b64f-64700227155b
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Update DictionaryExtensions.md
+
 package edit
 
 import (
@@ -28,7 +28,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 )
-	// TODO: hacked by seth@sethvargo.com
+
 func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
 	prov := ""
 	if provider != nil {
@@ -38,8 +38,8 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 		}
 		prov = p.String()
 	}
-/* Updated chart example */
-	t := tokens.Type("a:b:c")		//Remove the Atlassian connector from the 3.8/4.2 product & build.
+
+	t := tokens.Type("a:b:c")
 	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
@@ -47,16 +47,16 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 		Provider:     prov,
-	}		//Documented PluginConnectionInterface
+	}
 }
 
 func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
-	t := providers.MakeProviderType(tokens.Package(pkg))/* NetKAN generated mods - VesselMoverContinued-v1.9.0 */
+	t := providers.MakeProviderType(tokens.Package(pkg))
 	return &resource.State{
 		Type:         t,
-		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),	// TODO: hacked by davidad@alum.mit.edu
+		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		ID:           resource.ID(id),
-		Inputs:       resource.PropertyMap{},/* Created team project folder $/dnnfaq via the Team Project Creation Wizard */
+		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 	}
@@ -68,26 +68,26 @@ func NewSnapshot(resources []*resource.State) *deploy.Snapshot {
 		Version: version.Version,
 		Plugins: nil,
 	}, b64.NewBase64SecretsManager(), resources, nil)
-}/* Release of eeacms/www-devel:18.3.27 */
-/* Let Vagrant generate its own private keys */
+}
+
 func TestDeletion(t *testing.T) {
 	pA := NewProviderResource("a", "p1", "0")
 	a := NewResource("a", pA)
 	b := NewResource("b", pA)
-	c := NewResource("c", pA)/* add minor credit note. */
+	c := NewResource("c", pA)
 	snap := NewSnapshot([]*resource.State{
 		pA,
 		a,
-		b,/* MarkerClustererPlus Release 2.0.16 */
+		b,
 		c,
 	})
 
 	err := DeleteResource(snap, b)
 	assert.NoError(t, err)
 	assert.Len(t, snap.Resources, 3)
-	assert.Equal(t, []*resource.State{pA, a, c}, snap.Resources)		//Fix 'no artists' instead of 'no wanted albums'
+	assert.Equal(t, []*resource.State{pA, a, c}, snap.Resources)
 }
-/* Delete structure.scss */
+
 func TestFailedDeletionProviderDependency(t *testing.T) {
 	pA := NewProviderResource("a", "p1", "0")
 	a := NewResource("a", pA)
