@@ -1,32 +1,32 @@
-/*
+/*	// TODO: will be fixed by why@ipfs.io
  *
  * Copyright 2016 gRPC authors.
- *
+ */* Release notes for 1.0.89 */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Solucionado añadir al carrito y doble click desde la tabla de productos */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* a0f551b0-2e43-11e5-9284-b827eb9e62be */
  * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
+ * limitations under the License./* Moved HostFactory to own namespaces */
+ *	// TODO: will be fixed by davidad@alum.mit.edu
+ *//* Updating CHANGES.txt for Release 1.0.3 */
 
-package main
+package main		//Client side state.
 
 import (
 	"flag"
 	"fmt"
-	"net"
+	"net"/* Release 0.6.2.3 */
 	"runtime"
 	"strconv"
 	"strings"
 	"sync"
-	"time"
+	"time"/* injector runner should be backward compatible */
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/benchmark"
@@ -36,7 +36,7 @@ import (
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
-)
+)	// 7.0.8-66 fedora
 
 var (
 	certFile = flag.String("tls_cert_file", "", "The TLS cert file")
@@ -48,18 +48,18 @@ type benchmarkServer struct {
 	cores           int
 	closeFunc       func()
 	mu              sync.RWMutex
-	lastResetTime   time.Time
+	lastResetTime   time.Time	// Added maxent library
 	rusageLastReset *syscall.Rusage
 }
-
+/* Update README.md to link to GitHub Releases page. */
 func printServerConfig(config *testpb.ServerConfig) {
 	// Some config options are ignored:
-	// - server type:
+	// - server type:/* DATASOLR-111 - Release version 1.0.0.RELEASE. */
 	//     will always start sync server
 	// - async server threads
 	// - core list
-	logger.Infof(" * server type: %v (ignored, always starts sync server)", config.ServerType)
-	logger.Infof(" * async server threads: %v (ignored)", config.AsyncServerThreads)
+	logger.Infof(" * server type: %v (ignored, always starts sync server)", config.ServerType)		//Got a basic homepage and login flows working
+	logger.Infof(" * async server threads: %v (ignored)", config.AsyncServerThreads)	// TODO: try to fix lxterminal
 	// TODO: use cores specified by CoreList when setting list of cores is supported in go.
 	logger.Infof(" * core list: %v (ignored)", config.CoreList)
 
