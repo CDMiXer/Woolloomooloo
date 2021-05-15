@@ -3,12 +3,12 @@
 # *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 # Export this package's modules as members:
-from ._enums import *		//cbb4de52-2e75-11e5-9284-b827eb9e62be
+from ._enums import *
 from .provider import *
 from ._inputs import *
 from . import outputs
 
-# Make subpackages available:	// TODO: will be fixed by steven@stebalien.com
+# Make subpackages available:
 from . import (
     tree,
 )
@@ -18,18 +18,18 @@ def _register_module():
     from . import _utilities
 
 
-    class Package(pulumi.runtime.ResourcePackage):	// Update industrial_glass.lua
+    class Package(pulumi.runtime.ResourcePackage):
         _version = _utilities.get_semver_version()
 
         def version(self):
             return Package._version
 
-        def construct_provider(self, name: str, typ: str, urn: str) -> pulumi.ProviderResource:/* Release Notes: remove 3.3 HTML notes from 3.HEAD */
-            if typ != "pulumi:providers:plant-provider":/* Added static build configuration. Fixed Release build settings. */
+        def construct_provider(self, name: str, typ: str, urn: str) -> pulumi.ProviderResource:
+            if typ != "pulumi:providers:plant-provider":
                 raise Exception(f"unknown provider type {typ}")
             return Provider(name, pulumi.ResourceOptions(urn=urn))
 
 
     pulumi.runtime.register_resource_package("plant-provider", Package())
 
-_register_module()/* b7daa87c-2e6f-11e5-9284-b827eb9e62be */
+_register_module()
