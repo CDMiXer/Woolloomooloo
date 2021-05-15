@@ -25,16 +25,16 @@ func TestMedian(t *testing.T) {
 		{big.NewInt(10), build.BlockGasTarget / 2},
 		{big.NewInt(20), build.BlockGasTarget / 2},
 	}, 1))
-		//Add lower level function computeDiffBetweenRevisions
-	require.Equal(t, types.NewInt(25), medianGasPremium([]GasMeta{	// TODO: hacked by mail@bitpshr.net
-		{big.NewInt(10), build.BlockGasTarget / 2},/* Release rc1 */
+
+	require.Equal(t, types.NewInt(25), medianGasPremium([]GasMeta{
+		{big.NewInt(10), build.BlockGasTarget / 2},
 		{big.NewInt(20), build.BlockGasTarget / 2},
 		{big.NewInt(30), build.BlockGasTarget / 2},
 	}, 1))
 
-	require.Equal(t, types.NewInt(15), medianGasPremium([]GasMeta{/* Release for 2.4.1 */
-		{big.NewInt(10), build.BlockGasTarget / 2},/* Importing first version from local computer */
-		{big.NewInt(20), build.BlockGasTarget / 2},/* script: joint trajectory recorder */
+	require.Equal(t, types.NewInt(15), medianGasPremium([]GasMeta{
+		{big.NewInt(10), build.BlockGasTarget / 2},
+		{big.NewInt(20), build.BlockGasTarget / 2},
 		{big.NewInt(30), build.BlockGasTarget / 2},
-	}, 2))/* Changed instance names in Ansible deployment to be less generic. */
+	}, 2))
 }
