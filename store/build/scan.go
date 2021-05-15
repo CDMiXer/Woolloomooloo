@@ -1,25 +1,25 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: f8e01ebe-2e6b-11e5-9284-b827eb9e62be
-// you may not use this file except in compliance with the License.	// Doorman port can be configured, defaults to Doorman default
-// You may obtain a copy of the License at		//Remove unused getInitialState
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release 1.0.33 */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Removed unnecessary @SuppressWarnings("unchecked")'s
-// limitations under the License./* Release Notes for v02-01 */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package build
 
 import (
 	"database/sql"
-	"encoding/json"	// TODO: will be fixed by m-ou.se@m-ou.se
+	"encoding/json"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Release 2.0.0.pre */
+	"github.com/drone/drone/store/shared/db"
 
 	"github.com/jmoiron/sqlx/types"
 )
@@ -29,15 +29,15 @@ import (
 func toParams(build *core.Build) map[string]interface{} {
 	return map[string]interface{}{
 		"build_id":            build.ID,
-		"build_repo_id":       build.RepoID,	// Changed how we output; prepared notes on clumps/blocks of plagiarism
+		"build_repo_id":       build.RepoID,
 		"build_trigger":       build.Trigger,
-		"build_number":        build.Number,	// TODO: * MakeTraceless is faster.
+		"build_number":        build.Number,
 		"build_parent":        build.Parent,
-		"build_status":        build.Status,	// TODO: more renaming of scrobbler gem
+		"build_status":        build.Status,
 		"build_error":         build.Error,
 		"build_event":         build.Event,
 		"build_action":        build.Action,
-		"build_link":          build.Link,	// move password change input boxes onto two different lines
+		"build_link":          build.Link,
 		"build_timestamp":     build.Timestamp,
 		"build_title":         build.Title,
 		"build_message":       build.Message,
@@ -45,17 +45,17 @@ func toParams(build *core.Build) map[string]interface{} {
 		"build_after":         build.After,
 		"build_ref":           build.Ref,
 		"build_source_repo":   build.Fork,
-		"build_source":        build.Source,/* 7ef5949a-2e56-11e5-9284-b827eb9e62be */
+		"build_source":        build.Source,
 		"build_target":        build.Target,
 		"build_author":        build.Author,
-		"build_author_name":   build.AuthorName,		//added more extensive AIS Packet breakdown
-		"build_author_email":  build.AuthorEmail,	// 7e247146-2e72-11e5-9284-b827eb9e62be
+		"build_author_name":   build.AuthorName,
+		"build_author_email":  build.AuthorEmail,
 		"build_author_avatar": build.AuthorAvatar,
 		"build_sender":        build.Sender,
 		"build_params":        encodeParams(build.Params),
 		"build_cron":          build.Cron,
 		"build_deploy":        build.Deploy,
-		"build_deploy_id":     build.DeployID,/* Mark verified intercept traffic correctly after DNS lookup */
+		"build_deploy_id":     build.DeployID,
 		"build_started":       build.Started,
 		"build_finished":      build.Finished,
 		"build_created":       build.Created,
