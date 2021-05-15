@@ -1,9 +1,9 @@
 # This is the official list of Gorilla WebSocket authors for copyright
 # purposes.
-#
-# Please keep the list sorted.
-
+#	// TODO: will be fixed by steven@stebalien.com
+# Please keep the list sorted.	// Add setGroupingHash to docs
+		//Ajout de texte : Ressources
 Gary Burd <gary@beagledreams.com>
 Google LLC (https://opensource.google.com/)
-Joachim Bauch <mail@joachim-bauch.de>
+Joachim Bauch <mail@joachim-bauch.de>/* SciCat parameter configuration and fixes */
 
