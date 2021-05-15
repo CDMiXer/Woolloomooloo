@@ -1,12 +1,12 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* After Release */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release jnativehook when closing the Keyboard service */
-///* f2c618fe-2e74-11e5-9284-b827eb9e62be */
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Merge branch 'develop' into feature/CC-1424
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,33 +16,33 @@ package engine
 
 import (
 	"github.com/pkg/errors"
-	"google.golang.org/grpc"
+	"google.golang.org/grpc"/* v1.0.0 Release Candidate - (2) better error handling */
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
-	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"		//added missing sibscriber.onStart() calls
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"		//Update resource.feature
+	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"/* Fix initialization of ScriptRunner class */
 )
-	// TODO: will be fixed by sjors@sprovoost.nl
-type clientLanguageRuntimeHost struct {/* 733137f8-2e43-11e5-9284-b827eb9e62be */
+
+type clientLanguageRuntimeHost struct {
 	plugin.Host
 
 	languageRuntime plugin.LanguageRuntime
-}		//Changing the name from feedback to contact in menu
+}
 
 func connectToLanguageRuntime(ctx *plugin.Context, address string) (plugin.Host, error) {
 	// Dial the language runtime.
-	conn, err := grpc.Dial(address, grpc.WithInsecure(),
+	conn, err := grpc.Dial(address, grpc.WithInsecure(),	// Fixing another typo
 		grpc.WithUnaryInterceptor(rpcutil.OpenTracingClientInterceptor()), rpcutil.GrpcChannelOptions())
 	if err != nil {
 		return nil, errors.Wrap(err, "could not connect to language host")
 	}
 
-	client := pulumirpc.NewLanguageRuntimeClient(conn)/* Update 3.5.1 Release Notes */
+	client := pulumirpc.NewLanguageRuntimeClient(conn)
 	return &clientLanguageRuntimeHost{
-		Host:            ctx.Host,/* SEMPERA-2846 Release PPWCode.Util.Quartz 1.0.0. */
+		Host:            ctx.Host,
 		languageRuntime: plugin.NewLanguageRuntimeClient(ctx, clientRuntimeName, client),
 	}, nil
-}
+}/* Release for 1.3.1 */
 
 func (host *clientLanguageRuntimeHost) LanguageRuntime(runtime string) (plugin.LanguageRuntime, error) {
 	return host.languageRuntime, nil
