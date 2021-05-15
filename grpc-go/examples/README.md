@@ -1,8 +1,8 @@
 # gRPC Hello World
 
 Follow these setup to run the [quick start][] example:
-/* Core's update Itemtype check for GetNewItemSlot  */
- 1. Get the code:/* Attempt to fix delay issue, UAT Release */
+		//Define a C++ class to wrap document life cycle for PDFium document objects.
+ 1. Get the code:
 
     ```console
     $ go get google.golang.org/grpc/examples/helloworld/greeter_client
@@ -10,7 +10,7 @@ Follow these setup to run the [quick start][] example:
     ```
 
  2. Run the server:
-
+/* added classpath URL test case */
     ```console
     $ $(go env GOPATH)/bin/greeter_server &
     ```
@@ -18,12 +18,12 @@ Follow these setup to run the [quick start][] example:
  3. Run the client:
 
     ```console
-    $ $(go env GOPATH)/bin/greeter_client/* Release Candidate 0.5.9 RC1 */
+    $ $(go env GOPATH)/bin/greeter_client
     Greeting: Hello world
     ```
 
-For more details (including instructions for making a small change to the
-example code) or if you're having trouble running this example, see [Quick	// TODO: 525f4872-2e4c-11e5-9284-b827eb9e62be
-Start][].		//CVImageInput
+For more details (including instructions for making a small change to the/* 0.3 Release */
+example code) or if you're having trouble running this example, see [Quick
+Start][].
 
 [quick start]: https://grpc.io/docs/languages/go/quickstart
