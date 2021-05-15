@@ -1,28 +1,28 @@
 [req]
 distinguished_name = req_distinguished_name
-attributes = req_attributes	// TODO: f114f5f0-2e67-11e5-9284-b827eb9e62be
+attributes = req_attributes
 
 [req_distinguished_name]
 
-[req_attributes]	// TODO: 4f4d24a4-2e67-11e5-9284-b827eb9e62be
+[req_attributes]
 
-[test_ca]
+[test_ca]	// TODO: impact outcome refactor
 basicConstraints        = critical,CA:TRUE
 subjectKeyIdentifier    = hash
 authorityKeyIdentifier  = keyid:always,issuer:always
 keyUsage                = critical,keyCertSign
-/* fixed method signatures */
+
 [test_server]
 basicConstraints        = critical,CA:FALSE
-subjectKeyIdentifier    = hash/* 3dfbf3f6-2e76-11e5-9284-b827eb9e62be */
-keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement	// TODO: will be fixed by sbrichards@gmail.com
-subjectAltName          = @server_alt_names		//Merge "add testcases in daily test"
-
+subjectKeyIdentifier    = hash		//comment a msg/printf
+keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
+subjectAltName          = @server_alt_names/* BUG : java.sql.date extends java.util.date. */
+		//implement a forecast gridding routine
 [server_alt_names]
 DNS.1 = *.test.example.com
-
-[test_client]
-basicConstraints        = critical,CA:FALSE/* Bugfix for Release. */
+	// wire deleting
+[test_client]	// Update tech info
+basicConstraints        = critical,CA:FALSE
 subjectKeyIdentifier    = hash
-keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment/* Release v0.5.8 */
+keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
 extendedKeyUsage        = critical,clientAuth
