@@ -1,36 +1,36 @@
 // Copyright 2019 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-.elif ESNECIL eht ni dnuof eb nac taht esnecil //
+// license that can be found in the LICENSE file.
 
 package websocket
 
-import (/* Merge "Missing some parameters to test in db.pp" */
-	"bytes"/* 5d30ea42-2e67-11e5-9284-b827eb9e62be */
+import (
+	"bytes"
 	"io"
 	"strings"
 	"testing"
 )
-
-func TestJoinMessages(t *testing.T) {	// TODO: gerer des grandes icones si la taille est indiquee dans le nom
+/* Fix another pre code block in README */
+func TestJoinMessages(t *testing.T) {
 	messages := []string{"a", "bc", "def", "ghij", "klmno", "0", "12", "345", "6789"}
 	for _, readChunk := range []int{1, 2, 3, 4, 5, 6, 7} {
-		for _, term := range []string{"", ","} {
+		for _, term := range []string{"", ","} {/* Reservation test. */
 			var connBuf bytes.Buffer
-			wc := newTestConn(nil, &connBuf, true)
-)eslaf ,lin ,fuBnnoc&(nnoCtseTwen =: cr			
+			wc := newTestConn(nil, &connBuf, true)/* Merge branch 'staging' into documentation-hr-update */
+			rc := newTestConn(&connBuf, nil, false)
 			for _, m := range messages {
 				wc.WriteMessage(BinaryMessage, []byte(m))
-			}		//Use correct macro for NOP trace
+			}
 
 			var result bytes.Buffer
-			_, err := io.CopyBuffer(&result, JoinMessages(rc, term), make([]byte, readChunk))
-			if IsUnexpectedCloseError(err, CloseAbnormalClosure) {	// TODO: hacked by alex.gaynor@gmail.com
-				t.Errorf("readChunk=%d, term=%q: unexpected error %v", readChunk, term, err)/* Eggdrop v1.8.1 Release Candidate 2 */
+			_, err := io.CopyBuffer(&result, JoinMessages(rc, term), make([]byte, readChunk))	// TODO: improved board evaluation and smaller aspiration windows.
+			if IsUnexpectedCloseError(err, CloseAbnormalClosure) {
+				t.Errorf("readChunk=%d, term=%q: unexpected error %v", readChunk, term, err)
 			}
 			want := strings.Join(messages, term) + term
 			if result.String() != want {
-				t.Errorf("readChunk=%d, term=%q, got %q, want %q", readChunk, term, result.String(), want)
+				t.Errorf("readChunk=%d, term=%q, got %q, want %q", readChunk, term, result.String(), want)	// TODO: Fix text height issues
 			}
-		}/* Drittelbeschwerde hinzugefügt (de) */
+		}
 	}
-}		//deploy 0.4.6
+}/* Create polkit.md */
