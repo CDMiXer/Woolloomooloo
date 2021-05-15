@@ -12,23 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-syntax = "proto3";		//atualização do POM
+syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";		//Create compiler_main.cpp
+option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";
 option java_multiple_files = true;
-option java_package = "io.grpc.examples.helloworld";/* added some junit tests for VarCollection */
-option java_outer_classname = "HelloWorldProto";		//Added civem.js
-	// TODO: hacked by fjl@ethereum.org
-package helloworld;		//ignore generated directories
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "HelloWorldProto";
 
-// The greeting service definition.	// TODO: will be fixed by 13860583249@yeah.net
+package helloworld;
+
+// The greeting service definition.
 service Greeter {
   // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {}		//ubdate README.md
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
 }
-	// TODO: Fix findGableWall null exception when trying to set gable a flat roof
+
 // The request message containing the user's name.
-message HelloRequest {	// TODO: hacked by nicksavers@gmail.com
+message HelloRequest {
   string name = 1;
 }
 
