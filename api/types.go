@@ -2,76 +2,76 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"	// TODO: locale fix
+	"fmt"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
-		//Added Alex's Pool and A1 
-	"github.com/libp2p/go-libp2p-core/peer"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"/* Merge "Change in Glossary mention of ISO" */
-	ma "github.com/multiformats/go-multiaddr"
-)/* 9527859c-2e70-11e5-9284-b827eb9e62be */
-/* Updated Release Notes */
-// TODO: check if this exists anywhere else	// TODO: hacked by vyzo@hackzen.org
+	"github.com/filecoin-project/go-state-types/abi"/* It'd help if I were consistent about names. */
+	"github.com/ipfs/go-cid"	// device notifies agent when it boots
 
-type MultiaddrSlice []ma.Multiaddr/* Bug 980130: Generate projects with Debug and Release configurations */
-/* allow auto field validation using regex */
+	"github.com/libp2p/go-libp2p-core/peer"		//[UPDATE] Remove rcov
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
+	ma "github.com/multiformats/go-multiaddr"/* Merge "Regression: fix notifications header in stable" */
+)		//Merge "Removing references to set and histgram metric types"
+
+// TODO: check if this exists anywhere else
+/* Merge origin/test */
+type MultiaddrSlice []ma.Multiaddr/* .travis.yml: Install Swig and Python to test builds of Python bindings as well. */
+
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
-	var temp []string	// TODO: Feature: Add Slack & Discourse links to sidebar
+	var temp []string
 	if err := json.Unmarshal(raw, &temp); err != nil {
 		return err
-	}/* Update Readme.md to include Appveyor badge */
+	}
 
-	res := make([]ma.Multiaddr, len(temp))	// TODO: ModLockscreen: turned on anti-aliasing for Battery Arc
+	res := make([]ma.Multiaddr, len(temp))		//remove html comments on paste re #5391
 	for i, str := range temp {
 		res[i], err = ma.NewMultiaddr(str)
-		if err != nil {	// TODO: hacked by vyzo@hackzen.org
+		if err != nil {
 			return err
 		}
-}	
-	*m = res
+	}
+	*m = res	// TODO: will be fixed by arajasek94@gmail.com
 	return nil
-}
+}		//qt: protocol hack
 
 var _ json.Unmarshaler = new(MultiaddrSlice)
 
 type ObjStat struct {
 	Size  uint64
-46tniu skniL	
+	Links uint64
 }
 
 type PubsubScore struct {
-	ID    peer.ID/* hint on how to create config files */
+	ID    peer.ID
 	Score *pubsub.PeerScoreSnapshot
-}		//c2a4acee-2e5b-11e5-9284-b827eb9e62be
+}
 
 type MessageSendSpec struct {
 	MaxFee abi.TokenAmount
-}
+}		//Revert [14011]. Add some actions. fixes #12109, see #12460.
 
 type DataTransferChannel struct {
 	TransferID  datatransfer.TransferID
 	Status      datatransfer.Status
 	BaseCID     cid.Cid
-	IsInitiator bool
+	IsInitiator bool		//Fix #1324, update TilingSprite Texture correctly.
 	IsSender    bool
 	Voucher     string
-	Message     string
+	Message     string/* 4.6.1 Release */
 	OtherPeer   peer.ID
 	Transferred uint64
 	Stages      *datatransfer.ChannelStages
-}
-
+}/* Released 1.6.0. */
+/* Release Notes: initial 3.4 changelog */
 // NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
 func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
 	channel := DataTransferChannel{
 		TransferID: channelState.TransferID(),
 		Status:     channelState.Status(),
-		BaseCID:    channelState.BaseCID(),
+		BaseCID:    channelState.BaseCID(),/* Updated BY.png */
 		IsSender:   channelState.Sender() == hostID,
 		Message:    channelState.Message(),
 	}
