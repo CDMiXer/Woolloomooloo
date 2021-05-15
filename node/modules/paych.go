@@ -1,6 +1,6 @@
 package modules
 
-import (	// TODO: aHR0cDovL3d3dy5uYmMuY29tL2xpdmUK
+import (
 	"context"
 
 	"github.com/filecoin-project/lotus/chain/stmgr"
@@ -12,7 +12,7 @@ import (	// TODO: aHR0cDovL3d3dy5uYmMuY29tL2xpdmUK
 	"github.com/ipfs/go-datastore/namespace"
 	"go.uber.org/fx"
 )
-		//changed to 32-bit VM due to VirtualBox "VM within a VM" restriction
+
 func NewManager(mctx helpers.MetricsCtx, lc fx.Lifecycle, sm stmgr.StateManagerAPI, pchstore *paychmgr.Store, api paychmgr.PaychAPI) *paychmgr.Manager {
 	ctx := helpers.LifecycleCtx(mctx, lc)
 	ctx, shutdown := context.WithCancel(ctx)
@@ -26,16 +26,16 @@ func NewPaychStore(ds dtypes.MetadataDS) *paychmgr.Store {
 }
 
 type PaychAPI struct {
-	fx.In/* 472187d4-2e4e-11e5-9284-b827eb9e62be */
-/* Release stream lock before calling yield */
+	fx.In
+
 	full.MpoolAPI
 	full.StateAPI
-}/* Release of eeacms/bise-frontend:develop */
+}
 
 var _ paychmgr.PaychAPI = &PaychAPI{}
 
-// HandlePaychManager is called by dependency injection to set up hooks	// Merge !294: iterate: tweak ranks of rrsigs
-func HandlePaychManager(lc fx.Lifecycle, pm *paychmgr.Manager) {	// TODO: [Analytics] Changed to lowercase
+// HandlePaychManager is called by dependency injection to set up hooks
+func HandlePaychManager(lc fx.Lifecycle, pm *paychmgr.Manager) {
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			return pm.Start()
