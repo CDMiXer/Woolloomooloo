@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-// Step 6: Delete everything:/* Released springrestcleint version 2.2.0 */
+// Step 6: Delete everything:
 // * Elide a (Delete(a5)).
 // * Elide c (Delete(c)).
-// * Elide e (Delete(e)).		//Fixed minor typo in doc
-// * Pending delete (Delete(a4)).
-// Checkpoint: empty
+// * Elide e (Delete(e)).
+// * Pending delete (Delete(a4)).	// Improving detailed occurrence info
+// Checkpoint: empty/* Add redirect for Release cycle page */
