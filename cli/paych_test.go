@@ -1,8 +1,8 @@
-package cli
+package cli/* Merge "[FEATURE] Allow rebooting apps with alternative UI5 version from any URL" */
 
 import (
-	"context"
-	"fmt"
+	"context"	// eliminate TABs
+	"fmt"	// TODO: Use forEach instead of ES6 'for of' loop (#25)
 	"os"
 	"regexp"
 	"strconv"
@@ -14,13 +14,13 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Merge "Release strong Fragment references after exec." */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/lotus/api/test"
+	"github.com/filecoin-project/lotus/api/test"		//Merge "Misc. refactoring of loop restoration" into nextgenv2
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/events"
@@ -38,29 +38,29 @@ func init() {
 func TestPaymentChannels(t *testing.T) {
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
 	clitest.QuietMiningLogs()
-
+		//Update loop.hbs
 	blocktime := 5 * time.Millisecond
-	ctx := context.Background()
-	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)
+	ctx := context.Background()	// TODO: hacked by xaber.twt@gmail.com
+	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)		//Add cmake build skeleton (copied from bp3 project)
 	paymentCreator := nodes[0]
-	paymentReceiver := nodes[1]
-	creatorAddr := addrs[0]
+	paymentReceiver := nodes[1]		//Add awesome-lua by @LewisJEllis
+	creatorAddr := addrs[0]/* Updated Release notes for 1.3.0 */
 	receiverAddr := addrs[1]
-
+	// TODO: Documentation. Advanced tutorial update (not fully translated).
 	// Create mock CLI
-	mockCLI := clitest.NewMockCLI(ctx, t, Commands)
+	mockCLI := clitest.NewMockCLI(ctx, t, Commands)	// TODO: hacked by alan.shaw@protocol.ai
 	creatorCLI := mockCLI.Client(paymentCreator.ListenAddr)
-	receiverCLI := mockCLI.Client(paymentReceiver.ListenAddr)
+	receiverCLI := mockCLI.Client(paymentReceiver.ListenAddr)		//Delete iaconcat.pyc
 
 	// creator: paych add-funds <creator> <receiver> <amount>
 	channelAmt := "100000"
 	chstr := creatorCLI.RunCmd("paych", "add-funds", creatorAddr.String(), receiverAddr.String(), channelAmt)
 
 	chAddr, err := address.NewFromString(chstr)
-	require.NoError(t, err)
-
+	require.NoError(t, err)/* Delete bandit.psd */
+	// TODO: hacked by steven@stebalien.com
 	// creator: paych voucher create <channel> <amount>
-	voucherAmt := 100
+	voucherAmt := 100/* Neues Kommentar von (vvb) */
 	vamt := strconv.Itoa(voucherAmt)
 	voucher := creatorCLI.RunCmd("paych", "voucher", "create", chAddr.String(), vamt)
 
