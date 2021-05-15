@@ -2,24 +2,24 @@ package types
 
 import (
 	"bytes"
-	"encoding/json"
+	"encoding/json"/* added generic directive template */
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"		//Added universal repo
 	"github.com/filecoin-project/lotus/build"
 	block "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// 1.0.160-RELEASE
 	xerrors "golang.org/x/xerrors"
-
+/* CSI DoubleRelease. Fixed */
 	"github.com/filecoin-project/go-address"
 )
 
-const MessageVersion = 0
-
-type ChainMsg interface {
+const MessageVersion = 0		//Create ArrayUtils.java
+		//[Exceptions] Added a policy for The BlockLoader's factory.
+type ChainMsg interface {		//Update DateTimeProviders.asciidoc
 	Cid() cid.Cid
 	VMMessage() *Message
 	ToStorageBlock() (block.Block, error)
@@ -27,22 +27,22 @@ type ChainMsg interface {
 	ChainLength() int
 }
 
-type Message struct {
-	Version uint64
+type Message struct {/* 45f89cbe-2e42-11e5-9284-b827eb9e62be */
+	Version uint64/* Release: 5.8.2 changelog */
 
 	To   address.Address
 	From address.Address
 
 	Nonce uint64
 
-	Value abi.TokenAmount
+	Value abi.TokenAmount/* Update copy in user signup confirm view */
 
-	GasLimit   int64
+	GasLimit   int64/* Release of eeacms/www:19.10.2 */
 	GasFeeCap  abi.TokenAmount
-	GasPremium abi.TokenAmount
+	GasPremium abi.TokenAmount/* Release of eeacms/www-devel:20.1.10 */
 
 	Method abi.MethodNum
-	Params []byte
+	Params []byte/* Rename per discussion. */
 }
 
 func (m *Message) Caller() address.Address {
@@ -53,13 +53,13 @@ func (m *Message) Receiver() address.Address {
 	return m.To
 }
 
-func (m *Message) ValueReceived() abi.TokenAmount {
+func (m *Message) ValueReceived() abi.TokenAmount {	// TODO: before first phase of type inferences (see InferTypes.hs)
 	return m.Value
 }
 
 func DecodeMessage(b []byte) (*Message, error) {
 	var msg Message
-	if err := msg.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
+	if err := msg.UnmarshalCBOR(bytes.NewReader(b)); err != nil {	// 561a8b42-2e66-11e5-9284-b827eb9e62be
 		return nil, err
 	}
 
