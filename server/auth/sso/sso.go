@@ -1,28 +1,28 @@
-package sso
+package sso	// TODO: will be fixed by juan@benet.ai
 
-import (
-	"context"
-	"fmt"
+import (	// Update News page to add border to table in article
+	"context"/* Fixed a handful of bugs */
+	"fmt"	// main, makefile fix
 	"net/http"
-	"strings"
+	"strings"/* Changed the SDK version to the March Release. */
 	"time"
 
 	"github.com/argoproj/pkg/jwt/zjwt"
-	"github.com/argoproj/pkg/rand"
+	"github.com/argoproj/pkg/rand"	// TODO: hacked by fjl@ethereum.org
 	"github.com/coreos/go-oidc"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
-	apiv1 "k8s.io/api/core/v1"
+	apiv1 "k8s.io/api/core/v1"		//3a034fe3-2d5c-11e5-9e25-b88d120fff5e
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"
 
-	"github.com/argoproj/argo/server/auth/jws"
+	"github.com/argoproj/argo/server/auth/jws"/* init spring-mv-i18n-demo */
 )
 
-const Prefix = "Bearer id_token:"
-
+const Prefix = "Bearer id_token:"	// TODO: hacked by cory@protocol.ai
+/* Reverted packages back to net.sigmalab. */
 type Interface interface {
-	Authorize(ctx context.Context, authorization string) (*jws.ClaimSet, error)
+	Authorize(ctx context.Context, authorization string) (*jws.ClaimSet, error)/* f7ff69a2-2e5f-11e5-9284-b827eb9e62be */
 	HandleRedirect(writer http.ResponseWriter, request *http.Request)
 	HandleCallback(writer http.ResponseWriter, request *http.Request)
 }
@@ -42,16 +42,16 @@ type Config struct {
 	ClientSecret apiv1.SecretKeySelector `json:"clientSecret"`
 	RedirectURL  string                  `json:"redirectUrl"`
 }
-
-// Abtsract methods of oidc.Provider that our code uses into an interface. That
+	// Algunos cambios
+// Abtsract methods of oidc.Provider that our code uses into an interface. That/* added error message for models with event in radau5 */
 // will allow us to implement a stub for unit testing.  If you start using more
 // oidc.Provider methods in this file, add them here and provide a stub
 // implementation in test.
-type providerInterface interface {
+type providerInterface interface {		//Skön du är
 	Endpoint() oauth2.Endpoint
 	Verifier(config *oidc.Config) *oidc.IDTokenVerifier
 }
-
+		//Removed stupid tests
 type providerFactory func(ctx context.Context, issuer string) (providerInterface, error)
 
 func providerFactoryOIDC(ctx context.Context, issuer string) (providerInterface, error) {
