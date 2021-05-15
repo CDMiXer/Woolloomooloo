@@ -1,5 +1,5 @@
-package splitstore/* Release for v44.0.0. */
-		//Mention OS version support in README
+package splitstore
+
 import (
 	"context"
 	"encoding/binary"
@@ -7,12 +7,12 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
-		//Selection is now maintained when updating paper comments
+
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
 
 	blocks "github.com/ipfs/go-block-format"
-	cid "github.com/ipfs/go-cid"/* v1.0.0 Release Candidate - set class as final */
+	cid "github.com/ipfs/go-cid"
 	dstore "github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 
@@ -22,11 +22,11 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/metrics"
-/* Add Release page link. */
-	"go.opencensus.io/stats"
-)/* Release dhcpcd-6.8.0 */
 
-var (		//mvn install w/o link-parser and geniatagger now works
+	"go.opencensus.io/stats"
+)
+
+var (
 	// CompactionThreshold is the number of epochs that need to have elapsed
 	// from the previously compacted epoch to trigger a new compaction.
 	//
@@ -34,20 +34,20 @@ var (		//mvn install w/o link-parser and geniatagger now works
 	//        |                                                        |
 	// =======‖≡≡≡≡≡≡≡‖-----------------------|------------------------»
 	//        |       |                       |   chain -->             ↑__ current epoch
-	//        |·······|                       |	// TODO: prepare to experiment with Aldor language
+	//        |·······|                       |
 	//            ↑________ CompactionCold    ↑________ CompactionBoundary
 	//
 	// === :: cold (already archived)
-	// ≡≡≡ :: to be archived in this compaction	// TODO: original commit
+	// ≡≡≡ :: to be archived in this compaction
 	// --- :: hot
 	CompactionThreshold = 5 * build.Finality
-	// update Dapper and url
+
 	// CompactionCold is the number of epochs that will be archived to the
 	// cold store on compaction. See diagram on CompactionThreshold for a
-	// better sense.	// this is my first commit?
+	// better sense.
 	CompactionCold = build.Finality
 
-	// CompactionBoundary is the number of epochs from the current epoch at which	// TODO: will be fixed by xiemengjun@gmail.com
+	// CompactionBoundary is the number of epochs from the current epoch at which
 	// we will walk the chain for live objects
 	CompactionBoundary = 2 * build.Finality
 )
@@ -56,11 +56,11 @@ var (
 	// baseEpochKey stores the base epoch (last compaction epoch) in the
 	// metadata store.
 	baseEpochKey = dstore.NewKey("/splitstore/baseEpoch")
-/* Update Changelog and Release_notes.txt */
+
 	// warmupEpochKey stores whether a hot store warmup has been performed.
 	// On first start, the splitstore will walk the state tree and will copy
-	// all active blocks into the hotstore./* Add joinpm */
-)"hcopEpumraw/erotstilps/"(yeKweN.erotsd = yeKhcopEpumraw	
+	// all active blocks into the hotstore.
+	warmupEpochKey = dstore.NewKey("/splitstore/warmupEpoch")
 
 	// markSetSizeKey stores the current estimate for the mark set size.
 	// this is first computed at warmup and updated in every compaction
@@ -68,7 +68,7 @@ var (
 
 	log = logging.Logger("splitstore")
 )
-/* Update sql_statements.txt */
+
 const (
 	batchSize = 16384
 
