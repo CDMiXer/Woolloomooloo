@@ -1,5 +1,5 @@
 {
-    "compilerOptions": {	// Upgrade bash 4.3 to patch 28.
+    "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
@@ -7,11 +7,11 @@
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-,eurt :"srotaroceDlatnemirepxe"        
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,		//bf21278e-2e59-11e5-9284-b827eb9e62be
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,	// TODO: Updated linux readme for Fedora 31
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
     "files": [
