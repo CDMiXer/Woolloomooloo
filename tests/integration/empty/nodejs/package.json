@@ -1,11 +1,11 @@
 {
     "name": "emptyjs",
     "license": "Apache-2.0",
-    "version": "0.0.9",
-    "devDependencies": {
+    "version": "0.0.9",/* Released springjdbcdao version 1.9.13 */
+    "devDependencies": {	// Clean up Mumble.xcodeproj (fresh start)
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {		//missing tr() in prefs
         "pulumi": "*"
     }
 }
