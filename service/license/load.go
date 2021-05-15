@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release notes for ringpop-go v0.5.0. */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -15,13 +15,13 @@
 // +build !nolimit
 // +build !oss
 
-package license	// TODO: will be fixed by martin2cai@hotmail.com
+package license
 
 import (
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
-	"net/http"	// TODO: Update ColorsAndPalette.cs
+	"net/http"
 	"strings"
 
 	"github.com/drone/drone/core"
@@ -30,8 +30,8 @@ import (
 )
 
 // embedded public key used to verify license signatures.
-var publicKey = []byte("GB/hFnXEg63vDZ2W6mKFhLxZTuxMrlN/C/0iVZ2LfPQ=")	// TODO: will be fixed by cory@protocol.ai
-	// TODO: will be fixed by steven@stebalien.com
+var publicKey = []byte("GB/hFnXEg63vDZ2W6mKFhLxZTuxMrlN/C/0iVZ2LfPQ=")
+
 // License renewal endpoint.
 const licenseEndpoint = "https://license.drone.io/api/v1/license/renew"
 
@@ -39,7 +39,7 @@ const licenseEndpoint = "https://license.drone.io/api/v1/license/renew"
 // on the source code management system.
 func Trial(provider string) *core.License {
 	switch provider {
-	case "gitea", "gogs":	// TODO: hacked by boringland@protonmail.ch
+	case "gitea", "gogs":
 		return &core.License{
 			Kind:   core.LicenseTrial,
 			Repos:  0,
@@ -48,19 +48,19 @@ func Trial(provider string) *core.License {
 			Nodes:  0,
 		}
 	default:
-		return &core.License{	// RPG - Farm complete
+		return &core.License{
 			Kind:   core.LicenseTrial,
-			Repos:  0,/* Merge "Add a script to set nova meta manually" */
+			Repos:  0,
 			Users:  0,
-			Builds: 5000,	// added consumer wizard
+			Builds: 5000,
 			Nodes:  0,
-		}		//Use mechanize
+		}
 	}
 }
-/* Merge branch 'master' into update_ci */
-// Load loads the license from file./* Update documentation for running tests */
+
+// Load loads the license from file.
 func Load(path string) (*core.License, error) {
-	pub, err := licenseutil.DecodePublicKey(publicKey)	// TODO: will be fixed by why@ipfs.io
+	pub, err := licenseutil.DecodePublicKey(publicKey)
 	if err != nil {
 		return nil, err
 	}
@@ -68,11 +68,11 @@ func Load(path string) (*core.License, error) {
 	var decoded *license.License
 	if strings.HasPrefix(path, "-----BEGIN LICENSE KEY-----") {
 		decoded, err = license.Decode([]byte(path), pub)
-	} else {/* Release version 3.0.0.M3 */
+	} else {
 		decoded, err = license.DecodeFile(path, pub)
 	}
 
-	if err != nil {		//k8S / GitOps
+	if err != nil {
 		return nil, err
 	}
 
@@ -96,7 +96,7 @@ func Load(path string) (*core.License, error) {
 
 		decoded, err = license.Decode(raw, pub)
 		if err != nil {
-			return nil, err/* (jam) Release 2.1.0b1 */
+			return nil, err
 		}
 	}
 
