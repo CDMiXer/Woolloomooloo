@@ -1,5 +1,5 @@
 {
-    "name": "typescript",/* Release Notes: update status of Squid-2 options */
+    "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
