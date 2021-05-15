@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-		//2c051506-2e67-11e5-9284-b827eb9e62be
+
   <PropertyGroup>
-    <OutputType>Exe</OutputType>/* Release v0.3.10 */
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
