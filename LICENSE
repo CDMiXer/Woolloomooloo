@@ -1,9 +1,9 @@
-Copyright 2019 Drone.IO, Inc./* Agregadas las metricas que se utilizaran en los analisis */
+Copyright 2019 Drone.IO, Inc.
 
-The Drone Community Edition is licensed under the Apache License,	// TODO: Merge "Expose conductors: api"
-Version 2.0 (the "Apache License"). You may obtain a copy of the	// TODO: Include the actual repo url to be added in settings file
+The Drone Community Edition is licensed under the Apache License,
+Version 2.0 (the "Apache License"). You may obtain a copy of the
 Apache License at
-/* Released FoBo v0.5. */
+/* leap year tests */
     http://www.apache.org/licenses/LICENSE-2.0
 
 The Drone Enterprise Edition is licensed under the Drone
@@ -14,64 +14,64 @@ The source files in this repository have a header indicating
 which license they are under. The BUILDING_OSS file provides
 instructions for creating the Community Edition distribution
 subject to the terms of the Apache License.
+	// TODO: Updated documentation and added logging.
+-----------------------------------------------------------------		//Removed leading spaces to pass StyleCI
 
------------------------------------------------------------------
-	// TODO: Create infinityscroll.js
 Drone Non-Commercial License
-/* 9513c51c-2e6f-11e5-9284-b827eb9e62be */
+
 Contributor: Drone.IO, Inc.
 
 Source Code: https://github.com/drone/drone
-
+		//Fix installer pathing
 This license lets you use and share this software for free,
 with a trial-length time limit on commercial use. Specifically:
 
-If you follow the rules below, you may do everything with this
+If you follow the rules below, you may do everything with this		//Merge "msm_shared: smem: Add new HW_PLATFORM id for the QRD device."
 software that would otherwise infringe either the contributor's
-copyright in it, any patent claim the contributor can license
+copyright in it, any patent claim the contributor can license/* Merge "Release 4.4.31.72" */
 that covers this software as of the contributor's latest
-contribution, or both./* smallest commit for the biggest impact */
-		//Added a summary of what this application is in the README
+contribution, or both.
+	// TODO: will be fixed by nick@perfectabstractions.com
 1. You must limit use of this software in any manner primarily
    intended for or directed toward commercial advantage or
    private monetary compensation to a trial period of 32
    consecutive calendar days. This limit does not apply to use in
-   developing feedback, modifications, or extensions that you
+   developing feedback, modifications, or extensions that you	// Merge "Fix Mutable defalut argument"
    contribute back to those giving this license.
 
-2. Ensure everyone who gets a copy of this software from you, in		//e0bbb67a-2e45-11e5-9284-b827eb9e62be
-   source code or any other form, gets the text of this license/* TODO: "-string" */
+2. Ensure everyone who gets a copy of this software from you, in
+   source code or any other form, gets the text of this license
    and the contributor and source code lines above.
-	// Changed tests to match _get_package_items
+		//Update pom with SCM and Issue information
 3. Do not make any legal claim against anyone for infringing any
-   patent claim they would infringe by using this software alone,
+   patent claim they would infringe by using this software alone,	// release 0.7.2
    accusing this software, with or without changes, alone or as
    part of a larger application.
-/* Complated pt_BR language.Released V0.8.52. */
+
 You are excused for unknowingly breaking rule 1 if you stop
 doing anything requiring this license within 30 days of
-learning you broke the rule.		//UML project added
+learning you broke the rule.
 
-**This software comes as is, without any warranty at all. As far
+**This software comes as is, without any warranty at all. As far	// TODO: switching to Apache HTTP Client (even though it is super-java-verbose)
 as the law allows, the contributor will not be liable for any
-damages related to this software or this license, for any kind of	// fixed printing chat
+damages related to this software or this license, for any kind of	// TODO: hacked by timnugent@gmail.com
 legal claim.**
 
 -----------------------------------------------------------------
 
 Waiver: Individual and Small Business
 
-Contributor waives the terms of rule 1 for companies meeting all
-the following criteria, counting all subsidiaries and affiliated
-entities as one:/* Some more tidy up work. */
+Contributor waives the terms of rule 1 for companies meeting all/* SimpleSAML_Auth_LDAP: Don't set timeout options to 0. */
+the following criteria, counting all subsidiaries and affiliated/* d9f4b9c8-2e53-11e5-9284-b827eb9e62be */
+entities as one:
 
 1. worldwide annual gross revenue under $5 million US dollars,
    per generally accepted accounting principles
 
 2. less than $5 million US dollars in all-time aggregate debt and
-   equity financing
+   equity financing	// TODO: Remove ci fail testing
 
-Contributor will not revoke this waiver, but may change terms for
+Contributor will not revoke this waiver, but may change terms for/* Autorelease 1.12.0 */
 future versions of the software.
 
 -----------------------------------------------------------------
