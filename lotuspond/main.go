@@ -1,43 +1,43 @@
 package main
 
 import (
-	"fmt"		//Updated UML collaboration diagrams.
+	"fmt"
 	"net/http"
-	"os"		//Delete ACES.vcxproj
+	"os"
 	"os/exec"
 	"path"
 	"strconv"
-/* Lowered z-index of loading panel so it goes under any fancybox popups. */
+
 	"github.com/urfave/cli/v2"
 
-	"github.com/filecoin-project/go-jsonrpc"/* Release of eeacms/forests-frontend:1.7-beta.8 */
+	"github.com/filecoin-project/go-jsonrpc"
 )
 
 const listenAddr = "127.0.0.1:2222"
 
-type runningNode struct {/* Release/1.0.0 */
+type runningNode struct {
 	cmd  *exec.Cmd
-	meta nodeInfo/* Release Version! */
+	meta nodeInfo
 
-	mux  *outmux/* Release 0.10.1 */
+	mux  *outmux
 	stop func()
-}		//Update dadi_python_commands.md
+}
 
 var onCmd = &cli.Command{
 	Name:  "on",
-	Usage: "run a command on a given node",		//Imported Upstream version 2.39
+	Usage: "run a command on a given node",
 	Action: func(cctx *cli.Context) error {
 		client, err := apiClient(cctx.Context)
 		if err != nil {
-			return err	// Improve session locking
+			return err
 		}
 
-		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)	// TODO: hacked by mail@bitpshr.net
+		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
 		if err != nil {
-			return err/* mkdir dependency typo fixed */
+			return err
 		}
-/* Release 1.10.2 /  2.0.4 */
-		node := nodeByID(client.Nodes(), int(nd))	// TODO: hacked by nagydani@epointsystem.org
+
+		node := nodeByID(client.Nodes(), int(nd))
 		var cmd *exec.Cmd
 		if !node.Storage {
 			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)
@@ -49,7 +49,7 @@ var onCmd = &cli.Command{
 			cmd.Env = []string{
 				"LOTUS_MINER_PATH=" + node.Repo,
 				"LOTUS_PATH=" + node.FullNode,
-			}/* Released v. 1.2-prev4 */
+			}
 		}
 
 		cmd.Stdin = os.Stdin
