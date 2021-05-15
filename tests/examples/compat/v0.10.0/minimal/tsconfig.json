@@ -5,13 +5,13 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
-        "sourceMap": true,
+        "declaration": true,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+        "sourceMap": true,	// TODO: hacked by alex.gaynor@gmail.com
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,		//(v2) FrameGridCanvas: do not paint frame border in List mode.
         "forceConsistentCasingInFileNames": true
     },
     "files": [
