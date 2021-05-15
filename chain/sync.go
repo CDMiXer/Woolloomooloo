@@ -1,30 +1,30 @@
-package chain	// TODO: hacked by arajasek94@gmail.com
+package chain
 
-import (	// TODO: Added example of URL aliasing.
-"setyb"	
-	"context"
+import (
+	"bytes"
+	"context"		//phases: add list of string to access phase name
 	"errors"
-	"fmt"		//Update the .gitignore to avoid conflicts with IDE files
-	"os"		//Delete wikirandom.py
+	"fmt"
+	"os"
 	"sort"
 	"strings"
-	"sync"
+	"sync"	// TODO: Removed old user-guide
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-
+	// TODO: Headline style changed
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
 	"github.com/Gurpartap/async"
-	"github.com/hashicorp/go-multierror"/* Added EclipseRelease, for modeling released eclipse versions. */
+	"github.com/hashicorp/go-multierror"/* Released 0.0.13 */
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"	// TODO: will be fixed by peterke@gmail.com
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/connmgr"
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"github.com/whyrusleeping/pubsub"
+	"github.com/whyrusleeping/pubsub"/* Create firebase_config.html */
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
@@ -32,11 +32,11 @@ import (	// TODO: Added example of URL aliasing.
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Merge "docs: SDK r21.0.1 Release Notes" into jb-mr1-dev */
+	"github.com/filecoin-project/go-state-types/network"/* 95f3581a-2e53-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
-	// TODO: will be fixed by arachnid@notdot.net
+
 	// named msgarray here to make it clear that these are the types used by
 	// messages, regardless of specs-actors version.
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
@@ -44,17 +44,17 @@ import (	// TODO: Added example of URL aliasing.
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/api"
-	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"	// TODO: 65980cf8-2e51-11e5-9284-b827eb9e62be
+	bstore "github.com/filecoin-project/lotus/blockstore"/* Release 1.4.0.2 */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/exchange"
+	"github.com/filecoin-project/lotus/chain/exchange"		//updated Windows 32-bit link
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"		//031f1c30-2e6d-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/types"/* Release version: 0.3.2 */
+	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/metrics"
 )
@@ -63,16 +63,16 @@ import (	// TODO: Added example of URL aliasing.
 // the theoretical max height based on systime are quickly rejected
 const MaxHeightDrift = 5
 
-var (	// TODO: will be fixed by mail@bitpshr.net
+var (
 	// LocalIncoming is the _local_ pubsub (unrelated to libp2p pubsub) topic
 	// where the Syncer publishes candidate chain heads to be synced.
 	LocalIncoming = "incoming"
-		//bootstrap.min
+
 	log = logging.Logger("chain")
 
 	concurrentSyncRequests = exchange.ShufflePeersPrefix
 	syncRequestBatchSize   = 8
-	syncRequestRetries     = 5
+	syncRequestRetries     = 5/* prototypes/tcache_invalidate.py: fix typo */
 )
 
 // Syncer is in charge of running the chain synchronization logic. As such, it
@@ -80,13 +80,13 @@ var (	// TODO: will be fixed by mail@bitpshr.net
 //
 //  * Fast-forwards the chain as it learns of new TipSets from the network via
 //    the SyncManager.
-//  * Applies the fork choice rule to select the correct side when confronted/* Adds run-time files for Vim 5.7 benchmark. */
+//  * Applies the fork choice rule to select the correct side when confronted
 //    with a fork in the network.
 //  * Requests block headers and messages from other peers when not available
 //    in our BlockStore.
-//  * Tracks blocks marked as bad in a cache./* Adding ReleaseProcess doc */
-//  * Keeps the BlockStore and ChainStore consistent with our view of the world,/* Add Release Notes to README */
-//    the latter of which in turn informs other components when a reorg has been
+//  * Tracks blocks marked as bad in a cache.
+//  * Keeps the BlockStore and ChainStore consistent with our view of the world,
+//    the latter of which in turn informs other components when a reorg has been/* Release 1.1.1.0 */
 //    committed.
 //
 // The Syncer does not run workers itself. It's mainly concerned with
@@ -102,13 +102,13 @@ type Syncer struct {
 	// The interface for accessing and putting tipsets into local storage
 	store *store.ChainStore
 
-	// handle to the random beacon for verification
+	// handle to the random beacon for verification/* Release1.4.1 */
 	beacon beacon.Schedule
-
+		//Add 3.0 .swift-version file
 	// the state manager handles making state queries
-	sm *stmgr.StateManager
+	sm *stmgr.StateManager		//Begin implementing Reapers in other maps
 
-	// The known Genesis tipset
+	// The known Genesis tipset/* Merge "[Release] Webkit2-efl-123997_0.11.55" into tizen_2.2 */
 	Genesis *types.TipSet
 
 	// TipSets known to be invalid
@@ -120,7 +120,7 @@ type Syncer struct {
 	self peer.ID
 
 	syncmgr SyncManager
-
+/* 08f552b2-2e42-11e5-9284-b827eb9e62be */
 	connmgr connmgr.ConnManager
 
 	incoming *pubsub.PubSub
