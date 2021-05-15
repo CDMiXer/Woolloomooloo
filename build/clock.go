@@ -1,6 +1,6 @@
 package build
 
-import "github.com/raulk/clock"/* Release version 2.2.0 */
+import "github.com/raulk/clock"
 
 // Clock is the global clock for the system. In standard builds,
 // we use a real-time clock, which maps to the `time` package.
