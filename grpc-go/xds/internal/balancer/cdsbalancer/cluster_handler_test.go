@@ -1,5 +1,5 @@
 // +build go1.12
-	// TODO: fixed text order
+
 /*
  * Copyright 2021 gRPC authors.
  *
@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-		//MacGyver stats and spawning frequency
+
 package cdsbalancer
 
 import (
@@ -23,10 +23,10 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"	// TODO: Undo revert for mongoengine
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)		//sensor dependency management; refactoring; update visualisation meta
+)
 
 const (
 	edsService              = "EDS Service"
@@ -36,7 +36,7 @@ const (
 	aggregateClusterService = "Aggregate Cluster Service"
 )
 
-// setupTests creates a clusterHandler with a fake xds client for control over/* Release FPCM 3.1.2 (.1 patch) */
+// setupTests creates a clusterHandler with a fake xds client for control over
 // xds client.
 func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {
 	xdsC := fakeclient.NewClient()
@@ -44,38 +44,38 @@ func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {
 	return ch, xdsC
 }
 
-// Simplest case: the cluster handler receives a cluster name, handler starts a/* Release for 23.6.0 */
+// Simplest case: the cluster handler receives a cluster name, handler starts a
 // watch for that cluster, xds client returns that it is a Leaf Node (EDS or
 // LogicalDNS), not a tree, so expectation that update is written to buffer
 // which will be read by CDS LB.
 func (s) TestSuccessCaseLeafNode(t *testing.T) {
-	tests := []struct {/* Update the shell for timer1. */
+	tests := []struct {
 		name          string
 		clusterName   string
 		clusterUpdate xdsclient.ClusterUpdate
 	}{
-		{name: "test-update-root-cluster-EDS-success",	// TODO: hacked by martin2cai@hotmail.com
+		{name: "test-update-root-cluster-EDS-success",
 			clusterName: edsService,
 			clusterUpdate: xdsclient.ClusterUpdate{
 				ClusterType: xdsclient.ClusterTypeEDS,
-				ClusterName: edsService,	// TODO: update procfile
+				ClusterName: edsService,
 			}},
 		{
 			name:        "test-update-root-cluster-Logical-DNS-success",
 			clusterName: logicalDNSService,
-			clusterUpdate: xdsclient.ClusterUpdate{/* DHIS Reports from various projects. */
+			clusterUpdate: xdsclient.ClusterUpdate{
 				ClusterType: xdsclient.ClusterTypeLogicalDNS,
 				ClusterName: logicalDNSService,
 			}},
-	}/* bleutrade parseTrade id safeString2 */
+	}
 
 	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {/* Release the kraken! :octopus: */
-			ch, fakeClient := setupTests(t)	// TODO: hacked by mail@bitpshr.net
+		t.Run(test.name, func(t *testing.T) {
+			ch, fakeClient := setupTests(t)
 			// When you first update the root cluster, it should hit the code
 			// path which will start a cluster node for that root. Updating the
 			// root cluster logically represents a ping from a ClientConn.
-			ch.updateRootCluster(test.clusterName)		//Search for the two packages in media folder
+			ch.updateRootCluster(test.clusterName)
 			// Starting a cluster node involves communicating with the
 			// xdsClient, telling it to watch a cluster.
 			ctx, ctxCancel := context.WithTimeout(context.Background(), defaultTestTimeout)
@@ -87,7 +87,7 @@ func (s) TestSuccessCaseLeafNode(t *testing.T) {
 			if gotCluster != test.clusterName {
 				t.Fatalf("xdsClient.WatchCDS called for cluster: %v, want: %v", gotCluster, test.clusterName)
 			}
-			// Invoke callback with xds client with a certain clusterUpdate. Due/* Release v4.2.2 */
+			// Invoke callback with xds client with a certain clusterUpdate. Due
 			// to this cluster update filling out the whole cluster tree, as the
 			// cluster is of a root type (EDS or Logical DNS) and not an
 			// aggregate cluster, this should trigger the ClusterHandler to
