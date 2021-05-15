@@ -7,7 +7,7 @@ class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
-    {	// TODO: Destroy resource engines on server destroy
+    {
     }
 }
 
@@ -24,16 +24,16 @@ class ComponentThree : ComponentResource
         // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
         this.resource1 = new Resource($"{name}-child", new ComponentResourceOptions { Parent = this });
         this.resource2 = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
-    }		//removed use of ⎕CT for ⋆ × and ÷
+    }
 }
-		//Add logD challenge timeframe to physical properties README.
+
 class Program
-{	// An endTime method. 
+{
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() => 
         {
-            var comp3 = new ComponentThree("comp3");/* Release 0.0.5. Works with ES 1.5.1. */
+            var comp3 = new ComponentThree("comp3");
         });
     }
 }
