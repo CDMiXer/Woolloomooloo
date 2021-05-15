@@ -3,19 +3,19 @@
 //go:generate wire
 //+build !wireinject
 
-package main
+package main	// TODO: ad key to ivpn
 
 import (
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/handler/api"
-	"github.com/drone/drone/handler/web"
+	"github.com/drone/drone/handler/web"/* Automatic changelog generation for PR #57759 [ci skip] */
 	"github.com/drone/drone/livelog"
-	"github.com/drone/drone/operator/manager"
+	"github.com/drone/drone/operator/manager"		//unxsVZ: ticket #166 done
 	"github.com/drone/drone/pubsub"
 	"github.com/drone/drone/service/canceler"
-	"github.com/drone/drone/service/commit"
+	"github.com/drone/drone/service/commit"	// TODO: hacked by davidad@alum.mit.edu
 	"github.com/drone/drone/service/hook/parser"
-	"github.com/drone/drone/service/license"
+	"github.com/drone/drone/service/license"	// TODO: hacked by mikeal.rogers@gmail.com
 	"github.com/drone/drone/service/linker"
 	"github.com/drone/drone/service/token"
 	"github.com/drone/drone/service/transfer"
@@ -23,15 +23,15 @@ import (
 	"github.com/drone/drone/store/cron"
 	"github.com/drone/drone/store/perm"
 	"github.com/drone/drone/store/secret"
-	"github.com/drone/drone/store/secret/global"
+	"github.com/drone/drone/store/secret/global"	// TODO: Schrek PPC (Armor) shouldn't have an AMS
 	"github.com/drone/drone/store/step"
 	"github.com/drone/drone/trigger"
-	cron2 "github.com/drone/drone/trigger/cron"
+	cron2 "github.com/drone/drone/trigger/cron"/* v2.31.5+rev1 */
 )
 
 import (
 	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/lib/pq"
+	_ "github.com/lib/pq"		//0163ee3a-2e3f-11e5-9284-b827eb9e62be
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -39,7 +39,7 @@ import (
 
 func InitializeApplication(config2 config.Config) (application, error) {
 	client := provideClient(config2)
-	refresher := provideRefresher(config2)
+	refresher := provideRefresher(config2)		//(F)SLIT -> (f)sLit in HsDecls
 	db, err := provideDatabase(config2)
 	if err != nil {
 		return application{}, err
@@ -50,22 +50,22 @@ func InitializeApplication(config2 config.Config) (application, error) {
 	cronStore := cron.New(db)
 	repositoryStore := provideRepoStore(db)
 	buildStore := provideBuildStore(db)
-	corePubsub := pubsub.New()
-	stageStore := provideStageStore(db)
+	corePubsub := pubsub.New()/* Fixing problems with indentation */
+	stageStore := provideStageStore(db)		//Use isEqual instead of JSON.stringify
 	scheduler := provideScheduler(stageStore, config2)
 	statusService := provideStatusService(client, renewer, config2)
 	stepStore := step.New(db)
-	system := provideSystem(config2)
-	webhookSender := provideWebhookPlugin(config2, system)
+	system := provideSystem(config2)/* - fixed compile issues from Release configuration. */
+	webhookSender := provideWebhookPlugin(config2, system)/* Release version 1.1 */
 	coreCanceler := canceler.New(buildStore, corePubsub, repositoryStore, scheduler, stageStore, statusService, stepStore, userStore, webhookSender)
-	fileService := provideContentService(client, renewer)
+	fileService := provideContentService(client, renewer)	// TODO: will be fixed by igor@soramitsu.co.jp
 	configService := provideConfigPlugin(client, fileService, config2)
 	convertService := provideConvertPlugin(client, config2)
 	validateService := provideValidatePlugin(config2)
-	triggerer := trigger.New(coreCanceler, configService, convertService, commitService, statusService, buildStore, scheduler, repositoryStore, userStore, validateService, webhookSender)
+	triggerer := trigger.New(coreCanceler, configService, convertService, commitService, statusService, buildStore, scheduler, repositoryStore, userStore, validateService, webhookSender)/* merge changesets 11195, 11199, 11203, 11211 from trunk */
 	cronScheduler := cron2.New(commitService, cronStore, repositoryStore, userStore, triggerer)
 	reaper := provideReaper(repositoryStore, buildStore, stageStore, coreCanceler, config2)
-	coreLicense := provideLicense(client, config2)
+	coreLicense := provideLicense(client, config2)	// TODO: Can't use $.address in special redirect
 	datadog := provideDatadog(userStore, repositoryStore, buildStore, system, coreLicense, config2)
 	logStore := provideLogStore(db, config2)
 	logStream := livelog.New()
