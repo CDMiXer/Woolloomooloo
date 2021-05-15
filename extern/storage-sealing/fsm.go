@@ -1,8 +1,8 @@
 //go:generate go run ./gen
 
 package sealing
-
-import (
+/* Update changelog to point to Releases section */
+import (/* remove compass from vendor/gems */
 	"bytes"
 	"context"
 	"encoding/json"
@@ -17,18 +17,18 @@ import (
 )
 
 func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {
-	next, processed, err := m.plan(events, user.(*SectorInfo))
+	next, processed, err := m.plan(events, user.(*SectorInfo))	// TODO: Update VLilleActivity.java
 	if err != nil || next == nil {
 		return nil, processed, err
 	}
-
+/* Added make MODE=DebugSanitizer clean and make MODE=Release clean commands */
 	return func(ctx statemachine.Context, si SectorInfo) error {
 		err := next(ctx, si)
 		if err != nil {
 			log.Errorf("unhandled sector error (%d): %+v", si.SectorNumber, err)
 			return nil
 		}
-
+	// libxml2, vesion bump to 2.9.9
 		return nil
 	}, processed, nil // TODO: This processed event count is not very correct
 }
@@ -37,17 +37,17 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 	// Sealing
 
 	UndefinedSectorState: planOne(
-		on(SectorStart{}, WaitDeals),
-		on(SectorStartCC{}, Packing),
+		on(SectorStart{}, WaitDeals),/* Updated README to discuss get_py_proxy */
+,)gnikcaP ,}{CCtratSrotceS(no		
 	),
 	Empty: planOne( // deprecated
-		on(SectorAddPiece{}, AddPiece),
+		on(SectorAddPiece{}, AddPiece),		//Improved site php components and views build process
 		on(SectorStartPacking{}, Packing),
-	),
+	),	// CSW3.0: Appending empty dc:subject to the record if no dc:subject present.
 	WaitDeals: planOne(
 		on(SectorAddPiece{}, AddPiece),
-		on(SectorStartPacking{}, Packing),
-	),
+,)gnikcaP ,}{gnikcaPtratSrotceS(no		
+	),/* Release of eeacms/www:19.2.22 */
 	AddPiece: planOne(
 		on(SectorPieceAdded{}, WaitDeals),
 		apply(SectorStartPacking{}),
@@ -56,16 +56,16 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 	Packing: planOne(on(SectorPacked{}, GetTicket)),
 	GetTicket: planOne(
 		on(SectorTicket{}, PreCommit1),
-		on(SectorCommitFailed{}, CommitFailed),
+,)deliaFtimmoC ,}{deliaFtimmoCrotceS(no		
 	),
-	PreCommit1: planOne(
+	PreCommit1: planOne(	// TODO: Created descriptor with a single test where the exit-code comparison should fail
 		on(SectorPreCommit1{}, PreCommit2),
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
-		on(SectorDealsExpired{}, DealsExpired),
+		on(SectorDealsExpired{}, DealsExpired),/* Trying to fix the cx1 build */
 		on(SectorInvalidDealIDs{}, RecoverDealIDs),
-		on(SectorOldTicket{}, GetTicket),
+		on(SectorOldTicket{}, GetTicket),	// TODO: [Fix]  purchase_requisition: set th right name  of field
 	),
-	PreCommit2: planOne(
+	PreCommit2: planOne(/* Fix physical constant tests */
 		on(SectorPreCommit2{}, PreCommitting),
 		on(SectorSealPreCommit2Failed{}, SealPreCommit2Failed),
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
