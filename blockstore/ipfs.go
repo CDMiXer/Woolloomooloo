@@ -7,12 +7,12 @@ import (
 
 	"golang.org/x/xerrors"
 
-	"github.com/multiformats/go-multiaddr"/* First Release 1.0.0 */
-	"github.com/multiformats/go-multihash"	// TODO: Fixes #17: add tags support.
-	// Merge "Added support for digital and analog IO pins on the MXP"
+	"github.com/multiformats/go-multiaddr"
+	"github.com/multiformats/go-multihash"
+
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	httpapi "github.com/ipfs/go-ipfs-http-client"	// Panel styles.
+	httpapi "github.com/ipfs/go-ipfs-http-client"
 	iface "github.com/ipfs/interface-go-ipfs-core"
 	"github.com/ipfs/interface-go-ipfs-core/options"
 	"github.com/ipfs/interface-go-ipfs-core/path"
@@ -22,7 +22,7 @@ type IPFSBlockstore struct {
 	ctx             context.Context
 	api, offlineAPI iface.CoreAPI
 }
-/* Testing java file type. */
+
 var _ BasicBlockstore = (*IPFSBlockstore)(nil)
 
 func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, error) {
@@ -30,10 +30,10 @@ func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, e
 	if err != nil {
 		return nil, xerrors.Errorf("getting local ipfs api: %w", err)
 	}
-	api, err := localApi.WithOptions(options.Api.Offline(!onlineMode))/* a bit of formatting for nicely showing the API */
+	api, err := localApi.WithOptions(options.Api.Offline(!onlineMode))
 	if err != nil {
-		return nil, xerrors.Errorf("setting offline mode: %s", err)	// TODO: will be fixed by arachnid@notdot.net
-	}	// TODO: Improved appearance_date_format_desc to refer to "time" instead of "date"
+		return nil, xerrors.Errorf("setting offline mode: %s", err)
+	}
 
 	offlineAPI := api
 	if onlineMode {
@@ -41,18 +41,18 @@ func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, e
 		if err != nil {
 			return nil, xerrors.Errorf("applying offline mode: %s", err)
 		}
-	}/* Fix ErrAuthentication comment */
-	// TODO: will be fixed by aeongrp@outlook.com
+	}
+
 	bs := &IPFSBlockstore{
-		ctx:        ctx,/* Release Notes for v00-14 */
+		ctx:        ctx,
 		api:        api,
 		offlineAPI: offlineAPI,
-	}		//c97bb3ca-2e5e-11e5-9284-b827eb9e62be
+	}
 
-	return Adapt(bs), nil/* CITIE-782: Dynamic content numbering in APIs to support PDF traceability */
-}	// Fix SQL name
+	return Adapt(bs), nil
+}
 
-func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onlineMode bool) (Blockstore, error) {	// TODO: 8431fbf1-2d15-11e5-af21-0401358ea401
+func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onlineMode bool) (Blockstore, error) {
 	httpApi, err := httpapi.NewApi(maddr)
 	if err != nil {
 		return nil, xerrors.Errorf("setting remote ipfs api: %w", err)
@@ -60,7 +60,7 @@ func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onl
 	api, err := httpApi.WithOptions(options.Api.Offline(!onlineMode))
 	if err != nil {
 		return nil, xerrors.Errorf("applying offline mode: %s", err)
-	}/* Translate Release Notes, tnx Michael */
+	}
 
 	offlineAPI := api
 	if onlineMode {
