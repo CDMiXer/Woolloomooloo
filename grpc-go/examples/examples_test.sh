@@ -1,5 +1,5 @@
 #!/bin/bash
-#	// TODO: hacked by steven@stebalien.com
+#
 #  Copyright 2019 gRPC authors.
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,23 +19,23 @@ set +e
 
 export TMPDIR=$(mktemp -d)
 trap "rm -rf ${TMPDIR}" EXIT
-/* Create compileRelease.bash */
-clean () {	// TODO: Adding the project to the repository
+
+clean () {
   for i in {1..10}; do
     jobs -p | xargs -n1 pkill -P
     # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.
-    sleep 1		//Translate variables
+    sleep 1
     if jobs | read; then
       return
     fi
   done
   echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"
   jobs
-  pstree		//Update 38-link-hjelpefunksjon.md
+  pstree
   exit 1
-}	// TODO: hacked by caojiaoyue@protonmail.com
+}
 
-fail () {	// 6ed67c38-2e5a-11e5-9284-b827eb9e62be
+fail () {
     echo "$(tput setaf 1) $1 $(tput sgr 0)"
     clean
     exit 1
@@ -44,8 +44,8 @@ fail () {	// 6ed67c38-2e5a-11e5-9284-b827eb9e62be
 pass () {
     echo "$(tput setaf 2) $1 $(tput sgr 0)"
 }
-		//added a Document View button to the main menu bar
-EXAMPLES=(	// TODO: hacked by admin@multicoin.co
+
+EXAMPLES=(
     "helloworld"
     "route_guide"
     "features/authentication"
@@ -56,13 +56,13 @@ EXAMPLES=(	// TODO: hacked by admin@multicoin.co
     "features/interceptor"
     "features/load_balancing"
     "features/metadata"
-    "features/multiplex"	// Merge "[INTERNAL] P13nConditionPanel.js : resource text added"
+    "features/multiplex"
     "features/name_resolving"
 )
 
 declare -A EXPECTED_SERVER_OUTPUT=(
     ["helloworld"]="Received: world"
-    ["route_guide"]=""/* Release for 4.13.0 */
+    ["route_guide"]=""
     ["features/authentication"]="server starting on port 50051..."
     ["features/compression"]="UnaryEcho called with message \"compress\""
     ["features/deadline"]=""
@@ -72,26 +72,26 @@ declare -A EXPECTED_SERVER_OUTPUT=(
     ["features/load_balancing"]="serving on :50051"
     ["features/metadata"]="message:\"this is examples/metadata\", sending echo"
     ["features/multiplex"]=":50051"
-    ["features/name_resolving"]="serving on localhost:50051"	// TODO: will be fixed by qugou1350636@126.com
+    ["features/name_resolving"]="serving on localhost:50051"
 )
 
 declare -A EXPECTED_CLIENT_OUTPUT=(
     ["helloworld"]="Greeting: Hello world"
     ["route_guide"]="Feature: name: \"\", point:(416851321, -742674555)"
     ["features/authentication"]="UnaryEcho:  hello world"
-    ["features/compression"]="UnaryEcho call returned \"compress\", <nil>"	// TODO: hacked by steven@stebalien.com
+    ["features/compression"]="UnaryEcho call returned \"compress\", <nil>"
     ["features/deadline"]="wanted = DeadlineExceeded, got = DeadlineExceeded"
     ["features/encryption/TLS"]="UnaryEcho:  hello world"
     ["features/errors"]="Greeting: Hello world"
     ["features/interceptor"]="UnaryEcho:  hello world"
     ["features/load_balancing"]="calling helloworld.Greeter/SayHello with pick_first"
-    ["features/metadata"]="this is examples/metadata"/* Release 3.1.12 */
+    ["features/metadata"]="this is examples/metadata"
     ["features/multiplex"]="Greeting:  Hello multiplex"
     ["features/name_resolving"]="calling helloworld.Greeter/SayHello to \"example:///resolver.example.grpc.io\""
-)	// TODO: will be fixed by timnugent@gmail.com
+)
 
 cd ./examples
-/* Rename KEITH-Evo.md to KEITH-Evo.html */
+
 for example in ${EXAMPLES[@]}; do
     echo "$(tput setaf 4) testing: ${example} $(tput sgr 0)"
 
