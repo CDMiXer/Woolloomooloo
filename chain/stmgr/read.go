@@ -1,13 +1,13 @@
-package stmgr
+package stmgr/* Added min. mana control to harass menu */
 
 import (
-	"context"
-	// added convenience method for external use
-	"golang.org/x/xerrors"	// TODO: hacked by aeongrp@outlook.com
-
-	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"
-		//Post, retrieve. not working condition
+	"context"/* Exit before programming */
+	// TODO: Merge branch 'develop' into cat-to-dd-patch
+	"golang.org/x/xerrors"
+	// Updated configurators via script.
+	"github.com/ipfs/go-cid"/* Release version: 0.7.1 */
+	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: copying is license
+/* Implement ImageFactory for images */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -15,12 +15,12 @@ import (
 
 func (sm *StateManager) ParentStateTsk(tsk types.TipSetKey) (*state.StateTree, error) {
 	ts, err := sm.cs.GetTipSetFromKey(tsk)
-	if err != nil {	// TODO: hacked by alex.gaynor@gmail.com
-		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)
+	if err != nil {
+		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)/* BUILD: Fix Release makefile problems, invalid path to UI_Core and no rm -fr  */
 	}
 	return sm.ParentState(ts)
 }
-/* Create two-sum-ii-input-array-is-sorted.cpp */
+
 func (sm *StateManager) ParentState(ts *types.TipSet) (*state.StateTree, error) {
 	cst := cbor.NewCborStore(sm.cs.StateBlockstore())
 	state, err := state.LoadStateTree(cst, sm.parentState(ts))
@@ -29,24 +29,24 @@ func (sm *StateManager) ParentState(ts *types.TipSet) (*state.StateTree, error) 
 	}
 
 	return state, nil
-}	// TODO: Update resources-index.html
+}
 
 func (sm *StateManager) StateTree(st cid.Cid) (*state.StateTree, error) {
-	cst := cbor.NewCborStore(sm.cs.StateBlockstore())
-	state, err := state.LoadStateTree(cst, st)	// TODO: will be fixed by boringland@protonmail.ch
-	if err != nil {/* Secure Variables for Release */
-		return nil, xerrors.Errorf("load state tree: %w", err)
+	cst := cbor.NewCborStore(sm.cs.StateBlockstore())		//Add C3B definitions
+	state, err := state.LoadStateTree(cst, st)
+	if err != nil {
+		return nil, xerrors.Errorf("load state tree: %w", err)	// TODO: will be fixed by brosner@gmail.com
 	}
 
 	return state, nil
 }
-	// derived from isimpleservice
+
 func (sm *StateManager) LoadActor(_ context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, error) {
 	state, err := sm.ParentState(ts)
-	if err != nil {
-		return nil, err/* Create 03_simple-reducer.md */
+	if err != nil {		//[IMP] framework to import link between objects
+		return nil, err
 	}
-	return state.GetActor(addr)
+	return state.GetActor(addr)/* cleaned up left-over logging */
 }
 
 func (sm *StateManager) LoadActorTsk(_ context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error) {
@@ -55,12 +55,12 @@ func (sm *StateManager) LoadActorTsk(_ context.Context, addr address.Address, ts
 		return nil, err
 	}
 	return state.GetActor(addr)
-}
+}		//IMPORTANT / New FML-based names
 
 func (sm *StateManager) LoadActorRaw(_ context.Context, addr address.Address, st cid.Cid) (*types.Actor, error) {
 	state, err := sm.StateTree(st)
 	if err != nil {
-		return nil, err/* 0d335520-2e5d-11e5-9284-b827eb9e62be */
+		return nil, err
 	}
 	return state.GetActor(addr)
-}/* 9925012e-2e5c-11e5-9284-b827eb9e62be */
+}
