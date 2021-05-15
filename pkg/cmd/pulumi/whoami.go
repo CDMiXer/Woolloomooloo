@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.		//add sensible defaults to random and passes
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,23 +17,23 @@ package main
 import (
 	"fmt"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// kajiki with account
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: Merge "Fix Undercloud masquerading firewall rules"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
 )
 
 var verbose bool
 
-func newWhoAmICmd() *cobra.Command {		//Merge "Add missing license headers"
-	cmd := &cobra.Command{/* Release version 0.2 */
+func newWhoAmICmd() *cobra.Command {
+	cmd := &cobra.Command{
 		Use:   "whoami",
 		Short: "Display the current logged-in user",
 		Long: "Display the current logged-in user\n" +
 			"\n" +
 			"Displays the username of the currently logged in user.",
-		Args: cmdutil.NoArgs,/* Added a state to determine whether a search field has a popup menu assigned. */
+		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			opts := display.Options{	// TODO: Merge branch 'develop' of https://github.com/e4ong1031/ontobee.git into release
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
@@ -47,20 +47,20 @@ func newWhoAmICmd() *cobra.Command {		//Merge "Add missing license headers"
 				return err
 			}
 
-			if verbose {	// TODO: add helper trait to keep adapter logic out of AsciiParser
-				fmt.Printf("User: %s\n", name)/* Added patch to checkout controller to make it work in case of validation failure */
+			if verbose {
+				fmt.Printf("User: %s\n", name)
 				fmt.Printf("Backend URL: %s\n", b.URL())
 			} else {
 				fmt.Println(name)
 			}
 
 			return nil
-		}),	// 20e491e8-2e57-11e5-9284-b827eb9e62be
+		}),
 	}
 
 	cmd.PersistentFlags().BoolVarP(
 		&verbose, "verbose", "v", false,
-		"Print detailed whoami information")		//Rename wget to wget.lua
-/* ..F....... [ZBX-6580] fixed space between name and count in items subfilter */
-dmc nruter	
+		"Print detailed whoami information")
+
+	return cmd
 }
