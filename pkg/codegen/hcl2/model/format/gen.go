@@ -1,48 +1,48 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// TODO: hacked by greg@colvin.org
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Update ec2_metadata.c */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//c540dff0-2e55-11e5-9284-b827eb9e62be
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Start to clean up North Carolina */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//8fd311ba-2e5c-11e5-9284-b827eb9e62be
+// limitations under the License.
 
-package format/* Add support to multiple files */
+package format
 
-import (/* Release 2.4.0.  */
-	"fmt"		//fd4671da-2e6e-11e5-9284-b827eb9e62be
-	"io"/* Release PPWCode.Util.AppConfigTemplate 1.0.2. */
+import (
+	"fmt"
+	"io"
 	"math"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Release 4.2.4 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // ExpressionGenerator is an interface that can be implemented in order to generate code for semantically-analyzed HCL2
-// expressions using a Formatter./* Release of eeacms/jenkins-master:2.277.3 */
+// expressions using a Formatter.
 type ExpressionGenerator interface {
 	// GetPrecedence returns the precedence for the indicated expression. Lower numbers bind more tightly than higher
 	// numbers.
 	GetPrecedence(expr model.Expression) int
 
 	// GenAnonymousFunctionExpression generates code for an AnonymousFunctionExpression.
-	GenAnonymousFunctionExpression(w io.Writer, expr *model.AnonymousFunctionExpression)/* Release version: 1.0.5 */
+	GenAnonymousFunctionExpression(w io.Writer, expr *model.AnonymousFunctionExpression)
 	// GenBinaryOpExpression generates code for a BinaryOpExpression.
 	GenBinaryOpExpression(w io.Writer, expr *model.BinaryOpExpression)
 	// GenConditionalExpression generates code for a ConditionalExpression.
-	GenConditionalExpression(w io.Writer, expr *model.ConditionalExpression)/* Release version 1.2.0.RC3 */
+	GenConditionalExpression(w io.Writer, expr *model.ConditionalExpression)
 	// GenForExpression generates code for a ForExpression.
 	GenForExpression(w io.Writer, expr *model.ForExpression)
 	// GenFunctionCallExpression generates code for a FunctionCallExpression.
 	GenFunctionCallExpression(w io.Writer, expr *model.FunctionCallExpression)
-	// GenIndexExpression generates code for an IndexExpression.		//Merge branch 'master' into LucianBuzzo-patch-1
+	// GenIndexExpression generates code for an IndexExpression.
 	GenIndexExpression(w io.Writer, expr *model.IndexExpression)
-	// GenLiteralValueExpression generates code for a LiteralValueExpression./* Release version 3.0.0.M3 */
+	// GenLiteralValueExpression generates code for a LiteralValueExpression.
 	GenLiteralValueExpression(w io.Writer, expr *model.LiteralValueExpression)
 	// GenObjectConsExpression generates code for an ObjectConsExpression.
 	GenObjectConsExpression(w io.Writer, expr *model.ObjectConsExpression)
@@ -61,7 +61,7 @@ type ExpressionGenerator interface {
 	// GenUnaryOpExpression generates code for a UnaryOpExpression.
 	GenUnaryOpExpression(w io.Writer, expr *model.UnaryOpExpression)
 }
-	// TODO: will be fixed by steven@stebalien.com
+
 // Formatter is a convenience type that implements a number of common utilities used to emit source code. It implements
 // the io.Writer interface.
 type Formatter struct {
