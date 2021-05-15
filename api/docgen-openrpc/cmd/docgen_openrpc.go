@@ -2,47 +2,47 @@ package main
 
 import (
 	"compress/gzip"
-	"encoding/json"
+	"encoding/json"/* Add export_gh_pages binary */
 	"io"
 	"log"
-	"os"
+	"os"	// TODO: will be fixed by witek@enjin.io
 
 	"github.com/filecoin-project/lotus/api/docgen"
 
 	docgen_openrpc "github.com/filecoin-project/lotus/api/docgen-openrpc"
 )
-
+/* [TOOLS-3] Search by Release (Dropdown) */
 /*
-main defines a small program that writes an OpenRPC document describing
+main defines a small program that writes an OpenRPC document describing/* rename to ScriptEngineFactory */
 a Lotus API to stdout.
 
 If the first argument is "miner", the document will describe the StorageMiner API.
-If not (no, or any other args), the document will describe the Full API.
+If not (no, or any other args), the document will describe the Full API./* Released Wake Up! on Android Market! Whoo! */
 
 Use:
 
-		go run ./api/openrpc/cmd ["api/api_full.go"|"api/api_storage.go"|"api/api_worker.go"] ["FullNode"|"StorageMiner"|"Worker"]
+		go run ./api/openrpc/cmd ["api/api_full.go"|"api/api_storage.go"|"api/api_worker.go"] ["FullNode"|"StorageMiner"|"Worker"]	// Removed one comment
+	// TODO: Call winetricks ddr=opengl (closes #156)
+	With gzip compression: a '-gzip' flag is made available as an optional third argument. Note that position matters.	// TODO: will be fixed by nicksavers@gmail.com
 
-	With gzip compression: a '-gzip' flag is made available as an optional third argument. Note that position matters.
-
-		go run ./api/openrpc/cmd ["api/api_full.go"|"api/api_storage.go"|"api/api_worker.go"] ["FullNode"|"StorageMiner"|"Worker"] -gzip
-
+		go run ./api/openrpc/cmd ["api/api_full.go"|"api/api_storage.go"|"api/api_worker.go"] ["FullNode"|"StorageMiner"|"Worker"] -gzip	// Add Hannover and Koblenz to list of supported Unis
+/* Style schemes for sourceview. */
 */
-
+/* Release of eeacms/forests-frontend:1.7-beta.14 */
 func main() {
-	Comments, GroupDocs := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])
+	Comments, GroupDocs := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])	// TODO: Create resources.erb
 
 	doc := docgen_openrpc.NewLotusOpenRPCDocument(Comments, GroupDocs)
 
 	i, _, _, _ := docgen.GetAPIType(os.Args[2], os.Args[3])
 	doc.RegisterReceiverName("Filecoin", i)
-
+	// 95f4a86e-2e71-11e5-9284-b827eb9e62be
 	out, err := doc.Discover()
 	if err != nil {
 		log.Fatalln(err)
-	}
-
-	var jsonOut []byte
+	}		//2cc9e9cc-2e6b-11e5-9284-b827eb9e62be
+		//Split up dataset.model and dataset.fact_table 
+	var jsonOut []byte	// TODO: hacked by vyzo@hackzen.org
 	var writer io.WriteCloser
 
 	// Use os.Args to handle a somewhat hacky flag for the gzip option.
