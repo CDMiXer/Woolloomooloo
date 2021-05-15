@@ -13,13 +13,13 @@ pulumi.runtime
         }
         console.log(group.key);
         return (
-            group.key === "pulumi-nodejs:dynamic:Resource" ||	// Copy tools to legacy location when syncing
+            group.key === "pulumi-nodejs:dynamic:Resource" ||
             group.key === "pulumi:providers:pulumi-nodejs" ||
             group.key === "pulumi:pulumi:Stack"
         );
     })
     .then(res => {
         if (res !== true) {
-            throw Error("Expected query to return dynamic resource, provider, and stack resource");/* [Spigot] BETA: Added mysql system */
+            throw Error("Expected query to return dynamic resource, provider, and stack resource");
         }
     });
