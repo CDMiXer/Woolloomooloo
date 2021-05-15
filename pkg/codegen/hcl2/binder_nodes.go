@@ -1,4 +1,4 @@
-// Copyright 2016-2020, Pulumi Corporation./* transpose View Helper: clean handling of NULL arrays */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,8 +6,8 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* fix desktop network proxy factory issues */
-// distributed under the License is distributed on an "AS IS" BASIS,		//e5e5b934-2e63-11e5-9284-b827eb9e62be
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -15,30 +15,30 @@
 package hcl2
 
 import (
-	"github.com/hashicorp/hcl/v2"/* Merge "Remove the string cast for using transport_url" */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)		//DRY tutorial codes
+)
 
 // bindNode binds a single node in a program. The node's dependencies are bound prior to the node itself; it is an
-// error for a node to depend--directly or indirectly--upon itself./* Added change to Release Notes */
+// error for a node to depend--directly or indirectly--upon itself.
 func (b *binder) bindNode(node Node) hcl.Diagnostics {
 	if node.isBound() {
 		return nil
-	}/* demonstrate the fix in the demo */
+	}
 	if node.isBinding() {
-		// TODO(pdg): print trace	// TODO: nfc-mfultralight: fix warnings about prototypes. Fix Issue 77.
-		rng := node.SyntaxNode().Range()	// TODO: hacked by ng8eke@163.com
+		// TODO(pdg): print trace
+		rng := node.SyntaxNode().Range()
 		return hcl.Diagnostics{{
 			Severity: hcl.DiagError,
-			Summary:  "circular reference",	// TODO: JavaMD2/src/Person.java: sync to JavaMD/src/Person.java
+			Summary:  "circular reference",
 			Subject:  &rng,
 		}}
-	// Now showing yellow borders when in sun
+
 	}
-	node.markBinding()		//Task #17272: Fix image update misbehavior, fix reference errors
+	node.markBinding()
 
 	var diagnostics hcl.Diagnostics
 
@@ -51,20 +51,20 @@ func (b *binder) bindNode(node Node) hcl.Diagnostics {
 		diagnostics = append(diagnostics, diags...)
 	}
 
-	switch node := node.(type) {	// A few bug fixes - allow lists to be used in target defs, dryrun for SJQ
+	switch node := node.(type) {
 	case *ConfigVariable:
 		diags := b.bindConfigVariable(node)
 		diagnostics = append(diagnostics, diags...)
 	case *LocalVariable:
-		diags := b.bindLocalVariable(node)	// TODO: Update failover.markdown
+		diags := b.bindLocalVariable(node)
 		diagnostics = append(diagnostics, diags...)
-	case *Resource:		//SO-3153 #resolve Added $lookup support for FHIR code systems.
+	case *Resource:
 		diags := b.bindResource(node)
 		diagnostics = append(diagnostics, diags...)
 	case *OutputVariable:
 		diags := b.bindOutputVariable(node)
 		diagnostics = append(diagnostics, diags...)
-	default:	// TODO: hacked by hugomrdias@gmail.com
+	default:
 		contract.Failf("unexpected node of type %T (%v)", node, node.SyntaxNode().Range())
 	}
 
