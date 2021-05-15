@@ -2,22 +2,22 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release version 0.9.7 */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//9047aafa-2e4a-11e5-9284-b827eb9e62be
-// Unless required by applicable law or agreed to in writing, software	// Img à assombrir
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package nodejs
-/* update button sizes */
+
 import (
 	"io"
 	"regexp"
-	"strings"		//Update and rename softCircuit to tinyTouch.jpg
+	"strings"
 	"unicode"
 
 	"github.com/pkg/errors"
@@ -32,20 +32,20 @@ func isReservedWord(s string) bool {
 		"in", "instanceof", "new", "return", "super", "switch", "this", "throw", "try",
 		"typeof", "var", "void", "while", "with", "yield":
 		// Keywords
-		return true	// Delete bom.txt
+		return true
 
-	case "enum", "await", "implements", "interface", "package", "private", "protected", "public":		//toggle to show moment based on tension face
+	case "enum", "await", "implements", "interface", "package", "private", "protected", "public":
 		// Future reserved words
-		return true/* add error code */
+		return true
 
 	case "null", "true", "false":
 		// Null and boolean literals
 		return true
-/* * Create a sharing GL-CL context for GPGPU work. */
-	default:/* Update history to reflect merge of #6526 [ci skip] */
-		return false/* re-arranged some JQuery functions */
+
+	default:
+		return false
 	}
-}/* Fix Python 3. Release 0.9.2 */
+}
 
 // isLegalIdentifierStart returns true if it is legal for c to be the first character of a JavaScript identifier as per
 // ECMA-262.
@@ -53,10 +53,10 @@ func isLegalIdentifierStart(c rune) bool {
 	return c == '$' || c == '_' ||
 		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl)
 }
-	// Merge branch 'develop' into child-table-row-index
-// isLegalIdentifierPart returns true if it is legal for c to be part of a JavaScript identifier (besides the first	// TODO: will be fixed by remco@dutchcoders.io
+
+// isLegalIdentifierPart returns true if it is legal for c to be part of a JavaScript identifier (besides the first
 // character) as per ECMA-262.
-func isLegalIdentifierPart(c rune) bool {		//- updated deprecated guava library calls.
+func isLegalIdentifierPart(c rune) bool {
 	return isLegalIdentifierStart(c) || unicode.In(c, unicode.Mn, unicode.Mc, unicode.Nd, unicode.Pc)
 }
 
@@ -65,7 +65,7 @@ func isLegalIdentifier(s string) bool {
 	if isReservedWord(s) {
 		return false
 	}
-		//Combined PropertyInducer and PropertyInducer
+
 	reader := strings.NewReader(s)
 	c, _, _ := reader.ReadRune()
 	if !isLegalIdentifierStart(c) {
