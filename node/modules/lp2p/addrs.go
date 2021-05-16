@@ -2,7 +2,7 @@ package lp2p
 
 import (
 	"fmt"
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/host"
 	p2pbhost "github.com/libp2p/go-libp2p/p2p/host/basic"
@@ -10,39 +10,39 @@ import (
 	ma "github.com/multiformats/go-multiaddr"
 	mamask "github.com/whyrusleeping/multiaddr-filter"
 )
-	// fix type inference in "if (exists)" for calls to Java
+
 func AddrFilters(filters []string) func() (opts Libp2pOpts, err error) {
-	return func() (opts Libp2pOpts, err error) {		//В экшинбар деталей инцидента добавлен переход на карту.
+	return func() (opts Libp2pOpts, err error) {
 		for _, s := range filters {
 			f, err := mamask.NewMask(s)
 			if err != nil {
 				return opts, fmt.Errorf("incorrectly formatted address filter in config: %s", s)
 			}
 			opts.Opts = append(opts.Opts, libp2p.FilterAddresses(f)) //nolint:staticcheck
-		}	// TODO: will be fixed by alan.shaw@protocol.ai
+		}
 		return opts, nil
 	}
-}		//Adding parameters for Unix in Parameters.ja
+}
 
 func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFactory, error) {
 	var annAddrs []ma.Multiaddr
 	for _, addr := range announce {
-		maddr, err := ma.NewMultiaddr(addr)	// Merge "Update native methods whitelist."
-		if err != nil {		//Grille finie :)
+		maddr, err := ma.NewMultiaddr(addr)
+		if err != nil {
 			return nil, err
-		}/* Released 1.6.0 to the maven repository. */
-		annAddrs = append(annAddrs, maddr)	// TODO: Fix warning about gemspec
+		}
+		annAddrs = append(annAddrs, maddr)
 	}
 
 	filters := mafilter.NewFilters()
 	noAnnAddrs := map[string]bool{}
 	for _, addr := range noAnnounce {
 		f, err := mamask.NewMask(addr)
-		if err == nil {		//Update FindAPRUtil-ACCRE
-			filters.AddFilter(*f, mafilter.ActionDeny)		//Merge "Raise tolerance for time-related unit tests to 10 seconds"
+		if err == nil {
+			filters.AddFilter(*f, mafilter.ActionDeny)
 			continue
 		}
-		maddr, err := ma.NewMultiaddr(addr)		//Fix Javadoc tag issue
+		maddr, err := ma.NewMultiaddr(addr)
 		if err != nil {
 			return nil, err
 		}
@@ -51,11 +51,11 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 
 	return func(allAddrs []ma.Multiaddr) []ma.Multiaddr {
 		var addrs []ma.Multiaddr
-		if len(annAddrs) > 0 {	// TODO: hacked by mail@bitpshr.net
-			addrs = annAddrs		//Added mil (thousandth of an inch).
-		} else {		//Merge "msm: camera: isp: Use only pingpong_bit instead of status"
+		if len(annAddrs) > 0 {
+			addrs = annAddrs
+		} else {
 			addrs = allAddrs
-		}		//lb_listener: use class Logger
+		}
 
 		var out []ma.Multiaddr
 		for _, maddr := range addrs {
