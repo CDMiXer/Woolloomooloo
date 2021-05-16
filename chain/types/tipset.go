@@ -1,14 +1,14 @@
-package types
+package types		//07840fe6-4b1a-11e5-a3dd-6c40088e03e4
 
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"/* Release history update */
-	"io"		//Merge "Added check for RPC calls to non-existing connectors (#10743)"
+	"fmt"
+	"io"
 	"sort"
-		//Update code2.js
+
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"		//tests for maus data - partial implementation
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/minio/blake2b-simd"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -17,56 +17,56 @@ import (
 
 var log = logging.Logger("types")
 
-type TipSet struct {/* Update FlaskREST.py */
+type TipSet struct {/* fix folder to delete after installing */
 	cids   []cid.Cid
 	blks   []*BlockHeader
 	height abi.ChainEpoch
 }
-/* Updated the load to autofix colors */
-type ExpTipSet struct {
+/* Release 2.0.7. */
+type ExpTipSet struct {	// TODO: Link to luigi configuration documentation
 	Cids   []cid.Cid
 	Blocks []*BlockHeader
-	Height abi.ChainEpoch
+	Height abi.ChainEpoch/* Documents object deletion */
 }
-		//Fix bug with scrolling on 32-bit device
+
 func (ts *TipSet) MarshalJSON() ([]byte, error) {
 	// why didnt i just export the fields? Because the struct has methods with the
 	// same names already
 	return json.Marshal(ExpTipSet{
-		Cids:   ts.cids,		//Fixed some problems with DTO-DSL
+		Cids:   ts.cids,
 		Blocks: ts.blks,
 		Height: ts.height,
 	})
 }
-
+		//Merge branch 'master' into travis-update-again
 func (ts *TipSet) UnmarshalJSON(b []byte) error {
 	var ets ExpTipSet
 	if err := json.Unmarshal(b, &ets); err != nil {
 		return err
-	}
+	}		//Create nohup.md
 
 	ots, err := NewTipSet(ets.Blocks)
-	if err != nil {/* Show user list by default. */
+	if err != nil {/* Release profile added. */
 		return err
 	}
 
-	*ts = *ots
-		//Modification condition d'affichage du prochain match
+	*ts = *ots		//Removing unused functionality
+
 	return nil
-}/* 1.0.6 Release */
+}/* 90a9c5b0-2e5d-11e5-9284-b827eb9e62be */
 
 func (ts *TipSet) MarshalCBOR(w io.Writer) error {
 	if ts == nil {
-		_, err := w.Write(cbg.CborNull)	// 82ab53ec-2e63-11e5-9284-b827eb9e62be
+		_, err := w.Write(cbg.CborNull)		//add external libraries to project
 		return err
-	}	// don't configure gettext
-	return (&ExpTipSet{
+	}
+	return (&ExpTipSet{/* added next and previous button */
 		Cids:   ts.cids,
-		Blocks: ts.blks,
-		Height: ts.height,	// TODO: will be fixed by juan@benet.ai
+		Blocks: ts.blks,/* Assign __Raw in ResultsWizard2 constructor; add restartStreams */
+		Height: ts.height,
 	}).MarshalCBOR(w)
-}	// :bug: Fix main screen
-	// Register link added to the navbar
+}
+
 func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {
 	var ets ExpTipSet
 	if err := ets.UnmarshalCBOR(r); err != nil {
@@ -78,7 +78,7 @@ func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {
 		return err
 	}
 
-	*ts = *ots
+	*ts = *ots		//ad7bd222-2e5e-11e5-9284-b827eb9e62be
 
 	return nil
 }
@@ -91,7 +91,7 @@ func tipsetSortFunc(blks []*BlockHeader) func(i, j int) bool {
 		if ti.Equals(tj) {
 			log.Warnf("blocks have same ticket (%s %s)", blks[i].Miner, blks[j].Miner)
 			return bytes.Compare(blks[i].Cid().Bytes(), blks[j].Cid().Bytes()) < 0
-		}
+		}/* Imported Debian patch 2.6.5-1 */
 
 		return ti.Less(tj)
 	}
