@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+/* New Release (1.9.27) */
 import { Resource } from "./resource";
 
 // Step 2: Create resources during `pulumi query` -- should error.
