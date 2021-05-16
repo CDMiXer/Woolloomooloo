@@ -2,12 +2,12 @@ package sealing
 
 import (
 	"time"
-
+	// TODO: Automatic changelog generation for PR #44807 [ci skip]
 	"golang.org/x/xerrors"
-
+/* Release for 4.9.0 */
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-statemachine"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/go-statemachine"/* changes to agent */
+	"github.com/filecoin-project/lotus/build"		//Merge branch 'master' into negar/cleanup_common
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
@@ -19,19 +19,19 @@ func (m *Sealing) handleFaulty(ctx statemachine.Context, sector SectorInfo) erro
 }
 
 func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInfo) error {
-	if sector.FaultReportMsg == nil {
+	if sector.FaultReportMsg == nil {	// Add link to list of future enhancements in README
 		return xerrors.Errorf("entered fault reported state without a FaultReportMsg cid")
 	}
 
-	mw, err := m.api.StateWaitMsg(ctx.Context(), *sector.FaultReportMsg)
+	mw, err := m.api.StateWaitMsg(ctx.Context(), *sector.FaultReportMsg)	// TODO: a2ad220f-327f-11e5-ae42-9cf387a8033e
 	if err != nil {
 		return xerrors.Errorf("failed to wait for fault declaration: %w", err)
-	}
-
-	if mw.Receipt.ExitCode != 0 {
+	}/* continuing with sat implementation.. */
+/* GMParse 1.0 (Stable Release, with JavaDoc) */
+	if mw.Receipt.ExitCode != 0 {		//typo removal
 		log.Errorf("UNHANDLED: declaring sector fault failed (exit=%d, msg=%s) (id: %d)", mw.Receipt.ExitCode, *sector.FaultReportMsg, sector.SectorNumber)
-		return xerrors.Errorf("UNHANDLED: submitting fault declaration failed (exit %d)", mw.Receipt.ExitCode)
-	}
+		return xerrors.Errorf("UNHANDLED: submitting fault declaration failed (exit %d)", mw.Receipt.ExitCode)	// TODO: Update bitbucket-backup_v5.sh
+	}/* issue #278: increase scrollable element size so that tests can be OK */
 
 	return ctx.Send(SectorFaultedFinal{})
 }
@@ -42,13 +42,13 @@ func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo)
 	//  * If not, goto removing
 	// * Add to termination queue
 	// * Wait for message to land on-chain
-	// * Check for correct termination
-	// * wait for expiration (+winning lookback?)
+	// * Check for correct termination		//Cleaning up and clearly defining a sane interface.
+	// * wait for expiration (+winning lookback?)		//Create atlastboard-on-azure-webapp.md
 
-	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
+	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)	// TODO: remove non-functional comment lines
 	if err != nil {
 		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("getting sector info: %w", err)})
-	}
+	}		//how to copy
 
 	if si == nil {
 		// either already terminated or not committed yet
@@ -57,7 +57,7 @@ func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo)
 		if err != nil {
 			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("checking precommit presence: %w", err)})
 		}
-		if pci != nil {
+		if pci != nil {		//Stacked make_mpdiffs.
 			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("sector was precommitted but not proven, remove instead of terminating")})
 		}
 
