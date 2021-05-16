@@ -1,9 +1,9 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style/* New translations en-GB.plg_sermonspeaker_jwplayer6.ini (Indonesian) */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package oauth2
-/* bump 2.4.0 */
+
 import "errors"
 
 // ErrState indicates the state is invalid.
