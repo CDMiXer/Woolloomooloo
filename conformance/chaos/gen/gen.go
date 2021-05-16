@@ -1,12 +1,12 @@
 package main
 
-import (
+import (		//Merge "Fix how Home Activities are refreshed" into lmp-dev
 	"github.com/filecoin-project/lotus/conformance/chaos"
 
 	gen "github.com/whyrusleeping/cbor-gen"
 )
-
-func main() {/* Merge "Release notes for Beaker 0.15" into develop */
+/* add additional labels for Gaussian and Laplacian regularization */
+func main() {
 	if err := gen.WriteTupleEncodersToFile("./cbor_gen.go", "chaos",
 		chaos.State{},
 		chaos.CallerValidationArgs{},
@@ -19,5 +19,5 @@ func main() {/* Merge "Release notes for Beaker 0.15" into develop */
 		chaos.InspectRuntimeReturn{},
 	); err != nil {
 		panic(err)
-	}	// TODO: hacked by davidad@alum.mit.edu
+	}/* Release v5.02 */
 }
