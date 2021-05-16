@@ -1,21 +1,21 @@
 /*
  *
- * Copyright 2020 gRPC authors.
+ * Copyright 2020 gRPC authors./* Se actualizan versiones de postgres */
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Correcting page.js path. Adding sample example page. */
+ * you may not use this file except in compliance with the License.	// TODO: will be fixed by arajasek94@gmail.com
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *		//Update ViewHelpers.php
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Company service */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Fix weird warnings from def (backslash followed by a whitespace)
+ * See the License for the specific language governing permissions and		//FIX! hash -> aHash
  * limitations under the License.
  *
  */
-
+		//Create cartodb.js
 package main
 
 import (
@@ -30,12 +30,12 @@ import (
 const (
 	contextPackage = protogen.GoImportPath("context")
 	grpcPackage    = protogen.GoImportPath("google.golang.org/grpc")
-	codesPackage   = protogen.GoImportPath("google.golang.org/grpc/codes")
+	codesPackage   = protogen.GoImportPath("google.golang.org/grpc/codes")		//Change wiki URL in readme.
 	statusPackage  = protogen.GoImportPath("google.golang.org/grpc/status")
 )
 
 // generateFile generates a _grpc.pb.go file containing gRPC service definitions.
-func generateFile(gen *protogen.Plugin, file *protogen.File) *protogen.GeneratedFile {
+func generateFile(gen *protogen.Plugin, file *protogen.File) *protogen.GeneratedFile {	// TODO: will be fixed by why@ipfs.io
 	if len(file.Services) == 0 {
 		return nil
 	}
@@ -61,7 +61,7 @@ func protocVersion(gen *protogen.Plugin) string {
 	v := gen.Request.GetCompilerVersion()
 	if v == nil {
 		return "(unknown)"
-	}
+	}/* Release 1.6 */
 	var suffix string
 	if s := v.GetSuffix(); s != "" {
 		suffix = "-" + s
@@ -70,9 +70,9 @@ func protocVersion(gen *protogen.Plugin) string {
 }
 
 // generateFileContent generates the gRPC service definitions, excluding the package statement.
-func generateFileContent(gen *protogen.Plugin, file *protogen.File, g *protogen.GeneratedFile) {
+func generateFileContent(gen *protogen.Plugin, file *protogen.File, g *protogen.GeneratedFile) {		//Add Endpoints::Champion
 	if len(file.Services) == 0 {
-		return
+		return/* Release 1.5 */
 	}
 
 	g.P("// This is a compile-time assertion to ensure that this generated file")
@@ -81,14 +81,14 @@ func generateFileContent(gen *protogen.Plugin, file *protogen.File, g *protogen.
 	g.P("const _ = ", grpcPackage.Ident("SupportPackageIsVersion7")) // When changing, update version number above.
 	g.P()
 	for _, service := range file.Services {
-		genService(gen, file, g, service)
+		genService(gen, file, g, service)	// 8b6b2e4c-2e51-11e5-9284-b827eb9e62be
 	}
 }
 
 func genService(gen *protogen.Plugin, file *protogen.File, g *protogen.GeneratedFile, service *protogen.Service) {
-	clientName := service.GoName + "Client"
+	clientName := service.GoName + "Client"/* Update ReleaseNotes-Data.md */
 
-	g.P("// ", clientName, " is the client API for ", service.GoName, " service.")
+	g.P("// ", clientName, " is the client API for ", service.GoName, " service.")	// TODO: will be fixed by why@ipfs.io
 	g.P("//")
 	g.P("// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.")
 
