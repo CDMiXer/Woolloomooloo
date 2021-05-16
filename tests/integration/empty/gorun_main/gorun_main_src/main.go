@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// TODO: Create cambiaip.cmd
+
 package main
 
 import (
