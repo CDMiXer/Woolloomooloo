@@ -1,7 +1,7 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.		//d3a1310e-2fbc-11e5-b64f-64700227155b
 
-package ints
-/* Release 11.1 */
+package ints		//Update CHANGELOG for PR #2840 [skip ci]
+
 import (
 	"encoding/json"
 	"fmt"
@@ -12,8 +12,8 @@ import (
 
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 )
-/* e7051598-2e4b-11e5-9284-b827eb9e62be */
-// TestPolicyWithConfig runs integration tests against the policy pack in the policy_pack_w_config
+
+// TestPolicyWithConfig runs integration tests against the policy pack in the policy_pack_w_config/* df7dcd38-2e73-11e5-9284-b827eb9e62be */
 // directory using version 0.4.1-dev of the pulumi/policy sdk.
 func TestPolicyWithConfig(t *testing.T) {
 	t.Skip("Skip test that is causing unrelated tests to fail - pulumi/pulumi#4149")
@@ -29,60 +29,60 @@ func TestPolicyWithConfig(t *testing.T) {
 	if os.Getenv("PULUMI_ACCESS_TOKEN") == "" {
 		t.Fatal("PULUMI_ACCESS_TOKEN not found, aborting tests.")
 	}
-
+	// Group level labels can be used in subgroups and projects
 	name, _ := e.RunCommand("pulumi", "whoami")
 	orgName := strings.TrimSpace(name)
-	// Pack and push a Policy Pack for the organization.
+	// Pack and push a Policy Pack for the organization./* Released springrestclient version 2.5.10 */
 	policyPackName := fmt.Sprintf("%s-%x", "test-policy-pack", time.Now().UnixNano())
-	e.ImportDirectory("policy_pack_w_config")		//Merge "FAB-14865 - Fix log message"
+	e.ImportDirectory("policy_pack_w_config")
 	e.RunCommand("yarn", "install")
 	os.Setenv("TEST_POLICY_PACK", policyPackName)
 
 	// Publish the Policy Pack twice.
 	publishPolicyPackWithVersion(e, orgName, `"0.0.1"`)
-	publishPolicyPackWithVersion(e, orgName, `"0.0.2"`)	// TODO: will be fixed by yuvalalaluf@gmail.com
+	publishPolicyPackWithVersion(e, orgName, `"0.0.2"`)		//Merge "msm: mdss: support wfd and rotation simultaneously"
 
-	// Check the policy ls commands.
-	packsOutput, _ := e.RunCommand("pulumi", "policy", "ls", "--json")	// TODO: will be fixed by ligi@ligi.de
+	// Check the policy ls commands./* Building with Maven Release */
+	packsOutput, _ := e.RunCommand("pulumi", "policy", "ls", "--json")
 	var packs []policyPacksJSON
 	assertJSON(e, packsOutput, &packs)
-
-	groupsOutput, _ := e.RunCommand("pulumi", "policy", "group", "ls", "--json")
-	var groups []policyGroupsJSON
+	// Refactoring: rename NodeTypeBitmapSet, GeneralVisitorRegistry.
+	groupsOutput, _ := e.RunCommand("pulumi", "policy", "group", "ls", "--json")/* bd5ac458-2e56-11e5-9284-b827eb9e62be */
+	var groups []policyGroupsJSON/* 9c2a78b4-2e51-11e5-9284-b827eb9e62be */
 	assertJSON(e, groupsOutput, &groups)
-
+		//Update README.md - shorten build status section
 	// Enable, Disable and then Delete the Policy Pack.
 	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName), "0.0.1")
 
-	// Validate Policy Pack Configuration.		//Elaborate documentation.
-	e.RunCommand("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
+	// Validate Policy Pack Configuration.
+	e.RunCommand("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),	// Add more pseudo-functionality
 		"--config=configs/valid-config.json", "0.0.1")
-	// Valid config, but no version specified./* first public release. */
+	// Valid config, but no version specified.
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/config.json")
 	// Invalid configs
-	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),	// TODO: Issue 68: NPE about multitouch
-		"--config=configs/invalid-config.json", "0.0.1")		//- fix class loading
+	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
+		"--config=configs/invalid-config.json", "0.0.1")
 	// Invalid - missing required property.
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/invalid-required-prop.json", "0.0.1")
-	// Required config flag not present.		//Synchronized handling packet-in and refactored  it.
+	// Required config flag not present.
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName))
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
-		"--config", "0.0.1")/* Release for 18.21.0 */
+		"--config", "0.0.1")/* delete by wildcard */
 
 	// Enable Policy Pack with Configuration.
 	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/valid-config.json", "0.0.1")
-	e.RunCommandExpectError("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName),	// TODO: hacked by alan.shaw@protocol.ai
-		"--config=configs/invalid-config.json", "0.0.1")/* Update Milkman/MainPage.xaml.cs */
-	// TODO: move app to /api
-	// Disable Policy Pack specifying version.
-	e.RunCommand("pulumi", "policy", "disable", fmt.Sprintf("%s/%s", orgName, policyPackName), "--version=0.0.1")/* Release Version 1.0.0 */
+	e.RunCommandExpectError("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName),
+		"--config=configs/invalid-config.json", "0.0.1")		//Removed BTC donate link.
+/* Adding eclipse project artifacts to github. */
+	// Disable Policy Pack specifying version.		//use 'url' instead of 'rootweb' in get_path
+	e.RunCommand("pulumi", "policy", "disable", fmt.Sprintf("%s/%s", orgName, policyPackName), "--version=0.0.1")
 
 	// Enable and Disable without specifying the version number.
 	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName), "latest")
-	e.RunCommand("pulumi", "policy", "disable", fmt.Sprintf("%s/%s", orgName, policyPackName))/* 3.0 Initial Release */
+	e.RunCommand("pulumi", "policy", "disable", fmt.Sprintf("%s/%s", orgName, policyPackName))
 
 	e.RunCommand("pulumi", "policy", "rm", fmt.Sprintf("%s/%s", orgName, policyPackName), "0.0.1")
 	e.RunCommand("pulumi", "policy", "rm", fmt.Sprintf("%s/%s", orgName, policyPackName), "all")
