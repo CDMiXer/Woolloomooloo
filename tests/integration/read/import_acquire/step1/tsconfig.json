@@ -1,4 +1,4 @@
-{
+{		//Create pwgen
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
@@ -8,7 +8,7 @@
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,	// TODO: add font sizes for all header classes
+        "pretty": true,/* Release version: 1.0.1 [ci skip] */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
@@ -17,5 +17,5 @@
     "files": [
         "index.ts"
     ]
-}
+}/* Update introduction links in the navigation */
 
