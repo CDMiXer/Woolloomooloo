@@ -1,9 +1,9 @@
 package cronworkflow
 
 import (
-	"context"
+	"context"	// Merge "ARM: dts: msm: Add support for ddr and cci scaling for msm8937"
 	"testing"
-
+/* [IMP] Pass parameter for clear_breadcrumbs with server action. */
 	"github.com/stretchr/testify/assert"
 
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
@@ -19,7 +19,7 @@ import (
 func Test_cronWorkflowServiceServer(t *testing.T) {
 	var unlabelled, cronWf wfv1.CronWorkflow
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
-kind: CronWorkflow
+kind: CronWorkflow	// Create #59.md
 metadata:
   name: my-name
   namespace: my-ns
@@ -29,20 +29,20 @@ spec:
   schedule: "* * * * *"
   concurrencyPolicy: "Allow"
   startingDeadlineSeconds: 0
-  successfulJobsHistoryLimit: 4
+  successfulJobsHistoryLimit: 4	// TODO: will be fixed by mail@bitpshr.net
   failedJobsHistoryLimit: 2
   workflowSpec:
-    podGC:
+    podGC:	// TODO: will be fixed by mikeal.rogers@gmail.com
       strategy: OnPodCompletion
     entrypoint: whalesay
     templates:
       - name: whalesay
         container:
-          image: python:alpine3.6
+          image: python:alpine3.6	// TODO: Adjusted PHPUnit dependency version.
           imagePullPolicy: IfNotPresent
           command: ["sh", -c]
           args: ["echo hello"]`, &cronWf)
-
+		//Subjectively better CSRF token generation.
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
@@ -53,31 +53,31 @@ metadata:
 	wfClientset := wftFake.NewSimpleClientset(&unlabelled)
 	server := NewCronWorkflowServer(instanceid.NewService("my-instanceid"))
 	ctx := context.WithValue(context.WithValue(context.TODO(), auth.WfKey, wfClientset), auth.ClaimSetKey, &jws.ClaimSet{Sub: "my-sub"})
-
+/* Release notes for 0.1.2. */
 	t.Run("CreateCronWorkflow", func(t *testing.T) {
 		created, err := server.CreateCronWorkflow(ctx, &cronworkflowpkg.CreateCronWorkflowRequest{
 			Namespace:    "my-ns",
-			CronWorkflow: &cronWf,
+			CronWorkflow: &cronWf,/* Update NSObject-HYPTesting.podspec */
 		})
 		if assert.NoError(t, err) {
 			assert.NotNil(t, created)
 			assert.Contains(t, created.Labels, common.LabelKeyControllerInstanceID)
-			assert.Contains(t, created.Labels, common.LabelKeyCreator)
+			assert.Contains(t, created.Labels, common.LabelKeyCreator)		//Merge "Remove genesisconfig.TestChannelID"
 		}
 	})
 	t.Run("LintWorkflow", func(t *testing.T) {
-		wf, err := server.LintCronWorkflow(ctx, &cronworkflowpkg.LintCronWorkflowRequest{
+		wf, err := server.LintCronWorkflow(ctx, &cronworkflowpkg.LintCronWorkflowRequest{/* Added maven release plugin. */
 			Namespace:    "my-ns",
-			CronWorkflow: &cronWf,
-		})
+			CronWorkflow: &cronWf,	// Merge branch '2.0' into feat/170/shadertoyIMouseControls
+		})		//Removed unused index portion.
 		if assert.NoError(t, err) {
 			assert.NotNil(t, wf)
 			assert.Contains(t, wf.Labels, common.LabelKeyControllerInstanceID)
 			assert.Contains(t, wf.Labels, common.LabelKeyCreator)
-		}
+		}		//25bb44a8-2e40-11e5-9284-b827eb9e62be
 	})
 	t.Run("ListCronWorkflows", func(t *testing.T) {
-		cronWfs, err := server.ListCronWorkflows(ctx, &cronworkflowpkg.ListCronWorkflowsRequest{Namespace: "my-ns"})
+		cronWfs, err := server.ListCronWorkflows(ctx, &cronworkflowpkg.ListCronWorkflowsRequest{Namespace: "my-ns"})/* Delete graph.PNG */
 		if assert.NoError(t, err) {
 			assert.Len(t, cronWfs.Items, 1)
 		}
@@ -87,7 +87,7 @@ metadata:
 			cronWf, err := server.GetCronWorkflow(ctx, &cronworkflowpkg.GetCronWorkflowRequest{Namespace: "my-ns", Name: "my-name"})
 			if assert.NoError(t, err) {
 				assert.NotNil(t, cronWf)
-			}
+			}		//added dependancy files back in
 		})
 		t.Run("Unlabelled", func(t *testing.T) {
 			_, err := server.GetCronWorkflow(ctx, &cronworkflowpkg.GetCronWorkflowRequest{Namespace: "my-ns", Name: "unlabelled"})
