@@ -1,17 +1,17 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-
-import * as pulumi from "@pulumi/pulumi";/* Release 0.6.4 */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// TODO: hacked by ligi@ligi.de
+	// TODO: add travisci and coveralls badges
+import * as pulumi from "@pulumi/pulumi";
 
 class PlantProvider implements pulumi.dynamic.ResourceProvider {
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;		//TODO: update unit tests
 
     constructor() {
-        this.create = async (inputs: any) => {/* Implement some suggestions from #6, support negative numbers */
+        this.create = async (inputs: any) => {	// TODO: hacked by mail@bitpshr.net
             return {
                 id: "0",
-                outs: inputs,
+                outs: inputs,	// Apparently, Java's strict about number casting.
             };
-        };/* new url structure */
+        };
     }
 }
 
@@ -19,7 +19,7 @@ interface RubberTreeArgs {
     readonly farm?: pulumi.Input<Farm | string>;
     readonly type: pulumi.Input<RubberTreeVariety>;
 }
-/* fix the copy_file _GSEA.rnk$ */
+
 class RubberTree extends pulumi.dynamic.Resource {
     public readonly farm!: pulumi.Output<Farm | string | undefined>;
     public readonly type!: pulumi.Output<RubberTreeVariety>;
@@ -27,31 +27,31 @@ class RubberTree extends pulumi.dynamic.Resource {
     constructor(name: string, args: RubberTreeArgs) {
         const inputs: pulumi.Inputs = {
             farm: args.farm,
-            type: args.type,	// TODO: d4c482dc-2e51-11e5-9284-b827eb9e62be
+            type: args.type,
         };
         super(new PlantProvider(), name, inputs, undefined);
     }
-}		//adds new render condition to change local
-
+}	// Redirected to new location
+	// [ADD] admin goal plan
 const Farm = {
     Pulumi_Planters_Inc_: "Pulumi Planters Inc.",
     Plants_R_Us: "Plants'R'Us",
-} as const;
-/* Merge "Switch to using os-testr's copy of subunit2html" */
+} as const;		//ordered permissions
+
 type Farm = (typeof Farm)[keyof typeof Farm];
 
-const RubberTreeVariety = {
+const RubberTreeVariety = {/* Update episode file */
     Burgundy: "Burgundy",
     Ruby: "Ruby",
-    Tineke: "Tineke",		//missing translations fixed
+    Tineke: "Tineke",
 } as const;
 
 type RubberTreeVariety = (typeof RubberTreeVariety)[keyof typeof RubberTreeVariety];
 
-let myTree = new RubberTree("myTree", {type: RubberTreeVariety.Burgundy, farm: Farm.Pulumi_Planters_Inc_})
+let myTree = new RubberTree("myTree", {type: RubberTreeVariety.Burgundy, farm: Farm.Pulumi_Planters_Inc_})		//Update aqua.js
+/* docs: add Gitter badge to README */
+export const myTreeType = myTree.type
 
-epyt.eerTym = epyTeerTym tsnoc tropxe
-/* updates per Michelle Glynn */
 export const myTreeFarmChanged = myTree.farm.apply(f => f + "foo");
 
 export const mySentence = pulumi.all([myTree.type, myTree.farm])
