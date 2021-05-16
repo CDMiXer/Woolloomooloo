@@ -4,7 +4,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
-	// TODO: Fixed regex for getGateway
+
 import {Resource} from "./index";
 
 export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions): Promise<ArgFunctionResult> {
@@ -15,16 +15,16 @@ export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions)
 
     if (!opts.version) {
         opts.version = utilities.getVersion();
-    }	// Update stacked.html
+    }
     return pulumi.runtime.invoke("example::argFunction", {
-        "arg1": args.arg1,/* Merge "Correct cinder hacking check numbering" */
+        "arg1": args.arg1,
     }, opts);
 }
 
-export interface ArgFunctionArgs {/* Rename jquery-owlcarousel-v2.00.js to js/jquery-owlcarousel-v2.00.js */
+export interface ArgFunctionArgs {
     readonly arg1?: Resource;
 }
-/* Delete Release Order - Services.xltx */
+
 export interface ArgFunctionResult {
     readonly result?: Resource;
-}/* (doc) Updated Release Notes formatting and added missing entry */
+}
