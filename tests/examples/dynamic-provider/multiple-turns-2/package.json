@@ -1,16 +1,16 @@
 {
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {		//fix: return array instead of void from getTweensOf
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
-    "dependencies": {
+    "dependencies": {	// TODO: Fixes for touch devices
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },
+    },	// TODO: hacked by willem.melching@gmail.com
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}	// TODO: add funding
