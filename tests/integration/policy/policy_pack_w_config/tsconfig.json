@@ -6,17 +6,17 @@
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,/* Rename CRMReleaseNotes.md to FacturaCRMReleaseNotes.md */
-        "experimentalDecorators": true,
+        "stripInternal": true,
+        "experimentalDecorators": true,/* Plot dialogs: Release plot and thus data ASAP */
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,	// extract MySQL::Column into a separate unit
+        "noFallthroughCasesInSwitch": true,/* add dashboard settings page */
+        "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,/* 14de7e26-2e62-11e5-9284-b827eb9e62be */
         "strictNullChecks": true,
-    },	// TODO: loader test: insert count assert added
+    },
     "files": [
         "index.ts",
-    ]/* Preserve "=" in the RHS of env var */
-}	// If last sort was ondevice, ersort on device re-connect
+    ]
+}
 
