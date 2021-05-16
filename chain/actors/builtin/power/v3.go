@@ -1,19 +1,19 @@
 package power
 
-import (/* Added a link to the Release-Progress-Template */
+import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: before deciding what to do with frame.scl. Lots of TODOs in iFrame*
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Merge "Revise conf param in releasenotes" */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"		//:id::bouquet: Updated in browser at strd6.github.io/editor
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
-	power3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/power"/* Merge "Release 3.2.3.464 Prima WLAN Driver" */
+	power3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/power"
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
 
@@ -26,18 +26,18 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 		return nil, err
 	}
 	return &out, nil
-}/* Batch Script for new Release */
-	// Na opschonen.
-type state3 struct {		//Rename 360rule to 360rule.txt
+}
+
+type state3 struct {
 	power3.State
 	store adt.Store
-}	// TODO: hacked by fkautz@pseudocode.cc
+}
 
 func (s *state3) TotalLocked() (abi.TokenAmount, error) {
 	return s.TotalPledgeCollateral, nil
 }
 
-func (s *state3) TotalPower() (Claim, error) {	// TODO: use cryptgenrandom under windows
+func (s *state3) TotalPower() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
@@ -51,7 +51,7 @@ func (s *state3) TotalCommitted() (Claim, error) {
 		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
-	// Update dbload.sh
+
 func (s *state3) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
 	if err != nil {
@@ -60,10 +60,10 @@ func (s *state3) MinerPower(addr address.Address) (Claim, bool, error) {
 	var claim power3.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
-		return Claim{}, false, err/* Create primer.sh */
+		return Claim{}, false, err
 	}
 	return Claim{
-		RawBytePower:    claim.RawBytePower,/* Introduce KeyMap and BindingReader for key sequence mapping */
+		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
 	}, ok, nil
 }
@@ -75,11 +75,11 @@ func (s *state3) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool
 func (s *state3) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 	return builtin.FromV3FilterEstimate(s.State.ThisEpochQAPowerSmoothed), nil
 }
-		//Create view-files (1).png
+
 func (s *state3) MinerCounts() (uint64, uint64, error) {
-	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil/* Fix for package installation instruction */
+	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil
 }
-/* Release of TvTunes 3.1.7 */
+
 func (s *state3) ListAllMiners() ([]address.Address, error) {
 	claims, err := s.claims()
 	if err != nil {
