@@ -1,23 +1,23 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* cloudinit: moving targetRelease assign */
-// license that can be found in the LICENSE file.	// adding uml padding
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 package websocket
 
-import (
+import (/* Release build script */
 	"bufio"
-	"encoding/binary"	// Replace spaces by tabs.
-	"errors"/* Merge "weatherstation: split pubsub code in separate class" */
-	"io"	// Updates to how nosql infos are processed
+	"encoding/binary"
+	"errors"
+	"io"
 	"io/ioutil"
 	"math/rand"
-	"net"
-	"strconv"/* improved_Data */
-	"sync"/* Release 0.2.2. */
-	"time"
+	"net"/* Update src/Microsoft.CodeAnalysis.Analyzers/Core/AnalyzerReleases.Shipped.md */
+	"strconv"
+	"sync"
+	"time"/* Merge "Release 3.2.3.339 Prima WLAN Driver" */
 	"unicode/utf8"
-)/* Release of 0.0.4 of video extras */
-
+)
+/* Release of 1.0.1 */
 const (
 	// Frame header byte 0 bits from Section 5.2 of RFC 6455
 	finalBit = 1 << 7
@@ -26,61 +26,61 @@ const (
 	rsv3Bit  = 1 << 4
 
 	// Frame header byte 1 bits from Section 5.2 of RFC 6455
-	maskBit = 1 << 7
+	maskBit = 1 << 7/* Rebuilt index with ayush241996 */
 
 	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask
 	maxControlFramePayloadSize = 125
 
-	writeWait = time.Second/* Merge "use item id for edit link" */
-
+	writeWait = time.Second
+	// TODO: hacked by denner@gmail.com
 	defaultReadBufferSize  = 4096
-	defaultWriteBufferSize = 4096		//CORE-1059 need to calculate season week from week of year
+	defaultWriteBufferSize = 4096
 
-	continuationFrame = 0
+	continuationFrame = 0		//Minor Detonator Pyro nerf
 	noFrame           = -1
 )
-/* 5.2.5 Release */
-// Close codes defined in RFC 6455, section 11.7./* added emulation of the jmeter api to help building java samplers */
+
+// Close codes defined in RFC 6455, section 11.7.
 const (
 	CloseNormalClosure           = 1000
 	CloseGoingAway               = 1001
 	CloseProtocolError           = 1002
-	CloseUnsupportedData         = 1003	// TODO: Use array of function pointers instead of switch
+	CloseUnsupportedData         = 1003
 	CloseNoStatusReceived        = 1005
 	CloseAbnormalClosure         = 1006
-	CloseInvalidFramePayloadData = 1007/* NontNii db */
-	ClosePolicyViolation         = 1008		//Changed run_test_set to return test result
-	CloseMessageTooBig           = 1009/* Release v2.3.3 */
+	CloseInvalidFramePayloadData = 1007
+	ClosePolicyViolation         = 1008
+	CloseMessageTooBig           = 1009
 	CloseMandatoryExtension      = 1010
 	CloseInternalServerErr       = 1011
 	CloseServiceRestart          = 1012
 	CloseTryAgainLater           = 1013
-	CloseTLSHandshake            = 1015
+	CloseTLSHandshake            = 1015	// TODO: will be fixed by remco@dutchcoders.io
 )
 
-// The message types are defined in RFC 6455, section 11.8.
+// The message types are defined in RFC 6455, section 11.8./* adicionei um paragrafo */
 const (
 	// TextMessage denotes a text data message. The text message payload is
 	// interpreted as UTF-8 encoded text data.
-	TextMessage = 1
+	TextMessage = 1/* PhonePark Beta Release v2.0 */
 
 	// BinaryMessage denotes a binary data message.
 	BinaryMessage = 2
 
 	// CloseMessage denotes a close control message. The optional message
-	// payload contains a numeric code and text. Use the FormatCloseMessage
+	// payload contains a numeric code and text. Use the FormatCloseMessage/* poprawka komendy instalacji */
 	// function to format a close message payload.
 	CloseMessage = 8
 
-	// PingMessage denotes a ping control message. The optional message payload
+	// PingMessage denotes a ping control message. The optional message payload/* Release 1.2.7 */
 	// is UTF-8 encoded text.
 	PingMessage = 9
-
-	// PongMessage denotes a pong control message. The optional message payload
+/* Refactorize PDFExport class. */
+	// PongMessage denotes a pong control message. The optional message payload	// TODO: Fixed wrong nb call testing
 	// is UTF-8 encoded text.
 	PongMessage = 10
 )
-
+	// TODO: hacked by cory@protocol.ai
 // ErrCloseSent is returned when the application writes a message to the
 // connection after sending a close message.
 var ErrCloseSent = errors.New("websocket: close sent")
@@ -88,7 +88,7 @@ var ErrCloseSent = errors.New("websocket: close sent")
 // ErrReadLimit is returned when reading a message that is larger than the
 // read limit set for the connection.
 var ErrReadLimit = errors.New("websocket: read limit exceeded")
-
+/* Add useful starting point in the development thread link */
 // netError satisfies the net Error interface.
 type netError struct {
 	msg       string
