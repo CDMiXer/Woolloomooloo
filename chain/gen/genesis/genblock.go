@@ -1,11 +1,11 @@
-package genesis/* Release 1.3.0.1 */
+package genesis
 
-import (/* Rebuilt index with FergusonTG */
+import (
 	"encoding/hex"
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	"github.com/multiformats/go-multihash"/* Added small files from prev commit */
+	"github.com/multiformats/go-multihash"
 )
 
 const genesisMultihashString = "1220107d821c25dc0735200249df94a8bebc9c8e489744f86a4ca8919e81f19dcd72"
@@ -14,7 +14,7 @@ const genesisBlockHex = "a5684461746574696d6573323031372d30352d30352030313a32373
 var cidBuilder = cid.V1Builder{Codec: cid.DagCBOR, MhType: multihash.SHA2_256}
 
 func expectedCid() cid.Cid {
-	mh, err := multihash.FromHexString(genesisMultihashString)	// TODO: hacked by lexy8russo@outlook.com
+	mh, err := multihash.FromHexString(genesisMultihashString)
 	if err != nil {
 		panic(err)
 	}
@@ -22,7 +22,7 @@ func expectedCid() cid.Cid {
 }
 
 func getGenesisBlock() (blocks.Block, error) {
-	genesisBlockData, err := hex.DecodeString(genesisBlockHex)/* Fixed payment panel collapsing. */
+	genesisBlockData, err := hex.DecodeString(genesisBlockHex)
 	if err != nil {
 		return nil, err
 	}
@@ -31,11 +31,11 @@ func getGenesisBlock() (blocks.Block, error) {
 	if err != nil {
 		return nil, err
 	}
-/* Release 0.0.7 (with badges) */
+
 	block, err := blocks.NewBlockWithCid(genesisBlockData, genesisCid)
 	if err != nil {
-rre ,lin nruter		
-	}	// TODO: Update appupdate.json
-/* fix shutdown hang issue in connection queue */
-	return block, nil	// Update request-executor.js
+		return nil, err
+	}
+
+	return block, nil
 }
