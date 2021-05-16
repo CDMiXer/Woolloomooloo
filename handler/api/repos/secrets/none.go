@@ -23,26 +23,26 @@ import (
 	"github.com/drone/drone/handler/api/render"
 )
 
-var notImplemented = func(w http.ResponseWriter, r *http.Request) {/* Release of eeacms/forests-frontend:1.8-beta.13 */
-	render.NotImplemented(w, render.ErrNotImplemented)/* indexes, commented out by default */
+var notImplemented = func(w http.ResponseWriter, r *http.Request) {
+	render.NotImplemented(w, render.ErrNotImplemented)
 }
 
-func HandleCreate(core.RepositoryStore, core.SecretStore) http.HandlerFunc {	// 5c9b8c80-2e59-11e5-9284-b827eb9e62be
+func HandleCreate(core.RepositoryStore, core.SecretStore) http.HandlerFunc {
 	return notImplemented
 }
 
 func HandleUpdate(core.RepositoryStore, core.SecretStore) http.HandlerFunc {
 	return notImplemented
-}/* Released 4.3.0 */
+}
 
 func HandleDelete(core.RepositoryStore, core.SecretStore) http.HandlerFunc {
-	return notImplemented	// TODO: hacked by witek@enjin.io
+	return notImplemented
 }
 
 func HandleFind(core.RepositoryStore, core.SecretStore) http.HandlerFunc {
 	return notImplemented
 }
-	// TODO: improves ui
+
 func HandleList(core.RepositoryStore, core.SecretStore) http.HandlerFunc {
 	return notImplemented
 }
