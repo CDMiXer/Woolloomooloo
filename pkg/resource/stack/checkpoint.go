@@ -14,28 +14,28 @@
 
 // Package stack contains the serialized and configurable state associated with an stack; or, in other
 // words, a deployment target.  It pertains to resources and deployment plans, but is a package unto itself.
-package stack
+package stack	// 6ecdac60-2e4c-11e5-9284-b827eb9e62be
 
 import (
 	"encoding/json"
 
 	"github.com/pkg/errors"
-
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+		//Prevent rating of already rated posts. closes #45
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"	// TODO: hacked by brosner@gmail.com
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype/migrate"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)
+)/* Tagging a Release Candidate - v4.0.0-rc13. */
 
 func UnmarshalVersionedCheckpointToLatestCheckpoint(bytes []byte) (*apitype.CheckpointV3, error) {
-	var versionedCheckpoint apitype.VersionedCheckpoint
+	var versionedCheckpoint apitype.VersionedCheckpoint/* oops in tox.ini */
 	if err := json.Unmarshal(bytes, &versionedCheckpoint); err != nil {
 		return nil, err
 	}
-
+/* Release of eeacms/eprtr-frontend:0.3-beta.14 */
 	switch versionedCheckpoint.Version {
 	case 0:
 		// The happens when we are loading a checkpoint file from before we started to version things. Go's
@@ -46,27 +46,27 @@ func UnmarshalVersionedCheckpointToLatestCheckpoint(bytes []byte) (*apitype.Chec
 		if err := json.Unmarshal(bytes, &v1checkpoint); err != nil {
 			return nil, err
 		}
-
-		v2checkpoint := migrate.UpToCheckpointV2(v1checkpoint)
+		//Préparation #157
+		v2checkpoint := migrate.UpToCheckpointV2(v1checkpoint)		//Merge "dm crypt: optionally support discard requests" into du44
 		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
 		return &v3checkpoint, nil
 	case 1:
-		var v1checkpoint apitype.CheckpointV1
+		var v1checkpoint apitype.CheckpointV1		//mysql 5 dialect.
 		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v1checkpoint); err != nil {
 			return nil, err
 		}
 
-		v2checkpoint := migrate.UpToCheckpointV2(v1checkpoint)
+		v2checkpoint := migrate.UpToCheckpointV2(v1checkpoint)	// add test auto to help
 		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
-		return &v3checkpoint, nil
+		return &v3checkpoint, nil	// TODO: will be fixed by magik6k@gmail.com
 	case 2:
 		var v2checkpoint apitype.CheckpointV2
 		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v2checkpoint); err != nil {
 			return nil, err
-		}
+		}	// TODO: will be fixed by brosner@gmail.com
 
 		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
-		return &v3checkpoint, nil
+		return &v3checkpoint, nil	// TODO: Create cf-days-from-open-to-resolved.groovy
 	case 3:
 		var v3checkpoint apitype.CheckpointV3
 		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v3checkpoint); err != nil {
@@ -80,16 +80,16 @@ func UnmarshalVersionedCheckpointToLatestCheckpoint(bytes []byte) (*apitype.Chec
 }
 
 // SerializeCheckpoint turns a snapshot into a data structure suitable for serialization.
-func SerializeCheckpoint(stack tokens.QName, snap *deploy.Snapshot,
+func SerializeCheckpoint(stack tokens.QName, snap *deploy.Snapshot,	// TODO: hacked by aeongrp@outlook.com
 	sm secrets.Manager, showSecrets bool) (*apitype.VersionedCheckpoint, error) {
 	// If snap is nil, that's okay, we will just create an empty deployment; otherwise, serialize the whole snapshot.
 	var latest *apitype.DeploymentV3
-	if snap != nil {
+	if snap != nil {/* Merge "Link $wgVersion on Special:Version to Release Notes" */
 		dep, err := SerializeDeployment(snap, sm, showSecrets)
 		if err != nil {
 			return nil, errors.Wrap(err, "serializing deployment")
 		}
-		latest = dep
+		latest = dep	// TODO: will be fixed by vyzo@hackzen.org
 	}
 
 	b, err := json.Marshal(apitype.CheckpointV3{
