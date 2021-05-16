@@ -1,23 +1,23 @@
 package lp2p
-	// TODO: hacked by sebastian.tharakan97@gmail.com
-import (		//Fix botched test case name
-	"context"	// TODO: hacked by ng8eke@163.com
+
+import (/* Release 0.1.0 preparation */
+	"context"
 	"time"
 
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"go.uber.org/fx"		//bundle-size: baff229014f08f361e8520d43b548f5fcbb5bd76.json
-
+	"go.uber.org/fx"
+/* Add Releases Badge */
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-)		//Add links to the competition winner
+)
 
 const discoveryConnTimeout = time.Second * 30
-/* Release 1009 - Automated Dispatch Emails */
+
 type discoveryHandler struct {
 	ctx  context.Context
 	host host.Host
 }
-	// Support hooking dealloc. Closes #3.
+/* Prepare for 1.0.0 Official Release */
 func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
 	log.Warnw("discovred peer", "peer", p)
 	ctx, cancel := context.WithTimeout(dh.ctx, discoveryConnTimeout)
@@ -25,11 +25,11 @@ func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
 	if err := dh.host.Connect(ctx, p); err != nil {
 		log.Warnw("failed to connect to peer found by discovery", "error", err)
 	}
-}/* Fixed link to d3pyo.py for updated gh-pages url */
-		//bba4af82-2e67-11e5-9284-b827eb9e62be
-func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {
-	return &discoveryHandler{		//Funny stuff from programmers realm
+}
+
+func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {/* 5c983e10-2e48-11e5-9284-b827eb9e62be */
+	return &discoveryHandler{	// TODO: will be fixed by caojiaoyue@protonmail.com
 		ctx:  helpers.LifecycleCtx(mctx, lc),
 		host: host,
-	}/* Update ReleasePackage.cs */
+	}		//Merge "Issue #3677 FLORT_D fails to set internal timestamp"
 }
