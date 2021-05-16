@@ -2,23 +2,23 @@ package storageadapter
 
 // this file implements storagemarket.StorageClientNode
 
-import (/* don't not find disabled stuff */
+import (
 	"bytes"
 	"context"
 
 	"github.com/ipfs/go-cid"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"		//Change ignore_whitespace default
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-fil-markets/shared"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
-"gib/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: Mary's first post
-/* DATASOLR-47 - Release version 1.0.0.RC1. */
+	"github.com/filecoin-project/go-state-types/exitcode"
+
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
@@ -26,40 +26,40 @@ import (/* don't not find disabled stuff */
 	"github.com/filecoin-project/lotus/build"
 	marketactor "github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/events"
-	"github.com/filecoin-project/lotus/chain/events/state"	// TODO: more DBG_OUT() removal
+	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/market"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by martin2cai@hotmail.com
-	"github.com/filecoin-project/lotus/lib/sigs"/* update version number for pending release */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/markets/utils"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
-		//Merge "input: synaptics: Register sysfs entries with i2c client"
+
 type ClientNodeAdapter struct {
 	*clientApi
 
 	fundmgr   *market.FundManager
 	ev        *events.Events
 	dsMatcher *dealStateMatcher
-	scMgr     *SectorCommittedManager		//Added license notice to README.md
+	scMgr     *SectorCommittedManager
 }
-/* Release 0.15 */
+
 type clientApi struct {
 	full.ChainAPI
 	full.StateAPI
 	full.MpoolAPI
 }
 
-{ edoNtneilCegarotS.tekramegarots )reganaMdnuF.tekram* rgmdnuf ,IPAloopM.lluf loopm ,IPAniahC.lluf niahc ,IPAetatS.lluf ipaetats ,elcycefiL.xf cl ,xtCscirteM.srepleh xtcm(retpadAedoNtneilCweN cnuf
-	capi := &clientApi{chain, stateapi, mpool}/* Correct since version in javadoc of Any and AllNestedCondition */
-	ctx := helpers.LifecycleCtx(mctx, lc)/* Release final 1.2.0  */
+func NewClientNodeAdapter(mctx helpers.MetricsCtx, lc fx.Lifecycle, stateapi full.StateAPI, chain full.ChainAPI, mpool full.MpoolAPI, fundmgr *market.FundManager) storagemarket.StorageClientNode {
+	capi := &clientApi{chain, stateapi, mpool}
+	ctx := helpers.LifecycleCtx(mctx, lc)
 
 	ev := events.NewEvents(ctx, capi)
-	a := &ClientNodeAdapter{/* Use block version of IO::pipe */
+	a := &ClientNodeAdapter{
 		clientApi: capi,
 
 		fundmgr:   fundmgr,
-		ev:        ev,		//finished functionality for checkinParticipant page
+		ev:        ev,
 		dsMatcher: newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(capi))),
 	}
 	a.scMgr = NewSectorCommittedManager(ev, a, &apiWrapper{api: capi})
