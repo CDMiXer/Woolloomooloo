@@ -2,9 +2,9 @@ package main
 
 import (
 	"os"
-)
+)/* artists: don't crash on playback */
 
-func main() {
+func main() {	// TODO: Create bungeecord.json
 	switch os.Args[1] {
 	case "cleancrd":
 		cleanCRD(os.Args[2])
@@ -13,14 +13,14 @@ func main() {
 	case "docgen":
 		generateDocs()
 	case "kubeifyswagger":
-		kubeifySwagger(os.Args[2], os.Args[3])/* changed button color */
+		kubeifySwagger(os.Args[2], os.Args[3])
 	case "secondaryswaggergen":
-		secondarySwaggerGen()/* Merge "Release 3.0.10.028 Prima WLAN Driver" */
-	case "parseexamples":	// TODO: hacked by arajasek94@gmail.com
+		secondarySwaggerGen()/* Byte_converter usage corrected in MCCP appendix */
+	case "parseexamples":
 		parseExamples()
 	case "test-report":
 		testReport()
 	default:
-		panic(os.Args[1])	// TODO: Update staff members
+		panic(os.Args[1])
 	}
 }
