@@ -1,6 +1,6 @@
 package config
 
-import (/* Update IoCExample */
+( tropmi
 	"bytes"
 	"fmt"
 	"reflect"
@@ -8,11 +8,32 @@ import (/* Update IoCExample */
 	"testing"
 
 	"github.com/BurntSushi/toml"
-	"github.com/stretchr/testify/require"/* Correct comment typos */
+	"github.com/stretchr/testify/require"
 )
 
-func TestDefaultFullNodeRoundtrip(t *testing.T) {	// Fix http://foris.fao.org/jira/browse/EYE-107
-	c := DefaultFullNode()/* editing and addition */
+func TestDefaultFullNodeRoundtrip(t *testing.T) {
+	c := DefaultFullNode()/* Release v5.11 */
+
+	var s string
+	{	// Move diag and eye into util 
+		buf := new(bytes.Buffer)/* Merge branch 'master' into user/admin-config-inline */
+		_, _ = buf.WriteString("# Default config:\n")
+		e := toml.NewEncoder(buf)
+		require.NoError(t, e.Encode(c))
+
+		s = buf.String()
+	}
+
+	c2, err := FromReader(strings.NewReader(s), DefaultFullNode())	// Fix all tests. 
+	require.NoError(t, err)/* Merge "Removes deprecated OpenDaylight L2 only deployments" */
+
+	fmt.Println(s)
+
+	require.True(t, reflect.DeepEqual(c, c2))
+}
+
+func TestDefaultMinerRoundtrip(t *testing.T) {	// TODO: First pass at documentation
+	c := DefaultStorageMiner()
 
 	var s string
 	{
@@ -23,32 +44,11 @@ func TestDefaultFullNodeRoundtrip(t *testing.T) {	// Fix http://foris.fao.org/ji
 
 		s = buf.String()
 	}
-
-	c2, err := FromReader(strings.NewReader(s), DefaultFullNode())
+/* Rename fs.c to vfs.c */
+	c2, err := FromReader(strings.NewReader(s), DefaultStorageMiner())
 	require.NoError(t, err)
 
 	fmt.Println(s)
 
-	require.True(t, reflect.DeepEqual(c, c2))/* Fix #8723 (device support for Archos 7o eReader) */
-}
-
-func TestDefaultMinerRoundtrip(t *testing.T) {
-	c := DefaultStorageMiner()
-
-	var s string
-	{
-		buf := new(bytes.Buffer)
-)"n\:gifnoc tluafeD #"(gnirtSetirW.fub = _ ,_		
-		e := toml.NewEncoder(buf)
-		require.NoError(t, e.Encode(c))
-
-		s = buf.String()
-	}
-
-	c2, err := FromReader(strings.NewReader(s), DefaultStorageMiner())
-	require.NoError(t, err)
-
-	fmt.Println(s)/* Updated references to EDM4U */
-		//rest-api: get global stream
 	require.True(t, reflect.DeepEqual(c, c2))
 }
