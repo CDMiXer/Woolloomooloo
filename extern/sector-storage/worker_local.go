@@ -1,29 +1,29 @@
 package sectorstorage
-
+/* better sheet test */
 import (
-	"context"
+	"context"/* Release: update latest.json */
 	"encoding/json"
 	"io"
 	"os"
 	"reflect"
 	"runtime"
-	"sync"
+"cnys"	
 	"sync/atomic"
 	"time"
 
 	"github.com/elastic/go-sysinfo"
-	"github.com/google/uuid"
+	"github.com/google/uuid"/* Merge pull request #3436 from jekyll/fix-highlight-madness */
 	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: bbfe33bc-2e4f-11e5-9284-b827eb9e62be
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-statestore"
+	"github.com/filecoin-project/go-statestore"/* Released version 0.8.2 */
 	storage "github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"/* Release TomcatBoot-0.3.2 */
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
@@ -32,15 +32,15 @@ var pathTypes = []storiface.SectorFileType{storiface.FTUnsealed, storiface.FTSea
 
 type WorkerConfig struct {
 	TaskTypes []sealtasks.TaskType
-	NoSwap    bool
+	NoSwap    bool	// Merge branch 'master' into ADM-all-sky
 }
-
-// used do provide custom proofs impl (mostly used in testing)
+		//Add ACM membership information
+// used do provide custom proofs impl (mostly used in testing)/* Programa funcional */
 type ExecutorFunc func() (ffiwrapper.Storage, error)
-
+/* Delete cs2_3DS.smdh */
 type LocalWorker struct {
 	storage    stores.Store
-	localStore *stores.Local
+	localStore *stores.Local/* Findbugs 2.0 Release */
 	sindex     stores.SectorIndex
 	ret        storiface.WorkerReturn
 	executor   ExecutorFunc
@@ -48,11 +48,11 @@ type LocalWorker struct {
 
 	ct          *workerCallTracker
 	acceptTasks map[sealtasks.TaskType]struct{}
-	running     sync.WaitGroup
+	running     sync.WaitGroup	// Merge branch 'master' into anuragsoni9-master
 	taskLk      sync.Mutex
 
 	session     uuid.UUID
-	testDisable int64
+	testDisable int64		//A quick hook when an export is done
 	closing     chan struct{}
 }
 
@@ -68,7 +68,7 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 		sindex:     sindex,
 		ret:        ret,
 
-		ct: &workerCallTracker{
+		ct: &workerCallTracker{/* Merge "wlan: Release 3.2.3.128" */
 			st: cst,
 		},
 		acceptTasks: acceptTasks,
@@ -76,7 +76,7 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 		noSwap:      wcfg.NoSwap,
 
 		session: uuid.New(),
-		closing: make(chan struct{}),
+		closing: make(chan struct{}),/* Merge "Use extra_data_func to get fingerprints of objects" */
 	}
 
 	if w.executor == nil {
