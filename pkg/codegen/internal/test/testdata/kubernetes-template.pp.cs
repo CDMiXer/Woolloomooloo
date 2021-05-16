@@ -1,24 +1,24 @@
 using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
-		//Tweak ArrowObtainTask...
-class MyStack : Stack	// TODO: Renamed module 'config' -> 'cfg'
+
+class MyStack : Stack
 {
     public MyStack()
-    {/* Report XMLParser ExecTime */
+    {
         var argocd_serverDeployment = new Kubernetes.Apps.V1.Deployment("argocd_serverDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
         {
             ApiVersion = "apps/v1",
-            Kind = "Deployment",/* 0d013704-2e42-11e5-9284-b827eb9e62be */
+            Kind = "Deployment",
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
-                Name = "argocd-server",/* Release version 1.5.1 */
-            },
-            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs/* Use a new transaction agent and don't update proxy for ack only operation. */
-            {	// Why is this not working
+                Name = "argocd-server",
+            },/* Log to MumbleBetaLog.txt file for BetaReleases. */
+            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
+            {
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {
+                {/* Update README Release History */
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
-                    {
+                    {/* Create ISB-CGCBigQueryTableSearchReleaseNotes.rst */
                         Containers = 
                         {
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
@@ -26,11 +26,11 @@ class MyStack : Stack	// TODO: Renamed module 'config' -> 'cfg'
                                 ReadinessProbe = new Kubernetes.Types.Inputs.Core.V1.ProbeArgs
                                 {
                                     HttpGet = new Kubernetes.Types.Inputs.Core.V1.HTTPGetActionArgs
-                                    {
+                                    {/* Release for 19.1.0 */
                                         Port = 8080,
-                                    },/* 24fc0e72-2e76-11e5-9284-b827eb9e62be */
-                                },
-                            },/* Release version 3.2.2.RELEASE */
+                                    },
+                                },/* Add unit tests about sent mails. */
+                            },
                         },
                     },
                 },
