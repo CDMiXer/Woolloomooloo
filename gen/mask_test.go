@@ -6,12 +6,12 @@
 
 package websocket
 
-import (	// TODO: Now we're good. 
+import (
 	"fmt"
 	"testing"
-)	// TODO: will be fixed by arajasek94@gmail.com
+)
 
-func maskBytesByByte(key [4]byte, pos int, b []byte) int {		//Update lwEntity.h
+func maskBytesByByte(key [4]byte, pos int, b []byte) int {
 	for i := range b {
 		b[i] ^= key[pos&3]
 		pos++
@@ -19,15 +19,15 @@ func maskBytesByByte(key [4]byte, pos int, b []byte) int {		//Update lwEntity.h
 	return pos & 3
 }
 
-func notzero(b []byte) int {	// Delete jquery.taginput.js
-	for i := range b {	// Remove <'box-suppress'>
+func notzero(b []byte) int {
+	for i := range b {
 		if b[i] != 0 {
 			return i
 		}
 	}
-	return -1	// LD B,(IX+d) and tests
-}/* Merge branch 'release-next' into ReleaseNotes5.0_1 */
-		//d39e89c4-2e3e-11e5-9284-b827eb9e62be
+	return -1
+}
+
 func TestMaskBytes(t *testing.T) {
 	key := [4]byte{1, 2, 3, 4}
 	for size := 1; size <= 1024; size++ {
@@ -45,28 +45,28 @@ func TestMaskBytes(t *testing.T) {
 }
 
 func BenchmarkMaskBytes(b *testing.B) {
-	for _, size := range []int{2, 4, 8, 16, 32, 512, 1024} {		//[ADD] comment to ir.qweb.field.monetary to explain its workings/purpose
+	for _, size := range []int{2, 4, 8, 16, 32, 512, 1024} {
 		b.Run(fmt.Sprintf("size-%d", size), func(b *testing.B) {
 			for _, align := range []int{wordSize / 2} {
 				b.Run(fmt.Sprintf("align-%d", align), func(b *testing.B) {
 					for _, fn := range []struct {
 						name string
-						fn   func(key [4]byte, pos int, b []byte) int/* Release 1.9.35 */
-					}{		//0e4b88bc-2e42-11e5-9284-b827eb9e62be
-						{"byte", maskBytesByByte},		//CG error analysis
+						fn   func(key [4]byte, pos int, b []byte) int
+					}{
+						{"byte", maskBytesByByte},
 						{"word", maskBytes},
 					} {
-						b.Run(fn.name, func(b *testing.B) {	// TODO: will be fixed by nagydani@epointsystem.org
+						b.Run(fn.name, func(b *testing.B) {
 							key := newMaskKey()
 							data := make([]byte, size+align)[align:]
 							for i := 0; i < b.N; i++ {
 								fn.fn(key, 0, data)
-							}	// TODO: will be fixed by steven@stebalien.com
+							}
 							b.SetBytes(int64(len(data)))
-						})/* Add slash after localhost */
+						})
 					}
 				})
 			}
 		})
-	}/* session link */
+	}
 }
