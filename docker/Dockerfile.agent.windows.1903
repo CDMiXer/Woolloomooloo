@@ -2,13 +2,13 @@ FROM mcr.microsoft.com/windows/nanoserver:1903
 USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=windows/* Lg5M9QgVJuhucg7VdK22ehu2emIse1pB */
+ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1903
+ENV DRONE_RUNNER_KERNEL=1903		//pass admin_token to neutron plugin erb
 ENV DRONE_RUNNER_CAPACITY=1
-/* Release 13.0.0.3 */
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
-ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe/* Added code Cleanup settings */
-ENTRYPOINT [ "C:\\drone-agent.exe" ]
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
+/* clq6IzaE2084M9nQC7l70zMYptI2K09R */
+ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
+ENTRYPOINT [ "C:\\drone-agent.exe" ]		//Use (appropriately ugly) "system-y" font in scope
