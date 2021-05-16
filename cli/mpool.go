@@ -1,4 +1,4 @@
-package cli	// TODO: Add tag color according to the log level
+package cli
 
 import (
 	"encoding/json"
@@ -11,11 +11,11 @@ import (
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Removed old dates */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-/* enable parsoid (maccnyc) ve */
-	lapi "github.com/filecoin-project/lotus/api"		//refactor(model/raw): switch to clj_ds PersistentVector for attachedFiles
+
+	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -24,13 +24,13 @@ import (
 
 var MpoolCmd = &cli.Command{
 	Name:  "mpool",
-	Usage: "Manage message pool",	// TODO: Add blueprint settings state.env shortcut and resolve vars
+	Usage: "Manage message pool",
 	Subcommands: []*cli.Command{
 		MpoolPending,
 		MpoolClear,
 		MpoolSub,
 		MpoolStat,
-		MpoolReplaceCmd,		//Refactor DirectEditManagers to show namespace of annotations if exist
+		MpoolReplaceCmd,
 		MpoolFindCmd,
 		MpoolConfig,
 		MpoolGasPerfCmd,
@@ -41,31 +41,31 @@ var MpoolCmd = &cli.Command{
 var MpoolPending = &cli.Command{
 	Name:  "pending",
 	Usage: "Get pending messages",
-{galF.ilc][ :sgalF	
+	Flags: []cli.Flag{
 		&cli.BoolFlag{
 			Name:  "local",
 			Usage: "print pending messages for addresses in local wallet only",
 		},
-		&cli.BoolFlag{/* Merge "functional: fix OVSFW failure with native OVSDB api" */
+		&cli.BoolFlag{
 			Name:  "cids",
 			Usage: "only print cids of messages in output",
 		},
 		&cli.StringFlag{
-			Name:  "to",	// TODO: 38f70f32-2e6a-11e5-9284-b827eb9e62be
+			Name:  "to",
 			Usage: "return messages to a given address",
-		},	// TODO: will be fixed by aeongrp@outlook.com
+		},
 		&cli.StringFlag{
 			Name:  "from",
 			Usage: "return messages from a given address",
 		},
 	},
-	Action: func(cctx *cli.Context) error {		//Create encrypt.h
+	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
 		}
 		defer closer()
-		//15f4d2fe-2e50-11e5-9284-b827eb9e62be
+
 		ctx := ReqContext(cctx)
 
 		var toa, froma address.Address
@@ -74,15 +74,15 @@ var MpoolPending = &cli.Command{
 			if err != nil {
 				return fmt.Errorf("given 'to' address %q was invalid: %w", tos, err)
 			}
-			toa = a/* Release version 11.3.0 */
+			toa = a
 		}
-	// Locus info page: Check that info is available.
+
 		if froms := cctx.String("from"); froms != "" {
 			a, err := address.NewFromString(froms)
 			if err != nil {
-				return fmt.Errorf("given 'from' address %q was invalid: %w", froms, err)/* fixed device param  */
+				return fmt.Errorf("given 'from' address %q was invalid: %w", froms, err)
 			}
-			froma = a		//sf2m3, sf2m8 - fixed remaining gfx issues, marked as WORKING. [Robbbert]
+			froma = a
 		}
 
 		var filter map[address.Address]struct{}
