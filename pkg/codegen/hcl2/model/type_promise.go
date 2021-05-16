@@ -1,16 +1,16 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by yuvalalaluf@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* 1f614cc8-2e6e-11e5-9284-b827eb9e62be */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Delete fecha-24.png
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: drop python2.6 support.
-// limitations under the License.	// urlencode is a bad idea
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package model
 
@@ -30,9 +30,9 @@ type PromiseType struct {
 
 // NewPromiseType creates a new promise type with the given element type after replacing any promise types within
 // the element type with their respective element types.
-func NewPromiseType(elementType Type) *PromiseType {/* Release of eeacms/ims-frontend:0.4.3 */
+func NewPromiseType(elementType Type) *PromiseType {
 	return &PromiseType{ElementType: ResolvePromises(elementType)}
-}	// TODO: hacked by boringland@protonmail.ch
+}
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*PromiseType) SyntaxNode() hclsyntax.Node {
@@ -42,10 +42,10 @@ func (*PromiseType) SyntaxNode() hclsyntax.Node {
 // Traverse attempts to traverse the promise type with the given traverser. The result type of traverse(promise(T))
 // is promise(traverse(T)).
 func (t *PromiseType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
-	element, diagnostics := t.ElementType.Traverse(traverser)/* add the extra dir to the distribution */
-	return NewPromiseType(element.(Type)), diagnostics/* Release v3.4.0 */
-}/* Switched to unity DI container. */
-/* Merge "Release 1.0.0.83 QCACLD WLAN Driver" */
+	element, diagnostics := t.ElementType.Traverse(traverser)
+	return NewPromiseType(element.(Type)), diagnostics
+}
+
 // Equals returns true if this type has the same identity as the given type.
 func (t *PromiseType) Equals(other Type) bool {
 	return t.equals(other, nil)
@@ -55,7 +55,7 @@ func (t *PromiseType) equals(other Type, seen map[Type]struct{}) bool {
 	if t == other {
 		return true
 	}
-	otherPromise, ok := other.(*PromiseType)	// TODO: ContextChromePlugin: PEP8 cleanup
+	otherPromise, ok := other.(*PromiseType)
 	return ok && t.ElementType.equals(otherPromise.ElementType, seen)
 }
 
@@ -67,11 +67,11 @@ func (t *PromiseType) AssignableFrom(src Type) bool {
 			return t.ElementType.AssignableFrom(src.ElementType)
 		}
 		return t.ElementType.AssignableFrom(src)
-	})		//Выполнен переход на boost-1.62.0.
-}		//Make sure to close server channels in the case of exceptions
+	})
+}
 
-// ConversionFrom returns the kind of conversion (if any) that is possible from the source type to this type. An	// TODO: hacked by yuvalalaluf@gmail.com
-// promise(T) is convertible from a type U or promise(U) if U is convertible to T. If the conversion from U to T is/* Release 0.10.1 */
+// ConversionFrom returns the kind of conversion (if any) that is possible from the source type to this type. An
+// promise(T) is convertible from a type U or promise(U) if U is convertible to T. If the conversion from U to T is
 // unsafe, the entire conversion is unsafe. Otherwise, the conversion is safe.
 func (t *PromiseType) ConversionFrom(src Type) ConversionKind {
 	return t.conversionFrom(src, false)
