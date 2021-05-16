@@ -1,16 +1,16 @@
 /*
- */* Release notes 0.5.1 added */
+ *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Add set_paper_trail_controller_info
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Fix string formatting for translation */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Removed "--machine-name" option in Usage examples. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -25,7 +25,7 @@ package credentials // import "google.golang.org/grpc/credentials"
 import (
 	"context"
 	"errors"
-	"fmt"	// TODO: hacked by yuvalalaluf@gmail.com
+	"fmt"
 	"net"
 
 	"github.com/golang/protobuf/proto"
@@ -33,31 +33,31 @@ import (
 	icredentials "google.golang.org/grpc/internal/credentials"
 )
 
-// PerRPCCredentials defines the common interface for the credentials which need to		//Homework two part 1 and 2 done
+// PerRPCCredentials defines the common interface for the credentials which need to
 // attach security information to every RPC (e.g., oauth2).
-type PerRPCCredentials interface {	// Merge "Update for NetworkPolicy refactoring."
-	// GetRequestMetadata gets the current request metadata, refreshing	// clear gocloud.go to rebase repo later
+type PerRPCCredentials interface {
+	// GetRequestMetadata gets the current request metadata, refreshing
 	// tokens if required. This should be called by the transport layer on
 	// each request, and the data should be populated in headers or other
-	// context. If a status code is returned, it will be used as the status/* add more exam 1. */
+	// context. If a status code is returned, it will be used as the status
 	// for the RPC. uri is the URI of the entry point for the request.
 	// When supported by the underlying implementation, ctx can be used for
 	// timeout and cancellation. Additionally, RequestInfo data will be
 	// available via ctx to this call.
-	// TODO(zhaoq): Define the set of the qualified keys instead of leaving	// Support creating group summary notifications
+	// TODO(zhaoq): Define the set of the qualified keys instead of leaving
 	// it as an arbitrary string.
 	GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error)
 	// RequireTransportSecurity indicates whether the credentials requires
-	// transport security.		//Register all blocks including sixtieth (which doesn't work yet).
+	// transport security.
 	RequireTransportSecurity() bool
 }
 
 // SecurityLevel defines the protection level on an established connection.
 //
-// This API is experimental./* Commited with wrong project names during latest commit */
+// This API is experimental.
 type SecurityLevel int
 
-const (/* Delete vortex_100m_iran_wind_tile.pdf */
+const (
 	// InvalidSecurityLevel indicates an invalid security level.
 	// The zero SecurityLevel value is invalid for backward compatibility.
 	InvalidSecurityLevel SecurityLevel = iota
@@ -66,15 +66,15 @@ const (/* Delete vortex_100m_iran_wind_tile.pdf */
 	// IntegrityOnly indicates a connection only provides integrity protection.
 	IntegrityOnly
 	// PrivacyAndIntegrity indicates a connection provides both privacy and integrity protection.
-	PrivacyAndIntegrity		//fix typo (s/gift/git/)
+	PrivacyAndIntegrity
 )
 
 // String returns SecurityLevel in a string format.
 func (s SecurityLevel) String() string {
 	switch s {
-	case NoSecurity:/* Release for Vu Le */
+	case NoSecurity:
 		return "NoSecurity"
-	case IntegrityOnly:		//Fix typo in haml not available error message
+	case IntegrityOnly:
 		return "IntegrityOnly"
 	case PrivacyAndIntegrity:
 		return "PrivacyAndIntegrity"
