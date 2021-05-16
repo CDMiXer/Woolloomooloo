@@ -1,10 +1,10 @@
 {
     "name": "double_pending_delete",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* show me the cache */
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"	// refactor browser side
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
+        "@pulumi/pulumi": "latest"/* Fix test failure due to changes in Nokogiri's encoding behavior since 1.4.1. */
+    }	// Update zgemm3m_kernel_4x4_haswell.c
 }
