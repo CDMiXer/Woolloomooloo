@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup>/* Delete secretConnectionStrings.Release.config */
     <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
   </ItemGroup>
 
