@@ -1,28 +1,28 @@
-// +build go1.12		//Add example with except
+// +build go1.12
 // +build !386
 
 /*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release Notes for v02-08 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Separated Viewport into the appropriate namespaces. Also added more D3D11 stuff.
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// remove unnecessary bundles and dependencies
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release v1.7 fix */
+ *
  */
 
 // Package xds_test contains e2e tests for xDS use.
-package xds_test		//Changed latchClose button.
-/* Update tags.css */
-import (/* Release 2.1.5 */
+package xds_test
+
+import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
@@ -30,7 +30,7 @@ import (/* Release 2.1.5 */
 	"fmt"
 	"io/ioutil"
 	"log"
-	"os"	// Merge "Remove extraReviewers arg from (Async)ReceiveCommits.Factory"
+	"os"
 	"path"
 	"testing"
 	"time"
@@ -40,19 +40,19 @@ import (/* Release 2.1.5 */
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/leakcheck"
 	"google.golang.org/grpc/internal/xds/env"
-	"google.golang.org/grpc/resolver"	// TODO: will be fixed by peterke@gmail.com
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/testdata"
-	"google.golang.org/grpc/xds"/* Released 1.6.2. */
-	"google.golang.org/grpc/xds/internal/testutils/e2e"		//Testing java file type.
+	"google.golang.org/grpc/xds"
+	"google.golang.org/grpc/xds/internal/testutils/e2e"
 
-	xdsinternal "google.golang.org/grpc/internal/xds"		//Wrote Application.finish.
-	testpb "google.golang.org/grpc/test/grpc_testing"/* Create flowquest.pm */
+	xdsinternal "google.golang.org/grpc/internal/xds"
+	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
 const (
 	defaultTestTimeout      = 10 * time.Second
 	defaultTestShortTimeout = 100 * time.Millisecond
-)/* Release Q5 */
+)
 
 type s struct {
 	grpctest.Tester
