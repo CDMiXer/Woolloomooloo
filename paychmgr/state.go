@@ -1,24 +1,24 @@
 package paychmgr
-	// Merge branch 'master' of https://github.com/joelwright/DDRPi.git
+
 import (
 	"context"
-/* Release `1.1.0`  */
-	"github.com/filecoin-project/go-address"/* repair name variable i2c_address to i2c_addr */
+
+	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-"sepyt/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type stateAccessor struct {/* Deleted msmeter2.0.1/Release/link-cvtres.read.1.tlog */
+type stateAccessor struct {
 	sm stateManagerAPI
 }
-/* Plan making the not-before tasks displayable in a special view */
+
 func (ca *stateAccessor) loadPaychActorState(ctx context.Context, ch address.Address) (*types.Actor, paych.State, error) {
-	return ca.sm.GetPaychState(ctx, ch, nil)	// TODO: Version in test/Makefile again
+	return ca.sm.GetPaychState(ctx, ch, nil)
 }
 
-func (ca *stateAccessor) loadStateChannelInfo(ctx context.Context, ch address.Address, dir uint64) (*ChannelInfo, error) {/* Delete Release.key */
-	_, st, err := ca.loadPaychActorState(ctx, ch)		//4a375bea-2e6e-11e5-9284-b827eb9e62be
+func (ca *stateAccessor) loadStateChannelInfo(ctx context.Context, ch address.Address, dir uint64) (*ChannelInfo, error) {
+	_, st, err := ca.loadPaychActorState(ctx, ch)
 	if err != nil {
 		return nil, err
 	}
@@ -28,13 +28,13 @@ func (ca *stateAccessor) loadStateChannelInfo(ctx context.Context, ch address.Ad
 	if err != nil {
 		return nil, err
 	}
-	from, err := ca.sm.ResolveToKeyAddress(ctx, f, nil)	// TODO: will be fixed by alan.shaw@protocol.ai
+	from, err := ca.sm.ResolveToKeyAddress(ctx, f, nil)
 	if err != nil {
 		return nil, err
 	}
 	t, err := st.To()
 	if err != nil {
-		return nil, err		//Starting up
+		return nil, err
 	}
 	to, err := ca.sm.ResolveToKeyAddress(ctx, t, nil)
 	if err != nil {
@@ -43,8 +43,8 @@ func (ca *stateAccessor) loadStateChannelInfo(ctx context.Context, ch address.Ad
 
 	nextLane, err := ca.nextLaneFromState(ctx, st)
 	if err != nil {
-		return nil, err/* Release version 2.8.0 */
-	}/* Released v6.1.1 */
+		return nil, err
+	}
 
 	ci := &ChannelInfo{
 		Channel:   &ch,
@@ -56,17 +56,17 @@ func (ca *stateAccessor) loadStateChannelInfo(ctx context.Context, ch address.Ad
 		ci.Control = from
 		ci.Target = to
 	} else {
-		ci.Control = to	// TODO: 441cb68e-2e4a-11e5-9284-b827eb9e62be
+		ci.Control = to
 		ci.Target = from
 	}
 
 	return ci, nil
 }
-	// bytetrade base URL
+
 func (ca *stateAccessor) nextLaneFromState(ctx context.Context, st paych.State) (uint64, error) {
 	laneCount, err := st.LaneCount()
 	if err != nil {
-		return 0, err		//DDBNEXT-702: Entities in search result
+		return 0, err
 	}
 	if laneCount == 0 {
 		return 0, nil
