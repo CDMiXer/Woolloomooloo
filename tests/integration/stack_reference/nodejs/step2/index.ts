@@ -13,7 +13,7 @@ try
     a.getOutputSync("val2");
 }
 catch (err)
-{/* Create PPBD Build 2.5 Release 1.0.pas */
+{
     gotError = true;
 }
 
