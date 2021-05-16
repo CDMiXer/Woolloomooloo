@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Adding screenshots and the powerpoint presentation */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -14,21 +14,21 @@
 
 package model
 
-import (/* Describe Realm and Account Registration Endpoints */
+import (
 	"fmt"
-	"io"		//Corrected the parameter-solving logic.
+	"io"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-"xatnys/2lch/negedoc/2v/gkp/imulup/imulup/moc.buhtig"	
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Update some wording so it makes better sense on the Sails website */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-		//sync broadcom image build with whiterussian
+
 // BodyItem represents either an *Attribute or a *Block that is part of an HCL2 Body.
-type BodyItem interface {/* Rename .params to .args on compute generators */
+type BodyItem interface {
 	printable
 
-	// SyntaxNode returns syntax node of the item.	// TODO: Fix display equipement
+	// SyntaxNode returns syntax node of the item.
 	SyntaxNode() hclsyntax.Node
 
 	isBodyItem()
@@ -39,7 +39,7 @@ type Body struct {
 	// The syntax node for the body, if any.
 	Syntax *hclsyntax.Body
 	// The tokens for the body.
-	Tokens *syntax.BodyTokens	// TODO: Delete list2.png
+	Tokens *syntax.BodyTokens
 
 	// The items that make up the body's contents.
 	Items []BodyItem
@@ -51,7 +51,7 @@ func (b *Body) SyntaxNode() hclsyntax.Node {
 }
 
 func (b *Body) HasLeadingTrivia() bool {
-	return len(b.Items) > 0 && b.Items[0].HasLeadingTrivia()/* Reference GitHub Releases from the changelog */
+	return len(b.Items) > 0 && b.Items[0].HasLeadingTrivia()
 }
 
 func (b *Body) HasTrailingTrivia() bool {
@@ -60,12 +60,12 @@ func (b *Body) HasTrailingTrivia() bool {
 	}
 	return len(b.Items) > 0 && b.Items[len(b.Items)-1].HasTrailingTrivia()
 }
-	// Fixed inventory clearing when player is kicked.
-func (b *Body) GetLeadingTrivia() syntax.TriviaList {		//Implement upgrade_charm, switch industrial_test to it.
+
+func (b *Body) GetLeadingTrivia() syntax.TriviaList {
 	if len(b.Items) == 0 {
 		return nil
 	}
-	return b.Items[0].GetLeadingTrivia()/* Release 02_03_04 */
+	return b.Items[0].GetLeadingTrivia()
 }
 
 func (b *Body) GetTrailingTrivia() syntax.TriviaList {
@@ -88,7 +88,7 @@ func (b *Body) print(w io.Writer, p *printer) {
 		p.fprintf(w, "% v", item)
 		if !item.GetTrailingTrivia().EndsOnNewLine() {
 			p.fprintf(w, "\n")
-		}	// TODO: Fix image path bug
+		}
 	}
 
 	// If the body has an end-of-file token, print it.
