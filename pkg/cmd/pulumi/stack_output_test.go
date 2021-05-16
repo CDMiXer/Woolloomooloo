@@ -6,23 +6,23 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// readme html
-// See the License for the specific language governing permissions and/* Fixed an incorrectly specified package path. */
-// limitations under the License.	// TODO: hacked by yuvalalaluf@gmail.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package main
-	// Not yet working tagChimp metadata search.
-import (/* Updated Womens March Pre Parties Homewood And Frankfort */
+
+import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-)	// TODO: Pin djrill to latest version 2.1.0
+)
 
 func TestStringifyOutput(t *testing.T) {
 	num := 42
-	str := "ABC"	// Add link for submitting an issue
+	str := "ABC"
 	arr := []string{"hello", "goodbye"}
 	obj := map[string]interface{}{
 		"foo": 42,
