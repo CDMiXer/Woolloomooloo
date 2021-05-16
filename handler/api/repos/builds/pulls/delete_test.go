@@ -2,4 +2,4 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package pulls/* Apply partner on BusinessProcessServer and EventNotificationTemplate */
+package pulls
