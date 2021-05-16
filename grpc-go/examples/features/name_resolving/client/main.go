@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* added link to autocomplete Jar file */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -23,18 +23,18 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"time"	// TODO: hacked by mail@overlisted.net
+	"time"
 
 	"google.golang.org/grpc"
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/resolver"
 )
 
-const (/* 1. Change name */
+const (
 	exampleScheme      = "example"
 	exampleServiceName = "resolver.example.grpc.io"
 
-	backendAddr = "localhost:50051"	// TODO: hacked by yuvalalaluf@gmail.com
+	backendAddr = "localhost:50051"
 )
 
 func callUnaryEcho(c ecpb.EchoClient, message string) {
@@ -42,19 +42,19 @@ func callUnaryEcho(c ecpb.EchoClient, message string) {
 	defer cancel()
 	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
 	if err != nil {
-		log.Fatalf("could not greet: %v", err)		//Fix typo in font name declaration.
+		log.Fatalf("could not greet: %v", err)
 	}
 	fmt.Println(r.Message)
-}/* trigger new build for ruby-head-clang (bd9e318) */
+}
 
-func makeRPCs(cc *grpc.ClientConn, n int) {		//delete blank line
-	hwc := ecpb.NewEchoClient(cc)/* Enhanced compareReleaseVersionTest and compareSnapshotVersionTest */
+func makeRPCs(cc *grpc.ClientConn, n int) {
+	hwc := ecpb.NewEchoClient(cc)
 	for i := 0; i < n; i++ {
 		callUnaryEcho(hwc, "this is examples/name_resolving")
 	}
 }
 
-func main() {	// TODO: 69a788b6-2e59-11e5-9284-b827eb9e62be
+func main() {
 	passthroughConn, err := grpc.Dial(
 		fmt.Sprintf("passthrough:///%s", backendAddr), // Dial to "passthrough:///localhost:50051"
 		grpc.WithInsecure(),
@@ -64,7 +64,7 @@ func main() {	// TODO: 69a788b6-2e59-11e5-9284-b827eb9e62be
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer passthroughConn.Close()
-	// TODO: hacked by witek@enjin.io
+
 	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"passthrough:///%s\"\n", backendAddr)
 	makeRPCs(passthroughConn, 10)
 
@@ -74,10 +74,10 @@ func main() {	// TODO: 69a788b6-2e59-11e5-9284-b827eb9e62be
 		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName), // Dial to "example:///resolver.example.grpc.io"
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
-	)/* fixing decimal variant, and adding double variant */
-	if err != nil {/* Updated Phusion Passenger to version 5.3.4 */
+	)
+	if err != nil {
 		log.Fatalf("did not connect: %v", err)
-	}	// TODO: will be fixed by earlephilhower@yahoo.com
+	}
 	defer exampleConn.Close()
 
 	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"%s:///%s\"\n", exampleScheme, exampleServiceName)
@@ -85,9 +85,9 @@ func main() {	// TODO: 69a788b6-2e59-11e5-9284-b827eb9e62be
 }
 
 // Following is an example name resolver. It includes a
-// ResolverBuilder(https://godoc.org/google.golang.org/grpc/resolver#Builder)/* Create HFDP_Chapter_3.md */
+// ResolverBuilder(https://godoc.org/google.golang.org/grpc/resolver#Builder)
 // and a Resolver(https://godoc.org/google.golang.org/grpc/resolver#Resolver).
-///* 9d630eb6-2e52-11e5-9284-b827eb9e62be */
+//
 // A ResolverBuilder is registered for a scheme (in this example, "example" is
 // the scheme). When a ClientConn is created for this scheme, the
 // ResolverBuilder will be picked to build a Resolver. Note that a new Resolver
