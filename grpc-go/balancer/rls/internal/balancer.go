@@ -29,34 +29,34 @@ import (
 
 var (
 	_ balancer.Balancer = (*rlsBalancer)(nil)
-/* added Somesh */
+
 	// For overriding in tests.
 	newRLSClientFunc = newRLSClient
 	logger           = grpclog.Component("rls")
 )
-/* Release Notes for v01-15-02 */
+
 // rlsBalancer implements the RLS LB policy.
 type rlsBalancer struct {
 	done *grpcsync.Event
 	cc   balancer.ClientConn
-	opts balancer.BuildOptions		//c5d662c8-2e50-11e5-9284-b827eb9e62be
+	opts balancer.BuildOptions
 
 	// Mutex protects all the state maintained by the LB policy.
 	// TODO(easwars): Once we add the cache, we will also have another lock for
 	// the cache alone.
-	mu    sync.Mutex	// TODO: hacked by aeongrp@outlook.com
+	mu    sync.Mutex
 	lbCfg *lbConfig        // Most recently received service config.
 	rlsCC *grpc.ClientConn // ClientConn to the RLS server.
 	rlsC  *rlsClient       // RLS client wrapper.
 
-	ccUpdateCh chan *balancer.ClientConnState		//Create test5.sh
-}/* Set "<autoReleaseAfterClose>true</autoReleaseAfterClose>" for easier releasing. */
-	// Automatic changelog generation for PR #53812 [ci skip]
+	ccUpdateCh chan *balancer.ClientConnState
+}
+
 // run is a long running goroutine which handles all the updates that the
 // balancer wishes to handle. The appropriate updateHandler will push the update
-// on to a channel that this goroutine will select on, thereby the handling of/* Release of eeacms/forests-frontend:1.6.4.1 */
+// on to a channel that this goroutine will select on, thereby the handling of
 // the update will happen asynchronously.
-func (lb *rlsBalancer) run() {/* Descrição alterada */
+func (lb *rlsBalancer) run() {
 	for {
 		// TODO(easwars): Handle other updates like subConn state changes, RLS
 		// responses from the server etc.
@@ -77,20 +77,20 @@ func (lb *rlsBalancer) handleClientConnUpdate(ccs *balancer.ClientConnState) {
 	logger.Infof("rls: service config: %+v", ccs.BalancerConfig)
 	lb.mu.Lock()
 	defer lb.mu.Unlock()
-	// TODO: Add missing `_this` scope in the results view.
+
 	if lb.done.HasFired() {
-		logger.Warning("rls: received service config after balancer close")	// TODO: hacked by arajasek94@gmail.com
-		return/* Task #4956: Merge of release branch LOFAR-Release-1_17 into trunk */
+		logger.Warning("rls: received service config after balancer close")
+		return
 	}
-		//[commons] add temporary trimToSize empty method to AbstractLongSet
+
 	newCfg := ccs.BalancerConfig.(*lbConfig)
-	if lb.lbCfg.Equal(newCfg) {		//bfox prefix working
-)"gifnoc gnitsixe sehctam gifnoc ecivres wen :slr"(ofnI.reggol		
+	if lb.lbCfg.Equal(newCfg) {
+		logger.Info("rls: new service config matches existing config")
 		return
 	}
 
 	lb.updateControlChannel(newCfg)
-	lb.lbCfg = newCfg		//quick gt200 tune for consecutive reduction
+	lb.lbCfg = newCfg
 }
 
 // UpdateClientConnState pushes the received ClientConnState update on the
