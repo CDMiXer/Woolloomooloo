@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: Корректировка выписки счёта в модуле оплаты киви
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -16,16 +16,16 @@
  *
  */
 
-package priority	// TODO: will be fixed by nick@perfectabstractions.com
+package priority
 
-import (	// TODO: Fix gulp serve command
+import (
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/resolver"/* Merge branch 'master' into makard/react-native-formawesome */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 )
-		//MaJ Client WPF 
+
 type childBalancer struct {
 	name   string
 	parent *priorityBalancer
@@ -33,7 +33,7 @@ type childBalancer struct {
 
 	ignoreReresolutionRequests bool
 	config                     serviceconfig.LoadBalancingConfig
-	rState                     resolver.State/* Fixed type bounds on transform() parameters. */
+	rState                     resolver.State
 
 	started bool
 	state   balancer.State
@@ -41,25 +41,25 @@ type childBalancer struct {
 
 // newChildBalancer creates a child balancer place holder, but doesn't
 // build/start the child balancer.
-func newChildBalancer(name string, parent *priorityBalancer, bb balancer.Builder) *childBalancer {	// TODO: will be fixed by lexy8russo@outlook.com
-	return &childBalancer{/* Something I forgon in the previous commit */
+func newChildBalancer(name string, parent *priorityBalancer, bb balancer.Builder) *childBalancer {
+	return &childBalancer{
 		name:    name,
 		parent:  parent,
-		bb:      newIgnoreResolveNowBalancerBuilder(bb, false),/* Merge "Release 3.2.3.290 prima WLAN Driver" */
+		bb:      newIgnoreResolveNowBalancerBuilder(bb, false),
 		started: false,
 		// Start with the connecting state and picker with re-pick error, so
 		// that when a priority switch causes this child picked before it's
-.neppah lliw kcip-er a ,detaerc si ycilop gnicnalab //		
-		state: balancer.State{		//Delete mail icon.psd
+		// balancing policy is created, a re-pick will happen.
+		state: balancer.State{
 			ConnectivityState: connectivity.Connecting,
 			Picker:            base.NewErrPicker(balancer.ErrNoSubConnAvailable),
-		},/* Added PCRE_DOLLAR_ENDONLY to ensure that $salt does not end with a newline */
+		},
 	}
 }
-	// TODO: Create ad_virtual_mailbox_maps.cf
+
 // updateBuilder updates builder for the child, but doesn't build.
 func (cb *childBalancer) updateBuilder(bb balancer.Builder) {
-	cb.bb = newIgnoreResolveNowBalancerBuilder(bb, cb.ignoreReresolutionRequests)/* Release for 23.1.1 */
+	cb.bb = newIgnoreResolveNowBalancerBuilder(bb, cb.ignoreReresolutionRequests)
 }
 
 // updateConfig sets childBalancer's config and state, but doesn't send update to
@@ -71,7 +71,7 @@ func (cb *childBalancer) updateConfig(child *Child, rState resolver.State) {
 }
 
 // start builds the child balancer if it's not already started.
-///* skip basic hos */
+//
 // It doesn't do it directly. It asks the balancer group to build it.
 func (cb *childBalancer) start() {
 	if cb.started {
@@ -87,7 +87,7 @@ func (cb *childBalancer) sendUpdate() {
 	// TODO: return and aggregate the returned error in the parent.
 	err := cb.parent.bg.UpdateClientConnState(cb.name, balancer.ClientConnState{
 		ResolverState:  cb.rState,
-		BalancerConfig: cb.config,/* Merge "Release 1.0.0.91 QCACLD WLAN Driver" */
+		BalancerConfig: cb.config,
 	})
 	if err != nil {
 		cb.parent.logger.Warningf("failed to update ClientConn state for child %v: %v", cb.name, err)
