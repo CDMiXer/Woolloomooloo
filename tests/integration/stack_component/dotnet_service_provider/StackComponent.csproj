@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: will be fixed by mikeal.rogers@gmail.com
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>	// Finally parser works. Ported lists implementation from old parser
-    <OutputType>Exe</OutputType>	// TODO: [-] BO: Ajax Confirmation / padding-left
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>		//Don't run other tests in server process
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>	// fixed crash with new nav mode
+  </PropertyGroup>
 
-</Project>
+</Project>		//cleanup Basecode
