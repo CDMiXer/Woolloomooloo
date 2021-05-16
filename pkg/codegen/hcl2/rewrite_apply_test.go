@@ -2,33 +2,33 @@ package hcl2
 
 import (
 	"fmt"
-	"testing"/* b322b8bc-2e6d-11e5-9284-b827eb9e62be */
+	"testing"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Make it compile with omniORB 4.1.x.  */
-	"github.com/stretchr/testify/assert"	// TODO: will be fixed by alex.gaynor@gmail.com
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
+	"github.com/stretchr/testify/assert"
 )
-/* 6d67c66a-2e6c-11e5-9284-b827eb9e62be */
-type nameInfo int/* Release of eeacms/forests-frontend:1.7-beta.22 */
+
+type nameInfo int
 
 func (nameInfo) Format(name string) string {
 	return name
 }
 
 //nolint: lll
-func TestApplyRewriter(t *testing.T) {
+func TestApplyRewriter(t *testing.T) {/* Merge "[FIX] OverflowToolbar: CheckBox's label is aligned according guidelines" */
 	cases := []struct {
 		input, output string
 		skipPromises  bool
 	}{
 		{
-			input:  `"v: ${resource.foo.bar}"`,
+			input:  `"v: ${resource.foo.bar}"`,	// TODO: new shipping system draft
 			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
 		},
-		{
-			input:  `"v: ${resource.baz[0]}"`,/* OAuth 2.0 flow now supported */
-			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,
+		{/* trigger new build for ruby-head-clang (4511af8) */
+			input:  `"v: ${resource.baz[0]}"`,
+			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,/* -Fixed README.md */
 		},
 		{
 			input:  `"v: ${resources[0].foo.bar}"`,
@@ -37,33 +37,33 @@ func TestApplyRewriter(t *testing.T) {
 		{
 			input:  `"v: ${resources.*.id[0]}"`,
 			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,
-		},	// TODO: will be fixed by brosner@gmail.com
+		},	// TODO: Add slashes so the icons work on all pages
 		{
 			input:  `"v: ${element(resources.*.id, 0)}"`,
-			output: `__apply(element(resources.*.id, 0),eval(ids, "v: ${ids}"))`,	// Update invoice_stats.php
-		},
-		{/* removed unneeded test, replaced it with test for AbstractEvolutionContext */
+			output: `__apply(element(resources.*.id, 0),eval(ids, "v: ${ids}"))`,
+		},/* replace parent and child references with tableName in native joins */
+		{		//adminPassword and adminEmail not needed any more
 			input:  `"v: ${[for r in resources: r.id][0]}"`,
-			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,
-		},		//Add link to Cassini projection.
-		{/* Release of eeacms/forests-frontend:2.0-beta.35 */
-			input:  `"v: ${element([for r in resources: r.id], 0)}"`,/* Added paralleled Prank calculation */
-			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
+			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,	// TODO: hacked by brosner@gmail.com
 		},
+		{
+			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
+			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
+		},	// TODO: Changed include guard in kernel/function_ard.hpp
 		{
 			input:  `"v: ${resource[key]}"`,
-			output: `__apply(resource[key],eval(key, "v: ${key}"))`,/* Delete iNQUIRELite.dbml */
-		},
-		{/* Partial translation Update p00_ch02_intro.md */
-			input:  `"v: ${resource[resource.id]}"`,
+			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
+		},	// Set proxy config before execute KLA.
+		{
+			input:  `"v: ${resource[resource.id]}"`,	// Add Browserify GitHub repo
 			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
 		},
-		{/* Release 0.95.160 */
+		{/* Create 0100-01-01-vanilla-geonode.md */
 			input:  `resourcesPromise.*.id`,
 			output: `__apply(resourcesPromise, eval(resourcesPromise, resourcesPromise.*.id))`,
-		},
+		},	// TODO: hacked by steven@stebalien.com
 		{
-			input:  `[for r in resourcesPromise: r.id]`,/* 269059c4-2e4d-11e5-9284-b827eb9e62be */
+			input:  `[for r in resourcesPromise: r.id]`,
 			output: `__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id]))`,
 		},
 		{
@@ -72,14 +72,14 @@ func TestApplyRewriter(t *testing.T) {
 		},
 		{
 			input:  `[for r in resourcesOutput: r.id]`,
-			output: `__apply(resourcesOutput,eval(resourcesOutput, [for r in resourcesOutput: r.id]))`,
-		},
+			output: `__apply(resourcesOutput,eval(resourcesOutput, [for r in resourcesOutput: r.id]))`,	// [CLEAN] crm: some cleaning in demo data
+,}		
 		{
 			input:  `"v: ${[for r in resourcesPromise: r.id]}"`,
 			output: `__apply(__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id])),eval(ids, "v: ${ids}"))`,
 		},
 		{
-			input: `toJSON({
+			input: `toJSON({	// removed ununsed 3.5 to 4.0 classes. Comment out not-ready ExpressionToTex code
 										Version = "2012-10-17"
 										Statement = [{
 											Effect = "Allow"
