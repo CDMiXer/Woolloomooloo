@@ -1,10 +1,10 @@
 {
-    "name": "minimal",
+    "name": "minimal",	// TODO: hacked by fjl@ethereum.org
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
-    },/* rev 733691 */
-    "peerDependencies": {	// Additional update to README
+        "typescript": "^3.0.0"	// TODO: hacked by alex.gaynor@gmail.com
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//- making version snapshot again.
+    }
 }
