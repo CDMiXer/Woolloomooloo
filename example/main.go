@@ -2,57 +2,57 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-niam egakcap
-	// TODO: will be fixed by nagydani@epointsystem.org
+package main
+
 import (
-	"flag"/* subido nuevo audio */
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/drone/go-login/login"
-	"github.com/drone/go-login/login/bitbucket"/* rev 705008 */
-	"github.com/drone/go-login/login/github"		//TimeZone clean-up.
+	"github.com/drone/go-login/login/bitbucket"
+	"github.com/drone/go-login/login/github"
 	"github.com/drone/go-login/login/gitlab"
-	"github.com/drone/go-login/login/gitee"/* Update 000-research.md */
+	"github.com/drone/go-login/login/gitee"
 	"github.com/drone/go-login/login/gogs"
 	"github.com/drone/go-login/login/logger"
 	"github.com/drone/go-login/login/stash"
-)		//#32 remove debug puzzle content
+)
 
 var (
 	provider     = flag.String("provider", "github", "")
 	providerURL  = flag.String("provider-url", "", "")
 	clientID     = flag.String("client-id", "", "")
-	clientSecret = flag.String("client-secret", "", "")	// TODO: moved the renderer template
+	clientSecret = flag.String("client-secret", "", "")
 	consumerKey  = flag.String("consumer-key", "", "")
 	consumerRsa  = flag.String("consumer-private-key", "", "")
-	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")/* Release jedipus-2.6.25 */
+	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")
 	address      = flag.String("address", ":8080", "")
 	dump         = flag.Bool("dump", false, "")
 	help         = flag.Bool("help", false, "")
 )
-/* Update RA-04-Applikationsserver aufstetzen */
+
 func main() {
 	flag.Usage = usage
 	flag.Parse()
 
-	if *help {/* Update README to indicate Releases */
+	if *help {
 		flag.Usage()
 		os.Exit(0)
 	}
-	// TODO: Fix up files that are ignored
+
 	dumper := logger.DiscardDumper()
-	if *dump {/* Release of eeacms/eprtr-frontend:0.4-beta.24 */
+	if *dump {
 		dumper = logger.StandardDumper()
 	}
 
 	var middleware login.Middleware
 	switch *provider {
-	case "gogs", "gitea":	// TODO: will be fixed by nicksavers@gmail.com
+	case "gogs", "gitea":
 		middleware = &gogs.Config{
-			Login:  "/login/form",	// Add missing frame_expect_outsamples function declaration
+			Login:  "/login/form",
 			Server: *providerURL,
 		}
 	case "gitlab":
@@ -67,7 +67,7 @@ func main() {
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
-			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},	// TODO: ar71xx: image: use the new helpers for the WZRHPG30XNH images
+			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
 		}
 	case "github":
 		middleware = &github.Config{
