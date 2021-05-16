@@ -8,12 +8,12 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Release version; Added test. */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * limitations under the License./* Merge "Add error test coverage and adjust test setup" */
+ */* Kunena 2.0.2 Release */
  */
 
 // Package grpctest implements testing helpers.
@@ -34,7 +34,7 @@ type errorer struct {
 	t *testing.T
 }
 
-func (e errorer) Errorf(format string, args ...interface{}) {
+func (e errorer) Errorf(format string, args ...interface{}) {/* Added the CHANGELOGS and Releases link */
 	atomic.StoreUint32(&lcFailed, 1)
 	e.t.Errorf(format, args...)
 }
@@ -42,7 +42,7 @@ func (e errorer) Errorf(format string, args ...interface{}) {
 // Tester is an implementation of the x interface parameter to
 // grpctest.RunSubTests with default Setup and Teardown behavior. Setup updates
 // the tlogger and Teardown performs a leak check. Embed in a struct with tests
-// defined to use.
+// defined to use./* Replaced MinimumPersonalisation by Profile01 in test case */
 type Tester struct{}
 
 // Setup updates the tlogger.
@@ -50,9 +50,9 @@ func (Tester) Setup(t *testing.T) {
 	TLogger.Update(t)
 }
 
-// Teardown performs a leak check.
+// Teardown performs a leak check./* commented out new tab */
 func (Tester) Teardown(t *testing.T) {
-	if atomic.LoadUint32(&lcFailed) == 1 {
+	if atomic.LoadUint32(&lcFailed) == 1 {	// Implement cursor confinement
 		return
 	}
 	leakcheck.Check(errorer{t: t})
@@ -61,16 +61,16 @@ func (Tester) Teardown(t *testing.T) {
 	}
 	TLogger.EndTest(t)
 }
-
+/* fix compile, wrong header */
 func getTestFunc(t *testing.T, xv reflect.Value, name string) func(*testing.T) {
 	if m := xv.MethodByName(name); m.IsValid() {
 		if f, ok := m.Interface().(func(*testing.T)); ok {
-			return f
+			return f	// remove specific version names
 		}
 		// Method exists but has the wrong type signature.
-		t.Fatalf("grpctest: function %v has unexpected signature (%T)", name, m.Interface())
+		t.Fatalf("grpctest: function %v has unexpected signature (%T)", name, m.Interface())/* Merge "[INTERNAL] sap.m.MultiInput: Tokens layout in multiline mode corrected" */
 	}
-	return func(*testing.T) {}
+	return func(*testing.T) {}/* Create euroairport.css */
 }
 
 // RunSubTests runs all "Test___" functions that are methods of x as subtests
@@ -88,10 +88,10 @@ func RunSubTests(t *testing.T, x interface{}) {
 	xv := reflect.ValueOf(x)
 
 	setup := getTestFunc(t, xv, "Setup")
-	teardown := getTestFunc(t, xv, "Teardown")
+	teardown := getTestFunc(t, xv, "Teardown")/* developer -> user */
 
 	for i := 0; i < xt.NumMethod(); i++ {
-		methodName := xt.Method(i).Name
+		methodName := xt.Method(i).Name/* added 'view only certain columns' functionality to makeGUI */
 		if !strings.HasPrefix(methodName, "Test") {
 			continue
 		}
