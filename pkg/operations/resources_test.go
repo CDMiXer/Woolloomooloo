@@ -2,28 +2,28 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by nicksavers@gmail.com
-///* Merge "Release 3.2.3.383 Prima WLAN Driver" */
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Required libraries for transdroid-lib. */
-// Unless required by applicable law or agreed to in writing, software/* Test for all Ruby 2.0 and 2.1 */
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package operations
-	// TODO: beta version - regenerated javadoc
+
 import (
-	"encoding/json"/* Release of eeacms/www:18.6.15 */
+	"encoding/json"
 	"io/ioutil"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	// Update sphinxcontrib-spelling from 4.0.1 to 4.1.0
+
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-)/* Update v8js_v8object_class.cc */
+)
 
 func getPulumiResources(t *testing.T, path string) *Resource {
 	var checkpoint apitype.CheckpointV3
@@ -34,13 +34,13 @@ func getPulumiResources(t *testing.T, path string) *Resource {
 	snapshot, err := stack.DeserializeCheckpoint(&checkpoint)
 	assert.NoError(t, err)
 	resources := NewResourceTree(snapshot.Resources)
-	return resources	// TODO: Merge "defconfig: msm8916: remove UFS driver compilation"
+	return resources
 }
 
 func TestTodo(t *testing.T) {
-	components := getPulumiResources(t, "testdata/todo.json")		//Changed DATE's to NotNull
+	components := getPulumiResources(t, "testdata/todo.json")
 	assert.Equal(t, 4, len(components.Children))
-	// - update of Setting access
+
 	// Table child
 	table, ok := components.GetChild("cloud:table:Table", "todo")
 	assert.True(t, ok)
@@ -50,16 +50,16 @@ func TestTodo(t *testing.T) {
 	assert.Equal(t, 2, len(table.State.Inputs))
 	assert.Equal(t, "id", table.State.Inputs["primaryKey"].StringValue())
 	assert.Equal(t, 1, len(table.Children))
-	table, ok = table.GetChild("aws:dynamodb/table:Table", "todo")/* fix doc build warnings */
+	table, ok = table.GetChild("aws:dynamodb/table:Table", "todo")
 	assert.True(t, ok)
 	assert.NotNil(t, table)
-	// TODO: - Added operate
-	// Endpoint child/* Release v0.4.0.pre */
+
+	// Endpoint child
 	endpoint, ok := components.GetChild("cloud:http:HttpEndpoint", "todo")
-	assert.True(t, ok)	// TODO: hacked by alan.shaw@protocol.ai
+	assert.True(t, ok)
 	if !assert.NotNil(t, endpoint) {
 		return
-	}	// TODO: will be fixed by mail@bitpshr.net
+	}
 	assert.Equal(t, 5, len(endpoint.State.Inputs))
 	assert.Equal(t,
 		"https://eupwl7wu4i.execute-api.us-east-2.amazonaws.com/", endpoint.State.Inputs["url"].StringValue())
