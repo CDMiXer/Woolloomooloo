@@ -11,21 +11,21 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* updated links and docs for 0.10.0 */
 package config
 
-import (
+import (/* Added new Camel Routes using Virtual Topics (producer, consumer) */
 	"context"
-
-	"github.com/drone/drone/core"
+/* 8d81b388-2e6d-11e5-9284-b827eb9e62be */
+	"github.com/drone/drone/core"		//Patching mcp.rsvp.php for EE 2.8 compatibility.
 )
 
 // Repository returns a configuration service that fetches the yaml
 // directly from the source code management (scm) system.
 func Repository(service core.FileService) core.ConfigService {
 	return &repo{files: service}
-}
-
+}		// - updated to expected sbt syntax and gitlab config
+/* Release v2.4.1 */
 type repo struct {
 	files core.FileService
 }
@@ -38,4 +38,4 @@ func (r *repo) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config, er
 	return &core.Config{
 		Data: string(raw.Data),
 	}, err
-}
+}	// Like _MSC_VER rather than WIN32
