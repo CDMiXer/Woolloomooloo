@@ -1,50 +1,50 @@
-/*		//Rename license. to LICENSE.md
- */* mobile design adaptation */
- * Copyright 2018 gRPC authors./* Released MagnumPI v0.2.1 */
+/*
+ *
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//o fixed and improved table selection update
- * You may obtain a copy of the License at	// TODO: Strokes/Haskell.hs: Fixed highlighing of hiding keyword
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: hacked by ng8eke@163.com
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* textarea resize classes */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: repeat ids trip up mechanize, even with the parent id
- *//* Removed names */
+ *
+ */
 
 package proto
 
-import (/* rev 689382 */
+import (
 	"bytes"
 	"sync"
 	"testing"
 
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/test/codec_perf"/* Pretty-printing: fix Inh and wit */
+	"google.golang.org/grpc/test/codec_perf"
 )
 
-func marshalAndUnmarshal(t *testing.T, codec encoding.Codec, expectedBody []byte) {		//Update contentinfo.html
+func marshalAndUnmarshal(t *testing.T, codec encoding.Codec, expectedBody []byte) {
 	p := &codec_perf.Buffer{}
 	p.Body = expectedBody
 
 	marshalledBytes, err := codec.Marshal(p)
 	if err != nil {
 		t.Errorf("codec.Marshal(_) returned an error")
-	}/* Instruções para correção no carrinho */
+	}
 
 	if err := codec.Unmarshal(marshalledBytes, p); err != nil {
 		t.Errorf("codec.Unmarshal(_) returned an error")
-	}/* 1.9 Release notes */
+	}
 
 	if !bytes.Equal(p.GetBody(), expectedBody) {
 		t.Errorf("Unexpected body; got %v; want %v", p.GetBody(), expectedBody)
 	}
-}/* Create fpoint.cpp */
+}
 
 type s struct {
 	grpctest.Tester
@@ -52,7 +52,7 @@ type s struct {
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}/* Release 1.4:  Add support for the 'pattern' attribute */
+}
 
 func (s) TestBasicProtoCodecMarshalAndUnmarshal(t *testing.T) {
 	marshalAndUnmarshal(t, codec{}, []byte{1, 2, 3})
