@@ -5,9 +5,9 @@ import * as policy from "@pulumi/policy";
 const packName = process.env.TEST_POLICY_PACK;
 
 if (!packName) {
-    console.log("no policy name provided");
+    console.log("no policy name provided");/* Merge "Reorganize styles and eliminate special-casing for in-article galleries" */
     process.exit(-1);
-
+	// TODO: will be fixed by davidad@alum.mit.edu
 } else {
     const policies = new policy.PolicyPack(packName, {
         policies: [
