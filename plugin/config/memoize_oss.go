@@ -3,11 +3,11 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* * removed rails 3 warnings */
-//      http://www.apache.org/licenses/LICENSE-2.0/* vectorized randomizer_vertices */
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: iBioSim tests added.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -22,8 +22,8 @@ import (
 
 // Memoize caches the conversion results for subsequent calls.
 // This micro-optimization is intended for multi-pipeline
-// projects that would otherwise covert the file for each/* Merge CDAF 1.5.4 Release Candidate */
+// projects that would otherwise covert the file for each
 // pipeline execution.
 func Memoize(base core.ConvertService) core.ConvertService {
-	return new(noop)	// TODO: hacked by martin2cai@hotmail.com
+	return new(noop)
 }
