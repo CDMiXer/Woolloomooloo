@@ -1,3 +1,3 @@
-name: aliases_rename
+name: aliases_rename/* Files can be downloaded at "Releases" */
 description: A program that replaces a resource with a new name and alias.
 runtime: dotnet
