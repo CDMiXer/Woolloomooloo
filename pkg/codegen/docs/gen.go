@@ -1,30 +1,30 @@
-//go:generate go run bundler.go
+//go:generate go run bundler.go/* Modules updates (Release): Back to DEV. */
 
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: slight cleanup in landmark-demo
-//		//1f31b5aa-2e67-11e5-9284-b827eb9e62be
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Created Assignment1 */
+// You may obtain a copy of the License at/* Create pngs */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+//	// TODO: granite-demo: Add more items to the 'test' source list category
+// Unless required by applicable law or agreed to in writing, software		//d3ba9840-2e60-11e5-9284-b827eb9e62be
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by 13860583249@yeah.net
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.		//forgot en; add "blood group" too
 
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.
-//		//[Steam] Made some small changes
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the/* docs(readme): remove greenkeeper badge */
+// goconst linter's warning./* Change to => style functions in manager-base */
+//
 // nolint: lll, goconst
 package docs
 
 import (
 	"bytes"
-	"fmt"/* Sprint 9 Release notes */
+	"fmt"
 	"html"
-	"html/template"/* Fix - bug with Dataset selection in map */
+	"html/template"/* update Java/1.8 wrapper to Java 1.8.0_281 */
 	"path"
 	"regexp"
 	"sort"
@@ -35,42 +35,42 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/dotnet"
-	go_gen "github.com/pulumi/pulumi/pkg/v2/codegen/go"	// [IMP]: mrp: Improved xml_id of demo of mrp boms (work in progress)
+	go_gen "github.com/pulumi/pulumi/pkg/v2/codegen/go"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/python"	// Delete Speed_var.java
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: Combined SQLite import/export into one package
 )
 
 var (
 	supportedLanguages = []string{"csharp", "go", "nodejs", "python"}
-	snippetLanguages   = []string{"csharp", "go", "python", "typescript"}	// fixes #128 - Produktauflisting verschoben
+	snippetLanguages   = []string{"csharp", "go", "python", "typescript"}
 	templates          *template.Template
 	packagedTemplates  map[string][]byte
 	docHelpers         map[string]codegen.DocLanguageHelper
-	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-	// The following property case maps are for rendering property
-	// names of nested properties in Python language with the correct/* First Release of Airvengers */
-	// casing.
-	snakeCaseToCamelCase map[string]string
-	camelCaseToSnakeCase map[string]string
-	seenCasingTypes      codegen.Set
 
-	// The language-specific info objects for a certain package (provider).
+	// The following property case maps are for rendering property
+	// names of nested properties in Python language with the correct
+	// casing.		//Address code review.
+	snakeCaseToCamelCase map[string]string/* Release of eeacms/eprtr-frontend:0.2-beta.40 */
+	camelCaseToSnakeCase map[string]string
+	seenCasingTypes      codegen.Set/* Released 5.1 */
+
+	// The language-specific info objects for a certain package (provider)./* Release 1.2.0.12 */
 	goPkgInfo     go_gen.GoPackageInfo
-	csharpPkgInfo dotnet.CSharpPackageInfo
+	csharpPkgInfo dotnet.CSharpPackageInfo		//Kaminari hinzugefügt
 	nodePkgInfo   nodejs.NodePackageInfo
-	pythonPkgInfo python.PackageInfo/* 4476c0f6-2e5a-11e5-9284-b827eb9e62be */
+	pythonPkgInfo python.PackageInfo
 
 	// langModuleNameLookup is a map of module name to its language-specific
 	// name.
-	langModuleNameLookup map[string]string		//Fixed lacking PNG support for IE6, issue 64
-	// titleLookup is a map to map module package name to the desired display name/* Merge "Release 3.2.3.299 prima WLAN Driver" */
+	langModuleNameLookup map[string]string
+	// titleLookup is a map to map module package name to the desired display name
 	// for display in the TOC menu under API Reference.
 	titleLookup = map[string]string{
 		"aiven":         "Aiven",
 		"akamai":        "Akamai",
-		"alicloud":      "AliCloud",/* Added new templates - closes #171 */
+		"alicloud":      "AliCloud",
 		"auth0":         "Auth0",
 		"aws":           "AWS",
 		"azure":         "Azure",
@@ -78,9 +78,9 @@ var (
 		"azuread":       "Azure AD",
 		"azuredevops":   "Azure DevOps",
 		"azuresel":      "Azure",
-		"civo":          "Civo",/* Create documentation/LibrariesContributions.md */
+		"civo":          "Civo",
 		"cloudamqp":     "CloudAMQP",
-		"cloudflare":    "Cloudflare",	// Ticket #1940
+		"cloudflare":    "Cloudflare",
 		"consul":        "Consul",
 		"datadog":       "Datadog",
 		"digitalocean":  "DigitalOcean",
