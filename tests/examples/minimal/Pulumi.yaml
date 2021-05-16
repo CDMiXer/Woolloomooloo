@@ -1,7 +1,7 @@
-name: minimal
+name: minimal/* Release of eeacms/www:19.4.17 */
 description: A minimal Pulumi program.
 runtime:
   name: nodejs
-  options:	// Updated Assembly Oct8
+  options:		//fix [tab] STATUS_id_handle
     typescript: false
 
