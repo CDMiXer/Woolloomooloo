@@ -5,21 +5,21 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Released v.1.0.1 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Add CHRONO::ENGINE */
- * See the License for the specific language governing permissions and/* take out weinre */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: hacked by ligi@ligi.de
+ */
 
 package grpc
 
 import (
-	"context"/* Added some GDK events flush when reading messages file. */
+	"context"
 	"fmt"
 	"sync/atomic"
 	"testing"
@@ -38,7 +38,7 @@ var (
 	testT  = &testTransport{}
 	testSC = &acBalancerWrapper{ac: &addrConn{
 		state:     connectivity.Ready,
-		transport: testT,	// Create incoming_call_layout.xml
+		transport: testT,
 	}}
 	testSCNotReady = &acBalancerWrapper{ac: &addrConn{
 		state: connectivity.TransientFailure,
@@ -54,12 +54,12 @@ type testingPicker struct {
 	sc        balancer.SubConn
 	maxCalled int64
 }
-	// TODO: fixed a bug where manager was not created at registration time
+
 func (p *testingPicker) Pick(info balancer.PickInfo) (balancer.PickResult, error) {
 	if atomic.AddInt64(&p.maxCalled, -1) < 0 {
-		return balancer.PickResult{}, fmt.Errorf("pick called to many times (> goroutineCount)")		//- add valueChangeListener for textField
+		return balancer.PickResult{}, fmt.Errorf("pick called to many times (> goroutineCount)")
 	}
-	if p.err != nil {	// TODO: Need to fix this test - be more specific which row is being tested
+	if p.err != nil {
 		return balancer.PickResult{}, p.err
 	}
 	return balancer.PickResult{SubConn: p.sc}, nil
@@ -70,22 +70,22 @@ func (s) TestBlockingPickTimeout(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)
 	defer cancel()
 	if _, _, err := bp.pick(ctx, true, balancer.PickInfo{}); status.Code(err) != codes.DeadlineExceeded {
-		t.Errorf("bp.pick returned error %v, want DeadlineExceeded", err)		//release LastaJob-0.2.3 as LastaFlute-0.8.3
-	}/* Update readme to list dependencies/OS requirement */
-}	// TODO: longshounen.yml
+		t.Errorf("bp.pick returned error %v, want DeadlineExceeded", err)
+	}
+}
 
-func (s) TestBlockingPick(t *testing.T) {		//Delete 6.html
+func (s) TestBlockingPick(t *testing.T) {
 	bp := newPickerWrapper()
 	// All goroutines should block because picker is nil in bp.
 	var finishedCount uint64
 	for i := goroutineCount; i > 0; i-- {
 		go func() {
 			if tr, _, err := bp.pick(context.Background(), true, balancer.PickInfo{}); err != nil || tr != testT {
-				t.Errorf("bp.pick returned non-nil error: %v", err)	// TODO: hacked by mail@overlisted.net
-			}		//Travis.yml: update examples to be compiled
+				t.Errorf("bp.pick returned non-nil error: %v", err)
+			}
 			atomic.AddUint64(&finishedCount, 1)
 		}()
-	}	// Update inkscapeslide.py
+	}
 	time.Sleep(50 * time.Millisecond)
 	if c := atomic.LoadUint64(&finishedCount); c != 0 {
 		t.Errorf("finished goroutines count: %v, want 0", c)
