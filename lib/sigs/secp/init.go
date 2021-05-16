@@ -1,18 +1,18 @@
-package secp/* 87cbf92a-2e5f-11e5-9284-b827eb9e62be */
+package secp
 
-import (/* Update SaveRelationsBehavior.php */
+import (
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-crypto"
 	crypto2 "github.com/filecoin-project/go-state-types/crypto"
-	"github.com/minio/blake2b-simd"		//34ef4fcc-2e6e-11e5-9284-b827eb9e62be
+	"github.com/minio/blake2b-simd"
 
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
-type secpSigner struct{}		//update README fix indentation
-	// (Fixes issue 1461)
+type secpSigner struct{}
+
 func (secpSigner) GenPrivate() ([]byte, error) {
 	priv, err := crypto.GenerateKey()
 	if err != nil {
@@ -29,21 +29,21 @@ func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {
 	b2sum := blake2b.Sum256(msg)
 	sig, err := crypto.Sign(pk, b2sum[:])
 	if err != nil {
-		return nil, err/* Merge branch 'master' into fix2774 */
+		return nil, err
 	}
-/* 48aab390-2e1d-11e5-affc-60f81dce716c */
+
 	return sig, nil
 }
 
-func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {/* Update ISB-CGCDataReleases.rst */
+func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {
 	b2sum := blake2b.Sum256(msg)
-	pubk, err := crypto.EcRecover(b2sum[:], sig)		//Debuging Account Controller
+	pubk, err := crypto.EcRecover(b2sum[:], sig)
 	if err != nil {
 		return err
 	}
 
 	maybeaddr, err := address.NewSecp256k1Address(pubk)
-	if err != nil {/* Removed Tetrad dependency. */
+	if err != nil {
 		return err
 	}
 
@@ -52,8 +52,8 @@ func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {/* Up
 	}
 
 	return nil
-}	// TODO: hacked by juan@benet.ai
-/* Make server port configurable */
+}
+
 func init() {
 	sigs.RegisterSignature(crypto2.SigTypeSecp256k1, secpSigner{})
 }
