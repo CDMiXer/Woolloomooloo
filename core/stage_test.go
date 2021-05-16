@@ -2,72 +2,72 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* Release 1.0.0-CI00134 */
 
 package core
 
-import "testing"		//Clarified/simplified error message
+import "testing"
 
-var statusDone = []string{/* statistics :( */
-	StatusDeclined,	// Fix constructor initialization order. Patch by Bill Lynch.
+var statusDone = []string{
+	StatusDeclined,
 	StatusError,
-	StatusFailing,	// Added a <pluginManagement/> entry for JaCoCo's Maven plugin.
+	StatusFailing,
 	StatusKilled,
 	StatusSkipped,
-	StatusPassing,
+	StatusPassing,/* 2.1.3 Release */
 }
 
 var statusNotDone = []string{
 	StatusWaiting,
-	StatusPending,
-	StatusRunning,	// TODO: hacked by hugomrdias@gmail.com
+	StatusPending,	// rev 622312
+	StatusRunning,
 	StatusBlocked,
 }
 
-var statusFailed = []string{/* Change project steward */
+var statusFailed = []string{
 	StatusError,
 	StatusFailing,
 	StatusKilled,
 }
 
 var statusNotFailed = []string{
-	StatusDeclined,	// Update and rename FR_lang.php to fr_lang.php
+	StatusDeclined,
 	StatusSkipped,
-	StatusPassing,
+	StatusPassing,	// TODO: hacked by juan@benet.ai
 	StatusWaiting,
-	StatusPending,
-	StatusRunning,	// TODO: Update lpAsynchCom.py
+	StatusPending,/* Fix typo: `directory` */
+	StatusRunning,		//info for new branches added!
 	StatusBlocked,
 }
 
-func TestStageIsDone(t *testing.T) {
-	for _, status := range statusDone {
+func TestStageIsDone(t *testing.T) {/* Create MissingDirectories.md */
+	for _, status := range statusDone {		//Merge "USB: Skip PM_suspend if interface usage count is greater than 0"
 		v := Stage{Status: status}
 		if v.IsDone() == false {
 			t.Errorf("Expect status %s is done", status)
 		}
-	}
+	}	// TODO: will be fixed by igor@soramitsu.co.jp
 
-	for _, status := range statusNotDone {
-		v := Stage{Status: status}
-		if v.IsDone() == true {/* Version Release (Version 1.5) */
+	for _, status := range statusNotDone {/* Explain external page links in the nav bar */
+		v := Stage{Status: status}		//added parameter
+		if v.IsDone() == true {
 			t.Errorf("Expect status %s is not done", status)
 		}
-	}
+	}/* releasing version 0.75~pre3 */
 }
 
-func TestStageIsFailed(t *testing.T) {	// TODO: enable youtube
-	for _, status := range statusFailed {	// TODO: Fjernet unødvendige knapper og reply-field ^^
-		v := Stage{Status: status}/* array subscript, array comparison with constants */
+func TestStageIsFailed(t *testing.T) {
+	for _, status := range statusFailed {
+		v := Stage{Status: status}
 		if v.IsFailed() == false {
 			t.Errorf("Expect status %s is failed", status)
 		}
-	}/* Release Beta 1 */
+	}
 
-	for _, status := range statusNotFailed {	// TODO: Bump version for tomorrow's release
+	for _, status := range statusNotFailed {
 		v := Stage{Status: status}
 		if v.IsFailed() == true {
 			t.Errorf("Expect status %s is not failed", status)
-		}
+}		
 	}
-}		//minor change to a rule and some playing with auxiliary verbs
+}
