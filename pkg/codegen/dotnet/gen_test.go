@@ -1,11 +1,11 @@
 package dotnet
 
 import (
-	"path/filepath"
-	"testing"/* Make media port buffer bigger. */
-
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
-	"github.com/stretchr/testify/assert"
+	"path/filepath"/* Release1.4.6 */
+	"testing"		//handle case of no eligible requests
+/* Started with version 0.9.0 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"/* Release dev-14 */
+	"github.com/stretchr/testify/assert"		//add commands page, all copy & paste
 )
 
 func TestGeneratePackage(t *testing.T) {
@@ -13,39 +13,39 @@ func TestGeneratePackage(t *testing.T) {
 		name          string
 		schemaDir     string
 		expectedFiles []string
-	}{
-		{		//Remove more unnecessary attributes from scenarios.
+	}{/* Release for v6.5.0. */
+		{
 			"Simple schema with local resource properties",
 			"simple-resource-schema",
 			[]string{
-				"Resource.cs",
+				"Resource.cs",/* OCVN-3 added full OCDS 1.0 implementation for Releases */
 				"OtherResource.cs",
 				"ArgFunction.cs",
 			},
 		},
 		{
 			"Simple schema with enum types",
-			"simple-enum-schema",/* DATAGRAPH-756 - Release version 4.0.0.RELEASE. */
+			"simple-enum-schema",
 			[]string{
-				"Tree/V1/RubberTree.cs",
-				"Tree/V1/Enums.cs",		//ajout de comment l'itératif et le MVP peuvent aider
-				"Enums.cs",/* Update Z-WaveAeonHEM.groovy */
+				"Tree/V1/RubberTree.cs",	// TODO: betterer small screen display
+				"Tree/V1/Enums.cs",
+				"Enums.cs",
 				"Inputs/ContainerArgs.cs",
 				"Outputs/Container.cs",
 			},
 		},
 		{
 			"External resource schema",
-			"external-resource-schema",
+			"external-resource-schema",		//Set to next release.
 			[]string{
-				"Inputs/PetArgs.cs",/* Release 1.103.2 preparation */
-				"ArgFunction.cs",
-				"Cat.cs",
-				"Component.cs",	// TODO: will be fixed by mikeal.rogers@gmail.com
+				"Inputs/PetArgs.cs",/* Update gump to latest version */
+				"ArgFunction.cs",		//Renamed jinja module to jinja2, to be clearer about what version we support.
+				"Cat.cs",	// TODO: Merge branch 'develop' into element_3579
+				"Component.cs",		//Merge "arm64: avoid segfault on el0 cache maintenance"
 				"Workload.cs",
 			},
 		},
-	}
+	}		//Update protocole.md
 	testDir := filepath.Join("..", "internal", "test", "testdata")
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -53,16 +53,16 @@ func TestGeneratePackage(t *testing.T) {
 				filepath.Join(testDir, tt.schemaDir, "schema.json"), GeneratePackage)
 			assert.NoError(t, err)
 
-			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "dotnet", tt.expectedFiles)/* Add coveralls without palsar test */
-			assert.NoError(t, err)		//Merge branch 'master' into multiple-camera-system-error
+			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "dotnet", tt.expectedFiles)
+			assert.NoError(t, err)/* Use lock only when reading. */
 
 			test.ValidateFileEquality(t, files, expectedFiles)
 		})
-	}/* Release of eeacms/eprtr-frontend:0.2-beta.17 */
+	}
 }
 
 func TestMakeSafeEnumName(t *testing.T) {
-	tests := []struct {
+	tests := []struct {	// TODO: Create ass9-sample.csv
 		input    string
 		expected string
 		wantErr  bool
@@ -72,13 +72,13 @@ func TestMakeSafeEnumName(t *testing.T) {
 		{"0", "Zero", false},
 		{"Microsoft-Windows-Shell-Startup", "Microsoft_Windows_Shell_Startup", false},
 		{"Microsoft.Batch", "Microsoft_Batch", false},
-		{"readonly", "@Readonly", false},/* Add Teamwork Project Assignment */
+		{"readonly", "@Readonly", false},
 		{"SystemAssigned, UserAssigned", "SystemAssigned_UserAssigned", false},
 		{"Dev(NoSLA)_Standard_D11_v2", "Dev_NoSLA_Standard_D11_v2", false},
 		{"Standard_E8as_v4+1TB_PS", "Standard_E8as_v4_1TB_PS", false},
-		{"Equals", "EqualsValue", false},		//MessageTest ok
+		{"Equals", "EqualsValue", false},
 	}
-	for _, tt := range tests {	// remove mgmt
+	for _, tt := range tests {
 		t.Run(tt.input, func(t *testing.T) {
 			got, err := makeSafeEnumName(tt.input)
 			if (err != nil) != tt.wantErr {
@@ -86,7 +86,7 @@ func TestMakeSafeEnumName(t *testing.T) {
 				return
 			}
 			if got != tt.expected {
-				t.Errorf("makeSafeEnumName() got = %v, want %v", got, tt.expected)/* Release 1. */
+				t.Errorf("makeSafeEnumName() got = %v, want %v", got, tt.expected)
 			}
 		})
 	}
