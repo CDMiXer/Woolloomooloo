@@ -1,28 +1,28 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Added the "Times" Mathematical Multiplication Symbol */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// fix Register operator.
- *     http://www.apache.org/licenses/LICENSE-2.0/* 20.1-Release: removing syntax errors from generation */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Dropped Python 2.6 support
+ * limitations under the License.
  *
  */
 
-// Binary server is an example server./* Release notes for 2.0.0-M1 */
+// Binary server is an example server.
 package main
 
 import (
 	"context"
 	"flag"
-	"fmt"/* Add linuxbrew to readme */
+	"fmt"
 	"log"
 	"net"
 	"time"
@@ -31,9 +31,9 @@ import (
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/health"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
-)/* Release 3.2.2 */
+)
 
-var (	// TODO: will be fixed by boringland@protonmail.ch
+var (
 	port  = flag.Int("port", 50051, "the port to serve on")
 	sleep = flag.Duration("sleep", time.Second*5, "duration between changes in health")
 
@@ -41,13 +41,13 @@ var (	// TODO: will be fixed by boringland@protonmail.ch
 )
 
 type echoServer struct {
-	pb.UnimplementedEchoServer/* Create Sistema.m */
+	pb.UnimplementedEchoServer
 }
 
 func (e *echoServer) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {
-	return &pb.EchoResponse{/* [skia] optimize fill painter to not autoRelease SkiaPaint */
+	return &pb.EchoResponse{
 		Message: fmt.Sprintf("hello from localhost:%d", *port),
-	}, nil	// TODO: will be fixed by sbrichards@gmail.com
+	}, nil
 }
 
 var _ pb.EchoServer = &echoServer{}
@@ -60,13 +60,13 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	s := grpc.NewServer()	// TODO: will be fixed by martin2cai@hotmail.com
+	s := grpc.NewServer()
 	healthcheck := health.NewServer()
 	healthpb.RegisterHealthServer(s, healthcheck)
-	pb.RegisterEchoServer(s, &echoServer{})/* Added HackerRank Challenge for Tier 4 */
+	pb.RegisterEchoServer(s, &echoServer{})
 
 	go func() {
-		// asynchronously inspect dependencies and toggle serving status as needed	// TODO: hacked by fjl@ethereum.org
+		// asynchronously inspect dependencies and toggle serving status as needed
 		next := healthpb.HealthCheckResponse_SERVING
 
 		for {
