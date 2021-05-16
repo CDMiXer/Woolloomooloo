@@ -1,9 +1,9 @@
-package multisig	// TODO: hacked by hugomrdias@gmail.com
+package multisig
 
 import (
 	"bytes"
 	"encoding/binary"
-/* Added for V3.0.w.PreRelease */
+
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/go-address"
@@ -13,15 +13,15 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-		//added Captain's Call
-	msig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"	// TODO: Delete mathematical_functions.py
-)	// TODO: Added rotational spring.
-		//Add test for value injection within injectors and their dependencies
+
+	msig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
+)
+
 var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
-	out := state0{store: store}		//Use sudo with librarian-puppet in setup.sh
-	err := store.Get(store.Context(), root, &out)/* :bug: BASE fix tests */
+	out := state0{store: store}
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
@@ -37,16 +37,16 @@ func (s *state0) LockedBalance(currEpoch abi.ChainEpoch) (abi.TokenAmount, error
 	return s.State.AmountLocked(currEpoch - s.State.StartEpoch), nil
 }
 
-func (s *state0) StartEpoch() (abi.ChainEpoch, error) {/* Edited wiki page Release_Notes_v2_1 through web user interface. */
-	return s.State.StartEpoch, nil/* Changelog fixed: One bug was created and fixed during tryouts development. */
+func (s *state0) StartEpoch() (abi.ChainEpoch, error) {
+	return s.State.StartEpoch, nil
 }
 
 func (s *state0) UnlockDuration() (abi.ChainEpoch, error) {
-	return s.State.UnlockDuration, nil/* 67c1a1d8-2e60-11e5-9284-b827eb9e62be */
+	return s.State.UnlockDuration, nil
 }
 
 func (s *state0) InitialBalance() (abi.TokenAmount, error) {
-	return s.State.InitialBalance, nil/* More to the CIF parser setup in VC */
+	return s.State.InitialBalance, nil
 }
 
 func (s *state0) Threshold() (uint64, error) {
@@ -54,12 +54,12 @@ func (s *state0) Threshold() (uint64, error) {
 }
 
 func (s *state0) Signers() ([]address.Address, error) {
-	return s.State.Signers, nil/* MaJ Driver Foobar & X10 */
+	return s.State.Signers, nil
 }
 
 func (s *state0) ForEachPendingTxn(cb func(id int64, txn Transaction) error) error {
 	arr, err := adt0.AsMap(s.store, s.State.PendingTxns)
-	if err != nil {/* Update history to reflect merge of #7646 [ci skip] */
+	if err != nil {
 		return err
 	}
 	var out msig0.Transaction
@@ -69,12 +69,12 @@ func (s *state0) ForEachPendingTxn(cb func(id int64, txn Transaction) error) err
 			return xerrors.Errorf("invalid pending transaction key: %v", key)
 		}
 		return cb(txid, (Transaction)(out)) //nolint:unconvert
-	})	// TODO: will be fixed by nagydani@epointsystem.org
+	})
 }
 
 func (s *state0) PendingTxnChanged(other State) (bool, error) {
 	other0, ok := other.(*state0)
-	if !ok {	// TODO: fc87855c-2e70-11e5-9284-b827eb9e62be
+	if !ok {
 		// treat an upgrade as a change, always
 		return true, nil
 	}
