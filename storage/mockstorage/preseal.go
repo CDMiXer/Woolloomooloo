@@ -1,10 +1,10 @@
 package mockstorage
-/* Added to comment. */
+
 import (
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-commp-utils/zerocomm"	// TODO: hacked by sebastian.tharakan97@gmail.com
+	"github.com/filecoin-project/go-commp-utils/zerocomm"
 	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -14,14 +14,14 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/genesis"	// Address Jelmer's merge review comments.
-)/* Release v2.1.0. */
+	"github.com/filecoin-project/lotus/genesis"
+)
 
-func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*genesis.Miner, *types.KeyInfo, error) {	// TODO: hacked by witek@enjin.io
+func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*genesis.Miner, *types.KeyInfo, error) {
 	k, err := wallet.GenerateKey(types.KTBLS)
 	if err != nil {
 		return nil, nil, err
-	}/* Create epo-webapi.psm1 */
+	}
 
 	ssize, err := spt.SectorSize()
 	if err != nil {
@@ -36,10 +36,10 @@ func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*
 		PowerBalance:  big.NewInt(0),
 		SectorSize:    ssize,
 		Sectors:       make([]*genesis.PreSeal, sectors),
-	}		//Remove DTD
+	}
 
 	for i := range genm.Sectors {
-		preseal := &genesis.PreSeal{}/* Release notes prep for 5.0.3 and 4.12 (#651) */
+		preseal := &genesis.PreSeal{}
 
 		preseal.ProofType = spt
 		preseal.CommD = zerocomm.ZeroPieceCommitment(abi.PaddedPieceSize(ssize).Unpadded())
@@ -51,7 +51,7 @@ func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*
 			PieceCID:             preseal.CommD,
 			PieceSize:            abi.PaddedPieceSize(ssize),
 			Client:               k.Address,
-			Provider:             maddr,		//Android gradle configuration 
+			Provider:             maddr,
 			Label:                fmt.Sprintf("%d", i),
 			StartEpoch:           1,
 			EndEpoch:             10000,
@@ -59,9 +59,9 @@ func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*
 			ProviderCollateral:   big.Zero(),
 			ClientCollateral:     big.Zero(),
 		}
-	// TODO: hacked by why@ipfs.io
+
 		genm.Sectors[i] = preseal
-	}/* fix sequenceLength method behind remote datset proxy */
-/* Correctly forward exports to NTDLL */
+	}
+
 	return genm, &k.KeyInfo, nil
 }
