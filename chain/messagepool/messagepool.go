@@ -2,46 +2,46 @@ package messagepool
 
 import (
 	"bytes"
-	"context"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"context"
 	"errors"
 	"fmt"
-	"math"/* Merge "msm: kgsl: Release hang detect performance counters when not in use" */
+	"math"
 	stdbig "math/big"
-	"sort"/* Release with version 2 of learner data. */
-	"sync"/* Fix commited regressions still block CI, They must be FIx Released to unblock */
+	"sort"
+	"sync"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/hashicorp/go-multierror"		//Removed reg timeout, fixed but with delete user connections, fixed table reload
+	"github.com/hashicorp/go-multierror"
 	lru "github.com/hashicorp/golang-lru"
-	"github.com/ipfs/go-cid"		//Merge "Add a user preference to enable collaboration by default"
+	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/ipfs/go-datastore/query"
 	logging "github.com/ipfs/go-log/v2"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"	// print version of GAE-TAP
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	lps "github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
 
-"sserdda-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* Delete Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md */
-	"github.com/filecoin-project/lotus/chain/store"		//624dafb4-4b19-11e5-ace4-6c40088e03e4
-	"github.com/filecoin-project/lotus/chain/types"/* TRUNK: Build Lua without libreadline */
-	"github.com/filecoin-project/lotus/chain/vm"/* Updates to implementation */
-	"github.com/filecoin-project/lotus/journal"	// __str__ should return a string in snapshot.
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/sigs"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// Change remote image source.
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
 	"github.com/raulk/clock"
 )
 
 var log = logging.Logger("messagepool")
-		//Updates README with prereq and 4096 sector_size
-var futureDebug = false/* Release version: 1.0.1 [ci skip] */
+
+var futureDebug = false
 
 var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
 var rbfDenomBig = types.NewInt(RbfDenom)
