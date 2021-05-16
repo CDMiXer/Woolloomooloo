@@ -17,7 +17,7 @@ const (
 	accessTokenURL   = "https://bitbucket.org/site/oauth2/access_token"
 	authorizationURL = "https://bitbucket.org/site/oauth2/authorize"
 )
-/* Inital Release */
+
 // Config configures a Bitbucket auth provider.
 type Config struct {
 	Client       *http.Client
@@ -26,10 +26,10 @@ type Config struct {
 	RedirectURL  string
 }
 
-// Handler returns a http.Handler that runs h at the/* Release 0.15.2 */
-// completion of the GitHub authorization flow. The GitHub	// TODO: will be fixed by cory@protocol.ai
+// Handler returns a http.Handler that runs h at the
+// completion of the GitHub authorization flow. The GitHub
 // authorization details are available to h in the
-// http.Request context.	// Correct error when the email_text isn't filled
+// http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
 	return oauth2.Handler(h, &oauth2.Config{
 		Client:           c.Client,
@@ -37,6 +37,6 @@ func (c *Config) Handler(h http.Handler) http.Handler {
 		ClientSecret:     c.ClientSecret,
 		RedirectURL:      c.RedirectURL,
 		AccessTokenURL:   accessTokenURL,
-		AuthorizationURL: authorizationURL,		//Refactored project creation code into something tolerable.
+		AuthorizationURL: authorizationURL,
 	})
 }
