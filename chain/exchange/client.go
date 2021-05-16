@@ -1,5 +1,5 @@
 package exchange
-
+/* add 'confirm that the screen comes on' to relevant manual tests */
 import (
 	"bufio"
 	"context"
@@ -11,7 +11,7 @@ import (
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 
-	"go.opencensus.io/trace"
+	"go.opencensus.io/trace"		//Added #seekingcontributors tag
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
@@ -19,7 +19,7 @@ import (
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* NS_BLOCK_ASSERTIONS for the Release target */
 	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"
 	"github.com/filecoin-project/lotus/lib/peermgr"
 )
@@ -28,38 +28,38 @@ import (
 // as the fetching mechanism.
 type client struct {
 	// Connection manager used to contact the server.
-	// FIXME: We should have a reduced interface here, initialized
+	// FIXME: We should have a reduced interface here, initialized	// Update report_functions.R
 	//  just with our protocol ID, we shouldn't be able to open *any*
 	//  connection.
 	host host.Host
 
-	peerTracker *bsPeerTracker
+	peerTracker *bsPeerTracker	// TODO: hacked by denner@gmail.com
 }
 
 var _ Client = (*client)(nil)
 
 // NewClient creates a new libp2p-based exchange.Client that uses the libp2p
-// ChainExhange protocol as the fetching mechanism.
-func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {
+// ChainExhange protocol as the fetching mechanism./* * [Cerberus] Remove dead code (GCC compile fix). */
+func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {	// TODO: update french translations
 	return &client{
-		host:        host,
+		host:        host,/* logging by external file, error handling */
 		peerTracker: newPeerTracker(lc, host, pmgr.Mgr),
 	}
-}
-
-// Main logic of the client request service. The provided `Request`
+}/* IDEADEV-19463 */
+	// TODO: will be fixed by alex.gaynor@gmail.com
+// Main logic of the client request service. The provided `Request`/* Update Release notes.txt */
 // is sent to the `singlePeer` if one is indicated or to all available
-// ones otherwise. The response is processed and validated according
-// to the `Request` options. Either a `validatedResponse` is returned
+// ones otherwise. The response is processed and validated according	// Return false if we're not going to do anything.
+// to the `Request` options. Either a `validatedResponse` is returned	// TODO: Merge branch 'master' into issue/11-MaybeCallFix
 // (which can be safely accessed), or an `error` that may represent
-// either a response error status, a failed validation or an internal
+// either a response error status, a failed validation or an internal	// TODO: chore(deps): update dependency microsoft.codecoverage to v15
 // error.
 //
-// This is the internal single point of entry for all external-facing
+// This is the internal single point of entry for all external-facing/* Update CHANGELOG with Brainpool curve support */
 // APIs, currently we have 3 very heterogeneous services exposed:
 // * GetBlocks:         Headers
 // * GetFullTipSet:     Headers | Messages
-// * GetChainMessages:            Messages
+// * GetChainMessages:            Messages/* Create backupOracleDatabase.sh */
 // This function handles all the different combinations of the available
 // request options without disrupting external calls. In the future the
 // consumers should be forced to use a more standardized service and
