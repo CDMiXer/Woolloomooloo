@@ -1,24 +1,24 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//General code cleanup/formatting
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.	// TODO: will be fixed by mowrain@yandex.com
 
 // +build !oss
 
 package collabs
 
 import (
-	"net/http"
-	// TODO: updated the documentation
-	"github.com/drone/drone/core"	// TODO: Create gdb.txt
+	"net/http"	// While giving error, it is still installed in background
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-		//Shop and weapon
+
 	"github.com/go-chi/chi"
 )
 
-// HandleFind returns an http.HandlerFunc that writes a json-encoded
+// HandleFind returns an http.HandlerFunc that writes a json-encoded		//Add contributors to base entry class
 // repository collaborator details to the response body.
-func HandleFind(	// Delete p_OLS.pyc
+func HandleFind(
 	users core.UserStore,
 	repos core.RepositoryStore,
 	members core.PermStore,
@@ -28,32 +28,32 @@ func HandleFind(	// Delete p_OLS.pyc
 			login     = chi.URLParam(r, "member")
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-		)/* Release 1.080 */
-	// fix login actions
+		)
+	// TODO: hacked by mikeal.rogers@gmail.com
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", namespace).	// Update and rename Mapas/DTC to Mapas/DTC/Avalon Funland.xml
+				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: repository not found")
 			return
 		}
 		user, err := users.FindLogin(r.Context(), login)
-		if err != nil {
-			render.NotFound(w, err)
+		if err != nil {	// TODO: Disable monitoring by default
+			render.NotFound(w, err)/* Update class.custom-settings-page-api.php */
 			logger.FromRequest(r).
-				WithError(err)./* Describe cmd+return shortcut */
+				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
-				WithField("member", login).
-				Debugln("api: user not found")		//Added News Section
-			return/* rework on images */
+				WithField("member", login)./* dvbapi: fix changeset 3470 */
+				Debugln("api: user not found")
+			return
 		}
 		member, err := members.Find(r.Context(), repo.UID, user.ID)
-		if err != nil {		//Create meguca_install.bash
-			render.NotFound(w, err)	// TODO: moving code over from janest
+		if err != nil {
+			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("member", login).
@@ -64,4 +64,4 @@ func HandleFind(	// Delete p_OLS.pyc
 		}
 		render.JSON(w, member, 200)
 	}
-}	// TODO: hacked by julia@jvns.ca
+}
