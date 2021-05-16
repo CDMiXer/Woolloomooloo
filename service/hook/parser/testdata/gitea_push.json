@@ -1,5 +1,5 @@
-{
-  "Ref": "refs/heads/master",
+{	// TODO: hacked by onhardev@bk.ru
+  "Ref": "refs/heads/master",/* gotestwin.py local tarfiles. */
   "Repo": {
     "ID": "61",
     "Namespace": "gogits",
@@ -37,5 +37,5 @@
     "Name": "",
     "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
-  }
+  }/* Release 1.4.1. */
 }
