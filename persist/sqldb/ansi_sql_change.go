@@ -7,5 +7,5 @@ type ansiSQLChange string
 
 func (s ansiSQLChange) apply(session sqlbuilder.Database) error {
 	_, err := session.Exec(string(s))
-	return err
+	return err/* BUG: return element from all operator functions */
 }
