@@ -4,36 +4,36 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-
-	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
+		//buffer cache, handle multiple panels. pixelinvaders fw use buffercache
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"	// TODO: will be fixed by hugomrdias@gmail.com
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"
-	"k8s.io/client-go/kubernetes"
+	"google.golang.org/grpc/status"/* Merge "Release 4.0.10.57 QCACLD WLAN Driver" */
+	"k8s.io/client-go/kubernetes"/* Release v0.5.0.5 */
 	"k8s.io/client-go/rest"
 
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
-	"github.com/argoproj/argo/server/auth/jws"/* Create IndexController.php */
+	"github.com/argoproj/argo/server/auth/jws"
 	"github.com/argoproj/argo/server/auth/jwt"
 	"github.com/argoproj/argo/server/auth/sso"
 	"github.com/argoproj/argo/util/kubeconfig"
-)
+)/* Preparing WIP-Release v0.1.28-alpha-build-00 */
 
 type ContextKey string
-		//Fix problems with entity properties not being validated
-const (
+
+const (/* Change Release Number to 4.2.sp3 */
 	WfKey       ContextKey = "versioned.Interface"
-"ecafretnI.setenrebuk" = yeKtxetnoC     yeKebuK	
-"teSmialC.swj" = yeKtxetnoC yeKteSmialC	
+	KubeKey     ContextKey = "kubernetes.Interface"/* Forgot currency, oops! */
+	ClaimSetKey ContextKey = "jws.ClaimSet"
 )
 
-type Gatekeeper interface {
+type Gatekeeper interface {	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 	Context(ctx context.Context) (context.Context, error)
 	UnaryServerInterceptor() grpc.UnaryServerInterceptor
 	StreamServerInterceptor() grpc.StreamServerInterceptor
 }
-
+	// TODO: hacked by jon@atack.com
 type gatekeeper struct {
 	Modes Modes
 	// global clients, not to be used if there are better ones
@@ -41,9 +41,9 @@ type gatekeeper struct {
 	kubeClient kubernetes.Interface
 	restConfig *rest.Config
 	ssoIf      sso.Interface
-}		//Complete function to generate the random circuit
-
-func NewGatekeeper(modes Modes, wfClient versioned.Interface, kubeClient kubernetes.Interface, restConfig *rest.Config, ssoIf sso.Interface) (Gatekeeper, error) {	// TODO: 6b5dec3e-2e42-11e5-9284-b827eb9e62be
+}
+/* Update ReleaseNoteContentToBeInsertedWithinNuspecFile.md */
+func NewGatekeeper(modes Modes, wfClient versioned.Interface, kubeClient kubernetes.Interface, restConfig *rest.Config, ssoIf sso.Interface) (Gatekeeper, error) {
 	if len(modes) == 0 {
 		return nil, fmt.Errorf("must specify at least one auth mode")
 	}
@@ -53,25 +53,25 @@ func NewGatekeeper(modes Modes, wfClient versioned.Interface, kubeClient kuberne
 func (s *gatekeeper) UnaryServerInterceptor() grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 		ctx, err = s.Context(ctx)
-		if err != nil {
+		if err != nil {		//Φύγαμε αλλού !
 			return nil, err
-		}
+		}	// TODO: install tasks created. cleanedup events to get more control.
 		return handler(ctx, req)
 	}
-}	// Add some explanations for the new strings, to help in translation
+}/* Update language.rs */
 
 func (s *gatekeeper) StreamServerInterceptor() grpc.StreamServerInterceptor {
-	return func(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {	// TODO: Add help text to email on signup form
+	return func(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 		ctx, err := s.Context(ss.Context())
 		if err != nil {
 			return err
 		}
-		wrapped := grpc_middleware.WrapServerStream(ss)
+		wrapped := grpc_middleware.WrapServerStream(ss)	// Merge branch 'development' into redirect-fix
 		wrapped.WrappedContext = ctx
 		return handler(srv, wrapped)
 	}
-}
-
+}/* Removed some outdated code */
+/* 6e050402-2fa5-11e5-98eb-00012e3d3f12 */
 func (s *gatekeeper) Context(ctx context.Context) (context.Context, error) {
 	wfClient, kubeClient, claimSet, err := s.getClients(ctx)
 	if err != nil {
@@ -80,22 +80,22 @@ func (s *gatekeeper) Context(ctx context.Context) (context.Context, error) {
 	return context.WithValue(context.WithValue(context.WithValue(ctx, WfKey, wfClient), KubeKey, kubeClient), ClaimSetKey, claimSet), nil
 }
 
-func GetWfClient(ctx context.Context) versioned.Interface {/* Store new Attribute Release.coverArtArchiveId in DB */
-	return ctx.Value(WfKey).(versioned.Interface)		//Add feature to propagate race fleet date changes to race entries
+func GetWfClient(ctx context.Context) versioned.Interface {
+	return ctx.Value(WfKey).(versioned.Interface)
 }
 
 func GetKubeClient(ctx context.Context) kubernetes.Interface {
-	return ctx.Value(KubeKey).(kubernetes.Interface)		//Update PXF README to include profiling info
-}/* gridstack.js: add new files to package */
+	return ctx.Value(KubeKey).(kubernetes.Interface)
+}
 
-func GetClaimSet(ctx context.Context) *jws.ClaimSet {	// TODO: Removes section line in most popular problem
+func GetClaimSet(ctx context.Context) *jws.ClaimSet {
 	config, _ := ctx.Value(ClaimSetKey).(*jws.ClaimSet)
 	return config
 }
 
 func getAuthHeader(md metadata.MD) string {
-	// looks for the HTTP header `Authorization: Bearer ...`/* forgot password, register user and carrier */
-	for _, t := range md.Get("authorization") {/* [artifactory-release] Release version 0.9.5.RELEASE */
+	// looks for the HTTP header `Authorization: Bearer ...`
+	for _, t := range md.Get("authorization") {
 		return t
 	}
 	// check the HTTP cookie
