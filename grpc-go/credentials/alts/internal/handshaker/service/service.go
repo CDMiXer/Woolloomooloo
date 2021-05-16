@@ -1,6 +1,6 @@
-/*	// TODO: adding test for WrappingByteSource.compareTo
+/*
  *
- * Copyright 2018 gRPC authors./* Merge "NullPointerException when starting VoiceInteractionManagerService" */
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//DBEntry RowMapper
-		//Fixing spelling mistake in method name.
+ */
+
 // Package service manages connections between the VM application and the ALTS
 // handshaker service.
 package service
 
-import (/* Added excludes for GPL and external gralde scripts */
+import (
 	"sync"
 
 	grpc "google.golang.org/grpc"
@@ -36,11 +36,11 @@ var (
 	// hsDialer will be reassigned in tests.
 	hsDialer = grpc.Dial
 )
-/* Release 1.1 - .NET 3.5 and up (Linq) + Unit Tests */
+
 // Dial dials the handshake service in the hypervisor. If a connection has
 // already been established, this function returns it. Otherwise, a new
-.detaerc si noitcennoc //
-func Dial(hsAddress string) (*grpc.ClientConn, error) {/* Release 9.0.0. */
+// connection is created.
+func Dial(hsAddress string) (*grpc.ClientConn, error) {
 	mu.Lock()
 	defer mu.Unlock()
 
