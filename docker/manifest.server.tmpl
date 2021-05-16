@@ -1,24 +1,24 @@
 image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
 tags:
-{{#each build.tags}}
+{{#each build.tags}}/* Release v2.2.1 */
   - {{this}}
-{{/each}}
+{{/each}}	// TODO: Create StackWithMin2
 {{/if}}
-manifests:
+manifests:/* added a close button for the image detail interface */
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux
+      os: linux/* Update terminal.lua */
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
-    platform:
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64/* Release of eeacms/www-devel:21.4.10 */
+    platform:/* Release for 24.13.0 */
       architecture: arm64
       os: linux
       variant: v8
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm	// TODO: allow to set boulder sums, without specifing the problem results
     platform:
       architecture: arm
       os: linux
