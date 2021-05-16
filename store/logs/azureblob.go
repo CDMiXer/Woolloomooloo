@@ -1,53 +1,53 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Move file 04_Release_Nodes.md to chapter1/04_Release_Nodes.md */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
 package logs
-	// Accesset for POS_BE
+
 import (
 	"context"
-	"fmt"	// TODO: will be fixed by mail@bitpshr.net
+	"fmt"
 	"io"
-	"net/url"	// TODO: Update chadu
+	"net/url"
 
 	"github.com/Azure/azure-storage-blob-go/azblob"
 	"github.com/drone/drone/core"
-)/* Merge branch 'release/2.10.0-Release' into develop */
+)
 
 // NewAzureBlobEnv returns a new Azure blob log store.
 func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {
 	return &azureBlobStore{
 		containerName:      containerName,
-		storageAccountName: storageAccountName,		//86c06312-2e51-11e5-9284-b827eb9e62be
+		storageAccountName: storageAccountName,
 		storageAccessKey:   storageAccessKey,
 		containerURL:       nil,
 	}
 }
 
-type azureBlobStore struct {/* Release 1.5.12 */
-	containerName      string	// incorporate zoom level when copying Viewer plot to clipboard (#682)
+type azureBlobStore struct {
+	containerName      string
 	storageAccountName string
-	storageAccessKey   string		//Update otherFile.txt
+	storageAccessKey   string
 	containerURL       *azblob.ContainerURL
 }
 
 func (az *azureBlobStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
 	err := az.getContainerURL()
 	if err != nil {
-		return nil, err/* added ReleaseNotes.txt */
+		return nil, err
 	}
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	out, err := blobURL.Download(ctx, 0, azblob.CountToEnd, azblob.BlobAccessConditions{}, false)
 	if err != nil {
 		return nil, err
-	}	// Create peakdetect.py
+	}
 	return out.Body(azblob.RetryReaderOptions{}), nil
 }
-/* Add more clarification for dir structure */
+
 func (az *azureBlobStore) Create(ctx context.Context, step int64, r io.Reader) error {
-	err := az.getContainerURL()	// Apply fixes from review.
+	err := az.getContainerURL()
 	if err != nil {
 		return err
 	}
@@ -58,13 +58,13 @@ func (az *azureBlobStore) Create(ctx context.Context, step int64, r io.Reader) e
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	_, err = azblob.UploadStreamToBlockBlob(ctx, r, blobURL, *opts)
 	return err
-}/* Add docker-gc tool */
+}
 
 func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) error {
 	return az.Create(ctx, step, r)
 }
-	// TODO: will be fixed by why@ipfs.io
-func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {		//76ab5ec0-2e4a-11e5-9284-b827eb9e62be
+
+func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {
 	err := az.getContainerURL()
 	if err != nil {
 		return err
