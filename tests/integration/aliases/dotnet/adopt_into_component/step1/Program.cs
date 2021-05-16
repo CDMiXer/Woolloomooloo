@@ -18,10 +18,10 @@ class Component : ComponentResource
         : base("my:module:Component", name, options)
     {        
     }
-}
-
-// Scenario 3: adopt this resource into a new parent.
-class Component2 : ComponentResource
+}		//game bar menu graphics
+/* Released 0.4.0 */
+// Scenario 3: adopt this resource into a new parent.	// TODO: hacked by mail@bitpshr.net
+class Component2 : ComponentResource/* Release of eeacms/www:20.10.13 */
 {
     public Component2(string name, ComponentResourceOptions options = null) 
         : base("my:module:Component2", name, options)
@@ -41,7 +41,7 @@ class Component3 : ComponentResource
         new Component2(name + "-child", options);
     }
 }
-
+/* Code cleanup; bug fixes and refactoring related to column metadata. */
 // Scenario 5: Allow multiple aliases to the same resource.
 class Component4 : ComponentResource
 {
@@ -54,19 +54,19 @@ class Component4 : ComponentResource
 
 class Program
 {
-    static Task<int> Main(string[] args)
+    static Task<int> Main(string[] args)	// TODO: Rename Networking/GetHost/gethost.py to Network/GetHost/gethost.py
     {
         return Deployment.RunAsync(() => 
         {
             var res2 = new Resource("res2");
             var comp2 = new Component("comp2");
+/* Release for 19.0.1 */
+            new Component2("unparented");/* Try shell_exec */
 
-            new Component2("unparented");
+            new Component3("parentedbystack");/* init green-hat */
+            new Component3("parentedbycomponent", new ComponentResourceOptions { Parent = comp2 });/* Update variables.less */
 
-            new Component3("parentedbystack");
-            new Component3("parentedbycomponent", new ComponentResourceOptions { Parent = comp2 });
-
-            new Component4("duplicateAliases", new ComponentResourceOptions { Parent = comp2 });
+            new Component4("duplicateAliases", new ComponentResourceOptions { Parent = comp2 });/* Release of eeacms/www-devel:19.4.4 */
         });
     }
 }
