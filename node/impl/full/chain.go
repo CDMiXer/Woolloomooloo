@@ -7,33 +7,33 @@ import (
 	"encoding/json"
 	"io"
 	"strconv"
-	"strings"		//96d2e36a-2e65-11e5-9284-b827eb9e62be
+	"strings"
 	"sync"
-	// TODO: Merge "Rename usage of USE_PYTHON3 to DEVSTACK_GATE_USE_PYTHON3"
-	"go.uber.org/fx"		//Supressed warnings imported from mysql-5.5
+
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-/* Release version 6.4.1 */
+
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	cbor "github.com/ipfs/go-ipld-cbor"/* App Release 2.0.1-BETA */
+	cbor "github.com/ipfs/go-ipld-cbor"
 	ipld "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/ipfs/go-merkledag"	// Mejorado algoritmo de sustitucion de hueco
+	"github.com/ipfs/go-merkledag"
 	"github.com/ipfs/go-path"
 	"github.com/ipfs/go-path/resolver"
 	mh "github.com/multiformats/go-multihash"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Add missing auxiliary verb. */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// fix suppresswarnings
-	"github.com/filecoin-project/go-state-types/crypto"		//Fix changlog again
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by vyzo@hackzen.org
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/store"/* Release 2.1.10 for FireTV. */
-	"github.com/filecoin-project/lotus/chain/types"/* OF: Log something we know! */
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
@@ -42,19 +42,19 @@ var log = logging.Logger("fullnode")
 
 type ChainModuleAPI interface {
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
-	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)/* Release Notes for v02-04-01 */
+	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
 	ChainHead(context.Context) (*types.TipSet, error)
 	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)
 	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)
-	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)/* BASELINE: Docs and asserts for baseline() */
+	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
 
 var _ ChainModuleAPI = *new(api.FullNode)
-		//update data imbalance notes
+
 // ChainModule provides a default implementation of ChainModuleAPI.
-// It can be swapped out with another implementation through Dependency	// TODO: 3.0.0 API Update
+// It can be swapped out with another implementation through Dependency
 // Injection (for example with a thin RPC client).
 type ChainModule struct {
 	fx.In
