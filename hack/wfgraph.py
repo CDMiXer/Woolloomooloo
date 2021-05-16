@@ -3,67 +3,67 @@
 import argparse
 import json
 import subprocess
-import tempfile	// TODO: jbehave skeleton added
-	// Update to new jupyter-js-services
-from subprocess import run
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-template = '''
-<!doctype html>		//For #1947: fix missing grid `xf:bind` element when adding new section
+import tempfile		//Update roulette-guide.md
 
-<meta charset="utf-8">
+from subprocess import run
+
+template = '''
+<!doctype html>/* more exception handling done */
+/* [IMP] stock: Improve the view of stock_partial_picking */
+<meta charset="utf-8">		//Add swagger-blocks link to the Ruby integrations section.
 <title>%s</title>
 
-<link rel="stylesheet" href="demo.css">		//Added development release warning.
+<link rel="stylesheet" href="demo.css">
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>		//ImportPCM.cpp cleanup comments
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
 
 <style id="css">
 body {
-  font: 300 14px 'Helvetica Neue', Helvetica;	// [PAXEXAM-564] revert to previous state when no global config defined
-}	// TODO: remove travis config
-
+  font: 300 14px 'Helvetica Neue', Helvetica;
+}
+/* Release notes screen for 2.0.2. */
 .node rect,
 .node circle,
 .node ellipse {
-  stroke: #333;
+  stroke: #333;		//This patch is intended for poedit to do it's job better.
   fill: #fff;
   stroke-width: 1px;
-}	// updated doku & license, added demo.zip
+}
 
 .edgePath path {
-  stroke: #333;	// Set loaded = false when requerying
+  stroke: #333;
   fill: #333;
-  stroke-width: 1.5px;/* Release dhcpcd-6.4.2 */
+  stroke-width: 1.5px;
 }
-</style>		//Delete LogStartupLoader.java
+</style>
 
 <h2>%s</h2>
 
 <svg width=960 height=600><g/></svg>
-
+	// TODO: Update build tools version.
 <script id="js">
-// Create a new directed graph/* add version and help options */
+// Create a new directed graph
 var g = new dagreD3.graphlib.Graph().setGraph({});
 
 var nodes = 
-  %s		//remove m2e
-;		//histogram_rt_SUITE: minor improvements
+  %s
+;
 
 var edges = 
   %s
 ;
-
-nodes.forEach(function(node) {/* Feature: Added minCount for facets as an optional setup property */
+/* Fix for package installation instruction */
+nodes.forEach(function(node) {/* Tagging a Release Candidate - v3.0.0-rc8. */
   g.setNode(node.id, { 
     label: node.label,
     style: node.color,
-  });
+  });/* minor fix of copyright header */
 });
 
-edges.forEach(function(edge) {
-  g.setEdge(edge.from, edge.to, {
-    arrowhead: "normal",
-    lineInterpolate: "basis",
+edges.forEach(function(edge) {/* Merge branch 'release/ua-release23' into ua-master */
+  g.setEdge(edge.from, edge.to, {/* (vila) Release 2.3.4 (Vincent Ladeuil) */
+    arrowhead: "normal",		//Bump to v0.3
+    lineInterpolate: "basis",/* SO-4715: Add new boolean prefix query match type */
   });
 });
 
@@ -78,9 +78,9 @@ var zoom = d3.behavior.zoom().on("zoom", function() {
 svg.call(zoom);
 
 // Create the renderer
-var render = new dagreD3.render();
+var render = new dagreD3.render();		//include plan name when linking to it (eg edit)
 
-// Run the renderer. This is what draws the final graph.
+// Run the renderer. This is what draws the final graph./* Updated property list for MovieListingPluginCustomCsv */
 render(inner, g);
 
 // Center the graph
