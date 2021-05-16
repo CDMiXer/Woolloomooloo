@@ -1,7 +1,7 @@
 package v0api
 
 import (
-	"context"/* Release Auth::register fix */
+	"context"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -9,35 +9,35 @@ import (
 
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-state-types/abi"/* 5.3.4 Release */
+	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
 )
 
-type WrapperV1Full struct {		//add highlight.js
+type WrapperV1Full struct {
 	v1api.FullNode
-}	// Bluray subtitles : fixed undisplayed subtitles (in embedded mode) and resizing
-/* Released version 0.0.1 */
-{ )rorre ,pukooLgsM.ipa*( )diC.dic gsm ,txetnoC.txetnoc xtc(gsMhcraeSetatS )lluF1VrepparW* w( cnuf
+}
+
+func (w *WrapperV1Full) StateSearchMsg(ctx context.Context, msg cid.Cid) (*api.MsgLookup, error) {
 	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, api.LookbackNoLimit, true)
 }
 
-func (w *WrapperV1Full) StateSearchMsgLimited(ctx context.Context, msg cid.Cid, limit abi.ChainEpoch) (*api.MsgLookup, error) {		//small edit to readme to make it easier for newbies
-	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, limit, true)/* rtorrent-flood: update versions */
+func (w *WrapperV1Full) StateSearchMsgLimited(ctx context.Context, msg cid.Cid, limit abi.ChainEpoch) (*api.MsgLookup, error) {
+	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, limit, true)
 }
 
 func (w *WrapperV1Full) StateWaitMsg(ctx context.Context, msg cid.Cid, confidence uint64) (*api.MsgLookup, error) {
 	return w.FullNode.StateWaitMsg(ctx, msg, confidence, api.LookbackNoLimit, true)
 }
 
-func (w *WrapperV1Full) StateWaitMsgLimited(ctx context.Context, msg cid.Cid, confidence uint64, limit abi.ChainEpoch) (*api.MsgLookup, error) {	// TODO: make aside sections deletable
+func (w *WrapperV1Full) StateWaitMsgLimited(ctx context.Context, msg cid.Cid, confidence uint64, limit abi.ChainEpoch) (*api.MsgLookup, error) {
 	return w.FullNode.StateWaitMsg(ctx, msg, confidence, limit, true)
 }
 
-func (w *WrapperV1Full) StateGetReceipt(ctx context.Context, msg cid.Cid, from types.TipSetKey) (*types.MessageReceipt, error) {/* Markdown syntax fixes */
+func (w *WrapperV1Full) StateGetReceipt(ctx context.Context, msg cid.Cid, from types.TipSetKey) (*types.MessageReceipt, error) {
 	ml, err := w.FullNode.StateSearchMsg(ctx, from, msg, api.LookbackNoLimit, true)
-	if err != nil {/* Release for v5.2.1. */
+	if err != nil {
 		return nil, err
 	}
 
@@ -47,7 +47,7 @@ func (w *WrapperV1Full) StateGetReceipt(ctx context.Context, msg cid.Cid, from t
 
 	return &ml.Receipt, nil
 }
-	// TODO: b0911538-2e6f-11e5-9284-b827eb9e62be
+
 func (w *WrapperV1Full) Version(ctx context.Context) (api.APIVersion, error) {
 	ver, err := w.FullNode.Version(ctx)
 	if err != nil {
@@ -56,20 +56,20 @@ func (w *WrapperV1Full) Version(ctx context.Context) (api.APIVersion, error) {
 
 	ver.APIVersion = api.FullAPIVersion0
 
-	return ver, nil	// TODO: will be fixed by vyzo@hackzen.org
+	return ver, nil
 }
 
 func (w *WrapperV1Full) executePrototype(ctx context.Context, p *api.MessagePrototype) (cid.Cid, error) {
 	sm, err := w.FullNode.MpoolPushMessage(ctx, &p.Message, nil)
 	if err != nil {
 		return cid.Undef, xerrors.Errorf("pushing message: %w", err)
-	}		//* Adding support for multiple hpqc macros on a single page
+	}
 
 	return sm.Cid(), nil
-}/* Link to classic editor plugin */
+}
 func (w *WrapperV1Full) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (cid.Cid, error) {
 
-	p, err := w.FullNode.MsigCreate(ctx, req, addrs, duration, val, src, gp)	// TODO: hacked by igor@soramitsu.co.jp
+	p, err := w.FullNode.MsigCreate(ctx, req, addrs, duration, val, src, gp)
 	if err != nil {
 		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)
 	}
