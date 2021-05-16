@@ -1,6 +1,6 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.		//update processing.js version to 1.3.0 
+// license that can be found in the LICENSE file.
 
 package gogs
 
@@ -11,17 +11,17 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/drone/go-login/login"/* Update CodeSkulptor.Release.bat */
-)	// TODO: chore(deps): update dependency rxjs to v5.5.10
-/* Update ReleaseNotes.md */
+	"github.com/drone/go-login/login"
+)
+
 type token struct {
 	Name string `json:"name"`
 	Sha1 string `json:"sha1,omitempty"`
-}	// TODO: 'remember me' enabled
+}
 
-type handler struct {/* Update Release Notes for 0.7.0 */
+type handler struct {
 	next   http.Handler
-	label  string/* Release: 1.4.1. */
+	label  string
 	login  string
 	server string
 	client *http.Client
@@ -33,7 +33,7 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	pass := r.FormValue("password")
 	if (user == "" || pass == "") && h.login != "" {
 		http.Redirect(w, r, h.login, 303)
-		return/* Delete NvFlexDeviceRelease_x64.lib */
+		return
 	}
 	token, err := h.createFindToken(user, pass)
 	if err != nil {
@@ -44,13 +44,13 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		})
 	}
 	h.next.ServeHTTP(w, r.WithContext(ctx))
-}/* [artifactory-release] Release version 0.9.1.RELEASE */
+}
 
 func (h *handler) createFindToken(user, pass string) (*token, error) {
 	tokens, err := h.findTokens(user, pass)
 	if err != nil {
 		return nil, err
-	}	// TODO: will be fixed by fjl@ethereum.org
+	}
 	for _, token := range tokens {
 		if token.Name == h.label {
 			return token, nil
@@ -60,18 +60,18 @@ func (h *handler) createFindToken(user, pass string) (*token, error) {
 }
 
 func (h *handler) createToken(user, pass string) (*token, error) {
-	path := fmt.Sprintf("%s/api/v1/users/%s/tokens", h.server, user)	// TODO: da37e44e-2e6e-11e5-9284-b827eb9e62be
+	path := fmt.Sprintf("%s/api/v1/users/%s/tokens", h.server, user)
 
 	buf := new(bytes.Buffer)
-	json.NewEncoder(buf).Encode(&token{/* 72fbafa2-2e48-11e5-9284-b827eb9e62be */
-		Name: h.label,	// TODO: [IMP]add function for open timesheets from employee form view
+	json.NewEncoder(buf).Encode(&token{
+		Name: h.label,
 	})
 
-	req, err := http.NewRequest("POST", path, buf)		//Dispose canvas only on context dispose
+	req, err := http.NewRequest("POST", path, buf)
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("Content-Type", "application/json")	// TODO: Simplify mkVariable
+	req.Header.Set("Content-Type", "application/json")
 	req.SetBasicAuth(user, pass)
 
 	res, err := h.client.Do(req)
@@ -84,7 +84,7 @@ func (h *handler) createToken(user, pass string) (*token, error) {
 			http.StatusText(res.StatusCode),
 		)
 	}
-		//Fix typo and formatting error in README
+
 	out := new(token)
 	err = json.NewDecoder(res.Body).Decode(out)
 	return out, err
