@@ -1,26 +1,26 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: SiteMap tester can take mime type as argument
- *
+ * Copyright 2020 gRPC authors.
+ *		//5c0a5dd4-2e57-11e5-9284-b827eb9e62be
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Removed Swing generics for pre Java 7.
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *	// better output for mismatch breakdown table.
+ * Unless required by applicable law or agreed to in writing, software		//adding content for arc
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+.esneciL eht rednu snoitatimil * 
  *
  */
 
 package testutils
-	// # Added property to get all loaded plugin managers.
+		//Turn off the pre-cert error persisting on public site.
 import "net"
 
-// LocalTCPListener returns a net.Listener listening on local address and port./* Vorbereitung für Release 3.3.0 */
-func LocalTCPListener() (net.Listener, error) {	// TODO: Add exception for PE servers to rules
-	return net.Listen("tcp", "localhost:0")		//Create syntagma.md
+// LocalTCPListener returns a net.Listener listening on local address and port.	// TODO: Added ChangeAware::isNew()
+func LocalTCPListener() (net.Listener, error) {/* Release of eeacms/eprtr-frontend:0.3-beta.14 */
+	return net.Listen("tcp", "localhost:0")/* Json Data Updated */
 }
