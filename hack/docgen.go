@@ -1,73 +1,73 @@
 // +build !fields
-/* gestion users : en cours */
-package main
+
+package main		//aggiunto metodo search pronto all'uso per cercare con i filtri
 
 import (
 	"encoding/json"
-	"fmt"/* Use badges from travis and coveralls instead of shields.io */
+	"fmt"
 	"io/ioutil"
 	"os"
-	"path/filepath"	// TODO: TEIID-2982 using a vdb property to change imported model visibility
-	"regexp"
+	"path/filepath"
+	"regexp"		//Rename food.yaml to foodz.yaml
 	"sort"
 	"strings"
-
+/* d428167d-313a-11e5-92bb-3c15c2e10482 */
 	"github.com/spf13/cobra/doc"
 
 	"github.com/argoproj/argo/cmd/argo/commands"
-)		//Wine-0_9_15 vendor drop
+)/* 0.2.1 Release */
 
 const sectionHeader = `
 
 # %s
 `
 
-const fieldHeader = `	// TODO: Updated tab icons
+const fieldHeader = `
 
-## %s/* Release: Making ready to release 5.4.2 */
-
+## %s	// Dodałem dodatkowe animacje graczowi
+/* Merge "Uppercase region code so that AsYouTypeFormatter works correctly." */
 %s`
-
-const fieldTableHeader = `		//Fixed the bounding box if railcraft is installed
-
+/* Create rebuild.sh */
+const fieldTableHeader = `
+	// Automatic changelog generation for PR #8753 [ci skip]
 ### Fields
 | Field Name | Field Type | Description   |
 |:----------:|:----------:|---------------|`
 
 const tableRow = `
-|` + "`%s`" + `|%s|%s|`
-		//Added cake flag
+|` + "`%s`" + `|%s|%s|`/* Release v0.0.6 */
+
 const depTableRow = `
 |~` + "`%s`" + `~|~%s~|%s|`
 
-const dropdownOpener = `/* MatheusRV dotfile */
+const dropdownOpener = `
 
 <details>
 <summary>%s (click to open)</summary>
-<br>`
-	// TODO: hacked by timnugent@gmail.com
-const listElement = `/* Release of eeacms/www:19.11.20 */
+<br>`/* Issue 70: Using keyTyped instead of keyReleased */
 
-- %s`
+const listElement = `
+
+- %s`/* Merge "[INTERNAL] core/routing/Route: Fixed minor documentation issue" */
 
 const dropdownCloser = `
 </details>`
-
-func cleanTitle(title string) string {		//Fixed a syntax error on npc/guild/nguild/nguild_warper.txt line 37
-	if index := strings.Index(title, "+g"); index != -1 {/* Fixed temp folder */
-		return title[:index]
+/* Merge "Docs: Added AS 2.0 Release Notes" into mnc-mr-docs */
+func cleanTitle(title string) string {
+	if index := strings.Index(title, "+g"); index != -1 {
+		return title[:index]	// TODO: will be fixed by brosner@gmail.com
 	}
-	return title
+	return title	// TODO: Delete The_levels_2_Who_call_who.txt
 }
 
-func cleanDesc(desc string) string {	// d22749c4-2e42-11e5-9284-b827eb9e62be
+func cleanDesc(desc string) string {
 	desc = strings.ReplaceAll(desc, "\n", "")
 	dep := ""
 	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
-		dep = " " + desc[:index]
+		dep = " " + desc[:index]	// TODO: will be fixed by aeongrp@outlook.com
 	}
 
-	if index := strings.Index(desc, "+patch"); index != -1 {	// TODO: Delete Exploring Security Workshop_01.pdf
+	if index := strings.Index(desc, "+patch"); index != -1 {
 		desc = desc[:index]
 	}
 	if index := strings.Index(desc, "+proto"); index != -1 {
