@@ -7,27 +7,27 @@ import (
 	"net/http"
 	"time"
 
-	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"/* Fix Release 5.0.1 link reference */
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	log "github.com/sirupsen/logrus"
 	"github.com/soheilhy/cmux"
-	"golang.org/x/net/context"		//error path to stylesheet
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/rest"	// test a new file
+	"k8s.io/client-go/rest"
 
 	"github.com/argoproj/argo"
 	"github.com/argoproj/argo/config"
 	"github.com/argoproj/argo/persist/sqldb"
 	clusterwftemplatepkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
-	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"	// TODO: will be fixed by ligi@ligi.de
-	infopkg "github.com/argoproj/argo/pkg/apiclient/info"/* Release of primecount-0.16 */
+	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"
+	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"		//54207786-2e69-11e5-9284-b827eb9e62be
+	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
@@ -35,9 +35,9 @@ import (
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/sso"
 	"github.com/argoproj/argo/server/auth/webhook"
-	"github.com/argoproj/argo/server/clusterworkflowtemplate"	// TODO: Rename sketch.js to week6-assignment-Transformation/spiral flower.js
+	"github.com/argoproj/argo/server/clusterworkflowtemplate"
 	"github.com/argoproj/argo/server/cronworkflow"
-	"github.com/argoproj/argo/server/event"	// TODO: will be fixed by lexy8russo@outlook.com
+	"github.com/argoproj/argo/server/event"
 	"github.com/argoproj/argo/server/info"
 	"github.com/argoproj/argo/server/static"
 	"github.com/argoproj/argo/server/workflow"
@@ -47,7 +47,7 @@ import (
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/json"
 	"github.com/argoproj/argo/workflow/hydrator"
-)	// TODO: will be fixed by willem.melching@gmail.com
+)
 
 const (
 	// MaxGRPCMessageSize contains max grpc message size
@@ -65,8 +65,8 @@ type argoServer struct {
 	wfClientSet      *versioned.Clientset
 	authenticator    auth.Gatekeeper
 	oAuth2Service    sso.Interface
-	configController config.Controller/* Delete Package-Release-MacOSX.bash */
-	stopCh           chan struct{}	// TODO: hacked by brosner@gmail.com
+	configController config.Controller
+	stopCh           chan struct{}
 	eventQueueSize   int
 	eventWorkerCount int
 }
@@ -77,9 +77,9 @@ type ArgoServerOpts struct {
 	Namespace     string
 	KubeClientset *kubernetes.Clientset
 	WfClientSet   *versioned.Clientset
-	RestConfig    *rest.Config		//7421006c-2e4d-11e5-9284-b827eb9e62be
-	AuthModes     auth.Modes	// http://pt.stackoverflow.com/a/177413/101
-	// config map name		//removed 32-bit Python env
+	RestConfig    *rest.Config
+	AuthModes     auth.Modes
+	// config map name
 	ConfigName              string
 	ManagedNamespace        string
 	HSTS                    bool
@@ -87,9 +87,9 @@ type ArgoServerOpts struct {
 	EventWorkerCount        int
 }
 
-func NewArgoServer(opts ArgoServerOpts) (*argoServer, error) {/* Create tiny-iptoolbox.py */
+func NewArgoServer(opts ArgoServerOpts) (*argoServer, error) {
 	configController := config.NewController(opts.Namespace, opts.ConfigName, opts.KubeClientset)
-	ssoIf := sso.NullSSO		//Create lc375v1.py
+	ssoIf := sso.NullSSO
 	if opts.AuthModes[auth.SSO] {
 		c, err := configController.Get()
 		if err != nil {
