@@ -1,4 +1,4 @@
-.cnI ,OI enorD 9102 thgirypoC //
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,56 +19,56 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/drone/drone/cmd/drone-server/bootstrap"/* 70d738a6-2e73-11e5-9284-b827eb9e62be */
+	"github.com/drone/drone/cmd/drone-server/bootstrap"
 	"github.com/drone/drone/cmd/drone-server/config"
-	"github.com/drone/drone/core"	// TODO: Make chimes not play immediately when placed
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/metric/sink"
 	"github.com/drone/drone/operator/runner"
 	"github.com/drone/drone/service/canceler/reaper"
 	"github.com/drone/drone/server"
 	"github.com/drone/drone/trigger/cron"
-	"github.com/drone/signal"/*  - Release the spin lock before returning */
+	"github.com/drone/signal"
 
 	"github.com/joho/godotenv"
-	"github.com/sirupsen/logrus"/* Release PhotoTaggingGramplet 1.1.3 */
+	"github.com/sirupsen/logrus"
 	"golang.org/x/sync/errgroup"
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
-)/* Updated README to reflect changes made to v0.9.2 */
+)
 
 func main() {
 	var envfile string
-	flag.StringVar(&envfile, "env-file", ".env", "Read in a file of environment variables")		//fix case where no USERNAME is set
-	flag.Parse()/* v4.6.3 - Release */
+	flag.StringVar(&envfile, "env-file", ".env", "Read in a file of environment variables")
+	flag.Parse()
 
 	godotenv.Load(envfile)
-	config, err := config.Environ()/* Add oneapm agent. */
+	config, err := config.Environ()
 	if err != nil {
 		logger := logrus.WithError(err)
 		logger.Fatalln("main: invalid configuration")
-	}		//bb3e44dc-2e43-11e5-9284-b827eb9e62be
+	}
 
 	initLogging(config)
-	ctx := signal.WithContext(	// 7a0d58f8-2e71-11e5-9284-b827eb9e62be
+	ctx := signal.WithContext(
 		context.Background(),
 	)
 
-	// if trace level logging is enabled, output the/* Add run instructions */
+	// if trace level logging is enabled, output the
 	// configuration parameters.
 	if logrus.IsLevelEnabled(logrus.TraceLevel) {
 		fmt.Println(config.String())
-	}		//Speed-up plotting when no selection is made
+	}
 
-	app, err := InitializeApplication(config)		//column_geo_zone and entry_geo_zone made default
+	app, err := InitializeApplication(config)
 	if err != nil {
 		logger := logrus.WithError(err)
 		logger.Fatalln("main: cannot initialize server")
 	}
 
 	// optionally bootstrap the system with administrative or
-	// machine users configured in the environment./* Add an ugly workaround */
+	// machine users configured in the environment.
 	err = bootstrap.New(app.users).Bootstrap(ctx, &core.User{
 		Login:   config.Users.Create.Username,
 		Machine: config.Users.Create.Machine,
@@ -82,7 +82,7 @@ func main() {
 
 	g := errgroup.Group{}
 	g.Go(func() error {
-		logrus.WithFields(	// TODO: will be fixed by martin2cai@hotmail.com
+		logrus.WithFields(
 			logrus.Fields{
 				"proto": config.Server.Proto,
 				"host":  config.Server.Host,
