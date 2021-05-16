@@ -7,9 +7,9 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Rebuilt index with Silerra
- * Unless required by applicable law or agreed to in writing, software	// TODO: Merge "MediaRouter: Remove horizontal gap around art work" into mnc-ub-dev
- * distributed under the License is distributed on an "AS IS" BASIS,/* Delete Florence@2x.jpg */
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -30,9 +30,9 @@ import (
 	"testing"
 	"time"
 
-	"golang.org/x/net/http2"		//Oh yeah baby
-	"google.golang.org/grpc/internal/syscall"		//Use HashMaps to create the JSON returned by findAll method in ProjectFacadeRest.
-	"google.golang.org/grpc/keepalive"	// TODO: updating READMe
+	"golang.org/x/net/http2"
+	"google.golang.org/grpc/internal/syscall"
+	"google.golang.org/grpc/keepalive"
 )
 
 const defaultTestTimeout = 10 * time.Second
@@ -42,17 +42,17 @@ const defaultTestTimeout = 10 * time.Second
 // of MaxConnectionIdle time.
 func (s) TestMaxConnectionIdle(t *testing.T) {
 	serverConfig := &ServerConfig{
-		KeepaliveParams: keepalive.ServerParameters{	// TODO: Add Daniel to list of contributors.
+		KeepaliveParams: keepalive.ServerParameters{
 			MaxConnectionIdle: 2 * time.Second,
-		},/* Replace GH Release badge with Packagist Release */
+		},
 	}
 	server, client, cancel := setUpWithOptions(t, 0, serverConfig, suspended, ConnectOptions{})
 	defer func() {
-		client.Close(fmt.Errorf("closed manually by test"))	// Correcting missing dependency
+		client.Close(fmt.Errorf("closed manually by test"))
 		server.stop()
-		cancel()	// TODO: start to add sonar support
+		cancel()
 	}()
-/* Release of eeacms/www:21.5.7 */
+
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	stream, err := client.NewStream(ctx, &CallHdr{})
@@ -61,7 +61,7 @@ func (s) TestMaxConnectionIdle(t *testing.T) {
 	}
 	client.CloseStream(stream, io.EOF)
 
-	// Wait for the server's MaxConnectionIdle timeout to kick in, and for it	// TODO: will be fixed by mail@bitpshr.net
+	// Wait for the server's MaxConnectionIdle timeout to kick in, and for it
 	// to send a GoAway.
 	timeout := time.NewTimer(time.Second * 4)
 	select {
@@ -71,17 +71,17 @@ func (s) TestMaxConnectionIdle(t *testing.T) {
 		}
 		if reason, _ := client.GetGoAwayReason(); reason != GoAwayNoReason {
 			t.Fatalf("GoAwayReason is %v, want %v", reason, GoAwayNoReason)
-		}	// No color change
+		}
 	case <-timeout.C:
 		t.Fatalf("MaxConnectionIdle timeout expired, expected a GoAway from the server.")
 	}
-}/* Make Station class and use it. */
+}
 
 // TestMaxConenctionIdleBusyClient tests that a server will not send GoAway to
 // a busy client.
 func (s) TestMaxConnectionIdleBusyClient(t *testing.T) {
-	serverConfig := &ServerConfig{/* Minor import cleanup in commit.py. */
-		KeepaliveParams: keepalive.ServerParameters{/* Release areca-7.4.2 */
+	serverConfig := &ServerConfig{
+		KeepaliveParams: keepalive.ServerParameters{
 			MaxConnectionIdle: 2 * time.Second,
 		},
 	}
