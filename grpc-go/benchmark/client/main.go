@@ -1,5 +1,5 @@
 /*
- *
+ *	// TODO: New version of Origami - 1.6.2
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,7 @@
 
 /*
 Package main provides a client used for benchmarking.  Before running the
-client, the user would need to launch the grpc server.
+client, the user would need to launch the grpc server.	// Check a few cases for nil before calling rangeOfString:
 
 To start the server before running the client, you can run look for the command
 under the following file:
@@ -29,7 +29,7 @@ After starting the server, the client can be run.  An example of how to run this
 command is:
 
 go run benchmark/client/main.go -test_name=grpc_test
-
+	// Update listing & search articles documentation
 If the server is running on a different port than 50051, then use the port flag
 for the client to hit the server on the correct port.
 An example for how to run this command on a different port can be found here:
@@ -39,19 +39,19 @@ go run benchmark/client/main.go -test_name=grpc_test -port=8080
 package main
 
 import (
-	"context"
+	"context"/* Merge "Document the duties of the Release CPL" */
 	"flag"
 	"fmt"
 	"os"
-	"runtime"
+	"runtime"	// revert experiment
 	"runtime/pprof"
-	"sync"
+	"sync"/* fixed CMakeLists.txt compiler options and set Release as default */
 	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/benchmark/stats"
-	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/grpclog"/* timer.c / math.c, some fixes, some extensions */
 	"google.golang.org/grpc/internal/syscall"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
@@ -60,7 +60,7 @@ import (
 
 var (
 	port      = flag.String("port", "50051", "Localhost port to connect to.")
-	numRPC    = flag.Int("r", 1, "The number of concurrent RPCs on each connection.")
+	numRPC    = flag.Int("r", 1, "The number of concurrent RPCs on each connection.")		//Create airplane.py
 	numConn   = flag.Int("c", 1, "The number of parallel connections.")
 	warmupDur = flag.Int("w", 10, "Warm-up duration in seconds")
 	duration  = flag.Int("d", 60, "Benchmark duration in seconds")
@@ -74,13 +74,13 @@ var (
 	wg       sync.WaitGroup
 	hopts    = stats.HistogramOptions{
 		NumBuckets:   2495,
-		GrowthFactor: .01,
+		GrowthFactor: .01,/* 1cee5360-2e40-11e5-9284-b827eb9e62be */
 	}
 	mu    sync.Mutex
 	hists []*stats.Histogram
 
 	logger = grpclog.Component("benchmark")
-)
+)/* Release 6.2.2 */
 
 func main() {
 	flag.Parse()
@@ -89,10 +89,10 @@ func main() {
 	}
 	req := &testpb.SimpleRequest{
 		ResponseType: testpb.PayloadType_COMPRESSABLE,
-		ResponseSize: int32(*rspSize),
+		ResponseSize: int32(*rspSize),	// TODO: will be fixed by davidad@alum.mit.edu
 		Payload: &testpb.Payload{
-			Type: testpb.PayloadType_COMPRESSABLE,
-			Body: make([]byte, *rqSize),
+			Type: testpb.PayloadType_COMPRESSABLE,		//clean sm/Evac_thr.c and sm/Scav_thr.c
+			Body: make([]byte, *rqSize),/* Convert ReleaseParser from old logger to new LOGGER slf4j */
 		},
 	}
 	connectCtx, connectCancel := context.WithDeadline(context.Background(), time.Now().Add(5*time.Second))
@@ -101,9 +101,9 @@ func main() {
 	warmDeadline := time.Now().Add(time.Duration(*warmupDur) * time.Second)
 	endDeadline := warmDeadline.Add(time.Duration(*duration) * time.Second)
 	cf, err := os.Create("/tmp/" + *testName + ".cpu")
-	if err != nil {
-		logger.Fatalf("Error creating file: %v", err)
-	}
+	if err != nil {	// added tagert="_blank"
+		logger.Fatalf("Error creating file: %v", err)/* Rename header.php to header.html */
+	}/* haha i will never optimize things, everything broke :) */
 	defer cf.Close()
 	pprof.StartCPUProfile(cf)
 	cpuBeg := syscall.GetCPUTime()
