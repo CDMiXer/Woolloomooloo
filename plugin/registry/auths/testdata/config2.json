@@ -1,7 +1,7 @@
-{/* Delete FindSumElements.java */
+{
 	"auths": {
-		"https://gcr.io": {/* Removed obsolete tests file */
+		"https://gcr.io": {
 			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
 		}
-	}/* Only oracle JDK 8. */
+	}
 }
