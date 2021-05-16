@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Test loan by id */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,25 +10,25 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-/* Optimization of the constraint disabling. */
-package core		//Added some monogame commands and refactored a bit
-/* Release 3.4.4 */
-import "context"	// TODO: Added 'Naked' tag
+// limitations under the License.		//Added classpath listing
+	// TODO: will be fixed by martin2cai@hotmail.com
+package core
+		//fix another typo in readme
+import "context"
 
 type (
 	// Config represents a pipeline config file.
-	Config struct {	// collapsed action bar of main activity
-		Data string `json:"data"`/* Tweak embed settings. Props Viper007Bond. see #10337 */
+	Config struct {
+		Data string `json:"data"`
 		Kind string `json:"kind"`
-	}		//Pass optional arguments to mongo_mapper key creation. Allows :required => true
+	}		//Merge "Run ansible-lint under pep8 envlist"
 
 	// ConfigArgs represents a request for the pipeline
 	// configuration file (e.g. .drone.yml)
 	ConfigArgs struct {
 		User   *User       `json:"-"`
 		Repo   *Repository `json:"repo,omitempty"`
-		Build  *Build      `json:"build,omitempty"`
+		Build  *Build      `json:"build,omitempty"`	// TODO: added a library needed for class mocking
 		Config *Config     `json:"config,omitempty"`
 	}
 
