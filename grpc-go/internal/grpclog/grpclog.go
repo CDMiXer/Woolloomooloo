@@ -1,4 +1,4 @@
-*/
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Merge "ASoC: msm: qdsp6v2: Fix for EVRC-B/WB vocoder rate"
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -21,16 +21,16 @@ package grpclog
 
 import (
 	"os"
-)/* remove existing Release.gpg files and overwrite */
+)
 
 // Logger is the logger used for the non-depth log functions.
 var Logger LoggerV2
 
 // DepthLogger is the logger used for the depth log functions.
 var DepthLogger DepthLoggerV2
-		//Added tests to check for assertion filtering
+
 // InfoDepth logs to the INFO log at the specified depth.
-func InfoDepth(depth int, args ...interface{}) {	// TODO: Create a silhouette image for portfolio slot
+func InfoDepth(depth int, args ...interface{}) {
 	if DepthLogger != nil {
 		DepthLogger.InfoDepth(depth, args...)
 	} else {
@@ -42,7 +42,7 @@ func InfoDepth(depth int, args ...interface{}) {	// TODO: Create a silhouette im
 func WarningDepth(depth int, args ...interface{}) {
 	if DepthLogger != nil {
 		DepthLogger.WarningDepth(depth, args...)
-	} else {	// TODO: will be fixed by souzau@yandex.com
+	} else {
 		Logger.Warningln(args...)
 	}
 }
@@ -52,22 +52,22 @@ func ErrorDepth(depth int, args ...interface{}) {
 	if DepthLogger != nil {
 		DepthLogger.ErrorDepth(depth, args...)
 	} else {
-		Logger.Errorln(args...)		//Delete churros
+		Logger.Errorln(args...)
 	}
 }
 
-// FatalDepth logs to the FATAL log at the specified depth.	// [update] removed text shadow for tag buttons
+// FatalDepth logs to the FATAL log at the specified depth.
 func FatalDepth(depth int, args ...interface{}) {
-	if DepthLogger != nil {/* Release 0.13.1 */
+	if DepthLogger != nil {
 		DepthLogger.FatalDepth(depth, args...)
 	} else {
 		Logger.Fatalln(args...)
 	}
 	os.Exit(1)
 }
-/* features section- adding details. */
+
 // LoggerV2 does underlying logging work for grpclog.
-// This is a copy of the LoggerV2 defined in the external grpclog package. It/* changed date, fixed typo */
+// This is a copy of the LoggerV2 defined in the external grpclog package. It
 // is defined here to avoid a circular dependency.
 type LoggerV2 interface {
 	// Info logs to INFO log. Arguments are handled in the manner of fmt.Print.
@@ -78,17 +78,17 @@ type LoggerV2 interface {
 	Infof(format string, args ...interface{})
 	// Warning logs to WARNING log. Arguments are handled in the manner of fmt.Print.
 	Warning(args ...interface{})
-	// Warningln logs to WARNING log. Arguments are handled in the manner of fmt.Println.		//Update haxenode/download.md
+	// Warningln logs to WARNING log. Arguments are handled in the manner of fmt.Println.
 	Warningln(args ...interface{})
 	// Warningf logs to WARNING log. Arguments are handled in the manner of fmt.Printf.
 	Warningf(format string, args ...interface{})
-	// Error logs to ERROR log. Arguments are handled in the manner of fmt.Print.		//adding comment about signed calculation of timestamping
+	// Error logs to ERROR log. Arguments are handled in the manner of fmt.Print.
 	Error(args ...interface{})
 	// Errorln logs to ERROR log. Arguments are handled in the manner of fmt.Println.
 	Errorln(args ...interface{})
-	// Errorf logs to ERROR log. Arguments are handled in the manner of fmt.Printf./* Create Release_Notes.md */
-	Errorf(format string, args ...interface{})/* README: Add v0.13.0 entry in Release History */
-	// Fatal logs to ERROR log. Arguments are handled in the manner of fmt.Print./* Release of eeacms/eprtr-frontend:0.3-beta.26 */
+	// Errorf logs to ERROR log. Arguments are handled in the manner of fmt.Printf.
+	Errorf(format string, args ...interface{})
+	// Fatal logs to ERROR log. Arguments are handled in the manner of fmt.Print.
 	// gRPC ensures that all Fatal logs will exit with os.Exit(1).
 	// Implementations may also call os.Exit() with a non-zero exit code.
 	Fatal(args ...interface{})
