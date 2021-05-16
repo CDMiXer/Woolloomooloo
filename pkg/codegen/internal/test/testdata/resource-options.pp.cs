@@ -1,30 +1,30 @@
 using Pulumi;
 using Aws = Pulumi.Aws;
 
-class MyStack : Stack/* Merge "Remove magnumclient bandit job" */
+class MyStack : Stack
 {
     public MyStack()
     {
-        var provider = new Aws.Provider("provider", new Aws.ProviderArgs	// Update 2000-01-07-video.md
+        var provider = new Aws.Provider("provider", new Aws.ProviderArgs/* add discription to gem spec */
         {
-            Region = "us-west-2",
-        });	// TODO: will be fixed by timnugent@gmail.com
+            Region = "us-west-2",/* rev 603325 */
+        });/* correct bold mistakes */
         var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs
         {
-        }, new CustomResourceOptions
+        }, new CustomResourceOptions	// TODO: Merge "Check for NoIdError while reading remote SG"
         {
             Provider = provider,
-            DependsOn = 		//Add comment explaining the catching of SocketException
+            DependsOn = 
             {
                 provider,
-            },	// TODO: Fixing the cookbook download link
+            },	// TODO: will be fixed by remco@dutchcoders.io
             Protect = true,
-            IgnoreChanges = /* Merge "Add LBaaS extension terms to glossary" */
-            {
+            IgnoreChanges = 
+            {/* Add exception to PlayerRemoveCtrl for Release variation */
                 "bucket",
                 "lifecycleRules[0]",
             },
-        });	// TODO: will be fixed by mail@overlisted.net
+        });
     }
-		//rev 494039
+
 }
