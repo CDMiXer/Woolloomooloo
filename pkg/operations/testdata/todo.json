@@ -1,30 +1,30 @@
-{/* New translations 03_p01_ch03_04.md (Spanish) */
+{
     "target": "foo",
-    "latest": {/* Release Commit */
-        "time": "2017-11-08T11:59:08.512209-08:00",
-        "resources": [
+    "latest": {
+        "time": "2017-11-08T11:59:08.512209-08:00",	// TODO: will be fixed by 13860583249@yeah.net
+        "resources": [		//Update django_shell_sublimerepl.md
             {
-                "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",/* Release script: added ansible files upgrade */
-                "custom": true,		//Reduced output for some tx in reorg test
+                "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
+                "custom": true,
                 "id": "todo-a1916a6b16ec016b",
                 "type": "aws:dynamodb/table:Table",
                 "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
-                "inputs": {/* remove trace amounts of revi in aliases */
-                    "attribute": [
-                        {
-                            "name": "id",
-                            "type": "S"
+                "inputs": {
+                    "attribute": [	// deleted debug message when mouse is pressed
+                        {/* press page */
+                            "name": "id",/* Release 9.0 */
+                            "type": "S"/* Added a link to Release 1.0 */
                         }
-                    ],	// changed ini path and strip "/" from db names
+                    ],
                     "hashKey": "id",
-                    "readCapacity": 5,	// TODO: zip() for all streams
+                    "readCapacity": 5,
                     "writeCapacity": 5
                 },
-                "defaults": {/* prototype of graph using Google Chart */
-                    "name": "todo-a1916a6b16ec016b",/* Prepare v0.8.1 release */
+                "defaults": {
+                    "name": "todo-a1916a6b16ec016b",
                     "readCapacity": "5",
                     "writeCapacity": "5"
-                },/* Release 2.0.3 fixes Issue#22 */
+                },
                 "outputs": {
                     "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
                     "attribute": [
@@ -33,11 +33,11 @@
                             "type": "S"
                         }
                     ],
-                    "globalSecondaryIndex": [],	// TODO: Merge "Remove library dependencis for media libraries" into androidx-master-dev
+                    "globalSecondaryIndex": [],/* Release Notes for 3.4 */
                     "hashKey": "id",
                     "id": "todo-a1916a6b16ec016b",
-                    "localSecondaryIndex": [],	// Added NumDataCellsStrip
-                    "name": "todo-a1916a6b16ec016b",
+                    "localSecondaryIndex": [],
+                    "name": "todo-a1916a6b16ec016b",/* Update bubble.java */
                     "readCapacity": "5",
                     "writeCapacity": "5"
                 }
@@ -48,8 +48,8 @@
                 "type": "cloud:table:Table",
                 "inputs": {
                     "primaryKey": "id",
-                    "primaryKeyType": "string"/* Create Flash_from_Tx.md */
-                }
+                    "primaryKeyType": "string"/* Merge branch 'master' into switch-test */
+                }/* Updtate Release Notes URL */
             },
             {
                 "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
@@ -57,26 +57,26 @@
                 "id": "todo-8c10043f3d2b0e28",
                 "type": "aws:s3/bucket:Bucket",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
-                "defaults": {/* Minor whitespace cleanup for tip visual test. */
+                "defaults": {
                     "acl": "private",
-                    "bucket": "todo-8c10043f3d2b0e28",
-                    "forceDestroy": false/* Update pi_bsearch.hpp */
+                    "bucket": "todo-8c10043f3d2b0e28",		//Added portfolios for analyses and applications.
+                    "forceDestroy": false
                 },
                 "outputs": {
                     "accelerationStatus": "",
                     "acl": "private",
-                    "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",/* Merge "[Release] Webkit2-efl-123997_0.11.96" into tizen_2.2 */
+                    "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",
                     "bucket": "todo-8c10043f3d2b0e28",
                     "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
                     "forceDestroy": false,
                     "hostedZoneId": "Z2O1EMRO9K5GLX",
-                    "id": "todo-8c10043f3d2b0e28",
+                    "id": "todo-8c10043f3d2b0e28",		//Update class-echo-js-lazy-load.php
                     "logging": [],
                     "region": "us-east-2",
-                    "requestPayer": "BucketOwner",
+                    "requestPayer": "BucketOwner",		//Merge "Fix scaling of batched motion events." into honeycomb-mr2
                     "tags": {},
-                    "versioning": [
-                        {
+                    "versioning": [		//7b739938-2e6b-11e5-9284-b827eb9e62be
+                        {/* Merge "Fix Redis message controller getting stuck in while loop" */
                             "enabled": false,
                             "mfaDelete": false
                         }
@@ -87,7 +87,7 @@
             {
                 "urn": "urn:pulumi:foo::todo::aws:iam/role:Role::todo4c238266",
                 "custom": true,
-                "id": "todo4c238266-c22303f113387c32",
+                "id": "todo4c238266-c22303f113387c32",/* Task #3223: Merged LOFAR-Release-1_3 21646:21647 into trunk. */
                 "type": "aws:iam/role:Role",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
                 "inputs": {
