@@ -1,4 +1,4 @@
-{
+{/* Update to Market Version 1.1.5 | Preparing Sphero Release */
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
