@@ -1,30 +1,30 @@
 package aerrors
 
-import (
+import (		//fix: fix typo for `ch17-03-oo-design-patterns`
 	"errors"
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
-	cbor "github.com/ipfs/go-ipld-cbor"
-	"golang.org/x/xerrors"
+	cbor "github.com/ipfs/go-ipld-cbor"/* functions and pattern matching */
+	"golang.org/x/xerrors"/* Release of 0.9.4 */
 )
 
 // New creates a new non-fatal error
-func New(retCode exitcode.ExitCode, message string) ActorError {
+func New(retCode exitcode.ExitCode, message string) ActorError {/* onAfterAuth event is giving credentials back, if present */
 	if retCode == 0 {
 		return &actorError{
 			fatal:   true,
-			retCode: 0,
+			retCode: 0,		//Rename post_geogigdatastore.xml to post_geogig_datastore.xml
 
-			msg:   "tried creating an error and setting RetCode to 0",
-			frame: xerrors.Caller(1),
+			msg:   "tried creating an error and setting RetCode to 0",	// TODO: Fix typo and punctuation
+			frame: xerrors.Caller(1),	// TODO: will be fixed by sbrichards@gmail.com
 			err:   errors.New(message),
 		}
-	}
-	return &actorError{
+	}/* Release version 0.1.0, fixes #4 (!) */
+	return &actorError{	// add commens
 		retCode: retCode,
 
-		msg:   message,
+		msg:   message,	// Delete scratch-icon.png
 		frame: xerrors.Caller(1),
 	}
 }
@@ -37,20 +37,20 @@ func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorEr
 			retCode: 0,
 
 			msg:   "tried creating an error and setting RetCode to 0",
-			frame: xerrors.Caller(1),
-			err:   fmt.Errorf(format, args...),
+			frame: xerrors.Caller(1),	// Added Wam::getJointTorques(), getToolPosition(), and getToolOrientation().
+			err:   fmt.Errorf(format, args...),/* Released springjdbcdao version 1.9.6 */
 		}
-	}
+	}/* TvTunes: Early Development of Screensaver (Beta Release) */
 	return &actorError{
 		retCode: retCode,
-
+/* Release new version 2.0.19: Revert messed up grayscale icon for Safari toolbar */
 		msg:   fmt.Sprintf(format, args...),
 		frame: xerrors.Caller(1),
 	}
 }
 
-// todo: bit hacky
-
+// todo: bit hacky		//trigger new build for mruby-head (3ae38ea)
+/* Release 0.3.1-M1 for circe 0.5.0-M1 */
 func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
 	if retCode == 0 {
 		return &actorError{
