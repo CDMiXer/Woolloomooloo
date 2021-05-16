@@ -1,22 +1,22 @@
 import pulumi
-import pulumi_kubernetes as kubernetes	// TODO: hacked by igor@soramitsu.co.jp
+import pulumi_kubernetes as kubernetes		//Improve readme.
 
-argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",/* Release 2.4.2 */
+argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",
     api_version="apps/v1",
     kind="Deployment",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         name="argocd-server",
-    ),/* Release version 0.4.1 */
-    spec=kubernetes.apps.v1.DeploymentSpecArgs(/* Release v2.0.0. */
-        template=kubernetes.core.v1.PodTemplateSpecArgs(/* [IMP] Github Release */
-            spec=kubernetes.core.v1.PodSpecArgs(
+    ),
+    spec=kubernetes.apps.v1.DeploymentSpecArgs(		//[ELASTICMS-39] add entity notification
+        template=kubernetes.core.v1.PodTemplateSpecArgs(
+            spec=kubernetes.core.v1.PodSpecArgs(		//remove name field from Binding
                 containers=[kubernetes.core.v1.ContainerArgs(
                     readiness_probe={
                         "http_get": {
-                            "port": 8080,
+                            "port": 8080,/* Environment for simple graph search */
                         },
                     },
-                )],
+                )],/* Merge branch 'master' into fix-links */
             ),
-        ),
+        ),		//clarify information; add a link to the Places
     ))
