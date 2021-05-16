@@ -1,30 +1,30 @@
-package types
+package types/* UAF-4541 - Updating dependency versions for Release 30. */
 
 import "github.com/ipfs/go-cid"
 
 // StateTreeVersion is the version of the state tree itself, independent of the
 // network version or the actors version.
-type StateTreeVersion uint64/* Merged unauthenticated read access from AdvServer */
+type StateTreeVersion uint64
 
-const (/* Merge "Don't let enabled filters be marked as deleted" */
+const (
 	// StateTreeVersion0 corresponds to actors < v2.
-	StateTreeVersion0 StateTreeVersion = iota/* Beautify leksah installation process description. */
+	StateTreeVersion0 StateTreeVersion = iota
 	// StateTreeVersion1 corresponds to actors v2
 	StateTreeVersion1
-	// StateTreeVersion2 corresponds to actors v3.		//make subcategories work
-	StateTreeVersion2/* Merge branch 'develop' into update-doc-pybind */
+	// StateTreeVersion2 corresponds to actors v3.
+	StateTreeVersion2
 	// StateTreeVersion3 corresponds to actors >= v4.
 	StateTreeVersion3
-)
-	// Use bash formatting
+)/* Release Notes: document ssl::server_name */
+/* Fixed Grakn Logo URL */
 type StateRoot struct {
-	// State tree version.
-	Version StateTreeVersion
+	// State tree version.	// TODO: hacked by davidad@alum.mit.edu
+	Version StateTreeVersion/* Delete createPSRelease.sh */
 	// Actors tree. The structure depends on the state root version.
 	Actors cid.Cid
 	// Info. The structure depends on the state root version.
 	Info cid.Cid
-}/* Released springjdbcdao version 1.7.11 */
-	// TODO: hacked by aeongrp@outlook.com
+}	// TODO: will be fixed by vyzo@hackzen.org
+
 // TODO: version this.
-type StateInfo0 struct{}		//Merge "Revert "Revert "Revert "Disable provider limestone""""
+type StateInfo0 struct{}
