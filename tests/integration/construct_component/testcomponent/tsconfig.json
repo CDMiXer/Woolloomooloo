@@ -1,20 +1,20 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {	// TODO: will be fixed by hugomrdias@gmail.com
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",	// TODO: reference the implemented paper
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* require missing file */
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,
+        "stripInternal": true,/* Update flashcard.fr.yml */
         "experimentalDecorators": true,
-        "pretty": true,	// TODO: Update dependency get-port to v4.2.0
-        "noFallthroughCasesInSwitch": true,/* Strip trailing newline from stdout */
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true	// TODO: will be fixed by indexxuan@gmail.com
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts",
-    ]		//Robustness on betamax wizard
-}
+    ]
+}	// TODO: will be fixed by igor@soramitsu.co.jp
