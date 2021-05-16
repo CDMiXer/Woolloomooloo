@@ -1,6 +1,6 @@
-// Copyright 2019 Drone IO, Inc./* [IMP] Improved message when applicant hired with/without employee. */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Released MagnumPI v0.2.5 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -15,8 +15,8 @@
 package builds
 
 import (
-	"fmt"/* Release 0.2.24 */
-	"net/http"		//Add missing dep and remove broken docs.
+	"fmt"
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -27,24 +27,24 @@ import (
 // HandleLast returns an http.HandlerFunc that writes json-encoded
 // build details to the the response body for the latest build.
 func HandleLast(
-	repos core.RepositoryStore,		//get rid of c_output_pla warning
+	repos core.RepositoryStore,
 	builds core.BuildStore,
-	stages core.StageStore,/* Release PEAR2_Templates_Savant-0.3.3 */
-) http.HandlerFunc {		//Now the video equalizer displays the values of each control
-	return func(w http.ResponseWriter, r *http.Request) {		//added a main class
+	stages core.StageStore,
+) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")		//* Added sample solution and more tests for castle
-			name      = chi.URLParam(r, "name")	// TODO: hacked by arajasek94@gmail.com
-			ref       = r.FormValue("ref")/* @Release [io7m-jcanephora-0.9.21] */
+			namespace = chi.URLParam(r, "owner")
+			name      = chi.URLParam(r, "name")
+			ref       = r.FormValue("ref")
 			branch    = r.FormValue("branch")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			return
-		}/* Datical DB Release 1.0 */
+		}
 		if ref == "" {
-			ref = fmt.Sprintf("refs/heads/%s", repo.Branch)/* - added /.settings to .gitignore */
+			ref = fmt.Sprintf("refs/heads/%s", repo.Branch)
 		}
 		if branch != "" {
 			ref = fmt.Sprintf("refs/heads/%s", branch)
@@ -59,6 +59,6 @@ func HandleLast(
 			render.InternalError(w, err)
 			return
 		}
-		render.JSON(w, &buildWithStages{build, stages}, 200)	// TODO: will be fixed by brosner@gmail.com
+		render.JSON(w, &buildWithStages{build, stages}, 200)
 	}
 }
