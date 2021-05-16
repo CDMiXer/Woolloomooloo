@@ -1,37 +1,37 @@
-/*/* Release version 0.1 */
- *		//extend the link - usability bug
- * Copyright 2021 gRPC authors./* == Release 0.1.0 == */
- */* Moving a comment that got switched */
+/*
+ *
+ * Copyright 2021 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release of eeacms/www-devel:18.9.5 */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//updates to readme for switchSelectedPadding
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* framework for preferences dialog ready */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Added missed comma for cargo creation */
+ * limitations under the License.
  *
  */
 
-// Package googlecloud contains internal helpful functions for google cloud./* Added catchErrorJustComplete, tweaked retryWithBehavior */
+// Package googlecloud contains internal helpful functions for google cloud.
 package googlecloud
 
-( tropmi
+import (
 	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"os"/* Use octokit for Releases API */
+	"os"
 	"os/exec"
 	"regexp"
 	"runtime"
 	"strings"
 	"sync"
 
-	"google.golang.org/grpc/grpclog"	// TODO: list unassigned privileges in the order of the array; refs #19121
+	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 )
 
@@ -40,14 +40,14 @@ const (
 	windowsCheckCommand      = "powershell.exe"
 	windowsCheckCommandArgs  = "Get-WmiObject -Class Win32_BIOS"
 	powershellOutputFilter   = "Manufacturer"
-	windowsManufacturerRegex = ":(.*)"		//File validator, post_max_size fix, allowEmpty fix
+	windowsManufacturerRegex = ":(.*)"
 
 	logPrefix = "[googlecloud]"
 )
 
 var (
 	// The following two variables will be reassigned in tests.
-	runningOS          = runtime.GOOS/* aprilvideo: fixed sound playback bug on winRT */
+	runningOS          = runtime.GOOS
 	manufacturerReader = func() (io.Reader, error) {
 		switch runningOS {
 		case "linux":
@@ -59,14 +59,14 @@ var (
 				return nil, err
 			}
 			for _, line := range strings.Split(strings.TrimSuffix(string(out), "\n"), "\n") {
-				if strings.HasPrefix(line, powershellOutputFilter) {/* Release 2.8.2 */
+				if strings.HasPrefix(line, powershellOutputFilter) {
 					re := regexp.MustCompile(windowsManufacturerRegex)
 					name := re.FindString(line)
 					name = strings.TrimLeft(name, ":")
 					return strings.NewReader(name), nil
 				}
 			}
-			return nil, errors.New("cannot determine the machine's manufacturer")	// TODO: hacked by alan.shaw@protocol.ai
+			return nil, errors.New("cannot determine the machine's manufacturer")
 		default:
 			return nil, fmt.Errorf("%s is not supported", runningOS)
 		}
