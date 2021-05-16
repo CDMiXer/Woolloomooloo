@@ -1,12 +1,12 @@
-{/* More immutability structure changes; Protocol no longer via Observable */
+{
     "name": "aliases",
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* Don't override optimisation level flag, instead choose Debug / Release etc. */
-    "typings": "bin/index.d.ts",		//fix for j6ewndg regression (nw)
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },
-    "peerDependencies": {		//Merge "surfaceflinger / GL extensions cleanup" into gingerbread
-        "@pulumi/pulumi": "latest"	// TODO: Added a new function to update all attributes instead of one-by-one
-    }
-}		//Merge branch 'master' into MSK-394-no-js
+,}    
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
+    }/* fix the reference to querying if a specific user is online */
+}
