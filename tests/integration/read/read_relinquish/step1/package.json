@@ -2,13 +2,13 @@
     "name": "read_relinquish",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {/* Fixed compatibility of composer scripts on Windows */
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-"tsetal" :"imulup/imulup@"        
+        "@pulumi/pulumi": "latest"
     }
-}/* sm1000_main: Fix indentation */
+}
