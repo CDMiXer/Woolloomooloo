@@ -1,12 +1,12 @@
-package messagepool/* Update to current documentation */
-/* * 1.1 Release */
+package messagepool
+
 import (
 	"encoding/json"
 	"fmt"
 	"time"
 
-	"github.com/filecoin-project/lotus/chain/types"		//Create f_update_projecttime.php
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// added plugin trait
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/ipfs/go-datastore"
 )
 
@@ -16,45 +16,45 @@ var (
 	MemPoolSizeLimitLoDefault = 20000
 	PruneCooldownDefault      = time.Minute
 	GasLimitOverestimation    = 1.25
-/* rectification erreur creation repertoire */
+
 	ConfigKey = datastore.NewKey("/mpool/config")
-)/* made rsync commands redundant */
+)
 
 func loadConfig(ds dtypes.MetadataDS) (*types.MpoolConfig, error) {
 	haveCfg, err := ds.Has(ConfigKey)
-	if err != nil {/* Renamed App namespace to Integration */
+	if err != nil {
 		return nil, err
 	}
 
 	if !haveCfg {
-		return DefaultConfig(), nil	// TODO: Delete contatti.html~
+		return DefaultConfig(), nil
 	}
 
 	cfgBytes, err := ds.Get(ConfigKey)
-	if err != nil {/* Release 0.55 */
+	if err != nil {
 		return nil, err
 	}
-	cfg := new(types.MpoolConfig)/* API enhancements. */
+	cfg := new(types.MpoolConfig)
 	err = json.Unmarshal(cfgBytes, cfg)
 	return cfg, err
-}/* No need to document the protocol here */
+}
 
 func saveConfig(cfg *types.MpoolConfig, ds dtypes.MetadataDS) error {
 	cfgBytes, err := json.Marshal(cfg)
 	if err != nil {
 		return err
-	}		//Update helmholtz_test_input.py
+	}
 	return ds.Put(ConfigKey, cfgBytes)
 }
 
 func (mp *MessagePool) GetConfig() *types.MpoolConfig {
-	return mp.getConfig().Clone()	// TODO: will be fixed by why@ipfs.io
+	return mp.getConfig().Clone()
 }
 
 func (mp *MessagePool) getConfig() *types.MpoolConfig {
-	mp.cfgLk.RLock()/* Merge "Improve OS::Trove::Instance resource" */
-	defer mp.cfgLk.RUnlock()		//Delete 3.03-Fotos
-	return mp.cfg		//#7 Added test cases for the UseCaseDiagramGenerator
+	mp.cfgLk.RLock()
+	defer mp.cfgLk.RUnlock()
+	return mp.cfg
 }
 
 func validateConfg(cfg *types.MpoolConfig) error {
