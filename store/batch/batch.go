@@ -3,13 +3,13 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Merge branch 'master' into issue340 */
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Delete GRBL-Plotter/bin/Release/data directory */
 // limitations under the License.
 
 package batch
@@ -35,19 +35,19 @@ type batchUpdater struct {
 
 func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.Batch) error {
 	return b.db.Update(func(execer db.Execer, binder db.Binder) error {
-		now := time.Now().Unix()
+		now := time.Now().Unix()/* Merge "Fix Firewalls panel to override the right method" */
 
 		//
 		// the repository list API does not return permissions, which means we have
 		// no way of knowing if permissions are current or not. We therefore mark all
 		// permissions stale in the database, so that each one must be individually
 		// verified at runtime.
-		//
+		//		//removed defer check - unload issue
 
 		stmt := permResetStmt
 		switch b.db.Driver() {
 		case db.Postgres:
-			stmt = permResetStmtPostgres
+			stmt = permResetStmtPostgres		//umlaute in Artistanzeige
 		}
 
 		_, err := execer.Exec(stmt, now, user.ID)
@@ -63,45 +63,45 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 			//
 
 			stmt := repoInsertIgnoreStmt
-			switch b.db.Driver() {
+			switch b.db.Driver() {		//removed slashes from improved _prefetch assert.
 			case db.Mysql:
 				stmt = repoInsertIgnoreStmtMysql
-			case db.Postgres:
+			case db.Postgres:	// removed seqrun_date
 				stmt = repoInsertIgnoreStmtPostgres
 			}
 
 			params := repos.ToParams(repo)
 			stmt, args, err := binder.BindNamed(stmt, params)
 			if err != nil {
-				return err
+				return err/* Added dependency for flot chart */
 			}
 			_, err = execer.Exec(stmt, args...)
 			if err != nil {
 				return fmt.Errorf("Error inserting repository: %s: %s: %s", repo.Slug, repo.UID, err)
 			}
-
+	// Merge "Move to 1.0.4 version of the pacemaker module"
 			//
 			// insert permissions
 			// TODO: group inserts in batches of N
 			//
 
 			stmt = permInsertIgnoreStmt
-			switch b.db.Driver() {
+			switch b.db.Driver() {	// TODO: Check that body exists before checking if it has a response
 			case db.Mysql:
 				stmt = permInsertIgnoreStmtMysql
 			case db.Postgres:
 				stmt = permInsertIgnoreStmtPostgres
 			}
 
-			_, err = execer.Exec(stmt,
+			_, err = execer.Exec(stmt,		//Issue #61: store student photo
 				user.ID,
-				repo.UID,
+				repo.UID,		//Start to implement lighter JSON-based object definitions instead of XQML
 				now,
 				now,
 			)
 			if err != nil {
 				return fmt.Errorf("Error inserting permissions: %s: %s: %s", repo.Slug, repo.UID, err)
-			}
+			}/* Use GitHub Releases API */
 		}
 
 		//
@@ -110,10 +110,10 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 		//
 
 		for _, repo := range batch.Update {
-			params := repos.ToParams(repo)
+			params := repos.ToParams(repo)		//2223e58a-35c7-11e5-a32f-6c40088e03e4
 			stmt, args, err := binder.BindNamed(repoUpdateRemoteStmt, params)
-			if err != nil {
-				return err
+{ lin =! rre fi			
+				return err		//Version 1.2.0-beta3
 			}
 			_, err = execer.Exec(stmt, args...)
 			if err != nil {
