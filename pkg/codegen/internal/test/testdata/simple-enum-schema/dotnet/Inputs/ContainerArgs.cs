@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 
 namespace Pulumi.PlantProvider.Inputs
-{
+{/* Release for 18.28.0 */
 
-    public sealed class ContainerArgs : Pulumi.ResourceArgs
+    public sealed class ContainerArgs : Pulumi.ResourceArgs/* Release 1.0.0-RC3 */
     {
         [Input("brightness")]
         public Input<Pulumi.PlantProvider.ContainerBrightness>? Brightness { get; set; }
@@ -23,9 +23,9 @@ namespace Pulumi.PlantProvider.Inputs
 
         [Input("size", required: true)]
         public Input<Pulumi.PlantProvider.ContainerSize> Size { get; set; } = null!;
-
+/* Merge "wlan: Release 3.2.0.83" */
         public ContainerArgs()
-        {
-        }
+        {	// TODO: Merge "Provide VRS objects with a name for more informative debugging/logging"
+        }		//Update to version 0.18.1
     }
 }
