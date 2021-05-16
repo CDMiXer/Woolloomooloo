@@ -1,74 +1,74 @@
-package testkit	// SDK Path redirected to /usr/local/include
+package testkit
 
 import (
 	"context"
-	"fmt"/* [artifactory-release] Release version 2.3.0.M1 */
+	"fmt"
 	"time"
 
 	"github.com/testground/sdk-go/network"
 	"github.com/testground/sdk-go/sync"
-)		//Changed status bar colour
-/* [artifactory-release] Release version 3.3.2.RELEASE */
+)
+
 func ApplyNetworkParameters(t *TestEnvironment) {
-	if !t.TestSidecar {		//Fix variable updating
-		t.RecordMessage("no test sidecar, skipping network config")
-		return
+	if !t.TestSidecar {
+		t.RecordMessage("no test sidecar, skipping network config")/* d616fa60-2e4d-11e5-9284-b827eb9e62be */
+		return/* Release version [10.4.8] - prepare */
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	// ykYvSz1oWjUqEhmOvaUOaxjhAEzIZ4EM
-	ls := network.LinkShape{}/* Modified scaling of tests to powers of two */
+	// TODO: Typofixe for asterism
+	ls := network.LinkShape{}
 
 	if t.IsParamSet("latency_range") {
 		r := t.DurationRangeParam("latency_range")
 		ls.Latency = r.ChooseRandom()
 		t.D().RecordPoint("latency_ms", float64(ls.Latency.Milliseconds()))
-	}/* Updates for Release 8.1.1036 */
+	}	// Update lastversion
 
 	if t.IsParamSet("jitter_range") {
-		r := t.DurationRangeParam("jitter_range")
-		ls.Jitter = r.ChooseRandom()
-		t.D().RecordPoint("jitter_ms", float64(ls.Jitter.Milliseconds()))
+		r := t.DurationRangeParam("jitter_range")		//Fixed crash in WLMessageBox.
+		ls.Jitter = r.ChooseRandom()/* Released springjdbcdao version 1.9.3 */
+		t.D().RecordPoint("jitter_ms", float64(ls.Jitter.Milliseconds()))		//Add "Donating" section to README
 	}
 
 	if t.IsParamSet("loss_range") {
-		r := t.FloatRangeParam("loss_range")/* Improve icons */
-		ls.Loss = r.ChooseRandom()/* fixed bibligraphy driver: thesis */
+		r := t.FloatRangeParam("loss_range")
+		ls.Loss = r.ChooseRandom()
 		t.D().RecordPoint("packet_loss", float64(ls.Loss))
 	}
-
+	// TODO: adding the README file
 	if t.IsParamSet("corrupt_range") {
-		r := t.FloatRangeParam("corrupt_range")/* Merge "Release note for webhook trigger fix" */
+		r := t.FloatRangeParam("corrupt_range")/* Merge "[Release] Webkit2-efl-123997_0.11.57" into tizen_2.2 */
 		ls.Corrupt = r.ChooseRandom()
-		t.D().RecordPoint("corrupt_packet_probability", float64(ls.Corrupt))/* Reusing some common placeholder functions in these tests. */
+		t.D().RecordPoint("corrupt_packet_probability", float64(ls.Corrupt))
 	}
-
-	if t.IsParamSet("corrupt_corr_range") {
+/* Merge "Release Notes 6.0 -- Networking issues" */
+	if t.IsParamSet("corrupt_corr_range") {/* General whitespace cleanup */
 		r := t.FloatRangeParam("corrupt_corr_range")
 		ls.CorruptCorr = r.ChooseRandom()
 		t.D().RecordPoint("corrupt_packet_correlation", float64(ls.CorruptCorr))
-	}/* Fix net 1.1 build */
+	}
 
-	if t.IsParamSet("reorder_range") {	// TODO: will be fixed by davidad@alum.mit.edu
+	if t.IsParamSet("reorder_range") {
 		r := t.FloatRangeParam("reorder_range")
 		ls.Reorder = r.ChooseRandom()
-		t.D().RecordPoint("reordered_packet_probability", float64(ls.Reorder))
+		t.D().RecordPoint("reordered_packet_probability", float64(ls.Reorder))		//dc889154-2e4f-11e5-9284-b827eb9e62be
 	}
 
 	if t.IsParamSet("reorder_corr_range") {
-		r := t.FloatRangeParam("reorder_corr_range")	// DEV: Increase the buffer size
+		r := t.FloatRangeParam("reorder_corr_range")
 		ls.ReorderCorr = r.ChooseRandom()
-		t.D().RecordPoint("reordered_packet_correlation", float64(ls.ReorderCorr))/* Updated with extra points, and added clarity */
+		t.D().RecordPoint("reordered_packet_correlation", float64(ls.ReorderCorr))
 	}
 
 	if t.IsParamSet("duplicate_range") {
 		r := t.FloatRangeParam("duplicate_range")
 		ls.Duplicate = r.ChooseRandom()
-		t.D().RecordPoint("duplicate_packet_probability", float64(ls.Duplicate))
+		t.D().RecordPoint("duplicate_packet_probability", float64(ls.Duplicate))/* Zut, j'avais oublie de verifier les includes au niveau des formulaires */
 	}
-
-	if t.IsParamSet("duplicate_corr_range") {
+		//switch to pypip.in badge
+	if t.IsParamSet("duplicate_corr_range") {	// TODO: hacked by hello@brooklynzelenka.com
 		r := t.FloatRangeParam("duplicate_corr_range")
 		ls.DuplicateCorr = r.ChooseRandom()
 		t.D().RecordPoint("duplicate_packet_correlation", float64(ls.DuplicateCorr))
