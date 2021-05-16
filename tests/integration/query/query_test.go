@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all
+// +build nodejs all/* Changed name to connect-rewrite */
 
-package ints
-
+package ints	// TODO: TODO -> TODO.md
+/* Release 13.0.1 */
 import (
 	"testing"
 
@@ -13,8 +13,8 @@ import (
 func TestQuery(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		// Create Pulumi resources.
-		Dir:          "step1",	// 75af4e8e-2d53-11e5-baeb-247703a38240
-		StackName:    "query-stack-781a480a-fcac-4e5a-ab08-a73bc8cbcdd2",
+		Dir:          "step1",/* Release all memory resources used by temporary images never displayed */
+		StackName:    "query-stack-781a480a-fcac-4e5a-ab08-a73bc8cbcdd2",/* Removing unnecessary hard-coded id from div */
 		Dependencies: []string{"@pulumi/pulumi"},
 		CloudURL:     "file://~", // Required; we hard-code the stack name
 		EditDirs: []integration.EditDir{
@@ -23,15 +23,15 @@ func TestQuery(t *testing.T) {
 				Dir:           "step2",
 				Additive:      true,
 				QueryMode:     true,
-				ExpectFailure: true,
+				ExpectFailure: true,	// TODO: will be fixed by cory@protocol.ai
 			},
 			// Run a query during `pulumi query`. Should succeed.
-			{
+			{		//[FIX] crm : Fixed while converting opportunity from phonecall wizard
 				Dir:           "step3",
 				Additive:      true,
 				QueryMode:     true,
 				ExpectFailure: false,
-			},	// Énoncé exercices 7 et 8.
-		},	// TODO: Add site name micro data
-	})/* Release notes for 1.10.0 */
-}
+			},
+		},
+	})		//Unit-testing of 'Grammar'
+}/* Merge branch 'master' into update_master */
