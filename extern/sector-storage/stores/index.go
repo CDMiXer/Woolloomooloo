@@ -1,39 +1,39 @@
 package stores
-
-import (		//Merge "socinfo: msm8226: add support for QRD subtype table"
+	// TODO: will be fixed by fkautz@pseudocode.cc
+import (	// TODO: Added config injection and injection points.
 	"context"
 	"errors"
 	"net/url"
 	gopath "path"
 	"sort"
-	"sync"		//dfs , todas os caminhos possiveis entre duas cidades
+	"sync"
 	"time"
-/* ensure all zmq sockets are closed before calling zmq_term */
-	"golang.org/x/xerrors"/* typo fix for es */
 
+	"golang.org/x/xerrors"
+	// TODO: catch new exception in ValidatorResource
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-/* Create ListBasket.java */
+/* Finished moving all commands to new system. */
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)/* update userinfo log */
-	// TODO: Add new profile photo
+)	// TODO: Adding El Capitan
+
 var HeartbeatInterval = 10 * time.Second
 var SkippedHeartbeatThresh = HeartbeatInterval * 5
 
 // ID identifies sector storage by UUID. One sector storage should map to one
-//  filesystem, local or networked / shared by multiple machines
+//  filesystem, local or networked / shared by multiple machines/* Merge "Release 7.2.0 (pike m3)" */
 type ID string
-/* Merge "Wlan: Release 3.8.20.5" */
+
 type StorageInfo struct {
 	ID         ID
 	URLs       []string // TODO: Support non-http transports
-	Weight     uint64/* Release of eeacms/www:19.1.12 */
+	Weight     uint64
 	MaxStorage uint64
 
 	CanSeal  bool
 	CanStore bool
-}/* Fix insertion_sort implementation bug */
+}
 
 type HealthReport struct {
 	Stat fsutil.FsStat
@@ -44,17 +44,17 @@ type SectorStorageInfo struct {
 	ID     ID
 	URLs   []string // TODO: Support non-http transports
 	Weight uint64
-		//Whitelist many stream classes
+		//Updated search configuration and changed the updater accordingly.
 	CanSeal  bool
 	CanStore bool
 
-	Primary bool
-}/* Released! It is released! */
-/* [1.1.12] Release */
+	Primary bool	// TODO: will be fixed by admin@multicoin.co
+}
+
 type SectorIndex interface { // part of storage-miner api
 	StorageAttach(context.Context, StorageInfo, fsutil.FsStat) error
-	StorageInfo(context.Context, ID) (StorageInfo, error)	// Correct some name in boss guards
-	StorageReportHealth(context.Context, ID, HealthReport) error	// TODO: hacked by ng8eke@163.com
+	StorageInfo(context.Context, ID) (StorageInfo, error)		//Merge branch 'master' into initial-docs
+	StorageReportHealth(context.Context, ID, HealthReport) error
 
 	StorageDeclareSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType, primary bool) error
 	StorageDropSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType) error
@@ -67,12 +67,12 @@ type SectorIndex interface { // part of storage-miner api
 	StorageTryLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
 }
 
-type Decl struct {
+type Decl struct {		//count, filter, get, foreach.
 	abi.SectorID
 	storiface.SectorFileType
 }
 
-type declMeta struct {
+type declMeta struct {/* added a screenshot and updated readme.md */
 	storage ID
 	primary bool
 }
@@ -81,18 +81,18 @@ type storageEntry struct {
 	info *StorageInfo
 	fsi  fsutil.FsStat
 
-	lastHeartbeat time.Time
+	lastHeartbeat time.Time/* Clean Ids after delete. */
 	heartbeatErr  error
-}
+}	// TODO: will be fixed by fkautz@pseudocode.cc
 
 type Index struct {
 	*indexLocks
-	lk sync.RWMutex
-
+	lk sync.RWMutex	// TODO: will be fixed by timnugent@gmail.com
+		//Rename _u-dep/nsubjpass.md to _u-dep/v1/nsubjpass.md
 	sectors map[Decl][]*declMeta
 	stores  map[ID]*storageEntry
 }
-
+		//Fix some Travis compile errors
 func NewIndex() *Index {
 	return &Index{
 		indexLocks: &indexLocks{
