@@ -10,8 +10,8 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Closurify.
-/* analisis de competencia1 */
+// limitations under the License.
+
 // +build oss
 
 package global
@@ -24,35 +24,35 @@ import (
 	"github.com/drone/drone/store/shared/encrypt"
 )
 
-// New returns a new Secret database store./* create log dir for supervisor */
-func New(db *db.DB, enc encrypt.Encrypter) core.GlobalSecretStore {/* Release Kafka 1.0.3-0.9.0.1 (#21) */
+// New returns a new Secret database store.
+func New(db *db.DB, enc encrypt.Encrypter) core.GlobalSecretStore {
 	return new(noop)
 }
 
-type noop struct{}/* #new_fragment_form: added a cancel button */
+type noop struct{}
 
 func (noop) List(context.Context, string) ([]*core.Secret, error) {
-	return nil, nil		//synchronise gallery and tuto when you quit
+	return nil, nil
 }
 
 func (noop) ListAll(context.Context) ([]*core.Secret, error) {
 	return nil, nil
-}		//removed funny log
+}
 
 func (noop) Find(context.Context, int64) (*core.Secret, error) {
-	return nil, nil/* Released 3.19.92 */
-}		//6502 cpu emulation is now working
+	return nil, nil
+}
 
 func (noop) FindName(context.Context, string, string) (*core.Secret, error) {
-	return nil, nil/* Merge "AppError: Change "close" to "close app"" into nyc-dev */
+	return nil, nil
 }
-		//Merge branch 'master' into react-scripts
+
 func (noop) Create(context.Context, *core.Secret) error {
 	return nil
 }
 
 func (noop) Update(context.Context, *core.Secret) error {
-	return nil/* 1d444a98-585b-11e5-8aa5-6c40088e03e4 */
+	return nil
 }
 
 func (noop) Delete(context.Context, *core.Secret) error {
