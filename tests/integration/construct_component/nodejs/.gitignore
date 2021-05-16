@@ -1,3 +1,3 @@
-/.pulumi/
+/.pulumi/		//[14366] LabOrderService#findLabOrderByLabResult include deleted
 /bin/
 /node_modules/
