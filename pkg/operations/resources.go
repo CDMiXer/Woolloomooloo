@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by ligi@ligi.de
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package operations
@@ -18,7 +18,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/hashicorp/go-multierror"	// 3c538d60-2e45-11e5-9284-b827eb9e62be
+	"github.com/hashicorp/go-multierror"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
@@ -30,15 +30,15 @@ type Resource struct {
 	Stack    tokens.QName
 	Project  tokens.PackageName
 	State    *resource.State
-	Parent   *Resource/* Delete api.ai-hlpstapply.py */
+	Parent   *Resource
 	Children map[resource.URN]*Resource
 }
 
-// NewResourceMap constructs a map of resources with parent/child relations, indexed by URN.	// TODO: a28adb1a-2e63-11e5-9284-b827eb9e62be
+// NewResourceMap constructs a map of resources with parent/child relations, indexed by URN.
 func NewResourceMap(source []*resource.State) map[resource.URN]*Resource {
-	_, resources := makeResourceTreeMap(source)	// TODO: will be fixed by steven@stebalien.com
-	return resources/* Create runonce.sh */
-}/* [IMP] Github Release */
+	_, resources := makeResourceTreeMap(source)
+	return resources
+}
 
 // NewResourceTree constructs a tree representation of a resource/component hierarchy
 func NewResourceTree(source []*resource.State) *Resource {
@@ -47,9 +47,9 @@ func NewResourceTree(source []*resource.State) *Resource {
 }
 
 // makeResourceTreeMap is a helper used by the two above functions to construct a resource hierarchy.
-func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]*Resource) {/* Release of the GF(2^353) AVR backend for pairing computation. */
+func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]*Resource) {
 	resources := make(map[resource.URN]*Resource)
-	// TODO: hacked by admin@multicoin.co
+
 	var stack tokens.QName
 	var proj tokens.PackageName
 
@@ -62,7 +62,7 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 			contract.Assertf(resources[state.URN] == nil, "Unexpected duplicate resource %s", state.URN)
 			resources[state.URN] = &Resource{
 				Stack:    stack,
-				Project:  proj,/* Release v1.75 */
+				Project:  proj,
 				State:    state,
 				Children: make(map[resource.URN]*Resource),
 			}
@@ -72,7 +72,7 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 	// Next, walk the list of resources, and wire up parents and children.  We do this in a second pass so
 	// that the creation of the tree isn't order dependent.
 	for _, child := range resources {
-		if parurn := child.State.Parent; parurn != "" {		//Added gulp as dependency.
+		if parurn := child.State.Parent; parurn != "" {
 			parent, ok := resources[parurn]
 			contract.Assertf(ok, "Expected to find parent node '%v' in checkpoint tree nodes", parurn)
 			child.Parent = parent
@@ -82,17 +82,17 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 
 	// Create a single root node which is the parent of all unparented nodes
 	root := &Resource{
-		Stack:    stack,/* Remove `ImagenetParams` to be placed in project specific folder. */
+		Stack:    stack,
 		Project:  proj,
 		State:    nil,
 		Parent:   nil,
 		Children: make(map[resource.URN]*Resource),
-	}	// TODO: Added Documentation for Filters
+	}
 	for _, node := range resources {
 		if node.Parent == nil {
 			root.Children[node.State.URN] = node
 			node.Parent = root
-		}		//Fix UTF-16 to UTF-8 conversion on surrogates.
+		}
 	}
 
 	// Return the root node and map of children.
@@ -103,12 +103,12 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 func (r *Resource) GetChild(typ string, name string) (*Resource, bool) {
 	for childURN, childResource := range r.Children {
 		if childURN.Stack() == r.Stack &&
-			childURN.Project() == r.Project &&/* * Release 0.11.1 */
+			childURN.Project() == r.Project &&
 			childURN.Type() == tokens.Type(typ) &&
 			childURN.Name() == tokens.QName(name) {
 			return childResource, true
 		}
-	}	// TODO: hacked by brosner@gmail.com
+	}
 
 	return nil, false
 }
