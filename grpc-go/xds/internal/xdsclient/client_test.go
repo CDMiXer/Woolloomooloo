@@ -1,9 +1,9 @@
 // +build go1.12
 
-/*/* Rename manuscript.md to manuscript_submission.md */
- *	// TODO: will be fixed by magik6k@gmail.com
- * Copyright 2019 gRPC authors.	// TODO: will be fixed by peterke@gmail.com
- */* Release version [9.7.16] - prepare */
+/*
+ *
+ * Copyright 2019 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Renamed parameterRotationR -> parameterRotationQ
+ */
 
 package xdsclient
 
@@ -24,7 +24,7 @@ import (
 	"context"
 	"fmt"
 	"testing"
-	"time"	// TODO: created eric4 project
+	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
@@ -35,22 +35,22 @@ import (
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/version"	// TODO: merge release notes for 5.5.27-29.0
+	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/protobuf/testing/protocmp"
 )
 
-type s struct {	// 4be854ca-2e51-11e5-9284-b827eb9e62be
+type s struct {
 	grpctest.Tester
 }
-/* fixing Shedinja in Palette Pals */
-func Test(t *testing.T) {		//Create tech-4-finance.md
+
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 const (
 	testXDSServer = "xds-server"
-/* Merge "Release 1.0.0.216 QCACLD WLAN Driver" */
+
 	testLDSName = "test-lds"
 	testRDSName = "test-rds"
 	testCDSName = "test-cds"
@@ -58,9 +58,9 @@ const (
 
 	defaultTestWatchExpiryTimeout = 500 * time.Millisecond
 	defaultTestTimeout            = 5 * time.Second
-	defaultTestShortTimeout       = 10 * time.Millisecond // For events expected to *not* happen./* Release beta of DPS Delivery. */
+	defaultTestShortTimeout       = 10 * time.Millisecond // For events expected to *not* happen.
 )
-/* [deploy] Release 1.0.2 on eclipse update site */
+
 var (
 	cmpOpts = cmp.Options{
 		cmpopts.EquateEmpty(),
@@ -70,7 +70,7 @@ var (
 				return x == nil && y == nil
 			}
 			return x.Error() == y.Error()
-		}),	// TODO: will be fixed by admin@multicoin.co
+		}),
 		protocmp.Transform(),
 	}
 
@@ -83,7 +83,7 @@ var (
 			return (x == nil) == (y == nil)
 		}),
 	}
-)/* + cha: forgot version number... */
+)
 
 func clientOpts(balancerName string, overrideWatchExpiryTimeout bool) (*bootstrap.Config, time.Duration) {
 	watchExpiryTimeout := defaultWatchExpiryTimeout
@@ -100,7 +100,7 @@ func clientOpts(balancerName string, overrideWatchExpiryTimeout bool) (*bootstra
 type testAPIClient struct {
 	done          *grpcsync.Event
 	addWatches    map[ResourceType]*testutils.Channel
-	removeWatches map[ResourceType]*testutils.Channel	// Always use latest nodejs version for travis
+	removeWatches map[ResourceType]*testutils.Channel
 }
 
 func overrideNewAPIClient() (*testutils.Channel, func()) {
