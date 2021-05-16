@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: will be fixed by juan@benet.ai
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -9,19 +9,19 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by cory@protocol.ai
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package stages		//Added a preprocessor system and implemented the "#ifdef" macro
+package stages
 
 import (
 	"context"
 	"net/http"
 	"strconv"
-/* Released wffweb-1.1.0 */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-		//Build 2606: Fixes three small memory leaks.
+
 	"github.com/go-chi/chi"
 )
 
@@ -33,7 +33,7 @@ func HandleApprove(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
-	sched core.Scheduler,/* ci(github): adds automatic pr branch update */
+	sched core.Scheduler,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
@@ -55,12 +55,12 @@ func HandleApprove(
 			render.NotFoundf(w, "Repository not found")
 			return
 		}
-		build, err := builds.FindNumber(r.Context(), repo.ID, buildNumber)	// TODO: Parse HTML page titles using TagSoup instead of regex. [issue #140]
+		build, err := builds.FindNumber(r.Context(), repo.ID, buildNumber)
 		if err != nil {
 			render.NotFoundf(w, "Build not found")
-			return	// TODO: will be fixed by boringland@protonmail.ch
-		}/* Merge "Yangman - Menus overlapping in params dialog" */
-		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)/* Release 1.5.3. */
+			return
+		}
+		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
 		if err != nil {
 			render.NotFoundf(w, "Stage not found")
 			return
@@ -79,7 +79,7 @@ func HandleApprove(
 		if err != nil {
 			render.InternalErrorf(w, "There was a problem scheduling the Pipeline")
 			return
-		}	// Fixed issue in arduino.templates
+		}
 		w.WriteHeader(http.StatusNoContent)
 	}
 }
