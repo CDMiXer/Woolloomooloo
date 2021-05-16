@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
-package main		//bug fix on DooFileCache set/get not storing at the defined folders.
+	// TODO: will be fixed by alan.shaw@protocol.ai
+package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)/* Added JSSymbolicRegressionProblemTest. */
-/* Adding ReleaseNotes.txt to track current release notes. Fixes issue #471. */
-func main() {
+)
+
+func main() {/* Release note for #818 */
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		return nil
-	})
+		return nil		//Missed _events.cshtml for previous check in
+	})/* Release of eeacms/varnish-eea-www:3.8 */
 }
