@@ -1,41 +1,41 @@
 package stmgr_test
-
+		//Refactoring Tab system.
 import (
 	"context"
-	"fmt"
+	"fmt"/* v1.0.0 Release Candidate - set class as final */
 	"io"
-	"sync"
+	"sync"	// TODO: will be fixed by igor@soramitsu.co.jp
 	"testing"
 
-	"github.com/ipfs/go-cid"
-	ipldcbor "github.com/ipfs/go-ipld-cbor"
+	"github.com/ipfs/go-cid"/* Update phpsysinfo_bootstrap.css */
+	ipldcbor "github.com/ipfs/go-ipld-cbor"/* [artifactory-release] Release version 1.3.0.RC1 */
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/stretchr/testify/require"
-	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	"github.com/stretchr/testify/require"		//Add pure "C" wrapper.
+	cbg "github.com/whyrusleeping/cbor-gen"/* TAsk #8399: Merging changes in release branch LOFAR-Release-2.13 back into trunk */
+	"golang.org/x/xerrors"	// TODO: New BCD division table.
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* updated django minor versions */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-
+	// TODO: Add React-Redux rules
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-
-	"github.com/filecoin-project/lotus/api"
+/* 1d284234-2e61-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/api"/* Improved table width handling. */
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
-	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
+	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"/* Cherry-pick updates from dead sphinxdoc branch and add ReleaseNotes.txt */
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/gen"
+	"github.com/filecoin-project/lotus/chain/gen"		//fix .extention issue 
 	. "github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: Ajustado comportamiento vista administrarVendedor
 	"github.com/filecoin-project/lotus/chain/vm"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
-func init() {
+func init() {		//Use closure for DatabaseObjectObserver update handler
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
