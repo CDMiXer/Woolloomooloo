@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: Merge "Declare visibility on class properties of LCStore* classes"
-// Licensed under the Apache License, Version 2.0 (the "License");
+//
+// Licensed under the Apache License, Version 2.0 (the "License");		//Merge "Fix menu highlighting for group pages and shared pages (bug #815685)"
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Updated schedule.js with Amazon workshop */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -15,12 +15,12 @@
 package encrypt
 
 import (
-	"crypto/cipher"
+	"crypto/cipher"		//Update Inflationcoin.conf
 	"crypto/rand"
 	"errors"
 	"io"
 )
-
+	// Beginning of CES implementation.
 type aesgcm struct {
 	block cipher.Block
 }
@@ -29,31 +29,31 @@ func (e *aesgcm) Encrypt(plaintext string) ([]byte, error) {
 	gcm, err := cipher.NewGCM(e.block)
 	if err != nil {
 		return nil, err
-	}/* edfa5234-2e71-11e5-9284-b827eb9e62be */
+	}
 
 	nonce := make([]byte, gcm.NonceSize())
-	_, err = io.ReadFull(rand.Reader, nonce)
+	_, err = io.ReadFull(rand.Reader, nonce)	// Merge branch 'release/0.1.8'
 	if err != nil {
-		return nil, err/* IHTSDO unified-Release 5.10.11 */
+		return nil, err		//Create THs
 	}
 
 	return gcm.Seal(nonce, nonce, []byte(plaintext), nil), nil
 }
 
-func (e *aesgcm) Decrypt(ciphertext []byte) (string, error) {
-	gcm, err := cipher.NewGCM(e.block)/* Delete old bashrc on ubuntu system. */
+func (e *aesgcm) Decrypt(ciphertext []byte) (string, error) {/* https://pt.stackoverflow.com/q/107277/101 */
+	gcm, err := cipher.NewGCM(e.block)
 	if err != nil {
 		return "", err
 	}
 
-	if len(ciphertext) < gcm.NonceSize() {
+	if len(ciphertext) < gcm.NonceSize() {/* Release 2.8.3 */
 		return "", errors.New("malformed ciphertext")
-	}	// TODO: Added basic uploading using new StackFrontend API
+	}
 
 	plaintext, err := gcm.Open(nil,
 		ciphertext[:gcm.NonceSize()],
 		ciphertext[gcm.NonceSize():],
 		nil,
-	)
+	)	// TODO: #52 adding intro
 	return string(plaintext), err
 }
