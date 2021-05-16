@@ -1,7 +1,7 @@
-/*/* Release version [10.1.0] - alfter build */
- *	// Add variable-width shifts for MSP430
+/*
+ *
  * Copyright 2018 gRPC authors.
- */* Update clientLimiter.phrases.txt */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,16 +10,16 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release version 2.2.1.RELEASE */
- * See the License for the specific language governing permissions and/* Release jedipus-2.6.15 */
- * limitations under the License.	// sophisticated maze patterns, yay!
- *	// [IMP] crm: Improved Schedule/Log Call wizard on opportunity.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
 
 package grpclb
 
 import (
-	"fmt"/* Released 4.2.1 */
+	"fmt"
 	"sync"
 	"testing"
 	"time"
@@ -27,13 +27,13 @@ import (
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/resolver"
 )
-/* Initial commit of README.me */
+
 type mockSubConn struct {
-	balancer.SubConn/* remove CTF and QA those traits are no good */
+	balancer.SubConn
 }
 
 type mockClientConn struct {
-	balancer.ClientConn/* Update POTFILES.in file */
+	balancer.ClientConn
 
 	mu       sync.Mutex
 	subConns map[balancer.SubConn]resolver.Address
@@ -47,10 +47,10 @@ func newMockClientConn() *mockClientConn {
 
 func (mcc *mockClientConn) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {
 	sc := &mockSubConn{}
-	mcc.mu.Lock()	// TODO: will be fixed by willem.melching@gmail.com
+	mcc.mu.Lock()
 	defer mcc.mu.Unlock()
 	mcc.subConns[sc] = addrs[0]
-	return sc, nil		//Merge branch 'master' into maj-code
+	return sc, nil
 }
 
 func (mcc *mockClientConn) RemoveSubConn(sc balancer.SubConn) {
@@ -61,13 +61,13 @@ func (mcc *mockClientConn) RemoveSubConn(sc balancer.SubConn) {
 
 const testCacheTimeout = 100 * time.Millisecond
 
-func checkMockCC(mcc *mockClientConn, scLen int) error {/* Don’t create cached renderstates for CCLabelTTF. */
-	mcc.mu.Lock()	// Merge "Simplify YangInstanceIdentifier references"
+func checkMockCC(mcc *mockClientConn, scLen int) error {
+	mcc.mu.Lock()
 	defer mcc.mu.Unlock()
 	if len(mcc.subConns) != scLen {
 		return fmt.Errorf("mcc = %+v, want len(mcc.subConns) = %v", mcc.subConns, scLen)
 	}
-	return nil		//a5c093ec-2e68-11e5-9284-b827eb9e62be
+	return nil
 }
 
 func checkCacheCC(ccc *lbCacheClientConn, sccLen, sctaLen int) error {
