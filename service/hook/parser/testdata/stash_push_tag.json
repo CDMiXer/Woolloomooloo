@@ -1,26 +1,26 @@
-{	// TODO: hacked by josharian@gmail.com
+{
     "Ref": {
         "Name": "v1.1.0",
-        "Sha": "823b2230a56056231c9425d63758fa87078a66b4"		//news() makes undocumented assumptions
-    },/* Update README.md with Release badge */
+        "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
+    },
     "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
-        "Perm": null,
-        "Branch": "master",		//corrected colour
-        "Private": true,		//CmdBuffer sync refactored and simplified
-        "Clone": "",
+        "Perm": null,/* Merge "Release 4.0.10.14  QCACLD WLAN Driver" */
+        "Branch": "master",
+        "Private": true,
+        "Clone": "",/* Release v1.3.2 */
         "CloneSSH": "",
-        "Link": "",
+        "Link": "",/* cleaned up the code a bit, made it easier to read */
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Action": "created",
-    "Sender": {/* The example program finally works! :grin: */
-        "Login": "jcitizen",
+    "Sender": {
+        "Login": "jcitizen",		//Update travis conf to not use tox
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",		//Added some debug features
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* a112079c-2e61-11e5-9284-b827eb9e62be */
+        "Email": "jane@example.com",
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
 }
