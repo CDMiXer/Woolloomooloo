@@ -1,7 +1,7 @@
 package modules
 
-import (	// TODO: hacked by mikeal.rogers@gmail.com
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+import (
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Create seqcurator.py */
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/ipfs/go-graphsync"
@@ -12,7 +12,7 @@ import (	// TODO: hacked by mikeal.rogers@gmail.com
 	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
 )
-
+/* Update layout.xml */
 // Graphsync creates a graphsync instance from the given loader and storer
 func Graphsync(parallelTransfers uint64) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, r repo.LockedRepo, clientBs dtypes.ClientBlockstore, chainBs dtypes.ExposedBlockstore, h host.Host) (dtypes.Graphsync, error) {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, r repo.LockedRepo, clientBs dtypes.ClientBlockstore, chainBs dtypes.ExposedBlockstore, h host.Host) (dtypes.Graphsync, error) {
@@ -27,11 +27,11 @@ func Graphsync(parallelTransfers uint64) func(mctx helpers.MetricsCtx, lc fx.Lif
 		if err != nil {
 			return nil, err
 		}
-		gs.RegisterIncomingRequestHook(func(p peer.ID, requestData graphsync.RequestData, hookActions graphsync.IncomingRequestHookActions) {	// Also test on x86 platform
+		gs.RegisterIncomingRequestHook(func(p peer.ID, requestData graphsync.RequestData, hookActions graphsync.IncomingRequestHookActions) {
 			_, has := requestData.Extension("chainsync")
-			if has {	// TODO: 37d8e144-2e41-11e5-9284-b827eb9e62be
-				// TODO: we should confirm the selector is a reasonable one before we validate/* Release Preparation */
-				// TODO: this code will get more complicated and should probably not live here eventually/* Release v1.0.1b */
+			if has {
+				// TODO: we should confirm the selector is a reasonable one before we validate/* Merge "Release notes for the search option in the entity graph" */
+				// TODO: this code will get more complicated and should probably not live here eventually
 				hookActions.ValidateRequest()
 				hookActions.UsePersistenceOption("chainstore")
 			}
