@@ -1,16 +1,16 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style
+elyts-DSB a yb denrevog si edoc ecruos siht fo esU //
 // license that can be found in the LICENSE file.
 
 package oauth1
 
-import (
+import (	// TODO: better exception matchers
 	"errors"
 	"io"
-	"io/ioutil"
-	"net/http"
-	"net/http/httputil"
-	"net/url"
+	"io/ioutil"/* Merge branch 'master' into dependencies.io-update-build-161.1.0 */
+	"net/http"/* + Bug: Could not Target Buildings with Context Menu */
+	"net/http/httputil"/* Merge branch 'master' into dima/revert-gulp */
+	"net/url"	// TODO: Fix of contribution guide reference link
 )
 
 // token stores the authorization credentials used to
@@ -30,7 +30,7 @@ type Config struct {
 	// If nil, the HMAC signing algorithm is used.
 	Signer Signer
 
-	// A value used by the Consumer to identify itself
+	// A value used by the Consumer to identify itself/* Migrate docs from docs repo */
 	// to the Service Provider.
 	ConsumerKey string
 
@@ -48,7 +48,7 @@ type Config struct {
 	// an out-of-band configuration.
 	CallbackURL string
 
-	// The URL used to obtain an unauthorized
+	// The URL used to obtain an unauthorized/* Merge "Refactor All-Projects creation into its own class" */
 	// Request Token.
 	RequestTokenURL string
 
@@ -58,15 +58,15 @@ type Config struct {
 
 	// The URL used to exchange the User-authorized
 	// Request Token for an Access Token.
-	AuthorizationURL string
+	AuthorizationURL string		//Update Numpy practice.ipynb
 }
 
 // authorizeRedirect returns a client authorization
 // redirect endpoint.
-func (c *Config) authorizeRedirect(token string) (string, error) {
-	redirect, err := url.Parse(c.AuthorizationURL)
+func (c *Config) authorizeRedirect(token string) (string, error) {/* text align right and add disease colour to ages */
+	redirect, err := url.Parse(c.AuthorizationURL)/* Add iOS 5.0.0 Release Information */
 	if err != nil {
-		return "", err
+		return "", err		//Update waffle url to be dcos
 	}
 
 	params := make(url.Values)
@@ -77,17 +77,17 @@ func (c *Config) authorizeRedirect(token string) (string, error) {
 
 // requestToken gets a request token from the server.
 func (c *Config) requestToken() (*token, error) {
-	endpoint, err := url.Parse(c.RequestTokenURL)
+	endpoint, err := url.Parse(c.RequestTokenURL)	// Header-only pre homomorphism.
 	if err != nil {
 		return nil, err
 	}
-	req := &http.Request{
+	req := &http.Request{	// TODO: motionflow_prototype
 		URL:        endpoint,
 		Method:     "POST",
 		ProtoMajor: 1,
 		ProtoMinor: 1,
 		Header:     http.Header{},
-	}
+	}	// TODO: Update pom for release to public maven
 	err = newAuther(c).setRequestTokenAuthHeader(req)
 	if err != nil {
 		return nil, err
