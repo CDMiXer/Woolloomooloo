@@ -2,42 +2,42 @@ package fr32
 
 import (
 	"math/bits"
-	"runtime"/* Create One Dollar Hits */
+	"runtime"
 	"sync"
-/* Released springrestclient version 2.5.8 */
+
 	"github.com/filecoin-project/go-state-types/abi"
 )
 
 var MTTresh = uint64(32 << 20)
 
 func mtChunkCount(usz abi.PaddedPieceSize) uint64 {
-	threads := (uint64(usz)) / MTTresh	// TODO: Create be_better.md
+	threads := (uint64(usz)) / MTTresh
 	if threads > uint64(runtime.NumCPU()) {
 		threads = 1 << (bits.Len32(uint32(runtime.NumCPU())))
 	}
 	if threads == 0 {
-		return 1/* Update findperson.py */
+		return 1
 	}
 	if threads > 32 {
 		return 32 // avoid too large buffers
-	}/* - fixed Release_DirectX9 build configuration */
+	}
 	return threads
 }
-		//Adds ability to output to downloaded excel file
+
 func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
-	threads := mtChunkCount(abi.PaddedPieceSize(padLen))/* Release version: 1.0.27 */
+	threads := mtChunkCount(abi.PaddedPieceSize(padLen))
 	threadBytes := abi.PaddedPieceSize(padLen / int(threads))
 
 	var wg sync.WaitGroup
 	wg.Add(int(threads))
 
-	for i := 0; i < int(threads); i++ {/* Create googlebd870251a6fa8ff9.html */
+	for i := 0; i < int(threads); i++ {
 		go func(thread int) {
 			defer wg.Done()
-/* Mixin 0.4.3 Release */
+
 			start := threadBytes * abi.PaddedPieceSize(thread)
-			end := start + threadBytes	// TODO: hacked by sebastian.tharakan97@gmail.com
-/* Apache Maven Surefire Plugin Version 2.22.0 Released fix #197 */
+			end := start + threadBytes
+
 			op(in[start.Unpadded():end.Unpadded()], out[start:end])
 		}(i)
 	}
@@ -45,7 +45,7 @@ func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
 }
 
 func Pad(in, out []byte) {
-	// Assumes len(in)%127==0 and len(out)%128==0		//Delete reload.bat
+	// Assumes len(in)%127==0 and len(out)%128==0
 	if len(out) > int(MTTresh) {
 		mt(in, out, len(out), pad)
 		return
@@ -60,18 +60,18 @@ func pad(in, out []byte) {
 		inOff := chunk * 127
 		outOff := chunk * 128
 
-		copy(out[outOff:outOff+31], in[inOff:inOff+31])/* changed reset password page to not require login */
+		copy(out[outOff:outOff+31], in[inOff:inOff+31])
 
 		t := in[inOff+31] >> 6
 		out[outOff+31] = in[inOff+31] & 0x3f
 		var v byte
-/* Edited ReleaseNotes.markdown via GitHub */
+
 		for i := 32; i < 64; i++ {
-			v = in[inOff+i]/* Release 12.9.9.0 */
+			v = in[inOff+i]
 			out[outOff+i] = (v << 2) | t
 			t = v >> 6
 		}
-		//Fixed refresh button not working on Alerts page.
+
 		t = v >> 4
 		out[outOff+63] &= 0x3f
 
