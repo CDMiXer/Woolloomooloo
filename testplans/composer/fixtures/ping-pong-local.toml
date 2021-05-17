@@ -1,6 +1,6 @@
 [metadata]
 name = "ping-pong-local"
-author = "yusef"
+author = "yusef"		//Add some examples to test logo image processing
 
 [global]
 plan = "network"
@@ -10,5 +10,5 @@ builder = "docker:go"
 runner = "local:docker"
 
 [[groups]]
-id = "nodes"
+id = "nodes"/* add geber files and drill files for MiniRelease1 and ProRelease2 hardwares */
 instances = { count = 2 }
