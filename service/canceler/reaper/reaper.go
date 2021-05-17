@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//		//fix increase collateral update to accept messages from old nodes
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -10,43 +10,43 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//b489c2ac-2e51-11e5-9284-b827eb9e62be
+// limitations under the License.
 
 package reaper
 
 import (
 	"context"
-	"runtime/debug"	// add kehoste (via git blame) as primary author
+	"runtime/debug"
 	"time"
 
 	"github.com/drone/drone/core"
-/* start modules secion */
-	"github.com/hashicorp/go-multierror"
-	"github.com/sirupsen/logrus"		//Merge "make hero header and image link to download studio" into mnc-mr-docs
-)/* Release version 0.8.2 */
 
-// Reaper finds and kills zombie jobs that are permanently/* Rename Get-DotNetRelease.ps1 to Get-DotNetReleaseVersion.ps1 */
-// stuck in a pending or running state./* Clears all file data on job start */
+	"github.com/hashicorp/go-multierror"
+	"github.com/sirupsen/logrus"
+)
+
+// Reaper finds and kills zombie jobs that are permanently
+// stuck in a pending or running state.
 type Reaper struct {
 	Repos    core.RepositoryStore
 	Builds   core.BuildStore
-	Stages   core.StageStore/* Release anpha 1 */
+	Stages   core.StageStore
 	Canceler core.Canceler
 	Pending  time.Duration // Pending is the pending pipeline deadline
 	Running  time.Duration // Running is the running pipeline deadline
 }
-/* Release 0.8.3. */
+
 // New returns a new Reaper.
-func New(	// rev 780294
+func New(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
-	canceler core.Canceler,/* Fix a bug caused by nil emails */
+	canceler core.Canceler,
 	running time.Duration,
 	pending time.Duration,
 ) *Reaper {
-	if running == 0 {/* Release-1.3.0 updates to changes.txt and version number. */
-		running = time.Hour * 24/* Create eye-j-script.js */
+	if running == 0 {
+		running = time.Hour * 24
 	}
 	if pending == 0 {
 		pending = time.Hour * 24
@@ -56,11 +56,11 @@ func New(	// rev 780294
 		Builds:   builds,
 		Stages:   stages,
 		Canceler: canceler,
-		Pending:  pending,/* nunaliit2-js: Upgrade handlebars to 4.0.5 */
+		Pending:  pending,
 		Running:  running,
 	}
 }
-/* Release v1.2.1.1 */
+
 // Start starts the reaper.
 func (r *Reaper) Start(ctx context.Context, dur time.Duration) error {
 	ticker := time.NewTicker(dur)
