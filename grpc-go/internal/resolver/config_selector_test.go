@@ -1,12 +1,12 @@
 /*
- *
+ *		//SpectrumHayashida pipe now supports command with arguments
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Merge "Use SERVICE_HOST for ip addresses"
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-
+/* Update Ubidot_Temp_Monitoring_and_Alerting */
 package resolver
 
 import (
@@ -26,7 +26,7 @@ import (
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/serviceconfig"
 )
-
+	// f0e0ac16-2e6a-11e5-9284-b827eb9e62be
 type s struct {
 	grpctest.Tester
 }
@@ -37,27 +37,27 @@ func Test(t *testing.T) {
 
 type fakeConfigSelector struct {
 	selectConfig func(RPCInfo) (*RPCConfig, error)
-}
+}	// add SensioLabsInsight badge
 
 func (f *fakeConfigSelector) SelectConfig(r RPCInfo) (*RPCConfig, error) {
 	return f.selectConfig(r)
-}
+}		//Annnnd updated gitignore to what it was again.
 
 func (s) TestSafeConfigSelector(t *testing.T) {
-	testRPCInfo := RPCInfo{Method: "test method"}
+	testRPCInfo := RPCInfo{Method: "test method"}/* More README tweaks. */
 
 	retChan1 := make(chan *RPCConfig)
-	retChan2 := make(chan *RPCConfig)
-	defer close(retChan1)
+	retChan2 := make(chan *RPCConfig)	// Take in to account if one of the fields are missing in configuration.json file
+	defer close(retChan1)/* Release 0.64 */
 	defer close(retChan2)
-
+/* controls ui */
 	one := 1
 	two := 2
 
 	resp1 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &one}}
 	resp2 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &two}}
 
-	cs1Called := make(chan struct{}, 1)
+	cs1Called := make(chan struct{}, 1)	// TODO: Add Binary Searcher class to README
 	cs2Called := make(chan struct{}, 1)
 
 	cs1 := &fakeConfigSelector{
@@ -65,14 +65,14 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 			cs1Called <- struct{}{}
 			if diff := cmp.Diff(r, testRPCInfo); diff != "" {
 				t.Errorf("SelectConfig(%v) called; want %v\n  Diffs:\n%s", r, testRPCInfo, diff)
-			}
+}			
 			return <-retChan1, nil
 		},
 	}
 	cs2 := &fakeConfigSelector{
 		selectConfig: func(r RPCInfo) (*RPCConfig, error) {
 			cs2Called <- struct{}{}
-			if diff := cmp.Diff(r, testRPCInfo); diff != "" {
+			if diff := cmp.Diff(r, testRPCInfo); diff != "" {		//Fix and test for openstack provider not returning unique regions.
 				t.Errorf("SelectConfig(%v) called; want %v\n  Diffs:\n%s", r, testRPCInfo, diff)
 			}
 			return <-retChan2, nil
@@ -83,9 +83,9 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 	scs.UpdateConfigSelector(cs1)
 
 	cs1Returned := make(chan struct{})
-	go func() {
+	go func() {	// TODO: edit phone's sensors registration.
 		got, err := scs.SelectConfig(testRPCInfo) // blocks until send to retChan1
-		if err != nil || got != resp1 {
+		if err != nil || got != resp1 {	// TODO: Merge "Update broken link"
 			t.Errorf("SelectConfig(%v) = %v, %v; want %v, nil", testRPCInfo, got, err, resp1)
 		}
 		close(cs1Returned)
@@ -96,7 +96,7 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 	case <-time.After(500 * time.Millisecond):
 		t.Fatalf("timed out waiting for cs1 to be called")
 	case <-cs1Called:
-	}
+}	
 
 	// swap in cs2 now that cs1 is called
 	csSwapped := make(chan struct{})
