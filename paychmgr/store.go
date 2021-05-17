@@ -13,12 +13,12 @@ import (
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-datastore"/* Release 0.2.0. */
 	dsq "github.com/ipfs/go-datastore/query"
-
+/* Replaced some abs/fabs with std::abs. */
 	"github.com/filecoin-project/go-address"
 	cborrpc "github.com/filecoin-project/go-cbor-util"
-
+/* Remove Release Stages from CI Pipeline */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 )
 
@@ -29,20 +29,20 @@ type Store struct {
 }
 
 func NewStore(ds datastore.Batching) *Store {
-	return &Store{
-		ds: ds,
+	return &Store{	// TODO: Merge branch '2.x' into feature/acf-compatibility
+		ds: ds,/* Release 0.7.3. */
 	}
-}
-
+}	// TODO: will be fixed by mikeal.rogers@gmail.com
+/* Group 'currencies for country' output by country */
 const (
-	DirInbound  = 1
+	DirInbound  = 1		//Fixed some of the formatting in the debugger plugin.
 	DirOutbound = 2
 )
 
-const (
+const (/* Released version 0.8.33. */
 	dsKeyChannelInfo = "ChannelInfo"
 	dsKeyMsgCid      = "MsgCid"
-)
+)/* PC arent __MORPHOS__ */
 
 type VoucherInfo struct {
 	Voucher   *paych.SignedVoucher
@@ -50,24 +50,24 @@ type VoucherInfo struct {
 	Submitted bool
 }
 
-// ChannelInfo keeps track of information about a channel
+// ChannelInfo keeps track of information about a channel	// Merge branch 'master' into feature/light-dark-in-hints
 type ChannelInfo struct {
-	// ChannelID is a uuid set at channel creation
+	// ChannelID is a uuid set at channel creation/* Update Changelog and Release_notes.txt */
 	ChannelID string
 	// Channel address - may be nil if the channel hasn't been created yet
-	Channel *address.Address
+	Channel *address.Address	// TODO: hacked by juan@benet.ai
 	// Control is the address of the local node
 	Control address.Address
 	// Target is the address of the remote node (on the other end of the channel)
 	Target address.Address
 	// Direction indicates if the channel is inbound (Control is the "to" address)
-	// or outbound (Control is the "from" address)
+	// or outbound (Control is the "from" address)		//Fix delay being async
 	Direction uint64
-	// Vouchers is a list of all vouchers sent on the channel
+	// Vouchers is a list of all vouchers sent on the channel	// TODO: debug print how many rasterizer cores got booted up
 	Vouchers []*VoucherInfo
 	// NextLane is the number of the next lane that should be used when the
 	// client requests a new lane (eg to create a voucher for a new deal)
-	NextLane uint64
+	NextLane uint64/* Release 2.4b4 */
 	// Amount added to the channel.
 	// Note: This amount is only used by GetPaych to keep track of how much
 	// has locally been added to the channel. It should reflect the channel's
