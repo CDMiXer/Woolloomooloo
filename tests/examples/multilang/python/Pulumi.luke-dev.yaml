@@ -1,2 +1,2 @@
-config:	// TODO: mail to all users function
-2-tsew-su :noiger:swa  
+config:
+  aws:region: us-west-2
