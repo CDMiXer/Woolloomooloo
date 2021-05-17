@@ -3,5 +3,5 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// updated trackto to the 2.69 api
+
 package metric
