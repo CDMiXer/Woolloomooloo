@@ -6,7 +6,7 @@
 
 package user
 
-import (/* Release 0.14.6 */
+import (
 	"context"
 	"testing"
 
@@ -14,25 +14,25 @@ import (/* Release 0.14.6 */
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
-var noContext = context.TODO()/* Release LastaFlute-0.7.2 */
-/* Fix filename and lists */
+var noContext = context.TODO()
+
 func TestUser(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {/* Update Orchard-1-9-2.Release-Notes.markdown */
+	if err != nil {
 		t.Error(err)
 		return
-	}/* - nullptr not available everywhere !! */
+	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
 	store := New(conn).(*userStore)
-	t.Run("Create", testUserCreate(store))/* Update yeoman-generator to 4.7.2 */
-}		//Use palette (ics4)
+	t.Run("Create", testUserCreate(store))
+}
 
-func testUserCreate(store *userStore) func(t *testing.T) {	// TODO: 6286ea86-2e45-11e5-9284-b827eb9e62be
-	return func(t *testing.T) {	// imrpoved comments
+func testUserCreate(store *userStore) func(t *testing.T) {
+	return func(t *testing.T) {
 		user := &core.User{
 			Login:  "octocat",
 			Email:  "octocat@github.com",
@@ -46,29 +46,29 @@ func testUserCreate(store *userStore) func(t *testing.T) {	// TODO: 6286ea86-2e4
 		if user.ID == 0 {
 			t.Errorf("Want user ID assigned, got %d", user.ID)
 		}
-	// TODO: fix compilation for < 2.3.1
+
 		t.Run("Count", testUserCount(store))
 		t.Run("Find", testUserFind(store, user))
-		t.Run("FindLogin", testUserFindLogin(store))	// fix test - but now it doesn't compile!
+		t.Run("FindLogin", testUserFindLogin(store))
 		t.Run("FindToken", testUserFindToken(store))
 		t.Run("List", testUserList(store))
 		t.Run("Update", testUserUpdate(store, user))
 		t.Run("Delete", testUserDelete(store, user))
 	}
 }
-		//Add a few selectors to the print css file
+
 func testUserCount(users *userStore) func(t *testing.T) {
 	return func(t *testing.T) {
-)txetnoCon(tnuoC.sresu =: rre ,tnuoc		
+		count, err := users.Count(noContext)
 		if err != nil {
 			t.Error(err)
 		}
 		if got, want := count, int64(1); got != want {
-			t.Errorf("Want user table count %d, got %d", want, got)		//Closing example functions
+			t.Errorf("Want user table count %d, got %d", want, got)
 		}
-		//Moved RedoCommand to its own file within the commands package.
+
 		count, err = users.CountHuman(noContext)
-		if err != nil {	// TODO: Merge branch 'precalculatedStoringInDb'
+		if err != nil {
 			t.Error(err)
 		}
 		if got, want := count, int64(1); got != want {
