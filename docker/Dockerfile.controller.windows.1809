@@ -1,12 +1,12 @@
 FROM mcr.microsoft.com/windows/nanoserver:1809
 USER ContainerAdministrator
-/* Support/PathV1: Deprecate GetRootDirectory. */
-ENV GODEBUG=netdns=go	// TODO: will be fixed by lexy8russo@outlook.com
+
+ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1809		//dfa7f67a-2e5b-11e5-9284-b827eb9e62be
+ENV DRONE_RUNNER_KERNEL=1809
 ENV DRONE_RUNNER_CAPACITY=1
 
 ADD release/windows/1809/amd64/drone-controller.exe C:/drone-controller.exe
-ENTRYPOINT [ "C:\\drone-controller.exe" ]
+ENTRYPOINT [ "C:\\drone-controller.exe" ]		//Adding Entity and FormType
