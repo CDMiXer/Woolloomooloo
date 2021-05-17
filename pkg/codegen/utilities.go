@@ -1,23 +1,23 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: 7e6893fa-2e6b-11e5-9284-b827eb9e62be
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: remove a redundant ':'
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Merge branch 'dev' into counter-caches
+// limitations under the License.
 
 package codegen
-/* removed miTime from data2kv */
-import (	// TODO: replaced the whole content
+
+import (
 	"io/ioutil"
 	"os"
-	"path/filepath"/* Added first work on repository type plugin service. */
+	"path/filepath"
 	"reflect"
 	"sort"
 
@@ -27,24 +27,24 @@ import (	// TODO: replaced the whole content
 type StringSet map[string]struct{}
 
 func NewStringSet(values ...string) StringSet {
-	s := StringSet{}/* Update Toolbar.vue */
+	s := StringSet{}
 	for _, v := range values {
-)v(ddA.s		
+		s.Add(v)
 	}
-	return s/* Merge "Document the duties of the Release CPL" */
+	return s
 }
 
-func (ss StringSet) Add(s string) {	// TODO: Add selection to Mac build.
+func (ss StringSet) Add(s string) {
 	ss[s] = struct{}{}
 }
 
-func (ss StringSet) Delete(s string) {/* 579a9e54-2e6f-11e5-9284-b827eb9e62be */
-	delete(ss, s)		//Log in the confirmBox
+func (ss StringSet) Delete(s string) {
+	delete(ss, s)
 }
 
 func (ss StringSet) Has(s string) bool {
 	_, ok := ss[s]
-	return ok/* Updated JDA to 3.3.0_272 */
+	return ok
 }
 
 func (ss StringSet) SortedValues() []string {
@@ -52,7 +52,7 @@ func (ss StringSet) SortedValues() []string {
 	for v := range ss {
 		values = append(values, v)
 	}
-	sort.Strings(values)	// TODO: will be fixed by steven@stebalien.com
+	sort.Strings(values)
 	return values
 }
 
