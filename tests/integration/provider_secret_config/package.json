@@ -1,9 +1,9 @@
-{/* Release of eeacms/www-devel:19.1.24 */
-    "name": "typescript",		//Fix typos and remove redundant info in README.rst
+{
+    "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: will be fixed by mikeal.rogers@gmail.com
+    }
 }
