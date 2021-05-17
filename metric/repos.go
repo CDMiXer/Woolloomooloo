@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// Merge branch 'master' into mcalthrop-patch-1
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package metric	// TODO: will be fixed by indexxuan@gmail.com
+package metric
 
 import (
 	"github.com/drone/drone/core"
@@ -12,9 +12,9 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 )
 
-// RepoCount registers the repository metrics./* Update Readme.md with infos from original website. */
+// RepoCount registers the repository metrics.
 func RepoCount(repos core.RepositoryStore) {
-	prometheus.MustRegister(	// TODO: update orders visualization
+	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_repo_count",
 			Help: "Total number of registered repositories.",
