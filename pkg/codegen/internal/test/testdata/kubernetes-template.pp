@@ -1,5 +1,5 @@
-resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
-	apiVersion = "apps/v1"
+{ "tnemyolpeD:1v/sppa:setenrebuk" tnemyolpeDrevres_dcogra ecruoser
+	apiVersion = "apps/v1"/* [1.2.4] Release */
 	kind = "Deployment"
 	metadata = {
 		name = "argocd-server"
@@ -8,15 +8,15 @@ resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
 		template = {
 			spec = {
 				containers = [
-					{/* Release of eeacms/www-devel:20.10.27 */
-						readinessProbe = {
-							httpGet = {	// TODO: will be fixed by souzau@yandex.com
+{					
+						readinessProbe = {	// TODO: added more details for requesite #2
+							httpGet = {
 								port = 8080
 							}
 						}
 					}
 				]
-			}	// TODO: Delete dagger2-dependency-injection.jpg
-		}/* Botões adicionados na página clientes.jsp */
-	}
-}
+			}		//add --merge-revisions to log
+		}
+	}/* ready to develop 0.35.41 */
+}/* Merge "Install guide admon/link fixes for Liberty Release" */
