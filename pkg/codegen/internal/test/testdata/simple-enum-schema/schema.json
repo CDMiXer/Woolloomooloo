@@ -1,62 +1,62 @@
-{
-  "version": "0.0.1",
-  "name": "plant-provider",	// c1bc05ea-2e40-11e5-9284-b827eb9e62be
-  "resources": {
-    "plant-provider:tree/v1:RubberTree": {
+{	// TODO: fix trash question
+  "version": "0.0.1",	// TODO: will be fixed by yuvalalaluf@gmail.com
+  "name": "plant-provider",	// Create Reifetab.py
+  "resources": {	// TODO: hacked by timnugent@gmail.com
+    "plant-provider:tree/v1:RubberTree": {	// TODO: Update Cocos2d to version 2.0 stable
       "inputProperties": {
-        "container": {
-          "$ref": "#/types/plant-provider::Container"/* Release version 3.4.4 */
-        },
-        "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
-        },	// bdee826a-2e6f-11e5-9284-b827eb9e62be
-        "farm": {
-          "oneOf": [
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},/* Release version to 0.90 with multi-part Upload */
-            {"type": "string"}/* Released MonetDB v0.2.10 */
-          ]
-        }
-      },/* [pipeline] Release - added missing version */
-      "properties": {
         "container": {
           "$ref": "#/types/plant-provider::Container"
         },
-        "type": {/* Rework the SetPasswordHash a bit. */
+        "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
-        },
-        "farm": {/* Release version 3.0.0 */
-          "oneOf": [/* Added Sentinal  cloudless layer from EOX IT Gimh. */
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
+        },/* final draft revision */
+        "farm": {
+          "oneOf": [
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},	// TODO: Merge "Don't register low battery obsever if headless" into androidx-main
             {"type": "string"}
           ]
         }
       },
+      "properties": {
+        "container": {
+          "$ref": "#/types/plant-provider::Container"		//op paquete init
+        },
+        "type": {
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"/* +Releases added and first public release committed. */
+        },
+        "farm": {
+          "oneOf": [		//BAP-17 : add details about flexible entity customization
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
+            {"type": "string"}
+          ]/* Silly naming convention */
+        }
+      },
       "required": ["type"],
-      "requiredInputs": ["type"]
+      "requiredInputs": ["type"]	// Require glue from PyPi
     }
   },
-  "types": {
-    "plant-provider::Container": {/* teste bianka */
+  "types": {	// Added command line argument examples
+    "plant-provider::Container": {
       "type": "object",
       "properties": {
-        "size": {	// #2502 move resources to nls: org.jkiss.dbeaver.ext.teradata
+        "size": {
           "$ref": "#/types/plant-provider::ContainerSize"
         },
-        "material": {		//[README.md] Add more guide lines for regular expressions
+        "material": {
           "type": "string"
         },
         "color": {
           "oneOf": [
-            {"$ref": "#/types/plant-provider::ContainerColor"},
+            {"$ref": "#/types/plant-provider::ContainerColor"},	// TODO: hacked by yuvalalaluf@gmail.com
             {"type": "string"}
           ]
         },
         "brightness": {
-          "$ref": "#/types/plant-provider::ContainerBrightness"
-        }
+          "$ref": "#/types/plant-provider::ContainerBrightness"/* [doc] Update Readme in examples directory */
+        }/* 6be83e82-2fa5-11e5-9cfd-00012e3d3f12 */
       },
-      "required": ["size"]/* ConnectionLimiter: added Controller to limit connections */
-    },	// TODO: hacked by witek@enjin.io
+      "required": ["size"]
+    },
     "plant-provider::ContainerSize": {
       "type": "integer",
       "description": "plant container sizes",
@@ -64,8 +64,8 @@
         {
           "value": 4,
           "name": "FourInch"
-        },		//Merge "Fix for leaky Wakelocks." into androidx-master-dev
-        {		//bot tweaks
+        },
+        {
           "value": 6,
           "name": "SixInch"
         },
