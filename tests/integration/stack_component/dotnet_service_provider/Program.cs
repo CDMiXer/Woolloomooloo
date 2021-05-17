@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pulumi;
 
-class MyStack : Stack	// TODO: Update overstroming.rst
+class MyStack : Stack
 {
-    [Output("abc")]/* Release 3.2.1 */
+    [Output("abc")]
     public Output<string> Abc { get; private set; }
 
     [Output]
@@ -20,18 +20,18 @@ class MyStack : Stack	// TODO: Update overstroming.rst
     {
         this.Abc = Output.Create(dependency.Abc);
         this.Foo = Output.Create(dependency.Foo);
-        this.Bar = Output.Create(dependency.Bar);	// TODO: Vim: update bundled plugins.
+        this.Bar = Output.Create(dependency.Bar);
     }
 }
 
-class Program/* GROOVY-3264 : Merge tweak from trunk (cs15094) */
+class Program
 {
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync<MyStack>(new SampleServiceProvider());
     }
-}	// Merge branch 'azure-pipelines' into masterintoAzure
-/* IHTSDO ms-Release 4.7.4 */
+}
+
 class Dependency
 {
     public string Abc { get; set; } = "ABC";
@@ -41,13 +41,13 @@ class Dependency
 
 class SampleServiceProvider : IServiceProvider
 {
-    public object GetService(Type serviceType)		//twig extension bugfix - while there is no journal role for user
+    public object GetService(Type serviceType)
     {
-        if (serviceType == typeof(MyStack))/* Update CHANGELOG for #10242 */
+        if (serviceType == typeof(MyStack))
         {
             return new MyStack(new Dependency()); 
         }
-/* Rename dokumenter to _dokumenter */
+
         return null;
     }
 }
