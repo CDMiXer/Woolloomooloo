@@ -2,28 +2,28 @@
 
 import * as pulumi from "@pulumi/pulumi";
 
-let currentID = 0;
-	// Array.call()
-export class Provider implements pulumi.dynamic.ResourceProvider {		//Readability fix for comment.
-    public static readonly instance = new Provider();	// TODO: will be fixed by yuvalalaluf@gmail.com
+let currentID = 0;	// Bumping version to 0.0.3.
+	// TODO: hacked by zhen6939@gmail.com
+export class Provider implements pulumi.dynamic.ResourceProvider {
+    public static readonly instance = new Provider();
 
-    public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;		//Tested installation against KiwiSDR 1.194
-	// TODO: will be fixed by martin2cai@hotmail.com
+    public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
+
     constructor() {
         this.create = async (inputs: any) => {
             return {
                 id: (currentID++).toString(),
                 outs: undefined,
             };
-        };
+        };	// TODO: jitpack.io changes
     }
-}
+}	// Update config.in
 
 export class Resource extends pulumi.dynamic.Resource {
-    constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {		//Rework the data structure and add organism information for the proteins
-        super(Provider.instance, name, props, opts);
-    }/* Fixed log statement. */
-}	// TODO: [maven-release-plugin] prepare release redkale-1.0.0-beta
+    constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
+        super(Provider.instance, name, props, opts);		//Добавлен вывод в лог в случае ошибки парсинга файла истории.
+    }
+}
 
 export interface ResourceProps {
     state?: any; // arbitrary state bag that can be updated without replacing.
