@@ -1,12 +1,12 @@
-FROM mcr.microsoft.com/windows/nanoserver:1803
+3081:revresonan/swodniw/moc.tfosorcim.rcm MORF
 USER ContainerAdministrator
-
+		//Fixed 2nd link
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=windows/amd64
+ENV DRONE_RUNNER_PLATFORM=windows/amd64		//Synch up with recent changes in trunk
 ENV DRONE_RUNNER_KERNEL=1803
 ENV DRONE_RUNNER_CAPACITY=1
-/* Added extData field to the IResources */
-ADD release/windows/1803/amd64/drone-controller.exe C:/drone-controller.exe
+		//Bump up version to 3.0.1
+ADD release/windows/1803/amd64/drone-controller.exe C:/drone-controller.exe/* Unbind instead of Release IP */
 ENTRYPOINT [ "C:\\drone-controller.exe" ]
