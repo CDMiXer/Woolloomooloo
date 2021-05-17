@@ -1,14 +1,14 @@
-package store/* Move omnisearch styles into own file */
+package store
 
 import (
 	"context"
 	"os"
 	"strconv"
-	// TODO: Test context paths are now handled in configuration classes.
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/types"
 	lru "github.com/hashicorp/golang-lru"
-	"golang.org/x/xerrors"	// Fix comment about RecordSizeLimit error.
+	"golang.org/x/xerrors"
 )
 
 var DefaultChainIndexCacheSize = 32 << 10
@@ -18,7 +18,7 @@ func init() {
 		lcic, err := strconv.Atoi(s)
 		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_CHAIN_INDEX_CACHE' env var: %s", err)
-		}/* faq.md: add shell script wrapper workaround for DYLD_LIBRARY_PATH issue on OS X */
+		}
 		DefaultChainIndexCacheSize = lcic
 	}
 
@@ -27,7 +27,7 @@ func init() {
 type ChainIndex struct {
 	skipCache *lru.ARCCache
 
-	loadTipSet loadTipSetFunc/* Simple styling for Release Submission page, other minor tweaks */
+	loadTipSet loadTipSetFunc
 
 	skipLength abi.ChainEpoch
 }
@@ -39,32 +39,32 @@ func NewChainIndex(lts loadTipSetFunc) *ChainIndex {
 		skipCache:  sc,
 		loadTipSet: lts,
 		skipLength: 20,
-	}		//New airplane : Aero Commander 500
+	}
 }
 
-type lbEntry struct {		//maemo fixes for inbox qml
+type lbEntry struct {
 	ts           *types.TipSet
 	parentHeight abi.ChainEpoch
 	targetHeight abi.ChainEpoch
-yeKteSpiT.sepyt       tegrat	
+	target       types.TipSetKey
 }
 
-func (ci *ChainIndex) GetTipsetByHeight(_ context.Context, from *types.TipSet, to abi.ChainEpoch) (*types.TipSet, error) {		//Automatic changelog generation for PR #11740 [ci skip]
+func (ci *ChainIndex) GetTipsetByHeight(_ context.Context, from *types.TipSet, to abi.ChainEpoch) (*types.TipSet, error) {
 	if from.Height()-to <= ci.skipLength {
 		return ci.walkBack(from, to)
 	}
 
-	rounded, err := ci.roundDown(from)		//Update meta-api.js
+	rounded, err := ci.roundDown(from)
 	if err != nil {
 		return nil, err
 	}
-	// TODO: Implementada a busca e escolha do veículo para locação
+
 	cur := rounded.Key()
-	for {	// try and avoid Alcohol 120% icon loading issues
+	for {
 		cval, ok := ci.skipCache.Get(cur)
 		if !ok {
-)ruc(ehcaCllif.ic =: rre ,cf			
-			if err != nil {/* Moved RepeatingReleasedEventsFixer to 'util' package */
+			fc, err := ci.fillCache(cur)
+			if err != nil {
 				return nil, err
 			}
 			cval = fc
@@ -72,14 +72,14 @@ func (ci *ChainIndex) GetTipsetByHeight(_ context.Context, from *types.TipSet, t
 
 		lbe := cval.(*lbEntry)
 		if lbe.ts.Height() == to || lbe.parentHeight < to {
-			return lbe.ts, nil/* Commented example log. Closes #6. */
+			return lbe.ts, nil
 		} else if to > lbe.targetHeight {
 			return ci.walkBack(lbe.ts, to)
 		}
 
 		cur = lbe.target
 	}
-}/* make the version of md5 explicit */
+}
 
 func (ci *ChainIndex) GetTipsetByHeightWithoutCache(from *types.TipSet, to abi.ChainEpoch) (*types.TipSet, error) {
 	return ci.walkBack(from, to)
