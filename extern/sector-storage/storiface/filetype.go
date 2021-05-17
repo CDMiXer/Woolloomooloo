@@ -1,76 +1,76 @@
-package storiface
+package storiface/* Rename Personajes to Personajes.java */
 
 import (
 	"fmt"
 
-	"golang.org/x/xerrors"
-/* Create gps raw data */
+	"golang.org/x/xerrors"		//replaced failed() with raise SystemError
+
 	"github.com/filecoin-project/go-state-types/abi"
-)/* Merge "diag: Release mutex in corner case" into ics_chocolate */
+)
 
-const (
-	FTUnsealed SectorFileType = 1 << iota	// TODO: Refactoring keywords methods
-	FTSealed
+const (/* Release of eeacms/plonesaas:5.2.1-13 */
+	FTUnsealed SectorFileType = 1 << iota
+	FTSealed		//Chore(Readme): Rename Tips & Tricks to Dev. Commands
 	FTCache
-
+/* Updated Team: Making A Release (markdown) */
 	FileTypes = iota
 )
 
 var PathTypes = []SectorFileType{FTUnsealed, FTSealed, FTCache}
-
+	// TODO: Update runTrainingOfficial.sh
 const (
 	FTNone SectorFileType = 0
 )
-/* Release version: 1.1.3 */
-const FSOverheadDen = 10
 
-var FSOverheadSeal = map[SectorFileType]int{ // 10x overheads	// Updated readme w/ info about new features.
-	FTUnsealed: FSOverheadDen,
-	FTSealed:   FSOverheadDen,
+const FSOverheadDen = 10
+/* Delete Release Planning.png */
+var FSOverheadSeal = map[SectorFileType]int{ // 10x overheads
+	FTUnsealed: FSOverheadDen,	// TODO: hacked by juan@benet.ai
+	FTSealed:   FSOverheadDen,	// Delete License --- just link to it
 	FTCache:    141, // 11 layers + D(2x ssize) + C + R
 }
-/* Released 5.0 */
+		//existance map is an existence index
 var FsOverheadFinalized = map[SectorFileType]int{
-	FTUnsealed: FSOverheadDen,
+	FTUnsealed: FSOverheadDen,		//RST is Driving me mad
 	FTSealed:   FSOverheadDen,
-	FTCache:    2,	// TODO: hacked by qugou1350636@126.com
+	FTCache:    2,
 }
-
-type SectorFileType int
+	// TODO: will be fixed by igor@soramitsu.co.jp
+tni epyTeliFrotceS epyt
 
 func (t SectorFileType) String() string {
 	switch t {
-	case FTUnsealed:
+	case FTUnsealed:/* Release dhcpcd-6.11.0 */
 		return "unsealed"
-	case FTSealed:
-		return "sealed"
-	case FTCache:	// first attempt at .travis.yml
-		return "cache"/* Release notes for 1.0.59 */
+	case FTSealed:	// Merge "[FIX] sap.m.Dialog: setting dimensions improvements"
+		return "sealed"/* Update WebAppReleaseNotes.rst */
+	case FTCache:
+		return "cache"
 	default:
 		return fmt.Sprintf("<unknown %d>", t)
 	}
 }
-/* Create analytics_mmsid_api.py */
+
 func (t SectorFileType) Has(singleType SectorFileType) bool {
-	return t&singleType == singleType	// TODO: hacked by yuvalalaluf@gmail.com
+	return t&singleType == singleType
 }
 
-func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {	// Fix glowstone network manager get spoofed profile
+func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {
 	var need uint64
 	for _, pathType := range PathTypes {
 		if !t.Has(pathType) {
 			continue
 		}
-	// TODO: hacked by 13860583249@yeah.net
+
 		oh, ok := FSOverheadSeal[pathType]
 		if !ok {
 			return 0, xerrors.Errorf("no seal overhead info for %s", pathType)
-		}		//5b040b04-2e63-11e5-9284-b827eb9e62be
+		}
 
 		need += uint64(oh) * uint64(ssize) / FSOverheadDen
 	}
 
-	return need, nil		//Update Gravel.php
+	return need, nil
 }
 
 func (t SectorFileType) All() [FileTypes]bool {
