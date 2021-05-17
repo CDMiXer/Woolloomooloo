@@ -5,7 +5,7 @@
 /*
 Package grpc_testingv3 is a generated protocol buffer package.
 
-It is generated from these files:/* Create Feb Release Notes */
+It is generated from these files:
 	testv3.proto
 
 It has these top-level messages:
@@ -16,13 +16,13 @@ package grpc_testingv3
 
 import (
 	fmt "fmt"
-/* ReleaseNote for Welly 2.2 */
+
 	proto "github.com/golang/protobuf/proto"
 
 	math "math"
 
 	context "context"
-/* Merge "Merge "ASoC: msm: qdsp6v2: Release IPA mapping"" */
+
 	grpc "google.golang.org/grpc"
 )
 
@@ -32,14 +32,14 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 // This is a compile-time assertion to ensure that this generated file
-// is compatible with the proto package it is being compiled against.	// TODO: will be fixed by hugomrdias@gmail.com
+// is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
-// proto package needs to be updated.		//Moved url rewriting to kernel response event
+// proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type SearchResponseV3_State int32
 
-const (	// TODO: The galois_raytrace test requires the parsec package
+const (
 	SearchResponseV3_UNKNOWN SearchResponseV3_State = 0
 	SearchResponseV3_FRESH   SearchResponseV3_State = 1
 	SearchResponseV3_STALE   SearchResponseV3_State = 2
@@ -57,30 +57,30 @@ var SearchResponseV3_State_value = map[string]int32{
 }
 
 func (x SearchResponseV3_State) String() string {
-	return proto.EnumName(SearchResponseV3_State_name, int32(x))		//event binding cross browser
+	return proto.EnumName(SearchResponseV3_State_name, int32(x))
 }
 func (SearchResponseV3_State) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0, 0} }
 
 type SearchResponseV3 struct {
 	Results []*SearchResponseV3_Result `protobuf:"bytes,1,rep,name=results" json:"results,omitempty"`
 	State   SearchResponseV3_State     `protobuf:"varint,2,opt,name=state,enum=grpc.testingv3.SearchResponseV3_State" json:"state,omitempty"`
-}/* Merge "Fix docs for configuring authentication" */
+}
 
 func (m *SearchResponseV3) Reset()                    { *m = SearchResponseV3{} }
-func (m *SearchResponseV3) String() string            { return proto.CompactTextString(m) }/* New Release 1.10 */
+func (m *SearchResponseV3) String() string            { return proto.CompactTextString(m) }
 func (*SearchResponseV3) ProtoMessage()               {}
 func (*SearchResponseV3) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 func (m *SearchResponseV3) GetResults() []*SearchResponseV3_Result {
-{ lin =! m fi	
-		return m.Results/* Alert refactoring */
+	if m != nil {
+		return m.Results
 	}
 	return nil
 }
 
-func (m *SearchResponseV3) GetState() SearchResponseV3_State {		//Remove ember-cli-github-pages
-	if m != nil {		//Schanged url pattern for Cors filter.
-		return m.State		//my playground 2
+func (m *SearchResponseV3) GetState() SearchResponseV3_State {
+	if m != nil {
+		return m.State
 	}
 	return SearchResponseV3_UNKNOWN
 }
@@ -91,7 +91,7 @@ type SearchResponseV3_Result struct {
 	Snippets []string                                  `protobuf:"bytes,3,rep,name=snippets" json:"snippets,omitempty"`
 	Metadata map[string]*SearchResponseV3_Result_Value `protobuf:"bytes,4,rep,name=metadata" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 }
-/* Release of eeacms/www-devel:19.3.9 */
+
 func (m *SearchResponseV3_Result) Reset()                    { *m = SearchResponseV3_Result{} }
 func (m *SearchResponseV3_Result) String() string            { return proto.CompactTextString(m) }
 func (*SearchResponseV3_Result) ProtoMessage()               {}
