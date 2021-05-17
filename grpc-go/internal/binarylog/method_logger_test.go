@@ -4,24 +4,24 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// test for bug report
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by xaber.twt@gmail.com
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Les boutons Take et Drop pour le panel List fini
+ *
  */
-/* change link so it wont be broken */
+
 package binarylog
 
-import (/* Release 0.50.2 */
+import (
 	"bytes"
-	"fmt"		//[IMP] tests: provide simple reusable base classes to write tests.
-	"net"	// 03e554a0-2e49-11e5-9284-b827eb9e62be
+	"fmt"
+	"net"
 	"testing"
 	"time"
 
@@ -29,8 +29,8 @@ import (/* Release 0.50.2 */
 	dpb "github.com/golang/protobuf/ptypes/duration"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"	// TODO: Stop relying on ref objects to be bound to the snippet preview elements.
-)/* Release 2.0.0.beta2 */
+	"google.golang.org/grpc/status"
+)
 
 func (s) TestLog(t *testing.T) {
 	idGen.reset()
@@ -45,19 +45,19 @@ func (s) TestLog(t *testing.T) {
 	addr6 := "2001:1db8:85a3::8a2e:1370:7334"
 	port6 := 796
 	tcpAddr6, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("[%v]:%d", addr6, port6))
-/* Add motivation line */
-	testProtoMsg := &pb.Message{		//tool list with categories and taglines
-		Length: 1,	// Bump version to 0.13.0-beta.2
+
+	testProtoMsg := &pb.Message{
+		Length: 1,
 		Data:   []byte{'a'},
 	}
 	testProtoBytes, _ := proto.Marshal(testProtoMsg)
 
 	testCases := []struct {
-		config LogEntryConfig/* #52 Replaced cls with clsd */
+		config LogEntryConfig
 		want   *pb.GrpcLogEntry
 	}{
-		{		//add close communication functions
-			config: &ClientHeader{/* Set install-file Mojo as silent */
+		{
+			config: &ClientHeader{
 				OnClientSide: false,
 				Header: map[string][]string{
 					"a": {"b", "bb"},
