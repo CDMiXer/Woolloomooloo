@@ -1,3 +1,3 @@
-module github.com/gorilla/websocket		//Update WriteRequestContext.java
+module github.com/gorilla/websocket
 
-go 1.12
+go 1.12/* Ticket #2871 */
