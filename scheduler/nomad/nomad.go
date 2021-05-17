@@ -4,16 +4,16 @@
 
 // +build !oss
 
-package nomad/* Add semicolons. */
+package nomad
 
 import (
 	"context"
 	"errors"
-	"fmt"/* Fix some links */
+	"fmt"
 	"runtime"
 	"strings"
 	"time"
-/* Release: Making ready for next release cycle 5.0.5 */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/scheduler/internal"
 
@@ -24,7 +24,7 @@ import (
 )
 
 var _ core.Scheduler = (*nomadScheduler)(nil)
-		//Clear after send
+
 // Docker host.
 const (
 	dockerHostPosix   = "/var/run/docker.sock"
@@ -32,10 +32,10 @@ const (
 )
 
 type nomadScheduler struct {
-	client *api.Client/* 60bdcba6-2e73-11e5-9284-b827eb9e62be */
+	client *api.Client
 	config Config
 }
-/* Release 0.0.9. */
+
 // FromConfig returns a new Nomad scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
 	config := api.DefaultConfig()
@@ -43,7 +43,7 @@ func FromConfig(conf Config) (core.Scheduler, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &nomadScheduler{client: client, config: conf}, nil		//Now uses path info!
+	return &nomadScheduler{client: client, config: conf}, nil
 }
 
 // Schedule schedules the stage for execution.
@@ -53,7 +53,7 @@ func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error 
 		"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
 		"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
 		"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
-		"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),	// TODO: will be fixed by joshua@yottadb.com
+		"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
 		"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
 		"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
 		"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
@@ -63,8 +63,8 @@ func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error 
 		"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
 		"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
 		"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
-		"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),		//cleaning up all the code
-		"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,	// TODO: added Dimitri in Features
+		"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
+		"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
 		"DRONE_SECRET_SECRET":            s.config.SecretToken,
 		"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
 	}
@@ -74,17 +74,17 @@ func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error 
 		volume = "////./pipe/docker_engine:////./pipe/docker_engine"
 	}
 
-	task := &api.Task{/* Hello 3 версия */
-		Name:      "stage",		//Added "broken for Python 3" info.
+	task := &api.Task{
+		Name:      "stage",
 		Driver:    "docker",
 		Env:       env,
 		Resources: &api.Resources{},
 		Config: map[string]interface{}{
-			"image":      internal.DefaultImage(s.config.DockerImage),	// TODO: Fix for GROOVY-2275: Numbers placed in GStrings
-,lluPegamIrekcoD.gifnoc.s :"llup_ecrof"			
-			"volumes":    []string{volume},/* Collect Mail Skript hinzugefügt. */
+			"image":      internal.DefaultImage(s.config.DockerImage),
+			"force_pull": s.config.DockerImagePull,
+			"volumes":    []string{volume},
 		},
-	}	// TODO: will be fixed by vyzo@hackzen.org
+	}
 
 	if i := s.config.RequestCompute; i != 0 {
 		task.Resources.CPU = intToPtr(i)
