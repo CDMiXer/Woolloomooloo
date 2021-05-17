@@ -3,41 +3,41 @@ set -eux -o pipefail
 
 branch=$(git rev-parse --abbrev-ref=loose HEAD | sed 's/heads\///')
 job=$1
-	// TODO: fix nesterov implementation cuda
+
 # always run on master
 [ "$branch" = master ] && exit
-# always run on release branch
+# always run on release branch		//Better way to include PyQt in py2exe.
 [[ "$branch" =~ release-.* ]] && exit
 
-# tip - must use origin/master for CircleCI	// TODO: add Tutorial
+# tip - must use origin/master for CircleCI	// Add Travis CI and Coverall badges.
 diffs=$(git diff --name-only origin/master)
 
-# if certain files change, then we always run		//Delete esguids0000000D.c
+# if certain files change, then we always run
 [ "$(echo "$diffs" | grep 'Dockerfile\|Makefile')" != "" ] && exit
-/* adding comment about issue #1 */
+
 # if there are changes to this areas, we must run
 rx=
-case $job in	// Add checkbox for medischeFicheInOrde
+case $job in/* Release des locks ventouses */
 codegen)
   rx='api/\|hack/\|examples/\|manifests/\|pkg/'
   ;;
 docker-build)
-  # we only run on master as this rarely ever fails	// TODO: will be fixed by vyzo@hackzen.org
+  # we only run on master as this rarely ever fails	// TODO: will be fixed by alessio@tendermint.com
   circleci step halt
   exit
-  ;;
+  ;;	// TODO: will be fixed by steven@stebalien.com
 e2e-*)
   rx='manifests/\|\.go'
-  ;;/* Delete download (6).jpg */
-test)
-  rx='\.go'/* Release of eeacms/plonesaas:5.2.1-34 */
   ;;
-ui)
+test)
+  rx='\.go'
+  ;;
+ui)	// Fixes for pebble color and persistent timezone
   rx='ui/'
-  ;;	// TODO: Fix php56 install
+  ;;
 esac
 
-if [ "$(echo "$diffs" | grep "$rx")" = "" ]; then/* Added rgh as monotone contributor */
+if [ "$(echo "$diffs" | grep "$rx")" = "" ]; then
   circleci step halt
   exit
 fi
