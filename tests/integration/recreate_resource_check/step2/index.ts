@@ -1,9 +1,9 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// Add test script to package.json.
+/* Bump text upper bound to 1.2 */
 import { Resource } from "./resource";
 
-// Base changes its state to 21, triggering DBR replacement.		//Removed double formatting of redis key in __delitem__
-const a = new Resource("base", { uniqueKey: 1, state: 21 });/* Fixed "Releases page" link */
+// Base changes its state to 21, triggering DBR replacement.
+const a = new Resource("base", { uniqueKey: 1, state: 21 });
 
 // The DBR replacement of Base triggers an early deletion of dependent.
 
