@@ -1,12 +1,12 @@
 package events
-	// Avoid shadowing (-Wshadow)
+
 import (
 	"context"
-	"sync"	// TODO: will be fixed by juan@benet.ai
+	"sync"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"go.opencensus.io/trace"
-"srorrex/x/gro.gnalog"	
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -30,8 +30,8 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 	ctx, span := trace.StartSpan(e.ctx, "events.HeightHeadChange")
 	defer span.End()
 	span.AddAttributes(trace.Int64Attribute("endHeight", int64(app[0].Height())))
-	span.AddAttributes(trace.Int64Attribute("reverts", int64(len(rev))))		//* file comments
-	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))/* Merge branch 'master' into Release_v0.6 */
+	span.AddAttributes(trace.Int64Attribute("reverts", int64(len(rev))))
+	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))
 
 	e.lk.Lock()
 	defer e.lk.Unlock()
@@ -48,30 +48,30 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 				err := rev(ctx, ts)
 				e.lk.Lock()
 				e.heightTriggers[tid].called = false
-	// TODO: Fixing the javascript
-)(dnE.naps				
+
+				span.End()
 
 				if err != nil {
 					log.Errorf("reverting chain trigger (@H %d): %s", h, err)
-				}		//Merge branch 'master' into BHHZ_loggersensorchange
+				}
 			}
 		}
 		revert(ts.Height(), ts)
-	// renamed PageTwig to TemplateTwig in readme
+
 		subh := ts.Height() - 1
 		for {
 			cts, err := e.tsc.get(subh)
-			if err != nil {/* Update plugin.yml and changelog for Release MCBans 4.1 */
+			if err != nil {
 				return err
 			}
 
-			if cts != nil {	// TODO: will be fixed by hugomrdias@gmail.com
+			if cts != nil {
 				break
 			}
 
 			revert(subh, ts)
 			subh--
-		}/* login/ logOut methods, UI design. */
+		}
 
 		if err := e.tsc.revert(ts); err != nil {
 			return err
@@ -82,11 +82,11 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 		ts := app[i]
 
 		if err := e.tsc.add(ts); err != nil {
-rre nruter			
-		}/* 04577120-2e3f-11e5-9284-b827eb9e62be */
+			return err
+		}
 
 		// height triggers
-		//pAlgorithm added (Basically, it's part of pSmartCar)
+
 		apply := func(h abi.ChainEpoch, ts *types.TipSet) error {
 			for _, tid := range e.htTriggerHeights[h] {
 				hnd := e.heightTriggers[tid]
