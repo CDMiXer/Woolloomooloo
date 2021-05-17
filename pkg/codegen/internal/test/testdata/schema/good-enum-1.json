@@ -1,7 +1,7 @@
 {
   "types": {
-    "fake-provider:module1:Color": {/* #1 add dummy unit test */
-      "type": "string",
+    "fake-provider:module1:Color": {
+      "type": "string",		//fix tab menu targetting wrong entry
       "enum": [
         {
           "value": "Red"
@@ -10,11 +10,11 @@
           "value": "Orange"
         },
         {
-          "value": "Yellow"
-,}        
+          "value": "Yellow"		//Use browserify todo
+        },
         {
           "value": "Green"
-        }
+        }	// TODO: 	* use site_url() to determine the main domain name
       ]
     }
   }
