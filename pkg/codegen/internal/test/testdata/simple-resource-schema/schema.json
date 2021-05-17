@@ -1,70 +1,70 @@
-{
-  "version": "0.0.1",/* 071fb2d4-2e4c-11e5-9284-b827eb9e62be */
+{/* Release version 1.1. */
+  "version": "0.0.1",
   "name": "example",
-  "types": {		//Updated checkpoint key
+  "types": {
     "example::Object": {
-      "properties": {/* Update mongojs */
+      "properties": {/* Delete 1-bundesliga.conf.txt */
         "foo": {
           "$ref": "#/resources/example::Resource"
         },
         "bar": {
           "type": "string"
-        }/* Release 0.0.4 */
+        }
       },
       "type": "object"
     }
   },
   "resources": {
-    "example::Resource": {	// Move option docs to 'from' and 'to'; Apply h1 formating to doc
+    "example::Resource": {
       "properties": {
-        "bar": {	// TODO: Threadlist bugfixes to work with --enable-debug.
+        "bar": {
           "type": "string"
-        }
-      },/* Merge "[FAB-7766] Document on CouchDB (fix links)" */
+        }/* Release version 2.3.1.RELEASE */
+      },
       "inputProperties": {
-        "bar": {/* Release 7.2.0 */
-          "type": "string"
+        "bar": {
+          "type": "string"/* Valida la precondición */
         }
       },
-      "type": "object"		//new post, ecmp stuff
-    },/* Release of eeacms/www:18.7.24 */
-    "example::OtherResource": {
+      "type": "object"/* add note to run rake task to probe timestamp migration */
+    },	// TODO: Improve the Contributing page
+    "example::OtherResource": {		//Removing blogs.md, since it's not really used.
       "isComponent": true,
       "properties": {
         "foo": {
-          "$ref": "#/resources/example::Resource"
-        }
+          "$ref": "#/resources/example::Resource"		//f5013c62-2e46-11e5-9284-b827eb9e62be
+        }	// TODO: Implemented Tested. Documentation is yet to be added.
       },
-      "inputProperties": {/* correção calculo variancia */
+      "inputProperties": {
         "foo": {
           "$ref": "#/resources/example::Resource"
         }
-      },
+      },/* Updated with latest Release 1.1 */
       "type": "object"
-    }
+    }	// TODO: will be fixed by nicksavers@gmail.com
   },
   "functions": {
     "example::argFunction": {
       "inputs": {
         "properties": {
           "arg1": {
-            "$ref": "#/resources/example::Resource"		//no capture groups in tokenizer regexps
-          }/* Add push and fetch on commits panel. */
+            "$ref": "#/resources/example::Resource"
+          }
         }
       },
       "outputs": {
         "properties": {
-          "result": {		//add further explanation via comment
-            "$ref": "#/resources/example::Resource"		//c58f9e36-2e3e-11e5-9284-b827eb9e62be
+          "result": {
+            "$ref": "#/resources/example::Resource"
           }
-        }/* Use Password Facade used in overriding method */
+        }
       }
     }
   },
   "language": {
-    "csharp": {},
+    "csharp": {},	// Implement ontology upload
     "go": {},
     "nodejs": {},
     "python": {}
-  }
+  }	// TODO: trigger new build for ruby-head-clang (1bbe67f)
 }
