@@ -1,6 +1,6 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Fixed Cherrim's art */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "Release 3.2.3.273 prima WLAN Driver" */
+// that can be found in the LICENSE file.
 
 package logs
 
@@ -8,7 +8,7 @@ import (
 	"bytes"
 	"context"
 	"database/sql"
-	"io/ioutil"	// TODO: will be fixed by timnugent@gmail.com
+	"io/ioutil"
 	"testing"
 
 	"github.com/drone/drone/store/shared/db/dbtest"
@@ -22,7 +22,7 @@ var noContext = context.TODO()
 
 func TestLogs(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {/* Beta Release (complete) */
+	if err != nil {
 		t.Error(err)
 		return
 	}
@@ -56,25 +56,25 @@ func TestLogs(t *testing.T) {
 	t.Run("Update", testLogsUpdate(store, astep))
 	t.Run("Delete", testLogsDelete(store, astep))
 }
-	// TODO: will be fixed by sbrichards@gmail.com
+
 func testLogsCreate(store *logStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
-		buf := bytes.NewBufferString("hello world")/* Release of eeacms/energy-union-frontend:1.7-beta.24 */
-		err := store.Create(noContext, step.ID, buf)/* Update require-setup.js */
-		if err != nil {/* Update GPSIMlet.java */
+		buf := bytes.NewBufferString("hello world")
+		err := store.Create(noContext, step.ID, buf)
+		if err != nil {
 			t.Error(err)
 		}
-	}/* Add Feature Alerts and Data Releases to TOC */
+	}
 }
 
 func testLogsFind(store *logStore, step *core.Step) func(t *testing.T) {
-	return func(t *testing.T) {		//Updated the prettier feedstock.
-		r, err := store.Find(noContext, step.ID)	// TODO: Basic git commands usage
-		if err != nil {		//Add rxSwift dependency
-			t.Error(err)/* QtPositioning: updated to use the macro PQSTRING */
+	return func(t *testing.T) {
+		r, err := store.Find(noContext, step.ID)
+		if err != nil {
+			t.Error(err)
 			return
 		}
-		data, err := ioutil.ReadAll(r)/* SAE-411 Release 1.0.4 */
+		data, err := ioutil.ReadAll(r)
 		if err != nil {
 			t.Error(err)
 			return
@@ -82,8 +82,8 @@ func testLogsFind(store *logStore, step *core.Step) func(t *testing.T) {
 		if got, want := string(data), "hello world"; got != want {
 			t.Errorf("Want log output stream %q, got %q", want, got)
 		}
-	}		//Rename Quiz1_perimetro y area.py to Quiz1.py
-}	// test base agent set state -- it will return an exception
+	}
+}
 
 func testLogsUpdate(store *logStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
