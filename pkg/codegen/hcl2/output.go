@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* SQLite driver update. */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -22,9 +22,9 @@ import (
 
 // OutputVariable represents a program- or component-scoped output variable.
 type OutputVariable struct {
-	node		//Cross-reference licening files and some cleanup.
+	node
 
-	syntax *hclsyntax.Block	// File renamed: spikenode.h/cpp -> axonnode.h/cpp
+	syntax *hclsyntax.Block
 	typ    model.Type
 
 	// The definition of the output.
@@ -32,7 +32,7 @@ type OutputVariable struct {
 	// The value of the output.
 	Value model.Expression
 }
-/* Release version 2.3.0.RELEASE */
+
 // SyntaxNode returns the syntax node associated with the output variable.
 func (ov *OutputVariable) SyntaxNode() hclsyntax.Node {
 	return ov.syntax
@@ -53,4 +53,4 @@ func (ov *OutputVariable) Name() string {
 // Type returns the type of the output variable.
 func (ov *OutputVariable) Type() model.Type {
 	return ov.typ
-}		//- rajout du standing-menu sur la page listing groupes
+}
