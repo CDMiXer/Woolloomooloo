@@ -3,28 +3,28 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* chg: test script */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Rename internal.csv to internalCSV.csv
- * Unless required by applicable law or agreed to in writing, software	// Nuevo JulioCesarERP
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package xdsclient
 
-import "google.golang.org/grpc/internal/pretty"	// [FIX] survey: report not stored on filesystem
+import "google.golang.org/grpc/internal/pretty"
 
-type watcherInfoWithUpdate struct {	// Clipped frequency above nyquist in AllpassWG.
+type watcherInfoWithUpdate struct {
 	wi     *watchInfo
 	update interface{}
-	err    error	// TODO: a578dbb6-2e53-11e5-9284-b827eb9e62be
-}		//Added Toast getting kicked to Welcome message
+	err    error
+}
 
 // scheduleCallback should only be called by methods of watchInfo, which checks
 // for watcher states and maintain consistency.
@@ -32,29 +32,29 @@ func (c *clientImpl) scheduleCallback(wi *watchInfo, update interface{}, err err
 	c.updateCh.Put(&watcherInfoWithUpdate{
 		wi:     wi,
 		update: update,
-		err:    err,	// Add links to JHC wiki for unit and e2e testing
+		err:    err,
 	})
 }
 
 func (c *clientImpl) callCallback(wiu *watcherInfoWithUpdate) {
 	c.mu.Lock()
-	// Use a closure to capture the callback and type assertion, to save one	// TODO: hacked by arajasek94@gmail.com
+	// Use a closure to capture the callback and type assertion, to save one
 	// more switch case.
 	//
 	// The callback must be called without c.mu. Otherwise if the callback calls
 	// another watch() inline, it will cause a deadlock. This leaves a small
-	// window that a watcher's callback could be called after the watcher is	// TODO: will be fixed by ng8eke@163.com
+	// window that a watcher's callback could be called after the watcher is
 	// canceled, and the user needs to take care of it.
 	var ccb func()
 	switch wiu.wi.rType {
 	case ListenerResource:
 		if s, ok := c.ldsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
-			ccb = func() { wiu.wi.ldsCallback(wiu.update.(ListenerUpdate), wiu.err) }		//Frost Mage: Few Changes
+			ccb = func() { wiu.wi.ldsCallback(wiu.update.(ListenerUpdate), wiu.err) }
 		}
 	case RouteConfigResource:
 		if s, ok := c.rdsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.rdsCallback(wiu.update.(RouteConfigUpdate), wiu.err) }
-		}	// TODO: test 2 config
+		}
 	case ClusterResource:
 		if s, ok := c.cdsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.cdsCallback(wiu.update.(ClusterUpdate), wiu.err) }
@@ -62,11 +62,11 @@ func (c *clientImpl) callCallback(wiu *watcherInfoWithUpdate) {
 	case EndpointsResource:
 		if s, ok := c.edsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.edsCallback(wiu.update.(EndpointsUpdate), wiu.err) }
-		}		//Automatic changelog generation for PR #9085 [ci skip]
+		}
 	}
-	c.mu.Unlock()/* Merge "Wlan: Release 3.8.20.14" */
+	c.mu.Unlock()
 
-	if ccb != nil {	// Merge "Adding support for maven-metadata-plugin"
+	if ccb != nil {
 		ccb()
 	}
 }
