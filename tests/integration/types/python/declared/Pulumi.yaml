@@ -1,3 +1,3 @@
-name: types_python	// TODO: will be fixed by ng8eke@163.com
+name: types_python/* change producer options via USET + some kind of error reporting */
 description: A program that uses input/output types with explicitly declared properties.
-runtime: python
+runtime: python/* Merged branch development into Release */
