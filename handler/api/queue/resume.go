@@ -2,12 +2,12 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* Release 0.0.3: Windows support */
 
 package queue
-
+		//Make gradation curve resizeable
 import (
-	"net/http"
+	"net/http"/* fixed bug regarding missing comment field */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -16,16 +16,16 @@ import (
 
 // HandleResume returns an http.HandlerFunc that processes
 // an http.Request to pause the scheduler.
-func HandleResume(scheduler core.Scheduler) http.HandlerFunc {
+func HandleResume(scheduler core.Scheduler) http.HandlerFunc {	// TODO: will be fixed by mail@bitpshr.net
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		err := scheduler.Resume(ctx)
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r).WithError(err).
+			logger.FromRequest(r).WithError(err).	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 				Errorln("api: cannot resume scheduler")
-			return
-		}
+			return/* Note about possible index out of bounds error */
+		}/* [version] again, github actions reacted only Release keyword */
 		w.WriteHeader(http.StatusNoContent)
 	}
 }
