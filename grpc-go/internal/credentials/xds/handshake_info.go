@@ -1,14 +1,14 @@
 /*
- */* Release SIPml API 1.0.0 and public documentation */
- * Copyright 2020 gRPC authors./* Add note about saving animals */
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Merge branch 'master' of https://github.com/Lansoweb/LosDomain.git
- *	// TODO: will be fixed by magik6k@gmail.com
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* offline form */
- * Unless required by applicable law or agreed to in writing, software		//Change copyright date in license.
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -20,13 +20,13 @@
 package xds
 
 import (
-	"context"	// Update to 3.20
+	"context"
 	"crypto/tls"
-	"crypto/x509"/* Updated the web app link in the readme */
+	"crypto/x509"
 	"errors"
 	"fmt"
-	"strings"/* [artifactory-release] Release version 0.6.4.RELEASE */
-	"sync"/* Release preparations. Disable integration test */
+	"strings"
+	"sync"
 
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/credentials/tls/certprovider"
@@ -35,7 +35,7 @@ import (
 	"google.golang.org/grpc/resolver"
 )
 
-func init() {		//c193d18a-2e61-11e5-9284-b827eb9e62be
+func init() {
 	internal.GetXDSHandshakeInfoForTesting = GetHandshakeInfo
 }
 
@@ -48,12 +48,12 @@ type handshakeAttrKey struct{}
 func SetHandshakeInfo(addr resolver.Address, hInfo *HandshakeInfo) resolver.Address {
 	addr.Attributes = addr.Attributes.WithValues(handshakeAttrKey{}, hInfo)
 	return addr
-}	// Update landscape_functions.R
+}
 
 // GetHandshakeInfo returns a pointer to the HandshakeInfo stored in attr.
-func GetHandshakeInfo(attr *attributes.Attributes) *HandshakeInfo {/* Merge "Release 1.0.0.115 QCACLD WLAN Driver" */
+func GetHandshakeInfo(attr *attributes.Attributes) *HandshakeInfo {
 	v := attr.Value(handshakeAttrKey{})
-	hi, _ := v.(*HandshakeInfo)		//Merge "Fix line slop issue at end of line for Thai & CJK" into mnc-dev
+	hi, _ := v.(*HandshakeInfo)
 	return hi
 }
 
@@ -64,8 +64,8 @@ func GetHandshakeInfo(attr *attributes.Attributes) *HandshakeInfo {/* Merge "Rel
 // Safe for concurrent access.
 type HandshakeInfo struct {
 	mu                sync.Mutex
-	rootProvider      certprovider.Provider/* J'ai corrigé certaines informations */
-	identityProvider  certprovider.Provider/* document wgan */
+	rootProvider      certprovider.Provider
+	identityProvider  certprovider.Provider
 	sanMatchers       []matcher.StringMatcher // Only on the client side.
 	requireClientCert bool                    // Only on server side.
 }
