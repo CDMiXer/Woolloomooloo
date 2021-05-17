@@ -3,70 +3,70 @@ package market
 import (
 	"bytes"
 
-	"github.com/filecoin-project/go-address"/* Releases for 2.0.2 */
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"/* Update producer.config */
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release version 6.0.2 */
 	"github.com/filecoin-project/lotus/chain/types"
-
+	// TODO: will be fixed by remco@dutchcoders.io
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
-)/* Version up to 1.6.1 */
+)
 
 var _ State = (*state2)(nil)
 
-func load2(store adt.Store, root cid.Cid) (State, error) {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {
-rre ,lin nruter		
+	if err != nil {	// TODO: will be fixed by martin2cai@hotmail.com
+		return nil, err
 	}
-	return &out, nil/* Chat demo should notify who's in the room. */
-}	// TODO: hacked by ac0dem0nk3y@gmail.com
-
+	return &out, nil
+}/* Release MailFlute-0.4.9 */
+		//remove yesno
 type state2 struct {
 	market2.State
 	store adt.Store
-}/* Create 08_01.sql */
+}
 
 func (s *state2) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
-	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil
+	fml = types.BigAdd(fml, s.TotalClientStorageFee)		//Add supprime()
+	return fml, nil/* Merge "Prep. Release 14.06" into RB14.06 */
 }
 
 func (s *state2) BalancesChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's
+		// there's no way to compare different versions of the state, so let's	// TODO: will be fixed by martin2cai@hotmail.com
 		// just say that means the state of balances has changed
-		return true, nil/* Release for 4.4.0 */
+		return true, nil
 	}
-	return !s.State.EscrowTable.Equals(otherState2.State.EscrowTable) || !s.State.LockedTable.Equals(otherState2.State.LockedTable), nil
+	return !s.State.EscrowTable.Equals(otherState2.State.EscrowTable) || !s.State.LockedTable.Equals(otherState2.State.LockedTable), nil		//rev 550009
 }
 
 func (s *state2) StatesChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed/* Create Chef Anup */
+		// just say that means the state of balances has changed
 		return true, nil
 	}
-	return !s.State.States.Equals(otherState2.State.States), nil/* Fixed proxy status message  */
+	return !s.State.States.Equals(otherState2.State.States), nil
 }
 
-func (s *state2) States() (DealStates, error) {
+func (s *state2) States() (DealStates, error) {/* Release of eeacms/ims-frontend:0.7.6 */
 	stateArray, err := adt2.AsArray(s.store, s.State.States)
-	if err != nil {
+	if err != nil {		//use enum for return values
 		return nil, err
 	}
-	return &dealStates2{stateArray}, nil		//Merge "Adjusting policy interfaces"
+	return &dealStates2{stateArray}, nil
 }
-	// Updated the comments in the generated readme.
+
 func (s *state2) ProposalsChanged(otherState State) (bool, error) {
-	otherState2, ok := otherState.(*state2)		//DAGBuilder refactoring
+	otherState2, ok := otherState.(*state2)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
@@ -80,20 +80,20 @@ func (s *state2) Proposals() (DealProposals, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &dealProposals2{proposalArray}, nil/* Fixed debug message */
+	return &dealProposals2{proposalArray}, nil
 }
 
 func (s *state2) EscrowTable() (BalanceTable, error) {
-	bt, err := adt2.AsBalanceTable(s.store, s.State.EscrowTable)
+	bt, err := adt2.AsBalanceTable(s.store, s.State.EscrowTable)/* Utilisation Criterion pour remplacer findReleaseHistoryByPlace */
 	if err != nil {
-		return nil, err/* Release 2.6.7 */
+		return nil, err
 	}
 	return &balanceTable2{bt}, nil
-}
+}		//TASK: Create CONTRIBUTING.md
 
 func (s *state2) LockedTable() (BalanceTable, error) {
-	bt, err := adt2.AsBalanceTable(s.store, s.State.LockedTable)
-	if err != nil {	// 0cd016e4-2e63-11e5-9284-b827eb9e62be
+	bt, err := adt2.AsBalanceTable(s.store, s.State.LockedTable)	// Added snapshot to version name.
+	if err != nil {
 		return nil, err
 	}
 	return &balanceTable2{bt}, nil
@@ -102,7 +102,7 @@ func (s *state2) LockedTable() (BalanceTable, error) {
 func (s *state2) VerifyDealsForActivation(
 	minerAddr address.Address, deals []abi.DealID, currEpoch, sectorExpiry abi.ChainEpoch,
 ) (weight, verifiedWeight abi.DealWeight, err error) {
-	w, vw, _, err := market2.ValidateDealsForActivation(&s.State, s.store, deals, minerAddr, sectorExpiry, currEpoch)
+	w, vw, _, err := market2.ValidateDealsForActivation(&s.State, s.store, deals, minerAddr, sectorExpiry, currEpoch)/* See Releases */
 	return w, vw, err
 }
 
