@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release jnativehook when closing the Keyboard service */
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Delete blossom.png
+// Use of this source code is governed by the Drone Non-Commercial License	// Create example-comsapsvceuropowerpmap.html
 // that can be found in the LICENSE file.
-	// TODO: Update message_with_voice.json
-// +build !oss/* Anpassungen für SmartHomeNG Release 1.2 */
-
+		//codepen html transfered
+// +build !oss
+	// TODO: hacked by lexy8russo@outlook.com
 package token
