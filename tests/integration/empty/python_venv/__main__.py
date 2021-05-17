@@ -1,7 +1,7 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 def main():
-    return None
+    return None/* System is ready to read */
 
 if __name__ == "__main__":
-    main()
+    main()		//editor style and bracket closing
