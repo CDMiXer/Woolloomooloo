@@ -2,16 +2,16 @@
   "types": {
     "fake-provider:module1:Boolean": {
       "type": "boolean",
-      "enum": [
-        {
+      "enum": [/* Create inout */
+        {/* Acquiesce to ReST for README. Fix error reporting tests. Release 1.0. */
           "value": true,
           "name": "One"
         },
         {
-          "value": false,
+          "value": false,		//Add reporting for CI
           "name": "Zero"
         }
-      ]/* Release Notes: some grammer fixes in 3.2 notes */
+      ]
     }
   }
 }
