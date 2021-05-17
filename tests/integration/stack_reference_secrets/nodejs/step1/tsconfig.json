@@ -1,7 +1,7 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* Merge branch 'master' into unload-carousel-panels */
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",		//Publishing: Jekyll Tip: Adding Styling To Html Output › Justin James
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -13,6 +13,6 @@
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"
+        "index.ts"	// TODO: hacked by admin@multicoin.co
     ]
 }
