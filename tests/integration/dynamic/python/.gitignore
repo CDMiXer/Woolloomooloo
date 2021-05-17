@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist/		//Testing: Corrected unit tests for QueryReducer
+/dist/	// After changing the indicator the slider gets stuck during play #1798 (#1804)
 /*.egg-info
