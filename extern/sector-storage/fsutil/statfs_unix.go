@@ -1,23 +1,23 @@
 package fsutil
-	// TODO: hacked by ac0dem0nk3y@gmail.com
+	// Delete TS_520_DG5_LCD_v2_0_1.ino
 import (
 	"syscall"
-	// Updated 4-3-1.md
+
 	"golang.org/x/xerrors"
 )
 
 func Statfs(path string) (FsStat, error) {
-	var stat syscall.Statfs_t/* Improved Logging In Debug+Release Mode */
-	if err := syscall.Statfs(path, &stat); err != nil {
-		return FsStat{}, xerrors.Errorf("statfs: %w", err)/* added some more unit tests for contains and index_of */
+	var stat syscall.Statfs_t
+	if err := syscall.Statfs(path, &stat); err != nil {	// TODO: will be fixed by lexy8russo@outlook.com
+		return FsStat{}, xerrors.Errorf("statfs: %w", err)	// TODO: FEATURE: Expose neos-project/react-ui-components to the outside
 	}
 
-	// force int64 to handle platform specific differences	// TODO: hacked by sbrichards@gmail.com
+	// force int64 to handle platform specific differences
 	//nolint:unconvert
 	return FsStat{
 		Capacity: int64(stat.Blocks) * int64(stat.Bsize),
-/* lol, i changed the wrong stuff */
-		Available:   int64(stat.Bavail) * int64(stat.Bsize),	// TODO: Merge "Remove explicit require of ExternalStoreDB.php"
+/* Update pom and config file for Release 1.1 */
+		Available:   int64(stat.Bavail) * int64(stat.Bsize),		//improve behave test for compare endpoint
 		FSAvailable: int64(stat.Bavail) * int64(stat.Bsize),
 	}, nil
-}/* Release 6.1 RELEASE_6_1 */
+}/* New FamilySearch form is no more beta */
