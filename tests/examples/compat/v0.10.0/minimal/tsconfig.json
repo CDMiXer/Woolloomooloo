@@ -5,17 +5,17 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-        "sourceMap": true,	// TODO: hacked by alex.gaynor@gmail.com
+        "declaration": true,
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,		//(v2) FrameGridCanvas: do not paint frame border in List mode.
+        "pretty": true,		//Update convertCsvToOrc.java
+        "noFallthroughCasesInSwitch": true,	// TODO: [IMP] Account: Bank statement reconcile form usebility
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"
-    ]
-}
-
+        "index.ts"/* Released 1.5.1.0 */
+    ]/* [maven-release-plugin] prepare release stapler-parent-1.128 */
+}	// TODO: test to fix a problem
+		//Added comment about `fallbacks` method
