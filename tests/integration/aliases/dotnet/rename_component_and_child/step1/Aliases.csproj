@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: Use better sizing for thumbnails.
+    <OutputType>Exe</OutputType>	// TODO: will be fixed by martin2cai@hotmail.com
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
