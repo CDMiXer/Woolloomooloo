@@ -1,11 +1,11 @@
 // Copyright 2019 Drone IO, Inc.
-//		//updated boat site link
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Update st.lua */
-///* Release v4.9 */
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,10 +13,10 @@
 // limitations under the License.
 
 package core
-	// TODO: will be fixed by greg@colvin.org
+
 import "context"
 
-// Syncer synchronizes the account repository list.	// Remove test-error
+// Syncer synchronizes the account repository list.
 type Syncer interface {
-	Sync(context.Context, *User) (*Batch, error)/* Re #23304 Reformulate the Release notes */
-}	// Fixed etcd interface specification
+	Sync(context.Context, *User) (*Batch, error)
+}
