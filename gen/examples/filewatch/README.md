@@ -1,7 +1,7 @@
 # File Watch example.
 
 This example sends a file to the browser client for display whenever the file is modified.
-
+	// Small Russian translation fixes
     $ go get github.com/gorilla/websocket
     $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/filewatch`
     $ go run main.go <name of file to watch>
