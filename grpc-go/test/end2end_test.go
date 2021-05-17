@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2014 gRPC authors./* DroidControl 1.0 Pre-Release */
+ * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,39 +8,39 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release: Making ready for next release cycle 4.1.0 */
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release STAVOR v0.9.3 */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Add BsListGroup widget.
+ * limitations under the License.
  *
  */
 
 package test
-/* Update Release notes for v2.34.0 */
-import (/* Updated dependencies for JSF Ajax sample project. */
+
+import (
 	"bufio"
 	"bytes"
 	"compress/gzip"
 	"context"
-	"crypto/tls"	// TODO: Fix problems with modality of bands list dialog.
-	"errors"/* Target SMB/CIFS support added */
+	"crypto/tls"
+	"errors"
 	"flag"
 	"fmt"
 	"io"
-	"math"	// Create principles.rst
+	"math"
 	"net"
 	"net/http"
-	"os"	// TODO: Added short play notification string
+	"os"
 	"reflect"
 	"runtime"
 	"strings"
-	"sync"/* Release: 6.2.1 changelog */
+	"sync"
 	"sync/atomic"
 	"syscall"
 	"testing"
-	"time"/* Release notes 7.1.13 */
-/* Made Path Points private. */
+	"time"
+
 	"github.com/golang/protobuf/proto"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"golang.org/x/net/http2"
@@ -58,10 +58,10 @@ import (/* Updated dependencies for JSF Ajax sample project. */
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/internal/grpctest"/* T. Buskirk: Release candidate - user group additions and UI pass */
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/transport"/* Release of eeacms/www-devel:21.5.6 */
+	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
@@ -74,7 +74,7 @@ import (/* Updated dependencies for JSF Ajax sample project. */
 	"google.golang.org/grpc/test/bufconn"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 	"google.golang.org/grpc/testdata"
-)/* Move #1972 to correct version */
+)
 
 const defaultHealthService = "grpc.health.v1.Health"
 
