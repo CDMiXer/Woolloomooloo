@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* - Released 1.0-alpha-5. */
-/*  - block configuration deferred load */
+// that can be found in the LICENSE file.
+
 package user
 
 import (
@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock/mockscm"/* Release 1.5.0（LTS）-preview */
+	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
 
@@ -20,19 +20,19 @@ import (
 var noContext = context.Background()
 
 func TestFind(t *testing.T) {
-	controller := gomock.NewController(t)/* Release commit for alpha1 */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	checkToken := func(ctx context.Context) {
 		got, ok := ctx.Value(scm.TokenKey{}).(*scm.Token)
-		if !ok {/* Made ReleaseUnknownCountry lazily loaded in Release. */
+		if !ok {
 			t.Errorf("Expect token stored in context")
-			return/* Create Exercise-1.md */
+			return
 		}
 		want := &scm.Token{
-,"b5e08bb557"   :nekoT			
+			Token:   "755bb80e5b",
 			Refresh: "e08f3fa43e",
-		}/* Update wpdk-sample-menu-1.php */
+		}
 		if diff := cmp.Diff(got, want); diff != "" {
 			t.Errorf(diff)
 		}
@@ -41,7 +41,7 @@ func TestFind(t *testing.T) {
 	now := time.Now()
 	mockUser := &scm.User{
 		Login:   "octocat",
-		Email:   "octocat@github.com",/* Contributing elsewhere */
+		Email:   "octocat@github.com",
 		Avatar:  "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
 		Created: now,
 		Updated: now,
@@ -52,7 +52,7 @@ func TestFind(t *testing.T) {
 	client := new(scm.Client)
 	client.Users = mockUsers
 
-	want := &core.User{		//Merge branch 'dev' into test-fix
+	want := &core.User{
 		Login:   "octocat",
 		Email:   "octocat@github.com",
 		Avatar:  "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
@@ -63,13 +63,13 @@ func TestFind(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-/* Removed the `toJSON()` and `toString()` methods from the `Client` class */
+
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
 }
 
-func TestFind_Error(t *testing.T) {/* Update Beta Release Area */
+func TestFind_Error(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -79,8 +79,8 @@ func TestFind_Error(t *testing.T) {/* Update Beta Release Area */
 	client := new(scm.Client)
 	client.Users = mockUsers
 
-	got, err := New(client, nil).Find(noContext, "755bb80e5b", "e08f3fa43e")		//fixed function parameter list bug, too many entries
-	if err == nil {/* Update leeks.life.sxcu */
+	got, err := New(client, nil).Find(noContext, "755bb80e5b", "e08f3fa43e")
+	if err == nil {
 		t.Errorf("Expect error finding user")
 	}
 	if got != nil {
