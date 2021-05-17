@@ -1,3 +1,3 @@
-This directory contains x509 certificates used in cloud-to-prod interop tests.
+This directory contains x509 certificates used in cloud-to-prod interop tests./* remove reduntant cast */
 For tests within gRPC-Go repo, please use the files in testsdata/x509
 directory.
