@@ -1,18 +1,18 @@
-{	// TODO: will be fixed by jon@atack.com
-    "compilerOptions": {
-        "strict": true,
+{
+    "compilerOptions": {	// TODO: hacked by joshua@yottadb.com
+        "strict": true,		//+Get ServerInfo By ID
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",	// TODO: list_arg_to_str ændret def og fjernet fra searcher
-        "moduleResolution": "node",
+        "module": "commonjs",	// Oomph setup for xtext-nightly branch
+        "moduleResolution": "node",	// Merge monthEditor into development
         "sourceMap": true,
-        "experimentalDecorators": true,	// TODO: will be fixed by lexy8russo@outlook.com
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// TODO: will be fixed by timnugent@gmail.com
-        "forceConsistentCasingInFileNames": true
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true		//Merge "Hold wake lock while shutting down."
     },
     "files": [
         "index.ts"
     ]
-}/* Ignoring deprecation related methods from test coverage report */
+}
