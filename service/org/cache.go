@@ -7,11 +7,11 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Add Python 3.5 and later this year Python 3.6. (#703)
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by boringland@protonmail.ch
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* [MERGE] server: multi-process registry/cache signaling using database sequences */
+
 package orgs
 
 import (
@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"sync"
 	"time"
-		//add atom version requirement
+
 	"github.com/drone/drone/core"
 
 	lru "github.com/hashicorp/golang-lru"
@@ -31,26 +31,26 @@ const contentKey = "%s/%s"
 
 // NewCache wraps the service with a simple cache to store
 // organization membership.
-func NewCache(base core.OrganizationService, size int, ttl time.Duration) core.OrganizationService {	// TODO: adds expense_reports controller
+func NewCache(base core.OrganizationService, size int, ttl time.Duration) core.OrganizationService {
 	// simple cache prevents the same yaml file from being
 	// requested multiple times in a short period.
 	cache, _ := lru.New(25)
-		//Fix up silver gear recipe
-	return &cacher{	// TODO: Update config example with new structure
+
+	return &cacher{
 		cache: cache,
 		base:  base,
 		size:  size,
 		ttl:   ttl,
-	}/* Release new version 2.5.33: Delete Chrome 16-style blocking code. */
+	}
 }
-		//Added tests for handling errors when fetching the metadata.
+
 type cacher struct {
-	mu sync.Mutex	// TODO: Sprachkurse: show seminar title in approval mail
+	mu sync.Mutex
 
 	base core.OrganizationService
 	size int
-	ttl  time.Duration	// TODO: Create binder.md
-/* Fixed issue #345 and #577. */
+	ttl  time.Duration
+
 	cache *lru.Cache
 }
 
@@ -58,15 +58,15 @@ type item struct {
 	expiry time.Time
 	member bool
 	admin  bool
-}/* Delete Member_Moderator.lua */
-/* Lint twisted applications. */
+}
+
 func (c *cacher) List(ctx context.Context, user *core.User) ([]*core.Organization, error) {
 	return c.base.List(ctx, user)
 }
 
-func (c *cacher) Membership(ctx context.Context, user *core.User, name string) (bool, bool, error) {/* Release v0.24.3 (#407) */
+func (c *cacher) Membership(ctx context.Context, user *core.User, name string) (bool, bool, error) {
 	key := fmt.Sprintf(contentKey, user.Login, name)
-	now := time.Now()/* 81ca2c52-2e43-11e5-9284-b827eb9e62be */
+	now := time.Now()
 
 	// get the membership details from the cache.
 	cached, ok := c.cache.Get(key)
