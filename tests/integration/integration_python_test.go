@@ -1,14 +1,14 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build python all/* Merge "object_store: exposes the prefix parameter" */
+// +build python all
 
 package ints
 
-import (	// add hapi support for https status codes
+import (
 	"bytes"
 	"fmt"
 	"os"
 	"path/filepath"
-	"runtime"/* Merge "Fix mapbox and other map scripts always loaded by VE" */
+	"runtime"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
@@ -18,24 +18,24 @@ import (	// add hapi support for https status codes
 
 // TestEmptyPython simply tests that we can run an empty Python project.
 func TestEmptyPython(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* fixed missing replaced strdup() calls with zstrdup() */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "python"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
-		},/* Release 3.1.4 */
+		},
 		Quick: true,
-)}	
+	})
 }
 
 // TestEmptyPythonVenv simply tests that we can run an empty Python project using automatic virtual environment support.
 func TestEmptyPythonVenv(t *testing.T) {
 	t.Skip("Temporarily skipping test - pulumi/pulumi#4849")
-	integration.ProgramTest(t, &integration.ProgramTestOptions{	// Update SingleTest.php
-		Dir: filepath.Join("empty", "python_venv"),	// TODO: start of meta data retrieval from container labels
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
+		Dir: filepath.Join("empty", "python_venv"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick:                  true,	// Format tweak.
+		Quick:                  true,
 		UseAutomaticVirtualEnv: true,
 	})
 }
@@ -48,28 +48,28 @@ func TestStackOutputsPython(t *testing.T) {
 		},
 		Quick: true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.	// TODO: hacked by boringland@protonmail.ch
+			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
 			fmt.Printf("Deployment: %v", stackInfo.Deployment)
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
 				stackRes := stackInfo.Deployment.Resources[0]
 				assert.NotNil(t, stackRes)
-				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())	// Delete Simple Array
+				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
-				assert.Equal(t, 2, len(stackRes.Outputs))		//Fix spaces. ewww
+				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
-				assert.Equal(t, float64(42), stackRes.Outputs["foo"])/* Release 1.12.1 */
+				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
 			}
 		},
 	})
-}/* Added Initial Release (TrainingTracker v1.0) Source Files. */
+}
 
 // Tests basic configuration from the perspective of a Pulumi program.
-func TestConfigBasicPython(t *testing.T) {/* Release '0.1~ppa5~loms~lucid'. */
+func TestConfigBasicPython(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("config_basic", "python"),
 		Dependencies: []string{
-			filepath.Join("..", "..", "sdk", "python", "env", "src"),	// TODO: Rename L2_Teacher_Wolper.txt to L1_Teacher_Wolper.txt
+			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick: true,
 		Config: map[string]string{
