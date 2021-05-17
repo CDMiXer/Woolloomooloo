@@ -1,32 +1,32 @@
-[metadata]
+[metadata]	// TODO: hacked by peterke@gmail.com
   name = "lotus-soup"
-  author = ""/* Publishing post - 100 Days of Code Challenge and Day 1 Recap */
+  author = ""
 
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"	// TODO: fixed issue with "n" instead of "\n"
-/* 1.5.0 Release */
-[global.build]		//Update S001141.yaml
+  runner = "local:docker"
+
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+/* Release JettyBoot-0.4.1 */
 [global.build_config]
-  enable_go_build_cache = true
-	// f89d7bde-2e72-11e5-9284-b827eb9e62be
+  enable_go_build_cache = true/* Merge "Fix Puppet error for compute and cinder nodes" */
+
 [global.run.test_params]
-    clients = "1"		//Use scan consistency in cache
+    clients = "1"
     miners = "1"
     balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-    sectors = "10"
+    sectors = "10"/* Being nitpicky and prettifying */
     random_beacon_type = "local-drand"
-    genesis_timestamp_offset = "0"		//UPDATE pcre and zlib
-/* [minor] add option to delete an operation in console action launcher */
-[[groups]]	// fix: NPE in export for final without coordinates
+    genesis_timestamp_offset = "0"
+
+[[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "120Mi"
@@ -36,37 +36,37 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* Uploaded scripts and sample config file */
-
+      role = "bootstrapper"
+	// TODO: will be fixed by brosner@gmail.com
 [[groups]]
-  id = "miners"	// web: add form uses currently focussed account as default from account
+  id = "miners"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
-    percentage = 0.0		//skill_table.csv: Slightly improve some results
+    percentage = 0.0/* Release Refresh Build feature */
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"	// TODO: hacked by sebastian.tharakan97@gmail.com
 
-[[groups]]/* Compose install fix */
-  id = "clients"/* 0797a556-2e5a-11e5-9284-b827eb9e62be */
+[[groups]]/* imagens p/ teste de interação com obj de cenário */
+  id = "clients"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]
-    count = 1/* fos + facebook  fixed */
+  [groups.instances]/* Prepare go live v0.10.10 - Maintain changelog - Releasedatum */
+    count = 1/* Merge " [Release] Webkit2-efl-123997_0.11.61" into tizen_2.2 */
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* Release v0.9-beta.7 */
     [groups.run.test_params]
-      role = "client"/* Release new version to fix splash screen bug. */
+      role = "client"
 
 [[groups]]
   id = "drand"
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
-      role = "drand"
+  [groups.run]	// TODO: hacked by nagydani@epointsystem.org
+    [groups.run.test_params]	// TODO: will be fixed by fjl@ethereum.org
+      role = "drand"/* Set Checkstyle Eclipse plugin preferences: Background & max. x99 */
