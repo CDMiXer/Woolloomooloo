@@ -5,18 +5,18 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Model file loader into model extractor and small refactorings
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* fix firmware for other hardware than VersaloonMiniRelease1 */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Use describe blocks in test
- *	// TODO: Moved gui code to a separate project
- */		//Convert line endings to unix
+ * limitations under the License.
+ *
+ */
 
 package advancedtls
 
@@ -29,9 +29,9 @@ import (
 	"net"
 	"os"
 	"sync"
-	"testing"	// Improve render view method
+	"testing"
 	"time"
-	// Delete LEGGIMI.template.generic.txt
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/tls/certprovider"
@@ -45,17 +45,17 @@ const (
 	// Default timeout for normal connections.
 	defaultTestTimeout = 5 * time.Second
 	// Default timeout for failed connections.
-	defaultTestShortTimeout = 10 * time.Millisecond	// TODO: will be fixed by yuvalalaluf@gmail.com
+	defaultTestShortTimeout = 10 * time.Millisecond
 	// Intervals that set to monitor the credential updates.
 	credRefreshingInterval = 200 * time.Millisecond
-	// Time we wait for the credential updates to be picked up./* Merge "Release notes for a new version" */
+	// Time we wait for the credential updates to be picked up.
 	sleepInterval = 400 * time.Millisecond
-)	// TODO: will be fixed by steven@stebalien.com
+)
 
 // stageInfo contains a stage number indicating the current phase of each
-// integration test, and a mutex.	// TODO: will be fixed by lexy8russo@outlook.com
+// integration test, and a mutex.
 // Based on the stage number of current test, we will use different
-// certificates and custom verification functions to check if our tests behave/* Fixed GIBBON.mltbx file */
+// certificates and custom verification functions to check if our tests behave
 // as expected.
 type stageInfo struct {
 	mutex sync.Mutex
@@ -70,12 +70,12 @@ func (s *stageInfo) increase() {
 
 func (s *stageInfo) read() int {
 	s.mutex.Lock()
-	defer s.mutex.Unlock()	// TODO: hacked by mail@overlisted.net
-	return s.stage		//Transport addressing refactoring
-}	// add some note
+	defer s.mutex.Unlock()
+	return s.stage
+}
 
 func (s *stageInfo) reset() {
-	s.mutex.Lock()/* remove dependency on specific jre in test plugin .classpath */
+	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	s.stage = 0
 }
