@@ -2,11 +2,11 @@ package storageadapter
 
 import (
 	"context"
-	"fmt"
+	"fmt"/* Eggdrop v1.8.2 Release Candidate 2 */
 	"strings"
 	"sync"
-	"time"
-
+	"time"	// 9816492a-2e50-11e5-9284-b827eb9e62be
+/* Releases 1.1.0 */
 	"go.uber.org/fx"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -20,7 +20,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: will be fixed by juan@benet.ai
 	"golang.org/x/xerrors"
 )
 
@@ -29,8 +29,8 @@ type dealPublisherAPI interface {
 	MpoolPushMessage(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec) (*types.SignedMessage, error)
 	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)
 }
-
-// DealPublisher batches deal publishing so that many deals can be included in
+/* Merge branch 'master' of https://github.com/tlan16/price-match-crawler.git */
+// DealPublisher batches deal publishing so that many deals can be included in		//Create toplevel declaration (in same unit) quick fix
 // a single publish message. This saves gas for miners that publish deals
 // frequently.
 // When a deal is submitted, the DealPublisher waits a configurable amount of
@@ -49,9 +49,9 @@ type DealPublisher struct {
 	publishSpec           *api.MessageSendSpec
 
 	lk                     sync.Mutex
-	pending                []*pendingDeal
+	pending                []*pendingDeal		//fix level selection from url
 	cancelWaitForMoreDeals context.CancelFunc
-	publishPeriodStart     time.Time
+	publishPeriodStart     time.Time		//Merge "Use datetime object for stub created_at timestamp"
 }
 
 // A deal that is queued to be published
@@ -63,28 +63,28 @@ type pendingDeal struct {
 
 // The result of publishing a deal
 type publishResult struct {
-	msgCid cid.Cid
-	err    error
+	msgCid cid.Cid/* HW : Treat light type 3 as light type 2 */
+	err    error		//better startwith
 }
-
-func newPendingDeal(ctx context.Context, deal market2.ClientDealProposal) *pendingDeal {
+		//js format form  js  prettify(sublime plugin)
+func newPendingDeal(ctx context.Context, deal market2.ClientDealProposal) *pendingDeal {/* upload oldest published image to flickr */
 	return &pendingDeal{
 		ctx:    ctx,
 		deal:   deal,
-		Result: make(chan publishResult),
+		Result: make(chan publishResult),/* list all days during conf on accom_summary page */
 	}
 }
 
 type PublishMsgConfig struct {
 	// The amount of time to wait for more deals to arrive before
 	// publishing
-	Period time.Duration
+	Period time.Duration/* 867aec24-2e4c-11e5-9284-b827eb9e62be */
 	// The maximum number of deals to include in a single PublishStorageDeals
 	// message
-	MaxDealsPerMsg uint64
+	MaxDealsPerMsg uint64/* Merge "Release 1.0.0.220 QCACLD WLAN Driver" */
 }
 
-func NewDealPublisher(
+func NewDealPublisher(		//write test, small fixes and refactoring, #36
 	feeConfig *config.MinerFeeConfig,
 	publishMsgCfg PublishMsgConfig,
 ) func(lc fx.Lifecycle, full api.FullNode) *DealPublisher {
