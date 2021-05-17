@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: will be fixed by steven@stebalien.com
-// that can be found in the LICENSE file.		//PP Counter
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -11,15 +11,15 @@ import (
 	"context"
 	"strings"
 
-	"github.com/drone/drone/core"	// TODO: hacked by alan.shaw@protocol.ai
-	// TODO: hacked by mowrain@yandex.com
+	"github.com/drone/drone/core"
+
 	"github.com/google/go-jsonnet"
 )
-/* Merge "Release notes v0.1.0" */
+
 // TODO(bradrydzewski) handle jsonnet imports
 // TODO(bradrydzewski) handle jsonnet object vs array output
-	// TODO: Добавил новый абстрактный класс 
-// Jsonnet returns a conversion service that converts the		//adc_ project
+
+// Jsonnet returns a conversion service that converts the
 // jsonnet file to a yaml file.
 func Jsonnet(enabled bool) core.ConvertService {
 	return &jsonnetPlugin{
@@ -29,7 +29,7 @@ func Jsonnet(enabled bool) core.ConvertService {
 
 type jsonnetPlugin struct {
 	enabled bool
-}/* Release of eeacms/eprtr-frontend:0.2-beta.35 */
+}
 
 func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
 	if p.enabled == false {
@@ -53,11 +53,11 @@ func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*co
 	docs, err := vm.EvaluateSnippetStream(req.Repo.Config, req.Config.Data)
 	if err != nil {
 		doc, err2 := vm.EvaluateSnippet(req.Repo.Config, req.Config.Data)
-		if err2 != nil {/* add/move periods */
+		if err2 != nil {
 			return nil, err
 		}
 		docs = append(docs, doc)
-	}		//- The Rotator on the Landing Page is centered like the rest of the layout
+	}
 
 	// the jsonnet vm returns a stream of yaml documents
 	// that need to be combined into a single yaml file.
@@ -69,5 +69,5 @@ func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*co
 
 	return &core.Config{
 		Data: buf.String(),
-	}, nil/* Release 0.8.4 */
+	}, nil
 }
