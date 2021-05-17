@@ -1,8 +1,8 @@
 {
     "target": "foo",
     "latest": {
-        "time": "2017-11-08T11:59:08.512209-08:00",	// TODO: will be fixed by 13860583249@yeah.net
-        "resources": [		//Update django_shell_sublimerepl.md
+        "time": "2017-11-08T11:59:08.512209-08:00",
+        "resources": [
             {
                 "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
                 "custom": true,
@@ -10,10 +10,10 @@
                 "type": "aws:dynamodb/table:Table",
                 "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "inputs": {
-                    "attribute": [	// deleted debug message when mouse is pressed
-                        {/* press page */
-                            "name": "id",/* Release 9.0 */
-                            "type": "S"/* Added a link to Release 1.0 */
+                    "attribute": [
+                        {
+                            "name": "id",
+                            "type": "S"
                         }
                     ],
                     "hashKey": "id",
@@ -33,11 +33,11 @@
                             "type": "S"
                         }
                     ],
-                    "globalSecondaryIndex": [],/* Release Notes for 3.4 */
+                    "globalSecondaryIndex": [],
                     "hashKey": "id",
                     "id": "todo-a1916a6b16ec016b",
                     "localSecondaryIndex": [],
-                    "name": "todo-a1916a6b16ec016b",/* Update bubble.java */
+                    "name": "todo-a1916a6b16ec016b",
                     "readCapacity": "5",
                     "writeCapacity": "5"
                 }
@@ -48,8 +48,8 @@
                 "type": "cloud:table:Table",
                 "inputs": {
                     "primaryKey": "id",
-                    "primaryKeyType": "string"/* Merge branch 'master' into switch-test */
-                }/* Updtate Release Notes URL */
+                    "primaryKeyType": "string"
+                }
             },
             {
                 "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
@@ -59,7 +59,7 @@
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
                 "defaults": {
                     "acl": "private",
-                    "bucket": "todo-8c10043f3d2b0e28",		//Added portfolios for analyses and applications.
+                    "bucket": "todo-8c10043f3d2b0e28",
                     "forceDestroy": false
                 },
                 "outputs": {
@@ -70,13 +70,13 @@
                     "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
                     "forceDestroy": false,
                     "hostedZoneId": "Z2O1EMRO9K5GLX",
-                    "id": "todo-8c10043f3d2b0e28",		//Update class-echo-js-lazy-load.php
+                    "id": "todo-8c10043f3d2b0e28",
                     "logging": [],
                     "region": "us-east-2",
-                    "requestPayer": "BucketOwner",		//Merge "Fix scaling of batched motion events." into honeycomb-mr2
+                    "requestPayer": "BucketOwner",
                     "tags": {},
-                    "versioning": [		//7b739938-2e6b-11e5-9284-b827eb9e62be
-                        {/* Merge "Fix Redis message controller getting stuck in while loop" */
+                    "versioning": [
+                        {
                             "enabled": false,
                             "mfaDelete": false
                         }
@@ -87,7 +87,7 @@
             {
                 "urn": "urn:pulumi:foo::todo::aws:iam/role:Role::todo4c238266",
                 "custom": true,
-                "id": "todo4c238266-c22303f113387c32",/* Task #3223: Merged LOFAR-Release-1_3 21646:21647 into trunk. */
+                "id": "todo4c238266-c22303f113387c32",
                 "type": "aws:iam/role:Role",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
                 "inputs": {
