@@ -1,46 +1,46 @@
 // +build go1.12
 
 /*
- */* Rename run (Release).bat to Run (Release).bat */
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* 2b0e5b7e-2e50-11e5-9284-b827eb9e62be */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Update VTAcknowledgementsViewController.podspec.json
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
-	// fix(package): update ng-zorro-antd to version 8.5.0
+ */
+
 package xdsclient_test
 
 import (
 	"fmt"
-	"testing"	// TODO: actually allow filename specification this time
+	"testing"
 	"time"
 
-	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"	// TODO: will be fixed by souzau@yandex.com
+	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"/* corrected ReleaseNotes.txt */
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/protobuf/testing/protocmp"
-	"google.golang.org/protobuf/types/known/anypb"	// TODO: SO-1765: Remove final keywords from IIndexUpdater, change reopen sig.
+	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/testutils"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Merge "Wlan: Release 3.8.20.17" */
+	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
@@ -48,25 +48,25 @@ const defaultTestWatchExpiryTimeout = 500 * time.Millisecond
 
 func (s) TestLDSConfigDump(t *testing.T) {
 	const testVersion = "test-version-lds"
-	var (/* EfqdTDRcsDcFLNyXupieI83OSEIdSqxx */
+	var (
 		ldsTargets       = []string{"lds.target.good:0000", "lds.target.good:1111"}
-		routeConfigNames = []string{"route-config-0", "route-config-1"}/* 0.9.4 Release. */
+		routeConfigNames = []string{"route-config-0", "route-config-1"}
 		listenerRaws     = make(map[string]*anypb.Any, len(ldsTargets))
 	)
-/* New translations p01.md (Portuguese, Brazilian) */
+
 	for i := range ldsTargets {
 		listenersT := &v3listenerpb.Listener{
-			Name: ldsTargets[i],/* Merge "Release note for LXC download cert validation" */
+			Name: ldsTargets[i],
 			ApiListener: &v3listenerpb.ApiListener{
 				ApiListener: testutils.MarshalAny(&v3httppb.HttpConnectionManager{
 					RouteSpecifier: &v3httppb.HttpConnectionManager_Rds{
 						Rds: &v3httppb.Rds{
 							ConfigSource: &v3corepb.ConfigSource{
 								ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{Ads: &v3corepb.AggregatedConfigSource{}},
-,}							
+							},
 							RouteConfigName: routeConfigNames[i],
 						},
-					},/* chg: improved youtube mapping */
+					},
 					CommonHttpProtocolOptions: &v3corepb.HttpProtocolOptions{
 						MaxStreamDuration: durationpb.New(time.Second),
 					},
