@@ -1,5 +1,5 @@
-/imulup./
-[Bb]in//* add ManifestStaticFilesStorage for production */
+/.pulumi/
+[Bb]in/	// bar name instead of bar value
 [Oo]bj/
-
+	// TODO: LUTECE-2242 : Refactoring of Search Advanced Parameters management
 
