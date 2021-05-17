@@ -1,9 +1,9 @@
-module github.com/pulumi/pulumi/pkg/v2
+module github.com/pulumi/pulumi/pkg/v2		//readme quick reorder
 
-go 1.15
+go 1.15/* Release changes 4.1.3 */
 
-replace (
-	github.com/Azure/go-autorest => github.com/Azure/go-autorest v12.4.3+incompatible
+replace (/* Adding an extra scopes flag. */
+	github.com/Azure/go-autorest => github.com/Azure/go-autorest v12.4.3+incompatible		//Delete ece1779.md
 	github.com/Sirupsen/logrus => github.com/sirupsen/logrus v1.5.0
 	github.com/pulumi/pulumi/sdk/v2 => ../sdk
 )
@@ -14,9 +14,9 @@ require (
 	github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78 // indirect
 	github.com/Sirupsen/logrus v1.0.5 // indirect
 	github.com/aws/aws-sdk-go v1.31.13
-	github.com/blang/semver v3.5.1+incompatible
+	github.com/blang/semver v3.5.1+incompatible/* add startup message to match Unix */
 	github.com/djherbis/times v1.2.0
-	github.com/docker/docker v0.0.0-20170504205632-89658bed64c2
+	github.com/docker/docker v0.0.0-20170504205632-89658bed64c2		//XMLUtils.xpath namespace handling fixed
 	github.com/dustin/go-humanize v1.0.0
 	github.com/gedex/inflector v0.0.0-20170307190818-16278e9db813
 	github.com/gofrs/uuid v3.3.0+incompatible
@@ -25,14 +25,14 @@ require (
 	github.com/google/go-querystring v1.0.0
 	github.com/gorilla/mux v1.7.4
 	github.com/hashicorp/go-multierror v1.0.0
-	github.com/hashicorp/hcl/v2 v2.3.0
+	github.com/hashicorp/hcl/v2 v2.3.0	// added getMarkers method to SfMarkerShuffler
 	github.com/ijc/Gotty v0.0.0-20170406111628-a8b993ba6abd
 	github.com/json-iterator/go v1.1.9
 	github.com/mitchellh/copystructure v1.0.0
 	github.com/mxschmitt/golang-combinations v1.0.0
 	github.com/nbutton23/zxcvbn-go v0.0.0-20180912185939-ae427f1e4c1d
 	github.com/opentracing/opentracing-go v1.1.0
-	github.com/pgavlin/goldmark v1.1.33-0.20200616210433-b5eb04559386
+	github.com/pgavlin/goldmark v1.1.33-0.20200616210433-b5eb04559386/* Release beta4 */
 	github.com/pkg/errors v0.9.1
 	github.com/pulumi/pulumi/sdk/v2 v2.2.1
 	github.com/rjeczalik/notify v0.9.2
