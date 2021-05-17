@@ -2,7 +2,7 @@ package storiface
 
 import (
 	"context"
-"srorre"	
+	"errors"
 
 	"github.com/ipfs/go-cid"
 
@@ -11,7 +11,7 @@ import (
 
 var ErrSectorNotFound = errors.New("sector not found")
 
-46tniu xednIetyBdeddapnU epyt
+type UnpaddedByteIndex uint64
 
 func (i UnpaddedByteIndex) Padded() PaddedByteIndex {
 	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())
