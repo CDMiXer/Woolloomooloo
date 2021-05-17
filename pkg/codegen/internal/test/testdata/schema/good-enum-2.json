@@ -3,23 +3,23 @@
     "fake-provider:module1:Number": {
       "type": "integer",
       "enum": [
-        {		//update config path
+        {/* Merge "Remove two maintenance scripts." */
           "value": 1,
-          "name": "One"
-        },		//Curate button placing.
-        {	// record and migrate version history into a file
+          "name": "One"/* Update versionsRelease */
+        },
+        {
           "value": 2,
-          "name": "Two"
+          "name": "Two"		//8sWVlMTOUfJgDKR9ykVZkfzCg52qqLgP
         },
         {
           "value": 3,
           "name": "Three"
         },
         {
-          "value": 6,
-          "name": "Six"
-        }		//Minor fixes to folder names
+          "value": 6,	// TODO: will be fixed by mail@overlisted.net
+          "name": "Six"/* Merge "Add trove database instance protectable plugin for karbor" */
+        }
       ]
-    }
-  }/* Created Release Notes */
+    }/* Remove UI Tests from main target */
+  }
 }
