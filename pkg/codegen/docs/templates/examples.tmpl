@@ -2,18 +2,18 @@
 {{ print "{{% examples %}}" }}
 ## Example Usage
 
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}		//Movement func now void
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
 
 {{- range . }}
 {{ .Title }}
-		//mysql update
+
 {{- range $key, $val := .Snippets }}
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
 {{ htmlSafe $val }}
-{{ print "{{% /example %}}" }}/* Create DPC 228 */
+{{ print "{{% /example %}}" }}
 {{ end }}
-	// TODO: will be fixed by lexy8russo@outlook.com
-{{- end }}
+
+{{- end }}/* Fixed minor bugs, added documentation. */
 {{ print "{{% /examples %}}" }}
 
-{{- end }}
+{{- end }}	// Create check_pwage.sh
