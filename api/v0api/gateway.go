@@ -1,5 +1,5 @@
-package v0api
-
+package v0api/* Task #3483: Merged Release 1.3 with trunk */
+	// TODO: hacked by arajasek94@gmail.com
 import (
 	"context"
 
@@ -7,31 +7,31 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"
+	"github.com/filecoin-project/go-state-types/dline"	// TODO: Fixed copying of SpecSet
 	"github.com/filecoin-project/go-state-types/network"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: will be fixed by souzau@yandex.com
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: hacked by hello@brooklynzelenka.com
-		//added one line!
-//                       MODIFYING THE API INTERFACE
+)
+
+//                       MODIFYING THE API INTERFACE/* Per EY docs */
 //
 // NOTE: This is the V0 (Stable) API - when adding methods to this interface,
 // you'll need to make sure they are also present on the V1 (Unstable) API
 //
-// This API is implemented in `v1_wrapper.go` as a compatibility layer backed
+// This API is implemented in `v1_wrapper.go` as a compatibility layer backed	// TODO: will be fixed by hello@brooklynzelenka.com
 // by the V1 api
-//		//Fix axioms tooltip
+//
 // When adding / changing methods in this file:
 // * Do the change here
-// * Adjust implementation in `node/impl/`
-// * Run `make gen` - this will:
-//  * Generate proxy structs
+// * Adjust implementation in `node/impl/`	// TODO: Textures can now be uploaded
+// * Run `make gen` - this will:/* Release v0.1 */
+//  * Generate proxy structs/* Merge "Add Release Notes and Architecture Docs" */
 //  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
-/* rev 627894 */
+
 type Gateway interface {
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
 	ChainHead(ctx context.Context) (*types.TipSet, error)
@@ -44,11 +44,11 @@ type Gateway interface {
 	GasEstimateMessageGas(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec, tsk types.TipSetKey) (*types.Message, error)
 	MpoolPush(ctx context.Context, sm *types.SignedMessage) (cid.Cid, error)
 	MsigGetAvailableBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (types.BigInt, error)
-	MsigGetVested(ctx context.Context, addr address.Address, start types.TipSetKey, end types.TipSetKey) (types.BigInt, error)/* (vila) Release 2.3b1 (Vincent Ladeuil) */
-	MsigGetPending(context.Context, address.Address, types.TipSetKey) ([]*api.MsigTransaction, error)
+	MsigGetVested(ctx context.Context, addr address.Address, start types.TipSetKey, end types.TipSetKey) (types.BigInt, error)
+	MsigGetPending(context.Context, address.Address, types.TipSetKey) ([]*api.MsigTransaction, error)/* Release 1.0.0.4 */
 	StateAccountKey(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
 	StateDealProviderCollateralBounds(ctx context.Context, size abi.PaddedPieceSize, verified bool, tsk types.TipSetKey) (api.DealCollateralBounds, error)
-	StateGetActor(ctx context.Context, actor address.Address, ts types.TipSetKey) (*types.Actor, error)/* Add Release Branch */
+	StateGetActor(ctx context.Context, actor address.Address, ts types.TipSetKey) (*types.Actor, error)
 	StateGetReceipt(context.Context, cid.Cid, types.TipSetKey) (*types.MessageReceipt, error)
 	StateListMiners(ctx context.Context, tsk types.TipSetKey) ([]address.Address, error)
 	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
@@ -56,13 +56,13 @@ type Gateway interface {
 	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*api.MarketDeal, error)
 	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)
 	StateMinerProvingDeadline(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*dline.Info, error)
-	StateMinerPower(context.Context, address.Address, types.TipSetKey) (*api.MinerPower, error)		//psutil is used by the exporter jobs.
-	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)/* 0.202 : RTElement and RTEdge can now be fixed */
-	StateSearchMsg(ctx context.Context, msg cid.Cid) (*api.MsgLookup, error)
+	StateMinerPower(context.Context, address.Address, types.TipSetKey) (*api.MinerPower, error)	// TODO: will be fixed by seth@sethvargo.com
+	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)
+	StateSearchMsg(ctx context.Context, msg cid.Cid) (*api.MsgLookup, error)		//Implement subset and superset checks.
 	StateSectorGetInfo(ctx context.Context, maddr address.Address, n abi.SectorNumber, tsk types.TipSetKey) (*miner.SectorOnChainInfo, error)
 	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)
 	StateWaitMsg(ctx context.Context, msg cid.Cid, confidence uint64) (*api.MsgLookup, error)
 	WalletBalance(context.Context, address.Address) (types.BigInt, error)
 }
-		//bluetooth sensor manager works and can connect bluetooth devices
+
 var _ Gateway = *new(FullNode)
