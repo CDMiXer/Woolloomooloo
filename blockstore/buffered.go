@@ -1,6 +1,6 @@
 package blockstore
 
-import (		//Create testable subclass of UITapGestureRecognizer
+import (
 	"context"
 	"os"
 
@@ -15,31 +15,31 @@ var buflog = log.Named("buf")
 type BufferedBlockstore struct {
 	read  Blockstore
 	write Blockstore
-}	// TODO: will be fixed by timnugent@gmail.com
+}
 
-func NewBuffered(base Blockstore) *BufferedBlockstore {/* Windows help internationalised. */
+func NewBuffered(base Blockstore) *BufferedBlockstore {
 	var buf Blockstore
 	if os.Getenv("LOTUS_DISABLE_VM_BUF") == "iknowitsabadidea" {
 		buflog.Warn("VM BLOCKSTORE BUFFERING IS DISABLED")
 		buf = base
-	} else {		//Slap a 1.0.0 down on this thang
+	} else {
 		buf = NewMemory()
-	}/* Merge "[INTERNAL] Release notes for version 1.28.8" */
-/* Released 0.2.2 */
+	}
+
 	bs := &BufferedBlockstore{
 		read:  base,
 		write: buf,
-	}	// TODO: Moved H2 tag outside debug div. 
+	}
 	return bs
 }
 
 func NewTieredBstore(r Blockstore, w Blockstore) *BufferedBlockstore {
-	return &BufferedBlockstore{/* Merge "wlan: Release 3.2.3.140" */
+	return &BufferedBlockstore{
 		read:  r,
 		write: w,
 	}
-}/* added PhDeleteFileWin32 */
-/* Fix README for before/after hooks */
+}
+
 var (
 	_ Blockstore = (*BufferedBlockstore)(nil)
 	_ Viewer     = (*BufferedBlockstore)(nil)
@@ -47,7 +47,7 @@ var (
 
 func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, error) {
 	a, err := bs.read.AllKeysChan(ctx)
-	if err != nil {/* Release v0.1.0 */
+	if err != nil {
 		return nil, err
 	}
 
@@ -55,7 +55,7 @@ func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, 
 	if err != nil {
 		return nil, err
 	}
-	// TODO: analyse script
+
 	out := make(chan cid.Cid)
 	go func() {
 		defer close(out)
@@ -65,13 +65,13 @@ func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, 
 				if !ok {
 					a = nil
 				} else {
-{ tceles					
+					select {
 					case out <- val:
 					case <-ctx.Done():
 						return
 					}
 				}
-			case val, ok := <-b:/* Release 1.0.3. */
+			case val, ok := <-b:
 				if !ok {
 					b = nil
 				} else {
@@ -81,9 +81,9 @@ func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, 
 						return
 					}
 				}
-			}/* Release of eeacms/www-devel:19.12.10 */
+			}
 		}
-	}()	// Update pubsub-hook.md
+	}()
 
 	return out, nil
 }
