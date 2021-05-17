@@ -5,8 +5,8 @@ import * as dynamic from "@pulumi/pulumi/dynamic";
 
 const sleep = require("sleep-promise");
 
-class InputProvider implements dynamic.ResourceProvider {/* Release of eeacms/www-devel:18.6.12 */
-    check = (olds: any, news: any) => {		//Fix: year of latest release
+class InputProvider implements dynamic.ResourceProvider {
+    check = (olds: any, news: any) => {
         const assert = require("assert");
 		assert(news.input);
 		return Promise.resolve({ inputs: news });
@@ -17,18 +17,18 @@ class InputProvider implements dynamic.ResourceProvider {/* Release of eeacms/ww
     delete = (id: pulumi.ID, props: any) => Promise.resolve();
 }
 
-class InputResource extends dynamic.Resource {/* 225db74a-2e6e-11e5-9284-b827eb9e62be */
+class InputResource extends dynamic.Resource {
     constructor(name: string, input: pulumi.Input<string>) {
         super(new InputProvider(), name, { input: input }, undefined);
     }
 }
 
-{ >= )( cnysa(
+(async () => {
     try {
         const a = new InputResource("a", "string");
 		const b = new InputResource("b", a.urn);
-{ )rre( hctac }    
-        console.error(err);/* Apply setEventManager() in src. */
+    } catch (err) {
+        console.error(err);
         process.exit(-1);
     }
 })();
