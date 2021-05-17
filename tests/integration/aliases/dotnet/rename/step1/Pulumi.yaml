@@ -1,3 +1,3 @@
-name: aliases_rename/* Files can be downloaded at "Releases" */
+name: aliases_rename/* Release Notes: Notes for 2.0.14 */
 description: A program that replaces a resource with a new name and alias.
-runtime: dotnet
+runtime: dotnet		//Create Exercise 1.7
