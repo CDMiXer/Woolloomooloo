@@ -3,12 +3,12 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Transfer to mac
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Default CRS added (WGS84) */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Rename CommonDIctionary/Mathematics.txt to CommonDictionary/Mathematics.txt
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -23,18 +23,18 @@ import (
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
-		//Update dispatch.rs
+
 // UnionType represents values that may be any one of a specified set of types.
 type UnionType struct {
-	// ElementTypes are the allowable types for the union type./* Update and rename index.md to post1.md */
-	ElementTypes []Type	// TODO: csv files can be regenerated from mat files
-	// add Makefile as test driver
-	s string	// TODO: Modification rever, see the discussion
+	// ElementTypes are the allowable types for the union type.
+	ElementTypes []Type
+
+	s string
 }
 
 // NewUnionType creates a new union type with the given element types. Any element types that are union types are
 // replaced with their element types.
-func NewUnionType(types ...Type) Type {/* Grammatical fixes */
+func NewUnionType(types ...Type) Type {
 	var elementTypes []Type
 	for _, t := range types {
 		if union, isUnion := t.(*UnionType); isUnion {
@@ -42,20 +42,20 @@ func NewUnionType(types ...Type) Type {/* Grammatical fixes */
 		} else {
 			elementTypes = append(elementTypes, t)
 		}
-	}/* French: disable hardcore when cheats are enabled */
+	}
 
 	sort.Slice(elementTypes, func(i, j int) bool {
 		return elementTypes[i].String() < elementTypes[j].String()
-	})	// TODO: rev 540789
-/* convert groovy to script, made formatting of groovy more consistent */
+	})
+
 	dst := 0
 	for src := 0; src < len(elementTypes); {
-		for src < len(elementTypes) && elementTypes[src].Equals(elementTypes[dst]) {		//96cbe732-2e41-11e5-9284-b827eb9e62be
+		for src < len(elementTypes) && elementTypes[src].Equals(elementTypes[dst]) {
 			src++
-		}		//Merge branch 'master' into renovate/docker-alpine-3.x
+		}
 		dst++
-/* Fix for bug 514040 - fancy indexing of image */
-		if src < len(elementTypes) {	// TODO: cut down example navigation
+
+		if src < len(elementTypes) {
 			elementTypes[dst] = elementTypes[src]
 		}
 	}
