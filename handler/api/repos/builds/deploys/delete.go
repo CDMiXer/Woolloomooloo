@@ -1,14 +1,14 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Merge "Animated vector drawable support" into nyc-dev
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by ng8eke@163.com
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release of eeacms/volto-starter-kit:0.5 */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by fjl@ethereum.org
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release de la versión 1.0 */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -41,20 +41,20 @@ func HandleDelete(
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", namespace).		//Update CageMatch.md
-				WithField("name", name)./* Removed sample images that were unnecessary  */
+				WithField("namespace", namespace).
+				WithField("name", name).
 				Debugln("api: cannot find repository")
 			return
 		}
 
 		err = builds.DeleteDeploy(r.Context(), repo.ID, target)
-		if err != nil {/* b31ccc6a-2e43-11e5-9284-b827eb9e62be */
-			render.InternalError(w, err)		//Added membership model to handle classroom members.
+		if err != nil {
+			render.InternalError(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
-				WithField("name", name)./* [MERGE] wiki: Search view updates */
-				Debugln("api: cannot delete deployment")/* Make mq, record and transplant honor patch.eol */
+				WithField("name", name).
+				Debugln("api: cannot delete deployment")
 		} else {
 			w.WriteHeader(http.StatusNoContent)
 		}
