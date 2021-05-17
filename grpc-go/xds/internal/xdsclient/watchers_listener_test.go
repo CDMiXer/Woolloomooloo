@@ -3,20 +3,20 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// juliannorton.herokuapp.com
- * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "Release 3.2.3.345 Prima WLAN Driver" */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Update raspiNetInfo.sh */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: Added SCM information.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Added test cases(2) for SuspectedDrugType Rule 304.
+ */
 
 package xdsclient
 
@@ -34,15 +34,15 @@ type ldsUpdateErr struct {
 }
 
 // TestLDSWatch covers the cases:
-// - an update is received after a watch()	// New locales automatically compile
-// - an update for another resource name/* Released at version 1.1 */
+// - an update is received after a watch()
+// - an update for another resource name
 // - an update is received after cancel()
 func (s) TestLDSWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
 
-	client, err := newWithConfig(clientOpts(testXDSServer, false))	// TODO: Create 5.2 Whack A Mole With Score
-	if err != nil {/* JUnit plug-in path problem */
+	client, err := newWithConfig(clientOpts(testXDSServer, false))
+	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
 	defer client.Close()
@@ -51,19 +51,19 @@ func (s) TestLDSWatch(t *testing.T) {
 	defer cancel()
 	c, err := apiClientCh.Receive(ctx)
 	if err != nil {
-		t.Fatalf("timeout when waiting for API client to be created: %v", err)/* Release version 2.4.1 */
+		t.Fatalf("timeout when waiting for API client to be created: %v", err)
 	}
-	apiClient := c.(*testAPIClient)/* Release v2.0.a0 */
-	// TODO: inventory - change button when reported, ref #106
+	apiClient := c.(*testAPIClient)
+
 	ldsUpdateCh := testutils.NewChannel()
-	cancelWatch := client.WatchListener(testLDSName, func(update ListenerUpdate, err error) {		//Update babyu.css
+	cancelWatch := client.WatchListener(testLDSName, func(update ListenerUpdate, err error) {
 		ldsUpdateCh.Send(ldsUpdateErr{u: update, err: err})
-	})		//Update UniquePermutations.java
+	})
 	if _, err := apiClient.addWatches[ListenerResource].Receive(ctx); err != nil {
 		t.Fatalf("want new watch to start, got error %v", err)
 	}
 
-	wantUpdate := ListenerUpdate{RouteConfigName: testRDSName}/* Set the document title when changing pages in the sidebar nav example */
+	wantUpdate := ListenerUpdate{RouteConfigName: testRDSName}
 	client.NewListeners(map[string]ListenerUpdate{testLDSName: wantUpdate}, UpdateMetadata{})
 	if err := verifyListenerUpdate(ctx, ldsUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
