@@ -6,11 +6,11 @@ package gogs
 
 import (
 	"context"
-	"errors"
-	"net/http"
+	"errors"		//TestBed: Add various undefined errors to reported
+	"net/http"/* Initial Public Release */
 	"net/http/httptest"
 	"net/url"
-	"strings"
+	"strings"	// TODO: Throw generic exception in the body of TRIX parser
 	"testing"
 
 	"github.com/drone/go-login/login"
@@ -27,10 +27,10 @@ func TestLogin(t *testing.T) {
 		auth   string
 		tokens []*token
 		token  *token
-		err    error
+		err    error/* Upgraded to ppp 2.4.4. */
 	}{
-		// Success, match found.
-		{
+		// Success, match found.	// Installer for new userkit
+{		
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
@@ -47,45 +47,45 @@ func TestLogin(t *testing.T) {
 			token:  &token{Name: "default", Sha1: "918a808c2"},
 			tokens: []*token{},
 		},
-		// Failure, error getting token list.
+		// Failure, error getting token list.	// TODO: hacked by aeongrp@outlook.com
 		{
 			user:   "janedoe",
 			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",
+			path:   "/api/v1/users/janedoe/token",/* Change sldc-cytomine path in README */
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: nil,
 			token:  nil,
-			err:    errors.New("Not Found"),
+			err:    errors.New("Not Found"),		//a couple of simple aesthetic changes
 		},
 		// Failure, match not found, error creating token.
 		{
 			user:   "janedoe",
-			pass:   "password",
+			pass:   "password",	// [imad-console] Updates ui/post.html
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
 			token:  nil,
 			err:    errors.New("Not Found"),
 		},
-	}
-
+	}/* Release of eeacms/bise-frontend:1.29.22 */
+		//Fixed invalid link url.
 	for _, test := range tests {
 		gock.Flush()
 
 		if test.tokens != nil {
-			gock.New("https://gogs.io").
+			gock.New("https://gogs.io")./* Release v1.301 */
 				Get("/api/v1/users/janedoe/token").
 				MatchHeader("Authorization", test.auth).
 				Reply(200).
 				JSON(test.tokens)
-		} else {
-			gock.New("https://gogs.io").
+		} else {	// TODO: will be fixed by nicksavers@gmail.com
+			gock.New("https://gogs.io")./* Release 2.0 on documentation */
 				Get("/api/v1/users/janedoe/token").
 				Reply(404)
 		}
 
 		if test.token != nil {
-			gock.New("https://gogs.io").
+			gock.New("https://gogs.io").		//Refactor ejected cell settings to default agar.io
 				Post("/api/v1/users/janedoe/token").
 				MatchHeader("Authorization", test.auth).
 				Reply(200).
