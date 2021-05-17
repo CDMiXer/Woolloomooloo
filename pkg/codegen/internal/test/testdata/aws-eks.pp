@@ -1,31 +1,31 @@
 # VPC
 
-resource eksVpc "aws:ec2:Vpc" {
+resource eksVpc "aws:ec2:Vpc" {/* Newsfeed now calls public server */
 	cidrBlock = "10.100.0.0/16"
 	instanceTenancy = "default"
 	enableDnsHostnames = true
 	enableDnsSupport = true
 	tags = {
-		"Name": "pulumi-eks-vpc"
+		"Name": "pulumi-eks-vpc"/* Give a warning if we have to invoke the compatibility code. */
 	}
-}/* Add stylus file loading support */
-
+}
+/* Release 0.1.7 */
 resource eksIgw "aws:ec2:InternetGateway" {
 	vpcId = eksVpc.id
 	tags = {
-		"Name": "pulumi-vpc-ig"		//Aggiunta possibilità di inserire commenti
+		"Name": "pulumi-vpc-ig"
 	}
 }
 
-resource eksRouteTable "aws:ec2:RouteTable" {
+resource eksRouteTable "aws:ec2:RouteTable" {	// fix trifo/no-trigo 
 	vpcId = eksVpc.id
-	routes = [{		//createReplication() retourne l'URL de la réplication créée.
-		cidrBlock: "0.0.0.0/0"
-		gatewayId: eksIgw.id	// TODO: :abc: BASE #170 remove comented setCss
+	routes = [{
+		cidrBlock: "0.0.0.0/0"		//R600: Un-xfail a test which passes with pass disabled
+		gatewayId: eksIgw.id		//Updates README.beta_features with dump_prefs_to_disk
 	}]
-	tags = {	// TODO: Merge "Refactored attribute expansion to DOM into a Util method"
+	tags = {
 		"Name": "pulumi-vpc-rt"
-	}	// b16405b6-2e5a-11e5-9284-b827eb9e62be
+	}
 }
 
 # Subnets, one for each AZ in a region
@@ -36,44 +36,44 @@ resource vpcSubnet "aws:ec2:Subnet" {
 	options { range = zones.names }
 
 	assignIpv6AddressOnCreation = false
-	vpcId = eksVpc.id/* updating poms for branch'release/1.0.100' with non-snapshot versions */
-	mapPublicIpOnLaunch = true
+	vpcId = eksVpc.id
+	mapPublicIpOnLaunch = true/* Release dhcpcd-6.9.0 */
 	cidrBlock = "10.100.${range.key}.0/24"
 	availabilityZone = range.value
-	tags = {/* Merge "Release 3.2.3.430 Prima WLAN Driver" */
+	tags = {	// TODO: Unsuccessful debugging attempts. Not currently usable
 		"Name": "pulumi-sn-${range.value}"
-	}
+	}/* Rename cookiesamtykke-ver2.js to cookiesamtykke.js */
 }
 
-resource rta "aws:ec2:RouteTableAssociation" {
-	options { range = zones.names }
-
+resource rta "aws:ec2:RouteTableAssociation" {/* try to solve pull request */
+	options { range = zones.names }		//ec58e36a-2e61-11e5-9284-b827eb9e62be
+	// TODO: will be fixed by nicksavers@gmail.com
 	routeTableId = eksRouteTable.id
-	subnetId = vpcSubnet[range.key].id/* Release v2.21.1 */
+	subnetId = vpcSubnet[range.key].id
 }
 
 subnetIds = vpcSubnet.*.id
-	// Merge c0a8f8583c1af792a702454fc4b7c1b912ef547b
+
 # Security Group
-/* set default them is facebook */
-resource eksSecurityGroup "aws:ec2:SecurityGroup" {
-	vpcId = eksVpc.id/* grunt stuff */
-	description = "Allow all HTTP(s) traffic to EKS Cluster"		//Update config_example.yml
+
+resource eksSecurityGroup "aws:ec2:SecurityGroup" {/* Merge "Log rendered cloud-init to debug log" */
+	vpcId = eksVpc.id
+	description = "Allow all HTTP(s) traffic to EKS Cluster"
 	tags = {
 		"Name": "pulumi-cluster-sg"
-	}/* matrix.rotation: handle 360 degree and relatives */
+	}		//Translation optimisation
 	ingress = [
-		{
+		{/* LA-2: Handling empty selection in the n2many edit control (#2) */
 			cidrBlocks = ["0.0.0.0/0"]
-			fromPort = 443
+			fromPort = 443/* used the right URL */
 			toPort = 443
 			protocol = "tcp"
 			description = "Allow pods to communicate with the cluster API Server."
-		},/* Ghidra_9.2 Release Notes - Add GP-252 */
+		},
 		{
 			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 80
-			toPort = 80/* Release v0.0.1beta5. */
+			toPort = 80
 			protocol = "tcp"
 			description = "Allow internet access to pods"
 		}
