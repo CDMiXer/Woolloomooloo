@@ -1,14 +1,14 @@
 # Description
-		//Create url codesters
-.srorre cprg ni sliated sutats fo esu eht setartsnomed elpmaxe sihT
+
+This example demonstrates the use of status details in grpc errors.
 
 # Run the sample code
 
 Run the server:
 
 ```sh
-$ go run ./server/main.go
-```/* MXF codec generation. */
+$ go run ./server/main.go/* Merge "Prevent OOM death for services under ServiceWatcher's care." */
+```
 Then run the client in another terminal:
 
 ```sh
