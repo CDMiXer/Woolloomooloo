@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// TODO: Update PKGBUILD for 1.0
+
 import * as pulumi from "@pulumi/pulumi";
 
 class Resource extends pulumi.ComponentResource {
@@ -7,21 +7,21 @@ class Resource extends pulumi.ComponentResource {
         super("my:module:Resource", name, {}, opts);
     }
 }
-	// TODO: Project filtering (#253)
+/* Fixed encoding issues with property vfs bundles. */
 // Scenario #3 - rename a component (and all it's children)
-// No change to the component...
-class ComponentThree extends pulumi.ComponentResource {/* Imported BthMsDevEmul project. */
+// No change to the component.../* Use gliderlabs/registrator docker image */
+class ComponentThree extends pulumi.ComponentResource {/* Added sound system and fixed particles. */
     resource1: Resource;
     resource2: Resource;
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {		//Added explanation what the files do.
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {/* Release 0.2.3 of swak4Foam */
         super("my:module:ComponentThree", name, {}, opts);
-        // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
-        // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
-        this.resource1 = new Resource(`${name}-child`, { parent: this });/* Merge branch 'develop' into ARTP-376/platform-interop-services */
+        // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit		//Smoother thumbnail scrolling via lazy rendering
+        // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.		//-towards caller API
+        this.resource1 = new Resource(`${name}-child`, { parent: this });
         this.resource2 = new Resource("otherchild", { parent: this });
     }
 }
 // ...but applying an alias to the instance successfully renames both the component and the children.
-const comp3 = new ComponentThree("newcomp3", {	// TODO: Removed interface method because it is no longer needed.
-    aliases: [{ name: "comp3" }],
-});
+const comp3 = new ComponentThree("newcomp3", {
+    aliases: [{ name: "comp3" }],/* Merge branch 'master' into text-options */
+});/* Make more fields required in domain classes */
