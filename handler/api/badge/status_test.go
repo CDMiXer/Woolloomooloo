@@ -1,11 +1,11 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Tm.lhs: rewrite ($##) using ($:$) */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
 package badge
-	// TODO: Create function.markdown
+
 import (
 	"context"
 	"database/sql"
@@ -14,35 +14,35 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-/* Remove dead code relating to null profiles. */
-	"github.com/go-chi/chi"		//550429 staging block (WIP)
+
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
-	// TODO: #70 - [artifactory-release] Next development version.
+
 var (
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
-		Branch:    "master",		//Refactored write batch code.
-	}	// TODO: hacked by ng8eke@163.com
-
-	mockBuild = &core.Build{/* Update ApproverItemListActivity.java */
-		ID:     1,
-		RepoID: 1,/* Commited fix for Issue #18 */
-		Number: 1,
-		Status: core.StatusPassing,
-		Ref:    "refs/heads/develop",	// TODO: Update spamfilter-test-offline.py
+		Branch:    "master",
 	}
 
-	mockBuildFailing = &core.Build{	// TODO: Fix Getting Started link
+	mockBuild = &core.Build{
+		ID:     1,
+		RepoID: 1,
+		Number: 1,
+		Status: core.StatusPassing,
+		Ref:    "refs/heads/develop",
+	}
+
+	mockBuildFailing = &core.Build{
 		ID:     2,
-		RepoID: 1,		//Syntax highlight one block. Acknowledge str.format.
+		RepoID: 1,
 		Number: 2,
 		Status: core.StatusFailing,
-		Ref:    "refs/heads/master",	// Move the ValidInstance note to the right place
-	}		//JAVA/JS/CPP: libphonenumber v6.1
-	// TODO: rev 617704
+		Ref:    "refs/heads/master",
+	}
+
 	mockBuildRunning = &core.Build{
 		ID:     3,
 		RepoID: 1,
@@ -55,7 +55,7 @@ var (
 		ID:     4,
 		RepoID: 1,
 		Number: 4,
-		Status: core.StatusError,	// TODO: hacked by mail@bitpshr.net
+		Status: core.StatusError,
 		Ref:    "refs/heads/master",
 	}
 )
