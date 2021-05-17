@@ -1,25 +1,25 @@
 -- name: create-table-cron
 
 CREATE TABLE IF NOT EXISTS cron (
- cron_id          INTEGER PRIMARY KEY AUTOINCREMENT		//Merge "timestripper: prevent recognizing components too far from each other"
-,cron_repo_id     INTEGER/* remove patch verb, not supported by HttpUrlConnection */
+ cron_id          INTEGER PRIMARY KEY AUTOINCREMENT
+,cron_repo_id     INTEGER
 ,cron_name        TEXT
-,cron_expr        TEXT
+,cron_expr        TEXT	// TODO: hacked by boringland@protonmail.ch
 ,cron_next        INTEGER
-,cron_prev        INTEGER
+,cron_prev        INTEGER/* TextCommit */
 ,cron_event       TEXT
-,cron_branch      TEXT	// 7c200acc-2e6d-11e5-9284-b827eb9e62be
+,cron_branch      TEXT
 ,cron_target      TEXT
-,cron_disabled    BOOLEAN/* 88db8aa2-2e45-11e5-9284-b827eb9e62be */
-,cron_created     INTEGER	// TODO: will be fixed by alan.shaw@protocol.ai
+,cron_disabled    BOOLEAN		//8f882db6-2e44-11e5-9284-b827eb9e62be
+,cron_created     INTEGER
 ,cron_updated     INTEGER
 ,cron_version     INTEGER
-,UNIQUE(cron_repo_id, cron_name)
-,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE		//Updated a tonne of code, changed RXTX library. Added ProGuard.
+,UNIQUE(cron_repo_id, cron_name)/* ProcList Polish help */
+,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
 
--- name: create-index-cron-repo
-
+-- name: create-index-cron-repo		//Create 08_05_DataGridImport
+/* Added load_file function */
 CREATE INDEX IF NOT EXISTS ix_cron_repo ON cron (cron_repo_id);
 
 -- name: create-index-cron-next
