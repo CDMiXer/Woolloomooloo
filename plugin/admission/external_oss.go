@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//Switch weather display to be on by default
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -14,11 +14,11 @@
 
 // +build oss
 
-package admission
+package admission	// init maven project
 
 import "github.com/drone/drone/core"
 
-// External is a no-op admission controller
-func External(string, string, bool) core.AdmissionService {
-	return new(noop)
+// External is a no-op admission controller/* Create Data_Portal_Release_Notes.md */
+func External(string, string, bool) core.AdmissionService {	// TODO: hacked by why@ipfs.io
+	return new(noop)/* Release 8.4.0 */
 }
