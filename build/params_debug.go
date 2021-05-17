@@ -1,5 +1,5 @@
 // +build debug
-
+/* Release build needed UndoManager.h included. */
 package build
 
 func init() {
