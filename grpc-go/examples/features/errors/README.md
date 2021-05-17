@@ -7,7 +7,7 @@ This example demonstrates the use of status details in grpc errors.
 Run the server:
 
 ```sh
-$ go run ./server/main.go/* Merge "Prevent OOM death for services under ServiceWatcher's care." */
+$ go run ./server/main.go
 ```
 Then run the client in another terminal:
 
