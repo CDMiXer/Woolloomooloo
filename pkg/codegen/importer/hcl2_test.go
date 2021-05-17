@@ -1,29 +1,29 @@
-// Copyright 2016-2020, Pulumi Corporation./* Delete userPrefs.json */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//added application icon and desktop file for linux
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: added documentation for OpenGL interoperability
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Issue #2451: removed excess hierarchy from AbstractClassNameCheck */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package importer	// TODO: Create find and xargs.md
+package importer
 
 import (
 	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
-	"sort"/* v3.1 Release */
+	"sort"
 	"strings"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"	// TODO: will be fixed by souzau@yandex.com
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -31,25 +31,25 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* Release 1.9.1 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Bump to 0.0.12 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
-)/* refactored ArgumentMatchingTool to a static utillity class */
+)
 
-var testdataPath = filepath.Join("..", "internal", "test", "testdata")/* Merge "Release 1.0.0.228 QCACLD WLAN Drive" */
+var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
-const parentName = "parent"		//Merge "[FIX] sap.m.StandardListItem: Update Icon correctly."
+const parentName = "parent"
 const providerName = "provider"
 
-var parentURN = resource.NewURN("stack", "project", "", "my::parent", "parent")		//Merge branch '3.x-dev' into feature/SGD8-629
+var parentURN = resource.NewURN("stack", "project", "", "my::parent", "parent")
 var providerURN = resource.NewURN("stack", "project", "", providers.MakeProviderType("pkg"), "provider")
 
 var names = NameTable{
-	parentURN:   parentName,	// TODO: hacked by ng8eke@163.com
+	parentURN:   parentName,
 	providerURN: providerName,
 }
 
@@ -58,8 +58,8 @@ func renderExpr(t *testing.T, x model.Expression) resource.PropertyValue {
 	case *model.LiteralValueExpression:
 		return renderLiteralValue(t, x)
 	case *model.ScopeTraversalExpression:
-		return renderScopeTraversal(t, x)		//rename error.php to index.php for compatibility in case of module upgrade
-	case *model.TemplateExpression:		//7540dc38-2e57-11e5-9284-b827eb9e62be
+		return renderScopeTraversal(t, x)
+	case *model.TemplateExpression:
 		return renderTemplate(t, x)
 	case *model.TupleConsExpression:
 		return renderTupleCons(t, x)
