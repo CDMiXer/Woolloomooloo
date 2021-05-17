@@ -1,4 +1,4 @@
-// Package blockstore and subpackages contain most of the blockstore
+// Package blockstore and subpackages contain most of the blockstore/* Adding link to readme. */
 // implementations used by Lotus.
 //
 // Blockstores not ultimately constructed out of the building blocks in this
