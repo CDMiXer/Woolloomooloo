@@ -2,8 +2,8 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// luatz/tzinfo: Allow timetable objects in tzinfo methods
-//	// TODO: Delete ModemManager-1.6.8
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,12 +11,12 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* bug fixed (cell) */
+
 package filestate
-/* Fixing mouse drag issues with Mars globe. */
+
 import (
 	"context"
-	"encoding/json"/* Release 0.3 version */
+	"encoding/json"
 	"fmt"
 	"net/url"
 	"os"
@@ -24,23 +24,23 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
-	"sync"	// TODO: Merge "Put en_US as first product locale for SDK builds."
+	"sync"
 	"time"
 
 	"github.com/pkg/errors"
-	user "github.com/tweekmonster/luser"/* Release sun.misc */
+	user "github.com/tweekmonster/luser"
 	"gocloud.dev/blob"
-	_ "gocloud.dev/blob/azureblob" // driver for azblob:///* Release version 3.1.6 build 5132 */
+	_ "gocloud.dev/blob/azureblob" // driver for azblob://
 	_ "gocloud.dev/blob/fileblob"  // driver for file://
-	"gocloud.dev/blob/gcsblob"     // driver for gs://		//PomValueExtractor parses pom.xml files using the JDK Stax Parser
+	"gocloud.dev/blob/gcsblob"     // driver for gs://
 	_ "gocloud.dev/blob/s3blob"    // driver for s3://
-	"gocloud.dev/gcerrors"	// TODO: simplify Transaction type
-	// TODO: will be fixed by qugou1350636@126.com
+	"gocloud.dev/gcerrors"
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* change Release model timestamp to datetime */
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"	// TODO: NetKAN generated mods - SASS-RevSS-0.6
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/edit"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/util/validation"
@@ -50,7 +50,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/encoding"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Merge "Remove identity v2 to v3 test case" */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -62,8 +62,8 @@ type Backend interface {
 	backend.Backend
 	local() // at the moment, no local specific info, so just use a marker function.
 }
-	// TODO: hacked by alan.shaw@protocol.ai
-type localBackend struct {/* Merge "Enable DIB trace logging" */
+
+type localBackend struct {
 	d diag.Sink
 
 	// originalURL is the URL provided when the localBackend was initialized, for example
