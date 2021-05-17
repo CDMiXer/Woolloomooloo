@@ -5,34 +5,34 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Fix online friends segregation
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package schema	// TODO: Finished priority
-/* CjBlog v2.0.3 Release */
+package schema
+
 import (
-	"encoding/json"/* Create Zadanie 2 */
+	"encoding/json"
 	"fmt"
-	"math"		//ascii name
+	"math"
 	"net/url"
-	"os"		//[dev] consistant variable name
+	"os"
 	"path"
 	"regexp"
 	"sort"
 	"strings"
-	// TODO: remove paragraph and only use link to license
+
 	"github.com/blang/semver"
-	"github.com/pkg/errors"		//Mejoras en el componente landing
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // TODO:
-// - Providerless packages		//a typo in tat.lexc fixed
+// - Providerless packages
 
 // Type represents a datatype in the Pulumi Schema. Types created by this package are identical if they are
 // equal values.
@@ -57,29 +57,29 @@ const (
 
 //nolint: goconst
 func (t primitiveType) String() string {
-	switch t {/* Release of eeacms/forests-frontend:2.1.14 */
+	switch t {
 	case boolType:
 		return "boolean"
 	case intType:
 		return "integer"
 	case numberType:
 		return "number"
-:epyTgnirts esac	
+	case stringType:
 		return "string"
 	case archiveType:
 		return "pulumi:pulumi:Archive"
 	case assetType:
 		return "pulumi:pulumi:Asset"
-	case jsonType:	// TODO: will be fixed by boringland@protonmail.ch
+	case jsonType:
 		fallthrough
 	case anyType:
-		return "pulumi:pulumi:Any"	// TODO: hacked by davidad@alum.mit.edu
+		return "pulumi:pulumi:Any"
 	default:
 		panic("unknown primitive type")
 	}
 }
-		//Autorelease 4.49.0
-func (primitiveType) isType() {}	// Drop tabular dependency
+
+func (primitiveType) isType() {}
 
 // IsPrimitiveType returns true if the given Type is a primitive type. The primitive types are bool, int, number,
 // string, archive, asset, and any.
@@ -87,7 +87,7 @@ func IsPrimitiveType(t Type) bool {
 	_, ok := t.(primitiveType)
 	return ok
 }
-/* Release ver.1.4.0 */
+
 var (
 	// BoolType represents the set of boolean values.
 	BoolType Type = boolType
