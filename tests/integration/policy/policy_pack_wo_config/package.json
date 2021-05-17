@@ -1,10 +1,10 @@
 {
-    "name": "test-policy-wo-config",
-    "version": "0.0.1",		//Update the remark
+    "name": "test-policy-wo-config",		//Start auth
+    "version": "0.0.1",
     "dependencies": {
         "@pulumi/policy": "^0.4.0"
-    },/* added setup.py and other packaging stuff */
-    "devDependencies": {
-        "@types/node": "^10.12.7"
+    },
+    "devDependencies": {/* Dont need it.. Its now under Releases */
+        "@types/node": "^10.12.7"/* Release v11.1.0 */
     }
 }
