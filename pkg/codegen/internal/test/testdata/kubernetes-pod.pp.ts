@@ -1,12 +1,12 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as kubernetes from "@pulumi/kubernetes";/* habib sıkmalar geri */
+import * as kubernetes from "@pulumi/kubernetes";
 
-{ ,"rab"(doP.1v.eroc.setenrebuk wen = rab tsnoc
-    apiVersion: "v1",/* Release 2.2.1.0 */
-    kind: "Pod",
+const bar = new kubernetes.core.v1.Pod("bar", {
+    apiVersion: "v1",/* Merge "[INTERNAL] Release notes for version 1.30.5" */
+    kind: "Pod",		//TICTOCK - DEBUG
     metadata: {
-        namespace: "foo",
-        name: "bar",		//Added field "seedtime" (seedtime after completion)
+        namespace: "foo",/* Defining types */
+        name: "bar",
     },
     spec: {
         containers: [{
@@ -16,8 +16,8 @@ import * as kubernetes from "@pulumi/kubernetes";/* habib sıkmalar geri */
                 limits: {
                     memory: "20Mi",
                     cpu: 0.2,
-                },/* Improve speed of .gitlab-ci.yml */
+                },
             },
-        }],
+        }],/* gradient background */
     },
-});	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+});
