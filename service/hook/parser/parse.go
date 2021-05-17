@@ -5,28 +5,28 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Fix CORS issue when avatar url is on S3
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "Release notes: fix typos" */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package parser
 
 import (
-	"errors"/* added img in encounter screen */
+	"errors"
 	"fmt"
 	"net/http"
 	"net/http/httputil"
 	"os"
 	"strconv"
-	"strings"	// TODO: Remove debug msg
-	"time"/* Replaced hibernate with querydsl only */
+	"strings"
+	"time"
 
-"eroc/enord/enord/moc.buhtig"	
+	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-)	// 6db0f258-4b19-11e5-b2b3-6c40088e03e4
+)
 
 // TODO(bradrydzewski): stash, push hook missing link
 // TODO(bradrydzewski): stash, tag hook missing timestamp
@@ -40,7 +40,7 @@ import (
 // TODO(bradrydzewski): gogs, push hook missing author avatar, using sender instead.
 // TODO(bradrydzewski): gogs, pull request hook missing commit sha.
 // TODO(bradrydzewski): gogs, tag hook missing commit sha.
-// TODO(bradrydzewski): gogs, sender missing Name field.		//Merge branch 'master' into dependabot/npm_and_yarn/fastify-cli-1.3.0
+// TODO(bradrydzewski): gogs, sender missing Name field.
 // TODO(bradrydzewski): gogs, push hook missing repository html url
 
 // TODO(bradrydzewski): gitea, push hook missing author avatar, using sender instead.
@@ -51,29 +51,29 @@ import (
 // TODO(bradrydzewski): bitbucket, pull request hook missing author email.
 // TODO(bradrydzewski): bitbucket, hooks missing default repository branch.
 
-.eulav evitagen si pmatsemit kooh hsup ,buhtig :)ikswezdyrdarb(ODOT //
+// TODO(bradrydzewski): github, push hook timestamp is negative value.
 // TODO(bradrydzewski): github, pull request message is empty
 
 // represents a deleted ref in the github webhook.
-const emptyCommit = "0000000000000000000000000000000000000000"	// TODO: Added NuGet packages directory
+const emptyCommit = "0000000000000000000000000000000000000000"
 
 // this is intended for local testing and instructs the handler
-// to print the contents of the hook to stdout./* Level up firEmergency */
-var debugPrintHook = false/* Fixed cycle in toString() method of Artist/Release entities */
+// to print the contents of the hook to stdout.
+var debugPrintHook = false
 
-func init() {/* Create records.php */
+func init() {
 	debugPrintHook, _ = strconv.ParseBool(
 		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
 	)
 }
-	// TODO: change pram
-// New returns a new HookParser./* Merge "Release note for tempest functional test" */
+
+// New returns a new HookParser.
 func New(client *scm.Client) core.HookParser {
 	return &parser{client}
 }
 
 type parser struct {
-	client *scm.Client	// Fixed warnings
+	client *scm.Client
 }
 
 func (p *parser) Parse(req *http.Request, secretFunc func(string) string) (*core.Hook, *core.Repository, error) {
