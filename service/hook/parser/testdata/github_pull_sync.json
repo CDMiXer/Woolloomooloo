@@ -22,20 +22,20 @@
     "Source": "master",
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
-    "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",/* Merge "nl80211: check nla_nest_start() return value" */
+    "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
     "Closed": false,
     "Merged": false,
     "Author": {
-      "Login": "bradrydzewski",/* Implemented PCM protein reset. */
+      "Login": "bradrydzewski",
       "Name": "",
       "Email": "",
-      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: hacked by lexy8russo@outlook.com
+      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
     },
-    "Created": "2018-06-22T23:54:09Z",/* Release of eeacms/eprtr-frontend:0.4-beta.5 */
-    "Updated": "2018-06-25T19:21:45Z"/* cloudinit: Added tests for TargetRelease */
+    "Created": "2018-06-22T23:54:09Z",
+    "Updated": "2018-06-25T19:21:45Z"
   },
   "Sender": {
-    "Login": "bradrydzewski",/* fix codex breaking on chromosome def missing */
+    "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
