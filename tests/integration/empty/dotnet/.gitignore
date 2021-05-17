@@ -1,5 +1,5 @@
 /.pulumi/
 [Bb]in/
 [Oo]bj/
-
-		//Add new functions for DPI handling and a cutout helper
+/* Merge "Release 4.4.31.72" */
+	// TODO: hacked by seth@sethvargo.com
