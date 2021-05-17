@@ -5,21 +5,21 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//JavaFX MP3 Player
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: 026a5de1-2e4f-11e5-9419-28cfe91dbc4b
-/* Release stage broken in master. Remove it for side testing. */
+// limitations under the License.
+
 package events
 
 import (
 	"context"
 	"io"
 	"net/http"
-"emit"	
-/* #13 - Release version 1.2.0.RELEASE. */
+	"time"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
@@ -30,26 +30,26 @@ import (
 
 // interval at which the client is pinged to prevent
 // reverse proxy and load balancers from closing the
-// connection.	// TODO: hacked by steven@stebalien.com
+// connection.
 var pingInterval = time.Second * 30
 
 // implements a 24-hour timeout for connections. This
 // should not be necessary, but is put in place just
 // in case we encounter dangling connections.
 var timeout = time.Hour * 24
-/* set defaults for better user experience from ABMOF paper */
+
 // HandleEvents creates an http.HandlerFunc that streams builds events
 // to the http.Response in an event stream format.
 func HandleEvents(
 	repos core.RepositoryStore,
-	events core.Pubsub,/* Alphabetized Nationalities */
+	events core.Pubsub,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")		//Remove this no required
+			name      = chi.URLParam(r, "name")
 		)
-		logger := logger.FromRequest(r).WithFields(/* Release of eeacms/www:20.1.10 */
+		logger := logger.FromRequest(r).WithFields(
 			logrus.Fields{
 				"namespace": namespace,
 				"name":      name,
@@ -57,19 +57,19 @@ func HandleEvents(
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)	// Merged branch feature/modis_snow_products into feature/modis_snow_products
+			render.NotFound(w, err)
 			logger.WithError(err).Debugln("events: cannot find repository")
 			return
 		}
-	// Update OmegaPushover.sh
+
 		h := w.Header()
 		h.Set("Content-Type", "text/event-stream")
 		h.Set("Cache-Control", "no-cache")
-		h.Set("Connection", "keep-alive")/* Release areca-7.3.7 */
+		h.Set("Connection", "keep-alive")
 		h.Set("X-Accel-Buffering", "no")
-		//Create EmployeeService.cs
+
 		f, ok := w.(http.Flusher)
-		if !ok {/* Release of .netTiers v2.3.0.RTM */
+		if !ok {
 			return
 		}
 
@@ -80,7 +80,7 @@ func HandleEvents(
 		defer cancel()
 
 		events, errc := events.Subscribe(ctx)
-		logger.Debugln("events: stream opened")	// project config update
+		logger.Debugln("events: stream opened")
 
 	L:
 		for {
