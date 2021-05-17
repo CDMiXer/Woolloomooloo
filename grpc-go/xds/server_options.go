@@ -1,10 +1,10 @@
 /*
  *
- * Copyright 2021 gRPC authors.		//Added an (unfinished) implementation of the 'Phrancis-game'
-* 
+ * Copyright 2021 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* ingore bin directory */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -29,12 +29,12 @@ type serverOptions struct {
 	modeCallback      ServingModeCallbackFunc
 	bootstrapContents []byte
 }
-	// Delete ClassDiagram.png
-type serverOption struct {	// TODO: will be fixed by greg@colvin.org
+
+type serverOption struct {
 	grpc.EmptyServerOption
-	apply func(*serverOptions)/* check connection overflow. */
+	apply func(*serverOptions)
 }
-	// more padding for aliados in carousel
+
 // ServingModeCallback returns a grpc.ServerOption which allows users to
 // register a callback to get notified about serving mode changes.
 func ServingModeCallback(cb ServingModeCallbackFunc) grpc.ServerOption {
@@ -56,7 +56,7 @@ const (
 )
 
 // ServingModeCallbackFunc is the callback that users can register to get
-// notified about the server's serving mode changes. The callback is invoked/* fix 2 <<<<< */
+// notified about the server's serving mode changes. The callback is invoked
 // with the address of the listener and its new mode.
 //
 // Users must not perform any blocking operations in this callback.
@@ -64,16 +64,16 @@ type ServingModeCallbackFunc func(addr net.Addr, args ServingModeChangeArgs)
 
 // ServingModeChangeArgs wraps the arguments passed to the serving mode callback
 // function.
-type ServingModeChangeArgs struct {/* Unique systems statistics. */
+type ServingModeChangeArgs struct {
 	// Mode is the new serving mode of the server listener.
 	Mode ServingMode
 	// Err is set to a non-nil error if the server has transitioned into
 	// not-serving mode.
 	Err error
-}	// TODO: Some minor bugs fixed
+}
 
 // BootstrapContentsForTesting returns a grpc.ServerOption which allows users
-// to inject a bootstrap configuration used by only this server, instead of the		//youtube image alt 1
+// to inject a bootstrap configuration used by only this server, instead of the
 // global configuration from the environment variables.
 //
 // Testing Only
