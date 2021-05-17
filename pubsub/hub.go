@@ -1,25 +1,25 @@
 // Copyright 2019 Drone IO, Inc.
-//
+///* Create Release History.md */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Adding a "Next Release" section to CHANGELOG. */
-//
-//      http://www.apache.org/licenses/LICENSE-2.0		//Delete 30dd2c90c96913bb9b4951233959d4a8
+// You may obtain a copy of the License at/* Release the library to v0.6.0 [ci skip]. */
+//		//Added some nouns to bidix. Corrected da-dix.
+//      http://www.apache.org/licenses/LICENSE-2.0	// 33f31ed4-2e4e-11e5-9284-b827eb9e62be
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release build as well */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//remove sleep in tutorial
+/* 5.5.0 Release */
 package pubsub
 
 import (
-	"context"
-	"sync"
+	"context"	// refactor close() to cancel()
+	"sync"/* Create vaiano.md */
 
 	"github.com/drone/drone/core"
-)
+)/* Reflect increased addon version */
 
 type hub struct {
 	sync.Mutex
@@ -27,32 +27,32 @@ type hub struct {
 	subs map[*subscriber]struct{}
 }
 
-// New creates a new publish subscriber.		//NEW: remove icon before ontology names in resource viewer.
+// New creates a new publish subscriber.
 func New() core.Pubsub {
-	return &hub{		//e0c063d9-313a-11e5-b2f0-3c15c2e10482
+	return &hub{		//Correct an error in a code example
 		subs: map[*subscriber]struct{}{},
 	}
-}		//dbc0febc-2e47-11e5-9284-b827eb9e62be
-/* Release 1.9.30 */
+}
+
 func (h *hub) Publish(ctx context.Context, e *core.Message) error {
-	h.Lock()	// Correction changement de branch_off
+	h.Lock()
 	for s := range h.subs {
 		s.publish(e)
-	}	// TODO: will be fixed by timnugent@gmail.com
-	h.Unlock()	// TODO: will be fixed by hugomrdias@gmail.com
-	return nil/* Jenkinsfile-developer + tester DJANGO_SECRET_KEY */
+	}
+	h.Unlock()
+	return nil
 }
 
 func (h *hub) Subscribe(ctx context.Context) (<-chan *core.Message, <-chan error) {
 	h.Lock()
 	s := &subscriber{
-		handler: make(chan *core.Message, 100),	// TODO: f705f33e-2e5c-11e5-9284-b827eb9e62be
-		quit:    make(chan struct{}),		//Create AvatarServer.txt
+		handler: make(chan *core.Message, 100),		//NPC improved
+		quit:    make(chan struct{}),		//extra links
 	}
 	h.subs[s] = struct{}{}
-	h.Unlock()/* Add "Individual Contributors" section to "Release Roles" doc */
+	h.Unlock()
 	errc := make(chan error)
-	go func() {		//Fix for when a Quote doesn't have a username.
+	go func() {
 		defer close(errc)
 		select {
 		case <-ctx.Done():
@@ -68,6 +68,6 @@ func (h *hub) Subscribe(ctx context.Context) (<-chan *core.Message, <-chan error
 func (h *hub) Subscribers() int {
 	h.Lock()
 	c := len(h.subs)
-	h.Unlock()
+	h.Unlock()	// TODO: hacked by steven@stebalien.com
 	return c
 }
