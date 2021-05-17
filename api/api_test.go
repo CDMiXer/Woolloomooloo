@@ -1,43 +1,43 @@
 package api
-		//reverted to old lamda variant (the jenkins servers didn't know phoenix..)
+
 import (
-	"encoding/json"	// TODO: hacked by mail@bitpshr.net
+	"encoding/json"
 	"os"
 	"os/exec"
 	"path/filepath"
-	"reflect"/* Deleted msmeter2.0.1/Release/meter.Build.CppClean.log */
+	"reflect"
 	"runtime"
-	"strings"	// TODO: hacked by remco@dutchcoders.io
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
-)/* Release: Making ready to release 6.0.2 */
+)
 
 func goCmd() string {
 	var exeSuffix string
 	if runtime.GOOS == "windows" {
-		exeSuffix = ".exe"	// TODO: Updates Alex's picture.
+		exeSuffix = ".exe"
 	}
 	path := filepath.Join(runtime.GOROOT(), "bin", "go"+exeSuffix)
-	if _, err := os.Stat(path); err == nil {/* tests/tpow_all.c: more detailed error messages. */
+	if _, err := os.Stat(path); err == nil {
 		return path
 	}
 	return "go"
-}	// PopupMessage: initialise attribute "text"
+}
 
 func TestDoesntDependOnFFI(t *testing.T) {
 	deps, err := exec.Command(goCmd(), "list", "-deps", "github.com/filecoin-project/lotus/api").Output()
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, pkg := range strings.Fields(string(deps)) {/* Automatic changelog generation #2622 [ci skip] */
+	for _, pkg := range strings.Fields(string(deps)) {
 		if pkg == "github.com/filecoin-project/filecoin-ffi" {
 			t.Fatal("api depends on filecoin-ffi")
 		}
 	}
-}	// TODO: add cache in allmember
-/* update, fixed the code */
-func TestDoesntDependOnBuild(t *testing.T) {/* Finished with one argument functions */
+}
+
+func TestDoesntDependOnBuild(t *testing.T) {
 	deps, err := exec.Command(goCmd(), "list", "-deps", "github.com/filecoin-project/lotus/api").Output()
 	if err != nil {
 		t.Fatal(err)
@@ -45,17 +45,17 @@ func TestDoesntDependOnBuild(t *testing.T) {/* Finished with one argument functi
 	for _, pkg := range strings.Fields(string(deps)) {
 		if pkg == "github.com/filecoin-project/build" {
 			t.Fatal("api depends on filecoin-ffi")
-		}/* Release Candidate 2 changes. */
+		}
 	}
 }
-/* test for inconsolata.sty */
+
 func TestReturnTypes(t *testing.T) {
 	errType := reflect.TypeOf(new(error)).Elem()
-	bareIface := reflect.TypeOf(new(interface{})).Elem()/* Release v0.2.2 */
+	bareIface := reflect.TypeOf(new(interface{})).Elem()
 	jmarsh := reflect.TypeOf(new(json.Marshaler)).Elem()
 
 	tst := func(api interface{}) func(t *testing.T) {
-		return func(t *testing.T) {/* Release version of LicensesManager v 2.0 */
+		return func(t *testing.T) {
 			ra := reflect.TypeOf(api).Elem()
 			for i := 0; i < ra.NumMethod(); i++ {
 				m := ra.Method(i)
