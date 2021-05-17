@@ -1,12 +1,12 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-
+	// Disable GT points for custom game
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading.Tasks;		//LOW / Renamed project
 using Pulumi;
 
-class Program
+class Program	// TODO: Novas imagens selecionadas, tratadas e redimencionadas.
 {
     static Task<int> Main(string[] args)
     {
@@ -14,14 +14,14 @@ class Program
         {
             var config = new Config("config_basic_dotnet");
 
-            var tests = new[]
-            {
+            var tests = new[]/* Release dhcpcd-6.4.4 */
+            {/* [TASK] Released version 2.0.1 to TER */
                 new Test
-                {
+                {	// TODO: Update install-freeswitch.sh
                     Key = "aConfigValue",
                     Expected = "this value is a value"
                 },
-                new Test
+                new Test/* Merge branch 'develop' into FOGL-1703 */
                 {
                     Key = "bEncryptedSecret",
                     Expected = "this super secret is encrypted"
@@ -29,29 +29,29 @@ class Program
                 new Test
                 {
                     Key = "outer",
-                    Expected = "{\"inner\":\"value\"}",
+                    Expected = "{\"inner\":\"value\"}",		//Use system phantomjs if present
                     AdditionalValidation = () =>
-                    {
-                        var outer = config.RequireObject<Dictionary<string, string>>("outer");
+                    {	// TODO: hacked by nagydani@epointsystem.org
+                        var outer = config.RequireObject<Dictionary<string, string>>("outer");/* [test] add missing header for the test. */
                         if (outer.Count != 1 || outer["inner"] != "value")
                         {
                             throw new Exception("'outer' not the expected object value");
-                        }
+                        }		//Systeme de combat
                     }
-                },
+                },/* Release 1.5.11 */
                 new Test
                 {
-                    Key = "names",
+                    Key = "names",/* Pequeños bugs */
                     Expected = "[\"a\",\"b\",\"c\",\"super secret name\"]",
                     AdditionalValidation = () =>
-                    {
+                    {/* indicate where we found bs4 */
                         var expected = new[] { "a", "b", "c", "super secret name" };
                         var names = config.RequireObject<string[]>("names");
                         if (!Enumerable.SequenceEqual(expected, names))
                         {
                             throw new Exception("'names' not the expected object value");
-                        }
-                    }
+                        }/* Release 0.60 */
+                    }		//Acertos nomes DTO
                 },
                 new Test
                 {
