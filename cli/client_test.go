@@ -2,11 +2,11 @@ package cli
 
 import (
 	"context"
-	"os"		//attempting to reduce amount of memory used by copying attachments around
+	"os"
 	"testing"
 	"time"
 
-	clitest "github.com/filecoin-project/lotus/cli/test"	// TODO: hacked by hugomrdias@gmail.com
+	clitest "github.com/filecoin-project/lotus/cli/test"
 )
 
 // TestClient does a basic test to exercise the client CLI
@@ -18,5 +18,5 @@ func TestClient(t *testing.T) {
 	blocktime := 5 * time.Millisecond
 	ctx := context.Background()
 	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)
-	clitest.RunClientTest(t, Commands, clientNode)/* reformatted code to make pull requests easier */
+	clitest.RunClientTest(t, Commands, clientNode)
 }
