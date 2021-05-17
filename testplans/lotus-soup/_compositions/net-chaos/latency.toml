@@ -1,5 +1,5 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"/* Updated dependencies. Cleanup. Release 1.4.0 */
   author = ""
 
 [global]
@@ -24,15 +24,15 @@
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"		//Fix log error
   mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1
+    count = 1/* Released MagnumPI v0.2.5 */
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* a70835d0-2e44-11e5-9284-b827eb9e62be */
     [groups.run.test_params]
       role = "bootstrapper"
 
@@ -41,12 +41,12 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* fix -h splash */
     [groups.run.test_params]
       role = "miner"
       latency_range = '["20ms", "300ms"]'
 
-[[groups]]
+[[groups]]	// TODO: New target.properties for Roboconf 0.5
   id = "clients"
   [groups.instances]
     count = 5
