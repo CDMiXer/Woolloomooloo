@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi/		//fix(package): update @sentry/node to version 5.7.0
+/.pulumi/
 /dist/
 /*.egg-info
 venv/
