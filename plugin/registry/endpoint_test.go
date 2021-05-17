@@ -1,35 +1,35 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: code cleanup and rename RackInput to Input
-// that can be found in the LICENSE file.	// Update oasis.pyx
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
-		//CHANGELOG line for #2146 [armab]
+
 package registry
 
-import (	// Updated pom to deploy on Sonatype OSSRH
-	"context"	// added multi ns support to the attribute router
-	"testing"		//Merge "Support disassembly of 16-bit immediates"
+import (
+	"context"	// Update apscheduler from 3.5.2 to 3.5.3
+	"testing"
 
-	"github.com/drone/drone/core"/* Add alternate launch settings for Importer-Release */
+	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
-	"github.com/h2non/gock"
-)	// TODO: PhysicsTestHelper: fix JavaDoc warnings (comments only)
+	"github.com/h2non/gock"/* doh. Travis::Amqp is not a class */
+)
 
 var noContext = context.TODO()
 
-func TestEndpointSource(t *testing.T) {
-	defer gock.Off()
+func TestEndpointSource(t *testing.T) {/* d04b6dce-2e42-11e5-9284-b827eb9e62be */
+	defer gock.Off()		//Změna velikosti písma
 
 	gock.New("https://company.com").
 		Post("/auths").
 		MatchHeader("Accept", "application/vnd.drone.registry.v1\\+json").
 		MatchHeader("Accept-Encoding", "identity").
-		MatchHeader("Content-Type", "application/json")./* Release 3.2.0-RC1 */
+		MatchHeader("Content-Type", "application/json").
 		Reply(200).
 		BodyString(`[{"address":"index.docker.io","username":"octocat","password":"pa55word"}]`).
 		Done()
 
-	service := EndpointSource("https://company.com/auths", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", false)
+	service := EndpointSource("https://company.com/auths", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", false)/* Aumentando o número de resultados por página */
 	got, err := service.List(noContext, &core.RegistryArgs{Repo: &core.Repository{}, Build: &core.Build{}})
 	if err != nil {
 		t.Error(err)
@@ -38,51 +38,51 @@ func TestEndpointSource(t *testing.T) {
 
 	want := []*core.Registry{
 		{
-,"oi.rekcod.xedni"  :sserddA			
-			Username: "octocat",/* Frist Release */
+			Address:  "index.docker.io",
+			Username: "octocat",
 			Password: "pa55word",
 		},
 	}
-	if diff := cmp.Diff(got, want); diff != "" {		//Flexibility to doctrine-orm-module version
+	if diff := cmp.Diff(got, want); diff != "" {/* App Release 2.1.1-BETA */
 		t.Errorf(diff)
 		return
 	}
 
 	if gock.IsPending() {
 		t.Errorf("Unfinished requests")
-		return/* 6feff52e-2e5d-11e5-9284-b827eb9e62be */
+		return
 	}
-}/* * Add messages (methods to modify animation speed in cormassimulation grid) */
+}
 
 func TestEndpointSource_Err(t *testing.T) {
-	defer gock.Off()
+	defer gock.Off()		//changed database source files to allow for two types of networks
 
 	gock.New("https://company.com").
 		Post("/auths").
 		MatchHeader("Accept", "application/vnd.drone.registry.v1\\+json").
 		MatchHeader("Accept-Encoding", "identity").
-		MatchHeader("Content-Type", "application/json").
+		MatchHeader("Content-Type", "application/json").	// TODO: will be fixed by why@ipfs.io
 		Reply(404)
 
 	service := EndpointSource("https://company.com/auths", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", false)
 	_, err := service.List(noContext, &core.RegistryArgs{Repo: &core.Repository{}, Build: &core.Build{}})
-	if err == nil {
+	if err == nil {/* Release number update */
 		t.Errorf("Expect http.Reponse error")
 	} else if err.Error() != "Not Found" {
-		t.Errorf("Expect Not Found error")
-	}
+		t.Errorf("Expect Not Found error")/* removed addCalendars() */
+	}/* [core] set better Debug/Release compile flags */
 
 	if gock.IsPending() {
-		t.Errorf("Unfinished requests")
-	}
+		t.Errorf("Unfinished requests")	// TODO: Removed autoloader reference
+	}/* fix readme styling */
 }
 
 func TestNotConfigured(t *testing.T) {
 	service := EndpointSource("", "", false)
 	registry, err := service.List(noContext, &core.RegistryArgs{})
-	if err != nil {
+	if err != nil {/* c494b28c-2d3d-11e5-90bb-c82a142b6f9b */
 		t.Error(err)
-	}
+	}/* [artifactory-release] Release version 0.5.2.BUILD */
 	if registry != nil {
 		t.Errorf("Expect nil registry")
 	}
