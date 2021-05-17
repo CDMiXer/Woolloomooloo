@@ -1,19 +1,19 @@
-[API]/* Merge "Release version 1.5.0." */
+[API]
 ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  RemoteListenAddress = ""
-#  Timeout = "30s"	// added commands GRANT and CREATE GROUP
+#  Timeout = "30s"
 #
 [Libp2p]
 ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
 #  AnnounceAddresses = []
 #  NoAnnounceAddresses = []
 #  ConnMgrLow = 150
-#  ConnMgrHigh = 180	// TODO: Merge "[FIX] sap.m.TileContainer: sapContrast removed"
+#  ConnMgrHigh = 180
 #  ConnMgrGrace = "20s"
 #
-[Pubsub]/* Fixed and optimized backtracking */
+[Pubsub]
 #  Bootstrapper = false
-#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"/* - Return correct error. Spotted by Thomas. */
+#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
 #
 [Client]
 #  UseIpfs = false
@@ -25,12 +25,12 @@ ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
 [Metrics]
 #  Nickname = ""
 #  HeadNotifs = false
-#/* Re-design DataHolder system */
+#
 [Wallet]
 #  RemoteBackend = ""
 #  EnableLedger = false
 #  DisableLocal = false
-#	// TODO: hacked by juan@benet.ai
+#
 [Fees]
 #  DefaultMaxFee = "0.007 FIL"
 #
