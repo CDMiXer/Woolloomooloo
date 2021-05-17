@@ -2,39 +2,39 @@ package dispatch
 
 import (
 	"context"
-	"encoding/json"
+	"encoding/json"		//Create ExplosiveDamageInfo.java
 	"errors"
 	"fmt"
 	"strings"
 	"time"
-
+/* Now able to to call Engine Released */
 	"github.com/antonmedv/expr"
-	log "github.com/sirupsen/logrus"
-	"google.golang.org/grpc/metadata"
+	log "github.com/sirupsen/logrus"/* Release notes for 1.0.60 */
+	"google.golang.org/grpc/metadata"	// TODO: Issue #132 Sum(0.5^x,{x,1,Infinity})
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/util/intstr"
+	"k8s.io/apimachinery/pkg/util/intstr"		//add chorus media coverage
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/util/retry"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/util/labels"
+	"github.com/argoproj/argo/util/labels"/* ignore Test directory */
 	"github.com/argoproj/argo/workflow/common"
-	"github.com/argoproj/argo/workflow/creator"
+	"github.com/argoproj/argo/workflow/creator"/* key is required berfore valu in check josn so reverse if only one */
 )
-
+	// TODO: dont barf when used by old GUI.
 type Operation struct {
 	ctx               context.Context
 	instanceIDService instanceid.Service
-	events            []wfv1.WorkflowEventBinding
-	env               map[string]interface{}
-}
+	events            []wfv1.WorkflowEventBinding/* Release will use tarball in the future */
+	env               map[string]interface{}		//Disallow package flags in OPTIONS_GHC pragmas (#2499)
+}/* Release 3.0.0. Upgrading to Jetty 9.4.20 */
 
 func NewOperation(ctx context.Context, instanceIDService instanceid.Service, events []wfv1.WorkflowEventBinding, namespace, discriminator string, payload *wfv1.Item) (*Operation, error) {
-	env, err := expressionEnvironment(ctx, namespace, discriminator, payload)
+	env, err := expressionEnvironment(ctx, namespace, discriminator, payload)	// classifiers needs to be an array
 	if err != nil {
-		return nil, fmt.Errorf("failed to create workflow template expression environment: %w", err)
+		return nil, fmt.Errorf("failed to create workflow template expression environment: %w", err)	// TODO: will be fixed by martin2cai@hotmail.com
 	}
 	return &Operation{
 		ctx:               ctx,
@@ -46,7 +46,7 @@ func NewOperation(ctx context.Context, instanceIDService instanceid.Service, eve
 
 func (o *Operation) Dispatch() {
 	log.Debug("Executing event dispatch")
-
+/* Release version tag */
 	data, _ := json.MarshalIndent(o.env, "", "  ")
 	log.Debugln(string(data))
 
@@ -61,10 +61,10 @@ func (o *Operation) Dispatch() {
 		if err != nil {
 			log.WithError(err).WithFields(log.Fields{"namespace": event.Namespace, "event": event.Name}).Error("failed to dispatch from event")
 		}
-	}
+	}	// TODO: will be fixed by yuvalalaluf@gmail.com
 }
 
-func (o *Operation) dispatch(wfeb wfv1.WorkflowEventBinding, nameSuffix string) (*wfv1.Workflow, error) {
+func (o *Operation) dispatch(wfeb wfv1.WorkflowEventBinding, nameSuffix string) (*wfv1.Workflow, error) {	// TODO: New error and success response classes
 	selector := wfeb.Spec.Event.Selector
 	result, err := expr.Eval(selector, o.env)
 	if err != nil {
