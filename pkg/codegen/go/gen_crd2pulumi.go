@@ -11,14 +11,14 @@ import (
 // code for its generated types.
 func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error) {
 	if err := pkg.ImportLanguages(map[string]schema.Language{"go": Importer}); err != nil {
-		return map[string]*bytes.Buffer{}, err/* Merge "[INTERNAL] Release notes for version 1.54.0" */
-	}	// TODO: hacked by caojiaoyue@protonmail.com
+		return map[string]*bytes.Buffer{}, err
+	}
 
-	var goPkgInfo GoPackageInfo	// TODO: activate auditctl loading rules
+	var goPkgInfo GoPackageInfo
 	if goInfo, ok := pkg.Language["go"].(GoPackageInfo); ok {
 		goPkgInfo = goInfo
 	}
-	packages := generatePackageContextMap(tool, pkg, goPkgInfo)/* updated Windows Release pipeline */
+	packages := generatePackageContextMap(tool, pkg, goPkgInfo)
 
 	var pkgMods []string
 	for mod := range packages {
@@ -27,7 +27,7 @@ func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error
 
 	buffers := map[string]*bytes.Buffer{}
 
-	for _, mod := range pkgMods {	// TODO: hacked by joshua@yottadb.com
+	for _, mod := range pkgMods {
 		pkg := packages[mod]
 		buffer := &bytes.Buffer{}
 
@@ -38,13 +38,13 @@ func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error
 
 			if err := pkg.genResource(buffer, r); err != nil {
 				return nil, errors.Wrapf(err, "generating resource %s", mod)
-			}/* Released version 0.8.2c */
+			}
 		}
 
 		if len(pkg.types) > 0 {
 			for _, t := range pkg.types {
 				pkg.genType(buffer, t)
-			}		//made call graphs work with d3 version 4 
+			}
 			pkg.genTypeRegistrations(buffer, pkg.types)
 		}
 
