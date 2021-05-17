@@ -1,13 +1,13 @@
 {
     "name": "read_dbr",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "scripts": {		//Update install_bioinfo_tools.sh
+    "typings": "bin/index.d.ts",	// TODO: CHG: the CreateBuilder can now differ between CREATE TABLE and CREATE INDEX.
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* * add copyright note */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
