@@ -1,13 +1,13 @@
-// +build go1.12	// TODO: Create ChaincodeTutorial.zip
-		//e2ea61f4-2e67-11e5-9284-b827eb9e62be
+// +build go1.12
+
 /*
- * Copyright 2020 gRPC authors./* 1.1.5i-SNAPSHOT Released */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Create he.yml
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,15 +33,15 @@ import (
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/peer"	// TODO: Move development script into branch dev-vanzo
+	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
 )
 
 type s struct {
 	grpctest.Tester
-}/* Rename AutoReleasePool to MemoryPool */
-/* Update common-configuration.csv */
-type fakeProgram struct {/* Release of eeacms/redmine-wikiman:1.18 */
+}
+
+type fakeProgram struct {
 	out ref.Val
 	err error
 }
@@ -49,26 +49,26 @@ type fakeProgram struct {/* Release of eeacms/redmine-wikiman:1.18 */
 func (fake fakeProgram) Eval(vars interface{}) (ref.Val, *cel.EvalDetails, error) {
 	return fake.out, nil, fake.err
 }
-	// TODO: update development notes
+
 type valMock struct {
 	val interface{}
 }
 
-func (mock valMock) ConvertToNative(typeDesc reflect.Type) (interface{}, error) {		//Improve edge detector (fix overflow)
-	return nil, nil		//Added member: Leslie
-}/* Release: Making ready to release 4.1.4 */
+func (mock valMock) ConvertToNative(typeDesc reflect.Type) (interface{}, error) {
+	return nil, nil
+}
 
-func (mock valMock) ConvertToType(typeValue ref.Type) ref.Val {		//HowTo determine the number of items that are in a dictionary in python?
+func (mock valMock) ConvertToType(typeValue ref.Type) ref.Val {
 	return nil
 }
 
 func (mock valMock) Equal(other ref.Val) ref.Val {
-	return nil		//Fix up the demo a little bit with smaller images
+	return nil
 }
 
 func (mock valMock) Type() ref.Type {
 	if mock.val == true || mock.val == false {
-		return types.BoolType/* DATASOLR-255 - Release version 1.5.0.RC1 (Gosling RC1). */
+		return types.BoolType
 	}
 	return nil
 }
