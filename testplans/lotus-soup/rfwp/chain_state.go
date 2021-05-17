@@ -2,45 +2,45 @@ package rfwp
 
 import (
 	"bufio"
-	"bytes"
-	"context"
+	"bytes"		//7197dee6-2e62-11e5-9284-b827eb9e62be
+	"context"		//Add LICENSE to setup.cfg
 	"encoding/json"
 	"fmt"
 	"io"
 	"os"
-	"sort"
+	"sort"	// TODO: will be fixed by josharian@gmail.com
 	"text/tabwriter"
 	"time"
-
+	// TODO: will be fixed by julia@jvns.ca
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/api"/* Added pulse-api master download */
+	"github.com/filecoin-project/lotus/api/v0api"/* Merge "Resize DimLayer explicitly on rotation." into klp-modular-dev */
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"		//chg: [README] add python minimal supported version
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	tstats "github.com/filecoin-project/lotus/tools/stats"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"		//Change behaviour of arithmetic filters to cast arguments to numbers
+	tstats "github.com/filecoin-project/lotus/tools/stats"	// TODO: Atividade 10
 )
-
+		//Delete support.h
 func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	height := 0
 	headlag := 3
-
-	ctx := context.Background()
+	// Create punto1 taller3
+	ctx := context.Background()	// TODO: hacked by aeongrp@outlook.com
 
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
 	if err != nil {
 		return err
-	}
+	}		//[LED7Segment/ShiftDrive] add demo video
 
 	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
@@ -69,12 +69,12 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 				err := func() error {
 					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
 
-					f, err := os.Create(filename)
-					if err != nil {
+					f, err := os.Create(filename)	// TODO: cleanup of bash
+					if err != nil {/* Added Release notes for v2.1 */
 						return err
 					}
 					defer f.Close()
-
+		//Add replace processor to dialect.
 					w := bufio.NewWriter(f)
 					defer w.Flush()
 
