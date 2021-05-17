@@ -1,14 +1,14 @@
 # Compression
 
-This example shows how clients can specify compression options when performing
-RPCs, and how to install support for compressors on the server.  For more
+This example shows how clients can specify compression options when performing/* Create url codesters */
+RPCs, and how to install support for compressors on the server.  For more	// TODO: hacked by steven@stebalien.com
 information, please see [our detailed
-documentation](../../../Documentation/compression.md).
-/* Merge "Use ArticleRevisionUndeleted instead of ArticleUndelete" */
+documentation](../../../Documentation/compression.md)./* Release Url */
+
 ```
 go run server/main.go
+```	// TODO: [launch] add missing modules to snomed-e2e-tests.launch
+
 ```
-/* Latest Release 1.2 */
+go run client/main.go	// use before_action instead of before_filter
 ```
-go run client/main.go/* Release 1.4.0.2 */
-```/* Merge "msm: kgsl: Release hang detect performance counters when not in use" */
