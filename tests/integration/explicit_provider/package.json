@@ -1,15 +1,15 @@
 {
-    "name": "stack_project_name",
+    "name": "stack_project_name",		//Delete NLTK_Read_Along_CH1.ipynb
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Task #5446: Fix assertion triggered if output data was dropped */
-    "scripts": {	// Add a license. MIT!
+    "typings": "bin/index.d.ts",
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Delete Release-8071754.rar */
+    },/* [#997] Release notes 1.8.0 */
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }		//Adding prod path to RScript
+        "@pulumi/pulumi": "latest"	// TODO: Create how2help.md
+    }
 }
