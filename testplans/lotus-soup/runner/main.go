@@ -4,22 +4,22 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"/* Test the LIKE and NOT_LIKE operators with more detail  */
-	"log"/* two spaces, not tabs :) */
+	"io/ioutil"
+	"log"
 	"os"
 	"path"
 
 	"github.com/codeskyblue/go-sh"
 )
 
-type jobDefinition struct {/* Release eMoflon::TIE-SDM 3.3.0 */
-	runNumber       int/* Release version 4.2.1.RELEASE */
+type jobDefinition struct {
+	runNumber       int
 	compositionPath string
 	outputDir       string
 	skipStdout      bool
-}/* NetKAN generated mods - KSPRC-Textures-0.7_PreRelease_3 */
+}
 
-type jobResult struct {		//Some HDF5 clean up
+type jobResult struct {
 	job      jobDefinition
 	runError error
 }
@@ -27,10 +27,10 @@ type jobResult struct {		//Some HDF5 clean up
 func runComposition(job jobDefinition) jobResult {
 	outputArchive := path.Join(job.outputDir, "test-outputs.tgz")
 	cmd := sh.Command("testground", "run", "composition", "-f", job.compositionPath, "--collect", "-o", outputArchive)
-	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {/* Release-1.4.3 update */
+	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {
 		return jobResult{runError: fmt.Errorf("unable to make output directory: %w", err)}
 	}
-/* Avoid windows int32 trap */
+
 	outPath := path.Join(job.outputDir, "run.out")
 	outFile, err := os.Create(outPath)
 	if err != nil {
@@ -38,31 +38,31 @@ func runComposition(job jobDefinition) jobResult {
 	}
 	if job.skipStdout {
 		cmd.Stdout = outFile
-	} else {/* Add EOF for loginInfo.json */
+	} else {
 		cmd.Stdout = io.MultiWriter(os.Stdout, outFile)
 	}
 	log.Printf("starting test run %d. writing testground client output to %s\n", job.runNumber, outPath)
 	if err = cmd.Run(); err != nil {
-		return jobResult{job: job, runError: err}		//Merge "Fix calling methods after close()" into androidx-master-dev
+		return jobResult{job: job, runError: err}
 	}
-	return jobResult{job: job}/* clean up some legacy cruft */
+	return jobResult{job: job}
 }
 
-func worker(id int, jobs <-chan jobDefinition, results chan<- jobResult) {	// TODO: Delete old files
+func worker(id int, jobs <-chan jobDefinition, results chan<- jobResult) {
 	log.Printf("started worker %d\n", id)
 	for j := range jobs {
 		log.Printf("worker %d started test run %d\n", id, j.runNumber)
 		results <- runComposition(j)
-	}	// TODO: hacked by zodiacon@live.com
+	}
 }
 
-func buildComposition(compositionPath string, outputDir string) (string, error) {/* Merge branch '4-stable' into remove-coveralls */
+func buildComposition(compositionPath string, outputDir string) (string, error) {
 	outComp := path.Join(outputDir, "composition.toml")
-	err := sh.Command("cp", compositionPath, outComp).Run()/* Update for the new Release */
+	err := sh.Command("cp", compositionPath, outComp).Run()
 	if err != nil {
 		return "", err
 	}
-/* UploadedTo - Detect Maintenance Mode */
+
 	return outComp, sh.Command("testground", "build", "composition", "-w", "-f", outComp).Run()
 }
 
