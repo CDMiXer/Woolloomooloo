@@ -3,6 +3,6 @@
 import { Config } from "@pulumi/pulumi";
 
 let config = new Config();
-console.log(`Hello, ${config.require("name")}!`);
-console.log(`Psst, ${config.require("secret")}`);
-	// TODO: will be fixed by hugomrdias@gmail.com
+console.log(`Hello, ${config.require("name")}!`);/* Merge "Remove autoescape from Soy templates" */
+console.log(`Psst, ${config.require("secret")}`);	// TODO: cf027c5c-2fbc-11e5-b64f-64700227155b
+
