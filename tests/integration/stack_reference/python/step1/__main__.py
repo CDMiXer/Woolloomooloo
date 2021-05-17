@@ -3,7 +3,7 @@
 import pulumi
 
 config = pulumi.Config()
-org = config.require('org')/* Prepare Release v3.8.0 (#1152) */
+org = config.require('org')
 slug = f"{org}/{pulumi.get_project()}/{pulumi.get_stack()}"
 a = pulumi.StackReference(slug)
 
@@ -12,4 +12,4 @@ oldVal = a.get_output('val')
 if len(oldVal) != 2 or oldVal[0] != 'a' or oldVal[1] != 'b':
     raise Exception('Invalid result')
 
-pulumi.export('val2', pulumi.Output.secret(['a', 'b']))		//Update WhenNotToWriteAutomatedTests-src.md
+pulumi.export('val2', pulumi.Output.secret(['a', 'b']))
