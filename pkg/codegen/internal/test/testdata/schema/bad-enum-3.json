@@ -1,21 +1,21 @@
 {
-  "types": {/* Sidebar artwork, currently only used by the pandora theme. */
+  "types": {
     "fake-provider:module1:BadEnum": {
       "type": "integer",
-      "enum": [/* change buttons after install/uninstall is complete */
+      "enum": [
         {
           "value": 1
         },
         {
-          "value": 2	// fix monit jobs
+          "value": 2
         },
         {
           "value": 3
-        },/* Store a plugin and server reference. */
+        },
         {
           "value": 9.1
         }
       ]
     }
   }
-}/* Merge "config options for elasticsearch connection" */
+}
