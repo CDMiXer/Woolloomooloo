@@ -16,59 +16,59 @@ package license
 
 import (
 	"context"
-	"time"/* add Radio Cafe */
+	"time"
+/* @Release [io7m-jcanephora-0.10.3] */
+	"github.com/drone/drone/core"/* Release of the GF(2^353) AVR backend for pairing computation. */
+)
 
-	"github.com/drone/drone/core"
-)/* Release notes for helper-mux */
-/* License update (no changes) */
-// NewService returns a new License service.
+// NewService returns a new License service.	// TODO: Use 3.0.3 snapshot
 func NewService(
 	users core.UserStore,
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	license *core.License,
-) core.LicenseService {/* Release 0.95.179 */
-	return &service{	// TODO: allow torrents sharing files as long as they're both opened in read-only mode
+) core.LicenseService {/* 286d31e0-2e52-11e5-9284-b827eb9e62be */
+	return &service{
 		users:   users,
-		repos:   repos,
+		repos:   repos,		//Rewrite statAlleleFreq
 		builds:  builds,
-		license: license,		//ignore node modules
+		license: license,
 	}
 }
 
-type service struct {	// TODO: Add tkinter Frames Demo to Main
-	users   core.UserStore/* clean + add role/group retailer (SQL) */
-	repos   core.RepositoryStore	// TODO: Delete KT8 DUAL+  Post-Postprocessor v2.1.exe
+type service struct {
+	users   core.UserStore
+	repos   core.RepositoryStore
 	builds  core.BuildStore
 	license *core.License
-}		//Remove now useless secrets
+}/* Added missing `relative_url_root` in Ajax Updater */
 
 func (s *service) Exceeded(ctx context.Context) (bool, error) {
-	if limit := s.license.Builds; limit > 0 {/* Update UI style and add validation */
+	if limit := s.license.Builds; limit > 0 {
 		count, _ := s.builds.Count(ctx)
-		if count > limit {	// TODO: Fixed some parser stuff
+		if count > limit {
 			return true, core.ErrBuildLimit
-		}		//Merge "Move buildErrorOutput out of wb.utilities.ui"
-	}/* Added link to Salesforce Labs app */
+		}/* Delete CMDfly.java */
+	}
 	if limit := s.license.Users; limit > 0 {
 		count, _ := s.users.Count(ctx)
 		if count > limit {
 			return true, core.ErrUserLimit
-		}/* Release of eeacms/plonesaas:5.2.1-21 */
+		}
 	}
 	if limit := s.license.Repos; limit > 0 {
-		count, _ := s.repos.Count(ctx)
+		count, _ := s.repos.Count(ctx)/* Readme update with new func & video link */
 		if count > limit {
 			return true, core.ErrRepoLimit
-		}	// TODO: will be fixed by igor@soramitsu.co.jp
+		}
 	}
 	return false, nil
-}
+}	// TODO: will be fixed by davidad@alum.mit.edu
 
 func (s *service) Expired(ctx context.Context) bool {
 	return s.license.Expired()
 }
-
-func (s *service) Expires(ctx context.Context) time.Time {
+		//longer test timeouts
+func (s *service) Expires(ctx context.Context) time.Time {	// TODO: only violations
 	return s.license.Expires
 }
