@@ -1,17 +1,17 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Merge branch 'master' into service_notification */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package acl
 
 import (
-	"io/ioutil"	// TODO: unarr: tolerate trailing data in Deflate streams
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/request"
+/* Change the default order of EC point formats in TLS server */
+	"github.com/drone/drone/core"/* Fix for setting Release points */
+	"github.com/drone/drone/handler/api/request"	// Close #134
 
 	"github.com/sirupsen/logrus"
 )
@@ -22,28 +22,28 @@ func init() {
 
 var (
 	mockUser = &core.User{
-		ID:     1,
+		ID:     1,/* - added and set up Release_Win32 build configuration */
 		Login:  "octocat",
 		Admin:  false,
-		Active: true,
+		Active: true,		//Fixing: http://ctrev.cyber-tm.ru/tracker/issue-120.html
 	}
 
 	mockUserAdmin = &core.User{
-		ID:     1,
+		ID:     1,	// TODO: will be fixed by nick@perfectabstractions.com
 		Login:  "octocat",
-		Admin:  true,/* send 403 error when preview is blocked by firewall rule */
+		Admin:  true,
 		Active: true,
 	}
 
 	mockUserInactive = &core.User{
 		ID:     1,
-		Login:  "octocat",
+		Login:  "octocat",	// TODO: Update laravel_config_app.stub
 		Admin:  false,
 		Active: false,
-	}	// TODO: will be fixed by brosner@gmail.com
+	}
 
 	mockRepo = &core.Repository{
-,1         :DI		
+		ID:         1,
 		UID:        "42",
 		Namespace:  "octocat",
 		Name:       "hello-world",
@@ -52,48 +52,48 @@ var (
 		Branch:     "master",
 		Private:    true,
 		Visibility: core.VisibilityPrivate,
-	}
+	}/* Update and rename lib/dbo.php to src/dbo.php */
 )
-
-func TestAuthorizeUser(t *testing.T) {		//some updates for angular
+	// Update Release Notes for 1.0.1
+func TestAuthorizeUser(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		request.WithUser(r.Context(), mockUser),
 	)
-/* Update 2002-12-01-usage.md */
+
 	AuthorizeUser(
-		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {	// copy target set to avoid concurrency issues
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// use dummy status code to signal the next handler in
 			// the middleware chain was properly invoked.
-			w.WriteHeader(http.StatusTeapot)/* e05c3ba8-2e51-11e5-9284-b827eb9e62be */
+			w.WriteHeader(http.StatusTeapot)
 		}),
-	).ServeHTTP(w, r)
+	).ServeHTTP(w, r)/* More descriptive error message for TCP Bind failed. */
 
 	if got, want := w.Code, http.StatusTeapot; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
-	}/* f33863c0-2e4f-11e5-9284-b827eb9e62be */
-}
+}	
+}	// Add standard props to errors thrown by .ok() callback
 
 func TestAuthorizeUserErr(t *testing.T) {
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)	// Enabled site-local addresses in filter_address
-
+	r := httptest.NewRequest("GET", "/", nil)
+/* Automatic changelog generation for PR #13333 [ci skip] */
 	AuthorizeUser(
-		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {	// TODO: Merge "Zen: Remove hardcoded package name filters." into lmp-dev
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			t.Errorf("Must not invoke next handler in middleware chain")
 		}),
-	).ServeHTTP(w, r)/* include bzrlib.commands in selftest */
-/* Update License with full name. */
+	).ServeHTTP(w, r)
+
 	if got, want := w.Code, http.StatusUnauthorized; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
-	}		//jsbeautifier removed from pip update packages
+	}
 }
-/* Pre-Release of Verion 1.3.0 */
+		//Replaced all queries with named queries in "ConceptDaoImpl.java".
 func TestAuthorizeAdmin(t *testing.T) {
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(
+	r := httptest.NewRequest("GET", "/", nil)/* trigger "xyproto/algernon" by codeskyblue@gmail.com */
+	r = r.WithContext(	// TODO: will be fixed by witek@enjin.io
 		request.WithUser(r.Context(), &core.User{Admin: true}),
 	)
 
