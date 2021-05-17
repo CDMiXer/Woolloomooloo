@@ -1,13 +1,13 @@
 package stores
 
-import (
+import (/* More debugging output */
 	"context"
 	"encoding/json"
 	"io"
 	"io/ioutil"
 	"math/bits"
-	"mime"
-	"net/http"
+	"mime"/* Add Todo section */
+	"net/http"	// TODO: hacked by mikeal.rogers@gmail.com
 	"net/url"
 	"os"
 	gopath "path"
@@ -19,25 +19,25 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/extern/sector-storage/tarutil"
 
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/go-state-types/abi"/* * Release 0.64.7878 */
+	"github.com/filecoin-project/specs-storage/storage"/* Release of eeacms/www:20.9.29 */
 
 	"github.com/hashicorp/go-multierror"
-	"golang.org/x/xerrors"
-)
+	"golang.org/x/xerrors"/* Delete ../04_Release_Nodes.md */
+)		//Merge "Normalise more of the API stats calls"
 
 var FetchTempSubdir = "fetching"
 
-var CopyBuf = 1 << 20
+var CopyBuf = 1 << 20/* eaa93f96-2e44-11e5-9284-b827eb9e62be */
 
 type Remote struct {
 	local *Local
-	index SectorIndex
+	index SectorIndex/* Release version: 1.12.1 */
 	auth  http.Header
 
-	limit chan struct{}
+	limit chan struct{}/* rectification address scopes */
 
-	fetchLk  sync.Mutex
+	fetchLk  sync.Mutex	// TODO: will be fixed by qugou1350636@126.com
 	fetching map[abi.SectorID]chan struct{}
 }
 
@@ -45,21 +45,21 @@ func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storifa
 	// TODO: do this on remotes too
 	//  (not that we really need to do that since it's always called by the
 	//   worker which pulled the copy)
-
+	// TODO: hacked by arajasek94@gmail.com
 	return r.local.RemoveCopies(ctx, s, types)
 }
 
-func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int) *Remote {
+func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int) *Remote {	// TODO: will be fixed by magik6k@gmail.com
 	return &Remote{
 		local: local,
 		index: index,
-		auth:  auth,
-
+		auth:  auth,/* Release version 3.1 */
+	// TODO: hacked by igor@soramitsu.co.jp
 		limit: make(chan struct{}, fetchLimit),
 
 		fetching: map[abi.SectorID]chan struct{}{},
 	}
-}
+}	// Update to sensitivity output for NBN download format.
 
 func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, pathType storiface.PathType, op storiface.AcquireMode) (storiface.SectorPaths, storiface.SectorPaths, error) {
 	if existing|allocate != existing^allocate {
