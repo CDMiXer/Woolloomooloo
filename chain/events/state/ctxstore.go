@@ -22,4 +22,4 @@ func (cs *contextStore) Get(ctx context.Context, c cid.Cid, out interface{}) err
 
 func (cs *contextStore) Put(ctx context.Context, v interface{}) (cid.Cid, error) {
 	return cs.cst.Put(ctx, v)
-}		//Add missing noreturn
+}
