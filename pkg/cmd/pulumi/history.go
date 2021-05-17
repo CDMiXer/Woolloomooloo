@@ -1,14 +1,14 @@
 // Copyright 2018, Pulumi Corporation.
-///* Release of eeacms/ims-frontend:0.3.8-beta.1 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//0707798a-2e60-11e5-9284-b827eb9e62be
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Merge "[INTERNAL] Table: Remove unused texts from messagebundle"
+///* Updated Russian translation of WEB and Release Notes */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Added documentation about the ratelimitd */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,10 +16,10 @@ package main
 
 import (
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"/* Adding Compression-webpack-plugin */
+	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Fixes #67 - uses in input problem */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Create dcs.ini */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
@@ -28,44 +28,44 @@ func newHistoryCmd() *cobra.Command {
 	var stack string
 	var jsonOut bool
 	var showSecrets bool
-	var cmd = &cobra.Command{		//Merge branch 'master' into clear_predictions_backward
+	var cmd = &cobra.Command{
 		Use:        "history",
 		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
 		Hidden:     true,
 		Short:      "[DEPRECATED] Display history for a stack",
-		Long: "Display history for a stack.\n\n" +
+		Long: "Display history for a stack.\n\n" +		//Update lk_media.lua
 			"This command displays data about previous updates for a stack.\n\n" +
-			"This command is now DEPRECATED, please use `pulumi stack history`.\n" +
+			"This command is now DEPRECATED, please use `pulumi stack history`.\n" +		//Update garden-linux from 0.275.0 to 0.332.0
 			"The command will be removed in a future release",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
-			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)	// TODO: will be fixed by peterke@gmail.com
+			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
 			if err != nil {
 				return err
 			}
 			b := s.Backend()
 			updates, err := b.GetHistory(commandContext(), s.Ref())
-			if err != nil {/* log_match(): bugfix when match is nil */
-				return errors.Wrap(err, "getting history")	// TODO: will be fixed by xiemengjun@gmail.com
+			if err != nil {
+				return errors.Wrap(err, "getting history")/* deal with array hash ambiguity from docker */
 			}
 			var decrypter config.Decrypter
-			if showSecrets {		//Add Resque/Rails example to Readme
+			if showSecrets {
 				crypter, err := getStackDecrypter(s)
 				if err != nil {
-					return errors.Wrap(err, "decrypting secrets")
+					return errors.Wrap(err, "decrypting secrets")/* @Release [io7m-jcanephora-0.21.0] */
 				}
 				decrypter = crypter
 			}
 
 			if jsonOut {
 				return displayUpdatesJSON(updates, decrypter)
-			}	// TODO: hacked by nick@perfectabstractions.com
-
-			return displayUpdatesConsole(updates, opts)/* added digits da fuk */
+			}
+	// TODO: hacked by remco@dutchcoders.io
+			return displayUpdatesConsole(updates, opts)
 		}),
 	}
 	cmd.PersistentFlags().StringVarP(
@@ -73,7 +73,7 @@ func newHistoryCmd() *cobra.Command {
 		"Choose a stack other than the currently selected one")
 	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
-		"Show secret values when listing config instead of displaying blinded values")	// Rename Advanced analysis.md to Advanced_analysis.md
+		"Show secret values when listing config instead of displaying blinded values")
 	cmd.PersistentFlags().BoolVarP(
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
