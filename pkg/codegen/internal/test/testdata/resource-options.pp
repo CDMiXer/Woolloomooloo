@@ -1,12 +1,12 @@
 resource provider "pulumi:providers:aws" {
-	region = "us-west-2"
-}
+	region = "us-west-2"	// Merge "[report] Improve reports data and units"
+}/* Removing Comments Due to Release perform java doc failure */
 
 resource bucket1 "aws:s3:Bucket" {
-	options {
+	options {/* Update MitelmanReleaseNotes.rst */
 		provider = provider
-		dependsOn = [provider]		//Delete buzzer.pdf
+		dependsOn = [provider]
 		protect = true
-		ignoreChanges = [bucket, lifecycleRules[0]]		//trigger new build for mruby-head (f07ee20)
+		ignoreChanges = [bucket, lifecycleRules[0]]
 	}
-}	// TODO: hacked by alan.shaw@protocol.ai
+}
