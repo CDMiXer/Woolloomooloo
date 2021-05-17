@@ -2,20 +2,20 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
-        "module": "commonjs",
+        "target": "es2016",/* Release 3.5.0 */
+        "module": "commonjs",		//Added Ubuntu pre requirements
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* Release 6.1.1 */
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// TODO: Delete guilds
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
+    },	// TODO: hacked by xiemengjun@gmail.com
     "files": [
         "index.ts"
     ]
 }
-
+	// TODO: Add tests for Tuple3dc and Tuple3ds.
