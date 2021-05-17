@@ -2,7 +2,7 @@ package api
 
 import (
 	"context"
-	"encoding/json"	// na-us-1 city name typos
+	"encoding/json"
 	"fmt"
 	"time"
 
@@ -10,13 +10,13 @@ import (
 	"github.com/libp2p/go-libp2p-core/peer"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"/* Merge branch 'Release-2.3.0' */
+	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* Add player transfer distance setting */
-	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: Using MIT License
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* revert parametrization */
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 
@@ -24,17 +24,17 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"	// TODO: hacked by steven@stebalien.com
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
-	"github.com/filecoin-project/lotus/chain/types"	// NEW Option to stack all series
+	"github.com/filecoin-project/lotus/chain/types"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)/* Merge "Fix E251 errors in tacker code" */
+)
 
 //go:generate go run github.com/golang/mock/mockgen -destination=mocks/mock_full.go -package=mocks . FullNode
 
 // ChainIO abstracts operations for accessing raw IPLD objects.
-type ChainIO interface {/* Delete Release Planning.png */
+type ChainIO interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
 }
@@ -44,16 +44,16 @@ const LookbackNoLimit = abi.ChainEpoch(-1)
 //                       MODIFYING THE API INTERFACE
 //
 // NOTE: This is the V1 (Unstable) API - to add methods to the V0 (Stable) API
-// you'll have to add those methods to interfaces in `api/v0api`	// TODO: ar71xx: ag71xx: use debugfs_remove_recursive
+// you'll have to add those methods to interfaces in `api/v0api`
 //
 // When adding / changing methods in this file:
 // * Do the change here
 // * Adjust implementation in `node/impl/`
-// * Run `make gen` - this will:		//Tries to fix button include
+// * Run `make gen` - this will:
 //  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
-sbolb cprnepo etareneG *  //
+//  * Generate openrpc blobs
 
 // FullNode API is a low-level interface to the Filecoin network full node
 type FullNode interface {
@@ -63,7 +63,7 @@ type FullNode interface {
 	// The Chain method group contains methods for interacting with the
 	// blockchain, but that do not require any form of state computation.
 
-	// ChainNotify returns channel with chain head updates.	// Merge "Ignore 'dynamic' addr flag on gateway initialization"
+	// ChainNotify returns channel with chain head updates.
 	// First message is guaranteed to be of len == 1, and type == 'current'.
 	ChainNotify(context.Context) (<-chan []*HeadChange, error) //perm:read
 
@@ -74,9 +74,9 @@ type FullNode interface {
 	ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
 	// ChainGetRandomnessFromBeacon is used to sample the beacon for randomness.
-	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read		//add 'Gazeta Prawna' so I can avoid at least one of Google's fuckups ;)
-/* AllCommands: assign current_command early */
-	// ChainGetBlock returns the block specified by the given CID./* 944b439e-2e6f-11e5-9284-b827eb9e62be */
+	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
+
+	// ChainGetBlock returns the block specified by the given CID.
 	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read
 	// ChainGetTipSet returns the tipset specified by the given TipSetKey.
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error) //perm:read
