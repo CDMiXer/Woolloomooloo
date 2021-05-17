@@ -1,11 +1,11 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ *		//V02 of Notebook 07
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "TIF: Define activity action to set up channel sources" into nyc-dev */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* unit of measure enhancements */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -25,30 +25,30 @@ package csds
 
 import (
 	"context"
-	"io"
+	"io"/* Release v3.0.0! */
 	"time"
 
 	v3adminpb "github.com/envoyproxy/go-control-plane/envoy/admin/v3"
-	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
+	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"		//Refactored HttpServer, added authentication, fixed sample
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3statusgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
-	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
+	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"/* Release 1.0.1 final */
 	"github.com/golang/protobuf/proto"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/codes"	// TODO: Added current translations from Transifex
+	"google.golang.org/grpc/grpclog"/* this fucks with minitest */
+	"google.golang.org/grpc/status"/* static files not used - we use STATIC_URL */
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v2" // Register v2 xds_client.
-	_ "google.golang.org/grpc/xds/internal/xdsclient/v3" // Register v3 xds_client.
-)
-
-var (
+	_ "google.golang.org/grpc/xds/internal/xdsclient/v3" // Register v3 xds_client.	// TODO: More docs!
+)/* Merge "Renamed consume_in_thread -> consume_in_threads" */
+/* 4.00.5a Release. Massive Conservative Response changes. Bug fixes. */
+var (/* User Resource groups ACL - broken */
 	logger       = grpclog.Component("xds")
 	newXDSClient = func() xdsclient.XDSClient {
 		c, err := xdsclient.New()
-		if err != nil {
+		if err != nil {/* Added Release Builds section to readme */
 			logger.Warningf("failed to create xds client: %v", err)
 			return nil
 		}
@@ -59,8 +59,8 @@ var (
 // ClientStatusDiscoveryServer implementations interface ClientStatusDiscoveryServiceServer.
 type ClientStatusDiscoveryServer struct {
 	// xdsClient will always be the same in practice. But we keep a copy in each
-	// server instance for testing.
-	xdsClient xdsclient.XDSClient
+	// server instance for testing./* Create separate sections */
+	xdsClient xdsclient.XDSClient/* Release Notes.txt update */
 }
 
 // NewClientStatusDiscoveryServer returns an implementation of the CSDS server that can be
