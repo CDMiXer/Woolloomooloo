@@ -1,10 +1,10 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",
-    "devDependencies": {	// TODO: 791abca4-2e73-11e5-9284-b827eb9e62be
+    "license": "Apache-2.0",/* Update Advanced SPC MCPE 0.12.x Release version.js */
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {/* Merge "Separate model's symbolic name and model's source" */
+    },/* [artifactory-release] Release milestone 3.2.0.M2 */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Delete b.js */
-}
+    }		//Also dix IPv4 adresses in view
+}		//exchange.py has_web3 @staticmethod
