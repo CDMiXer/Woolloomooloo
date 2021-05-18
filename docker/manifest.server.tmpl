@@ -1,25 +1,25 @@
 image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
-{{#if build.tags}}
+{{#if build.tags}}/* Adding Gradle instructions to upload Release Artifacts */
 tags:
-{{#each build.tags}}/* Release v2.2.1 */
+{{#each build.tags}}/* power thingy */
   - {{this}}
-{{/each}}	// TODO: Create StackWithMin2
-{{/if}}
-manifests:/* added a close button for the image detail interface */
+{{/each}}
+{{/if}}/* Create stack_plot.py */
+manifests:
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux/* Update terminal.lua */
+      os: linux
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64/* Release of eeacms/www-devel:21.4.10 */
-    platform:/* Release for 24.13.0 */
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
+    platform:
       architecture: arm64
       os: linux
-      variant: v8
+      variant: v8	// updated README nginx part
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm	// TODO: allow to set boulder sums, without specifing the problem results
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
-      os: linux
+      os: linux/* Release 1.0.14 */
       variant: v7
