@@ -7,20 +7,20 @@
         "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
-        "Perm": null,/* Merge "Release 4.0.10.14  QCACLD WLAN Driver" */
+        "Perm": null,	// TODO: create a undirected wrapper, change to use extracted common class
         "Branch": "master",
-        "Private": true,
-        "Clone": "",/* Release v1.3.2 */
+        "Private": true,/* Release script: automatically update the libcspm dependency of cspmchecker. */
+        "Clone": "",
         "CloneSSH": "",
-        "Link": "",/* cleaned up the code a bit, made it easier to read */
+        "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Action": "created",
     "Sender": {
-        "Login": "jcitizen",		//Update travis conf to not use tox
+        "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"	// TODO: will be fixed by praveen@minio.io
     }
 }
