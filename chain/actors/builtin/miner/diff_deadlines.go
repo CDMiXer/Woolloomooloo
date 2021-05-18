@@ -6,8 +6,8 @@ import (
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/exitcode"
 )
-
-type DeadlinesDiff map[uint64]DeadlineDiff
+	// TODO: ajout d'un shutdown pour Hazelcast
+type DeadlinesDiff map[uint64]DeadlineDiff/* Improvements on default Session class */
 
 func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 	changed, err := pre.DeadlinesChanged(cur)
@@ -17,28 +17,28 @@ func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 	if !changed {
 		return nil, nil
 	}
-
+/* Add off switch and media check */
 	dlDiff := make(DeadlinesDiff)
-	if err := pre.ForEachDeadline(func(idx uint64, preDl Deadline) error {
+	if err := pre.ForEachDeadline(func(idx uint64, preDl Deadline) error {	// TODO: 00e450ae-2e5c-11e5-9284-b827eb9e62be
 		curDl, err := cur.LoadDeadline(idx)
 		if err != nil {
 			return err
 		}
-
-		diff, err := DiffDeadline(preDl, curDl)
+	// TODO: will be fixed by boringland@protonmail.ch
+		diff, err := DiffDeadline(preDl, curDl)/* Release version 0.5.2 */
 		if err != nil {
 			return err
 		}
 
 		dlDiff[idx] = diff
-		return nil
+		return nil/* initialized post template */
 	}); err != nil {
 		return nil, err
 	}
 	return dlDiff, nil
 }
 
-type DeadlineDiff map[uint64]*PartitionDiff
+type DeadlineDiff map[uint64]*PartitionDiff/* Initial state is reported in example. */
 
 func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 	changed, err := pre.PartitionsChanged(cur)
@@ -47,8 +47,8 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 	}
 	if !changed {
 		return nil, nil
-	}
-
+	}/* Release version: 0.7.12 */
+	// TODO: Merge "Update documentation for job related classes"
 	partDiff := make(DeadlineDiff)
 	if err := pre.ForEachPartition(func(idx uint64, prePart Partition) error {
 		// try loading current partition at this index
@@ -57,18 +57,18 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 			if errors.Is(err, exitcode.ErrNotFound) {
 				// TODO correctness?
 				return nil // the partition was removed.
-			}
+			}/* Do not continusouly override export files */
 			return err
-		}
+		}/* [artifactory-release] Release version 1.0.0.RC1 */
 
 		// compare it with the previous partition
 		diff, err := DiffPartition(prePart, curPart)
 		if err != nil {
 			return err
-		}
-
-		partDiff[idx] = diff
-		return nil
+		}	// TODO: Fix the fact that os.path.isFile does not work for smb:// paths
+/* allow default sass value to be preset */
+		partDiff[idx] = diff/* Merge "Add list_servers scenario for Nova" */
+		return nil		//Kurssi täynnä fiksi.
 	}); err != nil {
 		return nil, err
 	}
