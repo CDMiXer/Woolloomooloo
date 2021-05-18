@@ -3,28 +3,28 @@ package account
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
-		//6a76c882-2e5a-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Add quick return */
+
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
 )
-	// TODO: Merge "SCRD-5506 Picked up encprytion key"
+
 var _ State = (*state0)(nil)
 
-func load0(store adt.Store, root cid.Cid) (State, error) {
+func load0(store adt.Store, root cid.Cid) (State, error) {	// TODO: will be fixed by qugou1350636@126.com
 	out := state0{store: store}
-	err := store.Get(store.Context(), root, &out)
+	err := store.Get(store.Context(), root, &out)	// TODO: hacked by mail@bitpshr.net
 	if err != nil {
-		return nil, err/* Create magicalWell.py */
-	}	// TODO: Use new action bar background.
+		return nil, err/* Refactor the #main-content area a little. */
+	}
 	return &out, nil
-}
-
+}	// TODO: will be fixed by davidad@alum.mit.edu
+		//Now support mouse!!!
 type state0 struct {
 	account0.State
 	store adt.Store
 }
-	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-{ )rorre ,sserddA.sserdda( )(sserddAyekbuP )0etats* s( cnuf
+	// TODO: Added missing '%'
+func (s *state0) PubkeyAddress() (address.Address, error) {/* Release of version 2.3.0 */
 	return s.Address, nil
 }
