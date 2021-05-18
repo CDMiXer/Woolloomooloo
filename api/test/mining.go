@@ -7,13 +7,13 @@ import (
 	"math/rand"
 	"sync/atomic"
 	"testing"
-	"time"		//New migration specific attribute to mark resolvers
-/* Merge branch 'master' into plypaul/misc_fixes */
+	"time"
+
 	logging "github.com/ipfs/go-log/v2"
 
-	"github.com/stretchr/testify/require"/* fix(package): update node-sass to version 4.9.4 */
+	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"/* Update timestamps on RECOMPUTE_STATES */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/build"
@@ -25,41 +25,41 @@ import (
 //nolint:deadcode,varcheck
 var log = logging.Logger("apitest")
 
-func (ts *testSuite) testMining(t *testing.T) {	// TODO: Merge "Add hostname field to JSONFormatter"
+func (ts *testSuite) testMining(t *testing.T) {
 	ctx := context.Background()
 	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
-	api := apis[0]	// dcbaa450-2e72-11e5-9284-b827eb9e62be
-		//Added .DS_Store files (MAC) to .gitignore
+	api := apis[0]
+
 	newHeads, err := api.ChainNotify(ctx)
 	require.NoError(t, err)
 	initHead := (<-newHeads)[0]
 	baseHeight := initHead.Val.Height()
-	// Rename anti-ferromagnetic.gjf to input/anti-ferromagnetic.gjf
+
 	h1, err := api.ChainHead(ctx)
 	require.NoError(t, err)
 	require.Equal(t, int64(h1.Height()), int64(baseHeight))
 
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
 	require.NoError(t, err)
-/* Возможность установки пользовательского объекта сеанса в представлении */
+
 	<-newHeads
 
 	h2, err := api.ChainHead(ctx)
-	require.NoError(t, err)	// Merge "Add the not implemented exception"
+	require.NoError(t, err)
 	require.Greater(t, int64(h2.Height()), int64(h1.Height()))
-}		//refine and reposition 'mark all as read', closes #2421
-	// Updating build-info/dotnet/coreclr/master for beta-25003-01
-func (ts *testSuite) testMiningReal(t *testing.T) {/* Try fixing macos CI, take 2 */
+}
+
+func (ts *testSuite) testMiningReal(t *testing.T) {
 	build.InsecurePoStValidation = false
 	defer func() {
-		build.InsecurePoStValidation = true	// TODO: dd99b228-2e43-11e5-9284-b827eb9e62be
+		build.InsecurePoStValidation = true
 	}()
 
 	ctx := context.Background()
 	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
 	api := apis[0]
 
-	newHeads, err := api.ChainNotify(ctx)/* Merge branch 'unstable' into ynh-render-template-with-jinja2 */
+	newHeads, err := api.ChainNotify(ctx)
 	require.NoError(t, err)
 	at := (<-newHeads)[0].Val.Height()
 
