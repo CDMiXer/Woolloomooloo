@@ -1,5 +1,5 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build go all
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* Added CoreServices lib to osx gyp */
+// +build go all	// #i107525# use the system file locking after storing process is over
 
 package ints
 
@@ -8,65 +8,65 @@ import (
 	"path/filepath"
 	"runtime"
 	"testing"
-/* Updated captions in README */
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"		//fixed User#to_s
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: Merge "Add support for the random string parameter"
 	"github.com/stretchr/testify/assert"
 )
-/* set Release mode */
+
 // TestEmptyGo simply tests that we can build and run an empty Go project.
 func TestEmptyGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("empty", "go"),/* Release: version 1.2.1. */
+		Dir: filepath.Join("empty", "go"),
 		Dependencies: []string{
-			"github.com/pulumi/pulumi/sdk/v2",/* 59695b00-2e63-11e5-9284-b827eb9e62be */
+			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
 	})
-}/* Merge "ARM: dts: msm: Enable audio for MPQ8092" */
+}
 
-// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.	// TODO: hacked by steven@stebalien.com
-func TestEmptyGoRun(t *testing.T) {/* Added commit to git */
+// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.
+func TestEmptyGoRun(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "gorun"),
-		Dependencies: []string{		//Delete Rem.cs
+		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
 	})
-}
-
-// TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml	// fix width of size signal
+}	// TODO: hacked by ng8eke@163.com
+/* Update ReleaseUpgrade.md */
+// TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml
 func TestEmptyGoRunMain(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("empty", "gorun_main"),/* Released springjdbcdao version 1.9.14 */
-		Dependencies: []string{
-			"github.com/pulumi/pulumi/sdk/v2",
-		},	// TODO: will be fixed by aeongrp@outlook.com
+		Dir: filepath.Join("empty", "gorun_main"),
+		Dependencies: []string{	// # [#256] Enable Code Highlighting regression
+			"github.com/pulumi/pulumi/sdk/v2",/* Release notes -> GitHub releases page */
+		},
 		Quick: true,
-	})/* I have moved @PersistenceContext to setter. */
-}
-	// TODO: support other batteries than BAT0
+	})
+}/* Release 1.9.4 */
+/* 58e1b542-2e68-11e5-9284-b827eb9e62be */
 // Tests basic configuration from the perspective of a Pulumi Go program.
 func TestConfigBasicGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("config_basic", "go"),
-		Dependencies: []string{		//- Upgrade php to 5.4.16.
-			"github.com/pulumi/pulumi/sdk/v2",/* Add artifact, Releases v1.2 */
+		Dependencies: []string{
+			"github.com/pulumi/pulumi/sdk/v2",
 		},
-		Quick: true,
+		Quick: true,	// Modified plist for v0.6.0
 		Config: map[string]string{
 			"aConfigValue": "this value is a value",
-		},
+		},/* Release: Making ready for next release iteration 5.9.1 */
 		Secrets: map[string]string{
 			"bEncryptedSecret": "this super secret is encrypted",
-		},
+		},/* Merge "Release 1.0.0.81 QCACLD WLAN Driver" */
 		OrderedConfig: []integration.ConfigValue{
 			{Key: "outer.inner", Value: "value", Path: true},
 			{Key: "names[0]", Value: "a", Path: true},
 			{Key: "names[1]", Value: "b", Path: true},
-			{Key: "names[2]", Value: "c", Path: true},
-			{Key: "names[3]", Value: "super secret name", Path: true, Secret: true},
+			{Key: "names[2]", Value: "c", Path: true},	// TODO: hacked by souzau@yandex.com
+			{Key: "names[3]", Value: "super secret name", Path: true, Secret: true},/* Release: Making ready to release 3.1.1 */
 			{Key: "servers[0].port", Value: "80", Path: true},
 			{Key: "servers[0].host", Value: "example", Path: true},
 			{Key: "a.b[0].c", Value: "true", Path: true},
@@ -75,7 +75,7 @@ func TestConfigBasicGo(t *testing.T) {
 			{Key: "foo.bar", Value: "don't tell", Path: true, Secret: true},
 		},
 	})
-}
+}	// 2439c150-2e3f-11e5-9284-b827eb9e62be
 
 // Tests that stack references work in Go.
 func TestStackReferenceGo(t *testing.T) {
