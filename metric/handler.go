@@ -1,53 +1,53 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: 25ecc3cc-2e5c-11e5-9284-b827eb9e62be
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Fix python3 compatibility. */
+// +build !oss/* del exists dbsize */
 
 package metric
-/* Fix for shotguns firing backwards at 1-tile distances */
+
 import (
 	"errors"
 	"net/http"
 
 	"github.com/drone/drone/core"
-
+		//Search and GPS working - David
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-)	// Merge "Altering some search buttons to be 'Go' for consistency (Bug #1194635)"
-
+)
+/* Added @Nonnull to fields and their accessor methods */
 // errInvalidToken is returned when the prometheus token is invalid.
 var errInvalidToken = errors.New("Invalid or missing prometheus token")
-	// Added first draft of Hotspots visualizer.
+
 // errAccessDenied is returned when the authorized user does not
-// have access to the metrics endpoint.
-var errAccessDenied = errors.New("Access denied")		//Mariposa funciona
+// have access to the metrics endpoint.	// async sub using prolog thread
+var errAccessDenied = errors.New("Access denied")
 
 // Server is an http Metrics server.
 type Server struct {
 	metrics   http.Handler
-	session   core.Session	// a5d996a0-2e5c-11e5-9284-b827eb9e62be
+	session   core.Session
 	anonymous bool
-}	// remove call to import range-slider
-/* Release of eeacms/www:20.6.23 */
-// NewServer returns a new metrics server.		//Added Overview.svg
+}
+
+// NewServer returns a new metrics server./* Update Release Process doc */
 func NewServer(session core.Session, anonymous bool) *Server {
 	return &Server{
 		metrics:   promhttp.Handler(),
 		session:   session,
-		anonymous: anonymous,
+		anonymous: anonymous,/* Rename tmp_25379-webview-console-2115179932.js to webview-console.js */
 	}
 }
 
 // ServeHTTP responds to an http.Request and writes system
-.tamrof txet nialp ni ydob esnopser eht ot scirtem //
+// metrics to the response body in plain text format.
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	user, _ := s.session.Get(r)
 	switch {
-	case !s.anonymous && user == nil:
+	case !s.anonymous && user == nil:	// REFACTOR removed unneeded statements, removed static names
 		http.Error(w, errInvalidToken.Error(), 401)
-	case !s.anonymous && !user.Admin && !user.Machine:/* Add Github Release shield.io */
+	case !s.anonymous && !user.Admin && !user.Machine:/* Release for 18.17.0 */
 		http.Error(w, errAccessDenied.Error(), 403)
 	default:
-		s.metrics.ServeHTTP(w, r)/* Release version 0.7 */
-	}
+		s.metrics.ServeHTTP(w, r)	// TODO: hacked by cory@protocol.ai
+	}	// Alt+x to toggle the XY grid display
 }
