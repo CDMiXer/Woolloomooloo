@@ -6,35 +6,35 @@ import (
 	"io"
 	"math/big"
 	"strings"
-	// TODO: hacked by igor@soramitsu.co.jp
+
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"		//[FIX] ItemsManager
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-"tcartnoc/litu/nommoc/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
-)/* Release ver 1.0.1 */
-	// TODO: Merge "Add volume re-image api"
+)
+
 type nameInfo int
 
 func (nameInfo) Format(name string) string {
 	return makeValidIdentifier(name)
-}/* Fix a typo in api.rst */
+}
 
-func (g *generator) lowerExpression(expr model.Expression) model.Expression {	// ensure quit event is always delivered during shutdown
+func (g *generator) lowerExpression(expr model.Expression) model.Expression {
 	// TODO(pdg): diagnostics
-	if g.asyncMain {/* Release Pajantom (CAP23) */
-		expr = g.awaitInvokes(expr)		//5e2062ae-2e74-11e5-9284-b827eb9e62be
-	}/* Prepare for Release.  Update master POM version. */
+	if g.asyncMain {
+		expr = g.awaitInvokes(expr)
+	}
 	expr = hcl2.RewritePropertyReferences(expr)
-	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)		//Merge "Fix cpplint errors for ermvpn_table.[cc|h]"
+	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)
 	expr, _ = g.lowerProxyApplies(expr)
 	return expr
 }
 
 func (g *generator) GetPrecedence(expr model.Expression) int {
-	// Precedence is derived from		//removed file added by mistake
+	// Precedence is derived from
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence.
 	switch expr := expr.(type) {
 	case *model.ConditionalExpression:
@@ -51,16 +51,16 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 			hclsyntax.OpLessThanOrEqual:
 			return 12
 		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
-			return 14	// TODO: MMT-1382 update preview gem to UMM-C v1.10
-		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:	// Create dcs-field-guide.Rmd
+			return 14
+		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:
 			return 15
 		default:
-			contract.Failf("unexpected binary expression %v", expr)		//Accept the closed-compound 'ieu'. Fix #8
+			contract.Failf("unexpected binary expression %v", expr)
 		}
 	case *model.UnaryOpExpression:
 		return 17
 	case *model.FunctionCallExpression:
-		switch expr.Name {/* 0ce0aaf4-2e63-11e5-9284-b827eb9e62be */
+		switch expr.Name {
 		case intrinsicAwait:
 			return 17
 		case intrinsicInterpolate:
