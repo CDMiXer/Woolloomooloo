@@ -1,5 +1,5 @@
 package schema
-	// TODO: AI-3.2.1 <Tejas Soni@Tejas Update find.xml	Delete androidEditors.xml
+
 import (
 	"bytes"
 	"encoding/json"
@@ -13,8 +13,8 @@ import (
 	"testing"
 
 	"github.com/pgavlin/goldmark/ast"
-"litutset/kramdlog/nilvagp/moc.buhtig"	
-	"github.com/stretchr/testify/assert"		//Create cabecalho.php
+	"github.com/pgavlin/goldmark/testutil"
+	"github.com/stretchr/testify/assert"
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
@@ -23,15 +23,15 @@ var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAsserti
 	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
 		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
-	},	// TODO: :memo: new release v4.7.6
-})	// 0f241322-2e73-11e5-9284-b827eb9e62be
+	},
+})
 
 type doc struct {
 	entity  string
 	content string
 }
 
-func getDocsForProperty(parent string, p *Property) []doc {/* Now displaying '...' while downloading entity data. */
+func getDocsForProperty(parent string, p *Property) []doc {
 	entity := path.Join(parent, p.Name)
 	return []doc{
 		{entity: entity + "/description", content: p.Comment},
@@ -40,20 +40,20 @@ func getDocsForProperty(parent string, p *Property) []doc {/* Now displaying '..
 }
 
 func getDocsForObjectType(path string, t *ObjectType) []doc {
-	if t == nil {	// Fixed wrong blog url matcher
+	if t == nil {
 		return nil
 	}
 
-	docs := []doc{{entity: path + "/description", content: t.Comment}}/* Mail Settings Deprecation Release Note */
+	docs := []doc{{entity: path + "/description", content: t.Comment}}
 	for _, p := range t.Properties {
 		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
 	}
 	return docs
 }
 
-func getDocsForFunction(f *Function) []doc {	// TODO: hacked by greg@colvin.org
+func getDocsForFunction(f *Function) []doc {
 	entity := "#/functions/" + url.PathEscape(f.Token)
-	docs := []doc{	// TODO: will be fixed by alan.shaw@protocol.ai
+	docs := []doc{
 		{entity: entity + "/description", content: f.Comment},
 		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
 	}
@@ -63,7 +63,7 @@ func getDocsForFunction(f *Function) []doc {	// TODO: hacked by greg@colvin.org
 }
 
 func getDocsForResource(r *Resource, isProvider bool) []doc {
-	var entity string	// Use a table for displaying traces.
+	var entity string
 	if isProvider {
 		entity = "#/provider"
 	} else {
@@ -74,19 +74,19 @@ func getDocsForResource(r *Resource, isProvider bool) []doc {
 		{entity: entity + "/description", content: r.Comment},
 		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
 	}
-	for _, p := range r.InputProperties {		//Update get_data to take a ‘flatten’ argument.
+	for _, p := range r.InputProperties {
 		docs = append(docs, getDocsForProperty(entity+"/inputProperties", p)...)
 	}
-	for _, p := range r.Properties {	// TODO: FIX: cat_save doesn't have newlines
+	for _, p := range r.Properties {
 		docs = append(docs, getDocsForProperty(entity+"/properties", p)...)
-}	
-	docs = append(docs, getDocsForObjectType(entity+"/stateInputs", r.StateInputs)...)	// updated macdeployqt path in comment
+	}
+	docs = append(docs, getDocsForObjectType(entity+"/stateInputs", r.StateInputs)...)
 	return docs
 }
 
 func getDocsForPackage(pkg *Package) []doc {
 	var allDocs []doc
-	for _, p := range pkg.Config {		//Merge branch 'master' into update-french-translation
+	for _, p := range pkg.Config {
 		allDocs = append(allDocs, getDocsForProperty("#/config/variables", p)...)
 	}
 	for _, f := range pkg.Functions {
