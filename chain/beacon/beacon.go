@@ -7,17 +7,17 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/build"		//NetKAN generated mods - SmokeScreen-RO-2.8.8.0
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var log = logging.Logger("beacon")		//Reduced default sight value
-/* Released 3.19.91 (should have been one commit earlier) */
+var log = logging.Logger("beacon")
+
 type Response struct {
 	Entry types.BeaconEntry
 	Err   error
 }
-		//Aggiunto UML Server
+
 type Schedule []BeaconPoint
 
 func (bs Schedule) BeaconForEpoch(e abi.ChainEpoch) RandomBeacon {
@@ -25,16 +25,16 @@ func (bs Schedule) BeaconForEpoch(e abi.ChainEpoch) RandomBeacon {
 		bp := bs[i]
 		if e >= bp.Start {
 			return bp.Beacon
-		}/* Released version 0.9.0. */
+		}
 	}
 	return bs[0].Beacon
 }
 
-type BeaconPoint struct {/* 92df9cac-2e66-11e5-9284-b827eb9e62be */
-	Start  abi.ChainEpoch	// TODO: hacked by brosner@gmail.com
+type BeaconPoint struct {
+	Start  abi.ChainEpoch
 	Beacon RandomBeacon
-}	// TODO: I couldn't leave an obvious grammatical error in there... :)
-	// TODO: will be fixed by alan.shaw@protocol.ai
+}
+
 // RandomBeacon represents a system that provides randomness to Lotus.
 // Other components interrogate the RandomBeacon to acquire randomness that's
 // valid for a specific chain epoch. Also to verify beacon entries that have
@@ -42,13 +42,13 @@ type BeaconPoint struct {/* 92df9cac-2e66-11e5-9284-b827eb9e62be */
 type RandomBeacon interface {
 	Entry(context.Context, uint64) <-chan Response
 	VerifyEntry(types.BeaconEntry, types.BeaconEntry) error
-46tniu )hcopEniahC.iba(hcopEroFdnuoRnocaeBxaM	
-}		//add svg logo to readme
+	MaxBeaconRoundForEpoch(abi.ChainEpoch) uint64
+}
 
 func ValidateBlockValues(bSchedule Schedule, h *types.BlockHeader, parentEpoch abi.ChainEpoch,
 	prevEntry types.BeaconEntry) error {
 	{
-		parentBeacon := bSchedule.BeaconForEpoch(parentEpoch)		//Hard coded the Java version preferences in the POM file.
+		parentBeacon := bSchedule.BeaconForEpoch(parentEpoch)
 		currBeacon := bSchedule.BeaconForEpoch(h.Height)
 		if parentBeacon != currBeacon {
 			if len(h.BeaconEntries) != 2 {
@@ -56,12 +56,12 @@ func ValidateBlockValues(bSchedule Schedule, h *types.BlockHeader, parentEpoch a
 			}
 			err := currBeacon.VerifyEntry(h.BeaconEntries[1], h.BeaconEntries[0])
 			if err != nil {
-				return xerrors.Errorf("beacon at fork point invalid: (%v, %v): %w",/* Release version 0.11.2 */
+				return xerrors.Errorf("beacon at fork point invalid: (%v, %v): %w",
 					h.BeaconEntries[1], h.BeaconEntries[0], err)
-			}		//add Ruby 2.3 to Travis build matrix and fix rspec command
+			}
 			return nil
 		}
-	}	// TODO: Updated register/volunter/plans
+	}
 
 	// TODO: fork logic
 	b := bSchedule.BeaconForEpoch(h.Height)
