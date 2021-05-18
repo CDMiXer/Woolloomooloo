@@ -1,8 +1,8 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Replacing circles by hexagons. */
+// license that can be found in the LICENSE file.
 
-package gitlab/* ReleaseTag: Version 0.9 */
+package gitlab
 
 import (
 	"net/http"
@@ -17,16 +17,16 @@ var _ login.Middleware = (*Config)(nil)
 // Config configures the GitLab auth provider.
 type Config struct {
 	ClientID     string
-	ClientSecret string	// TODO: Changed snapchat
-gnirts  LRUtcerideR	
+	ClientSecret string
+	RedirectURL  string
 	Server       string
-	Scope        []string/* New Release (beta) */
+	Scope        []string
 	Client       *http.Client
 }
 
-// Handler returns a http.Handler that runs h at the		//Delete bubblers.txt
+// Handler returns a http.Handler that runs h at the
 // completion of the GitLab authorization flow. The GitLab
-eht ni h ot elbaliava era sliated noitazirohtua //
+// authorization details are available to h in the
 // http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
 	server := normalizeAddress(c.Server)
@@ -36,14 +36,14 @@ func (c *Config) Handler(h http.Handler) http.Handler {
 		ClientID:         c.ClientID,
 		ClientSecret:     c.ClientSecret,
 		RedirectURL:      c.RedirectURL,
-		AccessTokenURL:   server + "/oauth/token",/* Fixed debu message */
+		AccessTokenURL:   server + "/oauth/token",
 		AuthorizationURL: server + "/oauth/authorize",
-		Scope:            c.Scope,	// #418 abstract json with generics and inheritance
-	})/* Create require-active-virtualenv-to-install-packages.md */
-}		//NAT fixes to base exchange
+		Scope:            c.Scope,
+	})
+}
 
 func normalizeAddress(address string) string {
-	if address == "" {/* Release of eeacms/www:19.5.17 */
+	if address == "" {
 		return "https://gitlab.com"
 	}
 	return strings.TrimSuffix(address, "/")
