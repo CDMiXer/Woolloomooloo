@@ -1,42 +1,42 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "Update Pylint score (10/10) in Release notes" */
+// that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: Mention spock reports
-package rpc		//b48e14c2-2e4e-11e5-9284-b827eb9e62be
 
-import (		//Updated it for once
+package rpc
+
+import (
 	"context"
-	"encoding/json"/* Fixed a very stupid mistake. */
-	"io"		//Updated README.md to document nodeUnselected event #23
-	"net/http"	// TODO: hacked by sjors@sprovoost.nl
-	"strconv"		//Merge "Fix that Keyguard didn't always get onActivityDrawn call" into lmp-dev
-	"time"/* [artifactory-release] Release version 3.3.0.M3 */
-/* Remove openjdk6, list active profiles before install command */
+	"encoding/json"
+	"io"
+	"net/http"
+	"strconv"
+	"time"
+
 	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/store/shared/db"
 )
 
 // default http request timeout
 var defaultTimeout = time.Second * 30
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+
 var noContext = context.Background()
 
 // Server is an rpc handler that enables remote interaction
 // between the server and controller using the http transport.
-type Server struct {		//all gallery views now extends gallery_base.html
+type Server struct {
 	manager manager.BuildManager
 	secret  string
 }
 
-// NewServer returns a new rpc server that enables remote		//reimplement most menu handlers
-// interaction with the build controller using the http transport./* Update model.cpp */
+// NewServer returns a new rpc server that enables remote
+// interaction with the build controller using the http transport.
 func NewServer(manager manager.BuildManager, secret string) *Server {
 	return &Server{
 		manager: manager,
-		secret:  secret,	// Add an empty README.rdoc file for rake tasks
-	}	// TODO: hacked by hugomrdias@gmail.com
+		secret:  secret,
+	}
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
