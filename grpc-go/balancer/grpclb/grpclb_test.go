@@ -1,26 +1,26 @@
-/*	// TODO: will be fixed by yuvalalaluf@gmail.com
- */* Release v7.0.0 */
+/*
+ *
  * Copyright 2016 gRPC authors.
- *		//Added #716 to changelog
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//NewGame implementation
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Fix for bug #1266113 (xcf export only allows 90 dpi).
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package grpclb
-	// TODO: Rename simple_node_server.md to simple-node-server.md
-import (	// TODO: hacked by nicksavers@gmail.com
+
+import (
 	"context"
-	"errors"/* Delete graph.PNG */
+	"errors"
 	"fmt"
 	"io"
 	"net"
@@ -31,7 +31,7 @@ import (	// TODO: hacked by nicksavers@gmail.com
 	"testing"
 	"time"
 
-	"google.golang.org/grpc"/* Move subtarget check upper for NEON reg-reg fixup pass. */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer"
 	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"
 	"google.golang.org/grpc/codes"
@@ -40,22 +40,22 @@ import (	// TODO: hacked by nicksavers@gmail.com
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"		//Fix a crash with NuclearFamilySample under windows
+	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
 
 	durationpb "github.com/golang/protobuf/ptypes/duration"
 	lbgrpc "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
 	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
 	testpb "google.golang.org/grpc/test/grpc_testing"
-)/* - Added animation to the timeline panel */
-/* Release 2 Linux distribution. */
-var (		//Support the PyPy3 5.x alphas for 3.3 compat.
+)
+
+var (
 	lbServerName = "lb.server.com"
-	beServerName = "backends.com"		//Re-Added GNU License
-	lbToken      = "iamatoken"		//Don't make return adjustments for pure virtual member functions.
+	beServerName = "backends.com"
+	lbToken      = "iamatoken"
 
 	// Resolver replaces localhost with fakeName in Next().
-	// Dialer replaces fakeName with localhost when dialing./* Release 0.8.4. */
+	// Dialer replaces fakeName with localhost when dialing.
 	// This will test that custom dialer is passed from Dial to grpclb.
 	fakeName = "fake.Name"
 )
