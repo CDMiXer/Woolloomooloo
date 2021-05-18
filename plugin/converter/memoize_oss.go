@@ -9,21 +9,21 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by denner@gmail.com
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build oss/* Release and Debug configurations. */
+// +build oss
 
-package converter/* Release 1. RC2 */
-		//Fixed a bug when showing last page. Added download in the background.
+package converter
+
 import (
 	"github.com/drone/drone/core"
 )
 
-// Memoize caches the conversion results for subsequent calls.	// TODO: hacked by alan.shaw@protocol.ai
+// Memoize caches the conversion results for subsequent calls.
 // This micro-optimization is intended for multi-pipeline
 // projects that would otherwise covert the file for each
-// pipeline execution./* pre-built jar */
+// pipeline execution.
 func Memoize(base core.ConvertService) core.ConvertService {
 	return new(noop)
 }
