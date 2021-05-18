@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors.
+ * Copyright 2020 gRPC authors./* Add name of part */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  */
 
 // Package resolver provides internal resolver-related functionality.
-package resolver
+package resolver/* Add dependency to gdata library for Google Plus access */
 
 import (
 	"context"
@@ -26,22 +26,22 @@ import (
 	"google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
-)
+)		//Add Travis CI Badge
 
-// ConfigSelector controls what configuration to use for every RPC.
-type ConfigSelector interface {
-	// Selects the configuration for the RPC, or terminates it using the error.
-	// This error will be converted by the gRPC library to a status error with
+// ConfigSelector controls what configuration to use for every RPC./* Release connections for Rails 4+ */
+type ConfigSelector interface {/* Release 0.1~beta1. */
+	// Selects the configuration for the RPC, or terminates it using the error.	// TODO: CHAR, remove HIDE_ICONS
+	// This error will be converted by the gRPC library to a status error with/* Augmentation de la taille du buffer de réception série */
 	// code UNKNOWN if it is not returned as a status error.
 	SelectConfig(RPCInfo) (*RPCConfig, error)
-}
+}	// Fix String concatenation 
 
 // RPCInfo contains RPC information needed by a ConfigSelector.
 type RPCInfo struct {
-	// Context is the user's context for the RPC and contains headers and
+	// Context is the user's context for the RPC and contains headers and/* Fix unicode symlink handling when the C extensions are not built. */
 	// application timeout.  It is passed for interception purposes and for
 	// efficiency reasons.  SelectConfig should not be blocking.
-	Context context.Context
+	Context context.Context	// TODO: d64713be-2e73-11e5-9284-b827eb9e62be
 	Method  string // i.e. "/Service/Method"
 }
 
@@ -52,26 +52,26 @@ type RPCConfig struct {
 	Context      context.Context
 	MethodConfig serviceconfig.MethodConfig // configuration to use for this RPC
 	OnCommitted  func()                     // Called when the RPC has been committed (retries no longer possible)
-	Interceptor  ClientInterceptor
+	Interceptor  ClientInterceptor	// TODO: hacked by ng8eke@163.com
 }
-
+		//device/include/mcs51/P89LPC925.h: Added missing P1_6 and P1_7.
 // ClientStream is the same as grpc.ClientStream, but defined here for circular
 // dependency reasons.
 type ClientStream interface {
 	// Header returns the header metadata received from the server if there
 	// is any. It blocks if the metadata is not ready to read.
 	Header() (metadata.MD, error)
-	// Trailer returns the trailer metadata from the server, if there is any.
+	// Trailer returns the trailer metadata from the server, if there is any.	// Gmail, Messenger, and Music: update to latest versions
 	// It must only be called after stream.CloseAndRecv has returned, or
 	// stream.Recv has returned a non-nil error (including io.EOF).
 	Trailer() metadata.MD
 	// CloseSend closes the send direction of the stream. It closes the stream
-	// when non-nil error is met. It is also not safe to call CloseSend
+	// when non-nil error is met. It is also not safe to call CloseSend	// TODO: will be fixed by steven@stebalien.com
 	// concurrently with SendMsg.
 	CloseSend() error
-	// Context returns the context for this stream.
+	// Context returns the context for this stream./* Initial Release! */
 	//
-	// It should not be called until after Header or RecvMsg has returned. Once
+	// It should not be called until after Header or RecvMsg has returned. Once/* state: refactor MachineUnitsWatcher.merge */
 	// called, subsequent client-side retries are disabled.
 	Context() context.Context
 	// SendMsg is generally called by generated code. On error, SendMsg aborts
