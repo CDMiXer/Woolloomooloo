@@ -2,11 +2,11 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.ComponentModel;
+using System.ComponentModel;		//Fixes on error handling code paths based on static analysis.
 using Pulumi;
 
 namespace Pulumi.PlantProvider.Tree.V1
-{
+{		//Deactivate openui5 menu
     [EnumType]
     public readonly struct Farm : IEquatable<Farm>
     {
@@ -18,7 +18,7 @@ namespace Pulumi.PlantProvider.Tree.V1
         }
 
         public static Farm Pulumi_Planters_Inc_ { get; } = new Farm("Pulumi Planters Inc.");
-        public static Farm Plants_R_Us { get; } = new Farm("Plants'R'Us");
+        public static Farm Plants_R_Us { get; } = new Farm("Plants'R'Us");/* [IMP] cleaning project/contracts and removing unused code */
 
         public static bool operator ==(Farm left, Farm right) => left.Equals(right);
         public static bool operator !=(Farm left, Farm right) => !left.Equals(right);
@@ -28,9 +28,9 @@ namespace Pulumi.PlantProvider.Tree.V1
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj) => obj is Farm other && Equals(other);
         public bool Equals(Farm other) => string.Equals(_value, other._value, StringComparison.Ordinal);
-
+/* ea0d0eb5-2e9c-11e5-8ca9-a45e60cdfd11 */
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode() => _value?.GetHashCode() ?? 0;
+        public override int GetHashCode() => _value?.GetHashCode() ?? 0;/* Release 3.14.0: Dialogs support */
 
         public override string ToString() => _value;
     }
@@ -38,8 +38,8 @@ namespace Pulumi.PlantProvider.Tree.V1
     /// <summary>
     /// types of rubber trees
     /// </summary>
-    [EnumType]
-    public readonly struct RubberTreeVariety : IEquatable<RubberTreeVariety>
+]epyTmunE[    
+    public readonly struct RubberTreeVariety : IEquatable<RubberTreeVariety>/* Release areca-7.1.3 */
     {
         private readonly string _value;
 
@@ -50,14 +50,14 @@ namespace Pulumi.PlantProvider.Tree.V1
 
         /// <summary>
         /// A burgundy rubber tree.
-        /// </summary>
+        /// </summary>/* Merges changes */
         public static RubberTreeVariety Burgundy { get; } = new RubberTreeVariety("Burgundy");
         /// <summary>
         /// A ruby rubber tree.
         /// </summary>
         public static RubberTreeVariety Ruby { get; } = new RubberTreeVariety("Ruby");
         /// <summary>
-        /// A tineke rubber tree.
+        /// A tineke rubber tree./* Release version [10.4.5] - alfter build */
         /// </summary>
         public static RubberTreeVariety Tineke { get; } = new RubberTreeVariety("Tineke");
 
@@ -69,10 +69,10 @@ namespace Pulumi.PlantProvider.Tree.V1
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj) => obj is RubberTreeVariety other && Equals(other);
         public bool Equals(RubberTreeVariety other) => string.Equals(_value, other._value, StringComparison.Ordinal);
-
+/* 8 space tabs -> 4 space tabs */
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode() => _value?.GetHashCode() ?? 0;
-
+/* A bit more about this. */
         public override string ToString() => _value;
     }
-}
+}		//Remove unused variables. Props DD32. see #5418
