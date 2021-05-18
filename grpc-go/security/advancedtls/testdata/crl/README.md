@@ -1,18 +1,18 @@
 # CRL Test Data
-
+/* Released 0.8.2 */
 This directory contains cert chains and CRL files for revocation testing.
 
 To print the chain, use a command like,
 
 ```shell
-openssl crl2pkcs7 -nocrl -certfile security/crl/x509/client/testdata/revokedLeaf.pem | openssl pkcs7 -print_certs -text -noout
+openssl crl2pkcs7 -nocrl -certfile security/crl/x509/client/testdata/revokedLeaf.pem | openssl pkcs7 -print_certs -text -noout/* f596acbc-2e4f-11e5-9284-b827eb9e62be */
 ```
 
 The crl file symlinks are generated with `openssl rehash`
 
 ## unrevoked.pem
-
-A certificate chain with CRL files and unrevoked certs
+/* Release 0.0.4 maintenance branch */
+A certificate chain with CRL files and unrevoked certs	// TODO: Merge "NVP: Correct NVP router port mac to match neutron" into stable/havana
 
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=Root CA (2021-02-02T07:30:36-08:00)
@@ -29,7 +29,7 @@ the same value to test that loading multiple files works.
 
 Certificate chain where the intermediate is revoked
 
-*   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
+*   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,/* Merge "Release 1.0.0.61 QCACLD WLAN Driver" */
     OU=campus-sln, CN=Root CA (2021-02-02T07:31:54-08:00)
     *   3.crl
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
