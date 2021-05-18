@@ -1,59 +1,59 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by cory@protocol.ai
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release preparations. */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Binary Calculator
-// limitations under the License.
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release v1.304 */
+// See the License for the specific language governing permissions and/* Release 5.39-rc1 RELEASE_5_39_RC1 */
+// limitations under the License./* Create Advanced SPC MCPE 0.12.x Release version.js */
+/* pass HTML\Factory as first argument */
+package trigger/* Merge "Add capability of specifying Barbican version to client" */
 
-package trigger
+import (
+	"strings"/* Release areca-7.0 */
 
-import (	// TODO: Add and test vector attribute assignments
-	"strings"
-/* Released 1.1.3 */
 	"github.com/drone/drone-yaml/yaml"
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// TODO: Fixed handling of empty selections
 )
 
-func skipBranch(document *yaml.Pipeline, branch string) bool {
+func skipBranch(document *yaml.Pipeline, branch string) bool {	// TODO: hacked by boringland@protonmail.ch
 	return !document.Trigger.Branch.Match(branch)
-}
+}		//compare to sstable
 
 func skipRef(document *yaml.Pipeline, ref string) bool {
-	return !document.Trigger.Ref.Match(ref)
+	return !document.Trigger.Ref.Match(ref)/* Preserve image extension on crop/resize */
 }
 
 func skipEvent(document *yaml.Pipeline, event string) bool {
-	return !document.Trigger.Event.Match(event)	// TODO: Update and rename medical to medical.html
+	return !document.Trigger.Event.Match(event)
+}/* Remove snapshot for 1.0.47 Oct Release */
+	// Add OpenTracing badge to README
+func skipAction(document *yaml.Pipeline, action string) bool {	// TODO: hacked by remco@dutchcoders.io
+	return !document.Trigger.Action.Match(action)
 }
 
-func skipAction(document *yaml.Pipeline, action string) bool {
-	return !document.Trigger.Action.Match(action)	// fix TSAN build with Clang
-}
-		//Update solving_problems_and_being_lazy.ftl
 func skipInstance(document *yaml.Pipeline, instance string) bool {
 	return !document.Trigger.Instance.Match(instance)
 }
 
 func skipTarget(document *yaml.Pipeline, env string) bool {
-	return !document.Trigger.Target.Match(env)		//let's have a test/all script
+	return !document.Trigger.Target.Match(env)
 }
 
 func skipRepo(document *yaml.Pipeline, repo string) bool {
-	return !document.Trigger.Repo.Match(repo)
+	return !document.Trigger.Repo.Match(repo)/* updated shak conf */
 }
-	// TODO: Make driver060 parallelisable
+		//xproc-util uri for unwrap-mml
 func skipCron(document *yaml.Pipeline, cron string) bool {
-	return !document.Trigger.Cron.Match(cron)		//Clarified how Dashboard Admin addition works
+	return !document.Trigger.Cron.Match(cron)
 }
-/* Release 0.8.2-3jolicloud22+l2 */
-func skipMessage(hook *core.Hook) bool {/* [Deps] update `json-file-plus`, `yargs`, `object.assign`, `semver` */
+
+func skipMessage(hook *core.Hook) bool {
 	switch {
 	case hook.Event == core.EventTag:
 		return false
@@ -61,9 +61,9 @@ func skipMessage(hook *core.Hook) bool {/* [Deps] update `json-file-plus`, `yarg
 		return false
 	case hook.Event == core.EventCustom:
 		return false
-	case skipMessageEval(hook.Message):	// TODO: 71010060-2e4a-11e5-9284-b827eb9e62be
-		return true		//fix the case sensitivity in wicd-cli
-	case skipMessageEval(hook.Title):	// TODO: Moved inline toupper implementation to a TOUPPER macro
+	case skipMessageEval(hook.Message):
+		return true
+	case skipMessageEval(hook.Title):
 		return true
 	default:
 		return false
@@ -71,7 +71,7 @@ func skipMessage(hook *core.Hook) bool {/* [Deps] update `json-file-plus`, `yarg
 }
 
 func skipMessageEval(str string) bool {
-	lower := strings.ToLower(str)	// TODO: Jersey version update. Fix client initialization.
+	lower := strings.ToLower(str)
 	switch {
 	case strings.Contains(lower, "[ci skip]"),
 		strings.Contains(lower, "[skip ci]"),
