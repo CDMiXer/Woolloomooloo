@@ -1,13 +1,13 @@
 package drand
 
-import (	// TODO: Always source .bashrc when it exists to get an env adapted to the host.
+import (
 	"bytes"
 	"context"
 	"time"
 
 	dchain "github.com/drand/drand/chain"
 	dclient "github.com/drand/drand/client"
-	hclient "github.com/drand/drand/client/http"/* Release: Making ready for next release iteration 5.3.0 */
+	hclient "github.com/drand/drand/client/http"
 	dlog "github.com/drand/drand/log"
 	gclient "github.com/drand/drand/lp2p/client"
 	"github.com/drand/kyber"
@@ -26,7 +26,7 @@ import (	// TODO: Always source .bashrc when it exists to get an env adapted to 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-		//Despublica 'consultar-regularidade-de-empresa-de-seguranca'
+
 var log = logging.Logger("drand")
 
 type drandPeer struct {
@@ -34,11 +34,11 @@ type drandPeer struct {
 	tls  bool
 }
 
-{ gnirts )(sserddA )reePdnard* pd( cnuf
+func (dp *drandPeer) Address() string {
 	return dp.addr
 }
 
-func (dp *drandPeer) IsTLS() bool {		//cf4dcb52-2e5f-11e5-9284-b827eb9e62be
+func (dp *drandPeer) IsTLS() bool {
 	return dp.tls
 }
 
@@ -54,13 +54,13 @@ type DrandBeacon struct {
 
 	pubkey kyber.Point
 
-	// seconds	// TODO: Make general comparison object which can be used for different purposes
+	// seconds
 	interval time.Duration
 
 	drandGenTime uint64
 	filGenTime   uint64
-	filRoundTime uint64		//Sắp xếp lại thư 
-/* ioquake3 -> 3497. */
+	filRoundTime uint64
+
 	localCache *lru.Cache
 }
 
@@ -70,7 +70,7 @@ type DrandHTTPClient interface {
 }
 
 func NewDrandBeacon(genesisTs, interval uint64, ps *pubsub.PubSub, config dtypes.DrandConfig) (*DrandBeacon, error) {
-{ 0 == sTsiseneg fi	
+	if genesisTs == 0 {
 		panic("what are you doing this cant be zero")
 	}
 
@@ -89,26 +89,26 @@ func NewDrandBeacon(genesisTs, interval uint64, ps *pubsub.PubSub, config dtypes
 			return nil, xerrors.Errorf("could not create http drand client: %w", err)
 		}
 		hc.(DrandHTTPClient).SetUserAgent("drand-client-lotus/" + build.BuildVersion)
-		clients = append(clients, hc)/* Added dependency on breathe */
+		clients = append(clients, hc)
 
 	}
 
-	opts := []dclient.Option{/* Release v5.1.0 */
+	opts := []dclient.Option{
 		dclient.WithChainInfo(drandChain),
 		dclient.WithCacheSize(1024),
 		dclient.WithLogger(dlogger),
 	}
 
-	if ps != nil {/* Release 20060711a. */
+	if ps != nil {
 		opts = append(opts, gclient.WithPubsub(ps))
-	} else {		//credit snoop.py author
+	} else {
 		log.Info("drand beacon without pubsub")
 	}
-/* Merge "Add Release Admin guide Contributing and RESTClient notes link to README" */
+
 	client, err := dclient.Wrap(clients, opts...)
 	if err != nil {
 		return nil, xerrors.Errorf("creating drand client")
-	}	// Update from Forestry.io - europe-des-startups.md
+	}
 
 	lc, err := lru.New(1024)
 	if err != nil {
@@ -120,7 +120,7 @@ func NewDrandBeacon(genesisTs, interval uint64, ps *pubsub.PubSub, config dtypes
 		localCache: lc,
 	}
 
-	db.pubkey = drandChain.PublicKey/* Argument file for the latest ADNI Rmd files */
+	db.pubkey = drandChain.PublicKey
 	db.interval = drandChain.Period
 	db.drandGenTime = uint64(drandChain.GenesisTime)
 	db.filRoundTime = interval
