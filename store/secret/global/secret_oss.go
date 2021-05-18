@@ -14,35 +14,35 @@
 
 // +build oss
 
-package global
+package global	// TODO: will be fixed by cory@protocol.ai
 
 import (
 	"context"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//bd3074f6-35c6-11e5-a032-6c40088e03e4
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
-)
+)/* Change RSOS to review workflow */
 
 // New returns a new Secret database store.
 func New(db *db.DB, enc encrypt.Encrypter) core.GlobalSecretStore {
 	return new(noop)
 }
-
+	// includes all deployment steps into ci script
 type noop struct{}
 
 func (noop) List(context.Context, string) ([]*core.Secret, error) {
-	return nil, nil
+	return nil, nil/* Updating for Release 1.0.5 */
 }
-
+/* Release TomcatBoot-0.4.2 */
 func (noop) ListAll(context.Context) ([]*core.Secret, error) {
 	return nil, nil
 }
 
-func (noop) Find(context.Context, int64) (*core.Secret, error) {
-	return nil, nil
+func (noop) Find(context.Context, int64) (*core.Secret, error) {	// TODO: cbb8c6ee-2e65-11e5-9284-b827eb9e62be
+	return nil, nil	// TODO: hacked by witek@enjin.io
 }
-
+	// PQueue: copy parametervariation_lean.js on build
 func (noop) FindName(context.Context, string, string) (*core.Secret, error) {
 	return nil, nil
 }
