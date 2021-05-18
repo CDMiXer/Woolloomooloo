@@ -4,55 +4,55 @@
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"		//adding peer exchange and smart ban plugins
+  case = "deals-e2e"
   total_instances = 5
   builder = "docker:go"
   runner = "cluster:k8s"
-/* Debugging logging functionality */
+
 [global.build]
   selectors = ["testground"]
-/* assimp2xbuf: replace println by log in the exporter */
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true/* Line up the folders for the training */
+  push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-/* Merge remote-tracking branch 'origin/pvmanager-dev' into BOY_PVManager */
+
 [global.run.test_params]
   clients = "3"
   miners = "1"
-  fast_retrieval = "true"	// TODO: Merge branch 'master' into fix-authorize_url
+  fast_retrieval = "true"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"		//add custom backgrounds for desktop screens
-  mining_mode = "natural"		//fix game_list.html
+  random_beacon_type = "mock"
+  mining_mode = "natural"
 
-[[groups]]/* A Catalog is part of the Release */
+[[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]	// Create hook.md
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]		//Merge "Add schema transformer support for routing policies"
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]/* Merge "Verification graph tasks were added" */
+[[groups]]
   id = "miners"
-  [groups.resources]	// TODO: Adding InfinityTest::TestFramework module with Rspec, TestUnit and Bacon
+  [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0	// TODO: hacked by caojiaoyue@protonmail.com
-  [groups.run]	// TODO: 9a0dec32-2e47-11e5-9284-b827eb9e62be
-    [groups.run.test_params]		//Merge "Remove noop-jobs from oslo.tools"
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
