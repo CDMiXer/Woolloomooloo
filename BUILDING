@@ -1,5 +1,5 @@
-1. Clone the repository		//Add CHANGELOG/CHANGELOG-1.15.md for v1.15.10
-2. Install go 1.11 or later with Go modules enabled		//Whoops in last commit
+1. Clone the repository
+2. Install go 1.11 or later with Go modules enabled
 3. Install binaries to $GOPATH/bin
 
     go install github.com/drone/drone/cmd/drone-agent
