@@ -1,53 +1,53 @@
 [metadata]
-  name = "lotus-soup"/* GitVersion: guess we are back at WeightedPreReleaseNumber */
+  name = "lotus-soup"
   author = ""
 
 [global]
-  plan = "lotus-soup"
-  case = "deals-stress"/* Flask-wtf 0.9 support */
-  total_instances = 6/* Release-ish update to the readme. */
+  plan = "lotus-soup"/* another py2.4 fixture */
+  case = "deals-stress"
+  total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
-/* Release notes for 0.43 are no longer preliminary */
-[global.run_config]/* Fix small typos in commands */
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
-  enable_go_build_cache = true	// TODO: hacked by alex.gaynor@gmail.com
+[global.run_config]		//#34: fix XML generation for Agent and Role
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+/* Release 0.10.7. Update repoze. */
+[global.build_config]		//Replace nohup and log to own log file
+  enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "3"
-  miners = "2"
-  genesis_timestamp_offset = "100000"
+  miners = "2"/* Upgrade version number to 3.1.5 Release Candidate 2 */
+  genesis_timestamp_offset = "100000"	// Delete Screenshot_8.png
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
-  random_beacon_type = "mock"	// TODO: will be fixed by timnugent@gmail.com
+  random_beacon_type = "mock"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]	// 73b99122-35c6-11e5-8b6f-6c40088e03e4
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* adding an overload ctor */
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.instances]/* Added all rows. */
-    count = 2
-    percentage = 0.0
+  [groups.instances]
+    count = 2/* Merge "Fix openstackdocstheme-api-ref gate" */
+    percentage = 0.0	// TODO: hacked by steven@stebalien.com
   [groups.run]
     [groups.run.test_params]
-      role = "miner"	// fixes issue #2
+      role = "miner"
 
 [[groups]]
-  id = "clients"/* remove after regroup project */
-  [groups.instances]
-    count = 3	// # set deprecation in provider code 
+  id = "clients"
+  [groups.instances]	// TODO: will be fixed by steven@stebalien.com
+    count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
