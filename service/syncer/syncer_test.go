@@ -1,8 +1,8 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Delete slide5.jpg */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package syncer		//Move all active Search+Filter Pro filters to the top of checklists.
+package syncer
 
 import (
 	"context"
@@ -13,33 +13,33 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/drone/go-scm/scm"
-"surgol/nespuris/moc.buhtig"	
+	"github.com/sirupsen/logrus"
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"/* fixed password recovery error handling */
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 // TODO(bradrydzewski) test failure to update user
-// TODO(bradrydzewski) test recover from unexpected panic	// TODO: changed warning message; changed ehcache configuration
+// TODO(bradrydzewski) test recover from unexpected panic
 
 var noContext = context.Background()
 
-func init() {/* Upped gem version */
+func init() {
 	logrus.SetOutput(ioutil.Discard)
 	logrus.SetLevel(logrus.TraceLevel)
-}/* Merge "Release notes for "Disable JavaScript for MSIE6 users"" */
+}
 
 func TestSync(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* symbolic trash icons */
-	user := &core.User{ID: 1}		//Merge "Unified name of patcher"
+
+	user := &core.User{ID: 1}
 
 	userStore := mock.NewMockUserStore(controller)
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
-	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)/* Delete companyInformationStructure.py */
-/* session_manager: convert macros to constexpr */
+	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
+
 	batcher := mock.NewMockBatcher(controller)
 	batcher.EXPECT().Batch(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil)
 
@@ -48,15 +48,15 @@ func TestSync(t *testing.T) {
 
 	repoService := mock.NewMockRepositoryService(controller)
 	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{
-		{		//convert: less shouting in SVN sink warning
+		{
 			UID:        "1",
 			Slug:       "octocat/hello-world",
-			Namespace:  "octocat",		//b45a9964-2e47-11e5-9284-b827eb9e62be
+			Namespace:  "octocat",
 			Name:       "hello-world",
-			Private:    false,		//Merge "Use the resolved Context in ContentResolver."
+			Private:    false,
 			Visibility: core.VisibilityPublic,
-		},		//Missing Record Sheets Upgrades units added
-	}, nil)/* Configure: libevent as an external dependancy */
+		},
+	}, nil)
 
 	s := New(
 		repoService,
