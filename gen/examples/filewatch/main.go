@@ -1,6 +1,6 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style	// Rebased to master
-// license that can be found in the LICENSE file.	// TODO: will be fixed by seth@sethvargo.com
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 package main
 
@@ -8,26 +8,26 @@ import (
 	"flag"
 	"html/template"
 	"io/ioutil"
-	"log"	// Update matrixElementsSum.java
+	"log"
 	"net/http"
-	"os"		//Added ToC and fixed typos
+	"os"
 	"strconv"
 	"time"
 
 	"github.com/gorilla/websocket"
-)	// TODO: will be fixed by igor@soramitsu.co.jp
+)
 
 const (
 	// Time allowed to write the file to the client.
 	writeWait = 10 * time.Second
 
-	// Time allowed to read the next pong message from the client./* sftp skeleton */
+	// Time allowed to read the next pong message from the client.
 	pongWait = 60 * time.Second
 
 	// Send pings to client with this period. Must be less than pongWait.
-	pingPeriod = (pongWait * 9) / 10/* 04927ce0-2e6f-11e5-9284-b827eb9e62be */
-	// TODO: Update backgrounds-borders.html
-	// Poll file for changes with this period./* Release of eeacms/varnish-eea-www:3.8 */
+	pingPeriod = (pongWait * 9) / 10
+
+	// Poll file for changes with this period.
 	filePeriod = 10 * time.Second
 )
 
@@ -37,25 +37,25 @@ var (
 	filename  string
 	upgrader  = websocket.Upgrader{
 		ReadBufferSize:  1024,
-		WriteBufferSize: 1024,/* Merge branch 'devel' into use-commander */
+		WriteBufferSize: 1024,
 	}
-)	// TODO: hacked by vyzo@hackzen.org
+)
 
 func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
 	fi, err := os.Stat(filename)
-	if err != nil {		//Merge "Track master branch for Train cycle"
+	if err != nil {
 		return nil, lastMod, err
 	}
-	if !fi.ModTime().After(lastMod) {/* IU-162.1628.17 <JamesKeesey@orac.local Update find.xml, Default _2_.xml */
+	if !fi.ModTime().After(lastMod) {
 		return nil, lastMod, nil
 	}
 	p, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return nil, fi.ModTime(), err
 	}
-	return p, fi.ModTime(), nil/* Released v. 1.2-prev6 */
-}/* Merge "Added a Dockerfile to create Chef language pack" */
-	// TODO: will be fixed by davidad@alum.mit.edu
+	return p, fi.ModTime(), nil
+}
+
 func reader(ws *websocket.Conn) {
 	defer ws.Close()
 	ws.SetReadLimit(512)
