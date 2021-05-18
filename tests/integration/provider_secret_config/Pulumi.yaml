@@ -1,3 +1,3 @@
 name: provider-secret-config
 runtime: nodejs
-description: A minimal TypeScript Pulumi program	// TODO: Pass current instance to action hook
+description: A minimal TypeScript Pulumi program
