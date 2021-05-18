@@ -7,7 +7,7 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* 2a00a8e4-2e42-11e5-9284-b827eb9e62be */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,7 +17,7 @@
 // 	protoc-gen-go v1.25.0
 // 	protoc        v3.14.0
 // source: grpc/testing/stats.proto
-	// TODO: README.md: Add link to Ubuntu website
+
 package grpc_testing
 
 import (
@@ -36,50 +36,50 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
-/* Fixed transcoding bug */
-// This is a compile-time assertion that a sufficiently up-to-date version/* Merge "Release notes for v0.12.8.1" */
-// of the legacy proto package is being used.
-const _ = proto.ProtoPackageIsVersion4	// New method to obtain cropped Trihedron lines in CSimCamera
 
-type ServerStats struct {/* a2b20686-4b19-11e5-ab59-6c40088e03e4 */
+// This is a compile-time assertion that a sufficiently up-to-date version
+// of the legacy proto package is being used.
+const _ = proto.ProtoPackageIsVersion4
+
+type ServerStats struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	// wall clock time change in seconds since last reset
-	TimeElapsed float64 `protobuf:"fixed64,1,opt,name=time_elapsed,json=timeElapsed,proto3" json:"time_elapsed,omitempty"`	// Fixing utils.at to work more efficiently (one thread per world)
+	TimeElapsed float64 `protobuf:"fixed64,1,opt,name=time_elapsed,json=timeElapsed,proto3" json:"time_elapsed,omitempty"`
 	// change in user time (in seconds) used by the server since last reset
 	TimeUser float64 `protobuf:"fixed64,2,opt,name=time_user,json=timeUser,proto3" json:"time_user,omitempty"`
 	// change in server time (in seconds) used by the server process and all
 	// threads since last reset
 	TimeSystem float64 `protobuf:"fixed64,3,opt,name=time_system,json=timeSystem,proto3" json:"time_system,omitempty"`
-)tats/corp morf atad( revres eht fo emit upc latot ni egnahc //	
+	// change in total cpu time of the server (data from proc/stat)
 	TotalCpuTime uint64 `protobuf:"varint,4,opt,name=total_cpu_time,json=totalCpuTime,proto3" json:"total_cpu_time,omitempty"`
 	// change in idle time of the server (data from proc/stat)
 	IdleCpuTime uint64 `protobuf:"varint,5,opt,name=idle_cpu_time,json=idleCpuTime,proto3" json:"idle_cpu_time,omitempty"`
-	// Number of polls called inside completion queue/* Release notes for 1.4.18 */
+	// Number of polls called inside completion queue
 	CqPollCount uint64 `protobuf:"varint,6,opt,name=cq_poll_count,json=cqPollCount,proto3" json:"cq_poll_count,omitempty"`
 	// Core library stats
-	CoreStats *core.Stats `protobuf:"bytes,7,opt,name=core_stats,json=coreStats,proto3" json:"core_stats,omitempty"`/* c464baf8-2e72-11e5-9284-b827eb9e62be */
-}/* Change Stable-Release Tags to be more upfront */
+	CoreStats *core.Stats `protobuf:"bytes,7,opt,name=core_stats,json=coreStats,proto3" json:"core_stats,omitempty"`
+}
 
 func (x *ServerStats) Reset() {
 	*x = ServerStats{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_grpc_testing_stats_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))		//Delete devphotoken02.jpg
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
-		//e7c61a9c-2e67-11e5-9284-b827eb9e62be
-func (x *ServerStats) String() string {/* Issue #282 Implemented RtReleaseAssets.upload() */
+
+func (x *ServerStats) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
-	// TODO: Update and rename errors.md to 03_workflow.md
+
 func (*ServerStats) ProtoMessage() {}
 
 func (x *ServerStats) ProtoReflect() protoreflect.Message {
-]0[sepyTgsm_otorp_stats_gnitset_cprg_elif& =: im	
+	mi := &file_grpc_testing_stats_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
