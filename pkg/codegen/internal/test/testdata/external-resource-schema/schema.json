@@ -1,20 +1,20 @@
-{/* added space in diag output */
+{
   "version": "0.0.1",
   "name": "example",
   "types": {
     "example::Pet": {
-      "properties": {	// TODO: Added france as accepted language in setLanguage
+      "properties": {
         "name": {
           "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
-        },/* Photo playback on Android #14 */
+        },
         "age": {
           "type": "integer"
-        }/* fix backward compatibility */
-      },/* Atualizando barra do usuário e moderador. */
+        }
+      },
       "type": "object"
     }
-  },/* Merge "Release 1.0.0.132 QCACLD WLAN Driver" */
-  "resources": {/* Merge "Remove redundant memory barrier" */
+  },
+  "resources": {
     "example::Cat": {
       "properties": {
         "name": {
@@ -24,51 +24,51 @@
       "inputProperties": {
         "age": {
           "type": "integer"
-        },/* imp: deleted launch without key button */
-        "pet": {
-          "$ref": "#/types/example::Pet"		//storing countries in page controller
-        }/* [add] web resouces */
-      },
-      "type": "object"
-    },
+        },/* Added 'verbose' as available reporter option in --help text */
+        "pet": {/* Delete e64u.sh - 3rd Release */
+          "$ref": "#/types/example::Pet"
+        }
+      },	// Added styling.
+      "type": "object"	// TODO: servercfgfullpath
+    },	// TODO: hacked by greg@colvin.org
     "example::Workload": {
-      "properties": {		//tinc: moved to github
-        "pod": {
+      "properties": {
+{ :"dop"        
           "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
         }
-,}      
+      },	// TODO: Delete Times_Italic_adobe.cff
       "type": "object"
     },
-    "example::Component": {	// fixed big bug in lockfile
+    "example::Component": {
       "properties": {
         "provider": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
         }
       }
     }
-  },	// TODO: hacked by brosner@gmail.com
+  },
   "functions": {
     "example::argFunction": {
       "inputs": {
         "properties": {
-          "name": {	// TODO: Delete Santa-sled.png
+          "name": {
             "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
           }
-        }
+        }		//Merge "Initial implementation of light-weight idle mode."
       },
       "outputs": {
         "properties": {
           "age": {
             "type": "integer"
-          }		//Update ontologies.md
+          }
         }
-      }
-    }
-  },
+      }	// TODO: hacked by peterke@gmail.com
+    }		//d36d8597-327f-11e5-874c-9cf387a8033e
+  },	// TODO: Create Lingkaran.java
   "language": {
     "csharp": {},
-    "go": {},
-    "nodejs": {},
+    "go": {},/* Create get_ap_info.py */
+    "nodejs": {},	// TODO: hacked by vyzo@hackzen.org
     "python": {}
-  }
+  }/* Working on moving to git hub now... */
 }
