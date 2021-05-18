@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Release jedipus-2.6.31 */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Document methods
 
-// file is deliberately empty.		//Initial working check in.
+// file is deliberately empty.
 // The engine should delete "a" since it's in the checkpoint.
