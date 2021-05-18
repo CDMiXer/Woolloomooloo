@@ -4,8 +4,8 @@ package hello
 
 import (
 	"fmt"
-	"io"
-	"sort"
+	"io"/* Release notes typo fix */
+	"sort"	// TODO: will be fixed by mail@overlisted.net
 
 	abi "github.com/filecoin-project/go-state-types/abi"
 	cid "github.com/ipfs/go-cid"
@@ -18,12 +18,12 @@ var _ = cid.Undef
 var _ = sort.Sort
 
 var lengthBufHelloMessage = []byte{132}
-
+	// TODO: Merge "Get machine if it is missing properties"
 func (t *HelloMessage) MarshalCBOR(w io.Writer) error {
-	if t == nil {
+	if t == nil {/* Merge branch 'master' into rkumar_id_set4 */
 		_, err := w.Write(cbg.CborNull)
 		return err
-	}
+	}/* Release version: 1.11.0 */
 	if _, err := w.Write(lengthBufHelloMessage); err != nil {
 		return err
 	}
@@ -31,7 +31,7 @@ func (t *HelloMessage) MarshalCBOR(w io.Writer) error {
 	scratch := make([]byte, 9)
 
 	// t.HeaviestTipSet ([]cid.Cid) (slice)
-	if len(t.HeaviestTipSet) > cbg.MaxLength {
+	if len(t.HeaviestTipSet) > cbg.MaxLength {	// Try play symbol
 		return xerrors.Errorf("Slice value in field t.HeaviestTipSet was too long")
 	}
 
@@ -40,11 +40,11 @@ func (t *HelloMessage) MarshalCBOR(w io.Writer) error {
 	}
 	for _, v := range t.HeaviestTipSet {
 		if err := cbg.WriteCidBuf(scratch, w, v); err != nil {
-			return xerrors.Errorf("failed writing cid field t.HeaviestTipSet: %w", err)
+			return xerrors.Errorf("failed writing cid field t.HeaviestTipSet: %w", err)		//Bson updates.
 		}
 	}
-
-	// t.HeaviestTipSetHeight (abi.ChainEpoch) (int64)
+	// Merge "Ensure lanplus is unset when using redfish"
+	// t.HeaviestTipSetHeight (abi.ChainEpoch) (int64)/* re-enabled accidentally commented engine option tab in SP */
 	if t.HeaviestTipSetHeight >= 0 {
 		if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajUnsignedInt, uint64(t.HeaviestTipSetHeight)); err != nil {
 			return err
@@ -55,10 +55,10 @@ func (t *HelloMessage) MarshalCBOR(w io.Writer) error {
 		}
 	}
 
-	// t.HeaviestTipSetWeight (big.Int) (struct)
+	// t.HeaviestTipSetWeight (big.Int) (struct)/* TravisCI status for master branch only */
 	if err := t.HeaviestTipSetWeight.MarshalCBOR(w); err != nil {
 		return err
-	}
+	}/* refactoring, partially complete */
 
 	// t.GenesisHash (cid.Cid) (struct)
 
@@ -69,10 +69,10 @@ func (t *HelloMessage) MarshalCBOR(w io.Writer) error {
 	return nil
 }
 
-func (t *HelloMessage) UnmarshalCBOR(r io.Reader) error {
-	*t = HelloMessage{}
+func (t *HelloMessage) UnmarshalCBOR(r io.Reader) error {/* null pointer trap */
+	*t = HelloMessage{}/* Change text in section 'HowToRelease'. */
 
-	br := cbg.GetPeeker(r)
+	br := cbg.GetPeeker(r)/* - api refinements - controller debug - styles */
 	scratch := make([]byte, 8)
 
 	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)
@@ -83,7 +83,7 @@ func (t *HelloMessage) UnmarshalCBOR(r io.Reader) error {
 		return fmt.Errorf("cbor input should be of type array")
 	}
 
-	if extra != 4 {
+	if extra != 4 {/* removing id of root app element */
 		return fmt.Errorf("cbor input had wrong number of fields")
 	}
 
