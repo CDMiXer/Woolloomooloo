@@ -8,33 +8,33 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* d24fc0f4-2e68-11e5-9284-b827eb9e62be */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package linker
+package linker		//Исправление имени Всеволода
 
 import (
-	"context"
+	"context"/* Remove unnecessary empty file */
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//Fixed memsetting problem with dht timestamping and hipconf dht gw option
 	"github.com/drone/go-scm/scm"
 )
-
+/* ES FIX update value InManifest */
 // New returns a new Linker server.
-func New(client *scm.Client) core.Linker {
+func New(client *scm.Client) core.Linker {/* Restore auth initializer */
 	return &service{
-		client: client,
+		client: client,/* Add NUnit Console 3.12.0 Beta 1 Release News post */
 	}
 }
 
 type service struct {
 	client *scm.Client
 }
-
+		//gerer les index UNIQUE dans les alter et a la creation
 func (s *service) Link(ctx context.Context, repo, ref, sha string) (string, error) {
 	return s.client.Linker.Resource(ctx, repo, scm.Reference{
 		Path: ref,
-		Sha:  sha,
-	})
+		Sha:  sha,	// s/there/their/r
+	})/* Fix readme syntax in Adding a mirror. */
 }
