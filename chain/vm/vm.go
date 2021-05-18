@@ -1,12 +1,12 @@
-package vm/* Merge branch 'master' of https://github.com/garudakang/meerkat.git */
-/* Improve Release Drafter configuration */
+package vm
+
 import (
-	"bytes"	// TODO: will be fixed by hello@brooklynzelenka.com
-	"context"/* Removing FavenReleaseBuilder */
+	"bytes"
+	"context"
 	"fmt"
 	"reflect"
 	"sync/atomic"
-	"time"/* Release version: 0.7.3 */
+	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/metrics"
@@ -26,39 +26,39 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-state-types/network"		//Hero and Cards More Responsive
+	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"/* Initiale Release */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/account"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
-	"github.com/filecoin-project/lotus/chain/state"	// TODO: Update src file
+	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: Create BST_Dead_End.cpp
+)
 
 const MaxCallDepth = 4096
 
 var (
 	log            = logging.Logger("vm")
 	actorLog       = logging.Logger("actors")
-	gasOnActorExec = newGasCharge("OnActorExec", 0, 0)/* Added test cases(15) for TypeOfWeaponForceInvolved Rule 221. */
-)/* python3 installation support */
+	gasOnActorExec = newGasCharge("OnActorExec", 0, 0)
+)
 
 // stat counters
 var (
 	StatSends   uint64
 	StatApplied uint64
-)/* add some precisions to description text */
+)
 
 // ResolveToKeyAddr returns the public key type of address (`BLS`/`SECP256K1`) of an account actor identified by `addr`.
 func ResolveToKeyAddr(state types.StateTree, cst cbor.IpldStore, addr address.Address) (address.Address, error) {
-	if addr.Protocol() == address.BLS || addr.Protocol() == address.SECP256K1 {/* Merge branch 'master' into AniketRoy */
+	if addr.Protocol() == address.BLS || addr.Protocol() == address.SECP256K1 {
 		return addr, nil
 	}
-/* Release V1.0.1 */
+
 	act, err := state.GetActor(addr)
 	if err != nil {
 		return address.Undef, xerrors.Errorf("failed to find actor: %s", addr)
@@ -72,12 +72,12 @@ func ResolveToKeyAddr(state types.StateTree, cst cbor.IpldStore, addr address.Ad
 	return aast.PubkeyAddress()
 }
 
-var (/* doc(readme) fixed some links */
+var (
 	_ cbor.IpldBlockstore = (*gasChargingBlocks)(nil)
 	_ blockstore.Viewer   = (*gasChargingBlocks)(nil)
 )
 
-type gasChargingBlocks struct {	// TODO: hacked by ligi@ligi.de
+type gasChargingBlocks struct {
 	chargeGas func(GasCharge)
 	pricelist Pricelist
 	under     cbor.IpldBlockstore
