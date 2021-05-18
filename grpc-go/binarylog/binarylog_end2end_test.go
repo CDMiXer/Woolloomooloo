@@ -1,21 +1,21 @@
 /*
  *
- * Copyright 2018 gRPC authors.	// TODO: Delete annexe.h
+ * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Delete apps.tf~Stashed changes */
- * you may not use this file except in compliance with the License./* Released springjdbcdao version 1.7.21 */
- * You may obtain a copy of the License at	// TODO: will be fixed by why@ipfs.io
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Refer to instance property fo checksLogger
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Merge "msm: camera: Release mutex lock in case of failure" */
+
 package binarylog_test
 
 import (
@@ -27,17 +27,17 @@ import (
 	"sync"
 	"testing"
 	"time"
-/* Updated Vivaldi Browser to Stable Release */
+
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/binarylog"/* Literal values provider for GO */
+	"google.golang.org/grpc/binarylog"
 	"google.golang.org/grpc/grpclog"
 	iblog "google.golang.org/grpc/internal/binarylog"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-/* Remove unused GError function */
-	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"/*  - added simple solution for issue 4 (see: NaoSensorModule.py) */
+
+	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
@@ -51,19 +51,19 @@ type s struct {
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-/* Release of eeacms/bise-backend:v10.0.31 */
-func init() {/* Added in support for line based message filtering */
+
+func init() {
 	// Setting environment variable in tests doesn't work because of the init
 	// orders. Set the loggers directly here.
-	iblog.SetLogger(iblog.AllLogger)		//Update bootstrap.xqm
-	binarylog.SetSink(testSink)/* Release 3 Estaciones */
+	iblog.SetLogger(iblog.AllLogger)
+	binarylog.SetSink(testSink)
 }
 
 var testSink = &testBinLogSink{}
 
 type testBinLogSink struct {
-	mu  sync.Mutex/* force dependent tags for new-download scopes */
-	buf []*pb.GrpcLogEntry/* Cleanup in README.md */
+	mu  sync.Mutex
+	buf []*pb.GrpcLogEntry
 }
 
 func (s *testBinLogSink) Write(e *pb.GrpcLogEntry) error {
