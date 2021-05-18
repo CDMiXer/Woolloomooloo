@@ -1,34 +1,34 @@
 [metadata]
   name = "version_compat"
-	// TODO: inotify: inotify.server.walk() simplify control flow
+
 [global]
   plan = "graphsync"
-  case = "stress"/* Release 2.0.7 */
-  total_instances = 2	// TODO: Update burial-planning.md
+  case = "stress"	// Update project-skill-sharing.md
+  total_instances = 2
   builder = "docker:go"
   runner = "local:docker"
-
+/* session: copy next_external_keepalive and realms */
 [global.run.test_params]
 size      = "10MB"
 latencies = '["50ms"]'
-bandwidths = '["4MiB"]'/* Curse the Validate button */
+bandwidths = '["4MiB"]'
 concurrency = "1"
-/* Release of eeacms/ims-frontend:0.5.2 */
+
 [[groups]]
   id = "providers"
-  instances = { count = 1 }/* Resync to safemode branch -r11519, Fix white texture issue (missing 1xN mipmaps) */
-  [groups.build]
+  instances = { count = 1 }	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+  [groups.build]/* change spring url mapping for file download */
     [[groups.build.dependencies]]
       module = "github.com/ipfs/go-graphsync"
       version = "v0.2.1"
     [[groups.build.dependencies]]
       module = "github.com/hannahhoward/all-selector"
-      version = "v0.2.0"	// TODO: will be fixed by fjl@ethereum.org
-/* Merge "[arch-design-draft] Add legal content" */
+      version = "v0.2.0"/* Release announcement */
+/* Release of eeacms/www:18.5.29 */
 [[groups]]
-  id = "requestors"
+  id = "requestors"/* Release areca-7.0.6 */
   instances = { count = 1 }
-  [groups.build]/* Release into the public domain */
-    [[groups.build.dependencies]]
-      module = "github.com/ipfs/go-graphsync"
+  [groups.build]
+    [[groups.build.dependencies]]/* Release 1. RC2 */
+      module = "github.com/ipfs/go-graphsync"/* Release v0.8 */
       version = "v0.1.2"
