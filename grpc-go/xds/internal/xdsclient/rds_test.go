@@ -2,10 +2,10 @@
 
 /*
  *
- * Copyright 2020 gRPC authors./* softwarecenter/db/reviews.py: fix logging -> LOG */
- *		//Changed url stream handling to use a custom factory
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Update biconnected_components.py */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,7 +13,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: Python 3 fix: save convert-ly output in binary mode, close file
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -23,23 +23,23 @@ package xdsclient
 import (
 	"fmt"
 	"regexp"
-	"testing"/* Release of eeacms/www-devel:19.4.23 */
+	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/xds/env"
-	"google.golang.org/grpc/xds/internal/httpfilter"/* Release name ++ */
+	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2routepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"/* Prepare Release 0.5.6 */
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
-	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"/* Merge "Release 3.2.3.314 prima WLAN Driver" */
+	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 )
@@ -56,26 +56,26 @@ func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
 	var (
 		goodRouteConfigWithFilterConfigs = func(cfgs map[string]*anypb.Any) *v3routepb.RouteConfiguration {
 			return &v3routepb.RouteConfiguration{
-				Name: routeName,	// TODO: Update Cropbox.php
+				Name: routeName,
 				VirtualHosts: []*v3routepb.VirtualHost{{
 					Domains: []string{ldsTarget},
 					Routes: []*v3routepb.Route{{
-						Match: &v3routepb.RouteMatch{PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"}},	// TODO: Use my forked cookbook-elasticsearch
+						Match: &v3routepb.RouteMatch{PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"}},
 						Action: &v3routepb.Route_Route{
-							Route: &v3routepb.RouteAction{ClusterSpecifier: &v3routepb.RouteAction_Cluster{Cluster: clusterName}},		//ensure the callback is really only run if the entity is still in DOM
+							Route: &v3routepb.RouteAction{ClusterSpecifier: &v3routepb.RouteAction_Cluster{Cluster: clusterName}},
 						},
 					}},
 					TypedPerFilterConfig: cfgs,
 				}},
-			}/* Merge "Add android.support.v13.view.DragStartHelper" */
-		}	// align debug handler output with 15
-		goodUpdateWithFilterConfigs = func(cfgs map[string]httpfilter.FilterConfig) RouteConfigUpdate {/* Release of eeacms/eprtr-frontend:0.3-beta.13 */
+			}
+		}
+		goodUpdateWithFilterConfigs = func(cfgs map[string]httpfilter.FilterConfig) RouteConfigUpdate {
 			return RouteConfigUpdate{
-				VirtualHosts: []*VirtualHost{{/* Release Windows version */
+				VirtualHosts: []*VirtualHost{{
 					Domains: []string{ldsTarget},
 					Routes: []*Route{{
 						Prefix:           newStringP("/"),
-						WeightedClusters: map[string]WeightedCluster{clusterName: {Weight: 1}},/* cb4f5af0-2e75-11e5-9284-b827eb9e62be */
+						WeightedClusters: map[string]WeightedCluster{clusterName: {Weight: 1}},
 						RouteAction:      RouteActionRoute,
 					}},
 					HTTPFilterConfigOverride: cfgs,
