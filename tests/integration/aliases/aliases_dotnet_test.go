@@ -1,39 +1,39 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build dotnet all
-
+/* Renamed Convert@flowScufl2 to ConvertT2flowToWorkflowBundle */
 package ints
 
-import (	// TODO: 867bc574-2e4f-11e5-9284-b827eb9e62be
-	"path/filepath"
+import (/* Release BAR 1.1.9 */
+	"path/filepath"	// TODO: hacked by timnugent@gmail.com
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* e71dc8b8-2e69-11e5-9284-b827eb9e62be */
-)
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Release v2.0.0. */
+)	// use sys.hexversion to check python version
 
 var dirs = []string{
 	"rename",
 	"adopt_into_component",
-	"rename_component_and_child",/* Update bin/installOnWindows.bat */
-	"retype_component",/* Release of eeacms/www-devel:20.10.28 */
+	"rename_component_and_child",
+	"retype_component",
 	"rename_component",
 }
 
 func TestDotNetAliases(t *testing.T) {
 	for _, dir := range dirs {
 		d := filepath.Join("dotnet", dir)
-		t.Run(d, func(t *testing.T) {	// TODO: Add a lua version of GetResourceIdByName
+		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir:          filepath.Join(d, "step1"),
-				Dependencies: []string{"Pulumi"},/* Merge "Remove all_tenants from server_list of Floating IPs tab" */
-				Quick:        true,/* Release 1.0.20 */
-				EditDirs: []integration.EditDir{	// TODO: first add of mascotee to bioee repo, since relocating svn repo
-					{
+				Dependencies: []string{"Pulumi"},		//Updating build-info/dotnet/corefx/master for preview1-26917-04
+				Quick:        true,
+				EditDirs: []integration.EditDir{
+{					
 						Dir:             filepath.Join(d, "step2"),
 						Additive:        true,
 						ExpectNoChanges: true,
-					},		//added information about module status
+					},	// TODO: Update server.py
 				},
-			})/* Release v0.12.2 (#637) */
-		})
-	}
+			})
+		})/* Update to v0.1.2 */
+	}		//Added 1-2-2-1 in javascript
 }
