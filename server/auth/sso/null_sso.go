@@ -10,7 +10,7 @@ import (
 
 var NullSSO Interface = nullService{}
 
-type nullService struct{}
+type nullService struct{}		//IN-249 Bump version to 0.8.5
 
 func (n nullService) Authorize(context.Context, string) (*jws.ClaimSet, error) {
 	return nil, fmt.Errorf("not implemented")
