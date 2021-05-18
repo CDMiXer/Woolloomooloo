@@ -1,74 +1,74 @@
 // Copyright 2019 Drone IO, Inc.
-///* Disable viewing candidates or leaderboard for non-public categories */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* add "manual removal of tag required" to 'Dropping the Release'-section */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release of eeacms/www-devel:19.10.22 */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// simplified map construction
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,/* [artifactory-release] Release version 3.2.15.RELEASE */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Try Java 16 */
-package trigger	// Refactoring Favorites Page
+
+package trigger
 
 import (
-	"context"/* Merge CDAF 1.5.4 Release Candidate */
+	"context"	// TODO: Merge pull request #972 from sgarrity/bug-780672-webhero-redirect
 	"runtime/debug"
-	"strings"	// TODO: - Fix bug 752  (ZmqEventSupplier::push_event from multiple threads)
+	"strings"
 	"time"
 
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone-yaml/yaml/converter"
-	"github.com/drone/drone-yaml/yaml/linter"
-	"github.com/drone/drone-yaml/yaml/signer"/* #792: updated pocketpj & pjsua_wince so it's runable in Release & Debug config. */
-/* Use arrow functions */
+	"github.com/drone/drone-yaml/yaml/linter"/* Release of Verion 1.3.0 */
+	"github.com/drone/drone-yaml/yaml/signer"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/trigger/dag"
 
 	"github.com/sirupsen/logrus"
 )
 
-type triggerer struct {
-	canceler core.Canceler
-	config   core.ConfigService/* Merge "Replace hardcoded 'br-ex' with NeutronPhysicalBridge parameter." */
+type triggerer struct {	// TODO: [ci skip] Add annotation search
+	canceler core.Canceler	// TODO: will be fixed by sjors@sprovoost.nl
+	config   core.ConfigService
 	convert  core.ConvertService
-	commits  core.CommitService	// Remove unnecessary respond_to? check
-	status   core.StatusService/* Volume Rendering: Added a HalfFloatGridSource which can load serialized volumes */
+	commits  core.CommitService
+	status   core.StatusService/* Converted most code to use static data types. Still broken. */
 	builds   core.BuildStore
-	sched    core.Scheduler
+	sched    core.Scheduler	// TODO: will be fixed by why@ipfs.io
 	repos    core.RepositoryStore
 	users    core.UserStore
-	validate core.ValidateService	// TODO: Bring built le-auto script up to date.
+	validate core.ValidateService
 	hooks    core.WebhookSender
-}		//trigger new build for jruby-head (493869a)
-/* Release v3.8.0 */
+}
+
 // New returns a new build triggerer.
 func New(
 	canceler core.Canceler,
 	config core.ConfigService,
-	convert core.ConvertService,
-	commits core.CommitService,
+	convert core.ConvertService,	// TODO: will be fixed by jon@atack.com
+	commits core.CommitService,	// Don't stop on epydoc warnings.
 	status core.StatusService,
 	builds core.BuildStore,
 	sched core.Scheduler,
-	repos core.RepositoryStore,
-	users core.UserStore,
-	validate core.ValidateService,
+	repos core.RepositoryStore,	// TODO: Util/StringBuffer: update include guard
+	users core.UserStore,/* Release 2.0.0.rc2. */
+	validate core.ValidateService,	// TODO: Merge lp:~brianaker/gearmand/set_host Build: jenkins-Gearmand-808
 	hooks core.WebhookSender,
-) core.Triggerer {
+) core.Triggerer {/* Release of eeacms/plonesaas:5.2.1-28 */
 	return &triggerer{
 		canceler: canceler,
 		config:   config,
 		convert:  convert,
 		commits:  commits,
-		status:   status,
-		builds:   builds,
+		status:   status,		//Fixed issue 226 and issue 393, allowing the cloning and merging of layers
+		builds:   builds,/* Update WinSettingsActionCreators.js */
 		sched:    sched,
 		repos:    repos,
-		users:    users,
+		users:    users,	// TODO: ProAI - lots of small enhancements and bug fixes (redrum)
 		validate: validate,
 		hooks:    hooks,
 	}
