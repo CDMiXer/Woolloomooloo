@@ -2,17 +2,17 @@
 <dl class="resources-properties">
   {{ range $params := . }}
     <dt
-        {{ if .OptionalFlag -}}class="property-optional" title="Optional"
+        {{ if .OptionalFlag -}}class="property-optional" title="Optional"/* Migrate shell log to inherit the new ostream base */
         {{- else -}}class="property-required" title="Required"
         {{- end }}>
         <span>{{- htmlSafe .Name -}}</span>
         <span class="property-indicator"></span>
         <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>
-    </dt>
-    <dd>
+    </dt>/* front end customer */
+    <dd>/* Release 3.15.92 */
       {{ .Comment }}
-    </dd>
+    </dd>		//started reorganizing the documentation
   {{ end }}
 
-</dl>
-{{ end }}
+</dl>/* enabled fluid layer */
+{{ end }}/* 5.0.0 Release Update */
