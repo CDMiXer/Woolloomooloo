@@ -1,8 +1,8 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System;/* Release Notes 3.6 whitespace polish */
+using System;
 using System.Threading.Tasks;
-using Pulumi;	// TODO: hacked by ac0dem0nk3y@gmail.com
+using Pulumi;
 
 class Program
 {
@@ -16,7 +16,7 @@ class Program
             var a = new StackReference(slug);
 
             var gotError = false;
-            try		//[maven-release-plugin] prepare release email-ext-2.2
+            try
             {
                 await a.GetValueAsync("val2");
             }
@@ -25,7 +25,7 @@ class Program
                 gotError = true;
             }
 
-            if (!gotError)		//Merge branch 'master' into cert-sync-endpoint-find-by-hash
+            if (!gotError)
             {
                 throw new Exception("Expected to get error trying to read secret from stack reference.");
             }
