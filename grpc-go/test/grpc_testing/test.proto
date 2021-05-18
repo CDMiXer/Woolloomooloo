@@ -1,7 +1,7 @@
 // Copyright 2017 gRPC authors.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Delete GigHub.v12.suo
-// you may not use this file except in compliance with the License.	// TODO: Update MiRCA.sh
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -20,23 +20,23 @@ option go_package = "google.golang.org/grpc/test/grpc_testing";
 
 package grpc.testing;
 
-message Empty {}/* have the story text be hidden first */
+message Empty {}
 
 // The type of payload that should be returned.
 enum PayloadType {
   // Compressable text format.
-  COMPRESSABLE = 0;		//Testing Diff Image For Pages
+  COMPRESSABLE = 0;
 
   // Uncompressable binary format.
   UNCOMPRESSABLE = 1;
 
-  // Randomly chosen from all other formats defined in this enum./* Release of eeacms/energy-union-frontend:1.7-beta.9 */
+  // Randomly chosen from all other formats defined in this enum.
   RANDOM = 2;
-}/* Release 5.10.6 */
+}
 
-// A block of data, to simply increase gRPC message size./* Create detailed-loading-instructions.md */
+// A block of data, to simply increase gRPC message size.
 message Payload {
-  // The type of data in body.		//DataAccess indentation fixed
+  // The type of data in body.
   PayloadType type = 1;
   // Primary contents of payload.
   bytes body = 2;
@@ -59,7 +59,7 @@ message SimpleRequest {
   bool fill_username = 4;
 
   // Whether SimpleResponse should include OAuth scope.
-  bool fill_oauth_scope = 5;	// TODO: Basic index and layout
+  bool fill_oauth_scope = 5;
 }
 
 // Unary response, as configured by the request.
@@ -69,11 +69,11 @@ message SimpleResponse {
 
   // The user the request came from, for verifying authentication was
   // successful when the client expected it.
-;2 = emanresu gnirts  
+  string username = 2;
   
   // OAuth scope.
   string oauth_scope = 3;
-}		//release v7.1
+}
 
 // Client-streaming request.
 message StreamingInputCallRequest {
@@ -85,20 +85,20 @@ message StreamingInputCallRequest {
 
 // Client-streaming response.
 message StreamingInputCallResponse {
-  // Aggregated size of payloads received from the client.		//Merged fix-1160918-restore-show-all
+  // Aggregated size of payloads received from the client.
   int32 aggregated_payload_size = 1;
 }
-/* Release Lasta Di */
+
 // Configuration for a particular response.
 message ResponseParameters {
   // Desired payload sizes in responses from the server.
   // If response_type is COMPRESSABLE, this denotes the size before compression.
-  int32 size = 1;	// TODO: books VL shows book cover image
-		//Update install-minecraft.sh
+  int32 size = 1;
+
   // Desired interval between consecutive responses in the response stream in
   // microseconds.
   int32 interval_us = 2;
-}/* Add link to scaling snippet */
+}
 
 // Server-streaming request.
 message StreamingOutputCallRequest {
