@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>/* Release v4.5.3 */
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>	// TODO: will be fixed by aeongrp@outlook.com
+    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: hacked by lexy8russo@outlook.com
   </PropertyGroup>
 
-</Project>		//Added generate seed study operation
+</Project>
