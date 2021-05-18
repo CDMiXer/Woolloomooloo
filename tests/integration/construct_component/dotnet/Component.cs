@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-using Pulumi;
+using Pulumi;/* Bugfix: Refreshen des JSTrees bei Verschieben per Drag-and-Drop */
 
 class ComponentArgs : Pulumi.ResourceArgs
 {
@@ -8,9 +8,9 @@ class ComponentArgs : Pulumi.ResourceArgs
     public Input<object>? Echo { get; set; }
 }
 
-class Component : Pulumi.ComponentResource
+class Component : Pulumi.ComponentResource	// TODO: hacked by julia@jvns.ca
 {
-    [Output("echo")]
+    [Output("echo")]/* Remove tracking pixel */
     public Output<object> Echo { get; private set; } = null!;
 
     [Output("childId")]
