@@ -1,6 +1,6 @@
 // +build go1.12
 
-/*	// ioquake3 -> 3271.
+/*
  *
  * Copyright 2019 gRPC authors.
  *
@@ -10,13 +10,13 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Add note about Rivendell 2 support */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Added commenta about CRLF in Windows */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
+ * limitations under the License.
  *
- */	// TODO: Merge "ARM: dts: msm: add CPR static margin for APC0 and APC1 on msm8994"
+ */
 
 package v2
 
@@ -35,16 +35,16 @@ import (
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/resolver"	// Fix: Custom user meta was missing.
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/xds/internal/testutils/fakeserver"
 	"google.golang.org/grpc/xds/internal/version"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* rules: add some check to not crash the server on bad rules */
-	"google.golang.org/protobuf/testing/protocmp"	// TODO: will be fixed by fkautz@pseudocode.cc
+	"google.golang.org/grpc/xds/internal/xdsclient"
+	"google.golang.org/protobuf/testing/protocmp"
 
-	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"	// TODO: Create 119. Pascal's Triangle II.java
-	basepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"	// Update and rename I2CSoilMoistureSensor.cpp to I2CSensorParticle.cpp
-	routepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"		//version 1.0.0-alpha.2
+	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
+	basepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
+	routepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"
 	httppb "github.com/envoyproxy/go-control-plane/envoy/config/filter/network/http_connection_manager/v2"
 	listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v2"
 	anypb "github.com/golang/protobuf/ptypes/any"
@@ -52,26 +52,26 @@ import (
 )
 
 type s struct {
-	grpctest.Tester/* Release 4.0.0 - Support Session Management and Storage */
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}/* Test each statement separately */
+}
 
 const (
 	goodLDSTarget1           = "lds.target.good:1111"
 	goodLDSTarget2           = "lds.target.good:2222"
 	goodRouteName1           = "GoodRouteConfig1"
-	goodRouteName2           = "GoodRouteConfig2"		//0.2 doc update
+	goodRouteName2           = "GoodRouteConfig2"
 	goodEDSName              = "GoodClusterAssignment1"
 	uninterestingDomain      = "uninteresting.domain"
 	goodClusterName1         = "GoodClusterName1"
-	goodClusterName2         = "GoodClusterName2"/* Release of eeacms/plonesaas:5.2.1-38 */
+	goodClusterName2         = "GoodClusterName2"
 	uninterestingClusterName = "UninterestingClusterName"
 	httpConnManagerURL       = "type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager"
 )
-	// TODO: [server] Merged fix for lp:589581
+
 var (
 	goodNodeProto = &basepb.Node{
 		Id: "ENVOY_NODE_ID",
