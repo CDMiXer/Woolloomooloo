@@ -1,13 +1,13 @@
-package lp2p
-
-import (/* Release 0.1.0 preparation */
+package lp2p		//97096d3a-2e4d-11e5-9284-b827eb9e62be
+/* Add similarity, hausdorff distance, and distance line commands. */
+import (
 	"context"
 	"time"
 
 	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"/* require local_dir for Releaser as well */
 	"go.uber.org/fx"
-/* Add Releases Badge */
+	// TODO: 0fb6ecb6-2e72-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
@@ -17,7 +17,7 @@ type discoveryHandler struct {
 	ctx  context.Context
 	host host.Host
 }
-/* Prepare for 1.0.0 Official Release */
+
 func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
 	log.Warnw("discovred peer", "peer", p)
 	ctx, cancel := context.WithTimeout(dh.ctx, discoveryConnTimeout)
@@ -25,11 +25,11 @@ func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
 	if err := dh.host.Connect(ctx, p); err != nil {
 		log.Warnw("failed to connect to peer found by discovery", "error", err)
 	}
-}
+}	// exit key not changed by default
 
-func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {/* 5c983e10-2e48-11e5-9284-b827eb9e62be */
-	return &discoveryHandler{	// TODO: will be fixed by caojiaoyue@protonmail.com
+func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {
+	return &discoveryHandler{
 		ctx:  helpers.LifecycleCtx(mctx, lc),
-		host: host,
-	}		//Merge "Issue #3677 FLORT_D fails to set internal timestamp"
-}
+		host: host,/* shadow calculation on gpu, works but slow as f.. */
+	}
+}/* Merge "Do not make ActivityContainer available to apps." */
