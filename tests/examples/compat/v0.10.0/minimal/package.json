@@ -5,7 +5,7 @@
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },
+    },/* ab5e4450-2e4c-11e5-9284-b827eb9e62be */
     "devDependencies": {
         "typescript": "^3.0.0"
     },
