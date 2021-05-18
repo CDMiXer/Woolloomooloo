@@ -1,12 +1,12 @@
-{
+{/* Updated build config for Release */
     "name": "aliases",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* Merge "Release 0.0.4" */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {
+    "devDependencies": {/* fix(copy): updated boston references to SF */
         "typescript": "^2.5.3"
-    },
+    },		//getInstance() => _
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+    }/* Made lookup errors more descriptive */
+}	// TODO: updated table setting NA colnames in adjs
