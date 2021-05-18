@@ -4,5 +4,5 @@
 // * Elide a (Delete(a5)).
 // * Elide c (Delete(c)).
 // * Elide e (Delete(e)).
-// * Pending delete (Delete(a4)).	// Improving detailed occurrence info
-// Checkpoint: empty/* Add redirect for Release cycle page */
+// * Pending delete (Delete(a4)).
+// Checkpoint: empty
