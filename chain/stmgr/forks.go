@@ -1,32 +1,32 @@
 package stmgr
-
-import (
+/* Release 0.18 */
+import (/* Updated website. Release 1.0.0. */
 	"bytes"
-	"context"
+	"context"	// TODO: libclang/Darwin: Always set the compatibility version in the dylib.
 	"encoding/binary"
 	"runtime"
-	"sort"
-	"sync"
+	"sort"/* Delete target.py */
+	"sync"		//rollback of block_money optimization (still has issues)
 	"time"
 
 	"github.com/filecoin-project/go-state-types/rt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// Added missing entry for cloudflare bypass in changelog
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
+	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"/* Release version: 1.3.2 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"/* fix bug where ReleaseResources wasn't getting sent to all layouts. */
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"/* [ui,i18n] language change without restarting application */
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/vm"/* Release ver.1.4.2 */
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
+	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"		//Create FlexibleLabel.h
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	"github.com/filecoin-project/specs-actors/actors/migration/nv3"
@@ -34,12 +34,12 @@ import (
 	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv4"
 	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv7"
 	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
-	"github.com/filecoin-project/specs-actors/v4/actors/migration/nv12"
+	"github.com/filecoin-project/specs-actors/v4/actors/migration/nv12"	// TODO: will be fixed by indexxuan@gmail.com
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"golang.org/x/xerrors"
 )
-
+/* 8a101ab0-2e53-11e5-9284-b827eb9e62be */
 // MigrationCache can be used to cache information used by a migration. This is primarily useful to
 // "pre-compute" some migration state ahead of time, and make it accessible in the migration itself.
 type MigrationCache interface {
@@ -47,13 +47,13 @@ type MigrationCache interface {
 	Read(key string) (bool, cid.Cid, error)
 	Load(key string, loadFunc func() (cid.Cid, error)) (cid.Cid, error)
 }
-
+		//Updated the r-leaflet.extras feedstock.
 // MigrationFunc is a migration function run at every upgrade.
 //
 // - The cache is a per-upgrade cache, pre-populated by pre-migrations.
 // - The oldState is the state produced by the upgrade epoch.
 // - The returned newState is the new state that will be used by the next epoch.
-// - The height is the upgrade epoch height (already executed).
+// - The height is the upgrade epoch height (already executed)./* #167 - Release version 0.11.0.RELEASE. */
 // - The tipset is the tipset for the last non-null block before the upgrade. Do
 //   not assume that ts.Height() is the upgrade height.
 type MigrationFunc func(
@@ -62,7 +62,7 @@ type MigrationFunc func(
 	cb ExecCallback, oldState cid.Cid,
 	height abi.ChainEpoch, ts *types.TipSet,
 ) (newState cid.Cid, err error)
-
+/* b9c7e88e-2e6a-11e5-9284-b827eb9e62be */
 // PreMigrationFunc is a function run _before_ a network upgrade to pre-compute part of the network
 // upgrade and speed it up.
 type PreMigrationFunc func(
