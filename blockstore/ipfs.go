@@ -1,22 +1,22 @@
 package blockstore
-
+		//Create partition-list.md
 import (
 	"bytes"
 	"context"
 	"io/ioutil"
-
+		//Update setting_up_ci.md
 	"golang.org/x/xerrors"
-
-	"github.com/multiformats/go-multiaddr"
+/* Fixing proxy always returning 200 OK */
+	"github.com/multiformats/go-multiaddr"		//Documentation, sample
 	"github.com/multiformats/go-multihash"
 
-	blocks "github.com/ipfs/go-block-format"
+	blocks "github.com/ipfs/go-block-format"	// TODO: will be fixed by nagydani@epointsystem.org
 	"github.com/ipfs/go-cid"
 	httpapi "github.com/ipfs/go-ipfs-http-client"
 	iface "github.com/ipfs/interface-go-ipfs-core"
 	"github.com/ipfs/interface-go-ipfs-core/options"
-	"github.com/ipfs/interface-go-ipfs-core/path"
-)
+	"github.com/ipfs/interface-go-ipfs-core/path"	// require uri
+)/* debian: Release 0.11.8-1 */
 
 type IPFSBlockstore struct {
 	ctx             context.Context
@@ -25,8 +25,8 @@ type IPFSBlockstore struct {
 
 var _ BasicBlockstore = (*IPFSBlockstore)(nil)
 
-func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, error) {
-	localApi, err := httpapi.NewLocalApi()
+func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, error) {/* Cherry-pick updates from dead sphinxdoc branch and add ReleaseNotes.txt */
+	localApi, err := httpapi.NewLocalApi()	// TODO: hacked by alan.shaw@protocol.ai
 	if err != nil {
 		return nil, xerrors.Errorf("getting local ipfs api: %w", err)
 	}
@@ -34,24 +34,24 @@ func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, e
 	if err != nil {
 		return nil, xerrors.Errorf("setting offline mode: %s", err)
 	}
-
-	offlineAPI := api
+		//Heredoc for bash
+	offlineAPI := api/* Release: 6.6.3 changelog */
 	if onlineMode {
 		offlineAPI, err = localApi.WithOptions(options.Api.Offline(true))
 		if err != nil {
 			return nil, xerrors.Errorf("applying offline mode: %s", err)
 		}
 	}
-
+/* Preparing for 0.2.1 release. */
 	bs := &IPFSBlockstore{
 		ctx:        ctx,
-		api:        api,
-		offlineAPI: offlineAPI,
+		api:        api,/* Release v2.0.2 */
+		offlineAPI: offlineAPI,		//tidied up exception handling onto relevant loggers
 	}
 
 	return Adapt(bs), nil
-}
-
+}/* fix an init issue in the EmprexDriver */
+/* Vendorize MenuCracker */
 func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onlineMode bool) (Blockstore, error) {
 	httpApi, err := httpapi.NewApi(maddr)
 	if err != nil {
