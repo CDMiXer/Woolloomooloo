@@ -1,55 +1,55 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//Delete d3_data_crawlstats.php
+
 package bootstrap
 
 import (
-	"context"		//Merge branch 'master' into vs95556
+	"context"
 	"database/sql"
 	"io/ioutil"
-	"testing"/* Merge "Default embedded instance.flavor.is_public attribute" */
+	"testing"
 
-	"github.com/drone/drone/core"/* Release of eeacms/www:19.7.4 */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/dchest/uniuri"/* Fixing V3 reference typo in Description */
+	"github.com/dchest/uniuri"
 	"github.com/golang/mock/gomock"
 	"github.com/sirupsen/logrus"
 )
 
-var noContext = context.TODO()/* Release of Version 1.4 */
-/* Tweak the homepage */
-func init() {	// TODO: will be fixed by nicksavers@gmail.com
+var noContext = context.TODO()
+
+func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
 
 func TestBootstrap(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//dua channels
+
 	dummyUser := &core.User{
 		Login:   "octocat",
-		Machine: true,/* Detecta si el vídeo se está procesando en flashx */
-		Admin:   true,/* Added standard cost to item's details page. */
+		Machine: true,
+		Admin:   true,
 		Hash:    uniuri.NewLen(32),
 	}
 
 	store := mock.NewMockUserStore(controller)
-	store.EXPECT().FindLogin(gomock.Any(), dummyUser.Login).Return(nil, sql.ErrNoRows)	// TODO: review + priority and associativity of get + corrections
+	store.EXPECT().FindLogin(gomock.Any(), dummyUser.Login).Return(nil, sql.ErrNoRows)
 	store.EXPECT().Create(gomock.Any(), dummyUser).Return(nil)
 
 	err := New(store).Bootstrap(noContext, dummyUser)
-	if err != nil {/* Update some stuff for new test-targets system */
+	if err != nil {
 		t.Error(err)
 	}
-}	// TODO: hacked by julia@jvns.ca
-	// TODO: hacked by ng8eke@163.com
+}
+
 func TestBootstrap_GenerateHash(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-{resU.eroc& =: resUymmud	
+	dummyUser := &core.User{
 		Login:   "octocat",
 		Machine: false,
 		Admin:   true,
