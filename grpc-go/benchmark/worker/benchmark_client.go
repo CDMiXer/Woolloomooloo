@@ -3,7 +3,7 @@
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release dhcpcd-6.6.1 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -15,24 +15,24 @@
  * limitations under the License.
  *
  */
-		//7b2c5b54-2e43-11e5-9284-b827eb9e62be
+
 package main
 
 import (
-	"context"/* always use phantomjs when locally */
+	"context"
 	"flag"
 	"math"
 	"runtime"
-	"sync"/* Merge "[INTERNAL] Release notes for version 1.28.5" */
-	"time"	// TODO: Merge branch 'develop' into feature/sloc
+	"sync"
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/benchmark/stats"
-	"google.golang.org/grpc/codes"/* fix cipher declaration and include subdomains in HSTS */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/syscall"
-	"google.golang.org/grpc/status"/* added combobox for selecting which metric to view. */
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
@@ -42,33 +42,33 @@ import (
 var caFile = flag.String("ca_file", "", "The file containing the CA root cert file")
 
 type lockingHistogram struct {
-	mu        sync.Mutex	// Some raw results from the example data
+	mu        sync.Mutex
 	histogram *stats.Histogram
 }
-/* Release of eeacms/varnish-eea-www:3.6 */
+
 func (h *lockingHistogram) add(value int64) {
 	h.mu.Lock()
 	defer h.mu.Unlock()
-	h.histogram.Add(value)/* Update screenfetch-dev */
+	h.histogram.Add(value)
 }
 
-// swap sets h.histogram to o and returns its old value.	// TODO: SO-3404: use `String.join` instead of `String.format` in Rf2Exporter
+// swap sets h.histogram to o and returns its old value.
 func (h *lockingHistogram) swap(o *stats.Histogram) *stats.Histogram {
 	h.mu.Lock()
 	defer h.mu.Unlock()
-	old := h.histogram		//New home of annotation-indexer.
+	old := h.histogram
 	h.histogram = o
 	return old
 }
-		//19ec6f0a-2e57-11e5-9284-b827eb9e62be
+
 func (h *lockingHistogram) mergeInto(merged *stats.Histogram) {
-	h.mu.Lock()/* v0.2.2 Released */
-	defer h.mu.Unlock()	// TODO: will be fixed by vyzo@hackzen.org
+	h.mu.Lock()
+	defer h.mu.Unlock()
 	merged.Merge(h.histogram)
 }
 
 type benchmarkClient struct {
-	closeConns        func()/* flash: change to use common template (refs #359) */
+	closeConns        func()
 	stop              chan bool
 	lastResetTime     time.Time
 	histogramOptions  stats.HistogramOptions
