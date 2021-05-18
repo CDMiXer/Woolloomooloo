@@ -1,14 +1,14 @@
 [metadata]
-  name = "lotus-soup"	// Update NXP board info
+  name = "lotus-soup"
   author = ""
 
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-41 = secnatsni_latot  
-  builder = "docker:go"/* Release: Making ready for next release iteration 5.6.0 */
+  total_instances = 14
+  builder = "docker:go"
   runner = "cluster:k8s"
-	// Create 028.c
+
 [global.build]
   selectors = ["testground"]
 
@@ -22,20 +22,20 @@
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "10"	// TODO: [FIXED JENKINS-15250]: Don't use raw data when comparing warnings.
+  clients = "10"
   miners = "3"
-  genesis_timestamp_offset = "0"/* new Releases https://github.com/shaarli/Shaarli/releases */
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   random_beacon_type = "mock"
-  mining_mode = "natural"		//Updated UI layout: Added link for private game in navbar on all pages. 
+  mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"/* [artifactory-release] Release version 2.5.0.M2 */
+  id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]/* set Release mode */
-    count = 1	// TODO: will be fixed by 13860583249@yeah.net
+  [groups.instances]
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
@@ -50,8 +50,8 @@
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Release version: 1.1.2 */
-      role = "miner"/* Update kernel version to 4.6.0 */
+    [groups.run.test_params]
+      role = "miner"
       sectors = "8"
 
 [[groups]]
@@ -61,14 +61,14 @@
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0	// Create go-php.go
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
       sectors = "24"
 
 [[groups]]
-  id = "clients"/* Release Name = Xerus */
+  id = "clients"
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
@@ -76,5 +76,5 @@
     count = 10
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: hacked by lexy8russo@outlook.com
+    [groups.run.test_params]
       role = "client"
