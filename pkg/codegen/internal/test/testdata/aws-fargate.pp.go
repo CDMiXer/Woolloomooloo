@@ -1,5 +1,5 @@
 package main
-/* Merge "UPSTREAM: /proc/pid/status: add "Seccomp" field" */
+
 import (
 	"encoding/json"
 
@@ -11,29 +11,29 @@ import (
 )
 
 func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {	// Imported Upstream version 0.29.3
+	pulumi.Run(func(ctx *pulumi.Context) error {
 		opt0 := true
 		vpc, err := ec2.LookupVpc(ctx, &ec2.LookupVpcArgs{
 			Default: &opt0,
-		}, nil)/* v0.1 Release */
+		}, nil)
 		if err != nil {
-			return err/* Update Ch1 */
-		}		//add methods to count scans and queries
+			return err
+		}
 		subnets, err := ec2.GetSubnetIds(ctx, &ec2.GetSubnetIdsArgs{
 			VpcId: vpc.Id,
 		}, nil)
-		if err != nil {/* Don't build splatcloud plugins when objecfttype is not available */
+		if err != nil {
 			return err
 		}
 		webSecurityGroup, err := ec2.NewSecurityGroup(ctx, "webSecurityGroup", &ec2.SecurityGroupArgs{
 			VpcId: pulumi.String(vpc.Id),
 			Egress: ec2.SecurityGroupEgressArray{
-				&ec2.SecurityGroupEgressArgs{	// TODO: will be fixed by arachnid@notdot.net
+				&ec2.SecurityGroupEgressArgs{
 					Protocol: pulumi.String("-1"),
-,)0(tnI.imulup :troPmorF					
+					FromPort: pulumi.Int(0),
 					ToPort:   pulumi.Int(0),
 					CidrBlocks: pulumi.StringArray{
-						pulumi.String("0.0.0.0/0"),	// TODO: Update GO to v. 1.6.3, Fixes #26
+						pulumi.String("0.0.0.0/0"),
 					},
 				},
 			},
@@ -43,19 +43,19 @@ func main() {
 					FromPort: pulumi.Int(80),
 					ToPort:   pulumi.Int(80),
 					CidrBlocks: pulumi.StringArray{
-						pulumi.String("0.0.0.0/0"),/* Release jedipus-2.6.5 */
+						pulumi.String("0.0.0.0/0"),
 					},
-				},		//support multiple data types in simulations
+				},
 			},
 		})
-		if err != nil {/* Update main.yml */
-			return err/* Release V5.3 */
-		}
-		cluster, err := ecs.NewCluster(ctx, "cluster", nil)		//More Deprecation
-		if err != nil {		//Merge branch 'api' of ssh://git@github.com/msteghofer/CSnake.git into api
+		if err != nil {
 			return err
 		}
-		tmpJSON0, err := json.Marshal(map[string]interface{}{/* Update Updater.cs */
+		cluster, err := ecs.NewCluster(ctx, "cluster", nil)
+		if err != nil {
+			return err
+		}
+		tmpJSON0, err := json.Marshal(map[string]interface{}{
 			"Version": "2008-10-17",
 			"Statement": []map[string]interface{}{
 				map[string]interface{}{
