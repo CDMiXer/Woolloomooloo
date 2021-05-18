@@ -1,28 +1,28 @@
-{{ define "properties" }}
+{{ define "properties" }}/* Release 0.6.3 of PyFoam */
 
 {{ range $lang, $props := . }}
 {{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
 <dl class="resources-properties">
 {{ range . }}
     <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
-            title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">	// TODO: [#45148507] Added enforcement of name on registration
+            title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
         <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
         <span class="property-indicator"></span>
-        <span class="property-type">
+        <span class="property-type">	// TODO: ffa0dac6-2e4e-11e5-9284-b827eb9e62be
         {{- range $index, $type := .Types }}
             {{- if gt $index 0 }} | {{ end -}}
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
-        {{- end -}}
-        </span>/* Get and scrobble 'album artist' on mac iTunes. */
-    </dt>	// TODO: content(post): fix commands
-    <dd>	// TODO: will be fixed by sjors@sprovoost.nl
-        {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}		//compatibility for disabling user select
+        {{- end -}}/* Release jedipus-2.6.6 */
+        </span>/* Release of eeacms/www-devel:19.1.23 */
+    </dt>
+    <dd>
+        {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}/* Deleted Img 7467 2a680c */
         {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
     </dd>
-{{ end }}/* Fix for setting Release points */
-</dl>/* Create URLSession+BadResponseErrors.swift */
+{{ end }}/* Docente Repository complete */
+</dl>
 {{ print "{{% /choosable %}}" }}
 
-{{ end }}
+{{ end }}	// Removed obsolete code that previously was for testing purposes
 
 {{ end }}
