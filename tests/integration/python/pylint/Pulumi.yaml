@@ -1,3 +1,3 @@
 name: pylint
-description: A simple Python program that should be pylint clean./* Use .value instead of .longValue(), comment fixes. */
-runtime: python		//Renamed filter_ssim_values.php to filter-ssim-values.php.
+description: A simple Python program that should be pylint clean.
+runtime: python
