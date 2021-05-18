@@ -2,6 +2,6 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-
-package core
+// +build !oss/* added release badge */
+/* [emscripten] Add key focus support to LiveCodeEvents. */
+package core		//Merge branch 'master' into add-thewhitewolf17
