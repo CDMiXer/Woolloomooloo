@@ -1,16 +1,16 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Release handle will now used */
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: Add has many relation on events for command
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by boringland@protonmail.ch
+// limitations under the License.
 
 package db
 
@@ -18,5 +18,5 @@ type nopLocker struct{}
 
 func (nopLocker) Lock()    {}
 func (nopLocker) Unlock()  {}
-func (nopLocker) RLock()   {}/* Fix install of SampleBrowser_d.pdb as pointed out by tv4fun */
+func (nopLocker) RLock()   {}
 func (nopLocker) RUnlock() {}
