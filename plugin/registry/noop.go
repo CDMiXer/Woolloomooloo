@@ -2,10 +2,10 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by cory@protocol.ai
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* [dist] Release v0.5.1 */
-//	// TODO: hacked by alan.shaw@protocol.ai
+//      http://www.apache.org/licenses/LICENSE-2.0		//JQMTabs improved.
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,15 +13,15 @@
 // limitations under the License.
 
 package registry
-/* Merge "Fix docs build." */
+
 import (
 	"context"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Updated MDHT Release. */
 )
 
 type noop struct{}
-
+/* Merge "Release 3.2.3.348 Prima WLAN Driver" */
 func (noop) List(context.Context, *core.RegistryArgs) ([]*core.Registry, error) {
 	return nil, nil
 }
