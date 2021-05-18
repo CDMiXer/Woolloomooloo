@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Added icon for Dependency checks */
-  <PropertyGroup>
->epyTtuptuO/<exE>epyTtuptuO<    
+
+  <PropertyGroup>		//Merge "Add a periodic check of the tethering provisioning" into lmp-mr1-dev
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* Release profile added. */
+  </PropertyGroup>
 
   <ItemGroup>
-  </ItemGroup>/* [artifactory-release] Release version 1.0.2 */
-/* App Release 2.1-BETA */
-  <ItemGroup>
-    <PackageReference Include="Pulumi.Random" Version="2.*" />		//Merge branch 'master' into 0.5dev
+  </ItemGroup>
+
+  <ItemGroup>/* Rebuilt index with tarriel */
+    <PackageReference Include="Pulumi.Random" Version="2.*" />
   </ItemGroup>
 
 </Project>
