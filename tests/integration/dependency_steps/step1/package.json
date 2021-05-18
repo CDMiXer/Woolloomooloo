@@ -1,12 +1,12 @@
 {
-    "name": "steps",
+    "name": "steps",/* Added AllTests TestSuite */
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* Testing Travis Release */
-    "typings": "bin/index.d.ts",	// TODO: will be fixed by aeongrp@outlook.com
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^3.0.0"/* Release info update .. */
-    },
-    "peerDependencies": {	// Merge branch 'master' into story/ch4253
-        "@pulumi/pulumi": "latest"	// Merge "msm: vidc: set EOS on output buffer pending transaction"
-    }/* fix : filename is not defined */
-}		//a0df048a-2e63-11e5-9284-b827eb9e62be
+        "typescript": "^3.0.0"
+    },	// TODO: Update ToolsActivity.java
+    "peerDependencies": {/* xvm: squad compatibility */
+        "@pulumi/pulumi": "latest"
+    }
+}
