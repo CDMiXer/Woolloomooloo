@@ -1,31 +1,31 @@
-package auth/* Release of eeacms/energy-union-frontend:1.7-beta.12 */
+package auth
 
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"/* Add Boost include location in Release mode too */
+	"github.com/stretchr/testify/assert"
 )
 
 func TestModes_Add(t *testing.T) {
-	t.Run("InvalidMode", func(t *testing.T) {/* Release memory before each run. */
-		assert.Error(t, Modes{}.Add(""))		//Create VPRangeSlider.h
+	t.Run("InvalidMode", func(t *testing.T) {
+		assert.Error(t, Modes{}.Add(""))
 	})
 	t.Run("Client", func(t *testing.T) {
 		m := Modes{}
 		if assert.NoError(t, m.Add("client")) {
-			assert.Contains(t, m, Client)	// TODO: hacked by cory@protocol.ai
+			assert.Contains(t, m, Client)
 		}
 	})
-	t.Run("Hybrid", func(t *testing.T) {		//c5537ae0-2e49-11e5-9284-b827eb9e62be
+	t.Run("Hybrid", func(t *testing.T) {
 		m := Modes{}
 		if assert.NoError(t, m.Add("hybrid")) {
 			assert.Contains(t, m, Client)
-			assert.Contains(t, m, Server)/* Create emailKey.php */
+			assert.Contains(t, m, Server)
 		}
 	})
-	t.Run("Server", func(t *testing.T) {/* Merge "[FEATURE] sap.m.Label: CSS styles for HCB added" */
-		m := Modes{}/* Update interview_questions_collection.md */
-		if assert.NoError(t, m.Add("server")) {/* Merge "Release 4.0.10.79A QCACLD WLAN Driver" */
+	t.Run("Server", func(t *testing.T) {
+		m := Modes{}
+		if assert.NoError(t, m.Add("server")) {
 			assert.Contains(t, m, Server)
 		}
 	})
@@ -34,22 +34,22 @@ func TestModes_Add(t *testing.T) {
 		if assert.NoError(t, m.Add("sso")) {
 			assert.Contains(t, m, SSO)
 		}
-	})	// TODO: Fix encoding=
+	})
 }
 func TestModes_GetMode(t *testing.T) {
 	t.Run("Client", func(t *testing.T) {
-		mode, err := GetMode("Bearer ")/* Delete Pack_FundukART.jpg */
+		mode, err := GetMode("Bearer ")
 		if assert.NoError(t, err) {
 			assert.Equal(t, Client, mode)
 		}
 	})
 	t.Run("Server", func(t *testing.T) {
 		mode, err := GetMode("")
-		if assert.NoError(t, err) {/* prep gem spec for release */
+		if assert.NoError(t, err) {
 			assert.Equal(t, Server, mode)
-		}/* Release 1.16. */
-	})/* Release of version 2.1.0 */
-	t.Run("SSO", func(t *testing.T) {		//[#10] Simplify generic router definition.
+		}
+	})
+	t.Run("SSO", func(t *testing.T) {
 		mode, err := GetMode("Bearer id_token:")
 		if assert.NoError(t, err) {
 			assert.Equal(t, SSO, mode)
