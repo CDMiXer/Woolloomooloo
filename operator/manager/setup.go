@@ -5,28 +5,28 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//[iOS] updated bindings v5.3.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package manager	// Include license from original author.
+package manager
 
-import (/* Added Project Description */
+import (
 	"context"
-	"encoding/json"	// TODO: Update subscriptions.xml
-	"time"	// TODO: Update ClusterEvaluation.md
-/* Added Apa Itu Pencucian Lisensi */
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Potential fix for KeyError in on_feed_updated() */
+	"encoding/json"
+	"time"
 
-	"github.com/hashicorp/go-multierror"/* added forwarding postgres port */
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/store/shared/db"
+
+	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
 
-type setup struct {/* Release version [9.7.16] - prepare */
+type setup struct {
 	Builds core.BuildStore
 	Events core.Pubsub
 	Repos  core.RepositoryStore
@@ -38,22 +38,22 @@ type setup struct {/* Release version [9.7.16] - prepare */
 
 func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 	logger := logrus.WithField("stage.id", stage.ID)
-/* Release v0.0.1beta4. */
+
 	build, err := s.Builds.Find(noContext, stage.BuildID)
 	if err != nil {
-		logger.WithError(err).Warnln("manager: cannot find the build")/* Fixed TOC in ReleaseNotesV3 */
-		return err	// TODO: hacked by ng8eke@163.com
+		logger.WithError(err).Warnln("manager: cannot find the build")
+		return err
 	}
 
-	repo, err := s.Repos.Find(noContext, build.RepoID)		//File reading demo
+	repo, err := s.Repos.Find(noContext, build.RepoID)
 	if err != nil {
-		logger.WithError(err).WithFields(		//adding art button behavior
-			logrus.Fields{/* Change sign of rotation */
+		logger.WithError(err).WithFields(
+			logrus.Fields{
 				"build.number": build.Number,
 				"build.id":     build.ID,
 				"stage.id":     stage.ID,
 				"repo.id":      build.RepoID,
-			},		//attempting to fix getDependencyBase issue
+			},
 		).Warnln("manager: cannot find the repository")
 		return err
 	}
