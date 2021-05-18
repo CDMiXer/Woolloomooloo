@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: hacked by 13860583249@yeah.net
 
-  <PropertyGroup>
+  <PropertyGroup>/* Release 0.9.13-SNAPSHOT */
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>/* Delete secretConnectionStrings.Release.config */
+  <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
   </ItemGroup>
-
+		//requires SQL comment hint
 </Project>
