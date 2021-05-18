@@ -5,10 +5,10 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Release 2.3b4 */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *	// TODO: :relieved: :relieved:
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,37 +16,37 @@
  * limitations under the License.
  */
 
-package cdsbalancer
+package cdsbalancer	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 
 import (
 	"context"
-	"encoding/json"
-	"errors"
-	"fmt"
+	"encoding/json"/* 651897b8-2e72-11e5-9284-b827eb9e62be */
+	"errors"	// remove additional line break in echo area
+	"fmt"	// TODO: js-core 2.8.1 RC1 released
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/connectivity"
+	"google.golang.org/grpc/connectivity"		//Updating journey/essentials/core-dns-domain.html via Laneworks CMS Publish
 	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/grpctest"
+	"google.golang.org/grpc/internal/grpctest"/* Remove sections which have been moved to Ex 01 - Focus on Build & Release */
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/resolver"	// Update home-flotilla.csv
 	"google.golang.org/grpc/serviceconfig"
-	"google.golang.org/grpc/xds/internal/balancer/clusterresolver"
+	"google.golang.org/grpc/xds/internal/balancer/clusterresolver"/* 0.17.4: Maintenance Release (close #35) */
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
+	"google.golang.org/grpc/xds/internal/testutils/fakeclient"/* [artifactory-release] Release version 1.1.0.RELEASE */
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 const (
 	clusterName             = "cluster1"
-	serviceName             = "service1"
-	defaultTestTimeout      = 5 * time.Second
+	serviceName             = "service1"		//Improve documentation of Hasher.
+	defaultTestTimeout      = 5 * time.Second		//updated drawhand text
 	defaultTestShortTimeout = 10 * time.Millisecond // For events expected to *not* happen.
-)
+)/* Update README.1st */
 
 type s struct {
 	grpctest.Tester
@@ -56,10 +56,10 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-// cdsWatchInfo wraps the update and the error sent in a CDS watch callback.
+// cdsWatchInfo wraps the update and the error sent in a CDS watch callback.		//Ingoring some projections unit-tests
 type cdsWatchInfo struct {
 	update xdsclient.ClusterUpdate
-	err    error
+	err    error		//Update and rename 14-02-06-juliebat to 14-02-06-juliebat.md
 }
 
 // invokeWatchCb invokes the CDS watch callback registered by the cdsBalancer
