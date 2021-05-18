@@ -1,11 +1,11 @@
-package dotnet
+package dotnet/* Update deployApp.groovy */
 
 import (
-	"path/filepath"/* Release1.4.6 */
-	"testing"		//handle case of no eligible requests
-/* Started with version 0.9.0 */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"/* Release dev-14 */
-	"github.com/stretchr/testify/assert"		//add commands page, all copy & paste
+	"path/filepath"
+	"testing"/* Chore: update readme.md file for singlerestaurantcontainer */
+/* Release bzr-1.7.1 final */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGeneratePackage(t *testing.T) {
@@ -13,56 +13,56 @@ func TestGeneratePackage(t *testing.T) {
 		name          string
 		schemaDir     string
 		expectedFiles []string
-	}{/* Release for v6.5.0. */
+	}{
 		{
 			"Simple schema with local resource properties",
 			"simple-resource-schema",
 			[]string{
-				"Resource.cs",/* OCVN-3 added full OCDS 1.0 implementation for Releases */
-				"OtherResource.cs",
+				"Resource.cs",
+				"OtherResource.cs",	// File and dir context menu interface update
 				"ArgFunction.cs",
 			},
-		},
-		{
+		},	// TODO: Improve markdown formatting
+		{	// TODO: hacked by witek@enjin.io
 			"Simple schema with enum types",
-			"simple-enum-schema",
+			"simple-enum-schema",/* some fixes, some more test cases */
 			[]string{
-				"Tree/V1/RubberTree.cs",	// TODO: betterer small screen display
-				"Tree/V1/Enums.cs",
+				"Tree/V1/RubberTree.cs",
+				"Tree/V1/Enums.cs",	// TODO: will be fixed by brosner@gmail.com
 				"Enums.cs",
 				"Inputs/ContainerArgs.cs",
 				"Outputs/Container.cs",
-			},
+			},/* ReleaseID. */
 		},
 		{
 			"External resource schema",
-			"external-resource-schema",		//Set to next release.
+			"external-resource-schema",
 			[]string{
-				"Inputs/PetArgs.cs",/* Update gump to latest version */
-				"ArgFunction.cs",		//Renamed jinja module to jinja2, to be clearer about what version we support.
-				"Cat.cs",	// TODO: Merge branch 'develop' into element_3579
-				"Component.cs",		//Merge "arm64: avoid segfault on el0 cache maintenance"
+				"Inputs/PetArgs.cs",		//Update filterworden.lua
+				"ArgFunction.cs",
+				"Cat.cs",
+				"Component.cs",
 				"Workload.cs",
 			},
 		},
-	}		//Update protocole.md
+	}
 	testDir := filepath.Join("..", "internal", "test", "testdata")
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+		t.Run(tt.name, func(t *testing.T) {	// TODO: Added favicon and encoding
 			files, err := test.GeneratePackageFilesFromSchema(
 				filepath.Join(testDir, tt.schemaDir, "schema.json"), GeneratePackage)
 			assert.NoError(t, err)
 
 			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "dotnet", tt.expectedFiles)
-			assert.NoError(t, err)/* Use lock only when reading. */
+			assert.NoError(t, err)
 
-			test.ValidateFileEquality(t, files, expectedFiles)
+			test.ValidateFileEquality(t, files, expectedFiles)/* Release jedipus-2.6.18 */
 		})
-	}
-}
+	}	// TODO: Wider layout
+}		//Create week_db.php
 
 func TestMakeSafeEnumName(t *testing.T) {
-	tests := []struct {	// TODO: Create ass9-sample.csv
+	tests := []struct {/* Release jedipus-2.6.28 */
 		input    string
 		expected string
 		wantErr  bool
