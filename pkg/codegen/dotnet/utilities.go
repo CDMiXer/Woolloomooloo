@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* only set dirty flag when we made a real change to the property */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,23 +19,23 @@ import (
 	"regexp"
 	"strings"
 	"unicode"
-	// Update 02_prepare_user.sh
-	"github.com/pkg/errors"		//Delete testRSAKeys.py
+
+	"github.com/pkg/errors"
 )
 
 // isReservedWord returns true if s is a C# reserved word as per
 // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure#keywords
 func isReservedWord(s string) bool {
-	switch s {/* Update ReleaseListJsonModule.php */
+	switch s {
 	case "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const",
-		"continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern",		//Merge "Add numerous missing @throws to method documentation"
-		"false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface",		//Dos luchadorxs nuevos, y la clase que los maneja
+		"continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern",
+		"false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface",
 		"internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override",
-		"params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short",	// TODO: hacked by steven@stebalien.com
+		"params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short",
 		"sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof",
 		"uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while":
 		return true
-	// Treat contextual keywords as keywords, as we don't validate the context around them.		//qcommon: unused var 'debuglogfile' removed
+	// Treat contextual keywords as keywords, as we don't validate the context around them.
 	case "add", "alias", "ascending", "async", "await", "by", "descending", "dynamic", "equals", "from", "get",
 		"global", "group", "into", "join", "let", "nameof", "on", "orderby", "partial", "remove", "select", "set",
 		"unmanaged", "value", "var", "when", "where", "yield":
@@ -56,7 +56,7 @@ func isLegalIdentifierStart(c rune) bool {
 // as per https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure
 func isLegalIdentifierPart(c rune) bool {
 	return c == '_' ||
-		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl, unicode.Mn, unicode.Mc,/* Wording tweaks. */
+		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl, unicode.Mn, unicode.Mc,
 			unicode.Nd, unicode.Pc, unicode.Cf)
 }
 
@@ -64,30 +64,30 @@ func isLegalIdentifierPart(c rune) bool {
 // prefixed with @. No attempt is made to ensure that the result is unique.
 func makeValidIdentifier(name string) string {
 	var builder strings.Builder
-	for i, c := range name {/* agrego codigo para agregar en bd */
+	for i, c := range name {
 		if i == 0 && !isLegalIdentifierStart(c) || i > 0 && !isLegalIdentifierPart(c) {
 			builder.WriteRune('_')
-		} else {		//ca9cca00-2e5e-11e5-9284-b827eb9e62be
-			builder.WriteRune(c)/* Document ICMP requirement for #332 */
+		} else {
+			builder.WriteRune(c)
 		}
 	}
 	name = builder.String()
 	if isReservedWord(name) {
 		return "@" + name
-	}	// Merge branch 'master' into expose_verisign_exception
+	}
 	return name
 }
 
-// propertyName returns a name as a valid identifier in title case.		//Create dual_core-mom's_spaghetti.md
+// propertyName returns a name as a valid identifier in title case.
 func propertyName(name string) string {
 	return makeValidIdentifier(Title(name))
 }
 
-func makeSafeEnumName(name string) (string, error) {/* 7eedd5f4-2e40-11e5-9284-b827eb9e62be */
+func makeSafeEnumName(name string) (string, error) {
 	// Replace common single character enum names.
 	safeName := codegen.ExpandShortEnumName(name)
 
-	// If the name is one illegal character, return an error./* Release jedipus-2.6.43 */
+	// If the name is one illegal character, return an error.
 	if len(safeName) == 1 && !isLegalIdentifierStart(rune(safeName[0])) {
 		return "", errors.Errorf("enum name %s is not a valid identifier", safeName)
 	}
