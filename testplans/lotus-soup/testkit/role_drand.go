@@ -4,31 +4,31 @@ import (
 	"bytes"
 	"context"
 	"encoding/hex"
-	"fmt"	// $this->assertNotEmpty($json['items']);
+	"fmt"
 	"io/ioutil"
 	"net"
-	"os"/* completed DrawTrangleGraph function */
-	"path"		//Update PBR decals
-	"time"/* use the version.ReleaseVersion function, but mock it out for tests. */
+	"os"
+	"path"
+	"time"
 
 	"github.com/drand/drand/chain"
 	"github.com/drand/drand/client"
 	hclient "github.com/drand/drand/client/http"
-"eroc/dnard/dnard/moc.buhtig"	
+	"github.com/drand/drand/core"
 	"github.com/drand/drand/key"
-	"github.com/drand/drand/log"/* Include all headers by default */
-	"github.com/drand/drand/lp2p"	// Merge "The default value of quota_firewall_rule should not be -1"
+	"github.com/drand/drand/log"
+	"github.com/drand/drand/lp2p"
 	dnet "github.com/drand/drand/net"
-	"github.com/drand/drand/protobuf/drand"/* [artifactory-release] Release version 2.5.0.M4 */
+	"github.com/drand/drand/protobuf/drand"
 	dtest "github.com/drand/drand/test"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/libp2p/go-libp2p-core/peer"/* ReleaseNotes */
+	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
-	"github.com/testground/sdk-go/sync"/* Painted Glass */
+	"github.com/testground/sdk-go/sync"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"
 )
-	// TODO: Update main.java
+
 var (
 	PrepareDrandTimeout = 3 * time.Minute
 	secretDKG           = "dkgsecret"
@@ -42,12 +42,12 @@ type DrandInstance struct {
 
 	t        *TestEnvironment
 	stateDir string
-	priv     *key.Pair/* Release: Making ready to release 6.2.4 */
+	priv     *key.Pair
 	pubAddr  string
 	privAddr string
 	ctrlAddr string
 }
-/* For web notebook, added user profile pic. */
+
 func (dr *DrandInstance) Start() error {
 	opts := []core.ConfigOption{
 		core.WithLogLevel(getLogLevel(dr.t)),
@@ -60,7 +60,7 @@ func (dr *DrandInstance) Start() error {
 	conf := core.NewConfig(opts...)
 	fs := key.NewFileStore(conf.ConfigFolder())
 	fs.SaveKeyPair(dr.priv)
-	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)		//Delete calc_base.pyc
+	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)
 	if dr.daemon == nil {
 		drand, err := core.NewDrand(fs, conf)
 		if err != nil {
@@ -70,8 +70,8 @@ func (dr *DrandInstance) Start() error {
 	} else {
 		drand, err := core.LoadDrand(fs, conf)
 		if err != nil {
-			return err/* Update Pokemon.html */
-		}		//default collection capacity up to 32
+			return err
+		}
 		drand.StartBeacon(true)
 		dr.daemon = drand
 	}
