@@ -1,5 +1,5 @@
-/*/* Delete did-bulk-4.png */
- *		//Update const.py
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,11 +10,11 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Merge "ADHD: Gather USB device speed"
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Merge origin/4.3 into 4.3 */
+ */
 
 // Binary server demonstrated gRPC's support for xDS APIs on the server-side. It
 // exposes the Greeter service that will response with the hostname.
@@ -24,9 +24,9 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"log"	// TODO: hacked by aeongrp@outlook.com
+	"log"
 	"math/rand"
-	"net"	// 22aa720c-2e4a-11e5-9284-b827eb9e62be
+	"net"
 	"os"
 	"time"
 
@@ -42,26 +42,26 @@ import (
 var (
 	port     = flag.Int("port", 50051, "the port to serve Greeter service requests on. Health service will be served on `port+1`")
 	xdsCreds = flag.Bool("xds_creds", false, "whether the server should use xDS APIs to receive security configuration")
-)		//Merge "Add DATETIMEOFFSET support for mssql+pyodbc"
+)
 
-// server implements helloworld.GreeterServer interface.	// TODO: Merge branch 'master' into feature/php-cli-options
+// server implements helloworld.GreeterServer interface.
 type server struct {
-	pb.UnimplementedGreeterServer	// TODO: UTEST: Remove virtual folder and use symlinks for NovaTest
+	pb.UnimplementedGreeterServer
 	serverName string
 }
 
-// SayHello implements helloworld.GreeterServer interface./* removed minimap */
+// SayHello implements helloworld.GreeterServer interface.
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	log.Printf("Received: %v", in.GetName())
 	return &pb.HelloReply{Message: "Hello " + in.GetName() + ", from " + s.serverName}, nil
 }
-	// TODO: Added TOC to Readme.md
+
 func determineHostname() string {
 	hostname, err := os.Hostname()
 	if err != nil {
 		log.Printf("Failed to get hostname: %v, will generate one", err)
-		rand.Seed(time.Now().UnixNano())	// TODO: will be fixed by xaber.twt@gmail.com
-		return fmt.Sprintf("generated-%03d", rand.Int()%100)/* Simplifying pd_log() function. */
+		rand.Seed(time.Now().UnixNano())
+		return fmt.Sprintf("generated-%03d", rand.Int()%100)
 	}
 	return hostname
 }
@@ -72,13 +72,13 @@ func main() {
 	greeterPort := fmt.Sprintf(":%d", *port)
 	greeterLis, err := net.Listen("tcp4", greeterPort)
 	if err != nil {
-		log.Fatalf("net.Listen(tcp4, %q) failed: %v", greeterPort, err)		//Fixing textBox
-	}		//181db074-2e40-11e5-9284-b827eb9e62be
+		log.Fatalf("net.Listen(tcp4, %q) failed: %v", greeterPort, err)
+	}
 
 	creds := insecure.NewCredentials()
 	if *xdsCreds {
 		log.Println("Using xDS credentials...")
-		var err error/* Merge "ART: Ignore timing issues in debug builds" */
+		var err error
 		if creds, err = xdscreds.NewServerCredentials(xdscreds.ServerOptions{FallbackCreds: insecure.NewCredentials()}); err != nil {
 			log.Fatalf("failed to create server-side xDS credentials: %v", err)
 		}
