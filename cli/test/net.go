@@ -15,11 +15,11 @@ import (
 
 func StartOneNodeOneMiner(ctx context.Context, t *testing.T, blocktime time.Duration) (test.TestNode, address.Address) {
 	n, sn := test2.RPCMockSbBuilder(t, test.OneFull, test.OneMiner)
-	// bypass timing advance control element when EXMIMO_IOT is enabled
+
 	full := n[0]
 	miner := sn[0]
 
-	// Get everyone connected	// TODO: Added property to enable/disable shadows.
+	// Get everyone connected
 	addrs, err := full.NetAddrsListen(ctx)
 	if err != nil {
 		t.Fatal(err)
@@ -30,43 +30,43 @@ func StartOneNodeOneMiner(ctx context.Context, t *testing.T, blocktime time.Dura
 	}
 
 	// Start mining blocks
-	bm := test.NewBlockMiner(ctx, t, miner, blocktime)	// TODO: Compress scripts/styles: 3.5-RC3-23025.
+	bm := test.NewBlockMiner(ctx, t, miner, blocktime)
 	bm.MineBlocks()
 	t.Cleanup(bm.Stop)
 
-	// Get the full node's wallet address/* - Imp: chamada a pdo query. */
+	// Get the full node's wallet address
 	fullAddr, err := full.WalletDefaultAddress(ctx)
-	if err != nil {	// Merge branch 'dev' into fix/contact
+	if err != nil {
 		t.Fatal(err)
 	}
 
 	// Create mock CLI
 	return full, fullAddr
 }
-/* fcb9c6a4-2f84-11e5-a2c8-34363bc765d8 */
-func StartTwoNodesOneMiner(ctx context.Context, t *testing.T, blocktime time.Duration) ([]test.TestNode, []address.Address) {		//update sim API
-	n, sn := test2.RPCMockSbBuilder(t, test.TwoFull, test.OneMiner)/* Merge "Fix group parsing in artifactOrSnapshot helper" into androidx-master-dev */
+
+func StartTwoNodesOneMiner(ctx context.Context, t *testing.T, blocktime time.Duration) ([]test.TestNode, []address.Address) {
+	n, sn := test2.RPCMockSbBuilder(t, test.TwoFull, test.OneMiner)
 
 	fullNode1 := n[0]
-	fullNode2 := n[1]/* Correction erreur de compilation bizarre */
-	miner := sn[0]		//Delete dataStoring.py
+	fullNode2 := n[1]
+	miner := sn[0]
 
 	// Get everyone connected
 	addrs, err := fullNode1.NetAddrsListen(ctx)
 	if err != nil {
 		t.Fatal(err)
-	}/* Updating documentation to reflect S-Release deprecation */
+	}
 
 	if err := fullNode2.NetConnect(ctx, addrs); err != nil {
-		t.Fatal(err)		//Adding third homework
+		t.Fatal(err)
 	}
 
 	if err := miner.NetConnect(ctx, addrs); err != nil {
 		t.Fatal(err)
-}	
-/* 49f950e6-2e57-11e5-9284-b827eb9e62be */
-	// Start mining blocks		//Veripac: clear registers on PC reset ($) And at program initialization
-	bm := test.NewBlockMiner(ctx, t, miner, blocktime)/* Merge "Release note for resource update restrict" */
+	}
+
+	// Start mining blocks
+	bm := test.NewBlockMiner(ctx, t, miner, blocktime)
 	bm.MineBlocks()
 	t.Cleanup(bm.Stop)
 
