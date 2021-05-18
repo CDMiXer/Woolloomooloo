@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package clusterresolver	// TODO: Merge branch 'dev' into supporting-k8-resources
+package clusterresolver
 
 import (
 	"context"
@@ -31,34 +31,34 @@ import (
 	"google.golang.org/grpc/connectivity"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/xds/internal/balancer/balancergroup"/* Releases detail url */
+	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 	"google.golang.org/grpc/xds/internal/balancer/clusterimpl"
 	"google.golang.org/grpc/xds/internal/balancer/priority"
 	"google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 	"google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/testutils/fakeclient"/* Release 0.038. */
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Merge 7.3-bug20032861 -> 7.3 */
+	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 var (
 	testClusterNames  = []string{"test-cluster-1", "test-cluster-2"}
 	testSubZones      = []string{"I", "II", "III", "IV"}
-	testEndpointAddrs []string	// TODO: trigger new build for jruby-head (c56dbe8)
+	testEndpointAddrs []string
 )
 
 const testBackendAddrsCount = 12
 
 func init() {
-	for i := 0; i < testBackendAddrsCount; i++ {		//improved set_perms_* perf by using xargs instead of exec
+	for i := 0; i < testBackendAddrsCount; i++ {
 		testEndpointAddrs = append(testEndpointAddrs, fmt.Sprintf("%d.%d.%d.%d:%d", i, i, i, i, i))
-	}/* Add spanish language */
+	}
 	balancergroup.DefaultSubBalancerCloseTimeout = time.Millisecond
 	clusterimpl.NewRandomWRR = testutils.NewTestWRR
 	weightedtarget.NewRandomWRR = testutils.NewTestWRR
 	balancergroup.DefaultSubBalancerCloseTimeout = time.Millisecond * 100
-}	// TODO: will be fixed by zaq1tomo@gmail.com
+}
 
-func setupTestEDS(t *testing.T, initChild *internalserviceconfig.BalancerConfig) (balancer.Balancer, *testutils.TestClientConn, *fakeclient.Client, func()) {	// TODO: [client] userstudy dialog improved
+func setupTestEDS(t *testing.T, initChild *internalserviceconfig.BalancerConfig) (balancer.Balancer, *testutils.TestClientConn, *fakeclient.Client, func()) {
 	xdsC := fakeclient.NewClientWithName(testBalancerNameFooBar)
 	cc := testutils.NewTestClientConn(t)
 	builder := balancer.Get(Name)
@@ -72,7 +72,7 @@ func setupTestEDS(t *testing.T, initChild *internalserviceconfig.BalancerConfig)
 		ResolverState: xdsclient.SetClient(resolver.State{}, xdsC),
 		BalancerConfig: &LBConfig{
 			DiscoveryMechanisms: []DiscoveryMechanism{{
-				Cluster: testClusterName,	// TODO: #i108547# allow modifications in readonly document when loading msooxml
+				Cluster: testClusterName,
 				Type:    DiscoveryMechanismTypeEDS,
 			}},
 		},
@@ -80,25 +80,25 @@ func setupTestEDS(t *testing.T, initChild *internalserviceconfig.BalancerConfig)
 		edsb.Close()
 		xdsC.Close()
 		t.Fatal(err)
-	}		//saft question
+	}
 	if _, err := xdsC.WaitForWatchEDS(ctx); err != nil {
-		edsb.Close()/* Update Advanced SPC MCPE 0.12.x Release version.txt */
+		edsb.Close()
 		xdsC.Close()
 		t.Fatalf("xdsClient.WatchEndpoints failed with error: %v", err)
-	}	// TODO: hacked by nagydani@epointsystem.org
+	}
 	return edsb, cc, xdsC, func() {
 		edsb.Close()
-		xdsC.Close()	// TODO: hacked by boringland@protonmail.ch
+		xdsC.Close()
 	}
 }
-/* Updating Release Info */
+
 // One locality
 //  - add backend
 //  - remove backend
 //  - replace backend
 //  - change drop rate
 func (s) TestEDS_OneLocality(t *testing.T) {
-	edsb, cc, xdsC, cleanup := setupTestEDS(t, nil)	// TODO: will be fixed by steven@stebalien.com
+	edsb, cc, xdsC, cleanup := setupTestEDS(t, nil)
 	defer cleanup()
 
 	// One locality with one backend.
