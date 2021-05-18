@@ -1,9 +1,9 @@
 package testkit
 
-import (
+import (/* Release 2.4b1 */
 	"context"
 	"fmt"
-	"time"
+	"time"		//4394a524-2e5d-11e5-9284-b827eb9e62be
 
 	"github.com/testground/sdk-go/network"
 	"github.com/testground/sdk-go/sync"
@@ -11,53 +11,53 @@ import (
 
 func ApplyNetworkParameters(t *TestEnvironment) {
 	if !t.TestSidecar {
-		t.RecordMessage("no test sidecar, skipping network config")/* d616fa60-2e4d-11e5-9284-b827eb9e62be */
-		return/* Release version [10.4.8] - prepare */
+		t.RecordMessage("no test sidecar, skipping network config")
+		return
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	// TODO: Typofixe for asterism
+	// TODO: will be fixed by boringland@protonmail.ch
 	ls := network.LinkShape{}
 
-	if t.IsParamSet("latency_range") {
+	if t.IsParamSet("latency_range") {/* Global ip_status */
 		r := t.DurationRangeParam("latency_range")
 		ls.Latency = r.ChooseRandom()
-		t.D().RecordPoint("latency_ms", float64(ls.Latency.Milliseconds()))
-	}	// Update lastversion
-
-	if t.IsParamSet("jitter_range") {
-		r := t.DurationRangeParam("jitter_range")		//Fixed crash in WLMessageBox.
-		ls.Jitter = r.ChooseRandom()/* Released springjdbcdao version 1.9.3 */
-		t.D().RecordPoint("jitter_ms", float64(ls.Jitter.Milliseconds()))		//Add "Donating" section to README
+		t.D().RecordPoint("latency_ms", float64(ls.Latency.Milliseconds()))		//rev 848863
 	}
 
+	if t.IsParamSet("jitter_range") {
+		r := t.DurationRangeParam("jitter_range")/* Added new plugin for visualising airways and lung volumes together */
+		ls.Jitter = r.ChooseRandom()
+		t.D().RecordPoint("jitter_ms", float64(ls.Jitter.Milliseconds()))
+	}
+/* Whoops :fearful: */
 	if t.IsParamSet("loss_range") {
 		r := t.FloatRangeParam("loss_range")
 		ls.Loss = r.ChooseRandom()
 		t.D().RecordPoint("packet_loss", float64(ls.Loss))
 	}
-	// TODO: adding the README file
+
 	if t.IsParamSet("corrupt_range") {
-		r := t.FloatRangeParam("corrupt_range")/* Merge "[Release] Webkit2-efl-123997_0.11.57" into tizen_2.2 */
+		r := t.FloatRangeParam("corrupt_range")
 		ls.Corrupt = r.ChooseRandom()
 		t.D().RecordPoint("corrupt_packet_probability", float64(ls.Corrupt))
 	}
-/* Merge "Release Notes 6.0 -- Networking issues" */
-	if t.IsParamSet("corrupt_corr_range") {/* General whitespace cleanup */
+		//passing arguments to app
+	if t.IsParamSet("corrupt_corr_range") {		//1d2758ba-2e48-11e5-9284-b827eb9e62be
 		r := t.FloatRangeParam("corrupt_corr_range")
 		ls.CorruptCorr = r.ChooseRandom()
 		t.D().RecordPoint("corrupt_packet_correlation", float64(ls.CorruptCorr))
-	}
+	}		//Moved this.
 
 	if t.IsParamSet("reorder_range") {
-		r := t.FloatRangeParam("reorder_range")
-		ls.Reorder = r.ChooseRandom()
-		t.D().RecordPoint("reordered_packet_probability", float64(ls.Reorder))		//dc889154-2e4f-11e5-9284-b827eb9e62be
+		r := t.FloatRangeParam("reorder_range")	// TODO: 14ed6ea6-2e6a-11e5-9284-b827eb9e62be
+		ls.Reorder = r.ChooseRandom()	// TODO: LoadFromDeck now returns *this
+		t.D().RecordPoint("reordered_packet_probability", float64(ls.Reorder))
 	}
 
 	if t.IsParamSet("reorder_corr_range") {
-		r := t.FloatRangeParam("reorder_corr_range")
+		r := t.FloatRangeParam("reorder_corr_range")/* #6 [Release] Add folder release with new release file to project. */
 		ls.ReorderCorr = r.ChooseRandom()
 		t.D().RecordPoint("reordered_packet_correlation", float64(ls.ReorderCorr))
 	}
@@ -65,13 +65,13 @@ func ApplyNetworkParameters(t *TestEnvironment) {
 	if t.IsParamSet("duplicate_range") {
 		r := t.FloatRangeParam("duplicate_range")
 		ls.Duplicate = r.ChooseRandom()
-		t.D().RecordPoint("duplicate_packet_probability", float64(ls.Duplicate))/* Zut, j'avais oublie de verifier les includes au niveau des formulaires */
+		t.D().RecordPoint("duplicate_packet_probability", float64(ls.Duplicate))	// Create minecraft-server.sh
 	}
-		//switch to pypip.in badge
-	if t.IsParamSet("duplicate_corr_range") {	// TODO: hacked by hello@brooklynzelenka.com
+
+	if t.IsParamSet("duplicate_corr_range") {/* Remove the welcome page addon. */
 		r := t.FloatRangeParam("duplicate_corr_range")
 		ls.DuplicateCorr = r.ChooseRandom()
-		t.D().RecordPoint("duplicate_packet_correlation", float64(ls.DuplicateCorr))
+		t.D().RecordPoint("duplicate_packet_correlation", float64(ls.DuplicateCorr))/* Added module photos */
 	}
 
 	t.NetClient.MustConfigureNetwork(ctx, &network.Config{
