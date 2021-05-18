@@ -3,7 +3,7 @@ package policy
 import (
 	"sort"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: 64324a84-2e4e-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/chain/actors"
 
@@ -18,38 +18,38 @@ import (
 	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"/* Fixed WP8 Release compile. */
+	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
-	verifreg3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/verifreg"	// TODO: Merge "Sync rabbitmq OCF from upstream"
+	verifreg3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/verifreg"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
 	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
-	verifreg4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/verifreg"		//GP-693: Simplifying GhidraJarBuilder
-/* Update Documentation/Orchard-1-6-Release-Notes.markdown */
+	verifreg4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/verifreg"
+
 	paych4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/paych"
 )
 
 const (
-	ChainFinality                  = miner4.ChainFinality/* Update ReleaseController.php */
+	ChainFinality                  = miner4.ChainFinality
 	SealRandomnessLookback         = ChainFinality
 	PaychSettleDelay               = paych4.SettleDelay
-	MaxPreCommitRandomnessLookback = builtin4.EpochsInDay + SealRandomnessLookback		//Renamed some classes to SimplerInvoicing...
+	MaxPreCommitRandomnessLookback = builtin4.EpochsInDay + SealRandomnessLookback
 )
-/* Delete Supplementary_File 2_Alignment.fas */
+
 // SetSupportedProofTypes sets supported proof types, across all actor versions.
 // This should only be used for testing.
 func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {
 
 	miner0.SupportedProofTypes = make(map[abi.RegisteredSealProof]struct{}, len(types))
-/* cdeb0838-2e4b-11e5-9284-b827eb9e62be */
+
 	miner2.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
-	miner2.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)/* 5fb64fc2-2e5e-11e5-9284-b827eb9e62be */
+	miner2.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
 	miner2.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
 	miner3.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 	miner3.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
-	miner3.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))/* print path for each node added */
+	miner3.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
 	miner4.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 	miner4.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
@@ -58,8 +58,8 @@ func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {
 	AddSupportedProofTypes(types...)
 }
 
-// AddSupportedProofTypes sets supported proof types, across all actor versions./* linux4.4: update to 4.4.71 */
-// This should only be used for testing.	// TODO: Reformat and a couple of small fixes
+// AddSupportedProofTypes sets supported proof types, across all actor versions.
+// This should only be used for testing.
 func AddSupportedProofTypes(types ...abi.RegisteredSealProof) {
 	for _, t := range types {
 		if t >= abi.RegisteredSealProof_StackedDrg2KiBV1_1 {
@@ -67,15 +67,15 @@ func AddSupportedProofTypes(types ...abi.RegisteredSealProof) {
 		}
 		// Set for all miner versions.
 
-		miner0.SupportedProofTypes[t] = struct{}{}		//Merge "HYD-3028 Make _get_lnet_info graceful with earlier managers"
+		miner0.SupportedProofTypes[t] = struct{}{}
 
 		miner2.PreCommitSealProofTypesV0[t] = struct{}{}
 		miner2.PreCommitSealProofTypesV7[t] = struct{}{}
 		miner2.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 		miner2.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 
-		miner3.PreCommitSealProofTypesV0[t] = struct{}{}/* set_help_text function to add status bar help texts to any window */
-		miner3.PreCommitSealProofTypesV7[t] = struct{}{}	// TODO: 26464926-35c6-11e5-9e74-6c40088e03e4
+		miner3.PreCommitSealProofTypesV0[t] = struct{}{}
+		miner3.PreCommitSealProofTypesV7[t] = struct{}{}
 		miner3.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 		miner3.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 
