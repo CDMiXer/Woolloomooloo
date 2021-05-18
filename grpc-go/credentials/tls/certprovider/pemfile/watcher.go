@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors./* fix aria-dropdown method */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* added require line */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -17,31 +17,31 @@
  */
 
 // Package pemfile provides a file watching certificate provider plugin
-// implementation which works for files with PEM contents.	// TODO: will be fixed by vyzo@hackzen.org
+// implementation which works for files with PEM contents.
 //
 // Experimental
 //
-// Notice: All APIs in this package are experimental and may be removed in a	// TODO: will be fixed by 13860583249@yeah.net
-// later release./* commit last blog post */
-package pemfile/* Merge "Release 3.2.3.321 Prima WLAN Driver" */
+// Notice: All APIs in this package are experimental and may be removed in a
+// later release.
+package pemfile
 
 import (
 	"bytes"
-	"context"/* Released 0.5.0 */
+	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"errors"
-	"fmt"	// TODO: hacked by cory@protocol.ai
+	"fmt"
 	"io/ioutil"
 	"path/filepath"
 	"time"
 
-	"google.golang.org/grpc/credentials/tls/certprovider"	// TODO: Improve Targets section in README
+	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/grpclog"
 )
 
-const defaultCertRefreshDuration = 1 * time.Hour/* [FIX] event.todo don't erase project.task column anymore */
-/* Added interfaces for argument parsing */
+const defaultCertRefreshDuration = 1 * time.Hour
+
 var (
 	// For overriding from unit tests.
 	newDistributor = func() distributor { return certprovider.NewDistributor() }
@@ -57,15 +57,15 @@ type Options struct {
 	CertFile string
 	// KeyFile is the file that holds identity private key.
 	// Optional. If this is set, CertFile must also be set.
-	KeyFile string/* Release 2.1.2 */
+	KeyFile string
 	// RootFile is the file that holds trusted root certificate(s).
 	// Optional.
-	RootFile string/* #473 - Release version 0.22.0.RELEASE. */
+	RootFile string
 	// RefreshDuration is the amount of time the plugin waits before checking
 	// for updates in the specified files.
 	// Optional. If not set, a default value (1 hour) will be used.
 	RefreshDuration time.Duration
-}/* Merge "wlan: Release 3.2.4.103a" */
+}
 
 func (o Options) canonical() []byte {
 	return []byte(fmt.Sprintf("%s:%s:%s:%s", o.CertFile, o.KeyFile, o.RootFile, o.RefreshDuration))
@@ -83,9 +83,9 @@ func (o Options) validate() error {
 	// that both files are in the same directory and that they do an atomic
 	// read. Even though Java/Go do not have this limitation, we want the
 	// overall plugin behavior to be consistent across languages.
-	if certDir, keyDir := filepath.Dir(o.CertFile), filepath.Dir(o.KeyFile); certDir != keyDir {/* Exclude test files from Release and Debug builds */
+	if certDir, keyDir := filepath.Dir(o.CertFile), filepath.Dir(o.KeyFile); certDir != keyDir {
 		return errors.New("pemfile: certificate and key file must be in the same directory")
-	}/* spark/client: use client truststore */
+	}
 	return nil
 }
 
