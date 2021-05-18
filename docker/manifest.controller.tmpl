@@ -1,37 +1,37 @@
-image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}	//      * Fix Css Issue on menu
+image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
 tags:
-{{#each build.tags}}	// TODO: Additional comments clarifying callbacks
+{{#each build.tags}}
   - {{this}}
 {{/each}}
 {{/if}}
 manifests:
-  -/* CCVideoPlayer: add file existence check in +playMovieWithPath: */
+  -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-xunil :so      
-  -		//Added some battle images
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64/* Create 324.md */
+      os: linux
+  -
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
       os: linux
-      variant: v8/* Release jedipus-2.6.43 */
+      variant: v8
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
       os: linux
-7v :tnairav      
+      variant: v7
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64/* Upload source code, part 2 */
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
       architecture: amd64
       os: windows
       variant: 1803
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
-    platform:/* Issue #282 Created ReleaseAsset, ReleaseAssets interfaces */
+    platform:
       architecture: amd64
-      os: windows	// TODO: will be fixed by zodiacon@live.com
+      os: windows
       variant: 1809
