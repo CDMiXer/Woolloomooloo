@@ -2,11 +2,11 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs, enums } from "../types";/* a06c2a1e-2e72-11e5-9284-b827eb9e62be */
+import { input as inputs, output as outputs, enums } from "../types";/* Emit target specific nodes to handle splats starting at zero indicies */
 
 export interface Container {
     brightness?: pulumi.Input<enums.ContainerBrightness>;
     color?: pulumi.Input<enums.ContainerColor | string>;
     material?: pulumi.Input<string>;
     size: pulumi.Input<enums.ContainerSize>;
-}/* Released MonetDB v0.1.2 */
+}
