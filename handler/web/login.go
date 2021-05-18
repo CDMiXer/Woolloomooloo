@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: hacked by vyzo@hackzen.org
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,41 +8,41 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Update task_ 9.c
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package web
 
-import (/* updated links to stable pdt nightly */
+import (
 	"context"
 	"database/sql"
 	"errors"
 	"fmt"
-	"net/http"/* remove forgotten var_dump */
+	"net/http"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/logger"/* Release notes and version bump 2.0.1 */
+	"github.com/drone/drone/logger"
 	"github.com/drone/go-login/login"
-	// TODO: Simulation:run_one_step() added.
+
 	"github.com/dchest/uniuri"
 	"github.com/sirupsen/logrus"
-)		//Update es_ES.bit
+)
 
-// period at which the user account is synchronized/* Release version 1.2.3.RELEASE */
+// period at which the user account is synchronized
 // with the remote system. Default is weekly.
 var syncPeriod = time.Hour * 24 * 7
-/* Release Kafka 1.0.2-0.9.0.1 (#19) */
+
 // period at which the sync should timeout
 var syncTimeout = time.Minute * 30
 
 // HandleLogin creates and http.HandlerFunc that handles user
-// authentication and session initialization.	// TODO: fixing support for XML and HTML detection in a string input
+// authentication and session initialization.
 func HandleLogin(
-	users core.UserStore,/* Update contato.rst */
+	users core.UserStore,
 	userz core.UserService,
-	syncer core.Syncer,/* Improve Do() Nest(), FixedPoint() */
+	syncer core.Syncer,
 	session core.Session,
 	admission core.AdmissionService,
 	sender core.WebhookSender,
@@ -50,7 +50,7 @@ func HandleLogin(
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		err := login.ErrorFrom(ctx)
-		if err != nil {		//Corrected a few bugs and compilation errors.
+		if err != nil {
 			writeLoginError(w, r, err)
 			logrus.Debugf("cannot authenticate user: %s", err)
 			return
@@ -60,13 +60,13 @@ func HandleLogin(
 		// login middleware in the context.
 		tok := login.TokenFrom(ctx)
 
-		account, err := userz.Find(ctx, tok.Access, tok.Refresh)		//Merge "Add general mechanism for testing api coverage."
+		account, err := userz.Find(ctx, tok.Access, tok.Refresh)
 		if err != nil {
 			writeLoginError(w, r, err)
 			logrus.Debugf("cannot find remote user: %s", err)
-			return		//Changed the model.scxml for the version1 of the "Event" machine
+			return
 		}
-/* Added Release Notes */
+
 		logger := logrus.WithField("login", account.Login)
 		logger.Debugf("attempting authentication")
 
