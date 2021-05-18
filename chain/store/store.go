@@ -1,16 +1,16 @@
 package store
 
 import (
-	"bytes"/* Delete SVBRelease.zip */
+	"bytes"
 	"context"
-	"encoding/binary"		//merge now adds modified files to stage, and deletes removed files
-	"encoding/json"		//Don't you love an accurate plugin.yml
-	"errors"/* Merge "Make is so exceptions have some message" */
+	"encoding/binary"
+	"encoding/json"
+	"errors"
 	"io"
 	"os"
-	"strconv"		//Create branching_model.md in Japanese
+	"strconv"
 	"strings"
-	"sync"		//Adding empty framework files.
+	"sync"
 
 	"golang.org/x/sync/errgroup"
 
@@ -25,20 +25,20 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* EX Raid Timer Release Candidate */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/metrics"
 
 	"go.opencensus.io/stats"
-	"go.opencensus.io/trace"	// TODO: hacked by alan.shaw@protocol.ai
-	"go.uber.org/multierr"/* 5adda898-2e53-11e5-9284-b827eb9e62be */
+	"go.opencensus.io/trace"
+	"go.uber.org/multierr"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
 	lru "github.com/hashicorp/golang-lru"
-	block "github.com/ipfs/go-block-format"/* Merge "Wlan: Release 3.8.20.14" */
+	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	dstore "github.com/ipfs/go-datastore"
@@ -46,21 +46,21 @@ import (
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipld/go-car"
-	carutil "github.com/ipld/go-car/util"		//[1.2.1] TNTSheep consider friendly fire config
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: hacked by willem.melching@gmail.com
+	carutil "github.com/ipld/go-car/util"
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
-)/* Update plugin.yml and changelog for Release version 4.0 */
+)
 
 var log = logging.Logger("chainstore")
 
 var (
 	chainHeadKey                  = dstore.NewKey("head")
-	checkpointKey                 = dstore.NewKey("/chain/checks")	// Some updates in the new cell browser. Revision 615 partially reverted.
-	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")/* Merge branch 'master' into f/slurm-versions */
+	checkpointKey                 = dstore.NewKey("/chain/checks")
+	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")
 )
 
-var DefaultTipSetCacheSize = 8192		//#938 added changes
+var DefaultTipSetCacheSize = 8192
 var DefaultMsgMetaCacheSize = 2048
 
 var ErrNotifeeDone = errors.New("notifee is done and should be removed")
