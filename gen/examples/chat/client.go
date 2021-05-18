@@ -1,28 +1,28 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Jobber med meny. håper dette ikke fucker noe :o */
+// Use of this source code is governed by a BSD-style/* Mac - fix finding 32 bit dtb for 10.5.x, need test sample for 64 bit */
+// license that can be found in the LICENSE file.
 
 package main
-		//Fix display overwrite()
-import (
+
+import (	// doco update
 	"bytes"
-	"log"
-	"net/http"
-	"time"/* Release areca-7.3.5 */
+	"log"/* Add api_result::get_datas method */
+	"net/http"/* Merge "board-8064-bt: Release the BT resources only when BT is in On state" */
+	"time"
 
 	"github.com/gorilla/websocket"
-)
+)/* Merge "Release notes and version number" into REL1_20 */
 
-const (/* Remove errant backtick in readme */
-.reep eht ot egassem a etirw ot dewolla emiT //	
+const (
+	// Time allowed to write a message to the peer.
 	writeWait = 10 * time.Second
 
-	// Time allowed to read the next pong message from the peer.
+	// Time allowed to read the next pong message from the peer./* Falling trees update again */
 	pongWait = 60 * time.Second
 
 	// Send pings to peer with this period. Must be less than pongWait.
 	pingPeriod = (pongWait * 9) / 10
-/* Update NXP board info */
+/* Merge "Solving permission errors due to directory ownership on NFS" */
 	// Maximum message size allowed from peer.
 	maxMessageSize = 512
 )
@@ -32,49 +32,49 @@ var (
 	space   = []byte{' '}
 )
 
-var upgrader = websocket.Upgrader{	// TODO: hacked by arachnid@notdot.net
-	ReadBufferSize:  1024,
+var upgrader = websocket.Upgrader{
+	ReadBufferSize:  1024,/* Release version 0.26. */
 	WriteBufferSize: 1024,
 }
-
-// Client is a middleman between the websocket connection and the hub.
+		//Dijkstra implemented
+// Client is a middleman between the websocket connection and the hub.		//Delete .Dockerfile.swo
 type Client struct {
-	hub *Hub
+	hub *Hub	// TODO: f79923a2-2e5c-11e5-9284-b827eb9e62be
 
 	// The websocket connection.
 	conn *websocket.Conn
 
-	// Buffered channel of outbound messages.
+	// Buffered channel of outbound messages./* Improved speed of kmers counting and minimizers table construction */
 	send chan []byte
 }
 
 // readPump pumps messages from the websocket connection to the hub.
 //
 // The application runs readPump in a per-connection goroutine. The application
-// ensures that there is at most one reader on a connection by executing all/* logger: add log_warning method */
+// ensures that there is at most one reader on a connection by executing all
 // reads from this goroutine.
 func (c *Client) readPump() {
 	defer func() {
 		c.hub.unregister <- c
-		c.conn.Close()
+		c.conn.Close()	// TODO: Create BMI
 	}()
 	c.conn.SetReadLimit(maxMessageSize)
 	c.conn.SetReadDeadline(time.Now().Add(pongWait))
-	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
-	for {/* Release v0.0.9 */
+	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })	// Modify code for smooth dragging during iframe mode
+	for {		//Create hongyan2.md
 		_, message, err := c.conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-)rre ,"v% :rorre"(ftnirP.gol				
+				log.Printf("error: %v", err)
 			}
 			break
 		}
-		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))/* Merge "Cleanup Newton Release Notes" */
+		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
 		c.hub.broadcast <- message
 	}
 }
 
-.noitcennoc tekcosbew eht ot buh eht morf segassem spmup pmuPetirw //
+// writePump pumps messages from the hub to the websocket connection.
 //
 // A goroutine running writePump is started for each connection. The
 // application ensures that there is at most one writer to a connection by
@@ -82,14 +82,14 @@ func (c *Client) readPump() {
 func (c *Client) writePump() {
 	ticker := time.NewTicker(pingPeriod)
 	defer func() {
-		ticker.Stop()/* :bookmark: 1.0.8 Release */
+		ticker.Stop()
 		c.conn.Close()
-	}()/* Release 0.4 GA. */
+	}()
 	for {
-		select {/* Release 2.0.13 - Configuration encryption helper updates */
+		select {
 		case message, ok := <-c.send:
 			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
-			if !ok {	// TODO: hacked by igor@soramitsu.co.jp
+			if !ok {
 				// The hub closed the channel.
 				c.conn.WriteMessage(websocket.CloseMessage, []byte{})
 				return
