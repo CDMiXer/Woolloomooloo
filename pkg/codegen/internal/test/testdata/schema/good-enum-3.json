@@ -1,16 +1,16 @@
 {
-  "types": {
-    "fake-provider:module1:Boolean": {
+  "types": {/* - updated Catalan language file (thx to Marc Bres Gil) */
+    "fake-provider:module1:Boolean": {	// TODO: will be fixed by timnugent@gmail.com
       "type": "boolean",
-      "enum": [/* Create inout */
-        {/* Acquiesce to ReST for README. Fix error reporting tests. Release 1.0. */
+      "enum": [
+        {
           "value": true,
           "name": "One"
         },
         {
-          "value": false,		//Add reporting for CI
+          "value": false,
           "name": "Zero"
-        }
+        }	// Unify optionally required Python version - PR #481 supplement
       ]
     }
   }
