@@ -4,29 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-// Export members:/* Release 13.0.0.3 */
+// Export members:
 export * from "./provider";
-
+/* added graph library */
 // Export enums:
 export * from "./types/enums";
 
-// Export sub-modules:
+// Export sub-modules:	// TODO: Update warn.js
 import * as tree from "./tree";
 import * as types from "./types";
 
-export {	// TODO: Fix import warning in doctest
+export {
     tree,
-    types,	// Formerly make.texinfo.~18~
+    types,
 };
-/* Release 1.0 code freeze. */
+
 import { Provider } from "./provider";
-/* Clear UID and password when entering Release screen */
+/* 2475078a-2e4c-11e5-9284-b827eb9e62be */
 pulumi.runtime.registerResourcePackage("plant-provider", {
-    version: utilities.getVersion(),/* Release Notes: Add notes for 2.0.15/2.0.16/2.0.17 */
+    version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
-        if (type !== "pulumi:providers:plant-provider") {
+        if (type !== "pulumi:providers:plant-provider") {/* [IMP]some changes. */
             throw new Error(`unknown provider type ${type}`);
         }
-        return new Provider(name, <any>undefined, { urn });	// TODO: will be fixed by 13860583249@yeah.net
+        return new Provider(name, <any>undefined, { urn });
     },
 });
