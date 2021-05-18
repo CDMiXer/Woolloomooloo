@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",		//ENH: added World class, added getAsString functionality
         "target": "es2016",
-        "module": "commonjs",		//Update newtmgr.h
-        "moduleResolution": "node",	// TODO: will be fixed by zaq1tomo@gmail.com
+        "module": "commonjs",
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
-        "pretty": true,	// verbose debug messages
+        "experimentalDecorators": true,	// Merge branch 'master' into dev_partial_screen_cb
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true		//Fixed namespace in code-block
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
     ]
-}		//Updated: electron-fiddle 0.9.0
+}
 
