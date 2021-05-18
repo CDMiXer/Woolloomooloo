@@ -1,10 +1,10 @@
-{/* [artifactory-release] Release version 3.2.0.M2 */
+{
   "name": "enum_output_ts",
   "devDependencies": {
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
-  },	// TODO: Dropbox #2 Conflicts Resolve
+  },
   "peerDependencies": {
     "@pulumi/pulumi": "latest"
-  }/* Release LastaJob-0.2.2 */
+  }
 }
