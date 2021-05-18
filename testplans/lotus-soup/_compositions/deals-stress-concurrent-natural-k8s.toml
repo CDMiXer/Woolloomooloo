@@ -1,5 +1,5 @@
 [metadata]
-  name = "lotus-soup"	// TODO: hacked by fjl@ethereum.org
+  name = "lotus-soup"
   author = ""
 
 [global]
@@ -9,18 +9,18 @@
   builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build]		//added JEI recipe handlers
+[global.build]
   selectors = ["testground"]
 
-[global.run_config]/* 'heads up' about vendor dir */
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* update slack share invite link */
+
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-/* 92207472-2e51-11e5-9284-b827eb9e62be */
+
 [global.run.test_params]
   clients = "3"
   miners = "2"
@@ -29,40 +29,40 @@
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-		//Updated README to point flex / 1.1 users to Joel's fork.
+
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "100m"
-]secnatsni.spuorg[  
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]		//Prepare base sql system
+[[groups]]
   id = "miners"
   [groups.resources]
-    memory = "14000Mi"		//fix(package): update codemirror to version 5.33.0
+    memory = "14000Mi"
     cpu = "1000m"
   [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//[MCLIRR-41] Update Maven prerequisite to version 2.0.6
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "2048Mi"
-    cpu = "100m"	// TODO: will be fixed by steven@stebalien.com
+    cpu = "100m"
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]/* fix(package): update react-ga to version 2.5.4 */
+  [groups.run]
     [groups.run.test_params]
       role = "client"
       deals = "3"
