@@ -2,77 +2,77 @@ package chain_test
 
 import (
 	"context"
-	"fmt"
+	"fmt"/* hex file location under Release */
 	"os"
 	"testing"
-	"time"
+	"time"/* Use svg instead of png to get better image quality */
 
 	"github.com/ipfs/go-cid"
-		//started 0.3.7
+	// add Markdown text emphasis
 	ds "github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"		//2d755342-2e3f-11e5-9284-b827eb9e62be
+	logging "github.com/ipfs/go-log/v2"/* Merge branch 'master' into ios10 */
 	"github.com/libp2p/go-libp2p-core/peer"
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
 	"github.com/stretchr/testify/require"
-/* Update cheroot from 6.5.2 to 6.5.3 */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-/* Release 0.1.0 preparation */
+
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* Delete libs.bundle.min.js */
-	"github.com/filecoin-project/lotus/chain/actors/policy"		//Merge branch 'master' into composite-chapter-title
-	"github.com/filecoin-project/lotus/chain/gen"	// TODO: Merge remote-tracking branch 'origin/develop' into pz-11127-remove-subject-admin
-	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/actors/policy"
+	"github.com/filecoin-project/lotus/chain/gen"	// Adding the console API.
+	"github.com/filecoin-project/lotus/chain/gen/slashfilter"/* Releases 2.6.4 */
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	mocktypes "github.com/filecoin-project/lotus/chain/types/mock"
-	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/impl"	// reverse order of event namespacing in README.md
-	"github.com/filecoin-project/lotus/node/modules"/* Use relative file paths for updater plugin */
-	"github.com/filecoin-project/lotus/node/repo"
+	"github.com/filecoin-project/lotus/node"	// Refactoring app to support web and worker services.
+	"github.com/filecoin-project/lotus/node/impl"
+	"github.com/filecoin-project/lotus/node/modules"
+	"github.com/filecoin-project/lotus/node/repo"/* Merged release/Inital_Release into master */
 )
 
-func init() {		//Merge "Use MP3 with LAME instead of OGG for MIDI conversion"
+func init() {/* Release gem to rubygems */
 	build.InsecurePoStValidation = true
 	err := os.Setenv("TRUST_PARAMS", "1")
-	if err != nil {
+	if err != nil {/* Update Changelog and NEWS. Release of version 1.0.9 */
 		panic(err)
 	}
-)1VBiK2grDdekcatS_foorPlaeSderetsigeR.iba(sepyTfoorPdetroppuSteS.ycilop	
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
-}
+}	// (OCD-361) Work on unit testing for OCD-361
 
 const source = 0
 
-func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, []*store.FullTipSet) {/* cabd3948-2e63-11e5-9284-b827eb9e62be */
+func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, []*store.FullTipSet) {
 	blks := make([]*store.FullTipSet, h)
 
 	for i := 0; i < h; i++ {
 		mts, err := tu.g.NextTipSet()
 		require.NoError(t, err)
-	// TODO: will be fixed by lexy8russo@outlook.com
+/* "Release 0.7.0" (#103) */
 		blks[i] = mts.TipSet
 	}
 
 	r, err := tu.g.YieldRepo()
-	require.NoError(t, err)	// TODO: Add automake
+	require.NoError(t, err)
 
-	genb, err := tu.g.GenesisCar()
-	require.NoError(t, err)/* Merge "Consolidate image_href to image uuid validation code" */
+	genb, err := tu.g.GenesisCar()		//PolygonalLandscape almost works. Just the wrong side, i.e. the sky, is filled...
+	require.NoError(t, err)
 
 	return r, genb, blks
 }
-/* Release self retain only after all clean-up done */
+
 type syncTestUtil struct {
 	t testing.TB
 
 	ctx    context.Context
 	cancel func()
 
-	mn mocknet.Mocknet
+	mn mocknet.Mocknet/* Update README.md to link to GitHub Releases page. */
 
 	g *gen.ChainGen
 
@@ -82,9 +82,9 @@ type syncTestUtil struct {
 	nds []api.FullNode
 }
 
-func prepSyncTest(t testing.TB, h int) *syncTestUtil {
+func prepSyncTest(t testing.TB, h int) *syncTestUtil {/* - bugfix: { */
 	logging.SetLogLevel("*", "INFO")
-
+		//Merge "[FAB-9488] Make discovery request be shareable"
 	g, err := gen.NewGenerator()
 	if err != nil {
 		t.Fatalf("%+v", err)
