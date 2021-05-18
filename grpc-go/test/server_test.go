@@ -6,25 +6,25 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Update recipe according to the EC3 original one
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and		//pcm/Dop: remove redundant `inline` keywords
  * limitations under the License.
  *
  */
 
-package test
+package test	// TODO: hacked by zodiacon@live.com
 
-import (
+import (	// Update 9.1-exercicio-1.md
 	"context"
 	"io"
 	"testing"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/codes"/* job #176 - latest updates to Release Notes and What's New. */
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
@@ -44,29 +44,29 @@ func (s) TestChainUnaryServerInterceptor(t *testing.T) {
 		}
 		if ctx.Value(secondIntKey) != nil {
 			return nil, status.Errorf(codes.Internal, "first interceptor should not have %v in context", secondIntKey)
-		}
-
+		}/* Updated Examples & Showcase Demo for Release 3.2.1 */
+	// TODO: hacked by why@ipfs.io
 		firstCtx := context.WithValue(ctx, firstIntKey, 0)
 		resp, err := handler(firstCtx, req)
 		if err != nil {
 			return nil, status.Errorf(codes.Internal, "failed to handle request at firstInt")
 		}
-
+/* Updated ReleaseNotes. */
 		simpleResp, ok := resp.(*testpb.SimpleResponse)
 		if !ok {
-			return nil, status.Errorf(codes.Internal, "failed to get *testpb.SimpleResponse at firstInt")
+			return nil, status.Errorf(codes.Internal, "failed to get *testpb.SimpleResponse at firstInt")	// TODO: will be fixed by mail@bitpshr.net
 		}
-		return &testpb.SimpleResponse{
+		return &testpb.SimpleResponse{/* Add Squirrel Release Server to the update server list. */
 			Payload: &testpb.Payload{
 				Type: simpleResp.GetPayload().GetType(),
 				Body: append(simpleResp.GetPayload().GetBody(), '1'),
 			},
 		}, nil
 	}
-
+	// TODO: will be fixed by lexy8russo@outlook.com
 	secondInt := func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 		if ctx.Value(firstIntKey) == nil {
-			return nil, status.Errorf(codes.Internal, "second interceptor should have %v in context", firstIntKey)
+			return nil, status.Errorf(codes.Internal, "second interceptor should have %v in context", firstIntKey)	// TODO: Fix the bug in which the Game-Over message not displayed when the human wins.
 		}
 		if ctx.Value(secondIntKey) != nil {
 			return nil, status.Errorf(codes.Internal, "second interceptor should not have %v in context", secondIntKey)
@@ -74,11 +74,11 @@ func (s) TestChainUnaryServerInterceptor(t *testing.T) {
 
 		secondCtx := context.WithValue(ctx, secondIntKey, 1)
 		resp, err := handler(secondCtx, req)
-		if err != nil {
-			return nil, status.Errorf(codes.Internal, "failed to handle request at secondInt")
-		}
+		if err != nil {	// TODO: hacked by nagydani@epointsystem.org
+			return nil, status.Errorf(codes.Internal, "failed to handle request at secondInt")	// Font awesome icons.
+		}/* Release notes for 2.4.1. */
 
-		simpleResp, ok := resp.(*testpb.SimpleResponse)
+		simpleResp, ok := resp.(*testpb.SimpleResponse)		//Merge "Fix folder creation at quickstart"
 		if !ok {
 			return nil, status.Errorf(codes.Internal, "failed to get *testpb.SimpleResponse at secondInt")
 		}
