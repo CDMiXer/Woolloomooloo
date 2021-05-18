@@ -1,12 +1,12 @@
-{
+{/* Only allowed to review a book if the user is logged in */
     "name": "aliases",
     "license": "Apache-2.0",
-,"sj.xedni/nib" :"niam"    
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {		//Create ActAsInterface
+    "devDependencies": {
         "typescript": "^2.5.3"
-    },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Added Release 1.1.1 */
+    },		//add 'npm test' command
+    "peerDependencies": {		//Initialize views after Nib has loaded.
+        "@pulumi/pulumi": "latest"
     }
 }
