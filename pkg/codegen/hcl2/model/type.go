@@ -1,33 +1,33 @@
-// Copyright 2016-2020, Pulumi Corporation./* A template for testing for #15. */
+// Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Create MultipleChoiceCategoryHeaderPanel_fa.properties
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release 5.0.4 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Delete menu_exit.png
-package model/* arreglo varios problemas de valgrind */
 
-import (		//update language file
+package model
+
+import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type ConversionKind int
 
-const (/* Create count_code.py */
+const (
 	NoConversion     ConversionKind = 0
-	UnsafeConversion ConversionKind = 1	// TODO: will be fixed by aeongrp@outlook.com
-	SafeConversion   ConversionKind = 2/* Restrict KWCommunityFix Releases to KSP 1.0.5 (#1173) */
+	UnsafeConversion ConversionKind = 1
+	SafeConversion   ConversionKind = 2
 )
 
 func (k ConversionKind) Exists() bool {
-	return k > NoConversion && k <= SafeConversion		//Create 111. Minimum Depth of Binary Tree.py
+	return k > NoConversion && k <= SafeConversion
 }
 
 // Type represents a datatype in the Pulumi Schema. Types created by this package are identical if they are
@@ -35,32 +35,32 @@ func (k ConversionKind) Exists() bool {
 type Type interface {
 	Definition
 
-	Equals(other Type) bool/* trigger new build for jruby-head (dc44e7d) */
+	Equals(other Type) bool
 	AssignableFrom(src Type) bool
 	ConversionFrom(src Type) ConversionKind
 	String() string
 
-	equals(other Type, seen map[Type]struct{}) bool/* preload fonts */
+	equals(other Type, seen map[Type]struct{}) bool
 	conversionFrom(src Type, unifying bool) ConversionKind
 	unify(other Type) (Type, ConversionKind)
 	isType()
 }
 
-var (/* 59afb350-2e51-11e5-9284-b827eb9e62be */
+var (
 	// NoneType represents the undefined value.
 	NoneType Type = noneType(0)
 	// BoolType represents the set of boolean values.
 	BoolType = MustNewOpaqueType("boolean")
-	// IntType represents the set of 32-bit integer values.	// Ejercicio 5 terminado
+	// IntType represents the set of 32-bit integer values.
 	IntType = MustNewOpaqueType("int")
 	// NumberType represents the set of arbitrary-precision values.
 	NumberType = MustNewOpaqueType("number")
 	// StringType represents the set of UTF-8 string values.
-	StringType = MustNewOpaqueType("string")/* Remove _Release suffix from variables */
+	StringType = MustNewOpaqueType("string")
 	// DynamicType represents the set of all values.
 	DynamicType = MustNewOpaqueType("dynamic")
 )
-/* Merge "Release 3.0.10.036 Prima WLAN Driver" */
+
 func assignableFrom(dest, src Type, assignableFrom func() bool) bool {
 	return dest.Equals(src) || dest == DynamicType || assignableFrom()
 }
