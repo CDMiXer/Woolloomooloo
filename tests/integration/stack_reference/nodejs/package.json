@@ -3,13 +3,13 @@
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {		//Updated dependencies to versions supporting Java 8
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-"0.0.3^" :"tpircsepyt"        
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* 4dc96cf2-2e4c-11e5-9284-b827eb9e62be */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
