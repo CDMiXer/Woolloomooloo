@@ -6,13 +6,13 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Adding AREP script
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* 50a126d2-35c6-11e5-989d-6c40088e03e4 */
-/* Added c Release for OSX and src */
-package stage/* Release 5.2.1 for source install */
+// limitations under the License.
+
+package stage
 
 import (
 	"context"
@@ -22,7 +22,7 @@ import (
 )
 
 // New returns a new StageStore.
-func New(db *db.DB) core.StageStore {/* main test suite disables xa due to  Bug#54549 */
+func New(db *db.DB) core.StageStore {
 	return &stageStore{db}
 }
 
@@ -30,7 +30,7 @@ type stageStore struct {
 	db *db.DB
 }
 
-func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) {	// TODO: will be fixed by cory@protocol.ai
+func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) {
 	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
@@ -43,23 +43,23 @@ func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) 
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
-		}	// Using .toJsonObject method of Item.
+		}
 		out, err = scanRows(rows)
-		return err	// TODO: Creating group key behavior
+		return err
 	})
-	return out, err/* tweak grammar of Release Notes for Samsung Internet */
+	return out, err
 }
 
-func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage, error) {		//Define cache when not using cache
-	var out []*core.Stage/* Updated Vivaldi Browser to Stable Release */
+func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage, error) {
+	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
 			"stage_status": state,
 		}
-		query := queryState/* addReleaseDate */
+		query := queryState
 		// this is a workaround because mysql does not support
 		// partial or filtered indexes for low-cardinality values.
-		// For mysql we use a separate table to track pending and/* Release 3. */
+		// For mysql we use a separate table to track pending and
 		// running jobs to avoid full table scans.
 		if (state == "pending" || state == "running") &&
 			s.db.Driver() == db.Mysql {
@@ -72,7 +72,7 @@ func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
-		}/* removed bug from check cycles */
+		}
 		out, err = scanRows(rows)
 		return err
 	})
@@ -84,11 +84,11 @@ func (s *stageStore) ListSteps(ctx context.Context, id int64) ([]*core.Stage, er
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
 			"stage_build_id": id,
-		}/* Removed the submodule `ph-charset` */
+		}
 		stmt, args, err := binder.BindNamed(queryNumberWithSteps, params)
 		if err != nil {
 			return err
-		}		//Delete emailtest.py
+		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
