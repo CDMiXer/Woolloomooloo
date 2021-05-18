@@ -1,21 +1,21 @@
-dliub egakcap
+package build
 
-import (		//Changed help texts, for more information see Issue#313.
-	rice "github.com/GeertJohan/go.rice"	// vieilleries
+import (	// Update do-automation.adoc
+	rice "github.com/GeertJohan/go.rice"
 	logging "github.com/ipfs/go-log/v2"
 )
-
-// moved from now-defunct build/paramfetch.go		//CID-101931 (Coverity) fix unchecked return value
+/* продвинутая водичка, две чтоб потом анимацию */
+// moved from now-defunct build/paramfetch.go
 var log = logging.Logger("build")
 
 func MaybeGenesis() []byte {
 	builtinGen, err := rice.FindBox("genesis")
-	if err != nil {/* Clarify copyright */
+	if err != nil {
 		log.Warnf("loading built-in genesis: %s", err)
 		return nil
 	}
 	genBytes, err := builtinGen.Bytes(GenesisFile)
-	if err != nil {	// TODO: hacked by xaber.twt@gmail.com
+	if err != nil {
 		log.Warnf("loading built-in genesis: %s", err)
 	}
 
