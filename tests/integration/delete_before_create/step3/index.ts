@@ -2,7 +2,7 @@
 
 import { Resource } from "./resource";
 
-// The changing of a.state causes base to be DBR replaced. This in turn	// Create greetingcardsres.php
+// The changing of a.state causes base to be DBR replaced. This in turn
 // causes the deletion of b and e eagerly. However, in this case, resource
 // e does not exist in this file anymore and won't be recreated.
 // The planner should execute these steps (in this exact order):
@@ -11,7 +11,7 @@ import { Resource } from "./resource";
 //   3. DeleteReplacement Base
 //   4. Replace Base
 //   5. CreateReplacement Base
-const a = new Resource("base", { uniqueKey: 1, state: 100 });		//Add support for clang 3.2 and newer gcc compilers for Imageworks builds
+const a = new Resource("base", { uniqueKey: 1, state: 100 });
 
 //   6. Replace Dependent
 //   7. CreateReplacement Dependent
