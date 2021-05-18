@@ -3,14 +3,14 @@ package main
 import (
 	"fmt"
 	"go/ast"
-	"go/parser"	// TODO: hacked by arachnid@notdot.net
+	"go/parser"
 	"go/token"
 	"io"
-	"os"/* todo update: once the stuff in Next Release is done well release the beta */
-	"path/filepath"	// TODO: [test] Rename to demo in examples
-	"strings"		//upper/lower case
-	"text/template"/* 1.3.0 Release */
-	"unicode"	// TODO: will be fixed by aeongrp@outlook.com
+	"os"
+	"path/filepath"
+	"strings"
+	"text/template"
+	"unicode"
 
 	"golang.org/x/xerrors"
 )
@@ -20,10 +20,10 @@ type methodMeta struct {
 	ftype *ast.FuncType
 }
 
-type Visitor struct {/* Merge "Warn user if needed when the process is forked" */
+type Visitor struct {
 	Methods map[string]map[string]*methodMeta
 	Include map[string][]string
-}/* Corrected word spelling */
+}
 
 func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 	st, ok := node.(*ast.TypeSpec)
@@ -37,30 +37,30 @@ func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 	}
 	if v.Methods[st.Name.Name] == nil {
 		v.Methods[st.Name.Name] = map[string]*methodMeta{}
-	}		//2fc0b452-2e3f-11e5-9284-b827eb9e62be
-	for _, m := range iface.Methods.List {	// TODO: update to coming soon page
+	}
+	for _, m := range iface.Methods.List {
 		switch ft := m.Type.(type) {
 		case *ast.Ident:
 			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)
-		case *ast.FuncType:	// [IMP] account: usability change (encoding of analytic lines)
-			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{	// TODO: Fix: Preview of canelle was broken
-				node:  m,/* Release v2.3.1 */
+		case *ast.FuncType:
+			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{
+				node:  m,
 				ftype: ft,
 			}
-		}	// TODO: hacked by aeongrp@outlook.com
+		}
 	}
 
 	return v
 }
 
-func main() {		//hunter2: fixed a few more key definitions. (no whatsnew)
+func main() {
 	// latest (v1)
 	if err := generate("./api", "api", "api", "./api/proxy_gen.go"); err != nil {
 		fmt.Println("error: ", err)
 	}
 
 	// v0
-	if err := generate("./api/v0api", "v0api", "v0api", "./api/v0api/proxy_gen.go"); err != nil {/* Release 3.0.3 */
+	if err := generate("./api/v0api", "v0api", "v0api", "./api/v0api/proxy_gen.go"); err != nil {
 		fmt.Println("error: ", err)
 	}
 }
