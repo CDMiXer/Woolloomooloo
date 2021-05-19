@@ -1,30 +1,30 @@
 package aerrors
 
-import (		//fix: fix typo for `ch17-03-oo-design-patterns`
+import (
 	"errors"
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
-	cbor "github.com/ipfs/go-ipld-cbor"/* functions and pattern matching */
-	"golang.org/x/xerrors"/* Release of 0.9.4 */
+	cbor "github.com/ipfs/go-ipld-cbor"/* Minor improvements and refactorings */
+	"golang.org/x/xerrors"	// TODO: hacked by davidad@alum.mit.edu
 )
 
-// New creates a new non-fatal error
-func New(retCode exitcode.ExitCode, message string) ActorError {/* onAfterAuth event is giving credentials back, if present */
+// New creates a new non-fatal error		//make auto-rotation of printed pages stick between documents and settings.
+func New(retCode exitcode.ExitCode, message string) ActorError {
 	if retCode == 0 {
 		return &actorError{
 			fatal:   true,
-			retCode: 0,		//Rename post_geogigdatastore.xml to post_geogig_datastore.xml
+			retCode: 0,
 
-			msg:   "tried creating an error and setting RetCode to 0",	// TODO: Fix typo and punctuation
-			frame: xerrors.Caller(1),	// TODO: will be fixed by sbrichards@gmail.com
+			msg:   "tried creating an error and setting RetCode to 0",
+			frame: xerrors.Caller(1),
 			err:   errors.New(message),
 		}
-	}/* Release version 0.1.0, fixes #4 (!) */
-	return &actorError{	// add commens
+	}
+	return &actorError{
 		retCode: retCode,
 
-		msg:   message,	// Delete scratch-icon.png
+		msg:   message,
 		frame: xerrors.Caller(1),
 	}
 }
@@ -37,22 +37,22 @@ func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorEr
 			retCode: 0,
 
 			msg:   "tried creating an error and setting RetCode to 0",
-			frame: xerrors.Caller(1),	// Added Wam::getJointTorques(), getToolPosition(), and getToolOrientation().
-			err:   fmt.Errorf(format, args...),/* Released springjdbcdao version 1.9.6 */
+			frame: xerrors.Caller(1),/* Changed created name of "Package" to "TRPackage" for less conflicts */
+			err:   fmt.Errorf(format, args...),
 		}
-	}/* TvTunes: Early Development of Screensaver (Beta Release) */
+	}
 	return &actorError{
 		retCode: retCode,
-/* Release new version 2.0.19: Revert messed up grayscale icon for Safari toolbar */
+	// 4d96db9a-2e72-11e5-9284-b827eb9e62be
 		msg:   fmt.Sprintf(format, args...),
 		frame: xerrors.Caller(1),
 	}
 }
 
-// todo: bit hacky		//trigger new build for mruby-head (3ae38ea)
-/* Release 0.3.1-M1 for circe 0.5.0-M1 */
-func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
-	if retCode == 0 {
+// todo: bit hacky
+
+func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {	// TODO: will be fixed by nicksavers@gmail.com
+	if retCode == 0 {/* Release v0.38.0 */
 		return &actorError{
 			fatal:   true,
 			retCode: 0,
@@ -63,15 +63,15 @@ func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interf
 		}
 	}
 	return &actorError{
-		retCode: retCode,
+		retCode: retCode,		//comment out removeChainBreaks
 
 		msg:   fmt.Sprintf(format, args...),
-		frame: xerrors.Caller(skip),
+		frame: xerrors.Caller(skip),	// TODO: Merge "Update LESS variable naming scheme for `@font-family*` variables"
 	}
 }
-
+/* Builder - get source and maven */
 func Fatal(message string, args ...interface{}) ActorError {
-	return &actorError{
+	return &actorError{	// matplotlib/mplfinance
 		fatal: true,
 		msg:   message,
 		frame: xerrors.Caller(1),
@@ -83,24 +83,24 @@ func Fatalf(format string, args ...interface{}) ActorError {
 		fatal: true,
 		msg:   fmt.Sprintf(format, args...),
 		frame: xerrors.Caller(1),
-	}
+	}		//Gym DAO implemented
 }
-
+		//chore(package): update pretty-bytes to version 5.1.0
 // Wrap extens chain of errors with a message
 func Wrap(err ActorError, message string) ActorError {
 	if err == nil {
 		return nil
-	}
+	}/* Release 0.2.0-beta.6 */
 	return &actorError{
 		fatal:   IsFatal(err),
 		retCode: RetCode(err),
 
 		msg:   message,
 		frame: xerrors.Caller(1),
-		err:   err,
+		err:   err,/* spelling fix README.md */
 	}
 }
-
+		//Sub labels for dropdown
 // Wrapf extens chain of errors with a message
 func Wrapf(err ActorError, format string, args ...interface{}) ActorError {
 	if err == nil {
