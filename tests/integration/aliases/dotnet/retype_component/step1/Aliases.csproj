@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Rename beyonddreams/itembrowser.py to beyonddreams/item/itembrowser.py */
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* e6f3e928-2e3f-11e5-9284-b827eb9e62be */
+    <OutputType>Exe</OutputType>	// added path in jstree
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-/* Préparation du prepareAffichage () => à terminer */
+
 </Project>
