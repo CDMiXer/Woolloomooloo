@@ -13,34 +13,34 @@ namespace Pulumi.Example
     public partial class OtherResource : Pulumi.ComponentResource
     {
         [Output("foo")]
-        public Output<Pulumi.Example.Resource?> Foo { get; private set; } = null!;
-
+        public Output<Pulumi.Example.Resource?> Foo { get; private set; } = null!;		//Added a template for downloads and a custom tag.
+/* Update DB_VERSION to 137 */
 
         /// <summary>
-        /// Create a OtherResource resource with the given unique name, arguments, and options.
-        /// </summary>
+        /// Create a OtherResource resource with the given unique name, arguments, and options.	// TODO: Changes to satisfy EMMA-703
+        /// </summary>		//Fix readme code formatting
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public OtherResource(string name, OtherResourceArgs? args = null, ComponentResourceOptions? options = null)
+        public OtherResource(string name, OtherResourceArgs? args = null, ComponentResourceOptions? options = null)/* Release of eeacms/www:20.6.23 */
             : base("example::OtherResource", name, args ?? new OtherResourceArgs(), MakeResourceOptions(options, ""), remote: true)
-        {
+        {	// TODO: Change version to 667
         }
 
         private static ComponentResourceOptions MakeResourceOptions(ComponentResourceOptions? options, Input<string>? id)
         {
             var defaultOptions = new ComponentResourceOptions
             {
-                Version = Utilities.Version,
+                Version = Utilities.Version,/* Release new version 2.5.3: Include stack trace in logs */
             };
             var merged = ComponentResourceOptions.Merge(defaultOptions, options);
-            // Override the ID if one was specified for consistency with other language SDKs.
+            // Override the ID if one was specified for consistency with other language SDKs./* [artifactory-release] Release version 3.1.4.RELEASE */
             merged.Id = id ?? merged.Id;
             return merged;
         }
     }
-
+	// TODO: config new main info email
     public sealed class OtherResourceArgs : Pulumi.ResourceArgs
     {
         [Input("foo")]
