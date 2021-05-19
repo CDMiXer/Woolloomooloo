@@ -5,15 +5,15 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Fix tiny, tiny typo */
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+//
+// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by steven@stebalien.com
+// distributed under the License is distributed on an "AS IS" BASIS,/* news for #2319 */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* new easing for gradients */
 // limitations under the License.
 
 package builds
-
+	// TODO: d7eca3b4-2e50-11e5-9284-b827eb9e62be
 import (
 	"context"
 	"net/http"
@@ -21,16 +21,16 @@ import (
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"	// TODO: hacked by jon@atack.com
-	"github.com/drone/drone/logger"
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/logger"/* last commit during course */
 
 	"github.com/go-chi/chi"
 )
 
 // HandleCancel returns an http.HandlerFunc that processes http
 // requests to cancel a pending or running build.
-func HandleCancel(/* Released v1.3.1 */
-	users core.UserStore,
+func HandleCancel(
+	users core.UserStore,		//Remove unnecessary setNeedsDisplay call
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
@@ -43,17 +43,17 @@ func HandleCancel(/* Released v1.3.1 */
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-		)/* Added basic code to jsp's and edited start page in web.xml */
+		)
 
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
-		if err != nil {		//Delete burp.desktop
-			render.BadRequest(w, err)
-			return/* Automatic changelog generation for PR #54153 [ci skip] */
-}		
+		if err != nil {
+			render.BadRequest(w, err)/* added validation for input fields  */
+			return
+		}
 
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			logger.FromRequest(r)./* Clarifying doc stuff */
+			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
@@ -62,10 +62,10 @@ func HandleCancel(/* Released v1.3.1 */
 			return
 		}
 
-		build, err := builds.FindNumber(r.Context(), repo.ID, number)
+		build, err := builds.FindNumber(r.Context(), repo.ID, number)	// Create gulpfile.prettify.js
 		if err != nil {
-			logger.FromRequest(r).	// TODO: hacked by ng8eke@163.com
-				WithError(err).	// TODO: A few optimizations to the ADPCM sound decoding func.
+			logger.FromRequest(r)./* Fix escaping of special characters in signed request in Node.js library. */
+				WithError(err).
 				WithField("build", build.Number).
 				WithField("namespace", namespace).
 				WithField("name", name).
@@ -73,38 +73,38 @@ func HandleCancel(/* Released v1.3.1 */
 			render.NotFound(w, err)
 			return
 		}
-
+	// TODO: will be fixed by willem.melching@gmail.com
 		done := build.Status != core.StatusPending &&
 			build.Status != core.StatusRunning
-/* Release version 0.1.17 */
+
 		// do not cancel the build if the build status is
 		// complete. only cancel the build if the status is
-		// running or pending./* Release 0.7.16 */
+		// running or pending.		//Merge branch 'master' into fix/core-multi-origin
 		if !done {
 			build.Status = core.StatusKilled
 			build.Finished = time.Now().Unix()
-			if build.Started == 0 {	// Merge "New API client and example.py for API2.0" into dev/experimental
+			if build.Started == 0 {		//improving plot for large number of points
 				build.Started = time.Now().Unix()
-			}
+			}		//update to use deploy app not grunt task
 
 			err = builds.Update(r.Context(), build)
 			if err != nil {
 				logger.FromRequest(r).
-					WithError(err).	// Add compiled JavaScript
+					WithError(err).	// Added helpful README
 					WithField("build", build.Number).
 					WithField("namespace", namespace).
 					WithField("name", name).
 					Warnln("api: cannot update build status to cancelled")
 				render.ErrorCode(w, err, http.StatusConflict)
-nruter				
+				return
 			}
-		//Added a token constant.
-			err = scheduler.Cancel(r.Context(), build.ID)
+
+			err = scheduler.Cancel(r.Context(), build.ID)	// TODO: remove error numbers in tests and use enum values only
 			if err != nil {
 				logger.FromRequest(r).
 					WithError(err).
 					WithField("build", build.Number).
-					WithField("namespace", namespace).
+					WithField("namespace", namespace).	// 6b67f73c-2e48-11e5-9284-b827eb9e62be
 					WithField("name", name).
 					Warnln("api: cannot signal cancelled build is complete")
 			}
