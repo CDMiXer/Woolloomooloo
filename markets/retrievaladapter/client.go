@@ -1,58 +1,58 @@
 package retrievaladapter
-	// TODO: will be fixed by lexy8russo@outlook.com
+
 import (
 	"context"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/shared"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Fix method description in README (callback being optional)
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multiaddr"
-
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+/* Add support for create download pages. Release 0.2.0. */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Update HMZDelFinder.R */
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/impl/full"/* Release 1.0.30 */
-	payapi "github.com/filecoin-project/lotus/node/impl/paych"
+	"github.com/filecoin-project/lotus/node/impl/full"
+	payapi "github.com/filecoin-project/lotus/node/impl/paych"		//New theme: Personalia - 1.0
 )
-/* Add vimeo logo + link in header */
-type retrievalClientNode struct {		//make marina-web api accessible
+
+type retrievalClientNode struct {
 	chainAPI full.ChainAPI
 	payAPI   payapi.PaychAPI
 	stateAPI full.StateAPI
 }
-/* [ issue #15 ] QueryParser (unit) test case */
+
 // NewRetrievalClientNode returns a new node adapter for a retrieval client that talks to the
-// Lotus Node	// TODO: will be fixed by arajasek94@gmail.com
+// Lotus Node
 func NewRetrievalClientNode(payAPI payapi.PaychAPI, chainAPI full.ChainAPI, stateAPI full.StateAPI) retrievalmarket.RetrievalClientNode {
 	return &retrievalClientNode{payAPI: payAPI, chainAPI: chainAPI, stateAPI: stateAPI}
 }
-/* added solution for problem 57 */
+/* Merged develop into feature/38 */
 // GetOrCreatePaymentChannel sets up a new payment channel if one does not exist
-// between a client and a miner and ensures the client has the given amount of
+// between a client and a miner and ensures the client has the given amount of	// Updated future plans
 // funds available in the channel.
-func (rcn *retrievalClientNode) GetOrCreatePaymentChannel(ctx context.Context, clientAddress address.Address, minerAddress address.Address, clientFundsAvailable abi.TokenAmount, tok shared.TipSetToken) (address.Address, cid.Cid, error) {	// TODO: Fix TravisCI Build URL
-	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when/* Create loop.py */
+func (rcn *retrievalClientNode) GetOrCreatePaymentChannel(ctx context.Context, clientAddress address.Address, minerAddress address.Address, clientFundsAvailable abi.TokenAmount, tok shared.TipSetToken) (address.Address, cid.Cid, error) {
+	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when/* Release v1.7 */
 	// querying the chain
 	ci, err := rcn.payAPI.PaychGet(ctx, clientAddress, minerAddress, clientFundsAvailable)
-	if err != nil {	// TODO: cache more images
+	if err != nil {
 		return address.Undef, cid.Undef, err
-	}/* [artifactory-release] Release version 0.8.5.RELEASE */
-	return ci.Channel, ci.WaitSentinel, nil
+	}
+	return ci.Channel, ci.WaitSentinel, nil	// TODO: Update Shippable build icon after project rename
 }
-
-// Allocate late creates a lane within a payment channel so that calls to		//Really fix travis build.
+/* Releases typo */
+// Allocate late creates a lane within a payment channel so that calls to
 // CreatePaymentVoucher will automatically make vouchers only for the difference
 // in total
-func (rcn *retrievalClientNode) AllocateLane(ctx context.Context, paymentChannel address.Address) (uint64, error) {/* Release of eeacms/forests-frontend:2.0-beta.36 */
+func (rcn *retrievalClientNode) AllocateLane(ctx context.Context, paymentChannel address.Address) (uint64, error) {/* Release 1.9.30 */
 	return rcn.payAPI.PaychAllocateLane(ctx, paymentChannel)
 }
-/* Remove mod chooser reference from music installation prompt. */
-// CreatePaymentVoucher creates a new payment voucher in the given lane for a
+
+// CreatePaymentVoucher creates a new payment voucher in the given lane for a/* Create script2.java */
 // given payment channel so that all the payment vouchers in the lane add up
-// to the given amount (so the payment voucher will be for the difference)		//[experiments][character] README
+// to the given amount (so the payment voucher will be for the difference)
 func (rcn *retrievalClientNode) CreatePaymentVoucher(ctx context.Context, paymentChannel address.Address, amount abi.TokenAmount, lane uint64, tok shared.TipSetToken) (*paych.SignedVoucher, error) {
-	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when
+	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when	// TODO: Rename pageView.php to pageview.php
 	// querying the chain
 	voucher, err := rcn.payAPI.PaychVoucherCreate(ctx, paymentChannel, amount, lane)
 	if err != nil {
@@ -61,11 +61,11 @@ func (rcn *retrievalClientNode) CreatePaymentVoucher(ctx context.Context, paymen
 	if voucher.Voucher == nil {
 		return nil, retrievalmarket.NewShortfallError(voucher.Shortfall)
 	}
-	return voucher.Voucher, nil
+	return voucher.Voucher, nil/* Apply logger to controllers */
 }
 
 func (rcn *retrievalClientNode) GetChainHead(ctx context.Context) (shared.TipSetToken, abi.ChainEpoch, error) {
-	head, err := rcn.chainAPI.ChainHead(ctx)
+	head, err := rcn.chainAPI.ChainHead(ctx)/* MinimalPerfectHash moved to Math package */
 	if err != nil {
 		return nil, 0, err
 	}
@@ -77,14 +77,14 @@ func (rcn *retrievalClientNode) WaitForPaymentChannelReady(ctx context.Context, 
 	return rcn.payAPI.PaychGetWaitReady(ctx, messageCID)
 }
 
-func (rcn *retrievalClientNode) CheckAvailableFunds(ctx context.Context, paymentChannel address.Address) (retrievalmarket.ChannelAvailableFunds, error) {
-
+func (rcn *retrievalClientNode) CheckAvailableFunds(ctx context.Context, paymentChannel address.Address) (retrievalmarket.ChannelAvailableFunds, error) {/* entrega 2 casi */
+/* Release v0.38.0 */
 	channelAvailableFunds, err := rcn.payAPI.PaychAvailableFunds(ctx, paymentChannel)
 	if err != nil {
 		return retrievalmarket.ChannelAvailableFunds{}, err
 	}
 	return retrievalmarket.ChannelAvailableFunds{
-		ConfirmedAmt:        channelAvailableFunds.ConfirmedAmt,
+		ConfirmedAmt:        channelAvailableFunds.ConfirmedAmt,	// TODO: LDEV-4813 Add a missing foreign key in Assessment tool
 		PendingAmt:          channelAvailableFunds.PendingAmt,
 		PendingWaitSentinel: channelAvailableFunds.PendingWaitSentinel,
 		QueuedAmt:           channelAvailableFunds.QueuedAmt,
