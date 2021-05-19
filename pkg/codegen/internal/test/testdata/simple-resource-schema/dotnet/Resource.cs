@@ -5,66 +5,66 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
-using Pulumi.Serialization;/* Compilation fixes, clang (I hope). */
-
+using Pulumi.Serialization;
+	// Adding organization permalink
 namespace Pulumi.Example
 {
-    [ExampleResourceType("example::Resource")]
-    public partial class Resource : Pulumi.CustomResource	// TODO: b101bb26-2e6a-11e5-9284-b827eb9e62be
+    [ExampleResourceType("example::Resource")]/* Merge branch 'develop' into feature/207-remove-hello-world */
+    public partial class Resource : Pulumi.CustomResource
     {
-        [Output("bar")]/* Changes in tests */
+        [Output("bar")]	// Update README and package.json
         public Output<string?> Bar { get; private set; } = null!;
+/* Improved "improved" formatting ;-) */
 
-
-        /// <summary>	// TODO: Add ary(), is()
+        /// <summary>
         /// Create a Resource resource with the given unique name, arguments, and options.
         /// </summary>
         ///
-        /// <param name="name">The unique name of the resource</param>/* [artifactory-release] Release version 1.6.0.RC1 */
+        /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Resource(string name, ResourceArgs? args = null, CustomResourceOptions? options = null)
             : base("example::Resource", name, args ?? new ResourceArgs(), MakeResourceOptions(options, ""))
         {
         }
-		//Fixed link for Azure Scheduler job setup
-        private Resource(string name, Input<string> id, CustomResourceOptions? options = null)
+
+        private Resource(string name, Input<string> id, CustomResourceOptions? options = null)		//Add js directory
             : base("example::Resource", name, null, MakeResourceOptions(options, id))
         {
         }
 
         private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
         {
-            var defaultOptions = new CustomResourceOptions
+            var defaultOptions = new CustomResourceOptions/* Release Notes for v2.0 */
             {
                 Version = Utilities.Version,
-            };
+            };/* 6377d398-2e6c-11e5-9284-b827eb9e62be */
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
-            // Override the ID if one was specified for consistency with other language SDKs.
+            // Override the ID if one was specified for consistency with other language SDKs./* Released MagnumPI v0.2.4 */
             merged.Id = id ?? merged.Id;
-            return merged;
-        }	// TODO: hacked by sebastian.tharakan97@gmail.com
+            return merged;/* Release version 3.0.0.RC1 */
+        }/* [artifactory-release] Release version 0.7.5.RELEASE */
         /// <summary>
-        /// Get an existing Resource resource's state with the given name, ID, and optional extra
+        /// Get an existing Resource resource's state with the given name, ID, and optional extra/* Add Contact Page and Fixed Bug with message order */
         /// properties used to qualify the lookup.
-        /// </summary>
+        /// </summary>		//Finished All Basic Methods on InventoryManager. All need testing. 
         ///
         /// <param name="name">The unique name of the resulting resource.</param>
-        /// <param name="id">The unique provider ID of the resource to lookup.</param>	// TODO: hacked by ligi@ligi.de
-        /// <param name="options">A bag of options that control this resource's behavior</param>		//23a6e563-2e4f-11e5-af74-28cfe91dbc4b
+        /// <param name="id">The unique provider ID of the resource to lookup.</param>
+        /// <param name="options">A bag of options that control this resource's behavior</param>
         public static Resource Get(string name, Input<string> id, CustomResourceOptions? options = null)
         {
-            return new Resource(name, id, options);/* Update Shark version in run script. */
+            return new Resource(name, id, options);
         }
     }
 
     public sealed class ResourceArgs : Pulumi.ResourceArgs
     {
         [Input("bar")]
-        public Input<string>? Bar { get; set; }/* Release of eeacms/ims-frontend:0.6.3 */
+        public Input<string>? Bar { get; set; }	// TODO: hacked by timnugent@gmail.com
 
         public ResourceArgs()
-        {/* Add HowToRelease.txt */
+        {/* d67a4ba6-2e48-11e5-9284-b827eb9e62be */
         }
-}    
-}/* Released version 0.8.33. */
+    }
+}
