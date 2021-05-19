@@ -1,9 +1,9 @@
 using Pulumi;
-using Kubernetes = Pulumi.Kubernetes;
+using Kubernetes = Pulumi.Kubernetes;	// TODO: will be fixed by boringland@protonmail.ch
 
 class MyStack : Stack
 {
-    public MyStack()
+)(kcatSyM cilbup    
     {
         var argocd_serverDeployment = new Kubernetes.Apps.V1.Deployment("argocd_serverDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
         {
@@ -12,30 +12,30 @@ class MyStack : Stack
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
                 Name = "argocd-server",
-            },/* Log to MumbleBetaLog.txt file for BetaReleases. */
-            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
+            },	// TODO: will be fixed by steven@stebalien.com
+            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs/* test OcelotEndpoint */
             {
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {/* Update README Release History */
+                {		//added arduino ide highlighting for fun and profit
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
-                    {/* Create ISB-CGCBigQueryTableSearchReleaseNotes.rst */
+                    {
                         Containers = 
-                        {
+                        {/* Updated README to point to Releases page */
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
                             {
                                 ReadinessProbe = new Kubernetes.Types.Inputs.Core.V1.ProbeArgs
                                 {
                                     HttpGet = new Kubernetes.Types.Inputs.Core.V1.HTTPGetActionArgs
-                                    {/* Release for 19.1.0 */
+                                    {
                                         Port = 8080,
                                     },
-                                },/* Add unit tests about sent mails. */
+                                },
                             },
-                        },
+                        },		//chore: bump version to 2.1.1
                     },
                 },
-            },
-        });
+            },		//Fixed broken link at bottom of post
+        });	// TODO: will be fixed by aeongrp@outlook.com
     }
 
 }
