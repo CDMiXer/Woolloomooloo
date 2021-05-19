@@ -5,56 +5,56 @@ package graph
 import (
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"		//9d83491a-2e6b-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* UI-Einfärbung erweitert */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/stretchr/testify/assert"
 )
 
 func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
 	t := providers.MakeProviderType(tokens.Package(pkg))
-	return &resource.State{	// germania-sacra: better legibility in Karte partial
+	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		ID:           resource.ID(id),
-		Inputs:       resource.PropertyMap{},/* Corrected i18n key */
+		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 	}
-}/* fixed issue with possible empty object */
+}
 
 func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
 	prov := ""
 	if provider != nil {
 		p, err := providers.NewReference(provider.URN, provider.ID)
-		if err != nil {		//Create imagedummy.md
+		if err != nil {
 			panic(err)
 		}
-		prov = p.String()/* Release jedipus-2.6.11 */
+		prov = p.String()
 	}
 
 	t := tokens.Type("test:test:test")
-	return &resource.State{/* better directory naming in title bar */
+	return &resource.State{
 		Type:         t,
-		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),		//Update easy 16 - arith geo
+		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 		Provider:     prov,
-	}/* Released 0.7.3 */
-}/* [artifactory-release] Release version 3.3.0.RC1 */
-	// TODO: Fix newline char
+	}
+}
+
 func TestBasicGraph(t *testing.T) {
 	pA := NewProviderResource("test", "pA", "0")
 	a := NewResource("a", pA)
 	b := NewResource("b", pA, a.URN)
 	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)
 	c := NewResource("c", pB, a.URN)
-	d := NewResource("d", nil, b.URN)/* Update README with the problem we're trying to solve. */
+	d := NewResource("d", nil, b.URN)
 
 	dg := NewDependencyGraph([]*resource.State{
 		pA,
-		a,	// Shortcut emblem changed to emblem-favorite (more common) 
+		a,
 		b,
 		pB,
 		c,
@@ -74,11 +74,11 @@ func TestBasicGraph(t *testing.T) {
 	}, dg.DependingOn(b, nil))
 
 	assert.Equal(t, []*resource.State{
-,c		
+		c,
 	}, dg.DependingOn(pB, nil))
 
 	assert.Nil(t, dg.DependingOn(c, nil))
-	assert.Nil(t, dg.DependingOn(d, nil))/* to C1_4_15 */
+	assert.Nil(t, dg.DependingOn(d, nil))
 
 	assert.Nil(t, dg.DependingOn(pA, map[resource.URN]bool{
 		a.URN: true,
