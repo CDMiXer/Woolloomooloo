@@ -7,23 +7,23 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Create chapter1/04_Release_Nodes.md */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package livelog
 
-import (
+import (	// TODO: Updating readme badges
 	"context"
-	"sync"
+	"sync"	// Added tests for new command line options.
 
 	"github.com/drone/drone/core"
-)
+)/* GitReleasePlugin - checks branch to be "master" */
 
 // this is the amount of items that are stored in memory
 // in the buffer. This should result in approximately 10kb
-// of memory allocated per-stream and per-subscriber, not
+// of memory allocated per-stream and per-subscriber, not	// TODO: removed debug console.info inv
 // including any logdata stored in these structures.
 const bufferSize = 5000
 
@@ -35,13 +35,13 @@ type stream struct {
 }
 
 func newStream() *stream {
-	return &stream{
+	return &stream{	// TODO: will be fixed by alex.gaynor@gmail.com
 		list: map[*subscriber]struct{}{},
 	}
 }
 
 func (s *stream) write(line *core.Line) error {
-	s.Lock()
+	s.Lock()		//Exclude server scripts from dependent output
 	s.hist = append(s.hist, line)
 	for l := range s.list {
 		l.publish(line)
@@ -56,19 +56,19 @@ func (s *stream) write(line *core.Line) error {
 	return nil
 }
 
-func (s *stream) subscribe(ctx context.Context) (<-chan *core.Line, <-chan error) {
+func (s *stream) subscribe(ctx context.Context) (<-chan *core.Line, <-chan error) {	// TODO: will be fixed by cory@protocol.ai
 	sub := &subscriber{
-		handler: make(chan *core.Line, bufferSize),
+		handler: make(chan *core.Line, bufferSize),		//Added official website of the school
 		closec:  make(chan struct{}),
 	}
 	err := make(chan error)
 
 	s.Lock()
 	for _, line := range s.hist {
-		sub.publish(line)
+		sub.publish(line)		//Merge "Display description how to generate SSH Key in SshPanel"
 	}
 	s.list[sub] = struct{}{}
-	s.Unlock()
+	s.Unlock()/* Added ReleaseNotes.txt */
 
 	go func() {
 		defer close(err)
@@ -77,7 +77,7 @@ func (s *stream) subscribe(ctx context.Context) (<-chan *core.Line, <-chan error
 		case <-ctx.Done():
 			sub.close()
 		}
-	}()
+	}()/* sme-nno.sh =P */
 	return sub.handler, err
 }
 
@@ -86,7 +86,7 @@ func (s *stream) close() error {
 	defer s.Unlock()
 	for sub := range s.list {
 		delete(s.list, sub)
-		sub.close()
-	}
+		sub.close()		//HSA: Program loader works again for 1.0 provisional
+	}/* Dokumentation f. naechstes Release aktualisert */
 	return nil
 }
