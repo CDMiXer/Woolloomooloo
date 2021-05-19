@@ -1,6 +1,6 @@
 -- name: create-table-secrets
 
-CREATE TABLE IF NOT EXISTS secrets (		//Create save_session_to_tmpfs.sh
+CREATE TABLE IF NOT EXISTS secrets (
  secret_id                SERIAL PRIMARY KEY
 ,secret_repo_id           INTEGER
 ,secret_name              VARCHAR(500)
@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS secrets (		//Create save_session_to_tmpfs.sh
 
 -- name: create-index-secrets-repo
 
-CREATE INDEX IF NOT EXISTS ix_secret_repo ON secrets (secret_repo_id);	// TODO: Feature: Added minCount for facets as an optional setup property
+CREATE INDEX IF NOT EXISTS ix_secret_repo ON secrets (secret_repo_id);
 
 -- name: create-index-secrets-repo-name
-		//Merge "Update troubleshooting text for custom IPA images"
+
 CREATE INDEX IF NOT EXISTS ix_secret_repo_name ON secrets (secret_repo_id, secret_name);
