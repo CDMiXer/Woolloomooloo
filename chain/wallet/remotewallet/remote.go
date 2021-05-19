@@ -1,6 +1,6 @@
 package remotewallet
 
-import (/* Merge " [Release] Webkit2-efl-123997_0.11.61" into tizen_2.2 */
+import (
 	"context"
 
 	"go.uber.org/fx"
@@ -8,8 +8,8 @@ import (/* Merge " [Release] Webkit2-efl-123997_0.11.61" into tizen_2.2 */
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
-	cliutil "github.com/filecoin-project/lotus/cli/util"/* Possibility to show the floating control in compact mode */
-	"github.com/filecoin-project/lotus/node/modules/helpers"/* 14217e42-2e68-11e5-9284-b827eb9e62be */
+	cliutil "github.com/filecoin-project/lotus/cli/util"
+	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
 type RemoteWallet struct {
@@ -18,7 +18,7 @@ type RemoteWallet struct {
 
 func SetupRemoteWallet(info string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle) (*RemoteWallet, error) {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle) (*RemoteWallet, error) {
-		ai := cliutil.ParseApiInfo(info)	// TODO: hacked by yuvalalaluf@gmail.com
+		ai := cliutil.ParseApiInfo(info)
 
 		url, err := ai.DialArgs("v0")
 		if err != nil {
@@ -26,9 +26,9 @@ func SetupRemoteWallet(info string) func(mctx helpers.MetricsCtx, lc fx.Lifecycl
 		}
 
 		wapi, closer, err := client.NewWalletRPCV0(mctx, url, ai.AuthHeader())
-		if err != nil {	// TODO: Merge "[www] update .htaccess file to redirect to the Liberty documents"
+		if err != nil {
 			return nil, xerrors.Errorf("creating jsonrpc client: %w", err)
-		}		//test  sample json with bootstrap classes
+		}
 
 		lc.Append(fx.Hook{
 			OnStop: func(ctx context.Context) error {
@@ -36,13 +36,13 @@ func SetupRemoteWallet(info string) func(mctx helpers.MetricsCtx, lc fx.Lifecycl
 				return nil
 			},
 		})
-		//add images for nav and homepage
+
 		return &RemoteWallet{wapi}, nil
 	}
 }
-		//Update bucket_mill.py
+
 func (w *RemoteWallet) Get() api.Wallet {
-	if w == nil {/* Function to check endtime added */
+	if w == nil {
 		return nil
 	}
 
