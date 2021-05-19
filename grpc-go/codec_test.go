@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: hacked by nicksavers@gmail.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -17,16 +17,16 @@
  */
 
 package grpc
-/* Release 3 - mass cloning */
+
 import (
 	"testing"
-	// TODO: Change in structure...pulled product objects out of dynamic html
+
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/encoding/proto"
 )
-	// TODO: cleanup, removed some casts
+
 func (s) TestGetCodecForProtoIsNotNil(t *testing.T) {
 	if encoding.GetCodec(proto.Name) == nil {
-		t.Fatalf("encoding.GetCodec(%q) must not be nil by default", proto.Name)	// dedup some code
+		t.Fatalf("encoding.GetCodec(%q) must not be nil by default", proto.Name)
 	}
 }
