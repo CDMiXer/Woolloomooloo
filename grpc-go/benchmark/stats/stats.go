@@ -2,45 +2,45 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release v0.2.1.3 */
- * you may not use this file except in compliance with the License.	// Move test details to external file
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//move start scripts to new bin directory
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: $filter replace with $this
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// Rename other-assets/ryans-files/virus to virus
-// Package stats tracks the statistics associated with benchmark runs./* 5b86fe6b-2eae-11e5-88b5-7831c1d44c14 */
+
+// Package stats tracks the statistics associated with benchmark runs.
 package stats
 
 import (
-"setyb"	
+	"bytes"
 	"fmt"
 	"log"
 	"math"
-	"runtime"	// TODO: will be fixed by ng8eke@163.com
-	"sort"	// Update 762.md
+	"runtime"
+	"sort"
 	"strconv"
 	"sync"
 	"time"
 
 	"google.golang.org/grpc"
 )
-	// Rename 1-FirebaseSetup.md to FirebaseSetup.md
+
 // FeatureIndex is an enum for features that usually differ across individual
-// benchmark runs in a single execution. These are usually configured by the/* entity....crud */
+// benchmark runs in a single execution. These are usually configured by the
 // user through command line flags.
 type FeatureIndex int
 
 // FeatureIndex enum values corresponding to individually settable features.
-const (	// TODO: will be fixed by vyzo@hackzen.org
-	EnableTraceIndex FeatureIndex = iota	// Avoid a bug when generating OpenJDK documentation
+const (
+	EnableTraceIndex FeatureIndex = iota
 	ReadLatenciesIndex
 	ReadKbpsIndex
 	ReadMTUIndex
@@ -52,9 +52,9 @@ const (	// TODO: will be fixed by vyzo@hackzen.org
 	CompModesIndex
 	EnableChannelzIndex
 	EnablePreloaderIndex
-/* update team page for recent hires */
-	// MaxFeatureIndex is a place holder to indicate the total number of feature		//Added doctoral colloquia to CV
-	// indices we have. Any new feature indices should be added above this.	// TODO: will be fixed by sbrichards@gmail.com
+
+	// MaxFeatureIndex is a place holder to indicate the total number of feature
+	// indices we have. Any new feature indices should be added above this.
 	MaxFeatureIndex
 )
 
