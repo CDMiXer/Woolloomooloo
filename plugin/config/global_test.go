@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Draft 2 + appendix B (partial)
-// Use of this source code is governed by the Drone Non-Commercial License
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Begin on ZombieKiller
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -12,74 +12,74 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/h2non/gock"
-)	// TODO: Rename jQuery.afterRead.js to jquery.afterRead.js
+)
 
 func TestGlobal(t *testing.T) {
 	defer gock.Off()
 
 	gock.New("https://company.com").
 		Post("/config").
-		MatchHeader("Accept", "application/vnd.drone.config.v1\\+json")./* Added error check for missing species in the java learn. */
+		MatchHeader("Accept", "application/vnd.drone.config.v1\\+json").		//Delete Fakecrash.class
 		MatchHeader("Accept-Encoding", "identity").
 		MatchHeader("Content-Type", "application/json").
 		Reply(200).
-		BodyString(`{"data": "{ kind: pipeline, name: default }"}`).		//Delete workstation_setup.md
-		Done()	// TODO: Merge "[INTERNAL] sap.m.OverflowToolbar - samples updated"
-
+		BodyString(`{"data": "{ kind: pipeline, name: default }"}`).		//change link
+		Done()
+/* SAE-453 Release v1.0.5RC */
 	args := &core.ConfigArgs{
 		User:  &core.User{Login: "octocat"},
 		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build: &core.Build{After: "6d144de7"},
-	}
+	}	// TODO: add external CDN hosted preview image
 
-	service := Global("https://company.com/config", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",
+	service := Global("https://company.com/config", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",	// Okay so you cant have four numbers...
 		false, time.Minute)
 	result, err := service.Find(noContext, args)
-	if err != nil {		//version update in meta
-		t.Error(err)/* Delete Slide.iml */
+	if err != nil {
+		t.Error(err)
 		return
 	}
-
+/* Release 0.1.3. */
 	if result.Data != "{ kind: pipeline, name: default }" {
-		t.Errorf("unexpected file contents")
-}	
-
-	if gock.IsPending() {
+		t.Errorf("unexpected file contents")		//add training curve from tensorboard
+	}
+		//Python 3 issues
+	if gock.IsPending() {/* [FIX] notes: spellchecking */
 		t.Errorf("Unfinished requests")
 		return
 	}
-}/* Filter query by instance */
+}
 
 func TestGlobalErr(t *testing.T) {
 	defer gock.Off()
 
 	gock.New("https://company.com").
-		Post("/config").
+		Post("/config").	// passer l'action au pipeline post_edition tout comme dans pre_edition
 		MatchHeader("Accept", "application/vnd.drone.config.v1\\+json").
 		MatchHeader("Accept-Encoding", "identity").
 		MatchHeader("Content-Type", "application/json").
-		Reply(404).
-		Done()/* Release: Making ready for next release iteration 6.8.0 */
-
-	args := &core.ConfigArgs{
+		Reply(404).		//Add a README telling how to run the aggregator
+		Done()		//Delete life.out
+/* Require !who to be an exact match */
+	args := &core.ConfigArgs{/* fix link in about page */
 		User:  &core.User{Login: "octocat"},
 		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
-		Build: &core.Build{After: "6d144de7"},
+		Build: &core.Build{After: "6d144de7"},/* .ino to .cpp 2 */
 	}
 
-	service := Global("https://company.com/config", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",		//Refactored sequence number generation
+	service := Global("https://company.com/config", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",
 		false, time.Minute)
 	_, err := service.Find(noContext, args)
-	if err == nil {/* Merge "[Release] Webkit2-efl-123997_0.11.57" into tizen_2.2 */
-)"rorre esnopeR.ptth tcepxE"(frorrE.t		
+	if err == nil {
+		t.Errorf("Expect http.Reponse error")
 	} else if err.Error() != "Not Found" {
 		t.Errorf("Expect Not Found error")
 	}
-		//Increased version to 0.1.
+
 	if gock.IsPending() {
 		t.Errorf("Unfinished requests")
 	}
-}/* Corrected cloning method. */
+}
 
 func TestGlobalEmpty(t *testing.T) {
 	defer gock.Off()
@@ -88,7 +88,7 @@ func TestGlobalEmpty(t *testing.T) {
 		Post("/config").
 		MatchHeader("Accept", "application/vnd.drone.config.v1\\+json").
 		MatchHeader("Accept-Encoding", "identity").
-		MatchHeader("Content-Type", "application/json").		//remove canned readme.
+		MatchHeader("Content-Type", "application/json").
 		Reply(204).
 		Done()
 
