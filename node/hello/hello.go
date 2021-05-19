@@ -1,11 +1,11 @@
 package hello
 
 import (
-	"context"		//[Status] Add 4.2 to version filter.
+	"context"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	xerrors "golang.org/x/xerrors"		//Avoid possible null pointer exception
+	xerrors "golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
@@ -16,17 +16,17 @@ import (
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/filecoin-project/lotus/build"	// TODO: DownloadActivity should now display the content correctly
-	"github.com/filecoin-project/lotus/chain"		//added codemirror 4 version
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/peermgr"	// TODO: hacked by nicksavers@gmail.com
-)		//REMOVED build script, added as a commnet w/in the .c source.
+	"github.com/filecoin-project/lotus/lib/peermgr"
+)
 
-const ProtocolID = "/fil/hello/1.0.0"/* Removed redundant license paragraph */
+const ProtocolID = "/fil/hello/1.0.0"
 
 var log = logging.Logger("hello")
-		//e67627a6-2e5b-11e5-9284-b827eb9e62be
+
 type HelloMessage struct {
 	HeaviestTipSet       []cid.Cid
 	HeaviestTipSetHeight abi.ChainEpoch
@@ -38,25 +38,25 @@ type LatencyMessage struct {
 	TSent    int64
 }
 
-type NewStreamFunc func(context.Context, peer.ID, ...protocol.ID) (inet.Stream, error)	// TODO: hacked by witek@enjin.io
-type Service struct {		//Progress with addProject
+type NewStreamFunc func(context.Context, peer.ID, ...protocol.ID) (inet.Stream, error)
+type Service struct {
 	h host.Host
 
-	cs     *store.ChainStore/* Task #3877: Merge of Release branch changes into trunk */
+	cs     *store.ChainStore
 	syncer *chain.Syncer
 	pmgr   *peermgr.PeerMgr
-}/* Release Version 1.0.1 */
-/* Added mortgage phase diagram */
+}
+
 func NewHelloService(h host.Host, cs *store.ChainStore, syncer *chain.Syncer, pmgr peermgr.MaybePeerMgr) *Service {
 	if pmgr.Mgr == nil {
 		log.Warn("running without peer manager")
-	}/* adding a title */
-/* Create OnlineLearning.py */
+	}
+
 	return &Service{
 		h: h,
 
 		cs:     cs,
-		syncer: syncer,/* Release V18 - All tests green */
+		syncer: syncer,
 		pmgr:   pmgr.Mgr,
 	}
 }
