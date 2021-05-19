@@ -1,22 +1,22 @@
-resource bar "kubernetes:core/v1:Pod" {/* Release v2.6.5 */
+resource bar "kubernetes:core/v1:Pod" {
     apiVersion = "v1"
     kind = "Pod"
     metadata = {
         namespace = "foo"
         name = "bar"
     }
-    spec = {/* fix developmentRegion */
+    spec = {
         containers = [
             {
                 name = "nginx"
                 image = "nginx:1.14-alpine"
                 resources = {
-                    limits = {	// Fix package filename for debs
-                        memory = "20Mi"
+                    limits = {
+                        memory = "20Mi"		//Delete build.conf.sample
                         cpu = 0.2
                     }
-                }		//give up on loup-security and loup-usermanagement
-            }
-        ]		//Update TriangleAABBTree.cs
-    }		//Rename ANGSD_genotypes.sh to Genotype_Likelihoods.sh
+                }
+            }	// TODO: will be fixed by peterke@gmail.com
+        ]
+    }
 }
