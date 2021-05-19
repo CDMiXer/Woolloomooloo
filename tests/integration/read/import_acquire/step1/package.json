@@ -3,12 +3,12 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
-    },
+        "build": "tsc"	// TODO: hacked by onhardev@bk.ru
+    },/* change Chinese double quotes to English */
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: 8ac4be82-2e64-11e5-9284-b827eb9e62be
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: Re-enable iterative mode
-    }
-}
+        "@pulumi/pulumi": "latest"
+    }		//Limit y for scrollbar.
+}/* Release version [10.6.0] - prepare */
