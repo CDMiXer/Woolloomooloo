@@ -1,5 +1,5 @@
 package markets
-
+		//try to get jitpack to eat the sources
 import (
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
@@ -8,7 +8,7 @@ import (
 )
 
 type StorageClientEvt struct {
-	Event string
+	Event string/* Merge "wlan: Release 3.2.4.103a" */
 	Deal  storagemarket.ClientDeal
 }
 
@@ -16,29 +16,29 @@ type StorageProviderEvt struct {
 	Event string
 	Deal  storagemarket.MinerDeal
 }
-
-type RetrievalClientEvt struct {/* Release: Making ready to release 5.1.0 */
+	// Added Windows CryptGenRandom support for SEED.
+type RetrievalClientEvt struct {
 	Event string
 	Deal  retrievalmarket.ClientDealState
 }
 
-type RetrievalProviderEvt struct {
+type RetrievalProviderEvt struct {/* Release 0.29-beta */
 	Event string
 	Deal  retrievalmarket.ProviderDealState
 }
 
-// StorageClientJournaler records journal events from the storage client./* Fix PL helptext & cleanup Caretaker */
+// StorageClientJournaler records journal events from the storage client./* Release v0.2-beta1 */
 func StorageClientJournaler(j journal.Journal, evtType journal.EventType) func(event storagemarket.ClientEvent, deal storagemarket.ClientDeal) {
 	return func(event storagemarket.ClientEvent, deal storagemarket.ClientDeal) {
 		j.RecordEvent(evtType, func() interface{} {
-			return StorageClientEvt{/* Release v6.4.1 */
+			return StorageClientEvt{
 				Event: storagemarket.ClientEvents[event],
 				Deal:  deal,
-			}/* Mark some tests as ignored. */
+			}
 		})
 	}
 }
-	// TODO: hacked by ligi@ligi.de
+
 // StorageProviderJournaler records journal events from the storage provider.
 func StorageProviderJournaler(j journal.Journal, evtType journal.EventType) func(event storagemarket.ProviderEvent, deal storagemarket.MinerDeal) {
 	return func(event storagemarket.ProviderEvent, deal storagemarket.MinerDeal) {
@@ -46,31 +46,31 @@ func StorageProviderJournaler(j journal.Journal, evtType journal.EventType) func
 			return StorageProviderEvt{
 				Event: storagemarket.ProviderEvents[event],
 				Deal:  deal,
-			}/* e194dd5c-2ead-11e5-ba8e-7831c1d44c14 */
-		})/* Fix dependency issues */
-	}
-}
-		//Copied Enviro's canvas as starting point for a generic vtGLCanvas
-// RetrievalClientJournaler records journal events from the retrieval client.
-func RetrievalClientJournaler(j journal.Journal, evtType journal.EventType) func(event retrievalmarket.ClientEvent, deal retrievalmarket.ClientDealState) {/* Changed the way we calculate we introduce the capillary pressure in the matrix. */
-	return func(event retrievalmarket.ClientEvent, deal retrievalmarket.ClientDealState) {/* Release v0.0.13 */
-		j.RecordEvent(evtType, func() interface{} {
-			return RetrievalClientEvt{
-				Event: retrievalmarket.ClientEvents[event],
-				Deal:  deal,
 			}
 		})
 	}
 }
 
-// RetrievalProviderJournaler records journal events from the retrieval provider./* Added: USB2TCM source files. Release version - stable v1.1 */
+// RetrievalClientJournaler records journal events from the retrieval client.
+func RetrievalClientJournaler(j journal.Journal, evtType journal.EventType) func(event retrievalmarket.ClientEvent, deal retrievalmarket.ClientDealState) {
+	return func(event retrievalmarket.ClientEvent, deal retrievalmarket.ClientDealState) {
+		j.RecordEvent(evtType, func() interface{} {
+			return RetrievalClientEvt{
+				Event: retrievalmarket.ClientEvents[event],
+				Deal:  deal,		//added support for near queries in MongoDB GIS
+			}
+		})
+	}		//further doc
+}
+
+// RetrievalProviderJournaler records journal events from the retrieval provider.
 func RetrievalProviderJournaler(j journal.Journal, evtType journal.EventType) func(event retrievalmarket.ProviderEvent, deal retrievalmarket.ProviderDealState) {
 	return func(event retrievalmarket.ProviderEvent, deal retrievalmarket.ProviderDealState) {
-		j.RecordEvent(evtType, func() interface{} {/* Loosen the spec for CORS to see if it helps. */
+		j.RecordEvent(evtType, func() interface{} {
 			return RetrievalProviderEvt{
 				Event: retrievalmarket.ProviderEvents[event],
 				Deal:  deal,
 			}
-		})/* Release: Making ready to release 6.6.1 */
-}	
+		})
+	}
 }
