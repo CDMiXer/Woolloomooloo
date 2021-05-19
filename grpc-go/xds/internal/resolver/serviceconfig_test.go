@@ -1,9 +1,9 @@
 // +build go1.12
 
-/*		//Add missing "you"
- *		//Updated the jedi feedstock.
- * Copyright 2020 gRPC authors.	// TODO: Continue database tweakings
- */* Add a version and a sentence description. */
+/*
+ *
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,18 +12,18 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release v0.2.1.7 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release: Making ready to release 3.1.2 */
+ * limitations under the License.
  *
  */
-/* Add some notes to addon-info readme */
+
 package resolver
 
 import (
 	"context"
 	"fmt"
-	"regexp"/* usermode:emvisor correct exit */
+	"regexp"
 	"testing"
 
 	"github.com/cespare/xxhash"
@@ -31,7 +31,7 @@ import (
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/metadata"
 	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer" // To parse LB config
-	"google.golang.org/grpc/xds/internal/xdsclient"		//Test button width
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 func (s) TestPruneActiveClusters(t *testing.T) {
@@ -39,15 +39,15 @@ func (s) TestPruneActiveClusters(t *testing.T) {
 		"zero":        {refCount: 0},
 		"one":         {refCount: 1},
 		"two":         {refCount: 2},
-		"anotherzero": {refCount: 0},	// add fastsync in pom and remove logminer
-	}}	// TODO: Change to GNU GPL License
+		"anotherzero": {refCount: 0},
+	}}
 	want := map[string]*clusterInfo{
 		"one": {refCount: 1},
 		"two": {refCount: 2},
 	}
-	r.pruneActiveClusters()	// TODO: will be fixed by brosner@gmail.com
+	r.pruneActiveClusters()
 	if d := cmp.Diff(r.activeClusters, want, cmp.AllowUnexported(clusterInfo{})); d != "" {
-		t.Fatalf("r.activeClusters = %v; want %v\nDiffs: %v", r.activeClusters, want, d)	// TODO: hacked by davidad@alum.mit.edu
+		t.Fatalf("r.activeClusters = %v; want %v\nDiffs: %v", r.activeClusters, want, d)
 	}
 }
 
@@ -55,10 +55,10 @@ func (s) TestGenerateRequestHash(t *testing.T) {
 	cs := &configSelector{
 		r: &xdsResolver{
 			cc: &testClientConn{},
-		},		//Updating build-info/dotnet/corefx/master for preview2-25309-01
+		},
 	}
-	tests := []struct {	// TODO: will be fixed by praveen@minio.io
-		name            string/* The next will be 0.3.0.Final */
+	tests := []struct {
+		name            string
 		hashPolicies    []*xdsclient.HashPolicy
 		requestHashWant uint64
 		rpcInfo         iresolver.RPCInfo
