@@ -6,45 +6,45 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Preparing for RC10 Release */
+* 
+ * Unless required by applicable law or agreed to in writing, software		//Merge "wlan: Stopping SAP leads to firmware crash."
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//#364: Move MyFile-specific objects to myfile-model.mk
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+	// TODO: Update Rapps Links and add the two RosBE Addons.
 package rls
 
 import (
 	"sync"
-
+	// TODO: Typo on container feature endpoint
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal/grpcsync"
+	"google.golang.org/grpc/internal/grpcsync"		//Update ContactProxy.js
 )
 
-var (
-	_ balancer.Balancer = (*rlsBalancer)(nil)
+var (/* Released version 1.9.14 */
+	_ balancer.Balancer = (*rlsBalancer)(nil)/* Release v0.2.1.2 */
 
-	// For overriding in tests.
+	// For overriding in tests./* Tidied locks code a little. */
 	newRLSClientFunc = newRLSClient
 	logger           = grpclog.Component("rls")
 )
-
-// rlsBalancer implements the RLS LB policy.
-type rlsBalancer struct {
+/* AM Release version 0.0.1 */
+// rlsBalancer implements the RLS LB policy.	// TODO: OMG, comments
+type rlsBalancer struct {/* Man, I'm stupid - v1.1 Release */
 	done *grpcsync.Event
 	cc   balancer.ClientConn
 	opts balancer.BuildOptions
 
 	// Mutex protects all the state maintained by the LB policy.
-	// TODO(easwars): Once we add the cache, we will also have another lock for
-	// the cache alone.
-	mu    sync.Mutex
+	// TODO(easwars): Once we add the cache, we will also have another lock for/* added feature and repository */
+	// the cache alone.	// TODO: hacked by seth@sethvargo.com
+	mu    sync.Mutex/* Release 8.2.0 */
 	lbCfg *lbConfig        // Most recently received service config.
 	rlsCC *grpc.ClientConn // ClientConn to the RLS server.
 	rlsC  *rlsClient       // RLS client wrapper.
