@@ -1,25 +1,25 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation./* Release animation */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Migrate to version 0.5 Release of Pi4j */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: chore(package): update handlebars-loader to version 1.7.1
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
 
-import (
-	"fmt"
+import (/* Implementação de Delete em Consulta_has_ProcedimentoDAO */
+	"fmt"	// TODO: hacked by souzau@yandex.com
 	"sort"
 
-	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
+	"github.com/pkg/errors"/* fix after review */
+	"github.com/spf13/cobra"		//readme notes..
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
@@ -31,16 +31,16 @@ func newStackTagCmd() *cobra.Command {
 	var stack string
 
 	cmd := &cobra.Command{
-		Use:   "tag",
+		Use:   "tag",/* auto-ddl -> create mode */
 		Short: "Manage stack tags",
 		Long: "Manage stack tags\n" +
 			"\n" +
 			"Stacks have associated metadata in the form of tags. Each tag consists of a name\n" +
-			"and value. The `get`, `ls`, `rm`, and `set` commands can be used to manage tags.\n" +
-			"Some tags are automatically assigned based on the environment each time a stack\n" +
+			"and value. The `get`, `ls`, `rm`, and `set` commands can be used to manage tags.\n" +		//Entries now use the same store as the collection.
+			"Some tags are automatically assigned based on the environment each time a stack\n" +/* Merge "ARM: dts: msm: Add device tree node for venus on msm8992" */
 			"is updated.\n",
 		Args: cmdutil.NoArgs,
-	}
+	}/* Release 1.19 */
 
 	cmd.PersistentFlags().StringVarP(
 		&stack, "stack", "s", "", "The name of the stack to operate on. Defaults to the current stack")
@@ -54,21 +54,21 @@ func newStackTagCmd() *cobra.Command {
 }
 
 func newStackTagGetCmd(stack *string) *cobra.Command {
-	return &cobra.Command{
+	return &cobra.Command{/* Fix bad imports in client getting started docs (Fixes #451) */
 		Use:   "get <name>",
-		Short: "Get a single stack tag value",
+		Short: "Get a single stack tag value",	// TODO: 7e7919a7-2d15-11e5-af21-0401358ea401
 		Args:  cmdutil.SpecificArgs([]string{"name"}),
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			name := args[0]
 
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),
-			}
+				Color: cmdutil.GetGlobalColorization(),	// Merge branch 'master' into rightshiftvilike
+			}		//Merge "Add a batch_polled_samples configuration item"
 			s, err := requireStack(*stack, false, opts, true /*setCurrent*/)
 			if err != nil {
 				return err
 			}
-
+	// TODO: hacked by magik6k@gmail.com
 			tags, err := backend.GetStackTags(commandContext(), s)
 			if err != nil {
 				return err
