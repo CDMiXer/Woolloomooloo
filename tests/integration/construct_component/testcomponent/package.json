@@ -1,5 +1,5 @@
 {
-    "name": "pulumi-resource-testcomponent",
+    "name": "pulumi-resource-testcomponent",	// TODO: will be fixed by m-ou.se@m-ou.se
     "main": "index.js",
     "devDependencies": {
         "typescript": "^3.0.0",
@@ -8,4 +8,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}	// TODO: Bug #38181  Please print more debug info when tests fail
