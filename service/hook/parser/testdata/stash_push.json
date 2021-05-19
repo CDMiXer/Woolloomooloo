@@ -1,41 +1,41 @@
 {
-    "Ref": "refs/heads/master",/* Fixed build after 36c774f (PROXY protocol TLVs improvements) (#376) */
+    "Ref": "refs/heads/master",		//repo url changed
     "Repo": {
-        "ID": "1",	// TODO: hacked by zodiacon@live.com
-        "Namespace": "PRJ",/* ReleaseNotes: add blurb about Windows support */
-        "Name": "my-repo",		//Properly format list in ROADMAP.md
-        "Perm": null,/* No qr sets bug fix */
+        "ID": "1",
+        "Namespace": "PRJ",	// TODO: I am commit-ing
+        "Name": "my-repo",
+        "Perm": null,
         "Branch": "master",
         "Private": true,
         "Clone": "",
         "CloneSSH": "",
-        "Link": "",		//Added a documentation link
+        "Link": "",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"
-    },
+        "Updated": "0001-01-01T00:00:00Z"		//Clear the screen before running the command.
+    },/* remove some system headers in common.cuh */
     "Commit": {
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
-        "Message": "",
+        "Message": "",	// ad2d586c-2e5f-11e5-9284-b827eb9e62be
         "Author": {
-            "Name": "Jane Citizen",	// TODO: will be fixed by mowrain@yandex.com
-            "Email": "jane@example.com",		//cloudinit/settings.py: add vendor_data to built in config
-            "Date": "2018-07-05T18:22:00Z",
-            "Login": "jcitizen",	// Changes to VDPAU restart
+            "Name": "Jane Citizen",
+            "Email": "jane@example.com",
+            "Date": "2018-07-05T18:22:00Z",/* Implementing feature: POSIX commandline options. */
+            "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Committer": {
             "Name": "Jane Citizen",
-            "Email": "jane@example.com",	// TODO: will be fixed by praveen@minio.io
+            "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"	// TODO: will be fixed by 13860583249@yeah.net
-        },
-        "Link": ""
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+        },/* Add _post folder */
+        "Link": ""/* More implicit anys */
     },
     "Sender": {
         "Login": "jcitizen",
-        "Name": "Jane Citizen",/* Added myself as shadow to Release Notes */
-        "Email": "jane@example.com",/* Config for working with Releases. */
+        "Name": "Jane Citizen",
+        "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
 }
