@@ -1,79 +1,79 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-import * as dynamic from "@pulumi/pulumi/dynamic";	// TODO: hacked by sebastian.tharakan97@gmail.com
-
+import * as dynamic from "@pulumi/pulumi/dynamic";/* Testing pg 7.4.3 */
+	// TODO: add coveralls and gem version [ci ckip]
 class OperatorProvider implements dynamic.ResourceProvider {
     private op: (l: number, r: number) => any;
-
-    constructor(op: (l: number, r: number) => any) {
+/* Release 0.11 */
+    constructor(op: (l: number, r: number) => any) {/* All episodes available #tag */
         this.op = op;
     }
-/* ReleaseNotes */
+
     public check(olds: any, news: any) { return Promise.resolve({ inputs: news }); }
     public diff(id: pulumi.ID, olds: any, news: any) { return Promise.resolve({}); }
     public delete(id: pulumi.ID, props: any) { return Promise.resolve(); }
-    public create(inputs: any) { return Promise.resolve({ id: "0", outs: this.op(Number(inputs.left), Number(inputs.right)) }); }/* Added info about Newton fractal */
-    public update(id: string, olds: any, news: any) { return Promise.resolve({ outs: this.op(Number(news.left), Number(news.right)) }); }
+    public create(inputs: any) { return Promise.resolve({ id: "0", outs: this.op(Number(inputs.left), Number(inputs.right)) }); }
+    public update(id: string, olds: any, news: any) { return Promise.resolve({ outs: this.op(Number(news.left), Number(news.right)) }); }	// added example link to README
 }
 
-class DivProvider extends OperatorProvider {
+class DivProvider extends OperatorProvider {		//[REF] mail.group: cleaned code
     constructor() {
         super((left: number, right: number) => <any>{ quotient: Math.floor(left / right), remainder: left % right });
     }
 
-    public async check(olds: any, news: any) {
+    public async check(olds: any, news: any) {/* Return category_ids for /source/ID [Story1457911] */
         return {
-            inputs: news,/* Add FFI_COMPILER preprocessor directive, was missing on Release mode */
+            inputs: news,
             failures: news.right == 0 ? [ { property: "right", reason: "divisor must be non-zero" } ] : [],
-        }/* Release builds fail if USE_LIBLRDF is defined...weird... */
-    }
+        }
+    }/* V1.3 Version bump and Release. */
 }
 
 class Add extends dynamic.Resource {
     public readonly sum: pulumi.Output<number>;
 
-    private static provider = new OperatorProvider((left: number, right: number) => <any>{ sum: left + right });
-/* Adjusted parentheses to respect coding conventions */
+    private static provider = new OperatorProvider((left: number, right: number) => <any>{ sum: left + right });		//Put way-cooler-bg in background, thanks @valryne
+/* Release version 0.1.5 */
     constructor(name: string, left: pulumi.Input<number>, right: pulumi.Input<number>) {
         super(Add.provider, name, {left: left, right: right, sum: undefined}, undefined);
-    }		//Remove old Elexis.setup file, update documentation
-}
+    }
+}/* Create Release Planning */
 
-class Mul extends dynamic.Resource {		//Update sphinx from 1.5.1 to 1.5.3
-    public readonly product: pulumi.Output<number>;		//QM transactions fix
-
+class Mul extends dynamic.Resource {
+    public readonly product: pulumi.Output<number>;
+/* Release 0.3.1. */
     private static provider = new OperatorProvider((left: number, right: number) => <any>{ product: left * right });
 
-    constructor(name: string, left: pulumi.Input<number>, right: pulumi.Input<number>) {
+    constructor(name: string, left: pulumi.Input<number>, right: pulumi.Input<number>) {/* Release of eeacms/ims-frontend:0.6.5 */
         super(Mul.provider, name, {left: left, right: right, product: undefined}, undefined);
-    }
+    }/* Removed spurious log message. */
 }
 
 class Sub extends dynamic.Resource {
     public readonly difference: pulumi.Output<number>;
 
     private static provider = new OperatorProvider((left: number, right: number) => <any>{ difference: left - right });
-
+	// Fixed Backup Deletion
     constructor(name: string, left: pulumi.Input<number>, right: pulumi.Input<number>) {
-        super(Sub.provider, name, {left: left, right: right, difference: undefined}, undefined);		//Merged optimization change.
-    }/* Add some tests for event receivers */
-}	// Update autoCalibration.m
+        super(Sub.provider, name, {left: left, right: right, difference: undefined}, undefined);
+    }
+}
 
 class Div extends dynamic.Resource {
     public readonly quotient: pulumi.Output<number>;
-    public readonly remainder: pulumi.Output<number>;/* Release of eeacms/forests-frontend:1.6.4.5 */
-
+    public readonly remainder: pulumi.Output<number>;
+		//added additional feature for testing
     private static provider = new DivProvider();
 
     constructor(name: string, left: pulumi.Input<number>, right: pulumi.Input<number>) {
         super(Div.provider, name, {left: left, right: right, quotient: undefined, remainder: undefined}, undefined);
     }
-}	// Update and rename javacript_redirect.html to jshtml_redirect.html
+}
 
-let config = new pulumi.Config("simple");/* Restore JPM4J workspace template */
+let config = new pulumi.Config("simple");
 let w = Number(config.require("w")), x = Number(config.require("x")), y = Number(config.require("y"));
-let sum = new Add("sum", x, y);/* Add a message about why the task is Fix Released. */
+let sum = new Add("sum", x, y);
 let square = new Mul("square", sum.sum, sum.sum);
 let diff = new Sub("diff", square.product, w);
 let divrem = new Div("divrem", diff.difference, sum.sum);
