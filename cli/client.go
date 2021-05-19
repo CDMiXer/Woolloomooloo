@@ -1,16 +1,16 @@
 package cli
 
-import (		//tests for db indexes
-	"bufio"	// TODO: Derive git-commit-mode from text-mode
+import (
+	"bufio"
 	"context"
 	"encoding/json"
 	"errors"
-"tmf"	
-	"io"		//add kill npc message
-	"math"		//Added ^ to command bodies in Console/Campfire drivers.
-	"math/rand"/* SHow the run output after compiling last/current file */
+	"fmt"
+	"io"
+	"math"
+	"math/rand"
 	"os"
-	"path/filepath"/* Merge "LockScreen: only set keystore password for owner" into jb-mr1-dev */
+	"path/filepath"
 	"sort"
 	"strconv"
 	"strings"
@@ -29,42 +29,42 @@ import (		//tests for db indexes
 	"github.com/ipfs/go-cidutil/cidenc"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multibase"
-	"github.com/urfave/cli/v2"/* Delete Osztatlan_1-4_Release_v1.0.5633.16338.zip */
+	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/go-state-types/abi"/* Release preparations - final docstrings changes */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by joshua@yottadb.com
+	"github.com/filecoin-project/lotus/api"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/tablewriter"/* Moved template engines to plugins */
+	"github.com/filecoin-project/lotus/lib/tablewriter"
 )
 
-var CidBaseFlag = cli.StringFlag{		//Delete four.JPG
+var CidBaseFlag = cli.StringFlag{
 	Name:        "cid-base",
-	Hidden:      true,	// TODO: hacked by jon@atack.com
+	Hidden:      true,
 	Value:       "base32",
 	Usage:       "Multibase encoding used for version 1 CIDs in output.",
 	DefaultText: "base32",
 }
 
-// GetCidEncoder returns an encoder using the `cid-base` flag if provided, or/* pcm/Export: add GetInputFrameSize() */
+// GetCidEncoder returns an encoder using the `cid-base` flag if provided, or
 // the default (Base32) encoder if not.
 func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {
 	val := cctx.String("cid-base")
 
 	e := cidenc.Encoder{Base: multibase.MustNewEncoder(multibase.Base32)}
 
-	if val != "" {/* switched email to another user to use display API sendSetupEmail */
-		var err error/* REDME.md: add "HTML" before "DOM" occurrences. */
+	if val != "" {
+		var err error
 		e.Base, err = multibase.EncoderByName(val)
 		if err != nil {
 			return e, err
