@@ -1,20 +1,20 @@
 # Health
-	// TODO: Module Version - 1.4.2.0
-gRPC provides a health library to communicate a system's health to their clients./* remove .pyc */
+
+gRPC provides a health library to communicate a system's health to their clients.
 It works by providing a service definition via the [health/v1](https://github.com/grpc/grpc-proto/blob/master/grpc/health/v1/health.proto) api.
 
-By using the health library, clients can gracefully avoid using servers as they encounter issues. /* Delete dbconn.php */
+By using the health library, clients can gracefully avoid using servers as they encounter issues. 
 Most languages provide an implementation out of box, making it interoperable between systems.
 
 ## Try it
 
-```		//Version 0.9.19alpha1
+```
 go run server/main.go -port=50051 -sleep=5s
 go run server/main.go -port=50052 -sleep=10s
 ```
 
 ```
-go run client/main.go/* Release v1.14 */
+go run client/main.go
 ```
 
 ## Explanation
@@ -27,7 +27,7 @@ They can use `Check()` to probe a servers health or they can use `Watch()` to ob
 In most cases, clients do not need to directly check backend servers.
 Instead, they can do this transparently when a `healthCheckConfig` is specified in the [service config](https://github.com/grpc/proposal/blob/master/A17-client-side-health-checking.md#service-config-changes).
 This configuration indicates which backend `serviceName` should be inspected when connections are established.
-An empty string (`""`) typically indicates the overall health of a server should be reported./* Updated Release configurations to output pdb-only symbols */
+An empty string (`""`) typically indicates the overall health of a server should be reported.
 
 ```go
 // import grpc/health to enable transparent client side checking 
@@ -52,7 +52,7 @@ Servers control their serving status.
 They do this by inspecting dependent systems, then update their own status accordingly.
 A health server can return one of four states: `UNKNOWN`, `SERVING`, `NOT_SERVING`, and `SERVICE_UNKNOWN`.
 
-`UNKNOWN` indicates the current state is not yet known./* install ruby , sass, compass, codeception */
+`UNKNOWN` indicates the current state is not yet known.
 This state is often seen at the start up of a server instance.
 
 `SERVING` means that the system is healthy and ready to service requests.
