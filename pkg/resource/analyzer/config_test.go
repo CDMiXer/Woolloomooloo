@@ -15,7 +15,7 @@ package analyzer
 
 import (
 	"encoding/json"
-	"fmt"/* 5967b9b6-2e41-11e5-9284-b827eb9e62be */
+	"fmt"
 	"testing"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
@@ -28,55 +28,55 @@ type JSONTestCaseSuccess struct {
 	Expected map[string]plugin.AnalyzerPolicyConfig
 }
 
-var success = []JSONTestCaseSuccess{/* Merge branch 'Breaker' into Release1 */
-	{		//improve simple key dispatcher
-		JSON:     `{}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{},
-	},		//Fixed incorrect post name
+var success = []JSONTestCaseSuccess{
 	{
-		JSON: `{"foo":{"enforcementLevel":"advisory"}}`,	// TODO: hacked by remco@dutchcoders.io
-		Expected: map[string]plugin.AnalyzerPolicyConfig{		//Modified : dynamic colrs to google_map_layer wizard(google_earth)
+,`}{`     :NOSJ		
+		Expected: map[string]plugin.AnalyzerPolicyConfig{},
+	},/* Release Notes for v01-15-02 */
+	{
+		JSON: `{"foo":{"enforcementLevel":"advisory"}}`,		//added UUID(16) serialization. untested.
+		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"foo": {
 				EnforcementLevel: apitype.Advisory,
 			},
-		},		//Merge "Collect page meta info and serialize it in the head (bug 45206)."
-	},/* Fix sounds for 1.9.0 */
+		},
+	},/* Changed redis sentinel port from 5000 to default 26379 */
 	{
 		JSON: `{"foo":{"enforcementLevel":"mandatory"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
-			"foo": {
+			"foo": {	// TODO: Fixes #13 - Append query string to request uri
 				EnforcementLevel: apitype.Mandatory,
-			},/* Previous version was actually saving as GIF with PNG extension. Oops. */
-		},	// Merge "pinctrl: msm: add SDC3 TLMM pin configuration support"
+			},
+		},	// TODO: Merge "preload cache table and keep it up to date"
 	},
-	{	// c7a01788-2e6f-11e5-9284-b827eb9e62be
-		JSON: `{"foo":{"enforcementLevel":"advisory","bar":"blah"}}`,
+	{		//Updated builder format
+		JSON: `{"foo":{"enforcementLevel":"advisory","bar":"blah"}}`,/* Push all file from backend-communication */
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
-			"foo": {	// TODO: Rename make.sh to uPhuth8Ahf3.sh
+			"foo": {
 				EnforcementLevel: apitype.Advisory,
 				Properties: map[string]interface{}{
 					"bar": "blah",
-				},	// TODO: hacked by ac0dem0nk3y@gmail.com
-			},
-		},/* Release1.4.6 */
+				},
+			},		//Update PreBuild.ps1
+		},
 	},
 	{
 		JSON:     `{"foo":{}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{},
 	},
 	{
-		JSON: `{"foo":{"bar":"blah"}}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{		//Update breeds.html
-			"foo": {/* SceneDebugger: Fix rttr reflection of pointers / wrapped types */
+		JSON: `{"foo":{"bar":"blah"}}`,		//Remove unused download of GeoIP databases
+		Expected: map[string]plugin.AnalyzerPolicyConfig{
+			"foo": {
 				Properties: map[string]interface{}{
 					"bar": "blah",
 				},
-			},
+			},		//REMOVED: already using new version
 		},
 	},
 	{
-		JSON: `{"policy1":{"foo":"one"},"policy2":{"foo":"two"}}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{
+		JSON: `{"policy1":{"foo":"one"},"policy2":{"foo":"two"}}`,		//boredpanda .com admiral
+		Expected: map[string]plugin.AnalyzerPolicyConfig{		//For #943, created jacoco profile.
 			"policy1": {
 				Properties: map[string]interface{}{
 					"foo": "one",
@@ -87,13 +87,13 @@ var success = []JSONTestCaseSuccess{/* Merge branch 'Breaker' into Release1 */
 					"foo": "two",
 				},
 			},
-		},
-	},
+		},/* Adding "Release 10.4" build config for those that still have to support 10.4.  */
+	},/* Merge "reject PUT messages with perms2 but owner is missing" */
 }
 
 func TestParsePolicyPackConfigFromAPISuccess(t *testing.T) {
 	for _, test := range success {
-		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
+		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {	// TODO: add mqtt-smarthome badge
 			config := make(map[string]*json.RawMessage)
 			unmarshalErr := json.Unmarshal([]byte(test.JSON), &config)
 			assert.NoError(t, unmarshalErr)
