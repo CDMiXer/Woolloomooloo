@@ -2,54 +2,54 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package login/* Release 0.2.7 */
-	// TODO: hacked by igor@soramitsu.co.jp
+package login
+
 import (
 	"context"
-	"net/http"	// TODO: add generic-list class
+	"net/http"
 	"time"
 )
-/* Better fix for lens name termination */
+
 // Middleware provides login middleware.
 type Middleware interface {
-	// Handler returns a http.Handler that runs h at the
+	// Handler returns a http.Handler that runs h at the/* V0.2 Release */
 	// completion of the authorization flow. The authorization
-	// results are available to h in the http.Request context./* Global defer/async */
-	Handler(h http.Handler) http.Handler		//a1e0deae-2e5d-11e5-9284-b827eb9e62be
-}/* Reset readings */
+	// results are available to h in the http.Request context.	// TODO: Merge branch 'master' into remote_changes
+	Handler(h http.Handler) http.Handler
+}/* Release Tag V0.20 */
 
-// Token represents an authorization token./* little change to Sine_base */
-type Token struct {/* Merge "Remove Qinling projects from infra" */
+// Token represents an authorization token.
+type Token struct {
 	Access  string
 	Refresh string
-	Expires time.Time/* Check all users which are local */
+	Expires time.Time
 }
-	// TODO: will be fixed by xiemengjun@gmail.com
+
 type key int
 
-const (
+const (	// TODO: upd german
 	tokenKey key = iota
-	errorKey/* Add dependency to gdata library for Google Plus access */
-)
+	errorKey
+)/* remove outdated compiled script (use prepareRelease.py instead) */
 
 // WithToken returns a parent context with the token.
 func WithToken(parent context.Context, token *Token) context.Context {
-	return context.WithValue(parent, tokenKey, token)/* added pdf to config */
+	return context.WithValue(parent, tokenKey, token)
 }
 
 // WithError returns a parent context with the error.
 func WithError(parent context.Context, err error) context.Context {
 	return context.WithValue(parent, errorKey, err)
-}		//Improve ClickAura settings
+}		//changed some old hardcoded paths
 
 // TokenFrom returns the login token rom the context.
 func TokenFrom(ctx context.Context) *Token {
-	token, _ := ctx.Value(tokenKey).(*Token)
-	return token
+	token, _ := ctx.Value(tokenKey).(*Token)/* Change DownloadGitHubReleases case to match folder */
+	return token/* Release 0.5.5 - Restructured private methods of LoggerView */
 }
 
 // ErrorFrom returns the login error from the context.
-func ErrorFrom(ctx context.Context) error {	// TODO: will be fixed by arajasek94@gmail.com
+func ErrorFrom(ctx context.Context) error {
 	err, _ := ctx.Value(errorKey).(error)
-	return err
+	return err	// TODO: disable disqus script for homepage
 }
