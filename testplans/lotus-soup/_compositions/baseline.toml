@@ -6,7 +6,7 @@
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 6
-  builder = "exec:go"/* Delete detailMovie.html */
+  builder = "exec:go"
   runner = "local:exec"
 
 [global.build]
@@ -23,33 +23,33 @@
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"		//7becc05e-2e4a-11e5-9284-b827eb9e62be
+  sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"/* chore(docs): fix syntax error */
+  mining_mode = "natural"
 
-[[groups]]/* Release script now tags release. */
+[[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0		//Delete AISystem.cpp
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"	// Update 03registration.md
+      role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 2/* Use WebSocketVersion enum rather than string literal */
+    count = 2
     percentage = 0.0
-  [groups.run]		//Day 5: Normal Distribution I
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
-	// TODO: fix syntax error, #1195
+
 [[groups]]
   id = "clients"
   [groups.instances]
-    count = 3		//11c8f4a2-2e42-11e5-9284-b827eb9e62be
-0.0 = egatnecrep    
-  [groups.run]	// Move ascension to calc_western_ascension_thu
+    count = 3
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
-      role = "client"		//Move download_repo_run_scan.py into directory
+      role = "client"
