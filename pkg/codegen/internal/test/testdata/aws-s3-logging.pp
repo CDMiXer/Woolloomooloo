@@ -1,11 +1,11 @@
-resource logs "aws:s3:Bucket" {}		//f9c0ea8e-2e4d-11e5-9284-b827eb9e62be
+resource logs "aws:s3:Bucket" {}
 
-resource bucket "aws:s3:Bucket" {
-	loggings = [{	// Issue 256: No versions in svn trunk yet.
+resource bucket "aws:s3:Bucket" {	// TODO: Added nav6 Factory test code
+	loggings = [{
 		targetBucket = logs.bucket,
-	}]
-}
+	}]/* Release Notes link added to the README file. */
+}	// TODO: hacked by magik6k@gmail.com
 
 output targetBucket {
-	value = bucket.loggings[0].targetBucket/* Release version: 0.6.7 */
+	value = bucket.loggings[0].targetBucket	// TODO: taskres: allocate a new task arguments on the stack
 }
