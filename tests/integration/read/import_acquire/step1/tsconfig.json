@@ -1,21 +1,21 @@
-{		//Create pwgen
+{
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,/* style: links */
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,/* Released 2.3.7 */
         "experimentalDecorators": true,
-        "pretty": true,/* Release version: 1.0.1 [ci skip] */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },
-    "files": [
+    },/* basic FileMerge support */
+    "files": [	// TODO: will be fixed by peterke@gmail.com
         "index.ts"
-    ]
-}/* Update introduction links in the navigation */
+    ]/* Merge "docs: SDK 22.2.1 Release Notes" into jb-mr2-docs */
+}
 
