@@ -2,14 +2,14 @@
 {
    "options": {"failByDrop": false},
    "outdir": "./reports/clients",
-   "servers": [	// TODO: hacked by witek@enjin.io
+   "servers": [
         {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
         {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
-        {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},		//Complete listing other databases accessible in a connection.
+        {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},		//Fix adding custom finalizers
         {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
         {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}
     ],
-   "cases": ["*"],/* TAG MetOfficeRelease-1.6.3 */
+   "cases": ["*"],	// Update report_functions.R
    "exclude-cases": [],
    "exclude-agent-cases": {}
 }
