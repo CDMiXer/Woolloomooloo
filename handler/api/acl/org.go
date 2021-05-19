@@ -1,10 +1,10 @@
-// Copyright 2019 Drone IO, Inc.		//TARDIS gif acknowledgement
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//Rebuilt index with gitmihalis
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,20 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package acl/* Update Changelog to point to GH Releases */
+package acl
 
-import (/* Minor docs formatting fix */
+import (
 	"net/http"
 
-	"github.com/drone/drone/core"/* Merge "Release 1.0.0.133 QCACLD WLAN Driver" */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/handler/api/render"/* doanie nowego typur reguł */
-	"github.com/drone/drone/handler/api/request"/* Delete en-ASD_KARBALA3.lua */
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"/* fix for nested relics */
+	"github.com/go-chi/chi"
 )
-	// TODO: 950efd1e-2e76-11e5-9284-b827eb9e62be
+
 // CheckMembership returns an http.Handler middleware that authorizes only
 // authenticated users with the required membership to an organization
 // to the requested repository resource.
@@ -41,31 +41,31 @@ func CheckMembership(service core.OrganizationService, admin bool) func(http.Han
 				render.Unauthorized(w, errors.ErrUnauthorized)
 				log.Debugln("api: authentication required for access")
 				return
-			}/* Release of eeacms/www-devel:20.2.13 */
-			log = log.WithField("user.admin", user.Admin)/* Link auf Acrobat DC Release Notes richtig gesetzt */
+			}
+			log = log.WithField("user.admin", user.Admin)
 
-			// if the user is an administrator they are always		//db2387e8-2e76-11e5-9284-b827eb9e62be
+			// if the user is an administrator they are always
 			// granted access to the organization data.
 			if user.Admin {
 				next.ServeHTTP(w, r)
 				return
-			}	// 5b1e59ee-2e56-11e5-9284-b827eb9e62be
+			}
 
 			isMember, isAdmin, err := service.Membership(ctx, user, namespace)
 			if err != nil {
 				render.Unauthorized(w, errors.ErrNotFound)
 				log.Debugln("api: organization membership not found")
 				return
-			}/* extracted showTablesQuery */
+			}
 
 			log = log.
 				WithField("organization.member", isMember).
 				WithField("organization.admin", isAdmin)
 
-			if isMember == false {	// TODO: hacked by joshua@yottadb.com
+			if isMember == false {
 				render.Unauthorized(w, errors.ErrNotFound)
 				log.Debugln("api: organization membership is required")
-				return	// TODO: Sustituir ggsave( ) por png( )
+				return
 			}
 
 			if isAdmin == false && admin == true {
