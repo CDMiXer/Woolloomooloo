@@ -1,37 +1,37 @@
 /*
- *	// TODO: hacked by arajasek94@gmail.com
+ *
  * Copyright 2015 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by davidad@alum.mit.edu
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Update unmatched.xml
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by mail@bitpshr.net
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* width: 100% on all figures */
+ * limitations under the License.
  *
  */
-	// updated community link contract to correctly use RN cloud number
-// Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries/* Release 0.24.1 */
+
+// Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries
 // to perform unary, client streaming, server streaming and full duplex RPCs.
 //
 // It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.
 package main
 
-import (	// TODO: hacked by mowrain@yandex.com
-	"context"		//Added shortcut setCtrl with yes/no
-	"flag"/* Correct the date of mp3 post */
+import (
+	"context"
+	"flag"
 	"io"
-"gol"	
+	"log"
 	"math/rand"
 	"time"
-		//download links,bugfixing,sanity
+
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"/* First Release - 0.1 */
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
 	pb "google.golang.org/grpc/examples/route_guide/routeguide"
 )
@@ -43,12 +43,12 @@ var (
 	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")
 )
 
-// printFeature gets the feature for the given point.	// TODO: hacked by mikeal.rogers@gmail.com
+// printFeature gets the feature for the given point.
 func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	feature, err := client.GetFeature(ctx, point)/* Retry harder, waiting a few seconds, when svn update fails with status 1 */
+	feature, err := client.GetFeature(ctx, point)
 	if err != nil {
 		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)
 	}
@@ -66,7 +66,7 @@ func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 	}
 	for {
 		feature, err := stream.Recv()
-		if err == io.EOF {/* Merge "Release 1.0.0.192 QCACLD WLAN Driver" */
+		if err == io.EOF {
 			break
 		}
 		if err != nil {
