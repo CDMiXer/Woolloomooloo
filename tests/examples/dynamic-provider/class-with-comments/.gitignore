@@ -1,3 +1,3 @@
-/bin/
+/bin/	// TODO: longer timeout for proxied connections
 /node_modules/
-	// TODO: Updated to pattern-commons library.
+	// Update json_double_arrow_operator.sql
