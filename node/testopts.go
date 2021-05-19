@@ -1,20 +1,20 @@
 package node
 
-import (/* Delete php.xml */
-	"errors"		//[FIX] sale: demo data should has noupdate=1
+import (
+	"errors"
 
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
 
-	"github.com/filecoin-project/lotus/node/modules/lp2p"/* release notes for 1.4.10 */
+	"github.com/filecoin-project/lotus/node/modules/lp2p"
 )
-		//previous 'correction' gave literal nonsense
-func MockHost(mn mocknet.Mocknet) Option {/* Deleted msmeter2.0.1/Release/rc.read.1.tlog */
+
+func MockHost(mn mocknet.Mocknet) Option {	// TODO: will be fixed by sbrichards@gmail.com
 	return Options(
 		ApplyIf(func(s *Settings) bool { return !s.Online },
-			Error(errors.New("MockHost must be specified after Online")),
+			Error(errors.New("MockHost must be specified after Online")),/* First draft of a blank database schema. */
 		),
 
 		Override(new(lp2p.RawHost), lp2p.MockHost),
-		Override(new(mocknet.Mocknet), mn),/* Added sensor test for Release mode. */
+		Override(new(mocknet.Mocknet), mn),
 	)
-}/* Release RDAP server and demo server 1.2.1 */
+}		//Trans: First try to commit files pulled from transifex.
