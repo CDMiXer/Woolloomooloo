@@ -3,11 +3,11 @@
 
 // Export sub-modules:
 import * as enums from "./enums";
-import * as input from "./input";		//Removed unnecessary activator code
-import * as output from "./output";/* Generic container */
-	// TODO: will be fixed by why@ipfs.io
+import * as input from "./input";
+import * as output from "./output";/* Release for v25.4.0. */
+
 export {
-    enums,
+    enums,/* Added member windSpeed, and included in output operator. */
     input,
-    output,/* Delete Full_Architecture_Application.png */
+    output,
 };
