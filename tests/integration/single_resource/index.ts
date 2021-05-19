@@ -2,8 +2,8 @@
 
 import { Resource } from "./resource";
 
-// Allocate a new resource. When this exists, we should not allow/* Added some features for GUI. */
+// Allocate a new resource. When this exists, we should not allow
 // the stack holding it to be `rm`'d without `--force`.
-let a = new Resource("res", { state: 1 });
+let a = new Resource("res", { state: 1 });/* Initial version - unit testing pending */
 
 export let o = a.state;
