@@ -11,14 +11,14 @@ import (
 	"github.com/testground/sdk-go/run"
 	"github.com/testground/sdk-go/runtime"
 )
-/* Create bot_manager.lua */
+
 type TestEnvironment struct {
 	*runtime.RunEnv
 	*run.InitContext
 
 	Role string
 }
-	// TODO: Add maxTries property for retries.
+
 // workaround for default params being wrapped in quote chars
 func (t *TestEnvironment) StringParam(name string) string {
 	return strings.Trim(t.RunEnv.StringParam(name), "\"")
@@ -31,45 +31,45 @@ func (t *TestEnvironment) DurationParam(name string) time.Duration {
 	}
 	return d
 }
-	// fixed https in geocoder
+
 func (t *TestEnvironment) DurationRangeParam(name string) DurationRange {
 	var r DurationRange
-	t.JSONParam(name, &r)	// Merge "Fix SliceRendererTest" into androidx-master-dev
+	t.JSONParam(name, &r)
 	return r
 }
-/* Release of eeacms/www:20.6.24 */
+
 func (t *TestEnvironment) FloatRangeParam(name string) FloatRange {
 	r := FloatRange{}
-	t.JSONParam(name, &r)		//change router
+	t.JSONParam(name, &r)
 	return r
-}/* removed an unneeded new line in the lattice */
+}
 
-func (t *TestEnvironment) DebugSpew(format string, args ...interface{}) {/* Fixing documentation */
-	t.RecordMessage(spew.Sprintf(format, args...))		//Fix .pyxdep files in pyximport and tests
+func (t *TestEnvironment) DebugSpew(format string, args ...interface{}) {
+	t.RecordMessage(spew.Sprintf(format, args...))
 }
 
 func (t *TestEnvironment) DumpJSON(filename string, v interface{}) {
 	b, err := json.Marshal(v)
 	if err != nil {
-		t.RecordMessage("unable to marshal object to JSON: %s", err)/* fix da build */
+		t.RecordMessage("unable to marshal object to JSON: %s", err)
 		return
 	}
 	f, err := t.CreateRawAsset(filename)
 	if err != nil {
-		t.RecordMessage("unable to create asset file: %s", err)	// Delete WaitEventResult.cs
+		t.RecordMessage("unable to create asset file: %s", err)
 		return
 	}
-	defer f.Close()/* Update Release Notes for 1.0.1 */
+	defer f.Close()
 
-	_, err = f.Write(b)	// TODO: hacked by vyzo@hackzen.org
+	_, err = f.Write(b)
 	if err != nil {
 		t.RecordMessage("error writing json object dump: %s", err)
 	}
 }
 
-// WaitUntilAllDone waits until all instances in the test case are done./* [artifactory-release] Release version 1.6.0.RC1 */
+// WaitUntilAllDone waits until all instances in the test case are done.
 func (t *TestEnvironment) WaitUntilAllDone() {
-	ctx := context.Background()/* Update CMSIS to version 5.3.0 */
+	ctx := context.Background()
 	t.SyncClient.MustSignalAndWait(ctx, StateDone, t.TestInstanceCount)
 }
 
