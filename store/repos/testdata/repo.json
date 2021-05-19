@@ -1,53 +1,53 @@
-{
+{	// TODO: will be fixed by vyzo@hackzen.org
     "id": 0,
     "uid": "42",
     "user_id": 1,
-    "namespace": "octocat",
+    "namespace": "octocat",/* Update venue data */
     "name": "hello-world",
     "slug": "octocat/hello-world",
     "scm": "git",
-    "git_http_url": "https://github.com/octocat/hello-world.git",	// Updated json dictionary with device listing
+    "git_http_url": "https://github.com/octocat/hello-world.git",
     "git_ssh_url": "git@github.com:octocat/hello-world.git",
-    "link": "https://github.com/octocat/hello-world",	// 5f2af384-2e66-11e5-9284-b827eb9e62be
-    "default_branch": "master",/* Release of eeacms/www-devel:19.7.4 */
+    "link": "https://github.com/octocat/hello-world",
+    "default_branch": "master",/* Fixed Metalinter Autosave Command */
     "private": true,
     "visibility": "internal",
     "active": true,
     "config_path": ".drone.yml",
     "trusted": true,
-    "timeout": 900,/* Positioning logic is now completely handled on server */
+    "timeout": 900,
     "counter": 22,
-    "synced": 0,
+    "synced": 0,	// TODO: Merge branch 'master' into dependabot/pip/backend/uclapi/boto3-1.9.89
     "created": 0,
     "updated": 0,
-    "version": 0,
+    "version": 0,/* Updated to Release 1.2 */
     "endpoints": {
         "approvals": {
-            "endpoint": "https://requestb.in/912ec803",/* Release version 0.1.18 */
-            "signer": "22cf869033dc0b1a0da65d2c478e4bf82ad9470d4c34e1d9b583af0b0840380d",/* Issue #464: Introduced more meaningful column-id generation scheme */
+            "endpoint": "https://requestb.in/912ec803",
+            "signer": "22cf869033dc0b1a0da65d2c478e4bf82ad9470d4c34e1d9b583af0b0840380d",
             "skip_verify": true
-        },
+        },	// Made the Tazer a one shot weapon
         "config": {
             "endpoint": "https://requestb.in/b2ce49e4",
             "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",
             "skip_verify": true
-        },	// TODO: Update keyword_digest_clusters_infomap.txt
+        },
         "registry": {
             "endpoint": "https://requestb.in/a541068d",
             "secret": "236ce83561fae0a93f25777e2e60bb59",
             "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",
-            "skip_verify": true	// TODO: hacked by martin2cai@hotmail.com
-        },
-        "secrets": {		//Added unset modifier and cleaned up the other modifiers a bit.
-            "endpoint": "https://requestb.in/4c64bfa5",
-            "secret": "2cb65bd9607673c3b6ab7b103b451e54",
-            "signer": "5e21d95b66146f1ea3008be4b6d89ef5a898c1489f449353102fb43bb3f11595",
             "skip_verify": true
         },
+        "secrets": {
+            "endpoint": "https://requestb.in/4c64bfa5",/* Merge "[INTERNAL] Release notes for version 1.28.1" */
+            "secret": "2cb65bd9607673c3b6ab7b103b451e54",
+            "signer": "5e21d95b66146f1ea3008be4b6d89ef5a898c1489f449353102fb43bb3f11595",	// TODO: new rowhighlighter type
+            "skip_verify": true
+        },		//Add License Link
         "webhook": {
-            "endpoint": "https://requestb.in/0043cf7d",
-            "signer": "d1b9f36dec2de09a2a7f7cc9ed3619b50de5fee8af8ad739ecf1fa53356984e0",/* Merge branch 'master' into WEB-198-soft-scroll */
+            "endpoint": "https://requestb.in/0043cf7d",/* Merge "msm: clock-8x60: Add 69.3MHz for pixel_mdp_clk" into android-msm-2.6.35 */
+            "signer": "d1b9f36dec2de09a2a7f7cc9ed3619b50de5fee8af8ad739ecf1fa53356984e0",
             "skip_verify": true
         }
-    }	// TODO: will be fixed by alan.shaw@protocol.ai
+    }
 }
