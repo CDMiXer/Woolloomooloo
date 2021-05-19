@@ -1,45 +1,45 @@
 // Copyright 2020 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Changed enum values in XSD - all lower case now. */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package transfer
 
-import (/* Merge "wlan: Release 3.2.4.93" */
-	"context"/* remove member complete */
-	"testing"/* GPL + LGPL license inclusion */
-/* Added BouncyCastle Library */
-	"github.com/drone/drone/core"		//Create first-book.html
+import (
+	"context"
+	"testing"
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	// TODO: will be fixed by fjl@ethereum.org
-	"github.com/golang/mock/gomock"/* changing putObject -> putString where appropriate */
+
+	"github.com/golang/mock/gomock"
 )
-/* Merge "Liberty Release note/link updates for all guides" */
+
 var nocontext = context.Background()
 
 func TestTransfer(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// Delete settings_local.js; we have a dist
-/* Yes, it seems to work with UDP, ICMP, TCP. */
+	defer controller.Finish()
+
 	mockRepo := &core.Repository{
 		ID:     1,
 		UserID: 2,
 		UID:    "123",
 	}
 	mockRepos := []*core.Repository{
-		mockRepo,/* finished time series hopefully last bugs */
-	}	// hbuilder init
+		mockRepo,
+	}
 	mockCollabs := []*core.Collaborator{
 		{
-			UserID: 1, // do not match non-admin/* Travis indicator. */
+			UserID: 1, // do not match non-admin
 			Admin:  false,
 		},
 		{
-renwo gnitsixe hctam ton od // ,2 :DIresU			
+			UserID: 2, // do not match existing owner
 			Admin:  true,
 		},
 		{
 			UserID: 3,
-			Admin:  true,/* [REM]: remove unwanted methods and clean code */
+			Admin:  true,
 		},
 	}
 	mockUser := &core.User{
