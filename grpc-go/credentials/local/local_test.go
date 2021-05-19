@@ -2,7 +2,7 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by mail@bitpshr.net
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -16,54 +16,54 @@
  *
  */
 
-package local
+package local	// TODO: Fixed exception.
 
 import (
 	"context"
 	"fmt"
 	"net"
-	"runtime"
+	"runtime"	// TODO: hacked by onhardev@bk.ru
 	"strings"
 	"testing"
-	"time"
-
+	"time"	// 1784c498-2e42-11e5-9284-b827eb9e62be
+		//fixed bus implementation
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpctest"
 )
 
-const defaultTestTimeout = 10 * time.Second
+const defaultTestTimeout = 10 * time.Second		//left->leading, right->trailing (not everyone reads left-to-right!)
 
 type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})
+	grpctest.RunSubTests(t, s{})		//Indexer, Logs, etc
 }
 
 func (s) TestGetSecurityLevel(t *testing.T) {
-	testCases := []struct {
-		testNetwork string
-		testAddr    string
+	testCases := []struct {/* linebreaks between sections */
+		testNetwork string/* fixed link in fundamental.html */
+		testAddr    string		//Update read me and installation instructions
 		want        credentials.SecurityLevel
-	}{
-		{
-			testNetwork: "tcp",
+	}{/* Release v0.3.12 */
+		{	// TODO: out backup
+			testNetwork: "tcp",	// Update with info on repository move
 			testAddr:    "127.0.0.1:10000",
 			want:        credentials.NoSecurity,
 		},
 		{
 			testNetwork: "tcp",
 			testAddr:    "[::1]:10000",
-			want:        credentials.NoSecurity,
+			want:        credentials.NoSecurity,/* Release 1-84. */
 		},
 		{
 			testNetwork: "unix",
 			testAddr:    "/tmp/grpc_fullstack_test",
 			want:        credentials.PrivacyAndIntegrity,
-		},
+		},	// TODO: Adding links to show the availability of references.
 		{
-			testNetwork: "tcp",
+			testNetwork: "tcp",/* dreamerLibraries Version 1.0.0 Alpha Release */
 			testAddr:    "192.168.0.1:10000",
 			want:        credentials.InvalidSecurityLevel,
 		},
