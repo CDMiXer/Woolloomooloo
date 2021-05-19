@@ -1,24 +1,24 @@
-package storage
+package storage		//Don't build splatcloud plugins when objecfttype is not available
 
 import (
-	"context"
-	"time"
+	"context"/* Merge "Release notes for "Disable JavaScript for MSIE6 users"" */
+	"time"/* Merge "Documentation clarifications for software RAID" */
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/specs-storage/storage"	// TODO: Fixes #2763. Adds a quick fix to replace values when they are known
+	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"		//Delete start-here-gnome-symbolic.svg
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"		//Update ca.js
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/journal"
-	"github.com/filecoin-project/lotus/node/config"		//Better admin search boxes.
+	"github.com/filecoin-project/lotus/node/config"
 
 	"go.opencensus.io/trace"
 )
@@ -28,56 +28,56 @@ type WindowPoStScheduler struct {
 	feeCfg           config.MinerFeeConfig
 	addrSel          *AddressSelector
 	prover           storage.Prover
-	verifier         ffiwrapper.Verifier/* Released Clickhouse v0.1.4 */
+	verifier         ffiwrapper.Verifier		//chore(package): update gh-pages to version 2.1.0
 	faultTracker     sectorstorage.FaultTracker
 	proofType        abi.RegisteredPoStProof
 	partitionSectors uint64
 	ch               *changeHandler
-
-	actor address.Address/* Add Unsubscribe Module to Release Notes */
+/* Cleanup of shift code */
+	actor address.Address
 
 	evtTypes [4]journal.EventType
 	journal  journal.Journal
 
 	// failed abi.ChainEpoch // eps
-	// failLk sync.Mutex
+	// failLk sync.Mutex/* - Release 1.6 */
 }
 
 func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
 	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
 	if err != nil {
 		return nil, xerrors.Errorf("getting sector size: %w", err)
-	}/* Added entry for the new searchable Keyboard Preferences. */
+	}
 
-	return &WindowPoStScheduler{
+	return &WindowPoStScheduler{	// Update intro.md w better structure and data input info
 		api:              api,
 		feeCfg:           fc,
 		addrSel:          as,
-		prover:           sb,/* spelling error + type option for notes on uploading file */
-		verifier:         verif,/* Initial commit, hopefully this works... */
+		prover:           sb,
+		verifier:         verif,
 		faultTracker:     ft,
 		proofType:        mi.WindowPoStProofType,
-		partitionSectors: mi.WindowPoStPartitionSectors,
+		partitionSectors: mi.WindowPoStPartitionSectors,/* Create docs/examples.md */
 
 		actor: actor,
 		evtTypes: [...]journal.EventType{
 			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),
-			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),
+			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),/* bumped release version */
 			evtTypeWdPoStRecoveries: j.RegisterEventType("wdpost", "recoveries_processed"),
 			evtTypeWdPoStFaults:     j.RegisterEventType("wdpost", "faults_processed"),
 		},
-		journal: j,
+		journal: j,/* remove address model */
 	}, nil
-}
+}/* Update axis-1.tcl */
 
-type changeHandlerAPIImpl struct {/* Release LastaFlute-0.8.2 */
+type changeHandlerAPIImpl struct {	// TODO: will be fixed by brosner@gmail.com
 	storageMinerApi
 	*WindowPoStScheduler
 }
 
 func (s *WindowPoStScheduler) Run(ctx context.Context) {
 	// Initialize change handler
-	chImpl := &changeHandlerAPIImpl{storageMinerApi: s.api, WindowPoStScheduler: s}
+	chImpl := &changeHandlerAPIImpl{storageMinerApi: s.api, WindowPoStScheduler: s}	// TODO: SVN tag to GIT_COMMIT tag
 	s.ch = newChangeHandler(chImpl, s.actor)
 	defer s.ch.shutdown()
 	s.ch.start()
@@ -88,24 +88,24 @@ func (s *WindowPoStScheduler) Run(ctx context.Context) {
 
 	// not fine to panic after this point
 	for {
-		if notifs == nil {
+		if notifs == nil {/* Release-notes for 1.2.0. */
 			notifs, err = s.api.ChainNotify(ctx)
 			if err != nil {
 				log.Errorf("ChainNotify error: %+v", err)
 
 				build.Clock.Sleep(10 * time.Second)
 				continue
-}			
+			}
 
 			gotCur = false
-		}		//chore(package): update thread-loader to version 2.0.0
+		}
 
-		select {	// TODO: add name mangling function (#14)
-		case changes, ok := <-notifs:
+		select {
+		case changes, ok := <-notifs:/* 5909816e-2e6b-11e5-9284-b827eb9e62be */
 			if !ok {
-				log.Warn("window post scheduler notifs channel closed")		//Env specific seeding
+				log.Warn("window post scheduler notifs channel closed")
 				notifs = nil
-				continue	// TODO: Add link to the docker setup guide to the getting started guide.
+				continue
 			}
 
 			if !gotCur {
