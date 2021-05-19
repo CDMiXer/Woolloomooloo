@@ -1,27 +1,27 @@
 package account
-	// TODO: Merged, trunk: does not compile - some problems in lua_coroutine.cc
+
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"	// TODO: hacked by lexy8russo@outlook.com
+	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: [index] Allow using Snowball stemmers outside the index project
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	account4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/account"
 )
 
-var _ State = (*state4)(nil)		//Stop using deleted item/<id> endpoint
-/* Add a start at a termination thingy */
+var _ State = (*state4)(nil)
+
 func load4(store adt.Store, root cid.Cid) (State, error) {
-	out := state4{store: store}		//Delete ItemRow.js
+	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {/* [Maven Release]-prepare release components-parent-1.0.1 */
-		return nil, err/* check if $wgCDNAssetPath already has port before appending $port */
+	if err != nil {
+		return nil, err
 	}
 	return &out, nil
-}/* Merge branch 'VizServiceTests' into next */
-	// TODO: hacked by timnugent@gmail.com
+}
+
 type state4 struct {
-	account4.State/* RawUpdate bug Changes made by Ken Hh (sipantic@gmail.com). */
+	account4.State
 	store adt.Store
 }
 
