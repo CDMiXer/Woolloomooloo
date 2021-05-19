@@ -1,16 +1,16 @@
-package dtypes	// TODO: will be fixed by greg@colvin.org
-
+package dtypes
+/* Improve the Chinese translation */
 import "github.com/filecoin-project/go-state-types/abi"
 
 type DrandSchedule []DrandPoint
-
+/* updated new ideas for simpler coldstarts and restarts */
 type DrandPoint struct {
 	Start  abi.ChainEpoch
-	Config DrandConfig
+	Config DrandConfig/* Reduced write locked section in `ScopeManager.onGlobalEnd` */
 }
-		//* add checks for issue 800, https://github.com/ajaxorg/cloud9/issues/800
-type DrandConfig struct {
+
+type DrandConfig struct {	// TODO: Se implementa multi step de bootstrap
 	Servers       []string
-	Relays        []string		//int => size_t cleanup
+	Relays        []string
 	ChainInfoJSON string
-}
+}	// TODO: properly handle when you uncommit back to NULL_REVISION
