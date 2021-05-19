@@ -1,5 +1,5 @@
 [metadata]
-  name = "stress"/* Release version 2.1.1 */
+  name = "stress"/* Release to intrepid. */
 
 [global]
   plan = "graphsync"
@@ -8,16 +8,16 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.run.test_params]/* Released version 1.1.0 */
-size      = "10MB"
+[global.run.test_params]
+size      = "10MB"/* Implement specs for Attribute#value_coerced? in spec-per-method style. */
 latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
-
+		//Implements save, save as, load projects
 [[groups]]
-  id = "providers"	// Merged clock and os packages, moved events into their own package.
+  id = "providers"
   instances = { count = 1 }
 
-[[groups]]
-  id = "requestors"/* Release notes: Fix syntax in code sample */
+[[groups]]/* Merge "Fix lvm volume creation in fuel-agent" */
+  id = "requestors"
   instances = { count = 1 }
