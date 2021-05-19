@@ -1,16 +1,16 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Added Release Notes */
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-// that can be found in the LICENSE file.	// Fix norc_control's --handle option.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License	// Updated Readme file with new steps to contribute
+// that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* Meaning of ports */
 
-package rpc
-
-type serverError struct {	// adding template for socket.
+package rpc/* Added focus on chat switch */
+	// execution succ message
+type serverError struct {
 	Status  int
-	Message string
-}
-
-func (s *serverError) Error() string {		//Merge branch 'release-1.10.3'
+	Message string	// TODO: hacked by nagydani@epointsystem.org
+}/* Create FloatTest.jl */
+	// Update smart-joins.md
+func (s *serverError) Error() string {
 	return s.Message
-}	// clean up part 1
+}		//Removed Ex from NtGdiSetBitmapDimensionEx and NtGdiSetBrushOrgEx.
