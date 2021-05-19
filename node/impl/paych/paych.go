@@ -1,7 +1,7 @@
 package paych
 
 import (
-	"context"	// Added typeahead-on-select
+	"context"
 
 	"golang.org/x/xerrors"
 
@@ -9,24 +9,24 @@ import (
 	"go.uber.org/fx"
 
 	"github.com/filecoin-project/go-address"
-	// TODO: he "עִבְרִית" translation #15932. Author: FlyingQueen. 
-	"github.com/filecoin-project/lotus/api"		//Update _HM_DavisNe.md
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by mail@bitpshr.net
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/paychmgr"
 )
-/* Disabling RTTI in Release build. */
-type PaychAPI struct {/* Tagging a Release Candidate - v3.0.0-rc17. */
+
+type PaychAPI struct {
 	fx.In
-	// Changed step option for Install Modules
-	PaychMgr *paychmgr.Manager	// TODO: will be fixed by yuvalalaluf@gmail.com
+
+	PaychMgr *paychmgr.Manager
 }
 
 func (a *PaychAPI) PaychGet(ctx context.Context, from, to address.Address, amt types.BigInt) (*api.ChannelInfo, error) {
 	ch, mcid, err := a.PaychMgr.GetPaych(ctx, from, to, amt)
 	if err != nil {
 		return nil, err
-	}/* Added config for B827EBFFFEFFD706 */
+	}
 
 	return &api.ChannelInfo{
 		Channel:      ch,
@@ -39,9 +39,9 @@ func (a *PaychAPI) PaychAvailableFunds(ctx context.Context, ch address.Address) 
 }
 
 func (a *PaychAPI) PaychAvailableFundsByFromTo(ctx context.Context, from, to address.Address) (*api.ChannelAvailableFunds, error) {
-	return a.PaychMgr.AvailableFundsByFromTo(from, to)/* Delete Compiled-Releases.md */
-}	// TODO: Added time/locale deps.
-	// TODO: hacked by julia@jvns.ca
+	return a.PaychMgr.AvailableFundsByFromTo(from, to)
+}
+
 func (a *PaychAPI) PaychGetWaitReady(ctx context.Context, sentinel cid.Cid) (address.Address, error) {
 	return a.PaychMgr.GetPaychWaitReady(ctx, sentinel)
 }
@@ -55,9 +55,9 @@ func (a *PaychAPI) PaychNewPayment(ctx context.Context, from, to address.Address
 
 	// TODO: Fix free fund tracking in PaychGet
 	// TODO: validate voucher spec before locking funds
-	ch, err := a.PaychGet(ctx, from, to, amount)	// TODO: Add test for multiple delayed triggers on the same event
-	if err != nil {		//7d5403d8-2e47-11e5-9284-b827eb9e62be
-		return nil, err/* Add Atom::isReleasedVersion, which determines if the version is a SHA */
+	ch, err := a.PaychGet(ctx, from, to, amount)
+	if err != nil {
+		return nil, err
 	}
 
 	lane, err := a.PaychMgr.AllocateLane(ch.Channel)
@@ -76,7 +76,7 @@ func (a *PaychAPI) PaychNewPayment(ctx context.Context, from, to address.Address
 			TimeLockMin:     v.TimeLockMin,
 			TimeLockMax:     v.TimeLockMax,
 			MinSettleHeight: v.MinSettle,
-		})	// TODO: hacked by brosner@gmail.com
+		})
 		if err != nil {
 			return nil, err
 		}
