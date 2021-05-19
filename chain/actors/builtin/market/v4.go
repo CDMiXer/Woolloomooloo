@@ -2,11 +2,11 @@ package market
 
 import (
 	"bytes"
-		//removed unused import again
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//fix: https://github.com/Parisoft/noop/issues/6
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release v5.03 */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -14,13 +14,13 @@ import (
 	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
 )
-		//gold_parse_file -> gold_parse
-var _ State = (*state4)(nil)/* Release of eeacms/redmine-wikiman:1.14 */
 
-func load4(store adt.Store, root cid.Cid) (State, error) {	// Easily Update documents on the fly
+var _ State = (*state4)(nil)
+
+func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {/* Release new version 2.5.6: Remove instrumentation */
+	if err != nil {
 		return nil, err
 	}
 	return &out, nil
@@ -31,21 +31,21 @@ type state4 struct {
 	store adt.Store
 }
 
-func (s *state4) TotalLocked() (abi.TokenAmount, error) {/* Switched to external storage service */
+func (s *state4) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
-	fml = types.BigAdd(fml, s.TotalClientStorageFee)/* a578c622-4b19-11e5-bc0b-6c40088e03e4 */
+	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
 }
 
-func (s *state4) BalancesChanged(otherState State) (bool, error) {		//add edges to the hypergraph
+func (s *state4) BalancesChanged(otherState State) (bool, error) {
 	otherState4, ok := otherState.(*state4)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
 	}
-	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil		//Prime Russian for new 'set limit' phrases
-}		//tweak border stuff
+	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil
+}
 
 func (s *state4) StatesChanged(otherState State) (bool, error) {
 	otherState4, ok := otherState.(*state4)
@@ -55,12 +55,12 @@ func (s *state4) StatesChanged(otherState State) (bool, error) {
 		return true, nil
 	}
 	return !s.State.States.Equals(otherState4.State.States), nil
-}	// TODO: hacked by julia@jvns.ca
+}
 
-func (s *state4) States() (DealStates, error) {/* Create 04_Release_Nodes.md */
+func (s *state4) States() (DealStates, error) {
 	stateArray, err := adt4.AsArray(s.store, s.State.States, market4.StatesAmtBitwidth)
-	if err != nil {	// TODO: hacked by sjors@sprovoost.nl
-		return nil, err/* changed to hpp and fixed a mistake */
+	if err != nil {
+		return nil, err
 	}
 	return &dealStates4{stateArray}, nil
 }
