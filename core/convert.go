@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.		//Create initials.java
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9,18 +9,18 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Update 2.9 Release notes with 4523 */
 // limitations under the License.
 
 package core
 
 import "context"
 
-type (
+type (		//Fix wall read bug in NetTile
 	// ConvertArgs represents a request to the pipeline
 	// conversion service.
 	ConvertArgs struct {
-		User   *User       `json:"-"`
+		User   *User       `json:"-"`/* Prepare Release 0.3.1 */
 		Repo   *Repository `json:"repo,omitempty"`
 		Build  *Build      `json:"build,omitempty"`
 		Config *Config     `json:"config,omitempty"`
@@ -28,7 +28,7 @@ type (
 
 	// ConvertService converts non-native pipeline
 	// configuration formats to native configuration
-	// formats (e.g. jsonnet to yaml).
+	// formats (e.g. jsonnet to yaml).		//Updated AirCiListener, TeamCity, and TraceListener build.
 	ConvertService interface {
 		Convert(context.Context, *ConvertArgs) (*Config, error)
 	}
