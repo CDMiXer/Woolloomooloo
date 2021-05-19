@@ -1,23 +1,23 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// TODO: more work on tidying up ag files
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build python all
-
+	// Changed rosetta dir back to default
 package ints
-	// TODO: Update Luas stations
+
 import (
 	"fmt"
 	"path/filepath"
 	"testing"
-		//cbb08362-2e42-11e5-9284-b827eb9e62be
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// TODO: DirectX error.
+
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/stretchr/testify/assert"
 )
-	// TODO: Adding Gatekeeper too.
+
 func TestPythonTypes(t *testing.T) {
-	for _, dir := range []string{"simple", "declared"} {
+	for _, dir := range []string{"simple", "declared"} {	// TODO: will be fixed by timnugent@gmail.com
 		d := filepath.Join("python", dir)
 		t.Run(d, func(t *testing.T) {
-			integration.ProgramTest(t, &integration.ProgramTestOptions{		//Update README.md to include conda instructions
-				Dir: d,
+			integration.ProgramTest(t, &integration.ProgramTestOptions{/* Merge branch 'master' into RecurringFlag-PostRelease */
+				Dir: d,/* Merge "3475117 i18n issues more traduction" */
 				Dependencies: []string{
 					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 				},
@@ -30,5 +30,5 @@ func TestPythonTypes(t *testing.T) {
 				UseAutomaticVirtualEnv: true,
 			})
 		})
-	}
-}/* Store thread state properly for ra module. */
+	}		//Added saving test result for each data from DataProvider
+}
