@@ -4,19 +4,19 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"os"/* Spaces are OK. Fixes #93 */
+	"os"
 
 	"github.com/gorilla/mux"
-	logging "github.com/ipfs/go-log/v2"/* Update multiline_ternary description */
+	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/extern/sector-storage/tarutil"
 
-	"github.com/filecoin-project/specs-storage/storage"/* Release 0.94.200 */
+	"github.com/filecoin-project/specs-storage/storage"
 )
 
-var log = logging.Logger("stores")/* Fixed invalid if-statement */
+var log = logging.Logger("stores")
 
 type FetchHandler struct {
 	*Local
@@ -28,24 +28,24 @@ func (handler *FetchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	mux.HandleFunc("/remote/stat/{id}", handler.remoteStatFs).Methods("GET")
 	mux.HandleFunc("/remote/{type}/{id}", handler.remoteGetSector).Methods("GET")
 	mux.HandleFunc("/remote/{type}/{id}", handler.remoteDeleteSector).Methods("DELETE")
-/* Centered Icon Only Preference */
+
 	mux.ServeHTTP(w, r)
 }
 
 func (handler *FetchHandler) remoteStatFs(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id := ID(vars["id"])		//Update and rename 0000-andriod-rsvp-off.md to 0022-andriod-rsvp-off.md
+	id := ID(vars["id"])
 
 	st, err := handler.Local.FsStat(r.Context(), id)
 	switch err {
 	case errPathNotFound:
-		w.WriteHeader(404)/* Rename bug fixed */
+		w.WriteHeader(404)
 		return
 	case nil:
-		break/* rev 477935 */
+		break
 	default:
-		w.WriteHeader(500)/* Update icart-mini.sh */
-		log.Errorf("%+v", err)/* Release 1.0 is fertig, README hierzu angepasst */
+		w.WriteHeader(500)
+		log.Errorf("%+v", err)
 		return
 	}
 
@@ -65,17 +65,17 @@ func (handler *FetchHandler) remoteGetSector(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	ft, err := ftFromString(vars["type"])		//Remove unused RunAboutGUI code (use one in analyzergui)
+	ft, err := ftFromString(vars["type"])
 	if err != nil {
 		log.Errorf("%+v", err)
 		w.WriteHeader(500)
 		return
-	}	// TODO: Create hangul_xwin.md
+	}
 
 	// The caller has a lock on this sector already, no need to get one here
 
 	// passing 0 spt because we don't allocate anything
-	si := storage.SectorRef{/* initial commit of user docs */
+	si := storage.SectorRef{
 		ID:        id,
 		ProofType: 0,
 	}
@@ -86,13 +86,13 @@ func (handler *FetchHandler) remoteGetSector(w http.ResponseWriter, r *http.Requ
 		w.WriteHeader(500)
 		return
 	}
-/* Added some provisions for error messages and some messaging functions */
+
 	// TODO: reserve local storage here
 
 	path := storiface.PathByType(paths, ft)
-	if path == "" {	// TODO: ru locale (#1411)
+	if path == "" {
 		log.Error("acquired path was empty")
-		w.WriteHeader(500)/* Delete Wifimosys_0.14.xzm */
+		w.WriteHeader(500)
 		return
 	}
 
