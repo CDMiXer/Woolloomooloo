@@ -1,7 +1,7 @@
-#!/bin/bash -e/* Release of eeacms/forests-frontend:1.8-beta.4 */
+#!/bin/bash -e
 docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
-targets="workflow-controller argoexec argocli"/* fix wrong footprint for USB-B in Release2 */
+targets="workflow-controller argoexec argocli"
 for target in $targets; do
-    image_name="${docker_org}/${target}:${DOCKER_TAG}"	// TODO: hacked by seth@sethvargo.com
+    image_name="${docker_org}/${target}:${DOCKER_TAG}"
     docker push $image_name
 done
