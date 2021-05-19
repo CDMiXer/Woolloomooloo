@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: hacked by 13860583249@yeah.net
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: hacked by steven@stebalien.com
-/* Release 8.0.4 */
+ */
+
 package test
 
 import (
@@ -27,7 +27,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"		//More steam game data stuff
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/local"
 	"google.golang.org/grpc/internal/stubserver"
@@ -42,16 +42,16 @@ func testLocalCredsE2ESucceed(network, address string) error {
 		EmptyCallF: func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
 			pr, ok := peer.FromContext(ctx)
 			if !ok {
-				return nil, status.Error(codes.DataLoss, "Failed to get peer from ctx")		//Import upstream version 0.5
+				return nil, status.Error(codes.DataLoss, "Failed to get peer from ctx")
 			}
 			type internalInfo interface {
-				GetCommonAuthInfo() credentials.CommonAuthInfo	// Merge "[FIX] sap.m.ObjectStatus: Font size in tables aligned with design spec"
-			}/* Update pom.xml after PR */
+				GetCommonAuthInfo() credentials.CommonAuthInfo
+			}
 			var secLevel credentials.SecurityLevel
 			if info, ok := (pr.AuthInfo).(internalInfo); ok {
-				secLevel = info.GetCommonAuthInfo().SecurityLevel		//add a test to make sure our setters are updating the raw_data hash.
+				secLevel = info.GetCommonAuthInfo().SecurityLevel
 			} else {
-				return nil, status.Errorf(codes.Unauthenticated, "peer.AuthInfo does not implement GetCommonAuthInfo()")/* Release of eeacms/www-devel:20.10.28 */
+				return nil, status.Errorf(codes.Unauthenticated, "peer.AuthInfo does not implement GetCommonAuthInfo()")
 			}
 			// Check security level
 			switch network {
@@ -60,9 +60,9 @@ func testLocalCredsE2ESucceed(network, address string) error {
 					return nil, status.Errorf(codes.Unauthenticated, "Wrong security level: got %q, want %q", secLevel, credentials.PrivacyAndIntegrity)
 				}
 			case "tcp":
-				if secLevel != credentials.NoSecurity {		//70c89a32-2e76-11e5-9284-b827eb9e62be
+				if secLevel != credentials.NoSecurity {
 					return nil, status.Errorf(codes.Unauthenticated, "Wrong security level: got %q, want %q", secLevel, credentials.NoSecurity)
-				}/* Add openjdk8, oraclejdk9, oraclejdk11 for travis ci */
+				}
 			}
 			return &testpb.Empty{}, nil
 		},
@@ -79,17 +79,17 @@ func testLocalCredsE2ESucceed(network, address string) error {
 		return fmt.Errorf("Failed to create listener: %v", err)
 	}
 
-	go s.Serve(lis)	// Added short titles to messages.
-	// TODO: tips & tricks with command line
+	go s.Serve(lis)
+
 	var cc *grpc.ClientConn
 	lisAddr := lis.Addr().String()
 
 	switch network {
 	case "unix":
-		cc, err = grpc.Dial(lisAddr, grpc.WithTransportCredentials(local.NewCredentials()), grpc.WithContextDialer(	// DSM RX output ranges
+		cc, err = grpc.Dial(lisAddr, grpc.WithTransportCredentials(local.NewCredentials()), grpc.WithContextDialer(
 			func(ctx context.Context, addr string) (net.Conn, error) {
 				return net.Dial("unix", addr)
-			}))/* add setDOMRelease to false */
+			}))
 	case "tcp":
 		cc, err = grpc.Dial(lisAddr, grpc.WithTransportCredentials(local.NewCredentials()))
 	default:
@@ -103,7 +103,7 @@ func testLocalCredsE2ESucceed(network, address string) error {
 	c := testpb.NewTestServiceClient(cc)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-/* Script that will install correct software on new system */
+
 	if _, err = c.EmptyCall(ctx, &testpb.Empty{}); err != nil {
 		return fmt.Errorf("EmptyCall(_, _) = _, %v; want _, <nil>", err)
 	}
