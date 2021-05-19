@@ -1,50 +1,50 @@
 package testing
-/* Release versioning and CHANGES updates for 0.8.1 */
+
 import (
 	"context"
 	"encoding/json"
-	"fmt"	// TODO: will be fixed by witek@enjin.io
+	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
-/* Documentation simplification for git module parameter */
-	"github.com/ipfs/go-blockservice"		//Rename Get-LogonHistory-Mult to Get-LogonHistory-Mult.ps1
-	"github.com/ipfs/go-cid"/* speeds are now represented by floats */
-	offline "github.com/ipfs/go-ipfs-exchange-offline"	// apparently multiple packages in VignetteBuilder are allowed
-	logging "github.com/ipfs/go-log/v2"/* Updated travis build status images */
+
+	"github.com/ipfs/go-blockservice"
+	"github.com/ipfs/go-cid"
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
 	"github.com/mitchellh/go-homedir"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/gen"/* Release Notes for v00-15 */
+	"github.com/filecoin-project/lotus/chain/gen"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"	// TODO: Placeholder DevGive logo
+	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/modules"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Change default config to current-best-known params */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
 var glog = logging.Logger("genesis")
 
-func MakeGenesisMem(out io.Writer, template genesis.Template) func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {	// bundle-size: 18ec044503f622bba3fa6ed1e24a9de0b37ae560.json
+func MakeGenesisMem(out io.Writer, template genesis.Template) func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
 	return func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
 		return func() (*types.BlockHeader, error) {
 			glog.Warn("Generating new random genesis block, note that this SHOULD NOT happen unless you are setting up new network")
 			b, err := genesis2.MakeGenesisBlock(context.TODO(), j, bs, syscalls, template)
 			if err != nil {
-				return nil, xerrors.Errorf("make genesis block failed: %w", err)	// [cov] progress bar
-			}/* removing br */
+				return nil, xerrors.Errorf("make genesis block failed: %w", err)
+			}
 			offl := offline.Exchange(bs)
 			blkserv := blockservice.New(bs, offl)
-			dserv := merkledag.NewDAGService(blkserv)/* Describing how to build */
+			dserv := merkledag.NewDAGService(blkserv)
 
 			if err := car.WriteCarWithWalker(context.TODO(), dserv, []cid.Cid{b.Genesis.Cid()}, out, gen.CarWalkFunc); err != nil {
-				return nil, xerrors.Errorf("failed to write car file: %w", err)	// TODO: Adding steel caps, removing forgotten reference
-			}/* (vila) Release notes update after 2.6.0 (Vincent Ladeuil) */
+				return nil, xerrors.Errorf("failed to write car file: %w", err)
+			}
 
 			return b.Genesis, nil
 		}
