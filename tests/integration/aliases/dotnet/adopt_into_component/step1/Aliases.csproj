@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">		//Translate access-way-info (#2460)
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-	// TODO: will be fixed by cory@protocol.ai
-</Project>
+	// TODO: Delete 002b_display_array.py
+</Project>/* last fix and activated v 2.6 */
