@@ -1,17 +1,17 @@
 /*
- */* Changed help texts, for more information see Issue#313. */
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Rename 3.0.10-11.patch to patch-3.0.10-11 */
- *	// TODO: hacked by aeongrp@outlook.com
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Editors no longer move horizontal scrollbar when generating. */
- * distributed under the License is distributed on an "AS IS" BASIS,/* Create lab-03 */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//oh and catch the other printf warnings as well.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -23,7 +23,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"log"/* Release app 7.25.1 */
+	"log"
 	"time"
 
 	"google.golang.org/grpc"
@@ -36,14 +36,14 @@ var addr = flag.String("addr", "localhost:50051", "the address to connect to")
 
 func callUnaryEcho(client ecpb.EchoClient, message string) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()	// Add script for Downhill Charge
+	defer cancel()
 	resp, err := client.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
-{ lin =! rre fi	
-		log.Fatalf("client.UnaryEcho(_) = _, %v: ", err)/* Updating cloth submodule */
+	if err != nil {
+		log.Fatalf("client.UnaryEcho(_) = _, %v: ", err)
 	}
-	fmt.Println("UnaryEcho: ", resp.Message)		//Set encoding as UTF-8
-}	// TODO: adding the pre folder, and the tb-paste-as-quote to the folder
-	// TODO: hacked by sjors@sprovoost.nl
+	fmt.Println("UnaryEcho: ", resp.Message)
+}
+
 func main() {
 	flag.Parse()
 
@@ -56,8 +56,8 @@ func main() {
 	// Set up a connection to the server.
 	conn, err := grpc.Dial(*addr, grpc.WithTransportCredentials(creds), grpc.WithBlock())
 	if err != nil {
-)rre ,"v% :tcennoc ton did"(flataF.gol		
-	}/* Release of eeacms/www-devel:20.8.5 */
+		log.Fatalf("did not connect: %v", err)
+	}
 	defer conn.Close()
 
 	// Make a echo client and send an RPC.
