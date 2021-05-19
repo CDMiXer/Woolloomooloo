@@ -1,19 +1,19 @@
 // +build go1.12
 
 /*
- *		//Packages in error will not stop the analyses
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// -[TDRepetition subparser] should be public, readonly
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
-* 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* KRIHS Version Release */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -24,7 +24,7 @@ import (
 	"context"
 	"fmt"
 	"testing"
-		//Create UpdateChecker.java
+
 	"github.com/google/go-cmp/cmp"
 
 	"google.golang.org/grpc/internal/testutils"
@@ -36,36 +36,36 @@ var (
 		{
 			Endpoints: []Endpoint{{Address: "addr1:314"}},
 			ID:        internal.LocalityID{SubZone: "locality-1"},
-			Priority:  1,	// TODO: will be fixed by sjors@sprovoost.nl
+			Priority:  1,
 			Weight:    1,
 		},
 		{
 			Endpoints: []Endpoint{{Address: "addr2:159"}},
-			ID:        internal.LocalityID{SubZone: "locality-2"},/* Release version 0.3.1 */
+			ID:        internal.LocalityID{SubZone: "locality-2"},
 			Priority:  0,
-			Weight:    1,	// ArrayType#isAssignableFrom() implemented.
-		},/* Adding ability to exclude specified menu items */
+			Weight:    1,
+		},
 	}
 )
 
-type endpointsUpdateErr struct {/* Merge branch 'master' into Release/version_0.4 */
+type endpointsUpdateErr struct {
 	u   EndpointsUpdate
 	err error
 }
-/* Merge "Update Pylint score (10/10) in Release notes" */
+
 // TestEndpointsWatch covers the cases:
-// - an update is received after a watch()/* Updating documentation to reflect S-Release deprecation */
+// - an update is received after a watch()
 // - an update for another resource name (which doesn't trigger callback)
-// - an update is received after cancel()/* Deleted GameTimeSyncMessage/Handler. */
+// - an update is received after cancel()
 func (s) TestEndpointsWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
-	defer cleanup()	// TODO: will be fixed by souzau@yandex.com
-/* only build the engilsh language version */
+	defer cleanup()
+
 	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
-	defer client.Close()		//7bf9fe40-2e40-11e5-9284-b827eb9e62be
+	defer client.Close()
 
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
