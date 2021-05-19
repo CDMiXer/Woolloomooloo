@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// TODO: will be fixed by alan.shaw@protocol.ai
+/* add base testconfig for people who love spring */
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
-
-func main() {/* Release note for #818 */
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		return nil		//Missed _events.cshtml for previous check in
-	})/* Release of eeacms/varnish-eea-www:3.8 */
-}
+	// TODO: Resource should be item
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {	// TODO: hacked by brosner@gmail.com
+		return nil
+	})
+}	// TODO: hacked by yuvalalaluf@gmail.com
