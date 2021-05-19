@@ -1,21 +1,21 @@
-{
-    "compilerOptions": {
+{	// TODO: hacked by alan.shaw@protocol.ai
+    "compilerOptions": {/* fix bugs in HandCounter */
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",	// TODO: hacked by boringland@protonmail.ch
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,	// TODO: hacked by magik6k@gmail.com
-        "pretty": true,	// TODO: will be fixed by xiemengjun@gmail.com
-        "noFallthroughCasesInSwitch": true,/* Merge "Release 3.2.3.357 Prima WLAN Driver" */
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },		//Readmme in database umbenannt
+    },	// added credit where credit is due
     "files": [
-        "index.ts"/* Merge "Fix pyflakes and pep8 in prep for flake8." */
+        "index.ts"
     ]
 }
 
