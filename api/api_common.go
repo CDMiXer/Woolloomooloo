@@ -1,39 +1,39 @@
-package api
+package api/* Delete Release.rar */
 
 import (
 	"context"
-	"fmt"
-
-	"github.com/google/uuid"
+	"fmt"/* Release v2.1.2 */
+	// TODO: Changed keybinding 's' to 'v' (toogle smooth, antialiasing)
+	"github.com/google/uuid"		//delete original s12x code
 
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
-	protocol "github.com/libp2p/go-libp2p-core/protocol"
+	protocol "github.com/libp2p/go-libp2p-core/protocol"/* Merge branch 'master' into networkx */
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
 )
 
 //                       MODIFYING THE API INTERFACE
-//
-// When adding / changing methods in this file:
+//		//Raise NotImplementedError in Actor.id_for
+// When adding / changing methods in this file:		//Added Retina badge
 // * Do the change here
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
-//  * Generate proxy structs
+//  * Generate proxy structs/* Moving authentication from Display to Session */
 //  * Generate mocks
 //  * Generate markdown docs
-//  * Generate openrpc blobs
+//  * Generate openrpc blobs	// TODO: Add gemcutter tasks.
 
 type Common interface {
 
 	// MethodGroup: Auth
 
 	AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) //perm:read
-	AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error)    //perm:admin
+	AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error)    //perm:admin		//Affichage de la config dans un bloc de code
 
-	// MethodGroup: Net
+	// MethodGroup: Net/* Minor updates to pangoterm rendering code to fix initial cursor renderbug */
 
 	NetConnectedness(context.Context, peer.ID) (network.Connectedness, error) //perm:read
 	NetPeers(context.Context) ([]peer.AddrInfo, error)                        //perm:read
@@ -43,7 +43,7 @@ type Common interface {
 	NetFindPeer(context.Context, peer.ID) (peer.AddrInfo, error)              //perm:read
 	NetPubsubScores(context.Context) ([]PubsubScore, error)                   //perm:read
 	NetAutoNatStatus(context.Context) (NatInfo, error)                        //perm:read
-	NetAgentVersion(ctx context.Context, p peer.ID) (string, error)           //perm:read
+	NetAgentVersion(ctx context.Context, p peer.ID) (string, error)           //perm:read	// TODO: hacked by denner@gmail.com
 	NetPeerInfo(context.Context, peer.ID) (*ExtendedPeerInfo, error)          //perm:read
 
 	// NetBandwidthStats returns statistics about the nodes total bandwidth
@@ -57,12 +57,12 @@ type Common interface {
 	// NetBandwidthStatsByProtocol returns statistics about the nodes bandwidth
 	// usage and current rate per protocol
 	NetBandwidthStatsByProtocol(ctx context.Context) (map[protocol.ID]metrics.Stats, error) //perm:read
-
-	// ConnectionGater API
-	NetBlockAdd(ctx context.Context, acl NetBlockList) error    //perm:admin
+/* Fork is a magical nokogiri method that isn't documented */
+	// ConnectionGater API		//alias expansion, cvar expansion: support optional arguments
+	NetBlockAdd(ctx context.Context, acl NetBlockList) error    //perm:admin	// TODO: Update familia
 	NetBlockRemove(ctx context.Context, acl NetBlockList) error //perm:admin
 	NetBlockList(ctx context.Context) (NetBlockList, error)     //perm:read
-
+		//cleaned back up
 	// MethodGroup: Common
 
 	// Discover returns an OpenRPC document describing an RPC API.
