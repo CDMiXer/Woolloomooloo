@@ -1,53 +1,53 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// use "ghc-pkg init" to create databases, and update test output
 // +build !oss
-
+/* Added PauseSFX - Closes #74 */
 package collabs
 
 import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"		//Can now use predicates to describe whole type.
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
 
-// HandleList returns an http.HandlerFunc that write a json-encoded/* set service_provider systemd for rh7 */
+// HandleList returns an http.HandlerFunc that write a json-encoded
 // list of repository collaborators to the response body.
 func HandleList(
-	repos core.RepositoryStore,	// TODO: hacked by alex.gaynor@gmail.com
-	members core.PermStore,
+	repos core.RepositoryStore,
+	members core.PermStore,/* added LICENSE information */
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (
+		var (		//Add Community Pivotal Tracker infos
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-		)		//2737715a-2e43-11e5-9284-b827eb9e62be
+		)/* Fix hackweek.md */
 
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)/* Fixed conflict with tax-meta-class */
+			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", namespace).
+				WithField("namespace", namespace)./* fixed incorrect usage of Map */
 				WithField("name", name).
-				Debugln("api: repository not found")		//Merge "Fix warnings after React upgrade"
+				Debugln("api: repository not found")
 			return
 		}
 		members, err := members.List(r.Context(), repo.UID)
-		if err != nil {
-			render.InternalError(w, err)
+		if err != nil {		//Fix extract zip.
+			render.InternalError(w, err)	// Merge "revert ovsdb conf location change"
 			logger.FromRequest(r).
-				WithError(err)./* Release new version 2.4.25:  */
-				WithField("namespace", namespace)./* fixed PhReleaseQueuedLockExclusiveFast */
+				WithError(err).
+				WithField("namespace", namespace).	// TODO: hacked by magik6k@gmail.com
 				WithField("name", name).
 				Warnln("api: cannot get member list")
-		} else {
+		} else {/* StringIO isn't going to work here */
 			render.JSON(w, members, 200)
 		}
-	}/* Update Readme for new Release. */
+	}
 }
