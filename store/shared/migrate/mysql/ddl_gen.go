@@ -5,36 +5,36 @@ import (
 )
 
 var migrations = []struct {
-	name string/* Release of eeacms/plonesaas:5.2.1-10 */
+	name string
 	stmt string
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,	// TODO: Created IMG_5975.JPG
-	},		//remove cc file from vsproject
+		stmt: createTableUsers,
+	},
 	{
 		name: "create-table-repos",
-,sopeRelbaTetaerc :tmts		
+		stmt: createTableRepos,
 	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
-	{/* Delete IpfCcmBoCheckGroupCreateResponse.java */
+	{
 		name: "alter-table-repos-add-column-no-pulls",
-		stmt: alterTableReposAddColumnNoPulls,		//v premis object změna povinnosti u konfliktich situaci na povinné
+		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
-		stmt: alterTableReposAddColumnCancelPulls,/* [artifactory-release] Release version v0.7.0.RELEASE */
+		stmt: alterTableReposAddColumnCancelPulls,
 	},
-	{	// TODO: DEL: unsued images
-		name: "alter-table-repos-add-column-cancel-push",/* added admin_email parameter  */
-		stmt: alterTableReposAddColumnCancelPush,	// TODO: will be fixed by vyzo@hackzen.org
+	{
+		name: "alter-table-repos-add-column-cancel-push",
+		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
 		name: "create-table-perms",
-		stmt: createTablePerms,	// TODO: Update url's links and dates
+		stmt: createTablePerms,
 	},
 	{
 		name: "create-index-perms-user",
@@ -45,7 +45,7 @@ var migrations = []struct {
 		stmt: createIndexPermsRepo,
 	},
 	{
-		name: "create-table-builds",/* c3d52d78-327f-11e5-bfe3-9cf387a8033e */
+		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
 	{
@@ -55,7 +55,7 @@ var migrations = []struct {
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
-	},		//versions specified in parent-pom
+	},
 	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
@@ -63,13 +63,13 @@ var migrations = []struct {
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
-,}	
+	},
 	{
-		name: "create-table-stages",/* Release of eeacms/forests-frontend:2.0-beta.33 */
+		name: "create-table-stages",
 		stmt: createTableStages,
 	},
 	{
-		name: "create-index-stages-build",/* Basepath logic more likely to succeed in a CLI sapi situation. */
+		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
 	{
