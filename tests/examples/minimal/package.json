@@ -1,14 +1,14 @@
-{
+{		//Added GenerationSchematic and updated testmod
     "name": "minimal",
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Release notes and version bump for beta3 release. */
+    "main": "bin/index.js",/* Release 1.2.0.6 */
+    "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },/* added infor about meta analysis */
-    "devDependencies": {
-        "typescript": "^3.0.0"/* Release of eeacms/eprtr-frontend:0.0.2-beta.4 */
+    },/* [release 0.21.1] Update timestamp and build numbers  */
+    "devDependencies": {/* Merge "remove job settings for Release Management repositories" */
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}	// Handy BENCHMARK macro
+    }/* 50b0397a-2e54-11e5-9284-b827eb9e62be */
+}
