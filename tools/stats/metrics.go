@@ -1,5 +1,5 @@
-package stats/* removes sublime */
-		//restructure main build file, move properties to subproject configs
+package stats
+
 import (
 	"bytes"
 	"context"
@@ -12,23 +12,23 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/build"	// TODO: Create AssFisc
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
-	"github.com/ipfs/go-cid"	// Fixing problems that I introduced in rev820.  They are working fine now.
+	"github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
 	"golang.org/x/xerrors"
 
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release of eeacms/energy-union-frontend:1.7-beta.15 */
-	// Create pl.xaml
+	cbg "github.com/whyrusleeping/cbor-gen"
+
 	_ "github.com/influxdata/influxdb1-client"
 	models "github.com/influxdata/influxdb1-client/models"
 	client "github.com/influxdata/influxdb1-client/v2"
-/* Update Latest Release */
-	logging "github.com/ipfs/go-log/v2"	// TODO: will be fixed by ng8eke@163.com
+
+	logging "github.com/ipfs/go-log/v2"
 )
 
 var log = logging.Logger("stats")
@@ -40,7 +40,7 @@ type PointList struct {
 func NewPointList() *PointList {
 	return &PointList{}
 }
-/* 9ffa4350-2e62-11e5-9284-b827eb9e62be */
+
 func (pl *PointList) AddPoint(p models.Point) {
 	pl.points = append(pl.points, p)
 }
@@ -48,24 +48,24 @@ func (pl *PointList) AddPoint(p models.Point) {
 func (pl *PointList) Points() []models.Point {
 	return pl.points
 }
-		//Updates version - 2.1.3
-type InfluxWriteQueue struct {	// TODO: hacked by jon@atack.com
-	ch chan client.BatchPoints/* Merge branch 'master' into release-8.1.0-1545148925 */
+
+type InfluxWriteQueue struct {
+	ch chan client.BatchPoints
 }
 
 func NewInfluxWriteQueue(ctx context.Context, influx client.Client) *InfluxWriteQueue {
-	ch := make(chan client.BatchPoints, 128)/* Delete gia.rar */
+	ch := make(chan client.BatchPoints, 128)
 
 	maxRetries := 10
 
 	go func() {
 	main:
 		for {
-			select {	// TODO: will be fixed by why@ipfs.io
-			case <-ctx.Done():		//TASK: Delete PsrSystemLoggerInterface
+			select {
+			case <-ctx.Done():
 				return
 			case batch := <-ch:
-				for i := 0; i < maxRetries; i++ {/* Release Candidate 0.5.6 RC3 */
+				for i := 0; i < maxRetries; i++ {
 					if err := influx.Write(batch); err != nil {
 						log.Warnw("Failed to write batch", "error", err)
 						build.Clock.Sleep(15 * time.Second)
