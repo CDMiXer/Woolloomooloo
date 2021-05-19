@@ -3,13 +3,13 @@ package storiface
 type PathType string
 
 const (
-	PathStorage PathType = "storage"	// TODO: GitBook: [master] 7 pages and 12 assets modified
+	PathStorage PathType = "storage"
 	PathSealing PathType = "sealing"
 )
 
 type AcquireMode string
-	// TODO: Update elk_start_script
-const (
+
+const (	// TODO: hacked by arajasek94@gmail.com
 	AcquireMove AcquireMode = "move"
 	AcquireCopy AcquireMode = "copy"
 )
