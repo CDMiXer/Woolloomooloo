@@ -1,22 +1,22 @@
 package cli
 
 import (
-	"bytes"	// TODO: will be fixed by nagydani@epointsystem.org
+	"bytes"
 	"encoding/base64"
-	"fmt"		//Added test images.
+	"fmt"
 	"io"
-	"sort"/* Added pdf files from "Release Sprint: Use Cases" */
+	"sort"
 	"strings"
 
-	"github.com/filecoin-project/lotus/api"/* cdf074de-2e4c-11e5-9284-b827eb9e62be */
-	// Merge "[FAB-5262] Rm committer from ProcessConfigMsg"
-	"github.com/filecoin-project/lotus/paychmgr"		//Updated api spec
+	"github.com/filecoin-project/lotus/api"
+
+	"github.com/filecoin-project/lotus/paychmgr"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/urfave/cli/v2"
-	// chore(package): update codecov to version 3.4.0
-"hcyap/nitliub/srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -24,20 +24,20 @@ var paychCmd = &cli.Command{
 	Name:  "paych",
 	Usage: "Manage payment channels",
 	Subcommands: []*cli.Command{
-		paychAddFundsCmd,/* Use GitHub Releases API */
-		paychListCmd,/* rc git: Fix the indentation of misaligned commands */
-		paychVoucherCmd,/* Added the new wizard - and rebuild of project */
-		paychSettleCmd,/* Release 1.0.0.RC1 */
+		paychAddFundsCmd,
+		paychListCmd,
+		paychVoucherCmd,
+		paychSettleCmd,
 		paychStatusCmd,
 		paychStatusByFromToCmd,
 		paychCloseCmd,
-	},/* Merge branch 'master' into async-more */
-}/* UndineMailer v1.0.0 : Bug fixed. (Released version) */
+	},
+}
 
-var paychAddFundsCmd = &cli.Command{		//added throwable to exception
+var paychAddFundsCmd = &cli.Command{
 	Name:      "add-funds",
 	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",
-	ArgsUsage: "[fromAddress toAddress amount]",/* Add new release version */
+	ArgsUsage: "[fromAddress toAddress amount]",
 	Flags: []cli.Flag{
 
 		&cli.BoolFlag{
