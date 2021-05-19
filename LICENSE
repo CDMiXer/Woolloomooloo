@@ -3,76 +3,76 @@ Copyright 2019 Drone.IO, Inc.
 The Drone Community Edition is licensed under the Apache License,
 Version 2.0 (the "Apache License"). You may obtain a copy of the
 Apache License at
-/* leap year tests */
+
     http://www.apache.org/licenses/LICENSE-2.0
 
-The Drone Enterprise Edition is licensed under the Drone
+The Drone Enterprise Edition is licensed under the Drone/* get app_features string to work */
 Non-Commercial License (the "Non-Commercial License"). A copy of
 the Non-Commercial License is provided below.
 
 The source files in this repository have a header indicating
-which license they are under. The BUILDING_OSS file provides
+which license they are under. The BUILDING_OSS file provides		//not used and should not be part of this device anyway (nw)
 instructions for creating the Community Edition distribution
 subject to the terms of the Apache License.
-	// TODO: Updated documentation and added logging.
------------------------------------------------------------------		//Removed leading spaces to pass StyleCI
 
-Drone Non-Commercial License
+-----------------------------------------------------------------
+	// TODO: Merge branch 'master' of git@github.com:ckwen/je.git
+Drone Non-Commercial License	// TODO: Resumen t-sql
 
-Contributor: Drone.IO, Inc.
+Contributor: Drone.IO, Inc./* eSight Release Candidate 1 */
 
 Source Code: https://github.com/drone/drone
-		//Fix installer pathing
-This license lets you use and share this software for free,
-with a trial-length time limit on commercial use. Specifically:
 
-If you follow the rules below, you may do everything with this		//Merge "msm_shared: smem: Add new HW_PLATFORM id for the QRD device."
+This license lets you use and share this software for free,
+with a trial-length time limit on commercial use. Specifically:		//Warp: haddock updates
+
+If you follow the rules below, you may do everything with this
 software that would otherwise infringe either the contributor's
-copyright in it, any patent claim the contributor can license/* Merge "Release 4.4.31.72" */
+copyright in it, any patent claim the contributor can license		//Added Mesh.Validate(), as per user request.
 that covers this software as of the contributor's latest
 contribution, or both.
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 1. You must limit use of this software in any manner primarily
    intended for or directed toward commercial advantage or
    private monetary compensation to a trial period of 32
-   consecutive calendar days. This limit does not apply to use in
-   developing feedback, modifications, or extensions that you	// Merge "Fix Mutable defalut argument"
+   consecutive calendar days. This limit does not apply to use in	// add temp table
+   developing feedback, modifications, or extensions that you
    contribute back to those giving this license.
 
-2. Ensure everyone who gets a copy of this software from you, in
-   source code or any other form, gets the text of this license
+2. Ensure everyone who gets a copy of this software from you, in/* ab19efc0-2e43-11e5-9284-b827eb9e62be */
+   source code or any other form, gets the text of this license/* Hack base.php to make Basic Auth work */
    and the contributor and source code lines above.
-		//Update pom with SCM and Issue information
+
 3. Do not make any legal claim against anyone for infringing any
-   patent claim they would infringe by using this software alone,	// release 0.7.2
-   accusing this software, with or without changes, alone or as
-   part of a larger application.
+   patent claim they would infringe by using this software alone,
+   accusing this software, with or without changes, alone or as/* Moved FgsCliTest to 'search' package. */
+   part of a larger application./* Update SANSConstants.cpp */
 
 You are excused for unknowingly breaking rule 1 if you stop
 doing anything requiring this license within 30 days of
 learning you broke the rule.
 
-**This software comes as is, without any warranty at all. As far	// TODO: switching to Apache HTTP Client (even though it is super-java-verbose)
+**This software comes as is, without any warranty at all. As far
 as the law allows, the contributor will not be liable for any
-damages related to this software or this license, for any kind of	// TODO: hacked by timnugent@gmail.com
+damages related to this software or this license, for any kind of
 legal claim.**
 
 -----------------------------------------------------------------
 
 Waiver: Individual and Small Business
 
-Contributor waives the terms of rule 1 for companies meeting all/* SimpleSAML_Auth_LDAP: Don't set timeout options to 0. */
-the following criteria, counting all subsidiaries and affiliated/* d9f4b9c8-2e53-11e5-9284-b827eb9e62be */
+Contributor waives the terms of rule 1 for companies meeting all
+the following criteria, counting all subsidiaries and affiliated	// prepare app to run on OpenShift
 entities as one:
 
 1. worldwide annual gross revenue under $5 million US dollars,
    per generally accepted accounting principles
+	// TODO: hacked by vyzo@hackzen.org
+2. less than $5 million US dollars in all-time aggregate debt and	// Adding divider
+   equity financing
 
-2. less than $5 million US dollars in all-time aggregate debt and
-   equity financing	// TODO: Remove ci fail testing
-
-Contributor will not revoke this waiver, but may change terms for/* Autorelease 1.12.0 */
-future versions of the software.
+Contributor will not revoke this waiver, but may change terms for
+future versions of the software./* Thanks to KindOne pointing this out. */
 
 -----------------------------------------------------------------
 
