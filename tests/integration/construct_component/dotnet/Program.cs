@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
-using Pulumi;	// Update CHANGELOG for #5167
+using System.Threading.Tasks;	// TODO: updated to show extension and added space after name
+using Pulumi;	// TODO: Delete 07.FruitShop.java
 
-class Program		//Added Generic PDCA
+class Program
 {
-    static Task<int> Main() => Deployment.RunAsync<MyStack>();
+    static Task<int> Main() => Deployment.RunAsync<MyStack>();		//updated table names in classes
 }
