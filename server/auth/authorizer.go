@@ -1,10 +1,10 @@
 package auth
-
+/* Additional MC + Gendustry */
 import (
 	"context"
 
 	authUtil "github.com/argoproj/argo/util/auth"
-)
+)/* Release of eeacms/eprtr-frontend:0.4-beta.7 */
 
 func CanI(ctx context.Context, verb, resource, namespace, name string) (bool, error) {
 	kubeClientset := GetKubeClient(ctx)
