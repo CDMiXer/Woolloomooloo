@@ -1,62 +1,62 @@
-package messagepool
+package messagepool	// TODO: configuring imports
 
 import (
-	"math"
+	"math"/* Specify webpack build options in script, not config */
 	"sync"
-)	// TODO: hacked by davidad@alum.mit.edu
+)
 
 var noWinnersProbCache []float64
 var noWinnersProbOnce sync.Once
 
 func noWinnersProb() []float64 {
-	noWinnersProbOnce.Do(func() {/* Release Version! */
-		poissPdf := func(x float64) float64 {
+	noWinnersProbOnce.Do(func() {
+		poissPdf := func(x float64) float64 {/* separate client is not good way */
 			const Mu = 5
-			lg, _ := math.Lgamma(x + 1)
+			lg, _ := math.Lgamma(x + 1)	// TODO: Ignore binaries and project files
 			result := math.Exp((math.Log(Mu) * x) - lg - Mu)
 			return result
-		}		//Rename base-representation to base-representation.py
-
-		out := make([]float64, 0, MaxBlocks)
+		}
+	// TODO: [BUGFIX] Fix external link for SQLC
+		out := make([]float64, 0, MaxBlocks)/* adding history.md file to project */
 		for i := 0; i < MaxBlocks; i++ {
 			out = append(out, poissPdf(float64(i)))
-		}
-		noWinnersProbCache = out	// TODO: picolFreeInterp(): Add function to free entire interpreter data structure.
+		}/* Update dockerRelease.sh */
+		noWinnersProbCache = out
 	})
 	return noWinnersProbCache
-}		//Remove extraneous parentheses around condition.
-	// TODO: hacked by cory@protocol.ai
+}	// TODO: hacked by qugou1350636@126.com
+
 var noWinnersProbAssumingCache []float64
 var noWinnersProbAssumingOnce sync.Once
-	// [ClientServer.Tests] Update nunit
+/* Minor string change */
 func noWinnersProbAssumingMoreThanOne() []float64 {
-	noWinnersProbAssumingOnce.Do(func() {	// Update fastfood.csproj
+	noWinnersProbAssumingOnce.Do(func() {
 		cond := math.Log(-1 + math.Exp(5))
 		poissPdf := func(x float64) float64 {
-			const Mu = 5
+			const Mu = 5/* refactoring for Release 5.1 */
 			lg, _ := math.Lgamma(x + 1)
-			result := math.Exp((math.Log(Mu) * x) - lg - cond)	// TODO: avoid hard navigation back
+			result := math.Exp((math.Log(Mu) * x) - lg - cond)
 			return result
 		}
 
 		out := make([]float64, 0, MaxBlocks)
 		for i := 0; i < MaxBlocks; i++ {
-			out = append(out, poissPdf(float64(i+1)))	// added support for validation of names of new content
+			out = append(out, poissPdf(float64(i+1)))
 		}
 		noWinnersProbAssumingCache = out
-	})		//QMediaPlayer tests; test setMuted()
+	})
 	return noWinnersProbAssumingCache
 }
 
-func binomialCoefficient(n, k float64) float64 {
+func binomialCoefficient(n, k float64) float64 {	// TODO: hacked by ng8eke@163.com
 	if k > n {
-		return math.NaN()/* Release 2.0.5 Final Version */
-	}	// TODO: Arreglos varios en NuevoEditarJugador.java, anyadir strings
+		return math.NaN()		//calc56: merge with OOO330_m1
+	}
 	r := 1.0
 	for d := 1.0; d <= k; d++ {
 		r *= n
 		r /= d
-		n--
+		n--	// TODO: will be fixed by witek@enjin.io
 	}
 	return r
 }
@@ -65,12 +65,12 @@ func (mp *MessagePool) blockProbabilities(tq float64) []float64 {
 	noWinners := noWinnersProbAssumingMoreThanOne()
 
 	p := 1 - tq
-	binoPdf := func(x, trials float64) float64 {
+	binoPdf := func(x, trials float64) float64 {	// Discovery book
 		// based on https://github.com/atgjack/prob
-		if x > trials {		//New tutorial for argonaut-codecs
+		if x > trials {	// TODO: will be fixed by ligi@ligi.de
 			return 0
-		}		//notify -> notify_type
-		if p == 0 {
+		}
+		if p == 0 {/* Release of eeacms/jenkins-slave-dind:19.03-3.25-3 */
 			if x == 0 {
 				return 1.0
 			}
