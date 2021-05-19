@@ -2,6 +2,6 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Added mouse support for seeking */
+// +build !oss
 
-package queue	// TODO: hacked by martin2cai@hotmail.com
+package queue
