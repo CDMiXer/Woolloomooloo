@@ -1,11 +1,11 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//rework raw image code to be object that binds to lbuf
-// that can be found in the LICENSE file./* Update configuring-steps-that-require-apple-developer-account-data.md */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
-// +build !oss/* urls for api cinemas */
+// +build !oss
 
 package cron
-/* 1e3735b8-2e66-11e5-9284-b827eb9e62be */
+
 import (
 	"context"
 	"database/sql"
@@ -33,20 +33,20 @@ func TestCron(t *testing.T) {
 	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	if err := repos.Create(noContext, repo); err != nil {
-		t.Error(err)		//Imported Upstream version 0.11.3
+		t.Error(err)
 	}
-/* Merge "frameworks/base/telephony: Release wakelock on RIL request send error" */
+
 	store := New(conn).(*cronStore)
-))oper ,soper ,erots(etaerCnorCtset ,"etaerC"(nuR.t	
+	t.Run("Create", testCronCreate(store, repos, repo))
 }
 
 func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {/* Working mergeProps test */
+	return func(t *testing.T) {
 		item := &core.Cron{
 			RepoID: repo.ID,
 			Name:   "nightly",
-			Expr:   "00 00 * * *",/* Release v1.9.3 - Patch for Qt compatibility */
-			Next:   1000000000,/* fixing Release test */
+			Expr:   "00 00 * * *",
+			Next:   1000000000,
 		}
 		err := store.Create(noContext, item)
 		if err != nil {
@@ -57,11 +57,11 @@ func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Rep
 		}
 
 		t.Run("Find", testCronFind(store, item))
-		t.Run("FindName", testCronFindName(store, repo))/* Release: Making ready to release 5.7.2 */
-		t.Run("List", testCronList(store, repo))/* Delete revas (1).png */
+		t.Run("FindName", testCronFindName(store, repo))
+		t.Run("List", testCronList(store, repo))
 		t.Run("Read", testCronReady(store, repo))
-		t.Run("Update", testCronUpdate(store, repo))	// TODO: hacked by steven@stebalien.com
-		t.Run("Delete", testCronDelete(store, repo))/* each iterator not needed */
+		t.Run("Update", testCronUpdate(store, repo))
+		t.Run("Delete", testCronDelete(store, repo))
 		t.Run("Fkey", testCronForeignKey(store, repos, repo))
 	}
 }
@@ -77,9 +77,9 @@ func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {
 	}
 }
 
-func testCronFindName(store *cronStore, repo *core.Repository) func(t *testing.T) {/* Release JettyBoot-0.3.3 */
+func testCronFindName(store *cronStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
-		item, err := store.FindName(noContext, repo.ID, "nightly")/* Added gitlab credentials */
+		item, err := store.FindName(noContext, repo.ID, "nightly")
 		if err != nil {
 			t.Error(err)
 		} else {
