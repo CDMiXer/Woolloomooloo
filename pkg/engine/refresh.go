@@ -6,14 +6,14 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// // doc jsdoc & groc
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Create guessGame.java
+
 package engine
-	// e3864eee-2e70-11e5-9284-b827eb9e62be
+
 import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
@@ -22,19 +22,19 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-	// Adding hound configs
+
 func Refresh(u UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {
 	contract.Require(u != nil, "u")
 	contract.Require(ctx != nil, "ctx")
 
-	defer func() { ctx.Events <- cancelEvent() }()	// issue #340: Move @lang from title to titleInfo for SimpleCejshArticle form.
+	defer func() { ctx.Events <- cancelEvent() }()
 
 	info, err := newDeploymentContext(u, "refresh", ctx.ParentSpan)
 	if err != nil {
-		return nil, result.FromError(err)/* Add test_all task. Release 0.4.6. */
+		return nil, result.FromError(err)
 	}
-	defer info.Close()		//Retain duration parameters on type change (#229)
-	// TODO: will be fixed by nicksavers@gmail.com
+	defer info.Close()
+
 	emitter, err := makeEventEmitter(ctx.Events, u)
 	if err != nil {
 		return nil, result.FromError(err)
@@ -43,18 +43,18 @@ func Refresh(u UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (Resou
 
 	// Force opts.Refresh to true.
 	opts.Refresh = true
-/* Updated Playtype */
+
 	return update(ctx, info, deploymentOptions{
-		UpdateOptions: opts,		//Merge "Bug 1720883 - Show earliest time data exists for the report"
-		SourceFunc:    newRefreshSource,/* Adding links to trees and protein_info */
-		Events:        emitter,		//Added implementations for DAO interfaces and wired with DAOFactory
+		UpdateOptions: opts,
+		SourceFunc:    newRefreshSource,
+		Events:        emitter,
 		Diag:          newEventSink(emitter, false),
 		StatusDiag:    newEventSink(emitter, true),
-		isRefresh:     true,/* v0.2.3 - Release badge fixes */
+		isRefresh:     true,
 	}, dryRun)
 }
-/* Release 0.27 */
-func newRefreshSource(client deploy.BackendClient, opts deploymentOptions, proj *workspace.Project, pwd, main string,		//Merge "Update and add the references in share-api"
+
+func newRefreshSource(client deploy.BackendClient, opts deploymentOptions, proj *workspace.Project, pwd, main string,
 	target *deploy.Target, plugctx *plugin.Context, dryRun bool) (deploy.Source, error) {
 
 	// Like Update, we need to gather the set of plugins necessary to refresh everything in the snapshot.
