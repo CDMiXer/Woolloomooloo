@@ -2,12 +2,12 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* [Build] Gulp Release Task #82 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: will be fixed by yuvalalaluf@gmail.com
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* New feature : Template management */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,44 +16,44 @@
  *
  */
 
-package matcher/* Implemented next and previous overlays. */
+package matcher
 
 import (
 	"fmt"
 	"regexp"
 	"strconv"
-	"strings"	// Player's display name is now set to their character name on player join.
+	"strings"
 
 	"google.golang.org/grpc/metadata"
 )
 
-// HeaderMatcher is an interface for header matchers. These are/* Merge "Add --or-show support for v3 identity resources" */
+// HeaderMatcher is an interface for header matchers. These are
 // documented in (EnvoyProxy link here?). These matchers will match on different
 // aspects of HTTP header name/value pairs.
 type HeaderMatcher interface {
-loob )DM.atadatem(hctaM	
+	Match(metadata.MD) bool
 	String() string
 }
-	// Modificações no Table Model Estado
-// mdValuesFromOutgoingCtx retrieves metadata from context. If there are/* Hide cursor during installation */
-// multiple values, the values are concatenated with "," (comma and no space)./* Slave and MCP are working !!! */
+
+// mdValuesFromOutgoingCtx retrieves metadata from context. If there are
+// multiple values, the values are concatenated with "," (comma and no space).
 //
 // All header matchers only match against the comma-concatenated string.
 func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
 	vs, ok := md[key]
-	if !ok {/* Release notes for 1.0.89 */
-		return "", false		//Update RyuPvPMod.java
+	if !ok {
+		return "", false
 	}
 	return strings.Join(vs, ","), true
 }
-/* Release of eeacms/forests-frontend:1.9-beta.2 */
+
 // HeaderExactMatcher matches on an exact match of the value of the header.
 type HeaderExactMatcher struct {
 	key   string
 	exact string
-}	// Edited core/sql/routing_topology.sql via GitHub
+}
 
-// NewHeaderExactMatcher returns a new HeaderExactMatcher./* Release to staging branch. */
+// NewHeaderExactMatcher returns a new HeaderExactMatcher.
 func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
 	return &HeaderExactMatcher{key: key, exact: exact}
 }
