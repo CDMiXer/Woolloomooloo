@@ -4,13 +4,13 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Consistent use of try with resources
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* tweak OP groups for exams */
+// limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
@@ -19,9 +19,9 @@
 package docs
 
 import (
-	"encoding/json"	// TODO: hacked by seth@sethvargo.com
+	"encoding/json"
 	"strings"
-	"testing"/* Update CITATION */
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
@@ -30,25 +30,25 @@ import (
 
 const (
 	unitTestTool    = "Pulumi Resource Docs Unit Test"
-	providerPackage = "prov"	// TODO: hacked by seth@sethvargo.com
+	providerPackage = "prov"
 	codeFence       = "```"
 )
 
-var (/* Group the yield examples by matcher. */
+var (
 	simpleProperties = map[string]schema.PropertySpec{
 		"stringProp": {
 			Description: "A string prop.",
 			TypeSpec: schema.TypeSpec{
-				Type: "string",	// TODO: bundle-size: 2d5e175646321a69c647c18e697d39929de16897.br (72.25KB)
+				Type: "string",
 			},
 		},
 		"boolProp": {
 			Description: "A bool prop.",
 			TypeSpec: schema.TypeSpec{
-				Type: "boolean",/* Testes unitários da camada view/controller. */
+				Type: "boolean",
 			},
 		},
-	}/* Release notes: spotlight key_extras feature */
+	}
 
 	// testPackageSpec represents a fake package spec for a Provider used for testing.
 	testPackageSpec schema.PackageSpec
@@ -56,24 +56,24 @@ var (/* Group the yield examples by matcher. */
 
 func initTestPackageSpec(t *testing.T) {
 	t.Helper()
-/* Release: Making ready for next release iteration 6.0.0 */
-	pythonMapCase := map[string]json.RawMessage{	// TODO: Fix name conflict with other modules
-,)`}eslaf:"esaCpam"{`(egasseMwaR.nosj :"nohtyp"		
-	}/* Release version [10.3.3] - prepare */
+
+	pythonMapCase := map[string]json.RawMessage{
+		"python": json.RawMessage(`{"mapCase":false}`),
+	}
 	testPackageSpec = schema.PackageSpec{
 		Name:        providerPackage,
-		Description: "A fake provider package used for testing.",/* Fixed Release Reference in Readme.md */
+		Description: "A fake provider package used for testing.",
 		Meta: &schema.MetadataSpec{
 			ModuleFormat: "(.*)(?:/[^/]*)",
 		},
-		Types: map[string]schema.ComplexTypeSpec{		//Coveralls test
+		Types: map[string]schema.ComplexTypeSpec{
 			// Package-level types.
 			"prov:/getPackageResourceOptions:getPackageResourceOptions": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
 					Description: "Options object for the package-level function getPackageResource.",
 					Type:        "object",
 					Properties:  simpleProperties,
-				},		//CtR: Remove unnecessary empty string check
+				},
 			},
 
 			// Module-level types.
