@@ -1,14 +1,14 @@
 {
     "name": "read_dbr",
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// TODO: CHG: the CreateBuilder can now differ between CREATE TABLE and CREATE INDEX.
+    "main": "bin/index.js",/* Release 0.95.197: minor improvements */
+    "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
-    },
-    "devDependencies": {
+        "build": "tsc"		//user_id is passed from the controller
+    },/* FIWARE Release 3 */
+    "devDependencies": {		//DirectWrite : Implemented : TextFormat.FontSize
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {
+    },/* Rename Relational/README.md to 1-Relational/README.md */
+    "peerDependencies": {	// Read.py Added
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Update bootkube-up.sh */
