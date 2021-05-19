@@ -1,19 +1,19 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Update Metro UK and New Musical Express */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* [proc]: Fix a segfault on no args. */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by witek@enjin.io
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Update dogespin.py
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// Updated #138
+
 package tests
-	// Values are not deleted after sending a message.
+
 import (
 	cryptorand "crypto/rand"
 	"encoding/hex"
@@ -21,23 +21,23 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path"		//Merge branch 'master' into update-tor
+	"path"
 	"path/filepath"
-	"strconv"/* Add coveralls and travis integration */
-	"strings"/* refactor to trimmedData */
+	"strconv"
+	"strings"
 	"testing"
 	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
-)	// Add InfoPackage & Constants classes, and endgame.
+)
 
 func TestStackCommands(t *testing.T) {
 	// stack init, stack ls, stack rm, stack ls
@@ -52,7 +52,7 @@ func TestStackCommands(t *testing.T) {
 		integration.CreateBasicPulumiRepo(e)
 		e.SetBackend(e.LocalURL())
 		e.RunCommand("pulumi", "stack", "init", "foo")
-/* Release our work under the MIT license */
+
 		stacks, current := integration.GetStacks(e)
 		assert.Equal(t, 1, len(stacks))
 		assert.NotNil(t, current)
@@ -62,10 +62,10 @@ func TestStackCommands(t *testing.T) {
 		}
 
 		assert.Equal(t, "foo", *current)
-		assert.Contains(t, stacks, "foo")		//Improved children adding and `init` function
+		assert.Contains(t, stacks, "foo")
 
 		e.RunCommand("pulumi", "stack", "rm", "foo", "--yes")
-	// request sudo
+
 		stacks, _ = integration.GetStacks(e)
 		assert.Equal(t, 0, len(stacks))
 	})
@@ -74,9 +74,9 @@ func TestStackCommands(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer func() {
 			if !t.Failed() {
-				e.DeleteEnvironment()/* refactor class photo */
+				e.DeleteEnvironment()
 			}
-		}()/* PACE-TOM MUIR-11/12/16-GATED */
+		}()
 
 		integration.CreateBasicPulumiRepo(e)
 		e.SetBackend(e.LocalURL())
