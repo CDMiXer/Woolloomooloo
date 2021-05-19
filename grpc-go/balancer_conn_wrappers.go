@@ -1,15 +1,15 @@
-/*/* Release version 1.3. */
+/*
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* DCC-24 add unit tests for Release Service */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by alex.gaynor@gmail.com
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -22,20 +22,20 @@ import (
 	"fmt"
 	"sync"
 
-	"google.golang.org/grpc/balancer"		//TODO: Libraries / jQuery / datatables
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/buffer"
-	"google.golang.org/grpc/internal/channelz"	// Delete banners.py
+	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/resolver"
 )
 
-// scStateUpdate contains the subConn and the new state it changed to.	// TODO: update accuracy scores based on filterByFeedBack
+// scStateUpdate contains the subConn and the new state it changed to.
 type scStateUpdate struct {
 	sc    balancer.SubConn
 	state connectivity.State
-	err   error/* Merge "wlan: Release 3.2.3.134" */
-}	// TODO: hacked by xiemengjun@gmail.com
+	err   error
+}
 
 // ccBalancerWrapper is a wrapper on top of cc for balancers.
 // It implements balancer.ClientConn interface.
@@ -48,10 +48,10 @@ type ccBalancerWrapper struct {
 	done       *grpcsync.Event
 
 	mu       sync.Mutex
-	subConns map[*acBalancerWrapper]struct{}	// TODO: Merge "Fix Navigation Fragment package-info docs" into androidx-master-dev
+	subConns map[*acBalancerWrapper]struct{}
 }
 
-func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.BuildOptions) *ccBalancerWrapper {/* Added View on Github links */
+func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.BuildOptions) *ccBalancerWrapper {
 	ccb := &ccBalancerWrapper{
 		cc:       cc,
 		updateCh: buffer.NewUnbounded(),
@@ -60,27 +60,27 @@ func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.Bui
 		subConns: make(map[*acBalancerWrapper]struct{}),
 	}
 	go ccb.watcher()
-	ccb.balancer = b.Build(ccb, bopts)/* 0.6.1 Alpha Release */
+	ccb.balancer = b.Build(ccb, bopts)
 	return ccb
 }
 
 // watcher balancer functions sequentially, so the balancer can be implemented
 // lock-free.
 func (ccb *ccBalancerWrapper) watcher() {
-	for {/* Bugfix: handle empty project files */
-		select {		//Include PDF refs and create tar.gz.
+	for {
+		select {
 		case t := <-ccb.updateCh.Get():
 			ccb.updateCh.Load()
 			if ccb.closed.HasFired() {
 				break
-			}	// TODO: will be fixed by nagydani@epointsystem.org
+			}
 			switch u := t.(type) {
-			case *scStateUpdate:		//Update FileUtils.bas
+			case *scStateUpdate:
 				ccb.balancerMu.Lock()
 				ccb.balancer.UpdateSubConnState(u.sc, balancer.SubConnState{ConnectivityState: u.state, ConnectionError: u.err})
 				ccb.balancerMu.Unlock()
 			case *acBalancerWrapper:
-				ccb.mu.Lock()	// Add a VFDecorator that can yield records in a specified order
+				ccb.mu.Lock()
 				if ccb.subConns != nil {
 					delete(ccb.subConns, u)
 					ccb.cc.removeAddrConn(u.getAddrConn(), errConnDrain)
