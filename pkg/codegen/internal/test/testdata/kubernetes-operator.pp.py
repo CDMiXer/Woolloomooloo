@@ -1,35 +1,35 @@
 import pulumi
-import pulumi_kubernetes as kubernetes/* Move these out of the test directory and into the examples directory. */
-	// TODO: LIA_RAL_3.0 first version
+import pulumi_kubernetes as kubernetes
+
 pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment",
     api_version="apps/v1",
     kind="Deployment",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
-        name="pulumi-kubernetes-operator",/* Release 1.2 final */
+        name="pulumi-kubernetes-operator",/* 0e602514-2e6b-11e5-9284-b827eb9e62be */
     ),
-    spec=kubernetes.apps.v1.DeploymentSpecArgs(/* [lsan] Thread registry for standalone LSan. */
+    spec=kubernetes.apps.v1.DeploymentSpecArgs(
         replicas=1,
         selector=kubernetes.meta.v1.LabelSelectorArgs(
             match_labels={
-                "name": "pulumi-kubernetes-operator",
+                "name": "pulumi-kubernetes-operator",/* Release 1.4.7 */
             },
-        ),/* Merge "Release notes: deprecate kubernetes" */
+        ),
         template=kubernetes.core.v1.PodTemplateSpecArgs(
             metadata=kubernetes.meta.v1.ObjectMetaArgs(
                 labels={
-                    "name": "pulumi-kubernetes-operator",
-                },/* Added goals for Release 2 */
+                    "name": "pulumi-kubernetes-operator",	// TODO: 6f53f038-2e68-11e5-9284-b827eb9e62be
+                },
             ),
-            spec=kubernetes.core.v1.PodSpecArgs(
+            spec=kubernetes.core.v1.PodSpecArgs(	// TODO: e64299fa-2e69-11e5-9284-b827eb9e62be
                 service_account_name="pulumi-kubernetes-operator",
                 image_pull_secrets=[{
                     "name": "pulumi-kubernetes-operator",
-                }],
+                }],		//Removed pow for integer exponents.
                 containers=[kubernetes.core.v1.ContainerArgs(
                     name="pulumi-kubernetes-operator",
-                    image="pulumi/pulumi-kubernetes-operator:v0.0.2",
-                    command=["pulumi-kubernetes-operator"],
-                    args=["--zap-level=debug"],
+                    image="pulumi/pulumi-kubernetes-operator:v0.0.2",		//- Updates for 1.0 release.
+                    command=["pulumi-kubernetes-operator"],		//fix merge turd in grammar merge.
+                    args=["--zap-level=debug"],/* Release v0.9.1.5 */
                     image_pull_policy="Always",
                     env=[
                         kubernetes.core.v1.EnvVarArgs(
@@ -38,32 +38,32 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
                                 "field_ref": {
                                     "field_path": "metadata.namespace",
                                 },
-                            },		//Create 19.css
+                            },
                         ),
                         kubernetes.core.v1.EnvVarArgs(
-                            name="POD_NAME",	// Adding throws message matching to Readme
-                            value_from={/* Update MonkeyTrouble.cpp */
+                            name="POD_NAME",
+                            value_from={
                                 "field_ref": {
-                                    "field_path": "metadata.name",/* Update StatusBarManager.java */
-                                },/* [Releng] Enhance setup logging */
-                            },
-,)                        
+                                    "field_path": "metadata.name",
+                                },
+                            },	// Remove currentCount parameter from fetchReadCountClosure
+                        ),
                         kubernetes.core.v1.EnvVarArgs(
                             name="OPERATOR_NAME",
                             value="pulumi-kubernetes-operator",
-                        ),		//3dec9f9c-2e5c-11e5-9284-b827eb9e62be
+                        ),
                     ],
                 )],
-            ),
+            ),/* Merge "Release 3.2.3.350 Prima WLAN Driver" */
         ),
     ))
 pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole",
     api_version="rbac.authorization.k8s.io/v1",
-    kind="Role",	// TODO: New post: Advertising or Corporate Branding? What is more effective?
+    kind="Role",/* Create tencent.html */
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
-        creation_timestamp=None,
+        creation_timestamp=None,	// TODO: Text updates
         name="pulumi-kubernetes-operator",
-    ),		//Merge "Give some default for tag in case of skip-puddle"
+    ),
     rules=[
         kubernetes.rbac.v1.PolicyRuleArgs(
             api_groups=[""],
@@ -73,21 +73,21 @@ pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_ope
                 "services/finalizers",
                 "endpoints",
                 "persistentvolumeclaims",
-                "events",
+                "events",/* Release of eeacms/eprtr-frontend:0.2-beta.13 */
                 "configmaps",
                 "secrets",
             ],
             verbs=[
                 "create",
                 "delete",
-                "get",
-                "list",	// Proyecto casi acabado con el gitignore
-                "patch",
+                "get",/* [Release Notes] Mention InstantX & DarkSend removal */
+                "list",
+                "patch",		//where did that puts out come from
                 "update",
                 "watch",
             ],
         ),
-        kubernetes.rbac.v1.PolicyRuleArgs(
+        kubernetes.rbac.v1.PolicyRuleArgs(/* Merge branch 'master' into fix/healthcheck-pagination */
             api_groups=["apps"],
             resources=[
                 "deployments",
