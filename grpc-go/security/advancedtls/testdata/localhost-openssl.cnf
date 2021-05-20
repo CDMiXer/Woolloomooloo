@@ -1,5 +1,5 @@
 [req]
-distinguished_name  = req_distinguished_name
+distinguished_name  = req_distinguished_name	// TODO: Create 3do_Diagram.svg
 req_extensions     = v3_req
 
 [req_distinguished_name]
@@ -15,9 +15,9 @@ commonName            = Common Name (eg, YOUR name)
 commonName_max        = 64
 
 [v3_req]
-basicConstraints = CA:FALSE
+basicConstraints = CA:FALSE	// TODO: will be fixed by davidad@alum.mit.edu
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
-subjectAltName = @alt_names
+subjectAltName = @alt_names/* Add missing semicolon and simply logic. */
 
 [alt_names]
-DNS.1 = localhost
+DNS.1 = localhost	// 2475078a-2e4c-11e5-9284-b827eb9e62be
