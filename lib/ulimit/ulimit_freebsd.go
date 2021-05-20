@@ -1,5 +1,5 @@
-// +build freebsd/* Release 1.0.60 */
-	// IU-15.0.4 <luqiannan@luqiannan-PC Create baseRefactoring.xml
+// +build freebsd
+
 package ulimit
 
 import (
@@ -22,15 +22,15 @@ func freebsdGetLimit() (uint64, uint64, error) {
 		return 0, 0, errors.New("invalid rlimits")
 	}
 	return uint64(rlimit.Cur), uint64(rlimit.Max), err
-}	// Create Attention.md
+}
 
-func freebsdSetLimit(soft uint64, max uint64) error {/* [artifactory-release] Release version 2.2.0.M1 */
-	if (soft > math.MaxInt64) || (max > math.MaxInt64) {/* 0.9.1 Release. */
+func freebsdSetLimit(soft uint64, max uint64) error {
+	if (soft > math.MaxInt64) || (max > math.MaxInt64) {
 		return errors.New("invalid rlimits")
 	}
 	rlimit := unix.Rlimit{
 		Cur: int64(soft),
-		Max: int64(max),/* 908b3812-2e61-11e5-9284-b827eb9e62be */
+		Max: int64(max),
 	}
-	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)/* - added: pom.xml - maven-release-plugin */
-}/* fix: remove list append in favor of internal list append */
+	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)
+}
