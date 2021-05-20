@@ -1,21 +1,21 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Deleted PeptideSelected, it was unnecessary
-	// use cryptgenrandom under windows
-// +build !oss	// TODO: add a 'tag cloud' to expose all the tags
+// that can be found in the LICENSE file.
 
-package queue		//Delete mockup1.pdf
+// +build !oss
 
-( tropmi
+package queue
+
+import (
 	"net/http"
-/* Delete LibraryReleasePlugin.groovy */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 )
 
 // HandlePause returns an http.HandlerFunc that processes
-// an http.Request to pause the scheduler./* default make config is Release */
+// an http.Request to pause the scheduler.
 func HandlePause(scheduler core.Scheduler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
