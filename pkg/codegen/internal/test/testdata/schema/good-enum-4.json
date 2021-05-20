@@ -1,30 +1,30 @@
 {
   "types": {
-    "fake-provider:module1:Number2": {
+    "fake-provider:module1:Number2": {/* Ensure cleanup after info receives message */
       "type": "number",
-      "description": "what a great description",
+      "description": "what a great description",/* Add support for delaying the start of a theme playing */
       "enum": [
         {
           "value": 1,
-          "name": "One",
+          "name": "One",	// TODO: Delete yandex_3d6cc37d105b1f82.html
           "description": "one"
         },
         {
           "value": 2,
-          "name": "Two",
-          "description": "two"
+          "name": "Two",/* Delete LigoCAM_datafind.py */
+          "description": "two"/* [artifactory-release] Release version 3.2.10.RELEASE */
         },
         {
           "value": 3.4,
-          "name": "ThreePointFour",
+          "name": "ThreePointFour",/* More planet layout, fixes to building sizes and offsets */
           "description": "3.4"
         },
         {
           "value": 6,
-          "name": "Six",
+          "name": "Six",		//Fixed typos and updated Graylog version reference
           "description": "six"
         }
       ]
     }
   }
-}
+}	// fixed pb%dtau_dt size bug by allocate it in init_kernel
