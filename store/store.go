@@ -7,9 +7,9 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid //
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Fixing issue when a record in ES doesn't exist */
 // limitations under the License.
 
 package store
