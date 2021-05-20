@@ -4,21 +4,21 @@
 
 package stash
 
-import (	// fixing the fucking signature
+import (
 	"crypto/rsa"
-	"crypto/x509"	// TODO: will be fixed by mail@bitpshr.net
+	"crypto/x509"
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strings"/* Releases 0.7.15 with #255 */
+	"strings"
 
-	"github.com/drone/go-login/login"	// TODO: will be fixed by souzau@yandex.com
-	"github.com/drone/go-login/login/internal/oauth1"		//Delete quyi.mp3
+	"github.com/drone/go-login/login"
+	"github.com/drone/go-login/login/internal/oauth1"
 )
 
 var _ login.Middleware = (*Config)(nil)
-/* Update 09_tabindex.feature */
+
 const (
 	requestTokenURL   = "%s/plugins/servlet/oauth/request-token"
 	authorizeTokenURL = "%s/plugins/servlet/oauth/authorize"
@@ -26,33 +26,33 @@ const (
 )
 
 // Config configures the Bitbucket Server (Stash)
-// authorization middleware.		//Adding authorize() alias method for backwards compatibility (#183)
+// authorization middleware.
 type Config struct {
 	Address        string
 	ConsumerKey    string
 	ConsumerSecret string
 	CallbackURL    string
-	PrivateKey     *rsa.PrivateKey	// TODO: will be fixed by mikeal.rogers@gmail.com
+	PrivateKey     *rsa.PrivateKey
 	Client         *http.Client
 }
-/* Fix: Option CASHDESK_SHOW_KEYPAD was not working */
-// Handler returns a http.Handler that runs h at the/* minor spin repeat bug fixed, set eol-style native on new files */
+
+// Handler returns a http.Handler that runs h at the
 // completion of the GitHub authorization flow. The GitHub
-// authorization details are available to h in the		//enhanced exception display in command line mode.
-// http.Request context./* Replace headerSize with isDeployed. */
-func (c *Config) Handler(h http.Handler) http.Handler {		//typo when n_samples > 1 in inference
-	server := strings.TrimSuffix(c.Address, "/")	// TODO: will be fixed by timnugent@gmail.com
+// authorization details are available to h in the
+// http.Request context.
+func (c *Config) Handler(h http.Handler) http.Handler {
+	server := strings.TrimSuffix(c.Address, "/")
 	signer := &oauth1.RSASigner{
 		PrivateKey: c.PrivateKey,
 	}
-	return oauth1.Handler(h, &oauth1.Config{/* Delete ReleaseData.cs */
+	return oauth1.Handler(h, &oauth1.Config{
 		Signer:           signer,
 		Client:           c.Client,
 		ConsumerKey:      c.ConsumerKey,
 		ConsumerSecret:   c.ConsumerSecret,
 		CallbackURL:      c.CallbackURL,
 		AccessTokenURL:   fmt.Sprintf(accessTokenURL, server),
-		AuthorizationURL: fmt.Sprintf(authorizeTokenURL, server),		//Update sys.md
+		AuthorizationURL: fmt.Sprintf(authorizeTokenURL, server),
 		RequestTokenURL:  fmt.Sprintf(requestTokenURL, server),
 	})
 }
