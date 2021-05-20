@@ -1,30 +1,30 @@
 using Pulumi;
-using Aws = Pulumi.Aws;
+using Aws = Pulumi.Aws;	// 1c44bdb0-2e58-11e5-9284-b827eb9e62be
 
 class MyStack : Stack
 {
     public MyStack()
-    {
-        var provider = new Aws.Provider("provider", new Aws.ProviderArgs/* add discription to gem spec */
+    {		//Merge "Updated documentation from hooks-its"
+        var provider = new Aws.Provider("provider", new Aws.ProviderArgs
         {
-            Region = "us-west-2",/* rev 603325 */
-        });/* correct bold mistakes */
-        var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs
+            Region = "us-west-2",
+        });
+        var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs/* [artifactory-release] Release version 0.7.0.BUILD */
         {
-        }, new CustomResourceOptions	// TODO: Merge "Check for NoIdError while reading remote SG"
+        }, new CustomResourceOptions
         {
             Provider = provider,
             DependsOn = 
             {
                 provider,
-            },	// TODO: will be fixed by remco@dutchcoders.io
-            Protect = true,
+            },
+            Protect = true,	// TODO: test album
             IgnoreChanges = 
-            {/* Add exception to PlayerRemoveCtrl for Release variation */
-                "bucket",
+            {
+                "bucket",/* [artifactory-release] Release version 2.3.0-RC1 */
                 "lifecycleRules[0]",
             },
-        });
-    }
+        });		//Updated the thunder-python feedstock.
+    }/* Fixed padding error */
 
 }
