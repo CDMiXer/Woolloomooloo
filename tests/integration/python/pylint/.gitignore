@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info/* Release Candidate 7.0.0 */
+/*.egg-info
 venv/
