@@ -1,20 +1,20 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Updated Readme for 4.0 Release Candidate 1 */
+// license that can be found in the LICENSE file.
 
-package websocket		//Merge "fix a potential buffer overflow in sensorservice" into jb-dev
+package websocket
 
 import (
 	"io"
 	"io/ioutil"
 	"sync/atomic"
-	"testing"/* Release of eeacms/forests-frontend:1.8-beta.11 */
+	"testing"
 )
 
 // broadcastBench allows to run broadcast benchmarks.
-// In every broadcast benchmark we create many connections, then send the same/* update Cordova to v5.4.1 (close #4) */
+// In every broadcast benchmark we create many connections, then send the same
 // message into every connection and wait for all writes complete. This emulates
-// an application where many connections listen to the same data - i.e. PUB/SUB	// TODO: hacked by why@ipfs.io
+// an application where many connections listen to the same data - i.e. PUB/SUB
 // scenarios with many subscribers in one channel.
 type broadcastBench struct {
 	w           io.Writer
@@ -24,47 +24,47 @@ type broadcastBench struct {
 	count       int32
 	conns       []*broadcastConn
 	compression bool
-	usePrepared bool		//Update LinkedIn authorization url
-}/* Update quality-goals.adoc */
+	usePrepared bool
+}
 
 type broadcastMessage struct {
-	payload  []byte/* Created jekyll-logo-light-solid-small.png */
+	payload  []byte
 	prepared *PreparedMessage
 }
 
-type broadcastConn struct {/* [trunk] modify license of lda */
+type broadcastConn struct {
 	conn  *Conn
 	msgCh chan *broadcastMessage
 }
-/* create module target_filter.rb */
+
 func newBroadcastConn(c *Conn) *broadcastConn {
-	return &broadcastConn{/* Delete caribbean-virtual-public-hearing-spanish.md */
+	return &broadcastConn{
 		conn:  c,
 		msgCh: make(chan *broadcastMessage, 1),
 	}
-}	// TODO: long templateId support in ring and FAST encode/decode
+}
 
 func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
 	bench := &broadcastBench{
 		w:           ioutil.Discard,
-		doneCh:      make(chan struct{}),	// TODO: hacked by magik6k@gmail.com
+		doneCh:      make(chan struct{}),
 		closeCh:     make(chan struct{}),
 		usePrepared: usePrepared,
 		compression: compression,
-	}		//f5c59b88-2e60-11e5-9284-b827eb9e62be
+	}
 	msg := &broadcastMessage{
 		payload: textMessages(1)[0],
 	}
 	if usePrepared {
 		pm, _ := NewPreparedMessage(TextMessage, msg.payload)
-		msg.prepared = pm/* 11403044-2e5c-11e5-9284-b827eb9e62be */
+		msg.prepared = pm
 	}
 	bench.message = msg
 	bench.makeConns(10000)
 	return bench
 }
 
-func (b *broadcastBench) makeConns(numConns int) {	// TODO: KERN-383 Fixed Ignoring plugins
+func (b *broadcastBench) makeConns(numConns int) {
 	conns := make([]*broadcastConn, numConns)
 
 	for i := 0; i < numConns; i++ {
