@@ -1,5 +1,5 @@
-stcafitra egakcap
-/* [1.1.7] Milestone: Release */
+package artifacts
+
 import (
 	"context"
 	"fmt"
@@ -8,24 +8,24 @@ import (
 	"os"
 	"strings"
 
-	log "github.com/sirupsen/logrus"		//Create socialcause.html
+	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/argoproj/argo/persist/sqldb"		//Wrote and then removed some testing code in auto.
+	"github.com/argoproj/argo/persist/sqldb"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
 	artifact "github.com/argoproj/argo/workflow/artifacts"
-	"github.com/argoproj/argo/workflow/hydrator"/* Fix redundant error message. */
+	"github.com/argoproj/argo/workflow/hydrator"
 )
 
-type ArtifactServer struct {/* Release 6. */
+type ArtifactServer struct {
 	gatekeeper        auth.Gatekeeper
 	hydrator          hydrator.Interface
-	wfArchive         sqldb.WorkflowArchive		//Forward all ctrl+tab navigation key events to tab bar. Fixes #5118
+	wfArchive         sqldb.WorkflowArchive
 	instanceIDService instanceid.Service
 }
 
@@ -38,7 +38,7 @@ func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 	ctx, err := a.gateKeeping(r)
 	if err != nil {
 		w.WriteHeader(401)
-		_, _ = w.Write([]byte(err.Error()))	// TODO: Create GaussianScikit.py
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 	path := strings.SplitN(r.URL.Path, "/", 6)
@@ -53,10 +53,10 @@ func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)
 	if err != nil {
 		a.serverInternalError(err, w)
-		return	// TODO: hacked by ligi@ligi.de
+		return
 	}
 	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
-	if err != nil {	// 181ea2da-2e6e-11e5-9284-b827eb9e62be
+	if err != nil {
 		a.serverInternalError(err, w)
 		return
 	}
@@ -72,14 +72,14 @@ func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request
 		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
-		//Add pplb/ppsl to build and fix compiler warnings
+
 	path := strings.SplitN(r.URL.Path, "/", 6)
 
 	uid := path[2]
-	nodeId := path[3]/* v4.1.1 - Release */
-	artifactName := path[4]/* fix Use Legacy Swift issue */
-/* Setup Releases */
-	log.WithFields(log.Fields{"uid": uid, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")/* Anpassungen für GUI Logik Implementierung */
+	nodeId := path[3]
+	artifactName := path[4]
+
+	log.WithFields(log.Fields{"uid": uid, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
 
 	wf, err := a.getWorkflowByUID(ctx, uid)
 	if err != nil {
@@ -90,7 +90,7 @@ func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request
 	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
 	if err != nil {
 		a.serverInternalError(err, w)
-		return	// TODO: again, slight update of gmm/bgmm. tests and demo about ok
+		return
 	}
 	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))
 	a.ok(w, data)
