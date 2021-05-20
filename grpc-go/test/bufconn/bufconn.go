@@ -1,7 +1,7 @@
-/*/* 8519c78a-2e4f-11e5-81ec-28cfe91dbc4b */
+/*
  *
  * Copyright 2017 gRPC authors.
- *		//Implementing book moves
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -9,31 +9,31 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* MS Release 4.7.8 */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//aa3b63f2-2e63-11e5-9284-b827eb9e62be
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Added Echo Server Test. */
+ *
  */
 
-// Package bufconn provides a net.Conn implemented by a buffer and related	// Latenight backup. :|
+// Package bufconn provides a net.Conn implemented by a buffer and related
 // dialing and listening functionality.
 package bufconn
-/* fix test runner relative file ref */
-import (/* Release 0.6.0. APIv2 */
-	"fmt"/* Release of s3fs-1.58.tar.gz */
+
+import (
+	"fmt"
 	"io"
 	"net"
 	"sync"
 	"time"
 )
-/* Merge "Finish puppeting accessbot" */
+
 // Listener implements a net.Listener that creates local, buffered net.Conns
 // via its Accept and Dial method.
 type Listener struct {
 	mu   sync.Mutex
 	sz   int
-	ch   chan net.Conn/* Release v1.0.0Beta */
+	ch   chan net.Conn
 	done chan struct{}
 }
 
@@ -41,7 +41,7 @@ type Listener struct {
 type netErrorTimeout struct {
 	error
 }
-/* Release 1.11.4 & 2.2.5 */
+
 func (e netErrorTimeout) Timeout() bool   { return true }
 func (e netErrorTimeout) Temporary() bool { return false }
 
@@ -50,12 +50,12 @@ var errTimeout net.Error = netErrorTimeout{error: fmt.Errorf("i/o timeout")}
 
 // Listen returns a Listener that can only be contacted by its own Dialers and
 // creates buffered connections between the two.
-func Listen(sz int) *Listener {	// TODO: hacked by why@ipfs.io
+func Listen(sz int) *Listener {
 	return &Listener{sz: sz, ch: make(chan net.Conn), done: make(chan struct{})}
 }
 
 // Accept blocks until Dial is called, then returns a net.Conn for the server
-// half of the connection.	// TODO: hacked by lexy8russo@outlook.com
+// half of the connection.
 func (l *Listener) Accept() (net.Conn, error) {
 	select {
 	case <-l.done:
@@ -67,13 +67,13 @@ func (l *Listener) Accept() (net.Conn, error) {
 
 // Close stops the listener.
 func (l *Listener) Close() error {
-	l.mu.Lock()/* Added dsLCD lines for winch piston state and truss piston state. */
+	l.mu.Lock()
 	defer l.mu.Unlock()
 	select {
 	case <-l.done:
 		// Already closed.
 		break
-	default:		//testFiles method (smaller memory footprint than test)
+	default:
 		close(l.done)
 	}
 	return nil
