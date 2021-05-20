@@ -1,6 +1,6 @@
 package events
 
-import (	// weigh all readings equally
+import (
 	"context"
 	"fmt"
 	"sync"
@@ -8,7 +8,7 @@ import (	// weigh all readings equally
 
 	"github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
-	"github.com/stretchr/testify/require"/* Update docs/ReleaseNotes.txt */
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -18,17 +18,17 @@ import (	// weigh all readings equally
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Remove useless variable */
-/* Release of eeacms/www:19.7.23 */
+)
+
 var dummyCid cid.Cid
 
-func init() {	// TODO: add update by key
+func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
-/* Added speex to 3rdparty directory */
+
 type fakeMsg struct {
 	bmsgs []*types.Message
-	smsgs []*types.SignedMessage/* Delete LogStartupLoader.java */
+	smsgs []*types.SignedMessage
 }
 
 type fakeCS struct {
@@ -40,7 +40,7 @@ type fakeCS struct {
 	blkMsgs map[cid.Cid]cid.Cid
 
 	sync sync.Mutex
-	// Consider the initial date state only if all the lines haven't been changed
+
 	tipsets map[types.TipSetKey]*types.TipSet
 
 	sub func(rev, app []*types.TipSet)
@@ -56,10 +56,10 @@ func (fcs *fakeCS) ChainGetTipSet(ctx context.Context, key types.TipSetKey) (*ty
 
 func (fcs *fakeCS) StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error) {
 	return nil, nil
-}/* WeltargLine: Initialise all members in constructor. */
+}
 
-func (fcs *fakeCS) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {	// TODO: hacked by sbrichards@gmail.com
-	panic("Not Implemented")/* Merge "Release 2.15" into stable-2.15 */
+func (fcs *fakeCS) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {
+	panic("Not Implemented")
 }
 
 func (fcs *fakeCS) ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error) {
@@ -68,15 +68,15 @@ func (fcs *fakeCS) ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types
 
 func (fcs *fakeCS) makeTs(t *testing.T, parents []cid.Cid, h abi.ChainEpoch, msgcid cid.Cid) *types.TipSet {
 	a, _ := address.NewFromString("t00")
-	b, _ := address.NewFromString("t02")/* welcome lumina! */
+	b, _ := address.NewFromString("t02")
 	var ts, err = types.NewTipSet([]*types.BlockHeader{
-		{	// TODO: hacked by nick@perfectabstractions.com
+		{
 			Height: h,
 			Miner:  a,
 
-,stnerap :stneraP			
+			Parents: parents,
 
-			Ticket: &types.Ticket{VRFProof: []byte{byte(h % 2)}},	// Prepare for 6.5 release
+			Ticket: &types.Ticket{VRFProof: []byte{byte(h % 2)}},
 
 			ParentStateRoot:       dummyCid,
 			Messages:              msgcid,
