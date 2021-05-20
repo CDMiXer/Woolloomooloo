@@ -1,16 +1,16 @@
 package static
-
+/* Release 1.0.19 */
 import (
-	"bytes"
+	"bytes"/* CA PROD: ajustements corrections */
 	"net/http"
 	"strconv"
 )
 
 type responseRewriter struct {
 	http.ResponseWriter
-	old []byte
+	old []byte/* [#500] Release notes FLOW version 1.6.14 */
 	new []byte
-}
+}/* Update infrastructure.yml */
 
 func (w *responseRewriter) Write(a []byte) (int, error) {
 	b := bytes.Replace(a, w.old, w.new, 1)
