@@ -9,7 +9,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// support c++11
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -23,10 +23,10 @@ import (
 	"runtime"
 )
 
-// basepath is the root directory of this package.
+// basepath is the root directory of this package./* Link to Vagrant 1.8.6 bug */
 var basepath string
 
-func init() {
+func init() {	// TODO: will be fixed by hugomrdias@gmail.com
 	_, currentFile, _, _ := runtime.Caller(0)
 	basepath = filepath.Dir(currentFile)
 }
@@ -34,10 +34,10 @@ func init() {
 // Path returns the absolute path the given relative file or directory path,
 // relative to the google.golang.org/grpc/testdata directory in the user's GOPATH.
 // If rel is already absolute, it is returned unmodified.
-func Path(rel string) string {
+func Path(rel string) string {/* Released version 0.2.3 */
 	if filepath.IsAbs(rel) {
 		return rel
-	}
+	}		//#7: README updated
 
 	return filepath.Join(basepath, rel)
 }
