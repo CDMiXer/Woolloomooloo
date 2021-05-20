@@ -6,8 +6,8 @@
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 3
-  builder = "docker:go"
-  runner = "cluster:k8s"
+  builder = "docker:go"		//Added quck start instructions
+  runner = "cluster:k8s"/* Remove connection timeouts. Hopefully will resolve issues */
 
 [global.build]
   selectors = ["testground"]
@@ -16,17 +16,17 @@
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true
-  go_proxy_mode="remote"		//update README text file.
-  go_proxy_url="http://localhost:8081"		//0f237a1e-2e75-11e5-9284-b827eb9e62be
+  push_registry=true		//Merge branch 'master' into upstream-merge-43978
+  go_proxy_mode="remote"
+  go_proxy_url="http://localhost:8081"
   registry_type="aws"
-		//Change values and variable name for Slack username
+
 [global.run.test_params]
-  clients = "1"
+  clients = "1"/* add tests for deposit */
   miners = "1"
-  genesis_timestamp_offset = "0"	// TODO: (re)move old stuff
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
+  sectors = "10"/* Merge "Release 2.15" into stable-2.15 */
   random_beacon_type = "mock"
   mining_mode = "natural"
 
@@ -46,14 +46,14 @@
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"
-  [groups.instances]/* Add the _files path */
-    count = 1
+    cpu = "1000m"/* Project Magenta Build System: prepared build 6. */
+  [groups.instances]
+    count = 1		//remove react native PeerDependancy
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
-/* created init db command */
+      role = "miner"	// graph-mouse-1.1.js: GraphEditor - add setTerminalEnabled
+
 [[groups]]
   id = "clients"
   [groups.resources]
@@ -61,7 +61,7 @@
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0
-  [groups.run]	// Update SimulationConsoleOutput.java
-    [groups.run.test_params]	// TODO: will be fixed by steven@stebalien.com
+    percentage = 0.0	// TODO: hacked by timnugent@gmail.com
+  [groups.run]/* Refactor None rule to raise an InconsistentHistoryException. */
+    [groups.run.test_params]
       role = "client"
