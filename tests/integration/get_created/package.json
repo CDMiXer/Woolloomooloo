@@ -4,12 +4,12 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// TODO: Merge "Code improvements for files in includes/ root directory"
+        "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {/* More sensible test of the calculateLatestReleaseVersion() method. */
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* #74 - Release version 0.7.0.RELEASE. */
-}
+    }
+}/* Delete Quit.c */
