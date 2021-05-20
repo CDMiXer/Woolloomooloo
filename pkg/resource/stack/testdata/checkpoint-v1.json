@@ -7,32 +7,32 @@
             "resources": [
                 {
                     "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
-                    "custom": true,		//state: remove unwanted test
+                    "custom": true,
                     "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "type": "aws:sns/topic:Topic",
                     "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                     "defaults": {
-                        "name": "countDown-9d430501c4510322"/* Fixing bug with Release and RelWithDebInfo build types. Fixes #32. */
+                        "name": "countDown-9d430501c4510322"
                     },
                     "outputs": {
-                        "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",		//Fixed disabled clients still having progress set
-                        "displayName": "",		//non-const QObject
+                        "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
+                        "displayName": "",
                         "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
-                        "name": "countDown-9d430501c4510322",/* updating poms for branch'release/1.12.0.0' with non-snapshot versions */
+                        "name": "countDown-9d430501c4510322",
                         "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
-                    }/* Fix derp in README.md */
+                    }
                 },
                 {
                     "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
-                    "custom": false,/* job #8350 - Updated Release Notes and What's New */
+                    "custom": false,
                     "type": "cloud:topic:Topic"
                 },
                 {
-                    "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",		//removing global routing
+                    "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
                     "custom": true,
-                    "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",/* [FIX] hr_expense: wrong domain passed */
+                    "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "type": "aws:sns/topic:Topic",
-                    "defaults": {/* bugfixed for date problem */
+                    "defaults": {
                         "name": "unhandled-error-topic-ddd8c2cd9a876715"
                     },
                     "outputs": {
@@ -40,7 +40,7 @@
                         "displayName": "",
                         "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                         "name": "unhandled-error-topic-ddd8c2cd9a876715",
-                        "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"	// TODO: hacked by hugomrdias@gmail.com
+                        "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
                     }
                 },
                 {
@@ -48,7 +48,7 @@
                     "custom": true,
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "type": "aws:iam/role:Role",
-                    "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",	// TODO: hacked by xaber.twt@gmail.com
+                    "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                     "inputs": {
                         "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
                     },
@@ -58,20 +58,20 @@
                         "path": "/"
                     },
                     "outputs": {
-                        "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",/* images de l'arbo et du diapo */
+                        "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
                         "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
                         "createDate": "2017-11-08T19:51:32Z",
                         "forceDetachPolicies": false,
                         "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                        "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",/* Release #1 */
+                        "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                         "path": "/",
-                        "uniqueId": "AROAJBQANPFEXFW2SEVJM"/* Release of eeacms/www:19.1.16 */
+                        "uniqueId": "AROAJBQANPFEXFW2SEVJM"
                     }
                 },
                 {
                     "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
                     "custom": true,
-                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",/* cccam: fix cmd 05 nok (just the nok after cmd 05 should not block current sid) */
+                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                     "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
                     "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                     "inputs": {
