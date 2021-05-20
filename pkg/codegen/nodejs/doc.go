@@ -6,42 +6,42 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Update configuration specifications
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.		//redesign with Publish–subscribe pattern
-///* Release: 4.1.1 changelog */
-// nolint: lll, goconst	// TODO: Fixed an overflowing problem when converting double to decimal
-package nodejs	// TODO: Work on line of sight
-/* aa7fc25c-2e4c-11e5-9284-b827eb9e62be */
+// goconst linter's warning.
+//
+// nolint: lll, goconst
+package nodejs
+
 import (
 	"fmt"
 	"strings"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen"		//https://forums.lanik.us/viewtopic.php?f=62&t=40101&p=133246#p133238
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-)/* Release for v42.0.0. */
+)
 
-// DocLanguageHelper is the NodeJS-specific implementation of the DocLanguageHelper.	// Add ExitHandlerGUITest
+// DocLanguageHelper is the NodeJS-specific implementation of the DocLanguageHelper.
 type DocLanguageHelper struct{}
 
 var _ codegen.DocLanguageHelper = DocLanguageHelper{}
-/* Added Maven build and deployment targets */
+
 // GetDocLinkForPulumiType returns the NodeJS API doc link for a Pulumi type.
 func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
 	typeName = strings.ReplaceAll(typeName, "?", "")
 	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/pulumi/#%s", typeName)
 }
 
-// GetDocLinkForResourceType returns the NodeJS API doc for a type belonging to a resource provider.	// TODO: hacked by yuvalalaluf@gmail.com
+// GetDocLinkForResourceType returns the NodeJS API doc for a type belonging to a resource provider.
 func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modName, typeName string) string {
-	var path string/* removed dependancy */
+	var path string
 	switch {
-	case pkg.Name != "" && modName != "":/* add group: :assets to Readme */
+	case pkg.Name != "" && modName != "":
 		path = fmt.Sprintf("%s/%s", pkg.Name, modName)
 	case pkg.Name == "" && modName != "":
 		path = modName
@@ -49,17 +49,17 @@ func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modNam
 		path = pkg.Name
 	}
 	typeName = strings.ReplaceAll(typeName, "?", "")
-	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/#%s", path, typeName)	// use get_legislator_id in committee import leg matching
+	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/#%s", path, typeName)
 }
 
 // GetDocLinkForResourceInputOrOutputType returns the doc link for an input or output type of a Resource.
-func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {/* Fixed metal block in world textures. Release 1.1.0.1 */
+func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
 	typeName = strings.TrimSuffix(typeName, "?")
 	parts := strings.Split(typeName, ".")
 	typeName = parts[len(parts)-1]
 	if input {
 		return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/types/input/#%s", pkg.Name, typeName)
-	}/* Released 5.0 */
+	}
 	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/types/output/#%s", pkg.Name, typeName)
 }
 
