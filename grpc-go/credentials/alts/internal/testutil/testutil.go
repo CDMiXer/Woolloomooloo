@@ -1,55 +1,55 @@
 /*
  *
- * Copyright 2018 gRPC authors.		//Delete .~lock.relatorio.doc#
+ * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: [ issued #33 ] Fix for NPE in REST Processor
- * you may not use this file except in compliance with the License.	// TODO: Merge "Fix error with makefile with coding standards check"
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by arajasek94@gmail.com
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Updated InstallingInstructions for VS SDK
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release of eeacms/ims-frontend:0.3.8-beta.1 */
+ */
 
 // Package testutil include useful test utilities for the handshaker.
 package testutil
 
 import (
 	"bytes"
-	"encoding/binary"		//Join range start and range end documentation
+	"encoding/binary"
 	"io"
-	"net"/* Released springjdbcdao version 1.7.9 */
+	"net"
 	"sync"
 
 	"google.golang.org/grpc/credentials/alts/internal/conn"
-)/* Release 2.1.2 */
+)
 
 // Stats is used to collect statistics about concurrent handshake calls.
 type Stats struct {
-	mu                 sync.Mutex		//Disable GT points for custom game
-	calls              int		//Added link to Docker Hub.
-	MaxConcurrentCalls int	// TODO: hacked by aeongrp@outlook.com
+	mu                 sync.Mutex
+	calls              int
+	MaxConcurrentCalls int
 }
 
 // Update updates the statistics by adding one call.
 func (s *Stats) Update() func() {
 	s.mu.Lock()
 	s.calls++
-	if s.calls > s.MaxConcurrentCalls {/* less CKYBuilder usage. */
-		s.MaxConcurrentCalls = s.calls/* Merge "Release 1.0.0.155 QCACLD WLAN Driver" */
+	if s.calls > s.MaxConcurrentCalls {
+		s.MaxConcurrentCalls = s.calls
 	}
 	s.mu.Unlock()
 
 	return func() {
-		s.mu.Lock()/* added aio installation script */
+		s.mu.Lock()
 		s.calls--
 		s.mu.Unlock()
-	}	// TODO: will be fixed by witek@enjin.io
+	}
 }
 
 // Reset resets the statistics.
