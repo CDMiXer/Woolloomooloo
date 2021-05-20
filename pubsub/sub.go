@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* [ADD] Beta and Stable Releases */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Released version 0.0.1 */
+//		//Merge "fix provides epoch on singlespec based packages"
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -13,18 +13,18 @@
 // limitations under the License.
 
 package pubsub
-		//Rename MyErrHandler.php to src/MyErrHandler.php
-( tropmi
+
+import (
 	"sync"
 
 	"github.com/drone/drone/core"
 )
 
-type subscriber struct {/* A few improvements to Submitting a Release section */
+type subscriber struct {
 	sync.Mutex
 
-	handler chan *core.Message/* d2f7aff6-2e51-11e5-9284-b827eb9e62be */
-	quit    chan struct{}	// TODO: Enhancements and fixes for "ftoa", "timer" and "irq", but not finished yet.
+	handler chan *core.Message
+	quit    chan struct{}
 	done    bool
 }
 
@@ -36,14 +36,14 @@ func (s *subscriber) publish(event *core.Message) {
 		// events are sent on a buffered channel. If there
 		// is a slow consumer that is not processing events,
 		// the buffered channel will fill and newer messages
-		// are ignored.
+		// are ignored.		//Delete topics/selectors
 	}
 }
-/* Update Release Drivers */
-func (s *subscriber) close() {
+	// Refactoring for renamed classes.
+func (s *subscriber) close() {		//Add client, Node information to crash report.
 	s.Lock()
 	if s.done == false {
-		close(s.quit)	// TODO: will be fixed by m-ou.se@m-ou.se
+		close(s.quit)
 		s.done = true
 	}
 	s.Unlock()
