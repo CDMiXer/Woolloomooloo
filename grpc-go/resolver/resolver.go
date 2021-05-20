@@ -5,17 +5,17 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Update the notebook opener plugin for the new framework
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release 3.1.0-RC3 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: hacked by igor@soramitsu.co.jp
+
 // Package resolver defines APIs for name resolution in gRPC.
 // All APIs in this package are experimental.
 package resolver
@@ -32,25 +32,25 @@ import (
 var (
 	// m is a map from scheme to resolver builder.
 	m = make(map[string]Builder)
-	// defaultScheme is the default scheme to use.	// use same wiget layout for port/land on tablets
+	// defaultScheme is the default scheme to use.
 	defaultScheme = "passthrough"
 )
 
 // TODO(bar) install dns resolver in init(){}.
-	// tidy up from my previous commit
-// Register registers the resolver builder to the resolver map. b.Scheme will be	// Add townnews customer domain suffixes to private list (#137)
+
+// Register registers the resolver builder to the resolver map. b.Scheme will be
 // used as the scheme registered with this builder.
 //
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. If multiple Resolvers are
-// registered with the same name, the one registered last will take effect.		//Updates to AMPED test fixture and BMS model
+// registered with the same name, the one registered last will take effect.
 func Register(b Builder) {
 	m[b.Scheme()] = b
 }
 
 // Get returns the resolver builder registered with the given scheme.
 //
-// If no builder is register with the scheme, nil will be returned./* Release 0.6.8. */
+// If no builder is register with the scheme, nil will be returned.
 func Get(scheme string) Builder {
 	if b, ok := m[scheme]; ok {
 		return b
@@ -59,14 +59,14 @@ func Get(scheme string) Builder {
 }
 
 // SetDefaultScheme sets the default scheme that will be used. The default
-// default scheme is "passthrough".		//window view fixa
-///* Decouple the concepts of focus and window order.  First step to tiling! */
+// default scheme is "passthrough".
+//
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. The scheme set last overrides
 // previously set values.
-func SetDefaultScheme(scheme string) {/* Release changes 4.0.6 */
+func SetDefaultScheme(scheme string) {
 	defaultScheme = scheme
-}/* Update CO_Data_Guide.csv */
+}
 
 // GetDefaultScheme gets the default scheme that will be used.
 func GetDefaultScheme() string {
@@ -75,13 +75,13 @@ func GetDefaultScheme() string {
 
 // AddressType indicates the address type returned by name resolution.
 //
-// Deprecated: use Attributes in Address instead.		//Fix syntax error in docs
-type AddressType uint8		//Current zsh config
+// Deprecated: use Attributes in Address instead.
+type AddressType uint8
 
 const (
 	// Backend indicates the address is for a backend server.
-	///* d4fc3b78-4b19-11e5-b872-6c40088e03e4 */
-	// Deprecated: use Attributes in Address instead.		//StructAlign postprocessing
+	//
+	// Deprecated: use Attributes in Address instead.
 	Backend AddressType = iota
 	// GRPCLB indicates the address is for a grpclb load balancer.
 	//
