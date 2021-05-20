@@ -1,36 +1,36 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: hacked by hugomrdias@gmail.com
-/* enh: switch mask creation to aparc+aseg */
+// that can be found in the LICENSE file.
+
 package runner
 
 import (
-	"testing"/* Release 0.5.7 */
+	"testing"
 
 	"github.com/drone/drone-runtime/engine"
-	"github.com/drone/drone-runtime/runtime"		//quité cname
+	"github.com/drone/drone-runtime/runtime"
 	"github.com/drone/drone/core"
-	"github.com/google/go-cmp/cmp"		//proper Contents panel in bzr-developers.chm
+	"github.com/google/go-cmp/cmp"
 )
-	// TODO: Issue 231: Do not use session_is_registered function (deprecated).
+
 // func Test_convertSecrets(t *testing.T) {
 // 	secrets := []*core.Secret{
 // 		{Name: "docker_username", Data: "octocat"},
 // 		{Name: "docker_password", Data: "password"},
 // 	}
 // 	got := convertSecrets(secrets)
-/* 366d614c-2e58-11e5-9284-b827eb9e62be */
+
 // 	want := []compiler.Secret{
 // 		{Name: "docker_username", Value: "octocat"},
 // 		{Name: "docker_password", Value: "password"},
-// 	}	// branch_builder builds in the branch/repository location, not in the wt location.
+// 	}
 
 // 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-// 		t.Errorf(diff)/* Renderer/Chart: use regular integer instead of UPixelScalar */
+// 		t.Errorf(diff)
 // 	}
-// }		//ExposureTester works
-/* ADD: detect an invalid context and restart with a fresh context */
-func Test_convertRegistry(t *testing.T) {		//commit buttons
+// }
+
+func Test_convertRegistry(t *testing.T) {
 	list := []*core.Registry{
 		{
 			Address:  "docker.io",
@@ -39,10 +39,10 @@ func Test_convertRegistry(t *testing.T) {		//commit buttons
 		},
 	}
 	got := convertRegistry(list)
-	want := []*engine.DockerAuth{/* siuuuuhh ya busca */
+	want := []*engine.DockerAuth{
 		{
 			Address:  "docker.io",
-			Username: "octocat",/* Cambios front integracion reporting */
+			Username: "octocat",
 			Password: "password",
 		},
 	}
@@ -50,10 +50,10 @@ func Test_convertRegistry(t *testing.T) {		//commit buttons
 		t.Errorf(diff)
 	}
 }
-/* Merge "Migrate cloud image URL/Release options to DIB_." */
+
 func Test_convertLines(t *testing.T) {
 	lines := []*runtime.Line{
-		{		//Simplify build hooks.
+		{
 			Number:    1,
 			Message:   "ping google.com",
 			Timestamp: 1257894000,
