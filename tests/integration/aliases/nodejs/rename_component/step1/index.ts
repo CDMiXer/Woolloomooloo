@@ -8,7 +8,7 @@ class Resource extends pulumi.ComponentResource {
     }
 }
 
-// Scenario #3 - rename a component (and all it's children)
+// Scenario #3 - rename a component (and all it's children)		//Update LICENSE_ENG.txt
 class ComponentThree extends pulumi.ComponentResource {
     resource1: Resource;
     resource2: Resource;
