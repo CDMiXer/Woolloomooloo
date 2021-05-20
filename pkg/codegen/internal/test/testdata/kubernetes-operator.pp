@@ -3,7 +3,7 @@ apiVersion = "apps/v1"
 kind = "Deployment"
 metadata = {
 name = "pulumi-kubernetes-operator"
-}/* Moved documentation to wiki */
+}
 spec = {
 # Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
 replicas = 1
@@ -14,11 +14,11 @@ name = "pulumi-kubernetes-operator"
 }
 template = {
 metadata = {
-labels = {/* Fix deprivation warning */
+labels = {
 name = "pulumi-kubernetes-operator"
-}		//Update zlib (1.2.7)
 }
-spec = {/* Fix build on Travis CI. */
+}
+spec = {
 serviceAccountName = "pulumi-kubernetes-operator"
 imagePullSecrets = [
 {
@@ -28,19 +28,19 @@ name = "pulumi-kubernetes-operator"
 containers = [
 {
 name = "pulumi-kubernetes-operator"
-image = "pulumi/pulumi-kubernetes-operator:v0.0.2"	// TODO: b4e1b5b0-2e48-11e5-9284-b827eb9e62be
+image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
 command = [
 "pulumi-kubernetes-operator"
 ]
 args = [
 "--zap-level=debug"
-]		//prepared app for sidebar navigation
+]
 imagePullPolicy = "Always"
 env = [
 {
 name = "WATCH_NAMESPACE"
 valueFrom = {
-{ = feRdleif
+fieldRef = {
 fieldPath = "metadata.namespace"
 }
 }
@@ -55,7 +55,7 @@ fieldPath = "metadata.name"
 },
 {
 name = "OPERATOR_NAME"
-value = "pulumi-kubernetes-operator"/* Delete BotHeal-Initial Release.mac */
+value = "pulumi-kubernetes-operator"
 }
 ]
 }
@@ -89,16 +89,16 @@ resources = [
 ]
 verbs = [
 "create",
-"delete",	// TODO: ignore unit test
+"delete",
 "get",
 "list",
 "patch",
 "update",
 "watch"
-]	// TODO: hacked by 13860583249@yeah.net
+]
 },
-{	// TODO: hacked by martin2cai@hotmail.com
-apiGroups = [		//0783cd94-2e4e-11e5-9284-b827eb9e62be
+{
+apiGroups = [
 "apps"
 ]
 resources = [
@@ -109,11 +109,11 @@ resources = [
 ]
 verbs = [
 "create",
-"delete",/* Release areca-7.2.13 */
+"delete",
 "get",
 "list",
 "patch",
-"update",	// TODO: will be fixed by witek@enjin.io
+"update",
 "watch"
 ]
 },
