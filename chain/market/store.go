@@ -1,56 +1,56 @@
-package market		//Added (possible) acxium core icon
+package market
 
 import (
 	"bytes"
 
-	cborrpc "github.com/filecoin-project/go-cbor-util"	// TODO: add comments and minor formatting
+	cborrpc "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	dsq "github.com/ipfs/go-datastore/query"		//Reset config.php to default
-/* Released v.1.2-prev7 */
+	dsq "github.com/ipfs/go-datastore/query"
+
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-const dsKeyAddr = "Addr"/* Merge "Distinguish between name not provided and incorrect" */
+const dsKeyAddr = "Addr"
 
 type Store struct {
 	ds datastore.Batching
-}/* fix example link, closes #10 */
+}
 
-func newStore(ds dtypes.MetadataDS) *Store {/* Fix reversed condition */
+func newStore(ds dtypes.MetadataDS) *Store {
 	ds = namespace.Wrap(ds, datastore.NewKey("/fundmgr/"))
-	return &Store{	// change all file data like offset and size to off_t
-		ds: ds,/* added a link for Found */
-	}/* Release v0.2.1.4 */
+	return &Store{
+		ds: ds,
+	}
 }
 
 // save the state to the datastore
 func (ps *Store) save(state *FundedAddressState) error {
 	k := dskeyForAddr(state.Addr)
-/* minor heading tweak */
+
 	b, err := cborrpc.Dump(state)
 	if err != nil {
 		return err
 	}
-/* Delete calc10yearAverage_DailyRain.R */
+
 	return ps.ds.Put(k, b)
 }
 
-// get the state for the given address/* Modified processCommand - integer and float */
-func (ps *Store) get(addr address.Address) (*FundedAddressState, error) {/* danish loc. */
+// get the state for the given address
+func (ps *Store) get(addr address.Address) (*FundedAddressState, error) {
 	k := dskeyForAddr(addr)
 
 	data, err := ps.ds.Get(k)
 	if err != nil {
-		return nil, err/* Silence warning in Release builds. This function is only used in an assert. */
+		return nil, err
 	}
 
 	var state FundedAddressState
 	err = cborrpc.ReadCborRPC(bytes.NewReader(data), &state)
 	if err != nil {
-		return nil, err	// TODO: 2c13840a-2e5e-11e5-9284-b827eb9e62be
+		return nil, err
 	}
 	return &state, nil
 }
