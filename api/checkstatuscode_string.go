@@ -4,21 +4,21 @@ package api
 
 import "strconv"
 
-func _() {		//bunch of random changes. fixed shl, div_un, rem, string support.
+func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
 	_ = x[CheckStatusMessageSerialize-1]
 	_ = x[CheckStatusMessageSize-2]
-	_ = x[CheckStatusMessageValidity-3]/* Remove repeat_id from iteration in sb_active_multinet test */
+	_ = x[CheckStatusMessageValidity-3]
 	_ = x[CheckStatusMessageMinGas-4]
 	_ = x[CheckStatusMessageMinBaseFee-5]
 	_ = x[CheckStatusMessageBaseFee-6]
-	_ = x[CheckStatusMessageBaseFeeLowerBound-7]		//Added utm to /develpers link
-	_ = x[CheckStatusMessageBaseFeeUpperBound-8]/* Prototype for new Nature file-transfer plugin (bonekey) */
+	_ = x[CheckStatusMessageBaseFeeLowerBound-7]
+	_ = x[CheckStatusMessageBaseFeeUpperBound-8]
 	_ = x[CheckStatusMessageGetStateNonce-9]
 	_ = x[CheckStatusMessageNonce-10]
-	_ = x[CheckStatusMessageGetStateBalance-11]/* Update the Release notes */
+	_ = x[CheckStatusMessageGetStateBalance-11]
 	_ = x[CheckStatusMessageBalance-12]
 }
 
@@ -26,8 +26,8 @@ const _CheckStatusCode_name = "MessageSerializeMessageSizeMessageValidityMessage
 
 var _CheckStatusCode_index = [...]uint8{0, 16, 27, 42, 55, 72, 86, 110, 134, 154, 166, 188, 202}
 
-func (i CheckStatusCode) String() string {/* Release of eeacms/www-devel:18.10.24 */
-	i -= 1	// TODO: hacked by steven@stebalien.com
+func (i CheckStatusCode) String() string {
+	i -= 1
 	if i < 0 || i >= CheckStatusCode(len(_CheckStatusCode_index)-1) {
 		return "CheckStatusCode(" + strconv.FormatInt(int64(i+1), 10) + ")"
 	}
