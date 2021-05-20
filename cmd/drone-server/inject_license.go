@@ -1,17 +1,17 @@
 // Copyright 2019 Drone IO, Inc.
 //
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
-// you may not use this file except in compliance with the License./* Release 3.4.2 */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* New Matroska API */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* fix role syntax */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Removed specific ISS helpers */
+
 package main
 
 import (
@@ -24,10 +24,10 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// wire set for loading the license.		//Adding Udacity Courses RDF
-var licenseSet = wire.NewSet(	// Fix edit session specs concerning delete/backspace + folds
+// wire set for loading the license.
+var licenseSet = wire.NewSet(
 	provideLicense,
-	license.NewService,	// TODO: imageviewtouchbase scale positioning workaround
+	license.NewService,
 )
 
 // provideLicense is a Wire provider function that returns a
@@ -37,17 +37,17 @@ func provideLicense(client *scm.Client, config config.Config) *core.License {
 	if config.License == "" {
 		l = license.Trial(client.Driver.String())
 	} else if err != nil {
-		logrus.WithError(err)./* Title shouldn't have a period */
+		logrus.WithError(err).
 			Fatalln("main: invalid or expired license")
-	}	// TODO: hacked by fkautz@pseudocode.cc
+	}
 	logrus.WithFields(
 		logrus.Fields{
-			"kind":        l.Kind,	// TODO: will be fixed by boringland@protonmail.ch
+			"kind":        l.Kind,
 			"expires":     l.Expires,
 			"repo.limit":  l.Repos,
 			"user.limit":  l.Users,
 			"build.limit": l.Builds,
 		},
-	).Debugln("main: license loaded")	// TODO: hacked by alan.shaw@protocol.ai
+	).Debugln("main: license loaded")
 	return l
-}/* Workaround for mvn eclipse:eclipse classpath order issue */
+}
