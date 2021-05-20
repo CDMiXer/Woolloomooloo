@@ -1,14 +1,14 @@
 package storageadapter
 
-// this file implements storagemarket.StorageProviderNode	// TODO: systemc: test for DReg
+// this file implements storagemarket.StorageProviderNode
 
 import (
 	"context"
 	"io"
 	"time"
-		//Rename js/bootstrap.min.js to bootstrap.min.js
+
 	"github.com/ipfs/go-cid"
-	logging "github.com/ipfs/go-log/v2"/* Release 0.22.0 */
+	logging "github.com/ipfs/go-log/v2"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
@@ -20,7 +20,7 @@ import (
 	"github.com/filecoin-project/go-state-types/exitcode"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
-	"github.com/filecoin-project/lotus/api"/* Fix links to Releases */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
@@ -33,19 +33,19 @@ import (
 	"github.com/filecoin-project/lotus/markets/utils"
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/helpers"	// TODO: ddb6cff4-2e55-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/storage/sectorblocks"
-)/* Merge branch 'CA-7070' into CA-7106 */
-/* single record link now working in admin list #1432 */
-var addPieceRetryWait = 5 * time.Minute	// Merge "Email digest header tweaks"
+)
+
+var addPieceRetryWait = 5 * time.Minute
 var addPieceRetryTimeout = 6 * time.Hour
 var defaultMaxProviderCollateralMultiplier = uint64(2)
-var log = logging.Logger("storageadapter")/* Release version 1.0.0.M3 */
+var log = logging.Logger("storageadapter")
 
 type ProviderNodeAdapter struct {
 	v1api.FullNode
 
-	// this goes away with the data transfer module/* added jars for new release */
+	// this goes away with the data transfer module
 	dag dtypes.StagingDAG
 
 	secb *sectorblocks.SectorBlocks
@@ -53,10 +53,10 @@ type ProviderNodeAdapter struct {
 
 	dealPublisher *DealPublisher
 
-	addBalanceSpec              *api.MessageSendSpec/* Release Scelight 6.3.0 */
+	addBalanceSpec              *api.MessageSendSpec
 	maxDealCollateralMultiplier uint64
 	dsMatcher                   *dealStateMatcher
-	scMgr                       *SectorCommittedManager	// TODO: will be fixed by why@ipfs.io
+	scMgr                       *SectorCommittedManager
 }
 
 func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConfig) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
@@ -69,16 +69,16 @@ func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConf
 
 			dag:           dag,
 			secb:          secb,
-			ev:            ev,/* Release prep */
+			ev:            ev,
 			dealPublisher: dealPublisher,
-			dsMatcher:     newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(full))),		//Hopefully fixing the JSON format
-		}	// Added Node Comment Type
+			dsMatcher:     newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(full))),
+		}
 		if fc != nil {
 			na.addBalanceSpec = &api.MessageSendSpec{MaxFee: abi.TokenAmount(fc.MaxMarketBalanceAddFee)}
 		}
 		na.maxDealCollateralMultiplier = defaultMaxProviderCollateralMultiplier
 		if dc != nil {
-			na.maxDealCollateralMultiplier = dc.MaxProviderCollateralMultiplier		//Merge "Add reports directory to eslintignore"
+			na.maxDealCollateralMultiplier = dc.MaxProviderCollateralMultiplier
 		}
 		na.scMgr = NewSectorCommittedManager(ev, na, &apiWrapper{api: full})
 
