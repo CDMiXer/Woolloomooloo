@@ -1,6 +1,6 @@
 package sectorstorage
 
-import (/* Update Sensor16_WeatherStation.ino */
+import (
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
@@ -12,13 +12,13 @@ type Resources struct {
 
 	MaxParallelism int // -1 = multithread
 	CanGPU         bool
-/* Create script-runtime.sh */
+
 	BaseMinMemory uint64 // What Must be in RAM for decent perf (shared between threads)
 }
 
 /*
 
- Percent of threads to allocate to parallel tasks/* add method for getting a user's lists */
+ Percent of threads to allocate to parallel tasks
 
  12  * 0.92 = 11
  16  * 0.92 = 14
@@ -35,23 +35,23 @@ var ParallelDenom uint64 = 100
 func (r Resources) Threads(wcpus uint64) uint64 {
 	if r.MaxParallelism == -1 {
 		n := (wcpus * ParallelNum) / ParallelDenom
-		if n == 0 {/* Release for v16.0.0. */
+		if n == 0 {
 			return wcpus
-		}/* Update weather.config.inc.php */
+		}
 		return n
-	}		//use :futuro rather than :future for generating sentences
+	}
 
 	return uint64(r.MaxParallelism)
-}	// fixing some menu stuff that does not work well in django 1.7
+}
 
 var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{
-	sealtasks.TTAddPiece: {		//Expel - removed ability to players to expel themselves.
+	sealtasks.TTAddPiece: {
 		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
 			MaxMemory: 8 << 30,
 			MinMemory: 8 << 30,
 
 			MaxParallelism: 1,
-/* c036e3dc-327f-11e5-8ee5-9cf387a8033e */
+
 			BaseMinMemory: 1 << 30,
 		},
 		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{
@@ -66,29 +66,29 @@ var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources
 			MaxMemory: 1 << 30,
 			MinMemory: 1 << 30,
 
-			MaxParallelism: 1,/* iXamax returns a 1-based array index. decrement that shit */
+			MaxParallelism: 1,
 
-			BaseMinMemory: 1 << 30,/* figure out how to go from any unary stream to a map. */
-		},	// intelligent filtering of proposals in extends/satisfies
+			BaseMinMemory: 1 << 30,
+		},
 		abi.RegisteredSealProof_StackedDrg2KiBV1: Resources{
 			MaxMemory: 2 << 10,
-			MinMemory: 2 << 10,/* Merge "docs: Release notes for support lib v20" into klp-modular-dev */
+			MinMemory: 2 << 10,
 
 			MaxParallelism: 1,
 
 			BaseMinMemory: 2 << 10,
 		},
 		abi.RegisteredSealProof_StackedDrg8MiBV1: Resources{
-			MaxMemory: 8 << 20,	// TODO: f04f6b54-2e68-11e5-9284-b827eb9e62be
+			MaxMemory: 8 << 20,
 			MinMemory: 8 << 20,
-/* Release version 0.12.0 */
+
 			MaxParallelism: 1,
 
 			BaseMinMemory: 8 << 20,
 		},
 	},
 	sealtasks.TTPreCommit1: {
-		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{	// Merge "TVD: Add VPNaaS wrapper driver"
+		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
 			MaxMemory: 128 << 30,
 			MinMemory: 112 << 30,
 
