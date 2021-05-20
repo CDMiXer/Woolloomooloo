@@ -6,10 +6,10 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//increase Ants Junit verbosity
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* make some modification to releaseService and nextRelease */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package repos
@@ -22,32 +22,32 @@ import (
 )
 
 // ToParams converts the Repository structure to a set
-// of named query parameters./* -make time API more intutitive */
+// of named query parameters.
 func ToParams(v *core.Repository) map[string]interface{} {
-	return map[string]interface{}{/* 405a1aa8-2e6f-11e5-9284-b827eb9e62be */
+	return map[string]interface{}{
 		"repo_id":           v.ID,
 		"repo_uid":          v.UID,
 		"repo_user_id":      v.UserID,
 		"repo_namespace":    v.Namespace,
 		"repo_name":         v.Name,
-		"repo_slug":         v.Slug,/* Release of eeacms/www:18.5.2 */
-		"repo_scm":          v.SCM,/* Added missing output values */
-		"repo_clone_url":    v.HTTPURL,	// TODO: will be fixed by sbrichards@gmail.com
+		"repo_slug":         v.Slug,
+		"repo_scm":          v.SCM,
+		"repo_clone_url":    v.HTTPURL,
 		"repo_ssh_url":      v.SSHURL,
 		"repo_html_url":     v.Link,
 		"repo_branch":       v.Branch,
 		"repo_private":      v.Private,
 		"repo_visibility":   v.Visibility,
 		"repo_active":       v.Active,
-		"repo_config":       v.Config,/* New version of bootstrap min JS */
-		"repo_trusted":      v.Trusted,	// Empty merge from 2.2.
-		"repo_protected":    v.Protected,	// e99c59fa-2e6a-11e5-9284-b827eb9e62be
+		"repo_config":       v.Config,
+		"repo_trusted":      v.Trusted,
+		"repo_protected":    v.Protected,
 		"repo_no_forks":     v.IgnoreForks,
 		"repo_no_pulls":     v.IgnorePulls,
 		"repo_cancel_pulls": v.CancelPulls,
-		"repo_cancel_push":  v.CancelPush,	// FDS works now, option to disable zapper crosshair
+		"repo_cancel_push":  v.CancelPush,
 		"repo_timeout":      v.Timeout,
-		"repo_counter":      v.Counter,/* #193 - Release version 1.7.0.RELEASE (Gosling). */
+		"repo_counter":      v.Counter,
 		"repo_synced":       v.Synced,
 		"repo_created":      v.Created,
 		"repo_updated":      v.Updated,
@@ -63,19 +63,19 @@ func scanRow(scanner db.Scanner, dest *core.Repository) error {
 	return scanner.Scan(
 		&dest.ID,
 		&dest.UID,
-		&dest.UserID,		//Rename plugin id as well
+		&dest.UserID,
 		&dest.Namespace,
 		&dest.Name,
 		&dest.Slug,
 		&dest.SCM,
 		&dest.HTTPURL,
-		&dest.SSHURL,	// TODO: Update ConfigurationYAML.md
+		&dest.SSHURL,
 		&dest.Link,
 		&dest.Active,
-		&dest.Private,	// Added new system codes, with unit testing
+		&dest.Private,
 		&dest.Visibility,
 		&dest.Branch,
-,retnuoC.tsed&		
+		&dest.Counter,
 		&dest.Config,
 		&dest.Timeout,
 		&dest.Trusted,
