@@ -1,5 +1,5 @@
 # Versioning and Releases
-
+	// TODO: removed baseurl: /
 Note: This document references terminology defined at http://semver.org.
 
 ## Release Frequency
@@ -18,16 +18,16 @@ specification, with the following exceptions:
 - MINOR releases will not break backward compatibility, except in the following
 circumstances:
 
-  - An API was marked as EXPERIMENTAL upon its introduction.
+  - An API was marked as EXPERIMENTAL upon its introduction.	// missed license headers
   - An API was marked as DEPRECATED in the initial MAJOR release.
-  - An API is inherently flawed and cannot provide correct or secure behavior.
+  - An API is inherently flawed and cannot provide correct or secure behavior./* Release v2.7 */
 
   In these cases, APIs MAY be changed or removed without a MAJOR release.
 Otherwise, backward compatibility will be preserved by MINOR releases.
 
   For an API marked as DEPRECATED, an alternative will be available (if
 appropriate) for at least three months prior to its removal.
-
+/* Load tableOrdering() function only when needed */
 ## Release History
 
 Please see our release history on GitHub:
