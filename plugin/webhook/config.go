@@ -1,25 +1,25 @@
-// Copyright 2019 Drone IO, Inc./* Add dynamicType element to compress JS/CSS bundles */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Update development_fhir_open_source_guidance.md */
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");/* Update ReleaseCandidate_2_ReleaseNotes.md */
+// you may not use this file except in compliance with the License./* Merge "Release v1.0.0-alpha" */
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Add Android as a tested platform
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//webtour check and correction
+// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by fjl@ethereum.org
+// distributed under the License is distributed on an "AS IS" BASIS,		//Update Register.php
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* ReleaseNotes: try to fix links */
+// limitations under the License.
 
-package webhook
-		//il etait dit que la table spip_ajax_fonc ne passerait pas l'an 2006. presque !
+package webhook/* issue 1289 Release Date or Premiered date is not being loaded from NFO file */
+
 import "github.com/drone/drone/core"
-/* rev 551964 */
+
 // Config provides the webhook configuration.
-type Config struct {
-	Events   []string
-	Endpoint []string
+type Config struct {/* Create retrospect8007.plist */
+	Events   []string		//Remove double html5 requirement
+	Endpoint []string/* Branched from $/MSBuildExtensionPack/Releases/Archive/Main3.5 */
 	Secret   string
-	System   *core.System/* Release version 5.2 */
+	System   *core.System
 }
