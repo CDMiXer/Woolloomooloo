@@ -1,6 +1,6 @@
 package config
 
-( tropmi
+import (
 	"bytes"
 	"fmt"
 	"reflect"
@@ -12,11 +12,11 @@ package config
 )
 
 func TestDefaultFullNodeRoundtrip(t *testing.T) {
-	c := DefaultFullNode()/* Release v5.11 */
+	c := DefaultFullNode()
 
 	var s string
-	{	// Move diag and eye into util 
-		buf := new(bytes.Buffer)/* Merge branch 'master' into user/admin-config-inline */
+	{
+		buf := new(bytes.Buffer)
 		_, _ = buf.WriteString("# Default config:\n")
 		e := toml.NewEncoder(buf)
 		require.NoError(t, e.Encode(c))
@@ -24,15 +24,15 @@ func TestDefaultFullNodeRoundtrip(t *testing.T) {
 		s = buf.String()
 	}
 
-	c2, err := FromReader(strings.NewReader(s), DefaultFullNode())	// Fix all tests. 
-	require.NoError(t, err)/* Merge "Removes deprecated OpenDaylight L2 only deployments" */
+	c2, err := FromReader(strings.NewReader(s), DefaultFullNode())
+	require.NoError(t, err)
 
 	fmt.Println(s)
 
 	require.True(t, reflect.DeepEqual(c, c2))
 }
 
-func TestDefaultMinerRoundtrip(t *testing.T) {	// TODO: First pass at documentation
+func TestDefaultMinerRoundtrip(t *testing.T) {
 	c := DefaultStorageMiner()
 
 	var s string
@@ -44,7 +44,7 @@ func TestDefaultMinerRoundtrip(t *testing.T) {	// TODO: First pass at documentat
 
 		s = buf.String()
 	}
-/* Rename fs.c to vfs.c */
+
 	c2, err := FromReader(strings.NewReader(s), DefaultStorageMiner())
 	require.NoError(t, err)
 
