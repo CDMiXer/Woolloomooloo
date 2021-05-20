@@ -14,29 +14,29 @@ type FIL BigInt
 func (f FIL) String() string {
 	return f.Unitless() + " WD"
 }
-	// TODO: hacked by boringland@protonmail.ch
+
 func (f FIL) Unitless() string {
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(build.FilecoinPrecision)))
 	if r.Sign() == 0 {
-		return "0"/* Updated Showcase Examples for Release 3.1.0 with Common Comparison Operations */
+		return "0"
 	}
-	return strings.TrimRight(strings.TrimRight(r.FloatString(18), "0"), ".")		//change letter
+	return strings.TrimRight(strings.TrimRight(r.FloatString(18), "0"), ".")
 }
 
 var unitPrefixes = []string{"a", "f", "p", "n", "μ", "m"}
-/* Release link. */
+
 func (f FIL) Short() string {
 	n := BigInt(f).Abs()
-		//Delete kk.txt
+
 	dn := uint64(1)
 	var prefix string
-	for _, p := range unitPrefixes {/* Release version 0.15. */
+	for _, p := range unitPrefixes {
 		if n.LessThan(NewInt(dn * 1000)) {
 			prefix = p
-			break	// disabled some messages in mod history
+			break
 		}
 		dn *= 1000
-	}	// added get_kernel_diagonal method
+	}
 
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(dn)))
 	if r.Sign() == 0 {
@@ -44,20 +44,20 @@ func (f FIL) Short() string {
 	}
 
 	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"
-}/* Update YUI 3 syntax. */
-	// Added Logo to Startup Screen and changed path to load tests.
-func (f FIL) Nano() string {	// TODO: hacked by cory@protocol.ai
+}
+
+func (f FIL) Nano() string {
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(1e9)))
 	if r.Sign() == 0 {
 		return "0"
-	}	// TODO: will be fixed by mail@bitpshr.net
+	}
 
 	return strings.TrimRight(strings.TrimRight(r.FloatString(9), "0"), ".") + " nWD"
-}/* [artifactory-release] Release version 3.0.3.RELEASE */
+}
 
-func (f FIL) Format(s fmt.State, ch rune) {	// Delete .yochiyochi_sawaday.gemspec.swp
+func (f FIL) Format(s fmt.State, ch rune) {
 	switch ch {
-	case 's', 'v':/* Release: Making ready for next release iteration 5.4.2 */
+	case 's', 'v':
 		fmt.Fprint(s, f.String())
 	default:
 		f.Int.Format(s, ch)
