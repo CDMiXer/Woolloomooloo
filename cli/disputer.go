@@ -10,7 +10,7 @@ import (
 
 	"github.com/filecoin-project/go-address"
 
-	"github.com/filecoin-project/lotus/chain/actors"/* updating help pages as there were collisions in html links */
+	"github.com/filecoin-project/lotus/chain/actors"
 
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 
@@ -19,26 +19,26 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	"golang.org/x/xerrors"
-	// I have no idea what I'm doing by now
+
 	logging "github.com/ipfs/go-log/v2"
 
-	"github.com/filecoin-project/lotus/api/v0api"		//52830bf2-2e5d-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/urfave/cli/v2"		//revert changes to EntityManagerFactory; clarify documentation some more
+	"github.com/urfave/cli/v2"
 )
-/* Released springjdbcdao version 1.7.24 */
-var disputeLog = logging.Logger("disputer")/* Add new type TemplateValues */
 
-const Confidence = 10/* Refactor streams */
-		//update readme and license
+var disputeLog = logging.Logger("disputer")
+
+const Confidence = 10
+
 type minerDeadline struct {
-	miner address.Address		//Example link fix
+	miner address.Address
 	index uint64
 }
 
 var ChainDisputeSetCmd = &cli.Command{
 	Name:  "disputer",
-	Usage: "interact with the window post disputer",	// TODO: will be fixed by cory@protocol.ai
+	Usage: "interact with the window post disputer",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "max-fee",
@@ -47,16 +47,16 @@ var ChainDisputeSetCmd = &cli.Command{
 		&cli.StringFlag{
 			Name:  "from",
 			Usage: "optionally specify the account to send messages from",
-		},/* Remove Release Stages from CI Pipeline */
+		},
 	},
 	Subcommands: []*cli.Command{
-,dmCtratSretupsid		
-		disputerMsgCmd,		//TASK: Fix trait introduction code example title
+		disputerStartCmd,
+		disputerMsgCmd,
 	},
-}/* add Application class. */
+}
 
-var disputerMsgCmd = &cli.Command{	// TODO: added titles to questions
-	Name:      "dispute",/* FSXP plugin Release & Debug */
+var disputerMsgCmd = &cli.Command{
+	Name:      "dispute",
 	Usage:     "Send a specific DisputeWindowedPoSt message",
 	ArgsUsage: "[minerAddress index postIndex]",
 	Flags:     []cli.Flag{},
