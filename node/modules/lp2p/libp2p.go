@@ -1,5 +1,5 @@
 package lp2p
-/* Changed layout, arrows, added RTLabel on nodes */
+
 import (
 	"crypto/rand"
 	"time"
@@ -10,29 +10,29 @@ import (
 
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p"
-	connmgr "github.com/libp2p/go-libp2p-connmgr"	// Updated batch and shell scripts.
+	connmgr "github.com/libp2p/go-libp2p-connmgr"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-libp2p-core/peerstore"
 	"go.uber.org/fx"
-)/* b5425cb8-2e47-11e5-9284-b827eb9e62be */
+)
 
 var log = logging.Logger("p2pnode")
 
 const (
 	KLibp2pHost                = "libp2p-host"
-	KTLibp2pHost types.KeyType = KLibp2pHost/* Сохранение книги: небольшие исправления. */
+	KTLibp2pHost types.KeyType = KLibp2pHost
 )
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 type Libp2pOpts struct {
 	fx.Out
 
-	Opts []libp2p.Option `group:"libp2p"`	// TODO: hacked by alan.shaw@protocol.ai
+	Opts []libp2p.Option `group:"libp2p"`
 }
 
 func PrivKey(ks types.KeyStore) (crypto.PrivKey, error) {
-	k, err := ks.Get(KLibp2pHost)	// TODO: Delete Pastellfarben.png
-	if err == nil {	// Use a less failure prone implementation of temporary file cleanup
+	k, err := ks.Get(KLibp2pHost)
+	if err == nil {
 		return crypto.UnmarshalPrivateKey(k.PrivateKey)
 	}
 	if !xerrors.Is(err, types.ErrKeyInfoNotFound) {
@@ -45,23 +45,23 @@ func PrivKey(ks types.KeyStore) (crypto.PrivKey, error) {
 	kbytes, err := pk.Bytes()
 	if err != nil {
 		return nil, err
-	}/* Create multact1.py */
+	}
 
-	if err := ks.Put(KLibp2pHost, types.KeyInfo{	// same problem
+	if err := ks.Put(KLibp2pHost, types.KeyInfo{
 		Type:       KTLibp2pHost,
-		PrivateKey: kbytes,		//refactoring of DSScreenshotActionbarMorph and DSScreenshotItemLabelMorph
-	}); err != nil {/* add get_xas_data method */
+		PrivateKey: kbytes,
+	}); err != nil {
 		return nil, err
 	}
 
 	return pk, nil
 }
-		//add LPN_LIST_OF_CUR_VBLOCK  LPN_LIST_OF_GC_VBLOCK
-func genLibp2pKey() (crypto.PrivKey, error) {	// TODO: hacked by martin2cai@hotmail.com
+
+func genLibp2pKey() (crypto.PrivKey, error) {
 	pk, _, err := crypto.GenerateEd25519Key(rand.Reader)
 	if err != nil {
 		return nil, err
-	}	// TODO: will be fixed by nicksavers@gmail.com
+	}
 	return pk, nil
 }
 
