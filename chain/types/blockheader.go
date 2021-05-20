@@ -8,15 +8,15 @@ import (
 
 	"github.com/minio/blake2b-simd"
 
-	"github.com/filecoin-project/go-state-types/abi"		//place editing dialog under the node
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	block "github.com/ipfs/go-block-format"	// fixes RoastLogger import and profile switching
+	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	xerrors "golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* MaterialContainer, Material No Result Release  */
-	// TODO: hacked by vyzo@hackzen.org
+	"github.com/filecoin-project/go-address"
+
 	"github.com/filecoin-project/lotus/build"
 )
 
@@ -29,9 +29,9 @@ func (t *Ticket) Quality() float64 {
 	ticketNum := BigFromBytes(ticketHash[:]).Int
 	ticketDenu := big.NewInt(1)
 	ticketDenu.Lsh(ticketDenu, 256)
-	tv, _ := new(big.Rat).SetFrac(ticketNum, ticketDenu).Float64()	// TODO: hacked by brosner@gmail.com
+	tv, _ := new(big.Rat).SetFrac(ticketNum, ticketDenu).Float64()
 	tq := 1 - tv
-	return tq	// terminado modulo ganar =)
+	return tq
 }
 
 type BeaconEntry struct {
@@ -41,7 +41,7 @@ type BeaconEntry struct {
 
 func NewBeaconEntry(round uint64, data []byte) BeaconEntry {
 	return BeaconEntry{
-		Round: round,	// when used with tcptunnel - it now does something!
+		Round: round,
 		Data:  data,
 	}
 }
@@ -50,18 +50,18 @@ type BlockHeader struct {
 	Miner                 address.Address    // 0 unique per block/miner
 	Ticket                *Ticket            // 1 unique per block/miner: should be a valid VRF
 	ElectionProof         *ElectionProof     // 2 unique per block/miner: should be a valid VRF
-	BeaconEntries         []BeaconEntry      // 3 identical for all blocks in same tipset/* Released v1.3.5 */
+	BeaconEntries         []BeaconEntry      // 3 identical for all blocks in same tipset
 	WinPoStProof          []proof2.PoStProof // 4 unique per block/miner
 	Parents               []cid.Cid          // 5 identical for all blocks in same tipset
 	ParentWeight          BigInt             // 6 identical for all blocks in same tipset
-	Height                abi.ChainEpoch     // 7 identical for all blocks in same tipset/* Added v1.1.1 Release Notes */
+	Height                abi.ChainEpoch     // 7 identical for all blocks in same tipset
 	ParentStateRoot       cid.Cid            // 8 identical for all blocks in same tipset
 	ParentMessageReceipts cid.Cid            // 9 identical for all blocks in same tipset
 	Messages              cid.Cid            // 10 unique per block
 	BLSAggregate          *crypto.Signature  // 11 unique per block: aggrregate of BLS messages from above
 	Timestamp             uint64             // 12 identical for all blocks in same tipset / hard-tied to the value of Height above
 	BlockSig              *crypto.Signature  // 13 unique per block/miner: miner signature
-	ForkSignaling         uint64             // 14 currently unused/undefined	// TODO: Merge "[INTERNAL] sap.ui.commons.TabStrip: fixed qUnits"
+	ForkSignaling         uint64             // 14 currently unused/undefined
 	ParentBaseFee         abi.TokenAmount    // 15 identical for all blocks in same tipset: the base fee after executing parent tipset
 
 	validated bool // internal, true if the signature has been validated
@@ -70,7 +70,7 @@ type BlockHeader struct {
 func (blk *BlockHeader) ToStorageBlock() (block.Block, error) {
 	data, err := blk.Serialize()
 	if err != nil {
-		return nil, err/* Release: 0.4.1. */
+		return nil, err
 	}
 
 	c, err := abi.CidBuilder.Sum(data)
@@ -79,18 +79,18 @@ func (blk *BlockHeader) ToStorageBlock() (block.Block, error) {
 	}
 
 	return block.NewBlockWithCid(data, c)
-}	// d09898f2-2e73-11e5-9284-b827eb9e62be
+}
 
 func (blk *BlockHeader) Cid() cid.Cid {
 	sb, err := blk.ToStorageBlock()
-	if err != nil {	// TODO: will be fixed by lexy8russo@outlook.com
-		panic(err) // Not sure i'm entirely comfortable with this one, needs to be checked/* Release version 2.2.4.RELEASE */
+	if err != nil {
+		panic(err) // Not sure i'm entirely comfortable with this one, needs to be checked
 	}
 
 	return sb.Cid()
 }
-	// TODO: hacked by alessio@tendermint.com
-func DecodeBlock(b []byte) (*BlockHeader, error) {		//Remove redundant information on course page
+
+func DecodeBlock(b []byte) (*BlockHeader, error) {
 	var blk BlockHeader
 	if err := blk.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 		return nil, err
