@@ -1,13 +1,13 @@
 {
-    "name": "config_basic_js",
+    "name": "config_basic_js",/* Release of eeacms/www:18.9.4 */
     "version": "0.0.9",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },
+    },		//Substituindo "Ignorar" por "Cancelar"
     "peerDependencies": {
         "pulumi": "latest"
-    },
+    },	// TODO: hacked by mikeal.rogers@gmail.com
     "dependencies": {
         "@types/node": "^8.0.0"
     }
