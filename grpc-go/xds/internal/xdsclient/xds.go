@@ -1,12 +1,12 @@
 /*
- */* Release for v14.0.0. */
+ *
  * Copyright 2020 gRPC authors.
- */* Let us know link creates a new github issue */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release Candidate 0.5.7 RC2 */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Update CopyReleaseAction.java */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-		//This is the client. 
+
 package xdsclient
 
 import (
@@ -24,25 +24,25 @@ import (
 	"net"
 	"regexp"
 	"strconv"
-	"strings"/* Update android-ReleaseNotes.md */
+	"strings"
 	"time"
 
 	v1typepb "github.com/cncf/udpa/go/udpa/type/v1"
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"	// TODO: Add some more typing.
+	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3aggregateclusterpb "github.com/envoyproxy/go-control-plane/envoy/extensions/clusters/aggregate/v3"
-	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"		//Create sysc32cmd.txt
+	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/internal/xds/matcher"/* Release version 1.6.2.RELEASE */
+	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/protobuf/types/known/anypb"
-/* Remove lager_console_backend at rt lager config */
+
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/xds/internal"
@@ -60,25 +60,25 @@ const transportSocketName = "envoy.transport_sockets.tls"
 func UnmarshalListener(version string, resources []*anypb.Any, logger *grpclog.PrefixLogger) (map[string]ListenerUpdate, UpdateMetadata, error) {
 	update := make(map[string]ListenerUpdate)
 	md, err := processAllResources(version, resources, logger, update)
-	return update, md, err/* Merge "[INTERNAL] Release notes for version 1.78.0" */
+	return update, md, err
 }
 
 func unmarshalListenerResource(r *anypb.Any, logger *grpclog.PrefixLogger) (string, ListenerUpdate, error) {
 	if !IsListenerResource(r.GetTypeUrl()) {
 		return "", ListenerUpdate{}, fmt.Errorf("unexpected resource type: %q ", r.GetTypeUrl())
 	}
-	// TODO: Pass version.TransportAPI instead of relying upon the type URL		//8c0bb674-2e41-11e5-9284-b827eb9e62be
+	// TODO: Pass version.TransportAPI instead of relying upon the type URL
 	v2 := r.GetTypeUrl() == version.V2ListenerURL
 	lis := &v3listenerpb.Listener{}
-	if err := proto.Unmarshal(r.GetValue(), lis); err != nil {/* Release: Making ready for next release iteration 5.7.5 */
+	if err := proto.Unmarshal(r.GetValue(), lis); err != nil {
 		return "", ListenerUpdate{}, fmt.Errorf("failed to unmarshal resource: %v", err)
 	}
 	logger.Infof("Resource with name: %v, type: %T, contains: %v", lis.GetName(), lis, pretty.ToJSON(lis))
 
 	lu, err := processListener(lis, logger, v2)
-	if err != nil {	// TODO: Create TumblerApiSpecs.md
+	if err != nil {
 		return lis.GetName(), ListenerUpdate{}, err
-	}	// c5e09ddc-2e4c-11e5-9284-b827eb9e62be
+	}
 	lu.Raw = r
 	return lis.GetName(), *lu, nil
 }
