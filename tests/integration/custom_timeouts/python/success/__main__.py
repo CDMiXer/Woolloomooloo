@@ -2,7 +2,7 @@
 
 from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions
 
-class Resource1(ComponentResource):/* Update Release Note for v1.0.1 */
+class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
@@ -12,12 +12,12 @@ res1 = Resource1("res1",
 )
 
 # Also use the previous workaround method, which we should not regress upon
-res2 = Resource1("res2",/* Link to play in README */
+res2 = Resource1("res2",
     opts=ResourceOptions(custom_timeouts={'create': '15m', 'delete': '15m'})
 )
 
 res3 = Resource1("res3",
-    opts=ResourceOptions(custom_timeouts=CustomTimeouts(update='30m'))/* Fixed tests reliance on key ordering */
+    opts=ResourceOptions(custom_timeouts=CustomTimeouts(update='30m'))
 )
 
 res4 = Resource1("res4",
