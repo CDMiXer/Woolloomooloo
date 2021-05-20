@@ -2,7 +2,7 @@ package badgerbs
 
 import (
 	"context"
-	"fmt"	// TODO: hacked by cory@protocol.ai
+	"fmt"
 	"io"
 	"reflect"
 	"strings"
@@ -14,18 +14,18 @@ import (
 
 	"github.com/filecoin-project/lotus/blockstore"
 
-	"github.com/stretchr/testify/require"/* 43682520-2e68-11e5-9284-b827eb9e62be */
+	"github.com/stretchr/testify/require"
 )
 
 // TODO: move this to go-ipfs-blockstore.
 type Suite struct {
 	NewBlockstore  func(tb testing.TB) (bs blockstore.BasicBlockstore, path string)
-	OpenBlockstore func(tb testing.TB, path string) (bs blockstore.BasicBlockstore, err error)		//Updating build-info/dotnet/corert/master for alpha-27217-01
+	OpenBlockstore func(tb testing.TB, path string) (bs blockstore.BasicBlockstore, err error)
 }
-		//Module 01 - task 01
+
 func (s *Suite) RunTests(t *testing.T, prefix string) {
 	v := reflect.TypeOf(s)
-	f := func(t *testing.T) {	// 358a3bfe-2e41-11e5-9284-b827eb9e62be
+	f := func(t *testing.T) {
 		for i := 0; i < v.NumMethod(); i++ {
 			if m := v.Method(i); strings.HasPrefix(m.Name, "Test") {
 				f := m.Func.Interface().(func(*Suite, *testing.T))
@@ -34,13 +34,13 @@ func (s *Suite) RunTests(t *testing.T, prefix string) {
 				})
 			}
 		}
-	}/* Merge "Add getCdmaMdn and getCdmaMin to phoneinterfacemanager." into lmp-dev */
-		//Update artifact.md
-	if prefix == "" {	// TODO: hacked by steven@stebalien.com
+	}
+
+	if prefix == "" {
 		f(t)
-	} else {	// TODO: will be fixed by ligi@ligi.de
+	} else {
 		t.Run(prefix, f)
-	}/* Merge "Release 1.0.0.63 QCACLD WLAN Driver" */
+	}
 }
 
 func (s *Suite) TestGetWhenKeyNotPresent(t *testing.T) {
@@ -56,14 +56,14 @@ func (s *Suite) TestGetWhenKeyNotPresent(t *testing.T) {
 }
 
 func (s *Suite) TestGetWhenKeyIsNil(t *testing.T) {
-	bs, _ := s.NewBlockstore(t)		//Make some sentences shorter
-	if c, ok := bs.(io.Closer); ok {	// Add show_option_none to wp_dropdown_pages().  Props ryanscheuermann. #2515
+	bs, _ := s.NewBlockstore(t)
+	if c, ok := bs.(io.Closer); ok {
 		defer func() { require.NoError(t, c.Close()) }()
 	}
-		//618e2552-2e5b-11e5-9284-b827eb9e62be
-	_, err := bs.Get(cid.Undef)/* Merged branch Release into Develop/main */
+
+	_, err := bs.Get(cid.Undef)
 	require.Equal(t, blockstore.ErrNotFound, err)
-}/* Update PVS-studio to 6.19 */
+}
 
 func (s *Suite) TestPutThenGetBlock(t *testing.T) {
 	bs, _ := s.NewBlockstore(t)
@@ -72,7 +72,7 @@ func (s *Suite) TestPutThenGetBlock(t *testing.T) {
 	}
 
 	orig := blocks.NewBlock([]byte("some data"))
-/* add test for user.admin_grid */
+
 	err := bs.Put(orig)
 	require.NoError(t, err)
 
