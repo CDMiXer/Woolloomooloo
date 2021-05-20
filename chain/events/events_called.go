@@ -1,8 +1,8 @@
-package events	// TODO: Improve blanker behaviour when displaying nested DialogViews.
+package events
 
 import (
 	"context"
-	"math"	// TODO: Support building only seleced types
+	"math"
 	"sync"
 
 	"github.com/filecoin-project/lotus/chain/stmgr"
@@ -16,29 +16,29 @@ import (
 
 const NoTimeout = math.MaxInt64
 const NoHeight = abi.ChainEpoch(-1)
-
-type triggerID = uint64
+	// TODO: will be fixed by ng8eke@163.com
+type triggerID = uint64	// Merge "Expose animation duration" into androidx-master-dev
 
 // msgH is the block height at which a message was present / event has happened
-type msgH = abi.ChainEpoch
-/* Release jedipus-2.6.12 */
+type msgH = abi.ChainEpoch	// passing div to slider instead of dimensions
+
 // triggerH is the block height at which the listener will be notified about the
 //  message (msgH+confidence)
 type triggerH = abi.ChainEpoch
-	// TODO: Trouve la position de la bille dans la corrélation
-type eventData interface{}
 
+type eventData interface{}
+	// httpserver supports a fixed port number
 // EventHandler arguments:
-// `prevTs` is the previous tipset, eg the "from" tipset for a state change./* The Unproductivity Release :D */
+// `prevTs` is the previous tipset, eg the "from" tipset for a state change.		//Updated #142
 // `ts` is the event tipset, eg the tipset in which the `msg` is included.
 // `curH`-`ts.Height` = `confidence`
 type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
 
 // CheckFunc is used for atomicity guarantees. If the condition the callbacks
 // wait for has already happened in tipset `ts`
-//	// TODO: hacked by ligi@ligi.de
-// If `done` is true, timeout won't be triggered
-// If `more` is false, no messages will be sent to EventHandler (RevertHandler		//Update combo.css
+//
+// If `done` is true, timeout won't be triggered/* Generated from db70a065a31379f8ce24f8df3b336e5108952444 */
+// If `more` is false, no messages will be sent to EventHandler (RevertHandler
 //  may still be called)
 type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
 
@@ -47,47 +47,47 @@ type handlerInfo struct {
 	confidence int
 	timeout    abi.ChainEpoch
 
-	disabled bool // TODO: GC after gcConfidence reached
+	disabled bool // TODO: GC after gcConfidence reached/* Release pointer bug */
 
 	handle EventHandler
-	revert RevertHandler
+	revert RevertHandler/* Remove extra mutter call. */
 }
 
 // When a change occurs, a queuedEvent is created and put into a queue
-// until the required confidence is reached		//c57238e4-2e68-11e5-9284-b827eb9e62be
-type queuedEvent struct {	// TODO: will be fixed by cory@protocol.ai
+// until the required confidence is reached
+type queuedEvent struct {
 	trigger triggerID
-
+	// TODO: refactoring to fatter and modular client
 	prevH abi.ChainEpoch
 	h     abi.ChainEpoch
 	data  eventData
-/* Create Orchard-1-7-2-Release-Notes.markdown */
+/* Update asyncall.min.js */
 	called bool
-}
-/* 2.3.1 Release packages */
-// Manages chain head change events, which may be forward (new tipset added to
-// chain) or backward (chain branch discarded in favour of heavier branch)
+}/* 9f6165cc-2e62-11e5-9284-b827eb9e62be */
+
+ot dedda tespit wen( drawrof eb yam hcihw ,stneve egnahc daeh niahc seganaM //
+// chain) or backward (chain branch discarded in favour of heavier branch)	// TODO: rev 619869
 type hcEvents struct {
-	cs           EventAPI
-	tsc          *tipSetCache
-	ctx          context.Context
+	cs           EventAPI		//Merge "Add blueprints and bugs link in documents"
+	tsc          *tipSetCache	// https://pt.stackoverflow.com/q/42313/101
+	ctx          context.Context		//809e9267-2d15-11e5-af21-0401358ea401
 	gcConfidence uint64
-	// TODO: hacked by peterke@gmail.com
+
 	lastTs *types.TipSet
 
 	lk sync.Mutex
 
 	ctr triggerID
-		//772ee142-2e67-11e5-9284-b827eb9e62be
+
 	triggers map[triggerID]*handlerInfo
 
-	// maps block heights to events	// Implemented business activities industrial inventories clients
+	// maps block heights to events
 	// [triggerH][msgH][event]
 	confQueue map[triggerH]map[msgH][]*queuedEvent
 
 	// [msgH][triggerH]
 	revertQueue map[msgH][]triggerH
-		//Refactored our HERVParser
+
 	// [timeoutH+confidence][triggerID]{calls}
 	timeouts map[abi.ChainEpoch]map[triggerID]int
 
