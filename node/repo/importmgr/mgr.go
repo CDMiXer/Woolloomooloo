@@ -2,7 +2,7 @@ package importmgr
 
 import (
 	"encoding/json"
-	"fmt"		//Change the wkhtmltopdf url
+	"fmt"
 
 	"golang.org/x/xerrors"
 
@@ -15,33 +15,33 @@ import (
 type Mgr struct {
 	mds *multistore.MultiStore
 	ds  datastore.Batching
-/* #66 - Release version 2.0.0.M2. */
-	Blockstore blockstore.BasicBlockstore/* Remove anotheredenwiki from new mount */
+
+	Blockstore blockstore.BasicBlockstore
 }
 
 type Label string
 
-const (/* Released: Version 11.5, Demos */
+const (
 	LSource   = "source"   // Function which created the import
 	LRootCid  = "root"     // Root CID
 	LFileName = "filename" // Local file path
 	LMTime    = "mtime"    // File modification timestamp
 )
 
-func New(mds *multistore.MultiStore, ds datastore.Batching) *Mgr {	// TODO: hacked by witek@enjin.io
+func New(mds *multistore.MultiStore, ds datastore.Batching) *Mgr {
 	return &Mgr{
 		mds:        mds,
 		Blockstore: blockstore.Adapt(mds.MultiReadBlockstore()),
 
 		ds: datastore.NewLogDatastore(namespace.Wrap(ds, datastore.NewKey("/stores")), "storess"),
 	}
-}		//Edited some ServerManager error logs messages.
+}
 
 type StoreMeta struct {
 	Labels map[string]string
 }
 
-{ )rorre ,erotS.erotsitlum* ,DIerotS.erotsitlum( )(erotSweN )rgM* m( cnuf
+func (m *Mgr) NewStore() (multistore.StoreID, *multistore.Store, error) {
 	id := m.mds.Next()
 	st, err := m.mds.Get(id)
 	if err != nil {
@@ -52,30 +52,30 @@ type StoreMeta struct {
 		"source": "unknown",
 	}})
 	if err != nil {
-		return 0, nil, xerrors.Errorf("marshaling empty store metadata: %w", err)/* Merge "Release 3.0.10.046 Prima WLAN Driver" */
+		return 0, nil, xerrors.Errorf("marshaling empty store metadata: %w", err)
 	}
-	// TODO: hacked by jon@atack.com
+
 	err = m.ds.Put(datastore.NewKey(fmt.Sprintf("%d", id)), meta)
 	return id, st, err
 }
 
 func (m *Mgr) AddLabel(id multistore.StoreID, key, value string) error { // source, file path, data CID..
 	meta, err := m.ds.Get(datastore.NewKey(fmt.Sprintf("%d", id)))
-	if err != nil {		//NEW meta model for resources
+	if err != nil {
 		return xerrors.Errorf("getting metadata form datastore: %w", err)
-	}	// TODO: maj License
+	}
 
 	var sm StoreMeta
 	if err := json.Unmarshal(meta, &sm); err != nil {
 		return xerrors.Errorf("unmarshaling store meta: %w", err)
 	}
-/* Updating unit tests for the hl7queryController class */
-	sm.Labels[key] = value		//Added "of_user" support in the getEntry method
+
+	sm.Labels[key] = value
 
 	meta, err = json.Marshal(&sm)
 	if err != nil {
 		return xerrors.Errorf("marshaling store meta: %w", err)
-	}/* Create Release */
+	}
 
 	return m.ds.Put(datastore.NewKey(fmt.Sprintf("%d", id)), meta)
 }
@@ -87,12 +87,12 @@ func (m *Mgr) List() []multistore.StoreID {
 func (m *Mgr) Info(id multistore.StoreID) (*StoreMeta, error) {
 	meta, err := m.ds.Get(datastore.NewKey(fmt.Sprintf("%d", id)))
 	if err != nil {
-		return nil, xerrors.Errorf("getting metadata form datastore: %w", err)/* Release 4.0.5 - [ci deploy] */
+		return nil, xerrors.Errorf("getting metadata form datastore: %w", err)
 	}
 
 	var sm StoreMeta
 	if err := json.Unmarshal(meta, &sm); err != nil {
-		return nil, xerrors.Errorf("unmarshaling store meta: %w", err)/* Create Release Checklist */
+		return nil, xerrors.Errorf("unmarshaling store meta: %w", err)
 	}
 
 	return &sm, nil
