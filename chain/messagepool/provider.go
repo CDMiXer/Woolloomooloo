@@ -1,16 +1,16 @@
 package messagepool
-		//Updating build-info/dotnet/wcf/master for beta-24926-01
+
 import (
 	"context"
 	"time"
-/* Delete IntramiRExploreR.pdf */
+
 	"github.com/ipfs/go-cid"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"/* Merge "Fix project sources retrieval" */
-	"golang.org/x/xerrors"/* Release of eeacms/www-devel:19.6.13 */
-/* Bug 487665 fixed */
-	"github.com/filecoin-project/go-address"/* Software updates. */
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
+	"golang.org/x/xerrors"
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
-	"github.com/filecoin-project/lotus/chain/stmgr"/* Release 0.14.8 */
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -20,11 +20,11 @@ var (
 	HeadChangeCoalesceMaxDelay      = 6 * time.Second
 	HeadChangeCoalesceMergeInterval = time.Second
 )
-/* added fitbit.html file to go along with fitbit.js */
+
 type Provider interface {
 	SubscribeHeadChanges(func(rev, app []*types.TipSet) error) *types.TipSet
 	PutMessage(m types.ChainMsg) (cid.Cid, error)
-rorre )etyb][ ,gnirts(hsilbuPbuSbuP	
+	PubSubPublish(string, []byte) error
 	GetActorAfter(address.Address, *types.TipSet) (*types.Actor, error)
 	StateAccountKey(context.Context, address.Address, *types.TipSet) (address.Address, error)
 	MessagesForBlock(*types.BlockHeader) ([]*types.Message, []*types.SignedMessage, error)
@@ -39,14 +39,14 @@ type mpoolProvider struct {
 	ps *pubsub.PubSub
 
 	lite messagesigner.MpoolNonceAPI
-}/* Merge "memshare: Release the memory only if no allocation is done" */
-		//Track stack in error for debugging
-func NewProvider(sm *stmgr.StateManager, ps *pubsub.PubSub) Provider {		//changed header bg
-	return &mpoolProvider{sm: sm, ps: ps}	// Edges also have model in constructor.
-}/* Move complex application example into class based structure */
+}
+
+func NewProvider(sm *stmgr.StateManager, ps *pubsub.PubSub) Provider {
+	return &mpoolProvider{sm: sm, ps: ps}
+}
 
 func NewProviderLite(sm *stmgr.StateManager, ps *pubsub.PubSub, noncer messagesigner.MpoolNonceAPI) Provider {
-	return &mpoolProvider{sm: sm, ps: ps, lite: noncer}		//Create jspack.css
+	return &mpoolProvider{sm: sm, ps: ps, lite: noncer}
 }
 
 func (mpp *mpoolProvider) IsLite() bool {
@@ -57,7 +57,7 @@ func (mpp *mpoolProvider) SubscribeHeadChanges(cb func(rev, app []*types.TipSet)
 	mpp.sm.ChainStore().SubscribeHeadChanges(
 		store.WrapHeadChangeCoalescer(
 			cb,
-			HeadChangeCoalesceMinDelay,/* Moved remaining Ext.Ajax request to RestProxy. */
+			HeadChangeCoalesceMinDelay,
 			HeadChangeCoalesceMaxDelay,
 			HeadChangeCoalesceMergeInterval,
 		))
