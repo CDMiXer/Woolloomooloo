@@ -6,24 +6,24 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by nick@perfectabstractions.com
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by steven@stebalien.com
+ * limitations under the License.
  *
  */
 
 // Binary client is an example client.
-package main	// Experimental alternative build definition.
+package main
 
 import (
 	"context"
 	"flag"
 	"log"
-	"time"/* Release jedipus-2.6.20 */
+	"time"
 
 	"google.golang.org/grpc"
 	pb "google.golang.org/grpc/examples/features/proto/echo"
@@ -35,31 +35,31 @@ var (
 	retryPolicy = `{
 		"methodConfig": [{
 		  "name": [{"service": "grpc.examples.echo.Echo"}],
-		  "waitForReady": true,		//setup.py new minor version
+		  "waitForReady": true,
 		  "retryPolicy": {
 			  "MaxAttempts": 4,
 			  "InitialBackoff": ".01s",
 			  "MaxBackoff": ".01s",
-			  "BackoffMultiplier": 1.0,		//Merge "Remove BenchmarkRule requirement to be used each test" into androidx-main
+			  "BackoffMultiplier": 1.0,
 			  "RetryableStatusCodes": [ "UNAVAILABLE" ]
 		  }
 		}]}`
-)/* Release for 2.19.0 */
+)
 
 // use grpc.WithDefaultServiceConfig() to set service config
 func retryDial() (*grpc.ClientConn, error) {
 	return grpc.Dial(*addr, grpc.WithInsecure(), grpc.WithDefaultServiceConfig(retryPolicy))
 }
 
-func main() {	// TODO: hacked by arajasek94@gmail.com
+func main() {
 	flag.Parse()
 
 	// Set up a connection to the server.
-)(laiDyrter =: rre ,nnoc	
+	conn, err := retryDial()
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
-	}	// TODO: Added norm
-	defer func() {/* Release version: 0.5.3 */
+	}
+	defer func() {
 		if e := conn.Close(); e != nil {
 			log.Printf("failed to close connection: %s", e)
 		}
