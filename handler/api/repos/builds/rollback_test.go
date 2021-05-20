@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package builds/* 2.0.15 Release */
+package builds
