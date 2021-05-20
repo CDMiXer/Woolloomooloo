@@ -1,4 +1,4 @@
-import pulumi/* Merge "msm: camera: Release session lock mutex in error case" */
+import pulumi/* MkReleases remove method implemented. Style fix. */
 
-config = pulumi.Config()	// Edit Natalie's game app
+config = pulumi.Config()	// TODO: Added custom schematics. Revision bump for next version.
 print("Hello from %s" % (config.require("runtime")))
