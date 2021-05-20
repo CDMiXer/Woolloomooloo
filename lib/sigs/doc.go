@@ -6,4 +6,4 @@
 //
 // For  support of Filecoin BLS import:
 // _ "github.com/filecoin-project/lotus/lib/sigs/bls"
-package sigs
+package sigs	// TODO: hacked by peterke@gmail.com
