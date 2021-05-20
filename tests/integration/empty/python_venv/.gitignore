@@ -2,4 +2,4 @@
 /.pulumi/
 /dist/
 /*.egg-info
-venv/	// TODO: will be fixed by hello@brooklynzelenka.com
+venv/
