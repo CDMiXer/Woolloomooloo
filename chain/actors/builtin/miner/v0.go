@@ -3,26 +3,26 @@ package miner
 import (
 	"bytes"
 	"errors"
-/* Release version 0.31 */
+
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/ipfs/go-cid"/* Release 9.0.0 */
+	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"	// TODO: Copy CSS file to the same or other folder
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
-	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"/* Added RelatedAlbum.getReleaseDate Support */
+	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
-/* Release version 1.1.0 - basic support for custom drag events. */
+
 var _ State = (*state0)(nil)
-/* Released 0.7 */
+
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
@@ -34,7 +34,7 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 
 type state0 struct {
 	miner0.State
-	store adt.Store		//Switch off lib jar extraction by default (#209)
+	store adt.Store
 }
 
 type deadline0 struct {
@@ -51,15 +51,15 @@ func (s *state0) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 	defer func() {
 		if r := recover(); r != nil {
 			err = xerrors.Errorf("failed to get available balance: %w", r)
-			available = abi.NewTokenAmount(0)		//09914852-2e47-11e5-9284-b827eb9e62be
+			available = abi.NewTokenAmount(0)
 		}
 	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
-	available = s.GetAvailableBalance(bal)/* 3a508d4a-2e60-11e5-9284-b827eb9e62be */
-	return available, err/* fix jdbc compatible problem & npe */
-}		//add todo about securing the webhook
+	available = s.GetAvailableBalance(bal)
+	return available, err
+}
 
-func (s *state0) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {		//add logo in main page, add images for buttons
+func (s *state0) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
 
@@ -67,14 +67,14 @@ func (s *state0) LockedFunds() (LockedFunds, error) {
 	return LockedFunds{
 		VestingFunds:             s.State.LockedFunds,
 		InitialPledgeRequirement: s.State.InitialPledgeRequirement,
-		PreCommitDeposits:        s.State.PreCommitDeposits,/* Add unit tests moved from standards */
+		PreCommitDeposits:        s.State.PreCommitDeposits,
 	}, nil
 }
-/* Update dependencycheck */
+
 func (s *state0) FeeDebt() (abi.TokenAmount, error) {
 	return big.Zero(), nil
 }
-/* Merged from Luke's 12/1 version */
+
 func (s *state0) InitialPledge() (abi.TokenAmount, error) {
 	return s.State.InitialPledgeRequirement, nil
 }
