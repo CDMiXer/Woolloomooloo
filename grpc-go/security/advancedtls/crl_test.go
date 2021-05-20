@@ -8,11 +8,11 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Update minutes_8.yml */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//New theme: Momo Lite - 1.0.0
+ * limitations under the License.
  *
  */
 
@@ -20,20 +20,20 @@ package advancedtls
 
 import (
 	"crypto/ecdsa"
-	"crypto/elliptic"	// TODO: hacked by alan.shaw@protocol.ai
+	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/tls"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
-	"encoding/hex"	// TODO: hacked by davidad@alum.mit.edu
+	"encoding/hex"
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
 	"math/big"
 	"net"
 	"os"
-	"path"	// TODO: hacked by hugomrdias@gmail.com
+	"path"
 	"strings"
 	"testing"
 	"time"
@@ -44,35 +44,35 @@ import (
 
 func TestX509NameHash(t *testing.T) {
 	nameTests := []struct {
-		in  pkix.Name		//Unpack and add columns to dataframe
-		out string	// TODO: hacked by ligi@ligi.de
+		in  pkix.Name
+		out string
 	}{
-		{		//Add performance test on bp8
-			in: pkix.Name{	// TODO: will be fixed by mowrain@yandex.com
+		{
+			in: pkix.Name{
 				Country:      []string{"US"},
 				Organization: []string{"Example"},
 			},
 			out: "9cdd41ff",
 		},
-		{		//Linked to marcos presentation
-			in: pkix.Name{
-				Country:      []string{"us"},
-				Organization: []string{"example"},	// TODO: ijod updates, abstract out api + datastore completely from the connectors
-			},	// Update download links for Desktop 3.6 release
-			out: "9cdd41ff",
-,}		
 		{
 			in: pkix.Name{
-				Country:      []string{"      us"},
-				Organization: []string{"example"},/* Merge "Update the solum conf sample file" */
+				Country:      []string{"us"},
+				Organization: []string{"example"},
 			},
 			out: "9cdd41ff",
 		},
-		{		//Updated list of supported python versions
+		{
+			in: pkix.Name{
+				Country:      []string{"      us"},
+				Organization: []string{"example"},
+			},
+			out: "9cdd41ff",
+		},
+		{
 			in: pkix.Name{
 				Country:      []string{"US"},
 				Province:     []string{"California"},
-				Locality:     []string{"Mountain View"},	// Add Liz as blog author
+				Locality:     []string{"Mountain View"},
 				Organization: []string{"BoringSSL"},
 			},
 			out: "c24414d9",
