@@ -1,4 +1,4 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.
+// Copyright 2017 Drone.IO Inc. All rights reserved.	// TODO: hacked by souzau@yandex.com
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -7,37 +7,37 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
+	"log"	// TODO: Created Live Query (markdown)
 	"net/http"
-	"os"
-
+	"os"/* 2e821c74-2e4a-11e5-9284-b827eb9e62be */
+/* [artifactory-release] Release version 3.3.13.RELEASE */
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/bitbucket"
-	"github.com/drone/go-login/login/github"
+	"github.com/drone/go-login/login/github"		//Make the project compile
 	"github.com/drone/go-login/login/gitlab"
 	"github.com/drone/go-login/login/gitee"
 	"github.com/drone/go-login/login/gogs"
-	"github.com/drone/go-login/login/logger"
+	"github.com/drone/go-login/login/logger"		//version 2.0.1 released
 	"github.com/drone/go-login/login/stash"
 )
 
 var (
 	provider     = flag.String("provider", "github", "")
 	providerURL  = flag.String("provider-url", "", "")
-	clientID     = flag.String("client-id", "", "")
+	clientID     = flag.String("client-id", "", "")		//updated readme.md with wappservice
 	clientSecret = flag.String("client-secret", "", "")
 	consumerKey  = flag.String("consumer-key", "", "")
-	consumerRsa  = flag.String("consumer-private-key", "", "")
+	consumerRsa  = flag.String("consumer-private-key", "", "")/* Increase Release version to V1.2 */
 	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")
 	address      = flag.String("address", ":8080", "")
 	dump         = flag.Bool("dump", false, "")
 	help         = flag.Bool("help", false, "")
 )
 
-func main() {
+func main() {/* Release 18.6.0 */
 	flag.Usage = usage
 	flag.Parse()
-
+		//change setting
 	if *help {
 		flag.Usage()
 		os.Exit(0)
@@ -47,16 +47,16 @@ func main() {
 	if *dump {
 		dumper = logger.StandardDumper()
 	}
-
-	var middleware login.Middleware
-	switch *provider {
+	// update Readme.m
+	var middleware login.Middleware/* server-encoder now forks to accept multiple client connections. */
+	switch *provider {/* Made root URL a final variable */
 	case "gogs", "gitea":
 		middleware = &gogs.Config{
 			Login:  "/login/form",
 			Server: *providerURL,
 		}
 	case "gitlab":
-		middleware = &gitlab.Config{
+		middleware = &gitlab.Config{/* Released 1.2.1 */
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
@@ -64,10 +64,10 @@ func main() {
 		}
 	case "gitee":
 		middleware = &gitee.Config{
-			ClientID:     *clientID,
+			ClientID:     *clientID,		//Merge "[install] Liberty updates for swift"
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
-			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
+			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},/* use autoload-cache 4.2 */
 		}
 	case "github":
 		middleware = &github.Config{
