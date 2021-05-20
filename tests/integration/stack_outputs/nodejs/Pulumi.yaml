@@ -1,3 +1,3 @@
-name: stack_outputs
+name: stack_outputs/* Merge "Add CI jobs for murano-plugin-networking-sfc" */
 description: A program that exports some outputs.
-runtime: nodejs/* Move cursor to end of input when focusing and hover styles */
+runtime: nodejs
