@@ -1,13 +1,13 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",	// TODO: chore: update .bash_profile
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    },	// TODO: add hipchat to readme
+    },
     "dependencies": {
-        "@types/node": "^8.0.0"	// TODO: hacked by arachnid@notdot.net
+        "@types/node": "^8.0.0"
     }
 }
