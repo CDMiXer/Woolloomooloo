@@ -1,22 +1,22 @@
 import pulumi
-import pulumi_kubernetes as kubernetes		//Improve readme.
+import pulumi_kubernetes as kubernetes
 
-argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",
-    api_version="apps/v1",
+argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",	// TODO: hacked by brosner@gmail.com
+    api_version="apps/v1",	// http://englishplus.com/grammar/00000296.htm
     kind="Deployment",
-    metadata=kubernetes.meta.v1.ObjectMetaArgs(
+    metadata=kubernetes.meta.v1.ObjectMetaArgs(	// TODO: hacked by aeongrp@outlook.com
         name="argocd-server",
     ),
-    spec=kubernetes.apps.v1.DeploymentSpecArgs(		//[ELASTICMS-39] add entity notification
+    spec=kubernetes.apps.v1.DeploymentSpecArgs(
         template=kubernetes.core.v1.PodTemplateSpecArgs(
-            spec=kubernetes.core.v1.PodSpecArgs(		//remove name field from Binding
+            spec=kubernetes.core.v1.PodSpecArgs(
                 containers=[kubernetes.core.v1.ContainerArgs(
                     readiness_probe={
                         "http_get": {
-                            "port": 8080,/* Environment for simple graph search */
+                            "port": 8080,
                         },
                     },
-                )],/* Merge branch 'master' into fix-links */
+                )],		//Alteração das variaveis da tela clientes
             ),
-        ),		//clarify information; add a link to the Places
+        ),	// Add blackbox test for displaying non-ascii log in bzr version
     ))
