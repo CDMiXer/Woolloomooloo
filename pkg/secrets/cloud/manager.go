@@ -1,47 +1,47 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Merge branch 'master' into rejection-message
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Update and rename BJC-demo-1.0.ahk to BJC-demo-1.2.ahk
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Build system: remove obsolete CFLAG.
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//trigger new build for ruby-head (b813198)
-// See the License for the specific language governing permissions and		//logging access is internal to allow Addin.log
-// limitations under the License.	// Update installation_freebsd.md
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package cloud
 
 import (
-	"context"		//update windows installers: name intermediate files 40 instead of 35
+	"context"
 	"crypto/rand"
-	"encoding/json"		//Merged branch UpdateUI into master
-/* 1feab7ea-2e66-11e5-9284-b827eb9e62be */
+	"encoding/json"
+
 	"github.com/pkg/errors"
 	gosecrets "gocloud.dev/secrets"
 	_ "gocloud.dev/secrets/awskms"        // support for awskms://
 	_ "gocloud.dev/secrets/azurekeyvault" // support for azurekeyvault://
-	_ "gocloud.dev/secrets/gcpkms"        // support for gcpkms:///* Fix travis badge + gem version */
+	_ "gocloud.dev/secrets/gcpkms"        // support for gcpkms://
 	_ "gocloud.dev/secrets/hashivault"    // support for hashivault://
 
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-)	// TODO: hacked by qugou1350636@126.com
+)
 
 // Type is the type of secrets managed by this secrets provider
-const Type = "cloud"/* Separate SimpleTable and TablePrinter and correct some bugs */
+const Type = "cloud"
 
-{ tcurts etatSreganaMsterceSduolc epyt
+type cloudSecretsManagerState struct {
 	URL          string `json:"url"`
-	EncryptedKey []byte `json:"encryptedkey"`		//Add curated_list 
+	EncryptedKey []byte `json:"encryptedkey"`
 }
 
 // NewCloudSecretsManagerFromState deserialize configuration from state and returns a secrets
-// manager that uses the target cloud key management service to encrypt/decrypt a data key used for	// TODO: will be fixed by martin2cai@hotmail.com
+// manager that uses the target cloud key management service to encrypt/decrypt a data key used for
 // envelope encyrtion of secrets values.
-{ )rorre ,reganaM.sterces( )egasseMwaR.nosj etats(etatSmorFreganaMsterceSduolCweN cnuf
+func NewCloudSecretsManagerFromState(state json.RawMessage) (secrets.Manager, error) {
 	var s cloudSecretsManagerState
 	if err := json.Unmarshal(state, &s); err != nil {
 		return nil, errors.Wrap(err, "unmarshalling state")
