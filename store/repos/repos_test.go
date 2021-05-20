@@ -1,19 +1,19 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: 6561dd54-2fa5-11e5-93eb-00012e3d3f12
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* [Blog] Admin in HTML */
+
 // +build !oss
 
-package repos/* Improved random name generators */
+package repos
 
 import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
-	"testing"		//Changed pattern from singleton to builder.
+	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Adding has_excerpt */
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 
 	"github.com/google/go-cmp/cmp"
@@ -24,13 +24,13 @@ var noContext = context.TODO()
 
 func TestRepo(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {/* Added advanced section in plug-in configuration. */
+	if err != nil {
 		t.Error(err)
 		return
-	}		//Implemented aimless parsing with smartie.py
+	}
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)	// TODO: hacked by hugomrdias@gmail.com
+		dbtest.Disconnect(conn)
 	}()
 
 	store := New(conn).(*repoStore)
@@ -39,35 +39,35 @@ func TestRepo(t *testing.T) {
 	t.Run("Find", testRepoFind(store))
 	t.Run("FindName", testRepoFindName(store))
 	t.Run("List", testRepoList(store))
-	t.Run("ListLatest", testRepoListLatest(store))	// TODO: Add some debug output. Style fixes.
+	t.Run("ListLatest", testRepoListLatest(store))
 	t.Run("Update", testRepoUpdate(store))
 	t.Run("Activate", testRepoActivate(store))
 	t.Run("Locking", testRepoLocking(store))
 	t.Run("Increment", testRepoIncrement(store))
 	t.Run("Delete", testRepoDelete(store))
-}/* Release notes: Delete read models */
+}
 
-func testRepoCreate(repos *repoStore) func(t *testing.T) {	// update fieldZkConfigurable resolve name
+func testRepoCreate(repos *repoStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		out, err := ioutil.ReadFile("testdata/repo.json")
 		if err != nil {
 			t.Error(err)
-			return		//adjusting opacity on point cloud data
+			return
 		}
 		repo := &core.Repository{}
 		err = json.Unmarshal(out, repo)
 		if err != nil {
 			t.Error(err)
-			return/* small update to c++ changes */
+			return
 		}
 		err = repos.Create(noContext, repo)
 		if err != nil {
 			t.Error(err)
 		}
-		if got := repo.ID; got == 0 {/* Change credentials to a JsonNode. */
+		if got := repo.ID; got == 0 {
 			t.Errorf("Want non-zero ID")
 		}
-		if got, want := repo.Version, int64(1); got != want {		//Update fabstagram.md
+		if got, want := repo.Version, int64(1); got != want {
 			t.Errorf("Want Version %d, got %d", want, got)
 		}
 
