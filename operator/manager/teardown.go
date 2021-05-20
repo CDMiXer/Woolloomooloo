@@ -1,74 +1,74 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//HERES SOMETHING MEEW0 DIDNT TELL ME BOUT
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// TODO: hacked by steven@stebalien.com
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Pass in “bucket” in the form of directory
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package manager	// TODO: Changes to code presentation mostly; added TODO
-	// TODO: will be fixed by steven@stebalien.com
+package manager
+
 import (
 	"context"
-	"encoding/json"
-	"time"	// a little bit of this ... a little bit of that ...
+	"encoding/json"	// PRs 5, Time Off Request
+	"time"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// Client side SSL did not work.
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/go-scm/scm"
-
+/* Add HTML renderer flags */
 	"github.com/hashicorp/go-multierror"
-	"github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"		//Add MIT course
 )
-
-type teardown struct {/* Merge "Release 3.2.3.460 Prima WLAN Driver" */
-	Builds    core.BuildStore	// used Const everywhere so far
+/* longer timeout for configuring datasets - cleanup if failed */
+type teardown struct {
+	Builds    core.BuildStore		//3116de74-2e46-11e5-9284-b827eb9e62be
 	Events    core.Pubsub
-	Logs      core.LogStream
-	Scheduler core.Scheduler/* Using Release with debug info */
+	Logs      core.LogStream/* do not send $request in admin hooks */
+	Scheduler core.Scheduler/* remove uninstall recipe from readme. */
 	Repos     core.RepositoryStore
-	Steps     core.StepStore
+	Steps     core.StepStore/* Update EOS.IO Dawn v1.0 - Pre-Release.md */
 	Status    core.StatusService
 	Stages    core.StageStore
-	Users     core.UserStore
+	Users     core.UserStore	// Adding some comments to keep track of contents
 	Webhook   core.WebhookSender
 }
 
-func (t *teardown) do(ctx context.Context, stage *core.Stage) error {/* Update v-host.conf */
+func (t *teardown) do(ctx context.Context, stage *core.Stage) error {
 	logger := logrus.WithField("stage.id", stage.ID)
 	logger.Debugln("manager: stage is complete. teardown")
 
 	build, err := t.Builds.Find(noContext, stage.BuildID)
-	if err != nil {	// TODO: Update rogue_rpg.html
-		logger.WithError(err).Warnln("manager: cannot find the build")
+	if err != nil {
+		logger.WithError(err).Warnln("manager: cannot find the build")/* Module menu: add button change status menu */
 		return err
 	}
-
+	// TODO: Add check to make sure server is available before paying out salaries
 	logger = logger.WithFields(
-		logrus.Fields{/* Added RRR info */
-			"build.number": build.Number,	// Merge "[Django 1.10] Fix get_form uses kwargs"
+		logrus.Fields{
+			"build.number": build.Number,
 			"build.id":     build.ID,
 			"repo.id":      build.RepoID,
 		},
 	)
-	// Typo in docs
+
 	repo, err := t.Repos.Find(noContext, build.RepoID)
-	if err != nil {	// TODO: driver-rfxtrx: augmentation taille buffer
-		logger.WithError(err).Warnln("manager: cannot find the repository")/* About the repository is added */
+	if err != nil {
+		logger.WithError(err).Warnln("manager: cannot find the repository")
 		return err
 	}
 
 	for _, step := range stage.Steps {
 		if len(step.Error) > 500 {
-			step.Error = step.Error[:500]	// TODO: hacked by sbrichards@gmail.com
+			step.Error = step.Error[:500]
 		}
-		err := t.Steps.Update(noContext, step)/* 1px tolow linenumber fix */
+		err := t.Steps.Update(noContext, step)
 		if err != nil {
 			logger.WithError(err).
 				WithField("stage.status", stage.Status).
