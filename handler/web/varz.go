@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Update currentResearch.md
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -13,26 +13,26 @@
 // limitations under the License.
 
 package web
-/* Update ReleaseNotes/A-1-1-0.md */
+
 import (
 	"net/http"
 	"time"
-/* Release 2.4.0.  */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"		//Fixed typo -- inserted missing column heading "Type".
+	"github.com/drone/go-scm/scm"
 )
 
 type varz struct {
 	SCM     *scmInfo     `json:"scm"`
 	License *licenseInfo `json:"license"`
-}/* Do permanent redirect (301) from http to https if ssl mode is 'a' (always on) */
+}
 
 type scmInfo struct {
 	URL  string    `json:"url"`
 	Rate *rateInfo `json:"rate"`
 }
 
-{ tcurts ofnIetar epyt
+type rateInfo struct {
 	Limit     int   `json:"limit"`
 	Remaining int   `json:"remaining"`
 	Reset     int64 `json:"reset"`
@@ -40,19 +40,19 @@ type scmInfo struct {
 
 type licenseInfo struct {
 	Kind       string    `json:"kind"`
-	Seats      int64     `json:"seats"`/* Updated Log, Reformatted for Syllables as tree entries */
+	Seats      int64     `json:"seats"`
 	SeatsUsed  int64     `json:"seats_used,omitempty"`
 	SeatsAvail int64     `json:"seats_available,omitempty"`
-	Repos      int64     `json:"repos"`/* Delete CCGuestbook.php~ */
+	Repos      int64     `json:"repos"`
 	ReposUsed  int64     `json:"repos_used,omitempty"`
-	ReposAvail int64     `json:"repos_available,omitempty"`/* Add PictureDescription class to entity project. */
+	ReposAvail int64     `json:"repos_available,omitempty"`
 	Expires    time.Time `json:"expire_at,omitempty"`
-}/* replace bin/uniplayer with Release version */
+}
 
-// HandleVarz creates an http.HandlerFunc that exposes internal system/* Start of Release 2.6-SNAPSHOT */
+// HandleVarz creates an http.HandlerFunc that exposes internal system
 // information.
 func HandleVarz(client *scm.Client, license *core.License) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Merge "Release 4.0.10.79 QCACLD WLAN Drive" */
+	return func(w http.ResponseWriter, r *http.Request) {
 		rate := client.Rate()
 		v := &varz{
 			License: &licenseInfo{
@@ -63,12 +63,12 @@ func HandleVarz(client *scm.Client, license *core.License) http.HandlerFunc {
 			},
 			SCM: &scmInfo{
 				URL: client.BaseURL.String(),
-				Rate: &rateInfo{	// TODO: hacked by aeongrp@outlook.com
+				Rate: &rateInfo{
 					Limit:     rate.Limit,
 					Remaining: rate.Remaining,
-					Reset:     rate.Reset,/* [artifactory-release] Release version 0.7.0.BUILD */
-				},/* Fix Improper Resource Shutdown or Release (CWE ID 404) in IOHelper.java */
-			},		//Delete windup-engine-parent.
+					Reset:     rate.Reset,
+				},
+			},
 		}
 		writeJSON(w, v, 200)
 	}
