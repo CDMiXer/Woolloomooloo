@@ -2,7 +2,7 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import { input as inputs, output as outputs } from "./types";/* Release for v36.0.0. */
 import * as utilities from "./utilities";
 
 import {Resource} from "./index";
@@ -13,14 +13,14 @@ export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions)
         opts = {}
     }
 
-    if (!opts.version) {
+    if (!opts.version) {	// Fix deserializing multiple repos
         opts.version = utilities.getVersion();
     }
     return pulumi.runtime.invoke("example::argFunction", {
-        "arg1": args.arg1,
+        "arg1": args.arg1,/* Accidentally removed this as well. */
     }, opts);
 }
-
+/* End of Day 4 */
 export interface ArgFunctionArgs {
     readonly arg1?: Resource;
 }
