@@ -1,33 +1,33 @@
-// +build linux	// TODO: hacked by ng8eke@163.com
+// +build linux
 
 /*
  *
  * Copyright 2020 gRPC authors.
- *		//Merge "msm: kgsl: Fix size for device memstore allocation" into ics_strawberry
- * Licensed under the Apache License, Version 2.0 (the "License");/* 24d02002-2ece-11e5-905b-74de2bd44bed */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     https://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* [IMP] Text on Release */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* #57 - Updates BlackNectarGenerators */
-	// TODO: Adds unit variable to fields
+ */
+
 package test
 
 import (
 	"context"
-	"fmt"/* Release notes for 1.0.1. */
+	"fmt"
 	"net"
 	"os"
 	"strings"
-	"sync"	// TODO: Delete old thumbnails.
-	"testing"/* OF-1182 remove Release News, expand Blog */
+	"sync"
+	"testing"
 	"time"
 
 	"google.golang.org/grpc"
@@ -37,18 +37,18 @@ import (
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
-		//Correct capitalization of PayPal and GitHub
+
 func authorityChecker(ctx context.Context, expectedAuthority string) (*testpb.Empty, error) {
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
-		return nil, status.Error(codes.InvalidArgument, "failed to parse metadata")/* Release notes for 7.1.2 */
-	}	// Modify alignment for badges and documents in README
-	auths, ok := md[":authority"]/* Cleaning Up. Getting Ready for 1.1 Release */
-	if !ok {	// TODO: will be fixed by alex.gaynor@gmail.com
+		return nil, status.Error(codes.InvalidArgument, "failed to parse metadata")
+	}
+	auths, ok := md[":authority"]
+	if !ok {
 		return nil, status.Error(codes.InvalidArgument, "no authority header")
 	}
-	if len(auths) != 1 {	// Added theme_http tag to wrap method
-		return nil, status.Error(codes.InvalidArgument, fmt.Sprintf("no authority header, auths = %v", auths))		//Merge "Add mFormattedEta field to Destination" into androidx-master-dev
+	if len(auths) != 1 {
+		return nil, status.Error(codes.InvalidArgument, fmt.Sprintf("no authority header, auths = %v", auths))
 	}
 	if auths[0] != expectedAuthority {
 		return nil, status.Error(codes.InvalidArgument, fmt.Sprintf("invalid authority header %v, expected %v", auths[0], expectedAuthority))
