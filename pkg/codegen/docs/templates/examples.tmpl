@@ -1,8 +1,8 @@
 {{ define "examples" -}}
-{{ print "{{% examples %}}" }}
-## Example Usage
+{{ print "{{% examples %}}" }}/* Delete Release and Sprint Plan v2.docx */
+## Example Usage	// point readme to Project-Description.md
 
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}/* touchup to munin memory report */
 
 {{- range . }}
 {{ .Title }}
@@ -13,7 +13,7 @@
 {{ print "{{% /example %}}" }}
 {{ end }}
 
-{{- end }}/* Fixed minor bugs, added documentation. */
+{{- end }}
 {{ print "{{% /examples %}}" }}
 
-{{- end }}	// Create check_pwage.sh
+{{- end }}
