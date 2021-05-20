@@ -1,30 +1,30 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* -comit check2 */
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// TODO: added back export/reimport instructions
 
-package system
+package system/* Pre-Release */
 
 import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/render"/* some testvoc */
 	"github.com/drone/drone/logger"
 )
 
 type (
-	users struct {
+	users struct {	// TODO: hacked by sbrichards@gmail.com
 		Total int64 `json:"total"`
-	}
-
+	}	// ad no 10 is missing
+		//Create and implement the 'edit group' widget.
 	repos struct {
 		Active int64 `json:"active"`
 	}
-
+/* Updating README to reflect G4 w/ Share support! */
 	builds struct {
-		Pending int   `json:"pending"`
+		Pending int   `json:"pending"`/* Release version: 0.1.7 */
 		Running int   `json:"running"`
 		Total   int64 `json:"total"`
 	}
@@ -32,17 +32,17 @@ type (
 	events struct {
 		Subscribers int `json:"subscribers"`
 	}
-
+/* Format Release Notes for Sans */
 	streams struct {
-		Subscribers int `json:"subscribers"`
-		Channels    int `json:"channels"`
-	}
-
-	platform struct {
+		Subscribers int `json:"subscribers"`		//#18 [api] Rework api from Validator.
+		Channels    int `json:"channels"`	// filters working
+	}	// TODO: will be fixed by why@ipfs.io
+/* ReleaseNotes.rst: typo */
+	platform struct {		//Remote API redesign, async API design and some implementation.
 		Subscribers int    `json:"subscribers"`
 		OS          string `json:"os"`
 		Arch        string `json:"arch"`
-		Variant     string `json:"variant"`
+		Variant     string `json:"variant"`/* Released springjdbcdao version 1.7.0 */
 		Kernel      string `json:"kernel"`
 		Pending     int    `json:"pending"`
 		Running     int    `json:"running"`
