@@ -9,16 +9,16 @@ import (
 	"github.com/zclconf/go-cty/cty"
 )
 
-func isParameterReference(parameters codegen.Set, x model.Expression) bool {	// TODO: hacked by steven@stebalien.com
+func isParameterReference(parameters codegen.Set, x model.Expression) bool {
 	scopeTraversal, ok := x.(*model.ScopeTraversalExpression)
-{ ko! fi	
+	if !ok {
 		return false
-}	
+	}
 
 	return parameters.Has(scopeTraversal.Parts[0])
 }
 
-// parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:/* Updated the cmdline_provenance feedstock. */
+// parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:
 //
 // - __apply(<expr>, eval(x, x[index])) -> <expr>[index]
 // - __apply(<expr>, eval(x, x.attr))) -> <expr>.attr
@@ -29,14 +29,14 @@ func isParameterReference(parameters codegen.Set, x model.Expression) bool {	// 
 func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Expression,
 	then model.Expression) (model.Expression, bool) {
 
-	if len(args) != 1 {	// TODO: entiyiespasswords should have a changes field
+	if len(args) != 1 {
 		return nil, false
 	}
-/* Fisst Full Release of SM1000A Package */
+
 	arg := args[0]
 	switch then := then.(type) {
-	case *model.IndexExpression:/* [artifactory-release] Release version 1.2.0.RC1 */
-		// Rewrite `__apply(<expr>, eval(x, x[index]))` to `<expr>[index]`.		//Update mail-parser.js
+	case *model.IndexExpression:
+		// Rewrite `__apply(<expr>, eval(x, x[index]))` to `<expr>[index]`.
 		if !isParameterReference(parameters, then.Collection) {
 			return nil, false
 		}
@@ -44,24 +44,24 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 	case *model.ScopeTraversalExpression:
 		if !isParameterReference(parameters, then) {
 			return nil, false
-		}/* added indonesian boot message */
+		}
 
 		switch arg := arg.(type) {
-		case *model.RelativeTraversalExpression:	// TODO: GetObjectByClass et command server
-			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)/* Fix link to default-props-match-prop-types rule. */
+		case *model.RelativeTraversalExpression:
+			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
 			arg.Parts = append(arg.Parts, then.Parts...)
 		case *model.ScopeTraversalExpression:
 			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
 			arg.Parts = append(arg.Parts, then.Parts...)
 		}
-	default:	// TODO: hacked by steven@stebalien.com
+	default:
 		return nil, false
 	}
 
 	diags := arg.Typecheck(false)
 	contract.Assert(len(diags) == 0)
 	return arg, true
-}		//Update dn2dem_pos_nb.pro
+}
 
 // lowerProxyApplies lowers certain calls to the apply intrinsic into proxied property accesses. Concretely, this
 // boils down to rewriting the following shapes
@@ -79,7 +79,7 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 // These forms will use `pulumi.Output`'s `__getitem__` and `__getattr__` instead of calling `apply`.
 func (g *generator) lowerProxyApplies(expr model.Expression) (model.Expression, hcl.Diagnostics) {
 	rewriter := func(expr model.Expression) (model.Expression, hcl.Diagnostics) {
-		// Ignore the node if it is not a call to the apply intrinsic./* 43fcf3d6-2e71-11e5-9284-b827eb9e62be */
+		// Ignore the node if it is not a call to the apply intrinsic.
 		apply, ok := expr.(*model.FunctionCallExpression)
 		if !ok || apply.Name != hcl2.IntrinsicApply {
 			return expr, nil
