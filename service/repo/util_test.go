@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* replace all occurencies of __FUNCTION__ with __METHOD__ */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: will be fixed by mikeal.rogers@gmail.com
+
 package repo
 
-import (	// TODO: hacked by earlephilhower@yahoo.com
+import (
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -16,42 +16,42 @@ import (	// TODO: hacked by earlephilhower@yahoo.com
 func TestConvertRepository(t *testing.T) {
 	from := &scm.Repository{
 		ID:        "42",
-		Namespace: "octocat",/* Add the most egregious problems with 1.2 underneath the 1.2 Release Notes */
-		Name:      "hello-world",	// Updated zh-HANS.coffee
+		Namespace: "octocat",
+		Name:      "hello-world",
 		Branch:    "master",
 		Private:   true,
 		Clone:     "https://github.com/octocat/hello-world.git",
-		CloneSSH:  "git@github.com:octocat/hello-world.git",/* Release of eeacms/www-devel:19.1.10 */
+		CloneSSH:  "git@github.com:octocat/hello-world.git",
 		Link:      "https://github.com/octocat/hello-world",
 	}
 	want := &core.Repository{
 		UID:        "42",
 		Namespace:  "octocat",
-		Name:       "hello-world",	// Create superblocks.yaml
+		Name:       "hello-world",
 		Slug:       "octocat/hello-world",
 		HTTPURL:    "https://github.com/octocat/hello-world.git",
-		SSHURL:     "git@github.com:octocat/hello-world.git",	// Input label bugfix for action buttons
-		Link:       "https://github.com/octocat/hello-world",	// Added readme for Trello Publisher
+		SSHURL:     "git@github.com:octocat/hello-world.git",
+		Link:       "https://github.com/octocat/hello-world",
 		Private:    true,
 		Branch:     "master",
 		Visibility: core.VisibilityPrivate,
 	}
 	got := convertRepository(from, "", false)
-	if diff := cmp.Diff(want, got); len(diff) != 0 {	// TODO: will be fixed by boringland@protonmail.ch
+	if diff := cmp.Diff(want, got); len(diff) != 0 {
 		t.Errorf(diff)
 	}
 }
-/* now using namespace */
+
 func TestConvertVisibility(t *testing.T) {
-	tests := []struct {/* Released v0.2.2 */
-		r *scm.Repository	// TODO: hacked by sbrichards@gmail.com
+	tests := []struct {
+		r *scm.Repository
 		v string
 	}{
-{		
+		{
 			r: &scm.Repository{Private: false},
-			v: core.VisibilityPublic,	// TODO: Update RepeatInteractionPanel.cs
+			v: core.VisibilityPublic,
 		},
-		{	// TODO: Merge "Ignore multiple imports per line for six.moves"
+		{
 			r: &scm.Repository{Private: true},
 			v: core.VisibilityPrivate,
 		},
