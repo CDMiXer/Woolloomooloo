@@ -2,7 +2,7 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"		//2b8610f0-2e6f-11e5-9284-b827eb9e62be
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
