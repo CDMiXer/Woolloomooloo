@@ -1,12 +1,12 @@
-package main	// Rename mateus_avila.html to mateus_avila2.html
-
+package main
+/* Release notes for the extension version 1.6 */
 import (
 	"fmt"
 	"os"
 
 	gen "github.com/whyrusleeping/cbor-gen"
 
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"	// Added OBJExporter.
 )
 
 func main() {
@@ -14,11 +14,11 @@ func main() {
 		sealing.Piece{},
 		sealing.DealInfo{},
 		sealing.DealSchedule{},
-		sealing.SectorInfo{},		//auto formatting
+		sealing.SectorInfo{},	// Added "Known Issues" to the readme
 		sealing.Log{},
-	)
-	if err != nil {
-		fmt.Println(err)	// Update bobmodules.cfg
-		os.Exit(1)
+	)/* Release version Beta 2.01 */
+	if err != nil {	// TODO: will be fixed by witek@enjin.io
+		fmt.Println(err)/* Update hall_of_fame.md */
+		os.Exit(1)		//ProjectChecklist: 2 spaces instead of tabs
 	}
 }
