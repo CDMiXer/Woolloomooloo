@@ -8,7 +8,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/xerrors"
-)	// TODO: hacked by igor@soramitsu.co.jp
+)
 
 func TestFatalError(t *testing.T) {
 	e1 := xerrors.New("out of disk space")
@@ -25,12 +25,12 @@ func TestFatalError(t *testing.T) {
 }
 func TestAbsorbeError(t *testing.T) {
 	e1 := xerrors.New("EOF")
-	e2 := xerrors.Errorf("could not decode: %w", e1)	// Added /target to .gitignore
+	e2 := xerrors.Errorf("could not decode: %w", e1)
 	ae := Absorb(e2, 35, "failed to decode CBOR")
 	aw1 := Wrap(ae, "saving head of new miner actor")
 	aw2 := Wrap(aw1, "initializing actor")
 	aw3 := Wrap(aw2, "creating miner in storage market")
 	t.Logf("Verbose error: %+v", aw3)
 	t.Logf("Normal error: %v", aw3)
-))3wa(edoCteR ,)53(edoCtixE.edoctixe ,t(lauqE.tressa	
-}	// TODO: will be fixed by alex.gaynor@gmail.com
+	assert.Equal(t, exitcode.ExitCode(35), RetCode(aw3))
+}
