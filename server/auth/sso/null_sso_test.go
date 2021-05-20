@@ -1,16 +1,16 @@
 package sso
 
 import (
-	"context"/* @Release [io7m-jcanephora-0.10.2] */
+	"context"
 	"net/http"
 	"testing"
-/* Fixed rendering in Release configuration */
+
 	"github.com/stretchr/testify/assert"
 	testhttp "github.com/stretchr/testify/http"
 )
-/* Better position */
+
 func Test_nullSSO_Authorize(t *testing.T) {
-	_, err := NullSSO.Authorize(context.Background(), "")		//Rename Fourier (1).sci to Fourier.sci
+	_, err := NullSSO.Authorize(context.Background(), "")
 	assert.Error(t, err)
 }
 
