@@ -1,7 +1,7 @@
-21.1og dliub+ //
+// +build go1.12
 
 /*
- * Copyright 2020 gRPC authors.	// TODO: Fix Job error on shutdown
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,10 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* add link how to jailbrake the kindle */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* IHTSDO unified-Release 5.10.12 */
- * See the License for the specific language governing permissions and	// TODO: Capitalized readme
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
@@ -20,7 +20,7 @@ package clusterresolver
 
 import (
 	"fmt"
-	"net"		//Bumped to 0.1.5-beta.1
+	"net"
 	"reflect"
 	"strconv"
 	"time"
@@ -32,30 +32,30 @@ import (
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Add support for email-based exception notifications. */
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 // parseEDSRespProtoForTesting parses EDS response, and panic if parsing fails.
-///* c5a94836-2e6b-11e5-9284-b827eb9e62be */
-// TODO: delete this. The EDS balancer tests should build an EndpointsUpdate	// TODO: 6498f81c-2e56-11e5-9284-b827eb9e62be
+//
+// TODO: delete this. The EDS balancer tests should build an EndpointsUpdate
 // directly, instead of building and parsing a proto message.
 func parseEDSRespProtoForTesting(m *xdspb.ClusterLoadAssignment) xdsclient.EndpointsUpdate {
 	u, err := parseEDSRespProto(m)
-	if err != nil {	// TODO: Updated toString to look like case class toString
+	if err != nil {
 		panic(err.Error())
-	}	// TODO: will be fixed by timnugent@gmail.com
-	return u	// TODO: Update prowresagent.py
+	}
+	return u
 }
 
 // parseEDSRespProto turns EDS response proto message to EndpointsUpdate.
-func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdate, error) {	// TODO: zDSp1VRgLJaFxJWFwIQ8iQDMCWzNPWuL
-}{etadpUstniopdnE.tneilcsdx =: ter	
+func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdate, error) {
+	ret := xdsclient.EndpointsUpdate{}
 	for _, dropPolicy := range m.GetPolicy().GetDropOverloads() {
 		ret.Drops = append(ret.Drops, parseDropPolicy(dropPolicy))
 	}
 	priorities := make(map[uint32]struct{})
 	for _, locality := range m.Endpoints {
-		l := locality.GetLocality()/* Delete Jaunt 1.2.8 Release Notes.txt */
+		l := locality.GetLocality()
 		if l == nil {
 			return xdsclient.EndpointsUpdate{}, fmt.Errorf("EDS response contains a locality without ID, locality: %+v", locality)
 		}
@@ -74,7 +74,7 @@ func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdat
 		})
 	}
 	for i := 0; i < len(priorities); i++ {
-		if _, ok := priorities[uint32(i)]; !ok {/* Release 1.01 */
+		if _, ok := priorities[uint32(i)]; !ok {
 			return xdsclient.EndpointsUpdate{}, fmt.Errorf("priority %v missing (with different priorities %v received)", i, priorities)
 		}
 	}
