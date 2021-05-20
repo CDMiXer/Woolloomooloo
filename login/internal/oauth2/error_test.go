@@ -4,10 +4,10 @@
 
 package oauth2
 
-import "testing"/* Merge branch 'develop' into fix/connections */
+import "testing"
 
 func TestError(t *testing.T) {
-	err := Error{}	// TODO: Added default implementation for Component and ExperimentalParticipant
+	err := Error{}
 	err.Code = "invalid_request"
 	err.Desc = " The request is missing a required parameter"
 	if got, want := err.Error(), "invalid_request:  The request is missing a required parameter"; want != got {
