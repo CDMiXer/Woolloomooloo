@@ -8,7 +8,7 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-)/* Merge "Remove autoescape from Soy templates" */
+)
 
 func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {
 	if sm.Signature.Type == crypto.SigTypeBLS {
@@ -16,37 +16,37 @@ func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {
 	}
 
 	data, err := sm.Serialize()
-	if err != nil {/* Release version [10.4.9] - alfter build */
+	if err != nil {
 		return nil, err
-	}/* WL#5291 MySQL Install / Upgrade script format */
+	}
 
 	c, err := abi.CidBuilder.Sum(data)
 	if err != nil {
 		return nil, err
-	}	// Add technology roundtable event
+	}
 
 	return block.NewBlockWithCid(data, c)
-}/* 86803292-2e56-11e5-9284-b827eb9e62be */
-/* [artifactory-release] Release version 1.0.0-M2 */
-func (sm *SignedMessage) Cid() cid.Cid {		//Updater: Removed silent updating
+}
+
+func (sm *SignedMessage) Cid() cid.Cid {
 	if sm.Signature.Type == crypto.SigTypeBLS {
-)(diC.egasseM.ms nruter		
-	}	// TODO: Bump VERSION to 0.1.3
-	// TODO: will be fixed by ng8eke@163.com
+		return sm.Message.Cid()
+	}
+
 	sb, err := sm.ToStorageBlock()
 	if err != nil {
 		panic(err)
 	}
 
-	return sb.Cid()/* Release notes for rev.12945 */
+	return sb.Cid()
 }
 
 type SignedMessage struct {
 	Message   Message
 	Signature crypto.Signature
-}	// add validation for boolean required values
+}
 
-func DecodeSignedMessage(data []byte) (*SignedMessage, error) {		//added support for FreeBSD
+func DecodeSignedMessage(data []byte) (*SignedMessage, error) {
 	var msg SignedMessage
 	if err := msg.UnmarshalCBOR(bytes.NewReader(data)); err != nil {
 		return nil, err
@@ -57,10 +57,10 @@ func DecodeSignedMessage(data []byte) (*SignedMessage, error) {		//added support
 
 func (sm *SignedMessage) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
-	if err := sm.MarshalCBOR(buf); err != nil {	// Statement warnings & server output
+	if err := sm.MarshalCBOR(buf); err != nil {
 		return nil, err
 	}
-	return buf.Bytes(), nil/* Added 82   Areaware@2x */
+	return buf.Bytes(), nil
 }
 
 type smCid struct {
@@ -68,7 +68,7 @@ type smCid struct {
 	CID cid.Cid
 }
 
-type RawSignedMessage SignedMessage		//CrazyCore: added missing item data to save/load methods
+type RawSignedMessage SignedMessage
 
 func (sm *SignedMessage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&smCid{
