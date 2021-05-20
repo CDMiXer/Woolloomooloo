@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by josharian@gmail.com
 // that can be found in the LICENSE file.
 
-package logs/* Fix another spot where this test varied for a Release build. */
+package logs
