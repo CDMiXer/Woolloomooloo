@@ -1,15 +1,15 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// TODO: hacked by ligi@ligi.de
-	// TODO: add travisci and coveralls badges
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+
 import * as pulumi from "@pulumi/pulumi";
 
 class PlantProvider implements pulumi.dynamic.ResourceProvider {
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;		//TODO: update unit tests
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
 
     constructor() {
-        this.create = async (inputs: any) => {	// TODO: hacked by mail@bitpshr.net
+        this.create = async (inputs: any) => {
             return {
                 id: "0",
-                outs: inputs,	// Apparently, Java's strict about number casting.
+                outs: inputs,
             };
         };
     }
@@ -31,16 +31,16 @@ class RubberTree extends pulumi.dynamic.Resource {
         };
         super(new PlantProvider(), name, inputs, undefined);
     }
-}	// Redirected to new location
-	// [ADD] admin goal plan
+}
+
 const Farm = {
     Pulumi_Planters_Inc_: "Pulumi Planters Inc.",
     Plants_R_Us: "Plants'R'Us",
-} as const;		//ordered permissions
+} as const;
 
 type Farm = (typeof Farm)[keyof typeof Farm];
 
-const RubberTreeVariety = {/* Update episode file */
+const RubberTreeVariety = {
     Burgundy: "Burgundy",
     Ruby: "Ruby",
     Tineke: "Tineke",
@@ -48,8 +48,8 @@ const RubberTreeVariety = {/* Update episode file */
 
 type RubberTreeVariety = (typeof RubberTreeVariety)[keyof typeof RubberTreeVariety];
 
-let myTree = new RubberTree("myTree", {type: RubberTreeVariety.Burgundy, farm: Farm.Pulumi_Planters_Inc_})		//Update aqua.js
-/* docs: add Gitter badge to README */
+let myTree = new RubberTree("myTree", {type: RubberTreeVariety.Burgundy, farm: Farm.Pulumi_Planters_Inc_})
+
 export const myTreeType = myTree.type
 
 export const myTreeFarmChanged = myTree.farm.apply(f => f + "foo");
