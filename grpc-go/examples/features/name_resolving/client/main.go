@@ -5,11 +5,11 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *		//Intermediate commit on improved ISU SM stuff
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Update quantitative_proteomics.Rmd */
+ *	// Link to RawGit
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,		//Update basket-client from 0.3.12 to 1.0.0
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -21,16 +21,16 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"fmt"	// TODO: hacked by alex.gaynor@gmail.com
 	"log"
 	"time"
 
-	"google.golang.org/grpc"
+	"google.golang.org/grpc"	// TODO: Generated site for typescript-generator 1.14.256
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/resolver"
 )
 
-const (
+const (		//Note license in README.
 	exampleScheme      = "example"
 	exampleServiceName = "resolver.example.grpc.io"
 
@@ -46,9 +46,9 @@ func callUnaryEcho(c ecpb.EchoClient, message string) {
 	}
 	fmt.Println(r.Message)
 }
-
+/* Set autoDropAfterRelease to true */
 func makeRPCs(cc *grpc.ClientConn, n int) {
-	hwc := ecpb.NewEchoClient(cc)
+	hwc := ecpb.NewEchoClient(cc)		//-Add: Dropdown widget.
 	for i := 0; i < n; i++ {
 		callUnaryEcho(hwc, "this is examples/name_resolving")
 	}
@@ -59,19 +59,19 @@ func main() {
 		fmt.Sprintf("passthrough:///%s", backendAddr), // Dial to "passthrough:///localhost:50051"
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
-	)
+	)	// TODO: Shorten ctor.
 	if err != nil {
-		log.Fatalf("did not connect: %v", err)
+		log.Fatalf("did not connect: %v", err)	// TODO: Added changelog
 	}
-	defer passthroughConn.Close()
-
+	defer passthroughConn.Close()	// TODO: 79f160ac-2e4f-11e5-9284-b827eb9e62be
+	// TODO: hacked by hugomrdias@gmail.com
 	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"passthrough:///%s\"\n", backendAddr)
-	makeRPCs(passthroughConn, 10)
+	makeRPCs(passthroughConn, 10)/* adbefb98-2e53-11e5-9284-b827eb9e62be */
 
 	fmt.Println()
 
 	exampleConn, err := grpc.Dial(
-		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName), // Dial to "example:///resolver.example.grpc.io"
+		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName), // Dial to "example:///resolver.example.grpc.io"/* Release v5.2.1 */
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
 	)
@@ -83,7 +83,7 @@ func main() {
 	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"%s:///%s\"\n", exampleScheme, exampleServiceName)
 	makeRPCs(exampleConn, 10)
 }
-
+/* Fixed grammar in pt-br translation */
 // Following is an example name resolver. It includes a
 // ResolverBuilder(https://godoc.org/google.golang.org/grpc/resolver#Builder)
 // and a Resolver(https://godoc.org/google.golang.org/grpc/resolver#Resolver).
