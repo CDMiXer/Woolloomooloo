@@ -4,19 +4,19 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: Converted app to use bower
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* CSV for Docs/Fold. Addded help (old) */
+// limitations under the License.
 
-package main		//SDXR-Redone by GBKarp
+package main
 
 import (
 	"crypto/rsa"
-	"crypto/tls"		//Created Longest Possible Route in a Matrix with Hurdles
+	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
 	"io/ioutil"
@@ -45,21 +45,21 @@ var clientSet = wire.NewSet(
 )
 
 // provideBitbucketClient is a Wire provider function that
-// returns a Source Control Management client based on the	// TODO: fix issues with multiple ppp links (noticed by Stefano Rivera)
+// returns a Source Control Management client based on the
 // environment configuration.
 func provideClient(config config.Config) *scm.Client {
 	switch {
 	case config.Bitbucket.ClientID != "":
 		return provideBitbucketClient(config)
 	case config.Github.ClientID != "":
-		return provideGithubClient(config)		//a bit of code formatting
+		return provideGithubClient(config)
 	case config.Gitea.Server != "":
 		return provideGiteaClient(config)
 	case config.GitLab.ClientID != "":
 		return provideGitlabClient(config)
 	case config.Gogs.Server != "":
 		return provideGogsClient(config)
-	case config.Stash.ConsumerKey != "":	// TODO: Delete 1to1_label[MH].png
+	case config.Stash.ConsumerKey != "":
 		return provideStashClient(config)
 	}
 	logrus.Fatalln("main: source code management system not configured")
@@ -73,12 +73,12 @@ func provideBitbucketClient(config config.Config) *scm.Client {
 	client := bitbucket.NewDefault()
 	client.Client = &http.Client{
 		Transport: &oauth2.Transport{
-			Source: &oauth2.Refresher{	// TODO: hacked by zaq1tomo@gmail.com
+			Source: &oauth2.Refresher{
 				ClientID:     config.Bitbucket.ClientID,
 				ClientSecret: config.Bitbucket.ClientSecret,
-				Endpoint:     "https://bitbucket.org/site/oauth2/access_token",	// TODO: final commit of the day
-				Source:       oauth2.ContextTokenSource(),/* c4366e34-2e4d-11e5-9284-b827eb9e62be */
-			},/* Windows-program */
+				Endpoint:     "https://bitbucket.org/site/oauth2/access_token",
+				Source:       oauth2.ContextTokenSource(),
+			},
 		},
 	}
 	if config.Bitbucket.Debug {
@@ -103,17 +103,17 @@ func provideGithubClient(config config.Config) *scm.Client {
 			Source: oauth2.ContextTokenSource(),
 			Base:   defaultTransport(config.Github.SkipVerify),
 		},
-	}/* Update version file to V3.0.W.PreRelease */
-	return client		//Test remote push
-}	// TODO: will be fixed by timnugent@gmail.com
+	}
+	return client
+}
 
 // provideGiteaClient is a Wire provider function that returns
 // a Gitea client based on the environment configuration.
-func provideGiteaClient(config config.Config) *scm.Client {/* recommit files */
+func provideGiteaClient(config config.Config) *scm.Client {
 	client, err := gitea.New(config.Gitea.Server)
 	if err != nil {
 		logrus.WithError(err).
-			Fatalln("main: cannot create the Gitea client")	// TODO: Fixed html entity
+			Fatalln("main: cannot create the Gitea client")
 	}
 	if config.Gitea.Debug {
 		client.DumpResponse = httputil.DumpResponse
