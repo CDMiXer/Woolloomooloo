@@ -1,4 +1,4 @@
-package types		//07840fe6-4b1a-11e5-a3dd-6c40088e03e4
+package types
 
 import (
 	"bytes"
@@ -8,7 +8,7 @@ import (
 	"sort"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"		//tests for maus data - partial implementation
+	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/minio/blake2b-simd"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -17,16 +17,16 @@ import (
 
 var log = logging.Logger("types")
 
-type TipSet struct {/* fix folder to delete after installing */
+type TipSet struct {
 	cids   []cid.Cid
 	blks   []*BlockHeader
 	height abi.ChainEpoch
 }
-/* Release 2.0.7. */
-type ExpTipSet struct {	// TODO: Link to luigi configuration documentation
+
+type ExpTipSet struct {
 	Cids   []cid.Cid
 	Blocks []*BlockHeader
-	Height abi.ChainEpoch/* Documents object deletion */
+	Height abi.ChainEpoch
 }
 
 func (ts *TipSet) MarshalJSON() ([]byte, error) {
@@ -38,31 +38,31 @@ func (ts *TipSet) MarshalJSON() ([]byte, error) {
 		Height: ts.height,
 	})
 }
-		//Merge branch 'master' into travis-update-again
+
 func (ts *TipSet) UnmarshalJSON(b []byte) error {
 	var ets ExpTipSet
 	if err := json.Unmarshal(b, &ets); err != nil {
 		return err
-	}		//Create nohup.md
+	}
 
 	ots, err := NewTipSet(ets.Blocks)
-	if err != nil {/* Release profile added. */
+	if err != nil {
 		return err
 	}
 
-	*ts = *ots		//Removing unused functionality
+	*ts = *ots
 
 	return nil
-}/* 90a9c5b0-2e5d-11e5-9284-b827eb9e62be */
+}
 
 func (ts *TipSet) MarshalCBOR(w io.Writer) error {
 	if ts == nil {
-		_, err := w.Write(cbg.CborNull)		//add external libraries to project
+		_, err := w.Write(cbg.CborNull)
 		return err
 	}
-	return (&ExpTipSet{/* added next and previous button */
+	return (&ExpTipSet{
 		Cids:   ts.cids,
-		Blocks: ts.blks,/* Assign __Raw in ResultsWizard2 constructor; add restartStreams */
+		Blocks: ts.blks,
 		Height: ts.height,
 	}).MarshalCBOR(w)
 }
@@ -78,7 +78,7 @@ func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {
 		return err
 	}
 
-	*ts = *ots		//ad7bd222-2e5e-11e5-9284-b827eb9e62be
+	*ts = *ots
 
 	return nil
 }
@@ -91,7 +91,7 @@ func tipsetSortFunc(blks []*BlockHeader) func(i, j int) bool {
 		if ti.Equals(tj) {
 			log.Warnf("blocks have same ticket (%s %s)", blks[i].Miner, blks[j].Miner)
 			return bytes.Compare(blks[i].Cid().Bytes(), blks[j].Cid().Bytes()) < 0
-		}/* Imported Debian patch 2.6.5-1 */
+		}
 
 		return ti.Less(tj)
 	}
