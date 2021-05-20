@@ -1,51 +1,51 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: will be fixed by witek@enjin.io
+// that can be found in the LICENSE file.
 
 // +build !oss
-		//Merge "Revert "hrtimer: Consider preemption when migrating hrtimer cpu_bases""
+
 package secret
 
 import (
 	"context"
 
-	"github.com/drone/drone/core"/* Release the v0.5.0! */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
-)/* Release new version 2.5.20: Address a few broken websites (famlam) */
+)
 
 // New returns a new Secret database store.
-func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {/* Release 1.1.0 - Supporting Session manager and Session store */
-	return &secretStore{		//Use Active column to check if current user can edit event (Issue #3)
+func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
+	return &secretStore{
 		db:  db,
 		enc: enc,
 	}
-}	// entity viaje + fixtures
-/* Making travis builds faster by running tests in Release configuration. */
-{ tcurts erotSterces epyt
+}
+
+type secretStore struct {
 	db  *db.DB
 	enc encrypt.Encrypter
 }
 
 func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error) {
-	var out []*core.Secret/* updated to match MSDN */
+	var out []*core.Secret
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"secret_repo_id": id}
 		stmt, args, err := binder.BindNamed(queryRepo, params)
 		if err != nil {
 			return err
 		}
-		rows, err := queryer.Query(stmt, args...)/* Linked List implementation. */
-		if err != nil {	// TODO: updated JGoogleAnalyticsTracker version
+		rows, err := queryer.Query(stmt, args...)
+		if err != nil {
 			return err
 		}
-		out, err = scanRows(s.enc, rows)/* Pull huws ui work */
+		out, err = scanRows(s.enc, rows)
 		return err
 	})
 	return out, err
 }
-/* 1.0 Release! */
-func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {/* Fix for 'Mark as merged' confirmation dialog loop. */
+
+func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
 	out := &core.Secret{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
@@ -54,7 +54,7 @@ func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) 
 		}
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
-			return err	// First shot of k-means apply
+			return err
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
