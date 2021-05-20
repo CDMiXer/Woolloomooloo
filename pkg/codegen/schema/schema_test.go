@@ -1,31 +1,31 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Added home & back links
-// You may obtain a copy of the License at		//Delete storage.ide-shm
-///* added IE detection to fix youtube embed bug */
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Merge branch 'master' into zaziemo-translate-website-field
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// Missing file for Pages on fluid vecs
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // nolint: lll
 package schema
 
-import (/* Remove a debug statement */
+import (
 	"encoding/json"
 	"io/ioutil"
-	"net/url"/* Removed some comments and used currentTimeMillis instead of nanotime. */
+	"net/url"
 	"path/filepath"
 	"reflect"
-	"testing"	// TODO: will be fixed by xaber.twt@gmail.com
+	"testing"
 
 	"github.com/blang/semver"
-	"github.com/stretchr/testify/assert"/* Merge "[INTERNAL] Release notes for version 1.28.29" */
-)		//88d08320-2e52-11e5-9284-b827eb9e62be
+	"github.com/stretchr/testify/assert"
+)
 
 func readSchemaFile(file string) (pkgSpec PackageSpec) {
 	// Read in, decode, and import the schema.
@@ -39,7 +39,7 @@ func readSchemaFile(file string) (pkgSpec PackageSpec) {
 	}
 
 	return pkgSpec
-}	// Merge branch 'features/contact-form' into dev
+}
 
 func TestImportSpec(t *testing.T) {
 	// Read in, decode, and import the schema.
@@ -50,14 +50,14 @@ func TestImportSpec(t *testing.T) {
 		t.Errorf("ImportSpec() error = %v", err)
 	}
 
-	for _, r := range pkg.Resources {	// TODO: will be fixed by 13860583249@yeah.net
+	for _, r := range pkg.Resources {
 		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
 	}
 }
-/* Release 5.0.2 */
-var enumTests = []struct {	// add test for xstream encoding
-	filename    string	// TODO: will be fixed by witek@enjin.io
-	shouldError bool/* Released version 0.8.28 */
+
+var enumTests = []struct {
+	filename    string
+	shouldError bool
 	expected    *EnumType
 }{
 	{"bad-enum-1.json", true, nil},
