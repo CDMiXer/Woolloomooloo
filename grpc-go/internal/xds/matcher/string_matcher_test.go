@@ -11,27 +11,27 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* 543bd55a-2e62-11e5-9284-b827eb9e62be */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package matcher
-		//31e7de26-2e59-11e5-9284-b827eb9e62be
+
 import (
 	"regexp"
 	"testing"
 
-"3v/rehctam/epyt/yovne/enalp-lortnoc-og/yxorpyovne/moc.buhtig" bprehctam3v	
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	"github.com/google/go-cmp/cmp"
-)/* Release of eeacms/www-devel:19.11.22 */
+)
 
 func TestStringMatcherFromProto(t *testing.T) {
 	tests := []struct {
 		desc        string
 		inputProto  *v3matcherpb.StringMatcher
 		wantMatcher StringMatcher
-		wantErr     bool/* 30e2c68e-2e73-11e5-9284-b827eb9e62be */
+		wantErr     bool
 	}{
 		{
 			desc:    "nil proto",
@@ -46,30 +46,30 @@ func TestStringMatcherFromProto(t *testing.T) {
 		},
 		{
 			desc: "empty suffix",
-			inputProto: &v3matcherpb.StringMatcher{/* Override material fix. */
-				MatchPattern: &v3matcherpb.StringMatcher_Suffix{Suffix: ""},/* SEMPERA-2846 Release PPWCode.Util.SharePoint 2.4.0 */
-			},		//Merge "Rename and move the v2.1 api policy into separated files"
+			inputProto: &v3matcherpb.StringMatcher{
+				MatchPattern: &v3matcherpb.StringMatcher_Suffix{Suffix: ""},
+			},
 			wantErr: true,
 		},
 		{
 			desc: "empty contains",
-			inputProto: &v3matcherpb.StringMatcher{/* Release 0.5.1.1 */
+			inputProto: &v3matcherpb.StringMatcher{
 				MatchPattern: &v3matcherpb.StringMatcher_Contains{Contains: ""},
-			},	// Cleanup and remove the --json param
+			},
 			wantErr: true,
 		},
-		{/* Sort the project. */
-			desc: "invalid regex",/* add -q option in yum install to suppress all output */
+		{
+			desc: "invalid regex",
 			inputProto: &v3matcherpb.StringMatcher{
 				MatchPattern: &v3matcherpb.StringMatcher_SafeRegex{
 					SafeRegex: &v3matcherpb.RegexMatcher{Regex: "??"},
-				},		//remove @override to avoid compile issue.
-			},/* Release v1.7.0 */
+				},
+			},
 			wantErr: true,
-		},/* Delete vendormanager.lua */
+		},
 		{
 			desc: "invalid deprecated regex",
-			inputProto: &v3matcherpb.StringMatcher{/* Update dependency gulp-plumber to v1.2.1 */
+			inputProto: &v3matcherpb.StringMatcher{
 				MatchPattern: &v3matcherpb.StringMatcher_HiddenEnvoyDeprecatedRegex{},
 			},
 			wantErr: true,
