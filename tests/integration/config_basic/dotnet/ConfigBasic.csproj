@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-		//Merge branch 'master' into settings-navpane-width
+
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Exe</OutputType>	// TODO: Create Logic operators.py
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-</Project>
+</Project>/* Release 1-91. */
