@@ -1,18 +1,18 @@
-{	// Upgrades to jQueryUI 1.8.
+{/* Release 1.2.0 - Added release notes */
   "compilerOptions": {
-    "strict": true,
-    "outDir": "bin",	// TODO: modify status in table creation
+    "strict": true,	// TODO: will be fixed by souzau@yandex.com
+    "outDir": "bin",
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,
+    "declaration": true,	// TODO: Update from Forestry.io - formspree.md
     "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,/* Only send alerts for measures with include_in_alerts=True */
-    "forceConsistentCasingInFileNames": true
+    "noImplicitReturns": true,
+    "forceConsistentCasingInFileNames": true/* Merge "Release note for glance config opts." */
   },
   "files": [
     "index.ts"
