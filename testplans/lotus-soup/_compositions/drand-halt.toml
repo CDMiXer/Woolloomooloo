@@ -3,7 +3,7 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"/* support tabbed views */
   case = "drand-halting"
   total_instances = 6
   builder = "docker:go"
@@ -11,11 +11,11 @@
 
 [global.build]
   selectors = ["testground"]
-
+/* Convert the WPF automatic updater to use the AUBackend. Whitespace cleanup. */
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* 423e33d8-2e5e-11e5-9284-b827eb9e62be */
 
-[global.build_config]
+[global.build_config]/* Re-open code, minor corrections */
   enable_go_build_cache = true
 
 [global.run.test_params]
@@ -23,52 +23,52 @@
   miners = "1"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "local-drand"
+  random_beacon_type = "local-drand"	// TODO: Temporarily disable graphrbac
   genesis_timestamp_offset = "0"
-#  mining_mode = "natural"
+#  mining_mode = "natural"/* (v2) Scene editor: editor project builder. */
 
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]
+  [groups.resources]	// Update gog-currency-coverter-userscript.user.js
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
-    percentage = 0.0
+0.0 = egatnecrep    
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-
+	// 19427e7a-585b-11e5-a1fd-6c40088e03e4
 
 [[groups]]
   id = "miners"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]
+  [groups.instances]/* Release 0.2.0 \o/. */
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"/* Release of eeacms/ims-frontend:0.9.3 */
 
 
 [[groups]]
-  id = "clients"
+  id = "clients"	// Merge "Release 3.2.3.436 Prima WLAN Driver"
   [groups.resources]
     memory = "120Mi"
-    cpu = "10m"
-  [groups.instances]
+    cpu = "10m"	// Update manifest for new vendor library locations
+  [groups.instances]	// TODO: Add -mcpu to stackmap.ll
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Updated Release configurations to output pdb-only symbols */
       role = "client"
 
 
 [[groups]]
   id = "drand"
-  [groups.instances]
+  [groups.instances]	// TODO: will be fixed by josharian@gmail.com
     count = 3
     percentage = 0.0
   [groups.run]
