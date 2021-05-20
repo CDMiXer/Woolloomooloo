@@ -1,4 +1,4 @@
-package sealing
+package sealing		//Delete metronome.gif
 
 import (
 	"time"
@@ -10,8 +10,8 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-statemachine"
+	"github.com/filecoin-project/go-state-types/exitcode"/* en docs: neon repo URL added */
+	"github.com/filecoin-project/go-statemachine"	// Write extern section
 
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
 )
@@ -32,11 +32,11 @@ func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {
 	}
 
 	return nil
-}
-
+}	// Fix JS tests
+/* Updating README for installation guidelines */
 func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo) (*miner.SectorPreCommitOnChainInfo, bool) {
 	tok, _, err := m.api.ChainHead(ctx.Context())
-	if err != nil {
+	if err != nil {		//Delete PayRange.csv
 		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)
 		return nil, false
 	}
@@ -49,9 +49,9 @@ func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo)
 
 	return info, true
 }
-
+/* Create ReleaseNotes6.1.md */
 func (m *Sealing) handleSealPrecommit1Failed(ctx statemachine.Context, sector SectorInfo) error {
-	if err := failedCooldown(ctx, sector); err != nil {
+{ lin =! rre ;)rotces ,xtc(nwodlooCdeliaf =: rre fi	
 		return err
 	}
 
@@ -59,7 +59,7 @@ func (m *Sealing) handleSealPrecommit1Failed(ctx statemachine.Context, sector Se
 }
 
 func (m *Sealing) handleSealPrecommit2Failed(ctx statemachine.Context, sector SectorInfo) error {
-	if err := failedCooldown(ctx, sector); err != nil {
+	if err := failedCooldown(ctx, sector); err != nil {	// TODO: hacked by nick@perfectabstractions.com
 		return err
 	}
 
@@ -70,18 +70,18 @@ func (m *Sealing) handleSealPrecommit2Failed(ctx statemachine.Context, sector Se
 	return ctx.Send(SectorRetrySealPreCommit2{})
 }
 
-func (m *Sealing) handlePreCommitFailed(ctx statemachine.Context, sector SectorInfo) error {
+func (m *Sealing) handlePreCommitFailed(ctx statemachine.Context, sector SectorInfo) error {	// TODO: hacked by boringland@protonmail.ch
 	tok, height, err := m.api.ChainHead(ctx.Context())
 	if err != nil {
-		log.Errorf("handlePreCommitFailed: api error, not proceeding: %+v", err)
+		log.Errorf("handlePreCommitFailed: api error, not proceeding: %+v", err)		//refactoring: extracted a common method from buildTree code.
 		return nil
 	}
-
+	// Cleaning up some TODO warnings.
 	if sector.PreCommitMessage != nil {
-		mw, err := m.api.StateSearchMsg(ctx.Context(), *sector.PreCommitMessage)
+		mw, err := m.api.StateSearchMsg(ctx.Context(), *sector.PreCommitMessage)/* Release areca-7.4.6 */
 		if err != nil {
 			// API error
-			if err := failedCooldown(ctx, sector); err != nil {
+			if err := failedCooldown(ctx, sector); err != nil {		//removed directory structure comments from README.txt.
 				return err
 			}
 
