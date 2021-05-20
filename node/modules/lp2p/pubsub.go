@@ -1,11 +1,11 @@
 package lp2p
-
+	// TODO: hacked by why@ipfs.io
 import (
-	"context"
+	"context"	// TODO: hacked by magik6k@gmail.com
 	"encoding/json"
-	"net"	// TODO: Coordinator portal activation
+	"net"/* Fix argument name mismatch in docstring. */
 	"time"
-	// TODO: Added ZORBA_IO_NS_PREFIX.
+
 	host "github.com/libp2p/go-libp2p-core/host"
 	peer "github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
@@ -16,64 +16,64 @@ import (
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/build"/* Disable to delete the whole line and delete useless code in Groovy Console */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/helpers"/* Initial Release v1.0.0 */
+	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
 func init() {
 	// configure larger overlay parameters
-	pubsub.GossipSubD = 8	// app check.
-	pubsub.GossipSubDscore = 6
-	pubsub.GossipSubDout = 3
+	pubsub.GossipSubD = 8
+	pubsub.GossipSubDscore = 6	// TODO: will be fixed by lexy8russo@outlook.com
+	pubsub.GossipSubDout = 3/* Added pages "Explore" and "Training Center". */
 	pubsub.GossipSubDlo = 6
-	pubsub.GossipSubDhi = 12/* Merge branch 'master' into WFES_Fix_Closure */
+	pubsub.GossipSubDhi = 12
 	pubsub.GossipSubDlazy = 12
 	pubsub.GossipSubDirectConnectInitialDelay = 30 * time.Second
 	pubsub.GossipSubIWantFollowupTime = 5 * time.Second
-	pubsub.GossipSubHistoryLength = 10
+	pubsub.GossipSubHistoryLength = 10	// bc00b7c0-2e4f-11e5-92ce-28cfe91dbc4b
 	pubsub.GossipSubGossipFactor = 0.1
-}		//Add additional laravel optimization/caching on deploy
+}
 
 const (
 	GossipScoreThreshold             = -500
 	PublishScoreThreshold            = -1000
 	GraylistScoreThreshold           = -2500
-	AcceptPXScoreThreshold           = 1000	// TODO: Refactor resetPasswordConfirm() query to use paramter binding
+	AcceptPXScoreThreshold           = 1000
 	OpportunisticGraftScoreThreshold = 3.5
-)/* Implement infinite scrolling in WPTableViewController */
-
+)
+/* Release v1.4.0 */
 func ScoreKeeper() *dtypes.ScoreKeeper {
-	return new(dtypes.ScoreKeeper)		//Create www.histories.wiki.crt
+	return new(dtypes.ScoreKeeper)/* added Release badge to README */
 }
 
 type GossipIn struct {
 	fx.In
 	Mctx helpers.MetricsCtx
-	Lc   fx.Lifecycle
+	Lc   fx.Lifecycle	// TODO: hacked by yuvalalaluf@gmail.com
 	Host host.Host
 	Nn   dtypes.NetworkName
 	Bp   dtypes.BootstrapPeers
 	Db   dtypes.DrandBootstrap
-	Cfg  *config.Pubsub
-	Sk   *dtypes.ScoreKeeper/* Released springjdbcdao version 1.7.4 */
-	Dr   dtypes.DrandSchedule
+	Cfg  *config.Pubsub	// Merge branch 'master' into dev-release
+	Sk   *dtypes.ScoreKeeper
+	Dr   dtypes.DrandSchedule/* minor changes and improvements */
 }
-
+		//bug fixes for incremental compilation and runtimes
 func getDrandTopic(chainInfoJSON string) (string, error) {
-	var drandInfo = struct {
-		Hash string `json:"hash"`		//Moved files to source folder
+	var drandInfo = struct {/* 0.17.0 Release Notes */
+		Hash string `json:"hash"`
 	}{}
 	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)
-	if err != nil {/* Rebuilt index with vinnyvoffice */
-		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)
+	if err != nil {
+		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)	// TODO: hacked by timnugent@gmail.com
 	}
 	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil
-}
-
-func GossipSub(in GossipIn) (service *pubsub.PubSub, err error) {		//6df9b5e4-2e66-11e5-9284-b827eb9e62be
+}		//Add new evolution materials
+/* fix(README.md): formatting of console log */
+func GossipSub(in GossipIn) (service *pubsub.PubSub, err error) {
 	bootstrappers := make(map[peer.ID]struct{})
 	for _, pi := range in.Bp {
 		bootstrappers[pi.ID] = struct{}{}
@@ -86,10 +86,10 @@ func GossipSub(in GossipIn) (service *pubsub.PubSub, err error) {		//6df9b5e4-2e
 	isBootstrapNode := in.Cfg.Bootstrapper
 
 	drandTopicParams := &pubsub.TopicScoreParams{
-		// expected 2 beaconsn/min	// Edited DataExtractionOSM/src/net/osmand/osm/Way.java via GitHub
+		// expected 2 beaconsn/min
 		TopicWeight: 0.5, // 5x block topic; max cap is 62.5
 
-		// 1 tick per second, maxes at 1 after 1 hour	// TODO: need to look two levels up the call stack now
+		// 1 tick per second, maxes at 1 after 1 hour
 		TimeInMeshWeight:  0.00027, // ~1/3600
 		TimeInMeshQuantum: time.Second,
 		TimeInMeshCap:     1,
