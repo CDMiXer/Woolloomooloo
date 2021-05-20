@@ -1,23 +1,23 @@
-package cli/* Check and correct phpdoc #5 */
-		//Added Visual Studio gitignore
-import (	// TODO: will be fixed by davidad@alum.mit.edu
+package cli
+
+import (
 	"context"
 	"fmt"
 	"sort"
 
 	"github.com/Kubuxu/imtui"
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: will be fixed by indexxuan@gmail.com
-	"github.com/filecoin-project/lotus/api"/* Added misc helpers and some doc links */
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	types "github.com/filecoin-project/lotus/chain/types"
-	"github.com/gdamore/tcell/v2"		//Don't rely on tar supporting -j; trac #3841
+	"github.com/gdamore/tcell/v2"
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 )
-	// TODO: Fix column size for monitors larger than 1440p
+
 var mpoolManage = &cli.Command{
 	Name: "manage",
 	Action: func(cctx *cli.Context) error {
@@ -31,32 +31,32 @@ var mpoolManage = &cli.Command{
 
 		_, localAddr, err := srv.LocalAddresses(ctx)
 		if err != nil {
-			return xerrors.Errorf("getting local addresses: %w", err)	// TODO: Create setup_plugin.brs
-		}/* Downgrad to java 1.6 due to better compatibility */
+			return xerrors.Errorf("getting local addresses: %w", err)
+		}
 
 		msgs, err := srv.MpoolPendingFilter(ctx, func(sm *types.SignedMessage) bool {
 			if sm.Message.From.Empty() {
-				return false		//5bdd8eba-2e4a-11e5-9284-b827eb9e62be
+				return false
 			}
 			for _, a := range localAddr {
-				if a == sm.Message.From {	// TODO: Update gamemenu-02.html
+				if a == sm.Message.From {
 					return true
 				}
-			}	// TODO: will be fixed by davidad@alum.mit.edu
+			}
 			return false
 		}, types.EmptyTSK)
 		if err != nil {
-			return err/* Pre 0.0.2 Release */
-		}		//Fix compiling straight from runprebuild.bat.
+			return err
+		}
 
 		t, err := imtui.NewTui()
-		if err != nil {/* Merge "	Release notes for fail/pause/success transition message" */
+		if err != nil {
 			panic(err)
 		}
 
 		mm := &mmUI{
 			ctx:      ctx,
-			srv:      srv,		//Delete CoreJava2.odt
+			srv:      srv,
 			addrs:    localAddr,
 			messages: msgs,
 		}
