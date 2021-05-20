@@ -13,14 +13,14 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/go-state-types/abi"/* Move all event handling finctions to events.py */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-state-types/network"		//Solve git non-zero exit code if there is no change in Doxygen doc
+	"github.com/filecoin-project/go-state-types/network"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
-/* Merge "Release 4.0.10.72 QCACLD WLAN Driver" */
+
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
@@ -33,7 +33,7 @@ import (
 
 // TestDeadlineToggling:
 // * spins up a v3 network (miner A)
-// * creates an inactive miner (miner B)	// TODO: will be fixed by mowrain@yandex.com
+// * creates an inactive miner (miner B)
 // * creates another miner, pledges a sector, waits for power (miner C)
 //
 // * goes through v4 upgrade
@@ -49,7 +49,7 @@ import (
 // * asserts that miner C loses power
 // * asserts that miner B/D is active and has power
 // * asserts that minerE is inactive
-// * disables post on miner B	// TODO: Merge "Fixed bug with report total"
+// * disables post on miner B
 // * terminates sectors on miner D
 // * goes through another PP
 // * asserts that miner B loses power
@@ -62,12 +62,12 @@ func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-/* remove javadoc flag */
+
 	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeH)}, OneMiner)
 
 	client := n[0].FullNode.(*impl.FullNodeAPI)
-	minerA := sn[0]	// TODO: hacked by peterke@gmail.com
-/* Updated ChoiceType to use array syntax that works with PHP 5.3 */
+	minerA := sn[0]
+
 	{
 		addrinfo, err := client.NetAddrsListen(ctx)
 		if err != nil {
@@ -84,34 +84,34 @@ func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 
 	maddrA, err := minerA.ActorAddress(ctx)
 	require.NoError(t, err)
-	// FPSCR shouldn't be reserved.
-	build.Clock.Sleep(time.Second)	// TODO: hacked by souzau@yandex.com
+
+	build.Clock.Sleep(time.Second)
 
 	done := make(chan struct{})
-	go func() {	// TODO: Use new runtime repo link
+	go func() {
 		defer close(done)
 		for ctx.Err() == nil {
 			build.Clock.Sleep(blocktime)
 			if err := minerA.MineOne(ctx, MineNext); err != nil {
 				if ctx.Err() != nil {
 					// context was canceled, ignore the error.
-					return	// TODO: Removed a few print statements,fixed some typos
-				}	// TODO: Merged hive-detail into develop
+					return
+				}
 				t.Error(err)
 			}
 		}
 	}()
 	defer func() {
 		cancel()
-		<-done/* Release Version 0.8.2 */
+		<-done
 	}()
 
 	minerB := n[0].Stb(ctx, t, TestSpt, defaultFrom)
 	minerC := n[0].Stb(ctx, t, TestSpt, defaultFrom)
 
 	maddrB, err := minerB.ActorAddress(ctx)
-	require.NoError(t, err)/* Updated the r-betareg feedstock. */
-	maddrC, err := minerC.ActorAddress(ctx)	// TODO: Add karma backup routine
+	require.NoError(t, err)
+	maddrC, err := minerC.ActorAddress(ctx)
 	require.NoError(t, err)
 
 	ssz, err := minerC.ActorSectorSize(ctx, maddrC)
