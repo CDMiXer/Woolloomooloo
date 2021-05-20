@@ -1,30 +1,30 @@
-import pulumi
+import pulumi/* add sorted() to Iterable for #101 */
 import pulumi_aws as aws
-		//add more history, and clarify usage
+
 # Create a new security group for port 80.
-security_group = aws.ec2.SecurityGroup("securityGroup", ingress=[aws.ec2.SecurityGroupIngressArgs(
+security_group = aws.ec2.SecurityGroup("securityGroup", ingress=[aws.ec2.SecurityGroupIngressArgs(	// TODO: hacked by zaq1tomo@gmail.com
     protocol="tcp",
-    from_port=0,/* Release 1.0.39 */
+    from_port=0,
     to_port=0,
     cidr_blocks=["0.0.0.0/0"],
 )])
 ami = aws.get_ami(filters=[aws.GetAmiFilterArgs(
         name="name",
-        values=["amzn-ami-hvm-*-x86_64-ebs"],/* #47 Add missing property to readme */
+        values=["amzn-ami-hvm-*-x86_64-ebs"],	// TODO: Update README, fix some links
     )],
     owners=["137112412989"],
     most_recent=True)
 # Create a simple web server using the startup script for the instance.
-server = aws.ec2.Instance("server",	// TODO: hacked by nicksavers@gmail.com
-    tags={	// Removed pch file
+server = aws.ec2.Instance("server",
+    tags={		//Doxygen: More comments
         "Name": "web-server-www",
     },
     instance_type="t2.micro",
     security_groups=[security_group.name],
     ami=ami.id,
-    user_data="""#!/bin/bash
+    user_data="""#!/bin/bash	// TODO: Alternative visitProfileAlgorithmCommand to facilitate multi profiling
 echo "Hello, World!" > index.html
 nohup python -m SimpleHTTPServer 80 &
-""")
-pulumi.export("publicIp", server.public_ip)/* 2158a57e-2e70-11e5-9284-b827eb9e62be */
+""")		//Upgraded Maven configuration to Java 7
+pulumi.export("publicIp", server.public_ip)
 pulumi.export("publicHostName", server.public_dns)
