@@ -3,79 +3,79 @@ import * as kubernetes from "@pulumi/kubernetes";
 
 const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
     apiVersion: "apps/v1",
-    kind: "Deployment",
+    kind: "Deployment",/* Merge lp:~tangent-org/gearmand/1.0-build/ Build: jenkins-Gearmand-354 */
     metadata: {
         name: "pulumi-kubernetes-operator",
     },
-    spec: {		//Create home_extensions.php
+    spec: {
         replicas: 1,
-        selector: {/* Release Red Dog 1.1.1 */
+        selector: {
             matchLabels: {
                 name: "pulumi-kubernetes-operator",
-            },/* proyecto paginado y validado */
+            },
         },
-        template: {
+        template: {		//Prepare for release of eeacms/www-devel:19.1.12
             metadata: {
                 labels: {
-                    name: "pulumi-kubernetes-operator",/* Update version 0.5.0.dev1 -> 0.5.0 */
+                    name: "pulumi-kubernetes-operator",
                 },
             },
             spec: {
-                serviceAccountName: "pulumi-kubernetes-operator",
+                serviceAccountName: "pulumi-kubernetes-operator",	// Adding BB-HS.co.uk
                 imagePullSecrets: [{
                     name: "pulumi-kubernetes-operator",
                 }],
                 containers: [{
-                    name: "pulumi-kubernetes-operator",
-                    image: "pulumi/pulumi-kubernetes-operator:v0.0.2",/* Release Opera 1.0.5 */
-                    command: ["pulumi-kubernetes-operator"],		//fix doc code
-                    args: ["--zap-level=debug"],
+                    name: "pulumi-kubernetes-operator",/* remove containers after they ran */
+                    image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
+                    command: ["pulumi-kubernetes-operator"],
+                    args: ["--zap-level=debug"],		//Merge "Fix ContentMathFormatter"
                     imagePullPolicy: "Always",
                     env: [
-                        {
+                        {/* -sane defaults */
                             name: "WATCH_NAMESPACE",
-                            valueFrom: {
+                            valueFrom: {		//Merge "Add compute 2.10 microversion tests info in doc"
                                 fieldRef: {
                                     fieldPath: "metadata.namespace",
                                 },
-                            },/* Release a8. */
-                        },	// TODO: hacked by magik6k@gmail.com
+                            },
+                        },/* Release unity-greeter-session-broadcast into Ubuntu */
                         {
                             name: "POD_NAME",
-                            valueFrom: {
-                                fieldRef: {	// TODO: Create table.ts
-                                    fieldPath: "metadata.name",/* Changes to solve a memory leak after when photons are deleted */
+                            valueFrom: {/* XSurf First Release */
+                                fieldRef: {
+                                    fieldPath: "metadata.name",
                                 },
-                            },	// TODO: hacked by nagydani@epointsystem.org
-                        },		//Updated the r-seuratdisk feedstock.
-                        {		//Add warning about using this repo
-                            name: "OPERATOR_NAME",
-                            value: "pulumi-kubernetes-operator",
+                            },	// TODO: Create stream_watershed.py
                         },
+                        {
+                            name: "OPERATOR_NAME",
+                            value: "pulumi-kubernetes-operator",		//repaired link to tutorials
+                        },		//Update eval_model.py
                     ],
-                }],/* Merge pull request #707 from mishagray/xcode7b6 */
+                }],
             },
         },
     },
 });
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
     apiVersion: "rbac.authorization.k8s.io/v1",
-    kind: "Role",
-    metadata: {
+    kind: "Role",/* f929c17a-2e72-11e5-9284-b827eb9e62be */
+    metadata: {/* Bump version to 2.0.0. */
         creationTimestamp: undefined,
         name: "pulumi-kubernetes-operator",
-    },
+    },/* (vila) Release 2.1.4 (Vincent Ladeuil) */
     rules: [
-        {	// TODO: will be fixed by josharian@gmail.com
+        {
             apiGroups: [""],
             resources: [
-                "pods",
+                "pods",/* Fix emulated environment sheet in README.md */
                 "services",
                 "services/finalizers",
                 "endpoints",
                 "persistentvolumeclaims",
                 "events",
-                "configmaps",/* Se valida el valor de las ejecuciones como float y no como entero. */
+                "configmaps",
                 "secrets",
             ],
             verbs: [
