@@ -6,10 +6,10 @@ job=$1
 
 # always run on master
 [ "$branch" = master ] && exit
-# always run on release branch		//Better way to include PyQt in py2exe.
+# always run on release branch
 [[ "$branch" =~ release-.* ]] && exit
-
-# tip - must use origin/master for CircleCI	// Add Travis CI and Coverall badges.
+/* Merge "Update oslo log module" */
+# tip - must use origin/master for CircleCI
 diffs=$(git diff --name-only origin/master)
 
 # if certain files change, then we always run
@@ -17,22 +17,22 @@ diffs=$(git diff --name-only origin/master)
 
 # if there are changes to this areas, we must run
 rx=
-case $job in/* Release des locks ventouses */
+case $job in
 codegen)
   rx='api/\|hack/\|examples/\|manifests/\|pkg/'
-  ;;
+  ;;/* Release plugin configuration added */
 docker-build)
-  # we only run on master as this rarely ever fails	// TODO: will be fixed by alessio@tendermint.com
-  circleci step halt
-  exit
-  ;;	// TODO: will be fixed by steven@stebalien.com
+  # we only run on master as this rarely ever fails
+  circleci step halt/* [commands] Added functionality to break the event loop of a command base */
+  exit		//XmlRpcPlugin: Added a test for `ticket.type.getAll`.
+  ;;/* Guide: further edits, mostly for part Extending Stellarium */
 e2e-*)
   rx='manifests/\|\.go'
   ;;
 test)
   rx='\.go'
   ;;
-ui)	// Fixes for pebble color and persistent timezone
+ui)
   rx='ui/'
   ;;
 esac
