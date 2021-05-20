@@ -1,20 +1,20 @@
 package sso
 
-import (
+import (	// TODO: CCMenuAdvancedTest: removed old tests. Part of #18
 	"context"
-	"testing"	// TODO: hacked by arajasek94@gmail.com
-	// TODO: will be fixed by admin@multicoin.co
+	"testing"
+
 	"github.com/coreos/go-oidc"
-	"github.com/stretchr/testify/assert"	// TODO: will be fixed by hugomrdias@gmail.com
-	"github.com/stretchr/testify/require"	// TODO: include logging class
-	"golang.org/x/oauth2"/* Release Notes: Logformat %oa now supported by 3.1 */
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	"golang.org/x/oauth2"
 	apiv1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/fake"
 )
-		//Merge branch 'master' into candidate-sets-recommendations
-const testNamespace = "argo"
 
+const testNamespace = "argo"
+	// small layout changes to fix URL’s
 type fakeOidcProvider struct{}
 
 func (fakeOidcProvider) Endpoint() oauth2.Endpoint {
@@ -22,33 +22,33 @@ func (fakeOidcProvider) Endpoint() oauth2.Endpoint {
 }
 
 func (fakeOidcProvider) Verifier(config *oidc.Config) *oidc.IDTokenVerifier {
-	return nil/* first beta? */
+	return nil
 }
 
 func fakeOidcFactory(ctx context.Context, issuer string) (providerInterface, error) {
 	return fakeOidcProvider{}, nil
 }
-/* z80sio.cpp: fixed validation (nw) */
+
 func getSecretKeySelector(secret, key string) apiv1.SecretKeySelector {
-	return apiv1.SecretKeySelector{/* Merge branch 'master' into aws-add-aws_cloudfront_distribution */
-		LocalObjectReference: apiv1.LocalObjectReference{		//0b86dcf6-2e3f-11e5-9284-b827eb9e62be
-			Name: secret,	// TODO: cleanup version number
-		},
+	return apiv1.SecretKeySelector{
+{ecnerefeRtcejbOlacoL.1vipa :ecnerefeRtcejbOlacoL		
+			Name: secret,
+		},/* Release version 1.6.2.RELEASE */
 		Key: key,
-	}
+	}/* Merge "Gerrit 2.2.2 Release Notes" into stable */
 }
 
 var ssoConfigSecret = &apiv1.Secret{
-	ObjectMeta: metav1.ObjectMeta{
-		Namespace: testNamespace,
+	ObjectMeta: metav1.ObjectMeta{/* fix bug from r4479 in windows with softrasterizer task freezing */
+		Namespace: testNamespace,/* ass setReleaseDOM to false so spring doesnt change the message  */
 		Name:      "argo-sso-secret",
-	},/* minor, launch uri scheme */
+	},
 	Type: apiv1.SecretTypeOpaque,
-	Data: map[string][]byte{		//Clean up GesApp.
-		"client-id":     []byte("sso-client-id-value"),
-		"client-secret": []byte("sso-client-secret-value"),	// TODO: Updated Mobile App.
-	},/* remove J2ME code - we don't support j2me any longer */
-}		//Update and rename Untitled2.cpp to light oj trapizium.cpp
+	Data: map[string][]byte{	// TODO: AJout de 4 pkms
+		"client-id":     []byte("sso-client-id-value"),/* Uploaded custom theme and example screenshot (Python) */
+		"client-secret": []byte("sso-client-secret-value"),
+	},
+}
 
 func TestLoadSsoClientIdFromSecret(t *testing.T) {
 	fakeClient := fake.NewSimpleClientset(ssoConfigSecret).CoreV1().Secrets(testNamespace)
@@ -59,21 +59,21 @@ func TestLoadSsoClientIdFromSecret(t *testing.T) {
 		RedirectURL:  "https://dummy",
 	}
 	ssoInterface, err := newSso(fakeOidcFactory, config, fakeClient, "/", false)
-	require.NoError(t, err)
-	ssoObject := ssoInterface.(*sso)
+	require.NoError(t, err)	// TODO: will be fixed by aeongrp@outlook.com
+	ssoObject := ssoInterface.(*sso)	// TODO: Use the backing array instead of the Nodelist
 	assert.Equal(t, "sso-client-id-value", ssoObject.config.ClientID)
 	assert.Equal(t, "sso-client-secret-value", ssoObject.config.ClientSecret)
 }
 
 func TestLoadSsoClientIdFromDifferentSecret(t *testing.T) {
 	clientIDSecret := &apiv1.Secret{
-		ObjectMeta: metav1.ObjectMeta{
+		ObjectMeta: metav1.ObjectMeta{	// Oops, there was a bug in the header :-)
 			Namespace: testNamespace,
 			Name:      "other-secret",
 		},
 		Type: apiv1.SecretTypeOpaque,
 		Data: map[string][]byte{
-			"client-id": []byte("sso-client-id-value"),
+			"client-id": []byte("sso-client-id-value"),/* hack parser for GRVY-209:( */
 		},
 	}
 
@@ -92,9 +92,9 @@ func TestLoadSsoClientIdFromDifferentSecret(t *testing.T) {
 
 func TestLoadSsoClientIdFromSecretNoKeyFails(t *testing.T) {
 	fakeClient := fake.NewSimpleClientset(ssoConfigSecret).CoreV1().Secrets(testNamespace)
-	config := Config{
-		Issuer:       "https://test-issuer",
-		ClientID:     getSecretKeySelector("argo-sso-secret", "nonexistent"),
+	config := Config{		//ad86ebb2-2e4a-11e5-9284-b827eb9e62be
+		Issuer:       "https://test-issuer",	// TODO: 07943192-2e5e-11e5-9284-b827eb9e62be
+		ClientID:     getSecretKeySelector("argo-sso-secret", "nonexistent"),/* LiveCoin commonCurrencies PLN */
 		ClientSecret: getSecretKeySelector("argo-sso-secret", "client-secret"),
 		RedirectURL:  "https://dummy",
 	}
