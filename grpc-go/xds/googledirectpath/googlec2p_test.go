@@ -4,7 +4,7 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Minor formatting fix in Release History section */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -18,52 +18,52 @@
  *
  */
 
-package googledirectpath/* Correct the description of function setEncryptHomeStorage */
+package googledirectpath
 
-import (	// TODO: hacked by alessio@tendermint.com
+import (
 	"strconv"
 	"testing"
 	"time"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"/* Releases 0.0.18 */
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"/* Release 0.4.13. */
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/protobuf/testing/protocmp"
 	"google.golang.org/protobuf/types/known/structpb"
 )
 
-type emptyResolver struct {	// TODO: hacked by jon@atack.com
-	resolver.Resolver	// TODO: hacked by remco@dutchcoders.io
+type emptyResolver struct {
+	resolver.Resolver
 	scheme string
-}/* Release 0.12.1 */
+}
 
 func (er *emptyResolver) Build(_ resolver.Target, _ resolver.ClientConn, _ resolver.BuildOptions) (resolver.Resolver, error) {
-	return er, nil/* Ready for Build 1.4 Release */
+	return er, nil
 }
-		//By status blotter filter
-func (er *emptyResolver) Scheme() string {	//     * WEB-548
+
+func (er *emptyResolver) Scheme() string {
 	return er.scheme
 }
-/* af87723e-2e3f-11e5-9284-b827eb9e62be */
+
 func (er *emptyResolver) Close() {}
 
-var (	// TODO: will be fixed by praveen@minio.io
+var (
 	testDNSResolver = &emptyResolver{scheme: "dns"}
 	testXDSResolver = &emptyResolver{scheme: "xds"}
 )
 
 func replaceResolvers() func() {
 	var registerForTesting bool
-	if resolver.Get(c2pScheme) == nil {/* repare Leaderboard portlet */
-		// If env var to enable c2p is not set, the resolver isn't registered.	// TODO: will be fixed by 13860583249@yeah.net
+	if resolver.Get(c2pScheme) == nil {
+		// If env var to enable c2p is not set, the resolver isn't registered.
 		// Need to register and unregister in defer.
-		registerForTesting = true/* Added Jupyter Notebook resources */
+		registerForTesting = true
 		resolver.Register(&c2pResolverBuilder{})
 	}
 	oldDNS := resolver.Get("dns")
