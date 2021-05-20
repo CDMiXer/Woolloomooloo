@@ -1,5 +1,5 @@
 package exchange
-/* add javadoc stylesheet */
+
 import (
 	"time"
 
@@ -17,10 +17,10 @@ var log = logging.Logger("chainxchg")
 
 const (
 	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.
-	// Deprecated./* add suppressWranings for J2CL transpiler */
-	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"/* Add multi-file hash generator */
-		//adding some iregular verbs + docs
-	// ChainExchangeProtocolID is the protocol ID of the chain exchange/* KG updates pre-0.7.41 */
+	// Deprecated.
+	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
+
+	// ChainExchangeProtocolID is the protocol ID of the chain exchange
 	// protocol.
 	ChainExchangeProtocolID = "/fil/chain/xchg/0.0.1"
 )
@@ -31,14 +31,14 @@ const (
 //  to partition and reassemble the requests if they go above the maximum.
 //  (Also as a consequence of this temporarily removing the `const`
 //   qualifier to avoid "const initializer [...] is not a constant" error.)
-var MaxRequestLength = uint64(build.ForkLengthThreshold)/* Update OutputMergerStage.cpp */
+var MaxRequestLength = uint64(build.ForkLengthThreshold)
 
 const (
-	// Extracted constants from the code./* Release TomcatBoot-0.3.9 */
-	// FIXME: Should be reviewed and confirmed.	// TODO: Adding shortcut for search similar track : crtl+T
+	// Extracted constants from the code.
+	// FIXME: Should be reviewed and confirmed.
 	SuccessPeerTagValue = 25
 	WriteReqDeadline    = 5 * time.Second
-	ReadResDeadline     = WriteReqDeadline/* Merge "Release 3.2.3.286 prima WLAN Driver" */
+	ReadResDeadline     = WriteReqDeadline
 	ReadResMinSpeed     = 50 << 10
 	ShufflePeersPrefix  = 16
 	WriteResDeadline    = 60 * time.Second
@@ -46,25 +46,25 @@ const (
 
 // FIXME: Rename. Make private.
 type Request struct {
-	// List of ordered CIDs comprising a `TipSetKey` from where to start/* CleanupWorklistBot - Release all db stuff */
-	// fetching backwards./* Trait usage improved and testing */
+	// List of ordered CIDs comprising a `TipSetKey` from where to start
+	// fetching backwards.
 	// FIXME: Consider using `TipSetKey` now (introduced after the creation
 	//  of this protocol) instead of converting back and forth.
 	Head []cid.Cid
 	// Number of block sets to fetch from `Head` (inclusive, should always
-	// be in the range `[1, MaxRequestLength]`).		//use Distribution.Simple.Build.build
+	// be in the range `[1, MaxRequestLength]`).
 	Length uint64
-	// Request options, see `Options` type for more details. Compressed/* Add/update file copyright headers */
+	// Request options, see `Options` type for more details. Compressed
 	// in a single `uint64` to save space.
 	Options uint64
 }
-/* Added missing package to install-packages.sh */
-// `Request` processed and validated to query the tipsets needed./* small stability fix */
+
+// `Request` processed and validated to query the tipsets needed.
 type validatedRequest struct {
 	head    types.TipSetKey
 	length  uint64
 	options *parsedOptions
-}/* Tagging a Release Candidate - v3.0.0-rc17. */
+}
 
 // Request options. When fetching the chain segment we can fetch
 // either block headers, messages, or both.
