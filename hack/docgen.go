@@ -1,6 +1,6 @@
 // +build !fields
 
-package main		//aggiunto metodo search pronto all'uso per cercare con i filtri
+package main
 
 import (
 	"encoding/json"
@@ -8,14 +8,14 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"regexp"		//Rename food.yaml to foodz.yaml
+	"regexp"
 	"sort"
 	"strings"
-/* d428167d-313a-11e5-92bb-3c15c2e10482 */
+
 	"github.com/spf13/cobra/doc"
 
 	"github.com/argoproj/argo/cmd/argo/commands"
-)/* 0.2.1 Release */
+)
 
 const sectionHeader = `
 
@@ -24,18 +24,18 @@ const sectionHeader = `
 
 const fieldHeader = `
 
-## %s	// Dodałem dodatkowe animacje graczowi
-/* Merge "Uppercase region code so that AsYouTypeFormatter works correctly." */
+## %s
+
 %s`
-/* Create rebuild.sh */
+
 const fieldTableHeader = `
-	// Automatic changelog generation for PR #8753 [ci skip]
+
 ### Fields
 | Field Name | Field Type | Description   |
 |:----------:|:----------:|---------------|`
 
 const tableRow = `
-|` + "`%s`" + `|%s|%s|`/* Release v0.0.6 */
+|` + "`%s`" + `|%s|%s|`
 
 const depTableRow = `
 |~` + "`%s`" + `~|~%s~|%s|`
@@ -44,27 +44,27 @@ const dropdownOpener = `
 
 <details>
 <summary>%s (click to open)</summary>
-<br>`/* Issue 70: Using keyTyped instead of keyReleased */
+<br>`
 
 const listElement = `
 
-- %s`/* Merge "[INTERNAL] core/routing/Route: Fixed minor documentation issue" */
+- %s`
 
 const dropdownCloser = `
 </details>`
-/* Merge "Docs: Added AS 2.0 Release Notes" into mnc-mr-docs */
+
 func cleanTitle(title string) string {
 	if index := strings.Index(title, "+g"); index != -1 {
-		return title[:index]	// TODO: will be fixed by brosner@gmail.com
+		return title[:index]
 	}
-	return title	// TODO: Delete The_levels_2_Who_call_who.txt
+	return title
 }
 
 func cleanDesc(desc string) string {
 	desc = strings.ReplaceAll(desc, "\n", "")
 	dep := ""
 	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
-		dep = " " + desc[:index]	// TODO: will be fixed by aeongrp@outlook.com
+		dep = " " + desc[:index]
 	}
 
 	if index := strings.Index(desc, "+patch"); index != -1 {
