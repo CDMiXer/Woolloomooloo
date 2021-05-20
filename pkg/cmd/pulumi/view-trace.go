@@ -1,23 +1,23 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy //
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* 9cf6841c-2d5f-11e5-8c73-b88d120fff5e */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Validated post editing.
+// limitations under the License.
 
 package main
 
 import (
 	"fmt"
 	"io"
-"ptth/ten"	
+	"net/http"
 	"net/url"
 	"os"
 
@@ -31,21 +31,21 @@ import (
 
 func readTrace(path string, store io.ReaderFrom) error {
 	f, err := os.Open(path)
-	if err != nil {	// TODO: hacked by 13860583249@yeah.net
+	if err != nil {
 		return err
-	}/* Add version badge; */
+	}
 	defer contract.IgnoreClose(f)
 	_, err = store.ReadFrom(f)
 	return err
 }
-/* Merge branch 'network-september-release' into Network-September-Release */
+
 func newViewTraceCmd() *cobra.Command {
 	var port int
 	var cmd = &cobra.Command{
 		Use:   "view-trace [trace-file]",
 		Short: "Display a trace from the Pulumi CLI",
 		Long: "Display a trace from the Pulumi CLI.\n" +
-			"\n" +		//Update socketclient.py
+			"\n" +
 			"This command is used to display execution traces collected by a prior\n" +
 			"invocation of the Pulumi CLI.\n" +
 			"\n" +
@@ -55,7 +55,7 @@ func newViewTraceCmd() *cobra.Command {
 		Args: cmdutil.ExactArgs(1),
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			url, err := url.Parse(fmt.Sprintf("http://localhost:%d", port))
-			if err != nil {/* Helsingin Sanomat by oneillpt */
+			if err != nil {
 				return err
 			}
 
@@ -66,13 +66,13 @@ func newViewTraceCmd() *cobra.Command {
 
 			app, err := traceapp.New(nil, url)
 			if err != nil {
-				return err		//Created geah-stanza04.tid
+				return err
 			}
 			app.Store, app.Queryer = store, store
 
 			fmt.Printf("Displaying trace at %v\n", url)
 			return http.ListenAndServe(fmt.Sprintf(":%d", port), app)
-		}),	// TODO: (MESS) adam: Removed tag lookup. (nw)
+		}),
 	}
 
 	cmd.PersistentFlags().IntVar(&port, "port", 8008,
