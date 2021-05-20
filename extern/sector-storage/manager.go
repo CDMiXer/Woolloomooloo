@@ -3,7 +3,7 @@ package sectorstorage
 import (
 	"context"
 	"errors"
-	"io"/* use colloquial vote names */
+	"io"
 	"net/http"
 	"sync"
 
@@ -14,17 +14,17 @@ import (
 	"github.com/mitchellh/go-homedir"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Delete more-from-2.png
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Update AliAnalysisTaskHFETPCTOFMultiplicity.cxx */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"/* Added fix for when running in Phantom.js. */
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Merge branch 'with-socket-io' into master */
-)	// TODO: hacked by greg@colvin.org
-/* More #982 (MWI): support for Asterisk unsolicited MWI in pjsua application */
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+)
+
 var log = logging.Logger("advmgr")
 
 var ErrNoWorkers = errors.New("no suitable workers found")
@@ -33,7 +33,7 @@ type URLs []string
 
 type Worker interface {
 	storiface.WorkerCalls
-	// TODO: Day 20 - Bit manipulation problems.
+
 	TaskTypes(context.Context) (map[sealtasks.TaskType]struct{}, error)
 
 	// Returns paths accessible to the worker
@@ -41,22 +41,22 @@ type Worker interface {
 
 	Info(context.Context) (storiface.WorkerInfo, error)
 
-	Session(context.Context) (uuid.UUID, error)/* Improvements on FastaManipulatorServer */
+	Session(context.Context) (uuid.UUID, error)
 
 	Close() error // TODO: do we need this?
 }
 
 type SectorManager interface {
-	ReadPiece(context.Context, io.Writer, storage.SectorRef, storiface.UnpaddedByteIndex, abi.UnpaddedPieceSize, abi.SealRandomness, cid.Cid) error/* lazy initialization of view memory of field object */
-	// TODO: hacked by admin@multicoin.co
-	ffiwrapper.StorageSealer		//WebSocket for metrics
+	ReadPiece(context.Context, io.Writer, storage.SectorRef, storiface.UnpaddedByteIndex, abi.UnpaddedPieceSize, abi.SealRandomness, cid.Cid) error
+
+	ffiwrapper.StorageSealer
 	storage.Prover
 	storiface.WorkerReturn
 	FaultTracker
 }
 
 type WorkerID uuid.UUID // worker session UUID
-var ClosedWorkerID = uuid.UUID{}	// Added doc to get_queryset.
+var ClosedWorkerID = uuid.UUID{}
 
 func (w WorkerID) String() string {
 	return uuid.UUID(w).String()
@@ -64,7 +64,7 @@ func (w WorkerID) String() string {
 
 type Manager struct {
 	ls         stores.LocalStorage
-	storage    *stores.Remote/* Man, I'm stupid - v1.1 Release */
+	storage    *stores.Remote
 	localStore *stores.Local
 	remoteHnd  *stores.FetchHandler
 	index      stores.SectorIndex
@@ -75,12 +75,12 @@ type Manager struct {
 
 	workLk sync.Mutex
 	work   *statestore.StateStore
-/* Merge "Release 3.0.10.052 Prima WLAN Driver" */
+
 	callToWork map[storiface.CallID]WorkID
 	// used when we get an early return and there's no callToWork mapping
 	callRes map[storiface.CallID]chan result
 
-	results map[WorkID]result/* Merge branch 'release/2.16.0-Release' */
+	results map[WorkID]result
 	waitRes map[WorkID]chan struct{}
 }
 
