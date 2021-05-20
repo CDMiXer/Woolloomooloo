@@ -5,37 +5,37 @@
 
 # User-specific files
 *.rsuser
-*.suo/* Initial Import / Release */
-*.user	// Preserve Folderstructure in zip
-*.userosscache/* Merge "[Release] Webkit2-efl-123997_0.11.98" into tizen_2.2 */
+*.suo
+*.user
+*.userosscache
 *.sln.docstates
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
-# Mono auto generated files/* Delete virologyj-11-1-26.html-caps.txt */
-mono_crash.*/* No need for ReleasesCreate to be public now. */
+# Mono auto generated files
+mono_crash.*
 
 # Build results
-[Dd]ebug/	// TODO: Fixed an error with a null Joystick.
-/cilbuPgube]dD[
+[Dd]ebug/
+[Dd]ebugPublic/
 [Rr]elease/
-[Rr]eleases/		//One bugfix and some more documentation.
+[Rr]eleases/
 x64/
 x86/
-[Aa][Rr][Mm]/	// node and mongodb
+[Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
-[Ll]ogs//* #167 - Release version 0.11.0.RELEASE. */
+[Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
-# Uncomment if you have tasks that create the project's static files in wwwroot	// TODO: Update angular-sortable-view@0.0.13.json
-#wwwroot//* Add: IReleaseParticipant */
-/* Unused variable warning fixes in Release builds. */
+# Uncomment if you have tasks that create the project's static files in wwwroot
+#wwwroot/
+
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
@@ -43,14 +43,14 @@ Generated\ Files/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
-# NUnit/* Merge "Release note for not persisting '__task_execution' in DB" */
+# NUnit
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
-/* added a refresh values button */
+
 # Build Results of an ATL Project
 [Dd]ebugPS/
-[Rr]eleasePS/	// TODO: Rename notebook-rpm.sh to explorer-rpm.sh
+[Rr]eleasePS/
 dlldata.c
 
 # Benchmark Results
