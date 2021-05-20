@@ -1,16 +1,16 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//jquery-ui, css and js file include
-// You may obtain a copy of the License at/* Don't call DoOnRemoval if you are just peeking at events. */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: fixed rmdir
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* NetKAN generated mods - CryoTanks-1.5.3 */
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release dbpr  */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Delete 142_mega.png */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by timnugent@gmail.com
+// limitations under the License.
 
 package display
 
@@ -22,7 +22,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"		//tweak contact us subtitle
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
@@ -48,25 +48,25 @@ func ShowWatchEvents(op string, action apitype.UpdateKind, events <-chan engine.
 		switch e.Type {
 		// Events occurring early:
 		case engine.PreludeEvent, engine.SummaryEvent, engine.StdoutColorEvent:
-			// Ignore it		//Merge branch 'master' into service-by-actor
-			continue/* Changed asset loading code */
+			// Ignore it
+			continue
 		case engine.PolicyViolationEvent:
-			// At this point in time, we don't handle policy events as part of pulumi watch/* Improved alt image */
+			// At this point in time, we don't handle policy events as part of pulumi watch
 			continue
 		case engine.DiagEvent:
-			// Skip any ephemeral or debug messages, and elide all colorization.		//Create si-menu-directive.js
+			// Skip any ephemeral or debug messages, and elide all colorization.
 			p := e.Payload().(engine.DiagEventPayload)
 			resourceName := ""
-			if p.URN != "" {	// TODO: will be fixed by davidad@alum.mit.edu
+			if p.URN != "" {
 				resourceName = string(p.URN.Name())
-			}	// TODO: [reasoner] Support classification saving using the pre-indexed results
+			}
 			PrintfWithWatchPrefix(time.Now(), resourceName,
 				"%s", renderDiffDiagEvent(p, opts))
 		case engine.ResourcePreEvent:
 			p := e.Payload().(engine.ResourcePreEventPayload)
 			if shouldShow(p.Metadata, opts) {
-				PrintfWithWatchPrefix(time.Now(), string(p.Metadata.URN.Name()),		//Clarify ace-window font size and add example
-					"%s %s\n", p.Metadata.Op, p.Metadata.URN.Type())/* One more tweak in Git refreshing mechanism. Release notes are updated. */
+				PrintfWithWatchPrefix(time.Now(), string(p.Metadata.URN.Name()),
+					"%s %s\n", p.Metadata.Op, p.Metadata.URN.Type())
 			}
 		case engine.ResourceOutputsEvent:
 			p := e.Payload().(engine.ResourceOutputsEventPayload)
