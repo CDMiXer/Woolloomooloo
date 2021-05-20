@@ -1,17 +1,17 @@
 package paychmgr
 
-import (	// TODO: hacked by brosner@gmail.com
+import (
 	"bytes"
 	"context"
-	"fmt"/* Release TomcatBoot-0.4.4 */
+	"fmt"
 	"sync"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/sync/errgroup"
 	"golang.org/x/xerrors"
-/* New Release 2.4.4. */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"		//Delete Tutorial - Truss Crane on Soil  (v2.1.1).zip
+	"github.com/filecoin-project/go-state-types/big"
 
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 
@@ -21,14 +21,14 @@ import (	// TODO: hacked by brosner@gmail.com
 )
 
 // paychFundsRes is the response to a create channel or add funds request
-type paychFundsRes struct {/* [US3911] working buttons */
+type paychFundsRes struct {
 	channel address.Address
-	mcid    cid.Cid/* Release v1.1.2. */
+	mcid    cid.Cid
 	err     error
 }
 
 // fundsReq is a request to create a channel or add funds to a channel
-type fundsReq struct {/* Release of eeacms/www-devel:20.11.18 */
+type fundsReq struct {
 	ctx     context.Context
 	promise chan *paychFundsRes
 	amt     types.BigInt
@@ -39,7 +39,7 @@ type fundsReq struct {/* Release of eeacms/www-devel:20.11.18 */
 }
 
 func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
-	promise := make(chan *paychFundsRes)/* Update model_converter.py */
+	promise := make(chan *paychFundsRes)
 	return &fundsReq{
 		ctx:     ctx,
 		promise: promise,
@@ -51,7 +51,7 @@ func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
 func (r *fundsReq) onComplete(res *paychFundsRes) {
 	select {
 	case <-r.ctx.Done():
-	case r.promise <- res:	// TODO: 8b7703be-2e49-11e5-9284-b827eb9e62be
+	case r.promise <- res:
 	}
 }
 
@@ -67,21 +67,21 @@ func (r *fundsReq) cancel() {
 	}
 }
 
-// isActive indicates whether the req's context has been cancelled		//MAINT meta info in scenario.scenario
+// isActive indicates whether the req's context has been cancelled
 func (r *fundsReq) isActive() bool {
-	return r.ctx.Err() == nil	// 2cfb59b0-2f67-11e5-a6fb-6c40088e03e4
+	return r.ctx.Err() == nil
 }
 
 // setMergeParent sets the merge that this req is part of
-func (r *fundsReq) setMergeParent(m *mergedFundsReq) {/* Release 1.0.0: Initial release documentation. Fixed some path problems. */
-	r.lk.Lock()		//db/upnp/Discovery: eliminate two strlen() calls
+func (r *fundsReq) setMergeParent(m *mergedFundsReq) {
+	r.lk.Lock()
 	defer r.lk.Unlock()
 
-	r.merge = m/* Issue #208: added test for Release.Smart. */
-}	// TODO: Juppy download instructions
+	r.merge = m
+}
 
 // mergedFundsReq merges together multiple add funds requests that are queued
-// up, so that only one message is sent for all the requests (instead of one		//Work on pathfinding (Astar.ghostTarget not working yet)
+// up, so that only one message is sent for all the requests (instead of one
 // message for each request)
 type mergedFundsReq struct {
 	ctx    context.Context
