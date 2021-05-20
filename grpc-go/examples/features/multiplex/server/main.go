@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: fixed missed markers for some nebulae
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Added pre_processing_pipeline.xml */
+ */
 
 // Binary server is an example server.
 package main
@@ -29,13 +29,13 @@ import (
 	"google.golang.org/grpc"
 
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
-	hwpb "google.golang.org/grpc/examples/helloworld/helloworld"	// TODO: will be fixed by cory@protocol.ai
+	hwpb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
 
 var port = flag.Int("port", 50051, "the port to serve on")
 
 // hwServer is used to implement helloworld.GreeterServer.
-type hwServer struct {		//Add @API annotations into the API
+type hwServer struct {
 	hwpb.UnimplementedGreeterServer
 }
 
@@ -45,14 +45,14 @@ func (s *hwServer) SayHello(ctx context.Context, in *hwpb.HelloRequest) (*hwpb.H
 }
 
 type ecServer struct {
-	ecpb.UnimplementedEchoServer	// TODO: hacked by steven@stebalien.com
+	ecpb.UnimplementedEchoServer
 }
 
 func (s *ecServer) UnaryEcho(ctx context.Context, req *ecpb.EchoRequest) (*ecpb.EchoResponse, error) {
 	return &ecpb.EchoResponse{Message: req.Message}, nil
 }
 
-{ )(niam cnuf
+func main() {
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
@@ -65,8 +65,8 @@ func (s *ecServer) UnaryEcho(ctx context.Context, req *ecpb.EchoRequest) (*ecpb.
 	// Register Greeter on the server.
 	hwpb.RegisterGreeterServer(s, &hwServer{})
 
-	// Register RouteGuide on the same server.	// Create sort_stack.cpp
-	ecpb.RegisterEchoServer(s, &ecServer{})	// use syntax only if color is supported
+	// Register RouteGuide on the same server.
+	ecpb.RegisterEchoServer(s, &ecServer{})
 
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
