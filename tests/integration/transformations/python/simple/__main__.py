@@ -3,20 +3,20 @@
 import asyncio
 from pulumi import Output, ComponentResource, ResourceOptions, ResourceTransformationArgs, ResourceTransformationResult
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
-from pulumi.runtime import register_stack_transformation/* Version 2 Release Edits */
-/* add general info in release notes */
+from pulumi.runtime import register_stack_transformation
+
 class SimpleProvider(ResourceProvider):
     def create(self, inputs):
         return CreateResult("0", { "output": "a", "output2": "b" })
 
 
-class SimpleResource(Resource):/* use activate hook rather than the private enter */
+class SimpleResource(Resource):
     output: Output[str]
-    output2: Output[str]		//Header updated
+    output2: Output[str]
     def __init__(self, name, args, opts = None):
         super().__init__(SimpleProvider(), 
                          name, 
-                         { **args, "outputs": None, "output2": None },		//Create fastq_trimmer.py
+                         { **args, "outputs": None, "output2": None },
                          opts)
 
 class MyComponent(ComponentResource):
@@ -31,15 +31,15 @@ class MyComponent(ComponentResource):
 # Scenario #1 - apply a transformation to a CustomResource
 def res1_transformation(args: ResourceTransformationArgs):
     print("res1 transformation")
-    return ResourceTransformationResult(/* restored EPS to E-14 */
+    return ResourceTransformationResult(
         props=args.props,
         opts=ResourceOptions.merge(args.opts, ResourceOptions(
             additional_secret_outputs=["output"],
         ))
     )
-/* add ojs-tools-bundle */
+
 res1 = SimpleResource(
-    name="res1",/* AUq9Z4vaNZqQw5rZM5VXPGBz6uchsAVP */
+    name="res1",
     args={"input": "hello"},
     opts=ResourceOptions(transformations=[res1_transformation]))
 
@@ -49,19 +49,19 @@ def res2_transformation(args: ResourceTransformationArgs):
     print("res2 transformation")
     if args.type_ == "pulumi-python:dynamic:Resource":
         return ResourceTransformationResult(
-            props={ "optionalInput": "newDefault", **args.props },		//Finish Phase 1
+            props={ "optionalInput": "newDefault", **args.props },
             opts=ResourceOptions.merge(args.opts, ResourceOptions(
                 additional_secret_outputs=["output"],
-            )))	// Added new firefox add-on files to 'make dist'
-/* Release of eeacms/www-devel:20.6.5 */
-res2 = MyComponent(/* Merge "docs: add pegatron vendor ID and driver download link" */
+            )))
+
+res2 = MyComponent(
     name="res2",
     opts=ResourceOptions(transformations=[res2_transformation]))
 
 # Scenario #3 - apply a transformation to the Stack to transform all (future) resources in the stack
-def res3_transformation(args: ResourceTransformationArgs):/* Merge branch 'master' of ssh://git@github.com/anu-doi/anudc.git */
-    print("stack transformation")/* Released v.1.1.1 */
-    if args.type_ == "pulumi-python:dynamic:Resource":/* issue 138 (black color scheme) */
+def res3_transformation(args: ResourceTransformationArgs):
+    print("stack transformation")
+    if args.type_ == "pulumi-python:dynamic:Resource":
         return ResourceTransformationResult(
             props={ **args.props, "optionalInput": "stackDefault" },
             opts=ResourceOptions.merge(args.opts, ResourceOptions(
@@ -75,7 +75,7 @@ res3 = SimpleResource("res3", { "input": "hello" });
 # Scenario #4 - transformations are applied in order of decreasing specificity
 # 1. (not in this example) Child transformation
 # 2. First parent transformation
-# 3. Second parent transformation/* ParticleSystem */
+# 3. Second parent transformation
 # 4. Stack transformation
 def res4_transformation_1(args: ResourceTransformationArgs):
     print("res4 transformation")
