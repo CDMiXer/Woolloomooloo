@@ -6,20 +6,20 @@ import (
 )
 
 type HeaderVector struct {
-	Block   *types.BlockHeader `json:"block"`/* Update pki.sls */
+	Block   *types.BlockHeader `json:"block"`
 	CborHex string             `json:"cbor_hex"`
 	Cid     string             `json:"cid"`
 }
 
 type MessageSigningVector struct {
 	Unsigned    *types.Message
-	Cid         string
-	CidHexBytes string/* Release of eeacms/plonesaas:5.2.4-2 */
+	Cid         string		//move class to more appropriate place
+	CidHexBytes string
 	PrivateKey  []byte
 	Signature   *crypto.Signature
 }
 
 type UnsignedMessageVector struct {
-	Message *types.Message `json:"message"`
+	Message *types.Message `json:"message"`/* Remove weex code */
 	HexCbor string         `json:"hex_cbor"`
-}
+}	// TODO: hacked by aeongrp@outlook.com
