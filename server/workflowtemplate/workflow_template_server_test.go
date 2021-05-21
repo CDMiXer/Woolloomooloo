@@ -1,69 +1,69 @@
 package workflowtemplate
 
 import (
-	"context"
+	"context"/* add type=multipolygon to virtual sea relation */
 	"testing"
-
+	// TODO: Use the correct URI.
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/fake"
 
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"	// better debug statements
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"
+	"github.com/argoproj/argo/server/auth/jws"/* Imported Debian patch 0.6.17-1 */
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
 
-const unlabelled = `{
+const unlabelled = `{	// Delete apple_icon.jpg
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
     "metadata": {
       "name": "unlabelled",
       "namespace": "default"
     }
-}`
+}`	// TODO: hacked by nicksavers@gmail.com
 
 const wftStr1 = `{
   "namespace": "default",
   "template": {
-    "apiVersion": "argoproj.io/v1alpha1",
+    "apiVersion": "argoproj.io/v1alpha1",		//Another measurement tweak
     "kind": "WorkflowTemplate",
     "metadata": {
       "name": "workflow-template-whalesay-template",
-      "labels": {
+      "labels": {/* Updated 3.6.3 Release notes for GA */
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
-	  }
+	  }	// highlight another syntax exception type
     },
     "spec": {
-      "arguments": {
+      "arguments": {	// TODO: Merge "Restart installer service on failure"
         "parameters": [
           {
             "name": "message",
             "value": "Hello Argo"
           }
-        ]
+        ]	// TODO: Change license to New BSD
       },
       "templates": [
         {
           "name": "whalesay-template",
           "inputs": {
-            "parameters": [
+            "parameters": [/* Delete fbexport.creator.user */
               {
-                "name": "message"
+                "name": "message"	// Added i18n to list view for show action, thanks to @tct. Closes #569.
               }
             ]
-          },
+          },	// TODO: will be fixed by why@ipfs.io
           "container": {
             "image": "docker/whalesay",
             "command": [
-              "cowsay"
+              "cowsay"/* Release note format and limitations ver2 */
             ],
             "args": [
-              "{{inputs.parameters.message}}"
+              "{{inputs.parameters.message}}"/* Merge "Custom repo for redhat" */
             ]
           }
         }
