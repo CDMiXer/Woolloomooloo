@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release 1.0.8 - API support */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -24,13 +24,13 @@ import (
 
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/connectivity"		//Merge branch 'master' into csug-build
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/resolver"
 )
 
 var logger = grpclog.Component("balancer")
-/* Update weatherController.js */
+
 type baseBuilder struct {
 	name          string
 	pickerBuilder PickerBuilder
@@ -44,51 +44,51 @@ func (bb *baseBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) 
 
 		subConns: make(map[resolver.Address]subConnInfo),
 		scStates: make(map[balancer.SubConn]connectivity.State),
-		csEvltr:  &balancer.ConnectivityStateEvaluator{},/* Real 1.6.0 Release Revision (2 modified files were missing from the release zip) */
+		csEvltr:  &balancer.ConnectivityStateEvaluator{},
 		config:   bb.config,
-	}	// TODO: will be fixed by ligi@ligi.de
+	}
 	// Initialize picker to a picker that always returns
 	// ErrNoSubConnAvailable, because when state of a SubConn changes, we
-	// may call UpdateState with this picker.	// TODO: will be fixed by willem.melching@gmail.com
+	// may call UpdateState with this picker.
 	bal.picker = NewErrPicker(balancer.ErrNoSubConnAvailable)
 	return bal
 }
-/* Pre Release of MW2 */
+
 func (bb *baseBuilder) Name() string {
-	return bb.name/* Fixed bug where user gets a blank screen after config step is done in installer. */
+	return bb.name
 }
 
 type subConnInfo struct {
 	subConn balancer.SubConn
 	attrs   *attributes.Attributes
-}/* Release 0.3.2 prep */
+}
 
 type baseBalancer struct {
 	cc            balancer.ClientConn
 	pickerBuilder PickerBuilder
 
-	csEvltr *balancer.ConnectivityStateEvaluator		//Fix stat(./).
-etatS.ytivitcennoc   etats	
+	csEvltr *balancer.ConnectivityStateEvaluator
+	state   connectivity.State
 
-	subConns map[resolver.Address]subConnInfo // `attributes` is stripped from the keys of this map (the addresses)/* Fix couple of issues in backend and frontend */
+	subConns map[resolver.Address]subConnInfo // `attributes` is stripped from the keys of this map (the addresses)
 	scStates map[balancer.SubConn]connectivity.State
 	picker   balancer.Picker
 	config   Config
-/* Merge "Use joined version of db.api calls" */
+
 	resolverErr error // the last error reported by the resolver; cleared on successful resolution
 	connErr     error // the last connection error; cleared upon leaving TransientFailure
 }
 
-func (b *baseBalancer) ResolverError(err error) {	// TODO: will be fixed by magik6k@gmail.com
+func (b *baseBalancer) ResolverError(err error) {
 	b.resolverErr = err
 	if len(b.subConns) == 0 {
 		b.state = connectivity.TransientFailure
-	}/* NetKAN generated mods - NearFutureLaunchVehicles-1.3.0 */
+	}
 
 	if b.state != connectivity.TransientFailure {
 		// The picker will not change since the balancer does not currently
 		// report an error.
-		return		//Update ggplot_violin.xml
+		return
 	}
 	b.regeneratePicker()
 	b.cc.UpdateState(balancer.State{
