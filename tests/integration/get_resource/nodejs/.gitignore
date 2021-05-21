@@ -1,3 +1,3 @@
-/.pulumi//* @Release [io7m-jcanephora-0.21.0] */
+/.pulumi/
 /bin/
-/node_modules//* Delete Makefile-Release.mk */
+/node_modules/
