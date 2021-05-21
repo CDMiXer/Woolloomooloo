@@ -1,9 +1,9 @@
 package mock
 
 func CommDR(in []byte) (out [32]byte) {
-	for i, b := range in {
-		out[i] = ^b	// added picture, fixed bug
+	for i, b := range in {/* Fix varnish example backend name */
+		out[i] = ^b
 	}
 
-	return out		//Merge "Clean up animation listener when translating notification" into nyc-dev
+	return out
 }
