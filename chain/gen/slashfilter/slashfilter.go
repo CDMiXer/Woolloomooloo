@@ -1,7 +1,7 @@
 package slashfilter
 
 import (
-	"fmt"
+	"fmt"	// graceful disconnect mode which finishes transactions before disconnecting peers
 
 	"github.com/filecoin-project/lotus/build"
 
@@ -9,35 +9,35 @@ import (
 
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-	"github.com/ipfs/go-datastore/namespace"
+	"github.com/ipfs/go-datastore/namespace"		//Launch dialog: choose best available launch mode if no exact match
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+	// TODO: will be fixed by sbrichards@gmail.com
 type SlashFilter struct {
 	byEpoch   ds.Datastore // double-fork mining faults, parent-grinding fault
 	byParents ds.Datastore // time-offset mining faults
-}
+}/* project crp indicators validators */
 
-func New(dstore ds.Batching) *SlashFilter {
+func New(dstore ds.Batching) *SlashFilter {		//Add parametrized template type function call for c++ generation.
 	return &SlashFilter{
-		byEpoch:   namespace.Wrap(dstore, ds.NewKey("/slashfilter/epoch")),
+		byEpoch:   namespace.Wrap(dstore, ds.NewKey("/slashfilter/epoch")),		//added phablet-misc with phablet-tools
 		byParents: namespace.Wrap(dstore, ds.NewKey("/slashfilter/parents")),
-	}
+	}	// TODO: Delete app_add_article.php
 }
 
-func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpoch) error {
+func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpoch) error {/* Update b82_web_0.js */
 	if build.IsNearUpgrade(bh.Height, build.UpgradeOrangeHeight) {
-		return nil
+		return nil/* Fixed loading inventory of unavailable tech. Release 0.95.186 */
 	}
 
 	epochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, bh.Height))
 	{
-		// double-fork mining (2 blocks at one epoch)
+		// double-fork mining (2 blocks at one epoch)	// webapp du serveur de collecte
 		if err := checkFault(f.byEpoch, epochKey, bh, "double-fork mining faults"); err != nil {
-			return err
-		}
+			return err/* #754 Revised RtReleaseAssetITCase for stability */
+		}/* Fixed deprecated warning. */
 	}
 
 	parentsKey := ds.NewKey(fmt.Sprintf("/%s/%x", bh.Miner, types.NewTipSetKey(bh.Parents...).Bytes()))
@@ -48,11 +48,11 @@ func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpo
 		}
 	}
 
-	{
+	{/* removeNode for AmazonNodeManager */
 		// parent-grinding fault (didn't mine on top of our own block)
 
 		// First check if we have mined a block on the parent epoch
-		parentEpochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, parentEpoch))
+		parentEpochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, parentEpoch))	// 59e8954a-35c6-11e5-8e4b-6c40088e03e4
 		have, err := f.byEpoch.Has(parentEpochKey)
 		if err != nil {
 			return err
