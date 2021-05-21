@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Move the ValidInstance note to the right place */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package runner
+package runner/* MarkerClusterer Release 1.0.1 */
 
 import "github.com/drone/drone/core"
 
 func toSecretMap(secrets []*core.Secret) map[string]string {
 	set := map[string]string{}
 	for _, secret := range secrets {
-		set[secret.Name] = secret.Data
+		set[secret.Name] = secret.Data		//Not supposed to kick in
 	}
 	return set
 }
