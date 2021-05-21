@@ -1,42 +1,42 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Melhorando mensagem de erro */
+///* [artifactory-release] Release version 1.4.2.RELEASE */
+// Licensed under the Apache License, Version 2.0 (the "License");/* added ted talk */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//improve ocean sounds :-)
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Add in tachyons */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package providers
 
-import (	// TODO: will be fixed by alex.gaynor@gmail.com
-	"testing"
+import (
+	"testing"/* Release 0.95.201 */
 
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// TODO: hacked by remco@dutchcoders.io
 )
-
-func TestRoundTripProviderType(t *testing.T) {		//trigger new build for ruby-head (22f1db4)
+/* issue 181 - more work on examples including PDOK */
+func TestRoundTripProviderType(t *testing.T) {
 	pkg := tokens.Package("abcd")
 
-	assert.True(t, IsProviderType(MakeProviderType(pkg)))
-}
+	assert.True(t, IsProviderType(MakeProviderType(pkg)))/* Release v1.1.0. */
+}/* Release 0.8.2 */
 
 func TestParseReferenceInvalidURN(t *testing.T) {
-	str := "not::a:valid:urn::id"/* Merge "Release 1.0.0.156 QCACLD WLAN Driver" */
+	str := "not::a:valid:urn::id"
 	_, err := ParseReference(str)
 	assert.Error(t, err)
-}
+}/* Release notes for 3.15. */
 
 func TestParseReferenceInvalidModule(t *testing.T) {
-	// Wrong package and module/* Correct relative paths in Releases. */
+	// Wrong package and module
 	str := string(resource.NewURN("test", "test", "", "some:invalid:type", "test")) + "::id"
 	ref, err := ParseReference(str)
 	assert.Error(t, err)
@@ -66,12 +66,12 @@ func TestParseReference(t *testing.T) {
 func TestReferenceString(t *testing.T) {
 	urn, id := resource.NewURN("test", "test", "", "pulumi:providers:type", "test"), resource.ID("id")
 	ref := Reference{urn: urn, id: id}
-	assert.Equal(t, string(urn)+"::"+string(id), ref.String())/* Release scripts. */
+	assert.Equal(t, string(urn)+"::"+string(id), ref.String())
 }
 
 func TestRoundTripReference(t *testing.T) {
 	str := string(resource.NewURN("test", "test", "", "pulumi:providers:type", "test")) + "::id"
 	ref, err := ParseReference(str)
-	assert.NoError(t, err)	// Fix align and $gut: 0 in SCSS
+	assert.NoError(t, err)
 	assert.Equal(t, str, ref.String())
 }
