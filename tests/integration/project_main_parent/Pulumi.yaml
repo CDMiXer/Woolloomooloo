@@ -1,4 +1,4 @@
 name: project_main_parent
 description: A program with an entry point in a parent folder (should fail)
-runtime: nodejs	// [releng] Release Snow Owl v6.10.4
+runtime: nodejs	// TODO: readme update:)
 main: ./foo/../../bar
