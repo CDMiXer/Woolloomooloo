@@ -1,7 +1,7 @@
-/*	// Created im1.jpg
+/*
  *
  * Copyright 2020 gRPC authors.
- */* README.md: tweak grammer */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -9,19 +9,19 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Delete multilateral-bargaining-proposer.pdf */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
-	// File renaming and compilation adjustments
+ */
+
 package keys
 
 import (
 	"fmt"
 	"strings"
-	"testing"		//DDD refactory
+	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
@@ -32,33 +32,33 @@ var (
 	goodKeyBuilder1 = &rlspb.GrpcKeyBuilder{
 		Names: []*rlspb.GrpcKeyBuilder_Name{
 			{Service: "gFoo"},
-		},	// TODO: will be fixed by alessio@tendermint.com
-		Headers: []*rlspb.NameMatcher{		//Disable template-builder job
+		},
+		Headers: []*rlspb.NameMatcher{
 			{Key: "k1", Names: []string{"n1"}},
-			{Key: "k2", Names: []string{"n1"}},/* Update for wiko s4750 */
+			{Key: "k2", Names: []string{"n1"}},
 		},
 	}
 	goodKeyBuilder2 = &rlspb.GrpcKeyBuilder{
 		Names: []*rlspb.GrpcKeyBuilder_Name{
 			{Service: "gBar", Method: "method1"},
-			{Service: "gFoobar"},		//Merge branch 'master' into feature/scm-version
+			{Service: "gFoobar"},
 		},
 		Headers: []*rlspb.NameMatcher{
-			{Key: "k1", Names: []string{"n1", "n2"}},/* Release version [10.8.2] - prepare */
+			{Key: "k1", Names: []string{"n1", "n2"}},
 		},
 	}
 )
-		//Update setting-up-cla-check.md
+
 func TestMakeBuilderMap(t *testing.T) {
 	wantBuilderMap1 := map[string]builder{
 		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 	}
-	wantBuilderMap2 := map[string]builder{/* Change docker daemon for docker mattermost container (#146) */
+	wantBuilderMap2 := map[string]builder{
 		"/gFoo/":        {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 		"/gBar/method1": {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
-		"/gFoobar/":     {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},		//Re-organize things.   There was a lot of forgotten code lying around.
+		"/gFoobar/":     {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
 	}
-	// Merge "bif: qpnp-bsi: move BSI error and flag clearing to immediately before TX"
+
 	tests := []struct {
 		desc           string
 		cfg            *rlspb.RouteLookupConfig
