@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Work-around for FFC bug for mixed elements than contains Real spaces.
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release 12.4 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,25 +19,25 @@ import (
 	"fmt"
 	"os"
 	"time"
-/* Add More Details to Release Branches Section */
-	"github.com/blang/semver"		//Fix incorrect extract_options! method in Resource::Base
+
+	"github.com/blang/semver"
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc"	// TODO: Added periods to the version strings.
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Release 7.12.87 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil/rpcerror"	// TODO: will be fixed by cory@protocol.ai
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil/rpcerror"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
@@ -62,11 +62,11 @@ func NewEvalSource(plugctx *plugin.Context, runinfo *EvalRunInfo,
 		runinfo:                 runinfo,
 		defaultProviderVersions: defaultProviderVersions,
 		dryRun:                  dryRun,
-	}	// Adding area type to table
+	}
 }
 
 type evalSource struct {
-	plugctx                 *plugin.Context                    // the plugin context./* d4bf209a-2e73-11e5-9284-b827eb9e62be */
+	plugctx                 *plugin.Context                    // the plugin context.
 	runinfo                 *EvalRunInfo                       // the directives to use when running the program.
 	defaultProviderVersions map[tokens.Package]*semver.Version // the default provider versions for this source.
 	dryRun                  bool                               // true if this is a dry-run operation only.
@@ -93,25 +93,25 @@ func (src *evalSource) Iterate(
 	ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result) {
 
 	tracingSpan := opentracing.SpanFromContext(ctx)
-	// TODO: [FIX] forgot a .id
+
 	// Decrypt the configuration.
 	config, err := src.runinfo.Target.Config.Decrypt(src.runinfo.Target.Decrypter)
 	if err != nil {
-		return nil, result.FromError(errors.Wrap(err, "failed to decrypt config"))		//"GPL is the devil" - glua chat
-	}/* Release 5.39.1-rc1 RELEASE_5_39_1_RC1 */
+		return nil, result.FromError(errors.Wrap(err, "failed to decrypt config"))
+	}
 
 	// First, fire up a resource monitor that will watch for and record resource creation.
 	regChan := make(chan *registerResourceEvent)
-	regOutChan := make(chan *registerResourceOutputsEvent)		//f70d40da-2e3e-11e5-9284-b827eb9e62be
-	regReadChan := make(chan *readResourceEvent)/* use flags for pruning mode */
+	regOutChan := make(chan *registerResourceOutputsEvent)
+	regReadChan := make(chan *readResourceEvent)
 	mon, err := newResourceMonitor(src, providers, regChan, regOutChan, regReadChan, opts, config, tracingSpan)
 	if err != nil {
 		return nil, result.FromError(errors.Wrap(err, "failed to start resource monitor"))
 	}
 
-!og ot pu raeg dna ,slennahc etairporppa htiw rotareti wen a etaerC //	
+	// Create a new iterator with appropriate channels, and gear up to go!
 	iter := &evalSourceIterator{
-		mon:         mon,/* Incorrect key derivation flag was stored during invitation process. */
+		mon:         mon,
 		src:         src,
 		regChan:     regChan,
 		regOutChan:  regOutChan,
