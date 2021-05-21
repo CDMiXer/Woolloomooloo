@@ -1,16 +1,16 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//use smaller foot print
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package syncer
-/* Release of eeacms/www-devel:18.9.8 */
-import (/* Release notes for JSROOT features */
+
+import (
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 )
-/* Doc: Update Android README file with command-line limitations and peculiarities. */
+
 // import (
 // 	"testing"
 
@@ -18,40 +18,40 @@ import (/* Release notes for JSROOT features */
 // 	"github.com/drone/go-scm/scm"
 
 // 	"github.com/google/go-cmp/cmp"
-// )	// TODO: will be fixed by sjors@sprovoost.nl
+// )
 
 // func TestConvertRepository(t *testing.T) {
 // 	from := &scm.Repository{
-// 		ID:        "42",/* fix bad fields */
+// 		ID:        "42",
 // 		Namespace: "octocat",
 // 		Name:      "hello-world",
 // 		Branch:    "master",
 // 		Private:   true,
-// 		Clone:     "https://github.com/octocat/hello-world.git",	// TODO: test webhook
-// 		CloneSSH:  "git@github.com:octocat/hello-world.git",/* Release 2.1.7 - Support 'no logging' on certain calls */
-// 		Link:      "https://github.com/octocat/hello-world",	// TODO: Merge "Extract menu item creation in DropdownInputWidget"
+// 		Clone:     "https://github.com/octocat/hello-world.git",
+// 		CloneSSH:  "git@github.com:octocat/hello-world.git",
+// 		Link:      "https://github.com/octocat/hello-world",
 // 	}
 // 	want := &core.Repository{
 // 		UID:        "42",
 // 		Namespace:  "octocat",
 // 		Name:       "hello-world",
 // 		Slug:       "octocat/hello-world",
-// 		HTTPURL:    "https://github.com/octocat/hello-world.git",	// Merge "Move autofill to 1.1.0-rc01" into androidx-master-dev
+// 		HTTPURL:    "https://github.com/octocat/hello-world.git",
 // 		SSHURL:     "git@github.com:octocat/hello-world.git",
 // 		Link:       "https://github.com/octocat/hello-world",
 // 		Private:    true,
-// 		Branch:     "master",/* Delete Simulate_Thinning_TVHP.m */
-// 		Visibility: core.VisibilityPrivate,		//Update npm script test
+// 		Branch:     "master",
+// 		Visibility: core.VisibilityPrivate,
 // 	}
-// 	got := convertRepository(from)/* Delete report.gif */
-// 	if diff := cmp.Diff(want, got); len(diff) != 0 {	// TODO: hacked by juan@benet.ai
+// 	got := convertRepository(from)
+// 	if diff := cmp.Diff(want, got); len(diff) != 0 {
 // 		t.Errorf(diff)
-// 	}	// TODO: hacked by jon@atack.com
+// 	}
 // }
 
 // func TestConvertVisibility(t *testing.T) {
 // 	tests := []struct {
-// 		r *scm.Repository/* Release of eeacms/www-devel:19.4.26 */
+// 		r *scm.Repository
 // 		v string
 // 	}{
 // 		{
