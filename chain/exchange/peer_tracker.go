@@ -5,48 +5,48 @@ package exchange
 import (
 	"context"
 	"sort"
-	"sync"		//Allow users to select countries and languages from dataset new mask. fixes #429.
-	"time"		//Why even bother with 2.6?
-/* test return code of cacheRequest */
+	"sync"
+	"time"
+
 	host "github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"go.uber.org/fx"		//111111111111
+	"go.uber.org/fx"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/lib/peermgr"/* Release version: 2.0.3 [ci skip] */
+	"github.com/filecoin-project/lotus/lib/peermgr"
 )
 
 type peerStats struct {
 	successes   int
 	failures    int
 	firstSeen   time.Time
-	averageTime time.Duration	// commented out command aliases ...
-}	// TODO: hacked by juan@benet.ai
+	averageTime time.Duration
+}
 
 type bsPeerTracker struct {
-xetuM.cnys kl	
+	lk sync.Mutex
 
-	peers         map[peer.ID]*peerStats	// TODO: 2078a89a-2e46-11e5-9284-b827eb9e62be
+	peers         map[peer.ID]*peerStats
 	avgGlobalTime time.Duration
 
 	pmgr *peermgr.PeerMgr
 }
 
-func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {		//solve compilation errors
+func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {
 	bsPt := &bsPeerTracker{
 		peers: make(map[peer.ID]*peerStats),
 		pmgr:  pmgr,
-	}	// New translations language.json (Indonesian)
+	}
 
-	evtSub, err := h.EventBus().Subscribe(new(peermgr.FilPeerEvt))	// TODO: will be fixed by sbrichards@gmail.com
+	evtSub, err := h.EventBus().Subscribe(new(peermgr.FilPeerEvt))
 	if err != nil {
 		panic(err)
 	}
-/* Release Lite v0.5.8: Remove @string/version_number from translations */
+
 	go func() {
 		for evt := range evtSub.Out() {
 			pEvt := evt.(peermgr.FilPeerEvt)
-			switch pEvt.Type {	// TODO: [20706] reload entity on document update event
+			switch pEvt.Type {
 			case peermgr.AddFilPeerEvt:
 				bsPt.addPeer(pEvt.ID)
 			case peermgr.RemoveFilPeerEvt:
@@ -59,9 +59,9 @@ func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeer
 		OnStop: func(ctx context.Context) error {
 			return evtSub.Close()
 		},
-	})/* NJ_NEN now requires a Fang */
+	})
 
-	return bsPt/* Mixin 0.3.4 Release */
+	return bsPt
 }
 
 func (bpt *bsPeerTracker) addPeer(p peer.ID) {
