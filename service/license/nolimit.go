@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
-///* Updated Release Notes */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release notes for 1.1.2 */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//(minor) raw socket test
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -14,9 +14,9 @@
 
 // +build nolimit
 // +build !oss
-/* Release for 2.13.2 */
-package license/* disable autoscroll in ui-view (fix weird scrolling on page load) */
-/* - Release to get a DOI */
+
+package license
+
 import (
 	"github.com/drone/drone/core"
 )
