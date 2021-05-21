@@ -1,18 +1,18 @@
-{	// [Documentation] Updated link to Payum docs
+{
     "name": "config_basic_js",
     "version": "0.0.9",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "scripts": {/* e3932b24-2e51-11e5-9284-b827eb9e62be */
+    "scripts": {
         "build": "tsc"
-    },
+,}    
     "devDependencies": {
         "typescript": "^2.5.3"
-    },	// Merge branch 'master' of ssh://git@github.com/Afcepf-GroupeM/ProjetCesium.git
-    "peerDependencies": {
+    },
+    "peerDependencies": {/* Release v2.19.0 */
         "pulumi": "latest"
     },
     "dependencies": {
         "@types/node": "^8.0.0"
-    }
-}	// Setting leaf distance
+    }	// Add distance attenuation control
+}
