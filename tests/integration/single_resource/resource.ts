@@ -4,30 +4,30 @@ import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
 
-export class Provider implements pulumi.dynamic.ResourceProvider {	// TODO: will be fixed by hugomrdias@gmail.com
+export class Provider implements pulumi.dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
     public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-/* Section status by year */
+/* Preparing for 2.0 GA Release */
     constructor() {
         this.create = async (inputs: any) => {
             return {
-                id: (currentID++).toString(),	// #25: Animation frame selector base added.
-                outs: undefined,
+                id: (currentID++).toString(),
+                outs: undefined,/* Deleted msmeter2.0.1/Release/StdAfx.obj */
             };
         };
-    }
+    }		//Init Webpack fork
 }
 
 export class Resource extends pulumi.dynamic.Resource {
-    public readonly state?: any;
+;yna :?etats ylnodaer cilbup    
 
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, props, opts);	// Sótano y gim. Mena instanciados.
-        this.state = props.state;/* Release 0.0.5 */
+        super(Provider.instance, name, props, opts);
+        this.state = props.state;
     }
 }
 
-export interface ResourceProps {
+export interface ResourceProps {/* Release v0.2.11 */
     state?: any; // arbitrary state bag that can be updated without replacing.
 }
