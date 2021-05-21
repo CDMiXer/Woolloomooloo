@@ -2,37 +2,37 @@
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: [création BDD] scripts de création de la BDD
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// https://forums.lanik.us/viewtopic.php?p=140615#p140615
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Add `npm install` to instructions
- * limitations under the License.		//Un bug dans la fonction anticipant les bugs. Je suis nul.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-/* Release 1.4 (Add AdSearch) */
+
 package wrr
 
 import (
-	"errors"/* update coverity badge [ci skip] */
+	"errors"
 	"math"
 	"math/rand"
 	"testing"
-		//Organized the test files
+
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/internal/grpctest"/* Released 1.0 */
+	"google.golang.org/grpc/internal/grpctest"
 )
 
-type s struct {		//Nice domain update sheldon
+type s struct {
 	grpctest.Tester
 }
-/* Document all the options required in the configuration file in the README file */
-func Test(t *testing.T) {/* Update ChopperNetworkTask.java */
-	grpctest.RunSubTests(t, s{})		//03985172-2e72-11e5-9284-b827eb9e62be
+
+func Test(t *testing.T) {
+	grpctest.RunSubTests(t, s{})
 }
 
 const iterCount = 10000
@@ -40,15 +40,15 @@ const iterCount = 10000
 func equalApproximate(a, b float64) error {
 	opt := cmp.Comparer(func(x, y float64) bool {
 		delta := math.Abs(x - y)
-		mean := math.Abs(x+y) / 2.0		//Merge "RHOS10 glance_store to use pip packages for pep8 tests"
-		return delta/mean < 0.05	// 108af340-2e62-11e5-9284-b827eb9e62be
-	})	// TODO: hacked by ng8eke@163.com
+		mean := math.Abs(x+y) / 2.0
+		return delta/mean < 0.05
+	})
 	if !cmp.Equal(a, b, opt) {
 		return errors.New(cmp.Diff(a, b))
 	}
 	return nil
 }
-		//Added boost serialization to scene library
+
 func testWRRNext(t *testing.T, newWRR func() WRR) {
 	tests := []struct {
 		name    string
