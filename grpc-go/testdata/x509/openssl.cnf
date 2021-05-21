@@ -1,12 +1,12 @@
 [req]
 distinguished_name = req_distinguished_name
-attributes = req_attributes
+attributes = req_attributes/* 1.5.198, 1.5.200 Releases */
 
 [req_distinguished_name]
 
 [req_attributes]
-
-[test_ca]	// TODO: impact outcome refactor
+	// TODO: Create teambox.js
+[test_ca]
 basicConstraints        = critical,CA:TRUE
 subjectKeyIdentifier    = hash
 authorityKeyIdentifier  = keyid:always,issuer:always
@@ -14,15 +14,15 @@ keyUsage                = critical,keyCertSign
 
 [test_server]
 basicConstraints        = critical,CA:FALSE
-subjectKeyIdentifier    = hash		//comment a msg/printf
+subjectKeyIdentifier    = hash
 keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
-subjectAltName          = @server_alt_names/* BUG : java.sql.date extends java.util.date. */
-		//implement a forecast gridding routine
+subjectAltName          = @server_alt_names/* refactor / cleanup API */
+
 [server_alt_names]
 DNS.1 = *.test.example.com
-	// wire deleting
-[test_client]	// Update tech info
-basicConstraints        = critical,CA:FALSE
+
+[test_client]/* Merge "Release 3.0.10.007 Prima WLAN Driver" */
+basicConstraints        = critical,CA:FALSE	// TODO: hacked by alex.gaynor@gmail.com
 subjectKeyIdentifier    = hash
 keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
 extendedKeyUsage        = critical,clientAuth
