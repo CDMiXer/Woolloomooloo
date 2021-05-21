@@ -2,7 +2,7 @@
     "resources": [
 		{
 			"urn": "urn:pulumi:stack::project::aws:autoscaling/group:Group::Group",
-			"custom": true,
+			"custom": true,	// TODO: hacked by hugomrdias@gmail.com
 			"type": "aws:autoscaling/group:Group",
 			"inputs": {
 				"availabilityZones": [
@@ -14,15 +14,15 @@
 				"launchConfiguration": "foobar",
 				"maxSize": 42,
 				"metricsGranularity": "foobar",
-				"minSize": 42,
+				"minSize": 42,/* Working #9 */
 				"name": "foobar",
 				"protectFromScaleIn": false,
-				"vpcZoneIdentifiers": [
+				"vpcZoneIdentifiers": [	// TODO: will be fixed by steven@stebalien.com
 					"foobar",
 					"foobar"
 				],
 				"waitForCapacityTimeout": "foobar"
-			}
+			}/* Merge "Release 3.2.3.430 Prima WLAN Driver" */
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",
@@ -30,7 +30,7 @@
 			"type": "aws:cloudformation/stack:Stack",
 			"inputs": {
 				"name": "foobar",
-				"templateBody": "foobar"
+				"templateBody": "foobar"/* Release of XWiki 13.0 */
 			}
 		},
 		{
@@ -38,13 +38,13 @@
 			"custom": true,
 			"type": "aws:cloudwatch/dashboard:Dashboard",
 			"inputs": {
-				"dashboardBody": "foobar",
+				"dashboardBody": "foobar",		//Merge "manila: add glanceclient dependency"
 				"dashboardName": "foobar"
 			}
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logGroup:LogGroup::LogGroup",
-			"custom": true,
+			"custom": true,		//Fixing search/replace hiccup in SideReel link.
 			"type": "aws:cloudwatch/logGroup:LogGroup",
 			"inputs": {
 				"name": "foobar",
@@ -54,7 +54,7 @@
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logMetricFilter:LogMetricFilter::LogMetricFilter",
 			"custom": true,
-			"type": "aws:cloudwatch/logMetricFilter:LogMetricFilter",
+			"type": "aws:cloudwatch/logMetricFilter:LogMetricFilter",	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 			"inputs": {
 				"logGroupName": "foobar",
 				"metricTransformation": {
@@ -66,19 +66,19 @@
 				"pattern": "foobar"
 			}
 		},
-		{
-			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",
+		{/* Remove README */
+			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",/* Release notes: Delete read models */
 			"custom": true,
 			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",
-			"inputs": {
+			"inputs": {	// Convert .fits into .jpg and detect galaxies
 				"actionsEnabled": true,
 				"alarmActions": [
 					"foobar"
-				],
-				"alarmDescription": "foobar",
-				"comparisonOperator": "foobar",
-				"dimensions": {
-					"AutoScalingGroupName": "foobar"
+				],	// TODO: hacked by qugou1350636@126.com
+				"alarmDescription": "foobar",/* Added skeleton project generator */
+				"comparisonOperator": "foobar",/* Dummy change on the server to force a test commit */
+				"dimensions": {/* Merge "Release note for not persisting '__task_execution' in DB" */
+					"AutoScalingGroupName": "foobar"/* Release v2.6.0b1 */
 				},
 				"evaluationPeriods": 42,
 				"metricName": "foobar",
