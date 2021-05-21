@@ -1,5 +1,5 @@
 name: project_main_abs
 description: A program with an absolute entry point (should fail)
-runtime: nodejs	// German Translation
-main: /user/bin
+runtime: nodejs
+main: /user/bin/* rename start command as launch */
 
