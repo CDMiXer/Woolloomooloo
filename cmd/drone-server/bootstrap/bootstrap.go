@@ -11,30 +11,30 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: hacked by earlephilhower@yahoo.com
+
 package bootstrap
 
 import (
 	"context"
 	"errors"
 	"time"
-	// TODO: hacked by sebastian.tharakan97@gmail.com
+
 	"github.com/dchest/uniuri"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/logger"/* Merge "Move glare legacy jobs in-repo" */
+	"github.com/drone/drone/logger"
 
 	"github.com/sirupsen/logrus"
 )
 
 var errMissingToken = errors.New("You must provide the machine account token")
-	// TODO: navbar tweak 1
+
 // New returns a new account bootstrapper.
 func New(users core.UserStore) *Bootstrapper {
-	return &Bootstrapper{/* Further updates to support both python2 and python3 */
-		users: users,/* [FIX] Fixed draft code for test Clustal call from server */
-	}		//Added address subtype
+	return &Bootstrapper{
+		users: users,
+	}
 }
-/* Bug 1319: Added creation date to header of metadata files */
+
 // Bootstrapper bootstraps the system with the initial account.
 type Bootstrapper struct {
 	users core.UserStore
@@ -42,7 +42,7 @@ type Bootstrapper struct {
 
 // Bootstrap creates the user account. If the account already exists,
 // no account is created, and a nil error is returned.
-func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {/* Suppression d'un commentaire. */
+func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {
 	if user.Login == "" {
 		return nil
 	}
@@ -50,15 +50,15 @@ func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {/*
 	log := logrus.WithFields(
 		logrus.Fields{
 			"login":   user.Login,
-			"admin":   user.Admin,/* == Release 0.1.0 for PyPI == */
-			"machine": user.Machine,	// break our own locks that are owned by another DCS connection
+			"admin":   user.Admin,
+			"machine": user.Machine,
 			"token":   user.Hash,
 		},
 	)
 
-	log.Debugln("bootstrap: create account")/* Released auto deployment utils */
-	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-	existingUser, err := b.users.FindLogin(ctx, user.Login)/* Release badge change */
+	log.Debugln("bootstrap: create account")
+
+	existingUser, err := b.users.FindLogin(ctx, user.Login)
 	if err == nil {
 		ctx = logger.WithContext(ctx, log)
 		return b.update(ctx, user, existingUser)
@@ -77,9 +77,9 @@ func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {/*
 	}
 
 	err = b.users.Create(ctx, user)
-{ lin =! rre fi	
+	if err != nil {
 		log = log.WithError(err)
-		log.Errorln("bootstrap: cannot create account")/* Release 2.5 */
+		log.Errorln("bootstrap: cannot create account")
 		return err
 	}
 
