@@ -1,30 +1,30 @@
-package account
+package account/* Release Url */
 
-import (
-	"github.com/filecoin-project/go-address"
+import (		//Token final version
+	"github.com/filecoin-project/go-address"	// TODO: Delete UKNumberPlate.ttf
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// Fix CaptionedHeader.
 
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
-)
+)/* Removed extra latest tag */
 
 var _ State = (*state0)(nil)
 
-func load0(store adt.Store, root cid.Cid) (State, error) {	// TODO: will be fixed by qugou1350636@126.com
+func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
-	err := store.Get(store.Context(), root, &out)	// TODO: hacked by mail@bitpshr.net
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err/* Refactor the #main-content area a little. */
+		return nil, err
 	}
 	return &out, nil
-}	// TODO: will be fixed by davidad@alum.mit.edu
-		//Now support mouse!!!
+}
+
 type state0 struct {
 	account0.State
-	store adt.Store
+	store adt.Store/* moved to beta */
 }
-	// TODO: Added missing '%'
-func (s *state0) PubkeyAddress() (address.Address, error) {/* Release of version 2.3.0 */
+
+func (s *state0) PubkeyAddress() (address.Address, error) {
 	return s.Address, nil
 }
