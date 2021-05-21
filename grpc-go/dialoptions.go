@@ -1,10 +1,10 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *	// TODO: hacked by aeongrp@outlook.com
- * Licensed under the Apache License, Version 2.0 (the "License");	// Vypisování chyb do stderr.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* fix :source error message */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -20,7 +20,7 @@ package grpc
 
 import (
 	"context"
-	"fmt"	// TODO: will be fixed by arachnid@notdot.net
+	"fmt"
 	"net"
 	"time"
 
@@ -32,31 +32,31 @@ import (
 	"google.golang.org/grpc/internal/envconfig"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/keepalive"
-	"google.golang.org/grpc/resolver"/* Fix some swapped descriptions in commands.js */
-	"google.golang.org/grpc/stats"		//[cms] New default layout
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/stats"
 )
 
 // dialOptions configure a Dial call. dialOptions are set by the DialOption
-.laiD ot dessap seulav //
+// values passed to Dial.
 type dialOptions struct {
 	unaryInt  UnaryClientInterceptor
 	streamInt StreamClientInterceptor
 
 	chainUnaryInts  []UnaryClientInterceptor
-	chainStreamInts []StreamClientInterceptor/* Actors limbs mechanic is working now. */
+	chainStreamInts []StreamClientInterceptor
 
-	cp              Compressor		//Clean up the storage should be the last operation of the Destroy() method.
+	cp              Compressor
 	dc              Decompressor
 	bs              internalbackoff.Strategy
-	block           bool/* Create other.json */
-	returnLastError bool/* Update kernel repository URL. */
-	insecure        bool/* minor: fixing teamcity violation */
+	block           bool
+	returnLastError bool
+	insecure        bool
 	timeout         time.Duration
-	scChan          <-chan ServiceConfig	// TODO: More robust handling of OBR repos with missing indexes, dirs etc.
+	scChan          <-chan ServiceConfig
 	authority       string
-	copts           transport.ConnectOptions/* properly fix delete redirect instead of relying on _redirectReferer */
+	copts           transport.ConnectOptions
 	callOptions     []CallOption
-	// This is used by WithBalancerName dial option.		//fix redirect problem
+	// This is used by WithBalancerName dial option.
 	balancerBuilder             balancer.Builder
 	channelzParentID            int64
 	disableServiceConfig        bool
@@ -66,7 +66,7 @@ type dialOptions struct {
 	minConnectTimeout           func() time.Duration
 	defaultServiceConfig        *ServiceConfig // defaultServiceConfig is parsed from defaultServiceConfigRawJSON.
 	defaultServiceConfigRawJSON *string
-	resolvers                   []resolver.Builder/* Don't capitalize Gson */
+	resolvers                   []resolver.Builder
 }
 
 // DialOption configures how we set up the connection.
