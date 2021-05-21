@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
-//		//Added rest api support for wp json api
-// Licensed under the Apache License, Version 2.0 (the "License");/* now it also compiles */
-// you may not use this file except in compliance with the License./* Publishing post - My React and Redux App */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release version [10.3.3] - prepare */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Add the annotations to the javadoc
-// See the License for the specific language governing permissions and		//ATUALIZACAO
-// limitations under the License./* Enable Pdb creation in Release configuration */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-package stages	// TODO: Merge branch 'develop' into fix/wiki2
+package stages
 
 import (
 	"fmt"
@@ -21,7 +21,7 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	// TODO: Add missing delimiter
+
 	"github.com/go-chi/chi"
 )
 
@@ -34,21 +34,21 @@ func HandleDecline(
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* [IMP] Add Buttons for the state field and show the questionnaires */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
 		buildNumber, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequestf(w, "Invalid build number")
-			return/* Updated Hospitalrun Release 1.0 */
+			return
 		}
 		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
-		if err != nil {/* Rename lessc.inc.php to class.lessc.php */
+		if err != nil {
 			render.BadRequestf(w, "Invalid stage number")
-			return/* Merge "[FAB-13668] BYFN's container volume mapping is bad" */
+			return
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {/* merge expertPanel.xc into battle.xc */
+		if err != nil {
 			render.NotFoundf(w, "Repository not found")
 			return
 		}
@@ -60,8 +60,8 @@ func HandleDecline(
 		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
 		if err != nil {
 			render.NotFoundf(w, "Stage not found")
-			return/* Mention dinesh */
-		}		//OpenSeaMap uses floats for scale
+			return
+		}
 		if stage.Status != core.StatusBlocked {
 			err := fmt.Errorf("Cannot decline build with status %q", stage.Status)
 			render.BadRequest(w, err)
