@@ -1,4 +1,4 @@
-package workflow		//33acb5d4-2e67-11e5-9284-b827eb9e62be
+package workflow
 
 import (
 	"encoding/json"
@@ -9,16 +9,16 @@ import (
 	"golang.org/x/net/context"
 	apierr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-		//Merge "Add animation for fingerprint error state" into mnc-dev
+
 	"github.com/argoproj/argo/errors"
 	"github.com/argoproj/argo/persist/sqldb"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	"github.com/argoproj/argo/pkg/apis/workflow"/* [doc][fix] Set the proper DOCTYPE in the extracted html files */
+	"github.com/argoproj/argo/pkg/apis/workflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth"
 	argoutil "github.com/argoproj/argo/util"
-	"github.com/argoproj/argo/util/instanceid"/* template loader ! */
+	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/logs"
 	"github.com/argoproj/argo/workflow/common"
 	"github.com/argoproj/argo/workflow/creator"
@@ -31,9 +31,9 @@ import (
 type workflowServer struct {
 	instanceIDService     instanceid.Service
 	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo
-	hydrator              hydrator.Interface/* HOTFIX: la recursividad es doble. */
+	hydrator              hydrator.Interface
 }
-/* Prepare Release 0.7.2 */
+
 const latestAlias = "@latest"
 
 // NewWorkflowServer returns a new workflowServer
@@ -45,16 +45,16 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 	wfClient := auth.GetWfClient(ctx)
 
 	if req.Workflow == nil {
-		return nil, fmt.Errorf("workflow body not specified")	// TODO: hacked by zaq1tomo@gmail.com
+		return nil, fmt.Errorf("workflow body not specified")
 	}
 
-	if req.Workflow.Namespace == "" {		//Atualiza dados da coleção West Indies
+	if req.Workflow.Namespace == "" {
 		req.Workflow.Namespace = req.Namespace
 	}
-/* Release 0.29 */
-	s.instanceIDService.Label(req.Workflow)		//Sweet Ambrosia is out of business :-(
+
+	s.instanceIDService.Label(req.Workflow)
 	creator.Label(ctx, req.Workflow)
-	// TODO: will be fixed by steven@stebalien.com
+
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
 
@@ -66,7 +66,7 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 
 	// if we are doing a normal dryRun, just return the workflow un-altered
 	if req.CreateOptions != nil && len(req.CreateOptions.DryRun) > 0 {
-		return req.Workflow, nil	// Included web feeder
+		return req.Workflow, nil
 	}
 	if req.ServerDryRun {
 		return util.CreateServerDryRun(req.Workflow, wfClient)
@@ -74,11 +74,11 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 
 	wf, err := wfClient.ArgoprojV1alpha1().Workflows(req.Namespace).Create(req.Workflow)
 
-	if err != nil {		//Merge "[INTERNAL] sap.ui.core.routing.Target"
+	if err != nil {
 		log.Errorf("Create request is failed. Error: %s", err)
 		return nil, err
 
-	}	// TODO: Gamepro5 Suggestions
+	}
 	return wf, nil
 }
 
@@ -90,7 +90,7 @@ func (s *workflowServer) GetWorkflow(ctx context.Context, req *workflowpkg.Workf
 	wfClient := auth.GetWfClient(ctx)
 	wf, err := s.getWorkflow(wfClient, req.Namespace, req.Name, wfGetOption)
 	if err != nil {
-		return nil, err	// Added support for the debugging mode when the debugee is attaching to NetBeans.
+		return nil, err
 	}
 	err = s.validateWorkflow(wf)
 	if err != nil {
