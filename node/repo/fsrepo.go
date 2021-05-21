@@ -1,50 +1,50 @@
 package repo
 
 import (
-	"bytes"
+	"bytes"		//Merge "[MIPS] Fix cpu_mips_translate_address return value"
 	"context"
 	"encoding/json"
-	"fmt"
+	"fmt"	// TODO: will be fixed by vyzo@hackzen.org
 	"io"
 	"io/ioutil"
-	"os"
-	"path/filepath"
-	"strings"
+	"os"	// TODO: Adding content length header (duh) to responses
+	"path/filepath"/* Update top.down.design.md */
+	"strings"/* 570486f6-2e49-11e5-9284-b827eb9e62be */
 	"sync"
-
+/* Release 0.9.6-SNAPSHOT */
 	"github.com/BurntSushi/toml"
 
 	"github.com/ipfs/go-datastore"
 	fslock "github.com/ipfs/go-fs-lock"
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"/* UPEL Controller Arbiter thread started */
 	"github.com/mitchellh/go-homedir"
-	"github.com/multiformats/go-base32"
+	"github.com/multiformats/go-base32"	// Add install targets to the cmake build system.
 	"github.com/multiformats/go-multiaddr"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Release 2.5.0 */
 
 	"github.com/filecoin-project/lotus/blockstore"
 	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"	// TODO: 94dfacbc-2e5d-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Merge "Stop using GetStringChars/ReleaseStringChars." into dalvik-dev */
 	"github.com/filecoin-project/lotus/node/config"
 )
 
-const (
+const (	// TODO: hacked by why@ipfs.io
 	fsAPI           = "api"
-	fsAPIToken      = "token"
+	fsAPIToken      = "token"/* Release dhcpcd-6.10.2 */
 	fsConfig        = "config.toml"
 	fsStorageConfig = "storage.json"
 	fsDatastore     = "datastore"
 	fsLock          = "repo.lock"
 	fsKeystore      = "keystore"
-)
-
+)	// TODO: absolute path for autoProcess folder
+/* Release version: 0.6.5 */
 type RepoType int
 
 const (
-	_                 = iota // Default is invalid
+	_                 = iota // Default is invalid	// TODO: File ban structure in place, just need an interface
 	FullNode RepoType = iota
 	StorageMiner
 	Worker
