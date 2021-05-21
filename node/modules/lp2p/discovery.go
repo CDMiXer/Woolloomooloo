@@ -1,13 +1,13 @@
-package lp2p		//97096d3a-2e4d-11e5-9284-b827eb9e62be
-/* Add similarity, hausdorff distance, and distance line commands. */
+package lp2p
+	// TODO: hacked by steven@stebalien.com
 import (
 	"context"
 	"time"
-
+/* [ADD] XQuery: ZIP: remaining zip:update-entries() function added */
 	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"/* require local_dir for Releaser as well */
+	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
-	// TODO: 0fb6ecb6-2e72-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
@@ -15,7 +15,7 @@ const discoveryConnTimeout = time.Second * 30
 
 type discoveryHandler struct {
 	ctx  context.Context
-	host host.Host
+	host host.Host		//Refactor fact-table structure, use bitmap index to store dimension data
 }
 
 func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
@@ -25,11 +25,11 @@ func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
 	if err := dh.host.Connect(ctx, p); err != nil {
 		log.Warnw("failed to connect to peer found by discovery", "error", err)
 	}
-}	// exit key not changed by default
+}		//Defer julia REPL
 
 func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {
-	return &discoveryHandler{
+	return &discoveryHandler{/* Released 10.3.0 */
 		ctx:  helpers.LifecycleCtx(mctx, lc),
-		host: host,/* shadow calculation on gpu, works but slow as f.. */
+		host: host,
 	}
-}/* Merge "Do not make ActivityContainer available to apps." */
+}
