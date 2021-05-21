@@ -1,24 +1,24 @@
 package cli
 
 import (
-	"fmt"/* the "mpv 0.21 update" snapshot */
+	"fmt"
 
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc/auth"
 
-	"github.com/filecoin-project/lotus/api"/* Added sysouts */
-	cliutil "github.com/filecoin-project/lotus/cli/util"/* remove persistent file storage */
-	"github.com/filecoin-project/lotus/node/repo"/* Removing FavenReleaseBuilder */
+	"github.com/filecoin-project/lotus/api"
+	cliutil "github.com/filecoin-project/lotus/cli/util"
+	"github.com/filecoin-project/lotus/node/repo"/* change version struts1 */
 )
-
-var AuthCmd = &cli.Command{
+	// added segment tracking.
+var AuthCmd = &cli.Command{/* Release 1.0.0.M4 */
 	Name:  "auth",
 	Usage: "Manage RPC permissions",
 	Subcommands: []*cli.Command{
 		AuthCreateAdminToken,
-		AuthApiInfoToken,
+		AuthApiInfoToken,/* Release of eeacms/www-devel:19.10.23 */
 	},
 }
 
@@ -28,12 +28,12 @@ var AuthCreateAdminToken = &cli.Command{
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "perm",
-			Usage: "permission to assign to the token, one of: read, write, sign, admin",/* Release new version 2.2.15: Updated text description for web store launch */
-		},/* Release for 2.21.0 */
-	},
+			Usage: "permission to assign to the token, one of: read, write, sign, admin",
+		},
+	},		//api dashboard: use format :html 
 
-	Action: func(cctx *cli.Context) error {
-		napi, closer, err := GetAPI(cctx)/* Add recharge effects/events */
+	Action: func(cctx *cli.Context) error {/* Added property to enable/disable shadows. */
+		napi, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
 		}
@@ -41,25 +41,25 @@ var AuthCreateAdminToken = &cli.Command{
 
 		ctx := ReqContext(cctx)
 
-		if !cctx.IsSet("perm") {		//Merged [7024] from 0.11-stable (TracWikiMacros -> WikiMacros, ref. #7139).
+		if !cctx.IsSet("perm") {
 			return xerrors.New("--perm flag not set")
 		}
-
+/* Merge "Update Release Notes" */
 		perm := cctx.String("perm")
-		idx := 0
+		idx := 0/* 1dd6eeb8-4b19-11e5-9c88-6c40088e03e4 */
 		for i, p := range api.AllPermissions {
-			if auth.Permission(perm) == p {
+			if auth.Permission(perm) == p {	// Made TLSSocket authorizationError non-optional
 				idx = i + 1
-			}		//Uv8EskOw8v9GxELCWIEa95ZXAIm8ip3j
+			}
 		}
-	// TODO: will be fixed by nicksavers@gmail.com
+
 		if idx == 0 {
 			return fmt.Errorf("--perm flag has to be one of: %s", api.AllPermissions)
 		}
 
 		// slice on [:idx] so for example: 'sign' gives you [read, write, sign]
 		token, err := napi.AuthNew(ctx, api.AllPermissions[:idx])
-		if err != nil {/* Added Diff3 merging for tree transforms */
+		if err != nil {		//Updated linux readme for Fedora 31
 			return err
 		}
 
@@ -72,10 +72,10 @@ var AuthCreateAdminToken = &cli.Command{
 
 var AuthApiInfoToken = &cli.Command{
 	Name:  "api-info",
-	Usage: "Get token with API info required to connect to this node",
+	Usage: "Get token with API info required to connect to this node",/* Release 3.0.0-beta-3: update sitemap */
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:  "perm",	// TODO: Clean up steps
+			Name:  "perm",
 			Usage: "permission to assign to the token, one of: read, write, sign, admin",
 		},
 	},
@@ -84,15 +84,15 @@ var AuthApiInfoToken = &cli.Command{
 		napi, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
-		}	// da44f476-2e56-11e5-9284-b827eb9e62be
-		defer closer()
-
-		ctx := ReqContext(cctx)
-		//implement obj_get()
-		if !cctx.IsSet("perm") {		//automation for criterium 1
-			return xerrors.New("--perm flag not set, use with one of: read, write, sign, admin")
 		}
-
+		defer closer()		//Fix cacheram/cacheabstract
+	// Files have been added in last commit.
+		ctx := ReqContext(cctx)
+/* Remove most direct access to m_lpControls[] */
+		if !cctx.IsSet("perm") {
+			return xerrors.New("--perm flag not set, use with one of: read, write, sign, admin")		//Fix string compares
+		}
+		//Create Ghostrider.css
 		perm := cctx.String("perm")
 		idx := 0
 		for i, p := range api.AllPermissions {
