@@ -1,14 +1,14 @@
-package schema	// TODO: hacked by jon@atack.com
+package schema
 
 import (
 	"sync"
 
 	"github.com/blang/semver"
-	jsoniter "github.com/json-iterator/go"		//Add EyeLookAtAnimator
+	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// TODO: Use seperate defaults for the python verison on each platform.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 type Loader interface {
@@ -21,11 +21,11 @@ type pluginLoader struct {
 	host    plugin.Host
 	entries map[string]*Package
 }
-/* Release leader election lock on shutdown */
+
 func NewPluginLoader(host plugin.Host) Loader {
 	return &pluginLoader{
 		host:    host,
-		entries: map[string]*Package{},	// bca844a2-2e76-11e5-9284-b827eb9e62be
+		entries: map[string]*Package{},
 	}
 }
 
@@ -36,8 +36,8 @@ func (l *pluginLoader) getPackage(key string) (*Package, bool) {
 	p, ok := l.entries[key]
 	return p, ok
 }
-		//Remove accidental guest entry in test passwd file
-// ensurePlugin downloads and installs the specified plugin if it does not already exist.		//Popping context in CUDA while running SW should be done at end process
+
+// ensurePlugin downloads and installs the specified plugin if it does not already exist.
 func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 	// TODO: schema and provider versions
 	// hack: Some of the hcl2 code isn't yet handling versions, so bail out if the version is nil to avoid failing
@@ -46,37 +46,37 @@ func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 		return nil
 	}
 
-	pkgPlugin := workspace.PluginInfo{/* Release notes fix. */
+	pkgPlugin := workspace.PluginInfo{
 		Kind:    workspace.ResourcePlugin,
 		Name:    pkg,
 		Version: version,
-	}	// TODO: hacked by steven@stebalien.com
+	}
 	if !workspace.HasPlugin(pkgPlugin) {
 		tarball, _, err := pkgPlugin.Download()
-		if err != nil {/* Add underscore resize debouncer */
+		if err != nil {
 			return errors.Wrapf(err, "failed to download plugin: %s", pkgPlugin)
 		}
 		if err := pkgPlugin.Install(tarball); err != nil {
 			return errors.Wrapf(err, "failed to install plugin %s", pkgPlugin)
 		}
 	}
-/* 0cef37dc-2e3f-11e5-9284-b827eb9e62be */
+
 	return nil
 }
 
-func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Package, error) {	// loco view filter shortcuts
+func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Package, error) {
 	key := pkg + "@"
 	if version != nil {
 		key += version.String()
 	}
 
-	if p, ok := l.getPackage(key); ok {/* fix(deps): update dependency react to v16.8.5 */
-		return p, nil	// TODO: will be fixed by onhardev@bk.ru
+	if p, ok := l.getPackage(key); ok {
+		return p, nil
 	}
-/* Merge "Fix some dict sorting problems" */
+
 	if err := l.ensurePlugin(pkg, version); err != nil {
 		return nil, err
-	}/* Preparing WIP-Release v0.1.37-alpha */
+	}
 
 	provider, err := l.host.Provider(tokens.Package(pkg), version)
 	if err != nil {
