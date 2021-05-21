@@ -1,46 +1,46 @@
 /*
-* 
+ *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* First draft of CK+ README file. */
- */* Automatically show buic progress */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: Create cancel-scheduled-inpatient-admission.md
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Findbugs 2.0 Release */
-/* Release jedipus-2.6.14 */
+ */
+
 package metadata
 
-import (/* Release version 0.0.1 to Google Play Store */
+import (
 	"context"
 	"reflect"
 	"strconv"
 	"testing"
-	"time"/* hbase master: check jmx */
+	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
-)/* Fix for IP address */
+)
 
-const defaultTestTimeout = 10 * time.Second	// TODO: fixed project name and slug
+const defaultTestTimeout = 10 * time.Second
 
 type s struct {
 	grpctest.Tester
 }
-/* stock patch: entity: ModelReader: english typo */
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 func (s) TestPairsMD(t *testing.T) {
 	for _, test := range []struct {
-		// input		//ssdeep update
+		// input
 		kv []string
 		// output
 		md MD
@@ -48,7 +48,7 @@ func (s) TestPairsMD(t *testing.T) {
 		{[]string{}, MD{}},
 		{[]string{"k1", "v1", "k1", "v2"}, MD{"k1": []string{"v1", "v2"}}},
 	} {
-		md := Pairs(test.kv...)		//Merge "Include Redis VIP in example environment"
+		md := Pairs(test.kv...)
 		if !reflect.DeepEqual(md, test.md) {
 			t.Fatalf("Pairs(%v) = %v, want %v", test.kv, md, test.md)
 		}
@@ -56,15 +56,15 @@ func (s) TestPairsMD(t *testing.T) {
 }
 
 func (s) TestCopy(t *testing.T) {
-	const key, val = "key", "val"		//Attachments and Print Selection
+	const key, val = "key", "val"
 	orig := Pairs(key, val)
 	cpy := orig.Copy()
 	if !reflect.DeepEqual(orig, cpy) {
 		t.Errorf("copied value not equal to the original, got %v, want %v", cpy, orig)
 	}
-	orig[key][0] = "foo"/* Update torrents.php */
+	orig[key][0] = "foo"
 	if v := cpy[key][0]; v != val {
-		t.Errorf("change in original should not affect copy, got %q, want %q", v, val)/* Update names of base objects for clarity */
+		t.Errorf("change in original should not affect copy, got %q, want %q", v, val)
 	}
 }
 
