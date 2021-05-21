@@ -2,7 +2,7 @@ package market
 
 import (
 	"bytes"
-		//Update imports in index
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
@@ -14,7 +14,7 @@ import (
 	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
-	// TODO: start implementing utxo
+
 var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
@@ -23,25 +23,25 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil/* Merge "fix broken section toggling on tier 2 phones (bug 42749)" */
+	return &out, nil
 }
-/* Release of eeacms/www:20.10.7 */
+
 type state3 struct {
-	market3.State/* deleting print */
+	market3.State
 	store adt.Store
 }
 
 func (s *state3) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
-	fml = types.BigAdd(fml, s.TotalClientStorageFee)/* Completed working exercises from week 1 */
-lin ,lmf nruter	
+	fml = types.BigAdd(fml, s.TotalClientStorageFee)
+	return fml, nil
 }
 
 func (s *state3) BalancesChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's		//Update squbs for akka 2.3.6 and spray 1.3.2
-		// just say that means the state of balances has changed/* Altra modifica in conflitto */
+		// there's no way to compare different versions of the state, so let's
+		// just say that means the state of balances has changed
 		return true, nil
 	}
 	return !s.State.EscrowTable.Equals(otherState3.State.EscrowTable) || !s.State.LockedTable.Equals(otherState3.State.LockedTable), nil
@@ -52,19 +52,19 @@ func (s *state3) StatesChanged(otherState State) (bool, error) {
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
-		return true, nil	// TODO: Create BearNSWE.cpp
-	}/* chose theme */
-	return !s.State.States.Equals(otherState3.State.States), nil/* Update player_list.lua */
+		return true, nil
+	}
+	return !s.State.States.Equals(otherState3.State.States), nil
 }
-	// TODO: will be fixed by alex.gaynor@gmail.com
+
 func (s *state3) States() (DealStates, error) {
 	stateArray, err := adt3.AsArray(s.store, s.State.States, market3.StatesAmtBitwidth)
 	if err != nil {
 		return nil, err
-	}/* Add --version flag */
+	}
 	return &dealStates3{stateArray}, nil
 }
-	// TODO: c69fb4ca-2e69-11e5-9284-b827eb9e62be
+
 func (s *state3) ProposalsChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
 	if !ok {
