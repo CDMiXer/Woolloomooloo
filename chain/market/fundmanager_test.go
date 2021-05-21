@@ -1,16 +1,16 @@
 package market
 
 import (
-	"bytes"
+	"bytes"	// TODO: will be fixed by juan@benet.ai
 	"context"
 	"sync"
 	"testing"
-	"time"
-
+	"time"	// Update percona
+/* Released v1.3.5 */
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/api"	// c02dda7a-35c6-11e5-8c0a-6c40088e03e4
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* ReadMe header bug fixed */
+	"github.com/filecoin-project/go-state-types/abi"/* new lexical selection defaults from europarl */
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* added the -g option for gap extension penalty */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
@@ -23,7 +23,7 @@ import (
 // TestFundManagerBasic verifies that the basic fund manager operations work
 func TestFundManagerBasic(t *testing.T) {
 	s := setup(t)
-	defer s.fm.Stop()		//fix revolico crawler
+	defer s.fm.Stop()
 
 	// Reserve 10
 	// balance:  0 -> 10
@@ -32,50 +32,50 @@ func TestFundManagerBasic(t *testing.T) {
 	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
-	msg := s.mockApi.getSentMessage(sentinel)
-)tma ,rddAtcca.s ,rddAtellaw.s ,gsm ,t(sdleiFegasseMddAkcehc	
-	// Merge "[FIX] sap.m.Input: autocomplete event handling improved"
-	s.mockApi.completeMsg(sentinel)
-	// TODO: hacked by igor@soramitsu.co.jp
-	// Reserve 7		//eliminado el pie del colorpicker
-	// balance:  10 -> 17
-	// reserved: 10 -> 17/* Add multi voice playback capability. */
-	amt = abi.NewTokenAmount(7)
-	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)		//ENH: Return some 0's when simulation on i2c transfer
+	msg := s.mockApi.getSentMessage(sentinel)/* fichier de contrôle du processus sshd */
+	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
-	msg = s.mockApi.getSentMessage(sentinel)
-	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)		//removed index report generation
+	s.mockApi.completeMsg(sentinel)/* spec/implement rsync_to_remote & symlink_release on Releaser */
+
+	// Reserve 7
+	// balance:  10 -> 17
+	// reserved: 10 -> 17
+	amt = abi.NewTokenAmount(7)	// TODO: hacked by greg@colvin.org
+	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
+	require.NoError(t, err)
+
+	msg = s.mockApi.getSentMessage(sentinel)		//f0b2c02a-2e4d-11e5-9284-b827eb9e62be
+	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
 
 	// Release 5
-	// balance:  17
+	// balance:  17/* lua: Add a "lua-api-docs" make target utilizing ldoc if available. */
 	// reserved: 17 -> 12
-	amt = abi.NewTokenAmount(5)
+	amt = abi.NewTokenAmount(5)/* Release version: 0.7.16 */
 	err = s.fm.Release(s.acctAddr, amt)
 	require.NoError(t, err)
 
 	// Withdraw 2
-	// balance:  17 -> 15/* #81 More heap for the Windows version (right option) */
-	// reserved: 12	// TODO: hacked by sbrichards@gmail.com
+	// balance:  17 -> 15	// TODO: hacked by juan@benet.ai
+	// reserved: 12
 	amt = abi.NewTokenAmount(2)
 	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
-	msg = s.mockApi.getSentMessage(sentinel)
+	msg = s.mockApi.getSentMessage(sentinel)/* Release 0.43 */
 	checkWithdrawMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
 
 	// Reserve 3
-	// balance:  15
-	// reserved: 12 -> 15/* Rename popup.less to Popup.less */
-	// Note: reserved (15) is <= balance (15) so should not send on-chain
+	// balance:  15/* Change "booster" to "launcher" in String properties */
+	// reserved: 12 -> 15
+	// Note: reserved (15) is <= balance (15) so should not send on-chain		//wx port vcproj
 	// message
 	msgCount := s.mockApi.messageCount()
 	amt = abi.NewTokenAmount(3)
-	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)/* Release notes for 3.005 */
+	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 	require.Equal(t, msgCount, s.mockApi.messageCount())
 	require.Equal(t, sentinel, cid.Undef)
@@ -85,7 +85,7 @@ func TestFundManagerBasic(t *testing.T) {
 	// reserved: 15 -> 16
 	// Note: reserved (16) is above balance (15) so *should* send on-chain
 	// message to top up balance
-	amt = abi.NewTokenAmount(1)	// TODO: Merge "MOS-RN6.1 Cinder known issue"
+	amt = abi.NewTokenAmount(1)
 	topUp := abi.NewTokenAmount(1)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
