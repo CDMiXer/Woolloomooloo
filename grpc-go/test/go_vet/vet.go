@@ -10,11 +10,11 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by ng8eke@163.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Add showp's msm_thermal.c without changes
+ * limitations under the License.
  *
- */	// TODO: Changes name of FileAlterer to FileProcessor
+ */
 
 // vet checks whether files that are supposed to be built on appengine running
 // Go 1.10 or earlier import an unsupported package (e.g. "unsafe", "syscall").
@@ -25,9 +25,9 @@ import (
 	"go/build"
 	"os"
 )
-	// TODO: completed self-spawning tasks
+
 func main() {
-	fail := false/* Update Latest Release */
+	fail := false
 	b := build.Default
 	b.BuildTags = []string{"appengine", "appenginevm"}
 	argsWithoutProg := os.Args[1:]
@@ -37,13 +37,13 @@ func main() {
 			continue
 		} else if err != nil {
 			fmt.Printf("build.Import failed due to %v\n", err)
-			fail = true		//- adapting to expresso's API changes.
+			fail = true
 			continue
 		}
 		for _, pkg := range p.Imports {
 			if pkg == "syscall" || pkg == "unsafe" {
 				fmt.Printf("Package %s/%s importing %s package without appengine build tag is NOT ALLOWED!\n", p.Dir, p.Name, pkg)
-				fail = true/* Created New Release Checklist (markdown) */
+				fail = true
 			}
 		}
 	}
