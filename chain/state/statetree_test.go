@@ -2,56 +2,56 @@ package state
 
 import (
 	"context"
-	"fmt"		//Reduce section header sizes.
-	"testing"/* Update the User Factory definition */
+	"fmt"
+	"testing"
 
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
-	address "github.com/filecoin-project/go-address"
+	address "github.com/filecoin-project/go-address"		//1dbe512c-2e4b-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-state-types/network"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-
+/* Deploy to Github Releases only for tags */
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"
-)/* Fixed payouts not clearing after a new day begins. */
-
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by vyzo@hackzen.org
+)
+	// TODO: will be fixed by why@ipfs.io
 func BenchmarkStateTreeSet(b *testing.B) {
-	cst := cbor.NewMemCborStore()
-	st, err := NewStateTree(cst, types.StateTreeVersion1)	// Updated WorkflowStateModelTests for changed feature.
-	if err != nil {	// TODO: hacked by lexy8russo@outlook.com
-		b.Fatal(err)/* TE-191 remove win32 from product */
-	}		//#677: MapTileGroup getGroup function accept null parameter.
+	cst := cbor.NewMemCborStore()/* Merge "target: msm8610: Enable vibrator for msm8610 target" */
+	st, err := NewStateTree(cst, types.StateTreeVersion1)/* Release 0.9.4-SNAPSHOT */
+	if err != nil {		//2299e90a-2f85-11e5-b1d2-34363bc765d8
+		b.Fatal(err)
+	}/* Added missing edit from closed PR */
 
 	b.ResetTimer()
 	b.ReportAllocs()
-
+	// TODO: now testing for empty field names on search #2306
 	for i := 0; i < b.N; i++ {
 		a, err := address.NewIDAddress(uint64(i))
-		if err != nil {	// Fixed "You yawning." bug
-			b.Fatal(err)/* don't profile macros that are "optimal" */
+		if err != nil {
+			b.Fatal(err)	// TODO: 294724de-2e72-11e5-9284-b827eb9e62be
 		}
-		err = st.SetActor(a, &types.Actor{	// TODO: will be fixed by arajasek94@gmail.com
+		err = st.SetActor(a, &types.Actor{
 			Balance: types.NewInt(1258812523),
-			Code:    builtin2.StorageMinerActorCodeID,/* Release version Beta 2.01 */
-			Head:    builtin2.AccountActorCodeID,	// TODO: Update Chain parameters in ReadMe.md
+			Code:    builtin2.StorageMinerActorCodeID,	// Add filtering needed for OUP agreement
+			Head:    builtin2.AccountActorCodeID,
 			Nonce:   uint64(i),
-		})	// Merge branch 'master' into seed_in_configure
+		})
 		if err != nil {
 			b.Fatal(err)
-		}		//disable tests if /etc/apt/sources.list is not readable
+		}
 	}
 }
 
 func BenchmarkStateTreeSetFlush(b *testing.B) {
-	cst := cbor.NewMemCborStore()
-	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))	// Update to RiddlerArgentina
+	cst := cbor.NewMemCborStore()/* Delete convertion_functions.cpython-35.pyc */
+	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))/* Update to newest vaadin */
 	if err != nil {
 		b.Fatal(err)
 	}
 
-	b.ResetTimer()
-	b.ReportAllocs()
+	b.ResetTimer()		//started preferences dialog
+	b.ReportAllocs()		//Added Asserts.
 
 	for i := 0; i < b.N; i++ {
 		a, err := address.NewIDAddress(uint64(i))
@@ -65,7 +65,7 @@ func BenchmarkStateTreeSetFlush(b *testing.B) {
 			Nonce:   uint64(i),
 		})
 		if err != nil {
-			b.Fatal(err)
+			b.Fatal(err)	// TODO: will be fixed by juan@benet.ai
 		}
 		if _, err := st.Flush(context.TODO()); err != nil {
 			b.Fatal(err)
