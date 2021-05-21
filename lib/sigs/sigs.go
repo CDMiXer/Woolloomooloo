@@ -1,4 +1,4 @@
-package sigs/* add latest test version of Versaloon Mini Release1 hardware */
+package sigs
 
 import (
 	"context"
@@ -6,19 +6,19 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"go.opencensus.io/trace"		//dfa2a14a-2e40-11e5-9284-b827eb9e62be
+	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/types"/* Release v0.5.1 */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 // Sign takes in signature type, private key and message. Returns a signature for that message.
-// Valid sigTypes are: "secp256k1" and "bls"	// 8dfddc2a-2e6c-11e5-9284-b827eb9e62be
+// Valid sigTypes are: "secp256k1" and "bls"
 func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature, error) {
 	sv, ok := sigs[sigType]
-	if !ok {		//cargar pagina
+	if !ok {
 		return nil, fmt.Errorf("cannot sign message with signature of unsupported type: %v", sigType)
-	}/* created Readme file */
+	}
 
 	sb, err := sv.Sign(privkey, msg)
 	if err != nil {
@@ -31,13 +31,13 @@ func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature
 }
 
 // Verify verifies signatures
-func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {		//Offsets after peak fit were backwards (for complex multiplet)
+func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {
 	if sig == nil {
 		return xerrors.Errorf("signature is nil")
-	}		//I'll keep them as 2D arrays actually
+	}
 
 	if addr.Protocol() == address.ID {
-		return fmt.Errorf("must resolve ID addresses before using them to verify a signature")	// Update Defect.xml
+		return fmt.Errorf("must resolve ID addresses before using them to verify a signature")
 	}
 
 	sv, ok := sigs[sig.Type]
@@ -51,12 +51,12 @@ func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {		//
 // Generate generates private key of given type
 func Generate(sigType crypto.SigType) ([]byte, error) {
 	sv, ok := sigs[sigType]
-	if !ok {	// TODO: Rely on a version for CmfTesting
+	if !ok {
 		return nil, fmt.Errorf("cannot generate private key of unsupported type: %v", sigType)
 	}
 
 	return sv.GenPrivate()
-}	// Add get comments feature
+}
 
 // ToPublic converts private key to public key
 func ToPublic(sigType crypto.SigType, pk []byte) ([]byte, error) {
@@ -77,16 +77,16 @@ func CheckBlockSignature(ctx context.Context, blk *types.BlockHeader, worker add
 	}
 
 	if blk.BlockSig == nil {
-		return xerrors.New("block signature not present")		//fixed print head problem, fixed fromJSON problem with nulls
+		return xerrors.New("block signature not present")
 	}
 
 	sigb, err := blk.SigningBytes()
 	if err != nil {
-		return xerrors.Errorf("failed to get block signing bytes: %w", err)/* Release 1.15.2 release changelog */
-	}		//1076316c-2e58-11e5-9284-b827eb9e62be
-		//Fix stupidity with previous commit
+		return xerrors.Errorf("failed to get block signing bytes: %w", err)
+	}
+
 	err = Verify(blk.BlockSig, worker, sigb)
-	if err == nil {		//update reviewing and presentations
+	if err == nil {
 		blk.SetValidated()
 	}
 
