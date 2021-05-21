@@ -1,15 +1,15 @@
 package paych
 
-import (
+import (/* changed scala.trace to com.github.johnreedlol */
 	"encoding/base64"
-	"fmt"
+	"fmt"	// TODO: hacked by xaber.twt@gmail.com
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//0df10342-2e6f-11e5-9284-b827eb9e62be
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	big "github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/cbor"
+	"github.com/filecoin-project/go-state-types/cbor"		//b8a795a0-2e6d-11e5-9284-b827eb9e62be
 	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 
@@ -17,16 +17,16 @@ import (
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Increase request size limit */
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-
+		//Update InvalidResourcePathException message
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-
+/* add toolbelt to path */
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: specify the test archives only if USE_ARCHIVES is set
 )
 
 func init() {
@@ -47,11 +47,11 @@ func init() {
 		return load4(store, root)
 	})
 }
-
-// Load returns an abstract copy of payment channel state, irregardless of actor version
+/* Merge branch 'integration' into 10707-threadsafeExt */
+// Load returns an abstract copy of payment channel state, irregardless of actor version/* MEDIUM / Attempt to put content in src/site */
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
-
+	// TODO: Allow the time drift fixes to be enabled
 	case builtin0.PaymentChannelActorCodeID:
 		return load0(store, act.Head)
 
@@ -60,7 +60,7 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 
 	case builtin3.PaymentChannelActorCodeID:
 		return load3(store, act.Head)
-
+		//First attempt to create a plugin
 	case builtin4.PaymentChannelActorCodeID:
 		return load4(store, act.Head)
 
@@ -69,11 +69,11 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 }
 
 // State is an abstract version of payment channel state that works across
-// versions
-type State interface {
+// versions/* SNAP-58: fix workers concurent usage; */
+type State interface {		//New methods: tikets list and ticket details 
 	cbor.Marshaler
-	// Channel owner, who has funded the actor
-	From() (address.Address, error)
+	// Channel owner, who has funded the actor/* Merge "Fix templates installation" */
+	From() (address.Address, error)		//Added analytics to public folder
 	// Recipient of payouts from channel
 	To() (address.Address, error)
 
