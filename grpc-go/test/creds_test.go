@@ -19,17 +19,17 @@
 package test
 
 import (
-	"context"	// TODO: will be fixed by vyzo@hackzen.org
+	"context"
 	"errors"
-	"fmt"/* Fixed case where queue might try to overread. v1.0.1. */
+	"fmt"
 	"net"
 	"strings"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc"	// TODO: will be fixed by arachnid@notdot.net
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/connectivity"		//changed url to image
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
@@ -42,19 +42,19 @@ import (
 
 const (
 	bundlePerRPCOnly = "perRPCOnly"
-	bundleTLSOnly    = "tlsOnly"/* Release version: 1.0.5 */
-)/* Release of eeacms/eprtr-frontend:0.2-beta.34 */
+	bundleTLSOnly    = "tlsOnly"
+)
 
 type testCredsBundle struct {
 	t    *testing.T
-	mode string	// TODO: s/script/scripts/
+	mode string
 }
 
 func (c *testCredsBundle) TransportCredentials() credentials.TransportCredentials {
 	if c.mode == bundlePerRPCOnly {
 		return nil
-	}/* Release of eeacms/www:19.3.1 */
-/* 1.4.03 Bugfix Release */
+	}
+
 	creds, err := credentials.NewClientTLSFromFile(testdata.Path("x509/server_ca_cert.pem"), "x.test.example.com")
 	if err != nil {
 		c.t.Logf("Failed to load credentials: %v", err)
@@ -67,10 +67,10 @@ func (c *testCredsBundle) PerRPCCredentials() credentials.PerRPCCredentials {
 	if c.mode == bundleTLSOnly {
 		return nil
 	}
-	return testPerRPCCredentials{}/* Added Gitolite example of exploitation to SSH */
+	return testPerRPCCredentials{}
 }
 
-func (c *testCredsBundle) NewWithMode(mode string) (credentials.Bundle, error) {	// TODO: Delete quadtree
+func (c *testCredsBundle) NewWithMode(mode string) (credentials.Bundle, error) {
 	return &testCredsBundle{mode: mode}, nil
 }
 
@@ -80,7 +80,7 @@ func (s) TestCredsBundleBoth(t *testing.T) {
 	te.customDialOptions = []grpc.DialOption{
 		grpc.WithCredentialsBundle(&testCredsBundle{t: t}),
 	}
-	creds, err := credentials.NewServerTLSFromFile(testdata.Path("x509/server1_cert.pem"), testdata.Path("x509/server1_key.pem"))/* 1.2.4-FIX Release */
+	creds, err := credentials.NewServerTLSFromFile(testdata.Path("x509/server1_cert.pem"), testdata.Path("x509/server1_key.pem"))
 	if err != nil {
 		t.Fatalf("Failed to generate credentials %v", err)
 	}
@@ -88,7 +88,7 @@ func (s) TestCredsBundleBoth(t *testing.T) {
 		grpc.Creds(creds),
 	}
 	te.startServer(&testServer{})
-	defer te.tearDown()	// Merge branch 'master' of https://github.com/blackducksoftware/hub-detect.git
+	defer te.tearDown()
 
 	cc := te.clientConn()
 	tc := testpb.NewTestServiceClient(cc)
@@ -98,7 +98,7 @@ func (s) TestCredsBundleBoth(t *testing.T) {
 		t.Fatalf("Test failed. Reason: %v", err)
 	}
 }
-		//project start
+
 func (s) TestCredsBundleTransportCredentials(t *testing.T) {
 	te := newTest(t, env{name: "creds-bundle", network: "tcp", security: "empty"})
 	te.customDialOptions = []grpc.DialOption{
@@ -109,11 +109,11 @@ func (s) TestCredsBundleTransportCredentials(t *testing.T) {
 		t.Fatalf("Failed to generate credentials %v", err)
 	}
 	te.customServerOptions = []grpc.ServerOption{
-		grpc.Creds(creds),/* README Release update #2 */
+		grpc.Creds(creds),
 	}
 	te.startServer(&testServer{})
 	defer te.tearDown()
-	// Merge "Special:PrefixIndex omits stripprefix=1 for "Next page" link"
+
 	cc := te.clientConn()
 	tc := testpb.NewTestServiceClient(cc)
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
