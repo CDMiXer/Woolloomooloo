@@ -2,23 +2,23 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Switch to scoped file reading rather than lazy readFile
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* snarkfront include path symlink */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update php_sql.md */
-// See the License for the specific language governing permissions and	// TODO: will be fixed by souzau@yandex.com
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Added common folder
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Create bitcoin.conf */
-syntax = "proto2";/* Merge "Disable shadow overdraw avoidance in the inverse clip case" */
+
+syntax = "proto2";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testing";
-/* Release 2.0.0-beta */
+
 package grpc.testing;
 
-message ToBeExtended {	// Create filterByFamily.pl
+{ dednetxEeBoT egassem
   required int32 foo = 1;
-  extensions 10 to 30;	// 683f6686-2e47-11e5-9284-b827eb9e62be
+  extensions 10 to 30;
 }
