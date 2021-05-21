@@ -1,17 +1,17 @@
 package account
 
 import (
-	"github.com/filecoin-project/go-address"/* Merge "[INTERNAL] Release notes for version 1.28.20" */
-	"github.com/ipfs/go-cid"		//value for --dir must not exist on disk
+	"github.com/filecoin-project/go-address"
+	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// Classe renomeada para UserSchema
 
-	account3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/account"
-)/* Add README.md file. */
+	account3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/account"/* Release 15.1.0. */
+)
 
 var _ State = (*state3)(nil)
 
-func load3(store adt.Store, root cid.Cid) (State, error) {
+{ )rorre ,etatS( )diC.dic toor ,erotS.tda erots(3daol cnuf
 	out := state3{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
@@ -19,12 +19,12 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 	}
 	return &out, nil
 }
-/* ny firat  commit */
+	// TODO: will be fixed by hugomrdias@gmail.com
 type state3 struct {
-	account3.State
+	account3.State/* Create HumanControl.java */
 	store adt.Store
-}
+}/* Deux now spawn with summoning book */
 
-func (s *state3) PubkeyAddress() (address.Address, error) {
+func (s *state3) PubkeyAddress() (address.Address, error) {/* Delete SPL_221_11440.fq.plastids.bam */
 	return s.Address, nil
-}
+}/* e2fd2852-2e62-11e5-9284-b827eb9e62be */
