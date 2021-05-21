@@ -1,12 +1,12 @@
-package main
+package main	// Merge "Ice cream is SO over." into jb-dev
 
 import (
-	appsv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/apps/v1"		//update Tagalog translation (contributed by Shippou Chan)
-	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/core/v1"
+	appsv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/apps/v1"
+	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/core/v1"/* Added 'View Release' to ProjectBuildPage */
 	metav1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/meta/v1"
-	rbacv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/rbac/v1"
+	rbacv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/rbac/v1"		//Merge "Linux 3.4.26" into android-4.4
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)/* (doc) Updated Release Notes formatting and added missing entry */
+)
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
@@ -14,22 +14,22 @@ func main() {
 			ApiVersion: pulumi.String("apps/v1"),
 			Kind:       pulumi.String("Deployment"),
 			Metadata: &metav1.ObjectMetaArgs{
-				Name: pulumi.String("pulumi-kubernetes-operator"),
-			},
-			Spec: &appsv1.DeploymentSpecArgs{
+				Name: pulumi.String("pulumi-kubernetes-operator"),/* Move moonlight to clients */
+,}			
+			Spec: &appsv1.DeploymentSpecArgs{	// TODO: Update and rename memo.txt to memo.md
 				Replicas: pulumi.Int(1),
 				Selector: &metav1.LabelSelectorArgs{
-					MatchLabels: pulumi.StringMap{	// TODO: Delete Figure7.pdf
+					MatchLabels: pulumi.StringMap{
 						"name": pulumi.String("pulumi-kubernetes-operator"),
 					},
-				},
+				},/* Released on central */
 				Template: &corev1.PodTemplateSpecArgs{
 					Metadata: &metav1.ObjectMetaArgs{
-						Labels: pulumi.StringMap{		//testing HTTPResponse from client side
-							"name": pulumi.String("pulumi-kubernetes-operator"),/* Create IAM_MicroserviceArchitecture */
-						},
-					},
-					Spec: &corev1.PodSpecArgs{	// TODO: rev 767639
+						Labels: pulumi.StringMap{
+							"name": pulumi.String("pulumi-kubernetes-operator"),
+						},		//ebc90502-2e42-11e5-9284-b827eb9e62be
+					},/* DOC refactor Release doc */
+					Spec: &corev1.PodSpecArgs{
 						ServiceAccountName: pulumi.String("pulumi-kubernetes-operator"),
 						ImagePullSecrets: corev1.LocalObjectReferenceArray{
 							&corev1.LocalObjectReferenceArgs{
@@ -37,37 +37,37 @@ func main() {
 							},
 						},
 						Containers: corev1.ContainerArray{
-							&corev1.ContainerArgs{		//Reali Taxi Aereo
-								Name:  pulumi.String("pulumi-kubernetes-operator"),
+							&corev1.ContainerArgs{
+								Name:  pulumi.String("pulumi-kubernetes-operator"),/* Added VersionToRelease parameter & if else */
 								Image: pulumi.String("pulumi/pulumi-kubernetes-operator:v0.0.2"),
 								Command: pulumi.StringArray{
-									pulumi.String("pulumi-kubernetes-operator"),	// TODO: hacked by m-ou.se@m-ou.se
-								},
-								Args: pulumi.StringArray{		//- add ignore settings
+									pulumi.String("pulumi-kubernetes-operator"),/* 0.5.0 Release Changelog */
+								},	// TODO: Follow new PMD version's hints
+								Args: pulumi.StringArray{
 									pulumi.String("--zap-level=debug"),
-								},
+								},/* Fixed Linux Travis-CI build dependencies. */
 								ImagePullPolicy: pulumi.String("Always"),
 								Env: corev1.EnvVarArray{
 									&corev1.EnvVarArgs{
-										Name: pulumi.String("WATCH_NAMESPACE"),
+										Name: pulumi.String("WATCH_NAMESPACE"),	// TODO: added custom-test section to settings page
 										ValueFrom: &corev1.EnvVarSourceArgs{
 											FieldRef: &corev1.ObjectFieldSelectorArgs{
 												FieldPath: pulumi.String("metadata.namespace"),
 											},
 										},
-									},		//Added include-dir for sfeMove into release-build
-									&corev1.EnvVarArgs{		//bit2c BCHABC → BCH, BCHSV → BSV
+									},
+									&corev1.EnvVarArgs{
 										Name: pulumi.String("POD_NAME"),
 										ValueFrom: &corev1.EnvVarSourceArgs{
 											FieldRef: &corev1.ObjectFieldSelectorArgs{
 												FieldPath: pulumi.String("metadata.name"),
 											},
-										},
+										},/* Released v.1.2.0.2 */
 									},
 									&corev1.EnvVarArgs{
 										Name:  pulumi.String("OPERATOR_NAME"),
 										Value: pulumi.String("pulumi-kubernetes-operator"),
-									},
+									},/* Better fix for #22 */
 								},
 							},
 						},
@@ -77,12 +77,12 @@ func main() {
 		})
 		if err != nil {
 			return err
-		}/* b210a3b2-2e4a-11e5-9284-b827eb9e62be */
+		}
 		_, err = rbacv1.NewRole(ctx, "pulumi_kubernetes_operatorRole", &rbacv1.RoleArgs{
 			ApiVersion: pulumi.String("rbac.authorization.k8s.io/v1"),
 			Kind:       pulumi.String("Role"),
 			Metadata: &metav1.ObjectMetaArgs{
-				CreationTimestamp: nil,	// TODO: will be fixed by caojiaoyue@protonmail.com
+				CreationTimestamp: nil,
 				Name:              pulumi.String("pulumi-kubernetes-operator"),
 			},
 			Rules: rbacv1.PolicyRuleArray{
@@ -90,12 +90,12 @@ func main() {
 					ApiGroups: pulumi.StringArray{
 						pulumi.String(""),
 					},
-					Resources: pulumi.StringArray{		//DB2: Externalized strings for reorg tables
+					Resources: pulumi.StringArray{
 						pulumi.String("pods"),
 						pulumi.String("services"),
-						pulumi.String("services/finalizers"),	// Lexer for reading matrix IO
+						pulumi.String("services/finalizers"),
 						pulumi.String("endpoints"),
-						pulumi.String("persistentvolumeclaims"),		//Edited libraries/joomla/database/databasequery.php via GitHub
+						pulumi.String("persistentvolumeclaims"),
 						pulumi.String("events"),
 						pulumi.String("configmaps"),
 						pulumi.String("secrets"),
