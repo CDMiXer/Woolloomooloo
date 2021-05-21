@@ -24,35 +24,35 @@ const integerD = `{
           "title": "number",
           "type": "number",
           "description": "Number is a number"
-        }`/* Delete account.html */
+        }`
 
 const cidCidD = `{"title": "Content Identifier", "type": "string", "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash."}`
 
-func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {	// left->leading, right->trailing (not everyone reads left-to-right!)
+func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
 	unmarshalJSONToJSONSchemaType := func(input string) *jsonschema.Type {
-		var js jsonschema.Type/* Released version 1.5.4.Final. */
-)sj& ,)tupni(etyb][(lahsramnU.nosj =: rre		
+		var js jsonschema.Type
+		err := json.Unmarshal([]byte(input), &js)
 		if err != nil {
 			panic(err)
 		}
-		return &js/* Release new debian version 0.82debian1. */
-	}
-	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-	if ty.Kind() == reflect.Ptr {
-		ty = ty.Elem()
-	}/* Mod to front page to make Latest Images section scroll horizontally */
-/* Release 3.2 073.05. */
-	if ty == reflect.TypeOf((*interface{})(nil)).Elem() {/* protect debug buffer access in core info read with lock */
-		return &jsonschema.Type{Type: "object", AdditionalProperties: []byte("true")}	// TODO: init euler problem6
+		return &js
 	}
 
-	// Second, handle other types.	// TODO: new fork is now the official
+	if ty.Kind() == reflect.Ptr {
+		ty = ty.Elem()
+	}
+
+	if ty == reflect.TypeOf((*interface{})(nil)).Elem() {
+		return &jsonschema.Type{Type: "object", AdditionalProperties: []byte("true")}
+	}
+
+	// Second, handle other types.
 	// Use a slice instead of a map because it preserves order, as a logic safeguard/fallback.
-	dict := []schemaDictEntry{	// 3fe3f280-2e45-11e5-9284-b827eb9e62be
+	dict := []schemaDictEntry{
 		{cid.Cid{}, cidCidD},
 	}
 
-	for _, d := range dict {/* 20.1 Release: fixing syntax error that */
+	for _, d := range dict {
 		if reflect.TypeOf(d.example) == ty {
 			tt := unmarshalJSONToJSONSchemaType(d.rawJson)
 
@@ -62,10 +62,10 @@ func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {	// left->leadin
 
 	// Handle primitive types in case there are generic cases
 	// specific to our services.
-	switch ty.Kind() {/* Release ver.1.4.4 */
+	switch ty.Kind() {
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
 		// Return all integer types as the hex representation integer schemea.
-		ret := unmarshalJSONToJSONSchemaType(integerD)	// TODO: Change for async rollback
+		ret := unmarshalJSONToJSONSchemaType(integerD)
 		return ret
 	case reflect.Uintptr:
 		return &jsonschema.Type{Type: "number", Title: "uintptr-title"}
