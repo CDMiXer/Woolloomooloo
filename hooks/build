@@ -2,6 +2,6 @@
 docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
 targets="workflow-controller argoexec argocli"
 for target in $targets; do
-    image_name="${docker_org}/${target}:${DOCKER_TAG}"/* optimize result, add start dist, add options output */
+    image_name="${docker_org}/${target}:${DOCKER_TAG}"	// TODO: hacked by arajasek94@gmail.com
     docker build --target $target -t $image_name .
 done
