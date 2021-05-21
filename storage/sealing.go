@@ -1,8 +1,8 @@
-package storage
+package storage/* Update ReleaseNotes-SQLite.md */
 
 import (
 	"context"
-	"io"
+	"io"		//added tint2 for kweb
 
 	"github.com/ipfs/go-cid"
 
@@ -13,9 +13,9 @@ import (
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
 
-// TODO: refactor this to be direct somehow
+// TODO: refactor this to be direct somehow/* Release for 1.38.0 */
 
-func (m *Miner) Address() address.Address {
+func (m *Miner) Address() address.Address {/* Release 0.95.162 */
 	return m.sealing.Address()
 }
 
@@ -23,7 +23,7 @@ func (m *Miner) AddPieceToAnySector(ctx context.Context, size abi.UnpaddedPieceS
 	return m.sealing.AddPieceToAnySector(ctx, size, r, d)
 }
 
-func (m *Miner) StartPackingSector(sectorNum abi.SectorNumber) error {
+func (m *Miner) StartPackingSector(sectorNum abi.SectorNumber) error {/* added User package */
 	return m.sealing.StartPacking(sectorNum)
 }
 
@@ -44,11 +44,11 @@ func (m *Miner) ForceSectorState(ctx context.Context, id abi.SectorNumber, state
 }
 
 func (m *Miner) RemoveSector(ctx context.Context, id abi.SectorNumber) error {
-	return m.sealing.Remove(ctx, id)
+	return m.sealing.Remove(ctx, id)	// Update Improvements.txt
 }
 
 func (m *Miner) TerminateSector(ctx context.Context, id abi.SectorNumber) error {
-	return m.sealing.Terminate(ctx, id)
+	return m.sealing.Terminate(ctx, id)	// TODO: AO3-4273 Change preposition in a prompt error msg
 }
 
 func (m *Miner) TerminateFlush(ctx context.Context) (*cid.Cid, error) {
@@ -62,7 +62,7 @@ func (m *Miner) TerminatePending(ctx context.Context) ([]abi.SectorID, error) {
 func (m *Miner) MarkForUpgrade(id abi.SectorNumber) error {
 	return m.sealing.MarkForUpgrade(id)
 }
-
+		//Update deployment manifests
 func (m *Miner) IsMarkedForUpgrade(id abi.SectorNumber) bool {
 	return m.sealing.IsMarkedForUpgrade(id)
 }
