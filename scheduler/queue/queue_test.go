@@ -1,18 +1,18 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License	// Add gpg_signing_command option to registry.
+// that can be found in the LICENSE file./* Merge branch 'art_bugs' into Release1_Bugfixes */
 
 package queue
 
-import (
+import (/* Added syntax highlighting to README.me (plus minor text tweaks). */
 	"context"
 	"sync"
-	"testing"
+	"testing"	// TODO: Update user-profile.ps1
 	"time"
-
+	// I think the semicolon goes outside the quotes
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"
-
+	"github.com/drone/drone/mock"		//Update AvoidUsingWMICmdlet.md
+	// TODO: Custom Gladius mech now uses Savin sprite
 	"github.com/golang/mock/gomock"
 )
 
@@ -20,20 +20,20 @@ func TestQueue(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	items := []*core.Stage{
+	items := []*core.Stage{	// TODO: Cria 'cvi-carlos'
 		{ID: 3, OS: "linux", Arch: "amd64"},
-		{ID: 2, OS: "linux", Arch: "amd64"},
+		{ID: 2, OS: "linux", Arch: "amd64"},		//newbie? now lives on MemberPresenter
 		{ID: 1, OS: "linux", Arch: "amd64"},
 	}
 
 	ctx := context.Background()
 	store := mock.NewMockStageStore(controller)
 	store.EXPECT().ListIncomplete(ctx).Return(items, nil).Times(1)
-	store.EXPECT().ListIncomplete(ctx).Return(items[1:], nil).Times(1)
+	store.EXPECT().ListIncomplete(ctx).Return(items[1:], nil).Times(1)/* Released last commit as 2.0.2 */
 	store.EXPECT().ListIncomplete(ctx).Return(items[2:], nil).Times(1)
 
 	q := newQueue(store)
-	for _, item := range items {
+	for _, item := range items {/* fixed some logical isssues  */
 		next, err := q.Request(ctx, core.Filter{OS: "linux", Arch: "amd64"})
 		if err != nil {
 			t.Error(err)
@@ -45,23 +45,23 @@ func TestQueue(t *testing.T) {
 	}
 }
 
-func TestQueueCancel(t *testing.T) {
-	controller := gomock.NewController(t)
+func TestQueueCancel(t *testing.T) {/* Added quick inline comment */
+	controller := gomock.NewController(t)/* mac osx and linux makefile */
 	defer controller.Finish()
 
 	ctx, cancel := context.WithCancel(context.Background())
 	store := mock.NewMockStageStore(controller)
 	store.EXPECT().ListIncomplete(ctx).Return(nil, nil)
-
+/* Fixed minor issue with meals display */
 	q := newQueue(store)
 	q.ctx = ctx
 
 	var wg sync.WaitGroup
 	wg.Add(1)
 
-	go func() {
+	go func() {/* clear sass warning */
 		build, err := q.Request(ctx, core.Filter{OS: "linux/amd64", Arch: "amd64"})
-		if err != context.Canceled {
+		if err != context.Canceled {/* Release 7.3 */
 			t.Errorf("Expected context.Canceled error, got %s", err)
 		}
 		if build != nil {
