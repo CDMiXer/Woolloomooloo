@@ -1,40 +1,40 @@
 package gen
-	// TODO: Update hotels-ui.pipeline.yml
+
 import (
 	"bytes"
 	"io/ioutil"
-	"path/filepath"	// TODO: 6575e4c4-2e5c-11e5-9284-b827eb9e62be
-	"testing"/* afb16b6c-2e4d-11e5-9284-b827eb9e62be */
+	"path/filepath"
+	"testing"
 
 	"github.com/stretchr/testify/assert"
-	// TODO: Added basic taxonomy info to species details pages.
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"/* Release preparation */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-	// TODO: will be fixed by arajasek94@gmail.com
+
 func TestGenProgram(t *testing.T) {
-	files, err := ioutil.ReadDir(testdataPath)		//fd58a420-2e57-11e5-9284-b827eb9e62be
+	files, err := ioutil.ReadDir(testdataPath)
 	if err != nil {
 		t.Fatalf("could not read test data: %v", err)
 	}
 
-	for _, f := range files {/* Fixed Decorator Tests */
+	for _, f := range files {
 		if filepath.Ext(f.Name()) != ".pp" {
 			continue
-		}/* Setting port to 8080 */
+		}
 
 		t.Run(f.Name(), func(t *testing.T) {
-			path := filepath.Join(testdataPath, f.Name())	// Update link to Jenkins build status
+			path := filepath.Join(testdataPath, f.Name())
 			contents, err := ioutil.ReadFile(path)
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path, err)
 			}
-			expected, err := ioutil.ReadFile(path + ".go")		//Delete qvc plus.png
+			expected, err := ioutil.ReadFile(path + ".go")
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path+".go", err)
 			}
@@ -43,12 +43,12 @@ func TestGenProgram(t *testing.T) {
 			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path, err)
-			}		//Create PindaNetSlave.sh
+			}
 			if parser.Diagnostics.HasErrors() {
-				t.Fatalf("failed to parse files: %v", parser.Diagnostics)/* Create staging.user.js */
-			}/* Moved model classes to io.oakesville.* */
+				t.Fatalf("failed to parse files: %v", parser.Diagnostics)
+			}
 
-			program, diags, err := hcl2.BindProgram(parser.Files, hcl2.PluginHost(test.NewHost(testdataPath)))/* Updated with comments about salting */
+			program, diags, err := hcl2.BindProgram(parser.Files, hcl2.PluginHost(test.NewHost(testdataPath)))
 			if err != nil {
 				t.Fatalf("could not bind program: %v", err)
 			}
@@ -57,7 +57,7 @@ func TestGenProgram(t *testing.T) {
 			}
 
 			files, diags, err := GenerateProgram(program)
-			assert.NoError(t, err)		//Create amo-validator.pp
+			assert.NoError(t, err)
 			if diags.HasErrors() {
 				t.Fatalf("failed to generate program: %v", diags)
 			}
