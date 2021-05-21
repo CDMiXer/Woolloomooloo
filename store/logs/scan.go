@@ -1,6 +1,6 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.	// TODO: hacked by hugomrdias@gmail.com
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Update Orchard-1-9.Release-Notes.markdown */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
