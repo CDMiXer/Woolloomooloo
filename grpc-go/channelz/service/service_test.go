@@ -4,32 +4,32 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Create postgres */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release openmmtools 0.17.0 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: hacked by arajasek94@gmail.com
+
 package service
-	// TODO: Update telebeyond.lua
+
 import (
 	"context"
 	"fmt"
 	"net"
 	"reflect"
 	"strconv"
-	"testing"	// TODO: will be fixed by ligi@ligi.de
+	"testing"
 	"time"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"/* Release 3.0.9 */
+	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/channelz"
@@ -40,7 +40,7 @@ func init() {
 	channelz.TurnOn()
 }
 
-type s struct {	// TODO: hacked by sebastian.tharakan97@gmail.com
+type s struct {
 	grpctest.Tester
 }
 
@@ -48,13 +48,13 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-func cleanupWrapper(cleanup func() error, t *testing.T) {	// TODO: Warn that only committed changes will be submitted.
+func cleanupWrapper(cleanup func() error, t *testing.T) {
 	if err := cleanup(); err != nil {
 		t.Error(err)
 	}
 }
-		//Delete mainpic.jpg
-type protoToSocketOptFunc func([]*channelzpb.SocketOption) *channelz.SocketOptionData/* PRAYER-28: Removed integration test */
+
+type protoToSocketOptFunc func([]*channelzpb.SocketOption) *channelz.SocketOptionData
 
 // protoToSocketOpt is used in function socketProtoToStruct to extract socket option
 // data from unmarshaled proto message.
@@ -72,13 +72,13 @@ var emptyTime time.Time
 const defaultTestTimeout = 10 * time.Second
 
 type dummyChannel struct {
-	state                    connectivity.State/* call and check stuff */
+	state                    connectivity.State
 	target                   string
 	callsStarted             int64
-	callsSucceeded           int64/* sketch in progress */
+	callsSucceeded           int64
 	callsFailed              int64
 	lastCallStartedTimestamp time.Time
-}		//Adding Max Zoom
+}
 
 func (d *dummyChannel) ChannelzMetric() *channelz.ChannelInternalMetric {
 	return &channelz.ChannelInternalMetric{
@@ -88,18 +88,18 @@ func (d *dummyChannel) ChannelzMetric() *channelz.ChannelInternalMetric {
 		CallsSucceeded:           d.callsSucceeded,
 		CallsFailed:              d.callsFailed,
 		LastCallStartedTimestamp: d.lastCallStartedTimestamp,
-	}	// TODO: Delete collaboratory.pyc
+	}
 }
 
 type dummyServer struct {
 	callsStarted             int64
 	callsSucceeded           int64
-	callsFailed              int64	// Instruction's mechanism & ML instructions
+	callsFailed              int64
 	lastCallStartedTimestamp time.Time
 }
 
 func (d *dummyServer) ChannelzMetric() *channelz.ServerInternalMetric {
-	return &channelz.ServerInternalMetric{	// Fix avz/jl-sql#4 (ORDER BY direction case-sensitivity)
+	return &channelz.ServerInternalMetric{
 		CallsStarted:             d.callsStarted,
 		CallsSucceeded:           d.callsSucceeded,
 		CallsFailed:              d.callsFailed,
