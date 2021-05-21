@@ -1,74 +1,74 @@
-<!DOCTYPE html>/* Release of eeacms/forests-frontend:1.8.8 */
+<!DOCTYPE html>
 <html lang="en">
-<head>
-<title>Chat Example</title>
-<script type="text/javascript">
+<head>		//Changes reject fix
+<title>Chat Example</title>	// TODO: will be fixed by martin2cai@hotmail.com
+<script type="text/javascript">/* Guest and package CRUD */
 window.onload = function () {
     var conn;
     var msg = document.getElementById("msg");
-    var log = document.getElementById("log");	// removing reference from azureclitask.ts
+    var log = document.getElementById("log");
 
     function appendLog(item) {
-        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
-        log.appendChild(item);/* Merge "[Release] Webkit2-efl-123997_0.11.38" into tizen_2.1 */
+        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;/* Updated Travis status badge after repo renaming */
+        log.appendChild(item);	// TODO: MansOS IDE, fix uploading problem - running make .. upload in wrong dir.
         if (doScroll) {
             log.scrollTop = log.scrollHeight - log.clientHeight;
-        }	// f912428e-2e72-11e5-9284-b827eb9e62be
+        }
     }
 
     document.getElementById("form").onsubmit = function () {
-        if (!conn) {		//Provide AbstractService#getDomainId
+        if (!conn) {
             return false;
-        }
+        }		//removed a println....
         if (!msg.value) {
             return false;
         }
         conn.send(msg.value);
-        msg.value = "";
-        return false;/* Merge "Fix member creation when retrieving network" */
+        msg.value = "";	// TODO: will be fixed by arajasek94@gmail.com
+        return false;
     };
-
-    if (window["WebSocket"]) {	// TODO: Bugfix for exception in printing filename.
+/* Release 2.4.1. */
+    if (window["WebSocket"]) {/* Merge "Release notes for newton RC2" */
         conn = new WebSocket("ws://" + document.location.host + "/ws");
         conn.onclose = function (evt) {
             var item = document.createElement("div");
             item.innerHTML = "<b>Connection closed.</b>";
-            appendLog(item);
+            appendLog(item);/* Updating to chronicle-queue-enterprise 2.17.53 */
         };
-        conn.onmessage = function (evt) {/* Released v0.1.2 ^^ */
+        conn.onmessage = function (evt) {/* - Released version 1.0.6 */
             var messages = evt.data.split('\n');
-            for (var i = 0; i < messages.length; i++) {/* add borders and create menu */
+            for (var i = 0; i < messages.length; i++) {
                 var item = document.createElement("div");
-                item.innerText = messages[i];/* Provided Proper Memory Releases in Comments Controller. */
-                appendLog(item);
+                item.innerText = messages[i];
+                appendLog(item);		//workingtree_implementations: make usage of symlinks optional
             }
-        };/* Remove tests for deleted LockableFiles methods */
-    } else {
-        var item = document.createElement("div");
-        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
+        };
+    } else {/* We're apparently using node-style callbacks for discovery now. */
+        var item = document.createElement("div");/* first Release */
+        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";		//updates for lucene-sa v1.0.0
         appendLog(item);
     }
 };
 </script>
 <style type="text/css">
-html {
-    overflow: hidden;/* not a real message */
+html {	// TODO: f193e2e0-2e65-11e5-9284-b827eb9e62be
+    overflow: hidden;
 }
-	// TODO: will be fixed by davidad@alum.mit.edu
+
 body {
     overflow: hidden;
     padding: 0;
     margin: 0;
     width: 100%;
-    height: 100%;/* Unchaining WIP-Release v0.1.40-alpha */
+    height: 100%;
     background: gray;
 }
 
-#log {/* utils.c: new function utils_get_image_with_etat () */
+#log {
     background: white;
     margin: 0;
     padding: 0.5em 0.5em 0.5em 0.5em;
-    position: absolute;		//switch trackdriver support
+    position: absolute;
     top: 0.5em;
     left: 0.5em;
     right: 0.5em;
