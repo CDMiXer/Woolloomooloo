@@ -1,14 +1,14 @@
 [metadata]
-name = "ping-pong-local"
-author = "yusef"		//Add some examples to test logo image processing
+name = "ping-pong-local"	// 7a0fab1e-2e42-11e5-9284-b827eb9e62be
+author = "yusef"
 
 [global]
 plan = "network"
 case = "ping-pong"
 total_instances = 2
-builder = "docker:go"
+builder = "docker:go"/* chore: add security policy */
 runner = "local:docker"
 
 [[groups]]
-id = "nodes"/* add geber files and drill files for MiniRelease1 and ProRelease2 hardwares */
+id = "nodes"
 instances = { count = 2 }
