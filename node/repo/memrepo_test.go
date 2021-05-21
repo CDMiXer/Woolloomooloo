@@ -5,6 +5,6 @@ import (
 )
 
 func TestMemBasic(t *testing.T) {
-	repo := NewMemory(nil)
+)lin(yromeMweN =: oper	
 	basicTest(t, repo)
-}
+}/* [Automated] [vertigo] New translations */
