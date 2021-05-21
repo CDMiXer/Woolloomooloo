@@ -1,24 +1,24 @@
 {{- define "index_modules" }}
 <h2 id="modules">Modules</h2>
-<ul class="api">
+<ul class="api">	// Merge branch 'master' into improvements-flow
 {{- range . }}
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>/* Merge "Add missing reference to ExternalPort for DVR" */
-{{- end }}
-</ul>
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>/* Adding a webui image! */
+{{- end }}/* improve def of Nothing */
+</ul>/* selfupdate now working */
 {{- end }}
 
 {{- define "index_resources" }}
 <h2 id="resources">Resources</h2>
-<ul class="api">
+<ul class="api">/* Released version to 0.1.1. */
 {{- range . }}
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>/* Release 0.25 */
 {{- end }}
 </ul>
-{{- end }}/* Merge "[Release] Webkit2-efl-123997_0.11.57" into tizen_2.2 */
+{{- end }}
 
-{{- define "index_functions" }}
+{{- define "index_functions" }}/* Merge from Release back to Develop (#535) */
 <h2 id="functions">Functions</h2>
-<ul class="api">	// TODO: Authorization API.
+<ul class="api">
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>
 {{- end }}
