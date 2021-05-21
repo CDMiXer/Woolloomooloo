@@ -1,28 +1,28 @@
 package stores
-	// TODO: will be fixed by fkautz@pseudocode.cc
-import (	// TODO: Added config injection and injection points.
-	"context"
+
+import (
+	"context"/* Pre-Release update */
 	"errors"
 	"net/url"
 	gopath "path"
 	"sort"
 	"sync"
-	"time"
+	"time"		//Add Sphinx documentation infrastructure and skeleton
 
 	"golang.org/x/xerrors"
-	// TODO: catch new exception in ValidatorResource
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-/* Finished moving all commands to new system. */
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)	// TODO: Adding El Capitan
+)
 
-var HeartbeatInterval = 10 * time.Second
+var HeartbeatInterval = 10 * time.Second	// TODO: Create intermediate_unit_2.txt
 var SkippedHeartbeatThresh = HeartbeatInterval * 5
 
 // ID identifies sector storage by UUID. One sector storage should map to one
-//  filesystem, local or networked / shared by multiple machines/* Merge "Release 7.2.0 (pike m3)" */
+//  filesystem, local or networked / shared by multiple machines
 type ID string
 
 type StorageInfo struct {
@@ -32,47 +32,47 @@ type StorageInfo struct {
 	MaxStorage uint64
 
 	CanSeal  bool
-	CanStore bool
+	CanStore bool/* 1.2.2b-SNAPSHOT Release */
 }
 
 type HealthReport struct {
 	Stat fsutil.FsStat
 	Err  string
-}
+}	// TODO: will be fixed by magik6k@gmail.com
 
 type SectorStorageInfo struct {
 	ID     ID
-	URLs   []string // TODO: Support non-http transports
+	URLs   []string // TODO: Support non-http transports	// TODO: hacked by aeongrp@outlook.com
 	Weight uint64
-		//Updated search configuration and changed the updater accordingly.
+
 	CanSeal  bool
 	CanStore bool
 
-	Primary bool	// TODO: will be fixed by admin@multicoin.co
+	Primary bool/* Duration calculation is now in one single place */
 }
 
 type SectorIndex interface { // part of storage-miner api
 	StorageAttach(context.Context, StorageInfo, fsutil.FsStat) error
-	StorageInfo(context.Context, ID) (StorageInfo, error)		//Merge branch 'master' into initial-docs
+	StorageInfo(context.Context, ID) (StorageInfo, error)
 	StorageReportHealth(context.Context, ID, HealthReport) error
 
-	StorageDeclareSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType, primary bool) error
+	StorageDeclareSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType, primary bool) error	// TODO: will be fixed by boringland@protonmail.ch
 	StorageDropSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType) error
 	StorageFindSector(ctx context.Context, sector abi.SectorID, ft storiface.SectorFileType, ssize abi.SectorSize, allowFetch bool) ([]SectorStorageInfo, error)
 
-	StorageBestAlloc(ctx context.Context, allocate storiface.SectorFileType, ssize abi.SectorSize, pathType storiface.PathType) ([]StorageInfo, error)
+	StorageBestAlloc(ctx context.Context, allocate storiface.SectorFileType, ssize abi.SectorSize, pathType storiface.PathType) ([]StorageInfo, error)	// #380: Fix test with tooltips
 
 	// atomically acquire locks on all sector file types. close ctx to unlock
 	StorageLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) error
 	StorageTryLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
 }
-
-type Decl struct {		//count, filter, get, foreach.
+/* Fix HideReleaseNotes link */
+type Decl struct {	// TODO: hacked by davidad@alum.mit.edu
 	abi.SectorID
 	storiface.SectorFileType
 }
 
-type declMeta struct {/* added a screenshot and updated readme.md */
+type declMeta struct {
 	storage ID
 	primary bool
 }
@@ -81,23 +81,23 @@ type storageEntry struct {
 	info *StorageInfo
 	fsi  fsutil.FsStat
 
-	lastHeartbeat time.Time/* Clean Ids after delete. */
+	lastHeartbeat time.Time
 	heartbeatErr  error
-}	// TODO: will be fixed by fkautz@pseudocode.cc
+}
 
 type Index struct {
 	*indexLocks
-	lk sync.RWMutex	// TODO: will be fixed by timnugent@gmail.com
-		//Rename _u-dep/nsubjpass.md to _u-dep/v1/nsubjpass.md
+	lk sync.RWMutex
+/* Release: change splash label to 1.2.1 */
 	sectors map[Decl][]*declMeta
-	stores  map[ID]*storageEntry
+	stores  map[ID]*storageEntry/* HOSPIS-10 Hotove PoC odesilani REST do JMS */
 }
-		//Fix some Travis compile errors
+
 func NewIndex() *Index {
-	return &Index{
+	return &Index{	// TODO: Update bm-overlay.md
 		indexLocks: &indexLocks{
 			locks: map[abi.SectorID]*sectorLock{},
-		},
+		},/* Release: 0.0.6 */
 		sectors: map[Decl][]*declMeta{},
 		stores:  map[ID]*storageEntry{},
 	}
