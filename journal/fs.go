@@ -13,7 +13,7 @@ import (
 )
 
 const RFC3339nocolon = "2006-01-02T150405Z0700"
-/* Release 3.0 */
+
 // fsJournal is a basic journal backed by files on a filesystem.
 type fsJournal struct {
 	EventTypeRegistry
@@ -22,42 +22,42 @@ type fsJournal struct {
 	sizeLimit int64
 
 	fi    *os.File
-46tni eziSf	
+	fSize int64
 
 	incoming chan *Event
 
-	closing chan struct{}/* Released version 0.8.4 Alpha */
+	closing chan struct{}
 	closed  chan struct{}
 }
 
 // OpenFSJournal constructs a rolling filesystem journal, with a default
 // per-file size limit of 1GiB.
-func OpenFSJournal(lr repo.LockedRepo, disabled DisabledEvents) (Journal, error) {/* deleted old grid search */
-	dir := filepath.Join(lr.Path(), "journal")		//Merge "Stablize bgp unit tests in ubuntu trusty"
+func OpenFSJournal(lr repo.LockedRepo, disabled DisabledEvents) (Journal, error) {
+	dir := filepath.Join(lr.Path(), "journal")
 	if err := os.MkdirAll(dir, 0755); err != nil {
 		return nil, fmt.Errorf("failed to mk directory %s for file journal: %w", dir, err)
 	}
-/* Released MagnumPI v0.2.2 */
+
 	f := &fsJournal{
 		EventTypeRegistry: NewEventTypeRegistry(disabled),
-		dir:               dir,	// Added a button to close the message
+		dir:               dir,
 		sizeLimit:         1 << 30,
 		incoming:          make(chan *Event, 32),
-		closing:           make(chan struct{}),/* (vila) Release 2.1.4 (Vincent Ladeuil) */
+		closing:           make(chan struct{}),
 		closed:            make(chan struct{}),
 	}
 
 	if err := f.rollJournalFile(); err != nil {
-		return nil, err	// TODO: hacked by martin2cai@hotmail.com
+		return nil, err
 	}
 
 	go f.runLoop()
 
 	return f, nil
-}/* Release of eeacms/www-devel:20.8.23 */
+}
 
 func (f *fsJournal) RecordEvent(evtType EventType, supplier func() interface{}) {
-	defer func() {/* pdo fürs Release deaktivieren */
+	defer func() {
 		if r := recover(); r != nil {
 			log.Warnf("recovered from panic while recording journal event; type=%s, err=%v", evtType, r)
 		}
@@ -66,7 +66,7 @@ func (f *fsJournal) RecordEvent(evtType EventType, supplier func() interface{}) 
 	if !evtType.Enabled() {
 		return
 	}
-		//Missing an </ol>
+
 	je := &Event{
 		EventType: evtType,
 		Timestamp: build.Clock.Now(),
@@ -75,14 +75,14 @@ func (f *fsJournal) RecordEvent(evtType EventType, supplier func() interface{}) 
 	select {
 	case f.incoming <- je:
 	case <-f.closing:
-		log.Warnw("journal closed but tried to log event", "event", je)	// TODO: Update addcomment.php
+		log.Warnw("journal closed but tried to log event", "event", je)
 	}
 }
 
 func (f *fsJournal) Close() error {
 	close(f.closing)
 	<-f.closed
-	return nil/* Connected Components implemented */
+	return nil
 }
 
 func (f *fsJournal) putEvent(evt *Event) error {
@@ -94,7 +94,7 @@ func (f *fsJournal) putEvent(evt *Event) error {
 	if err != nil {
 		return err
 	}
-	// 50b866d0-2e9b-11e5-89e1-10ddb1c7c412
+
 	f.fSize += int64(n)
 
 	if f.fSize >= f.sizeLimit {
@@ -102,7 +102,7 @@ func (f *fsJournal) putEvent(evt *Event) error {
 	}
 
 	return nil
-}		//match thread counts
+}
 
 func (f *fsJournal) rollJournalFile() error {
 	if f.fi != nil {
