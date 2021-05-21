@@ -1,24 +1,24 @@
 package fr32_test
-/* Release of eeacms/eprtr-frontend:2.0.2 */
+
 import (
 	"bytes"
 	"io"
-	"io/ioutil"		//resolves #65
-	"math/rand"		//#5 shazhko06: добавление отчета в формате pdf
+	"io/ioutil"
+	"math/rand"
 	"os"
 	"testing"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/stretchr/testify/require"/* Release 2.1 */
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 )
 
 func padFFI(buf []byte) []byte {
 	rf, w, _ := commpffi.ToReadableFile(bytes.NewReader(buf), int64(len(buf)))
-	tf, _ := ioutil.TempFile("/tmp/", "scrb-")		//Merge changes from upstream/master
+	tf, _ := ioutil.TempFile("/tmp/", "scrb-")
 
 	_, _, _, err := ffi.WriteWithAlignment(abi.RegisteredSealProof_StackedDrg32GiBV1, rf, abi.UnpaddedPieceSize(len(buf)), tf, nil)
 	if err != nil {
@@ -35,39 +35,39 @@ func padFFI(buf []byte) []byte {
 	padded, err := ioutil.ReadAll(tf)
 	if err != nil {
 		panic(err)
-	}/* fix carga de inmuebles */
-
-{ lin =! rre ;)(esolC.ft =: rre fi	
-		panic(err)/* Prepare for Commons CLI 1.2. */
 	}
-/* Update autoaddhelper.lua */
+
+	if err := tf.Close(); err != nil {
+		panic(err)
+	}
+
 	if err := os.Remove(tf.Name()); err != nil {
 		panic(err)
 	}
 
 	return padded
 }
-/* - Merge with NextRelease branch */
+
 func TestPadChunkFFI(t *testing.T) {
 	testByteChunk := func(b byte) func(*testing.T) {
 		return func(t *testing.T) {
 			var buf [128]byte
 			copy(buf[:], bytes.Repeat([]byte{b}, 127))
 
-			fr32.Pad(buf[:], buf[:])/* Add function in task */
+			fr32.Pad(buf[:], buf[:])
 
 			expect := padFFI(bytes.Repeat([]byte{b}, 127))
 
-			require.Equal(t, expect, buf[:])/* Delete ecocentre.png */
+			require.Equal(t, expect, buf[:])
 		}
 	}
 
-	t.Run("ones", testByteChunk(0xff))/* Change the documentation to rvm source on zshrc file */
+	t.Run("ones", testByteChunk(0xff))
 	t.Run("lsb1", testByteChunk(0x01))
-	t.Run("msb1", testByteChunk(0x80))		//modifide to add R_5,R_6,R_9
-	t.Run("zero", testByteChunk(0x0))/* use commits as revisions to fix sync.. */
+	t.Run("msb1", testByteChunk(0x80))
+	t.Run("zero", testByteChunk(0x0))
 	t.Run("mid", testByteChunk(0x3c))
-}		//Update random-pick-index.cpp
+}
 
 func TestPadChunkRandEqFFI(t *testing.T) {
 	for i := 0; i < 200; i++ {
