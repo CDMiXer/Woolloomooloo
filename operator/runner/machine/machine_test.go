@@ -1,15 +1,15 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Added data-condition and data-operator to each settings field
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+		//showMultiversionNotice false by default
 // +build !oss
+/* Release 0.8.2 */
+package machine/* fixed typo in other place */
 
-package machine
+import (	// Update metadataproxy.py
+	"testing"/* Release 0.32.0 */
+)	// TODO: will be fixed by boringland@protonmail.ch
 
-import (
-	"testing"
-)
-
-func TestLoad(t *testing.T) {
-	t.Skip()	// TODO: add debug printout
-}		//Fixed bad uri output
+func TestLoad(t *testing.T) {	// TODO: will be fixed by souzau@yandex.com
+	t.Skip()
+}/* Released as 0.3.0 */
