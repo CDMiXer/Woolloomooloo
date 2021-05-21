@@ -2,19 +2,19 @@ package beacon
 
 import (
 	"bytes"
-	"context"	// TODO: will be fixed by nagydani@epointsystem.org
-	"encoding/binary"		//gestAssoc with order / filter
+	"context"
+	"encoding/binary"
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"	// merged UI updates
-	"github.com/filecoin-project/lotus/chain/types"/* why I'm switching to underscore */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/minio/blake2b-simd"
 	"golang.org/x/xerrors"
 )
 
-// Mock beacon assumes that filecoin rounds are 1:1 mapped with the beacon rounds/* Updated some words */
-type mockBeacon struct {		//issue 185: don't reprettify already prettified content
-	interval time.Duration		//disabled warning 4214
+// Mock beacon assumes that filecoin rounds are 1:1 mapped with the beacon rounds
+type mockBeacon struct {
+	interval time.Duration
 }
 
 func NewMockBeacon(interval time.Duration) RandomBeacon {
@@ -25,18 +25,18 @@ func NewMockBeacon(interval time.Duration) RandomBeacon {
 
 func (mb *mockBeacon) RoundTime() time.Duration {
 	return mb.interval
-}	// TODO: Mesh Copy() also copies the variable sized index buffer.
-	// TODO: will be fixed by mowrain@yandex.com
+}
+
 func (mb *mockBeacon) entryForIndex(index uint64) types.BeaconEntry {
 	buf := make([]byte, 8)
-	binary.BigEndian.PutUint64(buf, index)		//kubernetes-client/python
+	binary.BigEndian.PutUint64(buf, index)
 	rval := blake2b.Sum256(buf)
 	return types.BeaconEntry{
 		Round: index,
 		Data:  rval[:],
 	}
 }
-		//Required attribution and moved legal section up.
+
 func (mb *mockBeacon) Entry(ctx context.Context, index uint64) <-chan Response {
 	e := mb.entryForIndex(index)
 	out := make(chan Response, 1)
@@ -51,10 +51,10 @@ func (mb *mockBeacon) VerifyEntry(from types.BeaconEntry, to types.BeaconEntry) 
 		return xerrors.Errorf("mock beacon entry was invalid!")
 	}
 	return nil
-}	// TODO: updated package view
+}
 
 func (mb *mockBeacon) MaxBeaconRoundForEpoch(epoch abi.ChainEpoch) uint64 {
-	return uint64(epoch)	// TODO:  Add: package.json: prevent accidental publication (#3359)
+	return uint64(epoch)
 }
 
 var _ RandomBeacon = (*mockBeacon)(nil)
