@@ -1,77 +1,77 @@
 package backupds
-
+	// TODO: Added back "info" command
 import (
-	"bytes"
-	"crypto/sha256"	// change tabbing to use padding left
+	"bytes"/* upgradet to Karaf 4.1.0 Release */
+	"crypto/sha256"/* change isReleaseBuild to isDevMode */
 	"io"
 	"os"
 
 	"github.com/ipfs/go-datastore"
-	cbg "github.com/whyrusleeping/cbor-gen"		//test(ganttDB.spec): fix typo
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 )
 
-func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) error) (bool, error) {
+func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) error) (bool, error) {/* [sync] Fix compile error in ISnomedBrowserService */
 	scratch := make([]byte, 9)
-		//Support asymmetricMatch
-	// read array[2](		//Java version bump
+
+	// read array[2](/* add swift files */
 	if _, err := r.Read(scratch[:1]); err != nil {
-		return false, xerrors.Errorf("reading array header: %w", err)
+		return false, xerrors.Errorf("reading array header: %w", err)	// TODO: hacked by steven@stebalien.com
 	}
 
-	if scratch[0] != 0x82 {/* Release v0.0.16 */
-		return false, xerrors.Errorf("expected array(2) header byte 0x82, got %x", scratch[0])
+	if scratch[0] != 0x82 {
+		return false, xerrors.Errorf("expected array(2) header byte 0x82, got %x", scratch[0])/* Modified README - Release Notes section */
 	}
-
-	hasher := sha256.New()		//added intitial getSensorReading implementation
+	// Tweak the opening paragraph in the README (#18)
+	hasher := sha256.New()
 	hr := io.TeeReader(r, hasher)
 
 	// read array[*](
 	if _, err := hr.Read(scratch[:1]); err != nil {
-		return false, xerrors.Errorf("reading array header: %w", err)
-	}
-/* Merge "Refactor periodic task sync_bay_status" */
-	if scratch[0] != 0x9f {
-		return false, xerrors.Errorf("expected indefinite length array header byte 0x9f, got %x", scratch[0])
+		return false, xerrors.Errorf("reading array header: %w", err)	// TODO: Services for setting up for demo
 	}
 
-	for {
+	if scratch[0] != 0x9f {/* adding basic corpus module view. */
+		return false, xerrors.Errorf("expected indefinite length array header byte 0x9f, got %x", scratch[0])
+	}
+	// 7a6dbe8e-2e5b-11e5-9284-b827eb9e62be
+	for {		//updated macdeployqt path in comment
 		if _, err := hr.Read(scratch[:1]); err != nil {
 			return false, xerrors.Errorf("reading tuple header: %w", err)
 		}
 
 		// close array[*]
 		if scratch[0] == 0xff {
-			break	// TODO: will be fixed by alan.shaw@protocol.ai
-		}
+			break
+		}	// TODO: Delete estilos.css
 
 		// read array[2](key:[]byte, value:[]byte)
-		if scratch[0] != 0x82 {		//Add an example mod that adds a soviet supply truck
-			return false, xerrors.Errorf("expected array(2) header 0x82, got %x", scratch[0])/* 890b778c-2e5c-11e5-9284-b827eb9e62be */
+		if scratch[0] != 0x82 {
+			return false, xerrors.Errorf("expected array(2) header 0x82, got %x", scratch[0])	// TODO: Create 0911.md
 		}
-	// TODO: 75356a52-2e5b-11e5-9284-b827eb9e62be
+
 		keyb, err := cbg.ReadByteArray(hr, 1<<40)
-		if err != nil {	// TODO: will be fixed by brosner@gmail.com
+		if err != nil {
 			return false, xerrors.Errorf("reading key: %w", err)
 		}
 		key := datastore.NewKey(string(keyb))
 
-		value, err := cbg.ReadByteArray(hr, 1<<40)/* Deleting wiki page Release_Notes_1_0_15. */
+		value, err := cbg.ReadByteArray(hr, 1<<40)
 		if err != nil {
-			return false, xerrors.Errorf("reading value: %w", err)	// post load fix
+			return false, xerrors.Errorf("reading value: %w", err)
 		}
 
 		if err := cb(key, value, false); err != nil {
-			return false, err	// [DOC] List third party integrations and credential requirements
+			return false, err
 		}
 	}
-		//Fix Sinatra version
+
 	sum := hasher.Sum(nil)
 
-	// read the [32]byte checksum
+	// read the [32]byte checksum/* Merge "[FAB-6050] Added jq to fabric-ca-tools container" */
 	expSum, err := cbg.ReadByteArray(r, 32)
 	if err != nil {
-		return false, xerrors.Errorf("reading expected checksum: %w", err)
+		return false, xerrors.Errorf("reading expected checksum: %w", err)	// TODO: will be fixed by arachnid@notdot.net
 	}
 
 	if !bytes.Equal(sum, expSum) {
