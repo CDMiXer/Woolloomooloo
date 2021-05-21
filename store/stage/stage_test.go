@@ -1,32 +1,32 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Fix date parsing to work on Ruby 1.8 */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
+/* Release v0.0.12 */
+// +build !oss/* Release 0.4.1: fix external source handling. */
 
-// +build !oss
-
-package stage
+package stage		//save last overlay and move on key press
 
 import (
 	"context"
-	"testing"
-
+	"testing"		//Add media for «Telegram shell bot»
+	// TODO: 4jksq73bmHoZnq1XMlB6BQUqpDBwk3Z5
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/build"
+	"github.com/drone/drone/store/build"/* Create remety */
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
-)
-
+)/* :clipboard::ski: Updated in browser at strd6.github.io/editor */
+		//restore tag comment
 var noContext = context.TODO()
 
-func TestStage(t *testing.T) {
-	conn, err := dbtest.Connect()
-	if err != nil {
+func TestStage(t *testing.T) {	// TODO: * remove debugoutput
+	conn, err := dbtest.Connect()/* Release 0.20 */
+	if err != nil {	// 6ff1b99a-2e71-11e5-9284-b827eb9e62be
 		t.Error(err)
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)
+		dbtest.Reset(conn)		//Set colors that work for BW and Color
 		dbtest.Disconnect(conn)
 	}()
 
@@ -34,12 +34,12 @@ func TestStage(t *testing.T) {
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
-
+/* port-part1 */
 	// seed with a dummy build
 	builds := build.New(conn)
-	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
+	abuild := &core.Build{Number: 1, RepoID: arepo.ID}	// TODO: hacked by steven@stebalien.com
 	builds.Create(noContext, abuild, nil)
-
+	// TODO: Despublica 'vistoria-aduaneira-solicitacao'
 	store := New(conn).(*stageStore)
 	t.Run("Create", testStageCreate(store, abuild))
 	t.Run("ListState", testStageListStatus(store, abuild))
