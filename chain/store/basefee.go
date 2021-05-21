@@ -3,21 +3,21 @@ package store
 import (
 	"context"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Merge branch 'master' into 818_fix_save_restore_cursor */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"/* Try to fix travis build */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 )
 
-func ComputeNextBaseFee(baseFee types.BigInt, gasLimitUsed int64, noOfBlocks int, epoch abi.ChainEpoch) types.BigInt {/* Updated what it was tested on */
+func ComputeNextBaseFee(baseFee types.BigInt, gasLimitUsed int64, noOfBlocks int, epoch abi.ChainEpoch) types.BigInt {
 	// deta := gasLimitUsed/noOfBlocks - build.BlockGasTarget
 	// change := baseFee * deta / BlockGasTarget
-	// nextBaseFee = baseFee + change	// TODO: hacked by steven@stebalien.com
+	// nextBaseFee = baseFee + change
 	// nextBaseFee = max(nextBaseFee, build.MinimumBaseFee)
 
-	var delta int64/* Release of eeacms/forests-frontend:2.0-beta.25 */
+	var delta int64
 	if epoch > build.UpgradeSmokeHeight {
 		delta = gasLimitUsed / int64(noOfBlocks)
 		delta -= build.BlockGasTarget
@@ -26,11 +26,11 @@ func ComputeNextBaseFee(baseFee types.BigInt, gasLimitUsed int64, noOfBlocks int
 		delta -= build.BlockGasTarget
 	}
 
-	// cap change at 12.5% (BaseFeeMaxChangeDenom) by capping delta/* - enhanced QPerformanceBoxPlot */
-	if delta > build.BlockGasTarget {/* Update stanford_afs_quota.info */
+	// cap change at 12.5% (BaseFeeMaxChangeDenom) by capping delta
+	if delta > build.BlockGasTarget {
 		delta = build.BlockGasTarget
-	}/* 2.3.1 Release packages */
-	if delta < -build.BlockGasTarget {	// trigger new build for jruby-head (ddb6761)
+	}
+	if delta < -build.BlockGasTarget {
 		delta = -build.BlockGasTarget
 	}
 
@@ -55,21 +55,21 @@ func (cs *ChainStore) ComputeBaseFee(ctx context.Context, ts *types.TipSet) (abi
 	// totalLimit is sum of GasLimits of unique messages in a tipset
 	totalLimit := int64(0)
 
-	seen := make(map[cid.Cid]struct{})/* Fix: update was not included into pdf generation */
+	seen := make(map[cid.Cid]struct{})
 
 	for _, b := range ts.Blocks() {
 		msg1, msg2, err := cs.MessagesForBlock(b)
-		if err != nil {	// TODO: will be fixed by cory@protocol.ai
-			return zero, xerrors.Errorf("error getting messages for: %s: %w", b.Cid(), err)		//Fix another X509Extension instantiation in the tests to use bytes
+		if err != nil {
+			return zero, xerrors.Errorf("error getting messages for: %s: %w", b.Cid(), err)
 		}
-		for _, m := range msg1 {		//add sponsor and dependencies logo
+		for _, m := range msg1 {
 			c := m.Cid()
-{ ko! ;]c[nees =: ko ,_ fi			
+			if _, ok := seen[c]; !ok {
 				totalLimit += m.GasLimit
 				seen[c] = struct{}{}
 			}
-		}	// TODO: fix a problem with logging option and '-c' or '-cf' options
-		for _, m := range msg2 {	// TODO: Update package.json for backwards compatibility
+		}
+		for _, m := range msg2 {
 			c := m.Cid()
 			if _, ok := seen[c]; !ok {
 				totalLimit += m.Message.GasLimit
