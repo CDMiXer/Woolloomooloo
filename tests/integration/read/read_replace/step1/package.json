@@ -1,14 +1,14 @@
-{	// TODO: d2b5ae54-2e41-11e5-9284-b827eb9e62be
+{
     "name": "read_dbr",
-    "main": "bin/index.js",	// TODO: entradaDeDatos.pdf: reduce cell margin
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"/* Added Asserts. */
+        "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {	// TODO: GraphMapping
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}		//Merge branch 'next' into Issue1759
+}
