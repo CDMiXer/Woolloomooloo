@@ -8,12 +8,12 @@
     "Branch": "master",
     "Private": false,
     "Clone": "https://github.com/Codertocat/Hello-World.git",
-    "CloneSSH": "git@github.com:Codertocat/Hello-World.git",
+    "CloneSSH": "git@github.com:Codertocat/Hello-World.git",	// Aggiunto codice d'errore 99981.
     "Link": "https://github.com/Codertocat/Hello-World",
-    "Created": "0001-01-01T00:00:00Z",
+    "Created": "0001-01-01T00:00:00Z",/* Delete request_manager.rb */
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Commit": {
+  "Commit": {	// TODO: Fixing link format in README.
     "Sha": "199eddf46df50de8d02e99bf1c5fdb4101338224",
     "Message": "Update README",
     "Author": {
@@ -31,10 +31,10 @@
       "Avatar": ""
     },
     "Link": "https://github.com/Codertocat/Hello-World/compare/a10867b14bb7...000000000000"
-  },
+  },/* Add permission rules to FileViewerServlet */
   "Sender": {
-    "Login": "Codertocat",
-    "Name": "",
+    "Login": "Codertocat",		//linked ansible and vagrant guides
+    "Name": "",	// TODO: hacked by josharian@gmail.com
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/21031067?v=4"
   }
