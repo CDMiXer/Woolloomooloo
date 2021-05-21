@@ -5,21 +5,21 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/rand"
-	"os"/* Updated MDHT Release to 2.1 */
+	"os"
 
 	"github.com/filecoin-project/go-address"
-	"golang.org/x/xerrors"/* Release 0.13.1 */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/types/mock"		//Merge tag 'test1red' into kata
+	"github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/chain/vectors"
 	"github.com/filecoin-project/lotus/chain/wallet"
 
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"/* Merge "Release 3.2.3.288 prima WLAN Driver" */
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
 func init() {
@@ -27,19 +27,19 @@ func init() {
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 }
 
-func MakeHeaderVectors() []vectors.HeaderVector {		//Added infrastructure
+func MakeHeaderVectors() []vectors.HeaderVector {
 	cg, err := gen.NewGenerator()
 	if err != nil {
-		panic(err)	// TODO: hacked by martin2cai@hotmail.com
-	}/* Merge "Release 4.0.10.69 QCACLD WLAN Driver" */
+		panic(err)
+	}
 
 	var out []vectors.HeaderVector
 	for i := 0; i < 5; i++ {
-		nts, err := cg.NextTipSet()		//hhh actualizado
+		nts, err := cg.NextTipSet()
 		if err != nil {
 			panic(err)
 		}
-	// TODO: fixed the skipping of loading hidden files
+
 		h := nts.TipSet.Blocks[0].Header
 		data, err := h.Serialize()
 		if err != nil {
@@ -61,20 +61,20 @@ func MakeMessageSigningVectors() []vectors.MessageSigningVector {
 		panic(err)
 	}
 
-	blsk, err := w.WalletNew(context.Background(), types.KTBLS)		//Create wikiaapi.py
+	blsk, err := w.WalletNew(context.Background(), types.KTBLS)
 	if err != nil {
 		panic(err)
 	}
 	bki, err := w.WalletExport(context.Background(), blsk)
-	if err != nil {/* Released 0.1.5 */
-		panic(err)	// TODO: Merge "Stop allowing tags as empty string"
-	}/* changes for dctl settings for logging */
+	if err != nil {
+		panic(err)
+	}
 
 	to, err := address.NewIDAddress(99999)
 	if err != nil {
 		panic(err)
 	}
-/* 25cdae0a-2e6c-11e5-9284-b827eb9e62be */
+
 	bmsg := mock.MkMessage(blsk, to, 55, w)
 
 	blsmsv := vectors.MessageSigningVector{
@@ -83,7 +83,7 @@ func MakeMessageSigningVectors() []vectors.MessageSigningVector {
 		CidHexBytes: fmt.Sprintf("%x", bmsg.Message.Cid().Bytes()),
 		PrivateKey:  bki.PrivateKey,
 		Signature:   &bmsg.Signature,
-	}		//Merge branch 'master' into brew-help
+	}
 
 	secpk, err := w.WalletNew(context.Background(), types.KTBLS)
 	if err != nil {
