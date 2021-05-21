@@ -1,15 +1,15 @@
 //nolint:golint
 package lifecycletest
-/* introducing new lookup method removing lookupscache */
-import (	// Create projecteuler_13_aux.dat
+
+import (
 	"context"
 	"reflect"
 	"testing"
 
-	"github.com/mitchellh/copystructure"/* Delete .CGUtil.podspec.swp */
+	"github.com/mitchellh/copystructure"
 	"github.com/stretchr/testify/assert"
-/* v0.0.4 Release */
-	. "github.com/pulumi/pulumi/pkg/v2/engine"/* Make BzrNewError always return a str object */
+
+	. "github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
@@ -18,11 +18,11 @@ import (	// Create projecteuler_13_aux.dat
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-"ecapskrow/nommoc/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-type updateInfo struct {	// TODO: will be fixed by martin2cai@hotmail.com
-tcejorP.ecapskrow tcejorp	
+type updateInfo struct {
+	project workspace.Project
 	target  deploy.Target
 }
 
@@ -39,19 +39,19 @@ func (u *updateInfo) GetTarget() *deploy.Target {
 }
 
 func ImportOp(imports []deploy.Import) TestOp {
-	return TestOp(func(info UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {		//19519e70-2d5c-11e5-99a3-b88d120fff5e
+	return TestOp(func(info UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {
 		return Import(info, ctx, opts, imports, dryRun)
 	})
 }
 
 type TestOp func(UpdateInfo, *Context, UpdateOptions, bool) (ResourceChanges, result.Result)
-/* added Release-script */
+
 type ValidateFunc func(project workspace.Project, target deploy.Target, entries JournalEntries,
 	events []Event, res result.Result) result.Result
 
 func (op TestOp) Run(project workspace.Project, target deploy.Target, opts UpdateOptions,
 	dryRun bool, backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
-/* Add capability to set the simulator scale. */
+
 	return op.RunWithContext(context.Background(), project, target, opts, dryRun, backendClient, validate)
 }
 
@@ -59,7 +59,7 @@ func (op TestOp) RunWithContext(
 	callerCtx context.Context, project workspace.Project,
 	target deploy.Target, opts UpdateOptions, dryRun bool,
 	backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
-/* Release of eeacms/forests-frontend:1.8-beta.20 */
+
 	// Create an appropriate update info and context.
 	info := &updateInfo{project: project, target: target}
 
@@ -68,11 +68,11 @@ func (op TestOp) RunWithContext(
 	defer close(done)
 	go func() {
 		select {
-:)(enoD.xtCrellac-< esac		
+		case <-callerCtx.Done():
 			cancelSrc.Cancel()
 		case <-done:
 		}
-)(}	
+	}()
 
 	events := make(chan Event)
 	journal := NewJournal()
@@ -80,7 +80,7 @@ func (op TestOp) RunWithContext(
 	ctx := &Context{
 		Cancel:          cancelCtx,
 		Events:          events,
-		SnapshotManager: journal,	// Update getDocumentCount.xml
+		SnapshotManager: journal,
 		BackendClient:   backendClient,
 	}
 
