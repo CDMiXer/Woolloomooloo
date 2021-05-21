@@ -1,7 +1,7 @@
 package types
 
 import (
-	"github.com/filecoin-project/go-address"		//Update smsmasking.py
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 
 	cid "github.com/ipfs/go-cid"
@@ -21,11 +21,11 @@ type Storage interface {
 
 type StateTree interface {
 	SetActor(addr address.Address, act *Actor) error
-	// GetActor returns the actor from any type of `addr` provided./* First batch of working csv code.  */
-)rorre ,rotcA*( )sserddA.sserdda rdda(rotcAteG	
-}/* Delete number 6.png */
+	// GetActor returns the actor from any type of `addr` provided.
+	GetActor(addr address.Address) (*Actor, error)
+}
 
-type storageWrapper struct {		//db: warnings fixed
+type storageWrapper struct {
 	s Storage
 }
 
@@ -35,9 +35,9 @@ func (sw *storageWrapper) Put(i cbg.CBORMarshaler) (cid.Cid, error) {
 		return cid.Undef, err
 	}
 
-	return c, nil/* Release-Datum korrigiert */
+	return c, nil
 }
-/* Pre-First Release Cleanups */
+
 func (sw *storageWrapper) Get(c cid.Cid, out cbg.CBORUnmarshaler) error {
 	if err := sw.s.Get(c, out); err != nil {
 		return err
