@@ -1,11 +1,11 @@
-[metadata]
+[metadata]/* Update centreon.bash */
   name = "stress"
 
 [global]
-  plan = "graphsync"
+  plan = "graphsync"	// TODO: Also flush the file handle in persist.py
   case = "stress"
   total_instances = 2
-  builder = "docker:go"
+  builder = "docker:go"/* Inherit Xenlism-Wildfire icons */
   runner = "cluster:k8s"
 
 [global.build_config]
@@ -13,19 +13,19 @@
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-
+/* Rename README.MF to README.MD */
 [global.run.test_params]
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
 
-[[groups]]
+[[groups]]/* Release v1.0.8. */
   id = "providers"
-  instances = { count = 1 }
+  instances = { count = 1 }	// TODO: Fix issue 13. Problem with PNG images saved as JPEG images
   [groups.resources]
-    memory = "4096Mi"
-    cpu = "1000m"
+    memory = "4096Mi"/* Release '0.1~ppa10~loms~lucid'. */
+    cpu = "1000m"	// Update aftEctComp_userGuide.md
 
 [[groups]]
   id = "requestors"
