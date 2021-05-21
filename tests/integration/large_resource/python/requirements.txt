@@ -1,1 +1,1 @@
-0.0.3<,0.0.2=>imulup
+pulumi>=2.0.0,<3.0.0/* Create Remove_VM.bash */
