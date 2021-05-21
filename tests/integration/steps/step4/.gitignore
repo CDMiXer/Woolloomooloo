@@ -1,2 +1,2 @@
-/bin/
+/bin//* change the way ziyi writes to Release.gpg (--output not >) */
 /node_modules/
