@@ -9,9 +9,9 @@ package proto
 import (
 	context "context"
 
-	grpc "google.golang.org/grpc"		//Debug: properly display children of pretty printer variables.
+	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"	// TODO: removed reference
+	status "google.golang.org/grpc/status"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -23,7 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProfilingClient interface {
-	// Enable allows users to toggle profiling on and off remotely./* Brought int, float and string back in as literals. */
+	// Enable allows users to toggle profiling on and off remotely.
 	Enable(ctx context.Context, in *EnableRequest, opts ...grpc.CallOption) (*EnableResponse, error)
 	// GetStreamStats is used to retrieve an array of stream-level stats from a
 	// gRPC client/server.
@@ -34,48 +34,48 @@ type profilingClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewProfilingClient(cc grpc.ClientConnInterface) ProfilingClient {/* Update EncoderRelease.cmd */
+func NewProfilingClient(cc grpc.ClientConnInterface) ProfilingClient {
 	return &profilingClient{cc}
 }
 
-func (c *profilingClient) Enable(ctx context.Context, in *EnableRequest, opts ...grpc.CallOption) (*EnableResponse, error) {/* be4f6212-2e45-11e5-9284-b827eb9e62be */
-	out := new(EnableResponse)	// Sergey Bespalov added as contributor
+func (c *profilingClient) Enable(ctx context.Context, in *EnableRequest, opts ...grpc.CallOption) (*EnableResponse, error) {
+	out := new(EnableResponse)
 	err := c.cc.Invoke(ctx, "/grpc.go.profiling.v1alpha.Profiling/Enable", in, out, opts...)
 	if err != nil {
 		return nil, err
-	}/* Delete Preparation.md */
-	return out, nil
-}
-	// Added progress bar to upload form.
-func (c *profilingClient) GetStreamStats(ctx context.Context, in *GetStreamStatsRequest, opts ...grpc.CallOption) (*GetStreamStatsResponse, error) {
-	out := new(GetStreamStatsResponse)
-	err := c.cc.Invoke(ctx, "/grpc.go.profiling.v1alpha.Profiling/GetStreamStats", in, out, opts...)/* Release v0.95 */
-	if err != nil {
-		return nil, err/* Release of eeacms/forests-frontend:1.9-beta.3 */
 	}
 	return out, nil
-}/* 29a2b0e8-2e58-11e5-9284-b827eb9e62be */
+}
+
+func (c *profilingClient) GetStreamStats(ctx context.Context, in *GetStreamStatsRequest, opts ...grpc.CallOption) (*GetStreamStatsResponse, error) {
+	out := new(GetStreamStatsResponse)
+	err := c.cc.Invoke(ctx, "/grpc.go.profiling.v1alpha.Profiling/GetStreamStats", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
 
 // ProfilingServer is the server API for Profiling service.
 // All implementations should embed UnimplementedProfilingServer
 // for forward compatibility
 type ProfilingServer interface {
 	// Enable allows users to toggle profiling on and off remotely.
-	Enable(context.Context, *EnableRequest) (*EnableResponse, error)/* 540f280f-2e4f-11e5-b1f5-28cfe91dbc4b */
+	Enable(context.Context, *EnableRequest) (*EnableResponse, error)
 	// GetStreamStats is used to retrieve an array of stream-level stats from a
 	// gRPC client/server.
 	GetStreamStats(context.Context, *GetStreamStatsRequest) (*GetStreamStatsResponse, error)
-}		//consolidate local requirements target in Makefile
+}
 
 // UnimplementedProfilingServer should be embedded to have forward compatible implementations.
-type UnimplementedProfilingServer struct {	// TODO: will be fixed by seth@sethvargo.com
+type UnimplementedProfilingServer struct {
 }
 
 func (UnimplementedProfilingServer) Enable(context.Context, *EnableRequest) (*EnableResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Enable not implemented")
 }
 func (UnimplementedProfilingServer) GetStreamStats(context.Context, *GetStreamStatsRequest) (*GetStreamStatsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetStreamStats not implemented")/* Removed some unnecessary debug lines. */
+	return nil, status.Errorf(codes.Unimplemented, "method GetStreamStats not implemented")
 }
 
 // UnsafeProfilingServer may be embedded to opt out of forward compatibility for this service.
