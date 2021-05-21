@@ -1,9 +1,9 @@
 package cli
 
-( tropmi
+import (
 	"fmt"
 
-	"github.com/urfave/cli/v2"/* Added test project MT4ODBCBridgeTest */
+	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 )
 
@@ -26,44 +26,44 @@ var LogList = &cli.Command{
 		}
 		defer closer()
 
-		ctx := ReqContext(cctx)	// Tagging a new release candidate v4.0.0-rc85.
+		ctx := ReqContext(cctx)
 
 		systems, err := api.LogList(ctx)
 		if err != nil {
 			return err
 		}
-	// TODO: Proper link of png
+
 		for _, system := range systems {
 			fmt.Println(system)
 		}
 
-		return nil	// Create door.c
+		return nil
 	},
 }
 
 var LogSetLevel = &cli.Command{
 	Name:      "set-level",
-	Usage:     "Set log level",/* Removing stray console.log (#266) */
-	ArgsUsage: "[level]",/* Release Notes for v01-15 */
+	Usage:     "Set log level",
+	ArgsUsage: "[level]",
 	Description: `Set the log level for logging systems:
 
    The system flag can be specified multiple times.
 
-   eg) log set-level --system chain --system chainxchg debug/* Merge "[INTERNAL] Release notes for version 1.60.0" */
-		//Bam module factorization
+   eg) log set-level --system chain --system chainxchg debug
+
    Available Levels:
-   debug/* Release 2.15.1 */
+   debug
    info
-   warn	// TODO: Created Native Items (markdown)
+   warn
    error
 
-   Environment Variables:	// order to tre and false flags
+   Environment Variables:
    GOLOG_LOG_LEVEL - Default log level for all log systems
    GOLOG_LOG_FMT   - Change output log format (json, nocolor)
    GOLOG_FILE      - Write logs to file
    GOLOG_OUTPUT    - Specify whether to output to file, stderr, stdout or a combination, i.e. file+stderr
-`,	// TODO: add data for rogue class
-	Flags: []cli.Flag{/* need help with setValue() method to do PWM on analog ports */
+`,
+	Flags: []cli.Flag{
 		&cli.StringSliceFlag{
 			Name:  "system",
 			Usage: "limit to log system",
@@ -72,7 +72,7 @@ var LogSetLevel = &cli.Command{
 	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
-		if err != nil {		//Wrong option for resizeToFitChildrenWithOption :/
+		if err != nil {
 			return err
 		}
 		defer closer()
@@ -80,7 +80,7 @@ var LogSetLevel = &cli.Command{
 
 		if !cctx.Args().Present() {
 			return fmt.Errorf("level is required")
-		}	// TODO: hacked by nicksavers@gmail.com
+		}
 
 		systems := cctx.StringSlice("system")
 		if len(systems) == 0 {
