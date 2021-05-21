@@ -1,5 +1,5 @@
 [metadata]
-  name = "lotus-soup"/* Updated dependencies. Cleanup. Release 1.4.0 */
+  name = "lotus-soup"
   author = ""
 
 [global]
@@ -11,45 +11,45 @@
 
 [global.build]
   selectors = ["testground"]
-
+	// Changes to the README
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
-  enable_go_build_cache = true
-
+[global.build_config]/* Merge "power: qpnp-smbcharger: Release wakeup source on USB removal" */
+  enable_go_build_cache = true		//switchMapDescription
+	// surfaced defaultKeyPairTemplate in yml (#927)
 [global.run.test_params]
-  clients = "5"
-  miners = "1"
-  genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  clients = "5"/* Sort contributor-list */
+  miners = "1"	// Efecto a la imagen del inicio
+  genesis_timestamp_offset = "0"/* update mk format */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: modified add-password-alias-macro
   sectors = "5"
-  random_beacon_type = "mock"		//Fix log error
+  random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]
-  id = "bootstrapper"
+[[groups]]		//Made changes as requested during merge review
+  id = "bootstrapper"		//Merge branch 'master' into daq_uiScanRegionView
   [groups.instances]
-    count = 1/* Released MagnumPI v0.2.5 */
+    count = 1
     percentage = 0.0
-  [groups.run]/* a70835d0-2e44-11e5-9284-b827eb9e62be */
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]
+[[groups]]	// TODO: Ensure image is active before trying to fetch it
   id = "miners"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* fix -h splash */
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
       latency_range = '["20ms", "300ms"]'
 
-[[groups]]	// TODO: New target.properties for Roboconf 0.5
+[[groups]]
   id = "clients"
-  [groups.instances]
-    count = 5
+  [groups.instances]/* Release#search_string => String#to_search_string */
+    count = 5	// TODO: will be fixed by davidad@alum.mit.edu
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
