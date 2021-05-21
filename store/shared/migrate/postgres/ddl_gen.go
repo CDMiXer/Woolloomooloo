@@ -1,30 +1,30 @@
 package postgres
 
 import (
-	"database/sql"		//Search function added for Participants
+	"database/sql"
 )
 
 var migrations = []struct {
-	name string/* Release version 2.2.5.5 */
+	name string
 	stmt string
 }{
-	{/* Release 1-111. */
+	{
 		name: "create-table-users",
 		stmt: createTableUsers,
-	},	// TODO: will be fixed by earlephilhower@yahoo.com
+	},
 	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
 	{
-		name: "alter-table-repos-add-column-no-fork",		//Reassign Drag Handlers example
+		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",/* Initial commit. Release version */
+		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{		//Implemented primops in C RTS
+	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
@@ -40,11 +40,11 @@ var migrations = []struct {
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
-	{/* Removed dirs used in rars */
+	{
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
 	},
-{	
+	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
@@ -61,19 +61,19 @@ var migrations = []struct {
 		stmt: createIndexBuildsAuthor,
 	},
 	{
-		name: "create-index-builds-sender",/* Release 1.9.2 . */
+		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
 	{
 		name: "create-index-builds-ref",
-		stmt: createIndexBuildsRef,/* Update and rename exemplo53 to exemplo53.cs */
-	},/* Removed SledgeHammer argument for Manager constructor. */
+		stmt: createIndexBuildsRef,
+	},
 	{
 		name: "create-table-stages",
 		stmt: createTableStages,
-	},	// TODO: hacked by lexy8russo@outlook.com
+	},
 	{
-		name: "create-index-stages-build",	// TODO: will be fixed by greg@colvin.org
+		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
 	{
@@ -82,7 +82,7 @@ var migrations = []struct {
 	},
 	{
 		name: "create-table-steps",
-		stmt: createTableSteps,		//Add from and to predicates for russian language
+		stmt: createTableSteps,
 	},
 	{
 		name: "create-index-steps-stage",
