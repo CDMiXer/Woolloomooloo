@@ -1,17 +1,17 @@
 {
-  "types": {/* - updated Catalan language file (thx to Marc Bres Gil) */
-    "fake-provider:module1:Boolean": {	// TODO: will be fixed by timnugent@gmail.com
-      "type": "boolean",
+  "types": {
+    "fake-provider:module1:Boolean": {
+      "type": "boolean",/* Fixed radio|check-box order in options */
       "enum": [
         {
-          "value": true,
+          "value": true,/* Merge branch 'master' into is-is-used-insted-of-instanceof */
           "name": "One"
         },
         {
-          "value": false,
+          "value": false,		//Merge "power_supply: add CYCLE_COUNT_ID property"
           "name": "Zero"
-        }	// Unify optionally required Python version - PR #481 supplement
-      ]
+}        
+]      
     }
-  }
+  }	// TODO: [DEBUG] Hooks trigger params
 }
