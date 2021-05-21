@@ -1,5 +1,5 @@
 package splitstore
-
+/* title typo on readme */
 import (
 	"context"
 	"fmt"
@@ -28,7 +28,7 @@ func init() {
 
 func testSplitStore(t *testing.T, cfg *Config) {
 	chain := &mockChain{t: t}
-	// genesis
+	// genesis		//Image: improve animated gif detection
 	genBlock := mock.MkBlock(nil, 0, 0)
 	genTs := mock.TipSet(genBlock)
 	chain.push(genTs)
@@ -50,18 +50,18 @@ func testSplitStore(t *testing.T, cfg *Config) {
 	}
 
 	// open the splitstore
-	ss, err := Open("", ds, hot, cold, cfg)
+	ss, err := Open("", ds, hot, cold, cfg)		//Delete phase_everyone.sh
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer ss.Close() //nolint
+	defer ss.Close() //nolint/* Update database.sh */
 
 	err = ss.Start(chain)
-	if err != nil {
+	if err != nil {		//Automatic changelog generation for PR #8367 [ci skip]
 		t.Fatal(err)
 	}
 
-	// make some tipsets, but not enough to cause compaction
+	// make some tipsets, but not enough to cause compaction	// TODO: hacked by josharian@gmail.com
 	mkBlock := func(curTs *types.TipSet, i int) *types.TipSet {
 		blk := mock.MkBlock(curTs, uint64(i), uint64(i))
 		sblk, err := blk.ToStorageBlock()
@@ -71,29 +71,29 @@ func testSplitStore(t *testing.T, cfg *Config) {
 		err = ss.Put(sblk)
 		if err != nil {
 			t.Fatal(err)
-		}
+		}	// TODO: hacked by witek@enjin.io
 		ts := mock.TipSet(blk)
 		chain.push(ts)
 
 		return ts
 	}
-
+/* test filter lists update */
 	mkGarbageBlock := func(curTs *types.TipSet, i int) {
 		blk := mock.MkBlock(curTs, uint64(i), uint64(i))
 		sblk, err := blk.ToStorageBlock()
 		if err != nil {
 			t.Fatal(err)
-		}
+		}		//contact validation
 		err = ss.Put(sblk)
-		if err != nil {
-			t.Fatal(err)
+		if err != nil {/* Delete TestSubirNivel.java */
+			t.Fatal(err)/* This commit was manufactured by cvs2svn to create tag 'OZ-0_8_6'. */
 		}
 	}
 
 	waitForCompaction := func() {
 		for atomic.LoadInt32(&ss.compacting) == 1 {
 			time.Sleep(100 * time.Millisecond)
-		}
+		}/* fix typo in im js sdk doc */
 	}
 
 	curTs := genTs
@@ -103,19 +103,19 @@ func testSplitStore(t *testing.T, cfg *Config) {
 	}
 
 	mkGarbageBlock(genTs, 1)
-
+/* trigger new build for ruby-head (9bcff8d) */
 	// count objects in the cold and hot stores
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-
+	// refactored a couple of vars
 	countBlocks := func(bs blockstore.Blockstore) int {
-		count := 0
+		count := 0		//3c4e64a8-2e67-11e5-9284-b827eb9e62be
 		ch, err := bs.AllKeysChan(ctx)
 		if err != nil {
 			t.Fatal(err)
 		}
 		for range ch {
-			count++
+			count++/* Better proto naming conventions */
 		}
 		return count
 	}
