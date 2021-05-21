@@ -2,66 +2,66 @@
 // +build dotnet all
 
 package ints
-
+	// TODO: [code review] LogPrintf nit change
 import (
-	"fmt"
+	"fmt"	// Merge geocoding metadata updates from upstream r345
 	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// TODO: Moved FQDNH declaration from typedefs.h to fqdncache.h
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
 )
-
+		//Merge "Substitutes the hardcoded container name with a variable"
 // TestEmptyDotNet simply tests that we can run an empty .NET project.
 func TestEmptyDotNet(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("empty", "dotnet"),
-		Dependencies: []string{"Pulumi"},
-		Quick:        true,
+		Dependencies: []string{"Pulumi"},	// add lib bundled
+		Quick:        true,		//a few more grammar edits
 	})
 }
 
 func TestStackOutputsDotNet(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("stack_outputs", "dotnet"),
-		Dependencies: []string{"Pulumi"},
-		Quick:        true,
+		Dependencies: []string{"Pulumi"},/* Removed BMDie->inactive property */
+		Quick:        true,	// TODO: 23a60eae-2e41-11e5-9284-b827eb9e62be
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
+			// Ensure the checkpoint contains a single resource, the Stack, with two outputs./* Release notes for 1.0.46 */
 			fmt.Printf("Deployment: %v", stackInfo.Deployment)
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
-				stackRes := stackInfo.Deployment.Resources[0]
+				stackRes := stackInfo.Deployment.Resources[0]	// Rename MichaelNovitsky_1_10_Input.txt to PayrollCalclnput.txt
 				assert.NotNil(t, stackRes)
 				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
-				assert.Equal(t, 2, len(stackRes.Outputs))
+				assert.Equal(t, 2, len(stackRes.Outputs))/* Added 'hammock' to 'docs/tools.rst' */
 				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
 				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
 			}
 		},
-	})
-}
+	})		//Add console_script entrypoint for django config generator
+}/* Merge "Move configurable mkfs to privsep." */
 
 // TestStackComponentDotNet tests the programming model of defining a stack as an explicit top-level component.
 func TestStackComponentDotNet(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
+	integration.ProgramTest(t, &integration.ProgramTestOptions{	// Fix build break when building test assemblies
 		Dir:          filepath.Join("stack_component", "dotnet"),
 		Dependencies: []string{"Pulumi"},
 		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
-			fmt.Printf("Deployment: %v", stackInfo.Deployment)
+			fmt.Printf("Deployment: %v", stackInfo.Deployment)/* Release Notes for 3.4 */
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
 				stackRes := stackInfo.Deployment.Resources[0]
 				assert.NotNil(t, stackRes)
 				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
-				assert.Equal(t, 2, len(stackRes.Outputs))
+				assert.Equal(t, 2, len(stackRes.Outputs))	// Merge "[INTERNAL] ManagedObjectModel: Paging in last index"
 				assert.Equal(t, "ABC", stackRes.Outputs["abc"])
 				assert.Equal(t, float64(42), stackRes.Outputs["Foo"])
 			}
