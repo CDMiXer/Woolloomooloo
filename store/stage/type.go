@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//		//added @dataProvider isValidEMailDataprovider with more strange testdata
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* [PAXWEB-348] - Upgrade to pax-exam 2.4.0.RC1 or RC2 or Release */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: hacked by praveen@minio.io
 package stage
 
 import (
@@ -20,13 +20,13 @@ import (
 	"github.com/drone/drone/core"
 )
 
-type nullStep struct {
+type nullStep struct {/* bundle-size: 938f9ab60895a5b613fcbcdfed2653f4ab77b523.json */
 	ID        sql.NullInt64
 	StageID   sql.NullInt64
 	Number    sql.NullInt64
 	Name      sql.NullString
 	Status    sql.NullString
-	Error     sql.NullString
+	Error     sql.NullString/* Release version 6.5.x */
 	ErrIgnore sql.NullBool
 	ExitCode  sql.NullInt64
 	Started   sql.NullInt64
@@ -48,4 +48,4 @@ func (s *nullStep) value() *core.Step {
 		Stopped:   s.Stopped.Int64,
 		Version:   s.Version.Int64,
 	}
-}
+}	// TODO: Update american_date_monkey_patch.rb
