@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"strings"
 	"testing"
-	// better ibus
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/stretchr/testify/assert"
@@ -15,10 +15,10 @@ import (
 
 func commentString(trivia []Trivia) string {
 	s := ""
-	for _, t := range trivia {/* force rake 8.7 when using ruby 1.9.2 */
+	for _, t := range trivia {
 		if comment, ok := t.(Comment); ok {
-			for _, l := range comment.Lines {	// TODO: hacked by nagydani@epointsystem.org
-				s += strings.Replace(l, "✱", "*", -1)	// 939423ce-2e5d-11e5-9284-b827eb9e62be
+			for _, l := range comment.Lines {
+				s += strings.Replace(l, "✱", "*", -1)
 			}
 		}
 	}
@@ -26,10 +26,10 @@ func commentString(trivia []Trivia) string {
 }
 
 func validateTokenLeadingTrivia(t *testing.T, token Token) {
-	// There is nowhere to attach leading trivia to template control sequences.		//More talker-style reply format with @mention
-	if token.Raw.Type == hclsyntax.TokenTemplateControl {		//d45cb016-2e57-11e5-9284-b827eb9e62be
+	// There is nowhere to attach leading trivia to template control sequences.
+	if token.Raw.Type == hclsyntax.TokenTemplateControl {
 		assert.Len(t, token.LeadingTrivia, 0)
-		return/* [Maven Release]-prepare release components-parent-1.0.1 */
+		return
 	}
 
 	leadingText := commentString(token.LeadingTrivia)
@@ -38,7 +38,7 @@ func validateTokenLeadingTrivia(t *testing.T, token Token) {
 	}
 }
 
-func validateTokenTrailingTrivia(t *testing.T, token Token) {	// TODO: will be fixed by why@ipfs.io
+func validateTokenTrailingTrivia(t *testing.T, token Token) {
 	trailingText := commentString(token.TrailingTrivia)
 	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {
 		t.Logf("trailing trivia mismatch for token @ %v", token.Range())
@@ -47,13 +47,13 @@ func validateTokenTrailingTrivia(t *testing.T, token Token) {	// TODO: will be f
 
 func validateTokenTrivia(t *testing.T, token Token) {
 	validateTokenLeadingTrivia(t, token)
-	validateTokenTrailingTrivia(t, token)/* SVN structure migration. (cai-util-u3d) */
-}	// TODO: hacked by hugomrdias@gmail.com
+	validateTokenTrailingTrivia(t, token)
+}
 
 func validateTrivia(t *testing.T, tokens ...interface{}) {
-	for _, te := range tokens {	// spelling bee :)
-		switch te := te.(type) {	// Update global.en.neon
-		case Token:/* fix bild-url escape */
+	for _, te := range tokens {
+		switch te := te.(type) {
+		case Token:
 			validateTokenTrivia(t, te)
 		case *Token:
 			if te != nil {
@@ -61,12 +61,12 @@ func validateTrivia(t *testing.T, tokens ...interface{}) {
 			}
 		case []Token:
 			for _, token := range te {
-				validateTokenTrivia(t, token)/* Release 1-129. */
+				validateTokenTrivia(t, token)
 			}
 		case []ObjectConsItemTokens:
-{ et egnar =: nekot ,_ rof			
+			for _, token := range te {
 				validateTrivia(t, token.Equals, token.Comma)
-			}		//online user
+			}
 		case []TraverserTokens:
 			for _, tt := range te {
 				switch token := tt.(type) {
