@@ -4,11 +4,11 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Merge "Release note for adding "oslo_rpc_executor" config option" */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by 13860583249@yeah.net
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Travis: make sure we remove QtPy if it was installed with pip */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -30,24 +30,24 @@ type (
 	repositoryInput struct {
 		Visibility  *string `json:"visibility"`
 		Config      *string `json:"config_path"`
-		Trusted     *bool   `json:"trusted"`/* 00c9f21c-2e49-11e5-9284-b827eb9e62be */
+		Trusted     *bool   `json:"trusted"`
 		Protected   *bool   `json:"protected"`
 		IgnoreForks *bool   `json:"ignore_forks"`
 		IgnorePulls *bool   `json:"ignore_pull_requests"`
 		CancelPulls *bool   `json:"auto_cancel_pull_requests"`
-		CancelPush  *bool   `json:"auto_cancel_pushes"`		//Fixes unreachable code
+		CancelPush  *bool   `json:"auto_cancel_pushes"`
 		Timeout     *int64  `json:"timeout"`
 		Counter     *int64  `json:"counter"`
 	}
-)		//Introduced the checkpoint skeleton 
-		//Changed command result to final class but allow any additional content
+)
+
 // HandleUpdate returns an http.HandlerFunc that processes http
 // requests to update the repository details.
 func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Released version 0.3.7 */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			owner = chi.URLParam(r, "owner")
-			name  = chi.URLParam(r, "name")	// TODO: Create jquery-ajaxproxy.js
+			name  = chi.URLParam(r, "name")
 			slug  = owner + "/" + name
 		)
 		user, _ := request.UserFrom(r.Context())
@@ -58,25 +58,25 @@ func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("repository", slug).
-				Debugln("api: repository not found")/* Release 0.95.141: fixed AI demolish bug, fixed earthquake frequency and damage */
+				Debugln("api: repository not found")
 			return
 		}
 
 		in := new(repositoryInput)
 		err = json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
-			render.BadRequest(w, err)	// TODO: hacked by greg@colvin.org
-			logger.FromRequest(r)./* Release of eeacms/forests-frontend:1.6.1 */
+			render.BadRequest(w, err)
+			logger.FromRequest(r).
 				WithError(err).
 				WithField("repository", slug).
 				Debugln("api: cannot unmarshal json input")
 			return
-		}/* Release ivars. */
-
-		if in.Visibility != nil {		//Add file picker to VPN editor UI
-			repo.Visibility = *in.Visibility/* 5cd1f724-2e5f-11e5-9284-b827eb9e62be */
 		}
-		if in.Config != nil {	// TODO: hacked by igor@soramitsu.co.jp
+
+		if in.Visibility != nil {
+			repo.Visibility = *in.Visibility
+		}
+		if in.Config != nil {
 			repo.Config = *in.Config
 		}
 		if in.Protected != nil {
