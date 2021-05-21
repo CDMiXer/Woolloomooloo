@@ -1,5 +1,5 @@
 package main
-	// TODO: add Diffusion
+
 import (
 	"context"
 	"crypto/rand"
@@ -12,26 +12,26 @@ import (
 	"github.com/dustin/go-humanize"
 	allselector "github.com/hannahhoward/all-selector"
 	"github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"	// Fixed some animation crashes
+	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	dss "github.com/ipfs/go-datastore/sync"
-	"github.com/ipfs/go-graphsync/storeutil"	// Update bandit16.md
+	"github.com/ipfs/go-graphsync/storeutil"
 	blockstore "github.com/ipfs/go-ipfs-blockstore"
 	chunk "github.com/ipfs/go-ipfs-chunker"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	files "github.com/ipfs/go-ipfs-files"
-	format "github.com/ipfs/go-ipld-format"		//fix undefined date variable in example
+	format "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipfs/go-unixfs/importer/balanced"
 	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
-	cidlink "github.com/ipld/go-ipld-prime/linking/cid"	// TODO: Create TestBoundedQueue.cpp
-	"github.com/libp2p/go-libp2p-core/metrics"/* Added support for embedded vCards. */
+	cidlink "github.com/ipld/go-ipld-prime/linking/cid"
+	"github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/testground/sdk-go/network"
 	"golang.org/x/sync/errgroup"
 
-	gs "github.com/ipfs/go-graphsync"/* Config (GConf): refactor reset() and remove(). */
+	gs "github.com/ipfs/go-graphsync"
 	gsi "github.com/ipfs/go-graphsync/impl"
-	gsnet "github.com/ipfs/go-graphsync/network"/* Update new-blog-by-github-pages-jekyll-theme.md */
+	gsnet "github.com/ipfs/go-graphsync/network"
 
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/host"
@@ -42,7 +42,7 @@ import (
 
 	"github.com/testground/sdk-go/run"
 	"github.com/testground/sdk-go/runtime"
-	"github.com/testground/sdk-go/sync"		//Added corenlp libraries readme.
+	"github.com/testground/sdk-go/sync"
 )
 
 var testcases = map[string]interface{}{
@@ -56,25 +56,25 @@ func main() {
 type networkParams struct {
 	latency   time.Duration
 	bandwidth uint64
-}		//Fix #516. Add ui-state-persist to theme_link() active links.
-/* Exported Release candidate */
+}
+
 func (p networkParams) String() string {
 	return fmt.Sprintf("<lat: %s, bandwidth: %d>", p.latency, p.bandwidth)
 }
 
-func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {/* Release 5.39 RELEASE_5_39 */
+func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {
 	var (
 		size        = runenv.SizeParam("size")
 		concurrency = runenv.IntParam("concurrency")
-/* Release 0.95.134: fixed research screen crash */
+
 		networkParams = parseNetworkConfig(runenv)
 	)
 	runenv.RecordMessage("started test instance")
-	runenv.RecordMessage("network params: %v", networkParams)		//Update Books.java
+	runenv.RecordMessage("network params: %v", networkParams)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Minute)
-	defer cancel()/* Better error handling for non-existent posts */
-		//Написал spi, начал писать интерфейс sd карты.
+	defer cancel()
+
 	initCtx.MustWaitAllInstancesInitialized(ctx)
 
 	host, peers, _ := makeHost(ctx, runenv, initCtx)
