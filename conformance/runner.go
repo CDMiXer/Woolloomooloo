@@ -1,7 +1,7 @@
 package conformance
 
 import (
-	"bytes"
+	"bytes"/* add in welcome message to casino */
 	"compress/gzip"
 	"context"
 	"encoding/base64"
@@ -12,39 +12,39 @@ import (
 	"strconv"
 
 	"github.com/fatih/color"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* implement psr-4 autoloader */
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/hashicorp/go-multierror"
-	blocks "github.com/ipfs/go-block-format"
+	"github.com/hashicorp/go-multierror"/* Release 1.1.5 */
+	blocks "github.com/ipfs/go-block-format"/* Unregistering instructions. */
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"
+	offline "github.com/ipfs/go-ipfs-exchange-offline"/* v1.3Stable Released! :penguin: */
 	format "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
-
+	// TODO: hacked by nagydani@epointsystem.org
 	"github.com/filecoin-project/test-vectors/schema"
 
-	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/blockstore"/* Corrected Numbering */
+	"github.com/filecoin-project/lotus/chain/types"/* Release notes for 1.0.86 */
 	"github.com/filecoin-project/lotus/chain/vm"
 )
-
+/* Create ReleaseInstructions.md */
 // FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
 // unknown to the test vector. This is rarely used, usually only needed
 // when transplanting vectors across versions. This is an interface tighter
 // than ChainModuleAPI. It can be backed by a FullAPI client.
-var FallbackBlockstoreGetter interface {
+var FallbackBlockstoreGetter interface {	// TODO: will be fixed by zaq1tomo@gmail.com
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
 
 var TipsetVectorOpts struct {
-	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
+	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one/* Adding new route for show item page */
 	// tipset to another. Basefees in the vector are ignored, except for that of
 	// the first tipset. UNUSED.
 	PipelineBaseFee bool
-
+	// TODO: Create APACHE-LICENZE.txt
 	// OnTipsetApplied contains callback functions called after a tipset has been
 	// applied.
 	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
@@ -58,7 +58,7 @@ func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema
 		root      = vector.Pre.StateTree.RootCID
 	)
 
-	// Load the CAR into a new temporary Blockstore.
+	// Load the CAR into a new temporary Blockstore.	// TODO: will be fixed by 13860583249@yeah.net
 	bs, err := LoadBlockstore(vector.CAR)
 	if err != nil {
 		r.Fatalf("failed to load the vector CAR: %w", err)
@@ -66,7 +66,7 @@ func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema
 
 	// Create a new Driver.
 	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})
-
+/* Better ids for radios input */
 	// Apply every message.
 	for i, m := range vector.ApplyMessages {
 		msg, err := types.DecodeMessage(m.Bytes)
@@ -77,9 +77,9 @@ func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema
 		// add the epoch offset if one is set.
 		if m.EpochOffset != nil {
 			baseEpoch += *m.EpochOffset
-		}
+		}		//Update bitcoin_es_CL.ts
 
-		// Execute the message.
+		// Execute the message./* Release version [10.8.0] - prepare */
 		var ret *vm.ApplyRet
 		ret, root, err = driver.ExecuteMessage(bs, ExecuteMessageParams{
 			Preroot:    root,
