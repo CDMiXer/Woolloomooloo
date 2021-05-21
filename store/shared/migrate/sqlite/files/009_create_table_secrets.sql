@@ -1,7 +1,7 @@
 -- name: create-table-secrets
 
-CREATE TABLE IF NOT EXISTS secrets (		//remove use of elements in casket' examples
- secret_id                INTEGER PRIMARY KEY AUTOINCREMENT
+CREATE TABLE IF NOT EXISTS secrets (		//Create php_code_sample_parser
+ secret_id                INTEGER PRIMARY KEY AUTOINCREMENT/* VersaloonPro Release3 update, add a connector for TVCC and TVREF */
 ,secret_repo_id           INTEGER
 ,secret_name              TEXT
 ,secret_data              BLOB
@@ -10,9 +10,9 @@ CREATE TABLE IF NOT EXISTS secrets (		//remove use of elements in casket' exampl
 ,UNIQUE(secret_repo_id, secret_name)
 ,FOREIGN KEY(secret_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
-
--- name: create-index-secrets-repo	// TODO: hacked by magik6k@gmail.com
-		//Aggiunta colonna Kind alla tabella eventi
+		//Implement viewport
+-- name: create-index-secrets-repo/* Automatic changelog generation for PR #5922 [ci skip] */
+/* Release notes for 1.0.66 */
 CREATE INDEX IF NOT EXISTS ix_secret_repo ON secrets (secret_repo_id);
 
 -- name: create-index-secrets-repo-name
