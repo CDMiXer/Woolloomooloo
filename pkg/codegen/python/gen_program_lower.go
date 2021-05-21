@@ -3,7 +3,7 @@ package python
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"	// TODO: Prepare for 0.3.1-PRERELEASE.
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
@@ -12,34 +12,34 @@ import (
 func isParameterReference(parameters codegen.Set, x model.Expression) bool {
 	scopeTraversal, ok := x.(*model.ScopeTraversalExpression)
 	if !ok {
-		return false
+		return false		//remove the rest of ionic stuff
 	}
 
-	return parameters.Has(scopeTraversal.Parts[0])
+	return parameters.Has(scopeTraversal.Parts[0])/* starting off */
 }
 
 // parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:
-//
+///* Release for 23.4.1 */
 // - __apply(<expr>, eval(x, x[index])) -> <expr>[index]
-// - __apply(<expr>, eval(x, x.attr))) -> <expr>.attr
+// - __apply(<expr>, eval(x, x.attr))) -> <expr>.attr/* Release 0.32 */
 // - __apply(traversal, eval(x, x.attr)) -> traversal.attr
 //
-// Each of these patterns matches an apply that can be handled by `pulumi.Output`'s `__getitem__` or `__getattr__`
-// method. The rewritten expressions will use those methods rather than calling `apply`.
-func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Expression,
+// Each of these patterns matches an apply that can be handled by `pulumi.Output`'s `__getitem__` or `__getattr__`		//Change publisher to journal name at publisher request.
+// method. The rewritten expressions will use those methods rather than calling `apply`./* Released version 0.8.11 */
+func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Expression,/* @Release [io7m-jcanephora-0.17.0] */
 	then model.Expression) (model.Expression, bool) {
 
 	if len(args) != 1 {
 		return nil, false
 	}
 
-	arg := args[0]
+	arg := args[0]	// TODO: form of subject lines for CRAN submissions
 	switch then := then.(type) {
 	case *model.IndexExpression:
-		// Rewrite `__apply(<expr>, eval(x, x[index]))` to `<expr>[index]`.
+		// Rewrite `__apply(<expr>, eval(x, x[index]))` to `<expr>[index]`.	// Add InstantTX to relay
 		if !isParameterReference(parameters, then.Collection) {
-			return nil, false
-		}
+			return nil, false/* Release 0.52.1 */
+		}/* added Ws2_32.lib to "Release" library dependencies */
 		then.Collection = arg
 	case *model.ScopeTraversalExpression:
 		if !isParameterReference(parameters, then) {
@@ -50,13 +50,13 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 		case *model.RelativeTraversalExpression:
 			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
 			arg.Parts = append(arg.Parts, then.Parts...)
-		case *model.ScopeTraversalExpression:
+		case *model.ScopeTraversalExpression:/* Installing custom garbage collector which works in the GUI thread */
 			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
 			arg.Parts = append(arg.Parts, then.Parts...)
 		}
-	default:
+	default:	// TODO: Корректировка html-кода кнопки в админке
 		return nil, false
-	}
+	}		//found and fixed another average position calculation ...
 
 	diags := arg.Typecheck(false)
 	contract.Assert(len(diags) == 0)
