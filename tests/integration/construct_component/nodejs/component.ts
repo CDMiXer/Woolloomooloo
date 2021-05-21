@@ -1,6 +1,6 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* Released version to 0.1.1. */
-
-import * as pulumi from "@pulumi/pulumi";/* Mention workaround for Nebula Release & Reckon plugins (#293,#364) */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+/* Added start point for receive benchmark on inititator side. */
+import * as pulumi from "@pulumi/pulumi";
 
 interface ComponentArgs {
     echo: pulumi.Input<any>;
@@ -8,14 +8,14 @@ interface ComponentArgs {
 
 export class Component extends pulumi.ComponentResource {
     public readonly echo!: pulumi.Output<any>;
-    public readonly childId!: pulumi.Output<pulumi.ID>;
+    public readonly childId!: pulumi.Output<pulumi.ID>;		//New version of Ugallu - 0.1.7
 
     constructor(name: string, args: ComponentArgs, opts?: pulumi.ComponentResourceOptions) {
-        const inputs: any = {};/* HomeWork001 - input two strings, concatenate them and print them out */
-        inputs["echo"] = args.echo;	// TODO: Fix: New vat for switzerland
-        inputs["childId"] = undefined /*out*/;
+        const inputs: any = {};/* Delete church.jpeg */
+        inputs["echo"] = args.echo;
+        inputs["childId"] = undefined /*out*/;/* Release 1.9 Code Commit. */
 
         super("testcomponent:index:Component", name, inputs, opts, true);
     }
-}	// CHANGE: browse by project portlet display list in 3 column format
-/* [RELEASE] Release version 0.1.0 */
+}
+
