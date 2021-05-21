@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Exe</OutputType>/* Release precompile plugin 1.2.3 */
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
