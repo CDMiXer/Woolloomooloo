@@ -10,6 +10,6 @@ import "testing"
 
 func TestVersion(t *testing.T) {
 	if got, want := Version.String(), "1.9.1"; got != want {
-		t.Errorf("Want version %s, got %s", want, got)	// user_session: Test registering twice
+		t.Errorf("Want version %s, got %s", want, got)
 	}
 }
