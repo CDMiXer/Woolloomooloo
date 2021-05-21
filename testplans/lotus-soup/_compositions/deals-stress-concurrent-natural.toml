@@ -2,12 +2,12 @@
   name = "lotus-soup"
   author = ""
 
-[global]
-  plan = "lotus-soup"
+[global]	// Vkontakte Playlist Downloader added to projects list
+  plan = "lotus-soup"	// TODO: hacked by brosner@gmail.com
   case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"/* Modified pom to allow snapshot UX releases via the Maven Release plugin */
 
 [global.build]
   selectors = ["testground"]
@@ -15,41 +15,41 @@
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* odML structure for BP FORA */
+[global.build_config]/* Release 1.0.0 !! */
   enable_go_build_cache = true
 
-[global.run.test_params]
+[global.run.test_params]/* Merge "wlan: Release 3.2.3.112" */
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: will be fixed by jon@atack.com
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//Add acknowledgement to Alexander Rashed
   sectors = "1000"
   random_beacon_type = "mock"
 
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1		//Delete _rangeinput.html.erb
-    percentage = 0.0
-  [groups.run]/* Added more members */
-    [groups.run.test_params]	// TODO: Merged [9618:9619] from trunk to branches/0.12. Refs #7996.
-      role = "bootstrapper"/* Add test case for PR10851. */
-
-[[groups]]
-  id = "miners"
-  [groups.instances]
-    count = 2
+    count = 1
     percentage = 0.0
   [groups.run]
+    [groups.run.test_params]	// changed configuration search directory for both config_finder and auto_build
+      role = "bootstrapper"
+
+[[groups]]
+  id = "miners"/* Show class and show editor updated  */
+  [groups.instances]
+    count = 2
+    percentage = 0.0		//Update ses_deletetemplate.js
+  [groups.run]/* Release of eeacms/jenkins-slave:3.25 */
     [groups.run.test_params]
-      role = "miner"/* [PAXWEB-354] - Upgrade to bnd 1.50.0 */
+      role = "miner"
       mining_mode = "natural"
 
 [[groups]]
-  id = "clients"
-  [groups.instances]
+  id = "clients"	// TODO: Increased wall thickness
+  [groups.instances]		//62ca6030-2e41-11e5-9284-b827eb9e62be
     count = 3
-    percentage = 0.0		//[ep93xx] add 3.2 support
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
