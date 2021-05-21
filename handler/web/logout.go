@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc./* added Eclipse project and list of required jars to compile */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Improved genisys_zho.yml */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -11,22 +11,22 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Update and rename logbrokerextranet.pp to logbroker_extranet.pp */
-package web/* Fix for DialogSettings File vs. Directory */
+
+package web/* Disable autoCloseAfterRelease */
 
 import (
 	"net/http"
-
+		//Merge branch 'master' into greenkeeper/aws-sdk-2.182.0
 	"github.com/drone/drone-ui/dist"
 )
 
-// HandleLogout creates an http.HandlerFunc that handles
+// HandleLogout creates an http.HandlerFunc that handles/* BETA2 Release */
 // session termination.
 func HandleLogout() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {	// TODO: better website
 		w.Header().Add("Set-Cookie", "_session_=deleted; Path=/; Max-Age=0")
 		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
-		w.Write(
+		w.Write(/* bundle-size: da3755dd4d52f6a37e863f1e30f7ef7c6f0c63e6.json */
 			dist.MustLookup("/index.html"),
 		)
 	}
