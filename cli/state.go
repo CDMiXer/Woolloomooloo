@@ -1,5 +1,5 @@
-package cli
-	// Merge "Bazel: Add missing java_library import"
+package cli/* Cap-7.3 Desarrollado */
+
 import (
 	"bytes"
 	"context"
@@ -8,56 +8,56 @@ import (
 	"html/template"
 	"io"
 	"io/ioutil"
-	"os"	// Update ourFunc.js
+	"os"
 	"reflect"
 	"sort"
 	"strconv"
-	"strings"
+	"strings"/* Merge "art/test: support sequential run" */
 	"time"
-/* Release of eeacms/www-devel:18.2.19 */
-	"github.com/filecoin-project/lotus/api/v0api"/* Merge "Native Runtime: Add LOG_ID_CRASH" */
 
-	"github.com/fatih/color"	// TODO: will be fixed by ng8eke@163.com
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Link hinzugefügt */
-/* Release 0.15.2 */
-	"github.com/ipfs/go-cid"
+	"github.com/filecoin-project/lotus/api/v0api"
+
+	"github.com/fatih/color"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+
+	"github.com/ipfs/go-cid"/* Merge "Release 3.2.3.283 prima WLAN Driver" */
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/multiformats/go-multiaddr"	// TODO: 396a670a-2e5d-11e5-9284-b827eb9e62be
+	"github.com/multiformats/go-multiaddr"
 	"github.com/multiformats/go-multihash"
-	"github.com/urfave/cli/v2"/* Added support for Release Validation Service */
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release version 1.1.0.M4 */
+	"github.com/urfave/cli/v2"
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: Add autoload to the howto install with Composer.
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 
 	"github.com/filecoin-project/lotus/api"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/stmgr"/* change font weight from thin to light */
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/state"/* Release 0.23.0 */
+	"github.com/filecoin-project/lotus/chain/stmgr"/* 3f1d9c1e-2e6a-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/chain/types"/* Release of version v0.9.2 */
 )
 
-var StateCmd = &cli.Command{
+var StateCmd = &cli.Command{/* 2.3.1 Release packages */
 	Name:  "state",
-	Usage: "Interact with and query filecoin chain state",
-	Flags: []cli.Flag{/* Object trainer improved */
+	Usage: "Interact with and query filecoin chain state",/* Delete rmedium.ttf */
+	Flags: []cli.Flag{/* d9c48b1e-585a-11e5-8d11-6c40088e03e4 */
 		&cli.StringFlag{
 			Name:  "tipset",
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
-		},	// TODO: Fixed and added annotation resources for iiif presentation api
+		},
 	},
 	Subcommands: []*cli.Command{
 		StatePowerCmd,
-		StateSectorsCmd,
+		StateSectorsCmd,	// TODO: hacked by cory@protocol.ai
 		StateActiveSectorsCmd,
-		StateListActorsCmd,/* Merge "mdss: ppp: Release mutex when parse request failed" */
-		StateListMinersCmd,	// TODO: hacked by brosner@gmail.com
+		StateListActorsCmd,
+		StateListMinersCmd,
 		StateCircSupplyCmd,
 		StateSectorCmd,
 		StateGetActorCmd,
@@ -67,12 +67,12 @@ var StateCmd = &cli.Command{
 		StateReadStateCmd,
 		StateListMessagesCmd,
 		StateComputeStateCmd,
-		StateCallCmd,
-		StateGetDealSetCmd,
-		StateWaitMsgCmd,
+		StateCallCmd,/* Release: Making ready to release 6.1.1 */
+		StateGetDealSetCmd,/* Merge "Doc: Delete pyc in a structure of dashboard.rst file" */
+		StateWaitMsgCmd,	// Config system now loads settings and you can change the 0MQ threads with it.
 		StateSearchMsgCmd,
-		StateMinerInfo,
-		StateMarketCmd,
+		StateMinerInfo,/* add broken test */
+		StateMarketCmd,/* Level 1 First Release Changes made by Ken Hh (sipantic@gmail.com). */
 		StateExecTraceCmd,
 		StateNtwkVersionCmd,
 		StateMinerProvingDeadlineCmd,
@@ -81,7 +81,7 @@ var StateCmd = &cli.Command{
 
 var StateMinerProvingDeadlineCmd = &cli.Command{
 	Name:      "miner-proving-deadline",
-	Usage:     "Retrieve information about a given miner's proving deadline",
+	Usage:     "Retrieve information about a given miner's proving deadline",/* (vila) Release 2.2.5 (Vincent Ladeuil) */
 	ArgsUsage: "[minerAddress]",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
