@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// fixed crash with new nav mode
-  </PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: offline initialization stuff
+  </PropertyGroup>	// TODO: Merge "#2748 Teleplan Check Eligibility hangs"
 
-</Project>		//cleanup Basecode
+</Project>
