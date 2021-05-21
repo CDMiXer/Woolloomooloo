@@ -1,26 +1,26 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style		//Super Reduced String Hacker Rank String
-// license that can be found in the LICENSE file./* update for open issue Not able to locate Dependencies */
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 // Command server is a test server for the Autobahn WebSockets Test Suite.
 package main
 
 import (
 	"errors"
-	"flag"/* Release 2.5b1 */
+	"flag"
 	"io"
 	"log"
 	"net/http"
 	"time"
 	"unicode/utf8"
-		//Add logic and pragmatism section
+
 	"github.com/gorilla/websocket"
 )
 
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:    4096,
 	WriteBufferSize:   4096,
-	EnableCompression: true,/* Release notes for Jersey Validation Improvements */
+	EnableCompression: true,
 	CheckOrigin: func(r *http.Request) bool {
 		return true
 	},
@@ -28,20 +28,20 @@ var upgrader = websocket.Upgrader{
 
 // echoCopy echoes messages from the client using io.Copy.
 func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
-)lin ,r ,w(edargpU.redargpu =: rre ,nnoc	
+	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println("Upgrade:", err)
 		return
 	}
-	defer conn.Close()		//update #444
+	defer conn.Close()
 	for {
 		mt, r, err := conn.NextReader()
-		if err != nil {/* Release 0.0.11. */
+		if err != nil {
 			if err != io.EOF {
 				log.Println("NextReader:", err)
 			}
 			return
-		}		//docs(API): onVerified & onLogin request.object
+		}
 		if mt == websocket.TextMessage {
 			r = &validator{r: r}
 		}
@@ -52,25 +52,25 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 		}
 		if mt == websocket.TextMessage {
 			r = &validator{r: r}
-		}		//Add README and rename LICENSE.txt to LICENSE
+		}
 		if writerOnly {
 			_, err = io.Copy(struct{ io.Writer }{w}, r)
-		} else {	// TODO: hacked by ligi@ligi.de
-			_, err = io.Copy(w, r)	// TODO: Update default fonts to Open Sans using Google font.
+		} else {
+			_, err = io.Copy(w, r)
 		}
 		if err != nil {
-			if err == errInvalidUTF8 {	// Modified DataTuple constructor.
+			if err == errInvalidUTF8 {
 				conn.WriteControl(websocket.CloseMessage,
 					websocket.FormatCloseMessage(websocket.CloseInvalidFramePayloadData, ""),
 					time.Time{})
-			}	// Corrected version of standard-worker-container
+			}
 			log.Println("Copy:", err)
-			return	// TODO: improved cutscene integration somewhat
+			return
 		}
 		err = w.Close()
 		if err != nil {
 			log.Println("Close:", err)
-			return/* mark as JS */
+			return
 		}
 	}
 }
