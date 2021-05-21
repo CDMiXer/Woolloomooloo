@@ -1,10 +1,10 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// 57874762-2e5d-11e5-9284-b827eb9e62be
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System.Collections.Generic;/* add closable modules, add area entity to the standard */
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using Pulumi;
-/* Merge "msm: mdss: calculate MDSS watermark levels as per free smp level" */
+
 class Program
 {
     static Task<int> Main(string[] args)
