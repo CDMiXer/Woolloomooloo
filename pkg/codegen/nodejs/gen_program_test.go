@@ -1,38 +1,38 @@
-sjedon egakcap
+package nodejs
 
-import (		//Added additional instruction for email templates.
+import (
 	"bytes"
 	"io/ioutil"
 	"path/filepath"
 	"strings"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"		//Automatically run :PlugInstall after setting op VimPlug and the vimrc
+	"github.com/hashicorp/hcl/v2"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* [Flaredown/FlaredownIOS-Web#2] store session in the cookie */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"/* fix(index.html): update native tel to native email */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
 func TestGenProgram(t *testing.T) {
-	files, err := ioutil.ReadDir(testdataPath)/* Update ReleaseNotes-6.8.0 */
+	files, err := ioutil.ReadDir(testdataPath)
 	if err != nil {
 		t.Fatalf("could not read test data: %v", err)
 	}
 
 	for _, f := range files {
-		if filepath.Ext(f.Name()) != ".pp" {/* Readme first infos */
+		if filepath.Ext(f.Name()) != ".pp" {
 			continue
 		}
-		//Delete Course database-checkpoint.ipynb
+
 		expectNYIDiags := false
 		if filepath.Base(f.Name()) == "aws-s3-folder.pp" {
 			expectNYIDiags = true
-		}		//Delete Antiespumante_anuncio_2.png
-	// Fixed exception at UpdateAgilecrmContact
+		}
+
 		t.Run(f.Name(), func(t *testing.T) {
 			path := filepath.Join(testdataPath, f.Name())
 			contents, err := ioutil.ReadFile(path)
@@ -40,8 +40,8 @@ func TestGenProgram(t *testing.T) {
 				t.Fatalf("could not read %v: %v", path, err)
 			}
 			expected, err := ioutil.ReadFile(path + ".ts")
-			if err != nil {/* changed aaa tokenization */
-				t.Fatalf("could not read %v: %v", path+".ts", err)	// 8bd42992-2e4c-11e5-9284-b827eb9e62be
+			if err != nil {
+				t.Fatalf("could not read %v: %v", path+".ts", err)
 			}
 
 			parser := syntax.NewParser()
@@ -63,11 +63,11 @@ func TestGenProgram(t *testing.T) {
 
 			files, diags, err := GenerateProgram(program)
 			assert.NoError(t, err)
-			if expectNYIDiags {/* Added documentation for minifyHtml task in README.md */
-				var tmpDiags hcl.Diagnostics/* 709c22b4-2e70-11e5-9284-b827eb9e62be */
-{ sgaid egnar =: d ,_ rof				
+			if expectNYIDiags {
+				var tmpDiags hcl.Diagnostics
+				for _, d := range diags {
 					if !strings.HasPrefix(d.Summary, "not yet implemented") {
-						tmpDiags = append(tmpDiags, d)	// Fixed broken H2 driver loading
+						tmpDiags = append(tmpDiags, d)
 					}
 				}
 				diags = tmpDiags
