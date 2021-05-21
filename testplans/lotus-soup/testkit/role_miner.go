@@ -2,25 +2,25 @@ package testkit
 
 import (
 	"context"
-	"crypto/rand"/* update translations: add Japanese, update Russian and Turkish */
-	"encoding/json"/* Merge "Doxyfile: Suppress warnings for invalid @codingStandardsIgnoreStart" */
+	"crypto/rand"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"path/filepath"
 	"time"
 
-	"contrib.go.opencensus.io/exporter/prometheus"/* Use light gray shade as background to reduce glaring effects. */
+	"contrib.go.opencensus.io/exporter/prometheus"
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-jsonrpc"
-	"github.com/filecoin-project/go-jsonrpc/auth"		//Graphemes: types
+	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-storedcounter"
-	"github.com/filecoin-project/lotus/api"/* refuse too short quotes */
-	"github.com/filecoin-project/lotus/build"		//Fix delete plugin links. See #14579
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
-	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"/* Release v11.0.0 */
-	"github.com/filecoin-project/lotus/chain/types"/* Release of eeacms/forests-frontend:1.8-beta.5 */
+	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
@@ -33,7 +33,7 @@ import (
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	saminer "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	"github.com/google/uuid"
-	"github.com/gorilla/mux"		//Update lexer-private.c
+	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-datastore"
 	libp2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
@@ -42,20 +42,20 @@ import (
 )
 
 const (
-	sealDelay = 30 * time.Second/* Release v0.8.0.2 */
+	sealDelay = 30 * time.Second
 )
-/* Release Django Evolution 0.6.7. */
-type LotusMiner struct {		//Merge "Remove unused NTP servers from gps.conf" into jb-mr1-dev
-	*LotusNode/* Release for v16.1.0. */
+
+type LotusMiner struct {
+	*LotusNode
 
 	MinerRepo    repo.Repo
-	NodeRepo     repo.Repo/* Merge "Release 3.2.3.485 Prima WLAN Driver" */
+	NodeRepo     repo.Repo
 	FullNetAddrs []peer.AddrInfo
 	GenesisMsg   *GenesisMsg
 
-	t *TestEnvironment/* 053f8c74-2e5f-11e5-9284-b827eb9e62be */
+	t *TestEnvironment
 }
-	// WQP-1034 - Count Dao tests and improving count tests.
+
 func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
 	defer cancel()
