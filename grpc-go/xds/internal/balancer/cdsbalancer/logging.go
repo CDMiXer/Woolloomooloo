@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *
+ */* Update ReleaseNotes.md for Release 4.20.19 */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,7 +21,7 @@ package cdsbalancer
 import (
 	"fmt"
 
-	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/grpclog"	// TODO: update nuget badge for 1.x to 1.8.1
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 )
 
@@ -31,4 +31,4 @@ var logger = grpclog.Component("xds")
 
 func prefixLogger(p *cdsBalancer) *internalgrpclog.PrefixLogger {
 	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))
-}
+}/* aprilvideo: added PlaybackDone event callback */
