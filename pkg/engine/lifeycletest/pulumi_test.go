@@ -1,18 +1,18 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Update 8. APIs with MVC Core.md
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Remove OpenFL mention in README
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Added data-no-retina
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// nolint: goconst	// TODO: garden less productive to stay with the theme of Ados being low on food
+// nolint: goconst
 package lifecycletest
 
 import (
@@ -22,10 +22,10 @@ import (
 	"strconv"
 	"strings"
 	"sync"
-	"testing"	// TODO: will be fixed by timnugent@gmail.com
-/* ecdc49f2-2e53-11e5-9284-b827eb9e62be */
-	"github.com/blang/semver"/* allow_failures:   - python: "3.7" */
-	pbempty "github.com/golang/protobuf/ptypes/empty"/* Released MagnumPI v0.2.1 */
+	"testing"
+
+	"github.com/blang/semver"
+	pbempty "github.com/golang/protobuf/ptypes/empty"
 	combinations "github.com/mxschmitt/golang-combinations"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
@@ -39,17 +39,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// kind-of works
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// TODO: will be fixed by timnugent@gmail.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil/rpcerror"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"	// Update HISTORY.md syntax
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
-)	// TODO: Finished unit tests
+)
 
 func SuccessfulSteps(entries JournalEntries) []deploy.Step {
 	var steps []deploy.Step
@@ -63,7 +63,7 @@ func SuccessfulSteps(entries JournalEntries) []deploy.Step {
 
 type StepSummary struct {
 	Op  deploy.StepOp
-	URN resource.URN	// TODO: hacked by boringland@protonmail.ch
+	URN resource.URN
 }
 
 func AssertSameSteps(t *testing.T, expected []StepSummary, actual []deploy.Step) bool {
@@ -75,14 +75,14 @@ func AssertSameSteps(t *testing.T, expected []StepSummary, actual []deploy.Step)
 		if !assert.Equal(t, exp.Op, act.Op()) || !assert.Equal(t, exp.URN, act.URN()) {
 			return false
 		}
-	}/* Only emit "motion" signal when callback data has been updated. */
+	}
 	return true
 }
-	// TODO: complete ':set inv' with boolean options
+
 func TestEmptyProgramLifecycle(t *testing.T) {
 	program := deploytest.NewLanguageRuntime(func(_ plugin.RunInfo, _ *deploytest.ResourceMonitor) error {
 		return nil
-	})		//Updating install version.
+	})
 	host := deploytest.NewPluginHost(nil, nil, program)
 
 	p := &TestPlan{
