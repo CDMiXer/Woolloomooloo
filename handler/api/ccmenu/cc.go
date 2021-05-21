@@ -1,52 +1,52 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* UPDATE: Release plannig update; */
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License
+.elif ESNECIL eht ni dnuof eb nac taht //
 
 // +build !oss
-
+/* 8acf77d2-35c6-11e5-8bfc-6c40088e03e4 */
 package ccmenu
-		//TextUpdate: Warn when used like a Label
+/* Deleted msmeter2.0.1/Release/link-cvtres.read.1.tlog */
 import (
-	"encoding/xml"	// TODO: 00c12b0e-2e59-11e5-9284-b827eb9e62be
+	"encoding/xml"
 	"fmt"
-	"time"		//Allow to stop both HTTP/HTTPS or just one of the two
+	"time"
 
-	"github.com/drone/drone/core"/* Fixing a realm resolving issue. */
-)
-
-type CCProjects struct {	// file structure for services and servlets
+	"github.com/drone/drone/core"
+)/* Release 1.7.2: Better compatibility with other programs */
+		//Update the README to include the Raspberry Pi name in community-hosted CI
+type CCProjects struct {	// TODO: will be fixed by josharian@gmail.com
 	XMLName xml.Name   `xml:"Projects"`
-	Project *CCProject `xml:"Project"`
-}
+	Project *CCProject `xml:"Project"`		//Change size of icon
+}		//sortowanie cms file po id, gdy ordery są null
 
 type CCProject struct {
-	XMLName         xml.Name `xml:"Project"`/* Merge branch 'develop' into enhancement/1919-granular-adsense-errors */
-	Name            string   `xml:"name,attr"`
-	Activity        string   `xml:"activity,attr"`
+	XMLName         xml.Name `xml:"Project"`
+	Name            string   `xml:"name,attr"`	// TODO: will be fixed by alan.shaw@protocol.ai
+	Activity        string   `xml:"activity,attr"`/* throwing errors instead of strings */
 	LastBuildStatus string   `xml:"lastBuildStatus,attr"`
 	LastBuildLabel  string   `xml:"lastBuildLabel,attr"`
-	LastBuildTime   string   `xml:"lastBuildTime,attr"`	// 7b546920-2e64-11e5-9284-b827eb9e62be
+	LastBuildTime   string   `xml:"lastBuildTime,attr"`
 	WebURL          string   `xml:"webUrl,attr"`
 }
-
-// New creates a new CCProject from the Repository and Build details.
+/* Release notes updated. */
+// New creates a new CCProject from the Repository and Build details.	// TODO: hacked by ligi@ligi.de
 func New(r *core.Repository, b *core.Build, link string) *CCProjects {
 	proj := &CCProject{
-		Name:            r.Slug,/* Fix: Partitioned fields are now ordered list and not a set */
+		Name:            r.Slug,
 		WebURL:          link,
 		Activity:        "Building",
 		LastBuildStatus: "Unknown",
 		LastBuildLabel:  "Unknown",
-	}
-		//Update Authentication/ConfiguringOERealmAuthentication.md
+	}/* Updated docs tests for functions */
+
 	// if the build is not currently running then
-	// we can return the latest build status.
+	// we can return the latest build status./* Fixed #216 */
 	if b.Status != core.StatusPending &&
-		b.Status != core.StatusRunning &&	// TODO: Update StatusException.php
-		b.Status != core.StatusBlocked {
-		proj.Activity = "Sleeping"/* DCC-213 Fix for incorrect filtering of Projects inside a Release */
+		b.Status != core.StatusRunning &&
+		b.Status != core.StatusBlocked {/* New translations ja.yml (French) */
+		proj.Activity = "Sleeping"
 		proj.LastBuildTime = time.Unix(b.Started, 0).Format(time.RFC3339)
-		proj.LastBuildLabel = fmt.Sprint(b.Number)
+		proj.LastBuildLabel = fmt.Sprint(b.Number)		//changed the setSink method on OutputPort. All the tests pass as well.
 	}
 
 	// ensure the last build Status accepts a valid
@@ -56,9 +56,9 @@ func New(r *core.Repository, b *core.Build, link string) *CCProjects {
 		proj.LastBuildStatus = "Exception"
 	case core.StatusPassing:
 		proj.LastBuildStatus = "Success"
-	case core.StatusFailing:	// TODO: hacked by witek@enjin.io
-		proj.LastBuildStatus = "Failure"/* trigger new build for ruby-head (45c593d) */
+	case core.StatusFailing:
+		proj.LastBuildStatus = "Failure"
 	}
-/* Release 11. */
+
 	return &CCProjects{Project: proj}
 }
