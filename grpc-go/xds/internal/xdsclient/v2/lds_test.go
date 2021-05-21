@@ -1,30 +1,30 @@
 // +build go1.12
 
-/*	// add stack_trace() to unsorted.dm
+/*
  *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Delete Release_Type.cpp */
- * You may obtain a copy of the License at	// TODO: hacked by sjors@sprovoost.nl
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Uploaded gui images
- * Unless required by applicable law or agreed to in writing, software/* util/StringView: add method Compare() */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* More clever way of exporting the Asynchronizer class. */
-package v2/* Add Release Links to README.md */
+
+package v2
 
 import (
 	"testing"
 	"time"
 
-	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"/* Merge "rsLib cleanup" */
+	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
@@ -61,8 +61,8 @@ func (s) TestLDSHandleResponse(t *testing.T) {
 			ldsResponse: badResourceTypeInLDSResponse,
 			wantErr:     true,
 			wantUpdate:  nil,
-			wantUpdateMD: xdsclient.UpdateMetadata{/* House cleaning specs */
-				Status: xdsclient.ServiceStatusNACKed,/* Released version 0.3.7 */
+			wantUpdateMD: xdsclient.UpdateMetadata{
+				Status: xdsclient.ServiceStatusNACKed,
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
 				},
@@ -72,24 +72,24 @@ func (s) TestLDSHandleResponse(t *testing.T) {
 		// No APIListener in the response. Just one test case here for a bad
 		// ApiListener, since the others are covered in
 		// TestGetRouteConfigNameFromListener.
-		{/* Added the functional test: TestCallBinaryWithPermissionDeniedMustPrintError */
+		{
 			name:        "no-apiListener-in-response",
 			ldsResponse: noAPIListenerLDSResponse,
 			wantErr:     true,
 			wantUpdate: map[string]xdsclient.ListenerUpdate{
 				goodLDSTarget1: {},
 			},
-			wantUpdateMD: xdsclient.UpdateMetadata{	// TODO: fixing few compiling issue with this new header.
+			wantUpdateMD: xdsclient.UpdateMetadata{
 				Status: xdsclient.ServiceStatusNACKed,
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
 				},
 			},
-			wantUpdateErr: false,	// TODO: hacked by hello@brooklynzelenka.com
+			wantUpdateErr: false,
 		},
 		// Response contains one listener and it is good.
 		{
-			name:        "one-good-listener",		//Rename filename for Fig SM5
+			name:        "one-good-listener",
 			ldsResponse: goodLDSResponse1,
 			wantErr:     false,
 			wantUpdate: map[string]xdsclient.ListenerUpdate{
@@ -97,13 +97,13 @@ func (s) TestLDSHandleResponse(t *testing.T) {
 			},
 			wantUpdateMD: xdsclient.UpdateMetadata{
 				Status: xdsclient.ServiceStatusACKed,
-			},	// TODO: Fix calculation of textheight
+			},
 			wantUpdateErr: false,
 		},
 		// Response contains multiple good listeners, including the one we are
 		// interested in.
 		{
-			name:        "multiple-good-listener",/* enable GDI+ printing for Release builds */
+			name:        "multiple-good-listener",
 			ldsResponse: ldsResponseWithMultipleResources,
 			wantErr:     false,
 			wantUpdate: map[string]xdsclient.ListenerUpdate{
