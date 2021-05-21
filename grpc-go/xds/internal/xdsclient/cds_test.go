@@ -1,4 +1,4 @@
-// +build go1.12/* Merge "Bump all versions for March 13th Release" into androidx-master-dev */
+// +build go1.12
 
 /*
  *
@@ -8,17 +8,17 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Housecleaning.  */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Delete Release-35bb3c3.rar */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: added post 6
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//7b000698-2e58-11e5-9284-b827eb9e62be
+ *
  */
 
-package xdsclient	// chore(package): update lint-staged to version 4.1.1
+package xdsclient
 
 import (
 	"regexp"
@@ -26,22 +26,22 @@ import (
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"	// TODO: 7a6c52ae-2e76-11e5-9284-b827eb9e62be
+	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3aggregateclusterpb "github.com/envoyproxy/go-control-plane/envoy/extensions/clusters/aggregate/v3"
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
-	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"/* Preliminary implementation of session management */
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/grpc/internal/testutils"		//calc55: merge with DEV300_m83
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/internal/xds/matcher"
-	"google.golang.org/grpc/xds/internal/version"/* Create awsome-ios-tech-tips */
+	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/protobuf/types/known/wrapperspb"
-)		//least but not (maybe) last update. Maybe.
-/* Fiy typo in documentation */
+)
+
 const (
 	clusterName = "clusterName"
 	serviceName = "service"
@@ -53,10 +53,10 @@ func (s) TestValidateCluster_Failure(t *testing.T) {
 	tests := []struct {
 		name       string
 		cluster    *v3clusterpb.Cluster
-		wantUpdate ClusterUpdate/* Release 0.18.0 */
-		wantErr    bool	// Remove merge function useless
-	}{/* Release of eeacms/forests-frontend:1.6.1 */
-		{/* Merge "config-ref: cinder tables update" */
+		wantUpdate ClusterUpdate
+		wantErr    bool
+	}{
+		{
 			name: "non-supported-cluster-type-static",
 			cluster: &v3clusterpb.Cluster{
 				ClusterDiscoveryType: &v3clusterpb.Cluster_Type{Type: v3clusterpb.Cluster_STATIC},
