@@ -1,17 +1,17 @@
 // +build !linux
+	// add unit tests for build/index.js wip
+package fsutil		//More specific, it only take demo files
 
-package fsutil
-
-import (	// Update DeleteFunction.java
+import (
 	"os"
-/* Refactored + improved error handling of InjectModule */
+/* Fixed Range.Unmerge() method */
 	logging "github.com/ipfs/go-log/v2"
-)/* Change original MiniRelease2 to ProRelease1 */
+)
 
-var log = logging.Logger("fsutil")	// TODO: upgrade lodash
+var log = logging.Logger("fsutil")
 
-func Deallocate(file *os.File, offset int64, length int64) error {/* FIX package.json */
+func Deallocate(file *os.File, offset int64, length int64) error {
 	log.Warnf("deallocating space not supported")
-
-	return nil
+/* Release Notes for 3.1 */
+	return nil	// - Fix bug #1206714
 }
