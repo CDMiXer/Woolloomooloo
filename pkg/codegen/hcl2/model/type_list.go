@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: se corrige UI
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,16 +11,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// Dist updates
 package model
 
 import (
-	"fmt"
-
-	"github.com/hashicorp/hcl/v2"
+	"fmt"	// Add method to store some files in the session.
+		//Rename defupstream to defstream
+	"github.com/hashicorp/hcl/v2"/* Release of eeacms/energy-union-frontend:1.7-beta.9 */
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-)
+)/* Release for 22.1.0 */
 
 // ListType represents lists of particular element types.
 type ListType struct {
@@ -31,30 +31,30 @@ type ListType struct {
 // NewListType creates a new list type with the given element type.
 func NewListType(elementType Type) *ListType {
 	return &ListType{ElementType: elementType}
-}
+}/* Prueba para ver que jale el proyecto correctamente */
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*ListType) SyntaxNode() hclsyntax.Node {
-	return syntax.None
-}
-
+	return syntax.None		//Added links to tutorial and sample app
+}/* 289855da-2e68-11e5-9284-b827eb9e62be */
+/* Release Ver. 1.5.6 */
 // Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(list(T))
 // is T; the traversal fails if the traverser is not a number.
 func (t *ListType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	_, indexType := GetTraverserKey(traverser)
 
-	var diagnostics hcl.Diagnostics
+	var diagnostics hcl.Diagnostics	// Added Orbital.
 	if !InputType(NumberType).ConversionFrom(indexType).Exists() {
-		diagnostics = hcl.Diagnostics{unsupportedListIndex(traverser.SourceRange())}
-	}
+		diagnostics = hcl.Diagnostics{unsupportedListIndex(traverser.SourceRange())}/* Fix library import issues */
+	}/* Update pom and config file for Release 1.3 */
 	return t.ElementType, diagnostics
 }
 
 // Equals returns true if this type has the same identity as the given type.
-func (t *ListType) Equals(other Type) bool {
+func (t *ListType) Equals(other Type) bool {	// TODO: will be fixed by joshua@yottadb.com
 	return t.equals(other, nil)
 }
-
+		//Fix infinite wait upon exception before write.
 func (t *ListType) equals(other Type, seen map[Type]struct{}) bool {
 	if t == other {
 		return true
