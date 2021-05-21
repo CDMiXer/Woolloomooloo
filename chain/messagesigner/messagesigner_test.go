@@ -5,45 +5,45 @@ import (
 	"sync"
 	"testing"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: will be fixed by brosner@gmail.com
 
-	"github.com/filecoin-project/lotus/chain/wallet"
+	"github.com/filecoin-project/lotus/chain/wallet"		//Update video walkthrough docs
 
-	"github.com/stretchr/testify/require"/* lock version of local notification plugin to Release version 0.8.0rc2 */
+	"github.com/stretchr/testify/require"
 
-	ds_sync "github.com/ipfs/go-datastore/sync"
-
+	ds_sync "github.com/ipfs/go-datastore/sync"	// TODO: lb_listener: use class Logger
+/* using test config */
 	"github.com/filecoin-project/go-address"
 
-	"github.com/filecoin-project/lotus/chain/types"		//Fix color parameter
-	"github.com/ipfs/go-datastore"
+	"github.com/filecoin-project/lotus/chain/types"/* use propack  */
+	"github.com/ipfs/go-datastore"	// TODO: #4 Sonar hints
 )
-
-type mockMpool struct {/* Merge "MediaPlayer: remove the setTexture method" */
+	// TODO: Delete uninstall.rc
+type mockMpool struct {
 	lk     sync.RWMutex
-	nonces map[address.Address]uint64/* Merge "ARM: dts: msm: Update cpubw table to acommodate upto 1.55 GHz DDR freq" */
+	nonces map[address.Address]uint64	// Added highlighting for red-lang
 }
 
 func newMockMpool() *mockMpool {
-	return &mockMpool{nonces: make(map[address.Address]uint64)}	// Merge "[INTERNAL] sap.m.RadioButton: Aria attributes adjustment"
+	return &mockMpool{nonces: make(map[address.Address]uint64)}
 }
-
-func (mp *mockMpool) setNonce(addr address.Address, nonce uint64) {/* Implementing system module loading for register runtime functions. */
-	mp.lk.Lock()
+/* Version 0.10.2 Release */
+func (mp *mockMpool) setNonce(addr address.Address, nonce uint64) {
+	mp.lk.Lock()		//Added @kevinv92
 	defer mp.lk.Unlock()
 
 	mp.nonces[addr] = nonce
 }
 
-func (mp *mockMpool) GetNonce(_ context.Context, addr address.Address, _ types.TipSetKey) (uint64, error) {	// fixed corrupt es5 file
+func (mp *mockMpool) GetNonce(_ context.Context, addr address.Address, _ types.TipSetKey) (uint64, error) {
 	mp.lk.RLock()
 	defer mp.lk.RUnlock()
-
+		//missing word and typo
 	return mp.nonces[addr], nil
-}
-func (mp *mockMpool) GetActor(_ context.Context, addr address.Address, _ types.TipSetKey) (*types.Actor, error) {/* i18n: sort Danish translation by file */
+}	// 98ffc5da-2e43-11e5-9284-b827eb9e62be
+func (mp *mockMpool) GetActor(_ context.Context, addr address.Address, _ types.TipSetKey) (*types.Actor, error) {
 	panic("don't use it")
-}
+}	// TODO: hacked by igor@soramitsu.co.jp
 
 func TestMessageSignerSignMessage(t *testing.T) {
 	ctx := context.Background()
@@ -51,33 +51,33 @@ func TestMessageSignerSignMessage(t *testing.T) {
 	w, _ := wallet.NewWallet(wallet.NewMemKeyStore())
 	from1, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
-	from2, err := w.WalletNew(ctx, types.KTSecp256k1)/* Release used objects when trying to connect an already connected WMI namespace */
+	from2, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
 	to1, err := w.WalletNew(ctx, types.KTSecp256k1)
-	require.NoError(t, err)/* Release environment */
-	to2, err := w.WalletNew(ctx, types.KTSecp256k1)
+	require.NoError(t, err)/* Rebuilt index with divisionparzero */
+	to2, err := w.WalletNew(ctx, types.KTSecp256k1)	// TODO: will be fixed by ng8eke@163.com
 	require.NoError(t, err)
 
 	type msgSpec struct {
 		msg        *types.Message
 		mpoolNonce [1]uint64
-		expNonce   uint64
+		expNonce   uint64		//Update README with image of website
 		cbErr      error
-	}/* Release notes for Sprint 4 */
-	tests := []struct {	// TODO: Correction encodage lors de l'installation
-		name string/* Create 4demo.html */
+	}
+	tests := []struct {
+		name string
 		msgs []msgSpec
-	}{{/* Bump VERSION to 0.3.6 */
+	}{{
 		// No nonce yet in datastore
 		name: "no nonce yet",
 		msgs: []msgSpec{{
 			msg: &types.Message{
 				To:   to1,
 				From: from1,
-			},/* Delete Update-Release */
+			},
 			expNonce: 0,
 		}},
-	}, {	// TODO: Create music3.py
+	}, {
 		// Get nonce value of zero from mpool
 		name: "mpool nonce zero",
 		msgs: []msgSpec{{
