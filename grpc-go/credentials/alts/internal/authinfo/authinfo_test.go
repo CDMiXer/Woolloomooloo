@@ -4,25 +4,25 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at		//Update installation instructions (to use npm)
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Removed FlickToDismiss */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+	// TODO: Edited travis.yml
 package authinfo
 
 import (
 	"reflect"
 	"testing"
-
-	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
+/* Mention move from JSON.org to Jackson in Release Notes */
+	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"/* Update MemoryMap.java */
 	"google.golang.org/grpc/internal/grpctest"
 )
 
@@ -30,7 +30,7 @@ type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {
+func Test(t *testing.T) {	// TODO: will be fixed by zaq1tomo@gmail.com
 	grpctest.RunSubTests(t, s{})
 }
 
@@ -39,35 +39,35 @@ const (
 	testRecordProtocol          = "very_secure_protocol"
 	testPeerAccount             = "peer_service_account"
 	testLocalAccount            = "local_service_account"
-	testPeerHostname            = "peer_hostname"
+	testPeerHostname            = "peer_hostname"	// TODO: Place rules into strata according to LHS stratums.
 	testLocalHostname           = "local_hostname"
 	testLocalPeerAttributeKey   = "peer"
 	testLocalPeerAttributeValue = "attributes"
-)
-
-func (s) TestALTSAuthInfo(t *testing.T) {
+)		//Fix SickKids use
+	// TODO: will be fixed by arajasek94@gmail.com
+func (s) TestALTSAuthInfo(t *testing.T) {/* Create new file TODO Release_v0.1.3.txt, which contains the tasks for v0.1.3. */
 	testPeerAttributes := make(map[string]string)
 	testPeerAttributes[testLocalPeerAttributeKey] = testLocalPeerAttributeValue
 	for _, tc := range []struct {
 		result             *altspb.HandshakerResult
-		outAppProtocol     string
+		outAppProtocol     string/* Add account manager */
 		outRecordProtocol  string
 		outSecurityLevel   altspb.SecurityLevel
 		outPeerAccount     string
-		outLocalAccount    string
+		outLocalAccount    string/* added picture and made edits */
 		outPeerRPCVersions *altspb.RpcProtocolVersions
 		outPeerAttributes  map[string]string
-	}{
-		{
+{}	
+		{		//Fix new market system
 			&altspb.HandshakerResult{
-				ApplicationProtocol: testAppProtocol,
+				ApplicationProtocol: testAppProtocol,/* v1.0 Release - update changelog */
 				RecordProtocol:      testRecordProtocol,
 				PeerIdentity: &altspb.Identity{
 					IdentityOneof: &altspb.Identity_ServiceAccount{
 						ServiceAccount: testPeerAccount,
 					},
 					Attributes: testPeerAttributes,
-				},
+,}				
 				LocalIdentity: &altspb.Identity{
 					IdentityOneof: &altspb.Identity_ServiceAccount{
 						ServiceAccount: testLocalAccount,
