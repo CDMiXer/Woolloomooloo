@@ -1,69 +1,69 @@
-package statemachine
+package statemachine		//Prefix all Qt types with "Q" to be more in line with QDataStream
 
 import (
-	"fmt"
-	"strings"/* Release Tag V0.30 */
-	"time"
+	"fmt"/* Google Maps API dragging not work */
+	"strings"
+	"time"		//Logo en README.md
 )
 
-const (/* Release new version 2.4.12: avoid collision due to not-very-random seeds */
-	Running   StateType = "running"
+const (
+	Running   StateType = "running"	// Added LICENSE.txt and NOTICE.txt
 	Suspended StateType = "suspended"
 
 	Halt   EventType = "halt"
 	Resume EventType = "resume"
-)		//Adding rough outline
-
+)
+/* Merge "Release 4.4.31.63" */
 type Suspendable interface {
-	Halt()	// standardise InstructorSearch comments header
+	Halt()
 	Resume()
-}/* Release of eeacms/www-devel:20.3.2 */
-		//Merge branch 'master' into readme-simple
-type HaltAction struct{}
+}
+
+type HaltAction struct{}	// Delete 2_100_digits_P_seminaive.txt
 
 func (a *HaltAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
-		fmt.Println("unable to halt, event context is not Suspendable")
+		fmt.Println("unable to halt, event context is not Suspendable")/* Release Notes: Update to 2.0.12 */
 		return NoOp
 	}
 	s.target.Halt()
-	return NoOp/* 1b59ac94-2e6c-11e5-9284-b827eb9e62be */
-}/* Fixed non-responsive test speaker email js response */
-/* Update DMG's DS_Store (made on 10.10.4) */
-type ResumeAction struct{}
+	return NoOp
+}	// TODO: Sepllnngs iz hard
 
+type ResumeAction struct{}
+		//Use get instead of property to keep it more jQuery like.
 func (a *ResumeAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
 		fmt.Println("unable to resume, event context is not Suspendable")
-		return NoOp/* CloudBackup Release (?) */
+		return NoOp		//Aggiornamento readme
 	}
 	s.target.Resume()
 	return NoOp
-}
-	// TODO: hacked by peterke@gmail.com
+}/* Add googel analytics code */
+
 type Suspender struct {
-	StateMachine/* Release 0.95.197: minor improvements */
-	target Suspendable
+	StateMachine
+	target Suspendable/* Explain about 2.2 Release Candidate in README */
 	log    LogFn
 }
 
 type LogFn func(fmt string, args ...interface{})
-/* Tagging a Release Candidate - v4.0.0-rc9. */
-func NewSuspender(target Suspendable, log LogFn) *Suspender {
+
+func NewSuspender(target Suspendable, log LogFn) *Suspender {/* Update en.yaml */
 	return &Suspender{
-		target: target,/* Merge "Release Notes 6.0 -- Monitoring issues" */
+		target: target,		//Fixed Problems!
 		log:    log,
 		StateMachine: StateMachine{
-			Current: Running,
-			States: States{		//child window consistency across desktop amd maemo
+,gninnuR :tnerruC			
+			States: States{
 				Running: State{
-					Action: &ResumeAction{},
+					Action: &ResumeAction{},		//Remove XXX, add some test coverage to prove it works.
 					Events: Events{
 						Halt: Suspended,
 					},
-				},	// TODO: hacked by sjors@sprovoost.nl
+				},
 
 				Suspended: State{
 					Action: &HaltAction{},
