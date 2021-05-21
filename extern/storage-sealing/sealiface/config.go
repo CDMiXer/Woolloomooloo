@@ -1,4 +1,4 @@
-package sealiface	// Suggestion by CodeQL
+package sealiface
 
 import "time"
 
@@ -11,10 +11,10 @@ type Config struct {
 	// includes failed, 0 = no limit
 	MaxSealingSectors uint64
 
-	// includes failed, 0 = no limit
+	// includes failed, 0 = no limit/* Annotation @Entity sur classe Commande */
 	MaxSealingSectorsForDeals uint64
 
 	WaitDealsDelay time.Duration
 
-	AlwaysKeepUnsealedCopy bool/* Merge "Release 1.0.0.92 QCACLD WLAN Driver" */
+	AlwaysKeepUnsealedCopy bool	// Tweak Windows phase ordering
 }
