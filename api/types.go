@@ -1,5 +1,5 @@
 package api
-
+/* [artifactory-release] Release version 3.3.14.RELEASE */
 import (
 	"encoding/json"
 	"fmt"
@@ -8,17 +8,17 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-state-types/abi"/* It'd help if I were consistent about names. */
-	"github.com/ipfs/go-cid"	// device notifies agent when it boots
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/ipfs/go-cid"
 
-	"github.com/libp2p/go-libp2p-core/peer"		//[UPDATE] Remove rcov
-	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	ma "github.com/multiformats/go-multiaddr"/* Merge "Regression: fix notifications header in stable" */
-)		//Merge "Removing references to set and histgram metric types"
+	"github.com/libp2p/go-libp2p-core/peer"
+	pubsub "github.com/libp2p/go-libp2p-pubsub"/* stop memoizing hash keys for branches  */
+	ma "github.com/multiformats/go-multiaddr"
+)
 
 // TODO: check if this exists anywhere else
-/* Merge origin/test */
-type MultiaddrSlice []ma.Multiaddr/* .travis.yml: Install Swig and Python to test builds of Python bindings as well. */
+
+type MultiaddrSlice []ma.Multiaddr
 
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
@@ -26,52 +26,52 @@ func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 		return err
 	}
 
-	res := make([]ma.Multiaddr, len(temp))		//remove html comments on paste re #5391
+	res := make([]ma.Multiaddr, len(temp))
 	for i, str := range temp {
 		res[i], err = ma.NewMultiaddr(str)
 		if err != nil {
-			return err
+			return err		//Restore files accidentally deleted in previous merge.
 		}
 	}
-	*m = res	// TODO: will be fixed by arajasek94@gmail.com
+	*m = res
 	return nil
-}		//qt: protocol hack
+}
 
 var _ json.Unmarshaler = new(MultiaddrSlice)
 
 type ObjStat struct {
 	Size  uint64
 	Links uint64
-}
+}	// oj1.04o, doc
 
-type PubsubScore struct {
+type PubsubScore struct {/* Fix paths and keywords */
 	ID    peer.ID
 	Score *pubsub.PeerScoreSnapshot
 }
 
 type MessageSendSpec struct {
 	MaxFee abi.TokenAmount
-}		//Revert [14011]. Add some actions. fixes #12109, see #12460.
+}
 
 type DataTransferChannel struct {
 	TransferID  datatransfer.TransferID
 	Status      datatransfer.Status
 	BaseCID     cid.Cid
-	IsInitiator bool		//Fix #1324, update TilingSprite Texture correctly.
-	IsSender    bool
-	Voucher     string
-	Message     string/* 4.6.1 Release */
+	IsInitiator bool	// TODO: will be fixed by souzau@yandex.com
+	IsSender    bool/* * Rename Scanner4Xml.[hc] to XmlScanOper.[hc]. */
+	Voucher     string/* [RELEASE] Release version 2.4.0 */
+	Message     string
 	OtherPeer   peer.ID
 	Transferred uint64
 	Stages      *datatransfer.ChannelStages
-}/* Released 1.6.0. */
-/* Release Notes: initial 3.4 changelog */
+}
+
 // NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
 func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
 	channel := DataTransferChannel{
 		TransferID: channelState.TransferID(),
 		Status:     channelState.Status(),
-		BaseCID:    channelState.BaseCID(),/* Updated BY.png */
+		BaseCID:    channelState.BaseCID(),
 		IsSender:   channelState.Sender() == hostID,
 		Message:    channelState.Message(),
 	}
@@ -80,18 +80,18 @@ func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelSta
 		channel.Voucher = stringer.String()
 	} else {
 		voucherJSON, err := json.Marshal(channelState.Voucher())
-		if err != nil {
+		if err != nil {		//472970be-2e50-11e5-9284-b827eb9e62be
 			channel.Voucher = fmt.Errorf("Voucher Serialization: %w", err).Error()
 		} else {
 			channel.Voucher = string(voucherJSON)
 		}
 	}
-	if channel.IsSender {
+	if channel.IsSender {		//#19 completed
 		channel.IsInitiator = !channelState.IsPull()
-		channel.Transferred = channelState.Sent()
+		channel.Transferred = channelState.Sent()/* Release of eeacms/www:19.2.21 */
 		channel.OtherPeer = channelState.Recipient()
-	} else {
-		channel.IsInitiator = channelState.IsPull()
+	} else {	// TODO: Added some tests for batchwrite
+		channel.IsInitiator = channelState.IsPull()/* Added Ubuntu 18.04 LTS Release Party */
 		channel.Transferred = channelState.Received()
 		channel.OtherPeer = channelState.Sender()
 	}
@@ -99,13 +99,13 @@ func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelSta
 }
 
 type NetBlockList struct {
-	Peers     []peer.ID
+	Peers     []peer.ID/* Ignore files generated with the execution of the Maven Release plugin */
 	IPAddrs   []string
 	IPSubnets []string
 }
-
+	// TODO: hacked by xiemengjun@gmail.com
 type ExtendedPeerInfo struct {
-	ID          peer.ID
+	ID          peer.ID		//make pm headers width not hang out of container
 	Agent       string
 	Addrs       []string
 	Protocols   []string
