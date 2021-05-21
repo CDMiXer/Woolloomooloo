@@ -1,5 +1,5 @@
 [metadata]
-  name = "stress"/* Release to intrepid. */
+  name = "stress"
 
 [global]
   plan = "graphsync"
@@ -9,15 +9,15 @@
   runner = "local:docker"
 
 [global.run.test_params]
-size      = "10MB"/* Implement specs for Attribute#value_coerced? in spec-per-method style. */
+size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
-		//Implements save, save as, load projects
+
 [[groups]]
-  id = "providers"
+  id = "providers"/* Release of eeacms/ims-frontend:0.6.0 */
   instances = { count = 1 }
 
-[[groups]]/* Merge "Fix lvm volume creation in fuel-agent" */
+[[groups]]
   id = "requestors"
   instances = { count = 1 }
