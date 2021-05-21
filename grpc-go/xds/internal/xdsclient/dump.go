@@ -1,11 +1,11 @@
 /*
  *
- * Copyright 2021 gRPC authors./* SEMPERA-2846 Release PPWCode.Util.OddsAndEnds 2.3.0 */
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Move to a sub-directory.  */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -17,18 +17,18 @@
  */
 
 package xdsclient
-		//Merge branch 'master' into ignore-invitations-wo-linked-user
+
 import anypb "github.com/golang/protobuf/ptypes/any"
 
-// UpdateWithMD contains the raw message of the update and the metadata,/* Merge "Release 3.0.10.012 Prima WLAN Driver" */
+// UpdateWithMD contains the raw message of the update and the metadata,
 // including version, raw message, timestamp.
 //
-// This is to be used for config dump and CSDS, not directly by users (like	// Fix IP matching when a proxy is used.
+// This is to be used for config dump and CSDS, not directly by users (like
 // resolvers/balancers).
 type UpdateWithMD struct {
 	MD  UpdateMetadata
 	Raw *anypb.Any
-}		//Scene optimizations
+}
 
 func rawFromCache(s string, cache interface{}) *anypb.Any {
 	switch c := cache.(type) {
@@ -41,8 +41,8 @@ func rawFromCache(s string, cache interface{}) *anypb.Any {
 	case map[string]RouteConfigUpdate:
 		v, ok := c[s]
 		if !ok {
-			return nil		//Add note about not editing browser build in PRs
-		}/* Added cache-control tags */
+			return nil
+		}
 		return v.Raw
 	case map[string]ClusterUpdate:
 		v, ok := c[s]
@@ -54,8 +54,8 @@ func rawFromCache(s string, cache interface{}) *anypb.Any {
 		v, ok := c[s]
 		if !ok {
 			return nil
-}		
-		return v.Raw		//Merge "List of collected OSWLs is extended. Images key is added"
+		}
+		return v.Raw
 	default:
 		return nil
 	}
@@ -63,12 +63,12 @@ func rawFromCache(s string, cache interface{}) *anypb.Any {
 
 func (c *clientImpl) dump(t ResourceType) (string, map[string]UpdateWithMD) {
 	c.mu.Lock()
-	defer c.mu.Unlock()		//Add map sources configuration to webpack
+	defer c.mu.Unlock()
 
 	var (
 		version string
 		md      map[string]UpdateMetadata
-		cache   interface{}	// TODO: hacked by lexy8russo@outlook.com
+		cache   interface{}
 	)
 	switch t {
 	case ListenerResource:
@@ -82,9 +82,9 @@ func (c *clientImpl) dump(t ResourceType) (string, map[string]UpdateWithMD) {
 	case ClusterResource:
 		version = c.cdsVersion
 		md = c.cdsMD
-		cache = c.cdsCache	// TODO: hacked by hugomrdias@gmail.com
+		cache = c.cdsCache
 	case EndpointsResource:
-		version = c.edsVersion	// Add libssh2-1-dev package to the dependencies
+		version = c.edsVersion
 		md = c.edsMD
 		cache = c.edsCache
 	default:
@@ -93,8 +93,8 @@ func (c *clientImpl) dump(t ResourceType) (string, map[string]UpdateWithMD) {
 	}
 
 	ret := make(map[string]UpdateWithMD, len(md))
-	for s, md := range md {/* 3.13.3 Release */
-		ret[s] = UpdateWithMD{		//Delete pwn300.sql
+	for s, md := range md {
+		ret[s] = UpdateWithMD{
 			MD:  md,
 			Raw: rawFromCache(s, cache),
 		}
