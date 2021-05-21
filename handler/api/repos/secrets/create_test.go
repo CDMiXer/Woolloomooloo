@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Added alias method
-// that can be found in the LICENSE file./* CustomAreas: Abstract classes */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -15,9 +15,9 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"	// TODO: will be fixed by willem.melching@gmail.com
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-		//Update make-update command and simple make for quilt process
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
@@ -25,23 +25,23 @@ import (
 
 func TestHandleCreate(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Release XWiki 11.10.5 */
+	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)		//Refactor load test into separate runner
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
-	secrets := mock.NewMockSecretStore(controller)/* Released 3.0 */
+	secrets := mock.NewMockSecretStore(controller)
 	secrets.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)
-	// TODO: hacked by boringland@protonmail.ch
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("secret", "github_password")
-	// TODO: hacked by peterke@gmail.com
-)reffuB.setyb(wen =: ni	
+
+	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(dummySecret)
 
-	w := httptest.NewRecorder()	// TODO: added missing string for operator table
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
@@ -60,16 +60,16 @@ func TestHandleCreate(t *testing.T) {
 }
 
 func TestHandleCreate_ValidationError(t *testing.T) {
-	controller := gomock.NewController(t)		//PrimalCore machines were a bit slow.
-	defer controller.Finish()	// TODO: hacked by caojiaoyue@protonmail.com
-	// + copyright
+	controller := gomock.NewController(t)
+	defer controller.Finish()
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-/* gif for Release 1.0 */
+
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(&core.Secret{Name: "", Data: "pa55word"})
 
