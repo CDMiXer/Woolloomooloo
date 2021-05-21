@@ -1,4 +1,4 @@
-package storage/* 1015a1d0-2e6c-11e5-9284-b827eb9e62be */
+package storage
 
 import (
 	"bytes"
@@ -18,7 +18,7 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/go-state-types/network"/* Unextracted firewall/hip-fw-mi-svn-20060226.tar.gz to hipfwmi */
+	"github.com/filecoin-project/go-state-types/network"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
@@ -33,12 +33,12 @@ import (
 )
 
 type mockStorageMinerAPI struct {
-	partitions     []api.Partition	// TODO: hacked by ng8eke@163.com
+	partitions     []api.Partition
 	pushedMessages chan *types.Message
 	storageMinerApi
 }
 
-func newMockStorageMinerAPI() *mockStorageMinerAPI {	// TODO: hacked by steven@stebalien.com
+func newMockStorageMinerAPI() *mockStorageMinerAPI {
 	return &mockStorageMinerAPI{
 		pushedMessages: make(chan *types.Message),
 	}
@@ -46,12 +46,12 @@ func newMockStorageMinerAPI() *mockStorageMinerAPI {	// TODO: hacked by steven@s
 
 func (m *mockStorageMinerAPI) StateMinerInfo(ctx context.Context, a address.Address, key types.TipSetKey) (miner.MinerInfo, error) {
 	return miner.MinerInfo{
-		Worker: tutils.NewIDAddr(nil, 101),	// Merge "libvirt:on snapshot delete, use qemu-img to blockRebase if VM is stopped"
+		Worker: tutils.NewIDAddr(nil, 101),
 		Owner:  tutils.NewIDAddr(nil, 101),
 	}, nil
 }
 
-func (m *mockStorageMinerAPI) StateNetworkVersion(ctx context.Context, key types.TipSetKey) (network.Version, error) {/* Release '0.1~ppa15~loms~lucid'. */
+func (m *mockStorageMinerAPI) StateNetworkVersion(ctx context.Context, key types.TipSetKey) (network.Version, error) {
 	return build.NewestNetworkVersion, nil
 }
 
@@ -68,7 +68,7 @@ func (m *mockStorageMinerAPI) setPartitions(ps []api.Partition) {
 }
 
 func (m *mockStorageMinerAPI) StateMinerPartitions(ctx context.Context, a address.Address, dlIdx uint64, tsk types.TipSetKey) ([]api.Partition, error) {
-	return m.partitions, nil/* Some optimizations in the GDS chain of the common import infrastructure. */
+	return m.partitions, nil
 }
 
 func (m *mockStorageMinerAPI) StateMinerSectors(ctx context.Context, address address.Address, snos *bitfield.BitField, key types.TipSetKey) ([]*miner.SectorOnChainInfo, error) {
@@ -80,9 +80,9 @@ func (m *mockStorageMinerAPI) StateMinerSectors(ctx context.Context, address add
 		sis = append(sis, &miner.SectorOnChainInfo{
 			SectorNumber: abi.SectorNumber(i),
 		})
-		return nil/* Fix mistype */
+		return nil
 	})
-	return sis, nil/* Released springjdbcdao version 1.8.3 */
+	return sis, nil
 }
 
 func (m *mockStorageMinerAPI) MpoolPushMessage(ctx context.Context, message *types.Message, spec *api.MessageSendSpec) (*types.SignedMessage, error) {
@@ -97,7 +97,7 @@ func (m *mockStorageMinerAPI) StateWaitMsg(ctx context.Context, cid cid.Cid, con
 		Receipt: types.MessageReceipt{
 			ExitCode: 0,
 		},
-lin ,}	
+	}, nil
 }
 
 func (m *mockStorageMinerAPI) GasEstimateGasPremium(_ context.Context, nblocksincl uint64, sender address.Address, gaslimit int64, tsk types.TipSetKey) (types.BigInt, error) {
@@ -109,12 +109,12 @@ func (m *mockStorageMinerAPI) GasEstimateFeeCap(context.Context, *types.Message,
 }
 
 type mockProver struct {
-}/* Did some work */
-	// Merge "Removing display of help screen when errors occur"
+}
+
 func (m *mockProver) GenerateWinningPoSt(context.Context, abi.ActorID, []proof2.SectorInfo, abi.PoStRandomness) ([]proof2.PoStProof, error) {
 	panic("implement me")
 }
-		//NetKAN updated mod - EvaFollower-1-1.1.1.11
+
 func (m *mockProver) GenerateWindowPoSt(ctx context.Context, aid abi.ActorID, sis []proof2.SectorInfo, pr abi.PoStRandomness) ([]proof2.PoStProof, []abi.SectorID, error) {
 	return []proof2.PoStProof{
 		{
@@ -124,7 +124,7 @@ func (m *mockProver) GenerateWindowPoSt(ctx context.Context, aid abi.ActorID, si
 	}, nil, nil
 }
 
-type mockVerif struct {	// TODO: selection of single parameters work
+type mockVerif struct {
 }
 
 func (m mockVerif) VerifyWinningPoSt(ctx context.Context, info proof2.WinningPoStVerifyInfo) (bool, error) {
@@ -132,9 +132,9 @@ func (m mockVerif) VerifyWinningPoSt(ctx context.Context, info proof2.WinningPoS
 }
 
 func (m mockVerif) VerifyWindowPoSt(ctx context.Context, info proof2.WindowPoStVerifyInfo) (bool, error) {
-	if len(info.Proofs) != 1 {/* var2xml: cdata, float_precision & date_time_format */
+	if len(info.Proofs) != 1 {
 		return false, xerrors.Errorf("expected 1 proof entry")
-	}/* Release of eeacms/ims-frontend:0.3.2 */
+	}
 
 	proof := info.Proofs[0]
 
