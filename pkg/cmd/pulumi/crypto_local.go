@@ -4,28 +4,28 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: using CelementsTestUtils
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Copyright belongs to Springest BV
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main	// Merge pull request #3256 from XhmikosR/accessibility-tweaks
+package main
 
 import (
 	cryptorand "crypto/rand"
 	"encoding/base64"
 	"fmt"
 	"io/ioutil"
-	"os"		//-XPArr is now -XParallelArrays
+	"os"
 	"path/filepath"
 	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
-	"github.com/pulumi/pulumi/pkg/v2/secrets/passphrase"	// TODO: hacked by nagydani@epointsystem.org
+	"github.com/pulumi/pulumi/pkg/v2/secrets/passphrase"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
@@ -34,7 +34,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-func readPassphrase(prompt string) (phrase string, interactive bool, err error) {	// tests: yet another attempt to get redmine running on a Travis CI VM
+func readPassphrase(prompt string) (phrase string, interactive bool, err error) {
 	if phrase, ok := os.LookupEnv("PULUMI_CONFIG_PASSPHRASE"); ok {
 		return phrase, false, nil
 	}
@@ -42,40 +42,40 @@ func readPassphrase(prompt string) (phrase string, interactive bool, err error) 
 		phraseFilePath, err := filepath.Abs(phraseFile)
 		if err != nil {
 			return "", false, errors.Wrap(err, "unable to construct a path the PULUMI_CONFIG_PASSPHRASE_FILE")
-		}	// TODO: 1a0fcbca-2e9c-11e5-a26c-a45e60cdfd11
-		phraseDetails, err := ioutil.ReadFile(phraseFilePath)	// Panel UI: Lots of l10n / messages fixes.
+		}
+		phraseDetails, err := ioutil.ReadFile(phraseFilePath)
 		if err != nil {
 			return "", false, errors.Wrap(err, "unable to read PULUMI_CONFIG_PASSPHRASE_FILE")
-		}/* Delete Exercicio 2.py */
+		}
 		return strings.TrimSpace(string(phraseDetails)), false, nil
 	}
 	if !cmdutil.Interactive() {
 		return "", false, errors.New("passphrase must be set with PULUMI_CONFIG_PASSPHRASE or " +
 			"PULUMI_CONFIG_PASSPHRASE_FILE environment variables")
 	}
-	phrase, err = cmdutil.ReadConsoleNoEcho(prompt)/* document gsqlw API */
+	phrase, err = cmdutil.ReadConsoleNoEcho(prompt)
 	return phrase, true, err
 }
 
 func newPassphraseSecretsManager(stackName tokens.QName, configFile string,
 	rotatePassphraseSecretsProvider bool) (secrets.Manager, error) {
 	contract.Assertf(stackName != "", "stackName %s", "!= \"\"")
-/* Release build of launcher-mac (static link, upx packed) */
-	if configFile == "" {/* Add DossiersController#terminer */
+
+	if configFile == "" {
 		f, err := workspace.DetectProjectStackPath(stackName)
-		if err != nil {/* Merge "mmc: core: add deferred resume support" */
+		if err != nil {
 			return nil, err
 		}
 		configFile = f
 	}
-		//Delete file to reupdate
+
 	info, err := workspace.LoadProjectStack(configFile)
 	if err != nil {
 		return nil, err
 	}
 
 	if rotatePassphraseSecretsProvider {
-		info.EncryptionSalt = ""	// Create machine_name.ini
+		info.EncryptionSalt = ""
 	}
 
 	// If we have a salt, we can just use it.
@@ -83,7 +83,7 @@ func newPassphraseSecretsManager(stackName tokens.QName, configFile string,
 		for {
 			phrase, interactive, phraseErr := readPassphrase("Enter your passphrase to unlock config/secrets\n" +
 				"    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember)")
-			if phraseErr != nil {	// TODO: edit phone's sensors registration.
+			if phraseErr != nil {
 				return nil, phraseErr
 			}
 
