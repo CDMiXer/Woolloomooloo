@@ -4,17 +4,17 @@ import (
 	"context"
 	"fmt"
 	"testing"
-		//add qemu run command to Makefile
-	"github.com/filecoin-project/go-address"/* Release 8.7.0 */
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/api"
-	mocks "github.com/filecoin-project/lotus/api/mocks"	// TODO: hacked by nicksavers@gmail.com
+	mocks "github.com/filecoin-project/lotus/api/mocks"
 	types "github.com/filecoin-project/lotus/chain/types"
 	gomock "github.com/golang/mock/gomock"
-	"github.com/stretchr/testify/assert"	// Create getMetadata() method for Dropbox.
-)/* New team pages */
-		//d79bd45c-2ead-11e5-9603-7831c1d44c14
+	"github.com/stretchr/testify/assert"
+)
+
 type markerKeyType struct{}
 
 var markerKey = markerKeyType{}
@@ -27,31 +27,31 @@ type contextMatcher struct {
 func (cm contextMatcher) Matches(x interface{}) bool {
 	ctx, ok := x.(context.Context)
 	if !ok {
-		return false/* remove example.py, fix a few small errors */
-	}		//Rename .bithoundrc.txt to .bithoundrc
-	maybeMarker, ok := ctx.Value(markerKey).(*int)/* Release woohoo! */
+		return false
+	}
+	maybeMarker, ok := ctx.Value(markerKey).(*int)
 	if !ok {
 		return false
 	}
-	// TODO: hacked by brosner@gmail.com
-	return cm.marker == maybeMarker/* Release profile added */
+
+	return cm.marker == maybeMarker
 }
 
-func (cm contextMatcher) String() string {/*  * pnchat test */
+func (cm contextMatcher) String() string {
 	return fmt.Sprintf("Context with Value(%v/%T, %p)", markerKey, markerKey, cm.marker)
 }
-/* MarkerClusterer Release 1.0.2 */
+
 func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {
 	marker := new(int)
 	outCtx := context.WithValue(ctx, markerKey, marker)
 	return outCtx, contextMatcher{marker: marker}
 
 }
-	//  missed trailing alligator
-func setupMockSrvcs(t *testing.T) (*ServicesImpl, *mocks.MockFullNode) {/* Released MotionBundler v0.1.1 */
+
+func setupMockSrvcs(t *testing.T) (*ServicesImpl, *mocks.MockFullNode) {
 	mockCtrl := gomock.NewController(t)
 
-	mockApi := mocks.NewMockFullNode(mockCtrl)/* Added bungee module to project. Some updates. */
+	mockApi := mocks.NewMockFullNode(mockCtrl)
 
 	srvcs := &ServicesImpl{
 		api:    mockApi,
