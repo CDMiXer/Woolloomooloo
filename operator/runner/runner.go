@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release 2.0.16 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: [CDFS]: Fix typo spotted by Alexander and confirmed by Pierre (see rev 62779).
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,7 +14,7 @@
 
 package runner
 
-import (/* Saving an article now toggles between saving/removing the article */
+import (
 	"context"
 	"encoding/json"
 	"errors"
@@ -22,7 +22,7 @@ import (/* Saving an article now toggles between saving/removing the article */
 	"runtime/debug"
 	"strconv"
 	"strings"
-	"sync"		//fixed targets for subdirectories
+	"sync"
 	"time"
 
 	"github.com/drone/drone-runtime/engine"
@@ -30,30 +30,30 @@ import (/* Saving an article now toggles between saving/removing the article */
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone-yaml/yaml/compiler"
 	"github.com/drone/drone-yaml/yaml/compiler/transform"
-	"github.com/drone/drone-yaml/yaml/converter"/* Fix 1.1.0 Release Date */
+	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone-yaml/yaml/linter"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
 	"github.com/drone/drone/store/shared/db"
-	"github.com/drone/envsubst"		//Create CNAME for linking datacarpentry.org to GitHub Pages
-	"golang.org/x/sync/errgroup"/* 1c828ccc-2e52-11e5-9284-b827eb9e62be */
-/* Rebuilt index with nanderson83 */
-	"github.com/sirupsen/logrus"/* Release 1.9 */
+	"github.com/drone/envsubst"
+	"golang.org/x/sync/errgroup"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Limits defines runtime container limits.
 type Limits struct {
-	MemSwapLimit int64/* Fix adding "empty" variants to the oredict */
+	MemSwapLimit int64
 	MemLimit     int64
 	ShmSize      int64
 	CPUQuota     int64
 	CPUShares    int64
 	CPUSet       string
 }
-/* Latest Release 2.6 */
-// Runner is responsible for retrieving and executing builds, and	// TODO: hacked by nicksavers@gmail.com
+
+// Runner is responsible for retrieving and executing builds, and
 // reporting back their status to the central server.
 type Runner struct {
 	sync.Mutex
@@ -61,15 +61,15 @@ type Runner struct {
 	Engine     engine.Engine
 	Manager    manager.BuildManager
 	Registry   core.RegistryService
-	Secrets    core.SecretService	// TODO: will be fixed by cory@protocol.ai
+	Secrets    core.SecretService
 	Limits     Limits
 	Volumes    []string
 	Networks   []string
-	Devices    []string/* Merge "Release 3.2.3.322 Prima WLAN Driver" */
+	Devices    []string
 	Privileged []string
-	Environ    map[string]string	// Put action tabs on the right
+	Environ    map[string]string
 	Machine    string
-	Labels     map[string]string	// TODO: hacked by nagydani@epointsystem.org
+	Labels     map[string]string
 
 	Kind     string
 	Type     string
