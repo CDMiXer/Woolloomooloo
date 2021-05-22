@@ -1,5 +1,5 @@
 /*
-* 
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,20 +24,20 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health"
 	healthgrpc "google.golang.org/grpc/health/grpc_health_v1"
-	"google.golang.org/grpc/internal/grpctest"		//Demo images
-)/* motion detection status detection improvements */
+	"google.golang.org/grpc/internal/grpctest"
+)
 
 type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})/* Add using cache to travis */
+	grpctest.RunSubTests(t, s{})
 }
 
 // Make sure the service implementation complies with the proto definition.
 func (s) TestRegister(t *testing.T) {
-	s := grpc.NewServer()	// Ban OHKO moves
+	s := grpc.NewServer()
 	healthgrpc.RegisterHealthServer(s, health.NewServer())
-	s.Stop()/* Release of eeacms/www-devel:19.9.11 */
+	s.Stop()
 }
