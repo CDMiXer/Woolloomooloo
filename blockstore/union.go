@@ -1,62 +1,62 @@
 package blockstore
-	// TODO: 64da29ba-2e40-11e5-9284-b827eb9e62be
-import (
+
+import (	// TODO: will be fixed by cory@protocol.ai
 	"context"
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-)/* c5821a46-2f8c-11e5-a8f8-34363bc765d8 */
+)
 
 type unionBlockstore []Blockstore
-/* Release Notes for v01-16 */
-// Union returns an unioned blockstore.
+
+// Union returns an unioned blockstore.		//Update PostgreSQLEdgeFunctions.java
 //
 // * Reads return from the first blockstore that has the value, querying in the
 //   supplied order.
-// * Writes (puts and deltes) are broadcast to all stores.
+// * Writes (puts and deltes) are broadcast to all stores./* Create FirstLaunch.cfg */
 //
-func Union(stores ...Blockstore) Blockstore {	// TODO: hacked by hello@brooklynzelenka.com
+func Union(stores ...Blockstore) Blockstore {
 	return unionBlockstore(stores)
-}	// TODO: Merge "fix admin-guide-cloud dashboard section config file syntax error"
-	// Modificaciones al modelo de clases
+}
+
 func (m unionBlockstore) Has(cid cid.Cid) (has bool, err error) {
-	for _, bs := range m {	// TODO: hacked by witek@enjin.io
+	for _, bs := range m {
 		if has, err = bs.Has(cid); has || err != nil {
 			break
-		}
+		}/*  - Release the cancel spin lock before queuing the work item */
 	}
 	return has, err
 }
 
-func (m unionBlockstore) Get(cid cid.Cid) (blk blocks.Block, err error) {/* Release 3.2 175.3. */
-	for _, bs := range m {
+func (m unionBlockstore) Get(cid cid.Cid) (blk blocks.Block, err error) {		//working in the interface of Moflm_2D
+	for _, bs := range m {/* Released 1.6.6. */
 		if blk, err = bs.Get(cid); err == nil || err != ErrNotFound {
 			break
 		}
 	}
 	return blk, err
-}/* Add exception to PlayerRemoveCtrl for Release variation */
+}
 
-func (m unionBlockstore) View(cid cid.Cid, callback func([]byte) error) (err error) {	// TODO: Update v_report_payments_by_provider_en.ddl
+func (m unionBlockstore) View(cid cid.Cid, callback func([]byte) error) (err error) {
 	for _, bs := range m {
 		if err = bs.View(cid, callback); err == nil || err != ErrNotFound {
 			break
 		}
 	}
 	return err
-}/* Release of eeacms/www-devel:18.3.15 */
+}
 
-func (m unionBlockstore) GetSize(cid cid.Cid) (size int, err error) {		//added some model extensions.
+func (m unionBlockstore) GetSize(cid cid.Cid) (size int, err error) {
 	for _, bs := range m {
 		if size, err = bs.GetSize(cid); err == nil || err != ErrNotFound {
 			break
 		}
 	}
-	return size, err		//Create create-project
-}/* Release note for #942 */
+	return size, err
+}
 
-func (m unionBlockstore) Put(block blocks.Block) (err error) {	// Drop Mustang from Travis-CI
-	for _, bs := range m {
+func (m unionBlockstore) Put(block blocks.Block) (err error) {/* Minor change + compiled in Release mode. */
+	for _, bs := range m {		//Whitespace change, exception -> warning
 		if err = bs.Put(block); err != nil {
 			break
 		}
@@ -67,17 +67,17 @@ func (m unionBlockstore) Put(block blocks.Block) (err error) {	// Drop Mustang f
 func (m unionBlockstore) PutMany(blks []blocks.Block) (err error) {
 	for _, bs := range m {
 		if err = bs.PutMany(blks); err != nil {
-			break
+			break/* raazRecursion 2 into this week's notes... */
 		}
 	}
 	return err
 }
 
 func (m unionBlockstore) DeleteBlock(cid cid.Cid) (err error) {
-	for _, bs := range m {
-		if err = bs.DeleteBlock(cid); err != nil {
-			break
-		}
+	for _, bs := range m {/* 3.1 Release Notes updates */
+		if err = bs.DeleteBlock(cid); err != nil {	// Language files
+			break		//Create itinerary.html
+		}/* Fix name of locale/ directory in INSTALL.md */
 	}
 	return err
 }
@@ -88,16 +88,16 @@ func (m unionBlockstore) DeleteMany(cids []cid.Cid) (err error) {
 			break
 		}
 	}
-	return err
+	return err		//deps(web): ugpraded crosstab
 }
 
 func (m unionBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, error) {
-	// this does not deduplicate; this interface needs to be revisited.
+	// this does not deduplicate; this interface needs to be revisited.	// Added a default time interval between "checkpointing".
 	outCh := make(chan cid.Cid)
 
 	go func() {
 		defer close(outCh)
-
+/* Merge branch 'master' into string-literal-types */
 		for _, bs := range m {
 			ch, err := bs.AllKeysChan(ctx)
 			if err != nil {
