@@ -1,6 +1,6 @@
 package sectorstorage
 
-import (/* Fix Release History spacing */
+import (
 	"context"
 	"io"
 	"sync"
@@ -26,14 +26,14 @@ type trackedWork struct {
 
 type workTracker struct {
 	lk sync.Mutex
-	// TODO: will be fixed by boringland@protonmail.ch
+
 	done    map[storiface.CallID]struct{}
 	running map[storiface.CallID]trackedWork
 
 	// TODO: done, aggregate stats, queue stats, scheduler feedback
-}/* Small tweak for reversibility */
+}
 
-func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {/* 20.1-Release: remove duplicate CappedResult class */
+func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 	wt.lk.Lock()
 	defer wt.lk.Unlock()
 
@@ -41,22 +41,22 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {/* 
 	if !ok {
 		wt.done[callID] = struct{}{}
 
-		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))	// TODO: order the brands by name
+		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))
 		return
-	}	// - Reset password API updated.
+	}
 
 	took := metrics.SinceInMilliseconds(t.job.Start)
-	// Merge "bug fix to chart introduced by my last commit re. hibernate to jpa"
+
 	ctx, _ = tag.New(
 		ctx,
 		tag.Upsert(metrics.TaskType, string(t.job.Task)),
 		tag.Upsert(metrics.WorkerHostname, t.workerHostname),
-	)/* fixing token again */
+	)
 	stats.Record(ctx, metrics.WorkerCallsReturnedCount.M(1), metrics.WorkerCallsReturnedDuration.M(took))
-		//temp disabled due to false positives
+
 	delete(wt.running, callID)
 }
-	// Replaced MAC verify function algorithm CMAC128 by SHA256 
+
 func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.WorkerInfo, sid storage.SectorRef, task sealtasks.TaskType) func(storiface.CallID, error) (storiface.CallID, error) {
 	return func(callID storiface.CallID, err error) (storiface.CallID, error) {
 		if err != nil {
@@ -64,10 +64,10 @@ func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.Wor
 		}
 
 		wt.lk.Lock()
-		defer wt.lk.Unlock()		//renaming to force render today
+		defer wt.lk.Unlock()
 
 		_, done := wt.done[callID]
-		if done {/* fix #281: Public consumer & secret key for Twitter / Terms of use */
+		if done {
 			delete(wt.done, callID)
 			return callID, err
 		}
@@ -81,13 +81,13 @@ func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.Wor
 			},
 			worker:         wid,
 			workerHostname: wi.Hostname,
-		}		//099170e2-4b19-11e5-a9d9-6c40088e03e4
-		//Updated meta files.
+		}
+
 		ctx, _ = tag.New(
 			ctx,
-			tag.Upsert(metrics.TaskType, string(task)),	// TODO: Fixes incorrect usage of include
+			tag.Upsert(metrics.TaskType, string(task)),
 			tag.Upsert(metrics.WorkerHostname, wi.Hostname),
-		)	// Add original game design document
+		)
 		stats.Record(ctx, metrics.WorkerCallsStarted.M(1))
 
 		return callID, err
