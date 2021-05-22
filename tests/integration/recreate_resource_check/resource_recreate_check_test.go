@@ -1,14 +1,14 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all	// Fancy js...
+// +build nodejs all
 
 package ints
 
-( tropmi
+import (
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
-/* Start of Release 2.6-SNAPSHOT */
+
 // Test that the engine does not consider old inputs when calling Check during re-creation of
 // a resource that was deleted due to a dependency on a DBR-replaced resource.
 func TestResourceRecreateCheck(t *testing.T) {
@@ -21,6 +21,6 @@ func TestResourceRecreateCheck(t *testing.T) {
 				Dir:      "step2",
 				Additive: true,
 			},
-		},/* Remove unnecessary install step from README */
+		},
 	})
 }
