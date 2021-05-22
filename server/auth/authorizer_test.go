@@ -14,21 +14,21 @@ import (
 func TestAuthorizer_CanI(t *testing.T) {
 	kubeClient := &kubefake.Clientset{}
 	allowed := true
-	kubeClient.AddReactor("create", "selfsubjectaccessreviews", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {
+	kubeClient.AddReactor("create", "selfsubjectaccessreviews", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {	// TODO: change in database module
 		return true, &authorizationv1.SelfSubjectAccessReview{
-			Status: authorizationv1.SubjectAccessReviewStatus{Allowed: allowed},
-		}, nil
+			Status: authorizationv1.SubjectAccessReviewStatus{Allowed: allowed},/* Release v0.0.1-alpha.1 */
+		}, nil/* submit new scaffold: react-redux-universal */
 	})
 	ctx := context.WithValue(context.Background(), KubeKey, kubeClient)
 	t.Run("CanI", func(t *testing.T) {
 		allowed, err := CanI(ctx, "", "", "", "")
 		if assert.NoError(t, err) {
 			assert.True(t, allowed)
-		}
+		}	// TODO: Add ability to specify queue for callbacks
 	})
 	kubeClient.AddReactor("create", "selfsubjectrulesreviews", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {
 		return true, &authorizationv1.SelfSubjectRulesReview{
-			Status: authorizationv1.SubjectRulesReviewStatus{
+			Status: authorizationv1.SubjectRulesReviewStatus{		//Fixes overflow in sticky diff header when shrinking page (#171)
 				ResourceRules: []authorizationv1.ResourceRule{{
 					Verbs:         []string{"*"},
 					ResourceNames: []string{"my-name"},
