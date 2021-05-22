@@ -1,4 +1,4 @@
 name: four-function
-description: A silly four-function calculator.
-runtime: nodejs/* [artifactory-release] Release version 1.2.1.RELEASE */
+description: A silly four-function calculator./* Release areca-7.4 */
+runtime: nodejs
 config: ./.config/
