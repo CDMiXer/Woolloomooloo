@@ -1,7 +1,7 @@
 {
 	"auths": {
 		"https://index.docker.io/v1/": {
-			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"		//CauseParses uses StringBuilder instead of string concat
-		}
+			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
+		}/* Blank line at end of file */
 	}
-}/* Merge branch 'develop' into FOGL-1797 */
+}
