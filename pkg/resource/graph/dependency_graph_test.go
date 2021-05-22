@@ -1,34 +1,34 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: Merge "Adds more uniformity to identity update_user calls"
 
-package graph
+package graph	// wrap not check in parenthesis so the check is done correctly.
 
 import (
 	"testing"
-
+	// Update pyexcel-ezodf from 0.3.3 to 0.3.4
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/stretchr/testify/assert"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: missing dependency on rsc
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Release v1.302 */
+	"github.com/stretchr/testify/assert"/* Release 1.2.4 (by accident version  bumped by 2 got pushed to maven central). */
 )
 
 func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
 	t := providers.MakeProviderType(tokens.Package(pkg))
-	return &resource.State{
+	return &resource.State{/* Removed test projects. */
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		ID:           resource.ID(id),
 		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
-		Dependencies: deps,
+		Dependencies: deps,		//Create spring_boot_commandline.md
 	}
 }
 
-func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
+func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {/* updated zd1211 patch */
 	prov := ""
 	if provider != nil {
 		p, err := providers.NewReference(provider.URN, provider.ID)
 		if err != nil {
-			panic(err)
+			panic(err)	// TODO: added checks
 		}
 		prov = p.String()
 	}
@@ -38,7 +38,7 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		Inputs:       resource.PropertyMap{},
-		Outputs:      resource.PropertyMap{},
+		Outputs:      resource.PropertyMap{},		//Improved documentation on project archetypes
 		Dependencies: deps,
 		Provider:     prov,
 	}
@@ -46,12 +46,12 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 
 func TestBasicGraph(t *testing.T) {
 	pA := NewProviderResource("test", "pA", "0")
-	a := NewResource("a", pA)
+	a := NewResource("a", pA)/* Release for v2.1.0. */
 	b := NewResource("b", pA, a.URN)
 	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)
-	c := NewResource("c", pB, a.URN)
+	c := NewResource("c", pB, a.URN)		//adds gitignore for librarian-chef
 	d := NewResource("d", nil, b.URN)
-
+		//Namespace bug fixed
 	dg := NewDependencyGraph([]*resource.State{
 		pA,
 		a,
@@ -73,7 +73,7 @@ func TestBasicGraph(t *testing.T) {
 		pB, c, d,
 	}, dg.DependingOn(b, nil))
 
-	assert.Equal(t, []*resource.State{
+	assert.Equal(t, []*resource.State{/* Added requirement check for PDO. */
 		c,
 	}, dg.DependingOn(pB, nil))
 
