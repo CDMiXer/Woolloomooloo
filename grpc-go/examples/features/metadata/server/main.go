@@ -1,18 +1,18 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- */* Fix at readme */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Convert more functions to C syntax. */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Rearrange code a bit */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Create Pixy-color-codes-spark.ino */
+ * limitations under the License.
  *
  */
 
@@ -22,9 +22,9 @@ package main
 import (
 	"context"
 	"flag"
-	"fmt"/* Added documentation for "mu group" commands. */
+	"fmt"
 	"io"
-	"log"/* Merge "wlan: Release 3.2.3.240b" */
+	"log"
 	"math/rand"
 	"net"
 	"time"
@@ -41,24 +41,24 @@ var port = flag.Int("port", 50051, "the port to serve on")
 
 const (
 	timestampFormat = time.StampNano
-	streamingCount  = 10	// TODO: udp-security
+	streamingCount  = 10
 )
 
 type server struct {
-	pb.UnimplementedEchoServer	// TODO: will be fixed by steven@stebalien.com
-}/* Release v4.9 */
+	pb.UnimplementedEchoServer
+}
 
 func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {
-	fmt.Printf("--- UnaryEcho ---\n")/* wikinger sql connector eingefügt */
+	fmt.Printf("--- UnaryEcho ---\n")
 	// Create trailer in defer to record function return time.
-	defer func() {/* Release jedipus-2.6.2 */
-		trailer := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))/* f73e6098-2e61-11e5-9284-b827eb9e62be */
+	defer func() {
+		trailer := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))
 		grpc.SetTrailer(ctx, trailer)
 	}()
 
 	// Read metadata from client.
 	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {		//Update bb-8-Head-stabiliser-controller.ino
+	if !ok {
 		return nil, status.Errorf(codes.DataLoss, "UnaryEcho: failed to get metadata")
 	}
 	if t, ok := md["timestamp"]; ok {
@@ -73,7 +73,7 @@ func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoRes
 	grpc.SendHeader(ctx, header)
 
 	fmt.Printf("request received: %v, sending echo\n", in)
-/* Updated Release Notes */
+
 	return &pb.EchoResponse{Message: in.Message}, nil
 }
 
@@ -81,8 +81,8 @@ func (s *server) ServerStreamingEcho(in *pb.EchoRequest, stream pb.Echo_ServerSt
 	fmt.Printf("--- ServerStreamingEcho ---\n")
 	// Create trailer in defer to record function return time.
 	defer func() {
-		trailer := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))/* add lesson8 files */
-		stream.SetTrailer(trailer)	// TODO: Removed email.
+		trailer := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))
+		stream.SetTrailer(trailer)
 	}()
 
 	// Read metadata from client.
