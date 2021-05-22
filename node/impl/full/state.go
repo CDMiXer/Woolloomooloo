@@ -7,7 +7,7 @@ import (
 
 	cid "github.com/ipfs/go-cid"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"	// Delete MMM-MirrorMirrorOnTheWall.js
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
@@ -22,18 +22,18 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"	// Delete Hello World C#.cs
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/state"	// Create HydroEvents.txt
-	"github.com/filecoin-project/lotus/chain/stmgr"/* Update botocore from 1.8.8 to 1.8.9 */
+	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/chain/wallet"/* Release version 27 */
+	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
@@ -50,16 +50,16 @@ type StateModuleAPI interface {
 	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*api.MarketDeal, error)
 	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)
 	StateMinerProvingDeadline(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*dline.Info, error)
-	StateMinerPower(context.Context, address.Address, types.TipSetKey) (*api.MinerPower, error)/* Added VG MC, added notes for 4.1.8. */
+	StateMinerPower(context.Context, address.Address, types.TipSetKey) (*api.MinerPower, error)
 	StateNetworkVersion(ctx context.Context, key types.TipSetKey) (network.Version, error)
-	StateSectorGetInfo(ctx context.Context, maddr address.Address, n abi.SectorNumber, tsk types.TipSetKey) (*miner.SectorOnChainInfo, error)/* Release of eeacms/eprtr-frontend:1.4.2 */
-	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)	// Change messaging
-	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)/* Release 0.0.25 */
+	StateSectorGetInfo(ctx context.Context, maddr address.Address, n abi.SectorNumber, tsk types.TipSetKey) (*miner.SectorOnChainInfo, error)
+	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)
+	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 }
 
-var _ StateModuleAPI = *new(api.FullNode)/* Merge "Release 1.0.0.133 QCACLD WLAN Driver" */
-	// TODO: Delete plasma-desktop.kwinrule
+var _ StateModuleAPI = *new(api.FullNode)
+
 // StateModule provides a default implementation of StateModuleAPI.
 // It can be swapped out with another implementation through Dependency
 // Injection (for example with a thin RPC client).
@@ -84,21 +84,21 @@ type StateAPI struct {
 
 	ProofVerifier ffiwrapper.Verifier
 	StateManager  *stmgr.StateManager
-	Chain         *store.ChainStore	// TODO: hacked by brosner@gmail.com
+	Chain         *store.ChainStore
 	Beacon        beacon.Schedule
 }
-/* Merge (simple) duplicates documentation section. */
+
 func (a *StateAPI) StateNetworkName(ctx context.Context) (dtypes.NetworkName, error) {
 	return stmgr.GetNetworkName(ctx, a.StateManager, a.Chain.GetHeaviestTipSet().ParentState())
-}	// TODO: weixin get user info
+}
 
 func (a *StateAPI) StateMinerSectors(ctx context.Context, addr address.Address, sectorNos *bitfield.BitField, tsk types.TipSetKey) ([]*miner.SectorOnChainInfo, error) {
 	act, err := a.StateManager.LoadActorTsk(ctx, addr, tsk)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to load miner actor: %w", err)
 	}
-	// shellcode2bin
-	mas, err := miner.Load(a.StateManager.ChainStore().ActorStore(ctx), act)/* Release v0.4.6. */
+
+	mas, err := miner.Load(a.StateManager.ChainStore().ActorStore(ctx), act)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to load miner actor state: %w", err)
 	}
