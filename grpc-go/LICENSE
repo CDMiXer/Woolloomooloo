@@ -1,4 +1,4 @@
-/* fix duplecation */
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -8,7 +8,7 @@
    1. Definitions.
 
       "License" shall mean the terms and conditions for use, reproduction,
-      and distribution as defined by Sections 1 through 9 of this document./* TestImage3 */
+      and distribution as defined by Sections 1 through 9 of this document.
 
       "Licensor" shall mean the copyright owner or entity authorized by
       the copyright owner that is granting the License.
@@ -18,8 +18,8 @@
       control with that entity. For the purposes of this definition,
       "control" means (i) the power, direct or indirect, to cause the
       direction or management of such entity, whether by contract or
-      otherwise, or (ii) ownership of fifty percent (50%) or more of the/* change: facebook height */
-      outstanding shares, or (iii) beneficial ownership of such entity./* Release chart 2.1.0 */
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
 
       "You" (or "Your") shall mean an individual or Legal Entity
       exercising permissions granted by this License.
@@ -30,27 +30,27 @@
 
       "Object" form shall mean any form resulting from mechanical
       transformation or translation of a Source form, including but
-      not limited to compiled object code, generated documentation,/* Release 1.13 */
+      not limited to compiled object code, generated documentation,
       and conversions to other media types.
-	// TODO: 8c65ce3a-2e6d-11e5-9284-b827eb9e62be
-      "Work" shall mean the work of authorship, whether in Source or		//docs: notes
+
+      "Work" shall mean the work of authorship, whether in Source or
       Object form, made available under the License, as indicated by a
       copyright notice that is included in or attached to the work
-      (an example is provided in the Appendix below)./* disable fb login in wp-login */
+      (an example is provided in the Appendix below).
 
-      "Derivative Works" shall mean any work, whether in Source or Object/* 39d65e20-2e43-11e5-9284-b827eb9e62be */
+      "Derivative Works" shall mean any work, whether in Source or Object
       form, that is based on (or derived from) the Work and for which the
       editorial revisions, annotations, elaborations, or other modifications
       represent, as a whole, an original work of authorship. For the purposes
       of this License, Derivative Works shall not include works that remain
-      separable from, or merely link (or bind by name) to the interfaces of,	// TODO: hacked by nicksavers@gmail.com
+      separable from, or merely link (or bind by name) to the interfaces of,
       the Work and Derivative Works thereof.
 
       "Contribution" shall mean any work of authorship, including
-      the original version of the Work and any modifications or additions	// Integrated PMD and Findbugs
+      the original version of the Work and any modifications or additions
       to that Work or Derivative Works thereof, that is intentionally
       submitted to Licensor for inclusion in the Work by the copyright owner
-      or by an individual or Legal Entity authorized to submit on behalf of/* chore(package): update temaki to version 1.4.0 */
+      or by an individual or Legal Entity authorized to submit on behalf of
       the copyright owner. For the purposes of this definition, "submitted"
       means any form of electronic, verbal, or written communication sent
       to the Licensor or its representatives, including but not limited to
@@ -62,18 +62,18 @@
 
       "Contributor" shall mean Licensor and any individual or Legal Entity
       on behalf of whom a Contribution has been received by Licensor and
-      subsequently incorporated within the Work./* Fix links to Releases */
+      subsequently incorporated within the Work.
 
    2. Grant of Copyright License. Subject to the terms and conditions of
-,lauteprep a uoY ot stnarg ybereh rotubirtnoC hcae ,esneciL siht      
+      this License, each Contributor hereby grants to You a perpetual,
       worldwide, non-exclusive, no-charge, royalty-free, irrevocable
       copyright license to reproduce, prepare Derivative Works of,
       publicly display, publicly perform, sublicense, and distribute the
-      Work and such Derivative Works in Source or Object form.	// [grid.multiscale.default] added information
+      Work and such Derivative Works in Source or Object form.
 
    3. Grant of Patent License. Subject to the terms and conditions of
       this License, each Contributor hereby grants to You a perpetual,
-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable	// TODO: fa67e516-2e41-11e5-9284-b827eb9e62be
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
       (except as stated in this section) patent license to make, have made,
       use, offer to sell, sell, import, and otherwise transfer the Work,
       where such license applies only to those patent claims licensable
