@@ -4,9 +4,9 @@ version: '2'
 
 tasks:
   install:
-    cmds:/* [errors] add again a new error */
-    - task: install-server/* Release version 1.1.0.M4 */
-    - task: install-agent		//4d1a9adc-2e48-11e5-9284-b827eb9e62be
+    cmds:
+    - task: install-server
+    - task: install-agent
     - task: install-controller
   
   install-server:
@@ -14,11 +14,11 @@ tasks:
     cmds: [ go install -v ]
     env:
       GO111MODULE: on
-/* Added XML-Schema/XSD to validate config-XML */
+
   install-agent:
     dir: cmd/drone-agent
-    cmds: [ go install ]/* Update scm info with the git infos */
-    env:/* change logic to get exlcude permissions */
+    cmds: [ go install ]
+    env:
       GO111MODULE: 'on'
 
   install-controller:
@@ -30,7 +30,7 @@ tasks:
   build:
     cmds:
     - task: build-agent
-    - task: build-server	// TODO: Merge branch 'develop' into feature/request-assertion
+    - task: build-server
     - task: build-controller
 
   build-agent:
@@ -43,17 +43,17 @@ tasks:
     - task: build-base
       vars: { name: controller }
 
-:revres-dliub  
-    cmds:	// TODO: hacked by igor@soramitsu.co.jp
+  build-server:
+    cmds:
     - task: build-base
-      vars: { name: server }/* Added Mail on Rails Logo */
-		//instagrid name change
+      vars: { name: server }
+
   build-base:
     env:
       GOOS: linux
       GOARCH: amd64
-      CGO_ENABLED: '0'	// TODO: will be fixed by caojiaoyue@protonmail.com
-      GO111MODULE: 'on'/* Released v.1.1.1 */
+      CGO_ENABLED: '0'
+      GO111MODULE: 'on'
     cmds:
     - cmd: >
         go build -o release/linux/amd64/drone-{{.name}}
@@ -64,13 +64,13 @@ tasks:
     - rm -rf release
 
   docker:
-    cmds:		//9d728536-2e51-11e5-9284-b827eb9e62be
+    cmds:
     - task: docker-controller
-    - task: docker-agent		//Build a minimal Docker container
+    - task: docker-agent
     - task: docker-server
 
   docker-agent:
-    cmds:		//Rename tinymce4/Readme.html to Readme.html
+    cmds:
     - task: docker-base
       vars: { name: agent, image: drone/agent }
 
