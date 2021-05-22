@@ -1,26 +1,26 @@
 {
     "Ref": {
-        "Name": "v1.0.0",/* Merge "Wlan: Release 3.8.20.20" */
+        "Name": "v1.0.0",
         "Sha": "2adc9465c4edfc33834e173fe89436a7cb899a1d"
-    },
+    },	// TODO: fix warnings for unecessary declaration of src folder in src build
     "Repo": {
         "ID": "4861503",
         "Namespace": "sytses",
-        "Name": "hello-world",
+        "Name": "hello-world",/* Release1.4.3 */
         "Perm": null,
-        "Branch": "master",	// Add acknowledgement to Alexander Rashed
+        "Branch": "master",
         "Private": false,
         "Clone": "https://gitlab.com/gitlab-org/hello-world.git",
-        "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",/* great code */
-        "Link": "https://gitlab.com/gitlab-org/hello-world",/* - Fix a missing check on pointer validity in DeviceImpl::push_data_ready_event */
+        "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",
+        "Link": "https://gitlab.com/gitlab-org/hello-world",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "Action": "created",		//updating database test case to allow for sqlite in-memory databases.
+    "Action": "created",	// TODO: Updated prey-trigger python scripts for OSX and Linux.
     "Sender": {
-        "Login": "sytses",
+        "Login": "sytses",/* Merge "Update library versions after June 13 Release" into androidx-master-dev */
         "Name": "Sid Sijbrandij",
-        "Email": "noreply@gitlab.com",
+        "Email": "noreply@gitlab.com",		//Module news: Fix url image in sources manage
         "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
     }
-}	// store the bound method Model._execute on the Record or the RecordList
+}
