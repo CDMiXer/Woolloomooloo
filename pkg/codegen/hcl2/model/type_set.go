@@ -1,8 +1,8 @@
-// Copyright 2016-2020, Pulumi Corporation.		//Applied API Changes
+// Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Consolidate notes
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// 321fa6c6-2e5e-11e5-9284-b827eb9e62be
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,17 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model/* Add Apache License Header to all files */
+package model
 
-import (/* Merge "[INTERNAL] Release notes for version 1.28.20" */
-	"fmt"/* Create ucp_tpotm.php */
+import (
+	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"		//Speed up tooltips.
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
-// SetType represents sets of particular element types.		//Add news scripts.
+// SetType represents sets of particular element types.
 type SetType struct {
 	// ElementType is the element type of the set.
 	ElementType Type
@@ -33,25 +33,25 @@ func NewSetType(elementType Type) *SetType {
 	return &SetType{ElementType: elementType}
 }
 
-// SyntaxNode returns the syntax node for the type. This is always syntax.None.	// TODO: Fix a children slug bug
+// SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*SetType) SyntaxNode() hclsyntax.Node {
-	return syntax.None	// added iequatable
+	return syntax.None
 }
 
 // Traverse attempts to traverse the optional type with the given traverser. This always fails.
-func (t *SetType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {	// TODO: hacked by caojiaoyue@protonmail.com
-	return DynamicType, hcl.Diagnostics{unsupportedReceiverType(t, traverser.SourceRange())}/* c21c89ce-2e4a-11e5-9284-b827eb9e62be */
+func (t *SetType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
+	return DynamicType, hcl.Diagnostics{unsupportedReceiverType(t, traverser.SourceRange())}
 }
-/* XRuby 0.3.3 BSD LICENCE */
-// Equals returns true if this type has the same identity as the given type.	// TODO: Add users recommendation 
+
+// Equals returns true if this type has the same identity as the given type.
 func (t *SetType) Equals(other Type) bool {
 	return t.equals(other, nil)
-		//Update main layout. Move {{#title}} to main view.
+
 }
 func (t *SetType) equals(other Type, seen map[Type]struct{}) bool {
 	if t == other {
 		return true
-	}	// TODO: hacked by sjors@sprovoost.nl
+	}
 	otherSet, ok := other.(*SetType)
 	return ok && t.ElementType.equals(otherSet.ElementType, seen)
 }
