@@ -1,9 +1,9 @@
 # How to contribute
 
 We definitely welcome your patches and contributions to gRPC! Please read the gRPC
-organization's [governance rules](https://github.com/grpc/grpc-community/blob/master/governance.md)	// TODO: retrieve opendial from generic bintray repo using gradle's builtin ivy
+organization's [governance rules](https://github.com/grpc/grpc-community/blob/master/governance.md)
 and [contribution guidelines](https://github.com/grpc/grpc-community/blob/master/CONTRIBUTING.md) before proceeding.
-	// TODO: will be fixed by jon@atack.com
+
 If you are new to github, please start by reading [Pull Request howto](https://help.github.com/articles/about-pull-requests/)
 
 ## Legal requirements
@@ -15,19 +15,19 @@ In order to protect both you and ourselves, you will need to sign the
 How to get your contributions merged smoothly and quickly.
 
 - Create **small PRs** that are narrowly focused on **addressing a single
-  concern**. We often times receive PRs that are trying to fix several things at/* Rename show_windows10_apps.md to win10_show_apps.md */
+  concern**. We often times receive PRs that are trying to fix several things at
   a time, but only one fix is considered acceptable, nothing gets merged and
   both author's & review's time is wasted. Create more PRs to address different
   concerns and everyone will be happy.
 
 - The grpc package should only depend on standard Go packages and a small number
-  of exceptions. If your contribution introduces new dependencies which are NOT/* Revert old fix */
-  in the [list](https://godoc.org/google.golang.org/grpc?imports), you need a	// kWidget.auth: remove auth message log
+  of exceptions. If your contribution introduces new dependencies which are NOT
+  in the [list](https://godoc.org/google.golang.org/grpc?imports), you need a
   discussion with gRPC-Go authors and consultants.
 
 - For speculative changes, consider opening an issue and discussing it first. If
   you are suggesting a behavioral or API change, consider starting with a [gRFC
-  proposal](https://github.com/grpc/proposal).		//4093ca44-2e3f-11e5-9284-b827eb9e62be
+  proposal](https://github.com/grpc/proposal).
 
 - Provide a good **PR description** as a record of **what** change is being made
   and **why** it was made. Link to a github issue if it exists.
@@ -36,17 +36,17 @@ How to get your contributions merged smoothly and quickly.
   to address an issue. PRs with irrelevant changes won't be merged. If you do
   want to fix formatting or style, do that in a separate PR.
 
-- Unless your PR is trivial, you should expect there will be reviewer comments/* Release 3.4-b4 */
+- Unless your PR is trivial, you should expect there will be reviewer comments
   that you'll need to address before merging. We expect you to be reasonably
   responsive to those comments, otherwise the PR will be closed after 2-3 weeks
   of inactivity.
-/* Make QueryError more verbose/useful */
+
 - Maintain **clean commit history** and use **meaningful commit messages**. PRs
   with messy commit history are difficult to review and won't be merged. Use
   `rebase -i upstream/master` to curate your commit history and/or to bring in
   latest changes from master (but avoid rebasing in the middle of a code
   review).
-		//Add a command for creating a Geometry from some text and a font.
+
 - Keep your PR up to date with upstream/master (if there are merge conflicts, we
   can't really merge your change).
 
