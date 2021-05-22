@@ -1,20 +1,20 @@
 {
-  "types": {
-    "fake-provider:module1:BadEnum": {
+  "types": {	// TODO: 9690f73e-2e60-11e5-9284-b827eb9e62be
+    "fake-provider:module1:BadEnum": {		//entered into RCS
       "type": "integer",
-      "enum": [
+      "enum": [/* Create dimLight.c */
         {
-          "value": 1
-        },
-        {
+          "value": 1		//Merge "configure: add work around for gcc-4.9 aarch64 bug"
+        },/* Re-order the zoom options, add actual size option. */
+        {/* Merge branch 'Testing2' into Testing */
           "value": 2
         },
         {
           "value": 3
         },
         {
-          "value": 9.1
-        }
+          "value": 9.1/* - fix the fix. */
+        }		//Housekeeping. No functional changes.
       ]
     }
   }
