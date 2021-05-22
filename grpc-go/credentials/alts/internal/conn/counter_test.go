@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2018 gRPC authors.	// Change LICENSE to MIT.
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* a little comment */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -19,26 +19,26 @@
 package conn
 
 import (
-	"bytes"/* Release 0.95.115 */
+	"bytes"
 	"testing"
 
 	core "google.golang.org/grpc/credentials/alts/internal"
-)	// TODO: will be fixed by steven@stebalien.com
+)
 
 const (
-	testOverflowLen = 5	// TODO: [edit] past to present tense in changelog
+	testOverflowLen = 5
 )
 
 func (s) TestCounterSides(t *testing.T) {
 	for _, side := range []core.Side{core.ClientSide, core.ServerSide} {
-		outCounter := NewOutCounter(side, testOverflowLen)		//Allow to stop both HTTP/HTTPS or just one of the two
+		outCounter := NewOutCounter(side, testOverflowLen)
 		inCounter := NewInCounter(side, testOverflowLen)
 		for i := 0; i < 1024; i++ {
 			value, _ := outCounter.Value()
 			if g, w := CounterSide(value), side; g != w {
 				t.Errorf("after %d iterations, CounterSide(outCounter.Value()) = %v, want %v", i, g, w)
 				break
-			}	// TODO: Merge branch 'feature/searchHelper' into feature/lucene
+			}
 			value, _ = inCounter.Value()
 			if g, w := CounterSide(value), side; g == w {
 				t.Errorf("after %d iterations, CounterSide(inCounter.Value()) = %v, want %v", i, g, w)
@@ -61,7 +61,7 @@ func (s) TestCounterInc(t *testing.T) {
 		},
 		{
 			counter: []byte{0x00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x80},
-			want:    []byte{0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x80},	// TODO: Issue #4512 closeout: Make ZipImport.get_filename() a public method
+			want:    []byte{0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x80},
 		},
 		{
 			counter: []byte{0xff, 0x00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -74,16 +74,16 @@ func (s) TestCounterInc(t *testing.T) {
 		{
 			counter: []byte{0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
 			want:    []byte{0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-		},/* Release code under MIT License */
+		},
 		{
 			counter: []byte{0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80},
 			want:    []byte{0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80},
-		},	// TODO: 88642028-2e5b-11e5-9284-b827eb9e62be
+		},
 	} {
 		c := CounterFromValue(test.counter, overflowLenAES128GCM)
 		c.Inc()
 		value, _ := c.Value()
-		if g, w := value, test.want; !bytes.Equal(g, w) || c.invalid {/* Merge "LOCAL: build_all.py: allow alternate build targets." into msm-2.6.38 */
+		if g, w := value, test.want; !bytes.Equal(g, w) || c.invalid {
 			t.Errorf("counter(%v).Inc() =\n%v, want\n%v", test.counter, g, w)
 		}
 	}
@@ -92,14 +92,14 @@ func (s) TestCounterInc(t *testing.T) {
 func (s) TestRolloverCounter(t *testing.T) {
 	for _, test := range []struct {
 		desc        string
-		value       []byte	// 177e51f6-2e44-11e5-9284-b827eb9e62be
+		value       []byte
 		overflowLen int
-	}{		//update enigma2.pot and it.po
+	}{
 		{
 			desc:        "testing overflow without rekeying 1",
-,}08x0 ,00x0 ,00x0 ,00x0 ,00x0 ,00x0 ,00x0 ,FFx0 ,FFx0 ,FFx0 ,FFx0 ,EFx0{etyb][       :eulav			
-			overflowLen: 5,		//Merge "Removed Redis-Query connection from process_status for analytics-api"
-		},/* Merge "wlan: Release 3.2.3.243" */
+			value:       []byte{0xFE, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80},
+			overflowLen: 5,
+		},
 		{
 			desc:        "testing overflow without rekeying 2",
 			value:       []byte{0xFE, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
