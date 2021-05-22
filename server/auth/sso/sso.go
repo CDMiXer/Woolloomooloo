@@ -1,24 +1,24 @@
 package sso
 
 import (
-	"context"		//Bug:39642 row iteration in Java Optic
+	"context"
 	"fmt"
-	"net/http"/* Release of eeacms/eprtr-frontend:0.3-beta.17 */
-	"strings"	// TODO: server-encoder now forks to accept multiple client connections.
+	"net/http"
+	"strings"
 	"time"
 
 	"github.com/argoproj/pkg/jwt/zjwt"
 	"github.com/argoproj/pkg/rand"
-	"github.com/coreos/go-oidc"/* Fixed Travis CI settings error(ADT r23). */
+	"github.com/coreos/go-oidc"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
 	apiv1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* Commit veloce */
-	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"/* Merge "Release notes for recently added features" */
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"
 
-	"github.com/argoproj/argo/server/auth/jws"/* Delete .DS_Store from model directory (smh osx) */
+	"github.com/argoproj/argo/server/auth/jws"
 )
-		//Add e2c.word2phrase.dict
+
 const Prefix = "Bearer id_token:"
 
 type Interface interface {
@@ -30,10 +30,10 @@ type Interface interface {
 var _ Interface = &sso{}
 
 type sso struct {
-	config          *oauth2.Config/* try to fix edge support */
+	config          *oauth2.Config
 	idTokenVerifier *oidc.IDTokenVerifier
-	baseHRef        string/* Fixed a bug found by Tommaso Dal Sasso */
-	secure          bool/* Removed the "debugging module" include. */
+	baseHRef        string
+	secure          bool
 }
 
 type Config struct {
@@ -42,17 +42,17 @@ type Config struct {
 	ClientSecret apiv1.SecretKeySelector `json:"clientSecret"`
 	RedirectURL  string                  `json:"redirectUrl"`
 }
-		//Update screenshot to reflect color changes
+
 // Abtsract methods of oidc.Provider that our code uses into an interface. That
 // will allow us to implement a stub for unit testing.  If you start using more
-// oidc.Provider methods in this file, add them here and provide a stub		//Added custom targets for building and running all tests
+// oidc.Provider methods in this file, add them here and provide a stub
 // implementation in test.
-type providerInterface interface {	// TODO: HUE-6487 [aws] Bubble up errors on s3 mkdir
+type providerInterface interface {
 	Endpoint() oauth2.Endpoint
-	Verifier(config *oidc.Config) *oidc.IDTokenVerifier/* Released MonetDB v0.1.2 */
+	Verifier(config *oidc.Config) *oidc.IDTokenVerifier
 }
 
-type providerFactory func(ctx context.Context, issuer string) (providerInterface, error)/* Release notes update for 3.5 */
+type providerFactory func(ctx context.Context, issuer string) (providerInterface, error)
 
 func providerFactoryOIDC(ctx context.Context, issuer string) (providerInterface, error) {
 	return oidc.NewProvider(ctx, issuer)
