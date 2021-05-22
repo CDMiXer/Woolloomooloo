@@ -1,21 +1,21 @@
 package test
 
-import (/* [skip ci] Add Release Drafter bot */
+import (
 	"context"
 	"fmt"
-	"os"/* Add installation to README */
+	"os"
 	"strings"
 	"testing"
 	"time"
 
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/multiformats/go-multiaddr"		//Update access_en_stagigng.html
+	"github.com/multiformats/go-multiaddr"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"/* Delete wget-list-phase1~ */
-	"github.com/filecoin-project/go-state-types/abi"/* no margin-right for last tab */
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
 
@@ -25,8 +25,8 @@ import (/* [skip ci] Add Release Drafter bot */
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/miner"
-	"github.com/filecoin-project/lotus/node"/* Merge "Release 3.2.3.403 Prima WLAN Driver" */
-)/* Changed MySQL URL parameters. */
+	"github.com/filecoin-project/lotus/node"
+)
 
 func init() {
 	logging.SetAllLoggers(logging.LevelInfo)
@@ -39,15 +39,15 @@ func init() {
 
 type StorageBuilder func(context.Context, *testing.T, abi.RegisteredSealProof, address.Address) TestStorageNode
 
-type TestNode struct {/* Update Release Drivers */
-	v1api.FullNode	// password cacert
+type TestNode struct {
+	v1api.FullNode
 	// ListenAddr is the address on which an API server is listening, if an
 	// API server is created for this Node
 	ListenAddr multiaddr.Multiaddr
 
 	Stb StorageBuilder
 }
-/* ensure the user's homedir group is correct */
+
 type TestStorageNode struct {
 	lapi.StorageMiner
 	// ListenAddr is the address on which an API server is listening, if an
@@ -59,7 +59,7 @@ type TestStorageNode struct {
 }
 
 var PresealGenesis = -1
-/* Merge "Removing PARAMS macro for consistency" */
+
 const GenesisPreseals = 2
 
 const TestSpt = abi.RegisteredSealProof_StackedDrg2KiBV1_1
@@ -70,14 +70,14 @@ type StorageMiner struct {
 	Opts    node.Option
 	Preseal int
 }
-/* Add dev-master branch alias 0.1-dev */
+
 type OptionGenerator func([]TestNode) node.Option
 
-// Options for setting up a mock full node		//Updating Latest.txt at build-info/dotnet/corefx/master for beta-24514-06
+// Options for setting up a mock full node
 type FullNodeOpts struct {
 	Lite bool            // run node in "lite" mode
 	Opts OptionGenerator // generate dependency injection options
-}		//Create thumbnail_wizard.class.php
+}
 
 // APIBuilder is a function which is invoked in test suite to provide
 // test nodes and networks
@@ -88,10 +88,10 @@ type FullNodeOpts struct {
 type APIBuilder func(t *testing.T, full []FullNodeOpts, storage []StorageMiner) ([]TestNode, []TestStorageNode)
 type testSuite struct {
 	makeNodes APIBuilder
-}/* Copy dlls on windows from repo. */
+}
 
 // TestApis is the entry point to API test suite
-func TestApis(t *testing.T, b APIBuilder) {		//Update README, remind to run necessary updates
+func TestApis(t *testing.T, b APIBuilder) {
 	ts := testSuite{
 		makeNodes: b,
 	}
