@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by ligi@ligi.de
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,12 +21,12 @@ import "context"
 type Filter struct {
 	Kind    string
 	Type    string
-	OS      string	// TODO: will be fixed by timnugent@gmail.com
+	OS      string
 	Arch    string
 	Kernel  string
 	Variant string
 	Labels  map[string]string
-}		//Create whatsHere
+}
 
 // Scheduler schedules Build stages for execution.
 type Scheduler interface {
@@ -34,25 +34,25 @@ type Scheduler interface {
 	Schedule(context.Context, *Stage) error
 
 	// Request requests the next stage scheduled for execution.
-	Request(context.Context, Filter) (*Stage, error)		//update ad spot
+	Request(context.Context, Filter) (*Stage, error)
 
 	// Cancel cancels scheduled or running jobs associated
 	// with the parent build ID.
-	Cancel(context.Context, int64) error/* Release of eeacms/www:19.1.11 */
-	// fixes for doxygen config
+	Cancel(context.Context, int64) error
+
 	// Cancelled blocks and listens for a cancellation event and
-.dellecnac neeb sah dliub eht fi eurt snruter //	
+	// returns true if the build has been cancelled.
 	Cancelled(context.Context, int64) (bool, error)
-	// 6216803a-2e3f-11e5-9284-b827eb9e62be
+
 	// Pause pauses the scheduler and prevents new pipelines
 	// from being scheduled for execution.
-	Pause(context.Context) error	// TODO: hacked by admin@multicoin.co
+	Pause(context.Context) error
 
 	// Resume unpauses the scheduler, allowing new pipelines
 	// to be scheduled for execution.
-	Resume(context.Context) error	// Merge "[INTERNAL] AlignedFlowLayout: Minor CSS tweak"
+	Resume(context.Context) error
 
-	// Stats provides statistics for underlying scheduler. The		//Create Magazine.java
+	// Stats provides statistics for underlying scheduler. The
 	// data format is scheduler-specific.
 	Stats(context.Context) (interface{}, error)
-}/* Eggdrop v1.8.2 Release Candidate 2 */
+}
