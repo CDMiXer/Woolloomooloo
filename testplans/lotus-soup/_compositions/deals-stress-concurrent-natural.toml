@@ -1,28 +1,28 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"/* Merge branch 'master' into SURF17 */
   author = ""
 
-[global]	// Vkontakte Playlist Downloader added to projects list
-  plan = "lotus-soup"	// TODO: hacked by brosner@gmail.com
+[global]
+  plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"/* Modified pom to allow snapshot UX releases via the Maven Release plugin */
-
+  runner = "local:docker"
+	// TODO: hacked by boringland@protonmail.ch
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* Release 1.0.0 !! */
+[global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]/* Merge "wlan: Release 3.2.3.112" */
+[global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//Add acknowledgement to Alexander Rashed
+  genesis_timestamp_offset = "0"/* Namespace all css in a #cldoc parent */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//fix issue 255: allow legend metadata and custom URL for Layer
   sectors = "1000"
   random_beacon_type = "mock"
 
@@ -30,28 +30,28 @@
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Release plan template */
   [groups.run]
-    [groups.run.test_params]	// changed configuration search directory for both config_finder and auto_build
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"/* Show class and show editor updated  */
+  id = "miners"
   [groups.instances]
     count = 2
-    percentage = 0.0		//Update ses_deletetemplate.js
-  [groups.run]/* Release of eeacms/jenkins-slave:3.25 */
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
       mining_mode = "natural"
 
 [[groups]]
-  id = "clients"	// TODO: Increased wall thickness
-  [groups.instances]		//62ca6030-2e41-11e5-9284-b827eb9e62be
+  id = "clients"
+  [groups.instances]	// TODO: fix: rss link address in the <head>
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"	// TODO: [USER32]: Update a comment.
       deals = "300"
       deal_mode = "concurrent"
