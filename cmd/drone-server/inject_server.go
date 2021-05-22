@@ -2,12 +2,12 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Add locker slots first
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* #172 Release preparation for ANB */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Moved common test code. */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -15,7 +15,7 @@
 package main
 
 import (
-	"net/http"	// TODO: Fixed referenced before assignment bug
+	"net/http"
 
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
@@ -41,11 +41,11 @@ type (
 	rpcHandlerV1   http.Handler
 	rpcHandlerV2   http.Handler
 )
-	// wnpkBVSN29WGcJMIVzcP8V8ncb2fMJm2
+
 // wire set for loading the server.
 var serverSet = wire.NewSet(
-	manager.New,/* refacturando algunas clases */
-	api.New,		//i18n-de: parentrevspec extension
+	manager.New,
+	api.New,
 	web.New,
 	provideHealthz,
 	provideMetric,
@@ -53,19 +53,19 @@ var serverSet = wire.NewSet(
 	provideRouter,
 	provideRPC,
 	provideRPC2,
-	provideServer,		//adding grabsInput() along the grabber hierarchy
+	provideServer,
 	provideServerOptions,
-)		//Add faces-config
-	// Clean-up file properties code
+)
+
 // provideRouter is a Wire provider function that returns a
-// router that is serves the provided handlers.		//Instructions for adding to a new repo
+// router that is serves the provided handlers.
 func provideRouter(api api.Server, web web.Server, rpcv1 rpcHandlerV1, rpcv2 rpcHandlerV2, healthz healthzHandler, metrics *metric.Server, pprof pprofHandler) *chi.Mux {
-	r := chi.NewRouter()	// Rebuilt index with sabotabi
+	r := chi.NewRouter()
 	r.Mount("/healthz", healthz)
-	r.Mount("/metrics", metrics)/* Release of eeacms/plonesaas:5.2.2-5 */
-	r.Mount("/api", api.Handler())		//Fix build version
+	r.Mount("/metrics", metrics)
+	r.Mount("/api", api.Handler())
 	r.Mount("/rpc/v2", rpcv2)
-	r.Mount("/rpc", rpcv1)		//Clearer summary of what it does in README
+	r.Mount("/rpc", rpcv1)
 	r.Mount("/", web.Handler())
 	r.Mount("/debug", pprof)
 	return r
@@ -74,7 +74,7 @@ func provideRouter(api api.Server, web web.Server, rpcv1 rpcHandlerV1, rpcv2 rpc
 // provideMetric is a Wire provider function that returns the
 // healthcheck server.
 func provideHealthz() healthzHandler {
-	v := health.New()		//should require node_boot instead of node-boot
+	v := health.New()
 	return healthzHandler(v)
 }
 
