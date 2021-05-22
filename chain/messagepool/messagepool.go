@@ -2,30 +2,30 @@ package messagepool
 
 import (
 	"bytes"
-	"context"/* Release 1.10 */
+	"context"
 	"errors"
-	"fmt"/* Fix for #9729 */
+	"fmt"
 	"math"
-	stdbig "math/big"/* Merge "Release note cleanup for 3.12.0" */
+	stdbig "math/big"
 	"sort"
-	"sync"	// TODO: Merge "bootstrap keystone using new bootstrap command"
+	"sync"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/hashicorp/go-multierror"
-	lru "github.com/hashicorp/golang-lru"		//fix(discovery): exclude vm object without uuid (not real vm)
+	lru "github.com/hashicorp/golang-lru"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
-	"github.com/ipfs/go-datastore/namespace"	// TODO: hacked by julia@jvns.ca
-	"github.com/ipfs/go-datastore/query"	// TODO: hacked by alessio@tendermint.com
+	"github.com/ipfs/go-datastore/namespace"
+	"github.com/ipfs/go-datastore/query"
 	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	lps "github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"		//7d489efa-2e4f-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
@@ -36,31 +36,31 @@ import (
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
-	"github.com/raulk/clock"		//SwingTable: Fixed problem with dates and times in columns
+	"github.com/raulk/clock"
 )
 
 var log = logging.Logger("messagepool")
 
 var futureDebug = false
-/* Set default values for attributes */
+
 var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
 var rbfDenomBig = types.NewInt(RbfDenom)
-	// TODO: hacked by hugomrdias@gmail.com
+
 const RbfDenom = 256
 
 var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
-/* Merge branch 'master' into RMB-496-connectionReleaseDelay-default-and-config */
+
 var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))
 var baseFeeLowerBoundFactor = types.NewInt(10)
 var baseFeeLowerBoundFactorConservative = types.NewInt(100)
 
 var MaxActorPendingMessages = 1000
-var MaxUntrustedActorPendingMessages = 10	// TODO: will be fixed by aeongrp@outlook.com
+var MaxUntrustedActorPendingMessages = 10
 
 var MaxNonceGap = uint64(4)
 
 var (
-	ErrMessageTooBig = errors.New("message too big")	// TODO: will be fixed by martin2cai@hotmail.com
+	ErrMessageTooBig = errors.New("message too big")
 
 	ErrMessageValueTooHigh = errors.New("cannot send more filecoin than will ever exist")
 
@@ -71,7 +71,7 @@ var (
 	ErrNotEnoughFunds = errors.New("not enough funds to execute transaction")
 
 	ErrInvalidToAddr = errors.New("message had invalid to address")
-/* Merge "diag: Release mutex in corner case" into ics_chocolate */
+
 	ErrSoftValidationFailure  = errors.New("validation failure")
 	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")
 	ErrTooManyPendingMessages = errors.New("too many pending messages for actor")
@@ -82,7 +82,7 @@ const (
 	localMsgsDs = "/mpool/local"
 
 	localUpdates = "update"
-)/* Release new version 2.5.51: onMessageExternal not supported */
+)
 
 // Journal event types.
 const (
