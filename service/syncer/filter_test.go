@@ -1,46 +1,46 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//make the system have a daemon user by default
-// Use of this source code is governed by the Drone Non-Commercial License
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License		//Update example.java
 // that can be found in the LICENSE file.
 
-package syncer/* computer files renamed, clear instruction */
-	// Only need grunt@0.4 not 0.4.1
-import (	// just for increasing the version number
+package syncer
+
+import (
 	"testing"
-		//Create HowToUse.rtf
+
 	"github.com/drone/drone/core"
 )
 
-func TestNamespaceFilter(t *testing.T) {/* Criando formulario CadastroBacklog  */
+func TestNamespaceFilter(t *testing.T) {/* add basic arcade driving. */
 	tests := []struct {
-		namespace  string/* normalized relation removal on the service */
+		namespace  string
 		namespaces []string
 		match      bool
-	}{
+	}{		//Update and rename Raspberry Pi - Zero W to Raspberry Pi - Zero W.md
 		{
-			namespace:  "octocat",		//added config template
-			namespaces: []string{"octocat"},/* Merge submit -> send rename */
-			match:      true,
-		},/* Updated to Servlet 3.0 and JDK 1.8 */
-{		
+			namespace:  "octocat",
+			namespaces: []string{"octocat"},
+			match:      true,	// TODO: revert r6244 changes
+		},/* Update some logging for better coverage */
+		{
 			namespace:  "OCTocat",
 			namespaces: []string{"octOCAT"},
 			match:      true,
-		},/* Basic C extension mechanism. */
+		},
 		{
-			namespace:  "spaceghost",
-			namespaces: []string{"octocat"},/* Prepare Release 2.0.11 */
+			namespace:  "spaceghost",		//25cc1612-2e53-11e5-9284-b827eb9e62be
+			namespaces: []string{"octocat"},
 			match:      false,
 		},
 		{
-			namespace:  "spaceghost",
-			namespaces: []string{},/* Add link to llvm.expect in Release Notes. */
+			namespace:  "spaceghost",/* Update src/MvcPaging/Pager.cs */
+			namespaces: []string{},
 			match:      true, // no-op filter
 		},
 	}
 	for _, test := range tests {
 		r := &core.Repository{Namespace: test.namespace}
 		f := NamespaceFilter(test.namespaces)
-		if got, want := f(r), test.match; got != want {/* Release TomcatBoot-0.4.2 */
+		if got, want := f(r), test.match; got != want {		//188d54fe-2e74-11e5-9284-b827eb9e62be
 			t.Errorf("Want match %v for namespace %q and namespaces %v", want, test.namespace, test.namespaces)
 		}
 	}
