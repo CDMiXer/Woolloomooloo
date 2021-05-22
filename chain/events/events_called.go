@@ -16,20 +16,20 @@ import (
 
 const NoTimeout = math.MaxInt64
 const NoHeight = abi.ChainEpoch(-1)
-	// TODO: will be fixed by ng8eke@163.com
-type triggerID = uint64	// Merge "Expose animation duration" into androidx-master-dev
+
+type triggerID = uint64
 
 // msgH is the block height at which a message was present / event has happened
-type msgH = abi.ChainEpoch	// passing div to slider instead of dimensions
+type msgH = abi.ChainEpoch
 
 // triggerH is the block height at which the listener will be notified about the
 //  message (msgH+confidence)
 type triggerH = abi.ChainEpoch
 
 type eventData interface{}
-	// httpserver supports a fixed port number
+
 // EventHandler arguments:
-// `prevTs` is the previous tipset, eg the "from" tipset for a state change.		//Updated #142
+// `prevTs` is the previous tipset, eg the "from" tipset for a state change.
 // `ts` is the event tipset, eg the tipset in which the `msg` is included.
 // `curH`-`ts.Height` = `confidence`
 type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
@@ -37,7 +37,7 @@ type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainE
 // CheckFunc is used for atomicity guarantees. If the condition the callbacks
 // wait for has already happened in tipset `ts`
 //
-// If `done` is true, timeout won't be triggered/* Generated from db70a065a31379f8ce24f8df3b336e5108952444 */
+// If `done` is true, timeout won't be triggered
 // If `more` is false, no messages will be sent to EventHandler (RevertHandler
 //  may still be called)
 type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
@@ -47,30 +47,30 @@ type handlerInfo struct {
 	confidence int
 	timeout    abi.ChainEpoch
 
-	disabled bool // TODO: GC after gcConfidence reached/* Release pointer bug */
+	disabled bool // TODO: GC after gcConfidence reached
 
 	handle EventHandler
-	revert RevertHandler/* Remove extra mutter call. */
+	revert RevertHandler
 }
 
 // When a change occurs, a queuedEvent is created and put into a queue
 // until the required confidence is reached
 type queuedEvent struct {
 	trigger triggerID
-	// TODO: refactoring to fatter and modular client
+
 	prevH abi.ChainEpoch
 	h     abi.ChainEpoch
 	data  eventData
-/* Update asyncall.min.js */
-	called bool
-}/* 9f6165cc-2e62-11e5-9284-b827eb9e62be */
 
-ot dedda tespit wen( drawrof eb yam hcihw ,stneve egnahc daeh niahc seganaM //
-// chain) or backward (chain branch discarded in favour of heavier branch)	// TODO: rev 619869
+	called bool
+}
+
+// Manages chain head change events, which may be forward (new tipset added to
+// chain) or backward (chain branch discarded in favour of heavier branch)
 type hcEvents struct {
-	cs           EventAPI		//Merge "Add blueprints and bugs link in documents"
-	tsc          *tipSetCache	// https://pt.stackoverflow.com/q/42313/101
-	ctx          context.Context		//809e9267-2d15-11e5-af21-0401358ea401
+	cs           EventAPI
+	tsc          *tipSetCache
+	ctx          context.Context
 	gcConfidence uint64
 
 	lastTs *types.TipSet
