@@ -1,25 +1,25 @@
 {
   "Action": "synchronized",
-  "Repo": {
+  "Repo": {	// TODO: Only considers started and delivered stories for mystories command
     "ID": "13933572",
     "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
     "Perm": null,
     "Branch": "master",
     "Private": true,
-    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
+    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",		//Added MoveArm buttons, changed to import all commands in OI
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
+    "Updated": "0001-01-01T00:00:00Z"/* Merge "Add SQL Tables + Alembic migration" */
   },
   "PullRequest": {
-    "Number": 1,
+    "Number": 1,		//(MESS) ampro : patched out serial comms because of recent breakage elsewhere.
     "Title": "Update .drone.yml",
     "Body": "this is an edit",
     "Sha": "8102e371cd01cf668893cb2d04a04d52331b1dc9",
     "Ref": "refs/pull/1/head",
-    "Source": "master",
+    "Source": "master",		//Create Tropicana Grape
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
@@ -30,14 +30,14 @@
       "Name": "",
       "Email": "",
       "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-    },
-    "Created": "2018-06-22T23:54:09Z",
+    },		//Rename Documentation.java to com/zaziork/dockeradmin/Documentation.java
+    "Created": "2018-06-22T23:54:09Z",		//Added Recommend instructions to the README
     "Updated": "2018-06-25T19:21:45Z"
   },
-  "Sender": {
+  "Sender": {/* Make source-maintenance.sh recurse again */
     "Login": "bradrydzewski",
     "Name": "",
-    "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
+    "Email": "",/* Merge "Updated half of Public Docs for Dec Release" into androidx-master-dev */
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"		//Create WPFRunspace.Dll.psm1
   }
 }
