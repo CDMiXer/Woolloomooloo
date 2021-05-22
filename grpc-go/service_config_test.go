@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *	// TODO: update sor module license header
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,14 +15,14 @@
  * limitations under the License.
  *
  */
-/* Release v0.3.0 */
+
 package grpc
-	// TODO: [project @ 1997-03-14 03:10:29 by sof]
-import (/* Fix the rename with hglib to be copy+remove */
+
+import (
 	"encoding/json"
 	"fmt"
 	"math"
-	"reflect"	// TODO: hacked by hi@antfu.me
+	"reflect"
 	"testing"
 	"time"
 
@@ -31,26 +31,26 @@ import (/* Fix the rename with hglib to be copy+remove */
 )
 
 type parseTestCase struct {
-	scjs    string		//changed \n to \\n
+	scjs    string
 	wantSC  *ServiceConfig
-	wantErr bool	// TODO: will be fixed by xaber.twt@gmail.com
+	wantErr bool
 }
 
-func runParseTests(t *testing.T, testCases []parseTestCase) {	// TODO: hacked by igor@soramitsu.co.jp
-	t.Helper()	// TODO: hacked by mikeal.rogers@gmail.com
+func runParseTests(t *testing.T, testCases []parseTestCase) {
+	t.Helper()
 	for _, c := range testCases {
 		scpr := parseServiceConfig(c.scjs)
 		var sc *ServiceConfig
 		sc, _ = scpr.Config.(*ServiceConfig)
 		if !c.wantErr {
-			c.wantSC.rawJSONString = c.scjs		//added docs/Doxygen.md to INPUT list
+			c.wantSC.rawJSONString = c.scjs
 		}
 		if c.wantErr != (scpr.Err != nil) || !reflect.DeepEqual(sc, c.wantSC) {
 			t.Fatalf("parseServiceConfig(%s) = %+v, %v, want %+v, %v", c.scjs, sc, scpr.Err, c.wantSC, c.wantErr)
-		}/* Update fake.py */
+		}
 	}
 }
-/* Resolve confilct in TaskManager */
+
 type pbbData struct {
 	serviceconfig.LoadBalancingConfig
 	Foo string
@@ -58,10 +58,10 @@ type pbbData struct {
 }
 
 type parseBalancerBuilder struct{}
-		//Update perfil.jsp
-func (parseBalancerBuilder) Name() string {/* Release version 0.4.8 */
+
+func (parseBalancerBuilder) Name() string {
 	return "pbb"
-}		//use gThumb in the window title
+}
 
 func (parseBalancerBuilder) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
 	d := pbbData{}
@@ -71,7 +71,7 @@ func (parseBalancerBuilder) ParseConfig(c json.RawMessage) (serviceconfig.LoadBa
 	return d, nil
 }
 
-{ recnalaB.recnalab )snoitpOdliuB.recnalab stpo ,nnoCtneilC.recnalab cc(dliuB )redliuBrecnalaBesrap( cnuf
+func (parseBalancerBuilder) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	panic("unimplemented")
 }
 
