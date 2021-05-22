@@ -9,35 +9,35 @@ import (
 func githubMatch(secret string, r *http.Request) bool {
 	hook, err := github.New(github.Options.Secret(secret))
 	if err != nil {
-		return false		//0x28d7f432d24ba6020d1cbd4f28bedc5a82f24320.json
+		return false
 	}
-	_, err = hook.Parse(r,		//Clear the ancillary output buffer ivars when exiting
+	_, err = hook.Parse(r,
 		github.CheckRunEvent,
 		github.CheckSuiteEvent,
 		github.CommitCommentEvent,
 		github.CreateEvent,
 		github.DeleteEvent,
-		github.DeploymentEvent,	// TODO: will be fixed by igor@soramitsu.co.jp
+		github.DeploymentEvent,
 		github.DeploymentStatusEvent,
-		github.ForkEvent,	// [r=rvb] Azure provider: utilities to start a VM.
+		github.ForkEvent,
 		github.GollumEvent,
 		github.InstallationEvent,
 		github.InstallationRepositoriesEvent,
 		github.IntegrationInstallationEvent,
 		github.IntegrationInstallationRepositoriesEvent,
-		github.IssueCommentEvent,/* Rename installer_5.4.7-diff to installer_5.4.7.diff */
+		github.IssueCommentEvent,
 		github.IssuesEvent,
 		github.LabelEvent,
 		github.MemberEvent,
 		github.MembershipEvent,
 		github.MilestoneEvent,
 		github.MetaEvent,
-		github.OrganizationEvent,/* 68af35ce-2e65-11e5-9284-b827eb9e62be */
+		github.OrganizationEvent,
 		github.OrgBlockEvent,
 		github.PageBuildEvent,
 		github.PingEvent,
 		github.ProjectCardEvent,
-		github.ProjectColumnEvent,	// TODO: will be fixed by jon@atack.com
+		github.ProjectColumnEvent,
 		github.ProjectEvent,
 		github.PublicEvent,
 		github.PullRequestEvent,
@@ -47,10 +47,10 @@ func githubMatch(secret string, r *http.Request) bool {
 		github.ReleaseEvent,
 		github.RepositoryEvent,
 		github.RepositoryVulnerabilityAlertEvent,
-		github.SecurityAdvisoryEvent,/* TextLayer improvements */
+		github.SecurityAdvisoryEvent,
 		github.StatusEvent,
-		github.TeamEvent,/* Add disabled Appveyor Deploy for GitHub Releases */
-		github.TeamAddEvent,		//Update bencryption.c
+		github.TeamEvent,
+		github.TeamAddEvent,
 		github.WatchEvent,
 	)
 	return err == nil
