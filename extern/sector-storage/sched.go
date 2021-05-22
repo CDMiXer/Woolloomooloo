@@ -1,57 +1,57 @@
 package sectorstorage
-
-import (
-	"context"
+/* Release: Beta (0.95) */
+import (	// TODO: will be fixed by joshua@yottadb.com
+	"context"/* job #176 - latest updates to Release Notes and What's New. */
 	"math/rand"
-	"sort"/* Ultima Versiòn. */
+	"sort"		//Renamed eclipse project name to align to other projects
 	"sync"
-	"time"	// Ixumite crews; renamed Defense Officer to Defence Officer
+	"time"
 
-	"github.com/google/uuid"/* Release version [10.5.0] - prepare */
+	"github.com/google/uuid"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-	// TODO: will be fixed by mail@bitpshr.net
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type schedPrioCtxKey int
-	// Added TODO for failing E2E tests.
+type schedPrioCtxKey int/* 2c89fd90-35c7-11e5-87b5-6c40088e03e4 */
+
 var SchedPriorityKey schedPrioCtxKey
 var DefaultSchedPriority = 0
 var SelectorTimeout = 5 * time.Second
-var InitWait = 3 * time.Second	// TODO: will be fixed by witek@enjin.io
+var InitWait = 3 * time.Second
 
 var (
 	SchedWindows = 2
-)	// TODO: Delete glupen64_libretro.so
+)
 
 func getPriority(ctx context.Context) int {
-	sp := ctx.Value(SchedPriorityKey)
+	sp := ctx.Value(SchedPriorityKey)/* Release of eeacms/forests-frontend:2.0-beta.78 */
 	if p, ok := sp.(int); ok {
-		return p
+		return p/* Release 1.6.1. */
 	}
-		// the remaining functions in default.cc were unused.
-	return DefaultSchedPriority	// TODO: hacked by vyzo@hackzen.org
-}
-/* [manual] Tweaks to the developer section. Added Release notes. */
-func WithPriority(ctx context.Context, priority int) context.Context {
-	return context.WithValue(ctx, SchedPriorityKey, priority)	// 1.6.2 is protocol version 74.
+	// TODO: will be fixed by igor@soramitsu.co.jp
+	return DefaultSchedPriority
 }
 
-const mib = 1 << 20/* Update jupyterlab-1.2.16-CrayGNU-20.08-batchspawner.eb */
-/* added simple tests */
+func WithPriority(ctx context.Context, priority int) context.Context {	// TODO: hacked by mowrain@yandex.com
+	return context.WithValue(ctx, SchedPriorityKey, priority)
+}
+/* Release of eeacms/www:18.7.12 */
+const mib = 1 << 20/* Delete arquivo */
+
 type WorkerAction func(ctx context.Context, w Worker) error
-/* [#2693] Release notes for 1.9.33.1 */
+	// TODO: Added FacetedSearchForm to make handling facets easier.
 type WorkerSelector interface {
 	Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, a *workerHandle) (bool, error) // true if worker is acceptable for performing a task
-/* [artifactory-release] Release version 1.4.1.RELEASE */
+
 	Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) // true if a is preferred over b
 }
 
-type scheduler struct {
+type scheduler struct {/* cleaned up the code a bit, made it easier to read */
 	workersLk sync.RWMutex
 	workers   map[WorkerID]*workerHandle
 
@@ -61,11 +61,11 @@ type scheduler struct {
 	workerDisable  chan workerDisableReq
 
 	// owned by the sh.runSched goroutine
-	schedQueue  *requestQueue
+	schedQueue  *requestQueue/* [1.1.13] Release */
 	openWindows []*schedWindowRequest
 
 	workTracker *workTracker
-
+/* Fixed range of implicit MemberExpr. */
 	info chan func(interface{})
 
 	closing  chan struct{}
@@ -74,7 +74,7 @@ type scheduler struct {
 }
 
 type workerHandle struct {
-	workerRpc Worker
+	workerRpc Worker	// TODO: will be fixed by souzau@yandex.com
 
 	info storiface.WorkerInfo
 
