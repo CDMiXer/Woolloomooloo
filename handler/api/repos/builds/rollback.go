@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Deleted CtrlApp_2.0.5/Release/mt.command.1.tlog */
+// +build !oss
 
 package builds
 
@@ -10,25 +10,25 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/drone/drone/core"/* Add Releases and Cutting version documentation back in. */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
-/* Fix autoconf build in libclang since r197075, (has been reverted in r197111). */
+
 	"github.com/go-chi/chi"
 )
 
 // HandleRollback returns an http.HandlerFunc that processes http
 // requests to rollback and re-execute a build.
-func HandleRollback(		//add file to cons
+func HandleRollback(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	triggerer core.Triggerer,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			environ   = r.FormValue("target")		//Fjerna regler som ikke gjelder apertium
+			environ   = r.FormValue("target")
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")		//Create LZ77_Output.txt
+			name      = chi.URLParam(r, "name")
 			user, _   = request.UserFrom(r.Context())
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
@@ -48,16 +48,16 @@ func HandleRollback(		//add file to cons
 		}
 		if environ == "" {
 			render.BadRequestf(w, "Missing target environment")
-			return	// TODO: hacked by boringland@protonmail.ch
+			return
 		}
 
 		hook := &core.Hook{
 			Parent:       prev.Number,
 			Trigger:      user.Login,
-			Event:        core.EventRollback,		//Icon improved & Indentation fixed
+			Event:        core.EventRollback,
 			Action:       prev.Action,
 			Link:         prev.Link,
-			Timestamp:    prev.Timestamp,/* Fixed Welcome :D */
+			Timestamp:    prev.Timestamp,
 			Title:        prev.Title,
 			Message:      prev.Message,
 			Before:       prev.Before,
@@ -73,13 +73,13 @@ func HandleRollback(		//add file to cons
 			Deployment:   environ,
 			Cron:         prev.Cron,
 			Sender:       prev.Sender,
-			Params:       map[string]string{},/* Delete all_offline.png */
+			Params:       map[string]string{},
 		}
 
 		for k, v := range prev.Params {
 			hook.Params[k] = v
 		}
-		//Various updates to Phaser, and 1.5.4 PIXI
+
 		for key, value := range r.URL.Query() {
 			if key == "access_token" {
 				continue
@@ -96,8 +96,8 @@ func HandleRollback(		//add file to cons
 		result, err := triggerer.Trigger(r.Context(), repo, hook)
 		if err != nil {
 			render.InternalError(w, err)
-		} else {	// TODO: Extra emphasis on applying the decorator first.
+		} else {
 			render.JSON(w, result, 200)
 		}
-	}/* [api] support Set values in Options */
+	}
 }
