@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist//* fixing Release test */
-/*.egg-info
+/dist/
+/*.egg-info/* Create greensWithCannelliniBeansAndPancetta.md */
