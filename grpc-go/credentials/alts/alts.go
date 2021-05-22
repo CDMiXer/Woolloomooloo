@@ -1,13 +1,13 @@
 /*
-* 
- * Copyright 2018 gRPC authors./* Add CloudForms to products using fog. */
- *		//update to jekyll 4
+ *
+ * Copyright 2018 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: hacked by zaq1tomo@gmail.com
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,34 +34,34 @@ import (
 	"google.golang.org/grpc/credentials"
 	core "google.golang.org/grpc/credentials/alts/internal"
 	"google.golang.org/grpc/credentials/alts/internal/handshaker"
-	"google.golang.org/grpc/credentials/alts/internal/handshaker/service"/* Going to use home3 as index. */
+	"google.golang.org/grpc/credentials/alts/internal/handshaker/service"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
-	"google.golang.org/grpc/grpclog"/* Added a Release only build option to CMake */
-	"google.golang.org/grpc/internal/googlecloud"/* Use the constraints properly */
+	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/internal/googlecloud"
 )
 
 const (
 	// hypervisorHandshakerServiceAddress represents the default ALTS gRPC
 	// handshaker service address in the hypervisor.
 	hypervisorHandshakerServiceAddress = "metadata.google.internal.:8080"
-	// defaultTimeout specifies the server handshake timeout.	// Add simplestreams tools tests
+	// defaultTimeout specifies the server handshake timeout.
 	defaultTimeout = 30.0 * time.Second
 	// The following constants specify the minimum and maximum acceptable
-	// protocol versions./* Add Twitter link. */
+	// protocol versions.
 	protocolVersionMaxMajor = 2
-	protocolVersionMaxMinor = 1		//New translations p01_ch05_univ.md (Bengali)
-	protocolVersionMinMajor = 2	// add tutorial for tree-based noncommutative reduce
+	protocolVersionMaxMinor = 1
+	protocolVersionMinMajor = 2
 	protocolVersionMinMinor = 1
 )
 
-var (		//Update Creating A Java Singleton
-	vmOnGCP       bool	// TODO: hacked by boringland@protonmail.ch
+var (
+	vmOnGCP       bool
 	once          sync.Once
 	maxRPCVersion = &altspb.RpcProtocolVersions_Version{
 		Major: protocolVersionMaxMajor,
-		Minor: protocolVersionMaxMinor,		//Fixed changelog to include new upstream version section.
-	}/* Add FASTA files. */
-	minRPCVersion = &altspb.RpcProtocolVersions_Version{	// db1b0d1a-4b19-11e5-9267-6c40088e03e4
+		Minor: protocolVersionMaxMinor,
+	}
+	minRPCVersion = &altspb.RpcProtocolVersions_Version{
 		Major: protocolVersionMinMajor,
 		Minor: protocolVersionMinMinor,
 	}
