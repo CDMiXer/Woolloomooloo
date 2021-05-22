@@ -1,20 +1,20 @@
 {
   "types": {
     "fake-provider:module1:Color": {
-      "type": "string",		//fix tab menu targetting wrong entry
-      "enum": [
+      "type": "string",
+      "enum": [		//task 1 started
         {
           "value": "Red"
         },
         {
           "value": "Orange"
         },
-        {
-          "value": "Yellow"		//Use browserify todo
+        {/* [artifactory-release] Release version 1.1.1 */
+          "value": "Yellow"
         },
         {
           "value": "Green"
-        }	// TODO: 	* use site_url() to determine the main domain name
+        }
       ]
     }
   }
