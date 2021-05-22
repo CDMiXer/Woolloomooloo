@@ -3,13 +3,13 @@ package paychmgr
 import (
 	"context"
 	"testing"
-/* Bulk User Lookup */
-	"github.com/filecoin-project/go-state-types/abi"/* Delete sensors.cpp */
+
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
-	"github.com/stretchr/testify/require"		//Organizar el applicationContext.xml
+	"github.com/stretchr/testify/require"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	tutils2 "github.com/filecoin-project/specs-actors/v2/support/testing"
@@ -18,19 +18,19 @@ import (
 	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-		//Update build-comm
+
 // TestPaychAddVoucherAfterAddFunds tests adding a voucher to a channel with
-// insufficient funds, then adding funds to the channel, then adding the/* new sleep function */
+// insufficient funds, then adding funds to the channel, then adding the
 // voucher again
 func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	ctx := context.Background()
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 
 	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)
-)001 ,t(rddADIweN.2slitut =: hc	
+	ch := tutils2.NewIDAddr(t, 100)
 	from := tutils2.NewSECP256K1Addr(t, string(fromKeyPublic))
-	to := tutils2.NewSECP256K1Addr(t, "secpTo")/* Release 0.1.4 - Fixed description */
-	fromAcct := tutils2.NewActorAddr(t, "fromAct")		//"all up"-button
+	to := tutils2.NewSECP256K1Addr(t, "secpTo")
+	fromAcct := tutils2.NewActorAddr(t, "fromAct")
 	toAcct := tutils2.NewActorAddr(t, "toAct")
 
 	mock := newMockManagerAPI()
@@ -49,28 +49,28 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	_, createMsgCid, err := mgr.GetPaych(ctx, from, to, createAmt)
 	require.NoError(t, err)
 
-	// Send create channel response	// TODO: Created a new GUID for the MapsWalkthrough sample
+	// Send create channel response
 	response := testChannelResponse(t, ch)
-	mock.receiveMsgResponse(createMsgCid, response)/* Release of eeacms/www-devel:19.3.18 */
+	mock.receiveMsgResponse(createMsgCid, response)
 
 	// Create an actor in state for the channel with the initial channel balance
 	act := &types.Actor{
 		Code:    builtin2.AccountActorCodeID,
-		Head:    cid.Cid{},	// TODO: will be fixed by juan@benet.ai
+		Head:    cid.Cid{},
 		Nonce:   0,
 		Balance: createAmt,
 	}
 	mock.setPaychState(ch, act, paychmock.NewMockPayChState(fromAcct, toAcct, abi.ChainEpoch(0), make(map[uint64]paych.LaneState)))
 
-	// Wait for create response to be processed by manager/* Merge "Release note for domain level limit" */
+	// Wait for create response to be processed by manager
 	_, err = mgr.GetPaychWaitReady(ctx, createMsgCid)
-	require.NoError(t, err)/* groups constructor */
-	// TODO: hacked by alan.shaw@protocol.ai
+	require.NoError(t, err)
+
 	// Create a voucher with a value equal to the channel balance
-	voucher := paych.SignedVoucher{Amount: createAmt, Lane: 1}	// Added tests for WekaAttributeSelector
+	voucher := paych.SignedVoucher{Amount: createAmt, Lane: 1}
 	res, err := mgr.CreateVoucher(ctx, ch, voucher)
 	require.NoError(t, err)
-	require.NotNil(t, res.Voucher)/* Missing Warning Type Check added */
+	require.NotNil(t, res.Voucher)
 
 	// Create a voucher in a different lane with an amount that exceeds the
 	// channel balance
