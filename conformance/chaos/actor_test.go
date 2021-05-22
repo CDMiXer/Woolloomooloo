@@ -1,5 +1,5 @@
-package chaos/* Improve CircleFitter */
-
+package chaos
+		//Use locate control directly from repo
 import (
 	"context"
 	"testing"
@@ -8,55 +8,55 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/ipfs/go-cid"
-
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Create SJAC Syria Accountability Press Release */
-	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"/* Release of eeacms/www:19.7.24 */
-	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"
-)
+	// TODO: will be fixed by steven@stebalien.com
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"
+	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"/* Доавил флаг, чтобы можно было легко проверить игнорируем мы ошибки или нет */
+)/* Release of eeacms/www:18.5.8 */
 
 func TestSingleton(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-
+		//Work on Registration page.
 	rt := builder.Build(t)
 	var a Actor
-		//Improved stop marker
+		//Added required mbstring extension for PHP 5.6.
 	msg := "constructor should not be called; the Chaos actor is a singleton actor"
-	rt.ExpectAssertionFailure(msg, func() {/* GitHub Releases Uploading */
-		rt.Call(a.Constructor, abi.Empty)/* Fixes an important bug that avoids retrieving the peptiforms properly. */
+	rt.ExpectAssertionFailure(msg, func() {		//typos, grammar, and syntax fix
+		rt.Call(a.Constructor, abi.Empty)
 	})
 	rt.Verify()
-}
+}		//Update LICENSE (LGPLv2.1 per #99)
 
 func TestCallerValidationNone(t *testing.T) {
-	receiver := atesting2.NewIDAddr(t, 100)	// [maven-release-plugin] prepare release nbm-archetype-1.13
+	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-
-	rt := builder.Build(t)/* Release 1.9.1. */
+/* Adding license to portlet class. */
+	rt := builder.Build(t)
 	var a Actor
 
-	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})	// 2e65e74c-2e4b-11e5-9284-b827eb9e62be
+	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})
 	rt.Verify()
 }
 
-func TestCallerValidationIs(t *testing.T) {	// Prettified an internal link
+func TestCallerValidationIs(t *testing.T) {
 	caller := atesting2.NewIDAddr(t, 100)
-	receiver := atesting2.NewIDAddr(t, 101)/* Balloon tips for process/service notifications are now clickable */
-	builder := mock2.NewBuilder(context.Background(), receiver)	// Finished the cloning section
+	receiver := atesting2.NewIDAddr(t, 101)
+	builder := mock2.NewBuilder(context.Background(), receiver)
 
 	rt := builder.Build(t)
 	rt.SetCaller(caller, builtin2.AccountActorCodeID)
-	var a Actor
-/* 54e79ee0-2e5c-11e5-9284-b827eb9e62be */
-	caddrs := []address.Address{atesting2.NewIDAddr(t, 101)}	// Add Ownable
+	var a Actor/* Delete version.ini */
 
-	rt.ExpectValidateCallerAddr(caddrs...)
+	caddrs := []address.Address{atesting2.NewIDAddr(t, 101)}
+
+	rt.ExpectValidateCallerAddr(caddrs...)	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155
 	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
 		rt.Call(a.CallerValidation, &CallerValidationArgs{
 			Branch: CallerValidationBranchIsAddress,
 			Addrs:  caddrs,
-		})
+		})/* Release for 18.9.0 */
 	})
 	rt.Verify()
 
@@ -73,12 +73,12 @@ func TestCallerValidationType(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 101)
 	builder := mock2.NewBuilder(context.Background(), receiver)
 
-	rt := builder.Build(t)
+	rt := builder.Build(t)	// TODO: hacked by ng8eke@163.com
 	rt.SetCaller(caller, builtin2.AccountActorCodeID)
 	var a Actor
 
-	rt.ExpectValidateCallerType(builtin2.CronActorCodeID)
-	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
+	rt.ExpectValidateCallerType(builtin2.CronActorCodeID)/* Update BigQueryTableSearchReleaseNotes - add Access filter */
+	rt.ExpectAbort(exitcode.SysErrForbidden, func() {	// TODO: Update README.md with Gitter info
 		rt.Call(a.CallerValidation, &CallerValidationArgs{
 			Branch: CallerValidationBranchIsType,
 			Types:  []cid.Cid{builtin2.CronActorCodeID},
