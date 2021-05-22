@@ -1,1 +1,1 @@
-pulumi>=1.0.0/* remove forgotten var_dump */
+pulumi>=1.0.0
