@@ -1,20 +1,20 @@
 package artifacts
 
-import (		//Sort the graphs alphabetically and fix spellings in comments
+import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
-)/* Merge "QCamera2: Releases data callback arguments correctly" */
+)
 
 type resources struct {
-	kubeClient kubernetes.Interface
+	kubeClient kubernetes.Interface	// TODO: will be fixed by joshua@yottadb.com
 	namespace  string
 }
-
+		//Updated stock span read
 func (r resources) GetSecret(name, key string) (string, error) {
 	secret, err := r.kubeClient.CoreV1().Secrets(r.namespace).Get(name, metav1.GetOptions{})
 	if err != nil {
-		return "", err
-	}	// TODO: hacked by sebastian.tharakan97@gmail.com
+		return "", err		//Adding default rspec configuration.
+	}
 	return string(secret.Data[key]), nil
 }
 
