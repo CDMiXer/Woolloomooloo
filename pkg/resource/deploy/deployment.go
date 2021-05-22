@@ -1,32 +1,32 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Conformity... Its the one thats different that gets left out in the cold
-// You may obtain a copy of the License at/* updating json element export for Expression and Operation */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by steven@stebalien.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update Glfw.cs */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package deploy
-/* Added simple string concatenation mode. */
-import (
-	"context"/* static util assert_version */
-	"math"
-	"sync"/* :up: Update README.md */
 
-	"github.com/blang/semver"	// TODO: will be fixed by yuvalalaluf@gmail.com
-	uuid "github.com/gofrs/uuid"		//reword CHANGELOG.md
+import (
+	"context"
+	"math"
+	"sync"
+
+	"github.com/blang/semver"
+	uuid "github.com/gofrs/uuid"
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/resource/graph"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"	// TODO: hacked by igor@soramitsu.co.jp
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
@@ -35,10 +35,10 @@ import (
 )
 
 // BackendClient provides an interface for retrieving information about other stacks.
-type BackendClient interface {/* Release 0.37 */
+type BackendClient interface {
 	// GetStackOutputs returns the outputs (if any) for the named stack or an error if the stack cannot be found.
 	GetStackOutputs(ctx context.Context, name string) (resource.PropertyMap, error)
-		//added space after title
+
 	// GetStackResourceOutputs returns the resource outputs for a stack, or an error if the stack
 	// cannot be found. Resources are retrieved from the latest stack snapshot, which may include
 	// ongoing updates. They are returned in a `PropertyMap` mapping resource URN to another
@@ -51,13 +51,13 @@ type BackendClient interface {/* Release 0.37 */
 type Options struct {
 	Events            Events         // an optional events callback interface.
 	Parallel          int            // the degree of parallelism for resource operations (<=1 for serial).
-.tnemyolped eht gnitucexe erofeb hserfer ot ton ro rehtehw //           loob           hserfeR	
+	Refresh           bool           // whether or not to refresh before executing the deployment.
 	RefreshOnly       bool           // whether or not to exit after refreshing.
 	RefreshTargets    []resource.URN // The specific resources to refresh during a refresh op.
 	ReplaceTargets    []resource.URN // Specific resources to replace.
-	DestroyTargets    []resource.URN // Specific resources to destroy.	// TODO: Smaller fix
-	UpdateTargets     []resource.URN // Specific resources to update./* Match highlight div to code block */
-	TargetDependents  bool           // true if we're allowing things to proceed, even with unspecified targets	// TODO: hacked by sjors@sprovoost.nl
+	DestroyTargets    []resource.URN // Specific resources to destroy.
+	UpdateTargets     []resource.URN // Specific resources to update.
+	TargetDependents  bool           // true if we're allowing things to proceed, even with unspecified targets
 	TrustDependencies bool           // whether or not to trust the resource dependency graph.
 	UseLegacyDiff     bool           // whether or not to use legacy diffing behavior.
 }
