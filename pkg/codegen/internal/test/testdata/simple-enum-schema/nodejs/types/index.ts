@@ -4,10 +4,10 @@
 // Export sub-modules:
 import * as enums from "./enums";
 import * as input from "./input";
-import * as output from "./output";/* Release for v25.4.0. */
+import * as output from "./output";
 
 export {
-    enums,/* Added member windSpeed, and included in output operator. */
+    enums,	// TODO: hacked by admin@multicoin.co
     input,
     output,
 };
