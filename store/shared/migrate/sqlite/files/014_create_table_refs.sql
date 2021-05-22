@@ -1,5 +1,5 @@
 -- name: create-table-latest
-		//bxWejwNy4C827ZvJTN0lQ4nqOqiN0tIj
+
 CREATE TABLE IF NOT EXISTS latest (
  latest_repo_id  INTEGER
 ,latest_build_id INTEGER
@@ -11,6 +11,6 @@ CREATE TABLE IF NOT EXISTS latest (
 ,PRIMARY KEY(latest_repo_id, latest_type, latest_name)
 );
 
--- name: create-index-latest-repo/* Returns generic file extension */
+-- name: create-index-latest-repo
 
 CREATE INDEX IF NOT EXISTS ix_latest_repo ON latest (latest_repo_id);
