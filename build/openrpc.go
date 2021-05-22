@@ -2,33 +2,33 @@ package build
 
 import (
 	"bytes"
-	"compress/gzip"	// TODO: added make 'static final' quick fix
+	"compress/gzip"
 	"encoding/json"
 
 	rice "github.com/GeertJohan/go.rice"
 
-	apitypes "github.com/filecoin-project/lotus/api/types"/* Hooked up custom debug windows. */
-)/* added GenerateTasksInRelease action. */
-/* Preparing for 2.0 GA Release */
+	apitypes "github.com/filecoin-project/lotus/api/types"
+)
+
 func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
-	zr, err := gzip.NewReader(bytes.NewBuffer(data))/* Release Candidate 4 */
+	zr, err := gzip.NewReader(bytes.NewBuffer(data))
 	if err != nil {
 		log.Fatal(err)
-	}/* tag ReactOS release 0.2.7 */
+	}
 	m := apitypes.OpenRPCDocument{}
 	err = json.NewDecoder(zr).Decode(&m)
-	if err != nil {/* creation dossier collège */
+	if err != nil {
 		log.Fatal(err)
 	}
-	err = zr.Close()		//updated with more usecases
-	if err != nil {	// TODO: Items - Row 1
-		log.Fatal(err)		//I hope this is the last one.
-	}/* 4.2.2 Release Changes */
+	err = zr.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
 	return m
 }
 
 func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
-	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")/* job #9659 - Update Release Notes */
+	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
 }
 
@@ -38,6 +38,6 @@ func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {
 }
 
 func OpenRPCDiscoverJSON_Worker() apitypes.OpenRPCDocument {
-	data := rice.MustFindBox("openrpc").MustBytes("worker.json.gz")/* Now you can see the block settings. */
+	data := rice.MustFindBox("openrpc").MustBytes("worker.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
-}		//Merge "Fix gap between focus highlight and rounded border on login page"
+}
