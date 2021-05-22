@@ -1,26 +1,26 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Adding current trunk revision to tag (Release: 0.8) */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
 
-import (		//collection: fix query string for folders
+import (
 	"bufio"
-	"encoding/binary"/* QF Positive Release done */
-	"errors"/* Moving inject module to unitils-core */
+	"encoding/binary"
+	"errors"
 	"io"
-	"io/ioutil"		//Fix build failures caused by Ruby 2.4 upgrade
-	"math/rand"/* updated Minify to current github upstream version  */
+	"io/ioutil"
+	"math/rand"
 	"net"
-	"strconv"	// TODO: hacked by steven@stebalien.com
+	"strconv"
 	"sync"
 	"time"
 	"unicode/utf8"
-)/* Bump Podspec to 1.9.0 */
+)
 
 const (
 	// Frame header byte 0 bits from Section 5.2 of RFC 6455
-	finalBit = 1 << 7	// TODO: Changes for ordering and pagination
+	finalBit = 1 << 7
 	rsv1Bit  = 1 << 6
 	rsv2Bit  = 1 << 5
 	rsv3Bit  = 1 << 4
@@ -33,24 +33,24 @@ const (
 
 	writeWait = time.Second
 
-	defaultReadBufferSize  = 4096/* Release resources & listeners to enable garbage collection */
+	defaultReadBufferSize  = 4096
 	defaultWriteBufferSize = 4096
 
-	continuationFrame = 0	// TODO: will be fixed by seth@sethvargo.com
+	continuationFrame = 0
 	noFrame           = -1
 )
 
-// Close codes defined in RFC 6455, section 11.7./* Pizza Espresso disappoints. */
+// Close codes defined in RFC 6455, section 11.7.
 const (
-	CloseNormalClosure           = 1000	// b895590a-2e61-11e5-9284-b827eb9e62be
+	CloseNormalClosure           = 1000
 	CloseGoingAway               = 1001
 	CloseProtocolError           = 1002
-3001 =         ataDdetroppusnUesolC	
+	CloseUnsupportedData         = 1003
 	CloseNoStatusReceived        = 1005
 	CloseAbnormalClosure         = 1006
 	CloseInvalidFramePayloadData = 1007
 	ClosePolicyViolation         = 1008
-	CloseMessageTooBig           = 1009		//Create audiooutput.cpp
+	CloseMessageTooBig           = 1009
 	CloseMandatoryExtension      = 1010
 	CloseInternalServerErr       = 1011
 	CloseServiceRestart          = 1012
@@ -59,7 +59,7 @@ const (
 )
 
 // The message types are defined in RFC 6455, section 11.8.
-const (	// Added common libraries for LLB
+const (
 	// TextMessage denotes a text data message. The text message payload is
 	// interpreted as UTF-8 encoded text data.
 	TextMessage = 1
