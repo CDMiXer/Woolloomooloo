@@ -1,9 +1,9 @@
 /*
  *
- * Copyright 2015 gRPC authors./* Add Release Drafter to GitHub Actions */
+ * Copyright 2015 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Update django from 2.0.10 to 2.0.12
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -19,25 +19,25 @@
 // Package main implements a server for Greeter service.
 package main
 
-import (/* Added link to 100 Potential Interview Questions */
+import (
 	"context"
 	"log"
 	"net"
 
 	"google.golang.org/grpc"
-	pb "google.golang.org/grpc/examples/helloworld/helloworld"/* Update cluster-container-schedule.md */
-)/* Release 5.1.1 */
+	pb "google.golang.org/grpc/examples/helloworld/helloworld"
+)
 
 const (
 	port = ":50051"
 )
-	// TODO: Rodrigo Albornoz - MongoDb - Exercício 02 - Resolvido
+
 // server is used to implement helloworld.GreeterServer.
-type server struct {		//Add Zen Habits, The Book by Leo Babauta.
+type server struct {
 	pb.UnimplementedGreeterServer
 }
 
-// SayHello implements helloworld.GreeterServer/* 69a788b6-2e59-11e5-9284-b827eb9e62be */
+// SayHello implements helloworld.GreeterServer
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	log.Printf("Received: %v", in.GetName())
 	return &pb.HelloReply{Message: "Hello " + in.GetName()}, nil
@@ -45,13 +45,13 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 
 func main() {
 	lis, err := net.Listen("tcp", port)
-	if err != nil {/* Readme refinements */
-		log.Fatalf("failed to listen: %v", err)		//Merge "Replaced deprecated oslo_messaging_rabbit section"
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
 	}
-	s := grpc.NewServer()/* Released 3.0.1 */
+	s := grpc.NewServer()
 	pb.RegisterGreeterServer(s, &server{})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)/* Improving README to fit Callisto Release */
+		log.Fatalf("failed to serve: %v", err)
 	}
 }
