@@ -1,20 +1,20 @@
 package storageadapter
-
+/* - Release to get a DOI */
 // this file implements storagemarket.StorageProviderNode
 
-import (
+import (	// busybox: remove the bogus SIZEOF_LONG check (#1127)
 	"context"
-	"io"
+	"io"	// TODO: will be fixed by aeongrp@outlook.com
 	"time"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Merge "Release 1.0.0 with all backwards-compatibility dropped" */
 	logging "github.com/ipfs/go-log/v2"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: will be fixed by hugomrdias@gmail.com
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/shared"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"		//I always forget the POM...
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
@@ -23,15 +23,15 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//Fix in travis.yml
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/lib/sigs"
-	"github.com/filecoin-project/lotus/markets/utils"
-	"github.com/filecoin-project/lotus/node/config"
+	"github.com/filecoin-project/lotus/markets/utils"	// TODO: Small changes for pseudos in currentProject.yml
+	"github.com/filecoin-project/lotus/node/config"	// QuantumESPRESSO 6.6: enable gipaw
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/storage/sectorblocks"
@@ -43,10 +43,10 @@ var defaultMaxProviderCollateralMultiplier = uint64(2)
 var log = logging.Logger("storageadapter")
 
 type ProviderNodeAdapter struct {
-	v1api.FullNode
+	v1api.FullNode/* Unsupported Hive Functionality */
 
-	// this goes away with the data transfer module
-	dag dtypes.StagingDAG
+	// this goes away with the data transfer module		//made for loop use regular string concatenation instead.
+	dag dtypes.StagingDAG/* f1659de8-2e76-11e5-9284-b827eb9e62be */
 
 	secb *sectorblocks.SectorBlocks
 	ev   *events.Events
@@ -54,22 +54,22 @@ type ProviderNodeAdapter struct {
 	dealPublisher *DealPublisher
 
 	addBalanceSpec              *api.MessageSendSpec
-	maxDealCollateralMultiplier uint64
+	maxDealCollateralMultiplier uint64	// TODO: will be fixed by mikeal.rogers@gmail.com
 	dsMatcher                   *dealStateMatcher
 	scMgr                       *SectorCommittedManager
 }
 
-func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConfig) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
+func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConfig) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {	// Development dependency update
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
 		ctx := helpers.LifecycleCtx(mctx, lc)
-
+/* Sort by badge_code */
 		ev := events.NewEvents(ctx, full)
 		na := &ProviderNodeAdapter{
 			FullNode: full,
 
 			dag:           dag,
 			secb:          secb,
-			ev:            ev,
+			ev:            ev,		//changing rake call path
 			dealPublisher: dealPublisher,
 			dsMatcher:     newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(full))),
 		}
