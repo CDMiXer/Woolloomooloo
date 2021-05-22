@@ -9,13 +9,13 @@
         {
           "value": "marshmallow"
         },
-        {/* changed bulb "status" to "state" */
+        {
           "value": 3
         },
         {
           "value": "cookie"
-        }	// added python wheel generation and PyPI upload
-      ]/* Include paths on watch-manager watch */
+        }
+      ]
     }
-  }	// TODO: will be fixed by steven@stebalien.com
+  }
 }
