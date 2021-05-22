@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi/
+/.pulumi/	// TODO: hacked by peterke@gmail.com
 /dist/
 /*.egg-info
 venv/
