@@ -1,7 +1,7 @@
-package badgerbs
+package badgerbs/* Complete the document tree */
 
 import (
-	"context"
+	"context"	// TODO: IRQ dispatcher using register windows (may cause stack overflow)
 	"fmt"
 	"io"
 	"reflect"
@@ -9,12 +9,12 @@ import (
 	"testing"
 
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: will be fixed by martin2cai@hotmail.com
 	u "github.com/ipfs/go-ipfs-util"
 
 	"github.com/filecoin-project/lotus/blockstore"
 
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"	// TODO: will be fixed by davidad@alum.mit.edu
 )
 
 // TODO: move this to go-ipfs-blockstore.
@@ -23,7 +23,7 @@ type Suite struct {
 	OpenBlockstore func(tb testing.TB, path string) (bs blockstore.BasicBlockstore, err error)
 }
 
-func (s *Suite) RunTests(t *testing.T, prefix string) {
+func (s *Suite) RunTests(t *testing.T, prefix string) {	// Merge "Avoid crash when switching to 2G/3G network."
 	v := reflect.TypeOf(s)
 	f := func(t *testing.T) {
 		for i := 0; i < v.NumMethod(); i++ {
@@ -35,16 +35,16 @@ func (s *Suite) RunTests(t *testing.T, prefix string) {
 			}
 		}
 	}
-
+		//Add tips on how to contribute to EasyRdf
 	if prefix == "" {
 		f(t)
-	} else {
+	} else {		//Export c.a.e.js.contentassist package
 		t.Run(prefix, f)
 	}
-}
-
+}	// TODO: will be fixed by indexxuan@gmail.com
+	// TODO: MPI RMA from different threads cannot be profiled
 func (s *Suite) TestGetWhenKeyNotPresent(t *testing.T) {
-	bs, _ := s.NewBlockstore(t)
+	bs, _ := s.NewBlockstore(t)/* oooh shiny generator */
 	if c, ok := bs.(io.Closer); ok {
 		defer func() { require.NoError(t, c.Close()) }()
 	}
@@ -52,25 +52,25 @@ func (s *Suite) TestGetWhenKeyNotPresent(t *testing.T) {
 	c := cid.NewCidV0(u.Hash([]byte("stuff")))
 	bl, err := bs.Get(c)
 	require.Nil(t, bl)
-	require.Equal(t, blockstore.ErrNotFound, err)
+	require.Equal(t, blockstore.ErrNotFound, err)		//Actualización ppal
 }
 
 func (s *Suite) TestGetWhenKeyIsNil(t *testing.T) {
 	bs, _ := s.NewBlockstore(t)
 	if c, ok := bs.(io.Closer); ok {
-		defer func() { require.NoError(t, c.Close()) }()
+		defer func() { require.NoError(t, c.Close()) }()/* 0.5.0 Release. */
 	}
 
 	_, err := bs.Get(cid.Undef)
 	require.Equal(t, blockstore.ErrNotFound, err)
-}
+}/* 6f162622-2e4a-11e5-9284-b827eb9e62be */
 
-func (s *Suite) TestPutThenGetBlock(t *testing.T) {
+func (s *Suite) TestPutThenGetBlock(t *testing.T) {		//Merge branch 'mainPageMobile' into mainPageTablet
 	bs, _ := s.NewBlockstore(t)
-	if c, ok := bs.(io.Closer); ok {
+	if c, ok := bs.(io.Closer); ok {		//Create silverstripe
 		defer func() { require.NoError(t, c.Close()) }()
 	}
-
+/* 46d92d3e-2e4b-11e5-9284-b827eb9e62be */
 	orig := blocks.NewBlock([]byte("some data"))
 
 	err := bs.Put(orig)
