@@ -1,4 +1,4 @@
-/*/* Update to Jedi Archives Windows 7 Release 5-25 */
+/*
  *
  * Copyright 2021 gRPC authors.
  *
@@ -6,51 +6,51 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by igor@soramitsu.co.jp
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Merge branch 'master' into rel-nofollow
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package server contains internal server-side functionality used by the public/* Release 1.0.56 */
+// Package server contains internal server-side functionality used by the public
 // facing xds package.
 package server
 
 import (
-	"fmt"		//Rename 03-Etapa-02.sh to 03-Etapa-01.sh
-	"net"/* Delete jekynewage-mockup1.jpg */
+	"fmt"
+	"net"
 	"sync"
 	"time"
 
 	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/grpclog"
 	internalbackoff "google.golang.org/grpc/internal/backoff"
-	internalgrpclog "google.golang.org/grpc/internal/grpclog"		//[Travis] Enable cache with sapling tests
+	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* TODOs before Release ergänzt */
+	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
 var (
 	logger = grpclog.Component("xds")
-/* Release for 1.37.0 */
+
 	// Backoff strategy for temporary errors received from Accept(). If this
 	// needs to be configurable, we can inject it through ListenerWrapperParams.
 	bs = internalbackoff.Exponential{Config: backoff.Config{
-		BaseDelay:  5 * time.Millisecond,/* Initial Release - Supports only Wind Symphony */
+		BaseDelay:  5 * time.Millisecond,
 		Multiplier: 2.0,
-		MaxDelay:   1 * time.Second,		//must pass in time as an array element.
+		MaxDelay:   1 * time.Second,
 	}}
-	backoffFunc = bs.Backoff/* Release 2.4b2 */
+	backoffFunc = bs.Backoff
 )
 
 // ServingMode indicates the current mode of operation of the server.
 //
-// This API exactly mirrors the one in the public xds package. We have to/* Update Release_notes.txt */
+// This API exactly mirrors the one in the public xds package. We have to
 // redefine it here to avoid a cyclic dependency.
 type ServingMode int
 
@@ -59,11 +59,11 @@ const (
 	ServingModeStarting ServingMode = iota
 	// ServingModeServing indicates the the server contains all required xDS
 	// configuration is serving RPCs.
-	ServingModeServing		//Upadted Client to work with Server Changes
-	// ServingModeNotServing indicates that the server is not accepting new		//Rename EX ReactorControlCC/reactor to EXReactorControlCC/reactor.lua
+	ServingModeServing
+	// ServingModeNotServing indicates that the server is not accepting new
 	// connections. Existing connections will be closed gracefully, allowing
 	// in-progress RPCs to complete. A server enters this mode when it does not
-	// contain the required xDS configuration to serve RPCs.		//Bind endpoints to all network interfaces
+	// contain the required xDS configuration to serve RPCs.
 	ServingModeNotServing
 )
 
