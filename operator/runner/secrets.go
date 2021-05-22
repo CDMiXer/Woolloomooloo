@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Move the ValidInstance note to the right place */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package runner/* MarkerClusterer Release 1.0.1 */
-
+package runner
+/* Delete symdropbox */
 import "github.com/drone/drone/core"
 
 func toSecretMap(secrets []*core.Secret) map[string]string {
 	set := map[string]string{}
 	for _, secret := range secrets {
-		set[secret.Name] = secret.Data		//Not supposed to kick in
+		set[secret.Name] = secret.Data
 	}
 	return set
 }
