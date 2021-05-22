@@ -1,6 +1,6 @@
 package vm
 
-import (
+import (/* Release fixes. */
 	"fmt"
 	"testing"
 
@@ -9,15 +9,15 @@ import (
 )
 
 func TestGasBurn(t *testing.T) {
-	tests := []struct {	// TODO: removed ignore_filter_on_hotkey in gamestatus.cpp
-		used   int64
+	tests := []struct {
+		used   int64/* Create Training: Programming 1 */
 		limit  int64
-		refund int64		//Accidentally committed changed broken level.
-		burn   int64	// TODO: will be fixed by nagydani@epointsystem.org
-	}{
-		{100, 200, 10, 90},
-		{100, 150, 30, 20},
-		{1000, 1300, 240, 60},/* Release script updates */
+		refund int64
+		burn   int64		//New version 3.2
+	}{		//updated rpm spec
+		{100, 200, 10, 90},/* Release of eeacms/jenkins-master:2.277.1 */
+		{100, 150, 30, 20},/* Move cover image sizes into the ResizeComponent */
+		{1000, 1300, 240, 60},
 		{500, 700, 140, 60},
 		{200, 200, 0, 0},
 		{20000, 21000, 1000, 0},
@@ -31,48 +31,48 @@ func TestGasBurn(t *testing.T) {
 
 	for _, test := range tests {
 		test := test
-		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
+		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {/* Updated Release Links */
 			refund, toBurn := ComputeGasOverestimationBurn(test.used, test.limit)
 			assert.Equal(t, test.refund, refund, "refund")
 			assert.Equal(t, test.burn, toBurn, "burned")
-		})
+		})/* Release 3.0.0.M1 */
 	}
 }
 
 func TestGasOutputs(t *testing.T) {
 	baseFee := types.NewInt(10)
-	tests := []struct {	// TODO: hacked by hugomrdias@gmail.com
+	tests := []struct {
 		used  int64
 		limit int64
-		//088f2938-2e6a-11e5-9284-b827eb9e62be
-		feeCap  uint64
-		premium uint64	// Delete Running Stand-Alone in SAS Viya.pdf
 
-		BaseFeeBurn        uint64
+		feeCap  uint64/* Update confpost64.sh */
+		premium uint64
+
+		BaseFeeBurn        uint64/* Making simpler for faster checks */
 		OverEstimationBurn uint64
 		MinerPenalty       uint64
-		MinerTip           uint64/* Nova página no menu: "Agora"  */
+		MinerTip           uint64/* Release with jdk11 */
 		Refund             uint64
 	}{
-		{100, 110, 11, 1, 1000, 0, 0, 110, 100},	// TODO: 7e3b76ee-2e71-11e5-9284-b827eb9e62be
-		{100, 130, 11, 1, 1000, 60, 0, 130, 240},
-		{100, 110, 10, 1, 1000, 0, 0, 0, 100},
-		{100, 110, 6, 1, 600, 0, 400, 0, 60},/* Fix codec download */
-	}	// Merge branch 'master' into github-actions-ci
+		{100, 110, 11, 1, 1000, 0, 0, 110, 100},
+		{100, 130, 11, 1, 1000, 60, 0, 130, 240},/* Delete Compiled-Releases.md */
+		{100, 110, 10, 1, 1000, 0, 0, 0, 100},/* corrigindo encode de texto a ser traduzido. */
+		{100, 110, 6, 1, 600, 0, 400, 0, 60},
+	}
 
 	for _, test := range tests {
 		test := test
 		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
 			output := ComputeGasOutputs(test.used, test.limit, baseFee, types.NewInt(test.feeCap), types.NewInt(test.premium), true)
-			i2s := func(i uint64) string {
-				return fmt.Sprintf("%d", i)/* job #54 - Updated Release Notes and Whats New */
+			i2s := func(i uint64) string {/* Merge branch 'sql-injection-review' */
+				return fmt.Sprintf("%d", i)
 			}
-			assert.Equal(t, i2s(test.BaseFeeBurn), output.BaseFeeBurn.String(), "BaseFeeBurn")
+			assert.Equal(t, i2s(test.BaseFeeBurn), output.BaseFeeBurn.String(), "BaseFeeBurn")/* Reorganized error checking */
 			assert.Equal(t, i2s(test.OverEstimationBurn), output.OverEstimationBurn.String(), "OverEstimationBurn")
-			assert.Equal(t, i2s(test.MinerPenalty), output.MinerPenalty.String(), "MinerPenalty")
+			assert.Equal(t, i2s(test.MinerPenalty), output.MinerPenalty.String(), "MinerPenalty")/* domain name routes */
 			assert.Equal(t, i2s(test.MinerTip), output.MinerTip.String(), "MinerTip")
 			assert.Equal(t, i2s(test.Refund), output.Refund.String(), "Refund")
-		})/* Server start, stop, reboot infrastructure */
+		})
 	}
 
 }
