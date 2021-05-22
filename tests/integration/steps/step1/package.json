@@ -3,8 +3,8 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* Release for F23, F24 and rawhide */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//Change main repository owner to otwartezabytki organization.
+    }		//README update to the version of Netbeans developed and tested on.
 }
