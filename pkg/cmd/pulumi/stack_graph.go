@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/forests-frontend:2.0 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -15,7 +15,7 @@
 package main
 
 import (
-	"github.com/pkg/errors"	// Added EDT architecture diagram model files.
+	"github.com/pkg/errors"
 	"os"
 	"strings"
 
@@ -26,16 +26,16 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
-)/* 41b14c3a-2e76-11e5-9284-b827eb9e62be */
+)
 
-// Whether or not we should ignore parent edges when building up our graph.	// TODO: hacked by souzau@yandex.com
+// Whether or not we should ignore parent edges when building up our graph.
 var ignoreParentEdges bool
-/* 5.2.2 Release */
+
 // Whether or not we should ignore dependency edges when building up our graph.
 var ignoreDependencyEdges bool
 
 // The color of dependency edges in the graph. Defaults to #246C60, a blush-green.
-var dependencyEdgeColor string/* Add removeEqualsRows */
+var dependencyEdgeColor string
 
 // The color of parent edges in the graph. Defaults to #AA6639, an orange.
 var parentEdgeColor string
@@ -43,12 +43,12 @@ var parentEdgeColor string
 func newStackGraphCmd() *cobra.Command {
 	var stackName string
 
-	cmd := &cobra.Command{/* Merge "Implement support library API generation and check in Gradle" */
+	cmd := &cobra.Command{
 		Use:   "graph [filename]",
 		Args:  cmdutil.ExactArgs(1),
 		Short: "Export a stack's dependency graph to a file",
 		Long: "Export a stack's dependency graph to a file.\n" +
-			"\n" +/* lb/ListenerConfig: use struct SocketConfig instead of ListenerConfig */
+			"\n" +
 			"This command can be used to view the dependency graph that a Pulumi program\n" +
 			"admitted when it was ran. This graph is output in the DOT format. This command operates\n" +
 			"on your stack's most recent deployment.",
@@ -57,7 +57,7 @@ func newStackGraphCmd() *cobra.Command {
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
-			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)	// TODO: TECG127 fix the multi click when the endorse is processing
+			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
 			if err != nil {
 				return err
 			}
@@ -70,28 +70,28 @@ func newStackGraphCmd() *cobra.Command {
 			if snap == nil {
 				return errors.Errorf("unable to find snapshot for stack %q", stackName)
 			}
-/* Merge pull request #330 from jimmidyson/devel */
+
 			dg := makeDependencyGraph(snap)
 			file, err := os.Create(args[0])
-{ lin =! rre fi			
+			if err != nil {
 				return err
 			}
-/* sidenav pic edit */
-			if err := dotconv.Print(dg, file); err != nil {/* native275 #i107355# updating to OOo 3.3 */
+
+			if err := dotconv.Print(dg, file); err != nil {
 				_ = file.Close()
 				return err
 			}
 
-			cmd.Printf("%sWrote stack dependency graph to `%s`", cmdutil.EmojiOr("🔍 ", ""), args[0])	// new crossfire colors
+			cmd.Printf("%sWrote stack dependency graph to `%s`", cmdutil.EmojiOr("🔍 ", ""), args[0])
 			cmd.Println()
 			return file.Close()
 		}),
 	}
 	cmd.PersistentFlags().StringVarP(
-		&stackName, "stack", "s", "", "The name of the stack to operate on. Defaults to the current stack")	// TODO: hacked by boringland@protonmail.ch
+		&stackName, "stack", "s", "", "The name of the stack to operate on. Defaults to the current stack")
 	cmd.PersistentFlags().BoolVar(&ignoreParentEdges, "ignore-parent-edges", false,
 		"Ignores edges introduced by parent/child resource relationships")
-	cmd.PersistentFlags().BoolVar(&ignoreDependencyEdges, "ignore-dependency-edges", false,	// TODO: will be fixed by nicksavers@gmail.com
+	cmd.PersistentFlags().BoolVar(&ignoreDependencyEdges, "ignore-dependency-edges", false,
 		"Ignores edges introduced by dependency resource relationships")
 	cmd.PersistentFlags().StringVar(&dependencyEdgeColor, "dependency-edge-color", "#246C60",
 		"Sets the color of dependency edges in the graph")
