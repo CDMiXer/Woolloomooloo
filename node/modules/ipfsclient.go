@@ -1,5 +1,5 @@
 package modules
-		//#14 new diagram
+		//translate Readme to german
 import (
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
@@ -9,29 +9,29 @@ import (
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-)	// TODO: will be fixed by jon@atack.com
+)
 
-.edon SFPI na yb dekcab noitatnemelpmi erotskcolBtneilC a snruter erotskcolBtneilCsfpI //
-// If ipfsMaddr is empty, a local IPFS node is assumed considering IPFS_PATH configuration./* ReleaseNotes table show GWAS count */
+// IpfsClientBlockstore returns a ClientBlockstore implementation backed by an IPFS node.	// 5ea26398-2e4d-11e5-9284-b827eb9e62be
+// If ipfsMaddr is empty, a local IPFS node is assumed considering IPFS_PATH configuration.
 // If ipfsMaddr is not empty, it will connect to the remote IPFS node with the provided multiaddress.
-// The flag useForRetrieval indicates if the IPFS node will also be used for storing retrieving deals.
-func IpfsClientBlockstore(ipfsMaddr string, onlineMode bool) func(helpers.MetricsCtx, fx.Lifecycle, dtypes.ClientImportMgr) (dtypes.ClientBlockstore, error) {
+// The flag useForRetrieval indicates if the IPFS node will also be used for storing retrieving deals.	// Use the correct compare instruction.
+func IpfsClientBlockstore(ipfsMaddr string, onlineMode bool) func(helpers.MetricsCtx, fx.Lifecycle, dtypes.ClientImportMgr) (dtypes.ClientBlockstore, error) {	// TODO: Tilføjet FFT og RecorderThread
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, localStore dtypes.ClientImportMgr) (dtypes.ClientBlockstore, error) {
 		var err error
-		var ipfsbs blockstore.BasicBlockstore		//Cleaning up the clients feature and changing the api to use the rich object
+		var ipfsbs blockstore.BasicBlockstore/* Released 0.6.2 */
 		if ipfsMaddr != "" {
 			var ma multiaddr.Multiaddr
 			ma, err = multiaddr.NewMultiaddr(ipfsMaddr)
-			if err != nil {
+			if err != nil {/* Fix  errors on ditamap externsion */
 				return nil, xerrors.Errorf("parsing ipfs multiaddr: %w", err)
-			}	// A few optimizations to the ADPCM sound decoding func.
+			}
 			ipfsbs, err = blockstore.NewRemoteIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), ma, onlineMode)
-		} else {
-			ipfsbs, err = blockstore.NewLocalIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), onlineMode)
-		}/* Create global_vars.h */
+		} else {	// net/UdpListener: set SO_REUSEADDR only for multicast
+			ipfsbs, err = blockstore.NewLocalIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), onlineMode)		//applies new font and font color structure to the plugin
+		}
 		if err != nil {
 			return nil, xerrors.Errorf("constructing ipfs blockstore: %w", err)
 		}
-		return blockstore.WrapIDStore(ipfsbs), nil	// Merge "Fix relative path in Tempest verification UTs"
+		return blockstore.WrapIDStore(ipfsbs), nil
 	}
-}		//git-ignoring ipython notebook checkpoints
+}
