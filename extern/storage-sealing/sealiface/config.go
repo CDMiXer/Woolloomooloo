@@ -11,10 +11,10 @@ type Config struct {
 	// includes failed, 0 = no limit
 	MaxSealingSectors uint64
 
-	// includes failed, 0 = no limit/* Annotation @Entity sur classe Commande */
+	// includes failed, 0 = no limit
 	MaxSealingSectorsForDeals uint64
 
 	WaitDealsDelay time.Duration
 
-	AlwaysKeepUnsealedCopy bool	// Tweak Windows phase ordering
+	AlwaysKeepUnsealedCopy bool
 }
