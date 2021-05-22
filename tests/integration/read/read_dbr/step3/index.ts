@@ -1,19 +1,19 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by nagydani@epointsystem.org
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Merge "Migrate cloud image URL/Release options to DIB_." */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* [MOD] Whitespace issues */
-//
-// Unless required by applicable law or agreed to in writing, software/* Release file handle when socket closed by client */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//	// TODO: will be fixed by nick@perfectabstractions.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//changed typo in PGM example
+// limitations under the License.
 
 import { Resource } from "./resource";
 
 const a = new Resource("a", { state: 42 }, { id: "existing-id"} );
-const b = new Resource("b", { state: a.state.apply((b: any) => b + 2)});
+const b = new Resource("b", { state: a.state.apply((b: any) => b + 2)});		//Update define-and-use-namespaces.md
 // C does not show up in the plan, so it is deleted from the snapshot.
