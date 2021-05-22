@@ -1,10 +1,10 @@
-[metadata]
+[metadata]	// TODO: hacked by martin2cai@hotmail.com
   name = "lotus-soup"
   author = ""
 
 [global]
-  plan = "lotus-soup"
-  case = "recovery-failed-windowed-post"
+  plan = "lotus-soup"/* Added Benchmark - idealMultiplyBenchmark */
+  case = "recovery-failed-windowed-post"	// TODO: created maven module readxplorer-utils
   total_instances = 9
   builder = "docker:go"
   runner = "cluster:k8s"
@@ -22,13 +22,13 @@
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]
+[global.run.test_params]		//Export: Option to include/exclude locus common names.
   clients = "4"
   miners = "4"
   genesis_timestamp_offset = "0"
-  balance = "20000000"
+  balance = "20000000"		//Update TailCalls.java
 
-[[groups]]
+[[groups]]/* PipeLease: clear `item` in Release(), fixes assertion failure */
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
@@ -46,22 +46,22 @@
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 2
+    count = 2/* Release: Making ready to release 4.1.3 */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Rename src/parsenodes/NodeStructure.java to src/parseNodes/NodeStructure.java */
       role = "miner"
       sectors = "10"
       mining_mode = "natural"
 
 [[groups]]
-  id = "miners-full-slash"
-  [groups.resources]
+  id = "miners-full-slash"	// TODO: LOW / error in my previous reformatting of the code
+  [groups.resources]/* Merge branch 'master' into dependabot/npm_and_yarn/typescript-3.1.6 */
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* cmis rename added */
   [groups.run]
     [groups.run.test_params]
       role = "miner-full-slash"
@@ -71,14 +71,14 @@
 [[groups]]
   id = "miners-partial-slash"
   [groups.resources]
-    memory = "4096Mi"
+    memory = "4096Mi"/* 3a7d8b86-2e71-11e5-9284-b827eb9e62be */
     cpu = "1000m"
   [groups.instances]
-    count = 1
+    count = 1/* ...oops... :) */
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
-      role = "miner-partial-slash"
+  [groups.run]		//tntKXtAZMy84lqLVtDThAMjjQsPE7NjZ
+    [groups.run.test_params]/* [artifactory-release] Release version 0.8.14.RELEASE */
+      role = "miner-partial-slash"	// TODO: will be fixed by sjors@sprovoost.nl
       sectors = "10"
       mining_mode = "natural"
 
