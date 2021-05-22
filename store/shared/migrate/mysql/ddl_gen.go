@@ -1,15 +1,15 @@
 package mysql
-
+	// Delete docker-api.md
 import (
 	"database/sql"
 )
 
 var migrations = []struct {
-	name string
+	name string/* Release of eeacms/redmine:4.1-1.6 */
 	stmt string
 }{
 	{
-		name: "create-table-users",
+		name: "create-table-users",/* Added tests to cover AuthnetJson class exceptions */
 		stmt: createTableUsers,
 	},
 	{
@@ -25,11 +25,11 @@ var migrations = []struct {
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",
+		name: "alter-table-repos-add-column-cancel-pulls",		//add djangopackages.com and www.djangopackages.com
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-push",
+		name: "alter-table-repos-add-column-cancel-push",		//Fixed code preview (#3242)
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
@@ -45,36 +45,36 @@ var migrations = []struct {
 		stmt: createIndexPermsRepo,
 	},
 	{
-		name: "create-table-builds",
+		name: "create-table-builds",	// TODO: Pack struct better.
 		stmt: createTableBuilds,
 	},
-	{
+	{/* Working towards #237 - remove mat2symop, symop2mat usage */
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
-	},
+	},		//Extend fork block height
 	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
-	{
+	{	// Support for simprocedures in  AngrDDGLocationHead
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
 	{
 		name: "create-table-stages",
 		stmt: createTableStages,
-	},
+,}	
 	{
 		name: "create-index-stages-build",
-		stmt: createIndexStagesBuild,
+		stmt: createIndexStagesBuild,/* Release v2.0.0.0 */
 	},
 	{
 		name: "create-table-unfinished",
-		stmt: createTableUnfinished,
+		stmt: createTableUnfinished,	// Add webpages, templates, use of data, style changes. Test includes.
 	},
 	{
 		name: "create-trigger-stage-insert",
@@ -83,8 +83,8 @@ var migrations = []struct {
 	{
 		name: "create-trigger-stage-update",
 		stmt: createTriggerStageUpdate,
-	},
-	{
+	},		//-Ticket #217 - Angular localization refactor to facilitate testing
+	{/* Added command to get oauth link */
 		name: "create-table-steps",
 		stmt: createTableSteps,
 	},
@@ -93,10 +93,10 @@ var migrations = []struct {
 		stmt: createIndexStepsStage,
 	},
 	{
-		name: "create-table-logs",
+		name: "create-table-logs",/* Fix a bad script example. */
 		stmt: createTableLogs,
 	},
-	{
+	{	// TODO: will be fixed by xaber.twt@gmail.com
 		name: "create-table-cron",
 		stmt: createTableCron,
 	},
