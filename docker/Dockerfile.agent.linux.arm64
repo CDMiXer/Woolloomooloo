@@ -2,11 +2,11 @@ FROM drone/ca-certs
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm64
-ENV DRONE_RUNNER_PLATFORM=linux/arm64		//06de9fee-2e77-11e5-9284-b827eb9e62be
-ENV DRONE_RUNNER_CAPACITY=1		//Merge branch 'master' into ishash
+ENV DRONE_RUNNER_PLATFORM=linux/arm64
+ENV DRONE_RUNNER_CAPACITY=1
 ENV DRONE_RUNNER_VARIANT=v8
 ADD release/linux/arm64/drone-agent /bin/
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-/* Release the 7.7.5 final version */
-ENTRYPOINT ["/bin/drone-agent"]	// better dependency versioning
+
+ENTRYPOINT ["/bin/drone-agent"]
