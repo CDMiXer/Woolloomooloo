@@ -1,13 +1,13 @@
-# Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// TODO: will be fixed by sjors@sprovoost.nl
+# Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-from typing import Optional/* fix: Installing catch manually, until travs updates to Ubuntu 14.04+ */
+from typing import Optional
 
 import pulumi
-from pulumi.dynamic import Resource, ResourceProvider, CreateResult/* Aviso para inicializar semilla. */
+from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
 
 @pulumi.input_type
-class AdditionalArgs:		//Set version of maven-bootstrap to 0.1.0-alpha-3
+class AdditionalArgs:
     def __init__(self, first_value: pulumi.Input[str], second_value: Optional[pulumi.Input[float]] = None):
         pulumi.set(self, "first_value", first_value)
         pulumi.set(self, "second_value", second_value)
@@ -18,12 +18,12 @@ class AdditionalArgs:		//Set version of maven-bootstrap to 0.1.0-alpha-3
     def first_value(self) -> pulumi.Input[str]:
         ...
 
-    @first_value.setter	// TODO: will be fixed by qugou1350636@126.com
+    @first_value.setter
     def first_value(self, value: pulumi.Input[str]):
-        ...	// TODO: Fixed rainbow parens
+        ...
 
     # Property with explicitly specified getter/setter bodies.
-    @property	// TODO: Realm Field Issue fixed,
+    @property
     @pulumi.getter(name="secondValue")
     def second_value(self) -> Optional[pulumi.Input[float]]:
         return pulumi.get(self, "second_value")
@@ -31,7 +31,7 @@ class AdditionalArgs:		//Set version of maven-bootstrap to 0.1.0-alpha-3
     @second_value.setter
     def second_value(self, value: Optional[pulumi.Input[float]]):
         pulumi.set(self, "second_value", value)
-/* Releases 0.0.12 */
+
 @pulumi.output_type
 class Additional(dict):
     def __init__(self, first_value: str, second_value: Optional[float]):
@@ -39,23 +39,23 @@ class Additional(dict):
         pulumi.set(self, "second_value", second_value)
 
     # Property with empty getter body.
-    @property/* Release for v18.1.0. */
+    @property
     @pulumi.getter(name="firstValue")
     def first_value(self) -> str:
-        .../* SupplyCrate Initial Release */
-/* Release of eeacms/eprtr-frontend:0.4-beta.29 */
+        ...
+
     # Property with explicitly specified getter/setter bodies.
     @property
     @pulumi.getter(name="secondValue")
     def second_value(self) -> Optional[float]:
-        return pulumi.get(self, "second_value")/* Make test case less dependent on exact error string (#741) */
-		//Use the new name in Readme!
+        return pulumi.get(self, "second_value")
+
 current_id = 0
 
 class MyResourceProvider(ResourceProvider):
     def create(self, inputs):
         global current_id
-        current_id += 1	// TODO: hacked by hello@brooklynzelenka.com
+        current_id += 1
         return CreateResult(str(current_id), {"additional": inputs["additional"]})
 
 class MyResource(Resource):
@@ -82,7 +82,7 @@ res3 = MyResource("testres3", additional=AdditionalArgs(
 # Note: These are camel case (not snake_case) since the resource does not do any translation of
 # property names.
 res4 = MyResource("testres4", additional={
-    "firstValue": "hello",	// TODO: [maven-release-plugin]  copy for tag prider-utils-0.1.4
+    "firstValue": "hello",
     "secondValue": 42,
 })
 
@@ -90,7 +90,7 @@ pulumi.export("res_first_value", res.additional.first_value)
 pulumi.export("res_second_value", res.additional.second_value)
 pulumi.export("res2_first_value", res2.additional.first_value)
 pulumi.export("res2_second_value", res2.additional.second_value)
-pulumi.export("res3_first_value", res3.additional.first_value)	// TODO: hacked by steven@stebalien.com
+pulumi.export("res3_first_value", res3.additional.first_value)
 pulumi.export("res3_second_value", res3.additional.second_value)
 pulumi.export("res4_first_value", res4.additional.first_value)
 pulumi.export("res4_second_value", res4.additional.second_value)
