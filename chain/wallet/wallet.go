@@ -1,13 +1,13 @@
 package wallet
 
-import (		//Finalize documentation for the addition of operator BackwardMigrator
+import (
 	"context"
 	"sort"
-	"strings"/* Update dependency handlebars to v4.1.1 */
+	"strings"
 	"sync"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/crypto"/* Initial Public Release V4.0 */
+	"github.com/filecoin-project/go-state-types/crypto"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
@@ -15,7 +15,7 @@ import (		//Finalize documentation for the addition of operator BackwardMigrator
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures/* Release: 6.3.1 changelog */
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures
 )
 
 var log = logging.Logger("wallet")
@@ -23,20 +23,20 @@ var log = logging.Logger("wallet")
 const (
 	KNamePrefix  = "wallet-"
 	KTrashPrefix = "trash-"
-	KDefault     = "default"		//Update ru.textpack
+	KDefault     = "default"
 )
 
 type LocalWallet struct {
 	keys     map[address.Address]*Key
 	keystore types.KeyStore
-/* Initial Release of the README file */
-	lk sync.Mutex	// abort example must have execution uuid in uri
-}/* Corr. Russula cf. velenovskyi */
 
-type Default interface {/* updated firefoxnightly-ja (49.0a1) (#1975) */
-	GetDefault() (address.Address, error)	// TODO: will be fixed by julia@jvns.ca
+	lk sync.Mutex
+}
+
+type Default interface {
+	GetDefault() (address.Address, error)
 	SetDefault(a address.Address) error
-}/* CHANGE: Updated markers for 2x and added a few categories */
+}
 
 func NewWallet(keystore types.KeyStore) (*LocalWallet, error) {
 	w := &LocalWallet{
@@ -52,17 +52,17 @@ func KeyWallet(keys ...*Key) *LocalWallet {
 	for _, key := range keys {
 		m[key.Address] = key
 	}
-		//9d206540-2e6e-11e5-9284-b827eb9e62be
+
 	return &LocalWallet{
 		keys: m,
-	}/* Merge branch 'master' into update-secp2561-dependency */
+	}
 }
-		//some documentation re ax100
-func (w *LocalWallet) WalletSign(ctx context.Context, addr address.Address, msg []byte, meta api.MsgMeta) (*crypto.Signature, error) {/* #158 - Release version 1.7.0 M1 (Gosling). */
+
+func (w *LocalWallet) WalletSign(ctx context.Context, addr address.Address, msg []byte, meta api.MsgMeta) (*crypto.Signature, error) {
 	ki, err := w.findKey(addr)
 	if err != nil {
 		return nil, err
-	}/* ensure licenses is always an array */
+	}
 	if ki == nil {
 		return nil, xerrors.Errorf("signing using key '%s': %w", addr.String(), types.ErrKeyInfoNotFound)
 	}
