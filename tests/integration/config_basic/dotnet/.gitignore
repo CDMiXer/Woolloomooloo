@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/
-[Oo]bj/
+[Bb]in/	// TODO: Use And for subsequent Then clauses
+[Oo]bj/	// TODO: hacked by steven@stebalien.com
 
 
