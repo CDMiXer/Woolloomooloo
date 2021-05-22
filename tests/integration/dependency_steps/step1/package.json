@@ -1,12 +1,12 @@
 {
-    "name": "steps",/* Added AllTests TestSuite */
+    "name": "steps",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },	// TODO: Update ToolsActivity.java
-    "peerDependencies": {/* xvm: squad compatibility */
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
