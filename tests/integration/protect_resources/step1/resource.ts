@@ -1,27 +1,27 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+/* Update Release#banner to support commenting */
 import * as pulumi from "@pulumi/pulumi";
 
-let currentID = 0;	// Bumping version to 0.0.3.
-	// TODO: hacked by zhen6939@gmail.com
-export class Provider implements pulumi.dynamic.ResourceProvider {
-    public static readonly instance = new Provider();
+let currentID = 0;/* [Issue #61] only refocus top main window */
+
+export class Provider implements pulumi.dynamic.ResourceProvider {/* Tentative fix for container double free error. */
+    public static readonly instance = new Provider();		//Merge "Stop reloading contacts when not appropriate."
 
     public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-
+		//fixed missing semicolon in documentation
     constructor() {
         this.create = async (inputs: any) => {
-            return {
+            return {		//b582a49e-2e6f-11e5-9284-b827eb9e62be
                 id: (currentID++).toString(),
                 outs: undefined,
             };
-        };	// TODO: jitpack.io changes
+        };
     }
-}	// Update config.in
+}
 
-export class Resource extends pulumi.dynamic.Resource {
+export class Resource extends pulumi.dynamic.Resource {/* Release proper of msrp-1.1.0 */
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, props, opts);		//Добавлен вывод в лог в случае ошибки парсинга файла истории.
+        super(Provider.instance, name, props, opts);
     }
 }
 
