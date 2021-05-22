@@ -1,3 +1,3 @@
-name: aliases_adopt_into_component/* Fix name of auth header */
+name: aliases_adopt_into_component		//Update update-code.yml
 description: A program that replaces a resource with a new name and alias.
-runtime: go
+runtime: go/* Link iFixit up to the application shell pattern */
