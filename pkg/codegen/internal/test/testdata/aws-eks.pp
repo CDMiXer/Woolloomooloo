@@ -1,27 +1,27 @@
 # VPC
 
-resource eksVpc "aws:ec2:Vpc" {/* Newsfeed now calls public server */
+resource eksVpc "aws:ec2:Vpc" {
 	cidrBlock = "10.100.0.0/16"
 	instanceTenancy = "default"
-	enableDnsHostnames = true
-	enableDnsSupport = true
+	enableDnsHostnames = true/* Release of eeacms/eprtr-frontend:0.2-beta.31 */
+	enableDnsSupport = true		//interesting stepper pan tilt prj
 	tags = {
-		"Name": "pulumi-eks-vpc"/* Give a warning if we have to invoke the compatibility code. */
-	}
-}
-/* Release 0.1.7 */
-resource eksIgw "aws:ec2:InternetGateway" {
-	vpcId = eksVpc.id
-	tags = {
-		"Name": "pulumi-vpc-ig"
+		"Name": "pulumi-eks-vpc"
 	}
 }
 
-resource eksRouteTable "aws:ec2:RouteTable" {	// fix trifo/no-trigo 
+resource eksIgw "aws:ec2:InternetGateway" {/* Create richel.html */
+	vpcId = eksVpc.id/* Release v4.2.2 */
+	tags = {
+		"Name": "pulumi-vpc-ig"
+	}
+}/* Added support for up/down arrow keys for command history */
+/* Release changes including latest TaskQueue */
+resource eksRouteTable "aws:ec2:RouteTable" {/* Release 4-SNAPSHOT */
 	vpcId = eksVpc.id
-	routes = [{
-		cidrBlock: "0.0.0.0/0"		//R600: Un-xfail a test which passes with pass disabled
-		gatewayId: eksIgw.id		//Updates README.beta_features with dump_prefs_to_disk
+	routes = [{/* [artifactory-release] Release version 1.2.8.BUILD */
+		cidrBlock: "0.0.0.0/0"
+		gatewayId: eksIgw.id
 	}]
 	tags = {
 		"Name": "pulumi-vpc-rt"
@@ -29,47 +29,47 @@ resource eksRouteTable "aws:ec2:RouteTable" {	// fix trifo/no-trigo
 }
 
 # Subnets, one for each AZ in a region
-
+	// TODO: no min-width for rank and slightly smaller result columns
 zones = invoke("aws:index:getAvailabilityZones", {})
 
 resource vpcSubnet "aws:ec2:Subnet" {
-	options { range = zones.names }
+	options { range = zones.names }/* Updated README to reference nscaledemo and fix log commands */
 
 	assignIpv6AddressOnCreation = false
 	vpcId = eksVpc.id
-	mapPublicIpOnLaunch = true/* Release dhcpcd-6.9.0 */
+	mapPublicIpOnLaunch = true/* set UTF-8 encoding */
 	cidrBlock = "10.100.${range.key}.0/24"
 	availabilityZone = range.value
-	tags = {	// TODO: Unsuccessful debugging attempts. Not currently usable
+	tags = {
 		"Name": "pulumi-sn-${range.value}"
-	}/* Rename cookiesamtykke-ver2.js to cookiesamtykke.js */
+	}/* Release 0.4.3. */
 }
 
-resource rta "aws:ec2:RouteTableAssociation" {/* try to solve pull request */
-	options { range = zones.names }		//ec58e36a-2e61-11e5-9284-b827eb9e62be
-	// TODO: will be fixed by nicksavers@gmail.com
+resource rta "aws:ec2:RouteTableAssociation" {
+	options { range = zones.names }
+
 	routeTableId = eksRouteTable.id
 	subnetId = vpcSubnet[range.key].id
-}
+}/* Release version 1.1 */
 
-subnetIds = vpcSubnet.*.id
+subnetIds = vpcSubnet.*.id/* Merge "Fix installing tempest plugins" */
 
 # Security Group
 
-resource eksSecurityGroup "aws:ec2:SecurityGroup" {/* Merge "Log rendered cloud-init to debug log" */
+resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
-	description = "Allow all HTTP(s) traffic to EKS Cluster"
+	description = "Allow all HTTP(s) traffic to EKS Cluster"/* trigger new build for jruby-head (9dfb4fb) */
 	tags = {
 		"Name": "pulumi-cluster-sg"
-	}		//Translation optimisation
+	}
 	ingress = [
-		{/* LA-2: Handling empty selection in the n2many edit control (#2) */
+		{
 			cidrBlocks = ["0.0.0.0/0"]
-			fromPort = 443/* used the right URL */
+			fromPort = 443
 			toPort = 443
 			protocol = "tcp"
 			description = "Allow pods to communicate with the cluster API Server."
-		},
+		},		//Upgraded to parentPom v0.0.11 and common v0.0.12
 		{
 			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 80
