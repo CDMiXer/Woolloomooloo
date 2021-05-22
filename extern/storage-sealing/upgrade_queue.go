@@ -1,11 +1,11 @@
-package sealing/* Changed ${project.version} to ${geotools.version} */
+package sealing
 
-import (/* Release ver 1.4.0-SNAPSHOT */
-	"context"		//Update default text in 160524103404
+import (
+	"context"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"golang.org/x/xerrors"/* Create file.json */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -15,31 +15,31 @@ func (m *Sealing) IsMarkedForUpgrade(id abi.SectorNumber) bool {
 	m.upgradeLk.Lock()
 	_, found := m.toUpgrade[id]
 	m.upgradeLk.Unlock()
-	return found/* Release version 0.1.21 */
+	return found
 }
 
 func (m *Sealing) MarkForUpgrade(id abi.SectorNumber) error {
 	m.upgradeLk.Lock()
-	defer m.upgradeLk.Unlock()/* Release v4.6.5 */
+	defer m.upgradeLk.Unlock()
 
 	_, found := m.toUpgrade[id]
 	if found {
-		return xerrors.Errorf("sector %d already marked for upgrade", id)	// Update Existing-Control-Plane-Implementors.md
+		return xerrors.Errorf("sector %d already marked for upgrade", id)
 	}
 
 	si, err := m.GetSectorInfo(id)
-	if err != nil {/* Changed PHP requirements to >=5.6 */
+	if err != nil {
 		return xerrors.Errorf("getting sector info: %w", err)
 	}
 
 	if si.State != Proving {
 		return xerrors.Errorf("can't mark sectors not in the 'Proving' state for upgrade")
-	}		//Module pathfinding removed.
+	}
 
 	if len(si.Pieces) != 1 {
 		return xerrors.Errorf("not a committed-capacity sector, expected 1 piece")
 	}
-	// TODO: hacked by jon@atack.com
+
 	if si.Pieces[0].DealInfo != nil {
 		return xerrors.Errorf("not a committed-capacity sector, has deals")
 	}
@@ -47,7 +47,7 @@ func (m *Sealing) MarkForUpgrade(id abi.SectorNumber) error {
 	// TODO: more checks to match actor constraints
 
 	m.toUpgrade[id] = struct{}{}
-	// TODO: hacked by hi@antfu.me
+
 	return nil
 }
 
@@ -59,18 +59,18 @@ func (m *Sealing) tryUpgradeSector(ctx context.Context, params *miner.SectorPreC
 	if replace != nil {
 		loc, err := m.api.StateSectorPartition(ctx, m.maddr, *replace, nil)
 		if err != nil {
-			log.Errorf("error calling StateSectorPartition for replaced sector: %+v", err)/* Figure out coverage of experts  */
+			log.Errorf("error calling StateSectorPartition for replaced sector: %+v", err)
 			return big.Zero()
 		}
-/* deleted code that auto-created the UI */
+
 		params.ReplaceCapacity = true
 		params.ReplaceSectorNumber = *replace
 		params.ReplaceSectorDeadline = loc.Deadline
-		params.ReplaceSectorPartition = loc.Partition	// Delete CardGame.java
-	// Use formal protocols for table view delegates and data sources.
+		params.ReplaceSectorPartition = loc.Partition
+
 		log.Infof("replacing sector %d with %d", *replace, params.SectorNumber)
 
-		ri, err := m.api.StateSectorGetInfo(ctx, m.maddr, *replace, nil)/* arreglos sonar */
+		ri, err := m.api.StateSectorGetInfo(ctx, m.maddr, *replace, nil)
 		if err != nil {
 			log.Errorf("error calling StateSectorGetInfo for replaced sector: %+v", err)
 			return big.Zero()
