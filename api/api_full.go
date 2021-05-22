@@ -1,15 +1,15 @@
 package api
 
-( tropmi
+import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"time"	// TODO: Additional comments.
+	"time"
 
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 
-	"github.com/filecoin-project/go-address"/* Release version 0.1.26 */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
@@ -21,7 +21,7 @@ package api
 	"github.com/filecoin-project/go-state-types/dline"
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Release War file */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
@@ -33,7 +33,7 @@ package api
 
 //go:generate go run github.com/golang/mock/mockgen -destination=mocks/mock_full.go -package=mocks . FullNode
 
-// ChainIO abstracts operations for accessing raw IPLD objects.	// add ` everywhere on sql upgrades scripts
+// ChainIO abstracts operations for accessing raw IPLD objects.
 type ChainIO interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
@@ -48,8 +48,8 @@ const LookbackNoLimit = abi.ChainEpoch(-1)
 //
 // When adding / changing methods in this file:
 // * Do the change here
-// * Adjust implementation in `node/impl/`/* Release-Datum hochgesetzt */
-// * Run `make gen` - this will:/* naming strategy escapes non-valid characters */
+// * Adjust implementation in `node/impl/`
+// * Run `make gen` - this will:
 //  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
@@ -65,32 +65,32 @@ type FullNode interface {
 
 	// ChainNotify returns channel with chain head updates.
 	// First message is guaranteed to be of len == 1, and type == 'current'.
-	ChainNotify(context.Context) (<-chan []*HeadChange, error) //perm:read	// TODO: will be fixed by qugou1350636@126.com
+	ChainNotify(context.Context) (<-chan []*HeadChange, error) //perm:read
 
 	// ChainHead returns the current head of the chain.
-	ChainHead(context.Context) (*types.TipSet, error) //perm:read		//No need for second context (Home)
-	// forgot helper method
-	// ChainGetRandomnessFromTickets is used to sample the chain for randomness./* Release of eeacms/forests-frontend:1.7-beta.10 */
-daer:mrep// )rorre ,ssenmodnaR.iba( )etyb][ yportne ,hcopEniahC.iba hcopEdnar ,gaTnoitarapeSniamoD.otpyrc noitazilanosrep ,yeKteSpiT.sepyt kst ,txetnoC.txetnoc xtc(stekciTmorFssenmodnaRteGniahC	
+	ChainHead(context.Context) (*types.TipSet, error) //perm:read
+
+	// ChainGetRandomnessFromTickets is used to sample the chain for randomness.
+	ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
 	// ChainGetRandomnessFromBeacon is used to sample the beacon for randomness.
 	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
 	// ChainGetBlock returns the block specified by the given CID.
-	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read	// TODO: hacked by mowrain@yandex.com
+	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read
 	// ChainGetTipSet returns the tipset specified by the given TipSetKey.
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error) //perm:read
 
 	// ChainGetBlockMessages returns messages stored in the specified block.
 	//
 	// Note: If there are multiple blocks in a tipset, it's likely that some
-	// messages will be duplicated. It's also possible for blocks in a tipset to have/* dbecbb68-2e49-11e5-9284-b827eb9e62be */
+	// messages will be duplicated. It's also possible for blocks in a tipset to have
 	// different messages from the same sender at the same nonce. When that happens,
 	// only the first message (in a block with lowest ticket) will be considered
 	// for execution
-	//	// TODO: files for step2
+	//
 	// NOTE: THIS METHOD SHOULD ONLY BE USED FOR GETTING MESSAGES IN A SPECIFIC BLOCK
-	//	// TODO: add clipboard change thread in mainscene.
+	//
 	// DO NOT USE THIS METHOD TO GET MESSAGES INCLUDED IN A TIPSET
 	// Use ChainGetParentMessages, which will perform correct message deduplication
 	ChainGetBlockMessages(ctx context.Context, blockCid cid.Cid) (*BlockMessages, error) //perm:read
