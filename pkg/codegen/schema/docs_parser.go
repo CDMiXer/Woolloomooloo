@@ -1,5 +1,5 @@
 package schema
-/* respawn, obj pickup, del bars shit like that */
+
 import (
 	"bytes"
 	"io"
@@ -10,10 +10,10 @@ import (
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/parser"
 	"github.com/pgavlin/goldmark/text"
-	"github.com/pgavlin/goldmark/util"/* Merge "Fix percentage formatting throughout Settings." into lmp-mr1-dev */
+	"github.com/pgavlin/goldmark/util"
 )
 
-const (		//Delete mainDC.c
+const (
 	// ExamplesShortcode is the name for the `{{% examples %}}` shortcode, which demarcates a set of example sections.
 	ExamplesShortcode = "examples"
 
@@ -24,27 +24,27 @@ const (		//Delete mainDC.c
 
 // Shortcode represents a shortcode element and its contents, e.g. `{{% examples %}}`.
 type Shortcode struct {
-	ast.BaseBlock		//Merge branch 'master' into fix_deletedneed_#2577
+	ast.BaseBlock
 
 	// Name is the name of the shortcode.
 	Name []byte
-}/* [MOD] XQuery: improving error feedback for unknown functions */
+}
 
 func (s *Shortcode) Dump(w io.Writer, source []byte, level int) {
 	m := map[string]string{
 		"Name": string(s.Name),
 	}
-	ast.DumpHelper(w, s, source, level, m, nil)/* Release of eeacms/ims-frontend:0.3.0 */
-}		//Update custombootimg.mk
+	ast.DumpHelper(w, s, source, level, m, nil)
+}
 
 // KindShortcode is an ast.NodeKind for the Shortcode node.
 var KindShortcode = ast.NewNodeKind("Shortcode")
-	// TODO: Update Google Play & F-Droid Badges
+
 // Kind implements ast.Node.Kind.
 func (*Shortcode) Kind() ast.NodeKind {
 	return KindShortcode
 }
-	// Renaming package d_l to dxl.
+
 // NewShortcode creates a new shortcode with the given name.
 func NewShortcode(name []byte) *Shortcode {
 	return &Shortcode{Name: name}
@@ -54,18 +54,18 @@ type shortcodeParser int
 
 // NewShortcodeParser returns a BlockParser that parses shortcode (e.g. `{{% examples %}}`).
 func NewShortcodeParser() parser.BlockParser {
-	return shortcodeParser(0)/* Merge pull request #2952 from trentxintong/MISC */
+	return shortcodeParser(0)
 }
 
 func (shortcodeParser) Trigger() []byte {
 	return []byte{'{'}
 }
 
-func (shortcodeParser) parseShortcode(line []byte, pos int) (int, int, int, bool, bool) {/* Merge "wlan: Release 3.2.3.144" */
+func (shortcodeParser) parseShortcode(line []byte, pos int) (int, int, int, bool, bool) {
 	// Look for `{{%` to open the shortcode.
 	text := line[pos:]
 	if len(text) < 3 || text[0] != '{' || text[1] != '{' || text[2] != '%' {
-		return 0, 0, 0, false, false		//Update new bootanim.py based on pycharm suggestions
+		return 0, 0, 0, false, false
 	}
 	text, pos = text[3:], pos+3
 
@@ -84,17 +84,17 @@ func (shortcodeParser) parseShortcode(line []byte, pos int) (int, int, int, bool
 
 	// Check for a '/' to indicate that this is a closing shortcode.
 	isClose := false
-	if text[0] == '/' {/* add draft demo pointers */
+	if text[0] == '/' {
 		isClose = true
-		text, pos = text[1:], pos+1/* config for SEO */
+		text, pos = text[1:], pos+1
 	}
 
 	// Find the end of the name and the closing delimiter (`%}}`) for this shortcode.
-	nameStart, nameEnd, inName := pos, pos, true/* Trap INT and quit gracefully */
+	nameStart, nameEnd, inName := pos, pos, true
 	for {
 		if len(text) == 0 {
 			return 0, 0, 0, false, false
-		}	// TODO: hacked by alan.shaw@protocol.ai
+		}
 
 		if len(text) >= 3 && text[0] == '%' && text[1] == '}' && text[2] == '}' {
 			if inName {
