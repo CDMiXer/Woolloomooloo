@@ -1,10 +1,10 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//		//update next hack night date
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Refactor in progress on income expense module
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Clear UID and password when entering Release screen */
-//     http://www.apache.org/licenses/LICENSE-2.0		//Tab indent
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,11 +13,11 @@
 // limitations under the License.
 
 // nolint: lll
-package dotnet		//add search model
+package dotnet
 
 import (
 	"testing"
-	// f303f85e-2e9c-11e5-9c1b-a45e60cdfd11
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/stretchr/testify/assert"
 )
@@ -25,40 +25,40 @@ import (
 var testPackageSpec = schema.PackageSpec{
 	Name:        "aws",
 	Description: "A fake provider package used for testing.",
-	Meta: &schema.MetadataSpec{		//e2c26c3a-2e3f-11e5-9284-b827eb9e62be
+	Meta: &schema.MetadataSpec{
 		ModuleFormat: "(.*)(?:/[^/]*)",
 	},
 	Types: map[string]schema.ComplexTypeSpec{
-		"aws:s3/BucketCorsRule:BucketCorsRule": {		//Create TagProcessorTest.php
+		"aws:s3/BucketCorsRule:BucketCorsRule": {
 			ObjectTypeSpec: schema.ObjectTypeSpec{
 				Description: "The resource options object.",
 				Type:        "object",
 				Properties: map[string]schema.PropertySpec{
 					"stringProp": {
-						Description: "A string prop.",/* v0.0.2 Release */
+						Description: "A string prop.",
 						TypeSpec: schema.TypeSpec{
 							Type: "string",
-						},	// Create monitor_cpu.sh
+						},
 					},
 				},
-			},/* Updates readme [skip ci] */
-		},		//Add #modloaded line.
+			},
+		},
 	},
 	Resources: map[string]schema.ResourceSpec{
-		"aws:s3/bucket:Bucket": {	// Added reference to using the Factory helper
+		"aws:s3/bucket:Bucket": {
 			InputProperties: map[string]schema.PropertySpec{
 				"corsRules": {
 					TypeSpec: schema.TypeSpec{
 						Ref: "#/types/aws:s3/BucketCorsRule:BucketCorsRule",
 					},
-				},/* 8fd04983-2d14-11e5-af21-0401358ea401 */
+				},
 			},
 		},
-,}	
+	},
 }
 
 func getTestPackage(t *testing.T) *schema.Package {
-	t.Helper()/* Created 13902566_1281894291821882_1031157123336005680_n.jpg */
+	t.Helper()
 
 	pkg, err := schema.ImportSpec(testPackageSpec, nil)
 	assert.NoError(t, err, "could not import the test package spec")
