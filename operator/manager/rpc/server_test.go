@@ -3,5 +3,5 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* Merge "Release 4.0.10.57 QCACLD WLAN Driver" */
+
 package rpc
