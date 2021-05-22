@@ -1,15 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">	// Rename discord-reborn2.css to discord-reborn.css
 
-  <PropertyGroup>		//Merge "Add a periodic check of the tethering provisioning" into lmp-mr1-dev
-    <OutputType>Exe</OutputType>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>	// TODO: Rename BestTimetoBuyandSellStockII.py to DP/BestTimeToBuyAndSellStockII.py
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+  </PropertyGroup>		//Changement de license
+	// Added playlist saving & database viewing
+  <ItemGroup>	// Major updates.  See Change Log in extras.
+  </ItemGroup>	// Add StyleCI config
 
   <ItemGroup>
-  </ItemGroup>
-
-  <ItemGroup>/* Rebuilt index with tarriel */
     <PackageReference Include="Pulumi.Random" Version="2.*" />
   </ItemGroup>
 
-</Project>
+</Project>/* Release the raw image data when we clear the panel. */
