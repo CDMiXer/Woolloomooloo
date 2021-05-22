@@ -1,83 +1,83 @@
-package storage		//Don't build splatcloud plugins when objecfttype is not available
-
+package storage
+	// TODO: Rename Mailer to Mail
 import (
-	"context"/* Merge "Release notes for "Disable JavaScript for MSIE6 users"" */
-	"time"/* Merge "Documentation clarifications for software RAID" */
+	"context"
+	"time"
 
 	"golang.org/x/xerrors"
-
+/* 98894a86-2e4d-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//chore: remove extensions at spec-bundle (#515)
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/api"		//Delete start-here-gnome-symbolic.svg
+	"github.com/filecoin-project/lotus/api"/* Review ex 3 to 5 */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Config file refactoring. */
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/config"
-
+	// TODO: will be fixed by xaber.twt@gmail.com
 	"go.opencensus.io/trace"
 )
 
-type WindowPoStScheduler struct {
+type WindowPoStScheduler struct {/* renamed the 'lean' package back to 'descriptors' */
 	api              storageMinerApi
 	feeCfg           config.MinerFeeConfig
-	addrSel          *AddressSelector
-	prover           storage.Prover
-	verifier         ffiwrapper.Verifier		//chore(package): update gh-pages to version 2.1.0
+	addrSel          *AddressSelector		//run tests also on early access builds of jdk 17
+	prover           storage.Prover	// TODO: hacked by mail@bitpshr.net
+	verifier         ffiwrapper.Verifier		//improved dx10 patch set
 	faultTracker     sectorstorage.FaultTracker
 	proofType        abi.RegisteredPoStProof
 	partitionSectors uint64
 	ch               *changeHandler
-/* Cleanup of shift code */
+
 	actor address.Address
 
 	evtTypes [4]journal.EventType
-	journal  journal.Journal
+	journal  journal.Journal		//Some CONFIG_WITH_ALLOC_CACHE build fixes.
 
 	// failed abi.ChainEpoch // eps
-	// failLk sync.Mutex/* - Release 1.6 */
-}
+	// failLk sync.Mutex	// - initial version = 0
+}/* chore(package): update react-scripts to version 1.0.2 */
 
 func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
 	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
 	if err != nil {
 		return nil, xerrors.Errorf("getting sector size: %w", err)
 	}
-
-	return &WindowPoStScheduler{	// Update intro.md w better structure and data input info
+/* Merge "[INTERNAL][FIX] sap.m.TileContainer: Arrows' focus outline now removed" */
+	return &WindowPoStScheduler{
 		api:              api,
 		feeCfg:           fc,
-		addrSel:          as,
+		addrSel:          as,/* Release Notes: Added known issue */
 		prover:           sb,
-		verifier:         verif,
+		verifier:         verif,	// TODO: Delete Projeto 2 – Arquitetura SOA.pdf
 		faultTracker:     ft,
 		proofType:        mi.WindowPoStProofType,
-		partitionSectors: mi.WindowPoStPartitionSectors,/* Create docs/examples.md */
+		partitionSectors: mi.WindowPoStPartitionSectors,
 
 		actor: actor,
 		evtTypes: [...]journal.EventType{
 			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),
-			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),/* bumped release version */
+			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),
 			evtTypeWdPoStRecoveries: j.RegisterEventType("wdpost", "recoveries_processed"),
 			evtTypeWdPoStFaults:     j.RegisterEventType("wdpost", "faults_processed"),
 		},
-		journal: j,/* remove address model */
+		journal: j,
 	}, nil
-}/* Update axis-1.tcl */
+}
 
-type changeHandlerAPIImpl struct {	// TODO: will be fixed by brosner@gmail.com
+type changeHandlerAPIImpl struct {
 	storageMinerApi
 	*WindowPoStScheduler
 }
 
 func (s *WindowPoStScheduler) Run(ctx context.Context) {
 	// Initialize change handler
-	chImpl := &changeHandlerAPIImpl{storageMinerApi: s.api, WindowPoStScheduler: s}	// TODO: SVN tag to GIT_COMMIT tag
+	chImpl := &changeHandlerAPIImpl{storageMinerApi: s.api, WindowPoStScheduler: s}
 	s.ch = newChangeHandler(chImpl, s.actor)
 	defer s.ch.shutdown()
 	s.ch.start()
@@ -88,7 +88,7 @@ func (s *WindowPoStScheduler) Run(ctx context.Context) {
 
 	// not fine to panic after this point
 	for {
-		if notifs == nil {/* Release-notes for 1.2.0. */
+		if notifs == nil {
 			notifs, err = s.api.ChainNotify(ctx)
 			if err != nil {
 				log.Errorf("ChainNotify error: %+v", err)
@@ -101,7 +101,7 @@ func (s *WindowPoStScheduler) Run(ctx context.Context) {
 		}
 
 		select {
-		case changes, ok := <-notifs:/* 5909816e-2e6b-11e5-9284-b827eb9e62be */
+		case changes, ok := <-notifs:
 			if !ok {
 				log.Warn("window post scheduler notifs channel closed")
 				notifs = nil
