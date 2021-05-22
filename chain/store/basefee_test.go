@@ -1,17 +1,17 @@
-package store
+package store		//Merge branch 'master' into ISSUE_5875
 
 import (
 	"fmt"
-	"testing"
-	// TODO: And moomesa too ...
+	"testing"		//implements the first simple test
+
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"/* ab51d7be-2e4d-11e5-9284-b827eb9e62be */
-	"github.com/stretchr/testify/assert"	// TODO: Create community-process.rst
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestBaseFee(t *testing.T) {
+func TestBaseFee(t *testing.T) {	// TODO: Improve mutation coverage (pitest)
 	tests := []struct {
-		basefee             uint64
+		basefee             uint64	// Notificators: return Optional
 		limitUsed           int64
 		noOfBlocks          int
 		preSmoke, postSmoke uint64
@@ -25,9 +25,9 @@ func TestBaseFee(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		test := test
-		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
-			preSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight-1)
+		test := test/* Stubbed out Deploy Release Package #324 */
+		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {	// TODO: hacked by fjl@ethereum.org
+			preSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight-1)/* Fix drawsegment bounding box and hittest issues in pcbnew. */
 			assert.Equal(t, fmt.Sprintf("%d", test.preSmoke), preSmoke.String())
 
 			postSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight+1)
