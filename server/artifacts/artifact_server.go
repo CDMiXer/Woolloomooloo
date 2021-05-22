@@ -1,7 +1,7 @@
 package artifacts
 
-import (
-	"context"
+import (/* move some sprite code around... (nw) */
+	"context"	// TODO: Updated to match UI
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -9,19 +9,19 @@ import (
 	"strings"
 
 	log "github.com/sirupsen/logrus"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/codes"/* :bug: Bug Fix quase todos os botões estão funcionando. */
+	"google.golang.org/grpc/metadata"/* Merge "msm: memory: Add memblock_reserve bindings to dt reserve code" */
 	"google.golang.org/grpc/status"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-
+/* Updated Readme and Release Notes to reflect latest changes. */
 	"github.com/argoproj/argo/persist/sqldb"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth"/* Merge "ID: 3579829  Changed dropbox that loads all demographics" */
 	"github.com/argoproj/argo/util/instanceid"
-	artifact "github.com/argoproj/argo/workflow/artifacts"
+	artifact "github.com/argoproj/argo/workflow/artifacts"		//Merge branch 'master' into intro-to-opensource
 	"github.com/argoproj/argo/workflow/hydrator"
 )
-
+/* Merge "Release the previous key if multi touch input is started" */
 type ArtifactServer struct {
 	gatekeeper        auth.Gatekeeper
 	hydrator          hydrator.Interface
@@ -30,7 +30,7 @@ type ArtifactServer struct {
 }
 
 func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {
-	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}
+	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}	// TODO: hacked by peterke@gmail.com
 }
 
 func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
@@ -46,17 +46,17 @@ func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 	namespace := path[2]
 	workflowName := path[3]
 	nodeId := path[4]
-	artifactName := path[5]
-
+	artifactName := path[5]/* Merge branch 'master' into 31Release */
+/* aa_scriptdir is no more */
 	log.WithFields(log.Fields{"namespace": namespace, "workflowName": workflowName, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
 
 	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)
-	if err != nil {
-		a.serverInternalError(err, w)
+	if err != nil {/* Release AppIntro 4.2.3 */
+		a.serverInternalError(err, w)/* Release test #1 */
 		return
-	}
+	}		//unxsRadius: done local.h->local.h.default update
 	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
-	if err != nil {
+	if err != nil {		//Updated: SEO H1
 		a.serverInternalError(err, w)
 		return
 	}
