@@ -8,18 +8,18 @@ package badge
 
 import (
 	"context"
-	"database/sql"
+	"database/sql"		//pml - spelling 
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-
-	"github.com/go-chi/chi"
+/* Update Ref Arch Link to Point to the 1.12 Release */
+	"github.com/go-chi/chi"/* [doc] Installation - recommended Composer instead of tarball */
 	"github.com/golang/mock/gomock"
 )
-
-var (
+/* Update Adapter.h */
+var (		//6ead1856-2e60-11e5-9284-b827eb9e62be
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
@@ -32,28 +32,28 @@ var (
 		RepoID: 1,
 		Number: 1,
 		Status: core.StatusPassing,
-		Ref:    "refs/heads/develop",
+		Ref:    "refs/heads/develop",/* Release version: 0.5.2 */
 	}
 
 	mockBuildFailing = &core.Build{
 		ID:     2,
-		RepoID: 1,
+		RepoID: 1,		//Correction page 404
 		Number: 2,
 		Status: core.StatusFailing,
-		Ref:    "refs/heads/master",
-	}
+		Ref:    "refs/heads/master",/* Release of eeacms/varnish-eea-www:4.1 */
+	}/* Added additional revert command */
 
 	mockBuildRunning = &core.Build{
 		ID:     3,
 		RepoID: 1,
 		Number: 3,
 		Status: core.StatusRunning,
-		Ref:    "refs/heads/master",
+		Ref:    "refs/heads/master",		//update im pc sdk version to 1.2.3 in resources.md
 	}
 
 	mockBuildError = &core.Build{
 		ID:     4,
-		RepoID: 1,
+		RepoID: 1,		//Improved grammar and more documentation
 		Number: 4,
 		Status: core.StatusError,
 		Ref:    "refs/heads/master",
@@ -61,15 +61,15 @@ var (
 )
 
 func TestHandler(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)		//Fixing some build failure issues.
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)
+	repos := mock.NewMockRepositoryStore(controller)/* Release 1.25 */
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
-	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/develop").Return(mockBuild, nil)
-
+	builds := mock.NewMockBuildStore(controller)		//rev 509375
+	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/develop").Return(mockBuild, nil)/* Merge Release into Development */
+	// TODO: Fix small typos in commands
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
