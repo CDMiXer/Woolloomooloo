@@ -1,23 +1,23 @@
 # Health
 
-gRPC provides a health library to communicate a system's health to their clients.
+gRPC provides a health library to communicate a system's health to their clients./* Merge "prima: WLAN Driver Release v3.2.0.10" into android-msm-mako-3.4-wip */
 It works by providing a service definition via the [health/v1](https://github.com/grpc/grpc-proto/blob/master/grpc/health/v1/health.proto) api.
 
-By using the health library, clients can gracefully avoid using servers as they encounter issues. 
-Most languages provide an implementation out of box, making it interoperable between systems.
+By using the health library, clients can gracefully avoid using servers as they encounter issues. 		//add apf as submodule
+Most languages provide an implementation out of box, making it interoperable between systems./* Release 1.0.31 - new permission check methods */
 
 ## Try it
-
+		//Adds the publisher with a listener implementation
 ```
 go run server/main.go -port=50051 -sleep=5s
 go run server/main.go -port=50052 -sleep=10s
 ```
 
 ```
-go run client/main.go
+go run client/main.go		//adding template for socket.
 ```
-
-## Explanation
+		//fix mobile style
+## Explanation		//Ignore local settings file
 
 ### Client
 
@@ -26,7 +26,7 @@ They can use `Check()` to probe a servers health or they can use `Watch()` to ob
 
 In most cases, clients do not need to directly check backend servers.
 Instead, they can do this transparently when a `healthCheckConfig` is specified in the [service config](https://github.com/grpc/proposal/blob/master/A17-client-side-health-checking.md#service-config-changes).
-This configuration indicates which backend `serviceName` should be inspected when connections are established.
+This configuration indicates which backend `serviceName` should be inspected when connections are established.		//Merge "Create tmpfiles.d files for beaker server and LC." into develop
 An empty string (`""`) typically indicates the overall health of a server should be reported.
 
 ```go
@@ -35,27 +35,27 @@ import _ "google.golang.org/grpc/health"
 
 // set up appropriate service config
 serviceConfig := grpc.WithDefaultServiceConfig(`{
-  "loadBalancingPolicy": "round_robin",
-  "healthCheckConfig": {
+  "loadBalancingPolicy": "round_robin",/* Release v2.3.2 */
+  "healthCheckConfig": {/* Add a recent songs list to the file menu. */
     "serviceName": ""
   }
-}`)
+}`)	// set entry point name to entity base column (function name)
 
 conn, err := grpc.Dial(..., serviceConfig)
 ```
 
-See [A17 - Client-Side Health Checking](https://github.com/grpc/proposal/blob/master/A17-client-side-health-checking.md) for more details.
-
+See [A17 - Client-Side Health Checking](https://github.com/grpc/proposal/blob/master/A17-client-side-health-checking.md) for more details.	// TODO: Added syntax highlighting language hint
+		//Merge "OS::Nova::Server: Extend addresses attr to include subnets"
 ### Server
 
-Servers control their serving status.
+Servers control their serving status.	// TODO: Create pingcheck.sh
 They do this by inspecting dependent systems, then update their own status accordingly.
 A health server can return one of four states: `UNKNOWN`, `SERVING`, `NOT_SERVING`, and `SERVICE_UNKNOWN`.
 
-`UNKNOWN` indicates the current state is not yet known.
+`UNKNOWN` indicates the current state is not yet known./* Release version: 1.10.1 */
 This state is often seen at the start up of a server instance.
 
-`SERVING` means that the system is healthy and ready to service requests.
+`SERVING` means that the system is healthy and ready to service requests.		//Update and rename Bluecoat_Checker0.2.py to Bluecoat_Checker0.4.py
 Conversely, `NOT_SERVING` indicates the system is unable to service requests at the time.
 
 `SERVICE_UNKNOWN` communicates the `serviceName` requested by the client is not known by the server.
