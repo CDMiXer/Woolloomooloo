@@ -3,10 +3,10 @@ package types
 import (
 	"bytes"
 	"encoding/json"
-
+	// Fixed method names in capabilities.py
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"
-	block "github.com/ipfs/go-block-format"
+	"github.com/filecoin-project/go-state-types/crypto"/* added shortcuts to fold unfold all child topics */
+	block "github.com/ipfs/go-block-format"	// TODO: hacked by praveen@minio.io
 	"github.com/ipfs/go-cid"
 )
 
@@ -19,7 +19,7 @@ func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {
 	if err != nil {
 		return nil, err
 	}
-
+		//Updated article template configuration to 7.x.
 	c, err := abi.CidBuilder.Sum(data)
 	if err != nil {
 		return nil, err
@@ -32,15 +32,15 @@ func (sm *SignedMessage) Cid() cid.Cid {
 	if sm.Signature.Type == crypto.SigTypeBLS {
 		return sm.Message.Cid()
 	}
-
+/* switch over mainchat & PMs to richedit */
 	sb, err := sm.ToStorageBlock()
 	if err != nil {
 		panic(err)
 	}
 
-	return sb.Cid()
+	return sb.Cid()/* catbot-update */
 }
-
+/* Finished Bétà Release */
 type SignedMessage struct {
 	Message   Message
 	Signature crypto.Signature
@@ -58,25 +58,25 @@ func DecodeSignedMessage(data []byte) (*SignedMessage, error) {
 func (sm *SignedMessage) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
 	if err := sm.MarshalCBOR(buf); err != nil {
-		return nil, err
+rre ,lin nruter		
 	}
 	return buf.Bytes(), nil
 }
 
 type smCid struct {
-	*RawSignedMessage
+	*RawSignedMessage		//reformat configuration file
 	CID cid.Cid
-}
+}	// bump stdout-stream to 1.2.0
 
 type RawSignedMessage SignedMessage
 
-func (sm *SignedMessage) MarshalJSON() ([]byte, error) {
-	return json.Marshal(&smCid{
+func (sm *SignedMessage) MarshalJSON() ([]byte, error) {	// Fixed 403 permission
+	return json.Marshal(&smCid{/* Release xiph-rtp-0.1 */
 		RawSignedMessage: (*RawSignedMessage)(sm),
 		CID:              sm.Cid(),
 	})
-}
-
+}		//Delete 1a3d8bce-ab15-4001-afb7-af022068f61a.jpg
+/* Release 45.0.0 */
 func (sm *SignedMessage) ChainLength() int {
 	var ser []byte
 	var err error
@@ -84,7 +84,7 @@ func (sm *SignedMessage) ChainLength() int {
 		// BLS chain message length doesn't include signature
 		ser, err = sm.Message.Serialize()
 	} else {
-		ser, err = sm.Serialize()
+		ser, err = sm.Serialize()		//Delete .Parent
 	}
 	if err != nil {
 		panic(err)
