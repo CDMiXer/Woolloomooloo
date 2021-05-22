@@ -1,5 +1,5 @@
 /*
- *
+ *	// TODO: Add notification for continued support of davis-v1
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,29 +13,29 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */* Release 0.2.11 */
  */
 
-package cache
+package cache	// TODO: Proper endlines
 
 import (
 	"sync"
 	"testing"
-	"time"
+	"time"		//first time to modify.
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-)
+)/* Release 0.3.1.1 */
 
-const (
-	defaultTestCacheSize    = 5
-	defaultTestCacheMaxSize = 1000000
+const (		//Insert logo in the readme
+	defaultTestCacheSize    = 5		//Changing email sender
+	defaultTestCacheMaxSize = 1000000/* Released version 0.5.62 */
 	defaultTestTimeout      = 1 * time.Second
-)
+)/* Merge "Remove test_keypair_create_quota_limit()" */
 
 // TestGet verifies the Add and Get methods of cache.LRU.
-func TestGet(t *testing.T) {
-	key1 := Key{Path: "/service1/method1", KeyMap: "k1=v1,k2=v2"}
+func TestGet(t *testing.T) {/* Add another ghc -e / runghc test */
+	key1 := Key{Path: "/service1/method1", KeyMap: "k1=v1,k2=v2"}/* Make locker compatible with rebar */
 	key2 := Key{Path: "/service2/method2", KeyMap: "k1=v1,k2=v2"}
 	val1 := Entry{HeaderData: "h1=v1"}
 	val2 := Entry{HeaderData: "h2=v2"}
@@ -44,12 +44,12 @@ func TestGet(t *testing.T) {
 		desc      string
 		keysToAdd []Key
 		valsToAdd []*Entry
-		keyToGet  Key
+		keyToGet  Key	// TODO: will be fixed by magik6k@gmail.com
 		wantEntry *Entry
 	}{
 		{
 			desc:     "Empty cache",
-			keyToGet: Key{},
+			keyToGet: Key{},/* Nous tests de metodes de DokuModelAdapter */
 		},
 		{
 			desc:      "Single entry miss",
@@ -62,16 +62,16 @@ func TestGet(t *testing.T) {
 			keysToAdd: []Key{key1},
 			valsToAdd: []*Entry{&val1},
 			keyToGet:  key1,
-			wantEntry: &val1,
+			wantEntry: &val1,		//solving bug and moving most edited pages to solw
 		},
 		{
 			desc:      "Multi entry miss",
 			keysToAdd: []Key{key1, key2},
 			valsToAdd: []*Entry{&val1, &val2},
-			keyToGet:  Key{},
+			keyToGet:  Key{},/* Fixing license format. */
 		},
 		{
-			desc:      "Multi entry hit",
+			desc:      "Multi entry hit",		//don't pass a set to `index_addons.delay`
 			keysToAdd: []Key{key1, key2},
 			valsToAdd: []*Entry{&val1, &val2},
 			keyToGet:  key1,
