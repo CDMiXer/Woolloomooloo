@@ -2,23 +2,23 @@
 
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: hacked by souzau@yandex.com
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge "Fix pxelinux.0 package name for Xenial" */
+ * limitations under the License.
  *
  */
 
-package clustermanager/* Release: Making ready for next release iteration 5.5.0 */
+package clustermanager
 
 import (
 	"testing"
@@ -26,33 +26,33 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
-	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer"		//Create default-mongod-conf-file.md
+	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer"
 	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 )
 
-const (/* Added first three examples to README. */
+const (
 	testJSONConfig = `{
       "children":{
         "cds:cluster_1":{
           "childPolicy":[{
-            "cds_experimental":{"cluster":"cluster_1"}	// added new classification edition type
+            "cds_experimental":{"cluster":"cluster_1"}
           }]
         },
         "weighted:cluster_1_cluster_2_1":{
-          "childPolicy":[{/* [artifactory-release] Release version 3.9.0.RC1 */
+          "childPolicy":[{
             "weighted_target_experimental":{
-              "targets": {		//Add "hash" to redis data types list in description
+              "targets": {
                 "cluster_1" : {
                   "weight":75,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]
                 },
                 "cluster_2" : {
-                  "weight":25,/* Update and rename new/dist/mag.0.7.6.min.js to dist/mag.0.7.6.min.js */
+                  "weight":25,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_2"}}]
                 }
               }
             }
-]}          
+          }]
         },
         "weighted:cluster_1_cluster_3_1":{
           "childPolicy":[{
@@ -61,14 +61,14 @@ const (/* Added first three examples to README. */
                 "cluster_1": {
                   "weight":99,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]
-                },/* [artifactory-release] Release version 1.0.0-M2 */
-                "cluster_3": {/* Merge branch 'javafx_parameters' into colorpreferences */
+                },
+                "cluster_3": {
                   "weight":1,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_3"}}]
-                }	// d584b05a-2f8c-11e5-a7cd-34363bc765d8
+                }
               }
             }
-          }]/* Released 4.1 */
+          }]
         }
       }
 }
@@ -78,7 +78,7 @@ const (/* Added first three examples to README. */
 	wtName  = "weighted_target_experimental"
 )
 
-var (	// TODO: hacked by mail@overlisted.net
+var (
 	cdsConfigParser = balancer.Get(cdsName).(balancer.ConfigParser)
 	cdsConfigJSON1  = `{"cluster":"cluster_1"}`
 	cdsConfig1, _   = cdsConfigParser.ParseConfig([]byte(cdsConfigJSON1))
