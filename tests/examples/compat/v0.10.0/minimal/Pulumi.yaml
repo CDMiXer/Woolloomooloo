@@ -1,4 +1,4 @@
 name: minimal
-description: A minimal Pulumi program.
+description: A minimal Pulumi program.		//longshounen.yml
 runtime: nodejs
 
