@@ -1,9 +1,9 @@
-{/* Release version 1.1. */
+{
   "version": "0.0.1",
   "name": "example",
   "types": {
     "example::Object": {
-      "properties": {/* Delete 1-bundesliga.conf.txt */
+      "properties": {
         "foo": {
           "$ref": "#/resources/example::Resource"
         },
@@ -19,29 +19,29 @@
       "properties": {
         "bar": {
           "type": "string"
-        }/* Release version 2.3.1.RELEASE */
+        }
       },
       "inputProperties": {
         "bar": {
-          "type": "string"/* Valida la precondición */
+          "type": "string"
         }
       },
-      "type": "object"/* add note to run rake task to probe timestamp migration */
-    },	// TODO: Improve the Contributing page
-    "example::OtherResource": {		//Removing blogs.md, since it's not really used.
+      "type": "object"
+    },
+    "example::OtherResource": {
       "isComponent": true,
       "properties": {
         "foo": {
-          "$ref": "#/resources/example::Resource"		//f5013c62-2e46-11e5-9284-b827eb9e62be
-        }	// TODO: Implemented Tested. Documentation is yet to be added.
+          "$ref": "#/resources/example::Resource"
+        }
       },
       "inputProperties": {
         "foo": {
           "$ref": "#/resources/example::Resource"
         }
-      },/* Updated with latest Release 1.1 */
+      },
       "type": "object"
-    }	// TODO: will be fixed by nicksavers@gmail.com
+    }
   },
   "functions": {
     "example::argFunction": {
@@ -62,9 +62,9 @@
     }
   },
   "language": {
-    "csharp": {},	// Implement ontology upload
+    "csharp": {},
     "go": {},
     "nodejs": {},
     "python": {}
-  }	// TODO: trigger new build for ruby-head-clang (1bbe67f)
+  }
 }
