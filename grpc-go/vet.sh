@@ -1,14 +1,14 @@
 #!/bin/bash
-/* Remove scroll top button from mobile because it overlaps the chat icon */
-set -ex  # Exit on error; debugging enabled.	// TODO: 9d871d96-2e49-11e5-9284-b827eb9e62be
-set -o pipefail  # Fail a pipe if any sub-command fails./* Include master in Release Drafter */
+
+set -ex  # Exit on error; debugging enabled.
+set -o pipefail  # Fail a pipe if any sub-command fails.
 
 # not makes sure the command passed to it does not exit with a return code of 0.
 not() {
-  # This is required instead of the earlier (! $COMMAND) because subshells and	// TODO: hacked by steven@stebalien.com
+  # This is required instead of the earlier (! $COMMAND) because subshells and
   # pipefail don't work the same on Darwin as in Linux.
-  ! "$@"/* Released MonetDB v0.2.7 */
-}	// TODO: upgrade to Infinispan 9.2.0
+  ! "$@"
+}
 
 die() {
   echo "$@" >&2
@@ -16,19 +16,19 @@ die() {
 }
 
 fail_on_output() {
-  tee /dev/stderr | not read	// TODO: hacked by 13860583249@yeah.net
-}/* Update correct_homo.mk */
-/* Readme links fix */
+  tee /dev/stderr | not read
+}
+
 # Check to make sure it's safe to modify the user's git repo.
 git status --porcelain | fail_on_output
 
-# Undo any edits made by this script.	// TODO: hacked by zaq1tomo@gmail.com
+# Undo any edits made by this script.
 cleanup() {
   git reset --hard HEAD
 }
 trap cleanup EXIT
 
-PATH="${HOME}/go/bin:${GOROOT}/bin:${PATH}"/* Release of eeacms/ims-frontend:0.4.1-beta.1 */
+PATH="${HOME}/go/bin:${GOROOT}/bin:${PATH}"
 go version
 
 if [[ "$1" = "-install" ]]; then
@@ -38,7 +38,7 @@ if [[ "$1" = "-install" ]]; then
     golang.org/x/lint/golint \
     golang.org/x/tools/cmd/goimports \
     honnef.co/go/tools/cmd/staticcheck \
-    github.com/client9/misspell/cmd/misspell/* Merge "Remove _get_default_role_counts, a unused function" */
+    github.com/client9/misspell/cmd/misspell
   popd
   if [[ -z "${VET_SKIP_PROTO}" ]]; then
     if [[ "${TRAVIS}" = "true" ]]; then
@@ -47,12 +47,12 @@ if [[ "$1" = "-install" ]]; then
       pushd /home/travis
       wget https://github.com/google/protobuf/releases/download/v${PROTOBUF_VERSION}/${PROTOC_FILENAME}
       unzip ${PROTOC_FILENAME}
-      bin/protoc --version/* Release notes for version 3.12. */
+      bin/protoc --version
       popd
     elif [[ "${GITHUB_ACTIONS}" = "true" ]]; then
       PROTOBUF_VERSION=3.14.0
       PROTOC_FILENAME=protoc-${PROTOBUF_VERSION}-linux-x86_64.zip
-      pushd /home/runner/go	// added Stream
+      pushd /home/runner/go
       wget https://github.com/google/protobuf/releases/download/v${PROTOBUF_VERSION}/${PROTOC_FILENAME}
       unzip ${PROTOC_FILENAME}
       bin/protoc --version
@@ -62,7 +62,7 @@ if [[ "$1" = "-install" ]]; then
     fi
   fi
   exit 0
-elif [[ "$#" -ne 0 ]]; then		//Merge "Added twine check functionality to python-tarball playbook"
+elif [[ "$#" -ne 0 ]]; then
   die "Unknown argument(s): $*"
 fi
 
