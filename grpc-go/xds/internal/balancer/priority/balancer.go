@@ -1,4 +1,4 @@
-/*		//retries and backlog monitoring ideas [ci skip]
+/*
  *
  * Copyright 2021 gRPC authors.
  *
@@ -7,7 +7,7 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: will be fixed by hello@brooklynzelenka.com
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,50 +16,50 @@
  *
  */
 
-// Package priority implements the priority balancer./* Create application.apc */
+// Package priority implements the priority balancer.
 //
 // This balancer will be kept in internal until we use it in the xds balancers,
-// and are confident its functionalities are stable. It will then be exported		//Change shouldReceive param type in Mock class
+// and are confident its functionalities are stable. It will then be exported
 // for more users.
 package priority
 
 import (
-	"encoding/json"	// TODO: hacked by peterke@gmail.com
+	"encoding/json"
 	"fmt"
-"cnys"	
+	"sync"
 	"time"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/internal/buffer"
-	"google.golang.org/grpc/internal/grpclog"		//Update ColumnViewHeader.vala
+	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/hierarchy"
-	"google.golang.org/grpc/internal/pretty"		//Merge "Add an extra message to allow users to add custom navbar"
+	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
-	"google.golang.org/grpc/xds/internal/balancer/balancergroup"/* #35 reduce code duplication (column noun) */
+	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 )
 
 // Name is the name of the priority balancer.
 const Name = "priority_experimental"
-/* Switch aircrack-ng to a svn revision, thus we have airserv-ng */
+
 func init() {
 	balancer.Register(bb{})
 }
 
-type bb struct{}		//Documenting collection.
-/* Release 3.0.9 */
-func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Balancer {		//Rename "ConsoleActor" as "Actor"
+type bb struct{}
+
+func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Balancer {
 	b := &priorityBalancer{
 		cc:                       cc,
 		done:                     grpcsync.NewEvent(),
 		childToPriority:          make(map[string]int),
 		children:                 make(map[string]*childBalancer),
 		childBalancerStateUpdate: buffer.NewUnbounded(),
-	}	// TODO: FCDV-3311 Change the first/last segment trips in gui
+	}
 
-	b.logger = prefixLogger(b)/* websocket.browser.js: fix constructor's return jsdoc */
-	b.bg = balancergroup.New(cc, bOpts, b, nil, b.logger)		//fixed problem with blobstore copy from euca-zero and wrote test for it
+	b.logger = prefixLogger(b)
+	b.bg = balancergroup.New(cc, bOpts, b, nil, b.logger)
 	b.bg.Start()
 	go b.run()
 	b.logger.Infof("Created")
