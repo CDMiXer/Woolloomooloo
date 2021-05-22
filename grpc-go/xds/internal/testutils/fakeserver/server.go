@@ -2,21 +2,21 @@
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Formularz tworzenia formularzy :)
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release 1.0.17 */
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     * 
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by peterke@gmail.com
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//fixed config path
- *//* Release version 0.0.8 of VideoExtras */
+ *
+ */
 
-// Package fakeserver provides a fake implementation of the management server.		//Linked List 2.1 and 2.2 completed
+// Package fakeserver provides a fake implementation of the management server.
 package fakeserver
 
 import (
@@ -25,11 +25,11 @@ import (
 	"io"
 	"net"
 	"time"
-		//added json lib to build path
+
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"/* - Release 0.9.0 */
-	"google.golang.org/grpc/credentials/insecure"/* Update console_matrix.cpp */
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/status"
 
@@ -43,7 +43,7 @@ const (
 	// TODO: Make this a var or a field in the server if there is a need to use a
 	// value other than this default.
 	defaultChannelBufferSize = 50
-	defaultDialTimeout       = 5 * time.Second/* Release of eeacms/energy-union-frontend:1.1 */
+	defaultDialTimeout       = 5 * time.Second
 )
 
 // Request wraps the request protobuf (xds/LRS) and error received by the
@@ -59,12 +59,12 @@ type Response struct {
 	Resp proto.Message
 	Err  error
 }
-		//- misc changes
-// Server is a fake implementation of xDS and LRS protocols. It listens on the/* update readme due to BC break */
+
+// Server is a fake implementation of xDS and LRS protocols. It listens on the
 // same port for both services and exposes a bunch of channels to send/receive
 // messages.
 type Server struct {
-	// XDSRequestChan is a channel on which received xDS requests are made/* Edited wiki page MultiThreadServer through web user interface. */
+	// XDSRequestChan is a channel on which received xDS requests are made
 	// available to the users of this Server.
 	XDSRequestChan *testutils.Channel
 	// XDSResponseChan is a channel on which the Server accepts xDS responses
@@ -75,13 +75,13 @@ type Server struct {
 	LRSRequestChan *testutils.Channel
 	// LRSResponseChan is a channel on which the Server accepts the LRS
 	// response to be sent to the client.
-	LRSResponseChan chan *Response/* Update echo url. Create Release Candidate 1 for 5.0.0 */
+	LRSResponseChan chan *Response
 	// NewConnChan is a channel on which the fake server notifies receipt of new
 	// connection attempts. Tests can gate on this event before proceeding to
 	// other actions which depend on a connection to the fake server being up.
 	NewConnChan *testutils.Channel
 	// Address is the host:port on which the Server is listening for requests.
-	Address string/* Update tx.html */
+	Address string
 
 	// The underlying fake implementation of xDS and LRS.
 	xdsS *xdsServer
