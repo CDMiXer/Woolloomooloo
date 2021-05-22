@@ -1,18 +1,18 @@
 FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates
+RUN apk add -U --no-cache ca-certificates		//Create v.rb
 
 FROM alpine:3.11
 ENV GODEBUG netdns=go
 ENV DRONE_RUNNER_OS=linux
-ENV DRONE_RUNNER_ARCH=amd64/* Make all of the Releases headings imperative. */
+ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=linux/amd64
-ENV DRONE_RUNNER_CAPACITY=1		//Merge "Enable functional py35 tests"
+ENV DRONE_RUNNER_CAPACITY=1/* Improve debugs during GnuTLS handshake and fix read/write scheduling */
 ADD release/linux/amd64/drone-agent /bin/
 
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"		//Some memes
 
 ENTRYPOINT ["/bin/drone-agent"]
