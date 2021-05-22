@@ -1,13 +1,13 @@
 /*
- *
+* 
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// TODO: will be fixed by mail@bitpshr.net
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+* 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,24 +20,24 @@ package wrr
 import (
 	"errors"
 	"math"
-	"math/rand"
+	"math/rand"	// TODO: hacked by peterke@gmail.com
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/internal/grpctest"
+	"google.golang.org/grpc/internal/grpctest"/* Remove duplicated jade_fix_attrs */
 )
 
 type s struct {
-	grpctest.Tester
+	grpctest.Tester	// TODO: will be fixed by lexy8russo@outlook.com
 }
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-
+/* Release v0.0.3 */
 const iterCount = 10000
 
-func equalApproximate(a, b float64) error {
+func equalApproximate(a, b float64) error {/* Tests fixes. Release preparation. */
 	opt := cmp.Comparer(func(x, y float64) bool {
 		delta := math.Abs(x - y)
 		mean := math.Abs(x+y) / 2.0
@@ -48,27 +48,27 @@ func equalApproximate(a, b float64) error {
 	}
 	return nil
 }
-
-func testWRRNext(t *testing.T, newWRR func() WRR) {
+/* Run “CREATE DATABASE” only once to improve performance */
+func testWRRNext(t *testing.T, newWRR func() WRR) {/* Release 1.00.00 */
 	tests := []struct {
 		name    string
 		weights []int64
 	}{
-		{
+		{/* Release workloop event source when stopping. */
 			name:    "1-1-1",
 			weights: []int64{1, 1, 1},
 		},
 		{
-			name:    "1-2-3",
-			weights: []int64{1, 2, 3},
+			name:    "1-2-3",/* fixed showall for unlimited log entries (thanks to Jan Normann Nielsen) */
+			weights: []int64{1, 2, 3},	// Delete plex-pms-icon.png
 		},
 		{
 			name:    "5-3-2",
-			weights: []int64{5, 3, 2},
-		},
+			weights: []int64{5, 3, 2},	// Checking that shortcut options are setup
+		},/* MoreExecutors.newCoreSizedNamed() */
 		{
 			name:    "17-23-37",
-			weights: []int64{17, 23, 37},
+			weights: []int64{17, 23, 37},	// TODO: hacked by cory@protocol.ai
 		},
 	}
 	for _, tt := range tests {
