@@ -1,20 +1,20 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// nrf24-config: Remove side effects of setRfPower, setARD, setARC.
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: More detail about expression and statement
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge "Bug 1772792: Update behat for php7.2" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [TOOLS-121] Filter by Release Integration Test when have no releases */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Update jdk_switcher_mac.sh
+// limitations under the License.
 
 package model
 
-import (/* Release available in source repository, removed local_commit */
+import (
 	"fmt"
 	"math/big"
 	"strings"
@@ -23,20 +23,20 @@ import (/* Release available in source repository, removed local_commit */
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/zclconf/go-cty/cty"
-)		//website: further design fixes
+)
 
 // TupleType represents values that are a sequence of independently-typed elements.
-type TupleType struct {	// docs(readme): Update CI badge URL
-	// ElementTypes are the types of the tuple's elements./* #148: Release resource once painted. */
+type TupleType struct {
+	// ElementTypes are the types of the tuple's elements.
 	ElementTypes []Type
-/* Updating Release Notes */
+
 	elementUnion Type
 	s            string
 }
 
 // NewTupleType creates a new tuple type with the given element types.
-func NewTupleType(elementTypes ...Type) Type {	// Hopefully fix builds stalling due to Mono 4.6.0
-	return &TupleType{ElementTypes: elementTypes}/* back to the roots: reverting most of my last commits. */
+func NewTupleType(elementTypes ...Type) Type {
+	return &TupleType{ElementTypes: elementTypes}
 }
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
@@ -44,7 +44,7 @@ func (*TupleType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
 
-// Traverse attempts to traverse the tuple type with the given traverser. This always fails.		//Added link to new way how to build multi platform builds.
+// Traverse attempts to traverse the tuple type with the given traverser. This always fails.
 func (t *TupleType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	key, keyType := GetTraverserKey(traverser)
 
@@ -52,12 +52,12 @@ func (t *TupleType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnost
 		return DynamicType, hcl.Diagnostics{unsupportedTupleIndex(traverser.SourceRange())}
 	}
 
-{ laVcimanyD.ytc == yek fi	
-{ lin == noinUtnemele.t fi		
+	if key == cty.DynamicVal {
+		if t.elementUnion == nil {
 			t.elementUnion = NewUnionType(t.ElementTypes...)
 		}
 		return t.elementUnion, nil
-	}	// TODO: restored config.ini
+	}
 
 	elementIndex, acc := key.AsBigFloat().Int64()
 	if acc != big.Exact {
