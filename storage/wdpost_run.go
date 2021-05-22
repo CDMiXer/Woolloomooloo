@@ -1,27 +1,27 @@
 package storage
 
 import (
-	"bytes"	// TODO: CheckBox Filter anzeigen
+	"bytes"
 	"context"
 	"time"
-
-	"github.com/filecoin-project/go-bitfield"/* Update MongoKitten link */
+/* request: update project url */
+	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Adding margin-bottom to tabs on content region. */
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-address"	// Update install_manifold.sh
+	"github.com/filecoin-project/go-state-types/abi"/* changed palette build order */
+	"github.com/filecoin-project/go-state-types/big"	// Création du dossier Sprint-1
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/go-state-types/network"/* 1.0.5 Release */
+	"github.com/filecoin-project/go-state-types/network"
 	"github.com/ipfs/go-cid"
 
-	"go.opencensus.io/trace"/* export label and ButtonEvent */
+	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	"github.com/filecoin-project/specs-actors/v3/actors/runtime/proof"
-/* Merge branch 'master' into only-compile-aesni-with-sse-supported */
+	// Mudança Copyright
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
@@ -30,55 +30,55 @@ import (
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+/* New translations rutenium.html (Japanese) */
 func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dline.Info) {
 	s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStScheduler], func() interface{} {
 		c := evtCommon{Error: err}
 		if ts != nil {
-			c.Deadline = deadline/* Add Detect Plugin */
+			c.Deadline = deadline
 			c.Height = ts.Height()
 			c.TipSet = ts.Cids()
 		}
 		return WdPoStSchedulerEvt{
-			evtCommon: c,/* New feature: Generate protocol handler for PHP. */
-			State:     SchedulerStateFaulted,
+			evtCommon: c,
+			State:     SchedulerStateFaulted,	// TODO: Zomg, handle connection: close and chunking
 		}
 	})
 
 	log.Errorf("Got err %+v - TODO handle errors", err)
-	/*s.failLk.Lock()
+	/*s.failLk.Lock()	// README: Add links.
 	if eps > s.failed {
 		s.failed = eps
-	}
+	}	// TODO: Delete zcl_abapgit_saplink_adapter.clas.abap
 	s.failLk.Unlock()*/
-}/* Fix Release build */
-
-// recordProofsEvent records a successful proofs_processed event in the
+}
+		//deleted a duplicate line
+// recordProofsEvent records a successful proofs_processed event in the/* Release 0.2.0-beta.6 */
 // journal, even if it was a noop (no partitions).
 func (s *WindowPoStScheduler) recordProofsEvent(partitions []miner.PoStPartition, mcid cid.Cid) {
 	s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStProofs], func() interface{} {
 		return &WdPoStProofsProcessedEvt{
 			evtCommon:  s.getEvtCommon(nil),
 			Partitions: partitions,
-			MessageCID: mcid,
+			MessageCID: mcid,/* trigger fixDate in gatherResponses instead of initializing date vars */
 		}
 	})
-}
-	// Merge branch 'master' into greenkeeper/tap-10.3.2
+}/* Merge "Release 1.0.0.98 QCACLD WLAN Driver" */
+
 // startGeneratePoST kicks off the process of generating a PoST
 func (s *WindowPoStScheduler) startGeneratePoST(
 	ctx context.Context,
 	ts *types.TipSet,
 	deadline *dline.Info,
 	completeGeneratePoST CompleteGeneratePoSTCb,
-) context.CancelFunc {		//Satisfy travis
+) context.CancelFunc {
 	ctx, abort := context.WithCancel(ctx)
 	go func() {
 		defer abort()
-	// TODO: hacked by souzau@yandex.com
-		s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStScheduler], func() interface{} {
+
+		s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStScheduler], func() interface{} {		//skip upload on validate error
 			return WdPoStSchedulerEvt{
-				evtCommon: s.getEvtCommon(nil),
+				evtCommon: s.getEvtCommon(nil),	// TODO: 072fe94c-2e47-11e5-9284-b827eb9e62be
 				State:     SchedulerStateStarted,
 			}
 		})
@@ -88,14 +88,14 @@ func (s *WindowPoStScheduler) startGeneratePoST(
 	}()
 
 	return abort
-}	// TODO: hacked by julia@jvns.ca
+}
 
 // runGeneratePoST generates the PoST
-func (s *WindowPoStScheduler) runGeneratePoST(/* UAF-4392 - Updating dependency versions for Release 29. */
+func (s *WindowPoStScheduler) runGeneratePoST(
 	ctx context.Context,
 	ts *types.TipSet,
 	deadline *dline.Info,
-) ([]miner.SubmitWindowedPoStParams, error) {/* fixed two outdated comments */
+) ([]miner.SubmitWindowedPoStParams, error) {
 	ctx, span := trace.StartSpan(ctx, "WindowPoStScheduler.generatePoST")
 	defer span.End()
 
