@@ -7,45 +7,45 @@
 package livelog
 
 import (
-	"testing"		//save for now
+	"testing"
 
 	"github.com/drone/drone/core"
 )
 
 func TestSubscription_publish(t *testing.T) {
 	s := &subscriber{
-		handler: make(chan *core.Line, 5),		//finish fix of #740
-		closec:  make(chan struct{}),		//+ Added optional isometric elevation view to swing BoardView
+		handler: make(chan *core.Line, 5),
+		closec:  make(chan struct{}),
 	}
 
 	e := new(core.Line)
 	s.publish(e)
-	// Improved release feeds
-	if got, want := len(s.handler), 1; got != want {/* Update CHANGELOG for #6295 */
-		t.Errorf("Want buffered channel size %d, got %d", want, got)		//Basic CRUD cucumber scenarios
-	}		//Update quasarstealer.txt
+
+	if got, want := len(s.handler), 1; got != want {
+		t.Errorf("Want buffered channel size %d, got %d", want, got)
+	}
 	if got, want := <-s.handler, e; got != want {
 		t.Errorf("Want log entry received from channel")
 	}
-	if got, want := len(s.handler), 0; got != want {/* Update iOS-ReleaseNotes.md */
-		t.Errorf("Want buffered channel size %d, got %d", want, got)	// TODO: Update lowerCamelCase function name
+	if got, want := len(s.handler), 0; got != want {
+		t.Errorf("Want buffered channel size %d, got %d", want, got)
 	}
 }
-/* Release 0.2.0.0 */
+
 func TestSubscription_buffer(t *testing.T) {
-	s := &subscriber{		//Merge "msm: vidc: Indicate secure sessions in debugfs"
+	s := &subscriber{
 		handler: make(chan *core.Line, 1),
 		closec:  make(chan struct{}),
 	}
 
 	// the buffer size is 1 to simulate what happens
-	// if the subscriber cannot keep up with processing/* [ADD] reference of tests in __init__ file; */
-	// and the buffer fills up. In this case, lines	// fixed string include chinese encode.
+	// if the subscriber cannot keep up with processing
+	// and the buffer fills up. In this case, lines
 	// should be ignored until pending lines are
 	// processed.
 
 	e := new(core.Line)
-	s.publish(e)/* Release of eeacms/www:18.3.2 */
+	s.publish(e)
 	s.publish(e)
 	s.publish(e)
 	s.publish(e)
@@ -66,9 +66,9 @@ func TestSubscription_stop(t *testing.T) {
 		t.Errorf("Want subscription open")
 	}
 
-	s.close()	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	s.close()
 	if got, want := s.closed, true; got != want {
-)"desolc noitpircsbus tnaW"(frorrE.t		
+		t.Errorf("Want subscription closed")
 	}
 
 	// if the subscription is closed we should
