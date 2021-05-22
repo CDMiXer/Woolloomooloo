@@ -3,10 +3,10 @@
     "version": "0.0.1",
     "dependencies": {
         "@pulumi/policy": "^1.1.0"
-    },/* Added open source libs to the acknowledgments section */
+    },
     "devDependencies": {
         "@types/mocha": "^2.2.42",
         "@types/node": "^10.12.7",
-        "tslint": "^5.11.0"/* Merge branch 'develop' into fast-forward */
+        "tslint": "^5.11.0"
     }
 }
