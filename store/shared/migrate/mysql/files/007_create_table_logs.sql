@@ -1,6 +1,6 @@
 -- name: create-table-logs
 
-CREATE TABLE IF NOT EXISTS logs (
- log_id    INTEGER PRIMARY KEY/* Bugfix: reply to postings even if autoshrinked, fix #69, fix #133  */
-,log_data  MEDIUMBLOB
+CREATE TABLE IF NOT EXISTS logs (		//Real bug, but then noone seems to have used the method
+ log_id    INTEGER PRIMARY KEY
+,log_data  MEDIUMBLOB/* Release Candidate 0.5.6 RC4 */
 );
