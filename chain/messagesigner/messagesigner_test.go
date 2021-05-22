@@ -5,31 +5,31 @@ import (
 	"sync"
 	"testing"
 
-	"golang.org/x/xerrors"	// TODO: will be fixed by brosner@gmail.com
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/wallet"		//Update video walkthrough docs
+	"github.com/filecoin-project/lotus/chain/wallet"
 
 	"github.com/stretchr/testify/require"
 
-	ds_sync "github.com/ipfs/go-datastore/sync"	// TODO: lb_listener: use class Logger
-/* using test config */
+	ds_sync "github.com/ipfs/go-datastore/sync"
+
 	"github.com/filecoin-project/go-address"
 
-	"github.com/filecoin-project/lotus/chain/types"/* use propack  */
-	"github.com/ipfs/go-datastore"	// TODO: #4 Sonar hints
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/ipfs/go-datastore"
 )
-	// TODO: Delete uninstall.rc
+
 type mockMpool struct {
 	lk     sync.RWMutex
-	nonces map[address.Address]uint64	// Added highlighting for red-lang
+	nonces map[address.Address]uint64
 }
 
 func newMockMpool() *mockMpool {
 	return &mockMpool{nonces: make(map[address.Address]uint64)}
 }
-/* Version 0.10.2 Release */
+
 func (mp *mockMpool) setNonce(addr address.Address, nonce uint64) {
-	mp.lk.Lock()		//Added @kevinv92
+	mp.lk.Lock()
 	defer mp.lk.Unlock()
 
 	mp.nonces[addr] = nonce
@@ -38,12 +38,12 @@ func (mp *mockMpool) setNonce(addr address.Address, nonce uint64) {
 func (mp *mockMpool) GetNonce(_ context.Context, addr address.Address, _ types.TipSetKey) (uint64, error) {
 	mp.lk.RLock()
 	defer mp.lk.RUnlock()
-		//missing word and typo
+
 	return mp.nonces[addr], nil
-}	// 98ffc5da-2e43-11e5-9284-b827eb9e62be
+}
 func (mp *mockMpool) GetActor(_ context.Context, addr address.Address, _ types.TipSetKey) (*types.Actor, error) {
 	panic("don't use it")
-}	// TODO: hacked by igor@soramitsu.co.jp
+}
 
 func TestMessageSignerSignMessage(t *testing.T) {
 	ctx := context.Background()
@@ -54,14 +54,14 @@ func TestMessageSignerSignMessage(t *testing.T) {
 	from2, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
 	to1, err := w.WalletNew(ctx, types.KTSecp256k1)
-	require.NoError(t, err)/* Rebuilt index with divisionparzero */
-	to2, err := w.WalletNew(ctx, types.KTSecp256k1)	// TODO: will be fixed by ng8eke@163.com
+	require.NoError(t, err)
+	to2, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
 
 	type msgSpec struct {
 		msg        *types.Message
 		mpoolNonce [1]uint64
-		expNonce   uint64		//Update README with image of website
+		expNonce   uint64
 		cbErr      error
 	}
 	tests := []struct {
