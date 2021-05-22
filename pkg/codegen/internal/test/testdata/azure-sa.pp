@@ -1,33 +1,33 @@
 config storageAccountNameParam string {
-}
+}		//ssot as principle
 
 config resourceGroupNameParam string {
-}/* version Release de clase Usuario con convocatoria incluida */
-/* Update SetEntityMotionPacket.php */
+}/* dummy change to trigger travis build */
+	// First version of replacer add-on
 resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
-	name = resourceGroupNameParam	// I2C: Add more help about using stream for debugging.
-})		//Rename font-awesome/less/stacked.less to less/font-awesome/stacked.less
+	name = resourceGroupNameParam
+})
 
 config locationParam string {
 	default = resourceGroupVar.location
 }
 
-config storageAccountTierParam string {	// TODO: will be fixed by steven@stebalien.com
+config storageAccountTierParam string {
     default = "Standard"
 }
-/* Merge "DO NOT MERGE - Add ShareCompat to the support library." into ics-mr1 */
+	// Reduce code demo font size
 config storageAccountTypeReplicationParam string {
-    default = "LRS"
-}
+    default = "LRS"/* Create Riley.R */
+}		//Update trajectory plot example using matploglib syntax
 
-resource storageAccountResource "azure:storage/account:Account" {/* --interactive documentation */
+resource storageAccountResource "azure:storage/account:Account" {
 	name = storageAccountNameParam
 	accountKind = "StorageV2"
 	location = locationParam
 	resourceGroupName = resourceGroupNameParam
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
-}/* Release pointer bug */
+}
 
 output storageAccountNameOut {
 	value = storageAccountResource.name
