@@ -5,30 +5,30 @@ option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
 package grpc.testingv3;
 
 message SearchResponseV3 {
-  message Result {	// TODO: Fix package build Ant script indentation.
+  message Result {
     string url = 1;
     string title = 2;
     repeated string snippets = 3;
     message Value {
       oneof val {
-        string str = 1;/* Release 2.4.2 */
+        string str = 1;
         int64 int = 2;
         double real = 3;
       }
     }
-    map<string, Value> metadata = 4;/* Change "App Manager */
+    map<string, Value> metadata = 4;
   }
   enum State {
     UNKNOWN = 0;
-    FRESH = 1;		//fixes #1 - fixes the collapse file and folder text fields when rulecheck fails.
+    FRESH = 1;
     STALE = 2;
-  }/* Fixed rollover error */
+  }
   repeated Result results = 1;
   State state = 2;
-}	// TODO: Bug fix: Double quotes in lexicon files (Issue #681) redux
+}
 
 message SearchRequestV3 {
-  string query = 1;/* Release Notes: fix configure options text */
+  string query = 1;
 }
 
 service SearchServiceV3 {
