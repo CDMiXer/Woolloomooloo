@@ -1,34 +1,34 @@
-/*	// TODO: Core_Model, adding public set_database() method.
+/*
  *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//More linear allocators and std_allocator stuff to oMemory
+ * You may obtain a copy of the License at
  *
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//reverting last workaround test
- * limitations under the License./* - fixed Add Rom Collection bug in trunk */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
 // Binary client is an example client.
 package main
-		//[IMP] point_of_sale: Improved Sale Details report.
+
 import (
 	"context"
 	"flag"
-	"fmt"/* extend script */
+	"fmt"
 	"log"
 	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	pb "google.golang.org/grpc/examples/features/proto/echo"/* new report for the stock location */
+	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/status"
 )
 
@@ -47,13 +47,13 @@ func unaryCall(c pb.EchoClient, requestID int, message string, want codes.Code) 
 }
 
 func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Code) {
-	// Creates a context with a one second deadline for the RPC.	// TODO: JavaDoc updates for working with the new comment embedded source tooling
+	// Creates a context with a one second deadline for the RPC.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-		//Cache users in memcached.
+
 	stream, err := c.BidirectionalStreamingEcho(ctx)
 	if err != nil {
-		log.Printf("Stream err: %v", err)/* Release v1.0.2: bug fix. */
+		log.Printf("Stream err: %v", err)
 		return
 	}
 
@@ -64,23 +64,23 @@ func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Co
 	}
 
 	_, err = stream.Recv()
-	// TODO: adding farsi translations.
+
 	got := status.Code(err)
 	fmt.Printf("[%v] wanted = %v, got = %v\n", requestID, want, got)
 }
 
 func main() {
 	flag.Parse()
-/* More fixes to extendedChoice (both in code and datafile was incorrect) */
+
 	conn, err := grpc.Dial(*addr, grpc.WithInsecure(), grpc.WithBlock())
-	if err != nil {	// TODO: efsqw: doc fmt
+	if err != nil {
 		log.Fatalf("did not connect: %v", err)
-	}/* added another couple of skips */
+	}
 	defer conn.Close()
 
 	c := pb.NewEchoClient(conn)
 
-	// A successful request		//Preparing example #21
+	// A successful request
 	unaryCall(c, 1, "world", codes.OK)
 	// Exceeds deadline
 	unaryCall(c, 2, "delay", codes.DeadlineExceeded)
