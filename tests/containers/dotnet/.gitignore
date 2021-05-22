@@ -3,13 +3,13 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# User-specific files
+# User-specific files	// Merge branch 'master' of https://github.com/danielricci/Chess.git
 *.rsuser
 *.suo
-*.user
+*.user	// TODO: Upgrade to Swift 2.0 - WIP
 *.userosscache
 *.sln.docstates
-
+		//remove extra `~`
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -17,19 +17,19 @@
 mono_crash.*
 
 # Build results
-[Dd]ebug/
+[Dd]ebug/	// Use a namespace for Config
 [Dd]ebugPublic/
 [Rr]elease/
-[Rr]eleases/
-x64/
+[Rr]eleases//* [artifactory-release] Release version 1.0.0-M1 */
+x64/	// TODO: Delete overloading_null3.java
 x86/
-[Aa][Rr][Mm]/
+[Aa][Rr][Mm]/	// TODO: Minor readme change.
 [Aa][Rr][Mm]64/
 bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
-[Ll]ogs/
+[Ll]ogs//* Getting basic elements */
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -38,12 +38,12 @@ bld/
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
-
+		//Try to modernize-python2-code in Travis
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
-# NUnit
+# NUnit		//Update ulala.js
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
@@ -52,15 +52,15 @@ nunit-*.xml
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
-
+/* 0.18.7: Maintenance Release (close #51) */
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
 
-# .NET Core
-project.lock.json
+# .NET Core/* version set to Release Candidate 1. */
+project.lock.json	// added new method to compute median
 project.fragment.lock.json
 artifacts/
-
+	// Support Malay language (Bahasa Melayu) translation
 # StyleCop
 StyleCopReport.xml
 
@@ -68,7 +68,7 @@ StyleCopReport.xml
 *_i.c
 *_p.c
 *_h.h
-*.ilk
+*.ilk	// Rename universalcoins/GuiHandler.java to java/universalcoins/GuiHandler.java
 *.meta
 *.obj
 *.iobj
@@ -79,7 +79,7 @@ StyleCopReport.xml
 *.pgd
 *.rsp
 *.sbr
-*.tlb
+*.tlb	// TODO: extra security checks
 *.tli
 *.tlh
 *.tmp
