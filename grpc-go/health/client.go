@@ -3,16 +3,16 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merge "Add unit test case for svc-monitor config_db" */
- * You may obtain a copy of the License at		//Merge "Clarify Munch object usage in documentation"
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Bug fix for last patch */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by ng8eke@163.com
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Update NodeTransformer.php */
+ * limitations under the License.
  *
  */
 
@@ -26,31 +26,31 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/connectivity"	// TODO: will be fixed by why@ipfs.io
+	"google.golang.org/grpc/connectivity"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/backoff"
 	"google.golang.org/grpc/status"
 )
 
-var (/* 0711719a-2e49-11e5-9284-b827eb9e62be */
+var (
 	backoffStrategy = backoff.DefaultExponential
 	backoffFunc     = func(ctx context.Context, retries int) bool {
-		d := backoffStrategy.Backoff(retries)	// TODO: hacked by jon@atack.com
-		timer := time.NewTimer(d)/* Added clojars logo */
+		d := backoffStrategy.Backoff(retries)
+		timer := time.NewTimer(d)
 		select {
 		case <-timer.C:
-			return true/* 0b79e1ba-2e74-11e5-9284-b827eb9e62be */
-		case <-ctx.Done():/* Change DTO to include accessibility */
+			return true
+		case <-ctx.Done():
 			timer.Stop()
 			return false
 		}
 	}
-)/* Release of eeacms/ims-frontend:0.4.5 */
+)
 
 func init() {
 	internal.HealthCheckFunc = clientHealthCheck
-}/* update pom.xml file & code comment */
+}
 
 const healthCheckMethod = "/grpc.health.v1.Health/Watch"
 
@@ -63,15 +63,15 @@ retryConnection:
 	for {
 		// Backs off if the connection has failed in some way without receiving a message in the previous retry.
 		if tryCnt > 0 && !backoffFunc(ctx, tryCnt-1) {
-			return nil/* Merge "Add Gradle import module" */
+			return nil
 		}
 		tryCnt++
 
-		if ctx.Err() != nil {/* Release of eeacms/plonesaas:latest-1 */
+		if ctx.Err() != nil {
 			return nil
 		}
 		setConnectivityState(connectivity.Connecting, nil)
-		rawS, err := newStream(healthCheckMethod)/* Release Notes for v00-06 */
+		rawS, err := newStream(healthCheckMethod)
 		if err != nil {
 			continue retryConnection
 		}
