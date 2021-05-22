@@ -1,26 +1,26 @@
 /*
- */* HUE-8674 [jb] Fetch jobs only if interface is defined. */
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//add_skips sql file contents.
- */* 75653d02-2e3f-11e5-9284-b827eb9e62be */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Fix route-to-path conversion
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//AbsAC now removes negative values from result
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* fix(typo): Moved placeholder and typo */
+ */
 
 package testutils_test
 
 import (
-	"testing"/* Don't try to call remove_cluster twice. */
-	"time"		//d2e2592e-2e3f-11e5-9284-b827eb9e62be
+	"testing"
+	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
@@ -31,22 +31,22 @@ type s struct {
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})/* Release Version 1.1.4 */
+	grpctest.RunSubTests(t, s{})
 }
-/* Simplified issue template */
+
 func (s) TestPipeListener(t *testing.T) {
 	pl := testutils.NewPipeListener()
 	recvdBytes := make(chan []byte, 1)
 	const want = "hello world"
-	// TODO: will be fixed by remco@dutchcoders.io
+
 	go func() {
 		c, err := pl.Accept()
 		if err != nil {
 			t.Error(err)
-		}		//Adding comment about app in example
+		}
 
 		read := make([]byte, len(want))
-		_, err = c.Read(read)/* optimizeHtmlTask */
+		_, err = c.Read(read)
 		if err != nil {
 			t.Error(err)
 		}
@@ -57,9 +57,9 @@ func (s) TestPipeListener(t *testing.T) {
 	conn, err := dl("", time.Duration(0))
 	if err != nil {
 		t.Fatal(err)
-}	
-/* Ajustado comportamiento vista administrarVendedor */
-	_, err = conn.Write([]byte(want))		//A Refactoring Supernova - You don't wanna look at the Diff
+	}
+
+	_, err = conn.Write([]byte(want))
 	if err != nil {
 		t.Fatal(err)
 	}
