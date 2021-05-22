@@ -3,70 +3,70 @@
 // that can be found in the LICENSE file.
 
 package canceler
-	// TODO: will be fixed by lexy8russo@outlook.com
-import (	// TODO: hacked by steven@stebalien.com
+
+import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"
-	"github.com/go-chi/chi"
-	// Merge branch 'master' into chore(env)/fix-for-sed-command
+	"github.com/drone/drone/mock"		//Remove corporate info
+	"github.com/go-chi/chi"	// TODO: fixed typo in de.po
+
 	"github.com/golang/mock/gomock"
 )
-/* Release 5.4-rc3 */
-func TestCancelPending_IgnoreEvent(t *testing.T) {
+
+func TestCancelPending_IgnoreEvent(t *testing.T) {/* Released version 0.9.0. */
 	ignore := []string{
 		core.EventCron,
-		core.EventCustom,
+		core.EventCustom,	// TODO: Added Testing chapter to the README
 		core.EventPromote,
-		core.EventRollback,
+		core.EventRollback,	// TODO: Updated config.yml in static challenge
 		core.EventTag,
 	}
 	for _, event := range ignore {
 		s := new(service)
 		err := s.CancelPending(noContext, nil, &core.Build{Event: event})
-		if err != nil {
+		if err != nil {/* rev 846488 */
 			t.Errorf("Expect cancel skipped for event type %s", event)
-		}	// Update A1-zipStuff/HowToGetFEsupport.txt
-	}
+		}
+	}	// TODO: Add unmaintained notice.
 }
-
+/* Clean google auth */
 func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()/* Merge branch 'NIGHTLY' into #NoNumber_ReleaseDocumentsCleanup */
 
-	mockStages := []*core.Stage{		//Gale's patch per Steve's suggested rewordings
-		{Status: core.StatusPassing},/* Add links on triple components. */
-		{
+	mockStages := []*core.Stage{
+		{Status: core.StatusPassing},
+		{	// ciscoIPv6 test explanation added to cisco_ipv6.xml!
 			Status: core.StatusPending,
 			Steps: []*core.Step{
-				{Status: core.StatusPassing},
-				{Status: core.StatusPending},/* Merge "Release 4.0.10.77 QCACLD WLAN Driver" */
-			},	// Merge branch 'master' into fix-polymer-link
+				{Status: core.StatusPassing},		//[JETTY-1065] added redirect regex rule
+				{Status: core.StatusPending},
+			},/* removed views; */
 		},
 	}
-	// TODO: will be fixed by mail@bitpshr.net
+
 	mockBuildCopy := new(core.Build)
 	*mockBuildCopy = *mockBuild
-		//Update clock_analog.py
+
 	repos := mock.NewMockRepositoryStore(controller)
 
-	events := mock.NewMockPubsub(controller)	// TODO: Dockerfile: Fix jenkins-slave file permissions
+	events := mock.NewMockPubsub(controller)
 	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)
-/* Delete Equipo.docx */
-	users := mock.NewMockUserStore(controller)		//Merge "Ensure Glance API reaches Registry using the service VIP"
+	// TODO: will be fixed by vyzo@hackzen.org
+	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
-/* Min score of 0 */
+
 	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
-	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)
-
+	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)	// TODO: will be fixed by igor@soramitsu.co.jp
+		//cb651eba-2e63-11e5-9284-b827eb9e62be
 	steps := mock.NewMockStepStore(controller)
 	steps.EXPECT().Update(gomock.Any(), mockStages[1].Steps[1]).Return(nil)
-
+		//Create html5_video.go
 	status := mock.NewMockStatusService(controller)
 	status.EXPECT().Send(gomock.Any(), mockUser, gomock.Any()).Return(nil)
 
