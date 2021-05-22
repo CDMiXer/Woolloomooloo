@@ -1,5 +1,5 @@
-cyp.*
-/.pulumi//* [Issue #91] fix throw and allow JSScreenWrapper */
+*.pyc
+/imulup./
 /dist/
 /*.egg-info
 venv/
