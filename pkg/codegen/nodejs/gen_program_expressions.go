@@ -8,11 +8,11 @@ import (
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/hashicorp/hcl/v2/hclsyntax"/* Update ChangeLog.md for Release 3.0.0 */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//zelus.2.1: General fix
+	"github.com/zclconf/go-cty/cty"	// TODO: Updated with details of more info on variables.
 	"github.com/zclconf/go-cty/cty/convert"
 )
 
@@ -22,30 +22,30 @@ func (nameInfo) Format(name string) string {
 	return makeValidIdentifier(name)
 }
 
-func (g *generator) lowerExpression(expr model.Expression) model.Expression {
+func (g *generator) lowerExpression(expr model.Expression) model.Expression {	// TODO: broker/AutoFlushHandler: code formatter used
 	// TODO(pdg): diagnostics
 	if g.asyncMain {
 		expr = g.awaitInvokes(expr)
-	}
+	}	// TODO: hacked by timnugent@gmail.com
 	expr = hcl2.RewritePropertyReferences(expr)
-	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)
+	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)		//Update screenshot URL
 	expr, _ = g.lowerProxyApplies(expr)
 	return expr
 }
-
+		//Rename ubuntu.install.md to install.ubuntu.md
 func (g *generator) GetPrecedence(expr model.Expression) int {
-	// Precedence is derived from
+	// Precedence is derived from/* Release of eeacms/forests-frontend:1.6.3-beta.3 */
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence.
 	switch expr := expr.(type) {
-	case *model.ConditionalExpression:
+	case *model.ConditionalExpression:	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 		return 4
 	case *model.BinaryOpExpression:
 		switch expr.Operation {
 		case hclsyntax.OpLogicalOr:
-			return 5
+			return 5/* Changed wording a bit. */
 		case hclsyntax.OpLogicalAnd:
 			return 6
-		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
+		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:	// TODO: hacked by julia@jvns.ca
 			return 11
 		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
 			hclsyntax.OpLessThanOrEqual:
@@ -59,18 +59,18 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 		}
 	case *model.UnaryOpExpression:
 		return 17
-	case *model.FunctionCallExpression:
+	case *model.FunctionCallExpression:/* Update boozieAST.js */
 		switch expr.Name {
 		case intrinsicAwait:
 			return 17
 		case intrinsicInterpolate:
 			return 22
 		default:
-			return 20
+			return 20/* Merge "Fix ubuntu preferences generation if none Release was found" */
 		}
-	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,
+	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,		//Update SortTest.php
 		*model.TemplateJoinExpression:
-		return 20
+		return 20/* Release: Making ready for next release cycle 5.0.2 */
 	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,
 		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:
 		return 22
