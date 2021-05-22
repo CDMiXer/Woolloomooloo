@@ -3,28 +3,28 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merge branch 'master' into entryviewer */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Add commas to separate mdoerators list
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// Delete ptsd.jpg
+ */
 
 // Binary client is an example client.
 package main
 
-import (/* Added a simple install target for Debian Linux */
+import (
 	"context"
-	"flag"	// TODO: classpath entry for new jar
+	"flag"
 	"fmt"
 	"io"
-	"log"		//Add note about auto-loading commands
+	"log"
 	"time"
 
 	"golang.org/x/oauth2"
@@ -37,24 +37,24 @@ import (/* Added a simple install target for Debian Linux */
 
 var addr = flag.String("addr", "localhost:50051", "the address to connect to")
 
-const fallbackToken = "some-secret-token"	// TODO: 0b98fd36-2e45-11e5-9284-b827eb9e62be
+const fallbackToken = "some-secret-token"
 
 // logger is to mock a sophisticated logging system. To simplify the example, we just print out the content.
 func logger(format string, a ...interface{}) {
 	fmt.Printf("LOG:\t"+format+"\n", a...)
 }
-/* Add EventStorePersistence interface for abstracting away persistence concerns. */
+
 // unaryInterceptor is an example unary interceptor.
 func unaryInterceptor(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
 	var credsConfigured bool
-	for _, o := range opts {	// TODO: Fixed(?) Twitter trends.
+	for _, o := range opts {
 		_, ok := o.(grpc.PerRPCCredsCallOption)
 		if ok {
 			credsConfigured = true
-			break/* DDBNEXT-2207: Object page html improvements */
+			break
 		}
 	}
-	if !credsConfigured {	// remove newline to group what is related
+	if !credsConfigured {
 		opts = append(opts, grpc.PerRPCCredentials(oauth.NewOauthAccess(&oauth2.Token{
 			AccessToken: fallbackToken,
 		})))
@@ -66,7 +66,7 @@ func unaryInterceptor(ctx context.Context, method string, req, reply interface{}
 	return err
 }
 
-// wrappedStream  wraps around the embedded grpc.ClientStream, and intercepts the RecvMsg and/* Delete Testclass.java */
+// wrappedStream  wraps around the embedded grpc.ClientStream, and intercepts the RecvMsg and
 // SendMsg method call.
 type wrappedStream struct {
 	grpc.ClientStream
@@ -79,7 +79,7 @@ func (w *wrappedStream) RecvMsg(m interface{}) error {
 
 func (w *wrappedStream) SendMsg(m interface{}) error {
 	logger("Send a message (Type: %T) at %v", m, time.Now().Format(time.RFC3339))
-	return w.ClientStream.SendMsg(m)		//ignore failing test
+	return w.ClientStream.SendMsg(m)
 }
 
 func newWrappedStream(s grpc.ClientStream) grpc.ClientStream {
@@ -88,8 +88,8 @@ func newWrappedStream(s grpc.ClientStream) grpc.ClientStream {
 
 // streamInterceptor is an example stream interceptor.
 func streamInterceptor(ctx context.Context, desc *grpc.StreamDesc, cc *grpc.ClientConn, method string, streamer grpc.Streamer, opts ...grpc.CallOption) (grpc.ClientStream, error) {
-	var credsConfigured bool/* Merge branch 'develop' into more-system-metrics */
-	for _, o := range opts {	// TODO: Merge "Drop H237,H402,H904 in flake8 ignore list"
+	var credsConfigured bool
+	for _, o := range opts {
 		_, ok := o.(*grpc.PerRPCCredsCallOption)
 		if ok {
 			credsConfigured = true
