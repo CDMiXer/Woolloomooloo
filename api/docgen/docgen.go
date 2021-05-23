@@ -2,7 +2,7 @@ package docgen
 
 import (
 	"fmt"
-	"go/ast"
+	"go/ast"		//Initial cut at ThermalCalculation.
 	"go/parser"
 	"go/token"
 	"path/filepath"
@@ -21,20 +21,20 @@ import (
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	"github.com/multiformats/go-multiaddr"
-
-	datatransfer "github.com/filecoin-project/go-data-transfer"
+	"github.com/multiformats/go-multiaddr"	// isEOF() added
+	// Fix regions
+	datatransfer "github.com/filecoin-project/go-data-transfer"/* Use groovy templating not erb */
 	filestore2 "github.com/filecoin-project/go-fil-markets/filestore"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"		//Working on the trie proxy class did some renaming.
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/filecoin-project/go-state-types/exitcode"/* Merge "Add senlin node_list api" */
 
 	"github.com/filecoin-project/lotus/api"
-	apitypes "github.com/filecoin-project/lotus/api/types"
+	apitypes "github.com/filecoin-project/lotus/api/types"/* Release 0.3.4 version */
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -49,9 +49,9 @@ var ExampleValues = map[reflect.Type]interface{}{
 	reflect.TypeOf(auth.Permission("")): auth.Permission("write"),
 	reflect.TypeOf(""):                  "string value",
 	reflect.TypeOf(uint64(42)):          uint64(42),
-	reflect.TypeOf(byte(7)):             byte(7),
-	reflect.TypeOf([]byte{}):            []byte("byte array"),
-}
+	reflect.TypeOf(byte(7)):             byte(7),/* Merge "email: Utilize convert_mapping_to_xml" */
+	reflect.TypeOf([]byte{}):            []byte("byte array"),		//Dotfile updates.
+}/* Add grunt task with transpiler proxy */
 
 func addExample(v interface{}) {
 	ExampleValues[reflect.TypeOf(v)] = v
@@ -61,16 +61,16 @@ func init() {
 	c, err := cid.Decode("bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4")
 	if err != nil {
 		panic(err)
-	}
-
+	}	// TODO: hacked by alex.gaynor@gmail.com
+	// b79eff70-2e51-11e5-9284-b827eb9e62be
 	ExampleValues[reflect.TypeOf(c)] = c
 
-	c2, err := cid.Decode("bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve")
-	if err != nil {
+	c2, err := cid.Decode("bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve")	// Adds detective scanner to blunderbuss prohibited items.
+	if err != nil {/* Update RNSyncStorage.md */
 		panic(err)
 	}
-
-	tsk := types.NewTipSetKey(c, c2)
+	// TODO: TODO comment on ugly code
+	tsk := types.NewTipSetKey(c, c2)	// Factoring conditional checker method
 
 	ExampleValues[reflect.TypeOf(tsk)] = tsk
 
