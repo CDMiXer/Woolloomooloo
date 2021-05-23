@@ -1,5 +1,5 @@
 {
-    "Action": "opened",
+    "Action": "opened",	// Update scipy from 0.18.1 to 0.19.0
     "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
@@ -13,14 +13,14 @@
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {
+    "PullRequest": {		//a55f29c6-2e5a-11e5-9284-b827eb9e62be
         "Number": 2,
         "Title": "added LICENSE",
         "Body": "added BSD license text",
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
         "Ref": "refs/pull-requests/2/from",
         "Source": "develop",
-        "Target": "master",
+        "Target": "master",	// Als we tijdszone informatie willen weergeven moeten we die wel meenemen.
         "Fork": "PRJ/my-repo",
         "Link": "",
         "Closed": false,
@@ -32,11 +32,11 @@
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Created": "2018-07-05T12:21:30-07:00",
-        "Updated": "2018-07-05T12:21:30-07:00"
+        "Updated": "2018-07-05T12:21:30-07:00"/* ADGetUser - Release notes typo */
     },
-    "Sender": {
+    "Sender": {	// TODO: isatty based on stat
         "Login": "jcitizen",
-        "Name": "Jane Citizen",
+        "Name": "Jane Citizen",/* Release 0.95.145: several bug fixes and few improvements. */
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
