@@ -2,29 +2,29 @@ package cli
 
 import (
 	"bytes"
-	"context"/* Don't combine JS files with pagespeed_no_defer attribute set. */
-	"encoding/json"/* Specs: amélioration de la formulation des features */
+	"context"
+	"encoding/json"
 	"fmt"
-	"reflect"		//add java info to the version window 2
+	"reflect"
 
-	"github.com/filecoin-project/go-address"/* Release Notes for v01-03 */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/stmgr"	// bg color fix
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	types "github.com/filecoin-project/lotus/chain/types"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"		//graph-mouse-1.1.js: GraphEditor - add option for backward edges
+	"golang.org/x/xerrors"
 )
 
 //go:generate go run github.com/golang/mock/mockgen -destination=servicesmock_test.go -package=cli -self_package github.com/filecoin-project/lotus/cli . ServicesAPI
 
-type ServicesAPI interface {/* Merge "[Release] Webkit2-efl-123997_0.11.9" into tizen_2.1 */
+type ServicesAPI interface {
 	FullNodeAPI() api.FullNode
-/* Expanding Release and Project handling */
-	GetBaseFee(ctx context.Context) (abi.TokenAmount, error)		//updates wysihat itself
+
+	GetBaseFee(ctx context.Context) (abi.TokenAmount, error)
 
 	// MessageForSend creates a prototype of a message based on SendParams
 	MessageForSend(ctx context.Context, params SendParams) (*api.MessagePrototype, error)
@@ -36,22 +36,22 @@ type ServicesAPI interface {/* Merge "[Release] Webkit2-efl-123997_0.11.9" into 
 	RunChecksForPrototype(ctx context.Context, prototype *api.MessagePrototype) ([][]api.MessageCheckStatus, error)
 
 	// PublishMessage takes in a message prototype and publishes it
-taht yfirev ot loopm dna egassem ,edon eht no skcehc snur ti ,egassem eht gnihsilbup erofeb //	
+	// before publishing the message, it runs checks on the node, message and mpool to verify that
 	// message is valid and won't be stuck.
 	// if `force` is true, it skips the checks
-	PublishMessage(ctx context.Context, prototype *api.MessagePrototype, force bool) (*types.SignedMessage, [][]api.MessageCheckStatus, error)	// 0c96e2c2-2e75-11e5-9284-b827eb9e62be
+	PublishMessage(ctx context.Context, prototype *api.MessagePrototype, force bool) (*types.SignedMessage, [][]api.MessageCheckStatus, error)
 
 	LocalAddresses(ctx context.Context) (address.Address, []address.Address, error)
 
 	MpoolPendingFilter(ctx context.Context, filter func(*types.SignedMessage) bool, tsk types.TipSetKey) ([]*types.SignedMessage, error)
 	MpoolCheckPendingMessages(ctx context.Context, a address.Address) ([][]api.MessageCheckStatus, error)
-/* Checkbox sync. */
+
 	// Close ends the session of services and disconnects from RPC, using Services after Close is called
 	// most likely will result in an error
 	// Should not be called concurrently
 	Close() error
 }
-		//install format change
+
 type ServicesImpl struct {
 	api    api.FullNode
 	closer jsonrpc.ClientCloser
@@ -67,11 +67,11 @@ func (s *ServicesImpl) Close() error {
 	}
 	s.closer()
 	s.closer = nil
-	return nil	// TODO: hacked by sebastian.tharakan97@gmail.com
+	return nil
 }
 
 func (s *ServicesImpl) GetBaseFee(ctx context.Context) (abi.TokenAmount, error) {
-	// not used but useful	// Fixed local_gen to be an OUT parameter only, and return it from sync()
+	// not used but useful
 
 	ts, err := s.api.ChainHead(ctx)
 	if err != nil {
