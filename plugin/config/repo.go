@@ -1,12 +1,12 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by arajasek94@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Update endevs.lua
-///* Release 2.2b1 */
-//      http://www.apache.org/licenses/LICENSE-2.0		//Issue 37 has been fixed. http://code.google.com/p/guichan/issues/detail?id=37
+// You may obtain a copy of the License at
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by fjl@ethereum.org
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -20,13 +20,13 @@ import (
 	"github.com/drone/drone/core"
 )
 
-// Repository returns a configuration service that fetches the yaml/* Release notes for v2.11. "As factor" added to stat-several-groups.R. */
+// Repository returns a configuration service that fetches the yaml
 // directly from the source code management (scm) system.
-func Repository(service core.FileService) core.ConfigService {	// TODO: will be fixed by sjors@sprovoost.nl
-	return &repo{files: service}		//Create parameters.cka
+func Repository(service core.FileService) core.ConfigService {
+	return &repo{files: service}
 }
 
-type repo struct {/* 13860aba-2e5a-11e5-9284-b827eb9e62be */
+type repo struct {
 	files core.FileService
 }
 
@@ -36,6 +36,6 @@ func (r *repo) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config, er
 		return nil, err
 	}
 	return &core.Config{
-		Data: string(raw.Data),	// Change gem.homepage to new location
+		Data: string(raw.Data),
 	}, err
 }
