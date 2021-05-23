@@ -1,12 +1,12 @@
-{/* Only allowed to review a book if the user is logged in */
+{/* Update Readme / Binary Release */
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",	// CWS gnumake2: intermediate commit (module rework)
     "devDependencies": {
         "typescript": "^2.5.3"
-    },		//add 'npm test' command
-    "peerDependencies": {		//Initialize views after Nib has loaded.
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
