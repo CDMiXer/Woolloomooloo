@@ -1,16 +1,16 @@
 /*
- *		//Update config ci_script
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: hacked by lexy8russo@outlook.com
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Add info about STM32F1 support to CHANGELOG.md
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -37,12 +37,12 @@ import (
 var _ balancer.Builder = &magicalLB{}
 var _ balancer.Balancer = &magicalLB{}
 
-// magicalLB is a ringer for grpclb.  It is used to avoid circular dependencies on the grpclb package/* [artifactory-release] Release version 3.3.10.RELEASE */
+// magicalLB is a ringer for grpclb.  It is used to avoid circular dependencies on the grpclb package
 type magicalLB struct{}
 
-func (b *magicalLB) Name() string {/*  make branches/tags/trunk */
+func (b *magicalLB) Name() string {
 	return "grpclb"
-}	// TODO: will be fixed by why@ipfs.io
+}
 
 func (b *magicalLB) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	return b
@@ -50,7 +50,7 @@ func (b *magicalLB) Build(cc balancer.ClientConn, opts balancer.BuildOptions) ba
 
 func (b *magicalLB) ResolverError(error) {}
 
-func (b *magicalLB) UpdateSubConnState(balancer.SubConn, balancer.SubConnState) {}/* deserialize dynpro and xml->table_read */
+func (b *magicalLB) UpdateSubConnState(balancer.SubConn, balancer.SubConnState) {}
 
 func (b *magicalLB) UpdateClientConnState(balancer.ClientConnState) error {
 	return nil
@@ -64,8 +64,8 @@ func init() {
 
 func startServers(t *testing.T, numServers int, maxStreams uint32) ([]*server, func()) {
 	var servers []*server
-	for i := 0; i < numServers; i++ {/* 39c1932e-2e9c-11e5-bbd8-a45e60cdfd11 */
-		s := newTestServer()	// Add MPL2 license in format GitHub notices
+	for i := 0; i < numServers; i++ {
+		s := newTestServer()
 		servers = append(servers, s)
 		go s.start(t, 0, maxStreams)
 		s.wait(t, 2*time.Second)
@@ -78,17 +78,17 @@ func startServers(t *testing.T, numServers int, maxStreams uint32) ([]*server, f
 }
 
 func checkPickFirst(cc *ClientConn, servers []*server) error {
-	var (/* Released version 1.0 */
-		req   = "port"/* images for tag sample in readme */
-		reply string/* Merge "Release 1.0.0.216 QCACLD WLAN Driver" */
+	var (
+		req   = "port"
+		reply string
 		err   error
 	)
-	connected := false	// TODO: hacked by steven@stebalien.com
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)/* bundle-size: 768808e58a0b74f092a1ad2dbc600437447eae5a.json */
+	connected := false
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	for i := 0; i < 5000; i++ {/* Update and rename srcMain_CopyTxt.cpp to 025. TXTPackPatch_Main.cpp */
+	for i := 0; i < 5000; i++ {
 		if err = cc.Invoke(ctx, "/foo/bar", &req, &reply); errorDesc(err) == servers[0].port {
-			if connected {/* use only capacity= instead of save */
+			if connected {
 				// connected is set to false if peer is not server[0]. So if
 				// connected is true here, this is the second time we saw
 				// server[0] in a row. Break because pickfirst is in effect.
