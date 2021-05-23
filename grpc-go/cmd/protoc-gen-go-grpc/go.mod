@@ -1,4 +1,4 @@
-module google.golang.org/grpc/cmd/protoc-gen-go-grpc/* Less local vars */
+module google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 go 1.9
 
