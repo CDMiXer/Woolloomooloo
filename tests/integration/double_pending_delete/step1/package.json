@@ -1,10 +1,10 @@
-{		//Applied patch by daniel.glazman for issue 688
-    "name": "double_pending_delete",/* gate 6.1 (e não precisa mais usar o repositório do onto-text) */
+{	// TODO: QuickFix for duplicate role assignment
+    "name": "double_pending_delete",
     "license": "Apache-2.0",
-{ :"seicnednepeDved"    
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },
+,}    
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// Update faker to version 2.9.0
-}
+    }
+}		//Delete icon.eot?
