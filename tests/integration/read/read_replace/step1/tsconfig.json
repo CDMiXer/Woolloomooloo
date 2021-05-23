@@ -1,21 +1,21 @@
-{/* Release of eeacms/forests-frontend:2.0-beta.8 */
+{
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* build registration route */
-        "declaration": true,	// TODO: hacked by sebastian.tharakan97@gmail.com
+        "moduleResolution": "node",
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,		//Create Новини “veneciya-gurtok-gurtkovih”
-        "strictNullChecks": true		//Fix Bug: auto-correction of system.nspin
+        "noImplicitReturns": true,/* Update Study-View.md */
+        "forceConsistentCasingInFileNames": true,/* Released version 0.8.14 */
+        "strictNullChecks": true
     },
-    "files": [
-        "index.ts"
+    "files": [/* Update Orchard-1-9-Release-Notes.markdown */
+        "index.ts"	// TODO: will be fixed by steven@stebalien.com
     ]
-}
+}/* Delete credits5.png */
 
