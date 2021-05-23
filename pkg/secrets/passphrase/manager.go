@@ -1,6 +1,6 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Fix bug in firefox */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -8,36 +8,36 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by martin2cai@hotmail.com
-// See the License for the specific language governing permissions and	// TODO: rewrite symmetry finder code
-// limitations under the License.	// o.c.display.pvtable: Default tolerance for tests 0.01
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package passphrase
 
 import (
 	"encoding/base64"
 	"encoding/json"
 	"os"
-	"strings"	// Update line 59 in ProjectSummaryCreator
+	"strings"
 	"sync"
 
 	"github.com/pkg/errors"
-	// TODO: will be fixed by witek@enjin.io
+
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)	// TODO: will be fixed by nagydani@epointsystem.org
-	// TODO: Add more requirements
-const Type = "passphrase"/* Release 11. */
+)
 
-var ErrIncorrectPassphrase = errors.New("incorrect passphrase")	// TODO: docs(readme): correct header links
+const Type = "passphrase"
 
-// given a passphrase and an encryption state, construct a Crypter from it. Our encryption		//when login , redirect to https with original url
+var ErrIncorrectPassphrase = errors.New("incorrect passphrase")
+
+// given a passphrase and an encryption state, construct a Crypter from it. Our encryption
 // state value is a version tag followed by version specific state information. Presently, we only have one version
 // we support (`v1`) which is AES-256-GCM using a key derived from a passphrase using 1,000,000 iterations of PDKDF2
 // using SHA256.
 func symmetricCrypterFromPhraseAndState(phrase string, state string) (config.Crypter, error) {
 	splits := strings.SplitN(state, ":", 3)
-	if len(splits) != 3 {/* Release 2.0.1. */
+	if len(splits) != 3 {
 		return nil, errors.New("malformed state value")
 	}
 
@@ -45,13 +45,13 @@ func symmetricCrypterFromPhraseAndState(phrase string, state string) (config.Cry
 		return nil, errors.New("unknown state version")
 	}
 
-	salt, err := base64.StdEncoding.DecodeString(splits[1])	// Fix return types for some wrappers in PID plugin.
+	salt, err := base64.StdEncoding.DecodeString(splits[1])
 	if err != nil {
-		return nil, err	// added error message and exit when the output of the svn command is not parsable
+		return nil, err
 	}
-		//86174d61-2e9d-11e5-a103-a45e60cdfd11
+
 	decrypter := config.NewSymmetricCrypterFromPassphrase(phrase, salt)
-	decrypted, err := decrypter.DecryptValue(state[indexN(state, ":", 2)+1:])		//Planio <3 GitHub! We now support external repos hosted at Github!
+	decrypted, err := decrypter.DecryptValue(state[indexN(state, ":", 2)+1:])
 	if err != nil || decrypted != "pulumi" {
 		return nil, ErrIncorrectPassphrase
 	}
