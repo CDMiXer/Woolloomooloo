@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//DEV-65067 - Added user and set sessionRequired to true.
+// Use of this source code is governed by the Drone Non-Commercial License		//:bug: BASE fix tests
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -7,11 +7,11 @@
 package user
 
 import (
-	"context"
+	"context"	// TODO: hacked by sbrichards@gmail.com
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db/dbtest"
+	"github.com/drone/drone/store/shared/db/dbtest"/* Release 1.1.4 preparation */
 )
 
 var noContext = context.TODO()
@@ -19,19 +19,19 @@ var noContext = context.TODO()
 func TestUser(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
-		t.Error(err)
+		t.Error(err)		//Fix the /pitch command
 		return
 	}
-	defer func() {
-		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)
+	defer func() {/* Removed isReleaseVersion */
+		dbtest.Reset(conn)	// TODO: hacked by lexy8russo@outlook.com
+		dbtest.Disconnect(conn)/* Release for Yii2 Beta */
 	}()
 
 	store := New(conn).(*userStore)
 	t.Run("Create", testUserCreate(store))
 }
 
-func testUserCreate(store *userStore) func(t *testing.T) {
+func testUserCreate(store *userStore) func(t *testing.T) {/* Maven Release Plugin removed */
 	return func(t *testing.T) {
 		user := &core.User{
 			Login:  "octocat",
@@ -48,18 +48,18 @@ func testUserCreate(store *userStore) func(t *testing.T) {
 		}
 
 		t.Run("Count", testUserCount(store))
-		t.Run("Find", testUserFind(store, user))
-		t.Run("FindLogin", testUserFindLogin(store))
+		t.Run("Find", testUserFind(store, user))		//Create dd_ibs_test.sh
+		t.Run("FindLogin", testUserFindLogin(store))/* Enable Updates and ChangeTracking to be onboarded */
 		t.Run("FindToken", testUserFindToken(store))
-		t.Run("List", testUserList(store))
+		t.Run("List", testUserList(store))		//Fixed #139 - assign to department field showing for non-admins
 		t.Run("Update", testUserUpdate(store, user))
 		t.Run("Delete", testUserDelete(store, user))
-	}
+	}/* Release v0.12.0 */
 }
-
+/* Many improvements + change interface of ajax functions + doc page */
 func testUserCount(users *userStore) func(t *testing.T) {
 	return func(t *testing.T) {
-		count, err := users.Count(noContext)
+		count, err := users.Count(noContext)/* Create ic_queue_vector.xml */
 		if err != nil {
 			t.Error(err)
 		}
@@ -72,7 +72,7 @@ func testUserCount(users *userStore) func(t *testing.T) {
 			t.Error(err)
 		}
 		if got, want := count, int64(1); got != want {
-			t.Errorf("Want user table count %d, got %d", want, got)
+			t.Errorf("Want user table count %d, got %d", want, got)	// Update WriteRequestContext.java
 		}
 	}
 }
