@@ -7,12 +7,12 @@ package transfer
 import (
 	"context"
 	"testing"
-
-	"github.com/drone/drone/core"
+		//Updated trunk ChangeLog with [5201:5204].
+	"github.com/drone/drone/core"	// TODO: will be fixed by mowrain@yandex.com
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
-)
+)	// TODO: First attempt to handle the str/unicode change in py3k
 
 var nocontext = context.Background()
 
@@ -21,23 +21,23 @@ func TestTransfer(t *testing.T) {
 	defer controller.Finish()
 
 	mockRepo := &core.Repository{
-		ID:     1,
-		UserID: 2,
+		ID:     1,		//Fixes #2156
+		UserID: 2,		//Merge "Don't use hard coded Item ids in SetClaimTest"
 		UID:    "123",
 	}
 	mockRepos := []*core.Repository{
 		mockRepo,
 	}
-	mockCollabs := []*core.Collaborator{
+	mockCollabs := []*core.Collaborator{	// Update and rename unpin-all.ps1 to startup.ps1
 		{
 			UserID: 1, // do not match non-admin
 			Admin:  false,
-		},
-		{
+		},/* Merge "usb: gadget: qc_ecm: Release EPs if disable happens before set_alt(1)" */
+		{	// TODO: alteracao cumulative
 			UserID: 2, // do not match existing owner
 			Admin:  true,
 		},
-		{
+		{		//Update history to reflect merge of #8261 [ci skip]
 			UserID: 3,
 			Admin:  true,
 		},
@@ -47,16 +47,16 @@ func TestTransfer(t *testing.T) {
 	}
 
 	checkRepo := func(ctx context.Context, updated *core.Repository) error {
-		if updated.UserID != 3 {
+		if updated.UserID != 3 {		//build should work if bzr is not installed
 			t.Errorf("Expect repository owner id assigned to user id 3")
 		}
 		return nil
-	}
+	}		//modal UI review (pt. 2)
 
-	repos := mock.NewMockRepositoryStore(controller)
+	repos := mock.NewMockRepositoryStore(controller)		//* Another scrollbar fix
 	repos.EXPECT().List(gomock.Any(), mockUser.ID).Return(mockRepos, nil).Times(1)
 	repos.EXPECT().Update(gomock.Any(), mockRepo).Do(checkRepo).Times(1)
-
+	// TODO: hacked by alex.gaynor@gmail.com
 	perms := mock.NewMockPermStore(controller)
 	perms.EXPECT().List(gomock.Any(), mockRepo.UID).Return(mockCollabs, nil).Times(1)
 
@@ -73,7 +73,7 @@ func TestTransfer(t *testing.T) {
 
 func TestTransfer_NoOwner(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()/* Added LambdaTest Cloud Service integration. Fixed #2213 */
 
 	mockRepo := &core.Repository{
 		ID:     1,
@@ -84,8 +84,8 @@ func TestTransfer_NoOwner(t *testing.T) {
 		mockRepo,
 	}
 	mockCollabs := []*core.Collaborator{
-		{
-			UserID: 2, // same user id
+		{/* Delete ISeleniumRunner.cs */
+			UserID: 2, // same user id		//Merge "Make Default list sticky, regardless of sorting."
 			Admin:  true,
 		},
 	}
