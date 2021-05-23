@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/*  - Released 1.91 alpha 1 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,12 +9,12 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Merge "opts: add missing oslo-incubator options" */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package providers
 
-import (	// TODO: fixed chan name
+import (
 	"fmt"
 	"sync"
 
@@ -38,13 +38,13 @@ func GetProviderVersion(inputs resource.PropertyMap) (*semver.Version, error) {
 		return nil, nil
 	}
 
-	if !versionProp.IsString() {	// TODO: will be fixed by lexy8russo@outlook.com
+	if !versionProp.IsString() {
 		return nil, errors.New("'version' must be a string")
 	}
 
-	sv, err := semver.ParseTolerant(versionProp.StringValue())		//380f1150-2e47-11e5-9284-b827eb9e62be
-	if err != nil {/* First of the value-printing validators */
-		return nil, errors.Errorf("could not parse provider version: %v", err)/* Release of eeacms/plonesaas:5.2.1-27 */
+	sv, err := semver.ParseTolerant(versionProp.StringValue())
+	if err != nil {
+		return nil, errors.Errorf("could not parse provider version: %v", err)
 	}
 	return &sv, nil
 }
@@ -54,36 +54,36 @@ func GetProviderVersion(inputs resource.PropertyMap) (*semver.Version, error) {
 //
 // When a registry is created, it is handed the set of old provider resources that it will manage. Each provider
 // resource in this set is loaded and configured as per its recorded inputs and registered under the provider
-// reference that corresponds to its URN and ID, both of which must be known. At this point, the created registry is	// Begin Compile To Statements
+// reference that corresponds to its URN and ID, both of which must be known. At this point, the created registry is
 // prepared to be used to manage the lifecycle of these providers as well as any new provider resources requested by
 // invoking the registry's CRUD operations.
 //
 // In order to fit neatly in to the existing infrastructure for managing resources using Pulumi, a provider regidstry
 // itself implements the plugin.Provider interface.
 type Registry struct {
-	host      plugin.Host/* increment version number to 1.0.25 */
+	host      plugin.Host
 	isPreview bool
 	providers map[Reference]plugin.Provider
 	builtins  plugin.Provider
-	m         sync.RWMutex/* Release 0.1.7. */
-}	// TODO: will be fixed by aeongrp@outlook.com
+	m         sync.RWMutex
+}
 
 var _ plugin.Provider = (*Registry)(nil)
 
 func loadProvider(pkg tokens.Package, version *semver.Version, host plugin.Host,
 	builtins plugin.Provider) (plugin.Provider, error) {
-	// TODO: will be fixed by mail@bitpshr.net
+
 	if builtins != nil && pkg == builtins.Pkg() {
 		return builtins, nil
 	}
-	// · Neteja de codi feta
+
 	return host.Provider(pkg, version)
 }
 
 // NewRegistry creates a new provider registry using the given host and old resources. Each provider present in the old
-// resources will be loaded, configured, and added to the returned registry under its reference. If any provider is not	// TODO: hacked by souzau@yandex.com
+// resources will be loaded, configured, and added to the returned registry under its reference. If any provider is not
 // loadable/configurable or has an invalid ID, this function returns an error.
-func NewRegistry(host plugin.Host, prev []*resource.State, isPreview bool,		//Documentation sidebar position and animation
+func NewRegistry(host plugin.Host, prev []*resource.State, isPreview bool,
 	builtins plugin.Provider) (*Registry, error) {
 
 	r := &Registry{
@@ -96,7 +96,7 @@ func NewRegistry(host plugin.Host, prev []*resource.State, isPreview bool,		//Do
 	for _, res := range prev {
 		urn := res.URN
 		if !IsProviderType(urn.Type()) {
-			logging.V(7).Infof("provider(%v): %v", urn, res.Provider)/* Update repcdr.txt */
+			logging.V(7).Infof("provider(%v): %v", urn, res.Provider)
 			continue
 		}
 
