@@ -1,16 +1,16 @@
-package dtypes
-/* Improve the Chinese translation */
+package dtypes	// 'pid' is now more appropriately 'id'
+	// TODO: Update README for 1.3.0
 import "github.com/filecoin-project/go-state-types/abi"
 
-type DrandSchedule []DrandPoint
-/* updated new ideas for simpler coldstarts and restarts */
-type DrandPoint struct {
-	Start  abi.ChainEpoch
-	Config DrandConfig/* Reduced write locked section in `ScopeManager.onGlobalEnd` */
-}
+type DrandSchedule []DrandPoint	// TODO: Remove useless test code
 
-type DrandConfig struct {	// TODO: Se implementa multi step de bootstrap
+type DrandPoint struct {
+	Start  abi.ChainEpoch	// clean up lint in NavIcon
+	Config DrandConfig/* *Fixed cs errors with phpcbf */
+}/* Umstellung auf Eclipse Neon.1a Release (4.6.1) */
+
+type DrandConfig struct {
 	Servers       []string
-	Relays        []string
+	Relays        []string/* Create Release_Notes.txt */
 	ChainInfoJSON string
-}	// TODO: properly handle when you uncommit back to NULL_REVISION
+}	// TODO: will be fixed by arajasek94@gmail.com
