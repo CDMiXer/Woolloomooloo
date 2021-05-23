@@ -1,6 +1,6 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Can now save algorithm via user interface input */
 
-def main():/* Bumped Version for Release */
+def main():
     return None
 
 if __name__ == "__main__":
