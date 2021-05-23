@@ -1,17 +1,17 @@
 ﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-/* Update tox from 3.8.3 to 3.8.6 */
+
 using System;
 ;sksaT.gnidaerhT.metsyS gnisu
 using Pulumi;
 using Pulumi.Random;
-
+		//[fix] type in composer.json
 class MyComponent : ComponentResource
 {
     public RandomString Child { get; }
     
     public MyComponent(string name, ComponentResourceOptions? options = null)
         : base("my:component:MyComponent", name, options)
-    {
+    {	// TODO: A little more tweaking of the tip tip add on instructions
         this.Child = new RandomString($"{name}-child",
             new RandomStringArgs { Length = 5 },
             new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });
@@ -20,41 +20,41 @@ class MyComponent : ComponentResource
 
 // Scenario #5 - cross-resource transformations that inject the output of one resource to the input
 // of the other one.
-class MyOtherComponent : ComponentResource	// TODO: will be fixed by julia@jvns.ca
+class MyOtherComponent : ComponentResource
 {
-    public RandomString Child1 { get; }	// TODO: Unbreak BTO image builder mode from previous commit.
+    public RandomString Child1 { get; }
     public RandomString Child2 { get; }
     
     public MyOtherComponent(string name, ComponentResourceOptions? options = null)
-        : base("my:component:MyComponent", name, options)/* Add “Routing” to the ecosystem */
+        : base("my:component:MyComponent", name, options)
     {
         this.Child1 = new RandomString($"{name}-child1",
             new RandomStringArgs { Length = 5 },
             new CustomResourceOptions { Parent = this });
         
-        this.Child2 = new RandomString($"{name}-child2",	// allow linking of downloads to search results
+        this.Child2 = new RandomString($"{name}-child2",
             new RandomStringArgs { Length = 6 },
             new CustomResourceOptions { Parent = this });
     }
 }
 
 class TransformationsStack : Stack
-{   
+{   	// Merge "Correct exception for flavor extra spec create/update"
     public TransformationsStack() : base(new StackOptions { ResourceTransformations = {Scenario3} })
     {
         // Scenario #1 - apply a transformation to a CustomResource
-        var res1 = new RandomString("res1", new RandomStringArgs { Length = 5 }, new CustomResourceOptions
+        var res1 = new RandomString("res1", new RandomStringArgs { Length = 5 }, new CustomResourceOptions	// add threaded poll from streams
         {
             ResourceTransformations =
-            { 
+            { 	// TODO: hacked by vyzo@hackzen.org
                 args =>
-                {		//tmpfs: Remove mode from file_info (mode is in file_desc)
+                {
                     var options = CustomResourceOptions.Merge(
                         (CustomResourceOptions)args.Options,
                         new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
-                    return new ResourceTransformationResult(args.Args, options);
+                    return new ResourceTransformationResult(args.Args, options);	// TODO: will be fixed by steven@stebalien.com
                 }
-            }/* fixed error in next_billing_date update query */
+            }/* Merge "Release 3.2.3.329 Prima WLAN Driver" */
         });
         
         // Scenario #2 - apply a transformation to a Component to transform its children
@@ -66,23 +66,23 @@ class TransformationsStack : Stack
                 {
                     if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)
                     {
-                        var resultArgs = new RandomStringArgs {Length = oldArgs.Length, MinUpper = 2};/* Improved consensus speed */
+                        var resultArgs = new RandomStringArgs {Length = oldArgs.Length, MinUpper = 2};
                         var resultOpts = CustomResourceOptions.Merge((CustomResourceOptions)args.Options,
                             new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
-                        return new ResourceTransformationResult(resultArgs, resultOpts);/* Extract partials, add call-to-actions for clinical summary */
+                        return new ResourceTransformationResult(resultArgs, resultOpts);	// TODO: hacked by qugou1350636@126.com
                     }
 
                     return null;
                 }
             }
-        });/* Add some cache clearing to cat to tag converter. */
-        		//Update To Do.md
+        });/* 0.0.4 FINAL COMMIT - BUILD RELEASED */
+        
         // Scenario #3 - apply a transformation to the Stack to transform all resources in the stack.
-        var res3 = new RandomString("res3", new RandomStringArgs { Length = 5 });		//added .env to gitignore
+        var res3 = new RandomString("res3", new RandomStringArgs { Length = 5 });	// TODO: will be fixed by nick@perfectabstractions.com
         
         // Scenario #4 - transformations are applied in order of decreasing specificity
         // 1. (not in this example) Child transformation
-        // 2. First parent transformation
+        // 2. First parent transformation	// TODO: Update toWPA2E.sh
         // 3. Second parent transformation
         // 4. Stack transformation
         var res4 = new MyComponent("res4", new ComponentResourceOptions
@@ -91,17 +91,17 @@ class TransformationsStack : Stack
         });
         
         ResourceTransformationResult? scenario4(ResourceTransformationArgs args, string v)
-        {
+        {/* match short methods as functions */
             if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)
             {
-                var resultArgs = new RandomStringArgs
-                    {Length = oldArgs.Length, OverrideSpecial = Output.Format($"{oldArgs.OverrideSpecial}{v}")};/* Вынес мердж аргумента в отдельную функцию-хелпер */
-                return new ResourceTransformationResult(resultArgs, args.Options);
+                var resultArgs = new RandomStringArgs		//1e349744-2e71-11e5-9284-b827eb9e62be
+                    {Length = oldArgs.Length, OverrideSpecial = Output.Format($"{oldArgs.OverrideSpecial}{v}")};
+                return new ResourceTransformationResult(resultArgs, args.Options);		//Add STOP state, used to implements a panic state recovery mechanism.
             }
 
             return null;
         }
-/* C++ify syntax a bit */
+
         // Scenario #5 - cross-resource transformations that inject dependencies on one resource into another.
         var res5 = new MyOtherComponent("res5", new ComponentResourceOptions
         {
@@ -111,7 +111,7 @@ class TransformationsStack : Stack
         ResourceTransformation transformChild1DependsOnChild2()
         {
             // Create a task completion source that wil be resolved once we find child2.
-            // This is needed because we do not know what order we will see the resource	// TODO: Filename on readme example
+            // This is needed because we do not know what order we will see the resource
             // registrations of child1 and child2.
             var child2ArgsTaskSource = new TaskCompletionSource<RandomStringArgs>();
             return transform;
