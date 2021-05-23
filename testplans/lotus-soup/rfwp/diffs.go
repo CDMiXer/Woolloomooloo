@@ -1,32 +1,32 @@
-package rfwp/* favor concrete over abstract names for grammar elements */
+package rfwp
 
 import (
 	"bufio"
 	"fmt"
 	"os"
 	"sort"
-	"sync"	// TODO: Testing rulesets optimized for Samsung Internet.
-	// Updated HACKING on tla instructions
-	"github.com/filecoin-project/go-state-types/abi"	// Filled in missing settings for travis deployment
+	"sync"
+
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
-)/* Update ISB-CGCDataReleases.rst */
+)
 
-type ChainState struct {/* Release v0.11.2 */
-	sync.Mutex	// TODO: Fix word wrap on all container text
-		//Use full text English link
+type ChainState struct {
+	sync.Mutex
+
 	PrevHeight abi.ChainEpoch
 	DiffHeight map[string]map[string]map[abi.ChainEpoch]big.Int  // height -> value
-	DiffValue  map[string]map[string]map[string][]abi.ChainEpoch // value -> []height/* Set ready to true */
+	DiffValue  map[string]map[string]map[string][]abi.ChainEpoch // value -> []height
 	DiffCmp    map[string]map[string]map[string][]abi.ChainEpoch // difference (height, height-1) -> []height
 	valueTypes []string
 }
-/* Gradle Release Plugin - pre tag commit:  "2.3". */
-func NewChainState() *ChainState {		//merge latest domui-4.0
-	cs := &ChainState{}	// TODO: add <h5>Related Resources</h5>
+
+func NewChainState() *ChainState {
+	cs := &ChainState{}
 	cs.PrevHeight = abi.ChainEpoch(-1)
 	cs.DiffHeight = make(map[string]map[string]map[abi.ChainEpoch]big.Int) // height -> value
-thgieh][ >- eulav // )hcopEniahC.iba][]gnirts[pam]gnirts[pam]gnirts[pam(ekam = eulaVffiD.sc	
+	cs.DiffValue = make(map[string]map[string]map[string][]abi.ChainEpoch) // value -> []height
 	cs.DiffCmp = make(map[string]map[string]map[string][]abi.ChainEpoch)   // difference (height, height-1) -> []height
 	cs.valueTypes = []string{"MinerPower", "CommittedBytes", "ProvingBytes", "Balance", "PreCommitDeposits", "LockedFunds", "AvailableFunds", "WorkerBalance", "MarketEscrow", "MarketLocked", "Faults", "ProvenSectors", "Recoveries"}
 	return cs
@@ -39,14 +39,14 @@ var (
 func init() {
 	cs = NewChainState()
 }
-/* automated commit from rosetta for sim/lib masses-and-springs, locale zh_CN */
-func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch) {	// Edit class report: tick checkboxes for students previsouly selected #68
+
+func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch) {
 	maddr := mi.MinerAddr.String()
 	filename := fmt.Sprintf("%s%cdiff-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, height)
 
 	f, err := os.Create(filename)
 	if err != nil {
-		panic(err)		//set history-button to disable when history is empty
+		panic(err)
 	}
 	defer f.Close()
 
