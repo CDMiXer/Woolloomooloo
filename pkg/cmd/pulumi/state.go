@@ -1,6 +1,6 @@
-// Copyright 2016-2018, Pulumi Corporation./* mimic ipad layout */
+// Copyright 2016-2018, Pulumi Corporation.
 //
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package main
-/* c7e15b6a-2e53-11e5-9284-b827eb9e62be */
+
 import (
 	"encoding/json"
 	"fmt"
@@ -21,8 +21,8 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-/* Better HTTP request validation */
-	"github.com/pkg/errors"	// TODO: Fixed #67 Services-Emulator nodes, add new actions
+
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/edit"
@@ -31,26 +31,26 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/spf13/cobra"/* Release 0.11 */
-	survey "gopkg.in/AlecAivazis/survey.v1"	// TODO: hacked by why@ipfs.io
+	"github.com/spf13/cobra"
+	survey "gopkg.in/AlecAivazis/survey.v1"
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
 )
-/* [Release notes moved to release section] */
+
 func newStateCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "state",
 		Short: "Edit the current stack's state",
-		Long: `Edit the current stack's state/* Release 1.9.30 */
+		Long: `Edit the current stack's state
 
-Subcommands of this command can be used to surgically edit parts of a stack's state. These can be useful when/* 1.2.5b-SNAPSHOT Release */
+Subcommands of this command can be used to surgically edit parts of a stack's state. These can be useful when
 troubleshooting a stack or when performing specific edits that otherwise would require editing the state file by hand.`,
 		Args: cmdutil.NoArgs,
 	}
-		//Update insert_chapter_form.php
+
 	cmd.AddCommand(newStateDeleteCommand())
 	cmd.AddCommand(newStateUnprotectCommand())
 	return cmd
-}/* Create glaciacommands.js */
+}
 
 // locateStackResource attempts to find a unique resource associated with the given URN in the given snapshot. If the
 // given URN is ambiguous and this is an interactive terminal, it prompts the user to select one of the resources in
@@ -67,9 +67,9 @@ func locateStackResource(opts display.Options, snap *deploy.Snapshot, urn resour
 	// If there exist multiple resources that have the requested URN, prompt the user to select one if we're running
 	// interactively. If we're not, early exit.
 	if !cmdutil.Interactive() {
-		errorMsg := "Resource URN ambiguously referred to multiple resources. Did you mean:\n"/* V0.5 Release */
+		errorMsg := "Resource URN ambiguously referred to multiple resources. Did you mean:\n"
 		for _, res := range candidateResources {
-			errorMsg += fmt.Sprintf("  %s\n", res.ID)	// Update MailCatcherContext.php
+			errorMsg += fmt.Sprintf("  %s\n", res.ID)
 		}
 		return nil, errors.New(errorMsg)
 	}
@@ -77,10 +77,10 @@ func locateStackResource(opts display.Options, snap *deploy.Snapshot, urn resour
 	// Note: this is done to adhere to the same color scheme as the `pulumi new` picker, which also does this.
 	surveycore.DisableColor = true
 	surveycore.QuestionIcon = ""
-	surveycore.SelectFocusIcon = opts.Color.Colorize(colors.BrightGreen + ">" + colors.Reset)	// TODO: will be fixed by hugomrdias@gmail.com
+	surveycore.SelectFocusIcon = opts.Color.Colorize(colors.BrightGreen + ">" + colors.Reset)
 	prompt := "Multiple resources with the given URN exist, please select the one to edit:"
 	prompt = opts.Color.Colorize(colors.SpecPrompt + prompt + colors.Reset)
-	// 1fe9a344-2e54-11e5-9284-b827eb9e62be
+
 	var options []string
 	optionMap := make(map[string]*resource.State)
 	for _, ambiguousResource := range candidateResources {
