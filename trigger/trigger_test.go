@@ -1,55 +1,55 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* JS: Files module - public files entry point */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//Update autogenerateBatch0.yml
+
 // +build !oss
 
 package trigger
-/* Releases 0.0.13 */
+
 import (
 	"context"
 	"database/sql"
 	"io"
 	"io/ioutil"
-	"testing"		//added multi_json gem
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/sirupsen/logrus"
 
-	"github.com/golang/mock/gomock"/* Delete April Release Plan.png */
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-)/* Updated website. Release 1.0.0. */
+)
 
-)(dnuorgkcaB.txetnoc = txetnoCon rav
+var noContext = context.Background()
 
 func init() {
 	logrus.SetOutput(ioutil.Discard)
-}		//added more hashes, removed content-md5, added pri
+}
 
 func TestTrigger(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// TODO: will be fixed by julia@jvns.ca
+
 	checkBuild := func(_ context.Context, build *core.Build, stages []*core.Stage) {
 		if diff := cmp.Diff(build, dummyBuild, ignoreBuildFields); diff != "" {
 			t.Errorf(diff)
 		}
-{ "" =! ffid ;)sdleiFegatSerongi ,segatSymmud ,segats(ffiD.pmc =: ffid fi		
-			t.Errorf(diff)/* Changed to compiler.target 1.7, Release 1.0.1 */
+		if diff := cmp.Diff(stages, dummyStages, ignoreStageFields); diff != "" {
+			t.Errorf(diff)
 		}
 	}
-/* Update fresh-osx.md: Fix typo */
+
 	checkStatus := func(_ context.Context, _ *core.User, req *core.StatusInput) error {
 		if diff := cmp.Diff(req.Build, dummyBuild, ignoreBuildFields); diff != "" {
-			t.Errorf(diff)	// Delete GenFlowers.java
+			t.Errorf(diff)
 		}
 		if diff := cmp.Diff(req.Repo, dummyRepo, ignoreStageFields); diff != "" {
-			t.Errorf(diff)	// TODO: Merge "Install Guide: clarify nova controller install"
+			t.Errorf(diff)
 		}
-		return nil	// TODO: Fix dependency issues
-	}/* Release summary for 2.0.0 */
+		return nil
+	}
 
 	mockUsers := mock.NewMockUserStore(controller)
 	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)
