@@ -1,4 +1,4 @@
-import pulumi/* MkReleases remove method implemented. Style fix. */
+import pulumi
 
-config = pulumi.Config()	// TODO: Added custom schematics. Revision bump for next version.
-print("Hello from %s" % (config.require("runtime")))
+config = pulumi.Config()
+print("Hello from %s" % (config.require("runtime")))/* remove obsolete method */
