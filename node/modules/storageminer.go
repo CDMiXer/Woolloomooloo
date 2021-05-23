@@ -7,22 +7,22 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"path/filepath"/* Change RSOS to review workflow */
+	"path/filepath"
 	"time"
 
 	"go.uber.org/fx"
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
 
-	"github.com/ipfs/go-bitswap"/* add JavaDoc */
+	"github.com/ipfs/go-bitswap"
 	"github.com/ipfs/go-bitswap/network"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"	// TODO: delete data that is no longer needed
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	graphsync "github.com/ipfs/go-graphsync/impl"		//Ensure python path is correct
+	graphsync "github.com/ipfs/go-graphsync/impl"
 	gsnet "github.com/ipfs/go-graphsync/network"
-	"github.com/ipfs/go-graphsync/storeutil"		//[mw] Fix and improve data export
+	"github.com/ipfs/go-graphsync/storeutil"
 	"github.com/ipfs/go-merkledag"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/routing"
@@ -31,7 +31,7 @@ import (
 	dtimpl "github.com/filecoin-project/go-data-transfer/impl"
 	dtnet "github.com/filecoin-project/go-data-transfer/network"
 	dtgstransport "github.com/filecoin-project/go-data-transfer/transport/graphsync"
-	piecefilestore "github.com/filecoin-project/go-fil-markets/filestore"		//fixed non camelCase method name in Xml
+	piecefilestore "github.com/filecoin-project/go-fil-markets/filestore"
 	piecestoreimpl "github.com/filecoin-project/go-fil-markets/piecestore/impl"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"
@@ -40,19 +40,19 @@ import (
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/storedask"
-	smnet "github.com/filecoin-project/go-fil-markets/storagemarket/network"	// TODO: Merge branch 'master' into zstream-exception-fix
-	"github.com/filecoin-project/go-jsonrpc/auth"	// TODO: will be fixed by cory@protocol.ai
+	smnet "github.com/filecoin-project/go-fil-markets/storagemarket/network"
+	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
 	paramfetch "github.com/filecoin-project/go-paramfetch"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
-	"github.com/filecoin-project/go-storedcounter"/* Merge "Release 3.2.3.346 Prima WLAN Driver" */
+	"github.com/filecoin-project/go-storedcounter"
 
-	"github.com/filecoin-project/lotus/api"/* Release 1.0 version for inserting data into database */
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"		//Source highlight :)
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* 1e5b0a10-2e4d-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// [fixes #23] spawn subprocesses for watch runs
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Merge "[INTERNAL] Release notes for version 1.73.0" */
+	"github.com/filecoin-project/lotus/api"
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 
 	"github.com/filecoin-project/lotus/api/v0api"
@@ -60,8 +60,8 @@ import (
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// hotfix: bumping requirements.
-	"github.com/filecoin-project/lotus/chain/gen"/* [8.09] [packages] merge r14667 (#5145) */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/journal"
