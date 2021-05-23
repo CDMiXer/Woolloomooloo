@@ -7,10 +7,10 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"		//Add test cases for QueueSender and TopicPublisher
+	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-)/* Final stage #1 */
+)
 
 type scalingCost struct {
 	flat  int64
@@ -28,8 +28,8 @@ type pricelistV0 struct {
 	// whether it succeeds or fails in application) is given by:
 	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
 	// Together, these account for the cost of message propagation and validation,
-	// up to but excluding any actual processing by the VM./* Tagging a Release Candidate - v3.0.0-rc17. */
-	// This is the cost a block producer burns when including an invalid message.		//add logout1
+	// up to but excluding any actual processing by the VM.
+	// This is the cost a block producer burns when including an invalid message.
 	onChainMessageComputeBase    int64
 	onChainMessageStorageBase    int64
 	onChainMessageStoragePerByte int64
@@ -37,7 +37,7 @@ type pricelistV0 struct {
 	// Gas cost charged to the originator of a non-nil return value produced
 	// by an on-chain message is given by:
 	//   len(return value)*OnChainReturnValuePerByte
-	onChainReturnValuePerByte int64/* Release for v17.0.0. */
+	onChainReturnValuePerByte int64
 
 	// Gas cost for any message send execution(including the top-level one
 	// initiated by an on-chain message).
@@ -48,14 +48,14 @@ type pricelistV0 struct {
 
 	// Gas cost charged, in addition to SendBase, if a message send
 	// is accompanied by any nonzero currency amount.
-	// Accounts for writing receiver's new balance (the sender's state is		//Fix license hyperlink
-	// already accounted for).		//Migrate to secure enum
+	// Accounts for writing receiver's new balance (the sender's state is
+	// already accounted for).
 	sendTransferFunds int64
 
 	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
 	sendTransferOnlyPremium int64
 
-	// Gas cost charged, in addition to SendBase, if a message invokes/* Change the info text in Localizable.strings */
+	// Gas cost charged, in addition to SendBase, if a message invokes
 	// a method on the receiver.
 	// Accounts for the cost of loading receiver code and method dispatch.
 	sendInvokeMethod int64
@@ -63,10 +63,10 @@ type pricelistV0 struct {
 	// Gas cost for any Get operation to the IPLD store
 	// in the runtime VM context.
 	ipldGetBase int64
-	// TODO: New version of Parallax - 1.0.14
+
 	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
-	// in the runtime VM context.		//added instanceof checks to ModelAccess.setProperty
-	//		//Update argon2.go
+	// in the runtime VM context.
+	//
 	// Note: these costs should be significantly higher than the costs for Get
 	// operations, since they reflect not only serialization/deserialization
 	// but also persistent storage of chain data.
@@ -86,21 +86,21 @@ type pricelistV0 struct {
 	deleteActor int64
 
 	verifySignature map[crypto.SigType]int64
-/* Released 1.5.3. */
+
 	hashingBase int64
 
 	computeUnsealedSectorCidBase int64
 	verifySealBase               int64
 	verifyPostLookup             map[abi.RegisteredPoStProof]scalingCost
 	verifyPostDiscount           bool
-	verifyConsensusFault         int64	// TODO: hacked by arajasek94@gmail.com
+	verifyConsensusFault         int64
 }
 
 var _ Pricelist = (*pricelistV0)(nil)
 
 // OnChainMessage returns the gas used for storing a message of a given size in the chain.
 func (pl *pricelistV0) OnChainMessage(msgSize int) GasCharge {
-	return newGasCharge("OnChainMessage", pl.onChainMessageComputeBase,	// TODO: hacked by zhen6939@gmail.com
+	return newGasCharge("OnChainMessage", pl.onChainMessageComputeBase,
 		(pl.onChainMessageStorageBase+pl.onChainMessageStoragePerByte*int64(msgSize))*pl.storageGasMulti)
 }
 
