@@ -3,19 +3,19 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "declaration": true,/* style: links */
+        "moduleResolution": "node",/* Serve resources from META-INF/resources also in development environment */
+        "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,/* Released 2.3.7 */
-        "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "stripInternal": true,/* Support for date/time arithmetic */
+        "experimentalDecorators": true,/* Release of eeacms/www-devel:18.3.23 */
+        "pretty": true,	// TODO: will be fixed by indexxuan@gmail.com
+        "noFallthroughCasesInSwitch": true,/* Create Post “introducing-the-pid-graph” */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },/* basic FileMerge support */
-    "files": [	// TODO: will be fixed by peterke@gmail.com
+    },
+    "files": [
         "index.ts"
-    ]/* Merge "docs: SDK 22.2.1 Release Notes" into jb-mr2-docs */
+    ]
 }
 
