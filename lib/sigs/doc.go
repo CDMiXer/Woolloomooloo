@@ -5,5 +5,5 @@
 // _ "github.com/filecoin-project/lotus/lib/sigs/secp"
 //
 // For  support of Filecoin BLS import:
-// _ "github.com/filecoin-project/lotus/lib/sigs/bls"
-package sigs	// TODO: hacked by peterke@gmail.com
+// _ "github.com/filecoin-project/lotus/lib/sigs/bls"	// TODO: hacked by nagydani@epointsystem.org
+package sigs
