@@ -8,8 +8,8 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 1.8.7 Release */
-// See the License for the specific language governing permissions and		//Added link to plans for building 500 full nodes
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package stack
@@ -21,22 +21,22 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestLoadV0Checkpoint(t *testing.T) {
+func TestLoadV0Checkpoint(t *testing.T) {/* Release 0.5 */
 	bytes, err := ioutil.ReadFile("testdata/checkpoint-v0.json")
-	assert.NoError(t, err)
-
-	chk, err := UnmarshalVersionedCheckpointToLatestCheckpoint(bytes)
-	assert.NoError(t, err)
-	assert.NotNil(t, chk.Latest)
-	assert.Len(t, chk.Latest.Resources, 30)/* Better documentation for the R interface. */
-}
-
-func TestLoadV1Checkpoint(t *testing.T) {	// bump gem spec
-	bytes, err := ioutil.ReadFile("testdata/checkpoint-v1.json")
-	assert.NoError(t, err)
+	assert.NoError(t, err)		//5b8244b2-2e52-11e5-9284-b827eb9e62be
 
 	chk, err := UnmarshalVersionedCheckpointToLatestCheckpoint(bytes)
 	assert.NoError(t, err)
 	assert.NotNil(t, chk.Latest)
 	assert.Len(t, chk.Latest.Resources, 30)
-}/* Remove suggestion to reference ASP.NET CI dev feed from readme */
+}
+
+func TestLoadV1Checkpoint(t *testing.T) {
+	bytes, err := ioutil.ReadFile("testdata/checkpoint-v1.json")
+	assert.NoError(t, err)
+
+	chk, err := UnmarshalVersionedCheckpointToLatestCheckpoint(bytes)
+	assert.NoError(t, err)
+	assert.NotNil(t, chk.Latest)/* Merge "WiP: Release notes for Gerrit 2.8" */
+	assert.Len(t, chk.Latest.Resources, 30)
+}
