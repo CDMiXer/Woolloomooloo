@@ -1,28 +1,28 @@
-{{ define "properties" }}/* Release 0.6.3 of PyFoam */
+{{ define "properties" }}
 
 {{ range $lang, $props := . }}
-{{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
+{{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}		//add requests dependency
 <dl class="resources-properties">
 {{ range . }}
-    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
-            title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
-        <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
-        <span class="property-indicator"></span>
-        <span class="property-type">	// TODO: ffa0dac6-2e4e-11e5-9284-b827eb9e62be
+    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"/* First Release - 0.1 */
+            title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">	// TODO: hacked by sjors@sprovoost.nl
+        <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 	// TODO: Update GPUacceleration.rst
+        <span class="property-indicator"></span>/* Delete reVision.exe - Release.lnk */
+        <span class="property-type">
         {{- range $index, $type := .Types }}
             {{- if gt $index 0 }} | {{ end -}}
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
-        {{- end -}}/* Release jedipus-2.6.6 */
-        </span>/* Release of eeacms/www-devel:19.1.23 */
+        {{- end -}}
+        </span>/* Added ladders */
     </dt>
-    <dd>
-        {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}/* Deleted Img 7467 2a680c */
+>dd<    
+        {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}
         {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
     </dd>
-{{ end }}/* Docente Repository complete */
-</dl>
+{{ end }}
+</dl>		//Sblocco temporaneo dei comandi in stato "Possible"
 {{ print "{{% /choosable %}}" }}
 
-{{ end }}	// Removed obsolete code that previously was for testing purposes
+{{ end }}
 
 {{ end }}
