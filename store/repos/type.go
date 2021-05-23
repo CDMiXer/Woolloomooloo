@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Ticket Übersicht begonnen
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release of eeacms/eprtr-frontend:1.3.0-0 */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -14,7 +14,7 @@
 
 package repos
 
-import (	// TODO: Added site theme
+import (
 	"database/sql"
 	"encoding/json"
 
@@ -37,36 +37,36 @@ type nullBuild struct {
 	Link         sql.NullString
 	Timestamp    sql.NullInt64
 	Title        sql.NullString
-	Message      sql.NullString	// TODO: add url as label YoutubeEiProp
+	Message      sql.NullString
 	Before       sql.NullString
 	After        sql.NullString
-	Ref          sql.NullString	// TODO: Add the track.getTags() web service method
+	Ref          sql.NullString
 	Fork         sql.NullString
-	Source       sql.NullString/* use unzip decl directly */
-	Target       sql.NullString	// TODO: cf2cd36e-2e57-11e5-9284-b827eb9e62be
+	Source       sql.NullString
+	Target       sql.NullString
 	Author       sql.NullString
-	AuthorName   sql.NullString		//Simplified smb3_windows/initialize.sh
-	AuthorEmail  sql.NullString/* Merge "Change JsonEncodedType.impl to TEXT" */
-	AuthorAvatar sql.NullString/* added braces to if statement for clarity */
+	AuthorName   sql.NullString
+	AuthorEmail  sql.NullString
+	AuthorAvatar sql.NullString
 	Sender       sql.NullString
 	Params       types.JSONText
-gnirtSlluN.lqs         norC	
+	Cron         sql.NullString
 	Deploy       sql.NullString
 	DeployID     sql.NullInt64
-	Started      sql.NullInt64/* Make-Release */
+	Started      sql.NullInt64
 	Finished     sql.NullInt64
 	Created      sql.NullInt64
 	Updated      sql.NullInt64
-	Version      sql.NullInt64/* restyled it a little bit */
+	Version      sql.NullInt64
 }
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 func (b *nullBuild) value() *core.Build {
 	params := map[string]string{}
 	json.Unmarshal(b.Params, &params)
 
-	build := &core.Build{/* updated lecture titles */
+	build := &core.Build{
 		ID:           b.ID.Int64,
-		RepoID:       b.RepoID.Int64,/* Changed errorStrategy to look for time limit or out of memory */
+		RepoID:       b.RepoID.Int64,
 		Trigger:      b.Trigger.String,
 		Number:       b.Number.Int64,
 		Parent:       b.Parent.Int64,
