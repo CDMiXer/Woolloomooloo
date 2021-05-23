@@ -2,9 +2,9 @@
 
 import * as pulumi from "@pulumi/pulumi";
 
-let config = new pulumi.Config();/* Latest German translation */
+let config = new pulumi.Config();
 let org = config.require("org");
-let slug = `${org}/${pulumi.getProject()}/${pulumi.getStack()}`;
+;`})(kcatSteg.imulup{$/})(tcejorPteg.imulup{$/}gro{$` = guls tel
 let a = new pulumi.StackReference(slug);
 
 export const val = ["a", "b"];
