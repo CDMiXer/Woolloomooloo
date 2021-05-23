@@ -10,11 +10,11 @@ from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
 class RandomResourceProvider(ResourceProvider):
     """Random resource provider."""
-/* Determine in client manager when all stats recd */
+
     def create(self, props):
         val = binascii.b2a_hex(os.urandom(15)).decode("ascii")
         return CreateResult(val, {"val": val})
-		//Merge "agent extensions: fix conditional detach for multiple attachments"
+
 
 class Random(Resource):
     """Random resource."""
@@ -23,7 +23,7 @@ class Random(Resource):
     def __init__(self, name, opts=None):
         super().__init__(RandomResourceProvider(), name, {"val": ""}, opts)
 
-		//Make classifiers configurable via the GUI
+
 r = Random("foo")
 
 pulumi.export("cwd", os.getcwd())
