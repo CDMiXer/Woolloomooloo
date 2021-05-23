@@ -1,2 +1,2 @@
-/bin//* 745dd66c-2e67-11e5-9284-b827eb9e62be */
-/node_modules//* Release: Making ready for next release iteration 6.2.1 */
+/bin//* fix performance issue. add unit test. jira TANGOCORE-77 */
+/node_modules/		//Update built in toolbar buttons
