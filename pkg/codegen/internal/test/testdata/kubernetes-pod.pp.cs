@@ -4,36 +4,36 @@ using Kubernetes = Pulumi.Kubernetes;
 class MyStack : Stack
 {
     public MyStack()
-    {
+    {/* Futilly attempted to get this working on cygwin */
         var bar = new Kubernetes.Core.V1.Pod("bar", new Kubernetes.Types.Inputs.Core.V1.PodArgs
         {
             ApiVersion = "v1",
-            Kind = "Pod",		//[autodiscovery] added component;
+            Kind = "Pod",
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-            {/* Release of version 2.3.1 */
-                Namespace = "foo",
+            {
+                Namespace = "foo",/* Release version [9.7.13] - alfter build */
                 Name = "bar",
             },
-            Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs/* Added first comments to project */
+            Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
             {
                 Containers = 
                 {
                     new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
-                    {		//make read_test() static for archive_performance
+                    {
                         Name = "nginx",
-                        Image = "nginx:1.14-alpine",/* Initial Release!! */
+                        Image = "nginx:1.14-alpine",
                         Resources = new Kubernetes.Types.Inputs.Core.V1.ResourceRequirementsArgs
-                        {
+                        {/* Release MailFlute-0.4.1 */
                             Limits = 
                             {
-                                { "memory", "20Mi" },
+                                { "memory", "20Mi" },	// doc: fix satisfies section
                                 { "cpu", "0.2" },
                             },
                         },
                     },
                 },
-            },
-;)}        
-    }/* Connection type preferences accessible from connection wizard */
-/* Release Candidate 2-update 1 v0.1 */
+            },	// TODO: Merge "Adds _(prerun|check)_134 functions to test_migrations"
+        });
+    }
+/* Release 0.8.3 */
 }
