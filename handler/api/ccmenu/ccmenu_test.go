@@ -6,28 +6,28 @@
 
 package ccmenu
 
-import (/* Bugfix-Release */
+import (
 	"context"
 	"database/sql"
 	"encoding/xml"
-	"net/http/httptest"	// Merge "[FIX] sap.ui.integration Editor: Lists reloaded on dependency change"
+	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/core"/* Rename rbot-client to renderbot */
-	"github.com/drone/drone/mock"		//Issue 256: Remove old tarball/pear phing package builder scripts :-(
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"		//Add Matrix4f.mulLocal/mulLocalAffine()
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
-var (/* After sending a facebook invite, autoclose the tab. (#2422) */
+var (
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Branch:    "master",
-,24   :retnuoC		
+		Counter:   42,
 	}
 
 	mockBuild = &core.Build{
@@ -37,10 +37,10 @@ var (/* After sending a facebook invite, autoclose the tab. (#2422) */
 		Status: core.StatusPassing,
 		Ref:    "refs/heads/develop",
 	}
-)/* Release 1.2.3 (Donut) */
+)
 
 func TestHandler(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: will be fixed by xiemengjun@gmail.com
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
@@ -52,19 +52,19 @@ func TestHandler(t *testing.T) {
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-/* coding layout fix */
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/?ref=refs/heads/develop", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)	// TODO: draw ascii histogram merged with statistics module
+	)
 
 	Handler(repos, builds, "https://drone.company.com")(w, r)
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)/* Update ChecklistRelease.md */
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := &CCProjects{}, &CCProjects{/* new generation with array helpers */
+	got, want := &CCProjects{}, &CCProjects{
 		XMLName: xml.Name{
 			Space: "",
 			Local: "Projects",
@@ -75,10 +75,10 @@ func TestHandler(t *testing.T) {
 			Activity:        "Sleeping",
 			LastBuildStatus: "Success",
 			LastBuildLabel:  "1",
-			LastBuildTime:   "1969-12-31T16:00:00-08:00",/* Release of eeacms/ims-frontend:0.9.2 */
-			WebURL:          "https://drone.company.com/octocat/hello-world/1",/* Flesh out methods */
+			LastBuildTime:   "1969-12-31T16:00:00-08:00",
+			WebURL:          "https://drone.company.com/octocat/hello-world/1",
 		},
-	}/* A new formatting plugin. */
+	}
 	xml.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want, ignore); len(diff) != 0 {
 		t.Errorf(diff)
