@@ -1,3 +1,3 @@
-name: types_python/* d218cbc2-2e4e-11e5-a06b-28cfe91dbc4b */
-description: A program that uses input/output types.	// repare Leaderboard portlet
+name: types_python
+description: A program that uses input/output types.
 runtime: python
