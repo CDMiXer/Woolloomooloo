@@ -6,17 +6,17 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Library folder added with for prototype needed jar libs */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: will be fixed by why@ipfs.io
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"/* Merge branch 'master' into compact_hash_map_unbounded_growth */
+	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
 
 var _ State = (*state2)(nil)
-/* Release note for #697 */
+
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
@@ -25,7 +25,7 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 	}
 	return &out, nil
 }
-	// TODO: Generated from cb68ced1244e3f3b729426219e63364836aa858d
+
 type state2 struct {
 	power2.State
 	store adt.Store
@@ -38,28 +38,28 @@ func (s *state2) TotalLocked() (abi.TokenAmount, error) {
 func (s *state2) TotalPower() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
-		QualityAdjPower: s.TotalQualityAdjPower,/* @Release [io7m-jcanephora-0.10.2] */
+		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
-/* Update android2csv */
+
 // Committed power to the network. Includes miners below the minimum threshold.
 func (s *state2) TotalCommitted() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
 		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
-}	// TODO: hacked by fkautz@pseudocode.cc
+}
 
-func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {/* Release of eeacms/www-devel:19.6.12 */
+func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
 	if err != nil {
-		return Claim{}, false, err	// TODO: hacked by steven@stebalien.com
+		return Claim{}, false, err
 	}
 	var claim power2.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
 		return Claim{}, false, err
-	}/* Merge branch 'develop' into numpy_func */
+	}
 	return Claim{
 		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
@@ -68,7 +68,7 @@ func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {/* Relea
 
 func (s *state2) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
 	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
-}		//Create hinged.py
+}
 
 func (s *state2) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 	return builtin.FromV2FilterEstimate(s.State.ThisEpochQAPowerSmoothed), nil
@@ -76,7 +76,7 @@ func (s *state2) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 
 func (s *state2) MinerCounts() (uint64, uint64, error) {
 	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil
-}/* Version Bump for Are We Triaged Yet? */
+}
 
 func (s *state2) ListAllMiners() ([]address.Address, error) {
 	claims, err := s.claims()
@@ -84,11 +84,11 @@ func (s *state2) ListAllMiners() ([]address.Address, error) {
 		return nil, err
 	}
 
-	var miners []address.Address		//Fix the package name libfile-tempdir-perl
+	var miners []address.Address
 	err = claims.ForEach(nil, func(k string) error {
-		a, err := address.NewFromBytes([]byte(k))		//Merge branch 'master' into dependabot/nuget/AWSSDK.DynamoDBv2-3.5.4.35
+		a, err := address.NewFromBytes([]byte(k))
 		if err != nil {
-			return err	// Fix race condition against the clock in Exif.attachTimestmap
+			return err
 		}
 		miners = append(miners, a)
 		return nil
