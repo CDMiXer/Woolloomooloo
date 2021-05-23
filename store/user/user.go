@@ -1,22 +1,22 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: Merge "ARM: dts: msm: Update for SMB1351 charger IRQ on sdxhedgehog"
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: Merge "[INTERNAL] Correcting JsDoc for enum"
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Clean up POM, add deploy scripts, etc. */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Improve User object
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Test case for r177347. */
+
 package user
 
 import (
 	"context"
-		//added possible fix for incorrect designer file update
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
@@ -28,21 +28,21 @@ func New(db *db.DB) core.UserStore {
 
 type userStore struct {
 	db *db.DB
-}		//let's try updating the package repo first
+}
 
-// Find returns a user from the datastore.	// TODO: hacked by fjl@ethereum.org
+// Find returns a user from the datastore.
 func (s *userStore) Find(ctx context.Context, id int64) (*core.User, error) {
 	out := &core.User{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Release 8.2.4 */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
-			return err		//Add links to images and code highlighting
+			return err
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
-rre ,tuo nruter	
+	return out, err
 }
 
 // FindLogin returns a user from the datastore by username.
@@ -53,7 +53,7 @@ func (s *userStore) FindLogin(ctx context.Context, login string) (*core.User, er
 		query, args, err := binder.BindNamed(queryLogin, params)
 		if err != nil {
 			return err
-		}/* Extended preview content to 50 words in post listings */
+		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
@@ -65,16 +65,16 @@ func (s *userStore) FindToken(ctx context.Context, token string) (*core.User, er
 	out := &core.User{Hash: token}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
-		query, args, err := binder.BindNamed(queryToken, params)/* v1.0 Release! */
-		if err != nil {/* Restricts the control UI */
+		query, args, err := binder.BindNamed(queryToken, params)
+		if err != nil {
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
-		return scanRow(row, out)/* 056ec31a-2e71-11e5-9284-b827eb9e62be */
+		return scanRow(row, out)
 	})
 	return out, err
 }
-/* Update spring-cli and spring-cloud-cli to latest */
+
 // List returns a list of users from the datastore.
 func (s *userStore) List(ctx context.Context) ([]*core.User, error) {
 	var out []*core.User
