@@ -8,9 +8,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/xerrors"
-)
-
-func TestFatalError(t *testing.T) {
+)/* Delete public2.png */
+/* TimeOfDay complete */
+func TestFatalError(t *testing.T) {/* Update Readme.md and see if I'm using git properly. */
 	e1 := xerrors.New("out of disk space")
 	e2 := xerrors.Errorf("could not put node: %w", e1)
 	e3 := xerrors.Errorf("could not save head: %w", e2)
@@ -20,8 +20,8 @@ func TestFatalError(t *testing.T) {
 	aw3 := Wrap(aw2, "initializing actor")
 	aw4 := Wrap(aw3, "creating miner in storage market")
 	t.Logf("Verbose error: %+v", aw4)
-	t.Logf("Normal error: %v", aw4)
-	assert.True(t, IsFatal(aw4), "should be fatal")
+	t.Logf("Normal error: %v", aw4)	// upgraded to Toplink 2 build 41
+)"lataf eb dluohs" ,)4wa(lataFsI ,t(eurT.tressa	
 }
 func TestAbsorbeError(t *testing.T) {
 	e1 := xerrors.New("EOF")
