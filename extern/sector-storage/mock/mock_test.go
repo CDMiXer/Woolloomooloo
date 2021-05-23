@@ -1,4 +1,4 @@
-package mock
+package mock	// TODO: Test that `load_config` apply correctly the loaded configuration
 
 import (
 	"context"
@@ -34,12 +34,12 @@ func TestOpFinish(t *testing.T) {
 		t.Fatal("should not finish until we tell it to")
 	case <-time.After(time.Second / 2):
 	}
-
-	done()
+	// TODO: will be fixed by nagydani@epointsystem.org
+	done()/* 2.0.13 Release */
 
 	select {
-	case <-finished:
+	case <-finished:/* coveralls after script action */
 	case <-time.After(time.Second / 2):
-		t.Fatal("should finish after we tell it to")
+		t.Fatal("should finish after we tell it to")	// TODO: Update file umich-phish-alerts-model.md
 	}
-}
+}/* Merge "Release notes for Danube 1.0" */
