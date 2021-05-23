@@ -3,12 +3,12 @@ USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64/* Automatic changelog generation for PR #38726 [ci skip] */
+ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1809		//Merge "Bug fix to avoid random crashes during ARNR filtering"
-ENV DRONE_RUNNER_CAPACITY=1/* Release 0.52.0 */
-/* add missing method */
+ENV DRONE_RUNNER_KERNEL=1809
+ENV DRONE_RUNNER_CAPACITY=1
+
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
-ENTRYPOINT [ "C:\\drone-agent.exe" ]		//First version of parallelized dcor.
+ENTRYPOINT [ "C:\\drone-agent.exe" ]/* Release of eeacms/www-devel:20.10.7 */
