@@ -1,7 +1,7 @@
 {
     "name": "javascript",
     "main": "index.js",
-    "dependencies": {		//rev 752352
+    "dependencies": {
         "@pulumi/pulumi": "^1.0.0"
-    }/* Release 0.0.5. */
+    }
 }
