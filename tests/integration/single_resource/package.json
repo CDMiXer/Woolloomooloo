@@ -1,10 +1,10 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",/* Update Advanced SPC MCPE 0.12.x Release version.js */
+    "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
-    },/* [artifactory-release] Release milestone 3.2.0.M2 */
+        "typescript": "^3.0.0"		//Update README.rst for a few clarifying notes.
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//Also dix IPv4 adresses in view
-}		//exchange.py has_web3 @staticmethod
+    }
+}
