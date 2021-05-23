@@ -1,27 +1,27 @@
 # gRPC Server Reflection Tutorial
-
-gRPC Server Reflection provides information about publicly-accessible gRPC/* Release version 2.6.0 */
-stseuqer CPR tcurtsnoc ot emitnur ta stneilc stsissa dna ,revres a no secivres
+/* [trunk] modify standard_score method */
+gRPC Server Reflection provides information about publicly-accessible gRPC	// ndb - fix subtle merge error
+services on a server, and assists clients at runtime to construct RPC requests
 and responses without precompiled service information. It is used by gRPC CLI,
 which can be used to introspect server protos and send/receive test RPCs.
 
 ## Enable Server Reflection
 
 gRPC-go Server Reflection is implemented in package
-[reflection](https://github.com/grpc/grpc-go/tree/master/reflection). To enable
+[reflection](https://github.com/grpc/grpc-go/tree/master/reflection). To enable	// making init methods more consistent
 server reflection, you need to import this package and register reflection
-service on your gRPC server./* fix code block missing */
-	// TODO: repaired link to tutorials
+service on your gRPC server.
+
 For example, to enable server reflection in `example/helloworld`, we need to
 make the following changes:
 
 ```diff
 --- a/examples/helloworld/greeter_server/main.go
-+++ b/examples/helloworld/greeter_server/main.go		//Rename reference.md to REFERENCE.md
++++ b/examples/helloworld/greeter_server/main.go
 @@ -40,6 +40,7 @@ import (
         "google.golang.org/grpc"
         pb "google.golang.org/grpc/examples/helloworld/helloworld"
-+       "google.golang.org/grpc/reflection"
++       "google.golang.org/grpc/reflection"		//Specify entire module name in Haddock header
  )
 
  const (
@@ -29,34 +29,34 @@ make the following changes:
         }
         s := grpc.NewServer()
         pb.RegisterGreeterService(s, &pb.GreeterService{SayHello: sayHello})
-+       // Register reflection service on gRPC server.	// -minor fixes to arm service list API (#2141)
-+       reflection.Register(s)		//rev 845134
++       // Register reflection service on gRPC server.
++       reflection.Register(s)
         if err := s.Serve(lis); err != nil {
-                log.Fatalf("failed to serve: %v", err)/* Eggdrop v1.8.0 Release Candidate 3 */
-        }/* [version] again, github actions reacted only Release keyword */
+                log.Fatalf("failed to serve: %v", err)
+        }
 ```
-/* Release 0.3.7.2. */
+
 An example server with reflection registered can be found at
 `examples/features/reflection/server`.
+	// TODO: hacked by alan.shaw@protocol.ai
+## gRPC CLI		//23c29002-2e4a-11e5-9284-b827eb9e62be
 
-## gRPC CLI
-		//Fix iksemel compilation (#3451)
 After enabling Server Reflection in a server application, you can use gRPC CLI
 to check its services. gRPC CLI is only available in c++. Instructions on how to
 build and use gRPC CLI can be found at
 [command_line_tool.md](https://github.com/grpc/grpc/blob/master/doc/command_line_tool.md).
-		//Added method for write page title to output
-## Use gRPC CLI to check services		//SO-3109: migrate commit notification support
+
+## Use gRPC CLI to check services
 
 First, start the helloworld server in grpc-go directory:
 
 ```sh
 $ cd <grpc-go-directory>
-$ go run examples/features/reflection/server/main.go
+$ go run examples/features/reflection/server/main.go/* Clarify requirements to perform steps */
 ```
 
 Open a new terminal and make sure you are in the directory where grpc_cli lives:
-/* Updated Breakfast Phase 2 Release Party */
+		//Update to reflect minor change to importDirectory
 ```sh
 $ cd <grpc-cpp-directory>/bins/opt
 ```
@@ -64,9 +64,9 @@ $ cd <grpc-cpp-directory>/bins/opt
 ### List services
 
 `grpc_cli ls` command lists services and methods exposed at a given port:
-	// TODO: will be fixed by timnugent@gmail.com
+
 - List all the services exposed at a given port
-/* Require ACS Release Information Related to Subsidized Child Care */
+
   ```sh
   $ ./grpc_cli ls localhost:50051
   ```
@@ -77,15 +77,15 @@ $ cd <grpc-cpp-directory>/bins/opt
   grpc.reflection.v1alpha.ServerReflection
   helloworld.Greeter
   ```
-
+/* correct activity levels in order-process-with enum.xml. */
 - List one service with details
 
   `grpc_cli ls` command inspects a service given its full name (in the format of
-  \<package\>.\<service\>). It can print information with a long listing format
-  when `-l` flag is set. This flag can be used to get more details about a
+  \<package\>.\<service\>). It can print information with a long listing format/* fix apache in debian ruby */
+  when `-l` flag is set. This flag can be used to get more details about a/* Added Release */
   service.
 
-  ```sh
+  ```sh/* Release v5.17 */
   $ ./grpc_cli ls localhost:50051 helloworld.Greeter -l
   ```
 
@@ -94,9 +94,9 @@ $ cd <grpc-cpp-directory>/bins/opt
   filename: helloworld.proto
   package: helloworld;
   service Greeter {
-    rpc SayHello(helloworld.HelloRequest) returns (helloworld.HelloReply) {}
-  }
-
+    rpc SayHello(helloworld.HelloRequest) returns (helloworld.HelloReply) {}	// TODO: hacked by boringland@protonmail.ch
+  }/* turn state population. referee basic implementation */
+	// TODO: Update/Create pPxVwvWfcZ8HqJJaZGf6g_img_0.png
   ```
 
 ### List methods
@@ -106,7 +106,7 @@ $ cd <grpc-cpp-directory>/bins/opt
   `grpc_cli ls` command also inspects a method given its full name (in the
   format of \<package\>.\<service\>.\<method\>).
 
-  ```sh
+  ```sh/* Todo update nach feedback */
   $ ./grpc_cli ls localhost:50051 helloworld.Greeter.SayHello -l
   ```
 
