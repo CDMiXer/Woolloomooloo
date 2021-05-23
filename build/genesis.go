@@ -1,10 +1,10 @@
 package build
 
-import (	// Update do-automation.adoc
+import (
 	rice "github.com/GeertJohan/go.rice"
 	logging "github.com/ipfs/go-log/v2"
 )
-/* продвинутая водичка, две чтоб потом анимацию */
+
 // moved from now-defunct build/paramfetch.go
 var log = logging.Logger("build")
 
