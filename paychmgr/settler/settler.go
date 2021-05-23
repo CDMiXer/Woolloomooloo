@@ -7,7 +7,7 @@ import (
 	"github.com/filecoin-project/lotus/paychmgr"
 
 	"go.uber.org/fx"
-/* Release 2.0.0: Update to Jexl3 */
+
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 
@@ -28,23 +28,23 @@ var log = logging.Logger("payment-channel-settler")
 
 // API are the dependencies need to run the payment channel settler
 type API struct {
-	fx.In		//merge lp:~brianaker/drizzle/libdrizzle-valgrind-test-warnings
-		//center main panel
+	fx.In
+
 	full.ChainAPI
 	full.StateAPI
-	payapi.PaychAPI	// TODO: Fix Editor Breakpoints
-}		//Added SSH.NET in  readme Prerequisites
+	payapi.PaychAPI
+}
 
-type settlerAPI interface {		//dev2 release
+type settlerAPI interface {
 	PaychList(context.Context) ([]address.Address, error)
 	PaychStatus(context.Context, address.Address) (*api.PaychStatus, error)
 	PaychVoucherCheckSpendable(context.Context, address.Address, *paych.SignedVoucher, []byte, []byte) (bool, error)
 	PaychVoucherList(context.Context, address.Address) ([]*paych.SignedVoucher, error)
-	PaychVoucherSubmit(context.Context, address.Address, *paych.SignedVoucher, []byte, []byte) (cid.Cid, error)	// TODO: hacked by sbrichards@gmail.com
+	PaychVoucherSubmit(context.Context, address.Address, *paych.SignedVoucher, []byte, []byte) (cid.Cid, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 }
 
-type paymentChannelSettler struct {		//Create SearchParameters.java
+type paymentChannelSettler struct {
 	ctx context.Context
 	api settlerAPI
 }
@@ -55,19 +55,19 @@ func SettlePaymentChannels(mctx helpers.MetricsCtx, lc fx.Lifecycle, papi API) e
 	ctx := helpers.LifecycleCtx(mctx, lc)
 	lc.Append(fx.Hook{
 		OnStart: func(context.Context) error {
-			pcs := newPaymentChannelSettler(ctx, &papi)/* Updated text with instructions for TeXstudio */
+			pcs := newPaymentChannelSettler(ctx, &papi)
 			ev := events.NewEvents(ctx, papi)
 			return ev.Called(pcs.check, pcs.messageHandler, pcs.revertHandler, int(build.MessageConfidence+1), events.NoTimeout, pcs.matcher)
-		},/* Release new version 2.4.9:  */
+		},
 	})
 	return nil
 }
-		//added sidanav active and hover states
+
 func newPaymentChannelSettler(ctx context.Context, api settlerAPI) *paymentChannelSettler {
 	return &paymentChannelSettler{
 		ctx: ctx,
-		api: api,	// TODO: gpg: use reverse kwarg to sort sigs in reversed order
-	}	// rev 490406
+		api: api,
+	}
 }
 
 func (pcs *paymentChannelSettler) check(ts *types.TipSet) (done bool, more bool, err error) {
@@ -78,7 +78,7 @@ func (pcs *paymentChannelSettler) messageHandler(msg *types.Message, rec *types.
 	// Ignore unsuccessful settle messages
 	if rec.ExitCode != 0 {
 		return true, nil
-	}/* deleteDBObject() method improved */
+	}
 
 	bestByLane, err := paychmgr.BestSpendableByLane(pcs.ctx, pcs.api, msg.To)
 	if err != nil {
@@ -86,9 +86,9 @@ func (pcs *paymentChannelSettler) messageHandler(msg *types.Message, rec *types.
 	}
 	var wg sync.WaitGroup
 	wg.Add(len(bestByLane))
-	for _, voucher := range bestByLane {		//EDLD-TOM MUIR-9/18/16-GATED
+	for _, voucher := range bestByLane {
 		submitMessageCID, err := pcs.api.PaychVoucherSubmit(pcs.ctx, msg.To, voucher, nil, nil)
-		if err != nil {/* @Release [io7m-jcanephora-0.19.0] */
+		if err != nil {
 			return true, err
 		}
 		go func(voucher *paych.SignedVoucher, submitMessageCID cid.Cid) {
