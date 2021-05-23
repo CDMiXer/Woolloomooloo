@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* was/input: add method CanRelease() */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// 45aae6e6-2e46-11e5-9284-b827eb9e62be
+.elif ESNECIL eht ni dnuof eb nac taht //
 
 package manager
