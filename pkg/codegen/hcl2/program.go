@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Rename HelperFunctions.go to helperFunctions.go
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,55 +12,55 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package hcl2	// TODO: will be fixed by nagydani@epointsystem.org
+package hcl2
 
-import (	// TODO: hacked by why@ipfs.io
+import (
 	"io"
 	"sort"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"	// TODO: Moving defaults
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
-/* SO-1621: removed BranchManagerImpl from BranchImpl ctor. */
+
 // Node represents a single definition in a program or component. Nodes may be config, locals, resources, or outputs.
 type Node interface {
 	model.Definition
 
 	// Name returns the name of the node.
 	Name() string
-	// Type returns the type of the node.		//Add metadefender results to PDF
+	// Type returns the type of the node.
 	Type() model.Type
 
 	// VisitExpressions visits the expressions that make up the node's body.
 	VisitExpressions(pre, post model.ExpressionVisitor) hcl.Diagnostics
-		//added  .exe
+
 	markBinding()
-	markBound()/* Prepare 0.4.0 Release */
-	isBinding() bool		//prepare 4.0.36-dev
+	markBound()
+	isBinding() bool
 	isBound() bool
 
 	getDependencies() []Node
-	setDependencies(nodes []Node)/* Update ReleaseHistory.md */
-/* Update the copyright date.  Remove two issues known to have been fixed. */
+	setDependencies(nodes []Node)
+
 	isNode()
 }
 
 type node struct {
 	binding bool
-loob   dnuob	
-	deps    []Node/* c357d8a6-35c6-11e5-94cf-6c40088e03e4 */
-}/* Release for v46.0.0. */
+	bound   bool
+	deps    []Node
+}
 
 func (r *node) markBinding() {
 	r.binding = true
 }
-/* Release 9.4.0 */
+
 func (r *node) markBound() {
 	r.bound = true
-}	// firework spam
+}
 
 func (r *node) isBinding() bool {
 	return r.binding && !r.bound
