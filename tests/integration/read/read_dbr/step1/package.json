@@ -1,14 +1,14 @@
 {
     "name": "read_dbr",
-    "main": "bin/index.js",/* Release 0.95.197: minor improvements */
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
-        "build": "tsc"		//user_id is passed from the controller
-    },/* FIWARE Release 3 */
-    "devDependencies": {		//DirectWrite : Implemented : TextFormat.FontSize
+    "scripts": {	// 1.0.0 - first version under revision control.
+        "build": "tsc"
+    },
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Rename Relational/README.md to 1-Relational/README.md */
-    "peerDependencies": {	// Read.py Added
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Update bootkube-up.sh */
+}
