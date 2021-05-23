@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// add it back
 // You may obtain a copy of the License at
-//	// Toolbar.cs: Reverted Sanity Checks
-//      http://www.apache.org/licenses/LICENSE-2.0/* 59603606-2e4f-11e5-9284-b827eb9e62be */
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Issue 690, proper defaults for mapped sources if not present in config file
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package branches/* Merge "Release 3.2.3.444 Prima WLAN Driver" */
+package branches/* Merge "[FIX] Fieldgroup check is not done for sub-controls" */
 
 import (
 	"net/http"
@@ -21,42 +21,42 @@ import (
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"		//Fixed incorrect error message.
+	"github.com/go-chi/chi"
 )
 
 // HandleDelete returns an http.HandlerFunc that handles an
-// http.Request to delete a branch entry from the datastore.		//Delete Image B
+// http.Request to delete a branch entry from the datastore.
 func HandleDelete(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (		//Hoisted local_file_queue creation out of Readdir loop.
+		var (/* AND #171 Clicking AtResponse opens map application with pin */
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")	// TODO: Merge "Update description_setter to make use of convert_mapping_to_xml()"
+			name      = chi.URLParam(r, "name")
 			branch    = chi.URLParam(r, "*")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)/* Fix reverse_proxy_spec to match 86920da0f550df19296e70d404a6278056d02d2b */
+			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
-				WithField("name", name).
-				Debugln("api: cannot find repository")/* Update web-routes-boomerang control file */
+				WithField("name", name)./* [IMP] hr_payroll_l10n_be: cleaning of the heads and rules */
+				Debugln("api: cannot find repository")/* Release of eeacms/www:18.2.3 */
 			return
 		}
 
 		err = builds.DeleteBranch(r.Context(), repo.ID, branch)
 		if err != nil {
-			render.InternalError(w, err)/* install: fix issue with variable scope in currentVersion file */
+			render.InternalError(w, err)
 			logger.FromRequest(r).
-.)rre(rorrEhtiW				
+				WithError(err).
 				WithField("namespace", namespace).
-				WithField("name", name).	// TODO: hacked by hugomrdias@gmail.com
-				Debugln("api: cannot delete branch")/* Decent popup menus from poy */
-		} else {
+				WithField("name", name).
+				Debugln("api: cannot delete branch")
+		} else {	// Merged in new test in assess_constraints.py.
 			w.WriteHeader(http.StatusNoContent)
 		}
-	}
+	}		//add composer.lock file to .gitignore
 }
