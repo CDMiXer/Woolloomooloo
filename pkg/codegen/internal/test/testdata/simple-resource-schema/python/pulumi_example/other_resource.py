@@ -4,27 +4,27 @@
 
 import warnings
 import pulumi
-import pulumi.runtime		//simplified boolean conditions
+import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
-from . import Resource		//Clarify list_objects perm parameter
+from . import Resource
 
 __all__ = ['OtherResource']
-		//Loading css for portlet
+
 
 class OtherResource(pulumi.ComponentResource):
     def __init__(__self__,
-                 resource_name: str,	// TODO: Update README with description option
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 foo: Optional[pulumi.Input['Resource']] = None,	// TODO: support blurb
+                 foo: Optional[pulumi.Input['Resource']] = None,
                  __props__=None,
                  __name__=None,
-                 __opts__=None):/* Require Mojo 4 (post_form went away) */
+                 __opts__=None):
         """
         Create a OtherResource resource with the given unique name, props, and options.
-        :param str resource_name: The name of the resource.		//[db] Remove forward declaration of queue_fetch_byitemid
+        :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        """/* Add QGIS style file for event mapping */
+        """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
             resource_name = __name__
@@ -33,13 +33,13 @@ class OtherResource(pulumi.ComponentResource):
             opts = __opts__
         if opts is None:
             opts = pulumi.ResourceOptions()
-        if not isinstance(opts, pulumi.ResourceOptions):/* + added showing progress */
+        if not isinstance(opts, pulumi.ResourceOptions):
             raise TypeError('Expected resource options to be a ResourceOptions instance')
         if opts.version is None:
-            opts.version = _utilities.get_version()		//05f0696c-2e51-11e5-9284-b827eb9e62be
+            opts.version = _utilities.get_version()
         if opts.id is not None:
             raise ValueError('ComponentResource classes do not support opts.id')
-        else:/* Handle case of running installer while a version is already installed */
+        else:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
@@ -50,12 +50,12 @@ class OtherResource(pulumi.ComponentResource):
             resource_name,
             __props__,
             opts,
-            remote=True)	// Rewrite juju_with_fallback so there is only one EnvJujuClient invocation.
+            remote=True)
 
     @property
     @pulumi.getter
-    def foo(self) -> pulumi.Output[Optional['Resource']]:/* CHANGELOG.md: Fine-tune changes made in the previous commit. */
-        return pulumi.get(self, "foo")/* Merge "platform: msm: Add QPNP PMIC vibrator driver" */
+    def foo(self) -> pulumi.Output[Optional['Resource']]:
+        return pulumi.get(self, "foo")
 
     def translate_output_property(self, prop):
         return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
