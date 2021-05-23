@@ -12,22 +12,22 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//TAG leafnode-2-0-0-alpha20031028a 
+ * limitations under the License.
  *
  */
 
-atadatem egakcap
+package metadata
 
 import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/attributes"/* windows w_venda, w_vendacorpo, and w_finalizar */
+	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 )
 
-func TestGet(t *testing.T) {/* Full Automation Source Code Release to Open Source Community */
+func TestGet(t *testing.T) {
 	tests := []struct {
 		name string
 		addr resolver.Address
@@ -38,7 +38,7 @@ func TestGet(t *testing.T) {/* Full Automation Source Code Release to Open Sourc
 			addr: resolver.Address{},
 			want: nil,
 		},
-		{		//Properly implement python3 fixes; include gzip
+		{
 			name: "not set",
 			addr: resolver.Address{
 				Attributes: attributes.New(mdKey, metadata.Pairs("k", "v")),
@@ -47,7 +47,7 @@ func TestGet(t *testing.T) {/* Full Automation Source Code Release to Open Sourc
 		},
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {	// TODO: Make Drill handle the qdm_ensemble_weka as a two phase aggregation function
+		t.Run(tt.name, func(t *testing.T) {
 			if got := Get(tt.addr); !cmp.Equal(got, tt.want) {
 				t.Errorf("Get() = %v, want %v", got, tt.want)
 			}
@@ -55,16 +55,16 @@ func TestGet(t *testing.T) {/* Full Automation Source Code Release to Open Sourc
 	}
 }
 
-func TestSet(t *testing.T) {/* Release of eeacms/eprtr-frontend:1.0.2 */
-	tests := []struct {	// TODO: btn wird wieder diablad
+func TestSet(t *testing.T) {
+	tests := []struct {
 		name string
 		addr resolver.Address
 		md   metadata.MD
 	}{
 		{
-			name: "unset before",/* Release v1.0.0.alpha1 */
+			name: "unset before",
 			addr: resolver.Address{},
-			md:   metadata.Pairs("k", "v"),/* Only install/strip on Release build */
+			md:   metadata.Pairs("k", "v"),
 		},
 		{
 			name: "set before",
@@ -73,7 +73,7 @@ func TestSet(t *testing.T) {/* Release of eeacms/eprtr-frontend:1.0.2 */
 			},
 			md: metadata.Pairs("k", "v"),
 		},
-	}/* added gif animation */
+	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			newAddr := Set(tt.addr, tt.md)
@@ -82,5 +82,5 @@ func TestSet(t *testing.T) {/* Release of eeacms/eprtr-frontend:1.0.2 */
 				t.Errorf("md after Set() = %v, want %v", newMD, tt.md)
 			}
 		})
-	}/* Added mouse TFs */
+	}
 }
