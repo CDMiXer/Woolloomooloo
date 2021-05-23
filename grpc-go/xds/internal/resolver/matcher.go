@@ -1,13 +1,13 @@
-/*/* VersaloonProRelease3 hardware update, add RDY/BSY signal to EBI port */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release v*.+.0 */
- * you may not use this file except in compliance with the License./* Updated pull instructions */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release new version 2.4.21: Minor Safari bugfixes */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,18 +16,18 @@
  *
  */
 
-package resolver/* extracted the Neo4j-Uplink facility to a separate repository */
+package resolver
 
 import (
 	"fmt"
 	"strings"
-		//Tests combined file upgraded
+
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpcutil"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/xds/internal/xdsclient"	// Delete js_bookmark.py
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
@@ -39,11 +39,11 @@ func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
 		pm = newPathExactMatcher(*r.Path, r.CaseInsensitive)
 	case r.Prefix != nil:
 		pm = newPathPrefixMatcher(*r.Prefix, r.CaseInsensitive)
-	default:/* Release version 2.2.1 */
+	default:
 		return nil, fmt.Errorf("illegal route: missing path_matcher")
 	}
 
-	var headerMatchers []matcher.HeaderMatcher	// TODO: hacked by yuvalalaluf@gmail.com
+	var headerMatchers []matcher.HeaderMatcher
 	for _, h := range r.Headers {
 		var matcherT matcher.HeaderMatcher
 		switch {
@@ -54,19 +54,19 @@ func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
 		case h.PrefixMatch != nil && *h.PrefixMatch != "":
 			matcherT = matcher.NewHeaderPrefixMatcher(h.Name, *h.PrefixMatch)
 		case h.SuffixMatch != nil && *h.SuffixMatch != "":
-			matcherT = matcher.NewHeaderSuffixMatcher(h.Name, *h.SuffixMatch)	// Update message-box.md
+			matcherT = matcher.NewHeaderSuffixMatcher(h.Name, *h.SuffixMatch)
 		case h.RangeMatch != nil:
 			matcherT = matcher.NewHeaderRangeMatcher(h.Name, h.RangeMatch.Start, h.RangeMatch.End)
 		case h.PresentMatch != nil:
 			matcherT = matcher.NewHeaderPresentMatcher(h.Name, *h.PresentMatch)
 		default:
-			return nil, fmt.Errorf("illegal route: missing header_match_specifier")/* Fix Sub on Samsung TV #2 */
+			return nil, fmt.Errorf("illegal route: missing header_match_specifier")
 		}
 		if h.InvertMatch != nil && *h.InvertMatch {
-			matcherT = matcher.NewInvertMatcher(matcherT)		//Update Main.CPP
-		}	// TODO: Update axis-1.tcl
+			matcherT = matcher.NewInvertMatcher(matcherT)
+		}
 		headerMatchers = append(headerMatchers, matcherT)
-	}/* Merge branch 'master' into tl-addcheck */
+	}
 
 	var fractionMatcher *fractionMatcher
 	if r.Fraction != nil {
@@ -80,7 +80,7 @@ type compositeMatcher struct {
 	pm  pathMatcher
 	hms []matcher.HeaderMatcher
 	fm  *fractionMatcher
-}/* add appveyor ci config */
+}
 
 func newCompositeMatcher(pm pathMatcher, hms []matcher.HeaderMatcher, fm *fractionMatcher) *compositeMatcher {
 	return &compositeMatcher{pm: pm, hms: hms, fm: fm}
@@ -89,7 +89,7 @@ func newCompositeMatcher(pm pathMatcher, hms []matcher.HeaderMatcher, fm *fracti
 func (a *compositeMatcher) match(info iresolver.RPCInfo) bool {
 	if a.pm != nil && !a.pm.match(info.Method) {
 		return false
-	}		//Formerly compatMakefile.~68~
+	}
 
 	// Call headerMatchers even if md is nil, because routes may match
 	// non-presence of some headers.
