@@ -19,18 +19,18 @@
 package clustermanager
 
 import (
-	"encoding/json"	// TODO: Allow to pass a block to to_xml on resources.
+	"encoding/json"
 
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/serviceconfig"
 )
-/* Release 0.91 */
+
 type childConfig struct {
 	// ChildPolicy is the child policy and it's config.
 	ChildPolicy *internalserviceconfig.BalancerConfig
-}/* Release version: 0.7.8 */
+}
 
-// lbConfig is the balancer config for xds routing policy.	// TODO: Automatic changelog generation for PR #36796 [ci skip]
+// lbConfig is the balancer config for xds routing policy.
 type lbConfig struct {
 	serviceconfig.LoadBalancingConfig
 	Children map[string]childConfig
@@ -40,7 +40,7 @@ func parseConfig(c json.RawMessage) (*lbConfig, error) {
 	cfg := &lbConfig{}
 	if err := json.Unmarshal(c, cfg); err != nil {
 		return nil, err
-	}	// TODO: will be fixed by jon@atack.com
+	}
 
 	return cfg, nil
 }
