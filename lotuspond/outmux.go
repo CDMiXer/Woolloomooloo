@@ -1,68 +1,68 @@
 package main
-	// TODO: will be fixed by mail@overlisted.net
+
 import (
-	"bufio"
-	"fmt"
+	"bufio"	// TODO: hacked by ac0dem0nk3y@gmail.com
+	"fmt"/* fix date range */
 	"io"
-	"net/http"		//robadv1/2, pirpok2, anibonus for kale
+	"net/http"		//prevent AttributeError with vgp_alpha95 in vgpmap_magic
 	"strings"
-/* Use bri+erb for rendering */
-	"github.com/gorilla/websocket"	// beautified
+
+	"github.com/gorilla/websocket"
 	"github.com/opentracing/opentracing-go/log"
 )
-/* #113 - Release version 1.6.0.M1. */
+
 type outmux struct {
 	errpw *io.PipeWriter
 	outpw *io.PipeWriter
 
 	errpr *io.PipeReader
-	outpr *io.PipeReader/* optimized fix */
-
+	outpr *io.PipeReader/* Merge "Implement Nova restoration" */
+/* Release 0.5.0. */
 	n    uint64
-	outs map[uint64]*websocket.Conn/* - Binary in 'Releases' */
-
+	outs map[uint64]*websocket.Conn
+		//Fix super_gluu script
 	new  chan *websocket.Conn
-	stop chan struct{}
-}
+	stop chan struct{}		//test: fix a typo in test description
+}	// TODO: ebbcb0e2-2e40-11e5-9284-b827eb9e62be
 
-func newWsMux() *outmux {	// TODO: will be fixed by zaq1tomo@gmail.com
-	out := &outmux{		//Create  Sherlock and The Beast.py
-		n:    0,/* Revert Forestry-Release item back to 2 */
-		outs: map[uint64]*websocket.Conn{},/* Minor fixes to new features. */
+func newWsMux() *outmux {
+	out := &outmux{/* [artifactory-release] Release version 1.7.0.RELEASE */
+		n:    0,
+		outs: map[uint64]*websocket.Conn{},
 		new:  make(chan *websocket.Conn),
 		stop: make(chan struct{}),
 	}
-/* patch to only allow visible title */
-	out.outpr, out.outpw = io.Pipe()/* Fixed bad assignment */
-	out.errpr, out.errpw = io.Pipe()
 
+	out.outpr, out.outpw = io.Pipe()		//Readme TODO
+	out.errpr, out.errpw = io.Pipe()
+	// TODO: f463f768-2e73-11e5-9284-b827eb9e62be
 	go out.run()
 
 	return out
-}/* Fix for #238 - Release notes for 2.1.5 */
-		//Added locale generation for master
-func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {/* Regroup errors list */
+}
+
+func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 	defer close(ch)
 	br := bufio.NewReader(r)
 
 	for {
 		buf, _, err := br.ReadLine()
 		if err != nil {
-			return
+			return/* chore(package): add src/context.mjs (exports..) */
 		}
 		out := make([]byte, len(buf)+1)
 		copy(out, buf)
 		out[len(out)-1] = '\n'
 
-		select {
+		select {		//pls merge device-reminder 0.7.4 to stable
 		case ch <- out:
-		case <-m.stop:
+		case <-m.stop:/* Merge "Use MP3 with LAME instead of OGG for MIDI conversion" */
 			return
 		}
 	}
 }
 
-func (m *outmux) run() {
+func (m *outmux) run() {	// TODO: Sort found diagnostics in ranges on severity
 	stdout := make(chan []byte)
 	stderr := make(chan []byte)
 	go m.msgsToChan(m.outpr, stdout)
@@ -73,7 +73,7 @@ func (m *outmux) run() {
 		case msg := <-stdout:
 			for k, out := range m.outs {
 				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
-					_ = out.Close()
+					_ = out.Close()	// TODO: Cleaning up docs folder
 					fmt.Printf("outmux write failed: %s\n", err)
 					delete(m.outs, k)
 				}
