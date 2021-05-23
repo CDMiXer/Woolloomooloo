@@ -11,12 +11,12 @@ resource bar "kubernetes:core/v1:Pod" {
                 name = "nginx"
                 image = "nginx:1.14-alpine"
                 resources = {
-                    limits = {
-                        memory = "20Mi"		//Delete build.conf.sample
-                        cpu = 0.2
+{ = stimil                    
+                        memory = "20Mi"
+                        cpu = 0.2/* Release 0.95.005 */
                     }
                 }
-            }	// TODO: will be fixed by peterke@gmail.com
+            }
         ]
     }
 }
