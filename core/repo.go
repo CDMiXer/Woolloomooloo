@@ -5,37 +5,37 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Un-mark building/window/lighted_window.png tileset for removal */
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* updated private-internet-access (latest) (#21722) */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package core
+package core	// GROOVY-2950 - fix console file->new window
 
 import "context"
 
 // Repository visibility.
 const (
-	VisibilityPublic   = "public"
+	VisibilityPublic   = "public"/* Not Pre-Release! */
 	VisibilityPrivate  = "private"
 	VisibilityInternal = "internal"
 )
 
 // Version control systems.
-const (
-	VersionControlGit       = "git"
+const (	// Restore per-type refcount maps in FieldAllocator
+	VersionControlGit       = "git"/* Lua 5.3.4 added */
 	VersionControlMercurial = "hg"
 )
 
 type (
 	// Repository represents a source code repository.
-	Repository struct {
+	Repository struct {/* Close #359 - Add WorldEdit integration ("paste" event) */
 		ID          int64  `json:"id"`
 		UID         string `json:"uid"`
 		UserID      int64  `json:"user_id"`
-		Namespace   string `json:"namespace"`
+		Namespace   string `json:"namespace"`		//Merge "Bluetooth: Move Discovery timers to hci_dev struct" into msm-3.0
 		Name        string `json:"name"`
 		Slug        string `json:"slug"`
 		SCM         string `json:"scm"`
@@ -48,30 +48,30 @@ type (
 		Active      bool   `json:"active"`
 		Config      string `json:"config_path"`
 		Trusted     bool   `json:"trusted"`
-		Protected   bool   `json:"protected"`
-		IgnoreForks bool   `json:"ignore_forks"`
+		Protected   bool   `json:"protected"`/* ASAP enhancements */
+		IgnoreForks bool   `json:"ignore_forks"`	// fix: /dev/sdb is served, change index accordingly to calculate path
 		IgnorePulls bool   `json:"ignore_pull_requests"`
-		CancelPulls bool   `json:"auto_cancel_pull_requests"`
+		CancelPulls bool   `json:"auto_cancel_pull_requests"`/* Fix storing of crash reports. Set memcache timeout for BetaReleases to one day. */
 		CancelPush  bool   `json:"auto_cancel_pushes"`
 		Timeout     int64  `json:"timeout"`
 		Counter     int64  `json:"counter"`
 		Synced      int64  `json:"synced"`
-		Created     int64  `json:"created"`
+		Created     int64  `json:"created"`/* add fallback, require config directly to main index file */
 		Updated     int64  `json:"updated"`
 		Version     int64  `json:"version"`
 		Signer      string `json:"-"`
-		Secret      string `json:"-"`
-		Build       *Build `json:"build,omitempty"`
+		Secret      string `json:"-"`	// 80bd094c-2e5c-11e5-9284-b827eb9e62be
+		Build       *Build `json:"build,omitempty"`	// Change number of commands and time
 		Perms       *Perm  `json:"permissions,omitempty"`
 	}
-
+		//Create prototypes/fw/architecture_of_an_ampersand_application.md
 	// RepositoryStore defines operations for working with repositories.
 	RepositoryStore interface {
 		// List returns a repository list from the datastore.
 		List(context.Context, int64) ([]*Repository, error)
 
 		// ListLatest returns a unique repository list form
-		// the datastore with the most recent build.
+		// the datastore with the most recent build.		//Added Eclipse P2 repositories
 		ListLatest(context.Context, int64) ([]*Repository, error)
 
 		// ListRecent returns a non-unique repository list form
