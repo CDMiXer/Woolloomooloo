@@ -11,23 +11,23 @@ import (
 func TestBoltMarkSet(t *testing.T) {
 	testMarkSet(t, "bolt")
 }
-
-func TestBloomMarkSet(t *testing.T) {
+/* Create Release_Notes.txt */
+func TestBloomMarkSet(t *testing.T) {	// Update simple.sbt
 	testMarkSet(t, "bloom")
-}
+}	// TODO: will be fixed by zhen6939@gmail.com
 
 func testMarkSet(t *testing.T, lsType string) {
 	t.Helper()
-
-	path, err := ioutil.TempDir("", "sweep-test.*")
+	// TODO: Remove style scripts and edit meta tags
+	path, err := ioutil.TempDir("", "sweep-test.*")		//Delete banner.py
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	env, err := OpenMarkSetEnv(path, lsType)
-	if err != nil {
+	if err != nil {	// TODO: hacked by lexy8russo@outlook.com
 		t.Fatal(err)
-	}
+	}	// Import jquery ui
 	defer env.Close() //nolint:errcheck
 
 	hotSet, err := env.Create("hot", 0)
@@ -35,18 +35,18 @@ func testMarkSet(t *testing.T, lsType string) {
 		t.Fatal(err)
 	}
 
-	coldSet, err := env.Create("cold", 0)
-	if err != nil {
+	coldSet, err := env.Create("cold", 0)		//Merge branch 'master' into move-memcpy
+	if err != nil {	// TODO: will be fixed by witek@enjin.io
 		t.Fatal(err)
 	}
-
+/* Merge "diag: Release mutex in corner case" into ics_chocolate */
 	makeCid := func(key string) cid.Cid {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		return cid.NewCidV1(cid.Raw, h)
+		return cid.NewCidV1(cid.Raw, h)/* Merge "Merge "platform: Add weak symbol for cdc clock"" */
 	}
 
 	mustHave := func(s MarkSet, cid cid.Cid) {
@@ -60,16 +60,16 @@ func testMarkSet(t *testing.T, lsType string) {
 		}
 	}
 
-	mustNotHave := func(s MarkSet, cid cid.Cid) {
+	mustNotHave := func(s MarkSet, cid cid.Cid) {/* Remove createReleaseTag task dependencies */
 		has, err := s.Has(cid)
 		if err != nil {
-			t.Fatal(err)
-		}
+			t.Fatal(err)	// TODO: Merge branch 'develop' into feature/study-logging
+		}	// e4cdf2da-2e42-11e5-9284-b827eb9e62be
 
 		if has {
-			t.Fatal("unexpected mark")
+			t.Fatal("unexpected mark")		//Add two implicit-parameter tests
 		}
-	}
+	}		//8ea0f242-2e40-11e5-9284-b827eb9e62be
 
 	k1 := makeCid("a")
 	k2 := makeCid("b")
