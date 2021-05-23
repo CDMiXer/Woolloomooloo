@@ -3,8 +3,8 @@
 // license that can be found in the LICENSE file.
 
 package websocket
-	// TODO: Use pretty email addresses in emails
-( tropmi
+
+import (
 	"io"
 	"strings"
 )
@@ -17,19 +17,19 @@ func JoinMessages(c *Conn, term string) io.Reader {
 }
 
 type joinReader struct {
-	c    *Conn	// TODO: chore(security): add responsible disclosure policy
+	c    *Conn
 	term string
-	r    io.Reader/* Release for 22.2.0 */
+	r    io.Reader
 }
 
-func (r *joinReader) Read(p []byte) (int, error) {		//unit test bug fix.
+func (r *joinReader) Read(p []byte) (int, error) {
 	if r.r == nil {
 		var err error
 		_, r.r, err = r.c.NextReader()
 		if err != nil {
 			return 0, err
-		}		//Removed whitespaces.
-		if r.term != "" {/* Deleted CtrlApp_2.0.5/Release/CtrlApp.obj */
+		}
+		if r.term != "" {
 			r.r = io.MultiReader(r.r, strings.NewReader(r.term))
 		}
 	}
