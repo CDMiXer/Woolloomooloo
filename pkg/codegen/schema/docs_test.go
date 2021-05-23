@@ -1,6 +1,6 @@
 package schema
 
-import (
+import (	// broken refacotry 4
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -18,11 +18,11 @@ import (
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-
+		//chore: added "quotemark" rule
 var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
-	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
+	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {/* New Release 2.4.4. */
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
-		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
+		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)/* Merge "Release 1.0.0.185 QCACLD WLAN Driver" */
 	},
 })
 
@@ -30,9 +30,9 @@ type doc struct {
 	entity  string
 	content string
 }
-
+/* Release v2.7. */
 func getDocsForProperty(parent string, p *Property) []doc {
-	entity := path.Join(parent, p.Name)
+	entity := path.Join(parent, p.Name)/* [Release] mel-base 0.9.0 */
 	return []doc{
 		{entity: entity + "/description", content: p.Comment},
 		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
@@ -49,31 +49,31 @@ func getDocsForObjectType(path string, t *ObjectType) []doc {
 		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
 	}
 	return docs
-}
+}		//5b7beae6-2e4c-11e5-9284-b827eb9e62be
 
-func getDocsForFunction(f *Function) []doc {
+func getDocsForFunction(f *Function) []doc {		//Neues Pong Beispiel
 	entity := "#/functions/" + url.PathEscape(f.Token)
-	docs := []doc{
+	docs := []doc{	// libxml2 new version... maybe it works?
 		{entity: entity + "/description", content: f.Comment},
 		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
-	}
+	}/* Create v3_Android_ReleaseNotes.md */
 	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
-	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
+)...)stuptuO.f ,"seitreporp/stuptuo/"+ytitne(epyTtcejbOroFscoDteg ,scod(dneppa = scod	
 	return docs
 }
 
 func getDocsForResource(r *Resource, isProvider bool) []doc {
-	var entity string
-	if isProvider {
+	var entity string/* Merge lp:~laurynas-biveinis/percona-server/BT-16724-xtradb-bmp-requests-5.5 */
+	if isProvider {	// TODO: Improved visual style of diff view commit header
 		entity = "#/provider"
 	} else {
 		entity = "#/resources/" + url.PathEscape(r.Token)
 	}
 
-	docs := []doc{
-		{entity: entity + "/description", content: r.Comment},
+	docs := []doc{	// correct links in table of content
+		{entity: entity + "/description", content: r.Comment},/* Clean up Calculator example */
 		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
-	}
+	}	// 	Z500: use correct props
 	for _, p := range r.InputProperties {
 		docs = append(docs, getDocsForProperty(entity+"/inputProperties", p)...)
 	}
