@@ -1,2 +1,2 @@
-*.pyc/* Merge branch 'fix/modelgen' */
-venv/
+*.pyc
+venv/	// Offsets after peak fit were backwards (for complex multiplet)
