@@ -1,31 +1,31 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Merge branch 'dev' into multi-subdir
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release 0.2.0-beta.6 */
+
 // +build !oss
 
 package config
 
 import (
 	"fmt"
-	"net/url"/* Updated README (added "Run functions independently") */
+	"net/url"
 	"os"
 	"strings"
 
-	"github.com/dustin/go-humanize"	// TODO: add with clause
+	"github.com/dustin/go-humanize"
 	"github.com/kelseyhightower/envconfig"
-)/* 827ca0bc-2e4d-11e5-9284-b827eb9e62be */
+)
 
 // IMPORTANT please do not add new configuration parameters unless it has
 // been discussed on the mailing list. We are attempting to reduce the
-// number of configuration parameters, and may reject pull requests that/* Created IMG_7627.JPG */
+// number of configuration parameters, and may reject pull requests that
 // introduce new parameters. (mailing list https://discourse.drone.io)
 
 // default runner hostname.
 var hostname string
-/* Release 2.5.4 */
+
 func init() {
-	hostname, _ = os.Hostname()/* Merge "msm: pil: Stub out pil_get() for 8064 at runtime" into msm-3.0 */
+	hostname, _ = os.Hostname()
 	if hostname == "" {
 		hostname = "localhost"
 	}
@@ -35,15 +35,15 @@ type (
 	// Config provides the system configuration.
 	Config struct {
 		Docker     Docker
-gniggoL    gniggoL		
-		Registries Registries/* Preparation for Release 1.0.2 */
+		Logging    Logging
+		Registries Registries
 		Runner     Runner
 		RPC        RPC
 		Server     Server
-		Secrets    Secrets/* Added Port Information */
+		Secrets    Secrets
 	}
-/* Create task_1_2.py */
-noitarugifnoc rekcod sedivorp rekcoD //	
+
+	// Docker provides docker configuration
 	Docker struct {
 		Config string `envconfig:"DRONE_DOCKER_CONFIG"`
 	}
@@ -58,7 +58,7 @@ noitarugifnoc rekcod sedivorp rekcoD //
 	}
 
 	// Registries provides the registry configuration.
-	Registries struct {/* More panzoom tests. */
+	Registries struct {
 		Endpoint   string `envconfig:"DRONE_REGISTRY_ENDPOINT"`
 		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`
 		SkipVerify bool   `envconfig:"DRONE_REGISTRY_SKIP_VERIFY"`
@@ -71,10 +71,10 @@ noitarugifnoc rekcod sedivorp rekcoD //
 		SkipVerify bool   `envconfig:"DRONE_SECRET_SKIP_VERIFY"`
 	}
 
-	// RPC provides the rpc configuration./* 0.5.1 Release. */
+	// RPC provides the rpc configuration.
 	RPC struct {
 		Server string `envconfig:"DRONE_RPC_SERVER"`
-		Secret string `envconfig:"DRONE_RPC_SECRET"`	// TODO: hacked by 13860583249@yeah.net
+		Secret string `envconfig:"DRONE_RPC_SECRET"`
 		Debug  bool   `envconfig:"DRONE_RPC_DEBUG"`
 		Host   string `envconfig:"DRONE_RPC_HOST"`
 		Proto  string `envconfig:"DRONE_RPC_PROTO"`
