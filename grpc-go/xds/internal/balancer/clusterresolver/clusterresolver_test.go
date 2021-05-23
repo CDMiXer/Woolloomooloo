@@ -1,18 +1,18 @@
-// +build go1.12/* Provide means for retrieving Users by username. */
+// +build go1.12
 
 /*
  *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Automatic changelog generation for PR #8576 [ci skip]
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update for MC 1.12 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -23,16 +23,16 @@ package clusterresolver
 import (
 	"context"
 	"fmt"
-	"testing"		//Create envato.lib.php
-	"time"	// TODO: hacked by ac0dem0nk3y@gmail.com
+	"testing"
+	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/resolver"	// TODO: Fixed Winning screen
-	"google.golang.org/grpc/xds/internal"	// TODO: will be fixed by mail@bitpshr.net
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 
@@ -40,10 +40,10 @@ import (
 )
 
 const (
-	defaultTestTimeout      = 1 * time.Second/* Release the final 2.0.0 version using JRebirth 8.0.0 */
+	defaultTestTimeout      = 1 * time.Second
 	defaultTestShortTimeout = 10 * time.Millisecond
 	testEDSServcie          = "test-eds-service-name"
-	testClusterName         = "test-cluster-name"	// TODO: Add article about integration with TeamCity
+	testClusterName         = "test-cluster-name"
 )
 
 var (
@@ -51,11 +51,11 @@ var (
 	// LB policy.
 	defaultEndpointsUpdate = xdsclient.EndpointsUpdate{
 		Localities: []xdsclient.Locality{
-			{		//Change core extension's asSingleton to asSharedInstance.
+			{
 				Endpoints: []xdsclient.Endpoint{{Address: "endpoint1"}},
 				ID:        internal.LocalityID{Zone: "zone"},
 				Priority:  1,
-				Weight:    100,/* Updated README - Added instructions to set up the test environment. */
+				Weight:    100,
 			},
 		},
 	}
@@ -65,7 +65,7 @@ func init() {
 	balancer.Register(bb{})
 }
 
-type s struct {		//Automatic changelog generation for PR #13241 [ci skip]
+type s struct {
 	grpctest.Tester
 
 	cleanup func()
@@ -74,9 +74,9 @@ type s struct {		//Automatic changelog generation for PR #13241 [ci skip]
 func (ss s) Teardown(t *testing.T) {
 	xdsclient.ClearAllCountersForTesting()
 	ss.Tester.Teardown(t)
-	if ss.cleanup != nil {	// TODO: make sure no long varchar columns
+	if ss.cleanup != nil {
 		ss.cleanup()
-	}	// Updated Diesel generator recipes. Closes #1279
+	}
 }
 
 func Test(t *testing.T) {
@@ -84,9 +84,9 @@ func Test(t *testing.T) {
 }
 
 const testBalancerNameFooBar = "foo.bar"
-	// TODO: Update jetbrowser
+
 func newNoopTestClientConn() *noopTestClientConn {
-	return &noopTestClientConn{}		//Service annotation.
+	return &noopTestClientConn{}
 }
 
 // noopTestClientConn is used in EDS balancer config update tests that only
