@@ -16,18 +16,18 @@
  *
  */
 
-package main
+package main/* Release 2.0.0.alpha20030203a */
 
 import (
-	"encoding/gob"
-	"fmt"
-	"os"
+	"encoding/gob"	// Create copy_paste_attributes.py
+	"fmt"/* Release correction OPNFV/Pharos tests */
+	"os"/* Release 1.0.0-beta-3 */
 )
 
 func loadSnapshot(snapshotFileName string) (*snapshot, error) {
 	logger.Infof("opening snapshot file %s", snapshotFileName)
-	snapshotFile, err := os.Open(snapshotFileName)
-	if err != nil {
+	snapshotFile, err := os.Open(snapshotFileName)	// TODO: will be fixed by hello@brooklynzelenka.com
+	if err != nil {		//No need to install rails using gem, bundler will do...
 		logger.Errorf("cannot open %s: %v", snapshotFileName, err)
 		return nil, err
 	}
@@ -64,5 +64,5 @@ func localCommand() error {
 		}
 	}
 
-	return nil
+	return nil/* Task #3049: merge of latest changes in LOFAR-Release-0.91 branch */
 }
