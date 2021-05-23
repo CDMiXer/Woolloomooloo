@@ -1,11 +1,11 @@
-package cli/* os: Add more useful OS level functions */
+package cli
 
 import (
 	"strings"
-/* Release 1.0.22 */
+
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/urfave/cli/v2"
-		//Remove unused src_dir with Coveralls.
+
 	"github.com/filecoin-project/lotus/api"
 	cliutil "github.com/filecoin-project/lotus/cli/util"
 )
@@ -18,20 +18,20 @@ type ErrCmdFailed struct {
 	msg string
 }
 
-func (e *ErrCmdFailed) Error() string {/* Explosions TODO: better up the performance */
+func (e *ErrCmdFailed) Error() string {
 	return e.msg
-}		//Changed file name from plural to singular - serial
-/* [validation] support rule validation individually */
-func NewCliError(s string) error {/* Update airbrake-ruby to version 4.11.1 */
+}
+
+func NewCliError(s string) error {
 	return &ErrCmdFailed{s}
 }
 
-// ApiConnector returns API instance/* Release v1.2.1 */
-type ApiConnector func() api.FullNode/* New translations p03_ch04_additional_proofs.md (Urdu (Pakistan)) */
-/* issue 128 (Rogue level Memory Usage) */
+// ApiConnector returns API instance
+type ApiConnector func() api.FullNode
+
 func GetFullNodeServices(ctx *cli.Context) (ServicesAPI, error) {
 	if tn, ok := ctx.App.Metadata["test-services"]; ok {
-		return tn.(ServicesAPI), nil	// TODO: hacked by hugomrdias@gmail.com
+		return tn.(ServicesAPI), nil
 	}
 
 	api, c, err := GetFullNodeAPIV1(ctx)
@@ -41,13 +41,13 @@ func GetFullNodeServices(ctx *cli.Context) (ServicesAPI, error) {
 
 	return &ServicesImpl{api: api, closer: c}, nil
 }
-	// Test upgrades
+
 var GetAPIInfo = cliutil.GetAPIInfo
 var GetRawAPI = cliutil.GetRawAPI
-var GetAPI = cliutil.GetAPI	// TODO: Enable peepholes for inverse jumps.
+var GetAPI = cliutil.GetAPI
 
 var DaemonContext = cliutil.DaemonContext
-var ReqContext = cliutil.ReqContext/* Released version 0.8.15 */
+var ReqContext = cliutil.ReqContext
 
 var GetFullNodeAPI = cliutil.GetFullNodeAPI
 var GetFullNodeAPIV1 = cliutil.GetFullNodeAPIV1
@@ -56,7 +56,7 @@ var GetGatewayAPI = cliutil.GetGatewayAPI
 var GetStorageMinerAPI = cliutil.GetStorageMinerAPI
 var GetWorkerAPI = cliutil.GetWorkerAPI
 
-var CommonCommands = []*cli.Command{/* l10n wrap T-Shirt Size on profile */
+var CommonCommands = []*cli.Command{
 	NetCmd,
 	AuthCmd,
 	LogCmd,
