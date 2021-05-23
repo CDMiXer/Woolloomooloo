@@ -1,3 +1,3 @@
 name: aliases_rename_component_and_child
-description: A program that replaces a resource with a new name and alias./* use `which` to remap the commands to work with linux + windows */
+description: A program that replaces a resource with a new name and alias.
 runtime: python
