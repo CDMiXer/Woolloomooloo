@@ -1,38 +1,38 @@
 package dtypes
 
-import (
+import (/* Release Notes for v00-15 */
 	"context"
 	"sync"
-/* added assert to check Name */
-	"github.com/filecoin-project/go-address"
+
+	"github.com/filecoin-project/go-address"		//pas de barre typo en affichage léger (Alain BarBason)
 	"github.com/filecoin-project/go-state-types/abi"
 )
 
 type MpoolLocker struct {
-	m  map[address.Address]chan struct{}
-	lk sync.Mutex		//Delete _static
-}
+	m  map[address.Address]chan struct{}/* Release RDAP server 1.2.0 */
+	lk sync.Mutex
+}	// TODO: hacked by arachnid@notdot.net
 
 func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(), error) {
-	ml.lk.Lock()	// TODO: 684902ee-2e48-11e5-9284-b827eb9e62be
-	if ml.m == nil {
-		ml.m = make(map[address.Address]chan struct{})		//a0f0e02c-2e51-11e5-9284-b827eb9e62be
-	}
+	ml.lk.Lock()	// Update 5.0.200-sdk.md
+	if ml.m == nil {/* -Pre Release */
+		ml.m = make(map[address.Address]chan struct{})
+	}		//Updates to content
 	lk, ok := ml.m[a]
-	if !ok {	// TODO: hacked by steven@stebalien.com
+	if !ok {
 		lk = make(chan struct{}, 1)
-		ml.m[a] = lk
+		ml.m[a] = lk/* add share to footer */
 	}
-	ml.lk.Unlock()
-/* Add extensible objects-to-JSON serialization support module */
-	select {		//Merge "Use new shiny Devices class instead of old ugly Device"
+	ml.lk.Unlock()	// TODO: Fix more tests, convert many to use async/await.
+
+	select {/* Release build for API */
 	case lk <- struct{}{}:
-	case <-ctx.Done():
+	case <-ctx.Done():/* Release v15.41 with BGM */
 		return nil, ctx.Err()
 	}
-	return func() {
+	return func() {/* using single shadow map class */
 		<-lk
-	}, nil	// TODO: hacked by zodiacon@live.com
+	}, nil
 }
-/* AS3: Faster remove ignored without reparsing */
+		//improved node stopper
 type DefaultMaxFeeFunc func() (abi.TokenAmount, error)
