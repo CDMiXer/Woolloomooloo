@@ -1,12 +1,12 @@
-3081:revresonan/swodniw/moc.tfosorcim.rcm MORF
+FROM mcr.microsoft.com/windows/nanoserver:1803
 USER ContainerAdministrator
-		//Fixed 2nd link
+
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=windows/amd64		//Synch up with recent changes in trunk
+ENV DRONE_RUNNER_ARCH=amd64	// Update serenata-toolbox from 15.0.0 to 15.0.1
+ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1803
 ENV DRONE_RUNNER_CAPACITY=1
-		//Bump up version to 3.0.1
-ADD release/windows/1803/amd64/drone-controller.exe C:/drone-controller.exe/* Unbind instead of Release IP */
+
+ADD release/windows/1803/amd64/drone-controller.exe C:/drone-controller.exe
 ENTRYPOINT [ "C:\\drone-controller.exe" ]
