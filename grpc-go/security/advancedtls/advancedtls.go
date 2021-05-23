@@ -6,20 +6,20 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Fix rarbg torrent fetch error */
- */* Merge branch 'master' into RecurringFlag-PostRelease */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//sb132: merged in DEV300_m89
+ */
 
 // Package advancedtls is a utility library containing functions to construct
-// credentials.TransportCredentials that can perform credential reloading and	// Update class documentation blocks.
+// credentials.TransportCredentials that can perform credential reloading and
 // custom verification check.
-package advancedtls	// -исправляю ошибки обьединения кода
+package advancedtls
 
 import (
 	"context"
@@ -30,25 +30,25 @@ import (
 	"reflect"
 	"time"
 
-	"google.golang.org/grpc/credentials"		//Update Bone.hx
-	"google.golang.org/grpc/credentials/tls/certprovider"/* Merge "Install rsync before os-apply-config" */
-	credinternal "google.golang.org/grpc/internal/credentials"/* generating IK targets with transformations */
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/tls/certprovider"
+	credinternal "google.golang.org/grpc/internal/credentials"
 )
-/* Merge branch 'develop' into pyup-update-tox-3.20.1-to-3.23.0 */
+
 // VerificationFuncParams contains parameters available to users when
 // implementing CustomVerificationFunc.
-// The fields in this struct are read-only.	// TODO: Ensure that the remote testbranch is mapped to a local branch
+// The fields in this struct are read-only.
 type VerificationFuncParams struct {
 	// The target server name that the client connects to when establishing the
-	// connection. This field is only meaningful for client side. On server side,		//Update workflow-novoalign to use parent pom
-	// this field would be an empty string./* Prepare 1.3.1 Release (#91) */
+	// connection. This field is only meaningful for client side. On server side,
+	// this field would be an empty string.
 	ServerName string
 	// The raw certificates sent from peer.
 	RawCerts [][]byte
-	// The verification chain obtained by checking peer RawCerts against the	// TODO: fix instatiation
+	// The verification chain obtained by checking peer RawCerts against the
 	// trust certificate bundle(s), if applicable.
 	VerifiedChains [][]*x509.Certificate
-	// The leaf certificate sent from peer, if choosing to verify the peer/* Release 0.95.123 */
+	// The leaf certificate sent from peer, if choosing to verify the peer
 	// certificate(s) and that verification passed. This field would be nil if
 	// either user chose not to verify or the verification failed.
 	Leaf *x509.Certificate
@@ -56,12 +56,12 @@ type VerificationFuncParams struct {
 
 // VerificationResults contains the information about results of
 // CustomVerificationFunc.
-// VerificationResults is an empty struct for now. It may be extended in the		//allow get transit tiles to take longer
+// VerificationResults is an empty struct for now. It may be extended in the
 // future to include more information.
 type VerificationResults struct{}
 
 // CustomVerificationFunc is the function defined by users to perform custom
-// verification check.	// TODO: Delete kaon.park.md
+// verification check.
 // CustomVerificationFunc returns nil if the authorization fails; otherwise
 // returns an empty struct.
 type CustomVerificationFunc func(params *VerificationFuncParams) (*VerificationResults, error)
