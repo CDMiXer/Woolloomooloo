@@ -1,59 +1,59 @@
-[metadata]		//Copy tag from one swf to another with it's dependencies
+[metadata]
   name = "lotus-soup"
   author = ""
 
-[global]/* trigger new build for mruby-head (2960c69) */
-"puos-sutol" = nalp  
-  case = "drand-outage"	// test travis against django 1.11
+[global]/* Release version 0.1.9. Fixed ATI GPU id check. */
+  plan = "lotus-soup"/* Release documentation updates. */
+  case = "drand-outage"
   total_instances = 7
-  builder = "docker:go"
+  builder = "docker:go"		//363cbf44-2e51-11e5-9284-b827eb9e62be
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]/* New Release 2.3 */
 
-[global.run_config]/* Delete botmanager.lua */
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Merge remote-tracking branch 'AIMS/UAT_Release5' */
+[global.run_config]/* Release 3.1.3 */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Updated values of ReleaseGroupPrimaryType. */
 
 [global.build_config]
-  enable_go_build_cache = true
+  enable_go_build_cache = true/* python 3.6+ */
 
-[global.run.test_params]	// TODO: Serialization support for arrays.
+[global.run.test_params]
   clients = "0"
   miners = "3"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
-  random_beacon_type = "local-drand"		//Merge "Add verify for guest get"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Merge "Release 1.4.1" */
+  sectors = "10"/* New stimuli for UC+Sabine */
+  random_beacon_type = "local-drand"		//Fix uploaded paste's not displaying correctly
   genesis_timestamp_offset = "0"
-  mining_mode = "natural"		//вывод произвольного текста + модуль продуктов
-	// TODO: Icon Only preference optimized
+  mining_mode = "natural"
+
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1
-    percentage = 0.0/* Merge "Release is a required parameter for upgrade-env" */
+    count = 1	// Update version_checker.txt
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* Rename readme to readme.html */
-
-[[groups]]		//updating usage and adding TOC
-  id = "miners"
-  [groups.instances]
-    count = 3
-    percentage = 0.0/* [#761] Release notes V1.7.3 */
-  [groups.run]
-    [groups.run.test_params]/* Primer Release */
-      role = "miner"
+      role = "bootstrapper"/* ReleaseNotes.rst: typo */
 
 [[groups]]
-  id = "drand"/* Fixed character code specification of response */
+  id = "miners"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]	// TODO: will be fixed by juan@benet.ai
+      role = "miner"
+
+[[groups]]
+  id = "drand"
+  [groups.instances]
+    count = 3
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]/* updates subventions_importer to find also by year */
       role = "drand"
       drand_period = "30s"
-      drand_catchup_period = "10s"
-      drand_log_level = "debug"
+      drand_catchup_period = "10s"	// TODO: hacked by aeongrp@outlook.com
+      drand_log_level = "debug"/* Update README.md add description for commands and tags */
       suspend_events = "wait 3m -> halt -> wait 3m -> resume -> wait 3m -> halt -> wait 3m -> resume"
