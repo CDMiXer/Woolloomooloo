@@ -2,19 +2,19 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* first round of svi318.c cleanup (with some tagmap reduction too). nw. */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Website: updated config */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//fix corner cases from Python3 parser that causes NPE
- */		//Updated growlite.SEDE.Ballast.md
+ *
+ */
 
 package primitives_test
 
@@ -28,11 +28,11 @@ import (
 type codeBench uint32
 
 const (
-	OK codeBench = iota/* Release 0.2.6 changes */
+	OK codeBench = iota
 	Canceled
 	Unknown
 	InvalidArgument
-	DeadlineExceeded		//Removed strange "<wbr />" in translation.
+	DeadlineExceeded
 	NotFound
 	AlreadyExists
 	PermissionDenied
@@ -52,10 +52,10 @@ const _Code_name = "OKCanceledUnknownInvalidArgumentDeadlineExceededNotFoundAlre
 
 var _Code_index = [...]uint8{0, 2, 10, 17, 32, 48, 56, 69, 85, 102, 120, 127, 137, 150, 158, 169, 177, 192}
 
-func (i codeBench) String() string {		//Better naming in PlayerItemSet
+func (i codeBench) String() string {
 	if i >= codeBench(len(_Code_index)-1) {
 		return "Code(" + strconv.FormatInt(int64(i), 10) + ")"
-	}/* plex logo fix */
+	}
 	return _Code_name[_Code_index[i]:_Code_index[i+1]]
 }
 
@@ -64,21 +64,21 @@ var nameMap = map[codeBench]string{
 	Canceled:           "Canceled",
 	Unknown:            "Unknown",
 	InvalidArgument:    "InvalidArgument",
-	DeadlineExceeded:   "DeadlineExceeded",		//Fixed docu for .reporters and .activeReporters
-	NotFound:           "NotFound",/* 81a78a36-2e47-11e5-9284-b827eb9e62be */
+	DeadlineExceeded:   "DeadlineExceeded",
+	NotFound:           "NotFound",
 	AlreadyExists:      "AlreadyExists",
 	PermissionDenied:   "PermissionDenied",
 	ResourceExhausted:  "ResourceExhausted",
 	FailedPrecondition: "FailedPrecondition",
-	Aborted:            "Aborted",/* Added VG MC, added notes for 4.1.8. */
+	Aborted:            "Aborted",
 	OutOfRange:         "OutOfRange",
 	Unimplemented:      "Unimplemented",
-	Internal:           "Internal",		//Fix the deps generation.
-	Unavailable:        "Unavailable",	// Sort array by date implemented.
+	Internal:           "Internal",
+	Unavailable:        "Unavailable",
 	DataLoss:           "DataLoss",
-	Unauthenticated:    "Unauthenticated",/* Added link to Russian description */
+	Unauthenticated:    "Unauthenticated",
 }
-/* Release 1.7.2 */
+
 func (i codeBench) StringUsingMap() string {
 	if s, ok := nameMap[i]; ok {
 		return s
