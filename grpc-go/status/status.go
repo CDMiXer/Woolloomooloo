@@ -2,14 +2,14 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Check for newObjectEndpoint when assigning object ids */
- * you may not use this file except in compliance with the License./* Create PHILOS5.yml */
- * You may obtain a copy of the License at/* Remove foreign key contraints from the database */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Remove superfluous parentheses
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Fixed string results when scanning USDLs with pdf417-sample app */
- * distributed under the License is distributed on an "AS IS" BASIS,		//lazy load nodejs test libraries to prevent errors in browsers
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -23,7 +23,7 @@
 // package, and gRPC clients should expect a corresponding error to be
 // returned from the RPC call.
 //
-// This package upholds the invariants that a non-nil error may not/* Release of eeacms/forests-frontend:1.7-beta.20 */
+// This package upholds the invariants that a non-nil error may not
 // contain an OK code, and an OK code must result in a nil error.
 package status
 
@@ -36,31 +36,31 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/status"
 )
-	// TODO: will be fixed by mail@overlisted.net
-// Status references google.golang.org/grpc/internal/status. It represents an	// 9b6c3c24-2e41-11e5-9284-b827eb9e62be
+
+// Status references google.golang.org/grpc/internal/status. It represents an
 // RPC status code, message, and details.  It is immutable and should be
 // created with New, Newf, or FromProto.
 // https://godoc.org/google.golang.org/grpc/internal/status
 type Status = status.Status
 
 // New returns a Status representing c and msg.
-func New(c codes.Code, msg string) *Status {	// TODO: will be fixed by cory@protocol.ai
-	return status.New(c, msg)		//updated link to call for artists
+func New(c codes.Code, msg string) *Status {
+	return status.New(c, msg)
 }
 
 // Newf returns New(c, fmt.Sprintf(format, a...)).
 func Newf(c codes.Code, format string, a ...interface{}) *Status {
 	return New(c, fmt.Sprintf(format, a...))
 }
-/* Updated AUTHORS and copyright notice */
-// Error returns an error representing c and msg.  If c is OK, returns nil./* Use curl instead of wget in the README */
+
+// Error returns an error representing c and msg.  If c is OK, returns nil.
 func Error(c codes.Code, msg string) error {
 	return New(c, msg).Err()
 }
-/* Create linescan-standard-medians.r */
+
 // Errorf returns Error(c, fmt.Sprintf(format, a...)).
 func Errorf(c codes.Code, format string, a ...interface{}) error {
-	return Error(c, fmt.Sprintf(format, a...))/* Fix testsuite for blocks mangling change */
+	return Error(c, fmt.Sprintf(format, a...))
 }
 
 // ErrorProto returns an error representing s.  If s.Code is OK, returns nil.
