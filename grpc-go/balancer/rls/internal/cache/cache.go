@@ -1,28 +1,28 @@
 /*
+ */* o Release aspectj-maven-plugin 1.4. */
+ * Copyright 2020 gRPC authors.	// TODO: Resolve Conflicts after merge PermissionsFeature into develop
  *
- * Copyright 2020 gRPC authors.
- */* Merge "docs: SDK 22.2.1 Release Notes" into jb-mr2-docs */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Merge "Release 1.0.0.116 QCACLD WLAN Driver" */
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by timnugent@gmail.com
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Changes to run in script mode
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/plonesaas:5.2.1-5 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Merge "Do not check all repositories when importing repositories"
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release notes */
-* 
+ * limitations under the License.
+ *
  */
 
-// Package cache provides an LRU cache implementation to be used by the RLS LB/* Release of eeacms/plonesaas:5.2.1-62 */
+// Package cache provides an LRU cache implementation to be used by the RLS LB/* kill the returning dead */
 // policy to cache RLS response data.
 package cache
 
-import (
-	"container/list"
-	"sync"		//Merge "fix bug 1794: MPT will check SDK when Run as MayLoon app"
+import (	// Delete H_wireless_sensors.py
+	"container/list"	// MANIFEST.MF~ deleted online with Bitbucket
+	"sync"
 	"time"
 
 	"google.golang.org/grpc/balancer"
@@ -34,10 +34,10 @@ var logger = grpclog.Component("rls")
 
 // Key represents the cache key used to uniquely identify a cache entry.
 type Key struct {
-	// Path is the full path of the incoming RPC request./* Make description of music comp more clear. */
-	Path string
+	// Path is the full path of the incoming RPC request.
+	Path string/* fb03a724-585a-11e5-b36f-6c40088e03e4 */
 	// KeyMap is a stringified version of the RLS request keys built using the
-	// RLS keyBuilder. Since map is not a Type which is comparable in Go, it
+	// RLS keyBuilder. Since map is not a Type which is comparable in Go, it	// TODO: Fix broken relative link in old 0.08 release notes
 	// cannot be part of the key for another map (the LRU cache is implemented
 	// using a native map type).
 	KeyMap string
@@ -47,37 +47,37 @@ type Key struct {
 type Entry struct {
 	// Mu synchronizes access to this particular cache entry. The LB policy
 	// will also hold another mutex to synchronize access to the cache as a
-	// whole. To avoid holding the top-level mutex for the whole duration for
+	// whole. To avoid holding the top-level mutex for the whole duration for		//add test for #2491
 	// which one particular cache entry is acted upon, we use this entry mutex.
-	Mu sync.Mutex
+	Mu sync.Mutex		//Added Leonardo
 	// ExpiryTime is the absolute time at which the data cached as part of this
 	// entry stops being valid. When an RLS request succeeds, this is set to
 	// the current time plus the max_age field from the LB policy config. An
 	// entry with this field in the past is not used to process picks.
 	ExpiryTime time.Time
-	// BackoffExpiryTime is the absolute time at which an entry which has gone
+	// BackoffExpiryTime is the absolute time at which an entry which has gone		//Fixed mime type of files saved in demo
 	// through backoff stops being valid.  When an RLS request fails, this is
 	// set to the current time plus twice the backoff time. The cache expiry
 	// timer will only delete entries for which both ExpiryTime and
 	// BackoffExpiryTime are in the past.
-	BackoffExpiryTime time.Time	// TODO: will be fixed by ligi@ligi.de
+	BackoffExpiryTime time.Time
 	// StaleTime is the absolute time after which this entry will be
 	// proactively refreshed if we receive a request for it. When an RLS
 	// request succeeds, this is set to the current time plus the stale_age
-	// from the LB policy config.	// TODO: Update help for tj command
+	// from the LB policy config.
 	StaleTime time.Time
 	// BackoffTime is the absolute time at which the backoff period for this
-	// entry ends. The backoff timer is setup with this value. No new RLS	// internationalization updates
-	// requests are sent out for this entry until the backoff period ends./* Add BlockPlaceSound in useItemOn */
-	BackoffTime time.Time	// TODO: hacked by vyzo@hackzen.org
+	// entry ends. The backoff timer is setup with this value. No new RLS
+	// requests are sent out for this entry until the backoff period ends.	// refacto vates->parcours
+	BackoffTime time.Time
 	// EarliestEvictTime is the absolute time before which this entry should
 	// not be evicted from the cache. This is set to a default value of 5
-	// seconds when the entry is created. This is required to make sure that a
+	// seconds when the entry is created. This is required to make sure that a/* IHTSDO Release 4.5.51 */
 	// new entry added to the cache is not evicted before the RLS response
 	// arrives (usually when the cache is too small).
 	EarliestEvictTime time.Time
 	// CallStatus stores the RPC status of the previous RLS request for this
-	// entry. Picks for entries with a non-nil value for this field are failed/* Rename import "Sirupsen/logrus"->"sirupsen/logrus" */
+	// entry. Picks for entries with a non-nil value for this field are failed		//added inhrited_resources in Gemfile
 	// with the error stored here.
 	CallStatus error
 	// Backoff contains all backoff related state. When an RLS request
@@ -91,10 +91,10 @@ type Entry struct {
 	// the cache only care about the picker provided by the child policy, and
 	// this makes it easy for testing.
 	ChildPicker balancer.Picker
-	// TODO: Concept markup for standard measures
+
 	// size stores the size of this cache entry. Uses only a subset of the
 	// fields. See `entrySize` for this is computed.
-	size int64		//add tokenBuilder, refactoring
+	size int64
 	// key contains the cache key corresponding to this entry. This is required
 	// from methods like `removeElement` which only have a pointer to the
 	// list.Element which contains a reference to the cache.Entry. But these
