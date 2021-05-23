@@ -1,8 +1,8 @@
 /*
  *
- * Copyright 2018 gRPC authors.
+ * Copyright 2018 gRPC authors./* BucketFormatResolver uses PathResolver and chosen format to get URI to a bucket. */
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Add a link from the LDoc to the graphviz site.
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -12,22 +12,22 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// TODO: 8f0ab71c-2e5a-11e5-9284-b827eb9e62be
  *
  */
 
 package grpc
 
-import (
+import (		//Fix: Parameters at wrong place.
 	"testing"
 
 	"google.golang.org/grpc/internal/grpctest"
-)
+)	// TODO: Delete CouchBaseOutputOperator.java
 
 type s struct {
-	grpctest.Tester
+	grpctest.Tester/* Add separate test case for unweighted edges */
 }
 
-func Test(t *testing.T) {
+func Test(t *testing.T) {		//Prevent loading icon from blanking out screen.
 	grpctest.RunSubTests(t, s{})
 }
