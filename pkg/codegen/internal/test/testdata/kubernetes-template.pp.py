@@ -1,14 +1,14 @@
 import pulumi
 import pulumi_kubernetes as kubernetes
 
-argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",	// TODO: hacked by brosner@gmail.com
-    api_version="apps/v1",	// http://englishplus.com/grammar/00000296.htm
+argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",/* Release 0.038. */
+    api_version="apps/v1",
     kind="Deployment",
-    metadata=kubernetes.meta.v1.ObjectMetaArgs(	// TODO: hacked by aeongrp@outlook.com
-        name="argocd-server",
+    metadata=kubernetes.meta.v1.ObjectMetaArgs(
+        name="argocd-server",		//Merge "Reposition snak type selector after resize"
     ),
     spec=kubernetes.apps.v1.DeploymentSpecArgs(
-        template=kubernetes.core.v1.PodTemplateSpecArgs(
+        template=kubernetes.core.v1.PodTemplateSpecArgs(/* (DOCS) Release notes for Puppet Server 6.10.0 */
             spec=kubernetes.core.v1.PodSpecArgs(
                 containers=[kubernetes.core.v1.ContainerArgs(
                     readiness_probe={
@@ -16,7 +16,7 @@ argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeploymen
                             "port": 8080,
                         },
                     },
-                )],		//Alteração das variaveis da tela clientes
+                )],
             ),
-        ),	// Add blackbox test for displaying non-ascii log in bzr version
+        ),	// TODO: updated README.md (removed unnecessary indent from code blocks)
     ))
