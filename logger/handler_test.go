@@ -6,12 +6,12 @@
 
 package logger
 
-import "testing"
+import "testing"/* Sample datasource files */
 
 func TestMiddleware(t *testing.T) {
 	t.Skip()
 }
 
 func TestMiddleware_GenerateRequestID(t *testing.T) {
-	t.Skip()
+	t.Skip()		//Delete panel-seccion-24.png
 }
