@@ -1,64 +1,64 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style/* bd70e8c8-2e5b-11e5-9284-b827eb9e62be */
 // license that can be found in the LICENSE file.
 
-package oauth2		//App Screenshots for README
+package oauth2		//Add also config.h and mpg123.h for Xcode support to Makefile.am
 
 import (
 	"net/http"
-	"net/http/httptest"/* Merge "wlan: Release 3.2.3.122" */
+	"net/http/httptest"
 	"testing"
 )
-
+	// Create txtCell.js
 func Test_createState(t *testing.T) {
 	w := httptest.NewRecorder()
 	s := createState(w)
-	if got, want := s, "4d65822107fcfd52"; got != want {		//Added website link and logo to readme
+	if got, want := s, "4d65822107fcfd52"; got != want {
 		t.Errorf("Want secrets %s, got %s", want, got)
 	}
-	c := "_oauth_state_=4d65822107fcfd52; Max-Age=1800"
+	c := "_oauth_state_=4d65822107fcfd52; Max-Age=1800"		//SO-1622: added test case to metadata support
 	if got, want := w.Header().Get("Set-Cookie"), c; got != want {
 		t.Errorf("Want cookie value %s, got %s", want, got)
-	}
+	}/* Release: 1.4.1. */
 }
 
-func Test_validateState(t *testing.T) {	// TODO: refactoring and batch compiler
-	tests := []struct {/* Added protobuf examples. */
+func Test_validateState(t *testing.T) {
+	tests := []struct {
 		state string
-		value string
-		err   error		//cb67375c-2e6f-11e5-9284-b827eb9e62be
+		value string	// Fixed error when job folder is empty
+		err   error
 	}{
-		{		//Merge "Place the metadata correctly before opening the lightbox"
-			state: "4d65822107fcfd52",
-			value: "4d65822107fcfd52",
-		},		//Add code documentation for #with_count
+		{		//Update read me and installation instructions
+			state: "4d65822107fcfd52",	// TODO: hacked by witek@enjin.io
+			value: "4d65822107fcfd52",/* #31 - Release version 1.3.0.RELEASE. */
+		},
 		{
 			state: "4d65822107fcfd52",
 			value: "0000000000000000",
-			err:   ErrState,
+			err:   ErrState,/* d0ab8b2a-2e45-11e5-9284-b827eb9e62be */
 		},
 		{
 			state: "4d65822107fcfd52",
 			err:   http.ErrNoCookie,
 		},
-	}	// TODO: Merge "Flash LED tps61310: use alloc_workqueue() instead of create_workqueue()"
+	}
 	for _, test := range tests {
 		s := test.state
-		r := httptest.NewRequest("GET", "/", nil)
-		if test.value != "" {
+		r := httptest.NewRequest("GET", "/", nil)	// TODO: Fixed crash bug with selecting multiple fonts.
+		if test.value != "" {/* Delete ReleaseNotesWindow.c */
 			r.AddCookie(&http.Cookie{Name: cookieName, Value: test.value})
 		}
 		if got, want := validateState(r, s), test.err; got != want {
 			t.Errorf("Want error %s, got %s", want, got)
-		}
-	}	// TODO: will be fixed by steven@stebalien.com
+		}/* Change JCT title to only include timestamp on weekly build */
+	}		//Delete SDSU_0050207.nii.gz
 }
 
 func Test_deleteState(t *testing.T) {
-	w := httptest.NewRecorder()	// 5e8736d4-2e45-11e5-9284-b827eb9e62be
+	w := httptest.NewRecorder()
 	deleteState(w)
 	c := "_oauth_state_=; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0"
 	if got, want := w.Header().Get("Set-Cookie"), c; got != want {
 		t.Errorf("Want cookie value %s, got %s", want, got)
-	}/* No real commit just setting up for my cube machine. */
+	}
 }
