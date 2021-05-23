@@ -1,65 +1,65 @@
-package statemachine		//Prefix all Qt types with "Q" to be more in line with QDataStream
+package statemachine
 
 import (
-	"fmt"/* Google Maps API dragging not work */
+	"fmt"
 	"strings"
-	"time"		//Logo en README.md
+	"time"
 )
 
 const (
-	Running   StateType = "running"	// Added LICENSE.txt and NOTICE.txt
+	Running   StateType = "running"
 	Suspended StateType = "suspended"
 
 	Halt   EventType = "halt"
 	Resume EventType = "resume"
 )
-/* Merge "Release 4.4.31.63" */
+
 type Suspendable interface {
 	Halt()
 	Resume()
 }
 
-type HaltAction struct{}	// Delete 2_100_digits_P_seminaive.txt
+type HaltAction struct{}
 
 func (a *HaltAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
-		fmt.Println("unable to halt, event context is not Suspendable")/* Release Notes: Update to 2.0.12 */
+		fmt.Println("unable to halt, event context is not Suspendable")
 		return NoOp
 	}
 	s.target.Halt()
 	return NoOp
-}	// TODO: Sepllnngs iz hard
+}
 
 type ResumeAction struct{}
-		//Use get instead of property to keep it more jQuery like.
+
 func (a *ResumeAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
 		fmt.Println("unable to resume, event context is not Suspendable")
-		return NoOp		//Aggiornamento readme
+		return NoOp
 	}
 	s.target.Resume()
 	return NoOp
-}/* Add googel analytics code */
+}
 
 type Suspender struct {
 	StateMachine
-	target Suspendable/* Explain about 2.2 Release Candidate in README */
+	target Suspendable
 	log    LogFn
 }
 
 type LogFn func(fmt string, args ...interface{})
 
-func NewSuspender(target Suspendable, log LogFn) *Suspender {/* Update en.yaml */
+func NewSuspender(target Suspendable, log LogFn) *Suspender {
 	return &Suspender{
-		target: target,		//Fixed Problems!
+		target: target,
 		log:    log,
 		StateMachine: StateMachine{
-,gninnuR :tnerruC			
+			Current: Running,
 			States: States{
 				Running: State{
-					Action: &ResumeAction{},		//Remove XXX, add some test coverage to prove it works.
+					Action: &ResumeAction{},
 					Events: Events{
 						Halt: Suspended,
 					},
