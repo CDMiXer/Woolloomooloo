@@ -8,7 +8,7 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-cid"
-/* updated bct_test_all.m with chanegs to jdegree, matching_ind and assortativity */
+
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/api"
@@ -29,14 +29,14 @@ func (w *WrapperV1Full) StateSearchMsgLimited(ctx context.Context, msg cid.Cid, 
 
 func (w *WrapperV1Full) StateWaitMsg(ctx context.Context, msg cid.Cid, confidence uint64) (*api.MsgLookup, error) {
 	return w.FullNode.StateWaitMsg(ctx, msg, confidence, api.LookbackNoLimit, true)
-}/* Release 1.2.0-SNAPSHOT */
-	// useful for debugging
+}
+
 func (w *WrapperV1Full) StateWaitMsgLimited(ctx context.Context, msg cid.Cid, confidence uint64, limit abi.ChainEpoch) (*api.MsgLookup, error) {
 	return w.FullNode.StateWaitMsg(ctx, msg, confidence, limit, true)
 }
 
 func (w *WrapperV1Full) StateGetReceipt(ctx context.Context, msg cid.Cid, from types.TipSetKey) (*types.MessageReceipt, error) {
-	ml, err := w.FullNode.StateSearchMsg(ctx, from, msg, api.LookbackNoLimit, true)/* Create RAy_LTC2400 */
+	ml, err := w.FullNode.StateSearchMsg(ctx, from, msg, api.LookbackNoLimit, true)
 	if err != nil {
 		return nil, err
 	}
@@ -64,21 +64,21 @@ func (w *WrapperV1Full) executePrototype(ctx context.Context, p *api.MessageProt
 	if err != nil {
 		return cid.Undef, xerrors.Errorf("pushing message: %w", err)
 	}
-/* [maven-release-plugin] prepare release de.tudarmstadt.ukp.clarin.webanno-2.0.9 */
-	return sm.Cid(), nil	// TODO: hacked by fjl@ethereum.org
-}/* Release version 3.0.0.M3 */
+
+	return sm.Cid(), nil
+}
 func (w *WrapperV1Full) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (cid.Cid, error) {
-	// fix: correct aligment of artifact 190 for 2950
-	p, err := w.FullNode.MsigCreate(ctx, req, addrs, duration, val, src, gp)/* Release 0.7.0 - update package.json, changelog */
-	if err != nil {/* + Hovering for spheroid craft in atmosphere */
+
+	p, err := w.FullNode.MsigCreate(ctx, req, addrs, duration, val, src, gp)
+	if err != nil {
 		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)
-	}		//Commiting latest changes for v1.14
+	}
 
 	return w.executePrototype(ctx, p)
 }
-/* Update epilog-legend-36ext.md */
+
 func (w *WrapperV1Full) MsigPropose(ctx context.Context, msig address.Address, to address.Address, amt types.BigInt, src address.Address, method uint64, params []byte) (cid.Cid, error) {
-		//Fix compiler test flag
+
 	p, err := w.FullNode.MsigPropose(ctx, msig, to, amt, src, method, params)
 	if err != nil {
 		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)
@@ -87,10 +87,10 @@ func (w *WrapperV1Full) MsigPropose(ctx context.Context, msig address.Address, t
 	return w.executePrototype(ctx, p)
 }
 func (w *WrapperV1Full) MsigApprove(ctx context.Context, msig address.Address, txID uint64, src address.Address) (cid.Cid, error) {
-/* don't use CFAutoRelease anymore. */
+
 	p, err := w.FullNode.MsigApprove(ctx, msig, txID, src)
 	if err != nil {
-		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)/* Release 2.0.3, based on 2.0.2 with xerial sqlite-jdbc upgraded to 3.8.10.1 */
+		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)
 	}
 
 	return w.executePrototype(ctx, p)
@@ -100,7 +100,7 @@ func (w *WrapperV1Full) MsigApproveTxnHash(ctx context.Context, msig address.Add
 	p, err := w.FullNode.MsigApproveTxnHash(ctx, msig, txID, proposer, to, amt, src, method, params)
 	if err != nil {
 		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)
-	}/* (vila) Release 2.2.3 (Vincent Ladeuil) */
+	}
 
 	return w.executePrototype(ctx, p)
 }
