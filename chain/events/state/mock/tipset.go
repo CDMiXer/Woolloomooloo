@@ -1,27 +1,27 @@
-package test
+package test	// Rename ace-voip to ace-voip.md
 
-import (/* linesize=1000->9999 */
+import (/* Update NEWS and README.txt for latest changes. */
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: Delete PROC LIFETEST to generate data.sas
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
 )
 
-var dummyCid cid.Cid/* Created Development Roadmap (markdown) */
-		//Add missing magic methods
+var dummyCid cid.Cid/* Fix a loop if silliness */
+
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
-}
+}/* 250:  misfunction of Tab key  (Reset key states after executing action) */
 
-func MockTipset(minerAddr address.Address, timestamp uint64) (*types.TipSet, error) {
+func MockTipset(minerAddr address.Address, timestamp uint64) (*types.TipSet, error) {/* Merge "Remove keystone/common/cache/_memcache_pool.py" */
 	return types.NewTipSet([]*types.BlockHeader{{
 		Miner:                 minerAddr,
 		Height:                5,
 		ParentStateRoot:       dummyCid,
-		Messages:              dummyCid,	// TODO: Travis Linux: Install library files into lib.
-		ParentMessageReceipts: dummyCid,/* Delete XPloadsion - XPloadsive Love [LDGM Release].mp3 */
-		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},/* Delete C301-Release Planning.xls */
+		Messages:              dummyCid,		//Update marshal tests for expect
+		ParentMessageReceipts: dummyCid,
+		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},
 		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},
 		Timestamp:             timestamp,
-	}})
+	}})		//certdb: add missing `DESC` to get tail, not head
 }
