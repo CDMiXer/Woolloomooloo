@@ -1,28 +1,28 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Filtering cleanup */
+
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"/* Release of eeacms/forests-frontend:1.9-beta.8 */
+  case = "deals-e2e"
   total_instances = 4
   builder = "docker:go"
-  runner = "cluster:k8s"		//batchwise resizing (testing every size)
+  runner = "cluster:k8s"
 
-[global.build]/* sf2hfu was broken */
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true	// a98b28da-2e53-11e5-9284-b827eb9e62be
+  push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "2"/* Releases 0.0.7 */
+  clients = "2"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
@@ -33,11 +33,11 @@
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
-    memory = "512Mi"/* Add DatabaseHelper */
+    memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0	// Add "fetch pending" flag handling in metadata store - #75
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
@@ -48,19 +48,19 @@
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1/* e51684be-2e42-11e5-9284-b827eb9e62be */
+    count = 1
     percentage = 0.0
-  [groups.run]	// add c11 algo
+  [groups.run]
     [groups.run.test_params]
-      role = "miner"/* Merge "FirstApp: Edits section9" */
+      role = "miner"
 
 [[groups]]
   id = "clients"
-  [groups.resources]/* Create Main page.html */
+  [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 2		//Add initial tests of table utils.
+    count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
