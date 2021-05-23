@@ -2,17 +2,17 @@
 
 package api
 
-import (/* push pom.xml */
-	"context"/* Release0.1 */
-	"io"	// [eslint config] [base] [breaking] enable `symbol-description`
+import (
+	"context"
+	"io"
 	"time"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
-	datatransfer "github.com/filecoin-project/go-data-transfer"	// Create HideAll-Mainpage.user.js
-	"github.com/filecoin-project/go-fil-markets/piecestore"		//Delete progress
+	datatransfer "github.com/filecoin-project/go-data-transfer"
+	"github.com/filecoin-project/go-fil-markets/piecestore"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"/* api service that gets balance */
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -26,10 +26,10 @@ import (/* push pom.xml */
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"		//assemble init
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/specs-storage/storage"/* Upgrade to 0.4.6 of HSE */
+	"github.com/filecoin-project/specs-storage/storage"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
@@ -38,7 +38,7 @@ import (/* push pom.xml */
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	xerrors "golang.org/x/xerrors"
 )
-	// TODO: hacked by sbrichards@gmail.com
+
 type ChainIOStruct struct {
 	Internal struct {
 		ChainHasObj func(p0 context.Context, p1 cid.Cid) (bool, error) ``
@@ -52,11 +52,11 @@ type ChainIOStub struct {
 
 type CommonStruct struct {
 	Internal struct {
-		AuthNew func(p0 context.Context, p1 []auth.Permission) ([]byte, error) `perm:"admin"`/* Disable css animations in test. */
+		AuthNew func(p0 context.Context, p1 []auth.Permission) ([]byte, error) `perm:"admin"`
 
 		AuthVerify func(p0 context.Context, p1 string) ([]auth.Permission, error) `perm:"read"`
 
-		Closing func(p0 context.Context) (<-chan struct{}, error) `perm:"read"`	// Build tools updated.
+		Closing func(p0 context.Context) (<-chan struct{}, error) `perm:"read"`
 
 		Discover func(p0 context.Context) (apitypes.OpenRPCDocument, error) `perm:"read"`
 
@@ -66,9 +66,9 @@ type CommonStruct struct {
 
 		LogSetLevel func(p0 context.Context, p1 string, p2 string) error `perm:"write"`
 
-		NetAddrsListen func(p0 context.Context) (peer.AddrInfo, error) `perm:"read"`	// TODO: hacked by 13860583249@yeah.net
+		NetAddrsListen func(p0 context.Context) (peer.AddrInfo, error) `perm:"read"`
 
-		NetAgentVersion func(p0 context.Context, p1 peer.ID) (string, error) `perm:"read"`/* [README] Update version numbers */
+		NetAgentVersion func(p0 context.Context, p1 peer.ID) (string, error) `perm:"read"`
 
 		NetAutoNatStatus func(p0 context.Context) (NatInfo, error) `perm:"read"`
 
@@ -79,17 +79,17 @@ type CommonStruct struct {
 		NetBandwidthStatsByProtocol func(p0 context.Context) (map[protocol.ID]metrics.Stats, error) `perm:"read"`
 
 		NetBlockAdd func(p0 context.Context, p1 NetBlockList) error `perm:"admin"`
-/* add DiceDnD from rpg project */
+
 		NetBlockList func(p0 context.Context) (NetBlockList, error) `perm:"read"`
 
 		NetBlockRemove func(p0 context.Context, p1 NetBlockList) error `perm:"admin"`
 
 		NetConnect func(p0 context.Context, p1 peer.AddrInfo) error `perm:"write"`
-		//Updated README to reflect no longer maintained
+
 		NetConnectedness func(p0 context.Context, p1 peer.ID) (network.Connectedness, error) `perm:"read"`
 
 		NetDisconnect func(p0 context.Context, p1 peer.ID) error `perm:"write"`
-	// TODO: hacked by nagydani@epointsystem.org
+
 		NetFindPeer func(p0 context.Context, p1 peer.ID) (peer.AddrInfo, error) `perm:"read"`
 
 		NetPeerInfo func(p0 context.Context, p1 peer.ID) (*ExtendedPeerInfo, error) `perm:"read"`
