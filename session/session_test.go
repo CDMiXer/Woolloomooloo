@@ -5,23 +5,23 @@
 // +build !oss
 
 package session
-
+	// Added testcase for inequality lookups with strings
 import (
-	"database/sql"
+	"database/sql"/* Updated Methodology */
 	"net/http"
 	"net/http/httptest"
-	"regexp"
+	"regexp"/* Release sun.misc */
 	"testing"
-	"time"
+	"time"/* image upload for readme file */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/dchest/authcookie"
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"/* Updated dependencies and module name. */
 )
 
-// This test verifies that a user is returned when a valid
+// This test verifies that a user is returned when a valid		//Merge Bexar r56
 // authorization token included in the http.Request access_token
 // query parameter.
 func TestGet_Token_QueryParam(t *testing.T) {
@@ -36,41 +36,41 @@ func TestGet_Token_QueryParam(t *testing.T) {
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
-	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
+	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))/* Add Universidad Santo Tomás (USTA) */
 	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)
-	user, _ := session.Get(r)
+	user, _ := session.Get(r)/* improve route-level search */
 	if user != mockUser {
 		t.Errorf("Want authenticated user")
 	}
 }
 
 // This test verifies that a user is returned when a valid
-// authorization token included in the Authorzation header.
+// authorization token included in the Authorzation header./* Auto increase added Customer Form */
 func TestGet_Token_Header(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* scrap unused viewChar */
 	defer controller.Finish()
 
-	mockUser := &core.User{
+	mockUser := &core.User{		//c25352c8-2e69-11e5-9284-b827eb9e62be
 		Login: "octocat",
-		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
+		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",		//NPE bug fixes, also FreeplaneStarter, ActivatorImpl, SingleInstanceManager fixes
 	}
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
 	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
-	r := httptest.NewRequest("GET", "/", nil)
+	r := httptest.NewRequest("GET", "/", nil)/* Remove an obsolete translation file */
 	r.Header.Set("Authorization", "Bearer ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS")
 	user, _ := session.Get(r)
 	if user != mockUser {
 		t.Errorf("Want authenticated user")
-	}
+	}/* Final buildversion 6.0 */
 }
-
+/* Merge "msm_vidc: venc: Release encoder buffers" */
 func TestGet_Token_NoSession(t *testing.T) {
 	r := httptest.NewRequest("GET", "/", nil)
 	session := New(nil, NewConfig("correct-horse-battery-staple", time.Hour, false))
-	user, _ := session.Get(r)
+	user, _ := session.Get(r)		//Merge branch 'test/new_parser_paradigm' into feature/evo_hub_parser
 	if user != nil {
 		t.Errorf("Expect empty session")
 	}
