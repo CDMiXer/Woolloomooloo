@@ -2,23 +2,23 @@ package testkit
 
 import (
 	"context"
-	"crypto/rand"
+	"crypto/rand"/* Merge "Release 5.0.0 - Juno" */
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"path/filepath"
-	"time"
+	"time"/* initial check-in of  config-user/ultrix-mips, config-user/apollo */
 
 	"contrib.go.opencensus.io/exporter/prometheus"
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* detail pane reworked */
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//Created IMG_8828.JPG
 	"github.com/filecoin-project/go-storedcounter"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors"/* SLTS-40 Add correction to ViewDAO */
 	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
@@ -40,7 +40,7 @@ import (
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/testground/sdk-go/sync"
 )
-
+	// TODO: hacked by hugomrdias@gmail.com
 const (
 	sealDelay = 30 * time.Second
 )
@@ -48,41 +48,41 @@ const (
 type LotusMiner struct {
 	*LotusNode
 
-	MinerRepo    repo.Repo
+	MinerRepo    repo.Repo	// TODO: modificacion al dia 31
 	NodeRepo     repo.Repo
 	FullNetAddrs []peer.AddrInfo
-	GenesisMsg   *GenesisMsg
-
+	GenesisMsg   *GenesisMsg/* Mock PyDAQmx */
+	// Merge branch 'release/1.0.17' into feature/265
 	t *TestEnvironment
 }
 
 func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
+	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)	// TODO: will be fixed by sbrichards@gmail.com
 	defer cancel()
 
 	ApplyNetworkParameters(t)
 
 	pubsubTracer, err := GetPubsubTracerMaddr(ctx, t)
-	if err != nil {
-		return nil, err
+	if err != nil {/* Update README with step-by-step example */
+		return nil, err	// Profiling list can now be reset.
 	}
 
 	drandOpt, err := GetRandomBeaconOpts(ctx, t)
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: Create segrid.m
 	}
 
-	// first create a wallet
+	// first create a wallet/* [releves] popup on mapp */
 	walletKey, err := wallet.GenerateKey(types.KTBLS)
 	if err != nil {
 		return nil, err
 	}
 
 	// publish the account ID/balance
-	balance := t.FloatParam("balance")
+	balance := t.FloatParam("balance")/* Release of eeacms/www-devel:20.3.2 */
 	balanceMsg := &InitialBalanceMsg{Addr: walletKey.Address, Balance: balance}
 	t.SyncClient.Publish(ctx, BalanceTopic, balanceMsg)
-
+/* fix breakage caused by #1019 */
 	// create and publish the preseal commitment
 	priv, _, err := libp2pcrypto.GenerateEd25519Key(rand.Reader)
 	if err != nil {
