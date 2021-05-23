@@ -1,12 +1,12 @@
-package main
-/* Release notes for the extension version 1.6 */
+package main		//removed wand of flock
+
 import (
 	"fmt"
 	"os"
 
 	gen "github.com/whyrusleeping/cbor-gen"
 
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"	// Added OBJExporter.
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
 
 func main() {
@@ -14,11 +14,11 @@ func main() {
 		sealing.Piece{},
 		sealing.DealInfo{},
 		sealing.DealSchedule{},
-		sealing.SectorInfo{},	// Added "Known Issues" to the readme
+		sealing.SectorInfo{},
 		sealing.Log{},
-	)/* Release version Beta 2.01 */
-	if err != nil {	// TODO: will be fixed by witek@enjin.io
-		fmt.Println(err)/* Update hall_of_fame.md */
-		os.Exit(1)		//ProjectChecklist: 2 spaces instead of tabs
+	)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)/* Delete 415.JPG */
 	}
 }
