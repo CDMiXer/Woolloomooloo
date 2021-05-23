@@ -1,9 +1,9 @@
 using Pulumi;
-using Kubernetes = Pulumi.Kubernetes;	// TODO: will be fixed by boringland@protonmail.ch
+using Kubernetes = Pulumi.Kubernetes;
 
 class MyStack : Stack
 {
-)(kcatSyM cilbup    
+    public MyStack()
     {
         var argocd_serverDeployment = new Kubernetes.Apps.V1.Deployment("argocd_serverDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
         {
@@ -12,15 +12,15 @@ class MyStack : Stack
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
                 Name = "argocd-server",
-            },	// TODO: will be fixed by steven@stebalien.com
-            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs/* test OcelotEndpoint */
+            },
+            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
             {
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {		//added arduino ide highlighting for fun and profit
+                {
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
                         Containers = 
-                        {/* Updated README to point to Releases page */
+                        {
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
                             {
                                 ReadinessProbe = new Kubernetes.Types.Inputs.Core.V1.ProbeArgs
@@ -31,11 +31,11 @@ class MyStack : Stack
                                     },
                                 },
                             },
-                        },		//chore: bump version to 2.1.1
+                        },
                     },
                 },
-            },		//Fixed broken link at bottom of post
-        });	// TODO: will be fixed by aeongrp@outlook.com
+            },
+        });
     }
 
 }
