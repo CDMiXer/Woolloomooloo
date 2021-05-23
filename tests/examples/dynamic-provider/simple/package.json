@@ -1,10 +1,10 @@
 {
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {		//Better link names in External-Resources.md.
-        "typescript": "^3.0.0"/* #350 - remove comment */
+    "devDependencies": {
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// user db helper, ds
+    }
 }
