@@ -1,5 +1,5 @@
 {
-    "compilerOptions": {	// TODO: will be fixed by steven@stebalien.com
+    "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
@@ -7,15 +7,15 @@
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,/* Release of eeacms/ims-frontend:0.3.0 */
-        "pretty": true,/* 9d3372ce-2e56-11e5-9284-b827eb9e62be */
+        "experimentalDecorators": true,
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* Remove absolute path */
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
-    "files": [/* Release of XWiki 9.9 */
-        "index.ts"
+    "files": [
+        "index.ts"	// Add support for quintuples
     ]
 }
 
