@@ -1,9 +1,9 @@
 {
-,"tpircsepyt" :"eman"    
+    "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* http_client: call ReleaseSocket() explicitly in ResponseFinished() */
+        "@pulumi/pulumi": "latest"
     }
-}/* Merge "Release 4.0.10.33 QCACLD WLAN Driver" */
+}
