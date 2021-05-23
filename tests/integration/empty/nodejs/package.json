@@ -5,7 +5,7 @@
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Release version 0.31 */
         "pulumi": "*"
     }
 }
