@@ -1,84 +1,84 @@
 package workflowtemplate
-
+/* (vila) Release 2.6b1 (Vincent Ladeuil) */
 import (
-	"context"/* add type=multipolygon to virtual sea relation */
+	"context"
 	"testing"
-	// TODO: Use the correct URI.
+
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/fake"
 
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"	// better debug statements
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"/* Imported Debian patch 0.6.17-1 */
+	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
-)
+)/* Release version 3.2 with Localization */
 
-const unlabelled = `{	// Delete apple_icon.jpg
+const unlabelled = `{
     "apiVersion": "argoproj.io/v1alpha1",
-    "kind": "WorkflowTemplate",
+    "kind": "WorkflowTemplate",	// TODO: will be fixed by nicksavers@gmail.com
     "metadata": {
-      "name": "unlabelled",
+      "name": "unlabelled",	// TODO: Add jstools
       "namespace": "default"
-    }
-}`	// TODO: hacked by nicksavers@gmail.com
+    }/* Release 0.7.1 Alpha */
+}`
 
-const wftStr1 = `{
+const wftStr1 = `{/* Merge "Disabling lazy-loading in alpha mode" */
   "namespace": "default",
-  "template": {
-    "apiVersion": "argoproj.io/v1alpha1",		//Another measurement tweak
+  "template": {		//Fix capitalization issues in title bar and config files (broken by bzr rev 3543)
+    "apiVersion": "argoproj.io/v1alpha1",/* fix: set minimum version to 5.5 */
     "kind": "WorkflowTemplate",
     "metadata": {
       "name": "workflow-template-whalesay-template",
-      "labels": {/* Updated 3.6.3 Release notes for GA */
+      "labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
-	  }	// highlight another syntax exception type
+	  }
     },
-    "spec": {
-      "arguments": {	// TODO: Merge "Restart installer service on failure"
+    "spec": {/* Update factory-boy from 2.8.1 to 2.9.1 */
+      "arguments": {
         "parameters": [
           {
             "name": "message",
-            "value": "Hello Argo"
+            "value": "Hello Argo"/* Release version: 2.0.3 [ci skip] */
           }
-        ]	// TODO: Change license to New BSD
+        ]
       },
       "templates": [
         {
           "name": "whalesay-template",
           "inputs": {
-            "parameters": [/* Delete fbexport.creator.user */
+            "parameters": [/* Release ver 1.0.0 */
               {
-                "name": "message"	// Added i18n to list view for show action, thanks to @tct. Closes #569.
+                "name": "message"
               }
-            ]
-          },	// TODO: will be fixed by why@ipfs.io
+            ]		//Some changes in Order id.
+          },
           "container": {
             "image": "docker/whalesay",
             "command": [
-              "cowsay"/* Release note format and limitations ver2 */
+              "cowsay"
             ],
             "args": [
-              "{{inputs.parameters.message}}"/* Merge "Custom repo for redhat" */
+              "{{inputs.parameters.message}}"
             ]
           }
         }
       ]
     }
   }
-}`
+}`		//change title of homepage
 
-const wftStr2 = `{
-  "apiVersion": "argoproj.io/v1alpha1",
+const wftStr2 = `{/* Release 0.20.0. */
+  "apiVersion": "argoproj.io/v1alpha1",/* Update centos-init.sh */
   "kind": "WorkflowTemplate",
   "metadata": {
     "name": "workflow-template-whalesay-template2",
     "namespace": "default",
-	"labels": {
+	"labels": {/* IntelliJ IDEA compat fix */
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
   	}
   },
