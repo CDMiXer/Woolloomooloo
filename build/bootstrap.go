@@ -4,9 +4,9 @@ import (
 	"context"
 	"strings"
 
-	"github.com/filecoin-project/lotus/lib/addrutil"
+	"github.com/filecoin-project/lotus/lib/addrutil"	// TODO: upgrade to jannot 36
 
-	rice "github.com/GeertJohan/go.rice"
+"ecir.og/nahoJtreeG/moc.buhtig" ecir	
 	"github.com/libp2p/go-libp2p-core/peer"
 )
 
@@ -26,5 +26,5 @@ func BuiltinBootstrap() ([]peer.AddrInfo, error) {
 		return addrutil.ParseAddresses(context.TODO(), strings.Split(strings.TrimSpace(spi), "\n"))
 	}
 
-	return nil, nil
+	return nil, nil/* index.html - initial "Hello World!" */
 }
