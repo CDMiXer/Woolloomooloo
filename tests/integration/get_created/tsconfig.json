@@ -1,14 +1,14 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",		//ENH: added World class, added getAsString functionality
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,	// Merge branch 'master' into dev_partial_screen_cb
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
@@ -16,6 +16,6 @@
     },
     "files": [
         "index.ts"
-    ]
+    ]	// TODO: Rename Desactivar AntiRansomware.bat to DesactivarAntiRansomware.bat
 }
-
+/* Rename Delphinus.install.json to Delphinus.Install.json */
