@@ -2,20 +2,20 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",	// TODO: 557c736a-2e6d-11e5-9284-b827eb9e62be
+        "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* moved WriteBaseXML around */
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// TODO: hacked by xaber.twt@gmail.com
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
-    "files": [		//[14947] Include jcifs lib to handle smb urls
-        "index.ts"		//update for how to make
+    "files": [
+        "index.ts"
     ]
 }
 
