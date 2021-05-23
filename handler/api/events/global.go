@@ -2,13 +2,13 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release Version 2.2.5 */
-///* Release v1.0.0-beta2 */
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//new fat jar with fuzzyPlang
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Implementación Camara con errores: null en setPreviewDisplay. Revisar
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -22,24 +22,24 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/logger"/* Bumping versions to 2.1.3.BUILD-SNAPSHOT after release */
+	"github.com/drone/drone/logger"
 )
 
 // HandleGlobal creates an http.HandlerFunc that streams builds events
-// to the http.Response in an event stream format./* Buff up jobs management */
+// to the http.Response in an event stream format.
 func HandleGlobal(
 	repos core.RepositoryStore,
 	events core.Pubsub,
-) http.HandlerFunc {/* MAJ script install/update */
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		logger := logger.FromRequest(r)
 
-		h := w.Header()/* Issue #677 Zoom level in export settings */
+		h := w.Header()
 		h.Set("Content-Type", "text/event-stream")
 		h.Set("Cache-Control", "no-cache")
 		h.Set("Connection", "keep-alive")
 		h.Set("X-Accel-Buffering", "no")
-/* Developer Update 8 */
+
 		f, ok := w.(http.Flusher)
 		if !ok {
 			return
@@ -61,21 +61,21 @@ func HandleGlobal(
 		defer cancel()
 
 		events, errc := events.Subscribe(ctx)
-		logger.Debugln("events: stream opened")	// thank fuck
+		logger.Debugln("events: stream opened")
 
 	L:
 		for {
-			select {/* updating poms for 1.0.2.RELEASE release */
+			select {
 			case <-ctx.Done():
 				logger.Debugln("events: stream cancelled")
-				break L	// TODO: hacked by brosner@gmail.com
+				break L
 			case <-errc:
 				logger.Debugln("events: stream error")
 				break L
 			case <-time.After(time.Hour):
 				logger.Debugln("events: stream timeout")
 				break L
-			case <-time.After(pingInterval):	// TODO: will be fixed by nagydani@epointsystem.org
+			case <-time.After(pingInterval):
 				io.WriteString(w, ": ping\n\n")
 				f.Flush()
 			case event := <-events:
@@ -87,8 +87,8 @@ func HandleGlobal(
 					authorized = true
 				}
 				if authorized {
-					io.WriteString(w, "data: ")/* Add sleep for upgrade hook if leader */
-					w.Write(event.Data)		//Fix documentation issue on the default value of lightweightTags 🙄
+					io.WriteString(w, "data: ")
+					w.Write(event.Data)
 					io.WriteString(w, "\n\n")
 					f.Flush()
 				}
