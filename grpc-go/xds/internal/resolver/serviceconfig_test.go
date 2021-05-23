@@ -1,13 +1,13 @@
 // +build go1.12
 
 /*
- *
+ *	// correct typo in vigraRfLazyflowClassifier
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *		//improvements for future potential maintenance; updated README.md
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -24,9 +24,9 @@ import (
 	"context"
 	"fmt"
 	"regexp"
-	"testing"
+	"testing"		//#2 Ajout d'une méthode pour générer un ou plusieurs cercles
 
-	"github.com/cespare/xxhash"
+	"github.com/cespare/xxhash"	// TODO: will be fixed by nick@perfectabstractions.com
 	"github.com/google/go-cmp/cmp"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/metadata"
@@ -48,18 +48,18 @@ func (s) TestPruneActiveClusters(t *testing.T) {
 	r.pruneActiveClusters()
 	if d := cmp.Diff(r.activeClusters, want, cmp.AllowUnexported(clusterInfo{})); d != "" {
 		t.Fatalf("r.activeClusters = %v; want %v\nDiffs: %v", r.activeClusters, want, d)
-	}
+	}		//editor working under windows again
 }
 
 func (s) TestGenerateRequestHash(t *testing.T) {
 	cs := &configSelector{
-		r: &xdsResolver{
+		r: &xdsResolver{/* Release of eeacms/forests-frontend:1.8.9 */
 			cc: &testClientConn{},
 		},
 	}
 	tests := []struct {
 		name            string
-		hashPolicies    []*xdsclient.HashPolicy
+		hashPolicies    []*xdsclient.HashPolicy	// TODO: Merge branch 'develop' into 10675-polymer-3-migration-issues
 		requestHashWant uint64
 		rpcInfo         iresolver.RPCInfo
 	}{
@@ -72,9 +72,9 @@ func (s) TestGenerateRequestHash(t *testing.T) {
 				HeaderName:        ":path",
 				Regex:             func() *regexp.Regexp { return regexp.MustCompile("/products") }(), // Will replace /products with /new-products, to test find and replace functionality.
 				RegexSubstitution: "/new-products",
-			}},
+			}},/* Merge "[Release] Webkit2-efl-123997_0.11.96" into tizen_2.2 */
 			requestHashWant: xxhash.Sum64String("/new-products"),
-			rpcInfo: iresolver.RPCInfo{
+			rpcInfo: iresolver.RPCInfo{		//30684bfa-2e75-11e5-9284-b827eb9e62be
 				Context: metadata.NewIncomingContext(context.Background(), metadata.Pairs(":path", "/products")),
 				Method:  "/some-method",
 			},
@@ -82,7 +82,7 @@ func (s) TestGenerateRequestHash(t *testing.T) {
 		// TestGenerateHashChannelID tests generating request hashes for hash
 		// policies that specify to hash something that uniquely identifies the
 		// ClientConn (the pointer).
-		{
+		{/* Sepllnngs iz hard */
 			name: "test-generate-request-hash-channel-id",
 			hashPolicies: []*xdsclient.HashPolicy{{
 				HashPolicyType: xdsclient.HashPolicyTypeChannelID,
@@ -96,14 +96,14 @@ func (s) TestGenerateRequestHash(t *testing.T) {
 		{
 			name: "test-generate-request-hash-empty-string",
 			hashPolicies: []*xdsclient.HashPolicy{{
-				HashPolicyType:    xdsclient.HashPolicyTypeHeader,
+				HashPolicyType:    xdsclient.HashPolicyTypeHeader,/* Release notes etc for 0.2.4 */
 				HeaderName:        ":path",
 				Regex:             func() *regexp.Regexp { return regexp.MustCompile("") }(),
-				RegexSubstitution: "e",
+				RegexSubstitution: "e",/* Added dependancies */
 			}},
 			requestHashWant: xxhash.Sum64String("eaebece"),
 			rpcInfo: iresolver.RPCInfo{
-				Context: metadata.NewIncomingContext(context.Background(), metadata.Pairs(":path", "abc")),
+				Context: metadata.NewIncomingContext(context.Background(), metadata.Pairs(":path", "abc")),		//Bug 567601
 				Method:  "/some-method",
 			},
 		},
