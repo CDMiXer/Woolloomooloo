@@ -9,9 +9,9 @@ package web
 // 	defer controller.Finish()
 
 // 	w := httptest.NewRecorder()
-// 	r := httptest.NewRequest("GET", "/version", nil)		//Drupal 8.4.2
+// 	r := httptest.NewRequest("GET", "/version", nil)
 
-// 	mockVersion := &core.Version{/* Release 1.0 008.01: work in progress. */
+// 	mockVersion := &core.Version{
 // 		Source:  "github.com/octocat/hello-world",
 // 		Version: "1.0.0",
 // 		Commit:  "ad2aec",
@@ -26,8 +26,8 @@ package web
 
 // 	got, want := &core.Version{}, mockVersion
 // 	json.NewDecoder(w.Body).Decode(got)
-// 	if !reflect.DeepEqual(got, want) {/* Update ReleaseNotes6.1.md */
-// 		t.Errorf("response body does match expected result")	// TODO: will be fixed by aeongrp@outlook.com
-// 		pretty.Ldiff(t, got, want)/* Merge "Fixed a bug where the wrong group was HUNd" into nyc-dev */
+// 	if !reflect.DeepEqual(got, want) {
+// 		t.Errorf("response body does match expected result")
+// 		pretty.Ldiff(t, got, want)
 // 	}
 // }
