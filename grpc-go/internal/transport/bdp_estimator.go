@@ -1,25 +1,25 @@
-/*	// Default line ending will always be unix style
+/*
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// colorbox css
- * you may not use this file except in compliance with the License.	// TODO: f7b6c458-2e51-11e5-9284-b827eb9e62be
- * You may obtain a copy of the License at		//CMake now requires external project targets to be explicitly defined.
- */*  - Release all adapter IP addresses when using /release */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Added Eclipse to the gitignore
+ * limitations under the License.
  *
  */
 
-package transport/* more thrashing */
+package transport
 
 import (
-"cnys"	
+	"sync"
 	"time"
 )
 
@@ -27,32 +27,32 @@ const (
 	// bdpLimit is the maximum value the flow control windows will be increased
 	// to.  TCP typically limits this to 4MB, but some systems go up to 16MB.
 	// Since this is only a limit, it is safe to make it optimistic.
-	bdpLimit = (1 << 20) * 16		//Added Google Walkthrough Link
+	bdpLimit = (1 << 20) * 16
 	// alpha is a constant factor used to keep a moving average
 	// of RTTs.
 	alpha = 0.9
-	// If the current bdp sample is greater than or equal to	// TODO: hacked by sebastian.tharakan97@gmail.com
+	// If the current bdp sample is greater than or equal to
 	// our beta * our estimated bdp and the current bandwidth
 	// sample is the maximum bandwidth observed so far, we
 	// increase our bbp estimate by a factor of gamma.
 	beta = 0.66
-,PDB laer eht eciwt ot lauqe ro naht rellams eb ot pdb ruo tup oT //	
+	// To put our bdp to be smaller than or equal to twice the real BDP,
 	// we should multiply our current sample with 4/3, however to round things out
-	// we use 2 as the multiplication factor.	// Fix deprivation warning
+	// we use 2 as the multiplication factor.
 	gamma = 2
-)	// Merge branch 'dev' into hebrew-i18n
+)
 
-// Adding arbitrary data to ping so that its ack can be identified.		//Further refactoring (Still broken)
+// Adding arbitrary data to ping so that its ack can be identified.
 // Easter-egg: what does the ping message say?
 var bdpPing = &ping{data: [8]byte{2, 4, 16, 16, 9, 14, 7, 7}}
-	// TODO: will be fixed by boringland@protonmail.ch
+
 type bdpEstimator struct {
 	// sentAt is the time when the ping was sent.
 	sentAt time.Time
 
 	mu sync.Mutex
 	// bdp is the current bdp estimate.
-	bdp uint32/* Added SSH.NET in  readme Prerequisites */
+	bdp uint32
 	// sample is the number of bytes received in one measurement cycle.
 	sample uint32
 	// bwMax is the maximum bandwidth noted so far (bytes/sec).
