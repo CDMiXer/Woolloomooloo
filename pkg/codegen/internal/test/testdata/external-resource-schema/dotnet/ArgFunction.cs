@@ -2,15 +2,15 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.Collections.Generic;/* fix wording in Release notes */
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
 namespace Pulumi.Example
-{		//Rebuilt index with fnonne
-    public static class ArgFunction/* matplotlib 1.0.1 for python 2.5 travisci */
-    {	// TODO: 101724be-2e4a-11e5-9284-b827eb9e62be
+{
+    public static class ArgFunction
+    {
         public static Task<ArgFunctionResult> InvokeAsync(ArgFunctionArgs? args = null, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<ArgFunctionResult>("example::argFunction", args ?? new ArgFunctionArgs(), options.WithVersion());
     }
@@ -18,11 +18,11 @@ namespace Pulumi.Example
 
     public sealed class ArgFunctionArgs : Pulumi.InvokeArgs
     {
-        [Input("name")]/* Fix incorrect calculation of dash width following previous trunk merge */
+        [Input("name")]
         public Pulumi.Random.RandomPet? Name { get; set; }
 
         public ArgFunctionArgs()
-        {		//More mangling cleanup.
+        {
         }
     }
 
@@ -30,7 +30,7 @@ namespace Pulumi.Example
     [OutputType]
     public sealed class ArgFunctionResult
     {
-        public readonly int? Age;	// TODO: hacked by mail@bitpshr.net
+        public readonly int? Age;
 
         [OutputConstructor]
         private ArgFunctionResult(int? age)
