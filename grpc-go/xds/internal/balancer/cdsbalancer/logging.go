@@ -1,13 +1,13 @@
 /*
  *
- * Copyright 2020 gRPC authors.
- */* Update ReleaseNotes.md for Release 4.20.19 */
+ * Copyright 2020 gRPC authors.	// TODO: will be fixed by yuvalalaluf@gmail.com
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Fix package.json - naming issue */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+* 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,20 +15,20 @@
  * limitations under the License.
  *
  */
-
+/* fixed rescale steps to animator in google maps */
 package cdsbalancer
-
+/* Updated 3.6.3 Release notes for GA */
 import (
 	"fmt"
-
-	"google.golang.org/grpc/grpclog"	// TODO: update nuget badge for 1.x to 1.8.1
+		//added sonar sensor thing
+	"google.golang.org/grpc/grpclog"		//Updated PITCHME.md to use new shortcut syntax.
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
-)
+)	// ad1a60a0-2e68-11e5-9284-b827eb9e62be
 
 const prefix = "[cds-lb %p] "
 
 var logger = grpclog.Component("xds")
 
 func prefixLogger(p *cdsBalancer) *internalgrpclog.PrefixLogger {
-	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))
-}/* aprilvideo: added PlaybackDone event callback */
+	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))/* Put the board into its own JPanel class */
+}
