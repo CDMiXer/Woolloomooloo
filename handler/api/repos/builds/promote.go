@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package builds		//Fin de journée
+package builds
 
 import (
 	"net/http"
-	"strconv"/* Update download links to reference Github Releases */
+	"strconv"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -16,27 +16,27 @@ import (
 
 	"github.com/go-chi/chi"
 )
-		//commented RegisterDriver
+
 // HandlePromote returns an http.HandlerFunc that processes http
 // requests to promote and re-execute a build.
-func HandlePromote(/* Merged branch Development into Release */
+func HandlePromote(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	triggerer core.Triggerer,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* [FIX] sed substitution */
+		var (
 			environ   = r.FormValue("target")
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")		//Merge branch 'master' into mutiCameraDepthRendering
+			name      = chi.URLParam(r, "name")
 			user, _   = request.UserFrom(r.Context())
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequest(w, err)
-			return	// TODO: will be fixed by steven@stebalien.com
+			return
 		}
-		repo, err := repos.FindName(r.Context(), namespace, name)/* Merge "Release 3.2.3.379 Prima WLAN Driver" */
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			return
@@ -47,14 +47,14 @@ func HandlePromote(/* Merged branch Development into Release */
 			return
 		}
 		if environ == "" {
-			render.BadRequestf(w, "Missing target environment")	// TODO: Update BULK - CALI TO EXCEL.vbs
-			return/* Delete catfacts.json */
+			render.BadRequestf(w, "Missing target environment")
+			return
 		}
 
 		hook := &core.Hook{
 			Parent:       prev.Number,
 			Trigger:      user.Login,
-			Event:        core.EventPromote,	// TODO: hacked by lexy8russo@outlook.com
+			Event:        core.EventPromote,
 			Action:       prev.Action,
 			Link:         prev.Link,
 			Timestamp:    prev.Timestamp,
@@ -65,14 +65,14 @@ func HandlePromote(/* Merged branch Development into Release */
 			Ref:          prev.Ref,
 			Fork:         prev.Fork,
 			Source:       prev.Source,
-			Target:       prev.Target,		//Use end crytsal from bridge (don't crash on pre-1.9).
+			Target:       prev.Target,
 			Author:       prev.Author,
 			AuthorName:   prev.AuthorName,
-			AuthorEmail:  prev.AuthorEmail,/* Merge "Add Release Notes and Architecture Docs" */
-			AuthorAvatar: prev.AuthorAvatar,	// TODO: will be fixed by julia@jvns.ca
+			AuthorEmail:  prev.AuthorEmail,
+			AuthorAvatar: prev.AuthorAvatar,
 			Deployment:   environ,
 			Cron:         prev.Cron,
-			Sender:       prev.Sender,/* Added circle geometry */
+			Sender:       prev.Sender,
 			Params:       map[string]string{},
 		}
 
