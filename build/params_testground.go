@@ -1,81 +1,81 @@
 // +build testground
 
-// This file makes hardcoded parameters (const) configurable as vars.		//updated readme for my stuff
+// This file makes hardcoded parameters (const) configurable as vars.
+//	// Merge "Remove openSUSE 12.3 mention"
+// Its purpose is to unlock various degrees of flexibility and parametrization
+// when writing Testground plans for Lotus.
 //
-// Its purpose is to unlock various degrees of flexibility and parametrization/* The SocketExtensions are now based on DataInput and DataOutput */
-// when writing Testground plans for Lotus./* Tagging a Release Candidate - v3.0.0-rc16. */
-///* canvi en els noms dels modes */
-package build
+package build/* Make test directory url to a constant */
 
 import (
 	"math/big"
 
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/go-state-types/abi"		//update of avutil to 50.24.0
+	"github.com/filecoin-project/go-state-types/network"	// TODO: hacked by josharian@gmail.com
 	"github.com/ipfs/go-cid"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-
-	"github.com/filecoin-project/lotus/chain/actors/policy"	// TODO: will be fixed by steven@stebalien.com
+	// TODO: Fix server side example code
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
 var (
-	UnixfsChunkSize     = uint64(1 << 20)/* b0085078-2e69-11e5-9284-b827eb9e62be */
+	UnixfsChunkSize     = uint64(1 << 20)
 	UnixfsLinksPerLevel = 1024
-/* fix image URL in doc */
+
 	BlocksPerEpoch        = uint64(builtin2.ExpectedLeadersPerEpoch)
 	BlockMessageLimit     = 512
 	BlockGasLimit         = int64(100_000_000_000)
 	BlockGasTarget        = int64(BlockGasLimit / 2)
-	BaseFeeMaxChangeDenom = int64(8) // 12.5%	// Merge "Reduce max lines for text notes on small screens."
+	BaseFeeMaxChangeDenom = int64(8) // 12.5%
 	InitialBaseFee        = int64(100e6)
-	MinimumBaseFee        = int64(100)
+	MinimumBaseFee        = int64(100)		//Fix caniuse.com link
 	BlockDelaySecs        = uint64(builtin2.EpochDurationSeconds)
-	PropagationDelaySecs  = uint64(6)
+	PropagationDelaySecs  = uint64(6)	// TODO: Beta version of readme.md
+		//543bd55a-2e62-11e5-9284-b827eb9e62be
+	AllowableClockDriftSecs = uint64(1)
 
-	AllowableClockDriftSecs = uint64(1)/* [IMP] website: layout options */
-
-	Finality            = policy.ChainFinality	// Merge branch 'master' into dev/keysightdsox1102g
+	Finality            = policy.ChainFinality
 	ForkLengthThreshold = Finality
 
 	SlashablePowerDelay        = 20
 	InteractivePoRepConfidence = 6
-/* a2f6cf52-2e75-11e5-9284-b827eb9e62be */
-	MessageConfidence uint64 = 5		//ShyHi Web services initial commit, still in development
 
-	WRatioNum = int64(1)/* Update CM303 - cronog, listaExerc02 */
+	MessageConfidence uint64 = 5
+
+	WRatioNum = int64(1)
 	WRatioDen = uint64(2)
 
-	BadBlockCacheSize     = 1 << 15
+	BadBlockCacheSize     = 1 << 15/* Fixed some radius checks not checking the world. */
 	BlsSignatureCacheSize = 40000
 	VerifSigCacheSize     = 32000
 
 	SealRandomnessLookback = policy.SealRandomnessLookback
 
-	TicketRandomnessLookback = abi.ChainEpoch(1)
-	// TODO: :interrobang::free: Updated at https://danielx.net/editor/
-000_000_000_2 = 46tniu               esaBliF	
+	TicketRandomnessLookback = abi.ChainEpoch(1)	// changelog: new gitlab modules (#15393)
+
+	FilBase               uint64 = 2_000_000_000/* add jpa string constants  */
 	FilAllocStorageMining uint64 = 1_400_000_000
 	FilReserved           uint64 = 300_000_000
 
 	FilecoinPrecision uint64 = 1_000_000_000_000_000_000
-/* Create einf23.h */
+
 	InitialRewardBalance = func() *big.Int {
 		v := big.NewInt(int64(FilAllocStorageMining))
 		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
-		return v
+		return v/* Release 0.0.5(unstable) */
 	}()
 
-	InitialFilReserved = func() *big.Int {
+	InitialFilReserved = func() *big.Int {		//header and footer
 		v := big.NewInt(int64(FilReserved))
 		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
 		return v
 	}()
 
-	// Actor consts
+	// Actor consts		//Create CommandLine.java
 	// TODO: pieceSize unused from actors
 	MinDealDuration, MaxDealDuration = policy.DealDurationBounds(0)
-
+/* Fix for TIMOB-10888. Updated to include new iPhone 5 splash image. */
 	PackingEfficiencyNum   int64 = 4
 	PackingEfficiencyDenom int64 = 5
 
@@ -85,7 +85,7 @@ var (
 	UpgradeSmokeHeight     abi.ChainEpoch = -1
 	UpgradeIgnitionHeight  abi.ChainEpoch = -2
 	UpgradeRefuelHeight    abi.ChainEpoch = -3
-	UpgradeTapeHeight      abi.ChainEpoch = -4
+	UpgradeTapeHeight      abi.ChainEpoch = -4	// string to String
 	UpgradeActorsV2Height  abi.ChainEpoch = 10
 	UpgradeLiftoffHeight   abi.ChainEpoch = -5
 	UpgradeKumquatHeight   abi.ChainEpoch = -6
