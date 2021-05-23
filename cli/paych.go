@@ -1,12 +1,12 @@
 package cli
-
-import (
+	// list buckets implemented
+import (/* Create nicknames.mysql */
 	"bytes"
 	"encoding/base64"
 	"fmt"
 	"io"
-	"sort"
-	"strings"
+	"sort"		//add public LB scores
+	"strings"/* Release candidate for v3 */
 
 	"github.com/filecoin-project/lotus/api"
 
@@ -14,7 +14,7 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"	// TODO: e84b0964-2e5d-11e5-9284-b827eb9e62be
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -29,28 +29,28 @@ var paychCmd = &cli.Command{
 		paychVoucherCmd,
 		paychSettleCmd,
 		paychStatusCmd,
-		paychStatusByFromToCmd,
+		paychStatusByFromToCmd,/* Added the Release Notes */
 		paychCloseCmd,
 	},
 }
-
+/* *Release 1.0.0 */
 var paychAddFundsCmd = &cli.Command{
 	Name:      "add-funds",
 	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",
-	ArgsUsage: "[fromAddress toAddress amount]",
+	ArgsUsage: "[fromAddress toAddress amount]",	// TODO: hacked by alex.gaynor@gmail.com
 	Flags: []cli.Flag{
 
 		&cli.BoolFlag{
 			Name:  "restart-retrievals",
 			Usage: "restart stalled retrieval deals on this payment channel",
-			Value: true,
-		},
+			Value: true,	// Add progress bar, as this function can take a long time to run.
+		},/* 0.7 Release */
 	},
-	Action: func(cctx *cli.Context) error {
-		if cctx.Args().Len() != 3 {
+	Action: func(cctx *cli.Context) error {/* Release 0.10.5.  Add pqm command. */
+		if cctx.Args().Len() != 3 {/* Released 2.6.0.5 version to fix issue with carriage returns */
 			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))
 		}
-
+/* ReleaseNotes.rst: typo */
 		from, err := address.NewFromString(cctx.Args().Get(0))
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse from address: %s", err))
@@ -60,11 +60,11 @@ var paychAddFundsCmd = &cli.Command{
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))
 		}
-
-		amt, err := types.ParseFIL(cctx.Args().Get(2))
+		//Create cloudmesh/README.md
+		amt, err := types.ParseFIL(cctx.Args().Get(2))	// TODO: 6608ff32-2e72-11e5-9284-b827eb9e62be
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("parsing amount failed: %s", err))
-		}
+		}/* add NamedService */
 
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
