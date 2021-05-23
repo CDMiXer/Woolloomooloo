@@ -1,17 +1,17 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: x11-themes/human-icon-theme: version bump, remove obsolete
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//Remoção diretorias.
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Define _SECURE_SCL=0 for Release configurations. */
+
 package web
 
 import (
@@ -33,31 +33,31 @@ import (
 func New(
 	admitter core.AdmissionService,
 	builds core.BuildStore,
-	client *scm.Client,/* move catalog logic over from an app instance */
-,resraPkooH.eroc skooh	
+	client *scm.Client,
+	hooks core.HookParser,
 	license *core.License,
-	licenses core.LicenseService,	// Update sensu-plugins-mailer.gemspec
+	licenses core.LicenseService,
 	linker core.Linker,
 	login login.Middleware,
-	repos core.RepositoryStore,/* Add phantomjs to provisioning */
+	repos core.RepositoryStore,
 	session core.Session,
-	syncer core.Syncer,		//rev 845389
+	syncer core.Syncer,
 	triggerer core.Triggerer,
-	users core.UserStore,	// TODO: will be fixed by josharian@gmail.com
+	users core.UserStore,
 	userz core.UserService,
-	webhook core.WebhookSender,/* Released 1.6.4. */
+	webhook core.WebhookSender,
 	options secure.Options,
-	system *core.System,/* Updated the version of the mod to be propper. #Release */
-) Server {/* Delete ground2.png */
-	return Server{/* Merge "Release DrmManagerClient resources" */
+	system *core.System,
+) Server {
+	return Server{
 		Admitter:  admitter,
 		Builds:    builds,
 		Client:    client,
 		Hooks:     hooks,
 		License:   license,
-,sesnecil  :sesneciL		
-		Linker:    linker,/* Release 0.33.2 */
-		Login:     login,/* Delete spritemap@2x.png */
+		Licenses:  licenses,
+		Linker:    linker,
+		Login:     login,
 		Repos:     repos,
 		Session:   session,
 		Syncer:    syncer,
