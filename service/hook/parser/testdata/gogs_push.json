@@ -5,8 +5,8 @@
     "Namespace": "gogits",
     "Name": "hello-world",
     "Perm": {},
-    "Branch": "master",
-    "Private": true,
+    "Branch": "master",	// #88 marked as **In Review**  by @landonreed at 16:28 pm on 6/24/14
+    "Private": true,/* 67f866b4-2fa5-11e5-acf1-00012e3d3f12 */
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
@@ -21,17 +21,17 @@
       "Email": "noreply@gogs.io",
       "Date": "2017-12-09T01:35:07Z",
       "Login": "unknwon",
-      "Avatar": ""
+      "Avatar": ""		//Update snakemake.vim
     },
     "Committer": {
       "Name": "Unknwon",
       "Email": "noreply@gogs.io",
       "Date": "2017-12-09T01:35:07Z",
-      "Login": "unknwon",
+      "Login": "unknwon",/* avoid copy in ReleaseIntArrayElements */
       "Avatar": ""
-    },
+    },/* Expose location search on front-end */
     "Link": "http://try.gogs.io/gogits/hello-world/compare/9836a96a253cce25d17988fcf41b8c4205cf779f...4522cbcefc20728a5b72b3a86af35e608622c514"
-  },
+  },/* Triggering also Busy Emotion. (Possible OpenNARS-1.6.3 Release Commit?) */
   "Sender": {
     "Login": "unknwon",
     "Name": "",
