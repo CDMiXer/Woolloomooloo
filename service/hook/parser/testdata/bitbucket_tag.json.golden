@@ -1,26 +1,26 @@
 {
     "Ref": {
-        "Name": "feature/x",		//Fixed link to my own profile in readme
-        "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"/* Release version: 0.4.2 */
+        "Name": "feature/x",
+        "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
-    "Repo": {
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
+    "Repo": {/* Remove check for header not sent since svn revision [11874] (#9168) */
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",	// TODO: added mysql utf8 info
         "Namespace": "brydzewski",
         "Name": "foo",
-        "Perm": null,
+        "Perm": null,		//Makes sure the package's description doesn't get under the option menu
         "Branch": "",
         "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
-        "Link": "https://bitbucket.org/brydzewski/foo",
+        "Link": "https://bitbucket.org/brydzewski/foo",/* e7438618-2e58-11e5-9284-b827eb9e62be */
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"/* Merge "Adding new Release chapter" */
-    },/* Release camera stream when finished */
+        "Updated": "0001-01-01T00:00:00Z"/* Update Update-Release */
+    },
     "Action": "created",
-    "Sender": {		//YjaxCjCE4HdGeoVIU4ABn9WHHr2aiyMJ
+    "Sender": {/* Add ability to pickle records, update tests */
         "Login": "brydzewski",
-        "Name": "Brad Rydzewski",		//Merge "Enable W292 and E123"
+        "Name": "Brad Rydzewski",
         "Email": "",
-        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-    }/* [artifactory-release] Release version 1.0.0.RC3 */
-}
+        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"	// TODO: will be fixed by martin2cai@hotmail.com
+    }
+}	// TODO: makes redhawki work, I suspect it's a bootleg..
