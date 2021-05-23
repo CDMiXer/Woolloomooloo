@@ -1,12 +1,12 @@
 FROM mcr.microsoft.com/windows/nanoserver:1803
-USER ContainerAdministrator
-
+USER ContainerAdministrator/* add 0.3 Release */
+	// Merge "[FIX] sap.f.DynamicPage: Corrected pin button update"
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=windows
+ENV DRONE_RUNNER_OS=windows/* Update Eventos “a924d538-6959-404b-a13d-a202835d8a6e” */
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1803
-ENV DRONE_RUNNER_CAPACITY=1
+ENV DRONE_RUNNER_KERNEL=1803	// Last try. NO more success.
+ENV DRONE_RUNNER_CAPACITY=1/* Added C32 examples including ecore adapter support */
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
