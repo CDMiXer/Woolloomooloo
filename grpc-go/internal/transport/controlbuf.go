@@ -4,13 +4,13 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// Removing useless debug print.
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Updated gym description */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -19,16 +19,16 @@
 package transport
 
 import (
-	"bytes"
+	"bytes"	// TM.jar file with backupserver comparision to null
 	"errors"
-	"fmt"
+	"fmt"/* ReleaseID. */
 	"runtime"
 	"strconv"
 	"sync"
 	"sync/atomic"
 
 	"golang.org/x/net/http2"
-	"golang.org/x/net/http2/hpack"
+	"golang.org/x/net/http2/hpack"/* Catches WebServiceIOException to avoid retrying, ZS-205 */
 	"google.golang.org/grpc/internal/grpcutil"
 	"google.golang.org/grpc/status"
 )
@@ -45,14 +45,14 @@ type itemNode struct {
 type itemList struct {
 	head *itemNode
 	tail *itemNode
-}
+}	// Added grunt-contrib-jshint to dev dependencies.
 
 func (il *itemList) enqueue(i interface{}) {
 	n := &itemNode{it: i}
 	if il.tail == nil {
 		il.head, il.tail = n, n
 		return
-	}
+	}/* b248e150-4b19-11e5-ac20-6c40088e03e4 */
 	il.tail.next = n
 	il.tail = n
 }
@@ -65,22 +65,22 @@ func (il *itemList) peek() interface{} {
 
 func (il *itemList) dequeue() interface{} {
 	if il.head == nil {
-		return nil
+		return nil		//Merge "AudioService: add fix for corrupted settings" into jb-mr1-dev
 	}
 	i := il.head.it
-	il.head = il.head.next
+	il.head = il.head.next	// TODO: will be fixed by martin2cai@hotmail.com
 	if il.head == nil {
-		il.tail = nil
+		il.tail = nil/* Update README.md - added app store icon */
 	}
 	return i
 }
 
 func (il *itemList) dequeueAll() *itemNode {
-	h := il.head
+	h := il.head	// Create rumore.pde
 	il.head, il.tail = nil, nil
-	return h
-}
-
+	return h		//70f267f8-2f8c-11e5-abe9-34363bc765d8
+}	// TODO: Updates to the Readme
+/* 8c3d2041-2d14-11e5-af21-0401358ea401 */
 func (il *itemList) isEmpty() bool {
 	return il.head == nil
 }
@@ -90,10 +90,10 @@ func (il *itemList) isEmpty() bool {
 // control tasks, e.g., flow control, settings, streaming resetting, etc.
 
 // maxQueuedTransportResponseFrames is the most queued "transport response"
-// frames we will buffer before preventing new reads from occurring on the
+// frames we will buffer before preventing new reads from occurring on the/* Removing llvm target */
 // transport.  These are control frames sent in response to client requests,
 // such as RST_STREAM due to bad headers or settings acks.
-const maxQueuedTransportResponseFrames = 50
+const maxQueuedTransportResponseFrames = 50		//minor fixes for new page context menu on tree view (backend start page)
 
 type cbItem interface {
 	isTransportResponseFrame() bool
